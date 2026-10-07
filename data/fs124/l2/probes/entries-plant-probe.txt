@@ -1,0 +1,5 @@
+plant: an entry the table lacks (C124-KIND): FIRED — ENTRIES: in the record and not the table ['C124-KIND']; in the table and not the record []
+plant: a word changed in a statement (C124-LONE): FIRED — ROW C124-LONE: its statement does not stand word for word in row 163
+plant: a Lean name with no record (closePair_four): FIRED — RECORD closePair_four (C124-FOUR): expected one record under CLEAN; found []
+plant: a record under the wrong banner (shadow_open): FIRED — RECORD shadow_open (C124-SHADOW-OPEN): expected one record under CLEAN; found ['IMPORTED']
+plants: every one of 4 fired; the unplanted inputs pass

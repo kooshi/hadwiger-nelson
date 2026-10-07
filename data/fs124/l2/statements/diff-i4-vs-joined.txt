@@ -1,0 +1,3 @@
+  Plane.ClosePairModel: 3 named constants in the first dump, 3 in the second
+  Plane.SectorPoint: 6 named constants in the first dump, 6 in the second
+statements: PASS: no statement and no definition changed — 9 named constants compared in 2 module(s)

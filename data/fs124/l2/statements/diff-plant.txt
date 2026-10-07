@@ -1,0 +1,5 @@
+plant: a theorem's stored type changed (HadwigerNelson.Plane.CircleSide.ofNat_ctorIdx): FIRED — TYPE HadwigerNelson.Plane.CircleSide.ofNat_ctorIdx: the stored type differs
+plant: a definition's stored value changed (HadwigerNelson.Plane.CircleSide.ofNat): FIRED — VALUE HadwigerNelson.Plane.CircleSide.ofNat: the stored value differs
+plant: a constant dropped (HadwigerNelson.Plane.CircleSide.ofNat_ctorIdx): FIRED — LOST THM HadwigerNelson.Plane.CircleSide.ofNat_ctorIdx (Proofs.HadwigerNelson.Plane.CircleCrossing)
+plant: a constant added (zz.planted): FIRED — NEW THM zz.planted (Proofs.HadwigerNelson.Plane.CircleCrossing)
+plants: every one of 4 fired; the unplanted pair passes

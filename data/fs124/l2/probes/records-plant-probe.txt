@@ -1,0 +1,13 @@
+plant: a record dropped (HadwigerNelson.Plane.AeProperOn.ae_ne_of_ae_region): FIRED — MISSING HadwigerNelson.Plane.AeProperOn.ae_ne_of_ae_region (0 records; THM, module Proofs.HadwigerNelson.Plane.OnePiece)
+plant: a record doubled (HadwigerNelson.Plane.AeProperOn.ae_unitShadow_ne): FIRED — DOUBLED HadwigerNelson.Plane.AeProperOn.ae_unitShadow_ne (2 records; THM, module Proofs.HadwigerNelson.Plane.OnePiece)
+plant: sorryAx under a landing record (HadwigerNelson.Plane.CircleSide): FIRED — SORRY HadwigerNelson.Plane.CircleSide: carries sorryAx, under CLEAN
+plant: THE LEAF STILL OPEN: sorryAx under the bridge (HadwigerNelson.Plane.ThreePiece.IsSector.hasArcEdges): FIRED — FOREIGN HadwigerNelson.Plane.ThreePiece.IsSector.hasArcEdges: ['sorryAx']
+plant: a landing record resting on the Borel transfer (HadwigerNelson.Plane.CircleSide.abs_sign): FIRED — IMPORT-LEAK HadwigerNelson.Plane.CircleSide.abs_sign: carries proper_to_borel_weak and is not filed on it, under CLEAN
+plant: a landing record FILED under IMPORTED, on the three and the transfer (HadwigerNelson.Plane.CircleSide.ball_antipode_subset_outside): FIRED — NOT-CLEAN-SECTION HadwigerNelson.Plane.CircleSide.ball_antipode_subset_outside: printed under IMPORTED
+plant: a landing record printed under PURCHASED (HadwigerNelson.Plane.CircleSide.disjoint_region_flip): FIRED — NOT-CLEAN-SECTION HadwigerNelson.Plane.CircleSide.disjoint_region_flip: printed under PURCHASED
+plant: a native auxiliary under a landing record (HadwigerNelson.Plane.CircleSide.flip): FIRED — FOREIGN HadwigerNelson.Plane.CircleSide.flip: ['HadwigerNelson.Plane.CircleSide.flip._native.native_decide.ax_1_1']
+plant: a claim's theorem resting on the five-colour theorem (HadwigerNelson.Plane.closePair_four): FIRED — HEAD HadwigerNelson.Plane.closePair_four: under CLEAN, axioms ['Classical.choice', 'HadwigerNelson.Outside.OAI158.no_proper_five_coloring', 'Quot.sound', 'propext'] — not exactly the three under CLEAN
+plant: the three-arcs lemma printed under IMPORTED (HadwigerNelson.Plane.IsTriodCut.exists_arc): FIRED — HEAD HadwigerNelson.Plane.IsTriodCut.exists_arc: under IMPORTED, axioms ['Classical.choice', 'Quot.sound', 'propext'] — not exactly the three under CLEAN
+plant: a theorem of the landing with no record (HadwigerNelson.Plane.zz_l2_planted_theorem_with_no_record): FIRED — MISSING HadwigerNelson.Plane.zz_l2_planted_theorem_with_no_record (0 records; THM, module Proofs.HadwigerNelson.Plane.ClosePair)
+plant: a module of the landing absent from the dump (Plane.ThreeArcs): FIRED — MODULES: the dump lists 7 module(s); extra [], missing ['Proofs.HadwigerNelson.Plane.ThreeArcs']
+plants: every one of 12 fired; the unplanted lists pass

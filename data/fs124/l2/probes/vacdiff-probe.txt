@@ -1,0 +1,22 @@
+counter vs the main scan: declarations 15370 / 15370, refutations 226 / 226: agree
+counter vs the landing scan: declarations 15928 / 15928, refutations 228 / 228: agree
+main rows 1529, landing rows 1529; lost 0 (0 with a removed declaration); added 0
+  declarations: 15370 -> 15928 (+558)
+  refutations-skipped: 226 -> 228 (+2)
+  sites: 1448 -> 1448 (+0)
+  vacuous: 0 -> 0 (+0)
+  stale: 0 -> 0 (+0)
+  declared: 3 -> 3 (+0)
+  witnessed: 38 -> 38 (+0)
+  generic: 1405 -> 1405 (+0)
+  unknown: 2 -> 2 (+0)
+  module Plane.CircleCrossing: declarations 0 -> 69 (+69), refutations 0 -> 1 (+1)  [new module]
+  module Plane.ClosePair: declarations 0 -> 51 (+51), refutations 0 -> 0 (+0)  [new module]
+  module Plane.ClosePairModel: declarations 0 -> 3 (+3), refutations 0 -> 0 (+0)  [new module]
+  module Plane.ClosePairWitness: declarations 0 -> 152 (+152), refutations 0 -> 0 (+0)  [new module]
+  module Plane.OnePiece: declarations 0 -> 89 (+89), refutations 0 -> 0 (+0)  [new module]
+  module Plane.SectorPoint: declarations 0 -> 6 (+6), refutations 0 -> 0 (+0)  [new module]
+  module Plane.ThreeArcs: declarations 0 -> 89 (+89), refutations 0 -> 1 (+1)  [new module]
+  module Plane.ThreePiece: declarations 0 -> 99 (+99), refutations 0 -> 0 (+0)  [new module]
+  by module: declarations +558, refutations +2: equal to the scans difference
+vacdiff: PASS

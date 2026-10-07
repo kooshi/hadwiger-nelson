@@ -1,0 +1,11 @@
+dupnames-probe exit=0
+decls exit=0
+unfiled exit=0
+axioms-probe exit=0
+records exit=0
+records-plant exit=0
+axioms-selftest-probe exit=0
+assumptions-selftest-first exit=0
+assumptions-first exit=1
+vacuity-probe exit=0
+probes done

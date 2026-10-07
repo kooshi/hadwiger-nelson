@@ -21,8 +21,8 @@ The definitions of `data/fs124/claims-K2.md` ("Definitions, stated once") that C
   (an injective continuous image of `[0, 1]` starting at `x`). An arc-edged decomposition is full
   (`ThreePiece.HasArcEdges.isFull`). The claim list's **sector point** — the pieces are the three components of a
   disc about `x` cut along three arcs from `x` to its rim — is `ThreePiece.IsSector` in `Plane/SectorPoint`; that a
-  sector point has arc edges is the θ-curve fact of plane topology, one leaf of that module, and nothing here or in
-  `Plane/ClosePair` reads it.
+  sector point has arc edges is `ThreePiece.IsSector.hasArcEdges` there, over the three-arcs lemma of
+  `Plane/ThreeArcs`, and nothing here or in `Plane/ClosePair` reads it.
 
 **The two kinds of model** (the claim list distinguishes them, and C124-LONE and C124-BOTH turn on it):
 * **an ordinary three-sector point** — `sectorPoint`: at `0`, the three sectors cut by the rays along `1`, `i` and

@@ -1,0 +1,705 @@
+## MODULE Proofs.HadwigerNelson.Plane.CircleCrossing constants=83
+C THM HadwigerNelson.Plane.CircleSide.ofNat_ctorIdx TYPE=077cfe02b39dc46802e2030b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CircleSide.mem_region_outside._simp_1_5 INTERNAL TYPE=07cf484df146cdb1ac6f833f VALUE=- DATA=-
+C REC HadwigerNelson.Plane.CrossAt.rec TYPE=2726512d8b103e76341d8e43 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CircleSide.sign.eq_1 INTERNAL TYPE=13a6b610060e2643791fa247 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CircleSide.disjoint_region_flip TYPE=d4a7aa158c029fb2bd3aeffc VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CircleSide.mem_region_or_of_dist_ne TYPE=afe45b7e641d38e89a225d1f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CircleSide.sign.eq_2 INTERNAL TYPE=d6fdddc3bbccc0ec525835e9 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.CircleSide.ofNat TYPE=b4aa0e193a97edfb241a3d24 VALUE=ab536065625892b227654b45 DATA=-
+C THM HadwigerNelson.Plane.CrossAt.antipode TYPE=566a7f4fc532274e1d876d0e VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.CircleSide.casesOn TYPE=c3a4a4b5400449e414de93a9 VALUE=7948d99978914eee0c18ac29 DATA=-
+C DEF HadwigerNelson.Plane.CircleSide.toCtorIdx TYPE=abb8ce5b64c5cc7feae7b809 VALUE=44c0354d71364e00a020a2d1 DATA=-
+C THM HadwigerNelson.Plane.CircleSide.mem_region_outside TYPE=2cb6fbee5cc2401e54618685 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CrossAt.ne TYPE=94babd5dac2701ce1d506dc5 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.CircleSide.ctorElimType TYPE=19fbe4b86e0ad2ac30219925 VALUE=ecf512a8ec5038db15dfc432 DATA=-
+C THM HadwigerNelson.Plane.exists_ball_inter_spheres_subset TYPE=d20084488ab780e2aa8a284b VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.CrossAt.mk._flat_ctor INTERNAL TYPE=6418477695a97855886b89da VALUE=82a270f052e2c50a7451ea72 DATA=-
+C THM HadwigerNelson.Plane.CrossAt.quadPt_mem_region_right TYPE=f47dacdc3852ab361890230f VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.quadPt TYPE=91b054bf8b1672e38e2f9cfe VALUE=050bb9d3c67c6a00acd022ca DATA=-
+C THM HadwigerNelson.Plane.CircleSide.mem_region_inside._simp_1 INTERNAL TYPE=296b8d2563663b4714f2d91a VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.CircleSide.flip TYPE=04f8c0c70b557c3a0905165e VALUE=492c4e786a59e0442d5689f4 DATA=-
+C THM HadwigerNelson.Plane.abs_real_inner_lt_one TYPE=ca7981d35c7b237ffdb945a6 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CircleSide.mem_region_outside._simp_1 INTERNAL TYPE=122a15da1250255770982fea VALUE=- DATA=-
+C THM HadwigerNelson.Plane.instDecidableEqCircleSide._proof_1 INTERNAL TYPE=3c79ec36c9534938da49b996 VALUE=- DATA=-
+C IND HadwigerNelson.Plane.CircleSide TYPE=baaddf70fb5d432b8bd948ef VALUE=- DATA=-
+C THM HadwigerNelson.Plane.norm_sq_quadrant TYPE=6bf4a4186825444e69fb7379 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.instDecidableEqCircleSide._proof_2 INTERNAL TYPE=e860f8db5695eb714912042a VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Plane.CircleCrossing.0.HadwigerNelson.Plane.CircleSide.sign.match_1.eq_1 INTERNAL TYPE=021644d25d09683ef34df318 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CircleSide.flip_outside TYPE=e632178ebecd622d24353e60 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CircleSide.isOpen_region TYPE=7d53bad0f91a61ab229b4a82 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CircleSide.flip_flip TYPE=15933192c16460580affb540 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CrossAt.left TYPE=25b38130036192d4c7c010d8 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.CircleSide.sign TYPE=654f35f66a269567173e76b4 VALUE=d58ad6f71c58947defb186e2 DATA=-
+C CTOR HadwigerNelson.Plane.CircleSide.outside TYPE=1beb162aebae67038fc4ada4 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CrossAt.ne_antipode TYPE=55c16058634f8f4636c3c9d6 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.CircleSide.recOn TYPE=c3a4a4b5400449e414de93a9 VALUE=7948d99978914eee0c18ac29 DATA=-
+C THM HadwigerNelson.Plane.quadPt.eq_1 INTERNAL TYPE=40327d67193295d9f9844d8b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CircleSide.mem_region_inside TYPE=7e0dd000e53437674a92b4d9 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.quadrant_sign_pos TYPE=70771095ec1fd3f354b82b76 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CircleSide.abs_sign TYPE=9657c5d4139fe9cca22d7c2a VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.CircleSide.sign.match_1 INTERNAL TYPE=dfd304e43178cc274ade81e4 VALUE=a6f7224172899eefff375350 DATA=-
+C THM HadwigerNelson.Plane.CircleSide.mem_region_outside._simp_1_6 INTERNAL TYPE=4b6a414486c64a3aea4d62bb VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CircleSide.mem_region_outside._simp_1_4 INTERNAL TYPE=7628cb839a2255e7e873e847 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.exists_convex_subset_region TYPE=943347b3c3be356d054ec137 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.CircleSide.noConfusion TYPE=58bd89b2594a58441e9b5554 VALUE=889b40c8e1044fcc53f895fd DATA=-
+C DEF _private.Proofs.HadwigerNelson.Plane.CircleCrossing.0.HadwigerNelson.Plane.CircleSide.sign.match_1.splitter INTERNAL TYPE=dfd304e43178cc274ade81e4 VALUE=970e710015b16ecdf4377374 DATA=-
+C THM HadwigerNelson.Plane.CircleSide.sign_eq TYPE=d0a7fb4e1d0a1224442e46db VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.CrossAt.recOn TYPE=aa9099bddbd71377eb4ff5d9 VALUE=76d3d05f64703262b4a84dbd DATA=-
+C THM HadwigerNelson.Plane.CircleSide.ball_antipode_subset_outside TYPE=e34f635cb847d2131e09290d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CrossAt.volume_quadrant_pos TYPE=e3de2e00e17e79a813d05a7b VALUE=- DATA=-
+C IND HadwigerNelson.Plane.CrossAt TYPE=bd7ea1575c2d48296ed6e878 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CrossAt.right TYPE=67985d53892f091f8990f22b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CrossAt.abs_inner_lt_one TYPE=f4db5a06833061b87f3375fd VALUE=- DATA=-
+C THM HadwigerNelson.Plane.exists_convex_subset_region._abel_1_1 INTERNAL TYPE=e2a2c59e521367565e697da7 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CircleSide.mem_region_iff TYPE=f8e76321ffc0a2aee6be279a VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.CircleSide._sizeOf_1 INTERNAL TYPE=abb8ce5b64c5cc7feae7b809 VALUE=dc5dca440a5b5ff3355daa90 DATA=-
+C THM HadwigerNelson.Plane.CrossAt.quadPt_mem_region_left TYPE=0db9d143cb29ace4bb061aac VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CircleSide.outside.sizeOf_spec TYPE=53acf535148e4b3ff9bd455d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.dist_quadPt_le TYPE=549a273661fdb46d83f660aa VALUE=- DATA=-
+C THM HadwigerNelson.Plane.crossAt_zero_one_add_I TYPE=8c0d794b5d2582a5f00e81fa VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.instDecidableEqCircleSide TYPE=11e04f37eec1ee2073d33ba5 VALUE=e713e7993644aeb3c5ac5cfe DATA=-
+C THM HadwigerNelson.Plane.crossAt_of_dist_lt_two TYPE=7e9742fa41d1534492cfbb01 VALUE=- DATA=-
+C REC HadwigerNelson.Plane.CircleSide.rec TYPE=66da3612b80aadd00092d229 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.exists_dist_ne_of_isOpen TYPE=a8efb58f2468f5bcd4140ba4 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.CircleSide.region TYPE=0b85d1f1b516d837e492afe7 VALUE=25de578108fcf682b4a87edd DATA=-
+C THM HadwigerNelson.Plane.CircleSide.flip_inside TYPE=4f1999ef4c397988e4f8769c VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.CircleSide.inside.elim TYPE=99a4d6c412fcaff3feec30be VALUE=495e99c81df0c6dc8270cb24 DATA=-
+C THM HadwigerNelson.Plane.CrossAt.exists_mem_quadrant TYPE=2c7c38243d86d19ac0061728 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CrossAt.exists_mem_sphere_region TYPE=4303545d9ee5456b69ebd36b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CircleSide.inside.sizeOf_spec TYPE=bdf3d7fbbaf24ee4f6dfa878 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Plane.CircleCrossing.0.HadwigerNelson.Plane.CircleSide.sign.match_1.eq_2 INTERNAL TYPE=29f3900f81eb1638ef27a224 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CircleSide.mem_region_comm TYPE=29e9bd6ab6c6d7b4171c046a VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CrossAt.symm TYPE=734cd594b32a2fa34b1777a6 VALUE=- DATA=-
+C CTOR HadwigerNelson.Plane.CircleSide.inside TYPE=1beb162aebae67038fc4ada4 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CircleSide.region.eq_2 INTERNAL TYPE=8136267d88e90f7e4dabeffe VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.CrossAt.casesOn TYPE=aa9099bddbd71377eb4ff5d9 VALUE=e9a4c39ddb1b37f8d04945c1 DATA=-
+C DEF HadwigerNelson.Plane.CircleSide.ctorElim TYPE=432c4ba2e28a7bffedac4540 VALUE=fa1c9dead902aec2c7f2e336 DATA=-
+C DEF HadwigerNelson.Plane.CircleSide.outside.elim TYPE=c771c1096a61d424f2055094 VALUE=a26db3f92504a35667131ff5 DATA=-
+C CTOR HadwigerNelson.Plane.CrossAt.mk TYPE=6418477695a97855886b89da VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.CircleSide.noConfusionType TYPE=79a3c86a788020804e8a5970 VALUE=c967b756ba035e56970c2d72 DATA=-
+C THM HadwigerNelson.Plane.CircleSide.region.eq_1 INTERNAL TYPE=f125fd9669523546c04da4a7 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.CircleSide.ctorIdx TYPE=abb8ce5b64c5cc7feae7b809 VALUE=6dbd1b42ec271ad3cd76fea2 DATA=-
+C DEF HadwigerNelson.Plane.CircleSide._sizeOf_inst INTERNAL TYPE=31cc039efba15b7101db9a73 VALUE=0e90db70641d2d115192ab78 DATA=-
+C THM HadwigerNelson.Plane.CrossAt.exists_mem_sphere_inside TYPE=54c72ca4b602ab74ef286864 VALUE=- DATA=-
+## MODULE Proofs.HadwigerNelson.Plane.OnePiece constants=113
+C THM HadwigerNelson.Plane.OuterAt.eq_1 INTERNAL TYPE=083b2a0b38ab111808d44562 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.innerAt_or_outerAt_or_crossingAt TYPE=196b7d6f14749e2d83f441a0 VALUE=- DATA=-
+C REC HadwigerNelson.Plane.IsPieceAt.rec TYPE=89dc391cbc57ef09f6a190c3 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.tightModel_of_not_lt TYPE=bf935a707131cd1880e5c173 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.mem_unitShadow_iff_exists_e TYPE=b39b4dc94b4144765c8063e9 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.not_onSide_iff._simp_1_8 INTERNAL TYPE=d284503ce3d996b31adcc07a VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsPieceAt.mem_closure TYPE=71279b0f3928bda7690e451c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.tight_centre TYPE=9fd55074bce723b7ab209d06 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.onSide_inside._simp_1 INTERNAL TYPE=cdb1a470d663b4910f542757 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.not_onSide_iff._simp_1_9 INTERNAL TYPE=7628cb839a2255e7e873e847 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.InnerAt.closure_inter_closure_subset TYPE=07eea569c963165d2c618f1f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTightWith.mono TYPE=2469f01e0f138ce1573ab9e1 VALUE=- DATA=-
+C DEF _private.Proofs.HadwigerNelson.Plane.OnePiece.0.HadwigerNelson.Plane.CircleSide.sign.match_1.splitter INTERNAL TYPE=dfd304e43178cc274ade81e4 VALUE=970e710015b16ecdf4377374 DATA=-
+C DEF HadwigerNelson.Plane.IsTightWith.casesOn TYPE=a491fb355680792be03cc097 VALUE=c4c2a70c87d05c27d71644a6 DATA=-
+C DEF HadwigerNelson.Plane.outerCollar TYPE=4d89efdb77cacdaa484e4911 VALUE=4094df01ec3e28c50d118f0c DATA=-
+C THM HadwigerNelson.Plane.tightModel_ne_two_of_lt TYPE=a8218095a31db3493390cfb2 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.onSide_outside TYPE=70eb0a1e7dcd93f610c3391b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.not_outerAt_iff._simp_1_3 INTERNAL TYPE=63cd3a0f47f56696f3080db2 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Plane.OnePiece.0.HadwigerNelson.Plane.OnSide.match_1.eq_1 INTERNAL TYPE=254dd35d324978241ea0736d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.AeProperOn.ae_unitShadow_ne TYPE=47b5268c41d90824a97a7c44 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.tightModel_ne_two_of_mem TYPE=8e058da6a8857969c37e78b8 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsPieceAt.disjoint TYPE=b12253e683a56f9e8d9d6c42 VALUE=- DATA=-
+C CTOR HadwigerNelson.Plane.IsTightWith.mk TYPE=66b05cf909fffdcae9b5437c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.InnerAt.eq_1 INTERNAL TYPE=d6343d55ed6c5d5b6124cf23 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.IsPieceAt.mk._flat_ctor INTERNAL TYPE=417ba5c044127e42b36f34e1 VALUE=dc24bb8c8a5da110579f6713 DATA=-
+C THM HadwigerNelson.Plane.IsTight.ae_ne_straddle TYPE=8326b816b116388cf09fa997 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.OnSide.eq_1 INTERNAL TYPE=f61d84850ccb17ad5605257a VALUE=- DATA=-
+C THM HadwigerNelson.Plane.not_innerAt_and_outerAt TYPE=2253bd5e716c958d5799ae0e VALUE=- DATA=-
+C IND HadwigerNelson.Plane.IsTightWith TYPE=81f403cb5e192116d7c5dd19 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isTight_tightModel TYPE=610683074471bc50db5736ea VALUE=- DATA=-
+C THM HadwigerNelson.Plane.onSide_outside._simp_1 INTERNAL TYPE=70d740b924f25b64d1f683eb VALUE=- DATA=-
+C THM HadwigerNelson.Plane.OnSide.eq_2 INTERNAL TYPE=a61cc8a8d9a6f3ae666ef314 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.tightModel._proof_1 INTERNAL TYPE=845778214b1033fca0d40ebc VALUE=- DATA=-
+C THM HadwigerNelson.Plane.tightModel._proof_2 INTERNAL TYPE=e88fa057cdb3c9de9150d922 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.tightModel_eq_two_of_mem TYPE=f811422b82de8f14898b1922 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isWeakColouringOn_tightModel TYPE=e6ac5f329d3f203e5f36f95d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsPieceAt.innerAt_self TYPE=1f6bdbe34b8598d978613a57 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.eq_empty_of_isOpen_of_ae TYPE=4bd5ba7dfc0397739667a106 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CrossingAt.eq_1 INTERNAL TYPE=df2d623dc1342867aefcb7ac VALUE=- DATA=-
+C THM HadwigerNelson.Plane.onSide_of_subset_region TYPE=2c3b4c4134f81c2d174adf51 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.CrossingAt TYPE=a4c74b0103d04c70f665383b VALUE=20cc738e199cbe2198724c33 DATA=-
+C THM HadwigerNelson.Plane.not_innerAt_iff._simp_1_2 INTERNAL TYPE=d284503ce3d996b31adcc07a VALUE=- DATA=-
+C THM HadwigerNelson.Plane.tight_straddle TYPE=2c8c7396fca499c57b156bc7 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.not_innerAt_iff._simp_1_4 INTERNAL TYPE=4b6a414486c64a3aea4d62bb VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.IsTightWith.mk._flat_ctor INTERNAL TYPE=66b05cf909fffdcae9b5437c VALUE=d2e04f61607a605fd0ef1849 DATA=-
+C THM HadwigerNelson.Plane.isOpen_innerCollar TYPE=ab9243c229b9a532bf97c1a6 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsPieceAt.nonempty TYPE=c53d8269ba5afb45fac4a625 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.AeProperOn.ae_unitShadow_ne._simp_1_1 INTERNAL TYPE=25b48127ed40b821449b3594 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTightWith.ae_outerCollar TYPE=1aeb1065fc5c175b8f2f1d0a VALUE=- DATA=-
+C THM HadwigerNelson.Plane.not_innerAt_iff TYPE=cf3450a9356eef7cdfb4d589 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.unitShadow_mono.match_1_1 INTERNAL TYPE=01953a7f27084d15dc442c3a VALUE=1e4e119b19a01bc9d8392ec5 DATA=-
+C THM HadwigerNelson.Plane.isOpen_tightModelDom TYPE=5a20c031e2fbd0daab73b6cb VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsPieceAt.ae_ne_of_crossingAt TYPE=fc7809f83bb2dedd39efbea2 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isTight_of_ae_of_isOpen TYPE=a9426c3fdda667299c15aaad VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isOpen_unitShadow TYPE=c2efd0c8a84bbce2b2a8da10 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsPieceAt.ae_ne_region TYPE=59d805952289f2fe67deb8cc VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.IsPieceAt.recOn TYPE=02399b67286c30cf7edd9acb VALUE=ccdfb916fd3dc50e97b6866a DATA=-
+C THM HadwigerNelson.Plane.OnSide.subset_region TYPE=2341558ef72fd5f56186fd74 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.centre_half TYPE=256d7ac78501e56c60c003b6 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.OuterAt TYPE=a4c74b0103d04c70f665383b VALUE=c2ba210e6057e3581644f6bf DATA=-
+C IND HadwigerNelson.Plane.IsPieceAt TYPE=dfe33e069d033be5bd70663c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.tightModelDom._proof_1 INTERNAL TYPE=ef09bd1cd3e6ebd6842c0d20 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsPieceAt.isConnected TYPE=15d89d1f4564785548d987c8 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTight.ae_ne_centre TYPE=93b90334ee08af6b8b01534c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isOpen_outerCollar TYPE=dccfdb74a4adace81a292c47 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.shadow_open TYPE=b1fff0da561891908714db9b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.tightModel.eq_1 INTERNAL TYPE=dfd8964ace5bde64894ac0b5 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.innerCollar TYPE=4d89efdb77cacdaa484e4911 VALUE=f0ee8160e8a2c658fe66e685 DATA=-
+C THM HadwigerNelson.Plane.isOpen_unitShadow._simp_1_2 INTERNAL TYPE=c336f3918e857b847f787316 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsPieceAt.ae_label TYPE=60d01b711e65314b7db84b31 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.AeProperOn.ae_ne_of_ae_region TYPE=32665f9f4b80fcb8386534ea VALUE=- DATA=-
+C THM HadwigerNelson.Plane.mem_unitShadow_of_isPreconnected TYPE=493d68a713ff81a2a0c86663 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsPieceAt.ae_unitShadow_ne TYPE=1a4db09ffb853900871b7232 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTightWith.mem TYPE=a34bb67318c2471fb6779b94 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.not_outerAt_iff._simp_1_2 INTERNAL TYPE=07127a3d7e09c77c8a15c84b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTightWith.pos TYPE=e5c506e614cad8df5e6467fa VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.tightModel TYPE=c4fd8241caa904cd621e07af VALUE=21ca71f0495b975d0322a337 DATA=-
+C THM HadwigerNelson.Plane.IsTightWith.dist_eq TYPE=3550a6b706a5d91658dcf9b7 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsPieceAt.inter_eq_empty TYPE=a43f4878c3d94f7520311219 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.unitShadow_mono TYPE=cf38f0cb37c358d68b35a387 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.piece_type TYPE=17f583106e8abbc2d981f310 VALUE=- DATA=-
+C DEF _private.Proofs.HadwigerNelson.Plane.OnePiece.0.HadwigerNelson.Plane.OnSide.match_1.splitter INTERNAL TYPE=9dc68b098048e95256c4c447 VALUE=3c23614957a070ed8dbcd79e DATA=-
+C THM HadwigerNelson.Plane.not_outerAt_iff TYPE=ca4a8c422570573f89362046 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Plane.OnePiece.0.HadwigerNelson.Plane.OnSide.match_1.eq_2 INTERNAL TYPE=db295a08eb34e46598486c55 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Plane.OnePiece.0.HadwigerNelson.Plane.CircleSide.sign.match_1.eq_1 INTERNAL TYPE=021644d25d09683ef34df318 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CircleSide.flip.eq_1 INTERNAL TYPE=4f1999ef4c397988e4f8769c VALUE=- DATA=-
+C REC HadwigerNelson.Plane.IsTightWith.rec TYPE=3ccad9d92d9bb4fe49e5fb8c VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.OnSide TYPE=124e1d3db9e0b21da8aa0016 VALUE=d7aa900c0d13cbf004a344cf DATA=-
+C THM HadwigerNelson.Plane.IsTightWith.ae_innerCollar TYPE=c11786b43abbc1347d72285b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTightWith.ae_outside TYPE=0706a40bff56f35ca2edf6ad VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.tightModelDom TYPE=e31fc5a4b9b38ad9f54c8693 VALUE=46bf1a062442885746d8b49f DATA=-
+C DEF HadwigerNelson.Plane.IsTightWith.recOn TYPE=a491fb355680792be03cc097 VALUE=c6f8fa32ebb3e0599e5dee28 DATA=-
+C THM HadwigerNelson.Plane.IsPieceAt.isPreconnected TYPE=7856ebb2e1e9e6269b801b88 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsPieceAt.subset TYPE=3e39063430bca25159d60e07 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.CircleSide.flip.eq_2 INTERNAL TYPE=e632178ebecd622d24353e60 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Plane.OnePiece.0.HadwigerNelson.Plane.CircleSide.sign.match_1.eq_2 INTERNAL TYPE=29f3900f81eb1638ef27a224 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.tightModel_far TYPE=921474051fc46b64b70c2593 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTightWith.ball_subset TYPE=45e101305f0f8fafbaa9d31b VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.IsTight TYPE=66878b74ef9a86c148a95969 VALUE=21cbac168e302a6c763d2a45 DATA=-
+C THM HadwigerNelson.Plane.onSide_inside TYPE=627e808eb4c334eadc172fd4 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.crossingAt_iff TYPE=63ff0f26670f737d0ccd0a19 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsPieceAt.isOpen TYPE=44ebae288e24693171bbbf4b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.not_onSide_iff._simp_1_11 INTERNAL TYPE=07127a3d7e09c77c8a15c84b VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.IsPieceAt.casesOn TYPE=02399b67286c30cf7edd9acb VALUE=620f3c65e2f295cf0f10c9f7 DATA=-
+C THM HadwigerNelson.Plane.IsTightWith.ne TYPE=144c4589b850d373b52b9a27 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.not_innerAt_iff._simp_1_3 INTERNAL TYPE=07cf484df146cdb1ac6f833f VALUE=- DATA=-
+C CTOR HadwigerNelson.Plane.IsPieceAt.mk TYPE=417ba5c044127e42b36f34e1 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.OnSide.match_1 INTERNAL TYPE=9dc68b098048e95256c4c447 VALUE=517d43d71c05c4ac6eb12cb1 DATA=-
+C THM HadwigerNelson.Plane.IsTightWith.ae_inside TYPE=488501a4737739dae5c720a3 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.measurable_tightModel TYPE=d1734ee62f1de63a315de002 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isOpen_unitShadow._simp_1_1 INTERNAL TYPE=28eef7f5c9815d7ac1598137 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.InnerAt TYPE=a4c74b0103d04c70f665383b VALUE=ff590de8c3553b5b2d65a649 DATA=-
+C THM HadwigerNelson.Plane.not_onSide_iff TYPE=588a9379c388e6175224a645 VALUE=- DATA=-
+## MODULE Proofs.HadwigerNelson.Plane.ThreePiece constants=131
+C THM HadwigerNelson.Plane.mem_petalSet_two TYPE=f3c9b20ebff249a576c76b5c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.OneOfEach.eq_of_innerAt TYPE=06576ff8e7f7aee244de0795 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.ae_label TYPE=8a92a803dead51f9d06315c2 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.mem_closure_sectorSet_two TYPE=8ac174aa1b691e14f3a43b26 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.mem_closure_sectorSet_zero TYPE=33492a5cff87f070e4bf6b4a VALUE=- DATA=-
+C THM HadwigerNelson.Plane.sectorPoint._proof_7 INTERNAL TYPE=e9a71c31e911ec86f5527d2a VALUE=- DATA=-
+C THM HadwigerNelson.Plane.mem_petalSet_one TYPE=893bd26373e8b4fae89d36e8 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.nbhd_mem TYPE=88d2b84e62f6ffc7c5446b84 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.mem_sectorSet_zero TYPE=69cedbb58b460d93e3f684c7 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ThreePiece.HasArcEdges TYPE=54ddcb2b4af1cd628f80d34f VALUE=ef10e3c7d25eeaf3abf6c95f DATA=-
+C DEF HadwigerNelson.Plane.ThreePiece.label TYPE=5568ebcc2fc833ef06d60d14 VALUE=0427d585904737e76d7ed9a3 DATA=-
+C DEF HadwigerNelson.Plane.ThreePiece.edge TYPE=6bfdf8decaa6b882cb99a328 VALUE=88dd8b5dcde841e75c68f33c DATA=-
+C THM HadwigerNelson.Plane.isPreconnected_petalSea TYPE=8e6321d965f3856a59f8a1a2 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ThreePiece.noConfusionType TYPE=e9101b3c633a3637fb849a40 VALUE=dc7c55228c6d39fdc55f7e98 DATA=-
+C THM HadwigerNelson.Plane.volume_setOf_re_im_eq TYPE=2fb3099c07a0d29d574523d6 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.sectorCol TYPE=c4fd8241caa904cd621e07af VALUE=d26f87bdb5990902183f0718 DATA=-
+C THM HadwigerNelson.Plane.sectorPoint._proof_8 INTERNAL TYPE=f53d21bd7cc6800b6568516e VALUE=- DATA=-
+C THM HadwigerNelson.Plane.mem_sectorPoint_edge TYPE=08436830a34edd5e8a187af5 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.petalCol.eq_1 INTERNAL TYPE=879d407f1ce3062e4e4d133a VALUE=- DATA=-
+C THM HadwigerNelson.Plane.sectorPoint._proof_9 INTERNAL TYPE=3fa041e8f95617f29d577991 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.convex_setOf_lt_mul_re TYPE=a4bf11795541f1f696bef78e VALUE=- DATA=-
+C THM HadwigerNelson.Plane.zero_mem_closure_petalSet TYPE=e8720addfeddf5665b245dbc VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.petalPoint TYPE=828187be7d290e4012224e8d VALUE=b9da0846fab94325338f2721 DATA=1bff72c749d5bd7af09cab6d
+C THM HadwigerNelson.Plane.ofReal_mul_mem_ball_quarter TYPE=bd55d82066d0bbb0636cd517 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isPreconnected_petalSea._simp_1_1 INTERNAL TYPE=bf6e92a3ff3d911cac0dd092 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.sectorPoint._proof_5 INTERNAL TYPE=995730afad1ca72465dfa465 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isOpen_sectorSet TYPE=7c9def33205af9fcc0a803b2 VALUE=- DATA=-
+C CTOR HadwigerNelson.Plane.ThreePiece.mk TYPE=c60c7a80d47d9859f4f75c24 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.piece_subset TYPE=5ffd712e210154ce9f14b253 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.sectorSet.match_1 INTERNAL TYPE=8de4e3a8027f41051a98687d VALUE=0937d94f5e95b909034b1f54 DATA=-
+C THM HadwigerNelson.Plane.mem_sectorSet_one TYPE=e819d6dada5e4562602fe7c2 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.sectorPoint TYPE=52731132f8c47d1adbc90961 VALUE=d76dc0d7dcfc19c666e123f9 DATA=18fb83d048b6297765bdb0e6
+C THM HadwigerNelson.Plane.ThreePiece.hasUnitArcFrom_of_arc_subset_sphere._simp_1_6 INTERNAL TYPE=b84ed43e284b431edd25ded8 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.HasUnitArcFrom.mem_closure_diff TYPE=4599ed797fe01774cab60870 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.hasUnitArcFrom_of_arc_subset_sphere._simp_1_2 INTERNAL TYPE=5f2822f027e66ea9439af706 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.mem_closure_sectorSet_one TYPE=9a4c931663f6f91d220c93da VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.hasUnitArcFrom_of_arc_subset_sphere._simp_1_7 INTERNAL TYPE=38b40303f62fdb14550c7895 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ThreePiece.casesOn TYPE=17b97b327c6923229e105012 VALUE=9ae10f8461edb837523f657c DATA=-
+C DEF HadwigerNelson.Plane.ThreePiece.Saves TYPE=a351878759d7c9116e8ad5e1 VALUE=7e6241a13e7886994b6f4243 DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.hasUnitArcFrom_of_arc_subset_sphere._simp_1_4 INTERNAL TYPE=a789e8a05704042d6b055671 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.zero_mem_closure_sectorSet TYPE=eefe818a1a02d495b3de20a5 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.isConnected_piece TYPE=44c7257a9b39a5786461da0e VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isOpen_petalSet TYPE=f51ae32f970df1faeb783677 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.petalPoint_edge TYPE=2c6e96a2e436ad446fa020b3 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.volume_ball_diff_iUnion_petalSet._simp_1_2 INTERNAL TYPE=2aa7129bfb37dade06590c0f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.isPieceAt TYPE=a4eb5ffd08689559864c061c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.mem_ball_zero_of_abs_re_add_abs_im_lt TYPE=e0b3ce751bbab9ca3eeea89d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isPreconnected_petalSea._simp_1_3 INTERNAL TYPE=b98429f6bea3ed5ef903c9ef VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.label_injective TYPE=7aff02de5632251b93eefb6c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.mk.injEq TYPE=31fd90d97c6389c7ea3cbbe2 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.petalCol_of_mem TYPE=853f923cd72fafa747ff3ccf VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ThreePiece.ctorIdx TYPE=ab01d71ed0ed4ffab172b17a VALUE=6e04dd7ff40c7a287593f140 DATA=-
+C DEF HadwigerNelson.Plane.petalCol TYPE=c4fd8241caa904cd621e07af VALUE=7fc79fa89b8d178e8ed19988 DATA=-
+C THM HadwigerNelson.Plane.petalCol._proof_1 INTERNAL TYPE=7d6d64e83c4fef01fa51e419 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ThreePiece._sizeOf_inst INTERNAL TYPE=41b8de6014f621fb3a3db358 VALUE=abcb67d2723e02e998f8a132 DATA=-
+C DEF HadwigerNelson.Plane.ThreePiece.mk.noConfusion TYPE=31b9bb441c9d8260a479a396 VALUE=43869a30239c07478dfd5d1e DATA=-
+C THM HadwigerNelson.Plane.petalPoint_not_isFull TYPE=18bd84576671a466650f274f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.mem_closure_of_forall_add_ofReal_mul_mem TYPE=a6366c4800b379c003fc2c24 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.mem_ball_zero_of_sq_lt TYPE=8e071f5747a36925bf1ce370 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.petalSet TYPE=6e76bdbee4d40fba8dd50e91 VALUE=f7929d827b72af29552861d8 DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.ae_label_of_forall_onSide TYPE=fc75d2913833a23186b03971 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ThreePiece.IsFull TYPE=54ddcb2b4af1cd628f80d34f VALUE=530f29ab31f8594bf02d43d2 DATA=-
+C THM HadwigerNelson.Plane.mem_sectorSet_two TYPE=f2685b22e01ebe5d9a5a2ec2 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.edge.eq_1 INTERNAL TYPE=3e2ef780a51bbe90c209d688 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.HasUnitArcFrom.mem TYPE=659ba0a7dd4dc38de536327e VALUE=- DATA=-
+C THM HadwigerNelson.Plane.sectorCol.eq_1 INTERNAL TYPE=7e6f75729393fdd93b33e3c8 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.petalPoint._proof_5 INTERNAL TYPE=b3b834e83df348d2ad0dda3e VALUE=- DATA=-
+C THM HadwigerNelson.Plane.mem_closure_inter_ball TYPE=34886716ebd49693a84e5f2c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.mk.inj TYPE=f7314ddf755600740a2dab54 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.convex_sectorSet TYPE=519c59a3b0188d1acd51d19c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.null_diff TYPE=e9180ce106761780ea12afdd VALUE=- DATA=-
+C THM HadwigerNelson.Plane.petalPoint._proof_1 INTERNAL TYPE=5d4e177649c9add16be82931 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.petalPoint._proof_4 INTERNAL TYPE=92e2ad9e06cdaf7d3dbdff3c VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.sectorSet TYPE=6e76bdbee4d40fba8dd50e91 VALUE=721aeff121e2f991c59c29ad DATA=-
+C THM HadwigerNelson.Plane.petalPoint._proof_2 INTERNAL TYPE=5c4a1de00bcc36a054f027a4 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.petalPoint._proof_3 INTERNAL TYPE=0374be0061c722efc075399d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.OneOfEach._proof_1 INTERNAL TYPE=e88fa057cdb3c9de9150d922 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ThreePiece.recOn TYPE=17b97b327c6923229e105012 VALUE=7de1bd9129e00d0d87614e75 DATA=-
+C DEF HadwigerNelson.Plane.ThreePiece.piece TYPE=47be78d380091af286a3184f VALUE=153c7270c7e201845c4635b7 DATA=-
+C THM HadwigerNelson.Plane.measurable_petalCol TYPE=3f3be1479c3d79d9945a99af VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.isOpen_piece TYPE=af6d7a45eccb276dfa493a8c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.volume_ball_diff_iUnion_petalSet TYPE=94055d4544ff9ab8f3816978 VALUE=- DATA=-
+C REC HadwigerNelson.Plane.ThreePiece.rec TYPE=8079d2643ef3b097eb554518 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.not_separatesAt_iff TYPE=6c256282cf992e2bed4d3400 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.mem_edge TYPE=ded9c09a4ca4696e10e92448 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isWeakColouringOn_ball_quarter TYPE=780024d16e7dc6673bcd814f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.sectorCol_of_mem TYPE=0df39e4931454f1cbed6f38d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.mem_closure_piece TYPE=fc750b97960d8fb57e6d9162 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.measurable_sectorCol TYPE=6fa18ee23f6eb4f77160add2 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.volume_ball_diff_iUnion_petalSet._simp_1_1 INTERNAL TYPE=d61c5200751bb61a3320630f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.sectorPoint._proof_6 INTERNAL TYPE=4c254e04a90e17fbdfd7628c VALUE=- DATA=-
+C IND HadwigerNelson.Plane.ThreePiece TYPE=a63c61747f75b2f88dc73cb5 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.nbhd_subset TYPE=6c4c28da1df7e357df52bec7 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.mem TYPE=bcd8631ccfc54303b2e9c230 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.hasUnitArcFrom_of_arc_subset_sphere._simp_1_3 INTERNAL TYPE=cf55e889f99db8b90029e0ac VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.hasUnitArcFrom_of_arc_subset_sphere._simp_1_5 INTERNAL TYPE=d140ba623c140aefc82aed5c VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ThreePiece._sizeOf_1 INTERNAL TYPE=9f04fd4fd9bf12d37e0b6172 VALUE=a4861041f42d90e9c24f1a91 DATA=-
+C THM HadwigerNelson.Plane.convex_setOf_abs_re_lt_mul_im TYPE=08c9cd98d3839bc14ff4dea7 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.OneOfEach.eq_of_outerAt TYPE=f7e155f21186204eadb6f18f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.sectorPoint_isFull TYPE=1ccbece2eedc4539ef8d9c2b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.disjoint_piece TYPE=18c910cefb6d30bd70777ce1 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.convex_petalSet_one TYPE=f08c4ef2a4077b66c2c3bdda VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ThreePiece.mk._flat_ctor INTERNAL TYPE=c60c7a80d47d9859f4f75c24 VALUE=14f64e346d75cfb91212a449 DATA=-
+C THM HadwigerNelson.Plane.isPreconnected_petalSea._simp_1_4 INTERNAL TYPE=196d08506af39e733a9c76c1 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.combo_lt TYPE=d890ba29453c626f2c7eceb9 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isPreconnected_petalSea._simp_1_2 INTERNAL TYPE=d61c5200751bb61a3320630f VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ThreePiece.nbhd TYPE=a6f2ef840e2d4eb8a61d6679 VALUE=d85fea12b91447c842459648 DATA=-
+C THM HadwigerNelson.Plane.sectorPoint_hasArcEdges TYPE=566ecac5fa682840fcc96292 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.sectorPoint._proof_4 INTERNAL TYPE=efae88041a896e94944c11ed VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ThreePiece.SeparatesAt TYPE=a351878759d7c9116e8ad5e1 VALUE=d351b95cf96275e0b63d1a9d DATA=-
+C THM HadwigerNelson.Plane.sectorPoint._proof_1 INTERNAL TYPE=676345fb4d6e91d81c9345fd VALUE=- DATA=-
+C THM HadwigerNelson.Plane.mem_petalSet_zero TYPE=df51c13c0b917a7c8989b42d VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.IsThreePiecePoint TYPE=e58dbb8de679dcf229a5a3ab VALUE=926b370d4609f83a4bb66396 DATA=-
+C THM HadwigerNelson.Plane.fin_three_cases TYPE=90929cde88d5f0d4cb6e5ec1 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.sectorPoint._proof_3 INTERNAL TYPE=683932e0cc66ee0de821940b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.mk.sizeOf_spec TYPE=c5bbd6cf7b79eeda014d5d79 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.hasUnitArcFrom_of_arc_subset_sphere._simp_1_1 INTERNAL TYPE=5b1dd41da47b7b9d39a9e7e9 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.sectorPoint._proof_2 INTERNAL TYPE=ebe83eae61bdbef1eae92b3e VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ThreePiece.noConfusion TYPE=0f92f061ff6264020678bbae VALUE=bc69b43c40556126ce869b3f DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.hasUnitArcFrom_of_arc_subset_sphere TYPE=45091ca9aa79ff140726cf7e VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.HasArcEdges.isFull TYPE=4a78d6899fb9eec000274758 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.volume_ball_diff_iUnion_sectorSet TYPE=d1b1ed8a01f1b45b2cccf129 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.convex_petalSet_two TYPE=57c92776b7955480177e11de VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.edge_subset_sphere TYPE=cf5877eb5a3768f936338cad VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.edge_comm TYPE=cf6f8c47229a14fdb7a43dc6 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ThreePiece.OneOfEach TYPE=04c28e7a5dadaad106b0f259 VALUE=1ab924fae0a72d72ff98ac4b DATA=-
+C DEF HadwigerNelson.Plane.HasUnitArcFrom TYPE=09b78c93ecfef87f9ba9ca62 VALUE=f42e54903055f2bada2f87d9 DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.ae_mem_piece TYPE=6768d0822025875ade1df89e VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.isPreconnected_piece TYPE=62e1bdb13da3d33b7235932e VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.OneOfEach.separatesAt TYPE=83320b92ad3840ade45036a7 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.exists_arc_of_ray_subset TYPE=548352a5aacd3fbba2c306c4 VALUE=- DATA=-
+## MODULE Proofs.HadwigerNelson.Plane.ClosePair constants=65
+C THM HadwigerNelson.Plane.ClosePair.presentAt_eq TYPE=a88911ccdf6641b20e3b0998 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ClosePair.symm._proof_3 INTERNAL TYPE=ea7926c62d397fd6896477ff VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ClosePair.symm._proof_2 INTERNAL TYPE=845778214b1033fca0d40ebc VALUE=- DATA=-
+C THM HadwigerNelson.Plane.mem_presentAt_of_ae_eq TYPE=53cf4c5766ce1872f1b9edd0 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsCommonUnitPoint.symm TYPE=fbb723c8f005f1afc6ce9e5c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ae_onSide_of_label TYPE=cef3e3caa4e368cc70fcd775 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.not_isFull_of_ae_side TYPE=bc0a0b6f7b74c280716bcc06 VALUE=- DATA=-
+C IND HadwigerNelson.Plane.ClosePair TYPE=fad7a447fec71a3e0377b5e3 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ClosePair.exists_label_eq TYPE=df37f916aa8511d0fa7cbebb VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ae_label_left_of_forall_not_onSide TYPE=ccb8e5934f25fcc0ee6b5a77 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ClosePair.ncard_inner_outer._simp_1_3 INTERNAL TYPE=2aa7129bfb37dade06590c0f VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.presentAt TYPE=7ebf65d455edd93fc1b6a8be VALUE=df9a5555a72c7ebdf51337af DATA=-
+C THM HadwigerNelson.Plane.exists_perm_fin_three TYPE=93b2fb766c90f17a214bbd7a VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ClosePair.noConfusionType TYPE=6479e8c955fe591d7a57320d VALUE=52bc8183c8c0301b56465447 DATA=-
+C THM HadwigerNelson.Plane.ClosePair.mk.injEq TYPE=54948eb8202f10893217deb4 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.not_mem_presentAt_of_ae_ne TYPE=c31ba08f3f1ff944139ce175 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ClosePair.mk.sizeOf_spec TYPE=8e81367d2103ff53bf374803 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ClosePair.ncard_inner_outer._simp_1_1 INTERNAL TYPE=282d06d09d1aae25cc8d6a94 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.mem_presentAt_iff TYPE=a2de8036f01fd43d43336ef4 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ClosePair.right TYPE=153cc8017b8d8798ee0ba708 VALUE=538ceac2f8976150f02f18c9 DATA=-
+C DEF HadwigerNelson.Plane.ClosePair.mk._flat_ctor INTERNAL TYPE=2b1af3a01b051f1acb498e5a VALUE=2820c99349d0f7e150418fe8 DATA=-
+C THM HadwigerNelson.Plane.exists_onSide_of_cover TYPE=9688813823cb61da261eec11 VALUE=- DATA=-
+C CTOR HadwigerNelson.Plane.ClosePair.mk TYPE=2b1af3a01b051f1acb498e5a VALUE=- DATA=-
+C THM HadwigerNelson.Plane.exists_isTight_of_ae_side TYPE=8107d6cbeabbdfca8228650c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.closePair_both_saved TYPE=6cc3e0c3bf646d4a2422998d VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ClosePair.casesOn TYPE=db6279aeea0e145a96acb98d VALUE=513822c90f7cf1da6129e728 DATA=-
+C THM HadwigerNelson.Plane.ClosePair.mk.inj TYPE=433ab90392c23ebb55b93130 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ClosePair.mk.noConfusion TYPE=cd538584ebb75d9bc52db9bd VALUE=0b28e801c2f43bb57c42e598 DATA=-
+C THM HadwigerNelson.Plane.ClosePair.presentAt_eq._simp_1_2 INTERNAL TYPE=8adae6d8570982833d6ac6aa VALUE=- DATA=-
+C THM HadwigerNelson.Plane.exists_isCommonUnitPoint TYPE=8f3912c7f629fabca1b9ef5f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.closePair_four TYPE=333675922bad4bb9c69bff5f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.closePair_lone TYPE=0b816bf5b515a96f1462b2f9 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.exists_second_unit_point_of_ae_side TYPE=08597ba8bfeed8bcb7a6dbc7 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ClosePair.dist_lt TYPE=7b9b94547d2bf801dfc6ace1 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ClosePair.crossAt TYPE=ddaf261cd6d9fd63e9e5ad8f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.HasArcEdges.saves_of_separatesAt TYPE=b589b1fc6a2196c493e4cd00 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ClosePair.label_mem_presentAt_of_isFull_right TYPE=4f84449b11430004a11e1a91 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ClosePair.ctorIdx TYPE=17023e84e5e7516bfd00aadb VALUE=b678969f3a322034a72b76d9 DATA=-
+C DEF HadwigerNelson.Plane.ClosePair._sizeOf_inst INTERNAL TYPE=6192d1ab841f653a171dba30 VALUE=6b020f1486faf532d877ddbf DATA=-
+C DEF HadwigerNelson.Plane.ClosePair._sizeOf_1 INTERNAL TYPE=0eac2b7d372993159ddc1e7d VALUE=d9ae58b0c680c9e691bc205b DATA=-
+C THM HadwigerNelson.Plane.ClosePair.lone_of_cover TYPE=5dd40bd92ee7adf7969a1695 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.closePair_forced_pieces TYPE=f86450f86f706344a01aefe1 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.exists_inner_outer_of_cover._simp_1_1 INTERNAL TYPE=cdb1a470d663b4910f542757 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ClosePair.symm._proof_1 INTERNAL TYPE=2a0a68add08d58934e71aecb VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ClosePair.symm._proof_4 INTERNAL TYPE=41ae7e722c03c1bc5c54a35a VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ClosePair.symm TYPE=5535ce7c175c267b83d57b0c VALUE=f179fde5ce2283d10b7bb742 DATA=-
+C THM HadwigerNelson.Plane.presentAt_nonempty TYPE=2e99d581b80038457e63df28 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.exists_inner_outer_of_cover TYPE=1e3b79e7c624cacea7fd45b1 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ClosePair.ne TYPE=20c769ee351ecd4979c9d723 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ClosePair.separatesAt_right_of_isFull TYPE=1a746d75717bbc133c1b9edc VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ClosePair.ncard_inner_outer._simp_1_2 INTERNAL TYPE=8adae6d8570982833d6ac6aa VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ClosePair.noConfusion TYPE=e295b3a55e3931659a9fcf95 VALUE=5baf2f2c6db683296f7935f0 DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.exists_ne_not_onSide_of_ae_side TYPE=a75eb7e904e19fb668fcbeab VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ClosePair.ncard_inner_outer TYPE=24b926dd2b9105e80428c05d VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ClosePair.recOn TYPE=db6279aeea0e145a96acb98d VALUE=b59d734dae78cfd7f90a6da9 DATA=-
+C REC HadwigerNelson.Plane.ClosePair.rec TYPE=b95652e161c4ce3f84a1c857 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.IsCommonUnitPoint TYPE=bd7ea1575c2d48296ed6e878 VALUE=2bb1556420b5add8cc33b65c DATA=-
+C THM HadwigerNelson.Plane.IsTight.closure_inter_closure_eq TYPE=b6da3a4ed167833d58c3d60e VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ClosePair.separatesAt_or TYPE=08987049aa4811af42d0bf4c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ClosePair.presentAt_eq._simp_1_1 INTERNAL TYPE=282d06d09d1aae25cc8d6a94 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.closePair_both_separate TYPE=a7a8287db8e061a400a59e33 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ClosePair.left TYPE=75ed8a86dd5979329063c05f VALUE=235a46ddcadba178f1358aae DATA=-
+C THM HadwigerNelson.Plane.ClosePair.label_ne TYPE=27b74f79ab7970c98ceaa60c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.not_mem_presentAt_iff TYPE=61d6ee13180c0988ac2e5fa1 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.exists_inner_outer_of_cover._simp_1_2 INTERNAL TYPE=70d740b924f25b64d1f683eb VALUE=- DATA=-
+## MODULE Proofs.HadwigerNelson.Plane.ClosePairWitness constants=197
+C THM HadwigerNelson.Plane.ThreePiece.exists_eq_connectedComponentIn TYPE=7075ccc911ed95754bab259a VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isWeakColouringOn_sevenCol._proof_1_4 INTERNAL TYPE=70f1e4c2d36f02ed5e178e48 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.threeDiscPair_left_piece TYPE=dd118d7d30b6669ba5cf6356 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isCommonUnitPoint_zero_one_add_I TYPE=bf3fde071fa64f1d20d0d8e5 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.transport._proof_6 INTERNAL TYPE=f53d21bd7cc6800b6568516e VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.threeDiscPair TYPE=b68b934d28be91dbca74a3c4 VALUE=1510cf72c5c373eca0be7c26 DATA=-
+C THM HadwigerNelson.Plane.planeMotion.congr_simp TYPE=5b144d469e317817f76ced9d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.measurable_threeDiscCol TYPE=e6ae87aeae98f4871fde4b87 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.half_le_dist_one_add_I_one TYPE=71695f29ea316c5e853f9c4b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.petalCol_eq_two TYPE=289b7783444c845efd445bb8 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isWeakColouringOn_squareCol TYPE=2ba6a7859aea1eada6ac731f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.splitPoint._proof_6 INTERNAL TYPE=ce08ac10850b5296376d36ef VALUE=- DATA=-
+C THM HadwigerNelson.Plane.innerAt_image_iff TYPE=b7d7929551dda72b78e31903 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.sevenCol TYPE=37c954e7e4f65bfcf7018905 VALUE=10cf89e3e2ff4766af446924 DATA=-
+C THM HadwigerNelson.Plane.mem_closure_splitSet_one TYPE=64dbfa50c8b5d9f6c827df65 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.sevenPair_right_not_separatesAt TYPE=a4a5d9165d7f95d38826b4f2 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.splitCol.eq_1 INTERNAL TYPE=082b4ecb381d49b517ff0043 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.splitRadius.eq_3 INTERNAL TYPE=a8eaf563c00d4d0fe0290a49 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.threeDiscPair._proof_10 INTERNAL TYPE=8780b8e9d085b1df61bbb5f7 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.labHi TYPE=d3c6224fd338104a8d75a44b VALUE=cb9a4f556ca615d05b610290 DATA=-
+C THM HadwigerNelson.Plane.squarePair_right_oneOfEach TYPE=d7852f1a7786166ce2af12c0 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.threeDiscPair._proof_5 INTERNAL TYPE=fa1601b9cd035f3f0e69b70d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.labLo.congr_simp TYPE=21bd79c9a2bf910a0041ce8f VALUE=- DATA=-
+C DEF _private.Proofs.HadwigerNelson.Plane.ClosePairWitness.0.HadwigerNelson.Plane.splitSet.match_1.splitter INTERNAL TYPE=788b30c44033cbf79b7ce750 VALUE=864df4b0368829644c85d8ef DATA=-
+C THM HadwigerNelson.Plane.sectorPoint_arcCut TYPE=830f66b0764b15e8aa8e0a6d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.splitArc.eq_1 INTERNAL TYPE=fe1a98d808fc188e5476af47 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.threeDiscPair._proof_1 INTERNAL TYPE=845778214b1033fca0d40ebc VALUE=- DATA=-
+C THM HadwigerNelson.Plane.threeDiscPair._proof_4 INTERNAL TYPE=4757d3c3378538d4ac4d65cc VALUE=- DATA=-
+C THM HadwigerNelson.Plane.threeDiscPair_left_separatesAt_iff TYPE=bf8ead6e208a3ba24cff7a1e VALUE=- DATA=-
+C THM HadwigerNelson.Plane.pairCol.eq_1 INTERNAL TYPE=acb5309ae164601293be5d06 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.quarterTurn_symm_one TYPE=e5a2eca8bf20d4b6c5795b65 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.planeMotion_symm_mem_ball TYPE=8db4645f39d8639e0e2ad4f9 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.one_le_dist_iff TYPE=0ce166a02f69ad305632454d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.oneOfEach_iff_of_image TYPE=b378cc12d42876bafc6b8eee VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.pairCol TYPE=6507b273279cd3ea0d348063 VALUE=2f5bfba1af5d530ebd44e813 DATA=-
+C DEF HadwigerNelson.Plane.squarePair TYPE=eb91191c83116f073c2ac2d1 VALUE=cc915a76a9349c41b8388739 DATA=-
+C THM HadwigerNelson.Plane.squarePair_right_arcCut TYPE=82f4d4b9acb0a8742ffb5fb9 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.mem_closure_splitSet_zero TYPE=739189246a48f88f74e9dedb VALUE=- DATA=-
+C THM HadwigerNelson.Plane.splitArc_sq TYPE=1197fbb9b79b782a51f7c739 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.splitArc TYPE=e99c5a7c1500e8e6031689a3 VALUE=e36a6e053975e60fe585acc6 DATA=-
+C THM HadwigerNelson.Plane.planeMotion_symm_apply TYPE=d2eddf37122a82803ee6ac2d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.half_le_dist_one_sub_I_zero TYPE=d130047a31ca40be4742b8e2 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.transport._proof_2 INTERNAL TYPE=ac149f270692a8c258076a4b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.threeDiscPair_right_hasArcEdges TYPE=e6f5600b620b92b74af9c05c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.transport._proof_3 INTERNAL TYPE=2c05d5fc93e04b63d9982dba VALUE=- DATA=-
+C THM HadwigerNelson.Plane.splitPoint._proof_4 INTERNAL TYPE=5f2d352eca7e5ff49d5ceeb6 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.splitPoint._proof_1 INTERNAL TYPE=3d21a3ffdb139be0329d84fc VALUE=- DATA=-
+C THM HadwigerNelson.Plane.dist_zero_sq_eq TYPE=0a7b68f75fe570cb5e2353a9 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.threeDisc._proof_1 INTERNAL TYPE=676345fb4d6e91d81c9345fd VALUE=- DATA=-
+C THM HadwigerNelson.Plane.measurePreserving_planeMotion_symm TYPE=4e034187b640b564c7a0dc27 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.labLo.eq_1 INTERNAL TYPE=a3e3bc597757860a2245a69c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isOpen_splitSet TYPE=9c266cb52e2ebc0af95209ef VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Plane.ClosePairWitness.0.HadwigerNelson.Plane.splitSet.match_1.eq_3 INTERNAL TYPE=eecece39d2e9f3f988e7217e VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ThreePiece.transport TYPE=597fc8df62dd9d3454c6d894 VALUE=035c5bc11a4f326f31382dc0 DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.SeparatesAt.eq_1 INTERNAL TYPE=f9c150e73e765d430a80c90c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.half_le_dist_one_add_I_zero TYPE=8cb6a51ed6ebb1bb8d2a75fd VALUE=- DATA=-
+C THM HadwigerNelson.Plane.labLo._proof_1 INTERNAL TYPE=171c68dd1bb01014c145ea4a VALUE=- DATA=-
+C THM HadwigerNelson.Plane.dist_planeMotion_symm TYPE=cb016ab8b66bf9bf7dd60044 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.sevenCol._proof_2 INTERNAL TYPE=d0b401d1f123bac8327e02f5 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isWeakColouringOn_sevenCol._proof_1_2 INTERNAL TYPE=197419c6393ae4d082da6c88 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.planeMotion TYPE=dce1650e0f934353520a3d8c VALUE=912391ea399b70883668a7fb DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.transport_piece TYPE=1cb66603cf1be850b63cf386 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.threeDiscPair_right_piece TYPE=218cb31dd2a945a8c043a64b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.splitCol_of_mem TYPE=89056568c6064911a3c9c5c9 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.dist_lt_one_iff TYPE=c1ad147a4a48b88a77f4ac4e VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.arcCut_of_radii TYPE=ce9d2afb9d6a59c76233499c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.planeMotion_apply TYPE=d844bad5acc27af66c5217d9 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.dist_splitArc_zero TYPE=4c2ec62ed35580cec17773e3 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isWeakColouringOn_sevenCol TYPE=9a44f0f8f36ed9092d6d4334 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.splitCol TYPE=c4fd8241caa904cd621e07af VALUE=0e7c2453a8a4008a066e347f DATA=-
+C THM HadwigerNelson.Plane.splitPoint_hasArcEdges TYPE=6614fa0b56a99381fcf428e2 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isCommonUnitPoint_zero_one_sub_I TYPE=5150e70b6a9e2d3aaa484c53 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.one_mem_threeDisc TYPE=c531426015524dce81b8fa6b VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.sectorDir TYPE=108f040c2c8a24b380b5efef VALUE=55314db7f376d908e5f8cb88 DATA=-
+C THM HadwigerNelson.Plane.planeMotion._proof_1 INTERNAL TYPE=efd08ccf877f33b4725d5417 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.threeDiscPair._proof_9 INTERNAL TYPE=d222a261280ccdab90bff774 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.splitPoint_oneOfEach TYPE=666acf170554b795d75bec6f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.mem_closure_splitSet_two TYPE=a6ddf6a887e073f439db3d91 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.splitPoint._proof_7 INTERNAL TYPE=f1c31f1bedea8bcd46b0c6bc VALUE=- DATA=-
+C THM HadwigerNelson.Plane.threeDiscPair._proof_8 INTERNAL TYPE=69986724288c64762c997a8b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.threeDisc_aeProperOn TYPE=658fc772b6ae1813dc146baf VALUE=- DATA=-
+C THM HadwigerNelson.Plane.split_outer_dist_gt TYPE=171785671cb2a9c8cbfff704 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.splitPoint_arcCut TYPE=ee755e28926e36cef014d536 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.threeDiscPair_left_oneOfEach_iff TYPE=b77f249a2f6765cef32bc5aa VALUE=- DATA=-
+C THM HadwigerNelson.Plane.mem_splitPoint_edge TYPE=ecc81906ce5ddee7d9c623fa VALUE=- DATA=-
+C THM HadwigerNelson.Plane.sevenPair._proof_1 INTERNAL TYPE=054310ad1539db6be77a7ef8 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.sevenPair TYPE=04cf25612a63afe1503f070a VALUE=f9f1891cded2adf12643e045 DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.separatesAt_iff_of_image TYPE=fe8f4e7efea8cd9270dffcb2 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.labHi._proof_1 INTERNAL TYPE=39cf2f2b3c9edb98e42e964f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.threeDiscPair_right_oneOfEach_iff TYPE=54f763d587347efe01d9c3c0 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.splitPoint._proof_2 INTERNAL TYPE=f64848f9fa0856d06c38e222 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.loneW TYPE=a38dc70e09e6763acc651b2b VALUE=ff456273695de2af34bf835e DATA=-
+C THM HadwigerNelson.Plane.threeDiscPair_left_hasArcEdges TYPE=06b97af3aa3d20c536c6140c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.transport._proof_4 INTERNAL TYPE=765e68670f151dd3fd9f2efc VALUE=- DATA=-
+C THM HadwigerNelson.Plane.threeDiscCol_of_mem_right TYPE=6b9922f5f087337efd7fbfbb VALUE=- DATA=-
+C THM HadwigerNelson.Plane.volume_ball_diff_iUnion_splitSet TYPE=94272b20a1718d5ab2a8b347 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.dist_planeMotion TYPE=d534a76cd2feab6823a38092 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.splitSet TYPE=6e76bdbee4d40fba8dd50e91 VALUE=5324d0a28535309313d027f2 DATA=-
+C THM HadwigerNelson.Plane.quarterTurn_one TYPE=2a1924912527b8a728e22b33 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.mem_splitSet_zero TYPE=6cf3bb32305852dd18a18ffe VALUE=- DATA=-
+C THM HadwigerNelson.Plane.splitPoint._proof_3 INTERNAL TYPE=9405d1ff724576df4e87ed76 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.labHi.eq_1 INTERNAL TYPE=fba723d4b45396109b82d87e VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.transport._proof_1 INTERNAL TYPE=066201394272816014b4093f VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.splitSet.match_1 INTERNAL TYPE=788b30c44033cbf79b7ce750 VALUE=bd1f6ce1f9f59fa50f1ba4d7 DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.HasArcEdges.of_image TYPE=9e85a47362198a9e5fce7279 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.labLo_ne_labHi._proof_1_1 INTERNAL TYPE=aab0d414b8c7c83127d4af87 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.transport._proof_5 INTERNAL TYPE=f0a98c2b18a96444bf553dc3 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.splitPoint._proof_5 INTERNAL TYPE=55f791a6be2f036063f536a5 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.one_lt_dist_iff TYPE=b47360e5ec126cc1c4bac3e6 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.half_le_dist_one_sub_I_one TYPE=984f56817dba0530ae3c8f59 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isPreconnected_splitOuter TYPE=08c761608691653b995a538c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isWeakColouringOn_pairCol TYPE=b7b5103808047695618fcfad VALUE=- DATA=-
+C THM HadwigerNelson.Plane.dist_splitArc_one TYPE=6e3d8b1f72e1e02af3db155c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isWeakColouringOn_loneCol TYPE=441e248844d5859fcce71f5c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.labHi.congr_simp TYPE=ba192102fd897b3ec2a26f5d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.splitCol_eq_one TYPE=737b44e90afc9b69274fa184 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.threeDiscCol.eq_1 INTERNAL TYPE=a278788b5d83552aa07610c6 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.threeDiscPair._proof_6 INTERNAL TYPE=006bb30ec748c5e8cc88341c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.norm_sectorDir TYPE=ca8c63903e01c36ba0536fd4 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.zero_mem_closure_splitSet TYPE=3da0a402dbf2e503dca68d78 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.edge_eq_image TYPE=9db85b9414297fa8c2cce3bb VALUE=- DATA=-
+C THM HadwigerNelson.Plane.threeDiscPair_right_separatesAt_iff TYPE=682376d0709b9abcbd0fe340 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.transport_label TYPE=473f544c51b760f88dd5de25 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isOpen_threeDisc TYPE=978703b8022aef74a0509b08 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.mem_splitSet_two TYPE=f30ed277b1e8287078047f3f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.ArcCut.of_image TYPE=c156776a38140432fb79a619 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.mem_splitSet_one TYPE=5db4ebce2a20364f446cd83c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.sevenPair_left_not_separatesAt TYPE=ecba5472b195c18b3812e6ff VALUE=- DATA=-
+C THM HadwigerNelson.Plane.splitCol_eq_zero TYPE=ef3ea7abe82348c79681967f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.dist_one_sub_I_one_add_I TYPE=4dfca02f81a101f4ca22bac8 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.planeMotion._proof_2 INTERNAL TYPE=a688bcdfa7746c39f0277919 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.planeMotion._proof_3 INTERNAL TYPE=abb9c23c30977c079c3305a0 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.transport._proof_7 INTERNAL TYPE=24006a8fd9f2da9ba7c66a58 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.transport_nbhd TYPE=dbae42953e3a01f821e7908a VALUE=- DATA=-
+C THM HadwigerNelson.Plane.labHi_injective TYPE=1f42923f7ce8ea3729458180 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.lonePair_right_not_separatesAt TYPE=142244772215372ff6a21712 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ThreePiece.ArcCut TYPE=bcee24994c577799c4f2d5d2 VALUE=56561550c6fd6642fb2955cc DATA=-
+C THM HadwigerNelson.Plane.sq_lt_of_mem_ball_zero TYPE=607720fd374981b36e45a062 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.quarterTurn_symm_right TYPE=7dc7b6437e7a306a6e3fd3a8 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.loneW.eq_1 INTERNAL TYPE=75d38f4596556b0f5cb5919b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.outerAt_image_iff TYPE=9ee191f75a8b107d8740e3f2 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.ArcCut.sector TYPE=2da9627dc6402b5b3978999f VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.loneCol TYPE=a38dc70e09e6763acc651b2b VALUE=ddedb95501972f335da35d61 DATA=-
+C THM HadwigerNelson.Plane.sqrt_two_div_two_sq TYPE=78a33016b7b571e199d39ed9 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.squarePair_left_arcCut TYPE=0208276cba46f4b404d1c394 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.loneW._proof_1 INTERNAL TYPE=39e5e75ae5ef8334e8836a5f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.transport._proof_9 INTERNAL TYPE=d14e0e71687a96557ac39073 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.one_lt_dist_of_dist_lt_one TYPE=e22ceef7c82db1a37b56d7a9 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.transport._proof_8 INTERNAL TYPE=f81a4da4c007315c62b1dd9c VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.squareW TYPE=a38dc70e09e6763acc651b2b VALUE=b749044212f67ce147777bad DATA=-
+C THM _private.Proofs.HadwigerNelson.Plane.ClosePairWitness.0.HadwigerNelson.Plane.splitSet.match_1.eq_1 INTERNAL TYPE=df4bd118163d0c3a01110838 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.threeDiscCol_of_mem_one TYPE=a37a9713a1509317f3f4f76a VALUE=- DATA=-
+C THM HadwigerNelson.Plane.dist_le_one_iff TYPE=b3cbfc0892873d3241fbeac4 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.squarePair_left_oneOfEach TYPE=c13abf119882d44f7451d417 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.splitRadius TYPE=76c04b7ee586395c21c616ee VALUE=1397ed6bc70cd161bd9d5d14 DATA=-
+C THM HadwigerNelson.Plane.threeDiscPair._proof_11 INTERNAL TYPE=d5b4eda08df14f85e4f414e8 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.labLo_injective TYPE=6fa4a43a73b182c9d4b9e754 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.measurable_squareW TYPE=6a1c6736b1b669c28955805d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.sevenCol._proof_1 INTERNAL TYPE=0b06c7b7b232c8b9627ae026 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.split_inner_lt TYPE=4e28235c008a9419f69aef95 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.squarePair_left_hasArcEdges TYPE=2d581c27907ea91fbaf8b87e VALUE=- DATA=-
+C THM HadwigerNelson.Plane.petal_inner_lt TYPE=d22e197bf3ff1602bfeb77c8 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Plane.ClosePairWitness.0.HadwigerNelson.Plane.splitSet.match_1.eq_2 INTERNAL TYPE=7049dbf8eda34fd1d556d2ab VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.threeDisc TYPE=1c90d95fa148bb5de1e12a3b VALUE=71d4ff21ddea77358950bf9f DATA=-
+C THM HadwigerNelson.Plane.splitArc_mem_edge TYPE=1dc914eca461a619e09e903a VALUE=- DATA=-
+C THM HadwigerNelson.Plane.measurable_splitCol TYPE=40bb95db724d64ad493e7af0 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.petalCol_eq_one TYPE=703999a8b97184e44e5438c8 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.splitPoint TYPE=26675d81590da8a26509807c VALUE=1fc46c3e04aead0dbfdfca11 DATA=c76667d3fc5c16c6a6e51639
+C THM HadwigerNelson.Plane.splitArc_im_nonpos TYPE=39cff7fe2966cd224454f575 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.threeDiscCol TYPE=7ed5be724e6602a2e538bb59 VALUE=e3925dfb833513eb174d127c DATA=-
+C THM HadwigerNelson.Plane.sectorPoint_not_separatesAt_one TYPE=c583b8c36d2a71fffac7afb5 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.split_outer_gt TYPE=d39d46ea082391cee88cc2ee VALUE=- DATA=-
+C THM HadwigerNelson.Plane.squarePair_right_hasArcEdges TYPE=d46e254f1aa8ec57f1418a0b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.OneOfEach.eq_1 INTERNAL TYPE=1d936be0a3cd9700391ce4c5 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.split_inner_dist_lt TYPE=f87b5a92f1e15431d1588c8e VALUE=- DATA=-
+C THM HadwigerNelson.Plane.dist_one_sub_I_zero_lt_two TYPE=7e51f8e69450a93e3d4f661c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.petal_outer_gt TYPE=c4f0b9e54d686a230226a956 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.labLo_ne_labHi TYPE=085a48d1bab5ffe98d319d5e VALUE=- DATA=-
+C THM HadwigerNelson.Plane.splitRadius.eq_1 INTERNAL TYPE=4204f66e41620fcc0c26d97e VALUE=- DATA=-
+C THM HadwigerNelson.Plane.dist_sq_eq TYPE=9a1992d0cd392b847976b131 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.threeDiscPair._proof_2 INTERNAL TYPE=04918a68ddb91240b094e4d5 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.continuous_splitArc TYPE=3334a16dc709c2a1c70f457d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.threeDiscPair._proof_3 INTERNAL TYPE=8838bd750180209333e4c892 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.re_im_of_mem_ball_zero TYPE=5b1b89574eb904497e8f1e92 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.sectorPoint_not_separatesAt_neg_I TYPE=d38ab056443e84e5b21ad401 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.re_im_of_mem_ball_one TYPE=aeaecff1764c1db48c10a503 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.threeDiscPair._proof_7 INTERNAL TYPE=7f8a63c039ff098cbc62f2a6 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.planeMotion_mem_ball TYPE=0a4d3de297737392c8ead27f VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.lonePair TYPE=2e8be424047e79e63e16ffaf VALUE=1fca5df6f8b7d579c664f4ae DATA=-
+C THM HadwigerNelson.Plane.threeDiscCol_of_mem_zero TYPE=6fd51efaf7c55d73fb6bea66 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.squareCol TYPE=a38dc70e09e6763acc651b2b VALUE=b5df0aa15fe0a2c13cf41fab DATA=-
+C THM HadwigerNelson.Plane.loneW._proof_2 INTERNAL TYPE=e88fa057cdb3c9de9150d922 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.quarterTurn_symm_zero TYPE=b786fb97804a95dca65a7f1d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.splitRadius.eq_2 INTERNAL TYPE=c60febc00a69ca20bd36e866 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.dist_one_add_I_zero_lt_two TYPE=7083a489209c82787064e428 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.labLo TYPE=d3c6224fd338104a8d75a44b VALUE=46696bcd8949b4fb3c587511 DATA=-
+C THM HadwigerNelson.Plane.abs_re_sub_one_im_of_mem_ball_one TYPE=d7411bd54eb6ae3bccbd9403 VALUE=- DATA=-
+## MODULE Proofs.HadwigerNelson.Plane.ClosePairModel constants=3
+C THM HadwigerNelson.Plane.exists_closePair_full TYPE=ca0ff0f523b5739f993a4701 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.exists_closePair_seven_not_separatesAt TYPE=05e8f65e53a64ec1792a9cdc VALUE=- DATA=-
+C THM HadwigerNelson.Plane.exists_closePair_not_separatesAt TYPE=efe64a6e08eb445f0d8ac21a VALUE=- DATA=-
+## MODULE Proofs.HadwigerNelson.Plane.ThreeArcs constants=99
+C THM HadwigerNelson.Plane.IsTriod.pos TYPE=29bd5ed0bc2d80d19477c475 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.mem_diff_of_mem TYPE=bc7740ccc0cd951ee1914f6d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.exists_mem_piece TYPE=cdc4f3a54700da83b127afb4 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.isPreconnected_iUnion_range TYPE=8e5fde0ec4ef708ad4b9f773 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ballRetract TYPE=3bb731a9762ae66f1ee83912 VALUE=018a01d293618ed05400bd07 DATA=-
+C REC HadwigerNelson.Plane.RimOrder.rec TYPE=10182dff4bfc34393b32fc1d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.apply_mem_ball TYPE=e222971cc708110d7cb82361 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.exists_arc TYPE=bc1547f13ef577ecafe42062 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.fin_three_add_one_ne TYPE=e6c62a4a9102d30bfe3671fe VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.RimOrder.recOn TYPE=9ccd6f1bf752bf873ad32d9b VALUE=a25199cfe543b245849bf7f3 DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.exists_rimPieces TYPE=82befb6c55855cd252ad28e6 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.RimOrder.apply_b TYPE=a38ee8eb2ecb7dd66e4c387b VALUE=- DATA=-
+C IND HadwigerNelson.Plane.IsTriodCut TYPE=bf12fe3c124ce7e32fc1fa99 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.iUnion_eq TYPE=8725183ced8d3032b883a6cb VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.IsTriod.recOn TYPE=345f5ca157625bad61d652b0 VALUE=a88194644de05ede33719aed DATA=-
+C THM HadwigerNelson.Plane.ballRetract_of_mem TYPE=83269165891671cf3d878df8 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.fin_three_eq_or_of_ne TYPE=8f22078d401dda559b9169f0 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.polarPt_add_turn TYPE=68add56bcea7e56820159888 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.piece_subset_ball TYPE=c05c711da719712c2e3f4c3b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ballRetract_of_mem_segment._simp_1_4 INTERNAL TYPE=cf55e889f99db8b90029e0ac VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ballRetract_of_mem_segment._simp_1_2 INTERNAL TYPE=5b1dd41da47b7b9d39a9e7e9 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ballRetract_one TYPE=d395a6afa661560ee0feed09 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ballRetract_of_mem_segment._simp_1_6 INTERNAL TYPE=d140ba623c140aefc82aed5c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ballRetract_of_mem_segment._simp_1_7 INTERNAL TYPE=b84ed43e284b431edd25ded8 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ballRetract_of_mem_segment TYPE=e211e1f70eb4bf8dd9f7d643 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.RimOrder.eq_or TYPE=97671c5cd95b3ea88e4d6748 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.apply_mem_closedBall TYPE=0d01258fdc2d4f781eda4bab VALUE=- DATA=-
+C THM HadwigerNelson.Plane.RimOrder.ne_ca TYPE=48b19756fce826732d4db877 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.isPreconnected_range_union_range TYPE=f485ee8b7d6996ddb65034b8 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.RimOrder.rotate TYPE=8708e8fc75a98e63f9b9dd22 VALUE=- DATA=-
+C IND HadwigerNelson.Plane.IsTriod TYPE=af25a4f132186e06efce71e3 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.polarPt_mem_sphere TYPE=dfb2feb5eab254d1302084ac VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.mem_closure TYPE=255a82e9224eca3b66d04f77 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ballRetract_of_mem_segment._simp_1_5 INTERNAL TYPE=a789e8a05704042d6b055671 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isPreconnected_inter_halves TYPE=e80e84d69ec8b416a6bb977a VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.eq_one_of_mem_sphere TYPE=154e016515325a943a2bb07a VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.isPreconnected_preimage_ballRetract.match_1_1 INTERNAL TYPE=70e2d10aa3ce2ca1b01a7bab VALUE=dad4969a4f8a7f840dae7b1e DATA=-
+C DEF HadwigerNelson.Plane.IsTriodCut.mk._flat_ctor INTERNAL TYPE=0c93c103a97653c992c4b9fa VALUE=72ac87647969153e15d3810e DATA=-
+C IND HadwigerNelson.Plane.RimOrder TYPE=06f2e0d8ed387e5ae803b43d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.dist_lt TYPE=c1311f961af95b1646737b62 VALUE=- DATA=-
+C CTOR HadwigerNelson.Plane.IsTriodCut.mk TYPE=aaca6195994057cca958eb09 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.RimOrder.mk._flat_ctor INTERNAL TYPE=8d204f58f48af86c1c0723a9 VALUE=f65ef03ac3b7fda7231e6d98 DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.closure_inter_closure_inter_ball TYPE=fb47c1ac2513e8ba599d84db VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.disjoint_iUnion_range TYPE=e32f6b9a0d9d34a13a0d88d0 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.isOpen TYPE=7217933649ce4a83731a598b VALUE=- DATA=-
+C REC HadwigerNelson.Plane.IsTriod.rec TYPE=7f020c0589924ec2abcc3df0 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.IsTriodCut.casesOn TYPE=ea4cab4a4e6375f5162b6175 VALUE=ee597354fea02b4f8983d3fb DATA=-
+C THM HadwigerNelson.Plane.exists_ne_ne_fin_three TYPE=89d5fd1833b403f69ced5fef VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.exists_range_subset TYPE=f7df05c7423fa3d8776f1d9f VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.RimOrder.casesOn TYPE=9ccd6f1bf752bf873ad32d9b VALUE=e57a451e9708b3aff8a0d278 DATA=-
+C THM HadwigerNelson.Plane.exists_arc_range_subset_inter TYPE=377c24f231f238138d2b73b8 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.RimOrder.apply_c TYPE=3c16a2d6679d3b6d336a5921 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.RimOrder.ne_bc TYPE=0aec5b7f91f9574a286ab2b8 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.apply_one_eq_polarPt TYPE=7434cb2cd496c41bff13251f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.notMem_iUnion_range_of_mem_Ioo TYPE=7e25498e4f07c649fea3847c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.exists_opposite TYPE=19e20863ccbf445487087702 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.dist_apply_one TYPE=c69395af73b7f5e2570fe37d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.eq_of_mem_of_mem_closure TYPE=f00062a679eabf16cd069559 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.RimOrder.apply_a TYPE=c6049d04774a2874798f5ae8 VALUE=- DATA=-
+C CTOR HadwigerNelson.Plane.RimOrder.mk TYPE=8d204f58f48af86c1c0723a9 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ballRetract.eq_1 INTERNAL TYPE=be416919d56c82d085b20086 VALUE=- DATA=-
+C CTOR HadwigerNelson.Plane.IsTriod.mk TYPE=75d8a7b270fbfa18479e598c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.injective TYPE=b2591cdea4bf21baef98bd86 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.exists_rimOrder TYPE=89b1da3d8579d7fa2f148b7e VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.exists_forall_rimArc TYPE=e1f34a026d6dfafaf6cf46f0 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.continuous_ballRetract TYPE=401a4b6032e129de65c832b6 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.range_subset_of_isPreconnected TYPE=e30d0f64fb66cc6b8766cf90 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ballRetract_mem TYPE=9fc1c14eaba602010cb27a03 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.RimOrder.lt_ab TYPE=63053e4f90be70da72acc304 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.isPreconnected TYPE=8543bd70c0513b02ab13dade VALUE=- DATA=-
+C THM HadwigerNelson.Plane.RimOrder.lt_ca TYPE=af3fa4c8c3d870d2efc08526 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.toIsTriod TYPE=f50ff1014ce102554a7abb36 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ballRetract_of_mem_segment._simp_1_8 INTERNAL TYPE=38b40303f62fdb14550c7895 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.disjoint TYPE=821032c4f33b4cb888493638 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.RimOrder.ne_ab TYPE=781a5da1fb8282d290bcd46e VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.eq_apply_one_of_mem_sphere TYPE=b5d8a263a5329818b342c377 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ballRetract_of_mem_segment._simp_1_3 INTERNAL TYPE=5f2822f027e66ea9439af706 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isClosed_iUnion_range_arc TYPE=f8f3f697eade0b495946469b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.closure_inter_closure_subset TYPE=746860b5e1741a170af8a1d7 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isPreconnected_inter_of_union_eq_closedBall TYPE=12ca3b6a3f7c70d05976f6d1 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.apply_one_mem_sphere TYPE=7430c521eefe03b8a2d9ce3c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.rimPiece_spec TYPE=831262ece7dbf7a79e767ff6 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.exists_unique_mem_closure TYPE=7d23a7200983fcb012d4fcae VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.isPreconnected_image_Icc TYPE=8a1871f77e210fe0fb8ff473 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.IsTriodCut.recOn TYPE=ea4cab4a4e6375f5162b6175 VALUE=3f7d822f14d60598f5e7565a DATA=-
+C DEF HadwigerNelson.Plane.IsTriod.casesOn TYPE=345f5ca157625bad61d652b0 VALUE=dc75036f47c8f6d61cc641f6 DATA=-
+C REC HadwigerNelson.Plane.IsTriodCut.rec TYPE=0faf8715c5715b68273d98ad VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isPreconnected_preimage_ballRetract TYPE=80d655a5e5e1543ca64611b2 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.RimOrder.lt_bc TYPE=188f7c371f8c4139352f329f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.closure_inter_nonempty TYPE=a02a4d62f41c9752ee33d06b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.ne_of_rimOrder TYPE=bb971693ac976a0926852e18 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.apply_zero TYPE=4a9e708e1eab5765334feca5 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.apply_one_ne TYPE=ccc9fe4fc988174aef42e0a8 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.closure_piece_subset_closedBall TYPE=d411bdb6bc075ee19449d407 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.isPreconnected_closure_inter TYPE=93289be31dd20e8c72896996 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.disjoint_range_union_range TYPE=3201981635175a0944cee39c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.not_mem_closure_both_sides TYPE=ca89fac84fca86e276fcf274 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.eq_center_of_ne TYPE=a3e7c4c9a60bf127eceaf0ad VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.IsTriod.mk._flat_ctor INTERNAL TYPE=75d8a7b270fbfa18479e598c VALUE=d7126613836fa45d63acdfe8 DATA=-
+## MODULE Proofs.HadwigerNelson.Plane.SectorPoint constants=6
+C DEF HadwigerNelson.Plane.ThreePiece.IsSector TYPE=54ddcb2b4af1cd628f80d34f VALUE=3ae440b333ff05249b43bf43 DATA=-
+C THM HadwigerNelson.Plane.sectorPoint_isSector TYPE=6388f7ae2706e2801d3f64a9 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.IsSector.hasArcEdges TYPE=9c8507b15929c729442a7797 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ThreePiece.IsSector.isFull TYPE=5b53ea524a03646300f2fc39 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.exists_closePair_sector TYPE=703fb4af3104d3ea3df14972 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.closePair_both_saved_of_isSector TYPE=ab8aaa62e4368627f7fceb34 VALUE=- DATA=-

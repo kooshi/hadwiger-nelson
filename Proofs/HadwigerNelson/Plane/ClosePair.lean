@@ -34,7 +34,8 @@ excludes in C124-BOTH and C124-FOUR.
 **Inhabitants** (`Plane/ClosePairModel`): `exists_closePair_not_separatesAt` — a close complementary pair of a weak
 six-colouring with a common unit point at which one member does not separate (the hypotheses of `closePair_forced_pieces` and
 `closePair_lone` at once); `exists_closePair_full` — one with both members arc-edged, hence full, each with one inner, one
-outer and one crossing piece (the hypotheses of `closePair_both_separate`, `closePair_both_saved` and `closePair_four` at once).
+outer and one crossing piece (the hypotheses of `closePair_both_separate`, `closePair_both_saved` and `closePair_four` at once)
+— constructed in `Plane/ClosePairWitness` (`lonePair`, `squarePair`; the control, `sevenPair`).
 -/
 
 namespace HadwigerNelson.Plane
@@ -780,9 +781,10 @@ every edge contains an arc from the point). `D.Saves w`: some edge contains an a
 an end at the point. An arc-edged member is full, so both separate (`closePair_both_separate`); the edge of the inner and the
 outer piece lies on `S(w)` and contains an arc from the point, and an arc on a circle from a point contains an arc of
 the circle from it (`ThreePiece.hasUnitArcFrom_of_arc_subset_sphere`). The clause in the claim list's own words, for
-its sector points, is `closePair_both_saved_of_isSector` (`Plane/SectorPoint`), over one fact of plane topology that is a leaf
-there. Inhabitant of the hypotheses: `exists_closePair_full` (`Plane/ClosePairModel`), whose members' edges are arcs
-of unit circles by construction. -/
+its sector points, is `closePair_both_saved_of_isSector` (`Plane/SectorPoint`), over one fact of plane topology: the
+three-arcs lemma (`IsTriodCut.exists_arc`, `Plane/ThreeArcs`). Inhabitant of the hypotheses: `exists_closePair_full`
+(`Plane/ClosePairModel`), whose members' edges are two radii and an arc of the unit circle about the common unit
+point, by construction (`squarePair`, `Plane/ClosePairWitness`). -/
 theorem closePair_both_saved {U : Set ℂ} {c : ℂ → Fin 6} (hU : IsOpen U) (hc : IsWeakColouringOn U c) {x y w : ℂ}
     (C : ClosePair U c x y) (hw : w ∈ U) (hwu : IsCommonUnitPoint x y w) (hax : C.left.HasArcEdges)
     (hay : C.right.HasArcEdges) : C.left.Saves w ∧ C.right.Saves w := by

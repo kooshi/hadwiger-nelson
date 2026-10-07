@@ -1,0 +1,100 @@
+## MODULE Proofs.HadwigerNelson.Plane.ThreeArcs constants=99
+C THM HadwigerNelson.Plane.IsTriod.pos TYPE=29bd5ed0bc2d80d19477c475 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.mem_diff_of_mem TYPE=bc7740ccc0cd951ee1914f6d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.exists_mem_piece TYPE=cdc4f3a54700da83b127afb4 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.isPreconnected_iUnion_range TYPE=8e5fde0ec4ef708ad4b9f773 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.ballRetract TYPE=3bb731a9762ae66f1ee83912 VALUE=018a01d293618ed05400bd07 DATA=-
+C REC HadwigerNelson.Plane.RimOrder.rec TYPE=10182dff4bfc34393b32fc1d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.apply_mem_ball TYPE=e222971cc708110d7cb82361 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.exists_arc TYPE=bc1547f13ef577ecafe42062 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.fin_three_add_one_ne TYPE=e6c62a4a9102d30bfe3671fe VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.RimOrder.recOn TYPE=9ccd6f1bf752bf873ad32d9b VALUE=a25199cfe543b245849bf7f3 DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.exists_rimPieces TYPE=82befb6c55855cd252ad28e6 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.RimOrder.apply_b TYPE=a38ee8eb2ecb7dd66e4c387b VALUE=- DATA=-
+C IND HadwigerNelson.Plane.IsTriodCut TYPE=bf12fe3c124ce7e32fc1fa99 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.iUnion_eq TYPE=8725183ced8d3032b883a6cb VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.IsTriod.recOn TYPE=345f5ca157625bad61d652b0 VALUE=a88194644de05ede33719aed DATA=-
+C THM HadwigerNelson.Plane.ballRetract_of_mem TYPE=83269165891671cf3d878df8 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.fin_three_eq_or_of_ne TYPE=8f22078d401dda559b9169f0 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.polarPt_add_turn TYPE=68add56bcea7e56820159888 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.piece_subset_ball TYPE=c05c711da719712c2e3f4c3b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ballRetract_of_mem_segment._simp_1_4 INTERNAL TYPE=cf55e889f99db8b90029e0ac VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ballRetract_of_mem_segment._simp_1_2 INTERNAL TYPE=5b1dd41da47b7b9d39a9e7e9 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ballRetract_one TYPE=d395a6afa661560ee0feed09 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ballRetract_of_mem_segment._simp_1_6 INTERNAL TYPE=d140ba623c140aefc82aed5c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ballRetract_of_mem_segment._simp_1_7 INTERNAL TYPE=b84ed43e284b431edd25ded8 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ballRetract_of_mem_segment TYPE=e211e1f70eb4bf8dd9f7d643 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.RimOrder.eq_or TYPE=97671c5cd95b3ea88e4d6748 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.apply_mem_closedBall TYPE=0d01258fdc2d4f781eda4bab VALUE=- DATA=-
+C THM HadwigerNelson.Plane.RimOrder.ne_ca TYPE=48b19756fce826732d4db877 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.isPreconnected_range_union_range TYPE=f485ee8b7d6996ddb65034b8 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.RimOrder.rotate TYPE=8708e8fc75a98e63f9b9dd22 VALUE=- DATA=-
+C IND HadwigerNelson.Plane.IsTriod TYPE=af25a4f132186e06efce71e3 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.polarPt_mem_sphere TYPE=dfb2feb5eab254d1302084ac VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.mem_closure TYPE=255a82e9224eca3b66d04f77 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ballRetract_of_mem_segment._simp_1_5 INTERNAL TYPE=a789e8a05704042d6b055671 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isPreconnected_inter_halves TYPE=e80e84d69ec8b416a6bb977a VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.eq_one_of_mem_sphere TYPE=154e016515325a943a2bb07a VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.isPreconnected_preimage_ballRetract.match_1_1 INTERNAL TYPE=70e2d10aa3ce2ca1b01a7bab VALUE=dad4969a4f8a7f840dae7b1e DATA=-
+C DEF HadwigerNelson.Plane.IsTriodCut.mk._flat_ctor INTERNAL TYPE=0c93c103a97653c992c4b9fa VALUE=72ac87647969153e15d3810e DATA=-
+C IND HadwigerNelson.Plane.RimOrder TYPE=06f2e0d8ed387e5ae803b43d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.dist_lt TYPE=c1311f961af95b1646737b62 VALUE=- DATA=-
+C CTOR HadwigerNelson.Plane.IsTriodCut.mk TYPE=aaca6195994057cca958eb09 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.RimOrder.mk._flat_ctor INTERNAL TYPE=8d204f58f48af86c1c0723a9 VALUE=f65ef03ac3b7fda7231e6d98 DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.closure_inter_closure_inter_ball TYPE=fb47c1ac2513e8ba599d84db VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.disjoint_iUnion_range TYPE=e32f6b9a0d9d34a13a0d88d0 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.isOpen TYPE=7217933649ce4a83731a598b VALUE=- DATA=-
+C REC HadwigerNelson.Plane.IsTriod.rec TYPE=7f020c0589924ec2abcc3df0 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.IsTriodCut.casesOn TYPE=ea4cab4a4e6375f5162b6175 VALUE=ee597354fea02b4f8983d3fb DATA=-
+C THM HadwigerNelson.Plane.exists_ne_ne_fin_three TYPE=89d5fd1833b403f69ced5fef VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.exists_range_subset TYPE=f7df05c7423fa3d8776f1d9f VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.RimOrder.casesOn TYPE=9ccd6f1bf752bf873ad32d9b VALUE=e57a451e9708b3aff8a0d278 DATA=-
+C THM HadwigerNelson.Plane.exists_arc_range_subset_inter TYPE=377c24f231f238138d2b73b8 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.RimOrder.apply_c TYPE=3c16a2d6679d3b6d336a5921 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.RimOrder.ne_bc TYPE=0aec5b7f91f9574a286ab2b8 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.apply_one_eq_polarPt TYPE=7434cb2cd496c41bff13251f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.notMem_iUnion_range_of_mem_Ioo TYPE=7e25498e4f07c649fea3847c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.exists_opposite TYPE=19e20863ccbf445487087702 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.dist_apply_one TYPE=c69395af73b7f5e2570fe37d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.eq_of_mem_of_mem_closure TYPE=f00062a679eabf16cd069559 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.RimOrder.apply_a TYPE=c6049d04774a2874798f5ae8 VALUE=- DATA=-
+C CTOR HadwigerNelson.Plane.RimOrder.mk TYPE=8d204f58f48af86c1c0723a9 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ballRetract.eq_1 INTERNAL TYPE=be416919d56c82d085b20086 VALUE=- DATA=-
+C CTOR HadwigerNelson.Plane.IsTriod.mk TYPE=75d8a7b270fbfa18479e598c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.injective TYPE=b2591cdea4bf21baef98bd86 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.exists_rimOrder TYPE=89b1da3d8579d7fa2f148b7e VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.exists_forall_rimArc TYPE=e1f34a026d6dfafaf6cf46f0 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.continuous_ballRetract TYPE=401a4b6032e129de65c832b6 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.range_subset_of_isPreconnected TYPE=e30d0f64fb66cc6b8766cf90 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ballRetract_mem TYPE=9fc1c14eaba602010cb27a03 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.RimOrder.lt_ab TYPE=63053e4f90be70da72acc304 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.isPreconnected TYPE=8543bd70c0513b02ab13dade VALUE=- DATA=-
+C THM HadwigerNelson.Plane.RimOrder.lt_ca TYPE=af3fa4c8c3d870d2efc08526 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.toIsTriod TYPE=f50ff1014ce102554a7abb36 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ballRetract_of_mem_segment._simp_1_8 INTERNAL TYPE=38b40303f62fdb14550c7895 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.disjoint TYPE=821032c4f33b4cb888493638 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.RimOrder.ne_ab TYPE=781a5da1fb8282d290bcd46e VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.eq_apply_one_of_mem_sphere TYPE=b5d8a263a5329818b342c377 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ballRetract_of_mem_segment._simp_1_3 INTERNAL TYPE=5f2822f027e66ea9439af706 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isClosed_iUnion_range_arc TYPE=f8f3f697eade0b495946469b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.closure_inter_closure_subset TYPE=746860b5e1741a170af8a1d7 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isPreconnected_inter_of_union_eq_closedBall TYPE=12ca3b6a3f7c70d05976f6d1 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.apply_one_mem_sphere TYPE=7430c521eefe03b8a2d9ce3c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.rimPiece_spec TYPE=831262ece7dbf7a79e767ff6 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.exists_unique_mem_closure TYPE=7d23a7200983fcb012d4fcae VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.isPreconnected_image_Icc TYPE=8a1871f77e210fe0fb8ff473 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.IsTriodCut.recOn TYPE=ea4cab4a4e6375f5162b6175 VALUE=3f7d822f14d60598f5e7565a DATA=-
+C DEF HadwigerNelson.Plane.IsTriod.casesOn TYPE=345f5ca157625bad61d652b0 VALUE=dc75036f47c8f6d61cc641f6 DATA=-
+C REC HadwigerNelson.Plane.IsTriodCut.rec TYPE=0faf8715c5715b68273d98ad VALUE=- DATA=-
+C THM HadwigerNelson.Plane.isPreconnected_preimage_ballRetract TYPE=80d655a5e5e1543ca64611b2 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.RimOrder.lt_bc TYPE=188f7c371f8c4139352f329f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.closure_inter_nonempty TYPE=a02a4d62f41c9752ee33d06b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.ne_of_rimOrder TYPE=bb971693ac976a0926852e18 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.apply_zero TYPE=4a9e708e1eab5765334feca5 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.apply_one_ne TYPE=ccc9fe4fc988174aef42e0a8 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.closure_piece_subset_closedBall TYPE=d411bdb6bc075ee19449d407 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.isPreconnected_closure_inter TYPE=93289be31dd20e8c72896996 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriodCut.disjoint_range_union_range TYPE=3201981635175a0944cee39c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.not_mem_closure_both_sides TYPE=ca89fac84fca86e276fcf274 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.IsTriod.eq_center_of_ne TYPE=a3e7c4c9a60bf127eceaf0ad VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.IsTriod.mk._flat_ctor INTERNAL TYPE=75d8a7b270fbfa18479e598c VALUE=d7126613836fa45d63acdfe8 DATA=-
