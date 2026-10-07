@@ -718,9 +718,13 @@ hexagonal seven-colouring with circumradius `r = 2/5` (theirs, `M/introduction.t
 `B(v, ε)`, `ε < 0.03`: every point of the new class 3 is within `0.8 + ε < 1` of every point of its hexagon and at least
 `1.03 − ε > 1` from the other hexagons of colour 3, so the colouring is still proper at every unit pair; each disc's two
 boundary points on the edge carry all three transitions, so they are cyclic centres, and they accumulate at `v`: **`𝓛` is not
-locally finite.** (b) Recolour `B(v, ε)` by any measurable partition into three sets each of positive density at every point
-of it: proper for the same reason; and for a centre `x` at distance 1 from `v` the directions `e` with `x + e ∈ B(v, ε)` form
-an arc of positive measure on which all of 1, 2, 3 are in `P_x(e)`: **a palette of three labels.** Both constructions use only
+locally finite.** (b) Fix a centre `x` at distance 1 from `v` and recolour the part of `B(v, ε)` outside the unit circle about `x` in polar
+coordinates about `x`: on the `n`-th dyadic annulus `1 + 2^{−n−1} < |p − x| ≤ 1 + 2^{−n}`, angular stripes of colours 1, 2, 3
+of angular period `2^{−n}`. It is proper for the same reason (every recoloured point is within `ε` of `v`); the circles about
+`x` of radii `1 + (3/4)2^{−n}` are typical samplings (their points lie in open stripes off a null set) and their samples
+converge weak-* to `(1/3, 1/3, 1/3)` on the arc of directions pointing into `B(v, ε)`: **a palette of three labels on a set of
+positive measure.** (A partition with all three classes of positive density at every point would not do: almost every point of
+a measurable class is a density-one point of it.) Both constructions use only
 *slack* at `v`. So neither step is a regularity theorem about measurable colourings; each is a **tightness** statement — true
 at five, where it is true of an empty class, false at seven — and at six it can hold only for colourings with no such slack,
 or for a normal form of them.
