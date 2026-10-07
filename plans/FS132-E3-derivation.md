@@ -19,6 +19,11 @@ the release's manuscript, `/home/kooshi/source/math/preprints/The-Euclidean-plan
   1 between two hubs); nine of the route's eleven steps restate and are derived, V6-HUBS and the count of V6-COUNT are replaced
   by a count on the four exclusion sets (C132-M-ORBIT's step M6), and the statement the route was for is derived. § The route,
   step by step.
+- **C132-RUN-CV** — the reading: **stalls at FS112-N3-DENSE3** (GAP at that input: with its repeated-colour alternative gone it
+  is C132-M-CV itself, and its proof is row 134's base); the other three inputs are not needed on the measurable side — the
+  extraction stands where the terminal modification stood. § Stage 4, § The existence route, input by input.
+- **C132-DIAG-WIDE**, **C132-DIAG** — no ring alternating between two disjoint pairs of labels at any centre of a weak measurable
+  six-colouring — [hand] and [derived], one mind; the release's Lemma 6.4 read at six. § Argument — the two-diagonal ring.
 
 ## Stage 1 — SAVED: the readback
 
@@ -390,4 +395,150 @@ nothing within 30 s; the zbMATH Open API (`("measurable coloring" | "measurable 
 py:2024-2026`) answered 503, as it did for the first deriver. **A prior-art debt**, with the plan's: the statements of this record
 were not searched for in print. The release is three days old; the plan's §PA found no six-colour form of its §§ 5–8.
 
-## Stage 4 — (not yet saved)
+## Stage 4 — SAVED: C132-RUN-CV, and C132-DIAG on the way
+
+*Read for it: `plans/FS114-derivation.md` ll. 26–40 (the entry FS114-CV-EXISTS); `plans/FS114-CVB-verification.md` §§ 1.3–1.4
+whole; `LEDGER.md` row 134 (the base) to its mechanism line. **Not read:** `plans/BASE-V-verification.md`, the proofs of
+FS112-N3-DENSE3 and of `[SokolovVoronov2025]` Cor. 1, `fs131-w7:plans/FS131-w7-kernel-plan.md` (the planner's record of the count),
+`plans/FS112-N-proof.md` beyond its line stating N3-DENSE3. So this stage names the input at which the reading stalls and what
+kind of thing it is; what that input's own proof reads of a map is a debt, said in the hand-over.*
+
+**Recognition, briefly** (`ephodos-recognition`, the same invocation). The stall read: "a wall that describes a counterexample"
+— the map route supposes no vertex of four colours and describes what such a map must carry (a bi-infinite stuck chain). For the
+stranger, a dimension theorist: *a map into a graph defined off a finite set, with an essential loop at some puncture; must
+some puncture's loop be other than a triangle?* The map route's three reductions — the terminal modification, the stuck chains,
+"moves keep the colours at a vertex" — exist to bring every vertex to one of three kinds; on the measurable side the nerve does
+that with no modification, because a vertex with a repeated colour is filled inside a tree.
+
+### The entries
+
+derivation: C132-RUN-CV
+  statement: each input of the route to FS114-CV-EXISTS (`plans/FS114-CVB-verification.md` § 1.4, by the entry's `uses only:` — FS112-N3-DENSE3, FS112-N2-TERM with its terminal modification `M*`, N4-FIN, and "a modification creating no unit arc keeps a four-colour vertex's colours at the vertex") has a restatement under the dictionary, true of every weak measurable six-colouring of the plane whose cyclic centres are finite in every closed disc, derived from the data and the toolkit alone; and the restated steps give an extracted centre with `ℓ ≥ 4` (**C132-M-CV**, [G₆] in the measurable class under C132-EXT's hypothesis)
+  uses only: § The existence route, input by input — the reading of the four inputs against C132-EXT-DISC
+  not claimed: that C132-M-CV is false (a stall of the reading says nothing of the statement); that the measurable side needs the three inputs FS112-N2-TERM, N4-FIN and the colour-keeping of the moves at all — it does not (the extraction stands where they stood); what the proof of FS112-N3-DENSE3 reads of a cubic map (unread here)
+  argument: § The existence route, input by input
+  verdict: stalls at: FS112-N3-DENSE3 — "every closed disc of radius 3 of a valid map holds a vertex of `≥ 4` colours or a repeated colour": its second alternative reads the cyclic order of tiles at a point (no counterpart), and with that alternative gone its restatement is C132-M-CV itself; its proof is row 134's base (`[SokolovVoronov2025]` Cor. 1 for curved cubic maps), which no statement of the data or the toolkit replaces at six
+  grade: hand
+  minds: 1
+  model: the hexagonal seven-colouring — every extracted centre is a triangle (the first deriver's control `hex7-model`), so at seven the restated input is false, as FS112-N3-DENSE3 is false for it (CVB § 1.4, "Seven-colour control")
+  prior art: owed — the reading is this project's; nothing to search
+  handoff: none — a reading; its hand-over line is below
+
+derivation: C132-DIAG-WIDE
+  statement: let U be an open set of the plane containing the closed unit disc about a point p, c a weak measurable six-colouring of U, and D, D′ two disjoint pairs of labels; then there is no measurable map w from the unit circle to {D, D′} with w(e) ⊂ P_p(e) and w(Re) ≠ w(e) for almost every unit vector e, R the rotation by π/3
+  uses only: `[OAIMath2026]` Lemma 5.2 assertion (2) (at an angular density-one direction e of the set of directions whose palette holds i, the class of i has density zero at p + e + v for every v not parallel to e), Lemma 4.3 (two density-one points of one class are not at distance 1) and the argument of Lemma 6.4 (`M/transitions.tex:228–272`) with its one count read as "the labels outside D ∪ D′ are two"; that cos γ = 5/6 makes γ/π irrational; that the three points p + e(t + 2jπ/3)(1 − e(γ)) are pairwise 1 apart at distance 1/√3 from p
+  not claimed: anything about a ring that takes a third state (a palette holding an outside label) on a set of positive measure — the mixed rings of FS-124; anything at seven labels or more (three labels outside leave the triangle properly colourable)
+  argument: § Argument — the two-diagonal ring
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none can exist (a non-existence); at five labels the same argument is the release's Lemma 6.4, with one label and one pair
+  prior art: known: `[OAIMath2026]` Lemma 6.4, whose Lean form `two_state_impossible {k}` carries the count as the hypothesis that at most two labels lie outside (`plans/EXT-OAI2-reading.md` § 4.2 row 8; the Lean not read by this job) — this entry is its instance at six labels with two pairs, read from the manuscript's proof
+  handoff: de Bruijn — the instance of the release's `two_state_impossible` at `Fin 6` with `J`, `K` the two pairs; read `RealState` first (unread by the reading and by this job)
+
+derivation: C132-DIAG
+  statement: in a measurable six-colouring no four-cycle centre has a ring alternating, almost everywhere under the 60° rotation, between the two diagonals of its cycle
+  uses only: C132-DIAG-WIDE with D, D′ the two diagonals {i_0, i_2}, {i_1, i_3} of the cycle; "a ring alternating between the two diagonals" read as: almost every palette at the centre contains one of the two diagonals, chosen measurably, and the choice changes under the rotation
+  not claimed: what C132-DIAG-WIDE does not claim; that the centre is a four-cycle centre is not used
+  argument: § Argument — the two-diagonal ring
+  verdict: derived
+  grade: derived from: C132-DIAG-WIDE
+  minds: 1
+  model: none can exist (a non-existence)
+  prior art: known: as C132-DIAG-WIDE
+  handoff: none — subsumed by C132-DIAG-WIDE, which crosses
+
+### The existence route, input by input
+
+*The route (CVB § 1.4): pass to the terminal modification `M*`; if `M*` had no vertex of four colours, DENSE3 gives a vertex with
+a repeated colour, which is stuck; a stuck vertex propagates along its normal line both ways; N4-FIN forbids a bi-infinite chain;
+and the four-colour vertex of `M*` was one of `M`.*
+
+| input | what it does in the map | restated | verdict |
+|---|---|---|---|
+| **FS112-N3-DENSE3** | "every closed disc of radius 3 of a valid map holds a vertex of `≥ 4` colours or a repeated colour" (`plans/FS112-N-proof.md` l. 608) — proved from row 134's base: S–V Cor. 1 refutes a map near a cubic three-colour vertex all of whose neighbours are such | "every closed disc of radius 3 holds an extracted centre with `ℓ ≥ 4`, or [a point at which a label repeats]". The bracket reads **the cyclic order of tiles at a point**, for which the dictionary has nothing; without it the sentence is C132-M-CV | **no derived restatement — the stall.** It modifies nothing and counts nothing; it is the non-local refutation of "every vertex is a triangle", and on the measurable side that statement is the open one |
+| FS112-N2-TERM, `M*` | merges two sectors of one colour at a vertex, shaves, merges along a ray, bends: recolours parts of tiles until every vertex is cubic, an exception of at least four colours, or stuck | **nothing to restate.** What `M*` is for — every vertex of one of three kinds — the extraction gives with no modification: a vertex whose reduced loop word is empty is filled inside a tree (the first deriver's S5), and C132-EXT-DISC returns a centre with a simple cycle of length 3 to 6. A stuck vertex is no cyclic centre: its colours are `c, g, h` with `g` and `h` separated by two cusps of `c`, and the `g`–`h` transitions under a shift `h` have area `O(|h|^{3/2})`, so its transition graph is the path `g – c – h` (hand, one mind, a remark) | not needed |
+| N4-FIN | no bi-infinite chain of stuck vertices: the horns' curvature bounds `λ_k ≤ f(λ_{k+1})` cannot run both ways. **Reads an arc's curvature** | nothing to restate: stuck vertices are not centres, so no chain is met | not needed |
+| "a modification creating no unit arc keeps a four-colour vertex's colours at the vertex" | carries the vertex found in `M*` back to `M` | nothing to restate: nothing was modified | not needed |
+
+**The verdict.** `stalls at: FS112-N3-DENSE3`, the first input in the entry's order. The asking lane expected the stall at the
+modification; the reading finds the modification is not where it stalls — it is *dissolved*: three of the four inputs exist to
+normalize the map, and the nerve normalizes without touching the colouring. What is left is one input, and that input is the
+claim: **C132-M-CV holds exactly when the measurable side can refute "every extracted centre is a triangle"**, which in the map
+class is `[SokolovVoronov2025]` Cor. 1 for curved cubic maps (row 134's base, "S–V Cor. 1 a.e. with no `d = 2` exception two
+minds, both blind"), reached there from a cubic vertex outward over radius 3.
+
+**Hand-over, in a line, to the second deriver (not pursued):** what the existence route produces beyond the extraction is the
+non-local kill of the all-triangles map, and it is one held proof — row 134's base, `plans/BASE-V-verification.md` with FS-110's
+CB and CD records; the question to put to it is the one this job put to FS116-V6: *does S–V Cor. 1's chain, at a cubic
+three-colour vertex and its unit neighbours, read arcs and degree three, or only a triangle centre's three exclusion sets and
+the palettes about it?* C132-M-ORBIT's steps M2–M5 (the chart, tips, confinement, one tip per hub) are stated for four inner
+labels and two outside ones; at a triangle centre of a six-colouring there are three and three, the ring is not binary, and I
+did not try them there.
+
+### Argument — the two-diagonal ring
+
+*The release's Lemma 6.4, read with six labels.* Suppose `w` exists. `w(R²e) = w(e)` and `w(−e) ≠ w(e)` almost everywhere
+(`−e = R³e`). Let `γ` have `cos γ = 5/6`; `γ/π` is irrational (`2cos γ = 5/3` is no algebraic integer). The set of `t` with
+`w(e(t + γ)) = w(e(t))` has positive measure: otherwise `w` would flip under the rotation by `γ`, be invariant under the
+irrational rotation by `2γ`, hence almost everywhere constant, against the flip under `R`. Take such a `t`, generic for the
+finitely many almost-everywhere statements used and such that each `e(t + 2jπ/3)` and each `e(t + π + γ + 2jπ/3)`, `j = 0, 1, 2`,
+is an angular density-one point of the set of directions whose palette holds each label of its own value of `w` (almost every
+`t` is). Put `z_j = p + e(t + 2jπ/3) + e(t + π + γ + 2jπ/3) = p + e(t + 2jπ/3)(1 − e(γ))`. Then `|z_j − p| = |1 − e(γ)| = 1/√3`
+and the `z_j` are the corners of an equilateral triangle of side 1. In each sum the two unit vectors are not parallel and carry
+different values of `w`: `w(e(t + 2jπ/3)) = w(e(t))`, and `w(e(t + π + γ + 2jπ/3))` is the flip of `w(e(t + γ)) = w(e(t))`. By
+Lemma 5.2 (2), applied to each of the four labels of `D ∪ D′` with its own endpoint, each of those classes has density zero at
+`z_j`; so the two remaining classes together have density one at each `z_j` — **six is spent here: the labels outside `D ∪ D′`
+are two.** For a translation `τ` uniform in a small disc, with positive probability all three `z_j + τ` are density-one points
+of their own classes and carry one of the two remaining labels; two of the three then share a label and are 1 apart, against
+Lemma 4.3. ∎ *(At seven labels three remain and the triangle is properly coloured.)*
+
+C132-DIAG is the case `D = {i_0, i_2}`, `D′ = {i_1, i_3}`. With C132-M-EXCL it leaves, at a centre carrying the four exclusion
+sets, exactly the **mixed rings**: by Lemma 6.2 (which reads clause (5), the one-mind clause) almost every palette that holds
+no outside label holds a diagonal; C132-M-EXCL forbids the ring that is outside-labelled almost everywhere, C132-DIAG the ring
+that is diagonal almost everywhere and alternating, and C132-M-ORBIT every essential change point of the outside state whose
+orbit avoids the diagonal state. What is open is a ring with both kinds of state on sets of positive measure — FS-124's (Q)
+rings — and a diagonal ring that does not alternate.
+
+### The coordinator's question, answered in a paragraph (not a derivation)
+
+*Asked mid-job (relayed 2026-10-07): has the mechanism of M7–M8 a form at a triangle centre with three outside labels — the
+first clause of the second deriver's C132-RING-TAME (`plans/FS132-E2-derivation.md` l. 294, read at its entry only)? What plays
+the single tip at two adjacent hubs, and where does it break?*
+
+The mechanism has two halves: **(a)** a region near a ring point in which the transfer (⋆) leaves one label, so the colouring
+is forced there; **(b)** the *same* forced label near two ring points 60° apart, so that properness across the straddle shift
+`ε > 0` (M7) forbids a blip of the ring's state. (⋆) and M7 are label-free and carry over word for word. At a triangle centre
+half (a) survives in one form and half (b) does not. *What could play the tip:* (1) the one inner label that the strips allow
+on the impure side of a direction — it is the same along a whole arc of directions between two sign changes, so two ring
+points 60° apart in one such arc share it with no count of axes; but it is not forced to be there: where the binary ring left
+no outside label for `W`, a third outside label can fill the region. (2) The third outside label itself: on the pure side, at a
+point whose two unit neighbours on the ring carry different single outside labels, the colour is the remaining one — a forced
+region, and a real rigidity of the three-label ring; but near two ring points 60° apart the forced labels are in general
+*different* (each is, where the ring is locally constant, the ring's own label, and the ring changes label under the 60°
+rotation), so properness between the two regions says nothing; and at a centre whose three directions are 120° apart the pure
+sides at the two points are opposite and the pair is not even of this kind. *Where it breaks:* at M2's last line — "a label
+that is neither `X` nor `Y` is one of four" becomes "a label that is neither of two outside labels is the third, or the tip" —
+and again where the two unit neighbours carry the *same* outside label: two outside labels then remain at the point and nothing
+in (⋆), M7 or properness between adjacent hubs chooses between them. That last freedom is the second deriver's stall in its own
+words ("two of them may alternate at every scale"). So: **no form by this mechanism for the three-label ring as posed.** What
+there is, unproved here: a four-germ relation (the states near `α`, `α − 120°`, `α + 60°`, `α − 60°` cannot make both forced
+regions one label) and the third-label rigidity of (2). Whether those two bound the set where the ring is wild is more than a
+paragraph — a job of its own.
+
+### Not reached
+
+**C132-RADIUS**: unstarted. **The side question** (in a saturated colouring with REG-J′, is every cyclic centre a singular
+point?): unstarted — rows 140–141 were not read. **The readings' successor** takes over at the hand-over line above and at
+§ What this bears on, not entered.
+
+### Predictions scored
+
+- C132-RUN-EMPTY: the first deriver's P4 (*derived* 0.45, *stalls at* a step reading sectors at a hub 0.45, *refuted* 0.10) and
+  the asking lane's 0.60 for "runs": **the outcome falls between the two verdicts** — the reading stalls at one step (V6-HUBS,
+  which reads a tile, not a sector at a hub), and the statement is derived. Scored by the claim's grammar: *stalls at*. My own
+  unregistered expectation (stalls, 0.75) is not scored.
+- C132-RUN-CV (mine, registered at Stage 1: *stalls at* the terminal modification 0.85): **met as a stall, missed as to the
+  place** — the stall is at FS112-N3-DENSE3; the modification is not needed. The first deriver's P5 (*derived* 0.10) and the
+  asking lane's 0.20: the reading does not run.
+- C132-DIAG (mine 0.80; the first deriver's P6 0.75; the asking lane's 0.70): **met**.
