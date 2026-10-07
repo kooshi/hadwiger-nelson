@@ -55,9 +55,13 @@ removing any worktree's build copy; reuse a retired tree instead of copying a bu
    its "phase 1 committed" message: lift the fence by reply, naming `plans/FS136-derivation.md` §§ 1–2 and the three
    statements with no second derivation (C136-FORCED, C136-CLASS's order, C136-COLLAR). At its hand-back: an implementer
    on its skeleton (its branch must merge the landed module first).
-3. **The asking lane's re-rank and next card** — to launch now if not yet launched (see FS-136 inventory's last item):
-   re-rank after FS-136 Derived; FS-137's question and rank; where FS-124's eight cases live; its draft is filed after
-   the landing.
+3. **FS136-P2** (asking lane; launched 19:40 UTC; FS-136 inventory item 18) — the re-rank after FS-136 Derived and the next
+   milestone's question card (brief `data/fs136/briefs/FS136-P2-rerank.md`; record
+   `plans/POROS-2026-10-07-fs136-derived.md`). **It messages when the card is saved → open the next milestone**: read its
+   stub, open its inventory (`plans/FSnn-close-inventory.md`), fix the claim list from the card by script, brief the
+   opening job (`ephodos`; pattern `data/fs131/briefs/scripts/mk-fs136-e1.py`). **Its re-rank is filed only after the
+   landing is back** (pattern `data/fs124/p1/file_fs124_rerank.py`). Kooshi may override its choice of milestone: tell
+   him the choice when it arrives.
 
 **A side page, published at Kooshi's word**: the unit-step puzzle (`visualizations/unit-step-puzzle/page.html`, artifact
 `https://claude.ai/artifact/Yafj379vqWgrVUZaaK3AQr`, private). To change it: edit `page.html`, run its `build.py` and
