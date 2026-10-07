@@ -109,3 +109,66 @@ further draft.*
 until recognition is saved (Stage 2) and the first derivation (Stage 3); every later stage is committed with the gate at exit 0.
 
 **Stage 1 — SAVED** (2026-10-07).
+
+## Stage 2 — SAVED: recognition (`ephodos-recognition`, invoked fresh) on the claims this job takes
+
+**The stall read.** None of the claims has stalled; the card's own shape is two of the skill's conditions. *A result proved only at
+instances*: the claims are posed at three named points (`q` and the two completions), each as C132-SHADOW with a named direction.
+*A clause per case*: "a direction `v` in it with `v·(z − w) > 0`; then one with `v·(z − w) < 0`" — four applications for one
+statement. Both say the description splits one class along an accompaniment.
+
+**For a stranger** (a geometer who knows Minkowski sums and measure; no word of this project). *A measurable set `A` of the plane
+almost avoids distance 1: `A ∩ (A + u)` is null for almost every unit vector `u`. An open set `W` lies in `A` up to a null set.
+Then `A` is null on the open set `W + S¹`, the points at distance exactly 1 from a point of `W`. Now let `W` be one side of a short
+arc of a unit circle about a point `q`, near a point `z` of it: compute `W + S¹`.* **This is a** Minkowski sum of an open set with
+the unit circle, and its boundary is the envelope of the unit circles centred on the arc — the arc's two unit parallels, which for
+an arc of radius 1 are the point `q` and the arc of radius 2. The reader stops at no word: "tight", "collar", "present" were not
+needed to state it.
+
+**The features, sorted** (receipt beside each):
+
+| feature | sort | receipt |
+|---|---|---|
+| weak properness; measurability of `c` | determines | Fubini consumes both; a constant map satisfies the rest and fails every conclusion |
+| `W` open | determines | the fibre of directions must have positive length at every point; C132-SHADOW's own *not claimed* line for sets of positive density |
+| C132-SHADOW's segment `p′ + sv` and direction `v` | accompanies — it **splits**: consumed only as "some point of `S(p)` lies in `W`" | E6's argument, second paragraph, never reads `v` (`plans/FS132-E6-derivation.md` ll. 282–287); C124-SHADOW-OPEN's argument runs without it |
+| the number of labels | accompanies, for every P-claim | no step reads it |
+| the point is `q`, or a completion | accompanies | the conclusion is a property of the open set `W + S¹`; control `shadow-geometry` reads it at eleven kinds of point |
+| the interface is an arc of radius **exactly 1** about `q` | determines, for C124-CENTRE and C124-ANTIPODE | control `shadow-geometry`'s fault: with radius 0.9 the predicates at `q` fail |
+| the same feature, for C124-COMPLETION and C124-STRADDLE | **accompanies** | the argument uses only that `S(p)` crosses the interface at `z`, from one collar into the other; for any interface between two open one-label pieces that is the map class's edge exclusion (C132-WITNESS) |
+| the far end is one point `z` | accompanies | tightness is open along the circle (C124-OPEN): the object is an arc |
+| `U` a disc; "radius above the diameter" (C124-RADIUS) | accompanies — splits: consumed only as "`V` fits in `U` after a motion" | C124-RADIUS-GRAPH's argument, any open `U` |
+| `V` finite (C124-RADIUS-GRAPH) | accompanies — splits: consumed as "countably many unit pairs" and "the motions keeping `V` in `U` are a set of positive measure" | the argument runs for a countable `V` with compact closure in `U` (entry C124-RADIUS-COUNTABLE) |
+
+**The homes** (several; each tested):
+
+1. *Sets avoiding a distance, in Minkowski's words* — the object is `W + S¹`; the theorem held there is one line of Fubini
+   (in this project C132-SHADOW's second half and G84's shadow identity; in print the mechanism of `[OAIMath2026]` Lemma 8.1 by
+   FS132-E5's reading, not read by me). **Adopted.** The old proof applies at once; the four direction cases become one set; the
+   dictionary holds both ways (label `i` ↔ the set `A`; open one-label piece ↔ `W`).
+2. *Envelopes and parallel curves* (Huygens) — `∂(W + S¹)` for a collar of an arc is the pair of parallels at distance 1. **Adopted
+   as the computing tool.** It predicts neighbours the card did not pose: of the points one unit from `z`, exactly two are
+   exceptional — `q` and `2z − q`, where the circle about the point is tangent to the arc — and at `2z − q` the statement is
+   one-sided for `a` and two-sided for `b` (C124-ANTIPODE). And it says what tightness *is*: the interface's inner unit parallel
+   has collapsed to a point, so one point sees the whole interface at distance exactly 1.
+3. *Kinematic measure on the motion group* — for C124-RADIUS: an edge `{v, v′}` sends a motion `g` to the pair `(g(v), g(v′) −
+   g(v))`, a measure-preserving bijection of the group onto (point, unit vector). Theorem held there: invariance of Haar measure;
+   in print `[GwynStavrianos2022]` Lemma 2 (held), in this library N-EASY (`AeColouring.exists_motion`, statement name read, proof
+   not). **Adopted.** The one changed step: the plane becomes an open set, so "every motion" becomes "the open, non-empty set of
+   motions keeping `V` inside".
+4. *Ball-polarity* (ball-polyhedra, spindle convexity: the dual of a set `X` is `⋂_{x ∈ X} B̄(x, 1)`) — names the relation at the
+   centre: near `q` the inside label lies in the ball-polar of the tight arc. **Not adopted as a home**: recalled, not read; its
+   theorems concern one body, and the name predicts nothing here the envelope did not (the asking lane's frame F3, scored at the
+   close). Its vocabulary was used for §PA's queries.
+
+**The transfer.** The theorem read: E6's argument for C132-SHADOW (read whole); C132-WITNESS and C132-WIT-SIDE at their entries
+(statement, *uses only*, *not claimed*), their arguments not read. Hypotheses to discharge in each entry: `W` open with one label;
+weak properness on `U`; the point's unit circle meets `W`. The changed step, named: none for home 1; for home 3 the one above.
+**The remaining step is not the problem renamed**: after the lemma each claim is a finite computation with circles.
+
+**The class.** C124-SHADOW-OPEN at every open `W`; C124-STRADDLE at every point whose unit circle crosses the arc; C124-RADIUS-GRAPH
+at every open set. **A recognition that differs from the plan's and the card's**: C124-COMPLETION is not a property of tight pairs —
+it holds at every interface between two open one-label pieces, of any shape; what tightness adds is at the two envelope points only
+(C124-CENTRE, C124-ANTIPODE). So "what a tight pair passes on to its rhombus completions" is what any interface passes on.
+
+**Stage 2 — SAVED** (2026-10-07).
