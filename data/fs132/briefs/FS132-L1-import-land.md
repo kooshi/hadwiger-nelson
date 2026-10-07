@@ -168,3 +168,44 @@ Build only from inside the worktree, under the slot: `/home/kooshi/source/lean-d
 exit 75 wait ten minutes and retry. `lake env lean` (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`) is for iteration only, never evidence. The
 worktree's `.lake/build` is its own copy; never replace it with a symlink. `/tmp` on this machine is a tmpfs, wiped at power-off: keep anything your record
 cites under your `data/` folder, never in `/tmp`. Nothing with a `sorry` reaches `main`.
+
+## Amendment, 2026-10-07 — the coordinator's rulings on your mid-job message (the vacuity scan and the plane at five)
+
+Thank you — this is the finding a landing exists to make: the import changes what an older statement says, and the gate
+cannot see it. Standing rules unchanged; you start no agent of your own (rule 1: delegation is one level deep, because the
+coordinator can only review work it knows exists). `touches:` is extended by exactly the three items of R2 and R3 below.
+
+**R1 — the emptiness theorem and the marker: not in this landing.** No `IsEmpty` statement from the import, no
+`VACUITY DECLARED:` marker on `hexShell_plane5`, no entry removed from the baseline: its two entries and the declared count
+stay as they are. Why: the scan does not look at axioms, so a marker honoured on that evidence would make "empty, by the
+kernel on the standard three" and "empty, given a declared outside theorem" one count — a change in what the gate means,
+which is the tooling job's to design with its controls, and Kooshi's to hear first. Alternative weighed: doing it here, since
+the evidence is one line. Confidence: high. Put the question in your record under the tooling job's list (inventory ruling
+475 (d)), with the sentence you sent me: the first emptiness evidence resting on a declared import.
+
+**R2 — but the two texts inside your tree that are now false say so, in words, in this landing** (the rule of `LEAN.md`
+§ The gate that wave 8 set: where the scan's marker is not the right instrument, the docstring says the vacuity in words and
+names the theorem that shows it):
+1. `Proofs/HadwigerNelson/Instances/HexShell.lean`, **`hexShell_plane5`'s docstring only**: one sentence added, saying that
+   given the declared outside theorem `Outside.OAI158.no_proper_five_coloring` the plane has no five-colouring
+   (`Outside.OAI158.not_colorable_five`), so this statement's hypothesis has no inhabitant and it says nothing beyond that
+   import; that on the standard three axioms alone the scan cannot see this and holds it in its baseline; and that
+   `hexShell_plane6` is the open case. No statement, no proof, no other line. Show by script that the diff touches no line
+   outside that doc comment.
+2. `scripts/vacuity-baseline.txt`, **its prose only**: the sentence that calls both entries the Hadwiger–Nelson problem is
+   corrected for the first — empty given the import, by the same two names — and stays as it is for the second. The entries
+   and the header's count lines are not touched beyond what the scan's own procedure writes.
+Both edits go into the gated commit, so the gate runs on them.
+
+**R3 — the registry comment: yes.** Add your one paragraph to the registry comment of `scripts/Vacuity.lean` — a comment
+only: `ProperColoring` and `WeakColoring` OUT with the reason you gave, `Angles`, `angularMeasure`, `direction` as data, and
+the plane-five fact of R2. My brief's touches omitted the scan's own registration step; that omission is mine.
+
+**R4 — the front page's sentence is mine to file.** In your "Drafts for the front page", add the replacement for
+`CLAUDE.md` § The gate's sentence "The baseline's two entries, `hexShell_plane5` and `hexShell_plane6`, cannot be discharged:
+their inhabitant *is* Hadwiger–Nelson." — true of the second, and of the first what R2 says — with the exact words it
+replaces.
+
+Everything else as briefed: the one theorem, the comparison once more on the recompiled module at the gate, the full gate on
+one commit, the fast-forward.
+

@@ -1,0 +1,4 @@
+strip P0=(0,0): P=4 (Q)arcs=4 changepoints=2 all>=4colours=True maxDfree=60.000 qualifying=no twistviolations=0
+strip P1=(1/2,0): P=4 (Q)arcs=4 changepoints=2 all>=4colours=True maxDfree=60.000 qualifying=no twistviolations=0
+disk corner A0: P=4 (Q)arcs=4 changepoints=2 all>=4colours=False maxDfree=87.827 qualifying=no twistviolations=0
+exit=0

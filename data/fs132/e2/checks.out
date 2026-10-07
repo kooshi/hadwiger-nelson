@@ -1,0 +1,4 @@
+k=4:H1=0 k=5:H1=0 k=6:H1=0 k=7:H1=0 4cycle-in-K6+012+023=True 4cycle-in-K6+012=False
+N=18:sequences=12,d-mod-6=[3] N=24:sequences=480,d-mod-6=[3] N=30:sequences=11520,d-mod-6=[3]
+cycle-length=3 patterns=8 neither-side-pure=0
+own-labels=[0, 2, 3] ring-labels=[1, 4, 5, 6] own-on-rings=[[], [], []] crossings=9 vertices-inside=13 relation-holds=True

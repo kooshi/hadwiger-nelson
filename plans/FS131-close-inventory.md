@@ -8961,3 +8961,34 @@ reason by the close.*
      measure rigidity at number fields stays held. (f) **He is sent a push notification for one thing only**: a
      statement that would fix the value of `χ(ℝ²)` — sent as "claimed by one mind, unchecked" (FS-132 inventory,
      rule 2).
+
+633. **FS132-L1, mid-job: a finding the gate cannot see — with the import, one of the vacuity baseline's two entries has an empty carrier** (source: its message to "main", 2026-10-07; the import's landing, `main` merged as `90ef4fa3` in its tree, the join built with no warning, the stored-term comparison on the joined tree 8 of 8 identical by its word; probe `data/fs132/l1/probes/vacuity-joined.out` on its branch).
+     **The finding**: `Outside.OAI158.not_colorable_five` (on the five-colour import) makes the type of five-colourings
+     of the plane empty, and `hexShell_plane5` (`Proofs/HadwigerNelson/Instances/HexShell.lean` l. 250) binds exactly
+     that type and concludes an existence — given the import it says nothing. The scan still reads it "UNKNOWN, held
+     by the baseline": its evidence for emptiness is an unconditional `IsEmpty` or the negation of a tracked
+     proposition, and `¬ Colorable 5` is neither. So three texts become false of that entry at the landing: the
+     baseline file's prose, `CLAUDE.md` § The gate ("cannot be discharged: their inhabitant *is* Hadwiger–Nelson"),
+     and the theorem's own docstring ("the 6-programme's Act-One seed"). `hexShell_plane6` is untouched. The scan
+     itself is green on the join: one new site, generic; nothing vacuous or unknown. **Its question**: may it write
+     the two new hypothesis-formers into the scan's registry comment, as the scan's procedure asks of every landing.
+     **Read by me**: nothing beyond the message — the scan's rule and the theorem's line are its reading, to be seen in
+     its record at the hand-back. **Credit**: it read the scan's source for why the gate stayed quiet instead of taking
+     green for an answer, and it named the design question underneath — emptiness evidence that rests on a declared
+     import — without acting on it.
+     **Rulings** (the brief's amendment, R1–R4, is their text). (a) **No emptiness theorem, no marker, no baseline
+     entry removed in this landing.** Alternative: do it here, one line of evidence. Why not: the scan does not look
+     at axioms; a marker honoured on that evidence would merge "empty by the kernel on the standard three" with
+     "empty given a declared outside theorem" in one count — a change in what the gate means, for the tooling job
+     (ruling 475 (d)) and for Kooshi to hear first. Confidence: high. (b) **The two texts in its tree that are now
+     false say so in words, in the gated commit**: one sentence in `hexShell_plane5`'s docstring naming the import
+     and `not_colorable_five`; the baseline file's prose for that entry. Its touches are extended to those and
+     nothing else there. Alternative: a follow-up landing. Why not: the rule wave 8 set (`LEAN.md` § The gate: where
+     the marker is not the instrument, the docstring says the vacuity in words and names the theorem that shows it)
+     applies today, and a second landing for two sentences costs a second gate. Confidence: medium-high. (c) **Yes
+     to the registry comment** — the scan's own registration step, which my brief's touches omitted: **a slip of my
+     brief**. (d) **`CLAUDE.md` § The gate's sentence about the baseline's two entries is refiled by me at the
+     landing's filing**, from its draft. (e) **For Kooshi**: the first statement of this library
+     found to be emptied by the outside theorem; the 6-programme's five-colour seeds are to be swept for others
+     (owed: a short job on which statements bind a five-colouring of the plane — the scan found this one site only
+     at the plane with five colours, by its word).

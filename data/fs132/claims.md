@@ -120,4 +120,31 @@ the death of every such cycle — which are what the answer is made of and are n
   the first dated line**: one way, derived (clause (5)); the other way open, and false for the argument's own selection.
   *Not claimed*: each entry's own line; in particular nothing supplies the finiteness hypothesis for an arbitrary
   six-colouring, and nothing says a cycle longer than three is ever returned.
+- **2026-10-07 (after FS132-E2's Stage 2, commit `1bb5954c`; FS-132 inventory item 5): card 3 is turned into six claims, fixed
+  as that record states them** — each read whole at its address, with its *not claimed* line and the terms above the list:
+
+> 1. **C132-FILL** (the card's (i): the target and the map). Let k ≥ 3 be an integer, X_k the union of 𝒢 with all its filled
+> — source: plans/FS132-E2-derivation.md Stage 2, § The claims
+
+> 2. **C132-NOESS** (the card's (ii): which centres stay essential). For k ≥ 4 every loop of 𝒢 is null-homotopic in X_k; and
+> — source: plans/FS132-E2-derivation.md Stage 2, § The claims
+
+> 3. **C132-REL** (the relation a disc imposes). In the setting of C132-FILL, for a circle C in the interior of D₁ that misses
+> — source: plans/FS132-E2-derivation.md Stage 2, § The claims
+
+> 4. **C132-INDEX** (the invariant that tells six from seven). Let a, b, c be three labels, Θ the union of the edges ab, bc, ca
+> — source: plans/FS132-E2-derivation.md Stage 2, § The claims
+
+> 5. **C132-TRI-STRIP** (what a triangle centre's ring carries, every k). Let k ≥ 3, c a weak measurable k-colouring of the
+> — source: plans/FS132-E2-derivation.md Stage 2, § The claims
+
+> 6. **C132-LONG** (the card's (iii): the forcing statement; the disc form of the claim list's C132-M-CV). There is a radius
+> — source: plans/FS132-E2-derivation.md Stage 2, § The claims
+
+  **The deriver's recognition, which changes the card's frame**: with every triangle filled in the target, every loop bounds,
+  so no centre "stays essential" and the filled target carries no obstruction (C132-FILL, C132-NOESS). The statement that
+  tells six from seven is posed in the unfilled label graph, on the unit circle about a triangle centre: an index of the three
+  outside labels (C132-INDEX, a statement with no colouring in it), carried to the centre by C132-TRI-STRIP and summed over a
+  disc by C132-REL. **C132-LONG** is the forcing statement, the disc form of C132-M-CV, which follows from it. *Not claimed by
+  any of the six*: a value of `χ(ℝ²)`; that a six-colouring exists; that a cycle longer than three is ever returned.
 

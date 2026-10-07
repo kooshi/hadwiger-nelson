@@ -122,3 +122,25 @@ inventory, items 607–629 (an outside proof of six became this project's litera
    the other, gate exit 0, 14 quotations). **To the asking lane's next job**: the two proposed stubs; the stub's existence
    form's wording (item 2 (c)). **Owed**: the six unstarted grokking rewrites (G25, G60's remainder, G80's, G81, G82, G86, G91).
 
+5. **FS132-E2, first message: card 3 is six claims, and the card's own frame is corrected** (source: its message to "main",
+   2026-10-07; record `plans/FS132-E2-derivation.md` Stages 1–2; commits `c88a0986`, `1bb5954c` on `main`). **Its recognition**:
+   "fill the triangles and ask which centres stay essential" has an empty answer — in the complete graph on the labels with
+   every triangle filled, every loop bounds, a four-cycle as much as a triangle — so the obstruction is not there. It names
+   another home, the theorem of map colourings about cubic maps, and another invariant: **on the unit circle about a triangle
+   centre, the labels outside the triangle** — at six there are three and a loop among them with the 60° exclusion has degree
+   3 modulo 6 (C132-INDEX, no colouring in it; an exhaustive check on 18, 24 and 30 positions agrees and a planted fault gives
+   every residue); at seven there are four and nothing winds; at five two, and the ring is rigid, which is the release's own
+   kill. **The six**: C132-FILL, C132-NOESS (the card's (i), (ii)), C132-REL (the classes of the centres inside a circle add
+   up to the circle's), C132-INDEX, C132-TRI-STRIP (from the release's Lemma 8.1, read with its proof: no count), and
+   **C132-LONG**, the forcing statement — the disc form of C132-M-CV. **Its expectation, registered**: the first five derived;
+   C132-LONG stalls where the regular proof takes the winding number of a triangle centre's ring, because nothing makes a
+   measurable ring continuous in the sense C132-INDEX needs. **My receipt**: both commits are on `main`; § The claims read
+   whole against its message; the six first lines quoted into the claim list by script. Not checked by me: its recognition
+   stage; the index check. **Rulings.** (a) **The six claims are fixed in `data/fs132/claims.md` by a dated line, as stated.**
+   (b) **The card's frame is recorded as corrected, not as failed**: the card asked a question whose first branch has an empty
+   answer and the deriver found the statement the question was after; the asking lane's next job is told. (c) **If C132-LONG
+   stalls where it expects, the stalled step is the night's most useful object**: "a triangle centre's ring is continuous
+   enough to have a winding number" is a regularity statement about one circle at one centre — far smaller than the map step —
+   and it is asked of the readings' deriver's data in the next report, not pursued by a new job tonight. Alternative:
+   launch a job on it at once. Why not: both derivers are still on their claims, and the staffing is two.
+
