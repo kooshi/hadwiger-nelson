@@ -8815,3 +8815,63 @@ reason by the close.*
      after the filing. **A slip of mine**: one gate-baseline command began with `cd` inside a compound command
      (the working directory was already that one; nothing moved) — the rule is no `cd` in a compound command.
      In flight: 2.5 (the import; FS-133's deriver; the Clerk).
+
+629. **FS132-I1 done at its Stage 4: the import is a module of this library on its branch — the release's two theorems as declared outside theorems, each the release's stored statement term for term; `6 ≤ χ(ℝ²) ≤ 7` and `χ(ℝ²) = χ_m⁰(ℝ²)` with no binder; built, not gated, not landed** (implementer, Opus; 416k and 40 minutes by the task notice; record on `fs132-wi1`, `plans/FS132-I1-implementation.md` Stages 1–4; report `data/fs132/reports/FS132-I1.md` there; four commits, tip `39d37838`, pushed, tree clean; module `Proofs/HadwigerNelson/Outside/OAI158.lean`, 316 lines, namespace `HadwigerNelson.Outside.OAI158`).
+     **What it holds** (its build exit 0, no warning; no `sorry`, no native evaluation; two `axiom`s): the release's
+     five definitions copied (`ProperColoring`, `Angles`, `angularMeasure`, `direction`, `WeakColoring`); axiom H,
+     `no_proper_five_coloring : ¬ ∃ c : ℂ → Fin 5, ProperColoring 5 c`; axiom T, `proper_to_borel_weak {k : ℕ}
+     [NeZero k] {c : ℂ → Fin k} (hc : ProperColoring k c) : ∃ d : ℂ → Fin k, Measurable d ∧ WeakColoring k d`.
+     **On the standard three alone**: the dictionary — `properColoring_iff_colorable`; **the leaf, as an
+     equivalence**, `weakColoring_iff_unitPairsNull` (for measurable `d`, the release's weak condition iff every
+     colour class has null unit pairs: the release's Borel weak colourings and this library's `AeColouring`s are the
+     same objects); models at seven. **On H alone**: `six_le_chromaticNumber_plane`,
+     `chromaticNumber_plane_six_or_seven`, `six_le_chiM0`, `chiM0_six_or_seven`. **On T alone**:
+     `colorable_iff_nonempty_aeColouring` (colour by colour), `chiM0_le_chromaticNumber_plane`,
+     **`chromaticNumber_plane_eq_chiM0 : (unitDistance ℂ).chromaticNumber = Plane.chiM0`** — which is wave 9's named
+     hypothesis `Row130Collapse` by definition. No theorem rests on both. **Its probes, on its tree** (base
+     `8386c256`, before wave 8's landing): axiom audit exit 0, 6,355 records, +21 against the base (+12 clean, +9
+     imported), three declared imports; the assumptions step exit 1 on the nine `RESTS` rows the landing's ledger
+     write adds and nothing else (`axioms=3 rests=17`, seven counts unmoved); architecture, doubled names and the
+     guarded lint green. **A finding about the audit's skeleton, repaired**: under the skeleton's imports
+     `WeakColoring` stored another proof of `FiniteDimensional ℝ ℂ` inside `volume : Measure ℂ` than the release's
+     (six occurrences) — equal by proof irrelevance, not symbol for symbol; one Mathlib import cures it, and the
+     comparison then reads identical. **One step down**: of the 83 Mathlib and core constants the statements name,
+     69 are identical across the two pins, 6 identical up to universe names, 8 different — a moved file's private
+     names, one rename, two instance paths read at their first difference and not proved equal. **A consequence
+     checked and left out**: `7 ≤ (unitDistance ℂ).chromaticNumber ↔ (⨆ ε > 0, Plane.mu 6 ε) < 1`, two lines from
+     the collapse and `Plane.seven_le_chiM0_iff` (`Plane/Slack.lean` l. 3645), on T.
+     **My receipt**: the branch's tip is on `origin` (`git ls-remote`). **Read by me, text against text**: the
+     module's l. 60–123 against the release's `lean/OAI/Geometry/PlaneColoring/Coloring.lean` l. 7–8 and 15–29,
+     `Five.lean` l. 124 and `BorelTransfer.lean` l. 436–437 — each of the five definitions and both statements the
+     same characters, but that `anglePeriodPositive` is scoped here and global there (said in its docstring);
+     `rg` finds two line-initial `axiom`s in the module and `sorry` only inside a docstring; its comparison's saved
+     output (`data/fs132/i1/readback/decls-module.out`) ends "declarations: 8 compared: 8 identical: 8 different:
+     0"; its record's stage 1 (the cross-pin comparison and the 83-constant table) and stage 3 with its drafts read
+     whole; the left-out consequence read in its file. **Not checked by me**: its comparison re-run (it needs the
+     release's compiled copy); its six planted faults; the leaf's proof; any probe's count.
+     **Credit**: it compared what the kernel stores at two pins and not the text, and so found the one place where
+     equal text was a different term — a blind spot of the audit's read-back made inside `import Mathlib`, and of
+     my own text-against-text reading above, which would have passed the skeleton; it turned the one `sorry` leaf
+     into an equivalence that says the two libraries' notions are one; it filed each bridge on the one import it
+     uses, with a control that fires on a wrong filing; and it put its own judgment call in front of me.
+     **Rulings.** (a) **Its held question — it repaired the stored-term difference without messaging me — is ruled
+     its way, and the rule is tightened for the next import**: a difference between an imported statement's stored
+     term and its source's is messaged at once, whatever its weight, because the reviewer's own check (mine, by
+     text) cannot see it. Alternative: call it a slip. Why not: the brief's trigger was "an axiom whose statement
+     is not the release's", and it reasoned correctly that this was not that; the wording was mine. Confidence:
+     high. (b) **The left-out consequence enters the module at the landing**, as
+     `seven_le_chromaticNumber_plane_iff`, registered on T: it is link 5 of the aim — "Hadwiger–Nelson is one
+     question" — as a kernel statement on one import, and its informal form is drafted (the reading § 5.1 unit 5).
+     Alternative: wait for a planner to state it. Why not: the statement is two lines from two held theorems, its
+     file is checked, and no planner's judgment is in it. Confidence: medium-high; the landing reads it aloud
+     against that sentence. (c) **The import lands alone: `fs132-wi1` joined with `main`, nothing else.** This
+     amends rulings 599 (d) and 602 (c): the two example-map closers' branches wait for the backlog's restart.
+     Alternative: carry them, as ruled before the pause. Why not: Kooshi paused the backlog, and a doubled name in
+     a closer must not be able to hold up the landing that puts six on the front page. Confidence: high. (d) **The
+     landing launches after FS132-F1's branch is merged** (ruling 628 (b)); its brief carries I1's ten drafts, the
+     audit's Stage 8 sentences with I1's additions, and the joined tree's own counts. (e) **A correction owed to
+     the audit's record** (`plans/EXT-OAI1-audit.md` Stage 8, "the import's two statements closed by the release's
+     theorems"): true at the release's pin; the cross-pin comparison is this job's — a dated note, at the
+     landing's filing. (f) `Outside/OAI158` importing `Plane/CoverExamples` for its model stands; a lighter
+     module is cut when a consumer asks. (g) **Slot → FS-132's opening** (`ephodos`). In flight: 1.5 (FS-133's
+     deriver; the Clerk).
