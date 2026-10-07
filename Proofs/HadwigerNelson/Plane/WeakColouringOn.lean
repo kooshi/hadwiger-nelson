@@ -12,10 +12,12 @@ exactly one rigid motion, `z ↦ x + e θ * z`; so the pairs `(x, θ) ∈ ℂ ×
 motions, and `volume ⊗ arcLength` — "almost every unit pair" — *is* "almost every rigid motion", each motion counted
 once (its angle in `[0, 2π)`): Haar measure of the motion group in these coordinates.
 
-* `rigidMotion (x, θ)` is `z ↦ x + e θ * z`: rotation about `0` by the angle `θ`, then translation by `x`. Every
-  orientation-preserving isometry of the plane is one; the parameter names it up to `θ ↦ θ + 2π`. `motionMul q h` is
-  the parameter of the composite `rigidMotion q ∘ rigidMotion h`; multiplying on either side preserves Lebesgue
-  measure on `ℂ × ℝ` (the group is unimodular). No group structure is declared: these two facts are all that is used.
+* `rigidMotion (x, θ)` is `z ↦ x + e θ * z`: rotation about `0` by the angle `θ`, then translation by `x`
+  (`dist_rigidMotion`: an isometry). That every orientation-preserving isometry of the plane is one, with its
+  parameter determined up to `θ ↦ θ + 2π`, is the standard fact and is **not proved here**: no statement uses it —
+  "almost every motion" and "there is a motion" are statements about parameters. `motionMul q h` is the parameter of
+  the composite `rigidMotion q ∘ rigidMotion h`; multiplying on either side preserves Lebesgue measure on `ℂ × ℝ`
+  (the group is unimodular). No group structure is declared: these two facts are all that is used.
 * `monoPairSet U c ⊆ ℂ × ℝ` is the set of `(x, θ)` with `x` and `x + e θ` both in `U` and of one label — the motions
   carrying the reference edge into `U` onto a monochromatic pair (`mem_monoPairSet_iff_rigidMotion`).
   `AeProperOn U c` says it is `volume ⊗ arcLength`-null. It asks nothing of `c`: a null set is a set of outer
@@ -27,12 +29,19 @@ once (its angle in `[0, 2π)`): Haar measure of the motion group in these coordi
   (`exists_isWeakColouringOn_iff_subtype`). `U` is any set: the theorems that need it open say so.
 * At the whole plane it is this library's `AeColouring` (`isWeakColouringOn_univ_iff`,
   `AeColouring.isWeakColouringOn`), hence the import's Borel weak colourings
-  (`Plane/RadiusOutside`: `isWeakColouringOn_univ_iff_weakColoring`).
+  (`Plane/RadiusOutside`: `isWeakColouringOn_univ_iff_weakColoring`). **The release's own definition
+  (`Outside.OAI158.WeakColoring`) asks only that the colouring be almost-everywhere measurable; this one asks that it
+  be measurable.** The reason: it is then the object the release's transfer delivers (`∃ d, Measurable d ∧
+  WeakColoring k d`) and the object this library's `AeColouring` is, so both bridges are equalities of notions with
+  no choice of a representative; and the theorems that consume a weak colouring here (`Plane/Radius`) read only
+  `AeProperOn`, so nothing is lost on the consuming side. That an almost-everywhere measurable weak colouring agrees
+  almost everywhere with a measurable one that is still weak is true and is not a theorem of this library.
 * **"Almost every rigid motion"** is stated twice: for `volume ⊗ arcLength` (each motion once), and for Lebesgue
   measure on all of `ℂ × ℝ` (every real angle; each motion countably often), which is the form the proofs move in. A
   set of parameters that reads the angle through `e θ` alone is null for one exactly when it is for the other
   (`prod_arcLength_eq_zero_iff_volume`). "Open" is open in `ℂ × ℝ`: the parametrization is a covering map of the
-  motion group, so a set of motions is open exactly when its set of parameters is.
+  motion group, so a set of motions is open exactly when its set of parameters is (a remark; the group and its
+  topology are not declared).
 
 **Inhabitant.** `exists_isWeakColouringOn_seven` (`Plane/Radius`): this library's seven-colouring R7, on every set.
 Below: every colouring is proper at almost every unit pair of a small disc, which holds none; no colouring with one
@@ -74,19 +83,19 @@ structure IsWeakColouringOn (U : Set ℂ) (c : ℂ → Fin k) : Prop where
 /-! ## Rigid motions -/
 
 /-- The motion with parameter `(x, θ)` carries `0` to `x`. -/
-@[simp] theorem rigidMotion_zero (q : ℂ × ℝ) : rigidMotion q 0 = q.1 := by
+@[simp] theorem rigidMotion_apply_zero (q : ℂ × ℝ) : rigidMotion q 0 = q.1 := by
   sorry
 
 /-- The motion with parameter `(x, θ)` carries `1` to `x + e θ`. -/
-@[simp] theorem rigidMotion_one (q : ℂ × ℝ) : rigidMotion q 1 = q.1 + e q.2 := by
+@[simp] theorem rigidMotion_apply_one (q : ℂ × ℝ) : rigidMotion q 1 = q.1 + e q.2 := by
   sorry
 
-/-- The parameter `(0, 0)` is the identity. -/
-@[simp] theorem rigidMotion_zero_zero (z : ℂ) : rigidMotion (0, 0) z = z := by
+/-- The parameter `0 = (0, 0)` is the identity. -/
+@[simp] theorem rigidMotion_zero (z : ℂ) : rigidMotion 0 z = z := by
   sorry
 
 /-- The parameter `(t, 0)` is the translation by `t`. -/
-theorem rigidMotion_translation (t z : ℂ) : rigidMotion (t, 0) z = z + t := by
+theorem rigidMotion_translation (t z : ℂ) : rigidMotion (t, 0) z = t + z := by
   sorry
 
 /-- A rigid motion is an isometry. -/
@@ -95,6 +104,10 @@ theorem dist_rigidMotion (q : ℂ × ℝ) (z w : ℂ) : dist (rigidMotion q z) (
 
 /-- The parametrization is jointly continuous in the parameter and the point. -/
 theorem continuous_rigidMotion : Continuous fun p : (ℂ × ℝ) × ℂ => rigidMotion p.1 p.2 := by
+  sorry
+
+/-- Each rigid motion is continuous (hence measurable). -/
+theorem continuous_rigidMotion_apply (q : ℂ × ℝ) : Continuous (rigidMotion q) := by
   sorry
 
 /-- The motion with parameter `(x, θ + 2π)` is the motion with parameter `(x, θ)`. -/
@@ -192,8 +205,16 @@ theorem aeProperOn_of_proper {U : Set ℂ} {c : ℂ → α} (h : ∀ x ∈ U, �
     AeProperOn U c := by
   sorry
 
+/-- **Proper off a null set**: if `c` separates every two points of `U` at distance `1` that both lie off a null set
+`N` (the arcs of a map, a grid), it is proper at almost every unit pair of `U` — with no measurability of `c`, `U` or
+`N`. The pairs with an end in `N` are null: `N ×ˢ univ`, and its preimage under `q ↦ motionMul q (1, 0)`. -/
+theorem aeProperOn_of_proper_off_null {U N : Set ℂ} {c : ℂ → α} (hN : volume N = 0)
+    (h : ∀ x ∈ U, ∀ y ∈ U, dist x y = 1 → x ∉ N → y ∉ N → c x ≠ c y) : AeProperOn U c := by
+  sorry
+
 /-- **Rigid motions carry the condition**: if `c` is proper at almost every unit pair of `U`, then `c ∘ g` is at
-almost every unit pair of `g⁻¹ U`. -/
+almost every unit pair of `g⁻¹ U`. (One direction is stated; the motions form a group, and for a translation the
+equivalence is `exists_isWeakColouringOn_ball_iff`.) -/
 theorem AeProperOn.comp_rigidMotion {U : Set ℂ} {c : ℂ → α} (hc : AeProperOn U c) (g : ℂ × ℝ) :
     AeProperOn (rigidMotion g ⁻¹' U) (c ∘ rigidMotion g) := by
   sorry

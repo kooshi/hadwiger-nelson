@@ -90,16 +90,25 @@ theorem exists_radius_no_weak_four : ∃ R > (0 : ℝ), ∀ p : ℂ, ¬ ∃ c : 
 
 /-! ## The join: the problem on discs -/
 
-/-- **The plane is `k`-colourable exactly when every disc about the origin has a weak `k`-colouring.** `→` is
-C124-RADIUS-DOWN (on `Outside.OAI158.proper_to_borel_weak`), `←` is C124-RADIUS-UP (no import). Inhabitant of either
-side: `k = 7`. -/
+/-- **The plane is `k`-colourable exactly when every disc about the origin has a weak `k`-colouring.**
+
+Which half needs the import: `→` (a colourable plane gives every disc a weak colouring) is C124-RADIUS-DOWN,
+`radius_down`, and rests on the declared outside theorem `Outside.OAI158.proper_to_borel_weak` (`[OAIMath2026]`
+family 158); `←` (weak colourings of every disc colour the plane) is C124-RADIUS-UP, `radius_up`, and rests on the
+standard three axioms alone. Inhabitant of either side: `k = 7`. -/
 theorem colorable_iff_forall_ball :
     (unitDistance ℂ).Colorable k ↔ ∀ R > (0 : ℝ), ∃ c : ℂ → Fin k, IsWeakColouringOn (ball (0 : ℂ) R) c := by
   sorry
 
 /-- **Seven means one disc has no weak six-colouring; six means every disc has one**: `7 ≤ χ(ℝ²)` exactly when some
-open disc about the origin has no weak measurable six-colouring. Rests on the standard three axioms and
-`Outside.OAI158.proper_to_borel_weak` alone. It has no hypothesis. -/
+open disc about the origin has no weak measurable six-colouring. With `χ(ℝ²) ≤ 7` (`chromaticNumber_plane_interval`)
+the left side is `χ(ℝ²) = 7`.
+
+Which half needs the import: `→` (if the plane needs seven colours, some disc has no weak six-colouring) is the
+contrapositive of C124-RADIUS-UP — `exists_radius_of_not_colorable` at `k = 6` — and rests on the standard three
+axioms alone; `←` (**a disc with no weak six-colouring proves seven**) is the contrapositive of C124-RADIUS-DOWN and
+rests on the declared outside theorem `Outside.OAI158.proper_to_borel_weak` (`[OAIMath2026]` family 158).
+`Outside.OAI158.no_proper_five_coloring` is not used. It has no hypothesis, so no model is asked. -/
 theorem seven_le_chromaticNumber_plane_iff_exists_ball :
     7 ≤ (unitDistance ℂ).chromaticNumber ↔
       ∃ R > (0 : ℝ), ¬ ∃ c : ℂ → Fin 6, IsWeakColouringOn (ball (0 : ℂ) R) c := by

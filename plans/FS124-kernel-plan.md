@@ -246,3 +246,184 @@ definition says nothing — which is why the definition takes any set and the th
 **The probe** (`data/fs124/k1/lean/Probe1.lean`; `lean` against this worktree's build, iteration-level, not a build):
 `rigidMotion_motionMul`, `measurePreserving_motionMul_right`, `mem_monoPairSet_iff_rigidMotion` and the one-edge lemma from
 nullness over all angles, 35 lines in all, no error. Control: the composition law with `z + 1` for `z` fails at `ring`.
+
+## Stage 3 — SAVED (FS124-K1): the plan per leaf, the two remaining passes, phase 1 closed (blind)
+
+The skeleton after the passes: build exit 0, `476 of 476 batches, 4 module(s) rebuilt, 3 module(s) with warnings` — 57
+`declaration uses sorry` (33 + 16 + 8) and no other warning (`data/fs124/k1/logs/build-2-skeleton.log`);
+`tools/check_architecture.py` PASS. The claims as the environment stores them: `data/fs124/k1/signatures.txt` (`#check` of
+fifteen declarations, read against § 2.3: the binders are those written, no section variable enters, `radius_five` and
+`seven_le_chromaticNumber_plane_iff_exists_ball` have no binder).
+
+**The coordinator's rulings of 14:2x UTC** (in reply to § 2.4's message; nothing in the reply came from the fenced files):
+keep both join theorems, each docstring saying which half needs the import — done; the statements in the form the proof
+gives, the list's measurable forms as corollaries under them — that is the skeleton's shape; the module header says that
+the release's definition asks almost-everywhere measurability and this one measurability, and why — done; generalization 7
+goes to the deriver as a question and is not planned here.
+
+### 3.1 The routes, in one paragraph each
+
+**GRAPH (and the definition).** `AeProperOn U c` is nullness of `monoPairSet U c` for `volume ⊗ arcLength`; since the set
+reads the angle through `e θ` alone it is null for Lebesgue measure on `ℂ × ℝ` (`aeProperOn_iff_volume`, by
+`prod_arcLength_eq_zero_iff_volume`: the set is the union of the integer translates, in the angle, of its part over
+`[0, 2π)`). A unit pair `(v, w)` is `(rigidMotion h 0, rigidMotion h 1)` for `h = (v, arg (w − v))`
+(`exists_rigidMotion_edge`). A motion `q` carries `v`, `w` into `U` onto one label exactly when `motionMul q h ∈
+monoPairSet U c` (`rigidMotion_motionMul`, `mem_monoPairSet_iff_rigidMotion`), and `q ↦ motionMul q h` preserves Lebesgue
+measure (`measurePreserving_motionMul_right`: over each angle a translation of the plane, and a translation of the angle —
+`MeasurePreserving.skew_product` between two swaps), so those `q` are null (`QuasiMeasurePreserving.preimage_null`, which
+asks no measurability of the set). Countably many pairs: `ae_ball_iff`. The motions carrying a compact `K` into an open `U`
+are open by the tube lemma (`IsCompact.eventually_forall_of_forall_eventually`) from joint continuity; a non-empty open set
+of `ℂ × ℝ` has positive measure, so it meets the conull set of good motions (`Measure.exists_mem_of_measure_ne_zero_of_ae`).
+
+**COUNTABLE.** The same, with the compact set `closure V` and the motion `0`.
+
+**UP.** A finite `V` lies in a disc about `0` of some radius `R`; the hypothesis gives a colouring of a disc of radius `R`
+about some `p`, the translation by `p` carries `V` into it, and the one-good-motion lemma colours `V`. De Bruijn–Erdős
+(`SimpleGraph.nonempty_hom_of_forall_finite_subgraph_hom`, as in `chromaticNumber_plane_le_chiM0`) finishes.
+
+**DOWN.** `Outside.OAI158.nonempty_aeColouring_of_colorable` (which is `proper_to_borel_weak` in this library's words)
+gives an `AeColouring k`; its colouring is a weak colouring of `univ`, hence of every set.
+
+**FIVE.** UP's contrapositive (`exists_radius_of_not_colorable`) at `Outside.OAI158.not_colorable_five`.
+
+### 3.2 The leaves
+
+*Size is lines of proof. "P1", "P2" = proved in `data/fs124/k1/lean/Probe1.lean`, `Probe2.lean` (to be lifted; the
+probes' names carry a `probe_` prefix). Every Mathlib name below was `#check`ed at this pin
+(`data/fs124/k1/lean/checks1.lean`, `checks2.lean`), or is used in a probe that elaborates. The order of each file is a
+valid order of proof: no leaf uses a later one.*
+
+**`Plane/WeakColouringOn`** (33 leaves, about 150 lines)
+
+| leaf | route | size |
+|---|---|---|
+| `rigidMotion_apply_zero`, `_apply_one`, `rigidMotion_zero`, `rigidMotion_translation`, `rigidMotion_add_two_pi` | `simp [rigidMotion]`, with `e` unfolded for `e 0 = 1` and `e_add_two_pi` for the last | 1 each |
+| `dist_rigidMotion` | `dist_add_left`, `dist_eq_norm`, `← mul_sub`, `norm_mul`, `norm_e` | 2 |
+| `continuous_rigidMotion` | P2: `continuous_fst`, `continuous_snd`, `continuous_e` | 3 |
+| `continuous_rigidMotion_apply` | `continuous_const.add (continuous_const.mul continuous_id)` | 1 |
+| `rigidMotion_motionMul` | P1: `simp only [rigidMotion, motionMul, e_add]; ring` | 1 |
+| `exists_rigidMotion_edge` | witness `(v, Complex.arg (w - v))`; `Complex.norm_mul_exp_arg_mul_I (w - v)` with `‖w - v‖ = 1` | 6 |
+| `measurePreserving_motionMul_right` | P1: `MeasurePreserving.skew_product` (base: `measurePreserving_add_right volume h.2`; fibre: `measurePreserving_add_right volume (e θ * h.1)`), conjugated by `Measure.measurePreserving_swap` | 12 |
+| `measurePreserving_motionMul_left` | `MeasurePreserving.prod` of `z ↦ q.1 + e q.2 * z` — `(measurePreserving_add_left volume q.1).comp (rotation (Circle.exp q.2)).measurePreserving`, with `rotation_apply`, `Circle.coe_exp` — and `measurePreserving_add_left volume q.2` | 10 |
+| `prod_arcLength_eq_restrict` | P2: `Measure.volume_eq_prod`, `← Measure.prod_restrict`, `Measure.restrict_univ` | 1 |
+| `prod_arcLength_eq_zero_iff_volume` | P2: `Measure.restrict_apply'`; cover by `n = ⌊θ / 2π⌋`, `Function.Periodic.int_mul` on `e_add_two_pi`; each translate null by `(MeasurePreserving.id _).prod (measurePreserving_add_right _ _)` | 28 |
+| `mem_monoPairSet_iff_rigidMotion` | P1: `simp [monoPairSet, rigidMotion]` | 1 |
+| `monoPairSet_eq_iUnion` | `ext`; both directions by hand (the pattern of `Outside.OAI158.weakColoring_iff_unitPairsNull`'s `hpre`) | 6 |
+| `mem_monoPairSet_of_e_eq` | rewrite `e θ` | 2 |
+| `aeProperOn_iff_unitPairsNull` | `monoPairSet_eq_iUnion`, `measure_iUnion_null_iff` | 2 |
+| `aeProperOn_iff_ae` | `ae_iff`; the two sets are equal (`Classical.not_imp`, `not_not`) | 3 |
+| `aeProperOn_iff_volume` | `prod_arcLength_eq_zero_iff_volume mem_monoPairSet_of_e_eq` | 1 |
+| `monoPairSet_mono`, `AeProperOn.mono` | term; `measure_mono_null` | 1 each |
+| `aeProperOn_congr` | the two sets are equal: both ends lie in `U` | 5 |
+| `aeProperOn_of_proper` | the set is empty: `dist x (x + e θ) = 1` (`dist_eq_norm`, `sub_add_cancel_left`, `norm_neg`, `norm_e`) | 5 |
+| `aeProperOn_of_proper_off_null` | `monoPairSet U c ⊆ N ×ˢ univ ∪ (fun q => motionMul q (1, 0)) ⁻¹' (N ×ˢ univ)`; `Measure.prod_prod`; `measurePreserving_motionMul_right (1, 0)`; back to `arcLength` by `prod_arcLength_eq_restrict` and `Measure.restrict_le_self` | 12 |
+| `AeProperOn.comp_rigidMotion` | `monoPairSet (g⁻¹ U) (c ∘ g) = (motionMul g ·) ⁻¹' monoPairSet U c`; `aeProperOn_iff_volume` twice; `measurePreserving_motionMul_left` | 6 |
+| `isWeakColouringOn_univ_iff` | `aeProperOn_iff_unitPairsNull`, `univ_inter` | 4 |
+| `AeColouring.isWeakColouringOn`, `IsWeakColouringOn.exists_aeColouring`, `.mono`, `.comp_rigidMotion` | terms | 1–2 each |
+| `exists_isWeakColouringOn_ball_iff` | `comp_rigidMotion` with `(p, 0)` and `(-p, 0)`; `rigidMotion (p, 0) ⁻¹' ball p R = ball 0 R` | 10 |
+| `exists_isWeakColouringOn_iff_subtype` | `→`: restrict (`measurable_subtype_coe`), `aeProperOn_iff_ae`; `←`: `fun z => if h : z ∈ U then c ⟨z, h⟩ else 0`, `Measurable.dite`, `dif_pos` | 15 |
+
+**`Plane/Radius`** (16 leaves, about 90 lines)
+
+| leaf | route | size |
+|---|---|---|
+| `exists_isWeakColouringOn_seven` | `r7_aeColouring`, `AeColouring.isWeakColouringOn` | 2 |
+| `AeProperOn.ae_rigidMotion_edge` | P1, from `aeProperOn_iff_volume.mp hc` | 8 |
+| `AeProperOn.ae_rigidMotion` | `ae_ball_iff hV` twice; `exists_rigidMotion_edge`; the edge lemma | 10 |
+| `AeProperOn.ae_rigidMotion_arcLength` | `prod_arcLength_eq_restrict`, `ae_restrict_of_ae` | 2 |
+| `aeProperOn_iff_ae_rigidMotion` | `aeProperOn_iff_ae`, the two `_apply_` lemmas | 2 |
+| `isOpen_setOf_mapsTo_rigidMotion` | P2 | 5 |
+| `AeProperOn.exists_rigidMotion` | `IsOpen.measure_pos` on the motions carrying `closure V` into `U`; `Measure.exists_mem_of_measure_ne_zero_of_ae` with `ae_restrict_of_ae`; `subset_closure` | 10 |
+| `colorable_induce_of_forall_ne` | `SimpleGraph.Coloring.mk` | 3 |
+| `AeProperOn.colorable_induce` | `exists_rigidMotion` with `g₀ = 0`, `hV.isClosed.closure_eq`, `hV.isCompact`, `hV.countable` | 8 |
+| `radius_graph` | the three pieces | 8 |
+| `radius_countable` | `exists_rigidMotion` with `g₀ = 0` | 3 |
+| `colorable_plane_of_forall_finite` | `SimpleGraph.nonempty_hom_of_forall_finite_subgraph_hom`, as in `chromaticNumber_plane_le_chiM0` | 6 |
+| `colorable_induce_of_forall_aeProperOn_ball` | `hV.isBounded.subset_ball_lt 0 0`; `g₀ = (p, 0)`, `rigidMotion_translation` | 12 |
+| `colorable_plane_of_forall_aeProperOn_ball`, `exists_radius_of_not_colorable`, `radius_up` | the above; `by_contra`, `push Not`; `SimpleGraph.chromaticNumber_le_iff_colorable` | 1, 4, 5 |
+
+**`Plane/RadiusOutside`** (8 leaves, about 30 lines)
+
+| leaf | route | rests on |
+|---|---|---|
+| `isWeakColouringOn_univ_iff_weakColoring` | `isWeakColouringOn_univ_iff`, `Outside.OAI158.weakColoring_iff_unitPairsNull` | no axiom |
+| `exists_isWeakColouringOn_univ_iff` | the two bridges of `Plane/WeakColouringOn` | no axiom |
+| `exists_isWeakColouringOn_of_colorable`, `radius_down` | `Outside.OAI158.nonempty_aeColouring_of_colorable` | `proper_to_borel_weak` |
+| `radius_five` | `exists_radius_of_not_colorable`, `Outside.OAI158.not_colorable_five` | `no_proper_five_coloring` |
+| `exists_radius_no_weak_four` | the same at `isEmpty_coloring_plane_four` | no axiom |
+| `colorable_iff_forall_ball` | `radius_down`, `radius_up` | `proper_to_borel_weak` |
+| `seven_le_chromaticNumber_plane_iff_exists_ball` | `add_one_le_chromaticNumber_iff_not_colorable (n := 6)`, the line above, `push Not` | `proper_to_borel_weak` |
+
+**What is hard.** Nothing is deep. Where a first attempt may miss: the shape of `ae_ball_iff`'s predicate (state `p`
+explicitly); the function equality under `measurePreserving_motionMul_left` (`funext`, `rotation_apply`, `Circle.coe_exp`);
+the decidability instance for `Measurable.dite` (`open Classical in`, or `Classical.decPred`); the cast in `7 ≤ χ ↔ ¬
+Colorable 6`. `volume : Measure (ℂ × ℝ)` is `volume.prod volume` by `Measure.volume_eq_prod` and by `rfl`; the instance
+`IsOpenPosMeasure` for it is found (`Measure.prod.instIsOpenPosMeasure`).
+
+**The price so far**: seven leaves of the 57 — the composition law, right multiplication, the motion reading of the
+monochromatic pairs, the one-edge lemma, the measure identity, the periodicity lemma, openness: the ones I expected to cost
+most — are proved in the two probes, 80 lines, each on its first or second attempt, in under twenty minutes of work. The
+module is about 270 lines of proof. Stage 5 measures it in the build.
+
+### 3.3 The pass on the obligations (`debruijn-obligation-modeling`, run fresh)
+
+No induction anywhere; every global claim reduces to a local one named above (a countable family of null sets; one
+measure-preserving map; one neighbourhood per point of a compact set; one finite graph). Two statements changed shape:
+
+- **The periodicity lemma's hypothesis.** First draft: `S` invariant under `θ ↦ θ + 2π`, which needs an induction over `ℤ`
+  to reach `θ − 2πn`. The statement the proof derives from is that `S` reads the angle **through `e θ` alone**
+  (`e θ = e θ' → (x, θ) ∈ S → (x, θ') ∈ S`): `Function.Periodic.int_mul` then gives every integer at once, and each use
+  site discharges it by rewriting `e θ`.
+- **The measure identity `prod_arcLength_eq_restrict`** is named as its own leaf: the periodicity lemma, the
+  each-motion-once corollary and the null-set lemma all pass through it.
+
+Mutations tried on paper, each breaking the statement as it should: GRAPH without `IsOpen U` (`U` a closed disc, `V` a
+boundary point: the motions are not open); COUNTABLE without `IsOpen U` (`U = {0, 1}`, a constant colouring: weak, since
+`U` is null, and no motion separates `0` from `1`); UP with one radius instead of every radius (a disc of radius `1/2`
+has a weak one-colouring); FIVE at seven colours (false: R7; kept as an `example`); the subtype form without `k ≥ 1`
+(`k = 0`, `U = ∅`). The partition: everything is proved; the spec examples are the tests; nothing is assumed beyond the
+two declared outside theorems, each used once.
+
+### 3.4 The pass on the surface (`debruijn-experience-modeling`, run fresh)
+
+Three consumers, and what each reaches for:
+
+- **An exclusion on a disc** holds `hc : IsWeakColouringOn (ball p R) c` and wants a contradiction from a finite
+  configuration. `AeProperOn.colorable_induce` was missing — the third conjunct of `radius_graph` is not something to dig
+  out of a conjunction — and is added; `Plane/Radius` ends with the consumer's path as an `example` through public lemmas
+  alone. For density arguments: `aeProperOn_iff_unitPairsNull` lands in the library's `UnitPairsNull` vocabulary.
+- **A fragment on discs of every radius** must *produce* `AeProperOn`. `aeProperOn_of_proper_off_null` (proper off a null
+  set, no measurability) is added for it; `aeProperOn_of_proper` is its case `N = ∅`. It then cites
+  `colorable_plane_of_forall_aeProperOn_ball`.
+- **The front page** cites `colorable_iff_forall_ball` and `seven_le_chromaticNumber_plane_iff_exists_ball`. Each
+  docstring now says which half needs the import. For the second: *seven ⟹ some disc has no weak six-colouring* is UP's
+  contrapositive and needs none; ***a disc with no weak six-colouring ⟹ seven* needs `proper_to_borel_weak`**. So an
+  exclusion on a disc proves seven only through the transfer, and a six-colouring of every disc proves six with no import.
+
+Names: `rigidMotion_apply_zero`, `rigidMotion_apply_one` (the motion at a point) and `rigidMotion_zero` (the parameter
+`0`), so that `rigidMotion_zero` means what the convention predicts; `simp` is given those three and nothing else. The
+three claims keep claim-keyed names (`radius_graph`, `radius_countable`, `radius_up`, `radius_down`, `radius_five`), as
+this library's row-keyed theorems do; every piece a consumer applies has a name that states it. Docstrings assert only
+what a theorem backs: that every orientation-preserving isometry is a `rigidMotion`, and that the parameters cover the
+group, are marked "not proved here".
+
+### 3.5 For the landing (the implementer's job and the coordinator's files)
+
+- **`scripts/Axioms.lean`** (not touched by this job). CLEAN: the public surface of `Plane/WeakColouringOn` and
+  `Plane/Radius`, and of `Plane/RadiusOutside` the three marked "no axiom". IMPORTED on
+  `Outside.OAI158.proper_to_borel_weak`: `exists_isWeakColouringOn_of_colorable`, `radius_down`,
+  `colorable_iff_forall_ball`, `seven_le_chromaticNumber_plane_iff_exists_ball`. IMPORTED on
+  `Outside.OAI158.no_proper_five_coloring`: `radius_five`. No record rests on both. **The audit is the check of § 3.4's
+  sentence about halves**: `radius_up` and `exists_radius_of_not_colorable` must print the standard three.
+- **`scripts/Assumptions.lean`**: no new entry is expected. Every hypothesis here is a condition on the theorem's own `k`
+  (`radius_up`'s family of colourings, `exists_radius_of_not_colorable`'s `¬ Colorable k`, `radius_down`'s `χ ≤ k`); none
+  is closed. The count `rests=` rises by five; the nine counts in `CLAUDE.md` § Trust ledger are the coordinator's to
+  refile.
+- **Vacuity.** The binders are `c : ℂ → Fin k` at a free `k` (generic). A later theorem that takes a weak **five**-colouring
+  of a large disc, or of the plane, as a hypothesis has an empty domain given `radius_five`; `LEAN.md` § The gate's rule
+  for emptiness resting on an import applies to it, not to anything here.
+- **Names**: none of the 57 declarations, nor `monoPairSet`, `AeProperOn`, `IsWeakColouringOn`, `rigidMotion`, `motionMul`,
+  is declared in `main` or in any worktree under `.claude/worktrees/` (searched 14:0x UTC). `HadwigerNelson.Motion`
+  (`Proofs/HadwigerNelson/Motion.lean`, exact motions over `Q4`) is a different object under a different name.
+- **`AeColouring.exists_motion`** (`Plane/YesLimit`) is `AeProperOn.exists_rigidMotion` at `U = univ` in the other order
+  of parameters. It stays as it is: no statement on the main line is touched.

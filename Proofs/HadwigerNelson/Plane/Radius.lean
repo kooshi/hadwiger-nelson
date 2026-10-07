@@ -95,6 +95,13 @@ theorem colorable_induce_of_forall_ne {V : Set ℂ} {f : ℂ → Fin k}
     (h : ∀ v ∈ V, ∀ w ∈ V, dist v w = 1 → f v ≠ f w) : ((unitDistance ℂ).induce V).Colorable k := by
   sorry
 
+/-- **The consumer's form of C124-RADIUS-GRAPH**: if `c : ℂ → Fin k` is proper at almost every unit pair of an open
+`U`, the unit-distance graph on every finite set of points of `U` is `k`-colourable. Read backwards: a finite
+unit-distance graph inside `U` with no `k`-colouring refutes every such colouring of `U`. -/
+theorem AeProperOn.colorable_induce {U : Set ℂ} {c : ℂ → Fin k} (hU : IsOpen U) (hc : AeProperOn U c) {V : Set ℂ}
+    (hV : V.Finite) (hVU : V ⊆ U) : ((unitDistance ℂ).induce V).Colorable k := by
+  sorry
+
 /-! ## C124-RADIUS-GRAPH -/
 
 /-- **C124-RADIUS-GRAPH** (`data/fs124/claims-K1.md`): "Let k ≥ 1, U an open set of the plane, c a weak k-colouring
@@ -187,6 +194,13 @@ example : ∃ (c : ℂ → Fin 7) (q : ℂ × ℝ), c (rigidMotion q 0) ≠ c (r
   obtain ⟨q, -, hq⟩ := radius_countable (V := {0, 1}) isOpen_univ (hc univ) (by simp)
     (by simp) (subset_univ _)
   exact ⟨c, q, hq 0 (by simp) 1 (by simp) (by simp)⟩
+
+/-- **The path of an exclusion on a disc**, through the public lemmas alone: a finite set of points of a disc whose
+unit-distance graph has no `k`-colouring leaves the disc no weak `k`-colouring. -/
+example {R : ℝ} {V : Set ℂ} (hV : V.Finite) (hVR : V ⊆ ball (0 : ℂ) R)
+    (hnot : ¬ ((unitDistance ℂ).induce V).Colorable k) :
+    ¬ ∃ c : ℂ → Fin k, IsWeakColouringOn (ball (0 : ℂ) R) c :=
+  fun ⟨_, hc⟩ => hnot (hc.aeProperOn.colorable_induce isOpen_ball hV hVR)
 
 /-- The model, read through C124-RADIUS-UP: `χ(ℝ²) ≤ 7`. -/
 example : (unitDistance ℂ).chromaticNumber ≤ 7 := by

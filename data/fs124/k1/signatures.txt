@@ -1,0 +1,66 @@
+@IsWeakColouringOn : {k : ℕ} → Set ℂ → (ℂ → Fin k) → Prop
+@AeProperOn : {α : Type u_1} → Set ℂ → (ℂ → α) → Prop
+@radius_graph : ∀ {k : ℕ} {U : Set ℂ} {c : ℂ → Fin k},
+  IsOpen U →
+    IsWeakColouringOn U c →
+      ∀ {V : Set ℂ},
+        V.Finite →
+          V ⊆ U →
+            (IsOpen {q | Set.MapsTo (rigidMotion q) V U} ∧ {q | Set.MapsTo (rigidMotion q) V U}.Nonempty) ∧
+              (∀ᵐ (q : ℂ × ℝ) ∂MeasureTheory.volume.prod arcLength,
+                  Set.MapsTo (rigidMotion q) V U →
+                    ∀ v ∈ V, ∀ w ∈ V, dist v w = 1 → c (rigidMotion q v) ≠ c (rigidMotion q w)) ∧
+                (SimpleGraph.induce V (unitDistance ℂ)).Colorable k
+@radius_countable : ∀ {k : ℕ} {U : Set ℂ} {c : ℂ → Fin k},
+  IsOpen U →
+    IsWeakColouringOn U c →
+      ∀ {V : Set ℂ},
+        V.Countable →
+          IsCompact (closure V) →
+            closure V ⊆ U →
+              ∃ q,
+                Set.MapsTo (rigidMotion q) V U ∧
+                  ∀ v ∈ V, ∀ w ∈ V, dist v w = 1 → c (rigidMotion q v) ≠ c (rigidMotion q w)
+@radius_up : ∀ {k : ℕ},
+  (∀ R > 0, ∃ c, IsWeakColouringOn (Metric.ball 0 R) c) →
+    (∀ (V : Set ℂ), V.Finite → (SimpleGraph.induce V (unitDistance ℂ)).Colorable k) ∧
+      (unitDistance ℂ).chromaticNumber ≤ ↑k
+@radius_down : ∀ {k : ℕ}, (unitDistance ℂ).chromaticNumber ≤ ↑k → ∀ (U : Set ℂ), IsOpen U → ∃ c, IsWeakColouringOn U c
+radius_five : ∃ R > 0, ∀ (p : ℂ), ¬∃ c, IsWeakColouringOn (Metric.ball p R) c
+@AeProperOn.ae_rigidMotion : ∀ {α : Type u_1} {U : Set ℂ} {c : ℂ → α},
+  AeProperOn U c →
+    ∀ {V : Set ℂ},
+      V.Countable →
+        ∀ᵐ (q : ℂ × ℝ),
+          ∀ v ∈ V,
+            ∀ w ∈ V,
+              dist v w = 1 → rigidMotion q v ∈ U → rigidMotion q w ∈ U → c (rigidMotion q v) ≠ c (rigidMotion q w)
+@AeProperOn.exists_rigidMotion : ∀ {α : Type u_1} {U : Set ℂ} {c : ℂ → α},
+  IsOpen U →
+    AeProperOn U c →
+      ∀ {V : Set ℂ},
+        V.Countable →
+          IsCompact (closure V) →
+            ∀ {g₀ : ℂ × ℝ},
+              Set.MapsTo (rigidMotion g₀) (closure V) U →
+                ∃ q,
+                  Set.MapsTo (rigidMotion q) V U ∧
+                    ∀ v ∈ V, ∀ w ∈ V, dist v w = 1 → c (rigidMotion q v) ≠ c (rigidMotion q w)
+@colorable_plane_of_forall_aeProperOn_ball : ∀ {k : ℕ},
+  (∀ R > 0, ∃ p c, AeProperOn (Metric.ball p R) c) → (unitDistance ℂ).Colorable k
+@exists_radius_of_not_colorable : ∀ {k : ℕ},
+  ¬(unitDistance ℂ).Colorable k → ∃ R > 0, ∀ (p : ℂ) (c : ℂ → Fin k), ¬AeProperOn (Metric.ball p R) c
+@colorable_iff_forall_ball : ∀ {k : ℕ},
+  (unitDistance ℂ).Colorable k ↔ ∀ R > 0, ∃ c, IsWeakColouringOn (Metric.ball 0 R) c
+seven_le_chromaticNumber_plane_iff_exists_ball : 7 ≤ (unitDistance ℂ).chromaticNumber ↔
+  ∃ R > 0, ¬∃ c, IsWeakColouringOn (Metric.ball 0 R) c
+@exists_isWeakColouringOn_iff_subtype : ∀ {k : ℕ} [NeZero k] {U : Set ℂ},
+  MeasurableSet U →
+    ((∃ c, IsWeakColouringOn U c) ↔
+      ∃ c,
+        Measurable c ∧
+          ∀ᵐ (q : ℂ × ℝ) ∂MeasureTheory.volume.prod arcLength,
+            ∀ (h₁ : q.1 ∈ U) (h₂ : q.1 + e q.2 ∈ U), c ⟨q.1, h₁⟩ ≠ c ⟨q.1 + e q.2, h₂⟩)
+@isWeakColouringOn_univ_iff_weakColoring : ∀ {k : ℕ} {c : ℂ → Fin k},
+  IsWeakColouringOn Set.univ c ↔ Measurable c ∧ Outside.OAI158.WeakColoring k c
+'HadwigerNelson.Plane.radius_five' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
