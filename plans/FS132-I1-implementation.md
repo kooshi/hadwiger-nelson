@@ -392,3 +392,18 @@ release's scope lines; that the docstrings say what the statements say.
 **By nobody here:** Mathlib between the tags below the constants the statements name (and the five primitives the
 characterisations bottom out in); the release's proofs as mathematics (the audit's list stands); the audit scripts'
 self-tests, the vacuity scan and the whole gate on a joined tree.
+
+## Stage 4 — SAVED (FS132-I1): the statements as the kernel holds them, one consequence left out, the report
+
+- **Every statement, by `#check`** on the built module (`data/fs132/i1/checks.lean`, `checks.out`, exit 0): the
+  seventeen statements read as the list at the top prints them; `chromaticNumber_plane_eq_chiM0`, `six_le_chiM0`,
+  `chiM0_le_chromaticNumber_plane` and `chiM0_six_or_seven` have no binder; the module declares no `variable`.
+- **Checked and not added**: `7 ≤ (unitDistance ℂ).chromaticNumber ↔ (⨆ ε > (0 : ℝ), Plane.mu 6 ε) < 1` — row 131's
+  criterion (`Plane.seven_le_chiM0_iff`, a theorem of this library on the standard three) rewritten by
+  `chromaticNumber_plane_eq_chiM0`; `data/fs132/i1/extra/seven-criterion.lean` elaborates with `lake env lean` and
+  prints the standard three and `proper_to_borel_weak`. No row states it and the skeleton does not; it is the
+  planner's or the deriver's to state, and it is in the report's inventory.
+- **Left on the machine**: no process of this job (both builds ended, exit 0; the slot ledger holds none of mine).
+  Nothing was written under `~/source/math` or `~/.cache/ext-oai1/`. Everything this record cites is under
+  `data/fs132/i1/` or `tools/fs132_i1_*.py`, committed.
+- **The report**: `data/fs132/reports/FS132-I1.md`.

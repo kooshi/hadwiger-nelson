@@ -1,0 +1,19 @@
+import Proofs.HadwigerNelson.Outside.OAI158
+open HadwigerNelson HadwigerNelson.Outside.OAI158
+#check @no_proper_five_coloring
+#check @proper_to_borel_weak
+#check @properColoring_iff_colorable
+#check @weakColoring_iff_unitPairsNull
+#check @nonempty_aeColouring_of_weak
+#check @weakColoring_of_aeColouring
+#check @exists_weakColoring_iff_nonempty_aeColouring
+#check @proper_to_borel_weak_model
+#check @not_colorable_five
+#check @six_le_chromaticNumber_plane
+#check @chromaticNumber_plane_six_or_seven
+#check @nonempty_aeColouring_of_colorable
+#check @colorable_iff_nonempty_aeColouring
+#check @chiM0_le_chromaticNumber_plane
+#check @chromaticNumber_plane_eq_chiM0
+#check @six_le_chiM0
+#check @chiM0_six_or_seven
