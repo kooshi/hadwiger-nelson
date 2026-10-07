@@ -143,3 +143,12 @@ at the end.*
   7. **C124-EDGE** — first sentence as posed (a computation on the strip); **second sentence restated** once Stage 3 has read what "agrees with the strip on `|y| ≤ √15/4`" fixes at the member on the line `y = √15/4` — the restatement is given with the verdict. **Not claimed**: anything beyond the strip's family.
 
   8. **C124-SECOND** — as posed, **for sector points** (the class in which "pattern (1, 1)" has its meaning). **Not claimed**: that the saves close up; any exclusion. **Stage 1 — SAVED** (2026-10-07). *Gate at this stage*: `derive_gate.py all` reports one failure by construction — "no derivation entry" — until Stage 4's first entry; every later stage is committed with the gate at exit 0.
+
+- **2026-10-07 (14:38 UTC; after FS124-E2's Stage 4; FS-124 inventory item 18): the forcing claim has its verdicts** (each [hand] or
+  derived from a [hand] entry, one mind, kernel pending; none fixes a value of `χ(ℝ²)`). **C124-TYPE: derived. C124-FORCED-PIECES:
+  derived** — of a close complementary pair of three-piece points, one member separates at each common unit point in the set.
+  **C124-FORCED, for sector points: derived** (one topological input recalled, not read). **C124-FORCED as posed, for every
+  three-piece point by the letter: refuted** — by a held fragment with each bowtie's repeated label joined by a thin band.
+  **C124-FORCED-SEVEN: derived**, exact — the failure at seven. **C124-EVERY-DIRECTION** (the kernel planner's question, taken
+  as an entry): derived. Still to come: the save by one member (C124-LONE, C124-BOTH), C124-FOUR, C124-EDGE, C124-SECOND.
+

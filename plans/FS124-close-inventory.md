@@ -394,4 +394,29 @@ between two colours that is an arc of the unit circle about a point one unit awa
     commit and its time read on `origin`; the three modules listed; its record's outline read. Not checked by me: the
     skeleton's statements against the claim list. **Sent with the fence's lift**: where the deriver's entries are; its
     route in one line; that an implementer takes the module at its hand-back.
+18. **FS124-E2, third message (14:38 UTC logged): the forcing claim is at its verdicts — derived on pieces, derived as posed for
+    sector points, refuted as posed by the letter; and last night's sharp form is found to say less than its wording**
+    (record `plans/FS124-E2-derivation.md` Stages 3–4, on `main`). **C124-FORCED-PIECES (spends six), derived**: of a close
+    complementary pair, one member has a piece inside the closed unit disc about a common unit point and another disjoint
+    from the open disc, their common boundary on that circle — "the count is on four regions and six pieces", closed by
+    one identity of propositional logic. **For sector points, as posed**: an arc of an edge lies on the circle and the
+    pair is tight along it (one topological input, "recalled, not read"). **As posed by the letter: refuted** — the bowtie
+    fragment with each repeated label joined by a thin band: two three-piece points by the letter, one unit apart, with no
+    edge of either containing an arc of a circle. **The failure at seven, exact**: two vertices of the honeycomb at
+    circumradius 2/5 with disjoint triples, `√28/5` apart, and a common unit point strictly inside a tile of the seventh
+    label. **C124-TYPE** (per class) and **C124-EVERY-DIRECTION** (the kernel planner's question) derived. **About last
+    night's row 157**: the piece form "replaces C132-COMP-SHARP's 'one of six sets lies on the circle', which a one-point
+    set satisfies". **My receipt**: the stages are on `main`; **its gate run by me** — exit 0, 0 failures, 0 warnings, four
+    controls each firing; five entries' statement, uses, not-claimed, verdict and grade fields read; **the identity checked
+    by me** — `(A ∨ C)(A ∨ D)(B ∨ C)(B ∨ D) = (A ∨ CD)(B ∨ CD) = AB ∨ CD`; **and its remark on row 157 checked against
+    that row's statement by my own reading**: a one-point set at a member has an empty straddle set, so it meets the
+    hypothesis, and it lies on the unit circle about the common unit point, so it meets the conclusion — the row is true
+    and its headline ("force an edge set onto the unit circle") is larger than what its statement forces. Not checked by
+    me: the refuting fragment's band; the exact failure at seven. **Rulings.** (a) The verdicts enter the claim list.
+    (b) **A dated sentence is filed in `LEDGER.md` row 157 now** (the ledger may be written while a landing is in flight):
+    what the sharp form's conclusion can be met by, and the piece form as the statement with content. **A dated line is
+    owed in last night's theorem record under the entry**, at the next record job. (c) **This is the milestone's first
+    statement that holds at six and fails at seven** — derived, one mind, by hand — and it is said so, with what it does
+    not claim: that any weak six-colouring has such a pair. (d) The planner's question is answered and relayed. (e) Kooshi
+    is told, with the correction to what I reported from last night ("must be at least 2 apart, with the same escape").
 
