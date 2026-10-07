@@ -325,4 +325,24 @@ def hexcross():
           f"own-label-samples-outside-the-vertex's-unit-circle={wrong}")
 
 
-{"shadow": shadow, "seeing": seeing, "sides": sides, "model": model, "hexcross": hexcross}[sys.argv[1]]()
+# ------------------------------------------------------------------------------------------------ ringarc
+def ringarc():
+    """C132-PLACED-RING: the points y_0 + e(theta) just before the direction of y_1 (just after that of y_-1) lie outside the
+    unit circle about x and outside the one about y_2 (y_-2), in the wedges O_cw / O_far at y_1 (O_far / O_ccw at y_-1), and
+    those two wedges are on opposite sides of the unit circle about y_0.  --fault: theta on the other side of the direction."""
+    sg = -1 if FAULT else 1
+    y0 = Y(0)
+    n = bad = 0
+    sides = set()
+    for i in range(1, 201):
+        for k, far_side, th in ((1, 2, PSI + 2 * math.pi / 3 - sg * 0.001 * i), (-1, -2, PSI - 2 * math.pi / 3 + sg * 0.001 * i)):
+            w = (y0[0] + math.cos(th), y0[1] + math.sin(th))
+            n += 1
+            bad += not (math.hypot(*w) > 1 and dist(w, Y(far_side)) > 1)
+            for rr in (-0.0004, 0.0004):                     # just inside / just outside the unit circle about y_0
+                z = (y0[0] + (1 + rr) * math.cos(th), y0[1] + (1 + rr) * math.sin(th))
+                sides.add((k, "in" if rr < 0 else "out", WN[wedge(z, k)] if wedge(z, k) is not None else "?"))
+    print(f"arc-points={n} outside-the-region={bad} wedges={sorted(sides)}")
+
+
+{"shadow": shadow, "seeing": seeing, "sides": sides, "model": model, "hexcross": hexcross, "ringarc": ringarc}[sys.argv[1]]()
