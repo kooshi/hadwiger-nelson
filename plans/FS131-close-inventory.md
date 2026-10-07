@@ -8779,3 +8779,39 @@ reason by the close.*
      FS-132's opening at the import implementer's hand-back; the import's landing launches only after the Clerk's
      branch is merged, so no `CLAUDE.md` edit lands while a landing is in flight. In flight: 2 (the import;
      FS-133's deriver).
+
+628. **The one filing of ruling 620 (a) is briefed and launched as FS132-F1 — the Clerk as my pen, on a branch of its own; four rulings on what it carries** (brief `data/fs132/briefs/FS132-F1-front-page.md`, generator `data/fs131/briefs/scripts/mk-fs132-f1.py`, gate exit 0; worktree and branch `fs132-filing`; its sources read by me at their draft sections before the brief was written: `plans/EXT-OAI2-reading.md` §§ 5.0–5.5, `plans/EXT-OAI1-audit.md` Stage 7 and Stage 8's filing bullets, `plans/POROS-2026-10-07-after-release.md` §§ 4.1–4.4 and § Draft re-rank, `plans/FS131-L8A-landing.md` drafts 1–12, `plans/EXT-OAI3-review.md` § 5.1; the gates' baselines taken on `main` — the fact audit and `--dupes` exit 0, `tools/bib_audit.py` exit 1 with sixteen unlogged keys, fourteen of them the works the filing adds).
+     **Rulings.** (a) **The Lean backlog's own drafts leave this filing: wave 8's ledger regrades, errata and notes
+     (`plans/FS131-L8A-landing.md` drafts 6, 7, 10–12) join the other landed waves' held regrades in a second
+     filing.** This amends the handoff's line 4, source (iv), and its source (vi) with it. Alternative: file wave
+     8's with the release's, as the handoff listed. Why not: they are seventy-two kernel heads against § B's rows
+     by line number — a different kind of filing, twice the size, and every earlier wave's regrades are already
+     "held for the filing"; filing one wave's alone would make the ledger say wave 8 is in the kernel and wave 3
+     is not. Confidence: high. The second filing is briefed at the backlog's stopping point or its close,
+     whichever Kooshi's word on the restart makes first. (b) **The filing says what is true before the import
+     lands**: row 33 takes the audit's Stage 7 (c) sentence ("outside this library, and audited here"), not Stage
+     8's ("imported as the outside theorem …"); Stage 8's two sentences and the trust ledger's counts are filed at
+     the import's landing, from the implementer's drafts. Alternative: wait for the landing and file once. Why
+     not: the front page has said five, six or seven for two days while three milestones open on six or seven;
+     the landing is hours away and rewrites four sentences. Confidence: medium-high. **The import's landing
+     launches only after this branch is merged** (no `CLAUDE.md` edit while a landing is in flight). (c)
+     **Eighteen merges, M1–M18, are mine, listed in the brief and nowhere else** — each a sentence about the
+     project's state or rules that no lane drafted: the mission's first paragraph and its upper-end row; the
+     standard of evidence's first sentence (χ ≥ 6 is no longer "would be new mathematics"); the "Last updated"
+     line; the grade word of ruling 620 (b); the programme paragraph's names; FS-133 as Opened; **the backlog
+     filed as paused and restarting on Kooshi's word, with the asking lane's table as a recommendation** (the
+     asking lane drafted "resumes by the table"; he has not said); the group row's count; "local slack" in G95
+     and in link 6 (item 625); the bibliography row's cells, which I had rewritten since the audit drafted
+     against them. Alternative: send each back to a lane for a draft. Why not: none is mathematics, and a front
+     page whose first paragraph contradicts its table is the failure "current state only" names. Confidence:
+     medium-high on each; Kooshi is told they exist. (d) **Where the asking lane's re-rank is not drafted in
+     full — the question cells of ranks 7 and 11 ("as filed with clauses struck") and the rows below rank 12 —
+     the Clerk strikes nothing and appends that stub's verdict and reason from § 4.2, verbatim.** Alternative:
+     the Clerk strikes the five-colour clauses. Why not: which clause is a five-colour clause is a judgment, and
+     the Clerk decides nothing. **Owed by the asking lane's next job**: those two cells in full.
+     **Owed, named so the close finds them**: the in-place rewrite of the eight grokkings the reading amends
+     (G25, G60, G64, G80, G81, G82, G86, G91 — filed now as instances) — FS-132's opening re-grokking drafts it;
+     atlas nodes for the release, FS-132 and FS-133 — no lane has drafted one; `tools/bib_audit.py`'s residue
+     after the filing. **A slip of mine**: one gate-baseline command began with `cd` inside a compound command
+     (the working directory was already that one; nothing moved) — the rule is no `cd` in a compound command.
+     In flight: 2.5 (the import; FS-133's deriver; the Clerk).

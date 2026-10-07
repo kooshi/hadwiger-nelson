@@ -30,3 +30,10 @@ the release states any of this (its manuscript does not).
   found, one mind (`plans/EXT-OAI2-reading.md` stages 2–4).
 - The sketch this milestone starts from: `plans/EXT-OAI2-reading.md` § 2.6 — one mind, one step unchecked, named there.
 - This project's own rows on the one-class problem: `LEDGER.md` row 129 and the entries it names.
+
+## Dated lines
+
+- **2026-10-07 (after FS133-E1's Stage 3, `plans/FS133-E1-derivation.md`):** the deriver's entry **C133-DENS-CLASS** — the same
+  step for any σ-finite space, any window sequence, and a mean that is at least `α` at almost every point — is the form C133-ONE
+  consumes (the transfer's field has its mean only at almost every point). C133-DENS stays as posed above, and is derived from
+  it. The kernel lane's planner reads C133-DENS-CLASS's statement in that record as the one to formalize.
