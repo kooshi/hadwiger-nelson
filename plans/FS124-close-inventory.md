@@ -306,4 +306,48 @@ between two colours that is an arc of the unit circle about a point one unit awa
     the first module's planner is back. (c) **FS124-E2 is launched** (14:02 UTC by the clock at this entry; `ephodos`;
     brief `data/fs124/briefs/FS124-E2-second-round.md`): the reading on every held object, then the four claims. Slots:
     it, the implementer on the exclusion's last two modules, the kernel planner on the radius clause.
+14. **FS124-K1, a mid-job message, still blind (14:16 UTC logged): all five statements of the radius clause type, none is
+    vacuous, the skeleton builds — and typing them found six generalizations** (planner; branch `fs124-wk1`, three modules,
+    54 leaves, not yet committed at its message). (1) **Measurability of the colouring is idle** in the finite-set form, the
+    countable form and (up): what is used is that the monochromatic unit pairs inside the set are null, for any function —
+    so (up) in the form the proof gives contains the classical "every disc `k`-colourable implies the plane is"; (2) the
+    finite-set form's almost-every clause holds pair by pair for a countable set wherever it lies; (3) **"the pairs are
+    the motions"** — an oriented unit pair is the image of one fixed unit edge under exactly one rigid motion, so "almost
+    every unit pair" is "almost every rigid motion", "that is the whole proof" (probed at 35 lines, with a planted fault);
+    (4) (down) holds for every subset of the plane; (5) (up) and the statement at five hold with discs at any centres, and
+    **the contrapositive of (up) needs no import** — at four colours it is the five-statement's sentence on the standard
+    three axioms; (6) `k ≥ 1` is idle. (7) **Not planned, a question for the deriver**: for a measurable weak colouring
+    of a measurable set, every direction is good, not almost every one (its derivation, one mind, unchecked). **A shared
+    definition** for other modules to import (a weak colouring read on a set, for a total function), with a bridging
+    theorem for each place the words and the typed form differ. **Two theorems added as the module's join**: the plane is
+    `k`-colourable iff every disc about the origin has a weak `k`-colouring; **`7 ≤ χ(ℝ²)` iff some disc about the origin
+    has no weak six-colouring** — each on the one declared outside theorem on Borel transfer. **Rulings, sent**: (a) both
+    join theorems stay, each docstring saying which half needs the import; (b) the statements are planned in the form the
+    proof gives, the claim list's measurable forms as corollaries; (c) item 7 goes to the deriver as a question, labelled.
+    **Relayed to the running deriver** (FS124-E2), for its information, with the question as optional. Its phase-1 commit
+    and message are still to come; the fence stands until my reply to that.
+15. **FS124-E2, first message (14:16 UTC logged): the claims as its verdicts will be about them — one statement defect, and
+    prior art inside this project that the card did not read** (commit `b2885b03`; record `plans/FS124-E2-derivation.md`
+    Stage 1). **Prior art, for maps**: "the card's question — must one edge of each member lie on the point's unit circle
+    — is already answered for maps by FS112-N3-COR3 (row 135, two minds, one blind)": the common unit points are
+    "vertices of at least four colours, each a leaving centre of both `u` and `u′`"; its verification note says "One
+    failure is not enough"; FS107-W-TAN has the exception. "The card's hunch (a save by one member 'is consistent with
+    every first-order statement held') did not read these. What is open is the measurable form." **The defect**: by the
+    letter of the card's definition two pieces of a three-piece point may meet at the point only, their "edge" one point,
+    and the sharp form's conclusion is met with no arc forced; **restated on pieces** — a member *separates* at a common
+    unit point when one of its pieces lies in the closed unit disc about the point and another misses the open one.
+    **Restated**: C124-FORCED-PIECES (a close complementary pair: one member separates), with the posed form for sector
+    points; C124-ONE-MEMBER as two statements — C124-LONE (what a save by one member alone would force) and **C124-BOTH**
+    (for full members both separate; **for sector points no common unit point is saved by one member alone** — if it is
+    derived, the card's first branch, in measure). **Added**: C124-TYPE (one connected open piece with a point strictly
+    inside or outside the unit circle bars its label on one side — per class), C124-FORCED-SEVEN (the failure at seven as
+    a statement), C124-FOUR (exactly four labels present at a saved point — the "91 of 91", as a claim). Nothing derived
+    yet. **My receipt**: the commit is on `main`; its § 1.1 copied whole into the claim list by script (eight items, two
+    notation paragraphs). Not checked by me: row 135's entry against its reading. **Rulings.** (a) The restated and added
+    statements are accepted as the claims its verdicts are about. (b) **The asking lane's card missed held prior art of
+    this project's own — the second time today a card's unit was corrected by the deriver who took it**; logged for the
+    record job as an instance (the ask lane's re-read did not reach rows 133–136's derivation files), and Kooshi is told.
+    (c) What a derivation of C124-BOTH would be is said before it exists: the map class's two-minds result carried to
+    every measurable colouring with three-piece points of the sector kind — one mind, by hand, and not a statement that
+    such points exist in every colouring.
 
