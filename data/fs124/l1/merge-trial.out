@@ -1,0 +1,9 @@
+trial: HEAD=80ee1983473d8fc5c3f6de5f608aeafe95ee0b77 against origin/main=6a721c6aba5598b89cfef1f89c2bdca044f72176, merge-base 596100d4f208c042042fffe3fc581a2a777ae020, 2026-10-07T16:07:26Z
+518f01c710ea72398e28905203ccdaa1ec88a371
+Proofs.lean
+
+Auto-merging ARCHITECTURE.md
+Auto-merging Proofs.lean
+CONFLICT (content): Merge conflict in Proofs.lean
+Auto-merging scripts/Axioms.lean
+merge-tree exit=1

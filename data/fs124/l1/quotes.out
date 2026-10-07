@@ -1,0 +1,25 @@
+OK	data/external/EXT-OAI1-request.md	> I agree with all 3. let's keep the lean backlog paused. We move to t
+OK	CLAUDE.md § Counter-priors — read before pricing anything (Kooshi, 2026-09-26)	Do not consider Lean formalization a cost. It's practically mechanical
+OK	plans/FS124-close-inventory.md § Items	19. **FS124-K1 done (434k and 60 minutes by the task notice): the radi
+OK	plans/FS124-close-inventory.md § Items	24. **FS124-I1 done (389k and 31 minutes by the task notice): the radi
+OK	plans/FS132-close-inventory.md § Items	51. **FS132-L2 done (527k and 87 minutes by the task notice), and its 
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs124-wl1/Proofs/HadwigerNelson/Plane/WeakC	def AeProperOn (U : Set ℂ) (c : ℂ → α) : Prop := (volume.prod arcLengt
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs124-wl1/Proofs/HadwigerNelson/Plane/Radiu	theorem radius_graph {U : Set ℂ} {c : ℂ → Fin k} (hU : IsOpen U) (hc :
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs124-wl1/Proofs/HadwigerNelson/Plane/Radiu	theorem radius_up (h : ∀ R > (0 : ℝ), ∃ c : ℂ → Fin k, IsWeakColouring
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs124-wl1/Proofs/HadwigerNelson/Plane/Radiu	theorem radius_down (h : (unitDistance ℂ).chromaticNumber ≤ k) :
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs124-wl1/Proofs/HadwigerNelson/Plane/Radiu	theorem radius_five : ∃ R > (0 : ℝ), ∀ p : ℂ, ¬ ∃ c : ℂ → Fin 5, IsWea
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs124-wl1/Proofs/HadwigerNelson/Plane/Radiu	theorem colorable_iff_forall_ball :
+OK	/home/kooshi/source/lean-dir/.claude/worktrees/fs124-wl1/Proofs/HadwigerNelson/Plane/Radiu	theorem seven_le_chromaticNumber_plane_iff_exists_ball :
+OK	LEDGER.md	| 161 | **The disc criterion, in measure — weak six-colourings of the 
+OK	CLAUDE.md § Trust ledger	as a set); the current audit reads 6910 clean and 5 declared purchases
+OK	CLAUDE.md § Trust ledger	**What the library assumes, in both forms** (`scripts/assumptions.sh`,
+OK	CLAUDE.md § The gate	`declarations=15292 refutations-skipped=226 sites=1447`, `vacuous=0 st
+  source /home/kooshi/source/lean-dir/.claude/worktrees/fs124-wl1/Proofs/HadwigerNelson/Plane/Radius.lean: 2
+  source /home/kooshi/source/lean-dir/.claude/worktrees/fs124-wl1/Proofs/HadwigerNelson/Plane/RadiusOutside.lean: 4
+  source /home/kooshi/source/lean-dir/.claude/worktrees/fs124-wl1/Proofs/HadwigerNelson/Plane/WeakColouringOn.lean: 1
+  source CLAUDE.md: 4
+  source LEDGER.md: 1
+  source data/external/EXT-OAI1-request.md: 1
+  source plans/FS124-close-inventory.md: 2
+  source plans/FS132-close-inventory.md: 1
+quotations: 16  mismatches: 0  root: /home/kooshi/source/lean-dir
