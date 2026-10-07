@@ -64,3 +64,83 @@ accompanying Lean formalizations."; "The current catalogue contains 722 manuscri
 **First sight of the solution module, by listing** (no finding yet): `Five.lean` is 131 lines; its headline's proof is three
 lines — `proper_to_borel_weak` (a proper colouring gives a Borel one proper at almost every unit pair) and
 `no_measurable_weak_five_coloring`.
+
+## Stage 2 — SAVED: the statement, read aloud (by text; the elaborated comparison is stage 4's)
+
+**The challenge file, whole** (`/home/kooshi/source/math/lean/ComparatorChallenges/EuclideanFiveColor.lean`, 15 lines):
+
+```lean
+import Mathlib
+
+namespace OAI
+
+namespace EuclideanFiveColor
+
+def ProperColoring (colorCount : ℕ) (coloring : ℂ → Fin colorCount) : Prop :=
+  ∀ point otherPoint : ℂ, ‖point - otherPoint‖ = 1 → coloring point ≠ coloring otherPoint
+
+theorem no_proper_five_coloring : ¬ ∃ coloring : ℂ → Fin 5, ProperColoring 5 coloring := by
+  sorry
+
+end EuclideanFiveColor
+
+end OAI
+```
+
+**Read aloud.** A map `coloring` from `ℂ` to `Fin colorCount` is a *proper colouring* when, for every two points of `ℂ` whose
+difference has norm exactly `1`, the two points get different values. The theorem: there is no map from `ℂ` to `Fin 5` that is a
+proper colouring. That is the informal claim — "every five-colouring of the plane has two points at distance exactly 1 of one
+colour" — with the plane as `ℂ` under its norm, and by text nothing weaker:
+
+- **No hypothesis in the definition.** `ProperColoring` has one clause, the universally quantified implication. Its premise is
+  satisfiable (`‖0 − 1‖ = 1`), so it constrains every map; nothing restricts `point ≠ otherPoint` beyond the distance itself, and
+  nothing excludes a set of pairs.
+- **No restriction on the map.** The existential ranges over all of `ℂ → Fin 5`: no measurability, continuity or Borel
+  hypothesis, no structure, no class argument, no instance argument. `Fin 5` has five elements; the colour count `5` appears twice
+  and is the same literal both times.
+- **No trick of notation, by text.** The file imports `Mathlib` and nothing else, opens nothing, and declares no notation,
+  instance, attribute, macro or option; so `ℂ`, `‖·‖`, `-`, `=`, `1`, `≠`, `Fin` are Mathlib's at the pinned revision. Its non-ASCII
+  characters are the eight expected code points and no look-alike (U+00AC ¬, U+2016 ‖, U+2102 ℂ, U+2115 ℕ, U+2192 →, U+2200 ∀,
+  U+2203 ∃, U+2260 ≠). The `1` is a real number, because the norm is real-valued. Which `Norm ℂ` instance elaboration picks, and
+  that it is the Euclidean modulus `√(re² + im²)`, is checked by the kernel in stage 4, not asserted here.
+- **`ℂ` against `ℝ²`.** The claim is about the Euclidean plane; `ℂ` with its norm is isometric to `EuclideanSpace ℝ (Fin 2)`
+  (in this repository, `chromaticNumber_plane_eq_complex`, `Proofs/HadwigerNelson/Reduction.lean:51`, through
+  `Complex.orthonormalBasisOneI`). The release does not state that bridge in the cone; see the note below.
+
+**The proved theorem, by text.** `OAI/Geometry/PlaneColoring/Coloring.lean:7–8` (imports `Mathlib` only; nothing precedes it
+but the two `namespace` lines):
+
+```lean
+def ProperColoring (k : ℕ) (c : ℂ → Fin k) : Prop :=
+  ∀ x y : ℂ, ‖x - y‖ = 1 → c x ≠ c y
+```
+
+and `OAI/Geometry/PlaneColoring/Five.lean:123–127`, inside `namespace OAI`, `noncomputable section`, `open scoped Classical`,
+`open Set Filter Topology MeasureTheory`, `namespace EuclideanFiveColor`:
+
+```lean
+/-- No unrestricted five-coloring separates all unit-distance pairs in the Euclidean plane. -/
+theorem no_proper_five_coloring : ¬ ∃ c : ℂ → Fin 5, ProperColoring 5 c := by
+  rintro ⟨c,hc⟩
+  obtain ⟨d,hd,hw⟩ := proper_to_borel_weak hc
+  exact no_measurable_weak_five_coloring hd hw
+```
+
+Both are the challenge's declarations with the bound variables renamed (`colorCount`/`k`, `coloring`/`c`, `point`/`x`,
+`otherPoint`/`y`) and nothing else changed. In the cone the name `ProperColoring` is declared once
+(`rg "def ProperColoring"` over the 70 files: `Coloring.lean:7` only), so the theorem's `ProperColoring` is that definition unless
+an opened namespace supplies another — which the elaborated comparison of stage 4 decides, by signature and not by name.
+
+**Two notes, neither a defect of the theorem.**
+1. *The two ends are stated in two models and never joined.* The release's seven-colour theorem
+   (`OAI.Problem160.properColoring_seven`, `OAI/Geometry/PlaneColoring/Seven.lean:36`, outside this cone) is about
+   `EuclideanSpace ℝ (Fin 2)` with `dist x y = 1`, in a different namespace with its own `ProperColoring (k : ℕ) : Prop`
+   (`Basic.lean:26`, an existential); the five-colour theorem is about `ℂ` with `‖x − y‖ = 1`. `rg` over the whole library finds
+   `no_proper_five_coloring` in two files only, the challenge and `Five.lean`: the catalogue's sentence "only six and seven remain
+   possible chromatic numbers of the plane" is not a Lean statement in the release. It follows from the two theorems by the
+   isometry `ℂ ≃ᵢ EuclideanSpace ℝ (Fin 2)`, one line here (stage 7).
+2. *The proof's second line is a theorem this project holds only conditionally.* `proper_to_borel_weak`
+   (`BorelTransfer.lean:436`) is stated for every `k` with `[NeZero k]`: a proper `k`-colouring of `ℂ` gives a Borel `k`-colouring
+   `d` with `WeakColoring k d` — `AEMeasurable d ∧ ∀ᵐ p ∂(volume.prod angularMeasure), d p.1 ≠ d (p.1 + direction p.2)`
+   (`Coloring.lean:27–29`), proper at almost every unit pair. That is `χ_m⁰(ℝ²) ≤ χ(ℝ²)`, the direction `LEDGER.md` rows 128 and
+   130 hold given MR, at [hand]. Listed, not judged; stage 6 reads it.
