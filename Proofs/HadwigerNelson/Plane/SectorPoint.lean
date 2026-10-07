@@ -1,20 +1,22 @@
 import Proofs.HadwigerNelson.Plane.ClosePair
 import Proofs.HadwigerNelson.Plane.ClosePairWitness
+import Proofs.HadwigerNelson.Plane.ThreeArcs
 
 /-!
-# The claim list's sector point, and the bridge to arc edges (FS-124, second module; the θ-lemma is owed)
+# The claim list's sector point, and the bridge to arc edges (FS-124, second module)
 
 `data/fs124/claims-K2.md`: a three-piece point "is a sector point if for some r > 0 there are three arcs J_0, J_1,
 J_2 (homeomorphic images of [0, 1]) from x to the circle ∂B(x, r), inside B(x, r) but for their far ends and disjoint
 but for x, such that the three components of B(x, r) ∖ (J_0 ∪ J_1 ∪ J_2) are the pieces."
 
 * `ThreePiece.IsSector` — that definition, for a decomposition.
-* `ThreePiece.IsSector.hasArcEdges` — **the θ-lemma, a leaf of this module that no plan of FS124-K2 covers**: at a
-  sector point every edge contains an arc from the point (an initial part of one of the three arcs). It is the
-  θ-curve fact of plane topology — each of three arcs from the centre of a disc to its rim borders exactly two of the
-  three complementary components, and every two components share one. Mathlib holds no Jordan curve theorem; this
-  library's `Plane/PlaneTopology` holds unicoherence and the crossing of continua in a disc. Owed as a kernel job of
-  its own (`plans/FS124-kernel-plan-2.md` § the sector clause; the coordinator's ruling of 2026-10-07).
+* `ThreePiece.IsSector.hasArcEdges` — **the bridge**: at a sector point every edge contains an arc from the point
+  (an initial part of one of the three arcs). The plane topology under it is `IsTriodCut.exists_arc`
+  (`Plane/ThreeArcs`, FS124-K3 and FS124-I5): for three open preconnected pairwise disjoint sets that fill a disc cut
+  by three arcs from its centre to its rim, each arc borders exactly two of the three and every two share one — from
+  this library's unicoherence of the plane and its crossing lemma, with no Jordan curve theorem. Of the classical
+  θ-curve fact that is one half; the other, that the cut disc has exactly three components, is not proved there and
+  not used here: the definition's own words give the three pieces.
 * `closePair_both_saved_of_isSector` — **C124-BOTH's second clause in the claim list's own words**, over that leaf and
   `closePair_both_saved` (`Plane/ClosePair`), which is stated for arc-edged decompositions and does not read this module.
   "A sector point is full" (`ThreePiece.IsSector.isFull`) is over the same leaf.
@@ -47,10 +49,14 @@ def IsSector (D : ThreePiece U c x) : Prop :=
       (∀ i, ∃ z ∈ D.piece i, D.piece i = connectedComponentIn (ball x r \ ⋃ m, range (J m)) z) ∧
       ⋃ i, D.piece i = ball x r \ ⋃ m, range (J m)
 
-/-- **The θ-lemma** (plane topology; owed as a kernel job of its own): at a sector point every edge contains an arc
-from the point. -/
+/-- **The θ-lemma, for a decomposition** (plane topology: `IsTriodCut.exists_arc`, `Plane/ThreeArcs`): at a sector
+point every edge contains an arc from the point. The definition's sixth clause — each piece is a component of the cut
+disc — is not read: the clause that the pieces fill the cut disc and the decomposition's own fields (open,
+preconnected, pairwise disjoint) are what the lemma asks. Inhabitant of the hypothesis: `sectorPoint_isSector`. -/
 theorem IsSector.hasArcEdges {D : ThreePiece U c x} (h : D.IsSector) : D.HasArcEdges := by
-  sorry
+  obtain ⟨r, hr, J, h1, h2, h3, h4, h5, -, h7⟩ := h
+  exact fun i j hij => IsTriodCut.exists_arc ⟨⟨hr, h1, h2, h3, h4, h5⟩, D.isOpen_piece, D.isPreconnected_piece,
+    fun _ _ hab => D.disjoint_piece hab, h7⟩ D.nbhd_mem hij
 
 /-- "A sector point is full" (over the θ-lemma). -/
 theorem IsSector.isFull {D : ThreePiece U c x} (h : D.IsSector) : D.IsFull :=
@@ -63,6 +69,10 @@ and `−1 − i`. -/
 theorem sectorPoint_isSector : sectorPoint.IsSector := by
   obtain ⟨J, hJ⟩ := sectorPoint_arcCut
   exact hJ.sector (by norm_num)
+
+/-- The θ-lemma run on the model of its hypotheses: the ordinary three-sector point is arc-edged because it is a
+sector point. `sectorPoint_hasArcEdges` (`Plane/ThreePiece`) proves the same fact by construction — a cross-check. -/
+example : sectorPoint.HasArcEdges := sectorPoint_isSector.hasArcEdges
 
 /-- **C124-BOTH**, second clause, in the claim list's words (`data/fs124/claims-K2.md`): "If they are sector points,
 each has an edge that contains an arc of S(w) with an end at the member: no common unit point of a close
