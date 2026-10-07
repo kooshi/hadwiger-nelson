@@ -8504,3 +8504,38 @@ reason by the close.*
      lane** (`poros`; its brief regenerated to name this job's stage 5 and the audit's hand-back, gate exit 0, 21
      quotations), launched 2026-10-07 about 02:45 UTC. In flight: 3 (the asking lane; wave 8's landing; wave 9's
      implementer).
+
+621. **FS131-I9B done: wave 9's uniform bound is proved with nothing open beneath it, and the three models are built — "seven almost everywhere iff the hole bound stays positive uniformly in the complexity" is a theorem on its branch with no hypothesis** (implementer, Opus; harness 400k and 70 minutes by the task notice; record `fs131-w9b`'s `plans/FS131-I9B-implementation.md`; report `data/fs131/reports/FS131-I9B.md`; seven commits, tip `0fb15c61`; pushed, tree clean; not landed, the gate not run, by its brief).
+     **Proved on the standard three** (built, not gated): the three leaves of `Plane/Reduction/Uniform` — U1 (for a
+     measurable set invariant under a lattice, the complement's upper density is one minus the set's), U2 (every
+     grid colouring lies in some complexity class, `K = 2(N + 3)²`), U3 — and so **FS111-C1-UNIF with no leaf under
+     it**: `c1_unif`, `c1_unif_tendsto`, `lt_chiM0_iff_delta0_pos`, **`seven_le_chiM0_iff_delta0 : 7 ≤ chiM0 ↔ 0 <
+     ⨅ K, delta0 K 6`**, at every `k`. **Models M1–M3 built** in a new `Plane/Reduction/Models` (218 lines) on the
+     brick map at seven colours, each the theorem applied to an object meeting every hypothesis at once; and
+     general forms (`ArcMap.faceColouring_hyps`, `ArcMap.regularCover_hyps`: every valid arc map of the plane is a
+     model). **My receipt**: tip equals `origin/fs131-w9b`, tree clean; outside `data/`, `plans/`, `tools/` it
+     changed `Uniform` (267 lines), the new `Models`, and the three registry files; `sorry` in the four reduction
+     modules: 0; no `native_decide`; **by my script the nine heads `Uniform` had, and those of `Basic` (10) and
+     `Maps` (19), are textually unchanged**; its last build log ends "OK — 467 of 467 batches, 3 module(s) rebuilt,
+     2 module(s) with warnings" (the two are the other job's `Bend` and `QFree`), `EXIT=0`; its axioms log — 34
+     records CLEAN on exactly the standard three, `seven_le_chiM0_iff_delta0` among them, and two controls on
+     `sorryAx`; the guarded lint's log ends "Linting passed for Proofs.", `EXIT=0`. Not checked by me: the proofs
+     beyond the build; its statement tool's elaborated half; the models' adequacy. **Predictions scored**: the plan
+     priced U1–U3 at about 340 lines — about 225; the calibration's line gives 374k for 485 lines against 400k
+     measured. **Slips, the job's, disclosed**: a module written during a slot wait that the build walked (whole
+     before it started); the doubled-name check not run before one push (run before the next: clean); three checks
+     that overlapped the incident of item 612 — each exit 0, and repeated outside the window. **Corrections owed**
+     (its drafts): two deprecated Mathlib names in the plan's § 4.3; U2's bound. **Credit**: the theorem read back
+     against its row with what each half of the proof actually reads; the incident window handled by naming what
+     overlapped and repeating it; one row past its fence said plainly. **Rulings.** (a) Its rewrite of
+     `ARCHITECTURE.md`'s row for `Uniform` is kept (the row said "skeleton … three `sorry` leaves"). (b) Its three
+     docstring drafts for `Basic` and `Maps` (the "model is owed" sentences) are the wave's landing's. (c) **With
+     the import of item 619 (a), that theorem reads on the plane itself**: `7 ≤ χ(ℝ²)` iff the hole bound stays
+     positive uniformly — a bridge of two lines for whoever joins wave 9 with the import; noted for the asking
+     lane (its record is open to it) and for the front page's drafts; nothing filed. (d) **Slot → FS132-I1, the
+     import** (`debruijn-implementer`, `model: "opus"`; brief `data/fs132/briefs/FS132-I1-import.md`, generator
+     `mk-fs132-i1.py`, gate exit 0, 24 quotations; tree `fs132-wi1` from `main` at `8386c256`, build copied from
+     the gate step's idle tree, pushed): the two axioms in the release's own form with the four items, the one
+     leaf, the bridges, the registrations and the landing's drafts; it does not land. Launched 2026-10-07 about
+     03:00 UTC. In flight: 3 (the asking lane; wave 8's landing; the import). **The backlog now has one job
+     running, the landing.**
