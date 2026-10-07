@@ -124,10 +124,10 @@ not to be merged into it):
    `bend_away_whole`, with N2's route in `plans/FS129-SR1-audit.md` § 2.1. Either the collar away bend follows from the landed
    statements with `hR2` in place of the domain hypothesis, and your plan says how; or a twin of a landed statement is needed — then
    **message me at once with the twin's statement**, and state it in a module of yours as a `sorry` leaf (the landed file is not
-   edited). A fit of that structure on a concrete map is being built at this moment by an implementer on another branch — a named
-   `CollarFitOut` on `awayModel`'s gap; its record,
-   `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wd2/plans/FS131-MD2-implementation.md`, shows how each field is met in
-   practice, and bears on your model M4 too. It is not landed: read it, cite nothing from it.
+   edited). A fit of that structure on a concrete map was built today by an implementer on another branch
+   (`fs131-wd2`, not landed) — `awayModel_collarFitOut`, which is `exists_collarFitOut` applied on `awayModel`'s gap; its record,
+   `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wd2/plans/FS131-MD2-implementation.md`, shows how each hypothesis is met
+   in practice, and bears on your model M4 too. It is not landed: read it, cite nothing from it.
 5. **Leaf D is not proved again** (inventory item 593). Once `main` is merged, `not_hasRepeatedColour_of_simpleOn` is wave 8's
    `simpleOn_not_hasRepeatedColour`: close it by that citation, or remove the name and have its readers cite wave 8's — yours; say
    which in your record. Before the merge, leave it.
