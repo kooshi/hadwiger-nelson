@@ -13,8 +13,19 @@ transfer, palettes, transitions, interfaces, angular (4,628 lines), then `refere
 
 ## Theorems this phase proved
 
-None of ours. This is a reading: each stage says what the manuscript states, what its argument uses, and what I could and could not
-follow. Statements of ours that its theorems would re-grade, if it stands, are drafted in the last stage and filed nowhere.
+This is a reading: each stage says what the manuscript states, what its argument uses, and what I could and could not follow. No
+theorem of the manuscript is proved or re-proved here. Two small statements of this record's own, and one exact check:
+
+- **EXT-OAI2-SLACK7-L** — a seven-colouring of the plane, proper at every unit pair, whose cyclic centres (the manuscript's
+  Definition 6.1) accumulate. [hand], one mind, prior art owed. § 5.6, § Argument — islands at seven.
+- **EXT-OAI2-SLACK7-P** — a seven-colouring of the plane, proper at every unit pair, with a three-label palette (the manuscript's
+  Definition 5.1) on a set of directions of positive measure. [hand], one mind, prior art owed. § 5.6, § Argument — stripes at seven.
+- **The manuscript's Lemma 8.9 (seven-point certificate) holds**, by interval arithmetic independent of its tables. [tools], exact
+  enclosures, with a planted-fault control. § 3.6; `data/external/oai2/moser_certificate_check.py`.
+
+Not results, and marked where they stand: § 2.6 (the one-class consequence, a sketch with one step unchecked), § 2.3's ZF + DC
+reading, § 3.5's region kill (a question), § 4.3's road (a reading), § 5.3's bridge without Tarski (a reading of their proof).
+Statements of this project that the manuscript re-grades are drafted in stage 5, to be filed by the coordinator.
 
 ## Stage 1 — SAVED: the readback, the dictionary, and what I expect before the proofs
 
@@ -766,3 +777,326 @@ Finset.univ \ S = {i, j}` (a pair is left: step 5), `hcard : (Finset.univ \ (J �
 project's G91 names from the other side ("Six is spent where the ring has exactly two absent colours and where the tip sector
 holds only `p`'s colours"): **a ring is rigid when it is left two labels.** At five every cyclic centre leaves at most two;
 at six the triangle leaves three.
+
+## Stage 5 — SAVED: what changes here, as drafts to be filed; what does not; the bibliography
+
+*Kooshi's word (relayed 2026-10-07): "You may use their proof as any other literature. Cite it, build on it, let's use it to
+slingshot us past anyone else working on this problem." So each draft below is written as the front page would carry it and
+names its slot. Whether and when each is filed is the coordinator's and Kooshi's.*
+
+### 5.0 The grade the drafts carry
+
+- **`6 ≤ χ(ℝ²)`; `χ_m⁰(ℝ²) ≤ χ(ℝ²)` at every `k`; `χ_m⁰(ℝ²) ≥ 6`; the rigidity theorem in Fourier form** — *[external:
+  `[OAIMath2026]` family 158; kernel-checked in the release's own library at its pin, the 70-module cone built and audited
+  here on the standard three axioms (EXT-OAI1, `plans/EXT-OAI1-audit.md` stage 4); its manuscript read in full, no gap found,
+  one mind (EXT-OAI2)]*. **Not in this library's kernel**: row 33's own statement is unchanged.
+- **`χ(ℝ²) ≤ χ_m⁰(ℝ²)`** — not in their Lean; [hand] here (link 2, FS103-M-EASY) and in the manuscript (Lemma 4.3, read).
+- **A composition with a row of ours** carries the weaker of the two grades, and "given MR" wherever a number field's plane is
+  named.
+
+### 5.1 Drafts for the front page
+
+#### `CLAUDE.md`
+
+1. **§ The mission, the table's row D.** *Replaces* "open. Given MR it is one question about measurable colour classes, and
+   both of its answers decide the problem (§ The aim)" *with:*
+   "open at six against seven. **`6 ≤ χ(ℝ²)`** is `[OAIMath2026]`'s — a transfer from arbitrary to measurable colourings and
+   an obstruction to five there; kernel-checked in its own library, built and audited here (EXT-OAI1), read in full
+   (EXT-OAI2), not in this library — so `χ(ℝ²) ∈ {6, 7}`. With no hypothesis it is one question about measurable colour
+   classes, and both of its answers decide the problem (§ The aim)".
+2. **§ The aim, link 1.** *Replaces the whole item* ("1. **Given MR, the plane is the measurable problem.** … what is left is
+   analysis in `ℝ²`.") *with:*
+   "1. **The plane is the measurable problem, with no hypothesis.** `χ(ℝ²) = χ_CP(ℝ²) = χ_m⁰(ℝ²)` — the fewest colours in a
+   Lebesgue-measurable colouring whose unit pairs are bichromatic almost everywhere — at every number of colours
+   (`[OAIMath2026]` Thm 1.3: measure rigidity proved at the real algebraic numbers, where no place is stable; `χ_m⁰ ≤ χ`
+   kernel-checked in its library and audited here; `χ_CP = χ_m⁰` is row 130's). Given MR at a number field (row 120) it also
+   equals `χ(F²)` at each totally real field where every stable place mixes at six colours, ℚ(√635087) and de Grey's field
+   among them (row 128; [hand, two minds]). What is left is analysis in `ℝ²`."
+3. **§ The aim, link 3.** *After* "never only how large each is." *add:* "`[OAIMath2026]`'s six does exactly that: labels on
+   a ring, the graph of adjacent classes, the nerve of the cover (`plans/EXT-OAI2-reading.md` § 3.4)."
+4. **§ The aim, link 4.** *Replaces* "Maps need six for arc maps: `[Woodall1973]`'s steps 1–6 (step 6 by Townsend's lemma) and
+   FS131-E1's lemma in place of his steps 7–8, which have GAPs as printed; for Jordan boundaries, owed (`[Townsend1981]`
+   prints no proof); `[Coulson2004]`'s six is for tiles with an area bound." *with:*
+   "Maps need six, of every kind and almost everywhere, by citation: every measurable colouring proper at almost every unit
+   pair needs six (`[OAIMath2026]` Thm 1.4), Jordan boundaries included. This project's proof for arc maps
+   (`[Woodall1973]`'s steps 1–6, step 6 by Townsend's lemma, FS131-E1's lemma in place of his steps 7–8) stands as a second
+   route."
+5. **§ The aim, link 5.** *Replaces the whole item* ("5. **So, given MR, Hadwiger–Nelson is one question …** … the first move
+   of the upper bound since 1950.") *with:*
+   "5. **So Hadwiger–Nelson is one question: can vanishing holes save the seventh colour?** `χ(ℝ²) = χ_m⁰(ℝ²) ∈ {6, 7}`
+   (`[OAIMath2026]` Thms 1.3, 1.4), and `χ_m⁰(ℝ²) ≥ 7` iff six classes, each free of monochromatic pairs at distances in
+   `[1−ε, 1+ε]`, cannot cover the plane up to holes of density tending to 0 as `ε → 0` (row 131; `[SokolovVoronov2025]` §9's
+   hypothesis). A refutation needs no wild set: it is a sequence of periodic grid-square colourings, wild only in the limit,
+   whose normal form FS-103 holds, or valid fragments on discs of every radius (row 145). Both answers decide the problem.
+   *No* — Voronov's contradiction survives a free colour of vanishing density — gives `χ(ℝ²) = 7`. *Yes* — such a sequence
+   with six colours — gives `χ(ℝ²) = 6`: the first move of the upper bound since 1950. At five the answer is in: the holes
+   stay of density bounded below (`lim µ₅(ε) < 1`; row 131 with Thm 1.4)."
+6. **§ The aim, link 6.** *After its first sentence add:* "A third tool is `[OAIMath2026]`'s nerve: off a locally finite set
+   of centres a measurable five-colouring's smoothed classes are a continuous map into the complete graph on the colours, and
+   covering dimension forces a point with interface continua carrying Sokolov–Voronov's exclusion — no regularity of any
+   class. At six it needs two statements that are false under slack at seven and so belong to a saturated normal form: at
+   most two labels along a ring, and local finiteness of the centres where three classes meet cyclically
+   (`plans/EXT-OAI2-reading.md` § 4.3)."
+7. **§ Frontier, "Where the problem stands", first paragraph.** *Replaces* "**The problem.** χ(ℝ²) ∈ {5, 6, 7}. This
+   repository kernel-certifies the whole classical interval, **5 ≤ χ(ℝ²) ≤ 7** (row 33), on the standard three axioms, its
+   lower end through de Grey's graph (rung B)." *with:*
+   "**The problem.** χ(ℝ²) ∈ {6, 7}: `6 ≤ χ(ℝ²)` is `[OAIMath2026]`'s (family 158; kernel-checked in its own library on the
+   standard three axioms, the cone built and audited here, EXT-OAI1; its manuscript read in full, EXT-OAI2). This repository's
+   own kernel holds the classical interval, **5 ≤ χ(ℝ²) ≤ 7** (row 33), on the standard three axioms, its lower end through
+   de Grey's graph (rung B)."
+   *And replaces* "**Given MR, the plane's number is a field's and a measurable one** (rows 128, 130):
+   `χ(ℝ²) = χ(ℚ(√635087)²) = χ_CP(ℝ²) = χ_m⁰(ℝ²)`, the least number of colours in a measurable colouring proper at almost
+   every unit pair — [hand], two blind minds for the collapse, two for the last equality; Falconer's everywhere-proper `χ_m`
+   is one step further, a GAP." *with:*
+   "**The plane's number is a measurable one with no hypothesis, and given MR a field's**: `χ(ℝ²) = χ_CP(ℝ²) = χ_m⁰(ℝ²)`,
+   the least number of colours in a measurable colouring proper at almost every unit pair (`[OAIMath2026]` Thm 1.3 with row
+   130), and given MR(ℚ(√635087)) it is `χ(ℚ(√635087)²)` (row 128; [hand], two blind minds). Falconer's everywhere-proper
+   `χ_m` is one step further, a GAP; by Thm 1.4 `χ_m(ℝ²) ≥ χ_m⁰(ℝ²) ≥ 6`."
+8. **§ Frontier, item 31, its last sentence.** *Replaces* "Bearing on the answer: no value moved; of door (A)'s local
+   statement …" *by prefixing:* "Bearing on the answer: the value moved from outside — `χ(ℝ²) ∈ {6, 7}`, `[OAIMath2026]` —
+   and five is closed at every regularity; this project moved none. What is open is this item's question at six; of door
+   (A)'s local statement …" (the rest unchanged).
+9. **§ Grokkings, "The theory in one paragraph".** *Replaces* "No value has moved: χ(ℝ²) ∈ {5, 6, 7} (row 33)." *with:*
+   "This project has moved no value; `[OAIMath2026]` has: every measurable colouring proper at almost every unit pair needs
+   six, and `χ(ℝ²) = χ_m⁰(ℝ²)` with no hypothesis, so χ(ℝ²) ∈ {6, 7} and the stability question at six is the whole problem."
+   *And in the same paragraph replaces* "given MR, χ(F²) = χ(ℝ²) = χ_m⁰(ℝ²)" *with* "χ(ℝ²) = χ_m⁰(ℝ²) (`[OAIMath2026]`), and
+   given MR χ(F²) = χ(ℝ²)".
+10. **§ The local–global conjecture.** *Replaces* "the value-skipping that motivates the belief is itself compatible with
+    five (G64)." *with:* "the value-skipping that motivated the belief was compatible with five until `[OAIMath2026]`; now
+    some real number field's plane needs six (its transfer reads the colouring only on the algebraic plane), so `L(F) ≥ 6`
+    is attained with `χ(F²) ≥ 6` somewhere, and the conjecture's open content is which fields and whether six or seven."
+11. **§ Paths forward, the ranked table's row 3 (FS-104).** *Replaces the row's question and bearing with:* "**answered
+    YES by citation**: `χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6` (`[OAIMath2026]` Thm 1.4 with row 130). What the stub still carries: the
+    null-set step `χ_m⁰ = χ_m` (now, given a ZF + DC reading of the transfer, the Shelah–Soifer axiom question for the
+    plane — `plans/EXT-OAI2-reading.md` § 2.3), `χ_B` against `χ_m`, and the ZF + DC audit. Re-ranking is Poros's."
+
+#### `LEDGER.md`
+
+- **Row 33.** The audit's sentence (`plans/EXT-OAI1-audit.md` stage 7 (c)) stands as drafted; *append to it:* "Its manuscript
+  read in full, no gap found, one mind (`plans/EXT-OAI2-reading.md`)."
+- **Row 107 (the bridge).** *Append:* "**A second route to the chromatic-number half, with no Tarski** (EXT-OAI2 § 5.3; a
+  reading of `[OAIMath2026]`'s proof, one mind): its forward transfer reads the colouring only on the algebraic plane, so a
+  proper `k`-colouring of `ℚ̄`'s plane — which exists iff every real number field's plane is `k`-colourable — gives a weak
+  measurable one, and Lemma 4.3 with de Bruijn–Erdős a proper one of `ℝ²`: `χ(ℝ²) = sup_F χ(F²)` without
+  `RealAlgebraicDescent`; the redrawing statement still needs it."
+- **Row 120.** *Append to its Prior art:* "Since 2026-10-06 the nearest in print is `[OAIMath2026]` Thm 2.3 (family 158):
+  every probability on the dual of the algebraic plane `ℚ̄`, invariant under all algebraic rotations and null on the
+  continuous characters, is Haar — proved by a Furstenberg–Zimmer compact tower, a relative singularity lemma and a radial
+  subadditivity `m(A)m(B) ≤ m(|A − B|)`, with no entropy; kernel-checked there in Fourier form (`wild_fourier`). It uses
+  that the rotation group is divisible and the field closed under square roots, and does not give MR(F) for a number field
+  (EXT-OAI2 § 2.2): this row's statement and grade are unchanged."
+- **Row 125.** *Append:* "**Since `[OAIMath2026]`:** the conjunct `χ_CP(ℝ²) ≥ 6` holds (its Thm 1.4 with row 130), so given
+  MR `χ(ℚ(√167)²) ≥ 6` ⟺ `PL_∃(23, 43)`."
+- **Row 128.** *Append before* "**Not claimed:**": "**Since `[OAIMath2026]` (2026-10-06):** the plane half,
+  `χ(ℝ²) = χ_CP(ℝ²)`, holds with no MR — this row's load-bearing step run at `ℝ_alg`, where no place is stable, with a
+  rigidity theorem proved there; the field half, `χ(F²) = χ(ℝ²)`, still needs MR(F). `χ_CP(ℝ²) = 5` is excluded (its Thm
+  1.4): given MR, `χ(ℚ(√635087)²) = χ(F_dG²) ∈ {6, 7}`, a finite triangle-free six-chromatic unit-distance graph exists, and
+  over totally real fields S_nf ⟺ `χ(ℝ²) = 7` and no field with a non-6-thick stable place has `χ(F²) = 6`."
+  *And replaces in its Prior art* "not found in print (FS103-G: …)" *with:* "the plane equality is in print outright in
+  `[OAIMath2026]` family 158 (manuscript dated 2026-09-23, released 2026-10-06; FS-103 is 2026-09-26 and conditional on MR) —
+  independent, and theirs is the theorem; the field equality and the selection over stable places not found in print
+  (FS103-G: …)".
+- **Row 129.** *Append:* "`[OAIMath2026]`'s rigidity at `ℝ_alg`, run for one class, would give `α₁(ℝ²) = m₁(ℝ²)` and
+  `χ_f,0(ℝ²) = χ_f(ℝ²)` with no MR (EXT-OAI2 § 2.6: a sketch, one step unchecked; a job of its own)."
+- **Row 130.** *Replaces* "Given MR (row 128): `χ(ℝ²) = χ_m⁰(ℝ²)`, so `χ(ℝ²) ≥ 6` iff every measurable 5-colouring of the
+  plane has a positive-measure set of monochromatic unit pairs (the "only if" half unconditional)." *with:*
+  "With no hypothesis (`[OAIMath2026]` Thm 1.3; `χ_m⁰ ≤ χ` kernel-checked there and audited here, EXT-OAI1):
+  `χ(ℝ²) = χ_m⁰(ℝ²)`. And every measurable 5-colouring of the plane has a positive-measure set of monochromatic unit pairs
+  (its Thm 1.4): `χ(ℝ²) = χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6`, hence `χ_m(ℝ²) ≥ 6` and `χ_B(ℝ²) ≥ 6`." *And appends to its Prior art:*
+  "The equality with `χ(ℝ²)` is `[OAIMath2026]`'s; its Lemma 4.3 prints (D1)'s density-point form of FS103-M-D; its
+  references add `[BourgeatHeinrichMelottiRobert2015]` (a probabilistic Hadwiger–Nelson problem, 2015 — unheld, unread: the
+  averaging device's attribution to the 2018–19 wiki is owed a check against it)."
+- **Row 131.** *Append:* "**At five the question is answered** (`[OAIMath2026]` Thm 1.4): `lim_{ε→0} µ₅(ε) < 1`, with no
+  explicit constant."
+- **Row 132.** *Append:* "**Since `[OAIMath2026]`:** every a.e.-proper measurable colouring needs six (its Thm 1.4), so
+  'maps need six' holds for every kind of boundary, almost everywhere, by citation, and 'for Jordan boundaries, owed' is
+  closed that way; its Prop. 7.1 derives Sokolov–Voronov's two-colour exclusion for continua, with no map."
+- **Row 140.** *Append:* "`χ_m⁰(ℝ²) ≥ 6` is held by citation (`[OAIMath2026]` Thm 1.4), reached without the map step; the
+  class of M2-REDUCE-C at five is empty."
+- **Row 154.** *Append:* "The right side holds by citation (`[OAIMath2026]` Thm 1.4): no a.e.-proper five-colouring exists,
+  and the equivalence's two sides are both true."
+- **§ The claim list, "Ours".** *After* "the reduction of six at ℚ(√167) to `χ_CP(ℝ²) ≥ 6` (rows 123–125)" *add:*
+  "(`χ_CP(ℝ²) ≥ 6` itself, and `χ(ℝ²) = χ_m⁰(ℝ²)` with no hypothesis, are `[OAIMath2026]`'s)"; **"Not ours"** *add:*
+  "the plane's number as a measurable one with no hypothesis, six for measurable colourings proper almost everywhere, and
+  rigidity of rotation-invariant laws on the dual of the algebraic plane (`[OAIMath2026]` family 158, 2026)."
+
+#### Registered predictions, scored
+
+P1 0.85 met · P2 0.70 met · P3 0.60 half met · P4 0.50 met · P5 0.90 met in substance, too narrow · P6 0.50 met · P7 0.60
+met · P8 0.75 half met · P9 0.60 / 0.50 both lost (I followed every step). The stub's own registration — "`χ_CP(ℝ²) ≥ 6`
+proved — 0.02" (R1) and the advisor's "P ≈ 0.03 (it is `χ_m`-strength, open 45 years)" (`plans/STUB-cp-plane-six.md` lines
+76–80) — is scored **against**: proved, by another party, within eleven days of the registration.
+
+#### Proposed grokkings (G67's form), for `.claude/skills/grokkings/SKILL.md`
+
+* **G93 — The plane's number is a measurable one, by rigidity where no place is stable. [external: `[OAIMath2026]` Thm 1.3,
+  kernel-checked there, audited and read here; the reading one mind]** `χ(ℝ²) = χ_m⁰(ℝ²)` with no hypothesis: restrict a
+  colouring to the algebraic plane, average over its rigid motions, keep the part of each class's indicator that is
+  continuous in the plane's topology (a conditional expectation), and the rest is uncorrelated at every algebraic
+  translation because a rotation-invariant law on the dual with no continuous part is Haar. It is G81 at its limit — at
+  `ℝ_alg` no place is stable, the rotation group is divisible and every small real is a sum of two unit vectors — and it is
+  why no number field was needed for the plane. *Do: pose every question about `χ(ℝ²)` for measurable colourings proper at
+  almost every unit pair, and cite the transfer; keep "given MR" only where a number field's plane is named; when a rigidity
+  question about a group action resists at a finitely generated or number-field level, ask whether the question's consumer
+  can be moved to the divisible hull first. It forbids a value of `χ(ℝ²)` different from `χ_m⁰(ℝ²)`; nothing kills it but
+  a defect the kernel did not see in the statement's fit (the audit read the statement against its challenge).*
+* **G94 — The nerve replaces the map: what an exclusion argument needs from regularity is a continuous map to a graph and
+  connected fibres. [external for five (`[OAIMath2026]` §§ 6–7); the six-colour reading one mind]** Off the centres where
+  three classes meet cyclically, a measurable colouring's smoothed and thresholded classes land in the complete graph on the
+  colours; covering dimension forces an essential loop; fibres over edge midpoints are continua with Sokolov–Voronov's
+  exclusion. No curve, perimeter or saturation is used. *Do: when a route stalls at making a colouring a map (route M's
+  REG-J′, curved pencils, integer radii), ask first whether its consumer reads arcs or only a point with interface continua
+  and limiting directions; if the latter, the statement to prove is local finiteness of cyclic centres and nothing about
+  arcs. Killing test of the six-colour reading: a consumer in rows 134–138 or 145–150 that cannot be restated for continua.*
+* **G95 — Tightness is not regularity: the palette bound and the local finiteness of vertices are false under slack.
+  [hand, one mind (EXT-OAI2 § 4.3; entries `EXT-OAI2-SLACK7-L`, `EXT-OAI2-SLACK7-P`)]** In the hexagonal seven-colouring,
+  slack at a vertex admits accumulating islands and three-colour stripes along a unit circle. So a statement of the form
+  "every measurable `k`-colouring has locally finite vertices" or "at most two colours along a ring" can be true only
+  where no colouring has slack — at five, of an empty class — and at six it must be posed for a normal form. *Do: before
+  transplanting a five-colour lemma of `[OAIMath2026]` to six, plant slack in the hexagonal seven-colouring and see whether
+  the lemma survives; if it does not, pose it for honest saturated colourings (rows 140, 143). Killing test: a
+  slack-sensitive statement proved at six for all measurable colourings — it would show no six-colouring has slack at a
+  vertex, a strong rigidity in itself.*
+
+**Instances and amendments to existing entries** (for `plans/GROKKING-INSTANCES.md` or in place, the coordinator's choice):
+G25 — the forcing ladder in measurable form: the kills of `[OAIMath2026]`'s endgame are a unit pair, a unit triangle and
+the Moser spindle, by the number of labels a configuration leaves (one, two, three); at six the next rung is a 5-chromatic
+graph in a four-label region. G60 — the six that density cannot give was given by fit (§ 3.4). G64 — "equally consistent
+with every field being `≤ 5` and `χ(ℝ²) = 5`" is no longer so: W now reads `χ(ℝ²) ≠ 6` ⟺ `χ(ℝ²) = 7`. G80 — a second use
+of the same resource: divisibility in place of height counting. G81 — the limit case `ℝ_alg`. G82 — at five the stability
+question is answered. G86 — their method reads no tiles and has no Siamese hypothesis. G91 — the ring re-derived in
+measure, for every measurable colouring (the 60° exclusion and the binary alternation are stated for every `k` in their
+Lean).
+
+### 5.2 What it leaves untouched
+
+| held here | why untouched |
+|---|---|
+| **Six against seven**: row 131 at `k = 6` (`χ_m⁰(ℝ²) ≥ 7` ⟺ `lim µ₆(ε) < 1`), rows 133, 139 (the two routes; each third statement the answer restated), rows 134–138 and 145–150 (tight six-maps, the four-colour vertex, (Q) rings), row 153 | nothing in the manuscript is about six: "The remaining alternatives six and seven are unresolved" (`M/introduction.tex:70`); its five-only statements have no six-colour form held by anyone (§ 4.3). With Thm 1.3 these rows now bear on `χ(ℝ²)` itself, with no MR |
+| **The field planes**: rows 120–127 (MR at number fields, `χ(ℚ(√47)²) = 5`, the main clause through five, the type-(B) fields), row 128's field half, row 129's field form | their rigidity is at `ℝ_alg` and does not descend (§ 2.2); every one of these still reads "given MR" |
+| **The local–global conjecture** (G48) and its exposed predictions: at least six at ℚ(√167); the windows (G56, G59) | untouched in statement. One thing moved beside it: some real number field's plane needs six, so the conjecture's `L ≥ 6` range is inhabited by a field with `χ(F²) ≥ 6` |
+| Rows 140–144 at six (saturation, contact, ladders, the top colour) | bypassed at five, **needed** at six as the normal form (§ 4.3) |
+| Everything in this library's kernel (rows 1–119 as graded, 127; the 6,334 audited records) | a different library at a different pin; nothing of theirs is imported |
+| The null-set step `χ_m⁰ = χ_m` (FS103-M-D), `χ_B` against `χ_m` | not addressed by them; their Lemma 4.3 is its first half |
+
+### 5.3 Named hypotheses (`scripts/assumptions-ledger.txt`)
+
+| hypothesis | after `[OAIMath2026]` |
+|---|---|
+| `HadwigerNelson.Bridge.RealAlgebraicDescent` (six consumers) | **an alternative discharge exists for the chromatic-number consumers** (`chromaticNumber_plane_le_iSup_numberField_of_descent`, `…_eq_iSup_…`, `…_ne_six_iff_…`, `exists_numberField_chromaticNumber_eq_plane_…`): their forward transfer from a colouring of the algebraic plane, then the converse (Lemma 4.3 is in their Lean; the de Bruijn–Erdős step is not). Not for `exists_numberField_drawing_of_descent`. A question for de Bruijn's lane: the port is their transfer arm, 33 modules at Lean v4.34.1 against this library's v4.32.0 |
+| `HadwigerNelson.Plane.Row130M1` | untouched (an a.e.-proper colouring gives a CP one); the composite `χ_m⁰ ≤ χ` is theirs by a route that does not pass through it |
+| `SpectralChain.Interface.MR`, `.PE2`, `.EFPlus` | untouched: number fields |
+| `SpectralChain.BochnerHerglotz`, `.InvariantMeasureOnClosed`, `SpectralInputs.BochnerOn` | their cone holds spectral measures on the dual of a countable discrete abelian group, an invariant mean and stationary measures (`PlaneSpectrum/SpectralMeasure`, `Representations`, `InvariantMean`, `CompactFactors/Stationary`); whether those statements are these hypotheses is a question for de Bruijn's lane, not read here |
+| `HadwigerNelson.Plane.Voronov11`, `inline:FragmentsAtEveryRadius`, `inline:SixTarget`, `inline:SevenTarget` and the rest | untouched |
+
+### 5.4 Stubs: what the record job or the asking lane may want (drafts; I write no stub)
+
+- **FS-104** (`plans/STUB-cp-plane-six.md`): banner — "Answered YES by citation, 2026-10-07: `χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6`,
+  `[OAIMath2026]` Thm 1.4 with row 130. Items (1)–(3) of the 2026-09-26 banner stand; routes (0)–(d) are closed as routes to
+  this question."
+- **FS-123** (the Siamese class): add the region kill as a route (§ 3.5) with its search request.
+- **FS-124** (the (Q) ring): add the dictionary — their diagonal states are (Q) arcs; `two_state_impossible` at `k = 6`.
+- **FS-126, FS-127, FS-128, FS-120**: FS-126's curved pencils are not consumed by the nerve route; FS-127 re-aims at
+  [L₆] and [P₆] on honest saturated colourings; FS-128's and FS-120's five-colour halves are closed by citation.
+- **Candidates to mint** (each a question, the asking lane's to pose): (i) *the one-class transfer* — `α₁(ℝ²) = m₁(ℝ²)`
+  from Thm 2.3 (§ 2.6); (ii) *six by the nerve* — [P₆] first (§ 4.3); (iii) *the bridge without Tarski* (§ 5.3), with the
+  port's price; (iv) *the axiom question* — is the forward transfer in ZF + DC, making the Shelah–Soifer question for the
+  plane the null-set step (§ 2.3); (v) *MR(F) by compact extensions* — whether moves 2–4 of § 2.2 survive at a number field
+  with move 5 replaced (P2 says not as written).
+
+### 5.5 Their bibliography against ours
+
+Thirty-three entries. **Held here under another key:** `GwynStavrianos2020` = `[GwynStavrianos2022]` (they cite the arXiv
+numbering, "Lemma 2.10 and Theorem 2.11"; ours cites the journal's, "Lemma 2, Theorem 2" — the two numberings are of one
+paper, arXiv:2008.07987, not matched line by line here); `Voronov2025Interval` = `[Voronov2023]` (arXiv:2304.10163, their
+v3); `MoserMoser1961` = `[Moser1961]`; `MatolcsiRuzsaVargaZsamboki2025` = `[MatolcsiEtAl2025]`; `Parts2020Human` =
+`[Parts2020hv]`; `Parts2020Minimization` = `[Parts2020a]`; `Outside2026` = `[Outside2026]` (§ A row; the footnote's target).
+**Held under the same key:** `Falconer1981`, `Payne2009`, `SokolovVoronov2025`, `Townsend1981`, `Townsend2005`,
+`Woodall1973`, `deBruijnErdos1951`, `deGrey2018`, `Heule2018`, `ExooIsmailescu2020`.
+
+**Not held (sixteen)** — proposed rows for `BIBLIOGRAPHY.md` § C (titles seen in a reference list), each "cited by
+`[OAIMath2026]` family 158; **not held, not read**"; the first six are worth holding (a URL and a target file name each, for
+the coordinator; I fetched nothing):
+
+| proposed key | work | what theirs rests on it | fetch |
+|---|---|---|---|
+| `[Furstenberg1977]` | H. Furstenberg, *Ergodic behavior of diagonal measures and a theorem of Szemerédi on arithmetic progressions*, J. Analyse Math. 31 (1977) 204–256 | the compact / weak-mixing dichotomy; "Lemmas 6.6 and 7.2" for finite-rank modules and bounded bases (their Lemma 3.1); the multiple-average induction (Lemma 3.2) | doi 10.1007/BF02813304 → `library/pdf/furstenberg-1977-diagonal-measures.pdf` |
+| `[Zimmer1976ext]`, `[Zimmer1976gds]` | R. J. Zimmer, *Extensions of ergodic group actions* and *Ergodic actions with generalized discrete spectrum*, Illinois J. Math. 20 (1976) | the structure theorem for group actions | doi 10.1215/ijm/1256049780, 10.1215/ijm/1256049648 → `library/pdf/zimmer-1976-extensions.pdf`, `zimmer-1976-generalized-discrete-spectrum.pdf` |
+| `[Jamneshan2023]`, `[Jamneshan2026corr]` | A. Jamneshan, *An uncountable Furstenberg–Zimmer structure theory*, Ergodic Theory Dynam. Systems 43(7) (2023) 2404–2436, and its Corrigendum (2026) | "the corrected modern account … supplies further context" | doi 10.1017/etds.2022.43, 10.1017/etds.2025.10214 |
+| `[BourgeatHeinrichMelottiRobert2015]` | T. Bourgeat, M. Heinrich, P. Melotti, J.-M. Robert, *A probabilistic Hadwiger–Nelson problem*, arXiv:1501.02441 (2015) | Cor. 1.5 (ii), "Theorems 1–2"; **bears on row 130's attribution of the averaging device** | `https://arxiv.org/abs/1501.02441` → `library/pdf/arXiv-1501.02441-probabilistic-hadwiger-nelson.pdf` |
+| `[DeroinKleptsynNavas2008]` | B. Deroin, V. Kleptsyn, A. Navas, *On the question of ergodicity for minimal group actions on the circle*, arXiv:0806.1974 | § 2.1: Sullivan's expansion and bounded distortion (their Lemma 5.5) | `https://arxiv.org/abs/0806.1974` → `library/pdf/arXiv-0806.1974-ergodicity-circle-actions.pdf` |
+| `[Crum1956]`, `[GneitingSasvari1999]` | M. M. Crum, *On positive-definite functions*, Proc. London Math. Soc. (3) 6 (1956) 548–560; T. Gneiting, Z. Sasvári, *The characterization problem for isotropic covariance functions*, Math. Geology 31 (1999) | the classical analogue of their Thm 2.3 (a measurable radial positive-definite function is continuous plus a multiple of `1_{0}`); **the classical home of row 122's FR-1** | doi 10.1112/plms/s3-6.4.548, 10.1023/A:1007597415185 |
+| `[BekkaHarpeValette2008]` | B. Bekka, P. de la Harpe, A. Valette, *Kazhdan's Property (T)*, Cambridge 2008 | appendices: amenability (G.2.1, G.2.2, G.5.1), Bochner (D.2.2), the abelian spectral theorem (D.3.1) | doi 10.1017/CBO9780511542749 |
+| `[Tao2008ergodicity]` | T. Tao, *254A, Lecture 9: Ergodicity* (2008) | disintegration, "Theorem 4 and Remark 5" | terrytao.wordpress.com/2008/02/04/254a-lecture-9-ergodicity/ |
+| `[Hadwiger1961]`, `[Soifer2003history]`, `[Folner1955]`, `[vonNeumann1929]`, `[Hatcher2002]` | H. Hadwiger, *Ungelöste Probleme Nr. 40*, Elem. Math. 16 (1961); A. Soifer, *The 50th anniversary of one problem*, Math. Competitions 16 (2003); E. Følner, *On groups with full Banach mean value*, Math. Scand. 3 (1955); J. von Neumann, *Zur allgemeinen Theorie des Masses*, Fund. Math. 13 (1929); A. Hatcher, *Algebraic Topology* (2002) | history; invariant means; Brouwer's theorem and reduced words | not needed in the library |
+
+**`[OAIMath2026]`'s own row**: the audit's drafted cells (`plans/EXT-OAI1-audit.md` stage 7 (b)) stand; *its read-status
+cell, replacing* "the other seven sections: see EXT-OAI2" *with:* "**Manuscript: read in full** (EXT-OAI2,
+`plans/EXT-OAI2-reading.md`, 2026-10-07): all eight sections, 4,628 lines of TeX; §§ 2–4 (the transfer and its rigidity
+theorem) and §§ 5–8 (the obstruction) each followed step by step with the reworked steps listed, no gap found, one mind, one
+pass; its seven-point certificate re-checked independently (`data/external/oai2/moser_certificate_check.py`)." *And its
+third cell, appended:* "On it rest, if filed: `CLAUDE.md` § The aim links 1, 4, 5 and § Frontier's first paragraph; rows
+125, 128, 130, 131, 132, 140, 154's clauses 'since `[OAIMath2026]`'."
+
+### 5.6 The two calibration statements, as entries
+
+derivation: EXT-OAI2-SLACK7-L
+  statement: there is a colouring of the plane with seven colours, proper at every unit pair and with Lebesgue-measurable classes, whose set of points where three colours have pairwise transition sets of area at least c|h| at arbitrarily small displacements h in every ball about the point is not locally finite
+  uses only: the hexagonal seven-colouring with circumradius 2/5, in which two points of one hexagon are at most 0.8 apart and points of distinct hexagons of one colour are more than 1.03 apart; a vertex v of three hexagons of colours 1, 2, 3; discs of colour 3 centred on the 1–2 edge at distances 2^(−n) from v, inside B(v, 0.03)
+  not claimed: any such colouring with six colours; that every seven-colouring has slack at a vertex; that the accumulation survives saturation
+  argument: § Argument — islands at seven
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the colouring itself — the hexagonal seven-colouring of `M/introduction.tex:123–135` with the discs of radius 4^(−n) centred at distance 2^(−n) from v along the 1–2 edge, n ≥ 6
+  prior art: owed
+  handoff: none — a calibration for the reading of `[OAIMath2026]` Theorem 6.5 at other colour counts; the coordinator decides whether it is briefed for the kernel
+
+derivation: EXT-OAI2-SLACK7-P
+  statement: there is a colouring of the plane with seven colours, proper at every unit pair and with Lebesgue-measurable classes, and a point x, such that three labels have positive weight in a weak-* limit of typical circle samples about x on a set of directions of positive measure
+  uses only: the same hexagonal colouring and vertex v; a point x at distance 1 from v; on the part of B(v, 0.03) outside the unit circle about x, angular stripes about x of colours 1, 2, 3 with angular period 2^(−n) on the annulus 1 + 2^(−n−1) < |p − x| ≤ 1 + 2^(−n)
+  not claimed: any such colouring with six colours; a three-label palette at every centre; anything about colourings without slack
+  argument: § Argument — stripes at seven
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the colouring itself, with samples on the circles about x of radii 1 + (3/4)·2^(−n)
+  prior art: owed
+  handoff: none — a calibration for the reading of `[OAIMath2026]` Proposition 5.6 at other colour counts; the coordinator decides whether it is briefed for the kernel
+
+control: slack7-margins
+  of: EXT-OAI2-SLACK7-L — the two margins the recolouring needs, with ε = 0.03
+  run: python3 -c "print((21**0.5-2)*0.4-0.03>1, 0.8+0.03<1)"
+  expect: True True
+  fault: python3 -c "print((21**0.5-2)*0.4-0.05>1, 0.8+0.05<1)"
+
+control: seven-point-certificate
+  of: EXT-OAI2-SLACK7-P — not of that entry's mathematics; the independent check of the manuscript's Lemma 8.9 that this record cites in § 3.6, kept runnable here
+  run: python3 ../data/external/oai2/moser_certificate_check.py | tail -1
+  expect: CERTIFICATE HOLDS
+  fault: python3 ../data/external/oai2/moser_certificate_check.py --fault | tail -1
+
+### Argument — islands at seven
+
+Let `c` be the hexagonal seven-colouring with circumradius `2/5`, `v` a vertex where hexagons `T₁, T₂, T₃` of colours 1, 2, 3
+meet, `ε = 0.03`. For `n ≥ 6` let `D_n` be the open disc of radius `4^{−n}` centred at the point of the common edge of `T₁`
+and `T₂` at distance `2^{−n}` from `v`; the `D_n` are disjoint and lie in `B(v, ε)`. Recolour every `D_n` with colour 3.
+*Proper:* a point of colour 3 is in a hexagon of colour 3 or within `ε` of `v ∈ T₃`. Two points of `T₃ ∪ ⋃D_n` are at most
+`0.8 + ε < 1` apart (one in `T₃`), or less than `2ε` apart (both in discs). A point of some `D_n` and a point of another
+hexagon of colour 3 are more than `1.03 − ε > 1` apart, since `v ∈ T₃`. Colours 1 and 2 only lost points. So no unit pair is
+monochromatic. *Cyclic centres:* at each of the two points where `∂D_n` meets the edge, every ball contains a piece of the
+`T₁`–`T₂` edge and arcs of `∂D_n` bounding `T₁` and `T₂`, each of positive length, so each of the pairs 12, 13, 23 has a
+transition set of area at least `c|h|` for small `h` in a fixed direction transverse to it; the three pairs form a cycle.
+These points tend to `v`.
+
+### Argument — stripes at seven
+
+Same `c`, `v`, `ε`; fix `x` with `|x − v| = 1`. On `U = B(v, ε) ∩ {p : |p − x| > 1}` set the colour of `p = x + ρe^{iθ}` to
+`1 + (⌊3·2^{n}θ⌋ mod 3)` when `1 + 2^{−n−1} < ρ ≤ 1 + 2^{−n}`. Every recoloured point is within `ε` of `v`, which lies in
+hexagons of each of the colours 1, 2, 3, so the argument above gives properness at every unit pair. The classes are countable
+unions of polar rectangles and differences of measurable sets. For `r_n = 1 + (3/4)2^{−n}` the circle about `x` of radius
+`r_n` meets `U` in open stripes off finitely many points, so `(x, r_n)` is a typical circle sampling there, and on the arc
+`J` of directions `e` with `x + r_n e ∈ U` for all large `n` (an arc of positive length: `U` contains a one-sided
+neighbourhood of an arc of the unit circle about `x` through `v`) the sample `e ↦ (a_i(x + r_n e))_i` is `2^{−n}`-periodic
+with each of its first three coordinates equal to 1 on a third of each period. Its weak-* limit on `J` is `(1/3, 1/3, 1/3)`
+in those coordinates. So labels 1, 2, 3 all have positive weight on `J`.
