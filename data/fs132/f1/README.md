@@ -35,3 +35,39 @@ Keryx's two workflow sentences (`.claude/output-styles/keryx.md`) 2 of 2 present
 | 8 | proof atlas | check, re-point, rebuild | `visualizations/proof-atlas/README.md` | — |
 
 **Units seen to stop already (listed, left unfiled or filed as stated):** see the stops list in the report; first sightings are recorded in each stage below.
+
+## Stage 2 — SAVED: `CLAUDE.md` and `LEDGER.md` (items 1–2)
+
+Script `data/fs132/f1/stage2_claude_ledger.py` (helpers `flib.py`: every old string asserted to occur exactly once, whitespace-tolerant; every draft
+extracted from its source by script, nothing retyped); its assertion log `data/fs132/f1/stage2-log.txt`. The assembled open-milestones paragraph
+(M7, M8 applied) is `data/fs132/f1/open-milestones-paragraph.txt`, shared by stage 4.
+
+**`CLAUDE.md`** (R `plans/EXT-OAI2-reading.md` § 5.1): units 1 (row D), 2 (link 1, span), 3 (link 3, after "never only how large each is."), 4 (link 4),
+5 (link 5, span), 6 (link 6, after its first sentence, with **M10**), 7 (Frontier ¶1, both replacements), 8 (item 31, prefix), 9 (theory ¶, both
+replacements), 10 (local–global). **Unit 11 not filed** (as ruled). 1b: P's top-three rows replace the three ranked rows (P `plans/POROS-2026-10-07-after-release.md`
+§ Draft re-rank, "The top three …") with **M9** (4–72 | 69). 1c: P's open-milestones paragraph replaces "**Next, in Kooshi's order**" up to "**M63**", with
+**M7**, **M8**. Merges used: **M1** (mission ¶1), **M2** (upper-end row), **M3** (standard of evidence ¶1), **M4** (three edits to the Last-updated line),
+**M5** (Grades line), **M6** (three edits in "The program"), **M10**, **M9**, **M7**, **M8**. **M11**: the pattern `G1 – G92` (any dash or "to") occurs 0 times in
+`CLAUDE.md`, so nothing was changed (the grokkings' "G1 to G92" is in the skill's front matter: M13, stage 3).
+
+**`LEDGER.md`** (R § 5.1; A `plans/EXT-OAI1-audit.md` Stage 7 (c)): row 33 (A's sentence with its italics, then R's sentence, appended at the end of the result cell
+after "The colouring is classical; ours is the certificate."); rows 107, 120, 125, 129, 131, 132, 140, 154 (appended at the end of the result cell); row 128
+(R's sentence inserted before "**Not claimed:**"; "not found in print (FS103-G:" replaced by the draft's words, the rest of that parenthesis unchanged); row 130
+(replacement; the addition placed at the end of the Prior-art sentences, before "**Naming:**"); claim list "Ours" (after "(rows 123–125)") and "Not ours"
+(appended as the list's last item, the closing full stop of the previous item turned into "; "). No row added, none renumbered.
+
+**Sizes.** `CLAUDE.md` 52,599 → 55,413 bytes (limit 80,000); grokkings file 170,280 (stage 3 will change it).
+
+**Gates on this stage's tree.** `tools/claude_md_fact_audit.py --base f40d6bda`: exit 1, five lost tokens, saved `data/fs132/f1/audit-stage2.txt` — listed below, **not
+allow-listed**. `--dupes`: exit 0 (`data/fs132/f1/dupes-stage2.txt`).
+
+| lost token | the draft unit that removed it | lives elsewhere (own `rg`, outside the audit's join) |
+|---|---|---|
+| `data/fs129/index/lean-order-corrected.md`, chunk `FS129-L1` | 1c: P's open-milestones paragraph replaces the "Next, in Kooshi's order" sentence that held "from the input FS129-L1 writes (`plans/LEAN-BACKLOG.md`, on `data/fs129/index/lean-order-corrected.md`)" | yes: `plans/LEAN-BACKLOG.md`, `plans/STUB-lean-backlog.md`, `plans/FS129-close-inventory.md`, `plans/FS129-Z2-record.md`, `tools/fs129_l1_backlog.py`, `data/fs129/l1/README.md`, `data/fs129/reports/FS129-L1.md`; `plans/LEAN-BACKLOG.md` is still named by M8's sentence |
+| tag `[hand, two minds each]` | R unit 2 (link 1 replaced as a whole item) | yes: `plans/STUB-regularity-wall.md`; the link's new text carries `[hand, two minds]` (row 128) |
+| chunk `4–74` | M9 (the table row "4–74 | 71 more" reads "4–72 | 69 more") | yes in unrelated contexts only (`BIBLIOGRAPHY.md`, `plans/FS129-close-inventory.md`, `plans/FS131-E6-derivation.md`); no other file holds this table row |
+
+**Stops so far:** none in `CLAUDE.md` or `LEDGER.md`. **Observations for the coordinator** (not edits): (i) row 130's "Prior art" addition is placed before
+"**Naming:**" (the draft says "append to its Prior art"; the cell's last sentence is the Naming one); (ii) R's G93 and unit texts use the grade "[external: …]" while M5
+adds "[kernel, outside]" to § Notation — no filed text uses the new word yet; (iii) unit 9's second replacement leaves "…, and given MR χ(F²) = χ(ℝ²), the least k
+with a measurable k-colouring …" — the clause "the least k" now follows "χ(F²) = χ(ℝ²)" (filed as drafted).
