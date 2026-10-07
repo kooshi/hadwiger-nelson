@@ -21,6 +21,9 @@ plan's § PA.3.
 (Filled stage by stage; each line: the entry, its verdict, its grade, its address.)
 
 - Stage 1 proved none (a readback and an opening).
+- Stage 2 proved none (recognition).
+- **C133-DENS-CLASS** — the reverse-Fatou step at its class (any σ-finite space, any window sequence, mean `≥ α` almost everywhere): TRUE. [hand], one mind. Stage 3, § Argument for C133-DENS.
+- **C133-DENS** (posed) — TRUE. [derived] from C133-DENS-CLASS. Stage 3.
 
 ## Stage 1 — SAVED: the readback, the definitions at their pages, and the opening
 
@@ -164,3 +167,98 @@ Both applied at once. **Adopted, both.** (2) *The release's Proposition 4.2 with
 one changed step is the cross term. Same content. (3) *Constraint satisfaction on amenable groups.* Explains the shape; predicts
 nothing more. **Class.** Finitely many labels; for each algebraic distance `r` in a countable set, a set of forbidden label pairs.
 **Finding:** C133-HOM is an instance of that class statement (entry C133-PAIR, stage 6); the argument is the same line for line.
+
+## Stage 3 — SAVED: C133-DENS, the unchecked step — derived
+
+**Verdict: TRUE as posed, and at a wider class.** The posed statement is the entry `C133-DENS`, quoted from the stub; the statement
+its argument carries is `C133-DENS-CLASS`, which is the form C133-ONE consumes (the transfer's field has its mean only at almost
+every `x`). The step is the reverse Fatou lemma; this project had already used it in words at the same place of row 129's chain
+(`plans/FS103-F-fractional-shadow.md` § 3.4, link 1: "The reverse Fatou lemma (`E[limsup_R avg_{B_R} 1_W] ≥ P(0 ∈ W)`) gives a
+realisation of upper density `≥ P(0 ∈ W)`"), so the reading's "unchecked step" was a step held but not cited there.
+
+derivation: C133-DENS-CLASS
+  statement: let `(X, λ)` be a σ-finite measure space, `(Ω, μ)` a probability space, `α ≥ 0`, and `H : X × Ω → [0, 1]`
+    measurable for the product σ-algebra, with `∫ H(x, ω) dμ(ω) ≥ α` for `λ`-almost every `x`; let `(X_n)` be measurable subsets
+    of `X` with `0 < λ(X_n) < ∞`; then `D(ω) = limsup_n λ({x ∈ X_n : H(x, ω) > 0}) / λ(X_n)` is measurable and `∫ D dμ ≥ α`, so
+    `μ{D ≥ α} > 0` and every event of full `μ`-measure contains an `ω` with `D(ω) ≥ α`
+  uses only: Tonelli on each `X_n × Ω`; the pointwise bound `1_{H>0} ≥ H`, which is `H ≤ 1`; Fatou's lemma for the nonnegative
+    functions `1 − A_n`; that `μ` is a probability
+  not claimed: that almost every `ω` has `D(ω) ≥ α` — in the mixture of § Argument for C133-DENS (c) half of them have
+    `D = 0`; nor the same with `liminf` in place of `limsup` — false for the alternating annuli (control `dens-direction`); nor
+    that the window averages converge — no stationarity is assumed
+  argument: § Argument for C133-DENS
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `X = ℝ²`, `Ω` the period torus of the packing of open discs of radius 1/2 centred on `2(ℤ(1,0) + ℤ(1/2, √3/2))`,
+    `H(x, t) = 1_A(x + t)`: the mean is the density `π/(8√3) = 0.2267…` at every `x`, and `D(t)` is that density for every `t`
+    and every sequence of discs of radius tending to infinity (control `dens-model`)
+  prior art: known: the reverse Fatou lemma; used at this place in `plans/FS103-F-fractional-shadow.md` § 3.4 link 1
+  handoff: de Bruijn — the statement as written, over Mathlib's product measures (Tonelli) and Fatou's lemma; no outside theorem
+
+derivation: C133-DENS
+  statement: Let `H : ℝ² × Ω → [0, 1]` be jointly measurable with `∫ H(x, ω) dμ(ω) = α` for every
+    `x` and, for `μ`-almost every `ω`, `H(x, ω) H(x + u, ω) = 0` for almost every `(x, u) ∈ ℝ² × S¹`. Then for some `ω` the set
+    `{x : H(x, ω) > 0}` has upper density at least `α` and is unit-avoiding almost everywhere.
+  uses only: `C133-DENS-CLASS` at `X = ℝ²`, `X_n = B(0, n)`, with the full-measure event of the second hypothesis; and that for
+    `H ≥ 0` the product `H(x, ω) H(x + u, ω)` is positive at just those `(x, u)` with both `x` and `x + u` in the set
+  not claimed: that the set is 1-avoiding at every pair — that is the density-point step, entry `C133-DP`; nor anything for
+    almost every `ω`; nor lower density
+  argument: § Argument for C133-DENS
+  verdict: derived
+  grade: derived from: C133-DENS-CLASS
+  minds: 1
+  model: the model of `C133-DENS-CLASS`: the packing is 1-avoiding, so the second hypothesis holds for every `t`
+  prior art: known: an instance of `C133-DENS-CLASS`
+  handoff: none — subsumed by `C133-DENS-CLASS`, which crosses
+
+control: dens-direction
+  of: C133-DENS-CLASS — the direction of the conclusion, on the alternating-annuli field of mean 1/2 at every point: for both
+    samples the largest exact window average over discs of radius 2^(k+1), 6 ≤ k ≤ 40, is at least 1/2
+  run: python3 ../tools/fs133_e1_dens_control.py upper
+  expect: True
+  fault: python3 ../tools/fs133_e1_dens_control.py lower
+
+control: dens-model
+  of: C133-DENS-CLASS — the model: discs of radius 1/2 on the lattice of spacing 2 are 1-avoiding (all centres at distance ≥ 2)
+  run: python3 ../tools/fs133_e1_dens_control.py packing 2
+  expect: True
+  fault: python3 ../tools/fs133_e1_dens_control.py packing 19/10
+
+### Argument for C133-DENS
+
+**The class statement.** Put `W = {(x, ω) : H(x, ω) > 0}`, a measurable subset of `X × Ω`, and
+`A_n(ω) = λ({x ∈ X_n : (x, ω) ∈ W}) / λ(X_n)`. Since `λ(X_n) < ∞`, Tonelli on `X_n × Ω` makes each `A_n` measurable, with
+`0 ≤ A_n ≤ 1`, and gives
+
+`∫ A_n dμ = λ(X_n)⁻¹ ∫_{X_n} ∫_Ω 1_W dμ dλ ≥ λ(X_n)⁻¹ ∫_{X_n} ∫_Ω H dμ dλ ≥ α`.
+
+The first inequality is `1_W ≥ H` pointwise (where `H > 0` it reads `1 ≥ H`; where `H = 0` it reads `0 ≥ 0`); the second is the
+hypothesis on the mean, read under `dλ`, so a `λ`-null set of `x` is invisible to it. `D = limsup_n A_n` is measurable. Fatou's
+lemma for `1 − A_n ≥ 0` gives `∫ liminf_n (1 − A_n) dμ ≤ liminf_n ∫ (1 − A_n) dμ`, that is `∫ D dμ ≥ limsup_n ∫ A_n dμ ≥ α`
+(here `μ(Ω) = 1` is used). If `μ{D ≥ α} = 0` then `α − D > 0` almost everywhere and `∫ D dμ < α`: so `μ{D ≥ α} > 0`, and an
+event of full measure meets it.
+
+**The posed statement.** Take `X = ℝ²` with Lebesgue measure and `X_n = B(0, n)`. The upper density of a set,
+`limsup_{R→∞} |A ∩ B(0, R)| / |B(0, R)|` over real `R`, is at least its `limsup` over integers, which is `D(ω)`. Let `N` be the
+event of the second hypothesis. For `ω ∈ N` and `A = {x : H(x, ω) > 0}`: as `H ≥ 0`, `1_A(x) 1_A(x + u) = 1` iff
+`H(x, ω) H(x + u, ω) > 0`, which happens on a `(Leb × σ)`-null set of `(x, u)`; so `A` is edge-null, which is what "unit-avoiding
+almost everywhere" means. An `ω ∈ N` with `D(ω) ≥ α` is the one asked for. "`= α` for every `x`" was used only as "`≥ α` for almost
+every `x`".
+
+**What the conclusion cannot be.** (a) *Not lower density.* Let `S_0`, `S_1` be the unions of the annuli
+`{4^k ≤ |x|² < 4^{k+1}}` with `k` even, odd (the unit disc in `S_0`), `A` the packing of the model with density `d`, `t` uniform on
+its period torus, `j` a fair coin, `H(x, (j, t)) = 1_A(x + t) 1_{S_j}(x)`. The mean is `d/2` at every `x` and every sample is
+1-avoiding. In `B(0, 2^{k+1})` the set `S_j` has area fraction `4/5` or `1/5` in the limit, as `k ≡ j` or not (mod 2) (exact
+fractions: the control), so every sample has upper density `4d/5 ≥ d/2` and lower density `d/5 < d/2`. (b) *The windows matter to
+which `ω`, not to the bound:* the statement is for each window sequence separately. (c) *Not almost every `ω`.* With the same `A`
+and `t`, let `H(x, (j, t)) = j·1_A(x + t)`: the mean is `d/2` at every `x`; the samples with `j = 0` are empty and those with
+`j = 1` have density `d`. Half of the `ω` work.
+
+**Is the claim the right statement for its use?** Yes, in the class form. The transfer's field represents `T_x p` "for almost
+every `x`" (M/transfer.tex:223–224), and `∫ T_x p dμ = ⟨T_x p, 1⟩ = ⟨p, 1⟩` for every `x` because the extended operators are
+unitary and fix the constant; so the field's mean is `∫ p dμ` at almost every `x`, which is the class statement's hypothesis and
+not the posed one's.
+
+**Theorems this stage proved** (also listed at the head): `C133-DENS-CLASS` — TRUE, [hand], one mind; `C133-DENS` (posed) — TRUE,
+[derived] from it.
