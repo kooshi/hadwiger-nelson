@@ -993,7 +993,7 @@ inventory, items 607–629 (an outside proof of six became this project's litera
     half, which also writes that stub's bearing lines — one writer per file), and the re-rank it drafts then replaces its
     two unfiled drafts of the night. (e) **Staffing returns to his cap of three Opus slots**; 
 
-33. **Three jobs launched on Kooshi's sixth word (2026-10-07, about 12:20 UTC), each on a brief that passed the gate with
+33. **Three jobs launched on Kooshi's sixth word (2026-10-07, at 11:50 UTC by the briefs' commit — I first wrote "about 12:20" from memory, a slip: times are read from the clock), each on a brief that passed the gate with
     exit 0** (generator `data/fs131/briefs/scripts/mk-fs132-day2.py`; commit `dcf89464`). **FS132-Z2** (`ephodos`; brief
     `data/fs132/briefs/FS132-Z2-record.md`; record `plans/FS132-Z2-record.md`): the record job's second half — stubs from
     FS-134, ledger rows from 155, grokkings from G96, every registered prediction scored, the front page's drafts.

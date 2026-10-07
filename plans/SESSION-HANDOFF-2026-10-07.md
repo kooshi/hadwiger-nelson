@@ -35,7 +35,7 @@ FS-132 delivers what a point with data on its unit circle is forced to carry (th
 its first night's exclusion is formalized first; **FS-124, the (Q) ring — a boundary that is a unit arc about a ring point — is
 the next milestone**; staffing is his cap of three Opus slots.
 
-**State at about 14:15 UTC — FS-132 is DERIVED** (filed `fd398836`; FS-132 inventory items 35–36; **the next filing's
+**State at 12:36 UTC (read from the clock) — FS-132 is DERIVED** (filed `fd398836`; FS-132 inventory items 35–36; **the next filing's
 fact-audit base is `fd398836`**); **FS-124 is chosen and its inventory is open** (`plans/FS124-close-inventory.md`).
 
 **Running (three slots):**
