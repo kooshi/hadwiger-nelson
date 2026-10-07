@@ -687,4 +687,26 @@ between two colours that is an arc of the unit circle about a point one unit awa
     what it leaves implicit**; the derivers' model (the strip, by a script, not in the kernel) for its cost question, the
     choice left to it. **What is already on record before that paragraph arrives**: a second mind, blind and dated,
     reports reaching C124-LONE with its last clause by a route of its own — typed, not yet in the kernel.
+33. **FS124-K2, the second look at the flagged step (16:18 UTC logged): "my route IS its, and the step stands as written."**
+    Read against its own blind route to the same clause (its record § 3.1; three leaves of its skeleton): "same second
+    far end `w′` …, same use of C124-CENTRE-HALF at the centre `x` with the far end `w′`, same 'an open set with a label
+    almost everywhere and not that label almost everywhere is empty', same two circles through `x`"; the one difference
+    "cosmetic" (sets where it argues with labels — "one argument, the cover clause read at the same place"). **What the
+    step leaves implicit, "none of it a gap"**: (1) that the second far end exists — the two circles cross, plus an
+    intermediate value; (2) two inclusions in the open set, which come from the first step's ball; (3) **a bound the
+    step should state — "with `η ≤ 1`"**: two of its facts need the two far ends at most 1 apart, "and Step II gets it
+    only because the radius C124-TYPE's argument produces is at most 1/2"; (4) a passage to closures, which is the
+    openness of a ball. **A reading note for whoever builds on it**: the step's real hypothesis is not "the other member
+    does not separate" but the half-window it produces — "that is how C124-FOUR uses it, correctly", and the skeleton
+    states it that way. "I checked each sentence of Steps I and II and of the C124-FOUR paragraph; I did not find an
+    error. One mind's reading of another's argument; the kernel will be the check that counts." **What this is, by the
+    rules**: the deriver asked for a second mind on this step; a second mind reached the statement **blind, by the same
+    route, dated by its commit before it read the first** — and then read the first sentence by sentence. Under Workflow
+    3.1 the planner's blindness carries no grade: **C124-LONE, C124-BOTH and C124-FOUR stay "[hand], one mind, kernel
+    pending"**, and what is said beside them is exactly this: a second mind's blind route agrees and its reading found
+    no error. **Corrections owed, for the record** (a dated line under C124-LONE in the second round's record and in the
+    derivation file): the bound `η ≤ 1`; the hypothesis the step really uses. **Rulings.** (a) The deriver's hold —
+    "before C124-BOTH, C124-FOUR or C124-EDGE-CLOSED is built on outside this milestone" — is met as far as a hand check
+    can meet it; the successor's deriver already cites them and is told nothing new is needed. (b) The two corrections
+    go to the next record-type job that touches those files. (c) Kooshi is told, in those words.
 
