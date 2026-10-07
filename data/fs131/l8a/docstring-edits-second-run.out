@@ -1,0 +1,4 @@
+REFUSED: [LISTED 1] Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: the old text stands 0 time(s), expected 1 — nothing written
+The row's "full semi-hub of kind O with (Q) arcs `A`, `B`" gives these hypotheses: the arcs by
+`GermOnQWith.exists_isRingArc_ccw`, `…_cw`, four colours by `germS_absent`. Model: the strip's `P₀` (`ℓ = m = 15.52°`, edges
+at `0°, 90°, 180°, 270°`); no Lean term. -/

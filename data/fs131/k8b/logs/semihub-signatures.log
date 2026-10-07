@@ -1,0 +1,349 @@
+@qcol_inner_tile : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k},
+        F.IsRingArc p θ₁ θ₂ c c' → ∀ {T : Set ℂ}, F.TileOf c T → p ∈ closure T → ringArc p θ₁ θ₂ ⊆ closure T
+@ringArc_dist_le_one : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        p ∈ F.dom →
+          ∀ {θ₁ θ₂ : ℝ} {c c' : Fin k},
+            F.IsRingArc p θ₁ θ₂ c c' →
+              c ∈ F.coloursAt p → ∀ {x y : ℂ}, x ∈ ringArc p θ₁ θ₂ → y ∈ ringArc p θ₁ θ₂ → dist x y ≤ 1
+@GermOnQWith.exists_isRingArc_ccw : ∀ {k : ℕ} {F : ArcMap k} {p : ℂ} {θ : ℝ} {a a' : Fin k},
+  F.GermOnQWith p θ Side.ccw a a' → ∃ ℓ > 0, F.IsRingArc p θ (θ + ℓ) a a'
+@GermOnQWith.exists_isRingArc_cw : ∀ {k : ℕ} {F : ArcMap k} {p : ℂ} {θ : ℝ} {a a' : Fin k},
+  F.GermOnQWith p θ Side.cw a a' → ∃ ℓ > 0, F.IsRingArc p (θ - ℓ) θ a a'
+@qcol_not_one_arc : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        p ∈ F.dom →
+          ∀ {ψ : ℝ} (s : Side) {θ₁ θ₂ : ℝ},
+            F.IsQArc p θ₁ θ₂ →
+              GermIn p (ψ + Real.pi / 3) s (ringArc p θ₁ θ₂) →
+                GermIn p (ψ - Real.pi / 3) s.flip (ringArc p θ₁ θ₂) → False
+@germPair_inner_ne : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        p ∈ F.dom →
+          ∀ {ψ : ℝ} (s : Side) {a a' b b' : Fin k},
+            F.GermOnQWith p (ψ + Real.pi / 3) s a a' → F.GermOnQWith p (ψ - Real.pi / 3) s.flip b b' → a ≠ b
+@germPair_swap : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        p ∈ F.dom →
+          ∀ {ψ : ℝ} (s : Side) {a a' b b' : Fin k},
+            F.GermOnQWith p (ψ + Real.pi / 3) s a a' →
+              F.GermOnQWith p (ψ - Real.pi / 3) s.flip b b' → {a, a'} = {b, b'} → a = b' ∧ a' = b
+@germPair_dicho : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        p ∈ F.dom →
+          F.SimpleOn {p} →
+            (F.coloursAt p).ncard = 4 →
+              ∀ {ψ : ℝ} (s : Side) {a a' b b' : Fin k},
+                F.GermOnQWith p (ψ + Real.pi / 3) s a a' →
+                  F.GermOnQWith p (ψ - Real.pi / 3) s.flip b b' → a = b' ∧ a' = b ∨ Disjoint {a, a'} {b, b'}
+@ringTile_uMinus : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        F.Covers p 1 →
+          4 ≤ (F.coloursAt p).ncard →
+            k ≤ (F.coloursAt p).ncard + 2 →
+              ∀ {ψ : ℝ} {X X' : Fin k},
+                F.IsChangePoint p ψ X X' →
+                  ¬F.GermOnQ p (ψ + Real.pi / 3) Side.cw →
+                    ∀ {R : Set ℂ},
+                      F.TileOf X R →
+                        ringPt p ψ ∈ closure R →
+                          ringPt p (ψ + Real.pi / 3) ∈ closure R ∧ R ⊆ Metric.closedBall (ringPt p (ψ + Real.pi / 3)) 1
+@ringTile_vMinus : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        F.Covers p 1 →
+          4 ≤ (F.coloursAt p).ncard →
+            k ≤ (F.coloursAt p).ncard + 2 →
+              ∀ {ψ : ℝ} {X X' : Fin k},
+                F.IsChangePoint p ψ X X' →
+                  ¬F.GermOnQ p (ψ - Real.pi / 3) Side.cw →
+                    ∀ {R : Set ℂ},
+                      F.TileOf X R → ringPt p ψ ∈ closure R → Disjoint R (Metric.ball (ringPt p (ψ - Real.pi / 3)) 1)
+@ringTile_vPlus : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        F.Covers p 1 →
+          4 ≤ (F.coloursAt p).ncard →
+            k ≤ (F.coloursAt p).ncard + 2 →
+              ∀ {ψ : ℝ} {X X' : Fin k},
+                F.IsChangePoint p ψ X X' →
+                  ¬F.GermOnQ p (ψ - Real.pi / 3) Side.ccw →
+                    ∀ {R' : Set ℂ},
+                      F.TileOf X' R' →
+                        ringPt p ψ ∈ closure R' →
+                          ringPt p (ψ - Real.pi / 3) ∈ closure R' ∧
+                            R' ⊆ Metric.closedBall (ringPt p (ψ - Real.pi / 3)) 1
+@ringTile_uPlus : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        F.Covers p 1 →
+          4 ≤ (F.coloursAt p).ncard →
+            k ≤ (F.coloursAt p).ncard + 2 →
+              ∀ {ψ : ℝ} {X X' : Fin k},
+                F.IsChangePoint p ψ X X' →
+                  ¬F.GermOnQ p (ψ + Real.pi / 3) Side.ccw →
+                    ∀ {R' : Set ℂ},
+                      F.TileOf X' R' →
+                        ringPt p ψ ∈ closure R' → Disjoint R' (Metric.ball (ringPt p (ψ + Real.pi / 3)) 1)
+@isRingArc_of_edge : ∀ {k : ℕ} {F : ArcMap k} {y w : ℂ},
+  y ∈ F.dom →
+    ∀ {T₁ T₂ : Set ℂ} {c₁ c₂ : Fin k},
+      F.TileOf c₁ T₁ →
+        F.TileOf c₂ T₂ →
+          T₁ ≠ T₂ →
+            T₁ ⊆ Metric.closedBall w 1 →
+              Disjoint T₂ (Metric.ball w 1) →
+                ∀ {α : Arc},
+                  α ∈ F.arcs →
+                    ∀ {δ : ℝ} {B : Set ℂ},
+                      α.InitialPiece y δ B →
+                        B ⊆ closure T₁ ∩ closure T₂ → ∃ θ₁ θ₂, F.IsRingArc w θ₁ θ₂ c₁ c₂ ∧ y ∈ ringArc w θ₁ θ₂
+@four_le_of_bothKind : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese → ∀ {w : ℂ}, w ∈ F.dom → F.SimpleOn {w} → ∀ {θ₁ θ₂ : ℝ}, F.BothKind w θ₁ θ₂ → 4 ≤ (F.coloursAt w).ncard
+@exists_isStar4 : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        p ∈ F.dom →
+          F.SimpleOn {p} → (F.coloursAt p).ncard = 4 → ∃ t₁ t₂ t₃ t₄ e₁ e₂ e₃ e₄, F.IsStar4 p t₁ t₂ t₃ t₄ e₁ e₂ e₃ e₄
+@ringArc_star : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        p ∈ F.dom →
+          F.SimpleOn {p} →
+            (F.coloursAt p).ncard = 4 →
+              ∀ {u v : ℝ} {c c' : Fin k},
+                F.IsRingArc p u v c c' →
+                  c ∈ F.coloursAt p →
+                    c' ∈ F.coloursAt p →
+                      ∃ t₁ t₂ t₃ t₄ e₁ e₂ e₃ e₄,
+                        F.IsStar4 p t₁ t₂ t₃ t₄ e₁ e₂ e₃ e₄ ∧
+                          F.TileOf c t₁ ∧
+                            F.TileOf c' t₃ ∧
+                              v - Real.pi / 2 ≤ e₁ ∧
+                                e₂ ≤ u + Real.pi / 2 ∧ v + Real.pi / 2 ≤ e₃ ∧ e₄ ≤ u + 3 * Real.pi / 2
+@fullSemiHub_star_crossed : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        p ∈ F.dom →
+          F.SimpleOn {p} →
+            (F.coloursAt p).ncard = 4 →
+              ∀ {ψ ℓ m : ℝ} {a a' b b' : Fin k},
+                F.IsRingArc p (ψ + Real.pi / 3) (ψ + Real.pi / 3 + ℓ) a a' →
+                  F.IsRingArc p (ψ - Real.pi / 3 - m) (ψ - Real.pi / 3) b b' →
+                    a ∈ F.coloursAt p →
+                      a' ∈ F.coloursAt p →
+                        b ∈ F.coloursAt p →
+                          b' ∈ F.coloursAt p →
+                            Disjoint {a, a'} {b, b'} →
+                              ℓ + m ≤ Real.pi / 3 ∧
+                                ∃ ta tb' ta' tb e₁ e₂ e₃ e₄,
+                                  F.TileOf a ta ∧
+                                    F.TileOf b' tb' ∧
+                                      F.TileOf a' ta' ∧
+                                        F.TileOf b tb ∧
+                                          F.IsStar4 p ta tb' ta' tb e₁ e₂ e₃ e₄ ∧
+                                            e₁ ∈ Set.Icc (ψ + ℓ - Real.pi / 6) (ψ + Real.pi / 6 - m) ∧
+                                              e₂ ∈ Set.Icc (ψ + Real.pi / 6) (ψ + 5 * Real.pi / 6) ∧
+                                                e₃ ∈ Set.Icc (ψ + 5 * Real.pi / 6 + ℓ) (ψ + 7 * Real.pi / 6 - m) ∧
+                                                  e₄ ∈ Set.Icc (ψ + 7 * Real.pi / 6) (ψ + 11 * Real.pi / 6)
+@fullSemiHub_star_parallel : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        p ∈ F.dom →
+          F.SimpleOn {p} →
+            (F.coloursAt p).ncard = 4 →
+              ∀ {ψ ℓ m : ℝ} {a a' : Fin k},
+                F.IsRingArc p (ψ + Real.pi / 3) (ψ + Real.pi / 3 + ℓ) a a' →
+                  F.IsRingArc p (ψ - Real.pi / 3 - m) (ψ - Real.pi / 3) a' a →
+                    a ∈ F.coloursAt p →
+                      a' ∈ F.coloursAt p →
+                        ∃ ta tback ta' tfront e₁ e₂ e₃ e₄,
+                          F.TileOf a ta ∧
+                            F.TileOf a' ta' ∧
+                              F.IsStar4 p ta tback ta' tfront e₁ e₂ e₃ e₄ ∧
+                                ψ + Real.pi / 6 ≤ e₁ ∧
+                                  e₂ ≤ ψ + 5 * Real.pi / 6 ∧ ψ + 7 * Real.pi / 6 ≤ e₃ ∧ e₄ ≤ ψ + 11 * Real.pi / 6
+@fullSemiHub_star_parallel_T : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        p ∈ F.dom →
+          F.SimpleOn {p} →
+            (F.coloursAt p).ncard = 4 →
+              ∀ {ψ ℓ m : ℝ} {a a' : Fin k},
+                F.IsRingArc p (ψ + Real.pi / 3 - ℓ) (ψ + Real.pi / 3) a a' →
+                  F.IsRingArc p (ψ - Real.pi / 3) (ψ - Real.pi / 3 + m) a' a →
+                    a ∈ F.coloursAt p →
+                      a' ∈ F.coloursAt p →
+                        ∃ ta tback ta' tfront e₁ e₂ e₃ e₄,
+                          F.TileOf a ta ∧
+                            F.TileOf a' ta' ∧
+                              F.IsStar4 p ta tback ta' tfront e₁ e₂ e₃ e₄ ∧
+                                ψ + Real.pi / 6 + m ≤ e₁ ∧
+                                  e₂ ≤ ψ + 5 * Real.pi / 6 - ℓ ∧
+                                    ψ + 7 * Real.pi / 6 + m ≤ e₃ ∧ e₄ ≤ ψ + 11 * Real.pi / 6 - ℓ
+@semiHub_places : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        F.Covers p 1 →
+          ∀ {ψ : ℝ},
+            F.SimpleOn {p, ringPt p ψ, ringPt p (ψ + Real.pi / 3), ringPt p (ψ - Real.pi / 3)} →
+              4 ≤ (F.coloursAt p).ncard →
+                k ≤ (F.coloursAt p).ncard + 2 →
+                  ∀ {kind : SemiKind},
+                    F.IsSemiHub p ψ kind →
+                      4 ≤ (F.coloursAt (ringPt p ψ)).ncard ∨
+                        ((F.coloursAt (ringPt p ψ)).ncard = 3 ∧
+                            ∃ w,
+                              (w = ringPt p (ψ + Real.pi / 3) ∨ w = ringPt p (ψ - Real.pi / 3)) ∧
+                                (∃ θ₁ θ₂, F.BothKind w θ₁ θ₂ ∧ ringPt p ψ ∈ ringArc w θ₁ θ₂) ∧
+                                  4 ≤ (F.coloursAt w).ncard) ∨
+                          (F.coloursAt (ringPt p ψ)).ncard = 3 ∧
+                            F.IsFullSemiHub p ψ kind ∧
+                              ∃ a a',
+                                F.GermOnQWith p (ψ + Real.pi / 3) kind.qSide a a' ∧
+                                  F.GermOnQWith p (ψ - Real.pi / 3) kind.qSide.flip a' a ∧
+                                    ∃ c T,
+                                      F.TileOf c T ∧
+                                        p ∈ closure T ∧
+                                          F.coloursAt (ringPt p ψ) = (F.coloursAt p)ᶜ ∪ {c} ∧
+                                            (kind = SemiKind.O →
+                                                angleIcc (ψ + 5 * Real.pi / 6) (ψ + 7 * Real.pi / 6) ⊆ coneAt T p) ∧
+                                              (kind = SemiKind.T →
+                                                angleIcc (ψ - Real.pi / 6) (ψ + Real.pi / 6) ⊆ coneAt T p)
+@crossed_no_tip : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        p ∈ F.dom →
+          F.SimpleOn {p} →
+            (F.coloursAt p).ncard = 4 →
+              ∀ {ψ : ℝ} {a a' b b' : Fin k},
+                F.GermOnQWith p (ψ + Real.pi / 3) Side.ccw a a' →
+                  F.GermOnQWith p (ψ - Real.pi / 3) Side.cw b b' →
+                    Disjoint {a, a'} {b, b'} → ∀ (T : Set ℂ), ¬F.IsTip p (ringPt p ψ) T
+@crossed_tip_zeroAngle : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        p ∈ F.dom →
+          F.SimpleOn {p} →
+            (F.coloursAt p).ncard = 4 →
+              ∀ {ψ : ℝ} {a a' b b' : Fin k},
+                F.GermOnQWith p (ψ + Real.pi / 3) Side.ccw a a' →
+                  F.GermOnQWith p (ψ - Real.pi / 3) Side.cw b b' →
+                    Disjoint {a, a'} {b, b'} → ∀ {T : Set ℂ}, F.IsTip p (ringPt p ψ) T → ZeroAngleAt T (ringPt p ψ)
+@crossed_outer : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        p ∈ F.dom →
+          F.SimpleOn {p} →
+            (F.coloursAt p).ncard = 4 →
+              ∀ {ψ : ℝ} {a a' b b' : Fin k},
+                F.GermOnQWith p (ψ + Real.pi / 3) Side.ccw a a' →
+                  F.GermOnQWith p (ψ - Real.pi / 3) Side.cw b b' →
+                    Disjoint {a, a'} {b, b'} → F.outerTileColours p (ringPt p ψ) ⊆ {a', b'}
+@crossed_four : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        F.Covers p 1 →
+          F.SimpleOn {p} →
+            4 ≤ (F.coloursAt p).ncard →
+              k ≤ (F.coloursAt p).ncard + 2 →
+                ∀ {ψ : ℝ} {X X' : Fin k},
+                  F.IsChangePoint p ψ X X' →
+                    ∀ {a a' b b' : Fin k},
+                      F.GermOnQWith p (ψ + Real.pi / 3) Side.ccw a a' →
+                        F.GermOnQWith p (ψ - Real.pi / 3) Side.cw b b' →
+                          Disjoint {a, a'} {b, b'} →
+                            (F.coloursAt (ringPt p ψ)).ncard = 4 →
+                              F.outerTileColours p (ringPt p ψ) = {a', b'} ∧ (F.coloursAt (ringPt p ψ))ᶜ = {a, b}
+@crossed_changePoint : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        F.Covers p 2 →
+          F.SimpleOn {p} →
+            4 ≤ (F.coloursAt p).ncard →
+              k ≤ (F.coloursAt p).ncard + 2 →
+                ∀ {ψ : ℝ} {X X' : Fin k},
+                  F.IsChangePoint p ψ X X' →
+                    ∀ {a a' b b' : Fin k},
+                      F.GermOnQWith p (ψ + Real.pi / 3) Side.ccw a a' →
+                        F.GermOnQWith p (ψ - Real.pi / 3) Side.cw b b' →
+                          Disjoint {a, a'} {b, b'} →
+                            (F.coloursAt (ringPt p ψ)).ncard = 4 →
+                              ¬F.OnRingArc (ringPt p ψ) p → F.IsChangePoint (ringPt p ψ) (ψ + Real.pi) b a
+@crossed_semiHub : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        F.Covers p 2 →
+          ∀ {ψ : ℝ},
+            F.SimpleOn {p, ringPt p ψ} →
+              4 ≤ (F.coloursAt p).ncard →
+                k ≤ (F.coloursAt p).ncard + 2 →
+                  ∀ {X X' : Fin k},
+                    F.IsChangePoint p ψ X X' →
+                      F.OuterPairFree p ψ →
+                        ∀ {a a' b b' : Fin k},
+                          F.GermOnQWith p (ψ + Real.pi / 3) Side.ccw a a' →
+                            F.GermOnQWith p (ψ - Real.pi / 3) Side.cw b b' →
+                              Disjoint {a, a'} {b, b'} →
+                                (F.coloursAt (ringPt p ψ)).ncard = 4 →
+                                  ¬F.OnRingArc (ringPt p ψ) p → F.IsSemiHub (ringPt p ψ) (ψ + Real.pi) SemiKind.O
+@transferQC : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        F.Covers p 1 →
+          ∀ {ψ : ℝ},
+            F.SimpleOn {p, ringPt p ψ, ringPt p (ψ + Real.pi / 3), ringPt p (ψ - Real.pi / 3)} →
+              4 ≤ (F.coloursAt p).ncard →
+                k ≤ (F.coloursAt p).ncard + 2 →
+                  ∀ {kind : SemiKind},
+                    F.IsSemiHub p ψ kind →
+                      4 ≤ (F.coloursAt (ringPt p ψ)).ncard ∨
+                        4 ≤ (F.coloursAt (ringPt p (ψ + Real.pi / 3))).ncard ∨
+                          4 ≤ (F.coloursAt (ringPt p (ψ - Real.pi / 3))).ncard ∨
+                            (F.coloursAt (ringPt p ψ)).ncard = 3 ∧
+                              F.IsFullSemiHub p ψ kind ∧
+                                ∃ a a',
+                                  F.GermOnQWith p (ψ + Real.pi / 3) kind.qSide a a' ∧
+                                    F.GermOnQWith p (ψ - Real.pi / 3) kind.qSide.flip a' a
+'HadwigerNelson.Plane.ArcMap.qcol_cw' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.qcol_ccw' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.germOnQ_bar_uPlus' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.closure_inter_subset_sphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.isSemiHub_iff_qSide' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.isFullSemiHub_iff_qSide' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsStar4.isEdgeDir₁₂' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsStar4.angleIcc_subset_cone₄' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.ringArc_dist_le_one' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.transferQC' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

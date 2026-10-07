@@ -1,0 +1,49 @@
+# FS-133 — the claim list: the one-class transfer
+
+*Fixed by Keryx, 2026-10-07 (UTC), before the derivation launches, from the asking lane's stub. Each claim is posed, not derived;
+its statement is the stub's, quoted by its first line as the address — read each whole there, with the stub's § Existence form,
+§ Structural form and § What each answer gives. A later change to this file is a dated line at its end.*
+
+## The claims, in the order a deriver takes them
+
+> **C133-DENS (posed) — the unchecked step.** Let `H : ℝ² × Ω → [0, 1]` be jointly measurable with `∫ H(x, ω) dμ(ω) = α` for every
+> — source: plans/STUB-one-class-transfer.md
+
+> - **C133-INV (posed).** At the algebraic plane `E = ℚ̄`: there is an `E ⋊ K`-invariant probability on the independent subsets of
+> — source: plans/STUB-one-class-transfer.md
+
+> - **C133-ONE (posed).** `α₁(ℝ²) = α₁(𝒜²) = m₁(ℝ²)`, and `χ_f,0(ℝ²) = χ_f(ℝ²) = χ_f(𝒜²) = 1/m₁(ℝ²)`: steps F3–F9 of the transfer
+> — source: plans/STUB-one-class-transfer.md
+
+> - **C133-HOM (posed, the structural form's first rung).** For a finite graph `H`: a homomorphism of the plane's unit-distance graph
+> — source: plans/STUB-one-class-transfer.md
+
+
+*Not claimed* (from the stub; read its § Failure clauses whole): any value of `m₁(ℝ²)` or of a chromatic number; anything at a
+number field's plane (measure rigidity there is held only as a hypothesis in this project and the release does not give it); that
+the release states any of this (its manuscript does not).
+
+## What the claims rest on, each at its grade
+
+- The outside release's rigidity theorem and transfer, `[OAIMath2026]` family 158 — [kernel, outside]: kernel-checked in the
+  release's own library at its pin, built and audited here (`plans/EXT-OAI1-audit.md` stage 4); its manuscript read in full, no gap
+  found, one mind (`plans/EXT-OAI2-reading.md` stages 2–4).
+- The sketch this milestone starts from: `plans/EXT-OAI2-reading.md` § 2.6 — one mind, one step unchecked, named there.
+- This project's own rows on the one-class problem: `LEDGER.md` row 129 and the entries it names.
+
+## Dated lines
+
+- **2026-10-07 (after FS133-E1's Stage 3, `plans/FS133-E1-derivation.md`):** the deriver's entry **C133-DENS-CLASS** — the same
+  step for any σ-finite space, any window sequence, and a mean that is at least `α` at almost every point — is the form C133-ONE
+  consumes (the transfer's field has its mean only at almost every point). C133-DENS stays as posed above, and is derived from
+  it. The kernel lane's planner reads C133-DENS-CLASS's statement in that record as the one to formalize.
+- **2026-10-07 (after FS133-E1's Stage 7; FS-133 inventory item 3):** all four posed claims are derived, [hand], one mind. The
+  entries of `plans/FS133-E1-derivation.md` that carry them enter this list, each statement as its entry there states it:
+  **C133-INV-CLASS** (the invariant law, with equality, for every rotation-invariant connection set — C133-INV as posed is its
+  instance); **C133-ALG** (every invariant law on independent sets of the algebraic plane has density at most `m₁(ℝ²)` — the
+  core of C133-ONE, and the entry that reads the release's rigidity theorem); **C133-FN** (`f(n)/n → m₁(ℝ²)`); **C133-PAIR**
+  (the pair-constraint transfer — C133-HOM as posed is its instance); and the relay-results **C133-EASY, C133-PER, C133-DP,
+  C133-CHIF**, known statements re-derived. *What they rest on, added*: the release's Theorem 2.3 itself (`wild_fourier`,
+  [kernel, outside]) — not the transfer theorem — and the manuscript's Lemma 4.1 by its proof, re-run by hand for an arbitrary
+  invariant law.
+

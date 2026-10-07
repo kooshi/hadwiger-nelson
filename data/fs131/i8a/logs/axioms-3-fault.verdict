@@ -1,0 +1,2 @@
+axioms print: 65 records (0 axiom-free), each a subset of the standard three: NO; control `FS131I8AControl.planted_sorry` prints ['sorryAx']
+BAD FS131I8AControl.planted_sorry: ['sorryAx']

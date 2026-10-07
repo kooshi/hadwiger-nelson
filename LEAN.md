@@ -236,7 +236,11 @@ the characteristic failure here:
   (inhabitant proved); `DECLARED` (deliberate emptiness, named with its reason in the docstring as `VACUITY DECLARED:` and printed every
   run); `VACUOUS` (undeclared emptiness) and `STALE` (claimed emptiness not proved), which fail unconditionally before the baseline;
   `GENERIC` (parametric, where **no inhabitant witness can exist** — the caller's obligation); `UNKNOWN` (counted, never silent, and the
-  only thing the baseline may hold). The counts and the baseline's two entries are recorded in `CLAUDE.md` § The gate, where
+  only thing the baseline may hold). **The marker is for a declaration one of whose binders has a provably empty carrier**; the scan reads it binder by binder, and on
+  a binder whose carrier is not empty it reads `STALE` and fails. A route lemma whose hypotheses are *jointly* unsatisfiable — each
+  satisfiable alone — does not carry it: its docstring says the joint vacuity in words and names the theorem that derives `False`
+  from its exact hypotheses (`v6_hubs` with `v6_hubs_vacuous`, FS131-L8A). A statement that concludes `False` is skipped as a
+  refutation, so a marker on it is never read and proves nothing either way. The counts and the baseline's two entries are recorded in `CLAUDE.md` § The gate, where
   `scripts/gate_report.py` reads them; a silent change in them is this gate's own failure mode. `--self-test` plants sixty-five controls
   and watches each fire; the load-bearing one — the same carrier family at an instantiation nothing refutes — must read `UNKNOWN`,
   never `VACUOUS`.

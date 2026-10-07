@@ -1,0 +1,203 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/PVPDmlLYdTEJWkjJvx/J0t2XB9g</id>
+  <title>arXiv Query: search_query=all:"fractional chromatic number" AND all:measurable&amp;id_list=&amp;start=0&amp;max_results=25</title>
+  <updated>2026-10-07T03:04:37Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22fractional+chromatic+number%22+AND+all:measurable&amp;start=0&amp;max_results=25&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>25</opensearch:itemsPerPage>
+  <opensearch:totalResults>9</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2605.28709v1</id>
+    <title>Improved bounds for the double cap conjecture</title>
+    <updated>2026-05-27T16:33:54Z</updated>
+    <link href="https://arxiv.org/abs/2605.28709v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.28709v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In 1974, Witsenhausen asked for the maximum possible density $α_n$ of a measurable subset $A$ of the unit sphere $\mathbb{S}^{n-1}\subset \mathbb{R}^n$ such that $A$ contains no pair of orthogonal vectors. For $n=3$, the best known lower bound is $1 - 1/\sqrt{2} = 0.29289\dots$, obtained from the natural "double cap" construction of two opposite spherical caps, which is conjectured to be optimal for all $n$ by Gil Kalai. In this paper, we use a novel approach to establish an upper bound of $α_3\le 0.2953$, improving the previous best known bound $0.2977$ due to Bekker et al. (2025). Our approach combines harmonic-analytic arguments with the geometric fractional chromatic number of finite graphs, recently introduced by Ambrus et al. (2024). In this framework, any finite subset of the sphere yields an upper bound for $α_n$, and we obtain our bound by identifying an appropriate 33-element point set through a large-scale computer search.
+  The same method can also be used in higher dimensions to yield potential improvements of the best known bounds.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-27T16:33:54Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Domonkos Czifra</name>
+    </author>
+    <author>
+      <name>Ákos Dúcz</name>
+    </author>
+    <author>
+      <name>Máté Matolcsi</name>
+    </author>
+    <author>
+      <name>Dániel Varga</name>
+    </author>
+    <author>
+      <name>Pál Zsámboki</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2511.15954v1</id>
+    <title>A Graph-Theoretic Approach to Quantum Measurement Incompatibility</title>
+    <updated>2025-11-20T01:06:46Z</updated>
+    <link href="https://arxiv.org/abs/2511.15954v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2511.15954v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Measurement incompatibility--the impossibility of jointly measuring certain quantum observables--is a fundamental resource for quantum information processing. We develop a graph-theoretic framework for quantifying this resource for large families of binary measurements, including Pauli observables on multi-qubit systems and $k$-body Majorana observables on $n$-mode fermionic systems. To each set of observables we associate an anti-commutativity graph, whose vertices represent observables and whose edges indicate pairs that anti-commute. In this representation, the incompatibility robustness--the minimal amount of classical noise required to render the set jointly measurable--becomes a graph invariant. We derive general bounds on this invariant in terms of the Lovász number, clique number, and fractional chromatic number, and show that the Lovász number yields the correct asymptotic scaling for $k$-body Majorana observables. For line graphs $L(G)$, which naturally arise in the characterisation of exactly solvable spin models, we obtain spectral bounds on the robustness expressed through the energy and skew-energy of the underlying graph $G$. These bounds become tight for highly symmetric graphs, leading to closed formulas for several graph families. Finally, we identify structural conditions under which the robustness is determined by a simple function of the graph's maximum degree and the number of vertices and edges, and show that such extremal cases occur only when combinatorial structures such as Hadamard, conference or weighing matrices exist.</summary>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-11-20T01:06:46Z</published>
+    <arxiv:comment>24 pages, 7 figures</arxiv:comment>
+    <arxiv:primary_category term="quant-ph"/>
+    <author>
+      <name>Daniel McNulty</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2504.01295v5</id>
+    <title>A Spectral Lower Bound on Chromatic Numbers using $p$-Energy</title>
+    <updated>2025-05-26T09:36:32Z</updated>
+    <link href="https://arxiv.org/abs/2504.01295v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2504.01295v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $A_G $ be the adjacency matrix of a simple graph $ G $, and let $ χ(G) $, $ χ_f(G) $, $ χ_q(G) $, $ ξ(G) $ and $ ξ_f(G) $ denote its chromatic number, fractional chromatic number, quantum chromatic number, orthogonal rank and projective rank, respectively. For $ p \geq 0 $, we define the positive and negative $ p $-energies of $ G $ by $$ \mathcal{E}_p^+(G) = \sum_{λ_i &gt; 0} λ_i^p, \quad \mathcal{E}_p^-(G) = \sum_{λ_i &lt; 0} |λ_i|^p, $$ where $ λ_1 \geq \cdots \geq λ_n $ are the eigenvalues of $A_G $. We prove that for all $ p \geq 0 $, $$ χ(G) \geq \left\{χ_f(G), χ_q(G), ξ(G) \right\} \geq ξ_f(G) \geq 1 + \max\left\{ \frac{\mathcal{E}_p^+(G)}{\mathcal{E}_p^-(G)}, \frac{\mathcal{E}_p^-(G)}{\mathcal{E}_p^+(G)} \right\}^{\frac{1}{|p - 1|}}. $$ This result unifies and strengthens a series of existing bounds corresponding to the cases $ p \in \{0, 2, \infty\} $. In particular, the case $ p = 0 $ yields the inertia bound $$ χ_f(G) \geq ξ_f(G) \geq1 + \max\left\{\frac{n^+}{n^-}, \frac{n^-}{n^+}\right\}, $$ where $ n^+ $ and $ n^- $ denote the number of positive and negative eigenvalues of $ A_G $, respectively. This resolves two conjectures of Elphick and Wocjan.
+  We also demonstrate that for certain graphs, non-integer values of $ p $ provide sharper lower bounds than existing spectral bounds. As an example, we determine $ χ_q $ for the Tilley graph, which cannot be achieved using existing (unweighted) $p$-energy bounds. Our proof employs a novel synthesis of linear algebra and measure-theoretic tools, which allows us to surpass existing spectral bounds.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-04-02T01:59:22Z</published>
+    <arxiv:comment>20 pages, 4 figures, 1 table. v5 adds a conjecture on the vector chromatic number at the end; this is the submitted version. v4 extends the method of v3 to establish a lower bound on the projective rank and resolves two inertia conjectures of Elphick and Wocjan. Supersedes all previous preliminary versions. v3 introduced three authors and extended the original proof to the case $p&gt;1$</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>European J. Combin. 132, Part B (2026), Article 104252</arxiv:journal_ref>
+    <author>
+      <name>Clive Elphick</name>
+    </author>
+    <author>
+      <name>Quanyu Tang</name>
+    </author>
+    <author>
+      <name>Shengtong Zhang</name>
+    </author>
+    <arxiv:doi>10.1016/j.ejc.2025.104252</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.ejc.2025.104252" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2211.01699v2</id>
+    <title>Round and Bipartize for Vertex Cover Approximation</title>
+    <updated>2023-07-27T13:19:45Z</updated>
+    <link href="https://arxiv.org/abs/2211.01699v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2211.01699v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The vertex cover problem is a fundamental and widely studied combinatorial optimization problem. It is known that its standard linear programming relaxation is integral for bipartite graphs and half-integral for general graphs. As a consequence, the natural rounding algorithm based on this relaxation computes an optimal solution for bipartite graphs and a $2$-approximation for general graphs. This raises the question of whether one can interpolate the rounding curve of the standard linear programming relaxation in a beyond the worst-case manner, depending on how close the graph is to being bipartite. In this paper, we consider a simple rounding algorithm that exploits the knowledge of an induced bipartite subgraph to attain improved approximation ratios. Equivalently, we suppose that we work with a pair $(G, S)$, consisting of a graph with an odd cycle transversal.
+  If $S$ is a stable set, we prove a tight approximation ratio of $1 + 1/ρ$, where $2ρ-1$ denotes the odd girth (i.e., length of the shortest odd cycle) of the contracted graph $\tilde{G} := G /S$ and satisfies $ρ\in [2,\infty]$. If $S$ is an arbitrary set, we prove a tight approximation ratio of $\left(1+1/ρ\right) (1 - α) + 2 α$, where $α\in [0,1]$ is a natural parameter measuring the quality of the set $S$. The technique used to prove tight improved approximation ratios relies on a structural analysis of the contracted graph $\tilde{G}$. Tightness is shown by constructing classes of weight functions matching the obtained upper bounds. As a byproduct of the structural analysis, we obtain improved tight bounds on the integrality gap and the fractional chromatic number of 3-colorable graphs. We also discuss algorithmic applications in order to find good odd cycle transversals and show optimality of the analysis.</summary>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-11-03T10:52:17Z</published>
+    <arxiv:comment>To appear in APPROX 2023</arxiv:comment>
+    <arxiv:primary_category term="cs.DS"/>
+    <author>
+      <name>Danish Kashaev</name>
+    </author>
+    <author>
+      <name>Guido Schäfer</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2105.11557v3</id>
+    <title>Borel fractional colorings of Schreier graphs</title>
+    <updated>2022-03-23T22:55:46Z</updated>
+    <link href="https://arxiv.org/abs/2105.11557v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2105.11557v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $Γ$ be a countable group and let $G$ be the Schreier graph of the free part of the Bernoulli shift of $Γ$ (with respect to some finite subset $F \subseteq Γ$). We show that the Borel fractional chromatic number of $G$ is equal to $1$ over the measurable independence number of $G$. As a consequence, we asymptotically determine the Borel fractional chromatic number of $G$ when $Γ$ is the free group, answering a question of Meehan.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.LO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-05-24T22:12:44Z</published>
+    <arxiv:comment>8 pp</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Anton Bernshteyn</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1811.11806v2</id>
+    <title>Fractional coloring with local demands and applications to degree-sequence bounds on the independence number</title>
+    <updated>2024-07-24T15:34:08Z</updated>
+    <link href="https://arxiv.org/abs/1811.11806v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1811.11806v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In a fractional coloring, vertices of a graph are assigned measurable subsets of the real line and adjacent vertices receive disjoint subsets; the fractional chromatic number of a graph is at most $k$ if it has a fractional coloring in which each vertex receives a subset of $[0, 1]$ of measure at least $1/k$. We introduce and develop the theory of "fractional colorings with local demands" wherein each vertex "demands" a certain amount of color that is determined by local parameters such as its degree or the clique number of its neighborhood. This framework provides the natural setting in which to generalize degree-sequence type bounds on the independence number. Indeed, by Linear Programming Duality, all of the problems we study have an equivalent formulation as a problem concerning weighted independence numbers, and they often imply new bounds on the independence number.
+  Our results and conjectures are inspired by many of the most classical results and important open problems concerning the independence number and the chromatic number, often simultaneously. We conjecture a local strengthening of both Shearer's bound on the independence number of triangle-free graphs and the fractional relaxation of Molloy's recent bound on their chromatic number, as well as a longstanding problem of Ajtai et al.\ on the independence number of $K_r$-free graphs and the fractional relaxations of Reed's $ω, Δ, χ$ Conjecture and the Total Coloring Conjecture. We prove an approximate version of the first two, and we prove "local demands" versions of Vizing's Theorem and of some $χ$-boundedness results.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-11-28T20:10:08Z</published>
+    <arxiv:comment>33 pages. Version 1 has been split into three papers</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>Journal of Combinatorial Theory, Series B. Volume 169, November 2024, Pages 298-337</arxiv:journal_ref>
+    <author>
+      <name>Tom Kelly</name>
+    </author>
+    <author>
+      <name>Luke Postle</name>
+    </author>
+    <arxiv:doi>10.1016/j.jctb.2024.07.002</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.jctb.2024.07.002" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1810.00960v4</id>
+    <title>On the density of sets of the Euclidean plane avoiding distance 1</title>
+    <updated>2022-05-27T15:50:23Z</updated>
+    <link href="https://arxiv.org/abs/1810.00960v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1810.00960v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A subset $A \subset \mathbb R^2$ is said to avoid distance $1$ if: $\forall x,y \in A, \left\| x-y \right\|_2 \neq 1.$ In this paper we study the number $m_1(\mathbb R^2)$ which is the supremum of the upper densities of measurable sets avoiding distance 1 in the Euclidean plane. Intuitively, $m_1(\mathbb R^2)$ represents the highest proportion of the plane that can be filled by a set avoiding distance 1. This parameter is related to the fractional chromatic number $χ_f(\mathbb R^2)$ of the plane.
+  We establish that $m_1(\mathbb R^2) \leq 0.25647$ and $χ_f(\mathbb R^2) \geq 3.8991$.</summary>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-10-01T20:20:01Z</published>
+    <arxiv:comment>13 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="math.MG"/>
+    <arxiv:journal_ref>Discrete Mathematics &amp; Theoretical Computer Science, vol. 23 no. 1, Combinatorics (August 31, 2021) dmtcs:5153</arxiv:journal_ref>
+    <author>
+      <name>Thomas Bellitto</name>
+    </author>
+    <author>
+      <name>Arnaud Pêcher</name>
+    </author>
+    <author>
+      <name>Antoine Sédillot</name>
+    </author>
+    <arxiv:doi>10.46298/dmtcs.5153</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.46298/dmtcs.5153" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1604.00438v8</id>
+    <title>Some results on chromatic number as a function of triangle count</title>
+    <updated>2019-01-22T19:17:47Z</updated>
+    <link href="https://arxiv.org/abs/1604.00438v8" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1604.00438v8" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A variety of powerful extremal results have been shown for the chromatic number of triangle-free graphs. Three noteworthy bounds are in terms of the number of vertices, edges, and maximum degree given by Poljak \&amp; Tuza (1994), and Johansson. There have been comparatively fewer works extending these types of bounds to graphs with a small number of triangles. One noteworthy exception is a result of Alon et. al (1999) bounding the chromatic number for graphs with low degree and few triangles per vertex; this bound is nearly the same as for triangle-free graphs. This type of parametrization is much less rigid, and has appeared in dozens of combinatorial constructions.
+  In this paper, we show a similar type of result for $χ(G)$ as a function of the number of vertices $n$, the number of edges $m$, as well as the triangle count (both local and global measures). Our results smoothly interpolate between the generic bounds true for all graphs and bounds for triangle-free graphs. Our results are tight for most of these cases; we show how an open problem regarding fractional chromatic number and degeneracy in triangle-free graphs can resolve the small remaining gap in our bounds.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-04-01T23:43:59Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <arxiv:journal_ref>SIAM Journal on Discrete Mathematics 33(1), pp. 546-563 (2019)</arxiv:journal_ref>
+    <author>
+      <name>David G. Harris</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1212.5933v2</id>
+    <title>Necessary and sufficient conditions for state-independent measurement contextual scenarios</title>
+    <updated>2014-01-30T19:47:43Z</updated>
+    <link href="https://arxiv.org/abs/1212.5933v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1212.5933v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The problem of identifying measurement scenarios capable of revealing state-independent contextuality in a given Hilbert space dimension is considered. We begin by showing that for any given dimension $d$ and any measurement scenario consisting of projective measurements, (i) the measure of contextuality of a quantum state is entirely determined by its spectrum, so that pure and maximally mixed states represent the two extremes of contextual behavior, and that (ii) state-independent contextuality is equivalent to the contextuality of the maximally mixed state up to a global unitary transformation. We then derive a necessary and sufficient condition for a measurement scenario represented by an orthogonality graph to reveal state-independent contextuality. This condition is given in terms of the fractional chromatic number of the graph $χ_f(G)$ and is shown to identify all state-independent contextual measurement scenarios including those that go beyond the original Kochen-Specker paradigm \cite{Yu-Oh}.</summary>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2012-12-24T16:43:27Z</published>
+    <arxiv:comment>6 pages</arxiv:comment>
+    <arxiv:primary_category term="quant-ph"/>
+    <arxiv:journal_ref>Phys. Rev. Lett. 112, 040404 (2014)</arxiv:journal_ref>
+    <author>
+      <name>Ravishankar Ramanathan</name>
+    </author>
+    <author>
+      <name>Pawel Horodecki</name>
+    </author>
+    <arxiv:doi>10.1103/PhysRevLett.112.040404</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1103/PhysRevLett.112.040404" title="doi"/>
+  </entry>
+</feed>

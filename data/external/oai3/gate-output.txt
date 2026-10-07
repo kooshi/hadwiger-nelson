@@ -1,0 +1,12 @@
+entry lint
+  claim tile-colouring: minds 1
+  warn  EXT-OAI3-review.md:436 (tile-colouring): prior art owed — novelty unmeasured; a standing finding
+  claim tile-colouring: prior art owed
+  entries: 1  derived: 1  stalled, gapped or refuted: 0
+quotes
+  statements named in more than one place: 0
+controls
+  ok    tile-colouring-forward: printed '0 colourable and not tileable in 767 cases (n <= 9, |F| <= 4); both in 77'; with the fault planted ('' → '--connection F') it printed '181 colourable and not tileable in 767 c' — it fires
+  ok    tile-colouring-converse: printed '0 tileable and not colourable in 767 cases (n <= 9, |F| <= 4); both in 77'; with the fault planted ('' → '--connection plus1') it printed '6 tileable and not colourable in 767 cas' — it fires
+  controls: 2  fired on their faults: 2
+GATE: PASS (0 failures, 1 warning)

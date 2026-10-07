@@ -1,0 +1,7 @@
+ok    .claude/output-styles/keryx.md: identity = keryx (35,429 bytes), workflow 13,060 bytes
+ok    .claude/agents/poros.md: identity = poros (35,665 bytes), workflow 6,845 bytes
+ok    .claude/agents/ephodos.md: identity = ephodos (49,873 bytes), workflow 15,903 bytes
+ok    .claude/agents/ephodos-verifier.md: identity = ephodos (49,873 bytes), workflow 5,287 bytes
+ok    .claude/agents/debruijn.md: identity = debruijn (24,949 bytes), workflow 6,634 bytes
+ok    .claude/agents/debruijn-implementer.md: identity = debruijn (24,949 bytes), workflow 4,137 bytes
+IDENTITIES: PASS

@@ -1,0 +1,41 @@
+ok    1  /home/kooshi/source/lean-dir/CLAUDE.md                                  "Do not consider Lean formalization a cost. It's practically "
+ok    2  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md             "518. **FS131-K8, by message mid-job: wave 8's foundation wri"
+ok    3  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md             "524. **FS131-K8 done at its Stage 5: wave 8's first planning"
+ok    4  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md             "525. **Rulings on K8's held items, and its slot.** (a) **One"
+ok    5  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md             '498. **The planners of waves 7, 8 and 9 are prepared, and ca'
+ok    6  /home/kooshi/source/lean-dir/plans/FS131-kernel-plan.md                 "### 7.3 What each wave's planning job must hold"
+ok    7  /home/kooshi/source/lean-dir/plans/FS131-kernel-plan.md                 "1. **Reads its rows' derivation entries in full** (the CSV g"
+ok    8  /home/kooshi/source/lean-dir/plans/FS131-kernel-plan.md                 '3. **States every row at the class its argument reads** (G92'
+ok    9  /home/kooshi/source/lean-dir/plans/FS131-kernel-plan.md                 '5. **Checks vacuity at the seam**: a route lemma over a clas'
+ok   10  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '## Stage 2 — SAVED: the dispositions'
+ok   11  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '| FS116-N2-SIXRING | A | theorem, **not stated** (second pas'
+ok   12  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '| FS116-RING-TWIST-C | E | theorem, **not stated** (second p'
+ok   13  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '| FS116-N3-PAIR | E | theorem (second pass) | non-Siamese si'
+ok   14  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '| FS116-N3-STAR2 | E | named-hypothesis implication (second '
+ok   15  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '| FS116-N3-CONE | E | theorem (second pass) | six half-plane'
+ok   16  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '| FS116-N3-CROSS | E | named-hypothesis implication (second '
+ok   17  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '| FS116-V5-OUT2 | E | theorem (second pass) | **likely alrea'
+ok   18  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '| FS116-V5-QCOL | E | theorem (second pass) | its setting is'
+ok   19  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '| FS116-V5-DICHO | E | theorem (second pass) | a statement a'
+ok   20  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '| FS116-N3-SEMI | E | theorem (second pass) | three alternat'
+ok   21  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '| FS116-RING-TRANSFER-QC | E | composition (second pass) | r'
+ok   22  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '| FS129-SR3-OUTERADJ (carrying FS116-V6-ADJ) | E | theorem, '
+ok   23  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '| FS129-MR1-DOUBLETIP | E | theorem, stated (`doubleTip`) | '
+ok   24  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '**The hypothesis from wave 7**: FS114-N7-QOPP enters FS116-N'
+ok   25  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '### 3.3 Seams left open, by name (for the second pass)'
+ok   26  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '- **`IsSemiHub`, `IsFullSemiHub`** are four near-identical c'
+ok   27  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '- **Words the SemiHub rows use and the foundation does not d'
+ok   28  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '- **`GammaFreeRing`** reads "no arc of `Γ` lies on it"; the '
+ok   29  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '- **No concrete tip.** No example exhibits a tip or an outer'
+ok   30  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '- **`outerAdj`**, **`doubleTip`**: arguments not read in thi'
+ok   31  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '### 5.5 Inhabitants and vacuity'
+ok   32  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '### 5.6 The handoff'
+ok   33  urce/lean-dir/.claude/worktrees/fs131-w8/plans/FS131-w8-kernel-plan.md  '- **The second planning pass (K8b)** takes: the nine SemiHub'
+ok   34  e/worktrees/fs131-w7/Proofs/HadwigerNelson/Plane/FourColour/Local.lean  'theorem qArc_inner (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ'
+ok   35  e/worktrees/fs131-w7/Proofs/HadwigerNelson/Plane/FourColour/Local.lean  'theorem qArc_outer (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ'
+ok   36  e/worktrees/fs131-w7/Proofs/HadwigerNelson/Plane/FourColour/Local.lean  'theorem qArc_ne (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} {'
+ok   37  e/worktrees/fs131-w7/Proofs/HadwigerNelson/Plane/FourColour/Local.lean  'theorem qArc_cone_disjoint (hF : F.Valid) (hN : F.NonSiamese'
+ok   38  e/worktrees/fs131-w7/Proofs/HadwigerNelson/Plane/FourColour/Local.lean  'theorem qArc_others_absent (hF : F.Valid) (hN : F.NonSiamese'
+ok   39  rktrees/fs131-w8/Proofs/HadwigerNelson/Plane/RingCalculus/SoleTip.lean  'theorem not_sole_tip_of_adjacent_changePoints (hF : F.Valid)'
+ok   40  /home/kooshi/source/lean-dir/plans/FS131-close-inventory.md             '567. **FS131-I8A, by message mid-job: `emptyNS` is proved an'
+quotations=40 missing=0

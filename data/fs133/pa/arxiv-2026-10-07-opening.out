@@ -1,0 +1,87 @@
+a1 | all:"fractional chromatic number" AND all:plane | total 6 | shown 6
+    2026-06-26 2606.28157v1 | A unit-distance graph in the plane with independence ratio below 1/4
+    2026-06-10 2606.12325v1 | A note on geometric colorings of the Moser lattice
+    2023-11-16 2311.10069v4 | The fractional chromatic number of the plane is at least 4
+    2018-10-01 1810.00960v4 | On the density of sets of the Euclidean plane avoiding distance 1
+    2015-06-05 1506.01887v2 | Fractional and $j$-fold colouring of the plane
+    2015-01-07 1501.01647v1 | The Fractional Chromatic Number of the Plane
+a2 | all:avoiding AND all:"unit distance" AND all:density | total 8 | shown 8
+    2024-08-19 2408.10076v4 | No new lower bound for the density of planar Sets avoiding Unit Distances
+    2024-07-06 2407.05071v1 | Clustering in typical unit-distance avoiding sets
+    2023-11-16 2311.10069v4 | The fractional chromatic number of the plane is at least 4
+    2022-07-28 2207.14179v3 | The density of planar sets avoiding unit distances
+    2018-09-14 1809.05453v3 | Density estimates of 1-avoiding sets via higher order correlations
+    2014-12-31 1501.00168v2 | Better bounds for planar sets avoiding unit distances
+    2014-01-23 1401.6140v2 | The density of sets avoiding distance 1 in Euclidean space
+a3 | all:"independence ratio" AND all:"unit-distance" | total 2 | shown 2
+    2026-06-26 2606.28157v1 | A unit-distance graph in the plane with independence ratio below 1/4
+    2023-11-16 2311.10069v4 | The fractional chromatic number of the plane is at least 4
+a4 | all:"1-avoiding" | total 59 | shown 25
+    2026-08-31 2608.30266v1 | Inversion-descent enumerators of $\underline{32}1$-avoiding permutations
+    2026-07-29 2607.26900v1 | Lehmer Codes and the Reverse-Complement Mapping from (32-1)-Avoiding Permutations to (3-21)-Avoiding Permutations
+    2026-07-20 2607.18417v1 | (32-1)-Avoiding Permutations with Maximum Inversion Number
+    2026-06-29 2606.30186v1 | Small complete 3-term progression free sets in cyclic groups and vector spaces
+    2026-06-21 2606.22580v2 | Extended parameterized spin expansion formalism for ringdown analysis with GW250114
+    2026-05-08 2605.07805v1 | Flexible Routing via Uncertainty Decomposition
+    2026-03-20 2604.00032v1 | Rusty Flying Robots: Learning a Full Robotics Stack with Real-Time Operation on an STM32 Microcontroller in a 9 ECTS MS 
+a5 | all:"Hadwiger-Nelson" | total 29 | shown 25
+    2026-09-28 2609.36220v1 | Hadwiger--Nelson Problem for Typical Norms
+    2026-08-05 2608.04542v5 | A Moser-spindle-free 5-chromatic unit distance graph on 2131 vertices in the plane
+    2026-06-15 2606.16642v2 | On the chromatic number and equilateral dimension of $\mathbb{R}^n$ with the tropical norm
+    2026-01-08 2601.05137v1 | Neural Algorithmic Reasoning for Approximate $k$-Coloring with Recursive Warm Starts
+    2025-12-17 2512.15516v2 | Ramsey problems for graphs in Euclidean spaces and Cartesian powers
+    2025-02-04 2502.01958v1 | On the chromatic number of the plane for map-type colorings
+    2025-01-30 2501.18527v3 | Neural Discovery in Mathematics: Do Machines Dream of Colored Planes?
+a6 | all:"chromatic number of the plane" | total 23 | shown 23
+    2026-06-26 2606.28157v1 | A unit-distance graph in the plane with independence ratio below 1/4
+    2026-06-10 2606.12325v1 | A note on geometric colorings of the Moser lattice
+    2025-02-04 2502.01958v1 | On the chromatic number of the plane for map-type colorings
+    2024-04-22 2404.14398v2 | A lower bound on the number of colours needed to nicely colour a sphere
+    2023-11-16 2311.10069v4 | The fractional chromatic number of the plane is at least 4
+    2023-04-20 2304.10163v3 | The chromatic number of the plane with an interval of forbidden distances is at least 7
+    2023-03-13 2303.06801v1 | A 5-chromatic same-distance graph in the hyperbolic plane
+a7 | all:"measurable chromatic number" | total 12 | shown 12
+    2026-06-15 2606.16642v2 | On the chromatic number and equilateral dimension of $\mathbb{R}^n$ with the tropical norm
+    2026-02-05 2602.05185v2 | Spectral Theory for Borel PMP Graphs
+    2020-04-05 2004.02316v1 | Descriptive Chromatic Numbers of Locally Finite and Everywhere Two Ended Graphs
+    2019-08-30 1908.11613v2 | On the support of a non-autocorrelated function on a hyperbolic surface
+    2018-10-06 1810.03062v2 | Marked Groups with Isomorphic Cayley Graphs but Different Borel Combinatorics
+    2017-08-03 1708.01081v1 | Lower bounds for the measurable chromatic number of the hyperbolic plane
+    2016-11-07 1611.02204v1 | Hyperfiniteness and Borel combinatorics
+a8 | all:"unit-distance graph" AND all:measurable | total 3 | shown 3
+    2022-10-27 2210.16212v1 | A conditional approach for monochromatic unit distance in a plane for four and five coloring
+    2017-01-31 1702.00066v2 | Combinatorial distance geometry in normed spaces
+    2014-01-23 1401.6140v2 | The density of sets avoiding distance 1 in Euclidean space
+a9 | all:"Borel fractional" | total 3 | shown 3
+    2025-01-13 2501.07352v2 | Borel fractional perfect matchings in quasi-transitive amenable graphs
+    2023-11-23 2311.13913v1 | Optimized Self-Similar Borel Summation
+    2021-05-24 2105.11557v3 | Borel fractional colorings of Schreier graphs
+a10 | all:"fractional chromatic number" AND all:measurable | total 9 | shown 9
+    2026-05-27 2605.28709v1 | Improved bounds for the double cap conjecture
+    2025-11-20 2511.15954v1 | A Graph-Theoretic Approach to Quantum Measurement Incompatibility
+    2025-04-02 2504.01295v5 | A Spectral Lower Bound on Chromatic Numbers using $p$-Energy
+    2022-11-03 2211.01699v2 | Round and Bipartize for Vertex Cover Approximation
+    2021-05-24 2105.11557v3 | Borel fractional colorings of Schreier graphs
+    2018-11-28 1811.11806v2 | Fractional coloring with local demands and applications to degree-sequence bounds on the independence number
+a11 | all:"five-colorable" OR all:"five-colourable" | total 76 | shown 25
+    2026-09-29 2609.37973v1 | On-line majority edge-colourings of graphs
+    2026-09-19 2609.23179v1 | Counting edge-colorings of a complete graph avoiding a rainbow $K_4$
+    2026-09-13 2609.14356v1 | Color Complexity of Recolorable Graph Exploration: Upper and Lower Bounds via Block Structure
+    2026-05-19 2605.22860v1 | Every signed planar graph is $5$-choosable: A short proof and refinements
+    2026-03-24 2603.23189v1 | Total coloring of (sub)cubic Halin graphs
+    2025-11-16 2511.12696v1 | IdentYS: A Python-Based Tool for Identifying Young Stars in Star-Forming Regions
+a12 | all:"finitary" AND all:"chromatic number" AND all:plane | total 1 | shown 1
+    2023-11-16 2311.10069v4 | The fractional chromatic number of the plane is at least 4
+a13 | all:"distance-avoiding" AND all:density | total 4 | shown 4
+    2026-09-28 2609.34845v1 | Optimization hierarchies for extremal geometry through complete positivity
+    2024-07-06 2407.05071v1 | Clustering in typical unit-distance avoiding sets
+    2018-04-24 1804.09099v4 | Complete positivity and distance-avoiding sets
+    2008-08-13 0808.1822v2 | Fourier analysis, linear programming, and densities of distance avoiding sets in R^n
+a14 | all:"unit distance" AND all:"invariant" AND all:"independent set" | total 0 | shown 0
+a15 | ti:plane AND ti:colorable | total 67 | shown 25
+    2026-09-01 2609.00583v1 | A 21-Coloring of the Plane Without Monochromatic Unit-Area Rectangles
+    2026-08-08 2608.08367v1 | The Volume Helly Theorem in the plane, colorful version
+    2026-07-28 2607.25682v1 | On t-colorable k-plane drawings
+    2026-06-19 2606.21074v2 | Counting Weighted Bi-Colored Plane Trees and Their Geometric Applications
+    2026-04-16 2604.15466v1 | Any 2-coloring of the plane contains monochromatic unit rhombuses
+    2026-03-05 2603.05339v1 | Garment numbers of bi-colored point sets in the plane

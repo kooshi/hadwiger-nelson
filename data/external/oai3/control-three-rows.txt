@@ -1,0 +1,101 @@
+====================================================================================================
+INDEX ROW: family 167 | A power saving for planar unit distances | preprints/A-power-saving-for-planar-unit-distances-September-23-2026/paper.pdf
+  catalogue abstract: We prove a power saving for the planar unit-distance problem: for some absolute $\beta\lt 4/3$, every set of n points in the Euclidean plane determines $O(n^\beta)$ unordered pairs at unit distance.
+  README title: A power saving for planar unit distances | date: September 23, 2026
+-- BY HAND: pdftotext -l 1, first 1400 characters --
+                    A power saving for planar unit distances
+                                                OpenAI
+
+                                          September 23, 2026
+
+
+                                                Abstract
+         We prove a power saving for the planar unit-distance problem: for some absolute β < 4/3,
+      every set of n points in the Euclidean plane determines O(nβ ) unordered pairs at unit distance.
+
+
+1     Introduction
+For a finite set X ⊂ R2 , write
+                             
+                  u(X) = # {x, y} ⊂ X : ∥x − y∥2 = 1 ,              u(n) = max u(X).
+                                                                            X⊂R2
+                                                                            |X|=n
+
+Thus pairs are unordered and their endpoints are distinct. We prove a fixed power saving over the
+exponent 4/3.
+
+Theorem 1.1. There are absolute constants 0 < C < ∞ and 1 ≤ β < 4/3 such that u(n) ≤ Cnβ
+for every nonnegative integer n.
+
+    Theorem 1.1 gives a positive answer to the question whether this upper exponent can be
+lowered by a fixed amount: equivalently, u(n) = O(n4/3−δ ) for an absolute δ > 0. All constants
+are independent of the configuration.
+
+1.1   The unit-distance problem and earlier methods
+Erdős introduced the repeated-distance problem in 1946 [10]. Rescaling a configuration turns
+any specified positive
+-- BY HAND: TeX source, the abstract environment --
+build/main.tex :  We prove a power saving for the planar unit-distance problem: for some absolute \(\beta<4/3\), every set of \(n\) points in the Euclidean plane determines \(O(n^\beta)\) unordered pairs at unit distance. 
+====================================================================================================
+INDEX ROW: family 172 | A classification of finite Euclidean Ramsey configurations | preprints/A-classification-of-finite-Euclidean-Ramsey-configurations-September-23-2026/paper.pdf
+  catalogue abstract: We classify finite Euclidean Ramsey configurations by a necessary and sufficient tensor condition over their coordinate fields. The Ramsey property here concerns monochromatic congruent copies at the original scale under arbitrary finite colorings. The criterion shows that every nonempty subtransitive set and every nonempty set of at most five points on a circle is Ramsey. In particular, some Ramsey cyclic quadrilaterals are not subtransitive, disproving the necessity direction of the Leader–Russell–Walters conjectured characterization.
+  README title: A classification of finite Euclidean Ramsey configurations | date: September 23, 2026
+-- BY HAND: pdftotext -l 1, first 1400 characters --
+    A classification of finite Euclidean Ramsey configurations
+                                              OpenAI
+
+                                       September 23, 2026
+
+
+                                              Abstract
+         We classify finite Euclidean Ramsey configurations by a necessary and sufficient tensor
+      condition over their coordinate fields. The Ramsey property here concerns monochromatic
+      congruent copies at the original scale under arbitrary finite colorings. The criterion
+      shows that every nonempty subtransitive set and every nonempty set of at most five
+      points on a circle is Ramsey. In particular, some Ramsey cyclic quadrilaterals are not
+      subtransitive, disproving the necessity direction of the Leader–Russell–Walters conjectured
+      characterization.
+
+
+Contents
+1 The classification problem                                                                         1
+  1.1 The exact tensor criterion . . . . . . . . . . . . . . . . . . . . . . . . . . . . .           2
+  1.2 Geometric consequences . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .             3
+  1.3 How the algebra forces a monochromatic copy . . . . . . . . . . . . . . . . . .                3
+
+2 Rational tensors and the coloring obstruction                                                     4
+
+3 A finite lattice identity                          
+-- BY HAND: TeX source, the abstract environment --
+build/main.tex :  We classify finite Euclidean Ramsey configurations by a necessary and sufficient tensor condition over their coordinate fields. The Ramsey property here concerns monochromatic congruent copies at the original scale under arbitrary finite colorings. The criterion shows that every nonempty subtransitive set and every nonempty set of at most five points on a circle is Ramsey. In particular, some Ramsey cyclic quadrilaterals are not subtransitive, disproving the necessity direction of the Leader--Russell--Walters conjectured characterization. 
+====================================================================================================
+INDEX ROW: family 337 | Sharp integral fillings in CAT(0) spaces | preprints/Sharp-integral-fillings-in-CAT(0)-spaces-September-23-2026/paper.pdf
+  catalogue abstract: Every compactly supported integral n-cycle, n ≥ 2, in a proper CAT(0) space bounds a compactly supported integral current with the sharp Euclidean mass bound. The theorem allows arbitrary integer multiplicities and unrestricted ambient dimension. In particular, we prove the Euclidean Cartan–Hadamard isoperimetric conjecture in dimensions at least three.
+  README title: Sharp integral fillings in CAT(0) spaces | date: September 23, 2026
+-- BY HAND: pdftotext -l 1, first 1400 characters --
+                    Sharp integral fillings in CAT(0) spaces
+
+                                               OpenAI
+
+                                        September 23, 2026
+
+
+                                               Abstract
+          Every compactly supported integral n-cycle, n ≥ 2, in a proper CAT(0) space bounds a
+      compactly supported integral current with the sharp Euclidean mass bound. The theorem
+      allows arbitrary integer multiplicities and unrestricted ambient dimension. In particular, we
+      prove the Euclidean Cartan–Hadamard isoperimetric conjecture in dimensions at least three.
+
+
+1    Introduction
+The Euclidean isoperimetric inequality bounds the volume enclosed by a boundary of prescribed
+area. Its current-theoretic form asks for a filling of a cycle and permits singular supports, integer
+multiplicities, and arbitrary codimension. We prove that the sharp Euclidean filling bound holds
+in every proper CAT(0) space, in all cycle dimensions at least two.
+    Write Ij (X) for the integral j-currents of Ambrosio and Kirchheim [3], ∂ for current boundary,
+and M for mass. An integral n-cycle is a current T ∈ In (X) with ∂T = 0; an integral filling is
+a current S ∈ In+1 (X) with ∂S = T . A metric space is proper if its closed bounded balls are
+compact. A CAT(0) space is a geodesic metric space in which the distance between two points
+on a geodesic trian
+-- BY HAND: TeX source, the abstract environment --
+build/main.tex :  Every compactly supported integral $n$-cycle, $n\ge2$, in a proper CAT(0) space bounds a compactly supported integral current with the sharp Euclidean mass bound. The theorem allows arbitrary integer multiplicities and unrestricted ambient dimension. In particular, we prove the Euclidean Cartan--Hadamard isoperimetric conjecture in dimensions at least three. 

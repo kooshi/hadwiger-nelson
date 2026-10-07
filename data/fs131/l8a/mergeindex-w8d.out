@@ -1,0 +1,16 @@
+## control 1: a conflict path left unstaged (scripts/Axioms.lean)
+merge of origin/fs131-w8d (989a0393) into 8de00270, base 6e0cf10d: staged 49 path(s), 2 changed by both sides (ARCHITECTURE.md, scripts/Axioms.lean), 47 taken whole from theirs
+  UNMERGED scripts/Axioms.lean
+  DIRTY (working tree differs from the index): scripts/Axioms.lean
+merge-index: FAIL (2 fault(s))
+exit=1
+## control 2: an extra file staged
+merge of origin/fs131-w8d (989a0393) into 8de00270, base 6e0cf10d: staged 50 path(s), 2 changed by both sides (ARCHITECTURE.md, scripts/Axioms.lean), 48 taken whole from theirs
+  EXTRA staged, not of the merge: data/fs131/l8a/merge-w8d.out
+  NOT-THEIRS: staged data/fs131/l8a/merge-w8d.out is not origin/fs131-w8d's blob
+merge-index: FAIL (2 fault(s))
+exit=1
+## the check, as committed
+merge of origin/fs131-w8d (989a0393) into 8de00270, base 6e0cf10d: staged 49 path(s), 2 changed by both sides (ARCHITECTURE.md, scripts/Axioms.lean), 47 taken whole from theirs
+merge-index: PASS
+exit=0

@@ -61,6 +61,29 @@ NORMALISE: list[tuple[str, str, str]] = [
 
 # token -> reason it may vanish. Keep this small and reviewed.
 ALLOW: dict[str, str] = {
+    # FS-133's filing (2026-10-07, Keryx; FS-133 inventory item 4): row 129's finite-graph killing test for MR is withdrawn (draft D2).
+    '0.00297': "FS-133 withdrew row 129's finite-graph killing test for MR (FS133-E1's draft D2); the window's width stays in `plans/FS105-W-walk.md`",
+    '0.0176': "FS-133 withdrew row 129's finite-graph killing test for MR (FS133-E1's draft D2); the figure stays in `plans/FS105-W-walk.md`",
+    # FS132-F1 (2026-10-07, the coordinator's amendment R1)
+    "data/fs129/index/lean-order-corrected.md": "FS132-F1 (M8) replaced the open-milestones sentence; the fact stays in `plans/LEAN-BACKLOG.md`",
+    "FS129-L1": "FS132-F1 (M8) replaced the open-milestones sentence; the fact stays in `plans/LEAN-BACKLOG.md`",
+    "[hand, two minds each]": "`[OAIMath2026]` Thm 1.3 replaced link 1's grade for the plane's equality (FS132-F1); the fact stays in `plans/STUB-regularity-wall.md`",
+    "4–74": "the group row reads 4–72 since FS132-P1's re-rank (72 ranked rows)",
+    "six-colour-research-directions.md": "FS-49 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/STUB-distance-two-gadget.md`",
+    "six_le_chromaticNumber_plane_of_separated_two": "FS-49 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/STUB-distance-two-gadget.md`",
+    "μ(2)": "FS-49 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/STUB-distance-two-gadget.md`",
+    "J23": "FS-108 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/POROS-2026-10-03-fs129-rerank.md`",
+    "§ J23": "FS-108 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/POROS-2026-10-03-fs129-rerank.md`",
+    "Theorem 5": "FS-108 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/STUB-regular-half-residuals.md`",
+    "FS106-V3's": "FS-108 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/STUB-regular-half-residuals.md`",
+    "FS114-N2-AVG's": "FS-108 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/FS129-OR1-audit.md`",
+    "25's": "FS132-P1 re-drafted the ranked row; the fact stays in `plans/STUB-curved-pencils.md`",
+    "62.14": "FS132-P1 re-drafted the ranked row; the fact stays in `plans/STUB-cp-plane-six.md`",
+    "j/5": "FS132-P1 re-drafted the ranked row; the fact stays in `plans/STUB-cp-plane-six.md`",
+    "m₄(ℝ²)": "FS132-P1 re-drafted the ranked row; the fact stays in `plans/STUB-cp-plane-six.md`",
+    "χ_g(H)": "FS132-P1 re-drafted the ranked row; the fact stays in `plans/STUB-cp-plane-six.md`",
+    "80's": "FS132-P1 re-drafted the ranked row; the fact stays in `plans/STUB-cp-plane-six.md`",
+    "FS112-N3-COR3's": "FS132-P1 re-drafted the ranked row; the fact stays in `plans/FS112-unit-arc-half.md`",
     # FS129-F1 (2026-10-03, the coordinator's amendment R1): FS129-P1's re-drafted ranked rows.
     'j = 2, 3': "FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-cp-plane-six.md`",
     '104–108': "FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-qfree-ring.md`",
@@ -676,6 +699,7 @@ GATE_CHANGES: dict[tuple, str] = {
     (("5525", "5"), ("5783", "5")): "FS-131, wave 10's first landing (FS131-L10A; .claude/worktrees/fs131-w10l/build/gate/axioms/20261006T145710Z-778814.log, copy data/fs131/l10a/receipt-axioms-first.log, gated commit 999cde4a): 5,809 records, 5,783 clean, 17 axiom-free, 4 imported, 5 purchases",
     (("5783", "5"), ("6148", "5")): "FS-131, wave 6's first landing (FS131-L6A; copy data/fs131/l6a/receipt-axioms-first.log, gated commit 7e67af3b): 6,174 records, 6,148 clean, 17 axiom-free, 4 imported, 5 purchases",
     (("6148", "5"), ("6304", "5")): "FS-131, wave 10's second landing (FS131-L10B; copy data/fs131/l10b/receipt-axioms-final.log, gated commit f0cc3018): 6,334 records, 6,304 clean, 17 axiom-free, 8 imported, 5 purchases",
+    (("6304", "5"), ("6521", "5")): "FS-131, wave 8's first landing (FS131-L8A; copy data/fs131/l8a/gate/receipt-axioms-final.log, gated commit 126bff4d): 6,554 records, 6,521 clean, 20 axiom-free, 8 imported, 5 purchases",
 }
 PROTECTED_TAG = "[PROTECTED — never compress, trim"
 GATE_RE = re.compile(r"current audit reads (\d+) clean and (\d+) declared purchases")

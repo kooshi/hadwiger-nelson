@@ -1,0 +1,26 @@
+## Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean — the docstring of v6_hubs
+--- before
+VACUITY DECLARED: the class is empty (`emptyNS`, FS129-SR3-EMPTY-NS); this is a step of that refutation and is consumed
+nowhere else. -/
+theorem v6_hubs 
++++ after
+**Jointly vacuous, and a kernel fact (`v6_hubs_vacuous`)**: the class is empty (`emptyNS`, FS129-SR3-EMPTY-NS); this is a
+step of that refutation and is consumed nowhere else. (Not the scan's `VACUITY DECLARED` marker, which claims that one
+binder's carrier is empty; here each hypothesis is satisfiable alone and the five are not together.) -/
+theorem v6_hubs 
+
+## Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean — the docstring of v6_hug
+--- before
+VACUITY DECLARED: the class is empty (`emptyNS`, FS129-SR3-EMPTY-NS); this is a step of that refutation. Outside the
+Γ-free class the statement to use is `doubleTip`. (The proof reads no Γ-free ring: it is
+`not_sole_tip_of_adjacent_changePoints`, `Plane/RingCalculus/SoleTip`, which `emptyNS` consumes.) -/
+theorem v6_hug 
++++ after
+**Jointly vacuous, and a kernel fact (`v6_hug_vacuous`)**: the class is empty (`emptyNS`, FS129-SR3-EMPTY-NS); this is a
+step of that refutation. (Not the scan's `VACUITY DECLARED` marker, which claims that one binder's carrier is empty; here
+each of the first five hypotheses is satisfiable alone and the five are not together. The statement concludes `False`, so
+the scan skips it as a refutation and reads no marker on it.) Outside the Γ-free class the statement to use is
+`doubleTip`. (The proof reads no Γ-free ring: it is `not_sole_tip_of_adjacent_changePoints`,
+`Plane/RingCalculus/SoleTip`, which `emptyNS` consumes.) -/
+theorem v6_hug 
+

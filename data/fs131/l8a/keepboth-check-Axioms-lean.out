@@ -1,0 +1,2 @@
+check: scripts/Axioms.lean: 6524 non-blank lines; #print axioms lines 5757 = ours 5728 + theirs 5722 - base 5693; faults 0
+three-way: PASS

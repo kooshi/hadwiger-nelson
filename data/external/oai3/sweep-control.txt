@@ -1,0 +1,8 @@
+CONTROL — the sweep on a scratch copy of the index with three of the brief's phrases planted in one row's abstract (row 400)
+  /distance[\s\-–]+avoiding/  →  1 families: 218[A]
+  /measurable[\s\-–]+chromatic/  →  1 families: 218[A]
+  /Moser/  →  1 families: 218[A]
+…and on the true index:
+  /distance[\s\-–]+avoiding/  →  0 families: 
+  /measurable[\s\-–]+chromatic/  →  0 families: 
+  /Moser/  →  0 families: 

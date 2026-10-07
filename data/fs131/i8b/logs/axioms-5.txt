@@ -1,0 +1,31 @@
+/tmp/tmp84v76kly.lean:4:8: warning: declaration uses `sorry`
+'HadwigerNelson.Plane.exists_int_of_angleIcc_subset' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.int_eq_zero_of_two_pi_mul_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.int_eq_zero_of_abs_two_pi_mul_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.segment_eq_image_ray' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.Arc.InitialPiece.exists_param' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.branchPt_mem_Rgn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.branchPt_curveGerm_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.not_both_mem_Rgn_curveGerm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.mem_closure_tile_of_near' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.ncard_tileAt_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsSectorChart.tileAt_equiv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_sectorChart_tileAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_branch_of_isPreconnected' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_initialPiece_branch' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_initialPiece_between' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.exists_initialPiece_of_ncard_le_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.ArcMap.mem_coneAt_add_int_mul_two_pi' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.false_of_antipodal_gaps' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.star_anti_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.star_anti_count' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ArcMap.star_anti' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131I8BControl.planted_sorry' depends on axioms: [sorryAx]

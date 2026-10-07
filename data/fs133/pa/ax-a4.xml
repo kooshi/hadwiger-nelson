@@ -1,0 +1,623 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/q62r+LUA9kqOKTZwpB+4YnDc3D0</id>
+  <title>arXiv Query: search_query=all:"1-avoiding"&amp;id_list=&amp;start=0&amp;max_results=25</title>
+  <updated>2026-10-07T03:03:36Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%221-avoiding%22&amp;start=0&amp;max_results=25&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>25</opensearch:itemsPerPage>
+  <opensearch:totalResults>59</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2608.30266v1</id>
+    <title>Inversion-descent enumerators of $\underline{32}1$-avoiding permutations</title>
+    <updated>2026-08-31T05:16:43Z</updated>
+    <link href="https://arxiv.org/abs/2608.30266v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.30266v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We give the recurrence relation for counting polynomials for permutations avoiding the $\321$ vincular pattern, with respect to inversion numbers and descent numbers, and consequently give the $q$-exponential generating function for these counting polynomials. Furthermore, we give another explanation for these counting polynomials in terms of restricted-growth words.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-31T05:16:43Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Qiongqiong Pan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.26900v1</id>
+    <title>Lehmer Codes and the Reverse-Complement Mapping from (32-1)-Avoiding Permutations to (3-21)-Avoiding Permutations</title>
+    <updated>2026-07-29T13:33:01Z</updated>
+    <link href="https://arxiv.org/abs/2607.26900v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.26900v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $S_n(32\text{-}1)$ and $S_n(3\text{-}21)$ denote the sets of $n$-permutations avoiding the vincular patterns $32\text{-}1$ and $3\text{-}21$, respectively. Using Lehmer codes, we realize these families as weighted posets $L_n(32\text{-}1)$ and $L_n(3\text{-}21)$, where the weight of a code is the inversion number of its permutation. We show that the maximal elements of each of these posets, $\operatorname{Max} L_n(32\text{-}1)$ and $\operatorname{Max} L_n(3\text{-}21)$, are enumerated by the Fibonacci numbers. We demonstrate that the classical reverse-complement map on permutations restricts to a natural bijection between these two sets of maximal elements, revealing a deep symmetry between their underlying poset structures.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-29T13:33:01Z</published>
+    <arxiv:comment>23 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Andrew Beveridge</name>
+    </author>
+    <author>
+      <name>Yufan Hu</name>
+    </author>
+    <author>
+      <name>Yucheng Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.18417v1</id>
+    <title>(32-1)-Avoiding Permutations with Maximum Inversion Number</title>
+    <updated>2026-07-20T18:07:27Z</updated>
+    <link href="https://arxiv.org/abs/2607.18417v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.18417v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A permutation $π\in S_n$ is (32-1)-avoiding when there do not exist $1 \leq i &lt; i+1 &lt; j \leq n$ such that $π_i &gt; π_{i+1} &gt; π_j$. We determine the maximum inversion number for (32-1)-avoiding permutations and count the number of permutations that achieve this maximum. We then provide a direct construction that enumerates these permutations.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-20T18:07:27Z</published>
+    <arxiv:comment>25 pages, 12 figures</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Andrew Beveridge</name>
+    </author>
+    <author>
+      <name>Kristin Heysse</name>
+    </author>
+    <author>
+      <name>Paige Robertson</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.30186v1</id>
+    <title>Small complete 3-term progression free sets in cyclic groups and vector spaces</title>
+    <updated>2026-06-29T11:59:31Z</updated>
+    <link href="https://arxiv.org/abs/2606.30186v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.30186v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A classical extremal problem on progression free sets is to determine the maximum size of a $3$-term arithmetic progression free set in algebraic structures, for instance in intervals of integers or in finite vector spaces. To determine the minimum size of a complete $3$-term arithmetic progression free set is a lower-end analogue of this problem. It is also closely related to complete caps and saturating sets in finite geometry.
+  A simple counting argument shows that the order of magnitude of the minimum size is at least the square root of the cardinality of the structure. Addressing two open problems, we show that this lower bound is essentially tight. First, for every cyclic group $\mathbb{Z}_m$, we give explicit constructions of complete $3$-AP-free sets whose size is less than $2\sqrt m$. For $m\ge81$ the constructed sets satisfy the stronger, so-called complete $(2,-1)$-avoiding property; the remaining cases $m&lt;81$ are covered by a finite verification. Second, we resolve the vector space variant in a weaker sense by showing that for every fixed odd prime $p$ and $\varepsilon&gt;0$, there is a constant $C_{p, \varepsilon}$ such that \[
+  a(3\text{-}\mathrm{AP},\mathbb{F}_p^n)\le C_{p, \varepsilon}\,n^{1+\varepsilon}\,p^{n/2}
+  =p^{n/2+o(n)} \] holds for the minimum size $a(3\text{-}\mathrm{AP},\mathbb{F}_p^n)$ of a complete 3-AP-free subset of $\mathbb{F}_p^n$, for all $n\ge1$.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-29T11:59:31Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Bence Csajbók</name>
+    </author>
+    <author>
+      <name>Zoltán Lóránt Nagy</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.22580v2</id>
+    <title>Extended parameterized spin expansion formalism for ringdown analysis with GW250114</title>
+    <updated>2026-07-16T07:38:15Z</updated>
+    <link href="https://arxiv.org/abs/2606.22580v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.22580v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Parameterized descriptions of black-hole quasinormal-mode spectra are essential for testing gravity with ringdown observations. We extend the Parameterized Spin Expansion Coefficients (ParSpec) formalism by simultaneously sampling the characteristic length scale $\tilde{\ell}$ and the scaling index $\tilde{p}$, rather than fixing $\tilde{p}$ to a theory-motivated integer and constraining $\ell$. Physically, this extension promotes the scaling of the spectral corrections coming from higher-curvature operators to an observable quantity. Methodologically, it enables us to investigate the enlarged ParSpec parameter space and identify the prior geometry induced by conditions on the effective coupling $γ$. We examine the robustness of the framework by using the $220$ and $220+221$ ringdown models over different start times with informative priors on mass and luminosity for GW250114, and further study a joint constraint with GW231123. We find that $\tilde{p}$ remains prior dominated and that the data show no evidence for deviations from general relativity (GR). Among the coupling prescriptions considered, $γ&lt;1$ avoids an artificial correlation between $\tilde{p}$ and $\tilde{\ell}$. At the current signal-to-noise ratio, the results based on the Kullback-Leibler divergence show that the $220$-only model provides more informative constraints than the $220+221$ model. Higher-SNR ringdowns and hierarchical analyses of a larger event population will be required to break the $\tilde{p}-\tilde{\ell}$ degeneracy and directly probe the scaling structure of corrections to GR.</summary>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-21T16:33:05Z</published>
+    <arxiv:comment>19pages,9 figures</arxiv:comment>
+    <arxiv:primary_category term="gr-qc"/>
+    <author>
+      <name>Jia-Ning Chen</name>
+    </author>
+    <author>
+      <name>Liang-Bi Wu</name>
+    </author>
+    <author>
+      <name>Zong-Kuan Guo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.07805v1</id>
+    <title>Flexible Routing via Uncertainty Decomposition</title>
+    <updated>2026-05-08T14:39:57Z</updated>
+    <link href="https://arxiv.org/abs/2605.07805v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.07805v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A key strategy for balancing performance and cost in modern machine learning systems is to dynamically route queries to either a low-cost model or a more expensive oracle (such as a large pretrained model or human expert), an approach known as model routing. In this work we present a new uncertainty-aware router that (1) avoids unnecessary oracle calls on inherently ambiguous queries, and (2) adapts dynamically to different loss functions and cost parameters through simple hyperparameter changes, without retraining. Our method, applicable to any classification setting where multiple independent annotations per input are available, is based on decomposing total uncertainty into irreducible and reducible components using higher-order predictors [Ahdritz et al., 2025]. This enables a unified approach to both routing and abstention: predict with the weak model when uncertainty is low, route to the oracle when reducible uncertainty is high, and abstain when irreducible uncertainty is high. Our router comes with strong theoretical guarantees bounding regret relative to optimal task-specific routers. We conduct experiments on both synthetic and real-world datasets that demonstrate the benefits of our approach in suitable regimes -- in particular, whenever reducible and irreducible uncertainty are not too correlated.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-08T14:39:57Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Charlotte Peale</name>
+    </author>
+    <author>
+      <name>Siddartha Devic</name>
+    </author>
+    <author>
+      <name>Parikshit Gopalan</name>
+    </author>
+    <author>
+      <name>Udi Wieder</name>
+    </author>
+    <author>
+      <name>Aravind Gollakota</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.00032v1</id>
+    <title>Rusty Flying Robots: Learning a Full Robotics Stack with Real-Time Operation on an STM32 Microcontroller in a 9 ECTS MS Course</title>
+    <updated>2026-03-20T15:57:26Z</updated>
+    <link href="https://arxiv.org/abs/2604.00032v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.00032v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We describe a novel masters-level projects class that teaches robotics along the traditional robotics pipeline (dynamics, state estimation, controls, planning). One key motivational part is that students have to directly apply the algorithms they learn on a highly constrained compute platform, effectively making a robot fly. We teach nonlinear algorithms as deployed in state-of-the-art flight stacks such as PX4. Didactically, we rely on two core concepts: 1) avoidance of provided black-box software infrastructure, and 2) usage of the safe and efficient programming language Rust that is used on the PC (for simulation) and an STM32 microcontroller (for robot deployment). We discuss our methodology and the student feedback over two years with ten students each.
+  Teaching material: https://imrclab.github.io/teaching/flying-robots</summary>
+    <category term="physics.ed-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CY" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-20T15:57:26Z</published>
+    <arxiv:comment>Accepted at the International Conference on Robotics in Education (RiE), 2026</arxiv:comment>
+    <arxiv:primary_category term="physics.ed-ph"/>
+    <author>
+      <name>Wolfgang Hoenig</name>
+    </author>
+    <author>
+      <name>Christoph Scherer</name>
+    </author>
+    <author>
+      <name>Khaled Wahba</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.18287v4</id>
+    <title>Duality for Delsarte's extremal problem on locally compact Abelian groups</title>
+    <updated>2026-05-28T11:05:10Z</updated>
+    <link href="https://arxiv.org/abs/2603.18287v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.18287v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Delsarte extremal problem for positive definite functions, originally introduced by Delsarte in coding theory to bound the size of error-correcting codes, has since found applications in diverse areas such as sphere packing, Fuglede's spectral set conjecture, and $1$-avoiding sets.
+  Recent developments have established the existence of extremizers in fairly general settings and identified precise linear programming dual formulations, together with strong duality results, in several important cases including finite groups and $\mathbb{R}^d$.
+  In this paper, we consider a generalized Delsarte problem on locally compact Abelian groups, providing a natural framework for harmonic analysis. We extend both the normalization and the objective functional to encompass a wide range of previously studied cases, while avoiding restrictive topological assumptions common in the literature.
+  Within this general setting, we derive the corresponding dual problem and prove a strong duality theorem, thereby unifying and extending earlier results. Naturally, our proof uses harmonic analysis, but the key is a functional analytic approach which distinguishes our proof from existing methods.</summary>
+    <category term="math.FA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-18T21:18:32Z</published>
+    <arxiv:primary_category term="math.FA"/>
+    <author>
+      <name>Elena E. Berdysheva</name>
+    </author>
+    <author>
+      <name>Bálint Farkas</name>
+    </author>
+    <author>
+      <name>Marcell Gaál</name>
+    </author>
+    <author>
+      <name>Mita D. Ramabulana</name>
+    </author>
+    <author>
+      <name>Szilárd Gy. Révész</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2511.09432v2</id>
+    <title>Equivariant Sparse Autoencoders: Mechanistic Interpretability of Neural Networks on Symmetric Data</title>
+    <updated>2026-08-07T07:55:42Z</updated>
+    <link href="https://arxiv.org/abs/2511.09432v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2511.09432v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Machine learning (ML) models achieve remarkable performance but remain hard to interpret due to their scale and complexity. In particular, their activations entangle many concepts into fewer dimensions, a phenomenon known as superposition. Mechanistic interpretability methods such as sparse autoencoders (SAEs) can disentangle these dense activations into sparse sums of interpretable features, but SAEs suffer from unidentifiability: different explanations can fit the data equally well without necessarily being more interpretable or faithful to the underlying model. We show that this problem is exacerbated by data symmetries such as rotations that are prevalent in scientific domains. We extend the Linear Representation Hypothesis, the theory behind SAEs, to account for symmetries and show on synthetic as well as real-world scientific datasets and models that the resulting Equivariant SAEs can (1) avoid the pitfalls of existing SAEs on symmetric data and (2) discover features more useful for downstream tasks despite worse reconstructions. Our results show that incorporating the correct priors in SAEs can significantly improve their usefulness while highlighting that reconstruction quality can be inversely correlated with feature usefulness under symmetries, cautioning against its use as a key measure of interpretability. Code: https://github.com/ege-erdogan/equivariant-sae</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-11-12T15:48:38Z</published>
+    <arxiv:comment>NeurIPS 2025 Mechanistic Interpretability and UniReps workshops</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Ege Erdogan</name>
+    </author>
+    <author>
+      <name>Ana Lucic</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.17482v1</id>
+    <title>On a conjecture about pattern avoidance of cycle permutations</title>
+    <updated>2024-09-26T02:42:45Z</updated>
+    <link href="https://arxiv.org/abs/2409.17482v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.17482v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $π$ be a cycle permutation that can be expressed as one-line $π= π_1π_2 \cdot\cdot\cdot π_n$ and a cycle form $π= (c_1,c_2, ..., c_n)$. Archer et al. introduced the notion of pattern avoidance of one-line and all cycle forms for a cycle permutation $π$, defined as $π_1π_2 \cdot\cdot\cdot π_n$ and its arbitrary cycle form $c_ic_{i+1}\cdot\cdot\cdot c_nc_1c_2\cdot\cdot\cdot c_{i-1}$ avoid a given pattern. Let $\mathcal{A}^\circ_n(σ; τ)$ denote the set of cyclic permutations in the symmetric group $S_n$ that avoid $σ$ in their one-line form and avoid $τ$ in their all cycle forms. In this note, we prove that $|\mathcal{A}^\circ_n(2431; 1324)|$ is the $(n-1)^{\rm{st}}$ Pell number for any positive integer $n$. Thereby, we give a positive answer to a conjecture of Archer et al.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-26T02:42:45Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Junyao Pan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.07280v2</id>
+    <title>The Stanley-Stembridge Conjecture for $\bf 2 + 1 +1$-avoiding unit interval orders: a diagrammatic proof</title>
+    <updated>2024-04-20T19:41:38Z</updated>
+    <link href="https://arxiv.org/abs/2404.07280v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.07280v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A natural unit interval order is a naturally labelled partially ordered set that avoids patterns ${\bf 3} + {\bf 1}$ and $\bf 2 + 2$. To each natural unit interval order one can associate a symmetric function. The Stanley-Stembridge conjecture states that each such symmetric function is positive in the basis of complete homogenous symmetric functions. This conjecture has connections to cohomology rings of Hessenberg varieties, and to Kazhdan-Lusztig theory. We use a diagrammatic technique to re-prove the special case of the conjecture for unit interval orders additionally avoiding pattern $\bf 2 + 1 + 1$. Originally this special case is due to Gebhard and Sagan.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.RT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-10T18:14:35Z</published>
+    <arxiv:comment>17 pages</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Joseph McDonough</name>
+    </author>
+    <author>
+      <name>Pavlo Pylyavskyy</name>
+    </author>
+    <author>
+      <name>Shiyun Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.12550v4</id>
+    <title>Multilinear Mixture of Experts: Scalable Expert Specialization through Factorization</title>
+    <updated>2024-10-16T20:53:46Z</updated>
+    <link href="https://arxiv.org/abs/2402.12550v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.12550v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Mixture of Experts (MoE) paradigm provides a powerful way to decompose dense layers into smaller, modular computations often more amenable to human interpretation, debugging, and editability. However, a major challenge lies in the computational cost of scaling the number of experts high enough to achieve fine-grained specialization. In this paper, we propose the Multilinear Mixture of Experts ($μ$MoE) layer to address this, focusing on vision models. $μ$MoE layers enable scalable expert specialization by performing an implicit computation on prohibitively large weight tensors entirely in factorized form. Consequently, $μ$MoEs (1) avoid the restrictively high inference-time costs of dense MoEs, yet (2) do not inherit the training issues of the popular sparse MoEs' discrete (non-differentiable) expert routing. We present both qualitative and quantitative evidence that scaling $μ$MoE layers when fine-tuning foundation models for vision tasks leads to more specialized experts at the class-level, further enabling manual bias correction in CelebA attribute classification. Finally, we show qualitative results demonstrating the expert specialism achieved when pre-training large GPT2 and MLP-Mixer models with parameter-matched $μ$MoE blocks at every layer, maintaining comparable accuracy. Our code is available at: https://github.com/james-oldfield/muMoE.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-19T21:20:22Z</published>
+    <arxiv:comment>Accepted at NeurIPS 2024. Github: https://github.com/james-oldfield/muMoE. Project page: https://james-oldfield.github.io/muMoE</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>James Oldfield</name>
+    </author>
+    <author>
+      <name>Markos Georgopoulos</name>
+    </author>
+    <author>
+      <name>Grigorios G. Chrysos</name>
+    </author>
+    <author>
+      <name>Christos Tzelepis</name>
+    </author>
+    <author>
+      <name>Yannis Panagakis</name>
+    </author>
+    <author>
+      <name>Mihalis A. Nicolaou</name>
+    </author>
+    <author>
+      <name>Jiankang Deng</name>
+    </author>
+    <author>
+      <name>Ioannis Patras</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.10069v4</id>
+    <title>The fractional chromatic number of the plane is at least 4</title>
+    <updated>2025-03-27T16:48:40Z</updated>
+    <link href="https://arxiv.org/abs/2311.10069v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.10069v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We prove that the fractional chromatic number $χ_f(\mathbb R^2)$ of the unit distance graph of the Euclidean plane is greater than or equal to $4$. Interestingly, however, we cannot present a finite subgraph $G$ of the plane such that $χ_f(G)\ge 4$. Instead, we utilize the concept of the geometric fractional chromatic number $χ_{gf}(G)$, which was introduced recently in connection with density bounds for 1-avoiding sets.
+  First, as $G$ ranges over finite subgraphs of the plane, we establish that the supremum of $χ_f(G)$ is the same as that of $χ_{gf}(G)$. The proof exploits the amenability of the group of Euclidean transformations in dimension 2 and, as such, we do not know whether the analogous statement holds in higher dimensions. We then present a specific planar unit distance graph $G$ on 27 vertices such that $χ_{gf}(G)=4$, and conclude $χ_f(\mathbb R^2)\ge 4$ as a corollary.
+  As another main result we show that the finitary fractional chromatic number and the Hall ratio of the plane are equal. As a consequence, we conclude that there exist finite unit distance graphs with independence ratio $\frac{1}{4}+\varepsilon$, while we conjecture that the value $\frac{1}{4}$ cannot be reached.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-16T18:09:12Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Máté Matolcsi</name>
+    </author>
+    <author>
+      <name>Imre Z. Ruzsa</name>
+    </author>
+    <author>
+      <name>Dániel Varga</name>
+    </author>
+    <author>
+      <name>Pál Zsámboki</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2303.14265v1</id>
+    <title>Safe and Sample-efficient Reinforcement Learning for Clustered Dynamic Environments</title>
+    <updated>2023-03-24T20:29:17Z</updated>
+    <link href="https://arxiv.org/abs/2303.14265v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2303.14265v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This study proposes a safe and sample-efficient reinforcement learning (RL) framework to address two major challenges in developing applicable RL algorithms: satisfying safety constraints and efficiently learning with limited samples. To guarantee safety in real-world complex environments, we use the safe set algorithm (SSA) to monitor and modify the nominal controls, and evaluate SSA+RL in a clustered dynamic environment which is challenging to be solved by existing RL algorithms. However, the SSA+RL framework is usually not sample-efficient especially in reward-sparse environments, which has not been addressed in previous safe RL works. To improve the learning efficiency, we propose three techniques: (1) avoiding behaving overly conservative by adapting the SSA; (2) encouraging safe exploration using random network distillation with safety constraints; (3) improving policy convergence by treating SSA as expert demonstrations and directly learn from that. The experimental results show that our framework can achieve better safety performance compare to other safe RL methods during training and solve the task with substantially fewer episodes. Project website: https://hychen-naza.github.io/projects/Safe_RL/.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SY" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-03-24T20:29:17Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Hongyi Chen</name>
+    </author>
+    <author>
+      <name>Changliu Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2302.13837v2</id>
+    <title>Decentralized Learning Made Practical with Client Sampling</title>
+    <updated>2024-05-07T14:52:56Z</updated>
+    <link href="https://arxiv.org/abs/2302.13837v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2302.13837v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Decentralized learning (DL) leverages edge devices for collaborative model training while avoiding coordination by a central server. Due to privacy concerns, DL has become an attractive alternative to centralized learning schemes since training data never leaves the device. In a round of DL, all nodes participate in model training and exchange their model with some other nodes. Performing DL in large-scale heterogeneous networks results in high communication costs and prolonged round durations due to slow nodes, effectively inflating the total training time. Furthermore, current DL algorithms also assume all nodes are available for training and aggregation at all times, diminishing the practicality of DL. This paper presents Plexus, an efficient, scalable, and practical DL system. Plexus (1) avoids network-wide participation by introducing a decentralized peer sampler that selects small subsets of available nodes that train the model each round and, (2) aggregates the trained models produced by nodes every round. Plexus is designed to handle joining and leaving nodes (churn). We extensively evaluate Plexus by incorporating realistic traces for compute speed, pairwise latency, network capacity, and availability of edge devices in our experiments. Our experiments on four common learning tasks empirically show that Plexus reduces time-to-accuracy by 1.2-8.3x, communication volume by 2.4-15.3x and training resources needed for convergence by 6.4-370x compared to baseline DL algorithms.</summary>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-02-27T14:39:41Z</published>
+    <arxiv:primary_category term="cs.DC"/>
+    <author>
+      <name>Martijn de Vos</name>
+    </author>
+    <author>
+      <name>Akash Dhasade</name>
+    </author>
+    <author>
+      <name>Anne-Marie Kermarrec</name>
+    </author>
+    <author>
+      <name>Erick Lavoie</name>
+    </author>
+    <author>
+      <name>Johan Pouwelse</name>
+    </author>
+    <author>
+      <name>Rishi Sharma</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2302.03202v2</id>
+    <title>Exploring the Benefits of Training Expert Language Models over Instruction Tuning</title>
+    <updated>2023-02-09T04:55:39Z</updated>
+    <link href="https://arxiv.org/abs/2302.03202v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2302.03202v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recently, Language Models (LMs) instruction-tuned on multiple tasks, also known as multitask-prompted fine-tuning (MT), have shown the capability to generalize to unseen tasks. Previous work has shown that scaling the number of training tasks is the key component in making stronger MT LMs. In this work, we report an unexpected finding that an expert LM fine-tuned on just a single task can outperform an MT LM trained with 300+ different tasks on 11 different unseen datasets and on 13 datasets of the BIG-bench benchmark by a mean accuracy of 3.20% and 1.29%, respectively. This finding casts doubt on the previously held belief that simply scaling the number of tasks makes stronger MT LMs. Leveraging this finding, we further show that this distributed approach of training a separate expert LM per training task instead of a single MT LM for zero-shot inference possesses many benefits including (1) avoiding negative task transfer that often occurs during instruction tuning, (2) being able to continually learn new tasks without having to re-train on previous tasks to avoid catastrophic forgetting, and (3) showing compositional capabilities when merging individual experts together. The code is available at https://github.com/joeljang/ELM.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-02-07T02:24:30Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Joel Jang</name>
+    </author>
+    <author>
+      <name>Seungone Kim</name>
+    </author>
+    <author>
+      <name>Seonghyeon Ye</name>
+    </author>
+    <author>
+      <name>Doyoung Kim</name>
+    </author>
+    <author>
+      <name>Lajanugen Logeswaran</name>
+    </author>
+    <author>
+      <name>Moontae Lee</name>
+    </author>
+    <author>
+      <name>Kyungjae Lee</name>
+    </author>
+    <author>
+      <name>Minjoon Seo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2211.16550v2</id>
+    <title>Soft Alignment Objectives for Robust Adaptation of Language Generation</title>
+    <updated>2023-05-26T12:40:15Z</updated>
+    <link href="https://arxiv.org/abs/2211.16550v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2211.16550v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Domain adaptation allows generative language models to address specific flaws caused by the domain shift of their application. However, the traditional adaptation by further training on in-domain data rapidly weakens the model's ability to generalize to other domains, making the open-ended deployments of the adapted models prone to errors. This work introduces novel training objectives built upon a semantic similarity of the predicted tokens to the reference.
+  Our results show that (1) avoiding the common assumption of a single correct prediction by constructing the training target from tokens' semantic similarity can mitigate catastrophic forgetting during domain adaptation, while (2) preserving the quality of the adaptation, (3) with negligible additions to compute costs.
+  In the broader context, the objectives grounded in a continuous token similarity pioneer the exploration of the middle ground between the efficient but naïve exact-match token-level objectives and expressive but computationally- and resource-intensive sequential objectives.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-11-29T19:23:04Z</published>
+    <arxiv:comment>Annual Meeting of The ACL 2023: Main conference long paper</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Michal Štefánik</name>
+    </author>
+    <author>
+      <name>Marek Kadlčík</name>
+    </author>
+    <author>
+      <name>Petr Sojka</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2203.09063v4</id>
+    <title>Hierarchical Intention Tracking for Robust Human-Robot Collaboration in Industrial Assembly Tasks</title>
+    <updated>2023-08-06T23:05:26Z</updated>
+    <link href="https://arxiv.org/abs/2203.09063v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2203.09063v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Collaborative robots require effective human intention estimation to safely and smoothly work with humans in less structured tasks such as industrial assembly, where human intention continuously changes. We propose the concept of intention tracking and introduce a collaborative robot system that concurrently tracks intentions at hierarchical levels. The high-level intention is tracked to estimate human's interaction pattern and enable robot to (1) avoid collision with human to minimize interruption and (2) assist human to correct failure. The low-level intention estimate provides robot with task-related information. We implement the system on a UR5e robot and demonstrate robust, seamless and ergonomic human-robot collaboration in an ablative pilot study of an assembly use case. Our robot demonstrations and videos are available at \url{https://sites.google.com/view/hierarchicalintentiontracking}.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-03-17T03:48:54Z</published>
+    <arxiv:comment>8 pages, 6 figures. Accepted by ICRA 2023</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Zhe Huang</name>
+    </author>
+    <author>
+      <name>Ye-Ji Mun</name>
+    </author>
+    <author>
+      <name>Xiang Li</name>
+    </author>
+    <author>
+      <name>Yiqing Xie</name>
+    </author>
+    <author>
+      <name>Ninghan Zhong</name>
+    </author>
+    <author>
+      <name>Weihang Liang</name>
+    </author>
+    <author>
+      <name>Junyi Geng</name>
+    </author>
+    <author>
+      <name>Tan Chen</name>
+    </author>
+    <author>
+      <name>Katherine Driggs-Campbell</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2112.14216v4</id>
+    <title>Casper: Accelerating Stencil Computation using Near-cache Processing</title>
+    <updated>2023-09-05T20:13:46Z</updated>
+    <link href="https://arxiv.org/abs/2112.14216v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2112.14216v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Stencil computation is one of the most used kernels in a wide variety of scientific applications, ranging from large-scale weather prediction to solving partial differential equations. Stencil computations are characterized by three unique properties: (1) low arithmetic intensity, (2) limited temporal data reuse, and (3) regular and predictable data access pattern. As a result, stencil computations are typically bandwidth-bound workloads, which only experience limited benefits from the deep cache hierarchy of modern CPUs. In this work, we propose Casper, a near-cache accelerator consisting of specialized stencil compute units connected to the last-level cache (LLC) of a traditional CPU. Casper is based on two key ideas: (1) avoiding the cost of moving rarely reused data through the cache hierarchy, and (2) exploiting the regularity of the data accesses and the inherent parallelism of the stencil computation to increase the overall performance.
+  With minimal changes in LLC address decoding logic and data placement, Casper performs stencil computations at the peak bandwidth of the LLC. We show that, by tightly coupling lightweight stencil compute units near to LLC, Casper improves the performance of stencil kernels by 1.65x on average, while reducing the energy consumption by 35% compared to a commercial high-performance multi-core processor. Moreover, Casper provides a 37x improvement in performance-per-area compared to a state-of-the-art GPU.</summary>
+    <category term="cs.AR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-12-28T16:45:56Z</published>
+    <arxiv:primary_category term="cs.AR"/>
+    <author>
+      <name>Alain Denzler</name>
+    </author>
+    <author>
+      <name>Rahul Bera</name>
+    </author>
+    <author>
+      <name>Nastaran Hajinazar</name>
+    </author>
+    <author>
+      <name>Gagandeep Singh</name>
+    </author>
+    <author>
+      <name>Geraldo F. Oliveira</name>
+    </author>
+    <author>
+      <name>Juan Gómez-Luna</name>
+    </author>
+    <author>
+      <name>Onur Mutlu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2111.10703v1</id>
+    <title>The Gittins Policy in the M/G/1 Queue</title>
+    <updated>2021-11-21T00:32:15Z</updated>
+    <link href="https://arxiv.org/abs/2111.10703v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2111.10703v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Gittins policy is a highly general scheduling policy that minimizes a wide variety of mean holding cost metrics in the M/G/1 queue. Perhaps most famously, Gittins minimizes mean response time in the M/G/1 when jobs' service times are unknown to the scheduler. Gittins also minimizes weighted versions of mean response time. For example, the well-known "$cμ$ rule", which minimizes class-weighted mean response time in the multiclass M/M/1, is a special case of Gittins.
+  However, despite the extensive literature on Gittins in the M/G/1, it contains no fully general proof of Gittins's optimality. This is because Gittins was originally developed for the multi-armed bandit problem. Translating arguments from the multi-armed bandit to the M/G/1 is technically demanding, so it has only been done rigorously in some special cases. The extent of Gittins's optimality in the M/G/1 is thus not entirely clear.
+  In this work we provide the first fully general proof of Gittins's optimality in the M/G/1. The optimality result we obtain is even more general than was previously known. For example, we show that Gittins minimizes mean slowdown in the M/G/1 with unknown or partially known service times, and we show that Gittins's optimality holds under batch arrivals. Our proof uses a novel approach that works directly with the M/G/1, avoiding the difficulties of translating from the multi-armed bandit problem.</summary>
+    <category term="math.PR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.PF" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-11-21T00:32:15Z</published>
+    <arxiv:comment>Originally published at WiOpt 2021; this extended and revised version includes additional discussion throughout and fixes a minor error in Section VII</arxiv:comment>
+    <arxiv:primary_category term="math.PR"/>
+    <author>
+      <name>Ziv Scully</name>
+    </author>
+    <author>
+      <name>Mor Harchol-Balter</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2110.10731v2</id>
+    <title>Inflation with $0 \leq c_{\rm s} \leq 1$</title>
+    <updated>2022-02-08T01:04:43Z</updated>
+    <link href="https://arxiv.org/abs/2110.10731v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2110.10731v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We investigate a novel single field inflationary scenario which allows a transition between a slow-roll k-inflation with $c_{\rm s}$ of order unity and a ghost inflation with $ c_{\rm s} \simeq 0$, where $ c_{\rm s}$ is the sound speed for the curvature perturbations. We unify the two phases smoothly by appropriately taking into account a higher derivative scordatura term, which is always there from the effective field theory point of view but which becomes important only in the $c_{\rm s} \simeq 0$ regime. The model achieves the whole range of $0 \leq c_{\rm s} \leq 1$ avoiding strong coupling and gradient instability, and allows us to access the $c_{\rm s} \simeq 0$ regime in a self-consistent manner. We also discuss implications to the formation of primordial black holes.</summary>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="astro-ph.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-10-20T19:08:11Z</published>
+    <arxiv:comment>29 pages, 8 figures, matches published version</arxiv:comment>
+    <arxiv:primary_category term="hep-th"/>
+    <arxiv:journal_ref>JCAP 02 (2022) 030</arxiv:journal_ref>
+    <author>
+      <name>Mohammad Ali Gorji</name>
+    </author>
+    <author>
+      <name>Hayato Motohashi</name>
+    </author>
+    <author>
+      <name>Shinji Mukohyama</name>
+    </author>
+    <arxiv:doi>10.1088/1475-7516/2022/02/030</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1088/1475-7516/2022/02/030" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2110.09592v2</id>
+    <title>Large Salem Sets Avoiding Nonlinear Configurations</title>
+    <updated>2024-10-31T01:53:01Z</updated>
+    <link href="https://arxiv.org/abs/2110.09592v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2110.09592v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We construct large Salem sets avoiding patterns, complementing previous constructions of pattern avoiding sets with large Hausdorff dimension. For a (possibly uncountable) family of uniformly Lipschitz functions $\{ f_i : (\mathbb{T}^d)^{n-2} \to \mathbb{T}^d \}$, we obtain a Salem subset of $\mathbb{T}^d$ with dimension $d/(n-1)$ avoiding nontrivial solutions to the equation $x_n - x_{n-1} = f_i(x_1,\dots,x_{n-2})$. For a countable family of smooth functions $\{ f_i : (\mathbb{T}^d)^{n-1} \to \mathbb{T}^d \}$ satisfying a modest geometric condition, we obtain a Salem subset of $\mathbb{T}^d$ with dimension $d/(n-3/4)$ avoiding nontrivial solutions to the equation $x_n = f(x_1,\dots,x_{n-1})$. For a set $Z \subset \mathbb{T}^{dn}$ which is the countable union of a family of sets, each with lower Minkowski dimension $s$, we obtain a Salem subset of $\mathbb{T}^d$ of dimension $(dn - s)/(n - 1/2)$ whose Cartesian product does not intersect $Z$ except at points with non-distinct coordinates.</summary>
+    <category term="math.CA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-10-18T19:27:30Z</published>
+    <arxiv:comment>39 pages, 1 figure</arxiv:comment>
+    <arxiv:primary_category term="math.CA"/>
+    <author>
+      <name>Jacob Denson</name>
+    </author>
+    <arxiv:doi>10.1017/prm.2025.10097</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1017/prm.2025.10097" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2110.03585v2</id>
+    <title>To Charge or to Sell? EV Pack Useful Life Estimation via LSTMs, CNNs, and Autoencoders</title>
+    <updated>2023-12-29T14:15:19Z</updated>
+    <link href="https://arxiv.org/abs/2110.03585v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2110.03585v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Electric vehicles (EVs) are spreading fast as they promise to provide better performance and comfort, but above all, to help face climate change. Despite their success, their cost is still a challenge. Lithium-ion batteries are one of the most expensive EV components, and have become the standard for energy storage in various applications. Precisely estimating the remaining useful life (RUL) of battery packs can encourage their reuse and thus help to reduce the cost of EVs and improve sustainability. A correct RUL estimation can be used to quantify the residual market value of the battery pack. The customer can then decide to sell the battery when it still has a value, i.e., before it exceeds the end of life of the target application, so it can still be reused in a second domain without compromising safety and reliability. This paper proposes and compares two deep learning approaches to estimate the RUL of Li-ion batteries: LSTM and autoencoders vs. CNN and autoencoders. The autoencoders are used to extract useful features, while the subsequent network is then used to estimate the RUL. Compared to what has been proposed so far in the literature, we employ measures to ensure the method's applicability in the actual deployed application. Such measures include (1) avoiding using non-measurable variables as input, (2) employing appropriate datasets with wide variability and different conditions, and (3) predicting the remaining ampere-hours instead of the number of cycles. The results show that the proposed methods can generalize on datasets consisting of numerous batteries with high variance.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-10-07T16:09:01Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>Energies. 2023; 16(6):2837</arxiv:journal_ref>
+    <author>
+      <name>Michael Bosello</name>
+    </author>
+    <author>
+      <name>Carlo Falcomer</name>
+    </author>
+    <author>
+      <name>Claudio Rossi</name>
+    </author>
+    <author>
+      <name>Giovanni Pau</name>
+    </author>
+    <arxiv:doi>10.3390/en16062837</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.3390/en16062837" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2108.11528v2</id>
+    <title>Decreasing subsequences and Viennot for oscillating tableaux</title>
+    <updated>2026-01-15T18:18:13Z</updated>
+    <link href="https://arxiv.org/abs/2108.11528v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2108.11528v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We establish an extension of Viennot's geometric (shadow line) construction to the setting of oscillating tableaux. We then use this to give a new proof of the Type $C$ analogue of Schensted's theorem on longest decreasing subsequences. This pairs with our results from arXiv:2103.14997v1 [math.RT] on Type $C$ webs to give a direct proof of a result of Sundaram and Stanley: that the dimension of the space of invariant vectors in a $2k$-fold tensor product of the vector representation of $\mathfrak{sp}_{2n}$ equals the number of $(n+1)$-avoiding matchings of $2k$ points.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.RT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-08-26T00:36:38Z</published>
+    <arxiv:comment>16 pages, many diagrams, color viewing essential, final version (to appear in Abh. Math. Semin. Univ. Hambg.)</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Elijah Bodish</name>
+    </author>
+    <author>
+      <name>Ben Elias</name>
+    </author>
+    <author>
+      <name>David E. V. Rose</name>
+    </author>
+    <author>
+      <name>Logan Tatham</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2103.05050v2</id>
+    <title>Forbidden intersections for codes</title>
+    <updated>2021-06-21T01:24:39Z</updated>
+    <link href="https://arxiv.org/abs/2103.05050v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2103.05050v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Determining the maximum size of a $t$-intersecting code in $[m]^n$ was a longstanding open problem of Frankl and Füredi, solved independently by Ahlswede and Khachatrian and by Frankl and Tokushige. We extend their result to the setting of forbidden intersections, by showing that for any $m&gt;2$ and $n$ large compared with $t$ (but not necessarily $m$) that the same bound holds for codes with the weaker property of being $(t-1)$-avoiding, i.e.\ having no two vectors that agree on exactly $t-1$ coordinates. Our proof proceeds via a junta approximation result of independent interest, which we prove via a development of our recent theory of global hypercontractivity: we show that any $(t-1)$-avoiding code is approximately contained in a $t$-intersecting junta (a code where membership is determined by a constant number of co-ordinates). In particular, when $t=1$ this gives an alternative proof of a recent result of Eberhard, Kahn, Narayanan and Spirkl that symmetric intersecting codes in $[m]^n$ have size $o(m^n)$.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-03-08T20:10:09Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Peter Keevash</name>
+    </author>
+    <author>
+      <name>Noam Lifshitz</name>
+    </author>
+    <author>
+      <name>Eoin Long</name>
+    </author>
+    <author>
+      <name>Dor Minzer</name>
+    </author>
+  </entry>
+</feed>

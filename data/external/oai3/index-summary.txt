@@ -1,0 +1,13 @@
+families parsed from CONTENTS.md: 372 (distinct: 372; numbered 001..377; contiguous: False)
+manuscripts parsed from CONTENTS.md: 722 (distinct pdf paths: 722)
+preprint folders on disk: 722; in catalogue and on disk: 722; on disk not in catalogue: []; in catalogue not on disk: []
+catalogue pdf missing on disk: []
+manuscripts with TeX source in their folder: 722
+README title equals catalogue title: 668 of 722
+catalogue notes after a manuscript link: ['secondary writeup'] on 1 manuscripts
+families with a subject from overview.tex: 372
+families whose catalogue entry links a Lean note: 235; lean/docs notes on disk: 235; families with a note on disk: 235; mismatch: []
+formalization.yaml: sources listed 162; of them manuscripts in the catalogue 162; main_results (comparator configs) 185
+manuscripts in a family with a Lean note: 467; manuscripts named in their family's note: 330
+pdf abstracts located by the heuristic: 722 of 722
+families by subject: Theoretical computer science 40; Combinatorics 37; Algebraic and complex geometry 36; Number theory 31; Probability and statistical mechanics 29; Differential geometry 29; Mathematical physics 25; Operator algebras 19; Algebra 18; Topology 18; Real and complex analysis 16; Partial differential equations 16; Convex and metric geometry 15; Group theory 14; Dynamical systems and ergodic theory 12; Functional analysis 11; Mathematical logic 6

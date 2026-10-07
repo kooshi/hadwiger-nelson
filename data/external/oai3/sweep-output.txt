@@ -1,0 +1,86 @@
+==============================================================================================================
+A — the discipline's words (the brief's list)
+  /chromatic[\s\-–]+number[\s\-–]+of[\s\-–]+the[\s\-–]+plane/  →  1 families: 158[AP]
+  /Hadwiger/  →  2 families: 157[AFPT] 158[F]
+  /Nelson/  →  1 families: 158[F]
+  /unit[\s\-–]+distance/  →  2 families: 158[AP] 167[AFPT]
+  /unit[\s\-–]+distance[\s\-–]+graph/  →  0 families: 
+  /distance[\s\-–]+avoiding/  →  0 families: 
+  /measurable[\s\-–]+chromatic/  →  0 families: 
+  /Falconer/  →  1 families: 073[AFPT]
+  /de Grey/  →  0 families: 
+  /Moser/  →  0 families: 
+  /polychromatic/  →  0 families: 
+  /Erd[oő]s.{0,40}unit[\s\-]distance/  →  0 families: 
+==============================================================================================================
+A — from the other side (the brief's list)
+  /colou?r\w*.{0,80}(plane|Euclid)/  →  2 families: 158[AFP] 172[F]
+  /(plane|Euclid)\w*.{0,80}colou?r/  →  1 families: 158[AFPT]
+  /distance[\s\-–]+graph/  →  0 families: 
+  /forbidden[\s\-–]+distance/  →  0 families: 
+  /densit\w+.{0,80}avoid/  →  0 families: 
+  /avoid\w*.{0,80}(distance|densit)/  →  0 families: 
+==============================================================================================================
+A — widened by me: the same questions elsewhere
+  /chromatic/  →  12 families: 157[AFPT] 158[AFP] 160[F] 162[F] 164[T] 169[AFPT] 171[F] 172[AFP] 184[AP] 314[AFPT] 318[AFPT] 319[F]
+  /colou?ring/  →  9 families: 106[AFP] 157[AFPT] 158[AFP] 160[F] 164[AFP] 171[F] 172[AFP] 184[AFPT] 189[F]
+  /Ramsey/  →  4 families: 170[AFPT] 171[AFPT] 172[AFPT] 189[FT]
+  /distance[\s\-–]+set/  →  0 families: 
+  /distinct[\s\-–]+distance/  →  2 families: 166[AFPT] 167[AFP]
+  /repeated[\s\-]distance/  →  0 families: 
+  /pinned/  →  2 families: 167[AFPT] 218[AP]
+  /Borsuk/  →  1 families: 156[AFPT]
+  /Kneser/  →  0 families: 
+  /independence (ratio|number|density)/  →  1 families: 157[AFP]
+  /independent set/  →  4 families: 106[AFPT] 114[F] 170[F] 184[AFP]
+  /sphere[\s\-–]+packing/  →  0 families: 
+  /kissing/  →  0 families: 
+  /\bdistances?\b/  →  30 families: 022[AFP] 028[FP] 073[AFPT] 090[AFP] 099[AFPT] 121[AFPT] 131[AP] 137[AP] 139[AP] 158[AFP] 166[AFPT] 167[AFPT] 173[AFP] 190[F] 211[AP] 218[AP] 219[AP] 220[AP] 227[AP] 228[F] 232[AP] 234[AP] 238[AP] 267[AFP] 289[AFP] 322[AP] 357[AFP] 360[AFP] 361[AP] 374[AP]
+  /isosceles|equilateral|congruent cop/  →  3 families: 172[AP] 211[AP] 237[AP]
+  /Steinhaus/  →  0 families: 
+  /Lov[aá]sz/  →  0 families: 
+  /Hoffman/  →  0 families: 
+==============================================================================================================
+B — what this project assumes or poses
+  /measure[\s\-–]+rigidity/  →  1 families: 015[AP]
+  /rigidity/  →  11 families: 015[AP] 071[APT] 147[APT] 241[AFPT] 260[FT] 286[F] 290[AP] 337[FT] 339[AFP] 348[APT] 353[F]
+  /Furstenberg/  →  0 families: 
+  /[×x]\s?2.{0,6}[×x]\s?3/  →  1 families: 373[P]
+  /invariant measure/  →  0 families: 
+  /Rajchman/  →  0 families: 
+  /Kloosterman/  →  0 families: 
+  /Weil/  →  6 families: 002[AP] 004[AP] 006[AP] 014[AFP] 032[APT] 056[AFP]
+  /Bochner/  →  1 families: 078[AFPT]
+  /Herglotz/  →  0 families: 
+  /positive[\s\-]definite/  →  2 families: 334[AFP] 353[AP]
+  /Tarski/  →  0 families: 
+  /real[\s\-]closed/  →  0 families: 
+  /semialgebraic|semi-algebraic/  →  1 families: 058[AFPT]
+  /Einsiedler|Lindenstrauss|Katok|Rudolph/  →  1 families: 339[AFP]
+  /character group|Pontryagin|solenoid|adel/  →  1 families: 376[APT]
+  /equidistribut/  →  1 families: 015[AFPT]
+  /joining/  →  7 families: 028[F] 049[AFP] 119[AP] 189[AP] 256[F] 331[AP] 351[AP]
+  /Hedetniemi/  →  0 families: 
+  /fractional chromatic/  →  1 families: 157[AP]
+  /Cayley graph/  →  0 families: 
+  /unit[\s\-]vector/  →  3 families: 083[AFP] 100[P] 140[AFP]
+  /finite (field|plane)/  →  3 families: 014[AP] 032[AFP] 197[AP]
+  /quadratic field|number field/  →  6 families: 018[APT] 019[AP] 027[F] 030[AFPT] 031[AFP] 032[AP]
+==============================================================================================================
+D — methods and neighbours
+  /tiling|tile\b|tessellat/  →  2 families: 155[AFPT] 224[AP]
+  /Voronoi/  →  2 families: 090[AP] 224[AFPT]
+  /planar (map|graph)/  →  3 families: 089[AFPT] 180[T] 211[AFPT]
+  /four[\s\-]colou?r/  →  0 families: 
+  /Kempe/  →  0 families: 
+  /Borel|measurable/  →  14 families: 014[AP] 096[AFP] 100[P] 145[F] 154[AP] 222[AFP] 231[AP] 262[AP] 267[AP] 320[AFP] 323[AFP] 360[F] 365[AFPT] 373[AP]
+  /descriptive/  →  0 families: 
+  /Lebesgue densit|finite perimeter|isoperimetr/  →  3 families: 093[AP] 337[AFPT] 354[AFPT]
+  /incidence/  →  0 families: 
+  /Szemer[eé]di/  →  2 families: 159[F] 184[AFP]
+  /Delsarte|linear programming bound|semidefinite/  →  5 families: 095[AFPT] 096[F] 117[AFP] 126[AFP] 262[AP]
+  /ergodic/  →  4 families: 150[AFPT] 152[AFP] 154[AFPT] 220[AFP]
+  /Euclidean/  →  23 families: 028[P] 073[AFP] 079[AFP] 081[AP] 096[AP] 097[AFPT] 100[P] 140[AP] 150[AFP] 158[AFPT] 167[AP] 172[AFPT] 331[AP] 333[APT] 334[AP] 337[AFPT] 338[AP] 343[AP] 346[AFP] 353[AFP] 357[F] 361[AFP] 373[P]
+  /lattice/  →  23 families: 015[AFP] 090[AFPT] 092[AFPT] 155[F] 204[AFP] 206[AFPT] 213[T] 215[AFPT] 216[AFP] 218[AFP] 223[AFPT] 224[AFP] 225[AFP] 226[AFP] 232[AFPT] 233[F] 237[AFPT] 255[AFP] 261[AFP] 265[AFP] 271[AFPT] 286[AFPT] 376[AP]
+  /graph/  →  45 families: 011[T] 028[AFP] 089[AFPT] 102[AFP] 106[AFPT] 113[AFPT] 117[AP] 120[AFPT] 124[F] 131[AFPT] 133[AFPT] 157[AFP] 161[AFP] 162[AFP] 165[AFPT] 169[AFP] 171[F] 173[AFP] 174[AFP] 175[AFPT] 176[AFP] 177[AFP] 178[AFPT] 180[AFPT] 181[AFPT] 184[AFPT] 186[AFPT] 188[AFP] 189[F] 206[AP] 211[AP] 213[AFPT] 214[AFPT] 215[AP] 218[AP] 219[AFPT] 229[AP] 231[AFP] 260[APT] 265[AP] 281[F] 307[AFP] 331[AP] 336[AP] 353[AFPT]
+  /Lean/  →  11 families: 112[FT] 119[AFPT] 127[AFP] 132[AFP] 186[AP] 192[AFP] 219[AFP] 235[AP] 243[AP] 283[AFPT] 284[AFP]

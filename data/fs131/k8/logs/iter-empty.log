@@ -1,0 +1,9 @@
+slot: admitted lake: mem 10 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:86:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:97:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:109:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:125:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:136:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:148:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:180:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:193:8: warning: declaration uses `sorry`

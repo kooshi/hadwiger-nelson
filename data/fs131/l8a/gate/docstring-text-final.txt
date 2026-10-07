@@ -1,0 +1,16 @@
+ok    Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean: 2 doc comment(s) changed, nothing else
+    doc comment changed, l.323 (base l.323) — docstring of: theorem v6_hubs {F : ArcMap 6} (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers p 1)
+    doc comment changed, l.362 (base l.361) — docstring of: theorem v6_hug {F : ArcMap 6} (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers p 1)
+ok    Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: 3 doc comment(s) changed, nothing else
+    doc comment changed, l.7 (base l.7) — module doc
+    doc comment changed, l.256 (base l.256) — docstring of: theorem qcol_inner_tile (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k}
+    doc comment changed, l.908 (base l.908) — docstring of: theorem fullSemiHub_star_crossed (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hpd : p ∈ F.dom) (hS : F.SimpleOn
+ok    Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean: 6 doc comment(s) changed, nothing else
+    doc comment changed, l.5 (base l.5) — module doc
+    doc comment changed, l.529 (base l.529) — docstring of: theorem semiHub_places (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers p 1) {ψ : ℝ}
+    doc comment changed, l.694 (base l.694) — docstring of: theorem crossed_four (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers p 1) (hS : F.SimpleOn {p})
+    doc comment changed, l.749 (base l.749) — docstring of: theorem crossed_changePoint (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers p 2) (hS : F.SimpleOn {p
+    doc comment changed, l.931 (base l.931) — docstring of: theorem crossed_semiHub (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers p 2) {ψ : ℝ}
+    doc comment changed, l.996 (base l.996) — docstring of: theorem transferQC (hF : F.Valid) (hN : F.NonSiamese) {p : ℂ} (hp : F.Covers p 1) {ψ : ℝ}
+text: files=3 doc-comments-changed=11 failed=0 (base 1171c25b)
+exit=0

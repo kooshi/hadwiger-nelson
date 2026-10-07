@@ -1,0 +1,46 @@
+6a: open-milestones span replaced (M7, M8 inside)
+6b: rank 1 FS-132 added as drafted
+rank 6 FS-127 first sentence: 1 match, replaced (96 -> 265 chars)
+M17 on rank 7 FS-128: verdict and reason appended to the question cell
+rank 10 name: 1 match, replaced (28 -> 87 chars)
+rank 10: cost and solver cells replaced by P's words (unpriced / none)
+M17 on rank 11 FS-120: verdict and reason appended to the question cell
+M17 on rank 13 FS-62: verdict appended to the status cell
+M17 on rank 14 FS-39: verdict appended to the status cell
+M17 on rank 17 FS-113: verdict appended to the status cell
+M17 on rank 19 FS-80: verdict appended to the status cell
+M17 on rank 21 FS-59: verdict appended to the status cell
+M17 on rank 25 FS-102: verdict appended to the status cell
+6b/6c: ranked table rebuilt: 72 rows
+6d: FS-44, FS-49, FS-108 entered the closed list (at its head), banners verbatim
+count: ranked table holds 72 rows; every FS number once; closed three absent
+M18 FS-128 title: 1 match, replaced (34 -> 25 chars)
+M18 FS-120 title: 1 match, replaced (55 -> 26 chars)
+7: banner of FS-104 filed under the title of plans/STUB-cp-plane-six.md
+7: banner of FS-128 filed under the title of plans/STUB-top-colour.md
+7: banner of FS-120 filed under the title of plans/STUB-pinch-at-junction.md
+7: banner of FS-127 filed under the title of plans/STUB-lateral-extent.md
+7: banner of FS-126 filed under the title of plans/STUB-curved-pencils.md
+7: banner of FS-108 filed under the title of plans/STUB-regular-half-residuals.md
+7: banner of FS-44 filed under the title of plans/STUB-fifth-colour-structure.md
+7: banner of FS-49 filed under the title of plans/STUB-distance-two-gadget.md
+7: banner of FS-113 filed under the title of plans/STUB-mr-in-lean.md
+7: banner of FS-123 filed under the title of plans/STUB-qfree-ring.md
+7: banner of FS-124 filed under the title of plans/STUB-q-ring.md
+7: banner of FS-39 filed under the title of plans/STUB-plane-bridge.md
+7: banner of FS-59 filed under the title of plans/STUB-four-colours-167.md
+7: banner of FS-62 filed under the title of plans/STUB-six-is-not-a-value.md
+D4: one paragraph inserted after the paragraph beginning '**Provisional bearings, updated at the 2026-09-25 '
+D5: one paragraph inserted after the paragraph beginning 'G80 (infinite rank is the resource; the height cou'
+D7: one paragraph inserted after the paragraph beginning '**Provisional bearings (Poros, 2026-10-07; Ephodos'
+
+STOPS (left unfiled or filed as stated):
+rank 3 FS-123 solver cell: P gives "the placement is the Searcher's; otherwise as filed" — left as filed
+rank 18 FS-101: verdict "**unchanged** (field rows, given MR); its collapse slot is discharged for the plane by the import" carries a clause beside "unchanged"; moved to its rank, status cell NOT appended
+rank 20 FS-67: verdict "**unchanged**, given MR" / reason "field-level; FS-96's outcome "a CP five-colouring of the pla…" carries a clause beside "unchanged"; moved to its rank, status cell NOT appended
+rank 22 FS-96: verdict "**unchanged**, given MR" / reason "field-level; FS-96's outcome "a CP five-colouring of the pla…" carries a clause beside "unchanged"; moved to its rank, status cell NOT appended
+rank 23 FS-64: verdict "**unchanged**, given MR" / reason "field-level; FS-96's outcome "a CP five-colouring of the pla…" carries a clause beside "unchanged"; moved to its rank, status cell NOT appended
+rank 24 FS-63: verdict "**unchanged**, given MR" / reason "field-level; FS-96's outcome "a CP five-colouring of the pla…" carries a clause beside "unchanged"; moved to its rank, status cell NOT appended
+rank 32 FS-78: verdict "**unchanged; consumer closed**" / reason "each bore "none on the answer beyond FS-49's"…" carries a clause beside "unchanged"; moved to its rank, status cell NOT appended
+rank 33 FS-42: verdict "**unchanged; consumer closed**" / reason "each bore "none on the answer beyond FS-49's"…" carries a clause beside "unchanged"; moved to its rank, status cell NOT appended
+rank 34 FS-43: verdict "**unchanged; consumer closed**" / reason "each bore "none on the answer beyond FS-49's"…" carries a clause beside "unchanged"; moved to its rank, status cell NOT appended

@@ -1,0 +1,8 @@
+diff --git a/scripts/Axioms.lean b/scripts/Axioms.lean
+index dbc3fe9a..b1031582 100644
+--- a/scripts/Axioms.lean
++++ b/scripts/Axioms.lean
+@@ -7727 +7727,2 @@ close, their helpers, and the declarations the planner proved from those leaves.
+-`Plane/RingCalculus/SemiHub` rests on that module's open leaves (`tools/fs131_i8d_axioms.py` names them per record). -/
++`Plane/RingCalculus/SemiHub` rested on that module's open leaves; since the join (job FS131-L8A) none does
++(`tools/fs131_i8d_axioms.py`: 29 on the standard three, none resting). -/

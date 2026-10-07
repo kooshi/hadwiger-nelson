@@ -1,0 +1,14 @@
+faithful: ARCHITECTURE.md: 719 non-blank lines; faults 0
+plant (a line of theirs dropped): ARCHITECTURE.md: 718 non-blank lines; faults 1
+  LOST '| `Plane/RingCalculus/Empty` | **FS-131 wave 8, skeleton** (job FS131-K8; plan Stages 2 and 4). FS12' (rule 1 = ours 0 + theirs 1 - base 0; have 0)
+  -> fired (LOST)
+plant (a line of theirs doubled): ARCHITECTURE.md: 720 non-blank lines; faults 1
+  EXTRA '| `Plane/RingCalculus/Empty` | **FS-131 wave 8, skeleton** (job FS131-K8; plan Stages 2 and 4). FS12' (rule 1 = ours 0 + theirs 1 - base 0; have 2)
+  -> fired (EXTRA)
+plant (a marker left in): ARCHITECTURE.md: 720 non-blank lines; faults 1
+  MARKER '======='
+  -> fired (MARKER)
+plant (the base's line put back beside ours' rewriting): ARCHITECTURE.md: 720 non-blank lines; faults 1
+  EXTRA '| `Plane/RingCalculus/SemiHub` | **FS-131 wave 8, skeleton: the semi-hub rows** (job FS131-K8b; `pla' (rule 0 = ours 0 + theirs 1 - base 1; have 1)
+  -> fired (EXTRA)
+self-test: PASS

@@ -1,0 +1,6 @@
+plant (a name `<S>.<g>` where `<g>` is no field): NOT-FOUND fired, not exempted
+plant (`<E>.<c>.sizeOf_spec` where `<c>` is no constructor): NOT-FOUND fired, not exempted
+plant (a plain theorem name with no text): NOT-FOUND fired, not exempted
+partner (a true field, HadwigerNelson.Plane.ArcMap.IsStar4.cone₁): exempted with its field line
+plant: PASS
+exit=0

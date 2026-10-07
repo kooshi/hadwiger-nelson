@@ -1,0 +1,25 @@
+@HadwigerNelson.Plane.exists_int_of_angleIcc_subset : ∀ {a b lo hi : ℝ},
+  a ≤ b →
+    hi < lo + 2 * Real.pi →
+      HadwigerNelson.Plane.angleIcc a b ⊆ HadwigerNelson.Plane.angleIcc lo hi →
+        ∃ m, lo + 2 * Real.pi * ↑m ≤ a ∧ b ≤ hi + 2 * Real.pi * ↑m
+@HadwigerNelson.Plane.ArcMap.IsSectorChart.tileAt_equiv : ∀ {k : ℕ} {F : HadwigerNelson.Plane.ArcMap k} {n : ℕ}
+  {G : HadwigerNelson.Plane.BranchGerms n} {x : ℂ} {r₀ : ℝ},
+  F.IsSectorChart G x r₀ →
+    0 < n →
+      F.SimpleOn {x} →
+        ∃ τ,
+          Function.Injective τ ∧
+            (∀ (T : Set ℂ), F.TileAt x T ↔ ∃ i, τ i = T) ∧
+              (∀ (i : Fin n), τ i ∩ Metric.ball x r₀ = G.sector x r₀ i) ∧
+                ∀ (i : Fin n), HadwigerNelson.Plane.coneAt (τ i) x = HadwigerNelson.Plane.angleIcc (G.β i) (G.nextβ i)
+@HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_initialPiece_between : ∀ {k : ℕ} {F : HadwigerNelson.Plane.ArcMap k}
+  {n : ℕ} {G : HadwigerNelson.Plane.BranchGerms n} {x : ℂ} {r₀ : ℝ},
+  F.IsSectorChart G x r₀ →
+    (∀ (i j : Fin n),
+        i ≠ j → ∀ s ∈ Set.Ioo 0 r₀, HadwigerNelson.Plane.e (G.dir i s) ≠ HadwigerNelson.Plane.e (G.dir j s)) →
+      ∀ (i : Fin n),
+        ∃ α ∈ F.arcs,
+          ∃ B,
+            α.InitialPiece x (G.β (HadwigerNelson.Plane.BranchGerms.next i)) B ∧
+              B ⊆ closure (G.sector x r₀ i) ∩ closure (G.sector x r₀ (HadwigerNelson.Plane.BranchGerms.next i))

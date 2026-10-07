@@ -7537,6 +7537,278 @@ release's definitions in this library's vocabulary, the measure bridge, the mode
 #print axioms HadwigerNelson.Outside.OAI158.anglePeriodPositive
 #print axioms HadwigerNelson.Outside.OAI158.angularMeasure.instIsProbabilityMeasure
 
+
+/-! ## FS131-K7 — FS-131 wave 7's planner: `Plane/SimpleOn`, "simple" on a set (the class a fragment's argument reads;
+inventory item 508). Waves 8 and 9 merge the commit that adds this block. -/
+-- FS131-K7: Plane/SimpleOn
+#print axioms HadwigerNelson.Plane.ArcMap.Simple.simpleOn
+#print axioms HadwigerNelson.Plane.ArcMap.simpleOn_univ
+#print axioms HadwigerNelson.Plane.ArcMap.SimpleOn.mono
+#print axioms HadwigerNelson.Plane.ArcMap.simpleOn_ball_iff
+#print axioms HadwigerNelson.Plane.ArcMap.SimpleOn.coneAt_eq_angleIcc
+#print axioms HadwigerNelson.Plane.ArcMap.SimpleOn.coneAt_eq_angleIcc_sep
+#print axioms HadwigerNelson.Plane.halfDisc_simpleOn
+#print axioms HadwigerNelson.Plane.ArcMap.not_simpleOn_of_not_jordan
+-- FS131-K7 block end (Plane/SimpleOn)
+/-! ## FS131-K8 — FS-131 wave 8's planner: the ring calculus (`Plane/RingCalculus/Basic`, `Star`, `Empty`). The foundation
+and the rows proved at the planning pass; the `sorry` leaves (`star_recip`, `star_anti`, and `Empty`'s eight) join this block as
+their implementers close them. -/
+-- FS131-K8: Plane/RingCalculus/Basic
+#print axioms HadwigerNelson.Plane.ArcMap.coloursAt_inter_eq
+#print axioms HadwigerNelson.Plane.ArcMap.NonSiamese.tile_eq_of_dist_lt
+#print axioms HadwigerNelson.Plane.ArcMap.NonSiamese.tile_eq_of_mem_closure
+#print axioms HadwigerNelson.Plane.ArcMap.disjoint_tipColours_outerTileColours
+#print axioms HadwigerNelson.Plane.ArcMap.isTip_comm
+#print axioms HadwigerNelson.Plane.ArcMap.tipColours_comm
+#print axioms HadwigerNelson.Plane.ArcMap.mem_outerTileColours_iff
+#print axioms HadwigerNelson.Plane.ArcMap.cos_nonpos_of_coneAt_of_disjoint
+#print axioms HadwigerNelson.Plane.ArcMap.coneAt_subset_of_subset_closedBall
+#print axioms HadwigerNelson.Plane.ArcMap.coneAt_subset_of_disjoint_ball
+#print axioms HadwigerNelson.Plane.ArcMap.inter_ball_nonempty_of_coneAt
+#print axioms HadwigerNelson.Plane.ArcMap.exists_not_mem_closedBall_of_coneAt
+#print axioms HadwigerNelson.Plane.ArcMap.inter_ball_nonempty_of_inward_cone
+#print axioms HadwigerNelson.Plane.ArcMap.IsTip.coneAt_subset
+#print axioms HadwigerNelson.Plane.ArcMap.isHub_iff
+#print axioms HadwigerNelson.Plane.ArcMap.GammaFreeRing.qFreeRing
+#print axioms HadwigerNelson.Plane.ArcMap.QFreeRing.isHub
+#print axioms HadwigerNelson.Plane.GermIn.ringPt_mem_closure
+#print axioms HadwigerNelson.Plane.halfPlane2_gammaFreeRing
+-- FS131-K8: Plane/RingCalculus/Star (the proved rows: FS116-RING-GERM in tile form, FS116-N2-STAR)
+#print axioms HadwigerNelson.Plane.ArcMap.ringGerm_inward
+#print axioms HadwigerNelson.Plane.ArcMap.ringGerm_outward
+#print axioms HadwigerNelson.Plane.ArcMap.star_coloursAt
+#print axioms HadwigerNelson.Plane.ArcMap.star_absent
+#print axioms HadwigerNelson.Plane.ArcMap.star_outer_cone
+#print axioms HadwigerNelson.Plane.ArcMap.star_flank
+#print axioms HadwigerNelson.Plane.ArcMap.star_flank_interior
+#print axioms HadwigerNelson.Plane.ArcMap.star_tip_nonempty
+#print axioms HadwigerNelson.Plane.ArcMap.star_outer_nonempty
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_ringPt_add_pi
+-- FS131-K8: Plane/RingCalculus/Empty (the proved row: FS116-V6-ANTI, class-free)
+#print axioms HadwigerNelson.Plane.ArcMap.v6_anti
+-- FS131-K8 block end (Plane/RingCalculus)
+/-! ## FS131-I8A — FS-131 wave 8's first implementer: the route to `emptyNS` (`Plane/RingCalculus/Empty` and the helper
+modules `HubCount`, `TilesAt`, `SoleTip`, `RingColour`). -/
+-- FS131-I8A: Plane/RingCalculus/HubCount (FS116-V6-COUNT's count: the kernel table, by `decide +kernel`)
+#print axioms HadwigerNelson.Plane.V6Count.allZ_iff
+#print axioms HadwigerNelson.Plane.V6Count.anyZ_iff
+#print axioms HadwigerNelson.Plane.V6Count.allF_iff
+#print axioms HadwigerNelson.Plane.V6Count.anyF_iff
+#print axioms HadwigerNelson.Plane.V6Count.stmtB_sound
+#print axioms HadwigerNelson.Plane.V6Count.table
+#print axioms HadwigerNelson.Plane.V6Count.sub_one_not_cons
+#print axioms HadwigerNelson.Plane.V6Count.mem_shapes_single
+#print axioms HadwigerNelson.Plane.V6Count.mem_shapes_double
+#print axioms HadwigerNelson.Plane.V6Count.exists_shape
+#print axioms HadwigerNelson.Plane.V6Count.count
+#print axioms HadwigerNelson.Plane.V6Count.countModel_hyps
+#print axioms HadwigerNelson.Plane.V6Count.doublesB_sound
+#print axioms HadwigerNelson.Plane.V6Count.doublesTable
+#print axioms HadwigerNelson.Plane.V6Count.twoDoubles
+-- FS131-I8A: Plane/RingCalculus/TilesAt
+#print axioms HadwigerNelson.Plane.exists_fin_surj_of_card_le
+#print axioms HadwigerNelson.Plane.ArcMap.exists_fin_tileAt
+#print axioms HadwigerNelson.Plane.isPreconnected_sphere_complex
+#print axioms HadwigerNelson.Plane.ArcMap.finite_tileAt
+#print axioms HadwigerNelson.Plane.ArcMap.exists_ball_tileAt
+#print axioms HadwigerNelson.Plane.ArcMap.TileAt.inter_sphere_nonempty
+#print axioms HadwigerNelson.Plane.ArcMap.sphere_subset_iUnion_closure_tileAt
+-- FS131-I8A: Plane/RingCalculus/SoleTip (FS116-V6-HUG and FS129-MR1-DOUBLETIP at the class the argument reads)
+#print axioms HadwigerNelson.Plane.mem_closure_diff_closedBall
+#print axioms HadwigerNelson.Plane.ArcMap.germ_Icc_subset_closure
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.dist_le_one_of_near_germ
+#print axioms HadwigerNelson.Plane.ArcMap.exists_ball_subset_closure_region_of_sole_tip
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_ringPt_third_sub
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_ringPt_third_sub_two
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_ringPt_two_thirds
+#print axioms HadwigerNelson.Plane.ArcMap.not_sole_tip_of_adjacent_changePoints
+-- FS131-I8A: Plane/RingCalculus/RingColour
+#print axioms HadwigerNelson.Plane.ArcMap.germIn_of_mem_isOpen
+#print axioms HadwigerNelson.Plane.ArcMap.germIn_region_unique
+#print axioms HadwigerNelson.Plane.ArcMap.GammaFreeRing.exists_germIn
+#print axioms HadwigerNelson.Plane.ArcMap.not_mem_coloursAt_of_germIn
+#print axioms HadwigerNelson.Plane.ArcMap.GammaFreeRing.exists_absent_pair
+#print axioms HadwigerNelson.Plane.ArcMap.germCol_eq
+#print axioms HadwigerNelson.Plane.ArcMap.germCol_right
+#print axioms HadwigerNelson.Plane.ArcMap.germCol_left
+#print axioms HadwigerNelson.Plane.ArcMap.germCol_const
+#print axioms HadwigerNelson.Plane.ArcMap.germCol_rotate_ne
+#print axioms HadwigerNelson.Plane.ArcMap.exists_isChangePoint_iff
+#print axioms HadwigerNelson.Plane.ArcMap.germCol_change_rotate
+#print axioms HadwigerNelson.Plane.ArcMap.germCol_change_int
+#print axioms HadwigerNelson.Plane.ArcMap.exists_germCol_change
+#print axioms HadwigerNelson.Plane.ArcMap.exists_third_change
+#print axioms HadwigerNelson.Plane.halfPlane2_covers
+-- FS131-I8A: Plane/RingCalculus/Empty (the leaves closed)
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_sixth_congr
+#print axioms HadwigerNelson.Plane.ArcMap.exists_int_of_three_dist_le_one
+#print axioms HadwigerNelson.Plane.ArcMap.not_double_two_classes
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_mem_of_sixth
+#print axioms HadwigerNelson.Plane.ArcMap.sixth_cons_of_mem_closure
+#print axioms HadwigerNelson.Plane.ArcMap.exists_two_double_tiles
+#print axioms HadwigerNelson.Plane.ArcMap.fin_four_three_pairs
+#print axioms HadwigerNelson.Plane.ArcMap.GammaFreeRing.changePoint_gap
+#print axioms HadwigerNelson.Plane.ArcMap.v6_hubs
+#print axioms HadwigerNelson.Plane.ArcMap.v6_hug
+#print axioms HadwigerNelson.Plane.ArcMap.emptyNS
+#print axioms HadwigerNelson.Plane.ArcMap.v6_hubs_vacuous
+#print axioms HadwigerNelson.Plane.ArcMap.v6_hug_vacuous
+#print axioms HadwigerNelson.Plane.ArcMap.doubleTip
+#print axioms HadwigerNelson.Plane.ArcMap.intCast_zmod_six_of_half_le_cos
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_sixth_dist_le_one
+#print axioms HadwigerNelson.Plane.ArcMap.v6_count
+#print axioms HadwigerNelson.Plane.ArcMap.exists_ne_mem_closure_inter_of_split
+-- FS131-I8A: Plane/RingCalculus/Star (FS116-N2-RECIP)
+#print axioms HadwigerNelson.Plane.ArcMap.exists_tileOf_of_germIn
+#print axioms HadwigerNelson.Plane.ArcMap.star_recip
+-- FS131-I8A block end
+/-! ## FS131-K8b — FS-131 wave 8's second planner: the semi-hub rows (`Plane/RingCalculus/SemiHub`, `SemiHubPlaces`). The
+declarations with no `sorry` beneath them, all in `SemiHub`; `ringArc_dist_le_one`, `germPair_swap` (`SemiHub`),
+`crossed_tip_zeroAngle` and `transferQC` (`SemiHubPlaces`) are proved from stated leaves and join this block when those
+leaves close. -/
+-- FS131-K8b: Plane/RingCalculus/SemiHub
+#print axioms HadwigerNelson.Plane.ArcMap.IsEdgeDir.symm
+#print axioms HadwigerNelson.Plane.ArcMap.IsStar4.isEdgeDir₁₂
+#print axioms HadwigerNelson.Plane.ArcMap.IsStar4.isEdgeDir₂₃
+#print axioms HadwigerNelson.Plane.ArcMap.IsStar4.isEdgeDir₃₄
+#print axioms HadwigerNelson.Plane.ArcMap.IsStar4.angleIcc_subset_cone₂
+#print axioms HadwigerNelson.Plane.ArcMap.IsStar4.angleIcc_subset_cone₄
+#print axioms HadwigerNelson.Plane.ArcMap.isSemiHub_iff_qSide
+#print axioms HadwigerNelson.Plane.ArcMap.isFullSemiHub_iff_qSide
+#print axioms HadwigerNelson.Plane.ArcMap.qcol_cw
+#print axioms HadwigerNelson.Plane.ArcMap.qcol_ccw
+#print axioms HadwigerNelson.Plane.ArcMap.IsTile.not_mem_closure_of_not_subset_ball
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.germIn_closure
+#print axioms HadwigerNelson.Plane.ArcMap.GermOnQWith.germIn_closure
+#print axioms HadwigerNelson.Plane.ArcMap.germOnQ_bar_uPlus
+#print axioms HadwigerNelson.Plane.ArcMap.germOnQ_bar_vMinus
+#print axioms HadwigerNelson.Plane.ArcMap.germOnQ_bar_uMinus
+#print axioms HadwigerNelson.Plane.ArcMap.germOnQ_bar_vPlus
+#print axioms HadwigerNelson.Plane.ArcMap.closure_inter_subset_sphere
+-- FS131-K8b block end
+/-! ## FS131-I8B — FS-131 wave 8's join: the lemmas `Plane/RingCalculus/SemiHub` and `SemiHubPlaces` share
+(`Plane/RingCalculus/StarChart`), and FS116-N2-ANTI (`Plane/RingCalculus/Star`). -/
+-- FS131-I8B: Plane/RingCalculus/StarChart
+#print axioms HadwigerNelson.Plane.exists_int_of_angleIcc_subset
+#print axioms HadwigerNelson.Plane.int_eq_zero_of_two_pi_mul_lt
+#print axioms HadwigerNelson.Plane.int_eq_zero_of_abs_two_pi_mul_lt
+#print axioms HadwigerNelson.Plane.segment_eq_image_ray
+#print axioms HadwigerNelson.Plane.Arc.InitialPiece.exists_param
+#print axioms HadwigerNelson.Plane.branchPt_mem_Rgn
+#print axioms HadwigerNelson.Plane.branchPt_curveGerm_add
+#print axioms HadwigerNelson.Plane.not_both_mem_Rgn_curveGerm
+#print axioms HadwigerNelson.Plane.ArcMap.mem_closure_tile_of_near
+#print axioms HadwigerNelson.Plane.ArcMap.ncard_tileAt_eq
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.tileAt_equiv
+#print axioms HadwigerNelson.Plane.ArcMap.exists_sectorChart_tileAt
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_branch_of_isPreconnected
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_initialPiece_branch
+#print axioms HadwigerNelson.Plane.ArcMap.IsSectorChart.exists_initialPiece_between
+#print axioms HadwigerNelson.Plane.ArcMap.exists_initialPiece_of_ncard_le_three
+-- FS131-I8B: Plane/RingCalculus/Star (FS116-N2-ANTI, at the ruled statement)
+#print axioms HadwigerNelson.Plane.ArcMap.mem_coneAt_add_int_mul_two_pi
+#print axioms HadwigerNelson.Plane.ArcMap.false_of_antipodal_gaps
+#print axioms HadwigerNelson.Plane.ArcMap.star_anti_ne
+#print axioms HadwigerNelson.Plane.ArcMap.star_anti_count
+#print axioms HadwigerNelson.Plane.ArcMap.star_anti
+-- FS131-I8B block end
+/-! ## FS131-I8C — FS-131 wave 8's semi-hub rows, first module (`Plane/RingCalculus/SemiHub`): the planner's leaves as they
+close, their helpers, and the declarations the planner proved from those leaves. -/
+-- FS131-I8C: Plane/RingCalculus/SemiHub (FS116-V5-QCOL, FS116-N3-PAIR, FS116-N3-CONE (a))
+#print axioms HadwigerNelson.Plane.ArcMap.qcol_inner_tile
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.exists_sub_of_germIn
+#print axioms HadwigerNelson.Plane.ArcMap.GermOnQWith.exists_isRingArc_ccw
+#print axioms HadwigerNelson.Plane.ArcMap.GermOnQWith.exists_isRingArc_cw
+#print axioms HadwigerNelson.Plane.ArcMap.exists_far_of_germPair
+#print axioms HadwigerNelson.Plane.ArcMap.ringArc_dist_le_one
+#print axioms HadwigerNelson.Plane.ArcMap.qcol_not_one_arc
+#print axioms HadwigerNelson.Plane.ArcMap.germPair_inner_ne
+#print axioms HadwigerNelson.Plane.ArcMap.germPair_swap
+#print axioms HadwigerNelson.Plane.ArcMap.germIn_closure_tile_of_near
+#print axioms HadwigerNelson.Plane.ArcMap.disjoint_ball_of_far_germ
+#print axioms HadwigerNelson.Plane.ArcMap.ringTile_uMinus
+#print axioms HadwigerNelson.Plane.ArcMap.ringTile_vMinus
+#print axioms HadwigerNelson.Plane.ArcMap.ringTile_vPlus
+#print axioms HadwigerNelson.Plane.ArcMap.ringTile_uPlus
+-- FS131-I8C: helpers that read no map
+#print axioms HadwigerNelson.Plane.two_pi_mul_int_le_of_neg
+#print axioms HadwigerNelson.Plane.two_pi_le_mul_int_of_pos
+#print axioms HadwigerNelson.Plane.BranchGerms.nextβ_four
+-- FS131-I8C: Plane/RingCalculus/SemiHub (FS116-N3-CONE (c), FS116-N3-STAR2, FS116-V5-DICHO)
+#print axioms HadwigerNelson.Plane.ArcMap.isRingArc_of_edge
+#print axioms HadwigerNelson.Plane.ArcMap.simpleOn_not_hasRepeatedColour
+#print axioms HadwigerNelson.Plane.ArcMap.four_le_of_bothKind
+#print axioms HadwigerNelson.Plane.ArcMap.IsStar4.rotate
+#print axioms HadwigerNelson.Plane.ArcMap.IsStar4.shift
+#print axioms HadwigerNelson.Plane.ArcMap.IsStar4.exists_first
+#print axioms HadwigerNelson.Plane.ArcMap.IsStar4.opposite_of_disjoint
+#print axioms HadwigerNelson.Plane.ArcMap.exists_isStar4
+#print axioms HadwigerNelson.Plane.ArcMap.ringArc_star
+#print axioms HadwigerNelson.Plane.ArcMap.fullSemiHub_star_crossed
+#print axioms HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel
+#print axioms HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel_T
+#print axioms HadwigerNelson.Plane.ArcMap.ringArc_pair_eq_or_disjoint
+#print axioms HadwigerNelson.Plane.ArcMap.germPair_dicho
+-- FS131-I8C: the class of the shared lemmas, inhabited (`halfDisc` at `0`)
+#print axioms HadwigerNelson.Plane.halfDisc_valid
+#print axioms HadwigerNelson.Plane.halfDisc_nonSiamese
+#print axioms HadwigerNelson.Plane.halfDisc_ncard_coloursAt_zero
+-- FS131-I8C block end
+/-! ## FS131-I8D — FS-131 wave 8's second implementer of the semi-hub rows: `Plane/RingCalculus/SemiHubPlaces`
+(FS116-N3-CROSS, FS116-N3-SEMI) and FS129-SR3-OUTERADJ. Until the wave's join each record here that cites a statement of
+`Plane/RingCalculus/SemiHub` rested on that module's open leaves; since the join (job FS131-L8A) none does
+(`tools/fs131_i8d_axioms.py`: 29 on the standard three, none resting). -/
+-- FS131-I8D: Plane/RingCalculus/SemiHubPlaces
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_star_data
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_no_tip
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_tip_zeroAngle
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_outer
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_coloursAt
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_four
+#print axioms HadwigerNelson.Plane.e_add_sub_e_sub
+#print axioms HadwigerNelson.Plane.GermIn.tangent_mem_coneAt
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_changePoint
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_not_germOnQ_inside
+#print axioms HadwigerNelson.Plane.ArcMap.crossed_semiHub
+#print axioms HadwigerNelson.Plane.ArcMap.ringPt_ringPt_four_thirds
+#print axioms HadwigerNelson.Plane.ArcMap.IsRingArc.inner_ne_outer
+#print axioms HadwigerNelson.Plane.ArcMap.eq_of_ncard_eq_four
+#print axioms HadwigerNelson.Plane.ArcMap.eq_triple_of_ncard_le_three
+#print axioms HadwigerNelson.Plane.ArcMap.disjoint_ball_of_far_witness
+#print axioms HadwigerNelson.Plane.ArcMap.mem_closure_of_coneAt_toward
+#print axioms HadwigerNelson.Plane.ArcMap.semiHub_edge
+#print axioms HadwigerNelson.Plane.ArcMap.semiHub_places_O
+#print axioms HadwigerNelson.Plane.ArcMap.semiHub_places_T
+#print axioms HadwigerNelson.Plane.ArcMap.semiHub_places
+#print axioms HadwigerNelson.Plane.ArcMap.transferQC
+-- FS131-I8D: Plane/RingCalculus/OuterAdj, and the leaf of Plane/RingCalculus/Empty
+#print axioms HadwigerNelson.Plane.norm_e_add_e_sub_e_sq
+#print axioms HadwigerNelson.Plane.one_lt_norm_e_add_e_sub_e
+#print axioms HadwigerNelson.Plane.ArcMap.Valid.dist_le_one_of_near_germ_closure
+#print axioms HadwigerNelson.Plane.ArcMap.not_germOnQ_of_germIn_region
+#print axioms HadwigerNelson.Plane.ArcMap.exists_ball_subset_closure_of_sole_outer
+#print axioms HadwigerNelson.Plane.ArcMap.not_sole_outer_of_adjacent_changePoints
+#print axioms HadwigerNelson.Plane.ArcMap.outerAdj
+-- FS131-I8D block end
+/-! ## FS131-L8A — FS-131 wave 8's first landing: the theorems of the wave's modules that the planners' and the
+implementers' blocks did not list. Read from the kernel's own list of the library's theorems
+(`data/fs131/l5/count-modules.lean`), by `tools/fs131_l8a_register.py`; checked by `tools/fs131_l10b_records.py`. -/
+-- Plane/RingCalculus/Basic
+#print axioms HadwigerNelson.Plane.ArcMap.GammaFreeRing.not_isRingArc
+#print axioms HadwigerNelson.Plane.ArcMap.GermOnQWith.germOnQ
+#print axioms HadwigerNelson.Plane.ArcMap.IsFullSemiHub.isSemiHub
+#print axioms HadwigerNelson.Plane.ArcMap.IsHub.not_isSemiHub
+#print axioms HadwigerNelson.Plane.ArcMap.IsOuterTileAt.not_isTip
+#print axioms HadwigerNelson.Plane.ArcMap.IsTip.tileAt
+#print axioms HadwigerNelson.Plane.ArcMap.QFreeRing.not_germOnQ
+#print axioms HadwigerNelson.Plane.ArcMap.SemiKind.O.sizeOf_spec
+#print axioms HadwigerNelson.Plane.ArcMap.SemiKind.T.sizeOf_spec
+#print axioms HadwigerNelson.Plane.ArcMap.SemiKind.ofNat_ctorIdx
+#print axioms HadwigerNelson.Plane.ArcMap.TileAt.subset_ball
+#print axioms HadwigerNelson.Plane.ArcMap.outerTileColours_subset
+#print axioms HadwigerNelson.Plane.ArcMap.tipColours_subset
+-- FS131-L8A block end
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

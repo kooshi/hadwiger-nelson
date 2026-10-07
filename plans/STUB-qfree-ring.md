@@ -1,5 +1,7 @@
 # FS-123 — the Siamese class: does any four-colour vertex whose ring carries no (Q) arc survive past radius 1 + ε, in any class? (stub)
 
+> 2026-10-07 (FS132-P1): 'given MR' leaves this stub's bearing. Its first case is FS-132's existence form, asked for measurable colourings, where there is no Siamese clause; a second route to its NO at radius 2 is the reading § 3.5's region kill (a placement, queued for the Searcher).
+
 > **Re-ranked 2026-10-03 (FS129-P1; 1 → 2).** Its first question is answered yes in the non-Siamese class and
 > its remainder is the Siamese class — a necessary piece, opening on card 3 of `plans/POROS-2026-10-03-fs129-rerank.md`; FS-124 carries the bulk of the case
 > list and route R's exact-map form, so it leads.

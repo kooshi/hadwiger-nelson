@@ -1,0 +1,18 @@
+slot: admitted env: mem 40 GiB (hard cap), cpus 0,1,2,3,8,9,10,11
+==> build: this run's full output: build/gate/build/20261006T183759Z-2292135.log
+    ⚠ [5618/5663] Replayed Proofs.HadwigerNelson.Plane.RingCalculus.Star
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/Star.lean:211:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/Star.lean:231:8: declaration uses `sorry`
+    ⚠ [5640/5663] Replayed Proofs.HadwigerNelson.Plane.RingCalculus.Empty
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:86:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:97:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:109:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:125:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:136:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:148:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:180:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean:193:8: declaration uses `sorry`
+    All targets up-to-date (5812 jobs).
+==> build: OK — all 1805 modules already up to date, nothing built, 2 module(s) with warnings, 3s
+    full output: build/gate/build/20261006T183759Z-2292135.log
+EXIT=0

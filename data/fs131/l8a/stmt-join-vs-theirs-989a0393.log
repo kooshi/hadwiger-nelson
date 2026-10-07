@@ -1,0 +1,18 @@
+slot: admitted python3: mem 12 GiB (hard cap), cpus 8,9,10,11
+statement check against 989a0393: 255 base declarations compared in 11 modules; 0 changed or missing; 16 added since the base
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.ArcMap.IsRingArc.exists_sub_of_germIn
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.ArcMap.IsStar4.exists_first
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.ArcMap.IsStar4.opposite_of_disjoint
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.ArcMap.IsStar4.rotate
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.ArcMap.IsStar4.shift
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.ArcMap.disjoint_ball_of_far_germ
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.ArcMap.exists_far_of_germPair
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.ArcMap.germIn_closure_tile_of_near
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.ArcMap.ringArc_pair_eq_or_disjoint
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.ArcMap.simpleOn_not_hasRepeatedColour
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.BranchGerms.nextβ_four
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.halfDisc_ncard_coloursAt_zero
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.halfDisc_nonSiamese
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.halfDisc_valid
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.two_pi_le_mul_int_of_pos
+ADDED Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.two_pi_mul_int_le_of_neg

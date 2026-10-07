@@ -1,5 +1,7 @@
 # FS-104 — the stationary chromatic number at six: is `χ_CP(ℝ²) ≥ 6`? (stub)
 
+> Answered YES by citation, 2026-10-07: `χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6` (`[OAIMath2026]` Thm 1.4 with row 130). Routes (0)–(e) are closed as routes to that question. Re-aimed (FS132-P1): the stub now carries the null-set step `χ_m⁰(ℝ²) = χ_m(ℝ²)` — with the transfer, the Shelah–Soifer axiom question for the plane — `χ_B` against `χ_m`, and the ZF + DC audit. It bears on Falconer's number and on the axioms, not on `χ(ℝ²)`.
+
 > **Print addresses from the consolidation run (2026-09-27; job FP from the reading jobs LW and LW3, `data/consolidation-2026-09-27/reports/LW3.md`
 > §§ 1, 4; the quotations checked on the pages, `data/consolidation-2026-09-27/fp/record.md` stage 1).** **Item (1), the null-set step:** its compactness step is in print,
 > `[Johnson1994choice]` p. 125: *"The well-known DeBruijn-Erdös theorem on the chromatic number of an infinite graph holds for the choice

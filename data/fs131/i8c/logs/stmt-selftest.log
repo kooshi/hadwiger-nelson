@@ -1,0 +1,22 @@
+statement check against 6e0cf10d: 235 base declarations compared in 10 modules; 1 changed or missing; 7 added since the base
+DIFF Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.ArcMap.ringArc_star: CHANGED (type hash, printed type)
+    base: ∀ {k : ℕ} {F : HadwigerNelson.Plane.ArcMap k}, F.Valid → F.NonSiamese → ∀ {p : ℂ}, p ∈ F.dom → F.SimpleOn {p} → (F.coloursAt p).ncard = 4 → ∀ {u v : ℝ} {c c' : Fin k}, F.IsRingArc p u v c c' → c ∈ F.coloursAt p → c' ∈ F.coloursAt p → ∃ t₁ t₂ t₃ t₄ e₁ e₂ e₃ e₄, F.IsStar4 p t₁ t₂ t₃ t₄ e₁ e₂ e₃ e₄ ∧ F.TileOf c t₁ ∧ F.TileOf c' t₃ ∧ v - Real.pi / 2 ≤ e₁ ∧ e₂ ≤ u + Real.pi / 2 ∧ v + Real.pi / 2 ≤ e₃ ∧ e₄ ≤ u + 3 * Real.pi / 2
+    now:  ∀ {k : ℕ} {F : HadwigerNelson.Plane.ArcMap k}, F.Valid → F.NonSiamese → ∀ {p : ℂ}, p ∈ F.dom → F.SimpleOn {p} → (F.coloursAt p).ncard = 4 → ∀ {u v : ℝ} {c c' : Fin k}, u < v + 1 → F.IsRingArc p u v c c' → c ∈ F.coloursAt p → c' ∈ F.coloursAt p → ∃ t₁ t₂ t₃ t₄ e₁ e₂ e₃ e₄, F.IsStar4 p t₁ t₂ t₃ t₄ e₁ e₂ e₃ e₄ ∧ F.TileOf c t₁ ∧ F.TileOf c' t₃ ∧ v - Real.pi / 2 ≤ e₁ ∧ e₂ ≤ u + Real.pi / 2 ∧ v + Real.pi / 2 ≤ e₃ ∧ e₄ ≤ u + 3 * Real.pi / 2
+control 'binder': exit 1 — FIRED
+statement check against 6e0cf10d: 235 base declarations compared in 10 modules; 1 changed or missing; 7 added since the base
+DIFF Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.ArcMap.IsEdgeDir: CHANGED (value hash)
+    base: {k : ℕ} → HadwigerNelson.Plane.ArcMap k → ℂ → Set ℂ → Set ℂ → ℝ → Prop
+    now:  {k : ℕ} → HadwigerNelson.Plane.ArcMap k → ℂ → Set ℂ → Set ℂ → ℝ → Prop
+control 'def': exit 1 — FIRED
+statement check against 6e0cf10d: 235 base declarations compared in 10 modules; 1 changed or missing; 7 added since the base
+DIFF Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.ArcMap.qcol_inner_tile: CHANGED (type hash, printed type)
+    base: ∀ {k : ℕ} {F : HadwigerNelson.Plane.ArcMap k}, F.Valid → F.NonSiamese → ∀ {p : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k}, F.IsRingArc p θ₁ θ₂ c c' → ∀ {T : Set ℂ}, F.TileOf c T → p ∈ closure T → HadwigerNelson.Plane.ringArc p θ₁ θ₂ ⊆ closure T
+    now:  ∀ {k : ℕ} {F : HadwigerNelson.Plane.ArcMap k}, 0 = 1 → F.Valid → F.NonSiamese → ∀ {p : ℂ} {θ₁ θ₂ : ℝ} {c c' : Fin k}, F.IsRingArc p θ₁ θ₂ c c' → ∀ {T : Set ℂ}, F.TileOf c T → p ∈ closure T → HadwigerNelson.Plane.ringArc p θ₁ θ₂ ⊆ closure T
+control 'include': exit 1 — FIRED
+statement check against 6e0cf10d: 235 base declarations compared in 10 modules; 1 changed or missing; 7 added since the base
+DIFF Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean: HadwigerNelson.Plane.ArcMap.germPair_dicho: CHANGED (type hash, printed type)
+    base: ∀ {k : ℕ} {F : HadwigerNelson.Plane.ArcMap k}, F.Valid → F.NonSiamese → ∀ {p : ℂ}, p ∈ F.dom → F.SimpleOn {p} → (F.coloursAt p).ncard = 4 → ∀ {ψ : ℝ} (s : HadwigerNelson.Plane.Side) {a a' b b' : Fin k}, F.GermOnQWith p (ψ + Real.pi / 3) s a a' → F.GermOnQWith p (ψ - Real.pi / 3) s.flip b b' → a = b' ∧ a' = b ∨ Disjoint {a, a'} {b, b'}
+    now:  ∀ {k : ℕ} {F : HadwigerNelson.Plane.ArcMap k}, F.Valid → F.NonSiamese → ∀ {p : ℂ}, p ∈ F.dom → F.SimpleOn {p} → (F.coloursAt p).ncard = 5 → ∀ {ψ : ℝ} (s : HadwigerNelson.Plane.Side) {a a' b b' : Fin k}, F.GermOnQWith p (ψ + Real.pi / 3) s a a' → F.GermOnQWith p (ψ - Real.pi / 3) s.flip b b' → a = b' ∧ a' = b ∨ Disjoint {a, a'} {b, b'}
+control 'text': exit 1 — FIRED
+self-test: OK — every planted fault fired
+EXIT=0

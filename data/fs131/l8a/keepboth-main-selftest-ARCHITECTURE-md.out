@@ -1,0 +1,12 @@
+faithful: ARCHITECTURE.md: 802 non-blank lines; faults 0
+  (no base line that ours alone rewrote in this file: the stale-row plant is not applicable here)
+plant (a line of theirs dropped): ARCHITECTURE.md: 801 non-blank lines; faults 1
+  LOST '| `Plane/MetricalBoundary` | **FS-131, job FS131-IF1.** `[Falconer1981]` Lemma 2 (i) proved, in any ' (rule 1 = ours 0 + theirs 1 - base 0; have 0)
+  -> fired (LOST)
+plant (a line of theirs doubled): ARCHITECTURE.md: 803 non-blank lines; faults 1
+  EXTRA '| `Plane/MetricalBoundary` | **FS-131, job FS131-IF1.** `[Falconer1981]` Lemma 2 (i) proved, in any ' (rule 1 = ours 0 + theirs 1 - base 0; have 2)
+  -> fired (EXTRA)
+plant (a marker left in): ARCHITECTURE.md: 803 non-blank lines; faults 1
+  MARKER '======='
+  -> fired (MARKER)
+self-test: PASS

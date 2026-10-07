@@ -264,6 +264,19 @@ import Proofs.HadwigerNelson.Plane.Saturated.FanArcs
 import Proofs.HadwigerNelson.Plane.Saturated.FanBuild
 import Proofs.HadwigerNelson.Plane.Saturated.LocalGraph
 import Proofs.HadwigerNelson.Plane.Saturated.FanBridge
+
+import Proofs.HadwigerNelson.Plane.SimpleOn
+import Proofs.HadwigerNelson.Plane.RingCalculus.Basic
+import Proofs.HadwigerNelson.Plane.RingCalculus.Star
+import Proofs.HadwigerNelson.Plane.RingCalculus.HubCount
+import Proofs.HadwigerNelson.Plane.RingCalculus.TilesAt
+import Proofs.HadwigerNelson.Plane.RingCalculus.SoleTip
+import Proofs.HadwigerNelson.Plane.RingCalculus.RingColour
+import Proofs.HadwigerNelson.Plane.RingCalculus.Empty
+import Proofs.HadwigerNelson.Plane.RingCalculus.SemiHub
+import Proofs.HadwigerNelson.Plane.RingCalculus.SemiHubPlaces
+import Proofs.HadwigerNelson.Plane.RingCalculus.StarChart
+import Proofs.HadwigerNelson.Plane.RingCalculus.OuterAdj
 import Proofs.HadwigerNelson.Arith.NoAffine
 import Proofs.HadwigerNelson.Arith.FalconerFan
 import Proofs.HadwigerNelson.Topology.SpernerGrid

@@ -1,0 +1,113 @@
+## [LISTED 1] Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean — fullSemiHub_star_crossed's docstring: four colours do not follow from germS_absent (×1)
+--- before
+The row's "full semi-hub of kind O with (Q) arcs `A`, `B`" gives these hypotheses: the arcs by
+`GermOnQWith.exists_isRingArc_ccw`, `…_cw`, four colours by `germS_absent`. Model: the strip's `P₀` (`ℓ = m = 15.52°`, edges
+at `0°, 90°, 180°, 270°`); no Lean term. -/
++++ after
+The row's "full semi-hub of kind O with (Q) arcs `A`, `B`" gives the two arcs, by `GermOnQWith.exists_isRingArc_ccw`,
+`…_cw`. It does not give `h4`: at a change point `germS_absent` makes two colours absent at `p` (`ncard + 2 = k`), which is
+four colours only at `k = 6`; exactly four colours is a hypothesis of its own (inventory item 592). Model: the strip's `P₀`
+(`ℓ = m = 15.52°`, edges at `0°, 90°, 180°, 270°`); no Lean term. -/
+
+## [LISTED 3] Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean — qcol_inner_tile's docstring: the line of prose holding the word `sorry` (×1)
+--- before
+stated there with `sorry` on a branch this one does not hold: one declaration at the join.) -/
++++ after
+stated there as an open leaf on a branch this one does not hold: one declaration at the join.) -/
+
+## [BEYOND (a)] Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean — module doc, the row of FS116-N3-SEMI: proved, not stated (×1)
+--- before
+| FS116-N3-SEMI | `semiHub_places` (`…/SemiHubPlaces`) | stated |
++++ after
+| FS116-N3-SEMI | `semiHub_places` (`…/SemiHubPlaces`) | proved there (job FS131-I8D) |
+
+## [BEYOND (a)] Proofs/HadwigerNelson/Plane/RingCalculus/SemiHub.lean — module doc, the row of FS116-N3-CROSS: proved, not stated (×1)
+--- before
+`crossed_semiHub` (`…/SemiHubPlaces`) | `crossed_tip_zeroAngle` proved from `crossed_no_tip`; the rest stated |
++++ after
+`crossed_semiHub` (`…/SemiHubPlaces`) | proved there (job FS131-I8D) |
+
+## [LISTED 2] Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean — the five ruled statements cite the ruling by its inventory number (×5)
+--- before
+**The class** (`h4`; ruled on FS131-I8D's finding): `p` carries *exactly* four colours.
++++ after
+**The class** (`h4`; inventory item 592): `p` carries *exactly* four colours.
+
+## [BEYOND (c)] Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean — module doc: the same phrase a sixth time (×1)
+--- before
+**The class** (ruled on job FS131-I8D's finding): `semiHub_places`,
++++ after
+**The class** (inventory item 592, on job FS131-I8D's finding): `semiHub_places`,
+
+## [BEYOND (b)] Proofs/HadwigerNelson/Plane/RingCalculus/SemiHubPlaces.lean — module doc: stale since the join, and a line of prose holding the word `sorry` (×1)
+--- before
+**Proved over the statements of `Plane/RingCalculus/SemiHub`** (job FS131-I8C's leaves, in a tree of its own until the wave's
+join): no declaration of this module holds a `sorry`, and each rests on that module's leaves it cites.
++++ after
+**Proved over the statements of `Plane/RingCalculus/SemiHub`** (job FS131-I8C's leaves, proved in a tree of its own; the two
+were joined by job FS131-L8A): every declaration of this module is a kernel theorem with no open leaf beneath it.
+
+## [LISTED 4] ARCHITECTURE.md — the row of StarChart: two modules import it (×1)
+--- before
+Imported by no module yet: `SemiHub` and `SemiHubPlaces` take it at their implementers' first stage. No `sorry`, no axiom, no `native_decide`.
++++ after
+Imported by `SemiHub` and `SemiHubPlaces`. No `sorry`, no axiom, no `native_decide`.
+
+## [BEYOND] ARCHITECTURE.md — the row of SemiHubPlaces: the ruling by its inventory number (×1)
+--- before
+(`(F.coloursAt p).ncard = 4`, ruled on FS131-I8D's finding: `germS_absent` gives four colours only at `k = 6`)
++++ after
+(`(F.coloursAt p).ncard = 4`, inventory item 592: `germS_absent` gives four colours only at `k = 6`)
+
+## [BEYOND] ARCHITECTURE.md — the row of SemiHubPlaces: its records rest on nothing since the join (×1)
+--- before
+No `sorry` in the module; until the wave's join its records rest on `…/SemiHub`'s open leaves. No axiom, no `native_decide`.
++++ after
+No `sorry` in the module, and since the wave's join (job FS131-L8A) none beneath it: every record is on the standard three. No axiom, no `native_decide`.
+
+## [BEYOND] ARCHITECTURE.md — the row of Star: no skeleton — every leaf is proved (×1)
+--- before
+| `Plane/RingCalculus/Star` | **FS-131 wave 8, skeleton** (job FS131-K8; plan Stages 2–4).
++++ after
+| `Plane/RingCalculus/Star` | **FS-131 wave 8** (stated by job FS131-K8, plan Stages 2–4; its two leaves proved by jobs FS131-I8A and FS131-I8B).
+
+## [BEYOND] ARCHITECTURE.md — the row of Empty: no skeleton — every leaf is proved (×1)
+--- before
+| `Plane/RingCalculus/Empty` | **FS-131 wave 8, skeleton** (job FS131-K8; plan Stages 2 and 4).
++++ after
+| `Plane/RingCalculus/Empty` | **FS-131 wave 8** (stated by job FS131-K8, plan Stages 2 and 4; its leaves proved by jobs FS131-I8A and FS131-I8D).
+
+## [BEYOND] ARCHITECTURE.md — the row of SemiHub: no skeleton (×1)
+--- before
+| `Plane/RingCalculus/SemiHub` | **FS-131 wave 8, skeleton: the semi-hub rows** (job FS131-K8b; `plans/FS131-w8-kernel-plan.md` Stages 6–10).
++++ after
+| `Plane/RingCalculus/SemiHub` | **FS-131 wave 8: the semi-hub rows** (stated by job FS131-K8b, `plans/FS131-w8-kernel-plan.md` Stages 6–10; its seventeen leaves proved by job FS131-I8C, `plans/FS131-I8C-implementation.md`).
+
+## [BEYOND] ARCHITECTURE.md — the row of SemiHub: the skeleton's word '(stated)', five times (×1)
+--- before
+`qcol_inner_tile`, `qcol_not_one_arc`, `GermOnQWith.exists_isRingArc_ccw`, `…_cw` (stated). FS116-N3-PAIR: `germPair_inner_ne` (stated), `germPair_swap`; FS116-V5-DICHO: `germPair_dicho` (stated). FS116-N3-CONE: `ringTile_uMinus`, `…_vMinus`, `…_vPlus`, `…_uPlus` (stated),
++++ after
+`qcol_inner_tile`, `qcol_not_one_arc`, `GermOnQWith.exists_isRingArc_ccw`, `…_cw`. FS116-N3-PAIR: `germPair_inner_ne`, `germPair_swap`; FS116-V5-DICHO: `germPair_dicho`. FS116-N3-CONE: `ringTile_uMinus`, `…_vMinus`, `…_vPlus`, `…_uPlus`,
+
+## [BEYOND] ARCHITECTURE.md — the row of SemiHub: '(stated)', continued (×1)
+--- before
+`closure_inter_subset_sphere` (proved), `isRingArc_of_edge`, `four_le_of_bothKind` (stated).
++++ after
+`closure_inter_subset_sphere`, `isRingArc_of_edge`, `four_le_of_bothKind`.
+
+## [BEYOND] ARCHITECTURE.md — the row of SemiHub: '(stated)' and the sentence that apologized for it (×1)
+--- before
+`fullSemiHub_star_crossed`, `fullSemiHub_star_parallel`, `fullSemiHub_star_parallel_T` (stated). **Job FS131-I8C** (`plans/FS131-I8C-implementation.md`) proved the seventeen leaves; the words "(stated)" above are the skeleton's and no longer describe the module. Its helpers:
++++ after
+`fullSemiHub_star_crossed`, `fullSemiHub_star_parallel`, `fullSemiHub_star_parallel_T`. Job FS131-I8C's helpers:
+
+## [BEYOND] scripts/Axioms.lean — the block comment of FS131-I8D: no record rests on an open leaf since the join (×1)
+--- before
+Until the wave's join each record here that cites a statement of
+`Plane/RingCalculus/SemiHub` rests on that module's open leaves (`tools/fs131_i8d_axioms.py` names them per record). -/
++++ after
+Until the wave's join each record here that cites a statement of
+`Plane/RingCalculus/SemiHub` rested on that module's open leaves; since the join (job FS131-L8A) none does
+(`tools/fs131_i8d_axioms.py`: 29 on the standard three, none resting). -/
+
+17 edits in 4 files

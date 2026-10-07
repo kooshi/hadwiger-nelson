@@ -1,0 +1,31 @@
+FAIL A7: quote not found at CLAUDE.md § Where the problem stands: 'χ(ℝ²) ∈ {5, 6, 7}'
+FAIL A6: quote not found at CLAUDE.md § Where the problem stands: 'χ(ℝ²) ∈ {5, 6, 7}'
+FAIL A5: quote not found at CLAUDE.md § Where the problem stands: 'χ(ℝ²) ∈ {5, 6, 7}'
+FAIL LB7: quote not found at CLAUDE.md § The aim: 'gives χ_m⁰(ℝ²) = 7, hence χ(ℝ²) = 7 given MR'
+FAIL UB6: quote not found at CLAUDE.md § The aim: 'Yes — such a sequence, with six or five colours — gives χ(ℝ²) ≤ 6, or = 5, with no MR'
+FAIL UB5: quote not found at CLAUDE.md § The aim: 'Yes — such a sequence, with six or five colours — gives χ(ℝ²) ≤ 6, or = 5, with no MR'
+FAIL R130: quote not found at LEDGER.md row 130: 'Given MR (row 128): χ(ℝ²) = χ_m⁰(ℝ²)'
+FAIL MAPS6: quote not found at LEDGER.md row 132: "maps need six modulo Townsend's simplification (c), which [Woodall1973]'s steps 2, 3, 5 fi"
+FAIL M7: quote not found at CLAUDE.md § The aim: "No — Voronov's contradiction survives a free colour of vanishing density — gives χ_m⁰(ℝ²) "
+FAIL FS120: quote not found at plans/STUB-pinch-at-junction.md: 'the pinch at a junction, and the cover route at five: can a pinch in a measurable fall col'
+FAIL FS104: quote not found at CLAUDE.md § Paths forward, ranked item 3: 'is χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6 (row 130)?'
+FAIL FS80: quote not found at plans/FRONTIER-STUBS.md § Ranked stubs item 14: 'averaged certificates at five colours on the real plane — the integrality shape a six cert'
+FAIL FS44: quote not found at plans/FRONTIER-STUBS.md § Ranked stubs item 13: "the shape of a CP five-colouring of the plane — FS-104's mirror"
+FAIL edge LB7→A7: quote not found at CLAUDE.md § Where the problem stands: 'χ(ℝ²) ∈ {5, 6, 7}'
+FAIL edge UB7→A7: quote not found at CLAUDE.md § Where the problem stands: 'χ(ℝ²) ∈ {5, 6, 7}'
+FAIL edge LB6→A6: quote not found at CLAUDE.md § Where the problem stands: 'χ(ℝ²) ∈ {5, 6, 7}'
+FAIL edge UB6→A6: quote not found at CLAUDE.md § Where the problem stands: 'χ(ℝ²) ∈ {5, 6, 7}'
+FAIL edge LB5→A5: quote not found at CLAUDE.md § Where the problem stands: 'χ(ℝ²) ∈ {5, 6, 7}'
+FAIL edge UB5→A5: quote not found at CLAUDE.md § Where the problem stands: 'χ(ℝ²) ∈ {5, 6, 7}'
+FAIL edge R128→LB7: quote not found at CLAUDE.md § The aim: 'gives χ_m⁰(ℝ²) = 7, hence χ(ℝ²) = 7 given MR'
+FAIL edge R130→LB7: quote not found at LEDGER.md row 130: 'Given MR (row 128): χ(ℝ²) = χ_m⁰(ℝ²)'
+FAIL edge M7→LB7: quote not found at CLAUDE.md § The aim: 'gives χ_m⁰(ℝ²) = 7, hence χ(ℝ²) = 7 given MR'
+FAIL edge R128→LB6: quote not found at CLAUDE.md § Paths forward, ranked item 3: 'a YES gives χ(ℝ²) ≥ 6 given MR (row 128)'
+FAIL edge BOWTIE→TSMYES: quote not found at plans/FRONTIER-STUBS.md item 19: 'its fragments (the pencil, BOWTIE) stay local positives a YES could use'
+FAIL edge FS104→LB6: quote not found at CLAUDE.md § Paths forward, ranked item 3: 'a YES gives χ(ℝ²) ≥ 6 given MR (row 128)'
+FAIL edge FS104→FS44: quote not found at CLAUDE.md § Paths forward, ranked item 3: 'a NO (a CP five-colouring) gives χ(ℝ²) = 5 with no MR'
+FAIL edge FS80→FS104: quote not found at plans/FRONTIER-STUBS.md § Ranked stubs item 14: 'a certificate gives χ_CP(ℝ²) = χ_m⁰(ℝ²) ≥ 6 (row 130), hence χ(ℝ²) ≥ 6 given MR (row 128)'
+FAIL edge FS44→UB5: quote not found at plans/FRONTIER-STUBS.md § Ranked stubs item 13: 'a CP five-colouring of the plane gives χ(ℝ²) = 5 with no MR (link 2; row 130)'
+FAIL edge MAPS6→FS44: quote not found at LEDGER.md row 132: "maps need six modulo Townsend's simplification (c)"
+FAIL note belief: quote not found at CLAUDE.md § The local–global conjecture: 'Believing the answer is seven is not evidence for seven; the value-skipping that motivates'
+checked 212, failed 30, errors 0

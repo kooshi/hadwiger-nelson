@@ -1,0 +1,2 @@
+check: ARCHITECTURE.md: 802 non-blank lines; faults 0
+three-way: PASS

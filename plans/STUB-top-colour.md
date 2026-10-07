@@ -1,4 +1,6 @@
-# FS-128 — the top colour, at five and six: can the top colour of a Grundy six-colouring be bound, and does NO-PAR hold under Condition 5? (stub)
+# FS-128 — the top colour, at six: can the top colour of a Grundy six-colouring be bound, and does NO-PAR hold under Condition 5? (stub)
+
+> 2026-10-07: the five-colour half is answered by citation (no measurable five-colouring exists, `[OAIMath2026]` Thm 1.4; row 154's two sides are both true). TOP₆ stands, with no 'given MR'. Whether a saturated normal form is on the road at all waits on FS-132's cards 1 and 2.
 
 *Minted 2026-10-03 by FS-121's close (FS121-Z1, stage 5). It holds FS-121's two rungs that are at six by nature: honest saturation's upper colour
 (TOP₆, the honest route) and the cover route's own NO (C121-NOPAR-C5), parked behind FS-116 (inventory items 51, 63). **Solver column: in-ban.**

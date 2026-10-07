@@ -1,0 +1,45 @@
+M7: 1 match, replaced (40 -> 53 chars)
+M8: 1 match, replaced (206 -> 366 chars)
+M1: 1 match, replaced (25 -> 75 chars)
+M2: 1 match, replaced (57 -> 82 chars)
+M3: 1 match, replaced (82 -> 247 chars)
+M4a: 1 match, replaced (27 -> 27 chars)
+M4b: 1 match, replaced (60 -> 246 chars)
+M4c: 1 match, replaced (43 -> 37 chars)
+M5: 1 match, replaced (59 -> 214 chars)
+M6a: 1 match, replaced (43 -> 34 chars)
+M6b: 1 match, replaced (64 -> 35 chars)
+M6c: 1 match, replaced (28 -> 118 chars)
+R1 row D: 1 match, replaced (121 -> 414 chars)
+R2 link 1: span of 472 chars replaced by 664
+R3 link 3: 1 anchor, inserted 150 chars after
+R4 link 4: 1 match, replaced (285 -> 351 chars)
+R5 link 5: span of 830 chars replaced by 908
+M10: 1 match, replaced (26 -> 32 chars)
+R6 link 6: 1 anchor, inserted 571 chars after
+R7a Frontier para 1 (the problem): 1 match, replaced (204 -> 390 chars)
+R7b Frontier para 1 (given MR): 1 match, replaced (352 -> 428 chars)
+R8 item 31: 1 match, replaced (71 -> 229 chars)
+R9a theory (value moved): 1 match, replaced (47 -> 241 chars)
+R9b theory (given MR): 1 match, replaced (34 -> 62 chars)
+R10 local-global: 1 match, replaced (82 -> 331 chars)
+1b: three ranked rows replaced by P top-three rows
+M9: 1 match, replaced (81 -> 81 chars)
+1c: open-milestones span replaced (M7, M8 inside)
+M11: occurrences of "G1–G92" (any dash/"to") in CLAUDE.md: 0
+CLAUDE.md bytes 52599 -> 55413
+row 33: A(c) sentence then R sentence appended
+row 107: appended 492 chars to the result cell
+row 120: appended 618 chars to the result cell
+row 125: appended 136 chars to the result cell
+row128 before Not claimed: 1 match, replaced (16 -> 537 chars)
+row128 prior art: 1 match, replaced (28 -> 291 chars)
+row 129: appended 189 chars to the result cell
+row130 replacement: 1 match, replaced (191 -> 315 chars)
+row130 prior-art addition (before Naming): 1 match, replaced (11 -> 326 chars)
+row 131: appended 113 chars to the result cell
+row 132: appended 317 chars to the result cell
+row 140: appended 134 chars to the result cell
+row 154: appended 144 chars to the result cell
+claim list Ours: 1 anchor, inserted 90 chars after
+claim list Not ours (appended as the list's last item): 1 match, replaced (42 -> 268 chars)

@@ -1,0 +1,21 @@
+faithful: scripts/Axioms.lean: 7364 non-blank lines; #print axioms lines 6541 = ours 5757 + theirs 6334 - base 5550; faults 0
+  (no base line that ours alone rewrote in this file: the stale-row plant is not applicable here)
+plant (a line of theirs dropped): scripts/Axioms.lean: 7363 non-blank lines; #print axioms lines 6541 = ours 5757 + theirs 6334 - base 5550; faults 1
+  LOST "not (`undeclared-library-axiom`, from `libraryAxioms`, the file's last command). The library" (rule 1 = ours 0 + theirs 1 - base 0; have 0)
+  -> fired (LOST)
+plant (a line of theirs doubled): scripts/Axioms.lean: 7365 non-blank lines; #print axioms lines 6541 = ours 5757 + theirs 6334 - base 5550; faults 1
+  EXTRA "not (`undeclared-library-axiom`, from `libraryAxioms`, the file's last command). The library" (rule 1 = ours 0 + theirs 1 - base 0; have 2)
+  -> fired (EXTRA)
+plant (a marker left in): scripts/Axioms.lean: 7365 non-blank lines; #print axioms lines 6541 = ours 5757 + theirs 6334 - base 5550; faults 1
+  MARKER '======='
+  -> fired (MARKER)
+plant (a record of theirs doubled): scripts/Axioms.lean: 7365 non-blank lines; #print axioms lines 6542 = ours 5757 + theirs 6334 - base 5550; faults 3
+  COUNT #print axioms: have 6542, expected ours 5757 + theirs 6334 - base 5550
+  EXTRA '#print axioms HadwigerNelson.StandingFive.kloostermanBound_of_ringChar_ne_two' (rule 1 = ours 0 + theirs 1 - base 0; have 2)
+  TWICE HadwigerNelson.StandingFive.kloostermanBound_of_ringChar_ne_two (2)
+  -> fired (TWICE)
+plant (a record of theirs dropped): scripts/Axioms.lean: 7363 non-blank lines; #print axioms lines 6540 = ours 5757 + theirs 6334 - base 5550; faults 2
+  COUNT #print axioms: have 6540, expected ours 5757 + theirs 6334 - base 5550
+  LOST '#print axioms HadwigerNelson.StandingFive.kloostermanBound_of_ringChar_ne_two' (rule 1 = ours 0 + theirs 1 - base 0; have 0)
+  -> fired (COUNT)
+self-test: PASS

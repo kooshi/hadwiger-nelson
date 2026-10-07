@@ -1,0 +1,19 @@
+second pass 2026-10-07 03:25 UTC
+b1 | all:"fractional chromatic number" AND all:plane | total 6 | shown 6
+    2026-06-26 2606.28157v1 | A unit-distance graph in the plane with independence ratio below 1/4
+    2026-06-10 2606.12325v1 | A note on geometric colorings of the Moser lattice
+    2023-11-16 2311.10069v4 | The fractional chromatic number of the plane is at least 4
+b3 | all:"independence ratio" AND all:"unit-distance" | total 2 | shown 2
+    2026-06-26 2606.28157v1 | A unit-distance graph in the plane with independence ratio below 1/4
+    2023-11-16 2311.10069v4 | The fractional chromatic number of the plane is at least 4
+b5 | all:"Hadwiger-Nelson" | total 29 | shown 25
+    2026-09-28 2609.36220v1 | Hadwiger--Nelson Problem for Typical Norms
+    2026-08-05 2608.04542v5 | A Moser-spindle-free 5-chromatic unit distance graph on 2131 vertices in the plane
+    2026-06-15 2606.16642v2 | On the chromatic number and equilateral dimension of $\mathbb{R}^n$ with the tropical norm
+b13 | all:"distance-avoiding" AND all:density | total 4 | shown 4
+    2026-09-28 2609.34845v1 | Optimization hierarchies for extremal geometry through complete positivity
+    2024-07-06 2407.05071v1 | Clustering in typical unit-distance avoiding sets
+    2018-04-24 1804.09099v4 | Complete positivity and distance-avoiding sets
+b16 | all:"unit distance" AND all:fractional | total NO-RESPONSE | shown 0
+b17 | all:"avoiding" AND all:"measurable" AND all:"finite graphs" AND all:plane | total NO-RESPONSE | shown 0
+b18 | all:"plane" AND all:"five" AND all:"chromatic number" AND all:"measurable" | total NO-RESPONSE | shown 0

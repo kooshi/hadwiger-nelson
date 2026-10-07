@@ -1,0 +1,226 @@
+    scanned: declarations=14807  refutations-skipped=215
+    sites:   sites=1446  vacuous=0  stale=0  declared=3  witnessed=38  generic=1403  unknown=2
+    evidence: 18 emptiness proof(s), 63 witness(es)
+    recorded counts in scripts/vacuity-baseline.txt's header: match (9 of 9 compared)
+    RECORDED COUNTS ARE STALE in CLAUDE.md § The gate — update it: declarations 14501 → 14807, refutations-skipped 199 → 215, sites 1269 → 1446, generic 1226 → 1403
+    --- witnessed (38), with the evidence behind each ---
+    WITNESSED HadwigerNelson.AritySpec.p5_compels_rainbow :: HadwigerNelson.Compels HadwigerNelson.AritySpec.P5 3 ![1, 3, 4] id [by HadwigerNelson.AritySpec.p5_compels_rainbow]
+    WITNESSED HadwigerNelson.Plane.ArcMap.cuspFrag_isHorn :: HadwigerNelson.Plane.ArcMap.cuspFrag.IsHorn 0 0 (-1) 1 1 [by HadwigerNelson.Plane.ArcMap.cuspFrag_isHorn]
+    WITNESSED HadwigerNelson.Plane.ArcMap.halfDisc_simple :: HadwigerNelson.Plane.halfDisc.Simple [by HadwigerNelson.Plane.ArcMap.halfDisc_simple]
+    WITNESSED HadwigerNelson.Plane.ArcMap.l60Frag_isRingArc :: HadwigerNelson.Plane.ArcMap.l60Frag.IsRingArc 0 0 (Real.pi / 3) 0 1 [by HadwigerNelson.Plane.ArcMap.l60Frag_isRingArc]
+    WITNESSED HadwigerNelson.Plane.ArcMap.threeSectorDisc_niceAt :: HadwigerNelson.Plane.ArcMap.threeSectorDisc.NiceAt 0 [by HadwigerNelson.Plane.ArcMap.threeSectorDisc_niceAt]
+    WITNESSED HadwigerNelson.Plane.ArcMap.threeSectorDisc_phantom :: HadwigerNelson.Plane.ArcMap.threeSectorDisc.SectorsAt 0 5 ![0, 2 * Real.pi / 3, 2 * Real.pi / 3, 2 * Real.pi / 3, 4 * Real.pi / 3, 2 * Real.pi] ![0, 1, 0, 1, 2] [by HadwigerNelson.Plane.ArcMap.threeSectorDisc_phantom]
+    WITNESSED HadwigerNelson.Plane.ArcMap.threeSectorDisc_sectorsAt :: HadwigerNelson.Plane.ArcMap.threeSectorDisc.SectorsAt 0 3 ![0, 2 * Real.pi / 3, 4 * Real.pi / 3, 2 * Real.pi] ![0, 1, 2] [by HadwigerNelson.Plane.ArcMap.threeSectorDisc_sectorsAt]
+    WITNESSED HadwigerNelson.Plane.awayModel_isRingArc_gap :: HadwigerNelson.Plane.awayModel.IsRingArc HadwigerNelson.Plane.awayP (1 / 5) (3 / 10) 7 0 [by HadwigerNelson.Plane.awayModel_isRingArc_gap]
+    WITNESSED HadwigerNelson.Plane.cuspFrag_isRingArc :: HadwigerNelson.Plane.ArcMap.cuspFrag.IsRingArc Complex.I (-(Real.pi / 2) + 1 / 10) (-(Real.pi / 2) + 2 / 5) 0 1 [by HadwigerNelson.Plane.cuspFrag_isRingArc]
+    WITNESSED HadwigerNelson.Plane.halfDisc_niceAt :: HadwigerNelson.Plane.halfDisc.NiceAt 0 [by HadwigerNelson.Plane.halfDisc_niceAt]
+    WITNESSED HadwigerNelson.Plane.halfDisc_sectorsAt :: HadwigerNelson.Plane.halfDisc.SectorsAt 0 2 ![0, Real.pi, 2 * Real.pi] ![1, 0] [by HadwigerNelson.Plane.halfDisc_sectorsAt]
+    WITNESSED HadwigerNelson.Plane.halfPlane2_isChangePoint :: HadwigerNelson.Plane.halfPlane2.IsChangePoint 0 0 1 0 [by HadwigerNelson.Plane.halfPlane2_isChangePoint]
+    WITNESSED HadwigerNelson.Plane.hornModel_isHorn :: HadwigerNelson.Plane.hornModel.IsHorn HadwigerNelson.Plane.plantPt 0 (-1 / 2) (1 / 2) 7 [by HadwigerNelson.Plane.hornModel_isHorn]
+    WITNESSED HadwigerNelson.Plane.quadRing_isQArc :: HadwigerNelson.Plane.quadRing.IsQArc 0 0 (Real.pi / 2) [by HadwigerNelson.Plane.quadRing_isQArc]
+    WITNESSED HadwigerNelson.Plane.quadRing_isRingArc :: HadwigerNelson.Plane.quadRing.IsRingArc 0 0 (Real.pi / 2) 0 2 [by HadwigerNelson.Plane.quadRing_isRingArc]
+    WITNESSED HadwigerNelson.Plane.sevenBrickRegions :: HadwigerNelson.Plane.AeProperRegions 7 [by HadwigerNelson.Plane.sevenBrickRegions]
+    WITNESSED HadwigerNelson.Plane.sixFrag_isRingArc :: HadwigerNelson.Plane.sixFrag.IsRingArc 0 0 (Real.pi / 6) 0 2 [by HadwigerNelson.Plane.sixFrag_isRingArc]
+    WITNESSED HadwigerNelson.Plane.sq9 :: HadwigerNelson.Plane.AeColouring 9 [by HadwigerNelson.Plane.sq9]
+    WITNESSED HadwigerNelson.Plane.stuckModel_isHorn_pi :: HadwigerNelson.Plane.stuckModel.IsHorn HadwigerNelson.Plane.plantPt (0 + Real.pi) (-1) 1 9 [by HadwigerNelson.Plane.stuckModel_isHorn_pi]
+    WITNESSED HadwigerNelson.Plane.stuckModel_isStuck :: HadwigerNelson.Plane.stuckModel.IsStuck HadwigerNelson.Plane.plantPt [by HadwigerNelson.Plane.stuckModel_isStuck]
+    WITNESSED HadwigerNelson.StationaryRatio.StationarySet.parity :: HadwigerNelson.StationaryRatio.StationarySet (ZMod 2) [by HadwigerNelson.StationaryRatio.StationarySet.parity]
+    WITNESSED HadwigerNelson.core122_pigeonhole :: (HadwigerNelson.edgeGraph 122 HadwigerNelson.core122Edges).Coloring (Fin 4) [by HadwigerNelson.core122_colorable_four]
+    WITNESSED HadwigerNelson.core9_pigeonhole :: (HadwigerNelson.edgeGraph 9 HadwigerNelson.core9Edges).Coloring (Fin 4) [by HadwigerNelson.core9_colorable_four]
+    WITNESSED HadwigerNelson.finitePlane11Colouring.toColoring :: (HadwigerNelson.finitePlane 11).Coloring (Fin 5) [by HadwigerNelson.finitePlane11_colorable_five]
+    WITNESSED HadwigerNelson.finitePlane11DoubleGapColoring :: (HadwigerNelson.finitePlane 11).Coloring (Fin 5) [by HadwigerNelson.finitePlane11_colorable_five]
+    WITNESSED HadwigerNelson.finitePlane19QuotColoring :: (HadwigerNelson.finitePlane 19).Coloring (Fin 5) [by HadwigerNelson.finitePlane19QuotColoring]
+    WITNESSED HadwigerNelson.finitePlane3Colouring.toColoring :: (HadwigerNelson.finitePlane 3).Coloring (Fin 3) [by HadwigerNelson.finitePlane3ColouringDiff.toColoring]
+    WITNESSED HadwigerNelson.finitePlane3ColouringDiff.toColoring :: (HadwigerNelson.finitePlane 3).Coloring (Fin 3) [by HadwigerNelson.finitePlane3ColouringDiff.toColoring]
+    WITNESSED HadwigerNelson.finitePlane7QuotColoring :: (HadwigerNelson.finitePlane 7).Coloring (Fin 4) [by HadwigerNelson.finitePlane7QuotColoring]
+    WITNESSED HadwigerNelson.hexColoring :: (SimpleGraph.cycleGraph 6).Coloring (Fin 3) [by HadwigerNelson.hexColoring]
+    WITNESSED HadwigerNelson.pathColoring3 :: (SimpleGraph.pathGraph 3).Coloring (Fin 3) [by HadwigerNelson.pathColoring3]
+    WITNESSED HadwigerNelson.pathGraph_additivelyRigid :: (SimpleGraph.pathGraph 3).Coloring (Fin 2) [by HadwigerNelson.pathGraph_three_colorable_two]
+    WITNESSED HadwigerNelson.pathGraph_three_coloring_two :: (SimpleGraph.pathGraph 3).Coloring (Fin 2) [by HadwigerNelson.pathGraph_three_colorable_two]
+    WITNESSED HadwigerNelson.rhombus_forces :: (HadwigerNelson.edgeGraph 4 HadwigerNelson.rhombus).Coloring (Fin 3) [by HadwigerNelson.rhombus_colorable_three]
+    WITNESSED HadwigerNelson.rhombus_forces_of_gadget :: (HadwigerNelson.edgeGraph 4 HadwigerNelson.rhombus).Coloring (Fin 3) [by HadwigerNelson.rhombus_colorable_three]
+    WITNESSED HadwigerNelson.twoAdicFiveColouring :: (HadwigerNelson.twoAdicPlane 5).Coloring (Fin 4) [by HadwigerNelson.twoAdicFiveColouring]
+    WITNESSED HadwigerNelson.twoAdicFive_forces_delta :: (HadwigerNelson.twoAdicPlane 5).Coloring (Fin 4) [by HadwigerNelson.twoAdicFiveColouring]
+    WITNESSED HadwigerNelson.twoAdicFive_forces_of_ker :: (HadwigerNelson.twoAdicPlane 5).Coloring (Fin 4) [by HadwigerNelson.twoAdicFiveColouring]
+    --- changes since the previous complete run ---
+    previous: data/fs131/lt5/gate/receipt-vacuity-landed2.log
+    counts: declarations 14501 → 14807, refutations-skipped 199 → 215, sites 1269 → 1446, generic 1226 → 1403
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.GammaFreeRing.exists_absent_pair :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.IsHub.not_isSemiHub :: F.IsHub p ψ
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.exists_sub_of_germIn :: F.IsRingArc p θ₁ θ₂ a a'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.germIn_closure :: F.IsRingArc p θ₁ θ₂ a a'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.inner_ne_outer :: F.IsRingArc p θ₁ θ₂ c c'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.inner_ne_outer :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.IsTile.not_mem_closure_of_not_subset_ball :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.IsTip.coneAt_subset :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.NonSiamese.tile_eq_of_dist_lt :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.NonSiamese.tile_eq_of_dist_lt :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.NonSiamese.tile_eq_of_mem_closure :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.NonSiamese.tile_eq_of_mem_closure :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.QFreeRing.isHub :: F.IsChangePoint p ψ X X'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.QFreeRing.isHub :: F.IsHub p ψ
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.Simple.simpleOn :: F.Simple
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.TileAt.subset_ball :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.Valid.dist_le_one_of_near_germ :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.Valid.dist_le_one_of_near_germ_closure :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_changePoint :: F.IsChangePoint (HadwigerNelson.Plane.ringPt p ψ) (ψ + Real.pi) b a
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_changePoint :: F.IsChangePoint p ψ X X'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_changePoint :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_changePoint :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_coloursAt :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_coloursAt :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_four :: F.IsChangePoint p ψ X X'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_four :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_four :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_no_tip :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_no_tip :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_not_germOnQ_inside :: F.IsChangePoint p ψ X X'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_not_germOnQ_inside :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_not_germOnQ_inside :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_outer :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_outer :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_semiHub :: F.IsChangePoint p ψ X X'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_semiHub :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_semiHub :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_star_data :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_star_data :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_tip_zeroAngle :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_tip_zeroAngle :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.disjoint_ball_of_far_germ :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.disjoint_ball_of_far_germ :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.disjoint_ball_of_far_witness :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.disjoint_ball_of_far_witness :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.disjoint_tipColours_outerTileColours :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.disjoint_tipColours_outerTileColours :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_ball_subset_closure_of_sole_outer :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_ball_subset_closure_region_of_sole_tip :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_ball_subset_closure_region_of_sole_tip :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_fin_tileAt :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_fin_tileAt :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_germCol_change :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_initialPiece_of_ncard_le_three :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_initialPiece_of_ncard_le_three :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_isStar4 :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_isStar4 :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_sectorChart_tileAt :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_sectorChart_tileAt :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_third_change :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_two_double_tiles :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.four_le_of_bothKind :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.four_le_of_bothKind :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_crossed :: F.IsRingArc p (ψ + Real.pi / 3) (ψ + Real.pi / 3 + ℓ) a a'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_crossed :: F.IsRingArc p (ψ - Real.pi / 3 - m) (ψ - Real.pi / 3) b b'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_crossed :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_crossed :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel :: F.IsRingArc p (ψ + Real.pi / 3) (ψ + Real.pi / 3 + ℓ) a a'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel :: F.IsRingArc p (ψ - Real.pi / 3 - m) (ψ - Real.pi / 3) a' a
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel_T :: F.IsRingArc p (ψ + Real.pi / 3 - ℓ) (ψ + Real.pi / 3) a a'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel_T :: F.IsRingArc p (ψ - Real.pi / 3) (ψ - Real.pi / 3 + m) a' a
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel_T :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel_T :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.germCol_change_int :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.germCol_change_rotate :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.germCol_rotate_ne :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.germIn_closure_tile_of_near :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.germIn_closure_tile_of_near :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.germOnQ_bar_uMinus :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.germOnQ_bar_uPlus :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.germOnQ_bar_vMinus :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.germOnQ_bar_vPlus :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.germPair_dicho :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.germPair_dicho :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.germPair_inner_ne :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.germPair_inner_ne :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.germPair_swap :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.germPair_swap :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.mem_closure_of_coneAt_toward :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.mem_closure_of_coneAt_toward :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.mem_closure_tile_of_near :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.mem_closure_tile_of_near :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ncard_tileAt_eq :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ncard_tileAt_eq :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.not_mem_coloursAt_of_germIn :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.not_sole_outer_of_adjacent_changePoints :: F.IsChangePoint p (ψ + Real.pi / 3) Y Y'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.not_sole_outer_of_adjacent_changePoints :: F.IsChangePoint p ψ X X'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.not_sole_outer_of_adjacent_changePoints :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.not_sole_outer_of_adjacent_changePoints :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.outerAdj :: F.IsChangePoint p (ψ + Real.pi / 3) Y Y'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.outerAdj :: F.IsChangePoint p ψ X X'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.outerAdj :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.outerAdj :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.qcol_ccw :: F.IsChangePoint p ψ X X'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.qcol_ccw :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.qcol_cw :: F.IsChangePoint p ψ X X'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.qcol_cw :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.qcol_inner_tile :: F.IsRingArc p θ₁ θ₂ c c'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.qcol_inner_tile :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.qcol_inner_tile :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_dist_le_one :: F.IsRingArc p θ₁ θ₂ c c'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_dist_le_one :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_dist_le_one :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_pair_eq_or_disjoint :: F.IsRingArc p u v a a'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_pair_eq_or_disjoint :: F.IsRingArc p u' v' b b'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_pair_eq_or_disjoint :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_pair_eq_or_disjoint :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_star :: F.IsRingArc p u v c c'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_star :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_star :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringGerm_inward :: F.IsChangePoint p ψ X X'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringGerm_inward :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringGerm_inward :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringGerm_outward :: F.IsChangePoint p ψ X X'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringGerm_outward :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_uMinus :: F.IsChangePoint p ψ X X'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_uMinus :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_uMinus :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_uPlus :: F.IsChangePoint p ψ X X'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_uPlus :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_uPlus :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_vMinus :: F.IsChangePoint p ψ X X'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_vMinus :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_vMinus :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_vPlus :: F.IsChangePoint p ψ X X'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_vPlus :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_vPlus :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.semiHub_edge :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.semiHub_edge :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.semiHub_places :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.semiHub_places :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.semiHub_places_O :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.semiHub_places_O :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.semiHub_places_T :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.semiHub_places_T :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.simpleOn_not_hasRepeatedColour :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.simpleOn_not_hasRepeatedColour :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.sixth_cons_of_mem_closure :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.star_absent :: F.IsChangePoint p ψ X X'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.star_absent :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.star_anti :: F.IsHub p (ψ + Real.pi)
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.star_anti :: F.IsHub p ψ
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.star_anti :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.star_anti :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.star_anti_count :: F.IsHub p ψ
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.star_anti_count :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.star_anti_count :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.star_coloursAt :: F.IsChangePoint p ψ X X'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.star_coloursAt :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.star_flank :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.star_flank_interior :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.star_outer_cone :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.star_outer_cone :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.star_outer_nonempty :: F.IsChangePoint p ψ X X'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.star_outer_nonempty :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.star_recip :: F.IsChangePoint p ψ X X'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.star_recip :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.star_tip_nonempty :: F.IsChangePoint p ψ X X'
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.star_tip_nonempty :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.star_tip_nonempty :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.transferQC :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.transferQC :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.v6_anti :: F.Valid
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.v6_hubs :: F.NonSiamese
+    + SITE GENERIC HadwigerNelson.Plane.ArcMap.v6_hubs :: F.Valid
+    every site and piece of evidence: rg '^(SITE|EVIDENCE) ' data/fs131/l8a/gate/receipt-vacuity-final.log
+exit=0

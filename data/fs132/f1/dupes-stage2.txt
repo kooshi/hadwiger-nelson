@@ -1,0 +1,165 @@
+164 repeated runs of >= 10 words, 15,227 bytes in second and later tellings:
+    272 B  | 148 | in a non-Siamese simple valid six-coloured fragment on a closed disc of radius at least √3 about a vertex p of at least four colours whose rin…
+    245 B  | 148 | in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring ca…
+    245 B  | 148 | in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring ca…
+    245 B  | 148 | in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring ca…
+    245 B  | 148 | in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring ca…
+    245 B  | 148 | in a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring ca…
+    243 B  | 148 | in a non-Siamese simple valid six-coloured fragment on a closed disc of radius at least √3 about a vertex p of at least four colours whose rin…
+    226 B  non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours has a ring carrying no … |…
+    187 B  every locally finite map of the plane bounded by segments and circular arcs, arcs of radius 1 allowed, whose six-colouring puts no two interior points…
+    184 B  non-Siamese valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y = r(ψ) and y′ = r(ψ + 60°)…
+    171 B  about a vertex p of at least four colours whose ring … | derived; held, two minds (the second blind); true vacuously (FS116-Y4-EMPTY, held) | `plans/F…
+    168 B  | 146 | in a valid k-coloured fragment on a closed disc of radius above 2 about a point p, for any k, Siamese pairs allowed, let w be a point of ω(p) …
+    159 B  * **G72 — Pose a question that cannot be answered without an invariant every solution carries. [method; Kooshi's wording, 2026-09-23; one instance (FS…
+    157 B  | 145 | in a non-Siamese simple valid fragment on a closed disc of radius above 2 about a vertex p of at least four colours whose ring carries a (Q) a…
+    152 B  | 147 | in a non-Siamese simple valid fragment on a closed disc of radius above 2 about a vertex p of at least four colours whose ring carries no arc …
+    150 B  | 146 | in a valid k-coloured fragment on a closed disc of radius above 2 about a point p, for any k, Siamese pairs allowed, let w be a point of ω(p)
+    146 B  | 144 | in an honest saturated colouring in D-NF satisfying REG-J′, if interface pieces whose radii tend to infinity accumulate at a point, then
+    144 B  a non-Siamese simple valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four colours whose ring carries
+    143 B  | 147 | in a non-Siamese simple valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y = r(ψ) be a
+    143 B  | 147 | in a non-Siamese simple valid fragment on a closed disc of radius above 2 about a vertex p of at least four colours, let y = r(ψ) be a
+    138 B  | 147 | in a non-Siamese simple valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y = r(ψ)
+    138 B  | 142 | in a cusp-free honest saturated colouring in D-NF satisfying REG-J′, let I be a tangent-type interface arc between colours a and
+    134 B  | 142 | in an honest saturated colouring in D-NF satisfying REG-J′, the chain of unit parallels of an interface arc of finite radius
+    150 B  "let F ⊆ ℝ be a number field, E = F(t₁, …, t_n) ⊂ ℝ with t₁, …, t_n algebraically independent over F (n ≥ 0), and H ⊂ E² a finite
+    128 B  | 146 | in a valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, Siamese pairs allowed,
+    129 B  | 147 | in a non-Siamese valid fragment on a closed disc of radius above 2 about a vertex p of four colours P, let y = r(ψ) be a
+    125 B  | 146 | let p be a degree-4 vertex of four colours of a non-Siamese valid fragment on a closed disc of radius above 1 about p
+    124 B  | 145 | in a non-Siamese simple valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours,
+    124 B  | 147 | in a non-Siamese simple valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours,
+    124 B  | 147 | in a non-Siamese simple valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours,
+    124 B  | 147 | in a non-Siamese simple valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours,
+    122 B  > k` ⟹ every `k`-colouring of `G × H` pulled back | hand (two derivations; GRRSV external) | `plans/FS67-derivation.md`
+    118 B  … | derived; held, two minds (the second blind); true vacuously (FS116-Y4-EMPTY, held) | `plans/FS116-derivation.md`
+    115 B  | 147 | in a non-Siamese simple valid fragment on a closed disc of radius above 2 about a vertex p of at least four
+    116 B  * **G67 — A grokking is grokked by its form, and the reframe is re-grokking. [method; measured on one milestone]**
+    107 B  | 147 | in a non-Siamese valid fragment on a closed disc of radius above 1 about a vertex p of four colours
+    106 B  | 147 | in a non-Siamese simple valid fragment on a closed disc of radius above 2 about a vertex p of four
+    104 B  | at a vertex p of at least four colours of a valid fragment on a closed disc of radius above 1 about p,
+    103 B  a saturated tight nine-colouring | tools, exact; two minds: W; VMW, blind | `plans/FS111-derivation.md`
+    101 B  four tiles of diameter at most 1 cannot tip six hubs without one tile alone at two adjacent hubs, and
+    100 B  | in a non-Siamese simple valid fragment on a closed disc of radius above 1 about a vertex p of four
+     98 B  valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours, let y
+     96 B  valid six-coloured fragment on a closed disc of radius above 1 about a vertex p of at least four
+     97 B  | 144 | in an honest saturated colouring in D-NF satisfying REG-J′, with any number of colours,
+     94 B  a valid fragment on a closed disc of radius above 1 about a vertex p of at least four colours,
+     94 B  | in every honest saturated colouring in D-NF satisfying REG-J′, with any number of colours,
+     90 B  is spent where the ring has exactly two absent colours and where the tip sector holds only
+     92 B  … | derived; one mind; true vacuously (FS116-Y4-EMPTY, held) | `plans/FS116-derivation.md`
+     92 B  … | derived; one mind; true vacuously (FS116-Y4-EMPTY, held) | `plans/FS116-derivation.md`
+     92 B  … | derived; one mind; true vacuously (FS116-Y4-EMPTY, held) | `plans/FS116-derivation.md`
+     92 B  … | derived; one mind; true vacuously (FS116-Y4-EMPTY, held) | `plans/FS116-derivation.md`
+     92 B  … | derived; one mind; true vacuously (FS116-Y4-EMPTY, held) | `plans/FS116-derivation.md`
+     92 B  … | derived; one mind; true vacuously (FS116-Y4-EMPTY, held) | `plans/FS116-derivation.md`
+     92 B  … | derived; one mind; true vacuously (FS116-Y4-EMPTY, held) | `plans/FS116-derivation.md`
+     89 B  about a vertex p of at least four colours, every tile at p with a cone of positive angle,
+     88 B  | in a non-Siamese valid fragment on a closed disc of radius above 1 about a vertex p of
+     89 B  … | hand; one mind; true vacuously (FS116-Y4-EMPTY, held) | `plans/FS116-derivation.md`
+     88 B  * **G47 — The compulsion face of sealing, at level one. [kernel; subsumed by row 66]**
+     87 B  A same-colour piece of lateral half-width `ρ` facing a flat side across a gap `g` with
+     86 B  of a valid fragment on a closed disc of radius above 1 about p, Siamese pairs allowed,
+     86 B  | 148 | in a non-Siamese simple valid six-coloured fragment on a closed disc of radius
+     87 B  | 142 | in an honest saturated colouring in D-NF satisfying REG-J′, at every point of
+     83 B  statements two minds, the second blind (one prior); the rest one mind]** Mechanism:
+     85 B  | 142 | in an honest saturated colouring in D-NF satisfying REG-J′, the centre of a
+     85 B  … | computed over; held, two minds (the second blind) | `plans/FS121-derivation.md`
+     83 B  | 148 | in a fragment of the HEX3 class on a closed disc of radius above 2 about p,
+     84 B  … | derived from; held, two minds (the second blind) | `plans/FS121-derivation.md`
+     84 B  … | derived from; held, two minds (the second blind) | `plans/FS121-derivation.md`
+     84 B  … | derived from; held, two minds (the second blind) | `plans/FS121-derivation.md`
+     84 B  … | derived from; held, two minds (the second blind) | `plans/FS121-derivation.md`
+     82 B  | 146 | in a valid fragment on a closed disc of radius above 1 about a vertex p of
+     83 B  | in an honest saturated colouring in D-NF satisfying REG-J′, if interface pieces
+     83 B  honest saturated colouring in D-NF satisfying REG-J′, with any number of colours,
+     80 B  under a period-`N` colouring is the lift of the quotient's two-colour component,
+     82 B  of … | derived; held, two minds (the second blind) | `plans/FS116-derivation.md`
+     81 B  | 142 | in a cusp-free honest saturated colouring in D-NF satisfying REG-J′, if
+     81 B  | 142 | in a cusp-free honest saturated colouring in D-NF satisfying REG-J′, at
+     80 B  * **G51 — A competitor and an advisor beat one mind. [measured, one session]**
+     79 B  of … | hand; held, two minds (the second blind) | `plans/FS121-derivation.md`
+     79 B  … | derived; held, two minds (the second blind) | `plans/FS116-derivation.md`
+     79 B  … | derived; held, two minds (the second blind) | `plans/FS116-derivation.md`
+     79 B  … | derived; held, two minds (the second blind) | `plans/FS116-derivation.md`
+     79 B  … | derived; held, two minds (the second blind) | `plans/FS116-derivation.md`
+     79 B  … | derived; held, two minds (the second blind) | `plans/FS116-derivation.md`
+     79 B  … | derived; held, two minds (the second blind) | `plans/FS116-derivation.md`
+     76 B  two minds, the second blind (one prior); the rest one mind]** Mechanism: the
+     76 B  two flanking tiles, of one absent colour, are pinned to two unit circles and
+     78 B  | 142 | in a cusp-free honest saturated colouring in D-NF satisfying REG-J′,
+     78 B  | 142 | in a cusp-free honest saturated colouring in D-NF satisfying REG-J′,
+     78 B  | 142 | in a cusp-free honest saturated colouring in D-NF satisfying REG-J′,
+     76 B  four colours of a valid fragment on a closed disc of radius above 1 about p,
+     76 B  | in a valid fragment on a closed disc of radius above 1 about a vertex p of
+     78 B  a … | hand; held, two minds (the second blind) | `plans/FS116-derivation.md`
+     74 B  HX carries complementary blocking pairs whose unit points lie in its voids
+     76 B  … | hand; held, two minds (the second blind) | `plans/FS121-derivation.md`
+     76 B  … | hand; held, two minds (the second blind) | `plans/FS121-derivation.md`
+     76 B  … | hand; held, two minds (the second blind) | `plans/FS121-derivation.md`
+     76 B  … | hand; held, two minds (the second blind) | `plans/FS121-derivation.md`
+     76 B  … | hand; held, two minds (the second blind) | `plans/FS121-derivation.md`
+     76 B  … | hand; held, two minds (the second blind) | `plans/FS121-derivation.md`
+     76 B  … | hand; held, two minds (the second blind) | `plans/FS121-derivation.md`
+     76 B  … | hand; held, two minds (the second blind) | `plans/FS121-derivation.md`
+     76 B  … | hand; held, two minds (the second blind) | `plans/FS121-derivation.md`
+     76 B  … | hand; held, two minds (the second blind) | `plans/FS116-derivation.md`
+     76 B  … | hand; held, two minds (the second blind) | `plans/FS116-derivation.md`
+     76 B  … | hand; held, two minds (the second blind) | `plans/FS116-derivation.md`
+     76 B  … | hand; held, two minds (the second blind) | `plans/FS116-derivation.md`
+     71 B  | tools, exact; two minds: M2; VM2, blind | `plans/FS111-derivation.md`
+     73 B  | 142 | in an honest saturated colouring in D-NF satisfying REG-J′, the
+     73 B  | 142 | in an honest saturated colouring in D-NF satisfying REG-J′, the
+     73 B  | 144 | in an honest saturated colouring in D-NF satisfying REG-J′, let
+     71 B  valid six-coloured fragment on a closed disc of radius above 1 about p,
+     72 B  | 142 | in an honest saturated colouring in D-NF satisfying REG-J′, at
+     72 B  | 142 | in an honest saturated colouring in D-NF satisfying REG-J′, at
+     72 B  | 144 | in an honest saturated colouring in D-NF satisfying REG-J′, if
+     70 B  a valid k-coloured fragment on a closed disc of radius above 1 about a
+     70 B  | 146 | let p be a degree-4 vertex of four colours of a valid fragment
+     71 B  `LEDGER.md` § The claim list — read it before calling anything ours.
+     68 B  two tiles of one colour forced along two unit circles to come within
+     69 B  Every congruence between subsets of `F²` is an isometry of `F²`, so
+     69 B  | 142 | in an honest saturated colouring in D-NF satisfying REG-J′,
+     69 B  | 142 | in an honest saturated colouring in D-NF satisfying REG-J′,
+     69 B  | 142 | in an honest saturated colouring in D-NF satisfying REG-J′,
+     69 B  | 144 | in an honest saturated colouring in D-NF satisfying REG-J′,
+     67 B  | in a valid k-coloured fragment, for any k, Siamese pairs allowed,
+     68 B  | 144 | in an honest saturated colouring in D-NF satisfying REG-J′
+     68 B  | 144 | in an honest saturated colouring in D-NF satisfying REG-J′
+     65 B  every measurable colouring proper at almost every unit pair needs
+     65 B  in a non-Siamese simple valid fragment on a closed disc of radius
+     63 B  no usable prime above 3 in the committed table is tight for any
+     64 B  = 7` and no field with a non-6-thick stable place has `χ(F²) =
+     62 B  a vertex of at least four colours whose unit circle carries no
+     61 B  a vertex of at least four colours or a vertex with a repeated
+     63 B  — With unit arcs, the tight question lives at one four-colour
+     59 B  | 142 | in an honest saturated colouring in D-NF satisfying
+     64 B  multiquadratic F ⊇ K, 6-open ⟺ wall broken ∧ 11 inert (not
+     58 B  a four-colour vertex whose ring carries no (Q) arc dies at
+     64 B  `|a(s) − b(t)|² − 1 = −8 sin(s/2) sin(t/2) cos((s + t)/2)
+     56 B  no two interior points of one colour at distance exactly
+     59 B  ⟹ every `k`-colouring of `G × H` pulled back | hand (two
+     55 B  both neighbouring classes one unit away on the same set
+     53 B  is the NO's hole bound made uniform in the complexity
+     55 B  a real field whose compact places all read above −1/2
+     53 B  brief for a job that runs a solver, a build or a long
+     53 B  is the NO's hole bound made uniform in the complexity
+     53 B  change point whose `±60°` germs lie off (Q) arcs is
+     51 B  on a closed disc of radius above 1 about a point p,
+     50 B  a silent change in them is this gate's own failure
+     50 B  a tangent arc of radius `n` forces tangent arcs of
+     49 B  fragment on a closed disc of radius above 1 about
+     49 B  fragment on a closed disc of radius above 1 about
+     48 B  | FS-100 stage 5, wave 3 (crunch 2026-09-26) | |
+     48 B  | FS-100 stage 5, wave 3 (crunch 2026-09-26) | |
+     50 B  z has angle θ in (0, π) and both its edges begin
+     47 B  the cone calculus at the unit rhombus `p, u, y,
+     47 B  keeps its wall at two places inert of norm 128,
+     48 B  | 148 | in V5-RING's setting, let y = r(ψ) be a
+     48 B  … | hand; held, two minds (the second blind) |
+     46 B  a unit arc with constant sides is at most 60°
+     44 B  a rung that does not land is reported as not
+     43 B  of r(ψ + 120°) lies on a (Q) arc; then no
+     40 B  `L ≥ 5` | hand + tools exact, one mind
+     37 B  let y = r(ψ) and y′ = r(ψ + 60°)
+     35 B  φ_v : Fin k → ℝ (v a vertex of

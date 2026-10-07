@@ -1,0 +1,6 @@
+OK: star_anti now is its base statement with the two ruled binders after hm
+binders vs 8d979793 exit=0
+OK: star_anti now is its base statement with the two ruled binders after hm
+binders vs e1e0c74d exit=0
+MISMATCH: star_anti now is its base statement with the two ruled binders after hm — NOT so
+binders fault exit=1

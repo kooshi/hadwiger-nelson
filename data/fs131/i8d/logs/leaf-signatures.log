@@ -1,0 +1,172 @@
+@semiHub_places : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        F.Covers p 1 →
+          ∀ {ψ : ℝ},
+            F.SimpleOn {p, ringPt p ψ, ringPt p (ψ + Real.pi / 3), ringPt p (ψ - Real.pi / 3)} →
+              4 ≤ (F.coloursAt p).ncard →
+                k ≤ (F.coloursAt p).ncard + 2 →
+                  ∀ {kind : SemiKind},
+                    F.IsSemiHub p ψ kind →
+                      4 ≤ (F.coloursAt (ringPt p ψ)).ncard ∨
+                        ((F.coloursAt (ringPt p ψ)).ncard = 3 ∧
+                            ∃ w,
+                              (w = ringPt p (ψ + Real.pi / 3) ∨ w = ringPt p (ψ - Real.pi / 3)) ∧
+                                (∃ θ₁ θ₂, F.BothKind w θ₁ θ₂ ∧ ringPt p ψ ∈ ringArc w θ₁ θ₂) ∧
+                                  4 ≤ (F.coloursAt w).ncard) ∨
+                          (F.coloursAt (ringPt p ψ)).ncard = 3 ∧
+                            F.IsFullSemiHub p ψ kind ∧
+                              ∃ a a',
+                                F.GermOnQWith p (ψ + Real.pi / 3) kind.qSide a a' ∧
+                                  F.GermOnQWith p (ψ - Real.pi / 3) kind.qSide.flip a' a ∧
+                                    ∃ c T,
+                                      F.TileOf c T ∧
+                                        p ∈ closure T ∧
+                                          F.coloursAt (ringPt p ψ) = (F.coloursAt p)ᶜ ∪ {c} ∧
+                                            (kind = SemiKind.O →
+                                                angleIcc (ψ + 5 * Real.pi / 6) (ψ + 7 * Real.pi / 6) ⊆ coneAt T p) ∧
+                                              (kind = SemiKind.T →
+                                                angleIcc (ψ - Real.pi / 6) (ψ + Real.pi / 6) ⊆ coneAt T p)
+@crossed_no_tip : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        p ∈ F.dom →
+          F.SimpleOn {p} →
+            (F.coloursAt p).ncard = 4 →
+              ∀ {ψ : ℝ} {a a' b b' : Fin k},
+                F.GermOnQWith p (ψ + Real.pi / 3) Side.ccw a a' →
+                  F.GermOnQWith p (ψ - Real.pi / 3) Side.cw b b' →
+                    Disjoint {a, a'} {b, b'} → ∀ (T : Set ℂ), ¬F.IsTip p (ringPt p ψ) T
+@crossed_outer : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        p ∈ F.dom →
+          F.SimpleOn {p} →
+            (F.coloursAt p).ncard = 4 →
+              ∀ {ψ : ℝ} {a a' b b' : Fin k},
+                F.GermOnQWith p (ψ + Real.pi / 3) Side.ccw a a' →
+                  F.GermOnQWith p (ψ - Real.pi / 3) Side.cw b b' →
+                    Disjoint {a, a'} {b, b'} → F.outerTileColours p (ringPt p ψ) ⊆ {a', b'}
+@crossed_four : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        F.Covers p 1 →
+          F.SimpleOn {p} →
+            4 ≤ (F.coloursAt p).ncard →
+              k ≤ (F.coloursAt p).ncard + 2 →
+                ∀ {ψ : ℝ} {X X' : Fin k},
+                  F.IsChangePoint p ψ X X' →
+                    ∀ {a a' b b' : Fin k},
+                      F.GermOnQWith p (ψ + Real.pi / 3) Side.ccw a a' →
+                        F.GermOnQWith p (ψ - Real.pi / 3) Side.cw b b' →
+                          Disjoint {a, a'} {b, b'} →
+                            (F.coloursAt (ringPt p ψ)).ncard = 4 →
+                              F.outerTileColours p (ringPt p ψ) = {a', b'} ∧ (F.coloursAt (ringPt p ψ))ᶜ = {a, b}
+@crossed_changePoint : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        F.Covers p 2 →
+          F.SimpleOn {p} →
+            4 ≤ (F.coloursAt p).ncard →
+              k ≤ (F.coloursAt p).ncard + 2 →
+                ∀ {ψ : ℝ} {X X' : Fin k},
+                  F.IsChangePoint p ψ X X' →
+                    ∀ {a a' b b' : Fin k},
+                      F.GermOnQWith p (ψ + Real.pi / 3) Side.ccw a a' →
+                        F.GermOnQWith p (ψ - Real.pi / 3) Side.cw b b' →
+                          Disjoint {a, a'} {b, b'} →
+                            (F.coloursAt (ringPt p ψ)).ncard = 4 →
+                              ¬F.OnRingArc (ringPt p ψ) p → F.IsChangePoint (ringPt p ψ) (ψ + Real.pi) b a
+@crossed_semiHub : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        F.Covers p 2 →
+          ∀ {ψ : ℝ},
+            F.SimpleOn {p, ringPt p ψ} →
+              4 ≤ (F.coloursAt p).ncard →
+                k ≤ (F.coloursAt p).ncard + 2 →
+                  ∀ {X X' : Fin k},
+                    F.IsChangePoint p ψ X X' →
+                      F.OuterPairFree p ψ →
+                        ∀ {a a' b b' : Fin k},
+                          F.GermOnQWith p (ψ + Real.pi / 3) Side.ccw a a' →
+                            F.GermOnQWith p (ψ - Real.pi / 3) Side.cw b b' →
+                              Disjoint {a, a'} {b, b'} →
+                                (F.coloursAt (ringPt p ψ)).ncard = 4 →
+                                  ¬F.OnRingArc (ringPt p ψ) p → F.IsSemiHub (ringPt p ψ) (ψ + Real.pi) SemiKind.O
+@outerAdj : ∀ {F : ArcMap 6},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {p : ℂ},
+        F.Covers p 1 →
+          4 ≤ (F.coloursAt p).ncard →
+            ∀ {ψ : ℝ} {X X' Y Y' : Fin 6},
+              F.IsChangePoint p ψ X X' →
+                F.IsChangePoint p (ψ + Real.pi / 3) Y Y' →
+                  ¬F.GermOnQ p (ψ - Real.pi / 3) Side.ccw →
+                    ¬F.GermOnQ p (ψ + 2 * Real.pi / 3) Side.cw →
+                      ∀ (c : Fin 6),
+                        ¬(F.outerTileColours p (ringPt p ψ) = {c} ∧
+                            F.outerTileColours p (ringPt p (ψ + Real.pi / 3)) = {c})
+@exists_int_of_angleIcc_subset : ∀ {a b lo hi : ℝ},
+  a ≤ b →
+    hi < lo + 2 * Real.pi → angleIcc a b ⊆ angleIcc lo hi → ∃ m, lo + 2 * Real.pi * ↑m ≤ a ∧ b ≤ hi + 2 * Real.pi * ↑m
+@int_eq_zero_of_two_pi_mul_lt : ∀ {m : ℤ}, -(2 * Real.pi) < 2 * Real.pi * ↑m → 2 * Real.pi * ↑m < 2 * Real.pi → m = 0
+@mem_closure_tile_of_near : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {c : Fin k} {R : Set ℂ},
+        F.TileOf c R →
+          ∀ {z z' : ℂ}, z ∈ F.dom → z ∈ closure (F.region c) → z' ∈ closure R → dist z z' < 1 → z ∈ closure R
+@IsSectorChart.tileAt_equiv : ∀ {k : ℕ} {F : ArcMap k} {n : ℕ} {G : BranchGerms n} {x : ℂ} {r₀ : ℝ},
+  F.IsSectorChart G x r₀ →
+    0 < n →
+      F.SimpleOn {x} →
+        ∃ τ,
+          Function.Injective τ ∧
+            (∀ (T : Set ℂ), F.TileAt x T ↔ ∃ i, τ i = T) ∧
+              (∀ (i : Fin n), τ i ∩ Metric.ball x r₀ = G.sector x r₀ i) ∧
+                ∀ (i : Fin n), coneAt (τ i) x = angleIcc (G.β i) (G.nextβ i)
+@exists_sectorChart_tileAt : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {x : ℂ},
+        x ∈ F.dom →
+          F.SimpleOn {x} →
+            ∀ {n : ℕ},
+              (F.coloursAt x).ncard = n →
+                2 ≤ n →
+                  ∃ r₀ G,
+                    F.IsSectorChart G x r₀ ∧
+                      (∀ (i j : Fin n), i ≠ j → ∀ s ∈ Set.Ioo 0 r₀, e (G.dir i s) ≠ e (G.dir j s)) ∧
+                        ∃ τ,
+                          Function.Injective τ ∧
+                            (∀ (T : Set ℂ), F.TileAt x T ↔ ∃ i, τ i = T) ∧
+                              (∀ (i : Fin n), τ i ∩ Metric.ball x r₀ = G.sector x r₀ i) ∧
+                                ∀ (i : Fin n), coneAt (τ i) x = angleIcc (G.β i) (G.nextβ i)
+@IsSectorChart.exists_initialPiece_between : ∀ {k : ℕ} {F : ArcMap k} {n : ℕ} {G : BranchGerms n} {x : ℂ} {r₀ : ℝ},
+  F.IsSectorChart G x r₀ →
+    (∀ (i j : Fin n), i ≠ j → ∀ s ∈ Set.Ioo 0 r₀, e (G.dir i s) ≠ e (G.dir j s)) →
+      ∀ (i : Fin n),
+        ∃ α ∈ F.arcs,
+          ∃ B,
+            α.InitialPiece x (G.β (BranchGerms.next i)) B ∧
+              B ⊆ closure (G.sector x r₀ i) ∩ closure (G.sector x r₀ (BranchGerms.next i))
+@exists_initialPiece_of_ncard_le_three : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid →
+    F.NonSiamese →
+      ∀ {x : ℂ},
+        x ∈ F.dom →
+          F.SimpleOn {x} →
+            (F.coloursAt x).ncard ≤ 3 →
+              ∀ {T₁ T₂ : Set ℂ},
+                F.TileAt x T₁ →
+                  F.TileAt x T₂ → T₁ ≠ T₂ → ∃ α ∈ F.arcs, ∃ δ B, α.InitialPiece x δ B ∧ B ⊆ closure T₁ ∩ closure T₂
+@ncard_tileAt_eq : ∀ {k : ℕ} {F : ArcMap k},
+  F.Valid → F.NonSiamese → ∀ {p : ℂ}, p ∈ F.dom → {T | F.TileAt p T}.ncard = (F.coloursAt p).ncard
