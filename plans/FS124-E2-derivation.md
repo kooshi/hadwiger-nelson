@@ -591,6 +591,19 @@ derivation: C124-EDGE-CLOSED
   prior art: partly: for extensions of the strip as a map that keep all its tiles it is FS112-EDGE ("no valid extension of the strip holds a neighbourhood of Q", `tools/fs114_y_dial.py`'s header; row 136); for every weak measurable six-colouring that keeps only the part below y = √15/4, here — not found in print
   handoff: de Bruijn — only with a consumer: six instances of C124-TYPE with explicit points; it is the first exclusion in this milestone of every weak six-colouring of a named open set by first-order tools
 
+*Correction, dated 2026-10-07 (filed by FS-124's record job, FS124-Z1; source: the asking
+lane's record `plans/POROS-2026-10-07-fs124-round2.md` § 1.2, the row "the strip's six tiles and the disk's pentagon are in no
+valid map, under any colouring", and § 1.3, S5):* this entry's *prior art* line names FS112-EDGE and misses a held map statement
+about the same six tiles — **FS114-Y-STRIPK6** (`plans/FS114-derivation.md`; row 138; [hand], two minds, blind): "In the strip's
+geometry the six tiles at a valley `V_m` (the arches `U_{m−1}`, `U_m` and the top tile `T_m`) and at the apex of `U_{m+1}`
+(`U_{m+1}`, `T_{m+1}`, `T_{m+2}`) pairwise straddle distance 1, so the two vertices are complementary under every colouring; …
+so by FS112-N3-COR3 no valid map contains these six tiles, under any colouring". The asking lane (S5): "FS114-Y-STRIPK6 (maps,
+whole tiles, every colouring) and C124-EDGE-CLOSED (every weak six-colouring, the tiles cut at the apex line, the strip's
+colouring) do not cite each other." Neither statement is the other: the held one is about maps that contain the six whole
+tiles, under every colouring; this one is about every weak six-colouring that keeps six cut pieces at the strip's own labels.
+Which six tiles each names was not compared tile by tile by the record job. The entry's statement, verdict, grade and count of
+minds are unchanged.
+
 derivation: C124-SECOND
   statement: In the setting of C124-FORCED for sector points let both common unit points w, w′ lie in U, each with pattern (1, 1). Then the edge of x on the unit circle about w and its edge on the unit circle about w′ are different edges, and the edge of y on the unit circle about w and its edge on the unit circle about w′ are different edges; the labels present at w and those present at w′ are two sets of four with exactly two labels in common, one of each member; their absent pairs are disjoint; and the six labels have a cyclic order in which the three pairs read at w (the two edges, the absent pair) and the three read at w′ alternate.
   uses only: C124-BOTH and C124-FOUR at both points; that with exactly one edge of a sector member on S(w) its third piece is crossing (an inner or outer third piece would put a second arc of the decomposition on S(w)); that an arc from x has nested initial pieces, and two distinct circles share at most two points; a count over 36 label patterns

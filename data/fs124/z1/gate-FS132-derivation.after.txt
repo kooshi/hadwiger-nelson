@@ -1,0 +1,163 @@
+slot: admitted python3: mem 2 GiB (hard cap), cpus 10
+entry lint
+  claim C132-M-ORBIT: minds 1 — one derivation (FS132-E3). A second mind, the kernel lane's planner (FS132-K1), kept from the derivers' records until its commit 1eb4b94b, reached blind the state, the chart, a forced label at each hub by another route, the unit-pair relation on its diagonal and the kill for a clean change, and stopped at the step lemma (M8); with the fence lifted it read M4 to M9 line by line and found no gap. FS132-E5 reworked M1 to M6 from the argument and read M7 to M9. The number is 1 because M6 and M8 have one derivation and readings made with the argument open, and the weakest step governs; the table under the entry says who did what
+  claim C132-M-ORBIT: prior art partly
+  claim C132-WIT-ORBIT: governed by C132-M-ORBIT (hand, minds 1)
+  claim C132-WIT-ORBIT: minds 1
+  claim C132-WIT-ORBIT: prior art partly
+  claim C132-M-EXCL: governed by C132-M-ORBIT (hand, minds 1)
+  claim C132-M-EXCL: minds 1
+  claim C132-M-EXCL: prior art partly
+  claim C132-WIT-EXCL: governed by C132-M-EXCL (derived from, minds 1)
+  claim C132-WIT-EXCL: minds 1
+  claim C132-WIT-EXCL: prior art partly
+  claim C132-DIAG-WIDE: minds 1
+  claim C132-DIAG-WIDE: prior art known
+  claim C132-WIT-SIDE: minds 1
+  claim C132-WIT-SIDE: prior art partly
+  claim C132-WIT-STRIP: minds 1
+  claim C132-WIT-STRIP: prior art partly
+  claim C132-TRI-STRIP: minds 1
+  claim C132-TRI-STRIP: prior art partly
+  claim C132-SHADOW: minds 1
+  claim C132-SHADOW: prior art partly
+  claim C132-WITNESS: minds 1
+  claim C132-WITNESS: prior art known
+  claim C132-CONFINE: minds 1
+  claim C132-CONFINE: prior art known
+  claim C132-WIT-MARGIN: minds 1
+  warn  FS132-derivation.md:396 (C132-WIT-MARGIN): prior art owed — novelty unmeasured; a standing finding
+  claim C132-WIT-MARGIN: prior art owed
+  claim C132-WIT-CROSSED: minds 1
+  warn  FS132-derivation.md:421 (C132-WIT-CROSSED): prior art owed — novelty unmeasured; a standing finding
+  claim C132-WIT-CROSSED: prior art owed
+  claim C132-WIT-SUPER: minds 1
+  claim C132-WIT-SUPER: prior art partly
+  claim C132-EXT-DISC: minds 1
+  claim C132-EXT-DISC: prior art partly
+  claim C132-CORES-FREE: governed by C132-EXT-DISC (hand, minds 1)
+  claim C132-CORES-FREE: minds 1
+  claim C132-CORES-FREE: prior art partly
+  claim C132-WIT-EX-FIN: governed by C132-EXT-DISC (hand, minds 1)
+  claim C132-WIT-EX-FIN: minds 1
+  claim C132-WIT-EX-FIN: prior art partly
+  claim C132-FILL: minds 1
+  claim C132-FILL: prior art partly
+  claim C132-NOESS: minds 1
+  claim C132-NOESS: prior art known
+  claim C132-REL: minds 1
+  claim C132-REL: prior art known
+  claim C132-INDEX: minds 1
+  claim C132-INDEX: prior art partly
+  claim C132-RING-WIND: governed by C132-INDEX (hand, minds 1)
+  claim C132-RING-WIND: minds 1
+  claim C132-RING-WIND: prior art partly
+  claim C132-ORBIT: minds 1
+  warn  FS132-derivation.md:687 (C132-ORBIT): prior art owed — novelty unmeasured; a standing finding
+  claim C132-ORBIT: prior art owed
+  claim C132-SEP: minds 1
+  warn  FS132-derivation.md:703 (C132-SEP): prior art owed — novelty unmeasured; a standing finding
+  claim C132-SEP: prior art owed
+  claim C132-CROSS: minds 1
+  claim C132-CROSS: prior art partly
+  claim C132-COMP-SHARP: governed by C132-CROSS (hand, minds 1)
+  claim C132-COMP-SHARP: minds 1
+  claim C132-COMP-SHARP: prior art partly
+  claim C132-PLACE: minds 1
+  claim C132-PLACE: prior art partly
+  claim C132-ALT: minds 1
+  claim C132-ALT: prior art partly
+  claim C132-TURN-EDGE: minds 1
+  warn  FS132-derivation.md:853 (C132-TURN-EDGE): prior art owed — novelty unmeasured; a standing finding
+  claim C132-TURN-EDGE: prior art owed
+  claim C132-LENS: governed by C132-SHADOW (hand, minds 1)
+  claim C132-LENS: minds 1
+  claim C132-LENS: prior art partly
+  claim C132-LENS-SIDE: governed by C132-LENS (derived from, minds 1)
+  claim C132-LENS-SIDE: minds 1
+  claim C132-LENS-SIDE: prior art partly
+  claim C132-LENS-FOUR: governed by C132-LENS (derived from, minds 1)
+  claim C132-LENS-FOUR: minds 1
+  claim C132-LENS-FOUR: prior art partly
+  claim C132-LENS-GERM: governed by C132-LENS-SIDE (derived from, minds 1)
+  claim C132-LENS-GERM: minds 1
+  claim C132-LENS-GERM: prior art partly
+  claim C132-PLACED-RING: minds 1
+  claim C132-PLACED-RING: prior art partly
+  claim SEARCH-1007-TURN3: minds 1 — one instrument, the Searcher's run and its checker; the coordinator re-ran the checker on the four proofs (a receipt)
+  warn  FS132-derivation.md:1037 (SEARCH-1007-TURN3): prior art owed — novelty unmeasured; a standing finding
+  claim SEARCH-1007-TURN3: prior art owed
+  claim SEARCH-1007-TURN3-HAND: minds 1 — the Searcher's, "unchecked by a second"; FS132-E6 read steps 1 to 4 for what survives when the wedges are only measurable, and did not check step 5
+  warn  FS132-derivation.md:1052 (SEARCH-1007-TURN3-HAND): prior art owed — novelty unmeasured; a standing finding
+  claim SEARCH-1007-TURN3-HAND: prior art owed
+  claim SEARCH-1007-TURN4: minds 1 — one instrument
+  claim SEARCH-1007-TURN4: prior art partly
+  claim SEARCH-1007-TURN-SS: minds 1 — one instrument
+  warn  FS132-derivation.md:1097 (SEARCH-1007-TURN-SS): prior art owed — novelty unmeasured; a standing finding
+  claim SEARCH-1007-TURN-SS: prior art owed
+  claim SEARCH-1007-ALT: minds 1 — one instrument
+  claim SEARCH-1007-ALT: prior art partly
+  claim C132-GRUNDY7-NOT: minds 1
+  claim C132-GRUNDY7-NOT: prior art partly
+  claim C132-GRUNDY7-LOCAL: minds 1
+  warn  FS132-derivation.md:1151 (C132-GRUNDY7-LOCAL): prior art owed — novelty unmeasured; a standing finding
+  claim C132-GRUNDY7-LOCAL: prior art owed
+  claim C132-EXT: governed by C132-EXT-DISC (hand, minds 1)
+  claim C132-EXT: minds 1
+  claim C132-EXT: prior art partly
+  claim C132-CORES: governed by C132-CORES-FREE (derived from, minds 1)
+  claim C132-CORES: minds 1
+  claim C132-CORES: prior art partly
+  claim C132-M-EMPTY: governed by C132-M-EXCL (derived from, minds 1)
+  claim C132-M-EMPTY: minds 1
+  claim C132-M-EMPTY: prior art partly
+  claim C132-DIAG: governed by C132-DIAG-WIDE (hand, minds 1)
+  claim C132-DIAG: minds 1
+  claim C132-DIAG: prior art known
+  claim C132-COMP: governed by C132-COMP-SHARP (derived from, minds 1)
+  claim C132-COMP: minds 1
+  claim C132-COMP: prior art partly
+  claim C132-WIT: governed by C132-WIT-ORBIT (derived from, minds 1)
+  claim C132-WIT: governed by C132-WIT-EXCL (derived from, minds 1)
+  claim C132-WIT: governed by C132-WIT-STRIP (hand, minds 1)
+  claim C132-WIT: minds 1
+  claim C132-WIT: prior art partly
+  entries: 57  derived: 47  stalled, gapped or refuted: 10
+quotes
+  statements named in more than one place: 0
+controls
+  ok    hug-shift: printed 'ratio-min=1.1614 ratio-max=1.2411 limit=1.1547 nonpositive=0 bad-pairs=0 axis-below-1e-30=True'; with the fault planted ('' → '--fault') it printed 'ratio-min=1.1614 ratio-max=1.2411 limit=' — it fires
+  ok    three-axes: printed 'sign-consistent=36 of 64; kind-A=12 kind-B=24; with no adjacent equal tips=0'; with the fault planted ('' → '--fault') it printed 'sign-consistent=64 of 64; kind-A=12 kind' — it fires
+  ok    positives-escape: printed 'rings=4 change-points=8 all-four-germs-off-Q=0 least-germs-on-Q=2'; with the fault planted ('' → '--fault') it printed 'rings=4 change-points=7 all-four-germs-o' — it fires
+  ok    delta-monotone: printed 'in-the-smaller=28434 violations=0'; with the fault planted ('' → '--fault') it printed 'in-the-smaller=59075 violations=30641' — it fires
+  ok    strip-sides: printed 'samples=200000 outer=50147 inner=149853 disagreements=0'; with the fault planted ('' → '--fault') it printed 'samples=200000 outer=50147 inner=149853 ' — it fires
+  ok    tri-strips: printed 'cycle-length=3 patterns=8 neither-side-pure=0'; with the fault planted ('' → '--fault') it printed 'cycle-length=4 patterns=16 neither-side-' — it fires
+  ok    seeing: printed 'full-pairs=18 [I_ccw+I_lens+O_ccw]x[I_ccw+O_ccw+O_far] and [I_cw+O_cw+O_far]x[I_cw+I_lens+O_cw] product=True same-pairs-back=True lens1-seeing-Occw0=0.194,0.083,0.000 far1-seeing-far0=0.167,0.083,0.000'; with the fault planted ('' → '--fault') it printed 'full-pairs=0 []x[] and []x[] product=Tru' — it fires
+  ok    kept-model: printed 'first-order-pairs=108 equal-labels=0 labels=012,1234,012,0145,012,0235 lens-in-T-at=[1, 3, 5] points-with-a-b-n-and-one-of-T=[] interfaces-of-x=3 on-unit-circles-about=[1, 3, 5] sides=I-I-I- points-with-both-neighbours-outer-pure=[]'; with the fault planted ('' → '--fault') it printed 'first-order-pairs=108 equal-labels=1 lab' — it fires
+  ok    margin-witness: printed 'colourings=3 points=13 samples=982800 vertex-labels-on-annulus=0 labels-seen=1456'; with the fault planted ('' → '--fault') it printed 'colourings=3 points=13 samples=982800 ve' — it fires
+  ok    hex7-model: printed 'vertex-labels=3 edges=3 delta-samples=8963 violations=0 clause4=True'; with the fault planted ('' → '--fault') it printed 'vertex-labels=3 edges=3 delta-samples=89' — it fires
+  ok    hex7-islands: printed 'island-free-disc=True vertices-in-disc=18 clause4-at-v=False clause3-at-b=0 clause4-at-b=True'; with the fault planted ('' → '--fault') it printed 'island-free-disc=True vertices-in-disc=1' — it fires
+  ok    sec7-cites: printed 'eq:source-14 sec:transitions thm:cyclic-local-finiteness'; with the fault planted ('interfaces' → 'transitions') it printed 'eq:source-10 eq:source-11 eq:source-12 l' — it fires
+  ok    reduced-words: printed '0'; with the fault planted ('' → '--fault') it printed '2450' — it fires
+  ok    two-skeleton: printed 'k=4:H1=0 k=5:H1=0 k=6:H1=0 k=7:H1=0 4cycle-in-K6+012+023=True 4cycle-in-K6+012=False'; with the fault planted ('' → '--fault') it printed 'k=4:H1=1 k=5:H1=1 k=6:H1=1 k=7:H1=1 4cyc' — it fires
+  ok    hex7-relation: printed 'own-labels=[0, 2, 3] ring-labels=[1, 4, 5, 6] own-on-rings=[[], [], []] crossings=9 ring-walk=654164514 two-jumps-60-apart=False vertices-inside=13 relation-holds=True'; with the fault planted ('' → '--fault') it printed 'own-labels=[0, 2, 3] ring-labels=[1, 4, ' — it fires
+  ok    ring-degree: printed 'N=18:sequences=12,d-mod-6=[3] N=24:sequences=480,d-mod-6=[3] N=30:sequences=11520,d-mod-6=[3]'; with the fault planted ('' → '--fault') it printed 'N=18:sequences=287496,d-mod-6=[0, 1, 2, ' — it fires
+  ok    chord-angle: printed 'mixed-derivative-at-(1,1)=8*sqrt(3)/9 first-derivatives=-sqrt(3)/3'; with the fault planted ('' → '--fault') it printed 'mixed-derivative-at-(1,1)=0 first-deriva' — it fires
+  ok    crossing: printed 'least-squared-jacobian=399/40000 all-four-quadrants=True'; with the fault planted ('' → '--fault') it printed 'least-squared-jacobian=0 all-four-quadra' — it fires
+  ok    hex7-crossings: printed 'vertex-pairs=342 crossings=684 least-shared-outside=1 own-label-near-crossing=0'; with the fault planted ('' → '--fault') it printed 'vertex-pairs=180 crossings=360 least-sha' — it fires
+  ok    seam-fragments: printed 'excluded-labels-seen-near-the-common-unit-points:S1=0,T2=0,BB=0,MX=0 checker=ACCEPT,ACCEPT,ACCEPT,ACCEPT sets-of-T2-on-the-unit-circle-about-w=3'; with the fault planted ('' → '--fault') it printed 'excluded-labels-seen-near-the-common-uni' — it fires
+  ok    chart-wedges: printed 'chart-samples=1681 sign-mismatches=0 turning:far=c lens=ab cw=a ccw=b alternating:far=c lens=c cw=ac ccw=bc'; with the fault planted ('' → '--fault') it printed 'chart-samples=1681 sign-mismatches=1681 ' — it fires
+  ok    unit-shift: printed 'ratio-min=1.114 ratio-max=1.199 limit=1.1547 sign-or-size-violations=0'; with the fault planted ('' → '--fault') it printed 'ratio-min=-71.028 ratio-max=73.676 limit' — it fires
+  ok    forced-pairs: printed 'alternating:OO=36,OI=129,IO=93,II=0 turning:OO=0,OI=0,IO=0,II=0'; with the fault planted ('' → '--fault') it printed 'alternating:OO=0,OI=0,IO=0,II=0 turning:' — it fires
+  ok    turning-edge: printed 'circles-meet-at-x-and-y=True region-samples=576 side-mismatches=0'; with the fault planted ('' → '--fault') it printed 'circles-meet-at-x-and-y=False region-sam' — it fires
+  ok    lens-shadow: printed 'lens-points=600 missing-the-wedge-at-y1=0 missing-the-wedge-at-y-1=0 points-inside-y1=1800 missing=0 points-inside-y-1=1800 missing=0 least-arc-over-depth=11 chart-samples=1681 chart-mismatches=0'; with the fault planted ('' → '--fault') it printed 'lens-points=600 missing-the-wedge-at-y1=' — it fires
+  ok    side-patterns: printed 'near-witness-triples=46656 three-in-a-row=44064 alternating=2592 other=0 far-witnesses=IIIIII one-outer=OIIIII outer-sets-left-open=16'; with the fault planted ('' → '--fault') it printed 'near-witness-triples=46656 three-in-a-ro' — it fires
+  ok    placed-arcs: printed "arc-points=400 outside-the-region=0 wedges=[(-1, 'in', 'O_ccw'), (-1, 'out', 'O_far'), (1, 'in', 'O_cw'), (1, 'out', 'O_far')]"; with the fault planted ('' → '--fault') it printed 'arc-points=400 outside-the-region=400 we' — it fires
+  ok    hex-half-crossings: printed 'radius=0.5 vertex-pairs=216 crossings=432 least-shared-outside=1 own-label-near-crossing=36'; with the fault planted ('' → '--radius 0.4') it printed 'radius=0.4 vertex-pairs=342 crossings=68' — it fires
+  ok    hex-half-sides: printed "radius=0.5 crossings=432 crossings-with-an-own-label=36 own-label-samples=5760 own-label-samples-outside-the-vertex's-unit-circle=0"; with the fault planted ('' → '--fault') it printed 'radius=0.45 crossings=540 crossings-with' — it fires
+  ok    hex-half-margin: printed 'radius=0.5 colourings=3 points=13 samples=982800 vertex-labels-on-annulus=6672 labels-seen=0123456'; with the fault planted ('' → '--radius 0.4') it printed 'radius=0.4 colourings=3 points=13 sample' — it fires
+  ok    hex-half-relation: printed 'radius=0.5 own-labels=[0, 2, 3] ring-labels=[1, 4, 5, 6] own-on-rings=[[0, 2, 3], [], []] crossings=9 ring-walk=654164514 two-jumps-60-apart=False vertices-inside=13 relation-holds=True'; with the fault planted ('' → '--radius 0.4') it printed 'radius=0.4 own-labels=[0, 2, 3] ring-lab' — it fires
+  ok    grundy-margins: printed 'thickened-unit-pairs=0 margins=True,True ring-labels-at-island-point=1456 ring-labels-at-tile-point=1456'; with the fault planted ('' → '--fault') it printed 'thickened-unit-pairs=7398 margins=False,' — it fires
+  controls: 32  fired on their faults: 32
+GATE: PASS (0 failures, 9 warnings)
+exit=0

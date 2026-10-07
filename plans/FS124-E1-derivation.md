@@ -194,6 +194,15 @@ derivation: C124-RADIUS-GRAPH
   prior art: partly: the argument for a colouring of the whole plane is `[GwynStavrianos2022]` Lemma 2 (held; read by FS-103, not re-read by me) and this library's N-EASY (`Proofs/HadwigerNelson/Plane/YesLimit.lean`, `AeColouring.exists_motion`; statement name read, proof not); for an open set — zbMATH "probabilistic Hadwiger" and "almost every" with "unit distance" and colouring (0), arXiv Hadwiger–Nelson with measurable and disc or bounded or local (3, none on point by title): not found in print
   handoff: de Bruijn — the statement as written, on the local weak colouring of an open set; it is `AeColouring.exists_motion` with "every motion" replaced by "the open set of motions keeping V in U". Read the formal statement back against "almost every motion in that open set", not "some motion"
 
+*Correction, dated 2026-10-07 (filed by FS-124's record job, FS124-Z1; source: the kernel
+planner's record `plans/FS124-kernel-plan.md` § 4.1 on branch `fs124-wk1`, the row "the bad pairs `N`" of its table; inventory
+item 19, "For the deriver's entry"):* in § Argument — a random rigid motion, the sentence "The set `N` of pairs `(z, u)` … is
+measurable (`c` is) and null (weak properness)" has one clause that no later line uses. The planner: "the hand argument's clause
+"measurable (`c` is)" is not used by any later line, and the entry's own *uses only* says "no regularity of `c`"; the kernel
+statement is `AeProperOn`, for any function". The step reads only that `N` is null. The entry's statement, verdict, grade and
+count of minds are unchanged; that the result holds for any function proper at almost every unit pair is the planner's own
+generalization, recorded in `plans/FS124-derivation.md` § 1 and not entered.
+
 derivation: C124-RADIUS-COUNTABLE
   statement: Let k ≥ 1, U an open set of the plane, c a weak k-colouring of U, and V a countable subset of U whose closure is a compact subset of U. Then the unit-distance graph on V has a proper k-colouring of the form v ↦ c(g(v)) for a rigid motion g with g(V) ⊂ U.
   uses only: C124-RADIUS-GRAPH's argument with countably many unit pairs; that a compact subset of an open set keeps a positive distance from its complement, so the motions near the identity keep V in U
@@ -524,6 +533,14 @@ derivation: C124-HALF
   model: none is known: in fragment T2 three of the six sets lie on that circle and in the Searcher's kept model two (the card's reading, `plans/STUB-q-ring.md` § The first claims; not re-read by me). What is exhibited is the count: of the nine side patterns of K_1 and K_2 two leave a label in both quadrants outside S(y), with one label each (control `half-sides`)
   prior art: partly: in the map class row 135's rhombus lemma (FS112-N3-COR3); in measure it is C132-CROSS's count run with one set on the circle, posed as C132-ARC and by the asking lane; not searched in print — owed
   handoff: de Bruijn — after C132-WIT-SIDE's module: a case split on the sides of two sets
+
+*Correction, dated 2026-10-07 (filed by FS-124's record job, FS124-Z1; source:
+`data/fs124/reports/FS124-E2.md`, INVENTORY, "correction owed" — the second deriver's drafted line, verbatim):* "2026-10-07
+(FS124-E2): fragment S1 meets the hypothesis, its set on the circle being the single point x; the conclusion holds there and
+carries no arc (plans/FS124-E2-derivation.md, C124-LONE-EXISTS)." It corrects four places that stand above and below: this
+entry's *not claimed* clause "that the class is inhabited at six (no held object meets the hypothesis)"; its *model* line's "none
+is known"; "No held object meets C124-HALF's hypothesis" in § Theorems this phase proved; and "No held object meets its
+hypothesis" in Stage 5's "Read against the card". The entry's statement, verdict, grade and count of minds are unchanged.
 
 derivation: C124-HALF-TWO
   statement: In the setting of C132-COMP-SHARP, if exactly K_0 and one set K′_0 of y, with labels t′_0, t′_1, are contained in the unit circle about w, x's two other sets have points strictly on opposite sides of that circle, and y's two other sets have points strictly on opposite sides of that circle, then almost every point near w has one of the four labels t_0, t_1, t′_0, t′_1.

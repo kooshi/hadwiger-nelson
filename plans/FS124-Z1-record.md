@@ -144,3 +144,39 @@ background under a slot (several minutes): **GATE: PASS (0 failures, 2 warnings)
 Output: `data/fs124/z1/gate-FS124-derivation.txt`.
 
 **Stage 2 — SAVED** (2026-10-07).
+
+## Stage 3 — SAVED: the five dated corrections
+
+*Each is one paragraph, inserted by `data/fs124/z1/append_corrections.py` after the blank line that ends the text it corrects;
+it begins "\*Correction, dated 2026-10-07 (filed by FS-124's record job, FS124-Z1; source: …" and ends by saying that the
+entry's statement, verdict, grade and count of minds are unchanged. `git diff` of the three files: 58 lines added, none removed.
+The script refuses to run twice.*
+
+| # | file, and the text it stands under | what it corrects | its source | words quoted |
+|---|---|---|---|---|
+| 1 | `plans/FS124-E1-derivation.md`, under the entry C124-RADIUS-GRAPH | in § Argument — a random rigid motion, the clause "measurable (`c` is)" is used by no later line | the first kernel planner's record § 4.1 on branch `fs124-wk1` (the row "the bad pairs `N`"); inventory item 19 | the planner's sentence |
+| 2 | the same file, under the entry C124-HALF | "no held object meets the hypothesis" — in the entry's *not claimed* and *model* lines, in § Theorems this phase proved and in Stage 5: fragment S1 meets it, its set on the circle a single point | `data/fs124/reports/FS124-E2.md`, INVENTORY, "correction owed" | the second deriver's drafted line, whole |
+| 3 | `plans/FS124-E2-derivation.md`, under the entry C124-EDGE-CLOSED | its *prior art* line misses FS114-Y-STRIPK6 (row 138; two minds, blind), a held map statement about the strip's six tiles | the asking lane's last record § 1.2 and § 1.3 (S5) | FS114-Y-STRIPK6's statement from `plans/FS114-derivation.md`, its first clause and its conclusion; the asking lane's S5 sentence |
+| 4 | `plans/FS132-derivation.md`, under the prose that follows the entry C132-COMP-SHARP | as stated, the conclusion is met by a one-point set; the statement with content is on pieces | `plans/FS124-E2-derivation.md`: C124-FORCED-PIECES (*prior art*, statement), Stage 5's "Read against the card"; `LEDGER.md` row 157 | the deriver's two sentences; C124-FORCED-PIECES's statement, whole |
+| 5 | the same file, under the prose that follows the entry C132-CORES-SQUARE | "the comparison, one short stage, that nobody has done" — it was made by the kernel planner's successor, as a checking reading, one mind; the verdict stays "gap" | `data/fs132/claims.md`, the dated line after FS132-K2's Stage 6; `plans/FS132-close-inventory.md` item 39, ruling (b) | the claim list's line |
+
+**What I added of my own in them, so that it can be struck if it is too much.** In 3: "Neither statement is the other", with
+the difference said in one sentence, and "Which six tiles each names was not compared tile by tile by the record job" — the
+held entry names the tiles at a valley `V_m` and at the apex of `U_{m+1}`; C124-EDGE-CLOSED names three arches and the cut parts
+of three top tiles; I did not match them. In 4: "A compact set `K_j` containing `x` may be `{x}` alone, and `x` lies on the unit
+circle about `w`" — the one-line reason the deriver's sentence is true, read off the entry's own hypotheses; and that the
+quoted sentence about fragment S1 was said of C124-HALF, "whose hypothesis is this entry's setting with exactly one set on that
+circle".
+
+**Gates, before and after** (each from `plans/`, in the background under a slot; outputs `data/fs124/z1/gate-*.before.txt`,
+`gate-*.after.txt`):
+
+| file | before | after |
+|---|---|---|
+| `FS124-E1-derivation.md` | PASS, 0 failures, 2 warnings | PASS, 0 failures, 2 warnings |
+| `FS124-E2-derivation.md` | PASS, 0 failures, 0 warnings | PASS, 0 failures, 0 warnings |
+| `FS132-derivation.md` | PASS, 0 failures, 9 warnings (32 controls, 32 firing) | PASS, 0 failures, 9 warnings |
+
+`build_derivation.py --check` after the appends: identical — no copied block moved.
+
+**Stage 3 — SAVED** (2026-10-07).
