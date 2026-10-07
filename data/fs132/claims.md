@@ -63,3 +63,30 @@ the death of every such cycle — which are what the answer is made of and are n
 - This project's six-colour chain: `LEDGER.md` rows 137 and 148–149, at the grades filed there; FS116-Y4-EMPTY at its wider
   class is kernel-checked on `main` (`Proofs/HadwigerNelson/Plane/RingCalculus/Empty.lean`, `emptyNS`).
 - The two calibration colourings at seven (the islands and the stripes): `plans/EXT-OAI2-reading.md` § 5.6, [hand], one mind.
+
+## Dated lines
+
+- **2026-10-07 (after FS132-E1's Stage 1, commit `373d06fa`; FS-132 inventory item 2): card 1's two readings are fixed as the
+  deriver's plan states them** — each read whole at its address, with the data and the dictionary it is stated over:
+
+> **The data.** For a weak measurable six-colouring `c`, an **extracted centre** is what C132-EXT's conclusion gives: a point `x`
+> — source: plans/FS132-six-by-the-nerve.md § The readings, stated
+
+> **The dictionary** (map → measurable): a vertex `p` of at least four colours → an extracted centre `p` with `ℓ = 4`; a tile of `p`
+> — source: plans/FS132-six-by-the-nerve.md § The readings, stated
+
+> **C132-RUN-EMPTY.** *Statement:* each step of the route FS116-V6 § 2.2 (`plans/FS116-V6-verification.md`: V6-DIAM, V6-E1, V6-DICH,
+> — source: plans/FS132-six-by-the-nerve.md § The readings, stated
+
+> **C132-RUN-CV.** *Statement:* each input of the route to FS114-CV-EXISTS (`plans/FS114-CVB-verification.md` § 1.4, by the entry's
+> — source: plans/FS132-six-by-the-nerve.md § The readings, stated
+
+  **Two statements enter the list with them, each named inside its reading's statement and read there**: **C132-M-EMPTY** — that
+  no colouring of the class C132-RUN-EMPTY names exists (the existence form's NO, in the measurable class); **C132-M-CV** — that
+  the class C132-RUN-CV names has an extracted centre whose label cycle has length at least four. They are named apart from the
+  readings because "the argument runs" and "the statement is true" come apart: a stall of a reading says nothing of its
+  statement, and either statement may be derived by another route. *Not claimed*: each reading's own line, as its statement
+  gives it. **One reading of the stub, the deriver's, adopted**: the existence form's "cyclic centre whose label cycle has length
+  four" is read as an extracted centre with a cycle of length four — the extraction returns some centre, not a prescribed one,
+  and its cycle need not consist of edges of that centre's own transition graph.
+

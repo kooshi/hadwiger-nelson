@@ -35,3 +35,28 @@ inventory, items 607–629 (an outside proof of six became this project's litera
    (§G, §PA, §IQ, the plan), the two readings stated as claims, then C132-EXT — and launched into the slot the import's
    implementer freed (FS-131 inventory item 629 (g)). **Owed from the stub's deliverables, not in this job**: the nerve viewer (an
    explorable page of four colourings by formula); the Lean form of C132-EXT for the kernel lane when it is Derived.
+
+2. **FS132-E1, first message: the opening is saved and card 1's two readings are stated** (source: its message to "main",
+   2026-10-07; plan `plans/FS132-six-by-the-nerve.md` — the readback, §G with G93–G95, §PA, §IQ, § The readings, stated, the
+   route; commit `373d06fa` on `main`). **What it fixed**: *the data* a reading may use — an **extracted centre** of a weak
+   measurable six-colouring: a point isolated among the cyclic centres, a simple label cycle of length 3 to 6, a radius, and
+   for each consecutive pair of labels a compact connected set through the point reaching the radius, with a limiting
+   direction, the exclusion of both labels' essential supports from its straddle set, and (its own addition, to be derived
+   with C132-EXT) containment in both supports; *the toolkit* — the release's statements that do not use the colour count;
+   *the dictionary* from the map class, with what has **no counterpart assumed**: non-Siamese, simple, a tile's sector, the
+   cyclic order of tiles at a point, a shared edge, finitely many tiles meeting a small disc. **C132-RUN-EMPTY** and
+   **C132-RUN-CV** are stated as "each step of the named route has a restatement under the dictionary, derived from the data
+   and the toolkit alone", with three verdicts (derived; stalls at the first step with no restatement, naming the dictionary
+   term it reads; refuted by a colouring by formula). **Ahead of its second message**: the existence of a cyclic centre in
+   every large disc needs no hypothesis on the centres at all; what the continua read is isolation of the one essential
+   centre. **My receipt**: the commit is on `main`; § The readings, stated read whole against its message — the same text;
+   the four first lines quoted into the claim list by script. Not checked by me: §G, §PA, §IQ. **Rulings.** (a) **The two
+   readings are fixed in `data/fs132/claims.md` by a dated line, as stated.** (b) **C132-M-EMPTY and C132-M-CV enter the
+   list as statements of their own** — its proposal, adopted. Alternative: keep only the readings. Why: a stalled reading
+   says nothing about whether its statement is true, and the stub already names a second route to the first (a region kill
+   at radius 2). Confidence: high. (c) **Its reading of the stub's existence form — "extracted centre with a cycle of length
+   four", not "a centre whose own transition graph has a four-cycle" — is adopted**, and goes to the asking lane's next job
+   as a note on the stub's wording. Alternative: hold the readings until the asking lane re-words the form. Why not: the
+   extraction returns the object it returns; the readings must be about that object. Confidence: medium-high — the relation
+   between the two notions is asked of C132-EXT's entry (it holds, fails, or is open).
+
