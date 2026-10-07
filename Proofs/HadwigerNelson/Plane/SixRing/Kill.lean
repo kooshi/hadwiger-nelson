@@ -28,7 +28,10 @@ open Outside.OAI158 Real
 
 variable {k : ℕ} {c : ℂ → Fin k}
 
-/-- `HubColours` with the two outside labels exchanged is `HubColours` for the complement of the set. -/
+/-- `HubColours` with the two outside labels exchanged is `HubColours` for the complement of the set. (A model of
+`HubColours`, for every set `S`: the colouring constant at `b`, when `b` is neither `X` nor `Y`. The pair of
+hypotheses `HubColours` at `t` for `S` and at `t + π/3` for the flipped set, with a change of `S` at `t`, is what
+`chart_step_false` refutes for a weak colouring.) -/
 theorem HubColours.swap {p : ℂ} {b X Y : Fin k} {S : Set ℝ} {t κ : ℝ} (h : HubColours c p b X Y S t κ) :
     HubColours c p b Y X Sᶜ t κ := by
   filter_upwards [h] with x hx h1 h2 h3

@@ -220,7 +220,8 @@ theorem OutsideOrbit.chart_avoids (h : OutsideOrbit c hc p X Y ψ δ) (hw : Weak
 
 /-- **M5, "almost every point of `B(0, 1) ∩ N_k(κ_*)` carries `a_{τ(k)}`, `X` or `Y`"**, for any set `T` of labels:
 if no label outside `T` tips the hub `y_n`, then on some box about `(ψ_{n+1}, 0)`, inside the ring, almost every chart
-point has its colour in `T`. From `ae_ne_of_not_isTip` for each label outside `T`; the labels are finitely many. -/
+point has its colour in `T`. From `ae_ne_of_not_isTip` for each label outside `T`; the labels are finitely many.
+Every measurable colouring satisfies the hypothesis at `T = Set.univ`. -/
 theorem ae_chart_colour_mem {k : ℕ} {c : ℂ → Fin k} (hc : Measurable c) {p : ℂ} {ψ : ℝ} {n : ℤ} {T : Set (Fin k)}
     (h : ∀ i, i ∉ T → ¬ IsTip c p (hub p ψ n) i) :
     ∃ κ : ℝ, 0 < κ ∧ ∀ᵐ x : ℝ × ℝ, |x.1 - (ψ + ((n + 1 : ℤ) : ℝ) * (π / 3))| < κ → 0 < x.2 → x.2 < κ →

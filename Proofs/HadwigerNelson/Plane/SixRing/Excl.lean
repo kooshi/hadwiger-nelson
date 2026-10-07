@@ -26,7 +26,9 @@ theorem ae_real_of_ae_angles {P : Angles → Prop} (h : ∀ᵐ t ∂angularMeasu
 
 /-- For a weak colouring, a label whose palette set, with that of a second label, covers almost every angle is in
 the palette on a set of angles of positive measure: were it null, the second label would be in almost every palette,
-against the rotation by `π/3` (`palette_sixty_real`). -/
+against the rotation by `π/3` (`palette_sixty_real`). A step inside a proof by contradiction: whether a weak colouring
+has two labels satisfying `h` is not known to this library at any `k` (at six labels, with a four-cycle of
+exclusions, `not_ae_outside` refutes it); `WeakColoring` is inhabited at `k = 7` (`proper_to_borel_weak_model`). -/
 theorem volume_liftPalette_ne_zero {k : ℕ} {c : ℂ → Fin k} (hc : Measurable c) (hw : WeakColoring k c) (p : ℂ)
     {i j : Fin k} (h : ∀ᵐ θ : ℝ, θ ∈ liftPalette c hc p i ∨ θ ∈ liftPalette c hc p j) :
     volume (liftPalette c hc p i) ≠ 0 := by

@@ -7,10 +7,50 @@ Branch `fs132-wi4`, cut from `fs132-wk1` at `1c5e2609a`; worktree `.claude/workt
 
 ## Theorems this phase proved
 
-*One line per kernel theorem, with its declaration and its axioms. Filled as the stages save; the axioms are printed
-at the last stage from the built modules.*
+*Namespace `HadwigerNelson.SixRing`; modules under `Proofs/HadwigerNelson/Plane/SixRing/`. **Every theorem below prints
+exactly `[propext, Classical.choice, Quot.sound]`** from the built modules (`data/fs132/i4/axioms/Print.out`, read as
+sets by `check.py`: 65 of 65 records, none on `sorryAx`, no outside theorem, no native axiom; controls and 8 plants
+fire — stages 6 and 7). No assumption in hypothesis form: none of them takes a named hypothesis standing for an
+unproved result. All for a colouring of **the whole plane**; grade [kernel] on branch `fs132-wi4`, not yet through
+the full gate (the landing's).*
 
-(none yet — stage 1 is the readback)
+**The theorems the leaves complete** (statements and proofs the planner's, FS132-K2; kernel-checked once every leaf
+under them was proved — the last at stage 6):
+
+| declaration | module | the claim it was read against |
+|---|---|---|
+| `no_outside_orbit_points` | `Orbit` | C132-M-ORBIT over four points (the derivers' C132-WIT-ORBIT, `plans/FS132-derivation.md` § 1), at `U = ℂ`: a weak measurable six-colouring, four labels in a cycle whose consecutive pairs' supports miss the straddle region of `{p, q j}`, and the two other labels `X`, `Y`: no `ψ`, `δ > 0` with (i) `X` or `Y` in almost every palette within `δ` of each `ψ + kπ/3` and (ii) both in positive measure in every neighbourhood of `ψ` |
+| `no_outside_orbit` | `Orbit` | C132-M-ORBIT (four compact sets), at `U = ℂ` |
+| `not_ae_outside` | `Orbit` | C132-M-EXCL at `U = ℂ`: the palettes at the centre of such a four-cycle do not almost everywhere hold `X` or `Y` |
+| `adjacent_tip_false`, `chart_step_false` | `Orbit`, `Kill` | the derivation's V6-HUG restated (steps M7–M9), any number of labels |
+| `no_alternating_pairs`, `no_alternating_groups` | `TwoPairs` | C132-DIAG-WIDE at `U = ℂ` — the release's `two_state_impossible` read at six; sorry-free since the join (stage 2) |
+
+**The brief's sixteen leaves** (statements the planner's; changed only where marked, under its permission (1)):
+`State`: `measurableSet_liftPalette`, `OutsideOrbit.ae_iff_not`, `OutsideOrbit.ae_flip`, `OutsideOrbit.change_at`,
+`OutsideOrbit.chart_avoids`, `exists_tip`, `OutsideOrbit.hubColours`, `OutsideOrbit.hubColours_flip` (M1–M3);
+`Excl`: `ae_real_of_ae_angles`, `exists_change_of_ae_outside` (**without `hXY`**);
+`ChartMeasure`: `chart_quasiMeasurePreserving`, `shear_quasiMeasurePreserving`, `ae_ne_of_not_isTip`,
+`unitPair_chart_ae` (M2, M5, M7–M8);
+`Kill`: `no_double_change` (**without `0 < κ'`**), `step_kill` (**without `MeasurableSet S`**) (M8's (†), M9).
+
+**Amendment 2's eighteen leaves** (no statement changed):
+`Chart`: `chart_eq_polar`, `chart_zero`, `chart_hub`, `dist_chart_centre`, `dist_chart_lt_one`, `continuous_chart`,
+`chart_eq_angularSum`, `dist_hub`, `hub_add_three`, `hub_axes`, `hub_shift` (M2, M5, M6);
+`Tips`: `IsTip.dist_le_one`, `IsTip.inner_pos`, `tip_antipodal`, `tip_unique`, `adjacent_of_signs`,
+`exists_adjacent_tips`, `exists_cycle_label` (M4–M6).
+
+**Helpers this job added** (24):
+`NullSets` (new module): `shear_measurePreserving`, `quasiMeasurePreserving_triple_fst`,
+`quasiMeasurePreserving_triple_snd`, `quasiMeasurePreserving_triple_add`, `change_of_ae_flip`,
+`exists_inter_pos_of_ae_union`, `volume_preimage_inter_le_hausdorff`, `lipschitzWith_add_e`,
+`hausdorffMeasure_add_e_image_eq_zero`, `exists_mem_Ioo_of_ae`, `exists_pos_forall_le`;
+`Excl`: `volume_liftPalette_ne_zero`; `ChartMeasure`: `chartAngles_quasiMeasurePreserving`, `ringRadius_sub_ge`,
+`ringRadius_pos`, `volume_partner_direction_eq_zero`; `State`: `OutsideOrbit.ae_mem_or`, `OutsideOrbit.ae_add_mem_or`,
+`ae_chart_colour_mem`; `Kill`: `HubColours.swap`, `HubColours.shift_back`, `HubColours.ae_partner`, `step_kill_left`;
+`Tips`: `adjacent_of_signs_aux`.
+
+**Not this job's**: the 163 ported declarations (FS132-I2) and the 33 of `StepLemma` and `Shift` (FS132-I3), merged
+here; `Basic` and `Confine` (FS132-K1, -K2).
 
 ## Stage 1 — SAVED (FS132-I4): the readback, and the branch built as given
 
@@ -298,3 +338,100 @@ the headline theorem). The four lines were messaged to the coordinator before th
 `tools/check_architecture.py`: PASS (`logs/arch-6.out`; the two rows reworded). The block in `scripts/Axioms.lean`
 gains the 19 records of the two modules and six of the assembly the leaves complete (`chart_step_false`,
 `adjacent_tip_false`, `straddle_mono`, `no_outside_orbit_points`, `no_outside_orbit`, `not_ae_outside`).
+
+## Stage 7 — SAVED (FS132-I4): the last build and the checks of the brief's item 6
+
+Three docstring notes on models were added after stage 6 (`Excl.volume_liftPalette_ne_zero`,
+`State.ae_chart_colour_mem`, `Kill.HubColours.swap`: where the hypotheses hold, or that the lemma is a step inside a
+proof by contradiction and which theorem refutes the configuration — `LEAN.md` § The gate, the inhabitant rule); no
+statement and no proof changed. Then, on the final tree:
+
+| check | command | result | saved (`data/fs132/i4/…`) |
+|---|---|---|---|
+| the build | `slot.py --mem 40 --cpus 8 -- env MEMMAX=40G BATCH=4 ./scripts/build.sh` | **exit 0**; 6 modules rebuilt; 9m2s; **19 `sorry` warnings, all in `Winding` (16) and `CyclicCentre` (3)**; no other warning | `logs/build-7-last.out` |
+| the axioms | `lake env lean axioms/Print.lean`, `axioms/check.py` | exit 0, exit 0: **65 of 65 records on exactly the standard three**; three controls show what they must | `axioms/Print.out`, `check.out` |
+| the checker's own controls | `axioms/check.py --self-test` | exit 0: 8 plants, 8 refused | `axioms/selftest.out` |
+| the module map | `tools/check_architecture.py` | exit 0, `RESULT: PASS` | `logs/arch-7.out` |
+| doubled names | `./scripts/dupnames.sh` (slot, 16 GiB) | **exit 0**: 1868 of 1868 package modules, none doubled; 26 generated on demand — three more than at stage 5, each an equation lemma Lean writes in two modules that unfold one definition (`chart.eq_1`: `Chart` and `Shift`; `ringRadius.eq_1`; `angularSum.eq_1`), the class the gate lists and fails only when the copies' axioms differ | `logs/dupnames-7.out` |
+| the environment linters | `slot.py --mem 8 -- lake lint --no-build -- --no-build --trace` | **exit 0**, `-- Linting passed for Proofs.`, 14 linters `(2/2) Passed!` | `logs/lint-7.out` |
+
+**Not run, by the brief**: `axioms.sh`, `vacuity.sh`, `assumptions.sh` and their self-tests, `lean4checker` — the
+landing's. **Not done**: the two skeleton modules of other claims, `Winding` (C132-INDEX, C132-RING-WIND; 16 `sorry`)
+and `CyclicCentre` (C132-CORES-FREE; 3) — outside this brief and its amendments; with them in the tree the branch
+cannot land on `main` whole ("nothing with a `sorry` reaches `main`").
+
+**The price, as measured.**
+
+| | |
+|---|---|
+| leaves proved | 34 (the brief's 16; Amendment 2's 18), with 24 helpers; 1,131 lines added to nine files (the planner's estimate for these leaves: about 925 lines without helpers) |
+| statements changed | 3, each a hypothesis dropped under the planner's permission (1), with 3 call sites |
+| failed attempts | none reached three on one leaf; no companion was dispatched. First elaboration: `NullSets`, `State`, `Kill` clean; `ChartMeasure` two rewrites; `Chart` one missing import; `Tips` one `ring` in `Fin 4`; `Kill` two `tauto` timeouts |
+| builds | eight runs of `build.sh` (one up to date, seven at about 9 min: the walk; each module of this job elaborates in 2–13 s) |
+| merges | three (`fs132-wi2`; `fs132-wi3` at `6fe55ef78` and at its tip), one conflict (`scripts/Axioms.lean`) |
+| own token count | about 400k at this stage (an estimate; no meter) |
+
+**What the kernel's check adds to the derivation's record** (for the coordinator; nothing here is a grade): the
+leaves follow the hand argument's M1–M9 step for step, and the kernel found no gap in them. Three hypotheses of the
+skeleton were idle (`X ≠ Y` in the ring form; `0 < κ'` in (†); measurability of the state in the kill). The step
+M7's "Φ is a local diffeomorphism" is used only as: for fixed `z` the partner point moves along its unit circle no
+slower than a quarter of `d'` — no inverse function theorem and no formula for the partner's direction.
+
+## Drafts for the front page
+
+*Each names its slot. Nothing here is filed by me. The milestone FS-132 is not Closed by this job: its first theorem is
+kernel-checked on a branch that has not passed the full gate, and the branch holds two skeleton modules of other
+claims.*
+
+**D1 — `plans/FS132-derivation.md` § 1**, a dated line under the entries C132-M-ORBIT, C132-WIT-ORBIT, C132-M-EXCL
+(and under "Who did what, step by step"): "**[kernel], for a colouring of the whole plane** (the instance `U = ℂ`):
+`HadwigerNelson.SixRing.no_outside_orbit_points` (C132-WIT-ORBIT), `no_outside_orbit` (C132-M-ORBIT),
+`not_ae_outside` (C132-M-EXCL), `Proofs/HadwigerNelson/Plane/SixRing/Orbit.lean`, each on
+`[propext, Classical.choice, Quot.sound]`, no assumption in hypothesis form, no outside theorem; over the release's
+palette lemmas ported with their proofs (`Outside/OAI158…`, FS132-I2). Statements FS132-K2's; leaves FS132-I3
+(M7's calculus, M8) and FS132-I4 (M1–M6, M7's null sets, M8's (†), M9); branch `fs132-wi4`, before the full gate. Every
+step M1–M9 is now checked by the kernel; three hypotheses of the skeleton were unused (`X ≠ Y` in the ring form,
+`0 < κ'` in (†), measurability of the state in M9). **Not kernel**: the statement on an open set containing the closed
+unit disc (M0's local reading of the release's two proofs stays [hand], one mind)." The `grade:` and `minds:` fields
+are the coordinator's.
+
+**D2 — `plans/FS132-derivation.md` § 1, entry C132-DIAG-WIDE**, a dated line: "[kernel] at the whole plane:
+`HadwigerNelson.SixRing.no_alternating_pairs` (`Plane/SixRing/TwoPairs.lean`), the standard three axioms, from the
+ported `two_state_impossible`; the release's theorem read at six, not a result of this milestone."
+
+**D3 — `CLAUDE.md` § Frontier**, when the branch lands: in "Open milestones", after "**Opened 2026-10-07: … FS-132, six
+by the nerve** …", the sentence "Its first theorem — at the centre of a witnessed four-cycle of a weak measurable
+six-colouring of the plane, the two labels outside the cycle do not fill the ring near a rotation orbit at which they
+change, and so do not fill the ring (C132-M-ORBIT, C132-M-EXCL at `U = ℂ`) — is kernel-checked
+(`SixRing.no_outside_orbit_points`, `no_outside_orbit`, `not_ae_outside`) on the standard three axioms, over the
+release's palette lemmas ported with their proofs." No ledger row is regraded: FS-132 has filed none.
+
+**D4 — `CLAUDE.md` § Trust ledger and § The gate**: no count from me (the audits were not run). What the landing should
+expect from this branch: under CLEAN, 163 records (FS132-I2's block), 33 (FS132-I3's) and 66 (this job's: 60 theorems
+of this job's modules and of `TwoPairs`, 6 of the assembly); no purchase, no import, no new `axiom`. **For the
+assumptions step**: the exclusion's modules take `Prop`-formers as hypotheses that no theorem concludes —
+`OutsideOrbit`, `HubColours`, `NoDoubleChange`, `FourCycleStraddle`, `IsTip`, `ShiftBounds`, `IsDensityPt` — each a
+condition on a theorem's parameters, not an assumption about the world; `scripts/assumptions.sh` will ask for a
+`.condition` line for those it flags. **For the vacuity scan**: the headline theorems conclude `False` and are skipped
+as refutations; their docstrings (the planner's) name the open question.
+
+**D5 — the Proof Atlas**: C132-M-ORBIT, C132-WIT-ORBIT, C132-M-EXCL — [hand] → [kernel] for the whole plane, with
+D1's caveat on the open-set form; C132-DIAG-WIDE — [kernel] for the whole plane (the release's theorem).
+
+**D6 — `LEAN.md` § Searching — Lean**, three bullets:
+> - `tauto` exhausts its heartbeats in a context holding long implications it does not need (two pulled-back
+>   `HubColours` statements): write the case split (`SixRing.no_double_change`, FS132-I4).
+> - `rw [Measure.ae_prod_iff_ae_ae h]` finds no pattern in a goal that `filter_upwards` has beta-reduced; apply it as
+>   `refine (Measure.ae_prod_iff_ae_ae (p := fun w => …) h).mpr ?_` with the predicate written out. A section of a
+>   measurable set of triples is `measurable_prodMk_left hmeas` (FS132-I4, `unitPair_chart_ae`).
+> - A map from a set of the line into a metric space that is `K`-antilipschitz there pulls sets of one-dimensional
+>   Hausdorff measure zero back to Lebesgue-null sets (`SixRing.volume_preimage_inter_le_hausdorff`); with
+>   `abs_dist_sub_le` it replaces an inverse function theorem wherever a point is known to move away from a fixed
+>   centre at a definite rate. Shears of `ℝ × (ℝ × ℝ)` are `MeasurePreserving.skew_product` between two swaps
+>   (`SixRing.shear_measurePreserving`); a statement almost everywhere on the line pulls back to triples by
+>   `QuasiMeasurePreserving.prod_of_right` (FS132-I4).
+
+**D7 — `ARCHITECTURE.md`**: the rows are on the branch (one new, `Plane/SixRing/NullSets`; nine reworded; the
+placeholders' row gone). Left for the landing: the rows of `Orbit`, `Basic`, `TwoPairs`, `Confine`, `Winding`,
+`CyclicCentre` still say "branch `fs132-wk1`", and `Orbit.lean`'s module docstring still says its leaves "are `sorry`
+until implemented" — true as written, stale as news (the planner's file; this job changed one call site in it).
