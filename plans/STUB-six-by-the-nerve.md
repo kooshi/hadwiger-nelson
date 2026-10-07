@@ -8,6 +8,8 @@ started. Its number was fixed by Keryx (`plans/FS131-close-inventory.md` item 61
 **Provisional bearings (Poros, 2026-10-07; Ephodos's re-grokking replaces this line at the opening):** G82, G83, G91, G86, G92, G79,
 G72, G87, G25, G84, G89, G90, G60; rows 130–134, 137–145, 148–150, 153 — one line of why each in § Bearing on the answer.
 
+*2026-10-07 (EXT-OAI3 § 3.2):* `[OAIMath2026]` family 156 (Borsuk in dimension nine; Lean in the release, not audited here) is a second instance of the map-to-a-simplex method, with a rigidity statement at the threshold number of labels — every maximal support has exactly dim + 1 labels, by a mod-two degree count — of the kind [P₆] and [L₆] ask for. Its first step enlarges a cover to an open one, so it applies with slack only. Read its `extension.tex`, `topology.tex` and `six-labels.tex` at the opening.
+
 ## The mission, in plain language
 
 How many colours does the plane need so that no two points at distance exactly 1 share a colour? Since 2026-10-06 the answer is

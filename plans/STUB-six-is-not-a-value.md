@@ -1,5 +1,7 @@
 # FS-62 — six is not a value: does the function F ↦ χ(F²) omit six?
 
+> 2026-10-07: with `χ(ℝ²) ∈ {6, 7}`, W reads `χ(ℝ²) = 7`, and some real number field's plane needs at least six.
+
 > **Re-aimed at FS-103's close (2026-09-26; `plans/FS103-derivation.md` FS103-S).** S's exact form, given MR, two minds: S_nf ⟹ `χ(ℝ²) ≠ 6`;
 > over totally real fields S_nf ⟺ `χ_CP(ℝ²) = 5`, or `χ_CP(ℝ²) = 7` and no field with a non-6-thick stable place has `χ(F²) = 6`. R1's "a finite
 > family of CP product statements" is **MISSTATED**: the non-6-thick places have finitely many residue sizes (odd `q` below 101 of the window and

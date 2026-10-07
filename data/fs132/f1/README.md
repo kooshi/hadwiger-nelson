@@ -98,3 +98,36 @@ brief, as expected), `[Bekka2008]` and `[TaoDisintegration2008]` (the reading's 
 `[Tao2008ergodicity]`). No alias row added. "UNLOGGED PRIOR ART: 4" is the count of these four.
 
 **Stops so far:** none in items 3–5. **Observations:** G93's and G94's status brackets read "[external: …]" (as drafted), not the new "[kernel, outside]".
+
+## Stage 4 — SAVED: `plans/FRONTIER-STUBS.md` and the stubs (items 6–7)
+
+Script `data/fs132/f1/stage4_frontier_stubs.py`, log and stops `data/fs132/f1/stage4-log.txt`; every old string asserted once; every draft extracted by script.
+
+- **6a** open-milestones: P's paragraph (M7, M8 applied; the same text as in `CLAUDE.md`, `data/fs132/f1/open-milestones-paragraph.txt`) replaces "**Next, in Kooshi's order**" up to "**M63**".
+- **6b** ranked table: rank 1 FS-132 as drafted; ranks 2–12 are the old rows moved, with P's bearing cell and status cell in full; the question cell as P's cell says — rank 2, 3, 5, 9
+  "as filed, adding" (the quoted words appended; a full stop added first where the filed cell had none); rank 4, 8, 12 "as filed"; rank 6 the first sentence ("is the singular set of every
+  honest saturated colouring of the plane locally finite (C121-REGJ)?") replaced; rank 10 (FS-104) the full new question, the name replaced by P's name (path and minted note kept as filed),
+  cost "unpriced" and solver "none" (P's words); ranks 7 and 11 **M17** — nothing struck, "2026-10-07 (FS132-P1): " + P § 4.2's verdict and reason joined by " — " appended to the question cell.
+- **6c** below rank 12 in P's order (13–35) and old ranks 38–74 as 36–72; **M17** appended to the status cell for FS-62, FS-39, FS-113, FS-80 (verdict "its five target answered; unchanged
+  otherwise", treated as not "unchanged"), FS-59, FS-102 — verdict and reason joined by " — ".
+- **6d** FS-44, FS-49, FS-108 entered the closed list (at its head), each "name — path. banner" (P § 4.3, verbatim). **Count: the ranked table holds 72 rows; the set of FS numbers equals the old 74 minus the three plus FS-132; none twice** (asserted by the script).
+- **7** fourteen banners, each a block quote directly under the stub's title line (newest first), verbatim; **M18** (two title names); D4 after the paragraph "Provisional bearings, updated at the 2026-09-25 crunch's close (M1–M3)" in `STUB-four-colour-inheritance.md`; D5 after the first paragraph of § Provisional bearings in `STUB-mr-in-lean.md`; D7 after the paragraph "Provisional bearings (Poros, 2026-10-07; …)" (the file's lines 8–9) in `STUB-six-by-the-nerve.md`.
+
+**Units left as stated (stops; the unit named, the rest filed).**
+1. Rank 3 FS-123, solver cell: P's cell reads "the placement is the Searcher's; otherwise as filed" — a cell that is words plus "as filed"; left as filed.
+2. Status-cell appends (M17, "anything but unchanged") **not made** for eight rows whose § 4.2 verdict carries a clause beside "unchanged": FS-101 ("**unchanged** (field rows, given MR); its collapse slot is
+   discharged for the plane by the import"), FS-67, FS-96, FS-64, FS-63 ("**unchanged**, given MR", reason "field-level; FS-96's outcome …"), FS-78, FS-42, FS-43 ("**unchanged; consumer closed**", reason
+   "each bore …"). The rows are moved to their ranks as filed. Coordinator's call whether they gain the append.
+3. Rank 7 FS-128 and rank 11 FS-120: the ranked rows' name cells stay as filed ("at five and six"; "and the cover route at five") — the brief changes only rank 10's name — while M18 shortens the two stub
+   titles and P's table prints the shortened names. The rows and the stub titles now disagree.
+
+**Gates.** Fact audit `--base f40d6bda`: exit 1, 21 failures (`audit-stage4.txt`); the five of stage 2 and sixteen more, from this stage's replaced and removed cells, **not allow-listed**:
+
+| lost token(s) | removed by (draft unit) | still lives, by own `rg` outside the audit's join |
+|---|---|---|
+| `six-colour-research-directions.md`, `six_le_chromaticNumber_plane_of_separated_two`, `μ(2)` | 6d: FS-49's row leaves the ranked table (name, path, banner kept) | yes: `plans/STUB-distance-two-gadget.md`, `plans/POROS-2026-10-03-close-reread.md`, `plans/STUB-chain-theorem.md` and others |
+| `J23`, `§ J23`, `Theorem 5`, `FS106-V3's`, `FS114-N2-AVG's`, `25's` (also from FS-126's bearing, rank 12) | 6d: FS-108's row leaves the ranked table (and, for `25's`, P's rank-12 bearing replaces FS-126's) | `§ J23`: only `plans/POROS-2026-10-03-fs129-rerank.md`; `FS106-V3's`, `FS114-N2-AVG's`, `Theorem 5`: `plans/FS110-*`, `plans/FS114-*`, `plans/FS106-*`, `BIBLIOGRAPHY.md`, `plans/FS129-OR1-audit.md`; `J23` and `25's` remain elsewhere in this file's other rows and in `LEDGER.md`, `BIBLIOGRAPHY.md` |
+| `62.14`, `j/5`, `m₄(ℝ²)`, `χ_g(H)`, and "external home … lacks chunk token `80's`" (`FS-80's route`) | rank 10: P's full new question and bearing replace FS-104's | yes: `plans/STUB-cp-plane-six.md`, `plans/POROS-2026-10-03-close-reread.md`, `plans/FS129-OR1-audit.md`, `CLOSED-QUESTIONS.md`, `plans/FS103-M-derivation.md` and others |
+| `FS112-N3-COR3's` | rank 5: P's bearing replaces FS-122's | yes: `plans/FS114-NB5-verification.md`, `plans/FS112-unit-arc-half.md`, `plans/POROS-2026-10-03-fs129-rerank.md`, `plans/FS131-I5-implementation.md` |
+
+`--dupes` exit 0; `tools/check_architecture.py` exit 0 (`arch-stage4.txt`); `scripts/identities.py check` exit 0 (`identities-stage4.txt`).

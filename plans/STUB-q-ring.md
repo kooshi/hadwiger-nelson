@@ -1,5 +1,7 @@
 # FS-124 — the (Q) ring: does every vertex of at least four colours whose ring carries (Q) arcs, and every vertex of five or six colours, die within an explicit radius? (stub)
 
+> 2026-10-07 (FS132-P1): 'given MR' leaves this stub's bearing. From `[OAIMath2026]`: a palette that is a diagonal of the vertex's own labels is a (Q) arc in measure; its `two_state_impossible`, stated for every `k`, at six excludes a ring alternating between the two diagonals (FS-132's C132-DIAG, posed); its four-cycle argument (one outside label) is the template for the five-colour vertex. The class this stub is posed in waits on FS-132's card 1.
+
 *Minted 2026-10-03 by FS-116's close, part 2 (FS116-Z2; `plans/FS116-Z2-close.md` stage 3), carrying `plans/FS116-close-inventory.md` items 40, 53, 61,
 63, 67, 96–99 and 118 (CROSS's last clause), the (Q)-ring and many-colour rows of FS116-C114-LOCAL-F's case list (`plans/FS116-Z1-close.md` § 2.6), the
 owed blind minds on FS116-N2-STAR, -RECIP and -ANTI, and FS114-K1's residues on rings with (Q) arcs. FS-116's successor; siblings FS-123
