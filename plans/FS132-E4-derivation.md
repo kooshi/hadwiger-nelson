@@ -14,6 +14,11 @@ script and its output: `data/fs132/e4/`. Entries are in the identity's grammar a
   [derived from C132-CROSS, one mind] — complementary witnessed triangles less than 2 apart need an edge set on the unit
   circle about each common unit point in the open set; **C132-COMP** [derived, one mind] — the stub's statement, as posed;
   **C132-WITNESS** [hand, one mind] — a connected open region of one label witnesses that label. All in § Stage 2.
+- Stage 3: **C132-PLACE** [hand, one mind] — on the pure side near a ring point the label is in `N` and outside the palettes
+  of the point's two ring neighbours; **C132-ALT** [hand, one mind] — no alternating step orbit has two adjacent ring
+  points with pure sides; **C132-TURN-EDGE** [hand, one mind] — at a turning step with outer-pure neighbours the two ring
+  labels are never a witnessed edge at the ring point. **C132-TURN: not proved — stalls** (§ Where C132-TURN stalls). All
+  in § Stage 3.
 
 ## Stage 1 — SAVED: the readback, what I expect, recognition, and the claims stated
 
@@ -344,3 +349,275 @@ at once: the triangle a turning ring places at a ring point has two of its edges
 points 60° away, which are the crossing points.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: C132-PLACE, the alternating orbit, the turning orbit, and where C132-TURN stalls
+
+*Setting for the whole stage.* `U` is an open set containing the closed unit disc about `x`; `c` is a weak colouring of `U`
+with six labels; `T` is a set of three labels with a witnessed triangle at `x` (sets `K_0, K_1, K_2`); `N = {a, b, n}` is
+the set of the other three. Translate so `x = 0`. `Z(α, d) = e(α) + e(α − 2π/3 − d)` is FS132-E3's chart (its M2): a
+diffeomorphism of `(ℝ/2π) × (−d_0, d_0)` onto an annulus about the unit circle, with `|Z| < 1` when `d > 0` and `|Z| > 1`
+when `d < 0`, and `e(α)`, `e(α − 2π/3 − d)` the two ring points at distance 1 from `Z(α, d)` — its **forward** and
+**backward neighbours**. For an angle `ψ` write `ψ_k = ψ + kπ/3`, `y_k = e(ψ_k)` (the **ring points** of the orbit of `ψ`).
+A point near `y_0` is `Z(ψ_1 + θ, d)`: its forward neighbour is at `ψ_1 + θ`, its backward neighbour at `ψ_{−1} + θ − d`.
+Because the arc of the ring inside the unit disc about `Z` is the arc between its two neighbours,
+
+> (W) `Z(ψ_1 + θ, d)` is inside the unit circle about `y_1` when `θ > 0` and outside it when `θ < 0`; inside the unit
+> circle about `y_{−1}` when `θ − d < 0` and outside it when `θ − d > 0`
+
+(control `chart-wedges`: 1,681 samples, no mismatch). So the unit circles about `y_1` and `y_{−1}`, which cross at `y_0` and
+at `x`, cut a neighbourhood of `y_0` into four wedges: **far** (`θ < 0 < θ − d`: outside both, a 60° wedge outside the
+ring), **lens** (`θ − d < 0 < θ`: inside both, a 60° wedge inside the ring), **cw** (`θ < 0`, `θ − d < 0`) and **ccw**
+(`θ > 0`, `θ − d > 0`), the last two cut by the ring into an outer and an inner part.
+
+### The entries
+
+derivation: C132-PLACE
+  statement: let U be an open set of the plane containing the closed unit disc about a point x, c a measurable map from U to six labels with c(z) ≠ c(z + u) for almost every pair of a point z of U and a unit vector u with z + u in U, T a set of three labels and K_0, K_1, K_2 compact sets containing x such that for each of the three pairs of labels of T one of the sets K_j has Δ(K_j) disjoint from the closed essential supports of both labels of the pair, N the set of the three other labels, and ψ an angle such that at least two of the sets K_j have a point q with |x + e(ψ) − q| < 1; then there is κ > 0 such that for almost every (α, d) with |α − ψ − π/3| < κ and −κ < d < 0 the label of the point x + e(α) + e(α − 2π/3 − d) lies in N and in neither of the palettes P_x(e(α)) and P_x(e(α − 2π/3 − d)); and if at least two of the sets K_j have a point q with |x + e(ψ) − q| > 1, there is κ > 0 such that for almost every (α, d) with |α − ψ − π/3| < κ and 0 < d < κ the label of that point lies in N and in neither of those two palettes
+  uses only: `[OAIMath2026]` Lemma 5.2 assertion (1) read locally (`palettes.tex:111–203`, read with its proof: label by label, no count, and local to the pairs whose sums stay in U — FS132-E3's reading T2, which I re-read against the source); the chart Z (FS132-E3's M2) and that it carries null sets to null sets; step B1 of C132-CROSS (a set with a point strictly inside, or outside, the unit circle about the ring point excludes its two labels on the outer, or inner, side near it); that two edges of a triangle have its three labels among their endpoints. It reads nothing of the limiting directions, of connectedness, of the transition graph, or of the other side of the ring
+  not claimed: anything on the side that is not pure — there the label lies outside the two palettes and may be a label of T; anything at a ring point with no pure side (then one of the sets K_j lies on the unit circle about the ring point, by the pigeonhole of C132-COMP-SHARP); that the two palettes are singletons, or that the outside state is a step; that the ring point is a cyclic centre
+  argument: § Argument — the transfer on the pure side
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: seven labels, the hexagonal seven-colouring at the vertex (0, 2/5), where both sides are pure at every direction (FS132-E2's control `hex7-relation`): the label at a point near the ring is outside the labels at its two ring neighbours — properness of the honeycomb at distance 1; no six-colouring is known, and at six the list under the argument is checked on the two six-sector rings as patterns (control `chart-wedges`)
+  prior art: partly: `[OAIMath2026]` Lemma 5.2 and Lemma 8.1 are the two inputs, and its lemma "Polynomial three-label region" (`angular.tex:484–524`, the eighth numbered statement of its § 8) is this statement at five labels for two outside labels and both neighbours inside sectors; in the map class it is this project's ring calculus (G91; FS116-V6's V6-GERM, as FS132-E3's M2 restates it); the three-label form on a pure side not found by the milestone's gate, which this job did not extend
+  handoff: de Bruijn — over the release's `palette_transport_param` at `Fin 6` and the strips clause of C132-WIT: the statement as written, two cases by the side
+
+derivation: C132-ALT
+  statement: let U be an open set of the plane containing the closed unit disc about a point x, c a measurable map from U to six labels with c(z) ≠ c(z + u) for almost every pair of a point z of U and a unit vector u with z + u in U, T a set of three labels and K_0, K_1, K_2 compact sets containing x such that for each of the three pairs of labels of T one of the sets K_j has Δ(K_j) disjoint from the closed essential supports of both labels of the pair, a and b two labels outside T, ψ an angle and δ > 0 such that for every integer k the palette P_x(e(θ)) contains a for almost every θ in (ψ + kπ/3 − δ, ψ + kπ/3) when k is even and for almost every θ in (ψ + kπ/3, ψ + kπ/3 + δ) when k is odd, and contains b for almost every θ in (ψ + kπ/3, ψ + kπ/3 + δ) when k is even and for almost every θ in (ψ + kπ/3 − δ, ψ + kπ/3) when k is odd; then there is no integer k such that, for both m = k and m = k + 1, at least two of the sets K_j have a point strictly inside the unit circle about x + e(ψ + mπ/3) or at least two of them have a point strictly outside it
+  uses only: C132-PLACE at two adjacent ring points; the unit-pair relation between points near two ring points π/3 apart, FS132-E3's M7, with its shift ε = d d′ h(d, d′), h smooth and h(0, 0) = 2/√3, read for both signs of d and of d′ (the derivation there does not use the signs; control `unit-shift`); weak properness; six labels, as "three outside T"
+  not claimed: the statement for a ring that alternates near the orbit without being a step (palettes that hold a or b almost everywhere near the six points, each on a set of positive measure near ψ): for two adjacent ring points with pure inner sides it follows, because FS132-E3's Lemma S makes such a state a step; for the three other patterns of sides it needs a shift lemma of that kind for three other arrangements of the two gaps, which is sketched under the argument and not entered; anything at an orbit none of whose adjacent pairs has two pure sides — then three of the six ring points, alternate ones, each have one of the three sets K_j on their unit circle; anything at seven labels
+  argument: § Argument — the alternating orbit
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none can exist (a non-existence); as a pattern, the six-sector ring a, b, a, b, a, b: at each ring point the far wedge and the lens are left the third outside label (control `chart-wedges`), and between two adjacent ring points the forced regions hold unit pairs for three of the four patterns of sides and none for two inner sides, where the argument takes its second step (control `forced-pairs`: 36, 129, 93, 0)
+  prior art: partly: at five labels the ring of a triangle centre is this alternating ring and the release kills it by rigidity and a Moser spindle in the region its lemma "Polynomial three-label region" leaves to the triangle's labels (`angular.tex:476–607`); the mechanism here is FS132-E3's M7–M9 (C132-M-ORBIT) with the third outside label in the place of the tip; the six-label statement not found by the milestone's gate, which this job did not extend
+  handoff: de Bruijn — after C132-M-ORBIT's module, which holds the chart, the unit-pair relation and the kill; here four cases by the sides, three of them one open set of unit pairs each
+
+derivation: C132-TURN-EDGE
+  statement: let U be an open set of the plane containing the closed unit disc about a point x, c a measurable map from U to six labels with c(z) ≠ c(z + u) for almost every pair of a point z of U and a unit vector u with z + u in U, T a set of three labels and K_0, K_1, K_2 compact sets containing x such that for each of the three pairs of labels of T one of the sets K_j has Δ(K_j) disjoint from the closed essential supports of both labels of the pair, a, b, n the three labels outside T, ψ an angle and δ > 0 such that the palette P_x(e(θ)) contains a for almost every θ in (ψ − δ, ψ), contains b for almost every θ in (ψ, ψ + δ), and contains n for almost every θ in (ψ + 2π/3 − δ, ψ + 2π/3) and for almost every θ in (ψ − 2π/3, ψ − 2π/3 + δ), and suppose that at least two of the sets K_j have a point strictly inside the unit circle about x + e(ψ + π/3) and at least two of them have a point strictly inside the unit circle about x + e(ψ − π/3); then there is no compact set K containing x + e(ψ) and another point such that Δ(K) is disjoint from the closed essential supports of a and of b
+  uses only: C132-PLACE on the outer side at the two ring points x + e(ψ ± π/3); the first clause of C132-CONFINE (a support point outside Δ(K) has all of K within 1 or none of K nearer than 1); that the unit circles about x + e(ψ + π/3) and x + e(ψ − π/3) meet at x and at x + e(ψ) and nowhere else (control `turning-edge`)
+  not claimed: that the ring point is a cyclic centre, or carries any witnessed edge; that the pair {a, b} is an edge of its transition graph; anything when one of the two neighbouring ring points has only a pure inner side (the third label is then forced in no region the argument can read); anything for a state that is not a step at ψ; that a colouring with these hypotheses exists
+  argument: § Argument — no witness between the two ring labels
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: none at six — no six-colouring is known; the hypotheses on the ring are those of the six-sector ring a, b, n, a, b, n at any of its six ring points, and the regions the argument reads lie where it says (control `turning-edge`); at seven the honeycomb's ring at a vertex has no step whose neighbours 2π/3 away agree on a third label out of three (its ring carries four labels)
+  prior art: owed — the statement is this job's; its mechanism is C132-CONFINE (FS132-E1) read at two points of the unit circle about the ring point
+  handoff: de Bruijn — only with a consumer; from C132-PLACE and C132-CONFINE, two confinements and one intersection of circles
+
+derivation: C132-TURN
+  statement: In a weak measurable six-colouring of a closed disc of radius above 2 about a triangle centre `x`, every cyclic centre of which carries a witnessed triangle and no longer witnessed cycle, `W_x = 3` almost everywhere and no two essential changes of the outside label are `π/3` apart
+  uses only: nothing is carried to the statement. Derived on the way: C132-ALT (two changes π/3 apart of the alternating kind, for a step and two adjacent ring points with pure sides) and C132-TURN-EDGE (at a step of the turning kind whose two neighbours have pure outer sides the two ring labels are never a witnessed edge at the ring point)
+  not claimed: its truth or its falsity; that a ring by formula survives — none was built, and § What a colouring by formula would need says why none is in reach without a search; anything for an outside state that is only measurable near the orbit
+  argument: § Where C132-TURN stalls
+  verdict: stalls at: the step from the card's hypothesis to a witness at the ring point of a turning orbit — that the ring point is a cyclic centre (the side of the ring that is not pure is left free by the transfer), and that the witnessed triangle the hypothesis then gives it contains the pair of the two ring labels, as it would if a witnessed cycle had to lie in the point's own transition graph (the relation of C132-EXT-DISC's clause (5), one mind, against a sentence of the manuscript); with that pair witnessed C132-TURN-EDGE is a contradiction
+  grade: hand
+  minds: 1
+  model: none — no six-colouring is known; at seven the statement has no analogue (four outside labels carry no orbit index, and the honeycomb's rings have no two changes π/3 apart: FS132-E2's control `hex7-relation`)
+  prior art: partly: in the map classes "no two changes π/3 apart" is Sokolov–Voronov's transversality (by `plans/FS110-CB-verification.md` § D5, as FS132-E2's entry C132-RING-TAME cites it; not read by this job); for weak colourings not found by the milestone's gate
+  handoff: Poros — not derived; stalls at a witness at the ring point; the smallest open forms are § Where C132-TURN stalls, items (i)–(iii)
+
+control: chart-wedges
+  of: C132-PLACE — the chart's three signs (inside the ring; inside the unit circle about the forward neighbour's ring point; inside the one about the backward neighbour's) on 1,681 points, and the label sets the transfer leaves in the four wedges for the two six-sector rings
+  run: python3 ../data/fs132/e4/ring_card_checks.py wedges
+  expect: chart-samples=1681 sign-mismatches=0 turning:far=c lens=ab cw=a ccw=b alternating:far=c lens=c cw=ac ccw=bc
+  fault: python3 ../data/fs132/e4/ring_card_checks.py wedges --fault
+
+control: unit-shift
+  of: C132-ALT — the shift ε(d, d′) of the unit-pair relation in all four sign quadrants: its ratio to d d′ and the bounds the argument uses (the sign of d d′; at most min(|d|, |d′|)/16)
+  run: python3 ../data/fs132/e4/ring_card_checks.py shift
+  expect: ratio-min=1.114 ratio-max=1.199 limit=1.1547 sign-or-size-violations=0
+  fault: python3 ../data/fs132/e4/ring_card_checks.py shift --fault
+
+control: forced-pairs
+  of: C132-ALT — sampled unit pairs between two adjacent ring points whose two labels the transfer forces to one label, for the four patterns of pure sides (O outer, I inner), on the alternating and on the turning six-sector ring
+  run: python3 ../data/fs132/e4/ring_card_checks.py pairs
+  expect: alternating:OO=36,OI=129,IO=93,II=0 turning:OO=0,OI=0,IO=0,II=0
+  fault: python3 ../data/fs132/e4/ring_card_checks.py pairs --fault
+
+control: turning-edge
+  of: C132-TURN-EDGE — the unit circles about the two neighbouring ring points meet at x and at the ring point; the four regions read lie outside the ring and on the stated side of the unit circle about the ring point
+  run: python3 ../data/fs132/e4/ring_card_checks.py edge
+  expect: circles-meet-at-x-and-y=True region-samples=576 side-mismatches=0
+  fault: python3 ../data/fs132/e4/ring_card_checks.py edge --fault
+
+### Argument — the transfer on the pure side
+
+**P1.** By Lemma 5.2 (1), for almost every pair of unit vectors `(e, v)` with `e + v ∈ U`: `c(e + v) ∉ P_0(e) ∪ P_0(v)`.
+On the non-parallel pairs `(e(α), e(α − 2π/3 − d))` the sum map is the chart `Z`, a diffeomorphism, so for almost every
+`(α, d)` with `|d| < d_0`: `c(Z(α, d)) ∉ P_0(e(α)) ∪ P_0(e(α − 2π/3 − d))`. *(FS132-E3's (⋆), which is label-free.)*
+**P2.** If two of the `K_j` have a point strictly inside the unit circle about `y = e(ψ)`, then by step B1 of C132-CROSS
+the outer side of the ring near `y` carries, almost everywhere, no endpoint of either edge, so only `N`. The points
+`Z(α, d)` with `α` near `ψ + π/3` and `d < 0` small are the points near `y` outside the ring. **P3.** Intersect. The inner
+case is the same with "outside" for "inside" and `d > 0`. ∎
+
+**The list** (what P1–P3 force near a ring point `y_0 = e(ψ)` with a pure side, by the germs of the outside state
+`s(θ) = P_0(e(θ)) ∩ N` at `ψ ± π/3`; "germ" = `s` almost everywhere near the point; each line derived unless marked).
+
+- **L1 — both germs one singleton `{a′}` (the tame case).** The pure side near `y_0` is almost everywhere in the two other
+  labels of `N`. Nothing chooses between them: a change of `s` at `ψ` between those two is consistent with P1–P3.
+- **L2 — two different singletons `{a′}` at `ψ + π/3`, `{b′}` at `ψ − π/3`.** The pure side near `y_0` is almost everywhere
+  the third label. So `s` is that label near `ψ`: **no essential change at `ψ`**.
+- **L3 — steps: `f⁻ | f⁺` at `ψ + π/3` and `g⁻ | g⁺` at `ψ − π/3`** (singletons; `u | v` = `u` just before, `v` just after).
+  By (W), on the pure side: **far ⊂ `N ∖ {f⁻, g⁺}`, lens ⊂ `N ∖ {f⁺, g⁻}`, cw ⊂ `N ∖ {f⁻, g⁻}`, ccw ⊂ `N ∖ {f⁺, g⁺}`**.
+  When `s` is `a | b` at `ψ`, Corollary 5.4 leaves `f⁻, g⁻ ∈ {b, n}` and `f⁺, g⁺ ∈ {a, n}`: sixteen patterns, of which
+  L1 is `n | n`, `n | n`.
+- **L4 — the six-sector ring `a, b, n, a, b, n`** (`a | b` at `ψ`, `b | n` at `ψ + π/3`, `n | a` at `ψ − π/3`; control
+  `chart-wedges`, which prints the third label as `c`). **far = `n`**, lens ⊂ `{a, b}`, cw = `a`, ccw = `b`. *At a ring point with a pure outer side all three
+  outside labels meet*: outside the ring three 60° wedges `a`, `n`, `b`, the `n`-wedge between arcs of the unit circles
+  about `y_1` and `y_{−1}`; by C132-WITNESS the pairs `{a, n}` and `{n, b}` are witnessed edges at `y_0`, with sets on
+  those two circles — the escape of C132-COMP-SHARP, should `y_0` carry the triangle `N`. *At a ring point with a pure
+  inner side*: inside the ring only `a` and `b`, `a` on the cw part and `b` on the ccw part; the third label is forced
+  nowhere. The asking lane's hunch (`the-turning-ring-places-a-fourth-label`) is **confirmed on outer-pure ring points
+  and not on inner-pure ones**; for the mirror-image ring the same; for a twelve-sector ring `a, n, b, …` of 30° sectors
+  (also of orbit index 2) L3 gives lens = third label and far ⊂ two labels, so there the sides exchange roles.
+- **L5 — the six-sector ring `a, b, a, b, a, b`.** **far = `n` and lens = `n`**; cw ⊂ `{a, n}`, ccw ⊂ `{b, n}`. The forced
+  label is the same at every ring point: C132-ALT.
+- **L6 — open: the side that is not pure.** There P1 alone holds: the label avoids the two palettes and may be the one
+  label of `T` the strips allow on that side (any label of `T`, when all three edges are blocked on the pure side only).
+  Whether `y_0` is a cyclic centre, and with which labels, is decided there.
+- **L7 — open: germs that are only measurable.** Only P1–P3. A point whose two ring neighbours carry different single
+  labels has the third; where they carry one label, two remain.
+- **L8 — the other patterns of L3** (one germ constant and one a step; a swap `b | a` on one side only) are lines of its
+  table with no consequence drawn here. One is worth its sentence: forward germ `b | a`, backward germ `n | n` gives far
+  and cw = `a`, lens and ccw = `b` — the change at `ψ` continues off the ring along the unit circle about `y_1`, on both
+  sides if both are pure: an interface that is an arc of a unit circle about a ring point.
+
+### Argument — the alternating orbit
+
+Suppose `k` exists; replace `ψ` by `ψ + kπ/3`, exchanging the names `a` and `b` if `k` is odd, so that `k = 0` and the
+hypothesis reads: the palettes hold `a` just before `ψ_0`, `ψ_{±2}` and just after `ψ_{±1}`, and `b` on the other sides. Each of
+`y_0`, `y_1` has a pure side; write O for outer, I for inner. A point near `y_0` is `z = Z(ψ_1 + θ, d)`, and by C132-PLACE
+on the pure side of `y_0` (the sign of `d`) its label is in `N` and outside the palettes of its neighbours, at `ψ_1 + θ`
+and `ψ_{−1} + θ − d`. So, almost everywhere on that side:
+
+> lens₀ (`0 < θ < d`) and far₀ (`d < θ < 0`): the neighbours' palettes hold `a` and `b` — **the label is `n`**;
+> cw₀ (`θ < 0`, `θ < d`): they both hold `b` — the label is `a` or `n`.
+
+A point near `y_1` is `z′ = Z(ψ_2 + θ′, d′)`, with neighbours at `ψ_2 + θ′` and `ψ_0 + θ′ − d′`; on the pure side of `y_1`:
+
+> lens₁ (`θ′ − d′ < 0 < θ′`) and far₁ (`θ′ < 0 < θ′ − d′`): **the label is `n`**; ccw₁ (`θ′ > 0`, `θ′ − d′ > 0`): `a` or `n`.
+
+*The unit pairs.* By FS132-E3's M7, for small `d, d′` the points `z` and `z′` are at distance 1 when
+`θ′ = θ + d′ + ε(d, d′)`, where `ε = d d′ h(d, d′)` with `h` smooth and `h(0, 0) = 2/√3`: the derivation there (the
+implicit function `G`, and `ε = 0` on both axes) does not use the signs of `d` and `d′`. So there is `κ_1` with
+`0 < |ε| ≤ min(|d|, |d′|)/16` and `ε` of the sign of `d d′` for `0 < |d|, |d′| < κ_1` (control `unit-shift`), and
+`(θ, d, d′) ↦ (z, z′ − z)` is a local diffeomorphism into the unit pairs, so sets of positive measure correspond.
+Then `θ′ − d′ = θ + ε`, and:
+
+- **O, O** (`d, d′ < 0`, `ε > 0`). far₀ is `d < θ < 0`; far₁ is `θ + d′ + ε < 0 < θ + ε`. Both hold on the non-empty open
+  set `max(d, −ε) < θ < 0`: a positive measure of unit pairs with both labels `n`.
+- **O, I** (`d < 0 < d′`, `ε < 0`). far₀ is `d < θ < 0`; lens₁ is `θ + ε < 0 < θ + d′ + ε`. Both hold on
+  `max(d, |ε| − d′) < θ < 0`: again both labels `n`.
+- **I, O** (`d′ < 0 < d`, `ε < 0`). lens₀ is `0 < θ < d`; far₁ is `θ + d′ + ε < 0 < θ + ε`. Both hold on
+  `|ε| < θ < min(d, |d′| + |ε|)`, non-empty because `|ε| < d/16`: both labels `n`.
+- **I, I** (`d, d′ > 0`, `ε > 0`). lens₀ and lens₁ hold no unit pair (`θ > 0` and `θ + ε < 0`), and the argument is
+  FS132-E3's M9. (1) *`n` is null on the inner part of cw₀* (`θ < 0`, `d > 0`): for such a point and every
+  `d′ ∈ (|θ|, 16|θ|)`, `ε ≤ d′/16 < |θ| < d′ + ε`, so `θ + ε < 0 < θ + d′ + ε` and the partner is in lens₁, almost
+  everywhere of label `n`; a positive measure of label `n` there would give a positive measure of unit pairs of label
+  `n`. So that part is almost everywhere `a`. (2) *`n` is null on the inner part of ccw₁* (`θ + ε > 0`, `d′ > 0`): with
+  `h′ = θ + ε` and any `d ∈ (h′, 16h′)`, `θ = h′ − ε(d, d′) ∈ (0, h′) ⊂ (0, d)`, so the partner is in lens₀. So that part
+  is almost everywhere `a`. (3) On the non-empty open set `−ε < θ < 0`, `d, d′ > 0`, the point `z` is in the inner part
+  of cw₀ and `z′` (`θ + ε > 0`, `θ′ > 0`) in the inner part of ccw₁: a positive measure of unit pairs with both labels `a`.
+
+Each case contradicts weak properness. ∎ (Control `forced-pairs`: on the pattern, sampled unit pairs with both labels
+forced equal — 36, 129, 93 for O O, O I, I O, and 0 for I I, where the argument needs its steps (1) and (2).)
+
+**Read off it, not entered.** (i) *When no adjacent pair has two pure sides.* A ring point with no pure side has one of
+the `K_j` on its unit circle (the pigeonhole of C132-COMP-SHARP). So an alternating step orbit survives only if of every
+two adjacent ring points one has an edge set of `x` on its unit circle: three sets, a hexagon — **the three edge sets of
+`x` lie on the unit circles about three alternate ring points**. With connected sets these are three unit arcs through
+`x`, 120° apart: a (Q)-kind configuration, the one residue. (ii) *The measurable form.* With "the palettes near the six
+points hold `a` or `b`, each on a set of positive measure near `ψ`" in place of the step: for I, I the relation (†) of
+FS132-E3's M8 holds as there and its Lemma S makes the state a step, so the entry applies ([hand], one mind, over that
+lemma). For the three other patterns the relation is "not both `s` changes across a gap `p` above `α` and across a gap
+`r`" at `α ± ε`, with the gaps arranged differently; a density argument of Lemma S's kind (a thick interval of one
+value just below a density point of the other, the shift at most an eighth of the interval) gives a positive measure of
+violations for O, I and I, O, and for O, O after a case split on whether the lower value recurs below. **Sketched, not
+checked line by line, not entered.** (iii) *The readings deriver's paragraph* (`plans/FS132-E3-derivation.md` Stage 4,
+§ The coordinator's question: "near two ring points 60° apart the forced labels are in general *different* … so
+properness between the two regions says nothing"): **the same statement from the other side, no disagreement.** On an
+alternating orbit the forced labels at adjacent ring points coincide (both `n`), and there the mechanism runs; on a
+turning orbit they are `n`, `a`, `b` in turn, and control `forced-pairs` finds no forced pair in any pattern of sides.
+
+### Argument — no witness between the two ring labels
+
+Put `y = e(ψ)`, `y_± = e(ψ ± π/3)`, and suppose `K` exists. *Near `y_+`.* A point near `y_+` is `Z(ψ + 2π/3 + θ, d)`, with
+neighbours at `ψ + 2π/3 + θ` and `ψ + θ − d`. On the outer side (`d < 0`), by C132-PLACE: where `d < θ < 0` the
+neighbours' palettes hold `n` and `b`, so **the label is `a`**, and by (W) read at `y_+` (whose backward ring point is
+`y`) these points are outside the unit circle about `y`; where `θ < d` the palettes hold `n` and `a`, so **the label is
+`b`**, and these points are inside it. Both regions are non-empty and open, in every neighbourhood of `y_+` (control
+`turning-edge`). So there are points of `H_b` arbitrarily near `y_+` and nearer than 1 to `y`: each is outside `Δ(K)` and
+has the point `y` of `K` within 1, hence all of `K` within 1 (C132-CONFINE); in the limit `K ⊂ B̄(y_+, 1)`. And there are
+points of `H_a` arbitrarily near `y_+` farther than 1 from `y`: each has no point of `K` nearer than 1; in the limit
+`K ∩ B(y_+, 1) = ∅`. So **`K` lies on the unit circle about `y_+`**. *Near `y_−`.* A point is `Z(ψ + θ, d)`, neighbours
+at `ψ + θ` and `ψ − 2π/3 + θ − d`; outside the ring: where `d < θ < 0` the palettes hold `a` and `n`, the label is `b`,
+outside the unit circle about `y`; where `θ > 0` they hold `b` and `n`, the label is `a`, inside it. As before, **`K`
+lies on the unit circle about `y_−`**. *The end.* Those two circles meet at `x` and at `y` only, so `K = {x, y}`. But the
+points just found near `y_−` with label `a` are farther than 1 from `x` and nearer than 1 to `y`: they are in
+`Δ({x, y}) ∩ H_a`. ∎
+
+**What it is, in the witness card's words** (FS132-E5's recognition, relayed 2026-10-07: "a 'witnessed cycle at p' is a
+property of the unit circle about p, not of p"). That is how this argument reads the ring point: `y_+` and `y_−` are two
+points of the unit circle about `y` near each of which both `a` and `b` occur, one inside that circle and one outside, so
+no straddle set of a set through `y` can miss both supports. **It does not change the statement.** It changes how the
+stall below should be heard: the question is not whether the pair `{a, b}` *is* witnessed at the ring point — under these
+hypotheses it never is — but whether the card's hypothesis *requires* it to be.
+
+### Where C132-TURN stalls
+
+*The statement's two conclusions, against what is derived.* "No two essential changes π/3 apart": for a step ring the
+changes π/3 apart are the lines of L3 other than L1. The alternating kind is excluded by C132-ALT wherever two adjacent
+ring points have pure sides. The turning kind has orbit index 2 or 4 (`W_x ≠ 3`), is consistent with everything the
+centre `x` supplies near the ring (L4; control `forced-pairs`: no forced pair in any pattern of sides), and **stalls**:
+
+- **(i) The witness at the ring point.** C132-TURN-EDGE: at a ring point `y` of a turning step orbit whose two
+  neighbours have pure outer sides, `{a, b}` is not a witnessed edge. Every pattern of sides has such a point when all
+  six ring points have a pure side: the side is opposite at antipodes, so the six read O O O I I I (take the middle O) or
+  O I O I O I (take any I). The card's hypothesis gives a witnessed triangle to every *cyclic centre*. So the turning
+  orbit is excluded as soon as (1) `y` is a cyclic centre and (2) the triangle it then carries contains the pair
+  `{a, b}`. For (1): at an outer-pure `y` the labels `a`, `n`, `b` meet outside the ring, and the inside is L6's open
+  line; at an inner-pure `y` the inside holds `a` and `b` only and the outside is L6's. For (2): it holds if a witnessed
+  cycle must be a cycle of the point's own transition graph and every cycle of that graph at `y` passes through `a`–`b` —
+  the first is the relation of C132-EXT-DISC's clause (5) (one mind; the manuscript: "The extracted cycle need not
+  consist of edges of Γ_x"), the second is not derived. **Smallest open form:** *in a weak six-colouring, at a point `y`
+  near which one side of a unit circle through `y` carries `a` and then `b` along the circle and nothing else, does every
+  set of witnessed edges closing a cycle at `y` contain the pair `{a, b}`?*
+- **(ii) The measurable turning orbit.** For an outside state with orbit index 2 or 4 that is not a step near the orbit,
+  only L7. No derived form.
+- **(iii) Ring points with no pure side.** Every statement of this stage is void at a ring point on whose unit circle an
+  edge set of `x` lies. That is the same exception as C132-COMP-SHARP's, and the same kind of object as the (Q) arcs on
+  which every held positive of the map class lives (rows 136, 138).
+
+*The card's three branches.* It is the third — "all three outside labels are forced at the ring point but no cycle is
+witnessed there: the stall has moved from the ring to which points carry witnesses" — sharpened in two ways: the third
+label is forced only on outer-pure ring points (L4), and the witness that would kill is one edge, between the two ring
+labels, which is provably absent. So the witness card's answer decides this one; **what to ask it is form (i)**.
+
+### What a colouring by formula would need (not built)
+
+An open line realized by formula would be a weak six-colouring near the closed unit disc about a point with a witnessed
+triangle whose ring is `a, b, n, a, b, n`. Locally it must be, at each outer-pure ring point `y`, three 60° wedges of the
+outside labels with interfaces along the unit circles about the two neighbouring ring points (L4), and those neighbours
+are again ring points of the same kind. The one held object of this shape is fragment T2 (two complementary triangle
+points at distance 1, each with arcs on the unit circles about the common unit points) — and in T2 the common unit points
+are *four-colour vertices*, not triangle points. A triangles-only version needs the six ring points to carry each other's
+arcs consistently around the hexagon, with the impure sides filled; I found no formula for it and no reason it cannot
+exist beyond C132-TURN-EDGE. Deciding it by enumeration of local fillings is a search (a `search request` in the report),
+not a derivation. **Radius reached: none; nothing was built.**
+
+### Predictions scored
+
+- **P1** (C132-COMP derived in a sharper form, 0.93): **met** — derived as posed and as C132-COMP-SHARP.
+- **P2** (the list derived for constant and step germs, only the formula for measurable ones, 0.85; a formula built,
+  0.05): **met**; nothing built.
+- **P3** (C132-TURN stalls at a witness at the ring point, 0.80; the alternating half derived, 0.80): **met in outcome**;
+  the mechanism I expected for the stall was half wrong — I expected "is the edge witnessed" to be the open question, and
+  the derivation shows it is not witnessed; what is open is whether the hypothesis requires it.
+- The asking lane's registered expectations (the stub): C132-COMP derived at the first attempt (0.85) — met; C132-PLACE's
+  list with the third label forced in the differing case (0.60) — met on the pure side; C132-TURN "stalls at 'the ring
+  point carries a witnessed cycle'" (0.40) — the branch that occurred.
+
+## Stage 3 — SAVED

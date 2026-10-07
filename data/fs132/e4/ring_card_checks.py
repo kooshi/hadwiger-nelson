@@ -15,6 +15,9 @@
              transfer leaves in the four wedges for the two six-sector rings.  Fault: the inside test reversed.
   shift      the unit-pair shift eps(d, d') of FS132-E3's M7 in all four sign quadrants: its sign and its ratio to d d'.
              Fault: the pair is put at distance 1.001.
+  edge       C132-TURN-EDGE: the unit circles about the two ring neighbours of a ring point y meet at x and y only, and the
+             four regions the argument reads lie outside the ring, on the stated side of the unit circle about y.
+             Fault: a ring point 0.3 radians off in place of y.
   pairs      C132-ALT and the turning ring: for the two six-sector step rings and the four patterns of pure sides at two
              adjacent ring points, how many sampled unit pairs join two points whose labels the transfer forces to one
              label.  Fault: the turning ring's states in place of the alternating ring's.
@@ -232,6 +235,33 @@ def wedges():
     print(f"chart-samples={n} sign-mismatches={bad} turning:{table(turning)} alternating:{table(alternating)}")
 
 
+def edge():
+    """C132-TURN-EDGE: the two unit circles about the ring neighbours e(psi +- pi/3) meet at x = 0 and y = e(psi) only; and
+    the four regions the argument reads lie outside the ring and on the stated side of the unit circle about y."""
+    psi = 0.37
+    y0 = e(psi + (0.3 if FAULT else 0.0))
+    yp, ym = e(psi + math.pi / 3), e(psi - math.pi / 3)
+    mid = ((yp[0] + ym[0]) / 2, (yp[1] + ym[1]) / 2)
+    D = dist(yp, ym)
+    h = math.sqrt(1 - D * D / 4)
+    nrm = ((ym[1] - yp[1]) / D, -(ym[0] - yp[0]) / D)
+    P = [(mid[0] + sg * h * nrm[0], mid[1] + sg * h * nrm[1]) for sg in (1, -1)]
+    meets = all(min(dist(q, (0.0, 0.0)), dist(q, y0)) < 1e-12 for q in P)
+    bad = n = 0
+    for i in range(1, 13):
+        for j in range(1, 13):
+            d = -0.002 * j
+            for base, th, inside_y in (
+                    (psi + 2 * math.pi / 3, d * i / 13, False),          # far wedge at y_1: d < th < 0
+                    (psi + 2 * math.pi / 3, d * (1 + i / 3), True),      # outer part of the cw wedge at y_1: th < d
+                    (psi, d * i / 13, False),                            # far wedge at y_-1: d < th < 0
+                    (psi, 0.002 * i, True)):                             # outer part of the ccw wedge at y_-1: th > 0
+                z = Z(base + th, d)
+                n += 1
+                bad += (math.hypot(*z) <= 1) + ((dist(z, y0) < 1) != inside_y)
+    print(f"circles-meet-at-x-and-y={meets} region-samples={n} side-mismatches={bad}")
+
+
 def partner(z, dp):
     """the point z' = Z(a', d') at distance 1 from z, counterclockwise of it; returns (a', z')."""
     r, rp = math.hypot(*z), 2 * math.cos(math.pi / 3 + dp / 2)
@@ -295,4 +325,4 @@ def pairs():
 
 
 if __name__ == "__main__":
-    {"crossing": crossing, "hex7": hex7, "fragments": fragments, "wedges": wedges, "shift": shift, "pairs": pairs}[sys.argv[1]]()
+    {"crossing": crossing, "hex7": hex7, "fragments": fragments, "wedges": wedges, "shift": shift, "pairs": pairs, "edge": edge}[sys.argv[1]]()
