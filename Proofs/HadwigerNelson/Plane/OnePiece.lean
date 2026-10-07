@@ -60,7 +60,11 @@ theorem mem_unitShadow_iff_exists_e {W : Set ℂ} {z : ℂ} : z ∈ unitShadow W
 point on it.** -/
 theorem mem_unitShadow_of_isPreconnected {P : Set ℂ} (hP : IsPreconnected P) {z y₀ y₁ : ℂ} (h₀ : y₀ ∈ P)
     (h₁ : y₁ ∈ P) (hin : dist y₀ z < 1) (hout : 1 < dist y₁ z) : z ∈ unitShadow P := by
-  sorry
+  by_contra hz
+  have hne : ∀ s ∈ P, dist z s ≠ 1 := fun s hs h => hz ⟨s, hs, h⟩
+  rcases preconnected_dist_lt_or_gt hP hne with h | h
+  · exact absurd (h y₁ h₁) (by rw [dist_comm]; exact not_lt.mpr hout.le)
+  · exact absurd (h y₀ h₀) (by rw [dist_comm]; exact not_lt.mpr hin.le)
 
 /-- **The shadow** (the core of C124-SHADOW-OPEN): if `c` is proper at almost every unit pair of `U`, `W ⊆ U` is open
 and almost every point of `W` has the label `i`, then almost every point of `U` at distance exactly `1` from a point
@@ -150,7 +154,9 @@ theorem crossingAt_iff {P : Set ℂ} {w : ℂ} : CrossingAt P w ↔ (∃ y ∈ P
 
 /-- Not on the side `σ`: a point strictly on the other side. -/
 theorem not_onSide_iff {σ : CircleSide} {P : Set ℂ} {w : ℂ} : ¬ OnSide σ P w ↔ ∃ y ∈ P, y ∈ σ.flip.region w := by
-  sorry
+  cases σ
+  · simp only [OnSide, InnerAt, CircleSide.flip, CircleSide.region, not_subset, mem_compl_iff]
+  · simp only [OnSide, OuterAt, CircleSide.flip, CircleSide.region, not_disjoint_iff]
 
 /-- An open set on the closed side `σ` of a circle lies on its open side. -/
 theorem OnSide.subset_region {σ : CircleSide} {P : Set ℂ} {w : ℂ} (h : OnSide σ P w) (hP : IsOpen P) :
@@ -230,12 +236,33 @@ side `σ` of `S(x)`, points of `P` near `x` are on the side `σ` of `S(z)`; so `
 theorem IsPieceAt.ae_ne_region {U : Set ℂ} {c : ℂ → α} (hU : IsOpen U) (hc : AeProperOn U c) {x : ℂ} {P : Set ℂ}
     {i : α} (hP : IsPieceAt U c x P i) {w : ℂ} (hw : w ∈ U) {σ : CircleSide} (hσ : ¬ OnSide σ P w) :
     ∃ η > 0, ∀ᵐ z, z ∈ ball w η → z ∈ σ.region x → c z ≠ i := by
-  sorry
+  obtain ⟨y₀, hy₀P, hy₀⟩ := not_onSide_iff.mp hσ
+  -- a disc about `w` inside `U` on which `y₀` stays on the other side of the unit circle about the point
+  obtain ⟨η, hη, hball⟩ := Metric.isOpen_iff.mp (hU.inter (σ.flip.isOpen_region y₀)) w
+    ⟨hw, CircleSide.mem_region_comm.mp hy₀⟩
+  refine ⟨η, hη, ?_⟩
+  filter_upwards [hc.ae_unitShadow_ne hP.isOpen hP.subset hP.ae_label] with z hz hzb hzσ
+  refine hz ⟨(hball hzb).1, ?_⟩
+  have hy₀z : y₀ ∈ σ.flip.region z := CircleSide.mem_region_comm.mp (hball hzb).2
+  -- a point of `P` near `x` on the side `σ` of the unit circle about `z`
+  obtain ⟨y₁, hy₁σ, hy₁P⟩ := mem_closure_iff.mp hP.mem_closure _ (σ.isOpen_region z)
+    (CircleSide.mem_region_comm.mp hzσ)
+  cases σ
+  · exact mem_unitShadow_of_isPreconnected hP.isPreconnected hy₁P hy₀P
+      (by simpa [CircleSide.region] using hy₁σ) (by simpa [CircleSide.region, CircleSide.flip] using hy₀z)
+  · exact mem_unitShadow_of_isPreconnected hP.isPreconnected hy₀P hy₁P
+      (by simpa [CircleSide.region, CircleSide.flip] using hy₀z) (by simpa [CircleSide.region] using hy₁σ)
 
 /-- A crossing piece has its label almost nowhere near `w`. -/
 theorem IsPieceAt.ae_ne_of_crossingAt {U : Set ℂ} {c : ℂ → α} (hU : IsOpen U) (hc : AeProperOn U c) {x : ℂ}
     {P : Set ℂ} {i : α} (hP : IsPieceAt U c x P i) {w : ℂ} (hw : w ∈ U) (hcr : CrossingAt P w) :
     ∃ η > 0, ∀ᵐ z, z ∈ ball w η → c z ≠ i := by
+  sorry
+
+/-- **A piece at a point of `U` lies in the closed unit disc about the point** (the type of the piece at `w = x`: a
+piece reaching beyond the unit circle about `x` would have its label almost nowhere near `x`). -/
+theorem IsPieceAt.innerAt_self {U : Set ℂ} {c : ℂ → α} (hU : IsOpen U) (hc : AeProperOn U c) {x : ℂ} {P : Set ℂ}
+    {i : α} (hP : IsPieceAt U c x P i) (hx : x ∈ U) : InnerAt P x := by
   sorry
 
 /-- **C124-TYPE** (`data/fs124/claims-K2.md`): "Let c be a weak k-colouring of an open set U, P a connected open

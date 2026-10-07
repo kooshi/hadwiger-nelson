@@ -15,20 +15,26 @@ Claims **C124-FORCED-PIECES**, **C124-LONE**, **C124-BOTH** and **C124-FOUR** of
 
 **Where the number six is spent** — in one line, `ClosePair.exists_label_eq`: with six labels, every label is the
 label of a piece of `x` or of a piece of `y`. Every theorem here is proved from that sentence as a hypothesis
-(`hcover`) for `AeProperOn` at any finite label type — `ae_quadrant_label`, `ClosePair.separatesAt_or`,
+(`hcover`) for `AeProperOn` at any label type — `exists_onSide_of_cover`, `ClosePair.separatesAt_or`,
 `ClosePair.lone_of_cover`, `ClosePair.separatesAt_right_of_isFull`, `ClosePair.presentAt_eq` — and the claim list's
-statements are the corollaries at `Fin 6`. With seven labels `hcover` fails and nothing here applies.
+statements are the corollaries at `Fin 6`. With seven labels `hcover` fails, and `forced_pieces` is false
+(`exists_closePair_seven_not_separatesAt`, `Plane/ClosePairModel`).
 
-The mechanism (`ae_quadrant_label`): by the type of a piece (`IsPieceAt.ae_ne_region`), near `w` the label of a piece
-of `x` can occupy the side `σ` of the unit circle about `x` only if the piece lies on the closed side `σ` of the unit
-circle about `w`. So in the region on the side `σ` of `S(x)` and the side `τ` of `S(y)`, almost every point has the
-label of a piece of `x` on the side `σ` of `S(w)` or of a piece of `y` on the side `τ` of `S(w)`; the region has
-positive measure; so such a piece exists.
+The mechanism, with no cover hypothesis (`ae_onSide_of_label`, the type of finitely many pieces at once): near `w`,
+almost every point on the side `σ` of the unit circle about `x` that carries the label of a piece of `x` has that
+piece on the closed side `σ` of the unit circle about `w`. With the cover: each of the four regions cut near `w` by
+the unit circles about `x` and `y` has positive measure, so for each choice of sides `(σ, τ)` there is a piece of `x`
+on the closed side `σ` of `S(w)` or a piece of `y` on the closed side `τ` of `S(w)` (`exists_onSide_of_cover`).
+C124-FORCED-PIECES is that sentence at the two sides a non-separating pair would leave empty. When one side of
+`S(y)` near `w` is filled by two labels of `x` — one inside `S(x)`, one outside — a second unit point `w' ≠ w` of
+`x` is the far end of a tight pair, and the two pieces meet at `x` only
+(`ThreePiece.exists_second_unit_point_of_ae_side`): this is C124-LONE's last clause, and it is what fullness
+excludes in C124-BOTH and C124-FOUR.
 
 **Inhabitants** (`Plane/ClosePairModel`): `exists_closePair_not_separatesAt` — a close complementary pair of a weak
 six-colouring with a common unit point at which one member does not separate (the hypotheses of `forced_pieces` and
-`lone` at once); `exists_closePair_full` — one with both members sector points, full, each with one inner, one outer
-and one crossing piece (the hypotheses of `both_separate`, `both_saved` and `four` at once).
+`lone` at once); `exists_closePair_full` — one with both members arc-edged, hence full, each with one inner, one
+outer and one crossing piece (the hypotheses of `both_separate`, `both_saved` and `four` at once).
 -/
 
 namespace HadwigerNelson.Plane
@@ -51,6 +57,11 @@ theorem mem_presentAt_iff {U : Set ℂ} {c : ℂ → α} {w : ℂ} {i : α} :
 /-- A label almost nowhere on a disc about `w` is not present at `w`. -/
 theorem not_mem_presentAt_of_ae_ne {U : Set ℂ} {c : ℂ → α} {w : ℂ} {i : α} {η : ℝ} (hη : 0 < η)
     (h : ∀ᵐ z, z ∈ ball w η → c z ≠ i) : i ∉ presentAt U c w := by
+  sorry
+
+/-- Not present: the label is almost nowhere on `U` in some disc about the point. -/
+theorem not_mem_presentAt_iff {U : Set ℂ} {c : ℂ → α} {w : ℂ} {i : α} :
+    i ∉ presentAt U c w ↔ ∃ η > 0, ∀ᵐ z, z ∈ U → z ∈ ball w η → c z ≠ i := by
   sorry
 
 /-- A label carried almost everywhere by a subset of `U` that has positive measure in every disc about `w` is present
@@ -115,44 +126,56 @@ end ClosePair
 
 /-! ## The four regions at a common unit point -/
 
-/-- **The quadrant lemma, with labels**: let `P i` be pieces at `x` with labels `a i` and `Q j` pieces at `y` with
-labels `b j`, every label being one of them. Then near `w`, almost every point on the side `σ` of the unit circle
-about `x` and on the side `τ` of the unit circle about `y` has the label of a piece of `x` on the closed side `σ` of
-the unit circle about `w`, or of a piece of `y` on the closed side `τ` of it. (The other labels are excluded there by
-`IsPieceAt.ae_ne_region`, finitely many at once.) -/
-theorem ae_quadrant_label [Finite α] {U : Set ℂ} {c : ℂ → α} (hU : IsOpen U) (hc : AeProperOn U c) {x y w : ℂ}
-    (hw : w ∈ U) {ι κ : Type*} {P : ι → Set ℂ} {a : ι → α} {Q : κ → Set ℂ} {b : κ → α}
-    (hP : ∀ i, IsPieceAt U c x (P i) (a i)) (hQ : ∀ j, IsPieceAt U c y (Q j) (b j))
-    (hcover : ∀ ℓ : α, (∃ i, a i = ℓ) ∨ ∃ j, b j = ℓ) (σ τ : CircleSide) :
-    ∃ η > 0, ∀ᵐ z, z ∈ ball w η → z ∈ σ.region x → z ∈ τ.region y →
-      (∃ i, OnSide σ (P i) w ∧ c z = a i) ∨ ∃ j, OnSide τ (Q j) w ∧ c z = b j := by
+/-- **The type of finitely many pieces at once** (no cover hypothesis): let `P i` be finitely many pieces at `x` with
+labels `a i`. Then near `w`, almost every point on a side `σ` of the unit circle about `x` that carries the label
+`a i` has the piece `P i` on the closed side `σ` of the unit circle about `w`. (`IsPieceAt.ae_ne_region` for each
+piece and each side, the least of finitely many radii.) -/
+theorem ae_onSide_of_label {U : Set ℂ} {c : ℂ → α} (hU : IsOpen U) (hc : AeProperOn U c) {x w : ℂ} (hw : w ∈ U)
+    {ι : Type*} [Finite ι] {P : ι → Set ℂ} {a : ι → α} (hP : ∀ i, IsPieceAt U c x (P i) (a i)) :
+    ∃ η > 0, ∀ᵐ z, z ∈ ball w η → ∀ (σ : CircleSide) (i : ι), z ∈ σ.region x → c z = a i → OnSide σ (P i) w := by
   sorry
 
-/-- **The quadrant lemma**: where the two circles cross at `w`, each of the four regions needs a piece — a piece of
-`x` on the closed side `σ` of the unit circle about `w`, or a piece of `y` on the closed side `τ` of it. -/
-theorem exists_onSide_of_cover [Finite α] {U : Set ℂ} {c : ℂ → α} (hU : IsOpen U) (hc : AeProperOn U c)
-    {x y w : ℂ} (hcross : CrossAt x y w) (hw : w ∈ U) {ι κ : Type*} {P : ι → Set ℂ} {a : ι → α} {Q : κ → Set ℂ}
-    {b : κ → α} (hP : ∀ i, IsPieceAt U c x (P i) (a i)) (hQ : ∀ j, IsPieceAt U c y (Q j) (b j))
+/-- **The quadrant lemma**: let `P i` be pieces at `x` with labels `a i` and `Q j` pieces at `y` with labels `b j`,
+every label being one of them, and let the unit circles about `x` and `y` cross at `w ∈ U`. Then each of the four
+regions needs a piece: for every choice of sides there is a piece of `x` on the closed side `σ` of the unit circle
+about `w`, or a piece of `y` on the closed side `τ` of it. (The region on the side `σ` of `S(x)` and `τ` of `S(y)`
+has positive measure in every disc about `w`, `CrossAt.volume_quadrant_pos`, and almost every point of it has some
+label.) -/
+theorem exists_onSide_of_cover {U : Set ℂ} {c : ℂ → α} (hU : IsOpen U) (hc : AeProperOn U c) {x y w : ℂ}
+    (hcross : CrossAt x y w) (hw : w ∈ U) {ι κ : Type*} [Finite ι] [Finite κ] {P : ι → Set ℂ} {a : ι → α}
+    {Q : κ → Set ℂ} {b : κ → α} (hP : ∀ i, IsPieceAt U c x (P i) (a i)) (hQ : ∀ j, IsPieceAt U c y (Q j) (b j))
     (hcover : ∀ ℓ : α, (∃ i, a i = ℓ) ∨ ∃ j, b j = ℓ) (σ τ : CircleSide) :
     (∃ i, OnSide σ (P i) w) ∨ ∃ j, OnSide τ (Q j) w := by
   sorry
 
-/-- **One of the two points has an inner and an outer piece** (C124-FORCED-PIECES for any two families of pieces
-whose labels are all the labels): otherwise one closed side of `S(w)` holds no piece of `x` and one holds no piece of
-`y`, against the quadrant lemma at those two sides. -/
-theorem exists_inner_outer_of_cover [Finite α] {U : Set ℂ} {c : ℂ → α} (hU : IsOpen U) (hc : AeProperOn U c)
-    {x y w : ℂ} (hcross : CrossAt x y w) (hw : w ∈ U) {ι κ : Type*} {P : ι → Set ℂ} {a : ι → α} {Q : κ → Set ℂ}
-    {b : κ → α} (hP : ∀ i, IsPieceAt U c x (P i) (a i)) (hQ : ∀ j, IsPieceAt U c y (Q j) (b j))
+/-- **One of the two points has an inner and an outer piece** (C124-FORCED-PIECES for any two finite families of
+pieces whose labels are all the labels): otherwise one closed side of `S(w)` holds no piece of `x` and one holds no
+piece of `y`, against the quadrant lemma at those two sides. -/
+theorem exists_inner_outer_of_cover {U : Set ℂ} {c : ℂ → α} (hU : IsOpen U) (hc : AeProperOn U c) {x y w : ℂ}
+    (hcross : CrossAt x y w) (hw : w ∈ U) {ι κ : Type*} [Finite ι] [Finite κ] {P : ι → Set ℂ} {a : ι → α}
+    {Q : κ → Set ℂ} {b : κ → α} (hP : ∀ i, IsPieceAt U c x (P i) (a i)) (hQ : ∀ j, IsPieceAt U c y (Q j) (b j))
     (hcover : ∀ ℓ : α, (∃ i, a i = ℓ) ∨ ∃ j, b j = ℓ) :
     ((∃ i, InnerAt (P i) w) ∧ ∃ i, OuterAt (P i) w) ∨ ((∃ j, InnerAt (Q j) w) ∧ ∃ j, OuterAt (Q j) w) := by
+  sorry
+
+/-- **A side of `S(y)` with no piece of `y` belongs to `x`**: if no piece of `y` is on the closed side `τ` of the unit
+circle about `w`, then near `w`, on the side `τ` of the unit circle about `y`, almost every point on a side `σ` of
+the unit circle about `x` has the label of a piece of `x` that is on the closed side `σ` of the unit circle about
+`w`. -/
+theorem ae_label_left_of_forall_not_onSide {U : Set ℂ} {c : ℂ → α} (hU : IsOpen U) (hc : AeProperOn U c)
+    {x y w : ℂ} (hw : w ∈ U) {ι κ : Type*} [Finite ι] [Finite κ] {P : ι → Set ℂ} {a : ι → α} {Q : κ → Set ℂ}
+    {b : κ → α} (hP : ∀ i, IsPieceAt U c x (P i) (a i)) (hQ : ∀ j, IsPieceAt U c y (Q j) (b j))
+    (hcover : ∀ ℓ : α, (∃ i, a i = ℓ) ∨ ∃ j, b j = ℓ) {τ : CircleSide} (hτ : ∀ j, ¬ OnSide τ (Q j) w) :
+    ∃ η > 0, ∀ᵐ z, z ∈ ball w η → z ∈ τ.region y → ∀ σ : CircleSide, z ∈ σ.region x →
+      ∃ i, OnSide σ (P i) w ∧ c z = a i := by
   sorry
 
 /-! ## One side of a circle filled by two labels: a second unit point -/
 
 /-- **A tight pair on one side**: let the unit circles about `x` and `y` cross at `w ∈ U`. If near `w`, on the side
 `τ` of the unit circle about `y`, almost every point has the label `a` inside the unit circle about `x` and `b`
-outside it, then for a point `w' ≠ w` of the unit circle about `x`, as near `w` as wished and on that side, the pair
-`(x, w')` is tight for `(a, b)`. No hypothesis on the colouring. -/
+outside it, then for a point `w' ≠ w` of the unit circle about `x`, as near `w` as wished, the pair `(x, w')` is
+tight for `(a, b)`. No hypothesis on the colouring. -/
 theorem exists_isTight_of_ae_side {U : Set ℂ} {c : ℂ → α} (hU : IsOpen U) {x y w : ℂ} (hcross : CrossAt x y w)
     (hw : w ∈ U) {a b : α} (hab : a ≠ b) {τ : CircleSide} {η : ℝ} (hη : 0 < η)
     (hin : ∀ᵐ z, z ∈ ball w η → z ∈ τ.region y → dist z x < 1 → c z = a)
@@ -173,33 +196,61 @@ theorem IsTight.closure_inter_closure_eq {U : Set ℂ} {c : ℂ → α} (hU : Is
       Disjoint (B ∩ ball x η') (ball w 1 ∪ ball w' 1) ∧ closure A ∩ closure B ∩ ball x η' = {x} := by
   sorry
 
-/-- **One label cannot fill a side that the cover gives to it alone**: let `D` be a decomposition at `x`, the unit
-circles about `x` and `y` crossing at `w ∈ U`. If near `w`, on the side `τ` of `S(y)`, almost every point on the side
-`σ.flip` of `S(x)` has the label of the piece `j`, then not every other piece is on the closed side `σ` of `S(w)`.
-(Otherwise the cover gives the side `σ.flip` of `S(w)` near `x` to the label of `j`; for a point `w' ≠ w` of `S(x)`
-near `w` on that side of `S(y)`, C124-CENTRE-HALF at the centre `x` with the far end `w'` takes that label off the
-side `σ` of `S(w')` near `x`; and the two circles `S(w)`, `S(w')` cross at `x`.) -/
-theorem ThreePiece.not_forall_onSide_of_ae_side {U : Set ℂ} {c : ℂ → α} (hU : IsOpen U) (hc : AeProperOn U c)
-    {x y w : ℂ} (D : ThreePiece U c x) (hcross : CrossAt x y w) (hw : w ∈ U) {j : Fin 3} {σ τ : CircleSide} {η : ℝ}
-    (hη : 0 < η) (hfill : ∀ᵐ z, z ∈ ball w η → z ∈ τ.region y → z ∈ σ.flip.region x → c z = D.label j) :
-    ¬ ∀ i, i ≠ j → OnSide σ (D.piece i) w := by
+/-- **The second unit point** (the last clause of C124-LONE, for two pieces of one decomposition): let the unit
+circles about `x` and `y` cross at `w ∈ U`, and let the piece `i` of `D` be inner and the piece `j` outer at `w`. If
+near `w`, on a side `τ` of the unit circle about `y`, almost every point has the label of `i` inside the unit circle
+about `x` and the label of `j` outside it, there are a point `w' ≠ w` of the unit circle about `x` and `η' > 0` such
+that inside `ball x η'` the piece `i` lies in both closed unit discs, the piece `j` is disjoint from both open unit
+discs, and their closures meet at `x` only. -/
+theorem ThreePiece.exists_second_unit_point_of_ae_side {U : Set ℂ} {c : ℂ → α} (hU : IsOpen U)
+    (hc : AeProperOn U c) {x y w : ℂ} (D : ThreePiece U c x) (hcross : CrossAt x y w) (hw : w ∈ U) {i j : Fin 3}
+    (hi : InnerAt (D.piece i) w) (hj : OuterAt (D.piece j) w) {τ : CircleSide} {η : ℝ} (hη : 0 < η)
+    (hin : ∀ᵐ z, z ∈ ball w η → z ∈ τ.region y → dist z x < 1 → c z = D.label i)
+    (hout : ∀ᵐ z, z ∈ ball w η → z ∈ τ.region y → 1 < dist z x → c z = D.label j) :
+    ∃ w' ∈ sphere x 1, w' ≠ w ∧ ∃ η' > 0,
+      D.piece i ∩ ball x η' ⊆ closedBall w 1 ∩ closedBall w' 1 ∧
+        Disjoint (D.piece j ∩ ball x η') (ball w 1 ∪ ball w' 1) ∧
+        closure (D.piece i) ∩ closure (D.piece j) ∩ ball x η' = {x} := by
   sorry
 
-/-! ## The four statements for any finite label type, from the cover hypothesis -/
+/-- **A filled side defeats fullness**: under the hypotheses of `ThreePiece.exists_second_unit_point_of_ae_side` the
+edge of the pieces `i` and `j` is the point `x` near `x`, so the decomposition is not full. -/
+theorem ThreePiece.not_isFull_of_ae_side {U : Set ℂ} {c : ℂ → α} (hU : IsOpen U) (hc : AeProperOn U c)
+    {x y w : ℂ} (D : ThreePiece U c x) (hcross : CrossAt x y w) (hw : w ∈ U) {i j : Fin 3}
+    (hi : InnerAt (D.piece i) w) (hj : OuterAt (D.piece j) w) {τ : CircleSide} {η : ℝ} (hη : 0 < η)
+    (hin : ∀ᵐ z, z ∈ ball w η → z ∈ τ.region y → dist z x < 1 → c z = D.label i)
+    (hout : ∀ᵐ z, z ∈ ball w η → z ∈ τ.region y → 1 < dist z x → c z = D.label j) : ¬ D.IsFull := by
+  sorry
+
+/-- **One label cannot fill a side that the cover gives to it alone**: let `D` be a decomposition at `x`, the unit
+circles about `x` and `y` crossing at `w ∈ U`. If near `w`, on a side `τ` of `S(y)`, almost every point on the side
+`σ.flip` of `S(x)` has the label of the piece `j`, then some other piece is not on the closed side `σ` of `S(w)`.
+(Otherwise the cover gives the side `σ.flip` of `S(w)` near `x` to the label of `j`,
+`ThreePiece.ae_label_of_forall_onSide`; for a point `w' ≠ w` of `S(x)` near `w` on that side of `S(y)`,
+`AeProperOn.ae_ne_of_ae_region` at the centre `x` with the far end `w'` takes that label off the side `σ` of `S(w')`
+near `x`; and the circles `S(w)`, `S(w')` cross at `x`, so the region on the side `σ.flip` of the first and `σ` of
+the second has positive measure there.) -/
+theorem ThreePiece.exists_ne_not_onSide_of_ae_side {U : Set ℂ} {c : ℂ → α} (hU : IsOpen U) (hc : AeProperOn U c)
+    {x y w : ℂ} (D : ThreePiece U c x) (hcross : CrossAt x y w) (hw : w ∈ U) {j : Fin 3} {σ τ : CircleSide} {η : ℝ}
+    (hη : 0 < η) (hfill : ∀ᵐ z, z ∈ ball w η → z ∈ τ.region y → z ∈ σ.flip.region x → c z = D.label j) :
+    ∃ i, i ≠ j ∧ ¬ OnSide σ (D.piece i) w := by
+  sorry
+
+/-! ## The four statements at any label type, from the cover hypothesis -/
 
 namespace ClosePair
 
 variable {U : Set ℂ} {c : ℂ → α} {x y w : ℂ}
 
 /-- C124-FORCED-PIECES from the cover hypothesis: one member separates. -/
-theorem separatesAt_or [Finite α] (hU : IsOpen U) (hc : AeProperOn U c) (C : ClosePair U c x y) (hw : w ∈ U)
+theorem separatesAt_or (hU : IsOpen U) (hc : AeProperOn U c) (C : ClosePair U c x y) (hw : w ∈ U)
     (hwu : IsCommonUnitPoint x y w)
     (hcover : ∀ ℓ : α, (∃ i, C.left.label i = ℓ) ∨ ∃ j, C.right.label j = ℓ) :
     C.left.SeparatesAt w ∨ C.right.SeparatesAt w := by
   sorry
 
 /-- C124-LONE from the cover hypothesis. -/
-theorem lone_of_cover [Finite α] (hU : IsOpen U) (hc : AeProperOn U c) (C : ClosePair U c x y) (hw : w ∈ U)
+theorem lone_of_cover (hU : IsOpen U) (hc : AeProperOn U c) (C : ClosePair U c x y) (hw : w ∈ U)
     (hwu : IsCommonUnitPoint x y w)
     (hcover : ∀ ℓ : α, (∃ i, C.left.label i = ℓ) ∨ ∃ j, C.right.label j = ℓ) (hy : ¬ C.right.SeparatesAt w) :
     ∃ σ : Equiv.Perm (Fin 3), C.left.OneOfEach w σ ∧
@@ -214,14 +265,27 @@ theorem lone_of_cover [Finite α] (hU : IsOpen U) (hc : AeProperOn U c) (C : Clo
 
 /-- **A full member makes the other member separate** (the finer form of C124-BOTH's first clause): if `y` does not
 separate at `w`, the inner and the outer piece of `x` meet at `x` only (`lone_of_cover`), so `x` is not full. -/
-theorem separatesAt_right_of_isFull [Finite α] (hU : IsOpen U) (hc : AeProperOn U c) (C : ClosePair U c x y)
-    (hw : w ∈ U) (hwu : IsCommonUnitPoint x y w)
+theorem separatesAt_right_of_isFull (hU : IsOpen U) (hc : AeProperOn U c) (C : ClosePair U c x y) (hw : w ∈ U)
+    (hwu : IsCommonUnitPoint x y w)
     (hcover : ∀ ℓ : α, (∃ i, C.left.label i = ℓ) ∨ ∃ j, C.right.label j = ℓ) (hfx : C.left.IsFull) :
     C.right.SeparatesAt w := by
   sorry
 
-/-- C124-FOUR from the cover hypothesis. -/
-theorem presentAt_eq [Finite α] (hU : IsOpen U) (hc : AeProperOn U c) (C : ClosePair U c x y) (hw : w ∈ U)
+/-- **A full member keeps the other member's inner and outer labels present**: let each member have one inner, one
+outer and one crossing piece at `w`, and let `y` be full. Then the labels of the inner and of the outer piece of `x`
+are present at `w`. (If one of them were absent near `w`, its side of `S(x)` would be filled by the inner label of
+`y` inside `S(y)` and the outer label of `y` outside it: `ThreePiece.not_isFull_of_ae_side` at `y`.) -/
+theorem label_mem_presentAt_of_isFull_right (hU : IsOpen U) (hc : AeProperOn U c) (C : ClosePair U c x y)
+    (hw : w ∈ U) (hwu : IsCommonUnitPoint x y w)
+    (hcover : ∀ ℓ : α, (∃ i, C.left.label i = ℓ) ∨ ∃ j, C.right.label j = ℓ) (hfy : C.right.IsFull)
+    {σ τ : Equiv.Perm (Fin 3)} (hσ : C.left.OneOfEach w σ) (hτ : C.right.OneOfEach w τ) :
+    C.left.label (σ 0) ∈ presentAt U c w ∧ C.left.label (σ 1) ∈ presentAt U c w := by
+  sorry
+
+/-- C124-FOUR from the cover hypothesis: the crossing labels are almost nowhere near `w`
+(`IsPieceAt.ae_ne_of_crossingAt`), every other label is one of the four, and each of the four is present
+(`label_mem_presentAt_of_isFull_right`, for the pair and for the pair in the other order). -/
+theorem presentAt_eq (hU : IsOpen U) (hc : AeProperOn U c) (C : ClosePair U c x y) (hw : w ∈ U)
     (hwu : IsCommonUnitPoint x y w)
     (hcover : ∀ ℓ : α, (∃ i, C.left.label i = ℓ) ∨ ∃ j, C.right.label j = ℓ) (hfx : C.left.IsFull)
     (hfy : C.right.IsFull) {σ τ : Equiv.Perm (Fin 3)} (hσ : C.left.OneOfEach w σ) (hτ : C.right.OneOfEach w τ) :
@@ -245,7 +309,7 @@ the open unit disc about w; the edge of those two pieces lies on S(w)."
 Clause by clause: `hU`, `hc`; `C` (the pair with its two decompositions); `hw`, `hwx`, `hwy`; the disjunction is
 "x or y separates" with its two pieces `i` (inner) and `j` (outer) named, and their edge on the unit circle. **The
 number six is spent in `ClosePair.exists_label_eq`**, and nowhere else: `ClosePair.separatesAt_or` is the statement at
-any finite label type whose labels are all carried by the six pieces. The cover clause of the two decompositions
+any label type whose labels are all carried by the six pieces. The cover clause of the two decompositions
 (`null_diff`) is not read. Inhabitant of the hypotheses: `exists_closePair_not_separatesAt`
 (`Plane/ClosePairModel`). -/
 theorem forced_pieces {U : Set ℂ} {c : ℂ → Fin 6} (hU : IsOpen U) (hc : IsWeakColouringOn U c) {x y w : ℂ}
@@ -293,14 +357,17 @@ theorem both_separate {U : Set ℂ} {c : ℂ → Fin 6} (hU : IsOpen U) (hc : Is
 contains an arc of S(w) with an end at the member: no common unit point of a close complementary pair of sector
 points is saved by one member alone."
 
-`D.Saves w`: some edge of the decomposition contains an arc of the unit circle about `w` with an end at the point.
-A sector point is full (`ThreePiece.IsSector.isFull`), so both separate; the edge of the inner and the outer piece
-lies on `S(w)` and contains an arc from the point (`ThreePiece.IsSector.exists_arc_subset_edge` — the θ-lemma, plane
-topology), and an arc on a circle from a point contains an arc of the circle from it. Inhabitant of the hypotheses:
-`exists_closePair_full` (`Plane/ClosePairModel`). -/
+**Stated for what the clause reads of a sector point**: a decomposition with arc edges (`ThreePiece.HasArcEdges` —
+every edge contains an arc from the point). `D.Saves w`: some edge contains an arc of the unit circle about `w` with
+an end at the point. An arc-edged member is full, so both separate (`both_separate`); the edge of the inner and the
+outer piece lies on `S(w)` and contains an arc from the point, and an arc on a circle from a point contains an arc of
+the circle from it (`ThreePiece.hasUnitArcFrom_of_arc_subset_sphere`). The clause in the claim list's own words, for
+its sector points, is `both_saved_of_isSector` (`Plane/SectorPoint`), over one fact of plane topology that is a leaf
+there. Inhabitant of the hypotheses: `exists_closePair_full` (`Plane/ClosePairModel`), whose members' edges are arcs
+of unit circles by construction. -/
 theorem both_saved {U : Set ℂ} {c : ℂ → Fin 6} (hU : IsOpen U) (hc : IsWeakColouringOn U c) {x y w : ℂ}
-    (C : ClosePair U c x y) (hw : w ∈ U) (hwx : dist w x = 1) (hwy : dist w y = 1) (hsx : C.left.IsSector)
-    (hsy : C.right.IsSector) : C.left.Saves w ∧ C.right.Saves w := by
+    (C : ClosePair U c x y) (hw : w ∈ U) (hwx : dist w x = 1) (hwy : dist w y = 1) (hax : C.left.HasArcEdges)
+    (hay : C.right.HasArcEdges) : C.left.Saves w ∧ C.right.Saves w := by
   sorry
 
 /-- **C124-FOUR** (`data/fs124/claims-K2.md`): "In the setting of C124-FORCED-PIECES let x and y be full, each with

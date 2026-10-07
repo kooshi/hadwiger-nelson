@@ -17,13 +17,17 @@ The definitions of `data/fs124/claims-K2.md` ("Definitions, stated once") that C
 * `D.edge i j = cl (P i) ∩ cl (P j) ∩ N` — the edges; `D.SeparatesAt w` — an inner and an outer piece at `w`;
   `D.OneOfEach w σ` — exactly one inner, one outer and one crossing piece, named by a permutation `σ` of the pieces;
   `D.IsFull` — `x` is a limit of points other than `x` of every edge; `D.Saves w` — some edge contains an arc of the
-  unit circle about `w` with an end at `x` (`HasUnitArcFrom`); `D.IsSector` — the pieces are the three components of
-  a disc about `x` cut along three arcs from `x` to its rim.
+  unit circle about `w` with an end at `x` (`HasUnitArcFrom`); `D.HasArcEdges` — every edge contains an arc from `x`
+  (an injective continuous image of `[0, 1]` starting at `x`). An arc-edged decomposition is full
+  (`ThreePiece.HasArcEdges.isFull`). The claim list's **sector point** — the pieces are the three components of a
+  disc about `x` cut along three arcs from `x` to its rim — is `ThreePiece.IsSector` in `Plane/SectorPoint`; that a
+  sector point has arc edges is the θ-curve fact of plane topology, one leaf of that module, and nothing here or in
+  `Plane/ClosePair` reads it.
 
 **The two kinds of model** (the claim list distinguishes them, and C124-LONE and C124-BOTH turn on it):
 * **an ordinary three-sector point** — `sectorPoint`: at `0`, the three sectors cut by the rays along `1`, `i` and
-  `−1 − i`, in the disc of radius `1/4`. It is a sector point and it is full (`sectorPoint_isSector`,
-  `sectorPoint_isFull`); each edge is a ray.
+  `−1 − i`, in the disc of radius `1/4`. Each edge is a radius: it has arc edges by construction
+  (`sectorPoint_hasArcEdges`), hence it is full.
 * **a three-piece point by the letter only** — `petalPoint`: at `0`, two triangular petals `|Im z| < ± Re z < 1/8` and
   the rest of the disc of radius `1/4`, which is connected around their far sides. The closures of the two petals meet
   at `0` only: it is **not full** (`petalPoint_not_isFull`). This is the claim list's bowtie whose two sectors of one
@@ -44,7 +48,8 @@ of U with a neighbourhood that is, up to a null set, the union of three connecte
 closure and one label almost everywhere, the three labels distinct"; "a decomposition at a three-piece point x is a
 choice of the neighbourhood N and the three disjoint connected open sets P_0, P_1, P_2 of the definition". -/
 structure ThreePiece (U : Set ℂ) (c : ℂ → α) (x : ℂ) where
-  /-- The neighbourhood `N`. -/
+  /-- The neighbourhood `N`: any neighbourhood of `x` inside `U` that is the union of the pieces up to a null set
+  (it need not be open). -/
   nbhd : Set ℂ
   /-- The three pieces. -/
   piece : Fin 3 → Set ℂ
@@ -172,29 +177,13 @@ def IsFull (D : ThreePiece U c x) : Prop := ∀ i j, i ≠ j → x ∈ closure (
 `x`. -/
 def Saves (D : ThreePiece U c x) (w : ℂ) : Prop := ∃ i j, i ≠ j ∧ HasUnitArcFrom (D.edge i j) w x
 
-/-- The decomposition is that of a **sector point**: "for some r > 0 there are three arcs J_0, J_1, J_2 (homeomorphic
-images of [0, 1]) from x to the circle ∂B(x, r), inside B(x, r) but for their far ends and disjoint but for x, such
-that the three components of B(x, r) ∖ (J_0 ∪ J_1 ∪ J_2) are the pieces". An arc is an injective continuous map of
-`[0, 1]`; that the three components are the pieces is said as: each piece is a component, and the pieces fill the
-complement. -/
-def IsSector (D : ThreePiece U c x) : Prop :=
-  ∃ r > 0, ∃ J : Fin 3 → C(unitInterval, ℂ),
-    (∀ m, Function.Injective (J m)) ∧ (∀ m, J m 0 = x) ∧ (∀ m, dist (J m 1) x = r) ∧
-      (∀ m t, t ≠ 1 → dist (J m t) x < r) ∧
-      (∀ m m' s t, m ≠ m' → J m s = J m' t → J m s = x) ∧
-      (∀ i, ∃ z ∈ D.piece i, D.piece i = connectedComponentIn (ball x r \ ⋃ m, range (J m)) z) ∧
-      ⋃ i, D.piece i = ball x r \ ⋃ m, range (J m)
+/-- The decomposition has **arc edges**: every edge contains an arc from `x` — an injective continuous image of
+`[0, 1]` that starts at `x`. (What the second clause of C124-BOTH reads of a sector point.) -/
+def HasArcEdges (D : ThreePiece U c x) : Prop :=
+  ∀ i j, i ≠ j → ∃ γ : C(unitInterval, ℂ), Function.Injective γ ∧ γ 0 = x ∧ range γ ⊆ D.edge i j
 
-/-- **The θ-lemma** (plane topology, not routine — `plans/FS124-kernel-plan-2.md` § the sector clause): at a sector
-point the edge of every two pieces contains an arc from `x` — an initial part of one of the three arcs: each of three
-arcs from the centre of a disc to its rim borders exactly two of the three complementary components, and every two
-components share one. -/
-theorem IsSector.exists_arc_subset_edge {D : ThreePiece U c x} (h : D.IsSector) {i j : Fin 3} (hij : i ≠ j) :
-    ∃ γ : C(unitInterval, ℂ), Function.Injective γ ∧ γ 0 = x ∧ range γ ⊆ D.edge i j := by
-  sorry
-
-/-- "A sector point is full." -/
-theorem IsSector.isFull {D : ThreePiece U c x} (h : D.IsSector) : D.IsFull := by
+/-- An arc-edged decomposition is full: the points of an arc from `x` other than `x` tend to `x`. -/
+theorem HasArcEdges.isFull {D : ThreePiece U c x} (h : D.HasArcEdges) : D.IsFull := by
   sorry
 
 /-- An arc from a point `x` of the unit circle about `w`, lying on that circle, contains an arc of the circle with an
@@ -244,13 +233,13 @@ noncomputable def sectorPoint : ThreePiece (ball (0 : ℂ) (1 / 4)) sectorCol 0 
   label_injective := by sorry
   null_diff := by sorry
 
-/-- The ordinary three-sector point is a sector point: the three arcs are the radii along `1`, `i`, `−1 − i`. -/
-theorem sectorPoint_isSector : sectorPoint.IsSector := by
+/-- The ordinary three-sector point has arc edges: the edge of two sectors holds the radius between them. -/
+theorem sectorPoint_hasArcEdges : sectorPoint.HasArcEdges := by
   sorry
 
-/-- The ordinary three-sector point is full: each edge is a radius. -/
-theorem sectorPoint_isFull : sectorPoint.IsFull := by
-  sorry
+/-- The ordinary three-sector point is full. -/
+theorem sectorPoint_isFull : sectorPoint.IsFull :=
+  sectorPoint_hasArcEdges.isFull
 
 /-! ## A three-piece point by the letter only -/
 

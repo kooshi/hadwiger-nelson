@@ -290,6 +290,7 @@ import Proofs.HadwigerNelson.Plane.OnePiece
 import Proofs.HadwigerNelson.Plane.ThreePiece
 import Proofs.HadwigerNelson.Plane.ClosePair
 import Proofs.HadwigerNelson.Plane.ClosePairModel
+import Proofs.HadwigerNelson.Plane.SectorPoint
 
 /-!
 # Proofs
