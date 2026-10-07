@@ -152,7 +152,7 @@ cites under your `data/` folder, never in `/tmp`. Nothing with a `sorry` reaches
 A record job has written files on `main` since this brief was made, and they describe the derivations as the fenced files
 do. **Until your phase-1 plan is committed and I have replied, the fence of § Fences also closes**: `plans/FS124-derivation.md`,
 `plans/FS124-Z1-record.md`, everything under `data/fs124/z1/`, `plans/STUB-covering-pairs.md`, the blocks dated 2026-10-07 in
-every other file whose name begins `plans/STUB-`, the paragraphs dated 2026-10-07 in `plans/FS132-derivation.md`, and
+every other stub file under `plans/` (the files whose names begin with STUB), the paragraphs dated 2026-10-07 in `plans/FS132-derivation.md`, and
 `data/fs124/claims-K1.md`'s neighbour `data/fs124/claims.md` as before. None of these is in your worktree; they are on the
 main working tree, which you have no need to read before your commit. Nothing else in the brief changes, and this amendment
 carries no content from those files. The rule on agents is unchanged: you start none (standing rule 1: delegation is one
