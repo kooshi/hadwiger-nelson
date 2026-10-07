@@ -463,3 +463,9 @@ piece of either member onto a side of `S(w)`. The added spec example states it t
 - **The Proof Atlas** — at the landing, the nodes of C124-FORCED-PIECES, -LONE, -BOTH (first clause; second clause for
   arc-edged decompositions) and -FOUR move from [hand] to [kernel], each with its inhabitant named; C124-BOTH's
   second clause for sector points stays [hand] at one step. Nothing moves before the landing.
+
+## The build as committed, and the report (added with the report's commit)
+
+After Stage 4's commit (`99e179aaf`) the same build command, on the tree as committed: exit 0 — `build: OK — all 1854
+modules already up to date, nothing built, 1 module(s) with warnings, 2s`; the one warning is the θ-leaf
+(`data/fs124/i4/logs/build-4-as-committed.log`). The report: `data/fs124/reports/FS124-I4.md`.
