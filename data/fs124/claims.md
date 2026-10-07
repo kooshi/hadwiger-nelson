@@ -152,3 +152,18 @@ at the end.*
   **C124-FORCED-SEVEN: derived**, exact — the failure at seven. **C124-EVERY-DIRECTION** (the kernel planner's question, taken
   as an entry): derived. Still to come: the save by one member (C124-LONE, C124-BOTH), C124-FOUR, C124-EDGE, C124-SECOND.
 
+- **2026-10-07 (14:51 UTC; after FS124-E2's hand-back, its Stages 5–6; FS-124 inventory item 21): the second round is at its
+  verdicts** — 14 entries, 13 derived and 1 refuted, each [hand] or derived from a [hand] entry, one mind, kernel pending, the
+  reading [tools]; none fixes a value of `χ(ℝ²)`. **C124-LONE: derived. C124-BOTH: derived** — for full members both separate;
+  for sector points no common unit point of a close complementary pair is saved by one member alone. **C124-FOUR: derived.
+  C124-EDGE: derived as posed. C124-SECOND: derived, for sector points.** **The wording of C124-FORCED, fixed**: as posed for
+  every three-piece point by the letter it is **refuted** (the entry C124-FORCED-AS-POSED); the claim is the piece form
+  (C124-FORCED-PIECES) and, with "saved by" and "edges", the form for sector points (C124-FORCED). **Three statements added by
+  the deriver, derived with them** (copied by script from its entries):
+
+  **C124-CENTRE-HALF** — statement: Let c be a weak k-colouring of an open set U, q and z points of U with |q − z| = 1, ρ > 0 with B(z, ρ) ⊂ U, and a a label. If almost every point of B(z, ρ) with distance less than 1 from q has the label a, there is η > 0 such that almost every point p of B(q, η) with |p − z| > 1 has a label other than a; if almost every point of B(z, ρ) with distance more than 1 from q has the label a, there is η > 0 such that almost every point p of B(q, η) with |p − z| < 1 has a label other than a. *Not claimed (C124-CENTRE-HALF):* anything about the other collar; that (q, z) is tight
+
+  **C124-LONE-EXISTS** — statement: There is a weak six-colouring of an open set U, by formula, with a close complementary pair (x, y) of three-piece points and a common unit point w of the pair in U at which y does not separate. *Not claimed (C124-LONE-EXISTS):* a value of the chromatic number of the plane — the object lives on four flowers of radius at most about 1/4 and one band and fixes none; that it extends to any larger set; a save by one member at a full member (C124-BOTH excludes it); the card's pattern "exactly one edge of x on the circle" — here no edge of x lies on S(w); that x is a three-piece point in any sense but the letter's (its repeated label is connected only through the band)
+
+  **C124-EDGE-CLOSED** — statement: There is no weak six-colouring of an open set that contains the point w = (1/4, √15/4 + √3/2), the three arches U_{−1}, U_0, U_1 of FS-112's strip and the parts of its tiles T_0, T_1, T_2 below the line y = √15/4, and that gives almost every point of each of these six sets the strip's label. *Not claimed (C124-EDGE-CLOSED):* anything about colourings that change the strip below y = √15/4; anything at seven (a seventh label takes the point); the same at the points (1/4 + k/2, √15/4 + √3/2) except through the strip's translation by 1/2, which permutes its labels (not checked against the label tables by this job beyond k = 0); that no six-coloured object extends above the strip's top edge
+

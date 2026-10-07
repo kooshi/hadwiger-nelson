@@ -419,4 +419,174 @@ between two colours that is an arc of the unit circle about a point one unit awa
     statement that holds at six and fails at seven** — derived, one mind, by hand — and it is said so, with what it does
     not claim: that any weak six-colouring has such a pair. (d) The planner's question is answered and relayed. (e) Kooshi
     is told, with the correction to what I reported from last night ("must be at least 2 apart, with the same escape").
+19. **FS124-K1 done (434k and 60 minutes by the task notice): the radius clause is typed with no statement defect, planned
+    leaf by leaf, and priced from eight leaves taken through the build** (planner; record `plans/FS124-kernel-plan.md`
+    Stages 1–5 on branch `fs124-wk1`, tip `28a82429`; its report is its hand-back). 57 declarations in three modules, 8
+    proved (7 printing the standard three axioms), 49 open; build exit 0; architecture check passing. **Phase 2**: "the
+    deriver's route and mine are one proof (the deriver's bijection of the motion group onto the unit pairs is right
+    multiplication in my coordinates); the implementer builds this plan's form". **A correction of its own**: an
+    observation it had offered as its own ("fragments at every radius … with no periodization") is the deriver's; its own
+    is only that the fragment's colouring need not be measurable. **For the deriver's entry**: one clause of the hand
+    argument ("measurable (`c` is)") is used by no later line and can go. **Not stated in the module**: the
+    every-direction statement (it waits for a consumer and for a lemma the exclusion's port brings); an exhibited radius
+    at three colours (one line over a module of this library, "not planned"). **Its slips, disclosed**: one object file
+    written into the shared scratch directory and removed; a commit subject seen before its phase-1 commit. **A note on my
+    recipe**: the build I copied into its worktree from `main`'s was 136 modules behind — its first build took twenty
+    minutes; a worktree's build is to be copied from a tree built today. **My receipt**: the tip is on `origin`, its
+    working tree clean; the three modules' open leaves counted by me (27, 14, 8); its Stage 5 and its § 4.4 read whole.
+    Not checked by me: the eight proved leaves' prints. **Filed from its drafts now**: the dated line in the kernel claim
+    list (verbatim); one line in `LEAN.md` § Searching — Lean and one in § Building. **Held until the landing in flight
+    is back**: its sentence for the front page on which half of the disc criterion needs the import.
+20. **FS124-I1 launched into its slot** (14:5x UTC, by its brief's commit `fc77e37e`; `debruijn-implementer`, Opus; brief
+    `data/fs124/briefs/FS124-I1-radius.md`, gate exit 0; the planner's own worktree and branch `fs124-wk1`, at
+    `28a82429`; record `plans/FS124-I1-implementation.md` there): the 49 leaves in the planner's order, statements fixed
+    with no permissions to change them; the axioms of every theorem printed, the two join theorems' lines to me; no
+    landing — a landing job takes the branch when the one in flight is back.
+21. **FS124-E2 done (523k and 46 minutes by the task notice): the second round is in — the map class's rhombus theorem holds
+    in measure for three-sector points, by another route; a save by one member exists only at a bowtie; the strip is
+    closed at its top edge** (deriver; record `plans/FS124-E2-derivation.md`, six stages, 14 entries — 13 derived, 1
+    refuted — 8 controls; report `data/fs124/reports/FS124-E2.md`; commits to `d077b010`). Beyond items 16 and 18:
+    **C124-LONE** — if one member does not separate, the other has exactly one inner, one outer and one crossing piece,
+    the point's neighbourhood on one side is split along its unit circle between the two labels, and near that member
+    its inner and outer pieces lie in two opposite lenses and "their closures meet at `x` only"; **C124-BOTH** — so for
+    full members both separate, and **for sector points no common unit point of a close complementary pair is saved by
+    one member alone**: "the measurable form of FS112-N3-COR3 (row 135) … by another route"; **C124-FOUR** — exactly four
+    labels at a point saved by two full members; **C124-LONE-EXISTS** — the one-member save by formula, a held fragment
+    with a thin band: "four flowers and a band, no value", its saver a three-piece point "only by the letter";
+    **C124-EDGE-CLOSED** — "there is no weak six-colouring of an open set that contains the point `(1/4, √15/4 + √3/2)`,
+    the three arches … and the parts of its tiles … below the line, and that gives almost every point of each of these six
+    sets the strip's label": six uses of the round's lemma bar all six labels near the point, exact comparisons in a
+    number field — **local to the strip's family; no regularity assumed above the line**; **C124-SECOND** — a pair's two
+    saves use different edges at each member, four labels at each point with two in common, a cyclic order of the six
+    labels. **Its corrections owed, drafted**: a dated line under the first round's rhombus entry (its class is inhabited:
+    the lone save, with a one-point set on the circle); the claim list's wording of the forcing claim; line 14 of the
+    search queue declined. **Its debts**: prior art recalled, not read (a topological lemma; the release's every-direction
+    lemma); **"a second mind is owed on C124-LONE's Step II before C124-BOTH, C124-FOUR or C124-EDGE-CLOSED is built on
+    outside this milestone"**. **A question it leaves**: whether a three-sector vertex of an arc map with a cusp is a
+    sector point in its sense. **Its slips, disclosed**: two stages committed together; a count corrected in place; two
+    reader defects and a fault that did not fire, each repaired before a count was kept. **My receipt**: the commits are
+    on `main`; **its gate run by me on the whole record** — exit 0, 0 failures, 0 warnings, 14 entries, 8 controls each
+    firing; the statement, uses, not-claimed, verdict and grade fields of seven entries read (the forcing claim's three,
+    C124-LONE, C124-BOTH, C124-FOUR, C124-SECOND, the lone save, the closed edge). Not checked by me: C124-LONE's second
+    step; the exact comparisons; the band.
+    **Scored**: the asking lane's "one edge of each member forced 0.2; a save by one member exists 0.45; neither 0.35" —
+    **the first, for sector points**; the second only at a bowtie by the letter; its "every tight arc of kind both … an
+    edge of a save 0.6" missed (the six-colour fragment).
+    **Rulings.** (a) The verdicts and the three added statements enter the claim list; **the forcing claim's wording is
+    fixed** there. (b) **The second mind it asks for is the kernel lane's planner, blind first** — the milestone's second
+    module: the one lemma, the round's lemma on one piece and one side, the centre's statement collar by collar, the
+    forcing on pieces, C124-LONE, C124-BOTH, C124-FOUR — briefed when the first module's implementer frees its slot;
+    alternative: a blind verifier; that is outside the standard workflow and Kooshi's to order. (c) **The asking lane
+    takes the freed slot** (FS124-P3): two rounds are in, the frame has been corrected twice, and the next question —
+    whether the saves close up, what a six-colour point forces, or the record job — is its to pose. (d) Line 14 of the
+    search queue is declined in its words. (e) The dated line under the first round's entry is owed at the record job.
+22. **FS124-P3 launched** (14:52 UTC, read from the clock; `poros`; brief `data/fs124/briefs/FS124-P3-round-two.md`, gate exit 0;
+    record `plans/POROS-2026-10-07-fs124-round2.md`): what the two rounds settled, in one table; **its verdict — a third
+    round's card, or "record job" with what follows**; the six-colour point the frame leaves out; the held search line;
+    three lines for Kooshi. Its brief asks of every claim it poses the check the last card lacked: the held theorem or
+    entry it would restate. Slots: it, the landing, the radius module's implementer.
+23. **FS124-I1, first message (15:04 UTC): the radius clause is proved on its branch — all 49 leaves, and the disc criterion
+    prints the standard three axioms and the one declared outside theorem on Borel transfer, nothing else** (branch
+    `fs124-wk1`, commit `87267e70`; build exit 0, no warning, no `sorry`). Its two lines: `colorable_iff_forall_ball` and
+    `seven_le_chromaticNumber_plane_iff_exists_ball`, each `[propext, Classical.choice, Quot.sound,
+    Outside.OAI158.proper_to_borel_weak]`. Two more theorems on that import, one on the five-colour import, **the other 52
+    of the 57 on the standard three alone** — (up) and its contrapositive among them; no record on both imports. **"The
+    halves, each proved separately … and printed"**: seven implies a disc with no weak six-colouring, and discs imply
+    colourable, on the standard three; a disc with none implies seven, and colourable implies discs, on the import. **No
+    statement changed**: 72 of 72 stored terms identical before and after, by a check whose control fired. One route
+    changed (an isometry built inside a proof to add no import). **My receipt**: the commit is on `origin`; the three
+    modules at that commit hold no `sorry` (counted by me); **the criterion's statement read by me at that commit** —
+    `7 ≤ (unitDistance ℂ).chromaticNumber ↔ ∃ R > 0, ¬ ∃ c : ℂ → Fin 6, IsWeakColouringOn (ball 0 R) c` — with the
+    definition under it (measurable, and the monochromatic unit pairs with both ends in the set a null set); its axiom
+    line found in the job's print. Not checked by me: the build log; the other 55 prints. **By the announcement rule**:
+    kernel-checked on a branch, **not held** — the full gate is the landing's, after the one in flight. **What it is, said
+    once**: with this library's interval, the Hadwiger–Nelson problem is the statement that some disc has no measurable
+    six-colouring proper at almost every unit pair (seven) or that every disc has one (six) — a theorem of this library on
+    one declared outside theorem, on a branch. It moves no value.
+24. **FS124-I1 done (389k and 31 minutes by the task notice): the radius clause's module is proved whole on its branch and
+    ready for a landing** (implementer; record `plans/FS124-I1-implementation.md` on branch `fs124-wk1`, tip `80ee1983`,
+    working tree clean; its report is its hand-back). 57 of 57 theorems; build exit 0 with no warning; **no statement,
+    definition, docstring or import changed and no declaration added** (72 of 72 stored terms identical, control fired);
+    52 on the standard three, four on the Borel-transfer import, one on the five-colour import, none on both — as the
+    planner listed; its block in the axioms script (on the branch: 6,585 clean, 23 imported); architecture check,
+    duplicate-name check and the guarded lint pass; no binder unread by its proof (asked per theorem, with a planted
+    control). **Price**: about half an hour, 204 lines, one retry on one leaf — the planner's estimate held. **For the
+    landing**: counts measured on the branch's base (clean +52, imported +5; the assumptions' `rests` +5; vacuity
+    declarations +78, one new site, nothing vacuous or unknown); **twelve drafts with their slots, a new ledger row among
+    them**; the IMPORTED section's prose in the axioms script outside its block. **Its slips, disclosed**: one build where
+    the brief asked one per module; no control on the lint itself; its checkers under `data/`. **My receipt**: item 23's,
+    and the tip and clean tree read on `origin`. **Its held points, ruled**: its checkers stay where they are (a landing is
+    in flight; `tools/` is not written now); the per-module builds are not re-run — the final build on the committed tree
+    stands for them. **Credit**: a stored-term check that no statement moved; the two halves of the criterion printed
+    apart; the planner's route corrected where its check had run under a wider import.
+    **Next for this branch**: its landing, after the one in flight (FS132-L2) is back and filed — the two do not touch the
+    same Lean files, and a second landing in flight at once is not run. **Into its slot now: the kernel planner for the
+    second module, blind first** (FS124-K2; kernel claim list `data/fs124/claims-K2.md`, fixed 15:15 UTC: nine statements
+    — the one lemma; the centre's statement, whole and collar by collar; the wide form at a point one unit from a far end;
+    the second round's lemma on one piece and one side; the forcing on pieces; what a save by one member forces; both
+    members for full ones; four labels) — **the second mind the second round's deriver asked for**.
+25. **FS124-K2 launched** (15:17 UTC, read from the clock; `debruijn`, the kernel lane's planner, **blind first**; brief
+    `data/fs124/briefs/FS124-K2-kernel-plan.md`, gate exit 0 with no warning; kernel claim list `data/fs124/claims-K2.md`;
+    worktree and branch `fs124-wk2`, cut by me from `fs124-wk1` at `80ee1983`, build copied from that tree; record
+    `plans/FS124-kernel-plan-2.md` there): nine statements of the two rounds. **A slip of mine, caught before launch**: the
+    brief's first draft told it that one statement "rests on a step its own author has asked a second mind to look at" and
+    named the clause — a confidence about the derivation, in a fenced brief; removed, so that its second look is not
+    pointed. **When its phase-1 commit's message arrives**: reply to lift the fence, naming
+    `plans/FS124-E1-derivation.md` Stage 4 and `plans/FS124-E2-derivation.md` Stages 4–5 — **and then name the step the
+    deriver flagged** (C124-LONE's second step), as the first planner was told after its fence lifted. The six most recent
+    commit subjects on `main` were read by me as it would see them: none says anything of the nine statements.
+26. **FS124-P3, its verdict (15:19 UTC logged; commit `751b4749`; record `plans/POROS-2026-10-07-fs124-round2.md` Stages 0–3):
+    "record job" for FS-124, then a successor it minted — no third round at the pair.** **Why no third round**: "every
+    further step at the pair restates a held map entry by one use of the round's lemma" (its § 1.2's table: the partner
+    count, the centre's four colours, the six-colour ring — each a held entry of FS-112 or FS-116); the stub itself had
+    listed these to carry, "and the second card was not written from that list". **What changes the unit**: the strip, the
+    disk and the six-colour flower "each stop at one kind of point" — take a point of four or more labels and two rich
+    points on its unit circle whose labels together are all six: the stop is their second common unit point, at `φ²/√2`,
+    `φ` and `√3` from the centre; the flower's two ring points are four-label points, "so the 'pair of three-label points'
+    frame could not state it"; two of the three are held (two minds), the third read "from FS116-Y2-SIXOFF's words and one
+    reader's output — one mind, not exact". **The successor**: `plans/STUB-covering-pairs.md`, "the point across" — about
+    a point of four or more labels, must some two pieced points of its unit circle whose labels together are all six have
+    a second common unit point, within 2, that no weak six-colouring can contain? Five first claims, each naming the held
+    entry it would restate. Registered: always 0.08; a ring by formula past print 0.12; turns on the ring's type 0.8;
+    decides six against seven 0.03. **Against my framing** ("our map theorem carried to measure"): its § 2.3. **For the
+    record job**: the closed edge's prior-art line misses a held map statement about the same six tiles (row 138's, two
+    minds, blind); the forcing claim's argument reads "every label is a label of a piece at one of the two points", not
+    "two disjoint triples" — it reaches any two rich points whose labels are all six. "No two entries found that cannot
+    both hold; no entry found stated more widely than its argument." **My receipt**: the commit is on `main`; the stub's
+    head, its definitions and its card read by me; its decision card read. Not checked by me: its § 1.2 table against the
+    held entries; its reading of the three stops.
+    **The decision it leaves to me, ruled**: **the record job now** — FS-124's two rounds are filed as one unit and its
+    eight cases pass to the successor — alternative: a third round in place under FS-124's name; why the record job: the
+    asking lane's own table says a third round at the pair would restate held entries; thirty entries are unfiled; the
+    second mind on the one flagged step is already working in the kernel lane; and the successor's unit (rich points of
+    any number of labels) is the one the three held stops share; confidence medium (the asking lane's own: 0.6). **The
+    successor's number is FS-136.** **Kooshi is told, with the alternative**: he chose FS-124 this morning, and may
+    override the move to its successor. **The record job (FS124-Z1) launches into the asking lane's slot at its hand-back;
+    the successor's opening follows when a slot frees after that.**
+27. **FS124-P3 done (461k and 30 minutes by the task notice), and the record job launched into its slot** (asking lane; record
+    `plans/POROS-2026-10-07-fs124-round2.md` Stages 0–4 with an addendum, its gate exit 0; report
+    `data/fs124/reports/FS124-P3.md`; commits to `6f1b2a71`). Beyond item 26: **a fourth held object agrees** — the bowtie
+    fragment stops at such a point too, "in place (its labels not read)"; **what the two rounds settled**, sixteen lines
+    with class and count (its § 2.1), and **eight things not known that a reader might assume** (its § 2.2: that any weak
+    six-colouring has a piece; that three-colour points are of the ordinary kind; that close complementary pairs exist, in
+    measure or in a map; anything with a member of four or more labels; a second mind on anything; a value); **my framing
+    attacked** (its § 2.3): "our map theorem carried to measure" is right, and both alternatives are true of different
+    entries — more, where the lemma on one piece and the forcing on pieces "read no curve and nothing away from the two
+    members"; less, where an arc is concluded and the hypothesis "is a map's three-tile vertex seen locally" — "the
+    dictionary runs both ways, so the map rows are the place to read what is locally true, and measure owes only the
+    piece"; **the six-colour point** is not a second cause: "the same count with members of four labels", the next
+    milestone's; **G97's killing test fired** — an amendment with a demotion record drafted; **the search**: line 11
+    re-posed to run, one new line held, a continuation of the strip declined as a search. **Its own card's miss, said by
+    it**: the second card "was written from a reading of two maps and not from" the stub's own carry-over list, and no
+    earlier asking record names a derivation file of the three map milestones. **Its slips, disclosed**: records opened
+    before its expectations were written; a script's first version printing a tautology as a count; four map entries read
+    at statement and uses lines only; the claim list unread. **My receipt**: the commits are on `main`; its § 4.2 and § 4.3
+    read whole; the stub's head, definitions and card (item 26). Not checked by me: its table of ten map-class steps; its
+    reading of the four stops. **Filed by me, by script**: line 11's fate (to run at the next day's search) and a new held
+    line 15 in `plans/SEARCH-QUEUE.md`. **Held until the landing in flight is back**: its draft re-rank (the successor at
+    rank 1 once this milestone is Derived; clauses for three rows; the top three). **Rulings.** (a) As item 26: the record
+    job. (b) **FS124-Z1 is launched** (15:23 UTC by the clock; `ephodos`; brief `data/fs124/briefs/FS124-Z1-record.md`,
+    gate exit 0): the derivation file from thirty entries, five dated corrections, the stubs, the predictions, the front
+    page's drafts; its commit subjects neutral, because a planner is working blind. (c) **The day's search is spent**
+    (it ran in the night); line 11 goes to tomorrow's Searcher. (d) G97's amendment is the record job's draft to make.
 

@@ -178,6 +178,15 @@ report). The asking lane's banner for this stub — "Absorbed on the measurable 
 C132-M-EXCL; then to the closed list" (`plans/POROS-2026-10-07-fs132-night.md` § Banners) — is drafted, not filed. G86: a kill
 that reads points and distances reaches the Siamese class, and this is the instance.
 
+*Since FS-124 (FS124-Z1, the record job, 2026-10-07; every entry named is in `plans/FS124-derivation.md`, [hand] or derived from [hand] entries, **one mind, kernel pending**):* **no entry of that file assumes a map, simplicity
+or the absence of Siamese pairs.** The pair's statements (§ 3) read three pieces at each of two points and nothing else of the
+colouring, so they apply to a Siamese fragment's three-tile vertices as to any other: C124-FORCED-PIECES wherever two of them
+are a close complementary pair; with an arc, and for both members, where they are sector points (C124-FORCED, C124-BOTH — the
+second resting on C124-LONE, on whose Step II its deriver asks for a second mind). They give this stub no kill: the map class's
+kills at a degree-4 four-colour vertex are stated non-Siamese and simple, and in the asking lane's reading "'two pieces of one
+label within 1' is no contradiction in measure until one has a point beyond 1 as well"
+(`plans/POROS-2026-10-07-fs124-round2.md` § 1.2).
+
 ## Carried card (Poros, R2, 2026-10-03; verbatim from `plans/POROS-2026-10-03-close-reread.md` § 2.5)
 
 question: does-a-fragment-bend-keep-the-class

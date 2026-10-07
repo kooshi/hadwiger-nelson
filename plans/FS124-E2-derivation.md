@@ -11,6 +11,18 @@ from `plans/`.*
 *One line per theorem, with its grade and its address; filled as each stage is saved. Every one is [hand] or derived from [hand]
 entries, **one mind, kernel pending**.*
 
+- **C124-EVERY-DIRECTION** — [hand], one mind — Stage 4, § Argument — every direction (the kernel lane's question).
+- **C124-TYPE** — [hand] over the first round's C124-SHADOW-OPEN, one mind — Stage 4, § Argument — one piece, one side.
+- **C124-FORCED-PIECES** — derived from C124-TYPE, one mind — Stage 4, § Argument — four regions, six pieces.
+- **C124-FORCED** (as posed, for sector points) — derived from it, one mind, one topological input recalled — Stage 4, § Argument — sector points.
+- **C124-FORCED-AS-POSED** — **refuted** by the letter: fragment BB with two bands — Stage 4, § Argument — the banded bowtie.
+- **C124-FORCED-SEVEN** — [hand] with an exact check, one mind — Stage 4, § Argument — the honeycomb at seven.
+- **C124-CENTRE-HALF** — [hand] over the first round's argument, one mind; **C124-LONE** — derived, one mind; **C124-BOTH**, **C124-FOUR** — derived from C124-LONE, one mind — Stage 5, § Argument — the save by one member.
+- **C124-LONE-EXISTS** — [hand] on fragment S1's exact check, one mind: a save by one member, at a bowtie, on four flowers and a band — Stage 5.
+- **C124-EDGE** (as posed) — [hand], one mind; **C124-EDGE-CLOSED** — [hand] with an exact check, one mind — Stage 6, § Argument — the strip's top edge.
+- **C124-SECOND** (for sector points) — derived from C124-BOTH and C124-FOUR, one mind — Stage 6, § Argument — the two points of a pair.
+- The reading C124-READ-SAVES is [tools], one mind, and proves nothing: Stage 3.
+
 ## Notation used by every entry
 
 `S(p)` is the unit circle about `p`, `B(p, r)` the open disc, `B̄(p, r)` the closed one. A *weak `k`-colouring*, *present*, *tight
@@ -415,3 +427,271 @@ posed form derived for sector points; by the letter it fails where two pieces me
 lane's "derived as posed 0.8, restated at its wording 0.15": the second.
 
 **Stage 4 — SAVED** (2026-10-07).
+
+## Stage 5 — SAVED: C124-ONE-MEMBER — the save by one member: what it forces, where it is excluded, where it exists; and the labels at a saved point
+
+derivation: C124-CENTRE-HALF
+  statement: Let c be a weak k-colouring of an open set U, q and z points of U with |q − z| = 1, ρ > 0 with B(z, ρ) ⊂ U, and a a label. If almost every point of B(z, ρ) with distance less than 1 from q has the label a, there is η > 0 such that almost every point p of B(q, η) with |p − z| > 1 has a label other than a; if almost every point of B(z, ρ) with distance more than 1 from q has the label a, there is η > 0 such that almost every point p of B(q, η) with |p − z| < 1 has a label other than a.
+  uses only: the argument of C124-CENTRE (`plans/FS124-E1-derivation.md` § Argument — the centre, the straddle, the antipode, "The centre": [hand], one mind — inherited, read whole), which treats its two sentences separately, each from one collar and C124-SHADOW-OPEN
+  not claimed: anything about the other collar; that (q, z) is tight
+  argument: § Argument — the save by one member
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: R7 at a lattice point, as C124-CENTRE's (first round, control `r7-tight`): each of its two counts there is one half of this statement
+  prior art: partly: it is C124-CENTRE with its hypothesis split (G92); C132-SHADOW with a radial direction
+  handoff: de Bruijn — state C124-CENTRE in this form: one collar, one conclusion; the two-collar statement is its conjunction
+
+derivation: C124-LONE
+  statement: In the setting of C124-FORCED-PIECES suppose y does not separate at w. Then x has exactly one inner piece, one outer piece and one crossing piece at w, with labels a and b for the inner and the outer one; there are a side of S(y) and η > 0 such that almost every point of B(w, η) on that side has the label a if it lies inside S(x) and the label b if it lies outside S(x); and there are a point w′ ≠ w of S(x) and η′ > 0 such that inside B(x, η′) the inner piece lies in B̄(w, 1) ∩ B̄(w′, 1), the outer piece is disjoint from B(w, 1) ∪ B(w′, 1), and their closures meet at x only.
+  uses only: C124-TYPE for the six pieces; C124-CENTRE-HALF at the centre x for one far end w′ of S(x) near w, strictly on the chosen side of S(y); that two distinct unit circles through x that are not tangent there cut every small disc about x into four non-empty open sets and meet near x at x only; that the three pieces fill a neighbourhood of x up to a null set
+  not claimed: that a weak six-colouring has a three-piece point, or a close complementary pair; that such a configuration is impossible — it is fragment S1's (C124-LONE-EXISTS); anything about the edges of the crossing piece (one of them may lie on S(w)); that (x, w′) is tight on both sides of S(y)
+  argument: § Argument — the save by one member
+  verdict: derived
+  grade: derived from: C124-FORCED-PIECES, C124-CENTRE-HALF
+  minds: 1
+  model: fragment S1 at w = (1/2, √3/2): y = (1, 0) has pieces crossing, inner, crossing; x = (0, 0) has the piece of label 2 inner, of label 3 outer, of label 1 crossing; the labels at w are 2 and 3, split along S(x); the pieces of labels 2 and 3 are the opposite sectors (60°, 120°) and (240°, 300°) and meet at x only (control `saves-lone`)
+  prior art: partly: for maps it is the content of FS112-N3-COR3's step "One failure is not enough" (`plans/FS112-NB3-verification.md` ll. 125–128: side cones of arcs against N112-U1; statement and that paragraph read, the lemmas under it not) and of FS107-W-TAN's alternative "or include a bowtie"; in measure, with unit circles in place of side cones, not found in print
+  handoff: de Bruijn — the statement as written, after C124-FORCED-PIECES and C124-CENTRE-HALF: a case split on (inner, outer) counts (1, 2), (2, 1), (1, 1) and two inclusions
+
+derivation: C124-BOTH
+  statement: In the setting of C124-FORCED-PIECES, if x and y are full, both separate at w. If they are sector points, each has an edge that contains an arc of S(w) with an end at the member: no common unit point of a close complementary pair of sector points is saved by one member alone.
+  uses only: C124-LONE in both orders; the definition of full; for sector points the argument of C124-FORCED and that a sector point is full
+  not claimed: that a weak six-colouring has a full three-piece point, or a close complementary pair; that exactly one edge of each member lies on S(w) (T2, the kept model: two at one member); anything when a member is not full (S1: one member saves alone)
+  argument: § Argument — the save by one member
+  verdict: derived
+  grade: derived from: C124-LONE
+  minds: 1
+  model: FS-112's strip and disk and FS-114's capped strip: at each of their 71, 20 and 71 common unit points inside, both members are sectors and both separate, with one edge of each on the point's circle (control `saves-maps`)
+  prior art: partly: for maps FS112-N3-COR3 (row 135; [hand], two minds, one blind: "each a leaving centre of both u and u′") — this is its form for a weak measurable colouring and full three-piece points, by another route; not found in print
+  handoff: de Bruijn — the statement's first sentence, after C124-LONE; the second sentence with C124-FORCED's topological input
+
+derivation: C124-LONE-EXISTS
+  statement: There is a weak six-colouring of an open set U, by formula, with a close complementary pair (x, y) of three-piece points and a common unit point w of the pair in U at which y does not separate.
+  uses only: fragment S1 of FS110-FRAGS (`tools/fs110_y_fragments.py`; valid by FS110-Y's exact checker: control `seam-fragments` of `plans/FS132-derivation.md` § 4 prints ACCEPT for S1); the band β_u of C124-FORCED-AS-POSED's argument, which S1's bowtie admits unchanged (the same four tiles at u, label 1 repeated, no label 1 elsewhere)
+  not claimed: a value of the chromatic number of the plane — the object lives on four flowers of radius at most about 1/4 and one band and fixes none; that it extends to any larger set; a save by one member at a full member (C124-BOTH excludes it); the card's pattern "exactly one edge of x on the circle" — here no edge of x lies on S(w); that x is a three-piece point in any sense but the letter's (its repeated label is connected only through the band)
+  argument: § Argument — the save by one member
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the object itself: x = (0, 0) a bowtie with labels 1 (two sectors, joined by the band), 2, 3; y = (1, 0) a sector point with labels 4, 5, 6; w = (1/2, √3/2); near w only the labels 2 and 3, inside and outside S(x) (control `saves-lone`)
+  prior art: known: the fragment is FS110-Y2's S1 ("a bowtie u whose unit circle carries two boundary arcs … through w and w′; v generic trivalent", row 134's "exact local fragments of every seam"); read as a save by one member, and joined so as to be a three-piece point by the letter, here
+  handoff: none — a local object; it is the model that keeps C124-LONE from being a statement over an empty class
+
+derivation: C124-FOUR
+  statement: In the setting of C124-FORCED-PIECES let x and y be full, each with exactly one inner piece, one outer piece and one crossing piece at w. Then exactly four labels are present at w: those of the two inner and the two outer pieces.
+  uses only: C124-TYPE (at most those four); the second half of C124-LONE's argument applied to a side of S(y), or of S(x), on which one of the four labels is absent; fullness of both members
+  not claimed: that a weak six-colouring has a full three-piece point, or a close complementary pair; which label fills which of the four regions, or that each region carries one label; anything when a member has two inner or two outer pieces (T2: five labels allowed, four present)
+  argument: § Argument — the save by one member
+  verdict: derived
+  grade: derived from: C124-LONE
+  minds: 1
+  model: the strip at w = (0, 0) with x = (1/2, √3/2), y = (1/2, −√3/2): labels P, O, M, B present, G and R (the crossing pieces') absent; and 168 of 168 such points over the held objects (controls `saves-maps`, `saves-fragments`)
+  prior art: partly: for maps FS112-N3-COR3's "vertices of at least four colours" (row 135); the equality was read by the asking lane ("91 of 91", `plans/POROS-2026-10-07-fs124-round1.md` § 1.3) with the remark that it "is read … not derived" (`plans/STUB-q-ring.md`, the section after the first round); C124-HALF-TWO (first round) is the upper bound
+  handoff: de Bruijn — after C124-LONE; with C124-TYPE it is the first statement of this milestone that determines a point's label set from a count on six
+
+### Argument — the save by one member
+
+*The half-collar (C124-CENTRE-HALF).* The first round's argument for C124-CENTRE shows, for `p ∈ B(q, η)`: if `|p − z| > 1` the
+point of `S(p)` on the segment from `p` to `z` lies in `B(z, ρ) ∩ B(q, 1)`, and if `|p − z| < 1` the point of `S(p)` beyond `z` on
+that line lies in `B(z, ρ) ∖ B̄(q, 1)`. Each sentence then follows from C124-SHADOW-OPEN for that one open set. ∎
+
+*Step I — the half-window at `w` (C124-LONE).* `y` has no inner piece or no outer piece. In the first case each of its pieces has
+a point strictly outside `S(w)`, so by C124-TYPE its three labels are absent near `w` inside `S(y)`; in the second, outside `S(y)`.
+Call that side `Σ` (inside a ball `B(w, η)` on which all six applications of C124-TYPE hold). On `Σ` almost every point has a label
+of `x`; the label of a crossing piece is absent, that of an inner piece absent outside `S(x)`, that of an outer piece absent inside
+`S(x)`. `Σ ∩ B(x, 1)` and `Σ ∖ B̄(x, 1)` are non-empty and open, so `x` has an inner and an outer piece: its sides are (inner,
+outer) = (1, 1) with one crossing piece, or (1, 2), or (2, 1).
+
+*Step II — the two circles at `x`.* Take `w′ ∈ S(x) ∩ B(w, η)` strictly on the side `Σ` of `S(y)` (`S(x)` crosses `S(y)` at `w`),
+`w′ ≠ w`, and `ρ` with `B(w′, ρ) ⊂ B(w, η)` on that side. If `x` has one inner piece `P_a`, almost every point of `B(w′, ρ) ∩
+B(x, 1)` has the label `a`, and C124-CENTRE-HALF gives `η′` with: almost every `p ∈ B(x, η′)` with `|p − w′| > 1` has a label other
+than `a`; `P_a` being open with the label `a` almost everywhere, `P_a ∩ B(x, η′) ⊂ B̄(w′, 1)`. If `x` has one outer piece `P_b`,
+likewise `P_b ∩ B(x, η′) ∩ B(w′, 1) = ∅`. Take `η′ ≤ 1/2` and inside the neighbourhood of the decomposition. The unit vectors
+`w − x`, `w′ − x` are independent, so `D = {p ∈ B(x, η′) : |p − w| < 1 < |p − w′|}` and `E = {p ∈ B(x, η′) : |p − w′| < 1 < |p − w|}`
+are non-empty open sets. *Sides (1, 2)*: no point of `D` is in `P_a` (it is outside `B̄(w′, 1)`) nor in an outer piece (it is
+inside `B(w, 1)`); so the non-empty open set `D` lies in the null set the pieces leave: impossible. *Sides (2, 1)*: the same for
+`E`, which misses `P_b` (inside `B(w′, 1)`) and both inner pieces (outside `B̄(w, 1)`). *Sides (1, 1)*: both inclusions hold;
+`cl(P_a) ∩ cl(P_b) ∩ B(x, η′)` lies in both closed discs and in neither open disc, so on `S(w) ∩ S(w′)`, whose second point is at
+distance `2 cos(∠wxw′/2) ≥ √3` from `x`: it is `{x}`. (And `D`, `E` lie in the crossing piece up to null sets.) ∎
+
+*Both (C124-BOTH).* If `y` did not separate, C124-LONE would make `x` an isolated point of the edge of its inner and outer pieces,
+against fullness of `x`; and the same with the names exchanged. For sector points every two components share an arc of the
+decomposition (C124-FORCED's input), so a sector point is full, and the argument of C124-FORCED gives each member its arc of `S(w)`.
+**This is the named step at which no save by one member exists for sector points: the saving edge lies in the closures of the inner
+and the outer piece, and the half-window puts those closures in two opposite lenses that meet at the member only.** The card's
+derivation is Step I and the first inclusion of Step II in its words: `(x, w′)` is tight for `(a, b)` on the half-window; `(w, z)`
+is tight for `(a, b)` along the edge (C124-FORCED); "each of `x`, `w` is a centre of an arc through the other" — and C124-CENTRE-HALF
+at `x` then forbids the label `b` just outside `S(w)` on one side of `x` along `S(w)` and the label `a` just inside it on the other.
+
+*The object (C124-LONE-EXISTS).* S1's four tiles at `u = (0, 0)` are BB's (read from the loader: the same four polygons, labels 1,
+1, 2, 3, inside `B̄(u, 1/4)`); `v = (1, 0)` has three sectors with labels 4, 5, 6; at `w` and `w′` two labels, 2 and 3, across the
+unit circle about `u`. With `β_u` labelled 1 — the label 1 occurs nowhere else, and `β_u` meets no other flower (it lies in
+`B̄(u, 3/10)`; the flower at `w` lies beyond distance `3/4` from `u`) — the colouring is weak on the union `U` of the flowers'
+interiors and the band, `u` is a three-piece point by the letter, `v` is a sector point, the labels are complementary, `|u − v| = 1`,
+and at `w` the member `v` has no outer piece. ∎ **What it is and is not**: a weak six-colouring of four small flowers and a band;
+checked by FS110-Y's exact checker for S1 and by the diameter of the label 1's set for the band; it shows that C124-LONE's class is
+inhabited at a member that is not full, and nothing about any larger set or any value.
+
+*Four labels (C124-FOUR).* By C124-TYPE only the labels `a, b` of `x`'s inner and outer pieces and `a′, b′` of `y`'s can be present
+at `w`, each on its side. Suppose `a′` is absent on a ball about `w`. Inside `S(y)` the label `b′` is absent too, so there almost
+every point has the label `a` inside `S(x)` and `b` outside: Step II applies to that side and makes `x` an isolated point of the
+edge of `P_a` and `P_b` — against fullness of `x`. If `b′` is absent, the same on the side outside `S(y)`; if `a` or `b` is absent,
+the same with the members exchanged, against fullness of `y`. ∎
+
+control: saves-lone
+  of: C124-LONE-EXISTS — the reader on fragment S1: one sector member and one bowtie member, one pair, both common unit points inside, no boundary of either member on the point's circle, the bowtie alone separating ("x-(bs)": the first member, a bowtie, separates; the second, a sector, does not). The fault moves the two points by 0.01 (nobody separates)
+  run: python3 ../data/fs124/e2/saves_read.py S1 --brief
+  expect: S1: members=1s+1b pairs=1 inside=2 patterns=00:2 separating=x-(bs):2 four=0/0 half-two=0/0 arcs-of-kind-both=4 edges-of-saves=0
+  fault: python3 ../data/fs124/e2/saves_read.py S1 --brief --fault
+
+control: saves-maps
+  of: C124-BOTH — the reader on FS-112's strip and disk and FS-114's capped strip, each read whole from its tiles: at every common unit point inside, the pattern, who separates, the four-label count where each member has one piece of each side, C124-HALF-TWO's hypothesis, and the unit arcs of kind both against the edges of saves. Tight on these models: none has a margin. The fault moves every common unit point by 0.01
+  run: python3 ../data/fs124/e2/saves_read.py strip disk capped --brief
+  expect: strip: members=40s+0b pairs=54 inside=71 patterns=11:71 separating=xy(ss):71 four=71/71 half-two=71/71 arcs-of-kind-both=38 edges-of-saves=38
+    disk: members=25s+0b pairs=20 inside=20 patterns=11:20 separating=xy(ss):20 four=20/20 half-two=20/20 arcs-of-kind-both=20 edges-of-saves=15
+    capped: members=40s+0b pairs=54 inside=71 patterns=11:71 separating=xy(ss):71 four=71/71 half-two=71/71 arcs-of-kind-both=38 edges-of-saves=38
+  fault: python3 ../data/fs124/e2/saves_read.py strip disk capped --brief --fault
+
+**Read against the card.** Its ask — "must one edge of each member lie on its unit circle?" — is answered **yes for sector
+points** (a map's three-tile vertices) and for every pair of full members in the piece sense, **no in general**: the exception is
+exactly a member whose inner and outer pieces meet at the member only, and S1 is one. Of its three branches it is the first ("one
+edge of each member is forced"), for the class in which its pattern has a meaning, with the second branch's object existing only
+outside that class and with no edge on the circle. Its registered 0.45 for an object "on a neighbourhood of the rhombus" and 0.2
+for "excluded" were both posed without row 135's FS112-N3-COR3, which had the map-class answer. **C124-HALF** (first round) is not
+a statement over an empty class: S1 meets its hypothesis with the one-point set `{x}` as the set on the circle — which is also why
+its conclusion there carries no arc. **Predictions scored**: Q3 — met (excluded for full members; no object at a full member). Q4's
+third part — met (C124-FOUR derived).
+
+**Stage 5 — SAVED** (2026-10-07).
+
+## Stage 6 — SAVED: C124-EDGE, C124-SECOND; the sweeps; where a successor takes over
+
+derivation: C124-EDGE
+  statement: On FS-112's strip, let w be a point of the top edge y = √15/4 + √3/2 that is a common unit point of a close complementary pair of the strip's three-piece points. Then the member of the pair on the line y = √3/2 has no edge free for the unit circle about w: its three edges lie on the unit circles about two midline vertices and on a vertical wall. Hence a weak six-colouring of a neighbourhood of the closed strip that agrees with the strip on |y| ≤ √15/4 saves no such w by both members.
+  uses only: the strip's tiles (`tools/fs112_yb2_objects.py`): the vertex (m/2, √3/2) has the edges x = m/2 below it and the arcs of the unit circles about ((m − 1)/2, 0) and ((m + 1)/2, 0) above it; that two tiles of the top half sharing an arch label or a top label rule out every pair but a vertex on y = √3/2 with a vertex on y = √15/4; that a segment lies on no circle and w is no midline vertex
+  not claimed: anything beyond the strip's family; that the top edge is open to a save by the other member — it is not (C124-EDGE-CLOSED); the bottom edge except by the mirror, which this job did not check against the strip's labels
+  argument: § Argument — the strip's top edge
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: w = (1/4, √15/4 + √3/2) with the pairs (1/2, √3/2), (−1/4, √15/4) and (0, √3/2), (3/4, √15/4) — the card's smallest form (control `edge-exact`: w is at distance 1 from all four)
+  prior art: known: row 136's stop ("each stops at the unsaved second common unit point of a close complementary pair saved at its first", FS112-STOP, FS112-EDGE) says it for the strip as a map; the asking lane computed the member's edges by hand (`plans/POROS-2026-10-07-fs124-round1.md` § 1.3)
+  handoff: none — a computation on one held object; subsumed by C124-EDGE-CLOSED
+
+derivation: C124-EDGE-CLOSED
+  statement: There is no weak six-colouring of an open set that contains the point w = (1/4, √15/4 + √3/2), the three arches U_{−1}, U_0, U_1 of FS-112's strip and the parts of its tiles T_0, T_1, T_2 below the line y = √15/4, and that gives almost every point of each of these six sets the strip's label.
+  uses only: C124-TYPE six times, with the members (1/2, √3/2) for U_0, U_1 and the part of T_1, (−1/4, √15/4) for U_{−1} and the part of T_0, (3/4, √15/4) for the part of T_2; exact comparisons in ℚ(√3, √15) (control `edge-exact`); that the six labels are distinct and are all the labels
+  not claimed: anything about colourings that change the strip below y = √15/4; anything at seven (a seventh label takes the point); the same at the points (1/4 + k/2, √15/4 + √3/2) except through the strip's translation by 1/2, which permutes its labels (not checked against the label tables by this job beyond k = 0); that no six-coloured object extends above the strip's top edge
+  argument: § Argument — the strip's top edge
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the strip itself, which stops at w: its own tiles carry no label into the open set near w in the directions between arcsin(1/4) and 30° above the top edge (row 136's colourless cone is (arcsin ¼, 180° − arcsin ¼))
+  prior art: partly: for extensions of the strip as a map that keep all its tiles it is FS112-EDGE ("no valid extension of the strip holds a neighbourhood of Q", `tools/fs114_y_dial.py`'s header; row 136); for every weak measurable six-colouring that keeps only the part below y = √15/4, here — not found in print
+  handoff: de Bruijn — only with a consumer: six instances of C124-TYPE with explicit points; it is the first exclusion in this milestone of every weak six-colouring of a named open set by first-order tools
+
+*Correction, dated 2026-10-07 (filed by FS-124's record job, FS124-Z1; source: the asking
+lane's record `plans/POROS-2026-10-07-fs124-round2.md` § 1.2, the row "the strip's six tiles and the disk's pentagon are in no
+valid map, under any colouring", and § 1.3, S5):* this entry's *prior art* line names FS112-EDGE and misses a held map statement
+about the same six tiles — **FS114-Y-STRIPK6** (`plans/FS114-derivation.md`; row 138; [hand], two minds, blind): "In the strip's
+geometry the six tiles at a valley `V_m` (the arches `U_{m−1}`, `U_m` and the top tile `T_m`) and at the apex of `U_{m+1}`
+(`U_{m+1}`, `T_{m+1}`, `T_{m+2}`) pairwise straddle distance 1, so the two vertices are complementary under every colouring; …
+so by FS112-N3-COR3 no valid map contains these six tiles, under any colouring". The asking lane (S5): "FS114-Y-STRIPK6 (maps,
+whole tiles, every colouring) and C124-EDGE-CLOSED (every weak six-colouring, the tiles cut at the apex line, the strip's
+colouring) do not cite each other." Neither statement is the other: the held one is about maps that contain the six whole
+tiles, under every colouring; this one is about every weak six-colouring that keeps six cut pieces at the strip's own labels.
+Which six tiles each names was not compared tile by tile by the record job. The entry's statement, verdict, grade and count of
+minds are unchanged.
+
+derivation: C124-SECOND
+  statement: In the setting of C124-FORCED for sector points let both common unit points w, w′ lie in U, each with pattern (1, 1). Then the edge of x on the unit circle about w and its edge on the unit circle about w′ are different edges, and the edge of y on the unit circle about w and its edge on the unit circle about w′ are different edges; the labels present at w and those present at w′ are two sets of four with exactly two labels in common, one of each member; their absent pairs are disjoint; and the six labels have a cyclic order in which the three pairs read at w (the two edges, the absent pair) and the three read at w′ alternate.
+  uses only: C124-BOTH and C124-FOUR at both points; that with exactly one edge of a sector member on S(w) its third piece is crossing (an inner or outer third piece would put a second arc of the decomposition on S(w)); that an arc from x has nested initial pieces, and two distinct circles share at most two points; a count over 36 label patterns
+  not claimed: that a weak six-colouring has a sector point, or a close complementary pair; that the saves close up along a chain of pairs; any exclusion; anything when a pattern is not (1, 1) (T2: (2, 1) and (1, 2))
+  argument: § Argument — the two points of a pair
+  verdict: derived
+  grade: derived from: C124-BOTH, C124-FOUR
+  minds: 1
+  model: the strip's pair x = (1/2, √3/2) (labels G, O, P), y = (1/2, −√3/2) (B, M, R): at (0, 0) the edges P|O and M|B, absent G, R; at (1, 0) the edges G|O and R|B, absent P, M; common labels O and B; the cyclic order P, O, G, R, B, M (`data/fs124/e2/out/strip.txt`, the two rows of that pair)
+  prior art: partly: posed by the asking lane with the strip's order; C124-HALF-TWO (first round) for the upper bound on the labels; not found in print
+  handoff: de Bruijn — after C124-FOUR: a finite count; the statement to read back is the alternation, not only "different edges"
+
+### Argument — the strip's top edge
+
+*As posed.* In the top half the three-tile vertices are the valleys `V_m = (m/2, √3/2)` (tiles `T_m`, `U_{m−1}`, `U_m`) and the
+apexes `A_j = (j/2 + 1/4, √15/4)` (tiles `U_j`, `T_j`, `T_{j+1}`); two valleys share an arch label or have four arch labels among
+three, two apexes likewise for the top labels, so a pair with a common unit point on the top edge is a valley with an apex. The
+edges at `V_m` are the wall `x = m/2` and arcs of the unit circles about `P_{m−1}` and `P_{m+1}` (`P_j = (j/2, 0)`); `w` is neither
+point and a segment lies on no circle. ∎
+
+*Closed.* Write `V_1 = (1/2, √3/2)`, `A_{−1} = (−1/4, √15/4)`, `A_1 = (3/4, √15/4)`; all three are at distance 1 from `w`. Each
+arch has a point strictly inside and a point strictly outside `S(w)` — `U_0`: `(1/4, 9/10)`, `(1/4, 1/10)`; `U_1`: `(51/100, 87/100)`,
+`(3/4, 1/10)`; `U_{−1}`: `(−1/100, 87/100)`, `(−1/4, 1/10)` — and has `V_1` (for `U_0`, `U_1`) or `A_{−1}` (for `U_{−1}`) in its
+closure; so by C124-TYPE the three arch labels are absent on a ball about `w`. The part of `T_1` below the line is the open region
+bounded by the arc `V_1 A_0` of `S(P_0)`, the arc `V_1 A_1` of `S(P_2)` and the segment `A_0 A_1`; it is connected, has `V_1` in its
+closure and points strictly inside `S(w)` (near `A_0`, at distance `√3/2` from `w`): its label is absent near `w` outside `S(V_1)`.
+The part of `T_0`, its mirror image in the line `x = 1/4`, has `A_{−1}` in its closure and points strictly inside `S(w)`: its label
+is absent near `w` outside `S(A_{−1})`. The part of `T_2` has `A_1` in its closure and points strictly outside `S(w)` (near
+`V_2 = (1, √3/2)`, at squared distance `3/2`): its label is absent near `w` inside `S(A_1)`. The points `w + t(12, 5)/13`, `t > 0`
+small, are outside `S(V_1)`, outside `S(A_{−1})` and inside `S(A_1)` (the three scalar products have the signs `+, +, −`), and
+these conditions are open: on a non-empty open set all six labels are absent. ∎ **So the card's branch "the strip cannot be
+continued upward with its two rows kept" holds with no hypothesis on the continuation** — it needs neither C124-BOTH nor any
+regularity above the line.
+
+### Argument — the two points of a pair
+
+At each point both members separate (C124-BOTH) and, the pattern being (1, 1), each has one inner, one outer and one crossing piece:
+were the third piece inner or outer, it and the piece of the opposite side would share an arc of the decomposition lying on the
+circle, a second edge. So C124-FOUR gives the four labels at each point: those of the two saving edges. The saving edge of `x` at
+`w` is the arc of its decomposition shared by its inner and outer pieces there, and begins with an arc of `S(w)`; if the same arc of
+the decomposition served at `w′`, it would begin with an arc of `S(w′)`, and of two initial pieces of one arc one contains the
+other — a non-trivial arc on two distinct circles. So `x`'s two saving edges are different arcs, their label pairs are two different
+pairs out of three labels, and they share exactly one label; the same for `y`. The rest is the count of control `second-count`: in
+each of the 36 patterns the two label sets share exactly two labels, the absent pairs are disjoint, and the six pairs form one
+hexagon whose sides alternate between the two points. ∎
+
+control: edge-exact
+  of: C124-EDGE-CLOSED — exact, in sympy: w at distance 1 from the four members; the circles about the midline vertices meeting S(w) at the members; the sides of the six kept pieces at named points; the direction (12, 5)/13; the six labels read from the strip's own tiles. The fault reads the point w + (1/50, 0)
+  run: python3 ../data/fs124/e2/edge_check.py edge
+  expect: w-at-distance-1-from-V1,V0,A-1,A1=True circles-meet-S(w)-at-the-members=True T1-part-inner=[-1, -1, -1] T0-part-inner=[-1, -1, -1] T2-part-has-a-point-outside=True arches-crossing=[True, True, True] direction-(12,5)/13:outside-S(V1),outside-S(A-1),inside-S(A1)=True labels-T0,T1,T2,U-1,U0,U1=ROMBPG edge: OK
+  fault: python3 ../data/fs124/e2/edge_check.py edge --fault
+
+control: second-count
+  of: C124-SECOND — the 36 label patterns with different saving edges at the two points: labels in common, disjoint absent pairs, one alternating hexagon; the fault allows the same edge of x at both points (then three labels can be common)
+  run: python3 ../data/fs124/e2/edge_check.py second
+  expect: cases=36 labels-in-common=[2] absent-pairs-disjoint=36 one-alternating-hexagon=36 second: OK
+  fault: python3 ../data/fs124/e2/edge_check.py second --fault
+
+**Predictions scored.** Q4 — met on all three parts (the top-edge computation as read; C124-SECOND derived for sector points;
+C124-FOUR derived). Q5 — **met**: G97's killing test fires in its second clause twice — C124-BOTH excludes a unit-arc configuration
+(the save by one sector member) by first-order tools, and C124-EDGE-CLOSED excludes every weak six-colouring of a named open set.
+The asking lane's: C124-ONE-MEMBER "an object by formula 0.45, excluded 0.2, a gap 0.35" — excluded in the class where its pattern
+has a meaning, an object only at a bowtie; C124-EDGE "holds as read 0.7" — met; C124-SECOND "derived as posed 0.9" — met for sector
+points; "one edge of each member forced 0.2" — that branch.
+
+### The sweeps a successor needs (the record job's are not this job's)
+
+- **What is carried and not yet drawn.** (1) C124-TYPE with a *region's own two members*: a connected one-label piece whose closure
+  holds two points `p, p′` at distance 1 from `w` is barred near `w` outside both `S(p)` and `S(p′)` if it has a point inside
+  `S(w)` — used in C124-EDGE-CLOSED; as a general statement it is the "tile through two ring points" rule and is not entered.
+  (2) C124-LONE's lenses are a statement about any half-window, with no pair: *wherever `(x, w′)` is tight for `(a, b)` on a set of
+  far ends accumulating at `w`, no boundary between `a` and `b` runs along `S(w)` into `x` with `a` inside* — a per-class
+  reciprocity rule, true at every number of labels; it is why R7's mutual centres carry different outside labels. Not entered.
+  (3) C124-EDGE-CLOSED's method — keep some pieces, bar all six labels on an open set — is a finite computation for any held
+  object's stop: the disk's ten rim points are the next instance (not run).
+- **For the asking lane.** The unit "a save" is right for the three maps and wrong as the *only* source of tight arcs of kind both
+  (SIXFRAG: 18 with no pair). What the six-label vertex's ring is, in this round's terms, is not derived. The search drafted as
+  queue line 14 (a save by one member in the wedge family) is answered without a search for sector flowers (C124-BOTH: none) —
+  a `declined` line is drafted in the report.
+- **For the kernel lane.** The module after C124-SHADOW-OPEN: C124-TYPE, C124-CENTRE-HALF, C124-FORCED-PIECES, C124-LONE,
+  C124-BOTH (first sentence), C124-FOUR. No θ-curve lemma is needed for any of them.
+
+**Where a successor takes over.** Every claim of the round is at a verdict. Owed, in order of bearing: (1) a second mind on
+C124-LONE's Step II (the one new argument); (2) the full-member class against the map class — whether every vertex of a locally
+finite arc map with three labels and three sectors is a sector point in this record's sense when a tile has a cusp there (row
+133's "GAP at cusp vertices"): the definition used here asks only for three arcs from the point, and a cusp is allowed; not
+examined on an object with cusps; (3) the disk's rim by C124-EDGE-CLOSED's method; (4) the prior-art debts of both rounds.
+
+**Stage 6 — SAVED** (2026-10-07).
+
+*Gate on the whole record at the hand-back*: 14 entries (13 derived, 1 refuted), 8 controls, 8 faults fired, `GATE: PASS (0 failures, 0 warnings)`, exit 0 (`data/fs124/e2/out/gate-final.txt`). The run takes over two minutes because the three maps are read twice; each control is within 120 seconds. **An order slip, said here**: Stage 6 was appended while Stage 5's gate ran, and the two stages are in one commit.

@@ -127,3 +127,13 @@ G91 (the ring's twisted colouring: these are its measurable germs), G83 (the str
 C132-ALT), G95 (a statement about every measurable ring must survive planted slack: test each lemma on the stripe colouring
 first), G94 (what a consumer reads: here, three points and the ring), G21 (the second round's clean control counts were the
 margin's — run every control at circumradius 1/2 as well as 2/5), G92; rows 148–150; stubs FS-124, FS-127, FS-128, FS-134.
+
+*Since FS-124 (FS124-Z1, the record job, 2026-10-07; every entry named is in `plans/FS124-derivation.md`, [hand] or derived from [hand] entries, **one mind, kernel pending**):* two entries are stated on this stub's data —
+exclusion sets at two points, no piece assumed: **C124-HALF** and **C124-HALF-TWO** ([hand] over the inherited C132-WIT-SIDE;
+§ 5). With exactly one of the six sets on the unit circle about the common unit point, a neighbourhood of that point on one side
+of one circle is split between two labels along the other circle; with one set of each point there, almost every point near it
+has one of four labels. C124-HALF's class has one held member, with a one-point set on the circle (fragment S1; a dated
+correction stands under the entry in `plans/FS124-E1-derivation.md`). **The line between this stub's arc-free side and the arc is
+no wall for a statement that reads pieces**: C124-BOTH and C124-EDGE-CLOSED exclude configurations with a unit arc about a ring
+point by the open-piece lemma (C124-SHADOW-OPEN, C124-TYPE) — G97's killing test, fired by its deriver's own scoring; an
+amendment to G97 is drafted in `plans/FS124-Z1-record.md`. No entry gives a weak six-colouring a piece.
