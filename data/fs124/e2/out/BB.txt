@@ -1,0 +1,7 @@
+== BB: vertices=32 3-label/4-sector:2 4-label/4-sector:2 on-the-cut:28 | members: sector=0 bowtie=2 other=0 labels=6
+   close-complementary-pairs=1 common-unit-points: inside=2 on-the-cut-or-outside=0
+   patterns: (0, 0):2 | separating(member kinds): xy(bb):2
+   both-members-one-inner-one-outer-one-crossing=2, labels-at-w-exactly-those-four=2 | pattern-(1,1)-with-HALF-TWO's-hypothesis: 0 of 0
+   unit-arc-pieces=0 centre-on-the-cut=0 of-kind-both=0 edge-of-a-save=0 not=0
+   w=(0.50000,-0.86603) labels=2356 pattern=(0, 0) bowtie(0.0000,0.0000) 1:crossing,2:outer,3:inner SEP ; bowtie(1.0000,0.0000) 4:crossing,5:inner,6:outer SEP
+   w=(0.50000,0.86603) labels=2356 pattern=(0, 0) bowtie(0.0000,0.0000) 1:crossing,2:inner,3:outer SEP ; bowtie(1.0000,0.0000) 4:crossing,5:outer,6:inner SEP

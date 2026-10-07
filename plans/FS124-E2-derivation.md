@@ -159,3 +159,82 @@ card's**: the unit a save is paid in is not an edge on a circle but a pair of pi
 its shadow for sector points, and the card's open branch (a save by one member) is, in measure, exactly the bowtie of the map class.
 
 **Stage 2 — SAVED** (2026-10-07).
+
+## Stage 3 — SAVED: the reading (C124-READ-SAVES), and a relay from the kernel lane addressed first
+
+### 3.0 The relay (FS124-K1, through the coordinator, mid-stage) — read before going on
+
+The kernel lane's planner, typing the first round's radius clause, reports that measurability is idle in the finite-set form, that
+the identification of unit pairs with rigid motions is the whole proof, and that (down) holds for every subset; and it asks whether,
+for a measurable weak colouring of a measurable set, *every* direction is good. **How it changes this round's work: it does not** —
+no statement here reads a fixed direction; every one goes through C124-SHADOW-OPEN, whose fibres are open sets of directions. The
+question is answered as an entry, because it is true by four lines and a later statement about one side of one circle may want it:
+C124-EVERY-DIRECTION, Stage 4. Its remarks (a)–(e) are the first round's entries' business and go to the report unchanged.
+
+### 3.1 What was read, and how
+
+`data/fs124/e2/saves_read.py` (its header says what it reads and what it cannot see). Vertices are taken from the tiles' own
+pieces — every end of a boundary piece — not from the ends of unit arcs; members are the vertices with exactly three labels, with
+three sectors (**sector**) or four sectors `a, b, a, c` (**bowtie**); a common unit point is read only if both circles about it are
+wholly inside the object. **Grade: [tools], one mind; floats from the objects' exact pieces, boundaries refined by bisection, "on
+the circle" decided at `10⁻⁹` at two radii.** Two instrument defects met and repaired before any count was kept, both of which
+under-counted and neither of which flattered: the tiles' bounding boxes were tight at an arc's extreme point (two of the disk's arcs
+read as not of kind both), and the point location took two rays (now five vote). Outputs: `data/fs124/e2/out/<object>.txt`.
+
+| object | members (sector + bowtie) | pairs | common unit points inside | patterns | who separates | exactly four labels | HALF-TWO's hypothesis | unit arcs of kind both / edges of a save |
+|---|---|---|---|---|---|---|---|---|
+| FS-112's strip (tiles −4 … 6) | 40 + 0 | 54 | 71 | (1, 1): 71 | both: 71 | 71 of 71 | 71 of 71 | 38 / 38 |
+| FS-112's disk | 25 + 0 | 20 | 20 | (1, 1): 20 | both: 20 | 20 of 20 | 20 of 20 | 20 / 15 |
+| FS-114's capped strip | 40 + 0 | 54 | 71 | (1, 1): 71 | both: 71 | 71 of 71 | 71 of 71 | 38 / 38 |
+| fragment T2 | 2 + 0 | 1 | 2 | (1, 2), (2, 1) | both: 2 | — | — | 4 / 4 |
+| the bowtie fragment BB | 0 + 2 | 1 | 2 | (0, 0): 2 | both: 2 | 2 of 2 | — | 0 / 0 |
+| fragment S1 | 1 + 1 | 1 | 2 | (0, 0): 2 | **the bowtie alone: 2** | — | — | 4 / 0 |
+| fragment MX | 1 + 1 | 1 | 2 | (0, 2), (2, 1) | both: 2 | 1 of 1 | — | 2 / 2 |
+| FS116-Y2-SIXFRAG | 6 + 0 | **0** | 0 | — | — | — | — | 18 / 0 |
+| the Searcher's kept model | 4 + 0 | 3 | 6 | (1, 1): 3, (1, 2): 1, (2, 1): 2 | both: 6 | 3 of 3 | 3 of 3 | 9 / 9 |
+| R7 (seven labels; control) | 0 | 0 | — | — | — | — | — | — |
+| the honeycomb at 2/5 (seven; control) | 66 + 0 | 66 | 132 | (0, 0): 132 | nobody: 132 | — | — | — |
+
+("Exactly four labels" is counted where each member has one inner, one outer and one crossing piece; the strip's 71 are the asking
+lane's 74 less its three centres on the window's cut; S1 and MX were read beside the brief's list because BB's verdict needs them.)
+
+### 3.2 The statement to verify, and the attack on the card
+
+**On the three maps the statement holds, read whole**: at every common unit point inside the strip, the disk and the capped strip
+(71, 20, 71) the pattern is (1, 1), C124-HALF-TWO's hypothesis holds, and the labels present are exactly the four labels of the two
+edges. The asking lane's sample counts are **reproduced** (strip 71 of 74 with 3 on the cut; disk 20 of 20), none corrected; every
+three-tile vertex of both maps is an end of a unit arc, so its enumeration by arc ends missed no member.
+
+**On the other objects it does not hold as stated, and three objects break the frame.**
+1. *Patterns other than (1, 1)*: T2, MX, the kept model (three of its six points), BB, S1 — four of the five objects the card left
+   unread, and S1.
+2. *A point saved with no edge on its circle*: BB, at both points — each member is a bowtie whose two single-sector pieces lie one
+   in the closed unit disc about the point and one outside the open disc, and meet at the member only.
+3. *A point saved by one member alone*: S1, at both points — by the bowtie; its partner, a three-sector vertex, has no piece on the
+   outer side at one point and none on the inner side at the other. Two labels are present at the point, split along the unit circle
+   about the bowtie. No point read is saved by one **sector** member alone (0 of 172 points whose members are both sectors).
+4. *A tight arc of kind both that is no edge of a save* — the falsifier of the asking lane's hunch `centres-are-saved-points`:
+   **SIXFRAG, 18 of 18** (12 about the six-label vertex, 6 about its four-label ring points) **with no close complementary pair in
+   the fragment at all**; **S1, 4 of 4** (centred at the saving bowtie, through the saved point: the boundary a save by one member
+   forces *at the point*); **the disk, 5 of 20** (the sides of the central Reuleaux pentagon, whose ends are four-label corners; the
+   centres are saved points, the arcs are no member's edge). On the strip, the capped strip, T2, MX and the kept model every one is
+   an edge of a save.
+So a save is one cause of a tight arc of kind both and not the only one; "exactly one edge of each member" is the law of the two
+printed maps and of the capped strip — objects built by one recipe — and of nothing else held.
+
+**What the reading says of the round's route** (pieces by side): at every one of the 176 common unit points read inside a
+six-coloured object some member separates; whenever both members are sectors both separate (172 of 172: 71 + 20 + 71 + 2 + 6 + MX's
+none — MX and S1 have a bowtie member, BB two); wherever each member has one inner, one outer and one crossing piece exactly those
+four labels are present (168 of 168). At seven nobody separates at any of the honeycomb's 132 points, and R7 has no member.
+
+**Predictions scored.** Q1: first part met (71 of 71, 20 of 20); "some object shows another pattern" met; "every three-sector
+member separates at every common unit point" **missed as worded** — S1's sector member does not, its partner being a bowtie; the
+statement the route derives is for two full members, and there the reading has no exception; "a held fragment saved by a bowtie
+alone" met (S1). The asking lane's: its statement on the strip and the disk — met; another pattern on an unread object — met; a
+save by one member on a held object — **met, against its 0.1** (S1, which it did not list); every tight arc of kind both on the
+unread objects an edge of a save — **missed** (SIXFRAG, as it guessed, and S1).
+
+*The reading's controls are entered with the entries they test (Stages 4–6): `saves-maps`, `saves-fragments`, `saves-lone`,
+`saves-r7`, `seven-exact`.*
+
+**Stage 3 — SAVED** (2026-10-07).
