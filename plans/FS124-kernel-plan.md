@@ -259,7 +259,7 @@ The skeleton after the passes: build exit 0, `476 of 476 batches, 4 module(s) re
 fifteen declarations, read against § 2.3: the binders are those written, no section variable enters, `radius_five` and
 `seven_le_chromaticNumber_plane_iff_exists_ball` have no binder).
 
-**The coordinator's rulings of 14:2x UTC** (in reply to § 2.4's message; nothing in the reply came from the fenced files):
+**The coordinator's rulings** (received between 14:17 and 14:29 UTC) (in reply to § 2.4's message; nothing in the reply came from the fenced files):
 keep both join theorems, each docstring saying which half needs the import — done; the statements in the form the proof
 gives, the list's measurable forms as corollaries under them — that is the skeleton's shape; the module header says that
 the release's definition asks almost-everywhere measurability and this one measurability, and why — done; generalization 7
@@ -427,7 +427,7 @@ group, are marked "not proved here".
   of a large disc, or of the plane, as a hypothesis has an empty domain given `radius_five`; `LEAN.md` § The gate's rule
   for emptiness resting on an import applies to it, not to anything here.
 - **Names**: none of the 57 declarations, nor `monoPairSet`, `AeProperOn`, `IsWeakColouringOn`, `rigidMotion`, `motionMul`,
-  is declared in `main` or in any worktree under `.claude/worktrees/` (searched 14:0x UTC). `HadwigerNelson.Motion`
+  is declared in `main` or in any worktree under `.claude/worktrees/` (searched at about 14:00 UTC). `HadwigerNelson.Motion`
   (`Proofs/HadwigerNelson/Motion.lean`, exact motions over `Q4`) is a different object under a different name.
 - **`AeColouring.exists_motion`** (`Plane/YesLimit`) is `AeProperOn.exists_rigidMotion` at `U = univ` in the other order
   of parameters. It stays as it is: no statement on the main line is touched.
