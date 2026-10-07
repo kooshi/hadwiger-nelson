@@ -535,4 +535,32 @@ between two colours that is an arc of the unit circle about a point one unit awa
     `plans/FS124-E1-derivation.md` Stage 4 and `plans/FS124-E2-derivation.md` Stages 4–5 — **and then name the step the
     deriver flagged** (C124-LONE's second step), as the first planner was told after its fence lifted. The six most recent
     commit subjects on `main` were read by me as it would see them: none says anything of the nine statements.
+26. **FS124-P3, its verdict (15:19 UTC logged; commit `751b4749`; record `plans/POROS-2026-10-07-fs124-round2.md` Stages 0–3):
+    "record job" for FS-124, then a successor it minted — no third round at the pair.** **Why no third round**: "every
+    further step at the pair restates a held map entry by one use of the round's lemma" (its § 1.2's table: the partner
+    count, the centre's four colours, the six-colour ring — each a held entry of FS-112 or FS-116); the stub itself had
+    listed these to carry, "and the second card was not written from that list". **What changes the unit**: the strip, the
+    disk and the six-colour flower "each stop at one kind of point" — take a point of four or more labels and two rich
+    points on its unit circle whose labels together are all six: the stop is their second common unit point, at `φ²/√2`,
+    `φ` and `√3` from the centre; the flower's two ring points are four-label points, "so the 'pair of three-label points'
+    frame could not state it"; two of the three are held (two minds), the third read "from FS116-Y2-SIXOFF's words and one
+    reader's output — one mind, not exact". **The successor**: `plans/STUB-covering-pairs.md`, "the point across" — about
+    a point of four or more labels, must some two pieced points of its unit circle whose labels together are all six have
+    a second common unit point, within 2, that no weak six-colouring can contain? Five first claims, each naming the held
+    entry it would restate. Registered: always 0.08; a ring by formula past print 0.12; turns on the ring's type 0.8;
+    decides six against seven 0.03. **Against my framing** ("our map theorem carried to measure"): its § 2.3. **For the
+    record job**: the closed edge's prior-art line misses a held map statement about the same six tiles (row 138's, two
+    minds, blind); the forcing claim's argument reads "every label is a label of a piece at one of the two points", not
+    "two disjoint triples" — it reaches any two rich points whose labels are all six. "No two entries found that cannot
+    both hold; no entry found stated more widely than its argument." **My receipt**: the commit is on `main`; the stub's
+    head, its definitions and its card read by me; its decision card read. Not checked by me: its § 1.2 table against the
+    held entries; its reading of the three stops.
+    **The decision it leaves to me, ruled**: **the record job now** — FS-124's two rounds are filed as one unit and its
+    eight cases pass to the successor — alternative: a third round in place under FS-124's name; why the record job: the
+    asking lane's own table says a third round at the pair would restate held entries; thirty entries are unfiled; the
+    second mind on the one flagged step is already working in the kernel lane; and the successor's unit (rich points of
+    any number of labels) is the one the three held stops share; confidence medium (the asking lane's own: 0.6). **The
+    successor's number is FS-136.** **Kooshi is told, with the alternative**: he chose FS-124 this morning, and may
+    override the move to its successor. **The record job (FS124-Z1) launches into the asking lane's slot at its hand-back;
+    the successor's opening follows when a slot frees after that.**
 
