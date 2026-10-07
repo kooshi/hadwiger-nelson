@@ -1,0 +1,22 @@
+M12a: 1 match, replaced (22 -> 28 chars)
+M12b: 1 match, replaced (47 -> 51 chars)
+M12c: 1 match, replaced (44 -> 50 chars)
+M12d: 1 match, replaced (27 -> 182 chars)
+grokkings: G93, G94, G95 inserted after G92 (before the G51 pointer)
+M13: 1 match, replaced (17 -> 17 chars)
+instances: G60 appended under its existing heading
+instances: G64 appended under its existing heading
+instances: G82 appended under its existing heading
+instances: new heading G25 before '## G30 — '
+instances: new heading G80 before '## G82 — '
+instances: new heading G81 before '## G82 — '
+instances: new heading G86 before '## G87 — '
+instances: new heading G91 before '## `CLAUDE.md` § Counter-priors'
+instances: new heading G92 before '## `CLAUDE.md` § Counter-priors'
+M14: 1 match, replaced (90 -> 526 chars)
+M15a: 1 match, replaced (67 -> 67 chars)
+M15b: 1 anchor, inserted 81 chars after
+M15c: span of 168 chars replaced by 394
+M16: 1 match, replaced (66 -> 1275 chars)
+D3 GreenfeldTao2024: 1 match, replaced (78 -> 473 chars)
+bibliography § C: sixteen rows appended after [FejesToth1973] (end of § C table)

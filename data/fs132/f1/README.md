@@ -71,3 +71,30 @@ allow-listed**. `--dupes`: exit 0 (`data/fs132/f1/dupes-stage2.txt`).
 "**Naming:**" (the draft says "append to its Prior art"; the cell's last sentence is the Naming one); (ii) R's G93 and unit texts use the grade "[external: …]" while M5
 adds "[kernel, outside]" to § Notation — no filed text uses the new word yet; (iii) unit 9's second replacement leaves "…, and given MR χ(F²) = χ(ℝ²), the least k
 with a measurable k-colouring …" — the clause "the least k" now follows "χ(F²) = χ(ℝ²)" (filed as drafted).
+
+## Stage 3 — SAVED: the grokkings, the instances and the bibliography (items 3–5)
+
+Script `data/fs132/f1/stage3_grok_bib.py`, log `data/fs132/f1/stage3-log.txt`; every old string asserted once; every draft extracted by script.
+
+- **Grokkings** (R § 5.1 "Proposed grokkings"): G93, G94, G95 inserted after G92 and before the retired G51 pointer, verbatim; **M12** (four edits in G95: title,
+  "can be true only where no colouring has local slack", "plant local slack", and the parenthesis before "*Do:"); **M13** (front matter, G1 to G95).
+- **Instances** (R § 5.1 "Instances and amendments", S D9): under existing headings G60, G64, G82 (appended); new headings G25 (before G30), G80 and G81 (before G82),
+  G86 (before G87), G91 and G92 (before the `CLAUDE.md` sections), titles copied from the grokkings file and cut as the neighbours' are (at the first colon / comma-and);
+  each instance reads "EXT-OAI2 (2026-10-07): <the draft's words after its dash> Source: `plans/EXT-OAI2-reading.md` § 5.1." (D9 as drafted, under G92, with its own source
+  words). The form "Source: …" follows D9's own draft.
+- **`BIBLIOGRAPHY.md` § A** `[OAIMath2026]`: cell "what of ours rests on it" — **M14** (the last sentence replaced by R § 5.5's "On it rest: …" — the words "if filed"
+  removed together with their comma — then D2); cell "read" — **M15** (bold lead; the leanchecker sentence after "(`data/external/oai1/keryx/`)."; the "*The manuscript* (EXT-OAI2, …
+  being read." sentence replaced by R § 5.5's "**Manuscript: read in full** … (`data/external/oai2/moser_certificate_check.py`).") and **M16** (D1 replaces the closing
+  sentence). **§ C**: `[GreenfeldTao2024]` (D3); sixteen new rows from R § 5.5's nine lines, appended after `[FejesToth1973]` (the end of § C's last table), each
+  "Cited by `[OAIMath2026]` family 158; **not held, not read.** <rests cell>. Fetch: <fetch cell>"; a full stop added after a rests cell that had none, before "Fetch:".
+  Shared cells whole. Work cells split for the shared lines: Crum / Gneiting–Sasvári and the five at the end at their "; "; Zimmer's two titles and Jamneshan's two
+  entries by the draft's own words only (`[Jamneshan2026corr]`'s work cell reads "A. Jamneshan, *An uncountable Furstenberg–Zimmer structure theory*, its Corrigendum (2026)");
+  the split of the two titles was checked by script (every italic title and number of the new work cells occurs in the draft's work cell).
+
+**Gates.** Fact audit `--base f40d6bda`: exit 1, the same five lost tokens as stage 2 (table there), nothing new from this stage (`audit-stage3.txt`); `--dupes` exit 0;
+`CLAUDE.md` 55,413 bytes; grokkings file 173,804 (limit 200,000). `tools/bib_audit.py`: exit 1 (`bib-audit-stage3.txt`); left unlogged after the sixteen rows:
+`arXiv:2008.07987` (R § 5.5 names it as `[GwynStavrianos2022]`, held under the other key; first seen in `plans/EXT-OAI2-reading.md`), `[Author2024]` (a placeholder in this
+brief, as expected), `[Bekka2008]` and `[TaoDisintegration2008]` (the reading's body spells the keys differently from its § 5.5's `[BekkaHarpeValette2008]` and
+`[Tao2008ergodicity]`). No alias row added. "UNLOGGED PRIOR ART: 4" is the count of these four.
+
+**Stops so far:** none in items 3–5. **Observations:** G93's and G94's status brackets read "[external: …]" (as drafted), not the new "[kernel, outside]".

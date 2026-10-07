@@ -73,6 +73,10 @@ FS121-D1-EROSION's models SQ9 and HEX9 lie inside the diameter bound, which give
 "FS-116 (2026-10-03): twenty-one entries derived about the Γ-free four-colour vertex over rounds 3 and 4, nine of them frozen and four held at two minds, are true vacuously — FS116-Y4-EMPTY (held) empties the class at `1 + ε`. The plan carried the vacuity rule in its failure clauses ('the six-colour class may be empty'), and FS116-N2 noted that no held fragment has a hub (item 68); no job was asked for an inhabitant or an obstruction before the class's structure, so the structure was worked for two rounds on an empty class. A positive control for a class is an inhabitant, or the class is a candidate for emptiness."
 
 
+## G25 — The forcing ladder is recursive
+
+EXT-OAI2 (2026-10-07): the forcing ladder in measurable form: the kills of `[OAIMath2026]`'s endgame are a unit pair, a unit triangle and the Moser spindle, by the number of labels a configuration leaves (one, two, three); at six the next rung is a 5-chromatic graph in a four-label region. Source: `plans/EXT-OAI2-reading.md` § 5.1.
+
 ## G30 — Measurement generates; derivation kills
 
 *F1: G30 as at `c5e55f12^`.*
@@ -352,11 +356,15 @@ FS-103's V1 read row 110's `0.199` at 59 — a Hoffman ratio — as `λ*` in a s
 
 FS-103's §G read G60 and G24 only for "no bound on `χ_CP`"; their sharper bearing — that row 123's own five is G60's fractional bound rounded, so its route cannot give six — was drawn by the gate (CTL-FRAC) and proved by FS103-F (row 129) (`plans/FS103-collapse-cp-plane.md` §R-close 3.1).
 
+EXT-OAI2 (2026-10-07): the six that density cannot give was given by fit (§ 3.4). Source: `plans/EXT-OAI2-reading.md` § 5.1.
+
 ## G64 — Six may be a value no field attains
 
 *F1, from G64, cut in `d0df4f82` (2026-09-21), after “…specific to the plane stays untested.”:*
 
 A fresh instance of this file's own rule: the probe's design confirmed that a six was reachable *in principle* and never that it was reachable *at the sizes the budget could decide*.
+
+EXT-OAI2 (2026-10-07): "equally consistent with every field being `≤ 5` and `χ(ℝ²) = 5`" is no longer so: W now reads `χ(ℝ²) ≠ 6` ⟺ `χ(ℝ²) = 7`. Source: `plans/EXT-OAI2-reading.md` § 5.1.
 
 ## G65 — The refusal phase diagram
 
@@ -454,11 +462,21 @@ FS-114: the headline (every valid map carries a four-colour vertex) and the coun
 
 *FS-111: the headline from example invariants (the contact structure; R7), the walls from counterexample invariants (HC_K, M3-IRREG, M4-CUT, DECO-B, W-NEG) (`plans/FS111-C-close.md` §4.2).*
 
+## G80 — Infinite rank is the resource
+
+EXT-OAI2 (2026-10-07): a second use of the same resource: divisibility in place of height counting. Source: `plans/EXT-OAI2-reading.md` § 5.1.
+
+## G81 — Where every place mixes, the field is the plane
+
+EXT-OAI2 (2026-10-07): the limit case `ℝ_alg`. Source: `plans/EXT-OAI2-reading.md` § 5.1.
+
 ## G82 — The measurable question is a stability question
 
 *FS116-Z2, FS-116's close; `plans/FS116-Z2-close.md` D3, `plans/FS116-local-exclusion.md` § 3.4:*
 
 FS116-O1-YESLIM (held, 2026-10-03) — run on exact valid fragments, the weak-* step needs no map, no centre and no complexity bound: fragments on discs of every radius give `χ_m⁰(ℝ²) ≤ k`; so the uniform radius of a local NO is implied by seven, never an overshoot of it.
+
+EXT-OAI2 (2026-10-07): at five the stability question is answered. Source: `plans/EXT-OAI2-reading.md` § 5.1.
 
 ## G83 — With unit arcs, the tight question lives at one four-colour vertex
 
@@ -477,6 +495,10 @@ statement named (rings with no arc of `Γ`), and it was carried there only by th
 
 "SAT-STRIP is a collision between a rung and a contact: the east edge's tangent partner carries `c_IV` along `y = 1` from `q_N` out to `(L_E, 1)`, while the ring forces a tile of `c_IV` against `ω(p)` from outside somewhere in quadrant II; one connected family of `c_IV` tiles cannot be within distance below 1 of that tile at `q_N` and above 1 at `(L_E, 1)`." — FS116-S1, the saturated cross killed at `R = 2` in its class (FS116-S1-QF; two derivations, not held).
 
+## G86 — Tile counts are blind to Siamese pairs
+
+EXT-OAI2 (2026-10-07): their method reads no tiles and has no Siamese hypothesis. Source: `plans/EXT-OAI2-reading.md` § 5.1.
+
 ## G87 — The invention signal
 
 *FS116-Z2, FS-116's close; `plans/FS116-Z2-close.md` D3, `plans/FS116-Z1-close.md` § 2.4 F2, `plans/FS116-Z2-close.md` § 1.5:*
@@ -488,6 +510,14 @@ the whole-tile restriction of radius at most `√3`, side 2 for maps — "the tw
 (`plans/FS129-SR1-audit.md` § 2.3); its repair, read on the definition of a tile, closed FS-123's first question (FS129-OR1-QFREE). Poros's route-R
 signal: "side 1 is a stub's bearing sentence whose conclusion exceeds its reason" — a Condition-5 theorem stated without Condition 5
 (`plans/FS129-OR1-audit.md` § J15).
+
+## G91 — The ring is the pigeonhole
+
+EXT-OAI2 (2026-10-07): the ring re-derived in measure, for every measurable colouring (the 60° exclusion and the binary alternation are stated for every `k` in their Lean). Source: `plans/EXT-OAI2-reading.md` § 5.1.
+
+## G92 — A held result reaches as far as its argument, not as far as its statement
+
+EXT-OAI3 (2026-10-07): the bibliography row for `[GreenfeldTao2024]` had called C3-aper "the colouring form" of the periodic tiling conjecture since FS-73's close and stopped there; read for what a tiling *is* in graph words — a clique partition — the form is an equivalence for one graph, and the published counterexample answers the question the stub carried as open (EXT-OAI3 § 4.5). Source: `plans/EXT-OAI3-review.md` § 4.1 B2.
 
 ## `CLAUDE.md` § Counter-priors
 
