@@ -7,9 +7,21 @@ statement); working files `data/fs136/e1/`. Every statement below is about a wea
 
 ## Theorems this phase proved
 
-*(one line per theorem, with its grade and its address; filled stage by stage)*
+*(one line per theorem, with its grade and its address in this file; one mind each; kernel pending; **each is about a weak
+colouring that has the named pieces, and none says one exists**)*
 
-- none yet — Stage 0 is the opening.
+- **C136-TABLE** — [hand] over C124-TYPE — Stage 3: near a point with finitely many members one unit away, almost every
+  point's label is pure, on that point's side, at every member that has it. Any number of members, pieces, labels.
+- **C136-COVER** — derived from C136-TABLE — Stage 3: two families carrying all the labels: one member has an inner-pure and
+  an outer-pure label at a common unit point. (The claim as posed is its case with a weaker conclusion.)
+- **C136-ONE** — derived from C136-TABLE — Stage 3: one family carrying all the labels: its unit circle separates inner-pure
+  from outer-pure labels near each of its points.
+- **C136-PARTNERS** — [hand] over C124-BOTH — Stage 4: a sector point has at most three points on whose unit circle an edge
+  begins, and at most three close complementary sector partners with both common unit points in the set.
+- **C136-STOP-FLOWER**, **C136-STOP-FLOWER-GERMS**, **C136-STOP-DISK**, **C136-STOP-STRIP**, **C136-STOP-BOWTIE** — each
+  derived from C136-TABLE with exact signs — Stage 5: no weak six-colouring keeps the named tiles (or, for the flower, their
+  germs) of the held object and contains the named point across.
+- **C136-RINGS-READ** — computed over four named points, exact — Stage 2; the reading around it is [tools], floats.
 
 ## Notation used by every entry
 
@@ -439,6 +451,14 @@ colourings (weak measurable, no map) and the smallness of what is kept (six tile
 one pattern, the fragment's own. **The pair's own tiles suffice** (class L1 of the reading): `e(−30°)` separates — `2`
 inner-pure, `1` outer-pure — and the cell inside its circle and outside the other's has no label.
 
+*Added 2026-10-07, after the coordinator's reading of Stage 5 (a wording gap between the statement and the control's
+line; the statement stands).* The check keeps every tile with a member as an end point of a boundary piece: its line
+"kept-tiles=8" counts `G5 Q0 Q5 S5` at `e(−30°)` and `G0 Q0 Q1 S0` at `e(30°)` — seven distinct tiles, `Q0` at both members.
+**The statement's six are the ones the empty cell uses**: inside `S(e(−30°))` the labels `5`, `1`, `3` are barred by `S5`,
+`Q5`, `G5` (each with a point strictly outside the unit circle about `(√3, 0)`), and outside `S(e(30°))` the labels `0`, `2`,
+`4` by `S0`, `Q0`, `G0` (each with a point strictly inside). `Q1` and `Q0` read at `e(−30°)` are not used. It is the germs'
+argument on whole tiles.
+
 derivation: C136-STOP-FLOWER-GERMS
   statement: For every r with 0 < r ≤ 1/4 there is no weak six-colouring of an open set that contains the point (√3, 0) and the parts of the tiles S5, Q5, G5 of FS116-Y2-SIXFRAG within distance r of e(−30°) and the parts of its tiles S0, Q0, G0 within distance r of e(30°), and that gives almost every point of each of these six parts its label in that fragment.
   uses only: C136-TABLE as in C136-STOP-FLOWER; that for r ≤ 1/4 each part is connected (S5 and S0: the intersection of two discs; the four others: one of the four wedges cut from B(member, r) by two unit circles that cross at the member and next meet at distance at least 1 from it); the witnesses, with t = r/2 — for S5 the point e(−30°) + t e(180°), at squared distance 1 + t² + √3 t from (√3, 0); for Q5 any point, since Q5 lies in the open unit disc about e(−90°), which is 2 from (√3, 0); for G5 the point e(−30°) + t e(300°) on the common tangent, at squared distance 1 + t²; for S0 the point e(30°) + t e(270°), at 1 + t² − t; for Q0 any point, since Q0 lies in the closed unit disc about (√3, 0); for G0 the point e(30°) + t e(30°), at 1 + t² − t
@@ -505,6 +525,14 @@ derivation: C136-STOP-BOWTIE
 **Class**: one held
 family. **What is new beyond FS114-Y3-RSTOP**: the class of colourings.
 
+*Added 2026-10-07, with the line above.* The control's "kept-tiles=10" counts five tiles at each member: eight distinct,
+`t1` and `W` at both — the statement's eight. **Six of them suffice for one cell**: inside `S(q₂)` and outside `S(q₁)` the
+labels `6`, `2`, `5`, `1` are barred by `L2`, `T2`, `V′`, `t1` at `q₂` (each with a point strictly outside the unit circle
+about `(√3, 0)`) and `4`, `3` by `T1`, `W` at `q₁` (each with a point strictly inside); the mirror cell uses `T2`, `W` at `q₂`
+and `L1`, `T1`, `V`, `t1` at `q₁`. The statement keeps all eight, which is the stronger hypothesis; a statement with six
+kept tiles is the sharper one and is what the record job should file if it files one (its `statement:` would name
+`L2, T2, V′, t1, T1, W`).
+
 ### Argument — a cell with every label barred
 
 Let `c` be a weak six-colouring of an open set containing `w` and the kept tiles, with their labels almost everywhere. Each
@@ -553,3 +581,98 @@ control: stop-exact
 **Predictions scored.** P5 — the flower: **met** (0.9, registered as not blind); the disk: **met** (0.75). The asking
 lane's "the disk's rim by the first-order lemma 0.7" — met; "the flower's far vertex by the first-order lemma alone 0.35" —
 **met against its odds**, and for a reason that corrects the phrase: the lemma is not first order.
+
+
+## Stage 6 — SAVED: the second prior-art pass, the sweeps, the gates, where a successor takes over
+
+### 6.1 The prior-art gate, second pass (before the report)
+
+*In this project*: nothing found beyond the plan's §PA item 1 and the entries each `prior art:` line names; the kernel
+planner's G5 and G6 (§ 3.0) are the same statements by the same route, reached blind the same afternoon. *In print*, in
+the recognition's words — `data/fs136/e1/pa/zb2.out`, four queries: spindle convexity or ball-polyhedra with colouring or
+unit distance (1: Lopez-Campos, Oliveros, Ramírez Alfonsín, *Borsuk and Vázsonyi problems through Reuleaux polyhedra*, 2025,
+Zbl 1580.52001 — title only; a Borsuk-type problem, not ours by its title; unread); a Minkowski sum with a circle and an
+avoided distance (0); tiles or regions with the unit circle and the chromatic number of the plane (1:
+`[SokolovVoronov2025]`, held); six colours with regions, tilings or maps (1: the same). **Not found in print**: the table,
+the count at two rich points, a reason for any printed region's radius. *Debts*: the ball-polar literature is recalled,
+not read (nothing rests on it); a citation walk from `[Polymath2021]` in a second database; the held Polymath16 threads
+not re-grepped for the disk's rim.
+
+### 6.2 The sweeps
+
+- **§G re-read.** *Paid*: G13 with G92 (the head statement and the cells — the whole of Stages 3 and 5 hang on it); G86
+  (the label form: it found the degenerate case before any derivation); G99 in draft (it found FS-110's entries, which
+  changed every "restates" line); G96 (kept regions as open sets with witnesses — it is why the flower's answer has an `r²`
+  in it); G84–G85 (the tangency: cones do not decide a side); G21 and G95 (the R7 control, which showed the stub's control
+  wrong). *Should have borne and was not listed*: none found. *An instance for G92* (drafted for
+  `plans/GROKKING-INSTANCES.md`): "FS-136 (2026-10-07): C124-FORCED-PIECES's argument, read at its class, is C136-TABLE —
+  any number of members, pieces and labels; the same afternoon the kernel planner reached it blind (its G6). The count's
+  'six' is 'all the labels' (R7 at seven obeys it)." *An instance for G99's Do* (if G99 is filed): "its search range, rows
+  133–138, is needed: the card searched 135–138 and missed FS-110's covering pair (rows 133–134)."
+- **§IQ and G79.** No counterexample to either rule: the table is an example's invariant (what every coloured point with
+  members carries), and the four exclusions came from it.
+- **§PA, recognitions about what the object is**: (1) the unit is a point with the members on its unit circle, and the
+  ring of a centre is an index (Stage 1; § 2.2 item 5) — for the stub's re-aim, the asking lane's; (2) the available set
+  of a label is a ball-polar or the outside of a parallel body, and to first order the question is a cover of a circle by
+  arcs of at most 180° — a draft grokking is not offered: one milestone, one mind, and G13 already says "coverage".
+- **The plan, "conjecture" and "not claimed"**: no conjecture in the plan. Not-claimed lines that are open questions, each
+  with its home: *that separation suffices* — false (Stage 5); *a converse of the table* (labels left at every cell do
+  not give a colouring) — the card's second branch, FS-124's design case, no stub of its own; *which piece at a member
+  must be crossing* — the question a successor takes (§ 6.4); *the flower's pattern B, the other rim points and far
+  vertices* — by symmetry, declined as entries (a label permutation each, read in floats).
+- **G87 lookout**: no invention signal. Two things looked like one and are not: C124-BOTH ("no common unit point … is saved
+  by one member alone") against the reading's two-label points (those pairs have a four-label member; C124-BOTH is for two
+  three-label sector points); the stub's two controls at seven ("R7 has no covering pair"; "fails at seven on R7 at two
+  adjacent lattice points"), which cannot both hold — a defect in the first, not two truths.
+
+### 6.3 Corrections owed and drafts (each names its slot; none is filed by this job)
+
+1. `plans/STUB-covering-pairs.md` § The first claims, C-RINGS-READ's *Controls*: "R7 has no covering pair (six labels of
+   seven at each lattice point)" → "R7's pairs of lattice points that carry all seven labels obey the table at every common
+   unit point inside (54 pairs, 96 points, in the window read); no pair covers with six of seven left over". The asking
+   lane's.
+2. The same section, C-COVER's *Restates*: "no held entry found for a member of four labels" → the entries of the plan's
+   §PA item 1 (FS110-CALC, FS110-N-SEAM, N-E2; `data/fs110/claims.md` l. 327). The asking lane's.
+3. `data/fs136/claims.md`: dated lines for C136-TABLE (added), C136-COVER and C136-ONE (restated on labels, with the reason),
+   C136-STOP (five entries, their kept tiles). The coordinator's; the statements are the entries' `statement:` fields.
+4. `BIBLIOGRAPHY.md`, proposed row (not held, summary read from the zbMATH record, `data/fs136/e1/pa/zb-records.out`):
+   "B. L. Bauslaugh, *Tearing a strip off the plane*, J. Graph Theory 29(1) (1998) 17–33, Zbl 0919.05018 | **Author's
+   summary read** (FS136-E1, 2026-10-07): homomorphisms and odd cycles of the unit-distance graph of a strip `ℝ × [0, r]`;
+   nothing on colourings by regions; not held". And a title-only line for Zbl 1580.52001 if the coordinator wants it.
+5. A possible defect in another job's tool, reported, not edited: `data/fs124/e2/saves_read.py` rounds vertices to nine
+   decimals and tests "an edge lies on the circle" at `10⁻⁹`. In my copy the same rounding produced 2,296 false violations
+   on the disk. Whether it moves any of that reader's counts was not examined.
+
+### 6.4 The gates, and where a successor takes over
+
+| stage | gate (from `plans/`, `derive_gate.py all FS136-E1-derivation.md`) | saved output |
+|---|---|---|
+| 0 | exit 1 — its one expected failure, "no derivation entry" | `data/fs136/e1/gate-stage0.txt` |
+| 2 | exit 0; 1 entry, 3 controls firing, 1 warning | `gate-stage2.txt` |
+| 3 | exit 0; 4 entries, 5 controls firing, 1 warning | `gate-stage3.txt` |
+| 4 | exit 0; 5 entries, 6 controls firing, 1 warning | `gate-stage4.txt` |
+| 5 | exit 0; 10 entries, 7 controls firing, 1 warning | `gate-stage5.txt` |
+
+The warning, at every stage: C136-RINGS-READ's grade "states no set" by the gate's reading of its wording; the set is the
+four points named in the statement.
+
+**Done**: every item of the brief's "Done means" through the fifth claim. **Where a successor takes over**:
+
+1. **The question the table leaves.** A cell is emptied by pieces that are *crossing* at the point across, and crossing is
+   a fact about a piece's extent. On the strip and the disk the tiles have diameter 1 and cross; on the flower the germs
+   suffice only because of the tangency. So: *at a point across of a covering pair, which pieces at the members must reach
+   across its unit circle?* For maps this is where tiles of diameter at most 1, the Reuleaux containments (FS116-N2-SIXRING)
+   and the non-Siamese clause enter; in measure nothing bounds a piece from below (G96). It is the asking lane's to pose.
+2. **The structural form's second half** — "what must the whole family of covering pairs on one ring satisfy" — is not
+   answered: this job has the table at each point, not a relation between the tables of one ring. The reading's files hold
+   every table of every held ring for whoever looks (`data/fs136/e1/out/`).
+3. **Exactness of the reading**: four points are exact; the other stops (the disk's nineteen, the strip's, the flower's five,
+   the bowtie fragment's five) are floats and symmetric images. `stop_check.py`'s `SPEC` takes a line per point.
+4. **A second mind**: the kernel lane's `ae_onSide_of_label` is C136-TABLE at one member; the label form of the count is
+   not in its skeleton as read (§ 3.0 item 2).
+
+**Predictions scored, all.** P1 met (0.8; 0.6). P2 met (0.55). P3 met (0.93). P4 met in its first half (0.85); second half
+withdrawn. P5 met (0.9, not blind; 0.75). P6: "turns on the ring's type" 0.8 — the third branch occurred, with its unit
+corrected to the table at the point across; "always" 0.04 — not derived; "a ring by formula" 0.03 — none; its added line
+("the count is slack somewhere on a held object", 0.3) was not well posed — every inside point reads L2 and I gave "slack"
+no test — and is withdrawn, a slip. P7 no (0.2).
