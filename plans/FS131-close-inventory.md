@@ -8707,3 +8707,75 @@ reason by the close.*
      acted on: FS-113 and FS-101 stay held by Kooshi's word of 2026-10-06 — no formalizing, no pricing, no
      re-offer.** He is told that the machinery exists, as a fact. (d) The method note goes into FS-132's opening
      brief when it is written.
+
+627. **EXT-OAI3 done at its Stage 5: the sweep of the outside release's other 371 families — nothing else there is on the problem itself; five neighbouring families read at their statements; three partial hits on what this project assumes or poses; one entry of its own; nine drafts** (deriver; 464k and 21 minutes by the task notice; record `plans/EXT-OAI3-review.md` Stages 1–5; report `data/external/reports/EXT-OAI3.md`; six commits `eec0f0ff`, `7d15b20e`, `9596d280`, `0ee7a8be`, `a12113b1`, `adf7208d`, on `main`, pushed; working files `data/external/oai3/`).
+     **What it found** (each graded as its record grades it; nothing of the release's was built or audited by it):
+     (1) **No other family claims anything on the plane's chromatic number, its measurable form, a field's or a
+     finite plane's number, or a unit-avoiding set's density** — 372 catalogue sentences and 722 titles read, a
+     keyword sweep with a planted control. (2) **Tier A, five families at their statements**: 172 (finite
+     Euclidean Ramsey configurations, a tensor condition over the coordinate field; Lean), 156 (Borsuk fails in
+     dimension nine; Lean), 073, 166, 167 — the first two carry method, the last three no lever it could name.
+     (3) **Tier B**: B1, `fourth_norm_le : ‖sum ψ a b‖^4 ≤ 3 * (Fintype.card F : ℝ)^3` in the release's Lean
+     (family 021's folder; three files, Mathlib their only import) for the sum this library's one axiom bounds —
+     the elementary bound, which refuses `k` colours once `q > 3(k − 1)⁴` (243, 768, 1,875, 3,888 at `k` = 4..7,
+     against Weil's 34, 62, 98, 142); B2, FS-76's C3-aper answered no at `k = |T|` in rank 3 given family 155, by
+     its own entry; B3, family 015's 886 files of entropy and leafwise-measure machinery. (4) **Its one entry,
+     `tile-colouring`, [hand], one mind, prior art owed**: `Cay(A, (F − F) ∖ {0})` has a proper `P`-invariant
+     `|F|`-colouring iff `F` has a `P`-invariant tiling complement. (5) **Tier C: no hit** — no statement of
+     `LEDGER.md` § The claim list in any family but 158. (6) **A tier the brief did not name**: the release's Lean
+     library as infrastructure for this project's backlog — planar topology (418 files), finite perimeter (321),
+     Kloosterman sums — each piece a port across 1,502 Mathlib commits, the catalogue grading its own library
+     `review: status: unchecked`. (7) **A statement defect in the release**: its note for family 167 says both
+     that the unit-distance theorem is not included and that it is proved. Logged; nothing is posted anywhere.
+     **Its predictions**: five registered, three met, Brier 0.126; the miss it names is the Tier B hits coming
+     from below the headline results. **Slips**: the brief's "eleven reasoning summaries" is eleven files for ten
+     subjects (mine); its second message's "Weil's 59" (59 is an exact spectrum; Weil's threshold at five is
+     `q > 62`) and control figures from before the control was split, both corrected in its record (its own);
+     stages 3 and 4 saved in one commit (its own). **A correction to item 626 (mine)**: I relayed "against 59 and
+     about 142"; read 62 and 142.
+     **My receipt**: the six commits are on `main` and `origin/main` is at the last; the record's §§ 4.1–5.3 read
+     whole. **Checked by me**: (i) B1's statement read in the release's file
+     (`/home/kooshi/source/math/lean/OAI/NumberTheory/Jacobsthal/Primes/KloostermanPrimeBound.lean` l. 49–51; `def
+     sum` at `Estimates/PairCollisionCount.lean` l. 23–25), its cone's import lines (nine Mathlib modules and the
+     two siblings; 374 + 72 + 85 = 531 lines; `rg` for `sorry` and a line-initial `axiom` in the three: none)
+     against this library's axiom (`Proofs/HadwigerNelson/Arith/WeilKloosterman.lean` l. 51–53): the same sum, ours
+     over the non-zero elements with `4 * c * d = a ≠ 0` and `ringChar F ≠ 2`, theirs over the units with
+     `a ≠ 0 ∨ b ≠ 0` and `ψ.IsPrimitive`, every finite field; (ii) the thresholds redone: `3(k − 1)⁴` = 243, 768,
+     1,875, 3,888 and Weil's `((k − 1) + √((k − 1)² − 1))²` = 33.97, 61.98, 97.99, 141.99; (iii) its check
+     `data/external/oai3/tile_colour_check.py` re-run in its four modes — 0 of 767 forward, 181 under the planted
+     connection set, 0 of 767 converse, 6 under its fault; (iv) both directions of the entry's argument read — I
+     follow each step; (v) `/home/kooshi/source/math` is at `adc7f124` with a clean tree. **Not checked by me**:
+     Tier A's five statements against their sources; that the sweep missed nothing; family 155's statement; the
+     file counts of its § 4.4; its reading of family 015's headers.
+     **Credit**: the tier the brief did not name, found by attacking the brief's framing — the library as
+     infrastructure is the release's largest bearing on this project's own work, and no tier of mine would have
+     shown it; a published question's link to tilings turned from "the colouring form" into an equivalence with
+     two controls that each fire; its own figure caught and corrected before I had used it anywhere but an
+     inventory line; "what this job did not do" written as a section.
+     **Rulings.** (a) **Its drafts D1–D5, D7 and D9 go into the one filing of ruling 620 (a); D6 is declined until
+     the kernel lane takes the job it is conditional on; D8 owes nothing.** D5 is a bearing line on a held stub
+     (FS-113): filed as a fact. Alternative: leave D5 out, since the milestone is held. Why filed: the stub is
+     the memory a later opener reads, and the line formalizes nothing, prices nothing and offers nothing — the
+     three things Kooshi's word of 2026-10-06 holds. Confidence: medium-high; it changes if he reads the hold as
+     covering the stub's text. (b) **B2 is announced nowhere as a result.** It stands as "[hand], one mind, over
+     an outside theorem at the release's own grade; prior art owed", a candidate for the asking lane's next
+     ranking (ruling 626 (b)); family 155's audit and `[GreenfeldTao2024]`'s reading are owed only if it is
+     ranked. Alternative: a short milestone now, as FS-133. Why not: it bears none on six against seven, nothing
+     moves at four colours, and the reduction is elementary enough that I expect it in print (my expectation,
+     unchecked) — FS-133's window argument does not apply to a result likely already drawn. Confidence: medium.
+     (c) **B1 and the library-as-infrastructure question become one planner's job, "the release's Lean by this
+     project's needs"** (`debruijn`; brief not written): which folders state lemmas the backlog would otherwise
+     prove; the cost of a port measured from its first two pieces (`LEAN.md`'s re-pricing rule; the audit's stage
+     8 lists family 158's pieces to adopt); and whether the finite list between Weil's threshold and `3(k − 1)⁴`
+     is affordable in the kernel. **Family 015's folder is fenced out of its pricing**: FS-113 and FS-101 stay
+     held. It queues after FS-132's opening and the import's landing, and before any wave whose module it could
+     shorten restarts. Alternative: each wave's planner looks as it resumes. Why one job: the pin gap is one cost,
+     measured once, and Kooshi's answer 1 ("import and adopt parts piecemeal if needed") needs someone to say
+     where it is needed. Confidence: medium; Kooshi is told, and his word on the backlog's restart may reorder
+     it. (d) **No family gets a full reading or audit of its own now.** Family 156's three sections are read by
+     FS-132's opening (D7); 155 and 172 wait on the asking lane. (e) **Its question for the asking lane** — a
+     fixed-dimension, fixed-colour form of family 172's tensor criterion over a field — goes into the asking
+     lane's next brief. (f) **Slot**: the sweep's slot takes the Clerk (half a slot) on the one filing now, and
+     FS-132's opening at the import implementer's hand-back; the import's landing launches only after the Clerk's
+     branch is merged, so no `CLAUDE.md` edit lands while a landing is in flight. In flight: 2 (the import;
+     FS-133's deriver).
