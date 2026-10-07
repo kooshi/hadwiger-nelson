@@ -1,0 +1,10 @@
+card lint
+  cards: 2  no-question exits: 0
+  the ask: About a point of four or more labels, must some two pieced points of its unit circle whose labels together are all six have a second common unit point, within 2, that no weak six-colouring can contain?  [line 347]
+hunch ledger
+  hunches: 13  open: 7  confirmed: 3  killed: 3
+evidence inventory
+  warn  unread: `data/fs124/claims.md`
+  warn  unread: the first round's record beyond its list of theorems, and `plans/FS124-tight-pairs.md`
+  items: 24  surprised: 9  unread: 2
+GATE: PASS (0 failures, 2 warnings)
