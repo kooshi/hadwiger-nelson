@@ -8167,3 +8167,30 @@ reason by the close.*
      **Told to Kooshi at once.** **A note for the frontier, mine and unread**: this project's bridge (row 107) names
      `ℝ_alg` as real closed and a named hypothesis; their rigidity is stated at `ℝ_alg(i)` — the reading's second
      message says whether the two meet.
+
+612. **A MACHINE INCIDENT, over: an unslotted process of the outside audit exhausted the RAM twice in two and a half minutes; the kernel killed only that process** (source: EXT-OAI1's message to "main", sent by it at once, 2026-10-07 about 02:03 UTC; the kernel's log read by me).
+     **What happened, its account**: to read the usage of `leanchecker` (the kernel-replay tool in the release's
+     toolchain) it ran the binary with a help flag, outside a slot; the binary takes no such flag and, with no module
+     named, replays every module on its search path on 36 threads. Three runs between 02:00:15 and 02:02:50 UTC: two
+     killed by the kernel at about 119 GB resident, the third killed by it by PID at 95 GB. The first kill was hidden
+     from it by a pipe into `head`. **Read by me** (`journalctl -k`): exactly two `Out of memory: Killed process …
+     (leanchecker)` lines, at 02:00:46 and 02:02:09 UTC, pids 790279 and 793251, both
+     `global_oom`; no other kill; **no `ext4`, I/O, oops or segfault line in the twenty minutes around it**; at
+     02:04 UTC 119 GiB available, the slot ledger holding three slots within budget, no `leanchecker` process.
+     **The other jobs in the window**: wave 8's landing's build that started 02:00:53 UTC ends "Build completed
+     successfully (2491 jobs)"; wave 9's implementer's of 02:04:14 the same — both read by me. **The rule**
+     (`RUNNING.md` § Building: "On any unexplained process crash … HALT and report to Kooshi immediately"): the crash
+     is explained by the kernel's own lines and its cause is removed, so no halt; **reported to Kooshi at once.**
+     **Slips.** *The job's, disclosed by it*: a process run outside the slot on the guess that a flag was inert; an
+     exit status read through a pipe (standing rule 9); a second run before the first was understood. *Mine*: its
+     brief said every build and long process runs under the slot, and did not say that a first look at an unknown
+     binary is one. **A finding about the tool, the job's, for this project's own publication gate**: `leanchecker`
+     at toolchain v4.34.1 with no module argument is a whole-search-path replay, unbounded in threads and memory,
+     and an unknown flag does not stop it. **Rulings.** (a) **The audit continues**, everything under the slot; a
+     capped replay of the solution module is tried on a small module first, and "not run here, and why" is an
+     accepted line if it does not fit in about 40 GiB. Alternative: halt the audit. Why not: the cause is known and
+     removed, and the audit's third answer is what the standing conditional waits on. Confidence: high. (b) **The
+     landing and the implementer are told** (one message each): steps that overlapped the window are named in
+     their records with exit and last log line, anything not clean re-run, and the landing's evidence taken from a
+     pass begun after 02:03 UTC. (c) **A line for `RUNNING.md` § Building, filed now** (below): an unknown binary
+     is never probed outside a slot.
