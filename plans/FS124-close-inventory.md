@@ -159,4 +159,39 @@ between two colours that is an arc of the unit circle about a point one unit awa
    alternative: finish the exclusion's leaves first; why this order: the radius clause is the statement both answers are
    consumed through, it stands on a theorem this library already holds and one import, and a blind planner is best
    launched before more of the derivation is written around it; confidence medium.
+8. **FS124-E1, verdicts on the first-order rule (13:24 UTC): derived — and the card's question, for one tight pair, gets its
+   third answer: nothing is forced beyond the first step** (record `plans/FS124-E1-derivation.md` Stage 4; eleven entries
+   so far, six controls). **C124-SHADOW-OPEN** — an open set carrying one label almost everywhere bars that label from
+   almost every point at distance exactly 1 from it: one application of Fubini, and FS-132's shadow statement is its
+   corollary. **C124-CENTRE** and **C124-COMPLETION derived as posed**; **C124-OPEN** (tightness is open along the ring);
+   **C124-STRADDLE** (the completion's conclusion at every point one unit from the far end but two); **C124-ANTIPODE**
+   (at the point opposite the centre the outside label is absent, and the inside label is absent inside the circle of
+   radius 2 about the centre). **The paragraph my brief asked for**: at a completion the rule forces the absence of the
+   pair's two labels in a full neighbourhood, at every number of labels, "and with no other content"; **"that is not a
+   property of tight pairs"** — the argument never reads the interface's radius; **the completion is not forced to be an
+   end of a tight pair** (on the tight seven-colouring, 0 of 6); what tightness adds is at the two points where the unit
+   circle is tangent to the arc — the centre and the point opposite it. **A correction of its own first message, by
+   formula**: "the recurrence sits at the ends of maximal tight arcs" is the tight seven-colouring's shape (6 of 6) and
+   the disk's pentagon's (10 of 40) and **false of the strip (0 of 92)**; "what all three share is at the centre: each
+   centre is of kind both for several arcs at once"; **the next round's unit should be the centre with all its tight
+   arcs**. **Controls, on models with no margin**: the tight seven-colouring; the strip and the disk read from their own
+   tiles (62 unit arcs tight, 58 of kind both; 114 completions, 2,850 samples, no label of the pair); the honeycomb at
+   circumradius 1/2 (no tight direction). **Not run**: three fragments, the search's kept model, the strip's caps.
+   **A finding about one of the card's controls**: the honeycomb at circumradius 1/2 is tight only at its vertices and
+   has slack along its edges, so it is not a model with no margin for statements about edges; the tight seven-colouring
+   is. **My receipt**: the stage is on `main`; **its gate run by me** — exit 0, 0 failures, 2 warnings, six controls each
+   firing; the six entries' uses, verdict, grade and minds fields and the paragraph read by me; **two steps checked by my
+   own reasoning** — the lemma (if the label's class met the unit-distance neighbourhood of the open set in positive
+   measure, a positive measure of unit pairs would carry the label at both ends) and the crossing (two unit circles
+   through one point are tangent there only when their centres coincide or are symmetric about it; otherwise each
+   crosses from the other's inside to its outside, so a completion's circle enters both collars). Not checked by me: the
+   opposite point's second clause; the controls' scripts. **Scored**: the asking lane's "recurs 0.50, runs out 0.12,
+   nothing forced beyond the first step 0.38" — the third, at first order and for one pair; the deriver's own P3 (0.85)
+   met. **Rulings.** (a) The verdicts enter the claim list. (b) **This goes to the asking lane as a re-posing job when the
+   deriver hands back** — with the last three claims' verdicts, of which the count at a four-label centre is already
+   about the centre: alternative, re-pose now; rejected, no slot is free and the remaining verdicts bear on the new unit;
+   confidence medium-high. (c) **The search request of line 12 is not queued as written**: its rules were to be the
+   centre's and the completion's, and the completion's is now known to carry no datum; the asking lane re-poses it with
+   the card. (d) Kooshi is told in the next report, plainly: the rule holds, it is weaker than the card hoped, and it is
+   not special to unit arcs.
 

@@ -79,3 +79,12 @@ at the end.*
   over one declared outside theorem). **One statement added by the deriver, derived with them**: **C124-RADIUS-COUNTABLE** —
   statement: Let k ≥ 1, U an open set of the plane, c a weak k-colouring of U, and V a countable subset of U whose closure is a compact subset of U. Then the unit-distance graph on V has a proper k-colouring of the form v ↦ c(g(v)) for a rigid motion g with g(V) ⊂ U. *Not claimed (C124-RADIUS-COUNTABLE):* anything for an uncountable V; anything for a countable V that accumulates at the boundary of U; that the colouring obtained is measurable in any sense on a larger set. **It fixes no value of `χ(ℝ²)`.**
 
+- **2026-10-07 (13:24 UTC; after FS124-E1's Stage 4; FS-124 inventory item 8): the first-order rule has its verdicts.**
+  **Derived** (each [hand] or derived from a [hand] entry, one mind, kernel pending): C124-SHADOW-OPEN (the one lemma),
+  C124-OPEN, C124-CENTRE (as posed), C124-STRADDLE, C124-COMPLETION (as posed, as a case of C124-STRADDLE), C124-ANTIPODE.
+  **What they say of the card**: at a rhombus completion the rule forces the absence of the pair's two labels and nothing
+  else, at every number of labels; it is not special to tight pairs — "every interface between two open one-label pieces
+  passes the same absence to every point whose unit circle crosses it"; the completion is not forced to be an end of a tight
+  pair. **Of the card's three branches, for one tight pair and first-order tools, the third.** Still to come: C124-KIND,
+  C124-SIX with C124-SIX-CONES, C124-HALF.
+
