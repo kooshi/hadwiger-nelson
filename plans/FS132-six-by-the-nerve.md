@@ -127,7 +127,7 @@ of three pairwise interfaces — a triple junction, with no regularity assumed.
   a fetch): the newest entries are arXiv:2606.28157 and arXiv:2606.12325, both held (`[DuczVarga2026]`, `[Ducz2026]`); **nothing
   dated from 2026-10-06 on**. Seen in a listing only.
 - zbMATH Open API: three queries prepared (the question under "nerve", "covering dimension", "Sperner", "Lebesgue covering";
-  Raiskii's paper; measurable colourings 2019–2026) — **the API returned 503 on each**. A prior-art debt, retried before the report.
+  Raiskii's paper; measurable colourings 2019–2026) — **the API returned 503 on each**, and again on two retries, the last before the report. A prior-art debt: the queries are `"chromatic number of the plane" & (nerve | "covering dimension" | Sperner | "Lebesgue covering")`, `("measurable chromatic number" | "measurable coloring" | "measurable colouring") & ("unit distance" | plane) & py:2019-2026`, and Raiskii's 1970 paper by author and title.
 - `BIBLIOGRAPHY.md`: `[OAIMath2026]` is held (l. 401), `[HurewiczWallman1948]` and `[VanderWoude2023]` (ll. 403–404);
   `[Raiskii1970]` is "Listing only … not held, unread" (l. 873).
 - The release itself on six: "The remaining alternatives six and seven are unresolved." (`M/introduction.tex:70`, as the stub
@@ -207,6 +207,9 @@ to an hour, no run over a minute; a kill redoes the stage in progress and nothin
    two controls at seven; the conclusion at six as a list. *Stop rule:* an entry with its verdict; a step that reads five is a
    statement defect against `plans/EXT-OAI2-reading.md` § 4.2 and a message.
 4. (if context allows; else the second job) C132-RUN-EMPTY, then C132-RUN-CV, C132-DIAG, C132-RADIUS.
+
+**State after FS132-E1 (2026-10-07):** stages 1–3 saved (`plans/FS132-E1-derivation.md`); C132-EXT and C132-CORES derived, wider
+than posed; stage 4 not begun. The second job starts at the record's § Where the second job takes over.
 
 **Failure clauses.** The stub's stand. Added: if the derivation of EXT needs a clause the posed statement lacks, the clause is
 built into the statement and reported, never patched silently; if a reading's dictionary proves too poor to state a step, that is
