@@ -11,8 +11,8 @@ classical argument would say, for each of the three edges at that vertex, that n
 in an explicit open region along the unit circle about the vertex. **We ask whether every such colouring, however
 irregular, has a point at which that conclusion holds for some cycle of at least three colours** (Question 1, § 2).
 
-We can prove it when a certain closed set of exceptional points is finite in a disc, and when three colours leave room
-along one unit circle. In general we can neither prove nor refute it. Three attempts stalled, each at a step stated in
+We have proofs — by hand, and not independently checked — when a certain closed set of exceptional points is finite in
+a disc, and when three colours leave room along one unit circle. In general we can neither prove nor refute it. Three attempts stalled, each at a step stated in
 § 6. The case that matters is $k = 6$; a counterexample with $k \ge 7$ would also tell us something.
 
 Why we ask. The chromatic number of the plane is 6 or 7, and it is the least $k$ for which a colouring of the above kind
@@ -58,14 +58,15 @@ to $p$.
 everywhere and their closures share two points $p \ne q$ (tiles of a map with a common edge through $p$). Then $q$
 witnesses $\{a, b\}$ at $p$: a point $z \in \Delta(p, q)$ is at distance exactly 1 from a point of a path in $T_a$
 running from near $p$ to near $q$, and almost-everywhere properness then forbids the label $a$ near $z$ (statement P1
-in § 5; [NFC], § 7, names [SV], Propositions 1–2, as the precedent, for interfaces that come from a regular map). So at a vertex where
-three tiles meet pairwise along edges there is a witnessed triangle. A witnessed cycle is what remains of "a vertex with
+in § 5; [NFC], § 7, names [SV], Propositions 1–2, as the precedent, for interfaces that come from a regular map). So at
+a vertex where three tiles meet pairwise along edges there is a witnessed triangle. A witnessed cycle is what remains of "a vertex with
 its edges" when there is no map. The difficulty is that a measurable class need not contain any connected piece.
 
 **Further definitions, used in the variants and in § 6.**
 
 *Disc averages* ([NFC], § 7). $p_i^\varepsilon(z) = |A_i \cap B(z, \varepsilon)| / (\pi \varepsilon^2)$. These are
-continuous, non-negative, and sum to 1 at every point.
+continuous, non-negative, and sum to 1 at every point. For $\alpha > 0$ we call the open set
+$\{p_i^\varepsilon > \alpha\}$ a *smoothed class* of the label $i$.
 
 *Transition graph and cyclic centres* ([NFC], Definition 6.1 and Theorem 6.5). For distinct labels $i, j$, a ball $B$
 and a vector $h$, let $D_{ij}(B, h) = |\{q \in B : \{c(q), c(q + h)\} = \{i, j\}\}|$. The *transition graph* $\Gamma_x$
@@ -99,9 +100,10 @@ $D$?*
 Remarks on the quantifiers.
 
 - *The number of colours.* For $k \le 5$ no weak measurable $k$-colouring exists ([NFC], Theorem 1.4; a colouring with
-  fewer colours is one with five), so the statement is empty. For $k \ge 7$ such colourings exist (the hexagonal colouring, § 7), and the statement holds for every one we
-  can write down. For $k = 6$ no such colouring is known and none is excluded; if none exists the statement is empty at
-  six, and showing that none exists is the Hadwiger–Nelson problem itself. The useful answers are therefore a proof
+  fewer colours is one with five), so the statement is empty. For $k \ge 7$ such colourings exist (the hexagonal
+  colouring, § 7), and the statement holds for every one we can write down. For $k = 6$ no such colouring is known and
+  none is excluded; if none exists the statement is empty at six, and showing that none exists is the Hadwiger–Nelson
+  problem itself. The useful answers are therefore a proof
   that does not need to know whether six-colourings exist (for all $k$, or for $k = 6$ from properties any such
   colouring must have), or a counterexample at some $k \ge 7$.
 - *The disc.* The radius 1 is where our one unconditional result lives (P2 in § 5: every closed disc of radius above 1
@@ -109,8 +111,9 @@ Remarks on the quantifiers.
   serve our purpose equally, and we cannot prove that either. A counterexample needs only one disc.
 - *What is not asked of $p$.* Nothing says the labels $i_j$ occur near $p$, and nothing says $p$ is a cyclic centre.
   This is deliberate: the consequences we draw from a witnessed cycle (§ 5, P7 and P8) use the points $q_j$ and nothing
-  else. It has a cost: the statement is true for cheap reasons wherever a colouring leaves room (P4), at points where
-  nothing meets. The variants below ask for more.
+  else. It has a cost: the statement is true for cheap reasons wherever a colouring leaves *room* — three labels whose
+  supports avoid an annulus about the unit circle of $p$ (P4) — at points where nothing meets. The variants below ask
+  for more.
 
 ## 3. Variants
 
@@ -180,8 +183,9 @@ found no gap.
   proof given there does not use the number of colours, and the accompanying Lean statement of the inequality is for
   every $k$.)
 - **T5 ([NFC], Proposition 7.1, with Lemmas 7.3–7.8).** For a weak measurable five-colouring (the proof works on a
-  square of side ten): there are $\ell \in \{3, 4, 5\}$, distinct labels, a point $x$, a radius $\rho$ and compact connected sets
-  $K_j \subset \overline{B(x, \rho)}$ through $x$ meeting $\partial B(x, \rho)$, each with a limiting direction at $x$,
+  square of side ten): there are $\ell \in \{3, 4, 5\}$, distinct labels, a point $x$, a radius $\rho$ and compact
+  connected sets $K_j \subset \overline{B(x, \rho)}$ through $x$ meeting $\partial B(x, \rho)$, each with a limiting
+  direction at $x$,
   such that $H_{i_j}$ and $H_{i_{j+1}}$ are disjoint from $\Delta(K_j)$. Its proof uses [NFC], Theorem 6.5 (for five
   colours, $\mathcal L$ is closed and locally finite). Since no five-colouring exists, what matters here is the method;
   § 6 describes it.
@@ -280,10 +284,11 @@ positive, so the map takes its values in the complete graph $\mathcal G$ on the 
 discs are filled in through trees ([NFC], Lemma 7.4); one small disc is kept around each cyclic centre, and here
 finiteness of $\mathcal L \cap D$ is used for the first time, to keep their total radius small. A connected set on which
 coordinate $i$ is positive has diameter at most $1 + o(1)$, by T4 ([NFC], Lemma 7.6). If the loop of the map around
-every kept disc were null-homotopic in $\mathcal G$, the map would extend over a disc of radius above 1, and the connected
-components of the sets where one coordinate is positive would form an open cover of multiplicity at most two and mesh
-below the radius, against T6 in its disc form. Hence some cyclic centre carries a loop that is essential in $\mathcal G$; with no cyclic centre at all
-the same argument gives a contradiction outright, which is P2. To extract more, take a cyclic centre $x$ with essential
+every kept disc were null-homotopic in $\mathcal G$, the map would extend over a disc of radius above 1, and the
+connected components of the sets where one coordinate is positive would form an open cover of multiplicity at most two
+and mesh below the radius, against T6 in its disc form. Hence some cyclic centre carries a loop that is *essential*
+(not null-homotopic) in $\mathcal G$; with no cyclic centre at all the same argument gives a contradiction outright,
+which is P2. To extract more, take a cyclic centre $x$ with essential
 loops at all scales of a sequence and an annulus $\overline{B(x, \rho)}$ minus the kept disc about $x$. The reduced word
 of the inner loop contains a simple cycle of labels; for each edge of that cycle, the preimage of the edge's midpoint
 has a connected component that crosses the annulus ([NFC], Lemmas 7.7–7.8); Hausdorff limits of these components are
@@ -312,13 +317,14 @@ triangle ($\ell = 3$) — the aim is variant (3), by contradiction. For map-type
 six-colouring all of whose vertices are three-coloured (by our records it is the argument behind [SV], Corollary 1; we
 did not reread that paper for this note): the unit circle about such a vertex is coloured by the three other colours;
 that colouring has a winding number, so it changes colour at least nine times; each change leads into the disc to a
-further vertex; a count then produces two vertices of one type less than 2 apart; and two unit circles coloured by the
-same three colours, with centres between 1 and 2 apart, are excluded. We tried to carry the chain over. Its first step carries: at a point $x$ with the data of P3 for
-$\ell = 3$, with $N$ the set of the three other labels, at every direction $e$ perpendicular to no $v_j$ there are an
+further vertex; a count then produces two vertices of one type (the same three colours) less than 2 apart; and two unit
+circles coloured by the same three colours, with centres between 1 and 2 apart, are excluded. We tried to carry the
+chain over. Its first step carries: at a point $x$ with the data of P3 for $\ell = 3$, with $N$ the set of the three
+other labels, at every direction $e$ perpendicular to no $v_j$ there are an
 arc about $e$ and a one-sided strip along the unit circle about $x$ over that arc — outside the circle if
 $e \cdot v_j > 0$ for at least two $j$, inside if $e \cdot v_j < 0$ for at least two $j$ — on which the colouring takes
-only labels of $N$ almost everywhere (P7, with witnesses taken on the $K_j$ close to $x$). Let $\Pi_x(e) \subset N$ be the set of labels of positive weight
-at $e$ in the weak-$*$ limits of the samples $f \mapsto (1_{A_i}(x + r_n f))_i$ with $r_n \to 1$ from that side. Then
+only labels of $N$ almost everywhere (P7, with witnesses taken on the $K_j$ close to $x$). Let $\Pi_x(e) \subset N$ be
+the set of labels of positive weight at $e$ in the weak-$*$ limits of the samples $f \mapsto (1_{A_i}(x + r_n f))_i$ with $r_n \to 1$ from that side. Then
 $\Pi_x(e) \ne \emptyset$ and $\Pi_x(e) \cap \Pi_x(Re) = \emptyset$ for almost every $e$ (the second from [NFC],
 Corollary 5.4, stated there for five colours; its Lean statement is for every $k$). We also have the
 winding statement in the form needed: if a measurable $\Pi$ from $S^1$ to the non-empty subsets of a three-element set
@@ -349,7 +355,8 @@ $\{p_i^{\varepsilon} > \alpha\}$ already carries the exclusion for the label $i$
 and no cyclic centre. So a pair $\{a, b\}$ is witnessed at $x$ by $q$ as soon as $q$ is reached from $x$ in both labels
 (variant (1b)). And points where three smoothed classes meet exist with no hypothesis: for $0 < \alpha < 1/k$ the
 components of the sets $\{p_i^\varepsilon > \alpha\}$ cover the plane and have diameter at most $1 + o(1)$, so by T6
-every closed disc of radius above 1 contains, at every small scale $\varepsilon$, a point lying in three of them.
+in its disc form every closed disc of radius above 1 contains, at every small scale $\varepsilon$, a point lying in
+three of them.
 
 *The step it could not take.* The selection of a point through which connected pieces of two smoothed classes pass and
 reach a common second point — for each edge of some cycle of labels, with the second point at a distance bounded below
@@ -374,7 +381,7 @@ than $1$ from every other hexagon of the colours 1, 2, 3, which is why recolouri
 
 - **Example A (the hexagonal colouring itself).** Its cyclic centres are the vertices. At each vertex there is a
   witnessed triangle on its three colours, for two reasons: the tiles (P1), and room (P4) — the three colours avoid an
-  annulus about the unit circle of every point within $0.01$ of the vertex. So every such point has a witnessed
+  annulus of half-width $0.012$ about the unit circle of every point within $0.01$ of the vertex. So every such point has a witnessed
   triangle, and all but the vertex are not cyclic centres. With $r = 1/2$ the tiles have diameter exactly 1 and the room
   is gone (the three colours of a vertex now occur in every annulus about its unit circle); P1 still applies at the
   vertices.
@@ -386,8 +393,8 @@ than $1$ from every other hexagon of the colours 1, 2, 3, which is why recolouri
   $1 + (\lfloor 3 \cdot 2^n \theta \rfloor \bmod 3)$. On an arc of directions the circle samples about $x$ of radii
   $1 + \tfrac34 2^{-n}$ converge weak-$*$ to $(\tfrac13, \tfrac13, \tfrac13)$ in the coordinates 1, 2, 3: a palette of
   three labels on a set of directions of positive measure.
-- **Example D (dust; described, not written out by formula).** Around a point, nested closed curves of a second label whose thickness tends to 0 faster than
-  their radius: the point is a density point of the first label, while every connected subset of
+- **Example D (dust; described, not written out by formula).** Around a point, nested closed curves of a second label
+  whose thickness tends to 0 faster than their radius: the point is a density point of the first label, while every connected subset of
   $\{p^\varepsilon > \alpha\}$ for the first label near it has diameter tending to 0 with $\varepsilon$. Planted with
   the colours 1, 2, 3 inside $B(v, 0.03)$ it is a proper colouring in which P5 gives no witness at that point — and P4
   still does.
@@ -479,8 +486,9 @@ exists.
 ## References
 
 - **[NFC]** *The Euclidean plane is not five-colorable*, preprint dated September 23, 2026, with a Lean 4
-  formalization; in the repository `https://github.com/openai/math` (commit `adc7f1241b42e322a6451854ab7e4b4c146bf78a`),
-  under `preprints/The-Euclidean-plane-is-not-five-colorable-September-23-2026/`.
+  formalization; in the repository `https://github.com/openai/math`, commit
+  `adc7f1241b42e322a6451854ab7e4b4c146bf78a`; the manuscript is at
+  `https://github.com/openai/math/blob/main/preprints/The-Euclidean-plane-is-not-five-colorable-September-23-2026/paper.pdf`.
 - **[SV]** G. Sokolov, V. Voronov, *On the chromatic number of the plane for map-type colorings*, arXiv:2502.01958;
   Discrete Mathematics 349 (2026) 115321.
 - **[HW]** W. Hurewicz, H. Wallman, *Dimension Theory*, Princeton University Press, revised edition 1948.
