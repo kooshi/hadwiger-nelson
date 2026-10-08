@@ -63,3 +63,10 @@ H, so one piece H with an exactly computed α(H) < 0.1682·|H| proves it; becaus
 as hard as the board (for a union of j parallel no-clash lines, j·3.783 ≤ α(H) < j·3.870: no integer fits below j = 10;
 at j = 10 it would have to be exactly 38 of 230 cells, and that would give α = 87 outright); (4) Russian-doll search over
 nested unions of lines is the classical algorithm of this shape.
+
+**Corrections, same evening (found while fixing the claim list for the tool's planner).** (1) "No earlier record of a
+lower bound" is wrong for the sibling repository: its independent-set tool already holds 87 at 23, sixteen threads
+agreeing (`/home/kooshi/source/descent-engine/plans/WO-18-outcome.md` § 2.3) — measured there against the 106 that five
+colours need, not against the 89 that six need. (2) "no integer fits below j = 10" is false: `87j/23 ≤ α(H) < 89j/23`
+has the integer solutions 19, 23, 27 at j = 5, 6, 7 as well; j = 5 is out for whole lines, because one whole line is
+already 23 clash-free cells. The corrected statement is `data/puzzle23/claims.md` S5.
