@@ -6,3 +6,4 @@ K3: Have the lean engineer build the tool, using the algo you describe, in such 
 
 Read by Keryx: "the lean engineer" in K3 is the Rust engineer of the sibling repository (he names Ferrous and that repository); two jobs, a planner and then an implementer, each a fresh mind.
 K4: back on the field coloring: well... what if we pack it into a 3 bit representation (for up to 8 colors), and have a GPU kernel evaluate each board for clashes, and maybe have the CPU have each of the boards queued to push to the GPU? idk. depends on where the bottleneck is
+K5: nah, not worth it. […] we'll go back to the frontier. end tangent.

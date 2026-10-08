@@ -70,7 +70,20 @@ from; where the two differ, this section is current.
    file is `scratchpad/agents.txt` there. No record of FS-124, FS-136 or FS-137 cites a temp path, by my search and by
    each agent's own statement.
 
-**Order when the budget returns**: Kooshi's idea → the filing (2) → my review of FS-137's five entries → one kernel
+**Since the wind-down (2026-10-08 03:25 UTC; nothing is running, nothing is owed from any of it):**
+- **Kooshi's idea is heard and its tangent is ended by his word** ("nah, not worth it. […] we'll go
+  back to the frontier. end tangent."). The whole record is `data/puzzle23/README.md` (his words: `data/puzzle23/REQUEST.md`):
+  a family of colourings of the 23 board searched exactly (eight, no better than stripes); how many cells one colour can
+  hold (87 found, as already on file; the ledger's bracket is [87, 97], row 75 — **not "at most 105"**); a Rust planner's
+  design for an exact tool in the sibling repository, **not built** by his word. Do not reopen it or re-offer it.
+- **The existence step is written up as a question for a third party** (FS-132 inventory items 53–56):
+  `plans/FS127-Q1-question-for-a-third-party.md`, delivered to Kooshi as a file; he sends it himself. Corrections owed
+  from its writer, none made: the gloss of form (O) in `plans/FRONTIER-STUBS.md` l. 46 (the asking lane's, at its next
+  job); `BIBLIOGRAPHY.md` l. 401's "Corollary 5.3" (the writer reads the manuscript as 5.4 — verify, then fix).
+- **Kooshi's word for what comes next: "[…] we'll go back to the frontier."** The line above that
+  says his idea is unheard is superseded by this block.
+
+**Order when the budget returns**: the filing (2) → my review of FS-137's five entries → one kernel
 slot on FS-136's 25 leaves and one deriver on FS-137's sixth claim → at its verdict, the card's stop (§ 0d item 3).
 The three questions open with Kooshi (§ 0d) are still unanswered, each at its default.
 
