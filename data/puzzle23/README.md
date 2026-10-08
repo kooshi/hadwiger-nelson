@@ -70,3 +70,17 @@ agreeing (`/home/kooshi/source/descent-engine/plans/WO-18-outcome.md` § 2.3) �
 colours need, not against the 89 that six need. (2) "no integer fits below j = 10" is false: `87j/23 ≤ α(H) < 89j/23`
 has the integer solutions 19, 23, 27 at j = 5, 6, 7 as well; j = 5 is out for whole lines, because one whole line is
 already 23 clash-free cells. The corrected statement is `data/puzzle23/claims.md` S5.
+
+## The tool (Kooshi's word, `REQUEST.md` K3) — state
+
+- What it must decide is fixed in `claims.md` (D1–D3, S1–S6). S3–S5 are one mind's, by hand, unchecked.
+- **The planner is launched** (21:5x UTC, 2026-10-07; job WO22-FP1, the Rust engineer of the sibling repository, Opus;
+  brief `briefs/WO22-FP1-exact-independence-plan.md`, gate pass, generator `briefs/mk-wo22-fp1.py`). Its record will be
+  in the sibling repository: `/home/kooshi/source/descent-engine/plans/WO-22-exact-independence.md` (it may rename it).
+  It writes there and under that repository's `scratch/wo22/` only, commits locally, and does not push — the product
+  owner (this session) reviews and pushes.
+- **Next, at its hand-back**: review the plan by artifact (the commits exist; one measurement re-run); any statement it
+  found false is corrected in `claims.md` by a dated line; then the implementer's brief (a fresh mind of the same agent
+  type, on the plan), on the pattern of the planner's generator. The decisive run is DECIDE(23, 89).
+- The milestone handoff (`plans/SESSION-HANDOFF-2026-10-07.md`) is untouched at Kooshi's word; this section is this
+  tangent's handoff.
