@@ -129,3 +129,26 @@ matter — stopping at one with a clear "what is left" is a good hand-back.
 
 You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review
 work it knows exists).
+
+## Amendment 1 (2026-10-08 03:17 UTC) — one more lever to price: a GPU for the heavy branch
+
+Kooshi, reading your stage-2 measurements:
+
+> K4: back on the field coloring: well... what if we pack it into a 3 bit representation (for up to 8 colors), and have a GPU kernel evaluate each board for clashes, and maybe have the CPU have each of the boards queued to push to the GPU? idk. depends on where the bottleneck is
+> — source: data/puzzle23/REQUEST.md
+
+His sketch is about colouring boards; I am passing it to you for the search you priced, because that is where a
+bottleneck has been measured. My reading, unchecked: checking finished boards is never the bottleneck — what generates
+them is — but the heavy branch of DECIDE(23, 89) has an inner loop that is a few ANDs and popcounts on a 529-bit mask,
+and "the processor splits the tree into a queue of sub-boards, the GPU finishes each" is his sketch transposed to it.
+This machine has two cards (`nvidia-smi` reports graphics card A with 32 GB and graphics card B with 24 GB).
+
+**Asked of you, as part of the design's list of levers — to price, not to build:** what one node of the heavy branch
+costs in word operations; what node rate a GPU kernel would have to reach for DECIDE(23, 89) to take days and whether
+that is plausible for this kernel; how unevenly sized subtrees would be handed back and re-split; and what such a run
+does to the certificate and its checker, which cannot log every node of a tree that size. Say where it ranks among
+your other levers. If you think it is the wrong lever, say that and why — that is an answer.
+
+Nothing else changes: the statements, the acceptance, the files you may write. A GPU toolchain or crate that is not
+already on this machine is an install and needs Kooshi: name it in the plan, do not fetch it. You start no agents of
+your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).

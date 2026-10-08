@@ -5,3 +5,4 @@ K2: It feels like the largest independent set could be solved by ehaustive exact
 K3: Have the lean engineer build the tool, using the algo you describe, in such a way that it can be used to solve any/all of our open primes. Technically it will require both a Ferrous planner and Ferrous implementer. It can just go into the descent engine repo as a new binary.
 
 Read by Keryx: "the lean engineer" in K3 is the Rust engineer of the sibling repository (he names Ferrous and that repository); two jobs, a planner and then an implementer, each a fresh mind.
+K4: back on the field coloring: well... what if we pack it into a 3 bit representation (for up to 8 colors), and have a GPU kernel evaluate each board for clashes, and maybe have the CPU have each of the boards queued to push to the GPU? idk. depends on where the bottleneck is
