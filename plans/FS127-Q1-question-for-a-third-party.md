@@ -101,7 +101,7 @@ Remarks on the quantifiers.
 
 - *The number of colours.* For $k \le 5$ no weak measurable $k$-colouring exists ([NFC], Theorem 1.4; a colouring with
   fewer colours is one with five), so the statement is empty. For $k \ge 7$ such colourings exist (the hexagonal
-  colouring, § 7), and the statement holds for every one we can write down. For $k = 6$ no such colouring is known and
+  colouring, § 7), and the statement holds for every one we can write down (by P1 or P4 of § 5). For $k = 6$ no such colouring is known and
   none is excluded; if none exists the statement is empty at six, and showing that none exists is the Hadwiger–Nelson
   problem itself. The useful answers are therefore a proof
   that does not need to know whether six-colourings exist (for all $k$, or for $k = 6$ from properties any such
@@ -324,7 +324,7 @@ other labels, at every direction $e$ perpendicular to no $v_j$ there are an
 arc about $e$ and a one-sided strip along the unit circle about $x$ over that arc — outside the circle if
 $e \cdot v_j > 0$ for at least two $j$, inside if $e \cdot v_j < 0$ for at least two $j$ — on which the colouring takes
 only labels of $N$ almost everywhere (P7, with witnesses taken on the $K_j$ close to $x$). Let $\Pi_x(e) \subset N$ be
-the set of labels of positive weight at $e$ in the weak-$*$ limits of the samples $f \mapsto (1_{A_i}(x + r_n f))_i$ with $r_n \to 1$ from that side. Then
+the set of labels of positive weight at $e$ in the weak-$*$ limits of the samples $f \mapsto (1_{A_i}(x + r_n f))_i$ with $r_n \to 1$ from that side (an essential union, as for the palette). Then
 $\Pi_x(e) \ne \emptyset$ and $\Pi_x(e) \cap \Pi_x(Re) = \emptyset$ for almost every $e$ (the second from [NFC],
 Corollary 5.4, stated there for five colours; its Lean statement is for every $k$). We also have the
 winding statement in the form needed: if a measurable $\Pi$ from $S^1$ to the non-empty subsets of a three-element set

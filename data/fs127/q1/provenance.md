@@ -233,3 +233,45 @@ job id, row, stub number, grokking number or path of ours.
 - The square form of the cover theorem in this library's kernel is used only as the source of T6's wording.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: the cold read, and what it changed
+
+*2026-10-08. The document read whole, as its reader, with nothing else open; then each sentence that states a fact
+checked against the row of § 2.2 that carries it.*
+
+**Found and fixed** (each was in the first draft, commit `stage 2a`):
+
+1. § 0 said "We can prove it when …" with no status; now "We have proofs — by hand, and not independently checked".
+2. "room" was used before it was defined; defined at its first use (§ 2, third remark).
+3. "smoothed class" (variant (1b), P5) had no definition; defined with the disc averages.
+4. "essential" loop, and the "type" of a vertex, were undefined; glossed where they occur.
+5. T6 gave the disc form of the cover theorem as printed. It is this project's (E1's S6, [hand], one mind); the entry now
+   states the two printed forms and marks the disc form ours.
+6. "It is not refereed" said something of the outside work that its files do not say; struck.
+7. Variant (2) and item 10 said none of § 7's examples is a Grundy colouring. C132-GRUNDY7-NOT names three colourings (its
+   *not claimed*: "anything about the hexagonal colouring at circumradius 1/2"); both sentences now name those three.
+8. Variant (3) said it "is neither implied by Question 1 nor implies it" — a non-implication the record does not hold;
+   now "a different statement … it assumes what (1d) asks, and asks for more".
+9. T1's parenthesis gave this project's route (a random rigid motion) as the manuscript's; now "a translation", as R
+   l. 673 has it.
+10. Attempt 2 attributed the map-class chain to [SV] with no caveat; the text now says it is by our records and that the
+    paper was not reread for the note.
+11. P3 said clause (5) "goes beyond" the manuscript's sentence; the record's words are "against the letter" (D l. 479),
+    restored.
+12. The reference to [NFC] carried a path inside the outside repository; now the manuscript's URL, as its own citation
+    block gives it.
+
+**A scan of the outward text** for a job id, an entry name, a ledger row, a grokking number, a stub, a path of ours or an
+agent's name: none (the pattern is in this job's shell history; the two long lines it reported are the title and a URL).
+
+**What the reader could still have to ask** (left as it is, for the coordinator's review): nothing found on the last pass.
+Two sentences are the writer's and not an entry's, and § 2.2 flags them: the remark that the form with "some point of the
+plane" would serve and is also unproved, and "P1 still applies at the vertices" for the hexagonal colouring at
+circumradius 1/2.
+
+**Not a derivation, said for the record.** Before fixing Question 1 as the lead I looked, for some minutes and on paper
+only, for a quick way it might close — one common witness for three labels, or witnesses far away — and found none:
+three labels can be absent from `Δ(p, q)` with no unit pair forced among the other three there (sectors of `π/3` about
+`p` in one lune and about `q` in the other), so nothing local decides it. Nothing was derived and nothing is entered.
+
+## Stage 3 — SAVED
