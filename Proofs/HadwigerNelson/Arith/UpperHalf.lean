@@ -221,6 +221,20 @@ theorem localRing_ne_top (P : StablePrime F) : P.localRing ≠ ⊤ := by
   · exact ha0 (RingOfIntegers.coe_eq_zero_iff.1 h)
   · exact h (ValuationSubring.mem_top _)
 
+omit [NumberField F] in
+/-- The difference of two points of `F²` at distance 1, as an element `u` of `F(i)`, has `u·ū = 1`. -/
+private theorem sub_mul_conj_eq_one {x y : planeOver F} (h : dist (x : ℂ) (y : ℂ) = 1) :
+    ((⟨x, x.2⟩ - ⟨y, y.2⟩ : fieldI F)) * conjOn (fieldI_conj F) (⟨x, x.2⟩ - ⟨y, y.2⟩ : fieldI F) = 1 := by
+  have hone : ((x : ℂ) - (y : ℂ)) * (starRingEnd ℂ) ((x : ℂ) - (y : ℂ)) = 1 := sub_mem_normOne_conj_iff.mpr h
+  exact Subtype.ext hone
+
+/-- The residue of a unit vector is norm one in `𝓞 ⧸ P^m`: `res(u)·res(u)‾ = res(u·ū) = 1`. -/
+private theorem residue_mul_conj_eq_one (P : StablePrime F) (m : ℕ) {u : fieldI F}
+    (hu : u * conjOn (fieldI_conj F) u = 1) (hd : u ∈ P.localRing) :
+    P.residue m ⟨u, hd⟩ * Ideal.quotientMap (P.P ^ m) (conjO F) (P.le_comap m) (P.residue m ⟨u, hd⟩) = 1 := by
+  have h1 : (⟨u, hd⟩ : P.localRing) * ⟨conjOn (fieldI_conj F) u, conj_mem_localRing P u hd⟩ = 1 := Subtype.ext hu
+  rw [← residue_conj P m ⟨u, hd⟩, ← map_mul, h1, map_one]
+
 /-- **NF1-S1B, the homomorphism, at every level `m ≥ 1`**: the unit-distance graph on `F²` maps to
 `levelTarget P m = Cay(𝓞 ⧸ P^m, {x : x·x̄ = 1})`, and on each coset of `𝓞_P` the map is the residue map: for `x, y ∈ F²` with
 `x − y ∈ 𝓞_P`, `h x − h y = res(x − y)`. (A unit edge's difference `u` has `u·ū = 1`, so `u ∈ 𝓞_P` and
@@ -229,7 +243,38 @@ with no edge and there is no homomorphism. -/
 theorem exists_hom_levelTarget (P : StablePrime F) {m : ℕ} (hm : 1 ≤ m) :
     ∃ h : (unitDistance ℂ).induce (planeOver F) →g levelTarget P m,
       ∀ (x y : planeOver F) (hd : (⟨x, x.2⟩ - ⟨y, y.2⟩ : fieldI F) ∈ P.localRing), h x - h y = P.residue m ⟨_, hd⟩ := by
-  sorry
+  -- the image of `𝓞_P` in `ℂ` as an additive subgroup, and the residue map on it
+  let e := Subring.equivMapOfInjective P.localRing.toSubring (fieldI F).subtype Subtype.val_injective
+  let A : AddSubgroup ℂ := (P.localRing.toSubring.map (fieldI F).subtype).toAddSubgroup
+  let r' : P.localRing.toSubring →+* 𝓞 (fieldI F) ⧸ P.P ^ m := P.residue m
+  let ψ : A →+ 𝓞 (fieldI F) ⧸ P.P ^ m := (r'.comp e.symm.toRingHom).toAddMonoidHom
+  have hres : ∀ (x y : planeOver F) (hd : (⟨x, x.2⟩ - ⟨y, y.2⟩ : fieldI F) ∈ P.localRing),
+      cosetResidue ψ (x : ℂ) - cosetResidue ψ (y : ℂ) = P.residue m ⟨_, hd⟩ := by
+    intro x y hd
+    have hmem : (x : ℂ) - y ∈ A := ⟨_, hd, rfl⟩
+    have he : e.symm ⟨_, hmem⟩ = ⟨_, hd⟩ := by
+      rw [RingEquiv.symm_apply_eq]; exact Subtype.ext rfl
+    rw [cosetResidue_sub ψ hmem, cosetResidue_apply_of_mem ψ hmem]
+    show r' (e.symm ⟨_, hmem⟩) = _
+    rw [he]
+  refine ⟨{ toFun := fun x => cosetResidue ψ (x : ℂ), map_rel' := ?_ }, hres⟩
+  intro x y hxy
+  -- a unit edge's difference is a unit vector of `F(i)`: it lies in `𝓞_P`, and its residue is norm one
+  have hu := sub_mul_conj_eq_one (F := F) (x := x) (y := y) hxy
+  have hd := mem_localRing_of_mul_conj_eq_one P hu
+  have ht := residue_mul_conj_eq_one P m hu hd
+  have hsub := hres x y hd
+  haveI : Nontrivial (𝓞 (fieldI F) ⧸ P.P ^ m) :=
+    Ideal.Quotient.nontrivial_iff.mpr fun htop =>
+      P.isMaximal.ne_top (top_le_iff.1 (htop ▸ Ideal.pow_le_self (by omega)))
+  show (levelTarget P m).Adj (cosetResidue ψ (x : ℂ)) (cosetResidue ψ (y : ℂ))
+  rw [levelTarget, SimpleGraph.fromRel_adj]
+  refine ⟨fun heq => ?_, Or.inl ?_⟩
+  · rw [heq, sub_self] at hsub
+    rw [← hsub, zero_mul] at ht
+    exact zero_ne_one ht
+  · rw [hsub]
+    exact ht
 
 /-- **NF1-S1B, first clause, as claimed**: a graph homomorphism from the unit-distance graph on `F²` into the level-one
 target at a stable prime. -/
@@ -263,10 +308,31 @@ theorem chromaticNumber_eq_localBound_of_chain [NumberField.IsTotallyReal F]
     (chromaticNumber_planeOver_le_localBound F) hL
 
 omit [NumberField F] in
+/-- `i` is an integer of `F(i)`, with `i² = −1` and `ī = −i`. -/
+private theorem exists_I_integer : ∃ i : 𝓞 (fieldI F), i ^ 2 = -1 ∧ conjO F i = -i := by
+  let iL : fieldI F := ⟨Complex.I, by simp [zero_mem], by simp [one_mem]⟩
+  have hiL : iL ^ 2 = -1 := Subtype.ext Complex.I_sq
+  have hint : IsIntegral ℤ iL := IsIntegral.of_pow (n := 2) (by norm_num) (by rw [hiL]; exact isIntegral_one.neg)
+  refine ⟨⟨iL, hint⟩, RingOfIntegers.coe_injective ?_, RingOfIntegers.coe_injective ?_⟩
+  · rw [map_pow, map_neg, map_one]; exact hiL
+  · rw [map_neg]; exact Subtype.ext Complex.conj_I
+
+omit [NumberField F] in
 /-- A stable prime modulo which conjugation is the identity holds `2`: `ī − i = −2i` and `i` is a unit. -/
 theorem two_mem_of_conj_trivial (P : StablePrime F) (hram : ∀ x : 𝓞 (fieldI F), conjO F x - x ∈ P.P) :
     (2 : 𝓞 (fieldI F)) ∈ P.P := by
-  sorry
+  obtain ⟨i, hi2, hci⟩ := exists_I_integer (F := F)
+  have h2i : (2 : 𝓞 (fieldI F)) * i ∈ P.P := by
+    have h := P.P.neg_mem (hram i)
+    have e : -(conjO F i - i) = 2 * i := by rw [hci]; ring
+    rwa [e] at h
+  rcases P.isMaximal.isPrime.mem_or_mem h2i with h | h
+  · exact h
+  · exfalso
+    have h1 : (1 : 𝓞 (fieldI F)) ∈ P.P := by
+      have h' := P.P.neg_mem (Ideal.pow_mem_of_mem P.P h 2 (by norm_num))
+      rwa [hi2, neg_neg] at h'
+    exact P.isMaximal.ne_top ((Ideal.eq_top_iff_one _).mpr h1)
 
 /-- **Two colours at a ramified stable prime** (`LEDGER.md` row 63's two-colour theorem, at a real number field): if
 conjugation is the identity modulo a stable prime `P` of `F(i)` — `P` is ramified over `F`, and then dyadic
@@ -274,7 +340,21 @@ conjugation is the identity modulo a stable prime `P` of `F(i)` — `P` is ramif
 at `𝓞_P` with the residue map into the field `𝓞 ⧸ P` of characteristic 2, on which conjugation acts trivially.) -/
 theorem colorable_two_planeOver_of_ramified (P : StablePrime F) (hram : ∀ x : 𝓞 (fieldI F), conjO F x - x ∈ P.P) :
     ((unitDistance ℂ).induce (planeOver F)).Colorable 2 := by
-  sorry
+  have e : P.P ^ 1 = P.P := pow_one _
+  haveI : (P.P ^ 1).IsPrime := by rw [e]; exact P.isMaximal.isPrime
+  haveI : CharP (𝓞 (fieldI F) ⧸ P.P ^ 1) 2 := by
+    refine CharTwo.of_one_ne_zero_of_two_eq_zero one_ne_zero ?_
+    have h2 : (2 : 𝓞 (fieldI F) ⧸ P.P ^ 1) = Ideal.Quotient.mk (P.P ^ 1) 2 := (map_ofNat _ 2).symm
+    rw [h2, Ideal.Quotient.eq_zero_iff_mem, e]
+    exact two_mem_of_conj_trivial P hram
+  have hid : ∀ t, Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1) t = t := by
+    intro t
+    obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective t
+    rw [Ideal.quotientMap_mk, Ideal.Quotient.eq, e]
+    exact hram a
+  exact colorable_two_unitDistance_induce_of_valuationSubring (fieldI_conj F) P.localRing (conj_mem_localRing P)
+    (k := 𝓞 (fieldI F) ⧸ P.P ^ 1) (P.residue 1) (fun z => (residue_conj P 1 z).trans (hid _))
+    (S := planeOver F) (fun _ hz => hz)
 
 /-! ### The converse half (row 105's reading) -/
 

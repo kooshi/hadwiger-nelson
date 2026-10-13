@@ -67,3 +67,24 @@ What differed from the plan's text, for the next reader:
   P.localRing.toSubring P.localRing.toSubring _` — without the ascription `algebraMap (𝓞 K) P.localRing` is asked for an
   `Algebra (𝓞 K) ↥P.localRing.toSubring` instance, which does not exist (the instance is on `↥P.localRing`).
 - U7 by the elementary alternative (a nonzero `a ∈ P.P` and U6), four lines.
+
+## Stage 3 — SAVED: U9, U10, U8 proved
+
+`two_mem_of_conj_trivial`, `colorable_two_planeOver_of_ramified`, `exists_hom_levelTarget` — the plan's routes
+(`lake env lean`: exit 0, two `sorry` left — U11, U12; 5.6 s, 3.7 GB). Statement check
+(`data/fs131/iu1/logs/statements-stage3.out`): `PASS`, control `3 of 3`; three new named constants, the private helpers.
+
+Three private helpers, each a typed joint of its parent:
+- `exists_I_integer : ∃ i : 𝓞 (fieldI F), i ^ 2 = -1 ∧ conjO F i = -i` (no number-field hypothesis; `IsIntegral.of_pow`) — U9.
+- `sub_mul_conj_eq_one {x y : planeOver F} (h : dist (x : ℂ) (y : ℂ) = 1) : (⟨x, x.2⟩ - ⟨y, y.2⟩ : fieldI F) * conjOn
+  (fieldI_conj F) (⟨x, x.2⟩ - ⟨y, y.2⟩) = 1` — the geometry of U8, by `Subtype.ext (sub_mem_normOne_conj_iff.mpr h)`; the
+  library's `simpa [mem_normOne, map_sub]` (`ResidueColouring.lean:612`) does not close it here: `simp` rewrites
+  `⟨↑x, _⟩ - ⟨↑y, _⟩` to `↑(x - y)` and leaves a goal it cannot match.
+- `residue_mul_conj_eq_one (P) (m) (hu : u * conjOn (fieldI_conj F) u = 1) (hd : u ∈ P.localRing) : P.residue m ⟨u, hd⟩ *
+  Ideal.quotientMap (P.P ^ m) (conjO F) (P.le_comap m) (P.residue m ⟨u, hd⟩) = 1` — U8's arithmetic, by U5.
+
+What differed from the plan's text:
+- U10 needs no `Ideal.Quotient.field`: `(P.P ^ 1).IsPrime` (from `pow_one`) gives `IsDomain`, hence `IsReduced`, by instance,
+  and `one_ne_zero` for `CharTwo.of_one_ne_zero_of_two_eq_zero`. `hψσ` is `(residue_conj P 1 z).trans (hid _)` as a term: the
+  two spellings of the restricted conjugation unify by unfolding.
+- U8 as planned; `Ideal.pow_le_self` takes `m ≠ 0`.
