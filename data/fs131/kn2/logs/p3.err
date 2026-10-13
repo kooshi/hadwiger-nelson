@@ -1,0 +1,7 @@
+slot: waiting (ledger 18 + 8 > budget 22 GiB)
+slot: waiting (ledger 22 + 8 > budget 22 GiB; 0 free CPUs < 2)
+slot: waiting (ledger 18 + 8 > budget 22 GiB)
+slot: waiting (ledger 22 + 8 > budget 22 GiB; 0 free CPUs < 2)
+slot: waiting (ledger 18 + 8 > budget 22 GiB)
+slot: waiting (ledger 22 + 8 > budget 22 GiB; 0 free CPUs < 2)
+slot: waiting (ledger 18 + 8 > budget 22 GiB)

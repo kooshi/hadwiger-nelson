@@ -1,0 +1,56 @@
+@chromaticNumber_mono_of_hom : ∀ {V : Type u_1} {G : SimpleGraph V} {V' : Type u_2} {G' : SimpleGraph V'} (f : G →g G'),
+  G.chromaticNumber ≤ G'.chromaticNumber
+@hensels_lemma : ∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {R : Type u_1} [inst_1 : CommSemiring R]
+  [inst_2 : Algebra R ℤ_[p]] {F : Polynomial R} {a : ℤ_[p]},
+  ‖(Polynomial.aeval a) F‖ < ‖(Polynomial.aeval a) (Polynomial.derivative F)‖ ^ 2 →
+    ∃ z,
+      (Polynomial.aeval z) F = 0 ∧
+        ‖z - a‖ < ‖(Polynomial.aeval a) (Polynomial.derivative F)‖ ∧
+          ‖(Polynomial.aeval z) (Polynomial.derivative F)‖ = ‖(Polynomial.aeval a) (Polynomial.derivative F)‖ ∧
+            ∀ (z' : ℤ_[p]),
+              (Polynomial.aeval z') F = 0 → ‖z' - a‖ < ‖(Polynomial.aeval a) (Polynomial.derivative F)‖ → z' = z
+@PadicInt.toZMod : {p : ℕ} → [hp_prime : Fact (Nat.Prime p)] → ℤ_[p] →+* ZMod p
+PadicInt.subring : (p : ℕ) → [hp : Fact (Nat.Prime p)] → Subring ℚ_[p]
+@IntermediateField.exists_algHom_adjoin_of_splits : ∀ {F : Type u_1} {E : Type u_2} {K : Type u_3} [inst : Field F]
+  [inst_1 : Field E] [inst_2 : Field K] [inst_3 : Algebra F E] [inst_4 : Algebra F K] {S : Set E},
+  (∀ s ∈ S, IsIntegral F s ∧ (Polynomial.map (algebraMap F K) (minpoly F s)).Splits) →
+    ∀ {L : IntermediateField F E} (f : ↥L →ₐ[F] K) (hL : L ≤ IntermediateField.adjoin F S),
+      ∃ φ, φ.comp (IntermediateField.inclusion hL) = f
+@IntermediateField.exists_algHom_of_adjoin_splits : ∀ {F : Type u_1} {E : Type u_2} {K : Type u_3} [inst : Field F]
+  [inst_1 : Field E] [inst_2 : Field K] [inst_3 : Algebra F E] [inst_4 : Algebra F K] {S : Set E},
+  (∀ s ∈ S, IsIntegral F s ∧ (Polynomial.map (algebraMap F K) (minpoly F s)).Splits) →
+    ∀ {L : IntermediateField F E} (f : ↥L →ₐ[F] K), IntermediateField.adjoin F S = ⊤ → ∃ φ, φ.comp L.val = f
+@ValuationSubring.primeSpectrumEquiv : {K : Type u_1} →
+  [inst : Field K] → (A : ValuationSubring K) → PrimeSpectrum ↥A ≃ { S // A ≤ S }
+data/fs131/kn2/probes/p1.lean:16:8: error(lean.unknownIdentifier): Unknown constant `ValuationSubring.mem_of_isIntegral`
+@RingHom.quotientKerEquivOfSurjective : {R : Type u_1} →
+  {S : Type u_2} →
+    [inst : Ring R] → [inst_1 : Semiring S] → {f : R →+* S} → Function.Surjective ⇑f → R ⧸ RingHom.ker f ≃+* S
+@RingHom.ker_isMaximal_of_surjective : ∀ {R : Type u_1} {K : Type u_2} {F : Type u_3} [inst : Ring R]
+  [inst_1 : DivisionRing K] [inst_2 : FunLike F R K] [inst_3 : RingHomClass F R K] (f : F),
+  Function.Surjective ⇑f → (RingHom.ker f).IsMaximal
+@IsLocalization.lift : {R : Type u_1} →
+  [inst : CommSemiring R] →
+    {M : Submonoid R} →
+      {S : Type u_2} →
+        [inst_1 : CommSemiring S] →
+          [inst_2 : Algebra R S] →
+            {P : Type u_3} →
+              [inst_3 : CommSemiring P] → [IsLocalization M S] → {g : R →+* P} → (∀ (y : ↥M), IsUnit (g ↑y)) → S →+* P
+data/fs131/kn2/probes/p1.lean:20:8: error(lean.unknownIdentifier): Unknown constant `Ideal.Quotient.isUnit_mk_pow`
+@ZMod.ringHom_surjective : ∀ {n : ℕ} {R : Type u_1} [inst : NonAssocRing R] (f : R →+* ZMod n), Function.Surjective ⇑f
+@Subfield.closure : {K : Type u_1} → [inst : DivisionRing K] → Set K → Subfield K
+IntermediateField.adjoin_toSubfield : ∀ (F : Type u_1) [inst : Field F] {E : Type u_2} [inst_1 : Field E]
+  [inst_2 : Algebra F E] (S : Set E),
+  (IntermediateField.adjoin F S).toSubfield = Subfield.closure (Set.range ⇑(algebraMap F E) ∪ S)
+@PadicInt.isFractionRing : ∀ {p : ℕ} [hp : Fact (Nat.Prime p)], IsFractionRing ℤ_[p] ℚ_[p]
+@IsIntegrallyClosed.isIntegral_iff : ∀ {R : Type u_1} [inst : CommRing R] {K : Type u_2} [inst_1 : CommRing K]
+  [inst_2 : Algebra R K] [ifr : IsFractionRing R K] [IsIntegrallyClosed R] {x : K},
+  IsIntegral R x ↔ ∃ y, (algebraMap R K) y = x
+@fromRel_adj : ∀ {V : Type u_1} (r : V → V → Prop) (v w : V), (fromRel r).Adj v w ↔ v ≠ w ∧ (r v w ∨ r w v)
+@Ideal.quotientMap_mk : ∀ {R : Type u_1} [inst : Ring R] {S : Type u_2} [inst_1 : Ring S] {J : Ideal R} {I : Ideal S}
+  [inst_2 : I.IsTwoSided] [inst_3 : J.IsTwoSided] {f : R →+* S} {H : J ≤ Ideal.comap f I} {x : R},
+  (Ideal.quotientMap I f H) ((Ideal.Quotient.mk J) x) = (Ideal.Quotient.mk I) (f x)
+@ValuationSubring.comap : {K : Type u_1} →
+  [inst : Field K] → {L : Type u_2} → [inst_1 : Field L] → ValuationSubring L → (K →+* L) → ValuationSubring K
+data/fs131/kn2/probes/p1.lean:29:8: error(lean.unknownIdentifier): Unknown constant `Padic.isIntegral_iff`
