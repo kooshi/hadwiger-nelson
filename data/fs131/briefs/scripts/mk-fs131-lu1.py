@@ -71,7 +71,7 @@ step; its predicted counts). The last landing's record `plans/FS131-LC1-landing.
 2. **Docstrings, no statement**: the two rewordings the implementers left for the landing (the stable prime of the
    rational field, described by the proof's own route; the ramified homomorphism, "a ring homomorphism" where it
    says automorphism), and the reader's note on the ramified theorem (its two hypotheses are jointly satisfiable
-   only when the divisible radicand is outside the set). The two stale comments in `SpectralChain.lean` that still
+   only when the divisible radicand is outside the set). The two stale comments in `Proofs/HadwigerNelson/SpectralChain.lean` that still
    call the upper half a hypothesis are **not** edited here — a comment there recompiles everything above it — and
    go into your open gate items.
 3. **The registrations**: the 52 records as one block of yours in the audit script, each under the banner its
