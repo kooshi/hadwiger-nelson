@@ -1,0 +1,7 @@
+compared: 18 named constants of the first dump (17 theorems, 1 definitions; types, and values of definitions); 18 declarations written at 34d9113b2, each found in the first dump
+internal (not compared): 5 before, 5 after
+new named constants in the second dump: 0
+new private declarations in the second dump (counted among the internal): 0
+`example` heads: 6 at 34d9113b2, 6 in the working file
+TYPE     THM HadwigerNelson.TorsionExtraction.exists_zmod_hom_of_mem_torsionBy: the stored statement differs
+FAIL: 1 difference(s)

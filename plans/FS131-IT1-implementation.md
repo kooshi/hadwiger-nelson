@@ -1,0 +1,55 @@
+# FS131-IT1 — the ten leaves of `Arith/TorsionExtraction`: the implementer's record
+
+*The kernel lane's implementer (de Bruijn), 2026-10-13, branch `fs131-wr2` (worktree `.claude/worktrees/fs131-wr2`), from
+`34d9113b2`. Brief: `data/fs131/briefs/FS131-IT1-leaves.md`. Plans read: `plans/FS131-KN4-three-four-colours-plan.md` (its dated
+section, then § 4.2) and `plans/FS131-KN5-three-four-colours-passes.md` (§ Stage 3, 5, 7). Working files: `data/fs131/it1/`.*
+
+## Theorems this phase proved
+
+*Filled stage by stage; the axioms of each are printed at the last stage, from the built module.*
+
+## Stage 1 — SAVED: the readback
+
+**Quotations.** `data/fs131/it1/readback.py`: the brief's five quoted blocks (Kooshi's W2, the claim list's theorem, its three
+dated lines) against their sources in the coordinator's checkout — **5 IDENTICAL** (exit 0; `data/fs131/it1/logs/readback.out`).
+Control `--control` changes one digit in the body of each quotation, past its label: 5 of 5 then DIFFER
+(`logs/readback.control.out`). The first control I wrote changed the first digit of the whole line, which for two quotations
+is in the label (`W2`, `NF4`), and so only changed which comparison ran: it fired for the wrong reason, and was moved before it
+was believed. This tree's copy of `data/fs131/claims-NF4.md` predates the three dated lines (the planner's record says so);
+nothing here reads it.
+
+**The statement instruments, built before any proof.**
+- `data/fs131/it1/statements-before.raw.txt`: every constant of the compiled module as the build gave it (the `.olean` of
+  13:52, after the file's last commit `558952c3e` of 13:44), by `data/fs131/it1/lean/StatementDump.lean` — 23 constants: one
+  definition (`inv5`), 17 named theorems, 5 internal.
+- `data/fs131/it1/statements.sh`: the skeleton at `34d9113b2` and the working file, each elaborated at one path with
+  `lean/StatementFooter.lean`, compared by `statement_diff.py`. On the untouched file: 18 named constants compared, PASS; the
+  control (one statement's last character, `inv5`'s value, one declaration removed) reports 3 of 3
+  (`logs/statements-stage1.out`).
+- The tool defect FS131-IU1's record names, seen here too: the compiled dump against the footer's dump of the same text
+  differs in one statement, `exists_zmod_hom_of_mem_torsionBy`, by the instance binder's stored name alone
+  (`inst._@.Proofs.HadwigerNelson.Arith.TorsionExtraction.…` against `inst._@.data.fs131.it1.stmt.Copy.…`;
+  `logs/statements-compiled-vs-footer.out`). So the two prints of a comparison are always made at one path: footer against
+  footer between builds, compiled against compiled at the end.
+
+**The ten leaves, each as the kernel holds it** (`data/fs131/it1/probes/Checks.lean`, `#check`), in one line, with the plan's
+route. I re-derived each by hand before starting; every one is true as typed and agrees with its plan.
+
+| leaf | the statement, in one line | route (plan) |
+|---|---|---|
+| `layer_step` (L2.1) | reals `a b a' b'` of absolute value at most `1/6` with `2a' − b' − 2a − b ∈ ℤ` and `a' + 2b' + a − 2b ∈ ℤ`: either `a' = (3a + 4b)/5 ∧ b' = (−4a + 3b)/5`, or all four have absolute value exactly `1/6` | each integer has absolute value at most 1; both zero is the rotation (`linarith` twice); one of them `±1` forces all four to `±1/6` (KN4 § 4.2) |
+| `layer_dichotomy` (L2.2) | `a b : ℤ → ℝ` in the box with the two relations at every step `m → m + 1`: every step is the rotation, or every `m` is at a corner | a non-rotation step puts `m₀`, `m₀ + 1` at corners; a rotation into or out of a corner has a coordinate `7/30`; induction both ways from `m₀` (KN4 § 4.2) |
+| `tendsto_layer` (L2.3) | `θ ∈ Θ₃(R_F)`, `b ∈ U_F`: `θ(inv5^(2n) · b)` tends to some `t ∈ {↑(1/2), ↑(1/3), ↑(2/3)}` | `w = (3 + 4i)/5` a unit of `ℤ[U_F]`, `g_m = wᵐ b`; lifts `a_m`, `b_m` of `θ(g_m) − 1/2`, `θ(i g_m) − 1/2`; `(2 − i)w = 2 + i` gives L2.2's hypotheses; rotation layer `θ(5⁻ᵏ g_m) = ↑(1/2 + a_m/5ᵏ)`, corner layer `3 • θ(5⁻ᵏ g_m) = 0`, each by induction on `k` with `m` quantified inside (KN5 § Stage 3) |
+| `exists_torsion_mem_fieldBandSet` (L2.4) | `Θ₃(R_F) ≠ ∅` gives `τ ∈ Θ₃(R_F)` with `6 • τ = 0`, every subfield `F ⊆ ℝ` | the `x` along which `θ(inv5^(2n) x)` converges are a subgroup holding the unit vectors, so everything; `τ` is the limit, additive; on unit vectors it is `1/2`, `1/3` or `2/3` (KN4 § 4.2) |
+| `exists_zmod_hom_of_mem_torsionBy` (D-4) | a character `θ` of any abelian group `M` with `N • θ = 0`, `N ≠ 0`, is `ZMod.toAddCircle ∘ l` for an additive `l : M → ZMod N` | values are `↑(k/N)`; `ZMod.toAddCircle` is injective, so the choice is additive (KN5 § Stage 2, D-4) |
+| `colorable_two_iff_fieldBandSet_two_nonempty` (L2.5) | the plane over `F` is two-colourable iff some character of `ℤ[U_F]` is in `band 2 = {↑(1/2)}` at every unit vector | `⟸`: `colorable_of_residue` at `G = ZMod 2` through D-4; `⟹`: `f x = C x − C 0`, the invariant `∀ x, f (x + y) = f x + f y` holds at unit vectors and is closed under `+`, `−` (KN5 § Stage 3) |
+| `mem_fieldBandSet_two_of_inv_three_mem` (L2.6) | `1/3 ∈ ℤ[U_F]`, `τ ∈ Θ₃ ∩ T₆`: `τ ∈ Θ₂` | `u = 3 • (3⁻¹ u)`, so `2 • τ u = 6 • τ(3⁻¹ u) = 0`; `τ u = ↑t`, `t ∈ [1/3, 2/3]`, `2t ∈ ℤ`, so `t = 1/2` (KN4 § 4.2) |
+| `inv_natCast_mem_unitRing_of_sqrt_mem` (L2.7) | `d + 1 = 4n`, `√d ∈ F`: `(n : ℂ)⁻¹ ∈ ℤ[U_F]` | `v = ((2n − 1) + i√d)/(2n)` and its conjugate are unit vectors of `F²`; `1/n = 2 − v − v̄`; the identity stated on its own for L2.9 (KN4 § 4.2) |
+| `inv_three_mem_unitRing_of_sqrt_mem` (L2.8) | `d % 12 = 11`, `√d ∈ F`: `3⁻¹ ∈ ℤ[U_F]` | `d + 1 = 4·(3k)`, `3⁻¹ = k · (3k)⁻¹` (KN4 § 4.2) |
+| `not_colorable_two_of_sqrt_mem` (L2.9) | `d % 4 = 3`, `√d ∈ F`: the plane over `F` is not two-colourable | L2.5 `⟹` gives `θ = ↑(1/2)` on unit vectors; `θ` at `1 = n·(2 − v − v̄)` reads `↑(1/2) = 0` (KN4 § 4.2) |
+
+No leaf's statement and plan disagree; no message was owed. Two things I checked that the plans leave implicit: `n ≥ 1` in L2.7
+follows from `d + 1 = 4n` in `ℕ`; and in L2.3 the corner layer's sequence `θ(25⁻ⁿ b)` is constant because
+`25⁻ⁿ b − 25⁻⁽ⁿ⁺¹⁾ b = 24 · 25⁻⁽ⁿ⁺¹⁾ b` and `3 ∣ 24`.
+
+**The machine.** One file through `lake env lean` here: 2.3 s, 3.6 GB at its peak (`logs/StatementDump.time`).
