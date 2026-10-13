@@ -78,3 +78,65 @@ with a topology, the printed theorem).
    `TCA F` excludes a ramified stable dyadic place (ratio `1/2` there; the headline's docstring l. 592). So the scope is a
    hypothesis of EF_F⁺'s closed statement, and the module that proves "`TCA F` ⟹ no ramified stable dyadic place" is one
    of the leaves (the deriver's row 14; § the architecture).
+
+## Stage 2 — SAVED: §G and §PA, short
+
+### §G — the grokkings that bear on a chain this long (read by number in `.claude/skills/grokkings/SKILL.md`)
+
+- **G92** (a held result reaches as far as its argument, not as far as its statement). Its *Do* is this job's method: each
+  hypothesis is restated at the class its proof reads. Three uses here: `Interface.PE2`'s Haar-null clause is dropped
+  because no proof reads it (§ 1.3); EF_F⁺ is typed at its own strength (one non-torsion `u*`), not in the weakened form
+  the interface carried; the scope is carried by the one statement whose proof reads it (EF_F⁺), not by MR⁺'s consumers.
+- **G80** (infinite rank is the resource). It fixes what "the pieces" are for: Theorem 1.3 is applied on finitely generated
+  pieces `M̂`, never on `R̂`, where no finitely generated subgroup acts irreducibly (row 118). So the printed theorem is
+  declared for an abstract solenoid, and the passage `M̂_k → R̂` (Lemma Γ) is ours and a module.
+- **G21** (a negative measures its enumeration; the defects that flatter survive). Applied to an axiom: the check on
+  `positive_entropy_rigidity` is the read-back against the page, clause by clause, and the direction of every choice the
+  Lean statement makes is recorded as "weaker than the page or equal to it" (§ The four items).
+- `LEAN.md` § The kernel's cost model is about reduction; this chain evaluates nothing in the kernel. What does bear:
+  § Searching — Lean, "never state one lemma under one name in two modules that do not import each other" (the later
+  modules are cut so that every shared definition is upstream of both users: § The architecture), and "a section
+  `variable` enters a theorem only if the statement mentions it" (every leaf below is `#check`ed as the kernel has it).
+
+### §PA — each printed statement the chain reads
+
+| statement | where printed | held? | Mathlib at the pin / other Lean |
+|---|---|---|---|
+| **positive entropy rigidity** | `[EinsiedlerLindenstrauss2022]` Thm 1.3, § 1.1, pp. 2–3 of arXiv:2101.11120v1; Thm 1.2 on p. 2 | **held** (`~/source/library/pdf/EinsiedlerLindenstrauss2022-…pdf`); pp. 1–4 read by me today from the PDF's text layer, both statements and the three definitions on p. 2 copied into the module docstrings | none: no solenoid, no `ℤ^d`-action vocabulary, no entropy. `PontryaginDual` (`Topology/Algebra/PontryaginDual.lean`), `ContinuousAddEquiv`, `AddSubgroup.FiniteIndex`, `QuotientAddGroup.map`, `QuotientAddGroup.measurableSpace`, `Measure.MutuallySingular`, `Measure.IsAddHaarMeasure` are there and are what the statement is typed with |
+| Kolmogorov–Sinai entropy | textbook (Walters, *An Introduction to Ergodic Theory*, ch. 4 — recalled, not held, not read) | no page held | none (`Dynamics/TopologicalEntropy/` is topological; `Real.negMulLog`, `binEntropy`, `InformationTheory.klDiv` static). **`[OAIMath2026]` family 015**, `~/source/math/lean/OAI/NumberTheory/DukePrimeDegree/Entropy/MetricEntropy.lean` (51 lines, read in full today): `metricEntropy` in the same shape as `Rigidity.ksEntropy`; `PeriodicEntropyZero.lean` proves zero entropy for an almost-everywhere periodic map (statements read). The rest of `Entropy/` (20,958 lines by `wc`) unread: the planner of module M1 reads it before proving Abramov's formulas from scratch |
+| Thm 1.2's proof | attributed on p. 2 to `[EinsiedlerLindenstrauss2003]` Thm 1.1 | held; `BIBLIOGRAPHY.md`: read in full by FS105-R, "an announcement … only 'a sketch'" | — ; **no complete printed proof found**, so ruling 2 stands |
+| ergodic decomposition (T1), entropy along increasing σ-algebras (T2), Jacobs (T3) | **no page cited in any record** (X02D l. 175: "exact theorem numbers not checked here") | — | none ("ergodic decomposition" not in Mathlib; `Ergodic`, `ErgodicSMul`, `condExp`, martingale convergence `MeasureTheory.tendsto_ae_condExp` are). **A prior-art debt carried forward to modules M7 and M8, whose planners name the page before typing** |
+| Shannon–McMillan–Breiman, almost-everywhere form, not ergodic | X01D ll. 237–239 cites `[EinsiedlerFish2010]` Thm 2.1 | the paper is held and read in full (bibliography) | none |
+| Herglotz–Bochner; Markov–Kakutani; Chebotarev; `[AmbrusEtAl2023]`; Weil | the map's § X5 | as there; not re-read by me | as there |
+
+**Not worked around:** nothing was fetched. **Not read by me:** `[EinsiedlerFish2010]`, `[EinsiedlerLindenstrauss2003]`,
+the paper's §§ 2–9 (the bibliography records who read which).
+
+## Stage 3 — SAVED: the vocabulary typed (three modules elaborate)
+
+`Proofs/HadwigerNelson/Rigidity/Entropy.lean` (3 leaves `sorry`), `Rigidity/Solenoid.lean` (no `sorry`),
+`Rigidity/PositiveEntropy.lean` (the axiom; its model; Thm 1.2 stated, `sorry`). Elaborated one file at a time by
+`data/fs131/kn3/lean1.sh <module>` (under the slot at `--mem 4`, which the files stay inside; logs in
+`data/fs131/kn3/logs/`, last line `exit=<status>`); **not yet through `./scripts/build.sh`** — another planner's build
+held the machine's one build slot.
+
+**The definitions, and the form each was weighed against** (sent to the coordinator when typed):
+
+1. **`ksEntropy`** — label maps `P : X → Fin k`, `nameCell`, `blockEntropy` (Shannon entropy of the names of length `n`),
+   `partitionEntropy` (a `liminf` of `H_{n+1}/(n+1)`), a supremum over *measurable* label maps. **`ksEntropyOn 𝒜`** is the
+   same supremum over `𝒜`-measurable labels and is the leaf's "conditional form": in X02D § 3.1 step 3,
+   `h_ρ(γ | 𝒜_k)` is the entropy of the factor `(M̂_k, ρ_k, γ)`. Against: a separate relative entropy `H(· | 𝒜)`, read by no
+   statement of this layer.
+2. **`IsSolenoid`, `ZdAction`, `IsIrreducible`, `IsTotallyIrreducible`, `IsVirtuallyCyclic`** — the page's sentences
+   (p. 2), additive. `ZdAction` is a structure (a map `ℤ^d → (X →+ X)` with `α^0 = id`, `α^{m+n} = α^m ∘ α^n`, each
+   continuous). Against: Mathlib's `DistribMulAction (Multiplicative (Fin d → ℤ)) X`, a class, awkward to restrict to `Λ`.
+3. **`NoVirtuallyCyclicFactors`** — FS105-VC's forced sense, with "virtually cyclic on `X/Y`" as the page's sentence read
+   modulo `Y` (`IsVirtuallyCyclicMod`); `isVirtuallyCyclicMod_bot` proves the two definitions agree at `Y = 0`.
+4. **`IsErgodicOn Λ μ`** — invariance under every `α^n`, `n ∈ Λ`, and every strictly invariant measurable set null or
+   conull.
+
+**Inhabitants and drift checks.** `ksEntropy_zero_measure` (proved); `isSolenoid_unit`,
+`trivialAction_noVirtuallyCyclicFactors`, `trivialAction_isErgodicOn` (proved), assembled as
+`positive_entropy_rigidity_model`; `example : (ZdAction.trivial 2 Unit).IsVirtuallyCyclic` (the trivial action is virtually
+cyclic, so the clause `Y ≠ ⊤` cannot be dropped). Owed by M1's implementer: `blockEntropy_one`, `ksEntropy_id`,
+`ksEntropy_map`, and the two-shift at `log 2`.
