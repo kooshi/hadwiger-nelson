@@ -133,3 +133,132 @@ child marked **typed** is a new leaf in the module (statement fixed, `sorry`); t
   `τ 1 = 6·τ(1/6) = 0`.) Children: the lift (`a = 3a₂ − 2a₃`, with `exists_unit_mul_conj_eq`), D-4 at 2 and 3, and the pull-back of a
   maximal ideal along `R → R/p` keeping the quotient's size and conjugation's triviality. Statement unchanged.
 - **DQ.2, DQ.3** — § Stage 5: each class is one parity statement about integers, checked exactly.
+
+## Stage 4 — SAVED: the experience pass (`debruijn-experience-modeling`, a fresh invocation), and every change re-elaborated
+
+**Who reads these files.** Three implementers who take an upstream leaf as stated and cannot open its proof; the reader of the
+published statements, who meets a theorem by its name and docstring alone; `simp`, which knows two lemmas here (`coe_inv5`,
+`coe_conjR`, each a coercion to its value — a third, `conjR_conjR`, is added); and the gate's scripts, which read docstrings for the
+words "external", "named hypothesis", "outside the backlog" on hypothesis formers (there is none in these modules).
+
+- **E-1 — a name that said the wrong thing.** `exists_unit_mul_conj_eq`, docstring "Hilbert 90 inside the ring": the statement is the
+  *easy* direction (`a/ā` has norm one), and "unit" meant unit vector. Renamed `exists_unitSet_mul_conjR_eq`; the docstring says what
+  it is and points at the real Hilbert 90 (`exists_mul_conj_inv_eq_of_mul_conj_eq_one`, § Stage 3).
+- **E-2 — the module's docstring already called it `Winding.exists_box_point`**; the declaration was
+  `ThreeColourCharacter.exists_box_point`. It is now `ThreeColour.Winding.exists_box_point`, so `W.exists_box_point` reads.
+- **E-3 — the lemma a definition owes**: `conjR_conjR` (`@[simp]`, proved, one line). L3.6 and L3.8 both need the involution.
+- **E-4 — whose result, on the statement itself.** A reader who hovers a headline sees its docstring, not the module's. The three
+  headlines of `TorsionExtraction` now each carry one sentence of attribution in the claim list's words (the lower bound this
+  project's, not found in print; the vector and `1/3 ∈ ℤ[U]` `[Fischer1990]`; the family posed by `[Johnson2000]`; upper bounds prior
+  art). L3.10's docstring says the ring statement is elementary and that its number-field reading is an outside model's theorem.
+- **E-5 — joining text**: `colorable_three_iff` did not say of what; now `colorable_three_planeOver_iff`.
+- **Weighed, unchanged.** Explicit `(F : Subfield ℝ)` on headlines whose hypothesis already fixes `F`: the house's pattern
+  (`exists_torsion_mem_fieldBandSet F h`), and every proved composition calls them so. `targetFloor_four_weil` matches
+  `targetFloor_six_weil`, `targetFloor_seven_weil`. `exists_character_of_box_point` has no box in its hypothesis; it is read once,
+  inside its own module, and stays. Both directions of the two-colour end are stated (`fieldBandSet_two_nonempty_of_conj_trivial`,
+  `exists_maximal_conj_trivial_of_colorable_two`): no reader has to infer that the converse is missing.
+
+**Every change of the three passes, as applied** (commit `558952c3e`; the stored statements are the files'):
+
+| declaration | change | pass |
+|---|---|---|
+| `ThreeColourCriterion.comap_conjR_eq` | statement widened: every ideal | D-1 |
+| `ThreeColourCriterion.exists_maximal_conj_trivial_of_colorable_two` | statement widened: `[NumberField F]` dropped | D-2 |
+| `DyadicQuadratic.colorable_of_ringHom` | replaced by `colorable_planeOver_of_addMonoidHom` | D-3 |
+| `ThreeColourCharacter.exists_box_point` | renamed `ThreeColour.Winding.exists_box_point` | E-2 |
+| `ThreeColourCriterion.exists_unit_mul_conj_eq` | renamed `exists_unitSet_mul_conjR_eq` | E-1 |
+| joining text `colorable_three_iff` | renamed `colorable_three_planeOver_iff` | E-5 |
+| new leaves (typed children) | `ThreeColourCharacter.exists_int_vector_of_forall_neg` (C3); `TorsionExtraction.exists_zmod_hom_of_mem_torsionBy` (D-4); `ThreeColourCriterion.exists_mul_conj_inv_eq_of_mul_conj_eq_one` (H90), `exists_normOne_zero_of_card_ne_nine` (FC3), `eq_zero_of_forall_normOne_eq` (FC2); in `DyadicQuadratic`: `exists_rat_add_mul_sqrt_eq`, `exists_int_solution_of_mem_unitVectors`, `dyadic_shape_one_mod_four`, `dyadic_shape_two_mod_four`, `dyadic_shape_three_mod_eight`, `exists_addMonoidHom_one_mod_four`, `exists_addMonoidHom_two_mod_four`, `exists_addMonoidHom_three_mod_eight` | obligation |
+| proved | `ThreeColourCriterion.conjR_conjR`; `DyadicQuadratic.colorable_four_planeOver_sqrt` (a composition over its leaves) | E-3; obligation |
+| docstrings | three headlines of `TorsionExtraction`; L3.10; the modules' "Inhabitants" | E-4 |
+
+No headline of the claim list changed: clauses (a), (b), (c), NF4-S6, NF4-S7 and the two dyadic rows read as they did.
+
+**Re-elaboration.** `data/fs131/kn5/elab4.sh` (the first planner's `lean1.sh`, with `-DautoImplicit=false
+-DrelaxedAutoImplicit=false`, in dependency order): each module exit 0 with no message but its `declaration uses sorry` lines
+(`data/fs131/kn5/logs/<Module>.out`). The joining text against both lines' libraries (`data/fs131/kn4/join_check.sh`, its farm in this
+job's scratch): exit 0, ten `sorry`, no other message (`logs/join_check.out`). Leaf counts are in § Stage 7 with the final build.
+
+## Stage 5 — SAVED: the two dyadic leaves — a plan an implementer can follow; no question for the derive lane
+
+**The finding.** The first plan built an order of `ℚ(√m, i)`, a prime at which `1 + i` is a uniformizer, and its localization, and
+called the class `m ≡ 2 (mod 4)` "sketched only". None of that is needed. **Each class is one statement about integers**, and the
+colouring is an additive map written in coordinates. [hand, one mind, the planner; the integer statements checked exactly, below.]
+
+**The objects.** For `m` not a square, a unit vector of `ℚ(√m)²` is `u = (a + b√m + c·i + d·i√m)/N` with integers, and `|u| = 1` is
+`Q1: a² + c² + m(b² + d²) = N²`, `Q2: ab + cd = 0` (the rational part and the `√m` part of `u·ū = 1`). Take the solution not all
+even. Then, by class (`dyadic_shape_*`):
+
+| class | `N` odd | `N` even | the map `ψ` (on `(a, b, c, d)/(2N)`, `N` odd) |
+|---|---|---|---|
+| `m ≡ 1 (mod 4)` | `a + b + c + d` odd | `N ≡ 2 (mod 4)`, `a ≡ b`, `c ≡ d (mod 2)`, `(a − b + c − d)/2` odd | `(a − b + c − d)/2 mod 2` on `{a ≡ b, c ≡ d}` |
+| `m ≡ 2 (mod 4)` | `a + c` odd | `N ≡ 2 (mod 4)`, `a, c` even, `b, d` odd, `a/2 + c/2 + d` odd | `a/2 + c/2 + d mod 2` on `{a, c even, b ≡ d}` |
+| `m ≡ 3 (mod 8)` | `a + b + c + d` odd | `N ≡ 2 (mod 4)`, `a ≡ d`, `b ≡ c (mod 2)`, `b + d` odd | `((a − d + b + c)/2, b + d) mod 2` on `{a ≡ d, b ≡ c}` |
+
+In each row the last clause of both alternatives says `ψ(u) ≠ 0`. (`ψ` is reduction at the dyadic prime: `i ↦ 1`, and
+`ω = (1 + √m)/2`, `η = √m(1 + i)/2`, `ρ = (1 + i√m)/2` to their residues. The proof never says so.)
+
+**Checked exactly** (`data/fs131/kn5/dyadic_check.py`, `dyadic_modulus.py`; logs beside them):
+- every integer solution with `|a|, |b|, |c|, |d| ≤ 9` for every non-square `m ≤ 45` of the class: 836, 836 and 528 solutions, both
+  alternatives met in each class (96, 176, 272 with `N` even), **0 failures**;
+- every residue class: the statement with `Q1`, `Q2` read modulo 16 holds at all 20480 + 12288 + 8192 residue tuples satisfying them
+  — since the conclusion reads residues modulo 4 only, **this is a proof of the three statements by exhaustion** [tools, exact];
+- the least modulus (`dyadic_modulus.py`): classes A and B are already finite statements **modulo 8** (1280 and 768 tuples; modulo 4
+  each fails 8 times); class C needs 16 only to exclude the all-odd quadruples (**no** tuple modulo 16 satisfies `Q1`, `Q2` with
+  `a, b, c, d` all odd), and with those left out it is a statement modulo 8 (512 tuples). Control: class C modulo 8 with nothing left
+  out fails 128 times, as it must;
+- three planted faults, each watched firing (exit 1): class A's claim at `m ≡ 3 (mod 4)` (first failure `−(1 + i√3)/2`), class B's
+  at `m ≡ 0 (mod 4)`, class C's at `m ≡ 7 (mod 8)` (`logs/dyadic_check.plant{A,B,C}.out`).
+
+**The leaves of `Arith/DyadicQuadratic`, in order, each with its route.** Names marked ✓ are in
+`data/fs131/kn5/lean/NameCheck.lean` (checked under this module's imports; § Stage 7 has the log's verdict).
+
+1. **`colorable_planeOver_of_addMonoidHom`** (≈ 20 lines). `haveI := Fintype.ofFinite G`; `rw [Nat.card_eq_fintype_card]`;
+   `ResidueColouring.colorable_of_residue _ (fun v : planeOver F => (v : ℂ)) ψ hmem hne`. For adjacent `v, w` the difference is a
+   unit vector (`unitDistance_adj`, `Complex.dist_eq`; coordinates by `Complex.sub_re`, `Subfield.sub_mem`); `hmem` is the first
+   component of `h`, `hne` the second after `ResidueColouring.cosetResidue_apply_of_mem`.
+2. **`exists_rat_add_mul_sqrt_eq`** (≈ 35 lines). `Subfield.closure_induction` on `fieldOfRadicands {m}` with the predicate
+   `∃ p q : ℚ, x = p + q√m`. Product by `Real.mul_self_sqrt`. Inverse of `x = p + q√m ≠ 0`: if `p − q√m ≠ 0` it is
+   `(p − q√m)/(p² − mq²)`; if `p − q√m = 0` then `x = 2p` and the inverse is rational. **No irrationality is used**, so the lemma
+   holds for every `m`.
+3. **`exists_int_solution_of_mem_unitVectors`** (≈ 70 lines; the glue all three classes share). From (2), `u.re = p₁ + p₂√m`,
+   `u.im = p₃ + p₄√m`; `‖u‖ = 1` gives `(p₁² + p₃² + m(p₂² + p₄²) − 1) + 2(p₁p₂ + p₃p₄)√m = 0`, and `√m` irrational
+   (`irrational_sqrt_natCast_iff`, from `¬ IsSquare m`) makes both rational parts `0`. Clear denominators; among the representations
+   `N·u = a + b√m + (c + d√m)i` with `N > 0` take one with `N` least (`Nat.find`): it is not all even, or halving would give a
+   smaller one.
+4. **`dyadic_shape_one_mod_four`, `dyadic_shape_two_mod_four`** (≈ 40 lines each). Cast `h1`, `h2` to `ZMod 8`
+   (`congrArg (Int.cast : ℤ → ZMod 8)`, `push_cast`; `(m : ZMod 8)` is `1` or `5`, resp. `2` or `6`, by `ZMod.natCast_mod`). The
+   finite statement — for all `a b c d N : ZMod 8`, `Q1 → Q2 →` not all of even value `→` the conclusion on `.val` modulo 4 — is
+   `decide` over `8⁵ = 32768` tuples per value of `m`; if it is slow, split first on the five parities (32 cases) and use
+   `decide +kernel` (`LEAN.md` § The kernel's cost model; state the check as a `Bool` through `List.all` if a `∀` is slow). Read the
+   conclusion back with `ZMod.val_intCast` and `omega` (`Int.odd_iff`; `/ 2` and `% 4` by literals are linear for `omega`).
+5. **`dyadic_shape_three_mod_eight`** (≈ 60 lines). The same with one more step: first the all-odd quadruples are impossible —
+   cast to `ZMod 16` (`m ≡ 3` or `11`), `8⁴·16` tuples; by hand: odd squares are `1` or `9 (mod 16)`, `ab = −cd` forces
+   `a²b² = c²d²`, so `a² + c² + m(b² + d²) ≡ 2 + 2m ≡ 8 (mod 16)`, never a square. Then the rest modulo 8 as in (4).
+6. **The odd-denominator rationals** (≈ 40 lines, private to the module): `oddDen : AddSubgroup ℚ := {q | Odd q.den}`
+   (`Rat.add_den_dvd`) and `red : oddDen →+ ZMod 2`, `q ↦ ((q : ℚ) : ZMod 2)` — `Rat.cast` into the field `ZMod 2` is additive on
+   rationals whose denominators are not `0` there (`Rat.cast_add_of_ne_zero`); for an integer `a` and odd `N`, `a/N ∈ oddDen` and
+   `red (a/N) = (a : ZMod 2)`.
+7. **`exists_addMonoidHom_one_mod_four`, `…_two_mod_four`, `…_three_mod_eight`** (≈ 70 lines each). `e : ℚ × ℚ × ℚ × ℚ →+ ℂ`,
+   `e p = p₁ + p₂√m + (p₃ + p₄√m)·i`, injective because `√m` is irrational (classes 2 and 3 are never squares: squares are `0, 1
+   (mod 4)`). `Γ ≤ ℚ⁴`: the `p` whose four forms `t₁ … t₄` lie in `oddDen`; `ψ₀ : Γ →+ G` a sum of `red ∘ t_j`; then
+   `Λ := Γ.map e` and `ψ := ψ₀ ∘ (Γ.equivMapOfInjective e he).symm` (`AddSubgroup.equivMapOfInjective`), so no coordinate has to be
+   chosen. The forms, by class:
+   - `m ≡ 1 (mod 4)`: `t = (p₁ − p₂, 2p₂, p₃ − p₄, 2p₄)`; `ψ₀ = red t₁ + red t₃`.
+   - `m ≡ 2 (mod 4)`: `t = (p₁, p₃, p₂ − p₄, 2p₄)`; `ψ₀ = red t₁ + red t₂ + red t₄`.
+   - `m ≡ 3 (mod 8)`: `t = (p₁ − p₄, p₃ + p₂, 2p₄, −2p₂)`; `ψ₀ = (red t₁ + red t₂, red t₃ + red t₄)`.
+   For a unit vector: (3) gives `(a, b, c, d, N)`, the shape lemma gives the alternative, and in each the four `t_j` are an integer
+   over an odd number (`N`, or `N/2` when `N ≡ 2 (mod 4)`) and `ψ₀` is the odd quantity of the table.
+8. **`colorable_two_planeOver_sqrt`** (≈ 25 lines; a composition). `m % 4 = 0` contradicts `Squarefree m` (`2 * 2 ∣ m`,
+   `Nat.isUnit_iff`). `m = 1`: `fieldOfRadicands {1} ≤ fieldOfRadicands {2}` (`Subfield.closure_le`, `Real.sqrt_one`), then
+   `SimpleGraph.Colorable.of_hom` along `SimpleGraph.induceHomOfLE` from the case `m = 2`. `m % 4 = 1`, `m ≠ 1`: not a square (a
+   square root would be a unit by `Squarefree`); (7) and (1). `m % 4 = 2`: (7) and (1). `Nat.card (ZMod 2) = 2`.
+9. `colorable_four_planeOver_sqrt` — **proved** over (7) and (1).
+
+**What is hard.** Nothing is deep; the length is in (3) and (7). The one place a plan's table could mislead is the cost of the
+`decide` in (4)–(5): price it from the first of them.
+
+**What the joining text reads from these leaves.** J.10 (`exists_stablePrime_card_four_sqrt`) needed "`1/2 ∉ ℤ[U_F]`" from "the ring
+homomorphism of DQ.3"; with the additive map it is: `ℤ[U_F]` is the additive span of the unit vectors
+(`UnitRing.exists_sum_eq_of_mem_unitRingOver`), so it lies in `Λ`; were `1/2` in it, `ψ 1 = 2 • ψ (1/2) = 0` in `𝔽₂ × 𝔽₂`, but `1`
+is a unit vector. The rest of J.10 is as the first plan has it.
