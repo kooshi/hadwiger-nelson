@@ -6,7 +6,7 @@ Proofs/HadwigerNelson/Arith/UpperHalf.lean:159:8: warning: declaration uses `sor
 Proofs/HadwigerNelson/Arith/UpperHalf.lean:165:8: warning: declaration uses `sorry`
 Proofs/HadwigerNelson/Arith/UpperHalf.lean:170:8: warning: declaration uses `sorry`
 Proofs/HadwigerNelson/Arith/UpperHalf.lean:178:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Arith/UpperHalf.lean:215:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Arith/UpperHalf.lean:223:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Arith/UpperHalf.lean:232:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Arith/UpperHalf.lean:240:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/UpperHalf.lean:216:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/UpperHalf.lean:224:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/UpperHalf.lean:233:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/UpperHalf.lean:241:8: warning: declaration uses `sorry`

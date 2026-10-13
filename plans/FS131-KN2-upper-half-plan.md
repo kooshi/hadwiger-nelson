@@ -9,7 +9,9 @@ marked SAVED.*
 
 A planning job; what it proved is what typing showed to be a corollary of the library. Each is in
 `Proofs/HadwigerNelson/Arith/UpperHalf.lean`, namespace `HadwigerNelson.UpperHalf`, elaborated by `lake env lean` and by the
-build of stage 3; none has been through the gate (no axiom audit was run by this job).
+builds of stage 3. Grade: kernel-checked in a build of this branch; `#print axioms` in a probe (`data/fs131/kn2/probes/p4.lean`,
+output `data/fs131/kn2/logs/p4.out`) prints `[propext, Classical.choice, Quot.sound]` for the three NF1-S1A theorems named
+below. **None has been through the gate**: no audit, no vacuity scan, no linter run was made by this job.
 
 - `nonempty_hom_unitQuadrance`, `nonempty_hom_finitePlane` — the residue homomorphism at a usable prime, with no transcendental.
 - `chromaticNumber_planeOver_le_unitQuadrance`, `chromaticNumber_planeOver_le_finitePlane` — **NF1-S1A, both clauses**.
@@ -394,3 +396,74 @@ and `N := Re x² + Im x² = x x̄` are integral and rational, so integers; `(2 I
   counts in `CLAUDE.md` § Trust ledger change (`ours` 23 → 22, `inline` 16 → 15, `takes` by the new theorem's pairs); (5) the
   vacuity scan: no colouring binder is new; `StablePrime F` and `IsUsablePrime` are the carriers to name models for
   (stage 2); (6) two new global instances (`instNumberFieldFieldOfRadicands`, `instNumberFieldBot`) — named, `Prop`-valued.
+
+## Stage 5 — SAVED: the final skeleton, the statements as the kernel stores them, and drafts for files this job does not write
+
+**The last change and the last build.** After stage 4 one leaf lost a binder: `two_mem_of_conj_trivial` is stated under
+`omit [NumberField F] in`, because its proof reads no number-field fact and the `unusedSectionVars` linter is silent only
+while the body is `sorry` (`LEAN.md` § Searching, FS131-I7A) — an implementer could not have dropped it without changing a
+statement. Build 3 (`BATCH=8`, the same cap): exit 0, `249 of 249 batches, 3 module(s) rebuilt`, 6 m 33 s, 4.53 GB
+(`data/fs131/kn2/logs/build3.*`). No warning in the three modules but `declaration uses sorry`.
+
+**Read as the kernel has them** (`data/fs131/kn2/probes/p4.lean`, `#check @…` on thirteen statements after build 3;
+`data/fs131/kn2/logs/p4.out`): every `Arith/UpperHalf` statement about `P.localRing` or `P.residue` carries
+`[NumberField ↥F]`; `two_mem_of_conj_trivial` carries none; `chromaticNumber_planeOver_le_localBound` is
+`∀ (F : Subfield ℝ) [NumberField ↥F], (induce (planeOver F) (unitDistance ℂ)).chromaticNumber ≤ SpectralChain.localBound F`;
+`exists_hom_levelTarget` is `∀ {F} [NumberField ↥F] (P : StablePrime F) {m : ℕ}, 1 ≤ m → ∃ h, ∀ (x y : ↑(planeOver F))
+(hd : ⟨↑x, ⋯⟩ - ⟨↑y, ⋯⟩ ∈ P.localRing), h x - h y = (P.residue m) ⟨⟨↑x, ⋯⟩ - ⟨↑y, ⋯⟩, hd⟩`. The theorems proved from leaves
+print `sorryAx`, as they must.
+
+### Drafts — `LEDGER.md` (Keryx's; each to be filed when the leaf it names is proved and the module is through the gate)
+
+- **Row 52**, in place of the map's X9 draft: after "…(G43)." insert "**In the kernel:** the residue homomorphism at a
+  usable prime of any real number field (`Arith.exists_placeHom`, FS-131 wave 2) and the bound as an inequality of chromatic
+  numbers (`UpperHalf.chromaticNumber_planeOver_le_unitQuadrance`, `UpperHalf.chromaticNumber_planeOver_le_finitePlane`); a
+  prime with residue field `𝔽_p` at every field of square roots whose radicands are nonzero squares modulo an odd `p`
+  (`QuadraticPrime.exists_maximal_card_eq`). The two values stay [hand] until the ramified clause
+  (`QuadraticPrime.exists_maximal_card_eq_of_ramified`) lands and is applied at 11." Grade: "[kernel for the bound; hand +
+  tools for the two values]".
+- **Row 57**, the "Not proved" clause: "Proved at every stable prime of `F(i)`, for every real number field `F`:
+  `UpperHalf.exists_hom_levelTarget` (a homomorphism of the plane onto every level target) and
+  `UpperHalf.exists_stablePrime_of_valuationSubring` (every conjugation-stable valuation subring of `F(i)` is the
+  localization at one)."
+- **Row 63**, its gap: "Over a real field: `UpperHalf.colorable_two_planeOver_of_ramified` (two colours at a stable prime
+  modulo which conjugation is the identity), with `χ(ℚ²) = 2` as its instance (`UpperHalf.chromaticNumber_planeOver_rat`;
+  the value is Woodall's)."
+- **Row 73**: "**`χ(ℚ(√11)²) = 4`, kernel-checked, both halves** (`UpperHalf.chromaticNumber_planeOver_eleven`): the upper
+  half is the residue homomorphism at the prime above 7 onto `UD(𝔽₇, 2)`. The upper bound is `[Fischer1990]`'s."
+- **Row 105**, "Not claimed: the number-field reading": "The number-field reading:
+  `UpperHalf.inv_natCast_mem_unitRingOver_iff_forall_stablePrime` — `1/n ∈ ℤ[U_F]` iff no stable prime of `F(i)` holds `n`."
+- **Row 119**: add "upper end `χ(ℚ(√167)²) ≤ 8` (`UpperHalf.chromaticNumber_planeOver_sqrt167_le_eight`, the plane at 23)".
+- **Row 121**: add "the upper half a second way, through the prime above 11
+  (`UpperHalf.chromaticNumber_planeOver_sqrt47_le_five_of_prime`)".
+- **Rows 99, 123, 127**: "the upper half `χ(F²) ≤ L(F)` is `UpperHalf.chromaticNumber_planeOver_le_localBound`; the
+  headline's `hUpper` is discharged in `UpperHalf.chromaticNumber_eq_localBound_of_chain`."
+- **Not closed by this module, though the map's waiting column lists the row**: row 103's upper end `χ(ℚ(√2,√3)²) ≤ 4`
+  (it needs a stable prime above 2 of `ℚ(√2,√3)(i)` and its target's colouring — an instance at `p = 2`, outside
+  `Arith/QuadraticPrime`); row 53 (needs `[S3]`); row 94 (the colouring's formula).
+
+### Drafts — `LEAN.md` § Searching — Lean (Keryx's)
+
+- Mathlib at the pin holds the localization of a Dedekind domain at a prime as a valuation subring of its fraction field,
+  with its `IsLocalization` and `Ring.KrullDimLE 1` instances: `IsDedekindDomain.HeightOneSpectrum.valuationSubringAtPrime`
+  (`Mathlib/RingTheory/DedekindDomain/AdicValuation.lean`); a valuation subring above it other than `⊤` is it
+  (`ValuationSubring.eq_of_le_of_ne_top`). `Arith/PlaceHom`'s two localization lemmas predate the reading (FS131-KN2).
+- A field generated by algebraic elements maps to any field in which their minimal polynomials split:
+  `IntermediateField.nonempty_algHom_adjoin_of_splits`; at the pin `Polynomial.Splits` is a predicate on one polynomial
+  (`(p.map f).Splits`), and `Polynomial.splits_of_splits_of_dvd`, `Polynomial.splits_X_sub_C` are deprecated for
+  `Polynomial.Splits.of_dvd`, `Polynomial.Splits.X_sub_C` (FS131-KN2).
+- A maximal ideal with `p` elements in its quotient is the kernel of a ring homomorphism to `ZMod p`
+  (`ZMod.ringHom_surjective`, `RingHom.ker_isMaximal_of_surjective`, `RingHom.quotientKerEquivOfSurjective`): no ring of
+  integers need be computed to exhibit a degree-one prime (`QuadraticPrime.isMaximal_ker_and_card`; FS131-KN2).
+- On the laptop a build is the walk: 947 Lake starts at `BATCH=2` took 23 m 51 s with 12 s of compiling; 249 at `BATCH=8`
+  took 6 m 35 s; peak 4.5 GB when only small modules are stale. `lake env lean` at `--mem 8` does not fit beside a build under
+  the laptop's budget of 22 (FS131-KN2).
+
+### Corrections to the map (`plans/FS131-KN1-number-field-kernel-map.md`; its writer's or Keryx's)
+
+- § X1 `[S1b]`, size column: "those two localization lemmas … must be restated for a number field given as `fieldI F`" —
+  retired; Mathlib's `valuationSubringAtPrime` serves.
+- § X8 and NF1-NC's last clause ("each exact value named also needs its lower half, which the map says the kernel holds for
+  the instances listed"): true for `ℚ(√11)`; for `ℚ` the lower half `2 ≤ χ(ℚ²)` was not held by name — a leaf here.
+- § X1 `[S2]`: the second sentence as written is false with two radicands divisible by `p` (sent mid-job; the claim list
+  carries the dated line).

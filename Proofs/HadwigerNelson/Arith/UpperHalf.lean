@@ -211,6 +211,7 @@ theorem chromaticNumber_eq_localBound_of_chain [NumberField.IsTotallyReal F]
   SpectralChain.chromaticNumber_eq_localBound hBH hL1 I hCount hAP hRU hMR hCLS hRow99
     (chromaticNumber_planeOver_le_localBound F) hL
 
+omit [NumberField F] in
 /-- A stable prime modulo which conjugation is the identity holds `2`: `ī − i = −2i` and `i` is a unit. -/
 theorem two_mem_of_conj_trivial (P : StablePrime F) (hram : ∀ x : 𝓞 (fieldI F), conjO F x - x ∈ P.P) :
     (2 : 𝓞 (fieldI F)) ∈ P.P := by
