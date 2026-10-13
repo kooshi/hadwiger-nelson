@@ -1,0 +1,11 @@
+## FILE Proofs/HadwigerNelson/Instances/UpperHalfValues.lean lean-exit=0 errors=0
+AXIOMS public HadwigerNelson.UpperHalf.chromaticNumber_planeOver_eleven : [Classical.choice, Quot.sound, propext]
+AXIOMS public HadwigerNelson.UpperHalf.chromaticNumber_planeOver_rat : [Classical.choice, Quot.sound, propext, sorryAx]
+AXIOMS public HadwigerNelson.UpperHalf.chromaticNumber_planeOver_sqrt167_le_eight : [Classical.choice, Quot.sound, propext]
+AXIOMS public HadwigerNelson.UpperHalf.chromaticNumber_planeOver_sqrt47_le_five_of_prime : [Classical.choice, Quot.sound, propext]
+AXIOMS public HadwigerNelson.UpperHalf.colorable_planeOver_fieldOfRadicands : [Classical.choice, Quot.sound, propext]
+AXIOMS public HadwigerNelson.UpperHalf.exists_stablePrime_rat : [Classical.choice, Quot.sound, propext, sorryAx]
+AXIOMS public HadwigerNelson.UpperHalf.instNumberFieldBot : [Classical.choice, Quot.sound, propext, sorryAx]
+AXIOMS public HadwigerNelson.UpperHalf.numberField_bot : [Classical.choice, Quot.sound, propext, sorryAx]
+AXIOMS public HadwigerNelson.UpperHalf.two_le_chromaticNumber_planeOver : [Classical.choice, Quot.sound, propext, sorryAx]
+AXIOMS-COUNT 9

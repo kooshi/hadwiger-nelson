@@ -14,9 +14,11 @@ between the base commit and the working tree (block comments and docstrings blan
 head to the next blank line).  And the reader's own check: every `theorem`, `def`, `abbrev` or named `instance` written
 in the base commit's files in scope is a named constant of `before`.
 
-Usage:  statement_diff.py <before.txt> <after.txt> [--scope instances|module] [--control]
+Usage:  statement_diff.py <before.txt> <after.txt> [--scope instances|upperhalf|module] [--control]
   --scope instances   the dumps hold `Instances/UpperHalfValues` only (the footer's print)
   --scope module      the dumps hold all three files (the compiled modules' print; the default)
+  --scope upperhalf   `before` holds `Arith/UpperHalf` only (FS131-IU1's dump of the skeleton's compiled module,
+                      data/fs131/iu1/statements-before.txt), `after` any dump that holds it; no --control in this scope
 `--control` plants its faults in `after` — one character of one stored statement changed, one declaration removed, one
 theorem's kind changed, one `example`'s text changed, and (scope module) one definition's value changed — and must
 report exactly that many; exit 0 only then.
@@ -27,6 +29,7 @@ import re, subprocess, sys, pathlib
 BASE = "223241b0a"   # the skeleton's commit: the base of both branches the merge joined
 FILES = {
     "instances": ["Proofs/HadwigerNelson/Instances/UpperHalfValues.lean"],
+    "upperhalf": ["Proofs/HadwigerNelson/Arith/UpperHalf.lean"],
     "module": ["Proofs/HadwigerNelson/Arith/UpperHalf.lean", "Proofs/HadwigerNelson/Arith/QuadraticPrime.lean",
                "Proofs/HadwigerNelson/Instances/UpperHalfValues.lean"],
 }
@@ -75,6 +78,8 @@ def main():
     new_ex = {f: examples(new_text[f]) for f in files}
 
     want = 0
+    if control and scope == "upperhalf":
+        print("no --control in scope upperhalf: the comparator's control runs in the other two scopes"); sys.exit(2)
     if control:
         # plant 1: one character of one stored statement changed in `after` (its last: a raw dump and a compact one both carry it)
         victim = "HadwigerNelson.UpperHalf.exists_stablePrime_rat"

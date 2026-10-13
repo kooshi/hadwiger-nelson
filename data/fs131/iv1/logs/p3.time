@@ -1,18 +1,18 @@
 	Command being timed: "env SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 python3 /home/kooshi/source/lean-dir/scripts/slot.py --mem 4 --cpus 2 --wait 7200 --name iv1 -- lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false data/fs131/iv1/probes/p3.lean"
 	User time (seconds): 1.63
-	System time (seconds): 0.63
+	System time (seconds): 0.61
 	Percent of CPU this job got: 99%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:02.27
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:02.26
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 3596004
+	Maximum resident set size (kbytes): 3597468
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 97099
-	Voluntary context switches: 624
-	Involuntary context switches: 149
+	Minor (reclaiming a frame) page faults: 97103
+	Voluntary context switches: 363
+	Involuntary context switches: 125
 	Swaps: 0
 	File system inputs: 0
 	File system outputs: 16
