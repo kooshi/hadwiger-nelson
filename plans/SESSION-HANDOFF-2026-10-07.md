@@ -91,9 +91,12 @@ this session):
    first layer. A long job with saved stages; a successor can take any stage from its record
    `plans/FS131-KN3-chain-plan.md` on the branch.
 
-**RUNNING AT 2026-10-13 19:23 UTC: FS131-LC1 — A LANDING IN FLIGHT (the measurable-number module, tree `fs131-wkc`; items
-663, 667); FS131-IT1 (`Arith/TorsionExtraction.lean`: its ten leaves proved, building; tree `fs131-wr2`; items 675,
-677); FS131-IC1 (the eight leaves of `Arith/ThreeColourCharacter.lean`, tree `fs131-wc1`; item 678).** **The residue
+**RUNNING AT 2026-10-13 19:36 UTC: FS131-LC1 — A LANDING IN FLIGHT (the measurable-number module, tree `fs131-wkc`; items
+663, 667; on its final gate pass, near its context line — if it stops short, a successor takes the pass from its
+record `plans/FS131-LC1-landing.md` on that branch); FS131-IC1 (the eight leaves of `Arith/ThreeColourCharacter.lean`,
+tree `fs131-wc1`; item 678); FS131-ID1 (the ten leaves of `Arith/DyadicQuadratic.lean`, tree `fs131-wdq`; item 680).**
+`Arith/TorsionExtraction.lean` is fully proved and built on `fs131-wr2` (item 679); its five headline compositions
+wait on FS131-IC1's module. **The residue
 module is COMPLETE on branch `fs131-wnf` at `d83fdd8c7` — three files, no `sorry`, built, 52 public declarations on
 the standard three, `χ(ℚ(√11)²) = 4` and `χ(ℚ²) = 2` among them — NOT GATED (items 670, 674, 676, 678).** **Next
 free slots, in order: the residue module's landing, as soon as the corollary's landing is merged** (brief on the
