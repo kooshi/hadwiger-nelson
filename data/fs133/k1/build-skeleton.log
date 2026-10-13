@@ -1,0 +1,23 @@
+slot: admitted k133: mem 10 GiB (hard cap), cpus 4,5,6,7
+==> build: this run's full output: build/gate/build/20261013T211622Z-979653.log
+==> up-to-date check: exit 3 after 3s (3 means something needs building) — walking the batches
+==> 249 batches of at most 8 modules, capped at 10G
+==> [1/249] 8 modules  16:16:25
+==> [2/249] 8 modules  16:16:26
+    ⚠ [2619/2619] Replayed Proofs.HadwigerNelson.Outside.OAI158Rigidity
+    warning: Proofs/HadwigerNelson/Outside/OAI158Rigidity.lean:136:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Outside/OAI158Rigidity.lean:149:8: declaration uses `sorry`
+==> [3/249] 8 modules  16:16:28
+    ⚠ [2742/2742] Built Proofs.HadwigerNelson.Plane.OneClass.SectionDensity (1.7s)
+    warning: Proofs/HadwigerNelson/Plane/OneClass/SectionDensity.lean:41:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/SectionDensity.lean:46:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/SectionDensity.lean:51:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/SectionDensity.lean:57:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/SectionDensity.lean:64:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/SectionDensity.lean:80:8: declaration uses `sorry`
+    rebuilt: Plane.OneClass.SectionDensity (1.7s)
+==> [4/249] 5 modules  16:16:30
+==> [5/249] 8 modules  16:16:31
+==> [6/249] 6 modules  16:16:33
+==> [7/249] 8 modules  16:16:34
+==> [8/249] 8 modules  16:16:35

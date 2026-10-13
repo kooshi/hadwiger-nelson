@@ -115,7 +115,11 @@ zero; in the manuscript it is one step of the proof of the Proposition "From pro
 (`Ergodicity.lean` ll. 377–380) and are written here in the signature.
 
 Proved there on `[propext, Classical.choice, Quot.sound]` at Lean v4.34.1 (`data/fs133/k1/readback/ReleaseAxioms.out`).
-Read back against the release's stored statement, term for term, in `plans/FS133-kernel-plan.md` stage 2. A model of
+Read back against the release's stored statement in `plans/FS133-kernel-plan.md` stage 2: the six copied definitions
+are the release's term for term; **this statement is the release's up to instance arguments, not term for term** —
+binders, names and every explicit and implicit argument agree, and the stored types differ only inside instance
+arguments, because Mathlib reaches the inner product of `H` through another class at the release's pin (v4.34.1)
+than at this one. A model of
 its hypotheses with `v ≠ 0`, where its conclusion holds by computation, is `residual_fourier_model` below. Declared in
 `ARCHITECTURE.md` § Trust. -/
 axiom residual_fourier {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
