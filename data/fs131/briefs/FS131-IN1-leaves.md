@@ -125,3 +125,11 @@ site needs no change, or what change it needs.
 Thank you for the note on this tree's build: the one build at the end compiling about forty modules is expected, and
 your scratch farm is a fine way to iterate until then. You start no agents of your own (standing rule 1: delegation is
 one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 2 (2026-10-13 20:32 UTC) — widen the third statement too
+
+By the same reason as Amendment 1: `exists_maximal_conj_trivial` loses its hypothesis `hcc`, its docstring says "an
+endomorphism" where it said "an involution", and its one call stops passing the argument. Your touches are extended to
+that statement and its docstring. The three-part keeps its hypothesis, since its proof reads it. In your statement
+check these three are the only differences from the skeleton. You start no agents of your own (standing rule 1:
+delegation is one level deep, because the coordinator can only review work it knows exists).
