@@ -37,7 +37,7 @@ the passes — every one is true as typed; the notes are what the re-derivation 
 | `ThreeColourCriterion.exists_maximal_card_nine_of_colorable_three` (over L3.1–L3.9) | NF4-THEOREM (b) ⟹, as far as the ring | proved over leaves |
 | `exists_maximal_conj_trivial_of_colorable_two` (L3.10) | row 99's form only (the outside model's two-colour theorem, ⟹) | **true for every subfield, with a short proof** — § Stage 2, D-2 |
 | `comap_conjR_eq` (L3.6) | FS91-J02-L2(b) | **true of every ideal** — § Stage 2, D-1 |
-| `DyadicQuadratic.colorable_of_ringHom` (DQ.1) | route to NF4-DYADIC-TWO, -FOUR | **already in the kernel** as `ResidueColouring.colorable_unitDistance_induce_of_residue` — § Stage 2, D-3 |
+| `DyadicQuadratic.colorable_of_ringHom` (DQ.1) | route to NF4-DYADIC-TWO, -FOUR | **already in the kernel** as `HadwigerNelson.colorable_unitDistance_induce_of_residue` — § Stage 2, D-3 |
 | `colorable_two_planeOver_sqrt` (DQ.2), `colorable_four_planeOver_sqrt` (DQ.3) | NF4-DYADIC-TWO, NF4-DYADIC-FOUR (kernel form) | § Stage 5 |
 | joining text: `chromaticNumber_planeOver_eq_three_iff`, `colorable_three_iff`, the four rows, `localBound_le_chromaticNumber_of_le_four`, the two primes | NF4-THEOREM (b), (a)'s table, row 99, the dated lines' wording | elaborated against both lines by the first planner; re-elaborated after the passes (§ Stage 4) |
 
@@ -66,12 +66,12 @@ statement; each was re-elaborated in § Stage 4.
   mind; a restatement of "no odd closed walk" in the ring's words — elementary, and the outside model's theorem (GPT Astra Thm 2.1)
   is its number-field reading through the dictionary J.1/J.4; not claimed.] L3.3 keeps its one consumer, L3.8.
 - **D-3 — `DyadicQuadratic.colorable_of_ringHom` is already in the kernel, and the dyadic leaves want its additive form.**
-  `ResidueColouring.colorable_unitDistance_induce_of_residue` (`ResidueColouring.lean:561`, Theorem A for a set of points) is the old
+  `HadwigerNelson.colorable_unitDistance_induce_of_residue` (`ResidueColouring.lean:561`, Theorem A for a set of points) is the old
   statement with `A := unitRing F`; and the route § Stage 5 gives the two dyadic leaves builds an **additive** map on a lattice
   holding the unit vectors, not a ring homomorphism out of `ℤ[U_F]`. Old: `colorable_of_ringHom {k : Type} [CommRing k] [Finite k]
   [Nontrivial k] (φ : unitRing F →+* k) : Colorable (Nat.card k)`. New: `colorable_planeOver_of_addMonoidHom {Λ : AddSubgroup ℂ}
   {G : Type*} [AddCommGroup G] [Finite G] (ψ : Λ →+ G) (h : ∀ u ∈ unitVectors F, ∃ hu : u ∈ Λ, ψ ⟨u, hu⟩ ≠ 0) : Colorable (Nat.card G)`
-  — `ResidueColouring.colorable_of_residue` (`:235`) read at the plane. The old form is its case `Λ = ℤ[U_F]`.
+  — `HadwigerNelson.colorable_of_residue` (`ResidueColouring.lean:235`) read at the plane. The old form is its case `Λ = ℤ[U_F]`.
 - **D-4 — one helper stated once: a character killed by `N` is a `ZMod N`-valued functional** (`ZMod.toAddCircle` after it). Four
   leaves were each going to build it privately (L2.5 both ways, L3.8 at 2 and 3, L3.9). New leaf in `TorsionExtraction` § 3:
   `exists_addMonoidHom_zmod`. No statement changes.
@@ -102,7 +102,7 @@ child marked **typed** is a new leaf in the module (statement fixed, `sorry`); t
   from the rotation equations at `m` and `m − 1`); corner layer, `∀ m, 3 • θ(5⁻ᵏ g_m) = 0`. Before them: `w` as a **unit** of
   `ℤ[U_F]` (so `g_m = w^m b` is a `zpow`), a lift `a ∈ [−1/6, 1/6]` for every unit vector, and the two relation hypotheses of
   `layer_dichotomy` from `(2 − i)w = 2 + i`. Statement unchanged.
-- **L2.5 `colorable_two_iff_fieldBandSet_two_nonempty`** — `⟸` is D-4 with `ResidueColouring.colorable_of_residue` at
+- **L2.5 `colorable_two_iff_fieldBandSet_two_nonempty`** — `⟸` is D-4 with `HadwigerNelson.colorable_of_residue` at
   `G = ZMod 2` (fifteen lines, not the coset construction the first plan re-derives). `⟹`: with `f x = C x − C 0`, the invariant is
   `Q(y) := ∀ x, f (x + y) = f x + f y`; it holds at a unit vector (properness with two colours) and is closed under `+` and `−`, so
   it holds on the additive span. Statement unchanged.
@@ -214,9 +214,9 @@ In each row the last clause of both alternatives says `ψ(u) ≠ 0`. (`ψ` is re
 `data/fs131/kn5/lean/NameCheck.lean` (checked under this module's imports; § Stage 7 has the log's verdict).
 
 1. **`colorable_planeOver_of_addMonoidHom`** (≈ 20 lines). `haveI := Fintype.ofFinite G`; `rw [Nat.card_eq_fintype_card]`;
-   `ResidueColouring.colorable_of_residue _ (fun v : planeOver F => (v : ℂ)) ψ hmem hne`. For adjacent `v, w` the difference is a
+   `HadwigerNelson.colorable_of_residue _ (fun v : planeOver F => (v : ℂ)) ψ hmem hne`. For adjacent `v, w` the difference is a
    unit vector (`unitDistance_adj`, `Complex.dist_eq`; coordinates by `Complex.sub_re`, `Subfield.sub_mem`); `hmem` is the first
-   component of `h`, `hne` the second after `ResidueColouring.cosetResidue_apply_of_mem`.
+   component of `h`, `hne` the second after `HadwigerNelson.cosetResidue_apply_of_mem`.
 2. **`exists_rat_add_mul_sqrt_eq`** (≈ 35 lines). `Subfield.closure_induction` on `fieldOfRadicands {m}` with the predicate
    `∃ p q : ℚ, x = p + q√m`. Product by `Real.mul_self_sqrt`. Inverse of `x = p + q√m ≠ 0`: if `p − q√m ≠ 0` it is
    `(p − q√m)/(p² − mq²)`; if `p − q√m = 0` then `x = 2p` and the inverse is rational. **No irrationality is used**, so the lemma

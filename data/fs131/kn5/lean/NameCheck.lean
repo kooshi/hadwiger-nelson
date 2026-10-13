@@ -1,10 +1,15 @@
-import Proofs.HadwigerNelson.Arith.TorsionExtraction
+import Proofs.HadwigerNelson.SpectralChain
+import Mathlib.NumberTheory.Real.Irrational
+import Mathlib.Topology.Instances.AddCircle.Real
+import Mathlib.Topology.Algebra.Module.FiniteDimension
 /-! FS131-KN5: every library name the plan of § Stage 5 and the amended leaves cite, checked under the imports of
-`Arith/DyadicQuadratic` (its one import). An unknown name is an error line in the log. -/
+`Arith/DyadicQuadratic` (`SpectralChain` and `Mathlib.NumberTheory.Real.Irrational`), with two Mathlib modules more for the
+names the other three modules' amended leaves cite (they import more). An unknown name is an error line in the log. -/
 open HadwigerNelson
 -- the residue colouring at the plane (DQ.1')
-#check @ResidueColouring.colorable_of_residue
-#check @ResidueColouring.cosetResidue_apply_of_mem
+#check @colorable_of_residue
+#check @cosetResidue_apply_of_mem
+#check @colorable_unitDistance_induce_of_residue
 #check @Nat.card_eq_fintype_card
 #check @Fintype.ofFinite
 #check @unitDistance_adj
@@ -30,6 +35,8 @@ open HadwigerNelson
 #check @Rat.num_div_den
 #check @AddMonoidHom.mk'
 #check @AddMonoidHom.prod
+#check @AddSubgroup.equivMapOfInjective
+#check @Nat.find
 -- DQ.2's composition
 #check @SimpleGraph.Colorable.of_hom
 #check @SimpleGraph.induceHomOfLE

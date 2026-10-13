@@ -1,4 +1,5 @@
-import Proofs.HadwigerNelson.Arith.TorsionExtraction
+import Proofs.HadwigerNelson.SpectralChain
+import Mathlib.NumberTheory.Real.Irrational
 
 /-!
 # Two and four colours at the dyadic prime of a real quadratic field (FS-131, NF4; planners FS131-KN4, FS131-KN5)
@@ -15,14 +16,17 @@ reads them.
 **Both values are prior art** (`[Fischer1990]`, `[Johnson2000]`; `LEDGER.md` § The claim list): nothing here is claimed
 as this project's but the kernel form.
 
+**This module reads nothing of the three-colour line** (its imports are `SpectralChain` and Mathlib), so it can be built
+beside it.
+
 **The route** (`plans/FS131-KN5-three-four-colours-passes.md` § Stage 5): integers only — no order of `ℚ(√m, i)`, no
 valuation, no localization. A unit vector of `ℚ(√m)²` is `u = (a + b√m + c·i + d·i√m)/N` with integers
-(`exists_rat_add_mul_sqrt_eq`), and `|u| = 1` reads `a² + c² + m(b² + d²) = N²`, `ab + cd = 0` (`√m` is irrational in
-each class). For a solution not all even, the class of `m` fixes the shape of `(a, b, c, d, N)` modulo 4
+(`exists_rat_add_mul_sqrt_eq`, `exists_int_solution_of_mem_unitVectors`), and `|u| = 1` reads `a² + c² + m(b² + d²) = N²`,
+`ab + cd = 0` (`√m` is irrational in each class). For a solution not all even, the class of `m` fixes the shape of `(a, b, c, d, N)` modulo 4
 (`dyadic_shape_one_mod_four`, `…_two_mod_four`, `…_three_mod_eight`): `N` is odd or twice an odd number, and one
 additive map `ψ` on the lattice of points of that shape — into `𝔽₂`, or into `𝔽₂ × 𝔽₂` when `m ≡ 3 (mod 8)` — is never
 `0` at a unit vector (`exists_addMonoidHom_…`). `colorable_planeOver_of_addMonoidHom` — the residue colouring,
-`ResidueColouring.colorable_of_residue`, read at the plane — then colours with `|𝔽₂| = 2` or `|𝔽₂ × 𝔽₂| = 4` colours.
+`colorable_of_residue` of `ResidueColouring.lean`, read at the plane — then colours with `|𝔽₂| = 2` or `|𝔽₂ × 𝔽₂| = 4` colours.
 (`ψ` is the reduction at the dyadic prime written in coordinates: `i ↦ 1`, and `(1 + √m)/2`, `√m(1 + i)/2` or
 `(1 + i√m)/2` to its residue. Nothing in the proof needs to know that.)
 
@@ -36,14 +40,14 @@ and 272 solutions with `N` even in its box). `colorable_two_planeOver_sqrt` at `
 
 namespace HadwigerNelson.DyadicQuadratic
 
-open HadwigerNelson.CharacterColouring HadwigerNelson.SpectralChain HadwigerNelson.SquareClass SimpleGraph
+open HadwigerNelson.SpectralChain HadwigerNelson.SquareClass SimpleGraph
 
 /-! ## §1 The residue colouring, read at the plane -/
 
 /-- **An additive map that is never `0` at a unit vector colours the plane.** `Λ` an additive subgroup of `ℂ` holding
 the unit vectors of `F²`, `ψ : Λ →+ G` into a finite group with `ψ u ≠ 0` at each of them: the plane over `F` is
-`|G|`-colourable (colour each coset of `Λ` by `ψ`; `ResidueColouring.colorable_of_residue`). Every subfield `F ⊆ ℝ`.
-Its case `Λ = ℤ[U_F]`, `ψ` a ring homomorphism, is `ResidueColouring.colorable_unitDistance_induce_of_residue`. -/
+`|G|`-colourable (colour each coset of `Λ` by `ψ`; `HadwigerNelson.colorable_of_residue`). Every subfield `F ⊆ ℝ`.
+Its case `Λ = ℤ[U_F]`, `ψ` a ring homomorphism, is `HadwigerNelson.colorable_unitDistance_induce_of_residue`. -/
 theorem colorable_planeOver_of_addMonoidHom {F : Subfield ℝ} {Λ : AddSubgroup ℂ} {G : Type*} [AddCommGroup G]
     [Finite G] (ψ : Λ →+ G) (h : ∀ u ∈ unitVectors F, ∃ hu : u ∈ Λ, ψ ⟨u, hu⟩ ≠ 0) :
     ((unitDistance ℂ).induce (planeOver F)).Colorable (Nat.card G) := by
@@ -54,6 +58,17 @@ theorem colorable_planeOver_of_addMonoidHom {F : Subfield ℝ} {Λ : AddSubgroup
 /-- **Coordinates in `ℚ(√m)`**: every element is `p + q√m` with `p, q` rational. -/
 theorem exists_rat_add_mul_sqrt_eq {m : ℕ} {x : ℝ} (hx : x ∈ fieldOfRadicands {m}) :
     ∃ p q : ℚ, x = p + q * Real.sqrt m := by
+  sorry
+
+/-- **A unit vector in integers.** For `m` not a square, a unit vector `u` of `ℚ(√m)²` is `(a + b√m + (c + d√m)·i)/N`
+with integers not all even, and `|u| = 1` reads `a² + c² + m(b² + d²) = N²`, `ab + cd = 0` (the rational part and the
+`√m` part of `u·ū = 1`; `√m` is irrational). -/
+theorem exists_int_solution_of_mem_unitVectors {m : ℕ} (hsq : ¬ IsSquare m) {u : ℂ}
+    (hu : u ∈ unitVectors (fieldOfRadicands {m})) :
+    ∃ a b c d N : ℤ, N ≠ 0 ∧ ¬ (2 ∣ a ∧ 2 ∣ b ∧ 2 ∣ c ∧ 2 ∣ d ∧ 2 ∣ N) ∧
+      a ^ 2 + c ^ 2 + (m : ℤ) * (b ^ 2 + d ^ 2) = N ^ 2 ∧ a * b + c * d = 0 ∧
+      (N : ℂ) * u = (((a : ℝ) + (b : ℝ) * Real.sqrt m : ℝ) : ℂ) +
+        (((c : ℝ) + (d : ℝ) * Real.sqrt m : ℝ) : ℂ) * Complex.I := by
   sorry
 
 /-- **The shape of a unit vector, `m ≡ 1 (mod 4)`.** An integer solution of `a² + c² + m(b² + d²) = N²`, `ab + cd = 0`,
