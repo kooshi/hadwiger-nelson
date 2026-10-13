@@ -91,18 +91,16 @@ this session):
    first layer. A long job with saved stages; a successor can take any stage from its record
    `plans/FS131-KN3-chain-plan.md` on the branch.
 
-**RUNNING AT 2026-10-13 18:57 UTC: FS131-LC1 — A LANDING IN FLIGHT (the measurable-number module, tree `fs131-wkc`; items
-663, 667); FS131-IV1 (join `fs131-wq1` into `fs131-wnf` and prove the residue module's last three leaves; item 674);
-FS131-KN5 (the passes, the first build — green — and the two thin leaves of the three-and-four-colours skeleton, tree
-`fs131-wr2`; items 669, 672).** Done since: FS131-IU1 and FS131-IQ1 — both main files of the residue module fully
-proved and built on their branches, not gated (items 670, 674). **Next free slots, in order: the residue module's
-landing, after FS131-IV1 hands back AND the corollary's landing is merged (pattern
-`data/fs131/briefs/scripts/mk-fs131-lc1.py`; it merges `main` first; the assumptions step must lose the named
-hypothesis the module now proves); two implementers on the three-and-four-colours modules when FS131-KN5 says the
-statements are final (its split: one on `ThreeColourCharacter` then `ThreeColourCriterion`, one on
-`TorsionExtraction` then `DyadicQuadratic`); the Clerk for the owed filing once no landing is in flight; the chain's
-successor planner; a deriver on the chain's two questions; a small planner's job stating row 52's two values;
-FS-133's planner; FS131-KE1.**
+**RUNNING AT 2026-10-13 19:05 UTC: FS131-LC1 — A LANDING IN FLIGHT (the measurable-number module, tree `fs131-wkc`; items
+663, 667); FS131-IV1 (join and the residue module's last three leaves, tree `fs131-wnf`; item 674); FS131-IT1 (the
+ten leaves of `Arith/TorsionExtraction.lean`, tree `fs131-wr2`; item 675).** The three-and-four-colours skeleton is
+final (FS131-KN5; items 672, 675): four modules, 41 leaves, built green three times, linters silent. **Next free
+slots, in order: the residue module's landing (after FS131-IV1 AND the corollary's landing is merged; pattern
+`data/fs131/briefs/scripts/mk-fs131-lc1.py`); the other three modules of the three-and-four-colours line, one
+implementer each — item 675's last sentence says how to make each tree and brief (`mk-fs131-i4.py C|R|D <tree>`,
+cut at `34d9113b2`; retired trees with builds left: `fs132-wi2`, `fs132-wi3`, `fs124-wk1`); the Clerk for the owed
+filing once no landing is in flight; the chain's successor planner; a deriver on the chain's two questions; a small
+planner's job stating row 52's two values; FS-133's planner; FS131-KE1.**
 **Until the landing is back: nothing on
 `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`, `RUNNING.md`, and no
 `CLAUDE.md` filing.** At its green line: check its receipts (`data/fs131/lc1/gate/`), fast-forward `main` to its
