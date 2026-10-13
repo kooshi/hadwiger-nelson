@@ -21,8 +21,9 @@ theorem:
   translations on a finite-dimensional real normed space with a Haar measure; `davies_lemma_B1_euclidean` (the printed
   statement: `ℝ^d`, distances in a set `D`) and `Plane.davies_lemma_B1` (the plane, the unit distance).
 * **The density-point step** — two density-one points of one colour class of a weak colouring are never at distance
-  `1`: printed in `[DeCorteOliveiraVallentin2022]` (proof of Lemma 5.6) and used in `[Davies2026]` p. 46; this library
-  holds it as `Plane.AeColouring.dist_ne_one` (FS111-V0-ID1), and a second time as the ported
+  `1`: the density-point argument of `[DeCorteOliveiraVallentin2022]` (proof of Lemma 5.6, there for the density
+  points of a support on a compact group), which `[Davies2026]` p. 46 follows in `ℝ^d`; this library holds it as
+  `Plane.AeColouring.dist_ne_one` (FS111-V0-ID1), and a second time as the ported
   `Outside.OAI158.weak_density_proper` (`[OAIMath2026]`). Used here in `Plane.AeColouring.core_dist_ne_one`.
 * **The declared outside theorem** `Outside.OAI158.proper_to_borel_weak` (`[OAIMath2026]` family 158): a proper
   `k`-colouring of the plane gives a Borel one proper at almost every unit pair. Only the last section rests on it.
@@ -40,8 +41,9 @@ Falconer's number: the least `k` with a colouring `ℂ → Fin k` whose classes 
 **What is not said.** Nothing about Borel colourings: `Plane.chiM` (`Plane/FalconerReduction`) asks a **Borel** map
 proper at every unit pair — row 130's `χ_B` — and all that is proved about it here is `chiLebesgue ≤ chiM`. The lemma's
 colouring is Lebesgue measurable and no more: its null set is coloured by a compactness argument (`Finset.rado_selection`,
-which is Tychonoff's theorem). No value of any of these numbers is claimed here. The weak-to-proper step is stated for
-the plane and the unit distance only: in other dimensions the lemma is here and the density-point step is not.
+which Mathlib proves from Tychonoff's theorem). No value of any of these numbers is claimed here. The weak-to-proper
+step is stated for the plane and the unit distance only: in other dimensions the lemma is here and the density-point
+step is not.
 
 **Read aloud.** Take any way of colouring the points of the plane with `k` colours such that no two points one unit
 apart share a colour. Then there is such a colouring, with the same number of colours, each of whose colour classes is
@@ -341,8 +343,8 @@ theorem exists_proper_nullMeasurable_of_avoiding_cover (μ : Measure E) [μ.IsAd
 
 /-- **`[Davies2026]` Lemma B.1 as printed**: Lebesgue-measurable sets `A₁, …, A_k ⊆ ℝ^d`, none holding two points at a
 distance in `D`, with conull union, give a Lebesgue-measurable `k`-colouring of `ℝ^d` proper at every pair at a
-distance in `D`. The paper's standing hypotheses — `D` finite and nonempty, `d ⩾ 2`, `k ⩾ 2` — are not used by its proof
-and are not asked. -/
+distance in `D`. The paper's standing hypotheses — `D ⊆ (0, ∞)` finite and nonempty, `d ⩾ 2`, `k ⩾ 2` — are not used by
+its proof and are not asked: `D` is any set of reals. -/
 theorem davies_lemma_B1_euclidean {d : ℕ} (D : Set ℝ) {k : ℕ} {A : Fin k → Set (EuclideanSpace ℝ (Fin d))}
     (hA : ∀ i, NullMeasurableSet (A i) volume) (havoid : ∀ i, ∀ x ∈ A i, ∀ y ∈ A i, dist x y ∉ D)
     (hcov : volume (⋃ i, A i)ᶜ = 0) :
@@ -396,9 +398,9 @@ def AeColouring.core (a : AeColouring k) (j : Fin k) : Set ℂ := a.col ⁻¹' {
 theorem AeColouring.measurableSet_core (a : AeColouring k) (j : Fin k) : MeasurableSet (a.core j) :=
   (a.measurable (measurableSet_singleton j)).inter (measurableSet_densitySet (a.measurable (measurableSet_singleton j)))
 
-/-- **The density-point step** (`[DeCorteOliveiraVallentin2022]`, proof of Lemma 5.6; `[Davies2026]` p. 46; here
-`AeColouring.dist_ne_one`, FS111-V0-ID1): no two points of one core are at distance `1` — every pair, where the
-colouring itself was proper only at almost every pair. -/
+/-- **The density-point step** (the argument of `[DeCorteOliveiraVallentin2022]`, proof of Lemma 5.6, as
+`[Davies2026]` p. 46 follows it; here `AeColouring.dist_ne_one`, FS111-V0-ID1): no two points of one core are at
+distance `1` — every pair, where the colouring itself was proper only at almost every pair. -/
 theorem AeColouring.core_dist_ne_one (a : AeColouring k) (j : Fin k) {x y : ℂ} (hx : x ∈ a.core j)
     (hy : y ∈ a.core j) : dist x y ≠ 1 :=
   a.dist_ne_one j hy.2 (upperDensityAt_pos_of_mem_densitySet hx.2)
@@ -418,8 +420,9 @@ theorem AeColouring.col_eq_of_mem_core (a : AeColouring k) {j : Fin k} {x : ℂ}
 /-- **A weak colouring agrees almost everywhere with a Lebesgue-measurable colouring proper at every unit pair**
 (claim NF3-WEAK-TO-PROPER; `[Davies2026]` Lemma B.1 with the density-point step, composed). Inhabitant of the
 hypothesis: `r7_aeColouring` (seven colours); none exists with five colours given the declared outside theorem
-`Outside.OAI158.no_proper_five_coloring` (`Outside.OAI158.six_le_chiM0`), and whether one exists with six is
-Hadwiger–Nelson. On the standard three axioms. -/
+`Outside.OAI158.no_proper_five_coloring` (`Outside.OAI158.six_le_chiM0`), and whether one exists with six is the
+Hadwiger–Nelson problem given that theorem and `Outside.OAI158.proper_to_borel_weak`
+(`Outside.OAI158.colorable_iff_nonempty_aeColouring`). The theorem itself is on the standard three axioms. -/
 theorem exists_proper_of_aeColouring (a : AeColouring k) :
     ∃ f : ℂ → Fin k, NullMeasurable f volume ∧ f =ᵐ[volume] a.col ∧ ∀ x y, dist x y = 1 → f x ≠ f y := by
   refine exists_proper_ae_eq_of_proper_on_conull volume (R := fun x y => dist x y = 1)

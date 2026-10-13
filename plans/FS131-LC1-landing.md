@@ -69,3 +69,78 @@ private memory plus every mapped `.olean` page it touched). The instrument's con
 corrections recompile 117 modules (stage 2): had a scan asked for a word in the new module's docstrings, a second
 build would have followed. None does: the lint is clean on the module as given, the vacuity scan fails nothing, and
 the assumptions step fails only on the ledger rows the landing is to write.
+
+## Stage 2 — SAVED (FS131-LC1): the docstring corrections, one build, and this machine's first measurement of a build that recompiles real modules
+
+### The corrections (docstrings and module headers only; no statement)
+
+*The coordinator was told before the gate and extended this job's touches to match (the brief's Amendment 1, 18:00 UTC,
+on `main` at `ec4ea081d`): the four further lines of the same slip, the five fixes in the new module, and
+`scripts/axioms-controls.txt` (stage 3).*
+
+**The three named in the brief, from the planner's drafts:**
+- `Plane.chiM` (`Plane/FalconerReduction`) — the planner's draft, verbatim: "`χ_B(ℝ²)`, the **Borel** chromatic number
+  of the plane: the least `k` with a Borel-measurable `k`-colouring proper at every unit pair. Falconer's number, with
+  Lebesgue-measurable classes, is `Plane.chiLebesgue` (`Plane/LebesgueNumber`), and `chiLebesgue ≤ chiM`."
+- `Plane.le_chiM_of_falconerFan` — verbatim: "**FS129-SA1-FALC-RED**, its conclusion for the Borel chromatic number:
+  `χ_B(ℝ²) ≥ k + 1`."
+- `Plane.AeColouring` — the planner's draft with one change: its parenthesis names **both** theorems
+  (`Plane.exists_proper_of_nullMeasurable_weak`, `Plane.exists_aeColouring_of_nullMeasurable_proper`). The draft named
+  the first only, and "the number is the same" needs both: a Lebesgue weak colouring gives a Lebesgue proper one by
+  the first, and that gives a Borel weak one by the second. The composition is kernel-checked as a term
+  (`FS131LC1.lebesgue_weak_iff_nonempty_aeColouring`, `data/fs131/lc1/checks.lean`, the standard three). `Plane.chiM0`'s
+  docstring gains the sentence the brief describes: an `AeColouring` is a Borel map, the Lebesgue number of the same
+  kind is the same, and it is `Plane.chiLebesgue` (`Plane.chiM0_eq_chiLebesgue`).
+
+**Four more lines of the same slip, in the two files those three already recompile** (a later fix would cost a second
+build of 117 modules): `Plane/FalconerReduction`'s module title ("gives `χ_m(ℝ²) ≥ k + 1`" → `χ_B`, with a paragraph
+"Which number": its sets are `MeasurableSet`s and `chiM`'s maps are `Measurable`, so the bound is on the Borel number,
+and `chiLebesgue ≤ chiM` points the other way) and its spec example's docstring (`χ_m` → `χ_B`); `Plane/AeColouring`'s
+module header (a colouring there is a total **Borel**-measurable function; the Lebesgue number is the same, the two
+theorems named) and the field's docstring ("The colouring is Lebesgue measurable." → "Borel measurable.").
+
+**Five in the new module, from the read-aloud** (stage 6 gives the reasons): the standing hypotheses at
+`davies_lemma_B1_euclidean` ("`D ⊆ (0, ∞)` finite and nonempty …: `D` is any set of reals"); the density-point step's
+attribution, twice (the header; `AeColouring.core_dist_ne_one`); "which Mathlib proves from Tychonoff's theorem";
+`exists_proper_of_aeColouring`'s sentence on six colours, which now names the two declared outside theorems it holds
+under.
+
+**No statement changed.** In text (`data/fs131/lc1/code_only_diff.py`, every block comment removed, against the commit
+before the edits, `e9e7cd2de`): `Plane/AeColouring` 929 characters of code before and after, `Plane/FalconerReduction`
+33,156, `Plane/LebesgueNumber` 19,746 — "SAME" three times (`code-only.out`); its plant, one code character altered,
+reads "DIFFERS" three times (`code-only-plant.out`). **From the kernel's side** (`StatementDump.lean`, read by
+`tools/fs124_l2_statements.py`): every constant of the three modules' compiled data, stored type and a definition's
+stored value, dumped before any edit (`statements/before.compact`, at `b6e5abfab`) and after the build
+(`statements/after-build1.compact`): "statements: PASS: no statement and no definition changed — 87 named constants
+compared in 3 module(s)" (`statements/diff-before-vs-build1.txt`); four plants — a stored type changed, a definition's
+value changed, a constant dropped, one added — each fired (`statements/diff-plant.txt`). The three edited files
+elaborate alone with no message (`probes/syntax-*.log`).
+
+### The build
+
+`data/fs131/lc1/run-build.sh 1 10 8 2` — `./scripts/build.sh` under the slot, `--mem 10 --cpus 8`, `MEMMAX=10G BATCH=2`
+(`data/fs131/lc1/build-1.log`; Lake's full output `build/gate/build/20261013T175432Z-351432.log`, 0 lines holding
+"warning"):
+
+> ==> build: OK — 946 of 946 batches, 117 module(s) rebuilt, 0 module(s) with warnings, 47m22s
+
+**117 modules, the number predicted before the build** (`data/fs131/lc1/dependents.py`, `dependents.out`: the three
+edited modules and every module of `Proofs/` that imports one, 114 of them — `Plane/Cover` and its cone, the `ValidMap`,
+`Saturated`, `SixRing`, `RingCalculus` and `Woodall` families, the ten `Outside/OAI158*` modules, FS-124's, and the
+root).
+
+| measured on the laptop (12 cores, 31 GB), this build | |
+|---|---|
+| wall | 47 m 22 s (2,846 s with the slot's admission; the slot was free) — against 24 m 18 s for the walk that rebuilt ten small modules (FS131-KC1): about 23 minutes of compiling, the rest is Lake started 947 times |
+| largest single compiler | **5.5 GiB resident** (5,533 MiB), `Plane/CoverExamples`, which is also the slowest module (134 s); then `ValidMap/BaseSteps` 102 s, `ValidMap/UnitArc` 100 s, `ValidMap/MergeMove` 84 s, `SVMap` 75 s |
+| largest sum over the compilers of one batch | **8.0 GiB resident** (8,027 MiB), two processes: `Plane/SVMap` and `Plane/CoverExamples` — resident sets count the mapped `.olean` pages in each process, so the sum counts shared pages twice |
+| the sampler | `data/fs131/lc1/sample-lean.sh`: every 5 s, the `lean` processes whose working directory is this worktree (by `/proc/<pid>/cwd`, never by a command line), 566 samples; `build-1.rss` |
+
+**What the numbers say for the next build here.** At `BATCH=2` no batch came near the 10 GiB cap as the kernel charges
+it (mapped `.olean` pages already in the page cache are not charged to the batch's scope). A wider batch is safe when
+the stale set is known and small: the passes that follow rebuild the new module and the root only, one compiler at a
+time, and use `BATCH=10` to start Lake 190 times instead of 947. **If this build had died**: the same command again —
+Lake rebuilds what is not yet built, so the redo is the batch in flight and the walk.
+
+**After the build**: the checks file elaborates with no message (`probes/checks-after.log`; against the print made
+before the edits it differs by the two terms added since, nothing else).

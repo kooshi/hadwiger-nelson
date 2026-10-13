@@ -1,0 +1,60 @@
+sampler start 2026-10-13T17:54:31Z worktree=/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wkc interval=5s pid=351425
+17:55:37 new max sum-rss=352 MiB over 2 process(es): Proofs/HadwigerNelson/Plane/DensityPoints.lean Proofs/HadwigerNelson/Plane/Cover.lean
+17:55:37 new max one-rss=178 MiB: Proofs/HadwigerNelson/Plane/DensityPoints.lean
+17:55:42 new max sum-rss=3188 MiB over 1 process(es): Proofs/HadwigerNelson/Plane/Cover.lean
+17:55:42 new max one-rss=3188 MiB: Proofs/HadwigerNelson/Plane/Cover.lean
+17:55:47 new max sum-rss=3210 MiB over 1 process(es): Proofs/HadwigerNelson/Plane/Cover.lean
+17:55:47 new max one-rss=3210 MiB: Proofs/HadwigerNelson/Plane/Cover.lean
+17:56:17 new max sum-rss=5493 MiB over 2 process(es): Proofs/HadwigerNelson/Plane/Suprema.lean Proofs/HadwigerNelson/Plane/Stationary.lean
+17:56:42 new max sum-rss=6495 MiB over 2 process(es): Proofs/HadwigerNelson/Plane/MaximalCover.lean Proofs/HadwigerNelson/Plane/Slack.lean
+17:56:42 new max one-rss=3332 MiB: Proofs/HadwigerNelson/Plane/Slack.lean
+17:56:47 new max sum-rss=6675 MiB over 2 process(es): Proofs/HadwigerNelson/Plane/MaximalCover.lean Proofs/HadwigerNelson/Plane/Slack.lean
+17:56:47 new max one-rss=3468 MiB: Proofs/HadwigerNelson/Plane/Slack.lean
+17:56:52 new max sum-rss=6843 MiB over 2 process(es): Proofs/HadwigerNelson/Plane/MaximalCover.lean Proofs/HadwigerNelson/Plane/Slack.lean
+17:56:52 new max one-rss=3623 MiB: Proofs/HadwigerNelson/Plane/Slack.lean
+17:56:57 new max sum-rss=6992 MiB over 2 process(es): Proofs/HadwigerNelson/Plane/MaximalCover.lean Proofs/HadwigerNelson/Plane/Slack.lean
+17:56:57 new max one-rss=3757 MiB: Proofs/HadwigerNelson/Plane/Slack.lean
+17:57:02 new max sum-rss=7110 MiB over 2 process(es): Proofs/HadwigerNelson/Plane/MaximalCover.lean Proofs/HadwigerNelson/Plane/Slack.lean
+17:57:02 new max one-rss=3857 MiB: Proofs/HadwigerNelson/Plane/Slack.lean
+17:57:07 new max sum-rss=7225 MiB over 2 process(es): Proofs/HadwigerNelson/Plane/MaximalCover.lean Proofs/HadwigerNelson/Plane/Slack.lean
+17:57:07 new max one-rss=3968 MiB: Proofs/HadwigerNelson/Plane/Slack.lean
+17:57:12 new max sum-rss=7263 MiB over 2 process(es): Proofs/HadwigerNelson/Plane/MaximalCover.lean Proofs/HadwigerNelson/Plane/Slack.lean
+17:57:12 new max one-rss=3988 MiB: Proofs/HadwigerNelson/Plane/Slack.lean
+17:57:17 new max sum-rss=7313 MiB over 2 process(es): Proofs/HadwigerNelson/Plane/MaximalCover.lean Proofs/HadwigerNelson/Plane/Slack.lean
+17:57:17 new max one-rss=4008 MiB: Proofs/HadwigerNelson/Plane/Slack.lean
+17:57:22 new max one-rss=4009 MiB: Proofs/HadwigerNelson/Plane/Slack.lean
+17:57:28 new max one-rss=4064 MiB: Proofs/HadwigerNelson/Plane/Slack.lean
+17:59:28 heartbeat samples=60 now: 0 process(es), sum-rss=0 MiB
+18:00:08 new max one-rss=4080 MiB: Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:00:14 new max one-rss=4157 MiB: Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:00:19 new max sum-rss=7377 MiB over 2 process(es): Proofs/HadwigerNelson/Plane/SVMap.lean Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:00:19 new max one-rss=4253 MiB: Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:00:24 new max sum-rss=7528 MiB over 2 process(es): Proofs/HadwigerNelson/Plane/SVMap.lean Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:00:24 new max one-rss=4395 MiB: Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:00:29 new max sum-rss=7591 MiB over 2 process(es): Proofs/HadwigerNelson/Plane/SVMap.lean Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:00:29 new max one-rss=4454 MiB: Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:00:34 new max sum-rss=7704 MiB over 2 process(es): Proofs/HadwigerNelson/Plane/SVMap.lean Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:00:34 new max one-rss=4526 MiB: Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:00:39 new max sum-rss=7814 MiB over 2 process(es): Proofs/HadwigerNelson/Plane/SVMap.lean Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:00:39 new max one-rss=4586 MiB: Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:00:44 new max sum-rss=7930 MiB over 2 process(es): Proofs/HadwigerNelson/Plane/SVMap.lean Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:00:44 new max one-rss=4644 MiB: Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:00:49 new max sum-rss=8027 MiB over 2 process(es): Proofs/HadwigerNelson/Plane/SVMap.lean Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:00:49 new max one-rss=4708 MiB: Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:00:54 new max one-rss=4825 MiB: Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:00:59 new max one-rss=4902 MiB: Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:01:04 new max one-rss=4957 MiB: Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:01:09 new max one-rss=5040 MiB: Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:01:14 new max one-rss=5126 MiB: Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:01:19 new max one-rss=5326 MiB: Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:01:24 new max one-rss=5360 MiB: Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:01:49 new max one-rss=5533 MiB: Proofs/HadwigerNelson/Plane/CoverExamples.lean
+18:04:30 heartbeat samples=120 now: 0 process(es), sum-rss=0 MiB
+18:09:31 heartbeat samples=180 now: 0 process(es), sum-rss=0 MiB
+18:14:33 heartbeat samples=240 now: 0 process(es), sum-rss=0 MiB
+18:19:34 heartbeat samples=300 now: 0 process(es), sum-rss=0 MiB
+18:24:36 heartbeat samples=360 now: 0 process(es), sum-rss=0 MiB
+18:29:39 heartbeat samples=420 now: 1 process(es), sum-rss=3624 MiB
+18:34:41 heartbeat samples=480 now: 1 process(es), sum-rss=3672 MiB
+18:39:43 heartbeat samples=540 now: 1 process(es), sum-rss=3540 MiB
+sampler end 2026-10-13T18:41:59Z samples=566 PEAK_SUM_RSS_MIB=8027 (over 2 process(es): Proofs/HadwigerNelson/Plane/SVMap.lean Proofs/HadwigerNelson/Plane/CoverExamples.lean) PEAK_ONE_RSS_MIB=5533 (Proofs/HadwigerNelson/Plane/CoverExamples.lean)

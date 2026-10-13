@@ -97,6 +97,29 @@ theorem r7Col_not_proper : ∃ x y : ℂ, dist x y = 1 ∧ r7Col x = r7Col y := 
   · rw [r7Col_add_mul, r7Col_add_mul]
     norm_num [r7ColTri, triQ, r7UpCol]
 
+/-- The core form of the lemma is run by the library where `S ≠ univ`: the cores of the `AeColouring` whose colouring
+is `r7Col` — the conull set `exists_proper_of_aeColouring` hands the lemma — do not cover the plane. -/
+theorem model_core_ne_univ : ∃ a : AeColouring 7, a.col = r7Col ∧ (⋃ j, a.core j) ≠ univ := by
+  obtain ⟨a, ha⟩ := r7_aeColouring
+  refine ⟨a, ha, fun huniv => ?_⟩
+  obtain ⟨x, y, hxy, hc⟩ := r7Col_not_proper
+  have hx : x ∈ ⋃ j, a.core j := huniv ▸ mem_univ x
+  have hy : y ∈ ⋃ j, a.core j := huniv ▸ mem_univ y
+  obtain ⟨i, hi⟩ := mem_iUnion.1 hx
+  obtain ⟨j, hj⟩ := mem_iUnion.1 hy
+  have hij : i = j := by rw [← a.col_eq_of_mem_core hi, ← a.col_eq_of_mem_core hj, ha, hc]
+  subst hij
+  exact a.core_dist_ne_one i hi hj hxy
+
+/-- "The number is the same" (the corrected docstrings of `AeColouring` and `chiM0`): with `k` colours, a
+Lebesgue-measurable colouring proper at almost every unit pair exists exactly when a Borel one does — the two
+theorems those docstrings name, composed. -/
+theorem lebesgue_weak_iff_nonempty_aeColouring {k : ℕ} :
+    (∃ c : ℂ → Fin k, NullMeasurable c volume ∧ ∀ j, UnitPairsNull (c ⁻¹' {j})) ↔ Nonempty (AeColouring k) :=
+  ⟨fun ⟨_, hc, hn⟩ => (exists_proper_of_nullMeasurable_weak hc hn).elim fun _ h =>
+      (exists_aeColouring_of_nullMeasurable_proper h.1 h.2.2).elim fun a _ => ⟨a⟩,
+   fun ⟨a⟩ => ⟨a.col, a.measurable.nullMeasurable, a.unitPairsNull⟩⟩
+
 /-- The Lebesgue form of the weak-to-proper step, run on its named inhabitant (`r7Col`: Borel, so Lebesgue
 measurable; each class with null unit pairs).  The library's `example` runs the `AeColouring` form. -/
 theorem model_weak :
@@ -155,6 +178,8 @@ end FS131LC1
 #print axioms HadwigerNelson.Plane.chromaticNumber_euclidean_plane_eq_chiLebesgue
 #print axioms FS131LC1.model_euclidean
 #print axioms FS131LC1.r7Col_not_proper
+#print axioms FS131LC1.model_core_ne_univ
+#print axioms FS131LC1.lebesgue_weak_iff_nonempty_aeColouring
 #print axioms FS131LC1.model_weak
 #print axioms FS131LC1.model_converse
 #print axioms FS131LC1.model_translate
