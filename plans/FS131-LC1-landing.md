@@ -11,8 +11,12 @@ under `tools/`: the brief's list of what the job touches names that directory an
 
 ## Theorems this phase proved
 
-*Filled at the green line from the gate's saved logs (§ "Theorems this phase proved, final"). Until the gate is green on
-one commit nothing below is "held".*
+*The gate is green on one commit, `10892a8f2` (stage 8). This job proved no theorem: it landed FS131-KC1's module —
+31 theorems and 3 definitions, each [kernel] — and the list, one line per declaration with its banner and its axioms as
+the audit printed them, is § "Theorems this phase proved, final". In short: `χ(ℝ²) = χ_m(ℝ²)` (Lebesgue-measurable
+classes, every unit pair) in two forms and colour by colour, on the standard three axioms and the declared outside
+theorem `Outside.OAI158.proper_to_borel_weak`; `χ_m⁰(ℝ²) = χ_m(ℝ²)` and `[Davies2026]` Lemma B.1 in four forms, on the
+standard three. The mathematics is other people's.*
 
 ## Stage 1 — SAVED (FS131-LC1): the readback, what was read, `main` merged, the tree as given probed before any edit
 
@@ -526,8 +530,9 @@ to the lemma there is not the plane (`FS131LC1.model_core_ne_univ`). Open gate i
 **`main` merged in again** (`data/fs131/lc1/merge-2.out`): it had moved to `f3292e4bc` — `data/` 15 paths, `plans/` 2,
 **nothing else** — carrying the brief's Amendment 1 and the claim list's dated line of 18:00 UTC; merged by hash,
 automatic (`386087463`), so that the commit the gate reads holds them. The brief's quotations checked again on the
-merged tree: 7 of 7. The drafts' slots read on `main` at that commit (`data/fs131/lc1/drafts-slots.py`,
-`drafts-slots.out`): 14 of 14 found exactly once, the control absent.
+merged tree: 7 of 7. The drafts' slots read on `main` (`data/fs131/lc1/drafts-slots.py`, `drafts-slots.out`; `main` was
+then at `8cf1401b0`, two commits of `plans/` and `data/` past the one merged — a slip of this sentence's first wording,
+which said "at that commit"): 14 of 14 found exactly once, the control absent.
 
 **The zero-`sorry` search's plant** (`data/fs131/lc1/sorry-plant.sh`, after FS124-L2's; `sorry-plant.out`): a theorem
 with a `sorry` body appended to `Plane/LebesgueNumber.lean`, never built, never committed — narrow lines 0 before, 1
@@ -598,3 +603,384 @@ term for term on the module as recompiled. **What the gate does not show, and th
 is the paper's number — stage 6 reads it against p. 2; that the lemma is the page's — stage 6, clause by clause; that
 the hypotheses can be met — stage 5 names each model and how it is held; that the mathematics is this project's — it
 is not.
+
+## Drafts for the front page (FS131-LC1)
+
+*For the coordinator to file; nothing here is filed by this job. Each names its slot — the file, the section, and **the
+exact words on `main` it replaces or follows**, each asserted to occur exactly once on `main`
+(`data/fs131/lc1/drafts-slots.py`, output `drafts-slots.out`: 14 of 14, the control absent; read last on `main` at `1fbef575c`, after its fast-forward to this branch) — and the log line it
+comes from. The gated commit is `10892a8f20d3e81d07a3f067d9bcd5884c26e387`; its logs are `data/fs131/lc1/gate/*-final.*`
+(`receipt-axioms-final.log`, `receipt-vacuity-final.log`, `receipt-assumptions-final.log` are the three scans' full
+outputs). **Every draft says whose the mathematics is: a printed lemma, formalized here; a declared outside theorem; a
+composition.***
+
+**1. `CLAUDE.md` § Trust ledger, the audit's sentence.** *Replaces* "the current audit reads 7364 clean and 5 declared
+purchases, and 23 imported (and 28 axiom-free; 7,420 records at the landing of FS-124's second module, FS124-L2,
+2026-10-07)" — from `axioms-final.log`, "audited: 7454 records — 7395 clean on the standard axioms, 28 axiom-free, 26
+imported (resting on a declared outside theorem), 5 declared purchase(s)":
+
+> the current audit reads 7395 clean and 5 declared purchases, and 26 imported (and 28 axiom-free; 7,454 records at the
+> landing of FS-131's measurable number, FS131-LC1, 2026-10-13)
+
+7364 + 31 = 7395 (the landing's 31 records under CLEAN, each on exactly the three: `records-final.txt`); 23 + 3 = 26;
+7,420 + 34 = 7,454; axiom-free and purchases do not move. **Twenty more records than the planner's count gives**
+(fourteen): every declaration a person typed is filed. Until it is filed the audit flags the sentence stale (not
+failed): "7364 clean → 7395, 23 imported → 26".
+
+**2. `CLAUDE.md` § Trust ledger, the transfer's records.** *Replaces* "— a proper `k`-colouring of the plane gives a
+Borel one proper at almost every unit pair — with nine; no record rests on two of the three" — from
+`records-final.txt`, "whole log: records carrying proper_to_borel_weak: 12 (filed: 12); of the landing's: 3":
+
+> — a proper `k`-colouring of the plane gives a Borel one proper at almost every unit pair — with twelve (three of them
+> FS-131's: `χ(ℝ²) = χ_m(ℝ²)`, the Lebesgue-measurable chromatic number, in two forms and colour by colour,
+> `Plane/LebesgueNumber`); no record rests on two of the three
+
+**3. `CLAUDE.md` § Trust ledger, the nine assumption counts.** *Replaces* "`axioms=3 rests=23 named=19 inline=16
+outside=7 ours=23 open=5 takes=98 mentions=1` — three outside theorems declared as axioms, with twenty-three theorems
+resting on them" — from `receipt-assumptions-final.log`, its `=== TOTALS ===` line, "axioms=3 rests=26 named=19 inline=16
+outside=7 ours=23 open=5 takes=98 mentions=1":
+
+> `axioms=3 rests=26 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1` — three outside theorems declared
+> as axioms, with twenty-six theorems resting on them
+
+One of the nine moves, `rests` 23 → 26; the ledger's header is refiled on the branch by the script
+(`--write-ledger`: three `RESTS` rows gained, 125 rows). The rest of the paragraph stands: no hypothesis is declared.
+
+**4. `CLAUDE.md` § The gate, the vacuity scan's two count lines.** *Replaces* "`declarations=15928
+refutations-skipped=228 sites=1448`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1405 unknown=2`." — from
+`vacuity-final.log`, "scanned: declarations=15969 refutations-skipped=228", "sites: sites=1454 vacuous=0 stale=0
+declared=3 witnessed=38 generic=1411 unknown=2" (runs of spaces collapsed):
+
+> `declarations=15969 refutations-skipped=228 sites=1454`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1411 unknown=2`.
+
+Three counts move: declarations +41 (the module's 41 constants), sites +6 and generic +6 (six binders `AeColouring
+k`, the caller's `k`; stage 5). The sentences on the baseline's two entries stand; the baseline's header is refiled on
+the branch from the scan.
+
+**5. `tools/claude_md_fact_audit.py`, `GATE_CHANGES`** — one entry after the last (`(("6967", "5"), ("7364", "5")):`):
+
+```python
+    (("7364", "5"), ("7395", "5")): "FS-131, the landing of the measurable-number module — [Davies2026] Lemma B.1 formalized with its printed proof, chiM0 = chiLebesgue on the standard three, chi(R^2) = chiLebesgue on the declared outside theorem proper_to_borel_weak; other people's mathematics, composed (FS131-LC1; copy data/fs131/lc1/gate/receipt-axioms-final.log, gated commit 10892a8f2): 7,454 records, 7,395 clean, 28 axiom-free, 26 imported, 5 purchases",
+```
+
+and, in the same file's table of superseded counts, in that table's own form: `"7364"` (7395 clean), `"7,420"` (7,454
+records), "23 imported" (26), `declarations=15928` (15969), `sites=1448` (1454), `generic=1405` (1411), `rests=23`
+(26), "with nine" (twelve), "twenty-three theorems resting" (twenty-six) — "superseded gate count, refiled at
+FS131-LC1's landing from data/fs131/lc1/gate/receipt-axioms-final.log (the vacuity counts from
+receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in
+data/fs124/l2/gate/ and in GATE_CHANGES". **The next landing's previous receipts are
+`data/fs131/lc1/gate/receipt-{axioms,vacuity,assumptions}-final.log`.**
+
+**6. `CLAUDE.md` § Where the problem stands, the sentence on Falconer's number** (the planner's draft 3, checked
+against what landed: both names are theorems of the gated module; the first prints the standard three, the second
+those and the one import). *Replaces* "Falconer's everywhere-proper `χ_m` is one step further, a GAP; by Thm 1.4
+`χ_m(ℝ²) ≥ χ_m⁰(ℝ²) ≥ 6`." *by*
+
+> Falconer's everywhere-proper Lebesgue-measurable `χ_m` is the same number, by other people's mathematics composed:
+> `Plane.chiM0_eq_chiLebesgue` (`[Davies2026]` Lemma B.1, p. 44, formalized here with its printed proof, with the
+> density-point step the library held; no import), so `χ(ℝ²) = χ_m(ℝ²)` on the declared outside theorem
+> `Outside.OAI158.proper_to_borel_weak` (`Plane.chromaticNumber_plane_eq_chiLebesgue`; through the gate, FS131-LC1),
+> and by Thm 1.4 `χ_m(ℝ²) ≥ 6`; the Borel number `χ_B` (`Plane.chiM`) is not decided against it
+> (`Plane.chiLebesgue_le_chiM` is all that is held).
+
+*(Optional, the planner's note: § The aim, link 1 may add `= χ_m(ℝ²)` to its chain with the same attribution. Not
+drafted as a replacement: the link's sentence is about `χ_m⁰` and reads true as it stands.)*
+
+**7. `LEDGER.md` row 130** (the planner's draft 1, checked against what landed and against the dated line of 18:00 UTC).
+- *Replaces* "**Not claimed:** `χ(ℝ²) = χ_m(ℝ²)` (the null-set step, a GAP in every record); `χ_B` against `χ_m`; any
+  value." *by* "**Not claimed:** `χ_B` against `χ_m` (the lemma's colouring is Lebesgue measurable and no more: its
+  null set is coloured by compactness; in the kernel `χ_B` is `Plane.chiM` and only `Plane.chiLebesgue_le_chiM` is
+  held); the step from almost every pair to every pair in `ℝ^d` for a finite set of distances (it stays [hand], one
+  mind: `data/fs131/claims-NF3.md`, the dated line of 2026-10-13 18:00 UTC — the kernel holds the plane and the unit
+  distance); that either equality is this project's mathematics; any value."
+- *Follows* "need six colours** (FS-103 Phase 3; FS103-M1, M1b, M1c, M-FREE, M-NR, M-NSUPP, M-AE3, M-EASY, M-D,
+  M-Q4)." — the closing clause: "*Closed, by other people's mathematics composed (FS131-ER1's reading, FS131-KC1's
+  module, FS131-LC1's landing): `χ_m⁰(ℝ²) = χ_m(ℝ²)` — `[Davies2026]` Lemma B.1 (p. 44; a measurable colouring proper
+  on a conull set extends, after a null change, to a Lebesgue-measurable proper colouring), formalized with its
+  printed proof (`exists_proper_ae_eq_of_proper_on_conull`, in every finite dimension and for any translation-invariant
+  relation), with the density-point step (D1, `Plane.AeColouring.dist_ne_one`): `Plane.chiM0_eq_chiLebesgue`, on the
+  standard three axioms. With `[OAIMath2026]`'s transfer: `χ(ℝ²) = χ_m(ℝ²)`,
+  `Plane.chromaticNumber_plane_eq_chiLebesgue`, on the declared outside theorem
+  `Outside.OAI158.proper_to_borel_weak`. The list-colouring reduction of this row (FS103-M-D) is not used: the lemma
+  slides each finite set into the good set by a translation.* **[kernel]**, through the gate (FS131-LC1, gated commit
+  `10892a8f2`); the number is typed over `ℂ` (`Plane.chiLebesgue`)."
+- *In the row's chain*, "`χ_m⁰(ℝ²) = χ(A_σ) ≤ χ_m(ℝ²) ≤ χ_B(ℝ²)`" *becomes* "`χ_m⁰(ℝ²) = χ(A_σ) = χ_m(ℝ²) ≤ χ_B(ℝ²)`" —
+  the last equality is `Plane.chiM0_eq_chiLebesgue`; the first is the row's own, by hand.
+
+**8. `LEAN.md`** (three of the planner's, each elaborated at the pin in its job and read here against the module; four
+of this landing's).
+
+*§ Searching — Lean, following* "a module from another branch with a dump made in that branch's worktree (FS124-L2).":
+
+> - A colouring that must *extend* a given one on a set comes from `Finset.rado_selection` read at singletons (`χ x = g
+>   t x` with `x ∈ t`), with no gadget; `SimpleGraph.nonempty_hom_of_forall_finite_subgraph_hom` cannot carry a
+>   precolouring (`exists_proper_ae_eq_of_proper_on_conull`, FS131-KC1).
+> - `Besicovitch.ae_tendsto_measure_inter_div μ s` asks no measurability of `s`, and `ae_imp_of_ae_restrict` turns it
+>   into `∀ᵐ x ∂μ, x ∈ s → …` with none either: almost every point is a density-one point of its fibre for **any** map
+>   with countably many values (`ae_hasDensityOneAt_fibre`). Density one is closed under intersection only with a
+>   null-measurable set (`MeasureTheory.measure_union_add_inter₀`; `HasDensityOneAt.inter`) (FS131-KC1).
+> - `Measurable f` for `f : ℂ → Fin k` is Borel measurability (`Complex.measurableSpace := borel ℂ`); 'Lebesgue
+>   measurable' is `NullMeasurable f volume` — equivalently every fibre a `NullMeasurableSet`
+>   (`Plane.nullMeasurable_iff_forall_fibre`), equivalently `AEMeasurable f volume` (`NullMeasurable.aemeasurable`,
+>   `AEMeasurable.nullMeasurable`). A docstring that says Lebesgue over `Measurable` names another number wherever the
+>   colouring must be proper at every pair (`Plane.chiM` is `χ_B`) (FS131-KC1).
+> - A landing that edits docstrings only shows it twice: in text, the file with every block comment removed is the same
+>   (`data/fs131/lc1/code_only_diff.py`, with a planted code character), and from the kernel's side by the dump of the
+>   edited modules made before the build and after it. A docstring edit in a module the import's module reads
+>   (`Plane/AeColouring` is under `Outside/OAI158` and the nine ported modules) recompiles them: both stored-term
+>   comparisons with the release are run again (FS131-LC1).
+
+*§ Building, following* "`lake build --no-build` under the cap says so in two seconds. (FS124-K1).":
+
+> - **On the laptop** (12 cores, 31 GB; `SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6`): a build that recompiles 117 modules of
+>   `Plane/` and `Outside/` at `BATCH=2` is 47 m 22 s, about half of it the walk (Lake started 947 times); its largest
+>   compiler is 5.5 GiB resident (`Plane/CoverExamples`, 134 s) and its largest batch 8.0 GiB. With a known small stale
+>   set, `BATCH=10` starts Lake 201 times: a walk that rebuilds two modules is 5 m 33 s to 6 m 11 s. Every whole-library gate step — the audit, the two scans, the
+>   doubled names, the lint, their self-tests — is one `lean` process of 4.4 to 5.1 GiB resident, of which the kernel
+>   charges the step's scope 0.5 to 1.3 GiB when the `.olean` pages are already cached; the audit is 8 s, each scan
+>   about two minutes, each self-test two to three. A scope's `memory.peak` is not what a step costs cold: plan a cap
+>   from the largest process's resident set (`data/fs131/lc1/in-scope.sh` records both) (FS131-LC1).
+
+*§ The gate, the bullet on `./scripts/vacuity.sh`, following* "a landing reads each skipped declaration of its
+modules.":
+
+> A module that takes the library's tracked carrier is not silent: the binder `(a : AeColouring k)` reads `GENERIC`
+> (six sites in `Plane/LebesgueNumber`), which is the scan saying the parameter is the caller's; the landing says by
+> hand at which `k` the carrier is inhabited, empty given an import, and open (FS131-LC1, its record's stage 5: seven
+> and nine; five and below; six).
+
+*§ The gate, the bullet on `./scripts/axioms.sh --self-test`* — no new text: `scripts/axioms-controls.txt`'s own header
+carries the rule this landing followed (a record resting on a declared import moves the two state-reading counts).
+
+**9. `BIBLIOGRAPHY.md`.** `[Davies2026]` — *replaces* "**Read: the abstract, Theorem 1.1 and the introduction's
+passages on rational points and `ℚ(√n)²`** (2026-10-13, from a text extraction; FS131-PN1); the proofs unread." *by*
+
+> **Read: the abstract, Theorem 1.1 and the introduction's passages on rational points and `ℚ(√n)²`** (2026-10-13, from
+> a text extraction; FS131-PN1); **Appendix B, p. 44: its standing hypotheses, Lemma B.1 and its proof, read
+> first-hand from the rendered page and formalized** (FS131-KC1, 2026-10-13:
+> `Proofs/HadwigerNelson/Plane/LebesgueNumber.lean`; read again clause by clause at the landing, FS131-LC1, with p. 1,
+> p. 2's definitions of `χ^(m)`, of a D-avoiding set and of the D-distance graph, and p. 46's first paragraph, the
+> density-point argument); the other proofs unread. Rests on it: `Plane.chiM0_eq_chiLebesgue`,
+> `Plane.chromaticNumber_plane_eq_chiLebesgue`.
+
+`[DeCorteOliveiraVallentin2022]`, the library table's reading line — *add*: "the end of the proof of Lemma 5.6
+(printed p. 22: the density points of a support are an independent set), from a text extraction of the library copy
+(FS131-LC1, 2026-10-13) — the passage `[Davies2026]` p. 46 follows; the module cites it as that argument, not as a
+statement about colour classes".
+
+**10. The sentence a reader of the repository would be told** (the planner's draft 2, with one clause added: the
+lemma alone does not make the correction — the density-point step stands between "almost every pair" and the lemma's
+hypothesis):
+
+> The chromatic number of the plane equals its Lebesgue-measurable chromatic number, `χ(ℝ²) = χ_m(ℝ²)` (Falconer's
+> number). This library proves it in Lean from one declared outside theorem — the transfer of colourability to
+> measurable colourings of `[OAIMath2026]` (family 158), which gives a measurable colouring proper at almost every
+> unit pair — together with a lemma of J. Davies (`[Davies2026]`, Lemma B.1, p. 44), formalized here with its printed
+> proof, and the density-point argument his paper follows (DeCorte, de Oliveira Filho and Vallentin), which together
+> correct such a colouring on a null set to one proper at every unit pair. Those results are theirs; what is done here
+> is the formalization of the lemma and the composition, which neither paper states as far as each was read. Nothing
+> is said about Borel colourings, and no value is claimed.
+
+**11. `data/fs131/claims-NF3.md`, a dated line** — *follows* the line of 18:00 UTC (ending "it is the step from
+"almost every pair" to sets with no pair at the distance that the library holds for the plane only.)"):
+
+> - 2026-10-13 20:02 UTC — **Through the gate (FS131-LC1; gated commit `10892a8f2`; record
+>   `plans/FS131-LC1-landing.md`).** NF3-PRINTED: **[kernel]**, formalized with its printed proof on the standard three
+>   axioms (`exists_proper_ae_eq_of_proper_on_conull`, `exists_proper_nullMeasurable_of_avoiding_cover`,
+>   `davies_lemma_B1_euclidean`, `Plane.davies_lemma_B1`), with fewer hypotheses than the page asks. NF3-WEAK-TO-PROPER:
+>   **[kernel] for the plane and the unit distance** on the standard three (`Plane.exists_proper_of_nullMeasurable_weak`,
+>   `Plane.chiM0_eq_chiLebesgue`); its clause for `ℝ^d` and a finite set of distances stays **[hand]**. NF3-PLANE:
+>   **[kernel] on the one declared outside theorem** `Outside.OAI158.proper_to_borel_weak`
+>   (`Plane.chromaticNumber_plane_eq_chiLebesgue`, `Plane.colorable_iff_exists_nullMeasurable_proper`). NF3-NC holds of
+>   every docstring as read.
+
+**12. The Frontier line and the Proof Atlas.** *Frontier, "Last filed"* — a clause in that list's own form:
+
+> **the landing of FS-131's measurable number** (FS131-LC1, 2026-10-13: `Plane/LebesgueNumber` through the gate — 31
+> theorems and 3 definitions; `χ_m⁰(ℝ²) = χ_m(ℝ²)` on the standard three axioms, a printed lemma of `[Davies2026]`
+> formalized with its proof; `χ(ℝ²) = χ_m(ℝ²)`, Lebesgue-measurable classes and every unit pair, on the declared
+> outside theorem `Outside.OAI158.proper_to_borel_weak`; other people's mathematics, composed; row 130's gap closed;
+> no value moved)
+
+*Proof Atlas*: ER1-WEAK-TO-PROPER's plane clause and ER1-PLANE-FALCONER: **[hand]/[derived] → [kernel]**, the second
+with its one outside edge (`proper_to_borel_weak`); the node of `[Davies2026]` Lemma B.1: an outside statement →
+**[kernel]** (formalized, no outside edge); ER1-WEAK-TO-PROPER's `ℝ^d` clause: no grade moves. Row 130's GAP node
+(the null-set step) closes on `Plane.chiM0_eq_chiLebesgue`. No value moves.
+
+**13. A correction owed that this landing found a second end of** (the planner's inventory item): `LEDGER.md`'s row
+holding FS129-SA1-FALC-RED states, by hand and for `[Falconer1981]`'s lemmas, "`χ_m(ℝ²) ≥ k + 1` for Falconer's
+everywhere-proper measurable chromatic number". **The kernel form is for the Borel number**: `falconer_reduction` asks
+`MeasurableSet` classes and `le_chiM_of_falconerFan` bounds `Plane.chiM`. Wherever that row or the front page cites
+either as its kernel theorem, the sentence owes "for Borel classes; `χ_B(ℝ²) ≥ k + 1`" — the bound on
+`Plane.chiLebesgue` is not a corollary (`chiLebesgue ≤ chiM` points the other way), and its Lebesgue form (the cover
+theorem with `NullMeasurableSet` classes) is stated nowhere in the library. Not drafted as a replacement: the row's
+hand statement may well be right as printed in the paper; what is owed is the grade's scope.
+
+**14. `ARCHITECTURE.md`**: nothing to file — the trust row's twelve records and the two corrected rows are on the
+branch as landed (stage 3).
+
+## Open gate items at this landing
+
+1. **The Lebesgue number is defined over `ℂ` only.** `Plane.chiLebesgue` is typed on the complex plane; the headline
+   in row 33's form (`chromaticNumber_euclidean_plane_eq_chiLebesgue`) has `EuclideanSpace ℝ (Fin 2)` on its left and
+   the `ℂ`-number on its right. That the least number of colours of a Lebesgue-measurable proper colouring of
+   `EuclideanSpace ℝ (Fin 2)` is the same number is true — `Complex.orthonormalBasisOneI.repr` is an isometry that
+   carries Lebesgue measure to Lebesgue measure — and is stated nowhere in the library. The lemma itself *is* stated
+   over `EuclideanSpace ℝ (Fin d)`.
+2. **"`r7Col` is not proper" is a term, not a library theorem.** The module's second `example` is headed "The step run
+   on a colouring that is not proper". The fact is kernel-checked in this job's checks file
+   (`FS131LC1.r7Col_not_proper`: `0` and `3/7 + (5/7)ω`, at distance one, both of colour `0`), with its consequence
+   (`FS131LC1.model_core_ne_univ`). One `example` in `Plane/CoverExamples` or in the module would hold it; an `example`
+   is code, and this job touched docstrings only.
+3. **Models that are terms of an iteration file, not library theorems** (`data/fs131/lc1/checks.lean`; the gate's pass
+   elaborates them, each on the standard three): `model_euclidean` — **the only object `davies_lemma_B1_euclidean` is
+   run on**; `model_weak`; `model_converse`; `model_translate`; `model_seven`; `model_core_ne_univ`;
+   `lebesgue_weak_iff_nonempty_aeColouring`; `r7Col_not_proper`. And three sanity terms that are no claim of this
+   landing: `chiLebesgue_le_seven` (the three), `six_le_chiLebesgue` and `not_exists_five` (the three and
+   `no_proper_five_coloring`).
+4. **NF3-WEAK-TO-PROPER's clause for `ℝ^d` and a finite set of distances stays [hand]** (the claim list's dated line
+   of 18:00 UTC). The planner priced what it takes: a sphere measure per distance and continuity of translation in
+   `L²` for "almost every pair ⟹ every vector"; the other half is free from this module (`HasDensityOneAt.inter`,
+   `hasDensityOneAt_preimage_add_right`, `HasDensityOneAt.nonempty`).
+5. **The Borel number against the Lebesgue number is open, and one older theorem bounds only the Borel one.**
+   `Plane.chiLebesgue_le_chiM` is all the library holds between them. `falconer_reduction` and
+   `le_chiM_of_falconerFan` are for Borel classes: the corrected docstrings say so, and the ledger's row for
+   FS129-SA1-FALC-RED owes its grade's scope (draft 13). The cover theorem with `NullMeasurableSet` classes is stated
+   nowhere.
+6. **"The number is the same" for the Lebesgue almost-everywhere number is a term.** The corrected docstrings of
+   `AeColouring` and `chiM0` name the two theorems; their composition
+   (`FS131LC1.lebesgue_weak_iff_nonempty_aeColouring`) is not a library theorem.
+7. **Three names for density one**: `HasDensityOneAt` (this module, general), `Plane.densitySet` (tied to it by
+   `Plane.mem_densitySet_iff_hasDensityOneAt`, `Iff.rfl`), and the ported `Outside.OAI158.DensityOne`, tied to
+   neither by a theorem.
+8. **The vacuity scan decides nothing about this module**: six sites, all `GENERIC`; silent on its bare maps. The
+   notes check reads QA4's modules only: no instrument reads the module's "Inhabitant" notes; stage 5 read them.
+9. **Whether a landing files its definitions is still practice, not a written rule.** This landing files every
+   declaration a person typed — 34 records, 3 of them definitions — where the planner's count gives 14.
+10. **The record tools chain**: `data/fs131/lc1/records.py` reads the twenty-three earlier imported records from
+    `tools/fs124_l1_records.py`, which reads `tools/fs132_l1_records.py`. It lives under `data/`, where this job's
+    brief put its files. A later landing that files a record under IMPORTED extends the table, or the tooling job
+    makes one.
+11. **`scripts/axioms-controls.txt`'s two state-reading controls go red at every landing that files a record on a
+    declared import**, by design of the file (its header: "item 259's tool defect owed"). Moved here by its rule, with
+    the red seen first.
+12. **Prior-art debt, the reader's, not discharged here**: a search under "measurable chromatic number" with "null
+    set" is owed before either equality is announced (`plans/FS131-ER1-davies-reading.md` § M.5). This job searched
+    nothing. `[DeCorteOliveiraVallentin2022]`'s Lemma 5.6 was read only at the end of its proof.
+13. **Nothing is pushed**: the remote is unreachable; every commit is local on
+    `fs131-wkc`. `lean4checker` is the publication gate and was not run.
+14. **The memory numbers are warm-cache numbers**: the charged peaks (0.5 to 1.3 GiB) are what the kernel charged
+    steps whose `.olean` pages were already in the page cache; the resident sets (4.4 to 5.5 GiB) are the numbers to
+    plan a cap from. No step of this job was run on a cold cache.
+
+## Theorems this phase proved, final
+
+*Each [kernel], through the full gate at `10892a8f2`. This job proved none of them: statements and proofs are
+FS131-KC1's, and **the mathematics is other people's** — `[Davies2026]` Lemma B.1 (p. 44), formalized with its printed
+proof; the density-point argument of `[DeCorteOliveiraVallentin2022]` as `[Davies2026]` p. 46 follows it, held by this
+library since FS111-V0-ID1; the declared outside theorem `Outside.OAI158.proper_to_borel_weak` (`[OAIMath2026]` family
+158); a composition. Printed from the gate's own logs (`data/fs131/lc1/theorem-lines.py` on `gate/decls-final.out`
+and `gate/receipt-axioms-final.log`; output `data/fs131/lc1/theorem-lines.md`): every declaration the landing brings —
+31 theorems and 3 definitions — with the banner its record is under and its axioms as the audit printed them.
+Namespace `HadwigerNelson`; module `Proofs/HadwigerNelson/Plane/LebesgueNumber.lean`.*
+
+**The informal statement each headline was read against** (stage 6):
+- `Plane.chromaticNumber_plane_eq_chiLebesgue`, `Plane.chromaticNumber_euclidean_plane_eq_chiLebesgue`,
+  `Plane.colorable_iff_exists_nullMeasurable_proper` — NF3-PLANE: "`χ(ℝ²) = χ_m(ℝ²)`, Falconer's number": the plane has
+  a colouring with `k` colours and no two points one unit apart alike exactly when it has one whose colour classes
+  are Lebesgue-measurable sets. **On the one declared outside theorem.**
+- `Plane.chiM0_eq_chiLebesgue`, `Plane.exists_proper_of_nullMeasurable_weak`, `Plane.exists_proper_of_aeColouring`,
+  `Plane.nonempty_aeColouring_iff_exists_nullMeasurable_proper` — NF3-WEAK-TO-PROPER, **the plane and the unit
+  distance**: "a weak measurable `k`-colouring … gives a Lebesgue-measurable `k`-colouring proper at every such pair;
+  so `χ_m⁰(ℝ²) = χ_m(ℝ²)`". No outside theorem. The claim's clause for `ℝ^d` and a finite `D` is not among them.
+- `exists_proper_ae_eq_of_proper_on_conull`, `exists_proper_nullMeasurable_of_avoiding_cover`,
+  `davies_lemma_B1_euclidean`, `Plane.davies_lemma_B1` — NF3-PRINTED: "Suppose that A₁, …, A_k ⊆ ℝ^d are measurable
+  D-avoiding sets whose union is conull. Then ℝ^d admits a measurable proper k-colouring of its D-distance graph", and
+  the sentence before it; with fewer hypotheses than the page asks. No outside theorem.
+- `Plane.chiLebesgue_le_chiM`, `Plane.chromaticNumber_plane_le_chiLebesgue` — the dated line's "the inequality
+  'Lebesgue number ≤ `Plane.chiM`' beside them", and `χ(ℝ²) ≤ χ_m(ℝ²)`. No outside theorem.
+
+- `Plane.chromaticNumber_euclidean_plane_eq_chiLebesgue` — theorem; [kernel]; under IMPORTED; axioms: [propext, Classical.choice, Quot.sound, Outside.OAI158.proper_to_borel_weak]
+- `Plane.chromaticNumber_plane_eq_chiLebesgue` — theorem; [kernel]; under IMPORTED; axioms: [propext, Classical.choice, Quot.sound, Outside.OAI158.proper_to_borel_weak]
+- `Plane.colorable_iff_exists_nullMeasurable_proper` — theorem; [kernel]; under IMPORTED; axioms: [propext, Classical.choice, Quot.sound, Outside.OAI158.proper_to_borel_weak]
+- `HasDensityOneAt` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `HasDensityOneAt.inter` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `HasDensityOneAt.nonempty` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `Plane.AeColouring.col_eq_of_mem_core` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `Plane.AeColouring.core` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `Plane.AeColouring.core_dist_ne_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `Plane.AeColouring.measurableSet_core` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `Plane.AeColouring.volume_compl_iUnion_core` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `Plane.chiLebesgue` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `Plane.chiLebesgue_le` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `Plane.chiLebesgue_le_chiM` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `Plane.chiLebesgue_le_chiM0` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `Plane.chiM0_eq_chiLebesgue` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `Plane.chiM0_le_chiLebesgue` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `Plane.chromaticNumber_plane_le_chiLebesgue` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `Plane.davies_lemma_B1` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `Plane.exists_aeColouring_of_nullMeasurable_proper` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `Plane.exists_proper_of_aeColouring` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `Plane.exists_proper_of_nullMeasurable_weak` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `Plane.mem_densitySet_iff_hasDensityOneAt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `Plane.nonempty_aeColouring_iff_exists_nullMeasurable_proper` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `Plane.nullMeasurable_iff_forall_fibre` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ae_hasDensityOneAt_fibre` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `davies_lemma_B1_euclidean` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_nullMeasurable_selector` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_proper_ae_eq_of_proper_on_conull` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_proper_nullMeasurable_of_avoiding_cover` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `exists_translate_mem` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `hasDensityOneAt_congr_ae` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `hasDensityOneAt_preimage_add_right` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `hasDensityOneAt_univ` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+(34 declarations of 41 constants in 1 module)
+
+## Slips, my own
+
+1. **A sentence of stage 7 named the wrong commit**: it said the drafts' slots were read on `main` "at that commit"
+   (the one merged, `f3292e4bc`); `main` had moved two commits of `plans/` and `data/` further when the check ran
+   (`8cf1401b0`). The sentence is corrected in place and says so; the slots were read again at the end, on `main` at
+   `1fbef575c`: 14 of 14.
+2. **The first version of the measuring wrapper recorded the charged peak only**: two rows of stage 1's table (the
+   up-to-date check and the declarations dump) have no largest-process figure. The dump's is in the gate's table.
+3. **Stage numbers run one ahead of the brief's items from the gate on**: the brief's item 7 (the full gate) is this
+   record's stage 8, because "before the pass" is saved as a stage of its own; its items 8 and 9 are the drafts
+   section and stage 9.
+4. **Two merge commits and one staging file**: `main` was merged three times (stage 1, before the pass, after it),
+   each with a subject of this job; a staging file of the drafts was committed once (`data/fs131/lc1/drafts-body.md`,
+   in stage 7's commit) and removed when its text went into this record.
+5. **A `git stash` run by reflex while writing stage 9** (to ask whether the bibliography audit's one flag was
+   already on `main`): it took this record's uncommitted sections and the removal of the staging file off the working
+   tree; popped in the next command, the tree checked — 977 lines with stage 9, the same three paths modified. Nothing
+   was lost and nothing was built or committed in between; the question it was for is answered by the audit's own
+   output (the flagged id is first seen in another job's report).
+6. **Counts and edits that differ from the brief's first text** are decisions, sent before the gate and accepted in
+   its Amendment 1, not slips: 34 records for the planner's 14; seven docstring lines of the slip corrected where
+   three were named; five docstring fixes in the new module; `scripts/axioms-controls.txt`; this job's scripts under
+   `data/fs131/lc1/`.
+
+## Stage 9 — SAVED (FS131-LC1): the green line, and where the branch stands
+
+**The green line** was sent to the coordinator at about 20:05 UTC, after stage 8 was committed and `main` merged in once
+more: the gated commit `10892a8f2`; the branch tip then `1fbef575c`, which holds `main` (`8cf1401b0`) and differs
+from the gated commit **under `plans/` and `data/` only** (`data/fs131/lc1/tip-check.out`: `data/` 93 paths, `plans/`
+3, none outside them; `git diff --stat` over `Proofs`, `Proofs.lean`, `scripts`, `tools`, `ARCHITECTURE.md`, the
+lakefile, the toolchain, the manifest, `CLAUDE.md`, `LEAN.md`, `LEDGER.md`: empty; zero `sorry`; no tracked file
+modified). The baseline's header and the ledger's header were refiled **before** the pass, so nothing under
+`scripts/` moved after it. **The fast-forward of `main` is the coordinator's and was made** (`main` at `1fbef575c`
+when the slots were read last). **This job pushed nothing.**
+
+- **Nothing this record cites lives under `/tmp` or a scratch directory.** Every log, receipt, dump and script is
+  under `data/fs131/lc1/` (the gate's under `gate/`, the probes' under `probes/`), committed. The runner's snapshot
+  (`build/lc1-run-gate-snapshot.sh`) was a copy of a committed script. One receipt is kept compressed
+  (`gate/receipt-axioms-self-test-final.log.xz`, 18 MB as written).
+- **No process of this job is running**: the build, the two planted controls, the pass and the two monitors have
+  exited; the slot's ledger holds no reservation of mine.
+- **The bibliography audit** (`tools/bib_audit.py`, run as a courtesy; `data/fs131/lc1/bib-audit.out`): exit 1 on one
+  line that is not this job's — "arXiv ids cited but NOT in the bibliography: 1 — arXiv:2610.13551, first seen in
+  data/fs131/reports/FS131-ER1.md". Every key this record and the module cite resolves (`[Davies2026]`,
+  `[DeCorteOliveiraVallentin2022]`, `[OAIMath2026]`; "bracketed keys cited but neither defined nor aliased: 0").
+- **What is left, in order** — none of it gate work: (1) the filing, from the drafts (the coordinator's); (2) one
+  more fast-forward for this record's last sections and the report (`plans/` and `data/` only); (3) the open gate
+  items, of which items 1 to 3 are each one statement or one `example` for a later job.
