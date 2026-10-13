@@ -481,7 +481,7 @@ item for that work.*
 | `pdf/wormald-1979-4-chromatic-special-plane-drawing.pdf` | `[Wormald1979]` | read in full (FS-58 sweep); construction re-read |
 | `pdf/arXiv-0801.1059-bachoc-nebe-oliveira-vallentin-lower-bounds-measurable-chromatic.pdf` | `[BachocEtAl2009]` | §10.1 (FS-58 sweep) |
 | `pdf/arXiv-1301.1054-bachoc-decorte-oliveira-vallentin-spectral-bounds-operator.pdf` | `[BachocEtAl2014]` | §§2.3–2.4, §3.2 (FS-58 sweep); Def. 2.1, Thm 2.2 with proof, Thm 2.3's statement (2026-09-25, J35) |
-| `pdf/arXiv-1804.09099-decorte-oliveira-vallentin-complete-positivity.pdf` | `[DeCorteOliveiraVallentin2022]` | Def. 2.1, Thm 2.2, Thm 5.1, §7 opening + Thm 7.1 (FS-66 conjecture note, 2026-09-21); §6.1, Lemmas 6.1–6.2 (FS107-P, 2026-09-27); other proofs unread |
+| `pdf/arXiv-1804.09099-decorte-oliveira-vallentin-complete-positivity.pdf` | `[DeCorteOliveiraVallentin2022]` | Def. 2.1, Thm 2.2, Thm 5.1, §7 opening + Thm 7.1 (FS-66 conjecture note, 2026-09-21); §6.1, Lemmas 6.1–6.2 (FS107-P, 2026-09-27); the end of the proof of Lemma 5.6 (printed p. 22: the density points of a support are an independent set), from a text extraction of the library copy (FS131-LC1, 2026-10-13) — the passage `[Davies2026]` p. 46 follows; the module cites it as that argument, not as a statement about colour classes; other proofs unread |
 | `pdf/arXiv-2507.10387-akhtari-vaaler-widmer-equidistribution-norm-one-CM.pdf` | `[AkhtariVaalerWidmer2025]` | abstract, §1 (FS-58 sweep) |
 | `pdf/peyre-2003-points-hauteur-bornee-topologie-adelique-JTNB.pdf` | `[Peyre2003]` | §5 statements, formulas unseen (FS-58 sweep) |
 | `pdf/axenovich-2014-chromatic-number-subsets-euclidean-plane.pdf` | `[AxenovichEtAl2014]` | read: §1–§2 (FS-58 sweep) |
