@@ -99,6 +99,14 @@ ALLOW: dict[str, str] = {
     "6576": "superseded gate count, refiled at FS132-L2's landing from data/fs132/l2/gate/receipt-axioms-final.log (6,953 records); the old count stays in data/fs132/l1/gate/receipt-axioms-final.log and in GATE_CHANGES",
     "6910": "superseded gate count, refiled at FS124-L1's landing from data/fs124/l1/gate/receipt-axioms-final.log (6967 clean); the old count stays in data/fs132/l2/gate/receipt-axioms-final.log and in GATE_CHANGES",
     "6953": "superseded gate count, refiled at FS124-L1's landing from data/fs124/l1/gate/receipt-axioms-final.log (7,015 records); the old count stays in data/fs132/l2/gate/receipt-axioms-final.log and in GATE_CHANGES",
+    "6967": "superseded gate count, refiled at FS124-L2's landing from data/fs124/l2/gate/receipt-axioms-final.log (7364 clean); the old count stays in data/fs124/l1/gate/ and in GATE_CHANGES",
+    "7,015": "superseded gate count, refiled at FS124-L2's landing from data/fs124/l2/gate/receipt-axioms-final.log (7,420 records); the old count stays in data/fs124/l1/gate/ and in GATE_CHANGES",
+    "20 axiom-free": "superseded gate count, refiled at FS124-L2's landing from data/fs124/l2/gate/receipt-axioms-final.log (28 axiom-free); the old count stays in data/fs124/l1/gate/ and in GATE_CHANGES",
+    "declarations=15370": "superseded gate count, refiled at FS124-L2's landing from data/fs124/l2/gate/receipt-vacuity-final.log (15928); the old count stays in data/fs124/l1/gate/ and in GATE_CHANGES",
+    "declarations=15370 refutations-skipped=226 sites=1448": "superseded gate count, refiled at FS124-L2's landing from data/fs124/l2/gate/receipt-vacuity-final.log (15928, 228, 1448); the old line stays in data/fs124/l1/gate/receipt-vacuity-final.log",
+    "15370": "superseded gate count, refiled at FS124-L2's landing from data/fs124/l2/gate/receipt-vacuity-final.log (15928, 228, 1448); the old line stays in data/fs124/l1/gate/receipt-vacuity-final.log",
+    "7015": "superseded gate count, refiled at FS124-L2's landing from data/fs124/l2/gate/receipt-axioms-final.log (7,420 records); the old count stays in data/fs124/l1/gate/ and in GATE_CHANGES",
+    "refutations-skipped=226": "superseded gate count, refiled at FS124-L2's landing from data/fs124/l2/gate/receipt-vacuity-final.log (228); the old count stays in data/fs124/l1/gate/ and in GATE_CHANGES",
     "8's": "'wave 8's first landing' in the audit's sentence, superseded by FS132-L1's landing; wave 8's landing stays in plans/FS131-L8A-landing.md",
     "six_le_chromaticNumber_plane_of_no_proper_five": "LEDGER row 33's pre-import sentence named this drafted bridge; replaced at FS132-L1's landing by the landed `Outside.OAI158.chromaticNumber_plane_six_or_seven`; the draft stays in `plans/EXT-OAI1-audit.md` stage 7",
     "2))).chromaticNumber": "the same pre-import sentence of LEDGER row 33 (its Lean spelling of χ(ℝ²)); the form stays in `plans/EXT-OAI1-audit.md` stage 7 and in `Proofs/HadwigerNelson/Outside/OAI158.lean`",
@@ -762,6 +770,7 @@ GATE_CHANGES: dict[tuple, str] = {
     (("6521", "5"), ("6533", "5")): "FS-132, the landing of the import of [OAIMath2026] family 158 (FS132-L1; copy data/fs132/l1/gate/receipt-axioms-final.log, gated commit 5df686f0): 6,576 records, 6,533 clean, 20 axiom-free, 18 imported, 5 purchases",
     (("6533", "5"), ("6910", "5")): "FS-132, the landing of its first theorem — the first night's exclusion at the whole plane over the release's palette lemmas, ported (FS132-L2; copy data/fs132/l2/gate/receipt-axioms-final.log, gated commit b46a9d57): 6,953 records, 6,910 clean, 20 axiom-free, 18 imported, 5 purchases",
     (("6910", "5"), ("6967", "5")): "FS-124, the landing of its first module — the disc criterion: weak colourings of a set, the radius clause and its join over the Borel transfer (FS124-L1; copy data/fs124/l1/gate/receipt-axioms-final.log, gated commit 24a42aa9): 7,015 records, 6,967 clean, 20 axiom-free, 23 imported, 5 purchases",
+    (("6967", "5"), ("7364", "5")): "FS-124, the landing of its second module — what a region of one label forces one unit away, and at a common unit point of a close complementary pair; the witnesses; the three-arcs lemma (FS124-L2; copy data/fs124/l2/gate/receipt-axioms-final.log, gated commit da96003b): 7,420 records, 7,364 clean, 28 axiom-free, 23 imported, 5 purchases",
 }
 PROTECTED_TAG = "[PROTECTED — never compress, trim"
 GATE_RE = re.compile(r"current audit reads (\d+) clean and (\d+) declared purchases")
