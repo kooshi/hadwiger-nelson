@@ -1,0 +1,15 @@
+-- FS131-IC1: Arith/ThreeColourCharacter (9: 9 theorems, 0 definitions; every public declaration a
+-- person typed, in the file's order — the kernel's list, data/fs131/ic1/statements-built.txt, through
+-- data/fs131/ic1/make_audit.py).  Statements FS131-KN4's and FS131-KN5's; the eight leaves' proofs FS131-IC1's.
+-- The file's 2 private helpers (winding_le_vertex, exists_mem_box_of_forall_int) are not nameable here;
+-- each is read by `ThreeColour.Winding.exists_box_point` below.  Every record CLEAN: no declared outside theorem
+-- is read.  One name is declared outside the module's namespace: HadwigerNelson.ThreeColour.Winding.exists_box_point.
+#print axioms HadwigerNelson.ThreeColourCharacter.exists_int_vector_of_forall_neg
+#print axioms HadwigerNelson.ThreeColour.Winding.exists_box_point
+#print axioms HadwigerNelson.ThreeColourCharacter.exists_character_of_box_point
+#print axioms HadwigerNelson.ThreeColourCharacter.exists_character_of_properAlong
+#print axioms HadwigerNelson.ThreeColourCharacter.isClosed_band
+#print axioms HadwigerNelson.ThreeColourCharacter.bandSet_nonempty_of_finite
+#print axioms HadwigerNelson.ThreeColourCharacter.bandSet_three_nonempty_of_proper
+#print axioms HadwigerNelson.ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable
+#print axioms HadwigerNelson.ThreeColourCharacter.exists_character_one_two

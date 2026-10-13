@@ -16,5 +16,5 @@ env SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 python3 /home/kooshi/source/lean-dir/scr
 st=$?
 [ "$mode" = copy ] && rm -f $D/stmt/Copy.lean
 cat $D/logs/Models-$mode.out
-echo "models ($mode): lean exit $st; errors: $(grep -c ': error' $D/logs/Models-$mode.out); examples in the body: $(grep -c '^example' $D/lean/ModelsBody.lean)"
+echo "models ($mode): lean exit $st; errors: $(grep -c ': error' $D/logs/Models-$mode.out); theorems in the body: $(grep -cP '^theorem [A-Za-z0-9_]+( :|$)' $D/lean/ModelsBody.lean); axiom records printed: $(grep -c 'depends on axioms\|does not depend on any axioms' $D/logs/Models-$mode.out)"
 exit $st

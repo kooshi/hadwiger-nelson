@@ -75,7 +75,10 @@ private theorem winding_le_vertex {s : Fin m → A} (W : Winding s) (r : (relMap
   have hmin : ∀ t : ℤ, min (-t) (2 * -t) = -(if 0 ≤ t then 2 * t else t) := fun t => by
     split_ifs <;> omega
   have h3 : 3 * W.toHom r ≤ ∑ j, (if 0 ≤ (r : Fin m → ℤ) j then 2 * (r : Fin m → ℤ) j else (r : Fin m → ℤ) j) := by
-    simp only [minRise, AddSubgroup.coe_neg, Pi.neg_apply, hmin, Finset.sum_neg_distrib] at h
+    -- `minRise` read by unfolding, not by `simp [minRise]`: that would mint `minRise.eq_1` here, a second copy of a
+    -- theorem `ThetaCert` already generated
+    change ∑ j, min (-(r : Fin m → ℤ) j) (2 * -(r : Fin m → ℤ) j) ≤ 3 * -W.toHom r at h
+    simp only [hmin, Finset.sum_neg_distrib] at h
     linarith
   have h3' : (3 : ℝ) * ((W.toHom r : ℤ) : ℝ) ≤
       ∑ j, 3 * ((((r : Fin m → ℤ) j : ℤ) : ℝ) * (if 0 ≤ (r : Fin m → ℤ) j then 2 / 3 else 1 / 3)) := by
@@ -212,7 +215,9 @@ theorem exists_character_of_box_point (s : Fin m → A) {x : Fin m → ℝ}
     (relMap s).range.subtype (AddSubgroup.subtype_injective _) φ
   refine ⟨θ, fun j => ?_⟩
   have h1 : relMap s (Pi.single j 1) = s j := by
-    simp [relMap, Pi.single_apply]
+    -- `relMap` read by unfolding (see `winding_le_vertex`)
+    change ∑ k, (Pi.single j (1 : ℤ) : Fin m → ℤ) k • s k = s j
+    simp [Pi.single_apply]
   have h2 := DFunLike.congr_fun hθ ((relMap s).rangeRestrict (Pi.single j 1))
   rw [hφ, hψ] at h2
   simpa [h1, Pi.single_apply] using h2

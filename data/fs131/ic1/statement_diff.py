@@ -12,7 +12,14 @@ The file's side: an `example` is elaborated and discarded, so every `example` of
 text (head and body, whitespace runs collapsed) with the working file's: each must still be there, in order, and the
 working file's count is printed (one more is one this job added).
 
-Usage:  statement_diff.py <before.txt> <after.txt> [candidate-file] [--control]
+`--normalize-hyg`: for two prints made at two paths (the skeleton's, from a copy; the compiled module's, from the
+build).  A binder Lean names by hygiene is stored as `inst._@.<module of the file>.<n>._hygCtx._hyg.<k>`, so one
+statement prints two texts from two paths (FS131-IU1's tool defect).  With this flag every such suffix is replaced by
+`✝` in both prints before the comparison, and Lean's hash of the stored term, which does not read binder names, is
+compared as printed.  What that gives up: two statements that differ only in the hygienic name of a binder are read as
+equal — they are the same proposition.
+
+Usage:  statement_diff.py <before.txt> <after.txt> [candidate-file] [--control] [--normalize-hyg]
 `--control` plants three faults in `after` (one stored statement changed by one character, one skeleton declaration
 removed, one theorem turned into an axiom) and must report exactly three; exit 0 only then.
 What this does not see: a change to a docstring or a comment (not a statement).
@@ -25,9 +32,17 @@ BASE = "34d9113b2"
 ROOT = pathlib.Path(__file__).resolve().parents[3]
 
 
+HYG = re.compile(r"\._@\.\S+?\._hyg\.\d+")
+NORMALIZE = "--normalize-hyg" in sys.argv
+N_HYG = [0]
+
+
 def read_dump(path):
     out, cur = {}, None
     for ln in pathlib.Path(path).read_text().splitlines():
+        if NORMALIZE and (ln.startswith("TYPE ") or ln.startswith("VALUE ")):
+            ln, k = HYG.subn("✝", ln)
+            N_HYG[0] += k
         if ln.startswith("@@ "):
             parts = ln.split(" ")
             cur = {"kind": parts[1], "internal": parts[-1] == "INTERNAL", "type": None, "value": None}
@@ -116,6 +131,10 @@ def main():
     print(f"compared: {n_cmp} named constants of the first dump ({n_thm} theorems, {n_def} definitions; types, and values of definitions); "
           f"{len(written)} declarations written at {BASE}, each found in the first dump")
     print(f"internal (not compared): {n_int_b} before, {n_int_a} after")
+    if NORMALIZE:
+        print(f"hygienic binder names replaced by ✝ in the two prints: {N_HYG[0]}")
+        if N_HYG[0] == 0:
+            print("NORMALIZER BROKEN: --normalize-hyg found no hygienic name in either print"); sys.exit(2)
     print(f"new named constants in the second dump: {len(new)}")
     for n in new:
         print(f"  NEW {after[n]['kind']} {n}")
@@ -123,6 +142,19 @@ def main():
     for n, k in new_private:
         print(f"  NEW PRIVATE {k} {n}")
     print(f"`example`s: {len(old_ex)} at {BASE}, {len(new_ex)} in {cand.relative_to(ROOT)}; of the base's, missing as text: {len(lost)}")
+    # constants of the second dump that belong to no declaration of this file: theorems Lean generated here on demand
+    # for a definition of another module (`f.eq_1`, …).  Not a statement, so not a failure here; a second copy of one
+    # is a GENERATED row of scripts/dupnames.sh at the landing, so each is listed.
+    own = [n for n, a in after.items() if not a["internal"]] + [f"{m.group(1)}\x00{m.group(2)}" for m in
+           (re.match(r"_private\.(.*?)\.0\.(.*)$", n) for n in after) if m and private_user(m.group(0))]
+    def is_own(n):
+        m = re.match(r"_private\.(.*?)\.0\.(.*)$", n)
+        base = m.group(2) if m else n
+        return any(base == o.split("\x00")[-1] or base.startswith(o.split("\x00")[-1] + ".") for o in own)
+    foreign = sorted(n for n in after if not is_own(n))
+    print(f"constants of the second dump under no declaration of this file (generated on demand for another module's definition): {len(foreign)}")
+    for n in foreign:
+        print(f"  FOREIGN {after[n]['kind']} {n}")
     for b in bad:
         print(b)
     if control:

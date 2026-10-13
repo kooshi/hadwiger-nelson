@@ -106,3 +106,46 @@ that read it (`bandSet_three_nonempty_of_proper`, `fieldBandSet_three_nonempty_o
 model moved to `c = 1/2`, where the functional is positive, is an error, `logs/Models-control.out`). § Drafts has the table.
 
 **Theorems this phase proved** is filled below from the build's print, at the last stage.
+
+## Stage 4 — SAVED: the first build, what its compiled module showed, and two proof lines changed for it
+
+**The build** (`data/fs131/ic1/build_sampled.sh data/fs131/ic1/logs/build1 8`, which is
+`slot.py --mem 10 --cpus 4 -- env MEMMAX=10G BATCH=8 ./scripts/build.sh` with the process tree's memory sampled): **exit 0**,
+`==> build: OK — 248 of 248 batches, 39 module(s) rebuilt, 3 module(s) with warnings, 9m44s` (19:37:11Z to 19:47:01Z;
+`logs/build1.out`, the gate's whole log copied to `logs/build1.gate.log`). The 39: this tree's compiled library was two landings
+behind its branch (`Plane/…`, `Outside/OAI158…`), plus this line's four modules and `Proofs`. `Arith.ThreeColourCharacter` compiled
+in 7.6 s with **no message**. The three modules with warnings are the line's other three skeletons as they stand in this tree —
+33 `declaration uses sorry` (`DyadicQuadratic` 10, `TorsionExtraction` 10, `ThreeColourCriterion` 13) — and the run holds no other
+warning. The `✖ … ThreeColourCharacter` at the head of the gate's log is the up-to-date check naming a stale target, not a failure.
+
+**Memory, with what it measures**: the sum of resident memory over the build's process tree, sampled every 2 s, peaked at 15.6 GB
+(293 samples). Pages of `.olean` files mapped by several `lean` processes are counted once per process, and up to four ran at once
+(batches that rebuilt four modules), so this is an upper estimate; the cap of 10 GiB on the build's scope was not reached (no
+retry, exit 0). KN5's 5.2–5.4 GB was read by the same instrument with two to five modules stale.
+
+**Read from the compiled module** (`data/fs131/ic1/after_build.sh`, `logs/after_build1.out`): 22 constants, 9 of them the named
+theorems; the statement check against the skeleton PASS (9 compared; control 3 of 3); the nine public theorems each on
+`[propext, Classical.choice, Quot.sound]`, the names being the audit block's in order (control 2 of 2); the nine model theorems
+likewise (control 2 of 2). Environment linters (`lake lint --no-build -- --no-build --trace` under the slot): exit 0,
+`-- Linting passed for Proofs.`, fourteen linters each `(2/2) Passed!` (`logs/lint.out`; 14 s, 5.1 GB). I planted no fault in the
+house's linters: their controls are the gate's, and a plant would cost a build.
+
+**What the dump showed that no check of mine had looked for.** Two of the 22 constants are not this file's:
+`HadwigerNelson.ThreeColour.relMap.eq_1` and `HadwigerNelson.ThreeColour.minRise.eq_1` — equation theorems of the *upstream*
+module's definitions, which Lean generates on demand in whichever module first asks; my proofs asked with `simp [relMap, …]` and
+`simp only [minRise, …]`. `data/fs131/ic1/probes/OnDemand.lean` (the whole built library imported, read-only; controls: a name
+declared once reads 1, a name declared nowhere reads 0) finds each of the two in **two** modules: `Proofs.HadwigerNelson.ThetaCert`
+and this one, siblings that do not import each other. That is the class `scripts/dupnames.sh` counts and lists as `GENERATED`
+without failing (`LEAN.md` § The gate) — no fault, and two new rows for the landing to read on the joined tree. I removed them at
+the source instead: the two definitions are now read by unfolding (`change … at h`; `change …` before a `simp` that no longer
+names `relMap`), in `winding_le_vertex` and in `exists_character_of_box_point`, each with a comment saying why. Two proof lines;
+no statement touched (`logs/statements-stage4.out`: PASS, 9 compared, control 3 of 3).
+
+**The instrument that now sees it**: `statement_diff.py` lists every constant of the working file's print that lies under no
+declaration of the file (`FOREIGN`). On the first build's dump (kept as `statements-built1.txt`) it lists the two; on the revised
+file it lists none. The revised file under `lake env lean`: exit 0, no message; all 11 theorems on the standard three from a copy
+(control fires on the planted leaf and the two that read it); the models elaborate.
+
+**So one build was not enough, and I say why rather than ship text the build did not compile**: the revised file differs from the
+built one in two proof lines, and `lake env lean` is not the build. A second build follows (stage 5); it compiles this module, the
+three skeletons downstream of it or beside it, and `Proofs`.
