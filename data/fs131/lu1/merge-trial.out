@@ -1,0 +1,3 @@
+trial: git merge-tree --write-tree HEAD(d83fdd8c7) main(7a0a20cb9)  2026-10-13T20:16:35Z
+17f57acd6635928fe4a6ac2d50bc690ce75b9cf8
+exit=0

@@ -1,0 +1,6 @@
+plant: a hash of the manifest altered: FIRED — CONTENT Proofs/HadwigerNelson/Outside/OAI158.olean: 0000000000000000 in the manifest, f763d277289dc114 now
+plant: a file written after the copy: FIRED — WRITTEN-HERE Proofs/Basic.olean: mtime 2026-10-13T21:00:00Z is not earlier than the copy (2026-10-13T20:21:30Z)
+plant: a file gone from the tree: FIRED — GONE Proofs/HadwigerNelson/Outside/OAI158.olean: in the manifest, not in the tree
+plant: a file the manifest does not hold: FIRED — NEW Proofs/HadwigerNelson/Plane/zz_lu1_plant.olean: in the tree, not in the manifest
+plants: every one of 4 fired; the unplanted pair passes
+exit=0

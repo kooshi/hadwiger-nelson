@@ -1,0 +1,18 @@
+counter vs the main scan: declarations 15969 / 15969, refutations 228 / 228: agree
+counter vs the landing scan: declarations 16029 / 16029, refutations 228 / 228: agree
+main rows 1535, landing rows 1535; lost 0 (0 with a removed declaration); added 0
+  declarations: 15969 -> 16029 (+60)
+  refutations-skipped: 228 -> 228 (+0)
+  sites: 1454 -> 1454 (+0)
+  vacuous: 0 -> 0 (+0)
+  stale: 0 -> 0 (+0)
+  declared: 3 -> 3 (+0)
+  witnessed: 38 -> 38 (+0)
+  generic: 1411 -> 1411 (+0)
+  unknown: 2 -> 2 (+0)
+  module Arith.QuadraticPrime: declarations 0 -> 14 (+14), refutations 0 -> 0 (+0)  [new module]
+  module Arith.UpperHalf: declarations 0 -> 36 (+36), refutations 0 -> 0 (+0)  [new module]
+  module Instances.UpperHalfValues: declarations 0 -> 10 (+10), refutations 0 -> 0 (+0)  [new module]
+  by module: declarations +60, refutations +0: equal to the scans difference
+vacdiff: PASS
+exit=0

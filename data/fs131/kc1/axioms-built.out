@@ -1,0 +1,7 @@
+'HadwigerNelson.exists_proper_ae_eq_of_proper_on_conull' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.davies_lemma_B1' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.chiM0_eq_chiLebesgue' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.chromaticNumber_plane_eq_chiLebesgue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]

@@ -1,0 +1,38 @@
+## FILE constants=18
+@@ THM HadwigerNelson.UpperHalf.exists_stablePrime_rat._proof_1_1 INTERNAL
+TYPE 549711428 sha256=91ac26a7f7c880f99d9f28874c3882dd06d19335d023d0823dd540ee5ad30402 len=175 forall (m : Int), (Eq.{1} Int (HAdd.hAdd.{0, 0, 0} Int Int Int (instHAdd.{0} Int Int.instAdd) m m) (OfNat.ofNat.{0} Int 1 (instOfNat 1))) -> ([mdata noImplicitL
+@@ THM _private.data.fs131.iv1.stmt.Copy.0.HadwigerNelson.UpperHalf.exists_intCast_eq_re_of_isIntegral INTERNAL
+TYPE 841956013 sha256=73ca1e4508f9229d5244d9dc61bd944b022a5b064b6e962e3c760f9324130b65 len=399 forall {z : Complex}, (IsIntegral.{0, 0} Int Complex Int.instCommRing Complex.instRing (Ring.toIntAlgebra.{0} Complex Complex.instRing) z) -> (forall {a : Rat} 
+@@ DEF HadwigerNelson.UpperHalf.chromaticNumber_planeOver_rat.match_1_1 INTERNAL
+TYPE 3307730713 sha256=fc0a629a401c6a3aa3ca79891d8b0efbfa6c034c17959d4b5feeee66d8302364 len=1283253 forall (motive : (Exists.{1} (HadwigerNelson.SpectralChain.StablePrime (Bot.bot.{0} (Subfield.{0} Real Real.instDivisionRing) (OrderBot.toBot.{0} (Subfield.{0} 
+VALUE 3741040113 sha256=4b97118ce8df09e90d21a5c69788a2fd8b99d3aa6376842fdece89e881176d19 len=3076977 fun (motive : (Exists.{1} (HadwigerNelson.SpectralChain.StablePrime (Bot.bot.{0} (Subfield.{0} Real Real.instDivisionRing) (OrderBot.toBot.{0} (Subfield.{0} Rea
+@@ THM HadwigerNelson.UpperHalf.numberField_bot
+TYPE 3563361989 sha256=403eef08148da27eef530aa7a3b6f7bb53e453e6147388b509a1b1a9ffa61fcc len=2649 NumberField.{0} (Subtype.{1} Real (fun (x : Real) => Membership.mem.{0, 0} Real (Subfield.{0} Real Real.instDivisionRing) (SetLike.instMembership.{0, 0} (Subfie
+@@ THM _private.data.fs131.iv1.stmt.Copy.0.HadwigerNelson.UpperHalf.exists_intCast_eq_re_of_isIntegral._proof_1_2 INTERNAL
+TYPE 1836186947 sha256=f20340d3f36d3546ce2214a265e2c5b04f27c821af5b4c705a5c295a668b129a len=2546 forall (n : Int) (m : Int) (k : Int), (Eq.{1} Int (HAdd.hAdd.{0, 0, 0} Int Int Int (instHAdd.{0} Int Int.instAdd) (HPow.hPow.{0, 0, 0} Int Nat Int (instHPow.{0,
+@@ THM HadwigerNelson.UpperHalf.two_le_chromaticNumber_planeOver._simp_1_1 INTERNAL
+TYPE 1927452300 sha256=4e9ec655ca6215818f17eb7048dae811ce96c1adf03fc4ae60bf1535bb10887e len=722 forall {S : Type.{u_3}} {M : outParam.{succ (succ u_4)} Type.{u_4}} {inst._@.Mathlib.Algebra.Group.Submonoid.Defs.327041392._hygCtx._hyg.19 : Zero.{u_4} M} {ins
+@@ THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_sqrt167_le_eight
+TYPE 619063872 sha256=8b92c0af2dce2fea7bb11434af64bfaaaf5b01f4367e07ce7be8c26649a9de96 len=821 LE.le.{0} ENat instLEENat (SimpleGraph.chromaticNumber.{0} (Set.Elem.{0} Complex (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands (Singlet
+@@ THM HadwigerNelson.UpperHalf.two_le_chromaticNumber_planeOver
+TYPE 1603414070 sha256=018aca875635d7fb3cc57977c72ba024f39c1c4ff4009f83025450bcf00d7a54 len=541 forall (F : Subfield.{0} Real Real.instDivisionRing), LE.le.{0} ENat instLEENat (OfNat.ofNat.{0} ENat 2 (instOfNatAtLeastTwo.{0} ENat 2 ENat.instNatCast (Nat.in
+@@ THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_eleven
+TYPE 2203792150 sha256=3a2d76e8b412cf6afdc754fd3fdbf76d663586997b754f98f3b9731b5092906f len=803 Eq.{1} ENat (SimpleGraph.chromaticNumber.{0} (Set.Elem.{0} Complex (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands (Singleton.singleton.{
+@@ THM HadwigerNelson.UpperHalf.colorable_planeOver_fieldOfRadicands
+TYPE 374974536 sha256=dd30f97117ed1beb8cbb10b05db43941c9c0791c948da38093b96f141275fd22 len=1722 forall (D : Set.{0} Nat) [inst._@.data.fs131.iv1.stmt.Copy.2768645700._hygCtx._hyg.6 : Finite.{1} (Set.Elem.{0} Nat D)] {p : Nat}, (Nat.Prime p) -> (Eq.{1} Nat 
+@@ THM HadwigerNelson.UpperHalf.colorable_planeOver_fieldOfRadicands._proof_1_1 INTERNAL
+TYPE 1014013653 sha256=287f0965318cd8b006860f6aa9fa68febfecea8a3eee7f63ff06b9a3efb7faa1 len=209 (Eq.{1} Nat (HMod.hMod.{0, 0, 0} Nat Nat Nat (instHMod.{0} Nat Nat.instMod) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) (OfNat.ofNat.{0} Nat 4 (instOfNatNat 4))) (
+@@ THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_rat
+TYPE 2992685823 sha256=8f5b6ff229f02ae49d346cbaa720fa289228769d66dc7044fcf9f34aac8349d2 len=2817 Eq.{1} ENat (SimpleGraph.chromaticNumber.{0} (Set.Elem.{0} Complex (HadwigerNelson.planeOver (Bot.bot.{0} (Subfield.{0} Real Real.instDivisionRing) (OrderBot.to
+@@ THM HadwigerNelson.UpperHalf.exists_stablePrime_rat
+TYPE 3838690697 sha256=4e691b540c3ff783147018fb36561a2d9083e69c93410f851caf9228cc484e68 len=257324 Exists.{1} (HadwigerNelson.SpectralChain.StablePrime (Bot.bot.{0} (Subfield.{0} Real Real.instDivisionRing) (OrderBot.toBot.{0} (Subfield.{0} Real Real.instDivi
+@@ THM HadwigerNelson.UpperHalf.two_le_chromaticNumber_planeOver._simp_1_2 INTERNAL
+TYPE 3324589697 sha256=70dd8e738b568ac456fbec3c878b0e1affca02ba9c95aa5ad7bddccf514b6d21 len=719 forall {S : Type.{u_3}} {M : outParam.{succ (succ u_4)} Type.{u_4}} {inst._@.Mathlib.Algebra.Group.Submonoid.Defs.829301677._hygCtx._hyg.19 : One.{u_4} M} {inst
+@@ THM HadwigerNelson.UpperHalf.instNumberFieldBot
+TYPE 3563361989 sha256=403eef08148da27eef530aa7a3b6f7bb53e453e6147388b509a1b1a9ffa61fcc len=2649 NumberField.{0} (Subtype.{1} Real (fun (x : Real) => Membership.mem.{0, 0} Real (Subfield.{0} Real Real.instDivisionRing) (SetLike.instMembership.{0, 0} (Subfie
+@@ THM _private.data.fs131.iv1.stmt.Copy.0.HadwigerNelson.UpperHalf.exists_intCast_eq_re_of_isIntegral._proof_1_1 INTERNAL
+TYPE 3128576936 sha256=caef4a0d0a49d463a1525da8ee684207bbe4acbe171295247991bfa274598708 len=2273 forall (n : Int) (m : Int) (k : Int), (Eq.{1} Int (HAdd.hAdd.{0, 0, 0} Int Int Int (instHAdd.{0} Int Int.instAdd) (HPow.hPow.{0, 0, 0} Int Nat Int (instHPow.{0,
+@@ THM _private.data.fs131.iv1.stmt.Copy.0.HadwigerNelson.UpperHalf.exists_intCast_eq_of_isIntegral INTERNAL
+TYPE 3937490920 sha256=80752a0b75b05f37400ec7180ce824599c5cfe56bb6ec9d2ab79ca96a06501c1 len=266 forall {q : Rat}, (IsIntegral.{0, 0} Int Complex Int.instCommRing Complex.instRing (Ring.toIntAlgebra.{0} Complex Complex.instRing) (Rat.cast.{0} Complex Comple
+@@ THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_sqrt47_le_five_of_prime
+TYPE 1414371127 sha256=db999d73e074cf46a765b0fe567079dc494d7334952f338a6f844003293dfca4 len=817 LE.le.{0} ENat instLEENat (SimpleGraph.chromaticNumber.{0} (Set.Elem.{0} Complex (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands (Singlet

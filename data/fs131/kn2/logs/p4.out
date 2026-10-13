@@ -1,0 +1,72 @@
+UpperHalf.chromaticNumber_planeOver_le_unitQuadrance : ∀ (F : Subfield ℝ) [NumberField ↥F]
+  {𝔭 : Ideal (NumberField.RingOfIntegers ↥F)},
+  Arith.IsUsablePrime 𝔭 →
+    (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).chromaticNumber ≤
+      (unitQuadrance (NumberField.RingOfIntegers ↥F ⧸ 𝔭)).chromaticNumber
+UpperHalf.chromaticNumber_planeOver_le_finitePlane : ∀ (F : Subfield ℝ) [NumberField ↥F]
+  {𝔭 : Ideal (NumberField.RingOfIntegers ↥F)},
+  Arith.IsUsablePrime 𝔭 →
+    ∀ {p : ℕ},
+      Nat.Prime p →
+        Nat.card (NumberField.RingOfIntegers ↥F ⧸ 𝔭) = p →
+          (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).chromaticNumber ≤ (finitePlane p).chromaticNumber
+@UpperHalf.exists_hom_levelTarget : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (P : SpectralChain.StablePrime F)
+  {m : ℕ},
+  1 ≤ m →
+    ∃ h,
+      ∀ (x y : ↑(planeOver F)) (hd : ⟨↑x, ⋯⟩ - ⟨↑y, ⋯⟩ ∈ P.localRing), h x - h y = (P.residue m) ⟨⟨↑x, ⋯⟩ - ⟨↑y, ⋯⟩, hd⟩
+UpperHalf.chromaticNumber_planeOver_le_localBound : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).chromaticNumber ≤ SpectralChain.localBound F
+@UpperHalf.two_mem_of_conj_trivial : ∀ {F : Subfield ℝ} (P : SpectralChain.StablePrime F),
+  (∀ (x : NumberField.RingOfIntegers ↥(SpectralChain.fieldI F)), (SpectralChain.conjO F) x - x ∈ P.P) → 2 ∈ P.P
+@UpperHalf.colorable_two_planeOver_of_ramified : ∀ {F : Subfield ℝ} [NumberField ↥F] (P : SpectralChain.StablePrime F),
+  (∀ (x : NumberField.RingOfIntegers ↥(SpectralChain.fieldI F)), (SpectralChain.conjO F) x - x ∈ P.P) →
+    (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).Colorable 2
+@UpperHalf.exists_stablePrime_of_valuationSubring : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (A : ValuationSubring ↥(SpectralChain.fieldI F)), A ≠ ⊤ → (∀ z ∈ A, (conjOn ⋯) z ∈ A) → ∃ P, P.localRing = A
+UpperHalf.inv_natCast_mem_unitRingOver_iff_forall_stablePrime : ∀ (F : Subfield ℝ) [NumberField ↥F] {n : ℕ},
+  n ≠ 0 → ((↑n)⁻¹ ∈ UnitRing.unitRingOver F ↔ ∀ (P : SpectralChain.StablePrime F), ↑n ∉ P.P)
+@UpperHalf.residue_conj : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (P : SpectralChain.StablePrime F) (m : ℕ)
+  (z : ↥P.localRing),
+  (P.residue m) ⟨(conjOn ⋯) ↑z, ⋯⟩ = (Ideal.quotientMap (P.P ^ m) (SpectralChain.conjO F) ⋯) ((P.residue m) z)
+QuadraticPrime.exists_maximal_card_eq : ∀ (D : Set ℕ) {p : ℕ},
+  Nat.Prime p →
+    p ≠ 2 →
+      (∀ d ∈ D, ↑d ≠ 0 ∧ IsSquare ↑d) →
+        ∃ 𝔭, 𝔭.IsMaximal ∧ Nat.card (NumberField.RingOfIntegers ↥(SquareClass.fieldOfRadicands D) ⧸ 𝔭) = p
+@QuadraticPrime.nonempty_ringHom_zmod_of_ramified_sqrt : ∀ {K : Type u_1} [inst : Field K] {p : ℕ}
+  [inst_1 : Fact (Nat.Prime p)],
+  p ≠ 2 →
+    ∀ (K₀ : Subfield K) (ι₀ : ↥K₀ →+* ℚ_[p]) {q : ℕ},
+      p ∣ q →
+        ¬p ^ 2 ∣ q →
+          ∀ {π : K}, π ^ 2 = ↑q → Subfield.closure (↑K₀ ∪ {π}) = ⊤ → Nonempty (NumberField.RingOfIntegers K →+* ZMod p)
+QuadraticPrime.exists_maximal_card_eq_of_ramified : ∀ (D : Set ℕ) (q : ℕ) {p : ℕ},
+  Nat.Prime p →
+    p ≠ 2 →
+      (∀ d ∈ D, ↑d ≠ 0 ∧ IsSquare ↑d) →
+        p ∣ q →
+          ¬p ^ 2 ∣ q →
+            ∃ 𝔭,
+              𝔭.IsMaximal ∧ Nat.card (NumberField.RingOfIntegers ↥(SquareClass.fieldOfRadicands (insert q D)) ⧸ 𝔭) = p
+UpperHalf.exists_stablePrime_rat : ∃ P,
+  2 ∈ P.P ∧ ∀ (x : NumberField.RingOfIntegers ↥(SpectralChain.fieldI ⊥)), (SpectralChain.conjO ⊥) x - x ∈ P.P
+'HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_unitQuadrance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_finitePlane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UpperHalf.colorable_planeOver_of_finitePlane' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_localBound' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UpperHalf.chromaticNumber_planeOver_eleven' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UpperHalf.chromaticNumber_planeOver_rat' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

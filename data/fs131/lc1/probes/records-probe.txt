@@ -1,0 +1,22 @@
+landing: 41 constants in 1 modules; declarations it brings: 34 (31 THM, 3 DEF, 0 IND); records in the log: 7454
+  landing records on exactly the three: 31
+  landing records on the three and proper_to_borel_weak: 3
+  record Plane.chromaticNumber_euclidean_plane_eq_chiLebesgue: under IMPORTED: [Classical.choice, Quot.sound, proper_to_borel_weak, propext]
+  record Plane.chromaticNumber_plane_eq_chiLebesgue: under IMPORTED: [Classical.choice, Quot.sound, proper_to_borel_weak, propext]
+  record Plane.colorable_iff_exists_nullMeasurable_proper: under IMPORTED: [Classical.choice, Quot.sound, proper_to_borel_weak, propext]
+  record exists_proper_ae_eq_of_proper_on_conull: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record exists_proper_nullMeasurable_of_avoiding_cover: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record davies_lemma_B1_euclidean: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record Plane.davies_lemma_B1: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record Plane.exists_proper_of_aeColouring: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record Plane.exists_proper_of_nullMeasurable_weak: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record Plane.exists_aeColouring_of_nullMeasurable_proper: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record Plane.nonempty_aeColouring_iff_exists_nullMeasurable_proper: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record Plane.chiM0_eq_chiLebesgue: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record Plane.chiLebesgue_le_chiM: under CLEAN: [Classical.choice, Quot.sound, propext]
+  record Plane.chromaticNumber_plane_le_chiLebesgue: under CLEAN: [Classical.choice, Quot.sound, propext]
+  whole log: records carrying kloosterman_bound: 8 (filed: 8); of the landing's: 0
+  whole log: records carrying no_proper_five_coloring: 6 (filed: 6); of the landing's: 0
+  whole log: records carrying proper_to_borel_weak: 12 (filed: 12); of the landing's: 3
+  whole log: records under IMPORTED 26; carrying two imports 0; carrying sorryAx 0
+records: PASS

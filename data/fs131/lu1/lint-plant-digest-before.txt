@@ -1,0 +1,1 @@
+09fe50cb8f34a73cda75118dcbc3ed4a613c545a0bbc321d8fe092e0c543aca5  Proofs/HadwigerNelson/Instances/UpperHalfValues.lean

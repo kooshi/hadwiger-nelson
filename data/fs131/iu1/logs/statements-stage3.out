@@ -1,0 +1,8 @@
+Skeleton: lean exit 0; errors: 0; sorry warnings: 12
+Candidate: lean exit 0; errors: 0; sorry warnings: 2
+compared: 30 named constants of the first dump (27 theorems, 3 definitions; types, and values of definitions); 30 declarations written at 223241b0a, each found in the first dump
+internal (not compared): 15 before, 22 after
+new named constants in the second dump: 0
+`example` heads: 0 at 223241b0a, 0 in the working file
+PASS: no statement and no definition changed
+CONTROL: 3 of 3 planted faults reported — the check can fail

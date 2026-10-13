@@ -1,0 +1,5 @@
+  Arith.UpperHalf: 30 named constants in the first dump, 30 in the second
+  Arith.QuadraticPrime: 13 named constants in the first dump, 13 in the second
+  Instances.UpperHalfValues: 9 named constants in the first dump, 9 in the second
+statements: PASS: no statement and no definition changed — 52 named constants compared in 3 module(s)
+exit=0

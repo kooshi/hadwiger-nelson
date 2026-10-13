@@ -1,0 +1,4 @@
+axioms-selftest-probe exit=0
+vacuity-selftest-probe exit=0
+assumptions-selftest-first exit=0
+selftests done 20:44:50Z

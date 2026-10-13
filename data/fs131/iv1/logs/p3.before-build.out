@@ -1,0 +1,28 @@
+numberField_bot : NumberField ↥⊥
+instNumberFieldBot : NumberField ↥⊥
+two_le_chromaticNumber_planeOver : ∀ (F : Subfield ℝ),
+  2 ≤ (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).chromaticNumber
+exists_stablePrime_rat : ∃ P,
+  2 ∈ P.P ∧ ∀ (x : NumberField.RingOfIntegers ↥(SpectralChain.fieldI ⊥)), (SpectralChain.conjO ⊥) x - x ∈ P.P
+chromaticNumber_planeOver_rat : (SimpleGraph.induce (planeOver ⊥) (unitDistance ℂ)).chromaticNumber = 2
+@colorable_two_planeOver_of_ramified : ∀ {F : Subfield ℝ} [NumberField ↥F] (P : SpectralChain.StablePrime F),
+  (∀ (x : NumberField.RingOfIntegers ↥(SpectralChain.fieldI F)), (SpectralChain.conjO F) x - x ∈ P.P) →
+    (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).Colorable 2
+@two_mem_of_conj_trivial : ∀ {F : Subfield ℝ} (P : SpectralChain.StablePrime F),
+  (∀ (x : NumberField.RingOfIntegers ↥(SpectralChain.fieldI F)), (SpectralChain.conjO F) x - x ∈ P.P) → 2 ∈ P.P
+colorable_planeOver_fieldOfRadicands : ∀ (D : Set ℕ) [Finite ↑D] {p : ℕ},
+  Nat.Prime p →
+    p % 4 = 3 →
+      (∀ d ∈ D, ↑d ≠ 0 ∧ IsSquare ↑d) →
+        ∀ {k : ℕ},
+          (finitePlane p).Colorable k →
+            (SimpleGraph.induce (planeOver (SquareClass.fieldOfRadicands D)) (unitDistance ℂ)).Colorable k
+chromaticNumber_planeOver_eleven : (SimpleGraph.induce (planeOver (SquareClass.fieldOfRadicands {11}))
+      (unitDistance ℂ)).chromaticNumber =
+  4
+chromaticNumber_planeOver_sqrt167_le_eight : (SimpleGraph.induce (planeOver (SquareClass.fieldOfRadicands {167}))
+      (unitDistance ℂ)).chromaticNumber ≤
+  8
+chromaticNumber_planeOver_sqrt47_le_five_of_prime : (SimpleGraph.induce (planeOver (SquareClass.fieldOfRadicands {47}))
+      (unitDistance ℂ)).chromaticNumber ≤
+  5

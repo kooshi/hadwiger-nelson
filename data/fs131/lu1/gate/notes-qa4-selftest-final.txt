@@ -1,0 +1,2 @@
+self-test: OK (6 controls, 1 planted)
+exit=0
