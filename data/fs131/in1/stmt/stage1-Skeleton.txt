@@ -1,0 +1,42 @@
+## FILE constants=20
+@@ THM HadwigerNelson.ThreeColourCriterion.fieldBandSet_two_nonempty_of_conj_trivial
+TYPE 1092398046 sha256=1fd431596456c18ea62f286859721ff49851c0c17425f1b9c4735ddbd14e95ec len=37394 forall {F : Subfield.{0} Real Real.instDivisionRing} {𝔪 : Ideal.{0} (Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0} Comple
+@@ THM HadwigerNelson.ThreeColourCriterion.exists_mul_conj_inv_eq_of_mul_conj_eq_one
+TYPE 1278584828 sha256=6f52fea345ff7658686306c18433dda28752215620373a1d086ac509dd6b2667 len=7517 forall {k : Type.{u_1}} [inst._@.data.fs131.in1.stmt.Copy.2277961908._hygCtx._hyg.3 : Field.{u_1} k] [inst._@.data.fs131.in1.stmt.Copy.2277961908._hygCtx._hyg.6
+@@ THM HadwigerNelson.ThreeColourCriterion.conjR._proof_1 INTERNAL
+TYPE 4134808985 sha256=f31fe21ceeaa09c996e3fb57677ee781c089bdcbccc1c20b76c926924a252f6e len=398 SubringClass.{0, 0} (Subring.{0} Complex (NonAssocCommRing.toNonAssocRing.{0} Complex (CommRing.toNonAssocCommRing.{0} Complex Complex.commRing))) Complex (NonA
+@@ THM HadwigerNelson.ThreeColourCriterion.exists_maximal_conj_trivial_of_colorable_two
+TYPE 4108071516 sha256=6e9438152f0d2b631a7f3c272bcad41af46f81fe366f1518575d85e63093884f len=35212 forall (F : Subfield.{0} Real Real.instDivisionRing), (SimpleGraph.Colorable.{0} (Set.Elem.{0} Complex (HadwigerNelson.planeOver F)) (SimpleGraph.induce.{0} Com
+@@ THM HadwigerNelson.ThreeColourCriterion.conj_mem_unitRing
+TYPE 437354640 sha256=a67cc3bd5cf71dce9e3a7c9939d50c374977ba8fb4156d010aec8d80fc6b21cd len=1779 forall {F : Subfield.{0} Real Real.instDivisionRing} {x : Complex}, (Membership.mem.{0, 0} Complex (Subring.{0} Complex (NonAssocCommRing.toNonAssocRing.{0} Com
+@@ THM HadwigerNelson.ThreeColourCriterion.coe_conjR
+TYPE 3677297423 sha256=7e503bbeb391219b71895b96a5bbd58ed59e54f0209bfb927ae7b988b4fa8688 len=14936 forall {F : Subfield.{0} Real Real.instDivisionRing} (x : Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0} Complex (NonAssoc
+@@ THM HadwigerNelson.ThreeColourCriterion.eq_zero_of_forall_normOne_eq
+TYPE 3768979584 sha256=c7f37fe9a5634d3dbfa60b2316c7e814cebe930487d5b0db160b021cb5eec519 len=9997 forall {k : Type.{u_1}} [inst._@.data.fs131.in1.stmt.Copy.2732294008._hygCtx._hyg.3 : Field.{u_1} k] [inst._@.data.fs131.in1.stmt.Copy.2732294008._hygCtx._hyg.6
+@@ THM HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine_of_colorable_three
+TYPE 3884594125 sha256=ccf1c02bd0664fa8947e6f1536005364f1bad4c6cc565155153dbec9774099af len=10750 forall (F : Subfield.{0} Real Real.instDivisionRing) [inst._@.data.fs131.in1.stmt.Copy.2124043054._hygCtx._hyg.10 : NumberField.{0} (Subtype.{1} Real (fun (x : 
+@@ THM HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine
+TYPE 4234752620 sha256=2d204ac30a37547dbe54286653f14da057b0d06e58c26f258f1fa25e0b697bbe len=12498 forall {A : Type} [inst._@.data.fs131.in1.stmt.Copy.922726703._hygCtx._hyg.3 : CommRing.{0} A] [inst._@.data.fs131.in1.stmt.Copy.922726703._hygCtx._hyg.6 : Fini
+@@ THM HadwigerNelson.ThreeColourCriterion.targetFloor_four_weil
+TYPE 660920704 sha256=d9c9b7c5f071d59d4f8dd769088d15d8cb1ac58b5c0130a60cb2693629bb66d0 len=341 forall {Q : Nat}, (Eq.{1} Nat (HMod.hMod.{0, 0, 0} Nat Nat Nat (instHMod.{0} Nat Nat.instMod) Q (OfNat.ofNat.{0} Nat 4 (instOfNatNat 4))) (OfNat.ofNat.{0} Nat 3
+@@ THM HadwigerNelson.ThreeColourCriterion.exists_maximal_conj_trivial
+TYPE 1358477416 sha256=dcb755239ab1d9d919e256806928ae5de3c2a11ead7c2b248e17ba7f317b5db4 len=12104 forall {A : Type} [inst._@.data.fs131.in1.stmt.Copy.4143211598._hygCtx._hyg.3 : CommRing.{0} A] [inst._@.data.fs131.in1.stmt.Copy.4143211598._hygCtx._hyg.6 : Fi
+@@ THM HadwigerNelson.ThreeColourCriterion.comap_conjR_eq
+TYPE 523228987 sha256=c091af97c2941949535c30727a9df4644de4a74a0e06d930623dea12cba6ee30 len=24558 forall {F : Subfield.{0} Real Real.instDivisionRing} (I : Ideal.{0} (Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0} Comple
+@@ THM HadwigerNelson.ThreeColourCriterion.exists_unitSet_mul_conjR_eq
+TYPE 1611022902 sha256=b416ca2cf0153a4868a35475302838891db8bfbce234bfb8188f8b971e409a68 len=24991 forall {F : Subfield.{0} Real Real.instDivisionRing} {a : Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0} Complex (NonAssoc
+@@ DEF HadwigerNelson.ThreeColourCriterion.conjR
+TYPE 454768064 sha256=4bc5797088e2aa948010fbcb2d92fadeeb01737c1d7b265ffc892de196345f84 len=5400 forall (F : Subfield.{0} Real Real.instDivisionRing), RingHom.{0, 0} (Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0} Compl
+VALUE 2553684469 sha256=8cf8e3d50277fe9a480e34fb79375de706a29feef04ca42449aa9b7c36e54688 len=4411 fun (F : Subfield.{0} Real Real.instDivisionRing) => RingHom.codRestrict.{0, 0, 0} (Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Sub
+@@ THM HadwigerNelson.ThreeColourCriterion.conjR._proof_3 INTERNAL
+TYPE 1761406156 sha256=e8cb97b34911323763fec1318094a61ffe2db1ef493eec477457c22b94690cd0 len=6765 forall (F : Subfield.{0} Real Real.instDivisionRing) (x : Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0} Complex (NonAssoc
+@@ THM HadwigerNelson.ThreeColourCriterion.conjR._proof_2 INTERNAL
+TYPE 3885814394 sha256=879ce900cc87fccf7c513da478f3b2ec53dc05bedf10fcafc0933cf00e1702fe len=448 SubsemiringClass.{0, 0} (Subring.{0} Complex (NonAssocCommRing.toNonAssocRing.{0} Complex (CommRing.toNonAssocCommRing.{0} Complex Complex.commRing))) Complex (
+@@ THM HadwigerNelson.ThreeColourCriterion.conjR_conjR
+TYPE 1012677841 sha256=9a554274085439dc97106a781683542630f54d071c98242223b4b7c8a8da58a0 len=26182 forall {F : Subfield.{0} Real Real.instDivisionRing} (x : Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0} Complex (NonAssoc
+@@ THM HadwigerNelson.ThreeColourCriterion.finite_quotient_span_natCast
+TYPE 1979570787 sha256=0ad74d0c773a5b173cf866ea3e7ee6f244acda83edd68502abedaef570d6cf7a len=10118 forall (F : Subfield.{0} Real Real.instDivisionRing) [inst._@.data.fs131.in1.stmt.Copy.1823768554._hygCtx._hyg.10 : NumberField.{0} (Subtype.{1} Real (fun (x : 
+@@ THM HadwigerNelson.ThreeColourCriterion.exists_maximal_of_torsion
+TYPE 2132668392 sha256=bfead718e68e27153fe8968b8804be020104e6e3687e3aabdfe2f3aea53c838a len=115513 forall (F : Subfield.{0} Real Real.instDivisionRing) [inst._@.data.fs131.in1.stmt.Copy.1090627074._hygCtx._hyg.10 : NumberField.{0} (Subtype.{1} Real (fun (x : 
+@@ THM HadwigerNelson.ThreeColourCriterion.exists_normOne_zero_of_card_ne_nine
+TYPE 2423088848 sha256=2c10685d4c8b0b1685ca42b6869c1cdbcf119551c3ba50d64d03e20c27ee7784 len=11373 forall {k : Type} [inst._@.data.fs131.in1.stmt.Copy.1119181560._hygCtx._hyg.3 : Field.{0} k] [inst._@.data.fs131.in1.stmt.Copy.1119181560._hygCtx._hyg.6 : Finit
