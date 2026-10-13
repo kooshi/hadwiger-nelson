@@ -1,0 +1,59 @@
+'HadwigerNelson.exists_proper_ae_eq_of_proper_on_conull' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.exists_proper_nullMeasurable_of_avoiding_cover' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.davies_lemma_B1_euclidean' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.davies_lemma_B1' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_proper_of_aeColouring' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_proper_of_nullMeasurable_weak' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.exists_aeColouring_of_nullMeasurable_proper' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.chiLebesgue_le_chiM' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.chromaticNumber_plane_le_chiLebesgue' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.nonempty_aeColouring_iff_exists_nullMeasurable_proper' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.chiM0_eq_chiLebesgue' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.colorable_iff_exists_nullMeasurable_proper' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+'HadwigerNelson.Plane.chromaticNumber_plane_eq_chiLebesgue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+'HadwigerNelson.Plane.chromaticNumber_euclidean_plane_eq_chiLebesgue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+@HadwigerNelson.exists_proper_ae_eq_of_proper_on_conull : ∀ {E : Type u_1} [inst : NormedAddCommGroup E]
+  [inst_1 : NormedSpace ℝ E] [FiniteDimensional ℝ E] [inst_3 : MeasurableSpace E] [BorelSpace E]
+  (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] {R : E → E → Prop},
+  (∀ (ξ x y : E), R x y → R (x + ξ) (y + ξ)) →
+    ∀ {k : ℕ} {c : E → Fin k},
+      MeasureTheory.NullMeasurable c μ →
+        ∀ {S : Set E},
+          μ Sᶜ = 0 →
+            (∀ x ∈ S, ∀ y ∈ S, R x y → c x ≠ c y) →
+              ∃ f, MeasureTheory.NullMeasurable f μ ∧ f =ᵐ[μ] c ∧ ∀ (x y : E), R x y → f x ≠ f y
+HadwigerNelson.Plane.chromaticNumber_plane_eq_chiLebesgue : (HadwigerNelson.unitDistance ℂ).chromaticNumber =
+  HadwigerNelson.Plane.chiLebesgue
+HadwigerNelson.Plane.chiM0_eq_chiLebesgue : HadwigerNelson.Plane.chiM0 = HadwigerNelson.Plane.chiLebesgue
+@HadwigerNelson.HasDensityOneAt.inter : ∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E]
+  [FiniteDimensional ℝ E] [inst_3 : MeasurableSpace E] [BorelSpace E] {μ : MeasureTheory.Measure E} [μ.IsAddHaarMeasure]
+  {s t : Set E} {x : E},
+  MeasureTheory.NullMeasurableSet t μ →
+    HadwigerNelson.HasDensityOneAt μ s x →
+      HadwigerNelson.HasDensityOneAt μ t x → HadwigerNelson.HasDensityOneAt μ (s ∩ t) x
+@HadwigerNelson.exists_translate_mem : ∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E]
+  [FiniteDimensional ℝ E] [inst_3 : MeasurableSpace E] [BorelSpace E] {μ : MeasureTheory.Measure E} [μ.IsAddHaarMeasure]
+  {V : E → Set E} (F : Finset E),
+  (∀ x ∈ F, MeasureTheory.NullMeasurableSet (V x) μ) →
+    (∀ x ∈ F, HadwigerNelson.HasDensityOneAt μ (V x) x) → ∃ ξ, ∀ x ∈ F, x + ξ ∈ V x
+@HadwigerNelson.exists_nullMeasurable_selector : ∀ {X : Type u_1} [inst : MeasurableSpace X]
+  {μ : MeasureTheory.Measure X} {k : ℕ},
+  0 < k →
+    ∀ {A : Fin k → Set X},
+      (∀ (i : Fin k), MeasureTheory.NullMeasurableSet (A i) μ) →
+        ∃ c, MeasureTheory.NullMeasurable c μ ∧ ∀ x ∈ ⋃ i, A i, x ∈ A (c x)

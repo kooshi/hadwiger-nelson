@@ -307,6 +307,7 @@ import Proofs.HadwigerNelson.Plane.SixRing.TwoPairs
 import Proofs.HadwigerNelson.Plane.WeakColouringOn
 import Proofs.HadwigerNelson.Plane.Radius
 import Proofs.HadwigerNelson.Plane.RadiusOutside
+import Proofs.HadwigerNelson.Plane.LebesgueNumber
 import Proofs.HadwigerNelson.Plane.CircleCrossing
 import Proofs.HadwigerNelson.Plane.OnePiece
 import Proofs.HadwigerNelson.Plane.ThreePiece
