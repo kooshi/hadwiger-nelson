@@ -229,3 +229,115 @@ control: aplus-names-only-es
   fault: python3 ../data/fs131/en1/bare_e_check.py 126-135 145-148 150-150 153-157 159-162 240-247 248-250 321-328
 
 Rests on it: EN1-SPCOR (§ Stage 5) and EN1-OFFPATH (§ Stage 6); the planner's leaves 11 and 12.
+
+## Stage 4 — SAVED (EN1-FROM-TWO and EN1-MRPLUS; and what MR⁺ carries)
+
+**Verdicts.** **EN1-FROM-TWO: TRUE** [hand; one mind; a composition] — for every real number field, PE-2(F) and EF_F⁺(F) give MR⁺(F), and
+the argument reads neither R-U, nor `E`, nor `Fin_S`, nor any Haar-null clause. **EN1-MRPLUS: TRUE in the scope row 120 already carries** —
+for every real number field `F` with `R_F = O′` (no stable dyadic place ramified in `F(i)/F`), with "finite measure" read as finite positive
+measure; at row 100's exception fields (ℚ(√5), ℚ(√17), ℚ(α)) it is a GAP exactly where MR is, at EF_F⁺'s model of the dual. The class of rows
+121 and 123 (`L(F) ≥ 5`) lies inside `R = O′` (FS100-EXC), so the scope costs the path nothing.
+
+### 4.1 The argument
+
+Let `τ` be a finite positive Borel measure on `R̂`, invariant under every `u ∈ U`, with `τ(T + A) = 0`.
+
+1. *PE-2* (FS100-PE2): `τ = a·m + τ′`, `a ≥ 0`, `τ′` a finite positive `U`-invariant measure with `h_{τ′}(u) = 0` for every `u ∈ U`.
+2. `a·m ≥ 0`, so `τ′ ≤ τ` on every Borel set; `T + A` is Borel (σ-compact); so `τ′(T + A) ≤ τ(T + A) = 0`.
+3. `U` holds a non-torsion element: `(3 + 4i)/5 ∈ U_ℚ ⊆ U_F`, and the roots of unity of `ℚ(i)` are `±1, ±i`. By 1 its entropy for `τ′` is 0, so
+   *EF_F⁺* (FS100-EFP) gives `τ′(R̂ ∖ (T + A)) = 0`.
+4. `τ′(R̂) = τ′(T + A) + τ′(R̂ ∖ (T + A)) = 0`, so `τ′ = 0` and `τ = a·m`.
+5. For `r ≠ 0` in `R`, `χ ↦ χ(r)` is a non-trivial character of the compact group `R̂`, so `∫ χ(r) dm = 0`; hence `∫ χ(r) dτ = 0`. ∎
+
+**Against the record.** These are FS100-MR (a)'s three lines — "`τ = a·m + τ′`, `τ′ ≤ τ` carried by `T + A ⊆ E`, `τ(E) = 0`, so `τ′ = 0`"
+(`plans/FS100-derivation.md` l. 201) — with "`τ(E) = 0`" used only as "`τ(T + A) = 0`"; the entry itself says "MR uses neither R-U nor
+`m(E) = 0`", X01D § 4.1 "(`m(E) = 0` is not needed.)", and the plan's ladder, link L3, "MR does not need R-U … nor `m(E) = 0`". And they are the
+kernel proof's lines 198–209: `hTAc` is step 3, `hE'` with `measure_mono_null I.TA_subset_E` is step 2, `hzero` step 4, `hHF` step 5. The
+clause `hHE` is bound at l. 198 and occurs nowhere else (control `node-m-never-uses-haar-null`).
+
+**What "alone" leaves standing** (none of it a hand result of ours beyond the two named):
+- *The scope of EF_F⁺.* Its three derivations model the dual as `W/Λ`, which needs `R = O′` (FS100-EFP, "Scope"); PE-2 needs no such thing
+  ("No `R = O′`", the ladder's L1). So MR⁺(F) is derived exactly where EF_F⁺(F) is.
+- *One set under two descriptions.* EF_F⁺'s proofs name `T + A` inside their model — "`T = L/R^∨`, `A` = image of `L_∞`" (X01D § 2.0), "so
+  `x ∈ T + A` iff a lift has its finite part in the diagonal `L`" (FS105-B-M1) — while A⁺ reads `T + A` as the continuity group of `τ′_∅`
+  (N1 (a)). Both describe the literal set of torsion-plus-archimedean characters; the first identification is a step of EF_F⁺'s proof (its
+  § 2.0), the second is N1 (a) at `S = ∅`. A formal MR⁺ must carry one definition of `T + A` through both.
+- *A point for the kernel lane, not a ruling on its statements.* The Haar-null clause is unused by the proof of node M, but it is a conjunct of
+  the hypothesis `Interface.PE2` as that `Prop` stands (l. 179, "`τH I.E = 0`"). So "`Haar(E) = 0` is off the path" is true of the mathematics
+  and of a PE-2 stated without the clause; to discharge the present `Prop` at `E := T + A` one would still prove `m(T + A) = 0`, which is N1 (c)
+  at `S = ∅`.
+
+### 4.2 The readings of "finite measure"
+
+For positive measures the sentence is § 4.1's. For a signed or complex `τ` with `|τ|(T + A) = 0` it follows from the positive case (the Jordan
+parts of `Re τ` and `Im τ` are `U`-invariant, by uniqueness of the decomposition, and null on `T + A`). Under the literal value reading —
+`τ` signed, `τ(T + A) = 0` — it is **false** over every real number field: `ν = λ_r − λ_{r′}`, the difference of two of FS100-EFX's circle
+measures, is `U`-invariant, has `ν(T + A) = 1 − 1 = 0`, and `∫ χ(1) dν = J₀(2πr) − J₀(2πr′)`, which is `0.776243` at `r = 1/4`, `r′ = 1/2`
+(control `signed-reading-fails`). This is J45's own caution (§ 4.2, "Readings") moved from `E` to `T + A`.
+
+### 4.3 What MR⁺ carries: MR and R-U in one sentence
+
+The recognition predicted it (§ 2.3 item 2). *MR⁺(F) ⟹ MR(F)*: `τ(E) = 0` gives `τ(T + A) = 0`. *MR⁺(F) ⟹ R-U(F), given `m(E) = 0`*: for a
+finite positive `U`-invariant `ν`, the restriction `ν|_{R̂∖(T+A)}` is `U`-invariant and null on `T + A`, so it is `a·m` (MR⁺ and Fourier
+uniqueness), and `ν(E ∖ (T + A)) = a·m(E ∖ (T + A)) ≤ a·m(E) = 0`. *MR(F) ∧ R-U(F) ⟹ MR⁺(F)*: if `τ(T + A) = 0`, R-U gives
+`τ(E ∖ (T + A)) = 0`, so `τ(E) = 0` and MR applies. So MR⁺ is not a lighter sentence than MR: it is MR with R-U folded in. It follows a second
+way from two held results, row 120 and J45-RU, with no re-reading of EF_F⁺ — a check on its truth, not a route for the kernel, since that route
+is the one that reads R-U.
+
+derivation: EN1-FROM-TWO
+  statement: MR⁺(F) follows from PE-2 and EF_F⁺ alone: EF_F⁺'s conclusion is already about T + A (a zero-entropy invariant measure is carried by T + A), so for an invariant τ null on T + A, τ = a·m + τ′ (PE-2), τ′ ≤ τ is null on T + A and, by EF_F⁺, null off it, so τ′ = 0.
+  uses only: PE-2's decomposition with `a ≥ 0` and `τ′ ≥ 0` (so `τ′ ≤ τ`); EF_F⁺'s conclusion `τ′(R̂ ∖ (T + A)) = 0` at one non-torsion element of
+    zero entropy; that `(3 + 4i)/5 ∈ U_F` is not torsion; that `T + A` is Borel; that Haar measure's Fourier coefficients vanish off 0
+  not claimed: PE-2 or EF_F⁺ themselves (FS100-PE2 over `[EinsiedlerLindenstrauss2022]` Thm 1.2, external; FS100-EFP, which needs `R = O′`); that
+    the kernel's `Interface.PE2` can be discharged at `E := T + A` without `m(T + A) = 0` — that `Prop` carries the Haar-null clause as a conjunct
+    (§ 4.1); that the measure may be signed with only `τ(T + A) = 0`
+  argument: § 4.1 The argument
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `τ = m`, Haar probability: `U`-invariant, `m(T + A) = 0` (J45-N1 (c) at `S = ∅` — used for this model only), `a = 1`, `τ′ = 0`; and
+    `τ = 0`. A measure the hypothesis excludes: FS100-EFX's circle measure, carried by `A`, with coefficient `J₀(2πρ)` at 1
+  prior art: known: FS100-MR (a) (`plans/FS100-derivation.md` l. 201) with `τ(E) = 0` read as `τ(T + A) = 0`; the kernel's `Interface.mr_of_pe2_efPlus`
+  handoff: de Bruijn — the planner's leaf 22 as it stands: node M at `E := T + A`, from leaves 20 and 21
+
+control: node-m-never-uses-haar-null
+  of: EN1-FROM-TWO — the kernel proof it was read from: in `Interface.mr_of_pe2_efPlus` the Haar-null clause is bound and used nowhere
+  run: python3 ../data/fs131/en1/unused_check.py Interface.mr_of_pe2_efPlus hHE
+  expect: 1
+  fault: python3 ../data/fs131/en1/unused_check.py Interface.mr_of_pe2_efPlus hHF
+
+derivation: EN1-MRPLUS
+  statement: MR⁺(F): every finite rotation-invariant measure on the dual of ℤ[U_F] that gives T + A measure 0 has every Fourier coefficient off 0 equal to 0.
+  uses only: EN1-FROM-TWO; FS100-PE2 (every real number field) and FS100-EFP (every real number field with `R = O′`) at their grades
+  not claimed: MR⁺(F) at a field with a stable dyadic place ramified in `F(i)/F` (ℚ(√5), ℚ(√17), ℚ(α)) — a GAP at EF_F⁺'s model of the dual, as for
+    MR (row 120); the signed reading with only `τ(T + A) = 0`, which is false (§ 4.2); that it is new — it is row 120 and J45-RU in one sentence
+    (§ 4.3); that the kernel states it
+  argument: § 4.1 The argument
+  verdict: derived
+  grade: derived from: EN1-FROM-TWO
+  minds: 1
+  model: `F = ℚ(√47)`: its dyadic place splits in `F(i)` (`47 ≡ 7 mod 8`), so `R = O′`; `τ = m` satisfies the hypothesis and the conclusion
+  prior art: known: row 120 (MR(F)) with J45-RU; `[OAIMath2026]` Thm 2.3 is the nearest in print and is for the algebraic plane, not a number field (row 120's cell)
+  handoff: de Bruijn — the one closed sentence of the planner's leaf 2, for `F` with `R_F = O′`, with "measure" a positive measure
+
+control: signed-reading-fails
+  of: EN1-MRPLUS — the not-claimed line: a signed measure with value 0 on `T + A` and a non-zero coefficient at 1
+  run: python3 ../data/fs131/en1/j0_check.py 0.25 0.5
+  expect: 0.776243
+  fault: python3 ../data/fs131/en1/j0_check.py 0.25 0.25
+
+derivation: EN1-EQUIV
+  statement: for a real number field F, given Haar(E) = 0, MR⁺(F) holds if and only if MR(F) and R-U(F) both hold.
+  uses only: `T + A ⊆ E`; that `T + A` is Borel and `U`-invariant; Fourier uniqueness on `R̂` (a measure whose coefficients vanish off 0 is a
+    Haar multiple); `m(E) = 0` in the direction MR⁺ ⟹ R-U only
+  not claimed: that either side holds at row 100's exception fields; the direction MR⁺ ⟹ R-U without `m(E) = 0`
+  converse: § 4.3 What MR⁺ carries: MR and R-U in one sentence
+  argument: § 4.3 What MR⁺ carries: MR and R-U in one sentence
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `F = ℚ(√47)`, where all three sentences are held (row 120; J45-RU; EN1-MRPLUS)
+  prior art: known: X12B § 2.1's remark after X12B-E ("for invariant measures 'carried by `E`' and 'carried by `T + A`' are the same statement"); FS100-MR (c)
+  handoff: none — a relay-result for EN1-OFFPATH and the report: it says what leaves the path is R-U's separate proof, not R-U's content
+
+Rests on these: EN1-SPCOR and EN1-OFFPATH; the planner's leaves 2 and 22.
