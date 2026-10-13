@@ -9,7 +9,22 @@ second mind has read any of it.*
 
 *(one line each, grade per `CLAUDE.md` § Notation; filled in as the stages land)*
 
-- (stage 1: none — the readback)
+*All [hand], one mind, no second mind; the two computed checks are complete enumerations of small finite sets. None is claimed new.*
+
+- **EN2-MEAN** — the asker's scheme (Markov on the information function, a subsequence with summable bad sets) — **not derived: stalls at the choice of the subsequence** — § 3.0
+- **EN2-MEAN-WINDOW** — two runs of Step 3 at heights `M₁ ≤ M₂`, thinnesses `δ₁ ≥ δ₂`: `∏|z|_v ≤ (16ε)^{[L:ℚ]}·M₁³·M₂³·δ₁`; the pair `(M, M^c)` closes when `K > 3 + 3c` — [hand] — § 3.1
+- **EN2-MEAN-SCHEME** — Markov's bounds are summable along an admissible sequence of scales iff `Σ_n H_n/n² < ∞` — [hand] — § 3.2, § 3.2′
+- **EN2-MEAN-RATE** — a shift-invariant measure of entropy zero with `H_n ≥ (6 log 2/π²)·n/(1 + log₂ n)` (a mixture of de Bruijn orbits) — [hand; one step computed exactly, control `debruijn-marginals`] — § 3.3
+- **EN2-MEAN-MODEL** — functions `I_n ≥ 0`, non-decreasing in `n`, of mean `o(n)`, with no point good along any admissible sequence — [hand] — § 3.4
+- **EN2-CNT** — at most `(2a)^{θn + k}·g^{2n/k}` words of length `n` with at most `θn` bad starts — [hand; checked by enumeration on 228 cases, control `count-names`] — § 3.5
+- **EN2-ZE** — rate zero puts no atom of `ξ_n` below `e^{−βn}` on a set of measure `≥ 1 − η`, for every large `n`; no ergodicity; reads one maximal inequality — [hand] — § 3.5
+- **EN2-L31** — X01D's Lemma 3.1′, statement unchanged, with part (iii) of its proof resting on EN2-ZE — [hand] — § 3.6
+- **EN2-DECOMP** — X02D § 3.2's conclusions on the canonical decomposition, with no uniqueness of an ergodic decomposition — **derived** — § 4.0
+- **EN2-LEB-INV**, **EN2-AC-ERG**, **EN2-SING-COMP** — the parts of the Lebesgue decomposition are invariant; an invariant measure absolutely continuous to an ergodic one is a multiple of it; the canonical components of a measure singular to `m` are not `m` — [hand] — § 4.2
+- **EN2-PE2-SING** — the singular part of `τ` with respect to Haar measure is `U`-invariant of entropy zero for every `u`, and `τ − τ_s = a·m`, `a = max{c : c·m ≤ τ}` — [hand, given Lemma Γ and Lemma W by statement] — § 4.2
+- **EN2-PE2** — PE-2 and its ergodic form, the statement of FS100-PE2 unchanged — [derived from EN2-PE2-SING] — § 4.2, § 4.3
+- **EN2-EQUIV** — `u_*κ(x) = κ(ux)` almost everywhere, for the canonical kernel on the `Γ`-invariant sets (true, and not needed) — [hand] — § 4.4
+- **EN2-PE2-MAX** — PE-2's first sentence with `a` the largest Haar multiple below `τ`, reading neither the Lebesgue decomposition nor the ergodicity of Haar measure — [hand, given Lemma Γ and Lemma W by statement] — § 5.2
 
 ---
 
@@ -339,8 +354,10 @@ sequence `w_k^∞` — a shift-invariant measure on `{0,1}^ℤ` carried by one f
 5. *Even the true bad sets are not summable along the dyadic chain at a fixed rate.* Let `n = 2^J`, `β < log 2`,
    `q_n = Σ_{k ≥ J} p_k ≥ (6/π²)/J`. The words charged by some `μ_k` with `k < J` number at most `Σ_{k<J} 2^{2^k} ≤ 2^{1 + n/2}`; every
    other word `w` has `μ[w] = q_n·2^{−n} < e^{−βn}`. So `μ{I_n > βn} ≥ q_n·(1 − 2^{1 − n/2})`, and the sum over `J` diverges like the
-   harmonic series. The union of these bad sets over `J ≥ J₀` nevertheless has measure at most `q_{2^{J₀}} → 0`: they are nested, and
-   a union bound cannot see that.
+   harmonic series. The union of these bad sets over `J ≥ J₀` is nevertheless small: a point of the `k`-th orbit is good at every
+   scale `n` with `e^{−βn} ≤ p_k/P_k`, so for large `J` the bad set at `2^J` is carried by the orbits with `k > J − C` (`C` depending
+   on `β` only), and the union is carried by the orbits with `k > J₀ − C`, of mass tending to `0`. The bad sets are nested up to a
+   shift, and a union bound cannot see that.
 
 derivation: EN2-MEAN-RATE
   statement: There is a shift-invariant Borel probability `μ` on `{0,1}^ℤ`, of entropy zero, whose partition by the letter at time 0
@@ -810,3 +827,187 @@ derivation: EN2-DECOMP
 ### 4.6 Would-have-searched-here log
 
 - None.
+
+---
+
+## Stage 5 — SAVED (for the kernel lane: what each module reads; a leaner variant for M7; the look-back; drafts)
+
+*Every "is the statement" below is said of a stored statement I read in the release's source (§ 1.2), not of a name. I built nothing
+and ran nothing there; "proves" means what the asker's survey means by it (a `theorem` with a proof in a file with no `sorry` and no
+`axiom` by search), and for the three maximal-inequality files I read the proofs as well.*
+
+### 5.1 Module M8 (EF_F⁺): the classical statements Lemma 3.1′ needs, in place of Shannon–McMillan–Breiman
+
+| # | the statement, with its hypotheses | where it is | is the named declaration that statement? |
+|---|---|---|---|
+| 1 | *The rate of one partition is zero.* For a probability `μ` preserved by `T` and a measurable `P : Y → Fin k`: if the entropy of `T` is `0` then `liminf_n H_n/n = 0`, hence `inf_n H_n/n = 0` | by definition, in either library: this library's `ksEntropy` is a supremum over partitions of a `liminf`; the release's `measureEntropy` is `⨆ k, ⨆ P : Y → Fin k, ⨆ _, ofReal (observationEntropyRate μ T P)` with `observationEntropyRate := sInf {H_N/N : N ≥ 1}` (`PrimePackets/ShannonEntropy.lean` ll. 276–299) | yes — it is the definition. **No limit theorem is read**: EN2-ZE is stated with the infimum on purpose |
+| 2 | *A large block length with small `H_k/k`.* From a `liminf` equal to `0`: immediate (infinitely many `k`). From an infimum equal to `0`: by subadditivity, `H_{jk} ≤ j·H_k` | the release's `orbitEntropy_subadditive` (ll. 257–260): for `[IsProbabilityMeasure μ]`, `MeasurePreserving T μ μ`, fibres of `P` measurable, `Subadditive (fun N => observationEntropy μ (orbitName T P N))`; or its `tendsto_observationEntropyRate` (ll. 281–285) | yes, each is the statement. Needed only if the module reads the release's `sInf` form; with this library's `liminf` form nothing is needed |
+| 3 | *Markov on the terms of one `H_k`.* For a probability vector `p` on a finite set and `c > 0`: `Σ_{a : p a < e^{−c}} p a ≤ H(p)/c` | **fresh**; two lines over `Real.negMulLog` (each term of `H` is non-negative, and a term with `0 < p a < e^{−c}` is at least `c·p a`) | not in the release by name; not looked for further |
+| 4 | *The maximal ergodic inequality for the indicator of a set.* For a finite measure `μ`, `MeasurePreserving T μ μ`, a measurable `A` and `δ > 0`: `δ·μ{x : ∃ n, δ·n < #{j < n : T^j x ∈ A}} ≤ μ(A)` | **the release**, `DukePrimeDegree/Dynamics/MaximalOccupation.lean` ll. 49–52, `excessiveOccupation_measure_bound`: `(μ : Measure Y) [IsFiniteMeasure μ] {T : Y → Y} (hT : MeasurePreserving T μ μ) {A : Set Y} (hA : MeasurableSet A) {δ : ℝ} (hδ : 0 < δ) : ENNReal.ofReal δ * μ (excessiveOccupation T A δ) ≤ μ A`, with `excessiveOccupation T A δ := {x | ∃ n : ℕ, δ*n < (visitCount T A n x : ℝ)}` and `visitCount T B N x := ((Finset.range N).filter fun j => T^[j] x ∈ B).card` (`PrimePackets/InverseEntropy.lean` l. 248) | **yes, it is the statement, word for word.** It is not among the declarations the asker's § 4.2 names (the survey covered `PrimePackets/` and `DukePrimeDegree/Entropy/`; this is `DukePrimeDegree/Dynamics/`). Under it: `finite_hopf_maximal` (`Dynamics/HopfMaximal.lean`, 107 lines), whose proof I read: it uses Mathlib's `birkhoffSum` and integrals only. An equivalent form with the good set handed over: `exists_discrete_average_good_set` (`Geometry/DiscreteMaximal.lean` ll. 51–58): a measurable `G` with `μ Gᶜ ≤ ofReal ((∫ g)/c)` and `∀ x ∈ G, ∀ n, birkhoffSum T g n x ≤ c·n` |
+| 5 | *The count*, EN2-CNT | **fresh**; combinatorics on `Fin n → α` | — |
+| 6 | a geometric series; a countable union bound | Mathlib | — |
+
+**Imports, for whoever ports #4.** `HopfMaximal.lean` imports `Geometry/LeafLusinGoodSet` (the family's geometry) and
+`Mathlib.Dynamics.BirkhoffSum.Basic`; nothing in the 107 lines I read uses the first. `MaximalOccupation.lean` imports `HopfMaximal`
+and `PrimePackets/InverseEntropy` (for `visitCount`, `visitCount_cast`, `measurable_visitCount`), which imports `IdealNorms`. So the
+cone as declared is large and the cone as used is two short files and three lemmas; computing it is the port's first step, and
+writing the 230 lines fresh over Mathlib is the fallback. This library's Mathlib has no maximal or pointwise ergodic theorem that I
+found by name (`Mathlib/Dynamics/BirkhoffSum/`: four files).
+
+**No longer read by M8.** Shannon–McMillan–Breiman (in neither library); Egorov (Mathlib, not needed); Jacobs's formula and the
+ergodic decomposition for the single map `u*`; conditional information; the martingale theorem. **Of the two declarations the
+asker's § 4.2 lists beside Shannon–McMillan–Breiman, neither is EN2-ZE.** `measureEntropy_eq_zero_of_good_names`
+(`Entropy/EntropyCover.lean` ll. 50–60) is its converse: finite sets `G N` of names carrying all but `ε` of the mass with
+`log #(G N) ≤ ε·N`, eventually, for every partition and `ε`, give entropy zero. `measureEntropy_lower_of_good_atoms`
+(`ShannonEntropy.lean` ll. 435–444), applied to the sets `A_N` of points whose atom is smaller than `e^{−βN}` (each name-cell meets
+`A_N` in mass at most `e^{−βN}`), gives at entropy zero only that `μ(A_N)` is below any `w > 0` for infinitely many `N` — less than
+Markov's inequality gives, and not a set good at every large scale.
+
+**What the planner types for the module**, in sentences: (a) EN2-CNT as stated; (b) EN2-ZE as stated, for `MeasurePreserving T μ μ`,
+a probability `μ`, `P : Y → Fin k` with measurable fibres, hypothesis "the rate of `P` is `0`" in the library's own form; (c)
+EN2-L31, which is X01D's Lemma 3.1′ unchanged, proved from X01D's parts (i), (ii), (iv) and (b) at `T = rot u*`. Steps 3–7 are as
+X01D has them. If the planner wants scales in a ratio other than `M, M²`, EN2-MEAN-WINDOW gives the exponent: `K > 3 + 3c`.
+
+### 5.2 Module M7 (PE-2): the classical statements the step from `Γ` to `U` needs, and a variant that needs fewer
+
+**On § 4.2's route (the Lebesgue decomposition).**
+
+| # | the statement, with its hypotheses | where it is | is the named declaration that statement? |
+|---|---|---|---|
+| 1 | *The Lebesgue decomposition with uniqueness*, for finite measures on a measurable space | Mathlib (`Measure.singularPart`, `Measure.rnDeriv`, the uniqueness lemmas; `MeasurableEmbedding.singularPart_map` seen by name) | not the release's; Mathlib's statements not read by me beyond their names |
+| 2 | *T1, existence, canonical form.* For a countable group `H` acting on a standard Borel space `Y` (non-empty), each `g • ·` preserving a probability `μ`: with `κ` the conditional-expectation kernel of `μ` on the σ-algebra of sets invariant under every `g`, `∫ κ dμ = μ` and `κ(x)` is `H`-invariant and `H`-ergodic for almost every `x` | the release, `PrimePackets/ErgodicDecomposition.lean` ll. 127–134, `action_ergodic_decomposition` (quoted in § 1.4) | **yes, it is the statement** — both conjuncts, with invariance of the components inside `ErgodicSMul`. Used at `H = Γ`, `Y = Dual F`, `μ =` the normalised singular part. **Its uniqueness is not read anywhere** |
+| 3 | *A mixture of invariant measures of entropy zero has entropy zero.* For a probability `τ` on `Z`, a Markov kernel `κ : Z → Y`, a measurable `T`, `κ z` preserved by `T` and of entropy zero for `τ`-almost every `z`: the entropy of `T` for `κ ∘ₘ τ` is zero | the release, `PrimePackets/EntropyMixtures.lean` ll. 499–504, `measureEntropy_kernel_zero` | **yes, it is the statement.** Used at `Z = Y` with the invariant σ-algebra, `τ = μ.trim _`, the same typing as #2's own conclusion |
+| 4 | *Haar measure on `R̂` is ergodic for multiplication by one non-torsion unit vector* | **fresh** (the Fourier argument: X02D l. 200–201) | — it needs the characters to span a dense subspace of `L²(m)` (Stone–Weierstrass on the compact dual), which is the heaviest leaf on this route |
+| 5 | *An invariant measure absolutely continuous to an ergodic one is a multiple of it* (EN2-AC-ERG); *the parts of the Lebesgue decomposition are invariant* (EN2-LEB-INV); *the components of a measure singular to `m` are not `m`* (EN2-SING-COMP) | fresh, short, over #1 and #2 | — |
+
+**A variant that reads neither the Lebesgue decomposition nor the ergodicity of Haar measure.** § 4.2 identified the constant:
+`a = max{c ≥ 0 : c·m ≤ τ}`. Start from there instead.
+
+1. *The largest Haar multiple.* For a finite measure `τ`, the set `{c ≥ 0 : c·m ≤ τ}` (setwise inequality on Borel sets) contains
+   `0`, is bounded by `τ(X)` and is closed; let `a` be its maximum. `τ′ := τ − a·m` is a finite positive measure, `U`-invariant
+   because `τ` and `m` are, and **no `c > 0` has `c·m ≤ τ′`**.
+2. *The Haar set of the kernel is null.* Fix an admissible `Γ`; suppose `τ′ ≠ 0`; `λ := τ′/τ′(X)`; `κ` the conditional-expectation
+   kernel of `λ` on `𝓘_Γ`. For `r ∈ R ∖ {0}` let `f_r(x) := ∫ χ(r) dκ(x)(χ)`, an `𝓘_Γ`-measurable function and a version of
+   `E_λ[ev_r | 𝓘_Γ]`, and `A := {x : f_r(x) = 0 for all r ≠ 0}`, in `𝓘_Γ` (`R` is countable). The measure `λ|_A` has Fourier
+   coefficient `∫_A ev_r dλ = ∫_A f_r dλ = 0` at each `r ≠ 0` (the defining property of conditional expectation, `A ∈ 𝓘_Γ`) and
+   mass `λ(A)`; a finite measure on `R̂` is determined by its Fourier coefficients (X02D's T4, which Lemma Γ reads already), so
+   `λ|_A = λ(A)·m`. Hence `λ(A)·τ′(X)·m ≤ τ′`, and by step 1 `λ(A) = 0`.
+3. *Entropy zero.* For `λ`-almost every `x`: `x ∉ A`, so `κ(x)` — a probability — has a non-zero Fourier coefficient off `0` and is
+   not `m`; it is `Γ`-invariant and `Γ`-ergodic (the release's theorem); Lemma Γ gives `h_{κ(x)}(γ) = 0` for all `γ ∈ Γ`; the
+   mixture lemma gives `h_{τ′}(γ) = 0`. Lemma W and the torsion case finish as before. ∎
+
+The inputs of this variant: Haar measure exists and is `U`-invariant; T4; the release's two theorems (#2, #3 above); Mathlib's
+conditional expectation; Lemma Γ and Lemma W. It proves PE-2's first sentence — which is what the typed `EntropySplit` says — and
+not the ergodic form, nor that `τ′ ⟂ m`; for those § 4.2–4.3 stand. Given the ergodicity of `m` the two routes produce the same `a`
+and the same `τ′` (§ 4.2, "What `a` is").
+
+derivation: EN2-PE2-MAX
+  statement: For every real number field `F` and every `U`-invariant finite positive measure `τ` on `R̂`, the set of reals `c ≥ 0`
+    with `c·m ≤ τ` has a largest element `a`, and `τ − a·m` is a positive `U`-invariant measure with `h_{τ − a·m}(u) = 0` for every
+    `u ∈ U`.
+  uses only: `u_*m = m`; that a finite measure on `R̂` is determined by its Fourier coefficients; the conditional-expectation kernel
+    of a `Γ`-invariant probability on the `Γ`-invariant σ-algebra, with the release's two properties (it integrates to the measure;
+    its values are almost surely `Γ`-invariant and `Γ`-ergodic) and the defining property of conditional expectation on one
+    invariant set; Lemma Γ and Lemma W by statement; that a mixture of invariant measures of entropy zero has entropy zero; that a
+    torsion `u` has entropy zero
+  not claimed: the ergodic form of PE-2; that `τ − a·m` is singular to `m` (true by EN2-PE2-SING, which reads the ergodicity of
+    `m`; this argument does not show it); Lemma Γ and Lemma W themselves
+  argument: § 5.2 Module M7
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `τ = m + λ_ρ` (EN2-PE2-SING's model): `a = 1`, since `c·m ≤ m + λ_ρ` forces `c ≤ 1` on the complement of the `m`-null set
+    carrying `λ_ρ`; `τ − m = λ_ρ`
+  prior art: known — see EN2-PE2-SING; not searched
+  handoff: de Bruijn — the route to `entropySplit` with the fewest classical inputs: no Lebesgue decomposition, no ergodicity of
+    Haar measure, no uniqueness of an ergodic decomposition, no decomposition for `U`
+
+**Two points of typing the planner will meet** (sentences, not Lean). (i) The typed `EntropySplit` asks for a *probability* `ρ` of
+entropy zero with `τ = a•m + b•ρ`; when `τ′ = 0` take `b = 0` and `ρ` the point mass at the trivial character (rotation-invariant;
+every name-cell has mass `0` or `1`, so its entropy is zero). (ii) It quantifies over `m` with `IsHaarFourier m`; both routes use one
+such `m` throughout, and by T4 there is only one.
+
+**No longer read by M7.** The uniqueness of the ergodic decomposition (the asker's "formalize fresh" item); the ergodic
+decomposition for `U`; the measurability of `{m}` in a space of measures; on the variant, the ergodicity of Haar measure.
+**Still read:** T1's existence in the release's form; T2 and T4 inside Lemma Γ (not this job's question); T3's consequence.
+
+### 5.3 The look-back
+
+- **Could each have been foreseen?** EN2-ZE: yes, by a coder — a source of rate zero has a short codebook, and no code is beaten by
+  more than a logarithm; the surprise is only that Markov's inequality, which the asker reached for, is the right tool at one block
+  length and the wrong one across scales. EN2-PE2-SING: yes, by anyone asked "what are the two parts canonically?" — the
+  absolutely continuous and the singular. X02D reached the same two parts through a measure on a space of measures.
+- **Do they deform into neighbours?** EN2-ZE at entropy `h > 0` wants the upper half of the entropy theorem and its step 2 fails
+  (Markov gives `h/(h + γ)`); with an ergodic theorem in place of Markov it is the covering proof of that theorem. With the
+  release's `measureEntropy_eq_zero_of_good_names` it is one direction of a characterisation of entropy zero by eventually-few
+  names. EN2-PE2-SING with `m` replaced by any `U`-ergodic invariant probability `m₀` and "Lemma Γ" by "every `Γ`-ergodic measure
+  other than `m₀` has property `𝒫`", for a property closed under mixtures: the singular part with respect to `m₀` has `𝒫`.
+- **What else does the home say?** That `a = max{c : c·m ≤ τ}` and `τ′ ⟂ m` (drawn, § 4.2). That for a `U`-ergodic `ν`, `ν = m` or
+  `ν ⟂ m` (drawn, § 4.3). Not drawn: whether every invariant measure of entropy zero for all `u` is singular to `m` — it needs
+  Haar measure to have positive entropy for some `u`, which nothing on this path reads.
+- **Is it new, in the new words?** Not searched, and nothing here is claimed new (the claim list's own *not claimed*). Both
+  arguments are textbook material rearranged; the sources named are recalled, not read.
+- **How it was found.** EN2-MEAN: by taking the asker's scheme seriously enough to compute its window and its summability
+  (§§ 3.1–3.2), finding the obstruction exact, and then asking what every measure of entropy zero carries (few names) instead of
+  what a failure would carry (a slow rate); a side attempt to do without the chain of scales (one scale and the dynamics on a
+  tube) was killed by Haar measure. EN2-DECOMP: by writing the step for a measure theorist with the words "ergodic decomposition"
+  struck; and the variant of § 5.2 by reading what constant the Lebesgue route had identified.
+
+### 5.4 Drafts for files I do not write
+
+**A dated note for `plans/FS100-derivation.md`, to follow the paragraph of FS100-EFP** (the original text stands; nothing in it is
+wrong):
+
+> *Dated note, 2026-10-13 (FS131-EN2; `plans/FS131-EN2-derivation.md` §§ 3.5–3.6).* Lemma 3.1′'s proof need not read
+> Shannon–McMillan–Breiman, Jacobs's formula or Egorov. Its part (iii) follows from EN2-ZE — for a measure-preserving map and a
+> finite partition of rate zero, a set of measure near one on which no atom of `ξ_n` is smaller than `e^{−βn}` for every large `n` —
+> whose inputs are Markov's inequality at one block length, a count of words (EN2-CNT) and the maximal ergodic inequality for the
+> indicator of a set. [hand], one mind. The statement of EF_F⁺ and every other step are unchanged.
+
+**A dated note for `plans/FS100-derivation.md`, to follow the paragraph of FS100-PE2:**
+
+> *Dated note, 2026-10-13 (FS131-EN2; `plans/FS131-EN2-derivation.md` §§ 4.1–4.3, § 5.2).* The step from `Γ` to `U` need not read
+> the uniqueness of the ergodic decomposition, nor an ergodic decomposition for `U`, nor that `U` permutes the `Γ`-components. With
+> `a = max{c : c·m ≤ τ}`, `τ′ = τ − a·m` is the singular part of `τ` with respect to `m`; for each admissible `Γ` its canonical
+> `Γ`-components are almost surely not `m`, and Lemma Γ with the mixture lemma gives entropy zero (EN2-PE2-SING, EN2-PE2-MAX).
+> [hand], one mind. In X02D § 3.2 the uniqueness cited at l. 205 is read by no later step. PE-2's statement is unchanged; a little
+> more holds: `τ′` may be taken singular to `m`.
+
+**For `plans/FS131-EN1-derivation.md` § 7.2** (a pointer, to follow its last sentence): "Taken by FS131-EN2: the scheme is summable
+along an admissible sequence if and only if `Σ_n H_n/n² < ∞` (EN2-MEAN-SCHEME), and the deduction needs no almost-everywhere
+convergence theorem — one maximal inequality (EN2-ZE)."
+
+**For the asker's record** (the planner's own file; a note, not an edit): its § 4.2 rows "T1" and "Shannon–McMillan–Breiman" and its
+§ 4.4 bullets for M7 and M8 are answered by § 5.1 and § 5.2 here; the release's `excessiveOccupation_measure_bound` joins the port
+list of M0 or is written fresh in M8.
+
+**`plans/GROKKING-INSTANCES.md`, § G79, a new instance, verbatim:** "FS131-EN2 (2026-10-13). The wall arrived as a counterexample's
+invariant — 'a summable rate along a geometric sequence, which zero entropy does not supply' (`plans/FS131-EN1-derivation.md`
+§ 7.2) — and sharpening it kept it a wall (EN2-MEAN-SCHEME: summable iff `Σ H_n/n² < ∞`). What moved the question was an invariant
+every measure of entropy zero carries: at one block length most of the mass sits on few names, and long names are concatenations of
+short ones (EN2-ZE). Source: `plans/FS131-EN2-derivation.md` § 2.1, § 3.5."
+
+**`plans/GROKKING-INSTANCES.md`, § G92, a new instance, verbatim:** "FS131-EN2 (2026-10-13). Two proofs read more than their
+conclusions consume. X02D § 3.2 cites the uniqueness of the ergodic decomposition three times; one citation is idle and the other
+two are consumed only as 'the non-Haar components are not Haar' — the step is the Lebesgue decomposition with respect to Haar
+measure (EN2-PE2-SING), and does not use that `U` is abelian. X01D's Lemma 3.1′ cites Shannon–McMillan–Breiman and consumes its
+upper half at entropy zero on one set (EN2-ZE). Found by listing, per citing line, what is taken from the theorem
+(`plans/FS131-EN2-derivation.md` §§ 1.3–1.4)."
+
+**`BIBLIOGRAPHY.md`, reading status of `[OAIMath2026]`, family 015, to follow the planner's drafted sentence:** "FS131-EN2
+(2026-10-13) read in full, statements and proofs, `DukePrimeDegree/Dynamics/HopfMaximal.lean`, `Dynamics/MaximalOccupation.lean` and
+`Geometry/DiscreteMaximal.lean` (the finite Hopf maximal inequality and its form for visits to a set); stored statements of
+`action_ergodic_decomposition`, `condExpKernel_ae_constant`, `measureEntropy_kernel_zero`, `orbitEntropy_subadditive`,
+`tendsto_observationEntropyRate`, `measureEntropy_lower_of_good_atoms`, `measureEntropy_eq_zero_of_good_names`; nothing built."
+**Rows for works named from memory and not held** are listed in the report as prior-art debts, not drafted as rows: nothing in this
+record rests on them.
+
+### 5.5 Predictions
+
+None was registered before the verdicts (the brief asks for none), so none is scored. Said for the record: before computing § 3.2 I
+expected the asker's scheme to stall, and before § 4.2 I expected the canonical route to work with equivariance as the asker
+described it; the second expectation was wrong in the direction of *less being needed*.
+
+### 5.6 Would-have-searched-here log (whole job)
+
+- None. No step here is one a search could decide.
