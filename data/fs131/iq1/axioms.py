@@ -9,6 +9,9 @@
                            (no build needed: the interim check, elaborated by `lake env lean`).
   axioms.py check <output> read the print: every module theorem must be printed, on a subset of the standard three;
                            the two controls must print `sorryAx` and the planted axiom.  exit 0 iff so.
+  axioms.py block          write data/fs131/iq1/audit-block.lean: the draft of the module's block for
+                           `scripts/Axioms.lean` (CLEAN section), one record per public theorem — a draft for the
+                           landing, not applied here
 Run between:  data/fs131/iq1/lean1.sh data/fs131/iq1/lean/Axioms.lean   (its output: data/fs131/iq1/logs/Axioms.out)
 """
 import sys, re, pathlib
@@ -69,7 +72,20 @@ def check(path):
     print(f"RESULT: {'PASS' if ok else 'FAIL'} — {len(ns) - bad if bad <= len(ns) else 0} of {len(ns)} on a subset of the standard three")
     sys.exit(0 if ok else 1)
 
+def block():
+    ns = names()
+    out = ["/-! ## FS131-IQ1 — degree-one primes of fields of square roots (planned by FS131-KN2): `Arith/QuadraticPrime`.",
+           "NF1-S2: a field that embeds in `ℚ_p` has a maximal ideal of its integers with `p` elements in the quotient",
+           "(`exists_maximal_card_of_padic`); so has `ℚ(√D)` when every radicand is a nonzero square modulo the odd prime `p`",
+           "(`exists_maximal_card_eq`, with the claim's own form `exists_maximal_card_eq_sqrt`), and `ℚ(√D, √q)` with one more",
+           "radicand divisible by `p` exactly once (`exists_maximal_card_eq_of_ramified`). No import and no declared",
+           "hypothesis: every record is CLEAN. -/", "-- FS131-IQ1: Arith/QuadraticPrime"]
+    out += [f"#print axioms {n.removeprefix('HadwigerNelson.')}" for n in ns]
+    (ROOT / "data/fs131/iq1/audit-block.lean").write_text("\n".join(out) + "\n")
+    print(f"wrote data/fs131/iq1/audit-block.lean: {len(ns)} records")
+
 if __name__ == "__main__":
     if len(sys.argv) >= 2 and sys.argv[1] == "gen": gen("--copy" in sys.argv)
     elif len(sys.argv) == 3 and sys.argv[1] == "check": check(sys.argv[2])
+    elif len(sys.argv) == 2 and sys.argv[1] == "block": block()
     else: print(__doc__); sys.exit(2)
