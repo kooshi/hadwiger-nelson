@@ -76,3 +76,57 @@ with an involution that is not the identity (it is Hilbert's Theorem 90 for a qu
 resolvent). The skeleton's form is kept; the route's consequence for the environment linters is in § Stage 2.
 
 Order taken: the plan's — L3.1, H90, FC3, FC2, R, L3.2, L3.3, L3.4, L3.5, L3.6, L3.7, L3.8, L3.9, L3.10.
+
+## Stage 2 — SAVED: L3.1, Hilbert 90, the two field cases, the shared reduction, L3.2, L3.3 proved; three statements widened by ruling
+
+`targetFloor_four_weil`, `exists_mul_conj_inv_eq_of_mul_conj_eq_one`, `exists_normOne_zero_of_card_ne_nine`,
+`eq_zero_of_forall_normOne_eq`, `exists_maximal_card_nine`, `exists_maximal_conj_trivial` — each by the route of stage 1's
+table, each elaborating at its first writing but for two names (`Pi.ringHom` is deprecated at the pin for `RingHom.pi`; the
+sum minus one term is `Finset.sum_eq_sum_sdiff_singleton_add`). `lean1.sh`: exit 0, seven `sorry` left, no other message; 4.7 s,
+3.9 GB. **Price, from these seven**: the plan's 250–400 lines for L3.2 came to 75 for the shared reduction and 20 for each
+part; the remaining seven leaves are priced at about 250 lines together, L3.7 and L3.8 the long ones.
+
+**Three private helpers** (none named by the plan beyond R):
+- `exists_factor_functionals` — the plan's R, as stated in stage 1. `A ⧸ nilradical A ≃ₐ[A] Π_I A ⧸ I`
+  (`IsArtinianRing.quotNilradicalEquivPi`) gives the surjection `π : A → Π_I A ⧸ I` with nilpotent kernel;
+  `IsArtinianRing.isNilpotent_nilradical` gives one exponent; `l ∘ iterateFrobenius` descends along `π` by
+  `AddMonoidHom.liftOfRightInverse`; the factor functionals are its composites with `AddMonoidHom.single`
+  (`Finset.univ_sum_single`); a family of units lifts to an element outside every maximal ideal, a unit
+  (`exists_max_ideal_of_mem_nonunits`).
+- `quotientMap_involutive` — an involution's induced map on a quotient is an involution (read by L3.2, and by L3.8).
+- `charP_quotient_of_isMaximal` — a residue field of a ring of prime characteristic `p` has characteristic `p`.
+
+**What differed from the plan's text.**
+- Hilbert 90 is not the cyclic-group argument: `w = a + t·σ a` satisfies `t·σ w = w`, and `w = 0` for every `a` forces
+  `t = −1`, `σ = id`. Seventeen lines, no finiteness.
+- FC3 takes `|k| = Q²`, `Q ≡ 3 (mod 4)` from `StandingFive.card_fixed_of_involution` (the lemma the plan asked to look for
+  near `Arith/StandingFive.lean:1164`; it is at line 409), not from `involution_eq_pow`.
+- FC2 reads no Hilbert 90: the group is the range of the homomorphism `y ↦ y / σ y` of `kˣ`.
+- L3.3's "varying one coordinate" is `Function.apply_update` with `Finset.sum_update_of_mem`.
+
+**Findings, and the coordinator's rulings.** Three statements of the skeleton carried a hypothesis their proofs never read.
+I kept the skeleton's form, said so to the coordinator (two messages), and it ruled both times — the brief's Amendment 1
+(2026-10-13 20:28 UTC) and Amendment 2 (20:32 UTC), on `main` at `4f3a5af87` and `d0f364a3f` — to drop them:
+
+| statement | dropped | why the proof does not read it | consumer in this file |
+|---|---|---|---|
+| `exists_mul_conj_inv_eq_of_mul_conj_eq_one` | `[Finite k]` | the resolvent argument is for every field | FC3: an instance argument, the call is unchanged |
+| `eq_zero_of_forall_normOne_eq` | `hσσ : ∀ x, σ (σ x) = x` | `{y / σ y}` is a non-trivial subgroup of `kˣ` for every endomorphism `σ ≠ id` | L3.3: one argument fewer |
+| `exists_maximal_conj_trivial` | `hcc : ∀ x, c (c x) = x` | it read the involution only to pass it to the field case at 2; the shared reduction never reads it | L3.8 (not yet written): one argument fewer |
+
+The three docstrings say what the statements now say ("every field: no finiteness is read"; "an endomorphism `σ ≠ id` … `σ` need
+not be an involution"; "an endomorphism `c`"). `exists_maximal_card_nine` keeps `hcc`: Hilbert 90 and the count of the fixed field
+both read it. Nothing else of the skeleton's statements moved. **The joining module**: its text
+(`data/fs131/kn4/lean/ThreeFourColours.lean` on `fs131-wr2`) holds no call of any of the three yet — only the plan's J.2 cites
+the first; a call `exists_mul_conj_inv_eq_of_mul_conj_eq_one σ hσσ hσ ht` at a finite residue field elaborates unchanged, the
+dropped binder having been an instance argument. **It needs no change.**
+
+**The statement check after the rulings** (`data/fs131/in1/statements.sh stage2`; `logs/statements-stage2.out`).
+`statement_diff.py` now holds the three names in `WIDENED`: each **must** differ from the skeleton in its stored type — a
+widened name that does not differ fails — and every other constant must be identical as before. Result: `PASS`, 17 named
+constants compared, **3 of 3 widened, no other difference**, three new private theorems, no name outside the module's
+namespace, 3 `example`s identical as text; control `4 of 4` (its first plant is one more statement changed: reported).
+That each difference is a dropped hypothesis and nothing else is shown from the kernel's side by `widenings.py`: the
+skeleton's form of each of the three — binders and conclusion copied by script from `git show 34d9113b2`, never retyped — is
+an `example` proved by one application of the working module's theorem, appended to the candidate's copy: 0 errors. Its
+control (one argument too few): 1 error, as it must.

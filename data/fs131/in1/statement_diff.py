@@ -19,7 +19,14 @@ is not under `HadwigerNelson.ThreeColourCriterion` is reported as FOREIGN and fa
 NEW HERE (2) — the file's side.  An `example` is elaborated and discarded, so the `example`s of the base commit's file
 and of the working file are compared as text (block comments and docstrings blanked first), each whole, in order.
 
-Usage:  statement_diff.py <before.txt> <after.txt> [--control]
+WIDENED BY RULING — the brief's Amendments 1 and 2 (2026-10-13 20:28 and 20:32 UTC) drop one unread hypothesis from each of the leaves
+named in WIDENED below.  Each of them MUST differ from the skeleton in its stored type (if one does not, the ruling was
+not carried out: a failure), and is printed as WIDENED; every other constant must be identical as before.  That each
+difference is a dropped hypothesis and nothing else is shown by data/fs131/in1/widenings.py (the skeleton's form of
+each, proved in one application from the working module's).
+
+Usage:  statement_diff.py <before.txt> <after.txt> [--control] [--no-widening]
+`--no-widening`: expect no difference at all (the check as it was before the amendment).
 `--control` plants four faults in `after` (one stored statement changed by one character, one definition's value
 changed, one skeleton declaration removed, one generated equation lemma under another module's definition's name
 added) and must report exactly four; exit 0 only then.
@@ -30,6 +37,13 @@ import re, subprocess, sys, pathlib
 FILE = "Proofs/HadwigerNelson/Arith/ThreeColourCriterion.lean"
 BASE = "34d9113b2"
 NS = "HadwigerNelson.ThreeColourCriterion."
+# the statements the coordinator's ruling changed (data/fs131/briefs/FS131-IN1-leaves.md, Amendments 1 and 2; a later line
+# of this dict is a later ruling, named)
+WIDENED = {
+    "HadwigerNelson.ThreeColourCriterion.exists_mul_conj_inv_eq_of_mul_conj_eq_one": "Amendment 1: `[Finite k]` dropped",
+    "HadwigerNelson.ThreeColourCriterion.eq_zero_of_forall_normOne_eq": "Amendment 1: `hσσ` dropped",
+    "HadwigerNelson.ThreeColourCriterion.exists_maximal_conj_trivial": "Amendment 2: `hcc` dropped",
+}
 ROOT = pathlib.Path(__file__).resolve().parents[3]
 
 
@@ -74,6 +88,8 @@ def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     before, after = read_dump(args[0]), read_dump(args[1])
     bad = []
+    widened = {} if "--no-widening" in sys.argv else WIDENED
+    seen_widened = []
 
     if control:
         # plant 1: one character of one stored statement changed in `after` (its last: a raw dump and a compact one both carry it)
@@ -100,7 +116,12 @@ def main():
             bad.append(f"MISSING  {b['kind']} {name}: in the first dump, not in the second"); continue
         if a["kind"] != b["kind"]:
             bad.append(f"KIND     {name}: {b['kind']} -> {a['kind']}")
-        if a["type"] != b["type"]:
+        if name in widened:
+            if a["type"] == b["type"]:
+                bad.append(f"UNCHANGED {b['kind']} {name}: the ruling's widening is not in the second dump ({widened[name]})")
+            else:
+                seen_widened.append(name)
+        elif a["type"] != b["type"]:
             bad.append(f"TYPE     {b['kind']} {name}: the stored statement differs")
         if b["kind"] == "DEF" and a["value"] != b["value"]:
             bad.append(f"VALUE    DEF {name}: the stored definition differs")
@@ -140,6 +161,9 @@ def main():
     print(f"compared: {n_cmp} named constants of the first dump ({n_thm} theorems, {n_def} definitions; types, and values of definitions); "
           f"{len(written)} declarations written at {BASE}, each found in the first dump")
     print(f"internal (not compared): {n_int_b} before, {n_int_a} after")
+    print(f"widened by ruling (stored type differs, as it must): {len(seen_widened)} of {len(widened)}")
+    for n in seen_widened:
+        print(f"  WIDENED {n} — {widened[n]}")
     print(f"new named constants in the second dump: {len(new)}")
     for n in new:
         print(f"  NEW {after[n]['kind']} {n}")
@@ -157,7 +181,8 @@ def main():
         ok = len(bad) == want
         print(f"CONTROL: {len(bad)} of {want} planted faults reported — {'the check can fail' if ok else 'THE CONTROL DID NOT FIRE AS PLANTED'}")
         sys.exit(0 if ok else 1)
-    print("PASS: no statement and no definition changed" if not bad else f"FAIL: {len(bad)} difference(s)")
+    print((f"PASS: no statement and no definition changed but the {len(seen_widened)} widened by ruling" if widened else
+           "PASS: no statement and no definition changed") if not bad else f"FAIL: {len(bad)} difference(s)")
     sys.exit(1 if bad else 0)
 
 
