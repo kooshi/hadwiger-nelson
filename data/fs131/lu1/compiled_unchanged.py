@@ -3,8 +3,10 @@
 
 Why: at stage 1 the compiled files of the tree the last landing gated in (`.claude/worktrees/fs131-wkc`) were copied
 into this tree by checksum, and the comparison made then (`rsync-dry.out`, `rsync-real.out`, and the dry run after)
-showed every file of that tree's build byte for byte in this one.  That tree was removed by another hand about four
-minutes later (its directory is gone from `git worktree list`), so the comparison cannot be made again.  What can be
+showed every file of that tree's build byte for byte in this one.  About four minutes later the coordinator moved
+that tree to `.claude/worktrees/fs133-wk1` for the next job, and it was built in there (this docstring first said
+"removed by another hand": a wrong reading of a path that had stopped existing), so the comparison cannot be made
+again against the files it was made with.  What can be
 shown at the pass is that nothing has rewritten a copied file since: this tool.
 
   compiled_unchanged.py manifest            print `<sha256> <mtime, UTC> <path>` for every `.olean` under
