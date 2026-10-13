@@ -3,7 +3,8 @@
 
 `before` and `after` are two prints in the format of data/fs131/iu1/lean/StatementDump.lean (kind, full name, stored
 type, and for a definition its stored value), made either from the compiled module (`StatementDump.lean`) or from a
-copy of the file with `lean/StatementFooter.lean` appended (the same format; used between builds).  Every constant of
+copy of the file with `lean/StatementFooter.lean` appended (the same format; used between builds) — both raw, or both
+passed through data/fs131/iu1/compact_dump.py (each stored term as Lean's hash, its SHA-256, its length, its head).  Every constant of
 `before` that is not INTERNAL (a name Lean generates inside a declaration) must be in `after` with the same kind, the
 same type and, for a definition, the same value, character for character.  Constants only in `after` are listed as
 NEW: the helpers.  INTERNAL constants are counted, not compared: they move with a proof.
@@ -12,7 +13,7 @@ The file's side: an `example` is elaborated and discarded, so the count of `exam
 and in the working file is printed (the skeleton holds none; a head in the working file is one this job added).
 
 Usage:  statement_diff.py <before.txt> <after.txt> [--control]
-`--control` plants three faults in `after` (one stored statement changed by one token, one definition's value changed,
+`--control` plants three faults in `after` (one stored statement changed by one character, one definition's value changed,
 one skeleton declaration removed) and must report exactly three; exit 0 only then.
 What this does not see: a change to a docstring or a comment (not a statement).
 """
@@ -54,11 +55,11 @@ def main():
     bad = []
 
     if control:
-        # plant 1: one token of one stored statement changed in `after`
+        # plant 1: one character of one stored statement changed in `after` (its last: a raw dump and a compact one
+        # — data/fs131/iu1/compact_dump.py — both carry it)
         victim = "HadwigerNelson.UpperHalf.exists_hom_levelTarget"
         t = after[victim]["type"]
-        i = t.index("LE.le")
-        after[victim]["type"] = t[:i] + "LT.lt" + t[i + 5:]
+        after[victim]["type"] = t[:-1] + ("!" if t[-1] != "!" else "?")
         # plant 2: one definition's value changed in `after`
         vdef = "HadwigerNelson.SpectralChain.StablePrime.residue"
         after[vdef]["value"] = after[vdef]["value"] + " x"
