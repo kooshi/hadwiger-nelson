@@ -1,0 +1,33 @@
+@Odd.of_dvd_nat : ∀ {m n : ℕ}, Odd n → m ∣ n → Odd m
+Rat.den_dvd : ∀ (a b : ℤ), ↑(Rat.divInt a b).den ∣ b
+Rat.den_intCast : ∀ (a : ℤ), (↑a).den = 1
+@Rat.cast_intCast : ∀ {α : Type u_1} [inst : DivisionRing α] (n : ℤ), ↑↑n = ↑n
+@ZMod.natCast_eq_zero_iff_even : ∀ {n : ℕ}, ↑n = 0 ↔ Even n
+ZMod.intCast_zmod_eq_zero_iff_dvd : ∀ (a : ℤ) (b : ℕ), ↑a = 0 ↔ ↑b ∣ a
+ZMod.intCast_eq_intCast_iff_dvd_sub : ∀ (a b : ℤ) (c : ℕ), ↑a = ↑b ↔ ↑c ∣ b - a
+@AddMonoidHom.addSubgroupComap : {G : Type u_1} →
+  {G' : Type u_2} →
+    [inst : AddGroup G] →
+      [inst_1 : AddGroup G'] → (f : G →+ G') → (H' : AddSubgroup G') → ↥(AddSubgroup.comap f H') →+ ↥H'
+@AddSubgroup.coe_zsmul : ∀ {G : Type u_1} [inst : AddGroup G] (H : AddSubgroup G) (x : ↥H) (n : ℤ), ↑(n • x) = n • ↑x
+@AddSubgroup.inclusion : {G : Type u_1} → [inst : AddGroup G] → {H K : AddSubgroup G} → H ≤ K → ↥H →+ ↥K
+Nat.card_zmod : ∀ (n : ℕ), Nat.card (ZMod n) = n
+@SimpleGraph.Embedding.toHom : {V : Type u_1} →
+  {W : Type u_2} → {G : SimpleGraph V} → {G' : SimpleGraph W} → G ↪g G' → G →g G'
+@Nat.not_even_iff_odd : ∀ {n : ℕ}, ¬Even n ↔ Odd n
+@Int.not_even_iff_odd : ∀ {n : ℤ}, ¬Even n ↔ Odd n
+@AddEquiv.symm_apply_eq : ∀ {M : Type u_1} {N : Type u_2} [inst : Add M] [inst_1 : Add N] (e : M ≃+ N) {x : N} {y : M},
+  e.symm x = y ↔ x = e y
+@AddSubgroup.coe_equivMapOfInjective_apply : ∀ {G : Type u_1} [inst : AddGroup G] {N : Type u_2} [inst_1 : AddGroup N]
+  (H : AddSubgroup G) (f : G →+ N) (hf : Function.Injective ⇑f) (h : ↥H), ↑((H.equivMapOfInjective f hf) h) = f ↑h
+@injective_iff_map_eq_zero : ∀ {F : Type u_1} {G : Type u_2} {H : Type u_3} [inst : AddGroup G]
+  [inst_1 : AddZeroClass H] [inst_2 : FunLike F G H] [AddMonoidHomClass F G H] (f : F),
+  Function.Injective ⇑f ↔ ∀ (a : G), f a = 0 → a = 0
+Rat.neg_den : ∀ (a : ℚ), (-a).den = a.den
+Rat.den_zero : Rat.den 0 = 1
+@AddMonoidHom.mk'_apply : ∀ {M : Type u_1} {G : Type u_2} [inst : AddGroup G] [inst_1 : AddZeroClass M] (f : M → G)
+  (map_add : ∀ (a b : M), f (a + b) = f a + f b), ⇑(AddMonoidHom.mk' f map_add) = f
+@Squarefree : {R : Type u_1} → [Monoid R] → R → Prop
+@ZMod.intCast_cast : ∀ {n : ℕ} {R : Type u_1} [inst : Ring R] (i : ZMod n), ↑i.cast = i.cast
+@Int.odd_iff : ∀ {n : ℤ}, Odd n ↔ n % 2 = 1
+ZMod.instField 2

@@ -90,3 +90,56 @@ The file elaborates under `lake env lean` with the lakefile's options and `linte
   splits `|u|² = 1`. Denominators: `D` the product of the four, so `N = D > 0`.
 
 Private helpers so far: `rat_eq_zero_of_add_mul_irrational`, `exists_not_all_even`.
+
+## Stage 3 — SAVED: leaves 4–10 (the three shapes; the three additive maps; the two-colour row) — the file has no `sorry`
+
+The file elaborates under `lake env lean` with the lakefile's options and `linter.missingDocs`: **exit 0 and an empty
+message log** — no `sorry`, no warning (`data/fs131/id1/logs/DyadicQuadratic.stage3.out`, 0 bytes; 15.6 s behind the
+slot, 3.9 GB). Statement check: PASS, control 3 of 3 (`logs/statements-stage3.out`): 11 skeleton theorems unchanged,
+21 private helpers new (16 theorems, 5 definitions). Axioms of all 32 declarations, from a footer on a copy of the file
+(`data/fs131/id1/axioms_footer.sh`, `axioms-footer.txt`): each within `[propext, Classical.choice, Quot.sound]`;
+control (a planted `sorry`): reported (`logs/axioms-footer.control.out`). The build is the next stage.
+
+**The three shape lemmas** — the plan's exhaustion, at a smaller modulus (§ Stage 1's re-pricing), by one generic bridge:
+- `shapeCheck ms P : Bool` (private) — for every `m ∈ ms` (a residue modulo 8) and residues `a b c d n < 4`: `Q1` modulo 8
+  → `Q2` modulo 4 → not all even → `P a b c d n`, as nested `List.all` over `decide` of the implication;
+- `shape_of_check` (private) — if the check passes and `m % 8 ∈ ms`, an integer solution not all even has residues
+  modulo 4 (as naturals, with their casts) satisfying `P`. Its two steps: `x mod 4 · x mod 4 ≡ x² (mod 8)`
+  (`emod_four_mul_self_modEq`) and `Int.ModEq` congruence; `Int.natCast_modEq_iff` back to `ℕ`;
+- each lemma is then `shape_of_check (by decide +kernel)` at its `P` and an `omega` read-back
+  (`Int.odd_iff`; `/ 2`, `% 4`, `2 ∣` are literals to `omega`). The three checks are `4⁵·2`, `4⁵·2` and `4⁵` tuples.
+- **`dyadic_shape_three_mod_eight`**: its `P` carries one alternative more, "`b`, `c`, `d` odd", which residues modulo 4
+  cannot exclude; it is excluded by `not_odd_of_three_mod_eight` (private): `(b² + d²)(c² + m b²) = (N b)²`
+  (`linear_combination b² · Q1 − (ab − cd) · Q2`), the left side `≡ 8 (mod 16)` (`sq_emod_eight_of_odd`), no square
+  (`sq_emod_sixteen_ne_eight`). The parity of `a` is not read. This replaces the plan's cast to `ZMod 16`.
+- **Negative control of the exhaustion** (`data/fs131/id1/probes/shape_plant.lean`, log `logs/shape_plant.out`): the
+  module's three checks pass; four planted ones — class A's conclusion at `m ≡ 3 (mod 4)`, class B's at `m ≡ 0 (mod 4)`,
+  class C's at `m ≡ 7 (mod 8)`, and class C's at `m ≡ 3 (mod 8)` with the all-odd alternative left out — each end in
+  `decide`'s "proved that the proposition … is false": **four error lines, at the four plants**. The last is the reason
+  the separate lemma exists.
+
+**The three additive maps** — the plan's objects with one simplification, **found while writing and worth the
+planner's eye: one form per class is enough**. The plan's lattice is the set of `p ∈ ℚ⁴` at which four forms have odd
+denominator, and `ψ₀` is a sum of reductions of some of them. The leaf asks only for *some* subgroup `Λ`, so take the
+subgroup where the one form `s = Σ` (the sum the plan reduces) has odd denominator, and `ψ₀ = red ∘ s`:
+
+| class | the form `s` on `(p₁, p₂, p₃, p₄)` | at a unit vector `(a, b, c, d)/N` |
+|---|---|---|
+| `m ≡ 1 (4)` | `p₁ − p₂ + p₃ − p₄` | `N` odd: `(a − b + c − d)/N`, numerator odd; `N = 2M`: `((a − b + c − d)/2)/M`, numerator odd |
+| `m ≡ 2 (4)` | `p₁ + p₃ + 2p₄` | `N` odd: `(a + c + 2d)/N`; `N = 2M`: `(a/2 + c/2 + d)/M` |
+| `m ≡ 3 (8)` | `s₁ = p₁ + p₂ + p₃ − p₄`, `s₂ = 2p₄ − 2p₂` | `N` odd: `s₁` has odd numerator; `N = 2M`: `s₁ = ((a + b + c − d)/2)/M`, `s₂ = (d − b)/M` with `d − b` odd |
+
+Private pieces: `oddDen : AddSubgroup ℚ` (odd denominators; `Rat.add_den_dvd`), `red : oddDen →+ ZMod 2` (`Rat.cast`,
+additive by `Rat.cast_add_of_ne_zero`), `mem_oddDen_of_eq_div` (an integer over an odd integer), `red_ne_zero` (an odd
+integer over an integer does not reduce to `0`: `M • q = z` and `red` is additive — the residue itself is never
+computed), `form k₁ k₂ k₃ k₄ : ℚ⁴ →+ ℚ` with `form_div_eq`, `coordHom m : ℚ⁴ →+ ℂ` with `coordHom_injective` (`√m`
+irrational), `exists_addMonoidHom_of_lattice` (any `Γ ≤ ℚ⁴` and `ψ₀`: `Λ = Γ.map`, `ψ = ψ₀ ∘ equivMapOfInjective⁻¹`,
+as the plan has it), `exists_addMonoidHom_of_form` (one form: `Γ = oddDen.comap s`, `ψ₀ = red ∘ s`), and
+`not_isSquare_of_mod_four` (`m ≡ 2, 3 (mod 4)` is no square). Each class's leaf is then its shape lemma and two `omega`s.
+
+**`colorable_two_planeOver_sqrt`** — the plan's composition as written: `4 ∣ m` against `Squarefree` (`2 * 2 ∣ m`,
+`Nat.isUnit_iff`); `m = 1` through `fieldOfRadicands {1} ≤ fieldOfRadicands {2}` and
+`SimpleGraph.Colorable.of_hom (induceHomOfLE …).toHom`; `m ≡ 1`, `m ≠ 1`: not a square (`Squarefree` at `r`); `m ≡ 2`.
+`Nat.card_zmod`.
+
+**No leaf resisted**: every leaf went through on its first route; nothing is left as `sorry`.
