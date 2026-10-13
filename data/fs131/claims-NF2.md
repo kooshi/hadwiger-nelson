@@ -40,3 +40,7 @@ NF2-OFFPATH: the hand result R-U, with the split-place topology under it, and N1
 ## Not claimed
 
 NF2-NC: any size or price of a leaf (the map says none of leaves 8–23 is sized); that the leaf list is complete (the deriver's table names two results read on the path that are not numbered leaves: the density of the ring in its completion, and the ring equalling its maximal order away from the exception fields); that the printed rigidity theorem is formalized (it is declared, with its four items); that any leaf is new mathematics.
+
+## Dated lines
+
+- 2026-10-13 17:59 UTC — **A note on NF2-LEAF-07, from another module's planner (FS131-KN4), counted independently by me**: "at a stable prime the image of the unit vectors in the quotient by a power of the prime is every norm-one element" is false at the ramified stable dyadic prime of the rational field from the fourth power on (8 norm-one elements, 4 in the image). The leaf's own caveat and the chain's scope hypothesis (no ramified stable dyadic place) cover it; the chain's count at every level is to be typed under that hypothesis and nowhere wider.

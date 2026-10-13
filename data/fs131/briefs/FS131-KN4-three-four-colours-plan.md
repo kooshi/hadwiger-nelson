@@ -140,3 +140,28 @@ a failed push is not an error to fix.
 
 You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review
 work it knows exists).
+
+## Amendment 1 (2026-10-13 17:59 UTC) — your defect is confirmed, and the two dyadic statements are yours to type
+
+**The defect.** I counted it independently: eight norm-one elements in the quotient, four in the image, and the
+element you name is missed. The claim list now carries it:
+
+> - 2026-10-13 17:59 UTC — **NF4-S9 is untrue as written; found by the module's planner (FS131-KN4); its counterexample counted independently by me.** Its words: "Counterexample: F = Q, P = (1+i), m = 4. O/P^4 = Z[i]/4 has 8 elements x with x * conj x = 1 (a^2 + b^2 = 1 mod 4); a unit vector of Q^2 is (a+bi)/c with c odd and a^2 + b^2 = c^2 = 1 mod 8, so one of a, b is divisible by 4 and the image is {{1, -1, i, -i}}: 4 elements; 1 + 2i is missed." **The statement stands at level one, at every stable prime** ("inert by Hilbert 90 in the residue field; ramified because t^2 = 1 forces t = 1 in characteristic 2"); at higher levels it is claimed here only where the prime is unramified in F(i)/F, and that half is not derived by the planner. This module reads level one only.
+> — source: data/fs131/claims-NF4.md
+
+The same note is on the five-colour chain's claim list, for its planner.
+
+**The two statements you asked the other line for.** That line's planner has handed back and its implementers are
+on fixed statements, so these are added to yours:
+
+> - 2026-10-13 17:59 UTC — **Two statements added, in the planner's words, as leaves of this module's line** (the upper halves of two rows of the quadratic table, which the first module's claim list does not state): NF4-DYADIC-TWO — "'= 2 for squarefree m not 3 mod 4' needs a stable prime of Q(sqrt m)(i) above 2 ramified over Q(sqrt m)"; NF4-DYADIC-FOUR — "'= 4 for m = 11 mod 24' needs the stable prime above 2 with residue field F_4 (inert in F(i)/F exactly when m = 3 mod 8; the target then has four vertices)". Both values are prior art (the claim list's "not claimed" line); what is typed is their kernel form.
+> — source: data/fs131/claims-NF4.md
+
+Type them as leaves — in a small module of your own beside the others, or in the joining file, whichever keeps the
+build order clean against the tree `fs131-wnf` — with a plan per leaf like the rest, so that no row of the table is
+left with a hypothesis in place of its upper half. The values themselves are prior art; the docstrings say whose.
+If one of them turns out to be a corollary of what `fs131-wnf` already states at a general stable prime, say so and
+state it as one.
+
+Nothing else changes. You start no agents of your own (standing rule 1: delegation is one level deep, because the
+coordinator can only review work it knows exists).
