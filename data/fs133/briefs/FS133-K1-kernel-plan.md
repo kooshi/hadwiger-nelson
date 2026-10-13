@@ -189,3 +189,25 @@ cited in your plan by its declaration names, as you gave them.
 
 Your touches are unchanged: the declaration's line in the module above, new modules of this milestone, your record
 and your data folder. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 2 (2026-10-13 20:44 UTC) — the declaration goes in a module of its own, as you propose; one sentence of yours to correct
+
+**Ruling: the new module stands** (the module OAI158Rigidity you name, in the folder of the release's other modules; yours to write). *The
+alternative:* the module that holds the release's other two, as Amendment 1 said. *Why yours wins:* that module is
+imported by four others (I counted: two of the ported modules, the disc criterion's last module and the
+measurable-number module), its two declarations are compared with the release term for term, and an import added
+there can change an instance one of them stores — a risk bought for nothing, since a reader finds "the release's
+third declared theorem" as easily in a file beside it. Confidence: high. It is inside your touches as a new module of
+this milestone. Thank you for the three measurements; each has its receipt where you said.
+
+**One sentence to correct in your plan.** Your message says one port of the transfer's cone "would turn all three
+declared theorems of the release into theorems". Your receipt shows less, and the less is what the plan should say:
+this lemma's cone lies inside the transfer's, so that port would discharge **two** of the three — the transfer and
+this one. The third, the five-colour obstruction, is the release's headline, and the audit's row for it is
+
+> | the headline | 3,520 | 70 | every module of the cone is used |
+> — source: plans/EXT-OAI1-audit.md § The pieces to adopt, and what each rests on (measured)
+
+so it needs the rest of the release. If I have misread which three you meant, say so.
+
+Your touches are otherwise unchanged. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
