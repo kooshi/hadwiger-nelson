@@ -26,6 +26,58 @@ everything else.*
    holds is [P₆] on saturated six-colourings." REG-J′ is superseded as a target by local finiteness of cyclic centres at six.
 6. **Kooshi made it literature and set the plan** — § 1. His three messages are verbatim in `data/external/EXT-OAI1-request.md`.
 
+## 0f. READ THIS FIRST — THE DIRECTION CHANGED ON 2026-10-13: wind down, publish; the Lean backlog restarts on the number-field results
+
+*Written 2026-10-13 16:05 UTC by Keryx. Sections 0e and below are the state this started from; where they differ, this is current.*
+
+**Kooshi's word** (verbatim, `data/fs131/REQUEST-2026-10-13.md` line W1): "I'd like to continue with the lean backlog,
+specifically targeting our interesting number field findings. We're going to wind this project down and publish
+everything as a git repo (after some cleanup and sanitization, especially moving the transcript backups out of git
+history). But, to do that, we need the lean proofs for the good stuff. Have a planner determine what findings would be
+most interesting to the mathematicians in the field, and then let's start formalizing those." He is on the **laptop** (12 cores, 31 GB).
+
+**My rulings on it** (FS-131 inventory item 636, each in four parts): "a planner" is two jobs side by side (rank by
+interest; map the kernel state, then plan); the hold of 2026-10-06 is lifted for the number-field results themselves
+(FS-101's ground) and **stands for measure rigidity itself — an import, unformalized and unpriced; do not re-offer**;
+the frontier's open jobs are **parked** (FS-136's 25 leaves on branch `fs136-wk1`; FS-137's sixth claim, my review of
+its five entries, its record job; the asking lane's unfiled re-rank draft) — § 0e's "order when the budget returns" is
+superseded except for its first line, the owed filing.
+
+**Three jobs are running** (ids in the session's scratch `agents.txt`, never in a repo file; they resume only inside
+this session):
+1. **FS131-PN1** (asking lane; brief `data/fs131/briefs/FS131-PN1-number-field-ranking.md`; record
+   `plans/POROS-2026-10-13-number-field-findings.md`): the number-field findings ranked by interest to mathematicians
+   in the field. It messages when the list is saved.
+2. **FS131-KN1** (kernel planner; brief `data/fs131/briefs/FS131-KN1-number-field-kernel-map.md`; worktree and branch
+   `fs131-wnf`, the last landing's tree moved, its build matching `main`; record
+   `plans/FS131-KN1-number-field-kernel-map.md` on the branch): phase 1 the map of what each number-field result rests
+   on in Lean; **phase 2 starts only on my dated amendment** at the foot of its brief.
+3. **FS124-F2** (the Clerk, Sonnet; brief `data/fs124/briefs/FS124-F2-filing.md`; worktree `fs124-wf2`, branch
+   `fs124-f2`; FS-124 inventory item 51): the owed filing of FS-124's second landing, verbatim, with the digests, the
+   fact audit (`--base 07bf6096`) and the atlas rebuilt locally. FS-124 **stays Derived** (ruling there).
+
+**What I do at each hand-back.** *The ranking*: review by artifact (its claim-list quotations against `LEDGER.md` § The
+claim list; one attribution re-read); log it; report it to Kooshi as the asking lane's judgment. *The map*: review one
+entry against the receipt; log it. *Both in*: fix `data/fs131/claims-NF1.md` for the first-ranked finding from its
+derivation entry by script; append the amendment to the planner's brief (gate; one-line message), or brief a successor
+planner from its record if it handed back; then implementers on the leaves (`debruijn-implementer`, `model: "opus"`),
+**one build at a time on this machine**. *The filing*: rule on each `CHECK:`, merge `--no-ff`, then **file the
+direction change itself on the front page** — `CLAUDE.md` § The aim takes his words; the open-milestones line says the
+backlog is restarted and what is parked; `plans/STUB-lean-backlog.md` and the stubs of the parked milestones get a
+dated line (the stub rule); fact audit with the Clerk's merge as base.
+
+**The machine and the network.** The memory tool's defaults are the desktop's: here run it as
+`env SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 python3 scripts/slot.py …`; a build is `--mem 18 --cpus 10 -- env MEMMAX=18G
+BATCH=2 ./scripts/build.sh`, one at a time — **my numbers, unmeasured; the planner reports the first measurement**.
+**The remote does not answer** (`git fetch` fails to connect): every commit since
+`151c4a279` is local on `main`; agents are told not to push; push when it answers (`git push`, never force).
+
+**Queued behind the formalization, not started, each needs his word at the time**: the cleanup and sanitization pass
+(the transcript backups out of git history is a history rewrite — a force-push by definition, so his explicit word
+then); final states for every open milestone (Closed, or entries declined one by one); the six papers and the
+fallback write-up. **Open with him, told with defaults**: build on the laptop or move to the desktop for landings
+(default: laptop, one build at a time); measure rigidity as an import (default) or formalized (held).
+
 ## 0e. READ THIS BEFORE § 0d — THE WIND-DOWN IS COMPLETE (21:00 UTC, 2026-10-07): nothing is running
 
 Kooshi, after the compaction: "[…], and need to wind down. Make sure all agents come to a
