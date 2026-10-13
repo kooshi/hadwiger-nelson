@@ -175,7 +175,8 @@ kernel-checked; the others `[certified, tools]`.
 - K: `four_le_chromaticNumber_planeOver_eleven`, `four_le_chromaticNumber_planeOver_of_sqrt_eleven_mem` (std3).
   `ARCHITECTURE.md`: "The upper bound χ ≤ 4 is `[Fischer1990]`'s and is not in the kernel."
 - Missing: **the exact value is two short leaves away.** `[S1a]`, and `[S2]` at `ℚ(√11)`, 7 (`11 ≡ 2² (mod 7)`); the
-  four-colouring of `Γ₇` is already in the kernel (`GapSeven.gamma_proper`, `Arith/GapSeven`, by `decide +kernel`).
+  four-colouring of `Γ₇` is already in the kernel (`finitePlane7_colorable_four`, `Instances/PlaneFreedom.lean:61`; also
+  `GapSeven.gamma_proper`, by `decide +kernel`).
 - Reader after: "`χ(ℚ(√11)²) = 4`, kernel-checked, both halves" — the first exact value of a real quadratic field's plane in
   the kernel beside none today.
 
@@ -193,3 +194,130 @@ all-levels statements `[cert]`.
 `Instances/ThreeFive` holds the subring only. Nothing owed here.
 
 **Row 77** is an audit; no theorem.
+
+## Stage 3 — SAVED: the map, part II — lattices, rigidity, characters, the kernel lane (rows 78–107)
+
+**Row 78 — four colours on de Grey's lattice: `F = P = 8Λ`; the Kempe layer and the inheritance question in subgroup form.**
+The Kempe layer kernel-checked; `F = P = 8Λ` `[cert]`.
+- K: `kempeSwap`, `not_forces_of_kempeClosed`, `forces_iff_exists_finite`, `not_forces_of_voltageEscape`,
+  `forces_iff_of_quotient_fanGap`, `not_forces_of_additiveKempe`, `exists_finiteIndex_between_notMem`,
+  `notMem_periodicForcedSubgroup_of_voltageEscape`, `inheritanceQuestion_iff`, `voltageEscapeZ` (std3). The lattice
+  statement is taken as `inline:Row78` (ours) by `Arith.falconerFan_five_mem_eight`.
+- Missing: the refusal certificate behind `F ⊇ 8Λ`-periodicity as a kernel check (`data/fs73/cert/`, checker
+  `tools/fs73_cert_check.py`), or row 85's derivation from Parts's trees (`plans/FS85-derivation.md`), each over
+  `plans/FS73-derivation.md` T1–T20. Unknown size.
+- Reader today: "the forcing calculus is kernel-checked; the lattice's rigidity is certified outside the kernel."
+
+**Row 79 — three colours are linear: a Cayley graph of a finitely generated torsion-free abelian group is 3-colourable iff a
+character puts every generator in `[1/3, 2/3]`; periodic 3-colourings are dense.** `[hand; two independent derivations]`.
+- K: the ⟹ direction in winding form — `ThreeColour.nonempty_winding`, `nonempty_winding_of_colorable`,
+  `ThetaCert.Cert.isEmpty_winding`, `Cert.not_properAlong`, `ThetaPlane.four_le_chromaticNumber_of_cert` (std3).
+- Missing, in order: (1) `[S6]` the character form of ⟹: a winding gives `θ` with `θ(s) ∈ [1/3, 2/3]` on the generators
+  (`plans/FS73-derivation.md` T22; over fields `plans/FS81-derivation.md:39`, T2 "L1 as an inverse limit"); (2) ⟸, the
+  colouring `x ↦ ⌊3θ(x)⌋` (T21); (3) density of periodic colourings and the forced-pair clause (T23–T30). Unknown sizes;
+  (2) is a formula and should be short.
+- Reader after (1)–(2): the criterion as an equivalence in the kernel.
+
+**Rows 80–81, 84–87 — four colours cell by cell; `ℚ(√167)`'s lattice `L21cc6506` four-colourable and loose; the forcing graph
+on de Grey's lattice; the derivation of `F = P = 8Λ` and the 9,120 colourings; triangle-free rigidity; what does not reach
+`8Λ`.** `[hand]`, `[cert]`, `[hand + tools exact]`. K: none (row 81's lower bound is row 119). Missing: every theorem;
+`plans/FS79-derivation.md`, `plans/FS81-derivation.md` T20–T25, `plans/FS85-derivation.md`. These are statements about one
+lattice or about formats of certificate; none is on a field value's path. Not sized.
+
+**Row 82 — `χ(F²) ≥ 4` whenever `1/3 ∈ ℤ[U_F]` and `F²` is not bipartite; so `χ(ℚ(√d)²) ≥ 4` for every squarefree
+`d ≡ 11 (mod 12)`.** `[hand, two independent derivations]`.
+- K: the surrounding facts — prime inversion `UnitRing.inv_natCast_mem_unitRingOver_iff`, the chain theorem in ring form
+  `UnitRing.add_one_le_chromaticNumber_planeOver_of_inv_mem_unitRingOver`, the winding (row 79) — std3. The theorem: none.
+- Missing: `plans/FS81-derivation.md` T1 (:29), T2 (:39), T3 (:50), T4 (:66: "`1/3 ∈ ℤ[U_F]` and `Θ₃(F) ≠ ∅` make `F²`
+  bipartite"), T5 (:82), then the family clause (`d ≡ 11 (mod 12)` gives `1/3 ∈ ℤ[U]`, by prime inversion, kernel).
+  T2 is `[S6]`; T3–T4 are `[S7]` (torsion extraction). Unknown size.
+- Reader after: "every real quadratic field `ℚ(√d)`, `d ≡ 11 (mod 12)` squarefree, has a plane needing four colours,
+  kernel-checked with no finite graph" — the family `[Johnson2000]` p. 176 poses as open.
+
+**Row 83 — the census completed: 40 fields with certified witnesses.** `[cert + hand]`. Subsumed as a target by row 82.
+
+**Rows 88–94 — the type-(B) frame over `ℚ(√59)`, `ℚ(√83)`, `ℚ(√131)`; every four-colouring of `K²` is a pullback from
+`P₄` on each coset; the plane over `ℚ₂(√3)` is four-colour rigid; the no-go family; measurable windows; dyadic towers; an
+explicit non-periodic four-colouring of `ℚ(√11)`'s plane.** `[hand]`, several with certificates as inputs (rows 78, 75).
+- K: none of the theorems; `inline:Row88` (ours) is taken by `Arith.falconerFan_five_mem_P`.
+- Missing: `plans/FS86-derivation.md` whole. Row 89 (`F(R_K) = P(R_K) = 4R_K`) rests on row 78's certificate and FS-66's at
+  11 (`[S5]`). Row 94's colouring of `ℚ(√11)`'s plane (FS86-Cx-C9) is a formula — the one item here I would expect to be
+  short: its proof that `⌊4θ⌋` is proper is `GapSeven.gamma_proper` plus `[S1a]` at 7. Otherwise not sized.
+
+**Rows 95–98 — rational band rigidity (`RQ₄`, `RQ₅`), its consequences at the exposed fields, one prime's failure, and band
+rigidity at every band.** `[hand]` with exact tools.
+- K: the gluing only — `CharacterColouring.gluing`, `gluing_field`, `gluing_iff_uniform`, `mem_archimedean_unitRing_iff`
+  (std3); `CharacterColouring.gluing_iff_of_orderBound` (std3; takes `CharacterColouring.OrderBound`, ours, FS89-S0A-3);
+  `CharacterColouring.cl2` (std3; takes `OrderBound`, `inline:RQ4`, `inline:RQ5`, each ours).
+- Missing: `RQ₄` (FS89-D2-T1), `RQ₅` (FS89-D5-T2), the order bounds (FS89-S0A-3 at 4, on Weil; FS91-J08-11 at 5, J08-10 at
+  6), then band rigidity at every band (`plans/FS91-derivation.md:65–110`, J01-1 to J01-8: Berend's method carried to
+  `ℤ[i][1/p]`, the sweep lemma SW-m). The last planner to read these proofs wrote "a milestone's worth"
+  (`plans/FS131-w10-kernel-plan.md` § 5.5); I have not read them and give no size.
+- Outside: `[Berend1984]` as method, not as an imported statement; Weil's bound (held).
+- Reader today: "the gluing from `ℚ` to every real field is kernel-checked; rigidity over `ℚ` is by hand."
+
+**Row 99 — three colours obey the local–global conjecture over every real number field: `χ(F²) ≤ 3 ⟺ L(F) ≤ 3`, and
+`χ(F²) = L(F)` whenever `L(F) ≤ 4`; `χ(ℚ(α,√7)²) = 4`.** `[hand (+ Weil, tools exact)]`; S1 three derivations, S2 two.
+- K: none of the theorem. It is the hypothesis `inline:Row99` (ours) of row 127's headline, in the form
+  `localBound F ≤ 4 → localBound F ≤ χ(F²)`.
+- Missing, in order (statements quoted in `data/fs131/kn1/leaf-statements-99.txt`):
+  1. `[S1b]` the upper half at every stable prime (gives `χ ≤ L`).
+  2. the two-colour end: `F²` bipartite ⟹ a stable dyadic prime ramified in `F(i)/F` (GPT Astra's Thm 2.1, second
+     derivation FS91-J02-A21p, `plans/FS91-derivation.md:266`); with (1) this is `L = 3 ⟹ χ ≥ 3`.
+  3. `[S6]` a three-colouring gives `θ ∈ Θ₃(R_F)`.
+  4. `[S7]` torsion extraction, FS91-J02-L1 (:171).
+  5. the finite ring `R/6R` and the joint image of the unit vectors: FS91-J02-L2 (:144), J02-L3 (:154), J07-5 (:159), with
+     weak approximation on the norm-one torus, FS91-J10-L2 (:165).
+  6. norm-one functionals, FS91-J02-L4 (:175): at `q = 3^f` only `q = 3` (Weil above 243 — held as an import, at
+     characteristic not 2 — and exact at 27, 243); at `Q = 2^f` none.
+  7. FS91-J02-T1 (:188), the torsion local–global theorem; FS91-J09-J4 (:192), no mixing.
+  8. FS91-J02-T2 (:214), S1; FS91-J02-T3 (:244), S2 — compositions.
+- Outside: Weil (held). Weak approximation: Mathlib at the pin has it for absolute values
+  (`Mathlib/Analysis/AbsoluteValue/Equivalence.lean`, `NumberTheory/NumberField/InfinitePlace/Basic.lean` — found by
+  searching "weak approximation"); the form on the norm-one torus at finite places is ours to derive from it. Not sized.
+- Reader today: "held by hand, three derivations." After: "`χ(F²) = L(F)` for every real number field with `L(F) ≤ 4`,
+  kernel-checked on Weil's bound" — `[Fischer1990]` §1's question answered at three colours.
+
+**Rows 100–102 — the class theorem for character colourings; the character chromatic numbers of the window's planes and the
+exposed fields; one prime fails three ways.** `[hand]`, given band rigidity (row 98).
+- K: none beyond rows 95–98's gluing. Missing: `plans/FS91-derivation.md:282–455` (J07-1 to J07-15, J08-1 to J08-10,
+  J10, J11), over rows 95–98. Row 101's finite clauses (`χ_char(Γ₂₃) = 8`, `χ_char(Γ₁₁) = 6`, band lists) are exact finite
+  computations a `decide +kernel` could carry once `[S3]` names the characters; not measured.
+
+**Row 103 — the chain theorem; `χ(ℚ(√2,√3)²) ≥ 4`; `G4 → χ(K(√7)²) ≥ 5`.** Kernel-checked.
+- K: `Chain.not_colorable_chain`, `Chain.add_one_le_chromaticNumber_planeOver_of_chain`,
+  `SqrtTwoThree.four_le_chromaticNumber_planeOver_two_three`, `SqrtTwoThree.eighteen_not_colorable_three` (std3);
+  `SevenConditional.five_le_chromaticNumber_planeOver_seven_of_G4` (std3; takes `SevenConditional.G4`, ours: "row 103 (the
+  8/3 forcer: M56's 588-vertex core, one solver refusal with no proof log)").
+- Missing: `[S8]` `G4` — a refutation certificate for the 588-vertex core at four colours, checked by the library's LRAT
+  checker (the machinery of rung B). It needs a proof log from a solver, which is the Searcher's lane: a search request.
+  Also the upper end `χ(ℚ(√2,√3)²) ≤ 4`, "not in the kernel" (`ARCHITECTURE.md`): a residue map at a stable dyadic prime,
+  `[S1b]`.
+- Reader today: "`χ(K(√7)²) ≥ 5` if the 8/3 forcer refuses four colours." After `[S8]`: "`χ(ℚ(√3,√7,√11)²) ≥ 5`,
+  kernel-checked" — a lower bound at a field the conjecture puts at seven, by Parts's forcer (prior art) chained.
+
+**Rows 104–106 — transcendence is free; prime inversion in valuation form and the wall broken over `K(√7)`; the stripe
+lemma.** Kernel-checked. K: `RouteC.chromaticNumber_unitQuadrance_ratFunc_of_one_add_sq_ne_zero`,
+`RouteC.chromaticNumber_planeOver_adjoin_transcendental_eq`, `RouteC.chromaticNumber_planeOver_liouville`;
+`UnitRing.inv_natCast_mem_unitRing_iff`, `UnitRing.inv_natCast_mem_unitRingOver_iff`, `SevenUnitRing.wall_broken_seven`,
+`SevenUnitRing.inv_two_mem_unitRingOver_seven`; `Stripe.striped_of_proper_nt0` (std3). Row 105's reading of "σ-stable
+valuation subring with `n` a non-unit" as "conjugation-stable prime above `n`" is `[S1b]`'s converse half (every
+conjugation-stable valuation subring of a number field `F(i)` other than the field is the localization at a stable prime).
+Nothing else owed.
+
+**Row 107 — the bridge `χ(ℝ²) = sup_F χ(F²)` over real number fields, attained.** Kernel-checked over one named outside
+hypothesis.
+- K: `Bridge.chromaticNumber_plane_eq_iSup_numberField_of_descent` and four more (std3; each takes
+  `Bridge.RealAlgebraicDescent`, outside, `[Lang1953]`); `Bridge.iSup_numberField_le_chromaticNumber_plane`,
+  `Real.isRealClosed`, `algebraicClosure.isRealClosed`, `NoParam.not_isSquare_cube_sub_self` (std3, no hypothesis).
+- Outside: **Artin–Lang** (a finite system of rational polynomial equations with a real solution has a real algebraic
+  one). As printed: `[Lang1953]`, *The theory of real places*, Ann. of Math. 57, 378–391 — `BIBLIOGRAPHY.md`: "not held;
+  not read; cited through `[GoelPatilVerma2022]`" (Thm 3.11 there, read). Mathlib: none (searched "artin.?lang",
+  "tarski.?seidenberg", "quantifier elimination": only Presburger arithmetic). My call: **import**, as an `axiom` in the
+  form of `[GoelPatilVerma2022]` Thm 3.11 (the held, read statement), deriving `RealAlgebraicDescent` from it in the
+  kernel; real quantifier elimination or the Artin–Lang homomorphism theorem is far beyond an hour. Four items: (1) key and
+  page — owed; (2) read-back — owed, against the held paper; (3) model — held in part (`Bridge.realAlgebraicDescent_one`,
+  the one-variable case; `Bridge.not_rationalDescent`, the refuted rational twin); (4) § Trust line — owed.
+- The row's second route to the chromatic-number half with no Tarski (through `[OAIMath2026]`'s transfer read on the
+  algebraic plane, one mind's reading) would need an import the library does not hold; not pursued here.
+- Reader today: "conditional on Artin–Lang, a named hypothesis." After the import: "on one declared outside theorem."
