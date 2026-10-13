@@ -1,0 +1,5 @@
+sampler start 2026-10-13T19:38:39Z worktree=/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wkc interval=5s pid=701464
+19:43:36 heartbeat samples=60 now: 0 process(es), sum-rss=0 MiB
+19:44:16 new max sum-rss=3538 MiB over 1 process(es): Proofs/HadwigerNelson/Plane/LebesgueNumber.lean
+19:44:16 new max one-rss=3538 MiB: Proofs/HadwigerNelson/Plane/LebesgueNumber.lean
+sampler end 2026-10-13T19:44:56Z samples=75 PEAK_SUM_RSS_MIB=3538 (over 1 process(es): Proofs/HadwigerNelson/Plane/LebesgueNumber.lean) PEAK_ONE_RSS_MIB=3538 (Proofs/HadwigerNelson/Plane/LebesgueNumber.lean)

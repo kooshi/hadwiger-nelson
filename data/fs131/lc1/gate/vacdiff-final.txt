@@ -1,0 +1,24 @@
+counter vs the main scan: declarations 15928 / 15928, refutations 228 / 228: agree
+counter vs the landing scan: declarations 15969 / 15969, refutations 228 / 228: agree
+added SITE GENERIC HadwigerNelson.Plane.AeColouring.col_eq_of_mem_core :: HadwigerNelson.Plane.AeColouring k
+added SITE GENERIC HadwigerNelson.Plane.AeColouring.core :: HadwigerNelson.Plane.AeColouring k
+added SITE GENERIC HadwigerNelson.Plane.AeColouring.core_dist_ne_one :: HadwigerNelson.Plane.AeColouring k
+added SITE GENERIC HadwigerNelson.Plane.AeColouring.measurableSet_core :: HadwigerNelson.Plane.AeColouring k
+added SITE GENERIC HadwigerNelson.Plane.AeColouring.volume_compl_iUnion_core :: HadwigerNelson.Plane.AeColouring k
+added SITE GENERIC HadwigerNelson.Plane.exists_proper_of_aeColouring :: HadwigerNelson.Plane.AeColouring k
+main rows 1529, landing rows 1535; lost 0 (0 with a removed declaration); added 6
+  added SITE GENERIC on AeColouring: 6
+  added rows in Plane.LebesgueNumber: 6
+  declarations: 15928 -> 15969 (+41)
+  refutations-skipped: 228 -> 228 (+0)
+  sites: 1448 -> 1454 (+6)
+  vacuous: 0 -> 0 (+0)
+  stale: 0 -> 0 (+0)
+  declared: 3 -> 3 (+0)
+  witnessed: 38 -> 38 (+0)
+  generic: 1405 -> 1411 (+6)
+  unknown: 2 -> 2 (+0)
+  module Plane.LebesgueNumber: declarations 0 -> 41 (+41), refutations 0 -> 0 (+0)  [new module]
+  by module: declarations +41, refutations +0: equal to the scans difference
+vacdiff: PASS
+exit=0

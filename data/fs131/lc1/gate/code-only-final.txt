@@ -1,0 +1,5 @@
+SAME    Proofs/HadwigerNelson/Plane/AeColouring.lean: 929 characters of code at e9e7cd2de, 929 now; comment characters 1551 -> 2344 (whitespace counted with them)
+SAME    Proofs/HadwigerNelson/Plane/FalconerReduction.lean: 33156 characters of code at e9e7cd2de, 33156 now; comment characters 8632 -> 9141 (whitespace counted with them)
+SAME    Proofs/HadwigerNelson/Plane/LebesgueNumber.lean: 19746 characters of code at e9e7cd2de, 19746 now; comment characters 15615 -> 15940 (whitespace counted with them)
+OK
+exit=0

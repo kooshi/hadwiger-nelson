@@ -544,3 +544,57 @@ argument", and `synTaut` on the same plant (`lint-plant.log`). Restored by `git 
 the one taken before, the plant's name in the file 0 times, 0 tracked files modified; the pass's build recompiles the
 module and the root from the restored text. **This machine's second build measurement**: a walk at `BATCH=10` that
 rebuilds two modules is 5 m 33 s (200 Lake starts), against 24 m 18 s at `BATCH=2`.
+
+## Stage 8 — SAVED (FS131-LC1): the full gate on one commit — `10892a8f2` — green on its first pass
+
+One pass is every step in order, one at a time under the slot (`data/fs131/lc1/run-gate.sh final 10`, launched from a
+snapshot copy; every log under `data/fs131/lc1/gate/` with its exit status on its last line; `run-gate-final.head`
+records the commit — `10892a8f20d3e81d07a3f067d9bcd5884c26e387` — and that no tracked file was modified at its start;
+`run-pass-final.out` holds every step's exit; `measure-final.txt` every step's wall time and memory;
+19:38Z–20:02Z, 24 minutes). **Every step exit 0 but the one planted control that must exit 1** (the scan
+difference's plants); "tracked files modified after the pass: 0". It is the **first** full pass of this job. Counts
+below are read from the saved logs.
+
+| step | result, read from its saved log (`data/fs131/lc1/gate/`, tag `final`) | log | wall | peak (charged) / max-rss |
+|---|---|---|---|---|
+| build (`BATCH=10`, `--mem 10 --cpus 8`) | "build: OK — 200 of 200 batches, 2 module(s) rebuilt, **0 module(s) with warnings**, 6m11s" (`Plane.LebesgueNumber` and the root, recompiled from the text restored after the lint's control); lines holding "warning" in the build log: 1, that sentence; in Lake's full log: 0 | `build-final.log`, `receipt-build-final.log`, `build-final.rss` | 376 s | the one compiler 3.5 GiB resident |
+| `sorry` | narrow pattern over `Proofs/` and `Proofs.lean`: **0** lines; `\bsorry\b`: 24, all prose, `main`'s count; the search's plant fired before the pass (stage 7) | `sorry-narrow-final.txt`, `sorry-wide-final.txt`; `../sorry-plant.out` | — | — |
+| `axiom` lines in `Proofs/` | 4 line-initial, as on `main` (three axioms and one line of a docstring's code block). **The landing brings none** | `axiom-lines-final.txt` | — | — |
+| doubled names, after the build and before the audit | "dupnames: OK — no name is declared by two modules (24 generated on demand, listed above)"; its self-test "OK — all 15 controls behaved" | `dupnames-final.log`, `dupnames-selftest-final.log` | 4.3 s; 24 s | 0.53 / 4.41 GiB; 0.76 / 1.53 |
+| every declaration in a block, before the audit | "declarations the landing brings: 34 (of 41 constants in 1 modules); with one line: 34; unfiled: 0; doubled: 0" | `unfiled-final.txt`, `decls-final.out` | 62 s (the dump) | 0.54 / 4.42 |
+| axioms | "audited: **7454 records — 7395 clean on the standard axioms, 28 axiom-free, 26 imported** (resting on a declared outside theorem), **5 declared purchase(s)**"; "axioms: OK". `CLAUDE.md` § Trust ledger flagged stale, "7364 clean → 7395, 23 imported → 26" (draft 1) | `axioms-final.log`, `receipt-axioms-final.log` | 8.3 s | 1.15 / 4.98 |
+| its self-test | "axioms self-test: OK — every planted fault fired, and every partner passed." (23 of 23; red at its two state-reading controls before their counts moved: stage 3) | `axioms-selftest-final.log`, `receipt-axioms-self-test-final.log.xz` | 173 s | 1.29 / 5.09 |
+| every declaration of the landing filed on what it rests on (`data/fs131/lc1/records.py`) | "records: PASS" — 31 under CLEAN on exactly the three, 3 under IMPORTED on the three and `proper_to_borel_weak`; over the whole log 26 under IMPORTED (8 + 6 + 12), none carrying two imports, none `sorryAx`; "plants: every one of 16 fired; the unplanted lists pass" | `records-final.txt`, `records-plant-final.txt` | — | — |
+| the import's block with its two controls; the generated modules against the generator | "block: PASS — every record as filed; both controls fired"; "CHECK OK"; "SELF-TEST OK: 10 plants refused and 1 partner accepted" | `block-final.txt`, `port-check-final.txt`, `port-selftest-final.txt` | 8.7 s | (the tool's own slots) |
+| vacuity | "scanned: **declarations=15969 refutations-skipped=228**"; "sites: **sites=1454 vacuous=0 stale=0 declared=3 witnessed=38 generic=1411 unknown=2**"; "vacuity: OK"; "recorded counts in scripts/vacuity-baseline.txt's header: match (9 of 9 compared)". Flagged stale, not failed: `CLAUDE.md` § The gate ("declarations 15928 → 15969, sites 1448 → 1454, generic 1405 → 1411"; draft 4) | `vacuity-final.log`, `receipt-vacuity-final.log` | 125 s | 0.58 / 4.54 |
+| the scan against the last landing's, row for row | "main rows 1529, landing rows 1535; lost 0 …; added 6"; "by module: declarations +41, refutations +0: equal to the scans difference"; "vacdiff: PASS"; its plants: exit 1, as they must | `vacdiff-final.txt`, `vacdiff-plant-final.txt`, `count-modules-final.out` | 74 s (the counter) | 0.55 / 4.49 |
+| its self-test | "OK — all 65 controls behaved: every one fired, and the silent ones stayed silent." | `vacuity-selftest-final.log` | 120 s | 0.60 / 4.54 |
+| assumptions | "assumptions: OK — 3 outside theorem(s) as axioms, with **26** theorem(s) resting on them; 19 named and 16 inline hypotheses (7 outside, 23 ours, 5 open), taken by 98 statement(s) and mentioned by 1"; "assumed: **axioms=3 rests=26 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1**"; the ledger's header "match (9 of 9 compared)"; `CLAUDE.md` § Trust ledger flagged stale, "rests 23 → 26" (draft 3); its self-test "OK — all 33 checks behaved" | `assumptions-final.log`, `receipt-assumptions-final.log`, `assumptions-selftest-final.log` | 102 s; 113 s | 0.66 / 4.59; 0.69 / 4.64 |
+| architecture | "RESULT: PASS" | `arch-final.txt` | 3.7 s | — |
+| guarded lint (`lake lint --no-build -- --no-build --trace`, `--mem 8`) | exit 0, "-- Linting passed for Proofs.", 14 linters each "(2/2) Passed!"; its control red before the pass (stage 7) | `lint-final.log`; `../lint-plant.log` | 9.7 s | 0.85 / 4.92 |
+| notes, as the last landing ran them | "notes read: 196 LOCAL-SAID=31 NO-OBJECT=48 NONE-SAID=59 no-conflict=58", `main`'s count (the check reads QA4's modules, none of this landing's); "self-test: OK (6 controls, 1 planted)" | `notes-l5-final.txt`, `notes-qa4-selftest-final.txt` | 3.9 s | — |
+| the import's and the port's stored-term comparisons, **on the modules as this landing recompiled them** (`Outside/OAI158` and the nine ported modules import `Plane/AeColouring`) | "declarations: 8 compared: 8 identical: 8 different: 0", "READ-BACK IDENTICAL: all 8 declarations, term for term, modulo the namespace", "READ-BACK RUN gate-final: OK" (14 steps); "READBACK OK", the port's print byte for byte its own ("IDENTICAL"), "SELF-TEST OK: 13 plants refused, the unplanted pair passes", "PORT READ-BACK RUN gate-final: OK"; the release clone at `adc7f124`, clean, nothing written at its side | `readback-import-final.txt`, `readback-port-final.txt`; `../readback-import/`, `../readback-port/` | — | (the runners' own slots, 12 GiB each) |
+| the statements as stored, against the dump made before any edit | "statements: PASS: no statement and no definition changed — 87 named constants compared in 3 module(s)"; "plants: every one of 4 fired" | `statements-final.txt`, `statements-plant-final.txt`, `statements-final.compact` | 3.6 s | 0.54 / 4.39 |
+| the three edited files in text, block comments removed, against the commit before the edits | "SAME" three times; the plant "DIFFERS" three times; under `Proofs/` and `Proofs.lean` those three files differ from that commit and no other | `code-only-final.txt`, `code-only-plant-final.txt`, `proofs-diff-final.txt` | — | — |
+| the statements by `#check`, their axioms, the models | no error; 25 prints: the eleven headline theorems on `[propext, Classical.choice, Quot.sound]`, the three on those and `Outside.OAI158.proper_to_borel_weak`; nine model terms on the three, two sanity terms on the three and `no_proper_five_coloring` | `checks-final.out` | 4.7 s | 0.56 / 4.43 |
+| the baseline and the scans' sources | "baseline entries: unchanged from main's (2)"; lines that differ from `main`'s: `scripts/axioms-controls.txt` 13 (stage 3's edit), and 0 in each of `scripts/Vacuity.lean`, `Assumptions.lean`, the other three control files, `DupNames.lean`, `gate_report.py`, the four gate scripts and `build.sh` | `baseline-final.txt` | — | — |
+| the three digests against the previous landing's receipts (`data/fs124/l2/gate/receipt-*-final.log`) | axioms: **34 rows added, none removed** — 31 CLEAN, 3 IMPORTED; vacuity: three counts move, six `SITE GENERIC` rows added, none removed; assumptions: `rests 23 → 26`, three `RESTS` rows added, the axiom's row 9 → 12 theorems. **Stale against the front page until the drafts are filed, exactly these lines**: `CLAUDE.md` § Trust ledger — "7364 clean → 7395, 23 imported → 26" and "rests 23 → 26"; `CLAUDE.md` § The gate — "declarations 15928 → 15969, sites 1448 → 1454, generic 1405 → 1411". The two headers on the branch match | `digest-axioms-final.txt`, `digest-vacuity-final.txt`, `digest-assumptions-final.txt` | — | — |
+
+**What the measurements say, for the next landing on this machine**: every whole-library step is one `lean` process
+of 4.4 to 5.1 GiB resident — the reservation of 14 was three times the need, and 8 is honest; the kernel charged each
+step's scope 0.5 to 1.3 GiB, because the `.olean` pages were already cached. The whole pass is 24 minutes, six of
+them the walk.
+
+**Read aloud against the informal claim.** The claim of this landing: "the chromatic number of the plane equals its
+measurable chromatic number, with colour classes Lebesgue measurable and no two points at distance one sharing a
+colour — on one declared outside theorem, with a printed lemma formalized and composed; and, with no outside theorem,
+the almost-everywhere number equals the Lebesgue number." What the gate shows: no `axiom` enters and no `sorry` is in
+`Proofs/`; each of the 34 declarations the module brings has one record, the 31 that rest on no import under CLEAN on
+exactly the standard three and the 3 that state the plane's equality under IMPORTED on those and
+`proper_to_borel_weak` alone; no name is declared twice, so each printed list is the list of the proof the kernel
+checked; the three conditional statements are listed in the ledger of what the library assumes; no statement moved
+between the planner's hand-back and this commit, and the outside theorem's stored statement is still the release's
+term for term on the module as recompiled. **What the gate does not show, and this record says**: that the definition
+is the paper's number — stage 6 reads it against p. 2; that the lemma is the page's — stage 6, clause by clause; that
+the hypotheses can be met — stage 5 names each model and how it is held; that the mathematics is this project's — it
+is not.
