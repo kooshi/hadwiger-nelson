@@ -213,3 +213,61 @@ inside its Amendment 1.
 |---|---|---|---|
 | `./scripts/axioms.sh` (7,454 records) | 8.1 s | 1.07 GiB | 4.91 GiB |
 | `./scripts/axioms.sh --self-test` (23 controls) | 170 s | 1.23 GiB | 5.02 GiB |
+
+## Stage 4 — SAVED (FS131-LC1): what the library assumes
+
+`./scripts/assumptions.sh --self-test` first (`data/fs131/lc1/probes/assumptions-selftest-first.log`): exit 0, "OK —
+all 33 checks behaved: every planted fault fired, and every partner stayed silent". Then the step
+(`probes/assumptions-first.log`; the same on the tree as given, stage 1): **exit 1, three failures, one kind, each a
+row the landing is to write**:
+
+```
+FAIL unlisted-consumer HadwigerNelson.Plane.chromaticNumber_euclidean_plane_eq_chiLebesgue :: the scan finds 'RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Plane.chromaticNumber_euclidean_plane_eq_chiLebesgue' and the ledger does not list it
+FAIL unlisted-consumer HadwigerNelson.Plane.chromaticNumber_plane_eq_chiLebesgue :: … and the ledger does not list it
+FAIL unlisted-consumer HadwigerNelson.Plane.colorable_iff_exists_nullMeasurable_proper :: … and the ledger does not list it
+```
+
+**The ledger, written with the script's own flag** (`./scripts/assumptions.sh --write-ledger`;
+`probes/assumptions-write-ledger.log`: "ledger written (125 rows) — read the rows above; a row is a theorem that is
+conditional"). `git diff scripts/assumptions-ledger.txt`: **three rows gained, none lost**, and the header's count
+line:
+
+```
++RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Plane.chromaticNumber_euclidean_plane_eq_chiLebesgue
++RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Plane.chromaticNumber_plane_eq_chiLebesgue
++RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Plane.colorable_iff_exists_nullMeasurable_proper
+-#   axioms=3 rests=23 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1
++#   axioms=3 rests=26 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1
+```
+
+Each row read: each of the three is a statement that is now conditional on `[OAIMath2026]`'s transfer — `χ(ℝ²) =
+χ_m(ℝ²)` in its two forms and colour by colour. They are the three the audit prints under IMPORTED (stage 3).
+
+After it (`probes/assumptions-second.log`): **exit 0** — "assumptions: OK — 3 outside theorem(s) as axioms, with 26
+theorem(s) resting on them; 19 named and 16 inline hypotheses (7 outside, 23 ours, 5 open), taken by 98 statement(s)
+and mentioned by 1"; "recorded counts in scripts/assumptions-ledger.txt's header: match (9 of 9 compared)";
+`CLAUDE.md` § Trust ledger flagged stale, "rests 23 → 26" (draft 3).
+
+| | `main` (FS124-L2's gated scan) | this tree |
+|---|---|---|
+| `scanned` | constants=15036 theorems=11225 formers=361 hypotheses=19527 closed=1473 | constants=15071 theorems=11257 formers=362 hypotheses=19578 closed=1473 |
+| the nine | axioms=3 **rests=23** named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1 | axioms=3 **rests=26** named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1 |
+| the rest | conditions=40 … silent=1 cohyp=58 hints=0 unseen=17480 fails=0 | conditions=40 … silent=1 cohyp=58 hints=0 unseen=17512 fails=0 |
+
+**Of the nine counts, one moves: `rests` 23 → 26.** No theorem of the module takes an assumption in hypothesis form
+(no `TAKES` row; `closed=1473`, `main`'s count: no closed hypothesis enters), so `scripts/Assumptions.lean` is
+untouched — no `.former`, no `.site`, no `.condition`. The one new `Prop`-former, `HasDensityOneAt`, is concluded by
+a library theorem (`hasDensityOneAt_univ`), so the step reads it without a declaration.
+
+**The 32 hypotheses the step counts and cannot decide (`unseen` 17480 → 17512), read by hand, on this job's word**:
+every hypothesis of the module is a condition on its theorem's own variables — the relation's translation
+invariance (`hR`), the measurability of a given colouring or family (`hc`, `hA`, `hVm`, `hf`), a given set conull
+(`hS`, `hcov`), a given colouring proper on it or everywhere (`hproper`), given sets avoiding the relation (`havoid`),
+given classes with null unit pairs (`hnull`), densities and memberships at given points. None is a hand result of
+this project or an outside theorem written out in a binder; the one outside theorem the module uses enters as the
+declared axiom, through `Outside.OAI158.colorable_iff_nonempty_aeColouring` and `chromaticNumber_plane_eq_chiM0`.
+
+| step, this machine | wall | peak (charged) | max-rss |
+|---|---|---|---|
+| `./scripts/assumptions.sh` | 112 s | 0.66 GiB | 4.59 GiB |
+| `./scripts/assumptions.sh --self-test` (33 checks) | 112 s | 0.69 GiB | 4.63 GiB |
