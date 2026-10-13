@@ -7,7 +7,17 @@ and nothing else; no agent of my own; no search; no Lean build. An erratum to an
 
 ## Theorems this phase proved
 
-*(filled at each stage's save; one line per statement, with its grade and its address in this file)*
+| id | statement (one line) | verdict | grade | where |
+|---|---|---|---|---|
+| EN1-MRPLUS | MR⁺(F): an invariant finite positive measure null on `T + A` is a Haar multiple | TRUE for `F` with `R_F = O′` (row 120's scope); false under the signed value reading | [hand], derived from EN1-FROM-TWO; one mind | § Stage 4 |
+| EN1-FROM-TWO | PE-2 and EF_F⁺ give MR⁺, reading no R-U, no `E`, no Haar-null clause | TRUE | [hand]; one mind | § 4.1 |
+| EN1-SPCOR | SP-Cor at `T + A` reads MR⁺ and A⁺ at `S = ∅` of our hand results; R-U is `τ(∅) = 0` | TRUE ("only" among our hand results) | [hand]; one mind | § 5.1 |
+| EN1-APLUS | A⁺ at `S = ∅` reads `E` only as `T + A`; N2 at `S = ∅` needs N1 (a) | TRUE as worded; also reads N1 (b) at `S = ∅` as written, `T + A` Borel and `U`-stable | [hand], one exact text check; one mind | § Stage 3 |
+| EN1-OFFPATH | R-U, J45's split-place model, N1 (c), `Haar(E) = 0` are cited by no proof on the path of rows 121, 123 | TRUE read strictly; **not claimed and false:** that the split places or R-U's argument are off the path (EF_F⁺ keeps both) | [hand], derived from the three above and a walk; one mind | § Stage 6 |
+| EN1-EQUIV | given `Haar(E) = 0`: MR⁺(F) ⟺ MR(F) ∧ R-U(F) | TRUE | [hand]; one mind | § 4.3 |
+| EN1-UQ4 | `3\|λ\| < Q + 1` for every non-trivial eigenvalue of `U_Q`, `Q = 2^f ≥ 256`, by a fourth-moment count | TRUE | [hand] + computed exactly at `Q = 64, 128, 256`; one mind; prior art owed | § 7.3 |
+
+Readings, not theorems: Amendment 1's two questions (§ 7.1, § 7.2).
 
 ## Stage 1 — SAVED (readback: the quotations, the symbols, the statements in my words)
 
@@ -581,3 +591,79 @@ control: uq-fourth-moment
   fault: python3 ../data/fs131/en1/uq_fourth_moment.py 6 7 8 --plant
 
 Rests on it: nothing yet; it is offered to the kernel lane's leaf 8.
+
+## Stage 8 — SAVED (the hand-off: what is on the path, said plainly)
+
+### 8.1 The hand results on the path of rows 121 and 123, after this reading
+
+`D` = `plans/FS100-derivation.md`, `J45` = `plans/FS84-SI-D-derivation.md`, `R88` = `plans/R88-derivation.md`, `X01D`, `X02D`, `X12B`, `X23D` =
+`plans/FS100-<id>-derivation.md`, `FS105` = `plans/FS105-derivation.md`. "Leaf n" is the planner's (`plans/FS131-KN1-number-field-kernel-map.md`,
+"The chain's leaves"). Depth of my reading per item is § 6.3's.
+
+| # | hand result | address | leaf | note from this reading |
+|---|---|---|---|---|
+| 1 | `T + A` is Borel and stable under `U` | J45 § 2.1 Lemma N1 (ll. 105–109), at `S = ∅`; direct in § 3.1's last row | 1 | read by A⁺'s remark (ii) and by SP-Cor's `τ` |
+| 2 | N1 (a) at `S = ∅`: the `τ′_∅`-continuous characters are exactly `T + A` | J45 § 2.1 (ll. 110–113); both inclusions in § 3.3 here | 11 | needs J28V-7 (`NR` of finite index; R88 l. 182) and no split place |
+| 3 | `R` is dense in the completion that carries `T + A` | J45 N1 (b) at `S = ∅` (ll. 114–120); or J28D C1 (`plans/FS86-R88-D-derivation.md` ll. 148–150); X23D § 3.2 step 1 (ll. 222–223) | under 10 | **needed by T-C(A)'s extension step**; cited by N2 as written and avoidable there (§ 3.3). In J28D's and X23D's form it reads `R = O′` and one split place |
+| 4 | N2 at `S = ∅`: the spectral subspace of `T + A` is `L²` of an invariant σ-algebra | J45 § 2.1 Lemma N2 (ll. 126–135); entry l. 439 | 11 | over Bochner on a locally compact group |
+| 5 | SI-1, SI-2, SI-3 at `S = ∅` | J45 § 2.2 (ll. 145–157) | 12 | read `T + A` only |
+| 6 | SI-4 at `S = ∅` | J45 § 2.2 (l. 159); entry l. 456 | kernel | — |
+| 7 | A⁺ at `S = ∅`, with remark (ii) | J45 § Stage 3 (ll. 240–250) | 12 | given item 8 |
+| 8 | T-C(A) at `S = ∅` | R88-TCA (R88 l. 161) with R88-TC-ext (l. 114), -TC-reg (l. 130), -TC-count (l. 144), -TC-Yp / -J28V-3 (ll. 135, 140), -TC-tab (l. 152); in every degree FS100-TCA (D l. 291) and, at a complex place of `F`, FS100-CX (D l. 293) | 9, 10 | no split-place factor at `S = ∅`; reads `R = O′` (Lemma C (d), Lemma C′) and one split place in its density step |
+| 9 | CLS, with the dyadic Lemma P | FS100-CLS (D l. 285), FS100-DLP (D l. 287), FS100-G27 (D l. 289); at degree 2 FS100-T1 (D l. 116), FS100-Q0 (D l. 273) | 8 | "Weil" in characteristic 2 at `Q ≥ 256`, or EN1-UQ4 (§ 7.1, § 7.3) |
+| 10 | SP-Cor, run at `T + A` | EN1-SPCOR, § 5.1 here; J45 § 4.2 (l. 321) is the form with `E`; field-free by FS100-K0, K0b, SPC (D ll. 129, 277, 295) | 2 | reads items 1, 7, 12 and the two classical theorems; **not R-U** |
+| 11 | PE-2 | FS100-PE2 (D l. 191): X02D Lemma F (l. 100), PE-1′ (l. 146), Lemma W (l. 156), Lemma Γ (§ 3.1), § 3.2; if Thm 1.3 is declared, FS105-DED (FS105 l. 24) | 20 | reads no `E`; Lemma W reads a totally split prime |
+| 12 | EF_F⁺ | FS100-EFP (D l. 162): the model X01D § 2.0 (l. 118) / X12B § 2.0 / FS105-B-M1 (FS105 l. 76); Lemma PF (X01D l. 208); §§ 3.2–3.8; or X12B §§ 2.1–2.2; the height count FS100-EFG (b) (D l. 216) | 21 | **keeps the split places**: the restricted product over all of them, strong approximation and Lusin–Souslin in "leaves", the wandering step (X01D § 3.8; X12B Lemma Z; FS105-B-L6, with no class number); needs `R = O′` |
+| 13 | MR⁺(F), `R_F = O′` | EN1-FROM-TWO, EN1-MRPLUS, § 4.1 here; FS100-MR (a) (D l. 201) is the form with `E` | 22 | five lines from items 11 and 12 |
+| 14 | `R = O′` (Lemma C′), and the exception outside the class | `LEDGER.md` row 100 (`plans/FS91-derivation.md` l. 136, FS91-J07-4); FS100-EXC (D l. 297) | not a numbered leaf of the chain, as far as I read the map | read by items 3 (in J28D's form), 8 and 12 |
+| 15 | row 99, `χ = L` at `L ≤ 4` (row 123 only) | `LEDGER.md` row 99; `plans/FS91-derivation.md` § 3 | 6 | not read by me |
+| 16 | the upper half | row 52; at ℚ(√47) in the kernel | 5 | — |
+| 17 | the instances | FS100-Q47 (D l. 206), FS100-COR (l. 299), FS100-FAM (l. 275), FS100-Q35 (l. 301), FS100-167's first route (l. 279) | 23 | the second route of FS100-167 is not on the list (§ 6.1) |
+
+**Not on the path after this reading** (each was on it, or was listed as on it): J45-RU (J45 § 4.1) and FS100-EFZ (D l. 176); N1 at `S ≠ ∅`
+(J45's `G′_S` with `∏_{v∈S} L_v`, its weak approximation at split `v ∈ S`, its Borel isomorphism); N1 (c) and "`Haar(E) = 0`"; J45-SI-5, -SI-J,
+-SI-C; J45-SP-if, and SP-oi beyond its one line; FS100-MR (b), (c), (d); X12B-E; C14.2 (c).
+
+**Printed or classical statements the proofs above read** (as far as I read them; pages are the planner's to find): Herglotz–Bochner on the
+discrete `R` with uniqueness, and Bochner on a locally compact abelian group (N2; R88-TC-ext); Markov–Kakutani; Doob–Cohn's measurable
+modification and Lebesgue differentiation on a doubling space (R88-TC-ext, R88-TC-reg); weak approximation for the norm-one torus; strong
+approximation; Tate's duality for the model `W/Λ`; Lusin–Souslin; Kronecker's theorem on units; the product formula; finiteness of the class
+number (X01D § 3.8 only — FS105-B-L6 avoids it); Lehmer's count of Pythagorean triples (or X12B's exact count); `[LevitzMott1972]`; Chebotarev
+(Dirichlet at a biquadratic `L`); `[EinsiedlerLindenstrauss2022]`; the ergodic decomposition, the entropy of increasing factors and Jacobs's
+formula (PE-2); Shannon–McMillan–Breiman in its almost-everywhere form and Egorov (EF_F⁺); `[AmbrusEtAl2023]`; Weil for odd `q`, and in
+characteristic 2 unless EN1-UQ4 is taken.
+
+### 8.2 Shorter routes seen on the way (mine; one mind; none checked by a second; none folded into a verdict)
+
+1. **N2 at `S = ∅` on the closure of `R`** — no density needed (§ 3.3). J46's blind proof already runs this way.
+2. **Lemma 3.1′ without Jacobs's formula or the ergodic decomposition** — Fatou identifies the limit (§ 7.2).
+3. **Leaf 8 with no printed bound at a dyadic place** — the fourth-moment count, EN1-UQ4 (§ 7.3), with its exact control.
+4. **Density of `R` in `R̂_prof × (L ⊗ ℝ)` without weak approximation** (not written out, not checked): `6/5 − 1 = 1/5 ∈ R` since
+   `(3 ± 4i)/5 ∈ U`; `ℚR = L`; so `R` holds `ℤ[1/5]Λ₀` for a full lattice `Λ₀ ⊂ L`, and `N·5^{−k}Λ₀` is dense in `L ⊗ ℝ` for every `N`.
+5. **R-U, where another row still wants it, need not go through J45's model**: X12B-E derives it by Lemma Z on EF_F⁺'s model
+   (`plans/FS100-X12B-derivation.md` ll. 79–83), and given `Haar(E) = 0` it follows from MR⁺ in three lines (EN1-EQUIV). The record's, pointed
+   to here because the map will meet it at rows 112 and 116–118.
+
+### 8.3 Drafts for files I do not write
+
+- **`LEDGER.md`, row 121, the source cell** — a correction owed. It reads: "`plans/FS84-SI-D-derivation.md` (J45-N1, -N2, -SI-4, -SI-5, -SI-J,
+  -SI-C, -SP-oi, -SP-if — the inputs FS100-Q47's grade names, filed as entries by FS129-Z1)". Proposed: "`plans/FS84-SI-D-derivation.md`
+  (J45-N1, -N2, -SI-4, -SP-oi — inputs of SP-Cor's proof; J45-SI-5, -SI-J, -SI-C, -SP-if — its scope lemma, product lemma, control and
+  converse, not inputs of it — all filed as entries by FS129-Z1)". Source: § 6.2 here.
+- **`plans/FS84-SI-D-derivation.md`, a dated erratum under J45-N1's "Rests on it" line** (the original left standing): "*Erratum (2026-10-13,
+  FS131-EN1 §§ 5–6):* N1 reaches A⁺ and FS100-Q47 through its clauses at `S = ∅` only — (a), (b), σ-compactness and `U`-invariance. Its
+  clauses at `S ≠ ∅`, its Borel isomorphism and its clause (c) reach row 121 only through R-U and through SI-J; SP-Cor run at `T + A`
+  (FS131-EN1, EN1-SPCOR) reads neither."
+- **`plans/FS100-derivation.md`, a dated erratum under FS100-Q47** (the original left standing): "*Erratum (2026-10-13, FS131-EN1 § 5):* the
+  grade's 'SP-Cor … over N1, N2, R-U, A⁺' names R-U as an input. SP-Cor run with `T + A` in the place of `E` does not read R-U; it reads
+  MR⁺ (EN1-MRPLUS), A⁺ at `S = ∅`, and N1 at `S = ∅`. No statement or grade changes."
+- **`plans/FS100-three-field-lemma.md` §R-close (stage 5) 1.2, link L5** — it lists "C14.2 (c) at `q = 2` for the split dyadic place" among
+  the inputs of T-C(A) at `S = ∅`. That lemma is an input of row 113's statement at every finite `S`, not of its `S = ∅` case (J45 l. 326;
+  `plans/FS100-K-kernel-47.md` § 1.3, "What is *not* an input at `S = ∅`"). A note for whoever next cites the ladder; no erratum drafted.
+- **`plans/FS100-K-kernel-47.md` l. 84 and l. 123** — node M is written with "`m(E) = 0` (N1)" as a step. No derivation uses it; the
+  planner's new map supersedes that table. Logged as a slip of the old map.
+
+### 8.4 Predictions
+
+None was registered: no stage of this job chose its next step on a forecast. One expectation was written before the walk — § 2.3 item 1,
+that R-U's argument would be found inside EF_F⁺ — and it was met in all three derivations.
