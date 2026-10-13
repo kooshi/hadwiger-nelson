@@ -50,3 +50,20 @@ of one stored statement, one definition's value, one declaration removed — thr
 30 named constants compared (27 theorems, 3 definitions), control `3 of 3`. A first version elaborated the two copies at two
 paths and reported 29 false differences on an untouched file: an instance binder's stored name carries the file's module
 name (`inst._@.<module>.<n>._hygCtx._hyg.6`). The control said so itself (`29 of 3 … DID NOT FIRE AS PLANTED`).
+
+## Stage 2 — SAVED: U1–U7 proved
+
+`mem_localRing`, `conj_mem_localRing`, `isUnit_mk_pow`, `residue_div`, `residue_conj`, `coe_mem_nonunits_localRing_iff`,
+`localRing_ne_top` — each by the plan's route, one iteration (`lake env lean`: exit 0, five `sorry` left; 4.4 s, 3.6 GB).
+Statement check (`data/fs131/iu1/logs/statements-stage2.out`): `PASS`, control `3 of 3`.
+
+What differed from the plan's text, for the next reader:
+- U1 needs no `ValuationSubring.mem_ofSubring`: `show x ∈ HeightOneSpectrum.valuationSubringAtPrime (fieldI F) P.heightOne ↔ _`
+  and the membership destructs directly (`rintro ⟨a, s, hs, rfl⟩`, as Mathlib does).
+- The coercion `𝓞 K → K` is `RingOfIntegers.val`, an `abbrev` for `algebraMap`: `rw [map_one]` / `rw [map_mul]` do not see
+  through it (the head symbol is `val`); `simp` does, and so does a term `(map_mul (algebraMap _ _) a b).symm`.
+  `RingOfIntegers.coe_eq_zero_iff` is the injectivity at `0`.
+- U5: the restricted conjugation is named by a `let σB : P.localRing →+* P.localRing := (conjOn _).restrict
+  P.localRing.toSubring P.localRing.toSubring _` — without the ascription `algebraMap (𝓞 K) P.localRing` is asked for an
+  `Algebra (𝓞 K) ↥P.localRing.toSubring` instance, which does not exist (the instance is on `↥P.localRing`).
+- U7 by the elementary alternative (a nonzero `a ∈ P.P` and U6), four lines.

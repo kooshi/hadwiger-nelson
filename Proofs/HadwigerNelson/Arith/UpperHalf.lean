@@ -106,7 +106,10 @@ noncomputable abbrev _root_.HadwigerNelson.SpectralChain.StablePrime.localRing (
 /-- Its elements are the `a / s` with `a, s ∈ 𝓞 (F(i))`, `s ∉ P`. -/
 theorem mem_localRing (P : StablePrime F) {x : fieldI F} :
     x ∈ P.localRing ↔ ∃ a s : 𝓞 (fieldI F), s ∉ P.P ∧ x = (a : fieldI F) / (s : fieldI F) := by
-  sorry
+  show x ∈ HeightOneSpectrum.valuationSubringAtPrime (fieldI F) P.heightOne ↔ _
+  constructor
+  · rintro ⟨a, s, hs, rfl⟩; exact ⟨a, s, hs, (div_eq_mul_inv _ _).symm⟩
+  · rintro ⟨a, s, hs, rfl⟩; exact ⟨a, s, hs, div_eq_mul_inv _ _⟩
 
 omit [NumberField F] in
 /-- Conjugation on `𝓞 (F(i))` is conjugation on `F(i)`. -/
@@ -126,7 +129,10 @@ theorem conjO_mem_iff (P : StablePrime F) {a : 𝓞 (fieldI F)} : conjO F a ∈ 
 
 /-- **`𝓞_P` is conjugation-stable** (`a / s ↦ ā / s̄`, and `s̄ ∉ P`). -/
 theorem conj_mem_localRing (P : StablePrime F) : ∀ z ∈ P.localRing, conjOn (fieldI_conj F) z ∈ P.localRing := by
-  sorry
+  intro z hz
+  obtain ⟨a, s, hs, rfl⟩ := (mem_localRing P).1 hz
+  refine (mem_localRing P).2 ⟨conjO F a, conjO F s, mt (conjO_mem_iff P).1 hs, ?_⟩
+  rw [map_div₀, coe_conjO, coe_conjO]
 
 /-- **Every unit vector of `F²` lies in `𝓞_P`**: `u·ū = 1` and `𝓞_P` is a conjugation-stable valuation subring
 (`normOne_subset_valuationSubring`, Theorem A's integrality step). -/
@@ -137,7 +143,13 @@ theorem mem_localRing_of_mul_conj_eq_one (P : StablePrime F) {u : fieldI F} (hu 
 /-- An element of `𝓞 (F(i))` outside `P` is a unit modulo `P^m` (`Ideal.IsMaximal.exists_inv_pow`). -/
 theorem isUnit_mk_pow (P : StablePrime F) (m : ℕ) (y : P.heightOne.asIdeal.primeCompl) :
     IsUnit (Ideal.Quotient.mk (P.P ^ m) (y : 𝓞 (fieldI F))) := by
-  sorry
+  haveI := P.isMaximal
+  obtain ⟨z, i, hi, hzi⟩ := Ideal.IsMaximal.exists_inv_pow P.P (x := (y : 𝓞 (fieldI F))) y.2 m
+  refine IsUnit.of_mul_eq_one (Ideal.Quotient.mk (P.P ^ m) z) ?_
+  rw [← map_mul, ← map_one (Ideal.Quotient.mk (P.P ^ m)), Ideal.Quotient.eq]
+  have h : (y : 𝓞 (fieldI F)) * z - 1 = -i := by linear_combination hzi
+  rw [h]
+  exact neg_mem hi
 
 /-- **The residue map at level `m`**, `𝓞_P → 𝓞 ⧸ P^m`: the extension of the quotient map to the localization. -/
 noncomputable def _root_.HadwigerNelson.SpectralChain.StablePrime.residue (P : StablePrime F) (m : ℕ) : P.localRing →+* 𝓞 (fieldI F) ⧸ P.P ^ m :=
@@ -152,23 +164,62 @@ theorem residue_algebraMap (P : StablePrime F) (m : ℕ) (a : 𝓞 (fieldI F)) :
 theorem residue_div (P : StablePrime F) (m : ℕ) (a s : 𝓞 (fieldI F)) (hs : s ∉ P.P) :
     P.residue m ⟨(a : fieldI F) / (s : fieldI F), (mem_localRing P).2 ⟨a, s, hs, rfl⟩⟩ * Ideal.Quotient.mk (P.P ^ m) s =
       Ideal.Quotient.mk (P.P ^ m) a := by
-  sorry
+  have hs0 : (s : fieldI F) ≠ 0 := fun h =>
+    hs (by rw [RingOfIntegers.coe_eq_zero_iff.1 h]; exact P.P.zero_mem)
+  have key : (⟨(a : fieldI F) / (s : fieldI F), (mem_localRing P).2 ⟨a, s, hs, rfl⟩⟩ : P.localRing) *
+      algebraMap (𝓞 (fieldI F)) P.localRing s = algebraMap (𝓞 (fieldI F)) P.localRing a :=
+    Subtype.ext (by
+      show (a : fieldI F) / (s : fieldI F) * (s : fieldI F) = (a : fieldI F)
+      exact div_mul_cancel₀ _ hs0)
+  rw [← residue_algebraMap P m s, ← map_mul, key, residue_algebraMap]
 
 /-- **The residue map commutes with conjugation**: `res(z̄) = (res z)‾`, the bar on the right being the involution
 `levelTarget` is built on. -/
 theorem residue_conj (P : StablePrime F) (m : ℕ) (z : P.localRing) :
     P.residue m ⟨conjOn (fieldI_conj F) z, conj_mem_localRing P z z.2⟩ =
       Ideal.quotientMap (P.P ^ m) (conjO F) (P.le_comap m) (P.residue m z) := by
-  sorry
+  let σB : P.localRing →+* P.localRing :=
+    (conjOn (fieldI_conj F)).restrict P.localRing.toSubring P.localRing.toSubring (conj_mem_localRing P)
+  have h : (P.residue m).comp σB = (Ideal.quotientMap (P.P ^ m) (conjO F) (P.le_comap m)).comp (P.residue m) := by
+    refine IsLocalization.ringHom_ext P.heightOne.asIdeal.primeCompl (RingHom.ext fun a => ?_)
+    have ha : σB (algebraMap (𝓞 (fieldI F)) P.localRing a) = algebraMap (𝓞 (fieldI F)) P.localRing (conjO F a) :=
+      Subtype.ext rfl
+    show P.residue m (σB (algebraMap (𝓞 (fieldI F)) P.localRing a)) =
+      Ideal.quotientMap (P.P ^ m) (conjO F) (P.le_comap m) (P.residue m (algebraMap (𝓞 (fieldI F)) P.localRing a))
+    rw [ha, residue_algebraMap, residue_algebraMap, Ideal.quotientMap_mk]
+  exact DFunLike.congr_fun h z
 
 /-- An integer of `F(i)` is a non-unit of `𝓞_P` exactly when it lies in `P`. -/
 theorem coe_mem_nonunits_localRing_iff (P : StablePrime F) (a : 𝓞 (fieldI F)) :
     (a : fieldI F) ∈ (P.localRing).nonunits ↔ a ∈ P.P := by
-  sorry
+  rw [ValuationSubring.mem_nonunits_iff_or]
+  constructor
+  · intro h
+    by_contra ha
+    rcases h with h | h
+    · exact ha (by rw [RingOfIntegers.coe_eq_zero_iff.1 h]; exact P.P.zero_mem)
+    · exact h ((mem_localRing P).2 ⟨1, a, ha, by simp⟩)
+  · intro ha
+    by_cases h0 : (a : fieldI F) = 0
+    · exact Or.inl h0
+    · refine Or.inr fun hinv => ?_
+      obtain ⟨b, s, hs, hbs⟩ := (mem_localRing P).1 hinv
+      have hs0 : (s : fieldI F) ≠ 0 := fun h =>
+        hs (by rw [RingOfIntegers.coe_eq_zero_iff.1 h]; exact P.P.zero_mem)
+      have hK : (s : fieldI F) = (a : fieldI F) * (b : fieldI F) := by
+        rw [← (eq_div_iff hs0).1 hbs, mul_inv_cancel_left₀ h0]
+      have hsab : s = a * b := RingOfIntegers.ext (hK.trans (map_mul (algebraMap _ _) a b).symm)
+      exact hs (hsab ▸ P.P.mul_mem_right b ha)
 
 /-- `𝓞_P` is not all of `F(i)`. -/
 theorem localRing_ne_top (P : StablePrime F) : P.localRing ≠ ⊤ := by
-  sorry
+  intro htop
+  obtain ⟨a, ha, ha0⟩ := Submodule.exists_mem_ne_zero_of_ne_bot P.heightOne.ne_bot
+  have h := (coe_mem_nonunits_localRing_iff P a).2 ha
+  rw [ValuationSubring.mem_nonunits_iff_or, htop] at h
+  rcases h with h | h
+  · exact ha0 (RingOfIntegers.coe_eq_zero_iff.1 h)
+  · exact h (ValuationSubring.mem_top _)
 
 /-- **NF1-S1B, the homomorphism, at every level `m ≥ 1`**: the unit-distance graph on `F²` maps to
 `levelTarget P m = Cay(𝓞 ⧸ P^m, {x : x·x̄ = 1})`, and on each coset of `𝓞_P` the map is the residue map: for `x, y ∈ F²` with
