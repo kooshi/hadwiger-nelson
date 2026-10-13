@@ -1,2 +1,1 @@
-slot: waiting (ledger 20 + 4 > budget 22 GiB; 0 free CPUs < 2)
 slot: admitted id1: mem 4 GiB (hard cap), cpus 4,5

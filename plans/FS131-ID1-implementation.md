@@ -71,3 +71,22 @@ compared (stored types by Lean's hash and text; each head as source text; the Sp
 control, three planted faults (one stored statement changed by a character, one kind changed, one declaration removed):
 3 of 3 reported. The module has no compiled `.olean` in this tree (its build is an older job's), so the reading "before
 the first rebuild" is the skeleton's own elaboration at the base commit, kept as `data/fs131/id1/stmt/Skeleton.txt`.
+
+## Stage 2 — SAVED: leaves 1–3 (the residue colouring at the plane; coordinates; a unit vector in integers)
+
+The file elaborates under `lake env lean` with the lakefile's options and `linter.missingDocs`: exit 0, seven
+`declaration uses sorry` (the seven leaves left), no other message (`data/fs131/id1/logs/DyadicQuadratic.stage2.out`;
+4 s, 3.6 GB). Statement check: PASS, control 3 of 3 (`logs/statements-stage2.out`).
+
+- **`colorable_planeOver_of_addMonoidHom`** — the plan's route, as written: `Fintype.ofFinite`, `colorable_of_residue`
+  at `f = (↑)`; an edge of the induced graph has a difference with coordinates in `F` (`Subfield.sub_mem`) and norm 1
+  (`Complex.dist_eq`), so it is a unit vector; `cosetResidue_apply_of_mem`. 17 lines.
+- **`exists_rat_add_mul_sqrt_eq`** — the plan's route: `Subfield.closure_induction`; the product by `√m·√m = m`; the
+  inverse in three cases (conjugate `0`: `x = 2p`; `x = 0`; otherwise `(p − q√m)/(p² − mq²)`). No irrationality. 37 lines.
+- **`exists_int_solution_of_mem_unitVectors`** — the plan's route with one change of instrument: "not all even" is by
+  **induction on `|N|`** (an all-even representation halves), a private lemma `exists_not_all_even` that reads nothing
+  about `m` or `u`, in place of `Nat.find` on the least `N` (the same descent, no decidability of the predicate needed).
+  A second private lemma, `rat_eq_zero_of_add_mul_irrational` (`A + B·x = 0`, `x` irrational, `A B : ℚ` ⟹ `A = B = 0`),
+  splits `|u|² = 1`. Denominators: `D` the product of the four, so `N = D > 0`.
+
+Private helpers so far: `rat_eq_zero_of_add_mul_irrational`, `exists_not_all_even`.

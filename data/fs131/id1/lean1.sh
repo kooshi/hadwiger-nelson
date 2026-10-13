@@ -9,7 +9,7 @@ f="$1"; shift
 tag="data/fs131/id1/logs/$(basename "$f" .lean)"
 mkdir -p data/fs131/id1/logs
 /usr/bin/time -v -o "$tag.time" env SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 python3 /home/kooshi/source/lean-dir/scripts/slot.py --mem 4 --cpus 2 --wait 7200 --name id1 -- \
-  lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false "$@" "$f" > "$tag.out" 2> "$tag.err"
+  lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false -Dlinter.missingDocs=true "$@" "$f" > "$tag.out" 2> "$tag.err"
 st=$?
 head -c 60000 "$tag.out"
 grep -v "^slot: admitted" "$tag.err" | head -50

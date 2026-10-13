@@ -1,10 +1,7 @@
-Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:51:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:59:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:66:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:77:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:86:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:95:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:106:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:112:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:119:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:129:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:243:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:252:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:261:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:272:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:278:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:285:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:295:8: warning: declaration uses `sorry`
