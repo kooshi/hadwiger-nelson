@@ -341,3 +341,63 @@ derivation: EN1-EQUIV
   handoff: none — a relay-result for EN1-OFFPATH and the report: it says what leaves the path is R-U's separate proof, not R-U's content
 
 Rests on these: EN1-SPCOR and EN1-OFFPATH; the planner's leaves 2 and 22.
+
+## Stage 5 — SAVED (EN1-SPCOR: SP-Cor run at `T + A`)
+
+**Verdict: TRUE** [hand; one mind; a re-derivation of J45's corollary with `T + A` in the place of `E`]. Of this project's hand results the
+proof reads MR⁺(F) and A⁺ at `S = ∅` and no other; R-U has nothing left to say. "Needs only" is true among our hand results, not among all
+inputs: the two classical theorems stay, and so do two facts about the set `T + A`.
+
+### 5.1 The proof at `T + A`
+
+Suppose `F²` has a proper four-colouring. (P0) Restricted to `R ⊂ L ≅ F²` it is a proper four-colouring of `Cay(R, U)`, so `X₄(F) ≠ ∅`.
+(P1) `X₄(F)` is a non-empty compact set of `{0,1,2,3}^R` (`R` countable), invariant under the countable solvable group `R ⋊ U` acting by
+`c ↦ c(v· + y)`; an invariant Borel probability `μ` on it exists (Markov–Kakutani). (P2) `C(y) = E_μ⟨g(0), g(y)⟩` is positive definite on the
+discrete group `R`; Bochner gives the finite positive `σ = σ_μ` on `R̂` with `σ̂ = C`; `C(vy) = C(y)` for `v ∈ U`, and uniqueness of
+Fourier–Stieltjes coefficients makes `σ` `U`-invariant. (P3) `T + A` is Borel and `U`-invariant (§ 3.2), so `τ := σ|_{R̂∖(T+A)}` is finite,
+positive, `U`-invariant and null on `T + A`. (P4) MR⁺(F): `∫ χ(1) dτ = 0`, since `1 ≠ 0` in `R`; that is, `∫_{R̂∖(T+A)} Re χ(1) dσ_μ = 0`.
+(P5) A⁺ at `S = ∅`, remark (ii): `∫_{R̂∖E_∅} Re χ(1) dσ_μ < 0`, and `E_∅ = T + A`. Contradiction; so `χ(F²) ≥ 5`. ∎
+
+**Where R-U was, and why it is gone.** J45's proof (`plans/FS84-SI-D-derivation.md` ll. 323–326) takes `τ := σ_μ|_{R̂∖E}` because the measure
+statement it was given is null on `E`, and then needs "R-U gives `σ_μ(E ∖ (T + A)) = 0`" to turn A⁺'s integral over `R̂ ∖ E_∅` into one over
+`R̂ ∖ E`. X05V's blind re-derivation has the same two steps (P4 "`σ(E ∖ (T + A)) = 0` — R-U", P7 "P4 + P6"), and so does the kernel proof:
+`hRU` is bound and used once, at l. 544, for `hnull : σ (I.E \ I.TA) = 0` (control `spcor-reads-ru-once`). With the measure statement null on
+`T + A` the domain is `R̂ ∖ (T + A)` from the start, and at `E := T + A` the kernel's `RU` reads `τ(TA ∖ TA) = τ(∅) = 0`.
+
+**What the proof still reads, beyond the two named hand results.**
+
+| input | kind | where |
+|---|---|---|
+| an `R ⋊ U`-invariant probability on a non-empty closed invariant set of colourings | classical (Markov–Kakutani; the kernel's `InvariantMeasureOnClosed`) | P1 |
+| Herglotz–Bochner on the discrete `R`, with uniqueness | classical (the kernel's `BochnerHerglotz`) | P2 |
+| `R` countable | elementary (kernel: `countable_unitRing`) | P1 |
+| `T + A` Borel; `u·(T + A) = T + A` | N1 at `S = ∅`, two of its clauses (§ 3.2) | P3 |
+| `T + A` in MR⁺ and `T + A` in A⁺ are one set | § 4.1, "one set under two descriptions" | P4 against P5 |
+| T-C(A) at `S = ∅` | ours; A⁺ at `S = ∅` is "given T-C(A)" (R88-TCA; FS100-TCA in every degree) | inside P5 |
+
+Not read: R-U; `E`; `Fin_S`; N1 (b)'s Borel isomorphism; N1 (c); `m(E) = 0` (X05V's P3 lists "`m(E) = 0` (N1)" among `E`'s properties and
+no later step of its P4–P8 uses it).
+
+derivation: EN1-SPCOR
+  statement: SP-Cor at S = ∅ needs only MR⁺(F) and A⁺ at S = ∅; run at E := T + A, the hypothesis R-U is τ(∅) = 0.
+  uses only: MR⁺(F) applied once, to `σ_μ|_{R̂∖(T+A)}`; A⁺ at `S = ∅` in the form of its remark (ii), at `u = 1`; Markov–Kakutani for `R ⋊ U`;
+    Herglotz–Bochner with uniqueness on the discrete `R`; `R` countable; `T + A` Borel and `U`-invariant
+  not claimed: that no input but the two is read — "only" holds among this project's hand results (the table above lists the rest); A⁺ at `S = ∅`
+    itself, which is given T-C(A) at `S = ∅`; SP-Cor's converse; anything at `S ≠ ∅`, where A⁺ needs T-C(A) at that `S` and the set is `E_S`
+  argument: § 5.1 The proof at `T + A`
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `F = ℚ(√11)` for the hypotheses that can hold with `X₄ ≠ ∅`: C9's colouring gives a `μ` and a `σ_μ` carried by `T + A`, so
+    `τ = 0` and P4 holds with both sides 0; the chain stops at P5, because A⁺ fails there (T-C(A)'s class excludes ℚ(√11): X01D § 4.2's control)
+  prior art: known: J45-SP-Cor (`plans/FS84-SI-D-derivation.md` § 4.2) with `E` replaced by `T + A`; X05V § 2.1 P0–P8; the kernel's `Interface.x4_eq_empty`
+  handoff: de Bruijn — the planner's leaf 2: an instance of `Interface.x4_eq_empty` at `E := TA := T + A`, whose `hRU` is `τ(∅) = 0`; it needs
+    its leaf 1 (`T + A` measurable and rotation-stable) and nothing of J45-RU
+
+control: spcor-reads-ru-once
+  of: EN1-SPCOR — the kernel proof it was read from: `Interface.x4_eq_empty` binds `hRU` and uses it once (l. 544)
+  run: python3 ../data/fs131/en1/unused_check.py Interface.x4_eq_empty hRU
+  expect: 2
+  fault: python3 ../data/fs131/en1/unused_check.py Interface.x4_eq_empty hHE
+
+Rests on it: EN1-OFFPATH; the planner's leaf 2.
