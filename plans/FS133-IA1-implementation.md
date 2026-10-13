@@ -219,3 +219,28 @@ at v4.34.1; under `LEAN_ABORT_ON_PANIC` the run aborted (exit 134) with the pani
 the message and in my probe; the probe reads the value by cases now. (b) Before reading that probe's output I had
 written, in the generator's table, that the auxiliary was `Fact (1 ≤ 2)`; it is `IsTopologicalAddGroup ℂ`. Corrected
 before anything was generated from it.
+
+## Stage 3 — SAVED: X and M
+
+*From `lake env lean` (stage 5 prints again from the built tree).* `Outside/OAI158Rigidity` elaborates with exit 0,
+no error, no warning, no `sorry` (`data/fs133/ia1/rigidity-elab.out`).
+
+- **X, `Spectral.residual_fourier_cross`** — proved. `inner_map_polarization` for `T := op U z` writes
+  `⟪T w, v⟫` as a combination of the four values `⟪T x, x⟫` at `x = v ± w`, `v ± I • w`; each such `x` is in
+  `(space U)ᗮ` (a submodule) and fixed by every `W k` (`map_add`, `map_sub`, `map_smul`), so each value is `0` by the
+  import; `inner_conj_symm` turns the slots. Its axioms (`data/fs133/ia1/lane-axioms-stage3.out`):
+  `[propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.Spectral.residual_fourier]`.
+- **M, `Spectral.residual_fourier_model`** — proved, on `[propext, Classical.choice, Quot.sound]` **and nothing
+  else: the model does not read the declared theorem.** `H := lp (fun _ : E => ℂ) 2` (`ℓ²` of the algebraic plane, a
+  `Type`); `(U z f) x = f (x + z)`; `(W k f) x = f (k⁻¹ x)` — **the inverse rotation on the points**: with
+  `f (k x)` the covariance `W k ∘ U z = U (k z) ∘ W k` fails (it gives `f (k x + z)` against `f (k x + k² z)`);
+  `v := lp.single 2 0 1`. Three private helpers build the unitaries by hand, since the ported `Koopman.unitary` is
+  downstream of this file: `lpReindex` (composition with a bijection of the index set as a linear isometric
+  equivalence of `ℓ²`), `lpUnitary`, `turnEquiv`. Every clause of the model is exercised: covariance (a pointwise
+  identity); `v ∈ (space U)ᗮ` — for `w` in the continuous vectors the coordinate at `0` of the translate by `a` is
+  `w a` and tends to `w 0` as `a → 0`, while along the distinct points `1 / (n + 1)` of the algebraic plane the
+  values `w (1 / (n + 1))` are square-summable, so tend to `0`; hence `w 0 = 0 = ⟪w, v⟫` —; `W k v = v`; `v ≠ 0`;
+  and `⟪v, U z v⟫ = v z = 0` at `z ≠ 0`.
+
+The module docstring's sentence that called the two "a leaf of FS-133's skeleton" now says they are kernel-checked
+(a docstring, not a statement).
