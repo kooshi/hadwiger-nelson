@@ -100,3 +100,26 @@ your record cites lives under `data/fs131/en1/`. No search and no Lean build is 
 
 You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review
 work it knows exists).
+
+## Amendment 1 (2026-10-13 16:25 UTC) — two more questions from the planner's finished map, on the same chain; and a correction to this brief
+
+**The correction first.** Your readback found that my sentence on where the unused clause `hHE` sits did not match the
+proposer's words. You were right to hold to the claim list: the five statements are as fixed there, and my sentence in
+§ The statements about that clause was a paraphrase of mine — disregard it and read the Lean source.
+
+**Two questions.** The planner's map is finished and on `main` (`plans/FS131-KN1-number-field-kernel-map.md`; the chain
+is its section "The chain: rows 120, 121, 123, 127", leaves 8 and 18). Its report asks the derive lane:
+
+> - question for another lane (the deriver) — which bound does CLS use on the dyadic inert targets U_Q, Q = 2^f ≥ 64? The held Weil import is "characteristic not 2"; if a Kloosterman bound in characteristic 2 is read, it is a second printed statement not yet declared — record, chain leaf 8
+> — source: data/fs131/reports/FS131-KN1.md
+
+> - question for another lane (the deriver) — does EF_F⁺'s Lemma 3.1′ need Shannon–McMillan–Breiman, or only the definition of entropy? — record, chain leaf 18
+> — source: data/fs131/reports/FS131-KN1.md
+
+Each is a reading of the derivation entries, not a new derivation: say what the entry's argument actually uses, with
+the address of the step, and whether a printed statement beyond those already declared is read. Answer them after the
+five statements, as two short sections of your record, and include them in your message when they are done. If either
+turns out to need a derivation and not a reading, say so and stop there — that would be a job of its own.
+
+Nothing else changes. You start no agents of your own (standing rule 1: delegation is one level deep, because the
+coordinator can only review work it knows exists).

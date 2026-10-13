@@ -48,10 +48,15 @@ this session):
 1. **FS131-PN1** (asking lane; brief `data/fs131/briefs/FS131-PN1-number-field-ranking.md`; record
    `plans/POROS-2026-10-13-number-field-findings.md`): the number-field findings ranked by interest to mathematicians
    in the field. It messages when the list is saved.
-2. **FS131-KN1** (kernel planner; brief `data/fs131/briefs/FS131-KN1-number-field-kernel-map.md`; worktree and branch
-   `fs131-wnf`, the last landing's tree moved, its build matching `main`; record
-   `plans/FS131-KN1-number-field-kernel-map.md` on the branch): phase 1 the map of what each number-field result rests
-   on in Lean; **phase 2 starts only on my dated amendment** at the foot of its brief.
+2. ~~FS131-KN1, the map~~ — **done (2026-10-13 16:25 UTC; FS-131 inventory item 643): `plans/FS131-KN1-number-field-kernel-map.md` on
+   `main` (merge `123d2bc57`), 36 entries; its § X8 names the first module and its chain section lists 23 leaves under
+   the five-colour results.** Its successor **FS131-KN2** is running in the same tree (`fs131-wnf`): the first module,
+   the residue upper half, from the claim list `data/fs131/claims-NF1.md` (brief
+   `data/fs131/briefs/FS131-KN2-upper-half-plan.md`; record `plans/FS131-KN2-upper-half-plan.md` on the branch). **At
+   its hand-back**: review the skeleton by artifact (it compiles; statements read against the claim list), then two
+   implementers on disjoint files as its plan splits them, **one build at a time on this machine, with the memory
+   numbers it measures**. **Queued behind it**: a planner on the chain's first definitions (the map's chain leaves 1,
+   13–15); FS131-KE1 (pricing the printed theorem).
 3. ~~FS124-F2, the owed filing~~ — **done and merged (`94bb3f35c`, FS-124 inventory item 52): the front page reads the
    library as gated; FS-124 stays Derived. THE NEXT FILING'S FACT-AUDIT BASE IS `94bb3f35c`.** Two jobs are running, not three.
 
