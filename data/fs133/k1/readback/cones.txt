@@ -1,0 +1,12 @@
+PIECE OAI.PlaneFiveColor.Spectral.residual_fourier : decls=1802 modules=30
+PIECE OAI.PlaneFiveColor.Spectral.wild_fourier : decls=1644 modules=29
+PIECE OAI.EuclideanFiveColor.exists_measurable_field : decls=14 modules=1
+PIECE OAI.PlaneFiveColor.Spectral.orbitExtension_inner : decls=41 modules=3
+PIECE OAI.EuclideanFiveColor.ContinuousVectors.projection_range : decls=21 modules=1
+PIECE OAI.EuclideanFiveColor.ContinuousVectors.projection_covariance_fixed : decls=14 modules=1
+PIECE OAI.EuclideanFiveColor.ContinuousVectors.projection_coefficient : decls=18 modules=1
+PIECE OAI.EuclideanFiveColor.positive_orthogonal : decls=1 modules=1
+PIECE OAI.PlaneFiveColor.Spectral.circle_closed_induction : decls=13 modules=2
+PIECE OAI.EuclideanFiveColor.Koopman.nonlinear_commute : decls=1 modules=1
+PIECE OAI.PlaneFiveColor.LabelModel.fieldVector_unit_correlation : decls=1941 modules=31
+PIECE OAI.PlaneFiveColor.LabelModel.exists_label_field : decls=1976 modules=31

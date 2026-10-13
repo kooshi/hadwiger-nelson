@@ -57,7 +57,7 @@ end FS132I1
 open Lean Elab Command in
 #eval show CommandElabM Unit from liftCoreM do
   for n in [``OAI.PlaneFiveColor.Spectral.E, ``OAI.PlaneFiveColor.Spectral.K, ``OAI.PlaneFiveColor.Spectral.DiscreteE,
-      ``OAI.PlaneFiveColor.Spectral.kCoeff, ``OAI.EuclideanFiveColor.ContinuousVectors.op,
+      ``OAI.PlaneFiveColor.Spectral.instCommGroupDiscreteE, ``OAI.PlaneFiveColor.Spectral.kCoeff, ``OAI.EuclideanFiveColor.ContinuousVectors.op,
       ``OAI.EuclideanFiveColor.ContinuousVectors.space, ``OAI.PlaneFiveColor.Spectral.residual_fourier,
       ``OAI.PlaneFiveColor.Spectral.wild_fourier] do
     FS132I1.report n
