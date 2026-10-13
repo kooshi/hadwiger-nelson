@@ -91,15 +91,17 @@ this session):
    first layer. A long job with saved stages; a successor can take any stage from its record
    `plans/FS131-KN3-chain-plan.md` on the branch.
 
-**RUNNING AT 2026-10-13 18:17 UTC: FS131-LC1 — A LANDING IN FLIGHT (the measurable-number module, tree `fs131-wkc`; items
-663, 667); FS131-IQ1 (an implementer on the nine leaves of `Arith/QuadraticPrime.lean`, tree `fs131-wq1`; item 671);
-FS131-KN5 (a successor planner on the three-and-four-colours skeleton — the modeling passes, its first build, the two
-thin leaves — tree `fs131-wr2`; item 669).** Done since: FS131-IU1 (the residue module's first file fully proved on
-branch `fs131-wnf`, built there, not gated; item 670); FS131-KN4 (item 669). **Next free slots, in order: the three
-leaves of `Instances/UpperHalfValues.lean` on `fs131-wnf` (they inhabit the two-colour theorems' hypothesis: the
-module cannot land without them); then the residue module's landing (join `fs131-wq1` into `fs131-wnf`, the gate —
-pattern `data/fs131/briefs/scripts/mk-fs131-lc1.py`); two implementers on the three-and-four-colours modules when
-FS131-KN5 says the statements are final; the chain's successor planner; a deriver on the chain's two questions;
+**RUNNING AT 2026-10-13 18:57 UTC: FS131-LC1 — A LANDING IN FLIGHT (the measurable-number module, tree `fs131-wkc`; items
+663, 667); FS131-IV1 (join `fs131-wq1` into `fs131-wnf` and prove the residue module's last three leaves; item 674);
+FS131-KN5 (the passes, the first build — green — and the two thin leaves of the three-and-four-colours skeleton, tree
+`fs131-wr2`; items 669, 672).** Done since: FS131-IU1 and FS131-IQ1 — both main files of the residue module fully
+proved and built on their branches, not gated (items 670, 674). **Next free slots, in order: the residue module's
+landing, after FS131-IV1 hands back AND the corollary's landing is merged (pattern
+`data/fs131/briefs/scripts/mk-fs131-lc1.py`; it merges `main` first; the assumptions step must lose the named
+hypothesis the module now proves); two implementers on the three-and-four-colours modules when FS131-KN5 says the
+statements are final (its split: one on `ThreeColourCharacter` then `ThreeColourCriterion`, one on
+`TorsionExtraction` then `DyadicQuadratic`); the Clerk for the owed filing once no landing is in flight; the chain's
+successor planner; a deriver on the chain's two questions; a small planner's job stating row 52's two values;
 FS-133's planner; FS131-KE1.**
 **Until the landing is back: nothing on
 `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`, `RUNNING.md`, and no
