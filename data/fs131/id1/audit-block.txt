@@ -1,0 +1,15 @@
+-- FS131-ID1: Arith/DyadicQuadratic (11: 11 theorems, 0 definitions; every public declaration a person typed, in the
+-- file's order — the kernel's list, data/fs131/id1/statements-built.txt, through data/fs131/id1/make_audit.py).
+-- Statements FS131-KN4's and FS131-KN5's; the ten leaves' proofs FS131-ID1's.  The file's 21 private helpers are not
+-- nameable here; each is read by a record below.  Every record CLEAN: no declared outside theorem is read.
+#print axioms HadwigerNelson.DyadicQuadratic.colorable_planeOver_of_addMonoidHom
+#print axioms HadwigerNelson.DyadicQuadratic.exists_rat_add_mul_sqrt_eq
+#print axioms HadwigerNelson.DyadicQuadratic.exists_int_solution_of_mem_unitVectors
+#print axioms HadwigerNelson.DyadicQuadratic.dyadic_shape_one_mod_four
+#print axioms HadwigerNelson.DyadicQuadratic.dyadic_shape_two_mod_four
+#print axioms HadwigerNelson.DyadicQuadratic.dyadic_shape_three_mod_eight
+#print axioms HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_one_mod_four
+#print axioms HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_two_mod_four
+#print axioms HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_three_mod_eight
+#print axioms HadwigerNelson.DyadicQuadratic.colorable_two_planeOver_sqrt
+#print axioms HadwigerNelson.DyadicQuadratic.colorable_four_planeOver_sqrt

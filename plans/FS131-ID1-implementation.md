@@ -6,8 +6,26 @@
 
 ## Theorems this phase proved
 
-*(filled at each stage; one line per kernel theorem, with its declaration and its axioms — printed at the end from the
-built module, § the last stage)*
+Eleven kernel theorems, all in `Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean`, namespace
+`HadwigerNelson.DyadicQuadratic`; each **[kernel]**, on exactly `[propext, Classical.choice, Quot.sound]`, printed from
+the built module (`data/fs131/id1/axioms.txt`; § Stage 4). Ten were the skeleton's leaves; the eleventh was proved over
+them in the skeleton and is a theorem now that they are. No statement is this job's: they are FS131-KN4's and
+FS131-KN5's, unchanged (§ Stage 4, the statement check). **No value here is new**: both rows are `[Fischer1990]`'s
+(§ Drafts, the attribution).
+
+| declaration | what it says | axioms |
+|---|---|---|
+| `colorable_planeOver_of_addMonoidHom` | an additive map on a subgroup of `ℂ` holding the unit vectors of `F²`, into a finite group `G`, never `0` at one, makes the plane over `F` `Nat.card G`-colourable; every `F ≤ ℝ` | the standard three |
+| `exists_rat_add_mul_sqrt_eq` | every element of `ℚ(√m)` is `p + q√m`, `p q : ℚ`; every `m : ℕ` | the standard three |
+| `exists_int_solution_of_mem_unitVectors` | `m` not a square: a unit vector of `ℚ(√m)²` is `((a + b√m) + (c + d√m)i)/N` in integers not all even, with `a² + c² + m(b² + d²) = N²`, `ab + cd = 0` | the standard three |
+| `dyadic_shape_one_mod_four` | `m ≡ 1 (mod 4)`: such a solution has `N` odd and `a+b+c+d` odd, or `N ≡ 2 (mod 4)`, `a ≡ b`, `c ≡ d (mod 2)`, `(a−b+c−d)/2` odd | the standard three |
+| `dyadic_shape_two_mod_four` | `m ≡ 2 (mod 4)`: `N` odd and `a+c` odd, or `N ≡ 2 (mod 4)`, `a`, `c` even, `b`, `d` odd, `a/2 + c/2 + d` odd | the standard three |
+| `dyadic_shape_three_mod_eight` | `m ≡ 3 (mod 8)`: `N` odd and `a+b+c+d` odd, or `N ≡ 2 (mod 4)`, `a ≡ d`, `b ≡ c (mod 2)`, `b+d` odd | the standard three |
+| `exists_addMonoidHom_one_mod_four` | `m ≡ 1 (mod 4)`, not a square: a subgroup `Λ ≤ ℂ` and `ψ : Λ →+ ZMod 2`, every unit vector of `ℚ(√m)²` in `Λ` with `ψ ≠ 0` there | the standard three |
+| `exists_addMonoidHom_two_mod_four` | `m ≡ 2 (mod 4)`: the same | the standard three |
+| `exists_addMonoidHom_three_mod_eight` | `m ≡ 3 (mod 8)`: the same into `ZMod 2 × ZMod 2` | the standard three |
+| `colorable_two_planeOver_sqrt` | **NF4-DYADIC-TWO, kernel form**: `m` squarefree, `m ≢ 3 (mod 4)` ⟹ the plane over `ℚ(√m)` is two-colourable | the standard three |
+| `colorable_four_planeOver_sqrt` | **NF4-DYADIC-FOUR, kernel form**: `m ≡ 3 (mod 8)` ⟹ the plane over `ℚ(√m)` is four-colourable | the standard three |
 
 ## Stage 1 — SAVED: the readback
 
@@ -143,3 +161,176 @@ as the plan has it), `exists_addMonoidHom_of_form` (one form: `Γ = oddDen.comap
 `Nat.card_zmod`.
 
 **No leaf resisted**: every leaf went through on its first route; nothing is left as `sorry`.
+
+## Stage 4 — SAVED: the one build; the built module read back (statements, axioms, models); the linters
+
+**The build** — `data/fs131/id1/build_sampled.sh data/fs131/id1/logs/build1 8`, i.e. `scripts/slot.py --mem 10 --cpus 4
+-- env MEMMAX=10G BATCH=8 ./scripts/build.sh`: **exit 0**, `==> build: OK — 248 of 248 batches, 39 module(s) rebuilt,
+3 module(s) with warnings, 8m46s` (2026-10-13 20:07:49Z to 20:16:40Z; `data/fs131/id1/logs/build1.{out,err,peak,exit}`;
+the gate's own copy `build/gate/build/20261013T200749Z-786451.log`). Resume command, had it died: the same line (Lake
+keeps every module it finished).
+- **Zero warnings from this file**: `✔ [5161/5161] Built Proofs.HadwigerNelson.Arith.DyadicQuadratic (13s)` with no
+  message under it; the gate log holds no line naming `Arith/DyadicQuadratic.lean`. (The two lines naming the module at
+  the log's head are the up-to-date probe's "target is out-of-date", exit 3, before the walk.)
+- The three modules with warnings are the line's other three skeletons on this branch — `Arith/ThreeColourCharacter`,
+  `Arith/TorsionExtraction`, `Arith/ThreeColourCriterion` — 31 `declaration uses sorry` (8 + 10 + 13), nothing else.
+  They are other jobs' and are as the skeleton's commit has them here.
+- 39 rebuilt because this tree's `.lake/build` was an older job's: `Plane/…` (24), `Outside/…` (10), this line's four
+  and `Proofs`. Peak: 15.6 GB as a sum of resident memory over the build's process
+  tree (four `lean` at once in the widest batches; pages of `.olean` files mapped by several processes are counted once
+  each time, so an upper estimate — the planner's 5.4 GB was a chain two wide); the scope's 10 GB cap did not fire.
+
+**No statement changed, from the kernel's side** (Done means 3) — two readings, each with its control:
+1. *Between builds* (`data/fs131/id1/statements.sh`, at stages 1–3): the skeleton at `34d9113b2` and the working file,
+   each elaborated at one path with a footer printing every constant's stored type; 11 of 11 identical in kind, Lean's
+   hash and text; each theorem's head and the Spec section (the four `example`s) identical as source text. Control: 3
+   of 3 planted faults reported, each time.
+2. *From the built module* (`data/fs131/id1/lean/StatementDump.lean` → `statements-built.txt`, 127 constants stored;
+   `statements_built.py` against `stmt/Skeleton.txt`): **11 of 11 the same kind, the same hash, the same text**; no
+   public constant in the built module beyond the skeleton's eleven; 21 private helpers (`logs/statements-built.out`).
+   The two prints come from two paths, so the one statement with instance binders
+   (`colorable_planeOver_of_addMonoidHom`: `[AddCommGroup G] [Finite G]`) stores binder *names* carrying each file's
+   module name; the reader rewrites exactly those two module names inside the pattern `_@.<module>.<n>._hygCtx` and
+   says how many statements it touched (1). Lean's hash reads no binder name and is equal unrewritten.
+   Controls (`logs/statements-built.control.out`): three planted faults, 3 of 3; a hash moved by one, reported; **the
+   rewrite switched off: one TEXT difference, on the one statement carrying such a name** — so the rewrite is not what
+   makes the other ten agree.
+3. The source's side: `git diff 34d9113b2` on the module removes **exactly ten lines, each `  sorry`**, and adds 548
+   (`logs/module.diff`). No docstring of the skeleton was edited.
+
+**The tool defect I made and its control caught** (the brief asked me to read IU1's before copying; this is its
+sibling): my first rewrite pattern matched any module name, so it also "normalized" a hygienic binder name minted in
+Mathlib (`x._@.Mathlib.Data.FunLike.Basic.2582841819._hygCtx._hyg.11`, in the three `exists_addMonoidHom_*` statements)
+that is the same from every path. The comparison passed either way; the control "rewrite off ⟹ a difference on every
+statement the rewrite touches" read 1 difference against 4 touched and failed, as it should. The pattern now names
+this file's two module names and nothing else.
+
+**The axioms, from the built module** (Done means 4): `data/fs131/id1/lean/Axioms.lean` (generated with the audit block
+by `make_audit.py` from the kernel's list and the source's order) → `axioms.txt`: **11 records, each
+`[propext, Classical.choice, Quot.sound]`**, the same list in the same order as the audit block
+(`read_axioms.py`, `logs/axioms.out`); control: a `sorryAx` record and an undeclared axiom, 2 of 2 reported. No declared
+outside theorem is read; no `native_decide` (the three exhaustions are `decide +kernel`).
+
+**The models** (`data/fs131/id1/lean/Models.lean` → `models.txt`, 15 theorems, each on the standard three): § Drafts.
+
+**The environment linters** — `lake lint --no-build -- --no-build --trace` under the slot, after the build: exit 0,
+`-- Linting passed for Proofs.`, fourteen linters `(2/2) Passed!` (`logs/lint.out`). `tools/check_architecture.py`:
+`RESULT: PASS` (`logs/check_architecture.out`; no module was added). I planted no fault in the house's linters: their
+controls are the gate's.
+
+**Not run, because they are the landing's** (the brief; KN5's § Stage 7): `scripts/axioms.sh` with the block filed,
+`scripts/dupnames.sh`, `scripts/vacuity.sh`, `scripts/assumptions.sh` on the joined tree. This module declares no axiom,
+no hypothesis former and no public definition, and every name it adds is private.
+
+## Drafts for the front page
+
+*For the landing. Each names its slot. Nothing here is filed by this job.*
+
+### D1 — `scripts/Axioms.lean`, the CLEAN section: the audit block for this file
+
+`data/fs131/id1/audit-block.txt`, verbatim (11 `#print axioms` lines under a four-line header): every public
+declaration a person typed, in the file's order, all theorems. The 21 private declarations (16 theorems, 5 definitions:
+`shapeCheck`, `oddDen`, `red`, `form`, `coordHom`) cannot be named there; each is read by one of the eleven. Expected at
+the landing: **11 CLEAN records more, no purchase, no import** (`CLAUDE.md` § Trust ledger's first count moves by 11
+for this module; its other counts and the nine of the assumptions step do not move for it).
+
+### D2 — the models: for the landing's record (`LEAN.md` § The gate, "every theorem whose hypothesis is a structure")
+
+The vacuity scan tracks none of this module's hypotheses (sets, maps under predicates, integer equations), so silence
+there is not evidence; these are the inhabitants, **each held by the kernel** in `data/fs131/id1/lean/Models.lean`
+(outside the library; 15 theorems, each on the standard three, `data/fs131/id1/models.txt`):
+
+| statement | every hypothesis satisfied at | the model's theorem |
+|---|---|---|
+| `colorable_planeOver_of_addMonoidHom` | `F = ℚ(√2)`, `G = ZMod 2`; `F = ℚ(√5)`, `G = ZMod 2`; `F = ℚ(√3)`, `G = ZMod 2 × ZMod 2` — the hypothesis is the conclusion of the three `exists_addMonoidHom_*`; and it is no statement about an empty set: `1` is a unit vector of every `F` | `hom_model_two`, `hom_model_five`, `hom_model_three`, `colorable_model`, `one_mem_unitVectors` |
+| `exists_rat_add_mul_sqrt_eq` | `m = 7`, `x = √7` | `coordinates_model` |
+| `exists_int_solution_of_mem_unitVectors` | `m = 2` (not a square), `u = 1` | `int_solution_model` |
+| `dyadic_shape_one_mod_four` | `N` odd: `m = 5`, `(1, 0, 0, 0, 1)`; `N ≡ 2 (mod 4)`: `m = 17`, `(1, 1, 1, −1, 6)` — the unit vector `((1 + √17) + (1 − √17)i)/6` | `shape_one_odd`, `shape_one_even` |
+| `dyadic_shape_two_mod_four` | `m = 2`: `(1, 0, 0, 0, 1)`; `(0, 1, 0, 1, 2)` — `(√2 + i√2)/2` | `shape_two_odd`, `shape_two_even` |
+| `dyadic_shape_three_mod_eight` | `m = 3`: `(1, 0, 0, 0, 1)`; `(1, 0, 0, 1, 2)` — `(1 + i√3)/2` | `shape_three_odd`, `shape_three_even` |
+| `exists_addMonoidHom_one_mod_four` / `_two_` / `_three_mod_eight` | `m = 5`; `m = 2`; `m = 3` | `hom_model_five`, `hom_model_two`, `hom_model_three` |
+| `colorable_two_planeOver_sqrt` | `m = 1`, `2`, `5`, `17` (squarefree, not `3 (mod 4)`) | `two_model` |
+| `colorable_four_planeOver_sqrt` | `m = 3`, `11`, `35` | `four_model` |
+
+Both alternatives of each shape lemma are met, so neither disjunct is idle. The module's own Spec section holds the
+class arithmetic, one application of `colorable_four_planeOver_sqrt` at `m = 11`, and two of the solutions above.
+No statement of the module concludes `False`, and no hypothesis is empty at any parameter.
+
+### D3 — what a reader of the statements should be told that the docstrings do not say
+
+1. **Attribution — both rows are prior art; nothing here is claimed as this project's but the kernel form.** By
+   `BIBLIOGRAPHY.md`'s row for `[Fischer1990]` (K. G. Fischer, *Additive k-colorable extensions of the rational plane*,
+   Discrete Math. 82 (1990) 181–195): "Theorems 8–10: the complete real-quadratic classification — 2 colours iff
+   N ≢ 3 (mod 4), 3 colours for N ≢ 2 (mod 3) …, 4 colours for N ≡ 3 (mod 8), no additive k ≤ 6 for N ≡ 23 (mod 24)";
+   and `[Johnson2000]` p. 176, as that file quotes it: "Fischer does show that if m ≡ 3 mod 8, then
+   χ(ℚ²(√m), 1) ≤ 4". So `colorable_two_planeOver_sqrt` and `colorable_four_planeOver_sqrt` are **Fischer's values
+   (1990)**, restated by Johnson; an additive colouring — a homomorphism from a group holding the unit vectors, never
+   `0` at one — is Fischer's notion (the same row: "additive colourings = our residue colourings"), and
+   `colorable_planeOver_of_addMonoidHom` is this library's `colorable_of_residue` read at the plane. The claim list
+   says it in one line (NF4-NC): "any upper bound as this project's (every upper bound here is prior art…)". The
+   two-colour *classification over every real number field* is an outside model's derivation (NF4-NC, NF4-OBJECTION);
+   this module states the quadratic case only and reads none of it. **I have not read `[Fischer1990]` in this job**: the
+   attribution is `BIBLIOGRAPHY.md`'s, copied; whether the map `ψ` of each class is Fischer's own colouring is not
+   checked here. What is this job's is proofs of statements the planners typed.
+2. **Each headline is an upper half.** `colorable_two_planeOver_sqrt` is `χ ≤ 2`; "`= 2`" also needs an edge (the
+   lower bound 2 — by KN5's § Stage 7, `Instances/UpperHalfValues.two_le_chromaticNumber_planeOver` on branch
+   `fs131-wnf`, which I have not opened).
+   `colorable_four_planeOver_sqrt` is `χ ≤ 4` at every `m ≡ 3 (mod 8)`; it is sharp only where the lower bound four
+   holds (`m ≡ 11 (mod 12)`, the three-colour line's `TorsionExtraction`), i.e. at `m ≡ 11 (mod 24)` — at `m = 3`, `19`
+   the claim's printed value is 3 (NF4-THEOREM: "`3` for `m ≡ 3, 7 (mod 12)`").
+3. **The claim's dated line speaks of primes; the module proves colourings.** NF4-DYADIC-TWO reads "needs a stable prime
+   of Q(sqrt m)(i) above 2 ramified over Q(sqrt m)" and NF4-DYADIC-FOUR "needs the stable prime above 2 with residue
+   field F_4". No `StablePrime` is built or read here: the module's docstring says so ("The primes themselves … are
+   corollaries in the joining module"), and J.10 of the joining text is where the prime at `m ≡ 3 (mod 8)` is typed.
+4. **The subgroup `Λ` of the proofs is larger than the lattice the docstrings describe.** The three
+   `exists_addMonoidHom_*` docstrings name the points of the unit vectors' shape and `ψ` on them. The proofs take the
+   subgroup where **one integer form** has odd denominator — `p₁ − p₂ + p₃ − p₄`; `p₁ + p₃ + 2p₄`; and the pair
+   `p₁ + p₂ + p₃ − p₄`, `2p₄ − 2p₂` — and `ψ` = that form modulo 2. On the docstrings' lattice it is the docstrings'
+   map; the statements are existential and say neither. A consumer (J.10) reads only: `Λ` is a subgroup holding every
+   unit vector, `ψ` is additive, `ψ u ≠ 0`.
+5. `exists_int_solution_of_mem_unitVectors` gives `N ≠ 0`; in the proof `N > 0` (a product of denominators), which the
+   statement does not say and no reader here needs.
+6. The shape lemmas are statements about integers alone (every solution not all even, from a unit vector or not);
+   `dyadic_shape_three_mod_eight`'s proof never reads the parity of `a` in its all-odd case.
+
+### D4 — `ARCHITECTURE.md`, the module map, row `Arith/DyadicQuadratic`
+
+Replace "(FS131-KN4, its brief's Amendment 1; restated by FS131-KN5's passes; a skeleton: ten leaves are `sorry`)" by
+"(statements FS131-KN4's and FS131-KN5's; proofs FS131-ID1's; no `sorry`; every theorem on the standard three)", and
+"the lattice and its map by class" by "an additive map by class, one integer form's reduction modulo 2 on the subgroup
+where it has odd denominator". The row's imports (`SpectralChain`) are unchanged: no import was added.
+
+### D5 — `LEDGER.md` and `CLAUDE.md`: no row moves on this module alone
+
+Both values are prior art; I found no numbered row of `LEDGER.md` whose result is either upper bound (searched for
+the two classes; its claim list names "Fischer, 1990, additive colourings only" for the neighbouring facts). The first
+plan's § 4.8 has the one line this module feeds — "**Row 73**: `χ(ℚ(√11)²) = 4` is then also the dyadic row at `m = 11`" — which waits on the joining module
+(the lower half is row 73's). For `CLAUDE.md` § The gate and § Trust ledger the counts are the landing's to measure;
+from this module: 11 CLEAN audit records, 127 stored constants, no axiom, no hypothesis former, no vacuity marker.
+No Frontier line and no Proof Atlas grade changes on this module alone.
+
+### D6 — `LEAN.md` § Searching — Lean: three lines, if wanted
+
+- "A statement printed by a footer on a copy and the same statement dumped from the compiled module differ only in
+  binder names minted in the file (`inst._@.<module>.<n>._hygCtx._hyg.<k>`): rewrite the file's own module names and
+  no other — a hygienic name minted in Mathlib (`x._@.Mathlib.Data.FunLike.Basic…`) is the same from every path — and
+  compare Lean's hash unrewritten; with the rewrite off the differences must be exactly the statements it touches
+  (`data/fs131/id1/statements_built.py`; FS131-ID1)."
+- "An exhaustion over residues is priced by its modulus before its instrument: `8⁵·2` tuples of `ℕ` arithmetic under
+  `decide +kernel` are 10.6 s and 5.1 GB; a square modulo 8 is read from the residue modulo 4, and the same statement
+  over `4⁵·2` tuples is under a second (`Arith/DyadicQuadratic.shapeCheck`; `data/fs131/id1/probes/decide_cost.lean`;
+  FS131-ID1)."
+- "`omega` reads `Int.natAbs`: after `rw [Int.natAbs_mul]` the term `Int.natAbs 2 * N.natAbs` is a product of two
+  atoms to it; state `(2 * N).natAbs = 2 * N.natAbs` as a `have` and rewrite with that (FS131-ID1)."
+
+## Left, and held
+
+- **Leaves left as `sorry`: none.** All ten are proved; the file has no `sorry`.
+- **A strengthening at no cost, kept out of the skeleton as the brief says**: `colorable_two_planeOver_sqrt` holds with
+  `Squarefree m`, `m % 4 ≠ 3` weakened to **`m % 4 = 1 ∨ m % 4 = 2`** (a square `m ≡ 1 (mod 4)` gives `ℚ(√m) = ℚ ⊆ ℚ(√2)`;
+  squarefree and `m % 4 ≠ 3` imply it). Checked by the kernel outside the library, 25 lines over this module's leaves:
+  `data/fs131/id1/probes/two_colour_wider.lean` (`colorable_two_planeOver_sqrt_of_mod_four`, on the standard three; at
+  `m = 9`, `18`). The skeleton's form is what the table's row reads, and is kept.
+- **A simplification of the plan, for the planner's eye** (not a statement): one form per class instead of a lattice of
+  four (§ Stage 3). If the joining text's J.10 or a docstring was written against the four-form lattice, D3 item 4 is
+  what it should read.

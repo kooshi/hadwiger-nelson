@@ -1,0 +1,5 @@
+records: 13 (expected 13); resting on an axiom beyond the standard three: 2; error lines in the print: 0
+  NOT CLEAN Planted.one: ['sorryAx']
+  NOT CLEAN Planted.two: ['Some.undeclared_axiom']
+names against data/fs131/id1/audit-block.txt: the same list, in order (11 listed)
+CONTROL: 2 of 2 planted records reported — the check can fail

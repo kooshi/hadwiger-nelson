@@ -1,0 +1,23 @@
+'HadwigerNelson.DyadicQuadratic.colorable_planeOver_of_addMonoidHom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.DyadicQuadratic.exists_rat_add_mul_sqrt_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.DyadicQuadratic.exists_int_solution_of_mem_unitVectors' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.DyadicQuadratic.dyadic_shape_one_mod_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.DyadicQuadratic.dyadic_shape_two_mod_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.DyadicQuadratic.dyadic_shape_three_mod_eight' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_one_mod_four' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_two_mod_four' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_three_mod_eight' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.DyadicQuadratic.colorable_two_planeOver_sqrt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.DyadicQuadratic.colorable_four_planeOver_sqrt' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
