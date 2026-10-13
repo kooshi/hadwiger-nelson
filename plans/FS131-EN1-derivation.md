@@ -483,3 +483,101 @@ control: path-cites-ru-once
   fault: python3 ../data/fs131/en1/cites_check.py plans/FS100-X01D-derivation.md:203-308 plans/FS100-X12B-derivation.md:46-77 plans/FS100-X12B-derivation.md:85-131 plans/FS100-X02D-derivation.md:146-218 plans/FS84-SI-D-derivation.md:126-135 plans/FS84-SI-D-derivation.md:145-162 plans/FS84-SI-D-derivation.md:240-250 plans/FS86-R88-D-derivation.md:142-201 plans/FS100-X23D-derivation.md:217-246 plans/FS84-SI-D-derivation.md:321-328
 
 Rests on it: the planner's section X6 and the order of its leaves; § Stage 8's list.
+
+## Stage 7 — SAVED (Amendment 1: two readings of the entries)
+
+*The amendment's two block quotations are checked with the others (`quote_check.py`: `0 9` after it, `9 9` planted). Each answer below is a
+reading: what the entry's argument uses, with the address of the step, and whether a printed statement not yet declared is read.*
+
+### 7.1 Which bound CLS uses on the dyadic inert targets `U_Q`, `Q = 2^f ≥ 64` (the planner's leaf 8)
+
+**The reading.** At level one, CLS needs each such place to have Hoffman ratio below `1/4`, i.e. `3|λ_min(U_Q)| < Q + 1`. The entries get it
+from three sources, by `Q`:
+
+| `Q` | what the entry uses | address |
+|---|---|---|
+| 64 | the exact spectrum: `λ_min(U₆₄) = −15`, ratio `15/80 = 3/16` | X23D § 2.3, "exactly `λ_min(U₆₄) = −15` (2.1): `15/80`" (`plans/FS100-X23D-derivation.md` ll. 168–169); X26B-T1 (`plans/FS100-X26B-derivation.md` l. 119); FS100-G27 |
+| 128 | the exact spectrum: `λ_min(U₁₂₈) = −19`, ratio `0.12838` | X26B-T1 (l. 120); FS100-G27; in the kernel `Floor128.targetFloor_eight_128` (the planner's map) |
+| `2^f ≥ 256` | **"Weil"**: `\|λ\| ≤ 2√Q` — "`Q ≥ 64`: Weil gives Hoffman `≤ 2√Q/(Q + 1 + 2√Q) ≤ 16/81`" (X23D l. 168); "`Q ≥ 128` by Weil (`2√Q/(Q+1) < 1/3` from `Q ≥ 34`)" (X26B l. 120); "`U_Q`, `Q ≥ 64` — `3/16` at 64, Weil above, any base" (X26B l. 138) | cited by name only: no page, and no line says which sums the eigenvalues of `U_Q` are |
+
+At levels `m ≥ 2` the entry uses the dyadic Lemma P (FS100-DLP: `|λ| ≤ Q^{m−1}`), which is elementary and reads no printed bound. The same
+"dyadic `Q ≥ 64` by Weil" is read once more on the path, in T-C(A)'s count, where the places with every normalised eigenvalue above `−1/3` are
+split off (X23D § 3.2 step 5, l. 242) — the same inequality, `3|λ| < Q + 1`.
+
+**So: yes.** For `Q = 2^f ≥ 256` the entries read a bound on the character sums `Σ_{x ∈ μ_{Q+1}} (−1)^{Tr(ax)}` over a field of characteristic
+2, under the one word "Weil". That is a printed statement beyond the held import, if the held page is "of characteristic not 2" (the planner's
+words; I did not read `[Weil1948]`). No record I read cites a page for it or reads one. *Recalled, not read:* in characteristic 2 these sums
+are Kloosterman sums over `𝔽_Q`, and the bound is Hasse's for an elliptic curve; the three exact values held (`−11`, `−15`, `−19` at
+`Q = 32, 64, 128`) are each minus the largest integer `≡ 3 (mod 4)` below `2√Q`, which fits that description and proves nothing.
+
+**What the entry needs is far less than `2√Q`, and an elementary count gives it** — this is a derivation, so it is filed apart, as mine and
+unchecked by a second mind (§ 7.3, entry EN1-UQ4). If the kernel lane takes it, leaf 8 reads no printed bound at a dyadic place.
+
+### 7.2 Does EF_F⁺'s Lemma 3.1′ need Shannon–McMillan–Breiman, or only the definition of entropy? (the planner's leaf 18)
+
+**The reading: it needs the theorem — the almost-everywhere statement — and the proof consumes it.** X01D § 3.3 (iii)
+(`plans/FS100-X01D-derivation.md` ll. 237–239): "SMB (EF Thm 2.1, a countably generated σ-algebra, a finite partition):
+`(1/n)I_μ(ξ_n)(x) → h_{μ_x^E}(u*, ξ)` a.e. … so the limit is `0` a.e. By Egorov there are `X′` … and `N₀` with `μ(ξ_n(x)) ≥ e^{−nβ₁}` for
+`n ≥ N₀`, `x ∈ X′`." X12B § 2.2 step 2 (ll. 113–115) is the same: "by Shannon–McMillan–Breiman (no ergodicity: the limit is the ergodic
+components' entropy, a.e. 0) and Egorov". What is used downstream is **one set `X′` on which the lower bound holds for every `n ≥ N₀`**:
+Lemma 3.1′ concludes "for every `x ∈ X′` … and every `0 < δ ≤ δ₀`", and Steps 4–5 run the pigeonhole for one point `x` at the scales
+`M, M², M⁴, …` and compare consecutive scales ("Iterate the scales `M, M², M⁴, …` with one choice `(ℓ, r)` per scale; each consecutive pair gives
+`z = 0`, so all share **one** `t`", § 3.6 l. 283; X12B step 5, "`ℓ(X) = ℓ(X²) = ℓ(X⁴) = …`").
+
+The definition alone gives less. `H_μ(ξ_n) = ∫ I_μ(ξ_n) dμ` and `H_μ(ξ_n)/n → h_μ(u*, ξ) ≤ h_μ(u*) = 0`, so `I_μ(ξ_n)/n → 0` **in mean**, and
+by Markov's inequality each single `n` is good on a set of measure near full. That serves Step 3 at one scale. It does not serve the chain:
+one point must be good at a whole sequence of scales whose consecutive members are polynomially close (Step 4's product-formula comparison
+bounds `M₂` by a power of `M₁`), and convergence in mean gives a summable exceptional measure only along a sparse sequence. So the proofs as
+written read a printed theorem here: SMB for a finite partition and an invariant probability measure that need not be ergodic —
+`[EinsiedlerFish2010]` Thm 2.1, as X01D cites it — and Egorov.
+
+**What (iii) cites and does not need** (a remark, mine, one mind): the identification of the limit through the ergodic decomposition and
+Jacobs's formula. It is enough that the limit `g = lim I_μ(ξ_n)/n` exists almost everywhere: `g ≥ 0`, and by Fatou
+`∫ g dμ ≤ liminf ∫ I_μ(ξ_n)/n dμ = h_μ(u*, ξ) = 0`, so `g = 0` a.e. So leaf 18 is "the information function of a finite partition converges
+almost everywhere, for an invariant measure", with no statement about what the limit is. (Jacobs's formula stays an input of PE-2, the map's
+T3.)
+
+**Whether a rearranged proof could live on convergence in mean is a derivation, not a reading; I stop there** (the amendment's instruction).
+One fact for whoever takes it: `I_μ(ξ_n)(x)` is non-decreasing in `n` (atoms shrink), so "for every `n ≥ N₀`" is equivalent to the same along
+any sequence of bounded ratio; the whole difficulty is a summable rate along a geometric sequence, which zero entropy does not supply.
+
+### 7.3 A bound for leaf 8 that reads no printed statement (mine; one mind; not checked by a second)
+
+For `Q = 2^f`, `μ = μ_{Q+1} ⊂ 𝔽_{Q²}`, `S(a) = Σ_{x∈μ} (−1)^{Tr(ax)}` (`Tr` to `𝔽₂`): the eigenvalues of `U_Q` are the `S(a)`, with `S(0) = Q + 1`.
+(1) `S(ua) = S(a)` for `u ∈ μ`, and the norm `𝔽_{Q²}^× → 𝔽_Q^×` is onto with kernel `μ`, so `S` is constant on the `Q − 1` norm classes, each of
+`Q + 1` elements: write `S_n`. (2) `Σ_a S(a)⁴ = Q² · #{(x₁, …, x₄) ∈ μ⁴ : x₁ + x₂ = x₃ + x₄} = Q² Σ_s r(s)²`, `r(s)` the number of ordered pairs
+of `μ` with sum `s`. (3) `r(0) = Q + 1` (characteristic 2). For `s ≠ 0`, `x` and `s + x` both of norm one means `Tr_{Q²/Q}(s̄x) = N(s)`, an affine
+`𝔽_Q`-line `x₀ + t k`, on which `N(x₀ + tk) = 1` is a quadratic equation in `t` with leading coefficient `N(k) ≠ 0`: at most two roots, so
+`r(s) ≤ 2`. (4) `Σ_{s≠0} r(s) = (Q+1)² − (Q+1) = Q(Q+1)`, so `Σ_s r(s)² ≤ (Q+1)² + 2Q(Q+1) = (Q+1)(3Q+1)`. (5) Hence
+`(Q+1) Σ_n S_n⁴ ≤ Q²(Q+1)(3Q+1) − (Q+1)⁴`, i.e. **`Σ_n S_n⁴ ≤ 2Q³ − 2Q² − 3Q − 1`**. (6) So `(3|S_n|)⁴ < 162 Q³ ≤ Q⁴ < (Q+1)⁴` once `Q ≥ 162`:
+**`3|λ| < Q + 1` for every non-trivial eigenvalue of `U_Q`, at every `Q = 2^f ≥ 256`.** ∎
+
+Exact check (`data/fs131/en1/uq_fourth_moment.py`, arithmetic in `𝔽_{Q²}`, `f = 1, …, 8`, under two seconds): it reproduces the held values —
+`λ_min = −1, −11, −15, −19` at `Q = 2, 32, 64, 128` — which is the positive control on the code; `Σ_n S_n⁴` **equals** `2Q³ − 2Q² − 3Q − 1` at
+all eight `Q` (so `r(s) ∈ {0, 2}` off 0); `3·max|S| < Q + 1` holds at `Q = 64, 128, 256` and fails at `Q ≤ 32`, where `U_Q` is four-colourable;
+`λ_min(U₂₅₆) = −31`. With the norm-one group replaced by `μ_{Q−1}` the fourth-moment test fails at once (the plant).
+
+derivation: EN1-UQ4
+  statement: for Q = 2^f with f ≥ 8, every non-trivial eigenvalue λ of U_Q = Cay(𝔽_{Q²}, μ_{Q+1}) satisfies 3|λ| < Q + 1.
+  uses only: characteristic 2 (`−x = x`; `r(0) = Q + 1`); the norm `𝔽_{Q²}^× → 𝔽_Q^×` onto with kernel `μ_{Q+1}`; an affine `𝔽_Q`-line meets the
+    norm-one set in at most two points; orthogonality of the additive characters of `𝔽_{Q²}`; `162 Q³ ≤ Q⁴` for `Q ≥ 162`
+  not claimed: the bound `2√Q`; anything at `Q = 64` or `128`, where the inequality holds by the exact spectra and not by this count (the count
+    gives `|λ| ≤ 26` and `45` there, against `21.7` and `43`); levels above one (FS100-DLP); odd `q`; that it is new
+  argument: § 7.3 A bound for leaf 8 that reads no printed statement (mine; one mind; not checked by a second)
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `Q = 256`: `max|S| = 31`, `3·31 = 93 < 257`; the count gives `|S| ≤ 76`
+  prior art: owed — a fourth-moment bound of the kind Kloosterman used for his sums (recalled, not read); not searched
+  handoff: de Bruijn — a candidate for the planner's leaf 8 in place of a second printed bound: the count for `Q ≥ 256`, the exact spectrum at 64
+    (128 is in the kernel); it has had no second mind
+
+control: uq-fourth-moment
+  of: EN1-UQ4 — the count's inequality and its consequence, computed exactly at `Q = 64, 128, 256`
+  run: python3 ../data/fs131/en1/uq_fourth_moment.py 6 7 8
+  expect: 64 -15 15 515903 515903 1 1
+    128 -19 21 4161151 4161151 1 1
+    256 -31 31 33422591 33422591 1 1
+  fault: python3 ../data/fs131/en1/uq_fourth_moment.py 6 7 8 --plant
+
+Rests on it: nothing yet; it is offered to the kernel lane's leaf 8.
