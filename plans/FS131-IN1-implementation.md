@@ -7,7 +7,34 @@ Working files: `data/fs131/in1/`.*
 
 ## Theorems this phase proved
 
-*(filled as the stages are saved; one line per kernel theorem, with its declaration and its axioms)*
+All in `Proofs/HadwigerNelson/Arith/ThreeColourCriterion.lean`, namespace `HadwigerNelson.ThreeColourCriterion`; the thirteen
+leaves of the skeleton, each proved (stages 2–4), the axioms printed from the built module (stage 5). "Standard three" is
+`[propext, Classical.choice, Quot.sound]`; "Weil" is the declared outside theorem `HadwigerNelson.StandingFive.kloosterman_bound`
+(`[Weil1948]` p. 207). **Two of the thirteen also print `sorryAx` in this tree, from upstream leaves that are other jobs'
+and from nothing of this module** — those two are [kernel] only when their upstream is; the other eleven are [kernel] as
+they stand. Three statements are wider than the skeleton's, by the coordinator's rulings (stage 2).
+
+| declaration | the informal statement it was read against | axioms |
+|---|---|---|
+| `targetFloor_four_weil` | `χ(Γ_Q) ≥ 4` for `Q ≡ 3 (mod 4)`, `Q ≥ 14` (every field of `Q²` elements with a non-trivial involution) | standard three + Weil |
+| `exists_mul_conj_inv_eq_of_mul_conj_eq_one` | Hilbert 90 for a quadratic extension: `t·σ t = 1 ⟹ t = y/σ y` — **every field** (widened: `[Finite k]` dropped) | standard three |
+| `exists_normOne_zero_of_card_ne_nine` | FS91-J02-L4(a): in `𝔽_{Q²}`, characteristic 3, `i` moved by `σ`, `Q ≠ 3`, every `𝔽₃`-functional vanishes on the norm-one group | standard three + Weil |
+| `eq_zero_of_forall_normOne_eq` | FS91-J02-L4(b): characteristic 2, a functional constant on `{y/σ y}` is `0` there — **every endomorphism `σ ≠ id`** (widened: `hσσ` dropped) | standard three |
+| `exists_maximal_card_nine` | FS91-J02-L3, L4(a), T1 step 4: a finite ring of characteristic 3 with such a functional has a residue field of nine elements | standard three + Weil |
+| `exists_maximal_conj_trivial` | FS91-J02-L4(b), T1 step 5: characteristic 2, functional `≡ 1` on `{x/c x}` ⟹ `c` is the identity modulo a maximal ideal — **every endomorphism `c`** (widened: `hcc` dropped) | standard three |
+| `conj_mem_unitRing` | `ℤ[U_F]` is closed under complex conjugation | standard three |
+| `exists_unitSet_mul_conjR_eq` | every non-zero `a ∈ ℤ[U_F]` is `u·ā` with `u` a unit vector | standard three |
+| `comap_conjR_eq` | FS91-J02-L2(b), for every ideal: conjugation fixes each ideal of `ℤ[U_F]` | standard three |
+| `finite_quotient_span_natCast` | FS91-J02-L2(a): `ℤ[U_F]/N` is finite for a number field `F`, `N ≠ 0` | standard three |
+| `exists_maximal_of_torsion` | FS91-J02-T1 ⟹, in the ring: a point of `Θ₃ ∩ T₆` gives a maximal ideal of dyadic type or one with nine elements in its quotient | standard three + Weil **+ `sorryAx` from `TorsionExtraction.exists_zmod_hom_of_mem_torsionBy`** (upstream leaf) |
+| `fieldBandSet_two_nonempty_of_conj_trivial` | a maximal ideal with trivial conjugation is a two-colouring's character | standard three |
+| `exists_maximal_conj_trivial_of_colorable_two` | the two-colour end, every subfield of `ℝ`: a two-colourable plane gives such an ideal | standard three **+ `sorryAx` from `TorsionExtraction.colorable_two_iff_fieldBandSet_two_nonempty`** (upstream leaf) |
+
+The headline `exists_maximal_card_nine_of_colorable_three` (NF4-THEOREM (b), toward the prime, as far as the ring; the planner's
+composition, not a leaf) prints standard three + Weil + `sorryAx` from four upstream leaves
+(`ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable`, `TorsionExtraction.exists_torsion_mem_fieldBandSet`,
+`colorable_two_iff_fieldBandSet_two_nonempty`, `exists_zmod_hom_of_mem_torsionBy`). Twenty private helpers: nineteen on the
+standard three, one (`exists_maximal_card_nine_of_quotient`) on Weil's bound too.
 
 ## Stage 1 — SAVED: the readback
 
@@ -206,3 +233,186 @@ was empty and all three records failed as `SORRY UNSOURCED` — the stored proof
 **Statement check** (`logs/statements-stage4.out`): `PASS` — 17 named constants, the three widened by ruling and no other
 difference, 20 new private theorems, no name outside the module's namespace, the 3 `example`s identical; control `4 of 4`;
 the widenings' control 1 error.
+
+## Stage 5 — SAVED: the build, the statements and the axioms from the kernel's side, the models, the linters
+
+**The one build** (`data/fs131/in1/build_sampled.sh logs/build1 8`, i.e. `scripts/build.sh` under `scripts/slot.py --mem 10
+--cpus 4` with `MEMMAX=10G BATCH=8`; `data/fs131/in1/logs/build1.{out,err,peak}`; the gate's own copy
+`build/gate/build/20261013T205359Z-890092.log`): **exit 0 — `OK — 248 of 248 batches, 37 module(s) rebuilt, 3 module(s) with
+warnings, 9m54s`**. The three modules with warnings are the line's other three, still skeletons in this tree
+(`Arith/ThreeColourCharacter` 8, `Arith/TorsionExtraction` 10, `Arith/DyadicQuadratic` 10 `declaration uses sorry`, and nothing
+else). **`Arith/ThreeColourCriterion`: `✔ Built … (11s)`, no message of any kind** — the full log holds no line naming the file.
+The other 33 rebuilt modules are what this tree's build of 2026-10-07 was behind by (`Plane/…`, `Outside/OAI158…`, `Proofs`).
+Peak, summed over the build's process tree every 2 s: 12.3 GB — an upper estimate (pages of one `.olean` mapped by several
+processes are counted once each), above the planner's 5.2 GB because here whole batches compiled at once; the 10 GB cap did
+not fire. The build is Lake's: killed at any instant, the same command redoes only the modules not yet written.
+
+**No statement changed but the three ruled, from the kernel's side.** `data/fs131/in1/dump.sh` prints every constant the
+compiled module stores (kind, name, stored type, a definition's stored value). Before: `statements-before-wr2.txt`, from
+`fs131-wr2`'s compiled skeleton, made in stage 1 (this tree never held a compiled skeleton). After:
+`statements-after.txt`, from this tree's library after the build. `statement_diff.py` (`logs/statements-stage5.out`):
+**`PASS` — 17 named constants compared (16 theorems, 1 definition); 3 of 3 widened by ruling differ, as they must; the other
+14 identical character for character, `conjR`'s stored value included; 20 new private theorems; no new public name; names
+outside `HadwigerNelson.ThreeColourCriterion`: 0** (so no equation lemma under another module's definition's name — the launch
+note's point 1); the 3 `example`s identical as text. Control: four planted faults — one more statement changed, the
+definition's value changed, a declaration removed, a generated lemma under `SpectralChain.unitRing`'s name added — `4 of 4`
+reported. That each ruled difference is a dropped hypothesis and nothing else: stage 4's `widenings.py` examples (the
+skeleton's own text, proved in one application), 0 errors, control 1 error.
+
+**The axioms, from the built module** (`data/fs131/in1/axioms.sh compiled stage5`; print `logs/axioms-stage5.txt`, verdict
+`logs/axioms-stage5.out`): the same 37 records as stage 4's print from the source, line for line — 30 on the standard three;
+6 on Weil's bound, exactly the listed ones; 3 with `sorryAx`, each sourced to upstream leaves only (the table above). `PASS`;
+control `4 of 4`.
+
+**The models** (`data/fs131/in1/models.sh compiled stage5`; `logs/models-stage5.{txt,out}`): exit 0, no error, no `sorry` —
+Hilbert 90 at `ℂ` with conjugation and `t = i`; the two-part at `𝔽₂`; the field case at 2 at `GaloisField 2 2` with its
+Frobenius (`frobenius_ne_id`); `finite_quotient_span_natCast` at the standing field with `N = 2`. The two auxiliary theorems
+print the standard three.
+
+**The environment linters** (`lake lint --no-build -- --no-build --trace` under the slot; `logs/lint.out`): exit 0,
+`-- Linting passed for Proofs.`, fourteen linters `Passed`, no line naming this module — `unusedArguments` among them, which
+is the linter the three widenings would otherwise have met. I planted no fault in the house's linters (their controls are the
+gate's); the build's own `linter.unusedVariables` did fire once on this file during the work (`hσσ` in the field case at 2,
+stage 2), which is how the second finding was seen.
+
+**Not run by this job**: `scripts/axioms.sh`, `scripts/dupnames.sh`, `scripts/vacuity.sh`, `scripts/assumptions.sh` — the
+landing's, on the joined tree; this tree cannot pass them (three modules of the line are `sorry` here).
+
+**What is left in this tree, to clean or keep**: the scratch farm `build/in1-farm/` (55 MB, gitignored, regenerable by
+`data/fs131/in1/farm.sh`; no longer needed — `IN1_NOFARM=1` makes `lean1.sh` read the tree's own library). No process of
+this job is running or queued.
+
+## Drafts for the landing (saved with stage 5)
+
+*This job ran no gate: no audit, no vacuity scan, no assumptions step, no `dupnames`. What follows is for the landing of the
+three-and-four-colours line (`Arith/ThreeColourCharacter`, `Arith/TorsionExtraction`, `Arith/ThreeColourCriterion`,
+`Arith/DyadicQuadratic`).*
+
+### 1. The audit block — `scripts/Axioms.lean`
+
+`data/fs131/in1/audit-block.txt`: 17 records, one `#print axioms` line per public declaration a person typed (16 theorems,
+the definition `conjR`), in the file's order, generated by `data/fs131/in1/make_audit.py` from the source, the kernel's list
+of named constants and the axioms print — it fails if the source writes a public declaration the dump does not hold, or the
+dump holds a named constant the source does not write.
+- **CLEAN (12)**: `exists_mul_conj_inv_eq_of_mul_conj_eq_one`, `eq_zero_of_forall_normOne_eq`, `exists_maximal_conj_trivial`,
+  `conj_mem_unitRing`, `conjR`, `coe_conjR`, `conjR_conjR`, `exists_unitSet_mul_conjR_eq`, `comap_conjR_eq`,
+  `finite_quotient_span_natCast`, `fieldBandSet_two_nonempty_of_conj_trivial`, `exists_maximal_conj_trivial_of_colorable_two`.
+- **IMPORTED (5)**, under `declareImport ``HadwigerNelson.StandingFive.kloosterman_bound`: `targetFloor_four_weil`,
+  `exists_normOne_zero_of_card_ne_nine`, `exists_maximal_card_nine`, `exists_maximal_of_torsion`,
+  `exists_maximal_card_nine_of_colorable_three` — the plan's list (`plans/FS131-KN5-three-four-colours-passes.md` § Stage 7),
+  unchanged. `ARCHITECTURE.md` § Trust's consumer list for the import gains these five.
+- **In this tree three of the seventeen also print `sorryAx`**, from upstream leaves only (stage 4's table; stage 5's print from
+  the built module). On the joined tree, with the upstream modules proved, `exists_maximal_conj_trivial_of_colorable_two`
+  reads CLEAN and the other two IMPORTED; `data/fs131/in1/axioms.sh compiled <tag> --no-sorry` is the check that then
+  admits no `sorryAx` at all.
+- The 20 private helpers cannot be named from `scripts/Axioms.lean`; each is read by a public record, and their own prints
+  (by `collectAxioms` on the private names) are in the same print: 19 on the standard three, one
+  (`exists_maximal_card_nine_of_quotient`, the `𝔽₃` end of `exists_maximal_of_torsion`) on Weil's bound.
+
+### 2. A model for each hypothesis of the headlines
+
+`data/fs131/in1/lean/ModelsBody.lean` (never part of the library) applies the module's theorems at named objects; its print
+from the built module is `data/fs131/in1/logs/models-stage5.txt`. "Kernel" below means: an `example` there, or a declaration
+of the library, exhibits every hypothesis at once.
+
+| statement | hypotheses | model | does the kernel hold it? |
+|---|---|---|---|
+| `targetFloor_four_weil` | `Q % 4 = 3`, `14 ≤ Q` | `Q = 27` (the module's spec `example`: `27 % 4 = 3`; 14 is the least `Q` with `4√Q < Q + 1`) | yes. The conclusion's own binder — a field of `27²` elements with a non-trivial involution — is exhibited by no declaration (`GaloisField 3 6` with `x ↦ x²⁷`) |
+| `exists_mul_conj_inv_eq_of_mul_conj_eq_one` | a field, an involution `σ ≠ id`, `t·σ t = 1` | `ℂ`, conjugation, `t = i` — a field that is not finite, which the widened statement now covers | yes (`ModelsBody`, with `conj_ne_id`) |
+| `eq_zero_of_forall_normOne_eq` | a finite field of characteristic 2, an endomorphism `σ ≠ id`, `lam` constant `= e` on `{y/σ y}` | `𝔽₄ = GaloisField 2 2`, its Frobenius, `lam = 0`, `e = 0` (a non-zero `lam` is impossible there: `l(1) + l(ω) + l(ω²) = l(0)`) | yes (`ModelsBody`, with `frobenius_ne_id`) |
+| `exists_normOne_zero_of_card_ne_nine` | a finite field of characteristic 3, an involution, `ι² = −1`, `σ ι = −ι`, not nine elements | the field of `27²` elements, `σ = (·)²⁷`, `ι` a square root of `−1` (`27 ≡ 3 (mod 4)`); `𝔽₈₁` is **not** a model (`ι ∈ 𝔽₉` is fixed by `x ↦ x⁹`) — the module docstring says both | **no**: named, exhibited by no declaration |
+| `exists_maximal_card_nine` | a finite ring of characteristic 3, an involution fixing each maximal ideal, `ι`, `l` never `0` on `{x/c x}` | `𝔽₉ = 𝔽₃[i]`, conjugation, `l(x + yi) = x + y` (non-zero on `{±1, ±i}`); the conclusion holds there with `𝔪 = 0` | **no**: named in the module docstring, exhibited by no declaration |
+| `exists_maximal_conj_trivial` | a finite ring of characteristic 2, an endomorphism fixing each maximal ideal, `l = 1` on `{x/c x}` | `𝔽₂`, the identity, `l = id` | yes (`ModelsBody`; the module's first spec `example` is its last hypothesis) |
+| `conj_mem_unitRing`, `conjR`, `coe_conjR`, `conjR_conjR`, `comap_conjR_eq` | every `F : Subfield ℝ` | `F = ⊥` (the module's third spec `example`) | yes |
+| `exists_unitSet_mul_conjR_eq` | `a ≠ 0` in `ℤ[U_F]` | `a = 1` at any `F` | yes (a condition on the parameter) |
+| `finite_quotient_span_natCast` | `[NumberField F]`, `N ≠ 0` | the standing field `ℚ(√3, √11, η)` (`StandingFive.instNumberFieldStanding`), `N = 2`; `fieldOfRadicands {d}` once `fs131-wnf`'s instance is on the tree | yes, at the standing field (`ModelsBody`) |
+| `exists_maximal_of_torsion` | `[NumberField F]`, `τ ∈ Θ₃(R_F) ∩ T₆` | first alternative: `F = ℚ(√2)`, `τ` the character of a two-colouring (`1/2` on unit vectors: in the band at 3, killed by 2); second: `F = ℚ(√3)`, `τ` from a three-colouring through L1.7 and L2.4 | **not in this tree**: at `ℚ(√2)` once `DyadicQuadratic.colorable_two_planeOver_sqrt` and `TorsionExtraction.colorable_two_iff_fieldBandSet_two_nonempty` are proved; at `ℚ(√3)` once the joining module has its row at 3. At the standing field no such `τ` should exist (a point of `Θ₃` three-colours the plane, and `χ ≥ 5` there on Weil's bound) — said, not checked by a declaration here |
+| `fieldBandSet_two_nonempty_of_conj_trivial` | a maximal ideal of `ℤ[U_F]` modulo which conjugation is the identity | the ideal `exists_maximal_conj_trivial_of_colorable_two` produces at `F = ℚ(√2)` | **not in this tree** (the same two upstream leaves) |
+| `exists_maximal_conj_trivial_of_colorable_two` | `F²` two-colourable | `F = ℚ(√2)` (`DyadicQuadratic.colorable_two_planeOver_sqrt`, downstream of this module) | **not in this tree** |
+| `exists_maximal_card_nine_of_colorable_three` | `[NumberField F]`, `F²` three-colourable and not two-colourable | `F = ℚ(√3)`: `χ = 3` (`[Fischer1990]` Thm 9) | **not in this tree**: "not two-colourable" is `TorsionExtraction.not_colorable_two_of_sqrt_mem` at `d = 3` (a leaf); "three-colourable" is on `fs131-wnf` (the prime above 3 of residue field `𝔽₃`, `UpperHalf.colorable_planeOver_of_finitePlane`). The landing of the joined tree names the declaration |
+
+By the planner's reading (`plans/FS131-KN4-three-four-colours-plan.md` § 4.6) the vacuity scan tracks none of these hypotheses
+(sets and maps under predicates it does not read); this job did not run the scan. The table is then the evidence, and six of
+its rows are "named, not held": two for want of a declaration exhibiting a finite field or ring, four until the join.
+
+### 3. What a reader of the statements should be told that the docstrings do not say
+
+1. **Whose each value is.** The direction proved here — a three-colouring of the plane over a real number field gives a prime
+   with residue field `𝔽₃`, as far as a maximal ideal of `ℤ[U_F]` with nine elements in its quotient — is this project's
+   (FS91-J02-T2, `[hand; three derivations]` before this module; not found in print; `[Fischer1990]` §1 poses the question),
+   and it rests on **one declared outside theorem**, Weil's bound for Kloosterman sums (`[Weil1948]` p. 207), read at exactly
+   one place: `targetFloor_four_weil`, through the field case at 3. The two-colour end
+   (`exists_maximal_conj_trivial_of_colorable_two` with its converse `fieldBandSet_two_nonempty_of_conj_trivial`) is an
+   elementary restatement of "no odd closed walk" in the ring's words, at every subfield of `ℝ`; read at a real number field
+   through the joining module's dictionary it is the ⟹ of the two-colour classification, **an outside model's theorem**
+   (GPT Astra's Thm 2.1; second derivation FS91-J02-A21p): not claimed as this project's. The values 2 and 3 of the quadratic
+   table and every upper bound are Fischer's and Johnson's (`[Fischer1990]`, `[Johnson2000]`) and are not in this module at
+   all. Hilbert's Theorem 90 for a quadratic extension is classical; the proof here is the textbook resolvent.
+2. **Three statements are wider than the skeleton's**, by the coordinator's rulings of 2026-10-13 (the brief's Amendments 1
+   and 2; `data/fs131/claims-NF4.md`'s two dated lines): Hilbert 90 for every field; the field case at 2 and the two-part for
+   an endomorphism that need not be an involution. The three-part keeps "involution": its proof reads it twice.
+3. **"As far as the ring."** `exists_maximal_card_nine_of_colorable_three` ends at a maximal ideal of `ℤ[U_F]`, which is not
+   the ring of integers of anything and need not be Noetherian. That the ideal is cut out by a conjugation-stable prime of
+   `F(i)` with `𝓞/𝔓 = 𝔽₉`, so that `𝔓 ∩ F` has residue field `𝔽₃`, is the joining module's (its J.1, J.3) and is not in this
+   file.
+4. **The two alternatives of `exists_maximal_of_torsion` are decided by `τ`, and the statement does not say which.** The proof
+   shows more than the disjunction: the 2-part of `τ` is `1` on every `x/c̄ x` of `R/2`, or the 3-part is non-zero on every
+   `x/c̄ x` of `R/3` (`forall_unit_eq_one_or_forall_unit_ne_zero`, private). A field may have ideals of both kinds; a given
+   `τ` selects one.
+5. **`finite_quotient_span_natCast` is not a statement about `𝓞_F`.** `ℤ[U_F]` holds `1/5` (and `1/n` for many `n`), so some
+   quotients are the zero ring — still finite. The proof's bound, `dim_{𝔽_p} R/pR ≤ [F(i) : ℚ]`, is not stated.
+6. **`targetFloor_four_weil`'s `14 ≤ Q` is where `4√Q < Q + 1` begins, not where four colours begin.** The statement says
+   nothing about `Q = 3, 7, 11`; the criterion needs `Q = 3ᶠ ≥ 27`, `f` odd.
+7. **`exists_unitSet_mul_conjR_eq` is the easy direction** (`a/ā` has norm one); the planner renamed it for that reason. Its
+   name's `unitSet` is the set of unit vectors, not the group of units.
+
+### 4. For the join
+
+- **The joining module's call site needs no change** (the brief's Amendment 1 asks): its text
+  (`data/fs131/kn4/lean/ThreeFourColours.lean` on `fs131-wr2`) holds no call of any of the three widened leaves; the plan's
+  J.2 cites `exists_mul_conj_inv_eq_of_mul_conj_eq_one`, and a call `… σ hσσ hσ ht` at a finite residue field elaborates
+  unchanged, the dropped binder having been an instance argument. J.2's own statement may keep its finiteness.
+- **Names.** No public name was added, removed or renamed; the 20 helpers are private (`_private.…` names, which cannot meet
+  another module's); the module declares no constant outside `HadwigerNelson.ThreeColourCriterion` (stage 5, from the built
+  module) — in particular no equation lemma under another module's definition's name: no `simp [f]` unfolds an upstream
+  definition anywhere in the file (`Subring.closure_le.mpr` as a term unifies through `unitRing F` with no unfolding tactic).
+- **The statement check on the joined tree**: `data/fs131/in1/dump.sh <library> <out>` then
+  `statement_diff.py data/fs131/in1/statements-before-wr2.txt <out>` — expected: the three `WIDENED`, nothing else.
+- **`ARCHITECTURE.md` § 3, the row `Arith/ThreeColourCriterion`** — replace the words "(FS131-KN4, passes FS131-KN5; a
+  skeleton: thirteen leaves are `sorry`)" by "(statements FS131-KN4's and FS131-KN5's, three of them widened by ruling; the
+  thirteen leaves' proofs FS131-IN1's)". Nothing else in the row changes: no import was added, no public declaration added
+  or removed.
+
+### 5. Lines for `LEAN.md` § Searching — Lean
+
+- A module structure introduced by `letI : Module (ZMod p) M := AddCommGroup.zmodModule h` makes instance search for
+  `Module.Free (ZMod p) M` and `Module.Finite (ZMod p) M` fail as "typeclass instance problem is stuck, it is often due to
+  metavariables" (the printed problem holds none); with `haveI` the same line elaborates. Use `haveI` unless a proof must
+  unfold the action; a lemma that takes its instances by unification is not affected (`data/fs131/in1/probes/rank.lean`;
+  FS131-IN1).
+- `ConstantInfo.value?` is `none` for a theorem at the pin: a tool that walks proofs reads `.thmInfo v => v.value`
+  (`data/fs131/in1/lean/AxiomsCore.lean`, which names the leaf each `sorryAx` comes from; its first version found no source
+  for any, and the check was red until it did) (FS131-IN1).
+- A worktree cut for one module of a line may hold no `.olean` of the line's upstream modules: `lake env lean` then stops at
+  the first import. Without a build: real copies of the import closure's `.olean`s from the tree that built the skeleton,
+  the modules whose source differs recompiled into the copy from this tree's source with `lean -o`, and `lean` run with that
+  directory in front of Lake's path with the tree's own library taken out (`data/fs131/in1/farm.sh`, `lean1.sh`) (FS131-IN1).
+- At the pin: `Pi.ringHom` is deprecated for `RingHom.pi`; a sum minus one term is `Finset.sum_eq_sum_sdiff_singleton_add`;
+  `AddSubmonoidClass.coe_finset_sum` is deprecated for `AddSubmonoidClass.coe_finsetSum`; `Cardinal.nat_lt_aleph0` for
+  `Cardinal.natCast_lt_aleph0`. A finite ring's residue fields: `IsArtinianRing.quotNilradicalEquivPi` is an `A`-algebra
+  equivalence, so `e (mk a) = fun I => mk a` is `e.commutes a`. "Finite rank over `ℤ`, so `M/NM` is finite" has no single
+  lemma: at a prime `rank_le` over `ZMod p` with `LinearIndependent.iff_fractionRing ℤ ℚ`, and
+  `Submodule.finite_quotient_smul` for a product (FS131-IN1).
+
+## Drafts for the front page
+
+This job filed no ledger row and ran no gate; the counts for `CLAUDE.md` § The gate and § Trust ledger are the landing's.
+What this module changes when the line lands, for whoever drafts those lines:
+- **Trust ledger** — the import `StandingFive.kloosterman_bound` gains five imported records from this module (§ 1 above);
+  no new axiom, no native evaluation, no hypothesis former.
+- **`LEDGER.md` row 99** (the planner's draft, `plans/FS131-KN4-three-four-colours-plan.md` § 4.8, stands): its ⟹ — a
+  three-colouring gives a prime of residue field `𝔽₃` — is, as far as the ring `ℤ[U_F]`, the declaration
+  `ThreeColourCriterion.exists_maximal_card_nine_of_colorable_three`, kernel-checked in this tree on the standard three,
+  Weil's bound and four upstream leaves that are `sorry` here; it is [kernel] on one declared outside theorem only when those
+  leaves and the joining module's J.1, J.3 are. Until then its grade does not move.
+- **Frontier, Proof Atlas** — nothing from this job alone.

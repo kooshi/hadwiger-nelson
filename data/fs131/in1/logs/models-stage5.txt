@@ -1,0 +1,2 @@
+'FS131IN1Models.conj_ne_id' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IN1Models.frobenius_ne_id' depends on axioms: [propext, Classical.choice, Quot.sound]
