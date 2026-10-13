@@ -318,6 +318,7 @@ import Proofs.HadwigerNelson.Plane.ThreeArcs
 import Proofs.HadwigerNelson.Arith.ThreeColourCharacter
 import Proofs.HadwigerNelson.Arith.TorsionExtraction
 import Proofs.HadwigerNelson.Arith.ThreeColourCriterion
+import Proofs.HadwigerNelson.Arith.DyadicQuadratic
 
 /-!
 # Proofs

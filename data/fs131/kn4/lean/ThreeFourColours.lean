@@ -2,6 +2,7 @@ import Proofs.HadwigerNelson.Arith.UpperHalf
 import Proofs.HadwigerNelson.Arith.QuadraticPrime
 import Proofs.HadwigerNelson.Instances.UpperHalfValues
 import Proofs.HadwigerNelson.Arith.ThreeColourCriterion
+import Proofs.HadwigerNelson.Arith.DyadicQuadratic
 import Proofs.HadwigerNelson.PlaneRotation
 import Proofs.HadwigerNelson.Instances.PlaneFreedom
 
@@ -25,15 +26,17 @@ against both lines' skeletons by `data/fs131/kn4/join_check.sh`.
 namespace HadwigerNelson.ThreeFourColours
 
 open HadwigerNelson HadwigerNelson.Arith HadwigerNelson.SpectralChain HadwigerNelson.CharacterColouring
-  HadwigerNelson.SquareClass HadwigerNelson.ThreeColourCriterion HadwigerNelson.UpperHalf SimpleGraph NumberField
+  HadwigerNelson.SquareClass HadwigerNelson.ThreeColourCriterion HadwigerNelson.DyadicQuadratic HadwigerNelson.UpperHalf
+  SimpleGraph NumberField
 
 section Dictionary
 
 variable {F : Subfield ℝ} [NumberField F]
 
 /-- **J1 — a maximal ideal of `ℤ[U_F]` is cut out by a stable prime of `F(i)`** (FS91-J02-L2(b)): the ring lies in the
-local ring `𝓞_P`, and the ideal is the ring's part of the maximal ideal of `𝓞_P`. -/
-theorem exists_stablePrime_of_maximal {𝔪 : Ideal (unitRing F)} (h𝔪 : 𝔪.IsMaximal) :
+local ring `𝓞_P`, and the ideal is the ring's part of the maximal ideal of `𝓞_P`. (`𝔪 ≠ ⊥`: were `ℤ[U_F]` a field the
+statement would fail; that it never is needs Chebotarev, which no consumer here needs — each has `2` or `3` in `𝔪`.) -/
+theorem exists_stablePrime_of_maximal {𝔪 : Ideal (unitRing F)} (h𝔪 : 𝔪.IsMaximal) (hne : 𝔪 ≠ ⊥) :
     ∃ P : StablePrime F, ∃ hle : ∀ x : unitRing F, unitRingToFieldI F x ∈ P.localRing,
       ∀ x : unitRing F, x ∈ 𝔪 ↔ P.residue 1 ⟨unitRingToFieldI F x, hle x⟩ = 0 := by
   sorry
@@ -112,19 +115,34 @@ theorem chromaticNumber_planeOver_sqrt_eq_four_of_seven {m : ℕ} (hm : Squarefr
     ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {m}))).chromaticNumber = 4 := by
   sorry
 
-/-- **The row at 4, through the dyadic prime**: `m ≡ 11 (mod 24)`, given a stable prime of `ℚ(√m)(i)` with four
-elements in its quotient (the prime above 2 is inert in `F(i)/F` exactly when `m ≡ 3 (mod 8)`; **NF1 has no leaf for
-this family yet**, so it is a hypothesis here). The target has four vertices. -/
-theorem chromaticNumber_planeOver_sqrt_eq_four_of_dyadic {m : ℕ} (h24 : m % 24 = 11)
-    (hP : ∃ P : StablePrime (fieldOfRadicands {m}), Nat.card (𝓞 (fieldI (fieldOfRadicands {m})) ⧸ P.P ^ 1) = 4) :
-    ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {m}))).chromaticNumber = 4 := by
-  sorry
+/-- **The row at 4, through the dyadic prime**: `χ(ℚ(√m)²) = 4` for `m ≡ 11 (mod 24)`. Upper half:
+`DyadicQuadratic.colorable_four_planeOver_sqrt` (prior art). Lower half: this project's. -/
+theorem chromaticNumber_planeOver_sqrt_eq_four_of_dyadic {m : ℕ} (h24 : m % 24 = 11) :
+    ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {m}))).chromaticNumber = 4 :=
+  le_antisymm (colorable_four_planeOver_sqrt (by omega)).chromaticNumber_le
+    (TorsionExtraction.four_le_chromaticNumber_planeOver_fieldOfRadicands (by omega))
 
-/-- **The row at 2**: given a two-colouring (`[Fischer1990]`, `[Johnson2000]`; at a number field a stable dyadic prime
-ramified in `F(i)/F`, which exists for squarefree `m ≢ 3 (mod 4)` — **NF1 has no leaf for this family yet**). -/
-theorem chromaticNumber_planeOver_eq_two (F : Subfield ℝ)
-    (h2 : ((unitDistance ℂ).induce (planeOver F)).Colorable 2) :
-    ((unitDistance ℂ).induce (planeOver F)).chromaticNumber = 2 :=
-  le_antisymm h2.chromaticNumber_le (two_le_chromaticNumber_planeOver F)
+/-- **The row at 2**: `χ(ℚ(√m)²) = 2` for squarefree `m ≢ 3 (mod 4)` (`[Fischer1990]`, `[Johnson2000]`; prior art). -/
+theorem chromaticNumber_planeOver_sqrt_eq_two {m : ℕ} (hm : Squarefree m) (h4 : m % 4 ≠ 3) :
+    ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {m}))).chromaticNumber = 2 :=
+  le_antisymm (colorable_two_planeOver_sqrt hm h4).chromaticNumber_le (two_le_chromaticNumber_planeOver _)
+
+/-! ## The two dyadic primes themselves (NF4-DYADIC-TWO, NF4-DYADIC-FOUR in the claim's words) -/
+
+/-- **NF4-DYADIC-TWO, as worded**: for squarefree `m ≢ 3 (mod 4)` a stable prime of `ℚ(√m)(i)` modulo which conjugation
+is the identity — ramified over `ℚ(√m)`, and above 2 (`two_mem_of_conj_trivial`). A corollary of the two-colouring
+through the two-colour end and J4. -/
+theorem exists_stablePrime_ramified_sqrt {m : ℕ} (hm : Squarefree m) (h4 : m % 4 ≠ 3) :
+    ∃ P : StablePrime (fieldOfRadicands {m}),
+      ∀ x : 𝓞 (fieldI (fieldOfRadicands {m})), conjO (fieldOfRadicands {m}) x - x ∈ P.P := by
+  obtain ⟨𝔪, h𝔪, htriv⟩ := exists_maximal_conj_trivial_of_colorable_two _ (colorable_two_planeOver_sqrt hm h4)
+  exact exists_stablePrime_conj_trivial h𝔪 htriv
+
+/-- **NF4-DYADIC-FOUR, as worded**: for `m ≡ 3 (mod 8)` a stable prime of `ℚ(√m)(i)` above 2 with four elements in its
+quotient (its target has four vertices). -/
+theorem exists_stablePrime_card_four_sqrt {m : ℕ} (h8 : m % 8 = 3) :
+    ∃ P : StablePrime (fieldOfRadicands {m}), (2 : 𝓞 (fieldI (fieldOfRadicands {m}))) ∈ P.P ∧
+      Nat.card (𝓞 (fieldI (fieldOfRadicands {m})) ⧸ P.P ^ 1) = 4 := by
+  sorry
 
 end HadwigerNelson.ThreeFourColours

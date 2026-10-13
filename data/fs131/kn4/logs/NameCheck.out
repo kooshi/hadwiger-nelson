@@ -1,6 +1,11 @@
-slot: admitted kn4: mem 4 GiB (hard cap), cpus 8,9
-data/fs131/kn4/lean/NameCheck.lean:5:8: error(lean.unknownIdentifier): Unknown identifier `geometric_hahn_banach_compact_point`
-data/fs131/kn4/lean/NameCheck.lean:6:8: error(lean.unknownIdentifier): Unknown identifier `geometric_hahn_banach_point_compact`
+slot: admitted kn4: mem 4 GiB (hard cap), cpus 10,11
+@geometric_hahn_banach_closed_point : ∀ {E : Type u_1} [inst : TopologicalSpace E] [inst_1 : AddCommGroup E]
+  [inst_2 : Module ℝ E] {s : Set E} {x : E} [IsTopologicalAddGroup E] [ContinuousSMul ℝ E] [LocallyConvexSpace ℝ E],
+  Convex ℝ s → IsClosed s → x ∉ s → ∃ f u, (∀ a ∈ s, f a < u) ∧ u < f x
+@geometric_hahn_banach_compact_closed : ∀ {E : Type u_1} [inst : TopologicalSpace E] [inst_1 : AddCommGroup E]
+  [inst_2 : Module ℝ E] {s t : Set E} [IsTopologicalAddGroup E] [ContinuousSMul ℝ E] [LocallyConvexSpace ℝ E],
+  Convex ℝ s →
+    IsCompact s → Convex ℝ t → IsClosed t → Disjoint s t → ∃ f u v, (∀ a ∈ s, f a < u) ∧ u < v ∧ ∀ b ∈ t, v < f b
 @mem_span_of_iInf_ker_le_ker : ∀ {ι : Type u_1} {𝕜 : Type u_2} {E : Type u_3} [inst : Field 𝕜] [inst_1 : AddCommGroup E]
   [inst_2 : Module 𝕜 E] [Finite ι] {L : ι → E →ₗ[𝕜] 𝕜} {K : E →ₗ[𝕜] 𝕜},
   ⨅ i, (L i).ker ≤ K.ker → K ∈ Submodule.span 𝕜 (Set.range L)
@@ -114,7 +119,8 @@ IsArtinianRing.quotNilradicalEquivPi : (R : Type u_1) →
 iterateFrobenius : (R : Type u_1) → [inst : CommSemiring R] → (p : ℕ) → ℕ → [ExpChar R p] → R →+* R
 @FiniteField.isSquare_neg_one_iff : ∀ {F : Type u_1} [inst : Field F] [inst_1 : Fintype F],
   IsSquare (-1) ↔ Fintype.card F % 4 ≠ 3
-data/fs131/kn4/lean/NameCheck.lean:59:8: error(lean.unknownIdentifier): Unknown identifier `sum_subgroup_units_eq_zero`
+@FiniteField.sum_subgroup_units_eq_zero : ∀ {K : Type u_1} [inst : Ring K] [NoZeroDivisors K] {G : Subgroup Kˣ}
+  [inst_2 : Fintype ↥G], G ≠ ⊥ → ∑ x, ↑↑x = 0
 @Ideal.quotientMap : {R : Type u_1} →
   [inst : Ring R] →
     {S : Type u_2} →
@@ -145,7 +151,6 @@ data/fs131/kn4/lean/NameCheck.lean:59:8: error(lean.unknownIdentifier): Unknown 
             [inst_3 : SubsemiringClass σS S] → (f : R →+* S) → (s : σS) → (∀ (x : R), f x ∈ s) → R →+* ↥s
 FiniteField.card : ∀ (K : Type u_1) [inst : Field K] [inst_1 : Fintype K] (p : ℕ) [CharP K p],
   ∃ n, Nat.Prime p ∧ Fintype.card K = p ^ ↑n
-data/fs131/kn4/lean/NameCheck.lean:69:8: error(lean.unknownIdentifier): Unknown constant `Module.finrank_le_of_span_eq_top`
 @Ideal.Quotient.mk_surjective : ∀ {R : Type u_1} [inst : Ring R] {I : Ideal R} [inst_1 : I.IsTwoSided],
   Function.Surjective ⇑(Ideal.Quotient.mk I)
 @Finite.of_surjective : ∀ {α : Sort u_1} {β : Sort u_2} [Finite α] (f : α → β), Function.Surjective f → Finite β
