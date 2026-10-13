@@ -130,3 +130,36 @@ That each difference is a dropped hypothesis and nothing else is shown from the 
 skeleton's form of each of the three — binders and conclusion copied by script from `git show 34d9113b2`, never retyped — is
 an `example` proved by one application of the working module's theorem, appended to the candidate's copy: 0 errors. Its
 control (one argument too few): 1 error, as it must.
+
+## Stage 3 — SAVED: L3.4, L3.5, L3.6, L3.7, L3.9, L3.10 proved; one `sorry` left (L3.8)
+
+`conj_mem_unitRing`, `exists_unitSet_mul_conjR_eq`, `comap_conjR_eq`, `finite_quotient_span_natCast`,
+`fieldBandSet_two_nonempty_of_conj_trivial`, `exists_maximal_conj_trivial_of_colorable_two` — `lean1.sh`: exit 0, one `sorry`
+(L3.8), no other message; 10.5 s, 3.9 GB. Statement check (`logs/statements-stage3.out`): `PASS`, the three widened by ruling
+and nothing else; control `4 of 4`.
+
+**Private helpers added** (ten): on unit vectors — `conjR_mem_unitSet`, `mul_conjR_of_mem_unitSet` (`u·ū = 1`),
+`mul_mem_unitSet`, `one_mem_unitSet`, `neg_one_mem_unitSet`; `unitRing_induction` (the ring is the additive span of the unit
+vectors, as an induction principle over `UnitRing.exists_sum_eq_of_mem_unitRingOver`); `half_ne_zero`, `toAddCircle_one_two`
+(`1 ↦ 1/2`); `finite_quotient_span_prime` (L3.7 at a prime).
+
+**What differed from the plan's text.**
+- **L3.7 is not the plan's count of `N^d + 1` elements.** At a prime `p` the quotient `R/pR` is an `𝔽_p`-space
+  (`AddCommGroup.zmodModule`) of dimension at most `[F(i) : ℚ]`: by `rank_le` it is enough that lifts `v` of an
+  `𝔽_p`-independent finite family are independent over `ℤ` (then over `ℚ` by `LinearIndependent.iff_fractionRing ℤ ℚ`, and
+  `LinearIndependent.fintype_card_le_finrank` counts them in `fieldI F`). An integer relation among the lifts reduces to an
+  `𝔽_p`-relation, so `p` divides every coefficient; dividing, `pⁿ` divides every coefficient for every `n`
+  (`Int.eq_zero_of_abs_lt_dvd`). Then `Module.rank_lt_aleph0_iff` and `Module.finite_of_finite`. A composite `N`:
+  `Nat.recOnMul` with `Submodule.finite_quotient_smul` (`(ab) = (a)·(b)`). 60 lines for the prime, 17 for the rest.
+- **L3.10** takes `2 ∈ J` from the unit vector `−1` (`(−1) − 1 = −2`), not from `i`.
+- **L3.9**'s functional is `LinearMap.exists_leftInverse_of_injective` on `LinearMap.toSpanSingleton (ZMod 2) _ 1`, as the plan
+  says; the module structure is `AddCommGroup.zmodModule`.
+
+**One thing measured, for `LEAN.md`** (`data/fs131/in1/probes/rank.lean`): with a module structure introduced by
+`letI : Module (ZMod p) M := AddCommGroup.zmodModule h`, `inferInstance : Module.Free (ZMod p) M` (and `Module.Finite`, and so
+`Module.rank_lt_aleph0_iff.mp`) fails with "typeclass instance problem is stuck, it is often due to metavariables", the printed
+problem holding no metavariable; with `haveI` in place of `letI` the same line elaborates. (My reading, not checked against the
+elaborator's source: a candidate instance whose module structure does not match is unified against the `let`'s value, and
+that unification is reported stuck where against an opaque hypothesis it would fail and the search go on.) A lemma that takes
+its instances by unification (`LinearMap.exists_leftInverse_of_injective f`, `IsNoetherian.iff_rank_lt_aleph0.mpr h`) is not
+affected.

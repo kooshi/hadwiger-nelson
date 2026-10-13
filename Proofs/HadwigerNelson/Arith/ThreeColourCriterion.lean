@@ -348,7 +348,10 @@ variable {F : Subfield ℝ}
 
 /-- `ℤ[U_F]` is closed under complex conjugation (its generators are). -/
 theorem conj_mem_unitRing {x : ℂ} (hx : x ∈ unitRing F) : (starRingEnd ℂ) x ∈ unitRing F := by
-  sorry
+  have h : unitRing F ≤ (unitRing F).comap (starRingEnd ℂ) :=
+    Subring.closure_le.mpr fun z hz => Subring.subset_closure
+      ⟨fieldI_conj F z hz.1, by rw [Complex.norm_conj]; exact hz.2⟩
+  exact h hx
 
 /-- **Complex conjugation on `ℤ[U_F]`.** -/
 noncomputable def conjR (F : Subfield ℝ) : unitRing F →+* unitRing F :=
@@ -360,21 +363,154 @@ noncomputable def conjR (F : Subfield ℝ) : unitRing F →+* unitRing F :=
 @[simp] theorem conjR_conjR (x : unitRing F) : conjR F (conjR F x) = x :=
   Subtype.ext (Complex.conj_conj (x : ℂ))
 
+/-- The conjugate of a unit vector is a unit vector. -/
+private theorem conjR_mem_unitSet {u : unitRing F} (hu : u ∈ unitSet F) : conjR F u ∈ unitSet F :=
+  ⟨fieldI_conj F _ hu.1, by rw [coe_conjR, Complex.norm_conj]; exact hu.2⟩
+
+/-- A unit vector times its conjugate is `1`. -/
+private theorem mul_conjR_of_mem_unitSet {u : unitRing F} (hu : u ∈ unitSet F) : u * conjR F u = 1 :=
+  Subtype.ext (by
+    show (u : ℂ) * (starRingEnd ℂ) (u : ℂ) = 1
+    rw [Complex.mul_conj, Complex.normSq_eq_norm_sq, hu.2]
+    norm_num)
+
+/-- A product of unit vectors is a unit vector. -/
+private theorem mul_mem_unitSet {u v : unitRing F} (hu : u ∈ unitSet F) (hv : v ∈ unitSet F) : u * v ∈ unitSet F :=
+  ⟨(fieldI F).mul_mem hu.1 hv.1, by
+    show ‖(u : ℂ) * (v : ℂ)‖ = 1
+    rw [norm_mul, hu.2, hv.2, mul_one]⟩
+
+/-- `1` is a unit vector. -/
+private theorem one_mem_unitSet : (1 : unitRing F) ∈ unitSet F :=
+  ⟨(fieldI F).one_mem, by show ‖(1 : ℂ)‖ = 1; exact norm_one⟩
+
+/-- `−1` is a unit vector. -/
+private theorem neg_one_mem_unitSet : (-1 : unitRing F) ∈ unitSet F :=
+  ⟨(fieldI F).neg_mem (fieldI F).one_mem, by show ‖(-1 : ℂ)‖ = 1; rw [norm_neg, norm_one]⟩
+
+/-- **`ℤ[U_F]` is the additive span of the unit vectors**, as an induction principle
+(`UnitRing.exists_sum_eq_of_mem_unitRingOver`). -/
+private theorem unitRing_induction {P : unitRing F → Prop} (h0 : P 0) (hadd : ∀ x y, P x → P y → P (x + y))
+    (hu : ∀ u ∈ unitSet F, P u) (x : unitRing F) : P x := by
+  obtain ⟨m, u, hn, hp, hsum⟩ := UnitRing.exists_sum_eq_of_mem_unitRingOver x.2
+  have hmem : ∀ j, u j ∈ unitVectors F := fun j => ⟨hp j, hn j⟩
+  have hx : x = ∑ j, (⟨u j, unitVectors_subset_unitRing F (hmem j)⟩ : unitRing F) :=
+    Subtype.ext (by rw [← hsum, AddSubmonoidClass.coe_finsetSum])
+  rw [hx]
+  exact Finset.sum_induction _ P hadd h0 fun j _ => hu _ (hmem j)
+
 /-- **Every non-zero element of `ℤ[U_F]` is a unit vector times its conjugate**: `u = a/ā` has norm one and
 coordinates in `F`, and `u·ā = a`. (The easy direction; Hilbert 90 is `exists_mul_conj_inv_eq_of_mul_conj_eq_one`.) -/
 theorem exists_unitSet_mul_conjR_eq {a : unitRing F} (ha : a ≠ 0) : ∃ u ∈ unitSet F, u * conjR F a = a := by
-  sorry
+  have ha0 : (a : ℂ) ≠ 0 := fun h => ha (Subtype.ext h)
+  have hc0 : (starRingEnd ℂ) (a : ℂ) ≠ 0 := (map_ne_zero _).mpr ha0
+  have hplane : (a : ℂ) ∈ fieldI F := UnitRing.unitRingOver_le_planeOverSubring F a.2
+  have hu : (a : ℂ) / (starRingEnd ℂ) (a : ℂ) ∈ unitVectors F :=
+    ⟨(fieldI F).div_mem hplane (fieldI_conj F _ hplane), by
+      rw [norm_div, Complex.norm_conj, div_self (norm_ne_zero_iff.mpr ha0)]⟩
+  refine ⟨⟨_, unitVectors_subset_unitRing F hu⟩, hu, Subtype.ext ?_⟩
+  show (a : ℂ) / (starRingEnd ℂ) (a : ℂ) * (starRingEnd ℂ) (a : ℂ) = a
+  exact div_mul_cancel₀ _ hc0
 
 /-- **Every ideal of `ℤ[U_F]` is fixed by conjugation** (FS91-J02-L2(b) states it for primes; with no valuation: for
 `a ∈ I`, `a = u·ā` with `u` a unit vector, so `ā = ū·a ∈ I`). -/
 theorem comap_conjR_eq (I : Ideal (unitRing F)) : I.comap (conjR F) = I := by
-  sorry
+  have key : ∀ a ∈ I, conjR F a ∈ I := by
+    intro a ha
+    by_cases ha0 : a = 0
+    · rw [ha0, map_zero]
+      exact I.zero_mem
+    obtain ⟨u, hu, hua⟩ := exists_unitSet_mul_conjR_eq ha0
+    have h1 : conjR F u * u = 1 := by rw [mul_comm]; exact mul_conjR_of_mem_unitSet hu
+    have h2 : conjR F a = conjR F u * a :=
+      calc conjR F a = conjR F u * u * conjR F a := by rw [h1, one_mul]
+        _ = conjR F u * (u * conjR F a) := mul_assoc _ _ _
+        _ = conjR F u * a := by rw [hua]
+    rw [h2]
+    exact I.mul_mem_left _ ha
+  ext a
+  refine ⟨fun h => ?_, fun h => key a h⟩
+  have h' := key _ (Ideal.mem_comap.mp h)
+  rwa [conjR_conjR] at h'
+
+/-- **`ℤ[U_F]/p` is finite** for a number field `F` and a prime `p`: it is an `𝔽_p`-space of dimension at most
+`[F(i) : ℚ]`. (Lifts of an `𝔽_p`-independent family are independent over `ℤ`: an integer relation among them reduces to an
+`𝔽_p`-relation, so `p` divides every coefficient, and `ℤ[U_F]` has no torsion — by descent every coefficient is `0`.) -/
+private theorem finite_quotient_span_prime (F : Subfield ℝ) [NumberField F] (p : ℕ) [hp : Fact p.Prime] :
+    Finite (unitRing F ⧸ Ideal.span {(p : unitRing F)}) := by
+  classical
+  have hpx : ∀ x : unitRing F ⧸ Ideal.span {(p : unitRing F)}, p • x = 0 := fun x => by
+    obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
+    rw [← map_nsmul, Ideal.Quotient.eq_zero_iff_mem, nsmul_eq_mul]
+    exact Ideal.mul_mem_right _ _ (Ideal.subset_span rfl)
+  -- `haveI`, not `letI`: with the structure's value visible, instance search for `Module.Free` is reported stuck
+  haveI : Module (ZMod p) (unitRing F ⧸ Ideal.span {(p : unitRing F)}) := AddCommGroup.zmodModule hpx
+  have hrank : Module.rank (ZMod p) (unitRing F ⧸ Ideal.span {(p : unitRing F)}) ≤
+      (Module.finrank ℚ (fieldI F) : ℕ) := by
+    refine rank_le fun s hli => ?_
+    choose r hr using fun x : unitRing F ⧸ Ideal.span {(p : unitRing F)} => Ideal.Quotient.mk_surjective x
+    let v : s → fieldI F := fun i => ⟨(r i : ℂ), UnitRing.unitRingOver_le_planeOverSubring F (r i).2⟩
+    -- `p` divides every coefficient of an integer relation among the lifts
+    have hrel : ∀ g : s → ℤ, ∑ i, g i • v i = 0 → ∀ i, (p : ℤ) ∣ g i := by
+      intro g hg i
+      have h1 : ∑ i : s, (g i : unitRing F) * r i = 0 := Subtype.ext (by
+        have h := congrArg (fun z : fieldI F => (z : ℂ)) hg
+        simpa [v, zsmul_eq_mul] using h)
+      have h2 := congrArg (Ideal.Quotient.mk (Ideal.span {(p : unitRing F)})) h1
+      rw [map_sum, map_zero] at h2
+      have h3 : ∑ i : s, ((g i : ℤ) : ZMod p) • (i : unitRing F ⧸ Ideal.span {(p : unitRing F)}) = 0 := by
+        refine (Finset.sum_congr rfl fun i _ => ?_).trans h2
+        rw [Int.cast_smul_eq_zsmul, map_mul, map_intCast, hr, zsmul_eq_mul]
+      exact (ZMod.intCast_zmod_eq_zero_iff_dvd (g i) p).mp (Fintype.linearIndependent_iff.mp hli _ h3 i)
+    -- so `pⁿ` does, for every `n`
+    have hpow : ∀ n : ℕ, ∀ g : s → ℤ, ∑ i, g i • v i = 0 → ∀ i, (p : ℤ) ^ n ∣ g i := by
+      intro n
+      induction n with
+      | zero => intro g _ i; simp
+      | succ n ih =>
+        intro g hg i
+        choose g' hg' using hrel g hg
+        have hsmul : (p : ℤ) • ∑ i, g' i • v i = 0 := by
+          rw [Finset.smul_sum, ← hg]
+          exact Finset.sum_congr rfl fun i _ => by rw [hg' i, mul_smul]
+        have hg'rel : ∑ i, g' i • v i = 0 :=
+          (smul_eq_zero.mp hsmul).resolve_left (by exact_mod_cast hp.out.ne_zero)
+        rw [hg' i, pow_succ']
+        exact mul_dvd_mul_left _ (ih g' hg'rel i)
+    have hliZ : LinearIndependent ℤ v := by
+      rw [Fintype.linearIndependent_iff]
+      intro g hg i
+      refine Int.eq_zero_of_abs_lt_dvd (hpow (g i).natAbs g hg i) ?_
+      rw [← Int.natCast_natAbs]
+      exact_mod_cast Nat.lt_pow_self hp.out.one_lt
+    have hcard := ((LinearIndependent.iff_fractionRing ℤ ℚ).mp hliZ).fintype_card_le_finrank
+    rwa [Fintype.card_coe] at hcard
+  have hlt : Module.rank (ZMod p) (unitRing F ⧸ Ideal.span {(p : unitRing F)}) < Cardinal.aleph0 :=
+    hrank.trans_lt Cardinal.natCast_lt_aleph0
+  haveI : Module.Finite (ZMod p) (unitRing F ⧸ Ideal.span {(p : unitRing F)}) := Module.rank_lt_aleph0_iff.mp hlt
+  exact Module.finite_of_finite (ZMod p)
 
 /-- **`ℤ[U_F]/N` is finite** for a number field `F` and `N ≠ 0` (FS91-J02-L2(a): any `[F(i) : ℚ] + 1` elements of the
 ring satisfy a primitive integer relation). -/
 theorem finite_quotient_span_natCast (F : Subfield ℝ) [NumberField F] {N : ℕ} (hN : N ≠ 0) :
     Finite (unitRing F ⧸ Ideal.span {(N : unitRing F)}) := by
-  sorry
+  induction N using Nat.recOnMul with
+  | zero => exact absurd rfl hN
+  | one =>
+    haveI : Subsingleton (unitRing F ⧸ Ideal.span {((1 : ℕ) : unitRing F)}) :=
+      Ideal.Quotient.subsingleton_iff.mpr (by rw [Nat.cast_one, Ideal.span_singleton_one])
+    infer_instance
+  | prime p hp =>
+    haveI : Fact p.Prime := ⟨hp⟩
+    exact finite_quotient_span_prime F p
+  | mul a b iha ihb =>
+    haveI := iha (left_ne_zero_of_mul hN)
+    haveI := ihb (right_ne_zero_of_mul hN)
+    have e : Ideal.span {((a * b : ℕ) : unitRing F)} =
+        Ideal.span {(a : unitRing F)} • Ideal.span {(b : unitRing F)} := by
+      rw [smul_eq_mul, Ideal.span_singleton_mul_span_singleton, Nat.cast_mul]
+    rw [e]
+    exact Submodule.finite_quotient_smul _ (Submodule.fg_span_singleton _)
 
 /-! ## §3 The torsion theorem, and the two ends -/
 
@@ -387,12 +523,66 @@ theorem exists_maximal_of_torsion (F : Subfield ℝ) [NumberField F] {τ : unitR
       (∃ 𝔪 : Ideal (unitRing F), 𝔪.IsMaximal ∧ Nat.card (unitRing F ⧸ 𝔪) = 9) := by
   sorry
 
+/-- `1/2` is not `0` on the circle. -/
+private theorem half_ne_zero : ((1 / 2 : ℝ) : UnitAddCircle) ≠ 0 := by
+  intro h
+  obtain ⟨n, hn⟩ := (AddCircle.coe_eq_zero_iff _).mp h
+  rw [zsmul_eq_mul, mul_one] at hn
+  have h2 : (2 * n : ℤ) = 1 := by exact_mod_cast (by linarith : (2 * n : ℝ) = 1)
+  omega
+
+/-- `ZMod 2 ↪ ℝ/ℤ` sends `1` to `1/2`. -/
+private theorem toAddCircle_one_two : ZMod.toAddCircle (1 : ZMod 2) = ((1 / 2 : ℝ) : UnitAddCircle) := by
+  have h := ZMod.toAddCircle_natCast (N := 2) 1
+  simpa using h
+
 /-- **A maximal ideal with trivial conjugation is a two-colouring**: every unit vector is `1` modulo it (`u·ū = 1`,
 `ū ≡ u`, characteristic 2), so a functional on the quotient with value 1 at 1 is `1/2` on unit vectors. Every subfield
 `F ⊆ ℝ`. -/
 theorem fieldBandSet_two_nonempty_of_conj_trivial {𝔪 : Ideal (unitRing F)} (h𝔪 : 𝔪.IsMaximal)
     (htriv : ∀ x, conjR F x - x ∈ 𝔪) : (fieldBandSet F (band 2)).Nonempty := by
-  sorry
+  haveI := h𝔪
+  letI : Field (unitRing F ⧸ 𝔪) := Ideal.Quotient.field 𝔪
+  -- `2 ∈ 𝔪`: `ī − i = −2i` and `i` is a unit
+  have hI : Complex.I ∈ unitVectors F := ⟨⟨by simp, by simp⟩, Complex.norm_I⟩
+  have h2 : (2 : unitRing F ⧸ 𝔪) = 0 := by
+    have h := 𝔪.mul_mem_left ⟨Complex.I, unitVectors_subset_unitRing F hI⟩ (htriv ⟨Complex.I, unitVectors_subset_unitRing F hI⟩)
+    have e : (⟨Complex.I, unitVectors_subset_unitRing F hI⟩ : unitRing F) *
+        (conjR F ⟨Complex.I, unitVectors_subset_unitRing F hI⟩ - ⟨Complex.I, unitVectors_subset_unitRing F hI⟩) = 2 :=
+      Subtype.ext (by
+        show Complex.I * ((starRingEnd ℂ) Complex.I - Complex.I) = 2
+        rw [Complex.conj_I]
+        linear_combination (-2 : ℂ) * Complex.I_mul_I)
+    rw [e] at h
+    rw [← map_ofNat (Ideal.Quotient.mk 𝔪) 2]
+    exact Ideal.Quotient.eq_zero_iff_mem.mpr h
+  -- every unit vector is `1` modulo `𝔪`
+  have hone : ∀ u ∈ unitSet F, Ideal.Quotient.mk 𝔪 u = 1 := by
+    intro u hu
+    have hsq : Ideal.Quotient.mk 𝔪 u * Ideal.Quotient.mk 𝔪 u = 1 :=
+      calc Ideal.Quotient.mk 𝔪 u * Ideal.Quotient.mk 𝔪 u
+          = Ideal.Quotient.mk 𝔪 u * Ideal.Quotient.mk 𝔪 (conjR F u) := by
+            rw [Ideal.Quotient.eq.mpr (htriv u)]
+        _ = 1 := by rw [← map_mul, mul_conjR_of_mem_unitSet hu, map_one]
+    have h0 : (Ideal.Quotient.mk 𝔪 u - 1) * (Ideal.Quotient.mk 𝔪 u - 1) = 0 := by
+      linear_combination hsq + (1 - Ideal.Quotient.mk 𝔪 u) * h2
+    exact sub_eq_zero.mp (mul_self_eq_zero.mp h0)
+  -- an `𝔽₂`-linear functional on the quotient with value 1 at 1
+  letI : Module (ZMod 2) (unitRing F ⧸ 𝔪) := AddCommGroup.zmodModule (n := 2) fun x => by
+    rw [nsmul_eq_mul, Nat.cast_ofNat, h2, zero_mul]
+  obtain ⟨g, hg⟩ := LinearMap.exists_leftInverse_of_injective
+    (LinearMap.toSpanSingleton (ZMod 2) (unitRing F ⧸ 𝔪) 1) (LinearMap.ker_eq_bot'.mpr fun r hr => by
+      rcases (by decide : ∀ r : ZMod 2, r = 0 ∨ r = 1) r with rfl | rfl
+      · rfl
+      · rw [LinearMap.toSpanSingleton_apply, one_smul] at hr
+        exact absurd hr one_ne_zero)
+  have hg1 : g 1 = 1 := by
+    have h := LinearMap.congr_fun hg 1
+    rwa [LinearMap.comp_apply, LinearMap.toSpanSingleton_apply, one_smul, LinearMap.id_apply] at h
+  refine ⟨ZMod.toAddCircle.comp (g.toAddMonoidHom.comp (Ideal.Quotient.mk 𝔪).toAddMonoidHom), fun u hu => ?_⟩
+  refine ⟨1 / 2, ⟨by norm_num, by norm_num⟩, ?_⟩
+  show ((1 / 2 : ℝ) : UnitAddCircle) = ZMod.toAddCircle (g (Ideal.Quotient.mk 𝔪 u))
+  rw [hone u hu, hg1, toAddCircle_one_two]
 
 /-- **Clause (b), toward the prime, in the ring.** A real number field whose plane is three-colourable and not
 two-colourable has a maximal ideal of `ℤ[U_F]` with nine elements in its quotient. Rests on Weil's bound. -/
@@ -417,7 +607,58 @@ Thm 2.1; second derivation FS91-J02-A21p) and is not claimed as this project's. 
 theorem exists_maximal_conj_trivial_of_colorable_two (F : Subfield ℝ)
     (h2 : ((unitDistance ℂ).induce (planeOver F)).Colorable 2) :
     ∃ 𝔪 : Ideal (unitRing F), 𝔪.IsMaximal ∧ ∀ x, conjR F x - x ∈ 𝔪 := by
-  sorry
+  obtain ⟨τ, hτ⟩ := (TorsionExtraction.colorable_two_iff_fieldBandSet_two_nonempty F).mp h2
+  -- the two-colouring's character is `1/2` on every unit vector
+  have hhalf : ∀ u ∈ unitSet F, τ u = ((1 / 2 : ℝ) : UnitAddCircle) := by
+    intro u hu
+    obtain ⟨x, ⟨h1, h2⟩, hx⟩ := hτ u hu
+    have hx' : (x : UnitAddCircle) = τ u := hx
+    norm_num at h1 h2
+    rw [← hx', show x = 1 / 2 by linarith]
+  -- the ideal generated by the `u − 1`
+  let J : Ideal (unitRing F) := Ideal.span {x | ∃ u ∈ unitSet F, x = u - 1}
+  have hJu : ∀ u ∈ unitSet F, u - 1 ∈ J := fun u hu => Ideal.subset_span ⟨u, hu, rfl⟩
+  have h2J : (2 : unitRing F) ∈ J := by
+    have h := J.neg_mem (hJu (-1) neg_one_mem_unitSet)
+    have e : -((-1 : unitRing F) - 1) = 2 := by ring
+    rwa [e] at h
+  -- every element is `0` or `1` modulo `J`
+  have h01 : ∀ x : unitRing F, x ∈ J ∨ x - 1 ∈ J := by
+    refine unitRing_induction (Or.inl J.zero_mem) ?_ fun u hu => Or.inr (hJu u hu)
+    rintro x y (hx | hx) (hy | hy)
+    · exact Or.inl (J.add_mem hx hy)
+    · exact Or.inr (by have h := J.add_mem hx hy; rwa [← add_sub_assoc] at h)
+    · exact Or.inr (by have h := J.add_mem hx hy; rwa [sub_add_eq_add_sub] at h)
+    · refine Or.inl ?_
+      have h := J.add_mem (J.add_mem hx hy) h2J
+      have e : x - 1 + (y - 1) + 2 = x + y := by ring
+      rwa [e] at h
+  -- the character kills `J`
+  have hkill : ∀ x ∈ J, ∀ r : unitRing F, τ (r * x) = 0 := by
+    intro x hx
+    induction hx using Submodule.span_induction with
+    | mem x hx =>
+      obtain ⟨u, hu, rfl⟩ := hx
+      refine unitRing_induction (by rw [zero_mul, map_zero]) (fun a b ha hb => ?_) fun v hv => ?_
+      · rw [add_mul, map_add, ha, hb, add_zero]
+      · rw [mul_sub, mul_one, map_sub, hhalf _ (mul_mem_unitSet hv hu), hhalf v hv, sub_self]
+    | zero => intro r; rw [mul_zero, map_zero]
+    | add x y _ _ hx hy => intro r; rw [mul_add, map_add, hx r, hy r, add_zero]
+    | smul a x _ hx => intro r; rw [smul_eq_mul, ← mul_assoc]; exact hx (r * a)
+  have h1J : (1 : unitRing F) ∉ J := fun h => by
+    have h0 := hkill 1 h 1
+    rw [mul_one, hhalf 1 one_mem_unitSet] at h0
+    exact half_ne_zero h0
+  refine ⟨J, Ideal.isMaximal_iff.mpr ⟨h1J, fun J' x hJJ' hx hxJ' => ?_⟩, ?_⟩
+  · have h := J'.sub_mem hxJ' (hJJ' ((h01 x).resolve_left hx))
+    rwa [sub_sub_cancel] at h
+  · -- conjugation is the identity modulo `J`: `ū − u = (ū − 1) − (u − 1)`
+    refine unitRing_induction (by rw [map_zero, sub_self]; exact J.zero_mem) (fun x y hx hy => ?_) fun u hu => ?_
+    · have h := J.add_mem hx hy
+      have e : conjR F x - x + (conjR F y - y) = conjR F (x + y) - (x + y) := by rw [map_add]; ring
+      rwa [e] at h
+    · have h := J.sub_mem (hJu _ (conjR_mem_unitSet hu)) (hJu u hu)
+      rwa [sub_sub_sub_cancel_right] at h
 
 /-! ## Spec -/
 
