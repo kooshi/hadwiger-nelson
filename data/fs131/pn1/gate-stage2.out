@@ -1,0 +1,8 @@
+card lint
+  cards: 1  no-question exits: 0
+  the ask: is the measure-rigidity statement the five-colour results consume printed anywhere as a theorem about the unit-vector group of a real number field, or is part of it a hand derivation of this project?  [line 117]
+hunch ledger
+  hunches: 7  open: 7  confirmed: 0  killed: 0
+evidence inventory
+  items: 13  surprised: 6  unread: 0
+GATE: PASS (0 failures, 0 warnings)
