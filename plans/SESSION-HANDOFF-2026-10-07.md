@@ -91,9 +91,12 @@ this session):
    first layer. A long job with saved stages; a successor can take any stage from its record
    `plans/FS131-KN3-chain-plan.md` on the branch.
 
-**RUNNING AT 2026-10-13 17:36 UTC: FS131-KN2 (the residue module's plan, tree `fs131-wnf`), FS131-KN4 (three and four
-colours, tree `fs131-wr2`; item 662), and FS131-LC1 — A LANDING IN FLIGHT (the measurable-number module, tree
-`fs131-wkc`; brief `data/fs131/briefs/FS131-LC1-landing.md`; item 663).** **Until the landing is back: nothing on
+**RUNNING AT 2026-10-13 17:51 UTC: FS131-LC1 — A LANDING IN FLIGHT (the measurable-number module, tree `fs131-wkc`; item
+663); FS131-KN4 (three and four colours, a planner, tree `fs131-wr2`; item 662); FS131-IU1 (an implementer on the
+twelve leaves of `Arith/UpperHalf.lean`, tree `fs131-wnf`; item 664).** FS131-KN2 is done (item 664): the residue
+module's skeleton builds, 24 leaves. **Next free slot: FS131-IQ1, the second file's nine leaves — item 664's last
+sentence says exactly how to make its tree and brief.**
+**Until the landing is back: nothing on
 `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`, `RUNNING.md`, and no
 `CLAUDE.md` filing.** At its green line: check its receipts (`data/fs131/lc1/gate/`), fast-forward `main` to its
 gated commit (merge `main` into its branch first if `main` moved in plans and data only), **then tell Kooshi it is
