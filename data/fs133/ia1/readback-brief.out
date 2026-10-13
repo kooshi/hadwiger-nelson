@@ -1,0 +1,5 @@
+match    data/fs131/REQUEST-2026-10-13.md | W2: (2026-10-13, answering the choice between the two publishable form
+match    data/fs133/claims-K1.md | K133-ALG: (entry at line 445 of the derivation file) every `E ⋊ K`-inv
+match    data/fs133/claims-K1.md | K133-NC-ALG: the same at any number field's plane — over `ℚ(√3,√11)` a
+match    data/fs133/claims-K1.md | K133-NC-ALL: any value of the densities or of a chromatic number; anyt
+matched: 4  mismatched: 0
