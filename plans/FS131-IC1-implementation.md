@@ -226,7 +226,7 @@ directed family). The cost I did not foresee was the second build.
 my write to that path showed in `git status` as a modification; I restored the older report unchanged (`git checkout --`, nothing
 of it was committed over) and wrote mine to **`data/fs131/reports/FS131-IC1-leaves.md`**, after the brief's own file name. My
 record and data paths (`plans/FS131-IC1-implementation.md`, `data/fs131/ic1/`) were new and collide with nothing. What I could
-not undo: my five commits are headed `FS131-IC1:` like the older job's eight; a reader of `git log` tells them apart by date and
+not undo: my commits are headed `FS131-IC1:` like the older job's eight; a reader of `git log` tells them apart by date and
 by the words "stage n" against "stage n SAVED". The audit block's header (D1) says which job it is.
 
 ## Drafts for the front page
@@ -301,7 +301,9 @@ docstring's last paragraph, replacing its two lines; a docstring, so it recompil
    outside model's, `[Fischer1990]`'s or `[Johnson2000]`'s, and it reads no declared outside theorem (Weil's bound enters the
    line only in `Arith/ThreeColourCriterion`). What it holds is the ⟹ half of the three-colour criterion in character form —
    this project's FS73-T22 with FS81-T2's passage to all generators, `[hand; two independent derivations]` in `LEDGER.md` row 79
-   and § B, "not found in print" there — now with a kernel proof on this branch. The proof's three tools are classical and are
+   and § B — now with a kernel proof on this branch. The docstring's "not found in print" is the planner's sentence; the
+   ledger's claim list uses those words (`LEDGER.md:27`) of "the passage from additive to all three-colourings at the field
+   level" (rows 82–83), which is this module's § 3. I copy both and raise neither. The proof's three tools are classical and are
    named so in the docstrings except the first: `Winding.exists_box_point` is a finite-dimensional separation (Hahn–Banach for a
    compact convex set and a point, with the passage real → rational → integer coefficients), a theorem of the alternative of
    Farkas's kind; `exists_character_of_box_point` is the divisibility of `ℝ/ℤ` (Baer); `bandSet_nonempty_of_finite` is Tychonoff's
