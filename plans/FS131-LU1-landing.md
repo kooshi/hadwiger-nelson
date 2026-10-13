@@ -1150,3 +1150,27 @@ theorems and 3 definitions — with the banner its record is under and its axiom
 7. **One slot of the drafts' check was wider than its draft**: the map's `[S2]` sentence was first checked with the
    table's next cell attached, on a wrong reading that the sentence occurs twice in the file; it occurs once, and the
    check now holds the sentence alone (29 of 29 both times).
+
+## Stage 9 — SAVED (FS131-LU1): the green line, and where the branch stands
+
+**The green line** was sent to the coordinator at about 21:27 UTC, after stage 8 was committed and `main` merged in
+once more: the gated commit `c2f4e4f546c93f833d9c04a692d138a9a897cbc1`; the branch tip then `70c524e46`, which holds
+`main` (`b937f33d1`) and differs from the gated commit **under `plans/` and `data/` only**
+(`data/fs131/lu1/tip-check.out`: `data/` 78 paths, `plans/` 2, none outside them; `git diff --stat` over `Proofs`,
+`Proofs.lean`, `scripts`, `tools`, `ARCHITECTURE.md`, the lakefile, the toolchain, the manifest, `CLAUDE.md`, `LEAN.md`,
+`LEDGER.md`: empty; zero `sorry`; no tracked file modified). The baseline's header and the ledger's header were
+refiled **before** the pass, so nothing under `scripts/` moved after it. **The fast-forward of `main` is the
+coordinator's. This job pushed nothing.** The drafts' slots were read last on `main` at `b937f33d1`: 29 of 29.
+
+- **Nothing this record cites lives under `/tmp` or a scratch directory.** Every log, receipt, dump and script is
+  under `data/fs131/lu1/` (the gate's under `gate/`, the probes' under `probes/`), committed. The two runner snapshots
+  (`build/lu1-run-gate-snapshot.sh`, `build/lu1-lint-plant-snapshot.sh`) are copies of committed scripts. One receipt
+  is kept compressed (`gate/receipt-axioms-self-test-final.log.xz`, 18.5 MB as written).
+- **No process of this job is running**: the two builds, the lint's control and its build, the probes, the pass and
+  the waits have exited; the slot's ledger holds no reservation of mine.
+- **The bibliography audit** (`tools/bib_audit.py`, run as a courtesy; `data/fs131/lu1/bib-audit.out`): exit 0, "every
+  cited work resolves to a row or a recorded alias".
+- **What is left, in order** — none of it gate work: (1) the filing, from the drafts (the coordinator's); (2) one more
+  fast-forward for this record's last section and the report (`plans/` and `data/` only); (3) the open gate items, of
+  which 1 (the stale docstrings), 3 (models that are terms) and 6 (corollaries one line away, row 52's two values
+  among them) are each a few lines for a later job, and 8 is the tooling list's.
