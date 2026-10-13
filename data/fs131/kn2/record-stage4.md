@@ -46,15 +46,15 @@ re-proof.
 
 **U6 `coe_mem_nonunits_localRing_iff`**: `(a : K) ∈ B.nonunits ↔ a ∈ P.P`.
 Route: `ValuationSubring.mem_nonunits_iff_exists_mem_maximalIdeal` ✓ (used at `PlaceHom.lean:254`), or elementary through
-`x ∈ B.nonunits ↔ x = 0 ∨ x⁻¹ ∉ B` (the library uses `ValuationSubring.mem_nonunits_iff_or` at `UnitRing.lean:112` (read)).
+`x ∈ B.nonunits ↔ x = 0 ∨ x⁻¹ ∉ B` (the library uses `ValuationSubring.mem_nonunits_iff_or` ✓, Mathlib's, at `UnitRing.lean:112`).
 (⟸) `a ∈ P.P`, `a ≠ 0`: if `a⁻¹ = b / s` with `s ∉ P.P` then `s = a * b` in `𝓞` (`RingOfIntegers.coe_injective` (read)), so
 `s ∈ P.P`. (⟹, contrapositive) `a ∉ P.P` gives `a⁻¹ = 1 / a ∈ B` by U1 and `a ∈ B`, so `a` is a unit of `B`. Mathlib's
 `IsLocalization.AtPrime.to_map_mem_maximal_iff` ✓ is the same fact on `B` as a localization, if the instance route is smoother.
 
 **U7 `localRing_ne_top`**. Route: Mathlib proves it inside `valuationSubringAtPrime_eq_valuationSubring`
-(`AdicValuation.lean:509–512`): `rw [HeightOneSpectrum.valuationSubringAtPrime_eq_valuationSubring]` ✓, then that proof's last
-line (`by simp only [ne_eq, Valuation.valuationSubring_eq_top_iff, not_not]; infer_instance` — note it is written there for
-the negated form; read the three lines before copying). Elementary alternative: `P.heightOne.ne_bot` gives `a ∈ P.P`, `a ≠ 0`
+(`AdicValuation.lean:509–512`): `rw [HeightOneSpectrum.valuationSubringAtPrime_eq_valuationSubring]` ✓, after which the goal is that proof's third
+argument, `(v.valuation K).valuationSubring ≠ ⊤`, closed there by
+`by simp only [ne_eq, Valuation.valuationSubring_eq_top_iff, not_not]; infer_instance` (read; not compiled here). Elementary alternative: `P.heightOne.ne_bot` gives `a ∈ P.P`, `a ≠ 0`
 (`Submodule.exists_mem_ne_zero_of_ne_bot` ✓); `a⁻¹ ∈ ⊤`; contradiction with U6.
 
 **U8 `exists_hom_levelTarget` — the module's main leaf.** `∃ h : (unitDistance ℂ).induce (planeOver F) →g levelTarget P m, ∀ x y hd, h x - h y = P.residue m ⟨_, hd⟩`, for `1 ≤ m`.
@@ -124,8 +124,9 @@ inclusion `fieldOfRadicands D → IntermediateField.adjoin ℚ S` (`S := (fun d 
 Route: for `x : 𝓞 K`, `IsIntegral ℤ (ι x)` (`RingOfIntegers.isIntegral_coe x` ✓ pushed along `ι.toIntAlgHom` by `IsIntegral.map` ✓),
 so `IsIntegral ℤ_[p] (ι x)` (`IsIntegral.tower_top` ✓), so `ι x` is the image of some `z : ℤ_[p]`
 (`IsIntegrallyClosed.isIntegral_iff` ✓; `IsIntegrallyClosed ℤ_[p]` and `PadicInt.isFractionRing` ✓ are instances — both
-`inferInstance` in the probe), i.e. `‖ι x‖ ≤ 1` (`PadicInt.norm_le_one` ✓). `g : 𝓞 K →+* ℤ_[p]` is the corestriction of
-`ι.comp (algebraMap (𝓞 K) K)` to `PadicInt.subring p` ✓ (`PadicInt.mem_subring_iff` ✓; `ℤ_[p]` is that subring's carrier);
+`inferInstance` in the probe), i.e. `‖ι x‖ ≤ 1` (`PadicInt.norm_le_one` ✓). `g : 𝓞 K →+* ℤ_[p]` is `ι.comp (algebraMap (𝓞 K) K)` with its values in `ℤ_[p]`: Mathlib defines `ℤ_[p]` as the subtype
+`{x : ℚ_[p] // ‖x‖ ≤ 1}` (`PadicIntegers.lean:60`) and `PadicInt.subring p` ✓ as the subring with that carrier
+(`PadicInt.mem_subring_iff` ✓ is `Iff.rfl`), so write `g` by its five fields, `toFun x := ⟨ι x, h x⟩`, each law by `Subtype.ext`;
 `f := PadicInt.toZMod.comp g`; the specification is `congrArg _ (Subtype.ext h.symm)`.
 
 **Q6 `exists_padicInt_sq_eq`** (Hensel): `d` a nonzero square modulo odd `p` ⟹ `∃ r : ℤ_[p], r ^ 2 = d`.
