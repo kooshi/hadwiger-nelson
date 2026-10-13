@@ -42,7 +42,9 @@ open MeasureTheory
 
 open scoped ENNReal
 
-variable {X : Type*} [AddCommGroup X] [TopologicalSpace X] [MeasurableSpace X] [BorelSpace X]
+-- Every binder of the two statements below is written in its signature, none taken from a section `variable`: read as the
+-- kernel had it, the axiom stated with `variable … [BorelSpace X]` carried no `BorelSpace` binder (its statement names none),
+-- and said the theorem of every σ-algebra on `X` (FS131-KN3, `data/fs131/kn3/logs/FirstLayerCheck-before-binder-fix.log`).
 
 /-- **`[EinsiedlerLindenstrauss2022]` Theorem 1.3, § 1.1, pp. 2–3 (arXiv:2101.11120v1) — an outside theorem, declared.**
 For a `ℤ^d`-action `α`, `d ≥ 2`, by automorphisms of a solenoid `X` with no virtually cyclic factors and an `α`-invariant
@@ -50,7 +52,8 @@ ergodic probability measure `µ`: a finite-index `Λ` and mutually singular prob
 `µ = (1/J) Σ ν j`, each `α_Λ`-ergodic, each invariant under translation by a closed `α_Λ`-invariant subgroup `G j`, permuted
 with their subgroups by every `αⁿ`, and each inducing on `X/G j` a measure for which every `αⁿ`, `n ∈ Λ`, has entropy zero.
 The page is quoted in the module docstring; the read-back is `plans/FS131-KN3-chain-plan.md` § The four items. -/
-axiom positive_entropy_rigidity (hX : IsSolenoid X) {d : ℕ} (hd : 2 ≤ d) (α : ZdAction d X)
+axiom positive_entropy_rigidity {X : Type*} [AddCommGroup X] [TopologicalSpace X] [MeasurableSpace X] [BorelSpace X]
+    (hX : IsSolenoid X) {d : ℕ} (hd : 2 ≤ d) (α : ZdAction d X)
     (hα : α.NoVirtuallyCyclicFactors) (μ : Measure X) (hμ : IsProbabilityMeasure μ) (herg : α.IsErgodicOn ⊤ μ) :
     ∃ (Λ : AddSubgroup (Fin d → ℤ)) (J : ℕ) (ν : Fin J → Measure X) (G : Fin J → AddSubgroup X),
       Λ.FiniteIndex ∧ 0 < J ∧ μ = (J : ℝ≥0∞)⁻¹ • ∑ j, ν j ∧ (∀ i j, i ≠ j → ν i ⟂ₘ ν j) ∧
@@ -78,7 +81,8 @@ example : BorelSpace Unit := inferInstance
 `positive_entropy_rigidity` (FS105-DED): Theorem 1.3 applies (FS105-NVC); each `G j` is finite or `X`; some `G j = X` makes
 `µ` translation-invariant; every `G j` finite gives entropy zero through the finite-fibred factors. No inhabitant of the
 hypotheses is in the library yet: PE-1′ supplies the pieces `M̂`. -/
-theorem haar_or_zero_entropy (hX : IsSolenoid X) {d : ℕ} (α : ZdAction d X) (hirr : α.IsTotallyIrreducible)
+theorem haar_or_zero_entropy {X : Type*} [AddCommGroup X] [TopologicalSpace X] [MeasurableSpace X] [BorelSpace X]
+    (hX : IsSolenoid X) {d : ℕ} (α : ZdAction d X) (hirr : α.IsTotallyIrreducible)
     (hvc : ¬ α.IsVirtuallyCyclic) (μ : Measure X) (hμ : IsProbabilityMeasure μ) (herg : α.IsErgodicOn ⊤ μ) :
     μ.IsAddHaarMeasure ∨ ∀ n : Fin d → ℤ, ksEntropy μ (α n) = 0 := by
   sorry

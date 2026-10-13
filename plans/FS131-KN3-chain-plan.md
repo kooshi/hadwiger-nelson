@@ -237,3 +237,87 @@ high-entropy cases — for another group.
 - **M7** (from `Γ` to `U`) loses Jacobs's formula as an input and takes T1's existence from the port.
 - **M8** (the pigeonhole at the field) keeps Shannon–McMillan–Breiman as its one open classical input, behind a
   question to the derive lane.
+
+## Stage 5 — SAVED: the first layer compiles
+
+Four modules under `Proofs/HadwigerNelson/Rigidity/`, in `Proofs.lean` and in `ARCHITECTURE.md`'s map
+(`tools/check_architecture.py`: FAIL "module coverage" with the rows absent, PASS with them):
+
+| module | holds | `sorry` |
+|---|---|---|
+| `Rigidity/Entropy` | `nameCell`, `blockEntropy`, `partitionEntropy`, `ksEntropyOn`, `ksEntropy` | 3 leaves |
+| `Rigidity/Solenoid` | `IsSolenoid`, `ZdAction` and the page's predicates; the degenerate model | none |
+| `Rigidity/PositiveEntropy` | the axiom `positive_entropy_rigidity` (Thm 1.3), its model; `haar_or_zero_entropy` (Thm 1.2) | 1 leaf |
+| `Rigidity/ChainAtTA` | `TA`, `chainInterface`, `MRPlus`, `EntropySplit`, `ZeroEntropyCarried`, `NoRamifiedStableDyadic`; MR⁺ from the two; the headline with closed hypotheses | 6 leaves |
+
+**How it was checked, and what was not.** Each file through `lake env lean -DautoImplicit=false
+-DrelaxedAutoImplicit=false` under the slot (`data/fs131/kn3/lean1.sh`; every log ends `exit=0`); then
+`data/fs131/kn3/FirstLayerCheck.lean` prints ten statements and six axiom lists as the kernel has them
+(`data/fs131/kn3/logs/FirstLayerCheck.log`). **Not run: `./scripts/build.sh`.** Another planner's build held the
+machine's one build slot each time I looked (18 of 22 GiB, the last look at age 1006 s), and a first build on the laptop
+is unmeasured and would have outlived this session; the file-by-file check does not apply the lakefile's linters (a
+missing docstring is not reported: `LEAN.md`). The first build is the implementer's or the landing's, by
+`env SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 python3 scripts/slot.py --mem 18 --cpus 10 --name kn3 -- env MEMMAX=18G BATCH=2
+./scripts/build.sh` from the worktree. One file took under 4 GiB (the cap it ran under) and under two minutes.
+
+### 5.1 A slip of mine, found by reading the axiom as the kernel had it
+
+The axiom was first written under `variable … [MeasurableSpace X] [BorelSpace X]`. Its statement names no `BorelSpace`, and
+**an `axiom` does not take an instance binder its statement does not mention** (the `theorem` beside it, under the same
+`variable` line, did): the stored type had no `[BorelSpace X]`, so the axiom said Theorem 1.3 of every σ-algebra on the
+solenoid — more than the page, and nothing the page's proof supports. Found by `#check @positive_entropy_rigidity` in
+`FirstLayerCheck.lean`, before any commit of the chain module; repaired by writing every binder in the signature. The
+print before the repair is kept (`data/fs131/kn3/logs/FirstLayerCheck-before-binder-fix.log`) as the planted fault of
+`tools/fs131_kn3_axiom_binders.py`, which reads the kernel's print for the four instance binders: exit 1 on the old
+print, naming `BorelSpace X`; exit 0 on the new. **A draft line for `LEAN.md` § Searching — Lean** is in the report.
+
+### 5.2 The statements, read aloud against their claims
+
+- **NF2-MRPLUS / NF2-MRPLUS-SCOPE** ↔ `MRPlus F` and `mrPlus [NumberField F] (h : NoRamifiedStableDyadic F) : MRPlus F`.
+  "Every finite rotation-invariant measure on the dual of ℤ[U_F]" = `∀ τ : Measure (Dual F), IsFiniteMeasure τ → RotInv F
+  τ`; "that gives T + A measure 0" = `τ (TA F) = 0`; "has every Fourier coefficient off 0 equal to 0" = `∀ r ≠ 0, ∫ χ, (χ r
+  : ℂ) ∂τ = 0`. Positivity: `Measure` is positive. The field's hypothesis: on the theorem, not in the definition.
+- **NF2-FROM-TWO** ↔ `mrPlus_of_split_of_carried : EntropySplit F → ZeroEntropyCarried F → MRPlus F` — proved, with one
+  leaf under it (`exists_nonTorsion_unitVector`, the deriver's step 3: `(3 + 4i)/5`). Kernel: `sorryAx` from that leaf only.
+- **NF2-SPCOR** ↔ `five_le_chromaticNumber_of_mrPlus`: R-U is discharged inside it as `τ (TA F \ TA F) = 0`.
+- **NF2-LEAF-02** ↔ `chainInterface`, `interface_mr_iff` (`Iff.rfl`), `min_localBound_five_le_chromaticNumber_of_closed`.
+- **NF2-LEAF-22** ↔ `mrPlus`; `Interface.mr_of_pe2_efPlus` is not used (its `Prop` `Interface.PE2` carries the unread clause).
+- **NF2-LEAF-01** ↔ `TA`, `measurableSet_TA` (leaf), `rot_preimage_TA` (leaf). The leaf's "bridge between the two models of
+  a character" is not on the path: nothing in the chain reads `CharacterColouring.torsionBy`.
+- **NF2-LEAF-13** ↔ `ksEntropy`, `ksEntropyOn`. **NF2-LEAF-14** ↔ `IsSolenoid`, `ZdAction`, the predicates; the pieces
+  `M̂` themselves are module M6's. **NF2-LEAF-15** ↔ not typed here: Theorem 1.3 names no Haar measure; Theorem 1.2 says
+  `μ.IsAddHaarMeasure` on the abstract solenoid, and the Fourier form on `Dual F` is `IsHaarFourier` (through the gate
+  already). The passage between them is a lemma of M6. **NF2-LEAF-16** ↔ by ruling 2, `positive_entropy_rigidity` (Thm 1.3)
+  with `haar_or_zero_entropy` (Thm 1.2) a leaf. **NF2-LEAF-20, -21** ↔ `entropySplit`, `zeroEntropyCarried`.
+- **The headline's hypotheses, as the kernel has them**: `BochnerHerglotz (unitRing F)`, `InvariantMeasureOnClosed F`,
+  `(chainInterface F).Count`, `(chainInterface F).APlusOfR88`, `EntropySplit F`, `NoRamifiedStableDyadic F →
+  ZeroEntropyCarried F`, `TCA F → NoRamifiedStableDyadic F`, `5 ≤ localBound F → TCA F`, row 99's inequality. Nine, each a
+  closed statement about `F`; the last form (`…_closed`) takes six of them and rests on the three leaves.
+
+### 5.3 The four items of `positive_entropy_rigidity` (`LEAN.md` § Assumptions) — drafted
+
+1. **Docstring**: `[EinsiedlerLindenstrauss2022]` Theorem 1.3, § 1.1, pp. 2–3 of arXiv:2101.11120v1; the page quoted in
+   the module docstring. *Owed:* the journal's page numbers (ETDS 42 (2022) 691–736; I read the arXiv text layer).
+2. **Read-back, clause by clause.**
+
+   | the page | the Lean statement | direction |
+   |---|---|---|
+   | "a `ℤ^d`-action (`d ≥ 2`) by automorphisms of a solenoid `X`" | `IsSolenoid X`, `2 ≤ d`, `α : ZdAction d X`; `[BorelSpace X]` | equal; "compact group" read as Hausdorff |
+   | "`α` has no virtually cyclic factors" | `α.NoVirtuallyCyclicFactors` (no closed invariant `Y ≠ X` with the action on `X/Y` virtually cyclic) | **a sense chosen**: the literal phrase is met by no action (FS105-VC, three minds); the paper's own use is Lemma 7.4, p. 32. A reading that asked less of `α` would make the axiom stronger than the page; none is known. **Residual trust: this reading** |
+   | "`µ` an `α`-invariant and ergodic probability measure on `X`" | `IsProbabilityMeasure μ`, `α.IsErgodicOn ⊤ μ` | equal (strictly invariant sets suffice for a countable group) |
+   | "a subgroup `Λ ⊆ ℤ^d` of finite index and a decomposition `µ = (1/J)(µ₁ + … + µ_J)` into mutually singular measures" | `Λ.FiniteIndex`, `0 < J`, `μ = (J)⁻¹ • ∑ j, ν j`, `∀ i ≠ j, ν i ⟂ₘ ν j`, `IsProbabilityMeasure (ν j)` | probability: the page's "ergodic" and its `1/J`; also forced by (3), singularity and the ergodicity of `µ` |
+   | (1) "`µ_j` is `α_Λ`-ergodic" | `α.IsErgodicOn Λ (ν j)` | equal |
+   | (2) "an `α_Λ`-invariant closed subgroup `G_j` such that … `µ_j(B) = µ_j(B + g)` for all `g ∈ G_j` and every measurable `B`" | `IsClosed (G j)`, `α.InvariantOn Λ (G j)`, `∀ g ∈ G j, ∀ B measurable, ν j ((· + g)⁻¹' B) = ν j B` | equal (`(· + g)⁻¹' B = B − g`, and `G j` is a group) |
+   | (3) "for `n ∈ ℤ^d`, `αⁿ_* µ_j = µ_k` for some `k` and `αⁿ(G_j) = G_k`" | `∀ n, ∃ k, (ν j).map (α n) = ν k ∧ (G j).map (α n) = G k` | equal |
+   | (4) "`µ_j` induces a measure on the factor `X/G_j` with `h_{µ_j}(αⁿ_{X/G_j}) = 0` for any `n ∈ Λ`" | `∀ n ∈ Λ, ∀ h, ksEntropy ((ν j).map (mk' (G j))) (QuotientAddGroup.map (G j) (G j) (α n) h) = 0` | equal: the quotient σ-algebra on `X/G_j` is its Borel σ-algebra for a Polish group and a closed subgroup (Mathlib: `QuotientAddGroup.borelSpace`), and a solenoid is compact metrizable (its dual is countable); `∀ h` because the induced map needs the proof that (2) supplies |
+
+   Entropy is `Rigidity.ksEntropy`; that it is the textbook's number rests on module M1's checks (the two-shift at
+   `log 2`; the bridge to the outside release's `measureEntropy`).
+3. **A model of the hypotheses**: `positive_entropy_rigidity_model` (kernel: the standard three axioms) — degenerate. The
+   model that exercises the clause on factors is PE-1′ (module M6); until it lands the axiom's item 3 is met in form only.
+4. **`ARCHITECTURE.md` § Trust** — a draft line for the landing, not written now (a skeleton is not a purchase): "`Rigidity.positive_entropy_rigidity`
+   — `[EinsiedlerLindenstrauss2022]` Thm 1.3, pp. 2–3; declared; the sense of 'no virtually cyclic factors' is FS105-VC's;
+   read back in `plans/FS131-KN3-chain-plan.md` § 5.3". And for `scripts/Axioms.lean`'s IMPORTED section, at the landing:
+   one `AxiomAudit.declareImport` line for ``HadwigerNelson.Rigidity.positive_entropy_rigidity`` with every record that
+   rests on it. Today no record does (`entropySplit` is a `sorry`), and the audit would fail on an undeclared `axiom`: the
+   branch is a skeleton and is not at the gate.
