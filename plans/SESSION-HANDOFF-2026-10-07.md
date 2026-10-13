@@ -55,6 +55,15 @@ this session):
 3. ~~FS124-F2, the owed filing~~ — **done and merged (`94bb3f35c`, FS-124 inventory item 52): the front page reads the
    library as gated; FS-124 stays Derived. THE NEXT FILING'S FACT-AUDIT BASE IS `94bb3f35c`.** Two jobs are running, not three.
 
+4. **FS131-EN1** (deriver; launched 2026-10-13 16:16 UTC; brief `data/fs131/briefs/FS131-EN1-shorter-route.md`; claim list
+   `data/fs131/claims-EN1.md`; record `plans/FS131-EN1-derivation.md`; FS-131 inventory item 642): five statements the
+   kernel planner read off the kernel proof — for the plane over the field of √47 and the main clause through five,
+   the hand result on the split places (R-U, once priced in months) may not be on the path at all. It messages each
+   verdict; **relay each to the planner at once** (by message while it runs; else in the amendment that carries the
+   ranking). **Ruled the same hour (item 642 (b))**: the printed theorem declared is Einsiedler–Lindenstrauss's
+   Theorem 1.3 with its hypothesis's forced sense written into the statement, and our deduction of Theorem 1.2 from it
+   is a leaf to formalize — the planner is to be told in that same amendment.
+
 **What I do at each hand-back.** *The ranking*: review by artifact (its claim-list quotations against `LEDGER.md` § The
 claim list; one attribution re-read); log it; report it to Kooshi as the asking lane's judgment. *The map*: review one
 entry against the receipt; log it. *Both in*: fix `data/fs131/claims-NF1.md` for the first-ranked finding from its
