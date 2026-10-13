@@ -1,0 +1,6 @@
+[W2: (2026-10-13, answering t…]: IDENTICAL (278 characters; found verbatim in the request (whitespace runs collapsed); source data/fs131/REQUEST-2026-10-13.md)
+[NF4-THEOREM: *The theorem.* …]: IDENTICAL (541 characters; a whole line of the claim list, character for character; source data/fs131/claims-NF4.md § The theorem (the asking lane's wording, rank 2))
+[- 2026-10-13 17:51 UTC — **T…]: IDENTICAL (946 characters; a whole line of the claim list, character for character; source data/fs131/claims-NF4.md)
+[- 2026-10-13 17:59 UTC — **N…]: IDENTICAL (777 characters; a whole line of the claim list, character for character; source data/fs131/claims-NF4.md)
+[- 2026-10-13 17:59 UTC — **T…]: IDENTICAL (615 characters; a whole line of the claim list, character for character; source data/fs131/claims-NF4.md)
+compared=5 differing=0 mode=real

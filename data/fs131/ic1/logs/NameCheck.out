@@ -1,0 +1,103 @@
+@LinearMap.continuous_of_finiteDimensional : ∀ {𝕜 : Type u_1} [hnorm : NontriviallyNormedField 𝕜] {E : Type u_2}
+  [inst : AddCommGroup E] [inst_1 : Module 𝕜 E] [inst_2 : TopologicalSpace E] [IsTopologicalAddGroup E]
+  [ContinuousSMul 𝕜 E] {F' : Type u_3} [inst_5 : AddCommGroup F'] [inst_6 : Module 𝕜 F'] [inst_7 : TopologicalSpace F']
+  [IsTopologicalAddGroup F'] [ContinuousSMul 𝕜 F'] [CompleteSpace 𝕜] [T2Space E] [FiniteDimensional 𝕜 E]
+  (f : E →ₗ[𝕜] F'), Continuous ⇑f
+@Rat.denseRange_cast : ∀ {𝕜 : Type u_1} [inst : Field 𝕜] [inst_1 : LinearOrder 𝕜] [IsStrictOrderedRing 𝕜]
+  [inst_3 : TopologicalSpace 𝕜] [OrderTopology 𝕜] [Archimedean 𝕜], DenseRange Rat.cast
+@DenseRange.exists_mem_open : ∀ {X : Type u_1} [inst : TopologicalSpace X] {α : Type u_2} {f : α → X} {s : Set X},
+  DenseRange f → IsOpen s → s.Nonempty → ∃ a, f a ∈ s
+@isOpen_iInter_of_finite : ∀ {X : Type u_1} {ι : Sort u_2} [inst : TopologicalSpace X] [Finite ι] {s : ι → Set X},
+  (∀ (i : ι), IsOpen (s i)) → IsOpen (⋂ i, s i)
+@isOpen_lt : ∀ {α : Type u_1} {β : Type u_2} [inst : TopologicalSpace α] [inst_1 : LinearOrder α]
+  [OrderClosedTopology α] [inst_3 : TopologicalSpace β] {f g : β → α},
+  Continuous f → Continuous g → IsOpen {b | f b < g b}
+@DenseRange.piMap : ∀ {ι : Type u_1} {X : ι → Type u_2} {Y : ι → Type u_3} [inst : (i : ι) → TopologicalSpace (Y i)]
+  {f : (i : ι) → X i → Y i}, (∀ (i : ι), DenseRange (f i)) → DenseRange (Pi.map f)
+Rat.mul_den_eq_num : ∀ (q : ℚ), q * ↑q.den = ↑q.num
+Rat.den_pos : ∀ (self : ℚ), 0 < self.den
+@Finset.dvd_prod_of_mem : ∀ {ι : Type u_1} {M : Type u_2} [inst : CommMonoid M] (f : ι → M) {a : ι} {s : Finset ι},
+  a ∈ s → f a ∣ ∏ i ∈ s, f i
+@geometric_hahn_banach_closed_point : ∀ {E : Type u_1} [inst : TopologicalSpace E] [inst_1 : AddCommGroup E]
+  [inst_2 : Module ℝ E] {s : Set E} {x : E} [IsTopologicalAddGroup E] [ContinuousSMul ℝ E] [LocallyConvexSpace ℝ E],
+  Convex ℝ s → IsClosed s → x ∉ s → ∃ f u, (∀ a ∈ s, f a < u) ∧ u < f x
+@LinearMap.pi_apply_eq_sum_univ : ∀ {R : Type u_1} {M₂ : Type u_2} {ι : Type u_3} [inst : Semiring R]
+  [inst_1 : AddCommMonoid M₂] [inst_2 : Module R M₂] [inst_3 : DecidableEq ι] [inst_4 : Fintype ι]
+  (f : (ι → R) →ₗ[R] M₂) (x : ι → R), f x = ∑ i, x i • f fun j => if i = j then 1 else 0
+@Convex.linear_image : ∀ {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [inst : Semiring 𝕜] [inst_1 : PartialOrder 𝕜]
+  [inst_2 : AddCommMonoid E] [inst_3 : AddCommMonoid F] [inst_4 : Module 𝕜 E] [inst_5 : Module 𝕜 F] {s : Set E},
+  Convex 𝕜 s → ∀ (f : E →ₗ[𝕜] F), Convex 𝕜 (⇑f '' s)
+@convex_pi : ∀ {𝕜 : Type u_1} [inst : Semiring 𝕜] [inst_1 : PartialOrder 𝕜] {ι : Type u_2} {E : ι → Type u_3}
+  [inst_2 : (i : ι) → AddCommMonoid (E i)] [inst_3 : (i : ι) → SMul 𝕜 (E i)] {s : Set ι} {t : (i : ι) → Set (E i)},
+  (∀ ⦃i : ι⦄, i ∈ s → Convex 𝕜 (t i)) → Convex 𝕜 (s.pi t)
+@convex_Icc : ∀ {𝕜 : Type u_1} {β : Type u_2} [inst : Semiring 𝕜] [inst_1 : PartialOrder 𝕜] [inst_2 : AddCommMonoid β]
+  [inst_3 : PartialOrder β] [IsOrderedAddMonoid β] [inst_5 : Module 𝕜 β] [PosSMulMono 𝕜 β] (r s : β),
+  Convex 𝕜 (Set.Icc r s)
+@IsCompact.image : ∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {s : Set X}
+  {f : X → Y}, IsCompact s → Continuous f → IsCompact (f '' s)
+@isCompact_univ_pi : ∀ {ι : Type u_1} {X : ι → Type u_2} [inst : (i : ι) → TopologicalSpace (X i)]
+  {s : (i : ι) → Set (X i)}, (∀ (i : ι), IsCompact (s i)) → IsCompact (Set.univ.pi s)
+@isCompact_Icc : ∀ {α : Type u_1} {inst : TopologicalSpace α} {inst_1 : Preorder α} [self : CompactIccSpace α]
+  {a b : α}, IsCompact (Set.Icc a b)
+inferInstance : IsNoetherian ℤ (Fin 3 → ℤ)
+@AddSubgroup.toIntSubmodule : {M : Type u_1} → [inst : AddCommGroup M] → AddSubgroup M ≃o Submodule ℤ M
+@Submodule.fg_iff_exists_fin_generating_family : ∀ {R : Type u_1} {M : Type u_2} [inst : Semiring R]
+  [inst_1 : AddCommMonoid M] [inst_2 : Module R M] {N : Submodule R M}, N.FG ↔ ∃ n s, Submodule.span R (Set.range s) = N
+@Submodule.mem_span_range_iff_exists_fun : ∀ {α : Type u_1} {M : Type u_2} (R : Type u_3) [inst : Fintype α]
+  [inst_1 : Semiring R] [inst_2 : AddCommMonoid M] [inst_3 : Module R M] {v : α → M} {x : M},
+  x ∈ Submodule.span R (Set.range v) ↔ ∃ c, ∑ i, c i • v i = x
+@Matrix.toLin' : {R : Type u_1} →
+  [inst : CommSemiring R] →
+    {m : Type u_2} → {n : Type u_3} → [DecidableEq n] → [Fintype n] → Matrix m n R ≃ₗ[R] (n → R) →ₗ[R] m → R
+@Matrix.mulVecLin : {R : Type u_1} →
+  [inst : CommSemiring R] → {m : Type u_2} → {n : Type u_3} → [Fintype n] → Matrix m n R → (n → R) →ₗ[R] m → R
+@AddMonoidHom.liftOfSurjective : {G₁ : Type u_1} →
+  {G₂ : Type u_2} →
+    {G₃ : Type u_3} →
+      [inst : AddGroup G₁] →
+        [inst_1 : AddGroup G₂] →
+          [inst_2 : AddGroup G₃] → (f : G₁ →+ G₂) → Function.Surjective ⇑f → { g // f.ker ≤ g.ker } ≃ (G₂ →+ G₃)
+@AddMonoidHom.liftOfRightInverse_comp_apply : ∀ {G₁ : Type u_1} {G₂ : Type u_2} {G₃ : Type u_3} [inst : AddGroup G₁]
+  [inst_1 : AddGroup G₂] [inst_2 : AddGroup G₃] (f : G₁ →+ G₂) (f_neg : G₂ → G₁) (hf : Function.RightInverse f_neg ⇑f)
+  (g : { g // f.ker ≤ g.ker }) (x : G₁), ((f.liftOfRightInverse f_neg hf) g) (f x) = ↑g x
+@AddMonoidHom.rangeRestrict_surjective : ∀ {G : Type u_1} [inst : AddGroup G] {N : Type u_2} [inst_1 : AddGroup N]
+  (f : G →+ N), Function.Surjective ⇑f.rangeRestrict
+Module.Baer.of_divisible : ∀ (A : Type u_1) [inst : AddCommGroup A] [DivisibleBy A ℤ], Module.Baer ℤ A
+@Module.Baer.extension_property_addMonoidHom : ∀ {Q : Type u_1} [inst : AddCommGroup Q] {M : Type u_2} {N : Type u_3}
+  [inst_1 : AddCommGroup M] [inst_2 : AddCommGroup N],
+  Module.Baer ℤ Q → ∀ (f : M →+ N), Function.Injective ⇑f → ∀ (g : M →+ Q), ∃ h, h.comp f = g
+inferInstance : DivisibleBy UnitAddCircle ℤ
+@AddCircle.coe_eq_zero_iff : ∀ {𝕜 : Type u_1} [inst : AddCommGroup 𝕜] (p : 𝕜) {x : 𝕜}, ↑x = 0 ↔ ∃ n, n • p = x
+@QuotientAddGroup.lift : {G : Type u_1} →
+  {M : Type u_2} →
+    [inst : AddGroup G] →
+      [inst_1 : AddMonoid M] → (N : AddSubgroup G) → [nN : N.Normal] → (φ : G →+ M) → N ≤ φ.ker → G ⧸ N →+ M
+@QuotientAddGroup.quotientKerEquivRange : {G : Type u_1} →
+  [inst : AddGroup G] → {H : Type u_2} → [inst_1 : AddGroup H] → (φ : G →+ H) → G ⧸ φ.ker ≃+ ↥φ.range
+@AddCircle.continuous_mk' : ∀ {𝕜 : Type u_1} [inst : AddCommGroup 𝕜] (p : 𝕜) [inst_1 : TopologicalSpace 𝕜],
+  Continuous ⇑(QuotientAddGroup.mk' (AddSubgroup.zmultiples p))
+inferInstance : T2Space UnitAddCircle
+inferInstance : CompactSpace (ℤ → UnitAddCircle)
+AddMonoidHom.isClosed_range_coe : ∀ (M₁ : Type u_1) (M₂ : Type u_2) [inst : TopologicalSpace M₂] [T2Space M₂]
+  [inst_2 : AddZeroClass M₁] [inst_3 : AddZeroClass M₂] [ContinuousAdd M₂], IsClosed (Set.range DFunLike.coe)
+@IsCompact.inter_iInter_nonempty : ∀ {X : Type u_1} [inst : TopologicalSpace X] {s : Set X} {ι : Type u_2},
+  IsCompact s →
+    ∀ (t : ι → Set X),
+      (∀ (i : ι), IsClosed (t i)) → (∀ (u : Finset ι), (s ∩ ⋂ i ∈ u, t i).Nonempty) → (s ∩ ⋂ i, t i).Nonempty
+@IsCompact.nonempty_iInter_of_directed_nonempty_isCompact_isClosed : ∀ {X : Type u_1} [inst : TopologicalSpace X]
+  {ι : Type u_2} [hι : Nonempty ι] (t : ι → Set X),
+  Directed (fun x1 x2 => x1 ⊇ x2) t →
+    (∀ (i : ι), (t i).Nonempty) → (∀ (i : ι), IsCompact (t i)) → (∀ (i : ι), IsClosed (t i)) → (⋂ i, t i).Nonempty
+@AddMonoidHom.mk' : {M : Type u_1} →
+  {G : Type u_2} →
+    [inst : AddGroup G] → [inst_1 : AddZeroClass M] → (f : M → G) → (∀ (a b : M), f (a + b) = f a + f b) → M →+ G
+@Finset.equivFin : {α : Type u_1} → (s : Finset α) → ↥s ≃ Fin s.card
+UnitRing.unitRingOver_le_planeOverSubring : ∀ (F : Subfield ℝ), UnitRing.unitRingOver F ≤ Chain.planeOverSubring F
+@unitDistance_adj : ∀ {V : Type u_1} [inst : MetricSpace V] {x y : V}, (unitDistance V).Adj x y ↔ dist x y = 1
+@SimpleGraph.comap_adj : ∀ {V : Type u_1} {W : Type u_2} {u v : V} {G : SimpleGraph W} {f : V → W},
+  (SimpleGraph.comap f G).Adj u v ↔ G.Adj (f u) (f v)
+@SimpleGraph.induce : {V : Type u_1} → (s : Set V) → SimpleGraph V → SimpleGraph ↑s
+@ThreeColour.nonempty_winding : ∀ {A : Type u_1} [inst : AddCommGroup A] {m : ℕ} (s : Fin m → A) {c : A → ZMod 3},
+  ThreeColour.ProperAlong s c → Nonempty (ThreeColour.Winding s)
+SpectralChain.unitVectors : Subfield ℝ → Set ℂ
+data/fs131/ic1/probes/NameCheck.lean:58:8: error(lean.unknownIdentifier): Unknown identifier `planeOverSubring`

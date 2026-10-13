@@ -1,0 +1,11 @@
+Skeleton: lean exit 0; errors: 0; sorry warnings: 8
+Candidate: lean exit 0; errors: 0; sorry warnings: 0
+compared: 9 named constants of the first dump (9 theorems, 0 definitions; types, and values of definitions); 9 declarations written at 34d9113b2, each found in the first dump
+internal (not compared): 0 before, 13 after
+new named constants in the second dump: 0
+new private declarations in the second dump (counted among the internal): 2
+  NEW PRIVATE THM HadwigerNelson.ThreeColourCharacter.exists_mem_box_of_forall_int
+  NEW PRIVATE THM HadwigerNelson.ThreeColourCharacter.winding_le_vertex
+`example`s: 2 at 34d9113b2, 2 in Proofs/HadwigerNelson/Arith/ThreeColourCharacter.lean; of the base's, missing as text: 0
+PASS: no statement and no definition changed
+CONTROL: 3 of 3 planted faults reported — the check can fail
