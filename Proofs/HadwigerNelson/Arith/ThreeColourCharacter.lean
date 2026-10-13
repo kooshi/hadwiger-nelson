@@ -64,8 +64,9 @@ theorem exists_int_vector_of_forall_neg {ι κ : Type*} [Fintype ι] [Finite κ]
   rw [hN, map_smul, smul_eq_mul]
   exact mul_neg_of_pos_of_neg (Nat.cast_pos.mpr hDpos) (hq' k)
 
-/-- **The winding's bound, read at a vertex of the box** (C1): for a relation `r`, the vertex `v` with `v_j = 2/3` where
-`0 ≤ r_j` and `1/3` elsewhere has `W r ≤ r · v` — `W.minRise_le` at `−r`, because `−min(−t, −2t) = 3 t v`. -/
+/-- **The winding's bound, read at a vertex of the box** (C1): for a relation `r`, the vertex `v` with `v_j = 2/3`
+where `0 ≤ r_j` and `v_j = 1/3` elsewhere has `W r ≤ r · v` — `W.minRise_le` at `−r`, because `−min(−t, −2t)` is `2t`
+for `0 ≤ t` and `t` otherwise, three times `t v_j`. -/
 private theorem winding_le_vertex {s : Fin m → A} (W : Winding s) (r : (relMap s).ker) :
     ((W.toHom r : ℤ) : ℝ) ≤
       ∑ j, (((r : Fin m → ℤ) j : ℤ) : ℝ) * (if 0 ≤ (r : Fin m → ℤ) j then 2 / 3 else 1 / 3) := by
@@ -87,11 +88,11 @@ private theorem winding_le_vertex {s : Fin m → A} (W : Winding s) (r : (relMap
   rw [← Finset.mul_sum] at h3'
   linarith
 
-/-- **The real-linear half of `Winding.exists_box_point`** (C2 with C3): for a real matrix `g` and a target `w`, if every
-integer combination `Σ_i N_i (g_i · v − w_i)` of the equations is non-negative at some vertex `v` of the box
-`[1/3, 2/3]^m`, a point of the box solves `g_i · x = w_i` for every `i`. (Otherwise a functional separates the image of the
-box, compact and convex, from `w`; it is negative at every vertex, and
-`exists_int_vector_of_forall_neg` makes its coefficients integers.) -/
+/-- **The real-linear half of `Winding.exists_box_point`** (C2 with C3): for a real matrix `g` and a target `w`, if
+every integer combination `Σ_i N_i (g_i · v − w_i)` of the equations is non-negative at some vertex `v` of the box
+`[1/3, 2/3]^m`, a point of the box solves `g_i · x = w_i` for every `i`. (Otherwise a functional separates the image
+of the box, compact and convex, from `w`; it is negative at every vertex, and `exists_int_vector_of_forall_neg` makes
+its coefficients integers.) -/
 private theorem exists_mem_box_of_forall_int {n : ℕ} (g : Fin n → Fin m → ℝ) (w : Fin n → ℝ)
     (h : ∀ N : Fin n → ℤ, ∃ b : Fin m → Bool,
       0 ≤ ∑ i, (N i : ℝ) * (∑ j, g i j * (if b j then 2 / 3 else 1 / 3) - w i)) :
@@ -239,13 +240,29 @@ theorem isClosed_band (k : ℕ) : IsClosed (band k) :=
 has a character of `M` with values in `B` on it, so has `U`. -/
 theorem bandSet_nonempty_of_finite {M : Type*} [AddCommGroup M] (U : Set M) {B : Set UnitAddCircle} (hB : IsClosed B)
     (h : ∀ S : Finset M, (S : Set M) ⊆ U → (bandSet (S : Set M) B).Nonempty) : (bandSet U B).Nonempty := by
-  sorry
+  classical
+  -- the additive maps are a closed, hence compact, set of functions `M → ℝ/ℤ`
+  have hcomp : IsCompact (Set.range ((↑) : (M →+ UnitAddCircle) → M → UnitAddCircle)) :=
+    (AddMonoidHom.isClosed_range_coe M UnitAddCircle).isCompact
+  -- one closed condition for each element of `U`; finitely many of them are met by the hypothesis's character
+  obtain ⟨_, ⟨θ, rfl⟩, hθ⟩ := hcomp.inter_iInter_nonempty (fun u : U => {φ : M → UnitAddCircle | φ u ∈ B})
+    (fun u => hB.preimage (continuous_apply (u : M))) fun t => by
+      obtain ⟨θ, hθ⟩ := h (t.image Subtype.val) fun x hx => by
+        obtain ⟨u, -, rfl⟩ := Finset.mem_image.mp (Finset.mem_coe.mp hx)
+        exact u.2
+      exact ⟨θ, ⟨θ, rfl⟩, Set.mem_iInter₂.mpr fun u hu =>
+        hθ u (Finset.mem_coe.mpr (Finset.mem_image_of_mem _ hu))⟩
+  exact ⟨θ, fun u hu => Set.mem_iInter.mp hθ ⟨u, hu⟩⟩
 
 /-- **NF4-S6 for a group**: a colouring `c : A → ZMod 3` that changes along every step in `U` gives a character of `A`
 with `θ(U) ⊆ [1/3, 2/3]`. -/
 theorem bandSet_three_nonempty_of_proper {U : Set A} {c : A → ZMod 3} (hc : ∀ a, ∀ u ∈ U, c (a + u) ≠ c a) :
     (bandSet U (band 3)).Nonempty := by
-  sorry
+  refine bandSet_nonempty_of_finite U (isClosed_band 3) fun S hS => ?_
+  -- a finite subset of `U`, listed along `Fin S.card`, is a family the colouring is proper along
+  obtain ⟨θ, hθ⟩ := exists_character_of_properAlong (fun j : Fin S.card => ((S.equivFin.symm j : S) : A)) (c := c)
+    fun a j => hc a _ (hS (S.equivFin.symm j).2)
+  exact ⟨θ, fun u hu => by simpa using hθ (S.equivFin ⟨u, hu⟩)⟩
 
 /-! ## §3 The plane over a subfield of `ℝ` -/
 
@@ -253,7 +270,14 @@ theorem bandSet_three_nonempty_of_proper {U : Set A} {c : A → ZMod 3} (hc : �
 graph on `F²` gives a character of `ℤ[U_F]` with values in `[1/3, 2/3]` on every unit vector of `F²`. -/
 theorem fieldBandSet_three_nonempty_of_colorable (F : Subfield ℝ)
     (h : ((unitDistance ℂ).induce (planeOver F)).Colorable 3) : (fieldBandSet F (band 3)).Nonempty := by
-  sorry
+  obtain ⟨C⟩ := h
+  -- `ℤ[U_F]` lies in the plane over `F`, so the colouring restricts to it; a unit vector is a step of length 1
+  have hmem : ∀ a : unitRing F, (a : ℂ) ∈ planeOver F := fun a => UnitRing.unitRingOver_le_planeOverSubring F a.2
+  refine bandSet_three_nonempty_of_proper (c := fun a : unitRing F => (C ⟨a, hmem a⟩ : ZMod 3)) fun a u hu => ?_
+  refine C.valid ?_
+  change (unitDistance ℂ).Adj ((a + u : unitRing F) : ℂ) (a : ℂ)
+  rw [unitDistance_adj, Subring.coe_add, dist_eq_norm, add_sub_cancel_left]
+  exact hu.2
 
 /-! ## Spec -/
 

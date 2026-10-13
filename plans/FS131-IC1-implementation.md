@@ -62,15 +62,47 @@ private helpers new.
 
 | leaf | how it was proved | lines |
 |---|---|---|
-| `exists_int_vector_of_forall_neg` (C3) | the plan's route as written: `isOpen_iInter_of_finite` with `isOpen_lt` and `LinearMap.continuous_of_finiteDimensional`; `(DenseRange.piMap fun _ => Rat.denseRange_cast).exists_mem_open`; `D = ∏ i, (q i).den`, `N i = (q i).num * (D / (q i).den)`, and `N = D • q` by `Rat.cast_def` | 19 |
-| `ThreeColour.Winding.exists_box_point` (L1.1) | the plan's C1–C4, in two private children and a composition. **`winding_le_vertex`** (C1): `W r ≤ Σ_j r_j v_j` at the vertex `v_j = 2/3` where `0 ≤ r_j`, `1/3` elsewhere — `W.minRise_le (-r)` with `min (−t) (2·(−t)) = −(if 0 ≤ t then 2t else t)` (`omega`), cast to `ℝ`. **`exists_mem_box_of_forall_int`** (C2 with C3), a statement about a real matrix and no winding: if every integer combination `Σ_i N_i (g_i · v − w_i)` is non-negative at some vertex `v`, a point of the box solves `g_i · x = w_i` — `geometric_hahn_banach_closed_point` for `Matrix.mulVecLin g '' box` (compact by `isCompact_univ_pi`, convex by `convex_pi` and `Convex.linear_image`) and the point `w`, so no translation; the functional in coordinates by `LinearMap.pi_apply_eq_sum_univ`; C3 read at `κ = Fin m → Bool`. The leaf: generators by `Submodule.fg_iff_exists_fin_generating_family` at `AddSubgroup.toIntSubmodule (relMap s).ker`; every relation an integer combination (`Submodule.mem_span_range_iff_exists_fun`); both sides additive (`hkey`, which is C4 and the hypothesis of the real-linear half at once) | 20 + 44 + 39 |
-| `exists_character_of_box_point` (L1.2) | `ψ r = ↑(Σ_j r_j x_j)` by `AddMonoidHom.mk'`; `(relMap s).rangeRestrict.liftOfSurjective` in place of the plan's `QuotientAddGroup.lift` with `quotientKerEquivRange` (one step, and `liftOfRightInverse_comp_apply` is its equation); Baer as planned; `relMap s (Pi.single j 1) = s j` | 26 |
+| `exists_int_vector_of_forall_neg` (C3) | the plan's route as written: `isOpen_iInter_of_finite` with `isOpen_lt` and `LinearMap.continuous_of_finiteDimensional`; `(DenseRange.piMap fun _ => Rat.denseRange_cast).exists_mem_open`; `D = ∏ i, (q i).den`, `N i = (q i).num * (D / (q i).den)`, and `N = D • q` by `Rat.cast_def` | 20 |
+| `ThreeColour.Winding.exists_box_point` (L1.1) | the plan's C1–C4, in two private children and a composition. **`winding_le_vertex`** (C1): `W r ≤ Σ_j r_j v_j` at the vertex `v_j = 2/3` where `0 ≤ r_j`, `1/3` elsewhere — `W.minRise_le (-r)` with `min (−t) (2·(−t)) = −(if 0 ≤ t then 2t else t)` (`omega`), cast to `ℝ`. **`exists_mem_box_of_forall_int`** (C2 with C3), a statement about a real matrix and no winding: if every integer combination `Σ_i N_i (g_i · v − w_i)` is non-negative at some vertex `v`, a point of the box solves `g_i · x = w_i` — `geometric_hahn_banach_closed_point` for `Matrix.mulVecLin g '' box` (compact by `isCompact_univ_pi`, convex by `convex_pi` and `Convex.linear_image`) and the point `w`, so no translation; the functional in coordinates by `LinearMap.pi_apply_eq_sum_univ`; C3 read at `κ = Fin m → Bool`. The leaf: generators by `Submodule.fg_iff_exists_fin_generating_family` at `AddSubgroup.toIntSubmodule (relMap s).ker`; every relation an integer combination (`Submodule.mem_span_range_iff_exists_fun`); both sides additive (`hkey`, which is C4 and the hypothesis of the real-linear half at once) | 17 + 40 + 39 |
+| `exists_character_of_box_point` (L1.2) | `ψ r = ↑(Σ_j r_j x_j)` by `AddMonoidHom.mk'`; `(relMap s).rangeRestrict.liftOfSurjective` in place of the plan's `QuotientAddGroup.lift` with `quotientKerEquivRange` (one step, and `liftOfRightInverse_comp_apply` is its equation); Baer as planned; `relMap s (Pi.single j 1) = s j` | 27 |
 | `exists_character_of_properAlong` (L1.3) | the plan's three lines; `Nat.cast_ofNat` and `linarith` for `2/3 = 1 − 1/3` | 8 |
 | `isClosed_band` (L1.4) | `(isCompact_Icc.image (AddCircle.continuous_mk' 1)).isClosed`, as planned | 1 |
 
-**Price.** The plan guessed 150–250 lines for L1.1; it is 103 with its children, and each of the five leaves elaborated on the
+**Price.** The plan guessed 150–250 lines for L1.1; it is 96 lines of proof with its children (the counts in this table are proof lines read from the file by script, stage 3), and each of the five leaves elaborated on the
 first or second run. Nothing resisted; no route of the plan failed. The whole module elaborates in 5 s at 3.6 GB.
 
 **One difference from the plan, in my favour, said so it is not read as the plan's**: the separation is applied to the image of
 the box under the *linear* map and the target point `w`, not to the image under the affine map and the origin — the same theorem
 with no translation to carry.
+
+## Stage 3 — SAVED: the last three leaves (L1.5, L1.6, L1.7); the file has no `sorry`
+
+Under `lake env lean` with `-DautoImplicit=false -DrelaxedAutoImplicit=false` the module reads **exit 0 and no message at
+all** (`data/fs131/ic1/logs/ThreeColourCharacter.out`, 0 bytes; 5.8 s, 3.6 GB); with `-Dlinter.missingDocs=true` added (the
+lakefile's third option) a copy reads 0 warnings (`logs/axioms-footer.out`, first line). Not yet the build.
+
+| leaf | how it was proved | proof lines |
+|---|---|---|
+| `bandSet_nonempty_of_finite` (L1.5) | the plan's compactness, by the finite intersection property in place of a directed family: the additive maps are closed in `M → ℝ/ℤ` (`AddMonoidHom.isClosed_range_coe`), hence compact; one closed condition `{φ | φ u ∈ B}` per `u ∈ U` (`hB.preimage (continuous_apply u)`); `IsCompact.inter_iInter_nonempty`, whose hypothesis at a finite set `t` of points of `U` is `h` at `t.image Subtype.val`. `U = ∅` needs no case: the compact set is the additive maps | 13 |
+| `bandSet_three_nonempty_of_proper` (L1.6) | as planned: L1.5 at `band 3` with L1.4; `S.equivFin`; L1.3 | 5 |
+| `fieldBandSet_three_nonempty_of_colorable` (L1.7) | as planned: `UnitRing.unitRingOver_le_planeOverSubring` puts `ℤ[U_F]` in the plane; the colouring read in `ZMod 3` by unfolding; `dist (a + u) a = ‖u‖ = 1` | 8 |
+
+**No statement changed** (`data/fs131/ic1/statements.sh`, `logs/statements-stage3.out`): the skeleton at `34d9113b2` and the working
+file, each elaborated at one path with the footer — 9 named constants compared (9 theorems: the eight leaves and
+`exists_character_one_two`), kind and stored type character for character, **PASS**; 2 `example`s of the skeleton, both in the
+working file as text; new: two private theorems (`winding_le_vertex`, `exists_mem_box_of_forall_int`), no new public name, no
+`axiom`. Control: 3 of 3 planted faults reported; and on a real file (stage 1) a hypothesis added to one leaf is reported by name.
+The diff against the skeleton is 196 insertions and 9 deletions, the deletions being the eight `sorry` lines with their `:= by` and
+one `:= by` that became `:=`.
+
+**Axioms, before the build** (`data/fs131/ic1/axioms_footer.sh`, `axioms-footer.txt`, `logs/axioms-footer.out`): a copy of the module
+with `lean/AxiomsFooter.lean` appended prints the axioms of all **11** theorems the file declares (9 public, 2 private): each is
+exactly `[Classical.choice, Quot.sound, propext]`. No declared outside theorem is read, and none was expected: the plan names none
+for this module. Control: the same on a copy where `isClosed_band` is `sorry` reports `sorryAx` on exactly that leaf and the two
+that read it (`bandSet_three_nonempty_of_proper`, `fieldBandSet_three_nonempty_of_colorable`), and on nothing else
+(`axioms-footer.control.txt`).
+
+**Models of the hypotheses** (`data/fs131/ic1/lean/ModelsBody.lean`, `models.sh copy`: exit 0, 8 `example`s; control: the first
+model moved to `c = 1/2`, where the functional is positive, is an error, `logs/Models-control.out`). § Drafts has the table.
+
+**Theorems this phase proved** is filled below from the build's print, at the last stage.
