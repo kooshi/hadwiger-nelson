@@ -1,0 +1,18 @@
+data/fs131/it1/probes/P4q.lean:7:8: warning: declaration uses `sorry`
+Try this:
+  [apply] simp only [Complex.mul_re, Complex.sub_re, Complex.re_ofNat, Complex.I_re, sub_zero, Complex.sub_im,
+    Complex.im_ofNat, Complex.I_im, zero_sub, neg_mul, one_mul, sub_neg_eq_add, Complex.add_re, add_zero]
+Try this:
+  [apply] simp only [Complex.mul_im, Complex.sub_re, Complex.re_ofNat, Complex.I_re, sub_zero, Complex.sub_im,
+    Complex.im_ofNat, Complex.I_im, zero_sub, neg_mul, one_mul, Complex.add_im, zero_add]
+Try this:
+  [apply] simp only [Complex.mul_re, mul_neg, sub_neg_eq_add, Complex.one_re]
+Try this:
+  [apply] simp only [Complex.mul_im, mul_neg, Complex.one_im]
+Try this:
+  [apply] simp only [Complex.sub_re, Complex.add_re, Complex.one_re, Complex.inv_re, Complex.re_ofNat,
+    Complex.normSq_ofNat, div_self_mul_self']
+Try this:
+  [apply] simp only [Complex.sub_im, Complex.add_im, add_neg_cancel, Complex.one_im, sub_self, Complex.inv_im,
+    Complex.im_ofNat, neg_zero, Complex.normSq_ofNat, zero_div]
+data/fs131/it1/probes/P4q.lean:63:6: error: No goals to be solved

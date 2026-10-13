@@ -1,0 +1,40 @@
+JOB FS131-IT1 — DONE   harness≈300k (own≈200k; both guesses, I cannot read the count)
+
+RESULT:
+- All ten leaves of `Proofs/HadwigerNelson/Arith/TorsionExtraction.lean` are proved; the file has no `sorry`; no statement changed. Built once: exit 0, 6m28s at BATCH=8, 4.4 GiB peak, no warning from the file.
+- TRUE, [kernel], axioms `[propext, Classical.choice, Quot.sound]`, each (namespace `HadwigerNelson.TorsionExtraction`; printed from the built module, `data/fs131/it1/axioms.txt`):
+  - `layer_step` — read against FS81-T3's step: four reals of absolute value at most 1/6 whose forms `2a' − b' − 2a − b` and `a' + 2b' + a − 2b` are integers are a rotation step by `(3 − 4i)/5` or all at absolute value 1/6.
+  - `layer_dichotomy` — FS81-T3 in sequence form: such a two-sided sequence is a rotation orbit or sits at corners throughout.
+  - `tendsto_layer` — for `θ ∈ Θ₃(R_F)` and a unit vector `b`, `θ(25⁻ⁿ b)` converges, to 1/2, 1/3 or 2/3.
+  - `exists_torsion_mem_fieldBandSet` — NF4-S7 (FS91-J02-L1): `Θ₃(R_F) ≠ ∅ ⟹ Θ₃(R_F) ∩ T₆ ≠ ∅`, every subfield `F ⊆ ℝ`.
+  - `exists_zmod_hom_of_mem_torsionBy` — a character killed by `N ≠ 0` is a `ZMod N`-valued additive map followed by `ZMod N ↪ ℝ/ℤ`.
+  - `colorable_two_iff_fieldBandSet_two_nonempty` — the plane over `F` is two-colourable iff some character of `ℤ[U_F]` is 1/2 at every unit vector.
+  - `mem_fieldBandSet_two_of_inv_three_mem` — with `1/3 ∈ ℤ[U_F]`, a point of `Θ₃ ∩ T₆` is in `Θ₂`.
+  - `inv_natCast_mem_unitRing_of_sqrt_mem` — `1/n ∈ ℤ[U_F]` for `d + 1 = 4n`, `F ∋ √d`.
+  - `inv_three_mem_unitRing_of_sqrt_mem` — `1/3 ∈ ℤ[U_F]` for `F ∋ √d`, `d ≡ 11 (mod 12)`.
+  - `not_colorable_two_of_sqrt_mem` — the plane over `F ∋ √d`, `d ≡ 3 (mod 4)`, is not two-colourable.
+  - `three_le_chromaticNumber_planeOver_of_sqrt_mem` (the planner's composition, now complete) — `χ(F²) ≥ 3` for every subfield `F ∋ √d`, `d ≡ 3 (mod 4)`; read against the claim list's dated line G-1. The value is prior art.
+- NOT YET KERNEL THEOREMS OF THIS TREE — the five headline compositions `colorable_two_of_inv_three_mem`, `four_le_chromaticNumber_planeOver_of_inv_three_mem`, `chromaticNumber_planeOver_ne_three_of_inv_three_mem`, `four_le_chromaticNumber_planeOver_of_sqrt_mem`, `four_le_chromaticNumber_planeOver_fieldOfRadicands` (NF4-THEOREM (c) and (a)'s lower bound) print the standard three and `sorryAx`. The `sorryAx` is the upstream leaf's, `ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable` (another job's module), and nothing else's: with that statement as a hypothesis the same compositions print the standard three (`data/fs131/it1/models.txt`). Nothing changes here when that module lands.
+- No statement changed, from the kernel's side: the compiled module's constants before the first rebuild against after the build — 18 named constants (17 stored types; `inv5`'s type and value), PASS; 0 new named constants, 10 new private theorems. Controls: three faults planted in a dump, 3 of 3 reported; one hypothesis added to one statement in a copy of the file, reported as exactly that statement.
+
+RECORD: plans/FS131-IT1-implementation.md   COMMITS: 3f7525b5c (stage 1), 15466a33f and 1b5a6881d (stage 2), c007de223 and 2e76b13ea (stage 3), 10883bf85 (stage 4 and the drafts), and this report's commit — all on `fs131-wr2`, none pushed (the brief's instruction).
+
+INVENTORY:
+- result — ten leaves and one composition [kernel] on the standard three; ten private helpers, each on the standard three — `Proofs/HadwigerNelson/Arith/TorsionExtraction.lean`; `data/fs131/it1/axioms.txt`, `axioms-footer.txt`
+- result — the five headline compositions rest on one upstream leaf and on nothing else unproved — `data/fs131/it1/models.txt` (`colorable_two_of_upstream`, `four_le_eleven_of_upstream`); `data/fs131/it1/sorry-expected.txt`
+- generalization — FS81-T4 in the ledger's own words (`1/3 ∈ ℤ[U_F]` and `Θ₃(R_F) ≠ ∅` give a two-colouring) and clause (a) in character form (`Θ₃(R_F) = ∅` for every `F ∋ √d`, `d ≡ 11 (mod 12)`) are two-line compositions of this module's leaves, on the standard three today with no upstream leaf; stated only in the probe file, not in the library — `data/fs131/it1/lean/Models.lean` (`colorable_two_of_fieldBandSet_three_nonempty`, `fieldBandSet_three_empty_of_sqrt_mem`); record § Drafts for the landing, item 4
+- generalization — `unitRing_induction` (private here) is the argument `CharacterColouring.gluing_field` inlines and `ThreeColourCriterion`'s two-colour end needs again; stated once in `CharacterColouring` it would serve all three — record § Drafts for the landing, item 4
+- result — the headline at `d = 11` is word for word row 73's theorem, which the kernel holds by a 204-point witness: one instance of the family held independently — `data/fs131/it1/models.txt` (`four_le_eleven_by_witness`, `four_le_eleven_by_family`)
+- question for another lane — the only fields where `colorable_two_of_inv_three_mem` and `mem_fieldBandSet_two_of_inv_three_mem` have all their hypotheses at once are those with `1/3 ∈ ℤ[U_F]` and a two-colourable plane (`ℚ(√2)`: `1/3 = 1 − v − v̄`, `v = (1 + 2√2 i)/3`, kernel-checked in the probe); the two-colouring of `ℚ(√2)²` is `DyadicQuadratic.colorable_two_planeOver_sqrt`, a `sorry` in this tree. Likewise `Θ₃(R_F) ≠ ∅` (the hypothesis of `exists_torsion_mem_fieldBandSet` and `tendsto_layer`) follows from any two-colourable plane by this module alone, and this tree holds no such plane in that form — record § Drafts for the landing, item 2
+- prediction scored — the plan priced `tendsto_layer` at 150–200 lines and the two-colour criterion at 120–180: they took about 190 (with four private children) and about 70. My own price for `tendsto_layer` after eight leaves, 120 lines, was low by a third — record, stages 2 and 3
+- slip — mine: the first control of the quotation check changed a digit in two quotations' labels, so it fired for the wrong reason; moved past the label before it was believed. And the probe file of models first ran with four tactic errors and three linter warnings; fixed and re-run clean, its prints unchanged — record, stages 1 and 4
+- slip — the second planner's record names the new leaf of its finding D-4 `exists_addMonoidHom_zmod` in § Stage 2 and `exists_zmod_hom_of_mem_torsionBy` in § Stage 4's table; the file has the second — `plans/FS131-KN5-three-four-colours-passes.md` § Stage 2, D-4
+- tool defect — a statement printed from two paths differs in an instance binder's stored name (the defect FS131-IU1 named), seen here on `exists_zmod_hom_of_mem_torsionBy`; every comparison here is made at one path — `data/fs131/it1/logs/statements-compiled-vs-footer.out`
+- correction owed — none found: every leaf was true as typed and every plan held; the plan's names all exist at the pin (the base-point induction used is `Int.inductionOn'`, where the plan says `Int.induction_on` "shifted")
+- statement defect — none
+
+HELD FOR THE COORDINATOR:
+- The audit block (`data/fs131/it1/audit-block.txt`, 18 records) reads CLEAN only once `Arith/ThreeColourCharacter` has no `sorry`; until then five of its records print `sorryAx`. The check `read_axioms.py … --sorry sorry-expected.txt` is written to go red when that module is proved (a listed record without `sorryAx` fails), so the list is emptied at the landing, not forgotten.
+- Whether the two character-form statements (first generalization above) are stated in the library is the planner's decision; they would give the line a headline on the standard three that does not wait for the upstream module.
+- This job ran no gate (`axioms.sh`, `vacuity.sh`, `assumptions.sh`, `dupnames.sh`): it ran the build, the environment linters (exit 0, fourteen passed) and `tools/check_architecture.py` (PASS). Drafts for `ARCHITECTURE.md`, `LEDGER.md` row 82, the Frontier clause, the Proof Atlas and five `LEAN.md` lines are in the record, each with its slot; the ledger draft says in words that it is true only after the upstream module lands.
+- Nothing is running or queued from this job.
