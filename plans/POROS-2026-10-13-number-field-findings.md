@@ -124,7 +124,10 @@ question: is-measure-rigidity-at-a-number-field-in-print
   cost: one row, two bibliography entries, perhaps one derivation section
   hunch: partly ours by hand — the zero-entropy half is a transfer of a method, by the sentence quoted
   falsifier: a printed theorem whose hypotheses the unit-vector group of a real number field meets as stated and whose conclusion is the statement row 120 uses
-  rank: 1
+  rank: 3
+
+*(Ranked 1 when written. Answered at stage 2 — partly ours by hand, § 2.1 item 1, and the coordinator's Amendment 1 —
+and re-ranked third at stage 3 so that the open cards of § 3.8 lead.)*
 
 ### 1.7 Invention signal (stage 1)
 
@@ -254,6 +257,315 @@ result (row 120).
 | C25 | no-gos and reductions at four colours on lattices: no cell-local certificate; rank one reduced; triangle-free rigidity in the abstract class equivalent in the plane to Soifer's Open Problem 55.1 | 80, 86, 108 | hand, two derivations (rows 80, 86) | "the classification of four-colour edge-local heights over every generating set, the four no-gos by format …"; "the triangle-free abstract rigidity and its Soifer calibration" | "the four-colour grid's cohomological triviality (`[CGHO2025coh]`), the triangular lattice's four-colour height (`[MooreNewman2000]`), the Zig-zag Theorem (`[SimonyiTardos2006]`)" | nothing |
 | C26 | products: from a Borel `k`-colouring of `X × Cay(K, T)` with a mixing compact factor one reads a colouring of `X`; when every colouring of `G × H` comes from `G` | 109, 114–115 | hand | "the mixing selection"; "the product criterion `χ(E_k(G)) ≤ k` for gap-free `G` …" | "the mixing selection's complete-graph case (Burr–Erdős–Lovász, `[Tardif2008]` Thm 3.2) …" | nothing |
 
+## Stage 3 — SAVED: the ranking
+
+### 3.1 What decided the order
+
+Two things that were not in the record when the brief was written.
+
+**Kooshi's word W2** (Amendment 2): a finding resting on measure rigidity is judged kernel-checked given only the
+printed theorem of Einsiedler and Lindenstrauss. Under Amendment 1's form the five-colour theorem would have ranked
+below the three-colour one, because its published sentence would have been conditional on a claim of ours; under W2 it
+is conditional on a refereed theorem, which is how the field cites.
+
+**The search of today** (`data/fs131/pn1/arxiv-2026-10-13.md`: the queries, two abstracts verbatim, the passages
+quoted below with their extraction lines). Two papers posted last week, neither in `BIBLIOGRAPHY.md`, both in this
+project's exact territory:
+
+- **James Davies, *Measurable obstructions for unmeasurable colourings*, arXiv:2610.12301, 8 October 2026.** Its
+  Theorem 1.1: `χ(ℚ^d) = χ(ℝ^d) = χ^(m)(ℝ^d)` for `d ⩾ 5`, and the same for the independence densities; in dimension
+  four "there exists some positive integer n such that χ(R⁴) = χ(Q(√n)⁴)". Then, of the plane (extraction ll. 249–259;
+  the radicals restored from the layout): "In the plane we suspect that a more complicated extension of Q² might be
+  required. Nevertheless, the problem of determining the chromatic number of Q(√n)² has been well studied [32, 39, 49,
+  56]. In particular, it is known that Q(√n)² is four-colourable for n ≢ 47, 143, 167 (mod 168). **It would be
+  particularly interesting to determine if the remaining cases are six-colourable and if any of them contain a five
+  chromatic unit distance graph.**" (emphasis mine). His [32], [39], [49], [56] are Fischer 1990, Johnson, Moorhouse 2010 and Payne.
+  That is the five-colour theorem's question, posed by name five days ago by a specialist who cites this literature
+  and holds no answer; and his residue classes are row 117's exactly.
+- **Jonathan Davidson, *Coloring Monomial Cayley Graphs: The One-Parameter Case*, arXiv:2610.09474, 7 October 2026.**
+  Cayley graphs on `ℤ[α]` with steps `±α^k`, `|α| = 1`; colourings from additive characters whose values on the steps
+  keep away from zero (his figure's "shaded band is [1/3, 2/3]"); lower bounds from finite subgraphs by a solver. It
+  cites Polymath16 and Cervantes–Krebs and none of Fischer, Johnson, Moorhouse, Madore or Ellenberg. It asks "Can two
+  parameters already force five colors?" and "how few parameters suffice to attain the chromatic number of the plane,
+  and which relations make them do so?" (ll. 2064, 2081–2082). It has the character test as a sufficient one; row 79
+  is its converse at three colours.
+
+Both raise the interest of what is ranked below, and both put a date on it.
+
+### 3.2 The order
+
+Ranked by interest to the field, by § 1.4's criterion. **The last two columns are kept out of the order**: which
+findings rest on the measure-rigidity chain (so the kernel lane sees what its first member unlocks), and what the
+record says the kernel holds today.
+
+| rank | id | the finding | rests on the chain | the kernel today, as the record states it |
+|---|---|---|---|---|
+| 1 | C3 | five colours: `χ(ℚ(√47)²) = 5`, and the plane over a real number field has the least residue value whenever that is at most 5 | **yes** | the composition, over named hypotheses; `χ(ℚ(√47)²) ≤ 5` with none (row 127) |
+| 2 | C1 + C2 | three and four colours with no hypothesis: four for every `ℚ(√m)`, `m ≡ 11 (mod 12)`; the three-colour criterion over every real number field | no | `m = 11` (row 73); the forward half of the three-colour criterion and `ℚ(√167)` (row 119) |
+| 3 | C22 + C23 | the plane over a number field against the real plane: `χ(ℚ(√635087)²) = χ(ℝ²)`; the independence ratio of `F²` | **yes** | nothing; a statement over named hypotheses is drafted (`plans/STUB-main-clause-five-kernel.md`, banner) |
+| 4 | C5 | the `p`-adic Hadwiger–Nelson problem: no | no | `χ(UD(ℤ/121, 2)) = 5` (row 75) |
+| 5 | C6 | a Cayley graph of a lattice is three-colourable iff a character puts its generators in `[1/3, 2/3]` | no | the forward half, in winding form, with a certificate checker (row 119) |
+| 6 | C4 | measure rigidity for the norm-one group of `F(i)` | it is the chain | a named hypothesis (`MR`, `PE2`, `EFPlus`) |
+| 7 | C7 | four-colourings of `ℚ⁴` forbidding two distances | no | nothing |
+| 8 | C8 | the ring the unit vectors of `F²` generate | no | prime inversion in valuation form (row 105) |
+| 9 | C14 | `χ_f(ℚ(√3,√11)²) = 4` | no | the upper bound (row 57) |
+| 10 | C10, C16, C9, C13 | what is already kernel-checked and a reader will look for: the plane over `ℚ(√3,√11)` is four-chromatic (the value Fischer's); no pair is forced at five colours over a field with a prime of residue field `𝔽₁₁` (Gibbs's question); the chain theorem (the outside model's); the counterexample to Fischer's Remark 1 | no | done |
+| 11–18 | C18, C20, C21, C17, C19, C12, C15, C24–C26 | periodicity on de Grey's lattice; the finite planes' window; character colourings; the rest | no | mixed; C12, C15, C24 done |
+
+### 3.3 The first ten, each as the theorem a reader would look for
+
+No coined term is used undefined. In every statement `F` is a subfield of `ℝ`, `F²` carries the graph joining points
+at Euclidean distance 1, and a *unit vector* is an element `z` of `F(i)` with `z z̄ = 1`.
+
+**Rank 1 — C3. Five colours.**
+- *The theorem.* (Given the printed theorem of Einsiedler and Lindenstrauss.) The unit-distance graph on `ℚ(√47)²` has chromatic number 5. For a real quadratic field `ℚ(√n)`,
+  `n` squarefree, the plane needs at least five colours exactly when `n ≡ 47, 143, 167 (mod 168)`. For every real
+  number field `F`: let `L(F)` be the least chromatic number among the finite graphs `Cay(𝒪/𝔓^m, image of the unit
+  vectors)`, `𝔓` a prime of `F(i)` fixed by complex conjugation, `m ⩾ 1`; then `χ(F²) ⩽ L(F)`, and `χ(F²) ⩾ min(L(F),
+  5)`. Corollary: a finite triangle-free five-chromatic unit-distance graph exists in the plane (none is exhibited).
+  The definition of `L(F)` here is my reading of the kernel's `localBound` (every level `m`, the image of the unit
+  vectors); the planner fixes it from FS100-COR, where the record notes one hand step between two forms of it
+  (`plans/STUB-main-clause-five-kernel.md`, "Caveat carried from X11K2").
+- *Entry.* `plans/FS100-derivation.md` FS100-Q47 and FS100-COR (with CLS, SPC, TCA); `plans/FS84-SI-D-derivation.md`
+  (J45's lemmas); `plans/R88-derivation.md` R88-TCA. Kernel names: `SpectralChain.min_localBound_five_le_chromaticNumber`,
+  `SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five_of_chain`.
+- *Who asked.* `[Davies2026]` (the passage of § 3.1; read today in the PDF's text extraction at that passage, its
+  abstract and Theorem 1.1 — the other 45 pages unread); `[Johnson2006]` p. 214, the ">" question, "very interesting,
+  if the answer is yes!" (read in full 2026-09-27); `[Moorhouse2010slides]`, "What about χ(Q(√47)²)?" (the quoted
+  slides read in the text layer; the rest of the deck not); `[ExooIsmailescu2019]`, concluding section, "what is the
+  smallest subfield of E2 that requires 5 colors?" (its reading status not looked up today); `[Soifer2024]` p. 699,
+  Open Problem 55.1, in its existence half only ("the text confirmed in the held PDF by the owner"); `[Fischer1990]`
+  § 1 (held and read).
+- *What it rests on.* By hand (rows 121, 123 at the grades of § 2.3); the composition kernel-checked over named
+  hypotheses (row 127). Full form, by W2: conditional on `[EinsiedlerLindenstrauss2022]`'s theorem alone — and on
+  three printed classical inputs the gate already classes as outside (Bochner on a locally compact abelian group;
+  Markov–Kakutani; Weil's bound). It also uses the all-levels certificates at 11 and 19, accepted by a standalone
+  checker and not by the kernel (row 123: "FS-66's certificates at 11 and 19 re-run CERTIFIED").
+- *The first objection.* "Given what, exactly?" — which printed statement is declared is the first card (§ 3.8). Then:
+  no graph is exhibited, and Soifer's problem says "Construct"; the measure-rigidity step's "complex-place case [was]
+  never exercised on an instance" (row 123); `L(F)` must be defined in the statement, as above, or the theorem reads
+  as a tautology; the upper bound is Moorhouse's, Manturov's and Madore's and is in the kernel at `ℚ(√47)` only.
+
+**Rank 2 — C1 + C2. Three and four colours, with no hypothesis.** One family; the head statement is the table.
+- *The theorem.* (a) For every squarefree `m ≡ 11 (mod 12)`, `χ(ℚ(√m)²) ⩾ 4`. So, with the printed values:
+  `χ(ℚ(√m)²) = 2` for `m ≢ 3 (mod 4)`; `3` for `m ≡ 3, 7 (mod 12)`; `4` for `m ≡ 11 (mod 12)` outside the classes
+  `47, 143, 167 (mod 168)`; and at least 4 in those. (b) For every real number field `F` whose plane is not bipartite:
+  `χ(F²) = 3` iff some prime of `F` above 3 has residue field `𝔽₃`. (c) For any subfield `F` of `ℝ`: if `1/3` is an
+  integer combination of unit vectors and `F²` has an odd cycle, then `χ(F²) ⩾ 4`.
+- *Entry.* (a), (c): `plans/FS81-derivation.md` T1–T7. (b): `plans/FS91-derivation.md` FS91-J02-T2, J02-T3, J09-J4.
+- *Who asked.* `[Johnson2000]` p. 176 and `[Johnson2006]` p. 214 (the two passages of § 2.1; both read in full
+  2026-09-27); `[Fischer1990]` § 1; `[BendaPerles2000]` p. 126, Open Question (4), which is `[Johnson2000]`'s Problem
+  4.4 and `[Soifer2024]`'s Open Problem 11.6 ("each read in the source 2026-09-27"). `[Davies2026]` states the upper
+  bound for these planes as what "is known"; the exact value is this finding.
+- *What it rests on.* By hand: row 82 "two independent derivations", row 99 "S1 three derivations". Kernel-checked
+  already: `m = 11` on the standard three axioms (row 73) — which alone answers Johnson 2006's "does there exist" —
+  and the forward half of the three-colour criterion (row 119). Conditional on nothing unprinted: row 99's route uses
+  Weil's bound, row 82's uses none.
+- *The first objection.* Attribution: the two-colour classification over every real number field and the
+  three-colour one where `√3 ∈ F` are the outside model's (§ 2.1 item 6); the relation at `m ≡ 23 (mod 24)` and the
+  values 2 and 3 are Fischer's and Johnson's; every upper bound is prior art — and at the level of a field the kernel
+  does not hold it (row 57: "**Not proved:** that a number field with a conjugation-fixed prime supplies the valuation
+  subring …"), so an "=" in the Lean statement needs that gap closed. Scope: (b) is for number fields; row 99 records
+  where a wider reading fails.
+
+**Rank 3 — C22 + C23. A number field's plane against the real plane.**
+- *The theorem.* (Given the same printed theorem.) Let `F` be a totally real number field such that at every prime of `F(i)` fixed by complex
+  conjugation the finite graphs above have all non-trivial normalised eigenvalues below `1/5` in absolute value.
+  Then `χ(F²) = χ(ℝ²)`. This holds for `ℚ(√635087)` and for `ℚ(√3,√5,√7,√11)`, the field of de Grey's graph. With
+  `[OAIMath2026]`: `χ(ℚ(√635087)²) ∈ {6, 7}`, and since that plane has no unit triangle, a finite triangle-free
+  six-chromatic unit-distance graph exists. Density form: for a real number field `F`, the finitary independence
+  ratio of `F²` (row 129's `α₁(F²)`; its definition to be taken from the entry) is the larger of `m₁(ℝ²)` and the best
+  all-levels independence ratio among the finite graphs at its primes.
+- *Entry.* `plans/FS103-derivation.md` § 1 (FS103-LB, SEL, F1, 635, 635TF, DG; FRAC, TJ, ROUND).
+- *Who would care.* `[Davies2026]`: his Theorem 1.1 is this statement for `ℚ^d`, `d ⩾ 5`, and for a quadratic
+  extension in dimension four; of the plane he writes "we cannot reduce colouring R^d to colouring Q^d for d = 2, 3, 4"
+  and "we suspect that a more complicated extension of Q² might be required". `[BendaPerles2000]` pp. 117–118 (the
+  maximum is attained at some number field; none was named); `[Payne2009]`.
+- *What it rests on.* By hand (row 128: "the load-bearing step two derivations blind to each other"; measure
+  rigidity at degree 16 "one checking walk"). Conditional on the chain; "∈ {6, 7}" on `[OAIMath2026]`'s theorem,
+  already a declared outside theorem here.
+- *The first objection.* An expert suspects the opposite (the second card, § 3.8). The plane equality
+  `χ(ℝ²) = χ_m⁰(ℝ²)` is `[OAIMath2026]`'s — "independent, and theirs is the theorem" (row 128) — so ours is the field
+  half only. The eigenvalue condition is over infinitely many primes: the statement must say how it is verified.
+
+**Rank 4 — C5. The `p`-adic Hadwiger–Nelson problem.**
+- *The theorem.* For every prime `p ≡ 3 (mod 4)` the Borel chromatic number of the graph on `ℚ_p²` joining `x`, `y`
+  with `(x₁ − y₁)² + (x₂ − y₂)² = 1` is at least `1 + (p + 1)/(2√p)`; so it is not bounded in `p`. It is 4 at
+  `p = 7`, 5 at `p = 11` and `p = 19`, and between 6 and 8 at `p = 23`.
+- *Entry.* `plans/FS66-derivation.md` T7 (the bound); T8 and L1–L6 (the values).
+- *Who asked.* `[BardestaniMallahiKarai2017]`, Question 1, Israel J. Math. 217 ("read first-hand, §1–§2", arXiv v4
+  p. 2): "Is it true that there exists a universal constant B (independent of p) such that χ_Bor(QG_{𝒬_p}) ≤ B …?";
+  `[Madore2015]` ¶1.5 for the plain number, which this does not touch.
+- *What it rests on.* By hand; **no second derivation is filed** for T7. Conditional on two printed theorems: the
+  measurable ratio bound as the posers' own Theorem 2.5 states it, and Weil's bound. The values: exact certificates
+  accepted by a standalone checker, joined to the statement by six hand links; the upper halves prior art.
+- *The first objection.* "Why did the posers not see it?" — the statement must show the one new step, the bound at
+  levels two and above. And the plain chromatic number is untouched: the Lean statement must say Borel.
+
+**Rank 5 — C6. Three-colourings of lattice Cayley graphs.**
+- *The theorem.* Let `A` be a finitely generated torsion-free abelian group and `S = −S ⊂ A ∖ {0}` finite. Then
+  `Cay(A, S)` is three-colourable iff some homomorphism `θ : A → ℝ/ℤ` has `θ(S) ⊆ [1/3, 2/3]`, iff it has a
+  three-colouring periodic under a subgroup of finite index; and the periodic three-colourings are dense among all.
+- *Entry.* `plans/FS73-derivation.md` T22–T24 (with T21–T30, T39–T45); the kernel form `ThreeColour.lean`,
+  `ThetaCert.lean`.
+- *Who asked.* `[Ellenberg2018]`, MathOverflow 304715 (read in full through the API; not held, so paraphrased in
+  the record); Gibbs and Mixon on Polymath16 (held); `[CGHO2025bg]` Question 6.2 (read at § 1 and § 6.2). And as of
+  last week a consumer: `[Davidson2026]` tests colourability by such characters and has no converse.
+- *What it rests on.* By hand, "two independent derivations" (row 79). Nothing unprinted.
+- *The first objection.* Ellenberg asked for every `k`; this is `k = 3`, and at four the record has only no-gos. The
+  height lift is Chandgotia's, and "density at the **standard** generators is expected folklore … and not claimed".
+
+**Rank 6 — C4. Measure rigidity for the norm-one group.** *The theorem*, as row 120 states it: "for every real number
+field `F` with `R_F = O′` …, every `U_F`-invariant finite positive measure on `R̂` with `τ(E) = 0` is a multiple of
+Haar measure". I have not opened the entry, so the set `E` is not defined here: **the reader's statement must be
+fixed from `plans/FS100-derivation.md` FS100-MR, not from this line.** *Entry:* FS100-PE2, FS100-EFP, FS100-MR;
+`plans/FS105-derivation.md` FS105-DED. *Who would care:* ergodic theorists; nobody posed it. Its nearest in print are
+`[LacaWarren2018]`'s conjecture (the finitely generated case, open) and `[OAIMath2026]` Thm 2.3 (the divisible case).
+*Rests on:* `[EinsiedlerLindenstrauss2022]` by statement. *The first objection:* a reader will take it for a claim
+about ×2×3; the statement must show that the group is infinitely generated and that this is what is used (row 120:
+"MR was never the classical finitely generated question").
+
+**Rank 7 — C7. Rational four-space.** *The theorem:* for `d > 0` with `d² ∈ ℚ`, a proper four-colouring of the
+unit-distance graph on `ℚ⁴` with no monochromatic pair at distance `d` exists iff `d² = p/q` with `p`, `q` odd.
+*Entry:* `data/consolidation-2026-09-27/lv/record.md` LV-T3. *Who asked:* `[Johnson2006]` p. 212, "I believe the
+following is still open". *Rests on:* "[derived, two minds, one blind]"; `[Zaks1999]` Lemma 1 (read in full).
+*The first objection:* it has no ledger row, no claim-list line and no gate — "nothing after 2006 searched". **Novelty
+unchecked.** `[Davies2026]`'s "χ(Q⁴) = 4 …, so the restriction d ⩾ 5 … is necessary" makes it timely.
+
+**Rank 8 — C8. The ring of unit vectors.** *The theorem:* for a real number field `F` in which no prime above 2
+fixed by conjugation ramifies in `F(i)`, the additive group generated by the unit vectors is the ring of elements of
+`F(i)` integral at every prime fixed by conjugation; in every case the unit-distance graph on `F²` has infinitely
+many components. *Entry:* row 100's Lemma C′ (`plans/FS91-derivation.md` § 2; its entry id not looked up). *Who
+asked:* `[Johnson2000]` § 5, p. 177. *Rests on:* by hand, three derivations; nothing unprinted. *The first objection:*
+prime inversion in general is the outside model's, the quadratic and multiquadratic cases `[Fischer1990b]`'s, and
+"`[Shimura1964]` undecided" — **novelty unchecked** where a number theorist would look first.
+
+**Rank 9 — C14.** *The theorem:* the fractional chromatic number of the plane over `ℚ(√3,√11)` is 4. *Entry:*
+`plans/FS56-field-blowup.md`. *Who asked:* `[CranstonRabern2015]`, concluding section. *Rests on:* by hand; the lower
+bound is `[MatolcsiEtAl2025]`'s graph and theorem, the upper Fischer's value. *The first objection:* "Almost all of it
+is theirs" (`CLOSED-QUESTIONS.md` § 1.6); ours is one observation.
+
+**Rank 10 — what is already kernel-checked.** C10 (`chromaticNumber_seamPlane`): asked six times in print after
+Fischer had answered it; the Lean statement's docstring must give the value to `[Fischer1994]`. C16
+(`UDCert.forces_eq_11`): Gibbs's question, answered no at every distance. C9 (row 103): the outside model's theorem.
+C13 (row 107): a correction to `[Fischer1990]` Remark 1. Nothing for the kernel lane to do but check the attributions.
+
+### 3.4 Prior art, honestly, for the first five
+
+| rank | the search behind "not found in print" | its age | today's search |
+|---|---|---|---|
+| 1 | X24R (row 121): "zbMATH listings of twelve posers and fifteen abstract queries, arXiv with a positive control, the Polymath16 threads held and live to 2026-09-24, `[Soifer2024]` chs. 11 and 55"; the two Johnson surveys read | 2026-09-26, 27 | the arXiv listing to 2026-10-08; `[Davies2026]` poses it as open on 2026-10-08. **Still "not found", and now with a competitor in sight** |
+| 2 | FS-58, FS-61, FS-81 § PA.4 and FS-91's close gate (zbMATH, OpenAlex, arXiv, the Polymath16 archive; citation walks of four papers); the two Johnson surveys read. Row 99: "no mixing in the literature's words is unsearched" | 2026-09-19 to 27 | the same listing: nothing; `[Davies2026]` lists only the upper bound; `[Davidson2026]` has no result on a field's plane |
+| 3 | FS103-G (row 128): "the posers' zbMATH listings, 39 queries, web, two citation walks" | 2026-09-26 | **changed**: `[Davies2026]` Theorem 1.1 is in print for `d ⩾ 4`; the plane is what he says he cannot do. The kind of statement is no longer new; the plane over a number field is not found |
+| 4 | FS-66's gate (`CLOSED-QUESTIONS.md` § 1.8): the posers' full zbMATH listings, four abstract queries, a walk of the citing lists; "Not searched: MathSciNet; Russian-language literature" | 2026-09-20 | one web search and the arXiv listing: nothing |
+| 5 | FS-79's gate (§ 2.4): the MathOverflow thread, two papers at named sections, four authors' zbMATH listings; "**Not read:** the rest of the two CGHO papers' reference lists, and the homshift literature on non-standard generating sets" | 2026-09-23 | `[Davidson2026]` read at its introduction, conjectures and last section: the sufficient half only. The circular-colouring literature (his [25], [28]) not searched for the converse — **owed** |
+
+Ranks 7 and 8 are marked novelty unchecked in § 3.3. None of this is "first"; each is "not found in print".
+
+### 3.5 The recommendation
+
+**The choice.** The kernel lane takes **rank 2 first**, stated as the table for real quadratic fields through four
+with the three-colour criterion for number fields beside it; then **rank 1 with rank 6 inside it** — the chain above
+the three-colour theorem, and the two deductions under measure rigidity; then **rank 4**, which depends on neither.
+
+**An alternative weighed.** Rank 1 first, because it is the most wanted and Davies posed it last week.
+
+**Why this one won.** Rank 1 cannot be stated in the form W2 asks for without rank 2: row 127 names "row 99" among
+the hypotheses of the kernel's five-colour statement, and the equality needs the field-level upper bound that row 57
+calls not proved. So the first leaves are the same on either road, and taking them as rank 2 closes a question posed
+twice by name with no assumption at the first gate — where the alternative's first gate would be a conditional. This
+is an order by what rests on what, not by what is near.
+
+**Confidence.** About 0.75. The fact that would change it: the kernel planner's map showing that row 82's route to
+the quadratic table (no Weil, no number-field machinery) and row 99's route to the criterion share little — then
+which of the two is the head statement becomes a real choice, and I would take the table, because it is what Johnson
+asked for. And if Kooshi wants priority on five ahead of a first unconditional close, the alternative is his.
+
+**If he says nothing:** rank 2, then rank 1 with rank 6, then rank 4.
+
+### 3.6 Named apart: the real plane
+
+Unranked against the above, as the brief asks; one line each.
+
+- **FS-133 (row 129's plane clause): `ᾱ(ℝ²) = m₁(ℝ²)` and `χ_f,0(ℝ²) = χ_f(ℝ²) = 1/m₁(ℝ²)`, with no hypothesis, over
+  `[OAIMath2026]`'s rigidity theorem** — "[hand], one mind"; it answers `[DuczVarga2026]` Conjecture 1's first
+  clause, `[MatolcsiEtAl2025]` § 2 and Johnson's Problems of 1996 and 2000 (`CLOSED-QUESTIONS.md` § 3), and it is the
+  plane case of the density half of `[Davies2026]`'s Theorem 1.1, whose abstract hopes to reach "d = 3 or possibly
+  even … d = 2". **It is the one finding in the repository with a visible clock**, and by criterion 1 it would stand
+  beside rank 1. Kooshi asked about number fields; he should hear this.
+- The disc criterion (row 161): already kernel-checked.
+
+### 3.7 Which of the stubs' framings to keep
+
+- `plans/STUB-writeup-main-clause-five.md`. **Keep** its theorems 2 and 3 and measure rigidity as their engine.
+  **Reads wrongly now:** theorem 5, "`χ(ℝ²) ≥ 5` with no witness object", and the banner's lead with the collapse to
+  a measurable number — each is in print, stronger and with no hypothesis, since `[OAIMath2026]`; and the frame "this
+  project's local–global conjecture, proved through five", which a stranger reads as a conjecture of ours confirmed
+  by us. The frame a reader has this week is `[Davies2026]`'s sentence: the chromatic number of `ℚ(√n)²`.
+- `plans/STUB-main-clause-five-kernel.md`. **Keep.** Its "Next" list is in the order of its prices (Markov–Kakutani,
+  the upper half, Herglotz–Bochner); by W2 the order is the upper half and row 99 first.
+- `plans/STUB-theorem-B-writeup.md`. Not read today. By `CLOSED-QUESTIONS.md` §§ 1.1–1.2 its headline value and its
+  general form are both in print; what is left is a kernel proof and a second colouring.
+
+### 3.8 Cards
+
+The stage-1 card is answered (§ 2.1 item 1) and is re-ranked third so that the open ones lead.
+
+question: which-printed-statement-is-declared
+  evidence: the gate's receipt, quoted in Amendment 1 — `MR … (… over [EinsiedlerLindenstrauss2022] Thm 1.3 by statement)` and `PE2 … (PE-2, over [EinsiedlerLindenstrauss2022] Thm 1.2; blind X02V)`; `LEDGER.md` row 120, "applying EL2021 Thm 1.2 by statement — … it rests on EL2021 Thm 1.3 (external, published) and a deduction EL2021 never writes (FS105-DED, two minds, one blind)"; W2, "Any finding of ours must be formalized"
+  expected: the printed base of the chain is one statement, named the same way in every record
+  ask: is Einsiedler–Lindenstrauss's Theorem 1.2, stated in their paper with its deduction from Theorem 1.3 left unwritten, a printed theorem to declare — or is that deduction ours to formalize, with Theorem 1.3 the one declared?
+  if Theorem 1.2 is declared: it is copied from its page and read back by two readers, as Weil's bound was; FS105-DED stays out of Lean; the published sentence is "given Theorem 1.2"
+  if Theorem 1.3 is declared: FS105-DED is a third deduction of ours to formalize under W2, the chain is longer by it, and the published sentence names the theorem the paper proves
+  answered by: Kooshi — it is the edge of his rule; the kernel planner can say what each costs
+  cost: one message; the page of the paper is held
+  rank: 1
+
+question: does-a-quadratic-field-suffice-in-the-plane
+  evidence: `[Davies2026]`, extraction ll. 247–252, "in the four dimensional case the proof of Theorem 1.1 shows that there exists some positive integer n such that χ(R⁴) = χ(Q(√n)⁴). We conjecture that this also holds in the three dimensional case. In the plane we suspect that a more complicated extension of Q² might be required."; `LEDGER.md` row 128, "For every totally real number field `F` whose stable places are all 6-thick …, `χ(F²) = χ(ℝ²) = χ_CP(ℝ²)`; instances ℚ(√635087) …"
+  expected: a specialist who has just proved the statement in dimension four would expect it of the plane too, or would name what stops it
+  ask: what in Davies's proof makes a quadratic extension enough in dimension four, and does its failure in dimension two bear on a real quadratic field with no obstructing prime, or only on his method?
+  if it is a property a real quadratic field cannot have in the plane: row 128's instance at ℚ(√635087), and measure rigidity at degree 2 under it, has a defect to find before a line of it is formalized
+  if it is his method's reach only: row 128 answers his sentence, and rank 3's statement is written against it
+  answered by: derivation — Ephodos, from §§ 1 and 4–6 of the paper against FS103-LB and FS100-EFP
+  cost: some fifteen pages of one paper and two held entries
+  hunch: his method's reach — his proof counts lattice points on spheres, and the plane's circle has too few over ℚ, which is G80's point about why the whole unit-vector group is needed
+  falsifier: a step of his that fails for every real quadratic field in dimension two for a reason that is not about lattice-point counts
+  rank: 2
+
+### 3.9 Invention signal
+
+Invention signal: **one whiff, written as the second card above and reported as an `invention signal` item.** The two
+sides, each in its own words with its address: `[Davies2026]` (arXiv:2610.12301, introduction; extraction ll.
+249–252), "In the plane we suspect that a more complicated extension of Q² might be required"; `LEDGER.md` row 128,
+"For every totally real number field `F` whose stable places are all 6-thick …, `χ(F²) = χ(ℝ²) = χ_CP(ℝ²)`; instances
+ℚ(√635087) (… MR at degree 2)". One is a suspicion and the other a hand result given measure rigidity; they cannot
+both be right, and I do not say which. The premise they may share — what a field must supply for its points to stand
+for the plane's — is the card's question. Read for this job: `CLOSED-QUESTIONS.md` whole, the claim list, thirteen
+ledger rows whole, and the two new papers at the passages listed. No other collision seen; the claim list's two-way
+attribution (§ 2.1 item 6) is a wording defect its own index resolves, not a signal.
+
+### 3.10 Draft lines for files this lane does not write
+
+1. `LEDGER.md` § The claim list, Not ours — the line of § 2.1 item 6.
+2. `BIBLIOGRAPHY.md`, two new rows. **[Davies2026]** J. Davies, *Measurable obstructions for unmeasurable colourings*,
+   arXiv:2610.12301 (v1, 8 October 2026), 47 pp. — read: the abstract, Theorem 1.1 and the introduction's passages on
+   rational points and `ℚ(√n)²` (2026-10-13, from a text extraction; FS131-PN1); the proofs unread. Poses rows 121–123's
+   question; its Theorem 1.1 is row 128's kind of statement in dimension at least four. Library name:
+   `pdf/Davies2026-measurable-obstructions-unmeasurable-colourings.pdf` (fetched, not filed).
+   **[Davidson2026]** J. Davidson, *Coloring Monomial Cayley Graphs: The One-Parameter Case*, arXiv:2610.09474 (v1,
+   7 October 2026), 50 pp. — read: the abstract, the introduction's statement of results, Conjectures 4.3 and 4.7,
+   Corollary 4.6 and § 5's programme (same day, same way); the proofs unread. A consumer of row 79. Library name:
+   `pdf/Davidson2026-coloring-monomial-cayley-graphs-one-parameter.pdf` (fetched, not filed).
+3. `CLOSED-QUESTIONS.md` § 1.7, a fourth posing after Moorhouse's: *`[Davies2026]`, introduction (arXiv:2610.12301,
+   8 October 2026): "it is known that Q(√n)² is four-colourable for n ≢ 47, 143, 167 (mod 168). It would be
+   particularly interesting to determine if the remaining cases are six-colourable and if any of them contain a five
+   chromatic unit distance graph."* And § 3's entry on `ℚ⁴` belongs in § 1 or § 2: it is answered, not adjacent.
+4. `LEDGER.md` row 128, prior-art clause, to follow "theirs is the theorem": *in dimensions at least four the field
+   equality is `[Davies2026]` Theorem 1.1 (`χ(ℚ^d) = χ(ℝ^d)` for `d ⩾ 5`; a quadratic extension at `d = 4`), which
+   names the plane as beyond its method.*
+5. `LEDGER.md`: C7 has no row. If it is formalized it needs one, with a gate behind it.
+
 ## Evidence inventory
 
 *Seen versus read: an item is read only against an expectation written before the reading. Stage 1 lists the items and
@@ -271,16 +583,27 @@ their expectations; the later stages fill the last column.*
 - `CLOSED-QUESTIONS.md` §§ 1–4 — read against: E-b, § 1 holds a closure I cannot name; § 4 says a closed question is not thereby a paper — surprised: yes; five closures I could not name, each with no hypothesis (§ 2.1 item 3), and § 3 holds a sixth thing, Johnson 2006's question on `ℚ⁴`, answered whole and filed under "adjacent and open"
 - `plans/WHERE-THE-PROBLEM-STANDS.md` items 1–30 and § The prior-art position — read against: the items match the grokkings' account; the prior-art section names the seven earlier routes to the residue bound — surprised: no for § The prior-art position (read whole); items 1–30 not read, known by the grokkings' account only
 - `plans/STUB-writeup-main-clause-five.md`, `plans/STUB-main-clause-five-kernel.md`, `plans/STUB-theorem-B-writeup.md` — read against: each frames its paper by what the project built, and at least one framing reads wrongly for a stranger now that `χ(ℝ²) ≥ 6` is in print — surprised: no for the write-up stub (read whole; § 2.1 item 5) and the kernel stub (to line 60); `plans/STUB-theorem-B-writeup.md` unread, and nothing in the ranking turns on it
+- The arXiv listing of the 40 most recent papers on the chromatic number of the plane, to 2026-10-08 (`data/fs131/pn1/arxiv-2026-10-13.md`) — read against: nothing posted since the gates of 2026-09-26 and 27 touches the first five findings — surprised: yes; two papers of last week do, neither in the bibliography
+- `[Davies2026]`, arXiv:2610.12301: abstract, Theorem 1.1 and the introduction's passages on rational points and on `ℚ(√n)²` — read against: a transfer theorem for high dimensions with nothing about a number field's plane — surprised: yes; it poses the five-colour theorem's question by name ("if any of them contain a five chromatic unit distance graph") and suspects the opposite of row 128 for the plane
+- `[Davidson2026]`, arXiv:2610.09474: abstract, statement of results, Conjectures 4.3 and 4.7, § 5 — read against: it holds the three-colour criterion by characters in both directions, which would be prior art for row 79 — surprised: yes, the other way; it has the sufficient half only, credits it to the multiplier method, and cites none of the literature on planes over fields
 - `BIBLIOGRAPHY.md` entries for the works that posed the questions (Moorhouse, Soifer, Johnson, Fischer, Benda–Perles, Madore) and § E — read against: each posing is recorded with a page and a reading status; at least one is "abstract only" — surprised: yes; each posing was read at its page in a held copy (Johnson 2000 and 2006 and Benda–Perles in full, 2026-09-27; Bardestani–Mallahi-Karai §1–§2 first-hand), the weakest being Moorhouse's slides ("the quoted slides read in the text layer …; the rest of the deck not read"); § E not read
 
 ## Hunch ledger
+
+*Scored in the open at the close of stage 3. Of the seven registered at stage 1: the one read from a source is
+confirmed by its address; of the six from prior belief, two are killed (nobody-posed-three-colours-by-name;
+nothing-in-the-kernel-is-in-the-top-three) and four were borne out by the reading or by the final order —
+root-47-is-first (rank 1, and only because of W2: under Amendment 1's form it would have been third),
+three-colours-is-second (rank 2), a-closure-i-cannot-name (five of them, § 2.1 item 3), the-claim-list-narrows-the-upper-bound
+(§ 2.1 item 4). By this ledger's rule a hunch from prior belief is not promoted by the reading that tests it, so those
+four stay `open` below and are not counted as confirmed. Two more are registered at stage 3.*
 
 hunch: measure-rigidity-at-a-number-field-is-partly-ours
   claim: the measure-rigidity statement the five-colour results consume is filed as a hand result of this project resting on one printed theorem by statement and one transferred method, and is printed whole nowhere
   basis: read
   falsifier: `LEDGER.md` row 120 or a `BIBLIOGRAPHY.md` entry naming a printed theorem whose statement is the one consumed
   registered: 2026-10-13
-  status: open
+  status: confirmed (by: `LEDGER.md` row 120, l. 165, prior-art clause — "EF_F⁺ not in print", "MR not found under its discipline's names"; the claim list, l. 27, Ours; `data/fs124/l2/gate/receipt-assumptions-final.log`, `kind=ours` three times)
 
 hunch: root-47-is-first
   claim: by the criterion of § 1.4, applied after the reading, `χ(ℚ(√47)²) = 5` with the five-colour clause is the finding the field would most want
@@ -315,11 +638,26 @@ hunch: nobody-posed-three-colours-by-name
   basis: prior
   falsifier: a page in `CLOSED-QUESTIONS.md` or the bibliography where it is posed
   registered: 2026-10-13
-  status: open
+  status: killed (by: `CLOSED-QUESTIONS.md` § 1.7 — `[Johnson2000]` p. 176 poses the family `m ≡ 11 mod 12` as "still open" and `[Johnson2006]` p. 214 asks whether any `m` needs four; what the miss cost: stage 1 gave the three-colour theorem a weak "who asked", and it has the strongest unconditional one in the record)
 
 hunch: nothing-in-the-kernel-is-in-the-top-three
   claim: no finding already kernel-checked on the standard three axioms ends in the final top three
   basis: prior
   falsifier: a final top-three finding whose stated theorem is a kernel row with no hypothesis
   registered: 2026-10-13
+  status: killed (by: `LEDGER.md` row 73 — `four_le_chromaticNumber_planeOver_eleven`, on the standard three axioms, is rank 2's first member and by itself answers `[Johnson2006]` p. 214's "does there exist"; the family's theorem is by hand, so the hunch was half right and is scored as wrong)
+
+hunch: his-suspicion-is-his-methods-reach
+  claim: `[Davies2026]`'s "In the plane we suspect that a more complicated extension of Q² might be required" states what his lattice-point method reaches, and names no obstruction to a real quadratic field with no obstructing prime
+  basis: prior
+  falsifier: a step of his proof that fails for every real quadratic field in dimension two for a reason other than a count of lattice points on spheres
+  registered: 2026-10-13
   status: open
+
+hunch: row-79-is-the-converse-davidson-lacks
+  claim: by row 79 and compactness, a monomial Cayley graph on any set of unit parameters is three-colourable exactly when a character puts every step in `[1/3, 2/3]`, so `[Davidson2026]`'s Conjecture 4.3 is a statement about such characters and nothing else
+  basis: derived
+  falsifier: a three-colourable Cayley graph of a countable torsion-free abelian group with no such character, or a step of the compactness passage that needs the generating set finite
+  registered: 2026-10-13
+  status: open
+

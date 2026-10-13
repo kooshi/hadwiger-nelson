@@ -1,0 +1,125 @@
+slot: waiting (ledger 10 + 14 > budget 22 GiB)
+slot: waiting (ledger 14 + 14 > budget 22 GiB)
+slot: waiting (ledger 10 + 14 > budget 22 GiB)
+slot: waiting (ledger 14 + 14 > budget 22 GiB)
+slot: waiting (ledger 10 + 14 > budget 22 GiB)
+slot: waiting (ledger 14 + 14 > budget 22 GiB)
+slot: waiting (ledger 10 + 14 > budget 22 GiB)
+slot: waiting (ledger 14 + 14 > budget 22 GiB)
+slot: waiting (ledger 10 + 14 > budget 22 GiB)
+slot: waiting (ledger 14 + 14 > budget 22 GiB)
+slot: waiting (ledger 10 + 14 > budget 22 GiB)
+slot: waiting (ledger 14 + 14 > budget 22 GiB)
+slot: waiting (ledger 10 + 14 > budget 22 GiB)
+slot: waiting (ledger 14 + 14 > budget 22 GiB)
+slot: waiting (ledger 10 + 14 > budget 22 GiB)
+slot: waiting (ledger 14 + 14 > budget 22 GiB)
+slot: waiting (ledger 10 + 14 > budget 22 GiB)
+slot: waiting (ledger 14 + 14 > budget 22 GiB)
+slot: waiting (ledger 10 + 14 > budget 22 GiB)
+slot: waiting (ledger 14 + 14 > budget 22 GiB)
+slot: waiting (ledger 10 + 14 > budget 22 GiB)
+slot: admitted lc1-assumptions-second: mem 14 GiB (hard cap), cpus 0,1,2,3
+==> assumptions: this run's full output: build/gate/assumptions/20261013T191738Z-635976.log
+    scanned: constants=15071  theorems=11257  formers=362  hypotheses=19578  closed=1473
+    assumed: axioms=3  rests=26  named=19  inline=16  outside=7  ours=23  open=5  takes=98  mentions=1
+    decided: declaredClosed=33  established=1435  premises=2  refuted=3  conditions=40  fails=0
+    counted, not decided: cohyp=58  hints=0  silent=1  unseen=17512  produces=8  refutes=0  wrappers=0
+    --- outside theorems declared as axioms (3) ---
+    HadwigerNelson.Outside.OAI158.no_proper_five_coloring ref=bib:OAIMath2026 theorems=6
+    HadwigerNelson.Outside.OAI158.proper_to_borel_weak ref=bib:OAIMath2026 theorems=12
+    HadwigerNelson.StandingFive.kloosterman_bound ref=bib:Weil1948 theorems=8
+    --- hypotheses, kind outside (7) ---
+    HadwigerNelson.Bridge.RealAlgebraicDescent form=named kind=outside ref=bib:Lang1953 consumers=6 :: [Lang1953] Artin–Lang (equivalently Tarski 1951, quantifier elimination); row 107's one named hypothesis
+    HadwigerNelson.Plane.Voronov11 form=named kind=outside ref=bib:Voronov2023 consumers=2 :: [Voronov2023] Thm 1.1 (Euclidean norm, six colours); its one consumer is a half of FS106-COMP's equivalence
+    HadwigerNelson.SpectralChain.BochnerHerglotz form=named kind=outside ref=bib:Rudin1962 consumers=13 :: [Rudin1962] 1.4.3 (Bochner on a locally compact abelian group) and 1.3.6 (uniqueness); the read-back against the page is owed (FS131-L10A, planner's § 5.5)
+    HadwigerNelson.SpectralChain.InvariantMeasureOnClosed form=named kind=outside ref=bib:Kakutani1938 consumers=7 :: [Kakutani1938] Markov–Kakutani, for ℤ[U] and then for U on the ℤ[U]-invariant measures (FS-100's L1, X11K); no page read
+    HadwigerNelson.SpectralInputs.BochnerOn form=named kind=outside ref=bib:Rudin1962 consumers=1 :: [Rudin1962] 1.4.3, for a topology induced from a locally compact abelian group (J45 Lemma N2's ⟸)
+    HadwigerNelson.StandingFive.KloostermanBound form=named kind=outside ref=bib:Weil1948 consumers=9 :: [Weil1948] p. 207 (Weil's bound for Kloosterman sums over a finite field), in hypothesis form: the same outside theorem as the import StandingFive.kloosterman_bound, which proves it at characteristic not 2 (kloostermanBound_of_ringChar_ne_two)
+    inline:KloostermanFrom347 form=inline kind=outside ref=bib:Weil1948 consumers=3 :: [Weil1948] p. 207, at every finite field of q ≡ 3 (mod 4), q ≥ 347 elements (KloostermanBound at a closed family; the import proves it there)
+    --- hypotheses, kind ours (23) ---
+    HadwigerNelson.CharacterColouring.OrderBound form=named kind=ours ref=entry:FS89-S0A-3 consumers=2 :: FS89-S0A-3 (k = 4, N = 168, on Weil); J08-11 at 5, J08-10 at 6
+    HadwigerNelson.Plane.Row130M1 form=named kind=ours ref=row:130 consumers=1 :: row 130 (FS-103's M1, hard direction: χ_CP ≤ χ_m⁰)
+    HadwigerNelson.SevenConditional.G4 form=named kind=ours ref=row:103 consumers=1 :: row 103 (the 8/3 forcer: M56's 588-vertex core, one solver refusal with no proof log)
+    HadwigerNelson.SpectralChain.Interface.APlus0 form=named kind=ours ref=entry:J45 consumers=3 :: J45 § 3, remark (ii) (A⁺ at S = ∅; blind X05V; row 113)
+    HadwigerNelson.SpectralChain.Interface.APlusOfR88 form=named kind=ours ref=entry:J45 consumers=3 :: J45 (A⁺ from R88-TCA: SI-3, SI-4, N2; field-free, X23V § 2.3)
+    HadwigerNelson.SpectralChain.Interface.Count form=named kind=ours ref=entry:X23D-TCA consumers=3 :: X23D-TCA (the count: R88-TCA at S = ∅ in the class; X23V § 2.3; at a complex place X29C's ruling)
+    HadwigerNelson.SpectralChain.Interface.EFPlus form=named kind=ours ref=entry:FS100-X01D consumers=6 :: FS100-X01D line 194 (EF_F⁺; second derivation X12B)
+    HadwigerNelson.SpectralChain.Interface.MR form=named kind=ours ref=row:120 consumers=1 :: row 120 (measure rigidity for the unit-vector group, in Fourier form; over [EinsiedlerLindenstrauss2022] Thm 1.3 by statement)
+    HadwigerNelson.SpectralChain.Interface.MulStable form=named kind=ours ref=entry:J45 consumers=1 :: J45 § 4.2 step 2 (m⁻¹(E) ⊆ E; on J28V-7)
+    HadwigerNelson.SpectralChain.Interface.NegCircle form=named kind=ours ref=entry:J45 consumers=1 :: J45 § 4.2 step 3 (no Lean model on file)
+    HadwigerNelson.SpectralChain.Interface.PE2 form=named kind=ours ref=entry:X02D consumers=6 :: X02D (PE-2, over [EinsiedlerLindenstrauss2022] Thm 1.2; blind X02V)
+    HadwigerNelson.SpectralChain.Interface.RU form=named kind=ours ref=entry:J45 consumers=6 :: J45 § 5.4 (R-U; blind J46), plans/FS84-SI-D-derivation.md
+    inline:Alpha11 form=inline kind=ours ref=row:68 consumers=1 :: row 68 (FS-50's certificate at 11, α(Γ₁₁) ≤ 29; the conclusion is kernel-checked by another route, chromaticNumber_finitePlane11)
+    inline:Alpha23 form=inline kind=ours ref=row:71 consumers=1 :: row 71 (α(Γ₂₃) ≤ 105, [cert]: data/fs54/cert-q23-l3-N105.json, tools/fs54_l3_cert_check.py)
+    inline:Alpha83 form=inline kind=ours ref=row:68 consumers=1 :: row 68 (α(Γ₈₃) ≤ 1046 ≤ 1148, exact certificate, FS-50)
+    inline:CLS form=inline kind=ours ref=entry:X23D-CLS consumers=3 :: X23D-CLS (L(F) ≥ 5 ⟹ T-C(A) at S = ∅; X23V § 2.2)
+    inline:RQ4 form=inline kind=ours ref=entry:FS89-D2-T1 consumers=1 :: FS89-D2-T1 (Θ₄(ℤ[U_ℚ]) ⊆ T + A)
+    inline:RQ5 form=inline kind=ours ref=entry:FS89-D5-T2 consumers=1 :: FS89-D5-T2 (Θ₅(ℤ[U_ℚ]) ⊆ T + A)
+    inline:Row123Chain form=inline kind=ours ref=row:123 consumers=2 :: row 123 (min(L(F), 5) ≤ χ(F²) at the standing field; in the kernel over named hypotheses, SpectralChain.min_localBound_five_le_chromaticNumber)
+    inline:Row78 form=inline kind=ours ref=row:78 consumers=1 :: row 78 (on the lattice, a difference every four-colouring identifies lies in 8Λ)
+    inline:Row88 form=inline kind=ours ref=row:88 consumers=1 :: row 88 (the forced group is 0 or P, and if it is P every four-colouring is periodic)
+    inline:Row99 form=inline kind=ours ref=row:99 consumers=3 :: row 99 (χ(F²) = L(F) at L(F) ≤ 4)
+    inline:UpperHalf form=inline kind=ours ref=row:52 consumers=1 :: row 52 (the upper half χ(F²) ≤ L(F), at ring level; the field step is row 57's gap)
+    --- hypotheses, kind open (5) ---
+    HadwigerNelson.Plane.NoPar form=named kind=open ref=entry:C121-NOPAR consumers=2 :: C121-NOPAR (𝒫₆ is empty on the locally finite map colourings: the former is stated for every class of families, and the open statement is its instance there; FS121-C1-GMAP (ii), FS121-C1-SAT; FS131-L6A draft 5)
+    inline:FragmentsAtEveryRadius form=inline kind=open ref=row:145 consumers=1 :: row 145 (valid six-coloured fragments on discs of every radius: the YES side's exact form)
+    inline:SevenTarget form=inline kind=open ref=row:61 consumers=2 :: row 61 (the same target at six colours: two six-colour gadgets give χ ≥ 7)
+    inline:SixTarget form=inline kind=open ref=row:43 consumers=2 :: row 43 (the six-target: every √3-pair and every distance-2 pair separated at five colours; G26) — given the declared outside theorem Outside.OAI158.no_proper_five_coloring this holds with nothing to prove: its binder ranges over five-colourings of the plane, of which there are none (Outside.OAI158.not_colorable_five); the kind stays open until the tooling job decides how such an entry is classed (FS132-L1)
+    inline:SixTargetOneTwo form=inline kind=open ref=row:61 consumers=1 :: row 61 (the six-target, distance-set-generic: the plane of the distances 1 and 2) — given the declared outside theorem Outside.OAI158.no_proper_five_coloring this holds with nothing to prove: its binder ranges over five-colourings of the plane's {1, 2}-distance graph, each of them a five-colouring of the plane (chromaticNumber_unitDistance_le_distanceGraph), of which there are none (Outside.OAI158.not_colorable_five); the kind stays open until the tooling job decides how such an entry is classed (FS132-L1)
+    --- closed hypotheses other than the 1435 the library proves (38) ---
+    DECLARED HadwigerNelson.Bridge.RealAlgebraicDescent.of_finite hD :: HadwigerNelson.Bridge.RealAlgebraicDescent
+    DECLARED HadwigerNelson.Bridge.chromaticNumber_plane_eq_iSup_numberField_of_descent hD :: HadwigerNelson.Bridge.RealAlgebraicDescent
+    DECLARED HadwigerNelson.Bridge.chromaticNumber_plane_le_iSup_numberField_of_descent hD :: HadwigerNelson.Bridge.RealAlgebraicDescent
+    DECLARED HadwigerNelson.Bridge.chromaticNumber_plane_ne_six_iff_of_descent hD :: HadwigerNelson.Bridge.RealAlgebraicDescent
+    DECLARED HadwigerNelson.Bridge.exists_numberField_chromaticNumber_eq_plane_of_descent hD :: HadwigerNelson.Bridge.RealAlgebraicDescent
+    DECLARED HadwigerNelson.Bridge.exists_numberField_drawing_of_descent hD :: HadwigerNelson.Bridge.RealAlgebraicDescent
+    DECLARED HadwigerNelson.CharacterColouring.cl2 hN0 :: HadwigerNelson.CharacterColouring.OrderBound (HadwigerNelson.CharacterColouring.unitSet ⊥) (HadwigerNelson.CharacterColouring.band 4) 168
+    DECLARED HadwigerNelson.CharacterColouring.cl2 hRQ4 :: HadwigerNelson.CharacterColouring.fieldBandSet ⊥ (HadwigerNelson.CharacterColouring.band 4) ⊆ ↑(AddCommGroup.torsion (↥HadwigerNelson.CharacterColouring.Qring →+ UnitAddCircle) ⊔ HadwigerNelson.CharacterCo
+    DECLARED HadwigerNelson.CharacterColouring.cl2 hRQ5 :: HadwigerNelson.CharacterColouring.fieldBandSet ⊥ (HadwigerNelson.CharacterColouring.band 5) ⊆ ↑(AddCommGroup.torsion (↥HadwigerNelson.CharacterColouring.Qring →+ UnitAddCircle) ⊔ HadwigerNelson.CharacterCo
+    DECLARED HadwigerNelson.Plane.chiM0_le_iff_chiCP_le hM1 :: HadwigerNelson.Plane.Row130M1
+    DECLARED HadwigerNelson.Plane.chromaticNumber_plane_le_six_of_fragments h :: ∀ R > 0, ∃ F p, F.Covers p R ∧ F.Valid
+    DECLARED HadwigerNelson.Plane.mu_lt_of_voronov11 hV :: HadwigerNelson.Plane.Voronov11
+    DECLARED HadwigerNelson.SevenConditional.five_le_chromaticNumber_planeOver_seven_of_G4 h :: HadwigerNelson.SevenConditional.G4
+    DECLARED HadwigerNelson.SpectralInputs.sp_if_hypotheses_trivial_bot hBH :: HadwigerNelson.SpectralChain.BochnerHerglotz ↥(HadwigerNelson.SpectralChain.unitRing ⊥)
+    DECLARED HadwigerNelson.SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five_of_chain hBH :: HadwigerNelson.SpectralChain.BochnerHerglotz ↥(HadwigerNelson.SpectralChain.unitRing HadwigerNelson.SqrtFortySeven.F47)
+    DECLARED HadwigerNelson.SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five_of_chain hL1 :: HadwigerNelson.SpectralChain.InvariantMeasureOnClosed HadwigerNelson.SqrtFortySeven.F47
+    DECLARED HadwigerNelson.StandingFive.five_le_chromaticNumber hRow123 :: min (HadwigerNelson.SpectralChain.localBound HadwigerNelson.StandingFive.standingField) 5 ≤ (SimpleGraph.induce (HadwigerNelson.planeOver HadwigerNelson.StandingFive.standingField) (Hadwig
+    DECLARED HadwigerNelson.StandingFive.five_le_chromaticNumber_weil hRow123 :: min (HadwigerNelson.SpectralChain.localBound HadwigerNelson.StandingFive.standingField) 5 ≤ (SimpleGraph.induce (HadwigerNelson.planeOver HadwigerNelson.StandingFive.standingField) (H
+    DECLARED HadwigerNelson.StandingFive.seven_le_localBound_of_kloosterman hK :: ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F % 4 = 3 → 347 ≤ Fintype.card F → HadwigerNelson.StandingFive.KloostermanBound F
+    DECLARED HadwigerNelson.StandingFive.standingFloor_five hK :: ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F % 4 = 3 → 347 ≤ Fintype.card F → HadwigerNelson.StandingFive.KloostermanBound F
+    DECLARED HadwigerNelson.StandingFive.standingFloor_seven hK :: ∀ (F : Type) [inst : Field F] [inst_1 : Fintype F] [inst_2 : DecidableEq F], Fintype.card F % 4 = 3 → 347 ≤ Fintype.card F → HadwigerNelson.StandingFive.KloostermanBound F
+    DECLARED HadwigerNelson.five_le_chromaticNumber_finitePlane11_of_indepNum_le h :: (HadwigerNelson.finitePlane 11).indepNum ≤ 29
+    DECLARED HadwigerNelson.not_colorable_five_of_forced_pairs h2 :: ∀ (C : (HadwigerNelson.unitDistance ℂ).Coloring (Fin 5)) (x y : ℂ), dist x y = 2 → C x ≠ C y
+    DECLARED HadwigerNelson.not_colorable_five_of_forced_pairs h3 :: ∀ (C : (HadwigerNelson.unitDistance ℂ).Coloring (Fin 5)) (x y : ℂ), dist x y = √3 → C x ≠ C y
+    DECLARED HadwigerNelson.not_colorable_six_of_forced_pairs h2 :: ∀ (C : (HadwigerNelson.unitDistance ℂ).Coloring (Fin 6)) (x y : ℂ), dist x y = 2 → C x ≠ C y
+    DECLARED HadwigerNelson.not_colorable_six_of_forced_pairs h3 :: ∀ (C : (HadwigerNelson.unitDistance ℂ).Coloring (Fin 6)) (x y : ℂ), dist x y = √3 → C x ≠ C y
+    DECLARED HadwigerNelson.seven_le_chromaticNumber_finitePlane83_of_indepNum_le h :: (HadwigerNelson.finitePlane 83).indepNum ≤ 1148
+    DECLARED HadwigerNelson.seven_le_chromaticNumber_plane_of_forced_pairs h2 :: ∀ (C : (HadwigerNelson.unitDistance ℂ).Coloring (Fin 6)) (x y : ℂ), dist x y = 2 → C x ≠ C y
+    DECLARED HadwigerNelson.seven_le_chromaticNumber_plane_of_forced_pairs h3 :: ∀ (C : (HadwigerNelson.unitDistance ℂ).Coloring (Fin 6)) (x y : ℂ), dist x y = √3 → C x ≠ C y
+    DECLARED HadwigerNelson.six_le_chromaticNumber_finitePlane23_of_indepNum_le h :: (HadwigerNelson.finitePlane 23).indepNum ≤ 105
+    DECLARED HadwigerNelson.six_le_chromaticNumber_oneTwo_of_forced_sqrt3 h3 :: ∀ (C : (HadwigerNelson.distanceGraph ℂ {1, 2}).Coloring (Fin 5)) (x y : ℂ), dist x y = √3 → C x ≠ C y
+    DECLARED HadwigerNelson.six_le_chromaticNumber_plane_of_forced_pairs h2 :: ∀ (C : (HadwigerNelson.unitDistance ℂ).Coloring (Fin 5)) (x y : ℂ), dist x y = 2 → C x ≠ C y
+    DECLARED HadwigerNelson.six_le_chromaticNumber_plane_of_forced_pairs h3 :: ∀ (C : (HadwigerNelson.unitDistance ℂ).Coloring (Fin 5)) (x y : ℂ), dist x y = √3 → C x ≠ C y
+    PREMISE HadwigerNelson.Plane.voronov11_of_forall_mu_lt H :: ∀ ε > 0, HadwigerNelson.Plane.mu 6 ε < 1 :: one half of FS106-COMP's equivalence (mu_lt_of_voronov11 is the other): the implication is the content
+    PREMISE HadwigerNelson.deGrey_bound_of_not_colorable hG :: ¬(HadwigerNelson.edgeGraph 1581 HadwigerNelson.deGrey.edges).Colorable 4 :: the hand-off lemma of M04: the library proves the non-colourability over the same graph in its rotated presentation (deGreyRo
+    REFUTED HadwigerNelson.fanGap_needs_ne_own_colour bad :: ∀ {V W : Type} {G : SimpleGraph V} {P : SimpleGraph W} {k : ℕ} (f : G →g P) {C : P.Coloring (Fin k)} {u u' : V} {γ : Fin k}, (∀ (w : W), P.Adj (f u) w → C w ≠ γ) → u ≠ u' → ¬HadwigerNelson.Forces G k u u
+    REFUTED HadwigerNelson.not_forces_of_fanGap_needs_ne bad :: ∀ {V W : Type} {G : SimpleGraph V} {P : SimpleGraph W} {k : ℕ} (f : G →g P) {C : P.Coloring (Fin k)} {u u' : V} {γ : Fin k}, HadwigerNelson.FanGap C (f u) γ → ¬HadwigerNelson.Forces G k u u'
+    REFUTED HadwigerNelson.not_separated_of_sharedGap_needs_nonadjacent bad :: ∀ {V W : Type} {G : SimpleGraph V} {P : SimpleGraph W} {k : ℕ} (f : G →g P) {C : P.Coloring (Fin k)} {u u' : V} {γ : Fin k}, HadwigerNelson.SharedGap C (f u) (f u') γ → ¬HadwigerNelson.
+    --- formers declared conditions, not assumptions (40): IsUsablePrime, NoAffFieldHyp, ExtensionOrder, IsLift, RealState, IsRegion, IsUnitArc, BaseCtx, Condition6, CrossesAt, DoubleEvent, HexRing, IsEssBoundary, RayConfig, OnRingArc, OuterPairFree, RingProper, SaturatedAt, Terminal, TipPairFree, Todo, Sorted, RotationInvariant, GrundyBound, H1On, InSixLens, IsAdmissible, IsRegOf, IsSelection, IsTriod, IsTriodCut, FourCycleStraddle, OutsideOrbit, IsTraceSpectral, TCA, IsHaarFourier, IsSpectralMeasureOf, Rainbow, WindowProper, IsTwoSep
+    recorded counts in scripts/assumptions-ledger.txt's header: match (9 of 9 compared)
+    RECORDED COUNTS ARE STALE in CLAUDE.md § Trust ledger — update it: rests 23 → 26
+    --- changes since the previous complete run ---
+    previous: build/gate/assumptions/20261013T190918Z-610247.log
+    counts: unchanged
+    rows: none changed
+    every row: rg '^(AXIOM|RESTS|ASSUMPTION|TAKES|MENTIONS|PRODUCES|REFUTES|SITE|CLOSED|CONDITION|SILENT|DERIVED|WRAPS|COHYP|HINT|FAIL) ' build/gate/assumptions/20261013T191738Z-635976.log
+    --- what this check cannot see, said every run ---
+    A hand result or an outside theorem written out as a hypothesis over the theorem's own variables, in a
+    theorem none of whose hypotheses is declared and whose docstring does not say so, is not told from a
+    condition on the theorem's parameters. Hypotheses of that shape read and not decided: unseen=17512;
+    beside declared assumptions (printed in full, COHYP rows): cohyp=58; theorems whose docstrings use the
+    words and take nothing declared (HINT rows): hints=0.
+==> assumptions: OK — 3 outside theorem(s) as axioms, with 26 theorem(s) resting on them; 19 named and 16 inline hypotheses (7 outside, 23 ours, 5 open), taken by 98 statement(s) and mentioned by 1
+    full output: build/gate/assumptions/20261013T191738Z-635976.log
+exit=0

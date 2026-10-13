@@ -167,8 +167,9 @@ under PURCHASED — and so does any axiom the library declares without a `declar
 not (`undeclared-library-axiom`, from `libraryAxioms`, the file's last command). The library
 declares three imports at present: wave 10's `StandingFive.kloosterman_bound` (`[Weil1948]` p. 207, FS131-K10c), with
 eight records below, and FS-132's `Outside.OAI158.no_proper_five_coloring` and `Outside.OAI158.proper_to_borel_weak`
-(`[OAIMath2026]` family 158, FS132-I1), with six and nine (the fifth on the transfer is FS132-L1's; one on the first and four on
-the transfer are of FS-124's radius clause, `Plane/RadiusOutside`, FS124-I1, landed by FS124-L1); its first, wave 2's
+(`[OAIMath2026]` family 158, FS132-I1), with six and twelve (the fifth on the transfer is FS132-L1's; one on the first and four on
+the transfer are of FS-124's radius clause, `Plane/RadiusOutside`, FS124-I1, landed by FS124-L1; three more on the transfer are of
+FS-131's measurable number, `Plane/LebesgueNumber`, FS131-KC1, landed by FS131-LC1); its first, wave 2's
 `falconer_lemma2_nonempty`, is a theorem since FS131-IF1 (FS131-L10B's join).
 
 **Why this section comes first.** The gate reads the sections in any order, but two things do not move:
@@ -233,6 +234,10 @@ declared that no audited record carries fails as `stale-declaration`. -/
 #print axioms HadwigerNelson.Plane.radius_down
 #print axioms HadwigerNelson.Plane.colorable_iff_forall_ball
 #print axioms HadwigerNelson.Plane.seven_le_chromaticNumber_plane_iff_exists_ball
+-- FS131-KC1: the measurable number's records resting on `proper_to_borel_weak` (claim NF3-PLANE, `Plane/LebesgueNumber`; landed by FS131-LC1)
+#print axioms HadwigerNelson.Plane.colorable_iff_exists_nullMeasurable_proper
+#print axioms HadwigerNelson.Plane.chromaticNumber_plane_eq_chiLebesgue
+#print axioms HadwigerNelson.Plane.chromaticNumber_euclidean_plane_eq_chiLebesgue
 
 #eval IO.println "=== CLEAN ==="
 
@@ -8746,6 +8751,51 @@ eight modules against the audit's log: one record each, under CLEAN, on a subset
 #print axioms HadwigerNelson.Plane.exists_closePair_sector
 #print axioms HadwigerNelson.Plane.sectorPoint_isSector
 -- FS124-L2 block end
+
+/-! ## FS131-LC1 — the landing of FS-131's measurable number (claims NF3): `Plane/LebesgueNumber`, FS131-KC1's module — `[Davies2026]`
+Lemma B.1 (p. 44) formalized with its printed proof, the density-point step, `Plane.chiLebesgue` (the Lebesgue-measurable chromatic
+number of the plane) and `chiM0 = chiLebesgue`.  The mathematics is other people's; statements and proofs are FS131-KC1's.  Every
+declaration a person typed in the module has one record — theorems and definitions, as the last three landings' blocks file theirs:
+thirty-one here, under CLEAN, and the three that rest on the declared outside theorem `Outside.OAI158.proper_to_borel_weak`
+(`colorable_iff_exists_nullMeasurable_proper`, `chromaticNumber_plane_eq_chiLebesgue`, `chromaticNumber_euclidean_plane_eq_chiLebesgue`)
+under IMPORTED, above.  `data/fs131/lc1/records.py` reads the kernel's list of the module against the audit's log: one record each, the
+three under IMPORTED on the standard three and exactly that one import, every other under CLEAN on a subset of the standard three. -/
+-- FS131-LC1 block: `Plane/LebesgueNumber` — 31 records (28 theorems, 3 definitions), every
+-- declaration a person typed that rests on no declared outside theorem, one line each (the kernel's list:
+-- data/fs131/lc1/decls.lean; this block is `data/fs131/lc1/records.py DECLS --block`).  Statements and proofs
+-- FS131-KC1's.  The module's other three declarations are under IMPORTED, on `proper_to_borel_weak`.
+#print axioms HadwigerNelson.HasDensityOneAt
+#print axioms HadwigerNelson.HasDensityOneAt.inter
+#print axioms HadwigerNelson.HasDensityOneAt.nonempty
+#print axioms HadwigerNelson.Plane.AeColouring.col_eq_of_mem_core
+#print axioms HadwigerNelson.Plane.AeColouring.core
+#print axioms HadwigerNelson.Plane.AeColouring.core_dist_ne_one
+#print axioms HadwigerNelson.Plane.AeColouring.measurableSet_core
+#print axioms HadwigerNelson.Plane.AeColouring.volume_compl_iUnion_core
+#print axioms HadwigerNelson.Plane.chiLebesgue
+#print axioms HadwigerNelson.Plane.chiLebesgue_le
+#print axioms HadwigerNelson.Plane.chiLebesgue_le_chiM
+#print axioms HadwigerNelson.Plane.chiLebesgue_le_chiM0
+#print axioms HadwigerNelson.Plane.chiM0_eq_chiLebesgue
+#print axioms HadwigerNelson.Plane.chiM0_le_chiLebesgue
+#print axioms HadwigerNelson.Plane.chromaticNumber_plane_le_chiLebesgue
+#print axioms HadwigerNelson.Plane.davies_lemma_B1
+#print axioms HadwigerNelson.Plane.exists_aeColouring_of_nullMeasurable_proper
+#print axioms HadwigerNelson.Plane.exists_proper_of_aeColouring
+#print axioms HadwigerNelson.Plane.exists_proper_of_nullMeasurable_weak
+#print axioms HadwigerNelson.Plane.mem_densitySet_iff_hasDensityOneAt
+#print axioms HadwigerNelson.Plane.nonempty_aeColouring_iff_exists_nullMeasurable_proper
+#print axioms HadwigerNelson.Plane.nullMeasurable_iff_forall_fibre
+#print axioms HadwigerNelson.ae_hasDensityOneAt_fibre
+#print axioms HadwigerNelson.davies_lemma_B1_euclidean
+#print axioms HadwigerNelson.exists_nullMeasurable_selector
+#print axioms HadwigerNelson.exists_proper_ae_eq_of_proper_on_conull
+#print axioms HadwigerNelson.exists_proper_nullMeasurable_of_avoiding_cover
+#print axioms HadwigerNelson.exists_translate_mem
+#print axioms HadwigerNelson.hasDensityOneAt_congr_ae
+#print axioms HadwigerNelson.hasDensityOneAt_preimage_add_right
+#print axioms HadwigerNelson.hasDensityOneAt_univ
+-- FS131-LC1 block end
 
 #eval IO.println "=== PURCHASED ==="
 

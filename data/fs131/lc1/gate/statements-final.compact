@@ -1,0 +1,140 @@
+## MODULE Proofs.HadwigerNelson.Plane.AeColouring constants=22
+C IND HadwigerNelson.Plane.AeColouring TYPE=73a21016f7992758b99514a3 VALUE=- DATA=-
+C CTOR HadwigerNelson.Plane.AeColouring.mk TYPE=3dbe37004e5041af3349518d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.AeColouring.mk.inj TYPE=56f4fc5c780b1dbbb6c1566f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.instIsEmptyAeColouringOfNatNat_1 TYPE=87a9888688f8df86a5a45e66 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.AeColouring.mk._flat_ctor INTERNAL TYPE=3dbe37004e5041af3349518d VALUE=f9e127441f5894b0c573e596 DATA=-
+C DEF HadwigerNelson.Plane.AeColouring.noConfusionType TYPE=3803f09096db1e3a50bfc5f4 VALUE=0288114595731b01b27bd387 DATA=-
+C DEF HadwigerNelson.Plane.AeColouring.ctorIdx TYPE=80ec043464174168c6a5e0e0 VALUE=17bb1d38c5211e44407cc0b2 DATA=-
+C DEF HadwigerNelson.Plane.AeColouring._sizeOf_inst INTERNAL TYPE=304179175017da36468e8f07 VALUE=b8264ef40f7b71a8dc4282b8 DATA=-
+C THM HadwigerNelson.Plane.AeColouring.mk.sizeOf_spec TYPE=880b0e08b47cad511c657635 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.AeColouring.unitPairsNull TYPE=34895fd1ed516ad6192798fe VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.AeColouring.casesOn TYPE=8454253a856ce2876871c65c VALUE=39cbfb162bc8b07a8788625c DATA=-
+C REC HadwigerNelson.Plane.AeColouring.rec TYPE=5a0a7e624d63c767b5480c8b VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.chiM0 TYPE=ffeaa3cac26263063cd298ae VALUE=f1485d274b8e7f458e885a26 DATA=-
+C THM HadwigerNelson.Plane.chiM0_le TYPE=0de6a2f8795f67095fca878c VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.AeColouring.recOn TYPE=8454253a856ce2876871c65c VALUE=be04d387407b26cb5dd373c7 DATA=-
+C THM HadwigerNelson.Plane.AeColouring.measurable TYPE=b3c0541f8c7ebcd76dc3a058 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.AeColouring.noConfusion TYPE=aeb6eb4e1cb01ec2769bcd92 VALUE=01159dfc2faf7903d32c517a DATA=-
+C DEF HadwigerNelson.Plane.AeColouring.mk.noConfusion TYPE=f570da96a7858fcc6467a6ed VALUE=4aa512b5fe53c5b6559ea095 DATA=-
+C DEF HadwigerNelson.Plane.AeColouring.col TYPE=a7d9408a5e2ecfe11f0b84bc VALUE=4a14d586f7caba902506a00e DATA=-
+C DEF HadwigerNelson.Plane.AeColouring._sizeOf_1 INTERNAL TYPE=80ec043464174168c6a5e0e0 VALUE=429494a8f0c67a1b33b4cf02 DATA=-
+C THM HadwigerNelson.Plane.instIsEmptyAeColouringOfNatNat TYPE=6cfce3a142c22a5c17235d1d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.AeColouring.mk.injEq TYPE=6d9ac9913dc323e9bf84183b VALUE=- DATA=-
+## MODULE Proofs.HadwigerNelson.Plane.FalconerReduction constants=72
+C THM HadwigerNelson.Plane.twoCircleDeriv._proof_2 INTERNAL TYPE=e374992cd44d415df34609a8 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.twoCircleDeriv._proof_3 INTERNAL TYPE=44cd12508ba3079c67fc0804 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.not_rotate_ae_eq_compl._simp_1_1 INTERNAL TYPE=5b1dd41da47b7b9d39a9e7e9 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.twoCircleDeriv._proof_1 INTERNAL TYPE=4a8ab354c0b23c2865d2f188 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.preimage_inter_null_of_invertible_deriv TYPE=32d08a5739f94c7306eb5b7c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ae_arcLength_shift TYPE=394fb6b9c347dd0de6ed9ba3 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.falconer_lemma1 TYPE=84c66f6522cc75dba151699c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.falconer_lemma2_nonempty TYPE=7dab086a84c5e29d2de21ee1 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.twoCircleMap TYPE=cc0ecad7ddb41091642b1074 VALUE=5ca5871be4f132f1b8d4ce3e DATA=-
+C THM HadwigerNelson.Plane.twoCircleDeriv_injective TYPE=abc0ed32b2138a8562124ec0 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.slice_slice_null TYPE=12b80dea647973117cbbb9ca VALUE=- DATA=-
+C THM HadwigerNelson.Plane.densitySet_dist_ne_one TYPE=9b0a9063ee4ffad4ab7586b2 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.not_rotate_ae_eq_compl._simp_1_5 INTERNAL TYPE=d140ba623c140aefc82aed5c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.densitySet_dist_ne_one._simp_1_2 INTERNAL TYPE=ae107b04a127ca85a42dc88c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.not_rotate_ae_eq_compl._simp_1_3 INTERNAL TYPE=cf55e889f99db8b90029e0ac VALUE=- DATA=-
+C THM HadwigerNelson.Plane.volume_sinZero_null TYPE=9c1c362c48bb2b5bae0bc33d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.not_rotate_ae_eq_compl._simp_1_8 INTERNAL TYPE=bb2635f8d6784f797cefdf94 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.le_chiM_of_falconerFan._simp_1_4 INTERNAL TYPE=8adae6d8570982833d6ac6aa VALUE=- DATA=-
+C THM HadwigerNelson.Plane.falconer_lemma4 TYPE=c2d3d1b6876764982cf1cf82 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.le_chiM_of_falconerFan TYPE=b78a15ba664c6f29676e2168 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.exists_unit_pair_of_conull._simp_1_1 INTERNAL TYPE=d61c5200751bb61a3320630f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.sum_densityRatio_eq_one._simp_1_1 INTERNAL TYPE=a44f335fe3bf3ddacb0685ff VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.twoCircleDeriv TYPE=a924df636ab0c82100639586 VALUE=7eecbfdcee8031d73d00d822 DATA=-
+C THM HadwigerNelson.Plane.upperHalfPlane_falconer_hyp._simp_1_2 INTERNAL TYPE=669e14f3f39865eacb0e4a9c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.unitPairsNull_of_no_unit_pair._simp_1_1 INTERNAL TYPE=eeacb868379807d7a228b38d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.exists_mem_falconerE TYPE=116602ba80f27eab9aaba924 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.volume_sinZero_null._simp_1_3 INTERNAL TYPE=a6cd3e09b86d6db541b3b5bb VALUE=- DATA=-
+C THM HadwigerNelson.Plane.exists_unit_pair_of_conull._simp_1_3 INTERNAL TYPE=4c82eba48687e5114e19303b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.contDiff_e TYPE=278e43d7e83efff0fd47eff0 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.exists_unit_pair_of_conull._simp_1_5 INTERNAL TYPE=ff988c71807ee8c4c8d71572 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.dist_add_e_mul TYPE=41d07d3263c51de7840c1bd2 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.volume_sinZero_null._simp_1_1 INTERNAL TYPE=4c82eba48687e5114e19303b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ae_arcLength_shift._simp_1_2 INTERNAL TYPE=a5e456251c598b1742f77e95 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.fan_tip_ae_mem TYPE=0e6fac9f644c99bb17b7addc VALUE=- DATA=-
+C THM HadwigerNelson.Plane.twoCircleMap.eq_1 INTERNAL TYPE=d23561e05cf3a2c5e161b8b3 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.two_classes_of_mem_falconerE TYPE=417d07a46e4e0d1b4d9e2f96 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.slice_slice_null._simp_1_1 INTERNAL TYPE=4c82eba48687e5114e19303b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.densitySet_dist_ne_one._simp_1_1 INTERNAL TYPE=eeacb868379807d7a228b38d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.densityRatio_le_one TYPE=5bb391918f87c353895c602c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.upperHalfPlane_falconer_hyp TYPE=38627d5ae2be07c4980953b2 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.contDiff_twoCircleMap TYPE=22125b8222ab5303fa4c5cb3 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.falconer_lemma1.match_1_1 INTERNAL TYPE=fd7923c846975d66b429167e VALUE=e8a96cb6ee5493708dee1a7f DATA=-
+C THM HadwigerNelson.Plane.hasDerivAt_e TYPE=6cc2401512c76ab8bd8c85f1 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.not_rotate_ae_eq_compl TYPE=78613e2eb096b929a59e8876 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.densitySet_disjoint TYPE=c65a0c848ea04e83d768cdb4 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.not_rotate_ae_eq_compl._simp_1_6 INTERNAL TYPE=b84ed43e284b431edd25ded8 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.hasFDerivAt_twoCircleMap TYPE=46a09c06174ff3393e6ae81d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.not_rotate_ae_eq_compl._simp_1_4 INTERNAL TYPE=a789e8a05704042d6b055671 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.not_rotate_ae_eq_compl._simp_1_7 INTERNAL TYPE=38b40303f62fdb14550c7895 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.not_rotate_ae_eq_compl._simp_1_2 INTERNAL TYPE=5f2822f027e66ea9439af706 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.densitySet_mono TYPE=56f42e902e9037da461f9656 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.unitPairsNull_of_no_unit_pair._simp_1_2 INTERNAL TYPE=ae107b04a127ca85a42dc88c VALUE=- DATA=-
+C THM HadwigerNelson.Plane.le_chiM_of_falconerFan._simp_1_3 INTERNAL TYPE=4c82eba48687e5114e19303b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.upperHalfPlane_falconer_hyp._simp_1_1 INTERNAL TYPE=7628cb839a2255e7e873e847 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.dist_circle_rotate TYPE=a89de1e2401525ed9c61ecad VALUE=- DATA=-
+C THM LinearEquiv.ofInjectiveEndo.eq_1 INTERNAL TYPE=56b76ceb757761df0c9cfbdf VALUE=- DATA=-
+C THM HadwigerNelson.Plane.unitPairsNull_of_no_unit_pair TYPE=81967dbffffe57d632aa1d42 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.twoCircleDeriv.eq_1 INTERNAL TYPE=2be234603a0eaf4ecda00fa6 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.twoCircle_preimage_null TYPE=e833d5d374290948f33d81b5 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.exists_unit_pair_of_conull TYPE=cdb53f23d812c33d0841a5e3 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.exists_mem_essClosure_of_cover TYPE=3f804c251965152cb46c31ec VALUE=- DATA=-
+C THM HadwigerNelson.Plane.volume_sinZero_null._simp_1_4 INTERNAL TYPE=d7668509e394aa73aed2fd4b VALUE=- DATA=-
+C THM HadwigerNelson.Plane.volume_sinZero_null._simp_1_2 INTERNAL TYPE=ca7baf8dbeadf92c693dda13 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.chiM TYPE=ffeaa3cac26263063cd298ae VALUE=9242a7fa79c8e485cb656110 DATA=-
+C THM HadwigerNelson.Plane.ae_arcLength_shift._simp_1_1 INTERNAL TYPE=80d6de19a981b368a9192280 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.exists_unit_pair_of_conull._simp_1_2 INTERNAL TYPE=7628cb839a2255e7e873e847 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.exists_unit_pair_of_conull._simp_1_4 INTERNAL TYPE=2aa7129bfb37dade06590c0f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.sum_densityRatio_eq_one TYPE=e2370d62b359aad430b49c67 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.falconer_reduction TYPE=24f03fe2f3f0b810b4847328 VALUE=- DATA=-
+C THM LinearEquiv.toContinuousLinearEquiv.congr_simp TYPE=95c2ccc896ba2cb249ef5459 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.ae_arcLength_shift._simp_1_3 INTERNAL TYPE=4c82eba48687e5114e19303b VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.le_chiM_of_falconerFan.match_1_1 INTERNAL TYPE=20f78cdac5e076e92a0a9dff VALUE=26f579484b3b06c393abc8fa DATA=-
+## MODULE Proofs.HadwigerNelson.Plane.LebesgueNumber constants=43
+C THM HadwigerNelson.hasDensityOneAt_univ TYPE=77ac69ff6c160a463d534aea VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.nonempty_aeColouring_iff_exists_nullMeasurable_proper.match_1_3 INTERNAL TYPE=4836d71f3f42d9847d5f1dc3 VALUE=07b1397b0661b090a94f93e2 DATA=-
+C THM HadwigerNelson.exists_proper_ae_eq_of_proper_on_conull TYPE=091fbc312c49e7e16251d29e VALUE=- DATA=-
+C THM HadwigerNelson.Plane.chiLebesgue_le TYPE=0d283685818d46484d67f05f VALUE=- DATA=-
+C THM HadwigerNelson.exists_nullMeasurable_selector TYPE=f9c6b048d19f0018a30282c5 VALUE=- DATA=-
+C THM HadwigerNelson.HasDensityOneAt.eq_1 INTERNAL TYPE=4d3a6cf385dd2a835d3303a1 VALUE=- DATA=-
+C THM HadwigerNelson.hasDensityOneAt_preimage_add_right._simp_1_1 INTERNAL TYPE=4c82eba48687e5114e19303b VALUE=- DATA=-
+C THM HadwigerNelson.hasDensityOneAt_preimage_add_right TYPE=6489e933310da5ca5f2ee093 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.chiLebesgue_le_chiM.match_1_1 INTERNAL TYPE=da8174adaabc1b1942914a58 VALUE=4d1a359b0af285fd45b9a51f DATA=-
+C DEF HadwigerNelson.HasDensityOneAt TYPE=ad727ec7c8b95f70fc73251e VALUE=4189f82c26cceea63a6e6676 DATA=-
+C THM HadwigerNelson.davies_lemma_B1_euclidean TYPE=d0f9bf59dffd74d555eb2778 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.colorable_iff_exists_nullMeasurable_proper TYPE=08836ba96856c0960f364020 VALUE=- DATA=-
+C THM HadwigerNelson.ae_hasDensityOneAt_fibre TYPE=0d5993d63a75aebb62861ac5 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.AeColouring.core_dist_ne_one TYPE=ccdfc89d171fd97b4124ee44 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.exists_proper_of_aeColouring TYPE=c7eed859798a67271c995568 VALUE=- DATA=-
+C THM HadwigerNelson.exists_translate_mem TYPE=e2b8a4976ca23ae1de5da026 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.chromaticNumber_plane_le_chiLebesgue.match_1_1 INTERNAL TYPE=c8e1a989b98d554cfc17c091 VALUE=48b94f5b41fa6eaf02f25008 DATA=-
+C DEF HadwigerNelson.Plane.chiM0_le_chiLebesgue.match_1_1 INTERNAL TYPE=f935aa9ade8df470fe06f8e0 VALUE=93b7bd9ac83503374e2e732a DATA=-
+C THM HadwigerNelson.exists_proper_nullMeasurable_of_avoiding_cover TYPE=6f87dd52a32770508fa35d9d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.chiM0_eq_chiLebesgue TYPE=9dd83ab666cc4884f5b1da35 VALUE=- DATA=-
+C THM HadwigerNelson.HasDensityOneAt.inter TYPE=ac4f379b490ce7d4b5eb4021 VALUE=- DATA=-
+C THM HadwigerNelson.hasDensityOneAt_preimage_add_right._simp_1_2 INTERNAL TYPE=07cf484df146cdb1ac6f833f VALUE=- DATA=-
+C THM HadwigerNelson.Plane.mem_densitySet_iff_hasDensityOneAt TYPE=a5de03a04ac856fb7311378b VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.nonempty_aeColouring_iff_exists_nullMeasurable_proper.match_1_1 INTERNAL TYPE=61674945663d6181a5982192 VALUE=62ac6cbc371fd131672e2d16 DATA=-
+C DEF HadwigerNelson.Plane.AeColouring.core TYPE=089bf6bd0bfdebe7b84410bf VALUE=97c7a4c40e29d5f39f60e0e3 DATA=-
+C THM HadwigerNelson.Plane.AeColouring.volume_compl_iUnion_core TYPE=7493ad26107acfe0fdcec155 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.chiLebesgue_le_chiM TYPE=649ffc8e6e47f61ce6ed3d53 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.chromaticNumber_euclidean_plane_eq_chiLebesgue TYPE=1408c872fbd6bb3408da65c1 VALUE=- DATA=-
+C THM HadwigerNelson.HasDensityOneAt.nonempty TYPE=2a7fe44f75fdf004a8ce6925 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.AeColouring.col_eq_of_mem_core TYPE=b6b0cb37e4811f9312642970 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.nonempty_aeColouring_iff_exists_nullMeasurable_proper TYPE=4029e972a880eea146c97114 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.chiLebesgue_le_chiM0.match_1_1 INTERNAL TYPE=659bc58f09a78fc7811c5cc2 VALUE=d874f45959af7fdc0066e670 DATA=-
+C THM HadwigerNelson.Plane.exists_aeColouring_of_nullMeasurable_proper TYPE=f0b3cb305cdb70941987b973 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.AeColouring.measurableSet_core TYPE=75325192230f9dbb32126032 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.exists_proper_of_nullMeasurable_weak TYPE=5c0b6bb9bf01bdea53fd1343 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.chromaticNumber_plane_le_chiLebesgue TYPE=2bc9c976dc95913702026298 VALUE=- DATA=-
+C THM HadwigerNelson.hasDensityOneAt_congr_ae TYPE=e263afb3bc24481e6358598d VALUE=- DATA=-
+C THM HadwigerNelson.Plane.chiLebesgue_le_chiM0 TYPE=e38b441e1a8cb15535be41b1 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.nullMeasurable_iff_forall_fibre TYPE=98ff1de60b72af454558e6b2 VALUE=- DATA=-
+C THM HadwigerNelson.Plane.chiM0_le_chiLebesgue TYPE=5fbef2088a7cba687702ce03 VALUE=- DATA=-
+C DEF HadwigerNelson.Plane.chiLebesgue TYPE=ffeaa3cac26263063cd298ae VALUE=b62bb440c0d9430a3f1d847b DATA=-
+C THM HadwigerNelson.Plane.davies_lemma_B1 TYPE=830b47091294f11b8eedba8a VALUE=- DATA=-
+C THM HadwigerNelson.Plane.chromaticNumber_plane_eq_chiLebesgue TYPE=4834a81d95a7e09caa77d5ec VALUE=- DATA=-

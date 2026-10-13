@@ -1,0 +1,5 @@
+paths under Proofs/ and Proofs.lean that differ from the commit before the edits (e9e7cd2de):
+ Proofs/HadwigerNelson/Plane/AeColouring.lean       | 18 +++++++++++-----
+ Proofs/HadwigerNelson/Plane/FalconerReduction.lean | 15 +++++++++----
+ Proofs/HadwigerNelson/Plane/LebesgueNumber.lean    | 25 ++++++++++++----------
+ 3 files changed, 38 insertions(+), 20 deletions(-)

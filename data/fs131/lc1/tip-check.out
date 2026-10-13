@@ -1,0 +1,11 @@
+gated commit 10892a8f20d3e81d07a3f067d9bcd5884c26e387; branch tip 1fbef575c5dfb5d3541e897f53f89b5b3dd4b626; main 8cf1401b06071c4c54bb81834d079fb43531644f
+is main an ancestor of the tip: yes
+paths that differ between the gated commit and the tip, by top directory:
+     93 data
+      3 plans
+paths outside plans/ and data/ (must be none):
+--
+git diff --stat gated..tip over Proofs Proofs.lean scripts tools ARCHITECTURE.md lakefile.toml lean-toolchain lake-manifest.json CLAUDE.md LEAN.md LEDGER.md:
+(end)
+sorry, narrow search, on the tip: 0
+tracked files modified: 0

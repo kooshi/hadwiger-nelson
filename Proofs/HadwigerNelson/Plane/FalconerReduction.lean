@@ -11,7 +11,12 @@ import Mathlib.Dynamics.Ergodic.AddCircleAdd
 import Mathlib.Dynamics.Ergodic.Function
 
 /-!
-# Falconer's reduction: a Falconer fan with an irrational angle gives `χ_m(ℝ²) ≥ k + 1` (FS-131 wave 2)
+# Falconer's reduction: a Falconer fan with an irrational angle gives `χ_B(ℝ²) ≥ k + 1` (FS-131 wave 2)
+
+**Which number.** The sets of `falconer_reduction` are `MeasurableSet`s and the colourings of `chiM` are `Measurable`
+maps: Borel. The bound is therefore on the Borel number `χ_B(ℝ²)` (`chiM`), not on Falconer's own `χ_m(ℝ²)`, whose
+classes are Lebesgue measurable (`Plane.chiLebesgue`, `Plane/LebesgueNumber`): `chiLebesgue ≤ chiM`, which points the
+other way.
 
 Row: **FS129-SA1-FALC-RED** (FS129-OA1-FALC-RED's statement from FS129-SA1-FALC-RED's argument, SA1 item 6). Plan:
 `plans/FS131-w2-kernel-plan.md` §§ 3–4. `[Falconer1981]` Lemma 1 is **formalized**, not imported, in the measurable form
@@ -23,11 +28,13 @@ namespace HadwigerNelson.Plane
 
 open Complex Set MeasureTheory Filter Topology Metric HadwigerNelson HadwigerNelson.Arith
 
-/-- `χ_m(ℝ²)` (Falconer's, everywhere-proper): the least `k` with a measurable `k`-colouring proper at every unit pair. -/
+/-- `χ_B(ℝ²)`, the **Borel** chromatic number of the plane: the least `k` with a Borel-measurable `k`-colouring proper
+at every unit pair. Falconer's number, with Lebesgue-measurable classes, is `Plane.chiLebesgue`
+(`Plane/LebesgueNumber`), and `chiLebesgue ≤ chiM`. -/
 noncomputable def chiM : ℕ∞ :=
   ⨅ (k : ℕ) (_ : ∃ f : ℂ → Fin k, Measurable f ∧ ∀ x y, dist x y = 1 → f x ≠ f y), (k : ℕ∞)
 
-/-- Spec: `sq9` bounds `χ_m(ℝ²)` by `9`. -/
+/-- Spec: `sq9` bounds `χ_B(ℝ²)` by `9`. -/
 example : chiM ≤ 9 := iInf₂_le 9 ⟨sq9Col, measurable_sq9Col, fun _ _ h => sq9Col_ne_of_dist_eq_one h⟩
 
 /-- `θ ↦ e θ` has derivative `e θ · i`. -/
@@ -727,7 +734,7 @@ theorem falconer_reduction {k : ℕ} (V : Finset ℂ) {a t : ℂ} (ha : a ∈ V)
   obtain ⟨c, i, j, hij, hae⟩ := fan_tip_ae_mem V ha ht hfan hS'm hd' hcov' hno'
   exact falconer_lemma4 (hS'm i) (hS'm j) (hd' hij) (hno' i) (hno' j) hr hirr hae
 
-/-- **FS129-SA1-FALC-RED**, its conclusion for Falconer's chromatic number: `χ_m(ℝ²) ≥ k + 1`. -/
+/-- **FS129-SA1-FALC-RED**, its conclusion for the Borel chromatic number: `χ_B(ℝ²) ≥ k + 1`. -/
 theorem le_chiM_of_falconerFan {k : ℕ} (V : Finset ℂ) {a t : ℂ} (ha : a ∈ V) (ht : t ∈ V)
     (hfan : FalconerFan ((unitDistance ℂ).induce (V : Set ℂ)) k ⟨a, ha⟩ ⟨t, ht⟩) (hr : 1 / 2 < dist t a)
     (hirr : Irrational (Real.arcsin (1 / (2 * dist t a)) / Real.pi)) : ((k + 1 : ℕ) : ℕ∞) ≤ chiM := by

@@ -43,26 +43,89 @@ the frontier's open jobs are **parked** (FS-136's 25 leaves on branch `fs136-wk1
 its five entries, its record job; the asking lane's unfiled re-rank draft) — § 0e's "order when the budget returns" is
 superseded except for its first line, the owed filing.
 
-**Three jobs are running** (ids in the session's scratch `agents.txt`, never in a repo file; they resume only inside
+**Jobs running — at this hour FS131-EN1, FS131-KN2 and FS131-ER1** (ids in the session's scratch `agents.txt`, never in a repo file; they resume only inside
 this session):
-1. **FS131-PN1** (asking lane; brief `data/fs131/briefs/FS131-PN1-number-field-ranking.md`; record
-   `plans/POROS-2026-10-13-number-field-findings.md`): the number-field findings ranked by interest to mathematicians
-   in the field. It messages when the list is saved.
-2. **FS131-KN1** (kernel planner; brief `data/fs131/briefs/FS131-KN1-number-field-kernel-map.md`; worktree and branch
-   `fs131-wnf`, the last landing's tree moved, its build matching `main`; record
-   `plans/FS131-KN1-number-field-kernel-map.md` on the branch): phase 1 the map of what each number-field result rests
-   on in Lean; **phase 2 starts only on my dated amendment** at the foot of its brief.
+1. ~~FS131-PN1, the ranking~~ — **done (2026-10-13 16:31 UTC; FS-131 inventory item 644): `plans/POROS-2026-10-13-number-field-findings.md`
+   § 3.2 (order), § 3.3 (the first ten), § 3.5 (recommendation).** Order: five colours (rows 121, 123, 127); three and
+   four colours with no hypothesis (73, 82, 99); a number field's plane against the real plane (128, 129); the p-adic
+   problem (75); lattice Cayley graphs by a character (79, 119); … **For the kernel lane: rank 2's leaves first, then
+   the five-colour chain with the rigidity deductions, then the p-adic result** (adopted as the default; "five first"
+   is offered to Kooshi). **Its search found `[Davies2026]` (arXiv:2610.12301, 8 October 2026), which poses rows
+   121–123's question by name, proves row 128's kind of statement in dimension four and up, hopes to reach the plane,
+   and conjectures χ(ℝ²) = 6** — both PDFs are in the library and both rows in `BIBLIOGRAPHY.md`. **FS131-ER1** (a
+   deriver; brief `data/fs131/briefs/FS131-ER1-davies-reading.md`; record `plans/FS131-ER1-davies-reading.md`) is
+   reading it in full against rows 121–123, 128, 129. **Put to Kooshi the same hour, unanswered**: five first or the
+   recommended order (default: recommended); whether FS-133, the density equality for the real plane, joins the
+   formalization because the paper's author hopes to reach it (my recommendation: yes; default stated to him: its
+   kernel planner takes the next free slot unless he says no).
+2. ~~FS131-KN1, the map~~ — **done (2026-10-13 16:25 UTC; FS-131 inventory item 643): `plans/FS131-KN1-number-field-kernel-map.md` on
+   `main` (merge `123d2bc57`), 36 entries; its § X8 names the first module and its chain section lists 23 leaves under
+   the five-colour results.** Its successor **FS131-KN2** is running in the same tree (`fs131-wnf`): the first module,
+   the residue upper half, from the claim list `data/fs131/claims-NF1.md` (brief
+   `data/fs131/briefs/FS131-KN2-upper-half-plan.md`; record `plans/FS131-KN2-upper-half-plan.md` on the branch). **At
+   its hand-back**: review the skeleton by artifact (it compiles; statements read against the claim list), then two
+   implementers on disjoint files as its plan splits them, **one build at a time on this machine, with the memory
+   numbers it measures**. **Queued behind it**: a planner on the chain's first definitions (the map's chain leaves 1,
+   13–15); FS131-KE1 (pricing the printed theorem).
 3. ~~FS124-F2, the owed filing~~ — **done and merged (`94bb3f35c`, FS-124 inventory item 52): the front page reads the
    library as gated; FS-124 stays Derived. THE NEXT FILING'S FACT-AUDIT BASE IS `94bb3f35c`.** Two jobs are running, not three.
 
-4. **FS131-EN1** (deriver; launched 2026-10-13 16:16 UTC; brief `data/fs131/briefs/FS131-EN1-shorter-route.md`; claim list
-   `data/fs131/claims-EN1.md`; record `plans/FS131-EN1-derivation.md`; FS-131 inventory item 642): five statements the
-   kernel planner read off the kernel proof — for the plane over the field of √47 and the main clause through five,
-   the hand result on the split places (R-U, once priced in months) may not be on the path at all. It messages each
-   verdict; **relay each to the planner at once** (by message while it runs; else in the amendment that carries the
-   ranking). **Ruled the same hour (item 642 (b))**: the printed theorem declared is Einsiedler–Lindenstrauss's
-   Theorem 1.3 with its hypothesis's forced sense written into the statement, and our deduction of Theorem 1.2 from it
-   is a leaf to formalize — the planner is to be told in that same amendment.
+4. ~~FS131-EN1, the shorter route~~ — **done (2026-10-13 16:46 UTC; FS-131 inventory items 645, 646, 649, 651): seven entries,
+   one mind each; `plans/FS131-EN1-derivation.md` § 8.1 is the table the chain's planner builds from** (seventeen hand
+   results on the path of rows 121 and 123; what is off it; the printed statements read). The interface is run at the
+   smaller set; a duplicate model and proof leave; the split-place model and the wandering argument stay inside the
+   second deduction. Ruled: its fourth-moment count (EN1-UQ4) replaces a printed bound in characteristic 2; the
+   printed rigidity theorem declared is Theorem 1.3 with our deduction of 1.2 formalized (item 642 (b)).
+5. **FS131-KC1** (kernel planner; brief `data/fs131/briefs/FS131-KC1-measurable-number-plan.md`; claim list
+   `data/fs131/claims-NF3.md`; worktree and branch `fs131-wkc`; item 652): the measurable-number corollary —
+   `χ(ℝ²) = χ_m(ℝ²)` from `[Davies2026]` Lemma B.1 and the declared outside theorem. **A corollary of two outside
+   results, never filed as this project's theorem.**
+
+6. ~~FS131-ER1, the reading of `[Davies2026]`~~ — **done (2026-10-13 17:02 UTC; items 654, 655): it proves nothing this project
+   lists as its own, contradicts no row, and its method does not reach the plane as written; rows 121–123 are posed
+   there as open (by residue class modulo 168 — it never prints the field of √47), row 128's analogue is its theorem
+   in dimension four and up, row 129's plane clause is the d = 2 case of its density statement, which it lacks.**
+   Record `plans/FS131-ER1-davies-reading.md`; its § 9.2 holds drafts for the owed filing.
+7. **FS131-KN3** (kernel planner; brief `data/fs131/briefs/FS131-KN3-chain-plan.md`; claim list
+   `data/fs131/claims-NF2.md`; worktree and branch `fs131-wch`; item 656): the five-colour chain's architecture and
+   first layer. A long job with saved stages; a successor can take any stage from its record
+   `plans/FS131-KN3-chain-plan.md` on the branch.
+
+**RUNNING AT 2026-10-13 20:14 UTC: FS131-LU1 — A LANDING IN FLIGHT (the first number-field module — `Arith/UpperHalf`,
+`Arith/QuadraticPrime`, `Instances/UpperHalfValues` — tree `fs131-wnf`; brief `data/fs131/briefs/FS131-LU1-landing.md`;
+item 688); FS131-ID1 (`Arith/DyadicQuadratic.lean`, proved, building; tree `fs131-wdq`; item 683); FS131-IN1 (the
+thirteen leaves of `Arith/ThreeColourCriterion.lean`, tree `fs131-wrc`; item 686).** **Until the landing is back:
+nothing on `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`, `RUNNING.md`, and
+no `CLAUDE.md` filing.** At its green line: check its receipts (`data/fs131/lu1/gate/` on its branch), fast-forward
+`main`, tell Kooshi what is held, then the Clerk files its drafts (pattern
+`data/fs131/briefs/scripts/mk-fs131-fc1.py`; **fact-audit base `147e38bc8`**).
+
+**HELD TODAY (kernel, through the gate, on `main`): the measurable-number module** — `χ(ℝ²) = χ_m(ℝ²)` with
+Lebesgue-measurable classes, on the standard three axioms and the one declared outside theorem; a corollary of two
+outside results, formalized here (items 682, 684); **its drafts are filed** (merge `147e38bc8`; item 687).
+
+**The three-and-four-colours line**: `TorsionExtraction` (tree `fs131-wr2`), `ThreeColourCharacter` (`fs131-wc1`) and
+`DyadicQuadratic` (`fs131-wdq`) are each fully proved on their branches; `ThreeColourCriterion` is with FS131-IN1.
+**Its next jobs, as slots free**: a planner-implementer for the joining module (the planned text is
+`data/fs131/kn4/lean/ThreeFourColours.lean` on branch `fs131-wr2`; it joins the four branches and the landed residue
+module; state there the two character-form statements and the every-abelian-group form the implementers named, items
+679, 685), then that line's landing. **A job name is checked against `data/fs131/briefs/` before it is minted** (two
+were reused today; one overwritten report repaired, item 685).
+
+**Then, in order**: the Clerk for the owed corrections (items 640, 643, 644, 651, 653, 655, 659 (a), 684, and the
+direction change of 636) once no landing is in flight; the chain's successor planner (tree `fs131-wch`, item 661); a
+deriver on the chain's two questions; a small planner's job stating row 52's two values; FS-133's planner;
+FS131-KE1 (pricing the printed rigidity theorem; item 659 (3) goes into its brief).
+
+**REPORTS TO KOOSHI ONLY AT A GATE, A DECISION OF HIS OR HIS CHECK-IN (2026-10-13 16:44 UTC; his word W3, FS-131 inventory item 650): no per-event
+reports; report when something is through the gate, when a decision is genuinely his, or when he checks in. His
+defaults are in force: the asking lane's order; FS-133 joins the kernel queue; the measurable-number corollary
+(a reader's combination of `[Davies2026]` Lemma B.1 with the outside release's transfer, item 648; [hand], one mind)
+goes to Lean — "a great candidate to formalize too".** **The kernel queue, as slots free** (item 650): two
+implementers on the first module when FS131-KN2's plan is back → a planner on the corollary (claim list from
+FS131-ER1's record) → a planner on the chain's first definitions (with FS131-EN1's verdicts, items 645, 646, 649:
+the interface is run at the smaller set; what leaves is a duplicate model and proof, the split-place model and the
+wandering argument stay inside the second deduction) → FS-133's planner → rank 2's remaining leaves → FS131-KE1.
 
 **What I do at each hand-back.** *The ranking*: review by artifact (its claim-list quotations against `LEDGER.md` § The
 claim list; one attribution re-read); log it; report it to Kooshi as the asking lane's judgment. *The map*: review one

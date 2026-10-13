@@ -13,3 +13,7 @@ EN1-OFFPATH: the hand result R-U, with the split-place topology under it, and N1
 ## Not claimed
 
 EN1-NC: that any of these is new mathematics; that R-U is false or unneeded elsewhere; anything about rows other than 121 and 123; that the kernel's present theorems already state MR⁺(F) (they are stated over an abstract interface).
+
+## Dated lines
+
+- 2026-10-13 16:34 UTC — **EN1-MRPLUS holds in a narrower form than written; found by the deriver (FS131-EN1, its Stage 5).** Its words: "TRUE in a narrower form than 'F a real number field' — for every real number field with R_F = O′ (no stable dyadic place ramified in F(i)/F), and with 'finite measure' read as finite positive measure. (a) Scope: EF_F⁺'s three proofs need R = O′; at row 100's exception fields MR⁺ is a GAP exactly where MR is. The class of rows 121 and 123 (L ≥ 5) lies inside R = O′, so the path loses nothing. (b) Under the literal signed reading (τ signed, τ(T + A) = 0) it is false: the difference of two archimedean circle measures." A Lean statement of MR⁺ carries both: the field's hypothesis and positivity.
