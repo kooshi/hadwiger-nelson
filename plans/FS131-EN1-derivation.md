@@ -86,3 +86,57 @@ In full: the brief; `plans/STANDING-RULES.md`; `data/fs131/claims-EN1.md`; `Proo
 `plans/FS100-three-field-lemma.md` §R-close (stage 5) 1.2 (the six-link ladder); item 642 of `plans/FS131-close-inventory.md`. By grep, for the
 words `R-U`, `N1`, `E`, `split`: `plans/FS84-SI-V-verification.md` (J46), `plans/FS100-X02D-derivation.md`. What is read later is said at the
 stage that reads it.
+
+## Stage 2 — SAVED (recognition: what the five statements are, before any verdict)
+
+*`ephodos-recognition`, invoked fresh, run on the claim list. The object here is not a theorem that will not come; it is a chain of proofs in
+which a set `E` appears, and the question is which of `E`'s features the chain consumes. So the cut is the skill's one cut — what determines
+against what accompanies — applied to `E`.*
+
+### 2.1 For a stranger (an ergodic theorist who works on rigidity of algebraic actions)
+
+A countable abelian group `U` acts by automorphisms on a compact abelian group `X = R̂`. There is a measure classification in two halves: every
+finite invariant measure is `a·Haar` plus a part of zero entropy; and every invariant measure of zero entropy is carried by a named `U`-invariant
+σ-compact subgroup `H ⊂ X` (here `H = T + A`). A consumer has a `U`-invariant finite measure `σ` on `X` with `∫_{X∖H} Re χ(1) dσ < 0` and wants a
+contradiction. The records ran the consumer through a larger `U`-invariant subgroup `E ⊇ H`: they stated the classification as "an invariant
+measure null on `E` is a Haar multiple", restricted `σ` to `X ∖ E`, and bridged the difference with a lemma, "no finite invariant measure
+charges `E ∖ H`" (R-U). The five statements say: state the classification as "null on `H`" and the bridge is not needed.
+
+**This is** a classification theorem whose exceptional set was written larger than the set its exceptional measures live on. In that field's
+words the sharp form of "invariant and null on the exceptional set ⟹ Haar" takes the exceptional set to be exactly where the non-Haar
+measures sit, and R-U is the statement that `E ∖ H` is a **wandering** piece of the action: for each split place there is a `u ∈ U` whose
+powers move a shell `{1 ≤ |ξ₁|_v < |t|_v⁻¹}` off itself, so a finite invariant measure gives it nothing (Poincaré recurrence, read backwards).
+That is J45's proof of R-U word for word (`plans/FS84-SI-D-derivation.md` § 4.1, "the sets `uⁿ{…}` are disjoint, of equal measure").
+
+### 2.2 The features of `E`, sorted
+
+| feature of `E` | determines / accompanies, on the path of rows 121 and 123 | receipt |
+|---|---|---|
+| `T + A ⊆ E` | **determines**, and it is the only consequence of "`τ(E) = 0`" that MR's proof consumes: the feature *splits* — "`τ` is null on `E`" is used as "`τ` is null on `T + A`" | FS100-MR (a): "`τ′ ≤ τ` carried by `T + A ⊆ E`, `τ(E) = 0`, so `τ′ = 0`"; the kernel proof, l. 204: `measure_mono_null I.TA_subset_E hE'` |
+| `T + A` as EF_F⁺'s conclusion | **determines**; no smaller set will do | FS100-EFX: arc length on a circle of archimedean characters is invariant, of zero entropy and carried by `A`; the spectra of the four-colourings at K and ℚ(√11) sit on `T` (X01D § 4.2) |
+| `T + A` as the continuity group of the profinite-plus-archimedean topology (N1 (a) at `S = ∅`) | **determines** N2 at `S = ∅` | N2's ⟸ runs through Bochner on the completion; without the identification its measure lands on an unnamed set (§ Stage 3) |
+| `R` dense in `G′_∅` (N1 (b) at `S = ∅`) | **unsorted** at this stage | N2's proof cites it; whether it consumes it is § Stage 3's question |
+| `Fin_S`, `S ≠ ∅`: the split-place coordinates of `E`, with N1 (a), (b) at `S ≠ ∅` | **accompanies** — if the bridge is all that reads them | to be shown by the walk (§ Stage 6): every other reading of the larger set must be found or shown absent |
+| `Haar(E) = 0` (N1 (c)) | **accompanies** | FS100-MR: "MR uses neither R-U nor `m(E) = 0`"; the kernel proof binds the clause and never uses it (`unused_check.py`: one occurrence, the binder) |
+| that the split places are where `R` has denominators (`R = O′`) | **determines**, but it is a feature of `R`, not of `E` | EF_F⁺'s model `R̂ ≅ W/Λ`, `W = L_∞ × ∏′_{w split} L_w` (X01D § 2.0; X12B § 2.0) |
+
+### 2.3 What the recognition predicts, and where it differs from the proposer's picture
+
+1. **R-U's argument is inside EF_F⁺.** If `E ∖ (T + A)` is a wandering piece, then any proof that a class of invariant measures is carried by
+   `T + A` must run the wandering argument at the split places, and EF_F⁺ is such a proof. Checked at once, in both derivations: X01D § 3.8
+   ("Step 7 — wandering shells kill every other place", over the countably many split `w`), and X12B § 2.1 (Lemma Z: `ord_w` is equivariant, a
+   finite measure on `ℤ ∪ {∞}` invariant under `k ↦ k + h` charges no integer). X01D says so itself (§ 3.8, "Sanity check … that is R-U"), and
+   so does the plan's ladder ("Step 7 of EF_F⁺ re-derives R-U's mechanism internally", `plans/FS100-three-field-lemma.md` §R-close (stage 5)
+   1.2, link L3). **This is the difference from the proposer's picture.** Its words are that E := T + A "removes R-U (J45 § 5.4; FS100-EFZ)
+   from the leaves, together with J45-N1's clauses about the split places". What the recognition says: the *lemma* R-U and *J45's model* of the
+   split places leave the path; the *argument* of R-U and *a* model of the split places do not — they are a step of EF_F⁺, which is itself a
+   leaf. Stage 6 says exactly what stays.
+2. **MR⁺ is MR and R-U in one sentence** (a neighbour the new name predicts; derived in § Stage 4 as EN1-EQUIV): given `Haar(E) = 0`,
+   MR⁺(F) ⟺ MR(F) ∧ R-U(F). So MR⁺ is not a cheaper sentence than MR; what is saved is a second, separate proof of the wandering step.
+3. **N2's home** (recalled, not read; it bears on no verdict below): the vectors whose spectral measure sits on the continuity group of a
+   group topology are the vectors on which the action extends to the completion — the frame of eigenvalue groups of non-singular
+   transformations and "saturated" subgroups of a dual (Aaronson–Nadkarni 1987; Host–Méla–Parreau 1991, both recalled by name only). A
+   prior-art debt of J45-N2's entry, which reads "owed"; listed in the report.
+
+**A recognition that differs from the plan's is a finding**: item 1 is one, and it is the fifth statement's whole risk. Sent to the
+coordinator with the first verdict.
