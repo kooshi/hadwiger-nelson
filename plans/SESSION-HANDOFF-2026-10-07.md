@@ -52,9 +52,8 @@ this session):
    `fs131-wnf`, the last landing's tree moved, its build matching `main`; record
    `plans/FS131-KN1-number-field-kernel-map.md` on the branch): phase 1 the map of what each number-field result rests
    on in Lean; **phase 2 starts only on my dated amendment** at the foot of its brief.
-3. **FS124-F2** (the Clerk, Sonnet; brief `data/fs124/briefs/FS124-F2-filing.md`; worktree `fs124-wf2`, branch
-   `fs124-f2`; FS-124 inventory item 51): the owed filing of FS-124's second landing, verbatim, with the digests, the
-   fact audit (`--base 07bf6096`) and the atlas rebuilt locally. FS-124 **stays Derived** (ruling there).
+3. ~~FS124-F2, the owed filing~~ — **done and merged (`94bb3f35c`, FS-124 inventory item 52): the front page reads the
+   library as gated; FS-124 stays Derived. THE NEXT FILING'S FACT-AUDIT BASE IS `94bb3f35c`.** Two jobs are running, not three.
 
 **What I do at each hand-back.** *The ranking*: review by artifact (its claim-list quotations against `LEDGER.md` § The
 claim list; one attribution re-read); log it; report it to Kooshi as the asking lane's judgment. *The map*: review one
