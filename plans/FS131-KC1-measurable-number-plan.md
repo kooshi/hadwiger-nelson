@@ -8,8 +8,9 @@ Working files: `data/fs131/kc1/`.*
 
 ## Theorems this phase proved
 
-The leaves fell while typing: the module has no `sorry`. Each line is **kernel-checked by `lake env lean` in this tree
-(with `autoImplicit` off), not yet through `./scripts/build.sh` or the gate** — the landing's work, § Stage 3. Module:
+The leaves fell while typing: the module has no `sorry`. Each line is **kernel-checked in this tree — by `lake env lean`
+and by `./scripts/build.sh` (Stage 4) — and not yet through the gate** (the axiom audit's records, the vacuity, assumptions
+and duplicate-name steps, `lake lint`): the landing's work, § Stage 3. Module:
 `Proofs/HadwigerNelson/Plane/LebesgueNumber.lean`. Axioms as printed by `data/fs131/kc1/axioms_probe.sh`
 (`data/fs131/kc1/axioms-probe.out`; its control plants a `sorry` and `sorryAx` reaches the headline).
 
@@ -195,3 +196,11 @@ a few lines. So (c) is free and (a), (b) are a small job of their own.
 line and the clause that closes it, the sentence for a reader of the repository, `CLAUDE.md`'s sentence on Falconer's
 number, the docstrings of `Plane.chiM` and `Plane.AeColouring`, the `BIBLIOGRAPHY.md` reading status, three `LEAN.md`
 facts.
+
+## Stage 4 — SAVED: the first build
+
+`./scripts/build.sh` green in this tree — 946 of 946 batches, 10 modules rebuilt (FS-124's eight, this module, the root), 0 modules with warnings, 24 m 18 s wall under `--mem 18 --cpus 10 -- env MEMMAX=18G BATCH=2`, peak 3.7 GB summed over this tree's `lean` processes (sampled every 10 s; `data/fs131/kc1/build-1.log`). The headlines' axioms, read from the module as built (`data/fs131/kc1/AxiomsBuilt.lean`,
+`axioms-built.out`): `exists_proper_ae_eq_of_proper_on_conull`, `Plane.davies_lemma_B1`, `Plane.chiM0_eq_chiLebesgue` on
+`[propext, Classical.choice, Quot.sound]`; `Plane.chromaticNumber_plane_eq_chiLebesgue` on those and
+`HadwigerNelson.Outside.OAI158.proper_to_borel_weak`. Item 1 of "What is left" (Stage 3) is done; items 2 and 3 are the
+landing's. The report: `data/fs131/reports/FS131-KC1.md`.
