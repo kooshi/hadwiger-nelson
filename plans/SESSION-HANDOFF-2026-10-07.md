@@ -91,11 +91,16 @@ this session):
    first layer. A long job with saved stages; a successor can take any stage from its record
    `plans/FS131-KN3-chain-plan.md` on the branch.
 
-**RUNNING AT 2026-10-13 17:51 UTC: FS131-LC1 — A LANDING IN FLIGHT (the measurable-number module, tree `fs131-wkc`; item
-663); FS131-KN4 (three and four colours, a planner, tree `fs131-wr2`; item 662); FS131-IU1 (an implementer on the
-twelve leaves of `Arith/UpperHalf.lean`, tree `fs131-wnf`; item 664).** FS131-KN2 is done (item 664): the residue
-module's skeleton builds, 24 leaves. **Next free slot: FS131-IQ1, the second file's nine leaves — item 664's last
-sentence says exactly how to make its tree and brief.**
+**RUNNING AT 2026-10-13 18:17 UTC: FS131-LC1 — A LANDING IN FLIGHT (the measurable-number module, tree `fs131-wkc`; items
+663, 667); FS131-IQ1 (an implementer on the nine leaves of `Arith/QuadraticPrime.lean`, tree `fs131-wq1`; item 671);
+FS131-KN5 (a successor planner on the three-and-four-colours skeleton — the modeling passes, its first build, the two
+thin leaves — tree `fs131-wr2`; item 669).** Done since: FS131-IU1 (the residue module's first file fully proved on
+branch `fs131-wnf`, built there, not gated; item 670); FS131-KN4 (item 669). **Next free slots, in order: the three
+leaves of `Instances/UpperHalfValues.lean` on `fs131-wnf` (they inhabit the two-colour theorems' hypothesis: the
+module cannot land without them); then the residue module's landing (join `fs131-wq1` into `fs131-wnf`, the gate —
+pattern `data/fs131/briefs/scripts/mk-fs131-lc1.py`); two implementers on the three-and-four-colours modules when
+FS131-KN5 says the statements are final; the chain's successor planner; a deriver on the chain's two questions;
+FS-133's planner; FS131-KE1.**
 **Until the landing is back: nothing on
 `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`, `RUNNING.md`, and no
 `CLAUDE.md` filing.** At its green line: check its receipts (`data/fs131/lc1/gate/`), fast-forward `main` to its
