@@ -1,0 +1,29 @@
+Merge made by the 'ort' strategy.
+ data/fs131/briefs/FS131-KN3-chain-plan.md          | 230 +++++
+ .../briefs/FS131-KN4-three-four-colours-plan.md    | 142 ++++
+ data/fs131/briefs/FS131-LC1-landing.md             | 142 ++++
+ data/fs131/briefs/scripts/mk-fs131-kn3.py          | 149 ++++
+ data/fs131/briefs/scripts/mk-fs131-kn4.py          | 126 +++
+ data/fs131/briefs/scripts/mk-fs131-lc1.py          | 139 +++
+ data/fs131/claims-NF2.md                           |  42 +
+ data/fs131/claims-NF3.md                           |   4 +
+ data/fs131/claims-NF4.md                           |  26 +
+ data/fs131/er1/fields_check.py                     |  74 ++
+ data/fs131/er1/readback_check.py                   |  39 +
+ data/fs131/reports/FS131-ER1.md                    |  50 ++
+ plans/FS131-ER1-davies-reading.md                  | 938 +++++++++++++++++++++
+ plans/FS131-close-inventory.md                     |  10 +
+ plans/SESSION-HANDOFF-2026-10-07.md                |  32 +-
+ 15 files changed, 2135 insertions(+), 8 deletions(-)
+ create mode 100644 data/fs131/briefs/FS131-KN3-chain-plan.md
+ create mode 100644 data/fs131/briefs/FS131-KN4-three-four-colours-plan.md
+ create mode 100644 data/fs131/briefs/FS131-LC1-landing.md
+ create mode 100644 data/fs131/briefs/scripts/mk-fs131-kn3.py
+ create mode 100644 data/fs131/briefs/scripts/mk-fs131-kn4.py
+ create mode 100644 data/fs131/briefs/scripts/mk-fs131-lc1.py
+ create mode 100644 data/fs131/claims-NF2.md
+ create mode 100644 data/fs131/claims-NF4.md
+ create mode 100644 data/fs131/er1/fields_check.py
+ create mode 100644 data/fs131/er1/readback_check.py
+ create mode 100644 data/fs131/reports/FS131-ER1.md
+ create mode 100644 plans/FS131-ER1-davies-reading.md

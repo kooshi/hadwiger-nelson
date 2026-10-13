@@ -1,0 +1,47 @@
+slot: admitted lc1-decls-before: mem 4 GiB (hard cap), cpus 0,1
+=== LC1 DECLS ===
+LC1MODULE Proofs.HadwigerNelson.Plane.LebesgueNumber constants=41
+LC1DECL DEF written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.HasDensityOneAt
+LC1DECL THM aux - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.HasDensityOneAt.eq_1
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.HasDensityOneAt.inter
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.HasDensityOneAt.nonempty
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.AeColouring.col_eq_of_mem_core
+LC1DECL DEF written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.AeColouring.core
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.AeColouring.core_dist_ne_one
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.AeColouring.measurableSet_core
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.AeColouring.volume_compl_iUnion_core
+LC1DECL DEF written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.chiLebesgue
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.chiLebesgue_le
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.chiLebesgue_le_chiM
+LC1DECL DEF aux - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.chiLebesgue_le_chiM.match_1_1
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.chiLebesgue_le_chiM0
+LC1DECL DEF aux - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.chiLebesgue_le_chiM0.match_1_1
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.chiM0_eq_chiLebesgue
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.chiM0_le_chiLebesgue
+LC1DECL DEF aux - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.chiM0_le_chiLebesgue.match_1_1
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.chromaticNumber_euclidean_plane_eq_chiLebesgue
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.chromaticNumber_plane_eq_chiLebesgue
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.chromaticNumber_plane_le_chiLebesgue
+LC1DECL DEF aux - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.chromaticNumber_plane_le_chiLebesgue.match_1_1
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.colorable_iff_exists_nullMeasurable_proper
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.davies_lemma_B1
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.exists_aeColouring_of_nullMeasurable_proper
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.exists_proper_of_aeColouring
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.exists_proper_of_nullMeasurable_weak
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.mem_densitySet_iff_hasDensityOneAt
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.nonempty_aeColouring_iff_exists_nullMeasurable_proper
+LC1DECL DEF aux - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.nonempty_aeColouring_iff_exists_nullMeasurable_proper.match_1_1
+LC1DECL DEF aux - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.nonempty_aeColouring_iff_exists_nullMeasurable_proper.match_1_3
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.Plane.nullMeasurable_iff_forall_fibre
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.ae_hasDensityOneAt_fibre
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.davies_lemma_B1_euclidean
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.exists_nullMeasurable_selector
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.exists_proper_ae_eq_of_proper_on_conull
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.exists_proper_nullMeasurable_of_avoiding_cover
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.exists_translate_mem
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.hasDensityOneAt_congr_ae
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.hasDensityOneAt_preimage_add_right
+LC1DECL THM written - Proofs.HadwigerNelson.Plane.LebesgueNumber HadwigerNelson.hasDensityOneAt_univ
+LC1TOTAL modules=1 constants=41
+=== END ===
+exit=0

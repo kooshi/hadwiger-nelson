@@ -1,0 +1,8 @@
+MATCH    data/fs131/REQUEST-2026-10-13.md | 278 chars | W2: (2026-10-13, answering the choice between the two publishable form
+MATCH    data/fs131/REQUEST-2026-10-13.md | 276 chars | W3: (2026-10-13, after the report on the new paper and the corollary a
+MATCH    data/fs131/claims-NF3.md | 575 chars | NF3-PRINTED: **Lemma B.1** (p. 44). "Suppose that A₁, …, A_k ⊆ ℝ^d are
+MATCH    data/fs131/claims-NF3.md | 453 chars | NF3-WEAK-TO-PROPER: **ER1-WEAK-TO-PROPER** — a weak measurable `k`-col
+MATCH    data/fs131/claims-NF3.md | 240 chars | NF3-PLANE: **ER1-PLANE-FALCONER** — `χ(ℝ²) = χ_m(ℝ²)`, Falconer's numb
+MATCH    data/fs131/claims-NF3.md | 419 chars | NF3-NC: that either statement is this project's theorem (each is a com
+MATCH    data/fs131/claims-NF3.md | 1209 chars | - 2026-10-13 16:51 UTC — **The library's `Plane.chiM` is the Borel num
+quotations: 7 mismatches: 0

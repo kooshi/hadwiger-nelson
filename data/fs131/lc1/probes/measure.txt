@@ -1,0 +1,8 @@
+MEASURE measure-selftest mem-cap=1G cpus=1 exit=0 wall=0.1s peak=0.30 GiB max-rss=0.30 GiB :: python3 -c x = bytearray(300*1024*1024); print('held 300 MiB')
+MEASURE measure-selftest-fail mem-cap=1G cpus=1 exit=7 wall=0.0s peak=0.00 GiB max-rss=0.01 GiB :: bash -c exit 7
+MEASURE statements-before mem-cap=4G cpus=2 exit=0 wall=3.0s peak=0.52 GiB max-rss=4.34 GiB :: lake env lean data/fs131/lc1/StatementDump.lean
+MEASURE checks-before mem-cap=4G cpus=2 exit=0 wall=3.9s peak=0.55 GiB max-rss=4.37 GiB :: lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false data/fs131/lc1/checks.lean
+MEASURE lint-asgiven mem-cap=8G cpus=4 exit=0 wall=9.2s peak=1.05 GiB max-rss=4.92 GiB :: lake lint --no-build -- --no-build --trace
+MEASURE dupnames-asgiven mem-cap=14G cpus=8 exit=0 wall=4.0s peak=0.52 GiB max-rss=4.35 GiB :: ./scripts/dupnames.sh
+MEASURE vacuity-asgiven mem-cap=14G cpus=4 exit=0 wall=117.9s peak=0.59 GiB max-rss=4.50 GiB :: ./scripts/vacuity.sh
+MEASURE assumptions-asgiven mem-cap=14G cpus=4 exit=1 wall=105.7s peak=0.66 GiB max-rss=4.55 GiB :: ./scripts/assumptions.sh
