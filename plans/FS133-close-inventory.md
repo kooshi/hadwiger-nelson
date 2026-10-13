@@ -131,3 +131,7 @@ inventory, items 607–625 (an outside proof of six became this project's litera
    node for row 129; the ledger's row 129 is not regraded — [hand], one mind, kernel pending. **Slips of mine at this
    filing**: the stub's corrected citation was first written with its address twice (fixed in the same pass); the allow-list's
    reason first named a file that does not exist (fixed before the commit).
+
+- **2026-10-13 20:25 UTC — the Lean phase starts, at Kooshi's word of 2026-10-13** (`data/fs131/REQUEST-2026-10-13.md` lines W2 and W3; FS-131 inventory items 650 and 690): the kernel planner FS133-K1 is launched on the kernel claim list `data/fs133/claims-K1.md` (six statements, by script from the derivation's entries); brief `data/fs133/briefs/FS133-K1-kernel-plan.md`; tree and branch `fs133-wk1`; record `plans/FS133-kernel-plan.md` on that branch. Not blind (ruling in FS-131 item 690). New since this milestone was derived: `[Davies2026]` proves the same sentence in dimension four and up and names the plane as its aim (`plans/FS131-ER1-davies-reading.md`).
+
+- **2026-10-13 20:39 UTC — how the outside rigidity theorem enters: declared, in the vector form the release's own transfer consumes (`residual_fourier`), not as the printed Theorem 2.3; the generic lemmas behind C133-ALG ported.** The ruling, my receipt and the port's price are FS-131 inventory item 693 and Amendment 1 of `data/fs133/briefs/FS133-K1-kernel-plan.md`.
