@@ -550,7 +550,7 @@ equality `χ = χ_m⁰` by import. This is the real plane's row; listed because 
 | `[S8]` | `SevenConditional.G4`: a refutation certificate for the 588-vertex core at four colours. | 103 | needs a proof log: a search request |
 | `[S9]` | At a stable prime the image of `U_F` in `𝓞/P^m` is every norm-one element. | 99 (its step 5), 123 (count, CLS) | unknown |
 
-**These go first whatever the ranking says**: `[S1a]`, `[S1b]`, `[S2]` — eleven rows wait on them between them, they import
+**These go first whatever the ranking says**: `[S1a]`, `[S1b]`, `[S2]` — thirteen rows wait on them between them (52, 53, 57, 63, 73, 94, 99, 103, 105, 119, 121, 123, 127), they import
 nothing, and with them two exact values close at once (X8).
 
 ### X2. Hypotheses that more than one statement takes (`scripts/assumptions-ledger.txt`)
@@ -636,7 +636,7 @@ gives the two-colour theorem its first real instance. (v) "some real number fiel
 **The first module I would start with, whatever the ranking:** the residue upper half — `[S1a]` and `[S1b]` in one new
 module (`Arith/UpperHalf`, importing `Arith/PlaceHom` and `SpectralChain`), `[S2]` for real quadratic fields in a second
 (`Arith/QuadraticPrime`), and the values they close in a third (`Instances/…`: `χ(ℚ(√11)²) = 4`, `χ(ℚ²) = 2`,
-`χ(ℚ(√167)²) ≤ 8`, `χ(ℚ(√47)²) ≤ 5` again as the control against `SqrtFortySeven`). Reasons: eleven rows wait on it; it
+`χ(ℚ(√167)²) ≤ 8`, `χ(ℚ(√47)²) ≤ 5` again as the control against `SqrtFortySeven`). Reasons: thirteen rows wait on it; it
 discharges one hypothesis of the headline (`inline:UpperHalf`) and is leaf 1 of row 99; it imports nothing; and the result
 everyone expects first, `χ(ℚ(√47)²) = 5`, is not reachable without the whole chain, of which this is also a leaf. Two
 implementers could run at once with no shared file: one on `Arith/UpperHalf`, one on `Arith/QuadraticPrime`; the instances
