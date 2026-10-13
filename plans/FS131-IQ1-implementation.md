@@ -54,3 +54,68 @@ No leaf's statement disagrees with its plan; no message was owed.
 
 **The machine.** Two builds of other jobs held the slot's whole budget (20 of 22 GiB, twelve of twelve cores) from the
 first edit: a one-file run at 4 GiB waits behind them. Proofs were drafted on paper against Mathlib's source meanwhile.
+
+## Stage 2 — SAVED: the nine leaves proved (elaborated; not yet built)
+
+**State.** `Proofs/HadwigerNelson/Arith/QuadraticPrime.lean` has no `sorry`. Under `lake env lean` with the lakefile's
+three options (`autoImplicit`, `relaxedAutoImplicit` off; `linter.missingDocs` on) it elaborates with **no message at all**
+— no error, no warning (`data/fs131/iq1/logs/QuadraticPrime.out`, empty; exit 0; 8.5–15.6 s wall, 3.49 GB). The statement
+check after the last edit: `RESULT: PASS` (14 of the skeleton's 14 stored types found unchanged; the six examples' text
+identical; exit 0). The interim axiom print (the module's source with one `#print axioms` per public theorem appended,
+`data/fs131/iq1/axioms.py gen --copy`; output `data/fs131/iq1/axioms-interim.txt`): **13 of 13 on
+`[propext, Classical.choice, Quot.sound]`**; both controls fired (a theorem closed by `sorry` prints `sorryAx`; a theorem
+on a planted axiom prints it); exit 0. **This is not a build**: `lake env lean` is not the lakefile's build, and the
+print reads a copy, not the compiled module — stage 3 repeats both on the built library.
+
+**How each leaf was proved, against the plan.** Order as the plan's, Q1–Q7, Q9, Q8; all nine were drafted against Mathlib's
+source while two other builds held the slot, then elaborated together; three first-run errors, all in Q3–Q7, none in Q8–Q9.
+
+| leaf | the proof | against the plan |
+|---|---|---|
+| Q1 | `IsIntegral.of_pow`, `Real.sq_sqrt`, `isIntegral_algebraMap` | the plan's route, three lines |
+| Q2 | `IntermediateField.adjoin_toSubfield`, `Subfield.closure_mono`, `Subfield.closure_le`, `SubfieldClass.ratCast_mem` | the plan's route |
+| Q3 | the inclusion into the adjoin as a `ℚ`-linear map (`coe_mem_adjoin`, private), `Module.Finite.of_injective`, `IntermediateField.finiteDimensional_adjoin`, Q1 | the plan's route |
+| Q4 | the planner's compiled proof, verbatim | — |
+| Q5 | `norm_le_one_of_isIntegral` (private: `IsIntegral.tower_top`, `IsIntegrallyClosed.isIntegral_iff`), `map_isIntegral_int`, the map into `ℤ_p` by its fields, `PadicInt.toZMod` | the plan's route; `map_isIntegral_int` in place of `IsIntegral.map` on `ι.toIntAlgHom` (one lemma for two) |
+| Q6 | `hensels_lemma` for `X² − d` over `ℤ_p` itself at a natural lift `n` of the root; `PadicInt.norm_int_lt_one_iff_dvd`, `PadicInt.norm_natCast_eq_one_iff` | the plan's route, with the polynomial in `ℤ_p[X]` rather than `ℤ[X]` (no cast of `d` through `ℤ`) |
+| Q7 | `IntermediateField.nonempty_algHom_adjoin_of_splits`; `minpoly.dvd`, `Polynomial.map_dvd`, `Polynomial.Splits.of_dvd` on `(X − r)(X + r)`; the inclusion written by its fields over `coe_mem_adjoin` | the plan's route; its fallback for the composition (the ring homomorphism by fields) was the form used |
+| Q8 | six private lemmas, then the theorem (below) | the plan's children (a)–(e), by its first route |
+| Q9 | `K₀ := (fieldOfRadicands D).comap _`, `π := ⟨√q, _⟩`, `ι₀` = Q7's map after `K₀ → fieldOfRadicands D`; generation by `Subfield.closure_le` into the image under `Subfield.map`; Q8, then Q4 | the plan's route (its second option for `hgen`) |
+
+**Q8's children, as private lemmas of the file** (each a `private theorem`, `--` comments, no docstring; none is named in the
+plan, so none is public):
+
+- `valuation_natCast_eq_one` — `p ∣ q`, `p² ∤ q` give `(q : ℚ_p) ≠ 0` and valuation `1` (`Padic.valuation_natCast`,
+  `padicValNat_dvd_iff_le`, `omega`).
+- `padic_sq_ne_natCast` — no `y : ℚ_p` has `y² = q` (`Padic.valuation_pow`: `2·v(y) = 1`). This is child (a).
+- `norm_le_one_of_sq_mul_natCast` — `‖β² q‖ ≤ 1` gives `‖β‖ ≤ 1` (`Padic.norm_le_one_iff_val_nonneg`,
+  `Padic.valuation_mul`: `0 ≤ 2·v(β) + 1`). The parity step of child (d).
+- `norm_le_one_of_two_mul` — `‖2α‖ ≤ 1` gives `‖α‖ ≤ 1` for odd `p` (`Padic.norm_natCast_eq_one_iff`).
+- `exists_coords` — every `x : K` is `a + bπ` with `a b : K₀` (`Subfield.closure_induction` on `hgen`; the inverse case by
+  `a² − b²q ≠ 0`). Child (b). **No subfield structure is built**: the induction principle's six cases are the six closure
+  properties.
+- `coords_unique` — `a + bπ = a' + b'π` gives `a = a'`, `b = b'`. Child (c).
+
+In the theorem: `choose re im hrep` on `exists_coords`; additivity, multiplicativity and the values at `0`, `1` from
+`coords_unique`; `conj : K →+* K`, `x ↦ re x − im x·π`, written by its fields; for an integer `x`, `x + conj x = re x + re x`
+and `x · conj x = (re x)² − (im x)² q` are integral over `ℤ` and lie in `K₀`, so their images under `ι₀` have norm at most
+`1` (`isIntegral_algebraMap_iff`, `map_isIntegral_int`, `norm_le_one_of_isIntegral`); the two norm lemmas give
+`‖ι₀ (re x)‖ ≤ 1` and `‖ι₀ (im x)‖ ≤ 1`; the homomorphism is `x ↦ toZMod ⟨ι₀ (re x), _⟩`, multiplicative because
+`toZMod q = 0`.
+
+**Re-priced from the first child, as the brief asks**: the plan calls Q8 "the largest leaf"; drafted it is 190 lines with
+its helpers (93 of them the theorem), and it elaborated on the first run. No dispatch to a companion skill was needed: no
+leaf took three attempts.
+
+**What the first runs found** (for the next implementer of this shape):
+
+- `rw [h] at hx` with `hx : ↑x ∈ S` and `x : ↥S` fails ("motive is not type correct": `x`'s type mentions `S`). Read the
+  equation of subfields at a point instead: `(SetLike.ext_iff.1 h (x : ℝ)).1 x.2`.
+- `simp only [Polynomial.map_C, map_natCast]` on `(C (d : ℚ)).map f` rewrites the inner `C ↑d` to the cast `(d : ℚ[X])`
+  first (`map_natCast` at the ring homomorphism `C`), and `Polynomial.map_C` never fires; a `rw` chain in the order
+  `Polynomial.map_C, map_natCast` does what was meant.
+- `Polynomial.Splits.of_dvd hg hg₀ ?_` with `hg` built inline leaves `g` a metavariable; state `hg` as a `have` with its
+  polynomial.
+- `rw [map_one]` does not see `((1 : 𝓞 K) : K)`: the coercion is the abbreviation `RingOfIntegers.val`, whose head is not
+  `DFunLike.coe`. `show … (algebraMap (𝓞 K) K 1) …` first (they are definitionally the same), or use `simp`.
+- `((2 * a : K₀) : K)` is avoided by writing `a + a`: no numeral crosses the subfield coercion (`LEAN.md`, FS131-I10C).

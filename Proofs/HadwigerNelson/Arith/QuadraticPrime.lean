@@ -39,17 +39,43 @@ open HadwigerNelson HadwigerNelson.SquareClass NumberField
 
 /-- `√d` is integral over `ℚ` (a root of `X² − d`). -/
 theorem isIntegral_sqrt_natCast (d : ℕ) : IsIntegral ℚ (Real.sqrt d) := by
-  sorry
+  refine IsIntegral.of_pow (n := 2) two_pos ?_
+  rw [Real.sq_sqrt (Nat.cast_nonneg d), ← map_natCast (algebraMap ℚ ℝ) d]
+  exact isIntegral_algebraMap
 
 /-- `ℚ(√D)`, the closure of the square roots in `ℝ`, is the intermediate field of `ℝ/ℚ` they generate. -/
 theorem fieldOfRadicands_eq_adjoin (D : Set ℕ) :
     fieldOfRadicands D = (IntermediateField.adjoin ℚ ((fun d : ℕ => Real.sqrt d) '' D)).toSubfield := by
-  sorry
+  unfold fieldOfRadicands
+  rw [IntermediateField.adjoin_toSubfield]
+  refine le_antisymm (Subfield.closure_mono Set.subset_union_right) ?_
+  rw [Subfield.closure_le]
+  rintro x (⟨r, rfl⟩ | hx)
+  · rw [eq_ratCast]
+    exact SubfieldClass.ratCast_mem _ r
+  · exact Subfield.subset_closure hx
+
+-- An element of `ℚ(√D)` lies in the intermediate field its generators span: `fieldOfRadicands_eq_adjoin`, read at
+-- a point.
+private theorem coe_mem_adjoin (D : Set ℕ) (x : fieldOfRadicands D) :
+    (x : ℝ) ∈ IntermediateField.adjoin ℚ ((fun d : ℕ => Real.sqrt d) '' D) :=
+  (SetLike.ext_iff.1 (fieldOfRadicands_eq_adjoin D) (x : ℝ)).1 x.2
 
 /-- **`ℚ(√D)` is a number field for finite `D`** (finitely many integral generators:
 `IntermediateField.finiteDimensional_adjoin`). -/
 theorem numberField_fieldOfRadicands {D : Set ℕ} (hD : D.Finite) : NumberField (fieldOfRadicands D) := by
-  sorry
+  set S : Set ℝ := (fun d : ℕ => Real.sqrt d) '' D
+  haveI : Finite S := (hD.image _).to_subtype
+  haveI : FiniteDimensional ℚ (IntermediateField.adjoin ℚ S) :=
+    IntermediateField.finiteDimensional_adjoin fun x hx => by
+      obtain ⟨d, -, rfl⟩ := hx
+      exact isIntegral_sqrt_natCast d
+  let j : fieldOfRadicands D →ₗ[ℚ] IntermediateField.adjoin ℚ S :=
+    { toFun := fun x => ⟨x, coe_mem_adjoin D x⟩
+      map_add' := fun _ _ => rfl
+      map_smul' := fun c x => Subtype.ext (by simp [Algebra.smul_def]) }
+  have hj : Function.Injective j := fun x y h => Subtype.ext (congrArg Subtype.val h :)
+  exact { to_finiteDimensional := Module.Finite.of_injective j hj }
 
 /-- The instance the statements about `𝓞 (ℚ(√D))` read. Global and named, so that no module downstream declares its own
 (two anonymous instances of one proposition merge in silence: `LEAN.md` § The gate). -/
@@ -62,13 +88,29 @@ instance instNumberFieldFieldOfRadicands (D : Set ℕ) [Finite D] : NumberField 
 homomorphism is onto: `ZMod.ringHom_surjective`). -/
 theorem isMaximal_ker_and_card {R : Type*} [CommRing R] {p : ℕ} (hp : p.Prime) (f : R →+* ZMod p) :
     (RingHom.ker f).IsMaximal ∧ Nat.card (R ⧸ RingHom.ker f) = p := by
-  sorry
+  haveI : Fact p.Prime := ⟨hp⟩
+  have hs := ZMod.ringHom_surjective f
+  exact ⟨RingHom.ker_isMaximal_of_surjective f hs,
+    by rw [Nat.card_congr (RingHom.quotientKerEquivOfSurjective hs).toEquiv, Nat.card_zmod]⟩
+
+-- An element of `ℚ_p` integral over `ℤ` has norm at most `1`: `ℤ_p` is integrally closed in `ℚ_p`.
+private theorem norm_le_one_of_isIntegral {p : ℕ} [Fact p.Prime] {y : ℚ_[p]} (hy : IsIntegral ℤ y) : ‖y‖ ≤ 1 := by
+  obtain ⟨z, rfl⟩ := IsIntegrallyClosed.isIntegral_iff.1 (hy.tower_top (A := ℤ_[p]))
+  exact z.norm_le_one
 
 /-- **The integers of a field that embeds in `ℚ_p` map to `ℤ/p`**: an integral element lands in `ℤ_p` (integrally closed
 in `ℚ_p`), and `f x` is its residue there. -/
 theorem exists_ringHom_zmod_of_padic {K : Type*} [Field K] {p : ℕ} [Fact p.Prime] (ι : K →+* ℚ_[p]) :
     ∃ f : 𝓞 K →+* ZMod p, ∀ (x : 𝓞 K) (z : ℤ_[p]), (z : ℚ_[p]) = ι (x : K) → f x = PadicInt.toZMod z := by
-  sorry
+  have h : ∀ x : 𝓞 K, ‖ι (x : K)‖ ≤ 1 := fun x =>
+    norm_le_one_of_isIntegral (map_isIntegral_int ι (RingOfIntegers.isIntegral_coe x))
+  let g : 𝓞 K →+* ℤ_[p] :=
+    { toFun := fun x => ⟨ι (x : K), h x⟩
+      map_one' := PadicInt.ext (by simp)
+      map_mul' := fun x y => PadicInt.ext (by simp)
+      map_zero' := PadicInt.ext (by simp)
+      map_add' := fun x y => PadicInt.ext (by simp) }
+  exact ⟨PadicInt.toZMod.comp g, fun x z hz => congrArg PadicInt.toZMod (PadicInt.ext hz.symm)⟩
 
 /-- **A field that embeds in `ℚ_p` has a maximal ideal of its integers with `p` elements in the quotient.** -/
 theorem exists_maximal_card_of_padic {K : Type*} [Field K] {p : ℕ} [Fact p.Prime] (ι : K →+* ℚ_[p]) :
@@ -81,13 +123,59 @@ theorem exists_maximal_card_of_padic {K : Type*} [Field K] {p : ℕ} [Fact p.Pri
 /-- **Hensel**: a natural number that is a nonzero square modulo an odd prime `p` is a square in `ℤ_p`. -/
 theorem exists_padicInt_sq_eq {p : ℕ} [Fact p.Prime] (hp2 : p ≠ 2) {d : ℕ} (hd0 : (d : ZMod p) ≠ 0)
     (hd : IsSquare (d : ZMod p)) : ∃ r : ℤ_[p], r ^ 2 = (d : ℤ_[p]) := by
-  sorry
+  have hp : p.Prime := Fact.out
+  obtain ⟨s, hs⟩ := hd
+  obtain ⟨n, rfl⟩ := ZMod.natCast_zmod_surjective s
+  have hn : ¬ p ∣ n := fun h => hd0 (by rw [hs, (ZMod.natCast_eq_zero_iff n p).2 h, mul_zero])
+  have hdvd : (p : ℤ) ∣ (n : ℤ) ^ 2 - d := by
+    rw [← ZMod.intCast_zmod_eq_zero_iff_dvd]
+    push_cast
+    rw [hs]
+    ring
+  let F : Polynomial ℤ_[p] := Polynomial.X ^ 2 - Polynomial.C (d : ℤ_[p])
+  have hF : Polynomial.aeval (n : ℤ_[p]) F = (((n : ℤ) ^ 2 - d : ℤ) : ℤ_[p]) := by
+    simp [F]
+  have hF' : Polynomial.aeval (n : ℤ_[p]) (Polynomial.derivative F) = ((2 * n : ℕ) : ℤ_[p]) := by
+    simp [F, one_add_one_eq_two]
+  have h1 : ‖Polynomial.aeval (n : ℤ_[p]) (Polynomial.derivative F)‖ = 1 := by
+    rw [hF', PadicInt.norm_natCast_eq_one_iff]
+    exact (Nat.Prime.coprime_iff_not_dvd hp).2 fun h =>
+      (hp.dvd_mul.1 h).elim (fun h2 => hp2 ((Nat.prime_dvd_prime_iff_eq hp Nat.prime_two).1 h2)) hn
+  have h2 : ‖Polynomial.aeval (n : ℤ_[p]) F‖ < 1 := by
+    rw [hF]
+    exact (PadicInt.norm_int_lt_one_iff_dvd _).2 hdvd
+  obtain ⟨z, hz, -⟩ := hensels_lemma (F := F) (a := (n : ℤ_[p])) (by rw [h1, one_pow]; exact h2)
+  refine ⟨z, sub_eq_zero.1 ?_⟩
+  simpa [F] using hz
 
 /-- **`ℚ(√D)` embeds in `ℚ_p`** when every radicand is a nonzero square modulo the odd prime `p`: each generator's minimal
 polynomial divides `X² − d`, which splits in `ℚ_p` (`IntermediateField.nonempty_algHom_adjoin_of_splits`). -/
 theorem nonempty_ringHom_padic (D : Set ℕ) {p : ℕ} [Fact p.Prime] (hp2 : p ≠ 2)
     (hD : ∀ d ∈ D, (d : ZMod p) ≠ 0 ∧ IsSquare (d : ZMod p)) : Nonempty (fieldOfRadicands D →+* ℚ_[p]) := by
-  sorry
+  set S : Set ℝ := (fun d : ℕ => Real.sqrt d) '' D
+  have hK : ∀ s ∈ S, IsIntegral ℚ s ∧ ((minpoly ℚ s).map (algebraMap ℚ ℚ_[p])).Splits := by
+    rintro _ ⟨d, hd, rfl⟩
+    refine ⟨isIntegral_sqrt_natCast d, ?_⟩
+    obtain ⟨r, hr⟩ := exists_padicInt_sq_eq hp2 (hD d hd).1 (hD d hd).2
+    have hr' : (r : ℚ_[p]) ^ 2 = d := by exact_mod_cast congrArg (fun z : ℤ_[p] => (z : ℚ_[p])) hr
+    have hdvd : minpoly ℚ (Real.sqrt d) ∣ Polynomial.X ^ 2 - Polynomial.C (d : ℚ) :=
+      minpoly.dvd ℚ _ (by simp [Real.sq_sqrt (Nat.cast_nonneg d)])
+    have hmap : (Polynomial.X ^ 2 - Polynomial.C (d : ℚ)).map (algebraMap ℚ ℚ_[p])
+        = (Polynomial.X - Polynomial.C (r : ℚ_[p])) * (Polynomial.X + Polynomial.C (r : ℚ_[p])) := by
+      rw [Polynomial.map_sub, Polynomial.map_pow, Polynomial.map_X, Polynomial.map_C, map_natCast, ← hr', map_pow]
+      ring
+    have hsp : ((Polynomial.X - Polynomial.C (r : ℚ_[p])) * (Polynomial.X + Polynomial.C (r : ℚ_[p]))).Splits :=
+      (Polynomial.Splits.X_sub_C _).mul (Polynomial.Splits.X_add_C _)
+    refine hsp.of_dvd (mul_ne_zero (Polynomial.X_sub_C_ne_zero _) (Polynomial.X_add_C_ne_zero _)) ?_
+    rw [← hmap]
+    exact Polynomial.map_dvd _ hdvd
+  obtain ⟨φ⟩ := IntermediateField.nonempty_algHom_adjoin_of_splits hK
+  exact ⟨(φ : IntermediateField.adjoin ℚ S →+* ℚ_[p]).comp
+    { toFun := fun x => ⟨x, coe_mem_adjoin D x⟩
+      map_one' := rfl
+      map_mul' := fun _ _ => rfl
+      map_zero' := rfl
+      map_add' := fun _ _ => rfl }⟩
 
 /-! ## NF1-S2 -/
 
@@ -112,6 +200,99 @@ theorem exists_maximal_card_eq_sqrt {d : ℕ} (_hd : Squarefree d) (_hd1 : 1 < d
 
 /-! ## The ramified radicand -/
 
+-- `q` has valuation one in `ℚ_p` when `p` divides it exactly once.
+private theorem valuation_natCast_eq_one {p : ℕ} [Fact p.Prime] {q : ℕ} (hq : p ∣ q) (hq2 : ¬ p ^ 2 ∣ q) :
+    (q : ℚ_[p]) ≠ 0 ∧ (q : ℚ_[p]).valuation = 1 := by
+  have hq0 : q ≠ 0 := fun h => hq2 (h ▸ dvd_zero _)
+  refine ⟨Nat.cast_ne_zero.2 hq0, ?_⟩
+  rw [Padic.valuation_natCast]
+  have h1 : 1 ≤ padicValNat p q := (padicValNat_dvd_iff_le hq0).1 (by simpa using hq)
+  have h2 : ¬ 2 ≤ padicValNat p q := fun h => hq2 ((padicValNat_dvd_iff_le hq0).2 h)
+  omega
+
+-- No square root of such a `q` in `ℚ_p`: its valuation would be one half.
+private theorem padic_sq_ne_natCast {p : ℕ} [Fact p.Prime] {q : ℕ} (hq : p ∣ q) (hq2 : ¬ p ^ 2 ∣ q) (y : ℚ_[p]) :
+    y ^ 2 ≠ (q : ℚ_[p]) := by
+  obtain ⟨-, hv⟩ := valuation_natCast_eq_one hq hq2
+  intro h
+  have h' := congrArg Padic.valuation h
+  rw [Padic.valuation_pow, hv] at h'
+  push_cast at h'
+  omega
+
+-- The parity step: `β² q ∈ ℤ_p` forces `β ∈ ℤ_p`.
+private theorem norm_le_one_of_sq_mul_natCast {p : ℕ} [Fact p.Prime] {q : ℕ} (hq : p ∣ q) (hq2 : ¬ p ^ 2 ∣ q)
+    {β : ℚ_[p]} (h : ‖β ^ 2 * (q : ℚ_[p])‖ ≤ 1) : ‖β‖ ≤ 1 := by
+  obtain ⟨hq0, hv⟩ := valuation_natCast_eq_one hq hq2
+  rcases eq_or_ne β 0 with rfl | hβ
+  · simp
+  rw [Padic.norm_le_one_iff_val_nonneg] at h ⊢
+  rw [Padic.valuation_mul (pow_ne_zero 2 hβ) hq0, Padic.valuation_pow, hv] at h
+  push_cast at h
+  omega
+
+-- `2` is a unit of `ℤ_p` for odd `p`.
+private theorem norm_le_one_of_two_mul {p : ℕ} [Fact p.Prime] (hp2 : p ≠ 2) {α : ℚ_[p]} (h : ‖2 * α‖ ≤ 1) :
+    ‖α‖ ≤ 1 := by
+  have h2 : ‖((2 : ℕ) : ℚ_[p])‖ = 1 :=
+    Padic.norm_natCast_eq_one_iff.2 ((Nat.coprime_primes Fact.out Nat.prime_two).2 hp2)
+  rw [Nat.cast_ofNat] at h2
+  rwa [norm_mul, h2, one_mul] at h
+
+-- Coordinates in `K₀(π)`, `π² = q`, `q` not a square in `K₀`: every element is `a + bπ`.
+private theorem exists_coords {K : Type*} [Field K] (K₀ : Subfield K) {π : K} {q : ℕ} (hπ : π ^ 2 = (q : K))
+    (hns : ∀ c : K₀, (c : K) ^ 2 ≠ (q : K)) (hgen : Subfield.closure ((K₀ : Set K) ∪ {π}) = ⊤) (x : K) :
+    ∃ a b : K₀, x = a + b * π := by
+  have hx : x ∈ Subfield.closure ((K₀ : Set K) ∪ {π}) := hgen ▸ Subfield.mem_top x
+  induction hx using Subfield.closure_induction with
+  | mem x hx =>
+    rcases hx with hx | rfl
+    · exact ⟨⟨x, hx⟩, 0, by simp⟩
+    · exact ⟨0, 1, by simp⟩
+  | one => exact ⟨1, 0, by simp⟩
+  | add x y _ _ hx hy =>
+    obtain ⟨a, b, rfl⟩ := hx
+    obtain ⟨c, d, rfl⟩ := hy
+    exact ⟨a + c, b + d, by push_cast; ring⟩
+  | neg x _ hx =>
+    obtain ⟨a, b, rfl⟩ := hx
+    exact ⟨-a, -b, by push_cast; ring⟩
+  | inv x _ hx =>
+    obtain ⟨a, b, rfl⟩ := hx
+    rcases eq_or_ne b 0 with rfl | hb
+    · exact ⟨a⁻¹, 0, by simp⟩
+    · have hb' : (b : K) ≠ 0 := fun h => hb (Subtype.ext h)
+      have hN : (a : K) ^ 2 - (b : K) ^ 2 * q ≠ 0 := by
+        intro h
+        refine hns (a / b) ?_
+        push_cast
+        rw [div_pow, div_eq_iff (pow_ne_zero 2 hb')]
+        linear_combination h
+      refine ⟨a / (a ^ 2 - b ^ 2 * q), -b / (a ^ 2 - b ^ 2 * q), inv_eq_of_mul_eq_one_right ?_⟩
+      push_cast
+      field_simp
+      linear_combination (-(b : K) ^ 2) * hπ
+  | mul x y _ _ hx hy =>
+    obtain ⟨a, b, rfl⟩ := hx
+    obtain ⟨c, d, rfl⟩ := hy
+    exact ⟨a * c + b * d * q, a * d + b * c, by push_cast; linear_combination ((b : K) * d) * hπ⟩
+
+-- … uniquely.
+private theorem coords_unique {K : Type*} [Field K] (K₀ : Subfield K) {π : K} {q : ℕ} (hπ : π ^ 2 = (q : K))
+    (hns : ∀ c : K₀, (c : K) ^ 2 ≠ (q : K)) {a b a' b' : K₀} (h : (a : K) + b * π = a' + b' * π) :
+    a = a' ∧ b = b' := by
+  have hb : b = b' := by
+    by_contra hne
+    have hne' : (b : K) - b' ≠ 0 := sub_ne_zero.2 fun h => hne (Subtype.ext h)
+    have hπ' : π = ((a' : K) - a) / (b - b') := by
+      rw [eq_div_iff hne']
+      linear_combination h
+    refine hns ((a' - a) / (b - b')) ?_
+    push_cast
+    rw [← hπ', hπ]
+  subst hb
+  exact ⟨Subtype.ext (by linear_combination h), rfl⟩
+
 /-- **The ramified quadratic step.** Let `K₀ ⊆ K` be fields, `K₀` embedded in `ℚ_p` with `p` odd, and `K = K₀(π)` with
 `π² = q`, a natural number divisible by `p` exactly once. Then the integers of `K` map to `ℤ/p`. (`π ∉ K₀`: a square root of
 `q` in `ℚ_p` would have valuation `1/2`. Every `x ∈ K` is `a + bπ` with `a, b ∈ K₀` uniquely; `a + bπ ↦ a − bπ` is a ring
@@ -120,7 +301,91 @@ of the valuation — and `x ↦ a mod p` is the homomorphism, multiplicative bec
 theorem nonempty_ringHom_zmod_of_ramified_sqrt {K : Type*} [Field K] {p : ℕ} [Fact p.Prime] (hp2 : p ≠ 2)
     (K₀ : Subfield K) (ι₀ : K₀ →+* ℚ_[p]) {q : ℕ} (hq : p ∣ q) (hq2 : ¬ p ^ 2 ∣ q) {π : K} (hπ : π ^ 2 = (q : K))
     (hgen : Subfield.closure ((K₀ : Set K) ∪ {π}) = ⊤) : Nonempty (𝓞 K →+* ZMod p) := by
-  sorry
+  -- (a) no square root of `q` in `K₀`
+  have hns : ∀ c : K₀, (c : K) ^ 2 ≠ (q : K) := fun c hc =>
+    padic_sq_ne_natCast hq hq2 (ι₀ c) (by
+      have hc' : c ^ 2 = (q : K₀) := Subtype.ext (by push_cast; exact hc)
+      rw [← map_pow, hc', map_natCast])
+  -- (b), (c) coordinates, and their laws
+  choose re im hrep using exists_coords K₀ hπ hns hgen
+  have huniq : ∀ (x : K) (a b : K₀), x = a + b * π → re x = a ∧ im x = b := fun x a b h =>
+    coords_unique K₀ hπ hns ((hrep x).symm.trans h)
+  have hadd : ∀ x y : K, re (x + y) = re x + re y ∧ im (x + y) = im x + im y := fun x y =>
+    huniq _ _ _ (by push_cast; linear_combination hrep x + hrep y)
+  have hmul : ∀ x y : K,
+      re (x * y) = re x * re y + im x * im y * q ∧ im (x * y) = re x * im y + im x * re y := fun x y =>
+    huniq _ _ _ (by
+      push_cast
+      linear_combination (hrep x) * y + ((re x : K) + im x * π) * (hrep y) + ((im x : K) * im y) * hπ)
+  have hone : re 1 = 1 ∧ im 1 = 0 := huniq 1 1 0 (by simp)
+  have hzero : re 0 = 0 ∧ im 0 = 0 := huniq 0 0 0 (by simp)
+  -- the conjugation `a + bπ ↦ a − bπ`
+  let conj : K →+* K :=
+    { toFun := fun x => re x - im x * π
+      map_one' := by simp [hone.1, hone.2]
+      map_mul' := fun x y => by
+        simp only [(hmul x y).1, (hmul x y).2]
+        push_cast
+        linear_combination (-((im x : K) * im y)) * hπ
+      map_zero' := by simp [hzero.1, hzero.2]
+      map_add' := fun x y => by
+        simp only [(hadd x y).1, (hadd x y).2]
+        push_cast
+        ring }
+  have hconj : ∀ x : K, conj x = re x - im x * π := fun _ => rfl
+  -- (d) the coordinates of an integer land in `ℤ_p`
+  have hK₀ : ∀ c : K₀, IsIntegral ℤ (c : K) → ‖ι₀ c‖ ≤ 1 := fun c hc =>
+    norm_le_one_of_isIntegral (map_isIntegral_int ι₀
+      ((isIntegral_algebraMap_iff (A := K₀) (B := K) Subtype.val_injective).1 hc))
+  have hint : ∀ x : 𝓞 K, ‖ι₀ (re x)‖ ≤ 1 ∧ ‖ι₀ (im x)‖ ≤ 1 := by
+    intro x
+    have hx : IsIntegral ℤ (x : K) := RingOfIntegers.isIntegral_coe x
+    have hcx : IsIntegral ℤ (conj x) := map_isIntegral_int conj hx
+    have hT : ‖ι₀ (re x + re x)‖ ≤ 1 := hK₀ _ (by
+      have e : ((re x + re x : K₀) : K) = x + conj x := by
+        rw [hconj]
+        push_cast
+        linear_combination (-1 : K) * hrep x
+      rw [e]
+      exact hx.add hcx)
+    have hN : ‖ι₀ (re x ^ 2 - im x ^ 2 * q)‖ ≤ 1 := hK₀ _ (by
+      have e : ((re x ^ 2 - im x ^ 2 * q : K₀) : K) = x * conj x := by
+        rw [hconj]
+        push_cast
+        linear_combination (-((re x : K) - im x * π)) * hrep x + (im x : K) ^ 2 * hπ
+      rw [e]
+      exact hx.mul hcx)
+    have hre : ‖ι₀ (re x)‖ ≤ 1 := norm_le_one_of_two_mul hp2 (by rw [two_mul, ← map_add]; exact hT)
+    refine ⟨hre, norm_le_one_of_sq_mul_natCast hq hq2 ?_⟩
+    have e : ι₀ (im x) ^ 2 * (q : ℚ_[p]) = ι₀ (re x) ^ 2 - ι₀ (re x ^ 2 - im x ^ 2 * q) := by
+      simp only [map_sub, map_mul, map_pow, map_natCast]
+      ring
+    rw [e]
+    exact (PadicInt.subring p).sub_mem ((PadicInt.subring p).pow_mem hre 2) hN
+  -- (e) the homomorphism `a + bπ ↦ a mod p`
+  let gre : 𝓞 K → ℤ_[p] := fun x => ⟨ι₀ (re x), (hint x).1⟩
+  let gim : 𝓞 K → ℤ_[p] := fun x => ⟨ι₀ (im x), (hint x).2⟩
+  have hq0 : PadicInt.toZMod (q : ℤ_[p]) = 0 := by
+    rw [map_natCast]
+    exact (ZMod.natCast_eq_zero_iff q p).2 hq
+  have gre_one : gre 1 = 1 := PadicInt.ext (by
+    show ι₀ (re (algebraMap (𝓞 K) K 1)) = 1
+    rw [map_one, hone.1, map_one])
+  have gre_zero : gre 0 = 0 := PadicInt.ext (by
+    show ι₀ (re (algebraMap (𝓞 K) K 0)) = 0
+    rw [map_zero, hzero.1, map_zero])
+  have gre_add : ∀ x y, gre (x + y) = gre x + gre y := fun x y => PadicInt.ext (by
+    show ι₀ (re (algebraMap (𝓞 K) K (x + y))) = ι₀ (re x) + ι₀ (re y)
+    rw [map_add, (hadd _ _).1, map_add])
+  have gre_mul : ∀ x y, gre (x * y) = gre x * gre y + gim x * gim y * (q : ℤ_[p]) := fun x y => PadicInt.ext (by
+    show ι₀ (re (algebraMap (𝓞 K) K (x * y))) = ι₀ (re x) * ι₀ (re y) + ι₀ (im x) * ι₀ (im y) * (q : ℚ_[p])
+    rw [map_mul, (hmul _ _).1, map_add, map_mul, map_mul, map_mul, map_natCast])
+  exact ⟨{ toFun := fun x => PadicInt.toZMod (gre x)
+           map_one' := by rw [gre_one, map_one]
+           map_mul' := fun x y => by
+             rw [gre_mul, map_add, map_mul, map_mul, map_mul, hq0, mul_zero, add_zero]
+           map_zero' := by rw [gre_zero, map_zero]
+           map_add' := fun x y => by rw [gre_add, map_add] }⟩
 
 /-- **NF1-S2, the ramified clause, corrected**: every radicand in `D` a nonzero square modulo the odd prime `p`, and one
 more radicand `q` with `p ∣ q`, `p² ∤ q` (`11` in `ℚ(√3, √11)` at `p = 11`): the ring of integers of `ℚ(√D, √q)` has a
@@ -130,7 +395,38 @@ theorem exists_maximal_card_eq_of_ramified (D : Set ℕ) (q : ℕ) {p : ℕ} (hp
     (hD : ∀ d ∈ D, (d : ZMod p) ≠ 0 ∧ IsSquare (d : ZMod p)) (hq : p ∣ q) (hq2 : ¬ p ^ 2 ∣ q) :
     ∃ 𝔭 : Ideal (𝓞 (fieldOfRadicands (insert q D))),
       𝔭.IsMaximal ∧ Nat.card (𝓞 (fieldOfRadicands (insert q D)) ⧸ 𝔭) = p := by
-  sorry
+  haveI : Fact p.Prime := ⟨hp⟩
+  obtain ⟨ι⟩ := nonempty_ringHom_padic D hp2 hD
+  -- `K₀ = ℚ(√D)` inside `E = ℚ(√D, √q)`, and `π = √q`
+  let K₀ : Subfield (fieldOfRadicands (insert q D)) :=
+    (fieldOfRadicands D).comap (fieldOfRadicands (insert q D)).subtype
+  let j : K₀ →+* fieldOfRadicands D :=
+    { toFun := fun x => ⟨((x : fieldOfRadicands (insert q D)) : ℝ), x.2⟩
+      map_one' := rfl
+      map_mul' := fun _ _ => rfl
+      map_zero' := rfl
+      map_add' := fun _ _ => rfl }
+  let π : fieldOfRadicands (insert q D) := ⟨Real.sqrt q, sqrt_mem_fieldOfRadicands (Set.mem_insert q D)⟩
+  have hπ : π ^ 2 = (q : fieldOfRadicands (insert q D)) := Subtype.ext (by
+    show Real.sqrt q ^ 2 = ((q : fieldOfRadicands (insert q D)) : ℝ)
+    rw [Real.sq_sqrt (Nat.cast_nonneg q)]
+    norm_cast)
+  have hgen : Subfield.closure ((K₀ : Set (fieldOfRadicands (insert q D))) ∪ {π}) = ⊤ := by
+    have hle : fieldOfRadicands (insert q D) ≤
+        (Subfield.closure ((K₀ : Set (fieldOfRadicands (insert q D))) ∪ {π})).map
+          (fieldOfRadicands (insert q D)).subtype :=
+      Subfield.closure_le.2 (by
+        rintro _ ⟨d, hd, rfl⟩
+        rcases hd with hd | hd
+        · exact Subfield.mem_map.2 ⟨π, Subfield.subset_closure (Or.inr rfl), by rw [hd]; rfl⟩
+        · exact Subfield.mem_map.2 ⟨⟨Real.sqrt d, sqrt_mem_fieldOfRadicands (Set.mem_insert_of_mem q hd)⟩,
+            Subfield.subset_closure (Or.inl (sqrt_mem_fieldOfRadicands hd)), rfl⟩)
+    rw [eq_top_iff]
+    rintro x -
+    obtain ⟨y, hy, hyx⟩ := Subfield.mem_map.1 (hle x.2)
+    rwa [Subtype.ext hyx] at hy
+  obtain ⟨f⟩ := nonempty_ringHom_zmod_of_ramified_sqrt hp2 K₀ (ι.comp j) hq hq2 hπ hgen
+  exact ⟨RingHom.ker f, isMaximal_ker_and_card hp f⟩
 
 /-! ## Spec -/
 
