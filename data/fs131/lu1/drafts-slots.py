@@ -35,7 +35,7 @@ SLOTS = [
     ("11 LEAN.md § Building, the bullet the new one follows", N, "plan a cap from the largest process's resident set (`data/fs131/lc1/in-scope.sh` records both) (FS131-LC1)."),
     ("11 LEAN.md § Searching, the bullet the new ones follow", N, "both stored-term comparisons with the release are run again (FS131-LC1)."),
     ("12 the map, [S1b]'s size", K, "those two localization lemmas are stated for `F : Subfield ℝ` and must be restated for a number field given as `fieldI F : Subfield ℂ`. Proofs not read in full: unknown"),
-    ("12 the map, [S2]'s second sentence (in the table)", K, "The same for a multiquadratic field at a prime where every radicand is a square, a ramified radicand included (11 in `K`). | 52, 53, 73, 119 (upper end)"),
+    ("12 the map, [S2]'s second sentence", K, "The same for a multiquadratic field at a prime where every radicand is a square, a ramified radicand included (11 in `K`)."),
     ("12 the map, X8", K, "`[S1a]` and `[S2]` at `(11, 7)`; the lower half and the colouring of `Γ₇` are held."),
     ("13 the claim list, the line the regrade follows", "data/fs131/claims-NF1.md", "a draft that says \"onto\" is wrong and is not filed."),
     ("14 the Frontier's Last filed", C, "Last filed: **the landing of FS-131's measurable number** (FS131-LC1, 2026-10-13:"),

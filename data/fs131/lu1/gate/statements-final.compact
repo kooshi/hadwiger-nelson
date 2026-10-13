@@ -1,0 +1,102 @@
+## MODULE Proofs.HadwigerNelson.Arith.UpperHalf constants=56
+C THM HadwigerNelson.SpectralChain.StablePrime.localRing._proof_2 INTERNAL TYPE=59d59a99f2eb8ec3c1aa5d13 VALUE=- DATA=-
+C THM HadwigerNelson.SpectralChain.StablePrime.localRing._proof_1 INTERNAL TYPE=76bf351ed56626cdbc3bd103 VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.exists_hom_levelTarget TYPE=6c511b99826fcf32e99f62ed VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.residue_div TYPE=1989d4eda990c088e64a0ad2 VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.conjO_mem_iff TYPE=eaac25ed0223ee7aa4d24fdb VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.colorable_two_planeOver_of_ramified TYPE=3d38b5a96462c7f6a2f82ed6 VALUE=- DATA=-
+C DEF HadwigerNelson.UpperHalf.colorable_planeOver_of_finitePlane.match_1_1 INTERNAL TYPE=2032d8b5ea0c5b93c03b9478 VALUE=84f2f40364ae1c6d88679d63 DATA=-
+C THM HadwigerNelson.UpperHalf.heightOne_asIdeal TYPE=e8f76e9c329d474a92dd4015 VALUE=- DATA=-
+C THM HadwigerNelson.SpectralChain.StablePrime.residue._proof_5 INTERNAL TYPE=c6c9f1c518f9ad4bbf17df70 VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.mem_localRing TYPE=1bbb0842f15c85ba991f4cdf VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.inv_natCast_mem_unitRingOver_iff_forall_stablePrime TYPE=c382aca625ec8d2f6cbb3799 VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.isUnit_mk_pow TYPE=6689c3d3d2d1f7cd50ec726c VALUE=- DATA=-
+C DEF HadwigerNelson.UpperHalf.nonempty_hom_levelTarget_one.match_1_1 INTERNAL TYPE=d867b7fe576f87d69e797870 VALUE=f325e435999d36aebcce4cdc DATA=-
+C DEF HadwigerNelson.SpectralChain.StablePrime.localRing TYPE=9c234511e47e086fd731d14b VALUE=aed3702208a00088217db1e0 DATA=-
+C THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_levelTarget TYPE=005307bd79742899823d2f5e VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.exists_stablePrime_of_valuationSubring TYPE=2914600b624b51f105adbcfc VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.UpperHalf.0.HadwigerNelson.UpperHalf.exists_I_integer INTERNAL TYPE=d7df37a8ce9819d0c4a4aa67 VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.residue_algebraMap TYPE=5d7bfc5df1f4e8474fb4977c VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.UpperHalf.0.HadwigerNelson.UpperHalf.exists_I_integer._simp_1_2 INTERNAL TYPE=70dd8e738b568ac456fbec3c VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.UpperHalf.0.HadwigerNelson.UpperHalf.conj_mem_nonunits_iff INTERNAL TYPE=309627e0801fdd13413e63a7 VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.chromaticNumber_eq_localBound_of_chain TYPE=c7642c6d8669e4831ec5a96c VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.nonempty_hom_finitePlane TYPE=4b1b93812cce3e4414e0e529 VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.nonempty_hom_levelTarget_one TYPE=6a769a2313c92f37c20b57c5 VALUE=- DATA=-
+C DEF _private.Proofs.HadwigerNelson.Arith.UpperHalf.0.HadwigerNelson.UpperHalf.exists_centre.match_1_1 INTERNAL TYPE=615b465403f7371a374fb9c1 VALUE=f0f76280371755dcb6a155c4 DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.UpperHalf.0.HadwigerNelson.UpperHalf.integer_mem_valuationSubring INTERNAL TYPE=b3126fa79cd7cc8629e1b85c VALUE=- DATA=-
+C DEF HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_unitQuadrance.match_1_1 INTERNAL TYPE=56199ec849d098e943ebce01 VALUE=c0dea5c8434ab7661fcb8326 DATA=-
+C THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_finitePlane TYPE=f5c11c7e6cd9476f8b931b08 VALUE=- DATA=-
+C DEF HadwigerNelson.SpectralChain.StablePrime.heightOne TYPE=f01712f862b766321598c559 VALUE=041d6eabef99bd7628b91340 DATA=-
+C THM HadwigerNelson.SpectralChain.StablePrime.residue._proof_2 INTERNAL TYPE=92f41bba341a48bf190b7d5a VALUE=- DATA=-
+C THM HadwigerNelson.SpectralChain.StablePrime.residue._proof_3 INTERNAL TYPE=5f3355f113bfc33e8f031b46 VALUE=- DATA=-
+C THM HadwigerNelson.SpectralChain.levelTarget.eq_1 INTERNAL TYPE=06241df05de7919499b74135 VALUE=- DATA=-
+C THM HadwigerNelson.SpectralChain.StablePrime.residue._proof_1 INTERNAL TYPE=8a4daf8f3b75f8b697fcea59 VALUE=- DATA=-
+C THM HadwigerNelson.SpectralChain.StablePrime.residue._proof_4 INTERNAL TYPE=9fbbce9dd013f2a2e1812e7a VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.exists_hom_levelTarget._proof_1_1 INTERNAL TYPE=b5729065b1099240a62256e3 VALUE=- DATA=-
+C DEF HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_finitePlane.match_1_1 INTERNAL TYPE=783df941771aed70ba8f2406 VALUE=8267e91a3af20d0f8b9491e1 DATA=-
+C THM HadwigerNelson.UpperHalf.conjO_conjO TYPE=d0d4dbdd834a213e245dc1c4 VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.coe_conjO TYPE=000064127038666bfc21c2a5 VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.coe_mem_nonunits_localRing_iff TYPE=f10b1712f760881e0a52d0a0 VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.colorable_planeOver_of_finitePlane TYPE=b00dce08100653f777761975 VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.residue_conj TYPE=6cb65dbd8802e1ecf4cc3b4b VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_unitQuadrance TYPE=99e2b34868ce7153152cb27d VALUE=- DATA=-
+C THM HadwigerNelson.SpectralChain.StablePrime.residue._proof_6 INTERNAL TYPE=ff11db3ed0f42d163710539f VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.localRing_ne_top TYPE=c9e2b7f868d85ba739dc029e VALUE=- DATA=-
+C THM HadwigerNelson.SpectralChain.StablePrime.heightOne._proof_1 INTERNAL TYPE=91272c09386a062d2d02f06b VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.conj_mem_localRing TYPE=11c9e697401856f81d302914 VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.nonempty_hom_unitQuadrance TYPE=952ef25745fa854275172887 VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.two_mem_of_conj_trivial TYPE=3d79ad54d6767c82dfa43d22 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.UpperHalf.0.HadwigerNelson.UpperHalf.exists_I_integer._simp_1_1 INTERNAL TYPE=4e9ec655ca6215818f17eb70 VALUE=- DATA=-
+C DEF HadwigerNelson.SpectralChain.StablePrime.residue TYPE=d022f4d9d1133b347ae34ad4 VALUE=8b21ce1c07bf734f6fef7df4 DATA=-
+C DEF HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_levelTarget.match_1_1 INTERNAL TYPE=d76277bdd5fbcdc49bc3fb71 VALUE=4b5709812bb744b1c37d11c3 DATA=-
+C THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_localBound TYPE=5beace95b8b98f84dc1a8327 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.UpperHalf.0.HadwigerNelson.UpperHalf.exists_centre INTERNAL TYPE=ef15ec350ae4a252ea2159ed VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.UpperHalf.0.HadwigerNelson.UpperHalf.residue_mul_conj_eq_one INTERNAL TYPE=92d08e5e53a3c7f22e263181 VALUE=- DATA=-
+C THM HadwigerNelson.SpectralChain.StablePrime.heightOne._proof_2 INTERNAL TYPE=6c299e70d14ef12bb4b6e574 VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.mem_localRing_of_mul_conj_eq_one TYPE=ec9f13ef0d6b7237277bd1b3 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.UpperHalf.0.HadwigerNelson.UpperHalf.sub_mul_conj_eq_one INTERNAL TYPE=64e6c079d9183f181475e726 VALUE=- DATA=-
+## MODULE Proofs.HadwigerNelson.Arith.QuadraticPrime constants=25
+C THM _private.Proofs.HadwigerNelson.Arith.QuadraticPrime.0.HadwigerNelson.QuadraticPrime.exists_coords INTERNAL TYPE=7105c8aaff8e4262cec57458 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.QuadraticPrime.0.HadwigerNelson.QuadraticPrime.valuation_natCast_eq_one INTERNAL TYPE=ee174b5093bc5d6433f4c4cd VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.QuadraticPrime.0.HadwigerNelson.QuadraticPrime.padic_sq_ne_natCast INTERNAL TYPE=a33357ef98939c80d7de590e VALUE=- DATA=-
+C THM HadwigerNelson.QuadraticPrime.nonempty_ringHom_zmod_of_ramified_sqrt TYPE=d2d6d87ad7b10ed00872e284 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.QuadraticPrime.0.HadwigerNelson.QuadraticPrime.padic_sq_ne_natCast._proof_1_1 INTERNAL TYPE=7067f4f35701c5b2d73aad07 VALUE=- DATA=-
+C THM HadwigerNelson.QuadraticPrime.isMaximal_ker_and_card TYPE=88b922d22ba2b2c188a4bb6a VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.QuadraticPrime.0.HadwigerNelson.QuadraticPrime.coe_mem_adjoin INTERNAL TYPE=0ee37f05fbcb72449e516cfd VALUE=- DATA=-
+C THM HadwigerNelson.QuadraticPrime.exists_maximal_card_eq TYPE=9d4fc0a993f27a3a2dfa31fb VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.QuadraticPrime.0.HadwigerNelson.QuadraticPrime.norm_le_one_of_sq_mul_natCast._proof_1_1 INTERNAL TYPE=80b0c1d378799e37795cfd1e VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.QuadraticPrime.0.HadwigerNelson.QuadraticPrime.norm_le_one_of_sq_mul_natCast INTERNAL TYPE=abc096a1273cb6520fd11be6 VALUE=- DATA=-
+C THM HadwigerNelson.QuadraticPrime.exists_ringHom_zmod_of_padic TYPE=8a3b70ea5587692fd020d838 VALUE=- DATA=-
+C THM HadwigerNelson.QuadraticPrime.nonempty_ringHom_padic TYPE=8ecf4b552fd6fbaf599d0cef VALUE=- DATA=-
+C THM HadwigerNelson.QuadraticPrime.instNumberFieldFieldOfRadicands TYPE=010bcb1653bfc16c1d04bdc5 VALUE=- DATA=-
+C THM HadwigerNelson.QuadraticPrime.exists_padicInt_sq_eq TYPE=bc7b8f6d80deaf7fa33f3863 VALUE=- DATA=-
+C THM HadwigerNelson.QuadraticPrime.exists_maximal_card_eq_of_ramified TYPE=b34555c79e311b3108476e34 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.QuadraticPrime.0.HadwigerNelson.QuadraticPrime.valuation_natCast_eq_one._proof_1_1 INTERNAL TYPE=e9dd96264078d65bcc925e64 VALUE=- DATA=-
+C THM HadwigerNelson.QuadraticPrime.numberField_fieldOfRadicands TYPE=aa83d1ac63e1fa05521aa8fe VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.QuadraticPrime.0.HadwigerNelson.QuadraticPrime.norm_le_one_of_isIntegral INTERNAL TYPE=78b0c84fc46169a4cdfd7186 VALUE=- DATA=-
+C DEF HadwigerNelson.QuadraticPrime.exists_maximal_card_of_padic.match_1_1 INTERNAL TYPE=0d3e0717d9a52aa1f136614d VALUE=48c5c5ae4253a826015318fa DATA=-
+C THM HadwigerNelson.QuadraticPrime.isIntegral_sqrt_natCast TYPE=363f998b772edb49894aac92 VALUE=- DATA=-
+C THM HadwigerNelson.QuadraticPrime.exists_maximal_card_eq_sqrt TYPE=43ef61d9de0ee61e69bfbd67 VALUE=- DATA=-
+C THM HadwigerNelson.QuadraticPrime.exists_maximal_card_of_padic TYPE=59a587c5ac9b8331a7a2be69 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.QuadraticPrime.0.HadwigerNelson.QuadraticPrime.norm_le_one_of_two_mul INTERNAL TYPE=b403f04ef9e43a9f6490a528 VALUE=- DATA=-
+C THM HadwigerNelson.QuadraticPrime.fieldOfRadicands_eq_adjoin TYPE=f7904206b3c5f5bfa268cdcc VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.QuadraticPrime.0.HadwigerNelson.QuadraticPrime.coords_unique INTERNAL TYPE=f05f96102b0d9e5b83f3546d VALUE=- DATA=-
+## MODULE Proofs.HadwigerNelson.Instances.UpperHalfValues constants=18
+C THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_sqrt47_le_five_of_prime TYPE=db999d73e074cf46a765b0fe VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Instances.UpperHalfValues.0.HadwigerNelson.UpperHalf.exists_intCast_eq_re_of_isIntegral INTERNAL TYPE=73ca1e4508f9229d5244d9dc VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.instNumberFieldBot TYPE=403eef08148da27eef530aa7 VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.two_le_chromaticNumber_planeOver._simp_1_2 INTERNAL TYPE=70dd8e738b568ac456fbec3c VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.exists_stablePrime_rat TYPE=4e691b540c3ff783147018fb VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_rat TYPE=8f5b6ff229f02ae49d346cba VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.colorable_planeOver_fieldOfRadicands._proof_1_1 INTERNAL TYPE=287f0965318cd8b006860f6a VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.colorable_planeOver_fieldOfRadicands TYPE=f22d0b0c0f8f66e3fec9a7c9 VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_eleven TYPE=3a2d76e8b412cf6afdc754fd VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.two_le_chromaticNumber_planeOver TYPE=018aca875635d7fb3cc57977 VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_sqrt167_le_eight TYPE=8b92c0af2dce2fea7bb11434 VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.two_le_chromaticNumber_planeOver._simp_1_1 INTERNAL TYPE=4e9ec655ca6215818f17eb70 VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.numberField_bot TYPE=403eef08148da27eef530aa7 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Instances.UpperHalfValues.0.HadwigerNelson.UpperHalf.exists_intCast_eq_of_isIntegral INTERNAL TYPE=80752a0b75b05f37400ec718 VALUE=- DATA=-
+C DEF HadwigerNelson.UpperHalf.chromaticNumber_planeOver_rat.match_1_1 INTERNAL TYPE=d30e84da6ecf36dedb5ad5d0 VALUE=6a0441df520aeb4270e4ce01 DATA=-
+C THM _private.Proofs.HadwigerNelson.Instances.UpperHalfValues.0.HadwigerNelson.UpperHalf.exists_intCast_eq_re_of_isIntegral._proof_1_1 INTERNAL TYPE=caef4a0d0a49d463a1525da8 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Instances.UpperHalfValues.0.HadwigerNelson.UpperHalf.exists_intCast_eq_re_of_isIntegral._proof_1_2 INTERNAL TYPE=f20340d3f36d3546ce2214a2 VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.exists_stablePrime_rat._proof_1_1 INTERNAL TYPE=91ac26a7f7c880f99d9f2887 VALUE=- DATA=-

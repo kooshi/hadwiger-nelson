@@ -1,0 +1,5 @@
+paths under Proofs/ and Proofs.lean that differ from the commit before the edits (0585a35c4):
+ Proofs/HadwigerNelson/Arith/QuadraticPrime.lean      | 13 +++++++++----
+ Proofs/HadwigerNelson/Arith/UpperHalf.lean           |  5 +++--
+ Proofs/HadwigerNelson/Instances/UpperHalfValues.lean | 10 +++++++---
+ 3 files changed, 19 insertions(+), 9 deletions(-)

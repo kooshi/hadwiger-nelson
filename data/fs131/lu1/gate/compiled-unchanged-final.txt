@@ -1,0 +1,17 @@
+.olean files of Proofs: 1902 in the tree, 1902 in the manifest; allowed to move: 4 (moved since the manifest: 3: Proofs.olean, Proofs/HadwigerNelson/Arith/QuadraticPrime.olean, Proofs/HadwigerNelson/Instances/UpperHalfValues.olean)
+every other file: same SHA-256, same mtime, written before the copy (2026-10-13T20:21:30Z); the latest of them: 2026-10-13T19:44:17Z
+  identical f763d277289dc114 2026-10-13T18:32:48Z Proofs/HadwigerNelson/Outside/OAI158.olean
+  identical 852967b780c122c2 2026-10-13T18:35:22Z Proofs/HadwigerNelson/Outside/OAI158Palette.olean
+  identical 800612bb98d73f7f 2026-10-13T18:36:59Z Proofs/HadwigerNelson/Outside/OAI158CircleMaps.olean
+  identical 1507067ed18e6b30 2026-10-13T18:37:33Z Proofs/HadwigerNelson/Outside/OAI158CircleTransport.olean
+  identical e99ccf8d430ef561 2026-10-13T18:35:05Z Proofs/HadwigerNelson/Outside/OAI158Expansion.olean
+  identical 5a22b03f77e28966 2026-10-13T18:38:05Z Proofs/HadwigerNelson/Outside/OAI158PaletteDensity.olean
+  identical bb1359b106688ee0 2026-10-13T18:38:30Z Proofs/HadwigerNelson/Outside/OAI158PaletteTransport.olean
+  identical 89a5371c8b20b613 2026-10-13T18:36:57Z Proofs/HadwigerNelson/Outside/OAI158AngularBoundary.olean
+  identical 9c250c0267f4f6f0 2026-10-13T18:38:44Z Proofs/HadwigerNelson/Outside/OAI158BinaryPalettes.olean
+  identical 2303775ba8ebdf6e 2026-10-13T18:39:29Z Proofs/HadwigerNelson/Outside/OAI158States.olean
+  identical c2d9ff2df4bbba94 2026-10-13T17:55:23Z Proofs/HadwigerNelson/Plane/AeColouring.olean
+  identical b0aa2e2ebc1684d7 2026-10-13T17:56:14Z Proofs/HadwigerNelson/Plane/FalconerReduction.olean
+  identical fdc8e45e1a39da88 2026-10-13T19:44:17Z Proofs/HadwigerNelson/Plane/LebesgueNumber.olean
+compiled-unchanged: PASS
+exit=0
