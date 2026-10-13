@@ -53,3 +53,24 @@ compact set is the additive maps, not the whole space. L1.7 reads `ZMod 3` as `F
 **Plan of work**, in the plan's dependency order: C3 → L1.1 (with two private children: the vertex bound C1, and the real-linear
 statement "if every integer combination is non-negative at some vertex, a box point solves the equations") → L1.2 → L1.3 → L1.4 →
 L1.5 → L1.6 → L1.7. Saved stages: after L1.1; after L1.5; at the end.
+
+## Stage 2 — SAVED: five leaves proved (C3, L1.1, L1.2, L1.3, L1.4)
+
+Under `lake env lean` with the lakefile's two options the module reads exit 0 and three `declaration uses sorry` (L1.5, L1.6,
+L1.7), no other message. Statement check: PASS, 9 compared, control 3 of 3 (`data/fs131/ic1/logs/statements-stage2.out`); two
+private helpers new.
+
+| leaf | how it was proved | lines |
+|---|---|---|
+| `exists_int_vector_of_forall_neg` (C3) | the plan's route as written: `isOpen_iInter_of_finite` with `isOpen_lt` and `LinearMap.continuous_of_finiteDimensional`; `(DenseRange.piMap fun _ => Rat.denseRange_cast).exists_mem_open`; `D = ∏ i, (q i).den`, `N i = (q i).num * (D / (q i).den)`, and `N = D • q` by `Rat.cast_def` | 19 |
+| `ThreeColour.Winding.exists_box_point` (L1.1) | the plan's C1–C4, in two private children and a composition. **`winding_le_vertex`** (C1): `W r ≤ Σ_j r_j v_j` at the vertex `v_j = 2/3` where `0 ≤ r_j`, `1/3` elsewhere — `W.minRise_le (-r)` with `min (−t) (2·(−t)) = −(if 0 ≤ t then 2t else t)` (`omega`), cast to `ℝ`. **`exists_mem_box_of_forall_int`** (C2 with C3), a statement about a real matrix and no winding: if every integer combination `Σ_i N_i (g_i · v − w_i)` is non-negative at some vertex `v`, a point of the box solves `g_i · x = w_i` — `geometric_hahn_banach_closed_point` for `Matrix.mulVecLin g '' box` (compact by `isCompact_univ_pi`, convex by `convex_pi` and `Convex.linear_image`) and the point `w`, so no translation; the functional in coordinates by `LinearMap.pi_apply_eq_sum_univ`; C3 read at `κ = Fin m → Bool`. The leaf: generators by `Submodule.fg_iff_exists_fin_generating_family` at `AddSubgroup.toIntSubmodule (relMap s).ker`; every relation an integer combination (`Submodule.mem_span_range_iff_exists_fun`); both sides additive (`hkey`, which is C4 and the hypothesis of the real-linear half at once) | 20 + 44 + 39 |
+| `exists_character_of_box_point` (L1.2) | `ψ r = ↑(Σ_j r_j x_j)` by `AddMonoidHom.mk'`; `(relMap s).rangeRestrict.liftOfSurjective` in place of the plan's `QuotientAddGroup.lift` with `quotientKerEquivRange` (one step, and `liftOfRightInverse_comp_apply` is its equation); Baer as planned; `relMap s (Pi.single j 1) = s j` | 26 |
+| `exists_character_of_properAlong` (L1.3) | the plan's three lines; `Nat.cast_ofNat` and `linarith` for `2/3 = 1 − 1/3` | 8 |
+| `isClosed_band` (L1.4) | `(isCompact_Icc.image (AddCircle.continuous_mk' 1)).isClosed`, as planned | 1 |
+
+**Price.** The plan guessed 150–250 lines for L1.1; it is 103 with its children, and each of the five leaves elaborated on the
+first or second run. Nothing resisted; no route of the plan failed. The whole module elaborates in 5 s at 3.6 GB.
+
+**One difference from the plan, in my favour, said so it is not read as the plan's**: the separation is applied to the image of
+the box under the *linear* map and the target point `w`, not to the image under the affine map and the origin — the same theorem
+with no translation to carry.
