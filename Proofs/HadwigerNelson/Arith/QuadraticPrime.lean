@@ -25,7 +25,9 @@ form, with `Squarefree d` and `1 < d` carried and unused, is `exists_maximal_car
 with two radicands divisible by `p` — `ℚ(√11, √22) ∋ √2` and `2` is not a square modulo `11`, so every prime above `11` has
 residue field of `121` elements. The ramified clause is stated for **one** radicand divisible by `p`, exactly once.
 
-**Not claimed:** anything at `p = 2`; a prime where some radicand is a non-residue; that the ideal is unique.
+**Not claimed:** NF1-S2 at `p = 2` (each statement here about a square root and a prime asks `p ≠ 2`;
+`isMaximal_ker_and_card`, `exists_ringHom_zmod_of_padic` and `exists_maximal_card_of_padic`, which name no square root, do
+not ask it and hold at `p = 2` as stated); a prime where some radicand is a non-residue; that the ideal is unique.
 
 **Inhabitants.** A homomorphism `K →+* ℚ_[p]` is the hypothesis that is a structure: `ℚ → ℚ_5` is exhibited in the spec,
 and `nonempty_ringHom_padic` supplies one for every field of radicands that are nonzero squares modulo `p` (`{11}` at `7`).

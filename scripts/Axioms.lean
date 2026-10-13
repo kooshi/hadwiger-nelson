@@ -8797,6 +8797,73 @@ three under IMPORTED on the standard three and exactly that one import, every ot
 #print axioms HadwigerNelson.hasDensityOneAt_univ
 -- FS131-LC1 block end
 
+/-! ## FS131-LU1 — FS-131's first number-field module, the residue upper half and the values it closes (NF1; statements FS131-KN2's)
+
+Fifty-two records: every public declaration a person typed in `Arith/UpperHalf`, `Arith/QuadraticPrime` and `Instances/UpperHalfValues`,
+in each file's order — theorems and definitions, as the last four landings' blocks file theirs (the kernel's list:
+`data/fs131/lu1/decls.lean`; the lines are FS131-IV1's block, `data/fs131/iv1/audit-block.txt`, made from the compiled modules).  The
+files' sixteen private helpers are not nameable here; each is read by a record below.  **Every record under CLEAN**: none of the three
+modules reads a declared outside theorem.  One of them takes declared hypotheses — `chromaticNumber_eq_localBound_of_chain`, the chain's
+headline with its hypothesis `hUpper` discharged: its nine other hypotheses are the assumptions step's (`scripts/Assumptions.lean`), and
+they do not show here.  `data/fs131/lu1/lu1_records.py` reads the kernel's list of the three modules against the audit's log: one record
+each, under CLEAN, on exactly the standard three; over the whole log the records under IMPORTED are the twenty-six the last landing left. -/
+-- FS131-LU1 block: `Arith/UpperHalf` — 30 records (27 theorems, 3 definitions); the twelve leaves' proofs FS131-IU1's
+#print axioms HadwigerNelson.UpperHalf.nonempty_hom_unitQuadrance
+#print axioms HadwigerNelson.UpperHalf.nonempty_hom_finitePlane
+#print axioms HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_unitQuadrance
+#print axioms HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_finitePlane
+#print axioms HadwigerNelson.UpperHalf.colorable_planeOver_of_finitePlane
+#print axioms HadwigerNelson.SpectralChain.StablePrime.heightOne
+#print axioms HadwigerNelson.UpperHalf.heightOne_asIdeal
+#print axioms HadwigerNelson.SpectralChain.StablePrime.localRing
+#print axioms HadwigerNelson.UpperHalf.mem_localRing
+#print axioms HadwigerNelson.UpperHalf.coe_conjO
+#print axioms HadwigerNelson.UpperHalf.conjO_conjO
+#print axioms HadwigerNelson.UpperHalf.conjO_mem_iff
+#print axioms HadwigerNelson.UpperHalf.conj_mem_localRing
+#print axioms HadwigerNelson.UpperHalf.mem_localRing_of_mul_conj_eq_one
+#print axioms HadwigerNelson.UpperHalf.isUnit_mk_pow
+#print axioms HadwigerNelson.SpectralChain.StablePrime.residue
+#print axioms HadwigerNelson.UpperHalf.residue_algebraMap
+#print axioms HadwigerNelson.UpperHalf.residue_div
+#print axioms HadwigerNelson.UpperHalf.residue_conj
+#print axioms HadwigerNelson.UpperHalf.coe_mem_nonunits_localRing_iff
+#print axioms HadwigerNelson.UpperHalf.localRing_ne_top
+#print axioms HadwigerNelson.UpperHalf.exists_hom_levelTarget
+#print axioms HadwigerNelson.UpperHalf.nonempty_hom_levelTarget_one
+#print axioms HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_levelTarget
+#print axioms HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_localBound
+#print axioms HadwigerNelson.UpperHalf.chromaticNumber_eq_localBound_of_chain
+#print axioms HadwigerNelson.UpperHalf.two_mem_of_conj_trivial
+#print axioms HadwigerNelson.UpperHalf.colorable_two_planeOver_of_ramified
+#print axioms HadwigerNelson.UpperHalf.exists_stablePrime_of_valuationSubring
+#print axioms HadwigerNelson.UpperHalf.inv_natCast_mem_unitRingOver_iff_forall_stablePrime
+-- FS131-LU1 block: `Arith/QuadraticPrime` — 13 records (12 theorems and the `Prop`-valued instance); the nine leaves' proofs FS131-IQ1's
+#print axioms HadwigerNelson.QuadraticPrime.isIntegral_sqrt_natCast
+#print axioms HadwigerNelson.QuadraticPrime.fieldOfRadicands_eq_adjoin
+#print axioms HadwigerNelson.QuadraticPrime.numberField_fieldOfRadicands
+#print axioms HadwigerNelson.QuadraticPrime.instNumberFieldFieldOfRadicands
+#print axioms HadwigerNelson.QuadraticPrime.isMaximal_ker_and_card
+#print axioms HadwigerNelson.QuadraticPrime.exists_ringHom_zmod_of_padic
+#print axioms HadwigerNelson.QuadraticPrime.exists_maximal_card_of_padic
+#print axioms HadwigerNelson.QuadraticPrime.exists_padicInt_sq_eq
+#print axioms HadwigerNelson.QuadraticPrime.nonempty_ringHom_padic
+#print axioms HadwigerNelson.QuadraticPrime.exists_maximal_card_eq
+#print axioms HadwigerNelson.QuadraticPrime.exists_maximal_card_eq_sqrt
+#print axioms HadwigerNelson.QuadraticPrime.nonempty_ringHom_zmod_of_ramified_sqrt
+#print axioms HadwigerNelson.QuadraticPrime.exists_maximal_card_eq_of_ramified
+-- FS131-LU1 block: `Instances/UpperHalfValues` — 9 records (8 theorems and the `Prop`-valued instance); the three leaves' proofs FS131-IV1's
+#print axioms HadwigerNelson.UpperHalf.colorable_planeOver_fieldOfRadicands
+#print axioms HadwigerNelson.UpperHalf.chromaticNumber_planeOver_eleven
+#print axioms HadwigerNelson.UpperHalf.chromaticNumber_planeOver_sqrt167_le_eight
+#print axioms HadwigerNelson.UpperHalf.chromaticNumber_planeOver_sqrt47_le_five_of_prime
+#print axioms HadwigerNelson.UpperHalf.numberField_bot
+#print axioms HadwigerNelson.UpperHalf.instNumberFieldBot
+#print axioms HadwigerNelson.UpperHalf.two_le_chromaticNumber_planeOver
+#print axioms HadwigerNelson.UpperHalf.exists_stablePrime_rat
+#print axioms HadwigerNelson.UpperHalf.chromaticNumber_planeOver_rat
+-- FS131-LU1 block end
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

@@ -4,3 +4,17 @@ MEASURE decls-given mem-cap=6G cpus=2 exit=0 wall=57.2s peak=0.56 GiB max-rss=4.
 MEASURE syntax-UpperHalf mem-cap=4G cpus=2 exit=0 wall=9.5s peak=0.96 GiB max-rss=3.45 GiB :: lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false -Dlinter.missingDocs=true Proofs/HadwigerNelson/Arith/UpperHalf.lean
 MEASURE syntax-QuadraticPrime mem-cap=4G cpus=2 exit=0 wall=7.2s peak=0.61 GiB max-rss=3.36 GiB :: lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false -Dlinter.missingDocs=true Proofs/HadwigerNelson/Arith/QuadraticPrime.lean
 MEASURE syntax-UpperHalfValues mem-cap=4G cpus=2 exit=0 wall=3.2s peak=0.48 GiB max-rss=3.45 GiB :: lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false -Dlinter.missingDocs=true Proofs/HadwigerNelson/Instances/UpperHalfValues.lean
+MEASURE uptodate-given mem-cap=4G cpus=2 exit=0 wall=3.6s peak=0.21 GiB max-rss=0.87 GiB :: lake build --no-build Proofs
+MEASURE checks-given mem-cap=6G cpus=2 exit=0 wall=3.6s peak=0.55 GiB max-rss=4.36 GiB :: lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false data/fs131/lu1/checks.lean
+MEASURE decls-given mem-cap=6G cpus=2 exit=0 wall=66.0s peak=0.54 GiB max-rss=4.35 GiB :: lake env lean data/fs131/lu1/decls.lean
+MEASURE dupnames-given mem-cap=8G cpus=4 exit=0 wall=4.7s peak=0.54 GiB max-rss=4.34 GiB :: ./scripts/dupnames.sh
+MEASURE lint-given mem-cap=8G cpus=4 exit=0 wall=10.9s peak=0.84 GiB max-rss=4.91 GiB :: lake lint --no-build -- --no-build --trace
+MEASURE vacuity-given mem-cap=8G cpus=4 exit=0 wall=137.6s peak=0.59 GiB max-rss=4.48 GiB :: ./scripts/vacuity.sh
+MEASURE assumptions-given mem-cap=8G cpus=4 exit=1 wall=106.2s peak=0.72 GiB max-rss=4.54 GiB :: ./scripts/assumptions.sh
+MEASURE syntax-QuadraticPrime mem-cap=4G cpus=2 exit=0 wall=7.0s peak=0.65 GiB max-rss=3.37 GiB :: lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false -Dlinter.missingDocs=true Proofs/HadwigerNelson/Arith/QuadraticPrime.lean
+MEASURE syntax-QuadraticPrime mem-cap=4G cpus=2 exit=0 wall=7.2s peak=0.67 GiB max-rss=3.40 GiB :: lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false -Dlinter.missingDocs=true Proofs/HadwigerNelson/Arith/QuadraticPrime.lean
+MEASURE axioms-probe mem-cap=8G cpus=4 exit=0 wall=7.3s peak=1.14 GiB max-rss=4.92 GiB :: ./scripts/axioms.sh
+MEASURE count-modules-given mem-cap=6G cpus=2 exit=0 wall=74.4s peak=0.55 GiB max-rss=4.45 GiB :: lake env lean data/fs131/l5/count-modules.lean
+MEASURE axioms-selftest-probe mem-cap=8G cpus=4 exit=0 wall=178.1s peak=1.30 GiB max-rss=5.04 GiB :: ./scripts/axioms.sh --self-test
+MEASURE vacuity-selftest-probe mem-cap=8G cpus=4 exit=0 wall=138.2s peak=0.60 GiB max-rss=4.50 GiB :: ./scripts/vacuity.sh --self-test
+MEASURE assumptions-selftest-first mem-cap=8G cpus=4 exit=0 wall=118.6s peak=0.70 GiB max-rss=4.59 GiB :: ./scripts/assumptions.sh --self-test
