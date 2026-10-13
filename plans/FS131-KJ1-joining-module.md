@@ -73,3 +73,63 @@ dyadic statements "as worded" (a prime, not a colouring).
   planned theorems and no statement in the claim's own words; the excluded classes are exactly `m ≡ 23 (mod 24)` with `m` a
   non-square modulo 7 (`47 ≡ 5`, `143 ≡ 3`, `167 ≡ 6`). One corollary in the claim's words is added (stage 3).
 - No statement defect found in the four modules or in the planned text at this reading.
+
+## Stage 2 — SAVED: the join, one build, and the axioms of every declaration from the built tree
+
+**The merges** (branch `fs131-wj1`, each a merge commit):
+
+| merged | commit | result |
+|---|---|---|
+| `fs131-wr2` at `71f1394a4` | `45a04b917` | clean |
+| `fs131-wc1` at `14e65f524` | `f3bbf7896` | clean |
+| `fs131-wdq` at `c57e97ba2` | `505003ae2` | clean |
+| `main` at `39fee2edb` | `07bc1efef` | **two conflicts**, in `Proofs.lean` and `ARCHITECTURE.md`: each side had appended lines at one place (main's three lines for the residue module, this line's four). Resolved by keeping both, main's first (`data/fs131/kj1/resolve_both.py`, which refuses anything but one both-added hunk per file). Sent to the coordinator at once |
+
+After the four merges: each of the four proved modules is byte-identical to its branch's head and each of the three residue modules
+to main's (`git diff --quiet <commit> HEAD -- <file>`, seven times); under `Proofs/` and `scripts/` the tree differs from `39fee2edb`
+by the four module files only.
+
+**The joining module** is `Proofs/HadwigerNelson/Arith/ThreeFourColours.lean`, the planned text
+(`data/fs131/kn4/lean/ThreeFourColours.lean`) with its module docstring's first paragraph rewritten (it said "PLANNED TEXT — not in
+the library") and nothing else changed; one line in `Proofs.lean`, one row in `ARCHITECTURE.md` (`tools/check_architecture.py`:
+PASS, 349 modules, `data/fs131/kj1/logs/architecture-1.out`).
+
+**Compiled files copied, not recompiled** (the brief's § What is yours to decide; inventory item 694's condition). Main had changed
+`Plane/AeColouring` (docstrings) and added `Plane/LebesgueNumber` since this worktree's build; recompiling what imports them is the
+47-minute build. Instead:
+- *what was copied, from where*: the whole compiled library `.lake/build` of the worktree `fs131-wnf` (head `f57fc603d`; the tree
+  whose gate passed for the residue module at `c2f4e4f54`; its sources under `Proofs/`, `scripts/`, the lakefile, the manifest and
+  the toolchain file are identical to this tree's but for this line's four modules, the joining module and the root list) into this
+  worktree's `.lake/build`, by `rsync -a --checksum --delete` (`data/fs131/kj1/copy_build.sh`): 380 files copied, 1028 files whose
+  content already agreed (attributes only), 32 deleted — the stale artifacts of the four line modules;
+- *how compared*: by content — a second `rsync --checksum --dry-run` itemizes nothing (`logs/copy_build.verify.txt`, 0 lines); and
+  by Lake's own trace check at the build, which rebuilt six modules and no other.
+
+**The build** (`scripts/build.sh` under the slot, `--mem 12`, `MEMMAX=12G`, `BATCH=8`): exit 0, **249 of 249 batches, 6 modules
+rebuilt** (`Arith.DyadicQuadratic` 11 s, `Arith.ThreeColourCharacter` 4.1 s, `Arith.TorsionExtraction` 9.8 s,
+`Arith.ThreeColourCriterion` 10 s, `Arith.ThreeFourColours`, `Proofs`), 1 module with warnings — the joining module's ten
+`declaration uses sorry` and nothing else — 7 m 0 s (`logs/build1.out`, `build1.done`).
+
+**The axioms of every declaration of the eight files, from the compiled modules** (`data/fs131/kj1/lean/Axioms.lean`, FS131-IN1's
+printer over a list of modules; reader `data/fs131/kj1/read_axioms.py`; print `logs/axioms-build1.txt`, verdict
+`logs/axioms-build1.out`):
+
+| module | records (public) | standard three | + Weil's bound | unproved dependency |
+|---|---|---|---|---|
+| `Arith/ThreeColourCharacter` | 11 (9) | 11 | 0 | 0 |
+| `Arith/TorsionExtraction` | 28 (18) | 28 | 0 | 0 |
+| `Arith/ThreeColourCriterion` | 37 (17) | 31 | 6 (5 public) | 0 |
+| `Arith/DyadicQuadratic` | 32 (11) | 32 | 0 | 0 |
+| `Arith/UpperHalf`, `Arith/QuadraticPrime`, `Instances/UpperHalfValues` | 68 (52) | 68 | 0 | 0 |
+| `Arith/ThreeFourColours` | 15 (15) | 3 | 0 | 12: the ten leaves and the two compositions proved over them |
+
+The six on Weil's bound: `targetFloor_four_weil`, `exists_normOne_zero_of_card_ne_nine`, `exists_maximal_card_nine`,
+`exists_maximal_of_torsion`, `exists_maximal_card_nine_of_colorable_three`, and the private `exists_maximal_card_nine_of_quotient`.
+**The unproved dependency the four reports name is gone from every record of the four modules.** Control: three records planted in
+the print's own file — a `sorry`, a use of the import, a clean one — are read as SORRY, WEIL, CLEAN (3 of 3); the reader also fails
+if the set of records printing `sorryAx` differs from `sorry-expected-build1.txt` in either direction.
+
+**Item 679's list, emptied by its own check.** `data/fs131/it1/read_axioms.py` on the joined tree's print of its 18 records, with
+`data/fs131/it1/sorry-expected.txt` as the torsion implementer left it: exit 1, "with `sorryAx` as listed: 0 of 5 listed; not as
+expected: 5" (`logs/it1-check-with-list.out`). The file is now empty; the same check: exit 0, 18 records on the standard three
+(`logs/it1-check-emptied.out`); its control: 2 of 2 planted records reported.
