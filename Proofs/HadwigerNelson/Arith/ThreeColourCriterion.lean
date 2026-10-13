@@ -15,7 +15,7 @@ clause as claimed are in the joining module `Arith/ThreeFourColours` (`plans/FS1
 **The route** (FS91-J02-T1's ⟹, `plans/FS91-S0F-three-colours.md` §2.6, with two steps shortened by the kernel planner).
 `τ ∈ Θ₃ ∩ T₆` (`TorsionExtraction.exists_torsion_mem_fieldBandSet`) splits as `τ₂ = 3τ` on `R/2R` and `τ₃ = −2τ` on
 `R/3R`; on a unit vector `(τ₂, τ₃) ∈ {(1/2, 0), (0, ±1/3)}`. For units `x₂`, `x₃` of the two quotients lift `(x₂, x₃)` to
-`a ∈ R`; `u = a/ā` is a unit vector reducing to `(x₂/x̄₂, x₃/x̄₃)` (`exists_unit_mul_conj_eq`). So either `τ₃` never
+`a ∈ R`; `u = a/ā` is a unit vector reducing to `(x₂/x̄₂, x₃/x̄₃)` (`exists_unitSet_mul_conjR_eq`). So either `τ₃` never
 vanishes on `{x/x̄}` in `R/3R`, or `τ₂ = 1/2` on `{x/x̄}` in `R/2R` (`exists_maximal_of_torsion`).
 * *Three.* `exists_maximal_card_nine`: compose the functional with a power of Frobenius that kills the nilradical; it
   lives on the reduced quotient, a product of finite fields, and never vanishes on the product of their norm-one groups;
@@ -40,7 +40,10 @@ and the two-colour end do not read it.
 **Inhabitants.** The hypotheses of `exists_maximal_card_nine` at `A = 𝔽₉ = 𝔽₃[i]`, conjugation, `l(x + yi) = x + y`
 (FS91-J02-L4(a) at `q = 3`: `l ≠ 0` on `μ₄ = {±1, ±i}`); of `exists_maximal_conj_trivial` at `A = 𝔽₂`, the identity and
 `l = id`. `exists_maximal_card_nine_of_colorable_three` at `F = ℚ(√3)` (`χ = 3`, `[Fischer1990]` Thm 9), which no
-declaration on this line exhibits; `exists_maximal_conj_trivial_of_colorable_two` at `F = ℚ`.
+declaration on this line exhibits; `exists_maximal_conj_trivial_of_colorable_two` at `F = ℚ(√2)`
+(`DyadicQuadratic.colorable_two_planeOver_sqrt`, downstream of this module). The two field cases: `𝔽₈₁` has no
+model of `exists_normOne_zero_of_card_ne_nine`'s `ι` with `σ ι = −ι` (`ι ∈ 𝔽₉` is fixed by `x ↦ x⁹`); its first model is
+`𝔽₂₇[i]`, the field of `27²` elements; `eq_zero_of_forall_normOne_eq` at `𝔽₄` with Frobenius, `e = 0`.
 -/
 
 namespace HadwigerNelson.ThreeColourCriterion
@@ -52,6 +55,30 @@ open HadwigerNelson.CharacterColouring HadwigerNelson.SpectralChain HadwigerNels
 /-- **The floor at four, on Weil's bound**: `χ(Γ_Q) ≥ 4` for `Q ≡ 3 (mod 4)`, `Q ≥ 14` — every `Q = 3^f ≥ 27` with `f`
 odd. (`targetFloor_of_charSum` at `m = 2√Q`: `3·2√Q < Q + 1 + 2√Q`.) Rests on the import. -/
 theorem targetFloor_four_weil {Q : ℕ} (hQ4 : Q % 4 = 3) (hQ : 14 ≤ Q) : TargetFloor 4 Q := by
+  sorry
+
+/-- **Hilbert 90 for a finite field with an involution**: a norm-one element is `y / σ y`. (Read by both field cases
+below and, at a stable prime's residue field, by the joining module.) -/
+theorem exists_mul_conj_inv_eq_of_mul_conj_eq_one {k : Type*} [Field k] [Finite k] (σ : k →+* k)
+    (hσσ : ∀ x, σ (σ x) = x) (hσ : σ ≠ RingHom.id k) {t : k} (ht : t * σ t = 1) :
+    ∃ y : kˣ, (y : k) * σ ((y⁻¹ : kˣ) : k) = t := by
+  sorry
+
+/-- **The field case at 3 (FS91-J02-L4(a))**: in a finite field of characteristic 3 with an involution `σ`, an element
+`ι` with `ι² = −1`, `σ ι = −ι`, and not nine elements, every additive functional into `𝔽₃` vanishes somewhere on the
+norm-one group `{y / σ y}`. Rests on Weil's bound (`targetFloor_four_weil`: the functional would three-colour the
+field's target). -/
+theorem exists_normOne_zero_of_card_ne_nine {k : Type} [Field k] [Finite k] [CharP k 3] (σ : k →+* k)
+    (hσσ : ∀ x, σ (σ x) = x) {ι : k} (hι : ι * ι = -1) (hσι : σ ι = -ι) (hcard : Nat.card k ≠ 9) (lam : k →+ ZMod 3) :
+    ∃ y : kˣ, lam ((y : k) * σ ((y⁻¹ : kˣ) : k)) = 0 := by
+  sorry
+
+/-- **The field case at 2 (FS91-J02-L4(b))**: in a finite field of characteristic 2 with a non-trivial involution, an
+additive functional into `𝔽₂` that is constant on the norm-one group `{y / σ y}` is `0` there (the group has odd order
+`Q + 1 ≥ 3` and sums to `0`). No outside theorem. -/
+theorem eq_zero_of_forall_normOne_eq {k : Type*} [Field k] [Finite k] [CharP k 2] (σ : k →+* k)
+    (hσσ : ∀ x, σ (σ x) = x) (hσ : σ ≠ RingHom.id k) (lam : k →+ ZMod 2) {e : ZMod 2}
+    (h : ∀ y : kˣ, lam ((y : k) * σ ((y⁻¹ : kˣ) : k)) = e) : e = 0 := by
   sorry
 
 /-- **The three-part (FS91-J02-L3, L4(a) and T1 step 4, in one finite ring).** A finite commutative ring of
@@ -87,13 +114,18 @@ noncomputable def conjR (F : Subfield ℝ) : unitRing F →+* unitRing F :=
 
 @[simp] theorem coe_conjR (x : unitRing F) : ((conjR F x : unitRing F) : ℂ) = (starRingEnd ℂ) (x : ℂ) := rfl
 
-/-- **Hilbert 90 inside the ring**: for `a ≠ 0` in `ℤ[U_F]` the quotient `u = a/ā` is a unit vector, and `u·ā = a`. -/
-theorem exists_unit_mul_conj_eq {a : unitRing F} (ha : a ≠ 0) : ∃ u ∈ unitSet F, u * conjR F a = a := by
+/-- Conjugation on `ℤ[U_F]` is an involution. -/
+@[simp] theorem conjR_conjR (x : unitRing F) : conjR F (conjR F x) = x :=
+  Subtype.ext (Complex.conj_conj (x : ℂ))
+
+/-- **Every non-zero element of `ℤ[U_F]` is a unit vector times its conjugate**: `u = a/ā` has norm one and
+coordinates in `F`, and `u·ā = a`. (The easy direction; Hilbert 90 is `exists_mul_conj_inv_eq_of_mul_conj_eq_one`.) -/
+theorem exists_unitSet_mul_conjR_eq {a : unitRing F} (ha : a ≠ 0) : ∃ u ∈ unitSet F, u * conjR F a = a := by
   sorry
 
-/-- **Every prime ideal of `ℤ[U_F]` is fixed by conjugation** (FS91-J02-L2(b), with no valuation: for `a ∈ 𝔮`,
-`a = u·ā` with `u` a unit of the ring, so `ā ∈ 𝔮`). -/
-theorem comap_conjR_eq (𝔮 : Ideal (unitRing F)) [𝔮.IsPrime] : 𝔮.comap (conjR F) = 𝔮 := by
+/-- **Every ideal of `ℤ[U_F]` is fixed by conjugation** (FS91-J02-L2(b) states it for primes; with no valuation: for
+`a ∈ I`, `a = u·ā` with `u` a unit vector, so `ā = ū·a ∈ I`). -/
+theorem comap_conjR_eq (I : Ideal (unitRing F)) : I.comap (conjR F) = I := by
   sorry
 
 /-- **`ℤ[U_F]/N` is finite** for a number field `F` and `N ≠ 0` (FS91-J02-L2(a): any `[F(i) : ℚ] + 1` elements of the
@@ -133,11 +165,14 @@ theorem exists_maximal_card_nine_of_colorable_three (F : Subfield ℝ) [NumberFi
       (fieldBandSet_two_nonempty_of_conj_trivial h𝔪 htriv)) hnb
   · exact h
 
-/-- **The two-colour end, in the ring** (GPT Astra's Thm 2.1, ⟹; second derivation FS91-J02-A21p — an outside model's
-theorem, not this project's): a real number field with a two-colourable plane has a maximal ideal of `ℤ[U_F]` modulo
-which conjugation is the identity. With `fieldBandSet_two_nonempty_of_conj_trivial` it is an equivalence. No outside
-theorem. -/
-theorem exists_maximal_conj_trivial_of_colorable_two (F : Subfield ℝ) [NumberField F]
+/-- **The two-colour end, in the ring, every subfield `F ⊆ ℝ`**: a two-colourable plane gives a maximal ideal of
+`ℤ[U_F]` modulo which conjugation is the identity — the ideal generated by the `u − 1`, `u` a unit vector, whose
+quotient is `𝔽₂` (every unit vector is `1` modulo it and `i ≡ 1` gives `2 ≡ 0`; a two-colouring's character kills it
+and not `1`). With `fieldBandSet_two_nonempty_of_conj_trivial` it is an equivalence: `F²` is two-colourable iff `ℤ[U_F]`
+has `𝔽₂` as a quotient — "no odd closed walk" in the ring's words. Read through the joining module's dictionary at a
+real number field it is the ⟹ of the two-colour classification, which is an outside model's theorem (GPT Astra's
+Thm 2.1; second derivation FS91-J02-A21p) and is not claimed as this project's. No outside theorem is read. -/
+theorem exists_maximal_conj_trivial_of_colorable_two (F : Subfield ℝ)
     (h2 : ((unitDistance ℂ).induce (planeOver F)).Colorable 2) :
     ∃ 𝔪 : Ideal (unitRing F), 𝔪.IsMaximal ∧ ∀ x, conjR F x - x ∈ 𝔪 := by
   sorry

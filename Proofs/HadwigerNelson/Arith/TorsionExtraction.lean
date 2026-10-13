@@ -85,6 +85,12 @@ theorem exists_torsion_mem_fieldBandSet (F : Subfield ℝ) (h : (fieldBandSet F 
 
 /-! ## §3 Two colours are a character with value `1/2` -/
 
+/-- **A character killed by `N` is a `ZMod N`-valued functional** followed by `ZMod N ↪ ℝ/ℤ`, `1 ↦ 1/N`. (Stated once:
+the two-colour criterion below reads it at 2, and the criterion module at 2 and at 3.) -/
+theorem exists_zmod_hom_of_mem_torsionBy {M : Type*} [AddCommGroup M] {N : ℕ} [NeZero N] {θ : M →+ UnitAddCircle}
+    (h : θ ∈ torsionBy M N) : ∃ l : M →+ ZMod N, ∀ x, θ x = ZMod.toAddCircle (l x) := by
+  sorry
+
 /-- **Two-colourings are the points of `Θ₂(R_F)`**: the plane over `F` is two-colourable iff some character of `ℤ[U_F]`
 is `1/2` on every unit vector (`band 2 = {1/2}`). (`⟹`: on the component of `0` a two-colouring is `x ↦ c(x) − c(0)`,
 additive because every step changes it. `⟸`: colour each coset of `ℤ[U_F]` in `F(i)` by the character.) -/
@@ -107,7 +113,9 @@ theorem colorable_two_of_inv_three_mem (h3 : (3 : ℂ)⁻¹ ∈ unitRing F)
     exists_torsion_mem_fieldBandSet F (ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable F h)
   exact (colorable_two_iff_fieldBandSet_two_nonempty F).mpr ⟨τ, mem_fieldBandSet_two_of_inv_three_mem h3 hτ h6⟩
 
-/-- **Clause (c), as claimed**: `1/3 ∈ ℤ[U_F]` and `F²` not bipartite give `χ(F²) ≥ 4`. -/
+/-- **Clause (c), as claimed**: `1/3 ∈ ℤ[U_F]` and `F²` not bipartite give `χ(F²) ≥ 4`. This project's (FS81-T5,
+`[hand, two independent derivations]` before this module); not found in print. For **additive** colourings the
+obstruction is `[Fischer1990]` §1 and Thm 10(ii). -/
 theorem four_le_chromaticNumber_planeOver_of_inv_three_mem (h3 : (3 : ℂ)⁻¹ ∈ unitRing F)
     (hnb : ¬ ((unitDistance ℂ).induce (planeOver F)).Colorable 2) :
     4 ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber := by
@@ -159,13 +167,15 @@ theorem three_le_chromaticNumber_planeOver_of_sqrt_mem {d : ℕ} (hd : d % 4 = 3
   exact_mod_cast h
 
 /-- **Clause (a), at its proof's level**: every subfield of `ℝ` holding `√d` for a natural `d ≡ 11 (mod 12)` has a plane
-needing four colours. No squarefreeness, no finite graph. -/
+needing four colours. No squarefreeness, no finite graph. The lower bound is this project's; the unit vector and
+`1/3 ∈ ℤ[U]` are `[Fischer1990]` Thm 10(ii) and Ex. 4, and `[Johnson2000]` p. 176 poses the family as open. -/
 theorem four_le_chromaticNumber_planeOver_of_sqrt_mem {d : ℕ} (hd : d % 12 = 11) (hF : Real.sqrt d ∈ F) :
     4 ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber :=
   four_le_chromaticNumber_planeOver_of_inv_three_mem (inv_three_mem_unitRing_of_sqrt_mem hd hF)
     (not_colorable_two_of_sqrt_mem (by omega) hF)
 
-/-- **Clause (a), as claimed**: `χ(ℚ(√d)²) ≥ 4` for `d ≡ 11 (mod 12)` (the claim's "squarefree" is not used). -/
+/-- **Clause (a), as claimed**: `χ(ℚ(√d)²) ≥ 4` for `d ≡ 11 (mod 12)` (the claim's "squarefree" is not used). This
+project's lower bound; every upper bound for these fields is prior art (`[Fischer1990]`, `[Johnson2000]`). -/
 theorem four_le_chromaticNumber_planeOver_fieldOfRadicands {d : ℕ} (hd : d % 12 = 11) :
     4 ≤ ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {d}))).chromaticNumber :=
   four_le_chromaticNumber_planeOver_of_sqrt_mem hd (sqrt_mem_fieldOfRadicands (Set.mem_singleton d))

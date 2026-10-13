@@ -17,7 +17,7 @@ against both lines' skeletons by `data/fs131/kn4/join_check.sh`.
 **Read aloud, against the claim** (`data/fs131/claims-NF4.md`, NF4-THEOREM).
 * (b) *"For every real number field `F` whose plane is not bipartite: `χ(F²) = 3` iff some prime of `F` above 3 has
   residue field `𝔽₃`."* — `chromaticNumber_planeOver_eq_three_iff`; without the hypothesis, FS91-J02-T2's form
-  `colorable_three_iff`.
+  `colorable_three_planeOver_iff`.
 * (a), the table — one theorem per row, each naming the upper half it reads (every upper half is prior art:
   `[Fischer1990]`, `[Johnson2000]`; at the level of a field it is NF1's).
 * Row 99 in the form row 127 takes — `localBound_le_chromaticNumber_of_le_four`.
@@ -72,7 +72,7 @@ theorem colorable_three_of_card_three (F : Subfield ℝ) [NumberField F] {𝔭 :
 
 /-- **FS91-J02-T2 (S1), `(1) ⟺ (4)`**: the plane over a real number field is three-colourable iff it is two-colourable
 or some prime of `F` has residue field `𝔽₃`. Rests on Weil's bound (⟹). -/
-theorem colorable_three_iff (F : Subfield ℝ) [NumberField F] :
+theorem colorable_three_planeOver_iff (F : Subfield ℝ) [NumberField F] :
     ((unitDistance ℂ).induce (planeOver F)).Colorable 3 ↔
       ((unitDistance ℂ).induce (planeOver F)).Colorable 2 ∨
         ∃ 𝔭 : Ideal (𝓞 F), 𝔭.IsMaximal ∧ Nat.card (𝓞 F ⧸ 𝔭) = 3 := by

@@ -38,9 +38,16 @@ variable {A : Type*} [AddCommGroup A] {m : ℕ}
 
 /-! ## §1 Finitely many generators: from the winding to a point of the box -/
 
+/-- **Finitely many strict linear inequalities with a real solution have an integer one**: the solutions form an open
+cone, the rational vectors are dense, and a common denominator scales a rational solution to an integer one. (The one
+analytic step of `Winding.exists_box_point`, read there at the `2^m` vertices of the box.) -/
+theorem exists_int_vector_of_forall_neg {ι κ : Type*} [Fintype ι] [Finite κ] (ℓ : κ → (ι → ℝ) →ₗ[ℝ] ℝ) {c : ι → ℝ}
+    (h : ∀ k, ℓ k c < 0) : ∃ N : ι → ℤ, ∀ k, ℓ k (fun i => (N i : ℝ)) < 0 := by
+  sorry
+
 /-- **NF4-S6, finite form (FS73-T22 ⟹ past the winding).** A winding is the relation form of a point of the box: some
 `x ∈ [1/3, 2/3]^m` has `Σ_j r_j x_j = W r` for every relation `r`. -/
-theorem exists_box_point {s : Fin m → A} (W : Winding s) :
+theorem _root_.HadwigerNelson.ThreeColour.Winding.exists_box_point {s : Fin m → A} (W : Winding s) :
     ∃ x : Fin m → ℝ, (∀ j, x j ∈ Set.Icc (1 / 3 : ℝ) (2 / 3)) ∧
       ∀ r : (relMap s).ker, ∑ j, (((r : Fin m → ℤ) j : ℤ) : ℝ) * x j = ((W.toHom r : ℤ) : ℝ) := by
   sorry
