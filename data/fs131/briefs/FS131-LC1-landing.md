@@ -140,3 +140,18 @@ The remote is unreachable: **commit by explicit path on your branch and do not p
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 (2026-10-13 18:00 UTC) — your read-aloud's difference is recorded, and your four decisions stand
+
+The difference you found (the claim's clause for every dimension and a finite set of distances against a kernel
+theorem for the plane and the unit distance) is now a dated line in `data/fs131/claims-NF3.md`: your drafts regrade
+the plane clause and the equality, and nothing wider. Your four decisions stand as you stated them: the four further
+docstring lines of the same slip corrected in the same build; the five docstring fixes in the new module; the two
+state-reading counts in `scripts/axioms-controls.txt` moved by that file's own rule after the self-test is seen red on
+them; thirty-four records filed, and the two architecture rows and the trust row corrected. **Your touches are
+extended to `scripts/axioms-controls.txt` and to the docstrings and module headers of
+`Proofs/HadwigerNelson/Plane/FalconerReduction.lean` and `Proofs/HadwigerNelson/Plane/AeColouring.lean`** — docstrings
+only, no statement, with the kernel-side comparison after the build as you planned. Your note that the number is
+defined over the complex plane while one headline has the Euclidean plane on its left goes into the open gate items.
+You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only
+review work it knows exists).
