@@ -38,7 +38,8 @@ if missing or extra:
     print(f"FAIL: written but not one named constant of the dump: {missing}; named in the dump but not written: {extra}")
     sys.exit(1)
 nthm = sum(named[n] == "THM" for n in order); ndef = sum(named[n] == "DEF" for n in order)
-head = (f"-- FS131-IC1: Arith/ThreeColourCharacter ({len(order)}: {nthm} theorems, {ndef} definitions; every public declaration a\n"
+head = (f"-- FS131-IC1 of 2026-10-13 (brief FS131-IC1-leaves; not the job of that id that proved `Contact` on 2026-10-04):\n"
+        f"-- Arith/ThreeColourCharacter ({len(order)}: {nthm} theorems, {ndef} definitions; every public declaration a\n"
         f"-- person typed, in the file's order — the kernel's list, data/fs131/ic1/statements-built.txt, through\n"
         f"-- data/fs131/ic1/make_audit.py).  Statements FS131-KN4's and FS131-KN5's; the eight leaves' proofs FS131-IC1's.\n"
         f"-- The file's {len(private)} private helpers ({', '.join(private)}) are not nameable here;\n"
