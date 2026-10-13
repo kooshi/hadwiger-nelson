@@ -43,11 +43,21 @@ the frontier's open jobs are **parked** (FS-136's 25 leaves on branch `fs136-wk1
 its five entries, its record job; the asking lane's unfiled re-rank draft) — § 0e's "order when the budget returns" is
 superseded except for its first line, the owed filing.
 
-**Three jobs are running** (ids in the session's scratch `agents.txt`, never in a repo file; they resume only inside
+**Jobs running — at this hour FS131-EN1, FS131-KN2 and FS131-ER1** (ids in the session's scratch `agents.txt`, never in a repo file; they resume only inside
 this session):
-1. **FS131-PN1** (asking lane; brief `data/fs131/briefs/FS131-PN1-number-field-ranking.md`; record
-   `plans/POROS-2026-10-13-number-field-findings.md`): the number-field findings ranked by interest to mathematicians
-   in the field. It messages when the list is saved.
+1. ~~FS131-PN1, the ranking~~ — **done (2026-10-13 16:31 UTC; FS-131 inventory item 644): `plans/POROS-2026-10-13-number-field-findings.md`
+   § 3.2 (order), § 3.3 (the first ten), § 3.5 (recommendation).** Order: five colours (rows 121, 123, 127); three and
+   four colours with no hypothesis (73, 82, 99); a number field's plane against the real plane (128, 129); the p-adic
+   problem (75); lattice Cayley graphs by a character (79, 119); … **For the kernel lane: rank 2's leaves first, then
+   the five-colour chain with the rigidity deductions, then the p-adic result** (adopted as the default; "five first"
+   is offered to Kooshi). **Its search found `[Davies2026]` (arXiv:2610.12301, 8 October 2026), which poses rows
+   121–123's question by name, proves row 128's kind of statement in dimension four and up, hopes to reach the plane,
+   and conjectures χ(ℝ²) = 6** — both PDFs are in the library and both rows in `BIBLIOGRAPHY.md`. **FS131-ER1** (a
+   deriver; brief `data/fs131/briefs/FS131-ER1-davies-reading.md`; record `plans/FS131-ER1-davies-reading.md`) is
+   reading it in full against rows 121–123, 128, 129. **Put to Kooshi the same hour, unanswered**: five first or the
+   recommended order (default: recommended); whether FS-133, the density equality for the real plane, joins the
+   formalization because the paper's author hopes to reach it (my recommendation: yes; default stated to him: its
+   kernel planner takes the next free slot unless he says no).
 2. ~~FS131-KN1, the map~~ — **done (2026-10-13 16:25 UTC; FS-131 inventory item 643): `plans/FS131-KN1-number-field-kernel-map.md` on
    `main` (merge `123d2bc57`), 36 entries; its § X8 names the first module and its chain section lists 23 leaves under
    the five-colour results.** Its successor **FS131-KN2** is running in the same tree (`fs131-wnf`): the first module,
