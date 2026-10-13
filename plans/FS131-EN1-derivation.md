@@ -401,3 +401,85 @@ control: spcor-reads-ru-once
   fault: python3 ../data/fs131/en1/unused_check.py Interface.x4_eq_empty hHE
 
 Rests on it: EN1-OFFPATH; the planner's leaf 2.
+
+## Stage 6 — SAVED (EN1-OFFPATH: the whole chain under rows 121 and 123, walked for every reading of the split places, R-U and `Haar(E) = 0`)
+
+**Verdict: TRUE as worded, read strictly — and false in the sense a reader is likely to take from it** [hand; one mind; a walk whose depth
+per node is stated in § 6.3]. Once SP-Cor is run at `T + A`: the lemma R-U (J45-RU; FS100-EFZ), the topology R-U's proof stands on (J45's
+`G′_S` at `S ≠ ∅`: N1 (a), (b) there, with its Borel isomorphism), N1 (c) and "`Haar(E) = 0`" are cited by **no** proof on the path of rows 121
+and 123. **Not true, and not what the statement says if read word for word:** that the split places, or a topology on them, or R-U's argument
+are off the path. EF_F⁺ — a leaf of the path — models the dual on the restricted product over **every** split place and runs R-U's wandering
+argument there, in each of its three derivations; PE-2 and T-C(A) at `S = ∅` each read a split place once. So what the planner's map loses is
+a duplicate (J45's separate proof of the wandering step, through a second model of the split places), not the split places.
+
+### 6.1 The walk
+
+The chain, from the two rows' entries (FS100-Q47's six links, `plans/FS100-three-field-lemma.md` §R-close (stage 5) 1.2; FS100-COR,
+`plans/FS100-derivation.md` l. 299): the upper half; row 99 below five; CLS; T-C(A) at `S = ∅`; A⁺ at `S = ∅`; SP-Cor; MR from PE-2 and EF_F⁺;
+the instances. For each node: where a finite split place is read, where R-U is read, where a Haar-null clause is read.
+
+| node (entry; proof read) | split places | R-U | `Haar(E) = 0` / N1 (c) |
+|---|---|---|---|
+| **Upper half**, `χ ≤ L` (row 52; at ℚ(√47) the plane at 11, kernel `SqrtFortySeven.…_le_five`) | none — a residue map at a stable place | no | no |
+| **Row 99**, `χ = L` at `L ≤ 4` (row 123 only) | by its row and G74 its chain reads the rational unit vectors with 5-power denominators — the primes above 5, split in `ℚ(i)` — as arithmetic; *its proofs not read by me* | no (0 hits for `R-U`, `Fin_S`, `E_S`, `m(E)` in `plans/FS91-derivation.md`, `plans/FS81-derivation.md`, `plans/FS91-S0F-three-colours.md`) | no |
+| **CLS** (FS100-CLS; at degree 2 FS100-T1, FS100-Q0) | only to decide which places are stable (e.g. "the dyadic place splits in `L`" iff `d ≡ 7 mod 8`); every bound is at a stable place | no | no |
+| **T-C(A) at `S = ∅`** (R88-TCA; FS100-TCA; J28D § 3.2 C1–C5; X23D § 3.2 C1–C3; J28V C1 by grep) | **C1, once**: `R` is dense in `G_∅ = (L ⊗ ℝ) × ∏_{stable} O_{L_v}` "by strong approximation for `L` omitting one place above a split place outside `S` — the approximant is integral at every stable place, so lies in `R`" (J28D ll. 148–150; J28V l. 89); in every degree "or J45 N1 (b) with `R̂_prof = ∏_{stable} O_{L_v}`, which is `R = O′`, Lemma C′" (X23D ll. 222–223). And "torsion characters … stable-continuous (Lemma C (d))" — `R = O′` again. **No split-place factor**: at `S = ∅` C14.2 (c) is not an input (J45 l. 326; X11K § 1.3) | no | no |
+| **A⁺ at `S = ∅`** (J45 § 3, §§ 2.1–2.2; read in full: § Stage 3) | none | no | no — N1 (c) is not read |
+| **SP-Cor** (J45 § 4.2 ll. 321–326; J46-13; X05V § 2.1 P0–P8; FS100-K0, K0b, SPC) | only through R-U | **yes — the path's one citation**: "R-U gives `σ_μ(E ∖ (T + A)) = 0`" (J45 l. 324); X05V P4; K0's list "R-U (J45: every real number field)"; the kernel l. 544. Removed at `T + A` (§ Stage 5) | listed, not used: X05V P3 "`m(E) = 0` (N1)" |
+| **MR from PE-2 and EF_F⁺** (FS100-MR (a); X01D § 4.1) | none | no ("MR uses neither R-U nor `m(E) = 0`") | no; but X11K's map wrote the node as "`m(E) = 0` (N1) ⟹ `τ′(E) = τ(E) = 0`" (`plans/FS100-K-kernel-47.md` l. 84, graph l. 123), and the `Prop` `Interface.PE2` carries the clause — a slip of that map, not a step of any derivation |
+| **PE-2** (FS100-PE2; X02D §§ 2.2–3, read in full; X02V § 2.3 by grep) | **Lemma W, once**: a rational prime split completely in `L`, `(z) = 𝔓ʰ`, `w = z/c(z)`, valuations `h` and `−h` at `𝔓` and `c(𝔓)` (X02D ll. 156–163) — a split place as the place where `U` has an element of non-zero valuation | no | no |
+| **EF_F⁺** (FS100-EFP; X01D § 3 and X12B § 2 read in full; FS105-B by its entries) | **throughout.** The model: `R̂ ≅ W/Λ`, `W = L_∞ × ∏′_{w split} L_w` (X01D § 2.0; X12B § 2.0; FS105-B-M1), which needs `R = O′`. The expanding place `v*` is a split finite place when `F` is totally real (X01D § 3.2). The pigeonhole pays heights at every split `w ≠ v*` (§ 3.4's table). The leaves use strong approximation and Lusin–Souslin (§ 3.7). **The wandering step, at every split place**: X01D § 3.8 ("`g := γ/σ(γ) ∈ U` with `\|g\|_w ≠ 1` … the shells `A_j` … `ν_t(a_w ≠ 0) = 0`. Over the countably many split `w`"); X12B § 2.1 Lemma Z; FS105-B-L6 ("each other split place is killed by a contraction `z/σz ∈ U`") | **not cited; its argument is run.** X01D § 3.8: "Sanity check … that is R-U, a held result"; the ladder's L3: "Step 7 of EF_F⁺ re-derives R-U's mechanism internally" | no |
+| **Instances** (FS100-FAM, Q35, 167) | the stable/split classification of each place | FS100-167's *second* route to `χ(ℚ(√167)²) ≥ 5` (J48-N4cor) is recorded as "sharing R-U and SP with the first" (`plans/FS100-derivation.md` l. 279); its statement reads an SP witness "`τ(E) = 0`" (`plans/STUB-measure-rigidity-three-fields.md` ll. 181–184). *Not read by me beyond that statement.* The instance stands by the first route | not known to me |
+
+**The exact check.** `data/fs131/en1/cites_check.py` counts mentions of the lemma `R-U` and of a Haar-null clause in the line ranges of the
+on-path proofs read above — X01D §§ 3.1–3.8, X12B §§ 2.0–2.2 (without its corollary X12B-E), X02D's PE-1′ to PE-2, J45's N2, SI-1 to SI-4 and
+A⁺, J28D § 3.2 C1–C5, X23D § 3.2's C1 to C5. It prints `0 0`. With J45's SP-Cor added it prints `1 0`: the one citation (control
+`path-cites-ru-once`).
+
+### 6.2 Off the path, though the rows' cells name them
+
+Row 121's source cell lists "J45-N1, -N2, -SI-4, -SI-5, -SI-J, -SI-C, -SP-oi, -SP-if — the inputs FS100-Q47's grade names". Read against J45's
+proofs, four of the eight are not inputs of the proof of `χ(ℚ(√47)²) ≥ 5`:
+
+- **SI-J, SI-5, SI-C** — the lemma on independent products, the scope lemma for SI's "⟸", and the control. They are where N1 (c) *is* read
+  ("`≪ Haar`, which gives `E_S` measure 0 (N1 (c))", l. 198; "which gives `E` measure 0 (N1 (c))", l. 223). SP-Cor's proof cites none of them.
+- **SP-if** — the converse half of SP's equivalence, and the one other reader of N1's topology at `S ≠ ∅` ("`r₀R` is open in `τ′_S`",
+  ll. 303–306). SP-Cor uses only the one line of SP-only-if (Haar's coefficient at 1 is 0).
+- Also off the path: FS100-MR (b) (X02V-8, "uses `m(E) = 0`"), FS100-MR (c) ("given R-U, MR ⟺ PE-2"), FS100-EFZ (R-U restated), X12B-E.
+
+### 6.3 Depth of the walk, node by node (what "every place" rests on)
+
+Read in full: J45 (all of it), X01D §§ 2–4, X12B § 2, X02D §§ 2.2–3, `plans/FS100-derivation.md`, the kernel file. Read at the steps named and
+by grep for `R-U`, `N1`, `split`, `Fin_S`, `E_S`, `m(E)`: J28D § 3.2 C1–C5, X23D §§ 3.1–3.2 (C1–C3) and § 2.3's place list, X05V § 2.1, J46 §§ 2.0–2.1,
+2.4, X25B, J28V, X02V, FS105's entries, R88's entries. Read by ledger row and entry only: row 99's chain, row 52, row 100's Lemma C′, C14.1–C14.3,
+FS-66's certificates, J48-N4cor, FS105-DED. Not read: `[EinsiedlerLindenstrauss2022]`, `[EinsiedlerFish2010]`. A reading of the split places in
+a proof of the third kind would not be in the table; R-U and `Haar(E)` were grepped for in every file named.
+
+derivation: EN1-OFFPATH
+  statement: the hand result R-U, with the split-place topology under it, and N1's clauses about the split places and "Haar(E) = 0", are not on the path of ledger rows 121 and 123 (the plane over the field of √47 needs five colours; the main clause through five); the split-place E stays what it was for the selection results and Theorem C at S ≠ ∅ (rows 112, 116–118).
+  uses only: EN1-SPCOR (SP-Cor at `T + A` does not cite R-U); EN1-FROM-TWO (node M reads no Haar-null clause); EN1-APLUS (A⁺ at `S = ∅` reads
+    N1 at `S = ∅` only, and not its clause (c)); the walk of § 6.1 — in the proofs of T-C(A) at `S = ∅`, PE-2 and EF_F⁺ as read, no line cites
+    J45-RU, J45's `G′_S` at `S ≠ ∅`, or a Haar-null clause; "the split-place topology under it" read as the topology R-U's proof uses, J45's
+    `τ′_S` at `S ≠ ∅`
+  not claimed: that the split places are off the path, or that no topology on them is — EF_F⁺'s model of the dual is the restricted product over
+    every split place, and its proof runs R-U's wandering argument there (X01D § 3.8; X12B Lemma Z; FS105-B-L6); PE-2's Lemma W and T-C(A)'s
+    density step each read one; that R-U's *content* is off the path — MR⁺ implies it (EN1-EQUIV); that row 123's second route to
+    `χ(ℚ(√167)²) ≥ 5` (J48-N4cor) is free of R-U — its entry says it shares it, and I did not read it; that the `Prop` `Interface.PE2` can be
+    discharged without `m(T + A) = 0`; anything about rows 112 and 116–118 beyond that this job changes nothing in them (EN1-NC); completeness
+    of the walk beyond the depth § 6.3 states
+  argument: § 6.1 The walk
+  verdict: derived
+  grade: derived from: EN1-SPCOR, EN1-FROM-TWO, EN1-APLUS
+  minds: 1
+  model: `F = ℚ(√47)`: the six links of FS100-Q47 with SP-Cor at `T + A`; R-U's only citation (J45 l. 324) is the bridge EN1-SPCOR removes
+  prior art: known: the plan's ladder already says of link L3 "MR does not need R-U (Step 7 of EF_F⁺ re-derives R-U's mechanism internally), nor `m(E) = 0`" (`plans/FS100-three-field-lemma.md` §R-close (stage 5) 1.2); what is added is SP-Cor's link
+  handoff: de Bruijn — the planner's section X6 stands for the four items it names (R-U, `Fin_S`, `τ′_S` at `S ≠ ∅`, `Haar(E) = 0`); its leaf 21
+    keeps the split places: the model of the dual over every split place, strong approximation, and the wandering step
+
+control: path-cites-ru-once
+  of: EN1-OFFPATH — on the lines of the on-path proofs read in full, the lemma R-U and a Haar-null clause are never cited
+  run: python3 ../data/fs131/en1/cites_check.py plans/FS100-X01D-derivation.md:203-308 plans/FS100-X12B-derivation.md:46-77 plans/FS100-X12B-derivation.md:85-131 plans/FS100-X02D-derivation.md:146-218 plans/FS84-SI-D-derivation.md:126-135 plans/FS84-SI-D-derivation.md:145-162 plans/FS84-SI-D-derivation.md:240-250 plans/FS86-R88-D-derivation.md:142-201 plans/FS100-X23D-derivation.md:217-246
+  expect: 0 0
+  fault: python3 ../data/fs131/en1/cites_check.py plans/FS100-X01D-derivation.md:203-308 plans/FS100-X12B-derivation.md:46-77 plans/FS100-X12B-derivation.md:85-131 plans/FS100-X02D-derivation.md:146-218 plans/FS84-SI-D-derivation.md:126-135 plans/FS84-SI-D-derivation.md:145-162 plans/FS84-SI-D-derivation.md:240-250 plans/FS86-R88-D-derivation.md:142-201 plans/FS100-X23D-derivation.md:217-246 plans/FS84-SI-D-derivation.md:321-328
+
+Rests on it: the planner's section X6 and the order of its leaves; § Stage 8's list.
