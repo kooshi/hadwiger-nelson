@@ -262,3 +262,73 @@ In each row the last clause of both alternatives says `ψ(u) ≠ 0`. (`ψ` is re
 homomorphism of DQ.3"; with the additive map it is: `ℤ[U_F]` is the additive span of the unit vectors
 (`UnitRing.exists_sum_eq_of_mem_unitRingOver`), so it lies in `Λ`; were `1/2` in it, `ψ 1 = 2 • ψ (1/2) = 0` in `𝔽₂ × 𝔽₂`, but `1`
 is a unit vector. The rest of J.10 is as the first plan has it.
+
+## Stage 6 — SAVED: the builds, and the linters' verdict
+
+All through `scripts/build.sh` under `scripts/slot.py --mem 10 --cpus 4` with `MEMMAX=10G` (`data/fs131/kn5/build_sampled.sh` for
+the second and third; logs `data/fs131/kn5/logs/build{1,2,3}.{out,err,peak}`; the gate's own copies under `build/gate/build/`).
+
+| build | tree | batches | rebuilt | wall | peak memory | warnings |
+|---|---|---|---|---|---|---|
+| 1 | the skeleton as the first planner left it (`09f5e7b16`) | 482 of 4 | 39 modules (the tree's `.lake/build` was two landings behind: `Plane/…`, `Outside/…`, this line's four, `Proofs`) | 19m59s | not captured | the 29 `declaration uses sorry`, nothing else |
+| 2 | after the three passes (`558952c3e`) | 248 of 8 | 5 | 7m30s | 5.24 GB | the 40 `declaration uses sorry`, nothing else |
+| 3 | the final skeleton (the dyadic module on `SpectralChain`, its glue leaf; this record's last module commit) | 248 of 8 | 2 | 6m14s | 5.37 GB | the 41 `declaration uses sorry`, nothing else |
+
+**The linters' verdict: nothing to fix.** No missing docstring, no unused variable, no long line, no deprecation in any of the four
+modules, at any of the three builds; the only messages are the `sorry` warnings, one per leaf (counted per module against the leaf
+list, § Stage 7). The environment linters, `lake lint --no-build -- --no-build --trace` under the slot on the third build: exit 0,
+`-- Linting passed for Proofs.`, each of the fourteen linters `(2/2) Passed!` (`logs/lint.out`) — `docBlame`, `unusedArguments` and
+`simpNF` (which reads the new `@[simp] conjR_conjR`) among them. The build's own `linter.missingDocs` is on in `lakefile.toml`, so a
+missing docstring would have been a warning in these logs. (I planted no fault in the house's linters: their controls are the
+gate's; my own three checks each have one, §§ Stage 1 and 5.)
+
+**Peak memory** is the sum of resident memory over the build's process tree, sampled every 2 s — pages of `.olean` files mapped by
+two processes are counted twice, so it is an upper estimate. **Batch size**: with only this line's modules stale the walk is the
+cost (about 1.8 s a batch whatever its width), so `BATCH=8` halves it; the stale modules form a chain, so at most two `lean`
+processes run at once and the cap of 10 GB was never approached.
+
+## Stage 7 — SAVED: the leaf list after the passes, the split, and what the joining module needs
+
+**Leaves** (`sorry`), by module, as the build counts them: `Arith/ThreeColourCharacter` 8, `Arith/TorsionExtraction` 10,
+`Arith/ThreeColourCriterion` 13, `Arith/DyadicQuadratic` 10 — **41**, from 29: twelve typed children more, none of the first
+plan's leaves split away from its statement, one proved (`colorable_four_planeOver_sqrt`). The joining text: 10, unchanged.
+
+**The import graph of this line** is now a chain and a point:
+`ThreeColourCharacter → TorsionExtraction → ThreeColourCriterion`, and `DyadicQuadratic` alone on `SpectralChain`.
+
+**Two implementers at once.** No statement will move again, so every module can be worked while its upstream is still `sorry`: a
+module reads upstream leaves as stated. What each reads:
+- `TorsionExtraction` reads `ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable`, in one proved composition only;
+- `ThreeColourCriterion` reads that, and `TorsionExtraction.exists_torsion_mem_fieldBandSet`,
+  `colorable_two_iff_fieldBandSet_two_nonempty`, `exists_zmod_hom_of_mem_torsionBy`;
+- `DyadicQuadratic` reads **nothing** of the line.
+So any two modules can be taken at once. **Recommended with two:** one takes `ThreeColourCharacter` then `ThreeColourCriterion` (the
+leaves with real content: L1.1; the reduction R, L3.7, L3.8), the other `TorsionExtraction` then `DyadicQuadratic` (L2.3, L2.4,
+then the most mechanical module). With a third, `DyadicQuadratic` goes to it from the start. Sizes are guesses; re-price from each
+module's first two leaves.
+
+**The joining module** (`data/fs131/kn4/lean/ThreeFourColours.lean` → `Arith/ThreeFourColours`) starts when both lines are on
+`main`. From `fs131-wnf` it reads, by declaration:
+- `Arith/UpperHalf` (no `sorry` on its branch): `exists_stablePrime_of_valuationSubring` (J.1); `StablePrime.residue`,
+  `mem_localRing`, `residue_div`, `residue_conj` (J.1, J.2); `two_mem_of_conj_trivial` (J.2, J.4);
+  `colorable_planeOver_of_finitePlane` (clause (b), toward the colouring); `chromaticNumber_planeOver_le_levelTarget`,
+  `colorable_two_planeOver_of_ramified` (J.7); `inv_natCast_mem_unitRingOver_iff_forall_stablePrime` (J.10);
+- `Arith/QuadraticPrime` (leaves open on its branch): `exists_maximal_card_eq_sqrt`, `exists_maximal_card_eq_of_ramified`
+  (J.8, J.9), and the instance `instNumberFieldFieldOfRadicands` that every row's statement needs;
+- `Instances/UpperHalfValues` (leaves open): `two_le_chromaticNumber_planeOver` (the row at 2).
+From this line: `exists_maximal_card_nine_of_colorable_three`, `exists_maximal_conj_trivial_of_colorable_two`,
+`fieldBandSet_two_nonempty_of_conj_trivial`, `exists_mul_conj_inv_eq_of_mul_conj_eq_one`, `conjR`; the lower bounds of
+`TorsionExtraction`; `colorable_two_planeOver_sqrt`, `colorable_four_planeOver_sqrt`, `exists_addMonoidHom_three_mod_eight`.
+**One thing the join should see**: `UpperHalf.colorable_two_planeOver_of_ramified` (a stable prime with trivial conjugation gives two
+colours) and this line's `fieldBandSet_two_nonempty_of_conj_trivial` (a maximal ideal of `ℤ[U_F]` with trivial conjugation gives two
+colours) are one fact at two levels, under two names in two namespaces — no doubled name; J.7 may take either.
+
+**For the landing**, where the passes changed the first plan's § 4.6: the IMPORTED records (on `StandingFive.kloosterman_bound`)
+are `targetFloor_four_weil`, `exists_normOne_zero_of_card_ne_nine`, `exists_maximal_card_nine`, `exists_maximal_of_torsion`,
+`exists_maximal_card_nine_of_colorable_three`; **`exists_maximal_conj_trivial_of_colorable_two` is CLEAN and no longer passes
+through any finite ring**; every declaration of `DyadicQuadratic` is CLEAN. One name is declared outside its module's namespace:
+`HadwigerNelson.ThreeColour.Winding.exists_box_point`, in `Arith/ThreeColourCharacter` (searched: no other declaration of that name
+on `main`, `fs131-wnf`, `fs131-wq1`); `scripts/dupnames.sh` on the joined tree reads it like any other.
+
+**Not done by this job**: no leaf proved beyond the two one-liners; `scripts/Axioms.lean`, the vacuity scan and the assumptions step
+are the landing's.
