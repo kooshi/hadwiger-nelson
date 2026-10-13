@@ -7,7 +7,7 @@ now=sh("date","-u","+%Y-%m-%d %H:%M UTC")
 key,TREE=sys.argv[1],sys.argv[2]
 CFG={"T":("FS131-IT1","TorsionExtraction","it1","if one third is an integer combination of unit vectors, the plane's number is never three — and with it, at least four colours over every field holding the square root of a number that is 11 modulo 12"),
      "C":("FS131-IC1","ThreeColourCharacter","ic1","a three-colouring of a plane over a field gives a character of its ring of unit vectors whose values on unit vectors stay in the middle third"),
-     "R":("FS131-IR1","ThreeColourCriterion","ir1","the three-colour criterion toward the prime, in the ring of unit vectors, and the two-colour end"),
+     "R":("FS131-IN1","ThreeColourCriterion","in1","the three-colour criterion toward the prime, in the ring of unit vectors, and the two-colour end"),
      "D":("FS131-ID1","DyadicQuadratic","id1","two and four colours for planes over real quadratic fields by an additive map in coordinates — the upper halves of two rows of the table")}
 JOB,MOD,TAG,WHAT=CFG[key]
 W=WT+TREE+"/"; assert os.path.isdir(W+".lake/build"),"make the worktree first"
