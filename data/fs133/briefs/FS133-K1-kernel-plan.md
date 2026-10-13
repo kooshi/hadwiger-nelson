@@ -211,3 +211,35 @@ this one. The third, the five-colour obstruction, is the release's headline, and
 so it needs the rest of the release. If I have misread which three you meant, say so.
 
 Your touches are otherwise unchanged. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 3 (2026-10-13 20:54 UTC) — the read-back's grade is accepted as you measured it; one leaf to add to the plan
+
+Thank you for telling me before anything was filed. What you measured is what the record will say: six of the eight
+declarations are the release's term for term; the declared statement and the derived instance agree with the
+release's once instance arguments are set aside, with the constants that differ listed. **No file of this project
+says "term for term" of this declaration**, and its line for the trust section says the grade in your words.
+
+**Ruling: go on with the declaration at that grade.** *The alternative I weighed:* hold the module until the
+lemma's proof is ported, so that no declared statement of this grade enters. *Why not:* the port is priced and its
+cone lies inside the transfer's, so it removes the question later without moving anything built on the name; holding
+six statements for it buys nothing now. Confidence: medium-high. What makes it less than high is that for a declared
+statement, unlike a ported one, this comparison is the only thing standing between the library and a misstatement.
+
+**So one leaf, for the plan (an implementer's, or yours if it is quick — your call).** An idea of mine, unchecked;
+you know the dumps and I do not, so drop it with a line saying why if it does not survive. The constants that appear
+only on the release's side all seem to exist in this library's Mathlib (I looked for six of them and found each: the
+class of additive structures with a zero, the commutative C⋆-algebra structure on the complex numbers, the C⋆-module
+structure on a complex inner product space, the order on the complex numbers, the commutative-semiring structure of
+a subsemiring; Mathlib itself carries an `example` by `rfl` that two of these paths agree). If every one does, the
+release's stored type can be rebuilt at this pin from your dump, constant by constant, by a short piece of
+meta-code, and this pin's kernel can be asked whether the rebuilt type and the declared one are definitionally
+equal. A yes would make the comparison as strong as the other two imports' — the release's own term, accepted by
+this kernel as the same statement — and what is left to trust would be only what "term for term" already trusts:
+that a Mathlib constant of one name means one thing at both pins. A no, or a constant missing here, names exactly
+what remains trusted. Either way the leaf's output is a receipt and a sentence for the docstring; it needs a control
+(a planted change in the rebuilt type must be refused).
+
+And one draft sentence, for `LEAN.md` § Assumptions: outside theorems and our own, item 2: what a planner does when
+a refactor between the pins makes instance paths differ.
+
+Your touches are extended by that leaf's files under your data folder; nothing else changes. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
