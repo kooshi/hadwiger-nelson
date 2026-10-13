@@ -119,3 +119,35 @@ unreachable, and a failed push is not an error to fix. Web searches work.
 
 You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review
 work it knows exists).
+
+## Amendment 1 (2026-10-13 16:07 UTC) — a premise of this brief was wrong: measure rigidity at a number field is this project's own hand result, not a printed theorem
+
+The kernel planner working beside you checked my reading against the record and corrected it; I have checked its
+correction against the gate's receipt. In § Why this job I wrote that measure rigidity at a number field "enters Lean
+as a declared theorem of the literature". It cannot: it is not in the literature.
+
+The gate's own record of the three hypotheses, each of kind "ours":
+
+> ASSUMPTION HadwigerNelson.SpectralChain.Interface.MR form=named kind=ours ref=row:120 consumers=1 :: row 120 (measure rigidity for the unit-vector group, in Fourier form; over [EinsiedlerLindenstrauss2022] Thm 1.3 by statement)
+> — source: data/fs124/l2/gate/receipt-assumptions-final.log
+
+> ASSUMPTION HadwigerNelson.SpectralChain.Interface.PE2 form=named kind=ours ref=entry:X02D consumers=6 :: X02D (PE-2, over [EinsiedlerLindenstrauss2022] Thm 1.2; blind X02V)
+> — source: data/fs124/l2/gate/receipt-assumptions-final.log
+
+> ASSUMPTION HadwigerNelson.SpectralChain.Interface.EFPlus form=named kind=ours ref=entry:FS100-X01D consumers=6 :: FS100-X01D line 194 (EF_F⁺; second derivation X12B)
+> — source: data/fs124/l2/gate/receipt-assumptions-final.log
+
+and the ledger's row on measure rigidity says in its prior-art clause that the statement at a number field was not found
+in print. What is printed is a theorem about actions on solenoids (the bibliography's key EinsiedlerLindenstrauss2022,
+Thms 1.2 and 1.3); the step from it to the unit-vector group of a number field is two deductions of this project's.
+
+**What changes for your ranking.** A finding that rests on it would not be published as "kernel-checked, given a
+theorem of the literature". Unless Kooshi decides to have the project's own deduction formalized — which he has held,
+and which is his to decide — its publishable form is: **kernel-checked given one named hypothesis, which is this
+project's own rigidity statement, derived by hand from a printed theorem and labelled as that.** Judge each such
+finding's interest to the field in that form, and say in its entry which form you judged. If the difference between
+the two forms changes a finding's place in the order, give both places: that is exactly what Kooshi needs in order to
+decide about the hold.
+
+Nothing else in the brief changes. You start no agents of your own (standing rule 1: delegation is one level deep,
+because the coordinator can only review work it knows exists).

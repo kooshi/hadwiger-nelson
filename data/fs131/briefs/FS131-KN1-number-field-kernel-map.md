@@ -137,3 +137,33 @@ a failed push is not an error to fix.
 
 You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review
 work it knows exists).
+
+## Amendment 1 (2026-10-13 16:07 UTC) — your correction stands: measure rigidity at a number field is ours, and the target for the results that rest on it is restated
+
+You were right and the brief was wrong; thank you for sending it before the map. I checked it against the receipt:
+
+The gate's own record of the three hypotheses, each of kind "ours":
+
+> ASSUMPTION HadwigerNelson.SpectralChain.Interface.MR form=named kind=ours ref=row:120 consumers=1 :: row 120 (measure rigidity for the unit-vector group, in Fourier form; over [EinsiedlerLindenstrauss2022] Thm 1.3 by statement)
+> — source: data/fs124/l2/gate/receipt-assumptions-final.log
+
+> ASSUMPTION HadwigerNelson.SpectralChain.Interface.PE2 form=named kind=ours ref=entry:X02D consumers=6 :: X02D (PE-2, over [EinsiedlerLindenstrauss2022] Thm 1.2; blind X02V)
+> — source: data/fs124/l2/gate/receipt-assumptions-final.log
+
+> ASSUMPTION HadwigerNelson.SpectralChain.Interface.EFPlus form=named kind=ours ref=entry:FS100-X01D consumers=6 :: FS100-X01D line 194 (EF_F⁺; second derivation X12B)
+> — source: data/fs124/l2/gate/receipt-assumptions-final.log
+
+and the ledger's row on measure rigidity says in its prior-art clause that the statement at a number field was not found
+in print. What is printed is a theorem about actions on solenoids (the bibliography's key EinsiedlerLindenstrauss2022,
+Thms 1.2 and 1.3); the step from it to the unit-vector group of a number field is two deductions of this project's.
+
+**The target, restated.** For a result that rests on it: every *other* hypothesis of kind "ours" discharged, and
+measure rigidity at the field left as **one named hypothesis, stated concretely and labelled as this project's hand
+result** — not as an outside theorem. In the map, say what stating it concretely costs against today's abstract
+interface, as you proposed, and say as plain facts what the printed theorems' statements would need before they could
+even be declared (you named the definition Mathlib lacks). **Do not plan or price the formalization of the two
+deductions themselves**: that is the work Kooshi has held, and he is being told today that the choice between the two
+publishable sentences is his. If he lifts the hold, that is a new brief.
+
+The asking lane has the same correction as an amendment to its brief. Nothing else changes. You start no agents of
+your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).

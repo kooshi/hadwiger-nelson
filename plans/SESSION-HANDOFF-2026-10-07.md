@@ -38,7 +38,7 @@ most interesting to the mathematicians in the field, and then let's start formal
 
 **My rulings on it** (FS-131 inventory item 636, each in four parts): "a planner" is two jobs side by side (rank by
 interest; map the kernel state, then plan); the hold of 2026-10-06 is lifted for the number-field results themselves
-(FS-101's ground) and **stands for measure rigidity itself — an import, unformalized and unpriced; do not re-offer**;
+(FS-101's ground) and **stands for measure rigidity itself — which is NOT literature: it is this project's own hand result (row 120; the kernel planner's correction, item 638), so results resting on it are targeted as "kernel-checked given one named hypothesis, labelled ours"; whether to lift the hold and formalize its two deductions was put to Kooshi on 2026-10-13 and is his; until he answers, neither planned nor priced**;
 the frontier's open jobs are **parked** (FS-136's 25 leaves on branch `fs136-wk1`; FS-137's sixth claim, my review of
 its five entries, its record job; the asking lane's unfiled re-rank draft) — § 0e's "order when the budget returns" is
 superseded except for its first line, the owed filing.
@@ -76,7 +76,7 @@ BATCH=2 ./scripts/build.sh`, one at a time — **my numbers, unmeasured; the pla
 (the transcript backups out of git history is a history rewrite — a force-push by definition, so his explicit word
 then); final states for every open milestone (Closed, or entries declined one by one); the six papers and the
 fallback write-up. **Open with him, told with defaults**: build on the laptop or move to the desktop for landings
-(default: laptop, one build at a time); measure rigidity as an import (default) or formalized (held).
+(default: laptop, one build at a time); the rigidity statement as one named hypothesis labelled ours (default) or its deductions formalized (held; his choice, asked 2026-10-13).
 
 ## 0e. READ THIS BEFORE § 0d — THE WIND-DOWN IS COMPLETE (21:00 UTC, 2026-10-07): nothing is running
 
