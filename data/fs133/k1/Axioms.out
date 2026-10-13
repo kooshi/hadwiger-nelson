@@ -1,0 +1,39 @@
+'HadwigerNelson.OneClass.finIndepRatio_plane_eq_mOne' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.OneClass.finIndepRatio_algPlane_eq_mOne' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.OneClass.tendsto_minIndepNum_div' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.fractionalChromaticNumber_plane' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.OneClass.iSup_fractionalChromaticNumber_plane' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.OneClass.fractionalChromaticNumber_algPlane' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.OneClass.exists_admissibleOn_univ_iff_ae' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.OneClass.exists_admissibleOn_univ_iff_algPlane' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.OneClass.IsInvariantLaw.measure_origin_le_mOne' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.OneClass.exists_isInvariantLaw' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.sectionDensity_setOf_pos' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI158.Spectral.residual_fourier_cross' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

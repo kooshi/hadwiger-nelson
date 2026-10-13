@@ -21,3 +21,294 @@ slot: admitted k133: mem 10 GiB (hard cap), cpus 4,5,6,7
 ==> [6/249] 6 modules  16:16:33
 ==> [7/249] 8 modules  16:16:34
 ==> [8/249] 8 modules  16:16:35
+==> [9/249] 8 modules  16:16:36
+==> [10/249] 8 modules  16:16:36
+==> [11/249] 8 modules  16:16:37
+==> [12/249] 8 modules  16:16:38
+==> [13/249] 8 modules  16:16:39
+==> [14/249] 8 modules  16:16:40
+==> [15/249] 8 modules  16:16:41
+==> [16/249] 8 modules  16:16:41
+==> [17/249] 6 modules  16:16:43
+==> [18/249] 8 modules  16:16:44
+==> [19/249] 8 modules  16:16:45
+==> [20/249] 8 modules  16:16:46
+==> [21/249] 2 modules  16:16:48
+==> [22/249] 8 modules  16:16:49
+==> [23/249] 8 modules  16:16:50
+==> [24/249] 8 modules  16:16:51
+==> [25/249] 8 modules  16:16:52
+==> [26/249] 8 modules  16:16:54
+==> [27/249] 8 modules  16:16:55
+==> [28/249] 8 modules  16:16:56
+==> [29/249] 7 modules  16:16:57
+    ⚠ [3130/3130] Built Proofs.HadwigerNelson.Plane.OneClass.Defs (2.0s)
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Defs.lean:43:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Defs.lean:50:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Defs.lean:56:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Defs.lean:60:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Defs.lean:65:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Defs.lean:71:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Defs.lean:85:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Defs.lean:106:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Defs.lean:112:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Defs.lean:122:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Defs.lean:132:18: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Defs.lean:189:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Defs.lean:195:8: declaration uses `sorry`
+    rebuilt: Plane.OneClass.Defs (2.0s)
+==> [30/249] 8 modules  16:17:01
+==> [31/249] 8 modules  16:17:02
+==> [32/249] 8 modules  16:17:03
+==> [33/249] 8 modules  16:17:05
+==> [34/249] 8 modules  16:17:06
+==> [35/249] 8 modules  16:17:07
+==> [36/249] 8 modules  16:17:08
+==> [37/249] 8 modules  16:17:09
+==> [38/249] 8 modules  16:17:11
+==> [39/249] 8 modules  16:17:12
+==> [40/249] 8 modules  16:17:13
+==> [41/249] 8 modules  16:17:14
+==> [42/249] 8 modules  16:17:15
+==> [43/249] 8 modules  16:17:17
+==> [44/249] 8 modules  16:17:18
+==> [45/249] 8 modules  16:17:19
+==> [46/249] 8 modules  16:17:20
+==> [47/249] 8 modules  16:17:21
+==> [48/249] 8 modules  16:17:23
+==> [49/249] 8 modules  16:17:24
+==> [50/249] 8 modules  16:17:25
+==> [51/249] 8 modules  16:17:26
+==> [52/249] 8 modules  16:17:27
+==> [53/249] 8 modules  16:17:28
+==> [54/249] 8 modules  16:17:30
+==> [55/249] 8 modules  16:17:31
+==> [56/249] 8 modules  16:17:32
+    ⚠ [3260/3261] Built Proofs.HadwigerNelson.Plane.OneClass.Field (1.9s)
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Field.lean:36:8: declaration uses `sorry`
+    ⚠ [3261/3261] Built Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw (2.1s)
+    warning: Proofs/HadwigerNelson/Plane/OneClass/InvariantLaw.lean:32:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/InvariantLaw.lean:38:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/InvariantLaw.lean:43:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/InvariantLaw.lean:55:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/InvariantLaw.lean:68:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/InvariantLaw.lean:92:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/InvariantLaw.lean:98:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/InvariantLaw.lean:102:8: declaration uses `sorry`
+    rebuilt: Plane.OneClass.Field (1.9s), Plane.OneClass.InvariantLaw (2.1s)
+==> [57/249] 1 modules  16:17:35
+==> [58/249] 8 modules  16:17:36
+==> [59/249] 8 modules  16:17:37
+==> [60/249] 8 modules  16:17:39
+==> [61/249] 8 modules  16:17:41
+==> [62/249] 8 modules  16:17:42
+==> [63/249] 8 modules  16:17:44
+==> [64/249] 8 modules  16:17:46
+==> [65/249] 8 modules  16:17:47
+==> [66/249] 8 modules  16:17:49
+==> [67/249] 8 modules  16:17:51
+==> [68/249] 8 modules  16:17:53
+==> [69/249] 8 modules  16:17:54
+==> [70/249] 8 modules  16:17:56
+==> [71/249] 8 modules  16:17:58
+==> [72/249] 8 modules  16:17:59
+==> [73/249] 8 modules  16:18:01
+==> [74/249] 8 modules  16:18:03
+==> [75/249] 8 modules  16:18:04
+==> [76/249] 8 modules  16:18:06
+==> [77/249] 8 modules  16:18:08
+==> [78/249] 8 modules  16:18:09
+==> [79/249] 8 modules  16:18:11
+==> [80/249] 8 modules  16:18:13
+==> [81/249] 8 modules  16:18:14
+==> [82/249] 8 modules  16:18:16
+==> [83/249] 8 modules  16:18:18
+==> [84/249] 8 modules  16:18:19
+==> [85/249] 8 modules  16:18:21
+==> [86/249] 8 modules  16:18:23
+==> [87/249] 8 modules  16:18:24
+==> [88/249] 8 modules  16:18:26
+==> [89/249] 8 modules  16:18:27
+==> [90/249] 8 modules  16:18:29
+==> [91/249] 8 modules  16:18:31
+==> [92/249] 8 modules  16:18:32
+==> [93/249] 8 modules  16:18:34
+==> [94/249] 8 modules  16:18:36
+==> [95/249] 8 modules  16:18:37
+==> [96/249] 8 modules  16:18:39
+==> [97/249] 8 modules  16:18:41
+==> [98/249] 8 modules  16:18:43
+==> [99/249] 8 modules  16:18:44
+==> [100/249] 8 modules  16:18:46
+==> [101/249] 8 modules  16:18:48
+==> [102/249] 8 modules  16:18:49
+==> [103/249] 8 modules  16:18:51
+==> [104/249] 8 modules  16:18:53
+==> [105/249] 8 modules  16:18:55
+==> [106/249] 8 modules  16:18:56
+==> [107/249] 8 modules  16:18:58
+==> [108/249] 8 modules  16:19:00
+==> [109/249] 8 modules  16:19:01
+==> [110/249] 8 modules  16:19:03
+==> [111/249] 8 modules  16:19:04
+==> [112/249] 8 modules  16:19:06
+==> [113/249] 8 modules  16:19:08
+==> [114/249] 8 modules  16:19:09
+==> [115/249] 8 modules  16:19:11
+==> [116/249] 8 modules  16:19:13
+==> [117/249] 8 modules  16:19:15
+==> [118/249] 8 modules  16:19:16
+==> [119/249] 8 modules  16:19:18
+==> [120/249] 8 modules  16:19:20
+==> [121/249] 8 modules  16:19:22
+==> [122/249] 8 modules  16:19:23
+==> [123/249] 8 modules  16:19:25
+==> [124/249] 8 modules  16:19:27
+==> [125/249] 8 modules  16:19:28
+==> [126/249] 8 modules  16:19:30
+==> [127/249] 8 modules  16:19:32
+==> [128/249] 8 modules  16:19:33
+==> [129/249] 8 modules  16:19:35
+==> [130/249] 8 modules  16:19:37
+==> [131/249] 8 modules  16:19:38
+==> [132/249] 8 modules  16:19:40
+==> [133/249] 8 modules  16:19:42
+==> [134/249] 8 modules  16:19:44
+==> [135/249] 8 modules  16:19:45
+==> [136/249] 8 modules  16:19:47
+==> [137/249] 8 modules  16:19:49
+==> [138/249] 8 modules  16:19:50
+==> [139/249] 8 modules  16:19:52
+==> [140/249] 8 modules  16:19:54
+==> [141/249] 8 modules  16:19:55
+==> [142/249] 8 modules  16:19:57
+==> [143/249] 8 modules  16:19:59
+==> [144/249] 8 modules  16:20:00
+==> [145/249] 8 modules  16:20:02
+==> [146/249] 8 modules  16:20:04
+==> [147/249] 8 modules  16:20:05
+==> [148/249] 8 modules  16:20:07
+==> [149/249] 8 modules  16:20:08
+==> [150/249] 8 modules  16:20:10
+==> [151/249] 8 modules  16:20:12
+==> [152/249] 8 modules  16:20:14
+==> [153/249] 8 modules  16:20:15
+==> [154/249] 8 modules  16:20:17
+==> [155/249] 8 modules  16:20:18
+==> [156/249] 8 modules  16:20:20
+==> [157/249] 8 modules  16:20:22
+==> [158/249] 8 modules  16:20:23
+==> [159/249] 8 modules  16:20:25
+==> [160/249] 8 modules  16:20:27
+==> [161/249] 8 modules  16:20:28
+==> [162/249] 8 modules  16:20:30
+==> [163/249] 8 modules  16:20:32
+==> [164/249] 8 modules  16:20:33
+==> [165/249] 8 modules  16:20:35
+==> [166/249] 8 modules  16:20:37
+==> [167/249] 8 modules  16:20:39
+==> [168/249] 8 modules  16:20:40
+==> [169/249] 8 modules  16:20:42
+==> [170/249] 8 modules  16:20:44
+==> [171/249] 8 modules  16:20:45
+==> [172/249] 8 modules  16:20:47
+==> [173/249] 8 modules  16:20:49
+==> [174/249] 8 modules  16:20:50
+==> [175/249] 8 modules  16:20:52
+==> [176/249] 8 modules  16:20:54
+==> [177/249] 8 modules  16:20:55
+==> [178/249] 8 modules  16:20:57
+==> [179/249] 8 modules  16:20:59
+==> [180/249] 8 modules  16:21:00
+==> [181/249] 8 modules  16:21:02
+==> [182/249] 8 modules  16:21:04
+==> [183/249] 8 modules  16:21:05
+==> [184/249] 8 modules  16:21:07
+==> [185/249] 8 modules  16:21:09
+==> [186/249] 8 modules  16:21:10
+==> [187/249] 8 modules  16:21:12
+==> [188/249] 8 modules  16:21:14
+==> [189/249] 8 modules  16:21:15
+==> [190/249] 8 modules  16:21:17
+==> [191/249] 8 modules  16:21:19
+==> [192/249] 8 modules  16:21:21
+==> [193/249] 8 modules  16:21:22
+==> [194/249] 8 modules  16:21:24
+==> [195/249] 8 modules  16:21:26
+==> [196/249] 8 modules  16:21:28
+==> [197/249] 8 modules  16:21:29
+==> [198/249] 8 modules  16:21:31
+==> [199/249] 8 modules  16:21:33
+==> [200/249] 8 modules  16:21:35
+==> [201/249] 8 modules  16:21:37
+==> [202/249] 8 modules  16:21:38
+==> [203/249] 8 modules  16:21:40
+==> [204/249] 8 modules  16:21:42
+==> [205/249] 8 modules  16:21:44
+==> [206/249] 8 modules  16:21:45
+==> [207/249] 8 modules  16:21:47
+==> [208/249] 8 modules  16:21:49
+==> [209/249] 8 modules  16:21:50
+==> [210/249] 8 modules  16:21:52
+==> [211/249] 8 modules  16:21:53
+==> [212/249] 8 modules  16:21:55
+==> [213/249] 8 modules  16:21:56
+==> [214/249] 8 modules  16:21:57
+    ⚠ [3166/3166] Built Proofs.HadwigerNelson.Plane.OneClass.Algebraic (1.8s)
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Algebraic.lean:43:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Algebraic.lean:53:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Algebraic.lean:59:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Algebraic.lean:82:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Algebraic.lean:87:8: declaration uses `sorry`
+    rebuilt: Plane.OneClass.Algebraic (1.8s)
+==> [215/249] 6 modules  16:22:01
+==> [216/249] 8 modules  16:22:02
+==> [217/249] 8 modules  16:22:04
+==> [218/249] 8 modules  16:22:06
+    ⚠ [3265/3265] Built Proofs.HadwigerNelson.Plane.OneClass.Fractional (1.7s)
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Fractional.lean:28:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Fractional.lean:37:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Fractional.lean:43:8: declaration uses `sorry`
+    rebuilt: Plane.OneClass.Fractional (1.7s)
+==> [219/249] 3 modules  16:22:09
+==> [220/249] 8 modules  16:22:10
+==> [221/249] 8 modules  16:22:12
+==> [222/249] 2 modules  16:22:13
+==> [223/249] 8 modules  16:22:14
+==> [224/249] 8 modules  16:22:17
+==> [225/249] 3 modules  16:22:18
+==> [226/249] 8 modules  16:22:19
+==> [227/249] 8 modules  16:22:22
+==> [228/249] 1 modules  16:22:23
+==> [229/249] 8 modules  16:22:24
+==> [230/249] 8 modules  16:22:27
+==> [231/249] 8 modules  16:22:28
+==> [232/249] 8 modules  16:22:31
+==> [233/249] 2 modules  16:22:32
+==> [234/249] 8 modules  16:22:33
+==> [235/249] 8 modules  16:22:36
+==> [236/249] 1 modules  16:22:39
+==> [237/249] 8 modules  16:22:40
+==> [238/249] 6 modules  16:22:43
+    ⚠ [4845/4845] Built Proofs.HadwigerNelson.Plane.OneClass.Pair (2.1s)
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Pair.lean:59:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Pair.lean:64:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Pair.lean:69:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Pair.lean:82:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/OneClass/Pair.lean:90:8: declaration uses `sorry`
+    rebuilt: Plane.OneClass.Pair (2.1s)
+==> [239/249] 7 modules  16:22:47
+==> [240/249] 8 modules  16:22:50
+==> [241/249] 1 modules  16:22:53
+==> [242/249] 8 modules  16:22:54
+==> [243/249] 5 modules  16:22:57
+==> [244/249] 5 modules  16:23:00
+==> [245/249] 4 modules  16:23:03
+==> [246/249] 2 modules  16:23:05
+==> [247/249] 1 modules  16:23:07
+==> [248/249] 1 modules  16:23:08
+==> [249/249] 1 modules  16:23:09
+    rebuilt: Proofs (2.2s)
+==> build: OK — 249 of 249 batches, 8 module(s) rebuilt, 8 module(s) with warnings, 6m50s
+    full output: build/gate/build/20261013T211622Z-979653.log
+BUILD EXIT=0

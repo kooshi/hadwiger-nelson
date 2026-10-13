@@ -573,3 +573,27 @@ The consumers: later modules, implementers, `exact?`, and a reader of the public
   § 5 Trust); `tools/check_architecture.py` reads PASS.
 - **`BIBLIOGRAPHY.md`**: no new work; the row keyed `OAIMath2026` gains "FS-133's module declares its Lean lemma
   `residual_fourier` (`Outside/OAI158Rigidity`) and ports the generic lemmas of its transfer's proof".
+
+## Stage 4.2 — SAVED: the skeleton's build, its leaves, and its axioms
+
+- **The build** (`./scripts/build.sh` under the slot, `MEMMAX=10G BATCH=8`; log `data/fs133/k1/build-skeleton.log`,
+  full output `build/gate/build/20261013T211622Z-979653.log`): `build: OK — 249 of 249 batches, 8 module(s)
+  rebuilt, 8 module(s) with warnings, 6m50s`, exit 0. Every warning is `declaration uses 'sorry'`; none is a linter's.
+  `tools/check_architecture.py`: PASS (349 modules on disk, 349 rows).
+- **Leaves** (`sorry` lines by module; each is a whole proof body, none sits inside a proof): `OAI158Rigidity` 2,
+  `SectionDensity` 6, `Defs` 13, `Field` 1, `InvariantLaw` 8, `Algebraic` 5, `Fractional` 3, `Pair` 5 — 43. The
+  generated `Outside/OAI158Transfer` (leaf P) does not exist yet and has no statement of this job's.
+- **Axioms** (`data/fs133/k1/Axioms.lean`, `Axioms.out`): each of the eight headlines, C133-ALG,
+  `exists_isInvariantLaw`, `sectionDensity_setOf_pos` and `residual_fourier_cross` prints
+  `[propext, sorryAx, Classical.choice, Quot.sound]`. **The declared outside theorem is not in any of these prints,
+  and cannot be in a skeleton**: the one place it is read is inside the leaf `residual_fourier_cross`, which
+  `exists_field` (a leaf) will use; no proof term exists yet that names it. § 5.5 lists the records whose print
+  must show `HadwigerNelson.Outside.OAI158.Spectral.residual_fourier` once the leaves are done, and those whose
+  print must not.
+- **Not run in this job** (the landing's, on the joined tree): `scripts/axioms.sh`, `vacuity.sh`, `dupnames.sh`,
+  `assumptions.sh`, the lint. The new `axiom` is not yet declared to `scripts/Axioms.lean`, so `axioms.sh` would
+  fail on it as an undeclared library axiom until the landing adds its line (§ Drafts).
+- **A slip of mine, repaired**: twice a command of the form `cd <tree> && ( … ) &` put the `cd` in the background
+  job, and what followed ran in the coordinator's tree: one file (`data/fs133/k1/Axioms.lean`) was written there
+  and a `git add` there failed on a missing path. The file is moved into this tree; `git status` in the
+  coordinator's tree reads clean; nothing was committed there.
