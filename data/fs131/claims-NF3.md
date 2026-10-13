@@ -1,0 +1,13 @@
+# Claims NF3 — the plane's chromatic number equals its measurable chromatic number: a corollary of two outside results, drawn by a reader; fixed by Keryx, 2026-10-13, before its planner's launch
+
+*Statements only, one per line with its id, copied by script from the reader's record (`plans/FS131-ER1-davies-reading.md`, its section "Theorems this phase proved" and its § 2.7). The mathematics is the two outside works'; what is this project's is the composing, one mind, checked by nobody else. The library's objects: `Plane.chiM0` (`Proofs/HadwigerNelson/Plane/AeColouring.lean`), `Plane.chiM` (`Proofs/HadwigerNelson/Plane/FalconerReduction.lean`), the declared outside theorem `Outside.OAI158.proper_to_borel_weak` and `Outside.OAI158.chromaticNumber_plane_eq_chiM0` (`Proofs/HadwigerNelson/Outside/OAI158.lean`). A later change is a dated line at the end.*
+
+## Statements
+
+NF3-PRINTED: **Lemma B.1** (p. 44). "Suppose that A₁, …, A_k ⊆ ℝ^d are measurable D-avoiding sets whose union is conull. Then ℝ^d admits a measurable proper k-colouring of its D-distance graph." (Appendix B's standing hypotheses, p. 44: "Throughout, D = {d₁, …, d_t} ⊆ (0, ∞) is finite and nonempty, d ⩾ 2, and k ⩾ 2." Before the lemma: "We first show that a measurable proper colouring of a conull set can, after changes on a null set, be extended to a measurable proper colouring of ℝ^d. We suspect that this is a folklore result, but have not found it in the literature.")
+NF3-WEAK-TO-PROPER: **ER1-WEAK-TO-PROPER** — a weak measurable `k`-colouring of `ℝ^d` (Lebesgue measurable, proper at almost every pair at a distance in a finite `D`) gives a Lebesgue-measurable `k`-colouring proper at every such pair; so `χ_m⁰(ℝ²) = χ_m(ℝ²)`. **[hand]**, one mind, over `[Davies2026]` Lemma B.1 as printed (p. 44; its proof checked here) and the density-point step printed in `[DeCorteOliveiraVallentin2022]` (proof of Lemma 5.6). § M.
+NF3-PLANE: **ER1-PLANE-FALCONER** — `χ(ℝ²) = χ_m(ℝ²)`, Falconer's number. **[derived]** from ER1-WEAK-TO-PROPER and the declared outside theorem `Outside.OAI158.proper_to_borel_weak`; one mind; in neither paper as far as each was read. § M.
+
+## Not claimed
+
+NF3-NC: that either statement is this project's theorem (each is a composition of two outside results); any value of the plane's chromatic number; anything about Borel classes where the statements say Lebesgue; anything in dimension other than two or for distance sets other than the unit distance beyond what a planner finds comes free; that the printed lemma is new (its paper says it suspects the lemma is folklore).
