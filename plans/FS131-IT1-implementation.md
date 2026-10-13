@@ -53,3 +53,27 @@ follows from `d + 1 = 4n` in `ℕ`; and in L2.3 the corner layer's sequence `θ(
 `25⁻ⁿ b − 25⁻⁽ⁿ⁺¹⁾ b = 24 · 25⁻⁽ⁿ⁺¹⁾ b` and `3 ∣ 24`.
 
 **The machine.** One file through `lake env lean` here: 2.3 s, 3.6 GB at its peak (`logs/StatementDump.time`).
+
+## Stage 2 — SAVED: eight leaves proved (L2.1, L2.2, D-4, L2.5–L2.9); two left (L2.3, L2.4)
+
+Each leaf was written in a probe under `data/fs131/it1/probes/` (`P1.lean`: §1; `P2.lean`: D-4; `P3.lean`: §3 and §5), elaborated
+there, then moved into the module. The module elaborates under `lake env lean` with the lakefile's three options, with two
+`sorry` warnings (`tendsto_layer`, `exists_torsion_mem_fieldBandSet`) and no other message (9.9 s, 3.7 GB). The statement
+check on the working file: 18 named constants compared, PASS; control 3 of 3 (`logs/statements-stage2.out`).
+
+| leaf | how it went, against its plan |
+|---|---|
+| `layer_step` | as planned, with no `interval_cases`: the two forms are `2x + y + 2z + w` at signed arguments, and one private lemma (`abs_eq_of_one_le_abs_form`: a form of absolute value at least 1 on the box is at a corner) serves both; a non-zero integer has absolute value at least 1 (`Int.one_le_abs`) |
+| `layer_dichotomy` | as planned; one private lemma (`no_rotation_at_corner`: a rotation step between two points of the box has neither end at a corner) serves the forward and the backward step; the induction is `Int.inductionOn'` from `m₀` (the plan's `Int.induction_on` does not take a base point at the pin) |
+| `exists_zmod_hom_of_mem_torsionBy` | as planned: a value killed by `N` is `↑(k/N) = ZMod.toAddCircle k`; additivity of the chosen `l` by `ZMod.toAddCircle_injective` |
+| `colorable_two_iff_fieldBandSet_two_nonempty` | as the second planner's route: `⟸` is `colorable_of_residue` at `G = ZMod 2` through D-4; `⟹` the invariant `∀ x, f (x + y) = f x + f y`, which needs `0`, sums and unit vectors only (no negation), through the private induction `unitRing_induction` on `ℤ[U_F]` (it is `UnitRing.exists_sum_eq_of_mem_unitRingOver` in the form a proof applies). About 70 lines against the plan's 120–180 |
+| `mem_fieldBandSet_two_of_inv_three_mem` | as planned |
+| `inv_natCast_mem_unitRing_of_sqrt_mem` | as planned; the identity is the private `exists_unitVectors_inv_natCast` (two unit vectors `v`, `v'` of `F²` with `1/n = 2 − v − v'`), which L2.9 reads |
+| `inv_three_mem_unitRing_of_sqrt_mem` | as planned |
+| `not_colorable_two_of_sqrt_mem` | as planned: `1 = n • (1 + 1 − v − v')` in the ring, and the character is `1/2` at each of the four unit vectors |
+
+**Price.** The eight leaves took about 150 lines with six private helpers, each elaborated on the first or second attempt. The
+plan priced L2.3 at 150–200 lines; from these leaves I price it at about 120 with its children, and L2.4 at about 50.
+
+**Private helpers so far** (six; none is nameable outside the file): `abs_eq_of_one_le_abs_form`, `no_rotation_at_corner`,
+`unitRing_induction`, `eq_half_of_mem_band_two`, `half_ne_zero`, `exists_unitVectors_inv_natCast`.
