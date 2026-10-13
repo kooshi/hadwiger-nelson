@@ -19,3 +19,6 @@ MEASURE assumptions-selftest-first mem-cap=14G cpus=4 exit=0 wall=112.4s peak=0.
 MEASURE assumptions-first mem-cap=14G cpus=4 exit=1 wall=106.4s peak=0.66 GiB max-rss=4.59 GiB :: ./scripts/assumptions.sh
 MEASURE assumptions-write-ledger mem-cap=14G cpus=4 exit=0 wall=104.0s peak=0.66 GiB max-rss=4.60 GiB :: ./scripts/assumptions.sh --write-ledger
 MEASURE assumptions-second mem-cap=14G cpus=4 exit=0 wall=111.8s peak=0.66 GiB max-rss=4.59 GiB :: ./scripts/assumptions.sh
+MEASURE vacuity-probe mem-cap=14G cpus=4 exit=0 wall=125.4s peak=0.59 GiB max-rss=4.53 GiB :: ./scripts/vacuity.sh
+MEASURE count-modules-probe mem-cap=8G cpus=2 exit=0 wall=67.5s peak=0.54 GiB max-rss=4.48 GiB :: lake env lean data/fs131/l5/count-modules.lean
+MEASURE vacuity-selftest-probe mem-cap=14G cpus=4 exit=0 wall=125.1s peak=0.60 GiB max-rss=4.54 GiB :: ./scripts/vacuity.sh --self-test
