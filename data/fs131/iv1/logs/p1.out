@@ -1,0 +1,37 @@
+@two_le_chromaticNumber_of_adj : ∀ {V : Type u_1} {G : SimpleGraph V} {u v : V}, G.Adj u v → 2 ≤ G.chromaticNumber
+@Subfield.closure_empty : ∀ {K : Type u_1} [inst : DivisionRing K], Subfield.closure ∅ = ⊥
+data/fs131/iv1/probes/p1.lean:12:8: error(lean.unknownIdentifier): Unknown constant `Complex.isIntegral_int_I`
+@isIntegral_algebraMap_iff : ∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A]
+  [inst_2 : Ring B] [inst_3 : Algebra R A] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] {x : A},
+  Function.Injective ⇑(algebraMap A B) → (IsIntegral R ((algebraMap A B) x) ↔ IsIntegral R x)
+@IsIntegrallyClosed.isIntegral_iff : ∀ {R : Type u_1} [inst : CommRing R] {K : Type u_2} [inst_1 : CommRing K]
+  [inst_2 : Algebra R K] [ifr : IsFractionRing R K] [IsIntegrallyClosed R] {x : K},
+  IsIntegral R x ↔ ∃ y, (algebraMap R K) y = x
+@Ideal.exists_le_maximal : ∀ {α : Type u_1} [inst : Semiring α] (I : Ideal α), I ≠ ⊤ → ∃ M, M.IsMaximal ∧ I ≤ M
+Int.even_or_odd' : ∀ (n : ℤ), ∃ k, n = 2 * k ∨ n = 2 * k + 1
+@RingOfIntegers.ext : ∀ {K : Type u_1} [inst : Field K] {x y : 𝓞 K}, ↑x = ↑y → x = y
+@RingOfIntegers.coe_injective : ∀ {K : Type u_1} [inst : Field K], Function.Injective ⇑(algebraMap (𝓞 K) K)
+@RingOfIntegers.isIntegral_coe : ∀ {K : Type u_1} [inst : Field K] (x : 𝓞 K), IsIntegral ℤ ((algebraMap (𝓞 K) K) x)
+@coe_conjOn : ∀ {L : Subfield ℂ} (hL : ∀ z ∈ L, (starRingEnd ℂ) z ∈ L) (z : ↥L), ↑((conjOn hL) z) = (starRingEnd ℂ) ↑z
+@Subfield.bot_eq_of_charZero : ∀ {K : Type u_1} [inst : Field K] [inst_1 : CharZero K], ⊥ = (algebraMap ℚ K).fieldRange
+@QuadraticPrime.numberField_fieldOfRadicands : ∀ {D : Set ℕ}, D.Finite → NumberField ↥(fieldOfRadicands D)
+fieldOfRadicands : Set ℕ → Subfield ℝ
+@UpperHalf.coe_conjO : ∀ {F : Subfield ℝ} (a : 𝓞 ↥(fieldI F)), ↑((conjO F) a) = (conjOn ⋯) ↑a
+@UpperHalf.conjO_conjO : ∀ {F : Subfield ℝ} (a : 𝓞 ↥(fieldI F)), (conjO F) ((conjO F) a) = a
+unitDistance : (V : Type u_1) → [MetricSpace V] → SimpleGraph V
+planeOver : Subfield ℝ → Set ℂ
+@Ideal.span_singleton_eq_top : ∀ {α : Type u_1} [inst : CommSemiring α] {x : α}, Ideal.span {x} = ⊤ ↔ IsUnit x
+@Ideal.mem_span_singleton : ∀ {α : Type u_1} [inst : CommSemiring α] {x y : α}, x ∈ Ideal.span {y} ↔ y ∣ x
+@IsIntegral.map : ∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]
+  {B : Type u_3} {C : Type u_4} {F : Type u_5} [inst_3 : Ring B] [inst_4 : Ring C] [inst_5 : Algebra R B]
+  [inst_6 : Algebra A B] [inst_7 : Algebra R C] [IsScalarTower R A B] [inst_9 : Algebra A C] [IsScalarTower R A C]
+  {b : B} [inst_11 : FunLike F B C] [AlgHomClass F A B C] (f : F), IsIntegral R b → IsIntegral R (f b)
+@map_isIntegral_int : ∀ {B : Type u_1} {C : Type u_2} {F : Type u_3} [inst : Ring B] [inst_1 : Ring C] {b : B}
+  [inst_2 : FunLike F B C] [RingHomClass F B C] (f : F), IsIntegral ℤ b → IsIntegral ℤ (f b)
+Complex.conj_re : ∀ (z : ℂ), ((starRingEnd ℂ) z).re = z.re
+@Ideal.mem_comap : ∀ {R : Type u_1} {S : Type u_2} {F : Type u_3} [inst : Semiring R] [inst_1 : Semiring S]
+  [inst_2 : FunLike F R S] {f : F} {K : Ideal S} [inst_3 : RingHomClass F R S] {x : R}, x ∈ Ideal.comap f K ↔ f x ∈ K
+def HadwigerNelson.SquareClass.fieldOfRadicands : Set ℕ → Subfield ℝ :=
+fun D => Subfield.closure ((fun d => √↑d) '' D)
+def HadwigerNelson.unitDistance.{u_4} : (V : Type u_4) → [MetricSpace V] → SimpleGraph V :=
+fun V [MetricSpace V] => { Adj := fun x y => Dist.dist x y = 1, symm := ⋯, loopless := ⋯ }
