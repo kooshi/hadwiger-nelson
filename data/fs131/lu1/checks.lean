@@ -208,3 +208,9 @@ between the two proofs typechecks (by proof irrelevance) exactly when their stat
 example : @HadwigerNelson.UpperHalf.chromaticNumber_planeOver_sqrt47_le_five_of_prime =
     @HadwigerNelson.SqrtFortySeven.chromaticNumber_planeOver_sqrt47_le_five := rfl
 #check @HadwigerNelson.SqrtFortySeven.chromaticNumber_planeOver_sqrt47_le_five
+
+/-! ## A fact two of the module's records state about Mathlib at the pin (LU1: checked once more)
+
+The coercion `𝓞 K → K` is `RingOfIntegers.val`, a reducible definition unfolding to `algebraMap (𝓞 K) K`. -/
+#print NumberField.RingOfIntegers.val
+example (K : Type*) [Field K] (a : 𝓞 K) : (a : K) = NumberField.RingOfIntegers.val a := rfl

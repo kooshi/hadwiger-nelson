@@ -22,3 +22,4 @@ MEASURE assumptions-edited mem-cap=8G cpus=4 exit=1 wall=122.4s peak=0.66 GiB ma
 MEASURE assumptions-write-ledger mem-cap=8G cpus=4 exit=0 wall=120.9s peak=0.67 GiB max-rss=4.55 GiB :: ./scripts/assumptions.sh --write-ledger
 MEASURE assumptions-second mem-cap=8G cpus=4 exit=0 wall=114.0s peak=0.65 GiB max-rss=4.55 GiB :: ./scripts/assumptions.sh
 MEASURE checks-2 mem-cap=6G cpus=2 exit=0 wall=3.1s peak=0.55 GiB max-rss=4.36 GiB :: lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false data/fs131/lu1/checks.lean
+MEASURE p-val mem-cap=4G cpus=2 exit=0 wall=2.4s peak=0.34 GiB max-rss=2.40 GiB :: lake env lean data/fs131/lu1/probes/p-val.lean

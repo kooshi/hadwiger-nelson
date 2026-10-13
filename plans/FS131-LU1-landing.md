@@ -520,3 +520,44 @@ and "exhibited" in `Arith/UpperHalf`'s header, and "Not claimed: anything at `p 
 
 **One word for the drafts**: the planner's draft for `LEDGER.md` row 57 says "a homomorphism of the plane onto every
 level target". It is **into**; this record's draft says so, and the coordinator files that wording.
+
+## Stage 7 — SAVED (FS131-LU1): before the pass — `main` merged once more, the copied files' manifest, the two planted controls
+
+**`main` merged in again** (`data/fs131/lu1/merge-2.out`): it had moved to `3087fe75d` — 11 paths, `data/` and
+`plans/` only — carrying the brief's Amendment 1 and the claim list's dated line of 20:39 UTC; trial clean, merged by
+hash, automatic (`6e6cf60a2`), so that the commit the gate reads holds them. The brief's quotations checked again on
+the merged tree: 8 of 8 (`readback-tree.out`). The drafts' slots read on `main` at that commit
+(`data/fs131/lu1/drafts-slots.py`): 29 of 29 found exactly once, the control absent.
+
+**The tree the compiled modules were copied from is gone.** `.claude/worktrees/fs131-wkc` was removed by another
+hand at about 20:25 UTC (the directory `worktrees/` was last written then; `git worktree list` no longer shows it) —
+after this job's copy and its after-check (20:21 UTC) and during its first build. Nothing of this job's wrote there
+(`rsync` from it, no `--delete`). So the comparison of stage 1 cannot be made again; what stands in its place:
+- the three listings made then (`rsync-dry.out`, `rsync-real.out`; the dry run after the copy listed only the three
+  excluded sourceless modules);
+- **a manifest of every `.olean` of `Proofs` in this tree** — SHA-256 and time — made after the first build
+  (`data/fs131/lu1/olean-manifest.txt`, 1,902 files; `compiled_unchanged.py`): every file but the four this landing
+  recompiles carries a time **earlier than the copy** — the latest is 19:44:17 UTC, `Plane/LebesgueNumber`, the last
+  landing's final pass; the import's ten modules carry 18:32–18:39 UTC, its 47-minute build — so no compiler has
+  written any of them in this tree. The pass checks the tree against the manifest again; its four plants (a hash
+  altered, a time moved past the copy, a file gone, a file added) each fire;
+- from the kernel's side, the pass dumps the last landing's three modules as this tree stores them and compares with
+  that landing's own final dump (`data/fs131/lc1/gate/statements-final.compact`).
+
+**The zero-`sorry` search's plant** (`data/fs131/lu1/sorry-plant.sh`, FS131-LC1's pointed at this module;
+`sorry-plant.out`): a theorem with a `sorry` body appended to `Instances/UpperHalfValues.lean`, never built, never
+committed — narrow lines 0 before, 1 with the plant, "PLANT FIRED: the search finds the planted sorry and nothing
+else"; restored by `git checkout`, "RESTORED: the module is the text it was" (digest `09fe50cb…` before and after),
+narrow lines 0 again, 0 tracked files modified.
+
+**The lint's negative control** (`data/fs131/lu1/lint-plant.sh`; `lint-plant-run.out`): `theorem zz_lu1_lint_plant
+[Nonempty ℕ] : (1 : ℕ) = 1 := rfl` planted at the end of `Instances/UpperHalfValues.lean` (never committed), built —
+"build: OK — 200 of 200 batches, 3 module(s) rebuilt, **0 module(s) with warnings**, 6m11s" at `BATCH=10`
+(`lint-plant-build.log`: `Arith.QuadraticPrime`, whose docstring had moved since the first build, the planted module,
+the root; the build's own linters do not see the plant) — then the guarded lint: **exit 1**, "`unusedArguments`:
+(2/2) Failed with 1 messages", "error: @zz_lu1_lint_plant 1 unused argument", and `synTaut` on the same plant
+(`lint-plant.log`). Restored by `git checkout` under a trap: the digest is the one taken before, the plant's name in
+the file 0 times. The script's last line reads "tracked files modified: 1": that one file is
+`data/fs131/lu1/probes/measure.txt`, to which a probe of this job's own appended a line while the plant was building
+(a slip: nothing should run beside a plant) — not the module. The pass's build recompiles the module and the root
+from the restored text.
