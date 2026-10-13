@@ -1,0 +1,20 @@
+# Claims NF1 — the residue upper half: the first Lean module of the number-field results; fixed by Keryx, 2026-10-13, before its planner's launch
+
+*Statements only, one per line with its id. Each leaf is copied by script from the kernel planner's map (`plans/FS131-KN1-number-field-kernel-map.md` § X1, the rows tagged `[S1a]`, `[S1b]`, `[S2]`), where it is written "exact enough to type"; the instances are from the same record's § X8. The symbols are the library's: `planeOver F` the plane over a field `F ⊆ ℝ`; `unitQuadrance` and `finitePlane` the unit-distance graphs over a ring and over the integers modulo a prime; `Arith.IsUsablePrime`, `SpectralChain.StablePrime`, `SpectralChain.levelTarget`, `SpectralChain.localBound`, `fieldI` as declared in `Proofs/HadwigerNelson/`. A later change is a dated line at the end.*
+
+## Statements
+
+NF1-S1A: For a real number field `F` and `𝔭` with `Arith.IsUsablePrime 𝔭`: `χ(planeOver F) ≤ χ(unitQuadrance (𝓞 F ⧸ 𝔭))`; and `≤ χ(finitePlane p)` when `Nat.card (𝓞 F ⧸ 𝔭) = p` is prime.
+NF1-S1B: For a real number field `F` and `P : SpectralChain.StablePrime F`: a graph homomorphism from the unit-distance graph on `planeOver F` into `SpectralChain.levelTarget P 1`; so `χ(planeOver F) ≤ SpectralChain.localBound F`. Converse half for row 105: a conjugation-stable valuation subring of `fieldI F` other than the field is the localization at a stable prime.
+NF1-S2: For squarefree `d > 1`, `F = ℚ(√d) ⊂ ℝ` with its `NumberField` instance, and an odd prime `p` with `d ≡ s² ≢ 0 (mod p)`: a maximal ideal `𝔭` of `𝓞 F` with `Nat.card (𝓞 F ⧸ 𝔭) = p`. The same for a multiquadratic field at a prime where every radicand is a square, a ramified radicand included (11 in `K`).
+NF1-MODULE: **The first module I would start with, whatever the ranking:** the residue upper half — `[S1a]` and `[S1b]` in one new module (`Arith/UpperHalf`, importing `Arith/PlaceHom` and `SpectralChain`), `[S2]` for real quadratic fields in a second (`Arith/QuadraticPrime`), and the values they close in a third (`Instances/…`: `χ(ℚ(√11)²) = 4`, `χ(ℚ²) = 2`, `χ(ℚ(√167)²) ≤ 8`, `χ(ℚ(√47)²) ≤ 5` again as the control against `SqrtFortySeven`). Reasons: thirteen rows wait on it; it discharges one hypothesis of the headline (`inline:UpperHalf`) and is leaf 1 of row 99; it imports nothing; and the result everyone expects first, `χ(ℚ(√47)²) = 5`, is not reachable without the whole chain, of which this is also a leaf. Two implementers could run at once with no shared file: one on `Arith/UpperHalf`, one on `Arith/QuadraticPrime`; the instances file follows both. In parallel and independent of both, the chain's own first leaf is C0 (naming `T + A`) and then leaf 13 (entropy): a third tree.
+
+## What waits on them (the map's column, copied)
+
+NF1-WAIT-S1A: 52, 53, 73, 94, 119 (upper end), every instance field
+NF1-WAIT-S1B: 57, 63, 99, 103 (upper end), 105, 123, 127 (`inline:UpperHalf`)
+NF1-WAIT-S2: 52, 53, 73, 119 (upper end), 121 (a control: the result is already held another way), 123's instances
+
+## Not claimed
+
+NF1-NC: any lower bound for a plane over a field; anything above level one of a tower; `[S2]` at a prime where some radicand is not a square; that an instance's value is new mathematics (the value four over the field of the square roots of 3 and 11 is K. G. Fischer's of 1994; `LEDGER.md` § The claim list says what is ours); that the upper half alone gives any exact value — each exact value named also needs its lower half, which the map says the kernel holds for the instances listed.
