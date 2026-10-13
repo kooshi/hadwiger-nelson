@@ -514,6 +514,192 @@ theorem finite_quotient_span_natCast (F : Subfield ℝ) [NumberField F] {N : ℕ
 
 /-! ## §3 The torsion theorem, and the two ends -/
 
+/-- **The two parts of a point of `Θ₃ ∩ T₆` at one unit vector**: where the character lies in the band at 3 (its value is
+`1/3`, `1/2` or `2/3`), its 2-part is `1` exactly when its 3-part is `0` (both at the value `1/2`). -/
+private theorem two_part_eq_one_iff_three_part_eq_zero {M : Type*} [AddCommGroup M] {τ : M →+ UnitAddCircle}
+    (h6 : 6 • τ = 0) {m₂ : M →+ ZMod 2} {m₃ : M →+ ZMod 3} (h₂ : ∀ x, (3 • τ) x = ZMod.toAddCircle (m₂ x))
+    (h₃ : ∀ x, (2 • τ) x = ZMod.toAddCircle (m₃ x)) {u : M} (hu : τ u ∈ band 3) : m₂ u = 1 ↔ m₃ u = 0 := by
+  obtain ⟨x, ⟨hx1, hx2⟩, hxu⟩ := hu
+  have hxu' : τ u = (x : UnitAddCircle) := hxu.symm
+  norm_num at hx1 hx2
+  have hz : ∀ n : ℕ, n • (x : UnitAddCircle) = 0 ↔ ∃ k : ℤ, (k : ℝ) = n * x := fun n => by
+    rw [← AddCircle.coe_nsmul, AddCircle.coe_eq_zero_iff]
+    simp only [zsmul_eq_mul, mul_one, nsmul_eq_mul]
+  -- `6x = n ∈ {2, 3, 4}`
+  obtain ⟨n, hn⟩ : ∃ n : ℤ, (n : ℝ) = 6 * x := by
+    have h := DFunLike.congr_fun h6 u
+    rw [AddMonoidHom.smul_apply, AddMonoidHom.zero_apply, hxu'] at h
+    simpa using (hz 6).mp h
+  have hn2 : 2 ≤ n := by exact_mod_cast (by linarith : (2 : ℝ) ≤ n)
+  have hn4 : n ≤ 4 := by exact_mod_cast (by linarith : (n : ℝ) ≤ 4)
+  have e₂ : m₂ u = 0 ↔ ∃ k : ℤ, (k : ℝ) = 3 * x := by
+    rw [← (ZMod.toAddCircle_injective 2).eq_iff, map_zero, ← h₂, AddMonoidHom.smul_apply, hxu']
+    simpa using hz 3
+  have e₃ : m₃ u = 0 ↔ ∃ k : ℤ, (k : ℝ) = 2 * x := by
+    rw [← (ZMod.toAddCircle_injective 3).eq_iff, map_zero, ← h₃, AddMonoidHom.smul_apply, hxu']
+    simpa using hz 2
+  have h01 : ∀ z : ZMod 2, z = 1 ↔ ¬ z = 0 := by decide
+  rw [h01, e₂, e₃]
+  constructor
+  · intro h
+    have hn3 : n = 3 := by
+      by_contra hne
+      rcases (by omega : n = 2 ∨ n = 4) with rfl | rfl
+      · exact h ⟨1, by push_cast at hn ⊢; linarith⟩
+      · exact h ⟨2, by push_cast at hn ⊢; linarith⟩
+    subst hn3
+    exact ⟨1, by push_cast at hn ⊢; linarith⟩
+  · rintro ⟨k, hk⟩ ⟨k', hk'⟩
+    have h3k : (3 * k : ℤ) = n := by exact_mod_cast (by rw [hk, hn]; ring : (3 * k : ℝ) = n)
+    have h2k : (2 * k' : ℤ) = n := by exact_mod_cast (by rw [hk', hn]; ring : (2 * k' : ℝ) = n)
+    omega
+
+/-- An additive map into `ZMod p` kills `p·R`: it descends to `R ⧸ (p)`. -/
+private theorem exists_quotient_hom {R : Type*} [CommRing R] (p : ℕ) (m : R →+ ZMod p) :
+    ∃ l : R ⧸ Ideal.span {(p : R)} →+ ZMod p, ∀ x, l (Ideal.Quotient.mk _ x) = m x := by
+  have hsurj : Function.Surjective (Ideal.Quotient.mk (Ideal.span {(p : R)})).toAddMonoidHom :=
+    Ideal.Quotient.mk_surjective
+  have hker : (Ideal.Quotient.mk (Ideal.span {(p : R)})).toAddMonoidHom.ker ≤ m.ker := fun x hx => by
+    rw [AddMonoidHom.mem_ker] at hx ⊢
+    obtain ⟨a, rfl⟩ := Ideal.mem_span_singleton'.mp (Ideal.Quotient.eq_zero_iff_mem.mp hx)
+    rw [← nsmul_eq_mul', map_nsmul, nsmul_eq_mul, CharP.cast_eq_zero, zero_mul]
+  exact ⟨AddMonoidHom.liftOfRightInverse _ (Function.surjInv hsurj) (Function.rightInverse_surjInv hsurj) ⟨m, hker⟩,
+    fun x => AddMonoidHom.liftOfRightInverse_comp_apply _ _ (Function.rightInverse_surjInv hsurj) ⟨m, hker⟩ x⟩
+
+/-- Conjugation on a quotient of `ℤ[U_F]` fixes every ideal of the quotient (`comap_conjR_eq` on its pull-back). -/
+private theorem comap_quotientMap_conjR (I : Ideal (unitRing F)) (𝔪 : Ideal (unitRing F ⧸ I)) :
+    𝔪.comap (Ideal.quotientMap I (conjR F) (comap_conjR_eq I).ge) = 𝔪 := by
+  ext x
+  obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
+  rw [Ideal.mem_comap, Ideal.quotientMap_mk]
+  exact SetLike.ext_iff.mp (comap_conjR_eq (𝔪.comap (Ideal.Quotient.mk I))) x
+
+/-- If `u·ā = a` and `a` reduces to a unit `x` modulo `I`, then `u` reduces to `x / c̄ x`. -/
+private theorem mk_eq_unit_mul_conj_inv {I : Ideal (unitRing F)} {a u : unitRing F} (hua : u * conjR F a = a)
+    (x : (unitRing F ⧸ I)ˣ) (hx : Ideal.Quotient.mk I a = x) :
+    Ideal.Quotient.mk I u = (x : unitRing F ⧸ I) *
+      Ideal.quotientMap I (conjR F) (comap_conjR_eq I).ge ((x⁻¹ : (unitRing F ⧸ I)ˣ) : unitRing F ⧸ I) := by
+  have h1 : Ideal.Quotient.mk I u * Ideal.quotientMap I (conjR F) (comap_conjR_eq I).ge (x : unitRing F ⧸ I) = x := by
+    rw [← hx, Ideal.quotientMap_mk, ← map_mul, hua]
+  have h2 : Ideal.quotientMap I (conjR F) (comap_conjR_eq I).ge (x : unitRing F ⧸ I) *
+      Ideal.quotientMap I (conjR F) (comap_conjR_eq I).ge ((x⁻¹ : (unitRing F ⧸ I)ˣ) : unitRing F ⧸ I) = 1 := by
+    rw [← map_mul, Units.mul_inv, map_one]
+  rw [← h1, mul_assoc, h2, mul_one]
+
+/-- Pulling an ideal of `R ⧸ I` back to `R` keeps the quotient. -/
+private theorem card_quotient_comap_mk {R : Type*} [CommRing R] (I : Ideal R) (𝔪 : Ideal (R ⧸ I)) :
+    Nat.card (R ⧸ 𝔪.comap (Ideal.Quotient.mk I)) = Nat.card ((R ⧸ I) ⧸ 𝔪) := by
+  have hle : I ≤ 𝔪.comap (Ideal.Quotient.mk I) := fun x hx => by
+    rw [Ideal.mem_comap, Ideal.Quotient.eq_zero_iff_mem.mpr hx]
+    exact 𝔪.zero_mem
+  have e := DoubleQuot.quotQuotEquivQuotOfLE hle
+  rw [Ideal.map_comap_of_surjective _ Ideal.Quotient.mk_surjective] at e
+  exact Nat.card_congr e.symm.toEquiv
+
+/-- **One fact about two predicates** (`plans/FS131-KN5-three-four-colours-passes.md` § Stage 3, L3.8). Let `2 ∈ I₂`,
+`3 ∈ I₃`, and let the functionals `l₂`, `l₃` on the two quotients come from maps `m₂`, `m₃` on `ℤ[U_F]` with
+`m₂ u = 1 ↔ m₃ u = 0` at every unit vector. For units `x₂`, `x₃` the common lift `a = 3a₂ − 2a₃` gives the unit vector
+`a/ā`, which reduces to `x₂ / c̄ x₂` and to `x₃ / c̄ x₃`: so `l₂ (x₂ / c̄ x₂) = 1 ↔ l₃ (x₃ / c̄ x₃) = 0` for every pair, and
+one of the two predicates holds throughout. -/
+private theorem forall_unit_eq_one_or_forall_unit_ne_zero {I₂ I₃ : Ideal (unitRing F)} (h2 : (2 : unitRing F) ∈ I₂)
+    (h3 : (3 : unitRing F) ∈ I₃) {m₂ : unitRing F →+ ZMod 2} {m₃ : unitRing F →+ ZMod 3}
+    (hdich : ∀ u ∈ unitSet F, m₂ u = 1 ↔ m₃ u = 0) {l₂ : unitRing F ⧸ I₂ →+ ZMod 2}
+    {l₃ : unitRing F ⧸ I₃ →+ ZMod 3} (hl₂ : ∀ x, l₂ (Ideal.Quotient.mk I₂ x) = m₂ x)
+    (hl₃ : ∀ x, l₃ (Ideal.Quotient.mk I₃ x) = m₃ x) :
+    (∀ x₂ : (unitRing F ⧸ I₂)ˣ, l₂ ((x₂ : unitRing F ⧸ I₂) * Ideal.quotientMap I₂ (conjR F) (comap_conjR_eq I₂).ge
+        ((x₂⁻¹ : (unitRing F ⧸ I₂)ˣ) : unitRing F ⧸ I₂)) = 1) ∨
+      ∀ x₃ : (unitRing F ⧸ I₃)ˣ, l₃ ((x₃ : unitRing F ⧸ I₃) * Ideal.quotientMap I₃ (conjR F) (comap_conjR_eq I₃).ge
+        ((x₃⁻¹ : (unitRing F ⧸ I₃)ˣ) : unitRing F ⧸ I₃)) ≠ 0 := by
+  have hpair : ∀ (x₂ : (unitRing F ⧸ I₂)ˣ) (x₃ : (unitRing F ⧸ I₃)ˣ),
+      l₂ ((x₂ : unitRing F ⧸ I₂) * Ideal.quotientMap I₂ (conjR F) (comap_conjR_eq I₂).ge
+          ((x₂⁻¹ : (unitRing F ⧸ I₂)ˣ) : unitRing F ⧸ I₂)) = 1 ↔
+        l₃ ((x₃ : unitRing F ⧸ I₃) * Ideal.quotientMap I₃ (conjR F) (comap_conjR_eq I₃).ge
+          ((x₃⁻¹ : (unitRing F ⧸ I₃)ˣ) : unitRing F ⧸ I₃)) = 0 := by
+    intro x₂ x₃
+    obtain ⟨a₂, ha₂⟩ := Ideal.Quotient.mk_surjective (x₂ : unitRing F ⧸ I₂)
+    obtain ⟨a₃, ha₃⟩ := Ideal.Quotient.mk_surjective (x₃ : unitRing F ⧸ I₃)
+    have hmk₂ : Ideal.Quotient.mk I₂ (3 * a₂ - 2 * a₃) = x₂ := by
+      rw [← ha₂]
+      refine Ideal.Quotient.eq.mpr ?_
+      rw [show 3 * a₂ - 2 * a₃ - a₂ = (a₂ - a₃) * 2 by ring]
+      exact I₂.mul_mem_left _ h2
+    have hmk₃ : Ideal.Quotient.mk I₃ (3 * a₂ - 2 * a₃) = x₃ := by
+      rw [← ha₃]
+      refine Ideal.Quotient.eq.mpr ?_
+      rw [show 3 * a₂ - 2 * a₃ - a₃ = (a₂ - a₃) * 3 by ring]
+      exact I₃.mul_mem_left _ h3
+    by_cases ha : 3 * a₂ - 2 * a₃ = 0
+    · -- both quotients would be trivial: excluded by the unit vector `1`
+      exfalso
+      rw [ha, map_zero] at hmk₂ hmk₃
+      have h1₂ : (1 : unitRing F ⧸ I₂) = 0 := by rw [← x₂.mul_inv, ← hmk₂, zero_mul]
+      have h1₃ : (1 : unitRing F ⧸ I₃) = 0 := by rw [← x₃.mul_inv, ← hmk₃, zero_mul]
+      have hm₂ : m₂ 1 = 0 := by rw [← hl₂, map_one, h1₂, map_zero]
+      have hm₃ : m₃ 1 = 0 := by rw [← hl₃, map_one, h1₃, map_zero]
+      have h := (hdich 1 one_mem_unitSet).mpr hm₃
+      rw [hm₂] at h
+      exact zero_ne_one h
+    · obtain ⟨u, hu, hua⟩ := exists_unitSet_mul_conjR_eq ha
+      rw [← mk_eq_unit_mul_conj_inv hua x₂ hmk₂, ← mk_eq_unit_mul_conj_inv hua x₃ hmk₃, hl₂, hl₃]
+      exact hdich u hu
+  refine or_iff_not_imp_right.mpr fun hall => ?_
+  push Not at hall
+  obtain ⟨x₃, hx₃⟩ := hall
+  exact fun x₂ => (hpair x₂ x₃).mpr hx₃
+
+/-- The dyadic end of `exists_maximal_of_torsion`: the two-part on a finite quotient by an ideal holding `2`, pulled back. -/
+private theorem exists_maximal_conj_trivial_of_quotient {I : Ideal (unitRing F)} [Finite (unitRing F ⧸ I)]
+    (h2 : (2 : unitRing F) ∈ I) (l : unitRing F ⧸ I →+ ZMod 2)
+    (hl : ∀ x : (unitRing F ⧸ I)ˣ, l ((x : unitRing F ⧸ I) * Ideal.quotientMap I (conjR F) (comap_conjR_eq I).ge
+      ((x⁻¹ : (unitRing F ⧸ I)ˣ) : unitRing F ⧸ I)) = 1) :
+    ∃ 𝔪 : Ideal (unitRing F), 𝔪.IsMaximal ∧ ∀ x, conjR F x - x ∈ 𝔪 := by
+  haveI : Nontrivial (unitRing F ⧸ I) := by
+    by_contra hnt
+    haveI := not_nontrivial_iff_subsingleton.mp hnt
+    have h := hl 1
+    rw [show ∀ z : unitRing F ⧸ I, l z = 0 from fun z => by rw [Subsingleton.elim z 0, map_zero]] at h
+    exact zero_ne_one h
+  haveI : CharP (unitRing F ⧸ I) 2 := ringChar.of_eq (CharP.ringChar_of_prime_eq_zero Nat.prime_two (by
+    rw [Nat.cast_ofNat, ← map_ofNat (Ideal.Quotient.mk I) 2]
+    exact Ideal.Quotient.eq_zero_iff_mem.mpr h2))
+  obtain ⟨𝔪, h𝔪, htriv⟩ := exists_maximal_conj_trivial (Ideal.quotientMap I (conjR F) (comap_conjR_eq I).ge)
+    (fun 𝔪 _ => comap_quotientMap_conjR I 𝔪) l hl
+  haveI := h𝔪
+  refine ⟨𝔪.comap (Ideal.Quotient.mk I), Ideal.comap_isMaximal_of_surjective _ Ideal.Quotient.mk_surjective,
+    fun x => ?_⟩
+  have h := htriv (Ideal.Quotient.mk I x)
+  rw [Ideal.quotientMap_mk, ← map_sub] at h
+  exact Ideal.mem_comap.mpr h
+
+/-- The `𝔽₃` end of `exists_maximal_of_torsion`: the three-part on a finite quotient by an ideal holding `3` (with `ι` the
+class of `i`), pulled back with its quotient. Rests on Weil's bound. -/
+private theorem exists_maximal_card_nine_of_quotient {I : Ideal (unitRing F)} [Finite (unitRing F ⧸ I)]
+    (h3 : (3 : unitRing F) ∈ I) (l : unitRing F ⧸ I →+ ZMod 3)
+    (hl : ∀ x : (unitRing F ⧸ I)ˣ, l ((x : unitRing F ⧸ I) * Ideal.quotientMap I (conjR F) (comap_conjR_eq I).ge
+      ((x⁻¹ : (unitRing F ⧸ I)ˣ) : unitRing F ⧸ I)) ≠ 0) :
+    ∃ 𝔪 : Ideal (unitRing F), 𝔪.IsMaximal ∧ Nat.card (unitRing F ⧸ 𝔪) = 9 := by
+  haveI : Nontrivial (unitRing F ⧸ I) := by
+    by_contra hnt
+    haveI := not_nontrivial_iff_subsingleton.mp hnt
+    exact hl 1 (by rw [Subsingleton.elim (_ * _ : unitRing F ⧸ I) 0, map_zero])
+  haveI : CharP (unitRing F ⧸ I) 3 := ringChar.of_eq (CharP.ringChar_of_prime_eq_zero Nat.prime_three (by
+    rw [Nat.cast_ofNat, ← map_ofNat (Ideal.Quotient.mk I) 3]
+    exact Ideal.Quotient.eq_zero_iff_mem.mpr h3))
+  have hI : Complex.I ∈ unitVectors F := ⟨⟨by simp, by simp⟩, Complex.norm_I⟩
+  obtain ⟨𝔪, h𝔪, hcard⟩ := exists_maximal_card_nine (Ideal.quotientMap I (conjR F) (comap_conjR_eq I).ge)
+    (quotientMap_involutive (conjR F) conjR_conjR (comap_conjR_eq I).ge) (fun 𝔪 _ => comap_quotientMap_conjR I 𝔪)
+    (ι := Ideal.Quotient.mk I ⟨Complex.I, unitVectors_subset_unitRing F hI⟩)
+    (by
+      rw [← map_mul, ← map_one (Ideal.Quotient.mk I), ← map_neg]
+      exact congrArg _ (Subtype.ext Complex.I_mul_I))
+    (by
+      rw [Ideal.quotientMap_mk, ← map_neg]
+      exact congrArg _ (Subtype.ext Complex.conj_I))
+    l hl
+  haveI := h𝔪
+  exact ⟨𝔪.comap (Ideal.Quotient.mk I), Ideal.comap_isMaximal_of_surjective _ Ideal.Quotient.mk_surjective,
+    (card_quotient_comap_mk I 𝔪).trans hcard⟩
+
 /-- **FS91-J02-T1, ⟹, in the ring.** For a real number field, a point of `Θ₃ ∩ T₆` gives a maximal ideal of `ℤ[U_F]`
 modulo which conjugation is the identity (the dyadic type), or one with nine elements in its quotient (the `𝔽₃` type).
 Rests on Weil's bound (the second alternative). -/
@@ -521,7 +707,24 @@ theorem exists_maximal_of_torsion (F : Subfield ℝ) [NumberField F] {τ : unitR
     (hτ : τ ∈ fieldBandSet F (band 3)) (h6 : τ ∈ torsionBy (unitRing F) 6) :
     (∃ 𝔪 : Ideal (unitRing F), 𝔪.IsMaximal ∧ ∀ x, conjR F x - x ∈ 𝔪) ∨
       (∃ 𝔪 : Ideal (unitRing F), 𝔪.IsMaximal ∧ Nat.card (unitRing F ⧸ 𝔪) = 9) := by
-  sorry
+  have h6' : 6 • τ = 0 := h6
+  -- the 2-part `3τ` and the 3-part `2τ`, as functionals into `ZMod 2` and `ZMod 3`
+  obtain ⟨m₂, hm₂⟩ := TorsionExtraction.exists_zmod_hom_of_mem_torsionBy (N := 2) (θ := 3 • τ)
+    (mem_torsionBy.mpr (by rw [smul_smul]; exact h6'))
+  obtain ⟨m₃, hm₃⟩ := TorsionExtraction.exists_zmod_hom_of_mem_torsionBy (N := 3) (θ := 2 • τ)
+    (mem_torsionBy.mpr (by rw [smul_smul]; exact h6'))
+  have hdich : ∀ u ∈ unitSet F, m₂ u = 1 ↔ m₃ u = 0 := fun u hu =>
+    two_part_eq_one_iff_three_part_eq_zero h6' hm₂ hm₃ (hτ u hu)
+  -- on the finite quotients `R/2`, `R/3`
+  obtain ⟨l₂, hl₂⟩ := exists_quotient_hom 2 m₂
+  obtain ⟨l₃, hl₃⟩ := exists_quotient_hom 3 m₃
+  haveI : Finite (unitRing F ⧸ Ideal.span {((2 : ℕ) : unitRing F)}) := finite_quotient_span_natCast F (by norm_num)
+  haveI : Finite (unitRing F ⧸ Ideal.span {((3 : ℕ) : unitRing F)}) := finite_quotient_span_natCast F (by norm_num)
+  have h2 : (2 : unitRing F) ∈ Ideal.span {((2 : ℕ) : unitRing F)} := Ideal.subset_span (by simp)
+  have h3 : (3 : unitRing F) ∈ Ideal.span {((3 : ℕ) : unitRing F)} := Ideal.subset_span (by simp)
+  rcases forall_unit_eq_one_or_forall_unit_ne_zero h2 h3 hdich hl₂ hl₃ with hP | hQ
+  · exact Or.inl (exists_maximal_conj_trivial_of_quotient h2 l₂ hP)
+  · exact Or.inr (exists_maximal_card_nine_of_quotient h3 l₃ hQ)
 
 /-- `1/2` is not `0` on the circle. -/
 private theorem half_ne_zero : ((1 / 2 : ℝ) : UnitAddCircle) ≠ 0 := by

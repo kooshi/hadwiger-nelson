@@ -163,3 +163,46 @@ elaborator's source: a candidate instance whose module structure does not match 
 that unification is reported stuck where against an opaque hypothesis it would fail and the search go on.) A lemma that takes
 its instances by unification (`LinearMap.exists_leftInverse_of_injective f`, `IsNoetherian.iff_rank_lt_aleph0.mpr h`) is not
 affected.
+
+## Stage 4 — SAVED: L3.8 proved; the file has no `sorry`; every declaration prints its axioms
+
+`exists_maximal_of_torsion` — by the plan's "one fact about two predicates". `lean1.sh` on the module: exit 0, **no message at
+all** (no `sorry`, no warning); 14.3 s, 4.0 GB. The file is 878 lines (the skeleton was 192).
+
+**Eight private helpers** carry it, so that the theorem itself is fifteen lines and no `set`/`let` abbreviates a term a rewrite
+must find:
+- `two_part_eq_one_iff_three_part_eq_zero` — for `6τ = 0` and `τ u ∈ band 3`: with `3τ = toAddCircle ∘ m₂`, `2τ = toAddCircle ∘ m₃`,
+  `m₂ u = 1 ↔ m₃ u = 0`. (`6x = n ∈ {2, 3, 4}`; `m₂ u = 0 ↔ 3x ∈ ℤ`, `m₃ u = 0 ↔ 2x ∈ ℤ`; `omega`.) The 3-part is taken as
+  `2τ`, not the plan's `4τ`: either is killed by 3 and vanishes exactly where `τ u = 1/2`.
+- `exists_quotient_hom` — an additive map into `ZMod p` descends to `R ⧸ (p)` (`AddMonoidHom.liftOfRightInverse`).
+- `comap_quotientMap_conjR` — conjugation on a quotient of `ℤ[U_F]` fixes every ideal of it (L3.6 on the pull-back).
+- `mk_eq_unit_mul_conj_inv` — `u·ā = a` and `a ↦ x` a unit give `u ↦ x / c̄ x`.
+- `card_quotient_comap_mk` — pulling an ideal back along `R → R ⧸ I` keeps the quotient (`DoubleQuot.quotQuotEquivQuotOfLE`).
+- `forall_unit_eq_one_or_forall_unit_ne_zero` — the fact: for ideals `I₂ ∋ 2`, `I₃ ∋ 3`, the lift `a = 3a₂ − 2a₃` and L3.5
+  give `l₂ (x₂ / c̄ x₂) = 1 ↔ l₃ (x₃ / c̄ x₃) = 0` for every pair of units, so one predicate holds throughout. The case
+  `a = 0` (both quotients trivial) is excluded inside it by the unit vector `1` — no separate "`τ 1 = 6·τ(1/6)`" step.
+- `exists_maximal_conj_trivial_of_quotient`, `exists_maximal_card_nine_of_quotient` — the two ends: L3.3, L3.2 on a finite
+  quotient by an ideal holding `2`, resp. `3` (non-trivial because the functional is not `0`; `ι` the class of `i`), and the
+  ideal pulled back.
+
+**The axioms, between builds** (`data/fs131/in1/axioms.sh source stage4`; the print `logs/axioms-stage4.txt`, the verdict
+`logs/axioms-stage4.out`). `lean/AxiomsCore.lean` prints every declaration's axioms and, where `sorryAx` is among them, **the
+leaves it comes from** (the library's constants reachable from the declaration whose own stored type or proof holds `sorryAx`);
+`read_axioms.py` checks each record. 37 declarations (17 public, 20 private):
+- 30 on the standard three alone;
+- 6 rest on `HadwigerNelson.StandingFive.kloosterman_bound` and are exactly the listed ones — the plan's five
+  (`targetFloor_four_weil`, `exists_normOne_zero_of_card_ne_nine`, `exists_maximal_card_nine`, `exists_maximal_of_torsion`,
+  `exists_maximal_card_nine_of_colorable_three`) and the private `exists_maximal_card_nine_of_quotient`;
+- 3 hold `sorryAx`, **each from upstream leaves that are `sorry` in this tree and from nothing of this module**:
+  `exists_maximal_of_torsion` ← `TorsionExtraction.exists_zmod_hom_of_mem_torsionBy`;
+  `exists_maximal_conj_trivial_of_colorable_two` ← `TorsionExtraction.colorable_two_iff_fieldBandSet_two_nonempty`;
+  `exists_maximal_card_nine_of_colorable_three` ← those two, `TorsionExtraction.exists_torsion_mem_fieldBandSet` and
+  `ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable`.
+Verdict `PASS`; control (four planted records: an undeclared axiom, Weil's bound under an unlisted name, a `sorry` sourced
+inside this module, a `sorryAx` with no source) `4 of 4`. The check went red in earnest once before it passed: the first
+version read a theorem's proof through `ConstantInfo.value?`, which is `none` for a theorem at the pin, so every source list
+was empty and all three records failed as `SORRY UNSOURCED` — the stored proof is read by its constructor.
+
+**Statement check** (`logs/statements-stage4.out`): `PASS` — 17 named constants, the three widened by ruling and no other
+difference, 20 new private theorems, no name outside the module's namespace, the 3 `example`s identical; control `4 of 4`;
+the widenings' control 1 error.
