@@ -1,0 +1,34 @@
+# Draft claim list M5-totally-irreducible — Theorem 1.2 from Theorem 1.3 (FS105-DED)
+
+*Drafted by FS131-KN3 (the chain's planner) for Keryx to fix; a draft, not a fixed claim list. Kind: planner and implementer.*
+
+## The leaves it carries (quoted by script)
+
+> NF2-LEAF-16: `[EinsiedlerLindenstrauss2022]` Thm 1.2 (p. 2) — the import the chain reads (X7).
+> — source: data/fs131/claims-NF2.md § The chain's leaves
+
+## Statements
+
+1. `Rigidity.haar_or_zero_entropy` — typed, `sorry`: for a solenoid `X`, a totally irreducible, not virtually cyclic `ZdAction d X` and an invariant ergodic probability `μ`: `μ.IsAddHaarMeasure ∨ ∀ n, ksEntropy μ (α n) = 0`.
+2. to type — FS105-NVC: an irreducible, not virtually cyclic action has `2 ≤ d` and `NoVirtuallyCyclicFactors`; for a totally irreducible one, so does every restriction to a finite-index subgroup.
+3. to type — the finite-fibred step: for a finite `α_Λ`-invariant subgroup `G`, `ksEntropy` of `α n` on `X ⧸ G` for the image measure is `0` iff it is `0` on `X` (Abramov–Rokhlin over a finite-to-one factor).
+
+## Derivation addresses
+
+`plans/FS105-derivation.md` l. 24 (FS105-DED), l. 35 (FS105-VC), FS105-NVC; its classical inputs C1–C6 in D § 2.2 there
+
+## Imports
+
+`Rigidity/PositiveEntropy`, M1
+
+## Exports
+
+`haar_or_zero_entropy` on the axiom
+
+## Can run beside
+
+edits `Rigidity/PositiveEntropy.lean` (one proof) or proves it in a new file; shares none
+
+## Not claimed
+
+Any size or price. That the statements marked "to type" elaborate as written. What I read: statement typed by me; the deduction read only at its entry.

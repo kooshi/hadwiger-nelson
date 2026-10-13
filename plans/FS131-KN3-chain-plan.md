@@ -6,7 +6,20 @@
 
 ## Theorems this phase proved
 
-Filled at each stage; the last stage's list is the record.
+A planning job: the chain's leaves are not proved. What the kernel checked, one file at a time under `lake env lean` (not
+through `./scripts/build.sh`, not at the gate; axiom lists from `data/fs131/kn3/logs/FirstLayerCheck.log`):
+
+- `Rigidity.positive_entropy_rigidity_model` — [kernel, standard three] — `Rigidity/PositiveEntropy.lean`: the hypotheses of
+  the declared theorem have a model (degenerate).
+- `Rigidity.ZdAction.isVirtuallyCyclicMod_bot`, `Rigidity.isSolenoid_unit`, `Rigidity.trivialAction_noVirtuallyCyclicFactors`,
+  `Rigidity.trivialAction_isErgodicOn` — [kernel, standard three; the file has no `sorry`] — `Rigidity/Solenoid.lean`.
+- `Rigidity.ksEntropy_zero_measure`, `Rigidity.measurableSet_nameCell`, `Rigidity.ksEntropyOn_mono` — [kernel] — `Rigidity/Entropy.lean`.
+- `Rigidity.mrPlus_of_split_of_carried` (EN1-FROM-TWO), `Rigidity.five_le_chromaticNumber_of_mrPlus` (EN1-SPCOR's composition),
+  `Rigidity.min_localBound_five_le_chromaticNumber_of_closed` (the headline with closed hypotheses) — **compositions checked
+  over leaves that are `sorry`** (`exists_nonTorsion_unitVector`; `measurableSet_TA`, `rot_preimage_TA` under
+  `chainInterface`): the kernel prints `sorryAx` for each, so none is a theorem of the library yet — `Rigidity/ChainAtTA.lean`.
+
+Declared, not proved: the axiom `Rigidity.positive_entropy_rigidity` (`[EinsiedlerLindenstrauss2022]` Thm 1.3).
 
 ## Stage 1 — SAVED: the readback
 
@@ -321,3 +334,91 @@ print, naming `BorelSpace X`; exit 0 on the new. **A draft line for `LEAN.md` §
    one `AxiomAudit.declareImport` line for ``HadwigerNelson.Rigidity.positive_entropy_rigidity`` with every record that
    rests on it. Today no record does (`entropySplit` is a `sorry`), and the audit would fail on an undeclared `axiom`: the
    branch is a skeleton and is not at the gate.
+
+## Stage 6 — SAVED: the architecture
+
+Seventeen modules; a draft claim list for each under `data/fs131/kn3/claims-<id>.md`, written by
+`tools/fs131_kn3_claimlists.py` (every leaf line copied by script from the fixed claim list; `--check` compares the files
+with a regeneration, and fired on a line edited by hand; its coverage line: leaves 1, 3–21, 23 carried by a module, leaves
+2 and 22 proved in the first layer, none unassigned).
+
+| id | module | leaves | discharges | needs | status of my reading |
+|---|---|---|---|---|---|
+| — | **the first layer** (`Rigidity/Entropy`, `Solenoid`, `PositiveEntropy`, `ChainAtTA`) | 2, 22; the definitions of 13, 14; 16 declared | MR⁺ from PE-2 and EF_F⁺; the headline with closed hypotheses | — | typed, elaborated |
+| C0 | the smaller set; Lemma F | 1 | `measurableSet_TA`, `rot_preimage_TA`, `exists_nonTorsion_unitVector` | — | typed; an implementer's job |
+| M0 | the entropy base, **ported** from `[OAIMath2026]` family 015 | 13, 17 | — | Mathlib | surveyed (Stage 4); a port job with its own brief |
+| M1 | entropy, ours | 13, 17 (T2, T3's consequence) | the three leaves of `Rigidity/Entropy`; the bridge; the two-shift at `log 2` | M0 | definitions typed |
+| M2 | Herglotz–Bochner; Bochner for an induced topology | 3, 11 | `BochnerHerglotz`, `BochnerOn` | — | not read (ruling 4) |
+| M3 | Markov–Kakutani | 4 | `InvariantMeasureOnClosed` | — | not read (ruling 4) |
+| M4 | the dual as a compact group; Haar in two forms | 15 | — | `Solenoid` | not typed |
+| M5 | Theorem 1.2 from Theorem 1.3 (FS105-DED) | 16 | `haar_or_zero_entropy` | M1 | statement typed |
+| M6 | the pieces; PE-1′; Lemma W | 14, 19 | the axiom's non-degenerate model | M4, C0 | not read |
+| M7 | PE-2: Lemma Γ; from `Γ` to `U` | 20, 17 (T1) | `entropySplit` | M0, M1, M4, M5, M6 | § 3.1 read |
+| M8 | EF_F⁺ | 21, 18 | `zeroEntropyCarried` | M1, M9 | not read; its own planner |
+| M9 | the ring and the scope — **with the two unnumbered results** | — | `noRamifiedStableDyadic_of_tca`; `R = O′`; the density of `R` | — | entries read |
+| M10 | N1 (a) at `S = ∅`: the continuity group is `T + A` | 11 | N2 at `T + A` | C0 | not read |
+| M11 | A⁺ at `S = ∅` | 12 | `(chainInterface F).APlusOfR88` | M10, M2 | not read |
+| M12 | the count; `m₁(ℝ²) < 1/4` declared; `[S9]` | 7, 9, 10 | `(chainInterface F).Count` | M9 | not read; its own planner |
+| M13 | CLS, with EN1-UQ4 at the dyadic targets | 8 | `5 ≤ localBound F → TCA F` | the `Arith/` floors | not read |
+| M14 | row 99 at `L ≤ 4` (leaf 5 is branch `fs131-wnf`'s) | 5, 6 | `hRow99`; the upper half | — | not mine |
+| M15 | the instances, `ℚ(√47)` first; the final statement | 23 | row 121's sentence | all | not read |
+
+**The deriver's three questions, answered.** (1) The entropy split is restated beside `Interface.PE2`
+(`EntropySplit`), not proved through it: § 1.3 item 2. (2) One definition of the smaller set, `Rigidity.TA`, in the
+kernel's model of a character; the pigeonhole's reader gets its description as a theorem of M8 (the adelic model), the
+spectral reader as a theorem of M10 (the continuity group). (3) The two unnumbered results are module M9, with the
+scope lemma FS100-EXC, because the three are one piece of arithmetic about stable primes and three blocks read them
+(M8's model, M12's extension step, the headline's `hScope`).
+
+**What can be planned and built at the same time without sharing a file.** Each of these writes only new files, or one
+proof in a file no other of them touches: **C0, M0, M2, M3, M4, M9, M13**, and M12's declaration of `m₁`, and M15's place
+computations. Then, as their inputs land: M1 (after M0), M5 (after M1), M6 and M10 (after C0, M4), M8 (after M9; M1's
+definitions are typed, so its planning can start now), M11 (after M10, M2), M12 (after M9), M7 last of the entropy side.
+Two files are shared by design and are edited by one module each: `Rigidity/Entropy.lean` (M1 only),
+`Rigidity/ChainAtTA.lean` (C0 only; M7, M8 and M9 prove their leaves in files of their own and the landing replaces the
+`sorry`, or the three leaves move to a file downstream — the planner of each says which). Lemma F is stated once, in C0.
+
+**Which I would start next, and why.**
+1. **M0 with M1 — the entropy base.** The axiom's conclusion is a sentence about `ksEntropy`; until the definition is
+   pinned to the textbook's number (the bridge to the release's `measureEntropy`, the two-shift at `log 2`) the axiom's
+   read-back has a hole in it, and M5, M7 and M8 all read entropy. The port is the cheapest large step on the map: two of
+   its files import nothing but Mathlib.
+2. **M9 — the ring and the scope.** It holds the two results the leaf list missed; three blocks wait on it; it is
+   arithmetic over Mathlib's number-field API with no entropy and no measure, so a planner can type it against the kernel
+   today; and it settles early whether `IsRamified` (my definition by the action on the residue field) meets Mathlib's
+   ramification index.
+3. **C0 — an implementer, no planner.** Three leaves with their routes written; closing them takes `sorryAx` out of the
+   three proved compositions, so that MR⁺ from PE-2 and EF_F⁺ and the headline with closed hypotheses are theorems of the
+   library on the standard three axioms.
+M2 and M3 are already ruled to be jobs of their own and conflict with nothing above.
+
+**Before M7 and M8 are planned, two questions for the derive lane** (through the coordinator):
+- *M8, Lemma 3.1′.* Can Steps 4–5 (X01D ll. 226–246) run on convergence in mean — `μ{I_n > εn} ≤ H_n/(εn)` by Markov's
+  inequality on the information function, along a subsequence of scales chosen so that the bad sets are summable — with
+  no almost-everywhere theorem? The deriver left this open (EN1 § 7.2); Shannon–McMillan–Breiman is in neither Mathlib
+  nor the release, so the answer decides whether a classical theorem is formalized or dropped.
+- *M7, § 3.2.* The ergodic decomposition's *uniqueness* is cited at X02D ll. 205, 209 and 225. The release proves
+  existence in canonical form (the conditional measures on the invariant σ-algebra). Does § 3.2 go through on the canonical
+  decomposition, where "`u` permutes the components" is a computation and no uniqueness theorem is read?
+
+**Sizes.** Typed or read in full by me: the first layer (four files, about 560 lines with docstrings; ten `sorry`
+leaves). Every other module: **unknown** — I typed none of them and read no proof under them in full. The survey's line
+counts are `wc` on files I did not build.
+
+### Drafts for files I do not write
+
+- **`LEAN.md` § Searching — Lean**, a new line: "An `axiom` takes from a section `variable` line only the binders its
+  statement mentions: an instance binder it does not name (`[BorelSpace X]`) is dropped in silence, where a `theorem` under
+  the same line keeps it. Write every binder of an axiom in its own signature and read the stored type (`#check @name`)
+  before the first commit (`Rigidity.positive_entropy_rigidity`; `tools/fs131_kn3_axiom_binders.py` with the print kept
+  as its planted fault) (FS131-KN3)."
+- **`BIBLIOGRAPHY.md`, `[EinsiedlerLindenstrauss2022]`, reading status**, to follow the present text: "pp. 1–4 of
+  arXiv v1 re-read from the PDF's text layer by FS131-KN3 (2026-10-13) for the Lean statement of Thm 1.3; Thms 1.2, 1.3
+  and the three definitions of p. 2 quoted in `Proofs/HadwigerNelson/Rigidity/`". **`[OAIMath2026]`**, family 015: "its
+  entropy development surveyed by statement (FS131-KN3, `plans/FS131-KN3-chain-plan.md` § Stage 4): `PrimePackets/
+  ShannonEntropy.lean` and `DukePrimeDegree/Entropy/MetricEntropy.lean` read in full; statement heads of about twenty
+  files; no proof read, nothing built".
+- **`scripts/Axioms.lean`, `scripts/Assumptions.lean`, `ARCHITECTURE.md` § Trust**: nothing now — the branch is a
+  skeleton. At the landing of the first module that proves a record from the axiom: one `AxiomAudit.declareImport` line
+  and the § Trust line drafted in § 5.3 item 4; and `Interface.PE2`, `Interface.RU`, `Interface.EFPlus` stop being taken
+  by any closed statement on the path (their entries in `AssumptionAudit.declared` stay while rows 112, 116–118 take them).
