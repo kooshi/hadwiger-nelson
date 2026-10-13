@@ -463,7 +463,7 @@ Concrete objects: witnesses, certificates, carriers, and the models that show a 
 | `Instances/SqrtEleven/Edges` | Emitted: the certificate `eleven204` and its 455 edges in 3 chunks. | `Instances/SqrtEleven/Table` | — | FS-58 |
 | `Instances/SqrtEleven/Geom00` | Emitted: the geometry of the 3 edge chunks, by `decide +kernel`. | `Instances/SqrtEleven/Edges` | — | FS-58 |
 | `Instances/SqrtEleven/Valid` | `eleven204_valid`. | `Instances/SqrtEleven/Geom00` | — | FS-58 |
-| `Instances/SqrtEleven` | The plane over ℚ(√11) needs four colours, `four_le_chromaticNumber_planeOver_eleven` (and over any real field holding √11, `four_le_chromaticNumber_planeOver_of_sqrt_eleven_mem`), from the 204-point witness of `data/fs58/witness-11/` (`eleven204_coordsIn_elevenOnly`, `eleven204_not_colorable_three`, with the control `eleven204_colorable_four`); `ℤ[√11]` inside the tower (`Q4.elevenOnly`, `Q4.eval_mem_of_mem_elevenOnly`) and the generic transfer `UDCert.chromaticNumber_le_planeOver` (a valid certificate with coordinates in a subring `S` bounds the plane over any real field `S` evaluates into). The upper bound χ ≤ 4 is `[Fischer1990]`'s and is not in the kernel. | `Instances/SqrtEleven/Valid`, `Instances/SqrtEleven/Cnf/Cert`, `Gadget`, `SquareClass` | — | FS-58 |
+| `Instances/SqrtEleven` | The plane over ℚ(√11) needs four colours, `four_le_chromaticNumber_planeOver_eleven` (and over any real field holding √11, `four_le_chromaticNumber_planeOver_of_sqrt_eleven_mem`), from the 204-point witness of `data/fs58/witness-11/` (`eleven204_coordsIn_elevenOnly`, `eleven204_not_colorable_three`, with the control `eleven204_colorable_four`); `ℤ[√11]` inside the tower (`Q4.elevenOnly`, `Q4.eval_mem_of_mem_elevenOnly`) and the generic transfer `UDCert.chromaticNumber_le_planeOver` (a valid certificate with coordinates in a subring `S` bounds the plane over any real field `S` evaluates into). The upper bound χ ≤ 4 is `[Fischer1990]`'s; it is not in this module, and is in the kernel since FS131-LU1 in `Instances/UpperHalfValues` (`UpperHalf.chromaticNumber_planeOver_eleven`, χ = 4). | `Instances/SqrtEleven/Valid`, `Instances/SqrtEleven/Cnf/Cert`, `Gadget`, `SquareClass` | — | FS-58 |
 | `Instances/SqrtTwoThree` | χ(ℚ(√2,√3)²) ≥ 4 by the chain theorem, six chained rhombi with no Moser spindle in the field (`four_le_chromaticNumber_planeOver_two_three`; the six-unit identity `sixUnits_sum`, by factoring); the 18-vertex, 33-edge object of `example_qsqrt2_qsqrt3.json` refuses three colours by the gadget algebra with no solver (`eighteen_not_colorable_three`, through `pullGadget`, a gadget pulled between vertex sets of different sizes) and four-colours (`eighteen_colorable_four`); the plant `(15, 17)` kept as controls. The upper bound ≤ 4 is not in the kernel. | `Chain` | — | FS-45 (J14) |
 | `Instances/SqrtOneSixSeven/Cert` | Emitted: `Sqrt167.cert`, T41's 18 unit vectors (± pairs) over `ℚ(√167)` and the 1,050-leaf tree, multipliers scaled to integers per leaf (`tools/j52_intcert.py`). `--` comments and one docstring. | `ThetaCert` | 79 | FS-75 |
 | `Instances/SqrtOneSixSeven` | **χ(ℚ(√167)²) ≥ 4 in the kernel, with no finite graph** (`four_le_chromaticNumber_planeOver_sqrt167`; over any real field holding `√167`, `four_le_chromaticNumber_planeOver_of_sqrt167_mem`), from `Sqrt167.cert_units` and `Sqrt167.cert_check` by `decide +kernel` (12.2 CPU s, 5.5 GiB). Standard three axioms, no native purchase. | `ThetaPlane`, `Instances/SqrtOneSixSeven/Cert` | 79 | FS-75 |
@@ -563,6 +563,9 @@ colours, classes (`NonSiamese`, `Simple`) are predicates on one structure. Each 
 | `Arith/ProductFactor` | **FS-131 wave 10 (FS131-K10b; the leaf proved by FS131-I10F, no `sorry`).** J45-SI-J at the class its argument reads (any filter not eventually finite; no spectral measure): `preimage_mem_factorSets`, `comap_factorSigma_le` (the factor of a factor system), `prodMap₃`, `prodFactorSigma`, `contVec_prod_eq` (by the mean variance of sections on events: `fibre_mem_factorSets`, the cylinders `cylMap`, `cylSets`), and its model `contVec_prod_eq_coin`. | `Arith/SpectralInputs` | — | FS-131 |
 | `Arith/MajorityVote` | **FS-131 wave 10 (FS131-K10b; proved by FS131-I10F, no `sorry`).** FS131-E8-SI5C, majority decoding, under J45-SI-5 (c): `ae_eq_measurable_of_majority` (events of probability at most `p < 1/2`, pairwise independent, over an infinite index set; values in a countable type, no measurability of the variables assumed — inventory ruling 542), over `measure_half_le_sum_indicator_le`, `eq_of_lt_two_mul_card_filter`, `exists_measurable_selector`. | Mathlib | — | FS-131 |
 | `Arith/NegCircleModel` | **FS-131 wave 10 (FS131-K10b; every leaf proved by FS131-I10F, no `sorry`).** A model of `Interface.NegCircle` at `F = ℚ`, the point mass at the parity character: `exists_parityHom`, `negCircle_trivial_bot`; and `sp_if_hypotheses_trivial_bot` — given `BochnerHerglotz`, every other hypothesis of `sp_if` at once. | `Arith/SpectralInputs` | — | FS-131 |
+| `Arith/UpperHalf` | **FS-131, NF1 (statements FS131-KN2's; the twelve leaves' proofs FS131-IU1's; no `sorry`).** The residue upper half. At a usable prime: `nonempty_hom_unitQuadrance`, `chromaticNumber_planeOver_le_unitQuadrance`, `chromaticNumber_planeOver_le_finitePlane` (NF1-S1A, proved: corollaries of `Arith.placeHom_base`). At a stable prime of `F(i)`: `StablePrime.heightOne`, `StablePrime.localRing` (Mathlib's `valuationSubringAtPrime`), `StablePrime.residue`, `exists_hom_levelTarget` (every level `m ≥ 1`), `chromaticNumber_planeOver_le_localBound` (NF1-S1B; discharges `hUpper` of `SpectralChain.chromaticNumber_eq_localBound`: `chromaticNumber_eq_localBound_of_chain`), `colorable_two_planeOver_of_ramified` (row 63 at a number field), `exists_stablePrime_of_valuationSubring` and `inv_natCast_mem_unitRingOver_iff_forall_stablePrime` (row 105 over the stable primes). | `Arith/PlaceHom`, `SpectralChain`, `TwoColourResidue` | — |
+| `Arith/QuadraticPrime` | **FS-131, NF1 (statements FS131-KN2's; the nine leaves' proofs FS131-IQ1's; no `sorry`).** Degree-one primes of fields of square roots (NF1-S2): `numberField_fieldOfRadicands` with the global instance `instNumberFieldFieldOfRadicands`; `isMaximal_ker_and_card`, `exists_ringHom_zmod_of_padic`, `exists_maximal_card_of_padic` (a field that embeds in `ℚ_p` has a maximal ideal of its integers with `p` elements in the quotient); `exists_padicInt_sq_eq` (Hensel), `nonempty_ringHom_padic`, `exists_maximal_card_eq` (every radicand a nonzero square modulo an odd `p`; no squarefreeness), `exists_maximal_card_eq_sqrt` (the claim's form); `nonempty_ringHom_zmod_of_ramified_sqrt`, `exists_maximal_card_eq_of_ramified` (one radicand divisible by `p` exactly once). | `SquareClass` | — |
+| `Instances/UpperHalfValues` | **FS-131, NF1 (statements FS131-KN2's; the three leaves' proofs FS131-IV1's; no `sorry`).** `colorable_planeOver_fieldOfRadicands`; **`χ(ℚ(√11)²) = 4`** (`chromaticNumber_planeOver_eleven`), `χ(ℚ(√167)²) ≤ 8`, `χ(ℚ(√47)²) ≤ 5` through the prime above 11 (the control against `Instances/SqrtFortySeven`), **`χ(ℚ²) = 2`** (`chromaticNumber_planeOver_rat`) from `exists_stablePrime_rat`; the global instance `instNumberFieldBot`. | `Arith/UpperHalf`, `Arith/QuadraticPrime`, `Instances/SqrtEleven`, `Instances/SqrtOneSixSeven`, `Instances/SqrtFortySeven`, `Instances/PlaneFreedom`, `Instances/FinitePlane11`, `CayleyCertificate` | — |
 | `Plane/LocalMap` | **FS-131 wave 3, foundation.** The local geometry of an arc map (`plans/FS131-w3-kernel-plan.md` § 2): `Arc.isClosed_carrier`, `isOpen_interiorPts`, `isOpen_region`, tiles open, connected and monochromatic (`IsTile.col_eq`), `TileOf`; `UnitNear`/`UnitFar` (`~`, `⊥`); `coneAt` (limit directions); `Side`, `germ`, `GermIn`; `ringArc`, `OnRingArc`, `innerColours`/`outerColours`, `IsRingArc` (an arc of `Γ` on `ω(p)` with constant sides), `IsQArc`, `GermOnQ`, `OnQArc`; `IsChangePoint` (reading L), `IsHub`; `essColours` (`P(w)`), `IsEssBoundary`, `SaturatedAt`; `restrict`, `wholeDom`, `wholeRestrict` (`F_ρ`); `Arc.InitialPiece`. Reads "a tile of colour `c`" as the colour class `region c`, as `coloursAt` reads `P_cl`. | `Plane/ArcMap`, `Plane/UnitPairs` | — | FS-131 |
 | `Plane/LocalMapExamples` | **FS-131 wave 3, foundation.** Spec examples and inhabitants for `Plane/LocalMap`: `halfPlane2` (a change point and a hub at `r(0)`; no ring arc), `quadRing` (four colours at the centre, `IsRingArc 0 0 (π/2) 0 2`, a (Q) arc, no change point); cones of the unit disc at `1`; near and far discs; essential multicolour and saturation of a one-colour map; `wholeDom` of a one-colour disc; initial pieces of a segment and an arc. | `Plane/LocalMap` | — | FS-131 |
 | `Plane/CircleColouring` | **FS-131 wave 3, foundation** (FS129-SR1-RINGBAND's vocabulary). `CircleColouring` (a `ℤ/3`-colouring of the circle proper at `60°`), `Lift`, `Good`, `step`, `hSum`, `h`, `LeftVal`/`RightVal`, `IsSwap`, `Lift.W`, `Lift.D`, `Lift.m`, `Lift.n₂`; inhabitants `arcsColouring`/`arcsLift`, `hexColouring` (`W = 2`, `h = 2`), `nineColouring` (`W = 3`, `h = 0`). Mathlib only. | — | — | FS-131 |
@@ -830,45 +833,48 @@ either banner, so an audit that could not elaborate cannot read as a pass.
 
 None is an `axiom`: each is a `Prop` argument visible in the statement of every theorem that takes it, so `#print axioms`
 shows the standard three and the axiom audit counts the theorem clean. `scripts/assumptions-ledger.txt` lists every
-(hypothesis, statement) pair — 98 pairs, 51 statements — and the gate compares it with the library exactly. The gate fails
+(hypothesis, statement) pair — 106 pairs, 52 statements — and the gate compares it with the library exactly. The gate fails
 on a hypothesis that is closed (no free variable), never concluded, concluded only from another assumption, or called one
 in its docstring, and is not in the list. What it cannot find by itself is a hand result written out over a theorem's own
-variables under a docstring that does not say so; the landing that brings one declares it. Thirty-five entries, by kind
-(FS131-LT5; names under `HadwigerNelson.`):
+variables under a docstring that does not say so; the landing that brings one declares it — and retires it, on its own
+word, when a theorem proves it: the step finds a discharged named hypothesis and not a discharged binder. Thirty-four
+entries, by kind (FS131-LT5; one retired at FS131-LU1; names under `HadwigerNelson.`):
 
 **Outside theorems — seven entries, five theorems.** Weil's bound is listed in each form it takes: the import above (eight
 theorems rest on the axiom), and the two hypothesis forms below, which the import proves.
 
 | hypothesis | form | source | statements that take it |
 |---|---|---|---|
-| `SpectralChain.BochnerHerglotz` | named | `[Rudin1962]` 1.4.3 (Herglotz–Bochner on a discrete abelian group) and 1.3.6 (uniqueness); the page not read | 13 |
-| `SpectralChain.InvariantMeasureOnClosed` | named | `[Kakutani1938]` (Markov–Kakutani, for `ℤ[U]` and then for `U`); not read | 7 |
+| `SpectralChain.BochnerHerglotz` | named | `[Rudin1962]` 1.4.3 (Herglotz–Bochner on a discrete abelian group) and 1.3.6 (uniqueness); the page not read | 14 |
+| `SpectralChain.InvariantMeasureOnClosed` | named | `[Kakutani1938]` (Markov–Kakutani, for `ℤ[U]` and then for `U`); not read | 8 |
 | `Bridge.RealAlgebraicDescent` | named | `[Lang1953]` (Artin–Lang; equivalently Tarski 1951); row 107's one named hypothesis | 6 |
 | `SpectralInputs.BochnerOn` | named | `[Rudin1962]` 1.4.3, for a topology induced from a locally compact abelian group | 1 |
 | `Plane.Voronov11` | named | `[Voronov2023]` Thm 1.1 (six colours) | 1 (`mu_lt_of_voronov11`); `forall_mu_six_lt_one_iff` states it under `↔` |
 | `StandingFive.KloostermanBound` | named | `[Weil1948]` p. 207, at the theorem's field; proved from the import at characteristic not 2 | 9 |
 | `hK` of `standingFloor_seven`, `standingFloor_five`, `seven_le_localBound_of_kloosterman` | in a binder | `[Weil1948]` p. 207, at every field of `q ≡ 3 (mod 4)`, `q ≥ 347` elements | 3 |
 
-**Hand results of ours — twenty-three: twelve named, eleven written out in a binder.**
+**Hand results of ours — twenty-two: twelve named, ten written out in a binder.** (The upper half `χ(F²) ≤ L(F)`, `hUpper` of
+`SpectralChain.chromaticNumber_eq_localBound`, left this table at FS131-LU1: it is the theorem
+`UpperHalf.chromaticNumber_planeOver_le_localBound`, and `UpperHalf.chromaticNumber_eq_localBound_of_chain` is the headline
+without it, taking the nine that remain.)
 
 | hypothesis | form | source | statements that take it |
 |---|---|---|---|
-| `SpectralChain.Interface.RU` | named | J45 § 5.4 (R-U) | 6 |
-| `SpectralChain.Interface.PE2` | named | X02D (PE-2), over `[EinsiedlerLindenstrauss2022]` Thm 1.2 | 6 |
-| `SpectralChain.Interface.EFPlus` | named | FS100-X01D (EF_F⁺) | 6 |
+| `SpectralChain.Interface.RU` | named | J45 § 5.4 (R-U) | 7 |
+| `SpectralChain.Interface.PE2` | named | X02D (PE-2), over `[EinsiedlerLindenstrauss2022]` Thm 1.2 | 7 |
+| `SpectralChain.Interface.EFPlus` | named | FS100-X01D (EF_F⁺) | 7 |
 | `SpectralChain.Interface.APlus0` | named | J45 § 3 (A⁺ at `S = ∅`; row 113) | 3 |
-| `SpectralChain.Interface.APlusOfR88` | named | J45 (A⁺ from R88-TCA) | 3 |
-| `SpectralChain.Interface.Count` | named | X23D-TCA (the count) | 3 |
+| `SpectralChain.Interface.APlusOfR88` | named | J45 (A⁺ from R88-TCA) | 4 |
+| `SpectralChain.Interface.Count` | named | X23D-TCA (the count) | 4 |
 | `CharacterColouring.OrderBound` | named | FS89-S0A-3 (`N = 168` at the band at 4) | 2 |
 | `SpectralChain.Interface.MR` | named | row 120 (measure rigidity, Fourier form) | 1 |
 | `SpectralChain.Interface.MulStable` | named | J45 § 4.2 step 2 | 1 |
 | `SpectralChain.Interface.NegCircle` | named | J45 § 4.2 step 3 | 1 |
 | `Plane.Row130M1` | named | row 130 (`χ_CP ≤ χ_m⁰`) | 1 |
 | `SevenConditional.G4` | named | row 103 (a solver refusal with no proof log) | 1 |
-| `hRow99` | in a binder | row 99 (`χ(F²) = L(F)` at `L(F) ≤ 4`) | 3 |
-| `hCLS` | in a binder | X23D-CLS (`L(F) ≥ 5 ⟹` T-C(A)) | 3 |
+| `hRow99` | in a binder | row 99 (`χ(F²) = L(F)` at `L(F) ≤ 4`) | 4 |
+| `hCLS` | in a binder | X23D-CLS (`L(F) ≥ 5 ⟹` T-C(A)) | 4 |
 | `hRow123` | in a binder | row 123's chain at the standing field | 2 |
-| `hUpper` | in a binder | row 52 (`χ(F²) ≤ L(F)`) | 1 |
 | `hRQ4`, `hRQ5` of `cl2` | in a binder | FS89-D2-T1, FS89-D5-T2 | 1 each |
 | `α(Γ₂₃) ≤ 105`, `α(Γ₈₃) ≤ 1148`, `α(Γ₁₁) ≤ 29` | in a binder | rows 71, 68, 68 (certificates checked outside the kernel) | 1 each |
 | `hR78`; `hR88`, `hR88per` | in a binder | rows 78; 88 | 1 each |
@@ -993,10 +999,17 @@ and the ranked obstacles are in `CLAUDE.md` § Frontier.
 - **Certificate size decides what reaches the kernel.** The fine-tail cell core at `p = 1/7` was priced at
   about 800,000 LRAT lines per cube and declined; Exoo and Ismailescu's {1, 2} six-forcer was priced at
   about 50 million hints and deferred, which is why `Instances/OneTwo` does not exist (§ 3.10).
-- **Field-level statements rest on hand arguments.** Two steps are not in the kernel: that a number field
-  with a conjugation-fixed prime supplies a valuation subring with residue field of size N(𝔭) (ledger
-  row 57), and the integrality of unit vectors at the primes above `p` behind the finite-plane bound
-  (row 52). The kernel holds both theorems only through an explicit subring and ring homomorphism
+- **Field-level statements: the two residue steps are in the kernel for every real number field since
+  FS131-LU1; a field's list of primes is not.** That a real number field with a conjugation-fixed prime
+  supplies a conjugation-stable valuation subring with its residue map (ledger row 57) is `Arith/UpperHalf`
+  (`StablePrime.localRing`, `StablePrime.residue`, `exists_hom_levelTarget`; the size of the residue field
+  is not stated), and the integrality of unit vectors at a usable prime behind the finite-plane bound
+  (row 52) is `Arith.exists_placeHom` with `UpperHalf.chromaticNumber_planeOver_le_finitePlane`. What a
+  bound for a named field still needs is a prime of that field: `Arith/QuadraticPrime` exhibits one of
+  degree one at an odd prime modulo which every radicand of a field of square roots is a nonzero square
+  (one more radicand may be divisible by it once), and the stable prime of `ℚ(i)` above 2 is in
+  `Instances/UpperHalfValues`; no other field's primes are computed, and the older modules still reach
+  their fields through an explicit subring and ring homomorphism
   (`colorable_unitDistance_induce_of_valuationSubring`, `UDCert.drawing_adj`).
 - **No independent replay covers the current tree** (§ 5).
 - **A tools-side negative measures its enumeration** (`CLAUDE.md` § Grokkings, G21). Rows of the ledger

@@ -1,0 +1,85 @@
+=== DUPNAMES ===
+SCANNED modules=7506 package-modules=1881 package-constants=24987 other-constants=511389
+GENERATED HadwigerNelson.Adjoin.eval.congr_simp :: modules=3 types=same axioms=same reserved=true
+COPY HadwigerNelson.Adjoin.eval.congr_simp :: Proofs.HadwigerNelson.SeamCert kind=theorem held=true attributed=true package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY HadwigerNelson.Adjoin.eval.congr_simp :: Proofs.HadwigerNelson.Instances.CompositumFive kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY HadwigerNelson.Adjoin.eval.congr_simp :: Proofs.HadwigerNelson.Instances.SqrtEleven kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+GENERATED HadwigerNelson.Outside.OAI158.angularSum.eq_1 :: modules=2 types=same axioms=same reserved=true
+COPY HadwigerNelson.Outside.OAI158.angularSum.eq_1 :: Proofs.HadwigerNelson.Outside.OAI158CircleTransport kind=theorem held=true attributed=true package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY HadwigerNelson.Outside.OAI158.angularSum.eq_1 :: Proofs.HadwigerNelson.Plane.SixRing.Chart kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+GENERATED HadwigerNelson.Plane.AeColouring.cls.eq_1 :: modules=2 types=same axioms=same reserved=true
+COPY HadwigerNelson.Plane.AeColouring.cls.eq_1 :: Proofs.HadwigerNelson.Plane.MaximalCover kind=theorem held=true attributed=true package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY HadwigerNelson.Plane.AeColouring.cls.eq_1 :: Proofs.HadwigerNelson.Plane.Slack kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+GENERATED HadwigerNelson.Plane.ArcMap.coloursAt.eq_1 :: modules=3 types=same axioms=same reserved=true
+COPY HadwigerNelson.Plane.ArcMap.coloursAt.eq_1 :: Proofs.HadwigerNelson.Plane.LocalMapExamples kind=theorem held=true attributed=true package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY HadwigerNelson.Plane.ArcMap.coloursAt.eq_1 :: Proofs.HadwigerNelson.Plane.SVMap kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY HadwigerNelson.Plane.ArcMap.coloursAt.eq_1 :: Proofs.HadwigerNelson.Plane.ValidMap.Chain kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+GENERATED HadwigerNelson.Plane.ArcMap.const.congr_simp :: modules=3 types=same axioms=same reserved=true
+COPY HadwigerNelson.Plane.ArcMap.const.congr_simp :: Proofs.HadwigerNelson.Plane.LocalMapExamples kind=theorem held=true attributed=true package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY HadwigerNelson.Plane.ArcMap.const.congr_simp :: Proofs.HadwigerNelson.Plane.ValidMap.Chain kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY HadwigerNelson.Plane.ArcMap.const.congr_simp :: Proofs.HadwigerNelson.Plane.Woodall.Basic kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+GENERATED HadwigerNelson.Plane.ArcMap.innerColours.eq_1 :: modules=2 types=same axioms=same reserved=true
+COPY HadwigerNelson.Plane.ArcMap.innerColours.eq_1 :: Proofs.HadwigerNelson.Plane.LocalMapExamples kind=theorem held=true attributed=true package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY HadwigerNelson.Plane.ArcMap.innerColours.eq_1 :: Proofs.HadwigerNelson.Plane.SixFragment kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+GENERATED HadwigerNelson.Plane.ArcMap.outerColours.eq_1 :: modules=2 types=same axioms=same reserved=true
+COPY HadwigerNelson.Plane.ArcMap.outerColours.eq_1 :: Proofs.HadwigerNelson.Plane.LocalMapExamples kind=theorem held=true attributed=true package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY HadwigerNelson.Plane.ArcMap.outerColours.eq_1 :: Proofs.HadwigerNelson.Plane.SixFragment kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+GENERATED HadwigerNelson.Plane.ArcMap.sectorsOf.eq_1 :: modules=2 types=same axioms=same reserved=true
+COPY HadwigerNelson.Plane.ArcMap.sectorsOf.eq_1 :: Proofs.HadwigerNelson.Plane.ValidMap.Cone kind=theorem held=true attributed=true package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY HadwigerNelson.Plane.ArcMap.sectorsOf.eq_1 :: Proofs.HadwigerNelson.Plane.ValidMap.BaseSteps kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+GENERATED HadwigerNelson.Plane.ArcMap.Γ.eq_1 :: modules=2 types=same axioms=same reserved=true
+COPY HadwigerNelson.Plane.ArcMap.Γ.eq_1 :: Proofs.HadwigerNelson.Plane.RingGerm kind=theorem held=true attributed=true package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY HadwigerNelson.Plane.ArcMap.Γ.eq_1 :: Proofs.HadwigerNelson.Plane.ValidMap.Chain kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+GENERATED HadwigerNelson.Plane.Side.sign.eq_1 :: modules=2 types=same axioms=same reserved=true
+COPY HadwigerNelson.Plane.Side.sign.eq_1 :: Proofs.HadwigerNelson.Plane.LocalStructure kind=theorem held=true attributed=true package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY HadwigerNelson.Plane.Side.sign.eq_1 :: Proofs.HadwigerNelson.Plane.LocalMapExamples kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+GENERATED HadwigerNelson.Plane.Side.sign.eq_2 :: modules=2 types=same axioms=same reserved=true
+COPY HadwigerNelson.Plane.Side.sign.eq_2 :: Proofs.HadwigerNelson.Plane.LocalStructure kind=theorem held=true attributed=true package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY HadwigerNelson.Plane.Side.sign.eq_2 :: Proofs.HadwigerNelson.Plane.LocalMapExamples kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+GENERATED HadwigerNelson.Plane.curvUp.eq_1 :: modules=2 types=same axioms=same reserved=true
+COPY HadwigerNelson.Plane.curvUp.eq_1 :: Proofs.HadwigerNelson.Plane.StuckChain kind=theorem held=true attributed=true package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY HadwigerNelson.Plane.curvUp.eq_1 :: Proofs.HadwigerNelson.Plane.ValidMap.Cone kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+GENERATED HadwigerNelson.Plane.dot.eq_1 :: modules=2 types=same axioms=same reserved=true
+COPY HadwigerNelson.Plane.dot.eq_1 :: Proofs.HadwigerNelson.Plane.ValidMap.BaseSteps kind=theorem held=true attributed=true package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY HadwigerNelson.Plane.dot.eq_1 :: Proofs.HadwigerNelson.Plane.Woodall.Collar kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+GENERATED HadwigerNelson.Plane.fromFrame.eq_1 :: modules=3 types=same axioms=same reserved=true
+COPY HadwigerNelson.Plane.fromFrame.eq_1 :: Proofs.HadwigerNelson.Plane.ValidMap.Moves kind=theorem held=true attributed=true package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY HadwigerNelson.Plane.fromFrame.eq_1 :: Proofs.HadwigerNelson.Plane.ValidMap.UnitArc kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY HadwigerNelson.Plane.fromFrame.eq_1 :: Proofs.HadwigerNelson.Plane.Woodall.NoFourFive kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+GENERATED HadwigerNelson.Plane.shiftCol.eq_1 :: modules=2 types=same axioms=same reserved=true
+COPY HadwigerNelson.Plane.shiftCol.eq_1 :: Proofs.HadwigerNelson.Plane.Slack kind=theorem held=true attributed=true package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY HadwigerNelson.Plane.shiftCol.eq_1 :: Proofs.HadwigerNelson.Plane.Stationary kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+GENERATED HadwigerNelson.Plane.sq9Col.eq_1 :: modules=2 types=same axioms=same reserved=true
+COPY HadwigerNelson.Plane.sq9Col.eq_1 :: Proofs.HadwigerNelson.Plane.Stationary kind=theorem held=true attributed=true package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY HadwigerNelson.Plane.sq9Col.eq_1 :: Proofs.HadwigerNelson.Plane.CoverExamples kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+GENERATED HadwigerNelson.Plane.upperDensityAt.eq_1 :: modules=2 types=same axioms=same reserved=true
+COPY HadwigerNelson.Plane.upperDensityAt.eq_1 :: Proofs.HadwigerNelson.Plane.Cover kind=theorem held=true attributed=true package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY HadwigerNelson.Plane.upperDensityAt.eq_1 :: Proofs.HadwigerNelson.Plane.LocalMapExamples kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+GENERATED HadwigerNelson.Q4.eval.eq_1 :: modules=3 types=same axioms=same reserved=true
+COPY HadwigerNelson.Q4.eval.eq_1 :: Proofs.HadwigerNelson.SeamCert kind=theorem held=true attributed=true package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY HadwigerNelson.Q4.eval.eq_1 :: Proofs.HadwigerNelson.Instances.CompositumFive kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY HadwigerNelson.Q4.eval.eq_1 :: Proofs.HadwigerNelson.Instances.SqrtEleven kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+GENERATED HadwigerNelson.UDCert.denomSq.eq_1 :: modules=2 types=same axioms=same reserved=true
+COPY HadwigerNelson.UDCert.denomSq.eq_1 :: Proofs.HadwigerNelson.UnitQuadrance kind=theorem held=true attributed=true package=true axioms=[propext]
+COPY HadwigerNelson.UDCert.denomSq.eq_1 :: Proofs.HadwigerNelson.Motion kind=theorem held=true attributed=false package=true axioms=[propext]
+GENERATED HadwigerNelson.rhombus.eq_1 :: modules=2 types=same axioms=same reserved=true
+COPY HadwigerNelson.rhombus.eq_1 :: Proofs.HadwigerNelson.Mascot kind=theorem held=true attributed=true package=true axioms=[propext]
+COPY HadwigerNelson.rhombus.eq_1 :: Proofs.HadwigerNelson.Chain kind=theorem held=true attributed=false package=true axioms=[propext]
+GENERATED LinearEquiv.toContinuousLinearEquiv.congr_simp :: modules=2 types=same axioms=same reserved=true
+COPY LinearEquiv.toContinuousLinearEquiv.congr_simp :: Proofs.HadwigerNelson.Plane.FalconerReduction kind=theorem held=true attributed=true package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY LinearEquiv.toContinuousLinearEquiv.congr_simp :: Mathlib.NumberTheory.NumberField.CanonicalEmbedding.Basic kind=theorem held=true attributed=false package=false axioms=[propext, Classical.choice, Quot.sound]
+GENERATED Nonempty.some.congr_simp :: modules=6 types=same axioms=same reserved=true
+COPY Nonempty.some.congr_simp :: Mathlib.Order.SuccPred.LinearLocallyFinite kind=theorem held=true attributed=true package=false axioms=[Classical.choice]
+COPY Nonempty.some.congr_simp :: Mathlib.Order.RelSeries kind=theorem held=true attributed=false package=false axioms=[Classical.choice]
+COPY Nonempty.some.congr_simp :: Mathlib.CategoryTheory.Skeletal kind=theorem held=true attributed=false package=false axioms=[Classical.choice]
+COPY Nonempty.some.congr_simp :: Mathlib.Topology.MetricSpace.Gluing kind=theorem held=true attributed=false package=false axioms=[Classical.choice]
+COPY Nonempty.some.congr_simp :: Proofs.HadwigerNelson.Arity kind=theorem held=true attributed=false package=true axioms=[Classical.choice]
+COPY Nonempty.some.congr_simp :: Mathlib.Combinatorics.SimpleGraph.Connectivity.Subgraph kind=theorem held=true attributed=false package=false axioms=[Classical.choice]
+GENERATED SimpleGraph.Coloring.mk.congr_simp :: modules=2 types=same axioms=same reserved=true
+COPY SimpleGraph.Coloring.mk.congr_simp :: Proofs.HadwigerNelson.CoverageMono kind=theorem held=true attributed=true package=true axioms=[propext, Classical.choice, Quot.sound]
+COPY SimpleGraph.Coloring.mk.congr_simp :: Proofs.HadwigerNelson.Arith.FalconerFan kind=theorem held=true attributed=false package=true axioms=[propext, Classical.choice, Quot.sound]
+GENERATED Std.Sat.CNF.Clause.eval.eq_1 :: modules=2 types=same axioms=same reserved=true
+COPY Std.Sat.CNF.Clause.eval.eq_1 :: Proofs.HadwigerNelson.Sat.Encoding kind=theorem held=true attributed=true package=true axioms=[]
+COPY Std.Sat.CNF.Clause.eval.eq_1 :: Std.Tactic.BVDecide.LRAT.Internal.Convert kind=theorem held=true attributed=false package=false axioms=[]
+TOTALS doubled=0 generated=24 generated-axioms-differ=0
+=== END ===

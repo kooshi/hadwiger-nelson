@@ -316,6 +316,9 @@ import Proofs.HadwigerNelson.Plane.ClosePairWitness
 import Proofs.HadwigerNelson.Plane.ClosePairModel
 import Proofs.HadwigerNelson.Plane.SectorPoint
 import Proofs.HadwigerNelson.Plane.ThreeArcs
+import Proofs.HadwigerNelson.Arith.UpperHalf
+import Proofs.HadwigerNelson.Arith.QuadraticPrime
+import Proofs.HadwigerNelson.Instances.UpperHalfValues
 
 /-!
 # Proofs

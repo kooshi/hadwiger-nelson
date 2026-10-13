@@ -1,0 +1,23 @@
+data/fs131/iv1/probes/p2.lean:2:43: warning: Variable name `hb` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+data/fs131/iv1/probes/p2.lean:6:43: warning: Variable name `hb` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+data/fs131/iv1/probes/p2.lean:9:27: warning: Variable name `ha` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+data/fs131/iv1/probes/p2.lean:22:4: error: No goals to be solved
+case a
+z : ℂ
+a b : ℚ
+ha : z.re = ↑a
+hb : z.im = ↑b
+⊢ 2 * ↑b = ↑b + ↑b
+

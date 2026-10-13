@@ -1,0 +1,21 @@
+tip 70c524e46c9f6825234e78393011ce829ec481e0 against the gated commit c2f4e4f546c93f833d9c04a692d138a9a897cbc1, 2026-10-13T21:26:32Z
+paths that differ, by top directory:
+     78 data
+      2 plans
+paths that differ outside plans/ and data/: 0
+git diff --stat over Proofs Proofs.lean scripts tools ARCHITECTURE.md lakefile.toml lean-toolchain lake-manifest.json CLAUDE.md LEAN.md LEDGER.md:
+(empty above = none)
+sorry (narrow) lines: 0
+tracked files modified: 0
+main (b937f33d1cf5cb3a53fca1055f731b46e9d1588f) is an ancestor of the tip: yes
+tip against main under Proofs Proofs.lean scripts tools ARCHITECTURE.md:
+ ARCHITECTURE.md                                    |  51 ++-
+ Proofs.lean                                        |   3 +
+ Proofs/HadwigerNelson/Arith/QuadraticPrime.lean    | 463 +++++++++++++++++++++
+ Proofs/HadwigerNelson/Arith/UpperHalf.lean         | 443 ++++++++++++++++++++
+ .../HadwigerNelson/Instances/UpperHalfValues.lean  | 216 ++++++++++
+ scripts/Assumptions.lean                           |   8 +-
+ scripts/Axioms.lean                                |  67 +++
+ scripts/assumptions-ledger.txt                     |  12 +-
+ scripts/vacuity-baseline.txt                       |   2 +-
+ 9 files changed, 1241 insertions(+), 24 deletions(-)

@@ -1,0 +1,5 @@
+  Plane.AeColouring: 19 named constants in the first dump, 19 in the second
+  Plane.FalconerReduction: 34 named constants in the first dump, 34 in the second
+  Plane.LebesgueNumber: 34 named constants in the first dump, 34 in the second
+statements: PASS: no statement and no definition changed — 87 named constants compared in 3 module(s)
+exit=0

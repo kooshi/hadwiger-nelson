@@ -1,0 +1,122 @@
+## MODULE Proofs.HadwigerNelson.Arith.UpperHalf constants=56
+@@ THM HadwigerNelson.SpectralChain.StablePrime.localRing._proof_2 INTERNAL
+TYPE 3381873323 sha256=59d59a99f2eb8ec3c1aa5d1314c2086d377babd35d6058889e81e469bd610fd3 len=3924 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.4135567759._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+@@ THM HadwigerNelson.SpectralChain.StablePrime.localRing._proof_1 INTERNAL
+TYPE 721216511 sha256=76bf351ed56626cdbc3bd103256cca42c2a8d88ad2b16d2f093cbae79c8e3216 len=1506 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.4135567759._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+@@ THM HadwigerNelson.UpperHalf.exists_hom_levelTarget
+TYPE 3831841363 sha256=6c511b99826fcf32e99f62ed3864970a43d4a776c343729b2c60c9adb17019ea len=649176 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.1958512074._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+@@ THM HadwigerNelson.UpperHalf.residue_div
+TYPE 2220225868 sha256=1989d4eda990c088e64a0ad29f2c80ab14c19bc49b110c3c7340260ca0101d2d len=1046664 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.3945233608._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+@@ THM HadwigerNelson.UpperHalf.conjO_mem_iff
+TYPE 3211120009 sha256=eaac25ed0223ee7aa4d24fdb8a590ce8b3bda528a76f5efab0c48434459acca4 len=38188 forall {F : Subfield.{0} Real Real.instDivisionRing} (P : HadwigerNelson.SpectralChain.StablePrime F) {a : NumberField.RingOfIntegers.{0} (Subtype.{1} Complex (
+@@ THM HadwigerNelson.UpperHalf.colorable_two_planeOver_of_ramified
+TYPE 3613086241 sha256=3d38b5a96462c7f6a2f82ed668f52732d59adc724e6ddc032a9c474b670a6d25 len=31736 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.3846001522._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+@@ DEF HadwigerNelson.UpperHalf.colorable_planeOver_of_finitePlane.match_1_1 INTERNAL
+TYPE 3209755860 sha256=2032d8b5ea0c5b93c03b94785eed02226d11f30cf0f222b6a396cd463fd63cdd len=1540 forall (F : Subfield.{0} Real Real.instDivisionRing) {p : Nat} (motive : (Nonempty.{1} (SimpleGraph.Hom.{0, 0} (Set.Elem.{0} Complex (HadwigerNelson.planeOver F
+VALUE 572605168 sha256=84f2f40364ae1c6d88679d63c8577f9f1ad3ab3ccdf971132674f8d7932e2f58 len=2672 fun (F : Subfield.{0} Real Real.instDivisionRing) {p : Nat} (motive : (Nonempty.{1} (SimpleGraph.Hom.{0, 0} (Set.Elem.{0} Complex (HadwigerNelson.planeOver F)) 
+@@ THM HadwigerNelson.UpperHalf.heightOne_asIdeal
+TYPE 2181960869 sha256=e8f76e9c329d474a92dd40155e827f4dfa0cfec6aa8fc73c090902e3d9ea247d len=3928 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.1052162212._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+@@ THM HadwigerNelson.SpectralChain.StablePrime.residue._proof_5 INTERNAL
+TYPE 1089537707 sha256=c6c9f1c518f9ad4bbf17df706969bd384732e1570151a197fe7753b43bc7d2a7 len=18957 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.340119221._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Real
+@@ THM HadwigerNelson.UpperHalf.mem_localRing
+TYPE 3581930833 sha256=1bbb0842f15c85ba991f4cdf2294a06b6f387d4c33527a54efeba83ee3088c08 len=21272 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.3968823850._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+@@ THM HadwigerNelson.UpperHalf.inv_natCast_mem_unitRingOver_iff_forall_stablePrime
+TYPE 3334527818 sha256=c382aca625ec8d2f6cbb37994ba26fbe48a77121ac7b55ede367760867e0f549 len=16936 forall (F : Subfield.{0} Real Real.instDivisionRing) [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.93927814._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Real 
+@@ THM HadwigerNelson.UpperHalf.isUnit_mk_pow
+TYPE 1548032312 sha256=6689c3d3d2d1f7cd50ec726ce87e0876ce7cb90767c3b414eb531ea606e0c466 len=383916 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.2800355464._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+@@ DEF HadwigerNelson.UpperHalf.nonempty_hom_levelTarget_one.match_1_1 INTERNAL
+TYPE 2884893908 sha256=d867b7fe576f87d69e79787028428915c8aafabb7f24133d781d7875c8ced440 len=2577918 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.3733379409._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+VALUE 4234675020 sha256=f325e435999d36aebcce4cdcd7a91b1033b902c2084f5b94beed5d73fc87bf93 len=4505526 fun {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.3733379409._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Real (
+@@ DEF HadwigerNelson.SpectralChain.StablePrime.localRing
+TYPE 2236608232 sha256=9c234511e47e086fd731d14ba95fee5f20579a3e90b6c91c06d9e1133f290be3 len=992 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.4135567759._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+VALUE 474930887 sha256=aed3702208a00088217db1e016b4095f6ef9d94d84c2bc0a5dcc88308dfb042b len=3019 fun {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.4135567759._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Real (
+@@ THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_levelTarget
+TYPE 3006435856 sha256=005307bd79742899823d2f5eb20e253204b609f680269ed84e47258b9b6653c9 len=23189 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.3230293407._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+@@ THM HadwigerNelson.UpperHalf.exists_stablePrime_of_valuationSubring
+TYPE 2975914889 sha256=2914600b624b51f105adbcfc46a453bf3396c04f1426796cd6f8e0821490d4a5 len=18718 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.769288109._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Real
+@@ THM _private.Proofs.HadwigerNelson.Arith.UpperHalf.0.HadwigerNelson.UpperHalf.exists_I_integer INTERNAL
+TYPE 4052752047 sha256=d7df37a8ce9819d0c4a4aa6761fc1af7a2cbc3c3964071e661f4fa52374c4a53 len=33302 forall {F : Subfield.{0} Real Real.instDivisionRing}, Exists.{1} (NumberField.RingOfIntegers.{0} (Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0
+@@ THM HadwigerNelson.UpperHalf.residue_algebraMap
+TYPE 4009784773 sha256=5d7bfc5df1f4e8474fb4977cd121f079122c2e632d0406d944d55638d5bbceec len=570792 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.27872166._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Real 
+@@ THM _private.Proofs.HadwigerNelson.Arith.UpperHalf.0.HadwigerNelson.UpperHalf.exists_I_integer._simp_1_2 INTERNAL
+TYPE 3324589697 sha256=70dd8e738b568ac456fbec3c878b0e1affca02ba9c95aa5ad7bddccf514b6d21 len=719 forall {S : Type.{u_3}} {M : outParam.{succ (succ u_4)} Type.{u_4}} {inst._@.Mathlib.Algebra.Group.Submonoid.Defs.829301677._hygCtx._hyg.19 : One.{u_4} M} {inst
+@@ THM _private.Proofs.HadwigerNelson.Arith.UpperHalf.0.HadwigerNelson.UpperHalf.conj_mem_nonunits_iff INTERNAL
+TYPE 1460163153 sha256=309627e0801fdd13413e63a7d4c17fbfbd539d32878c6ee61b0da3fcfb38e1ca len=43016 forall {F : Subfield.{0} Real Real.instDivisionRing} (A : ValuationSubring.{0} (Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subfiel
+@@ THM HadwigerNelson.UpperHalf.chromaticNumber_eq_localBound_of_chain
+TYPE 12360969 sha256=c7642c6d8669e4831ec5a96ce018ecf319c89a3a3dbffa85962a7c5a22bf7b89 len=4101 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.2622816336._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+@@ THM HadwigerNelson.UpperHalf.nonempty_hom_finitePlane
+TYPE 3129263452 sha256=4b1b93812cce3e4414e0e529e1571e29eb5465cf9b574292bc3ec12483cc04af len=4671 forall (F : Subfield.{0} Real Real.instDivisionRing) [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.3771273490._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+@@ THM HadwigerNelson.UpperHalf.nonempty_hom_levelTarget_one
+TYPE 2023256981 sha256=6a769a2313c92f37c20b57c5e0e76120cb4f3baa182f806be7baca49f3972ab8 len=23127 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.3733379409._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+@@ DEF _private.Proofs.HadwigerNelson.Arith.UpperHalf.0.HadwigerNelson.UpperHalf.exists_centre.match_1_1 INTERNAL
+TYPE 1412623044 sha256=615b465403f7371a374fb9c1112ebea7d5696ba730a8b3d98a7bdb34d62dedcd len=54674 forall {K : Type.{u_1}} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.271021162._hygCtx._hyg.10 : Field.{u_1} K] (A : ValuationSubring.{u_1} K inst._@.Proofs.H
+VALUE 1213349382 sha256=f0f76280371755dcb6a155c437e9ce51b0cce00af8bb2d9546781188e5ce4cd6 len=95289 fun {K : Type.{u_1}} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.271021162._hygCtx._hyg.10 : Field.{u_1} K] (A : ValuationSubring.{u_1} K inst._@.Proofs.Hadw
+@@ THM _private.Proofs.HadwigerNelson.Arith.UpperHalf.0.HadwigerNelson.UpperHalf.integer_mem_valuationSubring INTERNAL
+TYPE 111213616 sha256=b3126fa79cd7cc8629e1b85ca8f4053ea2a2f9e58ec43b5f4802f0b4f17cf815 len=829 forall {K : Type.{u_1}} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.2505784715._hygCtx._hyg.10 : Field.{u_1} K] (A : ValuationSubring.{u_1} K inst._@.Proofs.
+@@ DEF HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_unitQuadrance.match_1_1 INTERNAL
+TYPE 3066991937 sha256=56199ec849d098e943ebce01f151162223205b18242fded91ded1cdfe92329fb len=34644 forall (F : Subfield.{0} Real Real.instDivisionRing) {𝔭 : Ideal.{0} (NumberField.RingOfIntegers.{0} (Subtype.{1} Real (fun (x : Real) => Membership.mem.{0, 0} R
+VALUE 4278986568 sha256=c0dea5c8434ab7661fcb8326563b4366ad345cb01b374b114a2cb42413f9a291 len=59577 fun (F : Subfield.{0} Real Real.instDivisionRing) {𝔭 : Ideal.{0} (NumberField.RingOfIntegers.{0} (Subtype.{1} Real (fun (x : Real) => Membership.mem.{0, 0} Real
+@@ THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_finitePlane
+TYPE 69121723 sha256=f5c11c7e6cd9476f8b931b089be8a59efd1807aa22f01b8f46d25ac279589a7e len=4727 forall (F : Subfield.{0} Real Real.instDivisionRing) [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.3134397193._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+@@ DEF HadwigerNelson.SpectralChain.StablePrime.heightOne
+TYPE 2404753400 sha256=f01712f862b766321598c55996cec805aa7e3eac7ca3fa3964136872cabf553a len=1574 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.1507823542._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+VALUE 4237285221 sha256=041d6eabef99bd7628b91340f81c61e587d629a4072795037ab4559594c643dd len=1828 fun {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.1507823542._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Real (
+@@ THM HadwigerNelson.SpectralChain.StablePrime.residue._proof_2 INTERNAL
+TYPE 2151089485 sha256=92f41bba341a48bf190b7d5a240463ccb35bc73ac4baaba6bf963c0787c6ef3d len=346 SubsemiringClass.{0, 0} (Subfield.{0} Complex (Field.toDivisionRing.{0} Complex Complex.instField)) Complex (NonAssocRing.toNonAssocSemiring.{0} Complex (NonAss
+@@ THM HadwigerNelson.SpectralChain.StablePrime.residue._proof_3 INTERNAL
+TYPE 488745535 sha256=5f3355f113bfc33e8f031b46be778ec62a8855ed9555fa78512e44955346bac8 len=3314 forall {F : Subfield.{0} Real Real.instDivisionRing}, SubsemiringClass.{0, 0} (ValuationSubring.{0} (Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0
+@@ THM HadwigerNelson.SpectralChain.levelTarget.eq_1 INTERNAL
+TYPE 4270880689 sha256=06241df05de7919499b741350fe6580df8833d786708cbd54a3097c6ba8782ee len=905529 forall {F : Subfield.{0} Real Real.instDivisionRing} (P : HadwigerNelson.SpectralChain.StablePrime F) (m : Nat), Eq.{1} (SimpleGraph.{0} (HasQuotient.Quotient.{
+@@ THM HadwigerNelson.SpectralChain.StablePrime.residue._proof_1 INTERNAL
+TYPE 1797064522 sha256=8a4daf8f3b75f8b697fcea59fef6c75de6f5a39dd37c54f3aa0d97bf091fa5f6 len=3876 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.340119221._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Real
+@@ THM HadwigerNelson.SpectralChain.StablePrime.residue._proof_4 INTERNAL
+TYPE 3972680521 sha256=9fbbce9dd013f2a2e1812e7acec8e06d490b22a43286e16420a4d68c3f403923 len=15662 forall {F : Subfield.{0} Real Real.instDivisionRing}, IsScalarTower.{0, 0, 0} (NumberField.RingOfIntegers.{0} (Subtype.{1} Complex (fun (x : Complex) => Members
+@@ THM HadwigerNelson.UpperHalf.exists_hom_levelTarget._proof_1_1 INTERNAL
+TYPE 2673951271 sha256=b5729065b1099240a62256e37aba679b4d9ac039c39bb0cae66beda5e61890ba len=154 forall {m : Nat}, (LE.le.{0} Nat instLENat (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)) m) -> (Eq.{1} Nat m (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0))) -> False
+@@ DEF HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_finitePlane.match_1_1 INTERNAL
+TYPE 3209755860 sha256=783df941771aed70ba8f24067901e0b850020e9f183d1534ddd1dfe62294f771 len=1542 forall (F : Subfield.{0} Real Real.instDivisionRing) {p : Nat} (motive : (Nonempty.{1} (SimpleGraph.Hom.{0, 0} (Set.Elem.{0} Complex (HadwigerNelson.planeOver F
+VALUE 572605168 sha256=8267e91a3af20d0f8b9491e18aee29dd237007ff1f3a52bc838252e5590cb45e len=2676 fun (F : Subfield.{0} Real Real.instDivisionRing) {p : Nat} (motive : (Nonempty.{1} (SimpleGraph.Hom.{0, 0} (Set.Elem.{0} Complex (HadwigerNelson.planeOver F)) 
+@@ THM HadwigerNelson.UpperHalf.conjO_conjO
+TYPE 496452786 sha256=d0d4dbdd834a213e245dc1c4440007d8c25c12d724e34c802d702c3661d41f3e len=26184 forall {F : Subfield.{0} Real Real.instDivisionRing} (a : NumberField.RingOfIntegers.{0} (Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Comple
+@@ THM HadwigerNelson.UpperHalf.coe_conjO
+TYPE 1007597260 sha256=000064127038666bfc21c2a54a666d87c0839a9ade16656877ec3baea0c3c28d len=24812 forall {F : Subfield.{0} Real Real.instDivisionRing} (a : NumberField.RingOfIntegers.{0} (Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Comple
+@@ THM HadwigerNelson.UpperHalf.coe_mem_nonunits_localRing_iff
+TYPE 973837649 sha256=f10b1712f760881e0a52d0a05b774211f2487877d74495d95913cedb0ef1b152 len=22344 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.1513901059._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+@@ THM HadwigerNelson.UpperHalf.colorable_planeOver_of_finitePlane
+TYPE 1353231579 sha256=b00dce08100653f777761975cbb4a404f2734a790a7b8688f94a761b12480147 len=4713 forall (F : Subfield.{0} Real Real.instDivisionRing) [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.663548186._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Real
+@@ THM HadwigerNelson.UpperHalf.residue_conj
+TYPE 1031869440 sha256=6cb65dbd8802e1ecf4cc3b4bbfa9e35a907a5491374a99dbe411d61f746dd0cf len=1008609 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.3605108186._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+@@ THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_unitQuadrance
+TYPE 3939182070 sha256=99e2b34868ce7153152cb27d7084e2fd6ece81ff562d7c9e3424423b6e9a03be len=10171 forall (F : Subfield.{0} Real Real.instDivisionRing) [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.1802269091._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+@@ THM HadwigerNelson.SpectralChain.StablePrime.residue._proof_6 INTERNAL
+TYPE 414906283 sha256=ff11db3ed0f42d163710539fd8fb85842feeb558fd1310f14b6142c6da797319 len=15420 forall {F : Subfield.{0} Real Real.instDivisionRing} (P : HadwigerNelson.SpectralChain.StablePrime F) (m : Nat), Ideal.IsTwoSided.{0} (NumberField.RingOfInteger
+@@ THM HadwigerNelson.UpperHalf.localRing_ne_top
+TYPE 335272810 sha256=c9e2b7f868d85ba739dc029e49fdfa1c23447307929194329e48b31568e4b3ca len=2169 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.1688560719._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+@@ THM HadwigerNelson.SpectralChain.StablePrime.heightOne._proof_1 INTERNAL
+TYPE 1529383563 sha256=91272c09386a062d2d02f06bd9c38f7254c8b6e1360d17d5c9128216f527e01b len=2317 forall {F : Subfield.{0} Real Real.instDivisionRing} (P : HadwigerNelson.SpectralChain.StablePrime F), Ideal.IsPrime.{0} (NumberField.RingOfIntegers.{0} (Subtyp
+@@ THM HadwigerNelson.UpperHalf.conj_mem_localRing
+TYPE 2494388576 sha256=11c9e697401856f81d302914c28cf2f01c72904bd10352cbe18a39a5d4654f10 len=16168 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.139485497._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Real
+@@ THM HadwigerNelson.UpperHalf.nonempty_hom_unitQuadrance
+TYPE 2829520420 sha256=952ef25745fa85427517288780edae0b0d95524a127e76158e9bf77b5f4fe96c len=10115 forall (F : Subfield.{0} Real Real.instDivisionRing) [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.1551323790._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+@@ THM HadwigerNelson.UpperHalf.two_mem_of_conj_trivial
+TYPE 202525925 sha256=3d79ad54d6767c82dfa43d22a2ec5e9d31c6cd34f9d908d09cb8fdca55063897 len=47524 forall {F : Subfield.{0} Real Real.instDivisionRing} (P : HadwigerNelson.SpectralChain.StablePrime F), (forall (x : NumberField.RingOfIntegers.{0} (Subtype.{1} 
+@@ THM _private.Proofs.HadwigerNelson.Arith.UpperHalf.0.HadwigerNelson.UpperHalf.exists_I_integer._simp_1_1 INTERNAL
+TYPE 1927452300 sha256=4e9ec655ca6215818f17eb7048dae811ce96c1adf03fc4ae60bf1535bb10887e len=722 forall {S : Type.{u_3}} {M : outParam.{succ (succ u_4)} Type.{u_4}} {inst._@.Mathlib.Algebra.Group.Submonoid.Defs.327041392._hygCtx._hyg.19 : Zero.{u_4} M} {ins
+@@ DEF HadwigerNelson.SpectralChain.StablePrime.residue
+TYPE 1287758244 sha256=d022f4d9d1133b347ae34ad47031af13619e6b5221f125d6eaf8e4fd43461e26 len=80603 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.340119221._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Real
+VALUE 4002023646 sha256=8b21ce1c07bf734f6fef7df415da16e1dcca45232462e98d5ae077f40afe2301 len=59782 fun {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.340119221._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Real (f
+@@ DEF HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_levelTarget.match_1_1 INTERNAL
+TYPE 1813754954 sha256=d76277bdd5fbcdc49bc3fb710297e8b66f566fbd87ee48a22202b1398be3ed2b len=2572702 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.3230293407._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+VALUE 2594263166 sha256=4b5709812bb744b1c37d11c302357f07ba98f3c8bc43f95bca095e895e035e21 len=4496410 fun {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.3230293407._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Real (
+@@ THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_localBound
+TYPE 343856509 sha256=5beace95b8b98f84dc1a8327f899aae0c260e0c0aa1d9b0a013373a3294bc8c7 len=759 forall (F : Subfield.{0} Real Real.instDivisionRing) [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.1204738543._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+@@ THM _private.Proofs.HadwigerNelson.Arith.UpperHalf.0.HadwigerNelson.UpperHalf.exists_centre INTERNAL
+TYPE 3722662729 sha256=ef15ec350ae4a252ea2159ed88e81ff78317eb1b951af73df41751b3507d0584 len=6702 forall {K : Type.{u_1}} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.271021162._hygCtx._hyg.10 : Field.{u_1} K] [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf
+@@ THM _private.Proofs.HadwigerNelson.Arith.UpperHalf.0.HadwigerNelson.UpperHalf.residue_mul_conj_eq_one INTERNAL
+TYPE 1288324045 sha256=92d08e5e53a3c7f22e2631813a38b8cc6e006c1dc66cb29c8c7b4f8d5bc7bf64 len=1226328 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.2676810927._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+@@ THM HadwigerNelson.SpectralChain.StablePrime.heightOne._proof_2 INTERNAL
+TYPE 67749879 sha256=6c299e70d14ef12bb4b6e574ccc9ccec251a791274300cb6d31daf7d0860299b len=11919 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.1507823542._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+@@ THM HadwigerNelson.UpperHalf.mem_localRing_of_mul_conj_eq_one
+TYPE 590101093 sha256=ec9f13ef0d6b7237277bd1b372963649849c6c1bbb4c67591e114d34c0ecff81 len=20241 forall {F : Subfield.{0} Real Real.instDivisionRing} [inst._@.Proofs.HadwigerNelson.Arith.UpperHalf.1326613564._hygCtx._hyg.6 : NumberField.{0} (Subtype.{1} Rea
+@@ THM _private.Proofs.HadwigerNelson.Arith.UpperHalf.0.HadwigerNelson.UpperHalf.sub_mul_conj_eq_one INTERNAL
+TYPE 3563500907 sha256=64e6c079d9183f181475e726f90ae3867964fc0b2057ceb88e7467c45466cbd5 len=25888 forall {F : Subfield.{0} Real Real.instDivisionRing} {x : Set.Elem.{0} Complex (HadwigerNelson.planeOver F)} {y : Set.Elem.{0} Complex (HadwigerNelson.planeOver

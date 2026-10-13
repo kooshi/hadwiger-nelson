@@ -1,0 +1,4 @@
+UpperHalf.lean: 30 public + 6 private = 36 rows (the footer's own count 36)
+QuadraticPrime.lean: 13 public + 8 private = 21 rows (the footer's own count 21)
+UpperHalfValues.lean: 9 public + 2 private = 11 rows (the footer's own count 11)
+PASS: every typed theorem and definition of the three files is on the standard three

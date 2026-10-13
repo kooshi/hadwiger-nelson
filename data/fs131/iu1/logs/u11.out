@@ -1,0 +1,38 @@
+@RingOfIntegers.isIntegral_coe : ∀ {K : Type u_1} [inst : Field K] (x : 𝓞 K), IsIntegral ℤ ((algebraMap (𝓞 K) K) x)
+@IsIntegral.tower_top : ∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A]
+  [inst_2 : Ring B] [inst_3 : Algebra R A] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] {x : B},
+  IsIntegral R x → IsIntegral A x
+@IsIntegrallyClosed.isIntegral_iff : ∀ {R : Type u_1} [inst : CommRing R] {K : Type u_2} [inst_1 : CommRing K]
+  [inst_2 : Algebra R K] [ifr : IsFractionRing R K] [IsIntegrallyClosed R] {x : K},
+  IsIntegral R x ↔ ∃ y, (algebraMap R K) y = x
+@Ideal.comap_isPrime : ∀ {R : Type u_1} {S : Type u_2} {F : Type u_3} [inst : Semiring R] [inst_1 : Semiring S]
+  [inst_2 : FunLike F R S] (f : F) (K : Ideal S) [inst_3 : RingHomClass F R S] [H : K.IsPrime],
+  (Ideal.comap f K).IsPrime
+@Ideal.IsPrime.isMaximal : ∀ {R : Type u_1} [inst : CommRing R] [Ring.DimensionLEOne R] {p : Ideal R},
+  p.IsPrime → p ≠ ⊥ → p.IsMaximal
+IsFractionRing.div_surjective : ∀ (A : Type u_1) [inst : CommRing A] {K : Type u_2} [inst_1 : Field K]
+  [inst_2 : Algebra A K] [IsFractionRing A K] (z : K),
+  ∃ x, ∃ y ∈ nonZeroDivisors A, (algebraMap A K) x / (algebraMap A K) y = z
+@ValuationSubring.eq_of_le_of_ne_top : ∀ {K : Type u_1} [inst : Field K] (A : ValuationSubring K) [Ring.KrullDimLE 1 ↥A]
+  {B : ValuationSubring K}, A ≤ B → B ≠ ⊤ → A = B
+@ValuationSubring.mem_nonunits_iff_or : ∀ {K : Type u_1} [inst : Field K] (A : ValuationSubring K) {x : K},
+  x ∈ A.nonunits ↔ x = 0 ∨ x⁻¹ ∉ A
+@ValuationSubring.mem_nonunits_iff_exists_mem_maximalIdeal : ∀ {K : Type u_1} [inst : Field K] {A : ValuationSubring K}
+  {a : K}, a ∈ A.nonunits ↔ ∃ (ha : a ∈ A), ⟨a, ha⟩ ∈ IsLocalRing.maximalIdeal ↥A
+@RingHom.codRestrict : {R : Type u_1} →
+  {S : Type u_2} →
+    [inst : NonAssocSemiring R] →
+      [inst_1 : NonAssocSemiring S] →
+        {σS : Type u_3} →
+          [inst_2 : SetLike σS S] →
+            [inst_3 : SubsemiringClass σS S] → (f : R →+* S) → (s : σS) → (∀ (x : R), f x ∈ s) → R →+* ↥s
+UnitRing.inv_natCast_mem_unitRingOver_iff : ∀ (F : Subfield ℝ) {n : ℕ},
+  n ≠ 0 →
+    ((↑n)⁻¹ ∈ UnitRing.unitRingOver F ↔
+      ∀ (B : ValuationSubring ↥(UnitRing.planeOverSubfield F)), (∀ z ∈ B, (conjOn ⋯) z ∈ B) → ↑n ∉ B.nonunits)
+@Ideal.mem_comap : ∀ {R : Type u_1} {S : Type u_2} {F : Type u_3} [inst : Semiring R] [inst_1 : Semiring S]
+  [inst_2 : FunLike F R S] {f : F} {K : Ideal S} [inst_3 : RingHomClass F R S] {x : R}, x ∈ Ideal.comap f K ↔ f x ∈ K
+@map_inv₀ : ∀ {G₀ : Type u_1} {G₀' : Type u_2} {F : Type u_3} [inst : GroupWithZero G₀] [inst_1 : GroupWithZero G₀']
+  [inst_2 : FunLike F G₀ G₀'] [MonoidWithZeroHomClass F G₀ G₀'] (f : F) (a : G₀), f a⁻¹ = (f a)⁻¹
+@RingOfIntegers.coe_eq_zero_iff : ∀ {K : Type u_1} [inst : Field K] {x : 𝓞 K}, (algebraMap (𝓞 K) K) x = 0 ↔ x = 0
+@ValuationSubring.mem_top : ∀ {K : Type u_1} [inst : Field K] (x : K), x ∈ ⊤

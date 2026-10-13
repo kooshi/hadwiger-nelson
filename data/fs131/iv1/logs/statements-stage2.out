@@ -1,0 +1,20 @@
+Skeleton: lean exit 0; errors: 0; sorry warnings: 3
+data/fs131/iv1/stmt/Skeleton.raw.txt (4631548 bytes, sha256 d7233550a1d717ed38632decdc6f76ab7a9d7288d2bb36cfc2378905fa6bb4e1) -> data/fs131/iv1/stmt/Skeleton.txt (3861 bytes), 12 stored terms
+Candidate: lean exit 0; errors: 0; sorry warnings: 0
+data/fs131/iv1/stmt/Candidate.raw.txt (4639475 bytes, sha256 6b6bef0d750cca1175e1aef973198a89ce7dca4ef662fcaf65a8e1944e3e08a3) -> data/fs131/iv1/stmt/Candidate.txt (6370 bytes), 19 stored terms
+scope: instances (1 file(s))
+compared: 9 named constants of the first dump (9 theorems, 0 definitions; kinds, types, and values of definitions); 9 declarations written at 223241b0a, each found in the first dump
+internal (not compared): 2 before, 9 after
+new named constants in the second dump: 0
+new private declarations in the second dump (counted among the internal): 2
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.exists_intCast_eq_of_isIntegral
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.exists_intCast_eq_re_of_isIntegral
+`example`s compared as text: 3 at 223241b0a (3 in UpperHalfValues.lean)
+PASS: no statement and no definition changed
+`example`s compared as text: 3 at 223241b0a (3 in UpperHalfValues.lean)
+MISSING  THM HadwigerNelson.UpperHalf.numberField_bot: in the first dump, not in the second
+KIND     HadwigerNelson.UpperHalf.two_le_chromaticNumber_planeOver: THM -> DEF
+TYPE     THM HadwigerNelson.UpperHalf.exists_stablePrime_rat: the stored statement differs
+EXAMPLE  Proofs/HadwigerNelson/Instances/UpperHalfValues.lean: example 2 of 3 at 223241b0a differs in the working file
+CONTROL: 4 of 4 planted faults reported — the check can fail
+statements.sh: real exit 0, control exit 0

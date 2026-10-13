@@ -1,0 +1,46 @@
+'HadwigerNelson.UpperHalf.nonempty_hom_unitQuadrance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.nonempty_hom_finitePlane' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_unitQuadrance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_finitePlane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UpperHalf.colorable_planeOver_of_finitePlane' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralChain.StablePrime.heightOne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.heightOne_asIdeal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralChain.StablePrime.localRing' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.mem_localRing' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.coe_conjO' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.conjO_conjO' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.conjO_mem_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.conj_mem_localRing' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.mem_localRing_of_mul_conj_eq_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.isUnit_mk_pow' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SpectralChain.StablePrime.residue' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.residue_algebraMap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.residue_div' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.residue_conj' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.coe_mem_nonunits_localRing_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.localRing_ne_top' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.exists_hom_levelTarget' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.nonempty_hom_levelTarget_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_levelTarget' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_localBound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UpperHalf.chromaticNumber_eq_localBound_of_chain' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UpperHalf.two_mem_of_conj_trivial' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.colorable_two_planeOver_of_ramified' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UpperHalf.exists_stablePrime_of_valuationSubring' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UpperHalf.inv_natCast_mem_unitRingOver_iff_forall_stablePrime' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

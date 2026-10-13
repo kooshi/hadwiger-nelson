@@ -1,0 +1,220 @@
+slot: admitted lu1-checks-given: mem 6 GiB (hard cap), cpus 0,1
+HadwigerNelson.UpperHalf.nonempty_hom_unitQuadrance : ∀ (F : Subfield ℝ) [NumberField ↥F] {𝔭 : Ideal (𝓞 ↥F)},
+  HadwigerNelson.Arith.IsUsablePrime 𝔭 →
+    Nonempty
+      (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ) →g
+        HadwigerNelson.unitQuadrance (𝓞 ↥F ⧸ 𝔭))
+HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_unitQuadrance : ∀ (F : Subfield ℝ) [NumberField ↥F]
+  {𝔭 : Ideal (𝓞 ↥F)},
+  HadwigerNelson.Arith.IsUsablePrime 𝔭 →
+    (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber ≤
+      (HadwigerNelson.unitQuadrance (𝓞 ↥F ⧸ 𝔭)).chromaticNumber
+HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_finitePlane : ∀ (F : Subfield ℝ) [NumberField ↥F]
+  {𝔭 : Ideal (𝓞 ↥F)},
+  HadwigerNelson.Arith.IsUsablePrime 𝔭 →
+    ∀ {p : ℕ},
+      Nat.Prime p →
+        Nat.card (𝓞 ↥F ⧸ 𝔭) = p →
+          (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber ≤
+            (HadwigerNelson.finitePlane p).chromaticNumber
+@HadwigerNelson.UpperHalf.exists_hom_levelTarget : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (P : HadwigerNelson.SpectralChain.StablePrime F) {m : ℕ},
+  1 ≤ m →
+    ∃ h,
+      ∀ (x y : ↑(HadwigerNelson.planeOver F)) (hd : ⟨↑x, ⋯⟩ - ⟨↑y, ⋯⟩ ∈ P.localRing),
+        h x - h y = (P.residue m) ⟨⟨↑x, ⋯⟩ - ⟨↑y, ⋯⟩, hd⟩
+@HadwigerNelson.UpperHalf.nonempty_hom_levelTarget_one : ∀ {F : Subfield ℝ} [NumberField ↥F]
+  (P : HadwigerNelson.SpectralChain.StablePrime F),
+  Nonempty
+    (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ) →g
+      HadwigerNelson.SpectralChain.levelTarget P 1)
+@HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_levelTarget : ∀ {F : Subfield ℝ} [NumberField ↥F]
+  (P : HadwigerNelson.SpectralChain.StablePrime F) {m : ℕ},
+  1 ≤ m →
+    (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber ≤
+      (HadwigerNelson.SpectralChain.levelTarget P m).chromaticNumber
+HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_localBound : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber ≤
+    HadwigerNelson.SpectralChain.localBound F
+@HadwigerNelson.UpperHalf.chromaticNumber_eq_localBound_of_chain : ∀ {F : Subfield ℝ} [NumberField ↥F]
+  [NumberField.IsTotallyReal ↥F],
+  HadwigerNelson.SpectralChain.BochnerHerglotz ↥(HadwigerNelson.SpectralChain.unitRing F) →
+    HadwigerNelson.SpectralChain.InvariantMeasureOnClosed F →
+      ∀ (I : HadwigerNelson.SpectralChain.Interface F),
+        I.Count →
+          I.APlusOfR88 →
+            I.RU →
+              (HadwigerNelson.SpectralChain.TCA F → I.PE2 ∧ I.EFPlus) →
+                (5 ≤ HadwigerNelson.SpectralChain.localBound F → HadwigerNelson.SpectralChain.TCA F) →
+                  (HadwigerNelson.SpectralChain.localBound F ≤ 4 →
+                      HadwigerNelson.SpectralChain.localBound F ≤
+                        (SimpleGraph.induce (HadwigerNelson.planeOver F)
+                            (HadwigerNelson.unitDistance ℂ)).chromaticNumber) →
+                    HadwigerNelson.SpectralChain.localBound F ≤ 5 →
+                      (SimpleGraph.induce (HadwigerNelson.planeOver F)
+                            (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+                        HadwigerNelson.SpectralChain.localBound F
+@HadwigerNelson.SpectralChain.chromaticNumber_eq_localBound : ∀ {F : Subfield ℝ} [NumberField ↥F]
+  [NumberField.IsTotallyReal ↥F],
+  HadwigerNelson.SpectralChain.BochnerHerglotz ↥(HadwigerNelson.SpectralChain.unitRing F) →
+    HadwigerNelson.SpectralChain.InvariantMeasureOnClosed F →
+      ∀ (I : HadwigerNelson.SpectralChain.Interface F),
+        I.Count →
+          I.APlusOfR88 →
+            I.RU →
+              (HadwigerNelson.SpectralChain.TCA F → I.PE2 ∧ I.EFPlus) →
+                (5 ≤ HadwigerNelson.SpectralChain.localBound F → HadwigerNelson.SpectralChain.TCA F) →
+                  (HadwigerNelson.SpectralChain.localBound F ≤ 4 →
+                      HadwigerNelson.SpectralChain.localBound F ≤
+                        (SimpleGraph.induce (HadwigerNelson.planeOver F)
+                            (HadwigerNelson.unitDistance ℂ)).chromaticNumber) →
+                    (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber ≤
+                        HadwigerNelson.SpectralChain.localBound F →
+                      HadwigerNelson.SpectralChain.localBound F ≤ 5 →
+                        (SimpleGraph.induce (HadwigerNelson.planeOver F)
+                              (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+                          HadwigerNelson.SpectralChain.localBound F
+@HadwigerNelson.UpperHalf.two_mem_of_conj_trivial : ∀ {F : Subfield ℝ} (P : HadwigerNelson.SpectralChain.StablePrime F),
+  (∀ (x : 𝓞 ↥(HadwigerNelson.SpectralChain.fieldI F)), (HadwigerNelson.SpectralChain.conjO F) x - x ∈ P.P) → 2 ∈ P.P
+@HadwigerNelson.UpperHalf.colorable_two_planeOver_of_ramified : ∀ {F : Subfield ℝ} [NumberField ↥F]
+  (P : HadwigerNelson.SpectralChain.StablePrime F),
+  (∀ (x : 𝓞 ↥(HadwigerNelson.SpectralChain.fieldI F)), (HadwigerNelson.SpectralChain.conjO F) x - x ∈ P.P) →
+    (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).Colorable 2
+@HadwigerNelson.UpperHalf.exists_stablePrime_of_valuationSubring : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (A : ValuationSubring ↥(HadwigerNelson.SpectralChain.fieldI F)),
+  A ≠ ⊤ → (∀ z ∈ A, (HadwigerNelson.conjOn ⋯) z ∈ A) → ∃ P, P.localRing = A
+HadwigerNelson.UpperHalf.inv_natCast_mem_unitRingOver_iff_forall_stablePrime : ∀ (F : Subfield ℝ) [NumberField ↥F]
+  {n : ℕ},
+  n ≠ 0 →
+    ((↑n)⁻¹ ∈ HadwigerNelson.UnitRing.unitRingOver F ↔ ∀ (P : HadwigerNelson.SpectralChain.StablePrime F), ↑n ∉ P.P)
+@HadwigerNelson.QuadraticPrime.numberField_fieldOfRadicands : ∀ {D : Set ℕ},
+  D.Finite → NumberField ↥(HadwigerNelson.SquareClass.fieldOfRadicands D)
+@HadwigerNelson.QuadraticPrime.exists_maximal_card_of_padic : ∀ {K : Type u_1} [inst : Field K] {p : ℕ}
+  [inst_1 : Fact (Nat.Prime p)] (ι : K →+* ℚ_[p]), ∃ 𝔭, 𝔭.IsMaximal ∧ Nat.card (𝓞 K ⧸ 𝔭) = p
+HadwigerNelson.QuadraticPrime.exists_maximal_card_eq : ∀ (D : Set ℕ) {p : ℕ},
+  Nat.Prime p →
+    p ≠ 2 →
+      (∀ d ∈ D, ↑d ≠ 0 ∧ IsSquare ↑d) →
+        ∃ 𝔭, 𝔭.IsMaximal ∧ Nat.card (𝓞 ↥(HadwigerNelson.SquareClass.fieldOfRadicands D) ⧸ 𝔭) = p
+@HadwigerNelson.QuadraticPrime.exists_maximal_card_eq_sqrt : ∀ {d : ℕ},
+  Squarefree d →
+    1 < d →
+      ∀ {p : ℕ},
+        Nat.Prime p →
+          p ≠ 2 →
+            ∀ {s : ℕ},
+              ↑d = ↑s ^ 2 →
+                ↑s ≠ 0 → ∃ 𝔭, 𝔭.IsMaximal ∧ Nat.card (𝓞 ↥(HadwigerNelson.SquareClass.fieldOfRadicands {d}) ⧸ 𝔭) = p
+@HadwigerNelson.QuadraticPrime.nonempty_ringHom_zmod_of_ramified_sqrt : ∀ {K : Type u_1} [inst : Field K] {p : ℕ}
+  [inst_1 : Fact (Nat.Prime p)],
+  p ≠ 2 →
+    ∀ (K₀ : Subfield K) (ι₀ : ↥K₀ →+* ℚ_[p]) {q : ℕ},
+      p ∣ q → ¬p ^ 2 ∣ q → ∀ {π : K}, π ^ 2 = ↑q → Subfield.closure (↑K₀ ∪ {π}) = ⊤ → Nonempty (𝓞 K →+* ZMod p)
+HadwigerNelson.QuadraticPrime.exists_maximal_card_eq_of_ramified : ∀ (D : Set ℕ) (q : ℕ) {p : ℕ},
+  Nat.Prime p →
+    p ≠ 2 →
+      (∀ d ∈ D, ↑d ≠ 0 ∧ IsSquare ↑d) →
+        p ∣ q →
+          ¬p ^ 2 ∣ q →
+            ∃ 𝔭, 𝔭.IsMaximal ∧ Nat.card (𝓞 ↥(HadwigerNelson.SquareClass.fieldOfRadicands (Insert.insert q D)) ⧸ 𝔭) = p
+HadwigerNelson.UpperHalf.colorable_planeOver_fieldOfRadicands : ∀ (D : Set ℕ) [Finite ↑D] {p : ℕ},
+  Nat.Prime p →
+    p % 4 = 3 →
+      (∀ d ∈ D, ↑d ≠ 0 ∧ IsSquare ↑d) →
+        ∀ {k : ℕ},
+          (HadwigerNelson.finitePlane p).Colorable k →
+            (SimpleGraph.induce (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands D))
+                  (HadwigerNelson.unitDistance ℂ)).Colorable
+              k
+HadwigerNelson.UpperHalf.chromaticNumber_planeOver_eleven : (SimpleGraph.induce
+      (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {11}))
+      (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+  4
+HadwigerNelson.UpperHalf.chromaticNumber_planeOver_sqrt167_le_eight : (SimpleGraph.induce
+      (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {167}))
+      (HadwigerNelson.unitDistance ℂ)).chromaticNumber ≤
+  8
+HadwigerNelson.UpperHalf.chromaticNumber_planeOver_sqrt47_le_five_of_prime : (SimpleGraph.induce
+      (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {47}))
+      (HadwigerNelson.unitDistance ℂ)).chromaticNumber ≤
+  5
+HadwigerNelson.UpperHalf.two_le_chromaticNumber_planeOver : ∀ (F : Subfield ℝ),
+  2 ≤ (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+HadwigerNelson.UpperHalf.exists_stablePrime_rat : ∃ P,
+  2 ∈ P.P ∧ ∀ (x : 𝓞 ↥(HadwigerNelson.SpectralChain.fieldI ⊥)), (HadwigerNelson.SpectralChain.conjO ⊥) x - x ∈ P.P
+HadwigerNelson.UpperHalf.chromaticNumber_planeOver_rat : (SimpleGraph.induce (HadwigerNelson.planeOver ⊥)
+      (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+  2
+'HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_unitQuadrance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_finitePlane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UpperHalf.exists_hom_levelTarget' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.nonempty_hom_levelTarget_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_localBound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UpperHalf.chromaticNumber_eq_localBound_of_chain' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UpperHalf.colorable_two_planeOver_of_ramified' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UpperHalf.exists_stablePrime_of_valuationSubring' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UpperHalf.inv_natCast_mem_unitRingOver_iff_forall_stablePrime' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.QuadraticPrime.exists_maximal_card_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.QuadraticPrime.exists_maximal_card_eq_sqrt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.QuadraticPrime.exists_maximal_card_eq_of_ramified' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UpperHalf.colorable_planeOver_fieldOfRadicands' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UpperHalf.chromaticNumber_planeOver_eleven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.chromaticNumber_planeOver_sqrt167_le_eight' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UpperHalf.chromaticNumber_planeOver_sqrt47_le_five_of_prime' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UpperHalf.exists_stablePrime_rat' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.chromaticNumber_planeOver_rat' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.four_le_chromaticNumber_planeOver_eleven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.finitePlane7_colorable_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.two_le_chromaticNumber_planeOver' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.colorable_two_unitDistance_induce_of_valuationSubring' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.four_le_chromaticNumber_planeOver_sqrt167' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.CayleyCert.colorable_finitePlane23_eight' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtFortySeven.chromaticNumber_planeOver_sqrt47_le_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.chromaticNumber_finitePlane11' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.exists_stablePrime_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.exists_conjO_sub_notMem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131LU1.stablePrime_rat_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131LU1.two_colour_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131LU1.two_mem_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131LU1.hom_rat_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131LU1.converse_rat_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131LU1.wall_rat_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131LU1.localBound_rat_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131LU1.two_le_localBound_rat' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131LU1.stablePrime_standing_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131LU1.hom_standing_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131LU1.one_standing_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131LU1.hram_fails_at_standingField' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131LU1.usablePrime_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131LU1.usable_card_mod_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131LU1.ramified_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131LU1.ramified_radicand_notMem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131LU1.ramified_radicand_ne_zero' depends on axioms: [propext]
+'FS131LU1.two_notMem_of_hD' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit=0
