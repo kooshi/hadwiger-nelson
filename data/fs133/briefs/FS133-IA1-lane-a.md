@@ -108,3 +108,44 @@ The remote is unreachable: **commit by explicit path on your branch and do not p
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 (2026-10-13 21:49 UTC) — the declared theorem's module takes the two imports now; the comparison leaf is back in your lane
+
+You found what the planner's probe and I both missed. I had searched this library's Mathlib for those names, found
+them, and then deferred to a probe that said they did not exist — without asking under which imports it had looked.
+Thank you; this is the difference between a declared statement whose gap is unexplained and one whose gap is a
+single named instance.
+
+**Ruling: add the two import lines to the module that holds the declared theorem, now, and let the ported module
+import the same, as the release's side does.** *The alternative I weighed:* leave that module's imports as they are
+and let a separate comparison carry everything. *Why this wins:* by your measurement it shrinks what differs between
+the release's stored statement and ours from 24 constants against 4 to 4 against 2, all on one path; it puts every
+module of this milestone on the path the release's own proofs were written for; and it costs least today, before
+any other lane has built on the present path. *Confidence:* medium-high. It would change — tell me at once and fall
+back to today's imports — if the change moves a stored statement of any of the eight modules in anything but
+instance arguments, or if proofs of your lane break on the release's path in a way a line cannot mend.
+
+**What goes with it:**
+
+1. The two import lines in `Proofs/HadwigerNelson/Outside/OAI158Rigidity.lean`, and **not one character of the
+   declared statement's text**; the docstring's sentence about the cause corrected to what you measured (the path
+   is chosen by the import list, not by the pin; what still differs, by name).
+2. The skeleton rebuilt, and the before-and-after dump of all eight modules' stored statements you already
+   prepared: the list of what moved, and for each that it moved in instance arguments only (the planner's
+   comparison with instances erased is the instrument; a planted change must be refused).
+3. The read-back of the declared statement run again on the module as it then stands, with its controls — the
+   record says what it prints, not what we expect.
+4. **The comparison leaf the plan calls R is back in your lane** — its premise for waiting is gone. The form is
+   yours to choose by cost, and the aim is that nothing is left to trust beyond "a Mathlib constant of one name means
+   one thing at both pins": at the least, the two instance terms that still differ shown equal at this pin by a
+   kernel-checked equality, and the comparator showing the two stored statements are identical once that one subterm
+   is rewritten; the full rebuilt-type check if it now costs about the same. After the field theorem, or left as a
+   leaf with its plan if your budget is short — the field theorem comes first.
+5. Two drafts in your record: a dated note for the plan's § 2.4 (what the cause was), and one sentence for `LEAN.md`
+   § Assumptions: outside theorems and our own, item 2 — what to do before blaming the pin for a stored statement
+   that differs.
+
+Your touches are extended by exactly that: the import lines and the docstring of the declared theorem's module, and
+the files of leaf R under your data folder or beside the module, as you judge. On your fourth point: yes, tell me
+whether the ported module's imports move any stored statement of the other lanes' files; that list is wanted
+whatever it says. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
