@@ -410,3 +410,113 @@ carrier. **One older hypothesis is made provable**: `hUpper` (stage 4).
 |---|---|---|---|
 | `./scripts/vacuity.sh` | 138 s | 0.59 GiB | 4.48 GiB |
 | `./scripts/vacuity.sh --self-test` (65 controls) | 138 s | 0.60 GiB | 4.50 GiB |
+
+## Stage 6 — SAVED (FS131-LU1): read aloud — each headline against its claim line and the dated lines
+
+*Read from the kernel's side: the statements below are as `#check` prints them from the built modules
+(`data/fs131/lu1/probes/checks-given.log`), not as the files print them. Throughout: "a real number field `F`" is
+`F : Subfield ℝ` with `[NumberField ↥F]` — a subfield of `ℝ` of finite degree over `ℚ`; its plane is `planeOver F ⊆ ℂ`,
+the points whose two coordinates lie in `F`; `χ` of it is `((unitDistance ℂ).induce (planeOver F)).chromaticNumber`,
+Mathlib's `SimpleGraph.chromaticNumber`, a value in `ℕ∞` — the least `n` with a proper `n`-colouring, `⊤` if none. The
+coordinator was sent the differences before the gate; they are accepted (the brief's Amendment 1) and are the claim
+list's dated line of 20:39 UTC.*
+
+### NF1-S1A — term for term
+
+> NF1-S1A: For a real number field `F` and `𝔭` with `Arith.IsUsablePrime 𝔭`: `χ(planeOver F) ≤ χ(unitQuadrance (𝓞 F ⧸ 𝔭))`; and `≤ χ(finitePlane p)` when `Nat.card (𝓞 F ⧸ 𝔭) = p` is prime.
+
+| the claim's clause | the kernel's statement | read |
+|---|---|---|
+| `χ(planeOver F) ≤ χ(unitQuadrance (𝓞 F ⧸ 𝔭))` | `UpperHalf.chromaticNumber_planeOver_le_unitQuadrance : ∀ (F : Subfield ℝ) [NumberField ↥F] {𝔭 : Ideal (𝓞 ↥F)}, Arith.IsUsablePrime 𝔭 → (induce (planeOver F) (unitDistance ℂ)).chromaticNumber ≤ (unitQuadrance (𝓞 ↥F ⧸ 𝔭)).chromaticNumber` | every clause; **no hypothesis Lean has that the claim lacks, none the claim has that Lean does not need** |
+| `≤ χ(finitePlane p)` when `Nat.card (𝓞 F ⧸ 𝔭) = p` is prime | `UpperHalf.chromaticNumber_planeOver_le_finitePlane : … → ∀ {p : ℕ}, Nat.Prime p → Nat.card (𝓞 ↥F ⧸ 𝔭) = p → … ≤ (finitePlane p).chromaticNumber` | every clause. The two hypotheses force `p ≡ 3 (mod 4)` (`FS131LU1.usable_card_mod_four`); the claim does not say so and need not |
+
+Beside them, with no claim line of their own and saying no more: the homomorphisms themselves
+(`nonempty_hom_unitQuadrance`, `nonempty_hom_finitePlane`: `Nonempty (… →g …)`, a homomorphism **into** the target)
+and the form the instances call (`colorable_planeOver_of_finitePlane`). The dated line ("both clauses follow in four
+lines from `Arith.placeHom_base` and `Arith.exists_hom_of_isPlaceHom`") is what the proofs read.
+
+### NF1-S1B — the claim's forms are corollaries; one hypothesis more in the wider form
+
+> NF1-S1B: For a real number field `F` and `P : SpectralChain.StablePrime F`: a graph homomorphism from the unit-distance graph on `planeOver F` into `SpectralChain.levelTarget P 1`; so `χ(planeOver F) ≤ SpectralChain.localBound F`. Converse half for row 105: a conjugation-stable valuation subring of `fieldI F` other than the field is the localization at a stable prime.
+
+| the claim's clause | the kernel's statement | read |
+|---|---|---|
+| a graph homomorphism … into `levelTarget P 1` | `UpperHalf.nonempty_hom_levelTarget_one : ∀ {F : Subfield ℝ} [NumberField ↥F] (P : StablePrime F), Nonempty (induce (planeOver F) (unitDistance ℂ) →g levelTarget P 1)` | term for term. **Into**: nothing here or in its proof is a surjection, and the module docstring says the target is every norm-one element of the quotient, not the image of the unit vectors |
+| (the dated line: every level `m ≥ 1`) | `UpperHalf.exists_hom_levelTarget : … (P : StablePrime F) {m : ℕ}, 1 ≤ m → ∃ h, ∀ (x y : ↑(planeOver F)) (hd : ⟨↑x, ⋯⟩ - ⟨↑y, ⋯⟩ ∈ P.localRing), h x - h y = (P.residue m) ⟨⟨↑x, ⋯⟩ - ⟨↑y, ⋯⟩, hd⟩`; `chromaticNumber_planeOver_le_levelTarget` | **Lean has `1 ≤ m`, which the claim (at `m = 1`) does not need to say**; at `m = 0` the statement is false. Wider than the claim by the level and by the formula, which names the map on each coset of `𝓞_P` and on nothing else: the homomorphism is not canonical (an additive constant per coset is chosen) |
+| so `χ(planeOver F) ≤ localBound F` | `UpperHalf.chromaticNumber_planeOver_le_localBound : ∀ (F : Subfield ℝ) [NumberField ↥F], (induce (planeOver F) (unitDistance ℂ)).chromaticNumber ≤ localBound F` | term for term. `localBound F` is an infimum in `ℕ∞` over the stable primes; with none it is `⊤` and the statement says nothing — its docstring says so |
+| a conjugation-stable valuation subring of `fieldI F` other than the field is the localization at a stable prime | `UpperHalf.exists_stablePrime_of_valuationSubring : … (A : ValuationSubring ↥(fieldI F)), A ≠ ⊤ → (∀ z ∈ A, (conjOn ⋯) z ∈ A) → ∃ P, P.localRing = A` | "other than the field" is `A ≠ ⊤`; "conjugation-stable" is "conjugation maps `A` into `A`" (an involution: then onto); "the localization" is `P.localRing`, Mathlib's `valuationSubringAtPrime`, whose elements are the `a / s` with `s ∉ P` (`mem_localRing`). Existence only: uniqueness of `P` is true and not stated |
+
+`[NumberField ↥F]` is the claim's "real number field" in every line. With `conj_mem_localRing` and
+`localRing_ne_top` the correspondence runs both ways.
+
+### NF1-S2 — the first sentence in two forms, one wider than the dated line; the second as corrected
+
+> NF1-S2: For squarefree `d > 1`, `F = ℚ(√d) ⊂ ℝ` with its `NumberField` instance, and an odd prime `p` with `d ≡ s² ≢ 0 (mod p)`: a maximal ideal `𝔭` of `𝓞 F` with `Nat.card (𝓞 F ⧸ 𝔭) = p`. The same for a multiquadratic field at a prime where every radicand is a square, a ramified radicand included (11 in `K`).
+
+| the claim's clause | the kernel's statement | read |
+|---|---|---|
+| the first sentence, as claimed | `QuadraticPrime.exists_maximal_card_eq_sqrt : ∀ {d : ℕ}, Squarefree d → 1 < d → ∀ {p : ℕ}, Nat.Prime p → p ≠ 2 → ∀ {s : ℕ}, ↑d = ↑s ^ 2 → ↑s ≠ 0 → ∃ 𝔭, 𝔭.IsMaximal ∧ Nat.card (𝓞 ↥(fieldOfRadicands {d}) ⧸ 𝔭) = p` | clause for clause; the casts are into `ZMod p`. **Two hypotheses the claim has and Lean does not need**: `Squarefree d` and `1 < d` are carried and unused (the docstring says so). "With its `NumberField` instance" is not a hypothesis of the statement — `𝓞` is defined for any field — and is a theorem and an instance of their own (`numberField_fieldOfRadicands`, `instNumberFieldFieldOfRadicands`) |
+| (the dated line: neither squarefree nor `d > 1`; "any finite set of such radicands") | `QuadraticPrime.exists_maximal_card_eq : ∀ (D : Set ℕ) {p : ℕ}, Nat.Prime p → p ≠ 2 → (∀ d ∈ D, ↑d ≠ 0 ∧ IsSquare ↑d) → ∃ 𝔭, 𝔭.IsMaximal ∧ Nat.card (𝓞 ↥(fieldOfRadicands D) ⧸ 𝔭) = p` | **says more than the dated line: any set `D`, finite or not.** True as stated; for infinite `D` the ring is all algebraic integers of an infinite extension, no Dedekind domain, and no consumer reads it there (the instances take `[Finite ↑D]`) |
+| the second sentence, false as written, standing with the dated line's hypothesis | `QuadraticPrime.exists_maximal_card_eq_of_ramified : ∀ (D : Set ℕ) (q : ℕ) {p : ℕ}, Nat.Prime p → p ≠ 2 → (∀ d ∈ D, ↑d ≠ 0 ∧ IsSquare ↑d) → p ∣ q → ¬p ^ 2 ∣ q → ∃ 𝔭, 𝔭.IsMaximal ∧ Nat.card (𝓞 ↥(fieldOfRadicands (insert q D)) ⧸ 𝔭) = p` | "the other radicands nonzero squares modulo `p`, at most one radicand divisible by `p`, and `p²` not dividing it": one radicand divisible is this theorem, none is the line above. "11 in `K`" is its fourth `example`, `ℚ(√3, √11)` at 11. Its hypotheses can hold together only at `q ∉ D` (stage 2's note) |
+
+Under these, as theorems of their own and with no claim line: `exists_maximal_card_of_padic` and
+`exists_ringHom_zmod_of_padic` (any field that embeds in `ℚ_p`, **`p = 2` included**), `isMaximal_ker_and_card`,
+`exists_padicInt_sq_eq`, `nonempty_ringHom_padic`, `nonempty_ringHom_zmod_of_ramified_sqrt`.
+
+### NF1-MODULE — the four values, and the kernel theorem that holds each other half
+
+| the claim's value | the kernel's statement | upper half | lower half, by name, with its axioms as `#print axioms` gives them |
+|---|---|---|---|
+| `χ(ℚ(√11)²) = 4` | `UpperHalf.chromaticNumber_planeOver_eleven : (induce (planeOver (fieldOfRadicands {11})) (unitDistance ℂ)).chromaticNumber = 4` | this module, the prime above 7 (`11 ≡ 2²`), with the older `finitePlane7_colorable_four` | **`four_le_chromaticNumber_planeOver_eleven`** (`Instances/SqrtEleven`, row 73; a 204-point witness) — `[propext, Classical.choice, Quot.sound]` |
+| `χ(ℚ²) = 2` | `UpperHalf.chromaticNumber_planeOver_rat : (induce (planeOver ⊥) (unitDistance ℂ)).chromaticNumber = 2` (`⊥ : Subfield ℝ` is the image of `ℚ`) | `colorable_two_planeOver_of_ramified` at `exists_stablePrime_rat`, over the older `colorable_two_unitDistance_induce_of_valuationSubring` | **`UpperHalf.two_le_chromaticNumber_planeOver`** (this module: `0` and `1` are a unit apart) — the standard three. The map said the kernel held this half; it did not by name |
+| `χ(ℚ(√167)²) ≤ 8` | `UpperHalf.chromaticNumber_planeOver_sqrt167_le_eight : … ≤ 8` | the prime above 23 (`167 ≡ 11²`), with the older `CayleyCert.colorable_finitePlane23_eight` | no equality is claimed. The held lower bound is `four_le_chromaticNumber_planeOver_sqrt167` (row 119), the standard three: `4 ≤ χ ≤ 8` |
+| `χ(ℚ(√47)²) ≤ 5`, the control | `UpperHalf.chromaticNumber_planeOver_sqrt47_le_five_of_prime : … ≤ 5` | the prime above 11 (`47 ≡ 5²`), with the older `chromaticNumber_finitePlane11` | no equality is claimed. **The same statement** as `SqrtFortySeven.chromaticNumber_planeOver_sqrt47_le_five` (its field `F47` is an abbreviation of `fieldOfRadicands {47}`): an equation between the two proofs typechecks by `rfl` (`checks.lean`, its last `example`) — two proofs of one proposition |
+
+Each of the eight older theorems named above prints `[propext, Classical.choice, Quot.sound]` (the pass's
+`checks-final.out`). The general statement they are instances of is `colorable_planeOver_fieldOfRadicands`.
+
+### NF1-NC — clause by clause, with the dated line of 20:39 UTC
+
+- "any lower bound for a plane over a field" — **the module holds one**: `two_le_chromaticNumber_planeOver`, `2 ≤ χ`
+  for the plane over every subfield of `ℝ`. The dated line now reads the clause as "no lower bound above two". The
+  equality at `ℚ(√11)` does state `4 ≤ χ`; that half is the older theorem's, as the claim's last clause says.
+- "anything above level one of a tower" — true at usable primes (`𝓞 F ⧸ 𝔭` only); at stable primes the dated line's
+  widening stands, every level `m ≥ 1`.
+- "`[S2]` at a prime where some radicand is not a square" — not stated: `hD` asks every member of `D` to be a nonzero
+  square, and the dated line's counterexample is refused (`FS131LU1.two_notMem_of_hD`).
+- "that an instance's value is new mathematics" — no docstring says so: the instances file's header ("**Not
+  claimed:** that any of these values is new mathematics"), `χ(ℚ(√11)²) = 4` ("The upper bound is `[Fischer1990]`'s;
+  the kernel proof of both halves is what is here"), `χ(ℚ²) = 2` ("Woodall's value").
+- "that the upper half alone gives any exact value" — each of the two equalities is `le_antisymm` of this module's
+  upper half and a lower half named above.
+
+### Theorems of the module with no claim line
+
+`two_mem_of_conj_trivial` and `colorable_two_planeOver_of_ramified` (row 63's two-colour theorem at a real number
+field; needed for `χ(ℚ²) = 2`); `inv_natCast_mem_unitRingOver_iff_forall_stablePrime` (row 105 read over the stable
+primes — the one reader of the converse half); `chromaticNumber_eq_localBound_of_chain` (below); the API of the three
+definitions (`mem_localRing`, `residue_algebraMap`, `residue_div`, `residue_conj`, `isUnit_mk_pow`, …).
+
+### The brief's four sentences (§ Why this job)
+
+- "a plane over a real number field maps homomorphically into each of its residue targets, so it needs no more
+  colours than they do" — `nonempty_hom_unitQuadrance`, `exists_hom_levelTarget` and the three inequalities. Into.
+- "the bound by the local bound for every real number field" — `chromaticNumber_planeOver_le_localBound`, the
+  standard three.
+- "the five-colour chain's headline with one of its named hypotheses discharged" —
+  `UpperHalf.chromaticNumber_eq_localBound_of_chain`. As the kernel prints the two, the new theorem is
+  `SpectralChain.chromaticNumber_eq_localBound` with exactly one binder gone, `(induce (planeOver F) (unitDistance
+  ℂ)).chromaticNumber ≤ localBound F`, and every other binder the same in the same order. **Two things a reader
+  should be told**: it is a new theorem beside the headline — the headline's own statement is unchanged and still
+  takes `hUpper`; and "on the standard three axioms" is true of its `#print axioms` and it remains conditional on nine
+  declared hypotheses (stage 4), none of which this module touches.
+- "the plane over the field of the square root of 11 needs exactly four colours; the rational plane exactly two" —
+  the two equalities, each on the standard three, each with its lower half named above.
+
+### What the read-aloud changed in the module's docstrings
+
+Five edits, no statement (stage 2 lists them): the three the brief names, and two found here — the wrong file name
+and "exhibited" in `Arith/UpperHalf`'s header, and "Not claimed: anything at `p = 2`" in `Arith/QuadraticPrime`'s.
+
+**One word for the drafts**: the planner's draft for `LEDGER.md` row 57 says "a homomorphism of the plane onto every
+level target". It is **into**; this record's draft says so, and the coordinator files that wording.
