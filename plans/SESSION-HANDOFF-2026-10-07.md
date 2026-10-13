@@ -91,9 +91,30 @@ this session):
    first layer. A long job with saved stages; a successor can take any stage from its record
    `plans/FS131-KN3-chain-plan.md` on the branch.
 
-**RUNNING AT THIS HOUR: FS131-KN2, FS131-KC1, FS131-KN3 — three planners, three trees (`fs131-wnf`, `fs131-wkc`,
-`fs131-wch`). Next free slots: implementers on the first plan back (briefs to write from the plan; iteration at
-`--mem 8`, builds one at a time); FS-133's planner; the Clerk for the owed filing (the list is in item 656).**
+**RUNNING AT 2026-10-13 19:23 UTC: FS131-LC1 — A LANDING IN FLIGHT (the measurable-number module, tree `fs131-wkc`; items
+663, 667); FS131-IT1 (`Arith/TorsionExtraction.lean`: its ten leaves proved, building; tree `fs131-wr2`; items 675,
+677); FS131-IC1 (the eight leaves of `Arith/ThreeColourCharacter.lean`, tree `fs131-wc1`; item 678).** **The residue
+module is COMPLETE on branch `fs131-wnf` at `d83fdd8c7` — three files, no `sorry`, built, 52 public declarations on
+the standard three, `χ(ℚ(√11)²) = 4` and `χ(ℚ²) = 2` among them — NOT GATED (items 670, 674, 676, 678).** **Next
+free slots, in order: the residue module's landing, as soon as the corollary's landing is merged** (brief on the
+pattern of `data/fs131/briefs/scripts/mk-fs131-lc1.py`, in the tree `fs131-wnf`; it merges `main` first; its drafts
+are gathered in `plans/FS131-IV1-implementation.md` § Drafts for the landing on that branch; the assumptions step
+must lose the named hypothesis the module proves — predicted counts in item 678; two docstrings and two stale
+comments reworded); the last two modules of the three-and-four-colours line (`mk-fs131-i4.py R|D <tree>`, cut at
+`34d9113b2`; retired trees with builds left: `fs132-wi3`, `fs124-wk1`); the Clerk for the owed filing once no
+landing is in flight; the chain's successor planner; a deriver on the chain's two questions; a small planner's job
+stating row 52's two values; FS-133's planner; FS131-KE1.**
+**Until the landing is back: nothing on
+`main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`, `RUNNING.md`, and no
+`CLAUDE.md` filing.** At its green line: check its receipts (`data/fs131/lc1/gate/`), fast-forward `main` to its
+gated commit (merge `main` into its branch first if `main` moved in plans and data only), **then tell Kooshi it is
+held — a corollary of two outside results, formalized here**, then the Clerk files its drafts with the owed list
+(items 640, 643, 644, 651, 653, 655, 659 (a), and the direction change of 636). **FS131-KN3 and FS131-KC1 are done**
+(items 661, 663): the chain's architecture is on branch `fs131-wch`, unmerged, with seventeen draft claim lists
+under its `data/fs131/kn3/`; its next job is a successor planner (the domain pass on its three definitions, the
+first build, then the entropy base), **behind rank 2 in the queue**. Next free slots, in order: two implementers on
+the residue module when FS131-KN2 hands back; the chain's successor planner; one deriver on the chain's two
+questions (item 661 (c)); FS-133's planner; FS131-KE1.
 
 **REPORTS TO KOOSHI ONLY AT A GATE, A DECISION OF HIS OR HIS CHECK-IN (2026-10-13 16:44 UTC; his word W3, FS-131 inventory item 650): no per-event
 reports; report when something is through the gate, when a decision is genuinely his, or when he checks in. His
