@@ -11,3 +11,7 @@ MEASURE syntax-LebesgueNumber mem-cap=6G cpus=2 exit=0 wall=3.8s peak=0.51 GiB m
 MEASURE syntax-FalconerReduction mem-cap=6G cpus=2 exit=0 wall=5.7s peak=0.57 GiB max-rss=3.14 GiB :: lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false -Dlinter.missingDocs=true Proofs/HadwigerNelson/Plane/FalconerReduction.lean
 MEASURE statements-after mem-cap=8G cpus=2 exit=0 wall=2.8s peak=0.52 GiB max-rss=4.40 GiB :: lake env lean data/fs131/lc1/StatementDump.lean
 MEASURE checks-after mem-cap=8G cpus=2 exit=0 wall=3.7s peak=0.56 GiB max-rss=4.43 GiB :: lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false data/fs131/lc1/checks.lean
+MEASURE axioms-probe mem-cap=14G cpus=4 exit=0 wall=8.1s peak=1.07 GiB max-rss=4.91 GiB :: ./scripts/axioms.sh
+MEASURE axioms-selftest-red mem-cap=14G cpus=4 exit=1 wall=171.0s peak=1.28 GiB max-rss=5.06 GiB :: ./scripts/axioms.sh --self-test
+MEASURE axioms-selftest-probe mem-cap=14G cpus=4 exit=0 wall=169.8s peak=1.23 GiB max-rss=5.02 GiB :: ./scripts/axioms.sh --self-test
+MEASURE dupnames-probe mem-cap=14G cpus=8 exit=0 wall=4.0s peak=0.52 GiB max-rss=4.41 GiB :: ./scripts/dupnames.sh

@@ -144,3 +144,72 @@ Lake rebuilds what is not yet built, so the redo is the batch in flight and the 
 
 **After the build**: the checks file elaborates with no message (`probes/checks-after.log`; against the print made
 before the edits it differs by the two terms added since, nothing else).
+
+## Stage 3 — SAVED (FS131-LC1): the registrations
+
+**What the landing brings, as the kernel lists it** (`data/fs131/lc1/decls.lean`; `probes/decls-before.log`): 41
+constants in `Plane/LebesgueNumber`; **34 declarations a person typed — 31 theorems and 3 definitions**
+(`HasDensityOneAt`, `Plane.AeColouring.core`, `Plane.chiLebesgue`); the other seven are the elaborator's
+(`HasDensityOneAt.eq_1` and six `match_1_n`).
+
+**Thirty-four records in `scripts/Axioms.lean`, each under the banner its axioms put it under** — generated from the
+kernel's list (`data/fs131/lc1/records.py DECLS --block`; the text is `data/fs131/lc1/audit-block.txt`):
+- **three under IMPORTED**, after FS124-I1's lines, headed "FS131-KC1: the measurable number's records resting on
+  `proper_to_borel_weak`": `Plane.colorable_iff_exists_nullMeasurable_proper`,
+  `Plane.chromaticNumber_plane_eq_chiLebesgue`, `Plane.chromaticNumber_euclidean_plane_eq_chiLebesgue`. The section's
+  prose now reads "with six and twelve" and names where the three come from;
+- **thirty-one under CLEAN**, one block above the PURCHASED banner, headed "FS131-LC1": 28 theorems and the 3
+  definitions.
+
+**Where the count differs from the planner's and why**: the planner counted fourteen (eleven clean, three imported) —
+the headline rows of its table; the brief asks for every declaration a person typed, as the last three landings filed
+theirs, so the audit gains 34 records. The three imported are the planner's three. `records.py … --unfiled`:
+"declarations the landing brings: 34 (of 41 constants in 1 modules); with one line: 34; unfiled: 0; doubled: 0"; the
+script holds 7,454 `#print axioms` lines (`main`'s 7,420 + 34), no name twice.
+
+**The audit on the registered tree** (`./scripts/axioms.sh`; `probes/axioms-probe.log`): exit 0 —
+
+> audited: 7454 records — 7395 clean on the standard axioms, 28 axiom-free, 26 imported (resting on a declared outside theorem), 5 declared purchase(s)
+
+Against `main` (7364 clean, 28 axiom-free, 23 imported, 7,420 records): clean +31, imported +3, records +34;
+axiom-free and purchases do not move. The digest reads `CLAUDE.md` § Trust ledger as stale ("7364 clean → 7395, 23
+imported → 26"), as it must until refiled (draft 1).
+
+**Each filed on what it rests on, read from the audit's own output** (`data/fs131/lc1/records.py`, after
+`tools/fs124_l1_records.py`, whose table of the twenty-three earlier imported records it imports;
+`probes/records-probe.txt`): "records: PASS" — "landing records on exactly the three: 31", "landing records on the
+three and proper_to_borel_weak: 3"; each of the eleven theorems the front page will say need no outside theorem
+"under CLEAN: [Classical.choice, Quot.sound, propext]"; over the whole log "records carrying kloosterman_bound: 8
+(filed: 8); of the landing's: 0", "no_proper_five_coloring: 6 (filed: 6); of the landing's: 0", "proper_to_borel_weak:
+12 (filed: 12); of the landing's: 3"; "records under IMPORTED 26; carrying two imports 0; carrying sorryAx 0".
+**Sixteen plants, in memory, one at a time, every one fired** (`probes/records-plant-probe.txt`): a record dropped;
+doubled; `sorryAx` under one; a clean record on the transfer; on the five-colour theorem; one filed under IMPORTED;
+one under PURCHASED; a native auxiliary; **the headline filed on the wrong import**; **the colour-by-colour form
+printed under CLEAN**; the Euclidean form carrying both imports; **`chiM0_eq_chiLebesgue` — the claim that needs no
+import — resting on the transfer**; the formalized lemma printed under IMPORTED; a theorem with no record; an earlier
+record on the transfer stripped of it; the module absent from the dump.
+
+**The audit's self-test, and its two controls that read the library's state**
+(`probes/axioms-selftest-red.log`, then `probes/axioms-selftest-probe.log`). With the controls as on `main`: **exit 1,
+red at 2 of 23, the two the file's own header names** — `baseline` ("expected COUNTS imported=23") and
+`imported_declared` ("expected COUNTS imported=24"): the landing files twenty-six. The other 21 behaved. By the file's
+rule ("a later record resting on a declared import, moves them again — … `imported` by its records, the `old`
+digests' texts follow"; FS124-L1's edit is the pattern) `scripts/axioms-controls.txt` moves in four places and its
+header's sentence: 23 → 26, 24 → 27, and the two `old` digest texts. After: exit 0, "axioms self-test: OK — every
+planted fault fired, and every partner passed" (23 of 23). The file is outside the brief's first list of touches and
+inside its Amendment 1.
+
+**`ARCHITECTURE.md`**: § Trust, the row of `Outside.OAI158.proper_to_borel_weak` gains the three names and reads
+"twelve records" (the planner's draft 7); § 3, two rows lose the slip the docstrings lost — `Plane/FalconerReduction`
+("`chiM` (the Borel number `χ_B(ℝ²)` … Falconer's `χ_m`, with Lebesgue-measurable classes, is
+`Plane/LebesgueNumber`'s `chiLebesgue`, and `chiLebesgue ≤ chiM`)", for "`chiM` (Falconer's `χ_m`)") and
+`Plane/AeColouring` ("a Borel-measurable `ℂ → Fin k`"). The module's own row is the planner's.
+`tools/check_architecture.py`: exit 0, "RESULT: PASS" (`probes/arch-probe.out`).
+
+**The doubled-name check on the built tree** (`./scripts/dupnames.sh`; `probes/dupnames-probe.log`): exit 0,
+"dupnames: OK — no name is declared by two modules (24 generated on demand, listed above)".
+
+| step, this machine | wall | peak (charged) | max-rss |
+|---|---|---|---|
+| `./scripts/axioms.sh` (7,454 records) | 8.1 s | 1.07 GiB | 4.91 GiB |
+| `./scripts/axioms.sh --self-test` (23 controls) | 170 s | 1.23 GiB | 5.02 GiB |
