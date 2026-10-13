@@ -1,0 +1,3 @@
+box     class A m%4 in [3]: odd-N 460  even-N 0  failures 656  first (3, -9, 0, 0, -9, 18)
+residue class A m%4 in [3]: cases 20480  failures 12288  first (3, 0, 1, 1, 0, 2)
+plant=A failures=12944
