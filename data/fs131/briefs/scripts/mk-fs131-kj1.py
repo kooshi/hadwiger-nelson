@@ -1,11 +1,11 @@
 exec(open("/home/kooshi/source/lean-dir/data/fs131/briefs/scripts/mkbrief.py").read())
 # FS131-KJ1: the joining module of the three-and-four-colours line — merge the four proved modules and main, state the
 # statements the implementers named, check the attribution against the paper, prove the ten joining leaves.
-# Usage: mk-fs131-kj1.py <inventory item of FS131-IN1's hand-back> [--dry]
+# Usage: mk-fs131-kj1.py <inventory item of FS131-IN1's hand-back> <inventory item of the residue module's landing> [--dry]
 import os,subprocess,sys
 def sh(*a): return subprocess.run(list(a),capture_output=True,text=True).stdout.strip()
 now=sh("date","-u","+%Y-%m-%d %H:%M UTC")
-IN1=int(sys.argv[1]); DRY="--dry" in sys.argv
+IN1=int(sys.argv[1]); LU1=int(sys.argv[2]); DRY="--dry" in sys.argv
 JOB="FS131-KJ1"; TREE="fs131-wrc"; BR="fs131-wj1"; W=WT+TREE+"/"
 assert os.path.isdir(W+".lake/build")
 assert sh("git","-C",ROOT,"branch","--list",BR)=="" or DRY, "branch name taken"
@@ -19,7 +19,7 @@ C="data/fs131/claims-NF4.md"; RQ="data/fs131/REQUEST-2026-10-13.md"
 TH=Q(C,"NF4-THEOREM: ","§ The theorem (the asking lane's wording, rank 2)")
 NC=Q(C,"NF4-NC: ","§ Not claimed")
 DL="\n".join(Q(C,"- 2026-10-13",None,k) for k in ("Three statements widened","NF4-S9 is untrue as written","Two statements added","Two leaves of the criterion's module widened","A third statement of the criterion's module widened"))
-ITEMS="\n".join(item(n) for n in (679,685,689,IN1))
+ITEMS="\n".join(item(n) for n in (679,685,689,IN1,LU1))
 P4=WT+"fs131-wr2/plans/FS131-KN4-three-four-colours-plan.md"
 P5=WT+"fs131-wr2/plans/FS131-KN5-three-four-colours-passes.md"
 JT=WT+"fs131-wr2/data/fs131/kn4/lean/ThreeFourColours.lean"
@@ -32,7 +32,7 @@ b=f'''# Brief {JOB} — join the line: four proved modules and the residue modul
 brief: {JOB}
   identity: de Bruijn, the planner — your agent file (`.claude/agents/debruijn.md`) is your identity and your lane's workflow; in this job you also prove what you state, and § Why this job says why one mind does both here
   role: the kernel lane's planner and prover for the joining module of the three-and-four-colours line — merge the four modules proved today on four branches with `main`, state the few statements their implementers named and could not add, read the line's attributions against the paper they credit, and prove the ten leaves of the joining module, so that the line is ready for its landing
-  launch: now, in the tree the last implementer of this line handed back; a planner works on another milestone in `fs133-wk1`; no landing is in flight
+  launch: now, in the tree the last implementer of this line handed back; an implementer works on another milestone in `fs133-wk1` and a deriver writes under `plans/` on `main`; no landing is in flight
   mission: § Why this job
   statements: § The statements
   acceptance: § Done means
@@ -41,7 +41,7 @@ brief: {JOB}
   channel: message the coordinator ("main") by SendMessage **at once** for a statement defect in any of the five modules (untrue as written, vacuous, narrower than it need be — say which), for an attribution the paper does not bear out, for a merge that does not come out clean, and with one line when the joined tree builds; the report goes to `data/fs131/reports/{JOB}.md` and to "main" as your hand-back
   standing rules: {STAND}
   record: `plans/FS131-KJ1-joining-module.md` (new, on branch `{BR}`)
-  touches: in the worktree `/home/kooshi/source/lean-dir/.claude/worktrees/{TREE}` on a **new branch `{BR}`** that you cut from its present head (`{T["fs131-wrc"]}`, the last implementer's): the merges named in § Done means; `Proofs/HadwigerNelson/Arith/ThreeFourColours.lean` (new, from the planned text) and any new module you decide an added statement needs, with their lines in the build's lists; in the four proved modules of this line (`Arith/ThreeColourCharacter`, `Arith/TorsionExtraction`, `Arith/ThreeColourCriterion`, `Arith/DyadicQuadratic`) **docstrings, and added statements with their proofs — no existing statement changes** (a defect goes to me first); `plans/FS131-KJ1-joining-module.md`; `data/fs131/kj1/`; `data/fs131/reports/{JOB}.md`. Nothing on `main`; nothing in another tree; nothing under `scripts/` (the audit's lists are the landing's)
+  touches: in the worktree `/home/kooshi/source/lean-dir/.claude/worktrees/{TREE}` on a **new branch `{BR}`** that you cut from its present head (`{T["fs131-wrc"]}`, the last implementer's): the merges named in § Done means; `Proofs/HadwigerNelson/Arith/ThreeFourColours.lean` (new, from the planned text) and any new module you decide an added statement needs, with their lines in the build's lists; added statements with their proofs in `Proofs/HadwigerNelson/Instances/UpperHalfValues.lean` if a corollary of § Done means item 6 belongs there; in the four proved modules of this line (`Arith/ThreeColourCharacter`, `Arith/TorsionExtraction`, `Arith/ThreeColourCriterion`, `Arith/DyadicQuadratic`) **docstrings, and added statements with their proofs — no existing statement changes** (a defect goes to me first); `plans/FS131-KJ1-joining-module.md`; `data/fs131/kj1/`; `data/fs131/reports/{JOB}.md`. Nothing on `main`; nothing in another tree; nothing under `scripts/` (the audit's lists are the landing's)
   budget: about 400k by the harness's count, as guidance; you cannot read that count, so save a stage (a commit on your branch) after the readback, after the merge builds, after the statements are added, after the attribution reading, and after every two or three leaves; hand back at a saved stage rather than start a step you cannot finish — the leaves left are then one implementer's job from your record
 
 Hello. Today four implementers proved the four modules of one line — three and four colours over real number
@@ -70,8 +70,8 @@ it today:
 {TH}
 {NC}
 {DL}
-What the four implementers handed back, with what each named for this job, as I logged it (their words are in
-quotation marks inside each item; the rulings are mine):
+What the four implementers and the residue module's landing handed back, with what each named for this job, as I
+logged it (their words are in quotation marks inside each item; the rulings are mine):
 
 {ITEMS}
 Where the rest is: the planned joining text `{JT}` (ten leaves, J.1–J.10 in the first planner's numbering); the first
@@ -101,16 +101,23 @@ one thing "the join should see": one fact under two names at two levels); the fo
    credits Fischer — the value two off the class 3 modulo 4, the value three at 3 and 7 modulo 12, four colours at
    3 modulo 8, and anything else you find — the theorem number and page of the paper, and whether what the paper has
    is the value only, or also the map our proof uses. Correct the docstrings to say exactly that. A credit the paper
-   does not bear out comes to me at once.
+   does not bear out comes to me at once. The last item above names one citation in an older file
+   (`Proofs/HadwigerNelson/Instances/SqrtEleven.lean`): read it against the paper too, and **draft** its correction —
+   that file is not yours to edit (a docstring edit there recompiles most of the library; it waits for one sweep).
 5. **The ten leaves** proved, and no `sorry` in the five modules; one build with the linters' verdict read from its
    log; the axioms of every public declaration printed from the built tree, with a planted `sorry` watched showing —
    and **the list of headline statements that rest on the declared outside theorem that is Weil's bound**, in plain
    words, because the report to Kooshi must say which of the theorem's clauses stand on the standard three axioms and
    which on that import.
-6. **Drafts for the landing and the filing**, in your record: the records the landing registers (clean, and
+6. **The corollaries the last item above names as one application each** (a local bound of two gives the value two;
+   the two values of the ledger's row 52 at the prime 11; row 105's reading at one field): state and prove each where
+   it belongs — a new small instances file is fine, an added statement in a landed file is fine, no existing
+   statement changes — or say what it needs if it is not one application. Upper bounds are prior art; say so in the
+   docstrings as the residue module does.
+7. **Drafts for the landing and the filing**, in your record: the records the landing registers (clean, and
    imported); the architecture rows; the ledger's rows this line regrades (73, 82, 99) with what each rests on; the
    front page's sentence; the "not claimed" lines as the docstrings now have them.
-7. The report in the standing rules' form.
+8. The report in the standing rules' form.
 
 ## What is yours to decide
 
@@ -121,7 +128,7 @@ did that today and I accepted it on the condition that its record says what was 
 compared (inventory item 694).
 
 Not yours: the gate and the audit's lists (the landing's); any existing statement of the four modules; the residue
-module; the two further values of the ledger's row 52 (a separate small job); the five-colour chain.
+module's existing statements; the five-colour chain.
 
 ## The machine
 
@@ -132,7 +139,8 @@ seconds and 3.6 GB; a build with only small modules stale takes 6 to 9 minutes a
 `env SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 python3 /home/kooshi/source/lean-dir/scripts/slot.py --mem <GiB> --cpus <n> --wait 7200 --name kj1 -- <command>`
 
 One file (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`): `--mem 4 --cpus 2` from inside your worktree. The
-build: `--mem 10 --cpus 4 -- env MEMMAX=10G BATCH=8 ./scripts/build.sh` from inside the worktree; never `lake build`.
+build: `--mem 12 --cpus 4 -- env MEMMAX=12G BATCH=4 ./scripts/build.sh` from inside the worktree (the last implementer's
+build peaked at 12.3 GB summed over its processes at `BATCH=8` with 37 modules stale); never `lake build`.
 Stop a process by its PID, never by matching its command line, and leave none running or queued when you hand back.
 `/tmp` is wiped at power-off: anything your record cites lives under `data/fs131/kj1/`.
 
