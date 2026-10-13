@@ -130,9 +130,13 @@ private theorem exists_intCast_eq_re_of_isIntegral {z : ℂ} (hz : IsIntegral �
     · have e : (2 * m + 1) ^ 2 + (2 * k + 1) ^ 2 = 4 * (m ^ 2 + m + k ^ 2 + k) + 2 := by ring
       omega
 
-/-- **The stable prime of `ℚ(i)` above 2**: a maximal ideal of `𝓞 (ℚ(i))` holding `2`, fixed by conjugation, modulo which
-conjugation is the identity (the ideal `(1 + i)`; `x̄ − x = −2·Im(x)·i` and `Im(x) ∈ ℤ` for an integer `x` of `ℚ(i)`). The
-inhabitant of `StablePrime` and of `colorable_two_planeOver_of_ramified`'s hypothesis. -/
+/-- **A stable prime of `ℚ(i)` above 2**: a maximal ideal of `𝓞 (ℚ(i))` holding `2`, fixed by conjugation, modulo which
+conjugation is the identity. Existence only, and the proof exhibits no ideal: it takes any maximal ideal over `(2)`
+(`Ideal.exists_le_maximal`; `2` is not a unit because the real part of an integer of `ℚ(i)` is an integer,
+`exists_intCast_eq_re_of_isIntegral`), and conjugation is the identity on `𝓞 (ℚ(i))` modulo `2` — `x̄ − x = 2·(Re x − x)` —
+so every maximal ideal holding `2` is fixed by conjugation and has the third clause. In `ℤ[i]` that ideal is `(1 + i)`;
+neither that, nor that it is the only one, is stated or proved here. The inhabitant of `StablePrime` and of
+`colorable_two_planeOver_of_ramified`'s hypothesis. -/
 theorem exists_stablePrime_rat :
     ∃ P : StablePrime (⊥ : Subfield ℝ), (2 : 𝓞 (fieldI (⊥ : Subfield ℝ))) ∈ P.P ∧
       ∀ x : 𝓞 (fieldI (⊥ : Subfield ℝ)), conjO ⊥ x - x ∈ P.P := by

@@ -296,8 +296,8 @@ private theorem coords_unique {K : Type*} [Field K] (K₀ : Subfield K) {π : K}
 /-- **The ramified quadratic step.** Let `K₀ ⊆ K` be fields, `K₀` embedded in `ℚ_p` with `p` odd, and `K = K₀(π)` with
 `π² = q`, a natural number divisible by `p` exactly once. Then the integers of `K` map to `ℤ/p`. (`π ∉ K₀`: a square root of
 `q` in `ℚ_p` would have valuation `1/2`. Every `x ∈ K` is `a + bπ` with `a, b ∈ K₀` uniquely; `a + bπ ↦ a − bπ` is a ring
-automorphism, so an integral `x` has `2a` and `a² − b²q` integral, hence in `ℤ_p`, hence `a, b ∈ ℤ_p` — the second by parity
-of the valuation — and `x ↦ a mod p` is the homomorphism, multiplicative because `q ≡ 0`.) -/
+homomorphism `K → K`, so an integral `x` has `2a` and `a² − b²q` integral, hence in `ℤ_p`, hence `a, b ∈ ℤ_p` — the second by
+parity of the valuation — and `x ↦ a mod p` is the homomorphism, multiplicative because `q ≡ 0`.) -/
 theorem nonempty_ringHom_zmod_of_ramified_sqrt {K : Type*} [Field K] {p : ℕ} [Fact p.Prime] (hp2 : p ≠ 2)
     (K₀ : Subfield K) (ι₀ : K₀ →+* ℚ_[p]) {q : ℕ} (hq : p ∣ q) (hq2 : ¬ p ^ 2 ∣ q) {π : K} (hπ : π ^ 2 = (q : K))
     (hgen : Subfield.closure ((K₀ : Set K) ∪ {π}) = ⊤) : Nonempty (𝓞 K →+* ZMod p) := by
@@ -390,7 +390,10 @@ theorem nonempty_ringHom_zmod_of_ramified_sqrt {K : Type*} [Field K] {p : ℕ} [
 /-- **NF1-S2, the ramified clause, corrected**: every radicand in `D` a nonzero square modulo the odd prime `p`, and one
 more radicand `q` with `p ∣ q`, `p² ∤ q` (`11` in `ℚ(√3, √11)` at `p = 11`): the ring of integers of `ℚ(√D, √q)` has a
 maximal ideal with exactly `p` elements in its quotient. With two radicands divisible by `p` the statement is false
-(module docstring). -/
+(module docstring). **For the reader**: `hD` and `hq` can hold together only when `q ∉ D` — `hD` makes every member of `D`
+nonzero modulo `p` and `hq` makes `q` zero there — so the statement is about a radicand outside `D` without saying so, and
+`hq2` excludes `q = 0`; each hypothesis is satisfiable alone, and all of them at `D = {3}`, `q = 11`, `p = 11` (the spec's
+fourth `example`). -/
 theorem exists_maximal_card_eq_of_ramified (D : Set ℕ) (q : ℕ) {p : ℕ} (hp : p.Prime) (hp2 : p ≠ 2)
     (hD : ∀ d ∈ D, (d : ZMod p) ≠ 0 ∧ IsSquare (d : ZMod p)) (hq : p ∣ q) (hq2 : ¬ p ^ 2 ∣ q) :
     ∃ 𝔭 : Ideal (𝓞 (fieldOfRadicands (insert q D))),

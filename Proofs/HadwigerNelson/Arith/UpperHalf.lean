@@ -35,8 +35,9 @@ quotient — `SpectralChain`'s caveat); the identification of `levelTarget P 1` 
 quotient map (an element outside `P` is a unit modulo `P^m`: `Ideal.IsMaximal.exists_inv_pow`).
 
 **Inhabitants.** `IsUsablePrime` and `StablePrime F` are the hypotheses that are structures. A usable prime with its
-residue field is exhibited at `ℚ(√11)`, `ℚ(√47)` and `ℚ(√167)` in `Instances/UpperHalf` (through `Arith/QuadraticPrime`), and a
-stable prime of `ℚ(i)` there too; `StandingFive.exists_stablePrime_two` exhibits a stable prime of another field.
+residue field is exhibited at `ℚ(√11)` (an `example` of `Instances/UpperHalfValues`, through `Arith/QuadraticPrime`) and used
+at `ℚ(√47)` and `ℚ(√167)` inside that file's instance theorems, and a stable prime of `ℚ(i)` is exhibited there too
+(`exists_stablePrime_rat`); `StandingFive.exists_stablePrime_two` exhibits a stable prime of another field.
 -/
 
 namespace HadwigerNelson.UpperHalf
