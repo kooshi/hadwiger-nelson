@@ -272,7 +272,7 @@ the second and third; logs `data/fs131/kn5/logs/build{1,2,3}.{out,err,peak}`; th
 |---|---|---|---|---|---|---|
 | 1 | the skeleton as the first planner left it (`09f5e7b16`) | 482 of 4 | 39 modules (the tree's `.lake/build` was two landings behind: `Plane/…`, `Outside/…`, this line's four, `Proofs`) | 19m59s | not captured | the 29 `declaration uses sorry`, nothing else |
 | 2 | after the three passes (`558952c3e`) | 248 of 8 | 5 | 7m30s | 5.24 GB | the 40 `declaration uses sorry`, nothing else |
-| 3 | the final skeleton (the dyadic module on `SpectralChain`, its glue leaf; this record's last module commit) | 248 of 8 | 2 | 6m14s | 5.37 GB | the 41 `declaration uses sorry`, nothing else |
+| 3 | the final skeleton (the dyadic module on `SpectralChain`, its glue leaf; `b8dfdb64c`) | 248 of 8 | 2 | 6m14s | 5.37 GB | the 41 `declaration uses sorry`, nothing else |
 
 **The linters' verdict: nothing to fix.** No missing docstring, no unused variable, no long line, no deprecation in any of the four
 modules, at any of the three builds; the only messages are the `sorry` warnings, one per leaf (counted per module against the leaf
