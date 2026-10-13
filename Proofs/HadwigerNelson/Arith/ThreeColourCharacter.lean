@@ -26,8 +26,18 @@ gives a point of `CharacterColouring.fieldBandSet F (band 3)` — an additive ma
 FS73-T22 with FS81-T2's passage to infinitely many generators `[hand; two independent derivations]`; not found in print,
 never "first". The compactness is de Bruijn–Erdős's in character form.
 
-**Inhabitants.** `ThreeColour.properAlong_one_two` (`ℤ` along `(1, 2)`, `x ↦ x mod 3`) inhabits every hypothesis here;
-`exists_character_one_two` is the conclusion at that model.
+**Inhabitants.** `ThreeColour.properAlong_one_two` (`ℤ` along `(1, 2)`, `x ↦ x mod 3`) inhabits
+`exists_character_of_properAlong`, and `exists_character_one_two` is its conclusion there;
+`ThreeColour.nonempty_winding_one_two` inhabits `Winding.exists_box_point`. `bandSet_three_nonempty_of_proper` is met at a
+group with torsion by the 5-cycle (`bandSet_three_nonempty_zmod_five`: `ℤ/5`, the step `1`, the colours `0, 1, 0, 1, 2`).
+No declaration of this module exhibits a subfield of `ℝ` whose plane is three-colourable — the hypothesis of
+`fieldBandSet_three_nonempty_of_colorable`; the joining module `Arith/ThreeFourColours` does (`ℚ(√3)`, and every
+two-colourable plane).
+
+**Wider than the ledger's row 79** (FS131-IC1's reading, stated by FS131-KJ1). Row 79 states the criterion for finitely
+generated torsion-free groups and finite symmetric generating sets; `exists_character_of_properAlong` and
+`bandSet_three_nonempty_of_proper` hold for **every** abelian group and **every** set of steps, torsion included. And the
+headline reads the colouring only on the ring `ℤ[U_F]`: `fieldBandSet_three_nonempty_of_colorable_unitRing`.
 -/
 
 namespace HadwigerNelson.ThreeColourCharacter
@@ -293,5 +303,44 @@ theorem exists_character_one_two : ∃ θ : ℤ →+ UnitAddCircle, ∀ j, θ (!
 -- The band at 3 holds `1/3`, `1/2` and `2/3`, and not `0`.
 example : ((1 / 3 : ℝ) : UnitAddCircle) ∈ band 3 := ⟨1 / 3, ⟨by norm_num, by norm_num⟩, rfl⟩
 example : ((1 / 2 : ℝ) : UnitAddCircle) ∈ band 3 := ⟨1 / 2, ⟨by norm_num, by norm_num⟩, rfl⟩
+
+/-! ## The two readings FS131-IC1 named (stated by FS131-KJ1) -/
+
+/-- **The headline, read on the ring of unit vectors**: a proper 3-colouring of the unit-distance graph on `ℤ[U_F]`
+alone — the component of `0` in `F²` — gives the character. It is what the proof of
+`fieldBandSet_three_nonempty_of_colorable` reads (the plane's colouring is only ever evaluated on the ring), and that
+theorem is this one after restricting the colouring. Every subfield `F ⊆ ℝ`. -/
+theorem fieldBandSet_three_nonempty_of_colorable_unitRing (F : Subfield ℝ)
+    (h : ((unitDistance ℂ).induce (unitRing F : Set ℂ)).Colorable 3) : (fieldBandSet F (band 3)).Nonempty := by
+  obtain ⟨C⟩ := h
+  refine bandSet_three_nonempty_of_proper (c := fun a : unitRing F => (C ⟨a, a.2⟩ : ZMod 3)) fun a u hu => ?_
+  refine C.valid ?_
+  change (unitDistance ℂ).Adj ((a + u : unitRing F) : ℂ) (a : ℂ)
+  rw [unitDistance_adj, Subring.coe_add, dist_eq_norm, add_sub_cancel_left]
+  exact hu.2
+
+/-- **The criterion's forward half at a group with torsion** — the 5-cycle: `ℤ/5` with the one step `1`, coloured
+`0, 1, 0, 1, 2`. The colouring changes along the step, so `bandSet_three_nonempty_of_proper` gives a character of `ℤ/5`
+with `θ(1) ∈ [1/3, 2/3]` modulo 1 (it is `2/5` or `3/5`). `LEDGER.md` row 79 states the criterion for finitely generated
+torsion-free groups; this is a model of the kernel's wider statement outside that class. -/
+theorem bandSet_three_nonempty_zmod_five : (bandSet ({1} : Set (ZMod 5)) (band 3)).Nonempty :=
+  bandSet_three_nonempty_of_proper (c := fun a : ZMod 5 => (![0, 1, 0, 1, 2] : Fin 5 → ZMod 3) a) fun a u hu => by
+    rw [Set.mem_singleton_iff] at hu
+    subst hu
+    revert a
+    decide
+
+-- The band at 3 holds `2/3` and not `0` (the other two of the four facts promised above).
+example : ((2 / 3 : ℝ) : UnitAddCircle) ∈ band 3 := ⟨2 / 3, ⟨by norm_num, by norm_num⟩, rfl⟩
+example : (0 : UnitAddCircle) ∉ band 3 := by
+  rintro ⟨x, ⟨h1, h2⟩, hx⟩
+  obtain ⟨n, hn⟩ := (AddCircle.coe_eq_zero_iff 1).mp hx
+  rw [zsmul_eq_mul, mul_one] at hn
+  rw [Nat.cast_ofNat] at h1 h2
+  have h3 : (0 : ℝ) < n := by rw [hn]; linarith
+  have h4 : (n : ℝ) < 1 := by rw [hn]; linarith
+  have h5 : (0 : ℤ) < n := by exact_mod_cast h3
+  have h6 : n < (1 : ℤ) := by exact_mod_cast h4
+  omega
 
 end HadwigerNelson.ThreeColourCharacter

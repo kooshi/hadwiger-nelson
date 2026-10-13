@@ -25,9 +25,13 @@ rotation or joins two corners, and a rotation step from a corner leaves the box:
 (`tendsto_layer`); the limit is additive, so it is a character `τ` with `6τ = 0` and `τ(U_F) ⊆ {1/3, 1/2, 2/3}`. If
 `1/3 ∈ ℤ[U_F]` then `τ(u) = 3τ(u/3)` is killed by 2, so `τ = 1/2` on `U_F`: a two-colouring.
 
-**Whose this is** (`LEDGER.md` § The claim list, row 82; `plans/FS81-derivation.md` T4, T5). The obstruction
-"`1/k ∈ ℤ[U]` ⟹ no **additive** `k`-colouring" is `[Fischer1990]` §1 and Thm 10(ii); the unit vector `v` and `1/3 ∈ ℤ[U]`
-at `N ≡ −1 (mod 24)` are `[Fischer1990]` Thm 10(ii) and Ex. 4, and `[Johnson2000]` p. 176 poses the family as open. The
+**Whose this is** (`LEDGER.md` § The claim list, row 82; `plans/FS81-derivation.md` T4, T5; the paper read against
+these statements by FS131-KJ1). The obstruction "`1/k ∈ ℤ[U]` ⟹ no **additive** `k`-colouring" is `[Fischer1990]` §1
+(p. 182) and Thm 10(ii) (pp. 193–194); the unit vector `v` and `1/3 ∈ ℤ[U]` at `N ≡ −1 (mod 24)` are its Thm 10(ii) and
+Ex. 4 (p. 194), and `[Johnson2000]` p. 176 poses the family as open. **The two-colour criterion in character form**
+(`colorable_two_iff_fieldBandSet_two_nonempty`) is `[Fischer1990]` Thm 1(ii) (p. 183), and **the lower bound three at
+`d ≡ 3 (mod 4)`** (`not_colorable_two_of_sqrt_mem`) is the "only if" of its Thm 8 (pp. 189–190), by the same unit vector
+and the same relation — his for squarefree `N` and the quadratic field, here for every subfield holding `√d`. The
 passage from additive to **all** three-colourings — the lower bound at four — is this project's `[hand, two independent
 derivations]`; not found in print. The route through `layer_step` (no computed cell list) is the kernel planner's.
 
@@ -443,7 +447,9 @@ private theorem half_ne_zero : ((1 / 2 : ℝ) : UnitAddCircle) ≠ 0 := by
 
 /-- **Two-colourings are the points of `Θ₂(R_F)`**: the plane over `F` is two-colourable iff some character of `ℤ[U_F]`
 is `1/2` on every unit vector (`band 2 = {1/2}`). (`⟹`: on the component of `0` a two-colouring is `x ↦ c(x) − c(0)`,
-additive because every step changes it. `⟸`: colour each coset of `ℤ[U_F]` in `F(i)` by the character.) -/
+additive because every step changes it. `⟸`: colour each coset of `ℤ[U_F]` in `F(i)` by the character.) Prior art:
+`[Fischer1990]` Thm 1(ii), p. 183 — "`F^d` can be 2-colored iff there exists an additive map `v : C₀(F^d) → ℤ/(2)` so that
+`v(ξ) = [1]` if `‖ξ‖ = 1`" — read with `ℤ/2 ⊂ ℝ/ℤ`; the kernel form is what is here. -/
 theorem colorable_two_iff_fieldBandSet_two_nonempty (F : Subfield ℝ) :
     ((unitDistance ℂ).induce (planeOver F)).Colorable 2 ↔ (fieldBandSet F (band 2)).Nonempty := by
   constructor
@@ -588,7 +594,7 @@ theorem chromaticNumber_planeOver_ne_three_of_inv_three_mem (h3 : (3 : ℂ)⁻¹
 /-! ## §5 Clause (a): the fields holding `√d` -/
 
 /-- **`1/n = 2 − v − v̄`** with `v`, `v̄` unit vectors of `F²`, for `d + 1 = 4n` and `F ∋ √d`:
-`v = ((2n − 1) + i√d)/(2n)` (`[Fischer1990]` Thm 10(ii)'s vector). -/
+`v = ((2n − 1) + i√d)/(2n)` (`[Fischer1990]`'s vector: Thm 8's proof, p. 190, and Thm 10(ii)'s, p. 194). -/
 private theorem exists_unitVectors_inv_natCast {d n : ℕ} (hd : d + 1 = 4 * n) (hF : Real.sqrt d ∈ F) :
     ∃ v v' : ℂ, v ∈ unitVectors F ∧ v' ∈ unitVectors F ∧ (n : ℂ)⁻¹ = 2 - v - v' := by
   have hn : (n : ℝ) ≠ 0 := by
@@ -619,7 +625,7 @@ private theorem exists_unitVectors_inv_natCast {d n : ℕ} (hd : d + 1 = 4 * n) 
     · simp
 
 /-- **`1/n = 2 − v − v̄`** for `d + 1 = 4n` and `v = ((2n − 1) + i√d)/(2n)`, a unit vector of every `F ∋ √d`
-(`[Fischer1990]` Thm 10(ii)'s vector). -/
+(`[Fischer1990]`'s vector: Thm 8's proof, p. 190, and Thm 10(ii)'s, p. 194). -/
 theorem inv_natCast_mem_unitRing_of_sqrt_mem {d n : ℕ} (hd : d + 1 = 4 * n) (hF : Real.sqrt d ∈ F) :
     (n : ℂ)⁻¹ ∈ unitRing F := by
   obtain ⟨v, v', hv, hv', h⟩ := exists_unitVectors_inv_natCast hd hF
@@ -639,8 +645,10 @@ theorem inv_three_mem_unitRing_of_sqrt_mem {d : ℕ} (hd : d % 12 = 11) (hF : Re
   exact mul_mem (natCast_mem _ k) h
 
 /-- **No two-colouring for `F ∋ √d`, `d ≡ 3 (mod 4)`**: `1 = 2n − nv − nv̄` is a sum of `4n` unit vectors, so a character
-equal to `1/2` on unit vectors would be `0` at the unit vector `1`. (The values 2 and 3 of the table are `[Fischer1990]`'s
-and `[Johnson2000]`'s; this is their lower end at 3.) -/
+equal to `1/2` on unit vectors would be `0` at the unit vector `1`. Prior art for squarefree `d` and the quadratic field:
+the "only if" of `[Fischer1990]` Thm 8 (pp. 189–190), by this vector and this relation (there as a root of
+`n·x² − (2n − 1)·x + n` with an odd coefficient sum, his Thm 7). What is added here is the class: every subfield of `ℝ`
+holding `√d`, every natural `d ≡ 3 (mod 4)`. -/
 theorem not_colorable_two_of_sqrt_mem {d : ℕ} (hd : d % 4 = 3) (hF : Real.sqrt d ∈ F) :
     ¬ ((unitDistance ℂ).induce (planeOver F)).Colorable 2 := by
   intro hcol
@@ -664,7 +672,8 @@ theorem not_colorable_two_of_sqrt_mem {d : ℕ} (hd : d % 4 = 3) (hF : Real.sqrt
   rw [hhalf 1 h1U] at h0
   exact half_ne_zero h0
 
-/-- `χ(F²) ≥ 3` for every subfield `F ∋ √d`, `d ≡ 3 (mod 4)`. -/
+/-- `χ(F²) ≥ 3` for every subfield `F ∋ √d`, `d ≡ 3 (mod 4)` (for `ℚ(√d)`, `d` squarefree: `[Fischer1990]` Thm 8,
+p. 189). -/
 theorem three_le_chromaticNumber_planeOver_of_sqrt_mem {d : ℕ} (hd : d % 4 = 3) (hF : Real.sqrt d ∈ F) :
     3 ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber := by
   have h : ((3 : ℕ) : ℕ∞) ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber := by
@@ -676,17 +685,41 @@ theorem three_le_chromaticNumber_planeOver_of_sqrt_mem {d : ℕ} (hd : d % 4 = 3
 
 /-- **Clause (a), at its proof's level**: every subfield of `ℝ` holding `√d` for a natural `d ≡ 11 (mod 12)` has a plane
 needing four colours. No squarefreeness, no finite graph. The lower bound is this project's; the unit vector and
-`1/3 ∈ ℤ[U]` are `[Fischer1990]` Thm 10(ii) and Ex. 4, and `[Johnson2000]` p. 176 poses the family as open. -/
+`1/3 ∈ ℤ[U]` are `[Fischer1990]` Thm 10(ii) and Ex. 4 (pp. 193–194; his at `N ≡ −1 (mod 24)`), and `[Johnson2000]`
+p. 176 poses the family as open. -/
 theorem four_le_chromaticNumber_planeOver_of_sqrt_mem {d : ℕ} (hd : d % 12 = 11) (hF : Real.sqrt d ∈ F) :
     4 ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber :=
   four_le_chromaticNumber_planeOver_of_inv_three_mem (inv_three_mem_unitRing_of_sqrt_mem hd hF)
     (not_colorable_two_of_sqrt_mem (by omega) hF)
 
 /-- **Clause (a), as claimed**: `χ(ℚ(√d)²) ≥ 4` for `d ≡ 11 (mod 12)` (the claim's "squarefree" is not used). This
-project's lower bound; every upper bound for these fields is prior art (`[Fischer1990]`, `[Johnson2000]`). -/
+project's lower bound; every upper bound for these fields is prior art (four colours at `d ≡ 3 (mod 8)`:
+`[Fischer1990]` Thm 10(i), p. 193, restated in `[Johnson2000]` p. 176). -/
 theorem four_le_chromaticNumber_planeOver_fieldOfRadicands {d : ℕ} (hd : d % 12 = 11) :
     4 ≤ ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {d}))).chromaticNumber :=
   four_le_chromaticNumber_planeOver_of_sqrt_mem hd (sqrt_mem_fieldOfRadicands (Set.mem_singleton d))
+
+/-! ## The two statements in character form (named by FS131-IT1, stated by FS131-KJ1) -/
+
+/-- **FS81-T4 in the ledger's own words** (`LEDGER.md` row 82: "`1/3 ∈ ℤ[U_F]` and `Θ₃(F) ≠ ∅` make `F²` bipartite"):
+with `1/3 ∈ ℤ[U_F]`, a character of `ℤ[U_F]` with values in `[1/3, 2/3]` on the unit vectors gives a two-colouring of the
+plane. It reads this module's leaves only — no colouring, so not `ThreeColourCharacter`'s headline —, and
+`colorable_two_of_inv_three_mem` is this after that headline. Every subfield `F ⊆ ℝ`. -/
+theorem colorable_two_of_fieldBandSet_three_nonempty (h3 : (3 : ℂ)⁻¹ ∈ unitRing F)
+    (h : (fieldBandSet F (band 3)).Nonempty) : ((unitDistance ℂ).induce (planeOver F)).Colorable 2 := by
+  obtain ⟨τ, hτ, h6⟩ := exists_torsion_mem_fieldBandSet F h
+  exact (colorable_two_iff_fieldBandSet_two_nonempty F).mpr ⟨τ, mem_fieldBandSet_two_of_inv_three_mem h3 hτ h6⟩
+
+/-- **Clause (a) in character form: `Θ₃(R_F) = ∅`** for every subfield `F ∋ √d`, `d ≡ 11 (mod 12)` — no additive map
+`ℤ[U_F] → ℝ/ℤ` puts every unit vector in `[1/3, 2/3]`. Stronger in form than `four_le_chromaticNumber_planeOver_of_sqrt_mem`
+(which is this with `ThreeColourCharacter`'s headline): it excludes the characters themselves, with no colouring named.
+This project's; for additive three-colourings (the characters killed by 3) of `ℚ(√N)²`, `N ≡ −1 (mod 24)` squarefree,
+it is `[Fischer1990]` Thm 10(ii). -/
+theorem fieldBandSet_three_eq_empty_of_sqrt_mem {d : ℕ} (hd : d % 12 = 11) (hF : Real.sqrt d ∈ F) :
+    fieldBandSet F (band 3) = ∅ :=
+  Set.not_nonempty_iff_eq_empty.mp fun h =>
+    not_colorable_two_of_sqrt_mem (by omega) hF
+      (colorable_two_of_fieldBandSet_three_nonempty (inv_three_mem_unitRing_of_sqrt_mem hd hF) h)
 
 /-! ## Spec -/
 

@@ -13,8 +13,20 @@ import Mathlib.NumberTheory.Real.Irrational
 The primes themselves (`SpectralChain.StablePrime`) are corollaries in the joining module; no consumer of the table
 reads them.
 
-**Both values are prior art** (`[Fischer1990]`, `[Johnson2000]`; `LEDGER.md` § The claim list): nothing here is claimed
-as this project's but the kernel form.
+**Both values are prior art** (`LEDGER.md` § The claim list): nothing here is claimed as this project's but the kernel
+form. Read against the paper by FS131-KJ1:
+* *two colours off the class `3 (mod 4)`* — `[Fischer1990]` Thm 8, p. 189 ("the plane `ℚ(√N)²` can be 2-colored iff
+  `N ≢ 3 mod 4`", `N` squarefree; the "if" half independently `[Johnson1987]`, his reference [8]). **The value and the
+  map**: his proof (pp. 190–191) is the additive map `(a₁ + b₁ + 2b₂)/c` at `N ≡ 2 (mod 4)` — the form of
+  `exists_addMonoidHom_two_mod_four` — and `(a₁ + b₁ + a₂ + b₂)/c` at `N ≡ 1 (mod 4)`, which differs from
+  `exists_addMonoidHom_one_mod_four`'s form in two signs and is the same map on the group the unit vectors generate (two
+  additive maps to `ℤ/2` equal to 1 at every unit vector agree there). The case analysis modulo 4 and 8 is his as well.
+* *four colours at `3 (mod 8)`* — `[Fischer1990]` Thm 10(i), p. 193 ("has an additive 4-coloring if `N ≡ 3 mod 8`"),
+  restated in `[Johnson2000]` p. 176. **The value only**: his additive colouring is into `ℤ/(4)` (`2(a₁ + b₁)/c` read
+  modulo 4); the map of `exists_addMonoidHom_three_mod_eight` is into `𝔽₂ × 𝔽₂`, a different quotient group and so a
+  different colouring.
+* *an additive map never `0` at a unit vector colours the plane* (`colorable_planeOver_of_addMonoidHom`) —
+  `[Fischer1990]` Thm 1(i), p. 183.
 
 **This module reads nothing of the three-colour line** (its imports are `SpectralChain` and Mathlib), so it can be built
 beside it.
@@ -24,8 +36,10 @@ valuation, no localization. A unit vector of `ℚ(√m)²` is `u = (a + b√m + 
 (`exists_rat_add_mul_sqrt_eq`, `exists_int_solution_of_mem_unitVectors`), and `|u| = 1` reads `a² + c² + m(b² + d²) = N²`,
 `ab + cd = 0` (`√m` is irrational in each class). For a solution not all even, the class of `m` fixes the shape of `(a, b, c, d, N)` modulo 4
 (`dyadic_shape_one_mod_four`, `…_two_mod_four`, `…_three_mod_eight`): `N` is odd or twice an odd number, and one
-additive map `ψ` on the lattice of points of that shape — into `𝔽₂`, or into `𝔽₂ × 𝔽₂` when `m ≡ 3 (mod 8)` — is never
-`0` at a unit vector (`exists_addMonoidHom_…`). `colorable_planeOver_of_addMonoidHom` — the residue colouring,
+additive map `ψ` — an integer form in the coordinates `(a, b, c, d)/N`, read modulo 2 on the subgroup of `ℚ⁴` where it
+has odd denominator; into `𝔽₂`, or a pair of forms into `𝔽₂ × 𝔽₂` when `m ≡ 3 (mod 8)` — is never `0` at a unit vector
+(`exists_addMonoidHom_…`). (The plan's lattice of points of the given shape lies in that subgroup; the statements ask for
+some subgroup holding the unit vectors, and the proofs take the larger one.) `colorable_planeOver_of_addMonoidHom` — the residue colouring,
 `colorable_of_residue` of `ResidueColouring.lean`, read at the plane — then colours with `|𝔽₂| = 2` or `|𝔽₂ × 𝔽₂| = 4` colours.
 (`ψ` is the reduction at the dyadic prime written in coordinates: `i ↦ 1`, and `(1 + √m)/2`, `√m(1 + i)/2` or
 `(1 + i√m)/2` to its residue. Nothing in the proof needs to know that.)
@@ -549,8 +563,10 @@ private theorem not_isSquare_of_mod_four {m : ℕ} (h : m % 4 = 2 ∨ m % 4 = 3)
   rcases hr with hr | hr | hr | hr <;> rw [hr] at hmul <;> omega
 
 /-- **`m ≡ 1 (mod 4)`, not a square**: an additive map into `𝔽₂`, on a subgroup of `ℂ` holding the unit vectors of
-`ℚ(√m)²`, that is not `0` at any of them. (Points `(a + b√m + c·i + d·i√m)/(2N)`, `N` odd, `a ≡ b`, `c ≡ d (mod 2)`;
-`ψ = (a − b + c − d)/2 mod 2`.) -/
+`ℚ(√m)²`, that is not `0` at any of them. (The subgroup: the points `p₁ + p₂√m + p₃·i + p₄·i√m`, `pⱼ ∈ ℚ`, at which
+`p₁ − p₂ + p₃ − p₄` has odd denominator; `ψ` is that form modulo 2. It holds the points `(a + b√m + c·i + d·i√m)/(2N)`,
+`N` odd, `a ≡ b`, `c ≡ d (mod 2)`, where `ψ = (a − b + c − d)/2 mod 2`. On the unit vectors' group it is
+`[Fischer1990]`'s map `(a₁ + b₁ + a₂ + b₂)/c`, p. 191.) -/
 theorem exists_addMonoidHom_one_mod_four {m : ℕ} (hm : m % 4 = 1) (hsq : ¬ IsSquare m) :
     ∃ (Λ : AddSubgroup ℂ) (ψ : Λ →+ ZMod 2),
       ∀ u ∈ unitVectors (fieldOfRadicands {m}), ∃ hu : u ∈ Λ, ψ ⟨u, hu⟩ ≠ 0 := by
@@ -568,7 +584,9 @@ theorem exists_addMonoidHom_one_mod_four {m : ℕ} (hm : m % 4 = 1) (hsq : ¬ Is
     · rw [Int.odd_iff] at hodd ⊢
       omega
 
-/-- **`m ≡ 2 (mod 4)`**: the same. (Points with `a`, `c` even and `b ≡ d (mod 2)`; `ψ = a/2 + c/2 + d mod 2`.) -/
+/-- **`m ≡ 2 (mod 4)`**: the same. (The subgroup where `p₁ + p₃ + 2p₄` has odd denominator; `ψ` is that form modulo 2 —
+`[Fischer1990]`'s `(a₁ + b₁ + 2b₂)/c`, p. 191. It holds the points with `a`, `c` even and `b ≡ d (mod 2)` over `2N`,
+where `ψ = a/2 + c/2 + d mod 2`.) -/
 theorem exists_addMonoidHom_two_mod_four {m : ℕ} (hm : m % 4 = 2) :
     ∃ (Λ : AddSubgroup ℂ) (ψ : Λ →+ ZMod 2),
       ∀ u ∈ unitVectors (fieldOfRadicands {m}), ∃ hu : u ∈ Λ, ψ ⟨u, hu⟩ ≠ 0 := by
@@ -587,8 +605,10 @@ theorem exists_addMonoidHom_two_mod_four {m : ℕ} (hm : m % 4 = 2) :
     · rw [Int.odd_iff] at hodd ⊢
       omega
 
-/-- **`m ≡ 3 (mod 8)`**: an additive map into `𝔽₂ × 𝔽₂` that is not `0` at any unit vector of `ℚ(√m)²`. (Points with
-`a ≡ d`, `b ≡ c (mod 2)`; `ψ = ((a − d + b + c)/2, b + d) mod 2`.) -/
+/-- **`m ≡ 3 (mod 8)`**: an additive map into `𝔽₂ × 𝔽₂` that is not `0` at any unit vector of `ℚ(√m)²`. (The subgroup
+where `p₁ + p₂ + p₃ − p₄` and `2p₄ − 2p₂` have odd denominator; `ψ` is the pair modulo 2. It holds the points with
+`a ≡ d`, `b ≡ c (mod 2)` over `2N`, where `ψ = ((a − d + b + c)/2, b + d) mod 2`. Not `[Fischer1990]`'s map: his
+Thm 10(i) colours into `ℤ/(4)`.) -/
 theorem exists_addMonoidHom_three_mod_eight {m : ℕ} (hm : m % 8 = 3) :
     ∃ (Λ : AddSubgroup ℂ) (ψ : Λ →+ ZMod 2 × ZMod 2),
       ∀ u ∈ unitVectors (fieldOfRadicands {m}), ∃ hu : u ∈ Λ, ψ ⟨u, hu⟩ ≠ 0 := by
@@ -628,8 +648,8 @@ theorem exists_addMonoidHom_three_mod_eight {m : ℕ} (hm : m % 8 = 3) :
 
 /-! ## §4 The two rows -/
 
-/-- **NF4-DYADIC-TWO, kernel form** (`[Fischer1990]`'s value; prior art): the plane over `ℚ(√m)` is two-colourable for
-squarefree `m ≢ 3 (mod 4)`. (`m = 1` is `ℚ`, a subfield of `ℚ(√2)`. Squarefreeness is read twice: `4 ∤ m`, and `m` is
+/-- **NF4-DYADIC-TWO, kernel form** (prior art, value and map: `[Fischer1990]` Thm 8, p. 189; the "if" half also
+`[Johnson1987]`): the plane over `ℚ(√m)` is two-colourable for squarefree `m ≢ 3 (mod 4)`. (`m = 1` is `ℚ`, a subfield of `ℚ(√2)`. Squarefreeness is read twice: `4 ∤ m`, and `m` is
 not a square unless `m = 1`.) -/
 theorem colorable_two_planeOver_sqrt {m : ℕ} (hm : Squarefree m) (h4 : m % 4 ≠ 3) :
     ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {m}))).Colorable 2 := by
@@ -668,8 +688,9 @@ theorem colorable_two_planeOver_sqrt {m : ℕ} (hm : Squarefree m) (h4 : m % 4 �
       exact key (exists_addMonoidHom_one_mod_four h1 hsq)
   · exact key (exists_addMonoidHom_two_mod_four h2)
 
-/-- **NF4-DYADIC-FOUR, kernel form** (prior art: the residue colouring at the dyadic prime, `𝔽₄`-valued): the plane over
-`ℚ(√m)` is four-colourable for `m ≡ 3 (mod 8)`. -/
+/-- **NF4-DYADIC-FOUR, kernel form** (the value is prior art: `[Fischer1990]` Thm 10(i), p. 193, for squarefree `N`, by
+an additive colouring into `ℤ/(4)`; the colouring here is into `𝔽₂ × 𝔽₂` — the residue at the dyadic prime — and is not
+his): the plane over `ℚ(√m)` is four-colourable for `m ≡ 3 (mod 8)`, squarefree or not. -/
 theorem colorable_four_planeOver_sqrt {m : ℕ} (h8 : m % 8 = 3) :
     ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {m}))).Colorable 4 := by
   obtain ⟨Λ, ψ, h⟩ := exists_addMonoidHom_three_mod_eight h8
@@ -677,6 +698,42 @@ theorem colorable_four_planeOver_sqrt {m : ℕ} (h8 : m % 8 = 3) :
     rw [Nat.card_eq_fintype_card]; rfl
   have hcol := colorable_planeOver_of_addMonoidHom ψ h
   rwa [hcard] at hcol
+
+/-- **Two colours without squarefreeness** (found by FS131-ID1, stated by FS131-KJ1): the plane over `ℚ(√m)` is
+two-colourable for every natural `m ≡ 1` or `2 (mod 4)`. `colorable_two_planeOver_sqrt` is its case `m` squarefree
+(`mod_four_of_squarefree`); it holds also at `m = 9`, `18`, `45`. (`m % 4 ≠ 3` alone is not enough: `m = 12` is `ℚ(√3)`,
+which needs three colours.) A square `m` gives `ℚ(√m) = ℚ ⊆ ℚ(√2)`. The value is prior art (`[Fischer1990]` Thm 8, at
+the squarefree part of `m`). -/
+theorem colorable_two_planeOver_sqrt_of_mod_four {m : ℕ} (h : m % 4 = 1 ∨ m % 4 = 2) :
+    ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {m}))).Colorable 2 := by
+  have key : ∀ {k : ℕ}, (∃ (Λ : AddSubgroup ℂ) (ψ : Λ →+ ZMod 2),
+      ∀ u ∈ unitVectors (fieldOfRadicands {k}), ∃ hu : u ∈ Λ, ψ ⟨u, hu⟩ ≠ 0) →
+      ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {k}))).Colorable 2 := by
+    rintro k ⟨Λ, ψ, h⟩
+    have hcol := colorable_planeOver_of_addMonoidHom ψ h
+    rwa [Nat.card_zmod] at hcol
+  rcases h with h1 | h2
+  · by_cases hsq : IsSquare m
+    · obtain ⟨r, rfl⟩ := hsq
+      have hle : fieldOfRadicands {r * r} ≤ fieldOfRadicands {2} := by
+        refine Subfield.closure_le.mpr ?_
+        rintro x ⟨d, hd, rfl⟩
+        rw [Set.mem_singleton_iff] at hd
+        subst hd
+        simp only [Nat.cast_mul, Real.sqrt_mul_self (Nat.cast_nonneg r)]
+        exact natCast_mem _ r
+      have hsub : planeOver (fieldOfRadicands {r * r}) ⊆ planeOver (fieldOfRadicands {2}) :=
+        fun z hz => ⟨hle hz.1, hle hz.2⟩
+      exact SimpleGraph.Colorable.of_hom (SimpleGraph.induceHomOfLE _ hsub).toHom
+        (key (exists_addMonoidHom_two_mod_four (by norm_num)))
+    · exact key (exists_addMonoidHom_one_mod_four h1 hsq)
+  · exact key (exists_addMonoidHom_two_mod_four h2)
+
+/-- A squarefree `m ≢ 3 (mod 4)` is `≡ 1` or `2 (mod 4)`: the hypotheses of `colorable_two_planeOver_sqrt` give those of
+`colorable_two_planeOver_sqrt_of_mod_four`. -/
+theorem mod_four_of_squarefree {m : ℕ} (hm : Squarefree m) (h4 : m % 4 ≠ 3) : m % 4 = 1 ∨ m % 4 = 2 := by
+  have h0 : m % 4 ≠ 0 := fun h0 => absurd (Nat.isUnit_iff.mp (hm 2 ⟨m / 4, by omega⟩)) (by norm_num)
+  omega
 
 /-! ## Spec -/
 
@@ -690,5 +747,10 @@ example : (1 : ℤ) ^ 2 + 0 ^ 2 + (3 : ℕ) * (0 ^ 2 + 1 ^ 2) = 2 ^ 2 ∧ (1 : �
     (2 : ℤ) % 4 = 2 ∧ (2 : ℤ) ∣ 1 - 1 ∧ (2 : ℤ) ∣ 0 - 0 ∧ Odd ((0 : ℤ) + 1) := by decide
 example : (0 : ℤ) ^ 2 + 0 ^ 2 + (2 : ℕ) * (1 ^ 2 + 1 ^ 2) = 2 ^ 2 ∧ (2 : ℤ) % 4 = 2 ∧
     Odd ((0 : ℤ) / 2 + 0 / 2 + 1) := by decide
+
+-- The wider two-colour form where the squarefree one does not apply: `m = 9` (a square), `m = 18`.
+example : ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {9}))).Colorable 2 ∧
+    ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {18}))).Colorable 2 :=
+  ⟨colorable_two_planeOver_sqrt_of_mod_four (by norm_num), colorable_two_planeOver_sqrt_of_mod_four (by norm_num)⟩
 
 end HadwigerNelson.DyadicQuadratic
