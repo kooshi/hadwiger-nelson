@@ -14,15 +14,23 @@ works except where a stage says so.
 
 ## Theorems this phase proved
 
-- **ER1-WEAK-TO-PROPER** — a weak measurable `k`-colouring of `ℝ^d` (Lebesgue measurable, proper at almost every pair at a distance in a
-  finite `D`) gives a Lebesgue-measurable `k`-colouring proper at every such pair; so `χ_m⁰(ℝ²) = χ_m(ℝ²)`. **[hand]**, one mind, over
-  `[Davies2026]` Lemma B.1 as printed (p. 44; its proof checked here) and the density-point step printed in
-  `[DeCorteOliveiraVallentin2022]` (proof of Lemma 5.6). § M.
-- **ER1-PLANE-FALCONER** — `χ(ℝ²) = χ_m(ℝ²)`, Falconer's number. **[derived]** from ER1-WEAK-TO-PROPER and the declared outside theorem
-  `Outside.OAI158.proper_to_borel_weak`; one mind; in neither paper as far as each was read. § M.
+A reading job; what it proved is five compositions over outside results and two pieces of arithmetic, each an entry below with its
+argument's address. All [hand] or [derived], one mind, checked by nobody else.
 
-Both are compositions of two outside results; neither is this project's mathematics beyond the composing. Nothing else was proved: this
-is a reading.
+- **ER1-B1** — `[Davies2026]` Lemma B.1 as printed (measurable avoiding sets with conull union give a Lebesgue-measurable colouring
+  proper at every pair): TRUE; **the paper's**, its proof checked here. [hand]. § M.3, § M.5.
+- **ER1-DENS** — the density-one points of the classes of a weak measurable colouring are avoiding sets with conull union: TRUE;
+  printed (`[Davies2026]` p. 46 after `[DeCorteOliveiraVallentin2022]`), held here as FS103-M-D (D1). [hand]. § M.2.
+- **ER1-WEAK-TO-PROPER** — a weak measurable `k`-colouring of the plane agrees almost everywhere with a Lebesgue-measurable one proper
+  at every unit pair; `χ_m⁰(ℝ²) = χ_m(ℝ²)`: TRUE. [derived] from the two above. § M.1.
+- **ER1-PLANE-FALCONER** — `χ(ℝ²) = χ_m(ℝ²)`, Falconer's number: TRUE, on the declared outside theorem
+  `Outside.OAI158.proper_to_borel_weak`. [derived]. In neither paper as far as each was read. § M.1.
+- **ER1-CERT** — `χ(ℝ²) > k` exactly when a finite certificate of `[Davies2026]` Theorem 2.2 exists at `d = 2`: TRUE, over that
+  theorem's converse, § M.4 and the same outside theorem. [hand]. § M.4.
+- **ER1-FILTER-FIELDS** — in `ℚ(√(4(Q!)^{2K} − 1))`, `−1` is a square at every place above every prime `p ⩽ Q`; from `Q = 7` the
+  squarefree part lies in the classes 47, 143, 167 modulo 168: TRUE. [hand], two controls. Stage 3.
+- **ER1-168** — an integer meets none of the four printed four-colouring conditions exactly when it is 47, 143 or 167 modulo 168:
+  TRUE. [hand], four controls. Stage 8.
 
 ## Stage 1 — SAVED: readback
 
@@ -346,7 +354,12 @@ properness gives `φ̄_R(d_s) = −(1/(k − 1))(1 − O(1/R))`. For a finite `U
 −O(1/R)`. Integrating (2.7) against `µ_R` gives `z + Σ_s a_s φ̄_R(d_s) − Σ_q Σ_{u,v∈U_q} S_{Z_q}(u, v) φ̄_R(‖u − v‖) ⩾ 0` (the trace
 terms are the `u = v` terms, `φ̄_R(0) = 1`). Adding: `z − (1/(k − 1)) Σ_s a_s + Σ_q A_{Z_q} ⩾ −O(1/R)`, and `R → ∞` contradicts (2.6). ∎
 So a certificate excludes weak measurable `k`-colourings, not only everywhere-proper ones. One mind; the paper's own sketch goes
-through a spectral measure of a limit, which this avoids.
+through a spectral measure of a limit, which this avoids. **The two directions of ER1-CERT.** If `χ(ℝ²) > k` then `χ_m(ℝ²) > k` (a
+measurable proper colouring is a proper colouring), and Theorem 2.2's converse gives a certificate. If a certificate exists, no weak
+measurable `k`-colouring exists (above), so by the transfer no proper `k`-colouring does. At `k = 6` the statement reads: **seven
+colours are needed exactly when a finite certificate exists** — finitely many finite sets of rational points, a copositive matrix on
+each, and two real numbers, with one strict inequality and one inequality in `J₀` on a half-line. Row 131's stability form and this
+are two equivalent forms of the same question; neither is easier for being finite, and no certificate is known at five.
 
 ### M.5 The entries
 
@@ -397,7 +410,7 @@ derivation: ER1-WEAK-TO-PROPER
     boundary points is a measurable proper colouring equal to it off the boundaries
   prior art: partly: [Davies2026] Lemma B.1 (p. 44) with its p. 46 — the composition is not stated there, and the paper never
     names the almost-everywhere number; this project's gate for the question (FS103-G § 2.2) found neither inequality in print;
-    a search under "measurable chromatic number" with "null set" is owed
+    four arXiv listing queries of 2026-10-13 return only [Davies2026] (§ 9.1); zbMATH and [KechrisMarks2020] not searched, owed
   handoff: de Bruijn — the statement; with Plane.chiM0 it gives the equality with Falconer's number, which the library does
     not yet define
 
@@ -416,26 +429,28 @@ derivation: ER1-PLANE-FALCONER
     sides fail given the declared outside theorem Outside.OAI158.no_proper_five_coloring
   prior art: partly: [OAIMath2026] Theorem 1.3 is the equality with the almost-everywhere number, and [Davies2026] Theorem 1.1
     is this equality in dimensions at least four; the plane's is the case [Davies2026]'s abstract names as a hope ("or possibly
-    even to d = 2"); not stated in either as far as each was read here; a search is owed
+    even to d = 2"); not stated in either as far as each was read here; the same four arXiv queries (§ 9.1), the same debt
   handoff: de Bruijn — the statement; it rests on the standard three axioms and the one declared outside theorem
 
 derivation: ER1-CERT
   statement: for every k ⩾ 2, χ(ℝ²) > k if and only if there are finite non-empty sets U₁, …, U_ℓ ⊆ ℚ², matrices Z_q ∈ COP(U_q × [k]) and real numbers z, a satisfying (2.6) and (2.7) of [Davies2026] Theorem 2.2 at d = 2, D = {1}
-  uses only: ER1-PLANE-FALCONER; the converse of [Davies2026] Theorem 2.2 (Appendix B), whose proof was read and checked in
-    Stage 3; for the other direction, § M.4, which the paper states and does not prove
+  uses only: that a measurable proper colouring is a proper colouring, with the converse of [Davies2026] Theorem 2.2
+    (Appendix B, whose proof was read and checked in Stage 3) — these give a certificate from χ(ℝ²) > k; for the other
+    direction § M.4, which the paper states and does not prove, and the declared outside theorem
+    Outside.OAI158.proper_to_borel_weak (a proper k-colouring would give a weak one, which a certificate excludes)
   not claimed: that any such certificate is known at k = 5, where one exists given [OAIMath2026] Theorem 1.4, or at k = 6,
     where its existence is Hadwiger–Nelson; a bound on its size; that it can be found by a search
   converse: § M.4 Argument for ER1-CERT's sufficient direction (Theorem 2.2's, which the paper states without proof)
-  argument: § M.1 The steps, numbered
+  argument: § M.4 Argument for ER1-CERT's sufficient direction (Theorem 2.2's, which the paper states without proof)
   verdict: derived
-  grade: derived from: ER1-PLANE-FALCONER
+  grade: hand
   minds: 1
   model: k = 3 — ℓ = 0, a = 1 and any z with 0.4028 ⩽ z < 1/2, where min J₀ ≈ −0.4028 (at the first positive zero of J₁) and
     Ω₂(t) = J₀(2πt): (2.7) reads z + J₀(2πτ) ⩾ 0 and (2.6) reads z − 1/2 < 0, the spectral bound χ_m(ℝ²) ⩾ 4; at k = 4 no
     certificate with ℓ = 0 exists (z < 1/3 against z ⩾ 0.4028), so the configurations are what a certificate above four needs
   prior art: partly: [Davies2026] Theorem 2.2 for the measurable number in every dimension at least two; its reading for
-    χ(ℝ²) itself needs ER1-PLANE-FALCONER and is in neither paper
-  handoff: none — a relay-result; whether the kernel wants it is the coordinator's to say once ER1-PLANE-FALCONER is planned
+    χ(ℝ²) itself needs the release's transfer and is in neither paper
+  handoff: none — a relay-result; whether the kernel wants it is the coordinator's to say
 
 ## Stage 3 — SAVED: the method, where the dimension enters, and what the dimension hypothesis is
 
@@ -805,3 +820,119 @@ None of the four holds exactly when `n ≡ 3 (mod 4)` and `n ≢ 3 (mod 8)`, i.e
 numbers `≡ 7 (mod 8)` and `≡ 2 (mod 3)` are those `≡ 23 (mod 24)`, namely 23, 47, 71, 95, 119, 143, 167 modulo 168, with residues
 2, 5, 1, 4, 0, 3, 6 modulo 7; those with residue 3, 5 or 6 are 143, 47, 167. Both directions are this one enumeration. ∎ The four
 conditions are the hypotheses of the printed colourings in the table above: two colours, the additive four, three, and the plane at 7.
+
+## Stage 9 — SAVED: a search, and the draft lines
+
+### 9.1 A search for § M's conclusion (arXiv listings only, 2026-10-13 16:56 UTC)
+
+Scope first: these are queries of the arXiv API over titles, abstracts and listing metadata — not full text, not zbMATH, not the
+descriptive-combinatorics surveys. A zero here says the conclusion is in no listing, not that it is in no paper.
+
+| query | hits | what came back |
+|---|---|---|
+| `all:"measurable chromatic number" AND all:"plane"` | 2 | 1708.01081 (hyperbolic plane, lower bounds), 1412.2091 (spheres) |
+| `all:"measurable chromatic number" AND (all:"almost everywhere" OR all:"null set" OR all:"measure zero")` | 0 | — |
+| `all:"measurable chromatic number" AND all:"chromatic number" AND submittedDate:[202609010000 TO 202610140000]` | 2 | 2610.12301 (`[Davies2026]`), 2610.13551 (*Spectral Theory and Descriptive Combinatorics for Non-Regular Borel pmp Graphs*, 9 October 2026 — title only, unread) |
+| `abs:"Hadwiger-Nelson" AND abs:measurable` | 4 | 2610.12301, 2606.16642 (tropical norm), 2309.09973 (configurations of a given volume), 1708.01081 |
+
+Positive control: the third and fourth queries return `[Davies2026]`, the one listing known to be on the subject. Not found: any
+listing stating `χ(ℝ²) = χ_m(ℝ²)` or the equality of the almost-everywhere and everywhere measurable numbers. **Debt:** zbMATH
+(down at FS-133's gate, not retried here); `[KechrisMarks2020]`'s section on measurable chromatic numbers, where a lemma like B.1 would
+be recorded if it is folklore; 2610.13551, by title in the neighbourhood.
+
+### 9.2 Draft lines (each names its slot; none is filed by this job)
+
+**`BIBLIOGRAPHY.md`, the row `[Davies2026]`, its second cell.** *Replaces* the cell beginning "**Read: the abstract, Theorem 1.1 and the
+introduction's passages on rational points and `ℚ(√n)²`**" and ending "A full reading is owed before rows 121–123 or 128 are
+announced." *with:*
+
+> **Read in full** (2026-10-13, FS131-ER1, `plans/FS131-ER1-davies-reading.md`): pp. 1–37 and Appendices A–B from the rendered pages,
+> the references as text; the proofs of Lemma B.1, Lemma B.2 and of Theorem 2.2's converse checked line by line; §§ 4–6 and 8–10 read,
+> not re-derived; the supplement `[48]` unread. **Proves** (Thm 1.1, p. 3): for finite `D` with rational squares, `ᾱ_D(ℝ⁴) = m_D(ℝ⁴)`,
+> `χ_D(ℝ⁴) = χ_D^(m)(ℝ⁴)`, and for `d ⩾ 5` the same with `ℚ^d`; `χ(ℝ⁴) = χ(ℚ(√n)⁴)` for some non-square `n` (not exhibited);
+> `(2 + o(1))^d ⩽ χ(ℝ^d) ⩽ (3√3/2 + o(1))^d` (the abstract's `3√3/4` is a slip). `χ^(m)` is Falconer's number: Lebesgue-measurable
+> classes, proper at every pair. Its certificate theorems (2.1, 2.2) hold for `d ⩾ 2`; its transference is four-dimensional (Magyar's
+> bound, quaternions). **Poses** (p. 5): whether `ℚ(√n)²`, `n ≡ 47, 143, 167 (mod 168)`, is six-colourable or holds a five-chromatic
+> unit-distance graph (rows 121, 123 answer the second, given MR); Conjecture 1.6, `χ(ℝ²) = 6`; "In the plane we suspect that a more
+> complicated extension of ℚ² might be required" — a suspicion, no argument (against row 128). **Its Lemma B.1** (p. 44: measurable
+> avoiding sets with conull union give a measurable proper colouring) closes row 130's null-set step; with `[OAIMath2026]` Thm 1.3 it
+> gives `χ(ℝ²) = χ_m(ℝ²)`, which the paper does not draw (FS131-ER1 § M, one mind). Does not use `[OAIMath2026]` (cited once, p. 37).
+> Unrefereed, version 1. Held: `pdf/Davies2026-measurable-obstructions-unmeasurable-colourings.pdf` (sha256 `58e7154a…`).
+
+**`BIBLIOGRAPHY.md`, the row `[DeCorteOliveiraVallentin2022]`, its read-status line** (the table row beginning
+"`pdf/arXiv-1804.09099-decorte-oliveira-vallentin-complete-positivity.pdf`"). *Follows* "§6.1, Lemmas 6.1–6.2 (FS107-P, 2026-09-27)"
+*with:* "; the statement of Lemma 5.6 and its proof's density-point paragraph, arXiv v4 pp. 22–23 (FS131-ER1, 2026-10-13)".
+
+**`LEDGER.md` row 121, its "Prior art" clause.** *Follows* "so novelty is "not found", never "first"." *with:*
+
+> **Posed again as open, 8 October 2026:** `[Davies2026]` p. 5 — "It would be particularly interesting to determine if the remaining
+> cases are six-colourable and if any of them contain a five chromatic unit distance graph", the remaining cases being
+> `n ≡ 47, 143, 167 (mod 168)`; read in full 2026-10-13 (FS131-ER1): it holds no lower bound for any `ℚ(√n)²`, and its "known" is the
+> upper bound four off those classes.
+
+**`LEDGER.md` row 123, its "Prior art" clause.** *Follows* "so "not found", never "first"." *with:*
+
+> `[Davies2026]` p. 5 (8 October 2026) poses the quadratic instances as open — a five-chromatic graph in, and six-colourability of,
+> `ℚ(√n)²` for `n ≡ 47, 143, 167 (mod 168)` — and prints those classes as the complement of what "is known" (read in full,
+> FS131-ER1); it has no local bound and no statement over a general number field.
+
+**`LEDGER.md` row 128, its "Prior art" clause.** *Follows* "independent, and theirs is the theorem;" *with:*
+
+> in dimension at least four the collapse is a theorem with no hypothesis — `[Davies2026]` Thm 1.1 (8 October 2026): `χ(ℚ^d) = χ(ℝ^d)
+> = χ^(m)(ℝ^d)` for `d ⩾ 5`, and `χ(ℝ⁴) = χ(ℚ(√n)⁴)` for some non-square `n`, not exhibited — by transferring finite spectral
+> certificates to lattice graphs; for the plane that paper writes "we suspect that a more complicated extension of ℚ² might be
+> required" (p. 5), a suspicion with no argument, which this row's field half contradicts given MR (read in full, FS131-ER1: what it
+> would have to deny is MR at the field or the selection over thick places);
+
+**`LEDGER.md` row 129, its "Prior art" clause.** *Follows* "the descriptive-combinatorics neighbours named, unread (`plans/FS133-one-class-transfer.md` § PA.4));" *with:*
+
+> the plane's equality is the `d = 2` case of `[Davies2026]` Thm 1.1's density half (`ᾱ_D(ℝ^d) = m_D(ℝ^d)`, proved there for `d ⩾ 4`
+> only, by a transference that is four-dimensional; its abstract hopes for `d = 2`) — read in full 2026-10-13 (FS131-ER1), not in it;
+
+**`LEDGER.md` row 130 — only once ER1-PLANE-FALCONER is accepted** (a second mind, or the kernel). *Replaces* "**Not claimed:**
+`χ(ℝ²) = χ_m(ℝ²)` (the null-set step, a GAP in every record); `χ_B` against `χ_m`; any value." *with:*
+
+> **The null-set step is closed** (FS131-ER1 § M, [hand], one mind, kernel pending): `χ_m⁰(ℝ²) = χ_m(ℝ²)` by `[Davies2026]` Lemma B.1
+> (p. 44) with the density-point step (`[DeCorteOliveiraVallentin2022]`, proof of Lemma 5.6), so with `[OAIMath2026]` Thm 1.3
+> `χ(ℝ²) = χ_m(ℝ²)`, Falconer's number; the lemma is the paper's and the transfer the release's — the composition is in neither as far
+> as read. **Not claimed:** `χ_B` against `χ_m` (the new colouring is Lebesgue measurable, never Borel); any value.
+
+*and, in the same row, replaces* "Falconer's `χ_m` (proper at every edge) is one step further: `χ_m⁰ = χ_m` iff some a.e.-proper
+colouring's metrical boundary … is list-colourable from lists of size at least two — a question about finite configurations —" *with*
+"Falconer's `χ_m` (proper at every edge) is the same number: every finite set can be translated into the density points with its good
+points keeping their colours, so the metrical boundary is always list-colourable (`[Davies2026]` Lemma B.1) —".
+
+**`CLAUDE.md` § Where the problem stands, "The problem." — only once accepted.** *Replaces* "Falconer's everywhere-proper `χ_m` is one
+step further, a GAP; by Thm 1.4 `χ_m(ℝ²) ≥ χ_m⁰(ℝ²) ≥ 6`." *with* "Falconer's everywhere-proper `χ_m` is the same number
+(`[Davies2026]` Lemma B.1 with the density-point step; FS131-ER1 § M, [hand], one mind, kernel pending): `χ(ℝ²) = χ_m⁰(ℝ²) =
+χ_m(ℝ²) ∈ {6, 7}`."
+
+**`CLOSED-QUESTIONS.md` § 1.7, the block of posers.** *Follows* the paragraph ending "FS-61's census (`plans/FS61-quadratic-census.md`)
+is the answer to the general one as far as finite witnesses reach." *with:*
+
+> **And again in October 2026** — `[Davies2026]` p. 5 (read in full 2026-10-13, FS131-ER1): *"Nevertheless, the problem of determining
+> the chromatic number of ℚ(√n)² has been well studied [32, 39, 49, 56]. In particular, it is known that ℚ(√n)² is four-colourable for
+> n ≢ 47, 143, 167 (mod 168). It would be particularly interesting to determine if the remaining cases are six-colourable and if any
+> of them contain a five chromatic unit distance graph."* (Its `[32, 39, 49, 56]` are `[Fischer1990]`, `[Johnson1987]`,
+> `[Moorhouse2010]`, `[Payne2009]`; the sentence needs "squarefree".) Rows 121 and 123 answer the second question — every one of them,
+> given MR, [hand] — and the first where `L = 5`; where `L ⩾ 6` the first is open, and at `ℚ(√635087)` it is Hadwiger–Nelson given MR
+> (row 128).
+
+**`CLOSED-QUESTIONS.md` § 3 (Adjacent and open), new items at its end** — the questions `[Davies2026]` poses that this project is
+placed to work:
+
+> - **Do the ordinary and measurable chromatic numbers of the plane differ?** `[Davies2026]` pp. 2–3: *"Székely [70] conjectured that
+>   the ordinary and measurable chromatic numbers of Euclidean spaces can differ. Croft, Falconer and Guy [16, Problem G10] discuss
+>   this, noting Székely's work as evidence against equality. The question and related measurability phenomena recur throughout the
+>   literature"*; equal for `d ⩾ 4` by its Thm 1.1; its abstract hopes for `d = 2`. **For the plane: equal** — `[OAIMath2026]` Thm 1.3
+>   with `[Davies2026]` Lemma B.1 (FS131-ER1 § M; [hand], one mind, a composition of two outside results; kernel pending). Open at
+>   `d = 3`. (`[Szekely1984]` and `[16]` are not held; the conjecture is quoted through the paper.)
+> - **Conjecture 1.6 of `[Davies2026]`: `χ(ℝ²) = 6`.** Open; given MR at `ℚ(√635087)` it is `χ(ℚ(√635087)²) = 6` (row 128).
+> - **Is `χ(ℝ²) = χ(ℚ(√n)²)` for some `n`?** `[Davies2026]` p. 5 proves the four-dimensional form, conjectures the three-dimensional
+>   one and writes of the plane *"we suspect that a more complicated extension of ℚ² might be required"*. Row 128: yes at
+>   `n = 635087`, given MR there ([hand]).
+> - **An arithmetic proof that `χ(ℚ^d)` is finite**, `d ⩾ 5` (`[Davies2026]` p. 5: *"it would be particularly interesting to have such
+>   a proof that χ(ℚ^d) is finite, even if it does not improve the known bounds"*). Not worked here; the residue method of row 52 is
+>   silent where no place is stable, which is that case.
+> - **Is `[Davies2026]`'s Lemma B.1 in the literature?** Its own question (p. 44). Not found in four arXiv listing queries
+>   (FS131-ER1 § 9.1); zbMATH and `[KechrisMarks2020]` owed.
