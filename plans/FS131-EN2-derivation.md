@@ -209,3 +209,358 @@ decomposition.
 **What the adopted home predicts, checkable.** (a) `a = ν_ac(X) = max{c : c·m ≤ ν}`. (b) PE-2's `τ′` may be taken **singular to `m`**
 — more than FS100-PE2 states. (c) For a `U`-ergodic `ν`: `ν = m` or `ν ⟂ m` — the classical fact that distinct ergodic measures are
 mutually singular, which is the ergodic form's first half. Each is derived in § 4.2–4.3.
+
+---
+
+## Stage 3 — SAVED (EN2-MEAN: the scheme as worded stalls; a narrower statement serves, and reads one maximal inequality)
+
+### 3.0 Verdict first
+
+**As worded — Markov's inequality on the information function, a subsequence of scales with summable bad sets, no almost-everywhere
+theorem — not derived; it stalls at the choice of the subsequence.** Steps 4–5 compare consecutive scales, and the comparison closes
+only on a window (§ 3.1), so the scales must form a chain of bounded ratio; along every such chain Markov's bounds are summable if and
+only if `Σ_n H_n/n² < ∞` (§ 3.2), and entropy zero does not give that (§ 3.3: an invariant measure of entropy zero with
+`H_n ≥ c·n/log n`). No argument that reads of the information functions only that they are non-negative, non-decreasing in `n`, and of
+mean `o(n)` can do better (§ 3.4).
+
+**A narrower statement serves, and it is a theorem with a short proof (§ 3.5): EN2-ZE.** For a measure of entropy zero the one thing
+the deduction takes from Shannon–McMillan–Breiman — a set of measure near full on which no atom of `ξ_n` is smaller than `e^{−βn}`, for
+every large `n` — follows from Markov's inequality at **one** block length, a count of words, and **the maximal ergodic inequality for
+the indicator of a set**. Lemma 3.1′ then stands word for word (§ 3.6), and Steps 3–7 and EF_F⁺ are untouched. What is no longer read:
+Shannon–McMillan–Breiman, conditional information, the martingale theorem, the ergodic decomposition for `u*`, Jacobs's formula,
+Egorov. What is read instead is one maximal inequality — not a convergence theorem, but the kind of statement almost-everywhere
+theorems are made from; so the literal answer to "with no almost-everywhere theorem" is *no, one maximal inequality*, and the answer
+to "is Shannon–McMillan–Breiman formalized or dropped" is *dropped*. The release proves that inequality (§ 5.1).
+
+### 3.1 Two runs of Step 3 compared: the window
+
+Notation is X01D's (§ 3.4–3.5 there): a run of Step 3 at height `M` and thinness `δ` takes `x`, a lift `x̃`, the box
+`Q_{v*}(2ε, δ)` and multipliers in `V_M`, and returns `ℓ = v₁ − v₂ ∈ R ∖ {0}`, `r ∈ Λ` and `e = ℓx̃ − r`, with the bounds of X01D's
+table (l. 259–263) read at `δ` in place of `δ(M)`: at archimedean places `|e| < 4ε`, `|ℓ| ≤ 2` (ordinary); at a finite `v*`
+`|e|_{v*} ≤ M·δ`, `|ℓ|_{v*} ≤ M`; at split `w ≠ v*`, `|e|_w, |ℓ|_w ≤ m(w)` with `∏_w m(w) ≤ M²`.
+
+Take two runs for the same `x` and `x̃`, at `(M₁, δ₁)` and `(M₂, δ₂)` with `M₁ ≤ M₂` and `δ₁ ≥ δ₂`, and `z := ℓ₂r₁ − ℓ₁r₂ = ℓ₁e₂ −
+ℓ₂e₁ ∈ Λ` (X01D l. 271). At `v*` (ultrametric): `|z|_{v*} ≤ max(M₁·M₂δ₂, M₂·M₁δ₁) = M₁M₂δ₁`. Over split `w ≠ v*`: `∏_w |z|_w ≤
+∏_w m₁(w)m₂(w) ≤ M₁²M₂²`. Archimedean: ordinary `|z| < 16ε`, normalised product `< (16ε)^{[L:ℚ]}`. So
+
+  `∏_{v of W} |z|_v ≤ (16ε)^{[L:ℚ]}·M₁³·M₂³·δ₁`,
+
+and by Lemma PF `z = 0` as soon as the right side is below `1/C_Λ`. With `δ = M^{−K}` and `M₂ = M₁^c` the right side is
+`(16ε)^{[L:ℚ]}·M₁^{3 + 3c − K}`: Step 4 closes for the pair `(M, M^c)` when `K > 3 + 3c`, and X01D's pair `(M, M²)` at `K = 16` is the
+case `M^{9 − K} = M^{−7}` (l. 274). The bound is polynomial in the larger height `M₂` because `ℓ₂` has height up to `M₂²` at the split
+places; that is what makes it a window.
+
+**What the window asks of a scheme that supplies only a mass bound.** Suppose the scheme supplies, at the scale `n` (atoms of `ξ_n`,
+thinness `δ = c·s^{−(n−1)}` by X01D (ii)), the bound `μ(ξ_n(x)) ≥ e^{−βn}` (μ normalised). The pigeonhole of Step 3 then needs more
+than `e^{βn}` multipliers, so a height `M` with `log M ≥ (βn − C₀)/α′`, `α′` the true growth exponent of `#V_M` (`#V_M ≤ C·M^{α′}`:
+the rational unit vectors of bounded height are counted exactly, X12B l. 97). Two scales `(n₁, β₁)`, `(n₂, β₂)`, `n₁ < n₂`, can be
+compared by the window only if `3 log M₁ + 3 log M₂ < (n₁ − 1) log s − C₁`, hence only if
+
+  `β₂·n₂ < (α′ log s / 3)·n₁ + C₂`.
+
+Call a sequence of scales and rates `(n_j, β_j)` **admissible** when `β_{j+1}·n_{j+1} ≤ c·n_j` for all `j`, for a constant `c`. Steps
+4–5 as they stand run along admissible sequences and along no others. (Letting the rates `β_j` tend to `0` lets the ratios
+`n_{j+1}/n_j` grow — the thinness exponent `K_j = log(1/δ_j)/log M_j ≈ α′ log s/β_j` grows with them — and that freedom is inside the
+definition.)
+
+derivation: EN2-MEAN-WINDOW
+  statement: In X01D's Steps 3–4 at a finite `v*`, for two runs of Step 3 for the same point and lift at heights `M₁ ≤ M₂` and
+    thinnesses `δ₁ ≥ δ₂`, the element `z = ℓ₂r₁ − ℓ₁r₂` of `Λ` satisfies `∏_v |z|_v ≤ (16ε)^{[L:ℚ]}·M₁³·M₂³·δ₁` over the places `v`
+    of `W`; so `z = 0` when `(16ε)^{[L:ℚ]}·C_Λ·M₁³·M₂³·δ₁ < 1`, and with `δ = M^{−K}`, `M₂ = M₁^c` that holds for every large `M₁`
+    when `K > 3 + 3c`.
+  uses only: the three rows of X01D's table at `δ` in place of `δ(M)` (ll. 259–263); the ultrametric inequality at `v*` and at the
+    split places; `∏_w m(w) ≤ M²` for each run; Lemma PF; `δ₂ ≤ δ₁`
+  not claimed: that no other comparison of two scales could close outside a polynomial window; an archimedean `v*` (there the factor
+    at `v*` is `64·δ₁²` and `K > 1 + c` suffices, by X01D's parenthesis at l. 274–275, not re-derived here); anything about X12B's
+    step 5, whose window has other constants
+  argument: § 3.1 Two runs of Step 3 compared
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: X01D's own pair: `c = 2`, `K = 16`, the bound `(16ε)^{[L:ℚ]}·M^{9 − K} = (16ε)^{[L:ℚ]}·M^{−7}` (X01D l. 274)
+  prior art: known — it is X01D § 3.5's estimate with the two scales left free; the method is `[EinsiedlerFish2010]` Lemma 3.2's
+    step from `M₁` to `M₁²` (read, pp. 5–6)
+  handoff: none — a relay-result for EN2-MEAN; M8's planner may use it to choose `K` if it wants scales in another ratio
+
+### 3.2 The scheme as worded: summable along an admissible chain
+
+A statement about sequences. Let `(H_n)_{n ≥ 1}` be non-negative and non-decreasing (as `H_n = H_μ(ξ_n)` is: `ξ_{n+1}` refines
+`ξ_n`), and `c > 0`. Markov's inequality gives `μ{I_n > βn} ≤ H_n/(βn)`, and the scheme wants scales `n_j` and rates `β_j`, admissible
+(`β_{j+1}n_{j+1} ≤ c·n_j`), with `Σ_j H_{n_j}/(β_j n_j) < ∞`.
+
+*If such a sequence exists then `Σ_n H_n/n² < ∞`.* For every `j`, `H_{n_{j+1}}/(β_{j+1}n_{j+1}) ≥ H_{n_{j+1}}/(c·n_j)`, so
+`Σ_j H_{n_{j+1}}/n_j < ∞`. For `n_j < n ≤ n_{j+1}`, `H_n ≤ H_{n_{j+1}}`, and `Σ_{n > N} n^{−2} < 1/N`. Hence
+`Σ_{n > n_1} H_n/n² ≤ Σ_j H_{n_{j+1}}/n_j < ∞`.
+
+### 3.2′ The converse: from the series to a chain
+
+*If `Σ_n H_n/n² < ∞` then the dyadic chain at a fixed rate is admissible and summable.* Take `n_j = 2^j`, `β_j = c/2`:
+`β_{j+1}n_{j+1} = c·2^j = c·n_j`. For `2^j ≤ n < 2^{j+1}`, `H_n ≥ H_{2^j}` and `n^{−2} > 4^{−(j+1)}`, so
+`Σ_{2^j ≤ n < 2^{j+1}} H_n/n² ≥ H_{2^j}/(4·2^j)`, and `Σ_j H_{2^j}/((c/2)·2^j) ≤ (8/c)·Σ_n H_n/n² < ∞`.
+
+So the scheme as worded proves Lemma 3.1′'s conclusion along a chain for the measures with `Σ_n H_μ(ξ_n)/n² < ∞` — for instance
+`H_n = O(n/(log n)^{1+κ})` — and for no others.
+
+derivation: EN2-MEAN-SCHEME
+  statement: For a non-decreasing sequence `H_1, H_2, …` of non-negative reals and a real `c > 0`: there are integers
+    `1 ≤ n_1 < n_2 < …` and reals `β_j > 0` with `β_{j+1}·n_{j+1} ≤ c·n_j` for every `j` and `Σ_j H_{n_j}/(β_j·n_j) < ∞` if and only
+    if `Σ_n H_n/n² < ∞`.
+  uses only: `H` non-decreasing and non-negative; `Σ_{n > N} n^{−2} < 1/N`; for the converse the dyadic blocks
+  not claimed: that the true bad sets `{I_n > βn}` are summable only then (Markov's bound can lose: § 3.3's example has summable bad
+    sets along some admissible sequences with rates tending to 0); anything about a proof that does not go through a union bound
+  converse: § 3.2′ The converse
+  argument: § 3.2 The scheme as worded
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `H_n = √n` (the series converges; the dyadic chain at `β = c/2` has bounds `2/(c·2^{j/2})`); and on the other side
+    `H_n = n/log(n + 1)` (the series diverges)
+  prior art: known — a condensation argument; not searched, nothing claimed
+  handoff: none — it is the reason EN2-MEAN stalls, and reaches the kernel lane only as that reason
+
+### 3.3 Entropy zero does not give the series: a mixture of de Bruijn orbits
+
+For `k ≥ 1` put `d_k = 2^k`, let `w_k` be a binary de Bruijn word of order `d_k` (a cyclic word of length `P_k = 2^{d_k}` in which
+every binary word of length `d_k` occurs once as a window), and `μ_k` the uniform probability on the `P_k` shifts of the periodic
+sequence `w_k^∞` — a shift-invariant measure on `{0,1}^ℤ` carried by one finite orbit. Let `p_k = (6/π²)·k^{−2}` and
+`μ = Σ_k p_k μ_k`. `P` is the letter at time `0`, so `ξ_n` is the partition by the word at times `0, …, n − 1`.
+
+1. *`H_n(μ_k) = min(n, d_k)·log 2`.* For `n ≤ d_k` every word of length `n` is the prefix of `2^{d_k − n}` words of length `d_k`, each
+   a window once: the `n`-marginal of `μ_k` is uniform. For `n ≥ d_k` the `P_k` windows are distinct (their first `d_k` letters
+   differ), each of mass `1/P_k`. (Control `debruijn-marginals`: orders 2, 4, 8, every `n ≤ d + 2`.)
+2. *`H_n(μ) ≥ (6 log 2/π²)·n/(1 + log₂ n)`.* Entropy is concave in the measure (Jensen for `−t log t`, word by word), so
+   `H_n(μ) ≥ Σ_k p_k H_n(μ_k) ≥ n log 2·Σ_{k ≥ ⌈log₂ n⌉, k ≥ 1} p_k`, and `Σ_{k ≥ K} k^{−2} > 1/K`, `⌈log₂ n⌉ ≤ 1 + log₂ n` (at `n = 1`
+   the sum is `1`). Hence `Σ_n H_n(μ)/n² = ∞`.
+3. *Entropy zero.* `H_n(μ) ≤ Σ_k p_k H_n(μ_k) + H(p)`, with `H(p) = −Σ_k p_k log p_k < ∞`, so
+   `H_n(μ)/n ≤ log 2·Σ_k p_k min(1, 2^k/n) + H(p)/n → 0` (dominated convergence). The time-zero partition generates, so the shift has
+   entropy zero for `μ`.
+4. *The conclusion holds anyway.* `μ` is carried by a countable set, and a point `x` of the `k`-th orbit has
+   `μ(ξ_n(x)) ≥ μ{x} = p_k/P_k` for every `n`.
+5. *Even the true bad sets are not summable along the dyadic chain at a fixed rate.* Let `n = 2^J`, `β < log 2`,
+   `q_n = Σ_{k ≥ J} p_k ≥ (6/π²)/J`. The words charged by some `μ_k` with `k < J` number at most `Σ_{k<J} 2^{2^k} ≤ 2^{1 + n/2}`; every
+   other word `w` has `μ[w] = q_n·2^{−n} < e^{−βn}`. So `μ{I_n > βn} ≥ q_n·(1 − 2^{1 − n/2})`, and the sum over `J` diverges like the
+   harmonic series. The union of these bad sets over `J ≥ J₀` nevertheless has measure at most `q_{2^{J₀}} → 0`: they are nested, and
+   a union bound cannot see that.
+
+derivation: EN2-MEAN-RATE
+  statement: There is a shift-invariant Borel probability `μ` on `{0,1}^ℤ`, of entropy zero, whose partition by the letter at time 0
+    has `H_μ(ξ_n) ≥ (6 log 2/π²)·n/(1 + log₂ n)` for every `n ≥ 1`, so that `Σ_n H_μ(ξ_n)/n² = ∞`; and `μ`-almost every point `x` has
+    `inf_n μ(ξ_n(x)) > 0`.
+  uses only: the de Bruijn property of each `w_k`; concavity of Shannon entropy in the measure and the bound
+    `H(Σ p_k μ_k) ≤ Σ p_k H(μ_k) + H(p)`; `Σ_{k ≥ K} k^{−2} > 1/K`; `H(p) < ∞` for `p_k ∝ k^{−2}`
+  not claimed: that such a measure lives on the dual `R̂` and is invariant under the unit vectors — by EF_F⁺ itself none does that
+    violates the deduction's conclusion, so the example is a model of the hypothesis "entropy zero" and not of the chain's setting;
+    that the measure is ergodic (it is a mixture; an ergodic example is not needed and not sought)
+  argument: § 3.3 Entropy zero does not give the series
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: the measure itself; at `d = 8` the word has period 256, every 5-letter word occurs 8 times, and the 256 windows of length
+    8, 9, 10 are distinct (the control's third line)
+  prior art: owed — that zero-entropy systems have block entropies of every sublinear growth is folklore (recalled, not read; the
+    words would be "slow entropy", "entropy dimension", "complexity of zero entropy systems"); not searched
+  handoff: none — a counter-model for the scheme, not a statement of the chain
+
+control: debruijn-marginals
+  of: EN2-MEAN-RATE — step 1, on the de Bruijn words of orders 2, 4, 8: every window count as derived
+  run: python3 ../data/fs131/en2/debruijn_mixture.py 2 4 8
+  expect: 2 4 0
+    4 16 0
+    8 256 0
+  fault: python3 ../data/fs131/en2/debruijn_mixture.py 2 4 8 --plant
+
+### 3.4 What the scheme reads is not enough: a model with no dynamics
+
+Fix `λ ≥ 1`. On `[0, 1)` with Lebesgue measure let `E_m` (`m ≥ 3`) be the arc of length `ε_m = 1/(m log m)` starting where
+`E_{m−1}` ends, the arcs laid end to end around the circle `ℝ/ℤ`. `Σ_m ε_m = ∞`, so every point lies in `E_m` for infinitely many `m`.
+Put `I_n(x) := λ·max{m ≤ n : x ∈ E_m}` (and `0` if there is none). Then `I_n ≥ 0`; `I_n ≤ I_{n+1}`; and
+`∫ I_n ≤ λ·Σ_{3 ≤ m ≤ n} m·ε_m = λ·Σ_{3 ≤ m ≤ n} 1/log m = o(n)`.
+
+Let `(n_j, β_j)` be any sequence with `β_{j+1}·n_{j+1} ≤ λ·n_j`. If `x ∈ E_m` and `n_j < m ≤ n_{j+1}`, then
+`I_{n_{j+1}}(x) ≥ λ·m > λ·n_j ≥ β_{j+1}·n_{j+1}`: `x` is bad at the scale `n_{j+1}`. Every `m > n_1` falls in one such interval and
+each interval holds finitely many `m`, so **every** point is bad at infinitely many scales of the sequence.
+
+So the three facts the scheme reads of the information functions — non-negative, non-decreasing in `n`, mean `o(n)` — are consistent
+with *no point at all* being good along any admissible sequence. These `I_n` are the information functions of no measure-preserving
+system (§ 3.5 forbids it); what separates the two is the invariance of the measure, and that is what a proof must read.
+
+derivation: EN2-MEAN-MODEL
+  statement: For every `λ ≥ 1` there are measurable functions `I_1 ≤ I_2 ≤ …` on `[0, 1)`, non-negative, with `∫ I_n = o(n)` for
+    Lebesgue measure, such that for every sequence of integers `n_1 < n_2 < …` and reals `β_j > 0` with `β_{j+1}·n_{j+1} ≤ λ·n_j`
+    for all `j`, every point `x` has `I_{n_j}(x) > β_j·n_j` for infinitely many `j`.
+  uses only: `Σ 1/(m log m) = ∞`; `Σ_{m ≤ n} 1/log m = o(n)`; the arcs laid end to end
+  not claimed: that these functions are information functions of a partition under any map; that no proof without a maximal
+    inequality exists — only that none can read these three facts alone
+  argument: § 3.4 What the scheme reads is not enough
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `λ = 1`, the dyadic chain `n_j = 2^j` at `β_j = 1/2`: a point of `E_m`, `2^j < m ≤ 2^{j+1}`, has `I_{2^{j+1}} ≥ m > 2^j =
+    β_{j+1}·n_{j+1}`
+  prior art: known — the sliding-arc ("typewriter") sequence that converges in mean and at no point; textbook, recalled
+  handoff: none — a counter-model
+
+derivation: EN2-MEAN
+  statement: Steps 4–5 (X01D ll. 226–246) can run on convergence in mean — `μ{I_n > εn} ≤ H_n/(εn)` by Markov's inequality on the
+    information function, along a subsequence of scales chosen so that the bad sets are summable — with no almost-everywhere theorem.
+  uses only: —
+  not claimed: that the deduction needs Shannon–McMillan–Breiman (it does not: EN2-ZE, EN2-L31); that no rearrangement free of every
+    maximal inequality exists (not shown; EN2-MEAN-MODEL shows only what such a rearrangement could not be built from)
+  argument: § 3.0 Verdict first
+  verdict: stalls at: the choice of the subsequence — Steps 4–5 need consecutive scales inside the window of EN2-MEAN-WINDOW, so the
+    sequence must be admissible, and along admissible sequences Markov's bounds are summable only when `Σ_n H_n/n² < ∞`
+    (EN2-MEAN-SCHEME), which entropy zero does not give (EN2-MEAN-RATE). Tried against it: rates `β_j → 0` with growing ratios (inside
+    EN2-MEAN-SCHEME's statement, no gain); the monotonicity of `I_n` (it reduces every scale to a chain and no further); passing to
+    the complement of `T + K_{v*}` and asking only for positive measure (the same union bound); a pigeonhole on atoms in place of
+    masses (one scale again); one scale with the dynamics of `u*` on a tube about the leaves (fails: Haar measure charges every
+    tube and no leaf). What serves in its place: EN2-ZE
+  grade: hand
+  minds: 1
+
+### 3.5 The narrower statement: entropy zero puts no small atoms on a large set
+
+**The count (EN2-CNT).** Let `𝒜` be an alphabet of `a` letters, `k ≥ 1`, `𝒢` a set of words of length `k`, `g ≥ 2` real with
+`#𝒢 ≤ g`, `θ ≥ 0`, `n ≥ k`, and `W` the set of words `w` of length `n` with at most `θn` *bad starts* — positions
+`0 ≤ j ≤ n − k` with `w[j, j + k) ∉ 𝒢`.
+
+*Parse.* Read `w` from the left: at position `j`, if `j ≤ n − k` and `w[j, j + k) ∈ 𝒢`, emit that block and move to `j + k`; otherwise
+emit the single letter `w_j` and move to `j + 1`. A single is emitted only at a bad start or at one of the last `k − 1` positions, so
+the parse of a word of `W` has at most `θn + k − 1` singles. The parse is a sequence of *tokens* — single letters (`a` kinds) and
+blocks (`#𝒢` kinds) — whose concatenation is `w`; so `w ↦` its parse is injective, and `#W` is at most the number of token sequences
+of total length `n` with at most `θn + k` singles.
+
+*Weigh.* Let `t = 1/(2a)` and `c_m := Σ t^{#singles}` over all token sequences of total length `m`. Then `c_0 = 1`,
+`c_m = a·t·c_{m−1} + #𝒢·c_{m−k}` (the last token; the second term only for `m ≥ k`), and with `ρ := g^{2/k}`:
+`a·t/ρ ≤ 1/2` and `#𝒢·ρ^{−k} ≤ g·g^{−2} ≤ 1/2`, so `c_m ≤ ρ^m` by induction (`c_m = 2^{−m}` for `m < k`). A sequence with at most
+`θn + k` singles has `t^{#singles − (θn + k)} ≥ 1`, so
+
+  `#W ≤ t^{−(θn + k)}·c_n ≤ (2a)^{θn + k}·g^{2n/k}`.
+
+(Control `count-names`: steps "parse", "count of token sequences" and the final bound, on 228 cases by complete enumeration.)
+
+derivation: EN2-CNT
+  statement: Let `𝒜` be a finite alphabet of `a ≥ 1` letters, `k ≥ 1`, `𝒢` a set of words of length `k` over `𝒜`, `g ≥ 2` a real
+    number with `#𝒢 ≤ g`, `θ ≥ 0` and `n ≥ k`. The number of words `w` of length `n` over `𝒜` having at most `θn` positions
+    `0 ≤ j ≤ n − k` with `w[j, j + k) ∉ 𝒢` is at most `(2a)^{θn + k}·g^{2n/k}`.
+  uses only: the greedy parse and its injectivity; the recursion for the weighted count of token sequences; `g ≥ 2` and `#𝒢 ≤ g`
+  not claimed: a sharp exponent (a binomial count gives `exp(n·h(2θ))` in place of `(2a)^{θn}` for the choice of positions; the
+    weighted count is used because it needs no bound on binomial sums); anything for `n < k`
+  argument: § 3.5 The narrower statement
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `a = 2`, `k = 3`, `𝒢 = {000}`, `g = 2`, `θ = 9/10`, `n = 13`: all `8192` words have at most `11.7` bad starts (there are
+    11 starts), and the bound is `4^{14.7}·2^{26/3} > 8192`
+  prior art: known — the count of names covered by good blocks in the covering proofs of the entropy theorem (Ornstein–Weiss;
+    Shields's book; recalled, not read); the weighted recursion is a standard device
+  handoff: de Bruijn — the statement as written, for module M8; pure combinatorics over `Fin n → α`, no measure
+
+control: count-names
+  of: EN2-CNT — the parse bound, the count of token sequences and the final inequality, on every word of length at most 13 for
+    five pairs (k, 𝒢) and four values of θ
+  run: python3 ../data/fs131/en2/count_names.py
+  expect: 0 0 0 228
+  fault: python3 ../data/fs131/en2/count_names.py --plant
+
+**The lemma (EN2-ZE).** `(X, μ)` a probability space, `T : X → X` measurable with `T_*μ = μ`, `P : X →` a finite set of `a` letters,
+measurable; `[x]_n` the set of points with the same name of length `n` as `x`; `H_n` the entropy of the partition into these sets;
+`inf_n H_n/n = 0`. Given `β, η > 0` (`η ≤ 1`):
+
+1. *Parameters.* `γ := β/8`, `θ := min(η/2, β/(8 log 2a))`.
+2. *One block length, by Markov on the terms of `H_k`.* `H_{m+n} ≤ H_m + H_n` (invariance), so `H_{jk₀}/(jk₀) ≤ H_{k₀}/k₀`: there is
+   `k` with `γk ≥ log 2` and `H_k ≤ γθ²k`. Let `𝒢` be the names `w` of length `k` with `μ[w] ≥ e^{−γk}`; `#𝒢 ≤ e^{γk} =: g`, `g ≥ 2`.
+   Let `B := {x : name_k(x) ∉ 𝒢}`. Each `w ∉ 𝒢` has `−log μ[w] > γk`, and the terms of `H_k` are non-negative, so
+   `H_k ≥ γk·μ(B)`: `μ(B) ≤ θ²`.
+3. *Every length at once, by the maximal inequality.* Let `E := {x : #{0 ≤ j < n : T^j x ∈ B} > θn for some n}`. The maximal ergodic
+   inequality for the indicator of `B` gives `θ·μ(E) ≤ μ(B)`: `μ(E) ≤ θ`.
+4. *Few names off `E`.* For `x ∉ E` and `n ≥ k/θ`: the block of `name_n(x)` at `j ≤ n − k` is `name_k(T^j x)`, which is outside `𝒢`
+   only if `T^j x ∈ B`; so `name_n(x)` has at most `θn` bad starts and lies in the set `W_n` of EN2-CNT, with
+   `#W_n ≤ (2a)^{θn + k}·e^{2γn} ≤ (2a)^{2θn}·e^{2γn} ≤ e^{βn/2}`.
+5. *Small atoms are few in mass.* Let `S_n` be the union of the sets `[w]_n`, `w ∈ W_n`, with `μ[w]_n < e^{−βn}`:
+   `μ(S_n) ≤ #W_n·e^{−βn} ≤ e^{−βn/2}`.
+6. *The set.* Take `N₀ ≥ k/θ` with `Σ_{n ≥ N₀} e^{−βn/2} ≤ η/2` and `X′ := X ∖ (E ∪ ⋃_{n ≥ N₀} S_n)`. Then `μ(X′) ≥ 1 − θ − η/2 ≥
+   1 − η`, and for `x ∈ X′`, `n ≥ N₀`: `name_n(x) ∈ W_n` and `[x]_n ⊄ S_n`, so `μ([x]_n) ≥ e^{−βn}`. ∎
+
+No limit is taken, no conditional expectation is formed, and nothing is assumed ergodic, invertible or standard Borel. Step 2 is
+where entropy zero is spent, and it is spent as Markov's inequality — the asker's instinct — but at one block length, not along a
+sequence of scales; step 3 is where the invariance of the measure is spent, and it is what the union bound over scales could not
+replace.
+
+derivation: EN2-ZE
+  statement: Let `(X, μ)` be a probability space, `T : X → X` measurable with `T_*μ = μ`, and `P` a measurable map from `X` to a
+    finite set; write `[x]_n` for the set of points `y` with `P(T^j y) = P(T^j x)` for `0 ≤ j < n`, and `H_n` for the Shannon entropy
+    of the partition of `X` into these sets. If `inf_{n ≥ 1} H_n/n = 0`, then for every `β > 0` and `η > 0` there are `N₀` and a
+    measurable `X′ ⊆ X` with `μ(X′) ≥ 1 − η` such that `μ([x]_n) ≥ e^{−βn}` for every `x ∈ X′` and every `n ≥ N₀`.
+  uses only: subadditivity of `H_n` (to make the block length large); Markov's inequality on the terms of one `H_k`; the maximal
+    ergodic inequality for the indicator of one measurable set under a measure-preserving map; EN2-CNT; a geometric series
+  not claimed: anything at positive entropy (step 2 fails there: Markov gives `μ(B) ≤ h/(h + γ)`, not small); convergence of
+    `−(1/n) log μ([x]_n)`, almost everywhere or otherwise; a countable partition; that the proof is new
+  argument: § 3.5 The narrower statement
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: an irrational rotation of the circle with `P` the indicator of an arc: `H_n ≤ log(2n)`, and every `[x]_n` is one of at most
+    `2n` arcs; and against the hypothesis, the fair-coin shift: `H_n/n = log 2`, `μ([x]_n) = 2^{−n}`, the conclusion false for
+    `β < log 2`
+  prior art: known — the upper half of the Shannon–McMillan–Breiman theorem at entropy zero, without ergodicity; the route is the
+    covering proof of the entropy theorem (Ornstein–Weiss 1983; Shields, *The Ergodic Theory of Discrete Sample Paths*) with the
+    pointwise ergodic theorem replaced by Hopf's maximal inequality and the choice of good blocks by Markov's inequality (both
+    sources recalled, not read; not searched; no novelty claimed)
+  handoff: de Bruijn — the statement as written, for module M8, in place of Shannon–McMillan–Breiman; its one classical input is the
+    maximal inequality for an indicator, which the release states and proves (`excessiveOccupation_measure_bound`, § 5.1)
+
+### 3.6 Lemma 3.1′ stands, word for word
+
+Parts (i), (ii) and (iv) of X01D's proof (ll. 230–236, 239–241) are kept. Part (iii) (ll. 237–239) is replaced by:
+
+(iii′) Let `μ̄ = μ/μ(R̂)`, `T` the map `χ ↦ u*·χ` of `R̂`, which preserves `μ̄`, and `P` the map sending a point to the cell of `ξ`
+that holds it; then `[x]_n` is the atom `ξ_n(x)`. The entropy `h_μ(u*)` is that of `μ̄`, and it is the supremum over finite
+measurable partitions of `inf_n H_n/n`; so `h_μ(u*) = 0` gives `inf_n H_{μ̄}(ξ_n)/n = 0`. EN2-ZE at `β₁` and `η/(2μ(R̂))` gives `N₀`
+and a Borel `X′` with `μ(X′) > μ(R̂) − η` and `μ(ξ_n(x)) ≥ μ(R̂)·e^{−nβ₁}` for `n ≥ N₀`, `x ∈ X′`.
+
+(iv) then reads as before with the constant `μ(R̂)` carried: `μ(π(x̃ + Q_{v*}(2ε, δ))) ≥ μ(ξ_n(x)) ≥ μ(R̂)·(δ/(cs))^{β₁/log s} ≥ δ^β`
+once `β₁/log s < β` and `δ₀` is small. Steps 3–7 of X01D read Lemma 3.1′ only through its statement, so EF_F⁺ stands as filed. X12B's
+step 2 (ll. 113–115) is replaced the same way.
+
+derivation: EN2-L31
+  statement: Fix `ε > 0` with `∏_{v|∞}(2ε(1 + |u*|_v^{1/2}))² · ∏_{w split} max(1,|u*|_w) < 1/C_Λ` (ordinary moduli inside,
+    normalised outside). For every `β > 0` and `η > 0` there are `δ₀ > 0` and a Borel `X′ ⊆ R̂` with `μ(X′) > μ(R̂) − η` such that
+    `μ(π(x̃ + Q_{v*}(2ε, δ))) ≥ δ^β` for every `x ∈ X′`, every lift `x̃`, and every `0 < δ ≤ δ₀`.
+  uses only: X01D's parts (i), (ii), (iv) as written; EN2-ZE for the map `χ ↦ u*·χ`, the normalised measure and the partition `ξ`;
+    that the entropy of a map is at least the rate of each finite partition
+  not claimed: any change to the statement (it is X01D ll. 226–228, quoted); anything about parts (i) and (ii), which were not
+    re-derived here; that the hypotheses of the lemma (set above it in X01D: `μ` a `U`-invariant finite measure, `h_μ(u*) = 0`,
+    `v*` an expanding place of `u*`) are changed
+  argument: § 3.6 Lemma 3.1′ stands
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: EF-X's circle measure `λ_ρ` (X01D § 2.2; entropy zero for every `u`) at a finite `v*`: a point `x = π(x̃)` of the circle has
+    `x̃_{v*} = 0`, so for every `δ > 0` the box `π(x̃ + Q_{v*}(2ε, δ))` holds the arc of the circle within archimedean distance `2ε`
+    of `x`, of mass independent of `δ` — at least `δ^β` for small `δ`
+  prior art: known — `[EinsiedlerFish2010]` Lemma 3.1 (read, pp. 3–4), which cites the almost-everywhere theorem for the same set
+  handoff: de Bruijn — Lemma 3.1′ with its proof's third part resting on EN2-ZE; the module reads no Shannon–McMillan–Breiman,
+    no Jacobs formula, no ergodic decomposition for `u*` and no Egorov
+
+### 3.7 The attack on my own argument
+
+- *A measure and a partition on which convergence in mean holds and the needed conclusion fails.* Among measure-preserving systems
+  there is none: EN2-ZE is a theorem (and so is Shannon–McMillan–Breiman). What exists is (a) a measure-preserving system of entropy
+  zero on which the **scheme** fails and the conclusion holds (EN2-MEAN-RATE), and (b) functions with every property the scheme reads
+  and no good point (EN2-MEAN-MODEL), which come from no invariant measure. The two together locate the missing input: invariance,
+  used across all lengths at once.
+- *Does EN2-ZE prove too much?* Run on the fair-coin shift it proves nothing false: step 2 needs `γk ≥ log 2` and `H_k ≤ γθ²k`, i.e.
+  `log 2 ≤ γθ²`, which forces `γ ≥ log 2/θ² > β` — the parameters of step 1 cannot be chosen.
+- *The ends of the parse.* A word whose length is not a multiple of `k`, and blocks that would overrun the end, are the usual place
+  for an off-by-`k`; the control enumerates every length from `k` to 13.
+- *`E` is defined with "for some `n`", including `n < k`.* That only enlarges `E`; the maximal inequality bounds it as defined.
+- *Does (iii′) use the right entropy?* The lemma's hypothesis is `h_μ(u*) = 0` and the proof needs the rate of one partition; the rate
+  is at most the entropy by definition. No generator is needed, and the release's `measureEntropy` is a supremum over finite
+  partitions (§ 5.1).
+- *What a second mind should attack first:* step 4's sentence "the block of `name_n(x)` at `j` is `name_k(T^j x)`" (it is the
+  definition of a name, and it is where the dynamics enters the count), and step 3's use of the inequality for *every* `n`.
+
+### 3.8 Would-have-searched-here log
+
+- None. The two computations are complete enumerations of finite sets whose extent the derivation fixed (de Bruijn windows; words
+  of length at most 13).
