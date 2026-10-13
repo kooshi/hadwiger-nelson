@@ -151,3 +151,15 @@ decide about the hold.
 
 Nothing else in the brief changes. You start no agents of your own (standing rule 1: delegation is one level deep,
 because the coordinator can only review work it knows exists).
+
+## Amendment 2 (2026-10-13 16:12 UTC) — Kooshi has chosen: every finding of ours is formalized, the two deductions under measure rigidity included
+
+> W2: (2026-10-13, answering the choice between the two publishable forms) I choose the second form. Any finding of ours must be formalized. I'd prefer to formalize the entire chain, so at some point I'd like to price the EL theorem to see what it would take to formalize as well.
+> — source: data/fs131/REQUEST-2026-10-13.md
+
+**What changes for your ranking.** Judge each finding that rests on measure rigidity at a number field in its full
+form: kernel-checked given only the printed theorem of Einsiedler and Lindenstrauss, with this project's own
+deductions formalized. Amendment 1's request for two places per finding is withdrawn — he has decided, so one order is
+enough; keep the column that says which findings rest on that chain, because it tells the kernel lane what the first
+of them unlocks for the rest. Nothing else changes. You start no agents of your own (standing rule 1: delegation is one
+level deep, because the coordinator can only review work it knows exists).

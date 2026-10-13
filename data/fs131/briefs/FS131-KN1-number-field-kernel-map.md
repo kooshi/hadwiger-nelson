@@ -167,3 +167,26 @@ publishable sentences is his. If he lifts the hold, that is a new brief.
 
 The asking lane has the same correction as an amendment to its brief. Nothing else changes. You start no agents of
 your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 2 (2026-10-13 16:12 UTC) — Kooshi has chosen: the hold is lifted; every hypothesis of ours is to be discharged, the two deductions included
+
+> W2: (2026-10-13, answering the choice between the two publishable forms) I choose the second form. Any finding of ours must be formalized. I'd prefer to formalize the entire chain, so at some point I'd like to price the EL theorem to see what it would take to formalize as well.
+> — source: data/fs131/REQUEST-2026-10-13.md
+
+**What changes for you.** Amendment 1's "do not plan or price the formalization of the two deductions" is withdrawn.
+The target for every number-field result is now the one this brief began with, and it is reachable in his terms:
+**every hypothesis of kind "ours" discharged — the entropy split and the pigeonhole carried to the number field among
+them — leaving only printed statements declared term for term.** So the map now carries, for those two deductions,
+what it carries for every other missing piece: the leaves in dependency order, each exact enough to type, starting
+with what the printed statements need before they can be declared at all (you named the definition Lean's library
+lacks). Sizes only from leaves you have typed or proofs you have read; an unknown is written as unknown.
+
+**Not asked now:** pricing the formalization of the printed theorem itself. He wants that "at some point"; it will be a
+job of its own. For now it is a declared outside theorem with its four items. If the map shows something about it in
+passing — which of its two printed forms the chain should import, what its statement needs — write it down; do not
+go looking.
+
+Your proposal of this morning (one sentence about measures null on the torsion-plus-archimedean characters) is logged
+as yours and unchecked; whether it is still the right interface now that the hypotheses under it are to be proved
+rather than assumed is yours to say in the map. You start no agents of your own (standing rule 1: delegation is one
+level deep, because the coordinator can only review work it knows exists).
