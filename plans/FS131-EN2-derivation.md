@@ -564,3 +564,249 @@ derivation: EN2-L31
 
 - None. The two computations are complete enumerations of finite sets whose extent the derivation fixed (de Bruijn windows; words
   of length at most 13).
+
+---
+
+## Stage 4 — SAVED (EN2-DECOMP: derived, and more than was asked — no uniqueness of an ergodic decomposition, no permutation of components, no decomposition for `U`)
+
+### 4.0 Verdict first
+
+**Derived.** The step from `Γ` to `U` goes through on the canonical decomposition in the form the release states it (existence
+only), and what replaces X02D § 3.2 is shorter than what it replaces: **PE-2's two parts are the Lebesgue decomposition of the
+measure with respect to Haar measure.** The absolutely continuous part is a multiple of `m` because `m` is ergodic; the singular
+part is `U`-invariant because the Lebesgue decomposition is unique; and for each admissible `Γ` the canonical `Γ`-components of the
+singular part are almost surely not `m` — they charge an `m`-null set fully — so Lemma Γ and the mixture lemma give it entropy zero
+on `Γ`. Three things X02D § 3.2 reads are not read at all:
+
+- **the uniqueness of the ergodic decomposition** (ll. 205, 209): at l. 205 its conclusion is used by no later step (§ 4.1); at
+  l. 209 what is consumed is "the components of the non-Haar part are not `m`", which singularity gives in one line;
+- **"`U` permutes the components"**: true, by a computation (§ 4.4), and idle;
+- **the ergodic decomposition for `U`** (l. 216, step 5): `τ′` is the singular part, formed with no decomposition.
+
+The uniqueness that *is* read is that of the Lebesgue decomposition, which Mathlib holds. L. 225 is in § 3.3, X02D's second route,
+which the chain does not need once § 3.2's conclusion stands. The statements PE-2 and its ergodic form are unchanged (EN2-PE2), and
+the route gives a little more than they say: `τ′` can be taken singular to `m` (EN2-PE2-SING).
+
+### 4.1 The reading: step 1's conclusion is read by no later step
+
+X02D § 3.2, step by step, for what each reads of step 1's conclusion `(u_*)_♯P = P` (l. 205):
+
+| step | lines | reads of step 1 |
+|---|---|---|
+| 2, the split | 206–207 | nothing: "`ν′_Γ` is `U`-invariant (it is `(ν − a_Γ m)/(1 − a_Γ)`)" reads the invariance of `ν` and of `m`; the entropy of `ν′_Γ` reads T3 |
+| 3, `U`-ergodic `ν` | 208–210 | nothing: it reads step 2's invariance, the extremality of `ν`, and T1's uniqueness a second time, for another purpose |
+| 4, all of `U` | 211–212 | nothing: Lemma W |
+| 5, PE-2 | 216–218 | nothing: the `U`-ergodic decomposition, (★), T3 |
+
+So the citation at l. 205 is idle, and with it step 1's remark that `u_*` preserves `Z_Γ`. § 3.3 (the second route) says of itself
+that it "reaches (★) without permuting components".
+
+### 4.2 The step from `Γ` to `U`, on the Lebesgue decomposition
+
+*Setting.* `X = R̂`: a compact metrizable group, so a standard Borel space. `U` acts by continuous automorphisms `χ ↦ u·χ`. `m` is
+Haar probability: `u_*m = m` for every `u` (in the kernel's form of "Haar" — every Fourier coefficient off `0` vanishes — because
+`∫χ(r) d(u_*m) = ∫χ(ur) dm` and `ur ≠ 0`). `ν` is a `U`-invariant Borel probability. Lemma Γ and Lemma W are X02D's (§ 3.1; ll.
+156–163), read by statement.
+
+1. **The Lebesgue decomposition.** `ν = ν_ac + ν_s`, `ν_ac ≪ m`, `ν_s ⟂ m`, and the pair is unique.
+2. **Both parts are `U`-invariant** (EN2-LEB-INV). For `u ∈ U`: `u_*ν_ac ≪ u_*m = m`; `u_*ν_s ⟂ u_*m = m` (if `m(S) = 0` and
+   `ν_s(Sᶜ) = 0` then `u_*m(uS) = 0` and `u_*ν_s((uS)ᶜ) = 0`, `u` being a bijection measurable both ways); and
+   `u_*ν_ac + u_*ν_s = u_*ν = ν`. By uniqueness, `u_*ν_ac = ν_ac` and `u_*ν_s = ν_s`.
+3. **`ν_ac = a·m`, `a = ν_ac(X)`** (EN2-AC-ERG). Let `g = dν_ac/dm`. For `u ∈ U` and Borel `B`:
+   `ν_ac(B) = ν_ac(u⁻¹B) = ∫ 1_B(ux) g(x) dm(x) = ∫_B g∘u⁻¹ dm` (the last by `u_*m = m`), so `g∘u⁻¹` is a density of `ν_ac` too and
+   `g∘u⁻¹ = g` `m`-almost everywhere. `m` is ergodic for one non-torsion `γ₀ ∈ U` — for `(3 + 4i)/5`, say: a character `r ∈ R` with
+   finite `γ₀`-orbit has `(γ₀^j − 1)r = 0` for some `j ≥ 1`, so `r = 0`, and an `L²(m)` function invariant under `γ₀` has Fourier
+   coefficients constant on orbits, hence zero off `0` (X02D l. 200–201 is this argument for `Γ`). So `g` is `m`-almost everywhere
+   constant.
+4. **For every admissible `Γ`, `h_{ν_s}(γ) = 0` for all `γ ∈ Γ`.** If `ν_s = 0` there is nothing to prove. Otherwise let
+   `λ = ν_s/ν_s(X)`, a `Γ`-invariant probability (step 2, `Γ ⊆ U`), `𝓘_Γ` the σ-algebra of Borel sets `B` with `γB = B` for all
+   `γ ∈ Γ`, and `κ` the conditional-expectation kernel of `λ` on `𝓘_Γ`. The canonical decomposition (the release's
+   `action_ergodic_decomposition`, both conjuncts, at `H = Γ`, `Y = R̂`, `μ = λ`) says: `∫ κ(x) dλ(x) = λ`, and for `λ`-almost every
+   `x` the probability `κ(x)` is `Γ`-invariant and `Γ`-ergodic. Take `S` Borel with `m(S) = 0`, `λ(S) = 1`. Then
+   `1 = λ(S) = ∫ κ(x)(S) dλ(x)` with `κ(x)(S) ≤ 1`, so `κ(x)(S) = 1` for almost every `x`; as `m(S) = 0`, **`κ(x) ≠ m`**
+   (EN2-SING-COMP). By Lemma Γ, `h_{κ(x)}(γ) = 0` for every `γ ∈ Γ`, for almost every `x` (`Γ` is countable). By the mixture lemma
+   (the release's `measureEntropy_kernel_zero`, at `Z = (R̂, 𝓘_Γ)`, `τ = λ` restricted to `𝓘_Γ`, `T = γ·`):
+   `h_λ(γ) = 0`.
+5. **All of `U`.** Every non-torsion `u ∈ U` lies in an admissible `Γ` (Lemma W); a torsion `u` has entropy zero for every
+   measure (X02D l. 166). So `h_{ν_s}(u) = 0` for every `u ∈ U`.
+
+**PE-2.** For a `U`-invariant finite positive `τ ≠ 0` apply 1–5 to `τ/τ(X)`: `τ = a·m + τ_s`, `a = τ_ac(X) ≥ 0`, and `τ′ := τ_s` is
+finite, positive, `U`-invariant, of entropy zero for every `u`. ∎
+
+**What `a` is.** `a·m = τ_ac ≤ τ`. If `c·m ≤ τ` then, with `S` as in step 4 for `τ_s`, `c·m = c·m|_{Sᶜ} ≤ τ|_{Sᶜ} = τ_ac`, so
+`c ≤ a`: `a = max{c ≥ 0 : c·m ≤ τ}`.
+
+### 4.3 The ergodic form, from the same decomposition
+
+Let `ν` be `U`-invariant and `U`-ergodic. Take `S` with `m(S) = 0`, `ν_s(Sᶜ) = 0`, and `S̃ := ⋃_{u ∈ U} uS`: still `m`-null (`U`
+countable, `m` invariant), still carrying `ν_s`, and `uS̃ = S̃` for every `u`. Then `ν(S̃) = ν_ac(S̃) + ν_s(S̃) = ν_s(X)`, and
+ergodicity gives `ν_s(X) ∈ {0, 1}`. If `1`: `ν = ν_s` has entropy zero for every `u` (§ 4.2). If `0`: `ν = ν_ac = a·m`, a
+probability, so `ν = m`. That is (★), X02D l. 214. ∎
+
+*On the word "equivalently" in the filed statement.* Here both sentences are proved outright. The implication from the ergodic form
+back to the decomposition is X02D's step 5 and reads the ergodic decomposition for `U`; this route does not use it and does not
+re-derive it.
+
+### 4.4 "`u` permutes the components" is a computation — and is not needed
+
+For the record, since the asker's question names it. Let `ν` be `U`-invariant, `Γ ⊆ U` a subgroup, `κ` the conditional-expectation
+kernel of `ν` on `𝓘_Γ`, `u ∈ U`. `u` commutes with `Γ`, so `u⁻¹I ∈ 𝓘_Γ` for `I ∈ 𝓘_Γ` (`γu⁻¹I = u⁻¹γI = u⁻¹I`), and likewise `uI`.
+For bounded Borel `f` and `I ∈ 𝓘_Γ`: `∫_I E_ν[f | 𝓘_Γ]∘u dν = ∫_{uI} E_ν[f | 𝓘_Γ] dν = ∫_{uI} f dν = ∫_I f∘u dν` (twice
+`u_*ν = ν`), and `E_ν[f | 𝓘_Γ]∘u` is `𝓘_Γ`-measurable; so `E_ν[f∘u | 𝓘_Γ] = E_ν[f | 𝓘_Γ]∘u` almost everywhere, i.e.
+`∫ f d(u_*κ(x)) = ∫ f dκ(ux)` for almost every `x`. Over a countable family of `f` that determines a measure: **`u_*κ(x) = κ(ux)`
+for `ν`-almost every `x`.** It is the one place commutativity is used, and § 4.2 does not use it: the step from `Γ` to `U` needs only
+`Γ ⊆ U` and that each `u` preserves `m`.
+
+*A variant that stays on `ν`'s own kernel* (not filed as an entry; one paragraph). With `κ` the kernel of `ν` itself on `𝓘_Γ` and
+`A_Γ := {x : κ(x) = m}` (in `𝓘_Γ`: countably many Fourier coefficients), the conditional-expectation property gives
+`ν|_{A_Γ} = ν(A_Γ)·m`, and `ν(A_Γ) = max{c : c·m ≤ ν}` by the lemma "if `c·m ≤ ν` with `c > 0` and `m` is `Γ`-ergodic, then
+`κ(x) = m` for `m`-almost every `x`" — proved by the same invariance of a density as step 3, read from the other side. It reaches
+the same `τ′` with one more lemma and a measurability check, so the Lebesgue route is the one handed over.
+
+### 4.5 The attack on my own argument
+
+- *A place where two decompositions that agree almost everywhere are treated as equal.* Looked for at each step. Step 2 equates
+  measures, by the uniqueness of the Lebesgue decomposition: an equality, not an almost-everywhere agreement. Step 3 concerns a density,
+  defined `m`-almost everywhere, and concludes an almost-everywhere constancy. Step 4 uses one kernel — Mathlib's `condExpKernel` is a
+  function defined everywhere — and three statements each true off a `λ`-null set (`κ(x)` ergodic; `κ(x)(S) = 1`; Lemma Γ's
+  conclusion for the countably many `γ`), intersected. No two kernels are compared, and no representing measure on a space of measures
+  is formed. X02D's argument did compare (the representing measure of `u_*ν` with the image of that of `ν`); this one has nothing to
+  compare.
+- *Where it would break.* Without the ergodicity of `m`, step 3 fails: the mean of the Haar measures of the two cosets of a closed
+  subgroup of index two is absolutely continuous to `m` and no multiple of it (FS100-PE1's second counterexample is such a measure
+  for a non-admissible `Γ`). With all of `U` acting there is no such measure, because `m` is ergodic for `(3 + 4i)/5` alone.
+- *Does it prove too much?* It never says an absolutely continuous measure has positive entropy, nor that a zero-entropy measure is
+  singular; `a·m` is simply whatever is absolutely continuous. For the circle measure of EF-X the decomposition is `a = 0`, `τ′ = λ_ρ`
+  (it is carried by `A`, and `m(T + A) = 0` is J45's N1 (c), by statement, as EN1 § 8.1 lists it — not needed by the argument).
+- *The measurable set `{m}`.* X02D's `a_Γ = P({m})` needs the singleton measurable in a space of measures. Step 4 needs no such set:
+  "`κ(x)(S) = 1`" is a statement about one Borel set.
+- *What a second mind should attack first:* step 2's "`u_*ν_s ⟂ m`" (it is where `u` bijective and bimeasurable is used), and step
+  4's use of the release's theorem for `λ`, a measure invariant under `Γ` but obtained from `ν` by a decomposition that is not
+  `Γ`-specific.
+
+derivation: EN2-LEB-INV
+  statement: Let a group `U` act on a measurable space `X` by bijections measurable in both directions, and let `m`, `ν` be finite
+    measures on `X` with `u_*m = m` and `u_*ν = ν` for every `u ∈ U`. Then the absolutely continuous part and the singular part of
+    `ν` with respect to `m` are each invariant under every `u ∈ U`.
+  uses only: existence and uniqueness of the Lebesgue decomposition of a finite measure with respect to a finite measure; that the
+    image of an absolutely continuous (singular) pair under a bimeasurable bijection is absolutely continuous (singular)
+  not claimed: anything for a map that is not invertible; that the density of the absolutely continuous part is invariant (that is
+    EN2-AC-ERG's first step)
+  argument: § 4.2 The step from `Γ` to `U`
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `X` the circle `ℝ/ℤ`, `U` the group of order two generated by the rotation by `1/2`, `m` Lebesgue,
+    `ν = ½·m + ¼·(δ_0 + δ_{1/2})`: `ν_ac = ½·m` and `ν_s = ¼·(δ_0 + δ_{1/2})`, each invariant
+  prior art: known — textbook (the Lebesgue decomposition commutes with a measure isomorphism); Mathlib holds
+    `MeasurableEmbedding.singularPart_map`, seen by name at this library's pin, not read
+  handoff: de Bruijn — the statement as written, for module M7 (a few lines over Mathlib's `singularPart`)
+
+derivation: EN2-AC-ERG
+  statement: Let `T` be a bijection of a measurable space `X`, measurable in both directions, preserving a probability `m` for which
+    `T` is ergodic, and let `λ` be a finite measure on `X` with `λ ≪ m` and `T_*λ = λ`. Then `λ = λ(X)·m`.
+  uses only: the Radon–Nikodym density `g` of `λ`; `g∘T⁻¹ = g` almost everywhere, from the invariance of `λ` and of `m`; an
+    almost-everywhere invariant integrable function of an ergodic map is almost everywhere constant
+  not claimed: the statement for a non-ergodic `m` (false: the mean of the Haar measures of two cosets of a subgroup of index two);
+    anything about entropy
+  argument: § 4.2 The step from `Γ` to `U`
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `X = R̂`, `T` multiplication by `(3 + 4i)/5`, `m` Haar: ergodic because no non-zero element of `R` has a finite orbit under
+    a non-torsion unit vector; `λ = m` itself
+  prior art: known — textbook (an invariant measure absolutely continuous to an ergodic one is proportional to it; recalled as
+    Walters, *An Introduction to Ergodic Theory*, ch. 6, not read)
+  handoff: de Bruijn — the statement as written, with the ergodicity of Haar measure on `R̂` under one non-torsion unit vector as its
+    companion leaf (the Fourier argument of X02D l. 200–201)
+
+derivation: EN2-SING-COMP
+  statement: Let `X` be a standard Borel space, `𝓘` a sub-σ-algebra of its Borel σ-algebra, `m` and `λ` probabilities on `X` with
+    `λ ⟂ m`, and `κ` the conditional-expectation kernel of `λ` on `𝓘`. Then for `λ`-almost every `x` there is a Borel set of
+    `κ(x)`-measure 1 and `m`-measure 0; in particular `κ(x) ≠ m`.
+  uses only: `∫ κ(x)(S) dλ(x) = λ(S)` for one Borel set `S`; `κ(x)(S) ≤ 1`
+  not claimed: that `κ(x)` is ergodic or invariant for any action (the release's theorem supplies that, separately); any group
+  argument: § 4.2 The step from `Γ` to `U`
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `X = [0, 1]`, `𝓘` trivial, `m` Lebesgue, `λ = δ_0`: `κ(x) = δ_0` for every `x`, and `S = {0}`
+  prior art: known — a one-line consequence of the disintegration identity
+  handoff: de Bruijn — the statement as written, for module M7; over the release's first conjunct
+    (`condExpKernel μ m ∘ₘ μ.trim hm = μ`)
+
+derivation: EN2-PE2-SING
+  statement: For every real number field `F` and every `U`-invariant finite positive measure `τ` on `R̂`, the singular part `τ_s` of
+    `τ` with respect to Haar measure `m` is `U`-invariant with `h_{τ_s}(u) = 0` for every `u ∈ U`, and `τ − τ_s = a·m` with
+    `a = max{c ≥ 0 : c·m ≤ τ}`.
+  uses only: EN2-LEB-INV; EN2-AC-ERG with the ergodicity of `m` under one non-torsion unit vector; EN2-SING-COMP; the canonical
+    ergodic decomposition for the countable group `Γ` on the standard Borel space `R̂`, existence only, in the release's form; Lemma Γ
+    (X02D § 3.1, which reads `[EinsiedlerLindenstrauss2022]` Thm 1.2 on the pieces) and Lemma W (X02D ll. 156–163), by statement;
+    that a mixture of invariant measures of entropy zero has entropy zero; `Γ ⊆ U` and `u_*m = m`; that a torsion `u` has entropy zero
+  not claimed: that `U` is used as an abelian group in this step (it is not; Lemma Γ and Lemma W use it); that an invariant measure
+    of entropy zero for every `u` is singular to `m` (that would need Haar measure to have positive entropy for some `u`, which this
+    step never reads); Lemma Γ and Lemma W themselves, which were not re-derived; the fields where `R ≠ O′`, at which Lemma Γ's
+    inputs are as X02D leaves them
+  argument: § 4.2 The step from `Γ` to `U`
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `τ = m + λ_ρ` with `λ_ρ` EF-X's circle measure (X01D § 2.2), carried by `A`, which is `m`-null (J45's N1 (c), by
+    statement): `τ_s = λ_ρ`, `a = 1`; and `τ = m`: `τ_s = 0`, `a = 1`
+  prior art: known — the Lebesgue decomposition of an invariant measure into invariant parts is textbook; its use for this step in
+    place of an ergodic decomposition of `τ` under `U` was not searched for and is not claimed new
+  handoff: de Bruijn — for module M7, in place of X02D § 3.2 steps 1–5: `entropySplit` with `τ′` the singular part
+
+derivation: EN2-PE2
+  statement: PE-2 (PE-lim): for every real number field `F`, every `U`-invariant finite positive measure `τ` on `R̂` is `a·m + τ′`,
+    `a ≥ 0`, `τ′` `U`-invariant with `h_{τ′}(u) = 0` for every `u ∈ U`; equivalently every `U`-ergodic `ν` is `m` or of zero entropy
+    for every `u`.
+  uses only: EN2-PE2-SING for the first sentence; for the second, EN2-PE2-SING, a `U`-invariant `m`-null set carrying the singular
+    part, and the ergodicity of `ν`
+  not claimed: any change to the statement (it is FS100-PE2's, `plans/FS100-derivation.md` l. 191, quoted); its grade there (two
+    derivations blind to each other) — this is a third route to the step from `Γ` to `U` only, one mind, over the same Lemma Γ
+  converse: one-way — both sentences are proved outright (§ 4.2, § 4.3); the implication from the ergodic form to the decomposition
+    is X02D's step 5, which reads the ergodic decomposition for `U` and is not used or re-derived here
+  argument: § 4.3 The ergodic form
+  verdict: derived
+  grade: derived from: EN2-PE2-SING
+  minds: 1
+  model: `τ = m + λ_ρ` as in EN2-PE2-SING: `a = 1`, `τ′ = λ_ρ`; ergodic `ν = λ_ρ`: not `m`, entropy zero for every `u`
+  prior art: known — FS100-PE2 (X02D § 3.2–3.3; X02V § 2.3); the statement's own prior-art cell stands as filed
+  handoff: de Bruijn — module M7's `entropySplit`; the statement is unchanged, its proof's step from `Γ` to `U` is § 4.2
+
+derivation: EN2-EQUIV
+  statement: Let a countable abelian group `U` act on a standard Borel space `X` by Borel automorphisms preserving a probability
+    `ν`, let `Γ` be a subgroup of `U`, and `κ` the conditional-expectation kernel of `ν` on the σ-algebra of `Γ`-invariant Borel
+    sets. Then for every `u ∈ U`, `u_*κ(x) = κ(ux)` for `ν`-almost every `x`.
+  uses only: `u` commutes with `Γ` (so `u` and `u⁻¹` preserve the `Γ`-invariant σ-algebra); `u_*ν = ν`; the defining property of
+    conditional expectation; a countable family of bounded Borel functions that determines a measure
+  not claimed: that PE-2 needs it (it does not: § 4.2); an everywhere statement; anything for `u` not commuting with `Γ`
+  argument: § 4.4 "`u` permutes the components" is a computation
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `X = (ℤ/2)²`, `Γ` generated by the flip of the first coordinate, `u` the flip of the second, `ν` uniform: `κ(x)` is uniform
+    on the `Γ`-orbit of `x`, and `u` carries the orbit of `x` to the orbit of `ux`
+  prior art: known — equivariance of conditional expectation under a measure-preserving automorphism of the sub-σ-algebra; textbook
+  handoff: none — answers the asker's sub-clause; idle for PE-2
+
+derivation: EN2-DECOMP
+  statement: § 3.2 goes through on the canonical decomposition, where "`u` permutes the components" is a computation and no
+    uniqueness theorem is read.
+  uses only: EN2-PE2-SING and EN2-PE2 (the conclusions of § 3.2, by a route that reads the canonical decomposition for `Γ` in
+    existence form); EN2-EQUIV (the sub-clause); § 4.1 (the reading)
+  not claimed: that no uniqueness statement of any kind is read — the uniqueness of the Lebesgue decomposition is, and Mathlib holds
+    it; that X02D's § 3.2 survives line by line (its steps 1, 3 and 5 are replaced, not repaired); anything about § 3.3 or about
+    X02V's route, each of which cites uniqueness and neither of which is needed
+  argument: § 4.0 Verdict first
+  verdict: derived
+  grade: derived from: EN2-PE2-SING, EN2-PE2, EN2-EQUIV
+  minds: 1
+  model: the measure `τ = m + λ_ρ` of EN2-PE2-SING, on which every step of § 4.2 is non-trivial except Lemma Γ's Haar case
+  prior art: known — see EN2-PE2-SING
+  handoff: de Bruijn — M7 reads T1 as the release's `action_ergodic_decomposition` and nothing more of the ergodic decomposition
+
+### 4.6 Would-have-searched-here log
+
+- None.
