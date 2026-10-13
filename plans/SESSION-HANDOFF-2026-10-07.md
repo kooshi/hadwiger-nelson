@@ -81,6 +81,20 @@ this session):
    `χ(ℝ²) = χ_m(ℝ²)` from `[Davies2026]` Lemma B.1 and the declared outside theorem. **A corollary of two outside
    results, never filed as this project's theorem.**
 
+6. ~~FS131-ER1, the reading of `[Davies2026]`~~ — **done (2026-10-13 17:02 UTC; items 654, 655): it proves nothing this project
+   lists as its own, contradicts no row, and its method does not reach the plane as written; rows 121–123 are posed
+   there as open (by residue class modulo 168 — it never prints the field of √47), row 128's analogue is its theorem
+   in dimension four and up, row 129's plane clause is the d = 2 case of its density statement, which it lacks.**
+   Record `plans/FS131-ER1-davies-reading.md`; its § 9.2 holds drafts for the owed filing.
+7. **FS131-KN3** (kernel planner; brief `data/fs131/briefs/FS131-KN3-chain-plan.md`; claim list
+   `data/fs131/claims-NF2.md`; worktree and branch `fs131-wch`; item 656): the five-colour chain's architecture and
+   first layer. A long job with saved stages; a successor can take any stage from its record
+   `plans/FS131-KN3-chain-plan.md` on the branch.
+
+**RUNNING AT THIS HOUR: FS131-KN2, FS131-KC1, FS131-KN3 — three planners, three trees (`fs131-wnf`, `fs131-wkc`,
+`fs131-wch`). Next free slots: implementers on the first plan back (briefs to write from the plan; iteration at
+`--mem 8`, builds one at a time); FS-133's planner; the Clerk for the owed filing (the list is in item 656).**
+
 **REPORTS TO KOOSHI ONLY AT A GATE, A DECISION OF HIS OR HIS CHECK-IN (2026-10-13 16:44 UTC; his word W3, FS-131 inventory item 650): no per-event
 reports; report when something is through the gate, when a decision is genuinely his, or when he checks in. His
 defaults are in force: the asking lane's order; FS-133 joins the kernel queue; the measurable-number corollary
