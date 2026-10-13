@@ -532,3 +532,134 @@ chain, then `plans/FS103-derivation.md:68–88`; FS-133's own module is `plans/F
 **Row 130 — `χ_CP(ℝ²) = χ_m⁰(ℝ²)`.** `[hand]`. K: `Plane.chiM0_le_iff_chiCP_le` (std3; takes `Plane.Row130M1`, ours); the
 equality `χ = χ_m⁰` by import. This is the real plane's row; listed because row 128 reads it. Missing:
 `plans/FS103-derivation.md:100` (FS103-M1).
+
+## Stage 5 — SAVED: the cross-cuts, the order, and what phase 2 inherits
+
+### X1. The shared leaves, defined once
+
+| tag | the leaf, exact enough to type | rows that wait on it | what I can say of its size |
+|---|---|---|---|
+| `[S1a]` | For a real number field `F` and `𝔭` with `Arith.IsUsablePrime 𝔭`: `χ(planeOver F) ≤ χ(unitQuadrance (𝓞 F ⧸ 𝔭))`; and `≤ χ(finitePlane p)` when `Nat.card (𝓞 F ⧸ 𝔭) = p` is prime. | 52, 53, 73, 94, 119 (upper end), every instance field | a corollary of `Arith.exists_placeHom` at `n = 0` (`pureTranscendental_zero`) and `Arith.exists_hom_finitePlane_of_card`; statements read, a few lines by that reading |
+| `[S1b]` | For a real number field `F` and `P : SpectralChain.StablePrime F`: a graph homomorphism from the unit-distance graph on `planeOver F` into `SpectralChain.levelTarget P 1`; so `χ(planeOver F) ≤ SpectralChain.localBound F`. Converse half for row 105: a conjugation-stable valuation subring of `fieldI F` other than the field is the localization at a stable prime. | 57, 63, 99, 103 (upper end), 105, 123, 127 (`inline:UpperHalf`) | the usable-prime analogue is `Arith/PlaceHom.lean:96–360` (about 260 lines: `exists_valuationSubring_localization`, `exists_residue_localization`, `placeHom_base`, `exists_hom_of_isPlaceHom`); those two localization lemmas are stated for `F : Subfield ℝ` and must be restated for a number field given as `fieldI F : Subfield ℂ`. Proofs not read in full: unknown |
+| `[S2]` | For squarefree `d > 1`, `F = ℚ(√d) ⊂ ℝ` with its `NumberField` instance, and an odd prime `p` with `d ≡ s² ≢ 0 (mod p)`: a maximal ideal `𝔭` of `𝓞 F` with `Nat.card (𝓞 F ⧸ 𝔭) = p`. The same for a multiquadratic field at a prime where every radicand is a square, a ramified radicand included (11 in `K`). | 52, 53, 73, 119 (upper end), 121 (a control: the result is already held another way), 123's instances | `Instances/SqrtFortySeven.lean` reaches the same end at `(47, 11)` with no `𝓞 F` in 431 lines (measured), and stays as the fallback and the control. By ideals: unknown |
+| `[S3]` | For a finite field `k` of `Q ≡ 3 (mod 4)` elements, a graph isomorphism between the norm-one Cayley graph of the quadratic extension (`StandingFive.normOneCayley`, the object of `TargetFloor n Q`) and `unitQuadrance k`. | 53, 68–71 (as readings of the floors), 101, 123 (CLS) | unknown |
+| `[S4]` | Each independence-number certificate as a kernel check: `α(Γ₂₃) ≤ 105`, `α(Γ₈₃) ≤ 1148`, then 27, 43, 47, 59, 67, 79. | 68–71; discharges `inline:Alpha23`, `inline:Alpha83` | unknown; to be measured at 23 first |
+| `[S5]` | The all-levels independence ratios of the towers at 11 and 19 (FS-66's fibre-share certificates). | 75, 89, 123 (CLS) | unknown |
+| `[S6]` | A winding on the relation lattice of `Cay(R_F, U_F)` gives a character `θ` of `R_F` with `θ(U_F) ⊆ [1/3, 2/3]` (`plans/FS73-derivation.md` T22; `plans/FS81-derivation.md:39`). | 79, 82, 99 | unknown |
+| `[S7]` | Torsion extraction, FS91-J02-L1 (`plans/FS91-derivation.md:171`). | 82, 99 | unknown |
+| `[S8]` | `SevenConditional.G4`: a refutation certificate for the 588-vertex core at four colours. | 103 | needs a proof log: a search request |
+| `[S9]` | At a stable prime the image of `U_F` in `𝓞/P^m` is every norm-one element. | 99 (its step 5), 123 (count, CLS) | unknown |
+
+**These go first whatever the ranking says**: `[S1a]`, `[S1b]`, `[S2]` — eleven rows wait on them between them, they import
+nothing, and with them two exact values close at once (X8).
+
+### X2. Hypotheses that more than one statement takes (`scripts/assumptions-ledger.txt`)
+
+Of kind `ours`: `Interface.RU`, `Interface.PE2`, `Interface.EFPlus` (6 statements each); `Interface.APlus0`,
+`Interface.APlusOfR88`, `Interface.Count`, `inline:Row99`, `inline:CLS` (3 each); `inline:Row123Chain`,
+`CharacterColouring.OrderBound` (2 each). Every one of the first eight is on the chain to five and nowhere else: **the chain
+is the only place where hypotheses of ours are shared.** Of kind `outside`: `SpectralChain.BochnerHerglotz` (13),
+`StandingFive.KloostermanBound` (9; proved from the import at characteristic not 2), `SpectralChain.InvariantMeasureOnClosed`
+(7), `Bridge.RealAlgebraicDescent` (6).
+
+### X3. Where the kernel's form and the ledger's row differ
+
+- **Stronger than the row — corrections owed to `LEDGER.md` (drafts in X9):** row 52 (the bound is kernel-checked at every
+  usable prime, FS-131 wave 2; the row says `[hand + tools]`); row 57's "Not proved" clause (closed at usable primes of `F`);
+  row 53's Kloosterman clause (floors on Weil's import, for the norm-one targets); row 121's and row 127's "every link it
+  names is [hand] and stays so" (eight of J45's inputs have kernel forms since wave 10: the chain entry's K).
+- **Weaker in form than the row:** row 127 and row 123's "kernel … over named hypotheses": the hypotheses are sentences
+  about an abstract `Interface` whose `E`, `TA` and entropy `h` are free data (the chain entry). Not a defect of truth; a
+  defect of what a reader is told. **Not a statement defect in the gate's sense**: I change no gated statement.
+- No row inside the line claims a kernel theorem that is absent.
+
+### X4. Statements that a declared outside theorem already in the library now implies
+
+- **Some real number field's plane needs six colours.** `Bridge.exists_numberField_chromaticNumber_eq_plane_of_descent`
+  (takes Artin–Lang as `RealAlgebraicDescent`) with `Outside.OAI158.six_le_chromaticNumber_plane` (on
+  `no_proper_five_coloring`) gives `∃ F : Subfield ℝ, NumberField F ∧ 6 ≤ χ(planeOver F)`. Two lines; stated nowhere in
+  `Proofs/` (searched `Bridge.lean`, `Outside/OAI158.lean`, `Plane/RadiusOutside.lean`). It is the one number-field sentence
+  above five the library can hold today, on one import and one named outside hypothesis.
+- Weil's import proves `StandingFive.KloostermanBound` wherever the characteristic is not 2, so each of its nine takers has
+  an unconditional twin on the import; the twins exist for the floors (`…_weil`) and for no other taker
+  (`circle_sum_le_of_ne`, `normOne_charSum_ge`, `kloosterman_page_of_kloostermanBound` keep the hypothesis form by design).
+- Row 128: its plane side (`χ(ℝ²) = χ_m⁰(ℝ²)`) is now an import's theorem, so the collapse needs only its field half.
+- Outside the line and already recorded: the six-target hypotheses given `no_proper_five_coloring` (`CLAUDE.md` § The gate).
+
+### X5. The outside theorems, one table
+
+| statement | printed | our copy read against the page? | Mathlib at the pin (what I searched) | call | four items |
+|---|---|---|---|---|---|
+| Weil's bound for Kloosterman sums, characteristic not 2 | `[Weil1948]` p. 207 | yes, two readers (`CLAUDE.md` § Trust ledger) | none ("kloosterman") | imported | held |
+| Artin–Lang | `[Lang1953]`; `[GoelPatilVerma2022]` Thm 3.11 | `[Lang1953]` not held; Thm 3.11 read | none ("artin.?lang", "tarski.?seidenberg", "quantifier elimination") | import, in Thm 3.11's form | 1, 2, 4 owed; 3 held in part |
+| Herglotz–Bochner with uniqueness | `[Rudin1962]` 1.4.3, 1.3.6 | no ("not quoted from a held copy") | none; has `PontryaginDual`, Riesz–Markov–Kakutani | formalize, own job | none while a hypothesis |
+| Markov–Kakutani | `[Kakutani1938]` | not held, not read | none ("markov.?kakutani", "amenab"); has `Measure/Prokhorov.lean` | formalize, own job | none while a hypothesis |
+| `m₁(ℝ²) ≤ 0.246989` | `[AmbrusEtAl2023]` Thm 1 | not checked by me | `m₁` undefined; statable | import | all owed |
+| the positive-entropy dichotomy on solenoids | `[EinsiedlerLindenstrauss2022]` Thm 1.2, p. 2 | §§ 1, 2, 4 read (row 120) | no entropy, no solenoid | import, after leaves 13–15 | all owed |
+| ergodic decomposition; entropy along increasing σ-algebras; Jacobs; Shannon–McMillan–Breiman | **no page cited** (X02D: "exact theorem numbers not checked") | — | none ("ergodic decomposition", "shannon", "mcmillan") | decide after leaf 13 | a prior-art debt first |
+| Chebotarev | not cited by page | — | none ("chebotarev"); Dirichlet held | import for general `F`; not needed at `ℚ(√47)` | all owed |
+| a Kloosterman bound in characteristic 2 | **only if CLS reads one at `U_Q`, `Q ≥ 64`** | — | none | to check (chain leaf 8) | — |
+
+### X6. The interface, now that what is under it will be proved
+
+Keep `E := T + A`. Read off the kernel's own proofs: `Interface.mr_of_pe2_efPlus` uses `E` only through `TA ⊆ E`, and binds
+the Haar-null clause `hHE` without using it; `Interface.x4_eq_empty` uses `E` only as a measurable rotation-stable set
+holding `TA`, in `hMR`, and in `hRU`. EF_F⁺'s conclusion is already "carried by `T + A`" (D:162). So at `E := T + A` the
+chain needs PE-2, EF_F⁺ and A⁺ at `S = ∅`, and **R-U (J45 § 5.4; D:176, FS100-EFZ), the split-place set `Fin_S`, the
+topology `τ′_S` at `S ≠ ∅`, and "Haar(`E`) = 0" are not leaves of rows 121 and 123.** They stay inputs of rows 112 and
+116–118. X11K's table carried R-U as "months (needs N1)". Mine, one mind, read off Lean and the entries' statements — **a
+deriver should confirm that A⁺ at `S = ∅` (SI-3, SI-4, N2 at `S = ∅`) reads `E` nowhere beyond `T + A`** before a skeleton
+is built on it. Sent to Keryx mid-job.
+
+### X7. Seen in passing about the printed Einsiedler–Lindenstrauss theorem (not looked for)
+
+The chain reads **Thm 1.2** (X02D § Stage 3, input E1), whose statement needs leaves 13–15 and no notion of "factor". Row 120
+says its proof in print is an outline (EL2003 § 6) and that it follows from Thm 1.3 by a deduction the paper does not write,
+which is ours (FS105-DED, `plans/FS105-derivation.md:24`). FS105-VC (:35) records that Thm 1.3's hypothesis "no virtually
+cyclic factors", read literally, is met by no action — the trivial factor is virtually cyclic — so an axiom copying Thm 1.3
+term for term would be empty unless the reading is written into it. Importing Thm 1.2 avoids that; it leaves FS105-DED off
+the library's path. Whether "any finding of ours must be formalized" then still asks for FS105-DED is Keryx's and Kooshi's
+ruling.
+
+### X8. Nearest and furthest, and the first module on the kernel's evidence alone
+
+**Nearest the kernel.** (i) Row 52's bound as an inequality: one corollary. (ii) **`χ(ℚ(√11)²) = 4` exactly** (row 73):
+`[S1a]` and `[S2]` at `(11, 7)`; the lower half and the colouring of `Γ₇` are held. (iii) `χ(K(√5)²) = 5` (row 52): `[S2]`
+at `K(√5)`, 11; both ends' certificates are held. (iv) `χ(F²) ≤ L(F)` for every real number field (`[S1b]`), which also
+gives the two-colour theorem its first real instance. (v) "some real number field's plane needs six" (X4): two lines.
+(vi) `χ(K(√7)²) ≥ 5` (row 103): one certificate from the search lane.
+**In the middle.** Row 99 (`χ = L` for `L ≤ 4`) and row 82: no entropy, no measure theory beyond characters; `[S6]`,
+`[S7]`, `[S9]` and the finite ring `R/6R`. Unsized.
+**Furthest.** Rows 121 and 123 (23 leaves, three definitions the library lacks, four to seven printed statements), rows
+128–129 on top of them, and the character cluster 95–102 (band rigidity).
+
+**The first module I would start with, whatever the ranking:** the residue upper half — `[S1a]` and `[S1b]` in one new
+module (`Arith/UpperHalf`, importing `Arith/PlaceHom` and `SpectralChain`), `[S2]` for real quadratic fields in a second
+(`Arith/QuadraticPrime`), and the values they close in a third (`Instances/…`: `χ(ℚ(√11)²) = 4`, `χ(ℚ²) = 2`,
+`χ(ℚ(√167)²) ≤ 8`, `χ(ℚ(√47)²) ≤ 5` again as the control against `SqrtFortySeven`). Reasons: eleven rows wait on it; it
+discharges one hypothesis of the headline (`inline:UpperHalf`) and is leaf 1 of row 99; it imports nothing; and the result
+everyone expects first, `χ(ℚ(√47)²) = 5`, is not reachable without the whole chain, of which this is also a leaf. Two
+implementers could run at once with no shared file: one on `Arith/UpperHalf`, one on `Arith/QuadraticPrime`; the instances
+file follows both. In parallel and independent of both, the chain's own first leaf is C0 (naming `T + A`) and then leaf 13
+(entropy): a third tree.
+
+### X9. Drafts for files this job does not write (Keryx's)
+
+- `LEDGER.md` row 52, after "…(G43)." insert: "**In the kernel since FS-131 wave 2:** the residue homomorphism at a usable
+  prime of any real number field — `Arith.exists_placeHom`, `Arith.exists_hom_finitePlane_of_card` (standard three axioms);
+  the two values are still [hand] at the fields' primes." and change the grade to "[kernel for the homomorphism; hand +
+  tools for the instances]".
+- `LEDGER.md` row 57, after "**Not proved:** … of size N(𝔭).": "Proved since at a usable prime of `F`
+  (`Arith.placeHom_base`); open at a conjugation-fixed prime of `F(i)`."
+- `LEDGER.md` row 127, replace "every link it names is [hand] and stays so" by "the hypotheses are stated over an abstract
+  interface (a set `E`, a set `TA`, a function `h`); of the links they stand for, J45's N2, N1 (c), SI-4, SP-oi, SP-if,
+  SI-J and SI-C's finite facts have kernel forms since FS-131 wave 10 (`Arith/SpectralInputs`, `ProductFactor`, `GapSeven`)".
+- `BIBLIOGRAPHY.md`: no new row. Debts to record: page citations for the four textbook inputs of PE-2 (X5).
+
+### What phase 2 inherits
+
+The amendment naming the asking lane's order had not come when this stage was saved (Amendments 1 and 2 were about the
+target). A successor, or this job resumed, starts phase 2 at X8's module unless the ranking says otherwise: type `[S1a]`
+and `[S1b]`'s statements against `Arith/PlaceHom.lean` and `SpectralChain.lean:274–301`, read them back against row 52 and
+row 123's "upper half" sentence, and build the skeleton under the brief's slot line. **No build and no `lake env lean` run
+was made in phase 1, so there is no measurement of this machine to report.**
