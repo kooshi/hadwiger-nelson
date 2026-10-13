@@ -77,3 +77,29 @@ plan priced L2.3 at 150–200 lines; from these leaves I price it at about 120 w
 
 **Private helpers so far** (six; none is nameable outside the file): `abs_eq_of_one_le_abs_form`, `no_rotation_at_corner`,
 `unitRing_induction`, `eq_half_of_mem_band_two`, `half_ne_zero`, `exists_unitVectors_inv_natCast`.
+
+## Stage 3 — SAVED: the last two leaves (L2.3, L2.4); the file has no `sorry`
+
+Commit `c007de223`. The module elaborates under `lake env lean` with the lakefile's three options and prints nothing
+(11.6 s, 3.7 GB). Statement check on the working file: 18 named constants compared, PASS; control 3 of 3
+(`data/fs131/it1/logs/statements-stage3.out`). One line sent to "main" as the brief's channel asks.
+
+| leaf | how it went, against its plan |
+|---|---|
+| `tendsto_layer` (L2.3) | the second planner's decomposition held, as four private children. `exists_orbit`: `g m = wᵐ b` built in `ℂ` (a `zpow` in the field, so no unit of the ring is constructed), `J = i`, with the three relations the argument reads — `(2 − i)w = 2 + i` at `g m`, its multiple by `i`, and `g m / 5 = g (m + 1) + g (m − 1) − g m` — each one `linear_combination` from an identity of `ℂ`. `exists_lift_of_mem_band_three`: a point of `band 3` is `1/2 + x`, `|x| ≤ 1/6`. `rotation_layer`: `θ(5⁻ᵏ g_m) = ↑(1/2 + a_m/5ᵏ)`, induction on `k` with `m` inside. `corner_layer`: `3 • θ(5⁻ᵏ g_m) = 0`, the same induction. The leaf is then: the two relations read through `θ` are `layer_dichotomy`'s hypotheses (the integers are `n + 1` and `n − 1`: the halves contribute `∓1`); a rotation layer tends to `↑(1/2)`; on a corner layer `θ(25⁻ⁿ b) = 25 • θ(25⁻⁽ⁿ⁺¹⁾ b) = θ(25⁻⁽ⁿ⁺¹⁾ b)` since `25 = 1 + 8·3`, so the sequence is constant at `θ b = ↑(1/2 ± 1/6)`. About 190 lines with the children, against the plan's 150–200 |
+| `exists_torsion_mem_fieldBandSet` (L2.4) | as planned, with `unitRing_induction` in place of a subgroup: convergence passes to sums (`Filter.Tendsto.add`), the limit is additive by `tendsto_nhds_unique` (`UnitAddCircle` is Hausdorff by instance), and at a unit vector it is one of `↑(1/2)`, `↑(1/3)`, `↑(2/3)`, each in `band 3` and killed by 6. About 50 lines |
+
+**Private helpers, all ten** (none is nameable outside the file; each carries a docstring): `abs_eq_of_one_le_abs_form`,
+`no_rotation_at_corner` (§1); `unitRing_induction`, `exists_orbit`, `exists_lift_of_mem_band_three`, `rotation_layer`,
+`corner_layer` (§2); `eq_half_of_mem_band_two`, `half_ne_zero` (§3); `exists_unitVectors_inv_natCast` (§5).
+
+**Axioms before the build, from a copy** (`lean/AxiomsFooter.lean` appended to the working file;
+`data/fs131/it1/axioms-footer.txt`, 28 records: 18 public, 10 private): every one of the ten leaves, every private helper,
+`inv5`, `coe_inv5` and `three_le_chromaticNumber_planeOver_of_sqrt_mem` on `[propext, Classical.choice, Quot.sound]`; five
+compositions with `sorryAx` besides — `colorable_two_of_inv_three_mem`, `four_le_chromaticNumber_planeOver_of_inv_three_mem`,
+`chromaticNumber_planeOver_ne_three_of_inv_three_mem`, `four_le_chromaticNumber_planeOver_of_sqrt_mem`,
+`four_le_chromaticNumber_planeOver_fieldOfRadicands` — which is the upstream leaf's,
+`ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable` (another job's module, `sorry` in this tree; stage 4 shows it
+from the built module). Control: with one helper's proof replaced by `sorry` in a copy, that helper and exactly the four
+records that read it (`layer_step`, `layer_dichotomy`, `tendsto_layer`, `exists_torsion_mem_fieldBandSet`) gain `sorryAx`:
+10 records against 5 (`axioms-footer.control.txt`).
