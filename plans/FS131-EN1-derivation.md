@@ -140,3 +140,92 @@ That is J45's proof of R-U word for word (`plans/FS84-SI-D-derivation.md` § 4.1
 
 **A recognition that differs from the plan's is a finding**: item 1 is one, and it is the fifth statement's whole risk. Sent to the
 coordinator with the first verdict.
+
+## Stage 3 — SAVED (EN1-APLUS: what A⁺ at `S = ∅` reads of `E`, line by line)
+
+**Verdict: TRUE as worded** [hand; one mind — a reading of J45's proofs, with one exact text check]. Nothing in the proof of A⁺ at `S = ∅`
+names the union `E`; every occurrence of the set is `E_S`, which at `S = ∅` is `T + A`. N2 at `S = ∅` does need N1 (a) at `S = ∅`. **What the
+statement leaves out, and the planner needs:** N1 (a) is not all of N1 that A⁺ at `S = ∅` reads. As written it also reads N1 (b) at `S = ∅`
+(`R` is dense in `R̂_prof × (L ⊗ ℝ)`), that `T + A` is Borel, and that `T + A` is stable under `U`. None of the three reads a split place.
+N1 (c) — proper, dense, Haar-null — is not read at all.
+
+### 3.1 The reading
+
+J45's A⁺ (`plans/FS84-SI-D-derivation.md` ll. 240–250) is proved from SI-4, N2 and T-C(A); SI-4 from SI-3 and SI-2; SI-3 from SI-1; SI-1 from N2.
+Each line that touches the set, at `S = ∅`:
+
+| step (line) | the text | what it reads of the set | what it needs of N1, at `S = ∅` |
+|---|---|---|---|
+| N2, statement (l. 126) | "`σ_f(R̂ ∖ E_S) = 0` iff `y ↦ V_y f` is `τ′_S`-continuous" | `E_∅ = T + A`, as a Borel set and as the continuity group of `τ′_∅` | that `T + A` is Borel (it is σ-compact: `T` is countable, `A` a continuous image of `L ⊗ ℝ`) |
+| N2, ⟹ (l. 128) | "dominated convergence along sequences (`G′_S` is metrizable)" | each `χ ∈ T + A` is `τ′_∅`-continuous | N1 (a), the inclusion `T + A ⊆` continuous characters (immediate); `R̂_prof` metrizable (countably many subgroups `NR`, each of finite index: J28V-7) |
+| N2, ⟸ (ll. 128–130) | "it extends to a continuous positive-definite function on `G′_S` (N1 (b)); Bochner there gives `ν` on `Ĝ′_S`, and uniqueness … gives `σ_f = ρ_*ν`, carried by `E_S`" | `ρ(Ĝ′_∅) = T + A` | **N1 (b)**: `R` dense in `G′_∅` (cited by name); **N1 (a)**, the inclusion continuous characters `⊆ T + A` — this is the clause the statement names; Bochner on the group `G′_∅` |
+| N2, the algebra and the σ-algebra (ll. 130–135) | "`H_S` … closed and translation-invariant … `Π(E_S)` commutes with every `V_y`" | the spectral projection of the Borel set `T + A` | nothing further |
+| SI-1 (ll. 145–148) | "`Π = Π(E_S)` … `∫_{R̂∖E_S} χ(u) dσ_{g_k}` … By N2, `Πg_k = h_k(0)`" | `Π(T + A)`, and `R̂ ∖ (T + A)` as a domain of integration | N2 |
+| SI-2 (l. 150) | "`P(c(x) = j, p_j(x) = 0) = 0`" | nothing (only `𝒜_S`) | — |
+| SI-3 (ll. 153–157) | "`∫_{R̂∖E_S} Re χ(u) dσ_μ = −(4/3) Σ_j E[p_j(0) p_j(u)]`" | `R̂ ∖ (T + A)` | SI-1 |
+| SI-4 (ll. 159–162) | "`M(x)` is a function of `p(x)`, which is `𝒜_S`-measurable, and `M(x + y) = M(x) ∘ T_y`" | nothing (only `𝒜_S` and its invariance) | N2 |
+| A⁺, proof (ll. 243–247) | "their spectral measures … are carried by `E_S` (N2): `σ_{μ′}` is carried by `T + A + Fin_S`, which T-C(A) … forbids" | `T + A`, twice: N2's ⟹, and T-C(A)'s hypothesis at `S = ∅` | N2; T-C(A) at `S = ∅` (R88-TCA, a separate leaf: § Stage 6) |
+| A⁺, remark (i) (l. 248) | "The `E_S` here is T-C(A)'s own, read literally (N1): nothing is transported between topologies" | `T + A` as a set of characters, the same set in T-C(A)'s statement | nothing: at `S = ∅` both statements name the literal set `T + A` |
+| A⁺, remark (ii) (ll. 249–250) — the form SP-Cor uses | "`σ_μ` and `E_S` are `U`-invariant, so `u ↦ ∫_{R̂∖E_S} χ(u) dσ_μ` is constant on `U`" | `u·(T + A) = T + A` | N1's "`U`-invariant" at `S = ∅`. Direct: `(u·χ)ⁿ = u·χⁿ`, so `u·T = T`; multiplication by `u` is a linear homeomorphism of `L ⊗ ℝ`, so `u·A = A` |
+
+**The exact check.** `data/fs131/en1/bare_e_check.py` counts, in the line ranges of those lemmas (N2, SI-1, SI-2, SI-3, SI-4, A⁺ and its
+remarks), the occurrences of the set written bare — an `E` that is not `E_S` and not an expectation. It finds none, against fifteen `E_S`. With
+SP-Cor's lines (321–328) added it finds five: the check can see the union when it is there (control `aplus-names-only-es` below). N1's own
+lines hold two (clause (c), "`Haar(E) = 0` for `E = ⋃_S E_S`") and R-U's two.
+
+### 3.2 N1 at `S = ∅`, clause by clause: what A⁺ at `S = ∅` consumes
+
+| clause of N1 (ll. 105–109) | read by A⁺ at `S = ∅`? | where | does its proof at `S = ∅` read a finite split place? |
+|---|---|---|---|
+| (a) `ρ(Ĝ′_∅) = T + A` = the `τ′_∅`-continuous characters | **yes**, both inclusions | N2 ⟹ and ⟸ | no: "`NR` has finite index" (J28V-7), extension of characters from a closed subgroup, the dual of a product (ll. 110–113) |
+| (b) `R` dense in `G′_∅` | **yes, as written**; N2's ⟸ cites it. It is avoidable there (§ 3.3), but T-C(A) at `S = ∅` needs the same density (§ Stage 6, item C1) | N2 ⟸ (l. 129) | no: at `S = ∅` the proof is weak approximation at the archimedean places and "`S¹ − S¹` is the disc of radius 2" (ll. 115–118) |
+| (b) `ρ` injective, a `U`-equivariant Borel isomorphism `Ĝ′_S → E_S` (Lusin–Souslin) | **no** | only R-U's proof reads it (l. 282) | — |
+| `E_S` σ-compact (hence Borel) | **yes**, at `S = ∅` | every `σ(R̂ ∖ E_∅)` | no |
+| `E_S` is `U`-invariant | **yes**, at `S = ∅` | remark (ii) | no |
+| (c) `E_S` proper, dense, `Haar(E_S) = 0`; `Haar(E) = 0` | **no** | read only by SI-J (l. 198), hence by SI-5 and the control SI-C, and by nothing A⁺ uses | — |
+
+### 3.3 The converse the entry owes: both inclusions of N1 (a) at `S = ∅`
+
+The statement says the `τ′_∅`-continuous characters are *exactly* `T + A`, and N2 uses each inclusion once, so each gets its line.
+*`T + A ⊆` continuous:* a torsion character kills some `NR`, which is `τ′_∅`-open (the preimage of an open subgroup of `R̂_prof`); an
+archimedean character is by definition continuous for the topology of `L ⊗ ℝ`; a sum of continuous characters is continuous.
+*Continuous `⊆ T + A`:* a `τ′_∅`-continuous character is uniformly continuous, so it extends to the closure `R̄` of `R` in the locally compact
+group `G′_∅`, then to `G′_∅` (a character of a closed subgroup extends); a character of `R̂_prof × (L ⊗ ℝ)` is a product `ψ_T ψ_A`; `ψ_T` is
+trivial on an open subgroup of the profinite group, so its restriction to `R` kills some `NR` and is torsion; the restriction of `ψ_A` is
+archimedean. No density is used in either inclusion: J45's text (ll. 112–113) extends "to the closure of `R` in the LCA group `G′_S`, then to
+`G′_S`".
+
+**N2's ⟸ without density** (a remark on the proof, mine, one mind; it changes no verdict). The positive-definite function `σ̂_f`, uniformly
+continuous on `(R, τ′_∅)`, extends to a continuous positive-definite function on `R̄`; Bochner on the locally compact abelian group `R̄` gives
+`ν` on its dual; restriction `r : (R̄)^ → R̂` is continuous and injective (`R` is dense in `R̄`), `σ_f = r_*ν` by uniqueness of
+Fourier–Stieltjes coefficients on `R̂`, and `r((R̄)^)` is the set of `τ′_∅`-continuous characters, which is `T + A` by (a). So N2 at `S = ∅`
+needs (a) and not (b). J46's blind proof does it this way (`plans/FS84-SI-V-verification.md` § 2.1 (b): "it extends to a strongly continuous
+unitary representation of the lcsc abelian group `R̄`; by SNAG … which lands in `E_S` by (a)"), and its (D), density, is "used only for the
+uniqueness of components (J46-1 (c)) in (R-U) and (SP)'s remark" (§ 2.0).
+
+derivation: EN1-APLUS
+  statement: nothing in A⁺ at S = ∅ (SI-3, SI-4, N2 at S = ∅) reads E beyond T + A; N2 at S = ∅ does still need N1 (a) at S = ∅ — the characters continuous for the profinite-plus-archimedean topology are exactly T + A.
+  uses only: J45's text of N2, SI-1, SI-2, SI-3, SI-4, A⁺ and its remarks (i), (ii) (`plans/FS84-SI-D-derivation.md` ll. 126–135, 145–162,
+    240–250), read line by line (§ 3.1); that `E_∅ = T + A` (`Fin_∅ = 0`); for the second clause, that N2's ⟸ ends "carried by `E_S`" only
+    through `ρ(Ĝ′_S) = E_S`, which is N1 (a)
+  not claimed: that N1 (a) is all of N1 that A⁺ at S = ∅ reads — as written it also reads N1 (b) at S = ∅ (N2's ⟸, l. 129), that `T + A` is Borel
+    and that it is `U`-invariant (§ 3.2); anything about T-C(A) at S = ∅, which A⁺ takes as given and whose own proof is walked in § Stage 6;
+    A⁺ at any `S ≠ ∅`; that the kernel's `APlus0` is proved
+  converse: § 3.3 The converse the entry owes: both inclusions of N1 (a) at `S = ∅`
+  argument: § 3.1 The reading
+  verdict: derived
+  grade: hand
+  minds: 1
+  model: `F = ℚ(√47)`, `S = ∅`: `G′_∅ = R̂_prof × ℂ²`, `E_∅ = T + A`; J45-SI-C's colouring over ℚ(√11) is a `μ` on which every lemma of the table
+    runs (its `𝒜_∅` holds `σ(Φ)`'s torsion eigenfunctions)
+  prior art: known: a statement about this project's own proofs; J45 § 5.1 names the inputs, X05V § 2.1 P8 names "A⁺ (only its `S = ∅` instance)"
+  handoff: de Bruijn — the planner's leaf 11 (N1 (a) at `S = ∅`) stands; beside it A⁺ at `S = ∅` needs `T + A` Borel and `U`-stable (its leaf 1)
+    and, unless N2 is run on the closure of `R`, N1 (b) at `S = ∅`; N1 (c) and the Borel isomorphism of N1 (b) are not needed for A⁺
+
+control: aplus-names-only-es
+  of: EN1-APLUS — the first clause, on the lines of N2, SI-1 to SI-4, A⁺ and its remarks: the union `E` is never named
+  run: python3 ../data/fs131/en1/bare_e_check.py 126-135 145-148 150-150 153-157 159-162 240-247 248-250
+  expect: 0 15
+  fault: python3 ../data/fs131/en1/bare_e_check.py 126-135 145-148 150-150 153-157 159-162 240-247 248-250 321-328
+
+Rests on it: EN1-SPCOR (§ Stage 5) and EN1-OFFPATH (§ Stage 6); the planner's leaves 11 and 12.
