@@ -140,3 +140,100 @@ held the machine's one build slot.
 `positive_entropy_rigidity_model`; `example : (ZdAction.trivial 2 Unit).IsVirtuallyCyclic` (the trivial action is virtually
 cyclic, so the clause `Y ≠ ⊤` cannot be dropped). Owed by M1's implementer: `blockEntropy_one`, `ksEntropy_id`,
 `ksEntropy_map`, and the two-shift at `log 2`.
+
+## Stage 4 — SAVED: the survey of the outside release's entropy development (Amendment 1)
+
+*A survey by statement: `rg` for definitions and `theorem` heads, and a reading of what it found. `~/source/math` was
+read and nothing was written into it or run from it. "Proves" below means: declared as a `theorem` with a proof in a
+file where `rg` finds no `sorry` and no `axiom`; I built nothing and read no proof. Release toolchain: Lean 4.34.1
+(`plans/STUB-mr-in-lean.md`); this library: 4.32.0.*
+
+### 4.1 What is there
+
+Two directories of `[OAIMath2026]` family 015 carry the entropy development, `OAI/NumberTheory/`:
+
+- **`PrimePackets/`** — 143 files, 58,852 lines: the base. Entropy lives in about a dozen of them; the rest is the
+  family's arithmetic and its homogeneous space.
+- **`DukePrimeDegree/Entropy/`** — 212 files, 20,958 lines, 604 theorems and lemmas, no `sorry`, no `axiom` (by `rg`). Most
+  files are steps of that family's own argument on its lattice space (names such as `RootPrefixTubeInformation`,
+  `WholeFutureProbabilityKernel`); about fifteen are general measure-theoretic entropy.
+
+**Its definitions, beside this layer's.**
+
+| release | file | this layer | same number? |
+|---|---|---|---|
+| `finiteShannon p = Σ negMulLog (p a)`; `observationEntropy μ P = finiteShannon (a ↦ μ.real {P = a})` | `PrimePackets/ShannonEntropy.lean` (453 lines, **`import Mathlib` only**) | `blockEntropy μ T P 1` (the lemma `blockEntropy_one`) | yes, at labels `Fin k` |
+| `orbitName T P N y = (j ↦ P (T^[j] y))` | same | `nameCell T P n w = {orbitName = w}` | yes |
+| `observationEntropyRate μ T P : ℝ := sInf {H_N / N : N ≥ 1}` | same | `partitionEntropy` (a `liminf` of `H_{n+1}/(n+1)`, in `ℝ≥0∞`) | **for a `T`-invariant probability measure, yes**: `tendsto_observationEntropyRate` (same file) proves `H_N/N` converges to that infimum. For a measure `T` does not preserve the infimum can be smaller than the `liminf`; no statement of this layer reads entropy there |
+| `measureEntropy μ T : ℝ≥0∞ := ⨆ k, ⨆ P : Y → Fin k, ⨆ (fibres measurable), ofReal (rate)` | same | `ksEntropy μ T` | yes, under invariance (fibres of a map into `Fin k` measurable ⟺ the map measurable) |
+| `metricEntropy T μ` (a `liminf`; labels `Fin (k+1)`) | `DukePrimeDegree/Entropy/MetricEntropy.lean` (51 lines; 5 files name it) | `ksEntropy` | yes, as written; the release's second definition |
+| `conditionalSigmaEntropy μ P m = ∫ finiteShannon (a ↦ μ[1_{P = a} \| m]) dμ` — `H(P \| m)` | `PrimePackets/ConditionalSigmaEntropy.lean` (79 lines) | none (not read by this layer's statements) | — |
+| `conditionalInformation μ P m y = −log μ[1_{P = P y} \| m](y)` | `DukePrimeDegree/Entropy/ConditionalInformation.lean` | none | — |
+| — | — | `ksEntropyOn 𝒜 μ T` (the entropy of the factor `𝒜` is) | not found by name; `observationSigma` and `measureEntropy_eq_iSup_generating` are the nearest |
+
+**Its general theorems, by name and statement head** (the ones a chain about an invariant measure could read):
+
+| theorem | file (lines; imports beyond Mathlib) | says |
+|---|---|---|
+| `orbitEntropy_subadditive`, `tendsto_observationEntropyRate` | `PrimePackets/ShannonEntropy` (453; none) | `H_{M+N} ≤ H_M + H_N`; `H_N/N →` the rate, for `MeasurePreserving T μ μ` |
+| `finiteShannon_le_log_card`, `observationEntropy_joint_le`, `observationEntropy_comp_preserving` | same | `H ≤ log card`; `H(P ∨ Q) ≤ H(P) + H(Q)`; invariance of `H` under a measure-preserving map |
+| `measureEntropy_lower_of_good_atoms` | same | if sets `A_N` of mass `≥ w` eventually meet every name-cell of length `N` in mass `≤ C e^{−cN}`, then `h ≥ c·w` |
+| `observationEntropyRate_finite_mixture` | `PrimePackets/EntropyMixtures` (540; `ShannonEntropy`) | the rate is affine over a finite convex combination of invariant probability measures |
+| `measureEntropy_kernel_zero` | same | **a mixture `κ ∘ₘ τ` of `T`-invariant probability measures of entropy zero has entropy zero** |
+| `kernel_entropyRate_le_block` | same | `rate(κ ∘ₘ τ) · N ≤ ∫ H_N(κ z) dτ` |
+| `action_ergodic_decomposition` | `PrimePackets/ErgodicDecomposition` (509; `KernelEntropy` → `AtomMass`, `EntropyMixtures`) | **for a countable group `H` acting on a standard Borel space and an invariant probability `μ`: the conditional-expectation kernel on the invariant σ-algebra integrates to `μ` and is `ErgodicSMul H` almost everywhere** |
+| `invariant_kernel_decomposition`, `condExpKernel_invariant`, `condExpKernel_ae_constant`, `continuous_action_ergodic_decomposition`, `invariant_probability_unique_transitive` | same | the components are invariant a.e.; a function measurable for the conditioning σ-algebra is a.e. constant on components; a version for a continuous action through a dense subgroup; uniqueness of the invariant probability of a transitive action |
+| `positive_entropy_components_ae` (`KernelEntropy`), `ae_positive_component_entropy` (`DukePrimeDegree/Entropy/Entropy`) | — | positive entropy of a mixture gives positive entropy on components (heads only read) |
+| `measureEntropy_eq_iSup_generating` | `PrimePackets/EntropyGeneratingSupremum` (56; a chain of four small files: `GeneratingObservationEntropy` 93, `ConditionalProbabilityExpectation` 60, `ObservationSigmaAlgebra` 77, `ObservationConditionalProbability`) | **for finite partitions `Q_n` whose σ-algebras increase and generate the whole σ-algebra, `h_μ(T) = sup_n rate(Q_n)`** |
+| `measureEntropy_eq_iSup_finiteGenerating` | `PrimePackets/FiniteGeneratingObservations` (102) | the same along a canonical generating sequence of a countably generated space |
+| `conditionalObservationEntropy_tendsto_zero`, `conditionalObservationEntropy_tendsto_sigma` | `GeneratingObservationEntropy`, `ConditionalSigmaEntropy` | `H(P \| Q_n) → 0` along a generating sequence; `H(P \| Q_n) → H(P \| ⨆ σ(Q_n))` |
+| `conditionalSigmaEntropy_antitone`, `conditionalSigmaEntropy_tendsto_iSup` | `DukePrimeDegree/Entropy/ConditionalSigmaOrder` (80), `ConditionalSigmaLimit` (68) | `H(P \| m)` decreases in `m`; `H(P \| m_n) → H(P \| ⨆ m_n)` for increasing `m_n` |
+| `measureEntropy_inverse` | `DukePrimeDegree/Entropy/EntropyInverse` (92; `ShannonEntropy`) — and `PrimePackets/InverseEntropy` | `h(S) = h(T)` for a left inverse `S` of a measure-preserving `T` |
+| `observationEntropyRate_blocks`, `observationEntropyRate_iterate_le` | `DukePrimeDegree/Entropy/FiniteBlockEntropy` (218; `ConditionalOrbitEntropy`, `EntropyMixtures`, `RootSubgroups`) | `rate(T^q, names of length q) = q · rate(T, P)` — Abramov's power formula on a partition; a bound for the iterate |
+| `measureEntropy_eq_zero_of_fourth_iterate` | `FourthIterateEntropy` (130) | `h(T⁴) = 0 ⟹ h(T) = 0` (the power 4 only) |
+| `measureEntropy_zero_of_ae_periodic` | `PeriodicEntropyZero` (121; reaches `Geometry/`) | an almost-everywhere periodic map has entropy zero |
+| `observationEntropyRate_le_of_good_names`, `measureEntropy_eq_zero_of_good_names` | `EntropyUpper` (134; `ShannonEntropy`), `EntropyCover` (69) | names covered by few words on most of the mass bound the rate; subexponential covers give entropy zero |
+
+### 4.2 Each classical statement the chain reads, against that table
+
+| the chain reads (EN1 § 8.1's last paragraph; the map's § X5) | in the release | call |
+|---|---|---|
+| the definition of entropy; `H_n` subadditive; the limit exists | **there as stated** (`ShannonEntropy.lean`, Mathlib-only) | **port** that one file as the base of module M1, and prove one bridge, `ksEntropy μ T = measureEntropy μ T` for `MeasurePreserving T μ μ` and a probability `μ` (from `tendsto_observationEntropyRate`). `ksEntropy` stays this library's definition and the axiom stays stated over it: a declared theorem should not rest on a copied definition |
+| **T1**, the ergodic decomposition for a countable group | **there in a form that would serve, for existence** (`action_ergodic_decomposition`: standard Borel, any countable group). **Uniqueness of the representing measure**, which X02D § 3.2 cites three times (ll. 205, 209, 225), **not found by name** among the file's 13 theorems | **port** existence (the cone is to be computed first: the file imports `KernelEntropy`, which reaches the family's `AtomMass`); uniqueness **formalize fresh**, or § 3.2 rewritten on the canonical decomposition, where equivariance is a computation — a question for the derive lane (§ the report) |
+| **T2**, `h_ρ(γ) = lim_k h_ρ(γ \| 𝒜_k)` along increasing invariant σ-algebras | **there in a form that would serve** (`measureEntropy_eq_iSup_generating`, for finite partitions generating exactly — which is the chain's case: the evaluations at `r ∈ M_k` generate the cylinder σ-algebra) | **port** the five small files; T2 for `ksEntropyOn` is then a short lemma, formalized fresh |
+| **T3**, Jacobs's formula | **the consequence the chain uses is there as stated**: X02D § 3.2 reads T3 only as "a mixture of zero-entropy invariant measures has zero entropy" (ll. 207, 217) = `measureEntropy_kernel_zero`. The formula `h(∫ρ dP) = ∫ h(ρ) dP` itself: not found by name | **port** `EntropyMixtures.lean` (540 lines over `ShannonEntropy` only). **Jacobs's formula leaves the list of statements to declare** |
+| Abramov's power formula, `h(T⁻¹) = h(T)` (FS105-DED's C-inputs) | **there** on a partition (`observationEntropyRate_blocks`), `measureEntropy_inverse` | **port** `EntropyInverse` (over `ShannonEntropy`); the power formula's file reaches `RootSubgroups`, so its cone is computed before a call — else fresh from `orbitEntropy_subadditive` |
+| Abramov–Rokhlin over a finite-fibred factor (FS105-DED) | **absent by name** ("abramov\|rokhlin": the two directories' hits are `Entropy/Entropy.lean` and `Geometry/Reduction.lean`, heads only read; no theorem so named) | **formalize fresh** in M5, on the ported `H(P \| m)` if its lemmas serve |
+| affinity of entropy (FS105-DED) | **there** for finite mixtures (`observationEntropyRate_finite_mixture`) | port, with `EntropyMixtures` |
+| **Shannon–McMillan–Breiman**, almost-everywhere form (EF_F⁺'s Lemma 3.1′) | **absent by name** (no "mcmillan", "breiman"; no almost-everywhere convergence of an information function found by name). Present: the two ways the theorem is *used* — `measureEntropy_eq_zero_of_good_names` and `measureEntropy_lower_of_good_atoms` | **formalize fresh, after one question to the derive lane**: whether Lemma 3.1′'s Steps 4–5 can run on convergence in mean along a subsequence of scales chosen summable (Markov's inequality on the information function and Borel–Cantelli), which needs no almost-everywhere theorem. The deriver left exactly this open (EN1 § 7.2) |
+| Egorov | Mathlib: `MeasureTheory.tendstoUniformlyOn_of_ae_tendsto` | in Mathlib |
+| Herglotz–Bochner, Markov–Kakutani, Chebotarev, strong and weak approximation, Tate's duality, Lusin–Souslin, Kronecker on units, `[LevitzMott1972]`, `[AmbrusEtAl2023]`, Weil | **not in these two directories.** A search by name over the whole release finds no theorem named for Chebotarev (one file mentions it, `CubicMoment/Estimates/PublishedHecke.lean`, unread) and a second development that names the ergodic decomposition (`GroupTheory/PolycyclicRecognition/Analysis/`, unread); the other keywords hit unrelated families (a "solenoidal" recorder, Kronecker deltas) | unchanged from the map's § X5 and ruling 4 |
+
+### 4.3 Does the release state a rigidity theorem of the kind this chain declares?
+
+**It states one, on a different space, and its files carry a proof of it.** `DukePrimeDegree/MainConditional.lean` l. 28
+defines `EKLPrimeInput d : Prop` — docstring: "The published rigidity input, on the actual lattice space and with actual
+diagonal ergodicity and measure-theoretic entropy" — for `d + 1` prime and `≥ 3`: every probability measure on `X (d + 1)`
+(the quotient of `SL_{d+1}(ℝ)` by the image of `SL_{d+1}(ℤ)`, `PrimePackets/PacketAlgebra.lean` l. 18) that is ergodic for
+the diagonal group and has `0 < measureEntropy` for the regular diagonal element is the Haar probability. And
+`DukePrimeDegree/Entropy/RegularEntropyDischarge.lean` l. 106 declares `theorem eklPrimeInput_unconditional (d : ℕ) :
+EKLPrimeInput d`, which `MainUnconditional.lean` uses. So it is a positive-entropy rigidity statement for an invariant
+measure — **for the diagonal action on a space of lattices** (the file under it is named `Dynamics/PublishedEKL.lean`), in
+prime degree. **Nothing in the two directories names a solenoid or a toral automorphism** (`rg -l -i 'solenoid|toral
+automorphism'`: 0 files), so neither Theorem 1.2 nor Theorem 1.3 of `[EinsiedlerLindenstrauss2022]` is stated there.
+What this bears on: pricing the formalization of Theorem 1.3 (not this job's) can start from a Lean development that
+carries the same method's vocabulary — leafwise and conditional measures, entropy contributions, the low-entropy and
+high-entropy cases — for another group.
+
+### 4.4 What the survey changes in the architecture
+
+- **A new module M0, "the entropy base, ported"** — a port job with its own brief (the generator and read-back of
+  `LEAN.md` § Assumptions: `tools/fs132_i2_port.py`'s method), in this order of certainty: `ShannonEntropy.lean`
+  (Mathlib-only), `EntropyMixtures.lean`, `EntropyInverse.lean`, the five files under
+  `measureEntropy_eq_iSup_generating`; then, cone permitting, `action_ergodic_decomposition` and
+  `observationEntropyRate_blocks`. Friction named by the release itself: 1,502 Mathlib commits between the pins.
+- **M1** (entropy, ours) shrinks to: the three leaves typed here, the bridge to the ported `measureEntropy`, T2 for
+  `ksEntropyOn`, and the two-shift model.
+- **M7** (from `Γ` to `U`) loses Jacobs's formula as an input and takes T1's existence from the port.
+- **M8** (the pigeonhole at the field) keeps Shannon–McMillan–Breiman as its one open classical input, behind a
+  question to the derive lane.
