@@ -79,6 +79,16 @@ this session):
    Theorem 1.3 with its hypothesis's forced sense written into the statement, and our deduction of Theorem 1.2 from it
    is a leaf to formalize — the planner is to be told in that same amendment.
 
+**REPORTS TO KOOSHI ONLY AT A GATE, A DECISION OF HIS OR HIS CHECK-IN (2026-10-13 16:44 UTC; his word W3, FS-131 inventory item 650): no per-event
+reports; report when something is through the gate, when a decision is genuinely his, or when he checks in. His
+defaults are in force: the asking lane's order; FS-133 joins the kernel queue; the measurable-number corollary
+(a reader's combination of `[Davies2026]` Lemma B.1 with the outside release's transfer, item 648; [hand], one mind)
+goes to Lean — "a great candidate to formalize too".** **The kernel queue, as slots free** (item 650): two
+implementers on the first module when FS131-KN2's plan is back → a planner on the corollary (claim list from
+FS131-ER1's record) → a planner on the chain's first definitions (with FS131-EN1's verdicts, items 645, 646, 649:
+the interface is run at the smaller set; what leaves is a duplicate model and proof, the split-place model and the
+wandering argument stay inside the second deduction) → FS-133's planner → rank 2's remaining leaves → FS131-KE1.
+
 **What I do at each hand-back.** *The ranking*: review by artifact (its claim-list quotations against `LEDGER.md` § The
 claim list; one attribution re-read); log it; report it to Kooshi as the asking lane's judgment. *The map*: review one
 entry against the receipt; log it. *Both in*: fix `data/fs131/claims-NF1.md` for the first-ranked finding from its
