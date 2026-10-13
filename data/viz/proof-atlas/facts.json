@@ -1737,7 +1737,7 @@
     "file": "LEDGER.md",
     "row": "162"
    },
-   "grade": "[hand] or derived from [hand] entries, one mind each, kernel pending",
+   "grade": "[kernel], through the gate",
    "theta": 120,
    "r": 560,
    "sector": "six-up",
@@ -1762,7 +1762,7 @@
     "file": "LEDGER.md",
     "row": "163"
    },
-   "grade": "[hand] or derived from [hand] entries, one mind each, kernel pending",
+   "grade": "[kernel], through the gate",
    "theta": 122,
    "r": 630,
    "sector": "six-up",
@@ -1787,12 +1787,12 @@
     "file": "LEDGER.md",
     "row": "164"
    },
-   "grade": "[hand] with an exact check, one mind, kernel pending",
+   "grade": "[hand] with an exact check, one mind, with no Lean theorem",
    "theta": 131,
    "r": 550,
    "sector": "six-up",
    "tier": 2,
-   "status": "kernel",
+   "status": "hand-1",
    "line": 209,
    "address": "LEDGER.md row 164, line 209",
    "grade_address": "LEDGER.md row 164, line 209",
@@ -1893,7 +1893,7 @@
    "status": "gap",
    "line": 35,
    "address": "plans/STUB-collars.md, line 35",
-   "grade_address": "plans/STUB-collars.md, line 97",
+   "grade_address": "plans/STUB-collars.md, line 99",
    "also": []
   },
   {

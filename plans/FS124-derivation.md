@@ -356,7 +356,7 @@ derivation: C124-FORCED
   handoff: de Bruijn — after C124-FORCED-PIECES, and only if the kernel lane wants the map-shaped corollary: its one topological input is the θ-curve lemma, which is not in the statement of C124-FORCED-PIECES
 
 *Corollary: the posed claim, for sector points.* **Class**: sector points. **Count**: six. One topological input (the θ-curve form
-of the Jordan–Schoenflies theorem) is recalled, not read. **What rests on it**: the second sentence of C124-BOTH, by its
+of the Jordan–Schoenflies theorem) is recalled, not read *(since FS124-L2, 2026-10-07, the half used here is a kernel theorem, `IsTriodCut.exists_opposite`: "the incidence, for three pieces given as filling the cut disc" — the landing's open gate item 2)*. **What rests on it**: the second sentence of C124-BOTH, by its
 argument; C124-SECOND is stated in its setting.
 
 derivation: C124-FORCED-AS-POSED
