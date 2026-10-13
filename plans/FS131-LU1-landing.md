@@ -227,3 +227,186 @@ library assumes in hypothesis form moves with stage 4. `tools/check_architecture
 |---|---|---|---|
 | `./scripts/axioms.sh` (7,506 records) | 7.3 s | 1.14 GiB | 4.92 GiB |
 | `./scripts/axioms.sh --self-test` (23 controls) | 178 s | 1.30 GiB | 5.04 GiB |
+
+## Stage 4 — SAVED (FS131-LU1): what the library assumes — one entry retired on the landing's word, and a sentence about the tool that was not true
+
+`./scripts/assumptions.sh --self-test` first (`data/fs131/lu1/probes/assumptions-selftest-first.log`): exit 0, "OK —
+all 33 checks behaved: every planted fault fired, and every partner stayed silent".
+
+### What the step said before any edit — and what it did not say
+
+On the merged, built tree, `scripts/` as on `main` but for the audit block (`probes/assumptions-given.log`; the full
+output `probes/receipt-assumptions-given.log`): **exit 1, seven failures, one kind** —
+
+```
+FAIL unlisted-consumer HadwigerNelson.UpperHalf.chromaticNumber_eq_localBound_of_chain :: the scan finds 'TAKES HadwigerNelson.SpectralChain.BochnerHerglotz HadwigerNelson.UpperHalf.chromaticNumber_eq_localBound_of_chain' and the ledger does not list it
+… the same for Interface.APlusOfR88, Interface.Count, Interface.EFPlus, Interface.PE2, Interface.RU, InvariantMeasureOnClosed
+```
+
+— the seven named hypotheses the new theorem takes, which the scan finds by itself. **It did not fail on `hUpper`.**
+The brief (Done means, 4), the planner (§ D (4)) and FS131-IV1 (drafts § 3) each say the step fails until the upper
+half leaves the declared list, because `UpperHalf.chromaticNumber_planeOver_le_localBound` now proves that binder over
+the theorem's own variables. The receipt reads otherwise: line 65, `ASSUMPTION inline:UpperHalf form=inline kind=ours
+ref=row:52 consumers=1`; line 209, `SITE inline:UpperHalf HadwigerNelson.SpectralChain.chromaticNumber_eq_localBound
+hUpper :: (…).chromaticNumber ≤ HadwigerNelson.SpectralChain.localBound F`; no `FAIL` names it.
+
+**The mechanism, read in `scripts/Assumptions.lean`.** `FAIL discharged <H> :: <theorem> proves it in general`
+(line 673) runs over `general` — the pairs (named former `H`, theorem) in which the theorem "concludes `H x₁ … xₙ` over
+its own distinct variables with no hypothesis" (line 380). A hypothesis written out in a binder is declared by
+`.site` as (theorem, binder name, label): the step checks that the binder exists, that the label's sources agree and
+that the label is taken; **nothing compares the binder's type with any theorem's conclusion**. The self-test's
+control for the rule (`scripts/assumptions-controls.txt`, `## control discharged`) plants a named former. So
+`LEAN.md` § The gate's clause "or one a theorem proves over its own variables" holds of a named hypothesis only; an
+entry written out in a binder is retired, as it is declared, on the landing's own word. The coordinator was told
+before the gate (the brief's Amendment 1 rules: retire it); drafts 9 and 10 carry the corrected sentence and the line
+for the tooling list.
+
+### The three edits (FS131-IV1's draft), on the landing's reading
+
+In `scripts/Assumptions.lean`, `AssumptionAudit.declared`:
+- **out**: `.site ``HadwigerNelson.SpectralChain.chromaticNumber_eq_localBound `hUpper "UpperHalf" .ours "row 52 (the
+  upper half χ(F²) ≤ L(F), at ring level; the field step is row 57's gap)"` — the label's only site, so the inline
+  hypothesis `UpperHalf` leaves with it. A four-line `--` comment stands where it was and says why.
+- **in**, for `UpperHalf.chromaticNumber_eq_localBound_of_chain`, each with its label's source character for
+  character: `` `hRow99 "Row99" .ours "row 99 (χ(F²) = L(F) at L(F) ≤ 4)" `` and `` `hCLS "CLS" .ours "X23D-CLS (L(F) ≥ 5 ⟹
+  T-C(A) at S = ∅; X23V § 2.2)" ``. Before they were declared the receipt printed both as `COHYP` rows of the new
+  theorem — hypotheses the step "counts and prints, and cannot decide": these two are hand results of this project
+  written out over the theorem's own variables, which only a landing's word can declare.
+
+**With the list edited and the ledger not yet written** (`probes/assumptions-edited.log`): exit 1, **ten failures,
+the ledger comparison red in both directions** — nine `unlisted-consumer` (the seven named and `inline:CLS`,
+`inline:Row99` for the new theorem) and one `stale-consumer` ("the ledger lists 'TAKES inline:UpperHalf
+HadwigerNelson.SpectralChain.chromaticNumber_eq_localBound' and the scan does not find it").
+
+**The ledger, written with the script's own flag** (`./scripts/assumptions.sh --write-ledger`;
+`probes/assumptions-write-ledger.log`: "ledger written (133 rows) — read the rows above; a row is a theorem that is
+conditional"). `git diff scripts/assumptions-ledger.txt`: **nine rows gained, one lost**, and the header's count line:
+
+```
++TAKES HadwigerNelson.SpectralChain.BochnerHerglotz HadwigerNelson.UpperHalf.chromaticNumber_eq_localBound_of_chain
++TAKES HadwigerNelson.SpectralChain.Interface.APlusOfR88 HadwigerNelson.UpperHalf.chromaticNumber_eq_localBound_of_chain
++TAKES HadwigerNelson.SpectralChain.Interface.Count HadwigerNelson.UpperHalf.chromaticNumber_eq_localBound_of_chain
++TAKES HadwigerNelson.SpectralChain.Interface.EFPlus HadwigerNelson.UpperHalf.chromaticNumber_eq_localBound_of_chain
++TAKES HadwigerNelson.SpectralChain.Interface.PE2 HadwigerNelson.UpperHalf.chromaticNumber_eq_localBound_of_chain
++TAKES HadwigerNelson.SpectralChain.Interface.RU HadwigerNelson.UpperHalf.chromaticNumber_eq_localBound_of_chain
++TAKES HadwigerNelson.SpectralChain.InvariantMeasureOnClosed HadwigerNelson.UpperHalf.chromaticNumber_eq_localBound_of_chain
++TAKES inline:CLS HadwigerNelson.UpperHalf.chromaticNumber_eq_localBound_of_chain
++TAKES inline:Row99 HadwigerNelson.UpperHalf.chromaticNumber_eq_localBound_of_chain
+-TAKES inline:UpperHalf HadwigerNelson.SpectralChain.chromaticNumber_eq_localBound
+-#   axioms=3 rests=26 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1
++#   axioms=3 rests=26 named=19 inline=15 outside=7 ours=22 open=5 takes=106 mentions=1
+```
+
+Each row read: the nine gained say that the new theorem — `χ(F²) = L(F)` for `L(F) ≤ 5` at a totally real number
+field, the headline with its upper half discharged — is conditional on nine things, two outside theorems
+(Herglotz–Bochner, Markov–Kakutani) and seven hand results of this project (the count, A⁺ from R88-TCA, R-U, PE-2,
+EF_F⁺, CLS, row 99). The one lost says the headline no longer lists the upper half as an assumption: its binder
+`hUpper` is still in its statement and is now a condition a library theorem discharges.
+
+After it (`probes/assumptions-second.log`; full output `probes/receipt-assumptions-second.log`): **exit 0** —
+"assumptions: OK — 3 outside theorem(s) as axioms, with 26 theorem(s) resting on them; 19 named and 15 inline
+hypotheses (7 outside, 22 ours, 5 open), taken by 106 statement(s) and mentioned by 1"; "recorded counts in
+scripts/assumptions-ledger.txt's header: match (9 of 9 compared)"; `CLAUDE.md` § Trust ledger flagged stale, "inline
+16 → 15, ours 23 → 22, takes 98 → 106" (draft 3).
+
+### Against the prediction
+
+| | predicted (the brief; FS131-IV1's drafts § 3, with `rests` as the last landing left it) | the step, after the edits |
+|---|---|---|
+| the nine | axioms=3 rests=26 named=19 inline=15 outside=7 ours=22 open=5 takes=106 mentions=1 | **axioms=3 rests=26 named=19 inline=15 outside=7 ours=22 open=5 takes=106 mentions=1** |
+
+**The nine counts come out as predicted, each one.** What did not is the sentence about why the entry had to leave
+(above). In words: thirty-four hypotheses, nineteen named and fifteen written out in a binder — seven standing for
+outside theorems, twenty-two for hand results of ours and five declared as open questions — taken in 106 (hypothesis,
+statement) pairs by 52 statements (51 on `main`: the new theorem; counted from the ledger's `TAKES` rows).
+
+| | `main` (FS131-LC1's gated scan) | this tree |
+|---|---|---|
+| `scanned` | constants=15071 theorems=11257 formers=362 hypotheses=19578 closed=1473 | constants=15140 theorems=11323 formers=362 hypotheses=19705 closed=1473 |
+| the rest | sites=30 conditions=40 … cohyp=58 hints=0 unseen=17512 fails=0 | sites=31 conditions=40 … cohyp=60 hints=0 unseen=17589 fails=0 |
+
+No closed hypothesis enters (`closed=1473`), and no new `Prop`-former (`formers=362`): `IsUsablePrime` was declared a
+condition by an earlier landing and stays one — no library *theorem* concludes it; the instances file exhibits one in
+an `example` and builds one inside a proof.
+
+**The hypotheses the step counts and cannot decide (`unseen` 17512 → 17589), read by hand, on this job's word.** One
+of the 77 is the headline's `hUpper`, now undeclared: a condition proved by the library. Every other hypothesis of
+the three modules but those of `chromaticNumber_eq_localBound_of_chain` is a condition on its theorem's own variables
+— a prime usable or of a given cardinality (`h𝔭`, `hcard`, `hp`, `hp2`, `hp4`), a level (`hm`), a difference in the
+local ring (`hd`), conjugation trivial modulo a given prime (`hram`), a valuation subring proper and stable (`hA`,
+`hσ`), a nonzero natural (`hn`), radicands that are nonzero squares or divisible once (`hD`, `hs`, `hs0`, `hd0`, `hq`,
+`hq2`, `_hd`, `_hd1`), a generator and its square (`hπ`, `hgen`), a colouring of a finite plane (`hk`), a unit vector
+(`hu`). None is a hand result of this project or an outside theorem written out in a binder. The chain theorem's own
+remaining co-hypothesis is `hL : localBound F ≤ 5`, a condition on the field.
+
+**`ARCHITECTURE.md`** § Trust, "Assumed as hypotheses", brought to what the step prints: "106 pairs, 52 statements";
+thirty-four entries; "Hand results of ours — twenty-two: twelve named, ten written out in a binder", the row `hUpper`
+gone and the sentence saying where it went; nine rows' counts of takers each one higher (`BochnerHerglotz` 14,
+`InvariantMeasureOnClosed` 8, `RU`, `PE2`, `EFPlus` 7, `APlusOfR88`, `Count` 4, `hRow99`, `hCLS` 4). Two older sentences
+of the map that the landing makes false, corrected: § 7's "Field-level statements rest on hand arguments. Two steps
+are not in the kernel …" (both steps are `Arith/UpperHalf`'s and `Arith/PlaceHom`'s now; what a named field still
+needs is its primes), and the row `Instances/SqrtEleven`'s "The upper bound χ ≤ 4 … is not in the kernel".
+`tools/check_architecture.py`: exit 0, "RESULT: PASS" (`probes/arch-probe.out`).
+
+| step, this machine | wall | peak (charged) | max-rss |
+|---|---|---|---|
+| `./scripts/assumptions.sh` | 106–122 s | 0.65–0.72 GiB | 4.55 GiB |
+| `./scripts/assumptions.sh --self-test` (33 checks) | 119 s | 0.70 GiB | 4.59 GiB |
+
+## Stage 5 — SAVED (FS131-LU1): the vacuity step — the scan is silent on the module, so every model is named by hand
+
+`./scripts/vacuity.sh` on the built tree (`data/fs131/lu1/probes/vacuity-given.log`; its full output
+`probes/receipt-vacuity-given.log`): **exit 0, "vacuity: OK"**. Its self-test (`probes/vacuity-selftest-probe.log`):
+"OK — all 65 controls behaved: every one fired, and the silent ones stayed silent."
+
+| | `main` (FS131-LC1's gated scan) | this tree |
+|---|---|---|
+| declarations | 15969 | **16029** (+60: the three modules' constants that are not internal, 36 + 14 + 10) |
+| refutations-skipped | 228 | 228 |
+| sites | 1454 | 1454 |
+| vacuous / stale / declared / witnessed / generic / unknown | 0 / 0 / 3 / 38 / 1411 / 2 | 0 / 0 / 3 / 38 / 1411 / 2 |
+
+**How the scan classes every new site: there is none.** Row for row against the last landing's gated scan
+(`tools/fs131_l5_vacdiff.py`, `probes/vacdiff-probe.txt`): "main rows 1535, landing rows 1535; lost 0 …; added 0";
+"module Arith.QuadraticPrime: declarations 0 -> 14", "Arith.UpperHalf: 0 -> 36", "Instances.UpperHalfValues: 0 -> 10";
+"by module: declarations +60, refutations +0: equal to the scans difference"; "vacdiff: PASS". No declaration of the
+module is skipped as a refutation; nothing reads `VACUOUS`, `STALE` or `UNKNOWN`; the baseline's two entries are as on
+`main`. **The scan reads none of the module's binders**: no hypothesis is a colouring structure, the one
+colourability hypothesis (`hk : (finitePlane p).Colorable k`) is a proposition the scan does not track, and the
+structures the theorems range over — a usable prime, a stable prime — are not its carriers. **Silence is not
+evidence** (`LEAN.md` § The gate), so each model is named below.
+
+**The baseline header's count line refiled from this scan** (`scripts/gate_report.py header` on the scan's output,
+written into `scripts/vacuity-baseline.txt`; no entry touched): `declarations=15969` → `declarations=16029`. Refiled
+before the pass, so that the gated commit holds the header its own scan confirms.
+
+**The model of each hypothesis of the headlines, by hand**, and whether the kernel holds it — "library" is a theorem
+or an `example` of a module, checked in the build; "term" is a theorem of `data/fs131/lu1/checks.lean`, kernel-checked
+when the gate's pass elaborates it and not a library theorem (every term on the standard three unless said). The
+table is FS131-IV1's (its drafts § 2), each line read again against the built modules:
+
+| statement | its hypotheses | the model | held |
+|---|---|---|---|
+| the five NF1-S1A statements (`nonempty_hom_unitQuadrance` … `colorable_planeOver_of_finitePlane`) | a real number field; `IsUsablePrime 𝔭`; for three of them `p` prime with `Nat.card (𝓞 F ⧸ 𝔭) = p` | **`ℚ(√11)` at 7 — the library's first model of `IsUsablePrime`**: the instances file's third `example`, through `QuadraticPrime.exists_maximal_card_eq`; `chromaticNumber_planeOver_eleven` runs the bound there, and the two other instance theorems at `ℚ(√167)`, 23 and `ℚ(√47)`, 11. `FS131LU1.usablePrime_model` holds every hypothesis and both bounds at once | library; the joint form a term |
+| the NF1-S1B statements (`mem_localRing` … `exists_hom_levelTarget`, `chromaticNumber_planeOver_le_levelTarget`) | a real number field; `P : StablePrime F`; `1 ≤ m`; in the formula, a difference in `𝓞_P` | **two fields**: `ℚ` with `UpperHalf.exists_stablePrime_rat` (the instances file's second `example`: `Nonempty (StablePrime ⊥)`), and the standing field with `StandingFive.exists_stablePrime_two` (an older theorem). Every `m ≥ 1` (at `m = 0` the statement is false and its docstring says why); the formula's hypothesis holds of any two points one unit apart (`mem_localRing_of_mul_conj_eq_one`: the proof uses it exactly there) | library at `ℚ`; at the standing field a term (`FS131LU1.hom_standing_model`) |
+| `chromaticNumber_planeOver_le_localBound` | a real number field | no hypothesis to model; **not empty of content at `ℚ`**: the infimum is over an inhabited family (the instances file's first two `example`s), and `2 ≤ L(ℚ)` (`FS131LU1.two_le_localBound_rat`). At a field with no stable prime it would read `χ ≤ ⊤`; that every real number field has one is not in the kernel | library; the lower bound on `L(ℚ)` a term |
+| **`two_mem_of_conj_trivial`, `colorable_two_planeOver_of_ramified`** | `P : StablePrime F` and **`hram : ∀ x, conjO F x - x ∈ P.P`** | **the stable prime of the rational field**: `UpperHalf.exists_stablePrime_rat`'s third clause, at `F = ⊥` with `instNumberFieldBot`. `UpperHalf.chromaticNumber_planeOver_rat` applies the two-colour theorem at it. **It is the only inhabitant the library holds**, and `hram` is a real condition: at the standing field it fails at every stable prime (`StandingFive.exists_conjO_sub_notMem`; `FS131LU1.hram_fails_at_standingField`) | library (`chromaticNumber_planeOver_rat`); `two_mem_of_conj_trivial` at it a term (`two_mem_model`) |
+| `exists_stablePrime_of_valuationSubring` | `A ≠ ⊤`; `A` stable under conjugation | `𝓞_P` for any stable `P` (`localRing_ne_top`, `conj_mem_localRing`, same file); its consumer `inv_natCast_mem_unitRingOver_iff_forall_stablePrime` uses it in general | library through the consumer; at `ℚ` a term (`converse_rat_model`) |
+| `inv_natCast_mem_unitRingOver_iff_forall_stablePrime` | a real number field; `n ≠ 0` | both sides of the iff occur: `n = 2` at `ℚ`, where a stable prime holds 2 and so `1/2 ∉ ℤ[U_ℚ]` (`wall_rat_model`); `n = 1` at the standing field, where both sides hold (`one_standing_model`) | terms |
+| `chromaticNumber_eq_localBound_of_chain` | a totally real number field; `BochnerHerglotz`, `InvariantMeasureOnClosed`, an `Interface` with `Count`, `APlusOfR88`, `RU`; `hMR`, `hCLS`, `hRow99`; `localBound F ≤ 5` | **none in the kernel, and none is expected here**: nine of these are the chain's declared assumptions (stage 4), not conditions with a model; the theorem is the older headline less one hypothesis, and is as conditional as the ledger says | — (as on `main` for the headline) |
+| `exists_ringHom_zmod_of_padic`, `exists_maximal_card_of_padic`, `isMaximal_ker_and_card` | a ring homomorphism `K →+* ℚ_[p]`; a prime `p` and `f : R →+* ZMod p` | `algebraMap ℚ ℚ_[5]`: `Arith/QuadraticPrime`'s first `example` | library |
+| `exists_padicInt_sq_eq`, `nonempty_ringHom_padic`, `exists_maximal_card_eq`, `exists_maximal_card_eq_sqrt` | an odd prime; every radicand a nonzero square modulo it (and, for the last, `Squarefree d`, `1 < d`, `d ≡ s²`, `s ≢ 0`) | `({11}, 7)` and `(47, 11, s = 5)`: its second and third `example`s | library |
+| `exists_maximal_card_eq_of_ramified` | the same on `D`; `p ∣ q`; `¬ p² ∣ q` | `D = {3}`, `q = 11`, `p = 11`, the field `ℚ(√3, √11)`: its fourth `example` — every hypothesis at once. **Jointly satisfiable only at `q ∉ D`, `q ≠ 0`** (`FS131LU1.ramified_radicand_notMem`, `ramified_radicand_ne_zero`): its docstring now says so. The dated line's counterexample is refused by `hD` (`two_notMem_of_hD`; the file's fifth `example`) | library; the two facts terms |
+| `nonempty_ringHom_zmod_of_ramified_sqrt` | a subfield `K₀` embedded in `ℚ_p`, `p` odd, `π² = q`, `p ∣ q`, `¬ p² ∣ q`, `K₀ ∪ {π}` generating `K` | no `example` of its own: the model is built inside the proof of `exists_maximal_card_eq_of_ramified` (`K₀` the copy of `ℚ(√D)` in `ℚ(√D, √q)`, `π = √q`) and instantiated by the fourth `example` at `ℚ(√3) ⊂ ℚ(√3, √11)` | library, through that proof |
+| `numberField_fieldOfRadicands`, `instNumberFieldFieldOfRadicands`, `numberField_bot` | `D` finite | `{3, 11, 5}`: the sixth `example`; `∅` for `ℚ` | library |
+| `colorable_planeOver_fieldOfRadicands` | `D` finite; a prime `p ≡ 3 (mod 4)`; every radicand a nonzero square modulo it; **`(finitePlane p).Colorable k`** | `({11}, 7, 4)` with `finitePlane7_colorable_four`; `({167}, 23, 8)` with `CayleyCert.colorable_finitePlane23_eight`; `({47}, 11, 5)` with `chromaticNumber_finitePlane11` — the three instance theorems, each an older kernel theorem on the standard three | library |
+| `two_le_chromaticNumber_planeOver` | none (any subfield of `ℝ`) | — | — |
+
+**No hypothesis of a headline that is a condition is without a kernel model; four are held as terms only**
+(open gate item 3). **No older statement is emptied or made vacuous by this landing**: it brings no axiom and no
+carrier. **One older hypothesis is made provable**: `hUpper` (stage 4).
+
+| step, this machine | wall | peak (charged) | max-rss |
+|---|---|---|---|
+| `./scripts/vacuity.sh` | 138 s | 0.59 GiB | 4.48 GiB |
+| `./scripts/vacuity.sh --self-test` (65 controls) | 138 s | 0.60 GiB | 4.50 GiB |

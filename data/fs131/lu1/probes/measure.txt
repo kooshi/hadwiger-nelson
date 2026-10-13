@@ -18,3 +18,6 @@ MEASURE count-modules-given mem-cap=6G cpus=2 exit=0 wall=74.4s peak=0.55 GiB ma
 MEASURE axioms-selftest-probe mem-cap=8G cpus=4 exit=0 wall=178.1s peak=1.30 GiB max-rss=5.04 GiB :: ./scripts/axioms.sh --self-test
 MEASURE vacuity-selftest-probe mem-cap=8G cpus=4 exit=0 wall=138.2s peak=0.60 GiB max-rss=4.50 GiB :: ./scripts/vacuity.sh --self-test
 MEASURE assumptions-selftest-first mem-cap=8G cpus=4 exit=0 wall=118.6s peak=0.70 GiB max-rss=4.59 GiB :: ./scripts/assumptions.sh --self-test
+MEASURE assumptions-edited mem-cap=8G cpus=4 exit=1 wall=122.4s peak=0.66 GiB max-rss=4.55 GiB :: ./scripts/assumptions.sh
+MEASURE assumptions-write-ledger mem-cap=8G cpus=4 exit=0 wall=120.9s peak=0.67 GiB max-rss=4.55 GiB :: ./scripts/assumptions.sh --write-ledger
+MEASURE assumptions-second mem-cap=8G cpus=4 exit=0 wall=114.0s peak=0.65 GiB max-rss=4.55 GiB :: ./scripts/assumptions.sh
