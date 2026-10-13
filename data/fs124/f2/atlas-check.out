@@ -1,0 +1,4 @@
+FAIL ONEPIECE: grade words not found at LEDGER.md row 162: '[hand] or derived from [hand] entries, one mind each, kernel pending'
+FAIL PAIRPAYS: grade words not found at LEDGER.md row 163: '[hand] or derived from [hand] entries, one mind each, kernel pending'
+FAIL STRIPEDGE: grade words not found at LEDGER.md row 164: '[hand] with an exact check, one mind, kernel pending'
+checked 240, failed 3, errors 0
