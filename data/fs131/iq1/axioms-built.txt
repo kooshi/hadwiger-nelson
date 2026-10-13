@@ -1,0 +1,22 @@
+'HadwigerNelson.QuadraticPrime.isIntegral_sqrt_natCast' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.QuadraticPrime.fieldOfRadicands_eq_adjoin' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.QuadraticPrime.numberField_fieldOfRadicands' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.QuadraticPrime.instNumberFieldFieldOfRadicands' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.QuadraticPrime.isMaximal_ker_and_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.QuadraticPrime.exists_ringHom_zmod_of_padic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.QuadraticPrime.exists_maximal_card_of_padic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.QuadraticPrime.exists_padicInt_sq_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.QuadraticPrime.nonempty_ringHom_padic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.QuadraticPrime.exists_maximal_card_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.QuadraticPrime.exists_maximal_card_eq_sqrt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.QuadraticPrime.nonempty_ringHom_zmod_of_ramified_sqrt' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.QuadraticPrime.exists_maximal_card_eq_of_ramified' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+data/fs131/iq1/lean/Axioms.lean:21:8: warning: declaration uses `sorry`
+'fs131_iq1_control_sorry' depends on axioms: [sorryAx]
+'fs131_iq1_control_planted' depends on axioms: [fs131_iq1_control_axiom]
