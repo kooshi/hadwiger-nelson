@@ -1,0 +1,32 @@
+class	name	kind	verdict	constants only at the release's pin	constants only at this pin	note
+definition	Spectral.imagUnit	def	IDENTICAL	—	—	
+target	Spectral.E_countable	theorem	IDENTICAL	—	—	
+target	Spectral.kCoeff_ne_zero	theorem	IDENTICAL	—	—	
+definition	Koopman.isometry	def	UP-TO-INSTANCES	AddSubmonoidClass.toAddZeroClass MeasureTheory.AEEqFun.instAddMonoid §.Koopman.isometry._proof_7 §.Koopman.isometry._proof_8	AddSubgroup.toAddGroup	
+target	Koopman.unitary	def	UP-TO-INSTANCES	AddGroup.toSubNegMonoid AddGroupWithOne.toAddGroup AddSubgroup.instAddSubgroupClass AddSubgroupClass.toAddSubmonoidClass AddSubmonoidClass.toAddCommMonoid CommSemiring.toSemiring Complex.addGroupWithOne Complex.instAddCommMonoid Complex.instField Complex.instNonUnitalCommRing Field.toDivisionRing IsSemitopologicalRing.toIsSemitopologicalSemiring IsSemitopologicalSemiring.toContinuousAdd IsTopologicalDivisionRing.toIsTopologicalRing IsTopologicalRing.toIsSemitopologicalRing MeasureTheory.AEEqFun.instAddCommMonoid NonUnitalCommRing.toNonUnitalNonAssocCommRing NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring NormedDivisionRing.to_isTopologicalDivisionRing NormedField.toNormedDivisionRing Semifield.toCommSemiring	AddCommGroup.toAddCommMonoid DivisionSemiring.toSemiring MeasureTheory.Lp.instAddCommGroup Semifield.toDivisionSemiring	
+target	Koopman.unitary_apply	theorem	UP-TO-INSTANCES	AddGroupWithOne.toAddGroup AddSubgroup.instAddSubgroupClass AddSubgroupClass.toAddSubmonoidClass AddSubmonoidClass.toAddCommMonoid AddSubmonoidClass.toAddZeroClass Complex.addGroupWithOne Complex.instAddCommMonoid Complex.instField Complex.instNonUnitalCommRing Field.toDivisionRing IsSemitopologicalRing.toIsSemitopologicalSemiring IsSemitopologicalSemiring.toContinuousAdd IsTopologicalDivisionRing.toIsTopologicalRing IsTopologicalRing.toIsSemitopologicalRing MeasureTheory.AEEqFun.instAddCommMonoid MeasureTheory.AEEqFun.instAddMonoid NonUnitalCommRing.toNonUnitalNonAssocCommRing NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring NormedDivisionRing.to_isTopologicalDivisionRing NormedField.toNormedDivisionRing	AddCommGroup.toAddCommMonoid MeasureTheory.Lp.instAddCommGroup	
+target	Koopman.nonlinear_commute	theorem	UP-TO-INSTANCES	AddSubgroup.instAddSubgroupClass AddSubgroupClass.toAddSubmonoidClass AddSubmonoidClass.toAddZeroClass IsTopologicalAddGroup.toContinuousAdd MeasureTheory.AEEqFun.instAddMonoid	AddSubgroup.toAddGroup	
+target	ContinuousVectors.isClosed_space	theorem	IDENTICAL	—	—	
+target	ContinuousVectors.op_mem	theorem	IDENTICAL	—	—	
+target	ContinuousVectors.orbit_continuous	theorem	IDENTICAL	—	—	
+target	projection_fixed_of_contraction	theorem	UP-TO-INSTANCES	CommSemiring.toSemiring Semifield.toCommSemiring	DivisionSemiring.toSemiring Semifield.toDivisionSemiring	
+target	ContinuousVectors.nonlinear_mem	theorem	UP-TO-INSTANCES	AddGroupWithOne.toAddGroup AddSubgroup.instAddSubgroupClass AddSubgroupClass.toAddSubmonoidClass AddSubmonoidClass.toAddCommMonoid AddSubmonoidClass.toAddZeroClass Complex.addGroupWithOne Complex.instAddCommMonoid Complex.instField Complex.instNonUnitalCommRing Field.toDivisionRing IsSemitopologicalRing.toIsSemitopologicalSemiring IsSemitopologicalSemiring.toContinuousAdd IsTopologicalDivisionRing.toIsTopologicalRing IsTopologicalRing.toIsSemitopologicalRing MeasureTheory.AEEqFun.instAddCommMonoid MeasureTheory.AEEqFun.instAddMonoid NonUnitalCommRing.toNonUnitalNonAssocCommRing NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring NormedDivisionRing.to_isTopologicalDivisionRing NormedField.toNormedDivisionRing	MeasureTheory.Lp.instAddCommGroup	
+definition	ContinuousVectors.clamp	def	IDENTICAL	—	—	
+target	ContinuousVectors.projection_range	theorem	UP-TO-INSTANCES	AddGroupWithOne.toAddGroup AddSubgroup.instAddSubgroupClass AddSubgroupClass.toAddSubmonoidClass AddSubmonoidClass.toAddCommMonoid AddSubmonoidClass.toAddZeroClass CommSemiring.toSemiring Complex.addGroupWithOne Complex.instAddCommMonoid Complex.instField Complex.instNonUnitalCommRing Field.toDivisionRing IsSemitopologicalRing.toIsSemitopologicalSemiring IsSemitopologicalSemiring.toContinuousAdd IsTopologicalDivisionRing.toIsTopologicalRing IsTopologicalRing.toIsSemitopologicalRing MeasureTheory.AEEqFun.instAddCommMonoid MeasureTheory.AEEqFun.instAddMonoid NonUnitalCommRing.toNonUnitalNonAssocCommRing NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring NormedDivisionRing.to_isTopologicalDivisionRing NormedField.toNormedDivisionRing Semifield.toCommSemiring	DivisionSemiring.toSemiring MeasureTheory.Lp.instAddCommGroup Semifield.toDivisionSemiring	
+target	ContinuousVectors.covariance_mem	theorem	IDENTICAL	—	—	
+target	ContinuousVectors.projection_covariance_fixed	theorem	UP-TO-INSTANCES	CommSemiring.toSemiring Semifield.toCommSemiring	DivisionSemiring.toSemiring Semifield.toDivisionSemiring	
+target	ContinuousVectors.op_orthogonal	theorem	UP-TO-INSTANCES	CommSemiring.toSemiring Semifield.toCommSemiring	DivisionSemiring.toSemiring Semifield.toDivisionSemiring	
+target	ContinuousVectors.projection_coefficient	theorem	UP-TO-INSTANCES	CommSemiring.toSemiring Semifield.toCommSemiring	DivisionSemiring.toSemiring Semifield.toDivisionSemiring	
+target	Spectral.dense_E	theorem	IDENTICAL	—	—	
+target	Spectral.orbit_uniformContinuous	theorem	IDENTICAL	—	—	
+target	Spectral.orbitExtension	def	IDENTICAL	—	—	
+target	Spectral.orbitExtension_continuous	theorem	IDENTICAL	—	—	
+target	Spectral.orbitExtension_eq	theorem	IDENTICAL	—	—	
+target	Spectral.orbitExtension_inner	theorem	IDENTICAL	—	—	
+target	Spectral.normalized_algebraic	theorem	IDENTICAL	—	—	
+target	Spectral.circle_closed_induction	theorem	IDENTICAL	—	—	
+definition	approxIndex	def	UP-TO-INSTANCES	§.LabelModel.projected._proof_1 §.approxIndex._proof_2	§.Koopman.isometry._proof_1 §.Koopman.isometry._proof_2	
+definition	approxField	def	UP-TO-INSTANCES	§.LabelModel.projected._proof_1 §.approxIndex._proof_1	§.Koopman.isometry._proof_1 §.Koopman.isometry._proof_2	
+definition	measurableField	def	UP-TO-INSTANCES	§.LabelModel.projected._proof_1 §.approxIndex._proof_1	§.Koopman.isometry._proof_1 §.Koopman.isometry._proof_2	
+target	exists_measurable_field	theorem	IDENTICAL	—	—	
+target	positive_orthogonal	theorem	IDENTICAL	—	—	

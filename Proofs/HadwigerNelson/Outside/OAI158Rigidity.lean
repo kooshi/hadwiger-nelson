@@ -3,6 +3,8 @@ import Mathlib.Analysis.Complex.Circle
 import Mathlib.Analysis.InnerProductSpace.Adjoint
 import Mathlib.Analysis.InnerProductSpace.Orthogonal
 import Mathlib.Analysis.InnerProductSpace.l2Space
+import Mathlib.Analysis.CStarAlgebra.Classes
+import Mathlib.Analysis.CStarAlgebra.Module.Constructions
 
 /-!
 # Rotation-fixed vectors orthogonal to the continuous vectors are uncorrelated: an outside theorem, imported (FS-133)
@@ -115,11 +117,19 @@ zero; in the manuscript it is one step of the proof of the Proposition "From pro
 (`Ergodicity.lean` ll. 377–380) and are written here in the signature.
 
 Proved there on `[propext, Classical.choice, Quot.sound]` at Lean v4.34.1 (`data/fs133/k1/readback/ReleaseAxioms.out`).
-Read back against the release's stored statement in `plans/FS133-kernel-plan.md` stage 2: the six copied definitions
-are the release's term for term; **this statement is the release's up to instance arguments, not term for term** —
-binders, names and every explicit and implicit argument agree, and the stored types differ only inside instance
-arguments, because Mathlib reaches the inner product of `H` through another class at the release's pin (v4.34.1)
-than at this one. A model of
+Read back against the release's stored statement in `plans/FS133-kernel-plan.md` stage 2, and again on this module
+as it stands (`data/fs133/ia1/axiom-readback/`, FS133-IA1): the six copied definitions are the release's term for
+term; **this statement is the release's up to instance arguments, not term for term** — binders, names and every
+explicit and implicit argument agree, and the stored types differ only inside instance arguments, on one path: the
+`Semiring` of a `Semifield` (of the algebraic plane, and of `ℂ`) is reached through `CommSemiring` at the release's
+pin (`CommSemiring.toSemiring`, `Semifield.toCommSemiring`, `SubsemiringClass.toCommSemiring`,
+`Complex.instCommSemiring`; Mathlib v4.34.1) and through `DivisionSemiring` at this one
+(`DivisionSemiring.toSemiring`, `Semifield.toDivisionSemiring`; Mathlib v4.32.0). Which instances a stored statement
+names depends on the module's imports as well as on the pin: this module imports
+`Mathlib.Analysis.CStarAlgebra.Classes` and `Mathlib.Analysis.CStarAlgebra.Module.Constructions` so that the inner
+product of `H` and the normed ring `ℂ` are reached as at the release's pin (`CStarModule.toInner`,
+`WithCStarModule.instCStarModuleComplex`, `instCommCStarAlgebraComplex`); without those two imports the two stored
+statements differ by twenty-four constants there and four here, in place of four and two. A model of
 its hypotheses with `v ≠ 0`, where its conclusion holds by computation, is `residual_fourier_model` below. Declared in
 `ARCHITECTURE.md` § Trust. -/
 axiom residual_fourier {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]

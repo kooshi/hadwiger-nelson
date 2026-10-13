@@ -1,0 +1,20 @@
+unplanted: PASS (as it must)
+plant 'the generated file changed by two spaces': REFUSED
+plant 'the generated file absent': REFUSED
+plant 'the 1 CONE line(s) of positive_orthogonal removed': REFUSED
+plant 'a CONE line added (a declaration outside the cone)': REFUSED
+plant 'a CONE line in a fourth file': REFUSED
+plant 'the label model's `projected` itself in the cone': REFUSED
+plant 'a patch that does not apply': REFUSED
+plant 'a patch into a statement': REFUSED
+plant 'a patch into a definition': REFUSED
+partner 'a patch into a proof': generation ACCEPTED, file then DIFFERS
+plant 'SCOPED withdrawn (the instance on `E` in neither table): refused at generation': REFUSED
+plant 'GLOBAL_INSTANCES withdrawn (an instance in neither table): refused at generation': REFUSED
+plant 'a SCOPED entry that changes more than the keyword': REFUSED
+plant '`kCoeff` absent upstream': REFUSED
+plant '`deriving CommGroup` absent upstream': REFUSED
+plant 'the licence copy changed by one byte': REFUSED
+plant 'the licence copy absent': REFUSED
+plant 'the clone at another commit': REFUSED
+SELF-TEST OK: 17 plants refused and 1 partner accepted

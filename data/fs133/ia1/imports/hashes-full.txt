@@ -1,0 +1,71 @@
+FOOT DEF HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp type=612455587 value=240421446
+FOOT DEF HadwigerNelson.Outside.OAI158.Koopman.isometry type=2196452204 value=2838295662
+FOOT DEF HadwigerNelson.Outside.OAI158.Koopman.unitary type=2764213036 value=1349551319
+FOOT DEF HadwigerNelson.Outside.OAI158.Spectral.imagUnit type=64213602 value=1881700132
+FOOT DEF HadwigerNelson.Outside.OAI158.Spectral.orbitExtension type=565281648 value=2162338569
+FOOT DEF HadwigerNelson.Outside.OAI158.approxField type=1213259823 value=3028878356
+FOOT DEF HadwigerNelson.Outside.OAI158.approxIndex type=951448135 value=4184283602
+FOOT DEF HadwigerNelson.Outside.OAI158.measurableField type=1777578689 value=3158594813
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp.eq_1 type=3603872943
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp_eq type=1327917537
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp_lipschitz type=1441468933
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp_lipschitz._simp_1_1 type=871189975
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp_range type=1271099835
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp_zero type=722641858
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.covariance_mem type=2333126617
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.dist_op type=4182117018
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.dist_op._simp_1_1 type=3910874390
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.instCompleteSpaceSubtypeMemSubmoduleComplexSpace_data type=3803448684
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.isClosed_space type=4253419262
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.nonlinear_mem type=338683324
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.norm_op type=1724195655
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.op.eq_1 type=230860685
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.op_add type=1805250901
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.op_comm type=3238431459
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.op_mem type=3871847337
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.op_orthogonal type=2545349689
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.op_zero type=444237620
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.orbit_continuous type=571925270
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.projection_coefficient type=3632263326
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.projection_coefficient._abel_1_1 type=3220485459
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.projection_covariance_fixed type=2964306378
+FOOT THM HadwigerNelson.Outside.OAI158.ContinuousVectors.projection_range type=1099670743
+FOOT THM HadwigerNelson.Outside.OAI158.Koopman.isometry._proof_1 type=2852675995
+FOOT THM HadwigerNelson.Outside.OAI158.Koopman.isometry._proof_2 type=2547959801
+FOOT THM HadwigerNelson.Outside.OAI158.Koopman.isometry._proof_3 type=2448489810
+FOOT THM HadwigerNelson.Outside.OAI158.Koopman.isometry._proof_4 type=2229653841
+FOOT THM HadwigerNelson.Outside.OAI158.Koopman.isometry._proof_5 type=2142397304
+FOOT THM HadwigerNelson.Outside.OAI158.Koopman.isometry._proof_6 type=1473706016
+FOOT THM HadwigerNelson.Outside.OAI158.Koopman.nonlinear_commute type=947999003
+FOOT THM HadwigerNelson.Outside.OAI158.Koopman.unitary._proof_1 type=3938749967
+FOOT THM HadwigerNelson.Outside.OAI158.Koopman.unitary._proof_2 type=1648061882
+FOOT THM HadwigerNelson.Outside.OAI158.Koopman.unitary._proof_3 type=2863211382
+FOOT THM HadwigerNelson.Outside.OAI158.Koopman.unitary_apply type=2656933849
+FOOT THM HadwigerNelson.Outside.OAI158.Spectral.E_countable type=4233630554
+FOOT THM HadwigerNelson.Outside.OAI158.Spectral.algebraic_norm type=2325062845
+FOOT THM HadwigerNelson.Outside.OAI158.Spectral.circle_closed_induction type=1035757648
+FOOT THM HadwigerNelson.Outside.OAI158.Spectral.dense_E type=3186566697
+FOOT THM HadwigerNelson.Outside.OAI158.Spectral.imagUnit._proof_1 type=318610554
+FOOT THM HadwigerNelson.Outside.OAI158.Spectral.kCoeff_ne_zero type=3191280428
+FOOT THM HadwigerNelson.Outside.OAI158.Spectral.kCoeff_ne_zero._simp_1 type=1858455321
+FOOT THM HadwigerNelson.Outside.OAI158.Spectral.normalized_algebraic type=1378451966
+FOOT THM HadwigerNelson.Outside.OAI158.Spectral.orbitExtension._proof_1 type=2159798104
+FOOT THM HadwigerNelson.Outside.OAI158.Spectral.orbitExtension_continuous type=3415794058
+FOOT THM HadwigerNelson.Outside.OAI158.Spectral.orbitExtension_eq type=71915722
+FOOT THM HadwigerNelson.Outside.OAI158.Spectral.orbitExtension_inner type=1445497395
+FOOT THM HadwigerNelson.Outside.OAI158.Spectral.orbit_uniformContinuous type=2869896900
+FOOT THM HadwigerNelson.Outside.OAI158.approxField.congr_simp type=2134875127
+FOOT THM HadwigerNelson.Outside.OAI158.approxField_measurable type=2429326267
+FOOT THM HadwigerNelson.Outside.OAI158.approxField_tendsto type=2704399605
+FOOT THM HadwigerNelson.Outside.OAI158.approxField_tendsto._simp_1_2 type=3468068545
+FOOT THM HadwigerNelson.Outside.OAI158.approxIndex._proof_1 type=471885199
+FOOT THM HadwigerNelson.Outside.OAI158.approxIndex.congr_simp type=4247123651
+FOOT THM HadwigerNelson.Outside.OAI158.dense_approx type=446807218
+FOOT THM HadwigerNelson.Outside.OAI158.exists_measurable_field type=1579418061
+FOOT THM HadwigerNelson.Outside.OAI158.index_bound type=2033818085
+FOOT THM HadwigerNelson.Outside.OAI158.index_measurable type=2383798319
+FOOT THM HadwigerNelson.Outside.OAI158.measurableField.eq_1 type=1685445549
+FOOT THM HadwigerNelson.Outside.OAI158.measurableField_measurable type=487475114
+FOOT THM HadwigerNelson.Outside.OAI158.positive_orthogonal type=320081658
+FOOT THM HadwigerNelson.Outside.OAI158.projection_fixed_of_contraction type=2017520233
+FOOTDONE 70

@@ -1,0 +1,9 @@
+import Mathlib
+
+/-!
+# Rotation-fixed vectors orthogonal to the continuous vectors are uncorrelated: an outside theorem, imported (FS-133)
+
+**The outside theorem of this module** is `Spectral.residual_fourier`, a lemma of the Lean development of
+`[OAIMath2026]` family 158 (github.com/openai/math, read at its commit `adc7f1241b42e322a6451854ab7e4b4c146bf78a`),
+declared here as an `axiom` **in the release's own form, over the release's own definitions, copied**. It is the
+release's third declared theorem in this library; the other two are in `Outside/OAI158`.
