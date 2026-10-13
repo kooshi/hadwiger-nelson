@@ -133,3 +133,59 @@ The remote is unreachable: **commit by explicit path on your branch and do not p
 
 You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review
 work it knows exists).
+
+## Amendment 1 (2026-10-13 20:37 UTC) — the outside theorem enters as the release's `residual_fourier`, declared; its generic lemmas are ported
+
+Your proposal is accepted as you made it. Thank you for measuring the port before proposing against it, and for the
+second finding: it takes the heaviest link out of the module.
+
+**The ruling, in four parts.** *Choice:* declare the release's `residual_fourier` in
+`Proofs/HadwigerNelson/Outside/OAI158.lean`, the third declared theorem from the release, over copies of the seven
+constants you name. *The alternative I weighed:* declare `wild_fourier`, which is the manuscript's numbered
+Theorem 2.3, and build the spectral measure of a vector in this library. *Why yours wins:* both statements are
+kernel-checked in the same file at the same pin, so the trust bought is the same release either way; what differs is
+how much of the release a reader must compare by eye, and yours copies seven short constants where the other copies
+the character group, the wild condition and the action on it, and then spends about 125 declarations here to arrive
+at the line the release already proves. A port now is declined for this job and priced for later (item 4 below).
+*Confidence:* high. What would change it: one of the seven constants turning out not to be short once its own
+dependencies are followed (a definition that pulls in the functional calculus), or the model on the regular
+representation not going through with a non-zero vector — tell me at once in either case.
+
+**What I ask the declaration to carry**, beyond the four items of `LEAN.md` § Assumptions: outside theorems and our own:
+
+1. **Its docstring says what it is, so no reader takes it for the printed Theorem 2.3**: a lemma of the release's
+   Lean, by file and line at the pin (I read the `lemma` keyword on line 403 of
+   `~/source/math/lean/OAI/Analysis/PlaneSpectrum/Ergodicity.lean`, where you wrote 402 — cite the line as the pin
+   has it); the rigidity theorem composed with the spectral theorem for the representation; not a numbered statement
+   of the manuscript; and the manuscript passage whose step it is, by key, section and page, with Theorem 2.3 named as
+   what it rests on.
+2. **The axioms line of `residual_fourier` itself** at the release's pin, from the compiled constants, recorded in
+   your plan with the command or the dump line that shows it. What I checked: it is consumed by
+   `projected_unit_correlation` on line 61 of `~/source/math/lean/OAI/Geometry/PlaneColoring/BorelTransfer.lean`, and
+   the audit has the axioms line for `wild_fourier`; I have not seen the line for this lemma, and an inference from a
+   neighbour's line is not a receipt.
+3. **Its binders in its own signature**, as the brief already says, and the read-back across the two pins with a
+   control that fires (`tools/fs132_i1_readback.py` is the pattern); the landing runs it again.
+4. **The port's price, as a table in your plan**: your count for this lemma's cone beside the audit's rows —
+> | `proper_to_borel_weak` (the transfer) | 1,997 | 32 | six to eight jobs; about 16,600 lines |
+> — source: plans/EXT-OAI1-audit.md § The pieces to adopt, and what each rests on (measured)
+
+> | `wild_fourier` | 1,644 | 29 | inside the previous |
+> — source: plans/EXT-OAI1-audit.md § The pieces to adopt, and what each rests on (measured)
+
+   — and one sentence on whether this lemma's cone lies inside the transfer's (the transfer consumes it, so I expect
+   so; say what the compiled constants say). If it does, one port would turn two of the library's declared theorems
+   into theorems under their present names. That is a later job and a decision for the publication pass
+   (`LEAN.md` § Assumptions: outside theorems and our own, its last bullet); your plan only has to hold the measurement.
+
+**The generic lemmas: port them, yes.** Plan them as a ported module of their own, made by the generator the last
+port used (`tools/fs132_i2_port.py`, which refuses a patch to a statement or a definition; its read-back
+`tools/fs132_i2_readback.py`; the licence text `Proofs/HadwigerNelson/Outside/OAIMath2026-LICENSE.txt` beside it),
+with the cone computed from the release's compiled constants and the line ranges in your plan. Keep the lines you
+rewrite for an arbitrary invariant law in a separate module of this library's own: a ported module's header says it
+is the release's text unchanged, and that has to stay true. Whether you run the generator yourself or leave it to an
+implementer as a leaf is yours to decide by which is cheaper. The density-point statement already in the library is
+cited in your plan by its declaration names, as you gave them.
+
+Your touches are unchanged: the declaration's line in the module above, new modules of this milestone, your record
+and your data folder. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
