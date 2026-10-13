@@ -334,3 +334,11 @@ No Frontier line and no Proof Atlas grade changes on this module alone.
 - **A simplification of the plan, for the planner's eye** (not a statement): one form per class instead of a lattice of
   four (§ Stage 3). If the joining text's J.10 or a docstring was written against the four-form lattice, D3 item 4 is
   what it should read.
+
+## Stage 5 — SAVED: the report
+
+`data/fs131/reports/FS131-ID1.md`, in the standing rules' form, and the same text as the hand-back. Commits of this
+job, on `fs131-wdq`, none pushed: `a296575d8` (stage 1), `4463c3f19` (stage 2), `715640bde` (stage 3), `ff9f19485`
+(stage 4), and the one that carries this section. One message went to the coordinator mid-job, at stage 3 (the file
+had no `sorry`). No process of this job is running or queued (`scripts/slot.py --status` holds no `id1` slot; the
+build's process, whose id is in `data/fs131/id1/logs/build1.pid`, exited 0).
