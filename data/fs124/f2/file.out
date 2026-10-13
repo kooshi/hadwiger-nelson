@@ -1,0 +1,25 @@
+D1: slot found once
+D2: the nine counts stand; nothing changed
+D3: slot found once
+D5-CLAUDE: slot found once
+D6.1: slot found once
+D6.2: slot found once
+D6.3: slot found once
+D7: slot found once
+D5-STUBS: slot found once
+D4a: GATE_CHANGES entry inserted after the L1 entry
+D4b: superseded-count entries: 6967, 7,015, 20 axiom-free, declarations=15370, refutations-skipped=226
+D8a+b: slot found once in row 162
+D9a+b: slot found once in row 163
+D10: slot found once in row 164
+D11b: slot found once
+D11c: slot found once
+D11a: dated line inserted after the head paragraph
+D12a: 16 bullets inserted after the FS124-I1 bullet
+D12b: slot found once
+D12c: appended at the end of the assumptions.sh bullet
+D13: the Proof Atlas: not filed by this script (see the report)
+D14: ARCHITECTURE.md: nothing to file
+D15: BIBLIOGRAPHY.md: nothing to file
+filed: CLAUDE.md, LEAN.md, LEDGER.md, plans/FRONTIER-STUBS.md, plans/FS124-derivation.md, tools/claude_md_fact_audit.py
+CLAUDE.md bytes 69783
