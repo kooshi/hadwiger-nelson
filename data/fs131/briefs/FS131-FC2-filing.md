@@ -90,3 +90,40 @@ what the report cites under `data/fs131/fc2/`.
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 (2026-10-13 21:55 UTC) — my rulings on your eight checks, and three small things to do before the merge
+
+Thank you: nothing guessed, and check 3 caught a mistake of mine — I told you no draft gives facts for the atlas
+after a search that missed the words because they are capitalised in the draft.
+
+**Check 1 — the five lost tokens: each is a superseded count or a replaced clause, and each is allowed, by these
+entries.** Add them to the table named `ALLOW` in `tools/claude_md_fact_audit.py`, the key exactly the token the
+audit printed, the reason exactly as written here:
+
+- key `axioms=3 rests=26 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1` — reason: `superseded gate counts (the assumptions step's nine), refiled at FS131-LU1's landing from data/fs131/lu1/gate/receipt-assumptions-final.log (inline=15, ours=22, takes=106); the old line stays in data/fs131/lc1/gate/ and in GATE_CHANGES`
+- key `declarations=15969 refutations-skipped=228 sites=1454` — reason: `superseded gate count (the vacuity scan's), refiled at FS131-LU1's landing from data/fs131/lu1/gate/receipt-vacuity-final.log (declarations=16029); the old line stays in data/fs131/lc1/gate/ and in GATE_CHANGES`
+- key `15969` — the same reason as the previous entry.
+- key `7454` — reason: `superseded gate count, the token form of 7,454 records; refiled at FS131-LU1's landing from data/fs131/lu1/gate/receipt-axioms-final.log (7,506 records); the old count stays in data/fs131/lc1/gate/ and in GATE_CHANGES`
+- key `ℤ[i]` — reason: `LEDGER row 63's clause "no instance over a real field yet; the only inhabitant is the ring form on ℤ[i], deferred to FS-37" is superseded at FS131-LU1's landing: the library now holds the theorem over a real number field with the rational field's prime above 2 as its instance (UpperHalf.exists_stablePrime_rat, UpperHalf.chromaticNumber_planeOver_rat)`
+
+If an entry does not silence its token (the table matches some other way), stop and tell me what the tool wants;
+do not widen a key.
+
+**Check 2 — draft 16 is filed.** `BIBLIOGRAPHY.md` is added to your touches. For each of the three keys the draft
+names, append the draft's quoted sentence, as one sentence ending in a full stop, at the end of that row's cell that
+says what of ours rests on the work (the row is the table line that begins with the key in bold; the cell is the one
+after the citation). If a row or that cell is not found exactly once, that is a check, not a choice.
+
+**Check 3 — the atlas part of draft 14 is not filed by this job.** The draft gives grade changes in prose, not facts
+with positions, and the same ledger rows are regraded again by the next landing; the atlas gets one rebuild at the
+cleanup pass. Nothing for you to do.
+
+**Check 4 — draft 10 is not for a front file.** I have taken its text into my own tooling list. Nothing for you to do.
+
+**Checks 5 to 8 — accepted as you did them**: the connector "; before it " is the list's own form; the joins stand;
+the unwrapped long lines stand.
+
+**Then**: run the fact audit again against the same base (it must exit 0), the same tool with its duplicates flag,
+the bibliography audit, and the three digests; keep each output under your data folder beside the first run's; add a
+short section to your report saying what this amendment changed and each check's last lines; commit by explicit
+path; hand back. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
