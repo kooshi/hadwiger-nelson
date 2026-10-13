@@ -1,12 +1,8 @@
-slot: admitted kn4: mem 4 GiB (hard cap), cpus 4,5
-Proofs/HadwigerNelson/Arith/ThreeColourCharacter.lean:43:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Arith/ThreeColourCharacter.lean:51:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Arith/ThreeColourCharacter.lean:58:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Arith/ThreeColourCharacter.lean:65:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Arith/ThreeColourCharacter.lean:70:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Arith/ThreeColourCharacter.lean:76:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Arith/ThreeColourCharacter.lean:84:8: warning: declaration uses `sorry`
-
-real	0m2.544s
-user	0m1.920s
-sys	0m0.606s
+slot: admitted kn4: mem 4 GiB (hard cap), cpus 0,1
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wr2/Proofs/HadwigerNelson/Arith/ThreeColourCharacter.lean:43:8: warning: declaration uses `sorry`
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wr2/Proofs/HadwigerNelson/Arith/ThreeColourCharacter.lean:51:8: warning: declaration uses `sorry`
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wr2/Proofs/HadwigerNelson/Arith/ThreeColourCharacter.lean:58:8: warning: declaration uses `sorry`
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wr2/Proofs/HadwigerNelson/Arith/ThreeColourCharacter.lean:65:8: warning: declaration uses `sorry`
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wr2/Proofs/HadwigerNelson/Arith/ThreeColourCharacter.lean:70:8: warning: declaration uses `sorry`
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wr2/Proofs/HadwigerNelson/Arith/ThreeColourCharacter.lean:76:8: warning: declaration uses `sorry`
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wr2/Proofs/HadwigerNelson/Arith/ThreeColourCharacter.lean:84:8: warning: declaration uses `sorry`

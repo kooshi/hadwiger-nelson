@@ -315,6 +315,9 @@ import Proofs.HadwigerNelson.Plane.ClosePairWitness
 import Proofs.HadwigerNelson.Plane.ClosePairModel
 import Proofs.HadwigerNelson.Plane.SectorPoint
 import Proofs.HadwigerNelson.Plane.ThreeArcs
+import Proofs.HadwigerNelson.Arith.ThreeColourCharacter
+import Proofs.HadwigerNelson.Arith.TorsionExtraction
+import Proofs.HadwigerNelson.Arith.ThreeColourCriterion
 
 /-!
 # Proofs

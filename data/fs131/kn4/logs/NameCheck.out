@@ -1,0 +1,164 @@
+slot: admitted kn4: mem 4 GiB (hard cap), cpus 8,9
+data/fs131/kn4/lean/NameCheck.lean:5:8: error(lean.unknownIdentifier): Unknown identifier `geometric_hahn_banach_compact_point`
+data/fs131/kn4/lean/NameCheck.lean:6:8: error(lean.unknownIdentifier): Unknown identifier `geometric_hahn_banach_point_compact`
+@mem_span_of_iInf_ker_le_ker : ∀ {ι : Type u_1} {𝕜 : Type u_2} {E : Type u_3} [inst : Field 𝕜] [inst_1 : AddCommGroup E]
+  [inst_2 : Module 𝕜 E] [Finite ι] {L : ι → E →ₗ[𝕜] 𝕜} {K : E →ₗ[𝕜] 𝕜},
+  ⨅ i, (L i).ker ≤ K.ker → K ∈ Submodule.span 𝕜 (Set.range L)
+@LinearMap.pi_apply_eq_sum_univ : ∀ {R : Type u_1} {M₂ : Type u_2} {ι : Type u_3} [inst : Semiring R]
+  [inst_1 : AddCommMonoid M₂] [inst_2 : Module R M₂] [inst_3 : DecidableEq ι] [inst_4 : Fintype ι]
+  (f : (ι → R) →ₗ[R] M₂) (x : ι → R), f x = ∑ i, x i • f fun j => if i = j then 1 else 0
+@Rat.denseRange_cast : ∀ {𝕜 : Type u_1} [inst : Field 𝕜] [inst_1 : LinearOrder 𝕜] [IsStrictOrderedRing 𝕜]
+  [inst_3 : TopologicalSpace 𝕜] [OrderTopology 𝕜] [Archimedean 𝕜], DenseRange Rat.cast
+@DenseRange.exists_mem_open : ∀ {X : Type u_1} [inst : TopologicalSpace X] {α : Type u_2} {f : α → X} {s : Set X},
+  DenseRange f → IsOpen s → s.Nonempty → ∃ a, f a ∈ s
+@Convex.is_linear_image : ∀ {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [inst : Semiring 𝕜] [inst_1 : PartialOrder 𝕜]
+  [inst_2 : AddCommMonoid E] [inst_3 : AddCommMonoid F] [inst_4 : Module 𝕜 E] [inst_5 : Module 𝕜 F] {s : Set E},
+  Convex 𝕜 s → ∀ {f : E → F}, IsLinearMap 𝕜 f → Convex 𝕜 (f '' s)
+@IsCompact.image : ∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {s : Set X}
+  {f : X → Y}, IsCompact s → Continuous f → IsCompact (f '' s)
+@isCompact_univ_pi : ∀ {ι : Type u_1} {X : ι → Type u_2} [inst : (i : ι) → TopologicalSpace (X i)]
+  {s : (i : ι) → Set (X i)}, (∀ (i : ι), IsCompact (s i)) → IsCompact (Set.univ.pi s)
+@isCompact_Icc : ∀ {α : Type u_1} {inst : TopologicalSpace α} {inst_1 : Preorder α} [self : CompactIccSpace α]
+  {a b : α}, IsCompact (Set.Icc a b)
+inferInstance : IsNoetherian ℤ (Fin 3 → ℤ)
+@AddSubgroup.toIntSubmodule : {M : Type u_1} → [inst : AddCommGroup M] → AddSubgroup M ≃o Submodule ℤ M
+@Submodule.fg_iff_exists_fin_generating_family : ∀ {R : Type u_1} {M : Type u_2} [inst : Semiring R]
+  [inst_1 : AddCommMonoid M] [inst_2 : Module R M] {N : Submodule R M}, N.FG ↔ ∃ n s, Submodule.span R (Set.range s) = N
+@QuotientAddGroup.lift : {G : Type u_1} →
+  {M : Type u_2} →
+    [inst : AddGroup G] →
+      [inst_1 : AddMonoid M] → (N : AddSubgroup G) → [nN : N.Normal] → (φ : G →+ M) → N ≤ φ.ker → G ⧸ N →+ M
+@QuotientAddGroup.quotientKerEquivRange : {G : Type u_1} →
+  [inst : AddGroup G] → {H : Type u_2} → [inst_1 : AddGroup H] → (φ : G →+ H) → G ⧸ φ.ker ≃+ ↥φ.range
+Module.Baer.of_divisible : ∀ (A : Type u_1) [inst : AddCommGroup A] [DivisibleBy A ℤ], Module.Baer ℤ A
+@Module.Baer.extension_property_addMonoidHom : ∀ {Q : Type u_1} [inst : AddCommGroup Q] {M : Type u_2} {N : Type u_3}
+  [inst_1 : AddCommGroup M] [inst_2 : AddCommGroup N],
+  Module.Baer ℤ Q → ∀ (f : M →+ N), Function.Injective ⇑f → ∀ (g : M →+ Q), ∃ h, h.comp f = g
+inferInstance : DivisibleBy UnitAddCircle ℤ
+@CharacterColouring.exists_ratLinear_extension : ∀ {S : Type u_1} {V : Type u_2} [inst : AddCommGroup S]
+  [inst_1 : AddCommGroup V] [inst_2 : Module ℚ V] (ι : S →+ V),
+  Function.Injective ⇑ι → ∀ (ψ : S →+ ℝ), ∃ ℓ, ∀ (x : S), ℓ (ι x) = ψ x
+@IsCompact.nonempty_iInter_of_directed_nonempty_isCompact_isClosed : ∀ {X : Type u_1} [inst : TopologicalSpace X]
+  {ι : Type u_2} [hι : Nonempty ι] (t : ι → Set X),
+  Directed (fun x1 x2 => x1 ⊇ x2) t →
+    (∀ (i : ι), (t i).Nonempty) → (∀ (i : ι), IsCompact (t i)) → (∀ (i : ι), IsClosed (t i)) → (⋂ i, t i).Nonempty
+inferInstance : CompactSpace (ℤ → UnitAddCircle)
+@isClosed_iInter : ∀ {X : Type u_1} {ι : Sort u_2} [inst : TopologicalSpace X] {f : ι → Set X},
+  (∀ (i : ι), IsClosed (f i)) → IsClosed (⋂ i, f i)
+@isClosed_eq : ∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] [T2Space X]
+  {f g : Y → X}, Continuous f → Continuous g → IsClosed {y | f y = g y}
+@continuous_apply : ∀ {ι : Type u_1} {A : ι → Type u_2} [T : (i : ι) → TopologicalSpace (A i)] (i : ι),
+  Continuous fun p => p i
+@AddCircle.continuous_mk' : ∀ {𝕜 : Type u_1} [inst : AddCommGroup 𝕜] (p : 𝕜) [inst_1 : TopologicalSpace 𝕜],
+  Continuous ⇑(QuotientAddGroup.mk' (AddSubgroup.zmultiples p))
+@ThreeColour.nonempty_winding : ∀ {A : Type u_1} [inst : AddCommGroup A] {m : ℕ} (s : Fin m → A) {c : A → ZMod 3},
+  ThreeColour.ProperAlong s c → Nonempty (ThreeColour.Winding s)
+@SimpleGraph.le_chromaticNumber_iff_colorable : ∀ {V : Type u_1} {G : SimpleGraph V} {n : ℕ},
+  ↑n ≤ G.chromaticNumber ↔ ∀ (m : ℕ), G.Colorable m → n ≤ m
+@SimpleGraph.chromaticNumber_le_iff_colorable : ∀ {V : Type u_1} {G : SimpleGraph V} {n : ℕ},
+  G.chromaticNumber ≤ ↑n ↔ G.Colorable n
+@tendsto_nhds_unique : ∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [T2Space X] {f : Y → X}
+  {l : Filter Y} {a b : X} [l.NeBot], Filter.Tendsto f l (nhds a) → Filter.Tendsto f l (nhds b) → a = b
+@Filter.Tendsto.add : ∀ {M : Type u_1} [inst : TopologicalSpace M] [inst_1 : Add M] [ContinuousAdd M] {α : Type u_2}
+  {f g : α → M} {x : Filter α} {a b : M},
+  Filter.Tendsto f x (nhds a) → Filter.Tendsto g x (nhds b) → Filter.Tendsto (fun x => f x + g x) x (nhds (a + b))
+@tendsto_pow_atTop_nhds_zero_of_lt_one : ∀ {𝕜 : Type u_1} [inst : Semifield 𝕜] [inst_1 : LinearOrder 𝕜]
+  [IsStrictOrderedRing 𝕜] [ExistsAddOfLE 𝕜] [Archimedean 𝕜] [inst_5 : TopologicalSpace 𝕜] [OrderTopology 𝕜] {r : 𝕜},
+  0 ≤ r → r < 1 → Filter.Tendsto (fun n => r ^ n) Filter.atTop (nhds 0)
+@UnitRing.exists_sum_eq_of_mem_unitRingOver : ∀ {F : Subfield ℝ} {x : ℂ},
+  x ∈ UnitRing.unitRingOver F → ∃ m u, (∀ (j : Fin m), ‖u j‖ = 1) ∧ (∀ (j : Fin m), u j ∈ planeOver F) ∧ ∑ j, u j = x
+@Subring.closure_induction : ∀ {R : Type u_1} [inst : NonAssocRing R] {s : Set R}
+  {p : (x : R) → x ∈ Subring.closure s → Prop},
+  (∀ (x : R) (hx : x ∈ s), p x ⋯) →
+    p 0 ⋯ →
+      p 1 ⋯ →
+        (∀ (x y : R) (hx : x ∈ Subring.closure s) (hy : y ∈ Subring.closure s), p x hx → p y hy → p (x + y) ⋯) →
+          (∀ (x : R) (hx : x ∈ Subring.closure s), p x hx → p (-x) ⋯) →
+            (∀ (x y : R) (hx : x ∈ Subring.closure s) (hy : y ∈ Subring.closure s), p x hx → p y hy → p (x * y) ⋯) →
+              ∀ {x : R} (hx : x ∈ Subring.closure s), p x hx
+@AddCircle.coe_eq_zero_iff : ∀ {𝕜 : Type u_1} [inst : AddCommGroup 𝕜] (p : 𝕜) {x : 𝕜}, ↑x = 0 ↔ ∃ n, n • p = x
+@AddCircle.coe_period : ∀ {𝕜 : Type u_1} [inst : AddCommGroup 𝕜] (p : 𝕜), ↑p = 0
+@abs_le : ∀ {G : Type u_1} [inst : AddCommGroup G] [inst_1 : LinearOrder G] [IsOrderedAddMonoid G] {a b : G},
+  |a| ≤ b ↔ -b ≤ a ∧ a ≤ b
+@Int.induction_on : ∀ {motive : ℤ → Prop} (i : ℤ),
+  motive 0 → (∀ (i : ℕ), motive ↑i → motive (↑i + 1)) → (∀ (i : ℕ), motive (-↑i) → motive (-↑i - 1)) → motive i
+CharacterColouring.inv_five_mem_Qring : 5⁻¹ ∈ CharacterColouring.Qring
+@QuotientAddGroup.mk_out_eq_mul : ∀ {α : Type u_1} [inst : AddGroup α] (s : AddSubgroup α) (g : α),
+  ∃ h, Quotient.out ↑g = g + ↑h
+@QuotientAddGroup.leftRel_apply : ∀ {α : Type u_1} [inst : AddGroup α] {s : AddSubgroup α} {x y : α},
+  (QuotientAddGroup.leftRel s) x y ↔ -x + y ∈ s
+StandingFive.targetFloor_of_charSum : ∀ (N Q : ℕ) {m : ℝ},
+  0 < m →
+    (↑N - 1) * m < ↑Q + 1 + m →
+      (∀ (k : Type) [inst : Field k] [inst_1 : Fintype k] [inst_2 : DecidableEq k],
+          Fintype.card k = Q ^ 2 → ∀ (ψ : AddChar k ℂ), ψ ≠ 1 → -m ≤ (∑ u with u ^ (Q + 1) = 1, ψ u).re) →
+        StandingFive.TargetFloor N Q
+@StandingFive.normOne_charSum_ge : ∀ {k : Type} [inst : Field k] [inst_1 : Fintype k] [inst_2 : DecidableEq k] {Q : ℕ},
+  Q % 4 = 3 →
+    Fintype.card k = Q ^ 2 →
+      (∀ (F : Type) [inst : Field F] [inst_3 : Fintype F] [inst_4 : DecidableEq F],
+          Fintype.card F = Q → StandingFive.KloostermanBound F) →
+        ∀ (ψ : AddChar k ℂ), ψ ≠ 1 → -(2 * √↑Q) ≤ (∑ u with u ^ (Q + 1) = 1, ψ u).re
+StandingFive.kloostermanBound_of_ringChar_ne_two : ∀ (F : Type u_1) [inst : Field F] [inst_1 : Fintype F]
+  [inst_2 : DecidableEq F], ringChar F ≠ 2 → StandingFive.KloostermanBound F
+@StandingFive.ringChar_ne_two_of_card_mod_four : ∀ {F : Type u_1} [inst : Field F] [inst_1 : Fintype F],
+  Fintype.card F % 4 = 3 → ringChar F ≠ 2
+@StandingFive.involution_eq_pow : ∀ {k : Type u_1} [inst : Field k] [inst_1 : Fintype k] (σ : k →+* k),
+  (∀ (x : k), σ (σ x) = x) → σ ≠ RingHom.id k → ∀ {Q : ℕ}, Fintype.card k = Q ^ 2 → ∀ (x : k), σ x = x ^ Q
+@StandingFive.card_normOne : ∀ {k : Type u_1} [inst : Field k] [inst_1 : Fintype k] [inst_2 : DecidableEq k] {Q : ℕ},
+  Fintype.card k = Q ^ 2 → {u | u ^ (Q + 1) = 1}.card = Q + 1
+IsArtinianRing.quotNilradicalEquivPi : (R : Type u_1) →
+  [inst : CommRing R] → [IsArtinianRing R] → (R ⧸ nilradical R) ≃ₐ[R] (I : MaximalSpectrum R) → R ⧸ I.asIdeal
+@IsArtinianRing.isNilpotent_nilradical : ∀ {R : Type u_1} [inst : CommRing R] [IsArtinianRing R],
+  IsNilpotent (nilradical R)
+iterateFrobenius : (R : Type u_1) → [inst : CommSemiring R] → (p : ℕ) → ℕ → [ExpChar R p] → R →+* R
+@FiniteField.isSquare_neg_one_iff : ∀ {F : Type u_1} [inst : Field F] [inst_1 : Fintype F],
+  IsSquare (-1) ↔ Fintype.card F % 4 ≠ 3
+data/fs131/kn4/lean/NameCheck.lean:59:8: error(lean.unknownIdentifier): Unknown identifier `sum_subgroup_units_eq_zero`
+@Ideal.quotientMap : {R : Type u_1} →
+  [inst : Ring R] →
+    {S : Type u_2} →
+      [inst_1 : Ring S] →
+        {I : Ideal R} →
+          (J : Ideal S) →
+            [inst_2 : I.IsTwoSided] → [inst_3 : J.IsTwoSided] → (f : R →+* S) → I ≤ Ideal.comap f J → R ⧸ I →+* S ⧸ J
+@DoubleQuot.quotQuotEquivQuotSup : {R : Type u_1} →
+  [inst : CommRing R] → (I J : Ideal R) → (R ⧸ I) ⧸ Ideal.map (Ideal.Quotient.mk I) J ≃+* R ⧸ I ⊔ J
+@Ideal.Quotient.lift : {R : Type u_1} →
+  [inst : Ring R] →
+    (I : Ideal R) →
+      {S : Type u_2} →
+        [inst_1 : I.IsTwoSided] → [inst_2 : Semiring S] → (f : R →+* S) → (∀ a ∈ I, f a = 0) → R ⧸ I →+* S
+@IsNilpotent.isUnit_quotient_mk_iff : ∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R},
+  IsNilpotent I → ∀ {x : R}, IsUnit ((Ideal.Quotient.mk I) x) ↔ IsUnit x
+@Ideal.IsPrime.mem_or_mem : ∀ {α : Type u_1} [inst : Semiring α] {I : Ideal α},
+  I.IsPrime → ∀ {x y : α}, x * y ∈ I → x ∈ I ∨ y ∈ I
+@Ideal.eq_top_of_isUnit_mem : ∀ {α : Type u_1} [inst : Semiring α] (I : Ideal α) {x : α}, x ∈ I → IsUnit x → I = ⊤
+@Subring.closure_le : ∀ {R : Type u_1} [inst : NonAssocRing R] {s : Set R} {t : Subring R},
+  Subring.closure s ≤ t ↔ s ⊆ ↑t
+@RingHom.codRestrict : {R : Type u_1} →
+  {S : Type u_2} →
+    [inst : NonAssocSemiring R] →
+      [inst_1 : NonAssocSemiring S] →
+        {σS : Type u_3} →
+          [inst_2 : SetLike σS S] →
+            [inst_3 : SubsemiringClass σS S] → (f : R →+* S) → (s : σS) → (∀ (x : R), f x ∈ s) → R →+* ↥s
+FiniteField.card : ∀ (K : Type u_1) [inst : Field K] [inst_1 : Fintype K] (p : ℕ) [CharP K p],
+  ∃ n, Nat.Prime p ∧ Fintype.card K = p ^ ↑n
+data/fs131/kn4/lean/NameCheck.lean:69:8: error(lean.unknownIdentifier): Unknown constant `Module.finrank_le_of_span_eq_top`
+@Ideal.Quotient.mk_surjective : ∀ {R : Type u_1} [inst : Ring R] {I : Ideal R} [inst_1 : I.IsTwoSided],
+  Function.Surjective ⇑(Ideal.Quotient.mk I)
+@Finite.of_surjective : ∀ {α : Sort u_1} {β : Sort u_2} [Finite α] (f : α → β), Function.Surjective f → Finite β
+@Ideal.exists_le_maximal : ∀ {α : Type u_1} [inst : Semiring α] (I : Ideal α), I ≠ ⊤ → ∃ M, M.IsMaximal ∧ I ≤ M
+@Ideal.isMaximal_comap_of_isIntegral_of_isMaximal : ∀ {R : Type u_1} [inst : CommRing R] {S : Type u_2}
+  [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.IsIntegral R S] (I : Ideal S) [hI : I.IsMaximal],
+  (Ideal.comap (algebraMap R S) I).IsMaximal
+@Ideal.comap_isMaximal_of_surjective : ∀ {R : Type u_1} {S : Type u_2} {F : Type u_3} [inst : Ring R] [inst_1 : Ring S]
+  [inst_2 : FunLike F R S] [inst_3 : RingHomClass F R S] (f : F),
+  Function.Surjective ⇑f → ∀ {K : Ideal S} [H : K.IsMaximal], (Ideal.comap f K).IsMaximal
+@Ideal.quotientInfEquivQuotientProd : {R : Type u_1} →
+  [inst : CommRing R] → (I J : Ideal R) → IsCoprime I J → R ⧸ I ⊓ J ≃+* (R ⧸ I) × R ⧸ J
+@Ideal.image_subset_nonunits_valuationSubring : ∀ {K : Type u_1} [inst : Field K] {A : Subring K} (I : Ideal ↥A),
+  I ≠ ⊤ → ∃ B, A ≤ B.toSubring ∧ ⇑A.subtype '' ↑I ⊆ ↑B.nonunits
+@UnitRing.normOne_subset_iff_stable : ∀ {L : Type u_1} [inst : Field L] (σ : L →+* L),
+  (∀ (z : L), σ (σ z) = z) → ∀ (B : ValuationSubring L), normOne σ ⊆ ↑B ↔ ∀ z ∈ B, σ z ∈ B
