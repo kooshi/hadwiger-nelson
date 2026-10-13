@@ -1,0 +1,22 @@
+plans/FS103-derivation.md:38  FS103-LB — C-LB, the load-bearing step, with no MR: for a totally real number field `F` with `N_k(F) = ∅` and any `k ≥ 2`, if `F²` is `k`-colourable then `UD(ℝ²)` has a CP `k`-colouring or an SP witness exists.  || [hand, two derivations blind to each other and to J39's and J48's proofs (V1-LB; V2-LB), with the two held (J39; J48): four derivations of one forced skeleton]
+
+plans/FS103-derivation.md:40  FS103-SEL — The CP mixing selection over a countable product of compact factors: if `X × ∏_v K_v` carries a CP random map whose fibre colour-measure vector `x ↦ (Haar{b : C(x, b) = j})_j` has disjoint supports at every edge (or a `Δ_k`-valued process with that property), and `sup_v λ*_v < 1/(k−1)`, then `X` has a CP `k`-colouring; the threshold lies in `(λ*/(1+λ*), 1/k)`, must avoid the atoms of `m_j(0)` for continuity in probability, and `1/k` is where the second class enters (the covering pigeonhole `max_j m_j ≥ 1/k`).  || [hand, two blind (V1-L6 with fractional input, sharp at `K_k`; V2-L3 with the atom condition, V2's addition) + the sealed C-THKDEL agreed by both]
+
+plans/FS103-derivation.md:42  FS103-F1 — The collapse: given MR(F), for every totally real number field `F` with `N₆(F) = ∅`, `χ(F²) = χ(ℝ²) = χ_CP(ℝ²)`. (`N₆ = ∅` excludes row 100's exception: a ramified stable dyadic place has `λ* = 1`.)  || [hand, two blind (V1; V2), over FS103-LB, I-CPUP (row 125, two blind), `χ_CP(ℝ²) ≤ 7` (a randomly translated hexagonal colouring) and MR (row 120's grade)]
+
+plans/FS103-derivation.md:44  FS103-CX — The complex-place widening: FS103-LB and FS103-F1 hold for every real number field with `N_k(F) = ∅` (resp. `N₆ = ∅`), not only totally real ones: at a complex place `a ↦ (a, ā)` carries the unit circle into the norm-one hyperbola `{(z, z⁻¹)}` and only the merge's ⟹ direction is used.  || [hand, one mind (V2), checked as a statement mismatch by the advisor]
+
+plans/FS103-derivation.md:46  FS103-CPUP — `χ(F²) ≤ χ(ℝ²) ≤ χ_CP(ℝ²)` for every `F ⊆ ℝ`, by de Bruijn–Erdős and countable restriction (a CP colouring restricted to a finite graph is proper almost surely); no Tarski, no MR.  || [hand, two (V1; V2); I-CPUP row 125, two blind]
+
+plans/FS103-derivation.md:48  FS103-635 — ℚ(√635087): `635087` is prime, `≡ 7 (mod 8)` (indeed `≡ 15 (mod 16)`); the 13 primes `p ≡ 3 (mod 4)` below 103 are inert; the one dyadic place is split in `L/F` (the wall is broken, `R = O′`); the stable places below 1000 lie over 42 primes, first 103, 107, 127, 163, 191; the ramified 635087 is stable (`L/F` inert there); `sup_v λ*_v = 0.192617` (exact, at 103; Weil `0.195171`), so `N₅ = N₆ = ∅`; hence, given MR(ℚ(√635087)), `χ(ℚ(√635087)²) = χ(ℝ²) = χ_CP(ℝ²)`.  || [tools exact (two code bases in V1, two paths and three plants in V2, two PARI routes to bound 2000 in B) + hand, two blind]
+
+plans/FS103-derivation.md:72  FS103-F-FRAC — The fractional local–global principle: given MR(F), every `R ⋊ U`-invariant random independent set of `F²` has density `≤ α_loc(F) = max(m₁(ℝ²), sup_v r_v)`, so `α₁(F²) = α_inv(F²) = α_loc(F)`; unconditionally, an invariant set of density `> α_loc(F)` gives an SP witness.  || [hand, two (F; B blind), over held lemmas (J45-N1/N2, R-U, SP-oi; X25B-L1/PZ/T or C14.1–C14.3; R88-TC-ext), given MR(F)]
+
+plans/FS103-derivation.md:76  FS103-F-ROUND — Row 123's lower bound is `χ(F²) ≥ ⌈1/α_loc(F)⌉`: the colour count enters row 123's chain only as the pigeonhole on the densest class (X25B-T); `1/α_loc(F) ≤ 1/δ_Croft ≤ 4.35987` at every field, so this route never gives six.  || [hand, two (F; B)]
+
+plans/FS103-derivation.md:86  FS103-B-AMEN — For every real number field, with no MR: `α₁(F²) = α_inv(F²)` (an invariant random independent set of density `δ` meets any finite `G ⊂ F²` in `δ|G|` points on average), and `α_inv(F²) ≥ α_loc(F)` (pullbacks).  || [hand, one mind (B)]
+
+plans/FS103-derivation.md:100  FS103-M1 — `χ_CP(ℝ²) ≤ χ_m⁰(ℝ²)`: a measurable `k`-colouring proper at almost every edge gives a CP `k`-colouring (the invariant measures on its translates' weak-* orbit closure in `L^∞(ℝ², Δ_k)` are continuous in probability for free; properness passes to the limit because `σ̂ = J₀ → 0`; one random threshold rounds `Δ_k` to `[k]`). General form: for a finite Rajchman `σ` on `ℝⁿ` and symmetric `T ⊆ supp σ`, `χ_CP(Cay(ℝⁿ, T)) ≤ χ_m⁰(ℝⁿ, σ)` — false without `T ⊆ supp σ` (FS103-M-NSUPP).  || [hand, two (M; N blind)]
+
+plans/FS103-derivation.md:104  FS103-M1c — With no MR: `χ(ℝ²) ≤ χ_CP(ℝ²) ≤ χ_m(ℝ²) ≤ χ_B(ℝ²)` (C-CPM).  || [hand, two (M; N)]
+

@@ -1,0 +1,244 @@
+== row 52
+== row 53
+  unitQuadrance.map  [declared, not an audited record: theorem at Forcer.lean:69 (+8 more)]
+  UDCert.drawing_adj  [CLEAN; std3]
+  chromaticNumber_finitePlane11  [CLEAN; std3]
+  chromaticNumber_heule510  [CLEAN; std3]
+== row 54
+  UDCert.add_one_le_chromaticNumber_plane_of_lift  [CLEAN; std3]
+  stressPairing_eq_zero_of_lift  [CLEAN; std3]
+== row 55
+  Forces.image  [CLEAN; std3]
+  Separated.image  [declared, not an audited record: theorem at FanGap.lean:244 (+4 more)]
+  forces_iff_eq_of_aperiodic  [CLEAN; std3]
+  Forces.quad_sub_eq_zero  [declared, not an audited record: theorem at ResidueObstruction.lean:221]
+  Separated.quad_sub_eq_one  [declared, not an audited record: theorem at ResidueObstruction.lean:228]
+  finitePlane11_forces_iff  [CLEAN; std3]
+  finitePlane11_separated_iff  [CLEAN; std3]
+  UDCert.not_separated_sqrt3_11  [CLEAN; std3]
+  UDCert.not_separated_two_11  [CLEAN; std3]
+  UDCert.not_forces_of_distSq_ratio  [CLEAN; std3]
+  UDCert.not_forces_five_thirds_11  [CLEAN; std3]
+== row 56
+  addCayleyMap  [CLEAN; std3]
+  unitQuadrance_colorable_of_quotient  [CLEAN; std3]
+  card_le_chromaticNumber_mul_indepNum  [CLEAN; std3]
+  Forces.isEmpty_ringHom_of_spindle_radicand  [CLEAN; std3]
+  chromaticNumber_finitePlane19_le_five  [CLEAN; std3]
+== row 57
+  chromaticNumber_seamPlane  [CLEAN; std3]
+  not_forces_five_of_subset_seamPlane  [CLEAN; std3]
+  colorable_of_residue  [CLEAN; std3]
+  normOne_subset_valuationSubring  [CLEAN; std3]
+  colorable_unitDistance_induce_of_valuationSubring  [CLEAN; std3]
+  normOneColoring  [CLEAN; std3]
+  A  [declared, not an audited record: def at Instances/SqrtFortySeven.lean:193]
+  normOne  [declared, not an audited record: def at ResidueColouring.lean:253]
+== row 58
+  not_forces_of_drawing  [CLEAN; std3]
+  not_forces_of_unit_drawing  [CLEAN; std3]
+  exists_forces_of_unit_drawing_three  [CLEAN; std3]
+== row 59
+  FieldWall4.residueColouring_eq_iff_psiA_zero  [CLEAN; std3]
+  FieldWall4.not_forces_of_residue_ne_zero  [CLEAN; std3]
+  FieldWall4.not_separated_of_residue_eq_zero  [CLEAN; std3]
+  map_mul_conj_eq_zero_iff  [CLEAN; std3]
+== row 60
+  rotHom  [declared, not an audited record: def at PlaneRotation.lean:85]
+  quarterTurnHom  [declared, not an audited record: def at PlaneRotation.lean:106]
+  finitePlane_forces_iff  [CLEAN; std3]
+  finitePlane3_not_colorable_two  [CLEAN; std3]
+== row 61
+  seven_le_chromaticNumber_plane_of_forced_pairs  [CLEAN; std3]  <<TAKES inline:SevenTarget>>
+  six_le_chromaticNumber_oneTwo_of_forced_sqrt3  [CLEAN; std3]  <<TAKES inline:SixTargetOneTwo>>
+  Outside.OAI158.no_proper_five_coloring  [declared, not an audited record: axiom at Outside/OAI158.lean:111]
+  chromaticNumber_unitDistance_le_distanceGraph  [CLEAN; std3]
+  Outside.OAI158.not_colorable_five  [IMPORTED; std3 + Outside.OAI158.no_proper_five_coloring]  <<RESTS Outside.OAI158.no_proper_five_coloring>>
+  chromaticNumber_plane_avoiding_sqrt_three_halves_le_nine  [CLEAN; std3]
+== row 62
+== row 63
+  colorable_two_unitDistance_induce_of_valuationSubring  [CLEAN; std3]
+  SquareClass.fieldOfRadicands_le_sup  [CLEAN; std3]
+  five_le_chromaticNumber_planeOver_fourteen_sup_seventy  [CLEAN; std3]
+== row 64
+== row 65
+== row 66
+  not_forces_of_fanGap  [CLEAN; std3]
+  not_fan_of_fanGap  [CLEAN; std3]
+  not_separated_of_sharedGap  [CLEAN; std3]
+  Slack.forces_iff  [CLEAN; std3]
+  PairwiseFusable.separated_iff_adj  [CLEAN; std3]
+  FanGap.comap  [CLEAN; std3]
+  Slack.of_hom  [CLEAN; std3]
+  slack_addCayley_of_fanGap  [CLEAN; std3]
+  unitQuadrance_fusable_of_sharedGap_base  [CLEAN; std3]
+  rotHom  [declared, not an audited record: def at PlaneRotation.lean:85]
+  Slack.unitQuadrance_of_ringHom  [CLEAN; std3]
+  exists_fanGap_iff_not_coverAtLeast  [CLEAN; std3]
+  three_le_arityFloor_of_forces_eq_of_separated_adj  [CLEAN; std3]
+  forces_iff_of_hom_finitePlane11  [CLEAN; std3]
+  separated_iff_adj_of_hom_finitePlane11  [CLEAN; std3]
+  Valid  [declared, not an audited record: def at Certificate.lean:188 (+1 more)]
+  UDCert.forces_eq_11  [CLEAN; std3]
+  UDCert.separated_iff_adj_11  [CLEAN; std3]
+  heule510_forces_iff  [CLEAN; std3]
+  heule510_separated_iff_adj  [CLEAN; std3]
+  three_le_arityFloor_heule510  [CLEAN; std3]
+  finitePlane19_slack  [CLEAN; std3]
+== row 67
+  twoAdicFour_forces_iff  [CLEAN; std3]
+  twoAdicFive_forces_iff  [CLEAN; std3]
+  twoAdicFive_not_colorable_with_edge  [CLEAN; std3]
+  twoAdicFive_not_slack  [CLEAN; std3]
+  twoAdicFour_not_slack  [CLEAN; std3]
+  twoAdicPlane_one_no_fanGap  [CLEAN; std3]
+  P_m  [NOT-FOUND]
+  H_min  [NOT-FOUND]
+== row 68
+  add_one_le_chromaticNumber_of_indepNum_le  [CLEAN; std3]
+  seven_le_chromaticNumber_finitePlane83_of_indepNum_le  [CLEAN; std3]  <<TAKES inline:Alpha83>>
+== row 69
+  CayleyCert.colorable_finitePlane23_eight  [CLEAN; std3]
+== row 70
+== row 71
+== row 72
+  ThreeAdicBarrier.colorable_three_integralDirectionPlane  [CLEAN; std3]
+== row 73
+  four_le_chromaticNumber_planeOver_eleven  [CLEAN; std3]
+== row 74
+== row 75
+  unitQuadrance_colorable_of_ringHom  [CLEAN; std3]
+  chromaticNumber_unitQuadrance_zmod_le_of_dvd  [CLEAN; std3]
+  unitPairNat  [declared, not an audited record: def at ResidueTower.lean:92]
+  unitPairNat_eq_true_iff  [CLEAN; std3]
+  unpackPt  [declared, not an audited record: def at ResidueTower.lean:109]
+  G_k  [NOT-FOUND]
+  e  [declared, not an audited record: def at Plane/Basic.lean:26]
+== row 76
+  Forces  [declared, not an audited record: def at Forcer.lean:41]
+  Separated  [CLEAN; std3]
+== row 77
+  colorable_succ_of_colorable_delete  [declared, not an audited record: theorem at Critical.lean:124]
+  core9_plane  [CLEAN; std3]
+== row 78
+  P  [declared, not an audited record: def at Arith/Floor128.lean:62]
+  v  [declared, not an audited record: def at Instances/SqrtTwoThree.lean:36]
+  P_found  [NOT-FOUND]
+  V_Q  [NOT-FOUND]
+  kempeSwap  [CLEAN; std3]
+  not_forces_of_kempeClosed  [CLEAN; std3]
+  forces_iff_exists_finite  [CLEAN; std3]
+  Finset.rado_selection  [NOT-FOUND]
+  not_forces_of_voltageEscape  [CLEAN; std3]
+  forces_iff_of_quotient_fanGap  [CLEAN; std3]
+  not_forces_of_additiveKempe  [CLEAN; std3]
+  forcedSubgroup  [declared, not an audited record: def at Kempe.lean:392 (+1 more)]
+  periodicForcedSubgroup  [declared, not an audited record: def at Kempe.lean:398]
+  exists_finiteIndex_between_notMem  [CLEAN; std3]
+  notMem_periodicForcedSubgroup_of_voltageEscape  [CLEAN; std3]
+  InheritanceQuestion  [declared, not an audited record: def at Kempe.lean:546]
+  inheritanceQuestion_iff  [CLEAN; std3]
+  voltageEscapeZ  [CLEAN; std3]
+== row 79
+== row 80
+== row 81
+== row 82
+  four_le_chromaticNumber_planeOver_eleven  [CLEAN; std3]
+== row 83
+== row 84
+  d_ball  [NOT-FOUND]
+  t_A  [NOT-FOUND]
+== row 85
+== row 86
+== row 87
+== row 88
+  P  [declared, not an audited record: def at Arith/Floor128.lean:62]
+== row 89
+  R_K  [NOT-FOUND]
+  v  [declared, not an audited record: def at Instances/SqrtTwoThree.lean:36]
+== row 90
+  v  [declared, not an audited record: def at Instances/SqrtTwoThree.lean:36]
+== row 91
+== row 92
+== row 93
+  Q_m  [NOT-FOUND]
+  P_c  [NOT-FOUND]
+  P  [declared, not an audited record: def at Arith/Floor128.lean:62]
+== row 94
+== row 95
+  U_S  [NOT-FOUND]
+== row 96
+== row 97
+== row 98
+  RQ_k  [NOT-FOUND]
+  m  [declared, not an audited record: def at Plane/CircleColouring.lean:109]
+  N_k  [NOT-FOUND]
+  R_S  [NOT-FOUND]
+  U_S  [NOT-FOUND]
+== row 99
+== row 100
+== row 101
+  V_c  [NOT-FOUND]
+== row 102
+  U_p  [NOT-FOUND]
+== row 103
+  G4  [declared, not an audited record: def at Instances/SevenConditional.lean:32]
+== row 104
+== row 105
+  Ideal.image_subset_nonunits_valuationSubring  [NOT-FOUND]
+== row 106
+== row 107
+  RealAlgebraicDescent  [declared, not an audited record: def at Bridge.lean:52]
+  Polynomial.flt_catalan  [NOT-FOUND]
+== row 108
+== row 109
+  K_n  [NOT-FOUND]
+== row 110
+== row 111
+== row 112
+  G_S  [NOT-FOUND]
+== row 113
+== row 114
+  D_C  [NOT-FOUND]
+== row 115
+  A  [declared, not an audited record: def at Instances/SqrtFortySeven.lean:193]
+== row 116
+  W  [declared, not an audited record: def at Plane/CircleColouring.lean:103]
+== row 117
+== row 118
+== row 119
+  W  [declared, not an audited record: def at Plane/CircleColouring.lean:103]
+  D  [declared, not an audited record: def at Plane/CircleColouring.lean:106]
+  Sqrt167.cert_check  [CLEAN; std3]
+== row 120
+  U_F  [NOT-FOUND]
+  H_L  [NOT-FOUND]
+  wild_fourier  [NOT-FOUND]
+== row 121
+== row 122
+  U_N  [NOT-FOUND]
+== row 123
+  U_Q  [NOT-FOUND]
+== row 124
+== row 125
+== row 126
+== row 127
+  SpectralChain.min_localBound_five_le_chromaticNumber  [CLEAN; std3]  <<TAKES SpectralChain.BochnerHerglotz; TAKES SpectralChain.Interface.APlusOfR88; TAKES SpectralChain.Interface.Count; TAKES SpectralChain.Interface.EFPlus; TAKES SpectralChain.Interface.PE2; TAKES SpectralChain.Interface.RU; TAKES SpectralChain.InvariantMeasureOnClosed; TAKES inline:CLS; TAKES inline:Row99>>
+  SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five_of_chain  [CLEAN; std3]  <<TAKES SpectralChain.BochnerHerglotz; TAKES SpectralChain.Interface.APlus0; TAKES SpectralChain.Interface.EFPlus; TAKES SpectralChain.Interface.PE2; TAKES SpectralChain.Interface.RU; TAKES SpectralChain.InvariantMeasureOnClosed>>
+  SqrtFortySeven.chromaticNumber_planeOver_sqrt47_le_five  [CLEAN; std3]
+  BochnerHerglotz  [declared, not an audited record: def at SpectralChain.lean:124]
+  InvariantMeasureOnClosed  [declared, not an audited record: def at SpectralChain.lean:345]
+  SpectralChain.posDef_corr  [CLEAN; std3]
+== row 128
+== row 129
+  r_v  [NOT-FOUND]
+  wild_fourier  [NOT-FOUND]
+== row 130
+  proper_to_borel_weak  [declared, not an audited record: axiom at Outside/OAI158.lean:123]
+  Outside.OAI158.proper_to_borel_weak  [declared, not an audited record: axiom at Outside/OAI158.lean:123]
+  Outside.OAI158.chiM0_le_chromaticNumber_plane  [IMPORTED; std3 + Outside.OAI158.proper_to_borel_weak]  <<RESTS Outside.OAI158.proper_to_borel_weak>>
+  Outside.OAI158.chromaticNumber_plane_eq_chiM0  [IMPORTED; std3 + Outside.OAI158.proper_to_borel_weak]  <<RESTS Outside.OAI158.proper_to_borel_weak>>
+  Outside.OAI158.colorable_iff_nonempty_aeColouring  [IMPORTED; std3 + Outside.OAI158.proper_to_borel_weak]  <<RESTS Outside.OAI158.proper_to_borel_weak>>
+  Outside.OAI158.six_le_chiM0  [IMPORTED; std3 + Outside.OAI158.no_proper_five_coloring]  <<RESTS Outside.OAI158.no_proper_five_coloring>>
+  AeColouring  [declared, not an audited record: structure at Plane/AeColouring.lean:23]
+  Outside.OAI158.weakColoring_iff_unitPairsNull  [CLEAN; std3]
