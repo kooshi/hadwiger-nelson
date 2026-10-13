@@ -70,14 +70,30 @@ this session):
 3. ~~FS124-F2, the owed filing~~ — **done and merged (`94bb3f35c`, FS-124 inventory item 52): the front page reads the
    library as gated; FS-124 stays Derived. THE NEXT FILING'S FACT-AUDIT BASE IS `94bb3f35c`.** Two jobs are running, not three.
 
-4. **FS131-EN1** (deriver; launched 2026-10-13 16:16 UTC; brief `data/fs131/briefs/FS131-EN1-shorter-route.md`; claim list
-   `data/fs131/claims-EN1.md`; record `plans/FS131-EN1-derivation.md`; FS-131 inventory item 642): five statements the
-   kernel planner read off the kernel proof — for the plane over the field of √47 and the main clause through five,
-   the hand result on the split places (R-U, once priced in months) may not be on the path at all. It messages each
-   verdict; **relay each to the planner at once** (by message while it runs; else in the amendment that carries the
-   ranking). **Ruled the same hour (item 642 (b))**: the printed theorem declared is Einsiedler–Lindenstrauss's
-   Theorem 1.3 with its hypothesis's forced sense written into the statement, and our deduction of Theorem 1.2 from it
-   is a leaf to formalize — the planner is to be told in that same amendment.
+4. ~~FS131-EN1, the shorter route~~ — **done (2026-10-13 16:46 UTC; FS-131 inventory items 645, 646, 649, 651): seven entries,
+   one mind each; `plans/FS131-EN1-derivation.md` § 8.1 is the table the chain's planner builds from** (seventeen hand
+   results on the path of rows 121 and 123; what is off it; the printed statements read). The interface is run at the
+   smaller set; a duplicate model and proof leave; the split-place model and the wandering argument stay inside the
+   second deduction. Ruled: its fourth-moment count (EN1-UQ4) replaces a printed bound in characteristic 2; the
+   printed rigidity theorem declared is Theorem 1.3 with our deduction of 1.2 formalized (item 642 (b)).
+5. **FS131-KC1** (kernel planner; brief `data/fs131/briefs/FS131-KC1-measurable-number-plan.md`; claim list
+   `data/fs131/claims-NF3.md`; worktree and branch `fs131-wkc`; item 652): the measurable-number corollary —
+   `χ(ℝ²) = χ_m(ℝ²)` from `[Davies2026]` Lemma B.1 and the declared outside theorem. **A corollary of two outside
+   results, never filed as this project's theorem.**
+
+6. ~~FS131-ER1, the reading of `[Davies2026]`~~ — **done (2026-10-13 17:02 UTC; items 654, 655): it proves nothing this project
+   lists as its own, contradicts no row, and its method does not reach the plane as written; rows 121–123 are posed
+   there as open (by residue class modulo 168 — it never prints the field of √47), row 128's analogue is its theorem
+   in dimension four and up, row 129's plane clause is the d = 2 case of its density statement, which it lacks.**
+   Record `plans/FS131-ER1-davies-reading.md`; its § 9.2 holds drafts for the owed filing.
+7. **FS131-KN3** (kernel planner; brief `data/fs131/briefs/FS131-KN3-chain-plan.md`; claim list
+   `data/fs131/claims-NF2.md`; worktree and branch `fs131-wch`; item 656): the five-colour chain's architecture and
+   first layer. A long job with saved stages; a successor can take any stage from its record
+   `plans/FS131-KN3-chain-plan.md` on the branch.
+
+**RUNNING AT THIS HOUR: FS131-KN2, FS131-KC1, FS131-KN3 — three planners, three trees (`fs131-wnf`, `fs131-wkc`,
+`fs131-wch`). Next free slots: implementers on the first plan back (briefs to write from the plan; iteration at
+`--mem 8`, builds one at a time); FS-133's planner; the Clerk for the owed filing (the list is in item 656).**
 
 **REPORTS TO KOOSHI ONLY AT A GATE, A DECISION OF HIS OR HIS CHECK-IN (2026-10-13 16:44 UTC; his word W3, FS-131 inventory item 650): no per-event
 reports; report when something is through the gate, when a decision is genuinely his, or when he checks in. His
