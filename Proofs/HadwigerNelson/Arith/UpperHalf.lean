@@ -358,12 +358,60 @@ theorem colorable_two_planeOver_of_ramified (P : StablePrime F) (hram : ∀ x : 
 
 /-! ### The converse half (row 105's reading) -/
 
+/-- An integer of a field lies in every valuation subring of it: integral over `ℤ`, and a valuation ring is integrally
+closed. -/
+private theorem integer_mem_valuationSubring {K : Type*} [Field K] (A : ValuationSubring K) (x : 𝓞 K) :
+    (x : K) ∈ A := by
+  have h : IsIntegral A (x : K) := (RingOfIntegers.isIntegral_coe x).tower_top
+  obtain ⟨y, hy⟩ := IsIntegrallyClosed.isIntegral_iff.1 h
+  rw [← hy]
+  exact y.2
+
+/-- **The centre of a valuation subring of a number field on its integers**: for `A ≠ K` the integers that are non-units
+of `A` form a maximal ideal of `𝓞 K`. (A prime ideal — the contraction of `A`'s maximal ideal — and nonzero: were it zero,
+every nonzero integer would be a unit of `A` and every fraction would lie in `A`.) -/
+private theorem exists_centre {K : Type*} [Field K] [NumberField K] (A : ValuationSubring K) (hA : A ≠ ⊤) :
+    ∃ Q : Ideal (𝓞 K), Q.IsMaximal ∧ ∀ a : 𝓞 K, a ∈ Q ↔ (a : K) ∈ A.nonunits := by
+  have hOA : ∀ x : 𝓞 K, (algebraMap (𝓞 K) K) x ∈ A := integer_mem_valuationSubring A
+  let ι : 𝓞 K →+* A := (algebraMap (𝓞 K) K).codRestrict A hOA
+  have hQ : ∀ a : 𝓞 K, a ∈ (IsLocalRing.maximalIdeal A).comap ι ↔ (a : K) ∈ A.nonunits := fun a => by
+    rw [ValuationSubring.mem_nonunits_iff_exists_mem_maximalIdeal]
+    exact ⟨fun h => ⟨hOA a, h⟩, fun ⟨_, h⟩ => h⟩
+  have hprime : ((IsLocalRing.maximalIdeal A).comap ι).IsPrime := Ideal.comap_isPrime ι _
+  refine ⟨_, hprime.isMaximal fun hbot => hA (eq_top_iff.2 fun x _ => ?_), hQ⟩
+  obtain ⟨a, s, hs, rfl⟩ := IsFractionRing.div_surjective (𝓞 K) x
+  have hsQ : s ∉ (IsLocalRing.maximalIdeal A).comap ι := by
+    rw [hbot]
+    exact fun h => nonZeroDivisors.ne_zero hs ((Submodule.mem_bot _).1 h)
+  have h := mt (hQ s).2 hsQ
+  rw [ValuationSubring.mem_nonunits_iff_or, not_or, not_not] at h
+  rw [div_eq_mul_inv]
+  exact A.mul_mem _ _ (hOA a) h.2
+
+omit [NumberField F] in
+/-- Conjugation preserves the non-units of a conjugation-stable valuation subring of `F(i)` (it is an involution). -/
+private theorem conj_mem_nonunits_iff (A : ValuationSubring (fieldI F))
+    (hσ : ∀ z ∈ A, conjOn (fieldI_conj F) z ∈ A) (z : fieldI F) :
+    conjOn (fieldI_conj F) z ∈ A.nonunits ↔ z ∈ A.nonunits := by
+  have hiff : ∀ w : fieldI F, conjOn (fieldI_conj F) w ∈ A ↔ w ∈ A := fun w =>
+    ⟨fun h => by simpa only [conjOn_conjOn] using hσ _ h, hσ w⟩
+  rw [ValuationSubring.mem_nonunits_iff_or, ValuationSubring.mem_nonunits_iff_or, map_eq_zero, ← map_inv₀, hiff]
+
 /-- **NF1-S1B, converse half**: a conjugation-stable valuation subring of `F(i)` other than `F(i)` is the localization at a
 stable prime. (Its centre on `𝓞 (F(i))` is a nonzero prime `P`, fixed by conjugation; `𝓞_P ≤ A`, and a discrete valuation
 ring is a maximal proper subring of its fraction field: `ValuationSubring.eq_of_le_of_ne_top`.) -/
 theorem exists_stablePrime_of_valuationSubring (A : ValuationSubring (fieldI F)) (hA : A ≠ ⊤)
     (hσ : ∀ z ∈ A, conjOn (fieldI_conj F) z ∈ A) : ∃ P : StablePrime F, P.localRing = A := by
-  sorry
+  obtain ⟨Q, hQmax, hQ⟩ := exists_centre A hA
+  have hcomap : Q.comap (conjO F) = Q := by
+    ext a
+    rw [Ideal.mem_comap, hQ, hQ, coe_conjO, conj_mem_nonunits_iff A hσ]
+  refine ⟨⟨Q, hQmax, hcomap⟩, ValuationSubring.eq_of_le_of_ne_top _ (fun x hx => ?_) hA⟩
+  obtain ⟨a, s, hs, rfl⟩ := (mem_localRing ⟨Q, hQmax, hcomap⟩).1 hx
+  have h := mt (hQ s).2 hs
+  rw [ValuationSubring.mem_nonunits_iff_or, not_or, not_not] at h
+  rw [div_eq_mul_inv]
+  exact A.mul_mem _ _ (integer_mem_valuationSubring A a) h.2
 
 variable (F) in
 /-- **Row 105 over the stable primes**: for a real number field `F` and `n ≠ 0`, `1/n` lies in the ring `ℤ[U_F]` generated
@@ -371,7 +419,23 @@ by the unit vectors of `F²` iff no stable prime of `F(i)` holds `n`. (`UnitRing
 conjugation-stable valuation subrings read as the stable primes.) -/
 theorem inv_natCast_mem_unitRingOver_iff_forall_stablePrime {n : ℕ} (hn : n ≠ 0) :
     (n : ℂ)⁻¹ ∈ UnitRing.unitRingOver F ↔ ∀ P : StablePrime F, (n : 𝓞 (fieldI F)) ∉ P.P := by
-  sorry
+  have e : ((n : 𝓞 (fieldI F)) : fieldI F) = (n : fieldI F) := map_natCast (algebraMap _ _) n
+  rw [UnitRing.inv_natCast_mem_unitRingOver_iff F hn]
+  constructor
+  · intro h P hP
+    refine h P.localRing (conj_mem_localRing P) ?_
+    rw [← e]
+    exact (coe_mem_nonunits_localRing_iff P (n : 𝓞 (fieldI F))).2 hP
+  · intro h B hσ hB
+    have hBtop : B ≠ ⊤ := by
+      rintro rfl
+      rcases (ValuationSubring.mem_nonunits_iff_or _).1 hB with h0 | h0
+      · exact hn (Nat.cast_eq_zero.1 h0)
+      · exact h0 (ValuationSubring.mem_top _)
+    obtain ⟨P, rfl⟩ := exists_stablePrime_of_valuationSubring B hBtop hσ
+    refine h P ((coe_mem_nonunits_localRing_iff P (n : 𝓞 (fieldI F))).1 ?_)
+    rw [e]
+    exact hB
 
 end Stable
 

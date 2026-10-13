@@ -88,3 +88,30 @@ What differed from the plan's text:
   and `one_ne_zero` for `CharTwo.of_one_ne_zero_of_two_eq_zero`. `hψσ` is `(residue_conj P 1 z).trans (hid _)` as a term: the
   two spellings of the restricted conjugation unify by unfolding.
 - U8 as planned; `Ideal.pow_le_self` takes `m ≠ 0`.
+
+## Stage 4 — SAVED: U11, U12 proved; the file has no `sorry`; every declaration prints the standard three
+
+`exists_stablePrime_of_valuationSubring` and `inv_natCast_mem_unitRingOver_iff_forall_stablePrime` — the plan's routes, one
+iteration. `lake env lean` with the lakefile's three options (`autoImplicit`, `relaxedAutoImplicit` off, `linter.missingDocs`
+on): exit 0, **no message at all** — no error, no warning, no `sorry` (6.0 s, 3.7 GB). `grep -c sorry` on the file: 0.
+Statement check (`data/fs131/iu1/logs/statements-stage4.out`): `PASS`, control `3 of 3`; the six private helpers listed by
+name. (Stage 3's line "three new named constants" was wrong as worded: a private declaration's stored name is flagged
+internal by the dumper, so the reader's count of new *named* constants stays 0; it now lists the private ones separately.)
+
+**Axioms, before the build** (`data/fs131/iu1/lean/AxiomsFooter.lean` appended to a copy of the file: `collectAxioms` on every
+theorem and definition the file declares; `data/fs131/iu1/axioms-footer.txt`): 36 declarations — 30 public, 6 private — each
+`[Classical.choice, Quot.sound, propext]`; `sorryAx` on none. Control (`axioms-footer.control.txt`): the same footer on the
+skeleton at `223241b0a` prints `sorryAx` on 19 of its 30 declarations — the 12 leaves, the definition `StablePrime.residue`
+(its proof argument is the leaf `isUnit_mk_pow`), and the six theorems proved from them.
+
+Three more private helpers, for U11:
+- `integer_mem_valuationSubring {K} [Field K] (A : ValuationSubring K) (x : 𝓞 K) : (x : K) ∈ A` — any field, no finiteness.
+- `exists_centre {K} [Field K] [NumberField K] (A : ValuationSubring K) (hA : A ≠ ⊤) : ∃ Q : Ideal (𝓞 K), Q.IsMaximal ∧
+  ∀ a : 𝓞 K, a ∈ Q ↔ (a : K) ∈ A.nonunits` — the centre of a valuation subring of a number field on its integers; `Q` is
+  `(IsLocalRing.maximalIdeal A).comap ι`, `ι := (algebraMap (𝓞 K) K).codRestrict A _`, and the membership clause is
+  `ValuationSubring.mem_nonunits_iff_exists_mem_maximalIdeal` read both ways. No conjugation enters: it is a statement
+  about any number field.
+- `conj_mem_nonunits_iff (A) (hσ) (z) : conjOn (fieldI_conj F) z ∈ A.nonunits ↔ z ∈ A.nonunits`.
+
+With them U11 is eight lines: the centre, its stability (`Ideal.mem_comap`, the membership clause twice, `coe_conjO`, the
+helper), `𝓞_Q ≤ A` (a denominator outside `Q` is a unit of `A`), and `ValuationSubring.eq_of_le_of_ne_top`.

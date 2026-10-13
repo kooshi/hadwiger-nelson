@@ -82,6 +82,15 @@ def main():
         if b["kind"] == "DEF" and a["value"] != b["value"]:
             bad.append(f"VALUE    DEF {name}: the stored definition differs")
     new = sorted(n for n, a in after.items() if n not in before and not a["internal"])
+    # a private declaration's stored name (`_private.<module>.0.<name>`) is flagged INTERNAL by the dumper; list the
+    # private theorems this job added by their own names (generated children — `_proof_n`, `match_n`, `eq_n` — left out)
+    def private_user(n):
+        m = re.match(r"_private\.(.*?)\.0\.(.*)$", n)
+        if not m:
+            return None
+        last = m.group(2).split(".")[-1]
+        return None if (last.startswith("_") or re.fullmatch(r"(match|eq|proof)_\d+(_\d+)*", last)) else m.group(2)
+    new_private = sorted((private_user(n), a["kind"]) for n, a in after.items() if n not in before and private_user(n))
     n_int_b = sum(1 for b in before.values() if b["internal"])
     n_int_a = sum(1 for a in after.values() if a["internal"])
 
@@ -100,6 +109,9 @@ def main():
     print(f"new named constants in the second dump: {len(new)}")
     for n in new:
         print(f"  NEW {after[n]['kind']} {n}")
+    print(f"new private declarations in the second dump (counted among the internal): {len(new_private)}")
+    for n, k in new_private:
+        print(f"  NEW PRIVATE {k} {n}")
     print(f"`example` heads: {n_old_ex} at {BASE}, {n_new_ex} in the working file")
     for b in bad:
         print(b)
