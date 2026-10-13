@@ -1,0 +1,23 @@
+planted: dropped `EVIDENCE EMPTY HadwigerNelson.Plane.ArcMap.bowtie_not_isHorn_I_axis ::…`; a row on main's `Complex.I.eq_1`; an UNKNOWN row on new `HadwigerNelson.HasDensityOneAt.eq_1`; declarations +1
+counter vs the main scan: declarations 15928 / 15928, refutations 228 / 228: agree
+counter vs the landing scan: declarations 15969 / 15970, refutations 228 / 228: COUNTER-DISAGREES
+LOST EVIDENCE EMPTY HadwigerNelson.Plane.ArcMap.bowtie_not_isHorn_I_axis :: HadwigerNelson.Plane.bowtie.IsHorn Complex.I 0 (-1) 1 1
+NOT NEW SITE GENERIC Complex.I.eq_1 :: F.Valid
+FLAGGED SITE UNKNOWN HadwigerNelson.HasDensityOneAt.eq_1 :: F.Valid
+main rows 1529, landing rows 1536; lost 1 (0 with a removed declaration); added 8
+  added SITE GENERIC on AeColouring: 6
+  added SITE UNKNOWN on Valid: 1
+  added rows in Plane.LebesgueNumber: 7
+  declarations: 15928 -> 15970 (+42)
+  refutations-skipped: 228 -> 228 (+0)
+  sites: 1448 -> 1454 (+6)
+  vacuous: 0 -> 0 (+0)
+  stale: 0 -> 0 (+0)
+  declared: 3 -> 3 (+0)
+  witnessed: 38 -> 38 (+0)
+  generic: 1405 -> 1411 (+6)
+  unknown: 2 -> 2 (+0)
+  module Plane.LebesgueNumber: declarations 0 -> 41 (+41), refutations 0 -> 0 (+0)  [new module]
+  by module: declarations +41, refutations +0: MODULE-SUM differs from the scans
+vacdiff: FAIL (5)
+exit=1

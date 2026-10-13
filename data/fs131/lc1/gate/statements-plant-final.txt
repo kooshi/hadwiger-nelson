@@ -1,0 +1,6 @@
+plant: a theorem's stored type changed (HadwigerNelson.Plane.AeColouring.mk.inj): FIRED — TYPE HadwigerNelson.Plane.AeColouring.mk.inj: the stored type differs
+plant: a definition's stored value changed (HadwigerNelson.Plane.AeColouring.noConfusionType): FIRED — VALUE HadwigerNelson.Plane.AeColouring.noConfusionType: the stored value differs
+plant: a constant dropped (HadwigerNelson.Plane.AeColouring.mk.inj): FIRED — LOST THM HadwigerNelson.Plane.AeColouring.mk.inj (Proofs.HadwigerNelson.Plane.AeColouring)
+plant: a constant added (zz.planted): FIRED — NEW THM zz.planted (Proofs.HadwigerNelson.Plane.AeColouring)
+plants: every one of 4 fired; the unplanted pair passes
+exit=0

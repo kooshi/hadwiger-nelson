@@ -1,0 +1,7 @@
+plant 'a changed instance (Fin.instMeasurableSpace)': FIRED (['WeakColoring'])
+plant 'a binder kind (the NeZero instance binder made explicit)': FIRED (['proper_to_borel_weak'])
+plant 'a numeral (five colours to four)': FIRED (['no_proper_five_coloring'])
+plant 'a missing declaration (WeakColoring's header line)': FIRED (['direction'])
+plant 'a kind (the first outside theorem printed as a theorem here)': FIRED (['no_proper_five_coloring'])
+plant 'a constant renamed in a USES list': FIRED (['direction'])
+SELF-TEST OK: the unplanted pair identical on 8 declarations; 6 plants

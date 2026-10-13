@@ -1,0 +1,15 @@
+A	data/fs131/briefs/FS131-KN3-chain-plan.md
+A	data/fs131/briefs/FS131-KN4-three-four-colours-plan.md
+A	data/fs131/briefs/FS131-LC1-landing.md
+A	data/fs131/briefs/scripts/mk-fs131-kn3.py
+A	data/fs131/briefs/scripts/mk-fs131-kn4.py
+A	data/fs131/briefs/scripts/mk-fs131-lc1.py
+A	data/fs131/claims-NF2.md
+M	data/fs131/claims-NF3.md
+A	data/fs131/claims-NF4.md
+A	data/fs131/er1/fields_check.py
+A	data/fs131/er1/readback_check.py
+A	data/fs131/reports/FS131-ER1.md
+A	plans/FS131-ER1-davies-reading.md
+M	plans/FS131-close-inventory.md
+M	plans/SESSION-HANDOFF-2026-10-07.md

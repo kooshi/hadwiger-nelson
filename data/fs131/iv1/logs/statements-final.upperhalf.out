@@ -1,0 +1,45 @@
+scope: upperhalf (1 file(s))
+compared: 30 named constants of the first dump (27 theorems, 3 definitions; kinds, types, and values of definitions); 30 declarations written at 223241b0a, each found in the first dump
+internal (not compared): 15 before, 47 after
+new named constants in the second dump: 22
+  NEW THM HadwigerNelson.QuadraticPrime.exists_maximal_card_eq
+  NEW THM HadwigerNelson.QuadraticPrime.exists_maximal_card_eq_of_ramified
+  NEW THM HadwigerNelson.QuadraticPrime.exists_maximal_card_eq_sqrt
+  NEW THM HadwigerNelson.QuadraticPrime.exists_maximal_card_of_padic
+  NEW THM HadwigerNelson.QuadraticPrime.exists_padicInt_sq_eq
+  NEW THM HadwigerNelson.QuadraticPrime.exists_ringHom_zmod_of_padic
+  NEW THM HadwigerNelson.QuadraticPrime.fieldOfRadicands_eq_adjoin
+  NEW THM HadwigerNelson.QuadraticPrime.instNumberFieldFieldOfRadicands
+  NEW THM HadwigerNelson.QuadraticPrime.isIntegral_sqrt_natCast
+  NEW THM HadwigerNelson.QuadraticPrime.isMaximal_ker_and_card
+  NEW THM HadwigerNelson.QuadraticPrime.nonempty_ringHom_padic
+  NEW THM HadwigerNelson.QuadraticPrime.nonempty_ringHom_zmod_of_ramified_sqrt
+  NEW THM HadwigerNelson.QuadraticPrime.numberField_fieldOfRadicands
+  NEW THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_eleven
+  NEW THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_rat
+  NEW THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_sqrt167_le_eight
+  NEW THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_sqrt47_le_five_of_prime
+  NEW THM HadwigerNelson.UpperHalf.colorable_planeOver_fieldOfRadicands
+  NEW THM HadwigerNelson.UpperHalf.exists_stablePrime_rat
+  NEW THM HadwigerNelson.UpperHalf.instNumberFieldBot
+  NEW THM HadwigerNelson.UpperHalf.numberField_bot
+  NEW THM HadwigerNelson.UpperHalf.two_le_chromaticNumber_planeOver
+new private declarations in the second dump (counted among the internal): 16
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.coe_mem_adjoin
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.coords_unique
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.exists_coords
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.norm_le_one_of_isIntegral
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.norm_le_one_of_sq_mul_natCast
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.norm_le_one_of_two_mul
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.padic_sq_ne_natCast
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.valuation_natCast_eq_one
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.conj_mem_nonunits_iff
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.exists_I_integer
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.exists_centre
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.exists_intCast_eq_of_isIntegral
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.exists_intCast_eq_re_of_isIntegral
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.integer_mem_valuationSubring
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.residue_mul_conj_eq_one
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.sub_mul_conj_eq_one
+`example`s compared as text: 0 at 223241b0a (0 in UpperHalf.lean)
+PASS: no statement and no definition changed

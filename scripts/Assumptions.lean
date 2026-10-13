@@ -793,11 +793,15 @@ def declared : Array Entry := #[
   .site ``HadwigerNelson.SpectralChain.min_localBound_five_le_chromaticNumber `hRow99 "Row99" .ours "row 99 (χ(F²) = L(F) at L(F) ≤ 4)",
   .site ``HadwigerNelson.SpectralChain.min_localBound_five_le_chromaticNumber_of_totallyReal `hRow99 "Row99" .ours "row 99 (χ(F²) = L(F) at L(F) ≤ 4)",
   .site ``HadwigerNelson.SpectralChain.chromaticNumber_eq_localBound `hRow99 "Row99" .ours "row 99 (χ(F²) = L(F) at L(F) ≤ 4)",
+  .site ``HadwigerNelson.UpperHalf.chromaticNumber_eq_localBound_of_chain `hRow99 "Row99" .ours "row 99 (χ(F²) = L(F) at L(F) ≤ 4)",
   .site ``HadwigerNelson.SpectralChain.min_localBound_five_le_chromaticNumber `hCLS "CLS" .ours "X23D-CLS (L(F) ≥ 5 ⟹ T-C(A) at S = ∅; X23V § 2.2)",
   .site ``HadwigerNelson.SpectralChain.min_localBound_five_le_chromaticNumber_of_totallyReal `hCLS "CLS" .ours "X23D-CLS (L(F) ≥ 5 ⟹ T-C(A) at S = ∅; X23V § 2.2)",
   .site ``HadwigerNelson.SpectralChain.chromaticNumber_eq_localBound `hCLS "CLS" .ours "X23D-CLS (L(F) ≥ 5 ⟹ T-C(A) at S = ∅; X23V § 2.2)",
-  .site ``HadwigerNelson.SpectralChain.chromaticNumber_eq_localBound `hUpper "UpperHalf" .ours
-    "row 52 (the upper half χ(F²) ≤ L(F), at ring level; the field step is row 57's gap)",
+  .site ``HadwigerNelson.UpperHalf.chromaticNumber_eq_localBound_of_chain `hCLS "CLS" .ours "X23D-CLS (L(F) ≥ 5 ⟹ T-C(A) at S = ∅; X23V § 2.2)",
+  -- The upper half `χ(F²) ≤ L(F)` (`hUpper` of `SpectralChain.chromaticNumber_eq_localBound`, label "UpperHalf", row 52) is not in
+  -- this list since FS131-LU1: `UpperHalf.chromaticNumber_planeOver_le_localBound` proves that binder over the theorem's own
+  -- variables, and `UpperHalf.chromaticNumber_eq_localBound_of_chain` is the headline without it.  Retired on the landing's
+  -- word: the step has no check that finds a `.site` a theorem has proved (`FAIL discharged` reads named formers only).
   .site ``HadwigerNelson.StandingFive.five_le_chromaticNumber `hRow123 "Row123Chain" .ours
     "row 123 (min(L(F), 5) ≤ χ(F²) at the standing field; in the kernel over named hypotheses, SpectralChain.min_localBound_five_le_chromaticNumber)",
   .site ``HadwigerNelson.StandingFive.five_le_chromaticNumber_weil `hRow123 "Row123Chain" .ours

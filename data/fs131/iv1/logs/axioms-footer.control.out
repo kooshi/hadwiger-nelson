@@ -1,0 +1,7 @@
+UpperHalfValues.lean: 9 public + 0 private = 9 rows (the footer's own count 9)
+  NOT CLEAN HadwigerNelson.UpperHalf.chromaticNumber_planeOver_rat: ['sorryAx']
+  NOT CLEAN HadwigerNelson.UpperHalf.exists_stablePrime_rat: ['sorryAx']
+  NOT CLEAN HadwigerNelson.UpperHalf.instNumberFieldBot: ['sorryAx']
+  NOT CLEAN HadwigerNelson.UpperHalf.numberField_bot: ['sorryAx']
+  NOT CLEAN HadwigerNelson.UpperHalf.two_le_chromaticNumber_planeOver: ['sorryAx']
+CONTROL: sorryAx on ['chromaticNumber_planeOver_rat', 'exists_stablePrime_rat', 'instNumberFieldBot', 'numberField_bot', 'two_le_chromaticNumber_planeOver'] — exactly the three leaves and the two theorems proved from them: the footer can fail

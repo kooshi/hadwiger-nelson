@@ -1,0 +1,6 @@
+plant: a theorem's stored type changed (HadwigerNelson.UpperHalf.exists_hom_levelTarget): FIRED — TYPE HadwigerNelson.UpperHalf.exists_hom_levelTarget: the stored type differs
+plant: a definition's stored value changed (HadwigerNelson.SpectralChain.StablePrime.localRing): FIRED — VALUE HadwigerNelson.SpectralChain.StablePrime.localRing: the stored value differs
+plant: a constant dropped (HadwigerNelson.UpperHalf.exists_hom_levelTarget): FIRED — LOST THM HadwigerNelson.UpperHalf.exists_hom_levelTarget (Proofs.HadwigerNelson.Arith.UpperHalf)
+plant: a constant added (zz.planted): FIRED — NEW THM zz.planted (Proofs.HadwigerNelson.Arith.UpperHalf)
+plants: every one of 4 fired; the unplanted pair passes
+exit=0

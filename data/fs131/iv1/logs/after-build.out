@@ -1,0 +1,117 @@
+
+=== 1. statement dump of the three compiled modules
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:04.00
+	Maximum resident set size (kbytes): 3730276
+lean-exit=0
+data/fs131/iv1/logs/StatementDump.out (25759838 bytes, sha256 6d73a92349e97a191961163a5deab61be9c49ad0a83d17f47b0ec80c9391d09e) -> data/fs131/iv1/statements-after.txt (36552 bytes), 110 stored terms
+
+=== 1a. before (this tree's build as given) against after (this job's build): all three modules
+scope: module (3 file(s))
+compared: 52 named constants of the first dump (49 theorems, 3 definitions; kinds, types, and values of definitions); 52 declarations written at 223241b0a, each found in the first dump
+internal (not compared): 29 before, 47 after
+new named constants in the second dump: 0
+new private declarations in the second dump (counted among the internal): 10
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.coe_mem_adjoin
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.coords_unique
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.exists_coords
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.norm_le_one_of_isIntegral
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.norm_le_one_of_sq_mul_natCast
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.norm_le_one_of_two_mul
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.padic_sq_ne_natCast
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.valuation_natCast_eq_one
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.exists_intCast_eq_of_isIntegral
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.exists_intCast_eq_re_of_isIntegral
+`example`s compared as text: 9 at 223241b0a (0 in UpperHalf.lean, 6 in QuadraticPrime.lean, 3 in UpperHalfValues.lean)
+PASS: no statement and no definition changed
+
+=== 1b. the reader's control (five planted faults)
+`example`s compared as text: 9 at 223241b0a (0 in UpperHalf.lean, 6 in QuadraticPrime.lean, 3 in UpperHalfValues.lean)
+VALUE    DEF HadwigerNelson.SpectralChain.StablePrime.residue: the stored definition differs
+TYPE     THM HadwigerNelson.UpperHalf.exists_stablePrime_rat: the stored statement differs
+KIND     HadwigerNelson.UpperHalf.two_le_chromaticNumber_planeOver: THM -> DEF
+MISSING  THM HadwigerNelson.UpperHalf.numberField_bot: in the first dump, not in the second
+EXAMPLE  Proofs/HadwigerNelson/Instances/UpperHalfValues.lean: example 2 of 3 at 223241b0a differs in the working file
+CONTROL: 5 of 5 planted faults reported — the check can fail
+
+=== 1c. Arith/UpperHalf: the skeleton's compiled module (FS131-IU1's dump) against this job's build
+scope: upperhalf (1 file(s))
+compared: 30 named constants of the first dump (27 theorems, 3 definitions; kinds, types, and values of definitions); 30 declarations written at 223241b0a, each found in the first dump
+internal (not compared): 15 before, 47 after
+new named constants in the second dump: 22
+  NEW THM HadwigerNelson.QuadraticPrime.exists_maximal_card_eq
+  NEW THM HadwigerNelson.QuadraticPrime.exists_maximal_card_eq_of_ramified
+  NEW THM HadwigerNelson.QuadraticPrime.exists_maximal_card_eq_sqrt
+  NEW THM HadwigerNelson.QuadraticPrime.exists_maximal_card_of_padic
+  NEW THM HadwigerNelson.QuadraticPrime.exists_padicInt_sq_eq
+  NEW THM HadwigerNelson.QuadraticPrime.exists_ringHom_zmod_of_padic
+  NEW THM HadwigerNelson.QuadraticPrime.fieldOfRadicands_eq_adjoin
+  NEW THM HadwigerNelson.QuadraticPrime.instNumberFieldFieldOfRadicands
+  NEW THM HadwigerNelson.QuadraticPrime.isIntegral_sqrt_natCast
+  NEW THM HadwigerNelson.QuadraticPrime.isMaximal_ker_and_card
+  NEW THM HadwigerNelson.QuadraticPrime.nonempty_ringHom_padic
+  NEW THM HadwigerNelson.QuadraticPrime.nonempty_ringHom_zmod_of_ramified_sqrt
+  NEW THM HadwigerNelson.QuadraticPrime.numberField_fieldOfRadicands
+  NEW THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_eleven
+  NEW THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_rat
+  NEW THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_sqrt167_le_eight
+  NEW THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_sqrt47_le_five_of_prime
+  NEW THM HadwigerNelson.UpperHalf.colorable_planeOver_fieldOfRadicands
+  NEW THM HadwigerNelson.UpperHalf.exists_stablePrime_rat
+  NEW THM HadwigerNelson.UpperHalf.instNumberFieldBot
+  NEW THM HadwigerNelson.UpperHalf.numberField_bot
+  NEW THM HadwigerNelson.UpperHalf.two_le_chromaticNumber_planeOver
+new private declarations in the second dump (counted among the internal): 16
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.coe_mem_adjoin
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.coords_unique
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.exists_coords
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.norm_le_one_of_isIntegral
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.norm_le_one_of_sq_mul_natCast
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.norm_le_one_of_two_mul
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.padic_sq_ne_natCast
+  NEW PRIVATE THM HadwigerNelson.QuadraticPrime.valuation_natCast_eq_one
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.conj_mem_nonunits_iff
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.exists_I_integer
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.exists_centre
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.exists_intCast_eq_of_isIntegral
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.exists_intCast_eq_re_of_isIntegral
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.integer_mem_valuationSubring
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.residue_mul_conj_eq_one
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.sub_mul_conj_eq_one
+`example`s compared as text: 0 at 223241b0a (0 in UpperHalf.lean)
+PASS: no statement and no definition changed
+
+=== 1d. a fault planted in a copy of the raw after-dump, past the kept head of exists_stablePrime_rat's stored type
+planted: one constant renamed at character 256123 of a stored type of 257340 characters
+TYPE     THM HadwigerNelson.UpperHalf.exists_stablePrime_rat: the stored statement differs
+FAIL: 1 difference(s)
+PLANTED FILE: reported, naming the theorem
+
+=== 2. axioms of every public declaration of the three files, from the compiled modules
+Arith/UpperHalf: 30 records (27 theorems, 3 definitions); private helpers in the source: 6: ['sub_mul_conj_eq_one', 'residue_mul_conj_eq_one', 'exists_I_integer', 'integer_mem_valuationSubring', 'exists_centre', 'conj_mem_nonunits_iff']
+Arith/QuadraticPrime: 13 records (13 theorems, 0 definitions); private helpers in the source: 8: ['coe_mem_adjoin', 'norm_le_one_of_isIntegral', 'valuation_natCast_eq_one', 'padic_sq_ne_natCast', 'norm_le_one_of_sq_mul_natCast', 'norm_le_one_of_two_mul', 'exists_coords', 'coords_unique']
+Instances/UpperHalfValues: 9 records (9 theorems, 0 definitions); private helpers in the source: 2: ['exists_intCast_eq_of_isIntegral', 'exists_intCast_eq_re_of_isIntegral']
+wrote 52 records; the lists for Arith/UpperHalf and Arith/QuadraticPrime are the two implementers' own, name for name
+lean exit 0
+records: 52 (expected 52); resting on an axiom beyond the standard three: 0; error lines in the print: 0
+names against data/fs131/iv1/audit-block.txt: the same list, in order (52 listed)
+PASS: every record is on the standard three
+CONTROL: 2 of 2 planted records reported — the check can fail
+
+=== 3. the headlines at their inhabitants, from the compiled modules
+lean exit 0
+records: 11 (expected 11); resting on an axiom beyond the standard three: 0; error lines in the print: 0
+PASS: every record is on the standard three
+
+=== 4. axioms of every typed theorem and definition, private helpers included (a footer on a copy of each file)
+UpperHalf.lean: 30 public + 6 private = 36 rows (the footer's own count 36)
+QuadraticPrime.lean: 13 public + 8 private = 21 rows (the footer's own count 21)
+UpperHalfValues.lean: 9 public + 2 private = 11 rows (the footer's own count 11)
+PASS: every typed theorem and definition of the three files is on the standard three
+  NOT CLEAN HadwigerNelson.UpperHalf.two_le_chromaticNumber_planeOver: ['sorryAx']
+CONTROL: sorryAx on ['chromaticNumber_planeOver_rat', 'exists_stablePrime_rat', 'instNumberFieldBot', 'numberField_bot', 'two_le_chromaticNumber_planeOver'] — exactly the three leaves and the two theorems proved from them: the footer can fail
+
+=== 5. #check of the leaves and their readers: the same print before and after the build
+lean exit 0
+identical
+
+after-build: ALL STEPS AS EXPECTED

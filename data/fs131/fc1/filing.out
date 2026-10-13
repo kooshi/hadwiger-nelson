@@ -1,0 +1,23 @@
+D1: slot found once
+D2: slot found once
+D3: slot found once
+D4: slot found once
+D6: slot found once
+D5a: GATE_CHANGES entry inserted after the L2 entry
+D5b: superseded-count entries: 7364, 7,420, 23 imported, declarations=15928, sites=1448, generic=1405, rests=23, with nine, twenty-three theorems resting
+D7a: slot found once
+D7b: slot found once
+D7c: slot found once
+D8a: slot found once
+D8b: slot found once
+D8c: slot found once
+D9a: slot found once
+D11: dated line inserted after the 18:00 UTC line
+D12 Frontier clause: HELD (no slot named) - CHECK
+D12 atlas: HELD - CHECK
+D9b DeCorte reading line: HELD (position in the cell not named) - CHECK
+D10: no file or slot named - HELD - CHECK
+D13: not drafted as a replacement - nothing filed (correction owed)
+D14: nothing to file
+filed: BIBLIOGRAPHY.md, CLAUDE.md, LEAN.md, LEDGER.md, data/fs131/claims-NF3.md, tools/claude_md_fact_audit.py
+CLAUDE.md bytes 70401

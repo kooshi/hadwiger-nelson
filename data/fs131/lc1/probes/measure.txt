@@ -1,0 +1,24 @@
+MEASURE measure-selftest mem-cap=1G cpus=1 exit=0 wall=0.1s peak=0.30 GiB max-rss=0.30 GiB :: python3 -c x = bytearray(300*1024*1024); print('held 300 MiB')
+MEASURE measure-selftest-fail mem-cap=1G cpus=1 exit=7 wall=0.0s peak=0.00 GiB max-rss=0.01 GiB :: bash -c exit 7
+MEASURE statements-before mem-cap=4G cpus=2 exit=0 wall=3.0s peak=0.52 GiB max-rss=4.34 GiB :: lake env lean data/fs131/lc1/StatementDump.lean
+MEASURE checks-before mem-cap=4G cpus=2 exit=0 wall=3.9s peak=0.55 GiB max-rss=4.37 GiB :: lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false data/fs131/lc1/checks.lean
+MEASURE lint-asgiven mem-cap=8G cpus=4 exit=0 wall=9.2s peak=1.05 GiB max-rss=4.92 GiB :: lake lint --no-build -- --no-build --trace
+MEASURE dupnames-asgiven mem-cap=14G cpus=8 exit=0 wall=4.0s peak=0.52 GiB max-rss=4.35 GiB :: ./scripts/dupnames.sh
+MEASURE vacuity-asgiven mem-cap=14G cpus=4 exit=0 wall=117.9s peak=0.59 GiB max-rss=4.50 GiB :: ./scripts/vacuity.sh
+MEASURE assumptions-asgiven mem-cap=14G cpus=4 exit=1 wall=105.7s peak=0.66 GiB max-rss=4.55 GiB :: ./scripts/assumptions.sh
+MEASURE syntax-AeColouring mem-cap=6G cpus=2 exit=0 wall=2.0s peak=0.38 GiB max-rss=2.77 GiB :: lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false -Dlinter.missingDocs=true Proofs/HadwigerNelson/Plane/AeColouring.lean
+MEASURE syntax-LebesgueNumber mem-cap=6G cpus=2 exit=0 wall=3.8s peak=0.51 GiB max-rss=3.48 GiB :: lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false -Dlinter.missingDocs=true Proofs/HadwigerNelson/Plane/LebesgueNumber.lean
+MEASURE syntax-FalconerReduction mem-cap=6G cpus=2 exit=0 wall=5.7s peak=0.57 GiB max-rss=3.14 GiB :: lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false -Dlinter.missingDocs=true Proofs/HadwigerNelson/Plane/FalconerReduction.lean
+MEASURE statements-after mem-cap=8G cpus=2 exit=0 wall=2.8s peak=0.52 GiB max-rss=4.40 GiB :: lake env lean data/fs131/lc1/StatementDump.lean
+MEASURE checks-after mem-cap=8G cpus=2 exit=0 wall=3.7s peak=0.56 GiB max-rss=4.43 GiB :: lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false data/fs131/lc1/checks.lean
+MEASURE axioms-probe mem-cap=14G cpus=4 exit=0 wall=8.1s peak=1.07 GiB max-rss=4.91 GiB :: ./scripts/axioms.sh
+MEASURE axioms-selftest-red mem-cap=14G cpus=4 exit=1 wall=171.0s peak=1.28 GiB max-rss=5.06 GiB :: ./scripts/axioms.sh --self-test
+MEASURE axioms-selftest-probe mem-cap=14G cpus=4 exit=0 wall=169.8s peak=1.23 GiB max-rss=5.02 GiB :: ./scripts/axioms.sh --self-test
+MEASURE dupnames-probe mem-cap=14G cpus=8 exit=0 wall=4.0s peak=0.52 GiB max-rss=4.41 GiB :: ./scripts/dupnames.sh
+MEASURE assumptions-selftest-first mem-cap=14G cpus=4 exit=0 wall=112.4s peak=0.69 GiB max-rss=4.63 GiB :: ./scripts/assumptions.sh --self-test
+MEASURE assumptions-first mem-cap=14G cpus=4 exit=1 wall=106.4s peak=0.66 GiB max-rss=4.59 GiB :: ./scripts/assumptions.sh
+MEASURE assumptions-write-ledger mem-cap=14G cpus=4 exit=0 wall=104.0s peak=0.66 GiB max-rss=4.60 GiB :: ./scripts/assumptions.sh --write-ledger
+MEASURE assumptions-second mem-cap=14G cpus=4 exit=0 wall=111.8s peak=0.66 GiB max-rss=4.59 GiB :: ./scripts/assumptions.sh
+MEASURE vacuity-probe mem-cap=14G cpus=4 exit=0 wall=125.4s peak=0.59 GiB max-rss=4.53 GiB :: ./scripts/vacuity.sh
+MEASURE count-modules-probe mem-cap=8G cpus=2 exit=0 wall=67.5s peak=0.54 GiB max-rss=4.48 GiB :: lake env lean data/fs131/l5/count-modules.lean
+MEASURE vacuity-selftest-probe mem-cap=14G cpus=4 exit=0 wall=125.1s peak=0.60 GiB max-rss=4.54 GiB :: ./scripts/vacuity.sh --self-test

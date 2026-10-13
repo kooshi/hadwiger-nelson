@@ -1,0 +1,11 @@
+read from: git 7a0a20cb9 = 7a0a20cb9c7724b66a9d1a67a1aa343168a4d464
+MATCH    data/fs131/REQUEST-2026-10-13.md | 278 chars | W2: (2026-10-13, answering the choice between the two publishable form
+MATCH    data/fs131/claims-NF1.md | 186 chars | NF1-S1A: For a real number field `F` and `𝔭` with `Arith.IsUsablePrime
+MATCH    data/fs131/claims-NF1.md | 370 chars | NF1-S1B: For a real number field `F` and `P : SpectralChain.StablePrim
+MATCH    data/fs131/claims-NF1.md | 311 chars | NF1-S2: For squarefree `d > 1`, `F = ℚ(√d) ⊂ ℝ` with its `NumberField`
+MATCH    data/fs131/claims-NF1.md | 995 chars | NF1-MODULE: **The first module I would start with, whatever the rankin
+MATCH    data/fs131/claims-NF1.md | 487 chars | NF1-NC: any lower bound for a plane over a field; anything above level
+MATCH    data/fs131/claims-NF1.md | 873 chars | - 2026-10-13 16:36 UTC — **NF1-S2's second sentence is false as writte
+MATCH    data/fs131/claims-NF1.md | 811 chars | - 2026-10-13 16:36 UTC — **Three statements widened by the same planne
+quotations: 8 mismatches: 0
+exit=0

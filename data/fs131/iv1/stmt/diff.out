@@ -1,0 +1,9 @@
+scope: instances (1 file(s))
+compared: 9 named constants of the first dump (9 theorems, 0 definitions; kinds, types, and values of definitions); 9 declarations written at 223241b0a, each found in the first dump
+internal (not compared): 2 before, 9 after
+new named constants in the second dump: 0
+new private declarations in the second dump (counted among the internal): 2
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.exists_intCast_eq_of_isIntegral
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.exists_intCast_eq_re_of_isIntegral
+`example`s compared as text: 3 at 223241b0a (3 in UpperHalfValues.lean)
+PASS: no statement and no definition changed

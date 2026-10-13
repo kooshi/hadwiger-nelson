@@ -1,0 +1,8 @@
+'HadwigerNelson.StandingFive.exists_stablePrime_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.StandingFive.instNumberFieldStanding' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IU1Models.stablePrime_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IU1Models.hom_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IU1Models.converse_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IU1Models.wall_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IU1Models.one_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IU1Models.hram_fails_at_standingField' depends on axioms: [propext, Classical.choice, Quot.sound]

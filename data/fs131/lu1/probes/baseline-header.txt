@@ -1,0 +1,2 @@
+#   declarations=16029  refutations-skipped=228  sites=1454
+#   vacuous=0 stale=0 declared=3 witnessed=38 generic=1411 unknown=2

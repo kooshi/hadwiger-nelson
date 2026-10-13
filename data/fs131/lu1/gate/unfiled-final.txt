@@ -1,0 +1,2 @@
+declarations the landing brings: 52 (of 60 constants in 3 modules); with one line: 52; unfiled: 0; doubled: 0; `#print axioms` lines in the script: 7506, names twice: 0
+exit=0

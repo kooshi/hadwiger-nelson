@@ -1,0 +1,9 @@
+sampler start 2026-10-13T20:24:02Z worktree=/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf interval=5s pid=828010
+20:28:58 new max sum-rss=3358 MiB over 1 process(es): Proofs/HadwigerNelson/Arith/QuadraticPrime.lean
+20:28:59 new max one-rss=3358 MiB: Proofs/HadwigerNelson/Arith/QuadraticPrime.lean
+20:28:59 heartbeat samples=60 now: 1 process(es), sum-rss=3358 MiB
+20:29:14 new max sum-rss=3521 MiB over 1 process(es): Proofs/HadwigerNelson/Arith/UpperHalf.lean
+20:29:14 new max one-rss=3521 MiB: Proofs/HadwigerNelson/Arith/UpperHalf.lean
+20:29:39 new max sum-rss=4248 MiB over 1 process(es): /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs.lean
+20:29:39 new max one-rss=4248 MiB: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs.lean
+sampler end 2026-10-13T20:29:44Z samples=68 PEAK_SUM_RSS_MIB=4248 (over 1 process(es): /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs.lean) PEAK_ONE_RSS_MIB=4248 (/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs.lean)

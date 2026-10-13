@@ -1,0 +1,32 @@
+MEASURE build mem-cap=10G cpus=8 BATCH=10 exit=0 wall=376s (slot wait included) sampler end 2026-10-13T19:44:56Z samples=75 PEAK_SUM_RSS_MIB=3538 (over 1 process(es): Proofs/HadwigerNelson/Plane/LebesgueNumber.lean) PEAK_ONE_RSS_MIB=3538 (Proofs/HadwigerNelson/Plane/LebesgueNumber.lean)
+MEASURE count-modules mem-cap=8G cpus=2 exit=0 wall=73.5s peak=0.55 GiB max-rss=4.49 GiB :: lake env lean data/fs131/l5/count-modules.lean
+MEASURE decls mem-cap=8G cpus=2 exit=0 wall=62.2s peak=0.54 GiB max-rss=4.42 GiB :: lake env lean data/fs131/lc1/decls.lean
+MEASURE dupnames mem-cap=14G cpus=8 exit=0 wall=4.3s peak=0.53 GiB max-rss=4.41 GiB :: ./scripts/dupnames.sh
+MEASURE dupnames-selftest mem-cap=4G cpus=4 exit=0 wall=23.8s peak=0.76 GiB max-rss=1.53 GiB :: ./scripts/dupnames.sh --self-test
+MEASURE unfiled (no slot: a script) exit=0 wall=0.0s
+MEASURE axioms mem-cap=14G cpus=4 exit=0 wall=8.3s peak=1.15 GiB max-rss=4.98 GiB :: ./scripts/axioms.sh
+MEASURE axioms-selftest mem-cap=14G cpus=4 exit=0 wall=173.1s peak=1.29 GiB max-rss=5.09 GiB :: ./scripts/axioms.sh --self-test
+MEASURE records (no slot: a script) exit=0 wall=0.1s
+MEASURE records-plant (no slot: a script) exit=0 wall=0.2s
+MEASURE block (no slot: a script) exit=0 wall=8.7s
+MEASURE port-check (no slot: a script) exit=0 wall=0.2s
+MEASURE port-selftest (no slot: a script) exit=0 wall=1.5s
+MEASURE vacuity mem-cap=14G cpus=4 exit=0 wall=124.9s peak=0.58 GiB max-rss=4.54 GiB :: ./scripts/vacuity.sh
+MEASURE vacuity-selftest mem-cap=14G cpus=4 exit=0 wall=119.6s peak=0.60 GiB max-rss=4.54 GiB :: ./scripts/vacuity.sh --self-test
+MEASURE vacdiff (no slot: a script) exit=0 wall=0.1s
+MEASURE vacdiff-plant (no slot: a script) exit=1 wall=0.1s
+MEASURE assumptions mem-cap=14G cpus=4 exit=0 wall=102.2s peak=0.66 GiB max-rss=4.59 GiB :: ./scripts/assumptions.sh
+MEASURE assumptions-selftest mem-cap=14G cpus=4 exit=0 wall=112.5s peak=0.69 GiB max-rss=4.64 GiB :: ./scripts/assumptions.sh --self-test
+MEASURE arch (no slot: a script) exit=0 wall=3.7s
+MEASURE lint mem-cap=8G cpus=4 exit=0 wall=9.7s peak=0.85 GiB max-rss=4.92 GiB :: lake lint --no-build -- --no-build --trace
+MEASURE notes-l5 (no slot: a script) exit=0 wall=3.9s
+MEASURE notes-qa4-selftest (no slot: a script) exit=0 wall=0.0s
+MEASURE statements mem-cap=8G cpus=2 exit=0 wall=3.6s peak=0.54 GiB max-rss=4.39 GiB :: lake env lean data/fs131/lc1/StatementDump.lean
+MEASURE statements (no slot: a script) exit=0 wall=0.0s
+MEASURE statements-plant (no slot: a script) exit=0 wall=0.0s
+MEASURE code-only (no slot: a script) exit=0 wall=0.1s
+MEASURE code-only-plant (no slot: a script) exit=0 wall=0.1s
+MEASURE checks mem-cap=8G cpus=2 exit=0 wall=4.7s peak=0.56 GiB max-rss=4.43 GiB :: lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false data/fs131/lc1/checks.lean
+MEASURE digest-axioms (no slot: a script) exit=0 wall=0.2s
+MEASURE digest-vacuity (no slot: a script) exit=0 wall=0.0s
+MEASURE digest-assumptions (no slot: a script) exit=0 wall=0.0s

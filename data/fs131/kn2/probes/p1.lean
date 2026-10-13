@@ -1,0 +1,29 @@
+import Proofs.HadwigerNelson.Arith.PlaceHom
+import Proofs.HadwigerNelson.SpectralChain
+import Mathlib.NumberTheory.Padics.Hensel
+import Mathlib.NumberTheory.Padics.RingHoms
+import Mathlib.RingTheory.Valuation.ValuationSubring
+import Mathlib.FieldTheory.Extension
+
+open HadwigerNelson SimpleGraph NumberField
+#check @SimpleGraph.chromaticNumber_mono_of_hom
+#check @hensels_lemma
+#check @PadicInt.toZMod
+#check @PadicInt.subring
+#check @IntermediateField.exists_algHom_adjoin_of_splits
+#check @IntermediateField.exists_algHom_of_adjoin_splits
+#check @ValuationSubring.primeSpectrumEquiv
+#check @ValuationSubring.mem_of_isIntegral
+#check @RingHom.quotientKerEquivOfSurjective
+#check @RingHom.ker_isMaximal_of_surjective
+#check @IsLocalization.lift
+#check @Ideal.Quotient.isUnit_mk_pow
+#check @ZMod.ringHom_surjective
+#check @Subfield.closure
+#check @IntermediateField.adjoin_toSubfield
+#check @PadicInt.isFractionRing
+#check @IsIntegrallyClosed.isIntegral_iff
+#check @SimpleGraph.fromRel_adj
+#check @Ideal.quotientMap_mk
+#check @ValuationSubring.comap
+#check @Padic.isIntegral_iff

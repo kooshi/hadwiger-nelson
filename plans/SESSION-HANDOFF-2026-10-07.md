@@ -26,7 +26,9 @@ everything else.*
    holds is [P₆] on saturated six-colourings." REG-J′ is superseded as a target by local finiteness of cyclic centres at six.
 6. **Kooshi made it literature and set the plan** — § 1. His three messages are verbatim in `data/external/EXT-OAI1-request.md`.
 
-## 0f. READ THIS FIRST — THE DIRECTION CHANGED ON 2026-10-13: wind down, publish; the Lean backlog restarts on the number-field results
+**SUPERSEDED AS THE FIRST READ: the current handoff is `plans/SESSION-HANDOFF-2026-10-13.md`. This file is the earlier state.**
+
+## 0f. (earlier) READ THIS FIRST — THE DIRECTION CHANGED ON 2026-10-13: wind down, publish; the Lean backlog restarts on the number-field results
 
 *Written 2026-10-13 16:05 UTC by Keryx. Sections 0e and below are the state this started from; where they differ, this is current.*
 
@@ -80,6 +82,42 @@ this session):
    `data/fs131/claims-NF3.md`; worktree and branch `fs131-wkc`; item 652): the measurable-number corollary —
    `χ(ℝ²) = χ_m(ℝ²)` from `[Davies2026]` Lemma B.1 and the declared outside theorem. **A corollary of two outside
    results, never filed as this project's theorem.**
+
+6. ~~FS131-ER1, the reading of `[Davies2026]`~~ — **done (2026-10-13 17:02 UTC; items 654, 655): it proves nothing this project
+   lists as its own, contradicts no row, and its method does not reach the plane as written; rows 121–123 are posed
+   there as open (by residue class modulo 168 — it never prints the field of √47), row 128's analogue is its theorem
+   in dimension four and up, row 129's plane clause is the d = 2 case of its density statement, which it lacks.**
+   Record `plans/FS131-ER1-davies-reading.md`; its § 9.2 holds drafts for the owed filing.
+7. **FS131-KN3** (kernel planner; brief `data/fs131/briefs/FS131-KN3-chain-plan.md`; claim list
+   `data/fs131/claims-NF2.md`; worktree and branch `fs131-wch`; item 656): the five-colour chain's architecture and
+   first layer. A long job with saved stages; a successor can take any stage from its record
+   `plans/FS131-KN3-chain-plan.md` on the branch.
+
+**RUNNING AT 2026-10-13 20:14 UTC: FS131-LU1 — A LANDING IN FLIGHT (the first number-field module — `Arith/UpperHalf`,
+`Arith/QuadraticPrime`, `Instances/UpperHalfValues` — tree `fs131-wnf`; brief `data/fs131/briefs/FS131-LU1-landing.md`;
+item 688); FS131-ID1 (`Arith/DyadicQuadratic.lean`, proved, building; tree `fs131-wdq`; item 683); FS131-IN1 (the
+thirteen leaves of `Arith/ThreeColourCriterion.lean`, tree `fs131-wrc`; item 686).** **Until the landing is back:
+nothing on `main` outside `plans/`, `data/`, `.claude/`, `BIBLIOGRAPHY.md`, `LEDGER.md`, `LEAN.md`, `RUNNING.md`, and
+no `CLAUDE.md` filing.** At its green line: check its receipts (`data/fs131/lu1/gate/` on its branch), fast-forward
+`main`, tell Kooshi what is held, then the Clerk files its drafts (pattern
+`data/fs131/briefs/scripts/mk-fs131-fc1.py`; **fact-audit base `147e38bc8`**).
+
+**HELD TODAY (kernel, through the gate, on `main`): the measurable-number module** — `χ(ℝ²) = χ_m(ℝ²)` with
+Lebesgue-measurable classes, on the standard three axioms and the one declared outside theorem; a corollary of two
+outside results, formalized here (items 682, 684); **its drafts are filed** (merge `147e38bc8`; item 687).
+
+**The three-and-four-colours line**: `TorsionExtraction` (tree `fs131-wr2`), `ThreeColourCharacter` (`fs131-wc1`) and
+`DyadicQuadratic` (`fs131-wdq`) are each fully proved on their branches; `ThreeColourCriterion` is with FS131-IN1.
+**Its next jobs, as slots free**: a planner-implementer for the joining module (the planned text is
+`data/fs131/kn4/lean/ThreeFourColours.lean` on branch `fs131-wr2`; it joins the four branches and the landed residue
+module; state there the two character-form statements and the every-abelian-group form the implementers named, items
+679, 685), then that line's landing. **A job name is checked against `data/fs131/briefs/` before it is minted** (two
+were reused today; one overwritten report repaired, item 685).
+
+**Then, in order**: the Clerk for the owed corrections (items 640, 643, 644, 651, 653, 655, 659 (a), 684, and the
+direction change of 636) once no landing is in flight; the chain's successor planner (tree `fs131-wch`, item 661); a
+deriver on the chain's two questions; a small planner's job stating row 52's two values; FS-133's planner;
+FS131-KE1 (pricing the printed rigidity theorem; item 659 (3) goes into its brief).
 
 **REPORTS TO KOOSHI ONLY AT A GATE, A DECISION OF HIS OR HIS CHECK-IN (2026-10-13 16:44 UTC; his word W3, FS-131 inventory item 650): no per-event
 reports; report when something is through the gate, when a decision is genuinely his, or when he checks in. His

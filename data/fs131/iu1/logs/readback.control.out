@@ -1,0 +1,6 @@
+[W2: (2026-10-13, answering t…]: DIFFERS (276 characters; source data/fs131/REQUEST-2026-10-13.md)
+[NF1-S1A: For a real number f…]: DIFFERS (188 characters; source data/fs131/claims-NF1.md)
+[NF1-S1B: For a real number f…]: DIFFERS (368 characters; source data/fs131/claims-NF1.md)
+[- 2026-10-13 16:36 UTC — **N…]: DIFFERS (871 characters; source data/fs131/claims-NF1.md)
+[- 2026-10-13 16:36 UTC — **T…]: DIFFERS (809 characters; source data/fs131/claims-NF1.md)
+compared=5 differing=5 mode=control
