@@ -520,3 +520,27 @@ on a colouring that is not proper". That `r7Col` gives one colour to two points 
 kernel-checked as a term — `FS131LC1.r7Col_not_proper`: the lattice point `0` and `3/7 + (5/7)ω`, at distance one
 because `(3/7)² + (3/7)(5/7) + (5/7)² = 1`, both of colour `0` — and so is its consequence that the conull set handed
 to the lemma there is not the plane (`FS131LC1.model_core_ne_univ`). Open gate item 2.
+
+## Stage 7 — SAVED (FS131-LC1): before the pass — `main` merged once more, the two planted controls
+
+**`main` merged in again** (`data/fs131/lc1/merge-2.out`): it had moved to `f3292e4bc` — `data/` 15 paths, `plans/` 2,
+**nothing else** — carrying the brief's Amendment 1 and the claim list's dated line of 18:00 UTC; merged by hash,
+automatic (`386087463`), so that the commit the gate reads holds them. The brief's quotations checked again on the
+merged tree: 7 of 7. The drafts' slots read on `main` at that commit (`data/fs131/lc1/drafts-slots.py`,
+`drafts-slots.out`): 14 of 14 found exactly once, the control absent.
+
+**The zero-`sorry` search's plant** (`data/fs131/lc1/sorry-plant.sh`, after FS124-L2's; `sorry-plant.out`): a theorem
+with a `sorry` body appended to `Plane/LebesgueNumber.lean`, never built, never committed — narrow lines 0 before, 1
+with the plant, "PLANT FIRED: the search finds the planted sorry and nothing else"; restored by `git checkout`,
+"RESTORED: the module is the text it was" (digest `9b0286a3…` before and after), narrow lines 0 again, 0 tracked files
+modified.
+
+**The lint's negative control** (`data/fs131/lc1/lint-plant.sh`, FS124-L2's script pointed at this module;
+`lint-plant-run.out`): `theorem zz_lc1_lint_plant [Nonempty ℕ] : (1 : ℕ) = 1 := rfl` planted at the end of
+`Plane/LebesgueNumber.lean` (never committed), built — "build: OK — 200 of 200 batches, 2 module(s) rebuilt, **0
+module(s) with warnings**, 5m33s" at `BATCH=10` (`lint-plant-build.log`: the build's own linters do not see it) — then
+the guarded lint: **exit 1**, "`unusedArguments`: (2/2) Failed with 1 messages", "error: @zz_lc1_lint_plant 1 unused
+argument", and `synTaut` on the same plant (`lint-plant.log`). Restored by `git checkout` under a trap: the digest is
+the one taken before, the plant's name in the file 0 times, 0 tracked files modified; the pass's build recompiles the
+module and the root from the restored text. **This machine's second build measurement**: a walk at `BATCH=10` that
+rebuilds two modules is 5 m 33 s (200 Lake starts), against 24 m 18 s at `BATCH=2`.

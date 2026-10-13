@@ -1,0 +1,17 @@
+ref main = 8cf1401b06071c4c54bb81834d079fb43531644f
+OK   1 time(s) in CLAUDE.md: 1 audit sentence
+OK   1 time(s) in CLAUDE.md: 2 the transfer's records
+OK   1 time(s) in CLAUDE.md: 3 nine counts
+OK   1 time(s) in CLAUDE.md: 4 vacuity counts
+OK   1 time(s) in tools/claude_md_fact_audit.py: 5 GATE_CHANGES, the entry it follows
+OK   1 time(s) in CLAUDE.md: 6 the front page's sentence on Falconer's number
+OK   1 time(s) in LEDGER.md: 7 row 130, not claimed
+OK   1 time(s) in LEDGER.md: 8 row 130, the sentence the closing clause follows
+OK   1 time(s) in LEDGER.md: 8 row 130, the chain
+OK   1 time(s) in LEAN.md: 9 LEAN.md § Searching, the bullet the new ones follow
+OK   1 time(s) in LEAN.md: 9 LEAN.md § Building, the bullet the new one follows
+OK   1 time(s) in LEAN.md: 9 LEAN.md § The gate, the sentence the new one follows
+OK   1 time(s) in BIBLIOGRAPHY.md: 10 the bibliography's status
+OK   1 time(s) in data/fs131/claims-NF3.md: 11 the claim list, the line the regrade follows
+CONTROL FIRED AS EXPECTED: absent — CLAUDE.md
+slots: 14 checked, 0 bad

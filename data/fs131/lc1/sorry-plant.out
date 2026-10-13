@@ -1,0 +1,11 @@
+HEAD=386087463ae9f5df87c1fd7d19a7ebee51ce051d
+narrow lines before the plant: 0
+narrow lines with the plant: 1
+Proofs/HadwigerNelson/Plane/LebesgueNumber.lean:566:theorem zz_lc1_sorry_plant : (1 : ℕ) = 2 := by sorry
+PLANT FIRED: the search finds the planted sorry and nothing else
+digest before: 9b0286a3228974d060212d71c271e72921c01364eadb4f2b89f44e34a57e41e5
+digest after:  9b0286a3228974d060212d71c271e72921c01364eadb4f2b89f44e34a57e41e5
+RESTORED: the module is the text it was
+plant's name in the file: 0 time(s)
+narrow lines after the restore: 0
+tracked files modified: 0
