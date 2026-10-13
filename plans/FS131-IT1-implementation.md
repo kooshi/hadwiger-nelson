@@ -6,7 +6,51 @@ section, then § 4.2) and `plans/FS131-KN5-three-four-colours-passes.md` (§ Sta
 
 ## Theorems this phase proved
 
-*Filled stage by stage; the axioms of each are printed at the last stage, from the built module.*
+*All in `Proofs/HadwigerNelson/Arith/TorsionExtraction.lean`, namespace `HadwigerNelson.TorsionExtraction`; axioms printed
+from the built module (`data/fs131/it1/axioms.txt`, stage 4). "Standard three" is `[propext, Classical.choice, Quot.sound]`.
+The statements are the planners' (FS131-KN4, FS131-KN5); the proofs of the ten leaves are this job's. Each line gives the
+informal statement the declaration was read against.*
+
+**The ten leaves — [kernel], standard three, each:**
+- `layer_step` — FS81-T3's step, without the cell list: four reals of absolute value at most 1/6 whose two forms
+  `2a' − b' − 2a − b` and `a' + 2b' + a − 2b` are integers are a rotation step by `(3 − 4i)/5`, or all at absolute value 1/6.
+- `layer_dichotomy` — FS81-T3 in sequence form: a two-sided sequence in the box satisfying the two relations at every step is
+  a rotation orbit or sits at corners throughout.
+- `tendsto_layer` — for `θ ∈ Θ₃(R_F)` and a unit vector `b`, `θ(25⁻ⁿ b)` converges, to `1/2`, `1/3` or `2/3`.
+- `exists_torsion_mem_fieldBandSet` — **NF4-S7** (FS91-J02-L1, torsion extraction): `Θ₃(R_F) ≠ ∅ ⟹ Θ₃(R_F) ∩ T₆ ≠ ∅`, every
+  subfield `F ⊆ ℝ`.
+- `exists_zmod_hom_of_mem_torsionBy` — a character of an abelian group killed by `N ≠ 0` is a `ZMod N`-valued additive map
+  followed by `ZMod N ↪ ℝ/ℤ`.
+- `colorable_two_iff_fieldBandSet_two_nonempty` — the plane over `F` is two-colourable iff some character of `ℤ[U_F]` is `1/2`
+  at every unit vector.
+- `mem_fieldBandSet_two_of_inv_three_mem` — if `1/3 ∈ ℤ[U_F]`, a point of `Θ₃ ∩ T₆` is in `Θ₂` (the last step of FS81-T4).
+- `inv_natCast_mem_unitRing_of_sqrt_mem` — `1/n ∈ ℤ[U_F]` for `d + 1 = 4n` and `F ∋ √d` (`1/n = 2 − v − v̄`,
+  `v = ((2n − 1) + i√d)/(2n)`).
+- `inv_three_mem_unitRing_of_sqrt_mem` — `1/3 ∈ ℤ[U_F]` for `F ∋ √d`, `d ≡ 11 (mod 12)`.
+- `not_colorable_two_of_sqrt_mem` — the plane over `F ∋ √d`, `d ≡ 3 (mod 4)`, is not two-colourable.
+
+**A composition of the planner's that this job's leaves complete — [kernel], standard three:**
+- `three_le_chromaticNumber_planeOver_of_sqrt_mem` — `χ(F²) ≥ 3` for every subfield `F ∋ √d`, `d ≡ 3 (mod 4)` (read against
+  the claim list's dated line G-1, "likewise chi >= 3 for d = 3 (mod 4)"; the value is prior art, `[Fischer1990]`,
+  `[Johnson2000]`).
+
+**Five compositions of the planner's, complete over this job's leaves and one upstream leaf — not yet kernel theorems of
+this tree:** `colorable_two_of_inv_three_mem` (NF4-THEOREM (c), strongest form, G-2),
+`four_le_chromaticNumber_planeOver_of_inv_three_mem` (NF4-THEOREM (c)), `chromaticNumber_planeOver_ne_three_of_inv_three_mem`,
+`four_le_chromaticNumber_planeOver_of_sqrt_mem` (NF4-THEOREM (a), lower bound, in G-1's form),
+`four_le_chromaticNumber_planeOver_fieldOfRadicands` (NF4-THEOREM (a) as claimed). Each prints the standard three and
+`sorryAx`; the `sorryAx` is `ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable`'s (NF4-S6, another job's
+module, `sorry` in this tree) and nothing else's: with that leaf as a hypothesis the compositions print the standard three
+(`data/fs131/it1/models.txt`, `colorable_two_of_upstream`, `four_le_eleven_of_upstream`). They become kernel theorems on the
+standard three the day that module has no `sorry`, with no change here.
+
+**Ten private helpers — [kernel], standard three, each** (`data/fs131/it1/axioms-footer.txt`): `abs_eq_of_one_le_abs_form`,
+`no_rotation_at_corner`, `unitRing_induction`, `exists_orbit`, `exists_lift_of_mem_band_three`, `rotation_layer`,
+`corner_layer`, `eq_half_of_mem_band_two`, `half_ne_zero`, `exists_unitVectors_inv_natCast`.
+
+**Outside the library** (`data/fs131/it1/lean/Models.lean`, a probe file, standard three; stage 4): FS81-T4 in the ledger's
+own words — `1/3 ∈ ℤ[U_F]` and `Θ₃(R_F) ≠ ∅` give a two-colouring — and clause (a) in character form — `Θ₃(R_F) = ∅` for
+every `F ∋ √d`, `d ≡ 11 (mod 12)` — are two-line compositions of this module's leaves that read no upstream leaf.
 
 ## Stage 1 — SAVED: the readback
 
@@ -103,3 +147,177 @@ compositions with `sorryAx` besides — `colorable_two_of_inv_three_mem`, `four_
 from the built module). Control: with one helper's proof replaced by `sorry` in a copy, that helper and exactly the four
 records that read it (`layer_step`, `layer_dichotomy`, `tendsto_layer`, `exists_torsion_mem_fieldBandSet`) gain `sorryAx`:
 10 records against 5 (`axioms-footer.control.txt`).
+
+## Stage 4 — SAVED: the build; the statements and the axioms from the kernel's side; the models; the linters
+
+**The one build.** `data/fs131/it1/build_sampled.sh data/fs131/it1/logs/build1 8` — the slot at `--mem 10 --cpus 4`,
+`MEMMAX=10G BATCH=8 ./scripts/build.sh` — from 19:22:26 to 19:28:59 UTC: **exit 0, "build: OK — 248 of 248 batches,
+3 module(s) rebuilt, 3 module(s) with warnings, 6m28s"**; peak 4.4 GiB over the process tree (4,645,912 kB, 195 samples;
+`logs/build1.out`, `.peak`; Lake's whole output `logs/build1.full.log`). Rebuilt: `Arith.TorsionExtraction` (8.8 s),
+`Arith.ThreeColourCriterion` (2.2 s, its one dependent), `Proofs` (1.8 s). **Zero warnings from this job's file**: Lake's
+line for it is `✔ Built Proofs.HadwigerNelson.Arith.TorsionExtraction (8.8s)`, and the log's 31 warning lines are the
+`sorry` leaves of the three other modules of the line (`DyadicQuadratic` 10, `ThreeColourCharacter` 8,
+`ThreeColourCriterion` 13), which other jobs hold. The module went from 201 lines to 709; against `34d9113b2` the diff
+under `Proofs/` is this one file, 518 lines added and 10 removed, the ten removed being the ten `  sorry` lines.
+
+**No statement changed, from the kernel's side** (`data/fs131/it1/after_build.sh`, which runs everything below from the
+built module; `logs/after_build.out`).
+- The compiled module's constants before the first rebuild (`statements-before.raw.txt`, sha256 `b3635e47…`) against the
+  same dump after the build (`statements-after.raw.txt`, sha256 `4a3d00a2…`; 49 constants, 31 of them internal), both
+  printed at the module's own path: **18 named constants compared — 17 theorems' stored types, and the stored type and
+  value of the one definition `inv5` — PASS; 0 new named constants; 10 new private theorems; `example` heads 6 and 6**
+  (`logs/statements-final.out`).
+- Its control in memory (one statement's last character, `inv5`'s value, `layer_step` removed): 3 of 3 reported
+  (`logs/statements-final.control.out`).
+- Its control on the file (`planted_file.sh`): a copy of the module with `(_h : True)` added to
+  `chromaticNumber_planeOver_ne_three_of_inv_three_mem` — a statement nothing in the file calls, so the copy elaborates —
+  is reported as exactly that one changed statement, exit 1 (`logs/statements-planted-file.out`).
+- What the check does not see: a docstring or a comment (none of the skeleton's was edited: the diff's removed lines are
+  the ten `sorry`), and the heads of `example`s beyond their count.
+
+**The axioms, from the built module** (`lean/Axioms.lean`, generated with the audit block by `make_audit.py` from the
+compiled module's own list of named constants; print `axioms.txt`; reader `read_axioms.py`): 18 records, the same list
+as the audit block in order; **13 on `[propext, Classical.choice, Quot.sound]`** — the ten leaves, `inv5`, `coe_inv5`,
+`three_le_chromaticNumber_planeOver_of_sqrt_mem` — **and 5 with `sorryAx` besides**, the five the list
+`sorry-expected.txt` names. The reader fails on a listed record that does *not* carry `sorryAx` too, so the list cannot go
+stale in silence: when the upstream module is proved this check goes red here and the list is emptied. Control: a planted
+record with `sorryAx` that the list does not name, and one on an undeclared axiom — 2 of 2 reported
+(`logs/read_axioms.control.out`).
+
+**Where the `sorryAx` comes from** (`lean/Models.lean`, print `models.txt`): `ThreeColourCharacter.
+fieldBandSet_three_nonempty_of_colorable` prints `sorryAx` (its module's eight leaves are another job's); the same
+compositions with that statement taken as a hypothesis — `colorable_two_of_upstream`, `four_le_eleven_of_upstream` — print
+the standard three. So nothing in this file is `sorry`, and the file's only reading of an unproved statement is that one.
+
+**The models** (the same probe file; 17 records; each on the standard three but the two named above): § Drafts for the
+landing, item 2.
+
+**The environment linters** on the built library: `lake lint --no-build -- --no-build --trace` under the slot — exit 0,
+`-- Linting passed for Proofs.`, each of the fourteen linters `Passed!` (`logs/lint.out`; 13 s, 4.9 GiB). I planted no
+fault in the house's linters. `tools/check_architecture.py`: `RESULT: PASS` (`logs/check_architecture.out`; no import was
+added, no public declaration added or removed).
+
+**Not run by this job**: `scripts/axioms.sh`, `scripts/vacuity.sh`, `scripts/assumptions.sh`, `scripts/dupnames.sh` — the
+gate is the landing's, and with 31 `sorry` in the line's other modules it cannot pass in this tree.
+
+## Drafts for the landing (saved with stage 4)
+
+*For the landing of the three-and-four-colours line (`Arith/ThreeColourCharacter`, `Arith/TorsionExtraction`,
+`Arith/ThreeColourCriterion`, `Arith/DyadicQuadratic`). This job ran no gate.*
+
+### 1. The audit block — `scripts/Axioms.lean`, in the landing's CLEAN block for the module
+
+`data/fs131/it1/audit-block.txt`: 18 records, one `#print axioms` line per public declaration of
+`Arith/TorsionExtraction` a person typed (17 theorems, 1 definition), in the file's order; generated from the compiled
+module's own list of named constants, and the generator fails if the source writes a public declaration the dump does
+not hold or the dump holds a named constant the source does not write. **Every record is CLEAN once
+`Arith/ThreeColourCharacter` has no `sorry`**: the module reads no declared outside theorem (Weil's bound is read in
+`Arith/ThreeColourCriterion` only; the second planner's record, § Stage 7, lists the IMPORTED records, none here). Until
+then five records print `sorryAx` (`sorry-expected.txt`). The ten private helpers cannot be named from
+`scripts/Axioms.lean`; each is read by a public record, and their own prints are `axioms-footer.txt`.
+
+### 2. A model for each hypothesis
+
+`data/fs131/it1/lean/Models.lean` (never part of the library) applies the statements at the models below; its print is
+`data/fs131/it1/models.txt`.
+
+| hypothesis | where it is taken | model | does the kernel hold it? |
+|---|---|---|---|
+| `h3 : (3 : ℂ)⁻¹ ∈ unitRing F` | `colorable_two_of_inv_three_mem`, `four_le_…_of_inv_three_mem`, `chromaticNumber_…_ne_three_…`, `mem_fieldBandSet_two_of_inv_three_mem` | `F = ℚ(√11)` (`inv_three_mem_unitRing_of_sqrt_mem` at `d = 11`); `F = ℚ(√2)`, `1/3 = 1 − v − v̄`, `v = (1 + 2√2 i)/3` (`Models.inv_three_mem_unitRing_sqrt_two`) | yes, both, standard three |
+| `hnb : ¬ Colorable 2`, with `h3` | `four_le_chromaticNumber_planeOver_of_inv_three_mem` | `F = ℚ(√11)`: both at once (`Models.headline_hypotheses_eleven`) | yes, standard three |
+| `h : Colorable 3`, with `h3` | `colorable_two_of_inv_three_mem` | `F = ℚ(√2)`: its plane is two-colourable, so three-colourable, and `h3` holds there. At `ℚ(√11)` the pair is refuted — that is the theorem | `h3`: yes. The two-colouring of `ℚ(√2)²`: **not in this tree** — it is `DyadicQuadratic.colorable_two_planeOver_sqrt` (another job's leaf). Until it lands the theorem has no kernel-held model of both hypotheses at once |
+| `hd : d % 12 = 11`, `hF : √d ∈ F` | `four_le_…_of_sqrt_mem`, `inv_three_mem_unitRing_of_sqrt_mem` | `d = 11`, `F = ℚ(√11)`; the file's own examples at 11 and 35 | yes |
+| `hd : d % 4 = 3`, `hF` | `three_le_…_of_sqrt_mem`, `not_colorable_two_of_sqrt_mem` | `d = 7`, `F = ℚ(√7)` (the file's example); `d = 11` | yes |
+| `hd : d + 1 = 4 * n`, `hF` | `inv_natCast_mem_unitRing_of_sqrt_mem` | `d = 11`, `n = 3`; `n = 0` is excluded by `hd` | yes |
+| `h : (fieldBandSet F (band 3)).Nonempty` | `exists_torsion_mem_fieldBandSet` | every `F` with a two-colourable plane — `band 2 ⊆ band 3` (`Models.fieldBandSet_three_nonempty_of_colorable_two`, standard three, this module alone): `ℚ`, `ℚ(√2)`; and `ℚ(√3)` (`[Fischer1990]` Thm 9, by the module's docstring), where the limit has order 3 | the implication: yes. A field whose plane the kernel holds two-colourable in this form: **none in this tree** (`DyadicQuadratic.colorable_two_planeOver_sqrt`; on `fs131-wnf`, `UpperHalf.colorable_two_planeOver_of_ramified` with its leaf at `ℚ`). At the headline's own fields the hypothesis is refuted (`Models.fieldBandSet_three_empty_of_sqrt_mem`): there the two leaves are steps inside a proof by contradiction |
+| `hθ : θ ∈ fieldBandSet F (band 3)`, `hb : b ∈ unitSet F` | `tendsto_layer` | as the row above, with `b = 1` | as the row above |
+| `hτ`, `h6`, with `h3` | `mem_fieldBandSet_two_of_inv_three_mem` | `F = ℚ(√2)`, `τ` the character of a two-colouring (in `Θ₂ ⊆ Θ₃`, killed by 2) | as two rows above |
+| `h : θ ∈ torsionBy M N`, `[NeZero N]` | `exists_zmod_hom_of_mem_torsionBy` | `θ = 0`; `ZMod.toAddCircle` at `M = ZMod N` | not exhibited as a declaration; its two readers in this file apply it at a `θ` in hand |
+| the box and the two integer forms | `layer_step` | a rotation step `(1/12, 0) ↦ (1/20, −1/15)`, where the second disjunct fails; a corner step `(−1/6, −1/6) ↦ (1/6, −1/6)`, where the first fails (`Models.layer_step_rotation`, `…_not_corner`, `layer_step_corner`, `…_not_rotation`) | yes |
+| the same along a sequence | `layer_dichotomy` | the zero orbit; the corner orbit `z_m = iᵐ(−1/6 − i/6)`, at which every hypothesis holds, the second disjunct holds and the first fails (`Models.layer_dichotomy_zero`, `layer_dichotomy_corner`) | yes |
+
+**One instance held twice.** The headline at `d = 11`, `4 ≤ χ(ℚ(√11)²)`, is word for word the statement the kernel
+already holds by a 204-point witness (`four_le_chromaticNumber_planeOver_eleven`, row 73, standard three):
+`Models.four_le_eleven_by_witness` and `Models.four_le_eleven_by_family` conclude one proposition.
+
+### 3. What a reader of the statements should be told that the docstrings do not say
+
+1. **Whose each value is** (copied from the module's docstring and the claim list's NF4-OBJECTION and NF4-NC; I read
+   neither `[Fischer1990]` nor `[Johnson2000]` in this job).
+   - `χ ≥ 4` for `d ≡ 11 (mod 12)` and clause (c) in both forms: this project's (row 82; FS81-T4, T5), not found in print;
+     `[Johnson2000]` p. 176 poses the family as open and `[Johnson2006]` p. 214 asks whether any such `m` exists.
+   - The vector `v = ((2n − 1) + i√d)/(2n)` and `1/3 ∈ ℤ[U]`: `[Fischer1990]` Thm 10(ii) and Ex. 4, there at
+     `N ≡ −1 (mod 24)`; the obstruction "`1/k ∈ ℤ[U]` gives no additive `k`-colouring": `[Fischer1990]` §1.
+   - `χ ≥ 3` for `d ≡ 3 (mod 4)` (`three_le_…`, `not_colorable_two_…`): prior art, the lower end of Fischer's and
+     Johnson's values; what is here is its kernel form, at every subfield holding `√d`.
+   - The two-colour criterion `colorable_two_iff_fieldBandSet_two_nonempty` is elementary (a bipartite Cayley graph has a
+     parity character) and is not claimed.
+   - No upper bound is in this module. Every "=" of the table needs the upper halves, all prior art, in the line's other
+     modules.
+2. **The headline's first instance was already in the kernel**: `d = 11`, by row 73's finite witness. New in the kernel
+   with this line are every other `d` of the class (23, 35, 47, …) and the route with no finite graph.
+3. **`d` is any natural number of the class, and `F` any subfield of `ℝ` holding `√d`.** The claim's "squarefree" is not
+   used (`d = 275 = 11·5²` is in the class; its field is `ℚ(√11)`). At `F = ⊤` the headline reads `4 ≤ χ(ℝ²)`, true and
+   below what the library holds: the content is at the small fields.
+4. **The five headline compositions rest on the upstream leaf** until `Arith/ThreeColourCharacter` lands; their own
+   module adds nothing unproved. In character form the same results stand on this module alone today (§ 4, first item).
+5. **`tendsto_layer` is along `25⁻ⁿ`, not `5⁻ᵏ`**: on a corner layer `θ(5⁻ᵏ b)` alternates between `1/3` and `2/3`
+   (`5 ≡ 2 (mod 3)`), which is why the limit is taken along even powers.
+6. **The character of `exists_torsion_mem_fieldBandSet` is a limit, and the colouring of
+   `colorable_two_iff_fieldBandSet_two_nonempty` `⟸` is `cosetResidue`'s**: the first is determined by `θ`, the second
+   depends on a choice of coset representatives. Existence is all either statement gives.
+
+### 4. Generalizations seen (the skeleton's forms kept; nothing added to the public surface)
+
+- **FS81-T4 and clause (a) in character form, with no three-colouring in the statement**: `(3 : ℂ)⁻¹ ∈ unitRing F →
+  (fieldBandSet F (band 3)).Nonempty → Colorable 2`, and `d % 12 = 11 → √d ∈ F → ¬ (fieldBandSet F (band 3)).Nonempty`.
+  Each is a two-line composition of this module's leaves and prints the standard three today
+  (`Models.colorable_two_of_fieldBandSet_three_nonempty`, `Models.fieldBandSet_three_empty_of_sqrt_mem`). The first is the
+  ledger's own wording of T4 ("`1/3 ∈ ℤ[U_F]` and `Θ₃(F) ≠ ∅` make `F²` bipartite"); `colorable_two_of_inv_three_mem` is
+  it after the upstream leaf. If the line wants a headline that does not wait for `ThreeColourCharacter`, these are it;
+  whether they are stated is the planner's.
+- **`unitRing_induction`** (private): a property of `0` that passes to sums and holds at every unit vector holds on
+  `ℤ[U_F]`. `CharacterColouring.gluing_field` inlines the same argument, and `ThreeColourCriterion`'s two-colour end
+  (the second planner's D-2: "`ℤ[U_F]` is the additive span of the unit vectors") needs it again. Stated once in
+  `CharacterColouring` it would serve all three; here it stays private, so no name is doubled.
+- **`rotation_layer`, `corner_layer`** read only the recurrence `g m / 5 = g (m + 1) + g (m − 1) − g m` and additivity: no
+  field, no unit vector.
+- **`not_colorable_two_of_sqrt_mem`** is the case "`1` is a signed sum of an even number of unit vectors" (`4n` of them)
+  of: a character equal to `1/2` on unit vectors is `0` on every signed sum of an even number of them.
+
+## Drafts for the front page, and for the other files this job does not write
+
+*Each names its slot. Keryx files; the landing decides when. This job ran no gate, so it drafts no counts for
+`CLAUDE.md` § The gate or § Trust ledger: those are the landing's, from its own run.*
+
+- **`ARCHITECTURE.md` § the module map, the row `Arith/TorsionExtraction`** — replace the words "(FS131-KN4, passes
+  FS131-KN5; a skeleton: ten leaves are `sorry`)" by "(statements FS131-KN4's and FS131-KN5's; the ten leaves' proofs
+  FS131-IT1's)". Nothing else in the row changes.
+- **`LEDGER.md` row 82**, at the landing, after its grade "[hand, two independent derivations]" — add: "**[kernel]
+  since the landing of FS-131's three-and-four-colours line**: `TorsionExtraction.colorable_two_of_inv_three_mem` (T4
+  with T2), `four_le_chromaticNumber_planeOver_of_inv_three_mem` (T5), `four_le_chromaticNumber_planeOver_of_sqrt_mem`
+  and `four_le_chromaticNumber_planeOver_fieldOfRadicands` (the family, every subfield of `ℝ` holding `√d`,
+  `d ≡ 11 (mod 12)`, squarefree or not), on the standard three axioms, resting on no assumption and no import; T3 is
+  `layer_step` and `layer_dichotomy`, proved with no cell list." **This sentence is true only when
+  `Arith/ThreeColourCharacter` (T2) has no `sorry`.** Before that the kernel holds, on the standard three, T3
+  (`layer_step`, `layer_dichotomy`), the limit and the torsion extraction (`tendsto_layer`,
+  `exists_torsion_mem_fieldBandSet`), the two-colour criterion, the relation (`inv_three_mem_unitRing_of_sqrt_mem`) and
+  `χ ≥ 3` at `d ≡ 3 (mod 4)` — and T2 is still [hand].
+- **`CLAUDE.md` § Frontier, "What the kernel holds, beyond the interval"**, at the landing — a clause after row 119's:
+  "**FS-131's three-and-four-colours line** — `χ(F²) ≥ 4` for every subfield `F ⊆ ℝ` holding `√d`, `d ≡ 11 (mod 12)`, with
+  no finite graph, and `χ(F²) ≠ 3` wherever `1/3 ∈ ℤ[U_F]` (row 82)".
+- **The Proof Atlas**, at the landing: row 82's nodes T3, T4, T5 and the family clause from [hand] to [kernel]; T2 with
+  `Arith/ThreeColourCharacter`. Before the landing: no grade changes on the page.
+- **`LEAN.md` § Searching — Lean**, five lines:
+  - Induction on `ℤ` from a base point is `Int.inductionOn'` (cases `zero`, `succ`, `pred`; `pred` gives `k - 1`, and
+    `sub_add_cancel` returns to `k`); there is no `Int.induction_on'` at the pin (FS131-IT1).
+  - `linear_combination` over `ℂ` does not know `Complex.I ^ 2 = -1`: add `c * Complex.I_sq` with the coefficient the
+    failed `ring` goal shows (FS131-IT1, `exists_orbit`).
+  - After `nsmul_eq_mul` in a subring, `simp` with `Nat.cast_ofNat` turns `((25 : ℕ) : ↥S)` into the numeral `(25 : ↥S)`,
+    whose coercion nothing then moves; keep the cast: `simp only [Subring.coe_mul, Subring.coe_natCast]`, then
+    `push_cast` (FS131-IT1; the line above on numerals out of a subfield).
+  - An orbit `wᵐ b` in a subring of a field is cheapest as a `zpow` in the field, with membership per `m`
+    (`zpow_add_one₀`, `zpow_sub_one₀`, `norm_zpow`), not as a unit of the subring (FS131-IT1).
+  - A control that changes "the first digit of the line" can land in the line's label and change which comparison runs,
+    not the text compared: plant past the label (`data/fs131/it1/readback.py`) (FS131-IT1).
+- **`BIBLIOGRAPHY.md`**: no row proposed; no work was read or fetched in this job.

@@ -3,8 +3,8 @@
 
 `before` and `after` are two prints in the format of data/fs131/it1/lean/StatementDump.lean (kind, full name, stored
 type, and for a definition its stored value), made either from the compiled module (`StatementDump.lean`) or from a
-copy of the file with `lean/StatementFooter.lean` appended (the same format; used between builds) — both raw, or both
-passed through data/fs131/it1/compact_dump.py (each stored term as Lean's hash, its SHA-256, its length, its head).  Every constant of
+copy of the file with `lean/StatementFooter.lean` appended (the same format; used between builds), raw: each stored
+term in full, with Lean's hash of it.  Every constant of
 `before` that is not INTERNAL (a name Lean generates inside a declaration) must be in `after` with the same kind, the
 same type and, for a definition, the same value, character for character.  Constants only in `after` are listed as
 NEW: the helpers.  INTERNAL constants are counted, not compared: they move with a proof.
@@ -55,8 +55,7 @@ def main():
     bad = []
 
     if control:
-        # plant 1: one character of one stored statement changed in `after` (its last: a raw dump and a compact one
-        # — data/fs131/it1/compact_dump.py — both carry it)
+        # plant 1: one character of one stored statement changed in `after` (its last)
         victim = "HadwigerNelson.TorsionExtraction.tendsto_layer"
         t = after[victim]["type"]
         after[victim]["type"] = t[:-1] + ("!" if t[-1] != "!" else "?")

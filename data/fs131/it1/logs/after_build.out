@@ -1,0 +1,53 @@
+== dump of the compiled module: exit 0
+compared: 18 named constants of the first dump (17 theorems, 1 definitions; types, and values of definitions); 18 declarations written at 34d9113b2, each found in the first dump
+internal (not compared): 5 before, 31 after
+new named constants in the second dump: 0
+new private declarations in the second dump (counted among the internal): 10
+  NEW PRIVATE THM HadwigerNelson.TorsionExtraction.abs_eq_of_one_le_abs_form
+  NEW PRIVATE THM HadwigerNelson.TorsionExtraction.corner_layer
+  NEW PRIVATE THM HadwigerNelson.TorsionExtraction.eq_half_of_mem_band_two
+  NEW PRIVATE THM HadwigerNelson.TorsionExtraction.exists_lift_of_mem_band_three
+  NEW PRIVATE THM HadwigerNelson.TorsionExtraction.exists_orbit
+  NEW PRIVATE THM HadwigerNelson.TorsionExtraction.exists_unitVectors_inv_natCast
+  NEW PRIVATE THM HadwigerNelson.TorsionExtraction.half_ne_zero
+  NEW PRIVATE THM HadwigerNelson.TorsionExtraction.no_rotation_at_corner
+  NEW PRIVATE THM HadwigerNelson.TorsionExtraction.rotation_layer
+  NEW PRIVATE THM HadwigerNelson.TorsionExtraction.unitRing_induction
+`example` heads: 6 at 34d9113b2, 6 in the working file
+PASS: no statement and no definition changed
+== statements, compiled before against compiled after: exit 0
+VALUE    DEF HadwigerNelson.TorsionExtraction.inv5: the stored definition differs
+MISSING  THM HadwigerNelson.TorsionExtraction.layer_step: in the first dump, not in the second
+TYPE     THM HadwigerNelson.TorsionExtraction.tendsto_layer: the stored statement differs
+CONTROL: 3 of 3 planted faults reported — the check can fail
+== its control: exit 0
+wrote 18 records (17 theorems, 1 definitions); private helpers in the source: 10: ['abs_eq_of_one_le_abs_form', 'no_rotation_at_corner', 'unitRing_induction', 'exists_orbit', 'exists_lift_of_mem_band_three', 'rotation_layer', 'corner_layer', 'eq_half_of_mem_band_two', 'half_ne_zero', 'exists_unitVectors_inv_natCast']
+== the audit block from the kernel's list: exit 0
+== axioms of the block's records, from the compiled module: exit 0
+records: 18 (expected 18); on the standard three: 13; with `sorryAx` as listed: 5 of 5 listed; not as expected: 0; listed and not printed: 0; error lines in the print: 0
+names against data/fs131/it1/audit-block.txt: the same list, in order (18 listed)
+PASS: every record is as expected
+== the axiom reader: exit 0
+CONTROL: 2 of 2 planted records reported — the check can fail
+== its control: exit 0
+== the models: exit 0
+'FS131IT1Models.layer_step_rotation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.layer_step_rotation_not_corner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.layer_step_corner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.layer_step_corner_not_rotation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.layer_dichotomy_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.layer_dichotomy_corner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.headline_hypotheses_eleven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.fieldBandSet_two_empty_eleven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.inv_three_mem_unitRing_sqrt_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.colorable_two_of_fieldBandSet_three_nonempty' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.fieldBandSet_three_empty_of_sqrt_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.colorable_two_of_upstream' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.four_le_eleven_of_upstream' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.fieldBandSet_three_nonempty_of_colorable_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.four_le_eleven_by_witness' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.four_le_eleven_by_family' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

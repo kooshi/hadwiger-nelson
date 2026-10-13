@@ -1,21 +1,21 @@
-	Command being timed: "env SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 python3 /home/kooshi/source/lean-dir/scripts/slot.py --mem 4 --cpus 2 --wait 7200 --name it1 -- lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false data/fs131/it1/lean/StatementDump.lean"
-	User time (seconds): 1.71
-	System time (seconds): 0.61
+	Command being timed: "env SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 python3 /home/kooshi/source/lean-dir/scripts/slot.py --mem 4 --cpus 2 --wait 7200 --name it1 -- lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false -Dlinter.missingDocs=true data/fs131/it1/lean/StatementDump.lean"
+	User time (seconds): 1.91
+	System time (seconds): 0.72
 	Percent of CPU this job got: 100%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:02.31
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:02.63
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 3571184
+	Maximum resident set size (kbytes): 3577896
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 97119
-	Voluntary context switches: 407
-	Involuntary context switches: 211
+	Minor (reclaiming a frame) page faults: 97961
+	Voluntary context switches: 338
+	Involuntary context switches: 133
 	Swaps: 0
 	File system inputs: 0
-	File system outputs: 520
+	File system outputs: 1032
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0

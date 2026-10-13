@@ -37,7 +37,7 @@ if missing or extra:
     sys.exit(1)
 nthm = sum(named[n] == "THM" for n in order); ndef = sum(named[n] == "DEF" for n in order)
 head = (f"-- FS131-IT1: Arith/TorsionExtraction ({len(order)}: {nthm} theorems, {ndef} definitions; every public declaration a person typed, in the\n"
-        f"-- file's order — the kernel's list, data/fs131/it1/statements-after.txt, through data/fs131/it1/make_audit.py).\n"
+        f"-- file's order — the kernel's list, data/fs131/it1/statements-after.raw.txt, through data/fs131/it1/make_audit.py).\n"
         f"-- Statements FS131-KN4's and FS131-KN5's; the ten leaves' proofs FS131-IT1's.  The file's {len(private)} private helpers are\n"
         f"-- not nameable here; each is read by a record below.  No declared outside theorem is read: every record is CLEAN\n"
         f"-- once `Arith/ThreeColourCharacter` has no `sorry` (five compositions read its\n"

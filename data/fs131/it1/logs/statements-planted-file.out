@@ -1,0 +1,4 @@
+Planted: lean exit 0; errors: 0
+TYPE     THM HadwigerNelson.TorsionExtraction.chromaticNumber_planeOver_ne_three_of_inv_three_mem: the stored statement differs
+FAIL: 1 difference(s)
+PLANTED FILE: the one changed statement is reported, and nothing else — the check can fail on the file
