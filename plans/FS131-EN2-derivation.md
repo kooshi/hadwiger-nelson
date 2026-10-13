@@ -115,3 +115,97 @@ reads `(u_*)_♯P = P`, the citation at l. 205 is idle.
 ### 1.5 Would-have-searched-here log
 
 - None: both questions are about what an argument reads.
+
+---
+
+## Stage 2 — SAVED (recognition: what each question is, before any verdict)
+
+*`ephodos-recognition` invoked fresh and run on both claims. The sorted features carry their receipts; the two computed receipts are
+the controls of stage 3. One mind.*
+
+### 2.1 EN2-MEAN — the stall, the stranger, the features, the homes
+
+**The stall, read.** Two shapes at once. *A known theorem that almost applies*: convergence in mean serves one scale and the chain
+wants a sequence of them. And *a wall that describes a counterexample*: EN1 § 7.2 ends on "a summable rate along a geometric sequence,
+which zero entropy does not supply" — a sentence about what a failure would carry. The description that moves such a question asks
+what every measure of entropy zero does carry.
+
+**For a stranger** (an ergodic theorist, or an information theorist who works on source coding). *A probability space `(X, μ)`, a
+measurable `T : X → X` preserving `μ`, a measurable map `P` from `X` to a finite alphabet of `a` letters. The name of `x` of length
+`n` is the word `P(x), P(Tx), …, P(T^{n−1}x)`; `[w]` is the set of points with name `w`; `H_n = −Σ_w μ[w] log μ[w]`. Suppose
+`inf_n H_n/n = 0`. Is it true — and what is the least that proves it — that for every `β, η > 0` there are `N₀` and a set of measure at
+least `1 − η` every one of whose points `x` has `μ[name_n(x)] ≥ e^{−βn}` for all `n ≥ N₀`? Nothing is assumed ergodic.* The reader
+stops at no word. **This is the upper half of the Shannon–McMillan–Breiman theorem at entropy zero**; to the coder it is *a source of
+rate zero has few typical names, and the ideal codelength `−log μ[name_n]` beats no code by more than a logarithm* (the second clause
+recalled as Barron's lemma, not read; proved here in the one form used, § 3.5's last step).
+
+**The features, sorted.**
+
+| feature | sort | receipt |
+|---|---|---|
+| entropy zero | **determines**, through one consequence: at one block length `k`, all but a given fraction of the mass sits on at most `e^{γk}` names (Markov's inequality on the terms of `H_k`) | the fair-coin shift: `μ[name_n] = 2^{−n}` everywhere, and the conclusion fails for `β < log 2` |
+| `μ` is preserved by `T` | **determines**: it is what turns one block length into every length (the maximal inequality for visits to a set) | EN2-MEAN-MODEL (§ 3.4): functions `I_n ≥ 0`, non-decreasing in `n`, with `∫ I_n = o(n)`, no point good along any admissible chain |
+| the rate at which `H_n/n → 0` | **accompanies** the conclusion (§ 3.5 holds at every rate); **determines** the Markov–Borel–Cantelli scheme | EN2-MEAN-SCHEME, EN2-MEAN-RATE (§§ 3.2–3.3); control `debruijn-marginals` |
+| almost-everywhere convergence of `I_n/n` | **accompanies**: what is consumed is a set and a threshold, one-sided (§ 1.3) | § 3.5 runs with no limit taken |
+| the identification of the limit (ergodic components, Jacobs) | **accompanies** | EN1 § 7.2's remark (Fatou); § 3.5 reads neither |
+| Egorov | **accompanies** | the maximal inequality hands over the uniform set |
+| ergodicity; invertibility of `T`; a standard Borel space | **accompany** | § 3.5 uses none |
+| a finite alphabet | **determines** the count (`a` enters EN2-CNT's bound) | the count's factor `(2a)^{θn + k}` |
+| consecutive scales in bounded ratio (Steps 4–5) | **determines** what is asked of Lemma 3.1′ | EN2-MEAN-WINDOW (§ 3.1): Step 4's product-formula bound closes exactly on a window |
+| `I_n` is non-decreasing in `n` | **accompanies** the conclusion; it is what reduces "every scale" to a chain (EN1 § 7.2) | — |
+
+**The homes.**
+
+| home | the object's name there | its theorem | verdict |
+|---|---|---|---|
+| probability: convergence in mean gives almost-sure convergence along a subsequence (the asker's) | `I_n/n → 0` in `L¹` | Markov, then Borel–Cantelli along a sequence with summable bounds | **killed at one line of the dictionary**: "the subsequence is free" is false — Steps 4–5 fix the ratio of consecutive scales. Exactly: it works iff `Σ H_n/n² < ∞` (§ 3.2) |
+| ergodic theory: Shannon–McMillan–Breiman (the costume's) | the information function | almost-everywhere and `L¹` convergence to the component's entropy | applies; reads the martingale theorem, a maximal lemma for conditional information, the pointwise ergodic theorem, and (as cited) the ergodic decomposition — of which the deduction consumes one one-sided set |
+| ergodic theory and source coding: the count of typical names (Ornstein–Weiss's covering proof; a block code with a codebook of typical `k`-blocks) | a source of rate zero | long names are concatenations of few short ones off a sparse set of positions, so there are few of them | **adopted**. The one step that changes: the ergodic proofs count the bad positions by the pointwise ergodic theorem; with no ergodicity and entropy zero the count is by **the maximal inequality for an indicator**, and the good `k`-blocks are chosen by Markov's inequality, with no convergence theorem at all |
+| geometric measure theory: "`μ` has zero dimension" (EF's own gloss on their Lemma 3.1) | upper local dimension along `v*` | — | **a mirror**: "upper local dimension zero almost everywhere" is the problem renamed; a single scale in measure is the *lower* dimension, and the upper one for an invariant measure is a theorem of dynamics again |
+| a single scale and the dynamics of `u*` (shells of the `v*`-distance to a leaf, wandering under `u*`, on a tube about finitely many leaves) | — | Step 7's argument, moved to `v*` | **killed**: `u*` contracts at `σv*`, so `u*` carries a shell *into* the next and the shells' masses are only monotone; Haar measure gives every tube positive mass and every leaf none; and one element alone has zero-entropy invariant measures off the leaves. The chain of scales is not removable this way |
+
+**What the adopted home predicts, checkable.** (a) Markov's step is special to entropy zero: at entropy `h > 0` it gives only
+`μ{I_k > (h + γ)k} ≤ h/(h + γ)`, not small — so the argument should not extend to the upper half of the theorem at `h > 0` without an
+ergodic theorem, and it does not. (b) With the release's `measureEntropy_eq_zero_of_good_names` (few names on most of the mass give
+entropy zero) the lemma is a characterisation: entropy zero for `P` iff eventually-few names on a set of measure near one.
+
+### 2.2 EN2-DECOMP — the stall, the stranger, the features, the homes
+
+**The stall, read.** *A known theorem that almost applies*: existence is held, uniqueness is not. The first question is which
+consequence of uniqueness each citing step consumes (§ 1.4's table: "a property of the pieces", three times).
+
+**For a stranger** (a measure theorist). *A compact metrizable abelian group `X` with Haar probability `m`; a countable group `U` of
+continuous automorphisms of `X`, for which `m` is ergodic; a `U`-invariant Borel probability `ν`. For each subgroup `Γ ≤ U` of a
+certain family, it is known that every `Γ`-invariant, `Γ`-ergodic Borel probability on `X` is `m` or has entropy zero under each
+`γ ∈ Γ`. Show `ν = a·m + τ′` with `a ≥ 0` and `τ′` a `U`-invariant measure of entropy zero under each `γ` of each `Γ` of the family —
+one `a` and one `τ′` for all `Γ`.* **This is the Lebesgue decomposition of `ν` with respect to `m`**: `a·m` is the absolutely
+continuous part (an invariant measure absolutely continuous to an ergodic one is a multiple of it), `τ′` the singular part. It is
+canonical, so it is invariant under everything that preserves `ν` and `m`, and it names no `Γ`. In the costume's words: in the simplex
+of invariant measures the face of an ergodic `m` is `{m}`, and the split of `ν` along that face and its complement is the Lebesgue
+decomposition.
+
+**The features, sorted.**
+
+| feature | sort | receipt |
+|---|---|---|
+| the representing measure `P` on the set of `Γ`-ergodic measures | **accompanies**: consumed only through `P({m})` and "the rest is off `m`" | § 4.2 never forms `P` |
+| uniqueness of `P` | **splits**. Consumed (l. 209): *an ergodic `m` is not a mixture of ergodic measures other than `m`*. Not consumed (l. 205): the invariance of `P` under `u_*` | § 4.1 (l. 205 is read by no later step); § 4.2 step 4 (the components of the singular part charge an `m`-null set fully) |
+| "`U` permutes the components" | **accompanies** | § 4.1; § 4.2 does not use it; it is true, by a computation (§ 4.4) |
+| `U` abelian | **accompanies** PE-2's step from `Γ` to `U` (it is consumed by step 1 alone; Lemma W and the pieces read it elsewhere) | § 4.2 uses only `Γ ⊆ U` and that each `u` preserves `m` |
+| `m` is ergodic for the acting group | **determines**: it makes the absolutely continuous part a multiple of `m` | without it: the mean of the Haar measures of two cosets of a subgroup of index two (FS100-PE1's second counterexample) is invariant, absolutely continuous to `m`, and no multiple of it |
+| the `Γ`-ergodic decomposition exists | **determines**: Lemma Γ speaks of `Γ`-ergodic measures only | — |
+| the `U`-ergodic decomposition (step 5) | **accompanies**: consumed only to assemble `τ′` | § 4.2 forms `τ′` as the singular part |
+| a mixture of entropy-zero invariant measures has entropy zero | **determines** | the release's `measureEntropy_kernel_zero` |
+| compactness; homeomorphisms | **accompany** the step (a standard Borel space and Borel automorphisms suffice for it) | the release's statement asks only `StandardBorelSpace` |
+
+**The homes.**
+
+| home | name there | theorem | verdict |
+|---|---|---|---|
+| Choquet theory (the costume's) | the simplex of invariant measures | a unique representing measure on the extreme points | applies; reads uniqueness |
+| the canonical disintegration, with equivariance computed (the asker's) | the conditional measures on the invariant σ-algebra | `u_*κ(x) = κ(ux)` almost everywhere, because `u` preserves `ν` and the invariant σ-algebra | applies (§ 4.4) — but the cases survive the translation: the case `a_Γ ∈ {0, 1}`, the reduction to `U`-ergodic `ν` and the second decomposition all stay, and l. 209's uniqueness still needs a replacement |
+| measure theory: the Lebesgue decomposition with respect to `m` | absolutely continuous and singular parts | existence and uniqueness (Mathlib) | **adopted**. Dictionary: `a_Γ·m` ↔ `ν_ac`; `(1 − a_Γ)ν′_Γ` ↔ `ν_s`; `P({m})` ↔ `ν_ac(X)`; "`P` off `m` is carried by `Z_Γ`" ↔ "the `Γ`-components of `ν_s` are almost surely not `m`"; `(u_*)_♯P = P` ↔ `u_*ν_s = ν_s`; "`a` does not depend on `Γ`" ↔ the decomposition names no `Γ`. The cases vanish: no `U`-ergodic case, no step 5. The one step proved anew: the components of `ν_s` are not `m` (one line, by singularity) |
+
+**What the adopted home predicts, checkable.** (a) `a = ν_ac(X) = max{c : c·m ≤ ν}`. (b) PE-2's `τ′` may be taken **singular to `m`**
+— more than FS100-PE2 states. (c) For a `U`-ergodic `ν`: `ν = m` or `ν ⟂ m` — the classical fact that distinct ergodic measures are
+mutually singular, which is the ergodic form's first half. Each is derived in § 4.2–4.3.
