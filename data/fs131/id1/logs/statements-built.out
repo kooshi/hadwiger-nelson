@@ -1,0 +1,4 @@
+compared: 11 named constants of the skeleton against the built module (127 constants stored); kind, Lean's hash, and text after the rewrite of this file's module name in binder names (1 statement(s) carry one)
+named public constants in the built module that the skeleton does not hold: 0 []
+private declarations in the built module (helpers): 21
+PASS: the built module stores the skeleton's statements

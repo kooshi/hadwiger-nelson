@@ -1,0 +1,7 @@
+[Elab.async] [10.601291] ✅️ elaborating proof of chkA_true
+  [Elab.definition.value] [10.601092] ✅️ chkA_true
+    [Elab.step] [10.600926] ✅️ decide +kernel
+      [Elab.step] [10.600903] ✅️ decide +kernel
+        [Elab.step] [10.600877] ✅️ decide +kernel
+          [addDecl] [10.600110] ✅️ adding declarations [chkA_true._proof_1_1]
+            [Kernel] [10.600063] ✅️ typechecking declarations [chkA_true._proof_1_1]

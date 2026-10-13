@@ -1,0 +1,3 @@
+records: 11 (expected 11); resting on an axiom beyond the standard three: 0; error lines in the print: 0
+names against data/fs131/id1/audit-block.txt: the same list, in order (11 listed)
+PASS: every record is on the standard three

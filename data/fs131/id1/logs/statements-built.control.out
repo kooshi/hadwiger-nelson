@@ -1,0 +1,6 @@
+CONTROL 1: 3 of 3 planted faults reported — the check can fail
+  KIND     HadwigerNelson.DyadicQuadratic.dyadic_shape_two_mod_four: THM -> AXIOM
+  TEXT     THM HadwigerNelson.DyadicQuadratic.colorable_two_planeOver_sqrt: the stored statement's text differs
+  MISSING  THM HadwigerNelson.DyadicQuadratic.exists_rat_add_mul_sqrt_eq: in the skeleton, not in the built module
+CONTROL 2 (a hash moved by one): 1 reported — the hash is read
+CONTROL 3 (the rewrite off): 1 TEXT difference(s), 1 statement(s) with a binder name minted in this file — the rewrite touches those lines and only those
