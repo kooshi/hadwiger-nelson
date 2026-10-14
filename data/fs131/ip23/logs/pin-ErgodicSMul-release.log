@@ -1,0 +1,31 @@
+slot: admitted ip23-rel: mem 5 GiB (hard cap), cpus 0,1
+class ErgodicSMul.{u_1, u_2} (G : Type u_1) (α : Type u_2) [SMul G α] {x✝ : MeasurableSpace α}
+  (μ : MeasureTheory.Measure α) : Prop
+number of parameters: 5
+parents:
+  ErgodicSMul.toSMulInvariantMeasure : MeasureTheory.SMulInvariantMeasure G α μ
+fields:
+  MeasureTheory.SMulInvariantMeasure.measure_preimage_smul : ∀ (c : G) ⦃s : Set α⦄,
+      MeasurableSet s → μ ((fun x => c • x) ⁻¹' s) = μ s
+  ErgodicSMul.aeconst_of_forall_preimage_smul_ae_eq : ∀ {s : Set α},
+      MeasurableSet s →
+        (∀ (g : G), (fun x => g • x) ⁻¹' s =ᵐ[μ] s) → Filter.EventuallyEmptyOrUniv s (MeasureTheory.ae μ)
+constructor:
+  ErgodicSMul.mk.{u_1, u_2} {G : Type u_1} {α : Type u_2} [SMul G α] {x✝ : MeasurableSpace α}
+    {μ : MeasureTheory.Measure α} [toSMulInvariantMeasure : MeasureTheory.SMulInvariantMeasure G α μ]
+    (aeconst_of_forall_preimage_smul_ae_eq :
+      ∀ {s : Set α},
+        MeasurableSet s →
+          (∀ (g : G), (fun x => g • x) ⁻¹' s =ᵐ[μ] s) → Filter.EventuallyEmptyOrUniv s (MeasureTheory.ae μ)) :
+    ErgodicSMul G α μ
+field notation resolution order:
+  ErgodicSMul, MeasureTheory.SMulInvariantMeasure
+theorem ErgodicSMul.aeconst_of_forall_preimage_smul_ae_eq.{u_1, u_2} : ∀ {G : Type u_1} {α : Type u_2} {inst : SMul G α}
+  {x : MeasurableSpace α} {μ : MeasureTheory.Measure α} [self : ErgodicSMul G α μ] {s : Set α},
+  MeasurableSet s → (∀ (g : G), (fun x => g • x) ⁻¹' s =ᵐ[μ] s) → Filter.EventuallyEmptyOrUniv s (MeasureTheory.ae μ) :=
+fun G α {inst} x μ [self : ErgodicSMul G α μ] => self.2
+def Filter.EventuallyEmptyOrUniv.{u_1} : {α : Type u_1} → Set α → Filter α → Prop :=
+fun {α} s l => Filter.EventuallyConst (fun x => x ∈ s) l
+@Filter.eventuallyEmptyOrUniv_iff : ∀ {α : Type u_1} {l : Filter α} {s : Set α},
+  Filter.EventuallyEmptyOrUniv s l ↔ (∀ᶠ (x : α) in l, x ∈ s) ∨ ∀ᶠ (x : α) in l, x ∉ s
+@Function.diag : {α : Type u_1} → α → α × α

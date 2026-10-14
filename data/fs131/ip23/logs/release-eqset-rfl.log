@@ -1,0 +1,12 @@
+slot: admitted ip23-rel: mem 5 GiB (hard cap), cpus 4,5
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wq1/build/fs131-ip23/pin/ReleaseEqSetRfl.lean:10:0: error: Not a definitional equality: the left-hand side
+  s =ᶠ[l] t
+is not definitionally equal to the right-hand side
+  t =ᶠ[l] s
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wq1/build/fs131-ip23/pin/ReleaseEqSetRfl.lean:11:64: error: Type mismatch
+  rfl
+has type
+  ?m.6 = ?m.6
+but is expected to have type
+  (s =ᶠ[l] t) = (t =ᶠ[l] s)
+'fs131ip23_eventuallyEqSet_rfl' does not depend on any axioms
