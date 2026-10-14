@@ -14,3 +14,8 @@ MEASURE axioms-selftest-probe mem-cap=8G cpus=4 exit=0 wall=200.4s peak=1.24 GiB
 MEASURE assumptions-edited mem-cap=8G cpus=4 exit=1 wall=119.2s peak=0.66 GiB max-rss=4.57 GiB :: ./scripts/assumptions.sh
 MEASURE assumptions-write-ledger mem-cap=8G cpus=4 exit=0 wall=112.0s peak=0.66 GiB max-rss=4.57 GiB :: ./scripts/assumptions.sh --write-ledger
 MEASURE assumptions-second mem-cap=8G cpus=4 exit=0 wall=110.6s peak=0.67 GiB max-rss=4.57 GiB :: ./scripts/assumptions.sh
+MEASURE vacuity-probe mem-cap=8G cpus=4 exit=0 wall=124.1s peak=0.59 GiB max-rss=4.51 GiB :: ./scripts/vacuity.sh
+MEASURE count-modules-probe mem-cap=8G cpus=2 exit=0 wall=74.3s peak=0.55 GiB max-rss=4.46 GiB :: lake env lean data/fs131/l5/count-modules.lean
+MEASURE vacuity-selftest-probe mem-cap=8G cpus=4 exit=0 wall=123.8s peak=0.61 GiB max-rss=4.52 GiB :: ./scripts/vacuity.sh --self-test
+MEASURE checks-probe2 mem-cap=8G cpus=2 exit=0 wall=3.4s peak=0.56 GiB max-rss=4.32 GiB :: lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false data/fs131/lj1/checks.lean
+MEASURE syntax-torsion mem-cap=6G cpus=2 exit=0 wall=11.2s peak=0.63 GiB max-rss=3.51 GiB :: lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false Proofs/HadwigerNelson/Arith/TorsionExtraction.lean

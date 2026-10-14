@@ -142,6 +142,20 @@ theorem localBound_sqrt_three : localBound (fieldOfRadicands {3}) = 3 := by
   rw [← ThreeFourColours.chromaticNumber_planeOver_eq_localBound_of_le_four _ (hle.trans (by norm_num))]
   exact ThreeFourColours.chromaticNumber_planeOver_sqrt_three
 
+/-- `L(ℚ(√11)) = 4 = χ(ℚ(√11)²)`: row 99's forms at a field with `L = 4`, the boundary of `localBound F ≤ 4` — the
+stable prime above 2 with four elements (`exists_stablePrime_card_four_sqrt`) has a target on four vertices. -/
+theorem localBound_sqrt_eleven : localBound (fieldOfRadicands {11}) = 4 := by
+  obtain ⟨P, -, h4⟩ := ThreeFourColours.exists_stablePrime_card_four_sqrt (m := 11) (by norm_num)
+  have hfin : Finite (𝓞 (fieldI (fieldOfRadicands {11})) ⧸ P.P ^ 1) :=
+    Nat.finite_of_card_ne_zero (by rw [h4]; norm_num)
+  letI := Fintype.ofFinite (𝓞 (fieldI (fieldOfRadicands {11})) ⧸ P.P ^ 1)
+  have hcol : (levelTarget P 1).Colorable 4 := by
+    have h := (levelTarget P 1).colorable_of_fintype
+    rwa [Fintype.card_eq_nat_card, h4] at h
+  have hle : localBound (fieldOfRadicands {11}) ≤ 4 := (iInf_le _ P).trans hcol.chromaticNumber_le
+  rw [← ThreeFourColours.chromaticNumber_planeOver_eq_localBound_of_le_four _ hle]
+  exact ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four_of_dyadic (m := 11) (by norm_num)
+
 /-- Clause (b), the side where the prime exists: `ℚ(√3)` — not bipartite, three-chromatic, and a prime with
 residue field `𝔽₃`. -/
 theorem clause_b_true_side :
@@ -200,6 +214,7 @@ end FS131LJ1
 #print axioms FS131LJ1.localBound_rat_eq_two
 #print axioms FS131LJ1.stablePrime_nine_sqrt_three
 #print axioms FS131LJ1.localBound_sqrt_three
+#print axioms FS131LJ1.localBound_sqrt_eleven
 #print axioms FS131LJ1.clause_b_true_side
 #print axioms FS131LJ1.clause_b_false_side
 #print axioms FS131LJ1.clause_c_model

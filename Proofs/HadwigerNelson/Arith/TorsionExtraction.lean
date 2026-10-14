@@ -38,7 +38,7 @@ derivations]`; not found in print. The route through `layer_step` (no computed c
 **Inhabitants.** `F = ℚ(√11)`: `√11 ∈ F`, `1/3 = 2 − v − v̄` with `v = (5 + i√11)/6`, and the plane is not two-colourable;
 every hypothesis of the headlines holds there (`four_le_chromaticNumber_planeOver_fieldOfRadicands` at `d = 11`, the value
 row 73 holds by a 204-point witness). `Θ₃(R_F) ≠ ∅` is inhabited at `F = ℚ(√3)` (`[Fischer1990]` Thm 9), which no
-declaration here exhibits; `Θ₂` at `F = ℚ` by `colorable_two_iff_fieldBandSet_two_nonempty` and Woodall's two-colouring.
+declaration here exhibits — the joining module does (`ThreeFourColours.fieldBandSet_three_nonempty_sqrt_three`); `Θ₂` at `F = ℚ` by `colorable_two_iff_fieldBandSet_two_nonempty` and Woodall's two-colouring.
 -/
 
 namespace HadwigerNelson.TorsionExtraction

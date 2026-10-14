@@ -321,3 +321,67 @@ the nine that remain" of the chain's headline now "the nine that remained then �
 |---|---|---|---|
 | `./scripts/assumptions.sh` | 109–119 s | 0.66–0.67 GiB | 4.57 GiB |
 | `./scripts/assumptions.sh --self-test` (33 checks) | 128 s | 0.68 GiB | 4.58 GiB |
+
+## Stage 5 — SAVED (FS131-LJ1): the vacuity step — the scan adds no site, so every model is named by hand
+
+`./scripts/vacuity.sh` on the built tree (`data/fs131/lj1/probes/vacuity-probe.log`; full output
+`probes/receipt-vacuity-probe.log`): **exit 0, "vacuity: OK"**. Its self-test (`probes/vacuity-selftest-probe.log`):
+"OK — all 65 controls behaved: every one fired, and the silent ones stayed silent." (The same scan on the merged tree
+before the docstring build, `probes/vacuity-given.log`, gave the same counts.)
+
+| | `main` (FS131-LU1's gated scan) | this tree |
+|---|---|---|
+| declarations | 16029 | **16125** (+96: the six modules' constants that are not internal, 11 + 20 + 17 + 13 + 31 + 4) |
+| refutations-skipped | 228 | 228 |
+| sites | 1454 | 1454 |
+| vacuous / stale / declared / witnessed / generic / unknown | 0 / 0 / 3 / 38 / 1411 / 2 | 0 / 0 / 3 / 38 / 1411 / 2 |
+
+**How the scan classes every new site: there is none.** Row for row against the last landing's gated scan
+(`tools/fs131_l5_vacdiff.py`, `probes/vacdiff-probe.txt`): "main rows 1535, landing rows 1535; lost 0 …; added 0"; the six
+modules "declarations 0 -> 11 … 4 [new module]", "by module: declarations +96, refutations +0: equal to the scans
+difference"; "vacdiff: PASS". No declaration of the line is skipped as a refutation (`¬ Colorable 2`, `≠ 3`, `∉` are not
+`False` as stated); nothing reads `VACUOUS`, `STALE` or `UNKNOWN`; the baseline's two entries are as on `main`. **The scan
+reads none of the line's binders**: its colourability hypotheses are propositions the scan does not track (`Colorable k`,
+`¬ Colorable 2`), and the structures its theorems range over — a stable prime, a maximal ideal of `ℤ[U_F]`, a finite ring
+with an involution, a character in a band set — are not its carriers. **Silence is not evidence**, so each model is named
+below.
+
+**The baseline header's count line refiled from this scan** (`scripts/gate_report.py header` on the scan's output, into
+`scripts/vacuity-baseline.txt`; no entry touched): `declarations=16029` → `declarations=16125`.
+
+**The model of each hypothesis of the headlines, by hand**, and whether the kernel holds it — "library" is a theorem or
+an `example` of a module, checked in the build; "term" a theorem of `data/fs131/lj1/checks.lean`, kernel-checked when the
+pass elaborates it, not a library theorem (`probes/checks-probe2.log`, no error, no warning; axioms per term below). The
+joining job's four models in the joining module (its D3) are the first rows.
+
+| statement | its hypotheses | the model | held |
+|---|---|---|---|
+| **clause (a)**, `chromaticNumber_planeOver_sqrt_table` and its rows | `Squarefree m`, and each conjunct's class of `m` | every class met: 2 colours at `√2`, 3 at `√7`, 4 at `√11` (the dyadic prime) and at `√23` (a prime above 7), `≥ 4` at `√47` and `√167` (the excluded classes 47, 167 mod 168) — the module's spec `example`s; the value 4 at 71, 95, 191 (row 73's radicands the record held by hand) and the three-chromatic `ℚ(√3)` | library (`example`s, `chromaticNumber_planeOver_sqrt_three`); 71/95/191 a term (`table_at_71_95_191`, standard three) |
+| **clause (b)**, `chromaticNumber_planeOver_eq_three_iff` | a real number field; `hnb : ¬ Colorable 2` | **both sides of the iff occur under `hnb`**: at `ℚ(√3)` the plane is not bipartite, `χ = 3`, and a prime with residue field `𝔽₃` exists; at `ℚ(√11)` the plane is not bipartite and no prime with residue field `𝔽₃` exists (3 is inert) | the pieces library (`TorsionExtraction.not_colorable_two_of_sqrt_mem`, `chromaticNumber_planeOver_sqrt_three`, `…_eq_four_of_dyadic`); the two joint forms terms (`clause_b_true_side`, `clause_b_false_side`, on Weil's bound as the clause is) |
+| `colorable_three_planeOver_iff` | a real number field | both disjuncts occur: two-colourable at `ℚ(√2)`, a prime of three elements at `ℚ(√3)`; neither at `ℚ(√11)` | as above |
+| **clause (c)**, `four_le_chromaticNumber_planeOver_of_inv_three_mem`, `chromaticNumber_planeOver_ne_three_of_inv_three_mem` | `(3 : ℂ)⁻¹ ∈ unitRing F`; `¬ Colorable 2` | **`ℚ(√11)`, both at once** (`1/3 = 2 − v − v̄`, `v = (5 + i√11)/6`); `h3` is a real condition: it fails at `ℚ(√3)` | library: `four_le_chromaticNumber_planeOver_of_sqrt_mem` is that composition; the joint form and the failure terms (`clause_c_model`, `inv_three_notMem_sqrt_three`, standard three) |
+| **row 99**, `localBound_le_chromaticNumber_of_le_four`, `chromaticNumber_planeOver_eq_localBound_of_le_four` | a real number field; `localBound F ≤ 4` | **no library theorem bounds a `localBound` above at a named field** (the joining job: "proved for no field in the library"). This job's terms: `L(ℚ) ≤ 2` and `= 2`; `L(ℚ(√3)) = 3`; **`L(ℚ(√11)) = 4`**, the hypothesis's boundary (the stable prime above 2 with four elements, `exists_stablePrime_card_four_sqrt`, has a target on four vertices) — each `= χ` there | terms (`localBound_rat_le_two` standard three; `localBound_rat_eq_two`, `localBound_sqrt_three`, `localBound_sqrt_eleven` on Weil's bound, through the row's theorem) |
+| `chromaticNumber_planeOver_le_three_iff`, `localBound_le_chromaticNumber_or_four_le` | a real number field | no hypothesis to model; both sides of the iff occur (`ℚ(√3)`: `χ = L = 3`; `ℚ(√11)`: `χ = L = 4`) | terms, as above |
+| `UpperHalf.chromaticNumber_planeOver_eq_two_of_localBound_le_two` | `localBound F ≤ 2` | `ℚ` | term (`localBound_rat_le_two`) |
+| J1 `exists_stablePrime_of_maximal` | `𝔪` maximal, `𝔪 ≠ ⊥` | the ideals below (each holds 2 or 3) | through J3's and J4's proofs at the two library models; not stated |
+| J2 `exists_unitSet_residue_eq` | a stable prime, `ℤ[U_F] ⊆ 𝓞_P`, a residue of norm one | `t = 1` at any stable prime with J1's `hle` | inside J3's and J4's proofs; not stated |
+| J4 `exists_stablePrime_conj_trivial`; `exists_stablePrime_ramified_sqrt` | a maximal ideal with trivial conjugation | at `ℚ(√2)` | library (`exists_maximal_conj_trivial_sqrt_two`) |
+| J3, `exists_stablePrime_card_nine` | a maximal ideal of `ℤ[U_F]` with nine elements in its quotient | at `ℚ(√3)` | library (`exists_maximal_card_nine_sqrt_three`, Weil) |
+| `levelTarget_colorable_three_of_card_nine`, `exists_maximal_card_three_of_stablePrime_card_nine` | a stable prime with nine elements in its quotient | at `ℚ(√3)`: `exists_stablePrime_card_nine` applied to the row above | term (`stablePrime_nine_sqrt_three`, Weil); the docstring now names the composition (stage 2) |
+| `levelTarget_colorable_two_of_ramified` | a stable prime with trivial conjugation | `(1 + i)` at `ℚ` | library (`UpperHalf.exists_stablePrime_rat`); used by `localBound_rat_le_two` |
+| `exists_stablePrime_card_four_sqrt`, `DyadicQuadratic.colorable_four_planeOver_sqrt` | `m ≡ 3 (mod 8)` | `m = 3, 11` | library (the dyadic module's spec; the table's `example` at 11); `localBound_sqrt_eleven` |
+| `ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable`; `TorsionExtraction.exists_torsion_mem_fieldBandSet`, `tendsto_layer` | a three-colourable plane; `Θ₃(R_F) ≠ ∅` | `ℚ(√3)` | library (`fieldBandSet_three_nonempty_sqrt_three`) |
+| `bandSet_three_nonempty_of_proper`, `exists_character_of_properAlong` | a colouring proper along a step set | `ℤ` along `(1, 2)`; the 5-cycle on `ℤ/5` | library (`exists_character_one_two`, `bandSet_three_nonempty_zmod_five`) |
+| `ThreeColourCriterion.exists_maximal_card_nine`, `exists_normOne_zero_of_card_ne_nine` | a finite ring of characteristic 3 with an involution, `ι² = −1`, a functional never 0 on norm-one elements; a field of `≠ 9` elements with such `ι` | `𝔽₉ = 𝔽₃[i]` and the field of `27²` elements, named in the module docstring | **not held** (the joining job's stage 3, and item 698's ruling: a sentence); the first's content is met inside `exists_maximal_card_nine_sqrt_three`'s proof |
+| `UpperHalf.two_notMem_stablePrime_seven` | a stable prime of `K(√7)` | one exists by Chebotarev | **not held**: the kernel holds no stable prime of this field, and the docstring says so |
+| `UpperHalf.chromaticNumber_planeOver_sqrt_five_le_five`, `…_sqrt_247_le_five` | none | — | — |
+
+**No hypothesis of a headline that is a condition is without a kernel model but three**: the two finite-field
+hypotheses of `ThreeColourCriterion` (ruled a sentence, item 698) and the stable prime of `K(√7)` (the module says so);
+six models are held as terms only (open gate item 3). **No older statement is emptied or made vacuous by this landing**:
+it brings no axiom and no carrier. **One older hypothesis is made provable**: `hRow99` (stage 4).
+
+| step, this machine | wall | peak (charged) | max-rss |
+|---|---|---|---|
+| `./scripts/vacuity.sh` | 121–125 s | 0.60 GiB | 4.52 GiB |
+| `./scripts/vacuity.sh --self-test` (65 controls) | about 130 s | 0.60 GiB | 4.5 GiB |
