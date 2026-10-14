@@ -219,6 +219,14 @@ import Proofs.HadwigerNelson.Rigidity.ContinuityGroup
 import Proofs.HadwigerNelson.Rigidity.BochnerTau
 import Proofs.HadwigerNelson.Rigidity.ClassRatio
 import Proofs.HadwigerNelson.Plane.OneAvoidingDensity
+import Proofs.HadwigerNelson.Plane.WindowDensity
+import Proofs.HadwigerNelson.Rigidity.FiniteZhang
+import Proofs.HadwigerNelson.Rigidity.PlaneZhang
+import Proofs.HadwigerNelson.Rigidity.CountTorus
+import Proofs.HadwigerNelson.Rigidity.CountResidue
+import Proofs.HadwigerNelson.Rigidity.CountCompletion
+import Proofs.HadwigerNelson.Rigidity.CountExtension
+import Proofs.HadwigerNelson.Rigidity.CountDescent
 import Proofs.HadwigerNelson.Rigidity.SubgroupHaar
 import Proofs.HadwigerNelson.Rigidity.Duality
 import Proofs.HadwigerNelson.Rigidity.DualConnected

@@ -1,0 +1,49 @@
+slot: waiting (ledger 20 + 5 > budget 22 GiB)
+slot: waiting (ledger 18 + 5 > budget 22 GiB)
+slot: admitted k12a: mem 5 GiB (hard cap), cpus 0,1
+data/fs131/k12a/probes/Inst.lean:5:0: error: failed to synthesize
+  TopologicalSpace (𝓞 ↥(fieldI F) ⧸ P.P ^ k)
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+data/fs131/k12a/probes/Inst.lean:6:45: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ k)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+@Ideal.finiteQuotientOfFreeOfNeBot : ∀ {S : Type u_1} [inst : CommRing S] [IsDomain S] [Module.Free ℤ S]
+  [Module.Finite ℤ S] (I : Ideal S), I ≠ ⊥ → Finite (S ⧸ I)
+@RingHom.pi : {I : Type u_1} →
+  {f : I → Type u_2} →
+    {γ : Type u_3} →
+      [inst : (i : I) → NonAssocSemiring (f i)] →
+        [inst_1 : NonAssocSemiring γ] → ((i : I) → γ →+* f i) → γ →+* (i : I) → f i
+Complex.reLm : ℂ →ₗ[ℝ] ℝ
+@LinearMap.smulRight : {R : Type u_1} →
+  {S : Type u_2} →
+    {M : Type u_3} →
+      {M₁ : Type u_4} →
+        [inst : Semiring R] →
+          [inst_1 : AddCommMonoid M] →
+            [inst_2 : AddCommMonoid M₁] →
+              [inst_3 : Module R M] →
+                [inst_4 : Module R M₁] →
+                  [inst_5 : Semiring S] →
+                    [inst_6 : Module R S] →
+                      [inst_7 : Module S M] → [IsScalarTower R S M] → (M₁ →ₗ[R] S) → M → M₁ →ₗ[R] M
+@AddSubgroup.topologicalClosure : {G : Type u_1} →
+  [inst : TopologicalSpace G] → [inst_1 : AddGroup G] → [IsTopologicalAddGroup G] → AddSubgroup G → AddSubgroup G
+@Ideal.absNorm_ne_zero_of_nonZeroDivisors : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S]
+  [inst_2 : Module.Free ℤ S] [Module.Finite ℤ S] (I : ↥(nonZeroDivisors (Ideal S))), Ideal.absNorm ↑I ≠ 0
+@countable_unitRing : ∀ {F : Subfield ℝ} [Countable ↥F], Countable ↥(unitRing F)
+Monoid.ExponentExists : (G : Type u_1) → [Monoid G] → Prop
+@pow_card_eq_one : ∀ {G : Type u_1} [inst : Group G] [inst_1 : Fintype G] {x : G}, x ^ Fintype.card G = 1
+@Finite.compactSpace : ∀ {X : Type u_1} [inst : TopologicalSpace X] [Finite X], CompactSpace X
+data/fs131/k12a/probes/Inst.lean:17:8: error(lean.unknownIdentifier): Unknown identifier `Measure.addHaarMeasure_self`
+NumberField.mixedEmbedding.mixedSpace.{u_1} (K : Type u_1) [Field K] : Type u_1
+@Ideal.quotientMap : {R : Type u_1} →
+  [inst : Ring R] →
+    {S : Type u_2} →
+      [inst_1 : Ring S] →
+        {I : Ideal R} →
+          (J : Ideal S) →
+            [inst_2 : I.IsTwoSided] → [inst_3 : J.IsTwoSided] → (f : R →+* S) → I ≤ Ideal.comap f J → R ⧸ I →+* S ⧸ J
+@SpectralInputs.contChars : {R : Type u_1} → [inst : AddCommGroup R] → TopologicalSpace R → Set (AddChar R Circle)

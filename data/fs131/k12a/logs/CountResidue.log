@@ -1,0 +1,13 @@
+slot: admitted k12a: mem 5 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/CountResidue.lean:49:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountResidue.lean:63:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountResidue.lean:67:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountResidue.lean:73:9: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountResidue.lean:76:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountResidue.lean:81:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountResidue.lean:87:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountResidue.lean:94:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountResidue.lean:99:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountResidue.lean:119:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountResidue.lean:138:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountResidue.lean:143:8: warning: declaration uses `sorry`

@@ -1,0 +1,9 @@
+slot: waiting (ledger 18 + 5 > budget 22 GiB)
+slot: admitted k12a: mem 5 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/CountTorus.lean:45:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountTorus.lean:56:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountTorus.lean:63:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountTorus.lean:67:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountTorus.lean:72:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountTorus.lean:77:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountTorus.lean:80:8: warning: declaration uses `sorry`
