@@ -1,8 +1,13 @@
 
 ## Stage 4 — SAVED: lane T typed to its leaves (form G), a plan per leaf
 
-Four new modules, with `Rigidity/TateExists` now the assembly. Each statement below is as the kernel prints it
-(`logs/KernelSigs4.log`); every name a route cites is checked at the pin (`probes/Names.lean`, `logs/Names-s4b.log`).
+Four new modules (`Rigidity/TateLocal`, `TateArch`, `TateCharacter`, `TateKernel`), with `Rigidity/TateExists` now the
+assembly; their lines in `Proofs.lean` and `ARCHITECTURE.md` § 3. **Elaborated** in dependency order inside one slot
+(`data/fs131/kt1/seq.sh s4a`): every module exit 0, warnings only `sorry` — 4, 6, 3, 13, 8 leaves — and `TateExists` none of
+its own (`logs/*-s4a.log`); `#print axioms exists_tateModel` reads the standard three and `sorryAx`. Each statement below is as the kernel prints it
+(`probes/KernelSigs4.lean`, `logs/KernelSigs4.log`); every name a route cites is checked at the pin (`probes/Names.lean`,
+`logs/Names-s4b.log`: 56 names, exit 0 — the first run found five spelled wrong, `Module.Basis.constr_basis`,
+`continuous_of_continuousAt_one` (root), `IsAlgebraic.exists_integral_multiple`, and two outside the probe's imports).
 
 ```
 TateLocal (K any number field)   TateArch (K any number field)
@@ -55,16 +60,16 @@ For `a ∈ oAnn F` (`ψ(a s) = 1` for every `s ∈ O′`):
 | | `exists_trace_not_int_away` | a uniformizer `π` at `v` (`valuation_exists_uniformizer`); `t` from `exists_valuation_le_one_away` at `s := π^{−N}` has `v(t) = v(π)^{−N}`; if every such `t` had integral trace, `d₀ t` would be integral at `v` (`exists_nat_mul_integral_of_trace_int` applied to `t`: `t·s` is again integral off `v` for `s ∈ 𝓞`), false for `N > v(d₀)` | 45 | the valuation bookkeeping in `ℤᵐ⁰` |
 | | `exists_nat_mul_integral_of_trace_int` | the dual basis of the integral basis for the trace form (`traceForm_nondegenerate`, `LinearMap.BilinForm.dualBasis`, `dualBasis_repr_apply`): `y = Σ Tr(y eᵢ) eᵢ^∨`; `d₀` clears the denominators of the `eᵢ^∨` (`IsLocalization.exist_integer_multiples_of_finset`); integral at every prime by `valuation_of_algebraMap` | 50 | — |
 | | `compactSpace_adicCompletionIntegers` | `Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField`: complete (`IsClosed.completeSpace_coe`, the integers closed), DVR (Mathlib's instance, FinitePlace.lean l. 76), finite residue field — the map `𝓞 ⧸ v → 𝓀` is onto (density of `K`, then `exists_valuation_sub_lt_of_integer`), and `𝓞 ⧸ v` is finite (`Ideal.finiteQuotientOfFreeOfNeBot` or the number-field instance) | 80 | **the residue field**: no Mathlib statement; the hardest leaf of the module |
-| `TateArch` | `archTrace_mixedEmbedding` | both sides `ℚ`-linear in `x`; agree on the integral basis (`latticeBasis_apply`, `Basis.constr_basis`); `x` in the `ℚ`-span (`integralBasis` is a `ℚ`-basis) | 25 | — |
+| `TateArch` | `archTrace_mixedEmbedding` | both sides `ℚ`-linear in `x`; agree on the integral basis (`latticeBasis_apply`, `Module.Basis.constr_basis`); `x` in the `ℚ`-span (`integralBasis` is a `ℚ`-basis) | 25 | — |
 | | `exists_eq_mixedEmbedding_of_archTrace_int` | coordinates of `b` in `latticeBasis` (`Basis.repr`); the Gram matrix `Tr(eᵢ eⱼ)` (`Algebra.traceMatrix`), invertible over `ℚ` (`Algebra.discr_def`, `NumberField.discr_ne_zero`); `c·G ∈ ℤⁿ` gives `c ∈ ℚⁿ`, so `b = ι_∞(Σ cᵢ eᵢ)` (`mem_rat_span_latticeBasis`) | 70 | **the matrix step**: a solve over `ℚ` read back in `ℝ` |
 | | `archTrace_mixedEmbedding_one` | `archTrace_mixedEmbedding`, `Algebra.trace_algebraMap` | 5 | — |
 | `TateCharacter` | `mem_stableIntegers_iff_valuation` | `mem_stableIntegers`, `UpperHalf`'s `StablePrime.heightOne`, `valuationSubringAtPrime_eq_valuationSubring`; a stable `HeightOneSpectrum` gives a `StablePrime` (`HeightOneSpectrum.isMaximal`) | 30 | the two-way bijection of stable primes |
 | | `exists_isApprox` | the finite set `{w : a.2 w ∉ O_w}` (`RestrictedProduct`'s `eventually` in `cofinite`); a `Finset.sum` of `exists_approx_completion`'s `t_w`; at each split `w` the other summands are integral (ultrametric `Valuation.map_sum_le`); in `O′` by `mem_stableIntegers_iff_valuation` (each `t_w` integral off `w`, `w` split) | 55 | the restricted-product bookkeeping |
 | | `exists_int_trace_sub_of_isApprox` | `t − t′` integral at split primes (difference of the two congruences) and at stable ones (`O′`); `exists_int_trace_of_integral`; the split/stable dichotomy is `IsStablePlace`'s excluded middle | 20 | — |
-| | `tateCharFun_eq` | `exists_int_trace_sub_of_isApprox` for `t` and the chosen approximant; `Circle.exp` is `2π`-periodic (`Circle.exp_int_mul_two_pi` or `_two_pi_mul_int`, whichever the probe finds) | 15 | — |
+| | `tateCharFun_eq` | `exists_int_trace_sub_of_isApprox` for `t` and the chosen approximant; `Circle.exp` is `2π`-periodic (`Circle.exp_two_pi_mul_int`; both spellings exist) | 15 | — |
 | | `tateCharFun_zero`, `tateCharFun_add` | the approximants `0` and `t_a + t_b`; `map_add` of `archTrace`, `Algebra.trace` | 20 | — |
 | | `tateChar_of_integral`, `tateChar_toSAdele_of_mem` | `tateCharFun_eq` at `0` and at `x`; `archTrace_mixedEmbedding` | 15 | — |
-| | `continuous_tateChar` | on the open subgroup `U₀ = L_∞ × ∏ O_w` (`RestrictedProduct.isOpen_forall_mem`) it is `e ∘ 2π Tr_∞ ∘ fst`; a homomorphism continuous at `1` is continuous (`MonoidHom.continuous_of_continuousAt_one` on `AddChar.toMonoidHom`) | 30 | — |
+| | `continuous_tateChar` | on the open subgroup `U₀ = L_∞ × ∏ O_w` (`RestrictedProduct.isOpen_forall_mem`) it is `e ∘ 2π Tr_∞ ∘ fst`; a homomorphism continuous at `1` is continuous (`continuous_of_continuousAt_one` on `AddChar.toMonoidHom`) | 30 | — |
 | | `continuous_tatePi` | `isClosedEmbedding_coe` (the pointwise topology of `R̂`), `continuous_pi_iff`, `continuous_tateChar.comp (continuous_mul_right _)` | 20 | — |
 | | `tatePi_unit_mul` | `AddChar.ext`; `ofUnitRing (uvRing u * r) = unitL u * ofUnitRing r` by `Subtype.ext`; `mul_comm`, `mul_assoc` | 15 | — |
 | | `tatePi_toSAdele_of_mem` | `UnitRing.coe_mem_unitRingOver_iff`, `unitRing_le_stableIntegers`, `Subring.mul_mem`, `tateChar_toSAdele_of_mem` | 15 | — |
@@ -75,10 +80,10 @@ For `a ∈ oAnn F` (`ψ(a s) = 1` for every `s ∈ O′`):
 | | `tatePi_ker_subset`, `tatePi_exists_nat_mul_mem` | `exists_mul_stableIntegers_le` (lane M9-R's statement), `exists_nat_forall_mem_oAnn`; `a = ι(c⁻¹)·(ι c · a)` | 45 | — |
 | | `tatePi_exists_isCompact` | `K := closure (ι_∞-fundamental domain) ×ˢ (structure map image of `∏ O_w`)`; `ZSpan.fundamentalDomain_isBounded`, `Metric.isCompact_of_isClosed_isBounded` (`ProperSpace` of the finite-dimensional mixed space); `isCompact_univ_pi` with `compactSpace_adicCompletionIntegers`, `RestrictedProduct.isEmbedding_structureMap`; the decomposition by `exists_isApprox` then `ZSpan.exist_unique_vadd_mem_fundamentalDomain` (`mixedEmbedding.fundamentalDomain_integerLattice`) | 90 | the compact set inside the restricted product |
 | | `tatePi_eq_one_forall_imp` | for `r ≠ 0`, `ι_∞ r` is a unit of the mixed space (each component a nonzero complex number); `b := (2[L:ℚ])⁻¹ · (ι_∞ r)⁻¹` gives `Tr_∞(b ι_∞ r) = 1/2` (`archTrace_mixedEmbedding_one`), so `π(b,0)(r) = e(π) = −1` | 40 | — |
-| | `surjective_tatePi` | `π(W) = π(K)` (fact 4 with `O′ ⊆ ker π`), compact, so closed (`IsCompact.isClosed`); its co-annihilator is `⊥` by the leaf above; `eq_top_of_isClosed_of_dualCoannihilator_eq_bot` on `MonoidHom.range π.toMonoidHom` | 40 | — |
-| `TateModel` (interface) | `mul_mem_Λ`, `π_eq_π_iff`, `toSAdele_mem_torsionChars`, `isOpenMap` | § 2.3's routes (`Subring.closure_le`; `AddChar.map_sub_eq_div`; `exists_integral_multiple`, `AddChar.map_nsmul_eq_pow`; `SigmaCompactSpace.of_countable`, `MonoidHom.isOpenMap_of_sigmaCompact`) | 85 | — |
+| | `surjective_tatePi` | `π(W) = π(K)` (fact 4 with `O′ ⊆ ker π`), compact, so closed (`IsCompact.isClosed`); its co-annihilator is `⊥` by the leaf above; `eq_top_of_isClosed_of_dualCoannihilator_eq_bot` on `MonoidHom.range π.toMonoidHom`, its `[Countable (unitRing F)]` from `SpectralChain.countable_unitRing` | 40 | — |
+| `TateModel` (interface) | `mul_mem_Λ`, `π_eq_π_iff`, `toSAdele_mem_torsionChars`, `isOpenMap` | § 2.3's routes (`Subring.closure_le`; `AddChar.map_sub_eq_div`; `IsAlgebraic.exists_integral_multiple`, `AddChar.map_nsmul_eq_pow`; `SigmaCompactSpace.of_countable`, `MonoidHom.isOpenMap_of_sigmaCompact`, `continuous_of_continuousAt_one`) | 85 | — |
 
-**Total: 30 leaves, about 1,050 lines**, of which 72 are written (the three route copies).
+**Total: 34 leaves, about 1,050 lines**, of which 72 are written (the three route copies).
 
 ### 4.4 Models (the statements whose hypotheses are a structure)
 
@@ -87,3 +92,29 @@ For `a ∈ oAnn F` (`ψ(a s) = 1` for every `s ∈ O′`):
 split prime and has archimedean part `ι_∞ x`, nonzero for `x ≠ 0`); `eq_zero_of_mem_oAnn`'s three hypotheses hold together at
 `0` only — it is a uniqueness statement, and its docstring's route says so. `tatePi_eq_one_forall_imp`'s hypothesis holds at
 `r = 0` only, likewise. Every other leaf is over a number field or `F` alone.
+
+### 4.5 The domain pass (`debruijn-domain-modeling`, a fresh invocation, scoped to lane T's definitions)
+
+- `archTrace` is defined through a basis (`latticeBasis.constr`), an incidental choice; its characterization is intrinsic: an
+  `ℝ`-linear map on `K ⊗ ℝ` is fixed by its values on `ι_∞(K)`, which spans, so `archTrace_mixedEmbedding` determines it, and
+  no consumer unfolds the definition. Mathlib's `Algebra.trace ℝ (mixedSpace K)` is the basis-free twin; equating it with
+  `Tr_{K/ℚ}` on `K` needs the base change `mixedSpace K ≅ ℝ ⊗_ℚ K`, so the constructed form is the cheaper one.
+- `IsApprox` is a **relation**, not a function: an element has many approximants, and the clause `t ∈ O′` is what makes the
+  character well defined (without it `Tr t` moves by stable-place denominators). The choice lives in `tateCharFun` alone, and
+  `tateCharFun_eq` — over *every* approximant — is its reasoning surface; no consumer reads the chosen one.
+- `tatePi` is the formula X01D writes (`tatePi_apply`, `rfl`); `oAnn` is a set, read by membership.
+- Nothing is indexed. The unsampled member: with no split prime `IsApprox` is `t ∈ O′ = 𝓞` and `ψ = e ∘ Tr_∞` — consistent.
+
+### 4.6 The obligation pass (`debruijn-obligation-modeling`, a fresh invocation, scoped to lane T's statements)
+
+- Each leaf's statement is the one its route consumes, and each route above names the statement it closes. Two are
+  **uniqueness shapes**: `eq_zero_of_mem_oAnn` (its hypotheses hold together at `c = 0`, which satisfies every clause) and
+  `tatePi_eq_one_forall_imp` (at `r = 0`). Both are satisfiable, neither vacuous, and § 4.4 names their inhabitants.
+- `exists_isApprox` decomposes into four children the implementer should state as `have`s: the finite set of split primes
+  where `a` is not integral; a per-prime approximant; the ultrametric bound on the sum at each split prime; membership in `O′`.
+  `eq_zero_of_mem_oAnn` decomposes as § 4.2 step 4 writes it, five `have`s.
+- **Dependencies on other lanes' statements**: `tatePi_ker_subset` and `tatePi_exists_nat_mul_mem` read
+  `exists_mul_stableIntegers_le` (lane M9-R); `surjective_tatePi` reads `eq_top_of_isClosed_of_dualCoannihilator_eq_bot`
+  (lane PD). Both are typed; `exists_tateModel` prints `sorryAx` through them until they land.
+- The assembly `exists_tateModel` is proved, one field per fact. The kernel's print of the structure it builds is the
+  interface's own (stage 2's `KernelSigs2.log`).

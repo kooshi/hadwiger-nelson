@@ -1,4 +1,5 @@
-import Proofs.HadwigerNelson.Rigidity.TateModel
+import Proofs.HadwigerNelson.Rigidity.TateKernel
+import Mathlib.RingTheory.Algebraic.Integral
 import Mathlib.RingTheory.DedekindDomain.Different
 import Mathlib.NumberTheory.NumberField.Discriminant.Defs
 import Mathlib.Algebra.Module.ZLattice.Basic
@@ -33,7 +34,7 @@ open IsDedekindDomain IsDedekindDomain.HeightOneSpectrum NumberField
 #check @mixedEmbedding.latticeBasis_apply
 #check @mixedEmbedding.mem_rat_span_latticeBasis
 #check @integralBasis_apply
-#check @Basis.constr_basis
+#check @Module.Basis.constr_basis
 #check @NumberField.discr_ne_zero
 #check @Algebra.discr_def
 #check @Algebra.trace_algebraMap
@@ -47,12 +48,12 @@ open IsDedekindDomain IsDedekindDomain.HeightOneSpectrum NumberField
 #check @AddChar.toMonoidHom
 #check @MonoidHom.isOpenMap_of_sigmaCompact
 #check @SigmaCompactSpace.of_countable
-#check @MonoidHom.continuous_of_continuousAt_one
+#check @continuous_of_continuousAt_one
 #check @AddChar.map_nsmul_eq_pow
 #check @AddChar.map_sub_eq_div
 #check @Circle.exp_int_mul_two_pi
 #check @Circle.exp_two_pi_mul_int
-#check @exists_integral_multiple
+#check @IsAlgebraic.exists_integral_multiple
 #check @Subring.closure_le
 #check @HadwigerNelson.Rigidity.eq_top_of_isClosed_of_dualCoannihilator_eq_bot
 #check @HadwigerNelson.Rigidity.isClosedEmbedding_coe

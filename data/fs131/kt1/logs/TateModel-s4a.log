@@ -1,0 +1,5 @@
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:161:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:165:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:170:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:181:8: warning: declaration uses `sorry`
+exit=0
