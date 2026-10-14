@@ -1,4 +1,3 @@
-recorded 56 constants in data/fs131/ipb1/readback/laneC1/instance-constants.txt
 PIN-DIFFERENCE	lemma	§.KernelCompact.exists_invariant_set	EQSET: `s =ᵐ[μ] t` of sets is `Filter.EventuallyEqSet` at the release's pin and `Filter.EventuallyEq` at `Prop` here; the same proposition by definition
   aux          AUX-ABSENT       6
   aux          AUX-DIFFERS      5

@@ -198,6 +198,16 @@ COEFF_LEMMAS = {"§.AlgebraicCayley.reciprocal_denominator", "§.AlgebraicCayley
 # EventuallyEq l s t` by `rfl` in the level-one print (`ReleaseLevel1.lean`).
 EQSET_HEAD = "Filter.EventuallyEqSet"
 EQSET_LEMMAS = {"§.KernelCompact.exists_invariant_set"}
+# ADAPTED_INSTANCE (FS131-IPB1, plan § 4.3): a statement adapted at an INSTANCE argument — `IsProbabilityMeasure (μ.map f)`
+# supplied by an inlined `haveI := Measure.isProbabilityMeasure_map h` from a measurability the statement names.  The
+# instance is a proof, so the erased prints agree and the verdict would be UP-TO-INSTANCES; each listed declaration is
+# then flagged ADAPTED, and one listed that is not UP-TO-INSTANCES is fatal (the list is stale or the site moved).
+ADAPTED_INSTANCE = {"§.BoundedMeasurable.covariance_mean_zero"}
+# ADAPTED_ASCRIPTION (the coordinator's ruling of 2026-10-14, option (a)): a statement whose text elaborates in another
+# order at this pin, given a type ascription that restores the release's stored term; flagged ADAPTED when the read-back
+# reads IDENTICAL or UP-TO-INSTANCES, fatal otherwise.  Its control is the elaboration without the ascription, kept:
+# `data/fs131/ipb1/readback/laneC2/compare-noascription.out` (DIFFERENT).
+ADAPTED_ASCRIPTION = {"§.BoundedMeasurable.prod_act_project_lift"}
 # rule -> (the declarations it may touch, the note its PIN-DIFFERENCE carries); each rule's flag is STATE[rule.lower()]
 RELEASE_REWRITES = {
     "COEFF": (COEFF_LEMMAS, "`Polynomial.coeff` is `R[X] → ℕ →₀ R` at the release's pin and `R[X] → ℕ → R` here; the "
@@ -590,6 +600,19 @@ def ruled_compare(rel_text, our_text, renamed=None, record=None, quiet=False, wr
             verdict, why = ("ADAPTED", "the release's print once the inserted argument is removed") if ok else \
                 ("DIFFERENT", "ADAPTED strip check refused")
         out.append((cls, lab, kind, verdict, there, here, why))
+    for k, t in enumerate(out):
+        if t[1] in ADAPTED_ASCRIPTION:
+            if t[3] in ("IDENTICAL", "UP-TO-INSTANCES"):
+                out[k] = t[:3] + ("ADAPTED", t[4], t[5], f"ADAPTED_ASCRIPTION: an ascription restores the release's "
+                                  f"stored term; the read-back reads {t[3]}")
+            else:
+                fatal.append(f"ADAPTED_ASCRIPTION lists {t[1]}, which reads {t[3]}")
+        if t[1] in ADAPTED_INSTANCE:
+            if t[3] == "UP-TO-INSTANCES":
+                out[k] = t[:3] + ("ADAPTED", t[4], t[5], "ADAPTED_INSTANCE: an instance argument supplied from the "
+                                  "statement's own measurability; a proof, erased, so the erased prints agree")
+            else:
+                fatal.append(f"ADAPTED_INSTANCE lists {t[1]}, which reads {t[3]}, not UP-TO-INSTANCES")
     for t in out:
         if t[1] in STRIP and t[3] in ("IDENTICAL", "UP-TO-INSTANCES"):
             fatal.append(f"STRIP lists {t[1]}, which does not differ (the list is stale)")
@@ -883,6 +906,17 @@ def self_test(label):
         finally:
             EQSET_LEMMAS.clear()
             EQSET_LEMMAS.update(saved_el)
+    # ADAPTED_INSTANCE (FS131-IPB1): a listed declaration that is not UP-TO-INSTANCES must be refused
+    ai_here = sorted((ADAPTED_INSTANCE | ADAPTED_ASCRIPTION) & set(rel))
+    if ai_here:
+        our, _ = rb.load(our_text, here=True)
+        ident = next(lab for lab, d in rel.items() if lab not in ai_here and d["kind"] == "theorem"
+                     and our.get(lab) and our[lab]["type"] == d["type"])
+        ADAPTED_INSTANCE.add(ident)
+        try:
+            expect(f"ADAPTED_INSTANCE lists an IDENTICAL declaration ({ident})", want_fatal="ADAPTED_INSTANCE")
+        finally:
+            ADAPTED_INSTANCE.discard(ident)
     # STRIP (FS131-IPB1): each part of the check must refuse what the ruling does not cover
     strip_here = [lab for lab in STRIP if lab in rel]
     if strip_here:

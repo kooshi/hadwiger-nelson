@@ -253,5 +253,93 @@ l s t`, as FS132-I2 checked `EventuallySubset` — added to the level-one print 
    `CommGroup` (the `Monoid` parents, item 763 (3)); `IntermediateField`, `SeminormedAddCommGroup` (instance paths);
    `ErgodicSMul` (EQSET and `EventuallyEmptyOrUniv`, stage 2.4); `Lp`, `MemLp` (item 764); `Measure.map` (§ 3.3).
 5. Every table entry has its reason; none touches a protected declaration (no lane C declaration is among the density
-   branch's shared names — checked with the generator's `shared_names()`: none of the five's 157 copied declarations — and the library's own
+   branch's shared names — checked with the generator's `shared_names()`: none of the five's 152 copied declarations — and the library's own
    modules name none).
+
+## Stage 4 — SAVED: lane C complete (Factors, RelativeProducts, Separability, Stationary, AlgebraModels)
+
+**4.1 Per module** (logs `data/fs131/ipb1/farm/<Module>-<try>.out`; the final runs `-try2`/`-try1`/`-c2b`/`-try3`):
+
+| module | table (each entry with its reason) | elaboration |
+|---|---|---|
+| `OAI158Factors` | global instances 52–56, 68, 76, 79, 557; rename `Measurable.of_eval`→`measurable_pi_iff.mpr`; patches 140, 366, 367, 378, 380: the release's explicit `@Measurable.of_eval A δ X mα mX g h` written `(@measurable_pi_iff A δ X mα mX g).mpr h` (one section, one variable order at both pins: `Constructions.lean:566–573`); 473 `haveI` of `IsProbabilityMeasure (μ.map J)` from `hJ`; `drop_imports` | try1 2 errors; **0, 0** |
+| `OAI158RelativeProducts` | global instances 19, 210, 211; **scoped** 372 | **0, 0** at try1 |
+| `OAI158Separability` | renames `ite_eq_left`→`if_pos`, `Finset.prod_le_prod₀`→`Finset.prod_le_prod`; patch 556 (`haveI` before the proof's `rw`); **adaptations** 555 (an inlined `haveI := Measure.isProbabilityMeasure_map (hq.aemeasurable (μ := μ))` at the instance argument `Family.meanNorm (μ.map q)` needs in `covariance_mean_zero`'s statement, `hq` named by the statement) and 214 (the ascription `((∏ i ∈ s, … : Func X) : X → ℂ)` in `prod_act_project_lift`'s statement, 4.3) | try1 5 errors; **0, 0** |
+| `OAI158Stationary` | global instances 86, 87, 90, 112 | **0, 0** at try1 |
+| `OAI158AlgebraModels` | patch 183 `Measure.fst_map_prodMk hq measurable_id` → `Measure.fst_map_prodMk measurable_id` (it takes `hY` only here, `Prod.lean:1133`; `hX` and `hY` there, `:1159`) | try1 2 errors, 2 warnings; try2 0 errors, the 2 `missing doc string for public constructor FiniteTensor.tensor`/`.add` warnings; **try3 0, 0** after the generator's revision (4.2) |
+
+**4.2 The generator's second revision by this job** (the coordinator's Amendment 2 of this brief, by message; commit
+`7deb20414`, its own): an `inductive`'s constructors get their source addresses as docstrings, the structure-field step
+extended to `kind == "inductive"` and nothing else (`AlgebraModels.lean:287`, `FiniteTensor`, is the one `inductive` of
+the 31 files). `--check` on the 25 generated modules: 24 byte-identical, AlgebraModels two docstring lines added (741 →
+743; `gen-ind-check-{before,after}.out`, `gen-ind-files-before.sha256`); `--parse-all` passes; self-test **21 plants
+refused and 5 partners accepted** (the new partner: FiniteTensor's two constructors addressed); with the step withdrawn
+in a scratch copy that partner reads FAILED (`gen-ind-control-nostep.out`).
+
+**4.3 A statement stored as another term, ruled (the coordinator's message): `BoundedMeasurable.prod_act_project_lift`.**
+The same text `(∏ i ∈ s, act …) =ᵐ[μ] …` elaborates at v4.34.1 to `Subtype.val (∏ i ∈ s, …)` (the product in `Func X`,
+then coerced) and at v4.32.0 to `∏ i ∈ s, Subtype.val (…)` (the coercion pushed onto each factor) — equal functions by a
+theorem, not by definition; the elaborator's order, not a Mathlib definition. Sent; **ruled option (a), an adaptation by
+ascription in item 758's class**, with the condition that the read-back show IDENTICAL or UP-TO-INSTANCES and a control
+without the ascription show DIFFERENT. Built: adaptation 214; the comparator's **ADAPTED_ASCRIPTION** (the listed
+declaration flagged ADAPTED when it reads IDENTICAL or UP-TO-INSTANCES, fatal otherwise). Result: **UP-TO-INSTANCES,
+flagged ADAPTED**; the control is the elaboration itself without the ascription, kept: `readback/laneC2/
+compare-noascription.out` (`DIFFERENT … prod_act_project_lift`, `READBACK FAILED`) and its here-print. The same session
+accepted `covariance_mean_zero`'s inlined `haveI` as an adaptation (a closed term from context), flagged by
+**ADAPTED_INSTANCE** (fatal if a listed declaration does not read UP-TO-INSTANCES; control: an IDENTICAL declaration
+listed — refused).
+
+**4.4 The five receipts, lane C's second five.**
+1. `--check` on all 25 generated modules: **`CHECK OK`** (`data/fs131/ipb1/gen-check-25.out`).
+2. Each **0 errors, 0 warnings** (4.1).
+3. Axioms (`axioms/AxiomslaneC2.out`): **`SUMMARY constants=382 clean=382 other=0`**.
+4. Read-back (`readback/laneC2/`, 364 constants: 274 declarations, 90 auxiliaries): **`READBACK OK`** — definitions
+   44 IDENTICAL, 10 UP-TO-INSTANCES; lemmas 158 IDENTICAL, 60 UP-TO-INSTANCES, 2 ADAPTED; auxiliaries 52 IDENTICAL, 3
+   UP-TO-INSTANCES, 14 AUX-ABSENT, 21 AUX-DIFFERS (counted); 93 instance constants, read — Mathlib's paths and 24
+   generated proofs of the port (`Family.l2Linear._proof_n`, `PairVanishing._proof_n`, `projectCLM._proof_n`, …). Self-test
+   **9 plants refused**. No statement or definition names `eLpNorm`; the cascade reaches none (no `frequencyLaw`,
+   `center`, `centerMap`, `centerKernel` in a lane C statement: none DIFFERENT, STRIP lists none).
+   Level one: **200 constants, 173 IDENTICAL, 10 MOVED, 17 DIFFERENT**, all of known classes (the `Monoid` parents and
+   instance paths: `AddCommGroup`, `AddCommMonoid`, `AddGroup`, `CommRing`, `Group`, `Monoid`, `Semiring`,
+   `InnerProductSpace`, `NormedAddCommGroup`, `NormedSpace`, `condExpL2`, `lpMeas`; universe `max`: `LinearIsometryEquiv`;
+   `Lp`; `Measure.map`; `ErgodicSMul`, `ErgodicVAdd` — EQSET). **The release kernel's check of EQSET** (owed by 3.3),
+   in `ReleaseLevel1.lean`: `Filter.EventuallyEqSet l s t = @Filter.EventuallyEq α Prop l s t := rfl` and `(s =ᵐ[μ] t) =
+   @Filter.EventuallyEq α Prop (ae μ) s t := rfl` **accepted** at v4.34.1; the control (right side `tᶜ`) refused — the
+   one error of the run, at its line (342).
+5. Every table entry has its reason. **No entry touches a protected declaration**: none of lane C's 401 copied
+   declarations is among the density branch's shared names (`shared_names()`), the library's own modules name none of
+   lane C's namespaces, and no adaptation is in a target.
+
+**Lane C is complete: ten modules, every one 0 errors and 0 warnings, read back, axioms clean.**
+
+## Stage 5 — SAVED: re-pricing, the Mathlib definitions found changed, and what is owed
+
+**5.1 Every Mathlib (or core) definition found changed between the pins in lanes B and C, with where it reaches**
+(beyond lane A's: `Measure.map`/`ProbabilityMeasure.map`, `HasAntidiagonal`, `Monoid`, `eLpNorm`/`MemLp`/`Lp`):
+
+| definition | the change | reaches | class |
+|---|---|---|---|
+| `Polynomial.coeff` | `R[X] → ℕ →₀ R` there, `R[X] → ℕ → R` here | 2 lemmas of NumberFields | COEFF (ruled), PIN-DIFFERENCE |
+| `Algebra.algebraMap`'s class parameter `[Semiring A]` | another instance path (hierarchy reflow) | 7 lemmas and `realLine` of NumberFields | CLASS_PARAMS (standing word), UP-TO-INSTANCES |
+| `Filter.EventuallyEqSet` (new at v4.34.1) | `s =ᵐ[μ] t` of sets stored through it there, as `EventuallyEq` at `Prop` here | `KernelCompact.exists_invariant_set`; `ErgodicSMul`'s field (level one only) | EQSET (standing word), PIN-DIFFERENCE; the release kernel's `rfl` |
+| `Filter.EventuallyEmptyOrUniv` (new at v4.34.1) | `ErgodicSMul`'s conclusion `EventuallyEmptyOrUniv s` there, `EventuallyConst s` here | proofs only (3 patches: Amenability 385, RelativeCenters 129, Kernels 509–510); `ErgodicSMul` at level one | proof patches |
+| the coercion's placement through `∏` (the elaborator, not Mathlib) | `↑(∏ …)` there, `∏ ↑…` here | `prod_act_project_lift` | ascription (ruled), ADAPTED |
+| `ProbabilityMeasure.map`, `Measure.map`, `isProbabilityMeasure_map` instance | as § 3.3 | 1 statement adapted at an instance (`covariance_mean_zero`), 1 at `ProbabilityMeasure.map` (`center_law_ordinary`), 22 proof sites | ADAPTED / patches |
+| renamed lemmas | `ite_eq_left/right`, `dite_eq_left` (core), `Measurable.of_eval`, `Set.mem_ofPred_eq`, `Finset.prod_le_prod₀`, `Isometry.lipschitzWith`, `dist_star_star`, `Measure.fst_map_prodMk`'s and `compProd_map_condDistrib`'s and `condDistrib_comp`'s arguments | proofs only | renames and patches |
+
+**5.2 Re-pricing for lane D, from what B and C cost.** Lane B's remainder and lane C took this job one session:
+Lane C's ten modules (5,574 release lines) needed 1–3 elaboration tries each, 47 table entries beyond the instances, and
+five rulings or standing-word rules (COEFF, CLASS_PARAMS, EQSET, the ascription, the inductive docstrings); the per-module
+cost was minutes, the rulings and the comparator's rules were the cost, as the first implementer found. Lane D's six
+modules (2,656 lines: Representations, Energy, SpectralMeasure, RadialEnergy, Ergodicity, BorelTransfer) carry the
+`include hq hqcov in` lines (Energy, RadialEnergy: 18 such lines), the targets, and the switch and its build. Price:
+**the six modules 3–5 h; the switch, the registration and the build 3–5 h (about 30 modules downstream of
+`Outside/OAI158` recompile; 15–50 minutes on the laptop)**, against the plan's 4–6 h and the first implementer's 6–10 h;
+risks named: a target statement that meets a class above needs a ruling (none may be adapted), and the shared declarations
+of `Representations` and `BorelTransfer` (plan § 4.5 step 0) are compared there.
+
+**5.3 Tool notes, for the generator's revision between lanes** (none blocks): the textual statement guard (item 763,
+still owed); the header's item 1 over a whole-file selection; `--axioms-block` omits instances and private declarations;
+`--self-test` reads the generated modules from `Proofs/` (item 759 (4)); the rename regex's lookahead lets a token match
+the start of a longer name with `_` (`lipschitzWith` in `lipschitzWith_thickenedIndicator`: met in Functions, patched per
+site instead).

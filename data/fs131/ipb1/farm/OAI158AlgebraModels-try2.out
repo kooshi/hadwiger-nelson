@@ -1,0 +1,7 @@
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Outside/OAI158AlgebraModels.lean:343:4: warning: missing doc string for public constructor FiniteTensor.tensor
+
+Note: This linter can be disabled with `set_option linter.missingDocs false`
+Proofs/HadwigerNelson/Outside/OAI158AlgebraModels.lean:344:4: warning: missing doc string for public constructor FiniteTensor.add
+
+Note: This linter can be disabled with `set_option linter.missingDocs false`
