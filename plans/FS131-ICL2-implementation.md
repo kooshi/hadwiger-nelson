@@ -7,7 +7,28 @@ server is unreachable).*
 
 ## Theorems this phase proved
 
-*(filled at the gate stage)*
+Read from the built tree after build 2 (`data/fs131/icl2/axioms.out`, `axioms-read.out`): 120 records of the five files,
+**CLEAN 112** (the standard three or fewer), **UPSTREAM 8** (`sorryAx` only through named leaves), **FAIL 0**. Grade
+[kernel] where clean; "[kernel, over named leaves]" otherwise, the leaves named.
+
+- `Rigidity/FiniteZhang`: `card_le_mul_card_closedNbhd`, `ratioLe_prod` (`[Zhang2012]` Thm 1.8's count, two finite
+  factors), `ratioLe_pi`, `ratioLe_subgroup` — [kernel], the standard three.
+- `Rigidity/CountResidue`: `ofUnitRing_mem_localRing`, `isIndepSet_levelTarget_iff`, `neg_mem_normOneQ`, `finite_quot`,
+  `ratioLe_normOneQ`, `exists_normOneL_residue` and `exists_normOneL_residues` (`[S9]`, Hilbert 90 modulo `P^m`),
+  `exists_unitRing_of_normOneL`, `exists_mem_nsmul_of_resR_eq_zero` (Lemma C (d)), `resR_eq_zero_of_le`, `mem_level`,
+  `exists_level_mem_nsmul` — [kernel], the standard three; `image_levR_unitVectors`, `ratioLe_levR_range` — [kernel, over
+  named leaves]: `Rigidity.noRamifiedStableDyadic_of_tca` (lane M9-S).
+- `Rigidity/CountTorus`: `mem_normOneL_iff`, `Delta_ratCast`, `Delta_circle_mem_closure`, `mem_closure_pow` (weak
+  approximation by `h`-th powers), `Delta_circle_mul_mem_closure_pow`, `pow_mem_normOneL`, `mul_mem_normOneL` — [kernel], the
+  standard three.
+- `Rigidity/CountCompletion`: `CompactSpace (K F)`, `continuous_proj`, `range_proj`, `proj_eq_zero_of_le`,
+  `hasBasis_nhds_zero_K`, `IsProbabilityMeasure (haarK F)`, `IsAddLeftInvariant`, `haarK_proj_preimage`, `denseRange_ιG`,
+  `mem_closure_ιG` — [kernel], the standard three. **Open:** `tendsto_haarK_bad`.
+- `Rigidity/CountDescent`: `measurableSet_levelRows`, `volume_colour_le` — [kernel], the standard three;
+  `rowsEdgeNull_levelRows` (statement repaired by ruling) — [kernel, over named leaves]: `noRamifiedStableDyadic_of_tca`;
+  `tendsto_bad` — over `tendsto_haarK_bad`; `false_of_slice` — over `tendsto_haarK_bad`, `noRamifiedStableDyadic_of_tca`,
+  `Rigidity.tca_uniform` (M13); **`count_of_oneAvoidingDensityBound`** — over those three and
+  `Plane.upperDensity_le_of_oneAvoidingDensityBound` (the density bound's job).
 
 ## Stage 1 — SAVED: the merge, the readback, and the stored statements before any edit
 
@@ -226,3 +247,103 @@ where it vanishes; `Delta_circle_mul_mem_closure_pow` in the submonoid's closure
 **Re-priced:** block A at ≈ 510 lines against 600–900 (0.6–0.85, the least favourable ratio of the job — the place
 bookkeeping the planner flagged). Λ3 was 1,300–1,850; block K (`CountCompletion`, 11 leaves) is left, its hard leaf
 `tendsto_haarK_bad`; at the job's ratios ≈ 400–650 lines. Nothing prices over a week.
+
+## Stage 5 — SAVED: `Rigidity/CountCompletion`, ten of eleven leaves; the one leaf left; the model not reached
+
+`CountCompletion` compiles in the farm with exit 0 and one warning, its open leaf's `declaration uses 'sorry'`
+(`logs/cc-2.log`; ≈ 250 lines net for ten leaves). Proved: `CompactSpace (K F)` (the scratch leaf `LeafK`),
+`continuous_proj`, `range_proj` and `proj_eq_zero_of_le` (each a closed set of the product holding the diagonal image of `R`:
+every set of a discrete level is clopen; private `mem_closure_range`), `hasBasis_nhds_zero_K` (`mem_nhds_subtype`, `nhds_pi`,
+`Filter.mem_pi`, a bound on the finite index set and `proj_eq_zero_of_le`), `IsProbabilityMeasure (haarK F)` (`LeafK`),
+`IsAddLeftInvariant`, `haarK_proj_preimage` (the cosets are translates, finitely many, covering `K`:
+`measure_biUnion_finset`, `ENNReal.eq_inv_of_mul_eq_one_left`), `denseRange_ιG` (private `exists_coset_subset`: a
+neighbourhood of `κ` holds a level coset of `κ`; `r = r₀ + M s` with `M = |Lev F k|`, which kills every level-`k` residue,
+`card_nsmul_eq_zero'`, and `dense_mixedEmbedding_nsmul_unitRing` at `N = M`) and `mem_closure_ιG` (`h = Monoid.exponent
+(Lev F k)ˣ`, positive as the group is finite; a unit vector `v` with `e(u) e(v)^h` near `Δ(e^{iθ})` from
+`Delta_circle_mul_mem_closure_pow` at `ū`; `levR k v` is a unit, its inverse the residue of `v̄`, so `levR k (u v^h) = levR k u`).
+
+**Left open: `tendsto_haarK_bad`** (block K's hard leaf; statement unchanged), with the route I would take — the plan's,
+made precise. (0) The bad set is monotone in `κ` (`1 − κ` grows as `κ` falls), so take `κ ≤ 1`. (1) Given `δ > 0`: a compact
+`C ⊆ Y` and an open `U ⊇ Y` with `haarK (Y \ C) < δ`, `haarK (U \ Y) < δ` (`haarK` is a Haar measure on a compact
+second-countable group, so regular: `MeasurableSet.exists_isCompact_diff_lt`, `MeasurableSet.exists_isOpen_diff_lt`).
+(2) Each `x ∈ C` has a level coset `x + ker proj_{k_x} ⊆ U` (`exists_coset_subset`, now in the file); finitely many cover `C`
+(`IsCompact.elim_finite_subcover`); `Z` their union, `k₀` the largest level. (3) For `k ≥ k₀` a level-`k` coset meeting `Z`
+lies in `Z` (`proj_eq_zero_of_le`). (4) A bad point is in `Y \ Z ⊆ Y \ C` (measure `< δ`) or in a bad coset inside `Z`; on a
+bad coset `D`, `κ·haarK D ≤ haarK (D \ Y)`, and the bad cosets inside `Z` are disjoint with `D \ Y ⊆ U \ Y`, so their union
+has measure `≤ δ/κ`. (5) So the bad set at every `k ≥ k₀` has measure `≤ δ + δ/κ`: `ENNReal.tendsto_atTop_zero`. Price, at
+this job's measured rate: 150–250 lines, under an hour.
+
+**The model at the rationals** (`Rigidity/CountModels`, an `InvariantColouring` at `F = ℚ`, the last implementer's § 6.2
+route): **not reached** — I stopped for the gate at a context reading near the brief's line. Nothing of it is written; the
+module is not created and the build's lists are untouched. The `NumberField ⊥` instance it needs is the library's
+`UpperHalfValues.instNumberFieldBot` (`Instances/UpperHalfValues`), which the count's modules do not import.
+
+## Stage 6 — SAVED: build 2, the statements from the kernel's side, the axioms, the drafts
+
+**Build 2** (`data/fs131/icl2/logs/build-2.log`, full output `build/gate/build/20261014T165056Z-3908851.log`): **OK — 256 of
+256 batches, 8 modules rebuilt, 7 m 44 s, exit 0**. The one warning from the five files is
+`Rigidity/CountCompletion.lean:180:8: declaration uses 'sorry'` — `tendsto_haarK_bad`, the open leaf. `tools/check_architecture.py`:
+**PASS** (`logs/architecture.log`), the five rows' state cells rewritten.
+
+**No statement and no definition changed but the ruled ones, from the kernel's side.** The dump after build 2
+(`statements-after.txt.xz`, 247 constants) against stage 1's (`statements-before.txt.xz`), `tools/fs131_icl2_statements.py`:
+**SAME 68, RULED 10, CHANGED 0, MISSING 0, ADDED-PUBLIC 0**, ADDED-INTERNAL 110 (private helpers and their generated names),
+ADDED-GENERATED 1 (`closedNbhd.congr_simp`, generated in `FiniteZhang` itself) — `statements-compare.out`, PASS; with no
+ruled list the same ten read CHANGED (`statements-compare-unruled.out`, FAIL (10)); the comparator's four plants all fire
+(`statements-plant.out`). **Each ruled change is exactly what was ruled** (`tools/fs131_icl2_ruled.py`, `ruled.out`: 10 of 10
+EXACT): eight `[NumberField F]` binders dropped (item 726: `isIndepSet_levelTarget_iff`, `neg_mem_normOneQ`,
+`ratioLe_normOneQ`, `exists_unitRing_of_normOneL`, `Delta_ratCast`, `Delta_circle_mem_closure`, `pow_mem_normOneL`,
+`mul_mem_normOneL`), `finite_quot` gaining `[NumberField ↥F]` (item 847 ruling 2) and `rowsEdgeNull_levelRows` gaining
+`TCA F` (the coordinator's ruling of this job) — each stored type equal, character for character, to the other dump's with that
+one binder struck; the control strips nothing and all ten read DIFFERS (`ruled-plant.out`). The stored types before and
+after, for the two ruled additions:
+- `finite_quot` before: `∀ {F : Subfield ℝ} (P : StablePrime F) (m : ℕ), Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ m)`; after:
+  `∀ {F : Subfield ℝ} [NumberField ↥F] (P : StablePrime F) (m : ℕ), Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ m)`.
+- `rowsEdgeNull_levelRows` before: `∀ {F} [NumberField ↥F] {φ : ℂ × K F → Fin 4}, Measurable φ → SliceEdgeNull φ → ∀ (j : Fin 4)
+  (k : ℕ), RowsEdgeNull {d | ↑d ∈ normOneLev F k} (levelRows φ j k)`; after: the same with `TCA F →` after the instance
+  binder. Its one reader `false_of_slice` composes (build 2) and passes its own `hT` (`rowsEdgeNull_levelRows hT hφ h j k`).
+
+**Axioms** (`data/fs131/icl2/lean/Axioms.lean`, FS131-ICL1's printer over the five modules; `tools/fs131_icl2_axioms.py`
+with `--leaves Counting.tendsto_haarK_bad`): **120 records — CLEAN 112, UPSTREAM 8, FAIL 0** (`axioms-read.out`). The
+eight: `count_of_oneAvoidingDensityBound` (`sorryAx` from `Plane.upperDensity_le_of_oneAvoidingDensityBound`,
+`Counting.tendsto_haarK_bad`, `noRamifiedStableDyadic_of_tca`, `tca_uniform`), `false_of_slice` (the last three),
+`tendsto_bad` and `tendsto_haarK_bad` itself (the open leaf), `image_levR_unitVectors`, `ratioLe_levR_range`,
+`ratio_unramified_of_tca`, `rowsEdgeNull_levelRows` (each `noRamifiedStableDyadic_of_tca` only). Control
+(`AxiomsPlant.lean`: a planted `sorry` and a planted axiom, counted as this job's): **2 of 2 read FAIL**
+(`axioms-plant-read.out`). Not run by this job: `scripts/dupnames.sh` and `lake lint` (no public name was added; the landing
+runs both on the joined tree).
+
+### Drafts for the landing
+
+**The audit block for the five files** (for `scripts/Axioms.lean`, by the landing): `Rigidity/FiniteZhang`,
+`Rigidity/CountTorus`, `Rigidity/CountResidue` — every record CLEAN once `noRamifiedStableDyadic_of_tca` lands (now
+UPSTREAM through it at `image_levR_unitVectors`, `ratioLe_levR_range`, `ratio_unramified_of_tca`); `Rigidity/CountCompletion`
+— CLEAN but `tendsto_haarK_bad` (open); `Rigidity/CountDescent` — CLEAN at `measurableSet_levelRows`, `volume_colour_le`;
+the rest UPSTREAM as listed above. CLEAN in full only when `tendsto_haarK_bad`, `tca_uniform` (M13),
+`noRamifiedStableDyadic_of_tca` (M9-S) and `Plane.upperDensity_le_of_oneAvoidingDensityBound` land.
+
+**The models** (`LEAN.md` § The gate: every theorem whose hypothesis is a structure names its inhabitant): `ratioLe_prod`,
+`ratioLe_pi`, `ratioLe_subgroup` — `RatioLe S 1` holds for every `S` (`ratioLe_one`, in the file); `exists_normOneL_residue`
+— an inert `p ≡ 3 (mod 4)` of `ℚ(i)` at `F = ℚ` (the module docstring's model; the instance `NumberField ⊥` is
+`UpperHalfValues.instNumberFieldBot`); `rowsEdgeNull_levelRows`, `volume_colour_le`, `tendsto_bad`, `false_of_slice` — a step
+inside the count's proof by contradiction, refuted by `false_of_slice` itself under `TCA F`; and the ruled leaf's
+counterexample at `F = ℚ`, `k = 4` (stage 3), which shows the hypothesis `TCA F` is needed and fails at `ℚ`. **The model owed
+at `F = ℚ` (an `InvariantColouring`, item 871 ruling 2) is not written** (stage 5).
+
+**`LEAN.md` § Searching — Lean, lines** (each to follow the last):
+- `Finset.le_sup` unified at `Ideal.absNorm P.P` (`f := fun P => Ideal.absNorm P.P`) runs out of heartbeats in `whnf`; a
+  bound stated for any `f : ι → ℕ` first (`∃ B, ∀ P ∈ s, f P ≤ B` from `s.sup f`) and then instantiated takes two seconds
+  (`data/fs131/icl2/probes/LevelProbe2.lean`, `LevelProbe3.lean`; FS131-ICL2).
+- An unused explicit binder prints as an arrow in a stored type's raw print (`(A) -> (∀ more, B)`), and the printer merges
+  the binders around it: a statement check that strips a ruled binder strips the arrow and the parentheses and re-merges
+  `∀ binders, ∀ more,` (`tools/fs131_icl2_ruled.py`; FS131-ICL2).
+- A class binder in a raw print is ` : NumberField.{0} (…)`; a check for the word `NumberField` passes a statement that only
+  mentions `NumberField.RingOfIntegers` — the shape that hid item 847's defect (`tools/fs131_icl2_statements.py`; FS131-ICL2).
+- Every infinite place of `F(i)` is complex and `w(i) = ±i`; one place of `F(i)` is read on `F`'s mixed space through
+  `InfinitePlace.mk (w.embedding.comp ι)` and `InfinitePlace.embedding_mk_eq`, a coordinate of `F`'s mixed space or its
+  conjugate — no correspondence of places built (`Counting.exists_coord`, private; FS131-ICL2). `F` is dense in its mixed
+  space by the rational multiples of `latticeBasis` (`Counting.dense_range_mixedEmbedding`, private).
+- At the pin `continuous_add_right`, `continuous_add_left`, `continuous_mul_left` are deprecated for `continuous_add_const`,
+  `continuous_const_add`, `continuous_const_mul`; `IsUnit.of_mul_eq_one` (not `isUnit_of_mul_eq_one`); `card_nsmul_eq_zero'`
+  is `Nat.card G • x = 0`; `Monoid.exponent_ne_zero_of_finite`; `mem_nhds_subtype` takes its three arguments explicitly
+  (FS131-ICL2).

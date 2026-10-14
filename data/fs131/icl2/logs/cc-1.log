@@ -1,0 +1,81 @@
+slot: admitted icl2: mem 6 GiB (hard cap), cpus 2,3
+data/fs131/icl2/work/CountCompletion.lean:110:27: error: Invalid projection: Projections cannot be used on functions, and
+  mem_nhds_subtype
+has function type
+  ∀ (s : Set ?m.35) (x : { x // x ∈ s }) (t : Set { x // x ∈ s }), t ∈ 𝓝 x ↔ ∃ u ∈ 𝓝 ↑x, Subtype.val ⁻¹' u ⊆ t
+data/fs131/icl2/work/CountCompletion.lean:110:11: error: Tactic `rcases` failed: `x✝ : ?m.37` is not an inductive datatype
+data/fs131/icl2/work/CountCompletion.lean:163:82: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+k : ℕ
+x₀ : K F
+hmeas : ∀ (b : Lev F k), MeasurableSet (⇑(proj F k) ⁻¹' {b})
+heq : ∀ b ∈ Set.range ⇑(proj F k), (haarK F) (⇑(proj F k) ⁻¹' {b}) = (haarK F) (⇑(proj F k) ⁻¹' {(proj F k) x₀})
+hfin : (Set.range ⇑(proj F k)).Finite
+x : K F
+⊢ ∃ x_1, ∃ (x_2 : x_1 ∈ Kgrp F), (proj F k) ⟨x_1, ⋯⟩ = (proj F k) x
+data/fs131/icl2/work/CountCompletion.lean:172:8: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Fintype ↑(Set.range ⇑(proj F k))
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/icl2/work/CountCompletion.lean:172:34: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Fintype ↑(Set.range ⇑(proj F k))
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/icl2/work/CountCompletion.lean:171:95: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+k : ℕ
+x₀ : K F
+hmeas : ∀ (b : Lev F k), MeasurableSet (⇑(proj F k) ⁻¹' {b})
+heq : ∀ b ∈ Set.range ⇑(proj F k), (haarK F) (⇑(proj F k) ⁻¹' {b}) = (haarK F) (⇑(proj F k) ⁻¹' {(proj F k) x₀})
+hfin : (Set.range ⇑(proj F k)).Finite
+hunion : Set.univ = ⋃ b ∈ hfin.toFinset, ⇑(proj F k) ⁻¹' {b}
+hdisj : (↑hfin.toFinset).PairwiseDisjoint fun b => ⇑(proj F k) ⁻¹' {b}
+hsum : 1 = ↑hfin.toFinset.card * (haarK F) (⇑(proj F k) ⁻¹' {(proj F k) x₀})
+⊢ Fintype ↑(Set.range ⇑(proj F k))
+data/fs131/icl2/work/CountCompletion.lean:177:8: warning: declaration uses `sorry`
+data/fs131/icl2/work/CountCompletion.lean:193:16: warning: `continuous_add_right` has been deprecated: Use `continuous_add_const` instead
+data/fs131/icl2/work/CountCompletion.lean:218:16: warning: `continuous_add_left` has been deprecated: Use `continuous_const_add` instead
+data/fs131/icl2/work/CountCompletion.lean:230:37: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (proj ?F ?k) ((ιK ?F) ?r)
+in the target expression
+  (proj F k) ((ιK F) r₀ + M • (ιK F) s) - (proj F k) p.2 = 0
+
+case refine_2
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+p : G F
+t : Set (G F)
+t₁ : Set (mixedEmbedding.mixedSpace ↥(fieldI F))
+ht₁ : t₁ ∈ 𝓝 p.1
+t₂ : Set (K F)
+ht₂ : t₂ ∈ 𝓝 p.2
+ht : t₁ ×ˢ t₂ ⊆ t
+k : ℕ
+hk : ∀ (x : K F), (proj F k) (x - p.2) = 0 → x ∈ t₂
+r₀ : ↥(unitRing F)
+hr₀ : (levR F k) r₀ = (proj F k) p.2
+M : ℕ := Nat.card (Lev F k)
+hM : M = Nat.card (Lev F k)
+hM0 : M ≠ 0
+c₀ : mixedEmbedding.mixedSpace ↥(fieldI F) := (mixedEmbedding ↥(fieldI F)) ((ofUnitRing F) r₀)
+hc₀ : c₀ = (mixedEmbedding ↥(fieldI F)) ((ofUnitRing F) r₀)
+h1 : (fun y => c₀ + y) ⁻¹' t₁ ∈ 𝓝 (p.1 - c₀)
+r : ↥(fieldI F)
+hr : r ∈ UnitRing.unitRing (conjOn ⋯)
+hy1 : (mixedEmbedding ↥(fieldI F)) (↑M * r) ∈ (fun y => c₀ + y) ⁻¹' t₁
+s : ↥(unitRing F) := ⟨↑r, ⋯⟩
+hs : s = ⟨↑r, ⋯⟩
+⊢ (proj F k) ((ιK F) r₀ + M • (ιK F) s) - (proj F k) p.2 = 0
+data/fs131/icl2/work/CountCompletion.lean:260:17: warning: `continuous_mul_left` has been deprecated: Use `continuous_const_mul` instead
+data/fs131/icl2/work/CountCompletion.lean:270:39: error(lean.unknownIdentifier): Unknown identifier `isUnit_of_mul_eq_one`
+data/fs131/icl2/work/CountCompletion.lean:282:4: error: Type mismatch
+  hy1
+has type
+  (mixedEmbedding ↥(fieldI F)) ((fun x => x ^ h) v) ∈ (fun y => (mixedEmbedding ↥(fieldI F)) uL * y) ⁻¹' t₁
+but is expected to have type
+  (mixedEmbedding ↥(fieldI F)) ((ofUnitRing F) u * v ^ h) ∈ t₁
+Command exited with non-zero status 1
+wall=6.76s maxrss=4055892kB
+lean1: compile failed; the build's .olean of Rigidity/CountCompletion linked back into the farm
