@@ -168,13 +168,117 @@ private theorem card_ne_fifteen_sq [NumberField F] (P : StablePrime F) : Nat.car
 
 -- FS131-ICM1: the named leaves.
 
+-- FS131-ICM1: the reduction from level `n + 2` to level `n + 1`.
+private def red (P : StablePrime F) (n : ℕ) : (𝓞 (fieldI F) ⧸ P.P ^ (n + 2)) →+* (𝓞 (fieldI F) ⧸ P.P ^ (n + 1)) :=
+  Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.le_succ (n + 1)))
+
+private theorem red_mk (P : StablePrime F) (n : ℕ) (a : 𝓞 (fieldI F)) :
+    red P n (Ideal.Quotient.mk _ a) = Ideal.Quotient.mk _ a := Ideal.Quotient.factor_mk _ a
+
+-- FS131-ICM1: the reduction carries the norm-one set into the norm-one set.
+private theorem red_mem_levelSet (P : StablePrime F) (n : ℕ) {x : 𝓞 (fieldI F) ⧸ P.P ^ (n + 2)}
+    (hx : x ∈ levelSet P (n + 2)) : red P n x ∈ levelSet P (n + 1) := by
+  obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
+  have hx' : Ideal.Quotient.mk _ a * Ideal.quotientMap (P.P ^ (n + 2)) (conjO F) (P.le_comap (n + 2))
+      (Ideal.Quotient.mk _ a) = 1 := hx
+  show red P n (Ideal.Quotient.mk _ a) * Ideal.quotientMap (P.P ^ (n + 1)) (conjO F) (P.le_comap (n + 1))
+    (red P n (Ideal.Quotient.mk _ a)) = 1
+  rw [Ideal.quotientMap_mk] at hx'
+  rw [red_mk, Ideal.quotientMap_mk, ← map_mul, ← red_mk, map_mul, hx', map_one]
+
+-- FS131-ICM1: a character trivial on the kernel of the reduction descends to level `n + 1`.
+private theorem exists_addChar_descent (P : StablePrime F) (n : ℕ) (ψ : AddChar (𝓞 (fieldI F) ⧸ P.P ^ (n + 2)) ℂ)
+    (hψ : ∀ e, red P n e = 0 → ψ e = 1) :
+    ∃ ψ' : AddChar (𝓞 (fieldI F) ⧸ P.P ^ (n + 1)) ℂ, ∀ x, ψ x = ψ' (red P n x) := by
+  have hsurj : Function.Surjective (red P n) := Ideal.Quotient.factor_surjective _
+  have hs : ∀ y, red P n (Function.surjInv hsurj y) = y := Function.surjInv_eq hsurj
+  have hker : ∀ x x', red P n x = red P n x' → ψ x = ψ x' := by
+    intro x x' h
+    have h0 : red P n (x - x') = 0 := by rw [map_sub, h, sub_self]
+    calc ψ x = ψ (x - x' + x') := by rw [sub_add_cancel]
+      _ = ψ (x - x') * ψ x' := AddChar.map_add_eq_mul ψ _ _
+      _ = ψ x' := by rw [hψ _ h0, one_mul]
+  refine ⟨{ toFun := fun y => ψ (Function.surjInv hsurj y), map_zero_eq_one' := ?_, map_add_eq_mul' := ?_ },
+    fun x => hker _ _ (hs _).symm⟩
+  · show ψ (Function.surjInv hsurj 0) = 1
+    rw [hker _ 0 (by rw [hs, map_zero]), AddChar.map_zero_eq_one]
+  · intro a b
+    show ψ (Function.surjInv hsurj (a + b)) = ψ (Function.surjInv hsurj a) * ψ (Function.surjInv hsurj b)
+    rw [hker _ (Function.surjInv hsurj a + Function.surjInv hsurj b) (by rw [hs, map_add, hs, hs]),
+      AddChar.map_add_eq_mul]
+
+open Classical in
+/-- **Hensel at level `n + 2`** (Lemma P's fibre count; KC13 § 5.2 K4): at an odd stable prime with `|𝓞 ⧸ P| = Q²`, every
+norm-one residue at level `n + 1` has exactly `Q` norm-one lifts at level `n + 2` — the lifts `x + e`, `e ∈ P^{n+1}/P^{n+2}`,
+of one lift `x` are those with `Tr(σ(x)e) = N(x) − 1`, an affine `k₀`-line. -/
+private theorem card_fibre [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) {Q : ℕ}
+    (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) (n : ℕ) (hfin : (levelSet P (n + 2)).Finite)
+    {t : 𝓞 (fieldI F) ⧸ P.P ^ (n + 1)} (ht : t ∈ levelSet P (n + 1)) :
+    (hfin.toFinset.filter fun x => red P n x = t).card = Q := by
+  sorry
+
+/-- **A character new at level `n + 2`** (Lemma P's bound; X26B-L1): at an odd stable prime with `|𝓞 ⧸ P| = Q²`, a
+character non-trivial on the kernel of the reduction sums to at most `2|S_{n+2}|/(Q + 1)` in modulus over `S_{n+2}` —
+averaged over the fibres it keeps only the residues `x mod P` whose line `{e : Tr(σ(x)e) = 0}` it kills, and its kernel on
+`P^{n+1}/P^{n+2}` holds one `k₀`-line, which is that line for at most two residues of norm one. -/
+private theorem norm_charSum_new_le [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) {Q : ℕ}
+    (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) (n : ℕ) (hfin : (levelSet P (n + 2)).Finite)
+    (ψ : AddChar (𝓞 (fieldI F) ⧸ P.P ^ (n + 2)) ℂ) (hψ : ∃ e, red P n e = 0 ∧ ψ e ≠ 1) :
+    ‖∑ s ∈ hfin.toFinset, ψ s‖ ≤ 2 / ((Q : ℝ) + 1) * hfin.toFinset.card := by
+  sorry
+
 /-- **Lemma P** (KC13 § 5.2, K4's first half; X26B-L1): at an odd stable prime with `|𝓞 ⧸ P| = Q²`, a level-one character
-bound `κ ≥ 2/(Q + 1)` holds at every level — a character of conductor `j ≥ 2` sums to at most `2Q^{j−1} = (2/(Q + 1))·|S_j|`
-in modulus over `S_j`, and one of conductor `j` sums over `S_m` to `|S_m|/|S_j|` times its sum over `S_j`. -/
+bound `κ ≥ 2/(Q + 1)` holds at every level — by induction: a character trivial on the kernel of `R_{m+1} → R_m` descends,
+and its sum is `Q` times the sum one level down (`card_fibre`); one non-trivial there is bounded by `norm_charSum_new_le`. -/
 private theorem charBound_of_charBound_one [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) {Q : ℕ}
     (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) {κ : ℝ} (hκ : 2 / ((Q : ℝ) + 1) ≤ κ) (h1 : CharBound P 1 κ) {m : ℕ}
     (hm : 1 ≤ m) : CharBound P m κ := by
-  sorry
+  classical
+  have hκ0 : 0 ≤ κ := le_trans (by positivity) hκ
+  obtain ⟨n, rfl⟩ : ∃ n, m = n + 1 := ⟨m - 1, by omega⟩
+  clear hm
+  induction n with
+  | zero => exact h1
+  | succ n ih =>
+    intro hfin ψ hψ
+    haveI := finite_quot_pow P (n + 1)
+    have hfin' : (levelSet P (n + 1)).Finite := Set.toFinite _
+    have hmaps : ∀ x ∈ hfin.toFinset, red P n x ∈ hfin'.toFinset := fun x hx =>
+      hfin'.mem_toFinset.2 (red_mem_levelSet P n (hfin.mem_toFinset.1 hx))
+    by_cases hK : ∀ e, red P n e = 0 → ψ e = 1
+    · obtain ⟨ψ', hψ'⟩ := exists_addChar_descent P n ψ hK
+      have hψ'1 : ψ' ≠ 1 := by
+        intro h
+        apply hψ
+        ext x
+        rw [hψ' x, h, AddChar.one_apply, AddChar.one_apply]
+      have hsum : ∑ s ∈ hfin.toFinset, ψ s = ((Q : ℝ) : ℂ) * ∑ t ∈ hfin'.toFinset, ψ' t := by
+        rw [← Finset.sum_fiberwise_of_maps_to hmaps, Finset.mul_sum]
+        refine Finset.sum_congr rfl fun t ht => ?_
+        have hc : ∀ x ∈ hfin.toFinset.filter (fun x => red P n x = t), ψ x = ψ' t := fun x hx => by
+          rw [hψ' x, (Finset.mem_filter.1 hx).2]
+        rw [Finset.sum_congr rfl hc, Finset.sum_const, card_fibre P h2 hQ n hfin (hfin'.mem_toFinset.1 ht),
+          nsmul_eq_mul]
+        push_cast
+        ring
+      have hcard : (hfin.toFinset.card : ℝ) = Q * hfin'.toFinset.card := by
+        rw [Finset.card_eq_sum_card_fiberwise hmaps,
+          Finset.sum_congr rfl fun t ht => card_fibre P h2 hQ n hfin (hfin'.mem_toFinset.1 ht)]
+        rw [Finset.sum_const, smul_eq_mul]
+        push_cast
+        ring
+      have hih := ih hfin' ψ' hψ'1
+      rw [hsum, Complex.re_ofReal_mul, hcard]
+      have hQ0 : (0 : ℝ) ≤ Q := Nat.cast_nonneg _
+      have hm := mul_le_mul_of_nonneg_left hih hQ0
+      linarith
+    · push Not at hK
+      obtain ⟨e, he, hψe⟩ := hK
+      have hb := norm_charSum_new_le P h2 hQ n hfin ψ ⟨e, he, hψe⟩
+      have hre := Complex.abs_re_le_norm (∑ s ∈ hfin.toFinset, ψ s)
+      have hc : (0 : ℝ) ≤ hfin.toFinset.card := Nat.cast_nonneg _
+      have : 2 / ((Q : ℝ) + 1) * hfin.toFinset.card ≤ κ * hfin.toFinset.card := mul_le_mul_of_nonneg_right hκ hc
+      linarith [neg_abs_le (∑ s ∈ hfin.toFinset, ψ s).re]
 
 /-- **Weil at level one** (`StandingFive.normOne_charSum_ge`, over the declared import `kloosterman_bound`): at an odd
 stable prime with `|𝓞 ⧸ P| = Q²`, every non-trivial character sums to real part at least `−2√Q` over the `Q + 1` norm-one

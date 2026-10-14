@@ -6,7 +6,26 @@ from `fs131-wcl2` at `ffa957c75`, in the tree `.claude/worktrees/fs131-wch`. Wor
 
 ## Theorems this phase proved
 
-*(Filled from the built tree at the last saved stage.)*
+Read from the built tree after build 3 (`data/fs131/icm1/axioms3.out`, `axioms3-read.out`): 102 records of
+`ClassRatio`, `CountCompletion`, `CountModels` and `count_of_oneAvoidingDensityBound` — **CLEAN 87, IMPORTED 1, UPSTREAM
+14, FAIL 0**.
+
+- `Rigidity.Counting.tendsto_haarK_bad` (`Rigidity/CountCompletion`) — density along cosets of `K` — [kernel],
+  `[propext, Classical.choice, Quot.sound]`. `CountCompletion` holds no `sorry`.
+- `Rigidity.Counting.ratColouring` (definition), `exists_invariantColouring_rat`, `not_r88TCA_rat` (`Rigidity/CountModels`,
+  new) — the count's hypotheses inhabited at `F = ℚ`, and its conclusion false there — [kernel], the standard three.
+- `Rigidity.tca_uniform`, `Rigidity.exists_uniform_tail` (`Rigidity/ClassRatio`) — [kernel, over named leaves]: the
+  standard three, `StandingFive.kloosterman_bound` (Weil's bound, declared), and `sorryAx` from Lemma P's two leaves
+  `card_fibre` and `norm_charSum_new_le` (private) only.
+- `Rigidity.ratioAtMost_of_five_le_chromaticNumber` (and `tca_of_five_le_localBound` over it) — [kernel, over named
+  leaves]: the standard three, Weil's bound, and `sorryAx` from the six private leaves (§ Stage 4).
+- Private, proved: `charBound_one_weil` (Weil at level one) — the standard three and Weil's bound;
+  `ratioAtMost_of_charBound` (the ratio bound at every level), `exists_card_sq`, `card_ne_fifteen_sq`, `red_mem_levelSet`,
+  `exists_addChar_descent` — the standard three; `charBound_of_charBound_one` (Lemma P's induction) — over `card_fibre`,
+  `norm_charSum_new_le`.
+- `Rigidity.Counting.count_of_oneAvoidingDensityBound` (`CountDescent`, not this job's file) now rests on Weil's bound and
+  `sorryAx` from `Plane.upperDensity_le_of_oneAvoidingDensityBound`, `Rigidity.noRamifiedStableDyadic_of_tca`,
+  `Rigidity.card_fibre` and `Rigidity.norm_charSum_new_le` — no leaf of the count's own.
 
 ## Stage 1 — SAVED: the readback
 
@@ -175,3 +194,100 @@ StandingFive.kloosterman_bound]`. UPSTREAM: the five leaves themselves; `ratioAt
 leaves; and **`count_of_oneAvoidingDensityBound`** — Weil's bound and `sorryAx` from
 `Plane.upperDensity_le_of_oneAvoidingDensityBound`, `Rigidity.noRamifiedStableDyadic_of_tca` and Lemma P. Control: **2 of
 2 planted records read FAIL** (`axioms2-plant-read.out`).
+
+## Stage 4 — SAVED: Lemma P's induction proved over two smaller leaves; build 3; the job's state from the kernel's side
+
+**Lemma P, `charBound_of_charBound_one`, proved** (≈ 110 lines with three helpers) over two named private leaves that are
+local to one level, by induction on the level. `red P n : 𝓞 ⧸ P^{n+2} →+* 𝓞 ⧸ P^{n+1}` (`Ideal.Quotient.factor`) carries
+`S_{n+2}` into `S_{n+1}` (`red_mem_levelSet`); a character trivial on its kernel descends (`exists_addChar_descent`, by
+`Function.surjInv`), its sum over `S_{n+2}` is `Q` times its sum one level down (`Finset.sum_fiberwise_of_maps_to` with the
+fibre count) and `|S_{n+2}| = Q·|S_{n+1}|` (`Finset.card_eq_sum_card_fiberwise`), so the induction's bound passes up; a
+character non-trivial on the kernel is bounded by the second leaf. The two leaves:
+
+| leaf | statement | route (owed; § Stage 3's reading) |
+|---|---|---|
+| `card_fibre` — Hensel | `2 ∉ P`, `|𝓞 ⧸ P| = Q²`, `t ∈ S_{n+1}` ⟹ `#{x ∈ S_{n+2} : red x = t} = Q` | a lift `x̃` of `t` has `N(x̃) = 1 + d`, `d` in the σ-fixed part of `K = P^{n+1}/P^{n+2}`; the lifts `x̃ + e` of norm one are `Tr(σ(x̃)e) = −d`, an affine `k₀`-line (`P` inert: a σ-fixed uniformizer makes `K ≅ 𝓞/P` with `σ`) |
+| `norm_charSum_new_le` | `2 ∉ P`, `|𝓞 ⧸ P| = Q²`, `ψ` non-trivial on `ker red` ⟹ `‖Σ_{S_{n+2}} ψ‖ ≤ (2/(Q + 1))·|S_{n+2}|` | averaged over the fibres the sum keeps the `x` whose line `W_x` `ψ` kills; one `k₀`-line in `ker ψ|_K`, met by at most two residues mod `P`; equidistribution over `S₁` by `card_fibre` |
+
+Both are true as stated by § Stage 3's argument (one mind; not checked by a second). Re-priced: Lemma P's remainder is
+these two, ≈ 350–700 lines (the `K ≅ 𝓞/P` structure with `σ` is shared).
+
+**Build 3** under the slot (`data/fs131/icm1/logs/build-3.log`, full output
+`build/gate/build/20261014T175227Z-4147475.log`): **OK — 257 of 257 batches, 7 modules rebuilt, 8 m 37 s, exit 0**; the
+only warnings from this job's files are the six leaves' `declaration uses 'sorry'` (`ClassRatio.lean` lines 214, 224,
+346, 351, 359, 366); `CountResidue` … `CountModels` rebuilt with none. `tools/check_architecture.py`: **PASS**
+(`logs/architecture-3.log`).
+
+**No statement and no definition changed, from the kernel's side** (`statements-after3.txt.xz` against stage 1's
+`statements-before.txt.xz`; `statements-compare3.out`): **SAME 41, CHANGED 0, RULED 0, MISSING 0, ADDED-PUBLIC 0**,
+ADDED-INTERNAL 116, NEW-MODULE 3 — PASS; planted changes (a character of a stored type, a constant dropped, a public
+constant added in an old module, a class binder removed) **4 of 4 fired** (`statements-plant3.out`). No class binder is
+missing (three misses, each by design, § 1.2). No binder was dropped and no statement ruled.
+
+**Axioms** (`axioms3-read.out`, the six leaves named): **102 records — CLEAN 87, IMPORTED 1 (`charBound_one_weil`),
+UPSTREAM 14, FAIL 0**; read without the leaf list the same output gives **FAIL 14** (`axioms3-read-noleaves.out`, exit 1:
+the leaves are what the UPSTREAM records rest on, and nothing else); the planted `sorry` and axiom **2 of 2 FAIL**
+(`axioms3-plant-read.out`). Not run by this job: `scripts/dupnames.sh`, `lake lint`, `scripts/vacuity.sh` (the landing runs
+them on the joined tree; this job added three public names, in a new module).
+
+## Drafts for the landing
+
+### The audit's block (`scripts/Axioms.lean`, by the landing)
+
+- `Rigidity/CountCompletion` — **every record CLEAN** (`tendsto_haarK_bad` among them; the module holds no `sorry`).
+- `Rigidity/CountModels` (new) — every record CLEAN: `ratColouring`, `exists_invariantColouring_rat`, `not_r88TCA_rat`.
+- `Rigidity/ClassRatio` — `RatioAtMost`, `tca_iff` CLEAN; `ratioAtMost_of_five_le_chromaticNumber`,
+  `tca_of_five_le_localBound`, `exists_uniform_tail`, `tca_uniform` UPSTREAM through this module's named private leaves
+  (the six of § Stage 4) and resting on Weil's bound (`StandingFive.kloosterman_bound`, declared) through
+  `charBound_one_weil`; IMPORTED (no `sorry`) once the leaves land.
+- `Rigidity/CountDescent`'s `count_of_oneAvoidingDensityBound` — UPSTREAM only through
+  `Plane.upperDensity_le_of_oneAvoidingDensityBound` (lane P), `Rigidity.noRamifiedStableDyadic_of_tca` (M9-S) and
+  `Rigidity.tca_uniform` (this module: through Lemma P's two leaves, `card_fibre`, `norm_charSum_new_le`), and on Weil's bound through `tca_uniform`. **The count
+  now reads the declared import `StandingFive.kloosterman_bound`**: when the leaves land it is IMPORTED, not CLEAN — a
+  line for `scripts/Axioms.lean`'s IMPORTED section (`AxiomAudit.declareImport` already names the axiom; the landing adds
+  the records).
+
+### The models (`LEAN.md` § The gate)
+
+- `CountExtension`'s and `CountDescent`'s structure hypotheses `(μ : InvariantColouring F)`, `IsTraceSpectral F μ.μ σ`,
+  `σ (TA F)ᶜ = 0`: inhabited at once at `F = ℚ` by the theorem `Counting.exists_invariantColouring_rat`
+  (`Rigidity/CountModels`, standard three), every clause exercised (two colourings, both translations' cases, a non-trivial
+  spectrum `⅓δ₁ + ⅔δ_χ`). It is a model of every hypothesis the count's lemmas take except `TCA F`, which fails at `ℚ`
+  (the ramified prime `(1 + i)`); `not_r88TCA_rat` is the count's conclusion failing there, as it must.
+- `Counting.tendsto_haarK_bad`: `Y = ∅` and `Y = univ` (measurable) at every `κ > 0`; no structure hypothesis.
+- `Rigidity/ClassRatio`: `5 ≤ localBound F` at the standing field (`StandingFive.le_localBound`, through the floor at
+  seven over Weil's bound) and at `ℚ(√47)` (module M15, not yet a theorem); `TCA F` is the open hypothesis of `tca_uniform`
+  (the count's input) and its inhabitant is the CLS consequence at those fields.
+
+### `LEAN.md` § Searching — Lean, lines (each to follow the last)
+
+- `MeasurableSet.exists_isCompact_diff_lt`, `exists_isOpen_diff_lt` and `exists_isClosed_diff_lt` are deprecated at the
+  pin for `…_sdiff_lt`; a Haar probability on a compact second-countable group (`Measure.addHaarMeasure ⊤`) is
+  `InnerRegularCompactLTTop` and `OuterRegular` by instance, so density along clopen cosets needs no martingale theorem:
+  a compact set inside and an open set outside, finitely many cosets between (`Counting.tendsto_haarK_bad`, FS131-ICM1).
+- `map_add ρ ⟨a, ha⟩ ⟨b, hb⟩` elaborated against `ρ ⟨a + b, add_mem ha hb⟩ = …`, with `ρ` a ring map out of a subring of
+  `ℂ` built from a residue map, ran out of heartbeats in `isDefEq`; `rw [show (⟨a + b, _⟩ : R) = ⟨a, ha⟩ + ⟨b, hb⟩ from
+  Subtype.ext rfl, map_add]` is instant — inside a `Subring.closure_induction` state the motive explicitly over `z` and
+  `hz` (`Counting.ρ_dichotomy`, private; FS131-ICM1).
+- `Measure.map_dirac` asks `MeasurableSingletonClass` of both sides and no measurability of the map; for `R → Fin 4` with
+  `R = ℤ[U]` over a number field, `Countable (unitRing F)` is `countable_unitRing` with `Countable F` from
+  `Finsupp.Countable.of_moduleFinite (R := ℚ)`, and Pi's instance follows. The characters `AddChar R Circle` under the
+  library's cylinder σ-algebra have measurable points by `MeasurableSpace.measurableSet_comap` at the singleton of the
+  evaluation map (`Counting.measurableSet_singleton_dual`, private; FS131-ICM1).
+- `u ∈ Finset.univ` is not `True` to `show`: `simp only [Finset.mem_univ, true_and]` first. `ENNReal.mul_div_cancel_left`
+  is not a name at the pin; `ENNReal.div_le_of_le_mul` with `mul_comm` gives `κ·x / κ ≤ x` (FS131-ICM1).
+
+### `ARCHITECTURE.md` (this job's pen for its rows)
+
+`Rigidity/CountCompletion`'s state cell: proved, no `sorry`; `Rigidity/ClassRatio`'s: the three public leaves proved over
+six named private leaves, its imports cell `Arith/WeilKloosterman`, `Rigidity/ChainAtTA`; `Rigidity/CountModels`: a new
+row. `tools/check_architecture.py`: PASS.
+
+### For the landing to read
+
+- `ClassRatio`'s module docstring still says "skeleton" and names Lemma P as one step; its statements are unchanged and
+  the docstring was not edited (the brief allowed proofs, private helpers and import lines). A reworded first line is the
+  landing's: "the three public leaves proved over six named private leaves (FS131-ICM1)".
+- `ratioAtMost_cert` is the link to line `fs131-wc15` (§ Stage 3): it closes there by K1's checks, K2
+  (`FibreCertSound.sum_le_of_certOK`, proved), K3, K4's fibre-share half and K5 — not by K2 alone.
+- The count now reads Weil's bound through `tca_uniform` (its docstring says so: "over Weil's bound").
