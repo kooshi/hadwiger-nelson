@@ -660,6 +660,15 @@ def emit_module(m, path, lines, decls, want, tab, names_here):
                     res.append(f"  /-- `[OAIMath2026]` `{name}:{a + j}`. -/")
                 res.append(t)
             out = res
+        if kind == "inductive":
+            # the same for an inductive's constructors (FS131-IPB1, the coordinator's Amendment 2 of its brief): a
+            # constructor line `  | name …` with no docstring before it gets its source address as one; nothing else
+            res = []
+            for j, t in enumerate(out):
+                if j > kw and re.match(r"^  \| [A-Za-z_][A-Za-z0-9_']*", t) and not (res and res[-1].strip().endswith("-/")):
+                    res.append(f"  /-- `[OAIMath2026]` `{name}:{a + j}`. -/")
+                res.append(t)
+            out = res
         addr = f"`[OAIMath2026]` `{name}:{a + kw}`."
         if out[0].startswith("/--"):
             out[0] = f"/-- {addr} " + out[0][3:].lstrip()
@@ -1081,6 +1090,20 @@ def self_test(mods):
         print(f"plant 'a drop_omit entry on an `include … in` line (Centers.lean:{ol} in a copy)': "
               f"{'REFUSED' if hit_i else 'SILENT' if why_i is None else 'REFUSED FOR ANOTHER REASON: ' + why_i}")
         ok = ok and hit_i
+        # an inductive's constructors get their source addresses as docstrings (FS131-IPB1, Amendment 2 of its brief):
+        # the partner, on `OAI158AlgebraModels`, whose release file has the port's one `inductive` (`FiniteTensor`)
+        src_a = (CLONE / SRCROOT / REL_OF_MOD["OAI158AlgebraModels"][1]).read_text().split("\n")
+        ia = next(i + 1 for i, x in enumerate(src_a) if re.match(r"^inductive\s", x))
+        ctors = [ia + 1 + k for k, x in enumerate(src_a[ia:]) if re.match(r"^  \| ", x)]
+        ctors = [c for c in ctors if c <= ia + len(ctors)]
+        ga, _ = generate(["OAI158AlgebraModels"])
+        gl = ga["OAI158AlgebraModels"].split("\n")
+        ind_ok = bool(ctors) and all(
+            any(gl[i] == src_a[c - 1] and gl[i - 1] == f"  /-- `[OAIMath2026]` `{base(REL_OF_MOD['OAI158AlgebraModels'][1])}:{c}`. -/"
+                for i in range(1, len(gl))) for c in ctors)
+        print(f"partner 'the constructors of an inductive (AlgebraModels.lean:{ia}, {len(ctors)}) get their addresses': "
+              f"{'ADDRESSED' if ind_ok else 'FAILED'}")
+        ok = ok and ind_ok
         # an upstream copy that is not upstream
         expect("an upstream entry removed", refused_upstream())
         # licence
@@ -1100,7 +1123,7 @@ def self_test(mods):
         if check(mods, outdir=td, quiet=True) != 0:
             print("SELF-TEST FAILED: the scratch copy does not pass after the plants were undone")
             return 1
-    print(f"SELF-TEST OK: {n} plants refused and 4 partners accepted" if ok else "SELF-TEST FAILED")
+    print(f"SELF-TEST OK: {n} plants refused and 5 partners accepted" if ok else "SELF-TEST FAILED")
     return 0 if ok else 1
 
 
