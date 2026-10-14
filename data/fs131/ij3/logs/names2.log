@@ -1,0 +1,55 @@
+slot: admitted ij3f: mem 5 GiB (hard cap), cpus 4,5
+@integral_finsetSum : ∀ {α : Type u_1} {G : Type u_2} [inst : NormedAddCommGroup G] [inst_1 : NormedSpace ℝ G]
+  {m : MeasurableSpace α} {μ : Measure α} {ι : Type u_3} (s : Finset ι) {f : ι → α → G},
+  (∀ i ∈ s, Integrable (f i) μ) → ∫ (a : α), ∑ i ∈ s, f i a ∂μ = ∑ i ∈ s, ∫ (a : α), f i a ∂μ
+@mul_meas_ge_le_integral_of_nonneg : ∀ {α : Type u_1} {m : MeasurableSpace α} {μ : Measure α} {f : α → ℝ},
+  0 ≤ᵐ[μ] f → Integrable f μ → ∀ (ε : ℝ), ε * μ.real {x | ε ≤ f x} ≤ ∫ (x : α), f x ∂μ
+Complex.exp_ofReal_mul_I_re : ∀ (x : ℝ), (Complex.exp (↑x * Complex.I)).re = Real.cos x
+Complex.norm_exp_ofReal_mul_I : ∀ (x : ℝ), ‖Complex.exp (↑x * Complex.I)‖ = 1
+Complex.exp_nat_mul : ∀ (x : ℂ) (n : ℕ), Complex.exp (↑n * x) = Complex.exp x ^ n
+@pi_norm_le_iff_of_nonneg : ∀ {ι : Type u_1} {G : ι → Type u_2} [inst : Fintype ι]
+  [inst_1 : (i : ι) → SeminormedAddGroup (G i)] {x : (i : ι) → G i} {r : ℝ}, 0 ≤ r → (‖x‖ ≤ r ↔ ∀ (i : ι), ‖x i‖ ≤ r)
+@BoundedContinuousFunction.ofNormedAddCommGroup : {α : Type u_1} →
+  {β : Type u_2} →
+    [inst : TopologicalSpace α] →
+      [inst_1 : SeminormedAddCommGroup β] →
+        (f : α → β) → Continuous f → (C : ℝ) → (∀ (x : α), ‖f x‖ ≤ C) → BoundedContinuousFunction α β
+@ENNReal.tendsto_nhds_zero : ∀ {α : Type u_1} {f : Filter α} {u : α → ENNReal},
+  Tendsto u f (𝓝 0) ↔ ∀ ε > 0, ∀ᶠ (x : α) in f, u x ≤ ε
+data/fs131/ij3/probes/names2.lean:16:8: error(lean.unknownIdentifier): Unknown identifier `isProbabilityMeasure_map`
+@integral_smul_measure : ∀ {α : Type u_1} {G : Type u_2} [inst : NormedAddCommGroup G] [inst_1 : NormedSpace ℝ G]
+  {m : MeasurableSpace α} {μ : Measure α} (f : α → G) (c : ENNReal),
+  ∫ (x : α), f x ∂c • μ = c.toReal • ∫ (x : α), f x ∂μ
+Rat.mul_den_eq_num : ∀ (q : ℚ), q * ↑q.den = ↑q.num
+@Finset.dvd_prod_of_mem : ∀ {ι : Type u_1} {M : Type u_2} [inst : CommMonoid M] (f : ι → M) {a : ι} {s : Finset ι},
+  a ∈ s → f a ∣ ∏ i ∈ s, f i
+@UpperHalf.mem_localRing : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (P : StablePrime F) {x : ↥(fieldI F)},
+  x ∈ P.localRing ↔ ∃ a, ∃ s ∉ P.P, x = ↑a / ↑s
+mem_stableIntegers : ∀ (F : Subfield ℝ) [inst : NumberField ↥F] {x : ↥(fieldI F)},
+  x ∈ stableIntegers F ↔ ∀ (P : StablePrime F), x ∈ P.localRing
+@Module.Basis.repr_self : ∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} [inst : Semiring R] [inst_1 : AddCommMonoid M]
+  [inst_2 : Module R M] (b : Module.Basis ι R M) (i : ι), b.repr (b i) = Finsupp.single i 1
+@Module.Basis.sum_repr : ∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} [inst : Semiring R] [inst_1 : AddCommMonoid M]
+  [inst_2 : Module R M] [inst_3 : Fintype ι] (b : Module.Basis ι R M) (u : M), ∑ i, (b.repr u) i • b i = u
+@UnitRing.coe_mem_unitRingOver_iff : ∀ {F : Subfield ℝ} (x : ↥(UnitRing.planeOverSubfield F)),
+  ↑x ∈ UnitRing.unitRingOver F ↔ x ∈ UnitRing.unitRing (conjOn ⋯)
+@measurableSet_lt : ∀ {α : Type u_1} {δ : Type u_2} [inst : TopologicalSpace α] {mα : MeasurableSpace α}
+  [OpensMeasurableSpace α] {mδ : MeasurableSpace δ} [inst_2 : LinearOrder α] [SecondCountableTopology α]
+  [OrderClosedTopology α] {f g : δ → α}, Measurable f → Measurable g → MeasurableSet {a | f a < g a}
+Complex.measurable_arg : Measurable Complex.arg
+@Ultrafilter.coe_map : ∀ {α : Type u_1} {β : Type u_2} (m : α → β) (f : Ultrafilter α),
+  ↑(Ultrafilter.map m f) = map m ↑f
+@tendsto_nhds_unique : ∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [T2Space X] {f : Y → X}
+  {l : Filter Y} {a b : X} [l.NeBot], Tendsto f l (𝓝 a) → Tendsto f l (𝓝 b) → a = b
+@measureReal_mono : ∀ {α : Type u_1} {x : MeasurableSpace α} {μ : Measure α} {s₁ s₂ : Set α},
+  s₁ ⊆ s₂ → autoParam (μ s₂ ≠ ⊤) measureReal_mono._auto_1 → μ.real s₁ ≤ μ.real s₂
+data/fs131/ij3/probes/names2.lean:40:93: error: Application type mismatch: The argument
+  r
+has type
+  ↥(unitRing F)
+but is expected to have type
+  ↥F × ↥F
+in the application
+  (toFieldI F) r
+seconds=2
+exit=1

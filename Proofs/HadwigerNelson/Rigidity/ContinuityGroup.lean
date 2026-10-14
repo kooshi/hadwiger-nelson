@@ -53,7 +53,7 @@ variable (F : Subfield ℝ)
 /-! ### Private helpers: the archimedean size, small arguments, the profinite neighbourhoods -/
 
 /-- The map of `archTop`, as an additive map: `archTop F` is induced by it (`archTop_eq`). -/
-private def archHom [NumberField F] : unitRing F →+ NumberField.mixedEmbedding.mixedSpace (fieldI F) where
+def archHom [NumberField F] : unitRing F →+ NumberField.mixedEmbedding.mixedSpace (fieldI F) where
   toFun r := NumberField.mixedEmbedding (fieldI F) ⟨(r : ℂ), UnitRing.unitRingOver_le_planeOverSubring F r.2⟩
   map_zero' := by
     rw [← map_zero (NumberField.mixedEmbedding (fieldI F))]
@@ -62,7 +62,7 @@ private def archHom [NumberField F] : unitRing F →+ NumberField.mixedEmbedding
     rw [← map_add]
     rfl
 
-private theorem archTop_eq [NumberField F] : archTop F = TopologicalSpace.induced (archHom F) inferInstance := rfl
+theorem archTop_eq [NumberField F] : archTop F = TopologicalSpace.induced (archHom F) inferInstance := rfl
 
 private theorem tendsto_archHom [NumberField F] (y : unitRing F) :
     Filter.Tendsto (archHom F) (@nhds _ (archTop F) y) (nhds (archHom F y)) := by
@@ -71,13 +71,13 @@ private theorem tendsto_archHom [NumberField F] (y : unitRing F) :
 
 -- the norm of the mixed space needs the decidability of the real places (`Fintype` of a subtype): classical here
 open scoped Classical in
-private theorem eventually_archTop [NumberField F] {p : unitRing F → Prop} :
+theorem eventually_archTop [NumberField F] {p : unitRing F → Prop} :
     (∀ᶠ r in @nhds _ (archTop F) 0, p r) ↔ ∃ δ > 0, ∀ r, ‖archHom F r‖ < δ → p r := by
   rw [archTop_eq, nhds_induced, map_zero, (Metric.nhds_basis_ball.comap _).eventually_iff]
   simp only [Set.mem_preimage, Metric.mem_ball, dist_zero_right]
 
 open scoped Classical in
-private theorem norm_archHom_nsmul [NumberField F] (n : ℕ) (x : unitRing F) :
+theorem norm_archHom_nsmul [NumberField F] (n : ℕ) (x : unitRing F) :
     ‖archHom F (n • x)‖ = n * ‖archHom F x‖ := by
   rw [map_nsmul, ← Nat.cast_smul_eq_nsmul ℝ, norm_smul, Real.norm_natCast]
 
@@ -123,7 +123,7 @@ private theorem abs_arg_lt_of_small {G : Type*} [AddCommGroup G] (χ : AddChar G
   linarith
 
 /-- `1/5 ∈ R`: `(3 + 4i)/5` and `(3 − 4i)/5` are unit vectors of `F²`, and their sum less `1` is `1/5`. -/
-private theorem inv_five_mem : ((5 : ℂ)⁻¹) ∈ unitRing F := by
+theorem inv_five_mem : ((5 : ℂ)⁻¹) ∈ unitRing F := by
   have h35 : (3 / 5 : ℝ) ∈ F := by
     have := SubfieldClass.ratCast_mem F (3 / 5 : ℚ)
     push_cast at this
@@ -146,10 +146,10 @@ private theorem inv_five_mem : ((5 : ℂ)⁻¹) ∈ unitRing F := by
   exact sub_mem (add_mem hu hv) (one_mem _)
 
 /-- `r / 5^k`, an element of `R`. -/
-private def fivePow (k : ℕ) (r : unitRing F) : unitRing F :=
+def fivePow (k : ℕ) (r : unitRing F) : unitRing F :=
   ⟨(5 : ℂ)⁻¹ ^ k * r, mul_mem (pow_mem (inv_five_mem F) k) r.2⟩
 
-private theorem nsmul_fivePow (k : ℕ) (r : unitRing F) : (5 ^ k) • fivePow F k r = r := by
+theorem nsmul_fivePow (k : ℕ) (r : unitRing F) : (5 ^ k) • fivePow F k r = r := by
   apply Subtype.ext
   rw [AddSubmonoidClass.coe_nsmul, nsmul_eq_mul]
   simp only [fivePow, Nat.cast_pow, Nat.cast_ofNat]
@@ -168,7 +168,7 @@ private theorem fivePow_add (k : ℕ) (r s : unitRing F) :
   ring
 
 /-- **The profinite neighbourhoods of `0` hold a subgroup `M·R`.** -/
-private theorem exists_nsmul_mem_of_mem_nhds_profTop {A : Set (unitRing F)} (hA : A ∈ @nhds _ (profTop F) 0) :
+theorem exists_nsmul_mem_of_mem_nhds_profTop {A : Set (unitRing F)} (hA : A ∈ @nhds _ (profTop F) 0) :
     ∃ M : ℕ, M ≠ 0 ∧ ∀ y : unitRing F, M • y ∈ A := by
   have hA' : A ∈ ⨅ N : ℕ, @nhds _ (TopologicalSpace.induced
       (QuotientAddGroup.mk' (nsmulAddMonoidHom (α := unitRing F) (N + 1)).range) ⊥) 0 := by

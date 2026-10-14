@@ -1,0 +1,36 @@
+import Proofs.HadwigerNelson.Rigidity.ContinuityGroup
+import Proofs.HadwigerNelson.Rigidity.Herglotz
+import Mathlib.Analysis.Fourier.FiniteAbelian.PontryaginDuality
+import Mathlib.Algebra.Order.Chebyshev
+open MeasureTheory Filter Topology
+#check @IsCompact.ultrafilter_le_nhds
+#check @ProbabilityMeasure.tendsto_iff_forall_integral_tendsto
+#check @ProbabilityMeasure.tendsto_iff_forall_integral_rclike_tendsto
+#check @isTightMeasureSet_of_tendsto_measure_norm_gt
+#check @isCompact_closure_of_isTightMeasureSet
+#check @Circle.coe_exp
+#check @Real.mul_le_sin
+#check @geom_sum_eq
+#check @Complex.norm_exp_I_mul_ofReal_sub_one
+#check @HadwigerNelson.Rigidity.measurable_evalChar
+#check @NumberField.integralBasis_apply
+#check @HadwigerNelson.Rigidity.exists_mul_stableIntegers_le
+#check @Ultrafilter.of_le
+#check @Measure.map_apply
+#check @integral_map
+#check @MeasureTheory.tendsto_integral_of_dominated_convergence
+#check @Nat.le_ceil
+#check @Int.floor_le
+#check @Int.lt_floor_add_one
+#check @Complex.arg_le_pi
+#check @Complex.neg_pi_lt_arg
+#check @Circle.exp_arg
+#check @Real.cos_sq_half
+#check @pi_norm_lt_iff
+#check @HadwigerNelson.Rigidity.archTop_eq
+#check @HadwigerNelson.Rigidity.fivePow
+#check @AddChar.map_zsmul_eq_zpow
+#check @AddChar.map_nsmul_eq_pow
+#check @Circle.exp_int_mul
+#check @Circle.exp_sum
+example : True := trivial

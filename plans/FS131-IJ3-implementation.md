@@ -68,3 +68,62 @@ line).
 `invariantComponent_model` name none. The other files declare only `variable (F : Subfield ℝ)` or `{F}`. The files'
 instances (`UnitCircle`'s `instMulActionDual`, `measurableConstSMul_dual`, `countable_unitRing_of_numberField`,
 `countable_unitCircle`) take their binders written. **No stored type lacks a class binder its section declares.**
+
+## Stage 2 — SAVED: M2b complete — the eight lemmas public, `archimedean_support` proved
+
+**2.1 The eight `private`s** (item 876 ruling 1). `Proofs/HadwigerNelson/Rigidity/ContinuityGroup.lean`: `private ` removed
+from `archHom` (l. 56), `archTop_eq` (65), `eventually_archTop` (74), `norm_archHom_nsmul` (80), `inv_five_mem` (126),
+`fivePow` (149), `nsmul_fivePow` (152), `exists_nsmul_mem_of_mem_nhds_profTop` (171); `git diff` on the file: those eight
+lines and nothing else. No public name of the library clashes with the eight (grep of `Proofs/`). `BochnerTau`'s
+`open private … from Proofs.HadwigerNelson.Rigidity.ContinuityGroup` (two lines) deleted; the module reads the eight by
+their public names. (The two public definitions carry their docstrings.)
+
+**2.2 `archimedean_support`** (written against `data/fs131/ij3/work/BochnerTau.lean`, elaborated in a scratch farm of the
+tree's compiled library with the edited `ContinuityGroup` compiled over it, `data/fs131/ij3/farm.sh`; rounds
+`logs/BT-1.log` … `BT-4.log`, the last exit 0 with **no warning**; copied over the module). About 616 lines, inside IJ2's
+450–700. **The route is IJ2's § 5.7, with these choices of mine:**
+- *Coordinates without `ℚ`-linear algebra on the mixed space* (`as_exists_coords`): `b_i = c·ω_i` (`ω` an integral basis,
+  `c·𝓞_L ⊆ R` by `exists_mul_stableIntegers_le` — `ContinuityGroup`'s private `exists_nat_mul_integers_mem` restated with
+  its four-line proof as `as_natMul_integers_mem`, since that lemma is not among the eight), `q_j(y) = ω^*_j(y)/c`; only
+  `q_j(b_i) = δ_ij` and injectivity of `y ↦ q(y)` are kept. The bound `‖ι(y)‖ ≤ Σ_j |q_j(y)|·‖ι(b_j)‖`
+  (`as_norm_archHom_le`) uses a common denominator `N` (`N•y` an integral combination of the `b_j`, by injectivity).
+- *Lattice points* `Σ_j z_j • b_j/5^k`: a point with `5^k q(y)` integral is the lattice point (`as_eq_lat`), where
+  `χ(y) = exp(i⟨t_k χ, q(y)⟩)` with `t_k(χ)_j = 5^k arg χ(b_j/5^k)` (`as_char_eq_asEv`).
+- *Tightness* (`as_tight`): `as_dirichlet` (for `|θ| ≤ π`, `L|θ| ≥ 2π`: `Σ_{n<L}(1 − cos nθ) ≥ L/2`, from the geometric sum
+  and Jordan's inequality `Real.mul_le_sin`), averaged and Markov's inequality (`as_measure_far_le`), into
+  `isTightMeasureSet_iff_exists_isCompact_measure_compl_le` on `ι → ℝ` (sup norm; the closed ball compact).
+- *The limit* (`as_exists_limit`): `isCompact_closure_of_isTightMeasureSet` and `IsCompact.ultrafilter_le_nhds` at
+  `Ultrafilter.of atTop`, read through `ProbabilityMeasure.tendsto_iff_forall_integral_rclike_tendsto`; the transform at
+  the lattice points is eventually constant along `atTop`.
+- *Density* (`as_transform_eq`): `d_m` with coordinates `⌊5^m q(y)⌋/5^m`; `ι(d_m − y) → 0` gives `φ(d_m) → φ(y)` by
+  `archTop`-continuity, and dominated convergence the limit's side.
+- *Conclusion* (`as_support_prob`): `e(s)(r) = exp(i⟨s, q(r)⟩)`, continuous into the dual; `ρ = e_*μ`
+  (`measure_eq_of_fourier`); `range e = ⋃_n e(closedBall 0 n)` measurable and inside `archChars`. The theorem normalises a
+  finite `ρ` to a probability.
+Private helpers added: 25 (`as_*`, `asT`, `asEv` and their lemmas), names distinct from the module's later helpers. No
+import added.
+
+**2.3 Build 1** (`./scripts/build.sh` under the slot, `MEMMAX=10G BATCH=8`; full output `logs/build1-full.log`, gate log
+`build/gate/build/20261014T164320Z-3873571.log`): `OK — 256 of 256 batches, 8 module(s) rebuilt, 16 module(s) with
+warnings, 8m23s`, exit 0. Rebuilt: `ContinuityGroup`, `BochnerTau`, the five `Count*` modules, `Proofs`. **No warning from
+`ContinuityGroup` or `BochnerTau`**; every warning of the build is a ``declaration uses `sorry` `` in another module.
+
+**2.4 Axioms, from the built tree** (`data/fs131/ij3/probes/ax-m2b-built.lean`, `logs/ax-m2b-built.log`):
+`bochnerOn_tauPrime` and `archimedean_support` — `[propext, Classical.choice, Quot.sound]`. Sent to the coordinator as one
+line (first from the farm compile, `logs/ax-m2b.log`). The full receipts of § Done means item 4 are the last stage's.
+
+**2.5 Lane A, `exists_admissiblePair`: the plan, and its price** (sent to the coordinator; not proved here).
+*Read aloud:* over every real number field `F` there are unit vectors `u, w` of `F²` such that `(a, b) ↦ u^a w^b` is
+injective on `ℤ²` and, for every finite-index `Λ ⊆ ℤ²`, the values on `Λ` generate `F(i)`. *Route* (X02D's valuation
+argument at one degree-one prime; `AdmissiblePair.ofPow`): an odd prime `p` and a prime `𝔓` of `𝓞_L` of degree one,
+unramified; `(z) = 𝔓^h`; `w = z/z̄`; then `ℚ(w^k) = L` for every `k ≥ 1`: if `w^k ∈ M ⊊ L`, every prime of `𝓞_L` above
+`𝔭 = 𝔓 ∩ 𝓞_M` contains `z` (the valuation of `w^k ∈ M` at `𝔭` is positive), so it is `𝔓`, and `Σ e·f = [L : M]` with
+`e = f = 1` gives `[L : M] = 1`; `u` the same at a second prime, independence by the valuations at the two primes.
+*Leaves (private helpers):* A1 Schur — infinitely many primes divide values of a monic integral polynomial (~80); A2 a
+degree-one unramified odd prime — a residue map `𝓞_L → ℤ/p` through `discr · 𝓞_L ⊆ ℤ[θ]`
+(`discr_mul_isIntegral_mem_adjoin`), unramified by `not_dvd_discr_iff_forall_mem` (200–300); A3 a principal power,
+class group finite (30–50); A4 `𝔓̄ ≠ 𝔓` (conjugation fixing `𝓞/𝔓 = ℤ/p` puts `2i` in `𝔓`) (40–70); A5 the core over
+`𝓞_M` with `Ideal.sum_ramification_inertia` (300–450); A6 independence (100–150); A7 assembly (60–100). **Price: 800–1,250
+lines, about 1,000 — from the plan, not from proved leaves.** No archimedean replacement exists: for totally real `F`, `L`
+is CM and every conjugate of a unit vector lies on the unit circle. Messaged to the coordinator with the proposal to take
+the split next (it takes the pair as an argument) and leave lane A to a job of its own.

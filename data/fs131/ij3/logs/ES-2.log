@@ -1,0 +1,12 @@
+slot: admitted ij3f: mem 5 GiB (hard cap), cpus 2,3
+data/fs131/ij3/work/EntropySplitMax.lean:137:37: warning: This simp argument is unused:
+  integral_smul_measure
+
+Hint: Omit it from the simp argument list.
+  simp [AddChar.map_zero_eq_one, i̵n̵t̵e̵g̵r̵a̵l̵_̵s̵m̵u̵l̵_̵m̵e̵a̵s̵u̵r̵e̵,̵ ̵Measure.real]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/EntropySplitMax.lean:195:6: error: No goals to be solved
+data/fs131/ij3/work/EntropySplitMax.lean:210:12: error(lean.unknownIdentifier): Unknown constant `MeasureTheory.Measure.smul_le_smul_left`
+seconds=4
+exit=1

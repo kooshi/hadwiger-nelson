@@ -1,0 +1,141 @@
+slot: admitted ij3f: mem 5 GiB (hard cap), cpus 1,2
+data/fs131/ij3/work/BochnerTau.lean:224:39: error: unsolved goals
+F : Subfield ℝ
+inst✝¹ : NumberField ↥F
+ι : Type
+inst✝ : Fintype ι
+b : ι → ↥(unitRing F)
+q : ι → ↥(unitRing F) →+ ℚ
+hqb : ∀ (i j : ι), (q j) (b i) = if i = j then 1 else 0
+hinj : Function.Injective fun y j => (q j) y
+y : ↥(unitRing F)
+N : ℕ := ∏ j, ((q j) y).den
+hN : N = ∏ j, ((q j) y).den
+hN0 : N ≠ 0
+hdvd : ∀ (j : ι), ((q j) y).den ∣ N
+w : ι → ℤ := fun j => ↑(N / ((q j) y).den) * ((q j) y).num
+hw : ∀ (j : ι), ↑(w j) = ↑N * (q j) y
+j' : ι
+⊢ ↑(w j') = ∑ x, (q j') (↑(w x) * b x)
+data/fs131/ij3/work/BochnerTau.lean:229:15: warning: This simp argument is unused:
+  map_zsmul
+
+Hint: Omit it from the simp argument list.
+  simp only [m̵a̵p̵_̵z̵s̵m̵u̵l̵,̵ ̵hqb, smul_ite, smul_zero, Finset.sum_ite_eq', Finset.mem_univ, if_true, zsmul_eq_mul,
+        mul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/BochnerTau.lean:229:26: warning: This simp argument is unused:
+  hqb
+
+Hint: Omit it from the simp argument list.
+  simp only [map_zsmul, h̵q̵b̵,̵ ̵smul_ite, smul_zero, Finset.sum_ite_eq', Finset.mem_univ, if_true,
+  ̲  ̲ ̲ ̲ ̲ ̲zsmul_eq_mul,
+  ̵  ̵ ̵ ̵ ̵ ̵mul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/BochnerTau.lean:229:31: warning: This simp argument is unused:
+  smul_ite
+
+Hint: Omit it from the simp argument list.
+  simp only [map_zsmul, hqb, smul_i̵t̵e̵,̵ ̵s̵m̵u̵l̵_̵zero, Finset.sum_ite_eq', Finset.mem_univ, if_true,
+  ̲  ̲ ̲ ̲ ̲ ̲zsmul_eq_mul,
+  ̵  ̵ ̵ ̵ ̵ ̵mul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/BochnerTau.lean:229:41: warning: This simp argument is unused:
+  smul_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [map_zsmul, hqb, smul_ite, s̵m̵u̵l̵_̵z̵e̵r̵o̵,̵ ̵Finset.sum_ite_eq', Finset.mem_univ, if_true, zsmul_eq_mul,
+        mul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/BochnerTau.lean:229:52: warning: This simp argument is unused:
+  Finset.sum_ite_eq'
+
+Hint: Omit it from the simp argument list.
+  simp only [map_zsmul, hqb, smul_ite, smul_zero, F̵i̵n̵s̵e̵t̵.̵s̵u̵m̵_̵i̵t̵e̵_̵e̵q̵'̵,̵ ̵Finset.mem_univ, if_true, zsmul_eq_mul, mul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/BochnerTau.lean:229:72: warning: This simp argument is unused:
+  Finset.mem_univ
+
+Hint: Omit it from the simp argument list.
+  simp only [map_zsmul, hqb, smul_ite, smul_zero, Finset.sum_ite_eq', F̵in̵s̵e̵t̵.̵m̵e̵m̵_̵u̵n̵i̵v̵,̵ ̵i̵f_true, zsmul_eq_mul,
+        mul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/BochnerTau.lean:229:89: warning: This simp argument is unused:
+  if_true
+
+Hint: Omit it from the simp argument list.
+  simp only [map_zsmul, hqb, smul_ite, smul_zero, Finset.sum_ite_eq', Finset.mem_univ,
+  ̲  ̲ ̲ ̲ ̲ ̲i̵f̵_̵t̵r̵u̵e̵,̵ ̵zsmul_eq_mul, mul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/BochnerTau.lean:230:6: warning: This simp argument is unused:
+  mul_one
+
+Hint: Omit it from the simp argument list.
+  simp only [map_zsmul, hqb, smul_ite, smul_zero, Finset.sum_ite_eq', Finset.mem_univ, if_true,
+  ̲  ̲ ̲ ̲ ̲ ̲z̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵m̵u̵l̵_̵o̵n̵e̵]̵z̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/BochnerTau.lean:402:29: warning: Variable name `j` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+data/fs131/ij3/work/BochnerTau.lean:608:6: error: mod_cast has type
+  ↑⌊↑(5 ^ m) * (q j) y⌋ ≤ ↑(5 ^ m) * (q j) y
+but is expected to have type
+  ↑(z m j) ≤ ↑(5 ^ m) * (q j) y
+data/fs131/ij3/work/BochnerTau.lean:611:6: error: mod_cast has type
+  ↑(5 ^ m) * (q j) y < ↑(⌊↑(5 ^ m) * (q j) y⌋ + 1)
+but is expected to have type
+  ↑(5 ^ m) * (q j) y < ↑(z m j + 1)
+data/fs131/ij3/work/BochnerTau.lean:615:65: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  1 ^ ?n
+in the target expression
+  |↑(z m j) - 5 ^ m * ↑((q j) y)| ≤ 1 / 5 ^ m * 5 ^ m
+
+F : Subfield ℝ
+inst✝³ : NumberField ↥F
+ι : Type
+inst✝² : Fintype ι
+b : ι → ↥(unitRing F)
+q : ι → ↥(unitRing F) →+ ℚ
+hqb : ∀ (i j : ι), (q j) (b i) = if i = j then 1 else 0
+hinj : Function.Injective fun y j => (q j) y
+ρ : Measure (Dual F)
+inst✝¹ : IsProbabilityMeasure ρ
+μ : Measure (ι → ℝ)
+inst✝ : IsProbabilityMeasure μ
+hμ :
+  ∀ (K : ℕ) (y : ↥(unitRing F)) (z : ι → ℤ),
+    (∀ (j : ι), 5 ^ K * (q j) y = ↑(z j)) → ∫ (s : ι → ℝ), asEv (fun j => ↑((q j) y)) s ∂μ = ∫ (χ : Dual F), ↑(χ y) ∂ρ
+y : ↥(unitRing F)
+φ : ↥(unitRing F) → ℂ := fun y => ∫ (χ : Dual F), ↑(χ y) ∂ρ
+h : Continuous[archTop F, _] φ
+hφ : φ = fun y => ∫ (χ : Dual F), ↑(χ y) ∂ρ
+Bs : ℝ := ∑ j, ‖(archHom F) (b j)‖
+hBs : Bs = ∑ j, ‖(archHom F) (b j)‖
+z : ℕ → ι → ℤ := fun m j => ⌊5 ^ m * (q j) y⌋
+d : ℕ → ↥(unitRing F) := fun m => ∑ j, z m j • fivePow F m (b j)
+hqd : ∀ (m : ℕ) (j : ι), 5 ^ m * (q j) (d m) = ↑(z m j)
+m : ℕ
+j : ι
+h5 : 0 < 5 ^ m
+e1 : 5 ^ m * ↑((q j) (d m)) = ↑(z m j)
+a1 : ↑(z m j) ≤ 5 ^ m * ↑((q j) y)
+a2 : 5 ^ m * ↑((q j) y) < ↑(z m j) + 1
+e2 : ↑((q j) (d m)) - ↑((q j) y) = (↑(z m j) - 5 ^ m * ↑((q j) y)) / 5 ^ m
+⊢ |↑(z m j) - 5 ^ m * ↑((q j) y)| ≤ 1 / 5 ^ m * 5 ^ m
+data/fs131/ij3/work/BochnerTau.lean:696:2: error: 'calc' expression has type
+  ρ (archChars ↥(unitRing F))ᶜ ≤ 0
+but is expected to have type
+  ρ (archChars ↥(unitRing F))ᶜ = 0
+seconds=20
+exit=1
