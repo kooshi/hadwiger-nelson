@@ -1,0 +1,7 @@
+compared: 215 named constants of the first dump (kinds, types, modules), 62 data definitions' values, 22 example heads of the base files
+internal (not compared): 83 before, 83 after
+IDENTICAL THM HadwigerNelson.Rigidity.TateModel.sigmaCompactSpace: identical up to the module's name in 21 hygienic instance-binder names, Lean's hash equal; module Proofs.HadwigerNelson.Rigidity.ThinBoxes -> Proofs.HadwigerNelson.Rigidity.TateModel
+new public constants in the second dump: 0 (allow-list: 0)
+new private constants in the second dump: 0
+examples in the working files that the base does not hold: 0
+PASS: no statement and no definition changed but the move

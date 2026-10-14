@@ -193,13 +193,26 @@ def main():
             bad.append(f"KIND     {name}: {b['kind']} -> {a['kind']}")
         if a["prop"] != b["prop"]:
             bad.append(f"PROP     {name}: proposition {b['prop']} -> {a['prop']}")
-        if a["type"] != b["type"]:
+        hyg = 0
+        if a["type"] != b["type"] and name in MOVED:
+            # a statement elaborated in another file stores its instance binders under names that carry the file's
+            # module (`inst._@.<module>.<n>._hygCtx._hyg.<k>`, LEAN.md FS131-IU1, FS131-ID1): rewrite the old and the new
+            # module's name there and no other, and compare Lean's hash (blind to binder names) unrewritten
+            old, new = MOVED[name]
+            def norm(t):
+                return t.replace(f"_@.{old}.", "_@.<MOVED>.").replace(f"_@.{new}.", "_@.<MOVED>.")
+            ha, hb = a["type"].split(" ", 1)[0], b["type"].split(" ", 1)[0]
+            if ha == hb and norm(a["type"]) == norm(b["type"]):
+                hyg = sum(1 for x, y in zip(b["type"].split(" "), a["type"].split(" ")) if x != y)
+        if a["type"] != b["type"] and not hyg:
             if name in dropped:
                 ruled.append(f"RULED DROP {b['kind']} {name}: the stored statement differs (a dropped unread binder)")
             else:
                 bad.append(f"TYPE     {b['kind']} {name}: the stored statement differs")
         elif name in MOVED and a["kind"] == b["kind"]:
-            moved_ok.append(f"IDENTICAL {b['kind']} {name}: stored type unchanged; module {b['module']} -> {a['module']}")
+            how = (f"identical up to the module's name in {hyg} hygienic instance-binder names, Lean's hash equal"
+                   if hyg else "stored type unchanged")
+            moved_ok.append(f"IDENTICAL {b['kind']} {name}: {how}; module {b['module']} -> {a['module']}")
         if b["kind"] == "DEF" and not b["prop"]:
             n_val += 1
             if a["value"] != b["value"]:

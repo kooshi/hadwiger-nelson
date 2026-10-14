@@ -100,10 +100,6 @@ namespace TateModel
 
 variable (D : TateModel F)
 
-/-- **`W` is σ-compact**: the countable union of the compact sets `K + ι(x)`, `x ∈ O′` (`exists_isCompact`; `L` countable). -/
-theorem sigmaCompactSpace : SigmaCompactSpace (SAdeleRing F) := by
-  sorry
-
 /-- **The image of a closed set under `π` is Borel**: σ-compact (`sigmaCompactSpace`, `continuous_π`), and compact sets are
 closed in the Hausdorff `R̂`. -/
 theorem measurableSet_image {s : Set (SAdeleRing F)} (hs : IsClosed s) : MeasurableSet (D.π '' s) := by

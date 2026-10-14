@@ -176,6 +176,10 @@ theorem mem_TA (t : fieldI F) (b : mixedEmbedding.mixedSpace (fieldI F)) :
   rw [AddChar.map_add_eq_mul]
   exact Set.mul_mem_mul (D.toSAdele_mem_torsionChars t) (D.arch_mem b)
 
+/-- **`W` is σ-compact**: the countable union of the compact sets `K + ι(x)`, `x ∈ O′` (`exists_isCompact`; `L` countable). -/
+theorem sigmaCompactSpace : SigmaCompactSpace (SAdeleRing F) := by
+  sorry
+
 /-- **`π` is open** (read by Lemma 3.1′ (i), X01D l. 230): the open mapping theorem for the σ-compact `W`
 (`AddChar.toMonoidHom` and `MonoidHom.isOpenMap_of_sigmaCompact`). -/
 theorem isOpenMap : IsOpenMap D.π := by

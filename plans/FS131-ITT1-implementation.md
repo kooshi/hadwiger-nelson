@@ -89,3 +89,28 @@ F)`; the move with text unchanged; `isOpenMap` through a private helper over `D.
 proved by the intrinsic route once `compactSpace_adicCompletionIntegers` is proved, with `TateModel` importing `TateLocal`
 (recorded in the `ARCHITECTURE.md` row). Its condition: if the intrinsic route needs more than the restricted product's
 σ-compactness that Mathlib provides at the pin, say so before typing anything new.
+
+## Stage 2 — SAVED: the move, shown from the kernel's side
+
+**2.1 The edit.** The three lines of `TateModel.sigmaCompactSpace` (its docstring, its statement, its `sorry`) cut from
+`Rigidity/ThinBoxes` (inside `namespace TateModel`, after `variable (D : TateModel F)`) and pasted, byte for byte, into
+`Rigidity/TateModel` inside `namespace TateModel` just above `isOpenMap` (where `variable {F} (D : TateModel F)` is in
+scope: `F` implicit in both places, and `D` read by neither statement). Nothing else in either file changed (`git diff`:
+4 lines out, 4 lines in). `ThinBoxes` imports `TateModel` through `PlaceSizes → TateCharacter`, so its readers see the
+name unchanged.
+
+**2.2 Build 2** (under the slot, `MEMMAX=10G BATCH=8`): `OK — 254 of 254 batches, 11 module(s) rebuilt, 16 module(s)
+with warnings, 7m58s`, exit 0 (`logs/build2.log`, `build2-full.log`); every warning a `sorry`.
+
+**2.3 From the kernel's side.** Dump after the move (`statements-move.txt`, `.xz` and sha256 committed) against stage 1's,
+`tools/fs131_itt1_statements.py … 432600f15 --moved`: **PASS** — 215 named constants (kinds, types, modules), 62 data
+definitions' values, 22 example heads; no new constant; and `IDENTICAL THM …TateModel.sigmaCompactSpace: identical up to
+the module's name in 21 hygienic instance-binder names, Lean's hash equal; module …ThinBoxes -> …TateModel`
+(`statements-compare-move.out`). The stored type differs in exactly one way, measured: the instance binder's stored name
+carries the file's module (`inst._@.Proofs.HadwigerNelson.Rigidity.ThinBoxes.3304278987._hygCtx._hyg.6` becomes
+`…TateModel.3304278987…`; LEAN.md's FS131-IU1 line), 21 tokens, every other of the 4,006 tokens equal and Lean's hash of
+the type (blind to binder names) equal, 1262488868 both. The reader rewrites the old and the new module's name in that
+position and no other, for the moved constant only. **Controls:** `--control` on these two dumps, 9 of 9 planted faults
+reported (`statements-compare-move-control.out`; plant 9 changes the moved statement in its new home and is reported
+`TYPE`); and the same two dumps without `--moved` FAIL with `MOVE …: ThinBoxes -> TateModel; expected ThinBoxes ->
+ThinBoxes` (`statements-compare-move-unmoved.out`) — the check sees the move.
