@@ -105,3 +105,9 @@ branch and do not push**; I copy the branches to a local backup.
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 (2026-10-14 07:42 UTC) — one more docstring line
+
+In `Rigidity/Pieces`' module docstring, the phrase "at each piece, with `[PolishSpace (PieceDual M)]` from `Rigidity.polishSpace_dual`." becomes "at each piece (it takes no `PolishSpace` since FS131-KN9)." This is prose only. The binder was removed from `haar_or_zero_entropy` on another branch (inventory items 785, 791).
+
+You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
