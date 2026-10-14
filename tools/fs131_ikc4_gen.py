@@ -531,17 +531,17 @@ def emit(a, P, n, pl, reps, W, blocks, orbits, p1stream, qtrans, tnu, rows, opst
             open(path, 'w').write(txt); written.append((path, len(txt)))
         bnames1 = []; bnamesq = []; ktnames = []; mods = []
         for k, t in enumerate(B1):
-            nm = f'{name}_b{k}'; bnames1.append(nm); mod = f'{a.prefix}B{k}'; mods.append(mod)
+            nm = f'{name}b{k}'; bnames1.append(nm); mod = f'{a.prefix}B{k}'; mods.append(mod)
             module(mod, f'/-- Times-1 block {k} of the certificate at p = {P} (data). -/\ndef {nm} : Blk :=\n  ' + blkL(t),
                    f'-- Data only: times-1 block {k} of `{name}`, its PSD witness at scale 2^{a.scale_bits}.')
         for k, t in enumerate(BQ):
-            nm = f'{name}_q{k}'; bnamesq.append(nm); mod = f'{a.prefix}Q{k}'; mods.append(mod)
+            nm = f'{name}q{k}'; bnamesq.append(nm); mod = f'{a.prefix}Q{k}'; mods.append(mod)
             module(mod, f'/-- Times-q block {k} of the certificate at p = {P} (data). -/\ndef {nm} : Blk :=\n  ' + blkL(t),
                    f'-- Data only: times-q block {k} of `{name}`.')
         if a.kt_maps:
             km_ = a.kt_maps
             for r in range((len(kt) + km_ - 1) // km_):
-                nm = f'{name}_kt{r}'; ktnames.append(nm); mod = f'{a.prefix}K{r}'; mods.append(mod)
+                nm = f'{name}kt{r}'; ktnames.append(nm); mod = f'{a.prefix}K{r}'; mods.append(mod)
                 module(mod, f'/-- Maps {r * km_} to {min(len(kt), (r + 1) * km_) - 1} of the K table of the certificate at p = {P} '
                        f'(data: the kernel compares it with `ktable`). -/\ndef {nm} : List ((Nat × Nat × Nat) × List (Nat × Nat)) :=\n  ' +
                        lean_list([ktL(e) for e in kt[r * km_:(r + 1) * km_]], '    '),
@@ -556,10 +556,10 @@ def emit(a, P, n, pl, reps, W, blocks, orbits, p1stream, qtrans, tnu, rows, opst
                                  f'{hexl(sum(v << (w * t) for t, v in enumerate(Nn)))})')
                 return '[' + ',\n    '.join('[' + ', '.join(rowsL[k:k + 16]) + ']' for k in range(0, len(rowsL), 16)) + ']'
             for r in range(1, len(p1bounds)):
-                m = p1bounds[r]; nm = f'{name}_p1s{r}'; mod = f'{a.prefix}P{r}'
+                m = p1bounds[r]; nm = f'{name}p1s{r}'; mod = f'{a.prefix}P{r}'
                 module(mod, f'/-- Phase 1\'s orbit rows after its first {m} pairs (data: the kernel compares it with its own fold). -/\n'
                        f'def {nm} : List (List ORow) :=\n  ' + bucketsL(m) +
-                       f'\n\n/-- Phase 1\'s bound after its first {m} pairs (data). -/\ndef {name}_p1b{r} : Nat := {p1bnd[m]}',
+                       f'\n\n/-- Phase 1\'s bound after its first {m} pairs (data). -/\ndef {name}p1b{r} : Nat := {p1bnd[m]}',
                        f'-- Data only: phase 1 of `{name}` after {m} of its {p1bounds[-1]} pairs.')
                 mods.append(mod)
             json.dump({'bounds': p1bounds, 'bnd': [p1bnd[m] for m in p1bounds]}, open(a.out + '.p1.json', 'w'))
@@ -569,12 +569,12 @@ def emit(a, P, n, pl, reps, W, blocks, orbits, p1stream, qtrans, tnu, rows, opst
         if a.doc:
             txt.append(open(a.doc).read().rstrip('\n'))
         txt.append('namespace HadwigerNelson.FibreCert')
-        txt.append(f'/-- The certificate at p = {P}, re-encoded for the kernel; its blocks are `{name}_b0` … in their own modules. -/')
+        txt.append(f'/-- The certificate at p = {P}, re-encoded for the kernel; its blocks are `{name}b0` … in their own modules. -/')
         txt.append(f'def {name} : Cert where')
         txt.append(certbody.replace(BLK1, '[' + ', '.join(bnames1) + ']').replace(BLKQ, '[' + ', '.join(bnamesq) + ']'))
         if a.kt_maps:
             txt.append(f'/-- The K table of `{name}` as literals (data: the kernel compares each piece with `ktable {name}`). -/')
-            txt.append(f'def {name}_kt : List ((Nat × Nat × Nat) × List (Nat × Nat)) :=\n  List.flatten [' + ', '.join(ktnames) + ']')
+            txt.append(f'def {name}kt : List ((Nat × Nat × Nat) × List (Nat × Nat)) :=\n  List.flatten [' + ', '.join(ktnames) + ']')
         if a.tail:
             txt.append(open(a.tail).read().rstrip('\n'))
         txt.append('end HadwigerNelson.FibreCert')

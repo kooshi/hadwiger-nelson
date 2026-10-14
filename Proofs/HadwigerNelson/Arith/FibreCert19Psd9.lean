@@ -10,11 +10,11 @@ Kernel reduction, one declaration per block: `s·R − M·Mᵀ` diagonally domin
 namespace HadwigerNelson.FibreCert
 
 /-- The times-1 block 18 of the `p = 19` certificate passes the PSD check. -/
-theorem cert19_psd18 : psdCheck cert19_b18 = true := by
+theorem cert19_psd18 : psdCheck cert19b18 = true := by
   decide +kernel
 
 /-- The times-q block 0 of the `p = 19` certificate passes the PSD check. -/
-theorem cert19_psdq0 : psdCheck cert19_q0 = true := by
+theorem cert19_psdq0 : psdCheck cert19q0 = true := by
   decide +kernel
 
 end HadwigerNelson.FibreCert

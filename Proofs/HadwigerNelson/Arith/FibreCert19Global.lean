@@ -9,8 +9,8 @@ One declaration by kernel reduction: `globalOK`'s conjuncts with phase 1's resul
 
 namespace HadwigerNelson.FibreCert
 
-/-- `globalOK`'s conjuncts hold at phase 1's result `(cert19_p1s8.flatten, true, cert19_p1b8)`. -/
-theorem cert19_globalP : globalOKP cert19 (cert19_p1s8.flatten, true, cert19_p1b8) = true := by
+/-- `globalOK`'s conjuncts hold at phase 1's result `(cert19p1s8.flatten, true, cert19p1b8)`. -/
+theorem cert19_globalP : globalOKP cert19 (cert19p1s8.flatten, true, cert19p1b8) = true := by
   decide +kernel
 
 end HadwigerNelson.FibreCert

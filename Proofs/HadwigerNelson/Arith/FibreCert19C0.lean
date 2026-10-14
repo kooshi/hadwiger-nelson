@@ -10,12 +10,12 @@ One declaration by kernel reduction: pairs `0` to `2080` of phase 1 (`p1stepF`, 
 namespace HadwigerNelson.FibreCert
 
 /-- Phase 1's orbit rows before its first pair: every row zero (`phase1`'s start). -/
-def cert19_p1s0 : List (List ORow) := (bucket16 (cert19.orbits.map fun o => (o.1, o.2, 0, 0)))
+def cert19p1s0 : List (List ORow) := (bucket16 (cert19.orbits.map fun o => (o.1, o.2, 0, 0)))
 
-/-- Phase 1 over pairs `0` to `2080` of `16653`, from the state after the first `0` (`p1AtF`), ends with the orbit rows `cert19_p1s1`, every transporter checked and the bound `cert19_p1b1`. -/
+/-- Phase 1 over pairs `0` to `2080` of `16653`, from the state after the first `0` (`p1AtF`), ends with the orbit rows `cert19p1s1`, every transporter checked and the bound `cert19p1b1`. -/
 theorem cert19_p1c0 : p1CoreEq ((((repPairs cert19.reps.length).drop 0).take 2081).foldl
-    (p1stepF cert19 cert19_kt (cert19.blocks1.map (kmax cert19))) (p1AtF cert19 cert19_p1s0 true 0 0))
-    cert19_p1s1 cert19_p1b1 = true := by
+    (p1stepF cert19 cert19kt (cert19.blocks1.map (kmax cert19))) (p1AtF cert19 cert19p1s0 true 0 0))
+    cert19p1s1 cert19p1b1 = true := by
   decide +kernel
 
 end HadwigerNelson.FibreCert

@@ -180,3 +180,90 @@ The short times are `&&` stopping at the corrupted entry; the last-entry plants 
 isDefEq`), the library's `Seg0` (62 s) did not: rerun with the limit lifted, refused. **The proofs' reopened part:
 none** — `certOK`, `FibreCertSound` and K2 are untouched (§ 5), so nothing was re-proved; the first implementer's
 counterexample controls are about `certOK`'s definition, which is unchanged.
+
+## Stage 5 — SAVED: no conclusion weakened; the gate items of the brief
+
+* **The lint first failed** (`lake lint`, after build 3): `defsWithUnderscore`, 46 generated data `def`s
+  (`cert19_b0`, `cert19_kt`, `cert19_p1s1`, …). Renamed in both generators to lowerCamelCase (`cert19b0`, `cert19kt`,
+  `cert19p1s1`, `cert19p1b1`, `cert19q0`, `cert19kt0`; theorem names unchanged), all 65 modules regenerated, the map's
+  rows updated (`tools/check_architecture.py` PASS, `logs/arch2.txt`), and the library rebuilt:
+  **`logs/build4.log` (full `logs/build4-full.log`): OK, 264 of 264 batches, 66 modules rebuilt, 0 modules with
+  warnings, 38 m 26 s.** Its per-module times (contended): `Kt` 43–45 s, `C` 34–58 s, `Global` 1.3 s, `Seg` 80/40/36/32 s,
+  `Psd` 88–96 s (`Psd9` 41 s), `Bound` 3.0 s — 1,589 s in all; peaks within 0.05 GiB of § 3.2's, at most 7.27 GiB
+  (`Seg0`; `logs/build4-rss.txt`). Then **`lake lint --no-build -- --no-build --trace`: `-- Linting passed for
+  Proofs.`, exit 0** (`logs/lint.log`).
+* **The stored statements, from the kernel's side**: `StatementDump.lean` on the final tree → `statements-after.txt`,
+  **byte-identical to § 1.3's dump** (sha256 `62f292bc668f…`, 791 constants of `FibreCert`, `FibreCert3`,
+  `FibreCertSound`); `tools/fs131_ikc1_statements.py` PASS (`statements-compare.txt`); its control — one character
+  planted in the after-dump's stored type of `sum_le_of_certOK` — exits 1 naming it (`statements-compare-control.txt`).
+* **Changes to `certOK`'s definition: none.** Nor to `Cert`, `FibreCertSound`, `FibreCert3` or `FibreCert11*`.
+* **Axioms**: `data/fs131/ikc4/lean/Axioms.lean` on the final tree → `axioms.txt`: 420 public records and 438 private
+  theorems of 81 modules, every one a subset of the standard three; the planted record reads `[sorryAx]`;
+  `tools/fs131_ikc2_axioms.py` PASS (`axioms-read.txt`), its control exits 1 (`axioms-control.txt`). This job's 190
+  public records listed by `axioms_block.py` are each in the print and clean (`axioms-block.txt`).
+* `native_decide` and `sorry`: in none of this job's files (`grep`).
+* Not run (the landing's): the whole-library audit, the vacuity scan, the assumptions step, the doubled-names scan. For
+  the vacuity scan: the bounds' hypotheses are inhabited by `model_nineteen` (`φ = 0`; `I = {0}`); their only structure
+  is `cert19`, a closed term whose acceptance is `cert19_ok`. The doubled-names scan should see `FibreCertFast`'s
+  `rowsEq`, `entEq`, `ktEq`, `rowsEq_eq`, `entEq_eq` as the only names near FS131-IKC3's probe (`FS131IKC3KT.*`, not in the
+  library).
+* Scratch removed: the farm (`build/ikc4farm`, 70 MB) and the regenerable outputs (`gen/mods`, `gen/checks`, 47 MB).
+  No process of this job is running or queued.
+
+### Slips, my own
+
+* A waiter armed on `$!` of a `setsid` launch held the intermediate shell's PID and fired at once; seen at once, the real
+  PID read from `ps`, nothing acted on (`RUNNING.md`'s "the pid you hold may not be the process you mean"); later
+  launches wrote `$$` to a pid file.
+* The assembly module was copied into `Proofs/` before a generator fix, and its next fix left two side conditions that
+  `rw` had closed: two build attempts lost (build 1's 33 minutes were not, its 65 modules were kept).
+* The lint was run only after the first green build: the underscore names cost a 38-minute rebuild. Running
+  `lake lint` on the first data module would have caught it.
+
+## Drafts for the front page
+
+### `scripts/Axioms.lean`, CLEAN (for the landing; a block after FS131-IKC3's)
+
+`data/fs131/ikc4/axioms-block.txt` — one `#print axioms` line per public `def` and `theorem` of `Arith/FibreCertFast`
+and the 65 `Arith/FibreCert19*` modules (190 records), written by `data/fs131/ikc4/axioms_block.py` from the sources and
+checked against the built tree's print: each present and a subset of the standard three (its control: the print made
+before the definitions' rename lacks exactly the 46 renamed names and the drafter exits 1).
+
+### `data/fs131/claims-NF2.md` § Dated lines (to follow the last)
+
+- 2026-10-14 — **The class-ratio bound at p = 19 is a kernel theorem, from the reduced certificate, with the checker
+  unchanged** (FS131-IKC4): `FibreCert.cert19_ok : certOK cert19 = true` for SEARCH-2026-10-14's
+  `v-p19-phi0-13-qs.json`, from 41 `decide +kernel` declarations (the K table in eight pieces, phase 1 in eight chunks,
+  the shape, four identity segments, twenty PSD blocks), each at most 7.3 GiB, about 24 minutes in all;
+  `FibreCertSound.sum_le_nineteen` (`Σφ ≤ U/L = 88.6434…` for `φ : (ℤ/19)² → [0,1]` with `q(φ) ≥ 0`),
+  `card_le_nineteen` and `card_div_lt_quarter_nineteen` (an independent set of `Cay((ℤ/19)², S)` has density below
+  `1/4`, `0.2455…`), on the standard three. Under the present checker the K table, phase 1 and one identity segment each
+  exceed 12 GiB in one declaration; each is computed instead in a faster form proved equal to the checker's for every
+  certificate (`Arith/FibreCertFast`), so `certOK` and the soundness theorems' statements are unchanged and F2 was not
+  built.
+
+### `LEAN.md` § The kernel's cost model (after the last bullet)
+
+- **A `let` chain in a step the kernel folds over is paid per step.** Phase 1's `p1step` (about 25 `let`s) over 2,081
+  pairs at p = 19: 82.5 s and 6.99 GiB; the same step written as small functions of the state with no `let`
+  (`FibreCertFast.p1stepF`, proved equal): 34.1 s and 5.62 GiB (FS131-IKC4).
+- **Ops of value zero cost the kernel their construction.** The reduced p = 19 certificate has 20,274 ops of non-zero
+  value and about 520,000 of value zero (zero orbit rows × 361 shifts, zero q-monomials); `segCheck` over all of them
+  exceeded 12 GiB in one of four segments, and with the zero rows and monomials left out (`segCheckZ`, proved equal) the
+  four segments were 5.6–7.3 GiB. A certificate's count of non-zero ops is not its kernel price (FS131-IKC4).
+- **Reaching field `n` of a sequentially read stream costs `n` reads.** A chunk of phase 1 starting 14,571 pairs in,
+  its 19 coefficient lists dropped from the start, exceeded 12 GiB; with the reader placed by one shift into the right
+  chunk (`FibreCertFast.rdAt`, `readIter_eq_rdAt`, `coefFrom_eq`) the same chunk was 55.5 s and 6.56 GiB (FS131-IKC4).
+- **Memory is returned between declarations of one file**: two 183 × 183 PSD checks in one module peaked at 5.56 GiB
+  against 4.82 GiB for one (FS131-IKC4).
+- **A check that does not fit can be made to fit without changing the checker**: define the faster form beside it,
+  prove it equal for every input, and rewrite (`Arith/FibreCertFast`: no statement of the soundness proof moved, `cert3`
+  and `cert11` untouched) (FS131-IKC4).
+
+### `LEAN.md` § Searching — Lean (after the last bullet)
+
+- `show l = l.drop 0 from rfl` on a closed list the elaborator can compute makes it compute the list (maximum recursion
+  depth on `repPairs 182`); `rw [← List.drop_zero (l := …)]` does not. A `by rw [h]; decide` whose goal `rw` closes by
+  `rfl` (an `≤` between equal literals) fails "no goals": write such side conditions as terms
+  (`Nat.le_trans (by decide) (Nat.le_of_eq h.symm)`). The environment linters refuse a `def` with an underscore
+  (`defsWithUnderscore`): generated data names are lowerCamelCase (`cert19b0`, not `cert19_b0`) (FS131-IKC4).

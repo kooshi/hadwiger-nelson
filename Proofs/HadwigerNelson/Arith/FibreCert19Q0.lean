@@ -3,7 +3,7 @@ import Proofs.HadwigerNelson.Arith.FibreCert
 -- Data only: times-q block 0 of `cert19`.
 namespace HadwigerNelson.FibreCert
 /-- Times-q block 0 of the certificate at p = 19 (data). -/
-def cert19_q0 : Blk :=
+def cert19q0 : Blk :=
   { wts := [37], m := 2, wr := 108, per := 75, sb := 80, wm := 95, wB := 193, mrows := [0x1000000000000000000000004000000000000000000000000adac9f4f4fd874214e002b96000000000000000000000000000000000858c24296206470,
         0x10000000000000376cf5d0b0c000000000000000000000000800000000000000000000002000000000000000000000000000000000cdb30705cc9a1c0], row0 := [0x800000000000000000000000000a09891a15f2405c40bb4e6c0000], rest := [0x800000000000000000000000001] }
 end HadwigerNelson.FibreCert

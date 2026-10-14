@@ -9,10 +9,10 @@ One declaration by kernel reduction: pairs `6244` to `8325` of phase 1 (`p1stepF
 
 namespace HadwigerNelson.FibreCert
 
-/-- Phase 1 over pairs `6244` to `8325` of `16653`, from the state after the first `6244` (`p1AtF`), ends with the orbit rows `cert19_p1s4`, every transporter checked and the bound `cert19_p1b4`. -/
+/-- Phase 1 over pairs `6244` to `8325` of `16653`, from the state after the first `6244` (`p1AtF`), ends with the orbit rows `cert19p1s4`, every transporter checked and the bound `cert19p1b4`. -/
 theorem cert19_p1c3 : p1CoreEq ((((repPairs cert19.reps.length).drop 6244).take 2082).foldl
-    (p1stepF cert19 cert19_kt (cert19.blocks1.map (kmax cert19))) (p1AtF cert19 cert19_p1s3 true cert19_p1b3 6244))
-    cert19_p1s4 cert19_p1b4 = true := by
+    (p1stepF cert19 cert19kt (cert19.blocks1.map (kmax cert19))) (p1AtF cert19 cert19p1s3 true cert19p1b3 6244))
+    cert19p1s4 cert19p1b4 = true := by
   decide +kernel
 
 end HadwigerNelson.FibreCert

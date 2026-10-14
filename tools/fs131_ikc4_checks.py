@@ -39,8 +39,8 @@ for i in range(0, a.nkt, 2):
     for r in (i, i + 1):
         if r >= a.nkt:
             continue
-        body += (f'/-- Maps `{5 * r}` to `{5 * r + 4}` of the checker\'s K table `ktable cert19` are the literal `cert19_kt{r}`. -/\n'
-                 f'theorem cert19_kt{r}_ok : ktEq (((ktable cert19).drop (5 * {r})).take 5) cert19_kt{r} = true := by\n'
+        body += (f'/-- Maps `{5 * r}` to `{5 * r + 4}` of the checker\'s K table `ktable cert19` are the literal `cert19kt{r}`. -/\n'
+                 f'theorem cert19_kt{r}_ok : ktEq (((ktable cert19).drop (5 * {r})).take 5) cert19kt{r} = true := by\n'
                  f'  decide +kernel\n\n')
     add(f'FibreCert19Kt{i // 2}',
         f'# The certificate at `p = 19`: the K table, maps {5 * i}–{5 * min(i + 1, a.nkt - 1) + 4} (FS131-IKC4)\n\n'
@@ -50,16 +50,16 @@ for i in range(0, a.nkt, 2):
 B0 = '(bucket16 (cert19.orbits.map fun o => (o.1, o.2, 0, 0)))'
 for r in range(nchunk):
     n, ln = bounds[r], bounds[r + 1] - bounds[r]
-    Br = f'cert19_p1s{r}'
-    bdr = '0' if r == 0 else f'cert19_p1b{r}'
+    Br = f'cert19p1s{r}'
+    bdr = '0' if r == 0 else f'cert19p1b{r}'
     pre = ('/-- Phase 1\'s orbit rows before its first pair: every row zero (`phase1`\'s start). -/\n'
-           f'def cert19_p1s0 : List (List ORow) := {B0}\n\n') if r == 0 else ''
+           f'def cert19p1s0 : List (List ORow) := {B0}\n\n') if r == 0 else ''
     body = pre + (f'/-- Phase 1 over pairs `{n}` to `{n + ln - 1}` of `{npairs}`, from the state after the first `{n}` '
-            f'(`p1AtF`), ends with the orbit rows `cert19_p1s{r + 1}`, every transporter checked and the bound '
-            f'`cert19_p1b{r + 1}`. -/\n'
+            f'(`p1AtF`), ends with the orbit rows `cert19p1s{r + 1}`, every transporter checked and the bound '
+            f'`cert19p1b{r + 1}`. -/\n'
             f'theorem cert19_p1c{r} : p1CoreEq ((((repPairs cert19.reps.length).drop {n}).take {ln}).foldl\n'
-            f'    (p1stepF cert19 cert19_kt (cert19.blocks1.map (kmax cert19))) (p1AtF cert19 {Br} true {bdr} {n}))\n'
-            f'    cert19_p1s{r + 1} cert19_p1b{r + 1} = true := by\n'
+            f'    (p1stepF cert19 cert19kt (cert19.blocks1.map (kmax cert19))) (p1AtF cert19 {Br} true {bdr} {n}))\n'
+            f'    cert19p1s{r + 1} cert19p1b{r + 1} = true := by\n'
             f'  decide +kernel\n')
     add(f'FibreCert19C{r}',
         f'# The certificate at `p = 19`: phase 1, chunk {r} of {nchunk} (FS131-IKC4)\n\n'
@@ -70,8 +70,8 @@ add('FibreCert19Global',
     '# The certificate at `p = 19`: the shape, from phase 1\'s result (FS131-IKC4)\n\n'
     'One declaration by kernel reduction: `globalOK`\'s conjuncts with phase 1\'s result read from the last chunk '
     f'(`globalOKP`): the orbit rows against the certificate\'s literals, the q-part\'s transporters, the shape. {ORDER}',
-    f'/-- `globalOK`\'s conjuncts hold at phase 1\'s result `(cert19_p1s{nchunk}.flatten, true, cert19_p1b{nchunk})`. -/\n'
-    f'theorem cert19_globalP : globalOKP cert19 (cert19_p1s{nchunk}.flatten, true, cert19_p1b{nchunk}) = true := by\n'
+    f'/-- `globalOK`\'s conjuncts hold at phase 1\'s result `(cert19p1s{nchunk}.flatten, true, cert19p1b{nchunk})`. -/\n'
+    f'theorem cert19_globalP : globalOKP cert19 (cert19p1s{nchunk}.flatten, true, cert19p1b{nchunk}) = true := by\n'
     f'  decide +kernel\n')
 # the identity segments
 for k in range(a.nseg):
@@ -83,8 +83,8 @@ for k in range(a.nseg):
         f'theorem cert19_seg{k} : segCheckZ cert19 {k} = true := by\n'
         f'  decide +kernel\n')
 # PSD, two blocks a module
-blks = [(f'cert19_psd{k}', f'cert19_b{k}', f'times-1 block {k}') for k in range(a.nb1)] + \
-       [(f'cert19_psdq{k}', f'cert19_q{k}', f'times-q block {k}') for k in range(a.nbq)]
+blks = [(f'cert19_psd{k}', f'cert19b{k}', f'times-1 block {k}') for k in range(a.nb1)] + \
+       [(f'cert19_psdq{k}', f'cert19q{k}', f'times-q block {k}') for k in range(a.nbq)]
 for i in range(0, len(blks), 2):
     body = ''
     for (thm, b, what) in blks[i:i + 2]:
@@ -102,7 +102,7 @@ for (mod, imps, doc, body) in chain:
 
 # the assembly
 last = chain[-1][0]
-kts = ', '.join(f'cert19_kt{r}' for r in range(a.nkt))
+kts = ', '.join(f'cert19kt{r}' for r in range(a.nkt))
 lines = []
 L = lines.append
 L(HDR + f'import {A}{last}\nimport {A}FibreCertSound\n')
@@ -123,7 +123,7 @@ L(f'/-- `cert19`\'s numerator `U`. -/\ntheorem cert19_unum : cert19.unum = {a.un
 L(f'/-- `cert19`\'s scale `L`. -/\ntheorem cert19_scale : cert19.scale = {a.scale} := rfl\n')
 L(f'/-- `cert19`\'s number of identity segments. -/\ntheorem cert19_nseg : cert19.nseg = {a.nseg} := rfl\n')
 L('/-- The checker\'s K table at `p = 19` is the literal, piece by piece (`cert19_kt0_ok` …). -/')
-L('theorem ktable_cert19 : ktable cert19 = cert19_kt := by')
+L('theorem ktable_cert19 : ktable cert19 = cert19kt := by')
 L('  have hlen : (ktable cert19).length = 40 := by decide +kernel')
 L(f'  refine (eq_flatten_of_pieces 5 [{kts}] (ktable cert19) (fun i hi => ?_)')
 L('    (by rw [hlen]; decide)).trans rfl')
@@ -132,21 +132,21 @@ for r in range(a.nkt):
     L(f'  | {r}, _ => exact ktEq_eq _ _ cert19_kt{r}_ok')
 L(f'  | n + {a.nkt}, h => exact absurd h (by simp)\n')
 L(f'/-- Phase 1 at `p = 19` is its last chunk\'s result (`cert19_p1c0` … `cert19_p1c{nchunk - 1}`). -/')
-L(f'theorem cert19_phase1 : phase1KZ cert19 cert19_kt = (cert19_p1s{nchunk}.flatten, true, cert19_p1b{nchunk}) := by')
+L(f'theorem cert19_phase1 : phase1KZ cert19 cert19kt = (cert19p1s{nchunk}.flatten, true, cert19p1b{nchunk}) := by')
 L('  have h1 : 0 < cert19.per1 := by decide +kernel')
 L(f'  have hpl : (repPairs cert19.reps.length).length = {npairs} := by decide +kernel')
 L(f'  have hs : ({B0}, true, 0, (⟨0, 0, cert19.p1⟩ : Rd), cert19.blocks1.map Blk.pairCoefs) =')
-L(f'      p1At cert19 cert19_p1s0 true 0 0 := by')
-L('    simp only [p1At, cert19_p1s0, List.drop_zero]')
+L(f'      p1At cert19 cert19p1s0 true 0 0 := by')
+L('    simp only [p1At, cert19p1s0, List.drop_zero]')
 L('    try rfl')
-L(f'  have e : (repPairs cert19.reps.length).foldl (p1stepZ cert19 cert19_kt (cert19.blocks1.map (kmax cert19)))')
-L(f'      (p1At cert19 cert19_p1s0 true 0 0) = p1At cert19 cert19_p1s{nchunk} true cert19_p1b{nchunk} {npairs} := by')
+L(f'  have e : (repPairs cert19.reps.length).foldl (p1stepZ cert19 cert19kt (cert19.blocks1.map (kmax cert19)))')
+L(f'      (p1At cert19 cert19p1s0 true 0 0) = p1At cert19 cert19p1s{nchunk} true cert19p1b{nchunk} {npairs} := by')
 L('    rw [← List.drop_zero (l := repPairs cert19.reps.length)]')
 for r in range(nchunk):
     n, ln = bounds[r], bounds[r + 1] - bounds[r]
-    Br = f'cert19_p1s{r}'
-    bdr = '0' if r == 0 else f'cert19_p1b{r}'
-    L(f'    rw [fold_drop_chunkF cert19 cert19_kt _ _ {Br} {bdr} {n} {ln} cert19_p1s{r + 1} cert19_p1b{r + 1}')
+    Br = f'cert19p1s{r}'
+    bdr = '0' if r == 0 else f'cert19p1b{r}'
+    L(f'    rw [fold_drop_chunkF cert19 cert19kt _ _ {Br} {bdr} {n} {ln} cert19p1s{r + 1} cert19p1b{r + 1}')
     L(f'      (Nat.le_trans (by decide) (Nat.le_of_eq hpl.symm)) h1 (by decide +kernel) cert19_p1c{r}, show {n} + {ln} = {n + ln} from rfl]')
 L(f'    rw [List.drop_eq_nil_of_le (Nat.le_of_eq hpl), List.foldl_nil]')
 L('  simp only [phase1KZ]')
@@ -171,7 +171,7 @@ for k in range(a.nseg):
 L(f'    | n + {a.nseg}, h => exact absurd h (by omega)')
 L('  have hp : psdAll cert19 = true := by')
 L('    change (cert19.blocks1 ++ cert19.blocksq).all psdCheck = true')
-b1 = ', '.join(f'cert19_b{k}' for k in range(a.nb1)); bq = ', '.join(f'cert19_q{k}' for k in range(a.nbq))
+b1 = ', '.join(f'cert19b{k}' for k in range(a.nb1)); bq = ', '.join(f'cert19q{k}' for k in range(a.nbq))
 L(f'    rw [show cert19.blocks1 = [{b1}] from rfl, show cert19.blocksq = [{bq}] from rfl]')
 psds = ', '.join([f'cert19_psd{k}' for k in range(a.nb1)] + [f'cert19_psdq{k}' for k in range(a.nbq)])
 L(f'    simp only [List.cons_append, List.nil_append, List.all_cons, List.all_nil, {psds}, Bool.and_self]')

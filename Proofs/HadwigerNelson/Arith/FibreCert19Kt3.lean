@@ -9,12 +9,12 @@ Two declarations by kernel reduction: the kernel computes these maps of `ktable 
 
 namespace HadwigerNelson.FibreCert
 
-/-- Maps `30` to `34` of the checker's K table `ktable cert19` are the literal `cert19_kt6`. -/
-theorem cert19_kt6_ok : ktEq (((ktable cert19).drop (5 * 6)).take 5) cert19_kt6 = true := by
+/-- Maps `30` to `34` of the checker's K table `ktable cert19` are the literal `cert19kt6`. -/
+theorem cert19_kt6_ok : ktEq (((ktable cert19).drop (5 * 6)).take 5) cert19kt6 = true := by
   decide +kernel
 
-/-- Maps `35` to `39` of the checker's K table `ktable cert19` are the literal `cert19_kt7`. -/
-theorem cert19_kt7_ok : ktEq (((ktable cert19).drop (5 * 7)).take 5) cert19_kt7 = true := by
+/-- Maps `35` to `39` of the checker's K table `ktable cert19` are the literal `cert19kt7`. -/
+theorem cert19_kt7_ok : ktEq (((ktable cert19).drop (5 * 7)).take 5) cert19kt7 = true := by
   decide +kernel
 
 end HadwigerNelson.FibreCert

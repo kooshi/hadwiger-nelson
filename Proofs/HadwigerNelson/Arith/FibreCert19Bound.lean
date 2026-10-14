@@ -34,9 +34,9 @@ theorem cert19_scale : cert19.scale = 100000000000000000000000000000000 := rfl
 theorem cert19_nseg : cert19.nseg = 4 := rfl
 
 /-- The checker's K table at `p = 19` is the literal, piece by piece (`cert19_kt0_ok` …). -/
-theorem ktable_cert19 : ktable cert19 = cert19_kt := by
+theorem ktable_cert19 : ktable cert19 = cert19kt := by
   have hlen : (ktable cert19).length = 40 := by decide +kernel
-  refine (eq_flatten_of_pieces 5 [cert19_kt0, cert19_kt1, cert19_kt2, cert19_kt3, cert19_kt4, cert19_kt5, cert19_kt6, cert19_kt7] (ktable cert19) (fun i hi => ?_)
+  refine (eq_flatten_of_pieces 5 [cert19kt0, cert19kt1, cert19kt2, cert19kt3, cert19kt4, cert19kt5, cert19kt6, cert19kt7] (ktable cert19) (fun i hi => ?_)
     (by rw [hlen]; decide)).trans rfl
   match i, hi with
   | 0, _ => exact ktEq_eq _ _ cert19_kt0_ok
@@ -50,31 +50,31 @@ theorem ktable_cert19 : ktable cert19 = cert19_kt := by
   | n + 8, h => exact absurd h (by simp)
 
 /-- Phase 1 at `p = 19` is its last chunk's result (`cert19_p1c0` … `cert19_p1c7`). -/
-theorem cert19_phase1 : phase1KZ cert19 cert19_kt = (cert19_p1s8.flatten, true, cert19_p1b8) := by
+theorem cert19_phase1 : phase1KZ cert19 cert19kt = (cert19p1s8.flatten, true, cert19p1b8) := by
   have h1 : 0 < cert19.per1 := by decide +kernel
   have hpl : (repPairs cert19.reps.length).length = 16653 := by decide +kernel
   have hs : ((bucket16 (cert19.orbits.map fun o => (o.1, o.2, 0, 0))), true, 0, (⟨0, 0, cert19.p1⟩ : Rd), cert19.blocks1.map Blk.pairCoefs) =
-      p1At cert19 cert19_p1s0 true 0 0 := by
-    simp only [p1At, cert19_p1s0, List.drop_zero]
+      p1At cert19 cert19p1s0 true 0 0 := by
+    simp only [p1At, cert19p1s0, List.drop_zero]
     try rfl
-  have e : (repPairs cert19.reps.length).foldl (p1stepZ cert19 cert19_kt (cert19.blocks1.map (kmax cert19)))
-      (p1At cert19 cert19_p1s0 true 0 0) = p1At cert19 cert19_p1s8 true cert19_p1b8 16653 := by
+  have e : (repPairs cert19.reps.length).foldl (p1stepZ cert19 cert19kt (cert19.blocks1.map (kmax cert19)))
+      (p1At cert19 cert19p1s0 true 0 0) = p1At cert19 cert19p1s8 true cert19p1b8 16653 := by
     rw [← List.drop_zero (l := repPairs cert19.reps.length)]
-    rw [fold_drop_chunkF cert19 cert19_kt _ _ cert19_p1s0 0 0 2081 cert19_p1s1 cert19_p1b1
+    rw [fold_drop_chunkF cert19 cert19kt _ _ cert19p1s0 0 0 2081 cert19p1s1 cert19p1b1
       (Nat.le_trans (by decide) (Nat.le_of_eq hpl.symm)) h1 (by decide +kernel) cert19_p1c0, show 0 + 2081 = 2081 from rfl]
-    rw [fold_drop_chunkF cert19 cert19_kt _ _ cert19_p1s1 cert19_p1b1 2081 2082 cert19_p1s2 cert19_p1b2
+    rw [fold_drop_chunkF cert19 cert19kt _ _ cert19p1s1 cert19p1b1 2081 2082 cert19p1s2 cert19p1b2
       (Nat.le_trans (by decide) (Nat.le_of_eq hpl.symm)) h1 (by decide +kernel) cert19_p1c1, show 2081 + 2082 = 4163 from rfl]
-    rw [fold_drop_chunkF cert19 cert19_kt _ _ cert19_p1s2 cert19_p1b2 4163 2081 cert19_p1s3 cert19_p1b3
+    rw [fold_drop_chunkF cert19 cert19kt _ _ cert19p1s2 cert19p1b2 4163 2081 cert19p1s3 cert19p1b3
       (Nat.le_trans (by decide) (Nat.le_of_eq hpl.symm)) h1 (by decide +kernel) cert19_p1c2, show 4163 + 2081 = 6244 from rfl]
-    rw [fold_drop_chunkF cert19 cert19_kt _ _ cert19_p1s3 cert19_p1b3 6244 2082 cert19_p1s4 cert19_p1b4
+    rw [fold_drop_chunkF cert19 cert19kt _ _ cert19p1s3 cert19p1b3 6244 2082 cert19p1s4 cert19p1b4
       (Nat.le_trans (by decide) (Nat.le_of_eq hpl.symm)) h1 (by decide +kernel) cert19_p1c3, show 6244 + 2082 = 8326 from rfl]
-    rw [fold_drop_chunkF cert19 cert19_kt _ _ cert19_p1s4 cert19_p1b4 8326 2082 cert19_p1s5 cert19_p1b5
+    rw [fold_drop_chunkF cert19 cert19kt _ _ cert19p1s4 cert19p1b4 8326 2082 cert19p1s5 cert19p1b5
       (Nat.le_trans (by decide) (Nat.le_of_eq hpl.symm)) h1 (by decide +kernel) cert19_p1c4, show 8326 + 2082 = 10408 from rfl]
-    rw [fold_drop_chunkF cert19 cert19_kt _ _ cert19_p1s5 cert19_p1b5 10408 2081 cert19_p1s6 cert19_p1b6
+    rw [fold_drop_chunkF cert19 cert19kt _ _ cert19p1s5 cert19p1b5 10408 2081 cert19p1s6 cert19p1b6
       (Nat.le_trans (by decide) (Nat.le_of_eq hpl.symm)) h1 (by decide +kernel) cert19_p1c5, show 10408 + 2081 = 12489 from rfl]
-    rw [fold_drop_chunkF cert19 cert19_kt _ _ cert19_p1s6 cert19_p1b6 12489 2082 cert19_p1s7 cert19_p1b7
+    rw [fold_drop_chunkF cert19 cert19kt _ _ cert19p1s6 cert19p1b6 12489 2082 cert19p1s7 cert19p1b7
       (Nat.le_trans (by decide) (Nat.le_of_eq hpl.symm)) h1 (by decide +kernel) cert19_p1c6, show 12489 + 2082 = 14571 from rfl]
-    rw [fold_drop_chunkF cert19 cert19_kt _ _ cert19_p1s7 cert19_p1b7 14571 2082 cert19_p1s8 cert19_p1b8
+    rw [fold_drop_chunkF cert19 cert19kt _ _ cert19p1s7 cert19p1b7 14571 2082 cert19p1s8 cert19p1b8
       (Nat.le_trans (by decide) (Nat.le_of_eq hpl.symm)) h1 (by decide +kernel) cert19_p1c7, show 14571 + 2082 = 16653 from rfl]
     rw [List.drop_eq_nil_of_le (Nat.le_of_eq hpl), List.foldl_nil]
   simp only [phase1KZ]
@@ -103,7 +103,7 @@ theorem cert19_ok : certOK cert19 = true := by
     | n + 4, h => exact absurd h (by omega)
   have hp : psdAll cert19 = true := by
     change (cert19.blocks1 ++ cert19.blocksq).all psdCheck = true
-    rw [show cert19.blocks1 = [cert19_b0, cert19_b1, cert19_b2, cert19_b3, cert19_b4, cert19_b5, cert19_b6, cert19_b7, cert19_b8, cert19_b9, cert19_b10, cert19_b11, cert19_b12, cert19_b13, cert19_b14, cert19_b15, cert19_b16, cert19_b17, cert19_b18] from rfl, show cert19.blocksq = [cert19_q0] from rfl]
+    rw [show cert19.blocks1 = [cert19b0, cert19b1, cert19b2, cert19b3, cert19b4, cert19b5, cert19b6, cert19b7, cert19b8, cert19b9, cert19b10, cert19b11, cert19b12, cert19b13, cert19b14, cert19b15, cert19b16, cert19b17, cert19b18] from rfl, show cert19.blocksq = [cert19q0] from rfl]
     simp only [List.cons_append, List.nil_append, List.all_cons, List.all_nil, cert19_psd0, cert19_psd1, cert19_psd2, cert19_psd3, cert19_psd4, cert19_psd5, cert19_psd6, cert19_psd7, cert19_psd8, cert19_psd9, cert19_psd10, cert19_psd11, cert19_psd12, cert19_psd13, cert19_psd14, cert19_psd15, cert19_psd16, cert19_psd17, cert19_psd18, cert19_psdq0, Bool.and_self]
   change (globalOK cert19 && segAll cert19 && psdAll cert19) = true
   rw [cert19_global, hs, hp]
