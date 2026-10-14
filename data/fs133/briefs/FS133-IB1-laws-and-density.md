@@ -106,3 +106,52 @@ The remote is unreachable: **commit by explicit path on your branch and do not p
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 (2026-10-14 02:59 UTC) — your three notes and your question: two accepted as they are, one statement widened, one choice kept
+
+Thank you for the two compactness leaves, and for saying each of these at once.
+
+1. **The routes** (one ultrafilter in place of a subsequence; the common fixed point for commuting maps over any
+   index type; the class as a predicate stable under one map and finite uniform averages) — accepted; they are yours
+   to choose, and each asks less than the plan's.
+2. **The three import lines** — accepted; the route needs them. What goes with them is what you already plan: the
+   stored statements of all eight modules read at the build against the dump taken on this branch, and the list of
+   any that moved, with whether each moved in instance arguments only.
+3. **The unread hypothesis: drop it.** `exists_turnInvariant` loses `hshift`, with the line that kept the linter
+   quiet; its callers stop passing it. *The alternative:* keep the statement as planned and leave the question to a
+   planner. *Why not:* the planner has handed back, the change only removes a binder the proof never reads, and a
+   line whose purpose is to hide a hypothesis from a linter should not reach a published library — the same ruling
+   I made twice yesterday on another module. Confidence: high. Your touches are extended to **that statement, its
+   docstring and its callers' proofs in your two files, and nothing else of the skeleton's statements**; in your
+   statement check it is shown as the only difference (a planted second one must still be reported). If a caller
+   lives in another lane's file, do not edit it: name it in your record. I have put a dated line in the claim list.
+4. **Your question — keep your choice**: the two private lemmas that unfold the ratio directly, so that your files
+   print clean on their own. *The alternative:* read the other file's stated lemmas and carry its unproved
+   dependency until that file is done. *Why yours:* a file that prints clean alone can be checked now. The brief's
+   item 4 should have said this itself. One line in your drafts for the join: the two private lemmas are re-pointed
+   at the other file's public ones, or deleted, when that file is proved — no duplicate proof goes to the landing.
+
+You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 2 (2026-10-14 03:06 UTC) — yes: the unread instance goes too
+
+**Ruling: drop `[Module ℚ A]` from `exists_foelner_finset`**, and let its docstring say "a countable commutative
+group". *The alternative:* hand back with the binder in and the landing's linter failing on it. *Why not:* the
+reason is the one of Amendment 1's item 3, and the wider statement is the true one — a Følner sequence is a fact
+about countable commutative groups, and your proof by polynomial growth shows it without a basis. Confidence: high.
+Your touches are extended to that statement and its docstring; in your statement check it is the second ruled
+difference, and a planted third must still be reported. The route by polynomial growth is accepted with it. Thank
+you for stopping at the edge of your touches and asking. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 3 (2026-10-14 03:09 UTC) — yes to "omit" for the two drift checks, and a standing word for the rest of this job
+
+**Ruling: `omit [MeasurableSpace Ω] in` above `sectionDensity_univ` and `sectionDensity_empty`.** *The alternatives:*
+a warning left in the build, or a line that reads the instance to quiet the linter. *Why not:* the first leaves the
+file short of the gate's zero warnings, the second is what Amendment 1 rules out. Confidence: high. They are the
+third and fourth ruled differences in your statement check.
+
+**And so that you need not stop a fourth time:** for the rest of this job, a binder of a statement in your two
+files — a hypothesis or an instance — that neither the statement nor its proof reads is dropped without asking.
+List each in your statement check as a ruled difference with one line saying why it was unread, and name them in
+your report so that I can put them in the claim list. Anything else about a statement — a changed hypothesis, a
+changed conclusion, a renamed declaration — still comes to me first. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
