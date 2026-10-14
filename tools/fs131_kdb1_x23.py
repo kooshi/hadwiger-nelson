@@ -516,13 +516,15 @@ Every congruence row is an isometry (`wcR_ok`, from {nparts} parts) and the DFS 
 
 namespace HadwigerNelson.DensityBound.X23Check
 
+set_option maxRecDepth 100000 in
 theorem wcR_ok : wcR.all (rowOk ptsL) = true := by
   show ({wc_show}).all (rowOk ptsL) = true
-  simp only [List.all_append, {wc_simp}, Bool.and_self, Bool.true_and]
+  simp only [List.all_append, {wc_simp}, Bool.and_self]
 
+set_option maxRecDepth 100000 in
 theorem frL_ok : frL.all (subtreeOk boundN (vertsL.drop KF) KF) = true := by
   show ({fr_show}).all (subtreeOk boundN (vertsL.drop KF) KF) = true
-  simp only [List.all_append, {fr_simp}, Bool.and_self, Bool.true_and]
+  simp only [List.all_append, {fr_simp}, Bool.and_self]
 
 end HadwigerNelson.DensityBound.X23Check
 '''

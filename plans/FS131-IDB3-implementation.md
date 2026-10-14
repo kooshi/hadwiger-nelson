@@ -8,7 +8,29 @@ stage not SAVED. Working files: `data/fs131/idb3/`.*
 
 ## Theorems this phase proved
 
-(Filled at stage 3.)
+Every record below is kernel-checked in the built tree of `fs131-wdb3` (build `data/fs131/idb3/build2-full.log`, exit 0,
+0 modules with warnings; the 21 check modules compiled in `build1-full.log`) and its axioms are printed from that tree
+(`data/fs131/idb3/axioms.txt`, read by `tools/fs131_idb3_axioms.py`): **427 records of 27 modules, 218 axiom-free and 209 on
+a subset of `[propext, Classical.choice, Quot.sound]`; none on `sorryAx`, none on a native axiom.**
+
+- **`HadwigerNelson.Plane.oneAvoidingDensityBound : Plane.OneAvoidingDensityBound`** (`Plane/DensityBound/Theorem`) —
+  `[AmbrusEtAl2023]` Theorem 1, "Any Lebesgue measurable, 1-avoiding planar set has upper density at most 0.2470" (p. 4),
+  at every centre — [kernel], `[propext, Classical.choice, Quot.sound]`.
+- `HadwigerNelson.DensityBound.X23_valid : X23.Valid` (`Plane/DensityBound/X23`) — the paper's certificate is valid: the
+  2,321 congruences, `V ≥ −ν` (`ν = 10⁻⁵`) on every nonempty independent atom, `bound ≥ 0` — [kernel], the standard three.
+- `HadwigerNelson.DensityBound.X23_phi` (`Theorem`) — `∀ t ≥ 0, 1 − 6/10⁵ ≤ X23.phi X23w0 t` (eq. (22), p. 18's `µ`) —
+  [kernel], the standard three.
+- `HadwigerNelson.DensityBound.X23_ratio` (`Theorem`) — `X23.bound / (1 − 6/10⁵) ≤ 0.2470` (p. 19) — [kernel], the standard
+  three.
+- `HadwigerNelson.DensityBound.X23_close` (`Plane/DensityBound/X23Dist`) — the certificate's 27 distances within `2⁻⁶⁴` of
+  the covering's `P23.Ds` — [kernel], the standard three.
+- The checker's semantics (`X23`): `X23Check.collect_sound` (every set passing the DFS's refusals is reached, with its sum),
+  `dfsG_eq_all`, `dfsG_append`, `sum_groups`, `L_eq` (`L(S)·10²¹` is the sum of the terms in `S`), `X23_atoms`,
+  `congruent_of_rowOk`, `dist_of_sqd`, `dist_of_adj`, `distOk_sound`, `ev_mul` and the field algebra — [kernel], the
+  standard three or fewer.
+- The kernel checks themselves (`X23Data`, `X23Cong00`–`07`, `X23Atoms00`–`12`, `X23All`): `encl_ok`, `adj_ok`, `terms_ok`,
+  `groups_eq`, `one_group`, `verts_length`, `frontier_eq`, `frontier_rt`, `wc00_ok`–`wc07_ok`, `fr00_ok`–`fr102_ok`, `wcR_ok`,
+  `frL_ok` — [kernel], `decide +kernel`, on `[propext]` or none.
 
 ## Stage 1 — SAVED: the readback
 
@@ -127,3 +149,90 @@ A module of eight ≤ 80 k-test theorems peaks at one theorem's memory (item 845
 | an atom with `V < 0`: bound lowered to `w_T + 6·10⁻⁸` | chunk 26's check is false | at `w_T + 7·10⁻⁸` chunk 26 passes: the check is tight at the true min V |
 | a changed `w₁` against the groups | `groups_eq` with `w1N + 1` is false | `groups_eq` passes |
 | the frontier with one state dropped | `frontier_eq` with `frL.tail` is false | `frontier_eq` passes |
+
+## Stage 3 — SAVED: the data, the build, the theorem
+
+### 3.1 The modules in the build's lists
+
+`Proofs.lean`: the 27 modules after `Plane.DensityBound.Window`, in dependency order; `ARCHITECTURE.md`: 27 rows after
+`Plane/DensityBound/Window`'s; `tools/check_architecture.py` PASS. The generator run twice gives identical output (`git
+status` empty after a second `--write`; `data/fs131/idb3/gen/summary.json` holds each module's sha256).
+
+### 3.2 Two builds under the slot
+
+1. `slot.py --mem 7 --cpus 3 -- env MEMMAX=7G BATCH=2 ./scripts/build.sh` (`build1-full.log`; Lake's log
+   `build/gate/build/20261014T190103Z-191486.log`): **the 21 check modules and `X23Data` all accepted by the kernel**, then
+   `X23All` refused with "maximum recursion depth has been reached" in its assembly (`show` and `simp` over a 103-deep `++`).
+   Not a check failing: the assembly's elaboration. Fixed in the generator (`set_option maxRecDepth 100000 in`; a term chain of
+   `all_app` was tried first and timed out at `whnf`, unfolding the literals).
+2. The same with `BATCH=10` (`build2-full.log`; `build/gate/build/20261014T192236Z-251041.log`): **exit 0**, 209 batches,
+   5 modules rebuilt (`X23All` 3.3 s, `X23` 12 s, `X23Dist` 2.1 s, `Theorem` 2.2 s, `Proofs` 3.6 s), **"0 module(s) with
+   warnings"**, 6 m 40 s.
+
+(The brief's `--mem 10 … BATCH=8` waited behind two other slots for ten minutes; a 7 GiB slot at two modules per batch keeps
+two 2.4 GB parts and the walk inside its cap.)
+
+### 3.3 Each generated module's kernel time and peak memory
+
+Times are Lake's (`Built … (Ns)`; two modules at a time on three cores); peaks the largest resident set of the module's
+`lean`, sampled every 2 s (`data/fs131/idb3/rss/sample.sh`, `samples.txt`, `table.py` → `table.md`).
+
+| module | compile | peak RSS | | module | compile | peak RSS |
+|---|---|---|---|---|---|---|
+| `X23Check` | 1.0 s | (< 2 s) | | `X23Atoms06` | 99 s | 2.15 GB |
+| `X23Data` | 91 s | 2.99 GB | | `X23Atoms07` | 82 s | 2.13 GB |
+| `X23Cong00` | 9.8 s | 1.51 GB | | `X23Atoms08` | 98 s | 2.31 GB |
+| `X23Cong01` | 12 s | 1.81 GB | | `X23Atoms09` | 104 s | 2.31 GB |
+| `X23Cong02` | 13 s | 1.96 GB | | `X23Atoms10` | 105 s | 2.23 GB |
+| `X23Cong03` | 16 s | 2.11 GB | | `X23Atoms11` | 98 s | 2.32 GB |
+| `X23Cong04` | 15 s | 2.11 GB | | `X23Atoms12` | 75 s | 2.15 GB |
+| `X23Cong05` | 17 s | 2.22 GB | | `X23All` | 3.3 s | 0.64 GB |
+| `X23Cong06` | 20 s | 2.46 GB | | `X23` | 12 s | 3.09 GB |
+| `X23Cong07` | 12 s | 1.88 GB | | `X23Dist` | 2.1 s | (< 2 s) |
+| `X23Atoms00` | 106 s | 2.33 GB | | `Theorem` | 2.2 s | 3.03 GB |
+| `X23Atoms01` | 87 s | 2.26 GB | | | | |
+| `X23Atoms02` | 117 s | 2.34 GB | | | | |
+| `X23Atoms03` | 128 s | 2.27 GB | | | | |
+| `X23Atoms04` | 91 s | 2.29 GB | | | | |
+| `X23Atoms05` | 98 s | 2.17 GB | | | | |
+
+**Kernel time in all: about 25 minutes of CPU** — the atom check 1,288 s (the planner's 12 minutes, × 1.8: the terms decoded
+per test and the depth-15 cut), the congruences 115 s, the data's eight checks 91 s. No module near the cap or an hour; the
+largest 3.09 GB. The planner's lane X at 700 lines and the last implementer's 900–1,400: this lane is 1,265 hand-written
+lines of Lean (`X23Check` 330, `X23` 790, `X23Dist` 60, `Theorem` 85) and a 560-line generator — **1.8× the planner's, inside
+the last implementer's range**.
+
+### 3.4 The theorem, read aloud
+
+`Plane.OneAvoidingDensityBound` (`Plane/OneAvoidingDensity`, unchanged): for every `A ⊆ EuclideanSpace ℝ (Fin 2)` that is
+`NullMeasurableSet A volume` (Lebesgue measurable) with `∀ a ∈ A, ∀ b ∈ A, dist a b ≠ 1` (1-avoiding), and every centre `x`,
+`limsup_{R→∞} vol(A ∩ ball x R)/vol(ball x R) ≤ 0.2470`. The paper's Theorem 1 (p. 4): "Any Lebesgue measurable, 1-avoiding
+planar set has upper density at most 0.2470." The same statement (the planner's reading, FS131-KDB1 § 1.3: at every centre
+where the paper fixes one and calls the value independent of it). `HadwigerNelson.Plane.oneAvoidingDensityBound` proves it
+with no hypothesis: `DualCert.oneAvoidingDensityBound_of X23 X23_valid (mu := 6/10⁵) (by norm_num) X23_phi X23_ratio`.
+
+**Models of the hypotheses** of this lane's structure-taking lemmas, all inhabited by the certificate itself:
+`congruent_of_rowOk` by each of the 2,321 rows (`wcR_ok`); `distOk_sound`, `forall₂_of_distsOk` by `enclL` (`encl_ok`)
+and the 26 rows (`dists_ok`); `dist_of_sqd`, `dist_of_adj` by the 47 listed edges (`adj_ok`); `collect_sound` by `vertsL`
+at the mask of any independent set (used so in `X23_atoms`); `tval_pack` by every term (`terms_ok`).
+
+## Stage 4 — SAVED: statements unchanged, axioms, linters
+
+- **No statement and no definition changed, from the kernel's side.** The dump of every constant of the 56 existing modules
+  of the density bound (`data/fs131/idb3/lean/StatementDump.lean`: kind, name, stored type, a definition's value by hash),
+  made before the first build (`statements-before.txt`, 3,335 constants) and after the last (`statements-after.txt`), are
+  **byte-identical** (`cmp`); `tools/fs131_idb3_statement_diff.py` reads 3,335 constants, 0 differences. Its self-test
+  (`--self-test`: a changed type, a changed value, a removed constant, a new public constant, each planted in a copy) fires on
+  all four, and the faithful copy reads 0. No existing module was recompiled by either build (only `Proofs`).
+- **Axioms**, from the built tree: `data/fs131/idb3/lean/AxiomsIDB3.lean` → `axioms.txt`; `tools/fs131_idb3_axioms.py`
+  PASS — 27 modules, 427 records (227 DEF, 191 THM, 3 IND, 3 CTOR, 3 REC), 218 axiom-free, 209 on the standard three or
+  fewer; `THEOREM HadwigerNelson.Plane.oneAvoidingDensityBound [propext, Classical.choice, Quot.sound]`. The planted records
+  show what was planted: `withSorry → [sorryAx]`, `withNative → [FS131IDB3Plant.withNative._native.native_decide.ax_1_1]`.
+- **`native_decide`** in none of the 27 files (`grep -rln`, exit 1); **`sorry`** in none (`grep -c`, all 0).
+- **Linters**: `lake lint --no-build -- --no-build --trace` under the slot — exit 0, "-- Linting passed for Proofs.", every
+  linter "(2/2) Passed!" (`data/fs131/idb3/lint.log`). No planted lint control was run (it needs a rebuild of a planted
+  module); the landing's gate runs the lint's own.
+- Not run by this job (the landing's): `scripts/axioms.sh` over the library, `vacuity.sh`, `assumptions.sh`, `dupnames.sh`.
+  The new public names are all under `HadwigerNelson.DensityBound.X23Check`, `HadwigerNelson.DensityBound.X23*` and
+  `HadwigerNelson.Plane.oneAvoidingDensityBound`; no hypothesis of any new statement is an assumption (none is declared or
+  owed to `scripts/Assumptions.lean`).

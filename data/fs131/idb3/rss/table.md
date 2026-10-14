@@ -1,0 +1,29 @@
+| module | compile time | peak RSS |
+|---|---|---|
+| `Plane.DensityBound.Theorem` | 2.2s | 3.03 GB |
+| `Plane.DensityBound.X23` | 12s | 3.09 GB |
+| `Plane.DensityBound.X23All` | 3.3s | 0.64 GB |
+| `Plane.DensityBound.X23Atoms00` | 106s | 2.33 GB |
+| `Plane.DensityBound.X23Atoms01` | 87s | 2.26 GB |
+| `Plane.DensityBound.X23Atoms02` | 117s | 2.34 GB |
+| `Plane.DensityBound.X23Atoms03` | 128s | 2.27 GB |
+| `Plane.DensityBound.X23Atoms04` | 91s | 2.29 GB |
+| `Plane.DensityBound.X23Atoms05` | 98s | 2.17 GB |
+| `Plane.DensityBound.X23Atoms06` | 99s | 2.15 GB |
+| `Plane.DensityBound.X23Atoms07` | 82s | 2.13 GB |
+| `Plane.DensityBound.X23Atoms08` | 98s | 2.31 GB |
+| `Plane.DensityBound.X23Atoms09` | 104s | 2.31 GB |
+| `Plane.DensityBound.X23Atoms10` | 105s | 2.23 GB |
+| `Plane.DensityBound.X23Atoms11` | 98s | 2.32 GB |
+| `Plane.DensityBound.X23Atoms12` | 75s | 2.15 GB |
+| `Plane.DensityBound.X23Check` | 978ms | 0.05 GB |
+| `Plane.DensityBound.X23Cong00` | 9.8s | 1.51 GB |
+| `Plane.DensityBound.X23Cong01` | 12s | 1.81 GB |
+| `Plane.DensityBound.X23Cong02` | 13s | 1.96 GB |
+| `Plane.DensityBound.X23Cong03` | 16s | 2.11 GB |
+| `Plane.DensityBound.X23Cong04` | 15s | 2.11 GB |
+| `Plane.DensityBound.X23Cong05` | 17s | 2.22 GB |
+| `Plane.DensityBound.X23Cong06` | 20s | 2.46 GB |
+| `Plane.DensityBound.X23Cong07` | 12s | 1.88 GB |
+| `Plane.DensityBound.X23Data` | 91s | 2.99 GB |
+| `Plane.DensityBound.X23Dist` | 2.1s | 0.31 GB |

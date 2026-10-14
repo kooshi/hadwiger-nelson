@@ -1,0 +1,158 @@
+slot: admitted idb3: mem 7 GiB (hard cap), cpus 6,7,8
+==> build: this run's full output: build/gate/build/20261014T190103Z-191486.log
+==> up-to-date check: exit 3 after 4s (3 means something needs building) — walking the batches
+==> 990 batches of at most 2 modules, capped at 7G
+==> [1/990] 2 modules  14:01:07
+==> [2/990] 2 modules  14:01:09
+==> [3/990] 2 modules  14:01:11
+==> [4/990] 2 modules  14:01:13
+==> [5/990] 2 modules  14:01:14
+==> [6/990] 2 modules  14:01:16
+==> [7/990] 2 modules  14:01:17
+==> [8/990] 2 modules  14:01:18
+==> [9/990] 2 modules  14:01:20
+==> [10/990] 2 modules  14:01:22
+    rebuilt: Plane.DensityBound.X23Check (978ms)
+==> [11/990] 2 modules  14:01:23
+==> [12/990] 2 modules  14:01:25
+==> [13/990] 2 modules  14:01:27
+==> [14/990] 2 modules  14:01:28
+==> [15/990] 2 modules  14:01:29
+==> [16/990] 2 modules  14:01:30
+==> [17/990] 2 modules  14:01:32
+==> [18/990] 2 modules  14:01:33
+==> [19/990] 2 modules  14:01:35
+==> [20/990] 2 modules  14:01:37
+==> [21/990] 2 modules  14:01:39
+    rebuilt: Plane.DensityBound.X23Data (91s)
+==> [22/990] 2 modules  14:03:11
+==> [23/990] 2 modules  14:03:13
+==> [24/990] 2 modules  14:03:14
+==> [25/990] 2 modules  14:03:16
+==> [26/990] 2 modules  14:03:17
+==> [27/990] 2 modules  14:03:19
+==> [28/990] 2 modules  14:03:20
+==> [29/990] 2 modules  14:03:20
+==> [30/990] 2 modules  14:03:21
+==> [31/990] 2 modules  14:03:22
+==> [32/990] 2 modules  14:03:23
+==> [33/990] 2 modules  14:03:24
+==> [34/990] 2 modules  14:03:25
+==> [35/990] 2 modules  14:03:26
+==> [36/990] 2 modules  14:03:26
+==> [37/990] 2 modules  14:03:27
+==> [38/990] 2 modules  14:03:28
+==> [39/990] 2 modules  14:03:29
+==> [40/990] 2 modules  14:03:30
+==> [41/990] 2 modules  14:03:31
+==> [42/990] 2 modules  14:03:32
+==> [43/990] 2 modules  14:03:32
+==> [44/990] 2 modules  14:03:33
+==> [45/990] 2 modules  14:03:34
+==> [46/990] 2 modules  14:03:35
+==> [47/990] 2 modules  14:03:36
+==> [48/990] 2 modules  14:03:37
+==> [49/990] 2 modules  14:03:38
+==> [50/990] 2 modules  14:03:39
+==> [51/990] 2 modules  14:03:40
+==> [52/990] 2 modules  14:03:42
+==> [53/990] 2 modules  14:03:43
+==> [54/990] 2 modules  14:03:44
+==> [55/990] 2 modules  14:03:44
+==> [56/990] 2 modules  14:03:45
+==> [57/990] 2 modules  14:03:46
+==> [58/990] 2 modules  14:03:47
+==> [59/990] 2 modules  14:03:48
+==> [60/990] 2 modules  14:03:49
+==> [61/990] 2 modules  14:03:50
+==> [62/990] 2 modules  14:03:51
+==> [63/990] 2 modules  14:03:51
+==> [64/990] 2 modules  14:03:52
+==> [65/990] 2 modules  14:03:54
+==> [66/990] 2 modules  14:03:56
+==> [67/990] 2 modules  14:03:57
+==> [68/990] 2 modules  14:03:57
+==> [69/990] 2 modules  14:03:58
+==> [70/990] 2 modules  14:03:59
+==> [71/990] 2 modules  14:03:59
+==> [72/990] 2 modules  14:04:00
+==> [73/990] 2 modules  14:04:01
+==> [74/990] 2 modules  14:04:02
+==> [75/990] 2 modules  14:04:02
+==> [76/990] 2 modules  14:04:03
+==> [77/990] 2 modules  14:04:04
+==> [78/990] 2 modules  14:04:04
+==> [79/990] 2 modules  14:04:05
+==> [80/990] 2 modules  14:04:06
+==> [81/990] 2 modules  14:04:06
+==> [82/990] 2 modules  14:04:07
+==> [83/990] 2 modules  14:04:08
+==> [84/990] 2 modules  14:04:08
+==> [85/990] 2 modules  14:04:09
+==> [86/990] 2 modules  14:04:10
+==> [87/990] 2 modules  14:04:11
+==> [88/990] 2 modules  14:04:11
+==> [89/990] 2 modules  14:04:13
+    rebuilt: Plane.DensityBound.X23Atoms01 (87s), Plane.DensityBound.X23Atoms00 (106s)
+==> [90/990] 2 modules  14:06:00
+    rebuilt: Plane.DensityBound.X23Atoms02 (117s), Plane.DensityBound.X23Atoms03 (128s)
+==> [91/990] 2 modules  14:08:09
+    rebuilt: Plane.DensityBound.X23Atoms04 (91s), Plane.DensityBound.X23Atoms05 (98s)
+==> [92/990] 2 modules  14:09:48
+    rebuilt: Plane.DensityBound.X23Atoms07 (82s), Plane.DensityBound.X23Atoms06 (99s)
+==> [93/990] 2 modules  14:11:28
+    rebuilt: Plane.DensityBound.X23Atoms08 (98s), Plane.DensityBound.X23Atoms09 (104s)
+==> [94/990] 2 modules  14:13:13
+    rebuilt: Plane.DensityBound.X23Atoms11 (98s), Plane.DensityBound.X23Atoms10 (105s)
+==> [95/990] 2 modules  14:14:59
+    rebuilt: Plane.DensityBound.X23Cong00 (9.8s), Plane.DensityBound.X23Atoms12 (75s)
+==> [96/990] 2 modules  14:16:16
+    rebuilt: Plane.DensityBound.X23Cong01 (12s), Plane.DensityBound.X23Cong02 (13s)
+==> [97/990] 2 modules  14:16:31
+    rebuilt: Plane.DensityBound.X23Cong04 (15s), Plane.DensityBound.X23Cong03 (16s)
+==> [98/990] 2 modules  14:16:47
+    rebuilt: Plane.DensityBound.X23Cong05 (17s), Plane.DensityBound.X23Cong06 (20s)
+==> [99/990] 2 modules  14:17:08
+    rebuilt: Plane.DensityBound.X23Cong07 (12s)
+==> [100/990] 2 modules  14:17:22
+==> [101/990] 2 modules  14:17:23
+==> [102/990] 1 modules  14:17:25
+==> [103/990] 2 modules  14:17:26
+==> [104/990] 2 modules  14:17:27
+==> [105/990] 2 modules  14:17:29
+==> [106/990] 2 modules  14:17:30
+==> [107/990] 2 modules  14:17:32
+==> [108/990] 2 modules  14:17:33
+==> [109/990] 2 modules  14:17:35
+==> [110/990] 2 modules  14:17:36
+==> [111/990] 2 modules  14:17:37
+==> [112/990] 2 modules  14:17:39
+    !! batch failed with status 1. What it printed, before the retry:
+    ✖ [2024/2304] Building Proofs.HadwigerNelson.Plane.DensityBound.X23All (736ms)
+    error: Proofs/HadwigerNelson/Plane/DensityBound/X23All.lean:33:2: maximum recursion depth has been reached
+    use `set_option maxRecDepth <num>` to increase limit
+    use `set_option diagnostics true` to get diagnostic information
+    error: Proofs/HadwigerNelson/Plane/DensityBound/X23All.lean:37:2: maximum recursion depth has been reached
+    use `set_option maxRecDepth <num>` to increase limit
+    use `set_option diagnostics true` to get diagnostic information
+    error: Lean exited with code 1
+    Some required targets logged failures:
+    - Proofs.HadwigerNelson.Plane.DensityBound.X23All
+    error: build failed
+    !! retrying ONCE. If this line is common, the machine is unwell and the build is not the
+       thing to fix.
+    ✖ [2302/2513] Building Proofs.HadwigerNelson.Plane.DensityBound.X23All (1.2s)
+    error: Proofs/HadwigerNelson/Plane/DensityBound/X23All.lean:33:2: maximum recursion depth has been reached
+    use `set_option maxRecDepth <num>` to increase limit
+    use `set_option diagnostics true` to get diagnostic information
+    error: Proofs/HadwigerNelson/Plane/DensityBound/X23All.lean:37:2: maximum recursion depth has been reached
+    use `set_option maxRecDepth <num>` to increase limit
+    use `set_option diagnostics true` to get diagnostic information
+    error: Lean exited with code 1
+    Some required targets logged failures:
+    - Proofs.HadwigerNelson.Plane.DensityBound.X23All
+    error: build failed
+    BATCH FAILED. Once it is fixed, rerun ./scripts/build.sh — modules that already built are
+    skipped. Never a bare or named lake build (RUNNING.md § Building).
+==> build: FAIL — 112 of 990 batches, 23 module(s) rebuilt, 0 module(s) with warnings, 16m36s
+    full output: build/gate/build/20261014T190103Z-191486.log
