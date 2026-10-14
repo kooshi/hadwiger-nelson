@@ -1,0 +1,51 @@
+slot: admitted icl2: mem 6 GiB (hard cap), cpus 0,1
+data/fs131/icl2/work/CountTorus.lean:57:0: warning: automatically included section variable(s) unused in theorem `HadwigerNelson.Rigidity.Counting.Delta_ratCast`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/icl2/work/CountTorus.lean:97:8: warning: automatically included section variable(s) unused in theorem `_private.data.fs131.icl2.work.CountTorus.0.HadwigerNelson.Rigidity.Counting.closure_powSubmonoid`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/icl2/work/CountTorus.lean:142:6: error: 'show' tactic failed, pattern
+  (fieldI F).subtype ?m.475 = ?m.477
+is not definitionally equal to target
+  ↑(↑((1 - q ^ 2) / (1 + q ^ 2)) + ↑(2 * q / (1 + q ^ 2)) * iL F) =
+    ↑((1 - q ^ 2) / (1 + q ^ 2)) + ↑(2 * q / (1 + q ^ 2)) * Complex.I
+data/fs131/icl2/work/CountTorus.lean:188:6: error: ring failed, ring expressions not equal
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+θ : ℝ
+X : Set (mixedEmbedding.mixedSpace ↥(fieldI F)) := ⋯
+hX : X = closure (⇑(mixedEmbedding ↥(fieldI F)) '' normOneL F)
+hΔc : Continuous ⇑(Delta F)
+cay : ℝ → ℂ := ⋯
+hcay : cay = fun t => (1 + ↑t * Complex.I) / (1 - ↑t * Complex.I)
+hden : ∀ (t : ℝ), 1 - ↑t * Complex.I ≠ 0
+hcayc : Continuous cay
+hrat : ∀ (q : ℚ), (Delta F) (cay ↑q) ∈ X
+hreal : ∀ (t : ℝ), (Delta F) (cay t) ∈ X
+c : ℝ := ⋯
+hc0 : c ≠ 0
+hcdef : c = Real.cos (θ / 2)
+sn : ℝ := ⋯
+hexp : Complex.exp (↑θ * Complex.I) = (↑c + ↑sn * Complex.I) ^ 2
+hsdef : sn = Real.sin (θ / 2)
+hcs : ↑c ^ 2 + ↑sn ^ 2 = 1
+hcC : ↑c ≠ 0
+hden' : ↑c - ↑sn * Complex.I ≠ 0
+hcay' : cay (sn / c) = (↑c + ↑sn * Complex.I) / (↑c - ↑sn * Complex.I)
+⊢ -(↑c * 2) - ↑c * ↑sn ^ 2 * Complex.I ^ 2 * 2 + ↑c ^ 2 * ↑sn * Complex.I * 2 + ↑c ^ 3 * 2 - ↑sn * Complex.I * 2 -
+      ↑sn ^ 3 * Complex.I ^ 3 * 2 =
+    0
+data/fs131/icl2/work/CountTorus.lean:193:8: warning: declaration uses `sorry`
+data/fs131/icl2/work/CountTorus.lean:201:8: warning: declaration uses `sorry`
+data/fs131/icl2/work/CountTorus.lean:206:8: warning: declaration uses `sorry`
+data/fs131/icl2/work/CountTorus.lean:209:8: warning: declaration uses `sorry`
+Command exited with non-zero status 1
+wall=4.70s maxrss=3804472kB
+lean1: compile failed; the build's .olean of Rigidity/CountTorus linked back into the farm

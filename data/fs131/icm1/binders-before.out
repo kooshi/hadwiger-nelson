@@ -1,0 +1,4 @@
+BINDER-MISS HadwigerNelson.Rigidity.tca_iff (ClassRatio): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.RatioAtMost (ClassRatio): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.unitVectorsR (CountCompletion): names Subfield, lacks NumberField
+binder misses: 3 of 41 public constants

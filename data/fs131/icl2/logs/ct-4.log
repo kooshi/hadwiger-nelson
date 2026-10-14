@@ -1,0 +1,312 @@
+slot: admitted icl2: mem 6 GiB (hard cap), cpus 0,1
+data/fs131/icl2/work/CountTorus.lean:263:23: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  -?a * ?b
+in the target expression
+  (1 + -(Complex.I * cayRoot h z)) / (1 - -(Complex.I * cayRoot h z)) = ξ⁻¹
+
+h : ℕ
+hh : 2 ≤ h
+z : ℂ
+h1 : 1 + Complex.I * z ≠ 0
+h2 : 1 - Complex.I * z ≠ 0
+c : ℂ := cayI Complex.I z
+hcdef : c = cayI Complex.I z
+hc0 : c ≠ 0
+ξ : ℂ := Complex.exp (Complex.log c / ↑h)
+hξdef : ξ = Complex.exp (Complex.log c / ↑h)
+hξ1 : ξ + 1 ≠ 0
+hξ0 : ξ ≠ 0
+hh0 : ↑h ≠ 0
+hξh : ξ ^ h = c
+hI : Complex.I * cayRoot h z = (ξ - 1) / (ξ + 1)
+hA : 1 - Complex.I * cayRoot h z = 2 / (ξ + 1)
+hB : 1 + Complex.I * cayRoot h z = 2 * ξ / (ξ + 1)
+hA0 : 1 - Complex.I * cayRoot h z ≠ 0
+hB0 : 1 + Complex.I * cayRoot h z ≠ 0
+hcay : cayI Complex.I (cayRoot h z) = ξ
+⊢ (1 + -(Complex.I * cayRoot h z)) / (1 - -(Complex.I * cayRoot h z)) = ξ⁻¹
+data/fs131/icl2/work/CountTorus.lean:266:36: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  -?a * ?b
+in the target expression
+  (1 + -(Complex.I * z)) / (1 - -(Complex.I * z)) = ((1 + Complex.I * z) / (1 - Complex.I * z))⁻¹
+
+h : ℕ
+hh : 2 ≤ h
+z : ℂ
+h1 : 1 + Complex.I * z ≠ 0
+h2 : 1 - Complex.I * z ≠ 0
+c : ℂ := cayI Complex.I z
+hcdef : c = cayI Complex.I z
+hc0 : c ≠ 0
+ξ : ℂ := Complex.exp (Complex.log c / ↑h)
+hξdef : ξ = Complex.exp (Complex.log c / ↑h)
+hξ1 : ξ + 1 ≠ 0
+hξ0 : ξ ≠ 0
+hh0 : ↑h ≠ 0
+hξh : ξ ^ h = c
+hI : Complex.I * cayRoot h z = (ξ - 1) / (ξ + 1)
+hA : 1 - Complex.I * cayRoot h z = 2 / (ξ + 1)
+hB : 1 + Complex.I * cayRoot h z = 2 * ξ / (ξ + 1)
+hA0 : 1 - Complex.I * cayRoot h z ≠ 0
+hB0 : 1 + Complex.I * cayRoot h z ≠ 0
+hcay : cayI Complex.I (cayRoot h z) = ξ
+hcay' : cayI (-Complex.I) (cayRoot h z) = ξ⁻¹
+⊢ (1 + -(Complex.I * z)) / (1 - -(Complex.I * z)) = ((1 + Complex.I * z) / (1 - Complex.I * z))⁻¹
+data/fs131/icl2/work/CountTorus.lean:282:4: error: Type mismatch: After simplification, term
+  this
+ has type
+  @Eq ℂ (1 + -(Complex.I * z)) 0
+but is expected to have type
+  @Eq ℂ (1 - Complex.I * z) 0
+data/fs131/icl2/work/CountTorus.lean:308:6: error: Type mismatch: After simplification, term
+  this
+ has type
+  @Eq ℂ (1 + -(Complex.I * cayRoot h ((starRingEnd ℂ) z))) 0
+but is expected to have type
+  @Eq ℂ (1 - Complex.I * cayRoot h ((starRingEnd ℂ) z)) 0
+data/fs131/icl2/work/CountTorus.lean:318:41: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  Complex.I * ?b
+in the target expression
+  ‖(1 + ↑r * Complex.I) / (1 - ↑r * Complex.I)‖ = 1
+
+h : ℕ
+hh : 2 ≤ h
+r : ℝ
+c : ℂ := cayI Complex.I ↑r
+hcdef : c = cayI Complex.I ↑r
+⊢ ‖(1 + ↑r * Complex.I) / (1 - ↑r * Complex.I)‖ = 1
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+data/fs131/icl2/work/CountTorus.lean:315:82: error: unsolved goals
+h : ℕ
+hh : 2 ≤ h
+r : ℝ
+c : ℂ := cayI Complex.I ↑r
+hcdef : c = cayI Complex.I ↑r
+hnorm : ‖c‖ = 1
+ξ : ℂ := Complex.exp (Complex.log c / ↑h)
+hξdef : ξ = Complex.exp (Complex.log c / ↑h)
+hξn : ‖ξ‖ = 1
+hξ0 : ξ ≠ 0
+hξ1 : ξ + 1 ≠ 0
+hconj : (starRingEnd ℂ) ξ = ξ⁻¹
+hξ1' : ξ⁻¹ + 1 ≠ 0
+⊢ ξ ^ 2 * (1 + ξ)⁻¹ - (1 + ξ)⁻¹ = -1 + ξ
+data/fs131/icl2/work/CountTorus.lean:369:15: error: Type mismatch
+  H
+has type
+  AddSubgroup (mixedEmbedding.mixedSpace ↥F)
+but is expected to have type
+  Set ?m.21
+data/fs131/icl2/work/CountTorus.lean:403:13: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  InfinitePlace.mk φ
+in the target expression
+  ComplexEmbedding.IsReal v.embedding
+
+case inl
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+w : InfinitePlace ↥(fieldI F)
+t₀ : ↥F
+g : ℂ → ℂ
+hg : ∀ (r : ℝ), (g ↑r).im = 0
+φ : ↥F →+* ℂ := w.embedding.comp (ιF F)
+hφ : φ = w.embedding.comp (ιF F)
+v : InfinitePlace ↥F := InfinitePlace.mk φ
+hv : v = InfinitePlace.mk φ
+hvr : v.IsReal
+hr : ComplexEmbedding.IsReal v.embedding
+e : (InfinitePlace.mk φ).embedding = φ
+⊢ ComplexEmbedding.IsReal φ
+data/fs131/icl2/work/CountTorus.lean:404:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  InfinitePlace.mk φ
+in the target expression
+  ComplexEmbedding.IsReal v.embedding
+
+case inr
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+w : InfinitePlace ↥(fieldI F)
+t₀ : ↥F
+g : ℂ → ℂ
+hg : ∀ (r : ℝ), (g ↑r).im = 0
+φ : ↥F →+* ℂ := w.embedding.comp (ιF F)
+hφ : φ = w.embedding.comp (ιF F)
+v : InfinitePlace ↥F := InfinitePlace.mk φ
+hv : v = InfinitePlace.mk φ
+hvr : v.IsReal
+hr : ComplexEmbedding.IsReal v.embedding
+e : (InfinitePlace.mk φ).embedding = ComplexEmbedding.conjugate φ
+⊢ ComplexEmbedding.IsReal φ
+data/fs131/icl2/work/CountTorus.lean:410:17: error(lean.unknownIdentifier): Unknown constant `NumberField.mixedEmbedding_apply_isReal`
+data/fs131/icl2/work/CountTorus.lean:411:6: error: Tactic `rfl` failed: The left-hand side
+  ↑(((mixedEmbedding ↥F) t).1 ⟨v, hvr⟩)
+is not definitionally equal to the right-hand side
+  w.embedding ((ιF F) t)
+
+case pos.refine_1
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+w : InfinitePlace ↥(fieldI F)
+t₀ : ↥F
+g : ℂ → ℂ
+hg : ∀ (r : ℝ), (g ↑r).im = 0
+φ : ↥F →+* ℂ := w.embedding.comp (ιF F)
+hφ : φ = w.embedding.comp (ιF F)
+v : InfinitePlace ↥F := InfinitePlace.mk φ
+hv : v = InfinitePlace.mk φ
+hvr : v.IsReal
+hφr : ComplexEmbedding.IsReal φ
+hvφ : v.embedding = φ
+t : ↥F
+⊢ ↑(((mixedEmbedding ↥F) t).1 ⟨v, hvr⟩) = w.embedding ((ιF F) t)
+data/fs131/icl2/work/CountTorus.lean:416:14: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+w : InfinitePlace ↥(fieldI F)
+t₀ : ↥F
+g : ℂ → ℂ
+hg : ∀ (r : ℝ), (g ↑r).im = 0
+φ : ↥F →+* ℂ := w.embedding.comp (ιF F)
+hφ : φ = w.embedding.comp (ιF F)
+v : InfinitePlace ↥F := InfinitePlace.mk φ
+hv : v = InfinitePlace.mk φ
+hvr : v.IsReal
+hφr : ComplexEmbedding.IsReal φ
+hvφ : v.embedding = φ
+hr : v.embedding t₀ = ↑((InfinitePlace.embedding_of_isReal hvr) t₀)
+⊢ (g (v.embedding t₀)).re = (g (w.embedding ((ιF F) t₀))).re
+data/fs131/icl2/work/CountTorus.lean:416:23: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+w : InfinitePlace ↥(fieldI F)
+t₀ : ↥F
+g : ℂ → ℂ
+hg : ∀ (r : ℝ), (g ↑r).im = 0
+φ : ↥F →+* ℂ := w.embedding.comp (ιF F)
+hφ : φ = w.embedding.comp (ιF F)
+v : InfinitePlace ↥F := InfinitePlace.mk φ
+hv : v = InfinitePlace.mk φ
+hvr : v.IsReal
+hφr : ComplexEmbedding.IsReal φ
+hvφ : v.embedding = φ
+hr : v.embedding t₀ = ↑((InfinitePlace.embedding_of_isReal hvr) t₀)
+⊢ 0 = (g (w.embedding ((ιF F) t₀))).im
+data/fs131/icl2/work/CountTorus.lean:418:6: error: No goals to be solved
+data/fs131/icl2/work/CountTorus.lean:422:19: error(lean.unknownIdentifier): Unknown constant `NumberField.mixedEmbedding_apply_isComplex`
+data/fs131/icl2/work/CountTorus.lean:423:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  InfinitePlace.mk φ
+in the target expression
+  ((mixedEmbedding ↥F) t).2 ⟨v, hvc⟩ = w.embedding ((ιF F) t)
+
+case neg.inl.refine_1
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+w : InfinitePlace ↥(fieldI F)
+t₀ : ↥F
+g : ℂ → ℂ
+hg : ∀ (r : ℝ), (g ↑r).im = 0
+φ : ↥F →+* ℂ := w.embedding.comp (ιF F)
+hφ : φ = w.embedding.comp (ιF F)
+v : InfinitePlace ↥F := InfinitePlace.mk φ
+hv : v = InfinitePlace.mk φ
+hvr : ¬v.IsReal
+hvc : v.IsComplex
+e : (InfinitePlace.mk φ).embedding = φ
+t : ↥F
+⊢ ((mixedEmbedding ↥F) t).2 ⟨v, hvc⟩ = w.embedding ((ιF F) t)
+data/fs131/icl2/work/CountTorus.lean:426:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  InfinitePlace.mk φ
+in the target expression
+  g (v.embedding t₀) = g (w.embedding ((ιF F) t₀))
+
+case neg.inl.refine_2
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+w : InfinitePlace ↥(fieldI F)
+t₀ : ↥F
+g : ℂ → ℂ
+hg : ∀ (r : ℝ), (g ↑r).im = 0
+φ : ↥F →+* ℂ := w.embedding.comp (ιF F)
+hφ : φ = w.embedding.comp (ιF F)
+v : InfinitePlace ↥F := InfinitePlace.mk φ
+hv : v = InfinitePlace.mk φ
+hvr : ¬v.IsReal
+hvc : v.IsComplex
+e : (InfinitePlace.mk φ).embedding = φ
+⊢ g (v.embedding t₀) = g (w.embedding ((ιF F) t₀))
+data/fs131/icl2/work/CountTorus.lean:430:19: error(lean.unknownIdentifier): Unknown constant `NumberField.mixedEmbedding_apply_isComplex`
+data/fs131/icl2/work/CountTorus.lean:431:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  InfinitePlace.mk φ
+in the target expression
+  (starRingEnd ℂ) (((mixedEmbedding ↥F) t).2 ⟨v, hvc⟩) = w.embedding ((ιF F) t)
+
+case neg.inr.refine_1
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+w : InfinitePlace ↥(fieldI F)
+t₀ : ↥F
+g : ℂ → ℂ
+hg : ∀ (r : ℝ), (g ↑r).im = 0
+φ : ↥F →+* ℂ := w.embedding.comp (ιF F)
+hφ : φ = w.embedding.comp (ιF F)
+v : InfinitePlace ↥F := InfinitePlace.mk φ
+hv : v = InfinitePlace.mk φ
+hvr : ¬v.IsReal
+hvc : v.IsComplex
+e : (InfinitePlace.mk φ).embedding = ComplexEmbedding.conjugate φ
+t : ↥F
+⊢ (starRingEnd ℂ) (((mixedEmbedding ↥F) t).2 ⟨v, hvc⟩) = w.embedding ((ιF F) t)
+data/fs131/icl2/work/CountTorus.lean:434:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  InfinitePlace.mk φ
+in the target expression
+  (starRingEnd ℂ) (g (v.embedding t₀)) = (starRingEnd ℂ) (g ((starRingEnd ℂ) (w.embedding ((ιF F) t₀))))
+
+case neg.inr.refine_2
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+w : InfinitePlace ↥(fieldI F)
+t₀ : ↥F
+g : ℂ → ℂ
+hg : ∀ (r : ℝ), (g ↑r).im = 0
+φ : ↥F →+* ℂ := w.embedding.comp (ιF F)
+hφ : φ = w.embedding.comp (ιF F)
+v : InfinitePlace ↥F := InfinitePlace.mk φ
+hv : v = InfinitePlace.mk φ
+hvr : ¬v.IsReal
+hvc : v.IsComplex
+e : (InfinitePlace.mk φ).embedding = ComplexEmbedding.conjugate φ
+⊢ (starRingEnd ℂ) (g (v.embedding t₀)) = (starRingEnd ℂ) (g ((starRingEnd ℂ) (w.embedding ((ιF F) t₀))))
+data/fs131/icl2/work/CountTorus.lean:410:58: warning: This simp argument is unused:
+  NumberField.InfinitePlace.embedding_of_isReal_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [NumberField.mixedEmbedding_apply_isReal, N̵u̵m̵b̵e̵r̵F̵i̵e̵l̵d̵.̵I̵n̵f̵i̵n̵i̵t̵e̵P̵l̵a̵c̵e̵.̵e̵m̵b̵e̵d̵d̵i̵n̵g̵_̵o̵f̵_̵i̵s̵R̵e̵a̵l̵_̵a̵p̵p̵l̵y̵,̵ ̵hvφ]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/icl2/work/CountTorus.lean:410:111: warning: This simp argument is unused:
+  hvφ
+
+Hint: Omit it from the simp argument list.
+  simp only [NumberField.mixedEmbedding_apply_isReal,
+  ̲  ̲ ̲ ̲ ̲ ̲NumberField.InfinitePlace.embedding_of_isReal_apply,̵ ̵h̵v̵φ̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/icl2/work/CountTorus.lean:416:32: warning: This simp argument is unused:
+  hg
+
+Hint: Omit it from the simp argument list.
+  simp ̵[̵h̵g̵]̵
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/icl2/work/CountTorus.lean:438:8: warning: declaration uses `sorry`
+data/fs131/icl2/work/CountTorus.lean:446:8: warning: declaration uses `sorry`
+data/fs131/icl2/work/CountTorus.lean:451:8: warning: declaration uses `sorry`
+data/fs131/icl2/work/CountTorus.lean:454:8: warning: declaration uses `sorry`
+Command exited with non-zero status 1
+wall=5.84s maxrss=3834120kB
+lean1: compile failed; the build's .olean of Rigidity/CountTorus linked back into the farm

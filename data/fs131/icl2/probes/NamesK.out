@@ -1,0 +1,30 @@
+slot: waiting (ledger 20 + 6 > budget 22 GiB)
+slot: admitted icl2: mem 6 GiB (hard cap), cpus 0,1
+data/fs131/icl2/probes/NamesK.lean:2:8: error(lean.unknownIdentifier): Unknown constant `Monoid.exponent_pos_of_finite`
+@Monoid.pow_exponent_eq_one : ∀ {G : Type u_1} [inst : Monoid G] (g : G), g ^ Monoid.exponent G = 1
+@card_nsmul_eq_zero : ∀ {G : Type u_1} [inst : AddGroup G] [inst_1 : Fintype G] {x : G}, Fintype.card G • x = 0
+@Filter.mem_pi : ∀ {ι : Type u_1} {α : ι → Type u_2} {f : (i : ι) → Filter (α i)} {s : Set ((i : ι) → α i)},
+  s ∈ Filter.pi f ↔ ∃ I, I.Finite ∧ ∃ t, (∀ (i : ι), t i ∈ f i) ∧ I.pi t ⊆ s
+@nhds_pi : ∀ {ι : Type u_1} {A : ι → Type u_2} [T : (i : ι) → TopologicalSpace (A i)] {a : (i : ι) → A i},
+  nhds a = Filter.pi fun i => nhds (a i)
+@mem_nhds_subtype : ∀ {X : Type u_1} [inst : TopologicalSpace X] (s : Set X) (x : { x // x ∈ s })
+  (t : Set { x // x ∈ s }), t ∈ nhds x ↔ ∃ u ∈ nhds ↑x, Subtype.val ⁻¹' u ⊆ t
+@Filter.hasBasis_iff : ∀ {α : Type u_1} {ι : Sort u_2} {l : Filter α} {p : ι → Prop} {s : ι → Set α},
+  l.HasBasis p s ↔ ∀ (t : Set α), t ∈ l ↔ ∃ i, p i ∧ s i ⊆ t
+@isClosed_discrete : ∀ {α : Type u_1} [inst : TopologicalSpace α] [DiscreteTopology α] (s : Set α), IsClosed s
+@ENNReal.eq_inv_of_mul_eq_one_left : ∀ {a b : ENNReal}, a * b = 1 → a = b⁻¹
+data/fs131/icl2/probes/NamesK.lean:11:8: error(lean.unknownIdentifier): Unknown identifier `Measure.addHaarMeasure_self`
+@Set.Finite.bddAbove : ∀ {α : Type u_1} [inst : Preorder α] [IsDirectedOrder α] [Nonempty α] {s : Set α},
+  s.Finite → BddAbove s
+@Filter.mem_prod_iff : ∀ {α : Type u_1} {β : Type u_2} {s : Set (α × β)} {f : Filter α} {g : Filter β},
+  s ∈ f ×ˢ g ↔ ∃ t₁ ∈ f, ∃ t₂ ∈ g, t₁ ×ˢ t₂ ⊆ s
+@nhds_prod_eq : ∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {x : X}
+  {y : Y}, nhds (x, y) = nhds x ×ˢ nhds y
+@mem_closure_iff_nhds : ∀ {X : Type u_1} [inst : TopologicalSpace X] {x : X} {s : Set X},
+  x ∈ closure s ↔ ∀ t ∈ nhds x, (t ∩ s).Nonempty
+@AddSubgroup.topologicalClosure_coe : ∀ {G : Type u_1} [inst : TopologicalSpace G] [inst_1 : AddGroup G]
+  [inst_2 : IsTopologicalAddGroup G] {s : AddSubgroup G}, ↑s.topologicalClosure = closure ↑s
+@Nat.card_eq_fintype_card : ∀ {α : Type u_1} [inst : Fintype α], Nat.card α = Fintype.card α
+@Set.toFinset_card : ∀ {α : Type u_1} (s : Set α) [inst : Fintype ↑s], s.toFinset.card = Fintype.card ↑s
+Command exited with non-zero status 1
+wall=2.73s maxrss=4007004kB

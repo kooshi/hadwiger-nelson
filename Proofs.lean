@@ -230,6 +230,7 @@ import Proofs.HadwigerNelson.Rigidity.CountResidue
 import Proofs.HadwigerNelson.Rigidity.CountCompletion
 import Proofs.HadwigerNelson.Rigidity.CountExtension
 import Proofs.HadwigerNelson.Rigidity.CountDescent
+import Proofs.HadwigerNelson.Rigidity.CountModels
 import Proofs.HadwigerNelson.Rigidity.SubgroupHaar
 import Proofs.HadwigerNelson.Rigidity.Duality
 import Proofs.HadwigerNelson.Rigidity.DualConnected

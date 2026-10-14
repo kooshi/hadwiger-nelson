@@ -1,0 +1,6 @@
+DIFFERS  HadwigerNelson.Rigidity.measurableSet_lonely: stripped ['AddCommGroup', 'Fintype']
+DIFFERS  HadwigerNelson.Rigidity.unitPairsNull_lonely: stripped ['AddCommGroup', 'Fintype']
+DIFFERS  HadwigerNelson.Rigidity.ae_sIndep_social: stripped []
+DIFFERS  HadwigerNelson.Rigidity.ae_disjoint_touched: stripped []
+DIFFERS  HadwigerNelson.Rigidity.Counting.measure_ne_eq: stripped []
+plant: FIRED

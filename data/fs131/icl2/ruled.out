@@ -1,0 +1,11 @@
+EXACT    DROP HadwigerNelson.Rigidity.Counting.isIndepSet_levelTarget_iff: : NumberField
+EXACT    DROP HadwigerNelson.Rigidity.Counting.neg_mem_normOneQ: : NumberField
+EXACT    DROP HadwigerNelson.Rigidity.Counting.ratioLe_normOneQ: : NumberField
+EXACT    DROP HadwigerNelson.Rigidity.Counting.exists_unitRing_of_normOneL: : NumberField
+EXACT    DROP HadwigerNelson.Rigidity.Counting.Delta_ratCast: : NumberField
+EXACT    DROP HadwigerNelson.Rigidity.Counting.Delta_circle_mem_closure: : NumberField
+EXACT    DROP HadwigerNelson.Rigidity.Counting.pow_mem_normOneL: : NumberField
+EXACT    DROP HadwigerNelson.Rigidity.Counting.mul_mem_normOneL: : NumberField
+EXACT    ADD  HadwigerNelson.Rigidity.Counting.finite_quot: : NumberField
+EXACT    ADD  HadwigerNelson.Rigidity.Counting.rowsEdgeNull_levelRows: (HadwigerNelson.SpectralChain.TCA F) -> (
+RESULT: PASS (10 of 10 exact)

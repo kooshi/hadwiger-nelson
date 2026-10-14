@@ -1,0 +1,15 @@
+slot: admitted icl1: mem 5 GiB (hard cap), cpus 0,1
+data/fs131/icl1/work/PlaneZhang.lean:67:89: warning: Variable name `q` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+data/fs131/icl1/work/PlaneZhang.lean:170:10: error: Function expected at
+  zero_le
+but this term has type
+  0 ≤ ?m.66
+
+Note: Expected a function because this term is being applied to the argument
+  _
+Command exited with non-zero status 1
+wall=5.99s maxrss=3400984kB

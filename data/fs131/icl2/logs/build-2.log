@@ -1,0 +1,323 @@
+slot: waiting (ledger 15 + 10 > budget 22 GiB)
+slot: admitted icl2: mem 10 GiB (hard cap), cpus 0,1,2,3
+==> build: this run's full output: build/gate/build/20261014T165056Z-3908851.log
+==> up-to-date check: exit 3 after 3s (3 means something needs building) — walking the batches
+==> 256 batches of at most 8 modules, capped at 10G
+==> [1/256] 8 modules  11:51:00
+==> [2/256] 8 modules  11:51:02
+==> [3/256] 8 modules  11:51:03
+    rebuilt: Rigidity.FiniteZhang (3.0s)
+==> [4/256] 8 modules  11:51:08
+==> [5/256] 3 modules  11:51:10
+==> [6/256] 8 modules  11:51:11
+==> [7/256] 8 modules  11:51:13
+==> [8/256] 8 modules  11:51:14
+==> [9/256] 8 modules  11:51:16
+==> [10/256] 8 modules  11:51:16
+==> [11/256] 8 modules  11:51:17
+==> [12/256] 8 modules  11:51:18
+==> [13/256] 8 modules  11:51:18
+==> [14/256] 8 modules  11:51:20
+==> [15/256] 8 modules  11:51:21
+==> [16/256] 8 modules  11:51:22
+==> [17/256] 8 modules  11:51:23
+==> [18/256] 7 modules  11:51:24
+==> [19/256] 8 modules  11:51:25
+==> [20/256] 8 modules  11:51:27
+==> [21/256] 8 modules  11:51:28
+==> [22/256] 3 modules  11:51:30
+==> [23/256] 8 modules  11:51:31
+==> [24/256] 8 modules  11:51:32
+==> [25/256] 8 modules  11:51:33
+==> [26/256] 8 modules  11:51:35
+==> [27/256] 2 modules  11:51:36
+    ⚠ [2986/2989] Replayed Proofs.HadwigerNelson.Rigidity.EntropyFibres
+    warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:60:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:66:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:73:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:82:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:94:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:110:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:125:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:141:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:151:8: declaration uses `sorry`
+==> [28/256] 8 modules  11:51:37
+==> [29/256] 8 modules  11:51:39
+==> [30/256] 8 modules  11:51:40
+==> [31/256] 8 modules  11:51:41
+    ⚠ [2788/2824] Replayed Proofs.HadwigerNelson.Plane.OneAvoidingDensity
+    warning: Proofs/HadwigerNelson/Plane/OneAvoidingDensity.lean:54:8: declaration uses `sorry`
+    ⚠ [3166/3166] Replayed Proofs.HadwigerNelson.Rigidity.PositiveEntropy
+    warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:150:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:157:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:162:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:169:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:179:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:207:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:213:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:224:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:235:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:256:8: declaration uses `sorry`
+==> [32/256] 8 modules  11:51:43
+==> [33/256] 8 modules  11:51:44
+==> [34/256] 8 modules  11:51:46
+==> [35/256] 8 modules  11:51:47
+==> [36/256] 8 modules  11:51:48
+==> [37/256] 8 modules  11:51:49
+==> [38/256] 8 modules  11:51:50
+==> [39/256] 8 modules  11:51:52
+==> [40/256] 8 modules  11:51:53
+==> [41/256] 8 modules  11:51:54
+==> [42/256] 8 modules  11:51:55
+==> [43/256] 8 modules  11:51:57
+==> [44/256] 8 modules  11:51:58
+==> [45/256] 8 modules  11:51:59
+==> [46/256] 8 modules  11:52:01
+==> [47/256] 8 modules  11:52:02
+==> [48/256] 8 modules  11:52:03
+==> [49/256] 8 modules  11:52:04
+==> [50/256] 8 modules  11:52:06
+==> [51/256] 8 modules  11:52:07
+==> [52/256] 8 modules  11:52:08
+==> [53/256] 8 modules  11:52:09
+==> [54/256] 8 modules  11:52:11
+==> [55/256] 8 modules  11:52:12
+==> [56/256] 8 modules  11:52:13
+==> [57/256] 8 modules  11:52:14
+==> [58/256] 8 modules  11:52:15
+==> [59/256] 8 modules  11:52:16
+==> [60/256] 8 modules  11:52:18
+==> [61/256] 8 modules  11:52:20
+==> [62/256] 8 modules  11:52:22
+==> [63/256] 8 modules  11:52:24
+==> [64/256] 8 modules  11:52:26
+==> [65/256] 8 modules  11:52:28
+==> [66/256] 8 modules  11:52:30
+==> [67/256] 8 modules  11:52:32
+==> [68/256] 8 modules  11:52:34
+==> [69/256] 8 modules  11:52:36
+==> [70/256] 8 modules  11:52:38
+==> [71/256] 8 modules  11:52:40
+==> [72/256] 8 modules  11:52:41
+==> [73/256] 8 modules  11:52:44
+==> [74/256] 8 modules  11:52:45
+==> [75/256] 8 modules  11:52:47
+==> [76/256] 8 modules  11:52:49
+==> [77/256] 8 modules  11:52:50
+==> [78/256] 8 modules  11:52:52
+==> [79/256] 8 modules  11:52:53
+==> [80/256] 8 modules  11:52:55
+==> [81/256] 8 modules  11:52:56
+==> [82/256] 8 modules  11:52:58
+==> [83/256] 8 modules  11:53:00
+==> [84/256] 8 modules  11:53:01
+==> [85/256] 8 modules  11:53:03
+==> [86/256] 8 modules  11:53:04
+==> [87/256] 8 modules  11:53:06
+==> [88/256] 8 modules  11:53:08
+==> [89/256] 8 modules  11:53:09
+==> [90/256] 8 modules  11:53:11
+==> [91/256] 8 modules  11:53:12
+==> [92/256] 8 modules  11:53:14
+==> [93/256] 8 modules  11:53:15
+==> [94/256] 8 modules  11:53:17
+==> [95/256] 8 modules  11:53:19
+==> [96/256] 8 modules  11:53:20
+==> [97/256] 8 modules  11:53:22
+==> [98/256] 8 modules  11:53:24
+==> [99/256] 8 modules  11:53:25
+==> [100/256] 8 modules  11:53:27
+==> [101/256] 8 modules  11:53:29
+==> [102/256] 8 modules  11:53:30
+==> [103/256] 8 modules  11:53:32
+==> [104/256] 8 modules  11:53:33
+==> [105/256] 8 modules  11:53:35
+==> [106/256] 8 modules  11:53:37
+==> [107/256] 8 modules  11:53:38
+==> [108/256] 8 modules  11:53:40
+==> [109/256] 8 modules  11:53:42
+==> [110/256] 8 modules  11:53:44
+==> [111/256] 8 modules  11:53:46
+==> [112/256] 8 modules  11:53:48
+==> [113/256] 8 modules  11:53:49
+==> [114/256] 8 modules  11:53:51
+==> [115/256] 8 modules  11:53:53
+==> [116/256] 8 modules  11:53:55
+==> [117/256] 8 modules  11:53:57
+==> [118/256] 8 modules  11:53:58
+==> [119/256] 8 modules  11:54:00
+==> [120/256] 8 modules  11:54:02
+==> [121/256] 8 modules  11:54:04
+==> [122/256] 8 modules  11:54:05
+==> [123/256] 8 modules  11:54:07
+==> [124/256] 8 modules  11:54:09
+==> [125/256] 8 modules  11:54:11
+==> [126/256] 8 modules  11:54:13
+==> [127/256] 8 modules  11:54:14
+==> [128/256] 8 modules  11:54:16
+==> [129/256] 8 modules  11:54:18
+==> [130/256] 8 modules  11:54:19
+==> [131/256] 8 modules  11:54:21
+==> [132/256] 8 modules  11:54:22
+==> [133/256] 8 modules  11:54:24
+==> [134/256] 8 modules  11:54:25
+==> [135/256] 8 modules  11:54:27
+==> [136/256] 8 modules  11:54:29
+==> [137/256] 8 modules  11:54:31
+==> [138/256] 8 modules  11:54:32
+==> [139/256] 8 modules  11:54:34
+==> [140/256] 8 modules  11:54:36
+==> [141/256] 8 modules  11:54:38
+==> [142/256] 8 modules  11:54:40
+==> [143/256] 8 modules  11:54:41
+==> [144/256] 8 modules  11:54:43
+==> [145/256] 8 modules  11:54:45
+==> [146/256] 8 modules  11:54:47
+==> [147/256] 8 modules  11:54:48
+==> [148/256] 8 modules  11:54:50
+==> [149/256] 8 modules  11:54:52
+==> [150/256] 8 modules  11:54:54
+==> [151/256] 8 modules  11:54:56
+==> [152/256] 8 modules  11:54:57
+==> [153/256] 8 modules  11:54:59
+==> [154/256] 8 modules  11:55:00
+==> [155/256] 8 modules  11:55:02
+==> [156/256] 8 modules  11:55:04
+==> [157/256] 8 modules  11:55:05
+==> [158/256] 8 modules  11:55:07
+==> [159/256] 8 modules  11:55:08
+==> [160/256] 8 modules  11:55:10
+==> [161/256] 8 modules  11:55:12
+==> [162/256] 8 modules  11:55:13
+==> [163/256] 8 modules  11:55:15
+==> [164/256] 8 modules  11:55:16
+==> [165/256] 8 modules  11:55:18
+==> [166/256] 8 modules  11:55:19
+==> [167/256] 8 modules  11:55:21
+==> [168/256] 8 modules  11:55:23
+==> [169/256] 8 modules  11:55:24
+==> [170/256] 8 modules  11:55:26
+==> [171/256] 8 modules  11:55:27
+==> [172/256] 8 modules  11:55:29
+==> [173/256] 8 modules  11:55:31
+==> [174/256] 8 modules  11:55:32
+==> [175/256] 8 modules  11:55:34
+==> [176/256] 8 modules  11:55:35
+==> [177/256] 8 modules  11:55:37
+==> [178/256] 8 modules  11:55:38
+==> [179/256] 8 modules  11:55:40
+==> [180/256] 8 modules  11:55:42
+==> [181/256] 8 modules  11:55:44
+==> [182/256] 8 modules  11:55:46
+==> [183/256] 8 modules  11:55:47
+==> [184/256] 8 modules  11:55:49
+==> [185/256] 8 modules  11:55:51
+==> [186/256] 8 modules  11:55:53
+==> [187/256] 8 modules  11:55:55
+==> [188/256] 8 modules  11:55:57
+==> [189/256] 8 modules  11:55:59
+==> [190/256] 8 modules  11:56:00
+==> [191/256] 8 modules  11:56:02
+==> [192/256] 8 modules  11:56:04
+==> [193/256] 8 modules  11:56:06
+==> [194/256] 8 modules  11:56:08
+==> [195/256] 8 modules  11:56:10
+==> [196/256] 8 modules  11:56:12
+==> [197/256] 8 modules  11:56:13
+==> [198/256] 8 modules  11:56:15
+==> [199/256] 8 modules  11:56:16
+==> [200/256] 8 modules  11:56:18
+==> [201/256] 8 modules  11:56:20
+==> [202/256] 8 modules  11:56:21
+==> [203/256] 8 modules  11:56:23
+==> [204/256] 8 modules  11:56:25
+==> [205/256] 8 modules  11:56:26
+==> [206/256] 8 modules  11:56:28
+==> [207/256] 8 modules  11:56:30
+==> [208/256] 8 modules  11:56:31
+==> [209/256] 8 modules  11:56:33
+==> [210/256] 8 modules  11:56:35
+==> [211/256] 8 modules  11:56:37
+==> [212/256] 8 modules  11:56:38
+==> [213/256] 8 modules  11:56:40
+==> [214/256] 8 modules  11:56:41
+==> [215/256] 8 modules  11:56:43
+==> [216/256] 6 modules  11:56:44
+    rebuilt: Rigidity.PlaneZhang (4.2s)
+==> [217/256] 8 modules  11:56:50
+==> [218/256] 8 modules  11:56:52
+==> [219/256] 8 modules  11:56:53
+==> [220/256] 2 modules  11:56:55
+==> [221/256] 8 modules  11:56:56
+==> [222/256] 8 modules  11:56:58
+==> [223/256] 2 modules  11:56:59
+==> [224/256] 8 modules  11:57:01
+==> [225/256] 8 modules  11:57:03
+==> [226/256] 3 modules  11:57:05
+==> [227/256] 8 modules  11:57:06
+==> [228/256] 8 modules  11:57:09
+==> [229/256] 1 modules  11:57:10
+==> [230/256] 8 modules  11:57:11
+==> [231/256] 8 modules  11:57:14
+==> [232/256] 8 modules  11:57:15
+==> [233/256] 8 modules  11:57:18
+==> [234/256] 2 modules  11:57:19
+==> [235/256] 8 modules  11:57:20
+==> [236/256] 8 modules  11:57:23
+==> [237/256] 2 modules  11:57:26
+==> [238/256] 8 modules  11:57:28
+==> [239/256] 5 modules  11:57:30
+==> [240/256] 7 modules  11:57:33
+==> [241/256] 8 modules  11:57:36
+==> [242/256] 2 modules  11:57:39
+==> [243/256] 8 modules  11:57:42
+==> [244/256] 3 modules  11:57:45
+    ⚠ [3734/3743] Replayed Proofs.HadwigerNelson.Rigidity.ChainAtTA
+    warning: Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:550:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:555:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:562:8: declaration uses `sorry`
+==> [245/256] 8 modules  11:57:46
+==> [246/256] 2 modules  11:57:49
+    ⚠ [3664/3736] Replayed Proofs.HadwigerNelson.Rigidity.RingScope
+    warning: Proofs/HadwigerNelson/Rigidity/RingScope.lean:247:8: declaration uses `sorry`
+    ⚠ [3736/3736] Replayed Proofs.HadwigerNelson.Rigidity.UnitCircle
+    warning: Proofs/HadwigerNelson/Rigidity/UnitCircle.lean:219:8: declaration uses `sorry`
+==> [247/256] 8 modules  11:57:50
+    ⚠ [5472/5477] Replayed Proofs.HadwigerNelson.Rigidity.InvariantMeasure
+    warning: Proofs/HadwigerNelson/Rigidity/InvariantMeasure.lean:32:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/InvariantMeasure.lean:39:8: declaration uses `sorry`
+==> [248/256] 1 modules  11:57:53
+==> [249/256] 8 modules  11:57:55
+    ⚠ [5478/5509] Replayed Proofs.HadwigerNelson.Rigidity.BochnerTau
+    warning: Proofs/HadwigerNelson/Rigidity/BochnerTau.lean:35:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/BochnerTau.lean:41:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/BochnerTau.lean:48:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/BochnerTau.lean:60:8: declaration uses `sorry`
+    rebuilt: Rigidity.CountTorus (6.3s)
+==> [250/256] 5 modules  11:58:04
+==> [251/256] 6 modules  11:58:06
+    ⚠ [3817/4066] Replayed Proofs.HadwigerNelson.Rigidity.ClassRatio
+    warning: Proofs/HadwigerNelson/Rigidity/ClassRatio.lean:46:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ClassRatio.lean:57:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ClassRatio.lean:64:8: declaration uses `sorry`
+    ⚠ [4191/4225] Replayed Proofs.HadwigerNelson.Rigidity.EntropySplitMax
+    warning: Proofs/HadwigerNelson/Rigidity/EntropySplitMax.lean:79:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropySplitMax.lean:93:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropySplitMax.lean:101:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropySplitMax.lean:112:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropySplitMax.lean:117:8: declaration uses `sorry`
+==> [252/256] 3 modules  11:58:07
+    rebuilt: Rigidity.CountResidue (5.2s)
+==> [253/256] 2 modules  11:58:14
+    ⚠ [4085/4085] Built Proofs.HadwigerNelson.Rigidity.CountCompletion (5.8s)
+    warning: Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:180:8: declaration uses `sorry`
+    rebuilt: Rigidity.CountCompletion (5.8s)
+==> [254/256] 2 modules  11:58:22
+    rebuilt: Rigidity.CountExtension (7.2s)
+==> [255/256] 1 modules  11:58:31
+    rebuilt: Rigidity.CountDescent (5.9s)
+==> [256/256] 1 modules  11:58:39
+    rebuilt: Proofs (2.2s)
+==> build: OK — 256 of 256 batches, 8 module(s) rebuilt, 11 module(s) with warnings, 7m44s
+    full output: build/gate/build/20261014T165056Z-3908851.log
+exit=0

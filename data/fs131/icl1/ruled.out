@@ -1,0 +1,6 @@
+EXACT    HadwigerNelson.Rigidity.measurableSet_lonely: stripped ['AddCommGroup', 'Fintype', 'DecidableEq']
+EXACT    HadwigerNelson.Rigidity.unitPairsNull_lonely: stripped ['AddCommGroup', 'Fintype', 'DecidableEq']
+EXACT    HadwigerNelson.Rigidity.ae_sIndep_social: stripped ['DecidableEq']
+EXACT    HadwigerNelson.Rigidity.ae_disjoint_touched: stripped ['DecidableEq']
+EXACT    HadwigerNelson.Rigidity.Counting.measure_ne_eq: stripped ['NumberField']
+RESULT: PASS

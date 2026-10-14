@@ -1,0 +1,14 @@
+slot: admitted icl2: mem 6 GiB (hard cap), cpus 0,1
+data/fs131/icl2/work/CountResidue.lean:72:0: warning: automatically included section variable(s) unused in theorem `HadwigerNelson.Rigidity.Counting.isIndepSet_levelTarget_iff`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/icl2/work/CountResidue.lean:346:0: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+Command exited with non-zero status 1
+wall=18.25s maxrss=4083780kB

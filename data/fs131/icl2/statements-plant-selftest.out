@@ -1,0 +1,16 @@
+BINDER-MISS HadwigerNelson.Rigidity.SIndep: binds G, lacks Finite
+BINDER-MISS HadwigerNelson.Rigidity.RatioLe: binds G, lacks Finite
+BINDER-MISS HadwigerNelson.Rigidity.Counting.Delta: names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.normOneL: names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.iL: names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.mem_normOneL_iff: names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.normOneQ: names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.finite_quot: names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.stablePrime_injective: names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.unitVectorsR: names Subfield, lacks NumberField
+SAME=78 CHANGED=0 RULED=0 MISSING=0 ADDED-INTERNAL=0 ADDED-GENERATED=0 ADDED-PUBLIC=0
+PLANT type-char in HadwigerNelson.Rigidity.Counting.instCommRingLev: CHANGED=1 -> FIRED
+PLANT drop HadwigerNelson.Rigidity.Counting.instCommRingLev: MISSING=1 -> FIRED
+PLANT add public: ADDED-PUBLIC=1 -> FIRED
+PLANT binder in HadwigerNelson.Rigidity.Counting.exists_mem_nsmul_of_resR_eq_zero: misses=11 -> FIRED
+plant: ALL FIRED

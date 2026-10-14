@@ -1,0 +1,71 @@
+BINDER-MISS HadwigerNelson.Rigidity.tca_iff (ClassRatio): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.RatioAtMost (ClassRatio): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.unitVectorsR (CountCompletion): names Subfield, lacks NumberField
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountCompletion.0.HadwigerNelson.Rigidity.Counting.haarK_bad_le._simp_1_1
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountCompletion.0.HadwigerNelson.Rigidity.Counting.mul_le_of_le_one_sub
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountCompletion.0.HadwigerNelson.Rigidity.Counting.haarK_bad_le
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountCompletion.0.HadwigerNelson.Rigidity.Counting.tendsto_haarK_bad_of_le_one._abel_1_2
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountCompletion.0.HadwigerNelson.Rigidity.Counting.haarK_bad_le._simp_1_2
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountCompletion.0.HadwigerNelson.Rigidity.Counting.tendsto_haarK_bad_of_le_one._simp_1_1
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountCompletion.0.HadwigerNelson.Rigidity.Counting.tendsto_haarK_bad_of_le_one
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.bit.eq_1
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.tetra_col
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.measurableSet_singleton_dual._simp_1_1
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.ρ_dichotomy
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.μ₀
+ADDED-INTERNAL HadwigerNelson.Rigidity.Counting.not_r88TCA_rat.match_1_1
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.corr_ratColouring
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.one_ne_zero_quot
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.bitHom
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.isPrime_pow_one
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.col_rot
+ADDED-INTERNAL HadwigerNelson.Rigidity.Counting.ratColouring._proof_1
+ADDED-INTERNAL HadwigerNelson.Rigidity.Counting.ratColouring._proof_4
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.χ₀._proof_1
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.countable_unitRing_bot
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.col_shift
+NEW-MODULE CountModels HadwigerNelson.Rigidity.Counting.exists_invariantColouring_rat
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.col_mem_X4._abel_1_1
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.bit._proof_1
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.χ₀_apply
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.bit_zero
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.P₀._proof_1
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.P₀
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.eq_one_of_sq_eq_one
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.σ₀.eq_1
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.σ₀
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.σ₀._proof_1
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.ρ_unit
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.measurableSet_singleton_dual._simp_1_2
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.χ₀_mem_TA
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.measurableSet_singleton_dual
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.μ₀._proof_1
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.dirac_TA_compl
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.μ₀.eq_1
+ADDED-INTERNAL HadwigerNelson.Rigidity.Counting.ratColouring._proof_2
+ADDED-INTERNAL HadwigerNelson.Rigidity.Counting.ratColouring._proof_3
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.col
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.bit
+NEW-MODULE CountModels HadwigerNelson.Rigidity.Counting.not_r88TCA_rat
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.map_μ₀
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.col._proof_1
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.bit_unit._simp_1_2
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.col.eq_1
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.bit_unit
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.two_cases
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.ρ
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.bit_add
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.ram_P₀
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.bit_mul_unit
+NEW-MODULE CountModels HadwigerNelson.Rigidity.Counting.ratColouring
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.two_eq_zero
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.quotientMap_conj_eq
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.col_mem_X4
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.two_mem_P₀
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.CountModels.0.HadwigerNelson.Rigidity.Counting.χ₀
+SAME=41 CHANGED=0 RULED=0 MISSING=0 ADDED-INTERNAL=59 ADDED-GENERATED=0 NEW-MODULE=3 ADDED-PUBLIC=0
+PLANT type-char in HadwigerNelson.Rigidity.Counting.ιK: CHANGED=1 -> FIRED
+PLANT drop HadwigerNelson.Rigidity.Counting.ιK: MISSING=1 -> FIRED
+PLANT add public in CountCompletion: ADDED-PUBLIC=1 -> FIRED
+PLANT binder in HadwigerNelson.Rigidity.tca_of_five_le_localBound: misses=4 -> FIRED
+plant: ALL FIRED

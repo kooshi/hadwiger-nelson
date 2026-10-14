@@ -1,0 +1,9 @@
+slot: admitted icl2: mem 6 GiB (hard cap), cpus 0,1
+data/fs131/icl2/probes/LevelProbe2.lean:5:0: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+data/fs131/icl2/probes/LevelProbe2.lean:13:8: warning: declaration uses `sorry`
+Command exited with non-zero status 1
+wall=14.88s maxrss=4004164kB

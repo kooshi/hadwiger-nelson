@@ -1,0 +1,72 @@
+slot: admitted icl1: mem 6 GiB (hard cap), cpus 0,1
+data/fs131/icl1/work/CountExtension.lean:61:14: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∫ (a : ↥(unitRing F) → Fin 4), ?m.215 - ?m.238 * A.indicator (fun x => 1) a ∂?m.234
+in the target expression
+  ∫ (c : ↥(unitRing F) → Fin 4), 1 - 4 / 3 * A.indicator 1 c ∂μ.μ = 1 - 4 / 3 * (μ.μ A).toReal
+
+F : Subfield ℝ
+μ : InvariantColouring F
+y : ↥(unitRing F)
+this : IsProbabilityMeasure μ.μ
+A : Set (↥(unitRing F) → Fin 4) := {c | c 0 ≠ c y}
+hA : A = {c | c 0 ≠ c y}
+hAm : MeasurableSet A
+htet : (fun c => tetra (c 0) (c y)) = fun c => 1 - 4 / 3 * A.indicator 1 c
+⊢ ∫ (c : ↥(unitRing F) → Fin 4), 1 - 4 / 3 * A.indicator 1 c ∂μ.μ = 1 - 4 / 3 * (μ.μ A).toReal
+data/fs131/icl1/work/CountExtension.lean:68:16: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  𝓝 ?m.23
+in the target expression
+  comap (⇑(ιG F)) (𝓝 0) ≤ 𝓝 0
+
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+⊢ comap (⇑(ιG F)) (𝓝 0) ≤ 𝓝 0
+data/fs131/icl1/work/CountExtension.lean:143:4: error: Type mismatch
+  MeasurableSet.compl (measurableSet_eq_fun (measurable_pi_apply 0) (measurable_pi_apply 0))
+has type
+  MeasurableSet {x | x 0 = x 0}ᶜ
+but is expected to have type
+  MeasurableSet {c | c 0 ≠ c (b - a)}
+data/fs131/icl1/work/CountExtension.lean:153:27: error: Application type mismatch: The argument
+  fun c hc hX => ?m.32
+has type
+  (c : ↥(unitRing F) → Fin 4) → (hc : c ∈ {c | c a = c (a + u)}) → (hX : ?m.33 c hc) → ?m.34 c hc hX
+but is expected to have type
+  {c | c a = c (a + u)} ⊆ ?m.27
+in the application
+  measure_mono_null fun c hc hX => ?m.32
+data/fs131/icl1/work/CountExtension.lean:154:2: error: No goals to be solved
+data/fs131/icl1/work/CountExtension.lean:165:36: error: Function expected at
+  countable_unitRing
+but this term has type
+  Countable ↥(unitRing ?m.61)
+
+Note: Expected a function because this term is being applied to the argument
+  F
+data/fs131/icl1/work/CountExtension.lean:179:63: error: Application type mismatch: The argument
+  hT₂
+has type
+  T₂ ∈ 𝓝 (0, 0)
+but is expected to have type
+  ?m.418 ∈ ?m.419 ×ˢ ?m.420
+in the application
+  mem_prod_iff.mp hT₂
+data/fs131/icl1/work/CountExtension.lean:191:4: error(lean.unknownIdentifier): Unknown identifier `mem_iInter₂.mpr`
+data/fs131/icl1/work/CountExtension.lean:193:21: error(lean.unknownIdentifier): Unknown identifier `mem_iInter₂.mp`
+data/fs131/icl1/work/CountExtension.lean:195:4: error(lean.unknownIdentifier): Unknown identifier `mem_iInter₂.mpr`
+data/fs131/icl1/work/CountExtension.lean:269:15: error: Tactic `rcases` failed: `left✝ : ∀ t_1 ∈ Set.range fun k => ⋂ (_ : k ∈ Finset.range (m + 1)), interior (W k),
+  w✝ - t ∈ t_1` is not an inductive datatype
+data/fs131/icl1/work/CountExtension.lean:284:48: error: Application type mismatch: The argument
+  fun δ hδ x => ?m.1491
+has type
+  (δ : ENNReal) → (hδ : 0 < δ) → (x : ?m.1492 δ hδ) → ?m.1493 δ hδ x
+but is expected to have type
+  ∀ (ε : ENNReal), 0 < ε → μ.μ (⋂ m, ⋂ (_ : M ≤ m), C m) ≤ 0 + ε
+in the application
+  le_of_forall_pos_le_add fun δ hδ x => ?m.1491
+data/fs131/icl1/work/CountExtension.lean:285:4: error: No goals to be solved
+data/fs131/icl1/work/CountExtension.lean:295:21: error(lean.unknownIdentifier): Unknown identifier `mem_iUnion.mpr`
+data/fs131/icl1/work/CountExtension.lean:296:6: error: No goals to be solved
+data/fs131/icl1/work/CountExtension.lean:311:8: warning: declaration uses `sorry`
+Command exited with non-zero status 1
+wall=6.35s maxrss=4049720kB

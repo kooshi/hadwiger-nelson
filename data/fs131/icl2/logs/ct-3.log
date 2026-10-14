@@ -1,0 +1,12 @@
+slot: admitted icl2: mem 6 GiB (hard cap), cpus 0,1
+data/fs131/icl2/work/CountTorus.lean:116:0: warning: automatically included section variable(s) unused in theorem `HadwigerNelson.Rigidity.Counting.Delta_circle_mem_closure`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/icl2/work/CountTorus.lean:194:8: warning: declaration uses `sorry`
+data/fs131/icl2/work/CountTorus.lean:202:8: warning: declaration uses `sorry`
+data/fs131/icl2/work/CountTorus.lean:207:8: warning: declaration uses `sorry`
+data/fs131/icl2/work/CountTorus.lean:210:8: warning: declaration uses `sorry`
+wall=4.43s maxrss=3827376kB
