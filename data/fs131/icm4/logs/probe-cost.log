@@ -1,0 +1,21 @@
+slot: admitted icm4: mem 4 GiB (hard cap), cpus 8,9
+type checking took 936ms
+type checking took 1.12s
+type checking took 1.74s
+type checking took 1.86s
+type checking took 2.81s
+type checking took 3.66s
+type checking took 3.66s
+cumulative profiling times:
+	attribute application 0.0872ms
+	elaboration 2.13ms
+	fix level params 0.0446ms
+	instantiate metavars 0.0775ms
+	let-to-have transformation 0.0905ms
+	overlappingInstancesLinter 1.11ms
+	process pre-definitions 0.995ms
+	share common exprs 0.19ms
+	tactic execution 2.49ms
+	tacticAnalysis 7.55ms
+	type checking 15.8s
+	typeclass inference 26.5ms
