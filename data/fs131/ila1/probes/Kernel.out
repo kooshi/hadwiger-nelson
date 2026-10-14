@@ -1,0 +1,33 @@
+@HadwigerNelson.Rigidity.exists_admissiblePair : ∀ {F : Subfield ℝ} [NumberField ↥F],
+  Nonempty (HadwigerNelson.Rigidity.AdmissiblePair F)
+structure HadwigerNelson.Rigidity.AdmissiblePair (F : Subfield ℝ) : Type
+number of parameters: 1
+fields:
+  HadwigerNelson.Rigidity.AdmissiblePair.u : ↥(unitCircle F)
+  HadwigerNelson.Rigidity.AdmissiblePair.w : ↥(unitCircle F)
+  HadwigerNelson.Rigidity.AdmissiblePair.injective : Function.Injective ⇑(zpowHom self.u self.w)
+  HadwigerNelson.Rigidity.AdmissiblePair.generates : ∀ (Λ : AddSubgroup (Fin 2 → ℤ)),
+      Λ.FiniteIndex →
+        Subfield.closure ((fun n => ↑↑((zpowHom self.u self.w) (Multiplicative.ofAdd n))) '' ↑Λ) =
+          HadwigerNelson.SpectralChain.fieldI F
+constructor:
+  HadwigerNelson.Rigidity.AdmissiblePair.mk {F : Subfield ℝ} (u w : ↥(unitCircle F))
+    (injective : Function.Injective ⇑(zpowHom u w))
+    (generates :
+      ∀ (Λ : AddSubgroup (Fin 2 → ℤ)),
+        Λ.FiniteIndex →
+          Subfield.closure ((fun n => ↑↑((zpowHom u w) (Multiplicative.ofAdd n))) '' ↑Λ) =
+            HadwigerNelson.SpectralChain.fieldI F) :
+    AdmissiblePair F
+@AdmissiblePair.ofPow : {F : Subfield ℝ} →
+  (u w : ↥(unitCircle F)) →
+    Function.Injective ⇑(zpowHom u w) →
+      (∀ (k : ℕ), 0 < k → Subfield.closure {↑↑w ^ k} = HadwigerNelson.SpectralChain.fieldI F) → AdmissiblePair F
+def HadwigerNelson.Rigidity.zpowHom : {F : Subfield ℝ} →
+  ↥(unitCircle F) → ↥(unitCircle F) → Multiplicative (Fin 2 → ℤ) →* ↥(unitCircle F) :=
+fun {F} u w =>
+  { toFun := fun n => u ^ Multiplicative.toAdd n 0 * w ^ Multiplicative.toAdd n 1, map_one' := ⋯, map_mul' := ⋯ }
+def HadwigerNelson.Rigidity.unitCircle : Subfield ℝ → Subgroup Circle :=
+fun F => { carrier := {z | ↑z ∈ HadwigerNelson.SpectralChain.fieldI F}, mul_mem' := ⋯, one_mem' := ⋯, inv_mem' := ⋯ }
+'HadwigerNelson.Rigidity.exists_admissiblePair' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.AdmissiblePair.ofPow' depends on axioms: [propext, Classical.choice, Quot.sound]
