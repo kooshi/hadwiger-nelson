@@ -73,3 +73,57 @@ upper density at most 0.2470." — `Plane.OneAvoidingDensityBound`, read aloud b
 The statements are the planner's typed block (FS131-KDB1 § 3.3) with `bound = w_T + 10⁻⁵`: `X23_valid : X23.Valid`;
 `X23_phi : ∀ t : ℝ, 0 ≤ t → 1 - 6 / 10 ^ 5 ≤ X23.phi X23w0 t`; `X23_ratio : X23.bound / (1 - 6 / 10 ^ 5) ≤ 0.2470`;
 `Plane.oneAvoidingDensityBound : Plane.OneAvoidingDensityBound`. No existing statement or definition is touched.
+
+## Stage 2 — SAVED: the checker, its soundness, and the planted faults
+
+### 2.1 What was built (all new files; no existing module touched)
+
+| file | lines | what |
+|---|---|---|
+| `Proofs/HadwigerNelson/Plane/DensityBound/X23Check.lean` (core, no import) | 330 | the checker (§ 1.4), 12 spec examples by `decide` |
+| `tools/fs131_kdb1_x23.py` | 560 | the generator: checksums, read-backs (Table 1 transcribed in `data/fs131/idb3/paper-table1.txt`, Table 2's text in `paper-table2.txt`, `P23`), the integer data, an exact Python mirror of every check, the modules |
+| `Proofs/HadwigerNelson/Plane/DensityBound/X23Data.lean`, `X23Cong00`–`07`, `X23Atoms00`–`12`, `X23All` (generated, core) | — | the data and 8 + 103 + 8 `decide +kernel` theorems, assembled in `X23All` (`wcR_ok`, `frL_ok`) |
+| `Proofs/HadwigerNelson/Plane/DensityBound/X23.lean` (Mathlib) | 790 | the semantics and `X23_valid` |
+| `Proofs/HadwigerNelson/Plane/DensityBound/X23Dist.lean`, `Theorem.lean` | 60, 85 | `X23_close`, `X23_phi`, `X23_ratio`, `Plane.oneAvoidingDensityBound` |
+
+**Deviations from the design, and one finding.** (i) The scale is `10²¹`, not `10²⁰`: one `w_C` row of `g23.csv`,
+`5.4369049825320215e-05`, has 21 decimals, and is not an integer at `10²⁰` — the planner's prototype `proto_atoms.py` read
+it with `int(v * WS)`, truncating it silently (its assertion `Fr(c, WS) * WS == c` is true of every integer). The kernel
+check here is exact at `10²¹`; `phiApprox_ge`'s weights (`w₀`, `w₂` at `10²⁰`) are exact and are matched to `X23`'s by
+`w₂·10²¹ = 10·Ws` (checked by `decide +kernel` in `X23_phi`). The truncation moved one coefficient by `< 10⁻²⁰` and changes
+no verdict (min V is reproduced here, exactly, at `10²¹`: `−6.712244·10⁻⁸`). (ii) The DFS is cut at depth 15 (the design
+said "a prefix enumeration"): 492 frontier states, 7,123,866 mask tests below them in 103 chunks of ≤ 80,000; the prefix
+itself is checked by `frontier_eq` (the DFS's own frontier, packed, equals the literal) and `frontier_rt` (packing
+round-trips). (iii) The atom DFS's term groups are computed by the kernel from the coefficient tables (`groups_eq`,
+`one_group`), so the terms `L(S)` sums can be no other than the certificate's; the semantics is one induction
+(`collect_sound`) used once, through `dfsG_append` and `dfsG_eq_all`.
+
+### 2.2 Read-backs and the exact mirror (`python3 tools/fs131_kdb1_x23.py --plan`)
+
+Table 1 (23 points, transcribed from the rendered p. 23) equals the notebook's list exactly, point by point; Table 2 (`w₀`,
+`w_T`, `w₁(1)`, the 26 `w₂(i, j)`, from p. 24's text) equals `g23.csv`'s rows exactly; `P23.Ws` is `w₀` then the 26 `w₂` in
+`g23.csv`'s order and `P23.w1N = w₁(1)·10²⁰`. Mirror: 47 edges; 2,321 rows, an isometry for each (`m ≤ 444`); 4,669 terms;
+13,552 independent sets reached, `max L = w_T + 6.712244·10⁻⁸`, so min `V = −6.712244·10⁻⁸ ≥ −ν` (J26's number);
+26 distances pass with `K = 2¹²⁸`.
+
+### 2.3 The kernel on the first parts (farm, `data/fs131/idb3/farm.sh`; each under the slot)
+
+| module | time | peak RSS |
+|---|---|---|
+| `X23Check` | 0.8 s | 0.52 GB |
+| `X23Data` (the 8 small checks) | 74–78 s | 3.13–3.16 GB |
+| `X23Cong00` (300 rows) | 8.0 s | 1.64 GB |
+| `X23Atoms00` (8 chunks, 598 k tests) | 90.7 s | 2.40 GB |
+| `X23`, `X23Dist`, `Theorem` (against a farm stub of `X23All` whose two theorems are `sorry`) | 10.9 s, 1.8 s, 2.1 s | 3.3 GB |
+
+A module of eight ≤ 80 k-test theorems peaks at one theorem's memory (item 845's question, answered again).
+
+### 2.4 Planted faults, each refused by the kernel (`data/fs131/idb3/plants/Plants.lean`, log `plants.log`)
+
+| plant | the kernel | partner (unplanted) |
+|---|---|---|
+| a wrong distance: `w₂` distance 6 moved by `2·2⁻⁶⁴` | "`decide` proved that the proposition `distsOk … = true` is false" | `distsOk ptsL enclL P23.Ds.tail w2T = true` passes |
+| a missing congruence: row 115 (`{2,6,8} ↦ {3,8,6}`, 1-based) with `J`'s last point moved, claiming `{2,6,8} ≅ {3,8,1}` (different side lengths) | `rowOk ptsL badRow = true` is false | the row itself passes |
+| an atom with `V < 0`: bound lowered to `w_T + 6·10⁻⁸` | chunk 26's check is false | at `w_T + 7·10⁻⁸` chunk 26 passes: the check is tight at the true min V |
+| a changed `w₁` against the groups | `groups_eq` with `w1N + 1` is false | `groups_eq` passes |
+| the frontier with one state dropped | `frontier_eq` with `frL.tail` is false | `frontier_eq` passes |
