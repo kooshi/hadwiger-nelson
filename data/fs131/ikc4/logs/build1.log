@@ -1,0 +1,323 @@
+slot: admitted ikc4: mem 10 GiB (hard cap), cpus 2,3,4,5
+==> build: this run's full output: build/gate/build/20261014T205149Z-580494.log
+==> up-to-date check: exit 3 after 3s (3 means something needs building) — walking the batches
+==> 264 batches of at most 8 modules, capped at 10G
+==> [1/264] 8 modules  15:51:53
+==> [2/264] 8 modules  15:51:54
+==> [3/264] 8 modules  15:51:55
+==> [4/264] 4 modules  15:51:57
+==> [5/264] 8 modules  15:51:58
+    rebuilt: Arith.FibreCert19B14 (16s), Arith.FibreCert19B11 (16s), Arith.FibreCert19B10 (16s), Arith.FibreCert19B12 (16s), Arith.FibreCert19B13 (16s), Arith.FibreCert19B1 (17s), Arith.FibreCert19B0 (25s)
+==> [6/264] 8 modules  15:52:24
+    rebuilt: Arith.FibreCert19B18 (18s), Arith.FibreCert19B4 (18s), Arith.FibreCert19B16 (19s), Arith.FibreCert19B3 (19s), Arith.FibreCert19B2 (19s), Arith.FibreCert19B5 (19s), Arith.FibreCert19B15 (19s), Arith.FibreCert19B17 (19s)
+==> [7/264] 8 modules  15:52:44
+    rebuilt: Arith.FibreCert19B8 (19s), Arith.FibreCert19B9 (21s), Arith.FibreCert19B6 (21s), Arith.FibreCert19B7 (21s), Arith.FibreCert19K0 (30s), Arith.FibreCert19K1 (35s), Arith.FibreCert19K3 (36s), Arith.FibreCert19K2 (36s)
+==> [8/264] 8 modules  15:53:22
+    rebuilt: Arith.FibreCert19P1 (16s), Arith.FibreCert19P2 (22s), Arith.FibreCert19P3 (23s), Arith.FibreCert19P4 (24s), Arith.FibreCert19K4 (32s), Arith.FibreCert19K5 (34s), Arith.FibreCert19K6 (35s), Arith.FibreCert19K7 (35s)
+==> [9/264] 8 modules  15:53:58
+    rebuilt: Arith.FibreCert19Q0 (626ms), Arith.FibreCertFast (2.4s), Arith.FibreCert19P8 (11s), Arith.FibreCert19P5 (12s), Arith.FibreCert19P7 (12s), Arith.FibreCert19P6 (13s)
+==> [10/264] 8 modules  15:54:12
+==> [11/264] 5 modules  15:54:13
+==> [12/264] 8 modules  15:54:14
+    rebuilt: Arith.FibreCert19 (18s)
+==> [13/264] 8 modules  15:54:33
+==> [14/264] 8 modules  15:54:34
+==> [15/264] 8 modules  15:54:35
+==> [16/264] 8 modules  15:54:36
+==> [17/264] 8 modules  15:54:36
+==> [18/264] 8 modules  15:54:37
+==> [19/264] 8 modules  15:54:38
+==> [20/264] 8 modules  15:54:39
+==> [21/264] 8 modules  15:54:39
+==> [22/264] 8 modules  15:54:40
+==> [23/264] 1 modules  15:54:42
+==> [24/264] 8 modules  15:54:42
+    rebuilt: Arith.FibreCert19Kt0 (46s)
+==> [25/264] 8 modules  15:55:29
+==> [26/264] 8 modules  15:55:30
+==> [27/264] 4 modules  15:55:32
+==> [28/264] 8 modules  15:55:33
+    rebuilt: Arith.FibreCert19Kt1 (45s)
+==> [29/264] 8 modules  15:56:19
+==> [30/264] 8 modules  15:56:21
+==> [31/264] 8 modules  15:56:21
+==> [32/264] 2 modules  15:56:23
+==> [33/264] 8 modules  15:56:24
+    rebuilt: Arith.FibreCert19Kt2 (45s)
+==> [34/264] 8 modules  15:57:11
+==> [35/264] 8 modules  15:57:12
+==> [36/264] 8 modules  15:57:14
+==> [37/264] 8 modules  15:57:15
+    rebuilt: Arith.FibreCert19Kt3 (42s)
+==> [38/264] 8 modules  15:57:59
+==> [39/264] 8 modules  15:58:00
+==> [40/264] 8 modules  15:58:01
+==> [41/264] 8 modules  15:58:03
+==> [42/264] 8 modules  15:58:05
+==> [43/264] 8 modules  15:58:06
+==> [44/264] 8 modules  15:58:08
+==> [45/264] 8 modules  15:58:09
+==> [46/264] 8 modules  15:58:10
+==> [47/264] 8 modules  15:58:11
+==> [48/264] 8 modules  15:58:12
+==> [49/264] 8 modules  15:58:14
+==> [50/264] 8 modules  15:58:15
+==> [51/264] 8 modules  15:58:16
+==> [52/264] 8 modules  15:58:17
+==> [53/264] 8 modules  15:58:18
+==> [54/264] 8 modules  15:58:20
+==> [55/264] 8 modules  15:58:21
+==> [56/264] 8 modules  15:58:22
+==> [57/264] 8 modules  15:58:23
+==> [58/264] 8 modules  15:58:24
+==> [59/264] 8 modules  15:58:26
+==> [60/264] 8 modules  15:58:27
+==> [61/264] 8 modules  15:58:28
+==> [62/264] 8 modules  15:58:29
+==> [63/264] 8 modules  15:58:30
+==> [64/264] 1 modules  15:58:31
+==> [65/264] 8 modules  15:58:32
+    rebuilt: Arith.FibreCert19C0 (30s)
+==> [66/264] 8 modules  15:59:04
+==> [67/264] 8 modules  15:59:06
+==> [68/264] 8 modules  15:59:08
+==> [69/264] 8 modules  15:59:10
+==> [70/264] 8 modules  15:59:11
+==> [71/264] 8 modules  15:59:13
+==> [72/264] 8 modules  15:59:15
+==> [73/264] 8 modules  15:59:16
+==> [74/264] 8 modules  15:59:18
+==> [75/264] 8 modules  15:59:20
+==> [76/264] 8 modules  15:59:21
+==> [77/264] 8 modules  15:59:23
+==> [78/264] 8 modules  15:59:25
+==> [79/264] 8 modules  15:59:26
+==> [80/264] 8 modules  15:59:28
+==> [81/264] 8 modules  15:59:30
+==> [82/264] 8 modules  15:59:32
+==> [83/264] 8 modules  15:59:33
+==> [84/264] 8 modules  15:59:35
+==> [85/264] 8 modules  15:59:37
+==> [86/264] 8 modules  15:59:38
+==> [87/264] 8 modules  15:59:40
+==> [88/264] 8 modules  15:59:42
+==> [89/264] 8 modules  15:59:43
+==> [90/264] 8 modules  15:59:45
+==> [91/264] 8 modules  15:59:47
+==> [92/264] 8 modules  15:59:48
+==> [93/264] 8 modules  15:59:50
+==> [94/264] 8 modules  15:59:52
+==> [95/264] 8 modules  15:59:53
+==> [96/264] 8 modules  15:59:55
+==> [97/264] 8 modules  15:59:57
+==> [98/264] 8 modules  15:59:58
+==> [99/264] 8 modules  16:00:00
+==> [100/264] 8 modules  16:00:02
+==> [101/264] 8 modules  16:00:03
+==> [102/264] 8 modules  16:00:05
+==> [103/264] 8 modules  16:00:07
+==> [104/264] 8 modules  16:00:08
+==> [105/264] 8 modules  16:00:10
+==> [106/264] 8 modules  16:00:12
+==> [107/264] 8 modules  16:00:13
+==> [108/264] 8 modules  16:00:15
+==> [109/264] 8 modules  16:00:17
+==> [110/264] 8 modules  16:00:19
+==> [111/264] 8 modules  16:00:20
+==> [112/264] 8 modules  16:00:22
+==> [113/264] 8 modules  16:00:24
+==> [114/264] 8 modules  16:00:25
+==> [115/264] 8 modules  16:00:27
+==> [116/264] 8 modules  16:00:29
+==> [117/264] 8 modules  16:00:30
+==> [118/264] 8 modules  16:00:32
+==> [119/264] 8 modules  16:00:34
+==> [120/264] 8 modules  16:00:35
+==> [121/264] 8 modules  16:00:37
+==> [122/264] 8 modules  16:00:39
+==> [123/264] 8 modules  16:00:40
+==> [124/264] 8 modules  16:00:42
+==> [125/264] 8 modules  16:00:44
+==> [126/264] 8 modules  16:00:46
+==> [127/264] 8 modules  16:00:47
+==> [128/264] 8 modules  16:00:49
+==> [129/264] 8 modules  16:00:51
+==> [130/264] 8 modules  16:00:52
+==> [131/264] 8 modules  16:00:54
+==> [132/264] 8 modules  16:00:56
+==> [133/264] 8 modules  16:00:57
+==> [134/264] 8 modules  16:00:59
+==> [135/264] 8 modules  16:01:01
+==> [136/264] 8 modules  16:01:02
+==> [137/264] 8 modules  16:01:04
+==> [138/264] 8 modules  16:01:06
+==> [139/264] 8 modules  16:01:08
+==> [140/264] 8 modules  16:01:09
+==> [141/264] 8 modules  16:01:11
+==> [142/264] 8 modules  16:01:13
+==> [143/264] 8 modules  16:01:14
+==> [144/264] 8 modules  16:01:16
+==> [145/264] 8 modules  16:01:18
+==> [146/264] 8 modules  16:01:19
+==> [147/264] 8 modules  16:01:21
+==> [148/264] 8 modules  16:01:23
+==> [149/264] 8 modules  16:01:24
+==> [150/264] 8 modules  16:01:26
+==> [151/264] 8 modules  16:01:28
+==> [152/264] 8 modules  16:01:30
+==> [153/264] 8 modules  16:01:31
+==> [154/264] 8 modules  16:01:33
+==> [155/264] 8 modules  16:01:35
+==> [156/264] 8 modules  16:01:36
+==> [157/264] 8 modules  16:01:38
+==> [158/264] 8 modules  16:01:40
+==> [159/264] 8 modules  16:01:41
+==> [160/264] 8 modules  16:01:43
+==> [161/264] 8 modules  16:01:45
+==> [162/264] 8 modules  16:01:47
+==> [163/264] 8 modules  16:01:48
+==> [164/264] 8 modules  16:01:50
+==> [165/264] 8 modules  16:01:52
+==> [166/264] 8 modules  16:01:53
+==> [167/264] 8 modules  16:01:55
+==> [168/264] 8 modules  16:01:56
+==> [169/264] 8 modules  16:01:58
+==> [170/264] 8 modules  16:02:00
+==> [171/264] 8 modules  16:02:01
+==> [172/264] 8 modules  16:02:03
+==> [173/264] 8 modules  16:02:05
+==> [174/264] 8 modules  16:02:07
+==> [175/264] 8 modules  16:02:08
+==> [176/264] 8 modules  16:02:10
+==> [177/264] 8 modules  16:02:12
+==> [178/264] 8 modules  16:02:13
+==> [179/264] 8 modules  16:02:15
+==> [180/264] 8 modules  16:02:17
+==> [181/264] 8 modules  16:02:18
+==> [182/264] 8 modules  16:02:20
+==> [183/264] 8 modules  16:02:22
+==> [184/264] 8 modules  16:02:23
+==> [185/264] 8 modules  16:02:25
+==> [186/264] 8 modules  16:02:27
+==> [187/264] 8 modules  16:02:29
+==> [188/264] 8 modules  16:02:30
+==> [189/264] 8 modules  16:02:32
+==> [190/264] 8 modules  16:02:34
+==> [191/264] 8 modules  16:02:36
+==> [192/264] 8 modules  16:02:38
+==> [193/264] 8 modules  16:02:39
+==> [194/264] 8 modules  16:02:41
+==> [195/264] 8 modules  16:02:43
+==> [196/264] 8 modules  16:02:44
+==> [197/264] 8 modules  16:02:46
+==> [198/264] 8 modules  16:02:48
+==> [199/264] 8 modules  16:02:50
+==> [200/264] 8 modules  16:02:51
+==> [201/264] 8 modules  16:02:53
+==> [202/264] 8 modules  16:02:55
+==> [203/264] 8 modules  16:02:56
+==> [204/264] 8 modules  16:02:58
+==> [205/264] 8 modules  16:03:00
+==> [206/264] 8 modules  16:03:01
+==> [207/264] 8 modules  16:03:03
+==> [208/264] 8 modules  16:03:05
+==> [209/264] 8 modules  16:03:06
+==> [210/264] 8 modules  16:03:08
+==> [211/264] 8 modules  16:03:10
+==> [212/264] 8 modules  16:03:11
+==> [213/264] 8 modules  16:03:13
+==> [214/264] 8 modules  16:03:15
+==> [215/264] 8 modules  16:03:16
+==> [216/264] 8 modules  16:03:18
+==> [217/264] 8 modules  16:03:20
+==> [218/264] 8 modules  16:03:21
+==> [219/264] 8 modules  16:03:23
+==> [220/264] 8 modules  16:03:24
+==> [221/264] 8 modules  16:03:26
+==> [222/264] 7 modules  16:03:27
+==> [223/264] 8 modules  16:03:28
+    rebuilt: Arith.FibreCert19C1 (38s)
+==> [224/264] 8 modules  16:04:07
+==> [225/264] 8 modules  16:04:08
+==> [226/264] 4 modules  16:04:10
+==> [227/264] 8 modules  16:04:11
+    rebuilt: Arith.FibreCert19C2 (39s)
+==> [228/264] 8 modules  16:04:51
+==> [229/264] 4 modules  16:04:52
+==> [230/264] 8 modules  16:04:54
+    rebuilt: Arith.FibreCert19C3 (37s)
+==> [231/264] 8 modules  16:05:32
+==> [232/264] 5 modules  16:05:34
+==> [233/264] 8 modules  16:05:35
+    rebuilt: Arith.FibreCert19C4 (38s)
+==> [234/264] 8 modules  16:06:15
+==> [235/264] 3 modules  16:06:16
+==> [236/264] 8 modules  16:06:17
+    rebuilt: Arith.FibreCert19C5 (40s)
+==> [237/264] 8 modules  16:06:59
+==> [238/264] 2 modules  16:07:01
+==> [239/264] 8 modules  16:07:02
+    rebuilt: Arith.FibreCert19C6 (42s)
+==> [240/264] 8 modules  16:07:45
+==> [241/264] 3 modules  16:07:47
+==> [242/264] 8 modules  16:07:48
+    rebuilt: Arith.FibreCert19C7 (45s)
+==> [243/264] 8 modules  16:08:35
+==> [244/264] 3 modules  16:08:37
+==> [245/264] 8 modules  16:08:39
+    rebuilt: Arith.FibreCert19Global (854ms)
+==> [246/264] 6 modules  16:08:42
+==> [247/264] 8 modules  16:08:45
+    rebuilt: Arith.FibreCert19Seg0 (62s)
+==> [248/264] 8 modules  16:09:49
+    rebuilt: Arith.FibreCert19Seg1 (34s)
+==> [249/264] 4 modules  16:10:25
+==> [250/264] 8 modules  16:10:28
+    rebuilt: Arith.FibreCert19Seg2 (31s)
+==> [251/264] 3 modules  16:11:00
+==> [252/264] 8 modules  16:11:03
+    rebuilt: Arith.FibreCert19Seg3 (27s)
+==> [253/264] 6 modules  16:11:31
+    rebuilt: Arith.FibreCert19Psd0 (84s)
+==> [254/264] 5 modules  16:12:56
+    rebuilt: Arith.FibreCert19Psd1 (82s)
+==> [255/264] 3 modules  16:14:20
+    rebuilt: Arith.FibreCert19Psd2 (85s)
+==> [256/264] 3 modules  16:15:46
+    rebuilt: Arith.FibreCert19Psd3 (81s)
+==> [257/264] 3 modules  16:17:08
+    rebuilt: Arith.FibreCert19Psd4 (80s)
+==> [258/264] 1 modules  16:18:29
+    rebuilt: Arith.FibreCert19Psd5 (82s)
+==> [259/264] 1 modules  16:19:52
+    rebuilt: Arith.FibreCert19Psd6 (80s)
+==> [260/264] 1 modules  16:21:14
+    rebuilt: Arith.FibreCert19Psd7 (82s)
+==> [261/264] 1 modules  16:22:37
+    rebuilt: Arith.FibreCert19Psd8 (84s)
+==> [262/264] 1 modules  16:24:02
+    rebuilt: Arith.FibreCert19Psd9 (40s)
+==> [263/264] 1 modules  16:24:44
+    !! batch failed with status 1. What it printed, before the retry:
+    ✖ [1305/1305] Building Proofs.HadwigerNelson.Arith.FibreCert19Bound (3.6s)
+    error: Proofs/HadwigerNelson/Arith/FibreCert19Bound.lean:62:85: maximum recursion depth has been reached
+    use `set_option maxRecDepth <num>` to increase limit
+    use `set_option diagnostics true` to get diagnostic information
+    error: Lean exited with code 1
+    Some required targets logged failures:
+    - Proofs.HadwigerNelson.Arith.FibreCert19Bound
+    error: build failed
+    !! retrying ONCE. If this line is common, the machine is unwell and the build is not the
+       thing to fix.
+    ✖ [1305/1305] Building Proofs.HadwigerNelson.Arith.FibreCert19Bound (3.6s)
+    error: Proofs/HadwigerNelson/Arith/FibreCert19Bound.lean:62:85: maximum recursion depth has been reached
+    use `set_option maxRecDepth <num>` to increase limit
+    use `set_option diagnostics true` to get diagnostic information
+    error: Lean exited with code 1
+    Some required targets logged failures:
+    - Proofs.HadwigerNelson.Arith.FibreCert19Bound
+    error: build failed
+    BATCH FAILED. Once it is fixed, rerun ./scripts/build.sh — modules that already built are
+    skipped. Never a bare or named lake build (RUNNING.md § Building).
+==> build: FAIL — 263 of 264 batches, 65 module(s) rebuilt, 0 module(s) with warnings, 33m0s
+    full output: build/gate/build/20261014T205149Z-580494.log

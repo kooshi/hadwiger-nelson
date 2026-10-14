@@ -1,0 +1,2 @@
+slot: waiting (ledger 20 + 5 > budget 22 GiB)
+slot: admitted ikc3: mem 5 GiB (hard cap), cpus 0

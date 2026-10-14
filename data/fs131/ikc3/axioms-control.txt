@@ -1,0 +1,4 @@
+CONTROL: planted sorryAx in HadwigerNelson.FibreCert.fLeaf
+AX=224 PRIVATE=418 COUNT=224 PLANTED=['sorryAx']
+BAD ('HadwigerNelson.FibreCert.fLeaf', ['sorryAx'])
+FAIL

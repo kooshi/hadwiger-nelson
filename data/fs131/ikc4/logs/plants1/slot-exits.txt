@@ -1,0 +1,6 @@
+PlantGlobal slot-exit 0 mem 6
+PlantKt slot-exit 0 mem 6
+PlantChunk slot-exit 0 mem 9
+PlantSeg slot-exit 0 mem 10
+PlantPsd slot-exit 0 mem 7
+DONE

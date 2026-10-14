@@ -1,0 +1,8 @@
+Chunk0 slot-exit 0 mem 12
+ChunkLast slot-exit 143 mem 12
+Psd2 slot-exit 0 mem 7
+SegZ1 slot-exit 0 mem 10
+SegZ2 slot-exit 0 mem 10
+SegZ3 slot-exit 0 mem 10
+SegPresent slot-exit 143 mem 12
+DONE

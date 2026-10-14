@@ -1,0 +1,14 @@
+slot: admitted kc13-s1: mem 12 GiB (hard cap), cpus 0
+type checking took 76.4s
+cumulative profiling times:
+	attribute application 0.00993ms
+	elaboration 0.412ms
+	fix level params 0.00483ms
+	instantiate metavars 0.00725ms
+	let-to-have transformation 0.0091ms
+	process pre-definitions 0.319ms
+	share common exprs 0.0179ms
+	tactic execution 1.31ms
+	type checking 76.4s
+	typeclass inference 0.422ms
+76.68 s wall, 68.62 s user, 10972548 KB peak

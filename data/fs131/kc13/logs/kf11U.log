@@ -1,0 +1,10 @@
+slot: waiting (ledger 10 + 13 > budget 22 GiB)
+slot: waiting (ledger 14 + 13 > budget 22 GiB)
+slot: waiting (ledger 10 + 13 > budget 22 GiB)
+slot: waiting (ledger 14 + 13 > budget 22 GiB)
+slot: waiting (ledger 10 + 13 > budget 22 GiB)
+slot: waiting (ledger 14 + 13 > budget 22 GiB)
+slot: waiting (ledger 10 + 13 > budget 22 GiB)
+slot: admitted kc13: mem 13 GiB (hard cap), cpus 0
+(false, true)
+56.57 s wall, 9177420 KB peak

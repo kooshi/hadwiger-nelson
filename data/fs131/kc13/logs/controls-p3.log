@@ -1,0 +1,11 @@
+kernel control U: KB3U.lean:3:60: error: [Error pretty printing: maximum recursion depth has been reached use `set_option maxRecDepth <num>` to increase limit use `set_option diagnostics true` to get diagnostic informa
+kernel control rowlam: KB3rowlam.lean:3:60: error: [Error pretty printing: maximum recursion depth has been reached use `set_option maxRecDepth <num>` to increase limit use `set_option diagnostics true` to get diagnostic in
+kernel control Rentry: KB3Rentry.lean:3:60: error: [Error pretty printing: maximum recursion depth has been reached use `set_option maxRecDepth <num>` to increase limit use `set_option diagnostics true` to get diagnostic in
+kernel control stream: KB3stream.lean:3:60: error: [Error pretty printing: maximum recursion depth has been reached use `set_option maxRecDepth <num>` to increase limit use `set_option diagnostics true` to get diagnostic in
+kernel control M: KB3M.lean:3:60: error: [Error pretty printing: maximum recursion depth has been reached use `set_option maxRecDepth <num>` to increase limit use `set_option diagnostics true` to get diagnostic informa
+kernel partner (good p=3): accepted
+kernel proves check = false under plant U: YES
+kernel proves check = false under plant rowlam: YES
+kernel proves check = false under plant Rentry: YES
+kernel proves check = false under plant stream: YES
+kernel proves check = false under plant M: YES

@@ -1,0 +1,10 @@
+FibreCert19P1 exit 0
+FibreCert19P2 exit 0
+FibreCert19P3 exit 0
+FibreCert19P4 exit 0
+FibreCert19P5 exit 0
+FibreCert19P6 exit 0
+FibreCert19P7 exit 0
+FibreCert19P8 exit 0
+FibreCert19 exit 0
+FibreCertFast exit 0

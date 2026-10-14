@@ -1,0 +1,44 @@
+p=19 n=361 |S|=20 maps=40 sha=f94ed6360c11
+reps 182; pairs 16653; orbits 984
+ops 20274 [1.9s]
+slots 1783; identity model: HOLDS; total magnitude bits 125 [8.2s]
+PSD witnesses: 20 blocks diagonally dominant [61.6s]
+wrote data/fs131/ikc4/gen/mods/FibreCert19B0.lean: 2227414 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19B1.lean: 1347503 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19B2.lean: 1343316 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19B3.lean: 1318000 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19B4.lean: 1322188 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19B5.lean: 1343317 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19B6.lean: 1343318 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19B7.lean: 1343318 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19B8.lean: 1343318 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19B9.lean: 1322190 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19B10.lean: 1343321 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19B11.lean: 1322193 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19B12.lean: 1297117 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19B13.lean: 1343321 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19B14.lean: 1297117 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19B15.lean: 1343321 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19B16.lean: 1318005 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19B17.lean: 1343321 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19B18.lean: 1322193 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19Q0.lean: 904 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19K0.lean: 2075776 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19K1.lean: 2113256 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19K2.lean: 2113798 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19K3.lean: 2113918 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19K4.lean: 2113512 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19K5.lean: 2114243 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19K6.lean: 2113329 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19K7.lean: 2113676 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19P1.lean: 308041 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19P2.lean: 537129 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19P3.lean: 582933 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19P4.lean: 582939 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19P5.lean: 605844 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19P6.lean: 628744 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19P7.lean: 628744 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19P8.lean: 628747 bytes
+wrote data/fs131/ikc4/gen/mods/FibreCert19.lean: 1418145 bytes
+modules 37; largest 2227414 bytes; total 48977469 bytes
+w=127 ds=3 k1=17 kq=10 kr=158 kw=18 ko=11; chunks ops=72 rows=37 keys=32

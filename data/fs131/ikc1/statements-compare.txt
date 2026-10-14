@@ -1,0 +1,110 @@
+SAME HadwigerNelson.FibreCertSound.sum_le_of_certOK (raw text identical)
+SAME HadwigerNelson.FibreCertSound.card_le_of_certOK (raw text identical)
+SAME HadwigerNelson.FibreCertSound.V (raw text identical)
+SAME HadwigerNelson.FibreCertSound.unitCircle (raw text identical)
+SAME HadwigerNelson.FibreCertSound.qform (raw text identical)
+SAME HadwigerNelson.FibreCert.Cert.p (raw text identical)
+SAME HadwigerNelson.FibreCert.Cert.scale (raw text identical)
+SAME HadwigerNelson.FibreCert.Cert.unum (raw text identical)
+constants: before 242, after 441; public removed 64, added 67, changed 36 (the checker, by design)
+  CHANGED HadwigerNelson.FibreCert.Cert.casesOn
+  CHANGED HadwigerNelson.FibreCert.Cert.mk
+  CHANGED HadwigerNelson.FibreCert.Cert.mk.inj
+  CHANGED HadwigerNelson.FibreCert.Cert.mk.injEq
+  CHANGED HadwigerNelson.FibreCert.Cert.mk.noConfusion
+  CHANGED HadwigerNelson.FibreCert.Cert.mk.sizeOf_spec
+  CHANGED HadwigerNelson.FibreCert.Cert.noConfusion
+  CHANGED HadwigerNelson.FibreCert.Cert.noConfusionType
+  CHANGED HadwigerNelson.FibreCert.Cert.rec
+  CHANGED HadwigerNelson.FibreCert.Cert.recOn
+  CHANGED HadwigerNelson.FibreCert.St.casesOn
+  CHANGED HadwigerNelson.FibreCert.St.mk
+  CHANGED HadwigerNelson.FibreCert.St.mk.inj
+  CHANGED HadwigerNelson.FibreCert.St.mk.injEq
+  CHANGED HadwigerNelson.FibreCert.St.mk.noConfusion
+  CHANGED HadwigerNelson.FibreCert.St.mk.sizeOf_spec
+  CHANGED HadwigerNelson.FibreCert.St.noConfusion
+  CHANGED HadwigerNelson.FibreCert.St.noConfusionType
+  CHANGED HadwigerNelson.FibreCert.St.op
+  CHANGED HadwigerNelson.FibreCert.St.rec
+  CHANGED HadwigerNelson.FibreCert.St.recOn
+  CHANGED HadwigerNelson.FibreCert.btab
+  CHANGED HadwigerNelson.FibreCert.cert3
+  CHANGED HadwigerNelson.FibreCert.certOK
+  CHANGED HadwigerNelson.FibreCert.kap
+  CHANGED HadwigerNelson.FibreCert.kappa
+  CHANGED HadwigerNelson.FibreCert.kblock
+  CHANGED HadwigerNelson.FibreCert.kmax
+  CHANGED HadwigerNelson.FibreCert.krow
+  CHANGED HadwigerNelson.FibreCert.ktable
+  CHANGED HadwigerNelson.FibreCert.phase1
+  CHANGED HadwigerNelson.FibreCert.psdCheck
+  CHANGED HadwigerNelson.FibreCert.qcoefs
+  CHANGED HadwigerNelson.FibreCert.segCheck
+  CHANGED HadwigerNelson.FibreCert.subP
+  CHANGED HadwigerNelson.FibreCert.wtab
+  REMOVED HadwigerNelson.FibreCert.Cert.od
+  REMOVED HadwigerNelson.FibreCert.OT
+  REMOVED HadwigerNelson.FibreCert.OT.below
+  REMOVED HadwigerNelson.FibreCert.OT.brecOn
+  REMOVED HadwigerNelson.FibreCert.OT.brecOn.eq
+  REMOVED HadwigerNelson.FibreCert.OT.brecOn.go
+  REMOVED HadwigerNelson.FibreCert.OT.build
+  REMOVED HadwigerNelson.FibreCert.OT.casesOn
+  REMOVED HadwigerNelson.FibreCert.OT.ctorElim
+  REMOVED HadwigerNelson.FibreCert.OT.ctorElimType
+  REMOVED HadwigerNelson.FibreCert.OT.ctorIdx
+  REMOVED HadwigerNelson.FibreCert.OT.leaf
+  REMOVED HadwigerNelson.FibreCert.OT.leaf.elim
+  REMOVED HadwigerNelson.FibreCert.OT.leaf.inj
+  REMOVED HadwigerNelson.FibreCert.OT.leaf.injEq
+  REMOVED HadwigerNelson.FibreCert.OT.leaf.noConfusion
+  REMOVED HadwigerNelson.FibreCert.OT.leaf.sizeOf_spec
+  REMOVED HadwigerNelson.FibreCert.OT.noConfusion
+  REMOVED HadwigerNelson.FibreCert.OT.noConfusionType
+  REMOVED HadwigerNelson.FibreCert.OT.node
+  REMOVED HadwigerNelson.FibreCert.OT.node.elim
+  REMOVED HadwigerNelson.FibreCert.OT.node.inj
+  REMOVED HadwigerNelson.FibreCert.OT.node.injEq
+  REMOVED HadwigerNelson.FibreCert.OT.node.noConfusion
+  REMOVED HadwigerNelson.FibreCert.OT.node.sizeOf_spec
+  REMOVED HadwigerNelson.FibreCert.OT.rec
+  REMOVED HadwigerNelson.FibreCert.OT.recOn
+  REMOVED HadwigerNelson.FibreCert.OT.toList
+  REMOVED HadwigerNelson.FibreCert.OT.upd
+  REMOVED HadwigerNelson.FibreCert.St.opI
+  REMOVED HadwigerNelson.FibreCert.St.tr
+  REMOVED HadwigerNelson.FibreCert.Tr
+  REMOVED HadwigerNelson.FibreCert.Tr.balanced
+  REMOVED HadwigerNelson.FibreCert.Tr.below
+  REMOVED HadwigerNelson.FibreCert.Tr.brecOn
+  REMOVED HadwigerNelson.FibreCert.Tr.brecOn.eq
+  REMOVED HadwigerNelson.FibreCert.Tr.brecOn.go
+  REMOVED HadwigerNelson.FibreCert.Tr.build
+  REMOVED HadwigerNelson.FibreCert.Tr.casesOn
+  REMOVED HadwigerNelson.FibreCert.Tr.ctorElim
+  REMOVED HadwigerNelson.FibreCert.Tr.ctorElimType
+  REMOVED HadwigerNelson.FibreCert.Tr.ctorIdx
+  REMOVED HadwigerNelson.FibreCert.Tr.leaf
+  REMOVED HadwigerNelson.FibreCert.Tr.leaf.elim
+  REMOVED HadwigerNelson.FibreCert.Tr.leaf.inj
+  REMOVED HadwigerNelson.FibreCert.Tr.leaf.injEq
+  REMOVED HadwigerNelson.FibreCert.Tr.leaf.noConfusion
+  REMOVED HadwigerNelson.FibreCert.Tr.leaf.sizeOf_spec
+  REMOVED HadwigerNelson.FibreCert.Tr.noConfusion
+  REMOVED HadwigerNelson.FibreCert.Tr.noConfusionType
+  REMOVED HadwigerNelson.FibreCert.Tr.node
+  REMOVED HadwigerNelson.FibreCert.Tr.node.elim
+  REMOVED HadwigerNelson.FibreCert.Tr.node.inj
+  REMOVED HadwigerNelson.FibreCert.Tr.node.injEq
+  REMOVED HadwigerNelson.FibreCert.Tr.node.noConfusion
+  REMOVED HadwigerNelson.FibreCert.Tr.node.sizeOf_spec
+  REMOVED HadwigerNelson.FibreCert.Tr.rec
+  REMOVED HadwigerNelson.FibreCert.Tr.recOn
+  REMOVED HadwigerNelson.FibreCert.Tr.upd
+  REMOVED HadwigerNelson.FibreCert.bagWith
+  REMOVED HadwigerNelson.FibreCert.keyW
+  REMOVED HadwigerNelson.FibreCert.kfL
+  REMOVED HadwigerNelson.FibreCert.revRow
+  REMOVED HadwigerNelson.FibreCert.wa
+PASS: the protected statements and definitions are unchanged

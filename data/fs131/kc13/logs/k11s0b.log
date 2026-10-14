@@ -1,0 +1,15 @@
+slot: waiting (ledger 20 + 13 > budget 22 GiB)
+slot: admitted kc13: mem 13 GiB (hard cap), cpus 0
+type checking took 93.7s
+cumulative profiling times:
+	attribute application 0.0116ms
+	elaboration 0.473ms
+	fix level params 0.00449ms
+	instantiate metavars 0.00742ms
+	let-to-have transformation 0.00762ms
+	process pre-definitions 0.17ms
+	share common exprs 0.0141ms
+	tactic execution 0.415ms
+	type checking 93.7s
+	typeclass inference 0.757ms
+94.02 s wall, 80.05 s user, 11986600 KB peak
