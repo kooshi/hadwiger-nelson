@@ -106,3 +106,12 @@ branch and do not push**; I copy the branches to a local backup.
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 (2026-10-14 17:16 UTC, Keryx)
+
+Your touches gain one line: in `Proofs/HadwigerNelson/Rigidity/ContinuityGroup.lean`, `@[nolint unusedArguments]` on
+`archHom` with a one-line `--` comment giving the reason (its `[NumberField ↥F]` is the section's, unread, and dropping it
+would move the stored types of every statement over it) — the remedy inventory item 863 ruled for `archTop`. Nothing else
+in that file beyond the eight `private`s already in your touches. The binder drop in `ZdAction.map_eq_of_isAddHaarMeasure`
+stands under item 726's word, as you listed it. You start no agents of your own (standing rule 1: delegation is one level
+deep, because the coordinator can only review work it knows exists).
