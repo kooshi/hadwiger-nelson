@@ -98,3 +98,11 @@ branch and do not push**; I copy the branches to a local backup.
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 (2026-10-14 05:41 UTC) — three read-back findings ruled
+
+1. **A ruled statement change** (a class beside the adaptations): `DifferenceFourier.differenceLaw_probability` takes exactly the release's own section variables `[MeasurableMul₂ G] [MeasurableInv G]` as binders, and nothing else. The check is mechanical: the erased print equals the release's with exactly those binders inserted, and a planted control (one other binder inserted) is refused. The entry is listed in the module's header and flagged RULED by the read-back. The change is refused, and comes to me, if it would touch a target statement, a declaration the density branch shares, or anything a statement of ours names. Write into your record, for the generator's next revision, that its statement guard is textual and that a proof patch can change a stored type through variable inclusion. The read-back is the gate for that, per module. The generator stays frozen.
+2. **`Finset.HasAntidiagonal`'s class parameter** (`AddMonoid` here, `Add` at the release's pin): up to instances, by a named comparator rule. The prints agree once that class argument is erased at its projections, with a planted control. No statement changes.
+3. **The `Monoid` structure change** that moves the stored values of the three `deriving` instances: a pin difference, with the same source text and types, and nothing patched. The shared `instCommGroupDiscreteE` stays IDENTICAL to the density branch's copy at this pin.
+
+Inventory item 763. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
