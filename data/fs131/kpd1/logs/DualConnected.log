@@ -1,0 +1,5 @@
+slot: admitted kpd1: mem 5 GiB (hard cap), cpus 4,5
+Proofs/HadwigerNelson/Rigidity/DualConnected.lean:36:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/DualConnected.lean:41:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/DualConnected.lean:46:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/DualConnected.lean:53:8: warning: declaration uses `sorry`

@@ -89,3 +89,87 @@ left invariant, and `integral_mul_left_eq_self` applies. **Mathlib's `ClosedSubg
 `IsClosed ((AddSubgroup.toSubgroup' Y) : Set (AddChar M Circle))`; `PontryaginDual (Multiplicative (PieceDual M))` is `rfl` to
 `PontryaginDual (Multiplicative (Additive (AddChar M Circle)))`; `ConnectedSpace (AddChar M Circle) → ConnectedSpace (PieceDual M)`
 is `fun h => h`.
+
+## Stage 2 — SAVED: the statements typed (four new modules), the domain and obligation passes, read aloud
+
+### 2.1 The cut (mine to decide)
+
+| module | what | imports (project) | consumers |
+|---|---|---|---|
+| `Rigidity/Annihilator` | `dualAnnihilator N` (`N^⊥ ⊆ Ĝ`), `dualCoannihilator Y` (`Y^⊥ ⊆ G`), their Galois connection, closedness, the closure lemma; `finite_dualAnnihilator` (`N^⊥` finite when `G ⧸ N` is) | `Rigidity/DualGroup` | SubgroupHaar, Duality, Pieces leaf 9 |
+| `Rigidity/SubgroupHaar` | `subgroupHaar Y` for a compact `Y ⊆ Ĝ`: probability, lives on `Y`, charges open sets meeting `Y`, Fourier coefficients the indicator of `Y^⊥` | `Rigidity/Annihilator` | Duality |
+| `Rigidity/Duality` | **D2** (closed form, closure form, the case, the case on `Additive (AddChar G Circle)`), **D1** (`evalDualHom_surjective` from D2 at `G × ℤ`; `dualDualEquiv`; `additiveDualDualEquiv`) | `Rigidity/SubgroupHaar` | Pieces leaves 8, 9 |
+| `Rigidity/DualConnected` | **D3**: extension of characters along injections, divisibility of the dual of a torsion-free group, connectedness; the negative partner at `ZMod 2` | `Rigidity/DualGroup` | Pieces leaf 8 |
+
+`Rigidity/Pieces` imports `Rigidity/Duality` and `Rigidity/DualConnected` (the re-pointing), and the docstrings of
+`isSolenoid_pieceDual` and `isTotallyIrreducible_pieceAction` name the theorems they read. **No statement of `Pieces` changed,
+from the kernel's side**: every one of its 74 stored constants (type, and value for definitions) is identical before and after
+the import (`data/fs131/kpd1/dump/PiecesDump.lean`; `data/fs131/kpd1/dump/pieces-{before,after}.txt`;
+`tools/fs131_kpd1_dumpdiff.py` → `SAME: 74 constants`; its control `--plant` reports `DIFF … IsPiece.mk changed`, exit 1).
+
+### 2.2 The domain pass (`debruijn-domain-modeling`, a fresh invocation, scoped to every new definition)
+
+- **The annihilators are one Galois connection**, not two definitions: the one primitive is the pairing `⟨χ, g⟩ = χ g`, and
+  `Y ≤ N^⊥ ↔ N ≤ Y^⊥` (both: `Y` and `N` kill each other) is `gc_dualAnnihilator`, written through `OrderDual`; every closure
+  identity is Mathlib's `GaloisConnection` API. Named after Mathlib's `Submodule.dualAnnihilator`/`dualCoannihilator`, so a reader
+  who knows the module version finds these. The intrinsic statement of D2 is then that **the closure operator of this
+  connection on `Ĝ`'s side is the topological closure** (`dualAnnihilator_dualCoannihilator`, every `Y`); the closed form is the
+  fixed-point form of it. Weighed: a general pairing type (no second use asked for); the algebraic half `(N^⊥)^⊥ = N` for every
+  `N ⊆ G` (separation at `G ⧸ N`, ten lines; HX-1 would read it, no typed statement does) — **not typed**, named in § 4 as an
+  optional extension.
+- **Compactness is an instance binder on a `Subgroup`**: `subgroupHaar (Y : Subgroup (AddChar G Circle)) [CompactSpace Y]`. Mathlib's
+  `ClosedSubgroup` is the image of "closed subgroup", but at the pin `IsTopologicalGroup ↥Y` is not synthesized for it (stage 1
+  probe), and a definition taking `IsClosed` as an explicit proof argument would make every lemma about it unappliable by
+  unification (`LEAN.md`, FS124-I4's line). Consumers with a closed `Y` supply `isCompact_iff_compactSpace.mp hY.isCompact`.
+- **The Fourier coefficients as two lemmas, not an `if`**: `integral_subgroupHaar_of_mem` / `_of_not_mem` — the `if` form needs a
+  `Decidable` instance in a statement, and the one consumer (`integral_subgroupHaar_eq`) cases on membership anyway.
+- **The duality iso in Mathlib's costume**: `dualDualEquiv G : Multiplicative G ≃* PontryaginDual (AddChar G Circle)` (Mathlib's
+  `PontryaginDual` is multiplicative; `G` is additive). The consumer form on `Multiplicative (Additive (AddChar G Circle))`
+  (what `IsSolenoid`'s `dual_embeds` reads at `X = PieceDual M`) is **the same term**, `additiveDualDualEquiv G := dualDualEquiv G`,
+  accepted by the elaborator as a definitional transport; its `apply` lemma is `rfl`.
+- **Torsion-freeness is Mathlib's class** `[IsAddTorsionFree G]` (at the pin: `nsmul_right_injective`). Divisibility of `Ĝ` is a
+  theorem (`exists_pow_eq`), not a `RootableBy` instance: its one consumer is D3's proof.
+- **Unsampled members.** `G = 0`: `Ĝ` one point, every statement trivial and true. `Y = ⊥` (closed, a point): `Y^⊥ = G`,
+  `subgroupHaar ⊥ = dirac 1` (`subgroupHaar_bot`, the spec). Uncountable `G`: D1, D2 true, the proofs (Polish) not; excluded by
+  `[Countable G]` exactly where Fourier uniqueness is read. **Adversarial members**, each the reason for a hypothesis: a dense
+  proper subgroup of `Ĝ` (the torsion characters of `ℤ`) has `Y^⊥ = 0` and `Y ≠ ⊤` — D2 needs `IsClosed`; `ZMod 2` — D3 needs
+  torsion-freeness (`not_connectedSpace_dual_zmod_two`, typed); `N = ⊥ ⊆ ℤ` — `finite_dualAnnihilator` needs `G ⧸ N` finite.
+
+### 2.3 The obligation pass (`debruijn-obligation-modeling`, a fresh invocation, scoped to every new statement)
+
+Every statement checked true as typed; its decomposition is its plan (§ 4). No statement was false as first typed. Two
+corrections the compiler made while typing, both of form not truth: `[Countable G]` moved off the section into the binders that
+read Polishness (the linter found it unused on `extendByPow_apply`), and `T2Space Circle` is not synthesized in
+`Rigidity/Annihilator`'s environment (it is in `Rigidity/Duality`'s, as `t2Space_of_metrizableSpace`), so closedness of
+`{χ | χ g = 1}` is read through `ℂ` by a helper the route copy adds (`isClosed_setOf_apply_eq_one`; § 3). **Mutation audit** (each
+hypothesis deleted once): `IsClosed` in D2 — false (the dense torsion subgroup); `[IsAddTorsionFree G]` in D3 — false (`ZMod 2`);
+`[Finite (G ⧸ N)]` — false (`N = ⊥` in `ℤ`: `N^⊥ ≅ Circle`); `(U ∩ Y).Nonempty` in `subgroupHaar_pos` — false (`U` disjoint from
+`Y` is null); continuity of `ψ` in D1 — built into `PontryaginDual` (a discontinuous character of `Ĝ` is no evaluation).
+`[Countable G]` is read by the proofs only. **No vacuity**: every binder is inhabited at `G = ℤ` (a group, `Y = ⊤` closed with
+`Y^⊥ = ⊥` — the case's hypotheses, `Duality`'s model example; `ψ = 1`; `IsAddTorsionFree ℤ`, Mathlib's instance).
+
+### 2.4 Read aloud against the use and against a textbook
+
+| statement | the use (stage 1 § 1.2) | textbook |
+|---|---|---|
+| `eq_top_of_isClosed_of_dualCoannihilator_eq_bot'` | U2, branch `N = 0`: "`Y^⊥ = 0` ⟹ `Y = ⊤`" on `AddSubgroup (PieceDual M)` — applied there by `exact` (probe 2) | the duality theorem for closed subgroups, `H = (H^⊥)^⊥` |
+| `dualAnnihilator_dualCoannihilator_of_isClosed` | X02D HX-1 step 1, l. 109: "closed subgroups `Y ⊆ R̂` correspond to subgroups `N = Y^⊥ ⊆ R`, with `Y = N^⊥`" | same |
+| `le_dualAnnihilator_dualCoannihilator`, `finite_dualAnnihilator` | U2, branch `N ≠ 0`: `Y ⊆ N^⊥`, finite | (not duality) |
+| `evalDualHom_surjective`, `additiveDualDualEquiv` | U1, `dual_embeds`: an injective `PontryaginDual (Multiplicative (PieceDual M)) →* Multiplicative M` — given by `(additiveDualDualEquiv M).symm.toMonoidHom` (probe 2) | Pontryagin's duality theorem, `G → (Ĝ)^` an isomorphism, at discrete `G` |
+| `connectedSpace_dual` | U1, `connectedSpace` at `PieceDual M` (probe 2, by `exact`) | "the dual of a discrete group is connected iff the group is torsion-free" |
+
+**Which textbook, and how much read: none read.** No copy of any harmonic-analysis text is in `~/source/library/` (searched for
+Rudin, Folland, Hewitt–Ross, Morris, Deitmar). The statements are recalled from W. Rudin, *Fourier Analysis on Groups* (1962;
+`[Rudin1962]`, already a bibliography row, "not held, not read"): § 1.7 (the duality theorem) and § 2.1 (annihilators) — section
+numbers recalled, not checked. This matters less than it would for an import: every statement here is to be **proved** in the
+kernel, so the source's role is only that the statements are the standard ones, and the mutation audit above shows each
+hypothesis load-bearing.
+
+### 2.5 Models
+
+`Annihilator`: the spec example `dualAnnihilator (⊤ : AddSubgroup ℤ) = ⊥` (proved). `SubgroupHaar`: `subgroupHaar_bot` (the spec,
+a leaf). `Duality`: the case's hypotheses inhabited at `ℤ` (`⟨⊤, isClosed_univ, dualCoannihilator_top⟩`); `evalDualHom ℤ 0 = 1`.
+`DualConnected`: `ConnectedSpace (AddChar ℤ Circle)` (an example over `connectedSpace_dual`) and the negative partner
+`not_connectedSpace_dual_zmod_two` (a leaf). Every statement elaborates in the farm (`data/fs131/kpd1/logs/{annihilator,
+SubgroupHaar,Duality,DualConnected,pieces}.log`, each exit 0 with `sorry` warnings only; options as the lakefile's:
+`autoImplicit` off, `linter.missingDocs` on).

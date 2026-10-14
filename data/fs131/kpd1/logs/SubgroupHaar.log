@@ -1,0 +1,7 @@
+slot: admitted kpd1: mem 5 GiB (hard cap), cpus 4,5
+Proofs/HadwigerNelson/Rigidity/SubgroupHaar.lean:40:9: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SubgroupHaar.lean:44:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SubgroupHaar.lean:48:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SubgroupHaar.lean:55:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SubgroupHaar.lean:60:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SubgroupHaar.lean:75:8: warning: declaration uses `sorry`

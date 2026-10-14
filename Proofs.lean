@@ -198,6 +198,10 @@ import Proofs.HadwigerNelson.Rigidity.ZeroEntropyNames
 import Proofs.HadwigerNelson.Rigidity.SolenoidErgodic
 import Proofs.HadwigerNelson.Rigidity.HaarMultiple
 import Proofs.HadwigerNelson.Rigidity.DualGroup
+import Proofs.HadwigerNelson.Rigidity.Annihilator
+import Proofs.HadwigerNelson.Rigidity.SubgroupHaar
+import Proofs.HadwigerNelson.Rigidity.Duality
+import Proofs.HadwigerNelson.Rigidity.DualConnected
 import Proofs.HadwigerNelson.Rigidity.UnitCircle
 import Proofs.HadwigerNelson.Rigidity.Pieces
 import Proofs.HadwigerNelson.Rigidity.EntropySplitMax

@@ -1,0 +1,19 @@
+slot: admitted kpd1: mem 5 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/Duality.lean:67:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Duality.lean:72:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Duality.lean:77:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Duality.lean:93:11: warning: Variable name `g` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Proofs/HadwigerNelson/Rigidity/Duality.lean:93:13: warning: Variable name `h` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Proofs/HadwigerNelson/Rigidity/Duality.lean:100:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Duality.lean:119:4: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Duality.lean:129:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Duality.lean:136:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Duality.lean:143:8: warning: declaration uses `sorry`

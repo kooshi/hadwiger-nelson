@@ -1,0 +1,10 @@
+slot: admitted kpd1: mem 5 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/Annihilator.lean:61:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Annihilator.lean:91:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Annihilator.lean:97:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Annihilator.lean:102:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Annihilator.lean:107:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Annihilator.lean:112:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Annihilator.lean:116:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Annihilator.lean:120:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Annihilator.lean:126:8: warning: declaration uses `sorry`

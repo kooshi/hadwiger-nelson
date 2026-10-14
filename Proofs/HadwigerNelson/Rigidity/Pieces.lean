@@ -1,5 +1,7 @@
 import Proofs.HadwigerNelson.Rigidity.UnitCircle
 import Proofs.HadwigerNelson.Rigidity.PositiveEntropy
+import Proofs.HadwigerNelson.Rigidity.Duality
+import Proofs.HadwigerNelson.Rigidity.DualConnected
 
 /-!
 # The pieces `M̂` and Lemma Γ (FS-131, job FS131-KN8; module M6 of `plans/FS131-KN3-chain-plan.md`; skeleton)
@@ -157,13 +159,15 @@ theorem toPiece_rot {M : AddSubgroup (unitRing F)} (hM : IsPiece p M) (n : Fin 2
 /-! ## PE-1′: the pieces meet the printed hypotheses (FS100-X02D l. 146) -/
 
 /-- **`M̂` is a solenoid** (PE-1′, first bullet): compact (`Rigidity/DualGroup`), Hausdorff, connected because `M` is
-torsion-free, and its dual embeds in `F(i) ≅ ℚⁿ` because the continuous characters of `M̂` are the evaluations at `M`. -/
+torsion-free (`Rigidity.connectedSpace_dual`), and its dual embeds in `F(i) ≅ ℚⁿ` because the continuous characters of `M̂`
+are the evaluations at `M` (`Rigidity.additiveDualDualEquiv`, D1). -/
 theorem isSolenoid_pieceDual [NumberField F] {M : AddSubgroup (unitRing F)} (hM : IsPiece p M) : IsSolenoid (PieceDual M) := by
   sorry
 
-/-- **The action on a piece is totally irreducible** (PE-1′, the criterion's (⇐)): a closed `α_Λ`-invariant subgroup of `M̂`
-is the annihilator of a `Λ`-stable `N ⊆ M`; if `N ≠ 0` then `ℚN = F(i)` (admissibility at `Λ`), so `M/N` is finite (Lemma
-F's consequence) and the subgroup is finite. -/
+/-- **The action on a piece is totally irreducible** (PE-1′, the criterion's (⇐)): for a closed `α_Λ`-invariant subgroup `Y`
+of `M̂` put `N := Y^⊥ ⊆ M`, which is `Λ`-stable. If `N = 0`, `Y` is everything
+(`Rigidity.eq_top_of_isClosed_of_dualCoannihilator_eq_bot'`, D2's case). If `N ≠ 0` then `ℚN = F(i)` (admissibility at `Λ`),
+so `M/N` is finite (Lemma F's consequence), and `Y ⊆ N^⊥` is finite (`Rigidity.finite_dualAnnihilator`). -/
 theorem isTotallyIrreducible_pieceAction [NumberField F] {M : AddSubgroup (unitRing F)} (hM : IsPiece p M) :
     (pieceAction hM).IsTotallyIrreducible := by
   sorry
