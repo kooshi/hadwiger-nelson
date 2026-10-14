@@ -1,0 +1,5 @@
+p=19 n=361 |S|=20 |maps|=40 reps=182
+SEARCH-2026-10-14: solve basis |J| = 12 of 182 reps (phi0,sq,15); q scalar; chars all
+build cache reloaded from /home/kooshi/source/lean-dir/data/search/2026-10-14/cache/build-p19-c2.npz: 52370 orbits, 16653x181 product table, 21 q forms
+products a*tau_t(a'): 3014193 canonical forms (a quarter of 11957764 by the two symmetries), 52370 orbits [0.9 s]
+q forms built: 52370 orbits [0.9 s]

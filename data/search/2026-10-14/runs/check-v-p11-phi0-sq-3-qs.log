@@ -1,0 +1,33 @@
+certificate sha256 7164d9aba687c08e6b053490254b0a887a5bc9609458238a9c6317a2d5345cb2  (data/search/2026-10-14/certs/v-p11-phi0-sq-3-qs.json)
+checker     sha256 735b926798ffac14998f0e3eb77c726001200f4c91230463b7c7ae55f1f5337e  (this file)
+format fs66-b1-cert-v2, p = 11 (prime, = 3 mod 4), n = p^2 = 121 points
+scale = 100000000000000000000000000000000, U_num = 3005635473457224976561501320449092
+note: "spec" and "producer" are provenance, not checked
+step 1/7: parsed 22 weight vectors of 122 integers, 12 blocks, 499 rows; every number a JSON integer
+step 2/7: signs: scale > 0; all 499 row multipliers >= 0
+step 3/7: rebuilt from p alone: 121 points, unit circle S of 12 points, 24 linear maps, each a bijection with h(x+s) - h(x) in S on all 34848 (point, unit vector) pairs
+step 4/7: rows: every point index in [0, 121); largest box-product degree 4 (<= 4)
+step 5/7: positive definiteness of 12 blocks (sizes 2..63) by fraction-free (Bareiss) elimination: every leading principal minor positive
+  products a * tau_t(a'): 62 x 62 representative pairs x 121 shifts = 465124 canonical forms
+    representative 10/62 ... [3.3 s]
+    representative 20/62 ... [5.2 s]
+    representative 30/62 ... [5.8 s]
+    representative 40/62 ... [6.2 s]
+    representative 50/62 ... [6.6 s]
+    representative 60/62 ... [7.0 s]
+  products table built: 3758 canonical monomials so far [7.0 s]
+  block 1/12: times 1, 1 weight vector(s), 63 x 63; 389 new canonical monomials [0.0 s]
+  block 2/12: times 1, 2 weight vector(s), 63 x 63; 0 new canonical monomials [0.0 s]
+  block 3/12: times 1, 2 weight vector(s), 63 x 63; 0 new canonical monomials [0.0 s]
+  block 4/12: times 1, 2 weight vector(s), 63 x 63; 0 new canonical monomials [0.0 s]
+  block 5/12: times 1, 2 weight vector(s), 63 x 63; 0 new canonical monomials [0.0 s]
+  block 6/12: times 1, 2 weight vector(s), 63 x 63; 0 new canonical monomials [0.0 s]
+  block 7/12: times 1, 2 weight vector(s), 63 x 63; 0 new canonical monomials [0.0 s]
+  block 8/12: times 1, 2 weight vector(s), 63 x 63; 0 new canonical monomials [0.0 s]
+  block 9/12: times 1, 2 weight vector(s), 63 x 63; 0 new canonical monomials [0.0 s]
+  block 10/12: times 1, 2 weight vector(s), 63 x 63; 0 new canonical monomials [0.0 s]
+  block 11/12: times 1, 2 weight vector(s), 63 x 63; 0 new canonical monomials [0.0 s]
+  block 12/12: times q, 1 weight vector(s), 2 x 2; 0 new canonical monomials [0.0 s]
+step 6/7: identity (*) holds on 3760 canonical monomials (12 blocks, 499 rows), coefficient by coefficient in exact integers
+step 7/7: 4 * U_num = 12022541893828899906246005281796368 < 121 * scale = 12100000000000000000000000000000000
+CERTIFIED: every phi in [0,1]^121 with q(phi) >= 0 has sum(phi) <= U = 30.056354… (exactly U_num/scale of the file, sha256 7164d9aba687…); 4*U = 120.225418… < 121, so BY THE HAND-PROVED LINKS L1, L2, L6 (data/fs66/b1/SOUNDNESS.md) no UD(Z/11^k, 2), k >= 1, is 4-colourable. Standard-library checker, NOT the Lean kernel.

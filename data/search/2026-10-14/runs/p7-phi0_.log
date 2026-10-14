@@ -1,0 +1,13 @@
+p=7 n=49 |S|=8 |maps|=16 reps=26
+SEARCH-2026-10-14: solve basis |J| = 1 of 26 reps (phi0); q localiser; chars all
+  the two product-table symmetries hold on 300 random (ia, ib, t)
+  2 forked workers built 8775 canonical forms [0.1 s]
+products a*tau_t(a'): 8775 canonical forms (a quarter of 33124 by the two symmetries), 494 orbits [0.2 s]
+q forms built: 495 orbits [0.2 s]
+orbits K=495; PSD blocks [('M2[u=0]', 2), ('M2[u=1]', 1), ('M2[u=3]', 1), ('M2[u=10]', 1), ('M2[u=2]', 1), ('M2[u=9]', 1), ('M2[u=17]', 1), ('locq[u=0]', 2)]; scalar rows 2288; equality rows 0 [0.3 s]
+  grouped 351 representative pairs into 7245 (pair, orbit) cells [0.0 s]
+  SEARCH-2026-10-14: 1 of 351 representative pairs inside the basis
+assembled: (2300, 494), nnz 6713 [0.3 s, 62.9 MB]
+FLOAT READING (untrusted, double precision): value 17.624838 (dual 17.624838), status solved, 150 iterations, 0.0 s, 77.3 MB
+  p^2/m for m = 3, 4, 5: 16.3333, 12.2500, 9.8000
+{"kind": "fs66-b1", "record_version": 1, "utc": "2026-10-14T18:56:58Z", "command": "python3 data/search/2026-10-14/fs1014_cert_make.py 7 --fast --build-jobs 2 --threads 2 --keep phi0 --no-round", "tool_sha256": "fab15b08f3c8d00286ee3f17aa8d2e51b003453d9ca635e1b1c4c03904ca9a94", "p": 7, "c": 2.0, "relaxation": "minimal", "solver": "scs 3.3.1", "solver_eps": 1e-07, "threads": 2, "float_value": 17.624837662258457, "float_dual": 17.624837664000115, "status": "solved", "iterations": 150, "solve_s": 0.0, "rss_mb": 77.3, "digits": null, "weight_digits": null, "shift": null, "pd_failures": null, "U_num": null, "scale": null, "U_float": null, "rows": null, "blocks": null, "cascaded": null, "exact_s": null, "arbitrary_weights_seed": null, "scan_kept": null, "cert": null, "cert_sha256": null, "machine": "local x86_64", "python": "3.14.7", "trust": "float reading (untrusted)"}

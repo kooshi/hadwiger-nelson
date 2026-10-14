@@ -1,0 +1,5 @@
+p=11 n=121 |S|=12 maps=24 sha=ad93ef082e84
+reps 62; pairs 1953; orbits 218
+ops 26987 [0.2s]
+slots 2213; identity model: HOLDS; total magnitude bits 122 [4.9s]
+5.02 s 39156 KB

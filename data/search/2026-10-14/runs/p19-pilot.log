@@ -1,0 +1,9 @@
+p=19 n=361 |S|=20 |maps|=40 reps=182
+SEARCH-2026-10-14: solve basis |J| = 22 of 182 reps (phi0,sq,1,4); q localiser; chars all
+build cache reloaded from cache/build-p19-c2.npz: 52370 orbits, 16653x181 product table, 21 q forms
+products a*tau_t(a'): 3014193 canonical forms (a quarter of 11957764 by the two symmetries), 52370 orbits [0.8 s]
+q forms built: 52370 orbits [0.8 s]
+orbits K=52370; PSD blocks [('M2[u=0]', 23), ('M2[u=1]', 22), ('M2[u=20]', 22), ('M2[u=81]', 22), ('M2[u=2]', 22), ('M2[u=9]', 22), ('M2[u=5]', 22), ('M2[u=8]', 22), ('M2[u=27]', 22), ('M2[u=3]', 22), ('M2[u=22]', 22), ('M2[u=7]', 22), ('M2[u=26]', 22), ('M2[u=41]', 22), ('M2[u=66]', 22), ('M2[u=45]', 22), ('M2[u=4]', 22), ('M2[u=6]', 22), ('M2[u=25]', 22), ('locq[u=0]', 2)]; scalar rows 259271; equality rows 0 [9.1 s]
+  grouped 16653 representative pairs into 2783667 (pair, orbit) cells [0.8 s]
+  SEARCH-2026-10-14: 253 of 16653 representative pairs inside the basis
+assembled: (264104, 52369), nnz 1377614 [10.6 s, 967.0 MB]

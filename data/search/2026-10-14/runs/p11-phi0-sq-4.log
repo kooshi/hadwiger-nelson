@@ -1,0 +1,13 @@
+p=11 n=121 |S|=12 |maps|=24 reps=62
+SEARCH-2026-10-14: solve basis |J| = 8 of 62 reps (phi0,sq,4); q localiser; chars all
+  the two product-table symmetries hold on 300 random (ia, ib, t)
+  1 forked workers built 119133 canonical forms [6.6 s]
+products a*tau_t(a'): 119133 canonical forms (a quarter of 465124 by the two symmetries), 3759 orbits [6.7 s]
+q forms built: 3760 orbits [7.5 s]
+orbits K=3760; PSD blocks [('M2[u=0]', 9), ('M2[u=1]', 8), ('M2[u=12]', 8), ('M2[u=5]', 8), ('M2[u=2]', 8), ('M2[u=4]', 8), ('M2[u=15]', 8), ('M2[u=27]', 8), ('M2[u=24]', 8), ('M2[u=3]', 8), ('M2[u=14]', 8), ('locq[u=0]', 2)]; scalar rows 18223; equality rows 0 [7.9 s]
+  grouped 1953 representative pairs into 104283 (pair, orbit) cells [0.1 s]
+  SEARCH-2026-10-14: 36 of 1953 representative pairs inside the basis
+assembled: (18631, 3759), nnz 67890 [8.0 s, 101.9 MB]
+FLOAT READING (untrusted, double precision): value 31.043859 (dual 31.043858), status solved, 1000 iterations, 1.6 s, 125.9 MB
+  p^2/m for m = 3, 4, 5: 40.3333, 30.2500, 24.2000
+{"kind": "fs66-b1", "record_version": 1, "utc": "2026-10-14T18:58:46Z", "command": "python3 data/search/2026-10-14/fs1014_cert_make.py 11 --fast --build-jobs 1 --threads 1 --keep phi0,sq,4 --no-round", "tool_sha256": "fab15b08f3c8d00286ee3f17aa8d2e51b003453d9ca635e1b1c4c03904ca9a94", "p": 11, "c": 2.0, "relaxation": "minimal", "solver": "scs 3.3.1", "solver_eps": 1e-07, "threads": 1, "float_value": 31.04385910339703, "float_dual": 31.043858206463575, "status": "solved", "iterations": 1000, "solve_s": 1.6, "rss_mb": 125.9, "digits": null, "weight_digits": null, "shift": null, "pd_failures": null, "U_num": null, "scale": null, "U_float": null, "rows": null, "blocks": null, "cascaded": null, "exact_s": null, "arbitrary_weights_seed": null, "scan_kept": null, "cert": null, "cert_sha256": null, "machine": "local x86_64", "python": "3.14.7", "trust": "float reading (untrusted)"}
