@@ -1,0 +1,83 @@
+slot: admitted ld1: mem 6 GiB (hard cap), cpus 0,1
+HadwigerNelson.OneClass.finIndepRatio_plane_eq_mOne : (HadwigerNelson.unitDistance ℂ).finIndepRatio =
+  HadwigerNelson.Plane.mOne
+HadwigerNelson.OneClass.finIndepRatio_algPlane_eq_mOne : (HadwigerNelson.unitDistance
+      ↥HadwigerNelson.Outside.OAI158.Spectral.E).finIndepRatio =
+  HadwigerNelson.Plane.mOne
+HadwigerNelson.OneClass.iSup_fractionalChromaticNumber_plane : ⨆ S,
+    (SimpleGraph.induce (↑S) (HadwigerNelson.unitDistance ℂ)).fractionalChromaticNumber =
+  HadwigerNelson.Plane.mOne⁻¹
+HadwigerNelson.OneClass.fractionalChromaticNumber_plane : (HadwigerNelson.unitDistance ℂ).fractionalChromaticNumber =
+  HadwigerNelson.Plane.mOne⁻¹
+HadwigerNelson.OneClass.fractionalChromaticNumber_algPlane : (HadwigerNelson.unitDistance
+      ↥HadwigerNelson.Outside.OAI158.Spectral.E).fractionalChromaticNumber =
+  HadwigerNelson.Plane.mOne⁻¹
+HadwigerNelson.OneClass.tendsto_minIndepNum_div : Filter.Tendsto (fun n => ↑(HadwigerNelson.Plane.minIndepNum n) / ↑n)
+  Filter.atTop (nhds HadwigerNelson.Plane.mOne)
+@HadwigerNelson.OneClass.exists_admissibleOn_univ_iff_ae : ∀ {Λ : Type u_1} [Finite Λ] {N : ℝ → Λ → Λ → Prop},
+  HadwigerNelson.OneClass.IsAlgPattern N →
+    ((∃ ℓ, HadwigerNelson.OneClass.AdmissibleOn N Set.univ ℓ) ↔
+      ∃ ℓ,
+        (∀ (a : Λ), MeasureTheory.NullMeasurableSet (ℓ ⁻¹' {a}) MeasureTheory.MeasureSpace.volume) ∧
+          HadwigerNelson.OneClass.AdmissibleAe N ℓ)
+@HadwigerNelson.OneClass.exists_admissibleOn_univ_iff_algPlane : ∀ {Λ : Type u_1} [Finite Λ] {N : ℝ → Λ → Λ → Prop},
+  HadwigerNelson.OneClass.IsAlgPattern N →
+    ((∃ ℓ, HadwigerNelson.OneClass.AdmissibleOn N Set.univ ℓ) ↔
+      ∃ ℓ, HadwigerNelson.OneClass.AdmissibleOn N (↑HadwigerNelson.Outside.OAI158.Spectral.E) ℓ)
+@HadwigerNelson.OneClass.exists_measurable_admissibleAe : ∀ {Λ : Type u_1} [Finite Λ] {N : ℝ → Λ → Λ → Prop},
+  HadwigerNelson.OneClass.IsAlgPattern N →
+    ∀ {ℓ : ℂ → Λ},
+      HadwigerNelson.OneClass.AdmissibleOn N (↑HadwigerNelson.Outside.OAI158.Spectral.E) ℓ →
+        ∃ ℓ', (∀ (a : Λ), MeasurableSet (ℓ' ⁻¹' {a})) ∧ HadwigerNelson.OneClass.AdmissibleAe N ℓ'
+@HadwigerNelson.OneClass.exists_admissibleOn_of_ae : ∀ {Λ : Type u_1} [Finite Λ] {N : ℝ → Λ → Λ → Prop},
+  (∀ (r : ℝ) (a b : Λ), N r a b → 0 < r) →
+    ∀ {ℓ' : ℂ → Λ},
+      (∀ (a : Λ), MeasureTheory.NullMeasurableSet (ℓ' ⁻¹' {a}) MeasureTheory.MeasureSpace.volume) →
+        HadwigerNelson.OneClass.AdmissibleAe N ℓ' → ∃ ℓ, HadwigerNelson.OneClass.AdmissibleOn N Set.univ ℓ
+HadwigerNelson.OneClass.one_seventh_le_mOne : 7⁻¹ ≤ HadwigerNelson.Plane.mOne
+def SimpleGraph.finIndepRatio.{u_1} : {V : Type u_1} → SimpleGraph V → ENNReal :=
+fun {V} G => ⨅ S, ⨅ (_ : S.Nonempty), ↑(SimpleGraph.induce (↑S) G).indepNum / ↑S.card
+def HadwigerNelson.Plane.mOne : ENNReal :=
+⨆ A, ⨆ (_ : MeasurableSet A), ⨆ (_ : (HadwigerNelson.unitDistance ℂ).IsIndepSet A), HadwigerNelson.Plane.upperDensity A
+def HadwigerNelson.Plane.minIndepNum : ℕ → ℕ :=
+fun n => ⨅ S, (SimpleGraph.induce (↑↑S) (HadwigerNelson.unitDistance ℂ)).indepNum
+def HadwigerNelson.OneClass.AdmissibleOn.{u_1} : {Λ : Type u_1} → (ℝ → Λ → Λ → Prop) → Set ℂ → (ℂ → Λ) → Prop :=
+fun {Λ} N X ℓ => ∀ x ∈ X, ∀ y ∈ X, ¬N (Dist.dist x y) (ℓ x) (ℓ y)
+def HadwigerNelson.OneClass.AdmissibleAe.{u_1} : {Λ : Type u_1} → (ℝ → Λ → Λ → Prop) → (ℂ → Λ) → Prop :=
+fun {Λ} N ℓ =>
+  ∀ (r : ℝ),
+    ∀ᵐ (p : ℂ × ℝ) ∂MeasureTheory.MeasureSpace.volume.prod HadwigerNelson.Plane.arcLength,
+      ¬N r (ℓ p.1) (ℓ (p.1 + ↑r * HadwigerNelson.Plane.e p.2))
+structure HadwigerNelson.OneClass.IsAlgPattern.{u_1} {Λ : Type u_1} (N : ℝ → Λ → Λ → Prop) : Prop
+number of parameters: 2
+fields:
+  HadwigerNelson.OneClass.IsAlgPattern.countable : {r | ∃ a b, N r a b}.Countable
+  HadwigerNelson.OneClass.IsAlgPattern.pos : ∀ (r : ℝ) (a b : Λ), N r a b → 0 < r
+  HadwigerNelson.OneClass.IsAlgPattern.alg : ∀ (r : ℝ) (a b : Λ), N r a b → IsAlgebraic ℚ r
+constructor:
+  HadwigerNelson.OneClass.IsAlgPattern.mk.{u_1} {Λ : Type u_1} {N : ℝ → Λ → Λ → Prop}
+    (countable : {r | ∃ a b, N r a b}.Countable) (pos : ∀ (r : ℝ) (a b : Λ), N r a b → 0 < r)
+    (alg : ∀ (r : ℝ) (a b : Λ), N r a b → IsAlgebraic ℚ r) : HadwigerNelson.OneClass.IsAlgPattern N
+@[reducible] def HadwigerNelson.Outside.OAI158.Spectral.E : IntermediateField ℚ ℂ :=
+algebraicClosure ℚ ℂ
+def SimpleGraph.fractionalChromaticNumber.{u_1} : {V : Type u_1} → SimpleGraph V → ENNReal :=
+fun {V} G => ⨅ b, ⨅ n, ⨅ (_ : 0 < b), ⨅ (_ : G.FractionalColorable b n), ↑n / ↑b
+def HadwigerNelson.Plane.upperDensity : Set ℂ → ENNReal :=
+fun S =>
+  Filter.limsup
+    (fun R =>
+      MeasureTheory.MeasureSpace.volume (S ∩ Metric.ball 0 R) / MeasureTheory.MeasureSpace.volume (Metric.ball 0 R))
+    Filter.atTop
+'HadwigerNelson.OneClass.finIndepRatio_plane_eq_mOne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.finIndepRatio_algPlane_eq_mOne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.iSup_fractionalChromaticNumber_plane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.OneClass.fractionalChromaticNumber_plane' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.fractionalChromaticNumber_algPlane' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.tendsto_minIndepNum_div' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.exists_admissibleOn_univ_iff_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.exists_admissibleOn_univ_iff_algPlane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.OneClass.one_seventh_le_mOne' depends on axioms: [propext, Classical.choice, Quot.sound]

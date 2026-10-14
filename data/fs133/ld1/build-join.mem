@@ -1,0 +1,26 @@
+sampler start 2026-10-14T13:21:50Z worktree=/home/kooshi/source/lean-dir/.claude/worktrees/fs133-wk1 interval=5s pid=3160271
+13:22:30 new max sum-rss=6519 MiB over 2 process(es): Proofs/HadwigerNelson/Outside/OAI158Amenability.lean Proofs/HadwigerNelson/Outside/OAI158Basic.lean
+13:22:30 new max one-rss=3388 MiB: Proofs/HadwigerNelson/Outside/OAI158Basic.lean
+13:22:35 new max one-rss=3476 MiB: Proofs/HadwigerNelson/Outside/OAI158Basic.lean
+13:22:40 new max sum-rss=15548 MiB over 5 process(es): Proofs/HadwigerNelson/Outside/OAI158Centers.lean Proofs/HadwigerNelson/Outside/OAI158PhaseEncoding.lean Proofs/HadwigerNelson/Outside/OAI158NumberFields.lean Proofs/HadwigerNelson/Outside/OAI158InvariantMean.lean Proofs/HadwigerNelson/Outside/OAI158SmallArcs.lean
+13:23:05 new max one-rss=3540 MiB: Proofs/HadwigerNelson/Outside/OAI158RelativeCenters.lean
+13:23:11 new max one-rss=3555 MiB: Proofs/HadwigerNelson/Outside/OAI158RelativeCenters.lean
+13:23:36 new max one-rss=3567 MiB: Proofs/HadwigerNelson/Outside/OAI158Multipliers.lean
+13:23:56 new max one-rss=3674 MiB: Proofs/HadwigerNelson/Outside/OAI158ConditionalSpectrum.lean
+13:24:01 new max one-rss=3697 MiB: Proofs/HadwigerNelson/Outside/OAI158ConditionalSpectrum.lean
+13:24:16 new max one-rss=3716 MiB: Proofs/HadwigerNelson/Outside/OAI158Approximation.lean
+13:25:06 new max one-rss=3736 MiB: Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean
+13:26:47 heartbeat samples=60 now: 0 process(es), sum-rss=0 MiB
+13:31:08 new max one-rss=3747 MiB: Proofs/HadwigerNelson/Outside/OAI158Separability.lean
+13:31:48 heartbeat samples=120 now: 1 process(es), sum-rss=3732 MiB
+13:31:53 new max one-rss=3788 MiB: Proofs/HadwigerNelson/Outside/OAI158Representations.lean
+13:33:34 new max one-rss=3792 MiB: Proofs/HadwigerNelson/Outside/OAI158Ergodicity.lean
+13:33:44 new max one-rss=3896 MiB: Proofs/HadwigerNelson/Outside/OAI158BorelTransfer.lean
+13:33:49 new max one-rss=3938 MiB: Proofs/HadwigerNelson/Outside/OAI158BorelTransfer.lean
+13:34:45 new max sum-rss=17062 MiB over 5 process(es): Proofs/HadwigerNelson/Plane/OneClass/InvariantLaw.lean Proofs/HadwigerNelson/Plane/OneClass/Field.lean Proofs/HadwigerNelson/Plane/SixRing/Tips.lean Proofs/HadwigerNelson/Plane/SixRing/Shift.lean Proofs/HadwigerNelson/Plane/RadiusOutside.lean
+13:35:10 new max sum-rss=21270 MiB over 6 process(es): Proofs/HadwigerNelson/Arith/TorsionExtraction.lean Proofs/HadwigerNelson/Outside/OAI158BinaryPalettes.lean Proofs/HadwigerNelson/Plane/SixRing/Excl.lean Proofs/HadwigerNelson/Plane/OneClass/Pair.lean Proofs/HadwigerNelson/Plane/OneClass/Algebraic.lean Proofs/HadwigerNelson/Plane/SixRing/ChartMeasure.lean
+13:35:45 new max one-rss=3964 MiB: Proofs/HadwigerNelson/Plane/OneClass/Fractional.lean
+13:35:50 new max one-rss=3973 MiB: Proofs/HadwigerNelson/Plane/OneClass/Fractional.lean
+13:35:55 new max one-rss=3985 MiB: Proofs/HadwigerNelson/Plane/OneClass/Fractional.lean
+13:36:00 new max one-rss=4037 MiB: Proofs/HadwigerNelson/Plane/OneClass/Fractional.lean
+sampler end 2026-10-14T13:36:45Z samples=178 PEAK_SUM_RSS_MIB=21270 (over 6 process(es): Proofs/HadwigerNelson/Arith/TorsionExtraction.lean Proofs/HadwigerNelson/Outside/OAI158BinaryPalettes.lean Proofs/HadwigerNelson/Plane/SixRing/Excl.lean Proofs/HadwigerNelson/Plane/OneClass/Pair.lean Proofs/HadwigerNelson/Plane/OneClass/Algebraic.lean Proofs/HadwigerNelson/Plane/SixRing/ChartMeasure.lean) PEAK_ONE_RSS_MIB=4037 (Proofs/HadwigerNelson/Plane/OneClass/Fractional.lean)

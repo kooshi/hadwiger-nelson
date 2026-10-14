@@ -1,0 +1,17 @@
+baseline entries: unchanged from main's (2)
+lines of scripts/Vacuity.lean that differ from main's: 0
+lines of scripts/Assumptions.lean that differ from main's: 0
+lines of scripts/Axioms.lean that differ from main's: 1508
+lines of scripts/axioms-controls.txt that differ from main's: 30
+lines of scripts/assumptions-controls.txt that differ from main's: 0
+lines of scripts/assumptions-ledger.txt that differ from main's: 14
+lines of scripts/vacuity-baseline.txt that differ from main's: 2
+lines of scripts/vacuity-controls.lean that differ from main's: 0
+lines of scripts/DupNames.lean that differ from main's: 0
+lines of scripts/dupnames-controls.txt that differ from main's: 0
+lines of scripts/gate_report.py that differ from main's: 0
+lines of scripts/axioms.sh that differ from main's: 0
+lines of scripts/vacuity.sh that differ from main's: 0
+lines of scripts/assumptions.sh that differ from main's: 0
+lines of scripts/dupnames.sh that differ from main's: 0
+lines of scripts/build.sh that differ from main's: 0

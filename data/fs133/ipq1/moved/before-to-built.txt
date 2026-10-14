@@ -1,0 +1,16 @@
+Proofs.HadwigerNelson.Plane.OneClass.SectionDensity: IDENTICAL 12
+Proofs.HadwigerNelson.Plane.OneClass.Defs: IDENTICAL 57
+Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw: IDENTICAL 28
+Proofs.HadwigerNelson.Plane.OneClass.Field: IDENTICAL 31
+Proofs.HadwigerNelson.Plane.OneClass.Algebraic: IDENTICAL 10
+Proofs.HadwigerNelson.Plane.OneClass.Fractional: IDENTICAL 18
+Proofs.HadwigerNelson.Plane.OneClass.Pair: BINDER-DROPPED 1, IDENTICAL 18
+  BINDER-DROPPED         theorem  HadwigerNelson.OneClass.exists_admissibleOn_of_ae
+constants of the first dump: 175  BINDER-DROPPED 1  IDENTICAL 174  new in the second: 6
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Pair.0.HadwigerNelson.OneClass.dist_kCoeff_mul @ Proofs.HadwigerNelson.Plane.OneClass.Pair
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Pair.0.HadwigerNelson.OneClass.exists_slice_ne_zero @ Proofs.HadwigerNelson.Plane.OneClass.Pair
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Pair.0.HadwigerNelson.OneClass.isPlaneSystem_lab @ Proofs.HadwigerNelson.Plane.OneClass.Pair
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Pair.0.HadwigerNelson.OneClass.kCoeff_mul_pair @ Proofs.HadwigerNelson.Plane.OneClass.Pair
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Pair.0.HadwigerNelson.OneClass.kCoeff_one_pair @ Proofs.HadwigerNelson.Plane.OneClass.Pair
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Pair.0.HadwigerNelson.OneClass.prod_pairs_ne_zero @ Proofs.HadwigerNelson.Plane.OneClass.Pair
+MOVED OK: every listed change is as listed; nothing else moved

@@ -1,0 +1,37 @@
+/-! ### The finitary ratio read on a finite set, and almost-invariant finite sets (private) -/
+
+/-- An independent subset of a finite vertex set has at most the independence number of the induced graph. -/
+private theorem card_le_indepNum_induce {V : Type*} (G : SimpleGraph V) (S : Finset V) {J : Finset V}
+    (hJS : J ⊆ S) (hJ : G.IsIndepSet (J : Set V)) : J.card ≤ (G.induce (S : Set V)).indepNum := by
+  classical
+  have hind : (G.induce (S : Set V)).IsIndepSet
+      ((J.subtype (· ∈ (S : Set V)) : Finset (S : Set V)) : Set (S : Set V)) := by
+    intro x hx y hy hxy hadj
+    exact hJ (Finset.mem_subtype.1 hx) (Finset.mem_subtype.1 hy) (fun h => hxy (Subtype.ext h))
+      (SimpleGraph.induce_adj.1 hadj)
+  have hcard : (J.subtype (· ∈ (S : Set V))).card = J.card := by
+    rw [Finset.card_subtype, Finset.filter_true_of_mem fun x hx => Finset.mem_coe.2 (hJS hx)]
+  rw [← hcard]
+  exact SimpleGraph.IsIndepSet.card_le_indepNum hind
+
+/-- A nonempty finite vertex set holds an independent set of at least the finitary ratio times its size. -/
+private theorem exists_indep_subset {V : Type*} (G : SimpleGraph V) {S : Finset V} (hS : S.Nonempty) :
+    ∃ J : Finset V, J ⊆ S ∧ G.IsIndepSet (J : Set V) ∧ G.finIndepRatio * S.card ≤ J.card := by
+  classical
+  obtain ⟨J', hJ'⟩ := (G.induce (S : Set V)).exists_isNIndepSet_indepNum
+  refine ⟨J'.map (Function.Embedding.subtype _), ?_, ?_, ?_⟩
+  · intro x hx
+    obtain ⟨y, -, rfl⟩ := Finset.mem_map.1 hx
+    exact y.2
+  · intro x hx y hy hxy hadj
+    obtain ⟨x', hx', rfl⟩ := Finset.mem_map.1 (Finset.mem_coe.1 hx)
+    obtain ⟨y', hy', rfl⟩ := Finset.mem_map.1 (Finset.mem_coe.1 hy)
+    exact hJ'.isIndepSet (Finset.mem_coe.2 hx') (Finset.mem_coe.2 hy') (fun h => hxy (congrArg _ h))
+      (SimpleGraph.induce_adj.2 hadj)
+  · rw [Finset.card_map, hJ'.card_eq]
+    have h : G.finIndepRatio ≤ ((G.induce (S : Set V)).indepNum : ℝ≥0∞) / S.card :=
+      iInf₂_le (f := fun (S : Finset V) (_ : S.Nonempty) =>
+        ((G.induce (S : Set V)).indepNum : ℝ≥0∞) / S.card) S hS
+    have hcard : (S.card : ℝ≥0∞) ≠ 0 := by simpa using hS.ne_empty
+    exact (ENNReal.le_div_iff_mul_le (Or.inl hcard) (Or.inl (ENNReal.natCast_ne_top _))).1 h
+

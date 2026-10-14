@@ -1,0 +1,53 @@
+ok    1  1 the audit's sentence  (CLAUDE.md)
+ok    1  1b the declared imports  (CLAUDE.md)
+ok    1  1c the palette lemmas  (CLAUDE.md)
+ok    1  2 the vacuity counts  (CLAUDE.md)
+ok    1  3 the nine counts  (CLAUDE.md)
+ok    1  3b the sentence it follows  (CLAUDE.md)
+ok    1  4 GATE_CHANGES, the entry it follows  (tools/claude_md_fact_audit.py)
+ok    1  5 the mission, row D  (CLAUDE.md)
+ok    1  6 where the problem stands, the collapse  (CLAUDE.md)
+ok    1  7 where the problem stands, the Lebesgue number  (CLAUDE.md)
+ok    1  8 where the problem stands, the discs  (CLAUDE.md)
+ok    1  9 open milestones, FS-124's disc criterion  (CLAUDE.md)
+ok    1  10a the aim, item 5  (CLAUDE.md)
+ok    1  10b item 31  (CLAUDE.md)
+ok    1  11 open milestones, the frontier's ground  (CLAUDE.md)
+ok    1  12 the Frontier's Last filed  (CLAUDE.md)
+ok    1  13a ARCHITECTURE § Trust, the transfer's row (its head)  (ARCHITECTURE.md)
+ok    1  13b ARCHITECTURE § Trust, the count  (ARCHITECTURE.md)
+ok    1  14a LEAN.md § Assumptions, the port bullet's last sentence  (LEAN.md)
+ok    1  14b LEAN.md § Searching — Lean, the last bullet's end  (LEAN.md)
+ok    1  14c LEAN.md § Building, the bullet it follows  (LEAN.md)
+ok    1  14d LEAN.md § The gate, the lint's bullet end  (LEAN.md)
+ok    1  15a BIBLIOGRAPHY, the release's row, what rests on it  (BIBLIOGRAPHY.md)
+ok    1  15b BIBLIOGRAPHY, the release's row, its reading  (BIBLIOGRAPHY.md)
+ok    0  CONTROL (must be absent)  (CLAUDE.md)
+slots: 24 checked on HEAD, control absent: yes; SLOTS OK
+D1: slot found once, replaced
+D1b: slot found once, replaced
+D1c: slot found once, replaced
+D2: slot found once, replaced
+D3: slot found once, replaced
+D3b: slot found once, inserted after
+D5: slot found once, replaced
+D6: slot found once, replaced
+D7: slot found once, replaced
+D8: slot found once, replaced
+D9: slot found once, replaced
+D10a: slot found once, replaced
+D10b: slot found once, replaced
+D11: slot found once, replaced
+D12: slot found once, replaced
+D4: GATE_CHANGES entry inserted after the LJ1 entry
+D4b: superseded-count entries (before the 'ℤ[i]' entry): 7531 | 7,602 | 7602 | 38 imported | 28 axiom-free | declarations=16125 | 16125 | refutations-skipped=228 | declarations=16125 refutations-skipped=228 sites=1454 | axioms=3 rests=39 | rests=39 | axioms=3 rests=39 named=19 inline=14 outside=7 ours=21 open=5 takes=102 mentions=1 | three outside theorems declared as axioms | thirty-nine theorems resting | three outside axioms
+D13a: the transfer's table row removed (one line)
+D13b: slot found once, replaced
+D14a: slot found once, inserted after
+D14b (6 bullets): slot found once, inserted after
+D14c: slot found once, inserted after
+D14d: slot found once, inserted after
+D15a: slot found once, replaced
+D15b: slot found once, replaced
+filed: ARCHITECTURE.md, BIBLIOGRAPHY.md, CLAUDE.md, LEAN.md, tools/claude_md_fact_audit.py
+CLAUDE.md bytes 77075

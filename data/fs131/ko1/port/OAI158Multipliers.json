@@ -1,0 +1,22 @@
+{
+ "global_instances": [
+  [
+   83,
+   "global: on a type built from the release's own definition `weight` (a `def`, `Multipliers.lean:76`): `IsFiniteMeasure (weight v)` is found only by a search on that term"
+  ]
+ ],
+ "patches": [
+  [
+   38,
+   "apply eLpNorm_congr_norm_ae (Lp.aestronglyMeasurable (mul h hm hn v))",
+   "apply eLpNorm_congr_norm_ae",
+   "at v4.34.1 `eLpNorm_congr_norm_ae` takes `hf : AEStronglyMeasurable f μ` and `hg : AEStronglyMeasurable g μ` before `hfg`; at v4.32.0 it takes `hfg` only, with the same conclusion (`Mathlib/MeasureTheory/Function/LpSeminorm/Basic.lean:411` here, `:452` there): the two measurability arguments are dropped"
+  ],
+  [
+   39,
+   "(Lp.aestronglyMeasurable v)",
+   "",
+   "at v4.34.1 `eLpNorm_congr_norm_ae` takes `hf : AEStronglyMeasurable f μ` and `hg : AEStronglyMeasurable g μ` before `hfg`; at v4.32.0 it takes `hfg` only, with the same conclusion (`Mathlib/MeasureTheory/Function/LpSeminorm/Basic.lean:411` here, `:452` there): the two measurability arguments are dropped"
+  ]
+ ]
+}

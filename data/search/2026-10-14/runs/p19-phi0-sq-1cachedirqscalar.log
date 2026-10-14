@@ -1,0 +1,13 @@
+p=19 n=361 |S|=20 |maps|=40 reps=182
+SEARCH-2026-10-14: solve basis |J| = 12 of 182 reps (phi0,sq,1); q scalar; chars all
+build cache reloaded from /home/kooshi/source/lean-dir/data/search/2026-10-14/cache/build-p19-c2.npz: 52370 orbits, 16653x181 product table, 21 q forms
+products a*tau_t(a'): 3014193 canonical forms (a quarter of 11957764 by the two symmetries), 52370 orbits [0.8 s]
+q forms built: 52370 orbits [0.8 s]
+orbits K=52370; PSD blocks [('M2[u=0]', 13), ('M2[u=1]', 12), ('M2[u=20]', 12), ('M2[u=81]', 12), ('M2[u=2]', 12), ('M2[u=9]', 12), ('M2[u=5]', 12), ('M2[u=8]', 12), ('M2[u=27]', 12), ('M2[u=3]', 12), ('M2[u=22]', 12), ('M2[u=7]', 12), ('M2[u=26]', 12), ('M2[u=41]', 12), ('M2[u=66]', 12), ('M2[u=45]', 12), ('M2[u=4]', 12), ('M2[u=6]', 12), ('M2[u=25]', 12)]; scalar rows 259254; equality rows 0 [12.2 s]
+  grouped 16653 representative pairs into 2783667 (pair, orbit) cells [0.9 s]
+  SEARCH-2026-10-14: 78 of 16653 representative pairs inside the basis
+assembled: (260749, 52369), nnz 605459 [13.8 s, 924.3 MB]
+  SEARCH-2026-10-14: trimmed to 811 of 52369 orbit variables and 3726 of 259254 scalar rows
+FLOAT READING (untrusted, double precision): value 99.497997 (dual 99.497988), status solved, 275 iterations, 0.6 s, 924.3 MB
+  p^2/m for m = 3, 4, 5: 120.3333, 90.2500, 72.2000
+{"kind": "fs66-b1", "record_version": 1, "utc": "2026-10-14T19:05:52Z", "command": "python3 data/search/2026-10-14/fs1014_cert_make.py 19 --fast --build-jobs 1 --threads 1 --keep phi0,sq,1 --no-round --cache-dir /home/kooshi/source/lean-dir/data/search/2026-10-14/cache --q-scalar", "tool_sha256": "ed432d745f5c9eca327c013e42cc1988a0b343473d7982376f1906d3293af290", "p": 19, "c": 2.0, "relaxation": "minimal", "solver": "scs 3.3.1", "solver_eps": 1e-07, "threads": 1, "float_value": 99.49799739495681, "float_dual": 99.49798802073911, "status": "solved", "iterations": 275, "solve_s": 0.6, "rss_mb": 924.3, "digits": null, "weight_digits": null, "shift": null, "pd_failures": null, "U_num": null, "scale": null, "U_float": null, "rows": null, "blocks": null, "cascaded": null, "exact_s": null, "arbitrary_weights_seed": null, "scan_kept": null, "cert": null, "cert_sha256": null, "machine": "local x86_64", "python": "3.14.7", "trust": "float reading (untrusted)"}

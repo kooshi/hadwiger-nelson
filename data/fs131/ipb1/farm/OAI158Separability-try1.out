@@ -1,0 +1,40 @@
+slot: waiting (ledger 17 + 6 > budget 22 GiB)
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Outside/OAI158Separability.lean:390:14: error(lean.unknownIdentifier): Unknown constant `Finset.prod_le_prod₀`
+Proofs/HadwigerNelson/Outside/OAI158Separability.lean:391:14: error: No goals to be solved
+Proofs/HadwigerNelson/Outside/OAI158Separability.lean:648:4: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsProbabilityMeasure (Measure.map q μ)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158Separability.lean:649:6: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsProbabilityMeasure (Measure.map q μ)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158Separability.lean:648:62: error: unsolved goals
+G : Type u_1
+X : Type u_2
+Y : Type u_3
+inst✝¹³ : AddCommGroup G
+inst✝¹² : MeasurableSpace X
+inst✝¹¹ : MeasurableSpace Y
+inst✝¹⁰ : StandardBorelSpace X
+inst✝⁹ : Nonempty X
+inst✝⁸ : StandardBorelSpace Y
+inst✝⁷ : Nonempty Y
+μ : Measure X
+inst✝⁶ : IsProbabilityMeasure μ
+q : X → Y
+hq : Measurable q
+inst✝⁵ : AddAction G X
+inst✝⁴ : AddAction G Y
+inst✝³ : MeasurableConstVAdd G X
+inst✝² : MeasurableConstVAdd G Y
+hqcov : ∀ (g : G), (fun x => q (g +ᵥ x)) =ᵐ[μ] fun x => g +ᵥ q x
+inst✝¹ : TopologicalSpace G
+inst✝ : DiscreteTopology G
+M : Amenable.Mean G
+hp : PairVanishing μ q hq M
+φ : G →+ G
+hs : Function.Surjective ⇑φ
+v w : Func X
+⊢ sorry = 0

@@ -1,0 +1,18 @@
+slot: admitted icd1: mem 4 GiB (hard cap), cpus 0,1
+⚠ [6035/6047] Replayed Proofs.HadwigerNelson.Plane.OneClass.Algebraic
+warning: Proofs/HadwigerNelson/Plane/OneClass/Algebraic.lean:43:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/OneClass/Algebraic.lean:53:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/OneClass/Algebraic.lean:59:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/OneClass/Algebraic.lean:82:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/OneClass/Algebraic.lean:87:8: declaration uses `sorry`
+⚠ [6036/6047] Replayed Proofs.HadwigerNelson.Plane.OneClass.Fractional
+warning: Proofs/HadwigerNelson/Plane/OneClass/Fractional.lean:28:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/OneClass/Fractional.lean:37:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/OneClass/Fractional.lean:43:8: declaration uses `sorry`
+⚠ [6037/6047] Replayed Proofs.HadwigerNelson.Plane.OneClass.Pair
+warning: Proofs/HadwigerNelson/Plane/OneClass/Pair.lean:59:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/OneClass/Pair.lean:64:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/OneClass/Pair.lean:69:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/OneClass/Pair.lean:82:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/OneClass/Pair.lean:90:8: declaration uses `sorry`
+All targets up-to-date (6047 jobs).

@@ -1,0 +1,31 @@
+slot: waiting (ledger 20 + 6 > budget 22 GiB)
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 4,5
+Proofs/HadwigerNelson/Outside/OAI158PhaseCollision.lean:416:6: error(lean.unknownIdentifier): Unknown identifier `dite_eq_left`
+Proofs/HadwigerNelson/Outside/OAI158PhaseCollision.lean:408:82: error: unsolved goals
+Ω : Type u_1
+ι : Type u_2
+κ : Type u_3
+V : Type u_4
+inst✝⁶ : MeasurableSpace Ω
+inst✝⁵ : Fintype ι
+inst✝⁴ : Fintype κ
+inst✝³ : Nonempty ι
+inst✝² : Nonempty κ
+inst✝¹ : PseudoMetricSpace V
+μ : Measure Ω
+inst✝ : IsProbabilityMeasure μ
+s : Ω → Finset ι
+v : Ω → ι → V
+w : Ω → κ → V
+r : ℝ
+hcov : ∀ᵐ (x : Ω) ∂μ, ∀ i ∈ s x, ∃ j, dist (v x i) (w x j) ≤ r
+hm : ∀ (i j : ι), Measurable fun x => dist (v x i) (v x j)
+hq : Measurable fun x => ↑(s x).card / ↑(Fintype.card ι)
+hlarge : 10 * Fintype.card κ < Fintype.card ι
+havg : 19 / 20 < ∫ (x : Ω), ↑(s x).card / ↑(Fintype.card ι) ∂μ
+f : Ω → ι → κ := fun x i => if h : ∃ j, dist (v x i) (w x j) ≤ r then h.choose else Classical.choice ⋯
+x : Ω
+hx : ∀ i ∈ s x, ∃ j, dist (v x i) (w x j) ≤ r
+i : ι
+hi : i ∈ s x
+⊢ dist (v x i) (w x (if h : ∃ j, dist (v x i) (w x j) ≤ r then h.choose else Classical.choice ⋯)) ≤ r

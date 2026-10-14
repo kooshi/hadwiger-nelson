@@ -1,0 +1,52 @@
+{
+ "renames": [
+  [
+   "Measurable.of_eval",
+   "measurable_pi_iff.mpr",
+   "`Measurable.of_eval {f} (hf : ∀ a, Measurable fun c => f c a)` (v4.34.1, `Mathlib/MeasureTheory/MeasurableSpace/Constructions.lean:596`, proved there as `measurable_pi_iff.mpr hf`, in the section of `measurable_pi_iff`) is not at v4.32.0; `measurable_pi_iff.mpr` is that proof, with the same variables and the same statement (`Constructions.lean:573` here)"
+  ],
+  [
+   "Set.mem_ofPred_eq",
+   "Set.mem_setOf_eq",
+   "Mathlib renamed `setOf` and its lemmas to `Set.ofPred` on 2026-07-09 (`LEAN.md` § Searching — Lean; FS132-I2's patches); at v4.32.0 the lemma is `Set.mem_setOf_eq`, the same statement"
+  ]
+ ],
+ "patches": [
+  [
+   128,
+   "dist_star_star",
+   "star_isometry.dist_eq",
+   "`dist_star_star` (v4.34.1, `Mathlib/Analysis/CStarAlgebra/Basic.lean:89`, proved there as `star_isometry.dist_eq x y`) is not at v4.32.0; `star_isometry.dist_eq` (`Basic.lean:68` and `Mathlib/Topology/MetricSpace/Isometry.lean:342` here) is that proof, the same equation `dist (star x) (star y) = dist x y`, given to `simpa only` as the term"
+  ],
+  [
+   131,
+   "dist_star_star",
+   "star_isometry.dist_eq",
+   "`dist_star_star` (v4.34.1, `Mathlib/Analysis/CStarAlgebra/Basic.lean:89`, proved there as `star_isometry.dist_eq x y`) is not at v4.32.0; `star_isometry.dist_eq` (`Basic.lean:68` and `Mathlib/Topology/MetricSpace/Isometry.lean:342` here) is that proof, the same equation `dist (star x) (star y) = dist x y`, given to `simpa only` as the term"
+  ],
+  [
+   551,
+   "Complex.isometry_ofReal.lipschitzWith.comp",
+   "Complex.isometry_ofReal.lipschitz.comp",
+   "Mathlib renamed `Isometry.lipschitz` to `Isometry.lipschitzWith` after v4.32.0: at v4.34.1 `theorem lipschitzWith (h : Isometry f) : LipschitzWith 1 f` (`Mathlib/Topology/MetricSpace/Isometry.lean:77`), at v4.32.0 `protected theorem lipschitz : LipschitzWith 1 f` (`Isometry.lean:316`), the same statement; a patch per site, since the token also begins `lipschitzWith_thickenedIndicator`, which is not renamed"
+  ],
+  [
+   552,
+   "(NNReal.isometry_coe.lipschitzWith.comp",
+   "(NNReal.isometry_coe.lipschitz.comp",
+   "Mathlib renamed `Isometry.lipschitz` to `Isometry.lipschitzWith` after v4.32.0: at v4.34.1 `theorem lipschitzWith (h : Isometry f) : LipschitzWith 1 f` (`Mathlib/Topology/MetricSpace/Isometry.lean:77`), at v4.32.0 `protected theorem lipschitz : LipschitzWith 1 f` (`Isometry.lean:316`), the same statement; a patch per site, since the token also begins `lipschitzWith_thickenedIndicator`, which is not renamed"
+  ],
+  [
+   588,
+   "isometry_neg.lipschitzWith",
+   "isometry_neg.lipschitz",
+   "Mathlib renamed `Isometry.lipschitz` to `Isometry.lipschitzWith` after v4.32.0: at v4.34.1 `theorem lipschitzWith (h : Isometry f) : LipschitzWith 1 f` (`Mathlib/Topology/MetricSpace/Isometry.lean:77`), at v4.32.0 `protected theorem lipschitz : LipschitzWith 1 f` (`Isometry.lean:316`), the same statement; a patch per site, since the token also begins `lipschitzWith_thickenedIndicator`, which is not renamed"
+  ],
+  [
+   812,
+   ":= inferInstance",
+   ":= MeasureTheory.Measure.isProbabilityMeasure_map (hπ.aemeasurable (μ := μ))",
+   "the class of `plans/FS131-KO1-port-plan.md` § 3.3, in a PROOF: at v4.34.1 `μ.map f` of a probability measure is one by an instance for every `f`, so the release's `let : IsProbabilityMeasure (μ.map f) := inferInstance` is found; at v4.32.0 only through `Measure.isProbabilityMeasure_map (hf : AEMeasurable f μ)` (`Mathlib/MeasureTheory/Measure/Typeclasses/Probability.lean:124`). The `let`'s value is that lemma at the measurability the proof's context holds; the statement is untouched"
+  ]
+ ]
+}

@@ -1,0 +1,165 @@
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:120:17: error(lean.invalidField): Invalid field `fun_mul`: The environment does not contain `And.fun_mul`, so it is not possible to project the field `fun_mul` from an expression
+  memLp μ f ∞
+of type
+  AEStronglyMeasurable (↑f) μ ∧ eLpNorm ↑f ∞ μ < ∞
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:123:44: error: Type mismatch
+  MemLp.coeFn_toLp ?m.34
+has type
+  ↑↑(MemLp.toLp ?m.33 ?m.34) =ᵐ[?m.31] ?m.33
+but is expected to have type
+  ↑↑(mulLp μ f g) =ᵐ[μ] fun x => ↑f x * ↑↑g x
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:176:4: error: type class instance expected
+  (fun g => ↑(U g)) element * y = y * (fun g => ↑(U g)) element
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:177:38: error: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce
+
+case hcomm_star
+G : Type u_1
+H : Type u_2
+inst✝³ : CommGroup G
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+U : G →* ↥(unitary (H →L[ℂ] H))
+left right : G
+⊢ (fun g => ↑(U g)) left * star ((fun g => ↑(U g)) right) = star ((fun g => ↑(U g)) right) * (fun g => ↑(U g)) left
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:180:2: error: No goals to be solved
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:187:2: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  CommRing ↥(algebra U)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:189:58: error: Fields missing: `mul_comm`
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:198:21: error: 'change' tactic failed, pattern
+  ↑(U (g * h)) = ↑(U g) * ↑(U h)
+is not definitionally equal to target
+  ↑(generator U (g * h)) = ↑(generator U g * generator U h)
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:201:50: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  StarMul ↥(algebra U)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:202:2: error: Tactic `constructor` failed: target is not an inductive datatype
+
+G : Type u_1
+H : Type u_2
+inst✝³ : CommGroup G
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+U : G →* ↥(unitary (H →L[ℂ] H))
+g : G
+⊢ generator U g ∈ sorry
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:207:19: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Module ℂ ↥(algebra U)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:209:19: error(lean.unknownIdentifier): Unknown identifier `Spectrum`
+
+Note: It is not possible to treat `Spectrum` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:216:14: error: unsolved goals
+G : Type u_1
+H : Type u_2
+inst✝⁵ : CommGroup G
+inst✝⁴ : NormedAddCommGroup H
+inst✝³ : InnerProductSpace ℂ H
+inst✝² : CompleteSpace H
+U : G →* ↥(unitary (H →L[ℂ] H))
+inst✝¹ : TopologicalSpace G
+inst✝ : DiscreteTopology G
+φ : sorry
+⊢ (sorry ()) 1 = 1
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:217:18: error: unsolved goals
+G : Type u_1
+H : Type u_2
+inst✝⁵ : CommGroup G
+inst✝⁴ : NormedAddCommGroup H
+inst✝³ : InnerProductSpace ℂ H
+inst✝² : CompleteSpace H
+U : G →* ↥(unitary (H →L[ℂ] H))
+inst✝¹ : TopologicalSpace G
+inst✝ : DiscreteTopology G
+φ : sorry
+g h : G
+⊢ (sorry ()) (generator U g * generator U h) = (sorry ()) (generator U g) * (sorry ()) (generator U h)
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:224:27: error(lean.unknownIdentifier): Unknown identifier `Spectrum`
+
+Note: It is not possible to treat `Spectrum` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:227:6: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:228:2: warning: 'apply ContinuousMonoidHom.isClosedEmbedding_coe.isEmbedding.isInducing.continuous_iff.mpr' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:229:2: warning: 'apply continuous_pi' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:229:23: warning: 'intro g' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:230:2: warning: 'exact Continuous.subtype_mk (map_continuous (gelfandStarTransform (algebra U) (generator U g))) _' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:229:2: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:229:23: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:230:2: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:233:30: error: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
+  @Distrib.toAdd (↥(algebra U))
+    (@instDistribOfSemiring (↥(algebra U))
+      (@CommSemiring.toSemiring (↥(algebra U)) (@CommRing.toCommSemiring (↥(algebra U)) (algebra_commRing U))))
+inferred
+  @Distrib.toAdd (↥(algebra U))
+    (@instDistribOfSemiring (↥(algebra U))
+      (@CommSemiring.toSemiring (↥(algebra U))
+        (@CommRing.toCommSemiring (↥(algebra U)) (algebra_commCStar U).toCommRing)))
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:233:2: error: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
+  CommRing.toCommSemiring.toSemiring
+inferred
+  SubsemiringClass.toSemiring (algebra U)
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:239:36: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  InnerProductSpace ℂ C(PontryaginDual G, ℂ)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:239:45: error: Application type mismatch: The argument
+  U
+has type
+  G →* ↥(unitary (H →L[ℂ] H))
+but is expected to have type
+  C(PontryaginDual ?m.20, ℂ)
+in the application
+  calculus U
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:359:52: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:361:34: error(lean.unknownIdentifier): Unknown identifier `ordinaryVector`
+
+Note: It is not possible to treat `ordinaryVector` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:362:11: error: overloaded, errors 
+  Function expected at
+    _root_.measure ⇑(calculus ?m.40)
+  but this term has type
+    WellFoundedRelation ℕ
+  
+  Note: Expected a function because this term is being applied to the argument
+    v
+  
+  362:32 Unknown identifier `v`
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:361:84: error: unsolved goals
+H : Type u_1
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+U : DiscreteE →* ↥(unitary (H →L[ℂ] H))
+⊢ sorry ∈ ContinuousVectors.space U
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:381:12: error: Application type mismatch: The argument
+  calculus ?m.48
+has type
+  ?m.41 →L[ℂ] ?m.41
+but is expected to have type
+  C(D, ℂ) →⋆ₐ[ℂ] H →L[ℂ] H
+in the application
+  VectorMeasure.measure (calculus ?m.48)

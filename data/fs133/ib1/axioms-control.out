@@ -1,0 +1,5 @@
+plant 'sorryAx in a clean record': REPORTED (OTHER AXIOM HadwigerNelson.OneClass.IsShiftInvariantLaw.measure_origin_le: ['sorryAx'])
+plant 'the import in a clean record': REPORTED (IMPORT      HadwigerNelson.Plane.sectionDensity_univ: a record that must be clean prints the declared outside theorem)
+plant 'a record removed': REPORTED (NO RECORD   HadwigerNelson.OneClass.IsShiftInvariantLaw.measure_origin_le)
+unplanted: PASS
+CONTROL OK

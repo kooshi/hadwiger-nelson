@@ -1,0 +1,12 @@
+PIN-DIFFERENCE	lemma	§.KernelCompact.exists_invariant_set	EQSET: `s =ᵐ[μ] t` of sets is `Filter.EventuallyEqSet` at the release's pin and `Filter.EventuallyEq` at `Prop` here; the same proposition by definition
+  aux          AUX-ABSENT       6
+  aux          AUX-DIFFERS      5
+  aux          IDENTICAL        33
+  definition   IDENTICAL        26
+  definition   UP-TO-INSTANCES  3
+  lemma        IDENTICAL        99
+  lemma        PIN-DIFFERENCE   1
+  lemma        UP-TO-INSTANCES  26
+  constants differing inside instance and proof arguments: 56
+constants: 199  failing: 0  fatal: 0
+READBACK OK

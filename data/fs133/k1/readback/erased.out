@@ -1,0 +1,9 @@
+IDENTICAL        §.Spectral.E
+IDENTICAL        §.Spectral.K
+IDENTICAL        §.Spectral.DiscreteE
+UP-TO-INSTANCES  §.Spectral.instCommGroupDiscreteE: only there ['§.Spectral.instCommGroupDiscreteE._aux_3', '§.Spectral.instCommGroupDiscreteE._proof_5']; only here ['Semigroup.mk', '§.Spectral.instCommGroupDiscreteE._aux_4', '§.Spectral.instCommGroupDiscreteE._proof_3']
+IDENTICAL        §.Spectral.kCoeff
+UP-TO-INSTANCES  §.Spectral.residual_fourier: only there ['AddGroup.toSubNegMonoid', 'AddZero.toZero', 'AddZeroClass.toAddZero', 'CStarModule.toInner', 'CommCStarAlgebra.toNormedCommRing', 'CommSemiring.toSemiring', 'Complex.instCommSemiring', 'Complex.instNonUnitalCommRing', 'Complex.instNorm', 'Complex.instStarRing', 'Complex.partialOrder', 'DistribMulAction.toDistribSMul', 'DistribSMul.toSMulZeroClass', 'Module.toDistribMulAction', 'NonUnitalCommRing.toNonUnitalCommSemiring', 'NonUnitalCommSemiring.toNonUnitalSemiring', 'NormedAddCommGroup.toNorm', 'SMulZeroClass.toSMul', 'Semifield.toCommSemiring', 'Semiring.toModule', 'SubNegMonoid.toAddMonoid', 'SubsemiringClass.toCommSemiring', 'WithCStarModule.instCStarModuleComplex', 'instCommCStarAlgebraComplex']; only here ['DivisionSemiring.toSemiring', 'InnerProductSpace.toInner', 'NormedField.toNormedCommRing', 'Semifield.toDivisionSemiring']
+IDENTICAL        §.ContinuousVectors.op
+IDENTICAL        §.ContinuousVectors.space
+declarations: 8  different: 0

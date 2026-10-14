@@ -1,0 +1,40 @@
+HEAD=75a0035f1daa5d7955b9a119acb170b40b830b07  2026-10-14T12:21:28Z  host=the machine cores=12 mem=31 GiB
+status (tracked files modified, and untracked outside data/ and plans/):
+--
+main (e928d4aa2) against this commit, paths that differ under Proofs/ Proofs.lean scripts/ tools/ ARCHITECTURE.md:
+     32   (a module of Outside/OAI158*)
+      1 ARCHITECTURE.md
+      1 Proofs/HadwigerNelson/Outside/OAI158.lean
+      1 Proofs/HadwigerNelson/Plane/LebesgueNumber.lean
+      1 Proofs/HadwigerNelson/Plane/RadiusOutside.lean
+      1 Proofs.lean
+      1 scripts/assumptions-ledger.txt
+      1 scripts/axioms-controls.txt
+      1 scripts/Axioms.lean
+      1 scripts/vacuity-baseline.txt
+      1 tools/fs131_ipa1_readback_port.py
+      1 tools/fs131_ipa1_readback.py
+      1 tools/fs131_ipb1_readback.py
+      1 tools/fs131_ipd1_dumpdiff.py
+      1 tools/fs131_ipd1_header_diff.py
+      1 tools/fs131_ipd1_readback.py
+      1 tools/fs131_ipd1_register.py
+      1 tools/fs131_ipd1_switchdiff.py
+      1 tools/fs131_ipd1_switch.py
+      1 tools/fs131_ko1_exposure.py
+      1 tools/fs131_ko1_overlap.py
+      1 tools/fs131_ko1_port.py
+      1 tools/fs131_ko1_readback.py
+      1 tools/fs131_lp1_instance_evidence.py
+      1 tools/fs131_lp1_nolint_diff.py
+      1 tools/fs131_lp1_readback.py
+      1 tools/fs131_lp1_records.py
+--
+dupnames latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/build/gate/dupnames/20261014T123149Z-3011218.log
+dupnames-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/build/gate/dupnames-self-test/20261014T123154Z-3011408.log
+axioms latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/build/gate/axioms/20261014T123217Z-3012657.log
+axioms-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/build/gate/axioms-self-test/20261014T123227Z-3012947.log
+vacuity latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/build/gate/vacuity/20261014T123622Z-3019924.log
+vacuity-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/build/gate/vacuity-self-test/20261014T123831Z-3022331.log
+assumptions latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/build/gate/assumptions/20261014T124056Z-3030145.log
+assumptions-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/build/gate/assumptions-self-test/20261014T124304Z-3037154.log

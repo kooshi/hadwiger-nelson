@@ -1,0 +1,4 @@
+Proofs.HadwigerNelson.Plane.OneClass.Pair: BINDER-DROPPED 1, IDENTICAL 18
+  BINDER-DROPPED         theorem  HadwigerNelson.OneClass.exists_admissibleOn_of_ae
+constants of the first dump: 19  BINDER-DROPPED 1  IDENTICAL 18  new in the second: 0
+MOVED OK: every listed change is as listed; nothing else moved

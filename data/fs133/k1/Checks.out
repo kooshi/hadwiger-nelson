@@ -1,0 +1,103 @@
+slot: admitted k133c: mem 6 GiB (hard cap), cpus 8,9
+@measurable_measure_prodMk_right : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α]
+  [inst_1 : MeasurableSpace β] {μ : Measure α} [SFinite μ] {s : Set (α × β)},
+  MeasurableSet s → Measurable fun y => μ ((fun x => (x, y)) ⁻¹' s)
+@Measure.ae_prod_iff_ae_ae : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α] [inst_1 : MeasurableSpace β]
+  {μ : Measure α} {ν : Measure β} [SFinite ν] {p : α × β → Prop},
+  MeasurableSet {x | p x} → ((∀ᵐ (z : α × β) ∂μ.prod ν, p z) ↔ ∀ᵐ (x : α) ∂μ, ∀ᵐ (y : β) ∂ν, p (x, y))
+@Measure.measure_ae_null_of_prod_null : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α]
+  [inst_1 : MeasurableSpace β] {μ : Measure α} {ν : Measure β} [SFinite ν] {s : Set (α × β)},
+  (μ.prod ν) s = 0 → (fun x => ν (Prod.mk x ⁻¹' s)) =ᵐ[μ] 0
+@lintegral_prod : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α] [inst_1 : MeasurableSpace β]
+  {μ : Measure α} {ν : Measure β} [SFinite ν] (f : α × β → ENNReal),
+  AEMeasurable f (μ.prod ν) → ∫⁻ (z : α × β), f z ∂μ.prod ν = ∫⁻ (x : α), ∫⁻ (y : β), f (x, y) ∂ν ∂μ
+@limsup_lintegral_le : ∀ {α : Type u_1} [inst : MeasurableSpace α] {μ : Measure α} {f : ℕ → α → ENNReal}
+  (g : α → ENNReal),
+  (∀ (n : ℕ), Measurable (f n)) →
+    (∀ (n : ℕ), f n ≤ᵐ[μ] g) →
+      ∫⁻ (a : α), g a ∂μ ≠ ⊤ →
+        Filter.limsup (fun n => ∫⁻ (a : α), f n a ∂μ) Filter.atTop ≤
+          ∫⁻ (a : α), Filter.limsup (fun n => f n a) Filter.atTop ∂μ
+@lintegral_liminf_le : ∀ {α : Type u_1} {m : MeasurableSpace α} {μ : Measure α} {ι : Type u_2} {f : ι → α → ENNReal}
+  {u : Filter ι} [u.IsCountablyGenerated],
+  (∀ (i : ι), Measurable (f i)) →
+    ∫⁻ (a : α), Filter.liminf (fun i => f i a) u ∂μ ≤ Filter.liminf (fun i => ∫⁻ (a : α), f i a ∂μ) u
+@Filter.limsup_le_limsup_of_le : ∀ {α : Type u_1} {β : Type u_2} [inst : ConditionallyCompleteLattice β]
+  {f g : Filter α},
+  f ≤ g →
+    ∀ {u : α → β},
+      autoParam (Filter.IsCoboundedUnder (fun x1 x2 => x1 ≤ x2) f u) Filter.limsup_le_limsup_of_le._auto_1 →
+        autoParam (Filter.IsBoundedUnder (fun x1 x2 => x1 ≤ x2) g u) Filter.limsup_le_limsup_of_le._auto_3 →
+          Filter.limsup u f ≤ Filter.limsup u g
+@tendsto_natCast_atTop_atTop : ∀ {R : Type u_1} [inst : Semiring R] [inst_1 : PartialOrder R] [IsOrderedRing R]
+  [Archimedean R], Filter.Tendsto Nat.cast Filter.atTop Filter.atTop
+@inner_map_polarization : ∀ {V : Type u_1} [inst : SeminormedAddCommGroup V] [inst_1 : InnerProductSpace ℂ V]
+  (T : V →ₗ[ℂ] V) (x y : V),
+  inner ℂ (T y) x =
+    (inner ℂ (T (x + y)) (x + y) - inner ℂ (T (x - y)) (x - y) +
+          Complex.I * inner ℂ (T (x + Complex.I • y)) (x + Complex.I • y) -
+        Complex.I * inner ℂ (T (x - Complex.I • y)) (x - Complex.I • y)) /
+      4
+@Submodule.sub_starProjection_mem_orthogonal : ∀ {𝕜 : Type u_1} {E : Type u_2} [inst : RCLike 𝕜]
+  [inst_1 : NormedAddCommGroup E] [inst_2 : InnerProductSpace 𝕜 E] {K : Submodule 𝕜 E}
+  [inst_3 : K.HasOrthogonalProjection] (v : E), v - K.starProjection v ∈ Kᗮ
+@Lp.compMeasurePreserving : {α : Type u_1} →
+  {E : Type u_2} →
+    {m : MeasurableSpace α} →
+      {p : ENNReal} →
+        {μ : Measure α} →
+          [inst : NormedAddCommGroup E] →
+            {β : Type u_3} →
+              [inst_1 : MeasurableSpace β] →
+                {μb : Measure β} → (f : α → β) → MeasurePreserving f μ μb → ↥(Lp E p μb) →+ ↥(Lp E p μ)
+@ProbabilityMeasure.continuous_map : ∀ {Ω : Type u_1} {Ω' : Type u_2} [inst : MeasurableSpace Ω]
+  [inst_1 : MeasurableSpace Ω'] [inst_2 : TopologicalSpace Ω] [inst_3 : OpensMeasurableSpace Ω]
+  [inst_4 : TopologicalSpace Ω'] [inst_5 : BorelSpace Ω'] {f : Ω → Ω'} (f_cont : Continuous f),
+  Continuous fun ν => ν.map ⋯
+Module.Basis.ofVectorSpace : (K : Type u_1) →
+  (V : Type u_2) →
+    [inst : DivisionRing K] →
+      [inst_1 : AddCommGroup V] → [inst_2 : Module K V] → Module.Basis (↑(Module.Basis.ofVectorSpaceIndex K V)) K V
+@SimpleGraph.Embedding.induce : {V : Type u_1} → {G : SimpleGraph V} → (s : Set V) → SimpleGraph.induce s G ↪g G
+@Finset.rado_selection : ∀ {α : Type u_1} {β : α → Type u_2} [∀ (a : α), Finite (β a)] (g : Finset α → (a : α) → β a),
+  ∃ χ, ∀ (s : Finset α), ∃ t, s ⊆ t ∧ ∀ x ∈ s, χ x = g t x
+@IsCompact.nonempty_iInter_of_directed_nonempty_isCompact_isClosed : ∀ {X : Type u_1} [inst : TopologicalSpace X]
+  {ι : Type u_2} [hι : Nonempty ι] (t : ι → Set X),
+  Directed (fun x1 x2 => x1 ⊇ x2) t →
+    (∀ (i : ι), (t i).Nonempty) → (∀ (i : ι), IsCompact (t i)) → (∀ (i : ι), IsClosed (t i)) → (⋂ i, t i).Nonempty
+Algebraic.countable : ∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [IsDomain R] [inst_2 : CommRing A]
+  [IsDomain A] [inst_4 : Algebra R A] [Module.IsTorsionFree R A] [Countable R], {x | IsAlgebraic R x}.Countable
+@NullMeasurableSet.exists_measurable_subset_ae_eq : ∀ {α : Type u_1} {m0 : MeasurableSpace α} {μ : Measure α}
+  {s : Set α}, NullMeasurableSet s μ → ∃ t ⊆ s, MeasurableSet t ∧ t =ᵐ[μ] s
+@Besicovitch.ae_tendsto_measure_inter_div : ∀ {β : Type u_1} [inst : MetricSpace β] [inst_1 : MeasurableSpace β]
+  [BorelSpace β] [SecondCountableTopology β] [HasBesicovitchCovering β] (μ : Measure β) [IsLocallyFiniteMeasure μ]
+  (s : Set β),
+  ∀ᵐ (x : β) ∂μ.restrict s,
+    Filter.Tendsto (fun r => μ (s ∩ Metric.closedBall x r) / μ (Metric.closedBall x r)) (nhdsWithin 0 (Set.Ioi 0))
+      (nhds 1)
+@Subadditive.tendsto_lim : ∀ {u : ℕ → ℝ} (h : Subadditive u),
+  BddBelow (Set.range fun n => u n / ↑n) → Filter.Tendsto (fun n => u n / ↑n) Filter.atTop (nhds h.lim)
+@SimpleGraph.IsIndepSet.card_le_indepNum : ∀ {α : Type u_1} {G : SimpleGraph α} [Finite α] {t : Finset α},
+  G.IsIndepSet ↑t → t.card ≤ G.indepNum
+@SimpleGraph.exists_isNIndepSet_indepNum : ∀ {α : Type u_1} {G : SimpleGraph α}, ∃ s, G.IsNIndepSet G.indepNum s
+@SimpleGraph.circulantGraph_adj : ∀ {G : Type u_1} [inst : AddGroup G] (s : Set G) (a b : G),
+  (SimpleGraph.circulantGraph s).Adj a b = (¬a = b ∧ (a - b ∈ s ∨ b - a ∈ s))
+@Unitary.linearIsometryEquiv : {𝕜 : Type u_1} →
+  [inst : RCLike 𝕜] →
+    {H : Type u_2} →
+      [inst_1 : NormedAddCommGroup H] →
+        [inst_2 : InnerProductSpace 𝕜 H] → [inst_3 : CompleteSpace H] → ↥(unitary (H →L[𝕜] H)) ≃* (H ≃ₗᵢ[𝕜] H)
+@isCompact_univ_pi : ∀ {ι : Type u_1} {X : ι → Type u_2} [inst : (i : ι) → TopologicalSpace (X i)]
+  {s : (i : ι) → Set (X i)}, (∀ (i : ι), IsCompact (s i)) → IsCompact (Set.univ.pi s)
+@Module.free_of_finite_type_torsion_free' : ∀ {R : Type u_1} [inst : CommRing R] {M : Type u_2}
+  [inst_1 : AddCommGroup M] [inst_2 : Module R M] [IsPrincipalIdealRing R] [IsDomain R] [Module.Finite R M]
+  [Module.IsTorsionFree R M], Module.Free R M
+@lp.single : {α : Type u_1} →
+  {E : α → Type u_2} →
+    [inst : (i : α) → NormedAddCommGroup (E i)] → [DecidableEq α] → (p : ENNReal) → (i : α) → E i → ↥(lp E p)
+data/fs133/k1/Checks.lean:31:8: error(lean.unknownIdentifier): Unknown constant `MeasurableEquiv.map_count`
+@integral_map : ∀ {α : Type u_1} {G : Type u_2} [inst : NormedAddCommGroup G] [inst_1 : NormedSpace ℝ G]
+  {m : MeasurableSpace α} {μ : Measure α} {β : Type u_3} [inst_2 : MeasurableSpace β] {φ : α → β},
+  AEMeasurable φ μ →
+    ∀ {f : β → G}, AEStronglyMeasurable f (Measure.map φ μ) → ∫ (y : β), f y ∂Measure.map φ μ = ∫ (x : α), f (φ x) ∂μ
+@ENNReal.ofReal_toReal : ∀ {a : ENNReal}, a ≠ ⊤ → ENNReal.ofReal a.toReal = a

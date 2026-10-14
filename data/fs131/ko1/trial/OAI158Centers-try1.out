@@ -1,0 +1,123 @@
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:95:45: error: unsolved goals
+z : ℂ
+h : lift z = 0
+this : WithLp.fst (lift z) = 0
+⊢ False
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:101:66: error: unsolved goals
+z : ℂ
+⊢ √(WithLp.fst (lift z) ^ 2 + ‖WithLp.snd (lift z)‖ ^ 2) = √(1 + ‖z‖ ^ 2)
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:118:4: error: Type mismatch: After simplification, term
+  Eq.symm hab
+ has type
+  1 = a + b
+but is expected to have type
+  WithLp.fst (lift (↑a * z + ↑b * w)) = a * WithLp.fst (lift z) + b * WithLp.fst (lift w)
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:131:30: error(lean.unknownIdentifier): Unknown identifier `lift_fst`
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:132:30: error(lean.unknownIdentifier): Unknown identifier `lift_snd`
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:133:45: error: Application type mismatch: The argument
+  hsnd
+has type
+  (r * a) • WithLp.snd (lift z) = b • WithLp.snd (lift w)
+but is expected to have type
+  (fun x => b • x) z = (fun x => b • x) w
+in the application
+  smul_right_injective ℂ (LT.lt.ne' hb) hsnd
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:131:53: warning: This simp argument is unused:
+  mul_one
+
+Hint: Omit it from the simp argument list.
+  simp only [WithLp.smul_fst, lift_fst, smul_eq_mul,̵ ̵m̵u̵l̵_̵o̵n̵e̵] at hfst
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:132:51: warning: This simp argument is unused:
+  hfst
+
+Hint: Omit it from the simp argument list.
+  simp only [WithLp.smul_snd, lift_snd, smul_smul,̵ ̵h̵f̵s̵t̵] at hsnd
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:406:28: error(lean.unknownIdentifier): Unknown constant `Set.mem_ofPred_eq`
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:439:18: error: Application type mismatch: The argument
+  fun point => point + v
+has type
+  ℂ → ℂ
+of sort `Type` but is expected to have type
+  AEMeasurable ?m.6 ↑μ
+of sort `Prop` in the application
+  μ.map fun point => point + v
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:463:18: error: Application type mismatch: The argument
+  O
+has type
+  ℂ ≃ₗᵢ[ℝ] ℂ
+of sort `Type` but is expected to have type
+  AEMeasurable ?m.18 ↑μ
+of sort `Prop` in the application
+  μ.map O
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:480:2: warning: missing doc string for public field Embedding.hom
+
+Note: This linter can be disabled with `set_option linter.missingDocs false`
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:481:2: warning: missing doc string for public field Embedding.measurableEmbedding
+
+Note: This linter can be disabled with `set_option linter.missingDocs false`
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:554:50: error(lean.unknownIdentifier): Unknown constant `Set.mem_ofPred_eq`
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:596:49: error(lean.unknownIdentifier): Unknown constant `Set.mem_ofPred_eq`
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:596:2: error: Type mismatch: After simplification, term
+  Eq.symm (lintegral_indicator_one hset)
+ has type
+  @Eq ℝ≥0∞ (↑p.1 {d | d / p.2 ∈ e.ordinary ∧ e.coordinate (d / p.2) ∈ s})
+    (∫⁻ (a : G), if a ∈ {d | d / p.2 ∈ e.ordinary ∧ e.coordinate (d / p.2) ∈ s} then 1 else 0 ∂↑p.1)
+but is expected to have type
+  @Eq ℝ≥0∞ (↑p.1 {d | d / p.2 ∈ e.ordinary ∧ e.coordinate (d / p.2) ∈ s})
+    (∫⁻ (b : G), if b / p.2 ∈ e.ordinary ∧ e.coordinate (b / p.2) ∈ s then 1 else 0 ∂↑p.1)
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:615:6: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsProbabilityMeasure (Measure.map (fun d => e.coordinate (d / z)) (↑μ)[|e.coset z])
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:625:4: error: No goals to be solved
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:623:10: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:629:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:680:31: error: Application type mismatch: The argument
+  fun point => point + -v
+has type
+  ℂ → ℂ
+of sort `Type` but is expected to have type
+  AEMeasurable ?m.33 ↑(e.frequencyLaw μ z)
+of sort `Prop` in the application
+  (e.frequencyLaw μ z).map fun point => point + -v
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:685:13: error(lean.unknownIdentifier): Unknown identifier `ite_eq_right`
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:685:2: error: `simp` made no progress
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:709:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:814:26: error: Application type mismatch: The argument
+  T
+has type
+  G ≃* G
+of sort `Type u_1` but is expected to have type
+  AEMeasurable ?m.51 ↑μ
+of sort `Prop` in the application
+  μ.map T
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:815:31: error: Application type mismatch: The argument
+  O
+has type
+  ℂ ≃ₗᵢ[ℝ] ℂ
+of sort `Type` but is expected to have type
+  AEMeasurable ?m.60 ↑(e.frequencyLaw μ z)
+of sort `Prop` in the application
+  (e.frequencyLaw μ z).map O
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:817:32: error: Application type mismatch: The argument
+  T
+has type
+  G ≃* G
+of sort `Type u_1` but is expected to have type
+  AEMeasurable ?m.78 ↑μ
+of sort `Prop` in the application
+  μ.map T
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:822:13: error(lean.unknownIdentifier): Unknown identifier `ite_eq_right`
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:822:2: error: `simp` made no progress
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:830:20: error: Application type mismatch: The argument
+  T
+has type
+  G ≃* G
+of sort `Type u_1` but is expected to have type
+  AEMeasurable ?m.51 ↑μ
+of sort `Prop` in the application
+  μ.map T

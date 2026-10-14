@@ -1,0 +1,14 @@
+recorded 93 constants in data/fs131/ipb1/readback/laneC2/instance-constants.txt
+DIFFERENT	lemma	§.BoundedMeasurable.prod_act_project_lift	type, erased print, at char 1596: release …asure [(p u_1)]) @0) _)) _) _) @6)) ((((c Subtype.val [(S (p u_1))]) (pi.d a @0 (c Complex []))) (lam.d x (pi.d a @0 (c Complex [])) ((((((c… | here …asure [(p u_1)]) @0) _)) _) _) @6)) ((((((c Finset.prod [(p u_4),(p u_1)]) @17) (pi.d a @0 (c Complex [])))
+  aux          AUX-ABSENT       14
+  aux          AUX-DIFFERS      21
+  aux          IDENTICAL        52
+  aux          UP-TO-INSTANCES  3
+  definition   IDENTICAL        44
+  definition   UP-TO-INSTANCES  10
+  lemma        DIFFERENT        1
+  lemma        IDENTICAL        158
+  lemma        UP-TO-INSTANCES  61
+  constants differing inside instance and proof arguments: 93
+constants: 364  failing: 1  fatal: 0
+READBACK FAILED

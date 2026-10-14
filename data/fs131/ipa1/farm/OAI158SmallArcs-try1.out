@@ -1,0 +1,45 @@
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 4,5
+Proofs/HadwigerNelson/Outside/OAI158SmallArcs.lean:201:57: error(lean.unknownIdentifier): Unknown identifier `ite_eq_left`
+Proofs/HadwigerNelson/Outside/OAI158SmallArcs.lean:200:46: error: unsolved goals
+X : Type u_1
+inst✝¹ : MeasurableSpace X
+μ : Measure X
+inst✝ : IsProbabilityMeasure μ
+z : X → ℂ
+hz : Measurable z
+hu : ∀ (x : X), ‖z x‖ = 1
+N : ℕ
+c : ℝ
+hc : 0 ≤ c
+hm : ∀ (n : ℕ), 0 < n → n < N → ‖∫ (x : X), z x ^ n ∂μ‖ ≤ c
+i : ℕ
+hi : i ∈ Finset.range N
+⊢ (if i ∈ Finset.range N then 1 else 0) + ∑ x ∈ Finset.range N, c = ?m.285 i
+Proofs/HadwigerNelson/Outside/OAI158SmallArcs.lean:202:8: error: `simp` made no progress
+Proofs/HadwigerNelson/Outside/OAI158SmallArcs.lean:312:6: error: Function expected at
+  compProd_map_condDistrib (Measurable.aemeasurable hp)
+but this term has type
+  Measure.map ?m.204 ?m.212 ⊗ₘ condDistrib p ?m.204 ?m.212 = Measure.map (fun a => (?m.204 a, p a)) ?m.212
+
+Note: Expected a function because this term is being applied to the argument
+  hb.aemeasurable
+Proofs/HadwigerNelson/Outside/OAI158SmallArcs.lean:307:50: error: unsolved goals
+X : Type u_1
+Y : Type u_2
+G : Type u_3
+inst✝⁶ : MeasurableSpace X
+inst✝⁵ : MeasurableSpace Y
+inst✝⁴ : MeasurableSpace G
+inst✝³ : MeasurableEq G
+inst✝² : StandardBorelSpace G
+inst✝¹ : Nonempty G
+μ : Measure X
+inst✝ : IsFiniteMeasure μ
+p : X → Y
+b : X → G
+hp : Measurable p
+hb : Measurable b
+ha : ∀ᵐ (y : Y) ∂Measure.map p μ, ∀ᵐ (d : G) ∂(condDistrib b p μ) y, 0 < ((condDistrib b p μ) y) {d}
+hm : MeasurableSet {z | 0 < ((condDistrib b p μ) z.1) {z.2}}
+he : ∀ᵐ (z : Y × G) ∂Measure.map p μ ⊗ₘ condDistrib b p μ, 0 < ((condDistrib b p μ) z.1) {z.2}
+⊢ ∀ᵐ (x : X) ∂μ, 0 < ((condDistrib b p μ) (p x)) {b x}

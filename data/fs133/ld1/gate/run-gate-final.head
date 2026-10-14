@@ -1,0 +1,49 @@
+HEAD=860538ddfcc8d420ff13970441aa58c03253b900  2026-10-14T14:15:16Z  host=the machine cores=12 mem=31 GiB
+status (tracked files modified, and untracked outside data/ and plans/):
+--
+main (80ac103c1) against this commit, paths that differ under Proofs/ Proofs.lean scripts/ tools/ ARCHITECTURE.md:
+ARCHITECTURE.md
+Proofs.lean
+Proofs/HadwigerNelson/Outside/OAI158Rigidity.lean
+Proofs/HadwigerNelson/Plane/OneClass/Algebraic.lean
+Proofs/HadwigerNelson/Plane/OneClass/Defs.lean
+Proofs/HadwigerNelson/Plane/OneClass/Field.lean
+Proofs/HadwigerNelson/Plane/OneClass/Fractional.lean
+Proofs/HadwigerNelson/Plane/OneClass/InvariantLaw.lean
+Proofs/HadwigerNelson/Plane/OneClass/Pair.lean
+Proofs/HadwigerNelson/Plane/OneClass/SectionDensity.lean
+scripts/Assumptions.lean
+scripts/Axioms.lean
+scripts/vacuity-baseline.txt
+tools/fs133_ia1_axioms.py
+tools/fs133_ia1_moved.py
+tools/fs133_ia1_port.py
+tools/fs133_ia1_readback.py
+tools/fs133_ia1_readback_port.py
+tools/fs133_ia1_rebuild.py
+tools/fs133_ia1_statements.py
+tools/fs133_ib1_axioms.py
+tools/fs133_ib1_moved.py
+tools/fs133_ib1_readback.py
+tools/fs133_ib2_axioms.py
+tools/fs133_ib2_moved.py
+tools/fs133_ib2_readback.py
+tools/fs133_icd1_axioms.py
+tools/fs133_icd1_moved.py
+tools/fs133_icd1_readback.py
+tools/fs133_ipq1_axioms.py
+tools/fs133_ipq1_moved.py
+tools/fs133_ipq1_readback.py
+tools/fs133_ld1_code_only.py
+tools/fs133_ld1_moved.py
+tools/fs133_ld1_readback.py
+tools/fs133_ld1_records.py
+--
+dupnames latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs133-wk1/build/gate/dupnames/20261014T142356Z-3406384.log
+dupnames-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs133-wk1/build/gate/dupnames-self-test/20261014T142401Z-3406726.log
+axioms latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs133-wk1/build/gate/axioms/20261014T142427Z-3409082.log
+axioms-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs133-wk1/build/gate/axioms-self-test/20261014T142438Z-3409886.log
+vacuity latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs133-wk1/build/gate/vacuity/20261014T142826Z-3421033.log
+vacuity-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs133-wk1/build/gate/vacuity-self-test/20261014T143048Z-3423910.log
+assumptions latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs133-wk1/build/gate/assumptions/20261014T143329Z-3429647.log
+assumptions-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs133-wk1/build/gate/assumptions-self-test/20261014T143613Z-3433749.log

@@ -1,0 +1,117 @@
+# Brief FS131-IJ3 — the five-colour chain: M2b's last leaf, then the entropy side proved
+
+*Written 2026-10-14 16:13 UTC by Keryx, the coordinator (the top-level session), at Kooshi's word of 2026-10-13. Launch line: "Your brief is on disk: read it in full first."*
+
+brief: FS131-IJ3
+  identity: de Bruijn, the implementer — your agent file (`.claude/agents/debruijn-implementer.md`) is your identity and your lane's workflow; you run on Opus, as every implementer now does (inventory item 137)
+  role: the chain's implementer — first M2b's last leaf (`archimedean_support`, with the eight private lemmas of M10's module it reads made public), which completes the road from the continuity group to M11; then the chain's entropy side: lane A (`exists_admissiblePair`, one admissible pair at every real number field, planned and proved here), the entropy split's remaining leaves, the positive-entropy lanes M5-E and M5-P, and M9-S last, as far as you reach
+  launch: now, in the last implementer's tree (its job is finished; nobody else writes there) on a new branch cut from its branch; three other jobs share the build slot (M11's implementer, the count's last lanes, the certificate checker)
+  mission: § Why this job
+  statements: § The statements
+  acceptance: § Done means
+  yours: § What is yours to decide
+  fences: none — nothing here is blind to you
+  channel: message the coordinator ("main") by SendMessage **at once** if a leaf is false as stated or needs a hypothesis it lacks, if a lane's first two leaves price it above twice its plan (or, for lane A, above 1,000 lines), if a stored statement lacks a class binder its section declares (item 847's defect), and with one line when `bochnerOn_tauPrime` prints the standard three; the report goes to `data/fs131/reports/FS131-IJ3.md` and to "main" as your hand-back
+  standing rules: plans/STANDING-RULES.md — part of this brief; read it in full. Also `LEAN.md` in full, and `RUNNING.md` § Building and § Make the gate fail, and watch it fail
+  record: `plans/FS131-IJ3-implementation.md` (new, on branch `fs131-wt5`)
+  touches: in the worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wq1` on a **new branch `fs131-wt5`** that you cut from its head (`fs131-wt4` at `226eae199`; its build is current for that commit): in `Proofs/HadwigerNelson/Rigidity/ContinuityGroup.lean`, `private` removed from the eight lemmas `BochnerTau` reads through `open private` and nothing else (item 876 ruling 1; M11's implementer removes it from three others in that file on another branch — touch no other line), and `BochnerTau`'s `open private` line dropped; **proofs, private helpers and import lines only — no statement changes, no definition changes** in `Proofs/HadwigerNelson/Rigidity/BochnerTau.lean`, `UnitCircle.lean` (lane A), `EntropySplitMax.lean` (the split), `EntropyFibres.lean` (M5-E), `PositiveEntropy.lean` (M5-P), and in `ChainAtTA.lean` the one proof of `noRamifiedStableDyadic_of_tca` (M9-S) and nothing else; their `ARCHITECTURE.md` rows where a cell's state changes; your checks under `tools/` named for this job; `plans/FS131-IJ3-implementation.md`; `data/fs131/ij3/`; `data/fs131/reports/FS131-IJ3.md`. **Not** M11's modules, the count's modules, `ClassRatio.lean`, `RingScope.lean`'s `unitRing_eq_stableIntegers` (off the path), any module under `Outside/`, the declared printed theorem `positive_entropy_rigidity`. Untracked files from older jobs are in this tree (`data/fs131/iq1/stmt/` and plain-text dumps under `data/fs131/idg1/`, `ig1/`, `ip23/`, `itt1/`, `itk1/`, `ij1/`, `ij2/`): leave them. Nothing on `main`
+  budget: about 400k by the harness's count, as guidance; hand back at a saved stage before about 500k — read your token count at every saved stage
+
+Hello. The last implementer proved M3 and the hard leaf of M2b, leaving one leaf of M2b with its route written down.
+After it, what the chain's line still has unproved outside the count, M11 and M13 is its entropy side: one admissible
+pair, the entropy split's leaves, and the two positive-entropy files. You take all of it, in that order.
+
+## Why this job
+
+Kooshi's rule for what goes out:
+
+> W2: (2026-10-13, answering the choice between the two publishable forms) I choose the second form. Any finding of ours must be formalized. I'd prefer to formalize the entire chain, so at some point I'd like to price the EL theorem to see what it would take to formalize as well.
+> — source: data/fs131/REQUEST-2026-10-13.md
+
+`archimedean_support` is the last leaf between M10 and M11; the entropy side is the chain's positive-entropy half, read by
+its headline through the entropy split.
+
+## The statements
+
+The dated lines of the chain's claim list (`data/fs131/claims-NF2.md`) that say what M2b's consumer reads and what the
+entropy side is now:
+
+> - 2026-10-14 — **`BochnerOn` is read by M11 only, at `τ′_∅` = `Rigidity.tauPrime F`** (FS131-KR1): M12's count passes from spectrum on `T + A` to continuity by dominated convergence.
+> — source: data/fs131/claims-NF2.md § Dated lines
+
+> - 2026-10-14 — **NF2-LEAF-20 is narrowed: the entropy split is read at one rotation (FS131-KN7, Amendment 2 of its brief).** `Rigidity.EntropySplit` asks for entropy zero at one rotation by a non-torsion unit vector, which is all `mrPlus_of_split_of_carried` reads; PE-2 at every rotation is `Rigidity.EntropySplitEvery`, which implies it and is off the headline's path. Off the path with it: Lemma W for every non-torsion vector and the torsion case (X02D ll. 156, 166); on the path: one admissible `Γ`. `mrPlus_of_split_of_carried` is now a theorem on the standard three axioms.
+> — source: data/fs131/claims-NF2.md § Dated lines
+
+> - 2026-10-14 — **The finite-fibred step reads the declared clause (4) as stated; `haar_or_zero_entropy` takes no `PolishSpace` (FS131-KN9, the coordinator's ruling).** Over the Borel σ-algebra of `X ⧸ G` for every compact T1 group: a finite partition whose cells lie in translates of an open `U` with `(U − U) ∩ G = {0}` — on which the projection is an open embedding, so images of Borel subsets of a cell are Borel — and the pattern of a partition `P` on the cosets give `H_n(P) ≤ H_n(pattern) + log |Q|` (`Rigidity.ksEntropy_eq_zero_iff_of_finite`, module `Rigidity/EntropyFibres`; a plan, not a proof). The binder `[PolishSpace X]` added by FS131-KN8 (inventory item 761) is gone: no Lusin–Souslin is read. The kernel's dump shows exactly that binder removed, and the statement is again FS131-KN7's.
+> — source: data/fs131/claims-NF2.md § Dated lines
+
+The two entropy planners' hand-backs and the last chain implementer's, as I logged them (their words in quotation marks,
+the rulings mine; item 761's ruling 4 carries a note of mine on lane A, unchecked, for you to use or discard):
+
+> 761. **FS131-KN8 handed back: the chain's fourth planner, at stage 6 (2026-10-14 06:55 UTC logged; "JOB FS131-KN8 — STAGE 6 SAVED … Items 1–4 and 6–8 of § Done means are done … Item 5 is done in words"; 471k by the harness's count — not to be resumed; branch `fs131-wk8` at `b531d058e`, tree `fs131-wq1`; record `plans/FS131-KN8-chain-split.md` there).** Its words: four modules typed with `sorry` at the leaves only — `Rigidity/DualGroup` (M4: "the dual of a discrete abelian group as a compact group under the pointwise topology. For countable G it is Polish, its Borel σ-algebra is the cylinder one, and it is a standard Borel space. Also separation of points, Fourier uniqueness, and Haar measure"), `Rigidity/UnitCircle` ("`AdmissiblePair` is the page's admissible Γ"), `Rigidity/Pieces` (M6: "PE-1′, the chain of pieces, Lemma Γ's steps, and Lemma Γ itself … Its hypothesis is `ErgodicSMul p.subgroup (Dual F) ρ`, which is exactly what the release's decomposition outputs"), `Rigidity/EntropySplitMax` (M7b: "the split `entropySplit_of_admissiblePair : EntropySplit F`, from one admissible pair"); "`haar_or_zero_entropy`'s proof does need `[PolishSpace X]` … The kernel's dump shows exactly ` [@PolishSpace.{u_1} X inst_1]` inserted (control fired) and the other three constants byte-identical"; "three statements of mine were false as first typed … lacked `[NumberField F]` … I corrected them before committing. No statement already typed in the chain is defective"; build 2 exit 0, 73 `sorry` warnings and no other; lint 14 passed; architecture PASS. **My receipt:** the five commits exist on `fs131-wk8`; from its compiled tree under the memory tool (scratch `kn8/Ax.lean`): `haar_or_zero_entropy`'s binders read `[BorelSpace X] [PolishSpace X]`; `Rigidity.polishSpace_dual : ∀ (G) [AddCommGroup G] [Countable G], PolishSpace (AddChar G Circle)`; `entropySplit_of_admissiblePair : ∀ {F} [NumberField ↥F] (p : AdmissiblePair F), EntropySplit F`, its axioms the standard three and `sorryAx` (a skeleton, as reported). **Rulings, four parts each.** (1) *The branch:* stays off `main` (a skeleton), the base of the chain's next lanes (D, U, G, S of record § 5.1); high. (2) *Lane PD, Pontryagin duality for a countable discrete group (D1, D2):* **formalize**, a planner first (FS131-KPD1, item 762), the declared form only as a fallback priced over a week, which comes to me (and an axiom added to the library is reported to Kooshi before it is declared); alternative, declare D2 now from `[Rudin1962]` — declined: W2, "when unsure, formalize", and the counter-priors on Lean cost; and a shorter route is in sight (below); high. **A route I saw while reading, labelled mine and unchecked, for the planner:** the one use (record § 2.3: "PE-1′'s total irreducibility needs it at `N = Y^⊥ = 0`") is "a closed subgroup `Y` of `Ĝ` with `Y^⊥ = 0` is all of `Ĝ`"; for discrete `G` a basic neighbourhood reads finitely many points, so restricting to the finitely generated `N = ⟨g₁, …, g_k⟩` (onto `N̂` since the circle is divisible) reduces it to closed subgroups of a torus times a finite group, where annihilators are Kronecker's theorem — no Haar measure, no `L²`, no Peter–Weyl. (3) *Tate's self-duality and strong approximation (M8b's inputs, prior-art debts):* priced by M8b's planner on record § Stage 4's vocabulary; bibliography rows (`[Tate1950]` or `[Weil1967]`) when a job reads one; not now; high. (4) *Lane A, `exists_admissiblePair` over every real number field:* a planner-and-implementer job in the queue; for its brief, a note of mine, unchecked: one completely split prime needs no Chebotarev — for `f` the minimal polynomial of a primitive element of the Galois closure, a prime dividing some `f(n)` and not the discriminant has a degree-one prime above it, hence (Galois) splits completely, and Schur's argument gives infinitely many such primes; medium. (5) *`Rigidity.entropySplit` sits in `ChainAtTA`, upstream of M7b:* owed to the chain's landing — the leaf moves downstream of `EntropySplitMax` with its statement unchanged, or the headline is assembled downstream (an import cycle otherwise); high. (6) *Its generalizations* (step 2 for any group action; the pigeonhole's `α′`; Herglotz–Bochner idle at countable `G`, item 757): filed as its dated lines. (7) *The three statements false as first typed:* credit for catching them before any commit; no workflow change. **Filed:** its four dated lines in `data/fs131/claims-NF2.md`, verbatim, this commit. **Owed to the second filing:** its `LEAN.md` lines (record §§ 3.5, 5.2) and the `[Rudin1962]` reading-status line (§§ 1.5, 2.1 cited, recalled, not read). **The queue's order, re-ruled:** the chain's PD planner takes this slot ahead of the density equality's lanes C and D; alternative, the density lanes now (interleaving) — declined: their landing waits on the port (about four lanes, 12–18 hours by its plan), so they have slack, while PD is on the chain's longest path; medium-high; the density lanes take the next free slot.
+> — source: plans/FS131-close-inventory.md
+
+> 791. **FS131-KN9 handed back: M5 and M9 typed and planned, M8b decided in words (2026-10-14 12:45 UTC logged; "JOB FS131-KN9 — DONE"; 531k by the harness's count — past the line, not to be resumed; branch `fs131-wk9` at `aee998a46`, tree `fs131-wch`; record `plans/FS131-KN9-chain-zero-entropy.md` there).** From its hand-back message: "**M5 is typed and planned** … A new module, `Rigidity/EntropyFibres` (9 leaves) … `Rigidity/PositiveEntropy` (10 leaves, `haar_or_zero_entropy` last)"; "**`haar_or_zero_entropy` no longer takes `[PolishSpace X]`** … The kernel's dump shows exactly that binder removed and nothing else changed … The statement is again FS131-KN7's, character for character"; "**M9 is typed in a new module, `Rigidity/RingScope`** … R ⊆ O′, proved; c·O′ ⊆ R, over every real number field; R = O′ in the scope: typed, off M8b's path, planned in words only"; "**M8b is decided in words, not typed** … I recommend packaging it as a structure `TateModel F`: the five facts M8b reads"; "Tate's duality: Mathlib at the pin has none of it … I recommend formalizing it as lane T, with a planner first. My price, from Mathlib's state and not from an elaborated leaf: several days, two to four thousand lines"; "Strong approximation and Lusin–Souslin: not needed on the routes chosen"; builds 1–4 exit 0, lint passed; an architecture cell failure inherited from the join (fixed on `fs131-wdg` by FS131-IDG1). **My receipt:** the six commits exist; from its compiled tree under the memory tool (scratch `kn9/Ax.lean`): `haar_or_zero_entropy`'s binders read `[AddCommGroup X] [TopologicalSpace X] [MeasurableSpace X] [BorelSpace X]`, no `PolishSpace`; `unitRing_le_stableIntegers` on the standard three. **Rulings, four parts each.** (1) *The `TateModel F` interface:* approved — a structure whose fields are exactly the five facts of its record § 4.1 that M8b reads, each stated as X01D states it, quantifying over nothing of ours beyond what X01D reads; its existence is lane T's leaf; M8b's records print `sorryAx` through it until lane T lands; it is typed first by the next planner (FS131-KT1, item 792) so that lane T and M8b's parts 2–4 can run beside each other; alternative, M8b typed straight over a construction — declined, it serializes the longest stretch of the chain; high. (2) *Lane T, Tate's duality:* **formalize**, a planner first (the same job, after the interface), measuring both forms of the local character on its first two leaves and pricing from them; no axiom declared; if priced over a week, a message to me first; alternative, declare it now from `[Tate1950]` — declined (W2; "when unsure, formalize"); high. (3) *`noRamifiedStableDyadic_of_tca` (lane M9-S):* proved in place in `Rigidity/ChainAtTA` by an implementer, a proof only, off the headline's path; medium-high. (4) *M12's question (does T-C(A) read `R = O′`, or only Lemma C (d)):* carried to M12's planner. (5) *The `Pieces` docstring line:* sent to FS131-IG1 as its Amendment 1. **Filed this commit:** its four dated lines in `data/fs131/claims-NF2.md`, verbatim; two `BIBLIOGRAPHY.md` rows, `[Tate1950]` and `[Weil1967]`, from its drafts (not held, not read; `tools/bib_audit.py` passes). **Owed to the second filing:** its four `LEAN.md` lines. **The chain's ready implementer lanes now:** M5-E, M5-P, M9-R, M9-S, P2, P3 (and S after G, P2, E).
+> — source: plans/FS131-close-inventory.md
+
+> 876. **FS131-IJ2 handed back at stage 5: M3 proved; M2b's hard leaf proved, one leaf left (logged 2026-10-14 16:12 UTC; "JOB FS131-IJ2 — STAGE 5 SAVED"; 602k by the harness's count — past the line, not to be resumed; branch `fs131-wt4` at `226eae199`, tree `fs131-wq1`; record `plans/FS131-IJ2-implementation.md` there).** From its hand-back message: "`Rigidity.invariantMeasureOnClosed_of_countable : ∀ (F : Subfield ℝ) [Countable ↥(unitRing F)], InvariantMeasureOnClosed F` — [kernel], axioms exactly [propext, Classical.choice, Quot.sound] … every nonempty closed measurable set of colourings `R → Fin 4` stable under shifts and rotations carries a probability measure invariant under both. M3 has no leaf left"; "`Rigidity.exists_twisted_parts`, M2b's hard leaf — [kernel], standard three"; "`Rigidity.finite_quotient_nsmul` … [kernel], standard three"; "`Rigidity.bochnerOn_tauPrime` (J45 N2's ⟸ at S = ∅) — GAP at `archimedean_support` … 450–700 lines" with a five-step route (record § 5.7); `archTop`'s attribute on, the lint 14/14 with its control red before; "no statement and no definition changed … 189 constants of 8 modules … PASS, control 8/8"; M2b re-priced at 1,550–1,950 lines in all; `BochnerTau` reads eight private lemmas of `ContinuityGroup` through `open private`; M3's private helpers copy `main`'s `Plane/OneClass/InvariantLaw`'s; two docstrings owed corrections. **My receipts:** the six commits exist; from the tree's compiled library (scratch `ij2/Ax.lean`): `invariantMeasureOnClosed_of_countable` and `exists_twisted_parts` — each `[propext, Classical.choice, Quot.sound]`; a census of `sorry` in the chain line's `Rigidity/` files on this branch: `BochnerTau` 1, `UnitCircle` 1, `RingScope` 1, `EntropySplitMax` 6, `PositiveEntropy` 10, `EntropyFibres` 9, `ChainAtTA` 5, `ClassRatio` 3, the count's files (on their own branch). **Rulings, four parts.** (1) *The eight private lemmas read by `open private`:* made public by the next implementer, statements unchanged and dumped — one fact, reached in the open, as items 823 and 873 ruled; FS131-IM11 removes `private` from three others in the same file on another branch, and the two edits merge line by line; alternative, keep `open private` — declined, a rename would break a module silently; high. (2) *M3's private copies of `main`'s `InvariantLaw` helpers:* one shared public copy at the chain's landing (owed there); medium. (3) *The two docstrings:* to the docstring sweep. (4) *The next slot:* `archimedean_support` and the eight lemmas made public, then the chain's entropy side — the admissible pair (lane A), the split's leaves, M5-E and M5-P — to a fresh implementer in this tree (FS131-IJ3, item 877); high on the first part, medium on the bundling. **Predictions scored:** M3 at about 0.5 of plan; M2b's hard leaf alone near IJ1's whole-M2b price — the rate held for M3, not for M2b.
+> — source: plans/FS131-close-inventory.md
+
+**Your work, in order.** (1) **M2b's last leaf**: the eight lemmas made public first, then `archimedean_support` by the
+route in the last implementer's record `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wq1/plans/FS131-IJ2-implementation.md` § 5.7 (450–700 lines). (2) **Lane A**, `exists_admissiblePair` in
+`UnitCircle` — no planner has typed its children: plan it in your record first (its statement read aloud, its route, its
+leaves as private helpers), then prove it. (3) **The split's leaves** in `EntropySplitMax` (the planner's record `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wq1/plans/FS131-KN8-chain-split.md`).
+(4) **M5-E**, `EntropyFibres` (9 leaves), then **M5-P**, `PositiveEntropy` (10, `haar_or_zero_entropy` last) — the plan per
+leaf in `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wq1/plans/FS131-KN9-chain-zero-entropy.md` (§ 5.1 for the lanes). (5) **M9-S**, `noRamifiedStableDyadic_of_tca`, if you reach it. Re-price each lane
+from its first two leaves and say so.
+
+## Done means
+
+1. **Readback** (a saved stage): the quoted lines checked against their sources; each leaf's statement restated in one
+   line beside its plan; the stored statements of your files dumped from the built tree before any edit, every instance
+   and definition read for a class binder its section declares and its stored type lacks.
+2. **M2b complete** (a saved stage, and the one line to me when `bochnerOn_tauPrime` prints the standard three).
+3. **Lane A, the split, M5-E, M5-P, M9-S** (saved stages as leaves fall).
+4. **No statement and no definition changed** but the ruled `private`s, shown from the kernel's side against item 1's dump
+   (a planted change watched firing); one build under the slot with no warning from your files but their remaining
+   leaves'; the axioms of every public declaration of your files printed from the built tree, each listed, with a planted
+   record watched showing; the guarded lint with no finding in your files.
+5. **Drafts for the landing**, in your record: the audit's block; the models; any `LEAN.md` lines.
+6. The report in the standing rules' form. Leave no process running or queued.
+
+## What is yours to decide
+
+The proofs; private helpers; imports; the order inside each item after the first; lane A's route (mine in item 761 is a
+note, not a plan); another route for a leaf where its plan's does not go through (tell me which). An unread binder of a
+statement in your files is dropped under item 726's word, listed and named. Not yours: any other change to a statement
+or definition; the files listed as not yours; the landing.
+
+## The machine
+
+**This session is on the laptop: 12 cores, 31 GB; about 318 GB of disk free — do not copy compiled libraries between
+trees.** This tree's compiled library is current for `fs131-wt4`. One file through `lake env lean`: 3 to 24 seconds,
+3.6 GB.
+
+`env SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 python3 /home/kooshi/source/lean-dir/scripts/slot.py --mem <GiB> --cpus <n> --wait 7200 --name ij3 -- <command>`
+
+One file (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`): `--mem 4 --cpus 2` from inside your worktree, and
+run every command from inside it. The build: `--mem 10 --cpus 4 -- env MEMMAX=10G BATCH=8 ./scripts/build.sh`; never
+`lake build`; do not edit a file a running build will compile. The certificate job holds up to 10 GiB of the slot for
+long stretches: on exit 75 wait ten minutes and retry. A cap kill under a `timeout` wrapper shows as exit 143, not 137.
+Stop a process by its PID, never by matching its command line. `/tmp` is wiped at power-off: anything your record cites
+lives under `data/fs131/ij3/`. Report at once any disk, memory or count reading near its limit.
+
+The remote is unreachable: **commit by explicit path on your
+branch and do not push**; I copy the branches to a local backup.
+
+You start no agents of your own (standing rule 1: delegation is one level
+deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 (2026-10-14 17:16 UTC, Keryx)
+
+Your touches gain one line: in `Proofs/HadwigerNelson/Rigidity/ContinuityGroup.lean`, `@[nolint unusedArguments]` on
+`archHom` with a one-line `--` comment giving the reason (its `[NumberField ↥F]` is the section's, unread, and dropping it
+would move the stored types of every statement over it) — the remedy inventory item 863 ruled for `archTop`. Nothing else
+in that file beyond the eight `private`s already in your touches. The binder drop in `ZdAction.map_eq_of_isAddHaarMeasure`
+stands under item 726's word, as you listed it. You start no agents of your own (standing rule 1: delegation is one level
+deep, because the coordinator can only review work it knows exists).

@@ -1,0 +1,61 @@
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 4,5
+Proofs/HadwigerNelson/Outside/OAI158RelativeCenters.lean:296:13: error: don't know how to synthesize implicit argument `mβ`
+  @condDistrib_comp X Y Z inst✝³ inst✝² inst✝¹ inst✝⁵ μ inst✝ f ?m.319 Z inst✝³ inst✝² inst✝¹ p
+    (Measurable.aemeasurable hf) T hT
+context:
+X : Type u_1
+Y : Type u_2
+Z : Type u_3
+inst✝⁵ : MeasurableSpace X
+inst✝⁴ : MeasurableSpace Y
+inst✝³ : MeasurableSpace Z
+inst✝² : StandardBorelSpace Z
+inst✝¹ : Nonempty Z
+μ : Measure X
+inst✝ : IsFiniteMeasure μ
+f : X → Z
+p : X → Y
+hf : Measurable f
+hp : Measurable p
+S : X ≃ᵐ X
+R : Y ≃ᵐ Y
+T : Z → Z
+hT : Measurable T
+hS : MeasurePreserving (⇑S) μ μ
+hRp : p ∘ ⇑S =ᵐ[μ] ⇑R ∘ p
+hTf : f ∘ ⇑S =ᵐ[μ] T ∘ f
+hR : Measure.map (⇑R) (Measure.map p μ) = Measure.map p μ
+hRS : Measure.map (p ∘ ⇑S) μ = Measure.map p μ
+hm : ⇑(condDistrib f p μ) =ᵐ[Measure.map p μ] ⇑(condDistrib (T ∘ f) (⇑R ∘ p) μ)
+hc : ⇑(condDistrib (T ∘ f) (⇑R ∘ p) μ) =ᵐ[Measure.map p μ] ⇑((condDistrib (T ∘ f) p μ).comap ⇑R.symm ⋯)
+hh : Measure.map (⇑R ∘ p) μ = Measure.map p μ
+⊢ MeasurableSpace Y
+Proofs/HadwigerNelson/Outside/OAI158RelativeCenters.lean:296:7: error: failed to infer `have` declaration type
+Proofs/HadwigerNelson/Outside/OAI158RelativeCenters.lean:282:76: error: unsolved goals
+X : Type u_1
+Y : Type u_2
+Z : Type u_3
+inst✝⁵ : MeasurableSpace X
+inst✝⁴ : MeasurableSpace Y
+inst✝³ : MeasurableSpace Z
+inst✝² : StandardBorelSpace Z
+inst✝¹ : Nonempty Z
+μ : Measure X
+inst✝ : IsFiniteMeasure μ
+f : X → Z
+p : X → Y
+hf : Measurable f
+hp : Measurable p
+S : X ≃ᵐ X
+R : Y ≃ᵐ Y
+T : Z → Z
+hT : Measurable T
+hS : MeasurePreserving (⇑S) μ μ
+hRp : p ∘ ⇑S =ᵐ[μ] ⇑R ∘ p
+hTf : f ∘ ⇑S =ᵐ[μ] T ∘ f
+hR : Measure.map (⇑R) (Measure.map p μ) = Measure.map p μ
+hRS : Measure.map (p ∘ ⇑S) μ = Measure.map p μ
+hm : ⇑(condDistrib f p μ) =ᵐ[Measure.map p μ] ⇑(condDistrib (T ∘ f) (⇑R ∘ p) μ)
+hc : ⇑(condDistrib (T ∘ f) (⇑R ∘ p) μ) =ᵐ[Measure.map p μ] ⇑((condDistrib (T ∘ f) p μ).comap ⇑R.symm ⋯)
+hh : Measure.map (⇑R ∘ p) μ = Measure.map p μ
+⊢ ∀ᵐ (y : Y) ∂Measure.map p μ, (condDistrib f p μ) (R y) = Measure.map T ((condDistrib f p μ) y)

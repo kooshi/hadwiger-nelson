@@ -1,0 +1,5 @@
+FAIL Proofs/HadwigerNelson/Outside/OAI158Approximation.lean: an unexplained difference at lines 145–144 / 145–146: [] -> ["-- nolint (FS131-LP1, inventory item 831): the release's binder, kept as it is (", '@[nolint  unusedArguments]']
+FAIL Proofs/HadwigerNelson/Outside/OAI158Basic.lean: an unexplained difference at lines 4–3 / 4–4: [] -> ['-- a stray line']
+FAIL OAI158Approximation: 6 entries, 5 met in the text
+nolint diff against HEAD: 14 files, 24 entries met (1 merged into an attribute block), 3 unexplained
+NOLINT-DIFF FAILED

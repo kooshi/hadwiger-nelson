@@ -1,0 +1,6 @@
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 4,5
+Proofs/HadwigerNelson/Outside/OAI158ConditionalSelection.lean:255:17: warning: Variable name `hp` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`

@@ -1,0 +1,7 @@
+REFUTATION HadwigerNelson.Outside.OAI158.triangleAngle_ratio_irrational @ Proofs.HadwigerNelson.Outside.OAI158BinaryPalettes
+REFUTATION HadwigerNelson.Outside.OAI158.two_state_impossible @ Proofs.HadwigerNelson.Outside.OAI158States
+REFUTATION HadwigerNelson.Outside.OAI158.FiniteModule.common_fiber_contradiction @ Proofs.HadwigerNelson.Outside.OAI158ConditionalSelection
+REFUTATION HadwigerNelson.Outside.OAI158.Spectral.finite_uniform_successor_contradiction @ Proofs.HadwigerNelson.Outside.OAI158ConditionalSpectrum
+REFUTATION HadwigerNelson.Outside.OAI158.Spectral.finite_uniform_precision_contradiction @ Proofs.HadwigerNelson.Outside.OAI158ConditionalSpectrum
+REFUTATION HadwigerNelson.Outside.OAI158.Spectral.ambient_uniform_precision_contradiction @ Proofs.HadwigerNelson.Outside.OAI158ConditionalLimits
+DONE constants=1994 refutations=6 (modules Proofs.HadwigerNelson.Outside.OAI158*)

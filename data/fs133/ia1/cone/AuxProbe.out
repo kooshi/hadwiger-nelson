@@ -1,0 +1,7 @@
+AUX OAI.PlaneFiveColor.LabelModel.projected._proof_1 : theorem levels=[]
+AUX   type  = IsTopologicalAddGroup.{0} Complex (UniformSpace.toTopologicalSpace.{0} Complex (PseudoMetricSpace.toUniformSpace.{0} Complex (SeminormedAddCommGroup.toPseudoMetricSpace.{0} Complex (NormedAddCommGroup.toSeminormedAddCommGroup.{0} Complex Complex.instNormedAddCommGroup)))) (AddCommGroup.toAddGroup.{0} Complex (SeminormedAddCommGroup.toAddCommGroup.{0} Complex (NormedAddCommGroup.toSeminormedAddCommGroup.{0} Complex Complex.instNormedAddCommGroup)))
+AUX   value = SeminormedAddCommGroup.toIsTopologicalAddGroup.{0} Complex (NormedAddCommGroup.toSeminormedAddCommGroup.{0} Complex Complex.instNormedAddCommGroup)
+'OAI.PlaneFiveColor.LabelModel.projected._proof_1' depends on axioms: [propext, Classical.choice, Quot.sound]
+data/fs133/ia1/cone/AuxProbe.lean:20:14: warning: `OAI.PlaneFiveColor.LabelModel.projected._proof_1` refers to an auto-generated auxiliary declaration. These are not stable across refactors; consider using a different approach.
+
+Note: This linter can be disabled with `set_option linter.auxLemma false`

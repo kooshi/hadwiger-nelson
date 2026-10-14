@@ -1,0 +1,4 @@
+Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw: IDENTICAL 10
+Proofs.HadwigerNelson.Plane.OneClass.SectionDensity: IDENTICAL 9
+constants of the first dump: 19  IDENTICAL 19  new in the second: 95
+MOVED OK: nothing moved outside instance and proof arguments

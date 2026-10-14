@@ -1,0 +1,31 @@
+OAI158: 29 constants — IDENTICAL 28, INSTANCES-ONLY 1, DIFFERENT 0, MISSING 0
+    INSTANCES-ONLY	HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff
+RadiusOutside: 8 constants — IDENTICAL 8, INSTANCES-ONLY 0, DIFFERENT 0, MISSING 0
+LebesgueNumber: 34 constants — IDENTICAL 34, INSTANCES-ONLY 0, DIFFERENT 0, MISSING 0
+Rigidity: 10 constants — IDENTICAL 10, INSTANCES-ONLY 0, DIFFERENT 0, MISSING 0
+SectionDensity: 9 constants — IDENTICAL 7, INSTANCES-ONLY 2, DIFFERENT 0, MISSING 0
+    INSTANCES-ONLY	HadwigerNelson.Plane.ofReal_integral_le_measure_pos
+    INSTANCES-ONLY	HadwigerNelson.Plane.sectionDensity_setOf_pos
+Defs: 50 constants — IDENTICAL 47, INSTANCES-ONLY 3, DIFFERENT 0, MISSING 0
+    INSTANCES-ONLY	HadwigerNelson.Plane.mOne
+    INSTANCES-ONLY	HadwigerNelson.Plane.mOne_eq_iSup_nullMeasurableSet
+    INSTANCES-ONLY	SimpleGraph.inv_finIndepRatio_le_iSup_fractionalChromaticNumber
+Field: 1 constants — IDENTICAL 1, INSTANCES-ONLY 0, DIFFERENT 0, MISSING 0
+InvariantLaw: 9 constants — IDENTICAL 9, INSTANCES-ONLY 0, DIFFERENT 0, MISSING 0
+Algebraic: 9 constants — IDENTICAL 9, INSTANCES-ONLY 0, DIFFERENT 0, MISSING 0
+Fractional: 7 constants — IDENTICAL 6, INSTANCES-ONLY 1, DIFFERENT 0, MISSING 0
+    INSTANCES-ONLY	HadwigerNelson.OneClass.iSup_fractionalChromaticNumber_plane
+Pair: 19 constants — IDENTICAL 19, INSTANCES-ONLY 0, DIFFERENT 0, MISSING 0
+OAI158-noCPO: 29 constants — IDENTICAL 29, INSTANCES-ONLY 0, DIFFERENT 0, MISSING 0
+RadiusOutside-noCPO: 8 constants — IDENTICAL 8, INSTANCES-ONLY 0, DIFFERENT 0, MISSING 0
+LebesgueNumber-noCPO: 34 constants — IDENTICAL 34, INSTANCES-ONLY 0, DIFFERENT 0, MISSING 0
+Rigidity-noCPO: 10 constants — IDENTICAL 10, INSTANCES-ONLY 0, DIFFERENT 0, MISSING 0
+SectionDensity-noCPO: 9 constants — IDENTICAL 7, INSTANCES-ONLY 2, DIFFERENT 0, MISSING 0
+    INSTANCES-ONLY	HadwigerNelson.Plane.ofReal_integral_le_measure_pos
+    INSTANCES-ONLY	HadwigerNelson.Plane.sectionDensity_setOf_pos
+Defs-noCPO: 50 constants — IDENTICAL 50, INSTANCES-ONLY 0, DIFFERENT 0, MISSING 0
+Field-noCPO: 1 constants — IDENTICAL 1, INSTANCES-ONLY 0, DIFFERENT 0, MISSING 0
+InvariantLaw-noCPO: 9 constants — IDENTICAL 9, INSTANCES-ONLY 0, DIFFERENT 0, MISSING 0
+Algebraic-noCPO: 9 constants — IDENTICAL 9, INSTANCES-ONLY 0, DIFFERENT 0, MISSING 0
+Fractional-noCPO: 7 constants — IDENTICAL 7, INSTANCES-ONLY 0, DIFFERENT 0, MISSING 0
+Pair-noCPO: 19 constants — IDENTICAL 19, INSTANCES-ONLY 0, DIFFERENT 0, MISSING 0

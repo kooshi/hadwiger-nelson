@@ -1,0 +1,4 @@
+slot: admitted lp1: mem 4 GiB (hard cap), cpus 2
+data/fs131/lp1/nolint/probes/attrs.lean:10:9: error: linter 'unusedArguments' not found
+instInhabitedZzT: nolint (some #[defsWithUnderscore]) simp false
+zz_merged: nolint none simp true

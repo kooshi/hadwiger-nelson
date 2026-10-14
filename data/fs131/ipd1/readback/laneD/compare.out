@@ -1,0 +1,33 @@
+slot: admitted ipd1c: mem 20 GiB (hard cap), cpus 0
+recorded 128 constants in data/fs131/ipd1/readback/laneD/instance-constants.txt
+DIFFERENT	lemma	§.ConvexAverage.setIntegral_bm	EQSET rewrote a constant it does not list
+DIFFERENT	lemma	§.ConvexAverage.setIntegral_of_limit	EQSET rewrote a constant it does not list
+DIFFERENT	definition	§.Spectral.instAddCommGroupRot	differs inside instance arguments by the release's own constants ['§.Spectral.instAddCommGroupRot._aux_3', '§.Spectral.instAddCommGroupRot._aux_4']
+ADAPTED	definition	§.CommutingSpectral.algebra_commRing	ADAPTED_VALUE: the release's own instance named with the Prop it asks proved explicitly; the read-back reads UP-TO-INSTANCES
+DIFFERENT	lemma	§.CommutingSpectral.generator_unitary	differs inside instance arguments by the release's own constants ['§.CommutingSpectral.algebra_commRing']
+DIFFERENT	aux	§.Spectral.instAddCommGroupRot._proof_10	differs inside instance arguments by the release's own constants ['§.Spectral.instAddCommGroupRot._aux_1', '§.Spectral.instAddCommGroupRot._aux_4']
+DIFFERENT	aux	§.Spectral.instAddCommGroupRot._proof_11	differs inside instance arguments by the release's own constants ['§.Spectral.instAddCommGroupRot._aux_3', '§.Spectral.instAddCommGroupRot._aux_1']
+DIFFERENT	aux	§.Spectral.instAddCommGroupRot._proof_18	differs inside instance arguments by the release's own constants ['§.Spectral.instAddCommGroupRot._aux_3', '§.Spectral.instAddCommGroupRot._aux_4']
+DIFFERENT	aux	§.Spectral.instAddCommGroupRot._proof_19	differs inside instance arguments by the release's own constants ['§.Spectral.instAddCommGroupRot._aux_3', '§.Spectral.instAddCommGroupRot._aux_4']
+DIFFERENT	aux	§.Spectral.instAddCommGroupRot._proof_20	differs inside instance arguments by the release's own constants ['§.Spectral.instAddCommGroupRot._aux_3', '§.Spectral.instAddCommGroupRot._aux_4']
+DIFFERENT	aux	§.Spectral.instAddCommGroupRot._proof_22	differs inside instance arguments by the release's own constants ['§.Spectral.instAddCommGroupRot._aux_3', '§.Spectral.instAddCommGroupRot._aux_4']
+DIFFERENT	aux	§.Spectral.instAddCommGroupRot._proof_23	differs inside instance arguments by the release's own constants ['§.Spectral.instAddCommGroupRot._aux_3', '§.Spectral.instAddCommGroupRot._aux_4']
+DIFFERENT	aux	§.Spectral.instAddCommGroupRot._proof_6	differs inside instance arguments by the release's own constants ['§.Spectral.instAddCommGroupRot._aux_3', '§.Spectral.instAddCommGroupRot._aux_4']
+DIFFERENT	aux	§.Spectral.instAddCommGroupRot._proof_7	differs inside instance arguments by the release's own constants ['§.Spectral.instAddCommGroupRot._aux_3', '§.Spectral.instAddCommGroupRot._aux_4']
+  aux          AUX-ABSENT       26
+  aux          AUX-DIFFERS      29
+  aux          DIFFERENT        9
+  aux          IDENTICAL        111
+  aux          PIN-DIFFERENCE   1
+  aux          UP-TO-INSTANCES  21
+  definition   ADAPTED          1
+  definition   DIFFERENT        1
+  definition   IDENTICAL        62
+  definition   UP-TO-INSTANCES  22
+  lemma        DIFFERENT        3
+  lemma        IDENTICAL        161
+  lemma        UP-TO-INSTANCES  77
+  constants differing inside instance and proof arguments: 128
+FATAL: TARGETS_HERE: the target §.Spectral.residual_fourier reads UP-TO-INSTANCES, not IDENTICAL
+constants: 524  failing: 13  fatal: 1
+READBACK FAILED

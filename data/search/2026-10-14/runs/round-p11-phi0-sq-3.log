@@ -1,0 +1,32 @@
+p=11 n=121 |S|=12 |maps|=24 reps=62
+SEARCH-2026-10-14: solve basis |J| = 8 of 62 reps (phi0,sq,3); q localiser; chars all
+  the two product-table symmetries hold on 300 random (ia, ib, t)
+  2 forked workers built 119133 canonical forms [4.5 s]
+products a*tau_t(a'): 119133 canonical forms (a quarter of 465124 by the two symmetries), 3759 orbits [4.6 s]
+q forms built: 3760 orbits [5.4 s]
+orbits K=3760; PSD blocks [('M2[u=0]', 9), ('M2[u=1]', 8), ('M2[u=12]', 8), ('M2[u=5]', 8), ('M2[u=2]', 8), ('M2[u=4]', 8), ('M2[u=15]', 8), ('M2[u=27]', 8), ('M2[u=24]', 8), ('M2[u=3]', 8), ('M2[u=14]', 8), ('locq[u=0]', 2)]; scalar rows 18223; equality rows 0 [5.7 s]
+  grouped 1953 representative pairs into 104283 (pair, orbit) cells [0.1 s]
+  SEARCH-2026-10-14: 36 of 1953 representative pairs inside the basis
+assembled: (18631, 3759), nnz 67890 [5.8 s, 102.2 MB]
+FLOAT READING (untrusted, double precision): value 30.056149 (dual 30.056148), status solved, 1000 iterations, 1.6 s, 125.9 MB
+  p^2/m for m = 3, 4, 5: 40.3333, 30.2500, 24.2000
+scan: 8 rounding attempts on 2 workers [1.4 s wall]
+
+=== the rounding scan (plan §R'.4) ===
+     shift    D                  U    rows  cascaded  exact s  blocks
+     1e-09   12 -- not positive definite                       0.23  locq[u=0] (1 blocks)
+     1e-09   14         30.056333…    2347       370     0.31  12
+     1e-08   12 -- not positive definite                       0.19  locq[u=0] (1 blocks)
+     1e-08   14         30.056563…    2346       394     0.32  12
+     1e-07   12         30.058957…    2329       349     0.26  12
+     1e-07   14         30.058956…    2329       352     0.43  12
+     1e-06   12         30.083186…    2328       352     0.43  12
+     1e-06   14         30.083185…    2328       352     0.36  12
+wrote data/search/2026-10-14/certs/v-p11-phi0-sq-3.json (224816 bytes, sha256 ad93ef082e84…)
+
+BOUND (the producer's own arithmetic -- UNTRUSTED until the checker says CERTIFIED):
+  U = 3005633322122926478307103385697846 / 100000000000000000000000000000000 = 30.056333…
+  4*U = 120.225332… < 121 -- refuses 4 colours (and fewer) at every level, by the hand links L1, L2, L6; 5*U = 150.281666… >= 121, so it says nothing about 5
+  loss against the float reading: 0.000184
+
+Next: python3 tools/fs66_b1_cert_check.py data/search/2026-10-14/certs/v-p11-phi0-sq-3.json --m 4 --record data/fs66/b1/records.jsonl

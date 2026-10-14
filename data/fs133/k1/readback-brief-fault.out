@@ -1,0 +1,10 @@
+MISMATCH data/fs131/REQUEST-2026-10-13.md | W2: (2026-10-13, answering the choice between the two publishable form
+MISMATCH data/fs133/claims-K1.md | K133-DENS-CLASS: (entry at line 191 of the derivation file) let `(X, λ
+MISMATCH data/fs133/claims-K1.md | K133-INV-CLASS: (entry at line 284 of the derivation file) let `S ⊆ E 
+MISMATCH data/fs133/claims-K1.md | K133-ALG: (entry at line 445 of the derivation file) every `E ⋊ K`-inv
+MISMATCH data/fs133/claims-K1.md | K133-ONE: (entry at line 469 of the derivation file) `α₁(ℝ²) = α₁(𝒜²) 
+MISMATCH data/fs133/claims-K1.md | K133-FN: (entry at line 487 of the derivation file) `f(n)/n → m₁(ℝ²)` 
+MISMATCH data/fs133/claims-K1.md | K133-PAIR: (entry at line 649 of the derivation file) an admissible `ℓ
+MISMATCH data/fs133/claims-K1.md | K133-NC-ONE: any value of `m₁(ℝ²)` or of a chromatic number; `m₁(ℝ²) =
+MISMATCH data/fs133/claims-K1.md | K133-NC-ALL: any value of the densities or of a chromatic number; anyt
+matched: 0  mismatched: 9

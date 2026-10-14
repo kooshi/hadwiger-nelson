@@ -1,0 +1,10 @@
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 4,5
+Proofs/HadwigerNelson/Outside/OAI158ConditionalSpectrum.lean:187:40: error(lean.unknownIdentifier): Unknown constant `Complex.isIntegral_I`
+Proofs/HadwigerNelson/Outside/OAI158ConditionalSpectrum.lean:190:40: error(lean.unknownIdentifier): Unknown constant `Complex.isIntegral_I`
+Proofs/HadwigerNelson/Outside/OAI158ConditionalSpectrum.lean:318:28: error(lean.unknownIdentifier): Unknown constant `Set.preimage_ofPred_eq`
+Proofs/HadwigerNelson/Outside/OAI158ConditionalSpectrum.lean:318:2: error: Type mismatch: After simplification, term
+  hu
+ has type
+  @LT.lt ℝ Real.instLT (μ ((fun x => (eval (a₁ - a₂)) (b x)) ⁻¹' {z | ‖↑z - 1‖ ≤ 4 * ρ})).toReal (1 / (4 * ↑m ^ 2))
+but is expected to have type
+  @LT.lt ℝ Real.instLT (μ {x | ‖↑((eval (a₁ - a₂)) (b x)) - 1‖ ≤ 4 * ρ}).toReal (1 / (4 * ↑m ^ 2))

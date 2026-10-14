@@ -1,0 +1,77 @@
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 4,5
+Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:135:10: error(lean.unknownIdentifier): Unknown constant `Measurable.of_eval`
+Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:136:10: error: No goals to be solved
+Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:209:22: error(lean.unknownIdentifier): Unknown identifier `ite_eq_left`
+Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:209:6: error: Type mismatch: After simplification, term
+  hz
+ has type
+  ‖H' z‖ ≤ 2 * C
+but is expected to have type
+  ‖if ‖H' z‖ ≤ 2 * C then H' z else 0‖ ≤ 2 * C
+Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:210:21: error(lean.unknownIdentifier): Unknown identifier `ite_eq_right`
+Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:210:50: error: not a positivity goal
+Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:215:20: error(lean.unknownIdentifier): Unknown identifier `ite_eq_left`
+Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:215:4: error: Type mismatch: After simplification, term
+  Eq.symm hy
+ has type
+  H' (p n y) = Hn n y
+but is expected to have type
+  (if ‖H' (p n y)‖ ≤ 2 * C then H' (p n y) else 0) = Hn n y
+Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:210:38: warning: This simp argument is unused:
+  norm_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [H₀, ite_eq_right hz,̵ ̵n̵o̵r̵m̵_̵z̵e̵r̵o̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:257:21: error(lean.unknownIdentifier): Unknown identifier `ite_eq_left`
+Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:257:6: error: Type mismatch: After simplification, term
+  hy
+ has type
+  ‖H₀ y‖ ≤ max A 0
+but is expected to have type
+  ‖if ‖H₀ y‖ ≤ max A 0 then H₀ y else 0‖ ≤ max A 0
+Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:258:20: error(lean.unknownIdentifier): Unknown identifier `ite_eq_right`
+Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:259:6: error: Type mismatch
+  le_max_right ?m.334 ?m.335
+has type
+  ?m.335 ≤ max ?m.334 ?m.335
+but is expected to have type
+  ‖if ‖H₀ y‖ ≤ max A 0 then H₀ y else 0‖ ≤ max A 0
+Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:260:75: error(lean.unknownIdentifier): Unknown identifier `ite_eq_left`
+Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:258:37: warning: This simp argument is unused:
+  norm_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [H, ite_eq_right hy,̵ ̵n̵o̵r̵m̵_̵z̵e̵r̵o̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:274:42: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsProbabilityMeasure (Measure.map p μ)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:337:42: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsProbabilityMeasure (Measure.map p μ)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:351:54: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsProbabilityMeasure (Measure.map (v n) (Measure.map p μ))
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:404:42: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsProbabilityMeasure (Measure.map b μ)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:454:42: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsProbabilityMeasure (Measure.map P μ)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:615:32: error(lean.unknownIdentifier): Unknown constant `Measurable.of_eval`
+Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:693:42: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsProbabilityMeasure (Measure.map p μ)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:706:42: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsProbabilityMeasure (Measure.map q μ)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.

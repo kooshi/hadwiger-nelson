@@ -1,0 +1,5 @@
+MISMATCH data/fs131/REQUEST-2026-10-13.md | W2: (2026-10-13, answering the choice between the two publishable form
+MISMATCH data/fs133/claims-K1.md | K133-PAIR: (entry at line 649 of the derivation file) an admissible `ℓ
+MISMATCH data/fs133/claims-K1.md | K133-NC-PAIR: any constraint on three or more points (a monochromatic 
+MISMATCH plans/FS131-close-inventory.md | 779. **FS133-ICD1 handed back: the density equality's headlines have n
+matched: 0  mismatched: 4

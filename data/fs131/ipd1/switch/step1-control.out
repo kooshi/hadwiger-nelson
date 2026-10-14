@@ -1,0 +1,6 @@
+unplanted: PASS
+plant 'a byte of a moved block changed in OAI158Collapse': REPORTED
+plant 'a moved block left in OAI158': REPORTED
+plant 'another line of OAI158 changed': REPORTED
+plant 'a second line changed in RadiusOutside': REPORTED
+CONTROL OK

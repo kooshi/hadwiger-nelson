@@ -1,0 +1,7 @@
+p=11 n=121 |S|=12 maps=24 sha=ad93ef082e84
+reps 62; pairs 1953; orbits 218
+ops 26987 [0.2s]
+slots 2213; identity model: HOLDS; total magnitude bits 122 [4.8s]
+PSD witnesses: 12 blocks diagonally dominant [6.5s]
+wrote data/search/2026-10-14/conv/v-p11-phi0-sq-3.lean: w=124 ds=6 k1=14 kq=9 kr=148 kw=15 ko=12; chunks ops=90 rows=43 keys=64
+6.77 s 82140 KB

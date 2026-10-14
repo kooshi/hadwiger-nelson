@@ -1,0 +1,7 @@
+slot: waiting (ledger 20 + 8 > budget 22 GiB)
+slot: waiting (ledger 16 + 8 > budget 22 GiB)
+slot: waiting (ledger 22 + 8 > budget 22 GiB)
+slot: waiting (ledger 16 + 8 > budget 22 GiB)
+slot: admitted ipd1j: mem 8 GiB (hard cap), cpus 2,3
+AUX HadwigerNelson.Outside.OAI158.Koopman.isometry._proof_1 : IsTopologicalAddGroup.{0} Complex (UniformSpace.toTopologicalSpace.{0} Complex (PseudoMetricSpace.toUniformSpace.{0} Complex (SeminormedAddCommGroup.toPseudoMetricSpace.{0} Complex (NormedAddCommGroup.toSeminormedAddCommGroup.{0} Complex Complex.instNormedAddCommGroup)))) (AddCommGroup.toAddGroup.{0} Complex (SeminormedAddCommGroup.toAddCommGroup.{0} Complex (NormedAddCommGroup.toSeminormedAddCommGroup.{0} Complex Complex.instNormedAddCommGroup)))
+AUX HadwigerNelson.Outside.OAI158.Koopman.isometry._proof_2 : Nat.AtLeastTwo (HAdd.hAdd.{0, 0, 0} Nat Nat Nat (instHAdd.{0} Nat instAddNat) (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)) (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)))

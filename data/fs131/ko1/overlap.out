@@ -1,0 +1,198 @@
+CONE transfer: constants=1995 declarations=1299 lines=12005 modules=32
+CONE rigidity lemma: constants=1800 declarations=1165 lines=11310 modules=30
+CONE headline: constants=3518 declarations=2390 lines=24156 modules=70
+SUBSET rigidity-in-transfer=True
+MODULE 1	OAI.Analysis.PlaneSpectrum.Basic	96 of 112 declarations	611 lines	<- 
+MODULE 1	OAI.Analysis.PlaneSpectrum.InvariantMean	115 of 134 declarations	823 lines	<- 
+MODULE 1	OAI.Analysis.PlaneSpectrum.NumberFields	40 of 43 declarations	451 lines	<- 
+MODULE 1	OAI.Analysis.PlaneSpectrum.PhaseEncoding	24 of 24 declarations	193 lines	<- 
+MODULE 1	OAI.Analysis.PlaneSpectrum.SmallArcs	19 of 19 declarations	242 lines	<- 
+MODULE 1	OAI.Geometry.PlaneColoring.Coloring	8 of 11 declarations	13 lines	<- 
+MODULE 1	OAI.MeasureTheory.CompactFactors.Amenability	41 of 58 declarations	276 lines	<- 
+MODULE 1	OAI.MeasureTheory.CompactFactors.Centers	90 of 103 declarations	537 lines	<- 
+MODULE 2	OAI.Analysis.PlaneSpectrum.Characters	42 of 42 declarations	492 lines	<- Basic
+MODULE 2	OAI.Analysis.PlaneSpectrum.PhaseCollision	21 of 23 declarations	368 lines	<- PhaseEncoding
+MODULE 2	OAI.Analysis.PlaneSpectrum.Selections	22 of 22 declarations	352 lines	<- NumberFields
+MODULE 2	OAI.MeasureTheory.CompactFactors.RelativeCenters	38 of 42 declarations	422 lines	<- Basic Centers
+MODULE 3	OAI.Analysis.PlaneSpectrum.Multipliers	29 of 30 declarations	230 lines	<- Basic Characters InvariantMean
+MODULE 3	OAI.MeasureTheory.CompactFactors.ConditionalSelection	18 of 19 declarations	350 lines	<- PhaseCollision PhaseEncoding
+MODULE 4	OAI.Analysis.PlaneSpectrum.FourierTests	15 of 16 declarations	224 lines	<- Basic Characters InvariantMean Multipliers
+MODULE 5	OAI.Analysis.PlaneSpectrum.ConditionalSpectrum	33 of 36 declarations	398 lines	<- Basic ConditionalSelection FourierTests Multipliers PhaseEncoding SmallArcs
+MODULE 6	OAI.MeasureTheory.CompactFactors.Approximation	14 of 14 declarations	396 lines	<- Basic ConditionalSpectrum FourierTests PhaseEncoding RelativeCenters
+MODULE 7	OAI.MeasureTheory.CompactFactors.ConditionalLimits	18 of 21 declarations	474 lines	<- Approximation Basic ConditionalSelection ConditionalSpectrum FourierTests PhaseEncoding RelativeCenters SmallArcs
+MODULE 8	OAI.MeasureTheory.CompactFactors.Kernels	33 of 34 declarations	603 lines	<- ConditionalLimits ConditionalSelection RelativeCenters
+MODULE 9	OAI.MeasureTheory.CompactFactors.BoundedFunctions	41 of 54 declarations	132 lines	<- ConditionalSelection Kernels
+MODULE 9	OAI.MeasureTheory.CompactFactors.Functions	31 of 32 declarations	735 lines	<- ConditionalSelection Kernels
+MODULE 10	OAI.MeasureTheory.CompactFactors.Factors	63 of 83 declarations	387 lines	<- ConditionalLimits Functions Kernels
+MODULE 10	OAI.MeasureTheory.CompactFactors.RelativeProducts	49 of 72 declarations	277 lines	<- Amenability BoundedFunctions Kernels RelativeCenters
+MODULE 11	OAI.MeasureTheory.CompactFactors.Separability	47 of 53 declarations	403 lines	<- Amenability BoundedFunctions Kernels RelativeProducts
+MODULE 11	OAI.MeasureTheory.CompactFactors.Stationary	22 of 23 declarations	164 lines	<- Approximation Basic ConditionalLimits Factors FourierTests Functions InvariantMean Kernels RelativeCenters
+MODULE 12	OAI.MeasureTheory.CompactFactors.AlgebraModels	37 of 43 declarations	449 lines	<- Amenability BoundedFunctions ConditionalSelection Kernels RelativeProducts Separability
+MODULE 13	OAI.Analysis.PlaneSpectrum.Representations	76 of 88 declarations	366 lines	<- AlgebraModels Basic Stationary
+MODULE 14	OAI.Analysis.PlaneSpectrum.Energy	45 of 49 declarations	334 lines	<- AlgebraModels Amenability Basic BoundedFunctions ConditionalSpectrum FourierTests InvariantMean Kernels RelativeCenters RelativeProducts Representations Separability
+MODULE 14	OAI.Analysis.PlaneSpectrum.SpectralMeasure	52 of 57 declarations	305 lines	<- Basic BoundedFunctions ConditionalSpectrum Representations
+MODULE 15	OAI.Analysis.PlaneSpectrum.RadialEnergy	27 of 28 declarations	363 lines	<- AlgebraModels Amenability Basic BoundedFunctions ConditionalSpectrum Energy FourierTests Kernels Multipliers RelativeCenters RelativeProducts Representations Selections Separability
+MODULE 16	OAI.Analysis.PlaneSpectrum.Ergodicity	40 of 52 declarations	298 lines	<- Amenability Approximation Basic BoundedFunctions ConditionalLimits ConditionalSelection ConditionalSpectrum Energy Factors FourierTests Kernels RadialEnergy RelativeCenters RelativeProducts Representations SpectralMeasure Stationary
+MODULE 17	OAI.Geometry.PlaneColoring.BorelTransfer	53 of 54 declarations	337 lines	<- Basic Coloring Ergodicity Representations
+OVERLAP main: 11 cone constants already declared here
+  Proofs.HadwigerNelson.Outside.OAI158: 9
+    BorelTransfer	axiom here	OAI.EuclideanFiveColor.proper_to_borel_weak	-> HadwigerNelson.Outside.OAI158.proper_to_borel_weak
+    Coloring	def here	OAI.EuclideanFiveColor.Angles	-> HadwigerNelson.Outside.OAI158.Angles
+    Coloring	def here	OAI.EuclideanFiveColor.ProperColoring	-> HadwigerNelson.Outside.OAI158.ProperColoring
+    Coloring	def here	OAI.EuclideanFiveColor.WeakColoring	-> HadwigerNelson.Outside.OAI158.WeakColoring
+    Coloring	def here	OAI.EuclideanFiveColor.angularMeasure	-> HadwigerNelson.Outside.OAI158.angularMeasure
+    Coloring	def here	OAI.EuclideanFiveColor.direction	-> HadwigerNelson.Outside.OAI158.direction
+    Coloring	theorem here	OAI.EuclideanFiveColor.Angles._proof_1	-> HadwigerNelson.Outside.OAI158.Angles._proof_1
+    Coloring	theorem here	OAI.EuclideanFiveColor.WeakColoring._proof_1	-> HadwigerNelson.Outside.OAI158.WeakColoring._proof_1
+    Coloring	theorem here	OAI.EuclideanFiveColor.anglePeriodPositive	-> HadwigerNelson.Outside.OAI158.anglePeriodPositive
+  Proofs.HadwigerNelson.Outside.OAI158Palette: 2
+    Coloring	theorem here	OAI.EuclideanFiveColor.direction_continuous	-> HadwigerNelson.Outside.OAI158.direction_continuous
+    Coloring	theorem here	OAI.EuclideanFiveColor.instIsAddHaarMeasureAnglesAngularMeasure	-> HadwigerNelson.Outside.OAI158.angularMeasure.instIsAddHaarMeasure
+OVERLAP fs133-wb1: 107 cone constants already declared here
+  Proofs.HadwigerNelson.Outside.OAI158: 9
+    BorelTransfer	axiom here	OAI.EuclideanFiveColor.proper_to_borel_weak	-> HadwigerNelson.Outside.OAI158.proper_to_borel_weak
+    Coloring	def here	OAI.EuclideanFiveColor.Angles	-> HadwigerNelson.Outside.OAI158.Angles
+    Coloring	def here	OAI.EuclideanFiveColor.ProperColoring	-> HadwigerNelson.Outside.OAI158.ProperColoring
+    Coloring	def here	OAI.EuclideanFiveColor.WeakColoring	-> HadwigerNelson.Outside.OAI158.WeakColoring
+    Coloring	def here	OAI.EuclideanFiveColor.angularMeasure	-> HadwigerNelson.Outside.OAI158.angularMeasure
+    Coloring	def here	OAI.EuclideanFiveColor.direction	-> HadwigerNelson.Outside.OAI158.direction
+    Coloring	theorem here	OAI.EuclideanFiveColor.Angles._proof_1	-> HadwigerNelson.Outside.OAI158.Angles._proof_1
+    Coloring	theorem here	OAI.EuclideanFiveColor.WeakColoring._proof_1	-> HadwigerNelson.Outside.OAI158.WeakColoring._proof_1
+    Coloring	theorem here	OAI.EuclideanFiveColor.anglePeriodPositive	-> HadwigerNelson.Outside.OAI158.anglePeriodPositive
+  Proofs.HadwigerNelson.Outside.OAI158Palette: 2
+    Coloring	theorem here	OAI.EuclideanFiveColor.direction_continuous	-> HadwigerNelson.Outside.OAI158.direction_continuous
+    Coloring	theorem here	OAI.EuclideanFiveColor.instIsAddHaarMeasureAnglesAngularMeasure	-> HadwigerNelson.Outside.OAI158.angularMeasure.instIsAddHaarMeasure
+  Proofs.HadwigerNelson.Outside.OAI158Rigidity: 33
+    Basic	def here	OAI.PlaneFiveColor.Spectral.DiscreteE	-> HadwigerNelson.Outside.OAI158.Spectral.DiscreteE
+    Basic	def here	OAI.PlaneFiveColor.Spectral.E	-> HadwigerNelson.Outside.OAI158.Spectral.E
+    Basic	def here	OAI.PlaneFiveColor.Spectral.K	-> HadwigerNelson.Outside.OAI158.Spectral.K
+    Basic	def here	OAI.PlaneFiveColor.Spectral.instCommGroupDiscreteE	-> HadwigerNelson.Outside.OAI158.Spectral.instCommGroupDiscreteE
+    Basic	def here	OAI.PlaneFiveColor.Spectral.instCommGroupDiscreteE._aux_1	-> HadwigerNelson.Outside.OAI158.Spectral.instCommGroupDiscreteE._aux_1
+    Basic	def here	OAI.PlaneFiveColor.Spectral.instCommGroupDiscreteE._aux_12	-> HadwigerNelson.Outside.OAI158.Spectral.instCommGroupDiscreteE._aux_12
+    Basic	def here	OAI.PlaneFiveColor.Spectral.instCommGroupDiscreteE._aux_14	-> HadwigerNelson.Outside.OAI158.Spectral.instCommGroupDiscreteE._aux_14
+    Basic	def here	OAI.PlaneFiveColor.Spectral.instCommGroupDiscreteE._aux_16	-> HadwigerNelson.Outside.OAI158.Spectral.instCommGroupDiscreteE._aux_16
+    Basic	def here	OAI.PlaneFiveColor.Spectral.instCommGroupDiscreteE._aux_8	-> HadwigerNelson.Outside.OAI158.Spectral.instCommGroupDiscreteE._aux_8
+    Basic	def here	OAI.PlaneFiveColor.Spectral.kCoeff	-> HadwigerNelson.Outside.OAI158.Spectral.kCoeff
+    Basic	theorem here	OAI.PlaneFiveColor.Spectral.K._proof_1	-> HadwigerNelson.Outside.OAI158.Spectral.K._proof_1
+    Basic	theorem here	OAI.PlaneFiveColor.Spectral.K._proof_2	-> HadwigerNelson.Outside.OAI158.Spectral.K._proof_2
+    Basic	theorem here	OAI.PlaneFiveColor.Spectral.K._proof_3	-> HadwigerNelson.Outside.OAI158.Spectral.K._proof_3
+    Basic	theorem here	OAI.PlaneFiveColor.Spectral.K._proof_4	-> HadwigerNelson.Outside.OAI158.Spectral.K._proof_4
+    Basic	theorem here	OAI.PlaneFiveColor.Spectral.K._proof_5	-> HadwigerNelson.Outside.OAI158.Spectral.K._proof_5
+    Basic	theorem here	OAI.PlaneFiveColor.Spectral.instCommGroupDiscreteE._proof_10	-> HadwigerNelson.Outside.OAI158.Spectral.instCommGroupDiscreteE._proof_10
+    Basic	theorem here	OAI.PlaneFiveColor.Spectral.instCommGroupDiscreteE._proof_11	-> HadwigerNelson.Outside.OAI158.Spectral.instCommGroupDiscreteE._proof_11
+    Basic	theorem here	OAI.PlaneFiveColor.Spectral.instCommGroupDiscreteE._proof_18	-> HadwigerNelson.Outside.OAI158.Spectral.instCommGroupDiscreteE._proof_18
+    Basic	theorem here	OAI.PlaneFiveColor.Spectral.instCommGroupDiscreteE._proof_19	-> HadwigerNelson.Outside.OAI158.Spectral.instCommGroupDiscreteE._proof_19
+    Basic	theorem here	OAI.PlaneFiveColor.Spectral.instCommGroupDiscreteE._proof_20	-> HadwigerNelson.Outside.OAI158.Spectral.instCommGroupDiscreteE._proof_20
+    Basic	theorem here	OAI.PlaneFiveColor.Spectral.instCommGroupDiscreteE._proof_21	-> HadwigerNelson.Outside.OAI158.Spectral.instCommGroupDiscreteE._proof_21
+    Basic	theorem here	OAI.PlaneFiveColor.Spectral.instCommGroupDiscreteE._proof_22	-> HadwigerNelson.Outside.OAI158.Spectral.instCommGroupDiscreteE._proof_22
+    Basic	theorem here	OAI.PlaneFiveColor.Spectral.instCommGroupDiscreteE._proof_23	-> HadwigerNelson.Outside.OAI158.Spectral.instCommGroupDiscreteE._proof_23
+    Basic	theorem here	OAI.PlaneFiveColor.Spectral.instCommGroupDiscreteE._proof_6	-> HadwigerNelson.Outside.OAI158.Spectral.instCommGroupDiscreteE._proof_6
+    Basic	theorem here	OAI.PlaneFiveColor.Spectral.instCommGroupDiscreteE._proof_7	-> HadwigerNelson.Outside.OAI158.Spectral.instCommGroupDiscreteE._proof_7
+    Basic	theorem here	OAI.PlaneFiveColor.Spectral.kCoeff._proof_1	-> HadwigerNelson.Outside.OAI158.Spectral.kCoeff._proof_1
+    Ergodicity	axiom here	OAI.PlaneFiveColor.Spectral.residual_fourier	-> HadwigerNelson.Outside.OAI158.Spectral.residual_fourier
+    Representations	def here	OAI.EuclideanFiveColor.ContinuousVectors.op	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.op
+    Representations	def here	OAI.EuclideanFiveColor.ContinuousVectors.space	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.space
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.op._proof_1	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.op._proof_1
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.space._proof_1	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.space._proof_1
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.space._proof_2	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.space._proof_2
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.space._proof_3	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.space._proof_3
+  Proofs.HadwigerNelson.Outside.OAI158Transfer: 63
+    Basic	def here	OAI.PlaneFiveColor.Spectral.imagUnit	-> HadwigerNelson.Outside.OAI158.Spectral.imagUnit
+    Basic	theorem here	OAI.PlaneFiveColor.Spectral.E_countable	-> HadwigerNelson.Outside.OAI158.Spectral.E_countable
+    Basic	theorem here	OAI.PlaneFiveColor.Spectral.imagUnit._proof_1	-> HadwigerNelson.Outside.OAI158.Spectral.imagUnit._proof_1
+    Basic	theorem here	OAI.PlaneFiveColor.Spectral.kCoeff_ne_zero	-> HadwigerNelson.Outside.OAI158.Spectral.kCoeff_ne_zero
+    BorelTransfer	def here	OAI.EuclideanFiveColor.approxField	-> HadwigerNelson.Outside.OAI158.approxField
+    BorelTransfer	def here	OAI.EuclideanFiveColor.approxIndex	-> HadwigerNelson.Outside.OAI158.approxIndex
+    BorelTransfer	def here	OAI.EuclideanFiveColor.measurableField	-> HadwigerNelson.Outside.OAI158.measurableField
+    BorelTransfer	def here	OAI.PlaneFiveColor.Spectral.orbitExtension	-> HadwigerNelson.Outside.OAI158.Spectral.orbitExtension
+    BorelTransfer	theorem here	OAI.EuclideanFiveColor.approxField_measurable	-> HadwigerNelson.Outside.OAI158.approxField_measurable
+    BorelTransfer	theorem here	OAI.EuclideanFiveColor.approxField_tendsto	-> HadwigerNelson.Outside.OAI158.approxField_tendsto
+    BorelTransfer	theorem here	OAI.EuclideanFiveColor.approxField_tendsto._simp_1_2	-> HadwigerNelson.Outside.OAI158.approxField_tendsto._simp_1_2
+    BorelTransfer	theorem here	OAI.EuclideanFiveColor.approxIndex._proof_1	-> HadwigerNelson.Outside.OAI158.approxIndex._proof_1
+    BorelTransfer	theorem here	OAI.EuclideanFiveColor.dense_approx	-> HadwigerNelson.Outside.OAI158.dense_approx
+    BorelTransfer	theorem here	OAI.EuclideanFiveColor.exists_measurable_field	-> HadwigerNelson.Outside.OAI158.exists_measurable_field
+    BorelTransfer	theorem here	OAI.EuclideanFiveColor.index_bound	-> HadwigerNelson.Outside.OAI158.index_bound
+    BorelTransfer	theorem here	OAI.EuclideanFiveColor.index_measurable	-> HadwigerNelson.Outside.OAI158.index_measurable
+    BorelTransfer	theorem here	OAI.EuclideanFiveColor.measurableField_measurable	-> HadwigerNelson.Outside.OAI158.measurableField_measurable
+    BorelTransfer	theorem here	OAI.EuclideanFiveColor.positive_orthogonal	-> HadwigerNelson.Outside.OAI158.positive_orthogonal
+    BorelTransfer	theorem here	OAI.PlaneFiveColor.Spectral.algebraic_norm	-> HadwigerNelson.Outside.OAI158.Spectral.algebraic_norm
+    BorelTransfer	theorem here	OAI.PlaneFiveColor.Spectral.circle_closed_induction	-> HadwigerNelson.Outside.OAI158.Spectral.circle_closed_induction
+    BorelTransfer	theorem here	OAI.PlaneFiveColor.Spectral.dense_E	-> HadwigerNelson.Outside.OAI158.Spectral.dense_E
+    BorelTransfer	theorem here	OAI.PlaneFiveColor.Spectral.normalized_algebraic	-> HadwigerNelson.Outside.OAI158.Spectral.normalized_algebraic
+    BorelTransfer	theorem here	OAI.PlaneFiveColor.Spectral.orbitExtension._proof_1	-> HadwigerNelson.Outside.OAI158.Spectral.orbitExtension._proof_1
+    BorelTransfer	theorem here	OAI.PlaneFiveColor.Spectral.orbitExtension_continuous	-> HadwigerNelson.Outside.OAI158.Spectral.orbitExtension_continuous
+    BorelTransfer	theorem here	OAI.PlaneFiveColor.Spectral.orbitExtension_eq	-> HadwigerNelson.Outside.OAI158.Spectral.orbitExtension_eq
+    BorelTransfer	theorem here	OAI.PlaneFiveColor.Spectral.orbitExtension_inner	-> HadwigerNelson.Outside.OAI158.Spectral.orbitExtension_inner
+    BorelTransfer	theorem here	OAI.PlaneFiveColor.Spectral.orbit_uniformContinuous	-> HadwigerNelson.Outside.OAI158.Spectral.orbit_uniformContinuous
+    Representations	def here	OAI.EuclideanFiveColor.ContinuousVectors.clamp	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp
+    Representations	def here	OAI.EuclideanFiveColor.Koopman.isometry	-> HadwigerNelson.Outside.OAI158.Koopman.isometry
+    Representations	def here	OAI.EuclideanFiveColor.Koopman.unitary	-> HadwigerNelson.Outside.OAI158.Koopman.unitary
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.clamp.eq_1	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp.eq_1
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.clamp_eq	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp_eq
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.clamp_lipschitz	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp_lipschitz
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.clamp_range	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp_range
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.clamp_zero	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp_zero
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.covariance_mem	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.covariance_mem
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.dist_op	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.dist_op
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.dist_op._simp_1_1	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.dist_op._simp_1_1
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.instCompleteSpaceSubtypeMemSubmoduleComplexSpace	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.instCompleteSpaceSubtypeMemSubmoduleComplexSpace
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.isClosed_space	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.isClosed_space
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.nonlinear_mem	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.nonlinear_mem
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.norm_op	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.norm_op
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.op_add	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.op_add
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.op_comm	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.op_comm
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.op_mem	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.op_mem
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.op_orthogonal	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.op_orthogonal
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.op_zero	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.op_zero
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.orbit_continuous	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.orbit_continuous
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.projection_coefficient	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.projection_coefficient
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.projection_coefficient._abel_1_1	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.projection_coefficient._abel_1_1
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.projection_covariance_fixed	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.projection_covariance_fixed
+    Representations	theorem here	OAI.EuclideanFiveColor.ContinuousVectors.projection_range	-> HadwigerNelson.Outside.OAI158.ContinuousVectors.projection_range
+    Representations	theorem here	OAI.EuclideanFiveColor.Koopman.isometry._proof_1	-> HadwigerNelson.Outside.OAI158.Koopman.isometry._proof_1
+    Representations	theorem here	OAI.EuclideanFiveColor.Koopman.isometry._proof_2	-> HadwigerNelson.Outside.OAI158.Koopman.isometry._proof_2
+    Representations	theorem here	OAI.EuclideanFiveColor.Koopman.isometry._proof_3	-> HadwigerNelson.Outside.OAI158.Koopman.isometry._proof_3
+    Representations	theorem here	OAI.EuclideanFiveColor.Koopman.isometry._proof_4	-> HadwigerNelson.Outside.OAI158.Koopman.isometry._proof_4
+    Representations	theorem here	OAI.EuclideanFiveColor.Koopman.isometry._proof_5	-> HadwigerNelson.Outside.OAI158.Koopman.isometry._proof_5
+    Representations	theorem here	OAI.EuclideanFiveColor.Koopman.isometry._proof_6	-> HadwigerNelson.Outside.OAI158.Koopman.isometry._proof_6
+    Representations	theorem here	OAI.EuclideanFiveColor.Koopman.nonlinear_commute	-> HadwigerNelson.Outside.OAI158.Koopman.nonlinear_commute
+    Representations	theorem here	OAI.EuclideanFiveColor.Koopman.unitary._proof_1	-> HadwigerNelson.Outside.OAI158.Koopman.unitary._proof_1
+    Representations	theorem here	OAI.EuclideanFiveColor.Koopman.unitary._proof_2	-> HadwigerNelson.Outside.OAI158.Koopman.unitary._proof_2
+    Representations	theorem here	OAI.EuclideanFiveColor.Koopman.unitary._proof_3	-> HadwigerNelson.Outside.OAI158.Koopman.unitary._proof_3
+    Representations	theorem here	OAI.EuclideanFiveColor.projection_fixed_of_contraction	-> HadwigerNelson.Outside.OAI158.projection_fixed_of_contraction
+RESIDUAL headline after the port (against main): declarations=843 lines=9885 modules=35
+  OAI.Geometry.PlaneColoring.DiskExtension	46	518
+  OAI.Geometry.PlaneColoring.Expansion	28	475
+  OAI.Geometry.PlaneColoring.BinaryDynamics	43	460
+  OAI.Geometry.PlaneColoring.Interfaces	43	451
+  OAI.Geometry.PlaneColoring.FourContinuity	31	442
+  OAI.Geometry.PlaneColoring.AngularBoundary	50	433
+  OAI.Geometry.PlaneColoring.States	31	425
+  OAI.Geometry.PlaneColoring.Sectors	28	406
+  OAI.Geometry.PlaneColoring.Moser	33	399
+  OAI.Geometry.PlaneColoring.Rigidity	37	396
+  OAI.Geometry.PlaneColoring.FourTransport	30	388
+  OAI.Geometry.PlaneColoring.PlanarCovers	13	357
+  OAI.Geometry.PlaneColoring.GraphRealization	34	351
+  OAI.Geometry.PlaneColoring.Accumulation	33	334
+  OAI.Geometry.PlaneColoring.DiskAverages	29	298
+  OAI.Geometry.PlaneColoring.FiveSupport	33	298
+  OAI.Geometry.PlaneColoring.FullApproximation	12	288
+  OAI.Geometry.PlaneColoring.ContinuumLimits	23	282
+  OAI.Geometry.PlaneColoring.BoundaryTrace	11	277
+  OAI.Geometry.PlaneColoring.GraphCuts	28	276
+  OAI.Geometry.PlaneColoring.GraphPatches	19	275
+  OAI.Geometry.PlaneColoring.HoleApproximation	26	275
+  OAI.Analysis.PlaneSpectrum.CircleOperator	29	261
+  OAI.Geometry.PlaneColoring.BinaryPalettes	23	219
+  OAI.Analysis.PlaneSpectrum.CircleDecay	15	216
+  OAI.Geometry.PlaneColoring.CyclicCore	20	211
+  OAI.Analysis.PlaneSpectrum.Fourier	25	139
+  OAI.Geometry.PlaneColoring.Exclusion	26	138
+  OAI.Geometry.PlaneColoring.Mesh	6	131
+  OAI.Geometry.PlaneColoring.Transitions	10	124
+  OAI.Geometry.PlaneColoring.CircleTransport	15	112
+  OAI.Geometry.PlaneColoring.Five	4	103
+  OAI.Geometry.PlaneColoring.PaletteTransport	4	68
+  OAI.Geometry.PlaneColoring.Palettes	4	58
+  OAI.Geometry.PlaneColoring.Compactness	1	1

@@ -1,0 +1,5 @@
+plant 'a constant changed in the erased and the full print' in HadwigerNelson.Outside.OAI158.Spectral.residual_fourier_cross: read DIFFERENT, planted DIFFERENT — as planted
+plant 'a constant changed in the full print only (AddCommGroup.toAddCommMonoid)' in HadwigerNelson.Outside.OAI158.Spectral.residual_fourier_cross: read INSTANCES-ONLY, planted INSTANCES-ONLY — as planted
+plant 'a constant removed' in HadwigerNelson.Outside.OAI158.Spectral.residual_fourier_cross: read MISSING, planted MISSING — as planted
+plant 'a theorem turned into an axiom' in HadwigerNelson.Outside.OAI158.Spectral.residual_fourier_cross: read DIFFERENT, planted DIFFERENT — as planted
+CONTROL OK: each plant read as planted

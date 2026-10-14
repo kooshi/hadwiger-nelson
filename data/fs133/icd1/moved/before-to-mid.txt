@@ -1,0 +1,9 @@
+Proofs.HadwigerNelson.Plane.OneClass.Defs: IDENTICAL 54, MADE-PUBLIC-IDENTICAL 3
+  MADE-PUBLIC-IDENTICAL  theorem  _private.Proofs.HadwigerNelson.Plane.OneClass.Defs.0.SimpleGraph.card_le_indepNum_induce
+  MADE-PUBLIC-IDENTICAL  theorem  _private.Proofs.HadwigerNelson.Plane.OneClass.Defs.0.SimpleGraph.exists_indep_card_eq_indepNum
+  MADE-PUBLIC-IDENTICAL  theorem  _private.Proofs.HadwigerNelson.Plane.OneClass.Defs.0.HadwigerNelson.Plane.upperDensity_congr_ae
+Proofs.HadwigerNelson.Plane.OneClass.Algebraic: IDENTICAL 9
+Proofs.HadwigerNelson.Plane.OneClass.Fractional: IDENTICAL 7
+Proofs.HadwigerNelson.Plane.OneClass.Pair: IDENTICAL 19
+constants of the first dump: 92  IDENTICAL 89  MADE-PUBLIC-IDENTICAL 3  new in the second: 0
+MOVED OK: every listed change is as listed; nothing else moved

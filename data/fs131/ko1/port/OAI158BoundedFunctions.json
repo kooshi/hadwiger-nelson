@@ -1,0 +1,8 @@
+{
+ "global_instances": [
+  [
+   29,
+   "global: on a type built from the release's own definition `Func X` (`BoundedFunctions.lean`): the coercion of the release's subtype of bounded measurable functions"
+  ]
+ ]
+}

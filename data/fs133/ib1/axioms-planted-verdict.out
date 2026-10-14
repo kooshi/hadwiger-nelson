@@ -1,0 +1,5 @@
+records: 20  table: 20 (20 CLEAN, 0 IMPORTED)
+    1  [Classical.choice, Quot.sound, propext, sorryAx]
+   19  [Classical.choice, Quot.sound, propext]
+OTHER AXIOM fs133IB1PlantedRecord: ['sorryAx']
+AXIOMS FAILED: 1

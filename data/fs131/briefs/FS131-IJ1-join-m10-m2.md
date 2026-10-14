@@ -1,0 +1,115 @@
+# Brief FS131-IJ1 — the five-colour chain: its proof line joined with the map's and the count's modules, then four of the map's modules proved
+
+*Written 2026-10-14 13:48 UTC by Keryx, the coordinator (the top-level session), at Kooshi's word of 2026-10-13. Launch line: "Your brief is on disk: read it in full first."*
+
+brief: FS131-IJ1
+  identity: de Bruijn, the implementer — your agent file (`.claude/agents/debruijn-implementer.md`) is your identity and your lane's workflow; you run on Opus, as every implementer now does (inventory item 137)
+  role: the chain's implementer — first the join of the chain's proof line (lane T and the zero-entropy side's second half, as the last implementer left them) with the branch holding the map's six typed modules and the count's eight; then one ruled replacement (the count's ring map `Counting.toL` by lane T's `ofUnitRing`, the same map under one name); then the map's modules M10 (the continuity group), M2a (Herglotz–Bochner's existence half), M3 (the invariant measure) and M2b (Bochner at the twisted parts), as far as you reach
+  launch: now, in the last implementer's tree (its job is finished; nobody else writes there) on a new branch cut from its branch; three other jobs run in other trees (the port's landing, the class-ratio certificates, the density bound's planner) and share the build slot
+  mission: § Why this job
+  statements: § The statements
+  acceptance: § Done means
+  yours: § What is yours to decide
+  fences: none — nothing here is blind to you
+  channel: message the coordinator ("main") by SendMessage **at once** if the join conflicts anywhere but `ARCHITECTURE.md`, if the two ring maps are not the same term, if a leaf is false as stated or needs a hypothesis it lacks, if a first leaf prices a module above a week, and with one line when the joined branch builds; the report goes to `data/fs131/reports/FS131-IJ1.md` and to "main" as your hand-back
+  standing rules: plans/STANDING-RULES.md — part of this brief; read it in full. Also `LEAN.md` in full, and `RUNNING.md` § Building and § Make the gate fail, and watch it fail
+  record: `plans/FS131-IJ1-implementation.md` (new, on branch `fs131-wt3`)
+  touches: in the worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wq1` on a **new branch `fs131-wt3`** that you cut from its head (`fs131-wt2` at `cea54d08e`; its build is current for that commit) and into which you merge `fs131-wk12` (at `f6898c132`) with `--no-ff` as your first commit, `ARCHITECTURE.md`'s conflict resolved by keeping both sides' rows (`git merge-tree` reports that file alone); then: the replacement of `Counting.toL` by `Rigidity.ofUnitRing` in the count's modules `Rigidity/CountResidue.lean` and `Rigidity/CountCompletion.lean` (the definition deleted, every reader re-pointed, an import added; the theorems named for it may be renamed, each listed — a ruled statement change, item 832 ruling 1); in `Rigidity/ChainAtTA.lean`, `private` removed from `mem_torsion_mul_arch_iff` and `exists_rat_coords` and nothing else (item 823 ruling 1); then **proofs, private helpers and import lines only — no statement changes, no definition changes** in `Rigidity/ContinuityGroup.lean`, `Rigidity/Herglotz.lean`, `Rigidity/InvariantMeasure.lean` and `Rigidity/BochnerTau.lean` (each under `Proofs/HadwigerNelson/`; they arrive with the merge); their `ARCHITECTURE.md` rows where a cell's state changes, and the rows of `Rigidity/TateExists` and `Rigidity/ZeroEntropyClosed`, which still read "skeleton" (item 850 ruling 2); your checks under `tools/` named for this job; `plans/FS131-IJ1-implementation.md`; `data/fs131/ij1/`; `data/fs131/reports/FS131-IJ1.md`. **Not** the count's other modules and leaves (four lanes of their own), lane T's and M8b's modules (any leaf the last implementer left is another job's), `ZeroEntropyClosed.lean`, `Plane/OneAvoidingDensity.lean` (its statement is the paper's; its proof is another job's, on a line from `main`), `Rigidity/ClassRatio.lean`, any module under `Outside/`, the declared printed theorem. Untracked files from older jobs are in this tree (`data/fs131/iq1/stmt/`, plain-text dumps under `data/fs131/idg1/`, `ig1/`, `ip23/`, `itt1/`, `itk1/`): leave them. Nothing on `main`
+  budget: about 400k by the harness's count, as guidance; hand back at a saved stage before about 500k — read your token count at every saved stage
+
+Hello. The chain's work is on two lines again: one where implementers proved the dual group, the pieces, the entropy
+file, the adelic model and the zero-entropy side's second half; one where planners typed the rest of the map and the
+count. You join them, apply one ruling at the seam, and prove the four modules of the map that the chain's critical
+path runs through.
+
+## Why this job
+
+Kooshi's rule for what goes out:
+
+> W2: (2026-10-13, answering the choice between the two publishable forms) I choose the second form. Any finding of ours must be formalized. I'd prefer to formalize the entire chain, so at some point I'd like to price the EL theorem to see what it would take to formalize as well.
+> — source: data/fs131/REQUEST-2026-10-13.md
+
+The chain's map planner read its critical path as M13's tail and the count, beside lane T → M8b and `M4 → M10 → M2b →
+M11` (its record § Stage 5); M10, M2a, M3 and M2b are typed and read nothing unproved but each other (M4 and M9-R are
+proved on this line); and the count's four lanes need one line to land on.
+
+## The statements
+
+The two dated lines of the chain's claim list (`data/fs131/claims-NF2.md`) that say what M2 and M3 are and what the
+count is:
+
+> - 2026-10-14 — **M2 and M3 are typed by averaging** (FS131-KR1): `Rigidity.bochnerHerglotz_of_countable` (M2's existence half; uniqueness is `DualGroup.measure_eq_of_fourier`, item 757) and `Rigidity.invariantMeasureOnClosed_of_countable`, each composed over its leaves; neither route reads `[Rudin1962]` or `[Kakutani1938]`.
+> — source: data/fs131/claims-NF2.md § Dated lines
+
+> - 2026-10-14 — **The count is typed** (FS131-K12A): `Rigidity.Counting.count_of_oneAvoidingDensityBound : Plane.OneAvoidingDensityBound → (chainInterface F).Count`, for every real number field, composed over 57 leaves in eight modules (`Plane/WindowDensity`, `Rigidity/FiniteZhang`, `PlaneZhang`, `CountTorus`, `CountResidue`, `CountCompletion`, `CountExtension`, `CountDescent`); it reads `tca_uniform`, `noRamifiedStableDyadic_of_tca`, `TA_subset_contChars`, `exists_mul_stableIntegers_le`, `dense_mixedEmbedding_nsmul_unitRing` and `upperDensity_le_of_oneAvoidingDensityBound`; no typed statement of another module changes.
+> — source: data/fs131/claims-NF2.md § Dated lines
+
+The three hand-backs behind this job and one ruling on a skeleton defect, as I logged them (their words in quotation
+marks, the rulings mine):
+
+> 823. **FS131-KR1 handed back: the chain's whole remaining road on one map (2026-10-14 11:03 UTC; "JOB FS131-KR1 — DONE"; 560k by the harness's count — past the line, not to be resumed; branch `fs131-wkr` at `3fabd5e10`, tree `fs131-wch`; record `plans/FS131-KR1-chain-map.md` there, its § Stage 5 the map).** From its hand-back message: six new modules typed (M2a `Rigidity/Herglotz`, M3 `Rigidity/InvariantMeasure`, M10 `Rigidity/ContinuityGroup`, M2b `Rigidity/BochnerTau`, M13 `Rigidity/ClassRatio`, M12's input `Plane/OneAvoidingDensity`), M11, M12 and M15 read and priced; "My seven modules come to about 14,000–28,000 lines. About half of that is M12, the count … 6,000–12,000 lines, 3–6 weeks; it needs its own planner"; M13 "2,500–5,000 lines plus FS-66's certificates at 11 and 19 … the cost of checking them in the kernel is unmeasured"; "Every price is estimated from what Mathlib at the pin covers, not from a proved leaf"; the critical path "M13's uniform-tail lemma → M12, alongside lane T → M8b and M4 → M10 → M2b → M11"; the density bound typed as `Plane.OneAvoidingDensityBound`, "as you ruled", its model proved; two private lemmas of `ChainAtTA` M10 reads. **My receipt:** the seven commits exist; from its compiled tree (scratch `kr1/Ax.lean`): `Plane.OneAvoidingDensityBound` prints as "∀ A, NullMeasurableSet A volume → (∀ a ∈ A, ∀ b ∈ A, dist a b ≠ 1) → ∀ x, limsup (fun R => volume (A ∩ ball x R) / volume (ball x R)) atTop ≤ ENNReal.ofReal 0.2470" on `EuclideanSpace ℝ (Fin 2)` — read by me against its row 2 table: equal to the page (the page's "independent of the choice of x" makes every centre the same as one); `oneAvoidingDensityBound_model` on the standard three. **Rulings.** (1) *The two private lemmas of `ChainAtTA` (`mem_torsion_mul_arch_iff`, `exists_rat_coords`):* made public by M10's implementer, statements unchanged and dumped (one fact proved once); high. (2) *The draft claim lists' corrections (M2's "existence half", M15's model):* carried by the five dated lines, filed; the generated drafts are left as their generator writes them; high. (3) *The next slot:* M12's planner (FS131-K12, item 824) — the longest single stretch and on the critical path; alternative, the FS-66 certificate measurement for M13 — next, as a short job; medium-high. **Filed:** its five dated lines in `data/fs131/claims-NF2.md`, verbatim, this commit; every bibliography key it cites resolves (`[Rudin1962]`, `[Kakutani1938]`, `[LevitzMott1972]`, `[KMOR2016]`, `[BachocEtAl2014]`, `[Zhang2012]` each have a row); their reading-status lines and its three `LEAN.md` lines are owed to the second filing. **For Kooshi's report:** the chain is weeks from the gate, not days — about 14,000–28,000 lines in its seven unread modules by estimate, M12 alone three to six weeks, and the density bound three to six weeks more if formalized; a fork in scope that is his (what to publish before the chain lands).
+> — source: plans/FS131-close-inventory.md
+
+> 832. **FS131-K12A handed back: the count typed and priced from first leaves (2026-10-14 12:24 UTC; "JOB FS131-K12A — DONE"; 620k by the harness's count — past the line, not to be resumed; branch `fs131-wk12` at `f6898c132`, tree `fs131-wch`; record `plans/FS131-K12A-count.md` there).** From its hand-back message: "the count is typed: `Rigidity.Counting.count_of_oneAvoidingDensityBound : Plane.OneAvoidingDensityBound → (chainInterface F).Count`, for every real number field. It is composed over 57 `sorry` leaves in eight new modules"; "five first leaves proved in scratch"; "priced from those leaves, the count is 4,150–6,000 lines of proof … The map had 6,000–12,000 lines and 3–6 weeks"; the shorter routes of item 827; "item 791's question (4) answered … the count reads neither R = O′ nor a scope"; a slip caught by its build ("the skeleton re-declared `Plane.bandFree_periodize`, a proved theorem of Plane/Slack … now reused"); "`Counting.toL` repeats lane T's `Rigidity.ofUnitRing`". **My receipt:** the six commits exist; from its compiled tree (scratch `k12a/Ax.lean`): `count_of_oneAvoidingDensityBound : ∀ {F : Subfield ℝ} [NumberField ↥F], Plane.OneAvoidingDensityBound → (chainInterface F).Count`, as reported. **Rulings.** (1) *`Counting.toL` and `Rigidity.ofUnitRing`, one map under two names:* at the join of this branch with the chain's, `Counting.toL` is replaced by `ofUnitRing` (lane T's, upstream), every reader re-pointed, the stored statements dumped; alternative, keep both — declined, one fact once; high. (2) *The count's four lanes:* queued for implementers; each opens with its hard leaf to re-price. (3) *Its price, at the measured rate:* 4,150–6,000 lines is about 5–7 active hours of the project's throughput — the count is no longer the chain's long pole. **Filed:** its four dated lines in `data/fs131/claims-NF2.md`, verbatim, this commit. **Owed to the second filing:** three bibliography lines, five `LEAN.md` lines; the draft claim list's two corrections are carried by the dated lines.
+> — source: plans/FS131-close-inventory.md
+
+> 850. **FS131-ITK1 handed back: the adelic model and the zero-entropy side's second half proved; the zero-entropy half of the chain on the standard three (logged 2026-10-14 13:48 UTC; "JOB FS131-ITK1 — DONE"; 647k by the harness's count — past the line, not to be resumed; branch `fs131-wt2` at `cea54d08e`, tree `fs131-wq1`; record `plans/FS131-ITK1-implementation.md` there).** From its hand-back message: "every leaf in this brief is proved. Lane T is complete, so `exists_tateModel` now rests on the standard three axioms, and so does `zeroEntropyCarried_of_numberField` (EF_F⁺ over every real number field, with no scope binder)"; "lane T-K, 8 leaves"; "the five M8b lanes, 60 leaves … PlaceSizes: 23 … Multipliers: 6 … ThinBoxes: 13, including Lemma 3.1′, `TateModel.thinBox_heavy` (EN2-L31) … GlobalPoint: 11 … WanderingShells: 7"; "All 167 records of the six modules print the standard three"; "no statement or definition changed except two ruled ones" (`countable_splitPlace`, item 847; `scaleHeight_three_mul_sq`'s unread binder, item 726's word), compared from the kernel's side with a control catching 8 of 8 plants; five generated `congr_simp` theorems allowed and listed; two shorter routes (`absAt_multiplier_arch`, `splitHeight_multiplier_le`); the planners' line counts "ran high again … T-K about 0.65, K8-A 0.5, K8-M 0.75, K8-B 0.65, K8-G 0.85, K8-S 0.6". **On the nine-versus-eight question of item 837:** the hand-back counts T-K as 8 leaves, as `ARCHITECTURE.md`'s row for `TateKernel` on the map's branch does ("`TateKernel` (8)"); the brief's "nine" was the planner's earlier count — settled. **My receipts:** the seven commits exist; `TateKernel`, `PlaceSizes`, `Multipliers`, `ThinBoxes`, `GlobalPoint`, `WanderingShells`, `TateExists` and `ZeroEntropyClosed` hold no `sorry`; from the tree's compiled library (scratch `itk1/Ax3.lean`): `Rigidity.zeroEntropyCarried_of_numberField : ∀ (F : Subfield ℝ) [NumberField ↥F], ZeroEntropyCarried F` — `[propext, Classical.choice, Quot.sound]`. So, on the chain's branch and not yet on `main` or through the gate: **every zero-entropy rotation-invariant probability measure on the dual of the unit-vector ring is carried by the continuity group, over every real number field** (EF_F⁺, FS100-EFP), a kernel theorem with no assumption. **Rulings, four parts.** (1) *`multiplier_mem`'s unread `[NumberField F]`:* kept, the linter silenced on that one declaration with its reason, as the job did; alternative, drop it as a ruled definition change — declined, it would move the stored type of `multiplier` and every statement that mentions it, for no reader's gain; high. (2) *The architecture rows of `TateExists` and `ZeroEntropyClosed` still reading "skeleton":* corrected by the join's implementer (FS131-IJ1), who writes `ARCHITECTURE.md` on the joined branch; high. (3) *The slot:* the join of this branch with the map's and the count's (FS131-IJ1, generator drafted at item 842), the queue's first item; high. **Prediction scored:** implementers at 0.5–0.85 of the planners' lines, as items 829 and 845 found. **Owed to the second filing:** five `LEAN.md` lines (the skeleton-instance rule of item 847 among them) and its audit block, drafted in its record.
+> — source: plans/FS131-close-inventory.md
+
+> 847. **FS131-ITK1 — a statement defect in a skeleton instance: `countable_splitPlace` stored without its number-field binder; ruled; the chain swept (2026-10-14 13:43 UTC; by message).** From its message: "as the kernel stores the skeleton it is `∀ {F : Subfield ℝ}, Countable (SplitPlace F)` — NO `[NumberField F]` binder (it is an `instance` with a `sorry` body, so Lean did not include the section's instance variable …). Believed false at F = ⊤ (one mind, by hand) … My proof (text of the statement unchanged) uses the instance, so Lean now includes `[NumberField F]` … the one reader (`measure_compl_TA_eq_zero` …) is unaffected, build 2 green." **My receipt:** its dump `fs131-wq1:data/fs131/itk1/statements-before.txt` line 55: `forall {F : Subfield.{0} Real Real.instDivisionRing}, Countable.{1} (HadwigerNelson.Rigidity.SplitPlace F)` — as reported. **The sweep (mine, scratch `k12/InstAll.lean`, `k12/SorryNF.lean`, each importing the whole library from the tree's compiled files):** every instance under `HadwigerNelson` whose stored type mentions a subfield and no `NumberField` — on `fs131-wch` (branch `fs131-wk12`, the map's and the count's modules) nine, on `fs131-wq1` (ITK1's working tree) seven: the structures' generated `SizeOf` instances, `Rigidity.instMulActionDual` and `Rigidity.measurableConstSMul_dual` (both proved, each the standard three, true over any subfield), and two skeleton instances with `sorry` bodies — `countable_splitPlace` (absent from `fs131-wq1`'s list: ITK1's proof restored the binder) and **`Rigidity.Counting.finite_quot`** (`Rigidity/CountResidue`, stored `∀ {F} (P : StablePrime F) (m : ℕ), Finite (𝓞 (fieldI F) ⧸ P.P ^ m)`; without a number field the residue ring at a maximal ideal can be an infinite field, so this too is believed false as stored — my reading, one mind). A second sweep for any `sorry`-bodied declaration of that kind found one more on `fs131-wk12`, `Rigidity.AdmissiblePair.ofPow`, and none on `fs131-wq1`; its detection of `sorry` is incomplete (it missed `finite_quot`), so it is a lower bound. **Rulings, four parts.** (1) *`countable_splitPlace`:* ITK1's course approved — the proof kept, the stored type gaining the section's `[NumberField ↥F]`, which the source text means; listed in its record as a ruled stored-type change with both dump lines; alternative, leave the leaf `sorry` with the false stored statement — declined, a statement believed false cannot stay; high. Sent by one message. (2) *`Counting.finite_quot`:* the same repair, ruled now for the lane that proves `CountResidue` (lane Λ2): the stored type gains `[NumberField F]` when proved, dumped before and after; written into that lane's brief; alternative, a planner's fix now — declined, no one writes that branch until the join and the lane's brief carries it; high. (3) *`AdmissiblePair.ofPow` on `fs131-wk12`:* checked by the join (FS131-IJ1) against `fs131-wt1`'s version, which the sweep finds clean; medium — the join's dump decides. **Tool note, for the planners' domain pass (to the tooling list):** a skeleton `instance` or `def` whose body is `sorry` does not include the section's instance variables in its stored type; a planner dumps the stored type of every instance it types, and reads any missing class binder as a defect.
+> — source: plans/FS131-close-inventory.md
+
+Of item 847: `Counting.finite_quot` in `CountResidue` is not yours to repair (lane Λ2 proves it), but you edit that
+file for the replacement — leave its statement as it is. After the merge, confirm that `Rigidity.AdmissiblePair.ofPow`
+is `fs131-wt1`'s version (ruling 3).
+**Your work, in order.** (1) **The join**: the merge commit; one build under the slot of the joined tree. (2) **The
+replacement**: first show from the kernel that the two maps are one term (`Counting.toL F = ofUnitRing F` by `rfl`, both
+printed); then delete `toL`, re-point its readers, dump the count's stored statements before and after, and list every
+statement that changed — each should differ only in that name. (3) **M10**, `ContinuityGroup` (6 leaves): the two lemmas
+of `ChainAtTA` made public first, their statements dumped and unchanged; the plan is the map planner's record `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wch/plans/FS131-KR1-chain-map.md`
+§ 2.3 and § 4.3. (4) **M2a**, `Herglotz` (3 leaves; § 2.1, § 4.3). (5) **M3**, `InvariantMeasure` (2 leaves; § 2.2,
+§ 4.3). (6) **M2b**, `BochnerTau` (4 leaves; § 2.1): the hard leaf `exists_twisted_parts` first, to re-price. The map
+itself is § Stage 5 of that record; the count's record `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wch/plans/FS131-K12A-count.md` § 5.1 names the leaves the count reads from M10. The last
+implementer's record `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wq1/plans/FS131-ITK1-implementation.md` is the worked pattern for this chain's files.
+
+## Done means
+
+1. **The join and the readback** (a saved stage, and the one line to me when the joined tree builds): the quoted lines
+   checked against their sources; each leaf's statement restated in one line beside its plan; the stored statements of
+   every file you touch dumped from the built joined tree before any edit.
+2. **The replacement and the two lemmas made public** (a saved stage), shown from the kernel's side.
+3. **The modules** (saved stages as leaves fall); re-price what is left from the first two leaves of each and say so.
+4. **No statement and no definition changed** but the replacement, shown from the kernel's side against item 1's dump (a
+   planted change watched firing); one build under the slot with no warning from your files but their remaining
+   leaves'; the axioms of every public declaration of your files printed from the built tree — the standard three, or
+   `sorryAx` only through named leaves — each listed, with a planted record watched showing.
+5. **Drafts for the landing**, in your record: the audit's block for your files; the models; any `LEAN.md` lines.
+6. The report in the standing rules' form. Leave no process running or queued.
+
+## What is yours to decide
+
+The proofs; private helpers; imports; the order inside items 3–6; the names of the theorems named for `toL`; another
+route for a leaf where the plan's does not go through (tell me which). An unread binder of a statement in your files is
+dropped under item 726's word, listed and named. Not yours: any other change to a statement or definition; the files
+listed as not yours; the declared printed theorem; the landing.
+
+## The machine
+
+**This session is on the laptop: 12 cores, 31 GB; about 316 GB of disk free — do not copy compiled libraries between
+trees.** This tree's compiled library is current for `fs131-wt2`; the join adds the map's and the count's fourteen
+modules, so the first build compiles them. One file through `lake env lean`: 3 to 24 seconds, 3.6 GB.
+
+`env SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 python3 /home/kooshi/source/lean-dir/scripts/slot.py --mem <GiB> --cpus <n> --wait 7200 --name ij1 -- <command>`
+
+One file (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`): `--mem 4 --cpus 2` from inside your worktree. The
+build: `--mem 10 --cpus 4 -- env MEMMAX=10G BATCH=8 ./scripts/build.sh` from inside the worktree; never `lake build`. The
+certificate job may hold 12 GiB of the slot for long stretches: on exit 75 wait ten minutes and retry. A cap kill under a
+`timeout` wrapper shows as exit 143, not 137 (item 835). Stop a process by its PID, never by matching its command line.
+`/tmp` is wiped at power-off: anything your record cites lives under `data/fs131/ij1/`. Report at once any disk, memory or
+count reading near its limit.
+
+The remote is unreachable: **commit by explicit path on your
+branch and do not push**; I copy the branches to a local backup.
+
+You start no agents of your own (standing rule 1: delegation is one level
+deep, because the coordinator can only review work it knows exists).

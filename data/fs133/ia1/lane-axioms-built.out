@@ -1,0 +1,12 @@
+slot: admitted ia1: mem 4 GiB (hard cap), cpus 0,1
+'HadwigerNelson.Outside.OAI158.Spectral.residual_fourier_cross' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.Spectral.residual_fourier]
+'HadwigerNelson.Outside.OAI158.Spectral.residual_fourier_model' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.OneClass.exists_field' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.Spectral.residual_fourier]

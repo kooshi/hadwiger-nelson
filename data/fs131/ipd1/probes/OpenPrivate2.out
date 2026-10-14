@@ -1,0 +1,5 @@
+slot: admitted ipd1: mem 8 GiB (hard cap), cpus 4,5
+'_private.Proofs.HadwigerNelson.Outside.OAI158Palette.0.HadwigerNelson.Outside.OAI158.instFactNeENNRealOfNatTop_proofs' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+build/ipd1/probes/OpenPrivate2.lean:8:14: error(lean.unknownIdentifier): Unknown constant `HadwigerNelson.Outside.OAI158.instFactNeENNRealOfNatTop_proofs`

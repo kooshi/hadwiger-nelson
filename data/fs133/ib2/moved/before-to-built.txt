@@ -1,0 +1,17 @@
+Proofs.HadwigerNelson.Plane.OneClass.Defs: IDENTICAL 48, PROOF-FILLED 1
+  PROOF-FILLED           def      HadwigerNelson.OneClass.algPlaneEmbedding
+      only before: Bool.false DFunLike.coe Function.Embedding Function.instFunLikeEmbedding Iff Lean.Name Lean.Name.anonymous Lean.Name.num Lean.Name.str Nat OfNat.ofNat instOfNatNat sorryAx
+      only after:  HadwigerNelson.OneClass.algPlaneEmbedding._proof_2
+Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw: DELETED 2, IDENTICAL 28, MOVED-IDENTICAL 1
+  MOVED-IDENTICAL        theorem  HadwigerNelson.OneClass.countable_algPlane -> Proofs.HadwigerNelson.Plane.OneClass.Defs
+  DELETED                theorem  _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.card_le_indepNum_induce
+  DELETED                theorem  _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.exists_indep_subset
+constants of the first dump: 80  DELETED 2  IDENTICAL 76  MOVED-IDENTICAL 1  PROOF-FILLED 1  new in the second: 7
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Defs.0.HadwigerNelson.OneClass.kCoeff_mul' @ Proofs.HadwigerNelson.Plane.OneClass.Defs
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Defs.0.HadwigerNelson.OneClass.kCoeff_one' @ Proofs.HadwigerNelson.Plane.OneClass.Defs
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Defs.0.HadwigerNelson.OneClass.measurable_shiftLab @ Proofs.HadwigerNelson.Plane.OneClass.Defs
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Defs.0.HadwigerNelson.OneClass.measurable_turnLab @ Proofs.HadwigerNelson.Plane.OneClass.Defs
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Defs.0.HadwigerNelson.Plane.upperDensity_congr_ae @ Proofs.HadwigerNelson.Plane.OneClass.Defs
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Defs.0.SimpleGraph.card_le_indepNum_induce @ Proofs.HadwigerNelson.Plane.OneClass.Defs
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Defs.0.SimpleGraph.exists_indep_card_eq_indepNum @ Proofs.HadwigerNelson.Plane.OneClass.Defs
+MOVED OK: every listed change is as listed; nothing else moved

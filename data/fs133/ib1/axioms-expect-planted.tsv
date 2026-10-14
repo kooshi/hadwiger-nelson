@@ -1,0 +1,21 @@
+# FS133-IB1: every public declaration of InvariantLaw and SectionDensity must print a subset of the standard three (the plan's § 5.5)
+HadwigerNelson.OneClass.countable_algPlane	CLEAN
+HadwigerNelson.OneClass.exists_foelner_finset	CLEAN
+HadwigerNelson.OneClass.exists_invariant_of_closed	CLEAN
+HadwigerNelson.OneClass.exists_isInvariantLaw	CLEAN
+HadwigerNelson.OneClass.exists_isInvariantLaw_unitDistance	CLEAN
+HadwigerNelson.OneClass.exists_shiftInvariant_of_foelner	CLEAN
+HadwigerNelson.OneClass.exists_turnInvariant	CLEAN
+HadwigerNelson.OneClass.norm_kCoeff_mul	CLEAN
+HadwigerNelson.OneClass.unitDistance_algPlane_eq_circulantGraph	CLEAN
+HadwigerNelson.OneClass.IsShiftInvariantLaw.measure_origin_le	CLEAN
+HadwigerNelson.Plane.exists_mem_le_sectionDensity	CLEAN
+HadwigerNelson.Plane.le_lintegral_sectionDensity	CLEAN
+HadwigerNelson.Plane.measurable_sectionDensity	CLEAN
+HadwigerNelson.Plane.measure_le_sectionDensity_pos	CLEAN
+HadwigerNelson.Plane.ofReal_integral_le_measure_pos	CLEAN
+HadwigerNelson.Plane.sectionDensity	CLEAN
+HadwigerNelson.Plane.sectionDensity_empty	CLEAN
+HadwigerNelson.Plane.sectionDensity_setOf_pos	CLEAN
+HadwigerNelson.Plane.sectionDensity_univ	CLEAN
+fs133IB1PlantedRecord	CLEAN

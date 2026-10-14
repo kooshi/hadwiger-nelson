@@ -1,0 +1,13 @@
+IMPORT	OAI.Geometry.PlaneColoring.BorelTransfer	Mathlib.Analysis.CStarAlgebra.Module.Constructions
+IMPORT	OAI.Geometry.PlaneColoring.BorelTransfer	Mathlib.Analysis.Complex.Circle
+IMPORT	OAI.Geometry.PlaneColoring.BorelTransfer	Mathlib.MeasureTheory.Function.L2Space
+IMPORT	OAI.Geometry.PlaneColoring.BorelTransfer	Mathlib.MeasureTheory.Function.LpSpace.InfiniteSum
+IMPORT	OAI.Analysis.PlaneSpectrum.Basic	Mathlib.Algebra.AlgebraicCard
+IMPORT	OAI.Analysis.PlaneSpectrum.Basic	Mathlib.Algebra.Order.Ring.Star
+IMPORT	OAI.Analysis.PlaneSpectrum.Basic	Mathlib.Analysis.Complex.Circle
+IMPORT	OAI.Analysis.PlaneSpectrum.Basic	Mathlib.FieldTheory.AlgebraicClosure
+IMPORT	OAI.Analysis.PlaneSpectrum.Basic	Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+IMPORT	OAI.Analysis.PlaneSpectrum.Basic	Mathlib.RingTheory.Flat.TorsionFree
+IMPORT	OAI.Analysis.PlaneSpectrum.Basic	Mathlib.RingTheory.SimpleRing.Principal
+IMPORT	OAI.Analysis.PlaneSpectrum.Representations	Mathlib.Analysis.CStarAlgebra.Module.Constructions
+IMPORT	OAI.Analysis.PlaneSpectrum.Representations	Mathlib.MeasureTheory.Function.L2Space

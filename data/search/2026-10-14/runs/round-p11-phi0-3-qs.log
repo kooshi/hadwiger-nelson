@@ -1,0 +1,32 @@
+p=11 n=121 |S|=12 |maps|=24 reps=62
+SEARCH-2026-10-14: solve basis |J| = 7 of 62 reps (phi0,3); q scalar; chars all
+  the two product-table symmetries hold on 300 random (ia, ib, t)
+  1 forked workers built 119133 canonical forms [4.9 s]
+products a*tau_t(a'): 119133 canonical forms (a quarter of 465124 by the two symmetries), 3759 orbits [5.0 s]
+q forms built: 3760 orbits [5.9 s]
+orbits K=3760; PSD blocks [('M2[u=0]', 8), ('M2[u=1]', 7), ('M2[u=12]', 7), ('M2[u=5]', 7), ('M2[u=2]', 7), ('M2[u=4]', 7), ('M2[u=15]', 7), ('M2[u=27]', 7), ('M2[u=24]', 7), ('M2[u=3]', 7), ('M2[u=14]', 7)]; scalar rows 18214; equality rows 0 [6.1 s]
+  grouped 1953 representative pairs into 104283 (pair, orbit) cells [0.0 s]
+  SEARCH-2026-10-14: 28 of 1953 representative pairs inside the basis
+assembled: (18530, 3759), nnz 42994 [6.2 s, 96.9 MB]
+  SEARCH-2026-10-14: trimmed to 177 of 3759 orbit variables and 815 of 18214 scalar rows
+FLOAT READING (untrusted, double precision): value 30.077159 (dual 30.077158), status solved, 1475 iterations, 0.3 s, 97.4 MB
+  p^2/m for m = 3, 4, 5: 40.3333, 30.2500, 24.2000
+scan: 6 rounding attempts on 1 workers [1.4 s wall]
+
+=== the rounding scan (plan §R'.4) ===
+     shift    D                  U    rows  cascaded  exact s  blocks
+     1e-09   12         30.077390…     452       251     0.21  12
+     1e-09   14         30.077390…     458       265     0.24  12
+     1e-08   12         30.077615…     459       280     0.24  12
+     1e-08   14         30.077614…     459       277     0.23  12
+     1e-07   12         30.080091…     458       292     0.23  12
+     1e-07   14         30.080090…     458       292     0.25  12
+wrote data/search/2026-10-14/certs/v-p11-phi0-3-qs.json (145118 bytes, sha256 d7c4f6890b92…)
+
+BOUND (the producer's own arithmetic -- UNTRUSTED until the checker says CERTIFIED):
+  U = 3007739046178795872566572659927704 / 100000000000000000000000000000000 = 30.077390…
+  4*U = 120.309561… < 121 -- refuses 4 colours (and fewer) at every level, by the hand links L1, L2, L6; 5*U = 150.386952… >= 121, so it says nothing about 5
+  loss against the float reading: 0.000231
+
+Next: python3 tools/fs66_b1_cert_check.py data/search/2026-10-14/certs/v-p11-phi0-3-qs.json --m 4 --record data/fs66/b1/records.jsonl
+8.30 s 102404 KB
