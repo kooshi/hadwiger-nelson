@@ -6,8 +6,14 @@ Branch `fs131-wk9`, cut from `3b531d1d2` (the join of `fs131-wl1` into `fs131-wp
 
 ## Theorems this phase proved
 
-None. A planning job: every statement typed here is a skeleton leaf (`sorry`), each with its plan; the few-line checks
-that elaborate are definitions' examples, not theorems of the chain.
+A planning job; every other statement typed here is a skeleton leaf (`sorry`) with its plan. Three short lemmas were proved
+in passing (kernel-checked in a skeleton module; their axioms not audited, as no gate ran):
+
+- `Rigidity.ZdAction.IsTotallyIrreducible.isIrreducible` — total irreducibility read at `Λ = ℤ^d` — `Rigidity/PositiveEntropy`.
+- `Rigidity.mem_stableIntegers` — membership in `O′` is membership in every stable valuation subring — `Rigidity/RingScope`.
+- `Rigidity.unitRing_le_stableIntegers` — `R ⊆ O′` over every real number field (FS91-J10-L1 (c)) — `Rigidity/RingScope`.
+
+Also proved, as parts of definitions: the two laws of the model `Rigidity.ZdAction.mulTwoThree`.
 
 ## Stage 1 — SAVED: the readback
 
