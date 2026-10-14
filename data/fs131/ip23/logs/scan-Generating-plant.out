@@ -1,0 +1,4 @@
+HIT Generating.lean:1856: [#eval] #eval (1 : Nat)
+HIT Generating.lean:1857: [import] import Evil
+scanned Generating.lean: lines=1857 hits=2
+control FIRED

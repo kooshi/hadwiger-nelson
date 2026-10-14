@@ -1,0 +1,4 @@
+HIT ErgDecomp.lean:573: [#eval] #eval (1 : Nat)
+HIT ErgDecomp.lean:574: [import] import Evil
+scanned ErgDecomp.lean: lines=574 hits=2
+control FIRED

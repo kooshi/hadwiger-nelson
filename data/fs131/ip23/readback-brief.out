@@ -1,0 +1,8 @@
+match    data/fs131/REQUEST-2026-10-13.md | W2: (2026-10-13, answering the choice between the two publishable form
+match    data/fs131/claims-NF2.md | - 2026-10-14 — **NF2-LEAF-17 is answered in part (FS131-EN2, inventory
+match    plans/FS131-close-inventory.md | 750. **FS131-KN7 handed back: the chain's third planner, at stage 6 (2
+match    plans/FS131-close-inventory.md | 758. **FS131-KO1 — the trial's result, and a ruling on Mathlib's chang
+match    plans/FS131-close-inventory.md | 763. **FS131-IPA1 — lane A's ten modules elaborate; three read-back fi
+match    plans/FS131-close-inventory.md | 772. **FS131-IPB1 — a fifth Mathlib definition changed between the pin
+match    plans/FS131-close-inventory.md | 801. **FS131-IG1 handed back: the pieces proved, Lemma Γ among them (2
+matched: 7  mismatched: 0
