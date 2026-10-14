@@ -8,7 +8,36 @@ private helpers only), and in `Plane/OneClass/Defs` two edits by rulings 1 and 4
 
 ## Theorems this phase proved
 
-(Filled at the build of record; until then, none.)
+Each [kernel], printed from the built tree (stage 4.3; `data/fs133/icd1/axioms-built.out`); statements FS133-K1's,
+unchanged (stage 4.2); proofs this job's. "Std" is `[propext, Classical.choice, Quot.sound]`; "Std + RF" is those and
+the declared outside theorem `HadwigerNelson.Outside.OAI158.Spectral.residual_fourier`.
+
+`Proofs/HadwigerNelson/Plane/OneClass/Algebraic.lean`:
+- `OneClass.exists_measurable_indep_of_field` — a `[0,1]` field with mean `≥ δ` and a.s. zero products at unit
+  distance gives a Borel independent set of upper density `≥ δ`. Std.
+- `OneClass.IsInvariantLaw.measure_origin_le_mOne` — C133-ALG: an invariant random independent set of the algebraic
+  plane has density at most `m₁(ℝ²)`. Std + RF.
+- `OneClass.mOne_le_finIndepRatio` — C133-EASY: `m₁(ℝ²) ≤ α₁(ℝ²)`. Std.
+- `OneClass.one_seventh_le_mOne` — `1/7 ≤ m₁(ℝ²)`. Std + RF.
+- `OneClass.tendsto_minIndepNum_div_finIndepRatio` — `f(n)/n → α₁(ℝ²)` (Fekete). Std.
+- With these, the skeleton's assembled headlines now have no `sorry` beneath them: `finIndepRatio_algPlane_le_mOne`,
+  `finIndepRatio_plane_eq_mOne`, `finIndepRatio_algPlane_eq_mOne` (C133-ONE, first line), `tendsto_minIndepNum_div`
+  (C133-FN) — each Std + RF.
+
+`Proofs/HadwigerNelson/Plane/OneClass/Fractional.lean`:
+- `OneClass.exists_periodic_indep` — periodisation below `m₁`. Std.
+- `OneClass.exists_fold_cover` — `N` independent sets covering every point at least `b ≥ cN > 0` times. Std.
+- `OneClass.fractionalChromaticNumber_plane_le` — C133-CHIF: `χ_f(ℝ²) ≤ 1/m₁(ℝ²)`. Std.
+- With these: `fractionalChromaticNumber_plane`, `iSup_fractionalChromaticNumber_plane`,
+  `fractionalChromaticNumber_algPlane` (C133-ONE, second line) — each Std + RF.
+
+`Proofs/HadwigerNelson/Plane/OneClass/Pair.lean`:
+- `OneClass.admissibleOn_colourPattern_iff`, `OneClass.isAlgPattern_colourPattern`,
+  `OneClass.exists_admissible_colourPattern_seven` — the drift check and the two models. Std.
+- **Not proved: Q4 `exists_measurable_admissibleAe`, Q5 `exists_admissibleOn_of_ae`**, so C133-PAIR's two clauses
+  (`exists_admissibleOn_univ_iff_ae`, `…_iff_algPlane`) still print `sorryAx`.
+
+`Proofs/HadwigerNelson/Plane/OneClass/Defs.lean`: no proof changed; three lemmas made public (stage 2.1).
 
 ## Stage 1 — SAVED: the readback, the leaves restated, the stored statements dumped before any edit
 
@@ -132,3 +161,126 @@ modulo `K` by the period, and `p ↦ (⌊x/h⌋, ⌊y/h⌋) − p` is a bijectio
 side, so distinct squares have distinct corners modulo `K`). Then `a K² < n'`, so `c K² ≤ n'`, `n' > 0`. The plan's
 route (regularise by `3/4`-dense discs, grid squares inside an open set) was not needed: the library's kept squares
 are already a grid union.
+
+## Stage 4 — SAVED: the build of record, and every receipt from the built tree
+
+**4.1 The build** (Done, item 4). `build-record`: OK, 249 of 249 batches, 4 modules rebuilt (`Algebraic`, `Fractional`,
+`Pair`, `Proofs`), warnings only `Pair`'s two `sorry`s. Its dump showed one generated constant in `Algebraic`,
+**`Subadditive.lim.congr_simp`**, made by a `simp only [SimpleGraph.finIndepRatio]` that rewrote under `hsub.lim`
+(`LEAN.md`: a generated lemma in a module that asks; two other worktrees, `fs131-wch` and `fs131-wq1`, read
+`Subadditive` and could generate the same name — a `GENERATED` dupnames row at a join). Replaced by `rw`; a footer dump
+of the old text lists it (10 named constants) and of the new one does not (9) — the control fired. The build of
+record is **`build-record2`: `build: OK — 249 of 249 batches, 3 module(s) rebuilt, 1 module(s) with warnings, 7m30s`**
+(`data/fs133/icd1/build-record2-full.log`): `✔ Built … Algebraic (2.8s)`, `✔ Built … Fractional (17s)` — **no
+warning from either**; `Pair` replays its two `declaration uses 'sorry'` (Q4, Q5) and nothing else. `sorry` in the
+files: `Algebraic` 0, `Fractional` 0, `Pair` 2.
+
+**4.2 No statement changed** (Done, item 4), from the kernel's side. `tools/fs133_icd1_moved.py` (FS133-IB2's reader,
+its verdicts unchanged, with `--made-public`: the private constant gone, the public one in the same module, full print
+identical), `--strict`: `moved/before.out.xz` (stage 1) against `moved/built2.out.xz`
+(`moved/before-to-built.txt`): **92 constants — 89 IDENTICAL, 3 MADE-PUBLIC-IDENTICAL (`card_le_indepNum_induce`,
+`exists_indep_card_eq_indepNum`, `upperDensity_congr_ae`); `MOVED OK`**; new: twelve private helpers of `Algebraic` and
+`Fractional`, nothing public. The same against the dump after the `Defs` edits and the first import (`mid.out.xz`,
+`before-to-mid.txt`): the same verdicts, so neither the visibility changes nor `Instances.Seven` moved a stored
+statement, and the final dump (after `Mathlib.Analysis.Subadditive`) is identical in all 92. **Controls**:
+`moved/control-built.txt` — eleven plants (per made-public constant its public print changed and its private copy left
+in; a constant changed in both prints, in the full print only under `--strict`, removed, made an axiom, moved to
+another module), each fails the run and is named; unplanted, no failure. **End to end** (`plant/`): a copy of `Pair`
+elaborated with FS133-IB2's footer at another path reads **19 of 19 IDENTICAL** to the compiled module
+(`copy-verdict.txt`); the same copy with `(_hplant : (0 : ℕ) = 0)` added to `admissibleOn_colourPattern_iff` reads
+`DIFFERENT … admissibleOn_colourPattern_iff`, `MOVED FAILED: 1`, exit 1 (`planted-verdict.txt`). **No ruled
+difference** of the standing word's kind: two binders of a private helper of mine were dropped as unread, and no binder
+of a statement of the three files is unread.
+
+**4.3 The axioms of every public declaration of the module** (Done, item 4). `lean/Axioms.lean` (the eight files and
+the ported module; the earlier implementers' tables joined with this job's, `axioms-expect.tsv`) →
+`axioms-built.out`; `tools/fs133_icd1_axioms.py` (FS133-IB2's reader with two kinds for outstanding leaves): **125
+records — 110 on the standard three, 11 on those and `Spectral.residual_fourier` (`residual_fourier_cross`,
+`exists_field` and this job's nine), 4 on `sorryAx` (Q4, Q5 and the two clauses of C133-PAIR, listed as OPEN); `AXIOMS
+OK`** (`axioms-verdict.out`) — every record matches the plan's § 5.5, and no record of its standard-three list prints
+the import. Controls: a `sorryAx` in a clean record, the import in a clean record, the import missing from an imported
+record and a record removed are each reported (`axioms-control.out`); end to end, a theorem on `sorry` planted beside
+the 125 prints `[sorryAx]` and is reported, exit 1 (`axioms-planted-verdict.out`).
+
+**4.4 Not run here** (the landing's, on the joined tree): `scripts/axioms.sh`, `vacuity.sh`, `dupnames.sh`,
+`assumptions.sh`, `lake lint`. Every private helper's name carries its module.
+
+**4.5 What is left.** **Q5** `exists_admissibleOn_of_ae`: the library's extension lemma
+(`exists_proper_ae_eq_of_proper_on_conull`, `Plane/LebesgueNumber`) concludes `f x ≠ f y` for one relation and cannot
+express a pattern of forbidden pairs, and `dist_ne_one_of_mem_densitySet` is for one set at distance one; Q5 needs both
+generalised — a two-set, radius-`r` density-point lemma (`Plane/DensityPoints` ll. 45–165 rerun) and the Rado
+extension for a pair pattern (`exists_proper_ae_eq_of_proper_on_conull`'s proof rerun) — priced from this job's rate
+at one long stage. **Q4** `exists_measurable_admissibleAe`: `exists_invariant_of_closed` on the closed set of
+admissible labellings of `E`, `exists_field` at `ι := Λ` (local discrete instances on `Λ`), Tonelli over the countable
+`(r, a, b)` as in A1, and a positive selection — one to two long stages. Neither begun.
+
+## Drafts for the landing (files this job does not write; each names its slot)
+
+**DD1. `scripts/Axioms.lean`.** Under CLEAN, appended after FS133-IB2's block DC1: its three new lines
+`#print axioms SimpleGraph.card_le_indepNum_induce`, `#print axioms SimpleGraph.exists_indep_card_eq_indepNum`,
+`#print axioms HadwigerNelson.Plane.upperDensity_congr_ae` (made public here; `Defs`'s block then holds 28 records),
+and this job's CLEAN block, `data/fs133/icd1/axioms-block.txt`'s first part (15 records of the three files). Under
+IMPORTED, after FS133-IA1's lines for `Spectral.residual_fourier`: the block's second part (9 records), each resting
+on `HadwigerNelson.Outside.OAI158.Spectral.residual_fourier` and on nothing else outside the standard three. **The
+four records of `Pair` that wait on Q4 and Q5** (`exists_measurable_admissibleAe`, `exists_admissibleOn_of_ae`,
+`exists_admissibleOn_univ_iff_ae`, `exists_admissibleOn_univ_iff_algPlane`) print `sorryAx` on this branch: their
+lines are in the block, commented, and are filed only when those leaves are proved (the first, third and fourth under
+IMPORTED, the second under CLEAN, by the plan's § 5.5).
+
+**DD2. The model for each hypothesis** (`LEAN.md` § The gate). No model was added as a declaration (a public
+declaration is outside this job's touches); each note names a library theorem or a term.
+- `exists_measurable_indep_of_field` (`hH`, `h01`, `hmean`, `hunit`, all at once, with `δ > 0`): the field that
+  `exists_field` gives at the law of `exists_isInvariantLaw_unitDistance` with the indicator of the origin — built
+  inside the proof of `IsInvariantLaw.measure_origin_le_mOne`, not as a named term; `δ` is that law's density, the
+  ratio of `unitDistance E`, at least `1/7`. With `δ ≤ 0`, `H = 0` meets every hypothesis.
+- `IsInvariantLaw.measure_origin_le_mOne` (`h`): the law of `exists_isInvariantLaw_unitDistance` (positive density);
+  `isInvariantLaw_dirac` (density `0`).
+- `exists_periodic_indep`, `exists_fold_cover` (`hc : c < mOne`): every `c < 1/7`, by `one_seventh_le_mOne`; `c = 0`
+  in particular.
+- `IsAlgPattern N`: `isAlgPattern_colourPattern`. `AdmissibleOn N univ ℓ` with `AdmissibleAe N ℓ` and Borel fibres:
+  `exists_admissible_colourPattern_seven` (the brick colouring, `Λ = Fin 7`) — the model, at once, of
+  `exists_admissibleOn_of_ae`'s hypotheses (`hcount`, `hpos` from `isAlgPattern_colourPattern`; `hm` from
+  `Measurable`), of `exists_measurable_admissibleAe`'s (`h` by `AdmissibleOn.mono`) and of both clauses of C133-PAIR.
+- The vacuity scan will read the binders `GENERIC` (no colouring binder of a tracked predicate); no hypothesis of the
+  three files stands for an outside theorem or a hand result (the assumptions step has nothing to declare).
+
+**DD3. `ARCHITECTURE.md` § 3, the row of `Plane/OneClass/Algebraic`**: its imports cell gains
+`Instances/Seven` and Mathlib's `Analysis.Subadditive` (Amendment 1 accepted the first; the second is A5's route).
+The rows of `Algebraic`, `Fractional` and `Pair`: "**FS-133 (FS133-K1; a skeleton).**" → "**FS-133 (FS133-K1's
+statements, FS133-ICD1's proofs; no `sorry` in `Algebraic` and `Fractional`; `Pair` two leaves, Q4 and Q5).**".
+The row of `Plane/OneClass/Defs` gains "three lemmas made public by FS133-ICD1 (`upperDensity_congr_ae`,
+`card_le_indepNum_induce`, `exists_indep_card_eq_indepNum`; rulings of inventory items 752 and 753)".
+
+**DD4. `CLAUDE.md` § Where the problem stands, "What the kernel holds, beyond the interval"**, a sentence following
+the three-and-four-colours sentence (its grade [kernel] on one declared outside theorem, until the port lands it on
+the standard three): "**The density equality for the plane** (FS-133): `α₁(ℝ²) = α₁(𝒜²) = m₁(ℝ²)` — the infimum of
+`α(G)/|G|` over finite point sets of the plane, and of the algebraic plane, is the supremum of the upper densities of
+the Borel (equivalently Lebesgue-measurable) sets with no two points at distance one — and `χ_f,0(ℝ²) = χ_f(ℝ²) =
+χ_f(𝒜²) = 1/m₁(ℝ²)`, and `f(n)/n → m₁(ℝ²)` (`[DuczVarga2026]` Conjecture 1, first clause), on the declared outside
+theorem `Outside.OAI158.Spectral.residual_fourier` (`OneClass.finIndepRatio_plane_eq_mOne`, `…_algPlane_eq_mOne`,
+`fractionalChromaticNumber_plane`, `iSup_fractionalChromaticNumber_plane`, `fractionalChromaticNumber_algPlane`,
+`tendsto_minIndepNum_div`); with no import, `m₁(ℝ²) ≤ α₁(ℝ²)`, `χ_f(ℝ²) ≤ 1/m₁(ℝ²)` and `f(n)/n → α₁(ℝ²)`
+(`mOne_le_finIndepRatio`, `fractionalChromaticNumber_plane_le`, `tendsto_minIndepNum_div_finIndepRatio`). Not
+claimed: any value of `m₁(ℝ²)` or of a chromatic number (only `1/7 ≤ m₁(ℝ²)`); `m₁(ℝ²) = δ_Croft`; that a finite
+graph attains `sup χ_f`; anything at a number field's plane; anything at six colours; that the release states any of
+this." **C133-PAIR is not yet in the kernel**: its two clauses wait on Q4 and Q5 and are not drafted as held.
+
+**DD5. `LEAN.md` § Searching — Lean**, new bullets.
+- "A module that opens `SimpleGraph` reads `ball` as `SimpleGraph.ball`: write `Metric.ball` there (the error is a
+  type mismatch at the centre, 'expected `SimpleGraph ?`') (FS133-ICD1)."
+- "A private lemma whose statement filters a `Finset` by an undecidable predicate needs `open Classical in` above it;
+  a proof that calls it after `classical` elaborates the same instance (FS133-ICD1)."
+- "Core's names for `a % b + a / b * b = a` are `Int.emod_add_ediv_mul` and `Int.mul_ediv_add_emod`; there is no
+  `Int.emod_add_ediv` or `Int.ediv_add_emod` at the pin (FS133-ICD1)."
+- "`Plane.muPer`'s definition records a grid side and a period with no relation between them; the construction of
+  `eventually_le_muPer` has the pixel `1/M` dividing the period `ℓ + 2`. A consumer that counts translates of a
+  periodic grid union reruns the construction (`OneClass.exists_fold_cover`) (FS133-ICD1)."
+- "The brick seven-colouring `sevenBrick.color` is Borel and proper at every pair: a table read at two floors of
+  affine functions (`Int.measurable_floor`, `measurable_of_countable` on `ℤ × ℤ`, `Brick.avoids` at `q = 1`);
+  `Plane.r7Col` is proper only almost everywhere (FS133-ICD1, `exists_admissible_colourPattern_seven`)."
+
+**DD6. `plans/FS133-kernel-plan.md`**, notes for the planner's record (its §§ 5.3–5.5): A2 is named
+`IsInvariantLaw.measure_origin_le_mOne` in the file; A5's route needs `Mathlib.Analysis.Subadditive`; C1 is proved
+by a window and copies cut `2` apart (not a trimmed square); C2 by the library's kept squares (not `3/4`-dense
+discs); Q3's model is the brick colouring (the plan's pointer is to an a.e.-proper one); `finIndepRatio_algPlane_le_mOne`
+rests on the import (§ 5.5 lists it under neither list; it is IMPORTED by its route through C133-ALG).

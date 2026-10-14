@@ -335,7 +335,7 @@ theorem tendsto_minIndepNum_div_finIndepRatio :
   -- the limit is the finitary ratio
   have hval : ENNReal.ofReal hsub.lim = G.finIndepRatio := by
     refine le_antisymm ?_ ?_
-    · simp only [SimpleGraph.finIndepRatio]
+    · rw [SimpleGraph.finIndepRatio]
       refine le_iInf₂ fun S hS => ?_
       have hpos : 0 < S.card := hS.card_pos
       calc ENNReal.ofReal hsub.lim ≤ ENNReal.ofReal (u S.card / S.card) :=
