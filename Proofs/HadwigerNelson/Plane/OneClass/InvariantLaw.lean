@@ -274,42 +274,7 @@ private theorem exists_common_fixed {ι : Type*} {p : Measure X → Prop}
 end Weak
 
 
-/-! ### The finitary ratio read on a finite set, and almost-invariant finite sets (private) -/
-
-/-- An independent subset of a finite vertex set has at most the independence number of the induced graph. -/
-private theorem card_le_indepNum_induce {V : Type*} (G : SimpleGraph V) (S : Finset V) {J : Finset V}
-    (hJS : J ⊆ S) (hJ : G.IsIndepSet (J : Set V)) : J.card ≤ (G.induce (S : Set V)).indepNum := by
-  classical
-  have hind : (G.induce (S : Set V)).IsIndepSet
-      ((J.subtype (· ∈ (S : Set V)) : Finset (S : Set V)) : Set (S : Set V)) := by
-    intro x hx y hy hxy hadj
-    exact hJ (Finset.mem_subtype.1 hx) (Finset.mem_subtype.1 hy) (fun h => hxy (Subtype.ext h))
-      (SimpleGraph.induce_adj.1 hadj)
-  have hcard : (J.subtype (· ∈ (S : Set V))).card = J.card := by
-    rw [Finset.card_subtype, Finset.filter_true_of_mem fun x hx => Finset.mem_coe.2 (hJS hx)]
-  rw [← hcard]
-  exact SimpleGraph.IsIndepSet.card_le_indepNum hind
-
-/-- A nonempty finite vertex set holds an independent set of at least the finitary ratio times its size. -/
-private theorem exists_indep_subset {V : Type*} (G : SimpleGraph V) {S : Finset V} (hS : S.Nonempty) :
-    ∃ J : Finset V, J ⊆ S ∧ G.IsIndepSet (J : Set V) ∧ G.finIndepRatio * S.card ≤ J.card := by
-  classical
-  obtain ⟨J', hJ'⟩ := (G.induce (S : Set V)).exists_isNIndepSet_indepNum
-  refine ⟨J'.map (Function.Embedding.subtype _), ?_, ?_, ?_⟩
-  · intro x hx
-    obtain ⟨y, -, rfl⟩ := Finset.mem_map.1 hx
-    exact y.2
-  · intro x hx y hy hxy hadj
-    obtain ⟨x', hx', rfl⟩ := Finset.mem_map.1 (Finset.mem_coe.1 hx)
-    obtain ⟨y', hy', rfl⟩ := Finset.mem_map.1 (Finset.mem_coe.1 hy)
-    exact hJ'.isIndepSet (Finset.mem_coe.2 hx') (Finset.mem_coe.2 hy') (fun h => hxy (congrArg _ h))
-      (SimpleGraph.induce_adj.2 hadj)
-  · rw [Finset.card_map, hJ'.card_eq]
-    have h : G.finIndepRatio ≤ ((G.induce (S : Set V)).indepNum : ℝ≥0∞) / S.card :=
-      iInf₂_le (f := fun (S : Finset V) (_ : S.Nonempty) =>
-        ((G.induce (S : Set V)).indepNum : ℝ≥0∞) / S.card) S hS
-    have hcard : (S.card : ℝ≥0∞) ≠ 0 := by simpa using hS.ne_empty
-    exact (ENNReal.le_div_iff_mul_le (Or.inl hcard) (Or.inl (ENNReal.natCast_ne_top _))).1 h
+/-! ### Almost-invariant finite sets (private) -/
 
 /-- The points of a finite set that a translation moves out of it, counted as a `Finset`. -/
 private theorem ncard_setOf_mem_and_add_notMem {A : Type*} [AddCommGroup A] [DecidableEq A] (F : Finset A)
@@ -409,16 +374,19 @@ theorem IsShiftInvariantLaw.measure_origin_le {G : SimpleGraph E} {P : Measure (
     ext I
     show I g = true ↔ I (0 + g) = true
     rw [zero_add]
-  unfold SimpleGraph.finIndepRatio
-  refine le_iInf₂ fun S hS => ?_
-  have hcard : (S.card : ℝ≥0∞) ≠ 0 := by simpa using hS.ne_empty
-  rw [ENNReal.le_div_iff_mul_le (Or.inl hcard) (Or.inl (ENNReal.natCast_ne_top _))]
+  rw [SimpleGraph.le_finIndepRatio_iff]
+  intro S hS
+  -- a largest independent subset `J` of `S`: the random set meets `S` in at most `#J` points
+  obtain ⟨J, hJmem, hJmax⟩ := Finset.exists_max_image (S.powerset.filter fun J => G.IsIndepSet (J : Set E))
+    Finset.card ⟨∅, Finset.mem_filter.2 ⟨Finset.empty_mem_powerset S, by simp⟩⟩
+  obtain ⟨hJS, hJ⟩ := Finset.mem_filter.1 hJmem
+  refine ⟨J, Finset.mem_powerset.1 hJS, hJ, ?_⟩
   calc P {I | I 0 = true} * S.card = ∑ g ∈ S, P {I | I g = true} := by
         rw [Finset.sum_congr rfl fun g _ => hshift g, Finset.sum_const, nsmul_eq_mul, mul_comm]
     _ = ∫⁻ I, ∑ g ∈ S, ({I : E → Bool | I g = true}.indicator 1 I : ℝ≥0∞) ∂P := by
         rw [lintegral_finsetSum _ fun g _ => measurable_one.indicator (hT g)]
         exact Finset.sum_congr rfl fun g _ => (lintegral_indicator_one (hT g)).symm
-    _ ≤ ∫⁻ _, ((G.induce (S : Set E)).indepNum : ℝ≥0∞) ∂P := by
+    _ ≤ ∫⁻ _, (J.card : ℝ≥0∞) ∂P := by
         refine lintegral_mono_ae (h.indep.mono fun I hI => ?_)
         -- the sum counts the points of `S` in the random set
         have hsum : ∑ g ∈ S, ({I : E → Bool | I g = true}.indicator 1 I : ℝ≥0∞) =
@@ -429,18 +397,9 @@ theorem IsShiftInvariantLaw.measure_origin_le {G : SimpleGraph E} {P : Measure (
           · rw [indicator_of_mem (show I ∈ {I : E → Bool | I g = true} from hg), if_pos hg]; simp
           · rw [indicator_of_notMem (show I ∉ {I : E → Bool | I g = true} from hg), if_neg hg]; simp
         rw [hsum]
-        exact_mod_cast card_le_indepNum_induce G S (Finset.filter_subset _ S)
-          (Set.Pairwise.mono (fun g hg => (Finset.mem_filter.1 hg).2) hI)
-    _ = (G.induce (S : Set E)).indepNum := by rw [lintegral_const, measure_univ, mul_one]
-
-/-- The algebraic plane is countable (the release's `E_countable`; a theorem, not an instance: `E` is Mathlib's
-type). -/
-theorem countable_algPlane : Countable E := by
-  apply Set.Countable.to_subtype
-  have heq : (algebraicClosure ℚ ℂ : Set ℂ) = {x | IsAlgebraic ℚ x} := by
-    ext z; exact mem_algebraicClosure_iff
-  rw [heq]
-  exact Algebraic.countable ℚ ℂ
+        exact_mod_cast hJmax _ (Finset.mem_filter.2 ⟨Finset.mem_powerset.2 (Finset.filter_subset _ S),
+          Set.Pairwise.mono (fun g hg => (Finset.mem_filter.1 hg).2) hI⟩)
+    _ = J.card := by rw [lintegral_const, measure_univ, mul_one]
 
 /-- **A Følner sequence**: a countable commutative group has finite nonempty sets `F n` such that, for every `z`,
 the proportion of `F n` that `z` translates out of `F n` tends to `0`. -/
@@ -681,7 +640,7 @@ theorem exists_isInvariantLaw (S : Set E) (hS : ∀ u : K, ∀ s ∈ S, kCoeff u
     rw [← mul_sub, ← mul_sub]
     exact hadj.2.imp (hS u _) (hS u _)
   obtain ⟨F, hF, hFz⟩ := exists_foelner_finset E
-  choose J hJF hJind hJcard using fun n => exists_indep_subset G (hF n)
+  choose J hJF hJind hJcard using fun n => (G.le_finIndepRatio_iff.1 le_rfl) (F n) (hF n)
   set ℓ : ℕ → E → Bool := fun n x => decide (x ∈ J n) with hℓ
   have hset : ∀ n, {z : E | ℓ n z = true} = (J n : Set E) := fun n => by
     ext z; simp [hℓ]
