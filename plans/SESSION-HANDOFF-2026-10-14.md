@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-14, afternoon: the port and the density equality on `main`; four jobs running on the chain and the density bound
 
 *Rewritten 2026-10-14 14:58 UTC, § 3–5 updated 2026-10-14 18:22 UTC, by Keryx, between hand-backs, so a compaction loses nothing. Current state only. A successor reads this
-file first, then `plans/FS131-close-inventory.md` items 837–899 (everything since the last rewrite, each with its receipt and its ruling
+file first, then `plans/FS131-close-inventory.md` items 837–906 (everything since the last rewrite, each with its receipt and its ruling
 in four parts; items 750–836 are the morning's, and their written times in 750–810 are wrong by up to six and a half hours, item 812).
 `plans/SESSION-HANDOFF-2026-10-13.md` is older: read it only for the parked frontier (its § 8) and the older corrections (its § 7).*
 
@@ -42,7 +42,7 @@ push -q backup --all`** after each commit. Agent ids: scratch `agents.txt`, copy
    `fs131-wcm` (the count, M13 composed); M9-S and `mulTwoThree_model`; the landing's code rulings (entropySplit/zeroEntropyCarried
    moved to `ZeroEntropyClosed`, the declared printed theorem registered, lane N's binders, Lemma F); the headline closed over what
    is open, its axioms read from the kernel.
-2. **FS131-ICM2 — M13's six leaves** (tree `fs131-wch`, branch `fs131-wcm2`): Lemma P first (`card_fibre`,
+2. **FS131-ICM3 — M13's last leaves on the count's line** (tree `fs131-wch`, branch `fs131-wcm3` from `fs131-wcm2`, where Lemma P and the exclusions at 3 and 7 are proved and `tca_uniform` rests on Weil's bound alone, item 905): `circleCos_bound` (23, 31), `charBound_one_exact_27`, the dyadic branch; `ratioAtMost_cert` stays named.
    `norm_charSum_new_le`), then q ∈ {3, 7}, the dyadic sizes, the exact spectra at 23, 27, 31; `ratioAtMost_cert` stays named.
 3. **FS131-IKC3 — the certificates** (tree `fs131-wnf`, branch `fs131-wc16`): **p = 11 done** (`card_le_eleven`, standard three,
    item 899); F2 at p = 19 next (checker parts, the computation half re-proved).
