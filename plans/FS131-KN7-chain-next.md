@@ -289,3 +289,47 @@ constant on it, and every entropy is `0` — said here, not a theorem of the lib
 `scripts/Axioms.lean`: still owed at the first landing that proves a record from the axiom; KN3 § 5.3 item 4's draft line,
 with "its σ-algebra on the factor is the Borel one of the quotient (FS131-KN7)" added.
 
+## Stage 4 — SAVED: the ergodic decomposition and the generating-sequence theorem, measured by trial
+
+The method of inventory item 717 (KN6 § 5.1): `tools/fs131_kn7_release_copy.py make` writes each bundle under the ignored
+`build/fs131-kn7/release-copies/` with its import lines replaced by `import Mathlib` and the recorded renames applied;
+`scan` searches the copy for anything that runs code at elaboration and for any other import, with a planted control;
+`data/fs131/kn7/trial.sh` elaborates one copy alone under an 8 GiB slot, writing no compiled file, only when the scan is
+clean. Notice sent to the coordinator before the first elaboration (bundles, line counts, scans). Nothing was written or
+run in `~/source/math`; no copy is in a commit.
+
+| bundle | release lines | declared cone | scan | trial 1 | renames added | trial 2 |
+|---|---|---|---|---|---|---|
+| **ErgDecomp** — `PrimePackets/KernelEntropy.lean` ll. 4–47 (header) and 220–558 (convex orbit approximants, `actionInvariantSigma`, `exists_invariant_orbit_average_limit`, `ergodicSMul_of_orbit_indicator_limits`), `PrimePackets/ErgodicDecomposition.lean` ll. 4–179 (`condExpKernel_invariant`, `invariant_kernel_decomposition`, `condExpKernel_ae_constant`, **`action_ergodic_decomposition`**) | 559 (572 with the closers) | 28 files, 22,632 lines | 0 hits; control fired | 7 errors, 303 s (most of it waiting for the slot) | 3 names, 6 tokens, **each inside a proof**: `Set.ofPred_forall` → `Set.setOf_forall`; `eventuallyEmptyOrUniv_iff` → `eventuallyConst_set` (a lemma of the later pin; the set form here has the same two disjuncts in the same order, read from both branches of its one use); `Function.diag` → `(fun y => (id y, id y))` (4 uses; at this pin `compProd_trim_condExpKernel` is stated with `fun ω ↦ (id ω, id ω)`) | **0 errors, 0 warnings, 17 s** |
+| **Generating** — the eleven files of `EntropyGeneratingSupremum.lean`'s declared cone, in import order (the first two are lane P's `ShannonEntropy`, `EntropyMixtures`) | 1,843 (862 beyond lane P's) | 11 files, 1,843 lines | 0 hits; control fired | 11 errors, 12 s, from one name | `Set.mem_ofPred_eq` → `Set.mem_setOf_eq` (7 uses, each in a `simp only` list) | **0 errors, 0 warnings, 11 s** |
+
+Logs: `data/fs131/kn7/logs/{make,scan,trial}-*`.
+
+**What it decides.** M7's one port input — the ergodic decomposition in canonical form, for a countable group acting —
+is **hours, not days**: its used cone is at most 559 lines of the release, against a declared cone of 22,632, and it
+elaborates at this pin after three renames inside proofs, no proof repaired. The cut is mine and the trial shows it is
+enough: KernelEntropy ll. 48–219 (the entropy of kernels) and ErgodicDecomposition ll. 180–509 (the packet
+applications) are not read. The generating-sequence theorem (T2, lane E's leaf 10) adds 862 lines over lane P's two files,
+one rename. Both join the port by FS-132's generator as lanes P2 and P3 (§ Stage 6).
+
+**What each needs at the consumer, read from the statements.**
+- `PrimeDegreePackets.action_ergodic_decomposition {H Y} [Group H] [Countable H] [MulAction H Y] [MeasurableSpace Y]
+  [StandardBorelSpace Y] [Nonempty Y] (μ) [IsProbabilityMeasure μ] (hp : ∀ g : H, MeasurePreserving (g • ·) μ μ)`:
+  `condExpKernel μ (actionInvariantSigma H Y) ∘ₘ μ.trim _ = μ ∧ ∀ᵐ x ∂μ.trim _, ErgodicSMul H Y (condExpKernel μ … x)`.
+  At M7's use (`H = Γ ≅ ℤ²` acting on `Dual F` by rotations) the chain owes: a `MulAction` of a group on `Dual F` (the
+  subgroup `Γ` of `unitVectors F` acting by `rot`), and **`StandardBorelSpace (Dual F)`** for the cylinder σ-algebra —
+  `Dual F` is a closed subset of a countable product of circles, so this is a theorem to prove (module M4's or M7's; it is
+  the same fact that makes the pieces `M̂` Polish, Stage 3).
+- `PrimeDegreePackets.measureEntropy_eq_iSup_generating (μ) [IsProbabilityMeasure μ] (hT : MeasurePreserving T μ μ)
+  {k : ℕ → ℕ} (Q : ∀ n, Y → Fin (k n)) (hQ : ∀ n b, MeasurableSet {y | Q n y = b})
+  (hmono : Monotone (fun n => observationSigma (Q n))) (hgen : (⨆ n, observationSigma (Q n)) = mY)`, with
+  `observationSigma Q = MeasurableSpace.comap Q ⊤`: `measureEntropy μ T = ⨆ n, ofReal (observationEntropyRate μ T (Q n))`.
+  **KN6's leaf 10 is no longer open in its plan**: its hypotheses fit `Rigidity.ksEntropy_eq_iSup_ksEntropyOn` as typed.
+  Route: for each `i` a countable generating family `(A i j)_j` of `𝒜 i` (`hcg`,
+  `MeasurableSpace.exists_countable_generateFrom`-type, the implementer checks the name); `Q n y` records the indicators of
+  `A i j y` for `i, j ≤ n` (a map into `Fin (2 ^ ((n + 1)^2))` through `Fintype.equivFin` of `Fin ((n+1)^2) → Bool`);
+  `observationSigma (Q n) ≤ 𝒜 n` by `hmono` on `𝒜` (each `A i j ∈ 𝒜 i ≤ 𝒜 n`), so `partitionEntropy … (Q n) ≤
+  ksEntropyOn (𝒜 n) …`; `observationSigma (Q n)` is monotone (the family grows) and its supremum contains every `A i j`,
+  hence `⨆ i, 𝒜 i = m`. The `≥` side is `ksEntropyOn_le_ksEntropy`. Hard: the encoding of a finite family of indicators
+  as one label; nothing else.
+

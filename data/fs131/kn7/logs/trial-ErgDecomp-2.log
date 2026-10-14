@@ -1,0 +1,4 @@
+slot: waiting (ledger 16 + 8 > budget 22 GiB)
+slot: admitted kn7t: mem 8 GiB (hard cap), cpus 4,5
+seconds=17
+exit=0
