@@ -6,7 +6,50 @@ brief: the remote is unreachable). Working files under `data/fs131/idg1/`; check
 
 ## Theorems this phase proved
 
-*(Filled at the last stage, from the axioms printed from the built tree.)*
+Every line is [kernel], on exactly `[propext, Classical.choice, Quot.sound]` ("the standard three"), printed from the
+built tree after build 3 by `data/fs131/idg1/lean/Axioms.lean` (`data/fs131/idg1/axioms-after.txt`, read by
+`tools/fs131_idg1_axioms.py`: 110 of the six modules' 111 records on the standard three, the 111th lane A's leaf).
+Namespace `HadwigerNelson.Rigidity` unless written in full.
+
+**Lane D — `Rigidity/DualGroup`** (the dual `Ĝ = AddChar G Circle` of a discrete abelian group, pointwise topology):
+- `isClosedEmbedding_coe` — `χ ↦ (g ↦ χ g)` is a closed embedding into `G → ℂ` — standard three
+- `isTopologicalGroup_dual` — `Ĝ` is a topological group — standard three
+- `compactSpace_dual` — `Ĝ` is compact — standard three
+- `polishSpace_dual` — Polish, for countable `G` — standard three
+- `borelSpace_dual` — the Borel σ-algebra is the library's cylinder σ-algebra, for countable `G` — standard three
+- `standardBorelSpace_dual` — standard Borel, for countable `G` — standard three
+- `exists_apply_ne_one` — the characters separate the points of `G` — standard three
+- `measure_eq_of_fourier` — **Fourier uniqueness**: finite measures on `Ĝ` with equal Fourier coefficients are equal,
+  countable `G` — standard three
+- `isProbabilityMeasure_dualHaar` — Haar measure `dualHaar G` is a probability — standard three
+- `isHaarFourier_dualHaar` — its Fourier coefficients vanish off `0` — standard three
+- `isHaarFourier_iff` — `IsHaarFourier m ↔ m = dualHaar G` — standard three
+- `HadwigerNelson.SpectralInputs.IsHaarFourier.map_dual` — the dual of an injective endomorphism keeps it — standard three
+- `HadwigerNelson.SpectralInputs.IsHaarFourier.map_mul_right` — translation keeps it — standard three
+
+**Lane PD-I — Pontryagin duality** (the planner's route copies, folded in, and its two spec leaves):
+- `Rigidity/Annihilator`: `le_dualAnnihilator_iff`, `dualCoannihilator_dualAnnihilator_dualCoannihilator`,
+  `dualAnnihilator_bot`, `dualCoannihilator_bot`, `dualCoannihilator_top`, `isClosed_setOf_apply_eq_one`,
+  `isClosed_dualAnnihilator`, `dualCoannihilator_topologicalClosure`, `finite_dualAnnihilator` — each standard three
+- `Rigidity/SubgroupHaar`: `isProbabilityMeasure_subgroupHaar`, `subgroupHaar_compl`, `subgroupHaar_pos`,
+  `integral_subgroupHaar_of_mem`, `integral_subgroupHaar_of_not_mem`, `subgroupHaar_bot` (spec) — each standard three
+- `Rigidity/Duality`: `dualAnnihilator_dualCoannihilator` (D2 for every subgroup: the closure),
+  `eq_top_of_isClosed_of_dualCoannihilator_eq_bot`, `eq_top_of_isClosed_of_dualCoannihilator_eq_bot'` (D2's case),
+  `evalDualHom_injective`, `Duality.graphSubgroup`'s three closure fields, `Duality.isClosed_graphSubgroup`,
+  `Duality.exists_mem_dualCoannihilator_graphSubgroup`, `evalDualHom_surjective` (**D1**) — each standard three
+- `Rigidity/DualConnected`: `surjective_compAddMonoidHom`, `exists_pow_eq`, `connectedSpace_dual` (**D3**),
+  `not_connectedSpace_dual_zmod_two` (the negative partner) — each standard three
+
+**Lane U — `Rigidity/UnitCircle`** (all but `exists_admissiblePair`): `uvRing_toUnitVector_mul`,
+`uvRing_toUnitVector_one`, `rotInv_iff`, `countable_unitCircle`, `HadwigerNelson.SpectralInputs.IsHaarFourier.rotInv`,
+`AdmissiblePair.u_nonTorsion`, `AdmissiblePair.ofPow`'s `generates` field — each standard three.
+
+**Consequences** — already proved, they had rested on `sorryAx` through these leaves and now rest on the standard
+three: **D2** `dualAnnihilator_dualCoannihilator_of_isClosed` (a closed subgroup of `Ĝ` is the annihilator of its
+annihilator, countable `G`), `dualDualEquiv` and `additiveDualDualEquiv` (`G ≅ (Ĝ)^`), `integral_subgroupHaar_eq`,
+`IsHaarFourier.map_dual_eq`, `IsHaarFourier.map_mul_right_eq`, `exists_isHaarFourier_of_countable` (a Haar measure in
+Fourier form exists at every countable `G` with no Herglotz–Bochner), the instances `t2Space_dual`,
+`secondCountableTopology_dual`, `isHaarMeasure_dualHaar`, and `instMulActionDual`, `measurableConstSMul_dual`.
 
 ## Stage 1 — SAVED: the join, the build, the readback, the dump before any edit
 
@@ -131,9 +174,9 @@ went by the plan's route (KN8 § 2.5), with one private definition or lemma wher
   `map_ne_zero_iff`), `IsHaarFourier.map_mul_right` (`integral_evalChar_map_mulRight`).
 
 **Re-price** (Done means item 2, from the first two leaves): `isClosedEmbedding_coe` and `isTopologicalGroup_dual`
-took two of the three iterations between them, minutes each, and the hard leaf, Fourier uniqueness, one iteration —
-the module about 40 minutes against KN8's plan, which did not price it in hours; what was left (PD-I and U) was then
-priced at under an hour each, and took about 20 minutes of writing between them (stages 3 and 4).
+took two of the three iterations between them, minutes each, and the hard leaf (Fourier uniqueness, KN8 § 5.1's "the
+hard one") one iteration: the module took about 40 minutes. What was left, PD-I and U, I then priced at under an hour
+each; they took about 20 minutes of writing between them (stages 3 and 4), with the build shared.
 
 **Build 2** (`data/fs131/idg1/build.sh 2 8`, all three lanes folded in): `==> build: OK — 249 of 249 batches, 9
 module(s) rebuilt, 6 module(s) with warnings, 7m57s`, `exit=0` (`logs/build-2.log`; full output
@@ -210,3 +253,67 @@ Written in a copy (`logs/lean-uc-1.log`, one error; `lean-uc-2.log`, exit 0, the
 
 **Not mine and untouched:** `exists_admissiblePair` (lane A). Its print rests on `sorryAx`, its own; nothing of the six
 files reads it.
+
+## Stage 5 — SAVED: the architecture cell and the docstrings, build 3, the checks from the built tree
+
+**`ARCHITECTURE.md`** (FS131-IN1L's drafts, its record § Drafts for the landing): the imports cell of
+`Rigidity/ZeroEntropyNames` reads `` `Rigidity/Entropy`, `Outside/OAI015Maximal` ``; the rows of `ZeroEntropyNames`,
+`HaarMultiple` and `SolenoidErgodic` read "proved by FS131-IN1L: no `sorry`", their leaves "Proved (FS131-IN1L)"; the
+row of `ChainAtTA` moves `measurableSet_TA`, `rot_preimage_TA`, `exists_nonTorsion_unitVector` to its proved list, adds
+`rotInv_dirac_one` and `zeroEntropyCarried_model`, and keeps three leaves (`entropySplit`, `zeroEntropyCarried`,
+`noRamifiedStableDyadic_of_tca`). **`tools/check_architecture.py`: `RESULT: PASS`** (`logs/arch-1.out`). **Its
+control**: the same check on a copy of the file as it was before the edit (`data/fs131/idg1/work/ARCHITECTURE.before.md`)
+fails with exactly the cell IN1L reported, `FAIL imports of Rigidity/ZeroEntropyNames: stated-only [], real-only
+['Outside/OAI015Maximal']` (`logs/arch-plant-before.out`, exit 1). The rows of my own six modules still say "skeleton";
+they are outside my touches, and their new text is drafted below.
+
+**The stale module docstrings IN1L named** (prose only; `data/fs131/idg1/work/docstrings.py`, which refuses unless each
+passage occurs once inside the module docstring): the titles of `HaarMultiple`, `SolenoidErgodic` and
+`ZeroEntropyNames` ("skeleton" → "proved by FS131-IN1L"); `ChainAtTA`'s title, its "Leaves" paragraph (the three
+proved leaves moved to a "Proved by FS131-IN1L" line) and its "Inhabitants" paragraph (`zeroEntropyCarried_model`
+named); `ZeroEntropyNames`' "not yet joined; at the join its proof is that theorem" (now: its proof is the port's
+`Outside.OAI015.excessiveOccupation_measure_bound`). **Shown prose-only twice** (`LEAN.md`, FS131-LC1's line):
+- *in text*: `tools/fs131_idg1_code_only.py` (FS131-LC1's tool) reads all four files SAME as `HEAD` with every block
+  comment removed (`logs/code-only.out`). **Its plant had to be repaired**: FS131-LC1's plant turns the first `:=` into
+  `:≡`, and in three of these four files the first `:=` is inside a docstring — the planted run read those three SAME
+  and the control failed ("plant: FAIL (3)"). The plant now takes the last `:=`, which is code in each file; all four
+  read DIFFERS (`logs/code-only-plant.out`, "plant: OK").
+- *from the kernel's side*: `data/fs131/idg1/lean/DocDump.lean` dumped the four modules before build 3 and after
+  (`docdump-before.txt`, `docdump-after.txt`): **all 183 constants identical, line for line**, internal ones and
+  proofs included (`tools/fs131_idg1_docdump_diff.py`, `logs/docdump-compare.out`); its control plants a changed type,
+  a removed constant and an added one, and all 3 are reported (`logs/docdump-compare-control.out`).
+- The theorem docstring of `measure_frequentVisits_le` ("stated under this library's name until lane P's port is
+  joined") is stale too; it is not a module docstring, so it is drafted below, not edited.
+
+**Build 3** (`data/fs131/idg1/build.sh 3 8`): `==> build: OK — 249 of 249 batches, 6 module(s) rebuilt, 6 module(s)
+with warnings, 7m12s`, `exit=0` (`logs/build-3.log`; full output `build/gate/build/20261014T065208Z-2043900.log`;
+435 s, peak 3.91 GiB for one process). Rebuilt: the four docstring modules, `EntropySplitMax`, `Proofs`. **From my
+six files one warning, `UnitCircle.lean:219:8`, `exists_admissiblePair`'s `sorry`**; every other warning is a
+`declaration uses 'sorry'` in `ChainAtTA` (its three leaves, not mine), `Pieces`, `EntropySplitMax`, `PositiveEntropy`
+or `Entropy`. No `sorry` in my six files but that leaf's (`grep`: `UnitCircle.lean` 1, the other five 0).
+
+**From the built tree after build 3:**
+- *Statements*: `tools/fs131_idg1_statements.py statements-before.txt statements-after.txt 3b531d1d2`: **PASS** — as
+  at build 2: no stored type moved in the eight modules, no data definition's value moved, the two ruled proof fields
+  only, no new public constant, 7 private helpers, no axiom (`logs/statements-compare.out`); the control, 8 of 8
+  (`logs/statements-compare-control.out`). **No unread binder** was found in my six files: the build's
+  `unusedVariables` warns of none, and the lint's `unusedArguments` passes — so nothing was dropped by item 726's word,
+  and the reader's `--dropped` list is empty.
+- *Axioms*: `tools/fs131_idg1_axioms.py axioms-after.txt`: **PASS**, 110 records on exactly the standard three, the
+  111th `exists_admissiblePair` (its own `sorry`); the planted record reported; the control 3 of 3
+  (`logs/axioms-check.out`, `axioms-check-control.out`). The print is byte-identical to build 2's.
+- *Linters*: `lake lint --no-build -- --no-build --trace` under the slot: `exit=0`, `-- Linting passed for Proofs.`,
+  14 linters `(2/2) Passed!` (`logs/lint-1.log`). **Its control**: `DualGroup.lean` copied to the ignored
+  `build/fs131-idg1/lint/` with `#lint` appended reads "Found 0 errors in 23 declarations" (`logs/lint-control-Green.log`);
+  the same copy with a planted `theorem planted_unused_countable (G) [AddCommGroup G] [Countable G] : True` fails,
+  `unusedArguments` naming it and both instance arguments (`logs/lint-control-Red.log`, exit 1).
+- *Doubled names on the joined tree* (`./scripts/dupnames.sh` under the slot): `OK — no name is declared by two
+  modules (24 generated on demand)`, `exit=0` (`logs/dupnames-1.log`); the two names it lists as gone since this tree's
+  previous scan are `SixRing.chart.eq_1` and `SixRing.ringRadius.eq_1`, generated equation lemmas of `Plane/`, not
+  from my files.
+- *Spec examples*: every `example` of the six files elaborates in each build (`DualGroup`'s `dualHaar ℤ` probability,
+  `Annihilator`'s `N = ⊤`, `Duality`'s two, `DualConnected`'s `ℤ`), and their heads are unchanged (the statement
+  reader's text side, 5 heads).
+
+The whole-library gate steps — `scripts/axioms.sh` with the CLEAN block below, `vacuity.sh`, `assumptions.sh` and
+their counts — belong to the landing that joins the chain to `main`, as for FS131-IN1L; I ran none of them.

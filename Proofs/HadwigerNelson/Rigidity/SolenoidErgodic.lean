@@ -1,7 +1,7 @@
 import Proofs.HadwigerNelson.Rigidity.Solenoid
 
 /-!
-# Ergodicity of a `ℤ^d`-action: the strict form gives the textbook's (FS-131, job FS131-KN7; skeleton)
+# Ergodicity of a `ℤ^d`-action: the strict form gives the textbook's (FS-131, job FS131-KN7; proved by FS131-IN1L)
 
 `ZdAction.IsErgodicOn` (`Rigidity/Solenoid`) asks that every measurable set **strictly** fixed by every `α n`, `n ∈ Λ`, be
 null or conull — Mathlib's convention for one map. The textbook's ergodicity (and Mathlib's `ErgodicSMul` for a group

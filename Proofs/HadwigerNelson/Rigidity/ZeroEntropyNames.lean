@@ -4,7 +4,7 @@ import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import Mathlib.Analysis.SpecificLimits.Basic
 
 /-!
-# Names at entropy zero: few words with few bad starts, and no small name cells on a large set (FS-131, job FS131-KN7; skeleton)
+# Names at entropy zero: few words with few bad starts, and no small name cells on a large set (FS-131, job FS131-KN7; proved by FS131-IN1L)
 
 **Read aloud, against the derivation** (`plans/FS131-EN2-derivation.md` § 3.5, entries EN2-CNT and EN2-ZE; module M8a
 of the chain, `data/fs131/kn3/claims-M8-zero-entropy-carried.md`).
@@ -33,8 +33,8 @@ cells of few names have small mass (`measureReal_lightCells_le`); (6) a geometri
 **`measure_frequentVisits_le` is the release's `DukePrimeDegree.excessiveOccupation_measure_bound`**
 (`[OAIMath2026]` family 015, `DukePrimeDegree/Dynamics/MaximalOccupation.lean`) with its two definitions unfolded
 (`excessiveOccupation T A δ = {x | ∃ n, δ n < visitCount T A n x}`, `visitCount` = this module's `visits`). It is stated
-here under a name of this library because lane P's port (`Outside/OAI015Maximal`, on another branch) is not yet joined;
-at the join its proof is that theorem, and the statement is not changed (FS131-KN7, § Stage 5).
+here under a name of this library, and its proof is that theorem of the port (`Outside/OAI015Maximal`,
+`Outside.OAI015.excessiveOccupation_measure_bound`), joined by FS131-IN1L with the statement not changed.
 
 **Inhabitants.** `card_words_badStarts_le`: the entry's model (`a = 2`, `k = 3`, `𝒢 = {000}`, `g = 2`, `θ = 9/10`,
 `n = 13`), its hypotheses checked in an `example`. EN2-ZE: `zeroEntropyNames_model`, the point mass on one point with the

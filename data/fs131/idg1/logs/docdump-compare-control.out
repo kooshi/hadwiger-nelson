@@ -1,0 +1,5 @@
+constants: 183 before, 183 after; differing, missing or added: 3
+MISSING HadwigerNelson.Rigidity.EntropySplit._proof_1
+DIFFERS HadwigerNelson.Rigidity.EntropySplit
+ADDED   planted.added
+CONTROL: 3 of 3 planted faults reported — the check can fail

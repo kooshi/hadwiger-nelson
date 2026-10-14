@@ -3,7 +3,7 @@ import Proofs.HadwigerNelson.Arith.UpperHalf
 import Proofs.HadwigerNelson.Rigidity.Entropy
 
 /-!
-# The chain to five, run at `T + A`: its hypotheses as closed statements about a field (FS-131, jobs FS131-KN3 and FS131-KN6; skeleton)
+# The chain to five, run at `T + A`: its hypotheses as closed statements about a field (FS-131, jobs FS131-KN3 and FS131-KN6; lane C proved by FS131-IN1L; three leaves `sorry`)
 
 **Read aloud, against the informal claim.** `SpectralChain` proves `χ(F²) ≥ min(L(F), 5)` over an *interface*: a set `E` of
 characters of `R = ℤ[U_F]`, a part `TA` and an entropy-like function are free data, and the project's hand results are
@@ -35,14 +35,15 @@ clause, and no leaf: the non-torsion rotation comes with the split); `entropySpl
 `colorable_two_levelTarget_one_of_isRamified`, so `L(F) ≤ 2`); and **the headline with closed hypotheses**,
 `min_localBound_five_le_chromaticNumber_of_closed` — eight of them: the scope is no longer one (FS131-KN6).
 
-**Leaves (`sorry`), each a module of the architecture in `plans/FS131-KN3-chain-plan.md`:** `measurableSet_TA`,
-`rot_preimage_TA`, `exists_nonTorsion_unitVector` (module C0); `entropySplit` (PE-2 at one non-torsion rotation: modules
-M5–M7); `zeroEntropyCarried` (EF_F⁺: module M8). **Stated and off the headline's path:** `noRamifiedStableDyadic_of_tca`
+**Proved by FS131-IN1L** (module C0): `measurableSet_TA`, `rot_preimage_TA`, `exists_nonTorsion_unitVector`.
+**Leaves (`sorry`), each a module of the architecture in `plans/FS131-KN3-chain-plan.md`:** `entropySplit` (PE-2 at one
+non-torsion rotation: modules M5–M7); `zeroEntropyCarried` (EF_F⁺: module M8). **Stated and off the headline's path:** `noRamifiedStableDyadic_of_tca`
 (FS100-EXC in its own words, module M9), which the hand record under `LEDGER.md` row 121 cites and no theorem of this module
 reads; and `EntropySplitEvery`, PE-2 at every rotation (its proof's extra layer — Lemma W for every vector and the torsion
 case — is in module M7's draft claim list, marked off the path).
 
-**Inhabitants.** `one_mem_TA`. `MRPlus`, `EntropySplit` and `ZeroEntropyCarried` quantify over measures, of which the zero
+**Inhabitants.** `one_mem_TA`; `zeroEntropyCarried_model` (the point mass at the trivial character meets every
+hypothesis of `ZeroEntropyCarried`'s clause, and its conclusion, at every non-torsion vector). `MRPlus`, `EntropySplit` and `ZeroEntropyCarried` quantify over measures, of which the zero
 measure and (given Herglotz–Bochner) Haar measure are instances. `NoRamifiedStableDyadic` **fails at `F = ℚ`** (the prime
 `(1 + i)` is stable, dyadic and ramified); its model is `ℚ(√47)`, which has no stable dyadic prime — the instances' module.
 -/

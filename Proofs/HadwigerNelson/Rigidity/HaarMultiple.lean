@@ -3,7 +3,7 @@ import Mathlib.MeasureTheory.Measure.Typeclasses.Probability
 import Mathlib.MeasureTheory.MeasurableSpace.Embedding
 
 /-!
-# The largest multiple of one measure below another (FS-131, job FS131-KN7; skeleton)
+# The largest multiple of one measure below another (FS-131, job FS131-KN7; proved by FS131-IN1L)
 
 **Read aloud, against the derivation** (`plans/FS131-EN2-derivation.md` § 5.2, EN2-PE2-MAX step 1; module M7 of the chain,
 `data/fs131/kn3/claims-M7-entropy-split.md`): "For a finite measure `τ`, the set `{c ≥ 0 : c·m ≤ τ}` (setwise inequality on

@@ -1,0 +1,31 @@
+PLANT reported: HadwigerNelson.Rigidity.positive_entropy_rigidity_of_polishSpace rests on ['HadwigerNelson.Rigidity.positive_entropy_rigidity']
+records: 111 (AXIOMS-COUNT 111); per module: Annihilator 18, DualConnected 4, DualGroup 31, Duality 17, SubgroupHaar 8, UnitCircle 33
+standard three or fewer: 108; not mine (its own sorry): 1; failing: 2
+  NOT MINE HadwigerNelson.Rigidity.exists_admissiblePair: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']; sorry from ['HadwigerNelson.Rigidity.exists_admissiblePair']
+downstream records: 44; on no sorry: 20; on sorry: 24; their sorry comes from:
+  HadwigerNelson.Rigidity.IsPiece.mulR_mem (10 records)
+  HadwigerNelson.Rigidity.PieceDual.continuous_dualMap (7 records)
+  HadwigerNelson.Rigidity.condExpKernel_ergodicDecomposition (1 records)
+  HadwigerNelson.Rigidity.entropySplit_of_admissiblePair (1 records)
+  HadwigerNelson.Rigidity.exists_pieceChain (1 records)
+  HadwigerNelson.Rigidity.integral_eq_zero_of_isAddHaarMeasure (1 records)
+  HadwigerNelson.Rigidity.isClosedEmbedding_coe (1 records)
+  HadwigerNelson.Rigidity.isErgodicOn_map_toPiece (1 records)
+  HadwigerNelson.Rigidity.isHaarFourier_or_ksEntropy_eq_zero (1 records)
+  HadwigerNelson.Rigidity.isPiece_closure_one (1 records)
+  HadwigerNelson.Rigidity.isSolenoid_pieceDual (1 records)
+  HadwigerNelson.Rigidity.isTotallyIrreducible_pieceAction (1 records)
+  HadwigerNelson.Rigidity.ksEntropy_eq_zero_of_not_smul_le (1 records)
+  HadwigerNelson.Rigidity.ksEntropy_rot_eq_iSup (1 records)
+  HadwigerNelson.Rigidity.measurable_toPiece (1 records)
+  HadwigerNelson.Rigidity.measure_haarSet_eq_zero (1 records)
+  HadwigerNelson.Rigidity.not_isVirtuallyCyclic_pieceAction (1 records)
+  HadwigerNelson.Rigidity.not_smul_dualHaar_le_dirac_one (1 records)
+  HadwigerNelson.Rigidity.pieceMul_add (7 records)
+  HadwigerNelson.Rigidity.pieceMul_zero (7 records)
+  HadwigerNelson.Rigidity.rotInv_sub_maxMultiple (1 records)
+  HadwigerNelson.Rigidity.toPiece_rot (1 records)
+DECLARED Proofs.HadwigerNelson.Rigidity.DualConnected HadwigerNelson.Rigidity.connectedSpace_dual: rests on the declared printed theorem
+AXIOMS   Proofs.HadwigerNelson.Rigidity.DualGroup public HadwigerNelson.Rigidity.measure_eq_of_fourier: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+DOWNSTREAM DOWNSTREAM-Proofs.HadwigerNelson.Rigidity.Pieces HadwigerNelson.Rigidity.AdmissiblePair.mulR: its sorry comes from this job's ['HadwigerNelson.Rigidity.isClosedEmbedding_coe']
+CONTROL: 3 of 3 planted faults reported, plant fired — the check can fail
