@@ -52,3 +52,65 @@ last build (`data/fs131/idb3/statements-after.txt`) are identical line for line 
 (`affb9142e`, "text unchanged"), and FS131-IDB2 proved its one leaf here. `fs131-wkr` (`3fabd5e10`) still holds the
 file with its `sorry` (sha256 `b5f55c5e…` against this branch's `72b78784…`): wherever the chain's line carries that copy,
 the join of the two lines meets the module twice at one path, and should keep this branch's.
+
+## Stage 2 — SAVED (FS131-LDB1): the merge, the build, and one name both lines define
+
+**2.1 The merge.** `git merge main` (`7c8f9af82`) — merge commit **`e2084c999`**, no conflict, exit 0
+(`data/fs131/ldb1/merge.out`). Against `main` the merged tree differs outside `data/` and `plans/` only in this line's own
+files: the 83 modules, `ARCHITECTURE.md`, `Proofs.lean`, and the earlier implementers' `tools/fs131_idb*`, `tools/fs131_kdb1_x23.py`.
+
+**2.2 The build** (`data/fs131/ldb1/build-sampled.sh build-join`: the slot at 10 GiB and 4 cpus, `MEMMAX=10G BATCH=8`, with
+FS131-LC1's sampler beside it): **`build: FAIL — 266 of 266 batches, 65 module(s) rebuilt, 0 module(s) with warnings,
+13m43s`**, exit 1, 827 s (`data/fs131/ldb1/build-join.log`; Lake's full output `build/gate/build/20261014T193853Z-316136.log`;
+sampler `build-join.mem`: largest single compiler 4.00 GiB, `Plane/OneClass/Fractional`). The 65 are `main`'s port, the density
+equality's eight and their downstream; none of the density bound's 83 (their imports are unchanged). **The one failure is the
+root**, twice (the script's retry): `error: Proofs.lean:1:0: import Proofs.HadwigerNelson.Plane.OneClass.Defs failed,
+environment already contains 'HadwigerNelson.Plane.mOne' from Proofs.HadwigerNelson.Plane.OneAvoidingDensity`.
+
+**2.3 The diagnosis.** Both lines define `HadwigerNelson.Plane.mOne`, in modules that do not import each other, so git merged
+them in silence and Lean refuses the second definition at the first import that holds both (two definitions are refused even
+when identical: `LEAN.md` § The gate, doubled names). The two are different terms for one number:
+- this line's (FS131-KR1's, `Plane/OneAvoidingDensity` l. 40): `⨆ (A : Set ℂ) (_ : NullMeasurableSet A volume ∧ BandFree A
+  0), upperDensity A` — Lebesgue-measurable sets;
+- `main`'s (FS-133's, `Plane/OneClass/Defs` l. 189): `⨆ A, ⨆ (_ : MeasurableSet A), ⨆ (_ : (unitDistance ℂ).IsIndepSet A),
+  upperDensity A` — Borel sets; `main`'s `mOne_eq_iSup_nullMeasurableSet` gives the same number over null-measurable sets.
+
+**It is the only such name.** Every constant of `main`'s library without the density bound (`data/fs131/ldb1/lean/MainNames.lean`
+→ `main-names.out`: 27,930 constants of the root's other imports, 24.7 s, 4.47 GiB) against the 4,083 of the 83 modules
+(stage 1.5's dump): **one name in both, `HadwigerNelson.Plane.mOne`** (`collisions.out`). Removing or renaming either definition
+is a definition change, which the brief does not give me: **messaged to the coordinator at once** (2026-10-14, about 20:00 UTC),
+with option (a) — this line's `mOne` deleted, `Plane/OneAvoidingDensity` importing `Plane/OneClass/Defs`, the two corollaries
+(`mOne_le_of_oneAvoidingDensityBound`, `mOne_lt_quarter`) unchanged in text and read over `main`'s `mOne`, proved through
+`mOne_le_iff` and `isIndepSet_unitDistance_iff` — and option (b), a rename with an equality lemma. Every gate step after the
+build waits on the ruling.
+
+**2.4 Done meanwhile, none of it waiting on the root** (each from the compiled modules, which the failed root does not touch):
+- **The audit's block** (`scripts/Axioms.lean`, CLEAN section, after FS133-LD1's block, banner "FS131-LDB1"): the three
+  implementers' drafts filed unchanged — FS131-IDB1's 264 records, FS131-IDB2's 41, FS131-IDB3's 418, **723**, distinct
+  (`data/fs131/ldb1/axioms-block.txt`). Their convention, kept: every public constant of the modules as the kernel stores
+  them, inductive types, constructors and recursors left out (the structures' other generated declarations — `casesOn`,
+  `noConfusion`, `mk.injEq`, … — kept as the drafts list them; FS133-LD1 filed none of those for its structures), the 847
+  cell theorems and 847 cell definitions read through their parts' `segNN_ok`.
+- **The prediction**, from the three implementers' printed axioms (`data/fs131/ldb1/prediction-axioms.txt`): of the 723, 400
+  on a non-empty subset of the three and 323 axiom-free, none on anything else; so the audit at **9,824 records — 9,438
+  clean, 355 axiom-free, 26 imported, 5 purchases**, the two declared imports unchanged.
+- **The coverage** (`data/fs131/ldb1/lean/Coverage.lean` → `coverage-join.out`, 4.2 s, 3.02 GiB): 83 modules, 4,083
+  constants, 2,490 public; 723 records, none absent; **every one of the other 1,767 public constants reached from a record**
+  through stored types and values (so its axioms are inside a printed list); 0 unreached. Its control — the same rule with
+  FS131-IDB3's 418 records taken out — reports all 418 and the 9 inductive types, constructors and recursors of lane X's three
+  structures, 427, which is lane X's whole public surface (FS131-IDB3's count). A first version of the control removed
+  records by name prefix (`…DensityBound.X23…`) and missed `dists_ok`, which reached 36 others; the control now removes
+  exactly the drafted list.
+- **The read-aloud's print** (`data/fs131/ldb1/lean/ReadAloud.lean` → `read-aloud.out`): the headline's stored type, the
+  definitions it names, the corollaries, and their axioms (stage 3).
+- **Tools written, each with its control seen to fire**: `tools/fs131_ldb1_records.py` (the records and the coverage; seven
+  plants); `tools/fs131_ldb1_code_only.py` (the 83 files without block comments against `9fe574044`; before the docstring
+  edits it reads the six files to be reworded as DIFFERS, "text untouched (listed)", exit 1 — the edit that has not happened
+  is caught); `data/fs131/ldb1/docstring-edits.py` (dry run: ten replacements in six files, each old text found once) — not
+  applied: one of the six is `Plane/OneAvoidingDensity`, which the ruling may change; `data/fs131/ldb1/run-gate.sh` (the
+  final pass), `lint-plant.sh` (the lint's control on `Plane/DensityBound/Theorem`, a leaf).
+- **Stale prose found** (for the edits): `OneAvoidingDensityBound`'s docstring says "External: a named hypothesis standing
+  for an outside theorem, not proved in the library" — the assumptions step fails a former whose docstring says "named
+  hypothesis" or "external" and that no entry declares (`FAIL undeclared-by-docstring`), so the rewording is needed for the
+  gate, not only for the reader; the two corollaries say "given the outside theorem"; five module headers and
+  `OneAvoidingDensity`'s say "skeleton".

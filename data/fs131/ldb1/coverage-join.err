@@ -1,0 +1,2 @@
+slot: admitted ldb1-coverage: mem 5 GiB (hard cap), cpus 1,2
+exit=0

@@ -1,0 +1,2 @@
+FS131-LDB1: names declared both by the density bound's 83 modules (4083 constants, data/fs131/ldb1/statements-before.txt) and by main's library without them (27903 names, data/fs131/ldb1/main-names.out): 1
+BOTH DEF HadwigerNelson.Plane.mOne :: here Proofs.HadwigerNelson.Plane.OneAvoidingDensity :: main ['Proofs.HadwigerNelson.Plane.OneClass.Defs']
