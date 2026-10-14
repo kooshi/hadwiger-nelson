@@ -104,3 +104,11 @@ branch and do not push**; I copy the branches to a local backup.
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment — 2026-10-14 20:35 UTC (Keryx, by message to this job)
+
+The instances' planner (FS131-KM15, on the chain's joined line) needs one public fact of this module: the odd branch of `ratioAtMost_of_five_le_chromaticNumber`, with its chromatic hypothesis replaced by the two residue sizes that branch excludes. **Ruled: add it to `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wch/Proofs/HadwigerNelson/Rigidity/ClassRatio.lean` as a new public theorem, with this statement verbatim (the planner's text, its message to me):**
+
+`theorem ratioAtMost_of_two_notMem [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) (h9 : Nat.card (𝓞 (fieldI F) ⧸ P.P) ≠ 9) (h49 : Nat.card (𝓞 (fieldI F) ⧸ P.P) ≠ 49) : ∃ c : ℝ, c < 1 / 4 ∧ RatioAtMost P c`
+
+Prove it from the private leaves the odd branch already uses (`exists_card_sq`, `ratioAtMost_weil_lt`, `ratioAtMost_cert`, `charBound_one_exact` with Lemma P, `card_ne_fifteen_sq`), and make that branch of `ratioAtMost_of_five_le_chromaticNumber` read it, its `h9` and `h49` from `chromaticNumber_le_four_of_small`, so the fact is proved once. This is the one statement this amendment adds; your statement check lists it as NEW and everything else stays SAME. **Touches extended:** that theorem and that proof in that file. You still start no agents of your own: only the coordinator launches agents, so that Kooshi's budget holds and every piece of work is known.
