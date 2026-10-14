@@ -1,0 +1,4 @@
+slot: admitted ij1: mem 4 GiB (hard cap), cpus 3,4
+data/fs131/ij1/work/ContinuityGroup.lean:223:16: warning: declaration uses `sorry`
+seconds=8
+exit=0

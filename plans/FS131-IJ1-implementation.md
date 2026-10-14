@@ -106,3 +106,28 @@ each named:
 definition, and **a reader of the replaced map whose stored type differs by more than the name**): 9 of 9 reported
 (`statements-control-b1.out`). Without the ruled lists the same two dumps FAIL with 10 differences, naming every ruled one
 (`statements-compare-b1-unruled.out`): the reader's substitution is off unless `toL` is listed as deleted.
+
+## Stage 3 — SAVED: M10, `Rigidity/ContinuityGroup`, all six leaves (elaborated; the build is a later stage)
+
+Written against a copy (`data/fs131/ij1/work/ContinuityGroup.lean`; rounds `logs/M10-1.log` … `M10-6.log`, the last exit 0
+with **no warning**, under `lake env lean` with the lakefile's two options), then copied over the module; `git diff -U0`
+removes the six `sorry` lines and nothing else. About 420 lines against the plan's 800–1,200 (about 0.4).
+
+| leaf | route as planned? |
+|---|---|
+| `isTopologicalAddGroup_tauPrime` | yes (`topologicalAddGroup_inf`, `_iInf`, `_induced`; the discrete quotient by `topologicalAddGroup_of_discreteTopology` at `⊥`) |
+| `isCountablyGenerated_nhds_tauPrime` | yes (`nhds_inf`, `nhds_iInf`, `nhds_induced`, `nhds_discrete` at `⊥`, `Filter.isCountablyGenerated_pure`) |
+| `TA_subset_contChars` | yes in outline, pointwise (`continuous_iff_continuousAt` and `Filter.Tendsto.mul`, so no product instance on `R` is asked for): the torsion factor is constant on the coset `y + (N′ + 1)·R`, a profinite neighbourhood; the archimedean factor through **another route than `exists_rat_coords`**: an additive `ψ : R → ℝ` equals `r ↦ Σ_i ℓ_i(ι_∞ r)·ψ(c e_i)/c`, `ℓ_i` the coordinates in Mathlib's `latticeBasis` (an integral basis `e_i` of `𝓞_L` sent to an `ℝ`-basis of `V`), `c·𝓞_L ⊆ R` (`exists_mul_stableIntegers_le` with `𝓞_L ⊆ O′`), and a non-zero `y` with `y r ∈ 𝓞_L` (`exists_integral_multiples`): both sides agree on the `c e_i` and are additive, so agree at `c y r`, hence at `r` |
+| `mem_archChars_of_continuousAt` | **another route, shorter** (no lattices, no stabilisation, no density): on the ball `‖ι_∞ r‖ < δ` where `Re χ > 0`, `θ = arg ∘ χ` is additive along multiples (`arg (z w) = arg z + arg w` for arguments in `(−π/2, π/2)`); `1/5 ∈ R` (`(3 ± 4i)/5`), so the lift is `ψ(r) = 5^k θ(r/5^k)` for every `k` past the first at which `5‖ι_∞(r/5^k)‖ < δ` (independent of `k` by `θ(5x) = 5θ(x)`), additive by one common `k`, and `χ = exp ∘ ψ` from `χ(r) = χ(r/5^k)^{5^k}` |
+| `archContinuousAt_pow_of_mem_contChars` | yes (`Re χ > 0` on `M·R ∩ B_δ`, the profinite neighbourhood holding `M·R` by `Filter.iInf_sets_induct`; then `|arg χ^M(x)| < π/(2n)` when `n‖ι_∞ x‖ < δ/M`) |
+| `contChars_subset_TA` | yes (`mem_torsion_mul_arch_iff`, now public) |
+
+**Private helpers** (16): `archHom` (a private definition: `archTop`'s map as an additive map, `archTop F =
+induced (archHom F) inferInstance` by `rfl`), `archTop_eq`, `tendsto_archHom`, `eventually_archTop`, `norm_archHom_nsmul`,
+`arg_mul_of_abs_lt`, `arg_nsmul_of_small`, `abs_arg_lt_of_small`, `inv_five_mem`, `fivePow` (a private definition, `r/5^k
+∈ R`), `nsmul_fivePow`, `fivePow_succ`, `fivePow_add`, `exists_nsmul_mem_of_mem_nhds_profTop`, `mem_nhds_profTop`,
+`exists_nat_mul_integers_mem`, `tendsto_archTop_addMonoidHom`. No import added. The mixed space's norm exists only with the
+real places decidable (`Fintype` of a subtype): `eventually_archTop` and `norm_archHom_nsmul` are stated under `open scoped
+Classical in`, and the proofs that read the norm open `classical`.
+
+**Re-priced from M10:** about 0.4 of the plan; the hard leaf, by a shorter route, about 100 lines.

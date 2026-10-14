@@ -1,0 +1,27 @@
+slot: admitted ij1: mem 4 GiB (hard cap), cpus 0,1
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+ψ : ↥(unitRing F) →+ ℝ
+y✝ : ↥(unitRing F)
+b : Module.Basis (Module.Free.ChooseBasisIndex ℤ (𝓞 ↥(fieldI F))) ℤ (𝓞 ↥(fieldI F)) := RingOfIntegers.basis ↥(fieldI F)
+B : Module.Basis (Module.Free.ChooseBasisIndex ℤ (𝓞 ↥(fieldI F))) ℝ (mixedEmbedding.mixedSpace ↥(fieldI F)) :=
+  mixedEmbedding.latticeBasis ↥(fieldI F)
+c : ℕ
+hc : c ≠ 0
+hcR : ∀ (a : 𝓞 ↥(fieldI F)), ↑c * ↑a ∈ UnitRing.unitRing (conjOn ⋯)
+e : Module.Free.ChooseBasisIndex ℤ (𝓞 ↥(fieldI F)) → ↥(unitRing F) := fun i => ⟨↑(↑c * ↑(b i)), ⋯⟩
+tt : Module.Free.ChooseBasisIndex ℤ (𝓞 ↥(fieldI F)) → ℝ := fun i => ψ (e i) / ↑c
+g : mixedEmbedding.mixedSpace ↥(fieldI F) → ℝ := fun v => ∑ i, (B.repr v) i * tt i
+hg : Continuous g
+Φ : ↥(unitRing F) →+ ℝ := { toFun := fun r => g ((archHom F) r), map_zero' := ⋯, map_add' := ⋯ }
+hΦe : ∀ (i : Module.Free.ChooseBasisIndex ℤ (𝓞 ↥(fieldI F))), Φ (e i) = ψ (e i)
+r : ↥(unitRing F)
+y : ℤ
+hy0 : y ≠ 0
+hyint : ∀ x ∈ {⟨↑r, ⋯⟩}, IsIntegral ℤ (y • x)
+X : 𝓞 ↥(fieldI F) := ⟨y • ⟨↑r, ⋯⟩, ⋯⟩
+hX : ↑(∑ x, (b.repr X) x • (algebraMap (𝓞 ↥(fieldI F)) ↥(fieldI F)) (b x)) = ↑↑X
+⊢ (↑c * y) • ↑r = ∑ x, (b.repr X) x • ↑(↑c * ↑(b x))
+data/fs131/ij1/work/ContinuityGroup.lean:223:16: warning: declaration uses `sorry`
+seconds=8
+exit=0
