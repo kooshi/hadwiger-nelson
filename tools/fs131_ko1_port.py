@@ -40,7 +40,7 @@ What this script changes in the copied text, and nothing else:
      Mathlib v4.32.0; the release is at v4.34.1), with its reason.  The script refuses a patch that touches a
      definition, an instance whose value is a term, or a theorem's statement (anything before its top-level `:=`);
   7. the table's `renames` — a Mathlib constant renamed between the pins, applied to the token wherever it stands in
-     a theorem; refused inside a definition;
+     a theorem as a whole name (`rename_pattern`: never the start of a longer name); refused inside a definition;
   8. the table's `drop_open` — a namespace that does not exist under the module's imports, taken out of its `open`
      line (by line and token); an `open` line left with none is left out.
 Before anything is generated the copied lines are SCANNED for what runs code or changes options while a file
@@ -635,7 +635,7 @@ def emit_module(m, path, lines, decls, want, tab, names_here):
                 used["adapt"].add(i)
                 adapted.append((a, b, o, al))
         for (r_old, r_new, _) in tab["renames"]:
-            pat = re.compile(r"(?<![A-Za-z0-9_'])" + re.escape(r_old) + r"(?![A-Za-z0-9'])")
+            pat = rename_pattern(r_old)
             for j, row in enumerate(text):
                 if pat.search(row):
                     if kind not in PROOFKINDS:
@@ -703,6 +703,25 @@ def emit_module(m, path, lines, decls, want, tab, names_here):
     return dict(name=name, path=path, body=body, copied=copied, left=left, examples=examples, rooted=rooted,
                 adapted=adapted,
                 tab=tab, total=len(decls), nlines=len(lines) - (1 if lines[-1] == "" else 0))
+
+
+# A rename matches WHOLE names only (FS131-IPD1's revision; the defect FS131-IPB1 met: `lipschitzWith` matched the start
+# of `lipschitzWith_thickenedIndicator`).  Lean's identifier characters (`isIdRest`, `Init/Meta/Defs.lean` at v4.32.0):
+# ASCII letters and digits, `_`, `'`, `!`, `?`, the letter-like blocks (`isLetterLike`) and the subscripts
+# (`isSubScriptAlnum`).  After the token none of them may follow (so `foo` is not the start of `foo_bar`, `foo₀`, `foo'`,
+# `foo?`); before it, none of them but `!` and `?`, which begin no identifier (`!foo` is `!` applied to `foo`).  A `.`
+# is allowed on both sides, as before: before it a longer qualified name of the same constant
+# (`MeasureTheory.Measure.foo` for a rename of `Measure.foo` under `open MeasureTheory`), after it dot notation on the
+# renamed constant (`foo.mp`).
+_LETTERLIKE = ("α-κμ-ωΑ-ΟΡ΢Τ-Ωϊ-ϻἀ-῾℀-⅏"
+               "\U0001d49c-\U0001d59fÀ-ÖØ-öø-ÿĀ-ſ")
+_SUBSCRIPT = "₀-₉ₐ-ₜᵢ-ᵪⱼ"
+ID_BEFORE = "A-Za-z0-9_'" + _LETTERLIKE + _SUBSCRIPT
+ID_AFTER = ID_BEFORE + "!?"
+
+
+def rename_pattern(r_old):
+    return re.compile(f"(?<![{ID_BEFORE}])" + re.escape(r_old) + f"(?![{ID_AFTER}])")
 
 
 def mathlib_imports(m, tab):
@@ -1113,6 +1132,23 @@ def self_test(mods):
         print(f"partner 'the constructors of an inductive (AlgebraModels.lean:{ia}, {len(ctors)}) get their addresses': "
               f"{'ADDRESSED' if ind_ok else 'FAILED'}")
         ok = ok and ind_ok
+        # a rename matches whole names only (FS131-IPD1's revision): planted in a copy of the source, on the last line
+        # of a copied theorem, a comment holding the renamed token alone, qualified and with dot notation — each
+        # renamed — and as the start of five longer names, each left alone
+        s6 = list(src0)
+        s6[b - 1] = s6[b - 1] + ("  -- zzRenamePlant zzRenamePlant_long zzRenamePlant₀ zzRenamePlant' zzRenamePlant? "
+                                 "zzRenamePlant! Foo.zzRenamePlant zzRenamePlant.mp")
+        want6 = ("  -- zzRenamed zzRenamePlant_long zzRenamePlant₀ zzRenamePlant' zzRenamePlant? zzRenamePlant! "
+                 "Foo.zzRenamed zzRenamed.mp")
+        try:
+            t6, _ = generate(mods, sources={rel0: s6},
+                             tables={m0: dict(tab, renames=tab["renames"] + [["zzRenamePlant", "zzRenamed", "planted"]])})
+            rn_ok = any(ln.endswith(want6) for ln in t6[m0].split("\n")) and \
+                not any(w in t6[m0] for w in ("zzRenamed_", "zzRenamed₀", "zzRenamed'", "zzRenamed?", "zzRenamed!"))
+        except Refused:
+            rn_ok = False
+        print(f"partner 'a rename (planted on {short(o)}) matches whole names only': {'WHOLE' if rn_ok else 'FAILED'}")
+        ok = ok and rn_ok
         # the audit's records (FS131-IPD1's revision): the block for m0 holds exactly one record per copied
         # declaration, instances included, and per instance a `deriving` clause declares; and a private declaration's
         # record stands inside a `section` that opens it — the private one planted by giving a copied theorem of m0 the
@@ -1164,7 +1200,7 @@ def self_test(mods):
         if check(mods, outdir=td, quiet=True) != 0:
             print("SELF-TEST FAILED: the scratch copy does not pass after the plants were undone")
             return 1
-    print(f"SELF-TEST OK: {n} plants refused and 6 partners accepted" if ok else "SELF-TEST FAILED")
+    print(f"SELF-TEST OK: {n} plants refused and 7 partners accepted" if ok else "SELF-TEST FAILED")
     return 0 if ok else 1
 
 
