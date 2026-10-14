@@ -1,0 +1,7 @@
+  ok    GeneratorUnitary.lean: exit 0, no error, DONE 3 (monoid_paths_agree and statement_paths_agree kernel-checked)
+  ok    here_form's stored type (full and erased) is generator_unitary's in lane D's print here
+  ok    release_form's erased type is the release print's; its full type differs by 5 constants, none the release's own (Monoid.toSemigroup, MulOne.toMul, Semigroup.toMul, SubmonoidClass.toMonoid._proof_5, SubmonoidClass.toMulMemClass)
+  ok    the planted control: exit 1, an error at planted_paths_agree (lines [16, 20]), none at its partner monoid_paths_agree
+  ok    residual_fourier: the density branch's axiom levels=[u_1] and this pin's theorem levels=[u_1] — universe parameters, full type and erased type identical
+EVIDENCE OK: 2 receipt lines written to data/fs131/lp1/readback/evidence.out
+exit=0
