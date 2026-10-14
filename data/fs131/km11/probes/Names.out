@@ -1,0 +1,131 @@
+slot: admitted km11p: mem 5 GiB (hard cap), cpus 0,1
+@ContinuousMap.starSubalgebra_topologicalClosure_eq_top_of_separatesPoints : ∀ {𝕜 : Type u_1} {X : Type u_2}
+  [inst : RCLike 𝕜] [inst_1 : TopologicalSpace X] [inst_2 : CompactSpace X] (A : StarSubalgebra 𝕜 C(X, 𝕜)),
+  A.SeparatesPoints → A.topologicalClosure = ⊤
+@ContinuousMap.toLp_denseRange : ∀ {α : Type u_1} [inst : TopologicalSpace α] [NormalSpace α]
+  [inst_2 : MeasurableSpace α] [inst_3 : BorelSpace α] (E : Type u_2) [inst_4 : NormedAddCommGroup E] (μ : Measure α)
+  {p : ENNReal} [inst_5 : SecondCountableTopologyEither α E] [_i : Fact (1 ≤ p)] (𝕜 : Type u_3) [inst_6 : NormedRing 𝕜]
+  [inst_7 : Module 𝕜 E] [inst_8 : IsBoundedSMul 𝕜 E] [NormedSpace ℝ E] [inst_10 : CompactSpace α] [μ.WeaklyRegular]
+  [inst_12 : IsFiniteMeasure μ], p ≠ ⊤ → DenseRange ⇑(ContinuousMap.toLp p μ 𝕜)
+@Lp.boundedContinuousFunction_dense : ∀ {α : Type u_1} [inst : TopologicalSpace α] [NormalSpace α]
+  [inst_2 : MeasurableSpace α] [inst_3 : BorelSpace α] (E : Type u_2) [inst_4 : NormedAddCommGroup E] (μ : Measure α)
+  {p : ENNReal} [NormedSpace ℝ E] [inst_6 : SecondCountableTopologyEither α E] [inst_7 : Fact (1 ≤ p)],
+  p ≠ ⊤ → ∀ [μ.WeaklyRegular], Dense ↑(Lp.boundedContinuousFunction E p μ)
+@Measure.WeaklyRegular.of_pseudoMetrizableSpace_of_isFiniteMeasure : ∀ {X : Type u_1} [inst : TopologicalSpace X]
+  [TopologicalSpace.PseudoMetrizableSpace X] [inst_2 : MeasurableSpace X] [BorelSpace X] (μ : Measure X)
+  [IsFiniteMeasure μ], μ.WeaklyRegular
+data/fs131/km11/probes/Names.lean:7:8: error(lean.unknownIdentifier): Unknown identifier `MeasureTheory.condExpL2_ae_eq_condExp`
+@tendsto_integral_filter_of_dominated_convergence : ∀ {α : Type u_1} {G : Type u_2} [inst : NormedAddCommGroup G]
+  [inst_1 : NormedSpace ℝ G] {m : MeasurableSpace α} {μ : Measure α} {ι : Type u_3} {l : Filter ι}
+  [l.IsCountablyGenerated] {F : ι → α → G} {f : α → G} (bound : α → ℝ),
+  (∀ᶠ (n : ι) in l, AEStronglyMeasurable (F n) μ) →
+    (∀ᶠ (n : ι) in l, ∀ᵐ (a : α) ∂μ, ‖F n a‖ ≤ bound a) →
+      Integrable bound μ →
+        (∀ᵐ (a : α) ∂μ, Filter.Tendsto (fun n => F n a) l (nhds (f a))) →
+          Filter.Tendsto (fun n => ∫ (a : α), F n a ∂μ) l (nhds (∫ (a : α), f a ∂μ))
+@Measure.map_congr : ∀ {α : Type u_1} {β : Type u_2} {mα : MeasurableSpace α} {mβ : MeasurableSpace β} {μ : Measure α}
+  {f g : α → β}, f =ᵐ[μ] g → Measure.map f μ = Measure.map g μ
+@Measure.map_map : ∀ {α : Type u_1} {β : Type u_2} {γ : Type u_3} {mα : MeasurableSpace α} {mβ : MeasurableSpace β}
+  {mγ : MeasurableSpace γ} {μ : Measure α} {g : β → γ} {f : α → β},
+  Measurable g → Measurable f → Measure.map g (Measure.map f μ) = Measure.map (g ∘ f) μ
+@Lp.coeFn_compMeasurePreserving : ∀ {α : Type u_1} {E : Type u_2} {m : MeasurableSpace α} {p : ENNReal} {μ : Measure α}
+  [inst : NormedAddCommGroup E] {β : Type u_3} [inst_1 : MeasurableSpace β] {μb : Measure β} {f : α → β}
+  (g : ↥(Lp E p μb)) (hf : MeasurePreserving f μ μb), ↑↑((Lp.compMeasurePreserving f hf) g) =ᵐ[μ] ↑↑g ∘ f
+@indicatorConstLp : {α : Type u_1} →
+  {E : Type u_2} →
+    {m : MeasurableSpace α} →
+      {μ : Measure α} →
+        [inst : NormedAddCommGroup E] → {s : Set α} → (p : ENNReal) → MeasurableSet s → μ s ≠ ⊤ → E → ↥(Lp E p μ)
+@L2.inner_def : ∀ {α : Type u_1} {E : Type u_2} {𝕜 : Type u_3} [inst : RCLike 𝕜] {m : MeasurableSpace α} {μ : Measure α}
+  [inst_1 : NormedAddCommGroup E] [inst_2 : InnerProductSpace 𝕜 E] (f g : ↥(Lp E 2 μ)),
+  inner 𝕜 f g = ∫ (a : α), inner 𝕜 (↑↑f a) (↑↑g a) ∂μ
+@cauchySeq_tendsto_of_complete : ∀ {α : Type u_1} {β : Type u_2} [uniformSpace : UniformSpace α] [inst : Preorder β]
+  [CompleteSpace α] {u : β → α}, CauchySeq u → ∃ x, Filter.Tendsto u Filter.atTop (nhds x)
+@MemLp.toLp : {α : Type u_1} →
+  {E : Type u_2} →
+    {m : MeasurableSpace α} →
+      {p : ENNReal} → {μ : Measure α} → [inst : NormedAddCommGroup E] → (f : α → E) → MemLp f p μ → ↥(Lp E p μ)
+@ContinuousMap.toLp : {α : Type u_1} →
+  {E : Type u_2} →
+    {m0 : MeasurableSpace α} →
+      (p : ENNReal) →
+        (μ : Measure α) →
+          [inst : TopologicalSpace α] →
+            [BorelSpace α] →
+              [inst_2 : NormedAddCommGroup E] →
+                [SecondCountableTopologyEither α E] →
+                  [CompactSpace α] →
+                    [IsFiniteMeasure μ] →
+                      (𝕜 : Type u_3) →
+                        [inst_6 : Fact (1 ≤ p)] →
+                          [inst_7 : NormedRing 𝕜] →
+                            [inst_8 : Module 𝕜 E] → [inst_9 : IsBoundedSMul 𝕜 E] → C(α, E) →L[𝕜] ↥(Lp E p μ)
+@ContinuousMap.coeFn_toLp : ∀ {α : Type u_1} {E : Type u_2} {m0 : MeasurableSpace α} {p : ENNReal} (μ : Measure α)
+  [inst : TopologicalSpace α] [inst_1 : BorelSpace α] [inst_2 : NormedAddCommGroup E]
+  [inst_3 : SecondCountableTopologyEither α E] [inst_4 : CompactSpace α] [inst_5 : IsFiniteMeasure μ] {𝕜 : Type u_3}
+  [inst_6 : Fact (1 ≤ p)] [inst_7 : NormedRing 𝕜] [inst_8 : Module 𝕜 E] [inst_9 : IsBoundedSMul 𝕜 E] (f : C(α, E)),
+  ↑↑((ContinuousMap.toLp p μ 𝕜) f) =ᵐ[μ] ⇑f
+@Lp.norm_def : ∀ {α : Type u_1} {E : Type u_2} {m : MeasurableSpace α} {p : ENNReal} {μ : Measure α}
+  [inst : NormedAddCommGroup E] (f : ↥(Lp E p μ)), ‖f‖ = (eLpNorm (↑↑f) p μ).toReal
+@L2.inner_indicatorConstLp_one : ∀ {α : Type u_1} {𝕜 : Type u_2} [inst : RCLike 𝕜] {m : MeasurableSpace α}
+  {μ : Measure α} {s : Set α} (hs : MeasurableSet s) (hμs : μ s ≠ ⊤) (f : ↥(Lp 𝕜 2 μ)),
+  inner 𝕜 (indicatorConstLp 2 hs hμs 1) f = ∫ (x : α) in s, ↑↑f x ∂μ
+@Lp.isometry_compMeasurePreserving : ∀ {α : Type u_1} {E : Type u_2} {m : MeasurableSpace α} {p : ENNReal}
+  {μ : Measure α} [inst : NormedAddCommGroup E] {β : Type u_3} [inst_1 : MeasurableSpace β] {μb : Measure β} {f : α → β}
+  [inst_2 : Fact (1 ≤ p)] (hf : MeasurePreserving f μ μb), Isometry ⇑(Lp.compMeasurePreserving f hf)
+@condExp_indicator : ∀ {α : Type u_1} {E : Type u_2} {m m0 : MeasurableSpace α} [inst : NormedAddCommGroup E]
+  [inst_1 : NormedSpace ℝ E] [CompleteSpace E] {μ : Measure α} {f : α → E} {s : Set α},
+  Integrable f μ → MeasurableSet s → μ[s.indicator f | m] =ᵐ[μ] s.indicator μ[f | m]
+@integral_indicator : ∀ {X : Type u_1} {E : Type u_2} {mX : MeasurableSpace X} [inst : NormedAddCommGroup E]
+  [inst_1 : NormedSpace ℝ E] {f : X → E} {s : Set X} {μ : Measure X},
+  MeasurableSet s → ∫ (x : X), s.indicator f x ∂μ = ∫ (x : X) in s, f x ∂μ
+@Measure.dirac_apply' : ∀ {α : Type u_1} [inst : MeasurableSpace α] {s : Set α} (a : α),
+  MeasurableSet s → (Measure.dirac a) s = s.indicator 1 a
+@ext_of_forall_mem_subalgebra_integral_eq_of_polish : ∀ {E : Type u_1} {𝕜 : Type u_2} [inst : RCLike 𝕜]
+  [inst_1 : MeasurableSpace E] [inst_2 : TopologicalSpace E] [PolishSpace E] [BorelSpace E] {P P' : Measure E}
+  [IsFiniteMeasure P] [IsFiniteMeasure P'] {A : StarSubalgebra 𝕜 (BoundedContinuousFunction E 𝕜)},
+  (StarSubalgebra.map (BoundedContinuousFunction.toContinuousMapStarₐ 𝕜) A).SeparatesPoints →
+    (∀ g ∈ A, ∫ (x : E), g x ∂P = ∫ (x : E), g x ∂P') → P = P'
+@StarSubalgebra.topologicalClosure : {R : Type u_1} →
+  {A : Type u_2} →
+    [inst : CommSemiring R] →
+      [inst_1 : StarRing R] →
+        [inst_2 : TopologicalSpace A] →
+          [inst_3 : Semiring A] →
+            [inst_4 : Algebra R A] →
+              [inst_5 : StarRing A] →
+                [inst_6 : StarModule R A] →
+                  [IsSemitopologicalSemiring A] → [ContinuousStar A] → StarSubalgebra R A → StarSubalgebra R A
+data/fs131/km11/probes/Names.lean:26:8: error(lean.unknownIdentifier): Unknown constant `ContinuousMap.ext_of_forall_mem_subalgebra`
+@Lp.coeFn_add : ∀ {α : Type u_1} {E : Type u_2} {m : MeasurableSpace α} {p : ENNReal} {μ : Measure α}
+  [inst : NormedAddCommGroup E] (f g : ↥(Lp E p μ)), ↑↑(f + g) =ᵐ[μ] ↑↑f + ↑↑g
+@L2.inner_def : ∀ {α : Type u_1} {E : Type u_2} {𝕜 : Type u_3} [inst : RCLike 𝕜] {m : MeasurableSpace α} {μ : Measure α}
+  [inst_1 : NormedAddCommGroup E] [inst_2 : InnerProductSpace 𝕜 E] (f g : ↥(Lp E 2 μ)),
+  inner 𝕜 f g = ∫ (a : α), inner 𝕜 (↑↑f a) (↑↑g a) ∂μ
+@tendsto_Lp_of_tendsto_ae : ∀ {α : Type u_1} {β : Type u_2} {m : MeasurableSpace α} [inst : NormedAddCommGroup β]
+  {μ : Measure α} {p : ENNReal},
+  1 ≤ p →
+    p ≠ ⊤ →
+      ∀ {f : ℕ → α → β} {g : α → β},
+        (∀ (n : ℕ), AEStronglyMeasurable (f n) μ) →
+          MemLp g p μ →
+            UnifIntegrable f p μ →
+              UnifTight f p μ →
+                (∀ᵐ (x : α) ∂μ, Filter.Tendsto (fun n => f n x) Filter.atTop (nhds (g x))) →
+                  Filter.Tendsto (fun n => eLpNorm (f n - g) p μ) Filter.atTop (nhds 0)
+@Lp.tendsto_Lp_iff_tendsto_eLpNorm' : ∀ {α : Type u_1} {m : MeasurableSpace α} {p : ENNReal} {μ : Measure α}
+  {E : Type u_2} [inst : NormedAddCommGroup E] {ι : Type u_3} {fi : Filter ι} [inst_1 : Fact (1 ≤ p)]
+  (f : ι → ↥(Lp E p μ)) (f_lim : ↥(Lp E p μ)),
+  Filter.Tendsto f fi (nhds f_lim) ↔ Filter.Tendsto (fun n => eLpNorm (↑↑(f n) - ↑↑f_lim) p μ) fi (nhds 0)
+@Lp.dist_def : ∀ {α : Type u_1} {E : Type u_2} {m : MeasurableSpace α} {p : ENNReal} {μ : Measure α}
+  [inst : NormedAddCommGroup E] (f g : ↥(Lp E p μ)), dist f g = (eLpNorm (↑↑f - ↑↑g) p μ).toReal
+data/fs131/km11/probes/Names.lean:32:8: error(lean.unknownIdentifier): Unknown identifier `MeasureTheory.eLpNorm_lt_top`
+@condExpL2_indicator_ae_eq_smul : ∀ {α : Type u_1} {E' : Type u_2} (𝕜 : Type u_3) [inst : RCLike 𝕜]
+  [inst_1 : NormedAddCommGroup E'] [inst_2 : InnerProductSpace 𝕜 E'] [inst_3 : CompleteSpace E']
+  [inst_4 : NormedSpace ℝ E'] {m m0 : MeasurableSpace α} {μ : Measure α} {s : Set α} (hm : m ≤ m0)
+  (hs : MeasurableSet s) (hμs : μ s ≠ ⊤) (x : E'),
+  ↑↑↑((condExpL2 E' 𝕜 hm) (indicatorConstLp 2 hs hμs x)) =ᵐ[μ] fun a =>
+    ↑↑↑((condExpL2 ℝ ℝ hm) (indicatorConstLp 2 hs hμs 1)) a • x
+@Lp.simpleFunc.isDenseEmbedding : ∀ {α : Type u_1} {E : Type u_2} [inst : MeasurableSpace α]
+  [inst_1 : NormedAddCommGroup E] {p : ENNReal} {μ : Measure α} [inst_2 : Fact (1 ≤ p)],
+  p ≠ ⊤ → IsDenseEmbedding Subtype.val

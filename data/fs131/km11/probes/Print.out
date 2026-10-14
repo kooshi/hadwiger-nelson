@@ -1,0 +1,101 @@
+slot: admitted km11p: mem 5 GiB (hard cap), cpus 0,1
+def HadwigerNelson.SpectralChain.Interface.APlusOfR88 : {F : Subfield ℝ} →
+  HadwigerNelson.SpectralChain.Interface F → Prop :=
+fun {F} I => I.R88TCA → I.APlus0
+def HadwigerNelson.SpectralChain.Interface.APlus0 : {F : Subfield ℝ} →
+  HadwigerNelson.SpectralChain.Interface F → Prop :=
+fun {F} I =>
+  ∀ (μ : HadwigerNelson.SpectralChain.InvariantColouring F)
+    (σ : MeasureTheory.Measure (HadwigerNelson.SpectralChain.Dual F)),
+    HadwigerNelson.SpectralChain.IsTraceSpectral F μ.μ σ →
+      ∫ (χ : HadwigerNelson.SpectralChain.Dual F) in I.TAᶜ, (↑(χ 1)).re ∂σ < 0
+def HadwigerNelson.SpectralChain.Interface.R88TCA : {F : Subfield ℝ} →
+  HadwigerNelson.SpectralChain.Interface F → Prop :=
+fun {F} I =>
+  ∀ (μ : HadwigerNelson.SpectralChain.InvariantColouring F)
+    (σ : MeasureTheory.Measure (HadwigerNelson.SpectralChain.Dual F)),
+    HadwigerNelson.SpectralChain.IsTraceSpectral F μ.μ σ → σ I.TAᶜ ≠ 0
+def HadwigerNelson.Rigidity.chainInterface : (F : Subfield ℝ) →
+  [NumberField ↥F] → HadwigerNelson.SpectralChain.Interface F :=
+fun F [NumberField ↥F] =>
+  { E := HadwigerNelson.Rigidity.TA F, TA := HadwigerNelson.Rigidity.TA F, measurableSet_E := ⋯, measurableSet_TA := ⋯,
+    TA_subset_E := ⋯, rot_preimage_E := ⋯,
+    h := fun τ u => HadwigerNelson.Rigidity.ksEntropy τ (HadwigerNelson.SpectralChain.rot u) }
+contChars_tauPrime : ∀ (F : Subfield ℝ) [inst : NumberField ↥F], contChars (tauPrime F) = TA F
+bochnerHerglotz_of_countable : ∀ (G : Type u_1) [inst : AddCommGroup G] [Countable G], BochnerHerglotz G
+bochnerOn_tauPrime : ∀ (F : Subfield ℝ) [inst : NumberField ↥F], BochnerOn (tauPrime F)
+@measure_eq_of_fourier : ∀ {G : Type u_1} [inst : AddCommGroup G] [Countable G] {σ σ' : Measure (AddChar G Circle)}
+  [IsFiniteMeasure σ] [IsFiniteMeasure σ'],
+  (∀ (r : G), ∫ (χ : AddChar G Circle), ↑(χ r) ∂σ = ∫ (χ : AddChar G Circle), ↑(χ r) ∂σ') → σ = σ'
+isTopologicalAddGroup_tauPrime : ∀ (F : Subfield ℝ) [inst : NumberField ↥F], IsTopologicalAddGroup ↥(unitRing F)
+isCountablyGenerated_nhds_tauPrime : ∀ (F : Subfield ℝ) [inst : NumberField ↥F], (nhds 0).IsCountablyGenerated
+measurableSet_TA : ∀ (F : Subfield ℝ) [NumberField ↥F], MeasurableSet (TA F)
+rot_preimage_TA : ∀ (F : Subfield ℝ) (u : ↑(unitVectors F)), rot u ⁻¹' TA F = TA F
+@spectral_carried_iff : ∀ {R : Type u_1} [inst : AddCommGroup R] {Ω : Type u_2} [inst_1 : MeasurableSpace Ω]
+  {μ : Measure Ω} (t : TopologicalSpace R),
+  IsTopologicalAddGroup R →
+    (nhds 0).IsCountablyGenerated →
+      BochnerOn t →
+        ∀ (T : R → Ω → Ω) (hT : ∀ (y : R), MeasurePreserving (T y) μ μ),
+          (∀ (x y : R), T (x + y) = T x ∘ T y) →
+            ∀ {f : ↥(Lp ℝ 2 μ)} {σ : Measure (AddChar R Circle)},
+              IsSpectralMeasureOf T hT f σ → (σ (contChars t)ᶜ = 0 ↔ f ∈ contVec T hT (nhds 0))
+@si4 : ∀ {Ω : Type u_1} {V : Type u_2} [Countable V] (𝒜 : MeasurableSpace Ω) [m0 : MeasurableSpace Ω] (μ : Measure Ω)
+  [IsProbabilityMeasure μ],
+  𝒜 ≤ m0 →
+    ∀ (c : Ω → V → Fin 4),
+      (∀ (x : V), Measurable fun ω => c ω x) →
+        ∀ (adj : V → V → Prop),
+          (∀ (x y : V),
+              adj x y →
+                ∀ (j : Fin 4),
+                  ∫ (ω : Ω),
+                      μ[{ω' | c ω' x = j}.indicator fun x => 1 | 𝒜] ω *
+                        μ[{ω' | c ω' y = j}.indicator fun x => 1 | 𝒜] ω ∂μ =
+                    0) →
+            ∀ (f : Finset (Fin 4) → Fin 4),
+              (∀ (s : Finset (Fin 4)), s.Nonempty → f s ∈ s) →
+                (∀ (x : V), Measurable fun ω => f (condSupport 𝒜 μ c ω x)) ∧
+                  (∀ᵐ (ω : Ω) ∂μ, ∀ (x y : V), adj x y → f (condSupport 𝒜 μ c ω x) ≠ f (condSupport 𝒜 μ c ω y)) ∧
+                    ∀ᵐ (ω : Ω) ∂μ, ∀ (x : V), c ω x ∈ condSupport 𝒜 μ c ω x
+@si4_equivariant : ∀ {Ω : Type u_1} {V : Type u_2} [Countable V] (𝒜 : MeasurableSpace Ω) [m0 : MeasurableSpace Ω]
+  (μ : Measure Ω) [IsProbabilityMeasure μ],
+  𝒜 ≤ m0 →
+    ∀ (c : Ω → V → Fin 4),
+      (∀ (x : V), Measurable fun ω => c ω x) →
+        ∀ {S : Ω → Ω},
+          MeasurePreserving S μ μ →
+            MeasurableSpace.comap S 𝒜 = 𝒜 →
+              ∀ (π : V → V),
+                (∀ (ω : Ω) (x : V), c (S ω) x = c ω (π x)) →
+                  ∀ᵐ (ω : Ω) ∂μ, ∀ (x : V), condSupport 𝒜 μ c (S ω) x = condSupport 𝒜 μ c ω (π x)
+@si4_equivariant_factorSigma : ∀ {R : Type u_1} {Ω : Type u_2} [inst : MeasurableSpace Ω] {μ : Measure Ω} {V : Type u_3}
+  [Countable V] [inst_2 : IsProbabilityMeasure μ] (T : R → Ω → Ω) (hT : ∀ (y : R), MeasurePreserving (T y) μ μ),
+  (∀ (x y : R), T x ∘ T y = T y ∘ T x) →
+    ∀ (l : Filter R) (c : Ω → V → Fin 4),
+      (∀ (v : V), Measurable fun ω => c ω v) →
+        ∀ {x x' : R},
+          T x' ∘ T x = id →
+            ∀ (π : V → V),
+              (∀ (ω : Ω) (v : V), c (T x ω) v = c ω (π v)) →
+                ∀ᵐ (ω : Ω) ∂μ,
+                  ∀ (v : V),
+                    condSupport (factorSigma T hT l) μ c (T x ω) v = condSupport (factorSigma T hT l) μ c ω (π v)
+@comap_factorSigma_eq_of_action : ∀ {R : Type u_1} {Ω : Type u_2} [inst : MeasurableSpace Ω] {μ : Measure Ω}
+  [inst_1 : AddCommGroup R] [inst_2 : IsProbabilityMeasure μ] (T : R → Ω → Ω)
+  (hT : ∀ (y : R), MeasurePreserving (T y) μ μ),
+  (∀ (x y : R), T (x + y) = T x ∘ T y) →
+    T 0 = id → ∀ (l : Filter R) (x : R), MeasurableSpace.comap (T x) (factorSigma T hT l) = factorSigma T hT l
+@rotInv_of_isTraceSpectral : ∀ {F : Subfield ℝ},
+  BochnerHerglotz ↥(unitRing F) →
+    ∀ (μ : InvariantColouring F) {σ : Measure (Dual F)}, IsTraceSpectral F μ.μ σ → RotInv F σ
+@contVec_eq_lpMeas : ∀ {R : Type u_1} {Ω : Type u_2} [inst : MeasurableSpace Ω] {μ : Measure Ω}
+  [inst_1 : IsProbabilityMeasure μ] (T : R → Ω → Ω) (hT : ∀ (y : R), MeasurePreserving (T y) μ μ) (l : Filter R),
+  contVec T hT l = ↑(lpMeas ℝ ℝ (factorSigma T hT l) 2 μ)
+@inner_sub_condExpL2_eq_zero : ∀ {R : Type u_1} {Ω : Type u_2} [inst : MeasurableSpace Ω] {μ : Measure Ω}
+  [inst_1 : IsProbabilityMeasure μ] (T : R → Ω → Ω) (hT : ∀ (y : R), MeasurePreserving (T y) μ μ) (l : Filter R)
+  (f : ↥(Lp ℝ 2 μ)) {g : ↥(Lp ℝ 2 μ)}, g ∈ contVec T hT l → inner ℝ (f - ↑((condExpL2 ℝ ℝ ⋯) f)) g = 0
+'HadwigerNelson.Rigidity.contChars_tauPrime' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.bochnerHerglotz_of_countable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.measure_eq_of_fourier' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.bochnerOn_tauPrime' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
