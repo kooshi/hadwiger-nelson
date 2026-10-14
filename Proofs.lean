@@ -210,6 +210,9 @@ import Proofs.HadwigerNelson.Rigidity.GlobalPoint
 import Proofs.HadwigerNelson.Rigidity.WanderingShells
 import Proofs.HadwigerNelson.Rigidity.ZeroEntropyClosed
 import Proofs.HadwigerNelson.Rigidity.ChainHeadline
+import Proofs.HadwigerNelson.Rigidity.SqrtClassFive
+import Proofs.HadwigerNelson.Instances.SqrtFortySevenFive
+import Proofs.HadwigerNelson.Instances.SqrtClassValues
 import Proofs.HadwigerNelson.Rigidity.SolenoidErgodic
 import Proofs.HadwigerNelson.Rigidity.HaarMultiple
 import Proofs.HadwigerNelson.Rigidity.DualGroup

@@ -1,0 +1,6 @@
+slot: admitted km15f: mem 4 GiB (hard cap), cpus 8,9
+Proofs/HadwigerNelson/Rigidity/SqrtClassFive.lean:104:16: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SqrtClassFive.lean:148:16: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SqrtClassFive.lean:155:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SqrtClassFive.lean:161:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SqrtClassFive.lean:168:8: warning: declaration uses `sorry`

@@ -126,7 +126,7 @@ minus `3` and `7` (spec: `IsSquare (47 : ZMod p)` at `11, 19, 23, 31, 43, 47`, n
 - `add_one_le_chromaticNumber_of_indep_le`: the graph with one vertex and no edge, `k = 0`, `c = 1`.
 - `hOA`: an outside theorem (`Plane.oneAvoidingDensityBound_model` models its clause).
 
-### 2.4 The domain pass (`debruijn-domain-modeling`, fresh; commit `c2…` below) — no new definition; what it changed
+### 2.4 The domain pass (`debruijn-domain-modeling`, fresh; its changes committed before the next pass, `git log -- Proofs/HadwigerNelson/Rigidity/SqrtClassFive.lean`) — no new definition; what it changed
 
 1. **Three radicands, not one.** The class's three conditions are each read once, by a different step: `a ≡ 7 (mod 8)`
    by the dyadic step, `b ≡ 2 (mod 3)` against residue size 3, `c` a non-square mod 7 against 7. Bundling them into one
@@ -170,3 +170,25 @@ minus `3` and `7` (spec: `IsSquare (47 : ZMod p)` at `11, 19, 23, 31, 43, 47`, n
 **Binders, from the kernel** (`probes/Sigs.out`): every `[NumberField F]` stored is read by its proof's children
 (finiteness of a residue ring, or M13's theorem). No section `variable` carries an instance. No definition or instance is
 new.
+
+## Stage 3 — SAVED: priced from the first leaves, and the leaves fell
+
+**The measure.** The hardest leaf of the classification is `stablePrime_card_of_two_notMem`: the residue field, its
+involution, the fixed field, `p` and `n`, and the square root in `K₀` as a natural number. It took **36 lines and one
+correction** (a coercion out of the subfield `K₀`, read with `map_natCast K₀.subtype`). It went in with the four other
+leaves of `Rigidity/SqrtClassFive`: the counting child, the ratio floor, the three integers, the dyadic exclusion and the
+floor at the class. Those are 150 lines of proof, 20:30–20:53 UTC, with three rounds through the farm (`logs-A5.txt`,
+`logs-A6.txt`). `Instances/SqrtFortySevenFive`'s three leaves — the degree bound, `n = 1` by the norm, and the stable
+prime above 11 through `ℤ[U] ⊆ A + Ai` — took 70 lines and elaborated on the first attempt (`logs-B4.txt`).
+**No classical input is missing**: every name the route reads is `#check`ed at the pin (`ReadBack.out`), and no axiom is
+declared.
+
+**The price, against the prediction.** M15 at `ℚ(√47)` is **459 lines** in two modules (`SqrtClassFive` 313,
+`SqrtFortySevenFive` 146), docstrings and spec included. I predicted 300–500 lines (logged by the coordinator), and the
+map priced 800–1,500. The map's price was for a computation this route does not make.
+
+**The next field, `ℚ(√143)`, from the same measure: 20 lines** (`Instances/SqrtClassValues`: `L ≥ 5` in one line from
+the class, the upper half at the ramified prime above 11 in seven, the value in four). `ℚ(√311)`, `ℚ(√335)`,
+`ℚ(√3, √5)` and `ℚ(√167) ≥ 5` came in the same module: **125 lines in all**.
+
+**Leaves left:** one, by ruling — `Rigidity.ratioAtMost_two_notMem_link`, M13's.
