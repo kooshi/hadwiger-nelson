@@ -44,6 +44,16 @@ private theorem quotientMap_conjO_involutive (P : StablePrime F) (x : 𝓞 (fiel
   obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
   rw [Ideal.quotientMap_mk, Ideal.quotientMap_mk, conjO_conjO]
 
+omit [NumberField F] in
+/-- `i` is an integer of `F(i)`, with `i² = −1` and `ī = −i` (`UpperHalf`'s private lemma, restated). -/
+private theorem exists_I_integer' : ∃ i : 𝓞 (fieldI F), i ^ 2 = -1 ∧ conjO F i = -i := by
+  let iL : fieldI F := ⟨Complex.I, by simp [zero_mem], by simp [one_mem]⟩
+  have hiL : iL ^ 2 = -1 := Subtype.ext Complex.I_sq
+  have hint : IsIntegral ℤ iL := IsIntegral.of_pow (n := 2) (by norm_num) (by rw [hiL]; exact isIntegral_one.neg)
+  refine ⟨⟨iL, hint⟩, RingOfIntegers.coe_injective ?_, RingOfIntegers.coe_injective ?_⟩
+  · rw [map_pow, map_neg, map_one]; exact hiL
+  · rw [map_neg]; exact Subtype.ext Complex.conj_I
+
 /-- The level-one residue map vanishes exactly on the non-units of `𝓞_P`: its kernel is a maximal ideal of a local ring. -/
 private theorem residue_one_eq_zero_iff (P : StablePrime F) (z : P.localRing) :
     P.residue 1 z = 0 ↔ (z : fieldI F) ∈ P.localRing.nonunits := by
@@ -236,13 +246,162 @@ with `Q ≡ 3 (mod 4)`, lie in the image of the ring, which has nine elements; s
 theorem exists_stablePrime_card_nine {𝔪 : Ideal (unitRing F)} (h𝔪 : 𝔪.IsMaximal)
     (h9 : Nat.card (unitRing F ⧸ 𝔪) = 9) :
     ∃ P : StablePrime F, Nat.card (𝓞 (fieldI F) ⧸ P.P ^ 1) = 9 := by
-  sorry
+  classical
+  -- `3 ∈ 𝔪`, so `𝔪 ≠ ⊥`
+  have h3 : (3 : unitRing F) ∈ 𝔪 := by
+    have h : Nat.card (unitRing F ⧸ 𝔪) • (1 : unitRing F ⧸ 𝔪) = 0 := card_nsmul_eq_zero'
+    rw [h9, nsmul_eq_mul, mul_one] at h
+    have h9m : (3 : unitRing F) * 3 ∈ 𝔪 := by
+      rw [← Ideal.Quotient.eq_zero_iff_mem, map_mul, map_ofNat]
+      have e : (3 : unitRing F ⧸ 𝔪) * 3 = ((9 : ℕ) : unitRing F ⧸ 𝔪) := by norm_num
+      rw [e, h]
+    exact (h𝔪.isPrime.mem_or_mem h9m).elim id id
+  have hne : 𝔪 ≠ ⊥ := fun h => by
+    rw [h, Ideal.mem_bot] at h3
+    have h0 := congrArg (unitRing F).subtype h3
+    rw [map_ofNat, map_zero] at h0
+    norm_num at h0
+  obtain ⟨P, hle, hker⟩ := exists_stablePrime_of_maximal h𝔪 hne
+  haveI := isMaximal_pow_one P
+  letI := Ideal.Quotient.field (P.P ^ 1)
+  refine ⟨P, ?_⟩
+  have hσσ := quotientMap_conjO_involutive P
+  haveI : Finite (𝓞 (fieldI F) ⧸ P.P ^ 1) :=
+    Ideal.finiteQuotientOfFreeOfNeBot _ (by rw [pow_one]; exact P.heightOne.ne_bot)
+  letI : Fintype (𝓞 (fieldI F) ⧸ P.P ^ 1) := Fintype.ofFinite _
+  -- the image of the ring has nine elements
+  have hkerg : RingHom.ker (ringResidue P hle) = 𝔪 := by
+    ext x
+    rw [RingHom.mem_ker, ringResidue_apply]
+    exact (hker x).symm
+  have hrange : Nat.card (ringResidue P hle).range = 9 := by
+    rw [← h9, ← hkerg]
+    exact Nat.card_congr (RingHom.quotientKerEquivRange (ringResidue P hle)).symm.toEquiv
+  -- characteristic 3
+  have h3κ : (3 : 𝓞 (fieldI F) ⧸ P.P ^ 1) = 0 := by
+    have h := (hker 3).mp h3
+    rwa [← ringResidue_apply, map_ofNat] at h
+  have h2κ : (2 : 𝓞 (fieldI F) ⧸ P.P ^ 1) ≠ 0 := fun h => one_ne_zero (by linear_combination h3κ - h)
+  -- `i` modulo `P`
+  obtain ⟨i, hi2, hci⟩ := exists_I_integer' (F := F)
+  have hι2 : (Ideal.Quotient.mk (P.P ^ 1) i) ^ 2 = -1 := by rw [← map_pow, hi2, map_neg, map_one]
+  have hσι : Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1) (Ideal.Quotient.mk (P.P ^ 1) i) =
+      -Ideal.Quotient.mk (P.P ^ 1) i := by rw [Ideal.quotientMap_mk, hci, map_neg]
+  obtain ⟨hQ2, hQ4⟩ := StandingFive.card_fixed_of_involution _ hσσ hι2 hσι h2κ
+  generalize Nat.card ↥((Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1)).eqLocusField (RingHom.id _)) = Q
+    at hQ2 hQ4
+  have hcard : Fintype.card (𝓞 (fieldI F) ⧸ P.P ^ 1) = Q ^ 2 := by rw [← Nat.card_eq_fintype_card, hQ2]
+  have hσne : Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1) ≠ RingHom.id _ := fun h => by
+    rw [h, RingHom.id_apply] at hσι
+    have hι0 : Ideal.Quotient.mk (P.P ^ 1) i = 0 := by
+      have h2ι : (2 : 𝓞 (fieldI F) ⧸ P.P ^ 1) * Ideal.Quotient.mk (P.P ^ 1) i = 0 := by linear_combination hσι
+      exact (mul_eq_zero.mp h2ι).resolve_left h2κ
+    rw [hι0] at hι2
+    norm_num at hι2
+  have hpow := StandingFive.involution_eq_pow _ hσσ hσne hcard
+  -- the `Q + 1` norm-one elements lie in the image of the ring
+  have hle9 : Q + 1 ≤ 9 := by
+    rw [← StandingFive.card_normOne hcard, ← hrange, ← Fintype.card_subtype, ← Nat.card_eq_fintype_card]
+    refine Nat.card_le_card_of_injective
+      (fun u : {u : 𝓞 (fieldI F) ⧸ P.P ^ 1 // u ^ (Q + 1) = 1} => (⟨u.1, ?_⟩ : (ringResidue P hle).range))
+      fun u v h => Subtype.ext (Subtype.mk.inj h)
+    have ht : u.1 * Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1) u.1 = 1 := by
+      rw [hpow, ← pow_succ']
+      exact u.2
+    obtain ⟨v, -, hv⟩ := exists_unitSet_residue_eq P hle ht
+    exact ⟨v, hv⟩
+  -- `Q ≡ 3 (mod 4)` and `Q ≤ 8`: `Q = 3` or `7`, and `7² = 49` is not the order of a group killed by 3
+  have hQ : Q = 3 := by
+    have h37 : Q = 3 ∨ Q = 7 := by omega
+    rcases h37 with h | h
+    · exact h
+    · exfalso
+      have hd1 : addOrderOf (1 : 𝓞 (fieldI F) ⧸ P.P ^ 1) ∣ 3 :=
+        addOrderOf_dvd_of_nsmul_eq_zero (by rw [nsmul_eq_mul, mul_one]; exact_mod_cast h3κ)
+      have hd2 : addOrderOf (1 : 𝓞 (fieldI F) ⧸ P.P ^ 1) ∣ 49 := by
+        have := addOrderOf_dvd_natCard (1 : 𝓞 (fieldI F) ⧸ P.P ^ 1)
+        rwa [hQ2, h] at this
+      have hd : addOrderOf (1 : 𝓞 (fieldI F) ⧸ P.P ^ 1) ∣ 1 := by
+        have hg := Nat.dvd_gcd hd1 hd2
+        rwa [show Nat.gcd 3 49 = 1 by norm_num] at hg
+      exact one_ne_zero (AddMonoid.addOrderOf_eq_one_iff.mp (Nat.dvd_one.mp hd))
+  rw [hQ2, hQ]
+  norm_num
 
+omit [NumberField F] in
+/-- `F → F(i)`, the inclusion. -/
+private noncomputable def toFieldIHom (F : Subfield ℝ) : F →+* fieldI F :=
+  (Complex.ofRealHom.comp F.subtype).codRestrict (fieldI F) fun x => by
+    show ((x : ℝ) : ℂ) ∈ fieldI F
+    exact ⟨by simp, by simp⟩
+
+/-- `𝓞 F → 𝓞 (F(i))`. -/
+private noncomputable def upO (F : Subfield ℝ) : 𝓞 F →+* 𝓞 (fieldI F) := RingOfIntegers.mapRingHom (toFieldIHom F)
+
+omit [NumberField F] in
+/-- Conjugation fixes the integers of `F`. -/
+private theorem conjO_upO (a : 𝓞 F) : conjO F (upO F a) = upO F a :=
+  RingOfIntegers.ext (Subtype.ext (by
+    show (starRingEnd ℂ) (((a : F) : ℝ) : ℂ) = (((a : F) : ℝ) : ℂ)
+    exact Complex.conj_ofReal _))
+
+omit [NumberField F] in
 /-- **A stable prime with nine elements in its quotient lies over a prime of `F` with three**: `P ∩ 𝓞 F` is maximal, and
-`𝓞 F ⧸ (P ∩ 𝓞 F)` lands in the fixed field of conjugation on `𝓞 ⧸ P`, which has three elements. -/
+`𝓞 F ⧸ (P ∩ 𝓞 F)` lands in the fixed field of conjugation on `𝓞 ⧸ P`, which has three elements. Every subfield
+`F ⊆ ℝ` (finiteness comes from the count). -/
 theorem exists_maximal_card_three_of_stablePrime_card_nine (P : StablePrime F)
     (h9 : Nat.card (𝓞 (fieldI F) ⧸ P.P ^ 1) = 9) : ∃ 𝔭 : Ideal (𝓞 F), 𝔭.IsMaximal ∧ Nat.card (𝓞 F ⧸ 𝔭) = 3 := by
-  sorry
+  classical
+  haveI := isMaximal_pow_one P
+  letI := Ideal.Quotient.field (P.P ^ 1)
+  haveI : Finite (𝓞 (fieldI F) ⧸ P.P ^ 1) := Nat.finite_of_card_ne_zero (by rw [h9]; norm_num)
+  have hσσ := quotientMap_conjO_involutive P
+  -- characteristic 3, and the fixed field of conjugation has three elements
+  have h3κ : (3 : 𝓞 (fieldI F) ⧸ P.P ^ 1) = 0 := by
+    have h : Nat.card (𝓞 (fieldI F) ⧸ P.P ^ 1) • (1 : 𝓞 (fieldI F) ⧸ P.P ^ 1) = 0 := card_nsmul_eq_zero'
+    rw [h9, nsmul_eq_mul, mul_one] at h
+    have e : (3 : 𝓞 (fieldI F) ⧸ P.P ^ 1) * 3 = ((9 : ℕ) : 𝓞 (fieldI F) ⧸ P.P ^ 1) := by norm_num
+    exact mul_self_eq_zero.mp (e.trans h)
+  have h2κ : (2 : 𝓞 (fieldI F) ⧸ P.P ^ 1) ≠ 0 := fun h => one_ne_zero (by linear_combination h3κ - h)
+  obtain ⟨i, hi2, hci⟩ := exists_I_integer' (F := F)
+  have hι2 : (Ideal.Quotient.mk (P.P ^ 1) i) ^ 2 = -1 := by rw [← map_pow, hi2, map_neg, map_one]
+  have hσι : Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1) (Ideal.Quotient.mk (P.P ^ 1) i) =
+      -Ideal.Quotient.mk (P.P ^ 1) i := by rw [Ideal.quotientMap_mk, hci, map_neg]
+  obtain ⟨hQ2, -⟩ := StandingFive.card_fixed_of_involution _ hσσ hι2 hσι h2κ
+  have hQ : Nat.card ↥((Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1)).eqLocusField (RingHom.id _)) = 3 :=
+    Nat.pow_left_injective (by norm_num : 2 ≠ 0) (show _ ^ 2 = 3 ^ 2 by rw [← hQ2, h9])
+  -- the prime below, and its quotient inside `𝓞 ⧸ P`
+  have hj : Function.Injective (Ideal.quotientMap (P.P ^ 1) (upO F) (le_refl ((P.P ^ 1).comap (upO F)))) :=
+    Ideal.quotientMap_injective
+  haveI : Finite (𝓞 F ⧸ (P.P ^ 1).comap (upO F)) := Finite.of_injective _ hj
+  have hmax : ((P.P ^ 1).comap (upO F)).IsMaximal :=
+    Ideal.Quotient.maximal_of_isField _ (Finite.isField_of_domain _)
+  refine ⟨(P.P ^ 1).comap (upO F), hmax, ?_⟩
+  have hfix : ∀ x : 𝓞 F ⧸ (P.P ^ 1).comap (upO F),
+      Ideal.quotientMap (P.P ^ 1) (upO F) (le_refl ((P.P ^ 1).comap (upO F))) x ∈
+        (Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1)).eqLocusField (RingHom.id _) := fun x => by
+    obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
+    show Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1)
+        (Ideal.quotientMap (P.P ^ 1) (upO F) (le_refl _) (Ideal.Quotient.mk _ a)) =
+      Ideal.quotientMap (P.P ^ 1) (upO F) (le_refl _) (Ideal.Quotient.mk _ a)
+    rw [Ideal.quotientMap_mk, Ideal.quotientMap_mk, conjO_upO]
+  have hle3 : Nat.card (𝓞 F ⧸ (P.P ^ 1).comap (upO F)) ≤ 3 := by
+    rw [← hQ]
+    exact Nat.card_le_card_of_injective
+      (fun x => (⟨_, hfix x⟩ :
+        ↥((Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1)).eqLocusField (RingHom.id _))))
+      fun x y h => hj (Subtype.mk.inj h)
+  -- three divides the order of the quotient
+  have h3 : (3 : 𝓞 F ⧸ (P.P ^ 1).comap (upO F)) = 0 := hj (by rw [map_ofNat, map_zero]; exact h3κ)
+  have hd1 : addOrderOf (1 : 𝓞 F ⧸ (P.P ^ 1).comap (upO F)) ∣ 3 :=
+    addOrderOf_dvd_of_nsmul_eq_zero (by rw [nsmul_eq_mul, mul_one]; exact_mod_cast h3)
+  have hne1 : addOrderOf (1 : 𝓞 F ⧸ (P.P ^ 1).comap (upO F)) ≠ 1 := fun h =>
+    one_ne_zero (AddMonoid.addOrderOf_eq_one_iff.mp h)
+  have hord := ((Nat.dvd_prime Nat.prime_three).mp hd1).resolve_left hne1
+  have hd2 : 3 ∣ Nat.card (𝓞 F ⧸ (P.P ^ 1).comap (upO F)) := by
+    have h := addOrderOf_dvd_natCard (1 : 𝓞 F ⧸ (P.P ^ 1).comap (upO F))
+    rwa [hord] at h
+  exact le_antisymm hle3 (Nat.le_of_dvd Nat.card_pos hd2)
 
 /-- **J3 — nine elements in the ring, three in `𝓞 F`.** A maximal ideal of `ℤ[U_F]` with nine elements in its quotient
 gives a maximal ideal of `𝓞 F` with three. -/
@@ -464,5 +623,51 @@ theorem exists_stablePrime_card_four_sqrt {m : ℕ} (h8 : m % 8 = 3) :
     ∃ P : StablePrime (fieldOfRadicands {m}), (2 : 𝓞 (fieldI (fieldOfRadicands {m}))) ∈ P.P ∧
       Nat.card (𝓞 (fieldI (fieldOfRadicands {m})) ⧸ P.P ^ 1) = 4 := by
   sorry
+
+/-! ## Spec: the models the line's docstrings name, and the table at four fields -/
+
+/-- **A three-chromatic plane over a number field**: `χ(ℚ(√3)²) = 3` (the value is `[Fischer1990]` Thm 9, p. 192). It is
+the model the docstrings of `Arith/ThreeColourCharacter`, `Arith/TorsionExtraction` and `Arith/ThreeColourCriterion` name
+and could not hold. -/
+theorem chromaticNumber_planeOver_sqrt_three :
+    ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {3}))).chromaticNumber = 3 :=
+  chromaticNumber_planeOver_sqrt_eq_three_of_mod (by norm_num) (Or.inr ⟨dvd_refl 3, by norm_num⟩)
+
+/-- **`Θ₃(R_F) ≠ ∅` at `F = ℚ(√3)`**: the hypothesis of `TorsionExtraction.exists_torsion_mem_fieldBandSet` and
+`tendsto_layer`, inhabited. -/
+theorem fieldBandSet_three_nonempty_sqrt_three : (fieldBandSet (fieldOfRadicands {3}) (band 3)).Nonempty :=
+  ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable _
+    (colorable_three_planeOver_sqrt (Or.inr ⟨dvd_refl 3, by norm_num⟩))
+
+/-- **A maximal ideal of `ℤ[U_F]` with nine elements in its quotient, at `F = ℚ(√3)`**: the hypotheses of
+`exists_maximal_card_nine_of_colorable_three` hold there, and its conclusion is the hypothesis of J3 and of
+`exists_stablePrime_card_nine`. Rests on Weil's bound, as that theorem does. -/
+theorem exists_maximal_card_nine_sqrt_three :
+    ∃ 𝔪 : Ideal (unitRing (fieldOfRadicands {3})), 𝔪.IsMaximal ∧ Nat.card (unitRing (fieldOfRadicands {3}) ⧸ 𝔪) = 9 :=
+  exists_maximal_card_nine_of_colorable_three _ (colorable_three_planeOver_sqrt (Or.inr ⟨dvd_refl 3, by norm_num⟩))
+    (TorsionExtraction.not_colorable_two_of_sqrt_mem (d := 3) (by norm_num)
+      (sqrt_mem_fieldOfRadicands (Set.mem_singleton 3)))
+
+/-- **A maximal ideal of `ℤ[U_F]` with trivial conjugation, at `F = ℚ(√2)`**: the hypothesis of J4, from the
+two-colouring of `ℚ(√2)²`. -/
+theorem exists_maximal_conj_trivial_sqrt_two :
+    ∃ 𝔪 : Ideal (unitRing (fieldOfRadicands {2})), 𝔪.IsMaximal ∧ ∀ x, conjR (fieldOfRadicands {2}) x - x ∈ 𝔪 :=
+  exists_maximal_conj_trivial_of_colorable_two _ (colorable_two_planeOver_sqrt_of_mod_four (Or.inr (by norm_num)))
+
+-- The table at four fields: 2 at `√2`, 3 at `√7`, 4 at `√11` (the dyadic prime) and at `√23` (a prime above 7) —
+-- the field `[Johnson2000]` p. 176 says to start at.
+example : ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {2}))).chromaticNumber = 2 :=
+  chromaticNumber_planeOver_sqrt_eq_two Nat.prime_two.squarefree (by norm_num)
+example : ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {7}))).chromaticNumber = 3 :=
+  chromaticNumber_planeOver_sqrt_eq_three_of_mod (by norm_num) (Or.inl (by norm_num))
+example : ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {11}))).chromaticNumber = 4 :=
+  chromaticNumber_planeOver_sqrt_eq_four_of_dyadic (by norm_num)
+example : ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {23}))).chromaticNumber = 4 :=
+  chromaticNumber_planeOver_sqrt_eq_four_of_seven_of_mod (by norm_num) (Or.inr (Or.inl (by norm_num)))
+-- The three classes the table leaves at "at least four": 47, 143, 167 modulo 168.
+example : 4 ≤ ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {47}))).chromaticNumber ∧
+    4 ≤ ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {167}))).chromaticNumber :=
+  ⟨TorsionExtraction.four_le_chromaticNumber_planeOver_fieldOfRadicands (by norm_num),
+    TorsionExtraction.four_le_chromaticNumber_planeOver_fieldOfRadicands (by norm_num)⟩
 
 end HadwigerNelson.ThreeFourColours

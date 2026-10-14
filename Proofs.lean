@@ -324,6 +324,7 @@ import Proofs.HadwigerNelson.Arith.TorsionExtraction
 import Proofs.HadwigerNelson.Arith.ThreeColourCriterion
 import Proofs.HadwigerNelson.Arith.DyadicQuadratic
 import Proofs.HadwigerNelson.Arith.ThreeFourColours
+import Proofs.HadwigerNelson.Instances.UpperHalfCorollaries
 
 /-!
 # Proofs
