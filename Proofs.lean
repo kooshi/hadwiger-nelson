@@ -213,6 +213,12 @@ import Proofs.HadwigerNelson.Rigidity.SolenoidErgodic
 import Proofs.HadwigerNelson.Rigidity.HaarMultiple
 import Proofs.HadwigerNelson.Rigidity.DualGroup
 import Proofs.HadwigerNelson.Rigidity.Annihilator
+import Proofs.HadwigerNelson.Rigidity.Herglotz
+import Proofs.HadwigerNelson.Rigidity.InvariantMeasure
+import Proofs.HadwigerNelson.Rigidity.ContinuityGroup
+import Proofs.HadwigerNelson.Rigidity.BochnerTau
+import Proofs.HadwigerNelson.Rigidity.ClassRatio
+import Proofs.HadwigerNelson.Plane.OneAvoidingDensity
 import Proofs.HadwigerNelson.Rigidity.SubgroupHaar
 import Proofs.HadwigerNelson.Rigidity.Duality
 import Proofs.HadwigerNelson.Rigidity.DualConnected

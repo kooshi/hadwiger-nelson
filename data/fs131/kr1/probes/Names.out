@@ -1,0 +1,52 @@
+slot: waiting (ledger 18 + 5 > budget 22 GiB)
+slot: waiting (ledger 22 + 5 > budget 22 GiB)
+slot: waiting (ledger 18 + 5 > budget 22 GiB)
+slot: waiting (ledger 22 + 5 > budget 22 GiB)
+slot: waiting (ledger 18 + 5 > budget 22 GiB)
+slot: waiting (ledger 22 + 5 > budget 22 GiB)
+slot: waiting (ledger 18 + 5 > budget 22 GiB)
+slot: admitted kr1: mem 5 GiB (hard cap), cpus 2,3
+data/fs131/kr1/probes/Names.lean:7:8: error(lean.unknownIdentifier): Unknown identifier `MeasureTheory.isCompact_setOf_finiteMeasure_le_of_compactSpace`
+@FiniteMeasure.tendsto_iff_forall_integral_tendsto : ∀ {Ω : Type u_1} [inst : MeasurableSpace Ω]
+  [inst_1 : TopologicalSpace Ω] [inst_2 : OpensMeasurableSpace Ω] {γ : Type u_2} {F : Filter γ}
+  {μs : γ → FiniteMeasure Ω} {μ : FiniteMeasure Ω},
+  Filter.Tendsto μs F (nhds μ) ↔
+    ∀ (f : BoundedContinuousFunction Ω ℝ),
+      Filter.Tendsto (fun i => ∫ (x : Ω), f x ∂↑(μs i)) F (nhds (∫ (x : Ω), f x ∂↑μ))
+data/fs131/kr1/probes/Names.lean:9:8: error(lean.unknownIdentifier): Unknown identifier `MeasureTheory.isCompact_closure_of_isTightMeasureSet`
+@nsmulAddMonoidHom : {α : Type u_1} → [inst : AddCommMonoid α] → ℕ → α →+ α
+@topologicalAddGroup_induced : ∀ {G : Type u_1} {H : Type u_2} [inst : TopologicalSpace G] [inst_1 : AddGroup G]
+  [IsTopologicalAddGroup G] {F : Type u_3} [inst_3 : AddGroup H] [inst_4 : FunLike F H G] [AddMonoidHomClass F H G]
+  (f : F), IsTopologicalAddGroup H
+@topologicalAddGroup_inf : ∀ {G : Type u_1} [inst : AddGroup G] {t₁ t₂ : TopologicalSpace G},
+  IsTopologicalAddGroup G → IsTopologicalAddGroup G → IsTopologicalAddGroup G
+NumberField.mixedEmbedding : (K : Type u_1) → [inst : Field K] → K →+* NumberField.mixedEmbedding.mixedSpace K
+NumberField.mixedEmbedding.latticeBasis : (K : Type u_1) →
+  [inst : Field K] →
+    [inst_1 : NumberField K] →
+      Module.Basis (Module.Free.ChooseBasisIndex ℤ (NumberField.RingOfIntegers K)) ℝ
+        (NumberField.mixedEmbedding.mixedSpace K)
+@Ideal.finite_setOf_absNorm_le : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S]
+  [inst_2 : Module.Free ℤ S] [Module.Finite ℤ S] [CharZero S] (n : ℕ), {I | Ideal.absNorm I ≤ n}.Finite
+Complex.orthonormalBasisOneI : OrthonormalBasis (Fin 2) ℝ ℂ
+@LinearIsometryEquiv.measurePreserving : ∀ {E : Type u_1} {F : Type u_2} [inst : NormedAddCommGroup F]
+  [inst_1 : InnerProductSpace ℝ F] [inst_2 : NormedAddCommGroup E] [inst_3 : InnerProductSpace ℝ E]
+  [inst_4 : MeasurableSpace E] [inst_5 : BorelSpace E] [inst_6 : MeasurableSpace F] [inst_7 : BorelSpace F]
+  [inst_8 : FiniteDimensional ℝ E] [inst_9 : FiniteDimensional ℝ F] (f : E ≃ₗᵢ[ℝ] F),
+  MeasurePreserving (⇑f) volume volume
+@Filter.Inf.isCountablyGenerated : ∀ {α : Type u_1} (f g : Filter α) [f.IsCountablyGenerated] [g.IsCountablyGenerated],
+  (f ⊓ g).IsCountablyGenerated
+@nhds_inf : ∀ {α : Type u_1} {t₁ t₂ : TopologicalSpace α} {a : α}, nhds a = nhds a ⊓ nhds a
+HadwigerNelson.Rigidity.dualHaar : (G : Type u_1) → [inst : AddCommGroup G] → [Countable G] → Measure (AddChar G Circle)
+@HadwigerNelson.Rigidity.measure_eq_of_fourier : ∀ {G : Type u_1} [inst : AddCommGroup G] [Countable G]
+  {σ σ' : Measure (AddChar G Circle)} [IsFiniteMeasure σ] [IsFiniteMeasure σ'],
+  (∀ (r : G), ∫ (χ : AddChar G Circle), ↑(χ r) ∂σ = ∫ (χ : AddChar G Circle), ↑(χ r) ∂σ') → σ = σ'
+HadwigerNelson.Rigidity.isHaarFourier_dualHaar : ∀ (G : Type u_1) [inst : AddCommGroup G] [inst_1 : Countable G],
+  HadwigerNelson.SpectralInputs.IsHaarFourier (HadwigerNelson.Rigidity.dualHaar G)
+HadwigerNelson.Plane.upperDensity : Set ℂ → ENNReal
+HadwigerNelson.Plane.BandFree : Set ℂ → ℝ → Prop
+@HadwigerNelson.SpectralInputs.contChars : {R : Type u_1} →
+  [inst : AddCommGroup R] → TopologicalSpace R → Set (AddChar R Circle)
+@HadwigerNelson.SpectralInputs.BochnerOn : {R : Type u_1} → [AddCommGroup R] → TopologicalSpace R → Prop
+HadwigerNelson.Rigidity.TA : (F : Subfield ℝ) → Set (HadwigerNelson.SpectralChain.Dual F)
+HadwigerNelson.SpectralChain.StablePrime : Subfield ℝ → Type

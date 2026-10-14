@@ -1,0 +1,8 @@
+Proofs/HadwigerNelson/Rigidity/ContinuityGroup.lean:37:0: warning: Definition `HadwigerNelson.Rigidity.profTop` of class type must be marked with `@[reducible]` or `@[implicit_reducible]`
+Proofs/HadwigerNelson/Rigidity/ContinuityGroup.lean:42:0: warning: Definition `HadwigerNelson.Rigidity.archTop` of class type must be marked with `@[reducible]` or `@[implicit_reducible]`
+Proofs/HadwigerNelson/Rigidity/ContinuityGroup.lean:49:0: warning: Definition `HadwigerNelson.Rigidity.tauPrime` of class type must be marked with `@[reducible]` or `@[implicit_reducible]`
+Proofs/HadwigerNelson/Rigidity/ContinuityGroup.lean:53:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ContinuityGroup.lean:57:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ContinuityGroup.lean:62:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ContinuityGroup.lean:67:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ContinuityGroup.lean:72:8: warning: declaration uses `sorry`

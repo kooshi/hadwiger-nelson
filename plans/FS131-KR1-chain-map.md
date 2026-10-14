@@ -202,7 +202,8 @@ excludes: ramified stable primes (level-one target two- or three-colourable: the
 `m ≥ 2` has `|λ| ≤ 2q^{m−1}`, dyadic `Q^{m−1}`), so an all-levels Hoffman bound follows from level one wherever level one's
 normalised least eigenvalue is above `−1/3`. (c) Level one by residue size: `q ≥ 37` (Weil, declared; the kernel's
 `RatioBound.card_mul_le_of_indep` and `NormOneTarget.targetFloor_of_charSum` are the Hoffman bound in exactly this shape);
-`q ∈ {23, 27, 31}` exact spectra (Hoffman margins `1.6·10⁻³`, `+`, `4.9·10⁻⁶` at 31 — an exact certificate, not floats);
+`q ∈ {23, 27, 31}` exact spectra (Hoffman: at 27 `λ_min = −8`, ratio `2/9`, FS100-G27; at 23 and 31 the normalised least
+eigenvalue clears `−1/3` by `1.6·10⁻³` and `4.9·10⁻⁶` — an exact certificate is needed there, not floats);
 dyadic `Q = 64` exact, `128` in the kernel (`Floor128`; to check that it gives the ratio and not only the floor), `Q ≥ 256`
 EN1-UQ4 (the fourth-moment count, about 300 lines, one mind, no printed bound read). (d) **`q = 11, 19`: Hoffman fails
 (0.2855, 0.2756); the all-levels ratio rests on FS-66's fibre-share inequality [hand] and its exact integer
@@ -227,6 +228,87 @@ certificate or FS-66's bound, 23 and 31 by exact Hoffman). **Price: 800–1,500 
 composition (Mathlib's `Ideal.sum_ramification_inertia` and the primed `inertiaDeg'` API, `LEAN.md` § Searching), about
 1 week; each further field (`ℚ(√143)`, `ℚ(√311)`, `ℚ(√335)`, `ℚ(√3,√5)`, `ℚ(√167) ≥ 5`) about 300–600 lines once the
 machinery stands.**
+
+## Stage 3 — SAVED: shorter routes, and what a consumer does not read
+
+1. **M12 does not read `BochnerOn`** (§ 2.5, C1 is dominated convergence); only M11 does, twice. So M2b blocks M11 and
+   nothing else on the path.
+2. **M2a and M3 share one lemma** (`exists_almostInvariant_weights`; M3 takes the probability weights `(w n)²`), and neither
+   reads Markov–Kakutani, Følner sets or the structure theorem of finitely generated groups.
+3. **`Interface.Count`'s hypothesis `TCA F` is read and is not enough by itself**: the count needs one constant for every
+   stable prime (`tca_uniform`), which the proof gets from Weil at the tail (sent to the coordinator; ruled: the uniform-tail
+   lemma goes once, upstream, in M13 — `Rigidity/ClassRatio`).
+4. **`InvariantMeasureOnClosed`'s `MeasurableSet K` is derivable from `IsClosed K`** for a countable product of finite
+   discrete spaces (`Pi.opensMeasurableSpace`); the step lemmas keep it (it is in the consumer's `Prop`), and an implementer
+   who proves them without it should drop it from the step lemmas, not from the `Prop`.
+5. **No headline hypothesis is discharged by anything already proved on the chain's branches** beyond what the coordinator
+   already knows (`hRow99` on `main`; `BochnerHerglotz`'s uniqueness clause by item 757). C0's three leaves are proved on this
+   branch's ancestry (`ChainAtTA.lean` has no `sorry` in `measurableSet_TA`, `rot_preimage_TA`, `exists_nonTorsion_unitVector`).
+6. **Two private lemmas of `Rigidity/ChainAtTA` are needed public by M10**: `mem_torsion_mul_arch_iff` and
+   `exists_rat_coords`. Making them public changes no statement; it is an edit to another module's file, so it is a question
+   for the coordinator (INVENTORY), not done here.
+
+## Stage 4 — SAVED: six modules typed (31 statements, 18 leaves `sorry`)
+
+New modules, each elaborated alone under `lake env lean` (logs `data/fs131/kr1/logs/*.log`: exit 0, every warning
+`declaration uses 'sorry'`), then the whole library through `./scripts/build.sh` (§ 4.4). Domain pass (`debruijn-domain-modeling`,
+invoked fresh) and obligation pass (`debruijn-obligation-modeling`, invoked fresh) were run on them; what each changed is in
+§ 4.2.
+
+### 4.1 The statements, read aloud against their sources
+
+| module | statement | read against | verdict |
+|---|---|---|---|
+| `Rigidity/Herglotz` (M2a) | `bochnerHerglotz_of_countable [Countable G] : BochnerHerglotz G` — **proved over three leaves** | the claim list's M2 statement 1; `BochnerHerglotz`'s body (`SpectralChain` l. 124) | the `Prop` itself, at every countable `G`; its taker `unitRing F` is countable at a number field (`countable_unitRing`) |
+| | `exists_almostInvariant_weights`, `exists_fejer_measures`, `exists_fourier_eq_of_tendsto` | § 2.1 (i)–(iv) | leaves |
+| `Rigidity/InvariantMeasure` (M3) | `invariantMeasureOnClosed_of_countable [Countable (unitRing F)] : InvariantMeasureOnClosed F` — **proved over two leaves** | the claim list's M3 statement ("for every `F` with `unitRing F` countable") | word for word |
+| `Rigidity/ContinuityGroup` (M10) | `profTop`, `archTop`, `tauPrime` (definitions); `contChars_tauPrime : contChars (tauPrime F) = TA F` — **proved over two leaves**; four further leaves | J45 N1 (a) at `S = ∅` (`plans/FS84-SI-D-derivation.md` ll. 105–113); EN1 § 3.3 | the claim list's statement 1, both inclusions |
+| `Rigidity/BochnerTau` (M2b) | `bochnerOn_tauPrime : BochnerOn (tauPrime F)`; `finite_quotient_nsmul`, `archimedean_support`, `exists_twisted_parts` | `BochnerOn`'s body (`SpectralInputs` l. 788); J45 N2's `⟸` (ll. 128–130) | the claim list's M2 statement 2, at the one topology M10 reads |
+| `Rigidity/ClassRatio` (M13) | `tca_of_five_le_localBound : 5 ≤ localBound F → TCA F` — **proved over one leaf**; `tca_iff` (`Iff.rfl`); `exists_uniform_tail`, `tca_uniform` | the headline's `hCLS` binder (`ChainAtTA` l. 532), character for character; FS100-CLS; R88-J28V-3 | the binder's type at every number field |
+| `Plane/OneAvoidingDensity` (M12's input) | `OneAvoidingDensityBound` (named outside hypothesis); `mOne`; `oneAvoidingDensityBound_model` (**proved**); `upperDensity_le_of_…` (leaf); `mOne_le_…`, `mOne_lt_quarter` (**proved over the leaf**) | `[AmbrusEtAl2023]` p. 4 Thm 1, p. 2 and eq. (1), quoted in § 2.5 | symbol by symbol in § 6.3 |
+
+### 4.2 What the two passes changed
+
+- *Domain pass.* (a) The `ℓ¹` weights M3 needs were folded into the `ℓ²` lemma (probability weights `(w n)²`; one lemma, not
+  two). (b) `tauPrime` is a `def`, never an instance: `unitRing F` is a subtype of `ℂ` and already carries the subspace
+  topology, and an instance would make a diamond. (c) The `N + 1` guard in `profTop` (the subgroup `0·R` would make `τ′`
+  discrete — the adversarial member of the definition). (d) `RatioAtMost` names the body of `TCA`, so `tca_iff` is `Iff.rfl` and
+  the uniform form states in the same vocabulary. (e) `m₁` reuses the library's `Plane.upperDensity` and `BandFree A 0` on `ℂ`;
+  the paper's form is kept on `EuclideanSpace ℝ (Fin 2)` with every centre, and no second "1-avoiding" predicate is minted on
+  `ℂ`. (f) The three `TopologicalSpace`-valued definitions are `@[reducible]` (the pin's linter asks it of a definition of
+  class type).
+- *Obligation pass.* (a) Two children were added to make the hard leaves explicit: `archContinuousAt_pow_of_mem_contChars`
+  (no small subgroups, M10) and `exists_twisted_parts` (the profinite step, M2b). (b) `BochnerTau` imports `Herglotz`: the
+  twisted parts become measures by M2a before `archimedean_support` reads them. (c) Every hypothesis of every leaf is read by
+  its route (§ 4.3), except `MeasurableSet K` in M3's steps (Stage 3 item 4). (d) The hard leaf of each module is named in
+  § 4.3.
+
+### 4.3 The plan per leaf (routes in § 2; Mathlib names `#check`ed in `data/fs131/kr1/probes/Names.out`)
+
+| leaf | route, children, names | hard? |
+|---|---|---|
+| `exists_almostInvariant_weights` | enumerate `G`; `ν = u₁ * … * u_k`, `uⱼ` uniform on `{a gⱼ : a < M}`; `‖u * f‖₂² ≥ ‖f‖₂²/M` for `f ≥ 0`; Young `‖a * b‖₂ ≤ ‖a‖₁‖b‖₂` on finitely supported functions (by hand, `Finsupp` sums); `w := ν/‖ν‖₂` | medium |
+| `exists_fejer_measures` | density `p_w(χ) = Re Σ_{x,y ∈ supp} w x w y C(x−y) χ̄(x−y) ≥ 0` (`PosDef` at `z x = w x · χ̄ x`); `σ_n = (dualHaar G).withDensity (ofReal ∘ p_w)`; coefficients by `isHaarFourier_dualHaar` | medium |
+| `exists_fourier_eq_of_tendsto` | `isCompact_setOf_finiteMeasure_le_of_compactSpace` (root namespace, `Prokhorov.lean` l. 69) on the compact dual (M4's scoped topology, `borelSpace_dual`), sequential compactness (metrizable), `FiniteMeasure.tendsto_iff_forall_integral_tendsto` with `χ ↦ Re/Im χ(y)` bounded continuous (`continuous_evalChar`) | low |
+| `exists_shiftInvariant_on` | `μ_n := Σ_y (w n y)² • δ_{c(· + y)}`; limit point as above on `unitRing F → Fin 4` (compact, `Pi.borelSpace`); shift invariance from `Σ_y |w(y)² − w(y+z)²| → 0`; `μ K = 1` by the portmanteau for closed sets | medium |
+| `exists_rotInvariant_of_shiftInvariant` | the same over the countable abelian group of unit vectors (a subgroup of `Circle`), with `shift_y ∘ rot_u = rot_u ∘ shift_{u y}` | medium |
+| `isTopologicalAddGroup_tauPrime` | `topologicalAddGroup_inf` of `topologicalAddGroup_induced` (each a pull-back by an additive map; `⨅` over `N` needs the `iInf` form, `topologicalAddGroup_iInf`, to `#check`) | low |
+| `isCountablyGenerated_nhds_tauPrime` | `nhds_inf`, `Filter.Inf.isCountablyGenerated`; `nhds_iInf` and a countable `iInf` of principal filters; first countability of the mixed space | low |
+| `TA_subset_contChars` | torsion: `χ(N r) = (χ^N) r` kills `N·R`, constant on open cosets; arch: `exists_rat_coords` (to be made public) and `mixedEmbedding.latticeBasis` (an integral basis is an `ℝ`-basis), so `ℚ`-coordinates are continuous | medium |
+| `archContinuousAt_pow_of_mem_contChars` | a basic neighbourhood `N·R ∩ B_δ` where `Re χ > 0`; the integer-multiples argument | low |
+| `mem_archChars_of_continuousAt` | **the hard leaf of M10**: lattices `5^{−k}c₀𝓞_L ⊆ R` (`exists_mul_stableIntegers_le`'s step (b), `1/5 ∈ R`), `ℓ_k` in the box domain, stabilisation, density (`dense_mixedEmbedding_nsmul_unitRing`) | hard |
+| `finite_quotient_nsmul` | every finite subset of `R` spans a free `ℤ`-module of rank `≤ [L:ℚ]` (`Module.free_of_finite_type_torsion_free'`), so the image in `R ⧸ N·R` has `≤ N^{[L:ℚ]}` elements | medium |
+| `archimedean_support` | § 2.1 M2b (1); `isCompact_closure_of_isTightMeasureSet` (root, `Prokhorov.lean` l. 504); characteristic functions continuous; `measure_eq_of_fourier` | hard |
+| `exists_twisted_parts` | **the hard leaf of M2b**: twisted Riemann sums, Cauchy by uniform continuity of a positive-definite function (`|φ(x) − φ(y)|² ≤ 2φ(0)(φ(0) − Re φ(x − y))`), `finite_quotient_nsmul`, density | hard |
+| `ratioAtMost_of_five_le_chromaticNumber` | **the hard leaf of M13**, to be cut by its implementer's planner into: the exclusion list (ramified: `colorable_two_levelTarget_one_of_isRamified`; `q ∈ {3, 7}`, `Q ≤ 32` four-colourable by formula, X26B); Lemma P at levels `m ≥ 2`; level one by residue size (Weil via `RatioBound.card_mul_le_of_indep` and `kloosterman_bound`; exact spectra at 23, 27, 31, 64; `Floor128` at 128; EN1-UQ4 for `Q ≥ 256`); FS-66 at 11 and 19 (**the certificate check, to be measured first**) | hard |
+| `exists_uniform_tail` | absolute norm above every dyadic and every `q ≤ 31` prime's; then odd inert `q ≥ 37`: Weil and Lemma P, `c = max over the bound's two branches` | medium |
+| `tca_uniform` | `Ideal.finite_setOf_absNorm_le`; `StablePrime` determined by its ideal; the maximum of finitely many `c_P` and the tail's | low |
+| `upperDensity_le_of_oneAvoidingDensityBound` | `Complex.orthonormalBasisOneI.repr : ℂ ≃ₗᵢ[ℝ] EuclideanSpace ℝ (Fin 2)` with `LinearIsometryEquiv.measurePreserving`; it maps `ball 0 R` to `ball 0 R` and preserves `dist`; the paper's form at `x = 0` | low |
+
+### 4.4 The build
+
+`./scripts/build.sh` under `scripts/slot.py --mem 10 --cpus 4` (`MEMMAX=10G BATCH=8`): log
+`data/fs131/kr1/logs/build-1.log` (result in § 4.5 below).
 
 ## Drafts for files I do not write
 
