@@ -1,0 +1,10 @@
+==> build: this run's full output: build/gate/build/20261014T214646Z-783578.log
+    rebuilt: Rigidity.ClassRatio (20s)
+    rebuilt: Rigidity.CountResidue (4.9s)
+    rebuilt: Rigidity.CountCompletion (5.9s)
+    rebuilt: Rigidity.CountExtension (6.8s)
+    rebuilt: Rigidity.CountDescent (5.6s)
+    rebuilt: Rigidity.CountModels (4.6s)
+    rebuilt: Proofs (2.8s)
+==> build: OK — 258 of 258 batches, 7 module(s) rebuilt, 10 module(s) with warnings, 8m15s
+    warning: Proofs/HadwigerNelson/Rigidity/ClassRatio.lean:1544:16: declaration uses `sorry`

@@ -37,7 +37,17 @@ by hand in the record, never a failure of the comparison.
 public constant dropped; one public constant added in an old module; one binder's class removed with a mention of
 `NumberField.RingOfIntegers` kept) and requires each to be reported, or exits 1.
 
-Usage: fs131_icm1_statements.py BEFORE AFTER [--ruled NAME ...] [--plant]
+ADDED IN FS131-ICM4 — --deleted-file PATH: the private user names (one per line) the brief lets this job delete (FS131-ICM2's
+odd Lemma P chain, folded onto `SqZeroInvT`): each must be in BEFORE and absent from AFTER (PRIVATE-DELETED, listed);
+a listed name still present (DELETED-BUT-PRESENT) or never in BEFORE (DELETED-NOT-IN-BEFORE) fails, and so does every
+private name missing that the list does not hold (PRIVATE-MISSING).
+
+ADDED IN FS131-ICM4 — --fold: a private constant of the fold's survivors whose stored text moved only by the hygiene
+context number of a binder name (Lean's hash unchanged) reads PRIVATE-HYGIENE, and a definition whose stored value moved
+only in the names of shared auxiliary proofs (`sqZeroInvAt._proof_4` became `sqZeroInvTAt._proof_3` when the definition
+that first generated it was deleted) reads PRIVATE-PROOFARGS; both listed, neither a failure (`fold_same`).
+
+Usage: fs131_icm1_statements.py BEFORE AFTER [--ruled NAME ...] [--deleted-file PATH] [--new NAME] [--fold] [--plant]
        fs131_icm1_statements.py --binders-only DUMP
 """
 import re
@@ -96,24 +106,78 @@ def private_user(n):
     return m.group(1)
 
 
+FOLD = False  # ADDED IN FS131-ICM4: --fold
+HYG = re.compile(r"(\._@\.Proofs\.HadwigerNelson\.[A-Za-z.]+)\.\d+(\._hygCtx\._hyg\.\d+)")
+PROOF = re.compile(r"(?<![A-Za-z0-9_.'])[A-Za-z0-9_.'₀-₉αβγδεθισψφωχλμνπρτ]+\._proof_\d+(?![A-Za-z0-9_])")
+
+
+def split_hash(s):
+    h, _, body = s.partition(" ")
+    return h, body
+
+
+def fold_same(b, a):
+    """Under --fold, for a private constant whose stored type or value moved: PRIVATE-HYGIENE when Lean's hash of each
+    stored term is unchanged and the text is the same once the hygiene context number of binder names minted in this
+    library (`inst._@.<module>.<n>._hygCtx._hyg.<k>`) is removed (Lean's hash ignores binder names); PRIVATE-PROOFARGS
+    when the stored type is so equal and the stored value is the same once every `<name>._proof_<n>` constant (an
+    auxiliary proof the elaborator shares between declarations: a proof of a proposition, irrelevant to the value) is
+    replaced by one token. Anything else: None (a change)."""
+    def norm(s):
+        return HYG.sub(r"\1.N\2", s)
+    hb, tb = split_hash(b["type"])
+    ha, ta = split_hash(a["type"])
+    if hb != ha or norm(tb) != norm(ta):
+        return None
+    if b["kind"] != "DEF" or b["value"] == a["value"]:
+        return "PRIVATE-HYGIENE"
+    vhb, vb = split_hash(b["value"])
+    vha, va = split_hash(a["value"])
+    if vhb == vha and norm(vb) == norm(va):
+        return "PRIVATE-HYGIENE"
+    if PROOF.sub("_PROOF_", norm(vb)) == PROOF.sub("_PROOF_", norm(va)):
+        return "PRIVATE-PROOFARGS"
+    return None
+
+
+DELETED = set()  # ADDED IN FS131-ICM4: private user names the brief lets this job delete (the odd Lemma P chain)
+
+
 def compare_private(before, after, quiet=False):
-    bad, counts, lines = 0, {"PRIVATE-SAME": 0, "PRIVATE-CHANGED": 0, "PRIVATE-MISSING": 0}, []
+    bad, counts, lines = 0, {"PRIVATE-SAME": 0, "PRIVATE-CHANGED": 0, "PRIVATE-MISSING": 0, "PRIVATE-DELETED": 0}, []
+    seen = set()
     for n, b in before.items():
         if private_user(n) is None:
             continue
         a = after.get(n)
         if a is None:
+            if private_user(n) in DELETED:
+                seen.add(private_user(n))
+                counts["PRIVATE-DELETED"] += 1
+                lines.append(f"PRIVATE-DELETED {n}")
+                continue
             counts["PRIVATE-MISSING"] += 1
             bad += 1
             lines.append(f"PRIVATE-MISSING {n}")
             continue
+        if private_user(n) in DELETED:
+            bad += 1
+            lines.append(f"DELETED-BUT-PRESENT {n}")
         same = a["kind"] == b["kind"] and a["type"] == b["type"] and (b["kind"] != "DEF" or a["value"] == b["value"])
         if same:
             counts["PRIVATE-SAME"] += 1
+        elif FOLD and a["kind"] == b["kind"] and fold_same(b, a):
+            v = fold_same(b, a)
+            counts[v] = counts.get(v, 0) + 1
+            lines.append(f"{v} {n}")
         else:
             counts["PRIVATE-CHANGED"] += 1
             bad += 1
             lines.append(f"PRIVATE-CHANGED {n}\n  before TYPE {b['type']}\n  after  TYPE {a['type']}")
+    for d in sorted(DELETED - seen):
+        if not any(private_user(n) == d for n in before):
+            bad += 1
+            lines.append(f"DELETED-NOT-IN-BEFORE {d}")
     if not quiet:
         for l in lines:
             print(l)
@@ -186,6 +250,14 @@ def main(argv):
     if "--new" in argv:
         i = argv.index("--new")
         NEW_ALLOWED.add(argv[i + 1])
+        argv = argv[:i] + argv[i + 2:]
+    global FOLD
+    if "--fold" in argv:
+        FOLD = True
+        argv = [x for x in argv if x != "--fold"]
+    if "--deleted-file" in argv:
+        i = argv.index("--deleted-file")
+        DELETED.update(l.strip() for l in open(argv[i + 1]) if l.strip() and not l.startswith("#"))
         argv = argv[:i] + argv[i + 2:]
     args = [a for a in argv if not a.startswith("--")]
     ruled = set()

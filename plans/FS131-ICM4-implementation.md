@@ -6,9 +6,10 @@ from `fs131-wcm3` at `c0b6798ed`, in the tree `.claude/worktrees/fs131-wch`. Wor
 
 ## Theorems this phase proved
 
-Read from the built tree after build 1 (`data/fs131/icm4/axioms1.out`, `axioms1-read.out`): 316 records of `Arith/BinaryField`,
+Read from the built tree after build 2 (`data/fs131/icm4/axioms2.out`, `axioms2-read.out`): 273 records of `Arith/BinaryField`,
 `Arith/DyadicCerts`, `Arith/CircleCos`, `Rigidity/ClassRatio`, `CountCompletion`, `CountModels` and
-`count_of_oneAvoidingDensityBound` — **CLEAN 304, IMPORTED 7, UPSTREAM 5, FAIL 0**.
+`count_of_oneAvoidingDensityBound` — **CLEAN 261, IMPORTED 7, UPSTREAM 5, FAIL 0** (after build 1, before the fold: 316 —
+CLEAN 304, IMPORTED 7, UPSTREAM 5, FAIL 0).
 
 - `HadwigerNelson.DyadicCerts.colorable_four_two_pow` (`Arith/DyadicCerts`, public, new) — [kernel], `[propext,
   Classical.choice, Quot.sound]`: at `Q = 2^f`, `2 ≤ f ≤ 5`, in every field `k` of `Q²` elements the graph
@@ -24,6 +25,10 @@ Read from the built tree after build 1 (`data/fs131/icm4/axioms1.out`, `axioms1-
   `[propext, Quot.sound]` (each `decide +kernel`, or read from one).
 - Private, in `Rigidity/ClassRatio`, now proved — [kernel], the standard three: `colorable_four_dyadic_small`,
   `charSum_64_ge`; so `chromaticNumber_le_four_dyadic`, `ratioAtMost_dyadic`.
+- Private, in `Rigidity/ClassRatio`, new by the fold (stage 4) — [kernel], the standard three: `exists_conj_sub_notMem`
+  (at an odd stable prime conjugation moves `i` off the prime) and **`norm_charSum_le_of_resT`** (Lemma P's per-character
+  bound at every level, as one lemma). FS131-ICM2's odd chain is deleted; its readers read `card_levelSet_oneT` and
+  `charBound_of_charBound_oneT` at `θ = i`.
 - `ratioAtMost_of_five_le_chromaticNumber`, `tca_of_five_le_localBound`, `ratioAtMost_of_two_notMem` (public) —
   `[propext, sorryAx, Classical.choice, Quot.sound, StandingFive.kloosterman_bound]`, **their `sorry` from
   `ratioAtMost_cert` alone** (the certificate link at `q ∈ {11, 19}`, which closes when the lines are joined).
@@ -157,3 +162,103 @@ control: the linter fires on this tree.)
 
 **Re-priced:** the five certificates ≈ 150 lines in all (the brief's 60–120 each, 300–600), because the bridge carries both
 consumers; the whole dyadic remainder ≈ 710 lines against ICM3's 700–1,200.
+
+## Stage 4 — SAVED: the odd Lemma P folded onto `SqZeroInvT` at `θ = i`; build 2; the job's state from the kernel's side
+
+**The fold** (the brief's part 3; `data/fs131/icm4/fold.py`, which edits by content and refuses unless every cut and
+replacement matches once; developed on the copy `data/fs131/icm4/lean/ClassRatioFold.lean`, elaborated against the farm,
+`logs/fold-1.log`, then copied over the module). `Rigidity/ClassRatio` 2,523 → 1,991 lines (−606, +74):
+
+- **deleted** (FS131-ICM2's odd chain, 48 private constants; `data/fs131/icm4/deleted-odd-chain.txt`): the structure
+  `SqZeroInv` with its section (`Kn`, `Kp`, `Kf`, `card_Kp_eq`, `card_Kf_eq`, `card_Kn_sq`, `card_lift`, `sum_Kn`,
+  `norm_sum_le`, `pm_of_good`, …), `sqZeroInvAt`, `sqZeroInvAt_σ`, `sqZeroInvAt_K`, `card_Kn_at`, `card_fibre`,
+  `card_levelSet_one`, `card_res_fibre`, `card_levelSet_succ`, `norm_charSum_new_le`, `charBound_of_charBound_one`;
+- **added** (private): `exists_conj_sub_notMem` (`2 ∉ P` ⟹ `conjO i − i ∉ P`: `(ī − i)·i = 2`), and
+  `norm_charSum_le_of_resT` (below);
+- **redirected**: the four readers (`ClassRatio`'s `card_levelSet_one P h2 …` twice, `charBound_of_charBound_one P h2 …`
+  twice: in `charBound_one_exact`'s and the exclusions' level-one count, in `ratioAtMost_weil`, and in the odd branch of
+  `ratioAtMost_of_two_notMem`'s chain) read `card_levelSet_oneT` and `charBound_of_charBound_oneT` at
+  `(exists_conj_sub_notMem P h2).choose_spec`; `--` comments that named the deleted chain now name the survivors.
+
+**The coordinator's constraint (2026-10-14, by message): the certificate link's two hypotheses (FS131-IKL1), at odd stable
+primes of residue size `11²` and `19²`, stay reachable, each as one private lemma:**
+1. **Hensel's count** — `card_res_fibreT P ha hQ n hfin hs : (hfin.toFinset.filter fun x => res P n x = s).card = Q ^ n`
+   for `s ∈ levelSet P 1` (every norm-one residue at level one has `Q^n` norm-one lifts at level `n + 1`), at an odd prime
+   with `ha := (exists_conj_sub_notMem P h2).choose_spec`. Unchanged by the fold (PRIVATE-SAME).
+2. **The per-character bound at every level** — `norm_charSum_le_of_resT P ha hQ n hfin ψ (hψ : ∃ e, res P n e = 0 ∧ ψ e ≠
+   1) : ‖∑ s ∈ hfin.toFinset, ψ s‖ ≤ 2 / ((Q : ℝ) + 1) * hfin.toFinset.card` over `S_{n+1}` — a character of `𝓞 ⧸ P^{n+1}`
+   non-trivial on the kernel of the residue map to level one; `|S_{n+1}| = Q^n(Q + 1)` (`card_levelSet_succT`), so the
+   bound is `2Q^n`. New: it was the descent inside `charBound_of_charBound_one`'s proof with `norm_charSum_new_le`; now one
+   lemma (induction: descend while the character is trivial on the kernel of the reduction, `card_fibreT`; bound it by
+   `norm_charSum_new_leT` where it is new; at level one the kernel is `0`).
+
+**Build 2** under the slot (`logs/build-2.log`, full output `logs/build-2-full.log.xz`,
+`build/gate/build/20261014T214646Z-783578.log`): **OK — 258 of 258 batches, 7 modules rebuilt, 8 m 15 s, exit 0**
+(`Rigidity/ClassRatio` 20 s, the count's five modules, `Proofs`); the only warning from this job's files is
+`ratioAtMost_cert`'s `declaration uses 'sorry'` (`ClassRatio.lean` line 1544). `tools/check_architecture.py`: **PASS**
+(`logs/architecture-2.log`; `ClassRatio`'s row names the fold and the two lemmas, and no deleted name).
+
+**No statement and no definition changed** (`statements-after2.txt` against stage 1's dump;
+`statements-compare2.out`, with `--fold --deleted-file data/fs131/icm4/deleted-odd-chain.txt`): **SAME 136, CHANGED 0,
+MISSING 0, ADDED-PUBLIC 0; PRIVATE-SAME 132, PRIVATE-CHANGED 0, PRIVATE-MISSING 0, PRIVATE-DELETED 48, PRIVATE-HYGIENE 11,
+PRIVATE-PROOFARGS 1** — PASS. Two mechanisms moved the stored text of survivors, and the comparator gained a rule for each
+(`fold_same`, under `--fold`):
+- *hygiene* (11: `SqZeroInvT.Kn`, `.Kf`, `.mem_Kn`, `.mem_Kf`, `.add_mem_Kn`, `.sub_mem_Kn`, `.sum_Kn`, `.norm_sum_le`,
+  `.pm_of_good`, `.card_Kn_sq`, `.card_lift`): the instance binders' minted names carry a hygiene context number that the
+  deletions above them shifted by one (`inst._@.Proofs.HadwigerNelson.Rigidity.ClassRatio.2658659181._hygCtx._hyg.7` →
+  `…2658659180…`); Lean's hash of each stored type and value is unchanged, and the text is equal with that number removed;
+- *proof arguments* (1: `sqZeroInvTAt`): its value named the auxiliary proofs `sqZeroInvAt._proof_4`, `_proof_5`, which the
+  elaborator had shared from the deleted `sqZeroInvAt`; now generated under its own name (`sqZeroInvTAt._proof_3`,
+  `_proof_4`). Its type is equal, and its value is equal once every `<name>._proof_<n>` is one token.
+
+**Controls** (`statements-plant2.out`): with the deletion list but without `--fold`, **FAIL (12)**
+(`statements-compare2-nofold.out`); without the deletion list, the 48 read PRIVATE-MISSING, **FAIL**
+(`statements-compare2-nolist.out`); planted in memory, each **FIRED**: a surviving name on the deletion list, a deleted
+name left off it, one character of a hygiene survivor's type (hash kept), a data change in `sqZeroInvTAt`'s value
+(`RingHom.ker` → `RingHom.range`); and the five standing plants.
+
+**Axioms** (`axioms2-read.out`): **273 records — CLEAN 261, IMPORTED 7, UPSTREAM 5, FAIL 0.** `card_res_fibreT`,
+`charBound_of_charBound_oneT`, `exists_conj_sub_notMem`, `norm_charSum_le_of_resT`: CLEAN. IMPORTED and UPSTREAM as at
+stage 3: `ratioAtMost_of_five_le_chromaticNumber`, `tca_of_five_le_localBound`, `ratioAtMost_of_two_notMem` —
+`[propext, sorryAx, Classical.choice, Quot.sound, StandingFive.kloosterman_bound]`, their `sorry` from `ratioAtMost_cert`
+alone; every public declaration of `BinaryField` and `DyadicCerts` CLEAN. Without the leaf list **FAIL 4**; the two
+planted records **2 of 2 FAIL** (`axioms2-plant-read.out`).
+
+**Lint** (`logs/lint-2.log`): as at stage 3 — one finding, `Rigidity.archTop` (`Rigidity/ContinuityGroup`), not this
+job's; 13 linters passed; none in this job's files.
+
+**Re-priced:** the fold ≈ 75 lines added against 606 removed (no price was given).
+
+## Drafts for the landing
+
+### The audit's block (`scripts/Axioms.lean`, by the landing)
+
+- `Arith/BinaryField`, `Arith/DyadicCerts` (new): 65 `#print axioms` lines, every one CLEAN, in
+  `data/fs131/icm4/axioms-block-draft.txt` (the public theorems and definitions of both modules, generated from the
+  compiled dump `statements-after2.txt`; structure projections and generated names left out). The `decide +kernel`
+  certificates `colour4` … `colour32`, `counts64_ok` read `[propext]`; `prim4` … `prim12`, `isPrimitiveCode_of_check`
+  `[propext, Quot.sound]`; `charSum_64_ge`, `colorable_four_two_pow`, `charSum_ge_of_classes`, `colorable_four_of_check`,
+  `exists_root` the standard three.
+- `Rigidity/ClassRatio`: `ratioAtMost_of_two_notMem`, `ratioAtMost_of_five_le_chromaticNumber`, `tca_of_five_le_localBound`
+  UPSTREAM through `ratioAtMost_cert` alone — IMPORTED (Weil and the standard three) once the certificate line is joined;
+  `tca_uniform`, `exists_uniform_tail` IMPORTED, unchanged.
+- `Rigidity/CountDescent`'s `count_of_oneAvoidingDensityBound`: UPSTREAM through lane P's and M9-S's leaves only, unchanged.
+
+### `LEAN.md` § Searching — Lean (each to follow the last)
+
+- A primitive polynomial `P` over `𝔽₂` has a root in every field of `2ⁿ` elements with no cofactor certificate: the
+  register's orbit closing after `2ⁿ − 1` steps gives `1 = x^(2ⁿ−1) + P·c` in `k[x]` (`Polynomial.charP` makes `k[x]`
+  characteristic 2), so `P ∣ x^|k| − x`, which splits (`splits_iff_card_roots`, `FiniteField.roots_X_pow_card_sub_X`);
+  then `Polynomial.Splits.of_dvd` and `Splits.exists_eval_eq_zero` (`BinaryField.exists_root`, FS131-ICM4).
+- Deleting declarations moves the stored text of the declarations after them in two ways that change no statement: the
+  hygiene context number of instance binders minted in the file shifts (`inst._@.<module>.<n>._hygCtx._hyg.<k>`; Lean's
+  hash of the term is unchanged), and a definition whose value named an auxiliary proof first generated by a deleted
+  declaration (`sqZeroInvAt._proof_4`) now names its own (`sqZeroInvTAt._proof_3`). A statement check after a deletion
+  normalizes exactly these two, each with a plant that a real change still fires (`tools/fs131_icm4_statements.py
+  --fold`, FS131-ICM4).
+
+### `LEAN.md` § The kernel's cost model (to follow the last)
+
+- `decide +kernel` on `Nat.iterate` of a three-operation bit register (`testBit`, `<<<`, `^^^`): the 44,000 steps of
+  `colourCheck` at `Q = 32` and a 4,095-step pass with 63 packed counters each check in 1–4 s, a module of nine such
+  certificates compiling in 5.2 s (`Arith/DyadicCerts`; `data/fs131/icm4/lean/probes/Cost.lean`; FS131-ICM4).
