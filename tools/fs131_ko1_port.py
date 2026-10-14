@@ -140,7 +140,7 @@ UPSTREAM = {
 }
 UPSTREAM_IMPORTS = {"OAI158": set(), "OAI158Palette": {"OAI158"}}   # what each upstream module imports, of these
 
-KEYWORD = re.compile(r"^(?:@\[[^\]]*\]\s*)*(?:(?:private|protected|noncomputable|scoped|local|nonrec|partial)\s+)*"
+KEYWORD = re.compile(r"^\s*(?:@\[[^\]]*\]\s*)*(?:(?:private|protected|noncomputable|scoped|local|nonrec|partial)\s+)*"
                      r"(lemma|theorem|def|abbrev|instance|structure|inductive|class)\b")
 PROOFKINDS = ("lemma", "theorem")
 GENERATED = re.compile(r"\.(?:_proof_\d+|match_\d+(?:\.(?:splitter|_arg_pusher|eq_\d+))?|eq_\d+|_simp_\d+_\d+|"
@@ -1021,6 +1021,17 @@ def self_test(mods):
         j = next(no for no in range(len(s4)) if s4[no] == "" and no > 10)
         s4[j] = "#eval 1"
         expect("an unclassified `#eval` line", refused(sources={rel0: s4}))
+        # an indented declaration (one space before its keyword, as `RelativeCenters.lean:40`) is copied as such
+        # (FS131-IPA1's revision, the coordinator's Amendment 2: `KEYWORD` allows leading whitespace)
+        s5 = list(src0)
+        s5[kwline - 1] = " " + s5[kwline - 1]
+        try:
+            t5, _ = generate(mods, sources={rel0: s5})
+            ind_ok = (" " + src0[kwline - 1]) in t5[m0].split("\n") and t5[m0] != texts[m0]
+        except Refused:
+            ind_ok = False
+        print(f"partner 'an indented declaration ({short(o)}) copied as such': {'COPIED' if ind_ok else 'REFUSED'}")
+        ok = ok and ind_ok
         # an upstream copy that is not upstream
         expect("an upstream entry removed", refused_upstream())
         # licence
@@ -1040,7 +1051,7 @@ def self_test(mods):
         if check(mods, outdir=td, quiet=True) != 0:
             print("SELF-TEST FAILED: the scratch copy does not pass after the plants were undone")
             return 1
-    print(f"SELF-TEST OK: {n} plants refused and 2 partners accepted" if ok else "SELF-TEST FAILED")
+    print(f"SELF-TEST OK: {n} plants refused and 3 partners accepted" if ok else "SELF-TEST FAILED")
     return 0 if ok else 1
 
 
