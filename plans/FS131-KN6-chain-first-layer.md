@@ -101,3 +101,50 @@ not in the release by name**)."
   with `IsHaarFourier m` throughout.
 
 The route and the port-or-write call are this job's (item 711 (a)); they are made in Stage 4.
+
+## Stage 2 — SAVED: the join and the first build
+
+### 2.1 The join
+
+`git merge main` at `82b4bc2b9` (the brief names `232a2f0d4`; `main` had since gained the two inventory commits that
+carry this job's brief). One conflict: `ARCHITECTURE.md`'s module table, where `main` had added the three upper-half rows
+and this branch the four `Rigidity/` rows — both kept, `main`'s first. `Proofs.lean` merged by itself.
+`tools/check_architecture.py`: PASS. Commit `50004bb97` (a merge commit cannot be made by explicit path; the index held
+the merge and nothing else, and no other agent writes in this worktree).
+
+### 2.2 The compiled library, brought up to date by copy (the condition of inventory items 694 and 709)
+
+- **From where**: `.claude/worktrees/fs131-wnf/.lake/build/`, the tree whose gate passed today; its `HEAD` was
+  `1e9014443` before and after the copy, its work tree clean, and `git diff 1e9014443 main -- Proofs Proofs.lean
+  lakefile.toml lean-toolchain lake-manifest.json` is empty: its Lean sources are `main`'s.
+- **What and how**: `rsync -a --checksum` with no `--delete`, into this tree's `.lake/build/`. Nothing was written in the
+  other tree and nothing run there.
+- **How it was compared**: a dry run with `--itemize-changes` before (`data/fs131/kn6/logs/rsync-dry-before.out`: 1,434
+  lines, of which 176 are `.olean` — 27 absent here, 8 differing in content, 141 identical in content with another time);
+  the copy (`rsync-real.out`, the same 1,434 lines); a dry run after (`rsync-dry-after.out`: **0 lines** — every file of
+  that tree's build is byte for byte in this one). The copy ran 02:06:07–02:06:53 UTC (`copy-times.txt`).
+- **The manifest** made after the copy and before the build: `olean-manifest-after-copy.sha256` (SHA-256 of each of the
+  1,906 `.olean` under `.lake/build/lib/lean`) and `olean-times-after-copy.txt`. A later reader shows that no compiler has
+  rewritten a copied file by `sha256sum -c` against it: the only files that may differ are the ones the builds below report
+  as rebuilt.
+- **What Lake then recompiled is what this tree changed**: the first build rebuilt five modules and no other (§ 2.3).
+
+### 2.3 The first build of the first layer
+
+`data/fs131/kn6/build.sh <tag> [BATCH]` runs `./scripts/build.sh` under the slot (`--mem 12 --cpus 4`, `MEMMAX=12G`) and
+keeps the log (last line `exit=<status>`), the wall time, and a memory sample every 5 s over the `lean` and `lake`
+processes whose working directory is this worktree. `BATCH=8`: `./scripts/build.sh --plan` puts the four stale modules
+in three batches (`Entropy` with `Solenoid`; `PositiveEntropy`; `ChainAtTA`), so at most two compile at once
+(`logs/plan-batch8.out`).
+
+| | |
+|---|---|
+| result | `==> build: OK — 249 of 249 batches, 5 module(s) rebuilt, 3 module(s) with warnings, 6m57s`; `exit=0` (`logs/build-1.log`) |
+| rebuilt | `Rigidity.Solenoid` (1.6 s), `Rigidity.Entropy` (1.9 s), `Rigidity.PositiveEntropy` (1.5 s), `Rigidity.ChainAtTA` (2.1 s), `Proofs` (2.3 s) |
+| warnings | ten, each `declaration uses 'sorry'`: `Entropy` 98, 104, 110; `PositiveEntropy` 84; `ChainAtTA` 66, 71, 75, 188, 193, 198. **No other warning**: the lakefile's linters (docstrings among them) are quiet on the four files |
+| wall | 421 s by the wrapper's clock (`logs/build-1.times`) |
+| memory | 3.01 GiB summed, 2.11 GiB the largest process (`logs/build-1.rss`). **What that measures**: 5-second samples; they include two single-file checks I ran beside the build; each of the four modules compiled in about 2 s, so a compile can fall between two samples. The 12 GiB cap was not approached |
+| environment linters | `lake lint --no-build -- --no-build --trace` under the slot: `exit=0`, `-- Linting passed for Proofs.`, 14 linters each `(2/2) Passed!` (`logs/lint-1.log`). With `sorry` bodies `unusedArguments` cannot see a binder a proof will not read: that reading is the domain pass's (Stage 3: `ksEntropy_id`) |
+
+Nothing was flagged, so nothing was fixed at this stage. The one line went to the coordinator with the wall time and the
+memory figures as measured.

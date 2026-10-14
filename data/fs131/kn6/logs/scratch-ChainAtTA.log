@@ -1,0 +1,7 @@
+slot: admitted kn6s: mem 5 GiB (hard cap), cpus 4,5
+data/fs131/kn6/scratch/ChainAtTA.lean:67:8: warning: declaration uses `sorry`
+data/fs131/kn6/scratch/ChainAtTA.lean:72:8: warning: declaration uses `sorry`
+data/fs131/kn6/scratch/ChainAtTA.lean:76:8: warning: declaration uses `sorry`
+data/fs131/kn6/scratch/ChainAtTA.lean:239:8: warning: declaration uses `sorry`
+data/fs131/kn6/scratch/ChainAtTA.lean:244:8: warning: declaration uses `sorry`
+data/fs131/kn6/scratch/ChainAtTA.lean:249:8: warning: declaration uses `sorry`
