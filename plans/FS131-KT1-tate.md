@@ -157,3 +157,51 @@ None changes a typed statement of another module.
   the two new rows pass (`logs/architecture-2.log`).
 - **For the landing**: `TateModel F` is a structure of data, not a `Prop`; M8b's statements take `(D : TateModel F)`, a binder
   the vacuity scan reads `GENERIC`, inhabited by `exists_tateModel` (lane T) and by nothing before it.
+
+## Stage 3 — SAVED: the two forms of the local character, measured on their first two leaves
+
+The two forms FS131-KN9 § 4.3 names, each carried in scratch through its first two leaves, at a general number field `K` (the
+leaves are about `K`, not about `F(i)`), under `lake env lean` with the lakefile's options (`data/fs131/kt1/lean1.sh`).
+
+**Form G (global, by approximation)** — `data/fs131/kt1/scratch/FormG.lean`, 90 lines with docstrings:
+`ψ_v(z) := e(−Tr_{K/ℚ}(t))` for any `t ∈ K` integral at every prime `≠ v` with `z − t ∈ O_v`. This is KN9's "global definition
+on `L` by approximation", with the approximant taken for `z ∈ K_v` directly, so no extension by uniform continuity is needed.
+- **G1** (`G1_approx`, with its child `G1b_crt`): such a `t` exists. The density of `K` in `K_v` (`denseRange_algebraMap`,
+  `DenseRange.exists_mem_open`, `Valued.isOpen_valuationSubring`), then the Chinese remainder step: write `s = n/c` with
+  `n, c ∈ 𝓞` (`IsLocalization.surj`); take `y ≡ n` modulo `v^{v(c)}` and `y ≡ 0` modulo `w^{w(c)}` at the other primes dividing
+  `c` (`IsDedekindDomain.exists_forall_sub_mem_ideal`, `Ideal.finite_factors`, `intValuation_eq_exp_neg_multiplicity`,
+  `intValuation_le_pow_iff_mem`); then `t := y/c`. **Closed: 65 lines, 3 elaboration rounds** (`logs/FormG-1.log`–`FormG-3.log`).
+- **G2** (`G2_trace_int`): `Tr(t − t′) ∈ ℤ`, so the definition is independent of `t`. An element integral at every prime is in
+  `𝓞` (`mem_integers_of_valuation_le_one`), and its trace is an integral rational (`Algebra.isIntegral_trace`,
+  `IsIntegrallyClosed.isIntegral_iff`). **Closed: 7 lines, first round.**
+- `logs/FormG-3.log`: exit 0, no `sorry`, no warning.
+
+**Form L (local trace)** — `data/fs131/kt1/scratch/FormL.lean`, 89 lines:
+`ψ_w(z) := ψ_p(Tr_{L_w/ℚ_p}(z))`.
+- **L1**: `L_w` as an algebra over `K_v` for `w | v`, with the two instances Mathlib's `Module.Finite Kv Lw` takes as hypotheses
+  (`IsScalarTower K Kv Lw`, `ContinuousSMul Kv Lw`). Mathlib has no such algebra (FinitePlace.lean l. 490 takes it as a
+  `variable`), but it has the uniform continuity of `K → L` for the two valuations (`uniformContinuous_algebraMap_liesOver`,
+  `Mathlib/NumberTheory/RamificationInertia/Valuation.lean`). The map is `UniformSpace.Completion.mapRingHom` of it, read
+  through `adicCompletion.equiv`. **Closed: map, instance, tower and continuity in 25 lines, 4 rounds** (two of them on the
+  `WithVal`/`Completion` coercion layer).
+- **L2**: `ψ_p`, an additive character of `ℚ_[p]` trivial on `ℤ_[p]` and not on `p⁻¹`. Its decomposition step `L2decomp`
+  (`x = m/p^k + y`, `y ∈ ℤ_p`: `Padic.norm_eq_zpow_neg_valuation`, `PadicInt.appr_spec`) is **closed: 28 lines, 4 rounds**. The
+  character itself, `L2char` (the definition by choice and the additivity from `ℤ_p ∩ ℤ[1/p] = ℤ`), is **open (`sorry`)**. Its
+  price is about forty lines, the size of G2 plus form G's additivity.
+- `logs/FormL-1.log`–`FormL-7.log`; the last: exit 0, one `sorry` (`L2char`).
+
+**The first two leaves cost about the same** (form G: 72 lines, both closed; form L: 53 lines closed and about 40 open). They
+are not what decides. **What decides is what each definition obliges next**, read from the same leaves:
+- **Form L**: the product formula on `O′`, that `ψ(ι x) = 1` for `x ∈ O′` (fact 3's lower bound, ruling (2) of the coordinator's
+  reply), needs `Σ_{w | p} Tr_{L_w/ℚ_p}(x) = Tr_{L/ℚ}(x)`. That needs the decomposition `L ⊗_ℚ ℚ_p ≅ ∏_{w | p} L_w`, of which
+  Mathlib holds only the surjectivity of `Kv ⊗[K] L → Lw` (FinitePlace.lean l. 498; no other `adicCompletion` file mentions a
+  tensor product). It also needs `Tr_{L_w/ℚ_p}(O_w) ⊆ ℤ_p`, the integrality of `O_w` over `ℤ_p`, at the stable places as well
+  as the split ones; Mathlib has no trace on `adicCompletion` at all. And it needs ℚ's own product formula for `ψ_p`,
+  `Σ_p {r}_p ≡ −r (mod ℤ)`. These are three classical inputs absent at the pin, the first of FLT-project size.
+- **Form G**: the same product formula is the integrality of one element, `x − Σ_{w ∈ supp} t_w ∈ 𝓞` (G1's `t_w` are integral
+  off `w`; `x ∈ O′` is integral at every stable place), so G2 closes it with a finite sum. Local non-degeneracy is: some
+  `t ∈ 𝓞[1/𝔭]` has `Tr(t) ∉ ℤ`, because `𝔭^{-k} ⊄ 𝔡⁻¹` for large `k` (Mathlib's `FractionalIdeal.dual`,
+  `RingTheory/DedekindDomain/Different.lean`). No input outside Mathlib.
+
+**Chosen: form G**, by the leaves after the first two, which form L's first two show it cannot reach without three absent
+inputs. Form L stays recorded as the second route, with its two leaves on disk. Lane T is planned on form G (stage 4).

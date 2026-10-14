@@ -1,0 +1,17 @@
+slot: admitted kt1: mem 4 GiB (hard cap), cpus 0,1
+data/fs131/kt1/scratch/FormL.lean:79:17: error: ring failed, ring expressions not equal
+p : ℕ
+inst✝ : Fact (Nat.Prime p)
+x : ℚ_[p]
+k : ℕ
+hk : ‖↑p ^ k * x‖ ≤ 1
+y : ℤ_[p] := ⋯
+hy : y - ↑(y.appr k) ∈ Ideal.span {↑p ^ k}
+z : ℤ_[p]
+hz : z * ↑p ^ k = y - ↑(y.appr k)
+hp : ↑p ^ k ≠ 0
+hz' : ↑z * ↑p ^ k = ↑p ^ k * x - ↑(y.appr k)
+hyx : ↑y = ↑p ^ k * x
+⊢ ↑(y.appr k) * 2 + ↑z * ↑p ^ k * 2 - ↑p ^ k * x * 2 = 0
+data/fs131/kt1/scratch/FormL.lean:86:8: warning: declaration uses `sorry`
+exit=1

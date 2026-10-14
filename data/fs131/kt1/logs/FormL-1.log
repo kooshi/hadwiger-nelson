@@ -1,0 +1,14 @@
+slot: admitted kt1: mem 4 GiB (hard cap), cpus 2,3
+data/fs131/kt1/scratch/FormL.lean:26:47: error: Application type mismatch: The argument
+  v
+has type
+  HeightOneSpectrum (𝓞 K)
+of sort `Type u_1` but is expected to have type
+  Type ?u.61
+of sort `Type (?u.61 + 1)` in the application
+  @uniformContinuous_algebraMap_liesOver ?m.104 L v
+data/fs131/kt1/scratch/FormL.lean:33:8: warning: declaration uses `sorry`
+data/fs131/kt1/scratch/FormL.lean:37:8: warning: declaration uses `sorry`
+data/fs131/kt1/scratch/FormL.lean:47:8: warning: declaration uses `sorry`
+data/fs131/kt1/scratch/FormL.lean:52:8: warning: declaration uses `sorry`
+exit=1

@@ -1,0 +1,13 @@
+slot: admitted kt1: mem 4 GiB (hard cap), cpus 2,3
+data/fs131/kt1/scratch/FormL.lean:63:39: error(lean.invalidField): Invalid field `norm_p`: The environment does not contain `AbsoluteValue.norm_p`, so it is not possible to project the field `norm_p` from an expression
+  padicNormE
+of type `AbsoluteValue ℚ_[?m.93] ℚ`
+data/fs131/kt1/scratch/FormL.lean:59:57: error: unsolved goals
+case inr
+p : ℕ
+inst✝ : Fact (Nat.Prime p)
+x : ℚ_[p]
+hx : x ≠ 0
+⊢ ‖↑p‖ ^ x.valuation.natAbs * ‖x‖ ≤ 1
+data/fs131/kt1/scratch/FormL.lean:80:8: warning: declaration uses `sorry`
+exit=1

@@ -1,0 +1,34 @@
+slot: admitted kt1: mem 4 GiB (hard cap), cpus 2,3
+data/fs131/kt1/scratch/FormL.lean:39:85: error: Type mismatch
+  k
+has type
+  K
+but is expected to have type
+  WithVal (valuation K v)
+data/fs131/kt1/scratch/FormL.lean:47:51: error: Application type mismatch: The argument
+  adicCompletion.continuous_toCompletion
+has type
+  ∀ (K : Type ?u.49) [inst : Field K] [inst_1 : Algebra ?m.68 K] [inst_2 : IsFractionRing ?m.68 K]
+    (v : HeightOneSpectrum ?m.68), Continuous adicCompletion.toCompletion
+but is expected to have type
+  Continuous ?m.66
+in the application
+  Continuous.comp UniformSpace.Completion.continuous_map adicCompletion.continuous_toCompletion
+data/fs131/kt1/scratch/FormL.lean:46:4: error: Type mismatch
+  ?m.54 ∘ ?m.72
+has type
+  ?m.50 → ?m.52
+but is expected to have type
+  Continuous ⇑(L1map v w)
+data/fs131/kt1/scratch/FormL.lean:63:39: error(lean.invalidField): Invalid field `norm_p`: The environment does not contain `AbsoluteValue.norm_p`, so it is not possible to project the field `norm_p` from an expression
+  padicNormE
+of type `AbsoluteValue ℚ_[?m.93] ℚ`
+data/fs131/kt1/scratch/FormL.lean:59:57: error: unsolved goals
+case inr
+p : ℕ
+inst✝ : Fact (Nat.Prime p)
+x : ℚ_[p]
+hx : x ≠ 0
+⊢ ‖↑p‖ ^ x.valuation.natAbs * ‖x‖ ≤ 1
+data/fs131/kt1/scratch/FormL.lean:80:8: warning: declaration uses `sorry`
+exit=1
