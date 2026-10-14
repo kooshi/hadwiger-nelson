@@ -59,7 +59,10 @@ Usage:
   tools/fs131_ko1_port.py --list [--modules …]    per module: copied / upstream / left out, with source lines
   tools/fs131_ko1_port.py --names [--modules …]   one line per ported declaration: module, kind, name here, release name
   tools/fs131_ko1_port.py --imports [--modules …] the computed import list of each module
-  tools/fs131_ko1_port.py --axioms-block [--modules …]  the audit's records for these modules (a draft for the landing)
+  tools/fs131_ko1_port.py --axioms-block [--modules …]  the audit's records for these modules (a draft for the landing):
+                                          every copied declaration, instances (and those a `deriving` clause
+                                          declares) included, and every private one inside a `section` that opens it
+                                          by `open private … from <module>` (FS131-IPD1's revision; `axioms_block`)
 """
 import hashlib
 import json
@@ -494,6 +497,12 @@ def plan(cone_text=None, clone=CLONE, tables=None, sources=None, only=None, pars
         out[mod] = emit_module(m, path, srcs[m], decls[m], allf, load_tables(mod, tables), names_here)
         out[mod]["deps"] = sorted(dep.get(m, set()))
         out[mod]["cone"] = len(want.get(m, set()))
+        # the instances a `deriving` clause of a copied definition declares (`def DiscreteE := … deriving CommGroup`):
+        # instances with no text of their own, inside their owner's range (`outermost`'s `derived`), each with its
+        # owner — for the audit's records (`axioms_block`)
+        out[mod]["derived"] = sorted((t[2], r[2]) for r, t in tops[m].items()
+                                     if r != t and t in allf and "deriving" in srcs[m][r[0] - 1]
+                                     and r[2].rsplit(".", 1)[-1].startswith("inst"))
     if parse_all:
         for m, path in FILES:
             parse(srcs[m], decls[m], MOD_OF_REL[m])
@@ -1104,6 +1113,38 @@ def self_test(mods):
         print(f"partner 'the constructors of an inductive (AlgebraModels.lean:{ia}, {len(ctors)}) get their addresses': "
               f"{'ADDRESSED' if ind_ok else 'FAILED'}")
         ok = ok and ind_ok
+        # the audit's records (FS131-IPD1's revision): the block for m0 holds exactly one record per copied
+        # declaration, instances included, and per instance a `deriving` clause declares; and a private declaration's
+        # record stands inside a `section` that opens it — the private one planted by giving a copied theorem of m0 the
+        # name the release's compiled constants give a `private` declaration (`_private.<module>.0.<name>`) in its DECL
+        # and CONE rows of the cone, nothing else changed
+        pa, pb, po, _ = next(c for c in q0["copied"] if c[3] in PROOFKINDS)
+        pn = f"_private.{rel0}.0.{po}"
+
+        def privatise(line):
+            f = line.split("\t")
+            if f[0] in ("DECL", "CONE") and len(f) > 4 and f[4] == po:
+                f[4] = pn
+                if f[0] == "CONE" and f[6] == po:
+                    f[6] = pn
+            return "\t".join(f)
+        try:
+            _, fp = generate([m0], cone_text="\n".join(privatise(ln) for ln in cone_text.splitlines()))
+            blk = axioms_block([m0], fp)
+            recs = [ln[len("#print axioms "):] for ln in blk if ln.startswith("#print axioms ")]
+            want_recs = [record_name(o) for _, _, o, _ in fp[m0]["copied"]] + [record_name(i) for _, i in fp[m0]["derived"]]
+            pr = record_name(pn)
+            sec = blk.index("section") if "section" in blk else -1
+            ab_ok = (sorted(recs) == sorted(want_recs) and len(recs) == len(set(recs))
+                     and any(k == "instance" for *_, k in fp[m0]["copied"]) and bool(fp[m0]["derived"])
+                     and sec > 0 and blk[sec + 1] == f"open private {pr} from {PFX}{m0}"
+                     and blk[sec + 2] == f"#print axioms {pr}" and blk[sec + 3] == "end" and len(blk) == sec + 4
+                     and recs.count(pr) == 1)
+        except Refused:
+            ab_ok = False
+        print(f"partner 'the audit's block for {m0}: a record per declaration, instances and derived instances included, "
+              f"and a private one ({short(po)} planted private) inside its section': {'COMPLETE' if ab_ok else 'FAILED'}")
+        ok = ok and ab_ok
         # an upstream copy that is not upstream
         expect("an upstream entry removed", refused_upstream())
         # licence
@@ -1123,7 +1164,7 @@ def self_test(mods):
         if check(mods, outdir=td, quiet=True) != 0:
             print("SELF-TEST FAILED: the scratch copy does not pass after the plants were undone")
             return 1
-    print(f"SELF-TEST OK: {n} plants refused and 5 partners accepted" if ok else "SELF-TEST FAILED")
+    print(f"SELF-TEST OK: {n} plants refused and 6 partners accepted" if ok else "SELF-TEST FAILED")
     return 0 if ok else 1
 
 
@@ -1138,6 +1179,54 @@ def refused_upstream():
     finally:
         UPSTREAM.clear()
         UPSTREAM.update(saved)
+
+
+# An anonymous instance's generated name ends in a suffix made from the root of the module that declares it: `_oAI` at
+# the release (modules `OAI.…`), `_proofs` here (`Proofs.…`) — the read-back's ANON class
+# (`tools/fs131_ipa1_readback_port.py`), the same pattern.
+ANON = re.compile(r"_oAI(?![A-Za-z])")
+
+
+def record_name(o):
+    """The name a copied declaration has HERE, as `#print axioms` takes it: the name map, and ANON."""
+    return ANON.sub("_proofs", here_name(o))
+
+
+def axioms_block(sel, full):
+    """The audit's records for the modules `sel` (`scripts/Axioms.lean`, a draft for the landing): one `#print axioms`
+    line per copied declaration, in source order — theorems, definitions, structures and instances (FS131-IPD1's
+    revision: instances by the name the kernel gives them here, ANON applied) — and, after them, every private
+    declaration of the module in one `section` that opens it by Batteries' `open private <name> from <module>`, in the
+    library's import closure (`data/fs131/ipd1/probes/OpenPrivate2.lean`): the record then prints the private name in
+    full, `'_private.<module>.0.<name>' depends on axioms: […]`, the form `scripts/axioms.sh` reads, and after `end`
+    the name is unknown again.  A generated auxiliary (`._proof_n`, `.match_n`, `.eq_n`) has no record: its axioms
+    are its owner's; an instance a `deriving` clause declares has its own record, after its owner's."""
+    out = []
+    for x in sel:
+        copied = full[x]["copied"]
+        derived = {}
+        for owner, inst in full[x].get("derived", []):
+            derived.setdefault(owner, []).append(inst)
+        pub = [(o, kind) for a, b, o, kind in copied if not o.startswith("_private.")]
+        priv = [(o, kind) for a, b, o, kind in copied if o.startswith("_private.")]
+        if any(o.startswith("_private.") for o in derived):
+            raise Refused(f"{x}: a private definition with a `deriving` clause: its instances' records are not planned")
+        ninst = sum(1 for _, k in pub + priv if k == "instance")
+        nder = sum(len(v) for v in derived.values())
+        out.append(f"-- Outside/{x}: {len(copied) + nder} records ({ninst} instances, {nder} derived instances, "
+                   f"{len(priv)} private)")
+        for o, _ in pub:
+            out.append(f"#print axioms {record_name(o)}")
+            for inst in derived.get(o, []):
+                out.append(f"#print axioms {record_name(inst)}")
+        if priv:
+            names = [record_name(o) for o, _ in priv]
+            out.append("section")
+            out.append(f"open private {' '.join(names)} from {PFX}{x}")
+            for nm in names:
+                out.append(f"#print axioms {nm}")
+            out.append("end")
+    return out
 
 
 def arg_mods():
@@ -1194,12 +1283,8 @@ def main():
             print(f"{x}\t" + " ".join(ported) + " | " + " ".join(ml))
         return 0
     if "--axioms-block" in sys.argv:
-        for x in sel:
-            print(f"-- Outside/{x}")
-            for a, b, o, kind in full[x]["copied"]:
-                if kind == "instance" or o.startswith("_private."):
-                    continue
-                print(f"#print axioms {here_name(o)}")
+        for ln in axioms_block(sel, full):
+            print(ln)
         return 0
     if mods is None:
         print("writing needs --modules (a lane writes its own modules)")
