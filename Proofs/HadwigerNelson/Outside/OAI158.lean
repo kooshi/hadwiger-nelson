@@ -36,9 +36,10 @@ modules; this library is at v4.32.0, and its five-colour arm is not ported (`pla
 release was audited on this machine (`plans/EXT-OAI1-audit.md`): its 70 modules compile from its source, H rests on
 `[propext, Classical.choice, Quot.sound]` there (a planted `sorry` reaches the headline), the headline's stored
 statement is the release's challenge statement, and the modules replay through `leanchecker`. **The read-back** is
-`plans/FS132-I1-implementation.md` (stages 1 and 2): the six copied declarations below and the statements of H and T
-are, as the kernel stores them at this pin, the release's as the kernel stores them at the release's pin, term for
-term (`tools/fs132_i1_readback.py`, on `data/fs132/i1/readback/`). What no check here reaches is Mathlib itself between
+`plans/FS132-I1-implementation.md` (stages 1 and 2): the six copied declarations below and the statement of H — and
+of T while it was declared here — are, as the kernel stores them at this pin, the release's as the kernel stores them
+at the release's pin, term for term (`tools/fs132_i1_readback.py`, on `data/fs132/i1/readback/`); T as the port's
+theorem is read back against the release by the port's own read-back (FS131-LP1: IDENTICAL). What no check here reaches is Mathlib itself between
 the two tags, below the constants H's statement names; what stands in for it is the equivalences above, which say in
 this library's own vocabulary what the axiom asserts at this pin, and nine characterisations of the copied definitions
 that elaborate, as one text, at both pins (`SemanticBody.lean.inc` there).
@@ -55,8 +56,8 @@ five-colour theorem are not imported: no statement here cites them.
 
 **Models** (`LEAN.md` § Assumptions, item 3). H has no hypothesis; its sentence at four colours is this library's own
 theorem and at seven it is false (the two `example`s under H). T's hypothesis is inhabited at `k = 7`
-(`exists_properColoring_seven`, row 33's upper end), and there its conclusion is a theorem with no axiom
-(`proper_to_borel_weak_model`).
+(`exists_properColoring_seven`, row 33's upper end), and there its conclusion is this library's own theorem, with no
+use of T (`proper_to_borel_weak_model`) — the model an import asked for, kept as T's model now that T is ported.
 -/
 
 open MeasureTheory

@@ -2,7 +2,7 @@ import Proofs.HadwigerNelson.Plane.Radius
 import Proofs.HadwigerNelson.Outside.OAI158Collapse
 
 /-!
-# The radius clause, on the two outside theorems: every open set has a weak colouring, and five fail on a disc (FS-124)
+# The radius clause: every open set has a weak colouring (the ported transfer), and five fail on a disc (FS-124)
 
 Claims **C124-RADIUS-DOWN** and **C124-RADIUS-FIVE** of `data/fs124/claims-K1.md` (plan:
 `plans/FS124-kernel-plan.md`), and what they give with `Plane/Radius`.
@@ -10,12 +10,13 @@ Claims **C124-RADIUS-DOWN** and **C124-RADIUS-FIVE** of `data/fs124/claims-K1.md
 * `isWeakColouringOn_univ_iff_weakColoring` — **the definition at the whole plane is the import's**: a weak
   `k`-colouring of `univ` is a Borel-measurable `c` with the release's `Outside.OAI158.WeakColoring k c`, the object
   `Outside.OAI158.proper_to_borel_weak` delivers. No axiom.
-* `radius_down` (C124-RADIUS-DOWN) rests on `Outside.OAI158.proper_to_borel_weak` — `[OAIMath2026]` family 158, the
-  transfer of colourability — and on nothing else outside.
+* `radius_down` (C124-RADIUS-DOWN) goes through `Outside.OAI158.proper_to_borel_weak` — `[OAIMath2026]` family 158's
+  transfer of colourability, its proof ported and checked by this kernel (`Outside/OAI158BorelTransfer`) — and rests
+  on the standard three axioms alone.
 * `radius_five` (C124-RADIUS-FIVE) rests on `Outside.OAI158.no_proper_five_coloring` — `[OAIMath2026]` family 158, the
   plane is not five-colourable — and on nothing else outside.
-* `colorable_iff_forall_ball`, `seven_le_chromaticNumber_plane_iff_exists_ball` — the join of UP and DOWN, on
-  `proper_to_borel_weak`: the plane is `k`-colourable exactly when every disc about `0` has a weak `k`-colouring, so
+* `colorable_iff_forall_ball`, `seven_le_chromaticNumber_plane_iff_exists_ball` — the join of UP and DOWN, on the
+  standard three axioms (DOWN through the ported `proper_to_borel_weak`): the plane is `k`-colourable exactly when every disc about `0` has a weak `k`-colouring, so
   seven colours are needed exactly when one disc has no weak six-colouring.
 * `exists_radius_no_weak_four` — C124-RADIUS-FIVE's sentence at four colours, with no import (rung B).
 
@@ -54,8 +55,8 @@ theorem exists_isWeakColouringOn_univ_iff :
 /-! ## C124-RADIUS-DOWN -/
 
 /-- **One colouring for every set**: a proper `k`-colouring of the plane gives a measurable `k`-colouring that is a
-weak colouring of every set of the plane. Rests on the standard three axioms and
-`Outside.OAI158.proper_to_borel_weak` (`[OAIMath2026]` family 158). Inhabitant of the hypothesis: `k = 7`
+weak colouring of every set of the plane. Rests on the standard three axioms, through
+`Outside.OAI158.proper_to_borel_weak` (`[OAIMath2026]` family 158, its proof ported). Inhabitant of the hypothesis: `k = 7`
 (`Outside.OAI158.exists_properColoring_seven`), where the conclusion is `exists_isWeakColouringOn_seven`. -/
 theorem exists_isWeakColouringOn_of_colorable (h : (unitDistance ℂ).Colorable k) :
     ∃ c : ℂ → Fin k, ∀ U : Set ℂ, IsWeakColouringOn U c := by
@@ -65,8 +66,8 @@ theorem exists_isWeakColouringOn_of_colorable (h : (unitDistance ℂ).Colorable 
 /-- **C124-RADIUS-DOWN** (`data/fs124/claims-K1.md`): "For every integer k ≥ 1: if χ(ℝ²) ≤ k, every open set of the
 plane has a weak measurable k-colouring."
 
-Rests on the standard three axioms and the declared outside theorem `Outside.OAI158.proper_to_borel_weak`
-(`[OAIMath2026]` family 158: a proper `k`-colouring of the plane gives a Borel one proper at almost every unit pair).
+Rests on the standard three axioms, through `Outside.OAI158.proper_to_borel_weak` (`[OAIMath2026]` family 158's
+theorem, its proof ported: a proper `k`-colouring of the plane gives a Borel one proper at almost every unit pair).
 `χ(ℝ²)` is `(unitDistance ℂ).chromaticNumber`. Openness of `U` is the claim's word and is not used: the colouring of
 `exists_isWeakColouringOn_of_colorable` serves every set. `k ≥ 1` is not a hypothesis: `χ(ℝ²) ≤ 0` is false.
 Inhabitant of the hypothesis: `k = 7` (`chromaticNumber_plane_interval`), where the conclusion holds with no axiom
@@ -103,10 +104,10 @@ theorem exists_radius_no_weak_four : ∃ R > (0 : ℝ), ∀ p : ℂ, ¬ ∃ c : 
 
 /-- **The plane is `k`-colourable exactly when every disc about the origin has a weak `k`-colouring.**
 
-Which half needs the import: `→` (a colourable plane gives every disc a weak colouring) is C124-RADIUS-DOWN,
-`radius_down`, and rests on the declared outside theorem `Outside.OAI158.proper_to_borel_weak` (`[OAIMath2026]`
-family 158); `←` (weak colourings of every disc colour the plane) is C124-RADIUS-UP, `radius_up`, and rests on the
-standard three axioms alone. Inhabitant of either side: `k = 7`. -/
+Which half needs the release's transfer: `→` (a colourable plane gives every disc a weak colouring) is
+C124-RADIUS-DOWN, `radius_down`, through `Outside.OAI158.proper_to_borel_weak` (`[OAIMath2026]` family 158, its proof
+ported); `←` (weak colourings of every disc colour the plane) is C124-RADIUS-UP, `radius_up`, which needs nothing of
+the release. Both halves rest on the standard three axioms. Inhabitant of either side: `k = 7`. -/
 theorem colorable_iff_forall_ball :
     (unitDistance ℂ).Colorable k ↔ ∀ R > (0 : ℝ), ∃ c : ℂ → Fin k, IsWeakColouringOn (ball (0 : ℂ) R) c := by
   constructor
@@ -119,10 +120,11 @@ theorem colorable_iff_forall_ball :
 open disc about the origin has no weak measurable six-colouring. With `χ(ℝ²) ≤ 7` (`chromaticNumber_plane_interval`)
 the left side is `χ(ℝ²) = 7`.
 
-Which half needs the import: `→` (if the plane needs seven colours, some disc has no weak six-colouring) is the
-contrapositive of C124-RADIUS-UP — `exists_radius_of_not_colorable` at `k = 6` — and rests on the standard three
-axioms alone; `←` (**a disc with no weak six-colouring proves seven**) is the contrapositive of C124-RADIUS-DOWN and
-rests on the declared outside theorem `Outside.OAI158.proper_to_borel_weak` (`[OAIMath2026]` family 158).
+Which half needs the release's transfer: `→` (if the plane needs seven colours, some disc has no weak six-colouring)
+is the contrapositive of C124-RADIUS-UP — `exists_radius_of_not_colorable` at `k = 6` — and needs nothing of the
+release; `←` (**a disc with no weak six-colouring proves seven**) is the contrapositive of C124-RADIUS-DOWN, through
+`Outside.OAI158.proper_to_borel_weak` (`[OAIMath2026]` family 158, its proof ported). Both halves rest on the standard
+three axioms.
 `Outside.OAI158.no_proper_five_coloring` is not used. It has no hypothesis, so no model is asked. -/
 theorem seven_le_chromaticNumber_plane_iff_exists_ball :
     7 ≤ (unitDistance ℂ).chromaticNumber ↔

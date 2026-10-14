@@ -9,8 +9,8 @@ proof is ported (`Outside/OAI158BorelTransfer`, under its name; FS-131, the port
 The declarations below are this library's forms of it — `χ(ℝ²) = χ_m⁰(ℝ²)` and the criterion
 `7 ≤ χ(ℝ²) ⟺ lim µ₆(ε) < 1` among them. They stood in `Outside/OAI158` while T was declared there as an axiom, and moved
 here unchanged, character for character with their docstrings (FS131-IPD1, the switch of the plan's § 4.4), because the
-ported theorem is downstream of that module. Where a docstring below says a theorem "rests on the standard three axioms
-and `proper_to_borel_weak`", it now names a theorem: each rests on the standard three axioms.
+ported theorem is downstream of that module. Each rests on the standard three axioms: T is the release's theorem, its
+proof ported with it and checked by this kernel (FS131-LP1, the port's landing).
 -/
 
 open MeasureTheory
@@ -18,7 +18,8 @@ open MeasureTheory
 namespace HadwigerNelson.Outside.OAI158
 
 /-- **T in this library's words**: if the plane has a proper `k`-colouring, it has a measurable `k`-colouring proper
-at almost every unit pair. Rests on the standard three axioms and `proper_to_borel_weak`. Inhabitant of the
+at almost every unit pair. Rests on the standard three axioms (`proper_to_borel_weak` is the release's theorem, its
+proof ported). Inhabitant of the
 hypothesis: `k = 7`, by `exists_properColoring_seven` through `properColoring_iff_colorable`. -/
 theorem nonempty_aeColouring_of_colorable {k : ℕ} (h : (unitDistance ℂ).Colorable k) :
     Nonempty (Plane.AeColouring k) := by
@@ -36,7 +37,7 @@ theorem colorable_iff_nonempty_aeColouring {k : ℕ} :
     (Plane.chromaticNumber_plane_le_chiM0.trans (Plane.chiM0_le a))⟩
 
 /-- **`χ_m⁰(ℝ²) ≤ χ(ℝ²)`** — the half of row 130's collapse this project held only given measure rigidity. Rests on
-the standard three axioms and `proper_to_borel_weak`. -/
+the standard three axioms, through the ported `proper_to_borel_weak`. -/
 theorem chiM0_le_chromaticNumber_plane : Plane.chiM0 ≤ (unitDistance ℂ).chromaticNumber := by
   rw [SimpleGraph.chromaticNumber]
   refine le_iInf₂ fun k hk => ?_
@@ -46,7 +47,7 @@ theorem chiM0_le_chromaticNumber_plane : Plane.chiM0 ≤ (unitDistance ℂ).chro
 /-- **Row 130's collapse, with no measure rigidity: `χ(ℝ²) = χ_m⁰(ℝ²)`.** One half is `proper_to_borel_weak`, the
 other this library's N-EASY. On branch `fs131-w9` the proposition `Plane.Row130Collapse` is this equality by
 definition, assumed there by the theorems of `Plane/Reduction`; at that wave's join this theorem proves it, and
-each of those theorems then holds on this import in its place. -/
+each of those theorems then holds in its place on the standard three axioms (the transfer is ported). -/
 theorem chromaticNumber_plane_eq_chiM0 : (unitDistance ℂ).chromaticNumber = Plane.chiM0 :=
   le_antisymm Plane.chromaticNumber_plane_le_chiM0 chiM0_le_chromaticNumber_plane
 
@@ -58,8 +59,8 @@ example : ∃ d : ℂ → Fin 7, Measurable d ∧ WeakColoring 7 d := by
 
 /-- **The one question, for the plane's chromatic number itself: `χ(ℝ²) ≥ 7 ⟺ lim_{ε → 0} µ₆(ε) < 1`.** Row 131's
 criterion — `Plane.seven_le_chiM0_iff`, FS106-EQ at six classes, this library's own theorem on the standard three
-axioms — rewritten by `chromaticNumber_plane_eq_chiM0`. Rests on the standard three axioms and `proper_to_borel_weak`
-alone: `no_proper_five_coloring` is not used. It has no hypothesis, so no model is asked (FS132-L1).
+axioms — rewritten by `chromaticNumber_plane_eq_chiM0`. Rests on the standard three axioms alone, through the ported
+`proper_to_borel_weak`: `no_proper_five_coloring` is not used. It has no hypothesis, so no model is asked (FS132-L1).
 
 **Read aloud**, against the front page's sentence (`CLAUDE.md` § The aim, item 5: "`χ(ℝ²) = χ_m⁰(ℝ²)` …, and
 `χ_m⁰(ℝ²) ≥ 7` iff six classes, each free of monochromatic pairs at distances in `[1−ε, 1+ε]`, cannot cover the plane
@@ -71,7 +72,8 @@ term:
 * `(unitDistance ℂ).chromaticNumber` is the plane's chromatic number in row 33's sense:
   `chromaticNumber_plane_eq_complex` equates it with `(unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber`, the
   number `chromaticNumber_plane_interval` bounds by `5` and `7`. With that upper end, `7 ≤ χ` is `χ = 7`; with the
-  lower end of `chromaticNumber_plane_six_or_seven` (which rests on the other import), its negation is `χ = 6`.
+  lower end of `chromaticNumber_plane_six_or_seven` (which rests on the declared outside theorem
+`no_proper_five_coloring`), its negation is `χ = 6`.
 * `Plane.mu 6 ε` is the best six-class cover at slack `ε`: the supremum, over families of six measurable, pairwise
   disjoint sets each `Plane.BandNull` at `ε`, of the upper density of their union (`Plane.upperDensity`: the `limsup`
   of the covered fraction of the disc of radius `R` about `0`, as `R → ∞`). `⨆ ε > 0, Plane.mu 6 ε` is its limit as
