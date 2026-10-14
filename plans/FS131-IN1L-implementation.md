@@ -10,7 +10,41 @@ subjects "FS131-IN1L".*
 
 ## Theorems this phase proved
 
-(filled at each stage; see the last stage)
+Every line is [kernel]. Each axiom set below was printed from the built tree by `data/fs131/in1l/lean/Axioms.lean`
+(`data/fs131/in1l/axioms-after.txt`). "Standard three" means `[propext, Classical.choice, Quot.sound]`.
+
+- `HadwigerNelson.Rigidity.maxMultiple_smul_le` (`Rigidity/HaarMultiple`) — standard three
+- `HadwigerNelson.Rigidity.smul_le_iff_le_maxMultiple` — standard three
+- `HadwigerNelson.Rigidity.maxMultiple_le_measure_univ` — standard three
+- `HadwigerNelson.Rigidity.sub_maxMultiple_add` — standard three
+- `HadwigerNelson.Rigidity.not_smul_le_sub_maxMultiple` — standard three
+- `HadwigerNelson.Rigidity.map_sub_maxMultiple` — standard three
+- `HadwigerNelson.Rigidity.maxMultiple_self` — standard three
+- `HadwigerNelson.Rigidity.measurableSet_TA` (`Rigidity/ChainAtTA`) — standard three
+- `HadwigerNelson.Rigidity.rot_preimage_TA` — standard three
+- `HadwigerNelson.Rigidity.exists_nonTorsion_unitVector` — standard three
+- `HadwigerNelson.Rigidity.rotInv_dirac_one` (added by ruling) — standard three
+- `HadwigerNelson.Rigidity.zeroEntropyCarried_model` (added by ruling) — standard three
+- `HadwigerNelson.Rigidity.card_words_badStarts_le` (EN2-CNT, `Rigidity/ZeroEntropyNames`) — standard three
+- `HadwigerNelson.Rigidity.mul_card_heavyNames_le` — standard three
+- `HadwigerNelson.Rigidity.mul_measureReal_light_le_blockEntropy` — standard three
+- `HadwigerNelson.Rigidity.measure_frequentVisits_le` — standard three (the port's theorem, no outside axiom)
+- `HadwigerNelson.Rigidity.badStarts_nameOf_le_visits` — standard three
+- `HadwigerNelson.Rigidity.rpow_mul_exp_le_exp` — standard three
+- `HadwigerNelson.Rigidity.measureReal_lightCells_le` — standard three
+- `HadwigerNelson.Rigidity.exists_forall_exp_le_measureReal_nameCell` (EN2-ZE) — standard three
+- `HadwigerNelson.Rigidity.ZdAction.IsErgodicOn.null_or_conull_of_ae_invariant` (`Rigidity/SolenoidErgodic`) — standard
+  three
+
+**Consequence:** these were already proved but had rested on `sorryAx` through lane C's leaves. They now rest on the
+standard three:
+- `chainInterface`;
+- `five_le_chromaticNumber_of_mrPlus`;
+- `entropySplit_of_every`;
+- **the headline with closed hypotheses, `min_localBound_five_le_chromaticNumber_of_closed`**.
+
+The third planner's print of its axioms held `sorryAx` (`data/fs131/kn7/logs/lean-axioms-check.log`). Today it
+rests on the standard three, over its eight hypotheses, with no `sorry` under it.
 
 ## Stage 1 — SAVED: the join, the readback, the dump before any edit
 
@@ -289,3 +323,190 @@ and moved verbatim. Each step is a typed `have`:
 `ZeroEntropyNames` through `lake env lean`: 0 errors, 0 warnings, no `sorry` (`logs/lean-zen-6.log`). N7 took about 25
 minutes. **Lanes H, C and N are proved.** In my four files the only `sorry`s left are the three leaves of
 `ChainAtTA` that are not mine: `entropySplit`, `zeroEntropyCarried` and `noRamifiedStableDyadic_of_tca`.
+
+## Stage 4 — SAVED: the build, the statements from the kernel's side, the axioms, the linters
+
+**The build** (`data/fs131/in1l/build.sh 4 8`): `==> build: OK — 249 of 249 batches, 2 module(s) rebuilt, 3 module(s)
+with warnings, 6m33s`, `exit=0`, 397 s, peak 3.89 GiB summed and 3.04 GiB for one process (`logs/build-4.log`,
+`build-4.times`, full log `logs/build-4-full.log`). Builds 2 and 3 compiled all four modules and `Proofs`. Build 4
+recompiled `ZeroEntropyNames` and `Proofs` after the fix below. Every warning of the build is a
+`declaration uses 'sorry'` at one of five places, none of them mine:
+- `ChainAtTA.lean:549`, `:554` and `:561` (`entropySplit`, `zeroEntropyCarried`, `noRamifiedStableDyadic_of_tca`);
+- `Entropy.lean:384` (the tenth leaf);
+- `PositiveEntropy.lean:136`.
+
+**No warning comes from `HaarMultiple`, `ZeroEntropyNames`, `SolenoidErgodic`, or my declarations in `ChainAtTA`.**
+
+**A generated public constant, found by the statement check and removed.**
+- *The finding.* Build 2's dump held a new public constant, `HadwigerNelson.Rigidity.badStarts.congr_simp`, in
+  `ZeroEntropyNames`. Lean realizes this reserved name on demand. The reader failed on it as a new public constant
+  off the allow-list, and its control then counted 7 of 6. No stored proof uses it (`lean/CongrUsers.lean`).
+- *The source.* A probe of the realized environment at seven places in a copy of the module
+  (`work/ZENBisect.lean`, `logs/lean-zenbisect.log`) put it inside `card_words_badStarts_le`. There, one `linarith`
+  had in its context a hypothesis about `(badStarts 𝒢 w : ℝ)`: its preprocessing makes Lean generate the
+  congruence lemma.
+- *The probe's own trap.* `Environment.contains` skips realized constants by default, so the first probe read
+  `false` on both versions. The working probe is `env.contains n (skipRealize := false)`. Its control is the
+  committed version, which reads `true` (`logs/lean-zencheck-old-2.log`).
+- *The repair.* `this.trans (add_le_add hb le_rfl)` replaces that `linarith`, and the probe reads `false`
+  (`logs/lean-zencheck-6.log`). Two other `simp`-based steps over `badStarts` became `Nat.cast_le`, `rw` and
+  `Finset.mem_filter.mpr`; whether they also generated the lemma was not isolated.
+
+**No statement and no definition changed, from the kernel's side** (`tools/fs131_in1l_statements.py`).
+- The run took `statements-before.txt` (Stage 1, before any edit), `statements-after.txt` (after build 4), base
+  `ac70d2c87` and `--allow-new allowed-new.txt`. It reports PASS: all 61 named constants of the first dump are the
+  same (kind, stored type, a definition's stored value). Both example heads are unchanged. There is no axiom in the
+  modules (`logs/statements-compare.out`).
+- **Exactly two new public constants, the two ruled additions,** `rotInv_dirac_one` and `zeroEntropyCarried_model`.
+  There are 46 new private constants: the helpers, and Lean's `congr_simp`, `eq_def`, `induct` and `splitter` for
+  the private definitions. The internal names went from 9 to 74 and are not compared.
+- The import of `Outside/OAI015Maximal` moved no stored statement of `ZeroEntropyNames`.
+- **The control on the same two dumps** plants six faults; all 6 are reported, "the check can fail"
+  (`logs/statements-compare--control.out`):
+  - a changed stored type;
+  - a changed definition value;
+  - a missing leaf;
+  - a theorem made a definition;
+  - a new public constant off the list;
+  - an axiom.
+
+**Axioms of every declaration of the four modules, from the built tree** (`lean/Axioms.lean` →
+`axioms-after.txt`, read by `tools/fs131_in1l_axioms.py`; `logs/axioms-check.out`): PASS. There are 109 records:
+
+| module | records |
+|---|---|
+| `ChainAtTA` | 39 |
+| `HaarMultiple` | 11 |
+| `SolenoidErgodic` | 1 |
+| `ZeroEntropyNames` | 58 |
+
+- 104 rest on the standard three or fewer.
+- 5 are not mine and rest also on `sorryAx`, every `sorry` coming from the three leaves not mine:
+  `entropySplit`, `zeroEntropyCarried`, `noRamifiedStableDyadic_of_tca`, `mrPlus`,
+  `min_localBound_five_le_chromaticNumber_closed`.
+- **None rests on the declared printed theorem.**
+
+The controls:
+- **The planted record**, `positive_entropy_rigidity_of_polishSpace`, which rests on
+  `HadwigerNelson.Rigidity.positive_entropy_rigidity`, is reported ("PLANT reported").
+- **A planted copy of the output** adds `sorryAx` to `maxMultiple_self` and the declared theorem to
+  `measurableSet_TA`. It fails with three lines and exit 1 (`logs/axioms-check-planted.out`).
+
+**The environment linters**: `lake lint --no-build -- --no-build --trace` under the slot returns `exit=0`,
+`-- Linting passed for Proofs.`, with 14 linters passed (`logs/lint-1.log`).
+
+**Doubled names on the joined tree** (`./scripts/dupnames.sh` under the slot): `OK — no name is declared by two
+modules (24 generated on demand)`, `exit=0` (`logs/dupnames-1.log`). One name is new since the previous run, the
+generated `OAI158.angularSum.eq_1`, not from my files.
+
+**The architecture check fails on one cell, which is mine to report and not mine to edit.** `tools/check_architecture.py`
+fails with `FAIL imports of Rigidity/ZeroEntropyNames: stated-only [], real-only ['Outside/OAI015Maximal']`
+(`logs/arch-1.out`): the N8 import line is real, and `ARCHITECTURE.md`'s row does not list it. `ARCHITECTURE.md` is
+outside my brief's touches. The edit is drafted below.
+
+**Spec examples**: the three `#guard`s on `badStarts` and the two `example`s passed in every build (they are elaborated
+there).
+
+## Drafts for the landing
+
+### `scripts/Axioms.lean` — the CLEAN block
+
+This is `data/fs131/in1l/audit-block.lean`, generated from the built tree by `tools/fs131_in1l_audit_block.py`. It
+holds 58 `#print axioms` lines: every public record of the four modules on the standard three, Lean's generated names
+left out. The five records resting on `sorryAx` are listed there in a comment and left out. **Slot:** the end of CLEAN,
+just above the PURCHASED banner, with the chain's other modules when they land.
+
+### `ARCHITECTURE.md` § 3, the row of `Rigidity/ZeroEntropyNames`
+
+- **Its imports cell**, which reads `` `Rigidity/Entropy` ``, becomes `` `Rigidity/Entropy`, `Outside/OAI015Maximal` ``.
+  This makes the architecture check pass.
+- **Its description**: "**FS-131 (FS131-KN7), skeleton: 8 leaves `sorry`.**" becomes "**FS-131 (FS131-KN7, proved by
+  FS131-IN1L): no `sorry`.**", and "**Leaves:**" becomes "**Proved (FS131-IN1L):**".
+- **The rows of `Rigidity/HaarMultiple` and `Rigidity/SolenoidErgodic`**: the same change of "skeleton … `sorry`" to
+  "proved by FS131-IN1L".
+- **The row of `Rigidity/ChainAtTA`**:
+  - `measurableSet_TA`, `rot_preimage_TA` and `exists_nonTorsion_unitVector` move from its leaves to its proved list;
+  - `rotInv_dirac_one` and `zeroEntropyCarried_model` are added;
+  - the leaves left are `entropySplit`, `zeroEntropyCarried` and `noRamifiedStableDyadic_of_tca`.
+
+### Module docstrings now stale (prose only; the files' authors or the landing)
+
+- **`Rigidity/ChainAtTA`**: the `**Leaves (`sorry`)…**` paragraph names `measurableSet_TA`, `rot_preimage_TA` and
+  `exists_nonTorsion_unitVector` (module C0), which are now proved. The **Inhabitants** paragraph can name
+  `zeroEntropyCarried_model`.
+- **`Rigidity/HaarMultiple`, `Rigidity/ZeroEntropyNames`, `Rigidity/SolenoidErgodic`**: "(…; skeleton)" in each title.
+- **`Rigidity/ZeroEntropyNames`**: "It is stated here under a name of this library because lane P's port … is not yet
+  joined; at the join its proof is that theorem" is now done. The proof is
+  `Outside.OAI015.excessiveOccupation_measure_bound`.
+
+  A docstring edit recompiles the module's dependents (`LEAN.md` § Building): today that is only `Proofs`.
+
+### Models of the hypotheses, for the landing's reading
+
+The vacuity scan is silent on these modules, as on `Arith/UpperHalf`: no tracked carrier is a binder. Each structure
+of hypotheses, its kernel model, and whether the library holds it:
+
+| statement(s) | hypotheses | model | in the library? |
+|---|---|---|---|
+| `maxMultiple_le_measure_univ`, `sub_maxMultiple_add`, `not_smul_le_sub_maxMultiple` | `τ` finite, `m` a probability (`c ≠ 0`) | `τ = m` any probability; `maxMultiple_self` exercises them | yes: `maxMultiple_self` |
+| `map_sub_maxMultiple` | `e : Y ≃ᵐ Y` with `τ.map e = τ`, `m.map e = m` | `e = MeasurableEquiv.refl Y`, at `τ = m = dirac ()` (`Measure.map_id`) | **no** — draft below |
+| N2, N3, N6, N8; EN2-ZE | a probability `μ`, `T` measure-preserving, `P` measurable (and `0 < θ`, `B` measurable) | the point mass on `Unit`, `id`, the one-label `P`; `θ = 1`, `B = univ` | yes for EN2-ZE (`zeroEntropyNames_model`, degenerate, as its docstring says); the rest by the same object |
+| `card_words_badStarts_le` (EN2-CNT) | `a ≥ 1`, `k ≥ 1`, `2 ≤ g`, `#𝒢 ≤ g`, `θ ≥ 0`, `k ≤ n` | the entry's (`a = 2`, `k = 3`, `𝒢 = {000}`, `g = 2`, `θ = 9/10`, `n = 13`) | yes: the `example` |
+| `rpow_mul_exp_le_exp` | `1 ≤ a`, `0 ≤ θ`, `θ log 2a ≤ β/8`, `0 ≤ n`, `k ≤ θ n` | `a = 2`, `θ = 1/8`, `β = log 4`, `n = 16`, `k = 2` (equality in the third and fifth) | **no** — draft below |
+| `IsErgodicOn.null_or_conull_of_ae_invariant` | strict ergodicity, `s` measurable and almost invariant | the trivial action on `Unit`, `Λ = ⊤`, `s = univ` | yes: the `example` (ergodicity), with `s = univ` |
+| `measurableSet_TA`, `zeroEntropyCarried_model` | `[NumberField F]` | `F = ⊥` (`Instances.UpperHalfValues.instNumberFieldBot`, downstream) | yes, downstream |
+
+Draft models, for the landing to place. Both elaborate (`data/fs131/in1l/work/ModelDrafts.lean`,
+`logs/lean-models-2.log`; exit 0):
+
+```lean
+-- `map_sub_maxMultiple`'s hypotheses, at the identity:
+example : (Measure.dirac () : Measure Unit).map (MeasurableEquiv.refl Unit) = Measure.dirac () := Measure.map_id
+-- `rpow_mul_exp_le_exp`'s hypotheses, non-degenerate:
+example : (1 : ℝ) ≤ 2 ∧ (0 : ℝ) ≤ 1 / 8 ∧ 1 / 8 * Real.log (2 * 2) ≤ Real.log 4 / 8 ∧ (0 : ℝ) ≤ 16 ∧
+    (2 : ℝ) ≤ 1 / 8 * 16 := by
+  refine ⟨by norm_num, by norm_num, ?_, by norm_num, by norm_num⟩
+  norm_num
+  linarith
+```
+
+### `LEAN.md` § Searching — Lean (Keryx files; each is a new bullet at the section's end)
+
+- `linarith` with a hypothesis in context about a module's definition `f` that takes instance arguments
+  (`(badStarts 𝒢 w : ℝ) ≤ θ * n`) makes Lean generate `f.congr_simp` in that module. It is a public constant that a
+  statement dump reports and no proof uses. The preprocessing normalizes the atoms. `Environment.contains` skips
+  realized constants by default, so probe with `env.contains n (skipRealize := false)`
+  (`data/fs131/in1l/work/ZENBisect.lean`). Close such a step by `le_trans` and `add_le_add` (FS131-IN1L).
+- `Finset.mem_filter.mpr` against a filter that a `classical` definition built (`visits`) fails with "synthesized type
+  class instance is not definitionally equal". `rw [Finset.filter_congr_decidable]` first (FS131-IN1L).
+- A predicate written inline with a proof about a list's length (`∃ h : k ≤ l.length, block l h ∈ 𝒢`) blocks
+  `rw [List.ofFn_fin_append]` under it. State it as a definition on the list (`GoodL 𝒢 l`) and rewrite the argument.
+  Sums over `Fin (k + r) → α` and `Fin (r + 1) → α` split by `(Fin.appendEquiv k r).sum_comp` and
+  `(Fin.consEquiv _).sum_comp` with `Fintype.sum_prod_type` (`Rigidity/ZeroEntropyNames`, FS131-IN1L).
+- At the pin:
+  - `ENNReal.mul_le_mul_iff_right (h0) (hinf) : a * b ≤ a * c ↔ b ≤ c` (there is no `ENNReal.mul_le_mul_left`);
+  - `Real.exp_lt_one_iff`; there is no `Rat.cast_ite`;
+  - `AddMonoidHom.finset_sum_apply` and `continuous_finset_sum` are deprecated for `finsetSum_apply` and
+    `continuous_finsetSum`;
+  - `Module.Basis.span` and `Module.Basis.coe_span_apply` carry the `Module.` prefix;
+  - `omit [...] in` goes before a docstring, never after it;
+  - `obtain ⟨j, hj, rfl⟩ := Finset.mem_image.mp hj` with the old `hj` in scope fails ("dependent elimination"):
+    use `Finset.image_subset_iff`;
+  - `Circle.exp` is a `C(ℝ, Circle)` (`Circle.exp.continuous`), and `Circle.coe_pow` and `Circle.coe_inj` move
+    between `Circle` and `ℂ` (FS131-IN1L).
+- `{f : G → ℂ | ∃ ψ : G →+ ℝ, ∀ g, f g = Circle.exp (ψ g)}` is measurable for the product σ-algebra when `G` is
+  countable and embeds in a finite-dimensional `ℚ`-space. It is a σ-compact image: rational coordinates come from a
+  basis chosen inside `G` (`exists_linearIndependent`), and the denominators clear by `Submodule.span_induction`
+  (`ChainAtTA`'s private `exists_rat_coords` and `measurableSet_archFun`, FS131-IN1L).
+
+### Statement observations for the planner (no statement changed)
+
+Five hypotheses are not read by their proofs. Each is referenced by `have _ := h` with a `--` comment, because the
+build's `unusedVariables` linter names unread hypotheses:
+- `hc : 0 < c` of `mul_card_heavyNames_le`;
+- `hγ : 0 ≤ γ` of `mul_measureReal_light_le_blockEntropy`;
+- `hθ : 0 ≤ θ` of `rpow_mul_exp_le_exp`;
+- `hθ : 0 ≤ θ` and `hn : k ≤ n` of `card_words_badStarts_le`.
+
+Each statement is true without its hypothesis. They are harmless: true at every use site, and the entries state them.
+Not a defect.

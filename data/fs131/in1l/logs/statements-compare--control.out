@@ -1,0 +1,63 @@
+compared: 61 named constants of the first dump (types; values of definitions), 2 example heads of the base files
+axioms of the modules: [] before, ['HadwigerNelson.Rigidity.planted_axiom'] after
+internal (not compared): 9 before, 74 after
+new public constants in the second dump: 3 (allow-list: 2)
+  NEW THM HadwigerNelson.Rigidity.planted_new_public
+  NEW THM HadwigerNelson.Rigidity.rotInv_dirac_one
+  NEW THM HadwigerNelson.Rigidity.zeroEntropyCarried_model
+new private constants in the second dump: 46
+  NEW PRIVATE THM HadwigerNelson.Rigidity.conj_mem_unitVectors
+  NEW PRIVATE THM HadwigerNelson.Rigidity.eq_zero_of_mem_span
+  NEW PRIVATE THM HadwigerNelson.Rigidity.exists_rat_coords
+  NEW PRIVATE THM HadwigerNelson.Rigidity.measurableSet_archFun
+  NEW PRIVATE THM HadwigerNelson.Rigidity.mem_torsion_mul_arch_iff
+  NEW PRIVATE THM HadwigerNelson.Rigidity.pow_three_add_four_I
+  NEW PRIVATE THM HadwigerNelson.Rigidity.rot_conj_rot
+  NEW PRIVATE THM HadwigerNelson.Rigidity.rot_mem_TA
+  NEW PRIVATE THM HadwigerNelson.Rigidity.isFiniteMeasure_maxMultiple_smul
+  NEW PRIVATE THM HadwigerNelson.Rigidity.maxMultiple_ne_top
+  NEW PRIVATE DEF HadwigerNelson.Rigidity.GoodL
+  NEW PRIVATE DEF HadwigerNelson.Rigidity.badSetL
+  NEW PRIVATE THM HadwigerNelson.Rigidity.badSetL.congr_simp
+  NEW PRIVATE DEF HadwigerNelson.Rigidity.badSum
+  NEW PRIVATE THM HadwigerNelson.Rigidity.badSum.congr_simp
+  NEW PRIVATE THM HadwigerNelson.Rigidity.badSum_le
+  NEW PRIVATE THM HadwigerNelson.Rigidity.card_badSetL_cons
+  NEW PRIVATE THM HadwigerNelson.Rigidity.card_badSetL_drop_le
+  NEW PRIVATE THM HadwigerNelson.Rigidity.card_badSetL_ofFn_le
+  NEW PRIVATE THM HadwigerNelson.Rigidity.exists_geom_tail_le
+  NEW PRIVATE DEF HadwigerNelson.Rigidity.goodSum
+  NEW PRIVATE THM HadwigerNelson.Rigidity.goodSum.congr_simp
+  NEW PRIVATE THM HadwigerNelson.Rigidity.goodSum_eq_zero_of_lt
+  NEW PRIVATE THM HadwigerNelson.Rigidity.goodSum_le
+  NEW PRIVATE THM HadwigerNelson.Rigidity.image_badSetL_drop_subset
+  NEW PRIVATE DEF HadwigerNelson.Rigidity.listBlock
+  NEW PRIVATE THM HadwigerNelson.Rigidity.listBlock.congr_simp
+  NEW PRIVATE THM HadwigerNelson.Rigidity.listBlock_ofFn_append
+  NEW PRIVATE THM HadwigerNelson.Rigidity.measureReal_nameOf_preimage
+  NEW PRIVATE THM HadwigerNelson.Rigidity.mul_le_negMulLog_of_lt_exp
+  NEW PRIVATE THM HadwigerNelson.Rigidity.nameCell_eq_preimage
+  NEW PRIVATE DEF HadwigerNelson.Rigidity.singles
+  NEW PRIVATE THM HadwigerNelson.Rigidity.singles.congr_simp
+  NEW PRIVATE THM HadwigerNelson.Rigidity.singles.eq_def
+  NEW PRIVATE THM HadwigerNelson.Rigidity.singles.induct
+  NEW PRIVATE DEF HadwigerNelson.Rigidity.singles.match_1.splitter
+  NEW PRIVATE THM HadwigerNelson.Rigidity.singles_cons_of_not_good
+  NEW PRIVATE THM HadwigerNelson.Rigidity.singles_le_card_badSetL
+  NEW PRIVATE THM HadwigerNelson.Rigidity.singles_le_length
+  NEW PRIVATE THM HadwigerNelson.Rigidity.singles_nil
+  NEW PRIVATE THM HadwigerNelson.Rigidity.singles_of_good
+  NEW PRIVATE THM HadwigerNelson.Rigidity.sum_measureReal_nameCell
+  NEW PRIVATE DEF HadwigerNelson.Rigidity.weightSum
+  NEW PRIVATE THM HadwigerNelson.Rigidity.weightSum.congr_simp
+  NEW PRIVATE THM HadwigerNelson.Rigidity.weightSum_eq_add
+  NEW PRIVATE THM HadwigerNelson.Rigidity.weightSum_le
+examples in the working files that the base does not hold: 0
+VALUE    DEF HadwigerNelson.Rigidity.maxMultiple: the stored definition differs
+KIND     HadwigerNelson.Rigidity.measure_frequentVisits_le: THM -> DEF
+TYPE     THM HadwigerNelson.Rigidity.card_words_badStarts_le: the stored statement differs
+MISSING  THM HadwigerNelson.Rigidity.rot_preimage_TA: in the first dump, not in the second
+AXIOMS   the modules declare axioms: [] before, ['HadwigerNelson.Rigidity.planted_axiom'] after
+NEW      THM HadwigerNelson.Rigidity.planted_new_public: a new public constant that the allow-list does not hold
+CONTROL: 6 of 6 planted faults reported — the check can fail
+exit=0

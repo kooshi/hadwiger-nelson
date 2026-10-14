@@ -381,8 +381,11 @@ theorem card_words_badStarts_le [Fintype α] [DecidableEq α] [Nonempty α] {k :
       ((singles_le_card_badSetL 𝒢 hk _).trans (Nat.add_le_add_right (card_badSetL_ofFn_le 𝒢 w) _)).trans
         (by omega)
     have hs' : (singles 𝒢 (List.ofFn w) : ℝ) ≤ θ * n + k := by
-      have : (singles 𝒢 (List.ofFn w) : ℝ) ≤ badStarts 𝒢 w + k := by exact_mod_cast hs
-      linarith
+      -- casts by `Nat.cast_le` and `rw`, no `simp`-based tactic over `badStarts`: one such tactic (the `linarith`
+      -- this replaced) made Lean generate `badStarts.congr_simp` in this module, a public constant.
+      have : ((singles 𝒢 (List.ofFn w) : ℕ) : ℝ) ≤ ((badStarts 𝒢 w + k : ℕ) : ℝ) := Nat.cast_le.mpr hs
+      rw [Nat.cast_add] at this
+      exact this.trans (add_le_add hb le_rfl)
     rw [← Real.rpow_natCast]
     exact Real.rpow_le_rpow_of_exponent_ge ht0 ht1 hs'
   have hsum : (W.card : ℝ) * t ^ (θ * n + k) ≤ ρ ^ n := by
@@ -674,11 +677,11 @@ theorem exists_forall_exp_le_measureReal_nameCell {m : MeasurableSpace X} (μ : 
     (Finset.univ : Finset (Fin n → Fin a)).filter fun w => (badStarts 𝒢 w : ℝ) ≤ θ * n
   have hWmem : ∀ x ∉ E, ∀ n, nameOf T P n x ∈ W n := by
     intro x hx n
-    simp only [W, Finset.mem_filter, Finset.mem_univ, true_and]
+    refine Finset.mem_filter.mpr ⟨Finset.mem_univ _, ?_⟩
     have h1 : (visits T B n x : ℝ) ≤ θ * n := by
       by_contra h
       exact hx ⟨n, not_le.mp h⟩
-    exact le_trans (by exact_mod_cast badStarts_nameOf_le_visits μ hk1 (Real.exp (-(β / 8 * k))) n x) h1
+    exact le_trans (Nat.cast_le.mpr (badStarts_nameOf_le_visits μ hk1 (Real.exp (-(β / 8 * k))) n x)) h1
   set N₁ := max k ⌈(k : ℝ) / θ⌉₊ with hN₁def
   have hWcard : ∀ n, N₁ ≤ n → ((W n).card : ℝ) ≤ Real.exp (β * n / 2) := by
     intro n hn
@@ -688,7 +691,7 @@ theorem exists_forall_exp_le_measureReal_nameCell {m : MeasurableSpace X} (μ : 
       rw [div_le_iff₀ hθpos] at h1
       linarith
     have h1 := card_words_badStarts_le hk1 𝒢 hg2 h𝒢g hθpos.le hkn
-    simp only [Fintype.card_fin] at h1
+    rw [Fintype.card_fin] at h1
     have hgpow : Real.exp (β / 8 * k) ^ (2 * n / k : ℝ) = Real.exp (2 * (β / 8) * n) := by
       rw [← Real.exp_mul]
       congr 1
