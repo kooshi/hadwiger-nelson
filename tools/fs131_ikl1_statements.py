@@ -14,7 +14,8 @@ unchanged must store every constant, generated ones too, identically) is looked 
   MISSING  absent from NEW's module                       -> FAIL
 NEW's constants of that module absent from REF are ADDED -> FAIL (nothing may be added to a module the line holds).
 A REF module NEW does not dump at all is MODULE-MISSING -> FAIL. NEW's modules absent from every REF are listed as
-NEW-MODULE (allowed: the job's own).
+NEW-MODULE (allowed: the job's own). `--allow-added NAME` (repeatable) admits NAME and the constants Lean generates
+under it (`NAME.<suffix>`) as ADDED-ALLOWED: the scratch copy's new declarations, never a change to an old one.
 
 --plant runs the comparison three more times on NEW changed in memory (one character of one stored type; one constant
 dropped; one constant added) and requires each to be reported, or exits 1. Exit 0 only when the real comparison is clean
@@ -45,8 +46,15 @@ def read(path):
     return mods
 
 
+ALLOWED = []
+
+
+def allowed(name):
+    return any(name == a or name.startswith(a + ".") for a in ALLOWED)
+
+
 def compare(refs, new, quiet=False):
-    counts = {"SAME": 0, "CHANGED": 0, "MISSING": 0, "ADDED": 0, "MODULE-MISSING": 0}
+    counts = {"SAME": 0, "CHANGED": 0, "MISSING": 0, "ADDED": 0, "ADDED-ALLOWED": 0, "MODULE-MISSING": 0}
     out = []
     for m, consts in refs.items():
         if m not in new:
@@ -66,8 +74,12 @@ def compare(refs, new, quiet=False):
                 counts["SAME"] += 1
         for name in nm:
             if name not in consts:
-                counts["ADDED"] += 1
-                out.append(f"ADDED {m} {name}")
+                if allowed(name):
+                    counts["ADDED-ALLOWED"] += 1
+                    out.append(f"ADDED-ALLOWED {m} {name}")
+                else:
+                    counts["ADDED"] += 1
+                    out.append(f"ADDED {m} {name}")
     newmods = [m for m in new if m not in refs]
     if not quiet:
         for l in out:
@@ -83,10 +95,14 @@ def main(argv):
     if "--new" not in argv:
         print("usage: fs131_ikl1_statements.py REF [REF ...] --new NEW [--plant]")
         return 2
-    i = argv.index("--new")
-    refpaths = [a for a in argv[:i] if not a.startswith("--")]
-    newpath = argv[i + 1]
     plant = "--plant" in argv
+    for j, a in enumerate(argv):
+        if a == "--allow-added":
+            ALLOWED.append(argv[j + 1])
+    argv = [a for j, a in enumerate(argv) if not (a == "--allow-added" or (j > 0 and argv[j - 1] == "--allow-added"))]
+    i = argv.index("--new")
+    newpath = argv[i + 1]
+    refpaths = [a for a in argv[:i] if not a.startswith("--")]
     refs = {}
     for p in refpaths:
         for m, c in read(p).items():

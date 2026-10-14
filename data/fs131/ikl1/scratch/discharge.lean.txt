@@ -1,0 +1,53 @@
+/-- **Hensel's count in the certificate link's words** (FS131-IKL1): at a stable prime not above `2` with
+`|𝓞 ⧸ P| = Q²`, every norm-one residue at level one has `Q^n` norm-one lifts at level `n + 1` (`card_res_fibre`). -/
+theorem henselCount_of_two_notMem [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) {Q : ℕ}
+    (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) : CertLink.HenselCount P Q :=
+  fun n hfin _ ht => card_res_fibre P h2 hQ n hfin ht
+
+/-- **The bound on new characters in the certificate link's words** (FS131-IKL1; FS-66's L1): at a stable prime not
+above `2` with `|𝓞 ⧸ P| = Q²`, a character of level `n + 1` not trivial on the kernel of the map to level one sums to at
+most `2Q^n` in modulus over the norm-one set — Lemma P's bound where it is new (`norm_charSum_new_le`), and `Q` times the
+bound one level down where it descends (`exists_addChar_descent`, `card_fibre`). -/
+theorem newCharBound_of_two_notMem [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) {Q : ℕ}
+    (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) : CertLink.NewCharBound P Q := by
+  classical
+  intro n
+  induction n with
+  | zero =>
+    rintro hfin ψ ⟨e, he, hψe⟩
+    have he0 : e = 0 := (res_zero P e).symm.trans he
+    exact absurd (by rw [he0, AddChar.map_zero_eq_one]) hψe
+  | succ n ih =>
+    show ∀ (hfin : (levelSet P (n + 2)).Finite) (ψ : AddChar (𝓞 (fieldI F) ⧸ P.P ^ (n + 2)) ℂ),
+      (∃ e, res P (n + 1) e = 0 ∧ ψ e ≠ 1) → ‖∑ s ∈ hfin.toFinset, ψ s‖ ≤ 2 * (Q : ℝ) ^ (n + 1)
+    intro hfin ψ hψ
+    haveI := finite_quot_pow P (n + 1)
+    have hfin' : (levelSet P (n + 1)).Finite := Set.toFinite _
+    by_cases hK : ∀ e, red P n e = 0 → ψ e = 1
+    · obtain ⟨ψ', hψ'⟩ := exists_addChar_descent P n ψ hK
+      have hnew : ∃ e, CertLink.toLevelOne P n e = 0 ∧ ψ' e ≠ 1 := by
+        obtain ⟨e, he, hψe⟩ := hψ
+        exact ⟨red P n e, (res_red P n e).trans he, fun h => hψe ((hψ' e).trans h)⟩
+      have hmaps : ∀ x ∈ hfin.toFinset, red P n x ∈ hfin'.toFinset := fun x hx =>
+        hfin'.mem_toFinset.2 (red_mem_levelSet P n (hfin.mem_toFinset.1 hx))
+      have hsum : ∑ s ∈ hfin.toFinset, ψ s = ((Q : ℝ) : ℂ) * ∑ t ∈ hfin'.toFinset, ψ' t := by
+        rw [← Finset.sum_fiberwise_of_maps_to hmaps, Finset.mul_sum]
+        refine Finset.sum_congr rfl fun t ht => ?_
+        have hc : ∀ x ∈ hfin.toFinset.filter (fun x => red P n x = t), ψ x = ψ' t := fun x hx => by
+          rw [hψ' x, (Finset.mem_filter.1 hx).2]
+        rw [Finset.sum_congr rfl hc, Finset.sum_const, card_fibre P h2 hQ n hfin (hfin'.mem_toFinset.1 ht),
+          nsmul_eq_mul]
+        push_cast
+        ring
+      have hih : ‖∑ t ∈ hfin'.toFinset, ψ' t‖ ≤ 2 * (Q : ℝ) ^ n := ih hfin' ψ' hnew
+      rw [hsum, norm_mul, Complex.norm_real, Real.norm_of_nonneg (Nat.cast_nonneg _), pow_succ (Q : ℝ) n]
+      have hQ0 : (0 : ℝ) ≤ Q := Nat.cast_nonneg _
+      nlinarith [mul_le_mul_of_nonneg_left hih hQ0]
+    · push Not at hK
+      obtain ⟨e, he, hψe⟩ := hK
+      have hb := norm_charSum_new_le P h2 hQ n hfin ψ ⟨e, he, hψe⟩
+      rw [card_levelSet_succ P h2 hQ (n + 1) hfin] at hb
+      have hQ1 : (0 : ℝ) < (Q : ℝ) + 1 := by positivity
+      refine hb.trans (le_of_eq ?_)
+      push_cast
+      field_simp

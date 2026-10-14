@@ -1,0 +1,23 @@
+ADDED-ALLOWED Proofs.HadwigerNelson.Rigidity.ClassRatio FS131IKL1Scratch.report
+ADDED-ALLOWED Proofs.HadwigerNelson.Rigidity.ClassRatio HadwigerNelson.Rigidity.newCharBound_of_two_notMem._simp_1_7
+ADDED-ALLOWED Proofs.HadwigerNelson.Rigidity.ClassRatio HadwigerNelson.Rigidity.newCharBound_of_two_notMem._simp_1_4
+ADDED-ALLOWED Proofs.HadwigerNelson.Rigidity.ClassRatio HadwigerNelson.Rigidity.newCharBound_of_two_notMem._simp_1_6
+ADDED-ALLOWED Proofs.HadwigerNelson.Rigidity.ClassRatio HadwigerNelson.Rigidity.newCharBound_of_two_notMem._simp_1_2
+ADDED-ALLOWED Proofs.HadwigerNelson.Rigidity.ClassRatio HadwigerNelson.Rigidity.newCharBound_of_two_notMem
+ADDED-ALLOWED Proofs.HadwigerNelson.Rigidity.ClassRatio HadwigerNelson.Rigidity.henselCount_of_two_notMem
+ADDED-ALLOWED Proofs.HadwigerNelson.Rigidity.ClassRatio HadwigerNelson.Rigidity.newCharBound_of_two_notMem._simp_1_5
+ADDED-ALLOWED Proofs.HadwigerNelson.Rigidity.ClassRatio HadwigerNelson.FibreCertSound.sum_le_nineteen
+ADDED-ALLOWED Proofs.HadwigerNelson.Rigidity.ClassRatio FS131IKL1Scratch.sorrySources._sparseCasesOn_3
+ADDED-ALLOWED Proofs.HadwigerNelson.Rigidity.ClassRatio FS131IKL1Scratch.sorrySources.match_1
+ADDED-ALLOWED Proofs.HadwigerNelson.Rigidity.ClassRatio HadwigerNelson.Rigidity.newCharBound_of_two_notMem._simp_1_3
+ADDED-ALLOWED Proofs.HadwigerNelson.Rigidity.ClassRatio FS131IKL1Scratch.sorrySources
+ADDED-ALLOWED Proofs.HadwigerNelson.Rigidity.ClassRatio FS131IKL1Scratch.sorrySources.match_3
+ADDED-ALLOWED Proofs.HadwigerNelson.Rigidity.ClassRatio HadwigerNelson.Rigidity.newCharBound_of_two_notMem._simp_1_1
+ADDED-ALLOWED Proofs.HadwigerNelson.Rigidity.ClassRatio FS131IKL1Scratch.sorrySources.match_6
+modules compared: 1 Proofs.HadwigerNelson.Rigidity.ClassRatio
+COUNTS SAME=230 CHANGED=0 MISSING=0 ADDED=0 ADDED-ALLOWED=16 MODULE-MISSING=0
+VERDICT PASS
+PLANT changed-type FIRED {'SAME': 229, 'CHANGED': 1, 'MISSING': 0, 'ADDED': 0, 'ADDED-ALLOWED': 16, 'MODULE-MISSING': 0}
+PLANT dropped FIRED {'SAME': 229, 'CHANGED': 0, 'MISSING': 1, 'ADDED': 0, 'ADDED-ALLOWED': 16, 'MODULE-MISSING': 0}
+PLANT added FIRED {'SAME': 230, 'CHANGED': 0, 'MISSING': 0, 'ADDED': 1, 'ADDED-ALLOWED': 16, 'MODULE-MISSING': 0}
+PLANTS 3/3
