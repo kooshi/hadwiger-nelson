@@ -37,20 +37,14 @@ backup --all`** after each commit. Agent ids: scratch `agents.txt`, copies `~/so
 - **Today's search** (SEARCH-2026-10-14, item 908): smaller class-ratio certificates at p = 19 and p = 11, each accepted by FS-66's
   frozen checker, in `data/search/2026-10-14/certs/` (read there; not copied to `data/fs66/`). Search queue row 24: done.
 
-## 3. Running now (four jobs)
+## 3. Running now (four jobs, 3.5 slots)
 
-1. **FS131-LDB1 — the density bound's landing** (tree `fs131-w10g`, branch `fs131-wldb` from `fs131-wdb3`): `main` merged in, the
-   full gate on one commit, the drafts. `Plane.oneAvoidingDensityBound : Plane.OneAvoidingDensityBound` (`[AmbrusEtAl2023]` Thm 1,
-   `m₁(ℝ²) ≤ 0.2470`) is proved on the standard three (item 910, my receipt). **Announcement rule (item 910):** reported as held only
-   when the gate is green on one commit, merged into `main`, and `main` checked equal to it outside `plans/` and `data/`. At its green
-   line and hand-back: check the commits after the green one touch only records; merge `--no-ff`; check; report to Kooshi; then the
-   filing (a Clerk; copy `data/fs131/briefs/scripts/mk-fs131-fc5.py`; fact-audit base `8eece67b0`; previous receipts
-   `data/fs133/ld1/gate/`).
-2. **FS131-KM15 — M15, the instances, `ℚ(√47)` first** (tree `fs131-wq1`, branch `fs131-wm15` from `fs131-wj` at `bda6a98f2`, item 919): typed, priced, then proved as far as its budget reaches; the density bound a hypothesis at most. **The join (FS131-IJN1) handed back, item 918**: the headline `Rigidity.min_localBound_five_le_chromaticNumber` (`Rigidity/ChainHeadline`) stated on `fs131-wj` with `hOA` and `hRow99` kept, its `sorryAx` through seven leaves of other lines (each proved or assigned, item 918); its drafts for the chain's landing in `fs131-wq1:data/fs131/ijn1/`.
-3. **FS131-ICM4 — M13's two dyadic certificates** (tree `fs131-wch`, branch `fs131-wcm4` from `fs131-wcm3` at `c0b6798ed`, item 923): the generic binary-field bridge, `colorable_four_dyadic_small` (Q ∈ {4, 8, 16, 32}) and `charSum_64_ge`; then the odd Lemma P folded onto `SqZeroInvT`. **ICM3 handed back, item 922**: `circleCos_bound` (new public module `Arith/CircleCos`), `charBound_one_exact_27` (through Weil, accepted), Lemma P with no unit 2, EN1-UQ4, and the public `ratioAtMost_of_two_notMem` that M15 reads (item 920). After ICM4, M13 rests on Weil, the standard three and `ratioAtMost_cert` (closed at the landing).
-4. **FS131-IKC4 — the bound at p = 19** (tree `fs131-wnf`, branch `fs131-wc17` from `fs131-wc16`, where `card_le_eleven` is proved on
-   the standard three, item 899): the search's reduced certificate (`data/search/2026-10-14/certs/v-p19-phi0-13-qs.json`, margin
-   1.607) through the present proved-sound checker first, measured; only the parts of form F2 the measurement needs (item 907).
+1. **FS131-FC6 — the density bound's filing** (the Clerk, tree `fs133-wk1`, branch `fs131-f6` from `main` at `2dfc01e82`, item 928): the 16 drafts of `plans/FS131-LDB1-landing.md` verbatim; fact-audit base `8eece67b0`. At its hand-back: read its `CHECK:` lines, rule, merge `--no-ff`, push.
+2. **FS131-IKL1 — the certificate link** (tree `fs132-wi1`, branch `fs131-wkl` from `fs131-wcm3` with `fs131-wc16` merged, item 929): K3–K5 in a module `ClassRatio` can import; `q = 11` closed, `q = 19` over a named hypothesis in `sum_le_eleven`'s shape.
+3. **FS131-ICM4 — M13's two dyadic certificates** (tree `fs131-wch`, branch `fs131-wcm4` from `fs131-wcm3`, item 923); `ClassRatio` is its file.
+4. **FS131-IKC4 — the bound at p = 19** (tree `fs131-wnf`, branch `fs131-wc17` from `fs131-wc16`); the certificate modules are its files.
+
+**Landed today since the last rewrite:** **the density bound** (FS131-LDB1, merged `2d71a0872`, item 927; `main` equal to the gated `7a2acfef8` outside `plans/` and `data/`; announced). **Handed back:** the join (FS131-IJN1, item 918), M13's leaves (FS131-ICM3, item 922), the instances (FS131-KM15, item 926: `χ(ℚ(√47)²) = 5` over `hOA`, through the headline's leaves and one link, `fs131-wm15` in `fs131-wq1`, whose build is current). **Reference compiled tree for `main`: `fs131-w10g`** (the gated build). **Counts on `main`:** audit 9,824 records (9,438 clean, 355 axiom-free, 26 imported, 5 purchases); `axioms=2 rests=27` unchanged; vacuity `declarations=20563`.
 
 ## 4. Where each line stands
 
@@ -73,13 +67,18 @@ copy (item 876); the `UnitCircle` and `ClassRatio` docstrings (items 897, 893) i
 
 ## 5. The queue (launch into each slot as it frees)
 
-1. **M15** (an implementer on the chain's line, after the join's headline): the instances, `ℚ(√47)` first.
-2. **The density bound's filing** at LDB1's merge (the Clerk, half a slot).
-3. **The chain's landing**: a lander joining `fs131-wj`, `fs131-wcm3`, `fs131-wc17` with `main`, closing `ratioAtMost_cert` (K3–K5's
-   link to `card_le_eleven` and the p = 19 bound), the full gate on one commit (item 808's rule), the filing; **then the W6
-   publication pass**, each irreversible step confirmed with Kooshi. The ~110 MB of generated p = 19 text (if F2 is built in full)
-   goes to him with that pass (item 902).
-4. Lemma P's dyadic form if ICM3 hands it on; F2's remaining parts if IKC4 needs them.
+1. **The chain's lander, part 1 — the join** (next free slot; tree `fs131-wq1`, whose build is current for `fs131-wm15`): a branch
+   from `fs131-wm15` merging `main` (trial: conflicts in `ARCHITECTURE.md`, `Proofs.lean`, `Plane/OneAvoidingDensity.lean`
+   add/add — `main`'s wins —, `scripts/Axioms.lean`, `scripts/assumptions-ledger.txt`) and `fs131-wcm3`; then the rulings
+   carried in § 4 and items 916, 918, 922, 926, 927: the chain's readers of the old `mOne` through the bridge; `hOA`
+   discharged by `Plane.oneAvoidingDensityBound` and `hRow99` by `ThreeFourColours.localBound_le_chromaticNumber_of_le_four`;
+   the M15 link deleted for `ratioAtMost_of_two_notMem`; `exists_I_integer` once; the old conditional retired; the two
+   corollaries `m₁ ≤ 0.2470`, `m₁ < 1/4` stated; one of `zeroEntropyCarried`/`…_of_numberField` removed; `archTop`'s binder;
+   the docstring sweep (28 "skeleton" titles; items 893, 897). **Part 2** at the hand-backs of FS131-ICM4, FS131-IKC4 and
+   FS131-IKL1: merge `fs131-wcm4`, `fs131-wc17`, `fs131-wkl`; `ratioAtMost_cert` one line; `q = 19`'s hypothesis
+   discharged; the full gate on one commit (item 808's rule); drafts; the filing. **Then the W6 publication pass**, each
+   irreversible step confirmed with Kooshi. The ~110 MB of p = 19 text, if F2 is built in full, goes to him then (item 902).
+2. F2's remaining parts if FS131-IKC4 needs them.
 
 Generators: `data/fs131/briefs/scripts/mk-*.py` on `mkbrief.py` (`fresh(JOB)` refuses a used id or a folder name used under any
 `data/fs13*/`). Gate every brief (`python3 .claude/skills/keryx/scripts/brief_gate.py all <brief>`) and **commit only inside `if
