@@ -266,9 +266,13 @@ neither paper here.
   `sorryAx` with the standard three, through the link only: the six floor and `L ≥ 5` statements. `tca_iff_five_le_localBound`:
   `sorryAx` and `kloosterman_bound`, through M13's `tca_of_five_le_localBound`. The seven `χ` statements:
   `[propext, sorryAx, Classical.choice, Quot.sound, Rigidity.positive_entropy_rigidity, StandingFive.kloosterman_bound]`.
-  Their `sorryAx` comes through the named leaves: the link, M13's six private leaves and `Plane/OneAvoidingDensity`'s
-  under the headline, and `RingScope` l. 247 if the headline reads it — item 918 named the headline's `sorryAx` as M13's
-  six and the density leaf.
+  **Where each `sorryAx` comes from** (`probes/SorryFrom.lean`, `.out`: the constants of the library reachable from a
+  declaration whose own type or value holds `sorryAx`, by FS131-IN1's reachability, copied). For
+  `chromaticNumber_planeOver_sqrt47_eq_five`: exactly the headline's seven leaves (`Plane.upperDensity_le_of_oneAvoidingDensityBound`,
+  `Rigidity.card_fibre`, `charBound_one_exact`, `chromaticNumber_le_four_of_small`, `norm_charSum_new_le`,
+  `ratioAtMost_cert`, `ratioAtMost_dyadic`) and `Rigidity.ratioAtMost_two_notMem_link`. `RingScope` l. 247 is not reached.
+  Controls: `stablePrime_card_sqrt47` prints `[]`, `five_le_localBound_sqrt47` prints the link alone, and the headline
+  prints its seven.
 - **Guarded lint** (`lake lint --no-build -- --no-build --trace` under the slot): exit 0, `-- Linting passed for Proofs.`,
   14 of 14 linters `(2/2) Passed!`, no finding (`data/fs131/km15/lint-1.txt`).
 - **Doubled names** (`./scripts/dupnames.sh`): OK, no name declared by two modules, and "no repeated name appeared or
