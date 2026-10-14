@@ -127,3 +127,24 @@ class group finite (30–50); A4 `𝔓̄ ≠ 𝔓` (conjugation fixing `𝓞/�
 lines, about 1,000 — from the plan, not from proved leaves.** No archimedean replacement exists: for totally real `F`, `L`
 is CM and every conjugate of a unit vector lies on the unit circle. Messaged to the coordinator with the proposal to take
 the split next (it takes the pair as an argument) and leave lane A to a job of its own.
+
+## Stage 3 — SAVED: the split, `Rigidity/EntropySplitMax`, its five leaves
+
+Written against `data/fs131/ij3/work/EntropySplitMax.lean` (rounds `logs/ES-1.log` … `ES-4.log`, the last exit 0 with **no
+warning**, in the farm with the lakefile's two options), then copied over the module: `git diff` removes the five
+`sorry` lines and adds proofs and one private helper. About 135 lines against KN8's plan (no number given there; its
+§ 3.4 per-leaf routes all went through as planned). **Re-priced:** the split was the cheapest lane of the job; the
+two hard leaves (KN8's "(i)'s measurability name, and (ii)'s complex-valued conditional expectation") are
+`StronglyMeasurable.integral_condExpKernel`, `setIntegral_condExp` and `condExp_ae_eq_integral_condExpKernel`, which take
+`ℂ`-valued functions directly.
+
+| leaf | route |
+|---|---|
+| `rotInv_sub_maxMultiple` | KN8's line: `map_sub_maxMultiple` at `MeasurableEquiv.smul g` |
+| `measure_haarSet_eq_zero` | KN8's (i)–(iv); (i) stated as its own private lemma `measurableSet_haarSet` (KN8's advice), read by step 3 |
+| `ksEntropy_eq_zero_of_not_smul_le` | KN8's line: the decomposition, the null Haar set under the trim, Lemma Γ almost everywhere, `ksEntropy_bind_eq_zero` (preservation from `ErgodicSMul`'s invariance, `measurePreserving_smul`) |
+| `entropySplit_of_admissiblePair` | KN8's line; `IsFiniteMeasure` of the remainder by `isFiniteMeasure_of_le` and `Measure.sub_le`; `p.u ∈ p.subgroup` at `n = ![1, 0]` |
+| `not_smul_dualHaar_le_dirac_one` | KN8's line: at `{1}ᶜ`; Haar null there would make its coefficient at `1` equal to `1` |
+
+Built at the next build (§ the last stage). The split's records rest on Lemma Γ and so on the leaves open in
+`Rigidity/Pieces` and below (`haar_or_zero_entropy`): their axioms are the last stage's print.
