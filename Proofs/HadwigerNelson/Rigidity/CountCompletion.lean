@@ -104,7 +104,7 @@ abbrev G := NumberField.mixedEmbedding.mixedSpace (fieldI F) × K F
 
 /-- `R → G_∅`, diagonally: the canonical embedding of `L` and `ιK`. -/
 def ιG : unitRing F →+ G F :=
-  AddMonoidHom.prod ((NumberField.mixedEmbedding (fieldI F)).toAddMonoidHom.comp (toL F).toAddMonoidHom) (ιK F)
+  AddMonoidHom.prod ((NumberField.mixedEmbedding (fieldI F)).toAddMonoidHom.comp (ofUnitRing F).toAddMonoidHom) (ιK F)
 
 theorem denseRange_ιG : DenseRange (ιG F) := by
   sorry

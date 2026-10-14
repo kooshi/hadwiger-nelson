@@ -1,0 +1,2 @@
+HadwigerNelson.Rigidity.mem_torsion_mul_arch_iff
+HadwigerNelson.Rigidity.exists_rat_coords

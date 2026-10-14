@@ -77,7 +77,7 @@ variable {G : Type*} [AddCommGroup G]
 
 /-- (i) of `measurableSet_TA`'s route: a character is a torsion character times an archimedean one exactly when one of
 its non-zero powers is archimedean (`⇐`: divide the lift by the power). -/
-private theorem mem_torsion_mul_arch_iff (χ : AddChar G Circle) :
+theorem mem_torsion_mul_arch_iff (χ : AddChar G Circle) :
     χ ∈ torsionChars G * archChars G ↔ ∃ N : ℕ, N ≠ 0 ∧ χ ^ N ∈ archChars G := by
   constructor
   · rintro ⟨t, ⟨N, hN, ht⟩, a, ⟨ψ, hψ⟩, rfl⟩
@@ -147,7 +147,7 @@ private theorem eq_zero_of_mem_span {W : Type*} [AddCommGroup W] [Module ℚ W] 
 space, there are finitely many additive coordinates `q j : G →+ ℚ` such that every additive `ψ : G → ℝ` is
 `∑ j, q j · t j` for some real `t` — `t j` is `ψ` at the `j`-th member of a `ℚ`-basis of the span of `G` chosen inside
 `G`. -/
-private theorem exists_rat_coords.{u} {W : Type u} [AddCommGroup W] [Module ℚ W] [FiniteDimensional ℚ W] (ι : G →+ W)
+theorem exists_rat_coords.{u} {W : Type u} [AddCommGroup W] [Module ℚ W] [FiniteDimensional ℚ W] (ι : G →+ W)
     (hι : Function.Injective ι) :
     ∃ (κ : Type u) (_ : Fintype κ) (q : κ → G →+ ℚ),
       ∀ ψ : G →+ ℝ, ∃ t : κ → ℝ, ∀ g, ψ g = ∑ j, (q j g : ℝ) * t j := by

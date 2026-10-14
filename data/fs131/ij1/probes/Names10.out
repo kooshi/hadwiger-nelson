@@ -1,0 +1,53 @@
+slot: waiting (ledger 20 + 4 > budget 22 GiB)
+slot: admitted ij1: mem 4 GiB (hard cap), cpus 1,2
+@Complex.abs_arg_lt_pi_div_two_iff : ∀ {z : ℂ}, |z.arg| < Real.pi / 2 ↔ 0 < z.re ∨ z = 0
+@Circle.arg_exp : ∀ {x : ℝ}, -Real.pi < x → x ≤ Real.pi → (↑(Circle.exp x)).arg = x
+Circle.exp_arg : ∀ (z : Circle), Circle.exp (↑z).arg = z
+Circle.exp_add : ∀ (x y : ℝ), Circle.exp (x + y) = Circle.exp x * Circle.exp y
+Circle.exp_nsmul : ∀ (x : ℝ) (n : ℕ), Circle.exp (n • x) = Circle.exp x ^ n
+Circle.exp_zero : Circle.exp 0 = 1
+@AddChar.map_nsmul_eq_pow : ∀ {A : Type u_1} {M : Type u_2} [inst : AddMonoid A] [inst_1 : Monoid M] (ψ : AddChar A M)
+  (n : ℕ) (x : A), ψ (n • x) = ψ x ^ n
+@AddChar.map_add_eq_mul : ∀ {A : Type u_1} {M : Type u_2} [inst : AddMonoid A] [inst_1 : Monoid M] (ψ : AddChar A M)
+  (x y : A), ψ (x + y) = ψ x * ψ y
+@nhds_induced : ∀ {α : Type u_1} {β : Type u_2} [T : TopologicalSpace α] (f : β → α) (a : β),
+  nhds a = Filter.comap f (nhds (f a))
+@nhds_inf : ∀ {α : Type u_1} {t₁ t₂ : TopologicalSpace α} {a : α}, nhds a = nhds a ⊓ nhds a
+@nhds_iInf : ∀ {α : Type u_1} {ι : Sort u_2} {t : ι → TopologicalSpace α} {a : α}, nhds a = ⨅ i, nhds a
+data/fs131/ij1/probes/Names10.lean:16:8: error(lean.unknownIdentifier): Unknown identifier `nhds_bot`
+@Filter.mem_iInf : ∀ {α : Type u_1} {ι : Type u_2} {s : ι → Filter α} {U : Set α},
+  U ∈ ⨅ i, s i ↔ ∃ I, I.Finite ∧ ∃ V, (∀ (i : ↑I), V i ∈ s ↑i) ∧ U = ⋂ i, V i
+@Filter.mem_inf_iff : ∀ {α : Type u_1} {f g : Filter α} {s : Set α}, s ∈ f ⊓ g ↔ ∃ t₁ ∈ f, ∃ t₂ ∈ g, s = t₁ ∩ t₂
+data/fs131/ij1/probes/Names10.lean:19:8: error(lean.unknownIdentifier): Unknown identifier `norm_nsmul`
+mixedEmbedding.latticeBasis_apply : ∀ (K : Type u_1) [inst : Field K] [inst_1 : NumberField K]
+  (i : Module.Free.ChooseBasisIndex ℤ (𝓞 K)),
+  (mixedEmbedding.latticeBasis K) i = (mixedEmbedding K) ((integralBasis K) i)
+@topologicalAddGroup_induced : ∀ {G : Type u_1} {H : Type u_2} [inst : TopologicalSpace G] [inst_1 : AddGroup G]
+  [IsTopologicalAddGroup G] {F : Type u_3} [inst_3 : AddGroup H] [inst_4 : FunLike F H G] [AddMonoidHomClass F H G]
+  (f : F), IsTopologicalAddGroup H
+@topologicalAddGroup_inf : ∀ {G : Type u_1} [inst : AddGroup G] {t₁ t₂ : TopologicalSpace G},
+  IsTopologicalAddGroup G → IsTopologicalAddGroup G → IsTopologicalAddGroup G
+@topologicalAddGroup_iInf : ∀ {G : Type u_1} {ι : Sort u_2} [inst : AddGroup G] {ts' : ι → TopologicalSpace G},
+  (∀ (i : ι), IsTopologicalAddGroup G) → IsTopologicalAddGroup G
+@Filter.isCountablyGenerated_pure : ∀ {α : Type u_1} (a : α), (pure a).IsCountablyGenerated
+@continuous_induced_dom : ∀ {α : Type u_1} {β : Type u_2} {f : α → β} {t : TopologicalSpace β}, Continuous f
+@continuous_bot : ∀ {α : Type u_1} {β : Type u_2} {f : α → β} {t : TopologicalSpace β}, Continuous f
+data/fs131/ij1/probes/Names10.lean:27:8: error(lean.unknownIdentifier): Unknown constant `Circle.continuous_exp`
+@Complex.continuousAt_arg : ∀ {x : ℂ}, x ∈ Complex.slitPlane → ContinuousAt Complex.arg x
+@pow_unbounded_of_one_lt : ∀ {R : Type u_1} [inst : Semiring R] [inst_1 : PartialOrder R] [IsStrictOrderedRing R]
+  [Archimedean R] {y : R} [ExistsAddOfLE R] (x : R), 1 < y → ∃ n, x < y ^ n
+data/fs131/ij1/probes/Names10.lean:30:8: error(lean.unknownIdentifier): Unknown identifier `Basis.repr`
+@LinearMap.continuous_of_finiteDimensional : ∀ {𝕜 : Type u_1} [hnorm : NontriviallyNormedField 𝕜] {E : Type u_2}
+  [inst : AddCommGroup E] [inst_1 : Module 𝕜 E] [inst_2 : TopologicalSpace E] [IsTopologicalAddGroup E]
+  [ContinuousSMul 𝕜 E] {F' : Type u_3} [inst_5 : AddCommGroup F'] [inst_6 : Module 𝕜 F'] [inst_7 : TopologicalSpace F']
+  [IsTopologicalAddGroup F'] [ContinuousSMul 𝕜 F'] [CompleteSpace 𝕜] [T2Space E] [FiniteDimensional 𝕜 E]
+  (f : E →ₗ[𝕜] F'), Continuous ⇑f
+@map_ratCast : ∀ {F : Type u_1} {α : Type u_2} {β : Type u_3} [inst : FunLike F α β] [inst_1 : DivisionRing α]
+  [inst_2 : DivisionRing β] [RingHomClass F α β] (f : F) (q : ℚ), f ↑q = ↑q
+Circle.coe_exp : ∀ (t : ℝ), ↑(Circle.exp t) = Complex.exp (↑t * Complex.I)
+data/fs131/ij1/probes/Names10.lean:34:47: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  SeminormedAddCommGroup (mixedEmbedding.mixedSpace K)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+seconds=272
+exit=1

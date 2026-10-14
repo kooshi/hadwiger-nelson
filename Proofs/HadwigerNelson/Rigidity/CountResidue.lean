@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Rigidity.CountTorus
+import Proofs.HadwigerNelson.Rigidity.TateModel
 import Proofs.HadwigerNelson.Rigidity.ClassRatio
 import Proofs.HadwigerNelson.Rigidity.FiniteZhang
 
@@ -40,18 +41,14 @@ noncomputable section
 
 variable (F : Subfield ℝ) [NumberField F]
 
-/-- `R = ℤ[U] ⊆ L`, as a ring map. -/
-def toL : unitRing F →+* fieldI F :=
-  RingHom.codRestrict (unitRing F).subtype (fieldI F) fun r => UnitRing.unitRingOver_le_planeOverSubring F r.2
-
 variable {F}
 
-theorem toL_mem_localRing (P : StablePrime F) (r : unitRing F) : toL F r ∈ P.localRing := by
+theorem ofUnitRing_mem_localRing (P : StablePrime F) (r : unitRing F) : ofUnitRing F r ∈ P.localRing := by
   sorry
 
-/-- `R → P.localRing`. -/
+/-- `R → P.localRing` (`R ⊆ L` is lane T's `ofUnitRing`). -/
 def toLocal (P : StablePrime F) : unitRing F →+* P.localRing :=
-  RingHom.codRestrict (toL F) P.localRing fun r => toL_mem_localRing P r
+  RingHom.codRestrict (ofUnitRing F) P.localRing fun r => ofUnitRing_mem_localRing P r
 
 /-- **The residue map of `R` at `P^m`.** -/
 def resR (P : StablePrime F) (m : ℕ) : unitRing F →+* 𝓞 (fieldI F) ⧸ P.P ^ m := (P.residue m).comp (toLocal P)
@@ -92,7 +89,7 @@ theorem exists_normOneL_residues (Φ : Finset (StablePrime F)) (hΦ : ∀ P ∈ 
 
 /-- A norm-one element of `L` is (the image of) an element of `R`. -/
 theorem exists_unitRing_of_normOneL {x : fieldI F} (hx : x ∈ normOneL F) :
-    ∃ r : unitRing F, toL F r = x ∧ ((r : ℂ) ∈ unitVectors F) := by
+    ∃ r : unitRing F, ofUnitRing F r = x ∧ ((r : ℂ) ∈ unitVectors F) := by
   sorry
 
 /-- **Lemma C (d)**, from `c·O′ ⊆ R`: residues zero at finitely many stable primes put an element of `R` in `N·R`. -/
