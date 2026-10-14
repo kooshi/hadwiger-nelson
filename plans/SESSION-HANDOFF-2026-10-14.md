@@ -15,12 +15,7 @@ when a decision is genuinely his, or when he checks in** — keep each short. Or
 then five colours with its two deductions, then the p-adic result; the density equality (FS-133) is in the queue.
 Nothing is said in public before it is formalized; no agent contacts anyone.
 
-**One decision is with him (told three times, each with the default):** whether to port the outside release's proof
-of its transfer theorem, which would turn two of the library's four declared outside theorems
-(`Outside.OAI158.proper_to_borel_weak`, and the new `Spectral.residual_fourier`, whose cone lies inside the first's)
-into theorems with no import. Two measurements: 314 lines ported in 11.5 minutes with five proof-line patches (item
-718); 1,236 further lines compiled here after seven one-word renames (item 719). My recommendation: yes, high
-confidence. **I start nothing on it without his word.**
+**His word on the port came at his check-in (W4, 2026-10-14): "yes to the port, and we'll stay on this version indefinitely. Scheduling the port is up to you."** The port of the release's transfer proof is approved (item 728 has my reading and the schedule: its planner takes the first full slot after the chain's next planner); the toolchain and Mathlib pin stay at v4.32.0 for good.
 
 **The machine and the network.** Laptop: 12 cores, 31 GB, 25 GB of disk free. Memory tool:
 `env SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 python3 scripts/slot.py --mem <GiB> --cpus <n> --wait 7200 --name <tag> -- <command>`.
@@ -111,9 +106,11 @@ The fractional-number chain is separable and can go last. Its landing will add a
 
 ## 5. The queue, as slots free (cap: three Opus slots, a Sonnet agent counts half)
 
-The landing's merge, report and filing → the chain's next planner (§ 4) → the density equality's `Defs`, then its
-lanes C and D → the chain's lanes N and C → the density equality's landing → the second reader → the p-adic
-planner → the port of the transfer's cone (on Kooshi's word) → FS131-KE1. Brief generators:
+The landing's merge, report and filing → the chain's next planner (§ 4) → the port's planner (approved, item 728;
+it settles first how the full port meets the two earlier partial ports and the density equality's copied
+definitions) → the density equality's `Defs`, then its lanes C and D, and the chain's lanes N and C, as slots
+free → the density equality's landing (with no new axiom, if the port is in first) → the second reader → the
+p-adic planner → FS131-KE1. Brief generators:
 `data/fs131/briefs/scripts/mk-*.py` on `mkbrief.py`; gate every brief
 (`python3 .claude/skills/keryx/scripts/brief_gate.py all <brief>`); an amendment is appended to the brief on disk,
 gated, and announced by one message; implementers `debruijn-implementer` with `model: "opus"`, planners `debruijn`,
