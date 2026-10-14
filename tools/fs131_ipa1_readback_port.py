@@ -35,6 +35,22 @@ that differ inside instance and proof arguments.  This job's table:
   * ADAPTED (plan § 4.3): a declaration whose text an adaptation rewrote.  The STRIP CHECK: at each application of a
     listed head with the listed number of arguments, the inserted argument (by position) is removed from this pin's
     erased print, which must then equal the release's; the full prints are not compared.
+FS131-IPB1's rules (lane B's remainder and lane C), each with its planted controls in `--self-test`:
+  * CLASS_PARAMS (on the standing word of the coordinator's item 769 ruling 2): ANTIDIAG's pattern for other Mathlib
+    classes — a projection takes its class's instance parameters as implicit arguments, which the erased print keeps;
+    the one listed argument (`Algebra.algebraMap`'s `[Semiring A]`, position 3) is written `_` in both erased prints.
+    Controls: another argument of the projection changed; the rule withdrawn;
+  * COEFF (the coordinator's ruling of 2026-10-14): `Polynomial.coeff` is `R[X] → ℕ →₀ R` at the release's pin and
+    `R[X] → ℕ → R` here, so `p.coeff n` is stored through the `Finsupp`'s coercion there; on the release's side the
+    coercion `DFunLike.coe (ℕ →₀ R) … (Polynomial.coeff p) n` is written `Polynomial.coeff p n`, only at the
+    declarations COEFF_LEMMAS lists, each then PIN-DIFFERENCE (COEFF).  Controls: another coercion head at a site; the
+    rule withdrawn; a listed lemma taken out of the list;
+  * STRIP (the ruled cascade of `frequencyLaw`, the coordinator's item 767 ruling (a) and item 768, and the closed-term
+    adaptations, plan § 4.3): the table below, measured by the read-back, per declaration the binders and the heads
+    whose applications carry inserted arguments.  Controls: one other binder inserted; a second `MeasurableInv`
+    inserted; another argument changed at a `center` site; the map changed at a `ProbabilityMeasure.map` site; the rule
+    withdrawn; a head listed where it does not occur.
+A LABEL holding a `/` is a directory under the repository root (FS131-IPB1's labels are `data/fs131/ipb1/readback/…`).
 Level one (risk 2 of the plan, § 4.7): every Mathlib or core constant that the modules' stored types and definitions'
 values name OUTSIDE instance and proof arguments, printed one level down at both pins (`level1`).
 
@@ -71,7 +87,9 @@ STATE = {"mods": None, "label": None}
 
 
 def label_dir(label):
-    return BASE / label
+    # FS131-IPB1: a label holding a `/` is a directory under the repository root (that job's prints live under
+    # `data/fs131/ipb1/readback/`); a bare label is FS131-IPA1's, under BASE
+    return ROOT / label if "/" in label else BASE / label
 
 
 def mods_file(label):
@@ -150,15 +168,95 @@ def normalise(s, renamed=None, here=False, erased=False):
         for a, b in (RENAMED if renamed is None else renamed).items():
             s = s.replace(f"(c {a} [", f"(c {b} [")
         s = rb.unfold(s, erased)
+        if STATE.get("coeff", True):
+            s = coeff_rewrite(s)
     return s
 
 
 ANTIDIAG = "Finset.HasAntidiagonal.antidiagonal"
+# CLASS_PARAMS (FS131-IPB1, on the standing word of the coordinator's item 769 ruling 2): a projection of a Mathlib
+# class takes the class's instance parameters as implicit arguments, so the erased print keeps them, and the hierarchy's
+# reflow between the pins reaches them by another instance path.  head -> the position of that one argument, written `_`
+# in both erased prints.  `Algebra.algebraMap {R} {A} {_ : CommSemiring R} {_ : Semiring A} [self : Algebra R A]`: its
+# `[Semiring A]` (position 3) is `CommSemiring.toSemiring L _` / `Ring.toSemiring _ _` at the release and
+# `DivisionSemiring.toSemiring L _` here (seven lemmas and `realLine` of `NumberFields`).
+CLASS_PARAMS = {"Algebra.algebraMap": 3}
+# COEFF (the coordinator's ruling of 2026-10-14, by message): `coeff_rewrite` below, on the release's side; the
+# constants it may touch, by name — each then classed PIN-DIFFERENCE (COEFF).
+COEFF_HEAD = "DFunLike.coe"
+COEFF_LEMMAS = {"§.AlgebraicCayley.reciprocal_denominator", "§.AlgebraicCayley.coeff_polyLinear"}
 PIN_DIFFERENCE = {"§.Spectral.instCommGroupDiscreteE", "§.Spectral.instCommGroupDiscreteF",
                   "§.InvariantMean.instAddCommGroupPeriodGroup"}
 RULED = {"§.DifferenceFourier.differenceLaw_probability": ["MeasurableMul₂", "MeasurableInv"]}
 # label -> [(head constant, number of arguments here, position of the inserted argument)]
 ADAPTED = {}
+# STRIP (FS131-IPB1): the ruled cascade of `frequencyLaw` (the coordinator's item 767 ruling (a), and item 768) and the
+# closed-term adaptations of `Outside/OAI158Centers` (plan § 4.3), MEASURED by that job's read-back of Centers: every
+# declaration listed here, and no other, may differ from the release's erased print, and only by
+#   * the binders it lists (one of each class, the release's own section variables `[MeasurableMul₂ G] [MeasurableInv
+#     G]`, `Centers.lean:426`) — on the stored type's `∀`s and, for a definition, on its value's `fun`s; and
+#   * the arguments a ruled head takes at this pin and not at the release's, at each application of a head it lists:
+#     `frequencyLaw` and `center` take the two instances after `e` (positions 4, 5, at six or more arguments), and
+#     `ProbabilityMeasure.map` takes the map's measurability (position 6 of exactly seven: `ProbabilityMeasure.map ν
+#     {f} (f_aemble : AEMeasurable f ν)` at v4.32.0, `ProbabilityMeasure.map ν f` at v4.34.1).
+# Each listed head must occur in the declaration's prints.  Verdict RULED where a binder or a cascade head is listed
+# (the release's statement with exactly the ruled binders and arguments inserted), ADAPTED where only
+# `ProbabilityMeasure.map` is (the release's print once the inserted measurability is removed).
+CASCADE_HEADS = {"§.CosetCenter.Embedding.frequencyLaw": (6, False, (4, 5)),
+                 "§.CosetCenter.Embedding.center": (6, False, (4, 5)),
+                 "MeasureTheory.ProbabilityMeasure.map": (7, True, (6,)),
+                 # `Outside/OAI158RelativeCenters`: the two definitions whose values name `center` take the two
+                 # instances after `[MeasurableSpace G]` (`{Y G} [MeasurableSpace Y] [CommGroup G] [MeasurableSpace G]`,
+                 # positions 5, 6, at seven or more arguments; `RelativeCenters.lean:214–215`)
+                 "§.RelativeCenters.centerMap": (7, False, (5, 6)),
+                 "§.RelativeCenters.centerKernel": (7, False, (5, 6))}
+_MM = ["MeasurableMul₂", "MeasurableInv"]
+_FL, _CE, _PM = "§.CosetCenter.Embedding.frequencyLaw", "§.CosetCenter.Embedding.center", \
+    "MeasureTheory.ProbabilityMeasure.map"
+_CM, _CK = "§.RelativeCenters.centerMap", "§.RelativeCenters.centerKernel"
+STRIP = {
+    # the ruled definitions (Centers.lean:496–501 and the definition after it): the two binders
+    "§.CosetCenter.Embedding.frequencyLaw": (_MM, []),
+    "§.CosetCenter.Embedding.center": (_MM, [_FL]),
+    # the three whose `omit … in` was dropped (`drop_omit` 578, 600, 615): the two binders
+    "§.CosetCenter.Embedding.center_mem_coset": (_MM, [_CE]),
+    "§.CosetCenter.Embedding.quotient_center": (_MM, [_CE]),
+    "§.CosetCenter.Embedding.center_mem_ordinary_iff": (_MM, [_CE]),
+    # statements that name `frequencyLaw` or `center` and already had the two binders at the release
+    "§.CosetCenter.Embedding.frequencyLaw_measure": ([], [_FL]),
+    "§.CosetCenter.Embedding.measurable_frequencyLaw": ([], [_FL]),
+    "§.CosetCenter.Embedding.frequencyLaw_shift": ([], [_FL, _PM]),
+    "§.CosetCenter.Embedding.measurable_center": ([], [_CE]),
+    "§.CosetCenter.Embedding.center_mul_j": ([], [_CE]),
+    "§.CosetCenter.Embedding.center_eq_of_mem_coset": ([], [_CE]),
+    "§.CosetCenter.Embedding.center_eq_iff": ([], [_CE]),
+    "§.CosetCenter.Embedding.preimage_center_singleton": ([], [_CE]),
+    "§.CosetCenter.Embedding.measurable_center_fixed": ([], [_CE]),
+    "§.CosetCenter.Embedding.frequencyLaw_equiv": ([], [_FL, _PM]),
+    "§.CosetCenter.Embedding.center_equivariant": ([], [_CE, _PM]),
+    # closed-term adaptations only (`adaptations` 350, 371)
+    "§.Location.center_translate": ([], [_PM]),
+    "§.Location.center_orthogonal": ([], [_PM]),
+    # `Outside/OAI158RelativeCenters` (FS131-IPB1, measured by its read-back `data/fs131/ipb1/readback/laneB`):
+    # the two definitions whose values name `center`, gaining the two binders through variable inclusion
+    "§.RelativeCenters.centerMap": (_MM, [_CE]),
+    "§.RelativeCenters.centerKernel": (_MM, [_CE]),
+    # the one whose `omit … in` was dropped (`drop_omit` 343)
+    "§.RelativeCenters.centerMap_mem_ordinary_iff": (_MM, [_CM]),
+    # statements that name `center`, `centerMap` or `centerKernel` and already had the two binders
+    "§.CosetCenter.Embedding.finite_uniform_centers": ([], [_CE]),
+    "§.CosetCenter.Embedding.center_law_ordinary": ([], [_CE, _PM]),
+    "§.RelativeCenters.positive_mass_finite_centers": ([], [_CE]),
+    "§.RelativeCenters.measurable_centerMap": ([], [_CM]),
+    "§.RelativeCenters.centerMap_law_ordinary": ([], [_CM]),
+    "§.RelativeCenters.centerMap_equivariant": ([], [_CM]),
+    "§.RelativeCenters.measurable_fiberCenter": ([], [_CE]),
+    "§.RelativeCenters.centerKernel_markov": ([], [_CK]),
+    "§.RelativeCenters.centerKernel_apply": ([], [_CK, _CE]),
+    "§.RelativeCenters.condDistrib_centerMap": ([], [_CM, _CK]),
+    "§.RelativeCenters.centerKernel_comp_map": ([], [_CK, _CM]),
+    "§.RelativeCenters.finite_center_reduction": ([], [_CM]),
+}
 KEYWORDS = ("c", "nat", "str", "proj", "Sort", "let", "(fvar)", "(mvar)")
 
 
@@ -245,7 +343,7 @@ def rewrite(t, f):
 
 
 def antidiag_erase(s):
-    if ANTIDIAG not in s:
+    if ANTIDIAG not in s and not any(h in s for h in CLASS_PARAMS):
         return s
     t = parse(s)
     assert unparse(t) == s
@@ -253,18 +351,102 @@ def antidiag_erase(s):
     def f(h, args):
         if isinstance(h, list) and len(h) == 3 and h[0] == "c" and h[1] == ANTIDIAG and len(args) >= 2:
             args = args[:1] + ["_"] + args[2:]
+        if isinstance(h, list) and len(h) == 3 and h[0] == "c" and h[1] in CLASS_PARAMS:
+            i = CLASS_PARAMS[h[1]]
+            if len(args) > i:
+                args = args[:i] + ["_"] + args[i + 1:]
         return args
     return unparse(rewrite(t, f))
 
 
-def strip_binders(s, classes):
+def coeff_rewrite(s):
+    """COEFF (FS131-IPB1, the coordinator's ruling of 2026-10-14): on the RELEASE's side only, every
+    `DFunLike.coe (Finsupp ℕ R) ℕ _ _ (Polynomial.coeff R _ p) n` (six arguments; the first a `Finsupp` over `Nat`;
+    the fifth `Polynomial.coeff` with three) is written `Polynomial.coeff R _ p n`.  Mathlib's `Polynomial.coeff` is
+    `R[X] → ℕ →₀ R` at v4.34.1 and `R[X] → ℕ → R` at v4.32.0 (`Mathlib/Algebra/Polynomial/Basic.lean` l. 562 there,
+    l. 563 here), so `p.coeff n` is stored through the `Finsupp`'s coercion there and as an application here; both name
+    the coefficient of `X ^ n`."""
+    if COEFF_HEAD not in s or "(c Polynomial.coeff [" not in s:
+        return s
+    t = parse(s)
+    assert unparse(t) == s
+
+    def site(h, args):
+        if not (isinstance(h, list) and len(h) == 3 and h[0] == "c" and h[1] == COEFF_HEAD and len(args) == 6):
+            return False
+        th, targs = spine(args[0])
+        ih, iargs = spine(args[4])
+        return (isinstance(th, list) and th[:2] == ["c", "Finsupp"] and len(targs) >= 1
+                and targs[0] == ["c", "Nat", "[]"]
+                and isinstance(ih, list) and ih[:2] == ["c", "Polynomial.coeff"] and len(iargs) == 3)
+
+    def go(x):
+        if isinstance(x, str):
+            return x
+        if is_app(x):
+            h, args = spine(x)
+            h, args = go(h), [go(a) for a in args]
+            # the coercion of `Polynomial.coeff R _ p` applied to `n` is the application `Polynomial.coeff R _ p n`
+            return [args[4], args[5]] if site(h, args) else build(h, args)
+        return [go(y) for y in x]
+    return unparse(go(t))
+
+
+def strip_args(s, heads):
+    """STRIP: at every application of a head of `heads` (head -> (number of arguments, exact?, positions)), the
+    arguments at those positions removed.  -> (print, {head: applications hit})."""
+    t = parse(s)
+    assert unparse(t) == s
+    hits = {}
+
+    def go(x):
+        if isinstance(x, str):
+            return x
+        if is_app(x):
+            h, args = spine(x)
+            h, args = go(h), [go(a) for a in args]
+            if isinstance(h, list) and len(h) == 3 and h[0] == "c" and h[1] in heads:
+                nargs, exact, pos = heads[h[1]]
+                if (len(args) == nargs) if exact else (len(args) >= nargs):
+                    hits[h[1]] = hits.get(h[1], 0) + 1
+                    args = [a for i, a in enumerate(args) if i not in pos]
+            return build(h, args)
+        return [go(y) for y in x]
+    return unparse(go(t)), hits
+
+
+def strip_check(r, o, lab):
+    """STRIP's check for one listed declaration: (ok, why)."""
+    binders, hl = STRIP[lab]
+    if r["kind"] != o["kind"] or r["levels"] != o["levels"]:
+        return False, "STRIP refused: kind or universe parameters differ"
+    heads = {h: CASCADE_HEADS[h] for h in hl}
+    hits = {}
+    for er, pfx in (("etype", "pi."), ("evalue", "lam.")):
+        if r[er] is None and o[er] is None:
+            continue
+        if r[er] is None or o[er] is None:
+            return False, f"STRIP refused: no {er} at one pin"
+        s, h = strip_args(o[er], heads)
+        for k, v in h.items():
+            hits[k] = hits.get(k, 0) + v
+        if binders:
+            s = strip_binders(s, binders, pfx)
+        if s != r[er]:
+            return False, f"STRIP refused at the {er} (binders {binders}, heads {hl})"
+    if set(hits) != set(hl):
+        return False, f"STRIP refused: a listed head does not occur ({sorted(set(hl) - set(hits))})"
+    return True, f"binders {binders or 'none'}; inserted arguments at {', '.join(f'{k} ×{v}' for k, v in sorted(hits.items())) or 'none'}"
+
+
+def strip_binders(s, classes, pfx="pi."):
     """Remove one top-level binder of each class in `classes` from an erased print; renumber `@k`.  None if a listed
-    class is not found exactly once or a removed binder is referenced."""
+    class is not found exactly once or a removed binder is referenced.  `pfx` "lam." reads a definition's value."""
     t = parse(s)
     assert unparse(t) == s
     want, removed, depth = list(classes), [], 0
     node, path = t, []
-    while isinstance(node, list) and node and isinstance(node[0], str) and node[0].startswith("pi."):
+    while isinstance(node, list) and node and isinstance(node[0], str) and node[0].startswith(pfx):
         hn = head_name(node[2])
         if hn in want:
             want.remove(hn)
@@ -310,17 +492,40 @@ def ruled_compare(rel_text, our_text, renamed=None, record=None, quiet=False, wr
     table, _, fatal, seen = rb.compare(rel_text, our_text, renamed, quiet=True, record=record)
     rel, _ = rb.load(rel_text, renamed)
     our, _ = rb.load(our_text, renamed, here=True)
+    # COEFF: the constants whose release print the rewrite changed (the prints read once more without it)
+    saved = STATE.get("coeff", True)
+    STATE["coeff"] = False
+    try:
+        rel_raw, _ = rb.load(rel_text, renamed)
+    finally:
+        STATE["coeff"] = saved
+    touched = {lab for lab, d in rel.items() if lab in rel_raw
+               and any(d[f] != rel_raw[lab][f] for f in ("type", "etype", "value", "evalue"))}
+    for lab in sorted(COEFF_LEMMAS & {t[1] for t in table}):
+        if lab not in touched and STATE.get("coeff", True):
+            fatal.append(f"COEFF lists {lab}, which the rewrite does not touch (the list is stale)")
     out = []
     for (cls, lab, kind, verdict, there, here, why) in table:
         r, o = rel.get(lab), our.get(lab)
         owner = next((p for p in PIN_DIFFERENCE if lab == p or lab.startswith(p + ".")), None)
-        if owner is not None and verdict not in ("IDENTICAL", "UP-TO-INSTANCES"):
+        if lab in touched:
+            if lab not in COEFF_LEMMAS:
+                verdict, why = "DIFFERENT", "COEFF rewrote a constant it does not list"
+            elif verdict in ("IDENTICAL", "UP-TO-INSTANCES"):
+                verdict, why = "PIN-DIFFERENCE", ("COEFF: `Polynomial.coeff` is `R[X] → ℕ →₀ R` at the release's pin and "
+                                                  "`R[X] → ℕ → R` here; the same coefficient")
+        elif owner is not None and verdict not in ("IDENTICAL", "UP-TO-INSTANCES"):
             ro, oo = rel.get(owner), our.get(owner)
             if ro and oo and ro["kind"] == oo["kind"] == "def" and ro["levels"] == oo["levels"] \
                     and ro["type"] == oo["type"]:
                 verdict, why = "PIN-DIFFERENCE", f"`Monoid`'s parents changed between the pins; {owner}'s type is identical"
             else:
                 verdict, why = "DIFFERENT", f"PIN-DIFFERENCE refused: {owner}'s kind, levels or full type differ"
+        elif lab in STRIP and verdict == "DIFFERENT":
+            good, note = strip_check(r, o, lab)
+            binders, hl = STRIP[lab]
+            cls_ = "RULED" if binders or any(h != _PM for h in hl) else "ADAPTED"
+            verdict, why = (cls_, note) if good else ("DIFFERENT", note)
         elif lab in RULED and verdict == "DIFFERENT":
             st = strip_binders(o["etype"], RULED[lab]) if o and o["etype"] else None
             if r["kind"] == o["kind"] and st is not None and st == r["etype"]:
@@ -337,6 +542,9 @@ def ruled_compare(rel_text, our_text, renamed=None, record=None, quiet=False, wr
             verdict, why = ("ADAPTED", "the release's print once the inserted argument is removed") if ok else \
                 ("DIFFERENT", "ADAPTED strip check refused")
         out.append((cls, lab, kind, verdict, there, here, why))
+    for t in out:
+        if t[1] in STRIP and t[3] in ("IDENTICAL", "UP-TO-INSTANCES"):
+            fatal.append(f"STRIP lists {t[1]}, which does not differ (the list is stale)")
     failing = [t for t in out if t[3] in ("DIFFERENT", "ABSENT-HERE")]
     counts = {}
     for t in out:
@@ -450,10 +658,11 @@ def self_test(label):
             j += 1
         return i, j
 
-    def expect(what, text=None, renamed=None, rec=None, want_fatal=None):
+    def expect(what, text=None, renamed=None, rec=None, want_fatal=None, rel_planted=None):
         nonlocal ok, n
         n += 1
-        _, f, ft, _ = ruled_compare(rel_text, our_text if text is None else text, renamed=renamed, quiet=True,
+        _, f, ft, _ = ruled_compare(rel_text if rel_planted is None else rel_planted,
+                                 our_text if text is None else text, renamed=renamed, quiet=True,
                                  record=record if rec is None else rec)
         fired = bool(f or ft)
         hit = fired and (want_fatal is None or any(want_fatal in x for x in ft))
@@ -517,6 +726,126 @@ def self_test(label):
             expect(f"ANTIDIAG withdrawn ({a0})")
         finally:
             globals()["ANTIDIAG"] = saved
+    # CLASS_PARAMS (FS131-IPB1): another argument of the projection changed must be refused, and the rule withdrawn
+    def plant_arg(src_lines, lab, head, pos, new, field="etype "):
+        i, j = block(lab) if src_lines is lines else rel_block(lab)
+        out = src_lines[:]
+        k = next(x for x in range(i + 1, j) if out[x][7:13] == field)
+        t = parse(out[k][15:])
+        done = [0]
+
+        def go(x):
+            if isinstance(x, str):
+                return x
+            if is_app(x):
+                h, args = spine(x)
+                h, args = go(h), [go(a) for a in args]
+                if not done[0] and isinstance(h, list) and h[:2] == ["c", head] and len(args) > pos:
+                    done[0] = 1
+                    if callable(new):
+                        return new(h, args)
+                    args = args[:pos] + [new] + args[pos + 1:]
+                return build(h, args)
+            return [go(y) for y in x]
+        out[k] = out[k][:15] + unparse(go(t))
+        assert done[0], (lab, head)
+        return "\n".join(out)
+
+    rel_lines = rel_text.splitlines()
+
+    def rel_block(lab):
+        i = next(k for k, ln in enumerate(rel_lines) if ln.startswith(f"DUMP {lab} : "))
+        j = i + 1
+        while j < len(rel_lines) and rel_lines[j].startswith("DUMP   "):
+            j += 1
+        return i, j
+
+    for head, pos in sorted(CLASS_PARAMS.items()):
+        users = [lab for lab, d in rel.items() if f"(c {head} [" in (d["etype"] or "") and not rb.AUXNAME.search(lab)]
+        if not users:
+            continue
+        u0 = users[0]
+        expect(f"CLASS_PARAMS {head}: its argument {pos - 1} changed ({u0})",
+               plant_arg(lines, u0, head, pos - 1, "(c Planted.instance [])"))
+        saved_cp = dict(CLASS_PARAMS)
+        CLASS_PARAMS.clear()
+        try:
+            expect(f"CLASS_PARAMS {head} withdrawn ({len(users)} users)")
+        finally:
+            CLASS_PARAMS.update(saved_cp)
+    # COEFF (FS131-IPB1): another coercion head at a listed site, the rule withdrawn, a listed lemma unlisted
+    coeff_here = sorted(COEFF_LEMMAS & set(rel))
+    if coeff_here:
+        c0 = coeff_here[0]
+        # the first coercion of the release's print whose type is a `Finsupp` gets another head (a coercion that is
+        # not the one the rule names)
+        i, j = rel_block(c0)
+        k = next(x for x in range(i + 1, j) if rel_lines[x][7:13] == "etype ")
+        t = parse(rel_lines[k][15:])
+        hit = [0]
+
+        def go2(x):
+            if isinstance(x, str):
+                return x
+            if is_app(x):
+                h, args = spine(x)
+                h, args = go2(h), [go2(a) for a in args]
+                if not hit[0] and isinstance(h, list) and h[:2] == ["c", COEFF_HEAD] and len(args) == 6 and \
+                        isinstance(args[0], list) and spine(args[0])[0][:2] == ["c", "Finsupp"]:
+                    hit[0] = 1
+                    return build(["c", COEFF_HEAD + "'", h[2]], args)
+                return build(h, args)
+            return [go2(y) for y in x]
+        out = rel_lines[:]
+        out[k] = out[k][:15] + unparse(go2(t))
+        assert hit[0], c0
+        planted_rel = "\n".join(out)
+        expect(f"COEFF: another coercion head at a site ({c0})", rel_planted=planted_rel)
+        STATE["coeff"] = False
+        try:
+            expect(f"COEFF withdrawn ({len(coeff_here)} lemmas)")
+        finally:
+            STATE["coeff"] = True
+        saved_cl = set(COEFF_LEMMAS)
+        COEFF_LEMMAS.discard(c0)
+        try:
+            expect(f"COEFF: {c0} taken out of the list")
+        finally:
+            COEFF_LEMMAS.clear()
+            COEFF_LEMMAS.update(saved_cl)
+    # STRIP (FS131-IPB1): each part of the check must refuse what the ruling does not cover
+    strip_here = [lab for lab in STRIP if lab in rel]
+    if strip_here:
+        def raw(h):
+            return h if not h.startswith("§.") else "HadwigerNelson.Outside.OAI158." + h[2:]
+        bmem = next(lab for lab in strip_here if STRIP[lab][0] and rel[lab]["kind"] == "theorem")
+        i, j = block(bmem)
+        k = next(x for x in range(i + 1, j) if lines[x][7:13] == "etype ")
+        first = re.search(r"\(pi\.d ", lines[k])
+        for what, ins in (("one other binder inserted", "(pi.c inst ((c MeasurableSpace [(p u_1)]) @0) "),
+                          ("a second MeasurableInv binder inserted",
+                           "(pi.c inst ((((c MeasurableInv [(p u_1)]) @0) _) _) ")):
+            out = lines[:]
+            out[k] = out[k][:first.start()] + ins + out[k][first.start():] + ")"
+            expect(f"STRIP {bmem}: {what}", "\n".join(out))
+        amem = next(lab for lab in strip_here if not STRIP[lab][0] and _CE in STRIP[lab][1])
+        expect(f"STRIP {amem}: another argument (3) changed at a `center` site",
+               plant_arg(lines, amem, raw(_CE), 3, "(c Planted.embedding [])"))
+        pmem = next(lab for lab in strip_here if STRIP[lab][1] == [_PM])
+        expect(f"STRIP {pmem}: the map (argument 5) changed at a `ProbabilityMeasure.map` site",
+               plant_arg(lines, pmem, _PM, 5, "(c Planted.map [])"))
+        saved_st = dict(STRIP)
+        STRIP.clear()
+        try:
+            expect(f"STRIP withdrawn ({len(strip_here)} declarations)")
+        finally:
+            STRIP.update(saved_st)
+        lmem = next(lab for lab in strip_here if STRIP[lab] == ([], [_CE]))
+        STRIP[lmem] = ([], [_CE, _PM])
+        try:
+            expect(f"STRIP {lmem}: a head listed that does not occur in it")
+        finally:
+            STRIP[lmem] = ([], [_CE])
     for owner in sorted(PIN_DIFFERENCE):
         if owner in rel:
             expect(f"PIN-DIFFERENCE: the full type of {owner} changed",

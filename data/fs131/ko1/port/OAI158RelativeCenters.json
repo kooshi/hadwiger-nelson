@@ -22,5 +22,63 @@
    "Mathlib.Order.CompletePartialOrder",
    "the module of `CompletePartialOrder.toSupSet`: under it a supremum in a complete lattice is stored through that instance, and imported here it would move a stored statement of this library that sees the port's imports (`HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff`, INSTANCES-ONLY: `data/fs131/ko1/exposure/OAI158-*`; without it, nothing moves: `OAI158-noCPO-*`); FS131-IE1 left it out of its port for the same reason. The module elaborates without it"
   ]
+ ],
+ "patches": [
+  [
+   129,
+   "eventuallyEmptyOrUniv_iff.mp",
+   "Filter.eventuallyConst_set.mp",
+   "at v4.34.1 Mathlib states that a set is eventually empty or everything as `Filter.EventuallyEmptyOrUniv s l` (a definition new there, `EventuallyConst (· ∈ s) l`: `Mathlib/Order/Filter/EventuallyConst.lean:77`), which `aeconst_of_forall_preimage_smul_ae_eq` concludes, with `eventuallyEmptyOrUniv_iff` its unfolding; at v4.32.0 the lemma concludes `EventuallyConst s l` and the same unfolding is `Filter.eventuallyConst_set` (`EventuallyConst.lean:74` here), with the same right-hand side (as `OAI158Amenability`'s patch at `Amenability.lean:385`)"
+  ],
+  [
+   163,
+   "compProd_map_condDistrib hp.aemeasurable hf.aemeasurable",
+   "compProd_map_condDistrib hf.aemeasurable",
+   "at v4.34.1 `compProd_map_condDistrib` takes `hX : AEMeasurable X μ` and `hY : AEMeasurable Y μ`; at v4.32.0 it takes `hY` only, with the same conclusion (`Mathlib/Probability/Kernel/CondDistrib.lean:82` at both pins): the first argument is dropped"
+  ],
+  [
+   189,
+   "condDistrib_comp (μ := μ) hp.aemeasurable hf.aemeasurable hT",
+   "condDistrib_comp (μ := μ) (mβ := inferInstance) p hf.aemeasurable hT",
+   "at v4.34.1 `condDistrib_comp` takes `hX : AEMeasurable X μ`; at v4.32.0 it takes the map `X` itself, explicit, with the same conclusion (`Mathlib/Probability/Kernel/CondDistrib.lean:183` here, `:182` there): the map is passed in place of its measurability; and its implicit `{mβ : MeasurableSpace β}`, which the release's `hX` fixed and which the `have` with no expected type leaves unsolved here, is named: `(mβ := inferInstance)`, the space of `Y`"
+  ],
+  [
+   261,
+   "compProd_map_condDistrib hp.aemeasurable hd.aemeasurable",
+   "compProd_map_condDistrib hd.aemeasurable",
+   "at v4.34.1 `compProd_map_condDistrib` takes `hX : AEMeasurable X μ` and `hY : AEMeasurable Y μ`; at v4.32.0 it takes `hY` only, with the same conclusion (`Mathlib/Probability/Kernel/CondDistrib.lean:82` at both pins): the first argument is dropped"
+  ],
+  [
+   293,
+   "compProd_map_condDistrib hp.aemeasurable hd.aemeasurable",
+   "compProd_map_condDistrib hd.aemeasurable",
+   "at v4.34.1 `compProd_map_condDistrib` takes `hX : AEMeasurable X μ` and `hY : AEMeasurable Y μ`; at v4.32.0 it takes `hY` only, with the same conclusion (`Mathlib/Probability/Kernel/CondDistrib.lean:82` at both pins): the first argument is dropped"
+  ],
+  [
+   443,
+   "compProd_map_condDistrib hp.aemeasurable hd.aemeasurable",
+   "compProd_map_condDistrib hd.aemeasurable",
+   "at v4.34.1 `compProd_map_condDistrib` takes `hX : AEMeasurable X μ` and `hY : AEMeasurable Y μ`; at v4.32.0 it takes `hY` only, with the same conclusion (`Mathlib/Probability/Kernel/CondDistrib.lean:82` at both pins): the first argument is dropped"
+  ],
+  [
+   382,
+   "(fun point : G => k • point) := by",
+   "(f := fun point : G => k • point) (measurable_const_smul k).aemeasurable := by",
+   "the class of `plans/FS131-KO1-port-plan.md` § 3.3, in a PROOF: at v4.34.1 `ProbabilityMeasure.map ν f` takes the map and no proof; at v4.32.0 `ProbabilityMeasure.map ν {f} (f_aemble : AEMeasurable f ν)` (`Mathlib/MeasureTheory/Measure/ProbabilityMeasure.lean:606`); the measurability is a closed term of the proof's context"
+  ]
+ ],
+ "adaptations": [
+  [
+   103,
+   "μ.map (e.center μ)",
+   "μ.map (f := e.center μ) (e.measurable_center_fixed μ).aemeasurable",
+   "ADAPTED (plan § 4.3, Amendment 2 of FS131-KO1's brief): at v4.34.1 `ProbabilityMeasure.map ν f` takes the map and no proof; at v4.32.0 `ProbabilityMeasure.map ν {f} (f_aemble : AEMeasurable f ν)` (`Mathlib/MeasureTheory/Measure/ProbabilityMeasure.lean:606`); the same measure for a measurable map. The inserted measurability is a closed term of the statement's context, no hypothesis and no binder"
+  ]
+ ],
+ "drop_omit": [
+  [
+   343,
+   "part of the ruled cascade of `frequencyLaw` (the coordinator's rulings on FS131-IPA1, Amendments 3 and 4 of its brief; item 767 ruling (a)): the declaration's statement names a definition of the cascade, which at this pin takes the release's own section variables `[MeasurableMul₂ G] [MeasurableInv G]`, so the `omit` of exactly those two cannot stand; the strip check of `tools/fs131_ipa1_readback_port.py` (STRIP) shows the stored statement is the release's with those binders inserted"
+  ]
  ]
 }
