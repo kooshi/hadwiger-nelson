@@ -48,6 +48,13 @@ variable {F : Subfield ℝ}
 
 /-! ### Level one: a ratio below a quarter needs five colours -/
 
+-- A finite graph whose independent sets hold at most the fraction `c` of its vertices, `k·c < 1`, is not `k`-colourable:
+-- the `k` colour classes are independent and cover the vertices.
+private theorem add_one_le_chromaticNumber_of_indep_le {V : Type*} [Finite V] [Nonempty V] (G : SimpleGraph V) {c : ℝ}
+    {k : ℕ} (hk : k * c < 1) (h : ∀ s : Finset V, G.IsIndepSet (s : Set V) → (s.card : ℝ) ≤ c * Nat.card V) :
+    ((k + 1 : ℕ) : ℕ∞) ≤ G.chromaticNumber := by
+  sorry
+
 /-- **A level-one ratio below `1/4` needs five colours**: the colour classes of a four-colouring are independent and one
 holds at least a quarter of the residue ring. -/
 theorem five_le_chromaticNumber_of_ratioAtMost [NumberField F] (P : StablePrime F) {c : ℝ} (hc : c < 1 / 4)
@@ -105,11 +112,11 @@ theorem two_notMem_of_isSquare (P : StablePrime F) {a : ℕ} (ha : IsSquare (a :
     (2 : 𝓞 (fieldI F)) ∉ P.P := by
   sorry
 
-/-- **An odd stable prime and its residue field**: `Q²` elements with `Q = pⁿ ≡ 3 (mod 4)`, `n` odd, and every natural
-number that is a square in `F` a square modulo `p`. -/
+/-- **An odd stable prime and its residue field**: it lies above a prime `p ≡ 3 (mod 4)`, its residue field has `Q²`
+elements with `Q = pⁿ`, `n` odd, and every natural number that is a square in `F` is a square modulo `p`. -/
 theorem stablePrime_card_of_two_notMem [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) :
-    ∃ p n : ℕ, p.Prime ∧ p % 4 = 3 ∧ Odd n ∧ Nat.card (𝓞 (fieldI F) ⧸ P.P) = (p ^ n) ^ 2 ∧
-      ∀ d : ℕ, IsSquare (d : F) → IsSquare (d : ZMod p) := by
+    ∃ p n : ℕ, p.Prime ∧ p % 4 = 3 ∧ Odd n ∧ (p : 𝓞 (fieldI F)) ∈ P.P ∧
+      Nat.card (𝓞 (fieldI F) ⧸ P.P) = (p ^ n) ^ 2 ∧ ∀ d : ℕ, IsSquare (d : F) → IsSquare (d : ZMod p) := by
   sorry
 
 /-- **Every stable prime's level-one target needs five colours** when `F` holds square roots of some `a ≡ 7 (mod 8)`,

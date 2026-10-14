@@ -1,0 +1,4 @@
+slot: admitted km15f: mem 4 GiB (hard cap), cpus 1,5
+Proofs/HadwigerNelson/Instances/SqrtFortySevenFive.lean:40:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Instances/SqrtFortySevenFive.lean:49:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Instances/SqrtFortySevenFive.lean:55:8: warning: declaration uses `sorry`
