@@ -54,7 +54,18 @@ variable (D : TateModel F)
 /-- **The lift on a leaf is unique** (X01D § 3.7 (i)): `ι(L) ∩ W_p = 0`. -/
 theorem eq_of_π_add_eq {p : WPlace F} {t t' : fieldI F} {a a' : SAdeleRing F} (ha : a ∈ hyperplane p)
     (ha' : a' ∈ hyperplane p) (h : D.π (toSAdele F t + a) = D.π (toSAdele F t' + a')) : a = a' := by
-  sorry
+  obtain ⟨y, -, hy⟩ := (D.π_eq_π_iff _ _).1 h
+  have hdiff : a - a' = toSAdele F (t' + y - t) := by
+    rw [map_sub, map_add]
+    linear_combination hy
+  have hmem : a - a' ∈ hyperplane p := by
+    show p.size (a - a') = 0
+    have h1 := size_add_le p a (-a')
+    rw [size_neg, ← sub_eq_add_neg, ha.out, ha'.out, add_zero] at h1
+    exact le_antisymm h1 (size_nonneg _ _)
+  rw [hdiff] at hmem
+  rw [eq_zero_of_toSAdele_mem_hyperplane hmem, map_zero] at hdiff
+  exact sub_eq_zero.1 hdiff
 
 /-- **A shell** (X01D § 3.8): the points `π(ι t + a)` with `a ∈ W_p` and `|a_w|_w = c`. -/
 def shell (p : WPlace F) (w : SplitPlace F) (t : fieldI F) (c : ℝ) : Set (Dual F) :=
@@ -65,20 +76,44 @@ example (p : WPlace F) (w : SplitPlace F) (t : fieldI F) (c : ℝ) :
 
 /-- Shells are Borel: images under `π` of closed sets (`measurableSet_image`). -/
 theorem measurableSet_shell (p : WPlace F) (w : SplitPlace F) (t : fieldI F) (c : ℝ) :
-    MeasurableSet (D.shell p w t c) := by
-  sorry
+    MeasurableSet (D.shell p w t c) :=
+  D.measurableSet_image ((Homeomorph.addLeft (toSAdele F t)).isClosedMap _
+    ((isClosed_hyperplane p).inter (isClosed_eq (continuous_size _) continuous_const)))
+
+/-- `|x^n|_p = |x|_p^n`. -/
+private theorem absAt_pow' (p : WPlace F) (x : fieldI F) (n : ℕ) : p.absAt (x ^ n) = p.absAt x ^ n := by
+  induction n with
+  | zero =>
+    rw [pow_zero, pow_zero, ← size_toSAdele, map_one]
+    cases p with
+    | arch v => exact (mixedEmbedding.normAtPlace v).map_one
+    | split w => exact norm_one
+  | succ n ih => rw [pow_succ, absAt_mul, ih, pow_succ]
 
 /-- **Shells wander** under the rotation by a unit vector contracting at `w`: no point of a shell returns to it. -/
 theorem iterate_rot_not_mem_shell {p : WPlace F} {w : SplitPlace F} {t : fieldI F} {c : ℝ} (hc : 0 < c)
     {g : unitVectors F} (hg : (WPlace.split w).absAt (unitL g) < 1) {m : ℕ} (hm : m ≠ 0) {χ : Dual F}
     (hχ : χ ∈ D.shell p w t c) : (rot g)^[m] χ ∉ D.shell p w t c := by
-  sorry
+  obtain ⟨_, ⟨a, ⟨haW, hac⟩, rfl⟩, rfl⟩ := hχ
+  rintro ⟨_, ⟨a', ⟨ha'W, ha'c⟩, rfl⟩, hχ'⟩
+  rw [D.iterate_rot_π, mul_add, ← map_mul] at hχ'
+  have heq := D.eq_of_π_add_eq ha'W (toSAdele_mul_mem_hyperplane p (unitL g ^ m) haW) hχ'
+  -- sizes at `w`: `c = |g|_w^m · c`, against `|g|_w^m < 1`
+  have hs := congrArg (WPlace.split w).size heq
+  rw [ha'c, size_toSAdele_mul, absAt_pow', hac] at hs
+  have hlt : (WPlace.split w).absAt (unitL g) ^ m < 1 := pow_lt_one₀ (absAt_nonneg _ _) hg hm
+  nlinarith
 
 /-- **Every shell is null** for a finite rotation-invariant measure: `rot g` preserves `μ`, so it is conservative
 (`MeasurePreserving.conservative`, `Conservative.exists_mem_iterate_mem`), and a shell has no returning point. -/
 theorem measure_shell_eq_zero (μ : Measure (Dual F)) [IsFiniteMeasure μ] (hμ : RotInv F μ) (p : WPlace F)
     (w : SplitPlace F) (t : fieldI F) {c : ℝ} (hc : 0 < c) : μ (D.shell p w t c) = 0 := by
-  sorry
+  obtain ⟨g, hg⟩ := exists_unitVector_absAt_lt_one w
+  have hcons := (MeasurePreserving.conservative (μ := μ) ⟨measurable_rot g, hμ g⟩)
+  by_contra h0
+  obtain ⟨χ, hχ, m, hm, hχm⟩ :=
+    hcons.exists_mem_iterate_mem (D.measurableSet_shell p w t c).nullMeasurableSet h0
+  exact D.iterate_rot_not_mem_shell hc hg hm hχ hχm
 
 end TateModel
 
@@ -86,7 +121,19 @@ end TateModel
 locally constant off `0` (`UniformSpace.Completion.denseRange_coe`, the ultrametric inequality). -/
 theorem exists_absAt_eq_norm (w : SplitPlace F) {z : w.1.adicCompletion (fieldI F)} (hz : z ≠ 0) :
     ∃ y : fieldI F, y ≠ 0 ∧ (WPlace.split w).absAt y = ‖z‖ := by
-  sorry
+  have hz0 : 0 < ‖z‖ := norm_pos_iff.2 hz
+  obtain ⟨y, hy⟩ := (w.1.denseRange_algebraMap (fieldI F)).exists_mem_open Metric.isOpen_ball
+    (Metric.nonempty_ball.2 hz0)
+  rw [Metric.mem_ball, dist_eq_norm] at hy
+  -- the ultrametric inequality: `‖y‖ = ‖z + (y − z)‖ = ‖z‖`
+  have hne : ‖z‖ ≠ ‖algebraMap (fieldI F) (w.1.adicCompletion (fieldI F)) y - z‖ := (ne_of_gt hy)
+  have hn : ‖algebraMap (fieldI F) (w.1.adicCompletion (fieldI F)) y‖ = ‖z‖ := by
+    have := IsUltrametricDist.norm_add_eq_max_of_norm_ne_norm hne
+    rw [add_sub_cancel, max_eq_left hy.le] at this
+    exact this
+  refine ⟨y, fun h => ?_, hn⟩
+  rw [h, map_zero, norm_zero] at hn
+  exact hz0.ne hn
 
 namespace TateModel
 
@@ -97,13 +144,36 @@ split component of `a` is `0` (`mem_TA`), and in the shell of `(w, t, |a_w|_w)` 
 theorem leafSet_subset (p : WPlace F) :
     D.leafSet p ⊆ TA F ∪ ⋃ (w : SplitPlace F) (t : fieldI F) (y : fieldI F) (_ : y ≠ 0),
       D.shell p w t ((WPlace.split w).absAt y) := by
-  sorry
+  rintro χ ⟨a, ⟨t, ht⟩, rfl⟩
+  have hdec : a = toSAdele F t + (a - toSAdele F t) := by abel
+  by_cases h0 : ∀ w : SplitPlace F, (a - toSAdele F t).2 w = 0
+  · left
+    have h2 : a - toSAdele F t = ((a - toSAdele F t).1, 0) := Prod.ext rfl (RestrictedProduct.ext _ _ h0)
+    rw [hdec, h2]
+    exact D.mem_TA t _
+  · right
+    push Not at h0
+    obtain ⟨w, hw⟩ := h0
+    obtain ⟨y, hy0, hy⟩ := exists_absAt_eq_norm w hw
+    refine Set.mem_iUnion.2 ⟨w, Set.mem_iUnion.2 ⟨t, Set.mem_iUnion.2 ⟨y, Set.mem_iUnion.2 ⟨hy0, ?_⟩⟩⟩⟩
+    exact ⟨toSAdele F t + (a - toSAdele F t), ⟨a - toSAdele F t, ⟨ht, hy.symm⟩, rfl⟩, hdec ▸ rfl⟩
 
 /-- **`μ` is carried by `T + A`** (X01D l. 306) once it is carried by a leaf set: the leaf set lies in `T + A` and countably
 many null shells (`leafSet_subset`, `measure_shell_eq_zero`, `countable_splitPlace`, `countable_fieldI`). -/
 theorem measure_compl_TA_eq_zero (μ : Measure (Dual F)) [IsFiniteMeasure μ] (hμ : RotInv F μ) (p : WPlace F)
     (hY : μ (D.leafSet p)ᶜ = 0) : μ (TA F)ᶜ = 0 := by
-  sorry
+  haveI : Countable (fieldI F) := countable_fieldI
+  have hshell : μ (⋃ (w : SplitPlace F) (t : fieldI F) (y : fieldI F) (_ : y ≠ 0),
+      D.shell p w t ((WPlace.split w).absAt y)) = 0 :=
+    measure_iUnion_null fun w => measure_iUnion_null fun t => measure_iUnion_null fun y =>
+      measure_iUnion_null fun hy => D.measure_shell_eq_zero μ hμ p w t
+        (lt_of_le_of_ne (absAt_nonneg _ _) fun h => hy ((absAt_eq_zero _).1 h.symm))
+  refine measure_mono_null (fun x hx => ?_) (measure_union_null hY hshell)
+  by_cases hxl : x ∈ D.leafSet p
+  · rcases D.leafSet_subset p hxl with h | h
+    · exact absurd h hx
+    · exact Or.inr h
+  · exact Or.inl hxl
 
 end TateModel
 
