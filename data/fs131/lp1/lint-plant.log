@@ -1,4 +1,4 @@
-slot: admitted lp1-lint-plant: mem 8 GiB (hard cap), cpus 0,1,2,3
+slot: admitted lp1-lint-plant: mem 8 GiB (hard cap), cpus 1,2,3,4
 Running linter on specified modules: [Proofs]
 [Proofs] Starting lint...
 [Proofs] Running linters:
@@ -33,7 +33,7 @@ Running linter on specified modules: [Proofs]
 [Proofs] - checkType: (1/2) Getting...
 [Proofs] - checkType: (2/2) Passed!
 [Proofs] - defsWithUnderscore: (1/2) Getting...
-[Proofs] - defsWithUnderscore: (2/2) Failed with 11 messages, but these may include declarations in `nolints.json`.
+[Proofs] - defsWithUnderscore: (2/2) Passed!
 [Proofs] - deprecatedNoSince: (1/2) Getting...
 [Proofs] - deprecatedNoSince: (2/2) Passed!
 [Proofs] - docBlame: (1/2) Getting...
@@ -45,7 +45,7 @@ Running linter on specified modules: [Proofs]
 [Proofs] - simpComm: (1/2) Getting...
 [Proofs] - simpComm: (2/2) Passed!
 [Proofs] - simpNF: (1/2) Getting...
-[Proofs] - simpNF: (2/2) Failed with 1 messages, but these may include declarations in `nolints.json`.
+[Proofs] - simpNF: (2/2) Passed!
 [Proofs] - structureInType: (1/2) Getting...
 [Proofs] - structureInType: (2/2) Passed!
 [Proofs] - subsetDotNotationLinter: (1/2) Getting...
@@ -55,58 +55,13 @@ Running linter on specified modules: [Proofs]
 [Proofs] - tacticDocs: (1/2) Getting...
 [Proofs] - tacticDocs: (2/2) Passed!
 [Proofs] - unusedArguments: (1/2) Getting...
-[Proofs] - unusedArguments: (2/2) Failed with 14 messages, but these may include declarations in `nolints.json`.
+[Proofs] - unusedArguments: (2/2) Failed with 1 messages, but these may include declarations in `nolints.json`.
 [Proofs] - unusedHavesSuffices: (1/2) Getting...
 [Proofs] - unusedHavesSuffices: (2/2) Passed!
 [Proofs] Completed linting!
 [Proofs] scripts/nolints.json summary (number of nolints per linter):
   
--- Found 27 errors in 15499 declarations (plus 12119 automatically generated ones) in Proofs with 14 linters
-
-/- The `defsWithUnderscore` linter reports:
-FOUND definitions with an underscore in their name.
-This linter can be disabled with `@[nolint defsWithUnderscore]`. -/
--- Proofs.HadwigerNelson.Outside.OAI158Basic
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158Basic.lean:141:1: error: HadwigerNelson.Outside.OAI158.Spectral.K_rootable The definition `HadwigerNelson.Outside.OAI158.Spectral.K_rootable` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
-
--- Proofs.HadwigerNelson.Outside.OAI158ConditionalLimits
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158ConditionalLimits.lean:474:1: error: HadwigerNelson.Outside.OAI158.Spectral.instMeasurableSpaceCircle_proofs_3 The definition `HadwigerNelson.Outside.OAI158.Spectral.instMeasurableSpaceCircle_proofs_3` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
-
--- Proofs.HadwigerNelson.Outside.OAI158ConditionalSelection
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158ConditionalSelection.lean:317:1: error: HadwigerNelson.Outside.OAI158.FiniteModule.instMeasurableSpaceCircle_proofs The definition `HadwigerNelson.Outside.OAI158.FiniteModule.instMeasurableSpaceCircle_proofs` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
-
--- Proofs.HadwigerNelson.Outside.OAI158ConditionalSpectrum
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158ConditionalSpectrum.lean:100:1: error: HadwigerNelson.Outside.OAI158.Spectral.instMeasurableSpaceCircle_proofs The definition `HadwigerNelson.Outside.OAI158.Spectral.instMeasurableSpaceCircle_proofs` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
-
--- Proofs.HadwigerNelson.Outside.OAI158Energy
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158Energy.lean:157:1: error: @HadwigerNelson.Outside.OAI158.MovingMean.instDecidableEq_proofs The definition `HadwigerNelson.Outside.OAI158.MovingMean.instDecidableEq_proofs` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
-
--- Proofs.HadwigerNelson.Outside.OAI158InvariantMean
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158InvariantMean.lean:72:1: error: HadwigerNelson.Outside.OAI158.InvariantMean.instDecidableEq_proofs The definition `HadwigerNelson.Outside.OAI158.InvariantMean.instDecidableEq_proofs` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
-
--- Proofs.HadwigerNelson.Outside.OAI158PhaseCollision
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158PhaseCollision.lean:65:1: error: @HadwigerNelson.Outside.OAI158.PhaseCollision.instDecidableEq_proofs The definition `HadwigerNelson.Outside.OAI158.PhaseCollision.instDecidableEq_proofs` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158PhaseCollision.lean:441:1: error: HadwigerNelson.Outside.OAI158.EncodedCollision.instMeasurableSpaceCircle_proofs The definition `HadwigerNelson.Outside.OAI158.EncodedCollision.instMeasurableSpaceCircle_proofs` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
-
--- Proofs.HadwigerNelson.Outside.OAI158SmallArcs
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158SmallArcs.lean:253:1: error: HadwigerNelson.Outside.OAI158.SmallArc.instMeasurableSpaceCircle_proofs The definition `HadwigerNelson.Outside.OAI158.SmallArc.instMeasurableSpaceCircle_proofs` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
-
--- Proofs.HadwigerNelson.Outside.OAI158SpectralMeasure
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:226:1: error: @HadwigerNelson.Outside.OAI158.CommutingSpectral.algebra_commRing The definition `HadwigerNelson.Outside.OAI158.CommutingSpectral.algebra_commRing` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:230:1: error: @HadwigerNelson.Outside.OAI158.CommutingSpectral.algebra_commCStar The definition `HadwigerNelson.Outside.OAI158.CommutingSpectral.algebra_commCStar` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
-
-/- The `simpNF` linter reports:
-SOME SIMP LEMMAS ARE NOT IN SIMP-NORMAL FORM.
-Please change the lemma to make sure their left-hand sides are in simp normal form.
-To learn about simp normal forms, see
-https://leanprover-community.github.io/extras/simp.html#simp-normal-form
-and https://lean-lang.org/doc/reference/latest/The-Simplifier/Simp-Normal-Forms/.
-This linter can be disabled with `@[nolint simpNF]`. -/
--- Proofs.HadwigerNelson.Outside.OAI158Energy
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158Energy.lean:457:1: error: HadwigerNelson.Outside.OAI158.Spectral.norm_char simp can prove this:
-  by simp only [*, HadwigerNelson.Outside.OAI158.Spectral.char_apply, @norm_eq_of_mem_sphere]
-One of the lemmas above could be a duplicate.
-If that's not the case try reordering lemmas or adding @[priority].
+-- Found 2 errors in 15499 declarations (plus 12119 automatically generated ones) in Proofs with 14 linters
 
 /- The `synTaut` linter reports:
 THE FOLLOWING DECLARATIONS ARE SYNTACTIC TAUTOLOGIES. This usually means that they are of the form `∀ a b ... z, e₁ = e₂` where `e₁` and `e₂` are identical expressions. We call declarations of this form syntactic tautologies. Such lemmas are (mostly) useless and sometimes introduced unintentionally when proving basic facts using `rfl`, when elaboration results in a different term than the user intended. You should check that the declaration really says what you think it does.
@@ -117,50 +72,6 @@ This linter can be disabled with `@[nolint synTaut]`. -/
 /- The `unusedArguments` linter reports:
 UNUSED ARGUMENTS.
 This linter can be disabled with `@[nolint unusedArguments]`. -/
--- Proofs.HadwigerNelson.Outside.OAI158Approximation
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:144:1: error: @HadwigerNelson.Outside.OAI158.UniformEnumeration.constant_uniform_lists 1 unused argument:
-  argument 10: [ProbabilityTheory.IsMarkovKernel κ]
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:188:1: error: @HadwigerNelson.Outside.OAI158.DifferenceInvariant.differenceLaw 1 unused argument:
-  argument 8: [ProbabilityTheory.IsMarkovKernel κ]
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:192:1: error: @HadwigerNelson.Outside.OAI158.DifferenceInvariant.invariant 1 unused argument:
-  argument 9: [MeasureTheory.IsProbabilityMeasure ν]
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:266:1: error: @HadwigerNelson.Outside.OAI158.CompactApproximation.vector_of_scalar 1 unused argument:
-  argument 8: [MeasureTheory.IsProbabilityMeasure ν]
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:404:1: error: @HadwigerNelson.Outside.OAI158.Spectral.finite_encoding_approximation_of_compact 6 unused arguments:
-  argument 11: [StandardBorelSpace X]
-  argument 12: [Nonempty X]
-  argument 13: [StandardBorelSpace Y]
-  argument 14: [Nonempty Y]
-  argument 15: [StandardBorelSpace W]
-  argument 16: [Nonempty W]
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:518:1: error: @HadwigerNelson.Outside.OAI158.CompactApproximation.lift_at 2 unused arguments:
-  argument 11: [MeasureTheory.IsProbabilityMeasure ν]
-  argument 17: [MeasurableConstSMul K Z]
-
--- Proofs.HadwigerNelson.Outside.OAI158Factors
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158Factors.lean:438:1: error: @HadwigerNelson.Outside.OAI158.FactorCode.encode_as_comp 1 unused argument:
-  argument 11: [MeasurableConstSMul K Y]
-
--- Proofs.HadwigerNelson.Outside.OAI158FourierTests
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158FourierTests.lean:296:1: error: @HadwigerNelson.Outside.OAI158.DifferenceFourier.differenceLaw 1 unused argument:
-  argument 8: [ProbabilityTheory.IsMarkovKernel κ]
-
--- Proofs.HadwigerNelson.Outside.OAI158InvariantMean
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158InvariantMean.lean:275:1: error: HadwigerNelson.Outside.OAI158.InvariantMean.averagingUF 1 unused argument:
-  argument 2: [AddCommGroup G]
-
--- Proofs.HadwigerNelson.Outside.OAI158PhaseEncoding
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158PhaseEncoding.lean:268:1: error: @HadwigerNelson.Outside.OAI158.PhaseEncoding.measurable_kernelEncoding 1 unused argument:
-  argument 6: [ProbabilityTheory.IsMarkovKernel β]
-
--- Proofs.HadwigerNelson.Outside.OAI158RelativeCenters
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158RelativeCenters.lean:338:1: error: @HadwigerNelson.Outside.OAI158.RelativeCenters.cosetMass 1 unused argument:
-  argument 8: [ProbabilityTheory.IsMarkovKernel κ]
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158RelativeCenters.lean:348:1: error: @HadwigerNelson.Outside.OAI158.RelativeCenters.differenceLaw 1 unused argument:
-  argument 8: [ProbabilityTheory.IsMarkovKernel κ]
-/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Outside/OAI158RelativeCenters.lean:701:1: error: @HadwigerNelson.Outside.OAI158.Spectral.wild_map_of_equivariant 1 unused argument:
-  argument 6: [MeasureTheory.IsProbabilityMeasure μ]
-
 -- Proofs.HadwigerNelson.Plane.LebesgueNumber
 /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/Proofs/HadwigerNelson/Plane/LebesgueNumber.lean:567:1: error: @zz_lp1_lint_plant 1 unused argument:
   argument 1: [Nonempty ℕ]

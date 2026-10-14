@@ -345,3 +345,61 @@ three; no record rests on the transfer and no `DECLARED IMPORT` names it; the de
 `no_proper_five_coloring`; IMPORTED 26 records, 20 on the first alone and 6 on the second alone; 9,024 records, none
 printed twice. Its five plants (an axiom added to the transfer's list; a moved record put under IMPORTED; a DECLARED
 IMPORT of the transfer; an IMPORTED record removed; a record printed twice) each FAIL, the unplanted receipt passes.
+
+## Stage 6 — SAVED (FS131-LP1): the guarded lint, red on the port, then green by the generator's `nolint` key (Amendment 1)
+
+**6.1 What the lint said, before** (the lint's planted-control run on `3f63a1219`, `data/fs131/lp1/nolint/run1-lint-plant.log`;
+the plant's own two messages aside): 25 findings, every one on a declaration of a generated module — `defsWithUnderscore` 11
+(the release's names `Spectral.K_rootable`, `CommutingSpectral.algebra_commRing`, `algebra_commCStar`, and eight
+anonymous instances whose generated names carry ANON's `_proofs`: `instMeasurableSpaceCircle_proofs[_3]` ×5,
+`instDecidableEq_proofs` ×3), `simpNF` 1 (`Spectral.norm_char`, the release's `@[simp]` lemma whose left side simp
+rewrites), `unusedArguments` 13 (the release's binders). FS131-IPD1 had not run the lint on the registered library;
+the library had no exemption mechanism. Sent to the coordinator at once; **ruled (inventory item 831, Amendment 1 of
+the brief): the generator writes `@[nolint <linter>]` in the file**, by name, with its reason.
+
+**6.2 The probe** (`data/fs131/lp1/nolint/probes/attrs.lean`, at this pin): two attribute blocks on one declaration do
+not parse ("unexpected token '@['"), so an entry on a declaration that already has a block is merged into it;
+`@[nolint defsWithUnderscore]` attaches to an anonymous instance (its generated name then carries the parameter) —
+the ruling's condition holds, and the fallback is not needed. A linter's name must be declared where the attribute is
+elaborated: every one of the fourteen modules has `unusedArguments`, `simpNF` and `defsWithUnderscore` in its
+environment (the build below: no error).
+
+**6.3 The generator's change** (its own commit, `38d91c4fe`; `tools/fs131_ko1_port.py`): the table key `nolint`,
+entries `[declaration, linter, reason]`, the declaration by its name here (the name map and ANON, as the lint prints
+it), the reason one of three classes — `name` ("the release's name"), `binder` ("the release's binder"), `simpnf`
+("simp's normal form of the release's lemma"). Written: a comment line `-- nolint (FS131-LP1, inventory item 831):
+<class>, kept as it is (<linter>)` and the line `@[nolint <linter>]` directly before the keyword line, or `nolint
+<linter>, ` merged at the head of the attribute block the keyword line already carries. Refused: an entry naming no
+declaration copied in its module (outside the port, private, or another module's), an unknown reason, a linter that is
+not an identifier, an entry given twice, an unused entry. Self-test: **23 plants refused and 9 partners accepted**
+(`gen-selftest-before-tables.out`, before any table had an entry): the new plants — an entry on
+`HadwigerNelson.Plane.radius_down` (outside the port), an entry whose reason is no class — REFUSED; the new partner —
+an entry on a copied theorem of `OAI158Basic` adds exactly its comment and attribute lines (`Spectral.K_pow_surjective`,
+its own line) or one comment line and the keyword line with the attribute merged (`Spectral.embed_one`, under
+`@[simp]`), nothing else — EXACT. Its controls, each a scratch copy of the generator with part of the change
+withdrawn: the comment not written — the partner FAILED, exit 1; the refusal of an entry outside the module withdrawn
+(both its checks) — the plant SILENT, exit 1 (`gen-control-{nocomment,nostray}.out`). `--check` on the 31 modules with
+no entry yet: `CHECK OK`, byte-identical (`gen-check-before-tables.out`).
+
+**6.4 The entries and the regenerated text** (`a1082de98`). `data/fs131/lp1/nolint/add_entries.py` read the 25 findings
+from the lint's own log, the class by linter, refusing any finding outside a generated module but the lint control's
+plant: **25 entries in 14 tables**, each table the old one with exactly the key `nolint` added, every other key
+unchanged and in order, written in its own format. The 14 modules regenerated; `tools/fs131_lp1_nolint_diff.py HEAD`
+(line-by-line against the commit before): **`NOLINT-DIFF OK` — 14 files, 25 entries met (1 merged into an attribute
+block: `Spectral.norm_char`'s `@[simp]`), 0 unexplained** — 25 comment lines, 24 attribute lines, one keyword line
+changed by the merge; its plant (one attribute line changed by one character; a stray line added to another module):
+both reported, `NOLINT-DIFF FAILED`, exit 1. Then `--check` on all 31: **CHECK OK**; `--parse-all`: PARSE OK;
+`--self-test` with the tables: **23 plants refused and 9 partners accepted**.
+
+**6.5 From the kernel's side.** The build (`./scripts/build.sh`, `--mem 10 --cpus 4`, `MEMMAX=10G BATCH=8`): **OK — 253 of 253
+batches, 31 module(s) rebuilt, 0 module(s) with warnings, 10m15s** (`nolint/build2.log`). Then, each against its dump
+before the change: lanes A–C's 25 modules by FS131-IPD1's module dumper (every constant, its raw stored type and its
+value's hash; `nolint/dump25.sh`): **1,777 constants, byte-identical**; lane D's print at this pin: **sha256 `43aa2be5…`,
+byte-identical** (524 constants, full and erased prints); the stage-1 dumper (541 constants of `Outside/OAI158`, its
+downstream, `Collapse`, `BorelTransfer`): **byte-identical**. No stored type and no value moved.
+
+**6.6 The lint.** `lake lint --no-build -- --no-build --trace` under the slot: **exit 0, `-- Linting passed for Proofs.`,
+14 linters each `(2/2) Passed!`** (`nolint/lint.log`). Its planted control again (`data/fs131/lp1/lint-plant.sh`, the
+plant in `Plane/LebesgueNumber`, outside the port): **`LINT CONTROL FIRED: exit 1, the plant named`** — `synTaut` and
+`unusedArguments` each `Failed with 1 messages`, both the plant's, nothing else; the module restored byte for byte
+(`nolint/lint-plant-run2.out`, `lint-plant.log`).
