@@ -87,3 +87,48 @@ of points that are density-one points of their own fibre, a translate of every f
 larger. **A binder the route does not read:** `hcount` (the countability of the constrained distances) — the converse
 reads each distance's null set alone (the derivation's § Converse never takes a union over distances; the forward
 direction does). If the proof confirms it, the binder is dropped under the standing word of item 726, and named.
+
+## Stage 3 — SAVED: Q5 proved, with its two new pieces; one unread binder dropped
+
+**3.1 The two new pieces**, private helpers in `Pair.lean` (no new module: no other file reads them).
+- **(i) `exists_slice_ne_zero`** — *two density-one points see each other in a set of positive measure*: if `x` is a
+  density-one point of `A` and `y` of a Lebesgue-measurable `B` (`HasDensityOneAt volume`, closed balls), then for
+  some `ρ > 0` every `v` with `‖x + v − y‖ ≤ ρ` has `volume {x' | x' ∈ A ∧ x' + v ∈ B} ≠ 0`. The comparison of
+  `Plane.dist_ne_one_of_mem_densitySet` for two sets: at a radius `ρ` where `A` fills more than half of
+  `B(x, ρ)` and `B` more than seven eighths of `B(y, 2ρ)`, the points of `A ∩ B(x, ρ)` moved by `v` land in
+  `B(y, 2ρ)`, so a null slice would put more than half of `B(x, ρ)` inside `B(y, 2ρ) ∖ B`, which has less than an
+  eighth of `4 |B(x, ρ)|` (`measure_inter_add_sdiff₀` — the one use of `B`'s measurability; `volume_real_closedBall`).
+- **(ii) `prod_pairs_ne_zero`** — *the density-point step for a radius*: with `x`, `y` as in (i) and `dist x y = r > 0`,
+  `(Leb ⊗ arc) {(x', θ) | x' ∈ A ∧ x' + r e^{iθ} ∈ B} ≠ 0`. The direction `θ₀` from `x` to `y`
+  (`exists_angle_of_norm_eq_one`), an interval of directions of length `min (ρ / r) π` about it inside `[0, 2π)`
+  (`exists_interval_near`), whose displacements `r e^{iθ}` move `x` to within `ρ` of `y` (`norm_e_sub_e_le`), so each of
+  its slices is not null by (i); a null set of pairs would have almost every direction's slice null — with no
+  measurability of the set: `Measure.measurePreserving_swap` pulls the null set back
+  (`QuasiMeasurePreserving.preimage_null`), and `Measure.measure_ae_null_of_prod_null` reads its sections — so the
+  interval would be null.
+- **The extension** needs no lemma of its own: Q5 asks for no agreement with `ℓ'`, so the proof takes one conull set
+  `T` and `exists_translate_mem` at `V x = T` (density one everywhere, `hasDensityOneAt_congr_ae`), and
+  `Finset.rado_selection` at `F x ↦ ℓ' (x + ξ F)`, in the body of Q5.
+
+**3.2 Q5 `exists_admissibleOn_of_ae` — proved.** `T := {x | x is a density-one point of ℓ'⁻¹{ℓ' x}}` is conull
+(`Besicovitch.ae_tendsto_measure_inter_div` per label, as `ae_hasDensityOneAt_fibre`; `ae_all_iff` over the finite
+`Λ`); `ℓ'` is admissible at every pair of `T` — a forbidden pair `x, y ∈ T` at distance `r` (`r > 0` by `hpos`) would
+make the set of (ii) for the fibres of `ℓ' x` and `ℓ' y` a subset of `AdmissibleAe`'s null set at `r`; every finite
+`F` has a translate `F + ξ F ⊆ T`; Rado selection gives `χ` agreeing on each pair `{x, y}` with some `ℓ' (· + ξ t)`, and
+`dist (x + ξ) (y + ξ) = dist x y` carries the pair into `T`. Elaborated under `lean1.sh`: **no error and no warning;
+no `sorry` in the file** (`data/fs133/ipq1/work/pair-lean1.out`). First elaboration of the two pieces and Q5 closed
+them; the second dropped the binder.
+
+**3.3 A ruled difference (the standing word of item 726).** The first elaboration of the proved file warned
+`Variable name hcount is not explicitly referenced` at `exists_admissibleOn_of_ae`'s binder
+`(hcount : {r | ∃ a b, N r a b}.Countable)` — the route reads each distance's null set alone. **Dropped**; the two
+clauses of C133-PAIR, which passed it `hN.countable`, now do not (proofs only); the theorem's docstring's last
+sentence reads "The distances need not be algebraic, nor countably many: each distance is read alone." (was: "The
+distances need not be algebraic."). The statement is stronger by one hypothesis; no other statement or docstring
+changed. Stage 4's comparison names it.
+
+**3.4 The axioms of `Pair`'s four open records**, from a copy with a footer (`data/fs133/ipq1/work/PairAx.lean`,
+output `PairAx-q5.out`): `exists_admissibleOn_of_ae` on `[propext, Classical.choice, Quot.sound]`;
+`exists_measurable_admissibleAe`, `exists_admissibleOn_univ_iff_ae`, `exists_admissibleOn_univ_iff_algPlane` on those
+and `HadwigerNelson.Outside.OAI158.Spectral.residual_fourier` — each the plan's § 5.5 list. The build of record and the
+receipts from the built tree are stage 4.

@@ -307,13 +307,162 @@ theorem exists_measurable_admissibleAe [Finite Λ] {N : ℝ → Λ → Λ → Pr
   filter_upwards [hfst, hsnd, hpr] with q h1 h2 h3 hq
   exact h3 _ _ hq ⟨hℓpos _ h1, hℓpos _ h2⟩
 
+/-! Private helpers for the converse: the density-point step for two sets and a radius (the comparison of
+`Plane.dist_ne_one_of_mem_densitySet`, there for one set at distance one). -/
+
+/-- **Two density-one points see each other in a set of positive measure.** If `x` is a density-one point of `A` and
+`y` of a Lebesgue-measurable `B`, then for some `ρ > 0` every displacement `v` carrying `x` to within `ρ` of `y` has
+a set of positive measure of points `x' ∈ A` with `x' + v ∈ B`. (In a small ball about `x` most points are in `A`;
+moved by `v`, they land in the doubled ball about `y`, most of which is in `B`.) -/
+private theorem exists_slice_ne_zero {A B : Set ℂ} (hB : NullMeasurableSet B volume) {x y : ℂ}
+    (hx : HasDensityOneAt volume A x) (hy : HasDensityOneAt volume B y) :
+    ∃ ρ > 0, ∀ v : ℂ, ‖x + v - y‖ ≤ ρ → volume {x' : ℂ | x' ∈ A ∧ x' + v ∈ B} ≠ 0 := by
+  have h2 : Tendsto (fun ρ : ℝ => 2 * ρ) (𝓝[>] 0) (𝓝[>] 0) :=
+    tendsto_nhdsWithin_of_tendsto_nhds_of_eventually_within _
+      (((continuous_const.mul continuous_id).tendsto' 0 0 (by simp)).mono_left nhdsWithin_le_nhds)
+      (eventually_mem_nhdsWithin.mono fun r hr => by simp only [mem_Ioi] at hr ⊢; linarith)
+  have hxT : Tendsto (fun ρ : ℝ => (volume (A ∩ Metric.closedBall x ρ) / volume (Metric.closedBall x ρ)).toReal)
+      (𝓝[>] 0) (𝓝 1) :=
+    (ENNReal.tendsto_toReal ENNReal.one_ne_top).comp hx
+  have hyT : Tendsto (fun ρ : ℝ =>
+      (volume (B ∩ Metric.closedBall y (2 * ρ)) / volume (Metric.closedBall y (2 * ρ))).toReal) (𝓝[>] 0) (𝓝 1) :=
+    (ENNReal.tendsto_toReal ENNReal.one_ne_top).comp (hy.comp h2)
+  have ev1 := (tendsto_order.1 hxT).1 (1 / 2) (by norm_num)
+  have ev2 := (tendsto_order.1 hyT).1 (7 / 8) (by norm_num)
+  obtain ⟨ρ, ⟨h1, h2'⟩, hρ⟩ := ((ev1.and ev2).and self_mem_nhdsWithin).exists
+  have hρ0 : (0 : ℝ) < ρ := hρ
+  refine ⟨ρ, hρ0, fun v hv hzero => ?_⟩
+  -- the real bookkeeping: `V` the area of the small ball, `4 V` of the doubled one
+  have hc := volume_real_closedBall_one_pos
+  set c := volume.real (Metric.closedBall (0 : ℂ) 1) with hcdef
+  have hV : (volume (Metric.closedBall x ρ)).toReal = ρ ^ 2 * c := volume_real_closedBall x hρ0.le
+  have hW : (volume (Metric.closedBall y (2 * ρ))).toReal = (2 * ρ) ^ 2 * c :=
+    volume_real_closedBall y (by linarith)
+  have hVpos : 0 < ρ ^ 2 * c := by positivity
+  have hWpos : 0 < (2 * ρ) ^ 2 * c := by positivity
+  have hAt : volume (A ∩ Metric.closedBall x ρ) ≠ ⊤ :=
+    (lt_of_le_of_lt (measure_mono inter_subset_right) measure_closedBall_lt_top).ne
+  have hBt : volume (B ∩ Metric.closedBall y (2 * ρ)) ≠ ⊤ :=
+    (lt_of_le_of_lt (measure_mono inter_subset_right) measure_closedBall_lt_top).ne
+  have hDt : volume (Metric.closedBall y (2 * ρ) \ B) ≠ ⊤ :=
+    (lt_of_le_of_lt (measure_mono sdiff_subset) measure_closedBall_lt_top).ne
+  rw [ENNReal.toReal_div, hV, lt_div_iff₀ hVpos] at h1
+  rw [ENNReal.toReal_div, hW, lt_div_iff₀ hWpos] at h2'
+  -- the doubled ball splits into its part in `B` and the rest
+  have hsplit : (volume (Metric.closedBall y (2 * ρ) ∩ B)).toReal +
+      (volume (Metric.closedBall y (2 * ρ) \ B)).toReal = (2 * ρ) ^ 2 * c := by
+    rw [← ENNReal.toReal_add (by rwa [inter_comm]) hDt, measure_inter_add_sdiff₀ _ hB, hW]
+  rw [inter_comm] at hsplit
+  -- the small ball's part in `A`, moved by `v`, lies where the slice is or outside `B` in the doubled ball
+  have hsub : A ∩ Metric.closedBall x ρ ⊆
+      {x' : ℂ | x' ∈ A ∧ x' + v ∈ B} ∪ (fun z => z + v) ⁻¹' (Metric.closedBall y (2 * ρ) \ B) := by
+    rintro z ⟨hzA, hz⟩
+    by_cases hzB : z + v ∈ B
+    · exact Or.inl ⟨hzA, hzB⟩
+    · refine Or.inr ⟨?_, hzB⟩
+      rw [Metric.mem_closedBall, dist_eq_norm] at hz ⊢
+      have he : z + v - y = (z - x) + (x + v - y) := by ring
+      rw [he]
+      calc ‖(z - x) + (x + v - y)‖ ≤ ‖z - x‖ + ‖x + v - y‖ := norm_add_le _ _
+        _ ≤ 2 * ρ := by linarith
+  have hle : volume (A ∩ Metric.closedBall x ρ) ≤ volume (Metric.closedBall y (2 * ρ) \ B) :=
+    calc volume (A ∩ Metric.closedBall x ρ)
+        ≤ volume ({x' : ℂ | x' ∈ A ∧ x' + v ∈ B} ∪ (fun z => z + v) ⁻¹' (Metric.closedBall y (2 * ρ) \ B)) :=
+          measure_mono hsub
+      _ ≤ volume {x' : ℂ | x' ∈ A ∧ x' + v ∈ B} +
+          volume ((fun z => z + v) ⁻¹' (Metric.closedBall y (2 * ρ) \ B)) := measure_union_le _ _
+      _ = volume (Metric.closedBall y (2 * ρ) \ B) := by rw [hzero, zero_add, measure_preimage_add_right]
+  have hle' := ENNReal.toReal_mono hDt hle
+  nlinarith
+
+/-- **The density-point step for a radius**: if `x` is a density-one point of `A`, `y` of a Lebesgue-measurable `B`,
+and `x`, `y` are `r > 0` apart, then the pairs `(x', θ)` with `x' ∈ A` and `x' + r e^{iθ} ∈ B` are not null. (The
+slices of the last lemma are not null for an interval of directions about the direction from `x` to `y`; a null set
+of pairs has almost every slice null, with no measurability asked.) -/
+private theorem prod_pairs_ne_zero {A B : Set ℂ} (hB : NullMeasurableSet B volume) {x y : ℂ}
+    (hx : HasDensityOneAt volume A x) (hy : HasDensityOneAt volume B y) {r : ℝ} (hr : 0 < r)
+    (hxy : dist x y = r) :
+    ((volume : Measure ℂ).prod arcLength) {p : ℂ × ℝ | p.1 ∈ A ∧ p.1 + r * e p.2 ∈ B} ≠ 0 := by
+  obtain ⟨ρ, hρ, hslice⟩ := exists_slice_ne_zero hB hx hy
+  -- the direction from `x` to `y`
+  have hrc : (r : ℂ) ≠ 0 := Complex.ofReal_ne_zero.2 hr.ne'
+  have hn : ‖(y - x) / (r : ℂ)‖ = 1 := by
+    rw [norm_div, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hr, ← dist_eq_norm, dist_comm, hxy,
+      div_self hr.ne']
+  obtain ⟨θ₀, hθ₀, hyx⟩ := exists_angle_of_norm_eq_one hn
+  have hy' : y = x + r * e θ₀ := by
+    rw [← hyx]
+    field_simp
+    ring
+  -- an interval of directions whose displacements land within `ρ` of `y`
+  set s := min (ρ / r) Real.pi with hs
+  have hs0 : 0 < s := lt_min (div_pos hρ hr) Real.pi_pos
+  obtain ⟨a, hIsub, hIlip⟩ := exists_interval_near hθ₀ hs0 (min_le_right _ _)
+  have hgood : ∀ θ ∈ Ico a (a + s), volume {x' : ℂ | x' ∈ A ∧ x' + r * e θ ∈ B} ≠ 0 := by
+    intro θ hθ
+    refine hslice _ ?_
+    have he : x + r * e θ - y = (r : ℂ) * (e θ - e θ₀) := by rw [hy']; ring
+    rw [he, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos hr]
+    calc r * ‖e θ - e θ₀‖ ≤ r * |θ - θ₀| :=
+          mul_le_mul_of_nonneg_left (norm_e_sub_e_le θ θ₀) hr.le
+      _ ≤ r * s := mul_le_mul_of_nonneg_left (hIlip θ hθ) hr.le
+      _ ≤ r * (ρ / r) := mul_le_mul_of_nonneg_left (min_le_left _ _) hr.le
+      _ = ρ := by field_simp
+  intro hzero
+  -- a null set of pairs has almost every direction's slice null
+  have hswap : (arcLength.prod (volume : Measure ℂ))
+      (Prod.swap ⁻¹' {p : ℂ × ℝ | p.1 ∈ A ∧ p.1 + r * e p.2 ∈ B}) = 0 :=
+    (Measure.measurePreserving_swap (μ := arcLength) (ν := (volume : Measure ℂ))).quasiMeasurePreserving.preimage_null
+      hzero
+  have hae := Measure.measure_ae_null_of_prod_null hswap
+  have hI : arcLength (Ico a (a + s)) = 0 := by
+    refine measure_mono_null (fun θ hθ => ?_) (ae_iff.1 hae)
+    exact hgood θ hθ
+  rw [arcLength, Measure.restrict_apply measurableSet_Ico, inter_eq_left.2 hIsub, Real.volume_Ico] at hI
+  have : 0 < a + s - a := by linarith
+  exact (ENNReal.ofReal_pos.2 this).ne' hI
+
 /-- **C133-PAIR, converse** (step (B)): a labelling with Lebesgue-measurable fibres that is admissible almost
 everywhere gives a labelling admissible at every pair of points of the plane. The distances need not be
-algebraic. -/
-theorem exists_admissibleOn_of_ae [Finite Λ] {N : ℝ → Λ → Λ → Prop} (hcount : {r | ∃ a b, N r a b}.Countable)
+algebraic, nor countably many: each distance is read alone. -/
+theorem exists_admissibleOn_of_ae [Finite Λ] {N : ℝ → Λ → Λ → Prop}
     (hpos : ∀ r a b, N r a b → 0 < r) {ℓ' : ℂ → Λ} (hm : ∀ a, NullMeasurableSet (ℓ' ⁻¹' {a}) volume)
     (h : AdmissibleAe N ℓ') : ∃ ℓ : ℂ → Λ, AdmissibleOn N univ ℓ := by
-  sorry
+  classical
+  -- `T`: the points that are density-one points of their own fibre; conull (the Lebesgue density theorem)
+  set T : Set ℂ := {x | HasDensityOneAt volume (ℓ' ⁻¹' {ℓ' x}) x} with hTdef
+  have hT : volume Tᶜ = 0 := by
+    have hfib : ∀ a : Λ, ∀ᵐ x ∂(volume : Measure ℂ), x ∈ ℓ' ⁻¹' {a} → HasDensityOneAt volume (ℓ' ⁻¹' {a}) x :=
+      fun a => ae_imp_of_ae_restrict (Besicovitch.ae_tendsto_measure_inter_div volume (ℓ' ⁻¹' {a}))
+    rw [measure_eq_zero_iff_ae_notMem]
+    filter_upwards [ae_all_iff.2 hfib] with x hx hxT
+    exact hxT (hx (ℓ' x) rfl)
+  -- (the density-point step) `ℓ'` is admissible at every pair of points of `T`
+  have hadm : ∀ x ∈ T, ∀ y ∈ T, ¬ N (dist x y) (ℓ' x) (ℓ' y) := by
+    intro x hx y hy hxy
+    refine prod_pairs_ne_zero (hm (ℓ' y)) hx hy (hpos _ _ _ hxy) rfl
+      (measure_mono_null (fun p hp => ?_) (ae_iff.1 (h (dist x y))))
+    have h1 : ℓ' p.1 = ℓ' x := hp.1
+    have h2 : ℓ' (p.1 + (dist x y : ℂ) * e p.2) = ℓ' y := hp.2
+    show ¬ ¬ N (dist x y) (ℓ' p.1) (ℓ' (p.1 + (dist x y : ℂ) * e p.2))
+    rw [h1, h2]
+    exact not_not.2 hxy
+  -- every finite set has a translate inside `T`
+  have hTm : NullMeasurableSet T volume := (NullMeasurableSet.of_null hT).of_compl
+  have hT1 : ∀ x, HasDensityOneAt volume T x := fun x =>
+    (hasDensityOneAt_congr_ae (ae_eq_univ.2 hT) x).2 (hasDensityOneAt_univ x)
+  choose ξ hξ using fun F : Finset ℂ =>
+    exists_translate_mem (μ := volume) (V := fun _ => T) F (fun _ _ => hTm) fun x _ => hT1 x
+  -- compactness: one labelling agreeing on each finite set with a translate of `ℓ'`
+  obtain ⟨χ, hχ⟩ := Finset.rado_selection (β := fun _ : ℂ => Λ) fun F x => ℓ' (x + ξ F)
+  refine ⟨χ, fun x _ y _ hxy => ?_⟩
+  obtain ⟨t, hst, ht⟩ := hχ {x, y}
+  have hx : x ∈ t := hst (Finset.mem_insert_self x {y})
+  have hy : y ∈ t := hst (Finset.mem_insert_of_mem (Finset.mem_singleton_self y))
+  rw [ht x (Finset.mem_insert_self x {y}), ht y (Finset.mem_insert_of_mem (Finset.mem_singleton_self y))] at hxy
+  have hd : dist (x + ξ t) (y + ξ t) = dist x y := dist_add_right _ _ _
+  rw [← hd] at hxy
+  exact hadm _ (hξ t x hx) _ (hξ t y hy) hxy
 
 /-- **C133-PAIR, first clause**: an admissible labelling of the plane exists if and only if a Lebesgue-measurable
 labelling admissible almost everywhere exists. The direction from left to right rests on the declared outside
@@ -326,7 +475,7 @@ theorem exists_admissibleOn_univ_iff_ae [Finite Λ] {N : ℝ → Λ → Λ → P
     obtain ⟨ℓ', hm, hae⟩ := exists_measurable_admissibleAe hN (hℓ.mono (subset_univ _))
     exact ⟨ℓ', fun a => (hm a).nullMeasurableSet, hae⟩
   · rintro ⟨ℓ, hm, hae⟩
-    exact exists_admissibleOn_of_ae hN.countable hN.pos hm hae
+    exact exists_admissibleOn_of_ae hN.pos hm hae
 
 /-- **C133-PAIR, second clause**: an admissible labelling of the plane exists if and only if one of the algebraic
 plane exists. The direction from right to left rests on the declared outside theorem
@@ -338,8 +487,11 @@ theorem exists_admissibleOn_univ_iff_algPlane [Finite Λ] {N : ℝ → Λ → Λ
     exact ⟨ℓ, hℓ.mono (subset_univ _)⟩
   · rintro ⟨ℓ, hℓ⟩
     obtain ⟨ℓ', hm, hae⟩ := exists_measurable_admissibleAe hN hℓ
-    exact exists_admissibleOn_of_ae hN.countable hN.pos (fun a => (hm a).nullMeasurableSet) hae
+    exact exists_admissibleOn_of_ae hN.pos (fun a => (hm a).nullMeasurableSet) hae
 
 end HadwigerNelson.OneClass
 
 #print axioms HadwigerNelson.OneClass.exists_measurable_admissibleAe
+#print axioms HadwigerNelson.OneClass.exists_admissibleOn_of_ae
+#print axioms HadwigerNelson.OneClass.exists_admissibleOn_univ_iff_ae
+#print axioms HadwigerNelson.OneClass.exists_admissibleOn_univ_iff_algPlane
