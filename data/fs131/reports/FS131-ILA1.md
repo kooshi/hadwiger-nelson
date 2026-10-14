@@ -1,0 +1,17 @@
+JOB FS131-ILA1 — DONE   harness≈330k (own≈260k)
+RESULT: `HadwigerNelson.Rigidity.exists_admissiblePair` — TRUE, [kernel] on `[propext, Classical.choice, Quot.sound]` (`Proofs/HadwigerNelson/Rigidity/UnitCircle.lean`, branch `fs131-wla`), read against X02D l. 146 / PE-1′: over every real number field `F` there are unit vectors `u, w` of `F²` with `ℤ² → ⟨u, w⟩` injective and every finite-index subgroup of `⟨u, w⟩` generating `F(i)`.
+RESULT: `HadwigerNelson.Rigidity.exists_unitPair` — TRUE, [kernel], standard three (`Rigidity/AdmissiblePrime`, new): over every real number field, `u, w ∈ F(i)` of modulus one, `u^a w^b = 1` only at `a = b = 0`, and `Subfield.closure {wᵏ} = F(i)` for every `k ≥ 1` — X02D's "in particular" form with independence.
+RESULT: `HadwigerNelson.Rigidity.exists_residueHom_unramified` — TRUE, [kernel], standard three (`Rigidity/AdmissiblePrime`): at every number field `K` and every `M ≠ 0`, a prime `p ∤ M` and a ring homomorphism `𝓞 K → ℤ/p` whose kernel `𝔓` has `p ∉ 𝔓²` — a degree-one unramified prime outside any finite set (classical; the kernel proof ours), by Schur's argument, Mathlib's Kummer–Dedekind isomorphism and `p ∤ disc K`.
+RECORD: plans/FS131-ILA1-implementation.md (branch fs131-wla, tree .claude/worktrees/fs132-wi1)   COMMITS: 9ce329aaf (stage 1), 47551720a (stage 2), 716d98d16 (stage 3), b9f373cec (stage 4), and this report's commit
+INVENTORY:
+- result — `exists_admissiblePair` [kernel], standard three; lane A closed; the entropy split now reads a pair that exists at every real number field — plans/FS131-ILA1-implementation.md § Theorems this phase proved
+- result — `exists_residueHom_unramified` and `exists_unitPair` [kernel], standard three, the module's two public theorems; 27 records of the module and 33 of `UnitCircle` CLEAN, control 4/4 — § Stage 4
+- generalization — X02D's Lemma W (its `ℚ(wᵏ) = L` half) needs neither Chebotarev nor a completely split prime nor a principal power: one degree-one unramified prime `𝔓` above an odd `p` (conjugation then moves it), `z ∈ 𝔓²` in no other prime above `p`, `w = z/z̄`; for `x ∈ M = ℚ(wᵏ)`, `[L : M]` divides `v_p(N_{L/ℚ}(x))`, and `v_p(N(wᵐ − p)) = 1 − m·v_p(N(z̄))` at `m = k, 2k` gives `[L : M] ∣ 1`; independence by membership in two such primes — `Proofs/HadwigerNelson/Rigidity/AdmissiblePrime.lean` (`adjoin_pow_eq_top`, `eq_zero_of_zpow_mul_zpow_eq_one`); `plans/FS100-X02D-derivation.md` ll. 156–163
+- prediction scored — the plan's price, 800–1,250 lines (about 1,000), against about 590 (the module's 572 lines with docstrings, `UnitCircle` +17); my re-price from the first two leaves, 400–500, low by about a fifth (independence and the conjugate prime took more) — § Stage 2, § Stage 3
+- correction owed — `UnitCircle`'s module docstring and `exists_admissiblePair`'s docstring still describe the plan's route ("a rational prime `p` splitting completely … `(z) = 𝔓ʰ`"); rewordings drafted, not mine to edit — record § Drafts, D2
+- prior-art debt — Schur's theorem (1912) is cited from memory as "Schur's argument" with no key; a row proposed with "recalled, not read" — § Drafts, D3
+- slip — none
+HELD FOR THE COORDINATOR:
+- The two docstring rewordings of `UnitCircle` (D2) — for the landing or a one-line ruling.
+- Whether `[Schur1912]` gets a row (D3); nothing rests on the paper.
+- The landing's whole-library steps (`axioms.sh`, `vacuity.sh`, `assumptions.sh`) were not run on this branch, which still holds other lanes' `sorry`; the audit block to add is D1 (three CLEAN records).
