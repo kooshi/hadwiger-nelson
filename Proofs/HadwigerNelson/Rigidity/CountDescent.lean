@@ -52,19 +52,19 @@ theorem rowsEdgeNull_levelRows {φ : ℂ × K F → Fin 4} (hφ : Measurable φ)
     RowsEdgeNull {d : (levR F k).range.toAddSubgroup | (d : Lev F k) ∈ normOneLev F k} (levelRows φ j k) := by
   sorry
 
-/-- **The descent's measure comparison**: colour `j` in the window `sq a s × K` is the level rows plus the badly filled
+/-- **The descent's measure comparison**: colour `j` in the window `squareWin a s × K` is the level rows plus the badly filled
 points. -/
 theorem volume_colour_le {φ : ℂ × K F → Fin 4} (hφ : Measurable φ) (j : Fin 4) (k : ℕ) (a : ℂ) (s : ℝ) :
-    (volume.prod (haarK F)).real ({p | φ p = j} ∩ sq a s ×ˢ Set.univ) ≤
-      (Nat.card (levR F k).range.toAddSubgroup : ℝ)⁻¹ * ∑ q, volume.real (levelRows φ j k q ∩ sq a s) +
-        (volume.prod (haarK F)).real {p | p.1 ∈ sq a s ∧ φ p = j ∧
+    (volume.prod (haarK F)).real ({p | φ p = j} ∩ squareWin a s ×ˢ Set.univ) ≤
+      (Nat.card (levR F k).range.toAddSubgroup : ℝ)⁻¹ * ∑ q, volume.real (levelRows φ j k q ∩ squareWin a s) +
+        (volume.prod (haarK F)).real {p | p.1 ∈ squareWin a s ∧ φ p = j ∧
           haarK F ({x | φ (p.1, x) = j} ∩ proj F k ⁻¹' {proj F k p.2}) ≤
             3 / 4 * haarK F (proj F k ⁻¹' {proj F k p.2})} := by
   sorry
 
 /-- The badly filled points of a window tend to `0` with the level. -/
 theorem tendsto_bad {φ : ℂ × K F → Fin 4} (hφ : Measurable φ) (j : Fin 4) (a : ℂ) (s : ℝ) :
-    Tendsto (fun k => (volume.prod (haarK F)).real {p | p.1 ∈ sq a s ∧ φ p = j ∧
+    Tendsto (fun k => (volume.prod (haarK F)).real {p | p.1 ∈ squareWin a s ∧ φ p = j ∧
         haarK F ({x | φ (p.1, x) = j} ∩ proj F k ⁻¹' {proj F k p.2}) ≤
           3 / 4 * haarK F (proj F k ⁻¹' {proj F k p.2})}) atTop (𝓝 0) := by
   sorry

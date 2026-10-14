@@ -6,7 +6,12 @@
 
 ## Theorems this phase proved
 
-(Filled at the last stage.)
+A planning job: **none in the library.** Composed over `sorry` leaves, so not theorems yet:
+`Rigidity.Counting.count_of_oneAvoidingDensityBound` (the count, over 57 leaves) and `Plane.mOne_le_one` (proved, a
+one-line consequence of `upperDensity_le_one`; through `./scripts/build.sh`, not at the gate). Five leaves proved **in
+scratch only** (`data/fs131/k12a/leaves/`, [kernel, standard three, scratch; not in a module]): `leafK_compactSpace`,
+`leafK_isProbabilityMeasure`, `leafR` (`exists_normOneL_residue`), `leafZ` (`card_le_mul_card_closedNbhd`), `leafP`
+(`unitPairsNull_diff_essNbhd_union`), `leafE` (`tendsto_measure_ne`, over its two sibling leaves).
 
 ## Stage 1 — SAVED: the readback
 
@@ -53,7 +58,7 @@ The derivation's entries (read): R88-TC-ext, -J28V-2, -TC-reg, -TC-Yp, -J28V-3, 
 (`plans/R88-derivation.md` ll. 114–161); FS100-TCA, FS100-CX (`plans/FS100-derivation.md` ll. 291, 293); J28D § 3.2 C1–C8,
 § 3.3 (`plans/FS86-R88-D-derivation.md` ll. 142–219).
 
-## Stage 2 — SAVED: the count typed, in seven blocks and eight modules (59 leaves `sorry`)
+## Stage 2 — SAVED: the count typed, in seven blocks and eight modules (57 leaves `sorry` at this stage; 61 after stage 3)
 
 ### 2.1 The route, and where it leaves the map planner's
 
@@ -111,7 +116,7 @@ eight modules then missing rows: `logs/architecture-base.log`).
 - `toL` repeats lane T's `Rigidity.ofUnitRing` (`Rigidity/TateModel`) under another name in another namespace; neither module
   imports the other. At the join the two can be made one (a question, INVENTORY).
 
-## Stage 3 — SAVED: the obligation pass, and the plan per leaf (61 leaves)
+## Stage 3 — SAVED: the obligation pass, and the plan per leaf (61 leaves; 57 after § 5.4)
 
 ### 3.1 The obligation pass (`debruijn-obligation-modeling`, invoked fresh)
 
@@ -250,3 +255,109 @@ pin; Zhang's counting (`[Zhang2012]` Thm 1.8) and Hilbert 90 mod `P^m` are forma
 the named hypothesis `Plane.OneAvoidingDensityBound` (`[AmbrusEtAl2023]` Thm 1), unchanged. **Formalize every one; no axiom
 declared.** Off the path now: Doob–Cohn, `[BachocEtAl2014]` Thm 2.2, weak approximation for the norm-one torus in full
 (only its `h`-th-power consequence is read).
+
+## Stage 5 — SAVED: lanes, and the count's row of the map
+
+### 5.1 What the count reads from outside its eight modules (statements only; each a leaf of its own module)
+
+`Rigidity.tca_uniform` (M13, over Weil's bound — the declared import); `Rigidity.noRamifiedStableDyadic_of_tca`
+(`Rigidity/ChainAtTA`, lane M9-S); `Rigidity.exists_mul_stableIntegers_le` and `Rigidity.dense_mixedEmbedding_nsmul_unitRing`
+(M9, lane M9-R); `Rigidity.TA_subset_contChars` (M10); `Plane.upperDensity_le_of_oneAvoidingDensityBound` (M12's input, low).
+**Not read:** `BochnerOn`, M2, M3, M4, M11, `isCountablyGenerated_nhds_tauPrime` (the completion is first countable),
+`unitRing_eq_stableIntegers` (`R = O′`), `NoRamifiedStableDyadic` as a hypothesis.
+
+### 5.2 Lanes (no two share a file; every lane can start now — the statements it reads are typed)
+
+| lane | modules | waits on (to land, not to start) | price |
+|---|---|---|---|
+| Λ1, the plane | `Plane/WindowDensity`, `Rigidity/PlaneZhang` (open with `exists_nrWindow`, then `sum_volume_inter_sq_le`) | nothing | 800–1,150 lines, 2.5–3.5 agent-days (after § 5.4) |
+| Λ2, the finite side | `Rigidity/FiniteZhang`, `Rigidity/CountResidue`, `Rigidity/CountDescent` (open with `ratioLe_prod`) | M9-R (`exists_mul_stableIntegers_le`), M9-S, M13 (`tca_uniform`) | 1,350–1,900 lines, 4–5.5 agent-days |
+| Λ3, the archimedean side and the completion | `Rigidity/CountTorus`, `Rigidity/CountCompletion` (open with `mem_closure_pow`, to re-price block A) | M9-R (`dense_mixedEmbedding_nsmul_unitRing`) | 1,300–1,850 lines, 4–6 agent-days |
+| Λ4, the extension | `Rigidity/CountExtension` (open with `exists_extension`) | M10 (`TA_subset_contChars`) | 700–1,100 lines, 2–3.5 agent-days |
+
+About six days of wall time on four lanes; the count closes when its lanes and the five upstream leaves of § 5.1 have
+landed. One implementer per lane; each re-prices its lane from its first two leaves (`LEAN.md` § The kernel's cost
+model) and messages the coordinator if a lane prices over a week.
+
+### 5.3 The count's row of the map (`plans/FS131-KR1-chain-map.md` § Stage 5), rewritten
+
+| module | Lean modules | state | lanes | price | waits on |
+|---|---|---|---|---|---|
+| **M12** | `Plane/OneAvoidingDensity` (1) for its input; `Plane/WindowDensity` (6), `Rigidity/FiniteZhang` (4), `PlaneZhang` (5), `CountTorus` (7), `CountResidue` (14), `CountCompletion` (11), `CountExtension` (5), `CountDescent` (5; the count composed: `Counting.count_of_oneAvoidingDensityBound`) | **typed (FS131-K12A)**: 57 leaves; five first leaves proved in scratch | Λ1–Λ4 (§ 5.2), all startable now | 4,150–6,000 lines, 12–18.5 agent-days, about a week across four lanes — from five first leaves | to land: M13's `tca_uniform`, M9-R, M9-S, M10's `TA_subset_contChars`; the ruling on `m₁` |
+
+**The critical path, re-read:** the count no longer waits on M13 or M9 to *start*; it waits on them to *land*. So the
+chain's path becomes `max(M13's tail, M12's lanes) → the headline`, beside lane T → M8b and M4 → M10 → M2b → M11.
+
+### 5.4 The build, a doubled name, and a shorter route it exposed
+
+**Build 1** (`data/fs131/k12a/logs/build-1.log`): FAIL at the import surface — `environment already contains
+'HadwigerNelson.Plane.bandFree_periodize' from Proofs.HadwigerNelson.Plane.Slack`. `Plane/Slack` (FS-131, proved, no
+`sorry`) already holds the window and periodisation machinery block P was planning to re-prove: `squareWin` (the job's `sq`,
+the same set), `periodize`, `measurableSet_periodize`, `isPeriodicSet_periodize`, `bandFree_periodize` (a window's trace at
+period `ℓ + 2`), `volume_squareWin`, `measurableSet_squareWin`, `exists_squareWin_dense` and `upperDensity_periodize`
+(the periodisation's upper density **equals** `|T| / (ℓ + 2)²`), with `Plane.measurableSet_densitySet` in `Plane/Cover`.
+`WindowDensity` now imports `Plane/Slack` and states over `squareWin`; the job's `sq`, `measurableSet_sq`, `volume_sq`,
+`le_upperDensity_of_periodic` and `bandFree_periodize` are deleted (four leaves fewer: **57 leaves**), and
+`volume_inter_sq_le` and `exists_periodic_near_mOne` become short compositions of kernel lemmas. **Block P re-priced:
+300–450 lines, 1–1.5 agent-days; the count: 4,150–6,000 lines, 12–18.5 agent-days.** A scan of the eight modules'
+other public names against the library's declarations finds no second clash (`grep` by name; `scripts/dupnames.sh` is the
+gate's check and was not run by this planning job).
+
+**Build 2** (`data/fs131/k12a/logs/build-2.log`, full output `build-2-full.log`): **exit 0, 256 of 256 batches, 8 m 27 s**;
+in the eight modules every warning is `declaration uses 'sorry'`. **As the kernel stores them**
+(`data/fs131/k12a/probes/KernelSigs.lean`, output `KernelSigs.out`): the principal statements' binders are those of § 2.2
+and § 3.1, no section variable dropped or added; `count_of_oneAvoidingDensityBound` prints `[propext, sorryAx,
+Classical.choice, Quot.sound]` through its leaves, as a skeleton must.
+
+## Stage 6 — SAVED: drafts for files I do not write
+
+### 6.1 Dated lines for `data/fs131/claims-NF2.md` § Dated lines (each to follow the last)
+
+- 2026-10-14 — **The count is typed** (FS131-K12A): `Rigidity.Counting.count_of_oneAvoidingDensityBound :
+  Plane.OneAvoidingDensityBound → (chainInterface F).Count`, for every real number field, composed over 57 leaves in eight
+  modules (`Plane/WindowDensity`, `Rigidity/FiniteZhang`, `PlaneZhang`, `CountTorus`, `CountResidue`, `CountCompletion`,
+  `CountExtension`, `CountDescent`); it reads `tca_uniform`, `noRamifiedStableDyadic_of_tca`, `TA_subset_contChars`,
+  `exists_mul_stableIntegers_le`, `dense_mixedEmbedding_nsmul_unitRing` and `upperDensity_le_of_oneAvoidingDensityBound`;
+  no typed statement of another module changes.
+- 2026-10-14 — **`[S9]` by Hilbert 90 modulo `P^m`** (FS131-K12A): at every stable prime not ramified in `F(i)/F` the unit
+  vectors map onto the norm-one elements of `𝓞/P^m` (`z = w + s·w̄`), with no smoothness; under `TCA F` no stable prime is
+  ramified. NF2-LEAF-07 is `Counting.exists_normOneL_residue(s)`, its first form proved in scratch.
+- 2026-10-14 — **One archimedean factor** (FS131-K12A): the slice `Δ = ℚ(i) ⊗ ℝ` of `L ⊗ ℝ` carries `UD(ℝ²) ⊗ Cay(K, U)` at
+  every number field, so the count reads `m₁` of one plane; C14.3's induction, FS100-CX's step, Doob–Cohn, R88-J28V-2's
+  Vitali family and `[BachocEtAl2014]` Thm 2.2 leave the count's path.
+- 2026-10-14 — **Lemma C (d) from `c·O′ ⊆ R`** (FS131-K12A; item 791's question (4)): the count reads neither `R = O′` nor
+  a scope.
+
+**A correction owed to the draft claim list `data/fs131/kn3/claims-M12-count.md`** (generator-owned, so not edited here):
+statement 2 reads "to type and declare"; by the ruling of 2026-10-14 the input is the named hypothesis
+`Plane.OneAvoidingDensityBound`, not declared; and "Imports M9 (density, `R = O′`)" — the count reads M9's density and
+`c·O′ ⊆ R`, not `R = O′`.
+
+### 6.2 `BIBLIOGRAPHY.md`
+
+- `[Zhang2012]`, to follow its reading status: "Thm 1.8's counting (social and lonely points) typed as
+  `Rigidity.ratioLe_prod` and `Rigidity.sum_volume_inter_sq_le` (FS131-K12A, skeleton), following J28D § 3.2 C5's count;
+  the paper not read by FS131-K12A".
+- `[BachocEtAl2014]`: "off the count's path since FS131-K12A (the count reads ratios through `tca_uniform`, not Hoffman
+  bounds)".
+- `[AmbrusEtAl2023]`: "read by FS131-K12A only through `Plane.OneAvoidingDensityBound` as FS131-KR1 typed it; not re-read".
+
+No paper was read by this job; its sources are the derivation files named in § 1.3.
+
+### 6.3 `LEAN.md` § Searching — Lean, five lines
+
+- At the pin `𝓞 L ⧸ I` carries no `TopologicalSpace` instance, and instance search does not find `Finite (𝓞 L ⧸ I)`
+  (`Ideal.finiteQuotientOfFreeOfNeBot` asks `I ≠ ⊥`): state it once as an instance for the ideals at hand, and give a ring
+  that must be discrete a `def` synonym with `⊥` as its instance (`Counting.Lev`; `data/fs131/k12a/probes/Inst.out`)
+  (FS131-K12A).
+- Instance search does not find `SecondCountableTopology` for the subtype of an `AddSubgroup.topologicalClosure` in a product
+  of discrete synonyms; without it `(comap f (𝓝 0)).IsCountablyGenerated` fails and `tendsto_integral_filter_of_dominated_convergence`
+  does not elaborate. Declare `DiscreteTopology.secondCountableTopology_of_countable` on the synonym and
+  `TopologicalSpace.Subtype.secondCountableTopology _` on the subgroup (`Rigidity/CountCompletion`;
+  `data/fs131/k12a/leaves/Dbg.out`) (FS131-K12A).
+- There is no `Algebra F (fieldI F)` for `F : Subfield ℝ`: the place of `F` under a place `w` of `F(i)` is
+  `InfinitePlace.comap w f` for a ring map `f : F →+* fieldI F` (`data/fs131/k12a/leaves/ProbeA.out`) (FS131-K12A).
+- `Circle.continuous_coe` is not a name at the pin: `Continuous (fun z : Circle => (z : ℂ))` by `fun_prop` (FS131-K12A).
+- New skeleton modules can be compiled against a tree's build with no Lake run: a symlink copy of the tree's compiled
+  `Proofs/` with `lean -o` writing the new modules over it and the lakefile's options passed as `-D…`
+  (`data/fs131/k12a/lean1.sh`); iteration only — the build is the check (FS131-K12A).

@@ -1,0 +1,99 @@
+slot: waiting (ledger 20 + 6 > budget 22 GiB)
+slot: admitted k12a: mem 6 GiB (hard cap), cpus 0,2
+@count_of_oneAvoidingDensityBound : ∀ {F : Subfield ℝ} [inst : NumberField ↥F],
+  Plane.OneAvoidingDensityBound → (chainInterface F).Count
+'HadwigerNelson.Rigidity.Counting.count_of_oneAvoidingDensityBound' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+@false_of_slice : ∀ {F : Subfield ℝ} [inst : NumberField ↥F],
+  SpectralChain.TCA F →
+    Plane.mOne < ENNReal.ofReal (1 / 4) → ∀ {φ : ℂ × K F → Fin 4}, Measurable φ → SliceEdgeNull φ → False
+@exists_slice : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (μ : SpectralChain.InvariantColouring F)
+  {σ : MeasureTheory.Measure (SpectralChain.Dual F)},
+  SpectralChain.IsTraceSpectral F μ.μ σ → σ (TA F)ᶜ = 0 → ∃ φ, Measurable φ ∧ SliceEdgeNull φ
+@exists_extension : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (μ : SpectralChain.InvariantColouring F)
+  {σ : MeasureTheory.Measure (SpectralChain.Dual F)},
+  SpectralChain.IsTraceSpectral F μ.μ σ →
+    σ (TA F)ᶜ = 0 →
+      ∃ f,
+        Measurable (Function.uncurry f) ∧
+          ∀ (g t : G F), t ∈ closure (⇑(ιG F) '' unitVectorsR F) → μ.μ {c | f c g = f c (g + t)} = 0
+@tendsto_measure_ne : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (μ : SpectralChain.InvariantColouring F)
+  {σ : MeasureTheory.Measure (SpectralChain.Dual F)},
+  SpectralChain.IsTraceSpectral F μ.μ σ →
+    σ (TA F)ᶜ = 0 → Filter.Tendsto (fun y => μ.μ {c | c 0 ≠ c y}) (Filter.comap (⇑(ιG F)) (nhds 0)) (nhds 0)
+mem_closure_ιG : ∀ (F : Subfield ℝ) [inst : NumberField ↥F] (θ : ℝ) {u : ↥(SpectralChain.unitRing F)},
+  u ∈ unitVectorsR F → ((Delta F) (Complex.exp (↑θ * Complex.I)), (ιK F) u) ∈ closure (⇑(ιG F) '' unitVectorsR F)
+ratioLe_levR_range : ∀ (F : Subfield ℝ) [inst : NumberField ↥F],
+  SpectralChain.TCA F →
+    ∀ {c : ℝ},
+      0 ≤ c →
+        (∀ (P : SpectralChain.StablePrime F), RatioAtMost P c) → ∀ {k : ℕ}, 1 ≤ k → RatioLe {d | ↑d ∈ normOneLev F k} c
+image_levR_unitVectors : ∀ (F : Subfield ℝ) [inst : NumberField ↥F],
+  SpectralChain.TCA F → ∀ (k : ℕ), ⇑(levR F k) '' {r | ↑r ∈ SpectralChain.unitVectors F} = normOneLev F k
+@exists_normOneL_residue : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (P : SpectralChain.StablePrime F),
+  ¬IsRamified P →
+    ∀ (m : ℕ) {s : NumberField.RingOfIntegers ↥(SpectralChain.fieldI F) ⧸ P.P ^ m},
+      s ∈ normOneQ P m → ∃ x, ∃ (hx : x ∈ normOneL F), (P.residue m) ⟨x, ⋯⟩ = s
+exists_level_mem_nsmul : ∀ (F : Subfield ℝ) [inst : NumberField ↥F] {N : ℕ},
+  N ≠ 0 → ∃ k, ∀ (r : ↥(SpectralChain.unitRing F)), (levR F k) r = 0 → ∃ y, r = N • y
+mem_closure_pow : ∀ (F : Subfield ℝ) [NumberField ↥F] {x : ↥(SpectralChain.fieldI F)},
+  x ∈ normOneL F →
+    ∀ {h : ℕ},
+      1 ≤ h →
+        (NumberField.mixedEmbedding ↥(SpectralChain.fieldI F)) x ∈
+          closure (⇑(NumberField.mixedEmbedding ↥(SpectralChain.fieldI F)) '' (fun x => x ^ h) '' normOneL F)
+@sum_volume_inter_sq_le : ∀ {Q : Type u_1} [inst : AddCommGroup Q] [inst_1 : Fintype Q] [DecidableEq Q] {S : Set Q},
+  (∀ s ∈ S, -s ∈ S) →
+    ∀ {r : ℝ},
+      RatioLe S r →
+        0 ≤ r →
+          ∀ {Y : Q → Set ℂ},
+            (∀ (q : Q), MeasurableSet (Y q)) →
+              RowsEdgeNull S Y →
+                ∀ {ε s₀ : ℝ},
+                  Plane.NRWindow ε s₀ →
+                    ∀ (a : ℂ) {s : ℝ},
+                      s₀ ≤ s →
+                        ∑ q, MeasureTheory.volume.real (Y q ∩ Plane.squareWin a s) ≤
+                          (max Plane.mOne.toReal r + ε) * ↑(Nat.card Q) * s ^ 2
+@ratioLe_prod : ∀ {G₁ : Type u_1} {G₂ : Type u_2} [inst : AddCommGroup G₁] [Finite G₁] [inst_2 : AddCommGroup G₂]
+  [Finite G₂] {S₁ : Set G₁} {S₂ : Set G₂} {c : ℝ},
+  (∀ s ∈ S₁, -s ∈ S₁) → (∀ s ∈ S₂, -s ∈ S₂) → RatioLe S₁ c → RatioLe S₂ c → RatioLe (S₁ ×ˢ S₂) c
+@ratioLe_pi : ∀ {ι : Type u_1} [Finite ι] {H : ι → Type u_2} [inst : (i : ι) → AddCommGroup (H i)]
+  [∀ (i : ι), Finite (H i)] {S : (i : ι) → Set (H i)} {c : ℝ},
+  0 ≤ c → (∀ (i : ι), ∀ s ∈ S i, -s ∈ S i) → (∀ (i : ι), RatioLe (S i) c) → RatioLe {d | ∀ (i : ι), d i ∈ S i} c
+@Plane.exists_nrWindow : ∀ {ε : ℝ}, 0 < ε → ∃ s₀, 0 < s₀ ∧ Plane.NRWindow ε s₀
+@Plane.volume_inter_sq_le : ∀ {A : Set ℂ},
+  MeasurableSet A →
+    Plane.UnitPairsNull A →
+      ∀ (a : ℂ) {s : ℝ},
+        0 < s → MeasureTheory.volume (A ∩ Plane.squareWin a s) ≤ Plane.mOne * ENNReal.ofReal ((s + 2) ^ 2)
+Plane.NRWindow : ℝ → ℝ → Prop
+tendsto_haarK_bad : ∀ (F : Subfield ℝ) [inst : NumberField ↥F] {Y : Set (K F)},
+  MeasurableSet Y →
+    ∀ {κ : ENNReal},
+      0 < κ →
+        Filter.Tendsto
+          (fun k =>
+            (haarK F)
+              {x |
+                x ∈ Y ∧
+                  (haarK F) (Y ∩ ⇑(proj F k) ⁻¹' {(proj F k) x}) ≤
+                    (1 - κ) * (haarK F) (⇑(proj F k) ⁻¹' {(proj F k) x})})
+          Filter.atTop (nhds 0)
+@rowsEdgeNull_levelRows : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] {φ : ℂ × K F → Fin 4},
+  Measurable φ → SliceEdgeNull φ → ∀ (j : Fin 4) (k : ℕ), RowsEdgeNull {d | ↑d ∈ normOneLev F k} (levelRows φ j k)
+@volume_colour_le : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] {φ : ℂ × K F → Fin 4},
+  Measurable φ →
+    ∀ (j : Fin 4) (k : ℕ) (a : ℂ) (s : ℝ),
+      (MeasureTheory.volume.prod (haarK F)).real ({p | φ p = j} ∩ Plane.squareWin a s ×ˢ Set.univ) ≤
+        (↑(Nat.card ↥(levR F k).range.toAddSubgroup))⁻¹ *
+            ∑ q, MeasureTheory.volume.real (levelRows φ j k q ∩ Plane.squareWin a s) +
+          (MeasureTheory.volume.prod (haarK F)).real
+            {p |
+              p.1 ∈ Plane.squareWin a s ∧
+                φ p = j ∧
+                  (haarK F) ({x | φ (p.1, x) = j} ∩ ⇑(proj F k) ⁻¹' {(proj F k) p.2}) ≤
+                    3 / 4 * (haarK F) (⇑(proj F k) ⁻¹' {(proj F k) p.2})}

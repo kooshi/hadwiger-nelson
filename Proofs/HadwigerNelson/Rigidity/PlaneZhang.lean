@@ -67,7 +67,7 @@ theorem ae_disjoint_touched {S : Set Q} (hS : ∀ s ∈ S, -s ∈ S) {Y : Q → 
 uniform in `Q`, `S` and the rows. -/
 theorem sum_volume_inter_sq_le {S : Set Q} (hS : ∀ s ∈ S, -s ∈ S) {r : ℝ} (hr : RatioLe S r) (hr0 : 0 ≤ r)
     {Y : Q → Set ℂ} (hY : ∀ q, MeasurableSet (Y q)) (h : RowsEdgeNull S Y) {ε s₀ : ℝ} (hN : NRWindow ε s₀) (a : ℂ)
-    {s : ℝ} (hs : s₀ ≤ s) : ∑ q, volume.real (Y q ∩ sq a s) ≤ (max mOne.toReal r + ε) * Nat.card Q * s ^ 2 := by
+    {s : ℝ} (hs : s₀ ≤ s) : ∑ q, volume.real (Y q ∩ squareWin a s) ≤ (max mOne.toReal r + ε) * Nat.card Q * s ^ 2 := by
   sorry
 
 /-! ## Spec examples -/
