@@ -175,10 +175,9 @@ replacement matches once; developed on the copy `data/fs131/icm4/lean/ClassRatio
   `card_levelSet_one`, `card_res_fibre`, `card_levelSet_succ`, `norm_charSum_new_le`, `charBound_of_charBound_one`;
 - **added** (private): `exists_conj_sub_notMem` (`2 ∉ P` ⟹ `conjO i − i ∉ P`: `(ī − i)·i = 2`), and
   `norm_charSum_le_of_resT` (below);
-- **redirected**: the four readers (`ClassRatio`'s `card_levelSet_one P h2 …` twice, `charBound_of_charBound_one P h2 …`
-  twice: in `charBound_one_exact`'s and the exclusions' level-one count, in `ratioAtMost_weil`, and in the odd branch of
-  `ratioAtMost_of_two_notMem`'s chain) read `card_levelSet_oneT` and `charBound_of_charBound_oneT` at
-  `(exists_conj_sub_notMem P h2).choose_spec`; `--` comments that named the deleted chain now name the survivors.
+- **redirected**: the four readers — `card_levelSet_one P h2 …` in `charBound_one_of_circleCos` and
+  `charBound_one_exact_27`, `charBound_of_charBound_one P h2 …` in `ratioAtMost_weil` and `ratioAtMost_of_two_notMem` —
+  read `card_levelSet_oneT` and `charBound_of_charBound_oneT` at `(exists_conj_sub_notMem P h2).choose_spec`; `--` comments that named the deleted chain now name the survivors.
 
 **The coordinator's constraint (2026-10-14, by message): the certificate link's two hypotheses (FS131-IKL1), at odd stable
 primes of residue size `11²` and `19²`, stay reachable, each as one private lemma:**
