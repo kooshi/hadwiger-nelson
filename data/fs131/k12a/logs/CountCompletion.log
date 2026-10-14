@@ -1,12 +1,12 @@
-slot: admitted k12a: mem 5 GiB (hard cap), cpus 0,1
-Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:49:0: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:65:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:68:8: warning: declaration uses `sorry`
+slot: admitted k12a: mem 5 GiB (hard cap), cpus 4,5
+Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:51:0: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:69:8: warning: declaration uses `sorry`
 Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:72:8: warning: declaration uses `sorry`
 Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:76:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:82:0: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:85:0: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:88:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:93:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:105:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:112:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:80:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:86:0: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:89:0: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:92:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:97:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:109:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:116:8: warning: declaration uses `sorry`

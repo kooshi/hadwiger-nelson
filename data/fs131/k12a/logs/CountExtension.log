@@ -1,4 +1,4 @@
-slot: admitted k12a: mem 5 GiB (hard cap), cpus 0,1
+slot: admitted k12a: mem 5 GiB (hard cap), cpus 4,5
 Proofs/HadwigerNelson/Rigidity/CountExtension.lean:41:8: warning: declaration uses `sorry`
 Proofs/HadwigerNelson/Rigidity/CountExtension.lean:46:8: warning: declaration uses `sorry`
 Proofs/HadwigerNelson/Rigidity/CountExtension.lean:50:8: warning: declaration uses `sorry`

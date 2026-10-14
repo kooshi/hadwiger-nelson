@@ -37,6 +37,8 @@ instance (k : ℕ) : TopologicalSpace (Lev F k) := ⊥
 
 instance (k : ℕ) : DiscreteTopology (Lev F k) := ⟨rfl⟩
 
+instance (k : ℕ) : SecondCountableTopology (Lev F k) := DiscreteTopology.secondCountableTopology_of_countable
+
 /-- The diagonal map of `R` into all levels. -/
 def ιAll : unitRing F →+ ∀ k, Lev F k := AddMonoidHom.pi fun k => (levR F k).toAddMonoidHom
 
@@ -48,6 +50,8 @@ abbrev K := ↥(Kgrp F)
 
 instance : CompactSpace (K F) := by
   sorry
+
+instance : SecondCountableTopology (K F) := TopologicalSpace.Subtype.secondCountableTopology _
 
 instance : MeasurableSpace (K F) := borel (K F)
 

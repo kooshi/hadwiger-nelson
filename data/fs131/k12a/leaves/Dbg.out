@@ -1,0 +1,6 @@
+slot: admitted k12a: mem 5 GiB (hard cap), cpus 4,5
+TopologicalSpace.instSecondCountableTopologyForallOfCountable
+instSecondCountableTopologyK F
+TopologicalSpace.instFirstCountableTopologyProd
+TopologicalSpace.instFirstCountableTopologyProd
+wall=2.77s maxrss=3922952kB

@@ -193,3 +193,60 @@ should open with.*
 | | `volume_colour_le` | Tonelli; on each coset either the fill exceeds `3/4` (the row) or the point is bad; `haarK_proj_preimage` | medium |
 | | `tendsto_bad` | per `z`, `tendsto_haarK_bad` at `κ = 1/4`; `tendsto_lintegral_filter_of_dominated_convergence` over the window | medium |
 | | `false_of_slice` | `tca_uniform` gives `c`; `ε` with `4 (max(m₁, c) + 2ε) < 1`; `s₀` from `exists_nrWindow`; one window `sq 0 s₀`; `k ≥ 1` with each bad term `≤ ε s₀²` (`tendsto_bad`); `sum_volume_inter_sq_le` at level `k` with `ratioLe_levR_range` and `rowsEdgeNull_levelRows`; the four colours sum to `s₀²` | medium |
+
+## Stage 4 — SAVED: first leaves, and the price
+
+### 4.1 Five first leaves, written in scratch and elaborated
+
+Each is the module's statement restated under a scratch name in `data/fs131/k12a/leaves/`, compiled against the tree's
+library and this job's modules with the lakefile's options (`data/fs131/k12a/leaf1.sh`); outputs beside them (`*.out`:
+exit 0, no `sorry`, no warning).
+
+| block | leaf (module statement) | file | lines | iterations to green | elaboration |
+|---|---|---|---|---|---|
+| K | `CompactSpace (K F)` and `IsProbabilityMeasure (haarK F)` | `LeafK.lean` | 17 | 1 | 2.8 s, 3.9 GB |
+| R | `exists_normOneL_residue` — `[S9]` at one prime, Hilbert 90 mod `P^m` | `LeafR.lean` | 58 | 2 | 2.8 s, 4.0 GB |
+| Z | `card_le_mul_card_closedNbhd` — the finite neighbourhood ratio | `LeafZ.lean` | 73 | 2 | 2.0 s, 1.9 GB |
+| P | `unitPairsNull_diff_essNbhd_union` — C14.1-e's union | `LeafP.lean` | 44 | 2 | 2.3 s, 3.1 GB |
+| E | `tendsto_measure_ne` — C1 (over its two sibling leaves) | `LeafE.lean` | 50 | 4 | 3.0 s, 4.0 GB |
+
+What the leaves taught: (1) the library's residue API (`UpperHalf.residue_div`, `isUnit_mk_pow`, `coe_conjO`,
+`conjO_conjO`) carries `[S9]` with no new infrastructure; (2) the plane's slice API (`pairSet_measure_eq_lintegral`,
+`pairSet_null_iff_ae_slice`, `volume_slice_swap`, `ae_arcLength_shift_pi`) carries the essential-neighbourhood bookkeeping —
+PlaneZhang's and CountDescent's null-set leaves are of this kind; (3) **the completion needed two instances the skeleton
+lacked**, `SecondCountableTopology (Lev F k)` and `SecondCountableTopology (K F)` (instance search did not find the
+subtype's), without which `comap ιG (𝓝 0)` is not countably generated and dominated convergence does not apply — now
+declared in `CountCompletion`, with their proofs; (4) block A's hard leaf has no `Algebra F (fieldI F)` to lean on
+(`data/fs131/k12a/leaves/ProbeA.out`): its transfer from `F`'s mixed space to `L`'s goes through a ring map `F →+* L` and
+`(NumberField.mixedEmbedding.latticeBasis F).constr`, which the plan names.
+
+### 4.2 The calibration and the price
+
+Against § 3.2's grades, the five leaves measured `low ≈ 15`, `medium ≈ 45–75` lines, each green in one to four
+elaborations of three seconds. Priced from that, leaf by leaf (`hard` taken at 200–500 lines, `medium-hard` at 100–250):
+
+| block | module | leaves | lines (proofs) | agent-days | its hard leaf |
+|---|---|---|---|---|---|
+| P | `Plane/WindowDensity` | 10 | 550–750 | 1.5–2.5 | `exists_nrWindow` |
+| Z | `Rigidity/FiniteZhang` | 4 | 400–550 | 1–1.5 | `ratioLe_prod` |
+| C | `Rigidity/PlaneZhang` | 5 | 500–700 | 1.5–2 | `sum_volume_inter_sq_le` |
+| A | `Rigidity/CountTorus` | 7 | 600–900 | 2–3 | `mem_closure_pow` (no first leaf of its own; priced from the probe and the route) |
+| R | `Rigidity/CountResidue` | 14 | 500–650 | 1.5–2 | `exists_normOneL_residues`, `exists_mem_nsmul_of_resR_eq_zero` |
+| K | `Rigidity/CountCompletion` | 11 | 700–950 | 2–3 | `tendsto_haarK_bad` |
+| E | `Rigidity/CountExtension` | 5 | 700–1,100 | 2–3.5 | `exists_extension` |
+| D | `Rigidity/CountDescent` | 5 | 450–700 | 1.5–2 | `rowsEdgeNull_levelRows` |
+| **the count** | eight modules (≈ 900 lines of statements, now typed) | **61** | **4,400–6,300** | **13–19.5 agent-days of one lane; about one week of wall time across four lanes** | |
+
+**Against the map's 6,000–12,000 lines and 3–6 weeks** (from Mathlib's coverage): the shorter routes of § 2.1 remove
+Doob–Cohn, the Vitali family on the non-doubling product, C14.3's induction, FS100-CX's step and the measurable Hoffman
+bound from the path, and the five leaves price what is left at about half the map's lower figure. Blocks A, C and D are
+priced from leaves of the same kind in other blocks, not from leaves of their own; A is the least certain (place
+bookkeeping). **No block is priced over two weeks.** Plus, outside these modules, the upstream leaves the count reads (§ 5.1).
+
+**Classical inputs.** None beyond the chain's lists: Borel–Cantelli (`measure_limsup_atTop_eq_zero`), Haar measure on a
+compact group (`Measure.addHaarMeasure`) and its regularity, dominated convergence, the Lebesgue density theorem (the
+kernel's `Plane/DensityPoints`), the Chinese remainder theorem (`IsDedekindDomain.exists_forall_sub_mem_ideal`) are at the
+pin; Zhang's counting (`[Zhang2012]` Thm 1.8) and Hilbert 90 mod `P^m` are formalized in these modules; `m₁(ℝ²) < 1/4` is
+the named hypothesis `Plane.OneAvoidingDensityBound` (`[AmbrusEtAl2023]` Thm 1), unchanged. **Formalize every one; no axiom
+declared.** Off the path now: Doob–Cohn, `[BachocEtAl2014]` Thm 2.2, weak approximation for the norm-one torus in full
+(only its `h`-th-power consequence is read).
