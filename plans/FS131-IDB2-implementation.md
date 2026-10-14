@@ -8,7 +8,33 @@ is the planner's record `plans/FS131-KDB1-density-bound.md` (§ 3.3 per leaf, §
 
 ## Theorems this phase proved
 
-(Filled as leaves fall; none yet.)
+Every record below is kernel-checked in the built tree of `fs131-wdb2` (build `data/fs131/idb2/build1-full.log`, exit 0) and its
+axioms are printed from that tree (`data/fs131/idb2/axioms.txt`, read by `tools/fs131_idb2_axioms.py`): **each on
+`[propext, Classical.choice, Quot.sound]`; none on `sorryAx`, none on a native axiom.**
+
+- `HadwigerNelson.DensityBound.autocorr_eq_zero_of_norm_eq_one` (`Plane/DensityBound/Autocorr`) — `[KMOR2016]` Lemma 3.2 (1),
+  finite-window form — [kernel], the standard three.
+- `HadwigerNelson.DensityBound.circleAvg_autocorr_one`, `circleAvg_autocorr_zero`, `continuous_autocorr` (`Autocorr`) — [kernel],
+  the standard three.
+- **`HadwigerNelson.DensityBound.sum_circleAvg_autocorr_nonneg`** (`Autocorr`) — for a bounded measurable `E ⊆ ℂ`: if
+  `Σ c_k J₀(t r_k) ≥ 0` for every `t ≥ 0` then `Σ c_k F̊(r_k) ≥ 0`, `F̊` the circle average of `vol(E ∩ (E − ·))`; the Fourier
+  side of `[AmbrusEtAl2023]` Proposition 1 with no torus and no periodic reduction — [kernel], the standard three.
+- **`HadwigerNelson.DensityBound.DualCert.window_bound`** (`Plane/DensityBound/Pattern`) — the pattern expectation: a valid
+  certificate gives `(Σw₁)·vol E + Σ w₂ F̊(|xᵢ − xⱼ|) ≤ bound · vol B(x₀, R + D)` for a measurable 1-avoiding `E ⊆ B(x₀, R)`,
+  `‖xᵢ‖ ≤ D`; the atom half of Proposition 1 — [kernel], the standard three.
+- `HadwigerNelson.DensityBound.trivialCert_valid` (`Pattern`) — the model of `DualCert.Valid` — [kernel], the standard three.
+- `HadwigerNelson.DensityBound.DualCert.window_le` (`Plane/DensityBound/Window`) — `(1 − µ) vol E ≤ bound · vol B(x₀, R + D)`
+  — [kernel], the standard three.
+- **`HadwigerNelson.DensityBound.DualCert.limsup_le`** (`Window`) — Proposition 1 in finite-window form, on `ℂ`, at every
+  centre: `limsup_R vol(A ∩ B(x₀, R))/vol B(x₀, R) ≤ bound/(1 − µ)` — [kernel], the standard three.
+- **`HadwigerNelson.DensityBound.DualCert.oneAvoidingDensityBound_of`** (`Window`) — any valid certificate with
+  `ϕ ≥ 1 − µ` on `[0, ∞)`, `µ < 1` and `bound/(1 − µ) ≤ 0.2470` proves `Plane.OneAvoidingDensityBound` — [kernel], the
+  standard three.
+- `HadwigerNelson.Plane.upperDensity_le_of_oneAvoidingDensityBound` (`Plane/OneAvoidingDensity`) — the paper's form carried
+  to the library's plane `ℂ` — [kernel], the standard three; with it `mOne_le_of_oneAvoidingDensityBound` and
+  `mOne_lt_quarter` (unchanged) now rest on the standard three.
+
+**Not proved: `Plane.OneAvoidingDensityBound` itself** — it waits on lane X, the certificate as a Lean instance (stage 5).
 
 ## Stage 1 — SAVED: the readback
 
@@ -86,3 +112,58 @@ circle averages (no Gaussian normalization is computed: the positive-definite bo
 
 **Re-priced.** The planner priced lane F at 900 lines; the five leaves came to 365 lines with the helpers (the two first leaves
 13 lines together; the positive definiteness about 300). **0.4×** the plan. No message owed.
+
+## Stage 3 — SAVED: lane P, the patterns and the window (`Pattern` 2, `Window` 3, `Plane/OneAvoidingDensity` 1); the build, the statements, the axioms
+
+### 3.1 The six leaves
+
+All proved in the copies under `data/fs131/idb2/work/` and copied over the modules; the text diff against the skeletons removes
+exactly the six `sorry` lines (`git diff` shows no other removed line) and adds proofs and private helpers; no import line
+changed in `Pattern`, `Window` or `Plane/OneAvoidingDensity`.
+
+| leaf | proof |
+|---|---|
+| `DualCert.window_bound` | the plan's pattern expectation, as lower integrals. Private helpers: `rho θ b z = e^{iθ}(b ? z̄ : z)` with `rho_comp` (O(2) composes: `ρ_{θ,b}(u·(b′ ? z̄ : z)) = ρ_{θ ± arg u, b ⊕ b′}(z)`), `lintegral_Ioc_shift` (a `2π`-periodic function's lower integral over `(0, 2π]` is shift-invariant, through `AddCircle.lintegral_preimage` and Haar invariance on `AddCircle (2π)`); `hitVol I b θ = vol{y : ∀ i ∈ I, y + ρ(xᵢ) ∈ E}` and `patVol S b θ = vol{y : pat = S}`, measurable in `θ` (`measurable_measure_prodMk_right`); the Venn identity `hitVol I = Σ_{S ⊇ I} patVol S` (`measure_biUnion_finset`); `hitVol {i} = vol E`; `hitVol {i, j} = F(ρ(xⱼ − xᵢ))` and `∫_{(0,2π]} F(ρ_θ v) = 2π F̊(‖v‖)` (`circleAverage_eq_integral_add`); congruence invariance (a translation in `y`, a shift in `θ`, a flip of `b`); `patVol S = 0` off independent `S`; `Σ_{S ≠ ∅} patVol S ≤ vol B(x₀, R + D)`. The assembly sums `N(I) = Σ_b ∫ hitVol` and `P(S) = Σ_b ∫ patVol` in `ℝ≥0∞`, takes real parts on the nonempty patterns (each finite, `≤ N({i})`), and expands `Σ_S P(S) L(S)` by the private `sum_mul_L`; the congruence terms cancel, the rest is `4π` times the left side, and `L(S) ≤ bound` on independent `S` bounds it by `4π · bound · vol B` |
+| `trivialCert_valid` | `L S = |S| ≤ 1` on `Fin 1` |
+| `DualCert.window_le` | `sum_circleAvg_autocorr_nonneg` on the index type `Option (Option (Fin w₂.length))` (`w₀` at radius 1, `Σw₁ − (1 − µ)` at radius 0, `w₂` at the pair distances), the list sum read as a `Fin` sum through `List.ofFn_getElem`; `circleAvg_autocorr_one`, `_zero`; `window_bound` |
+| `DualCert.limsup_le` | a measurable `A′ ⊆ A` of full measure (`exists_measurable_subset_ae_eq`); `D := Σ‖xᵢ‖`; for `R > 0` the ratio is at most `ofReal(β((R + D)/R)²)`, `β = bound/(1 − µ)`, from `window_le` and `vol B(x₀, r) = πr²`; that bound tends to `ofReal β` |
+| `DualCert.oneAvoidingDensityBound_of` | `Complex.orthonormalBasisOneI.repr`, measure-preserving (`LinearIsometryEquiv.measurePreserving`), a measurable embedding; balls and distances carried; `limsup_le` |
+| `upperDensity_le_of_oneAvoidingDensityBound` | the same isometry reversed; `BandFree A 0` gives `dist ≠ 1` |
+
+**Re-priced.** The planner priced lane P at 1,150 lines; the six leaves came to 545 lines with their helpers (`Pattern` +429
+over its skeleton, `Window` +101, `Plane/OneAvoidingDensity` +18): **0.47×**. Lanes F and P together: 910 lines against
+2,050 planned, **0.44×**. No message owed.
+
+### 3.2 One build under the slot
+
+`scripts/slot.py --mem 10 --cpus 4 -- env MEMMAX=10G BATCH=8 ./scripts/build.sh` — **exit 0**, 256 batches, 5 modules rebuilt
+(`Autocorr` 4.5 s, `Pattern` 4.1 s, `Window` 3.0 s, `Plane/OneAvoidingDensity` 2.5 s, `Proofs` 2.2 s), **"0 module(s) with
+warnings"**, 7 m 23 s (`data/fs131/idb2/build1-full.log`; Lake's log `build/gate/build/20261014T175113Z-4141683.log`). Each file
+through `lake env lean` under a 4 GiB cap: 3.0–5.6 s, 3.13–3.24 GB resident (Mathlib's mapped `.olean`s are ≈ 3.1 GB of it).
+`sorry` appears in no file of `Plane/DensityBound/` nor in `Plane/OneAvoidingDensity` (`grep -c`, all 0); `native_decide` in
+none (`grep -rln`, exit 1).
+
+### 3.3 No statement and no definition changed, from the kernel's side
+
+`data/fs131/idb2/statements-after.txt` (stage 1's dump re-run on the built tree) against `statements-before.txt`:
+`tools/fs131_idb2_statement_diff.py` — **47 constants checked, 0 differences** (every stored type of the four modules, every
+stored value of `autocorr`, `DualCert`'s fields, `L`, `IsIndep`, `Congruent`, `phi`, `trivialCert`, `OneAvoidingDensityBound`,
+`mOne`); the private helpers are internal names and no public constant was added. **A planted change, watched firing from the
+kernel's side**: the copy `data/fs131/idb2/work/WindowCtl.lean` (the module's text with a footer printing the stored type's
+hash of `DualCert.window_le` as elaborated in the file) prints `3481863677`, the hash the built module stores; the copy
+`WindowPlant.lean`, the same with one added hypothesis `(_hplant : 0 ≤ mu)`, prints `178506245`. The reader's self-test (stage 1)
+fires on a changed type, a changed value, a removed constant and a new public constant.
+
+### 3.4 The axioms of every public declaration of these files, from the built tree
+
+`data/fs131/idb2/lean/AxiomsIDB2.lean` prints `Lean.collectAxioms` of every non-internal constant of the four modules;
+`tools/fs131_idb2_axioms.py` reads it: **47 records, all 47 on `[propext, Classical.choice, Quot.sound]`; no `sorryAx`, no
+native axiom** (`data/fs131/idb2/axioms.txt`). The two planted records show what was planted (`withSorry` → `[sorryAx]`,
+`withNative` → `[FS131IDB2Plant.withNative._native.native_decide.ax_1_1]`); a copy of the print with `window_le`'s list made
+`[propext, sorryAx]` and the sorry plant's made `[propext]` is refused on both counts (exit 1).
+
+### 3.5 Linters
+
+`lake lint --no-build -- --no-build --trace` under the slot: exit 0, `-- Linting passed for Proofs.`, every linter passed, no
+finding in `Plane/DensityBound/` or `Plane/OneAvoidingDensity` (`data/fs131/idb2/lint.log`). No planted lint control was run
+(it needs a rebuild); the landing's gate runs the lint's own.

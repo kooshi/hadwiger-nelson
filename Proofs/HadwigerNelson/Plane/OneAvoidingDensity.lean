@@ -53,7 +53,25 @@ theorem oneAvoidingDensityBound_model :
 /-- **The bound on the library's plane**: from the paper's form through the volume-preserving isometry `ℂ ≅ ℝ²`. -/
 theorem upperDensity_le_of_oneAvoidingDensityBound (h : OneAvoidingDensityBound) {A : Set ℂ}
     (hA : NullMeasurableSet A volume) (h1 : BandFree A 0) : upperDensity A ≤ ENNReal.ofReal 0.2470 := by
-  sorry
+  set e : ℂ ≃ₗᵢ[ℝ] EuclideanSpace ℝ (Fin 2) := Complex.orthonormalBasisOneI.repr
+  have hmp : MeasurePreserving e.symm volume volume := e.symm.measurePreserving
+  have hemb : MeasurableEmbedding e.symm := e.symm.toHomeomorph.measurableEmbedding
+  have hA₂ : NullMeasurableSet (e.symm ⁻¹' A) volume := hA.preimage hmp.quasiMeasurePreserving
+  have h1₂ : ∀ a ∈ e.symm ⁻¹' A, ∀ b ∈ e.symm ⁻¹' A, dist a b ≠ 1 := by
+    intro a ha b hb
+    have h := h1 _ ha _ hb
+    rw [LinearIsometryEquiv.dist_map] at h
+    rcases h with h | h
+    · exact ne_of_lt (by linarith)
+    · exact ne_of_gt (by linarith)
+  have hfun : (fun R : ℝ => volume (A ∩ ball 0 R) / volume (ball (0 : ℂ) R)) =
+      fun R => volume (e.symm ⁻¹' A ∩ ball 0 R) / volume (ball (0 : EuclideanSpace ℝ (Fin 2)) R) := by
+    funext R
+    have hb : e.symm ⁻¹' ball (0 : ℂ) R = ball 0 R := by
+      rw [e.symm.preimage_ball, LinearIsometryEquiv.symm_symm, map_zero]
+    rw [← hb, ← Set.preimage_inter, hmp.measure_preimage_emb hemb, hmp.measure_preimage_emb hemb]
+  rw [upperDensity, hfun]
+  exact h _ hA₂ h1₂ 0
 
 /-- `m₁(ℝ²) ≤ 0.2470`, given the outside theorem. -/
 theorem mOne_le_of_oneAvoidingDensityBound (h : OneAvoidingDensityBound) : mOne ≤ ENNReal.ofReal 0.2470 :=
