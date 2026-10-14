@@ -1,0 +1,3 @@
+slot: admitted icl1: mem 6 GiB (hard cap), cpus 0,1
+data/fs131/icl1/work/CountExtension.lean:315:8: warning: declaration uses `sorry`
+wall=6.96s maxrss=4085388kB
