@@ -1,0 +1,15 @@
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 6,7
+Proofs/HadwigerNelson/Outside/OAI158Characters.lean:257:18: error(lean.unknownIdentifier): Unknown constant `Set.mem_ofPred_eq`
+Proofs/HadwigerNelson/Outside/OAI158Characters.lean:257:6: error: Type mismatch: After simplification, term
+  hx
+ has type
+  x ∈ {x | R ≤ |(↑(X x)).arg| * 2 ^ n}
+but is expected to have type
+  R ≤ |(↑(X x)).arg| * 2 ^ n
+Proofs/HadwigerNelson/Outside/OAI158Characters.lean:640:41: error(lean.unknownIdentifier): Unknown constant `Set.ofPred_true`
+Proofs/HadwigerNelson/Outside/OAI158Characters.lean:640:2: error: Type mismatch: After simplification, term
+  hf
+ has type
+  @Eq ENNReal (μ {a | True}) 0
+but is expected to have type
+  @Eq ENNReal (μ Set.univ) 0

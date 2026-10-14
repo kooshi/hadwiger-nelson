@@ -1,0 +1,19 @@
+{
+ "notes": [
+  "its two instances (lines 201–202) are `local instance`, which need no entry; its two patches are to proofs (FS131-IPA1)"
+ ],
+ "patches": [
+  [
+   160,
+   "ite_eq_left hi",
+   "if_pos hi",
+   "core renamed `if_pos` to `ite_eq_left` after v4.32.0 (with `if_neg` → `ite_eq_right`: `LEAN.md` § Searching — Lean); at v4.32.0 only the old name, the same statement (`Init/Core.lean` at v4.34.1: `theorem if_pos … := ite_eq_left hc`)"
+  ],
+  [
+   266,
+   "compProd_map_condDistrib hp.aemeasurable hb.aemeasurable",
+   "compProd_map_condDistrib hb.aemeasurable",
+   "at v4.34.1 `compProd_map_condDistrib` takes `hX : AEMeasurable X μ` and `hY : AEMeasurable Y μ`; at v4.32.0 it takes `hY` only, with the same conclusion (`Mathlib/Probability/Kernel/CondDistrib.lean:82` at both pins): the first argument is dropped"
+  ]
+ ]
+}

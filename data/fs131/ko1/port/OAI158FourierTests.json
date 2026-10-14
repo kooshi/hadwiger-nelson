@@ -1,0 +1,16 @@
+{
+ "global_instances": [
+  [
+   238,
+   "global: on a type built from the release's own definition `differenceLaw` (a `noncomputable def`, `FourierTests.lean:235`): `IsProbabilityMeasure (differenceLaw ν κ)` is found only by a search on that term"
+  ]
+ ],
+ "patches": [
+  [
+   241,
+   "infer_instance",
+   "exact MeasureTheory.Measure.isProbabilityMeasure_map (by fun_prop)",
+   "RULED STATEMENT CHANGE (the coordinator's ruling (1) on FS131-IPA1, Amendment 1 of its brief): the token is in the instance's proof, and because an instance's body is elaborated like a definition's, the two section variables it uses, `[MeasurableMul₂ G] [MeasurableInv G]` (`FourierTests.lean:231–232`, the release's own), become binders of the stored statement — exactly those two, checked by the read-back's strip check (`tools/fs131_ipa1_readback_port.py`, verdict RULED). They are needed: at v4.32.0 `Measure.map` of a map that is not almost-everywhere measurable is `0`, so without the division's measurability the release's statement is false at this pin. The proof: at v4.34.1 `μ.map f` of a probability measure is one by an instance for every `f`, which the release's `infer_instance` finds; at v4.32.0 only through `Measure.isProbabilityMeasure_map (hf : AEMeasurable f μ)` (`Mathlib/MeasureTheory/Measure/Typeclasses/Probability.lean:124`), the division's measurability by `fun_prop` from those two instances"
+  ]
+ ]
+}

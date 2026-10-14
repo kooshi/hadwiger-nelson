@@ -1,0 +1,13 @@
+{
+ "notes": [
+  "its four instances (lines 22, 23, 386, 387) are `local instance`, which need no entry; its one patch is to a proof (FS131-IPA1)"
+ ],
+ "patches": [
+  [
+   368,
+   "dite_eq_left (hx i hi)",
+   "dif_pos (hx i hi)",
+   "core renamed `dif_pos` to `dite_eq_left` after v4.32.0 (with `if_pos`/`if_neg`); at v4.32.0 only the old name, the same statement (`Init/Core.lean:1197` here; at v4.34.1 `theorem dif_pos … := dite_eq_left hc`, `:1210`)"
+  ]
+ ]
+}

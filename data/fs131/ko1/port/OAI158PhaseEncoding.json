@@ -1,0 +1,19 @@
+{
+ "notes": [
+  "no instance; its two patches are to proofs (FS131-IPA1)"
+ ],
+ "patches": [
+  [
+   118,
+   "Finset.prod_le_prod₀",
+   "Finset.prod_le_prod",
+   "Mathlib renamed `Finset.prod_le_prod` to `Finset.prod_le_prod₀` after v4.32.0; at v4.32.0 the lemma has the old name, the same hypotheses and statement (`Mathlib/Algebra/Order/BigOperators/GroupWithZero/Finset.lean:38` here, `:39` at v4.34.1)"
+  ],
+  [
+   210,
+   "Measurable.of_eval",
+   "measurable_pi_lambda",
+   "`Measurable.of_eval` (v4.34.1, `Mathlib/MeasureTheory/MeasurableSpace/Constructions.lean:596`, proved there as `measurable_pi_iff.mpr hf`) is not at v4.32.0; `measurable_pi_lambda` (`Constructions.lean:590` here) is the same statement with the function explicit, which `apply` unifies"
+  ]
+ ]
+}
