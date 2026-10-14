@@ -92,3 +92,29 @@ the record's:
 
 What it reads from `globalOK`: `p ≥ 2` and the q-part's verdict (every `t` has a class `ν < |tnu|` and a unit map `g`
 with `g(t_ν) = t`).
+
+## Stage 5 — SAVED: L3 `opSum_O23_eq` proved; the module holds no `sorry`
+
+`Arith/FibreCertSound` elaborates with no `sorry` and no warning (`lake env lean`, iteration only; the build is § Stage 6).
+From a scratch copy with `#print axioms` appended (`data/fs131/ikc2/work/AxSrc.lean`): `sum_le_of_certOK`,
+`card_le_of_certOK` and the four leaves each `[propext, Classical.choice, Quot.sound]`. L3 is about 620 lines (the record
+priced 350–500), in four sections:
+
+* **buckets** — `Bk` (buckets of at most 16, all but the last full), `Bk_getD`, `Bk_mem`, `Bk_mod` (on a bucketed list,
+  `bget`, `bmem`, `bmod` are the flattened list's `getD`, bound and `modify`), `brec_spec`, `bucket16_spec`;
+* **the transport, the swap and the pairs** — `kz_neg` (`κ` even), `Yv_pair_swap`, `sum_pair_swap`, `transport_w` (an
+  orbit row's slots read at a pair through its checked map: `g` linear, a bijection of `V`, the bags multisets by
+  `bag_perm`; the swap by a translation and `κ` even), `W_symm`, `repPairs_sum`, `pairs_double` (over `i ≤ j`, `mult·F`
+  is the full double sum of a symmetric `F`, by induction on `N`);
+* **one pair** — `krow_eq` (the packed rows), `kmax_ge`, `kblock_eq`, `p1step_eq` (`rfl`: the step's parts named) and
+  `Inv1_step`: the invariant `Inv1` (ghost slot values `P`, `N` with the rows `(A0, A1, Σ_t P_t B^t, Σ_t N_t B^t)` in
+  buckets, every slot pair at most the running bound, and, while every check holds, the rows at the moments equal to the
+  pairs' shares so far) survives a pair; a default table entry adds nothing and fails the unit check;
+* **the fold and its ends** — `Inv1_fold`, `Inv1_init`, `pairCoefs_eq` (the triangle's rows `1..` read along the pairs,
+  from `m = |reps| + 1`), `contrib_sum`, `opSum_O2`, `digit_sum`; then the leaf: phase 1's final rows are the literal
+  `orows` (`orowsOK`), their digits are the ghosts (bound below `2^w`), and the identity's O2 and O3 parts are the blocks'
+  terms.
+
+**K2 in all**: `Arith/FibreCertSound` is 2,665 lines against 794 at this job's start; with FS131-IKC1's part, K2 took
+about 2,450 lines of proof — inside the planner's 2,000–4,000, and as § Stage 3's re-price said. **No change to
+`certOK`'s definition was needed** (none made): every check the proof reads was already in FS131-IKC1's checker.

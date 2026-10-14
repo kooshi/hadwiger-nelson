@@ -2272,11 +2272,155 @@ private theorem Inv1_step (C : Cert) [NeZero C.p] (hp : 2 ≤ C.p)
   congr 1
   exact transport_b C φ b (hw b hb) _ _ ij _ _ _ hele.1 hele.2 hu hsw
 
+/-! ### Leaf L3: the fold, its start and its end -/
+
+private theorem Inv1_fold (C : Cert) [NeZero C.p] (hp : 2 ≤ C.p)
+    (hw : ∀ b ∈ C.blocks1, ∀ wi ∈ b.wts, wi < C.weights.length) (φ : V C.p → ℝ) :
+    ∀ (rest : List (ℕ × ℕ)) (s : P1St) (Φ : ℝ), Inv1 C φ s Φ → s.2.2.2.2 = C.blocks1.map (fun b => rest.map (R1 b)) →
+      Inv1 C φ (rest.foldl (p1step C (ktable C) (C.blocks1.map (kmax C))) s) (Φ + (rest.map (contrib1 C φ)).sum) ∧
+      ((rest.foldl (p1step C (ktable C) (C.blocks1.map (kmax C))) s).2.1 = true → s.2.1 = true)
+  | [], s, Φ, h, _ => by simpa using h
+  | ij :: rest, s, Φ, h, hco => by
+    obtain ⟨h1, h2, h3, -⟩ := Inv1_step C hp hw φ s Φ ij rest h hco
+    have ih := Inv1_fold C hp hw φ rest _ _ h1 h2
+    rw [List.foldl_cons, List.map_cons, List.sum_cons, ← add_assoc]
+    exact ⟨ih.1, fun hok => h3 (ih.2 hok)⟩
+
+private theorem flatMap_eq {α β : Type} (l : List α) (f : α → List β) : l.flatMap f = (l.map f).flatten := by
+  induction l with
+  | nil => rfl
+  | cons x l ih => rw [List.flatMap_cons, ih, List.map_cons, List.flatten_cons]
+
+private theorem tri_length (b : Blk) (hm : 0 < b.m) : b.tri.length = b.m := by
+  have htoI : ∀ l : List ℕ, (l.map fun x => sfield x b.wr).length = l.length := fun l => List.length_map _
+  rw [tri_eq, List.length_cons, (trows_length b.wr b.per _ htoI (Nat.sub b.m 1) (Nat.sub b.m 1) ⟨0, 0, b.rest⟩).1,
+    Nat.sub_eq]; omega
+
+/-- **Phase 1's coefficients** are the triangle's rows `1..`, read along the pairs. -/
+private theorem pairCoefs_eq (b : Blk) (N : ℕ) (hm : b.m = N + 1) : b.pairCoefs = (repPairs N).map (R1 b) := by
+  have hrows := tri_rows b (by omega)
+  have hlen := tri_length b (by omega)
+  unfold Blk.pairCoefs repPairs
+  rw [List.map_flatMap, flatMap_eq]
+  congr 1
+  refine List.ext_getElem (by simp [hlen, hm]) fun i h1 h2 => ?_
+  have hi : i < N := by simpa using h2
+  simp only [List.getElem_drop, List.getElem_map, List.getElem_range]
+  rw [← getD_of_lt b.tri [] (by omega)]
+  conv_lhs => rw [← map_range_getD (b.tri.getD (1 + i) []) 0, hrows (1 + i) (by omega)]
+  rw [List.range'_eq_map_range, List.map_map, show b.m - (1 + i) = N - i by omega]
+  simp only [List.map_map, Function.comp_def, show N.sub i = N - i from rfl]
+  refine List.map_congr_left fun k _ => ?_
+  simp only [R1]
+  rw [triGet_le _ _ _ (by omega), show 1 + (i + k) - (1 + i) = k by omega]
+
+private theorem orb_getD (C : Cert) (f : List ℕ × List ℕ → ORow) (r : ℕ) (hr : r < C.orbits.length) :
+    (C.orbits.map f).getD r ([], [], 0, 0) = f (orb C r) := by
+  rw [getD_of_lt _ _ (by simpa using hr), List.getElem_map, orb, getD_of_lt _ _ hr]
+
+private theorem Inv1_init (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) :
+    Inv1 C φ (bucket16 (C.orbits.map fun o => (o.1, o.2, 0, 0)), true, 0, ⟨0, 0, C.p1⟩, C.blocks1.map Blk.pairCoefs) 0 := by
+  obtain ⟨h1, h2⟩ := bucket16_spec (C.orbits.map fun o => ((o.1, o.2, 0, 0) : ORow))
+  refine ⟨fun _ _ => 0, fun _ _ => 0, ⟨h2, by rw [h1, List.length_map], fun r hr => ?_⟩, fun _ _ => le_rfl,
+    fun _ => by simp [rowSum]⟩
+  rw [h1, orb_getD C _ r hr]; simp
+
+/-- The sum over the pairs, regrouped: `Σ_{i ≤ j} mult·R·W = Σ_{a,a'} R·W` per block, then per weight. -/
+private theorem contrib_sum (C : Cert) [NeZero C.p] (φ : V C.p → ℝ)
+    (hw : ∀ b ∈ C.blocks1, ∀ wi ∈ b.wts, wi < C.weights.length) :
+    ((repPairs C.reps.length).map (contrib1 C φ)).sum = (C.blocks1.map fun b => (b.wts.map fun wi =>
+      ∑ a ∈ Finset.range C.reps.length, ∑ a' ∈ Finset.range C.reps.length, (triGet b.tri (1 + a) (1 + a') : ℝ) *
+        ∑ t ∈ Finset.range (C.p * C.p), (kappa C wi t : ℝ) *
+          Ym C.p φ (C.reps.getD a [] ++ (C.reps.getD a' []).map fun x => addP C.p x t)).sum).sum := by
+  unfold contrib1
+  rw [list_sum_comm]
+  congr 1; refine List.map_congr_left fun b hb => ?_
+  have hsym : ∀ i j, (R1 b (i, j) : ℝ) * Wb C φ b (i, j) = (R1 b (j, i) : ℝ) * Wb C φ b (j, i) := fun i j => by
+    congr 1
+    · simp only [R1, triGet_symm]
+    · unfold Wb; congr 1; refine List.map_congr_left fun wi hwi => ?_
+      simp only [kappa_eq C wi (hw b hb wi hwi)]
+      exact (W_symm C φ _ _ _ _).symm
+  rw [repPairs_sum]
+  have e1 : ∀ i k, ((mlt (i, i + k) * R1 b (i, i + k) : ℤ) : ℝ) * Wb C φ b (i, i + k) =
+      (if i = i + k then (1 : ℝ) else 2) * ((R1 b (i, i + k) : ℝ) * Wb C φ b (i, i + k)) := fun i k => by
+    simp only [mlt]; split_ifs <;> push_cast <;> ring
+  simp only [e1]
+  rw [pairs_double (fun i j => (R1 b (i, j) : ℝ) * Wb C φ b (i, j)) hsym]
+  simp only [Wb, R1, ← List.sum_map_mul_left]
+  rw [Finset.sum_congr rfl fun a _ => finset_list_comm _ _ _, finset_list_comm]
+
+/-- (O2) term by term. -/
+private theorem opSum_O2 (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) :
+    opSum C.p φ (opsO2 C) = (C.blocks1.map fun b => (b.wts.map fun wi =>
+      (triGet b.tri 0 0 : ℝ) * (cval C wi : ℝ) ^ 2 * Ym C.p φ [] +
+      ∑ a ∈ Finset.range C.reps.length,
+        2 * (triGet b.tri 0 (1 + a) : ℝ) * (cval C wi : ℝ) * (sigma C wi : ℝ) * Ym C.p φ (C.reps.getD a [])).sum).sum := by
+  unfold opsO2
+  rw [opSum_flatMap]
+  congr 1; refine List.map_congr_left fun b _ => ?_
+  rw [opSum_flatMap]
+  congr 1; refine List.map_congr_left fun wi _ => ?_
+  rw [opSum_cons, opSum_map, opVal_opI, mono_opI]
+  simp only [opVal_opI, mono_opI, List.map_nil, List.append_nil, lsum_range]
+  congr 1
+  · show ((triGet b.tri 0 0 * (cval C wi * cval C wi) : ℤ) : ℝ) * _ = _; push_cast; ring
+  · refine Finset.sum_congr rfl fun a _ => ?_
+    show ((2 * triGet b.tri 0 (1 + a) * (cval C wi * sigma C wi) : ℤ) : ℝ) * _ = _; push_cast; ring
+
+private theorem digit_sum (w n : ℕ) (c : ℕ → ℕ) (hc : ∀ t, c t < 2 ^ w) (t' : ℕ) (ht : t' < n) :
+    digit (∑ t ∈ Finset.range n, c t * (2 ^ w) ^ t) w t' = c t' := by
+  rw [digit_eq]; exact sum_digit _ c n (fun i _ => hc i) t' ht
+
 /-- **Leaf L3** (K2h): the times-1 families are the blocks' terms — the orbit rows are phase 1's (`orowsOK`), each
 pair's transporter moves its term onto its orbit's representative, `R` is symmetric and `κ` even. -/
 private theorem opSum_O23_eq (C : Cert) [NeZero C.p] (hC : globalOK C = true) (φ : V C.p → ℝ) :
     opSum C.p φ (opsO2 C ++ opsO3 C (orbRows C)) = (C.blocks1.map fun b => blockT C φ b C.reps).sum := by
-  sorry
+  have hg := hC
+  simp only [globalOK, Bool.and_eq_true, Nat.ble_eq, Nat.blt_eq, List.all_eq_true, Nat.beq_eq] at hg
+  obtain ⟨⟨⟨⟨⟨⟨⟨⟨⟨hp2, -⟩, -⟩, hok⟩, hbw⟩, horows⟩, -⟩, hm⟩, -⟩, hw'⟩ := hg
+  have hw : ∀ b ∈ C.blocks1, ∀ wi ∈ b.wts, wi < C.weights.length := fun b hb => hw' b (List.mem_append_left _ hb)
+  -- phase 1 run through its invariant
+  have hco0 : (C.blocks1.map Blk.pairCoefs) = C.blocks1.map (fun b => (repPairs C.reps.length).map (R1 b)) :=
+    List.map_congr_left fun b hb => pairCoefs_eq b _ (hm b hb)
+  obtain ⟨⟨P, N, ⟨hBk, hlen, hrow⟩, hbnd, hsum⟩, -⟩ := Inv1_fold C hp2 hw φ (repPairs C.reps.length) _ 0
+    (Inv1_init C φ) hco0
+  set fin := (repPairs C.reps.length).foldl (p1step C (ktable C) (C.blocks1.map (kmax C)))
+    (bucket16 (C.orbits.map fun o => (o.1, o.2, 0, 0)), true, 0, ⟨0, 0, C.p1⟩, C.blocks1.map Blk.pairCoefs) with hfin
+  have hph : phase1 C = (fin.1.flatten, fin.2.1, fin.2.2.1) := rfl
+  rw [hph] at hok hbw
+  have hbw' : fin.2.2.1 < 2 ^ C.w := by simpa only [shl_one] using hbw
+  have hPlt : ∀ r t, P r t < 2 ^ C.w := fun r t => by have := hbnd r t; omega
+  have hNlt : ∀ r t, N r t < 2 ^ C.w := fun r t => by have := hbnd r t; omega
+  -- the literal rows are phase 1's
+  simp only [orowsOK, hph, Bool.and_eq_true, Nat.beq_eq, List.all_eq_true] at horows
+  obtain ⟨⟨hl1, hl2⟩, hall⟩ := horows
+  have hob : orbRows C = (List.range C.orbits.length).map fun k => ((orb C k).1, (orb C k).2,
+      ∑ t ∈ Finset.range (C.p * C.p), P k t * (2 ^ C.w) ^ t, ∑ t ∈ Finset.range (C.p * C.p), N k t * (2 ^ C.w) ^ t) := by
+    refine List.ext_getElem (by simp [orbRows, hl2]) fun k h1 h2 => ?_
+    have hk : k < C.orbits.length := by simpa using h2
+    have hk' : k < fin.1.flatten.length := by rw [hlen]; exact hk
+    have hz := hall _ (List.getElem_mem (l := fin.1.flatten.zip C.orows) (n := k)
+      (by rw [List.length_zip, hlen, hl2, min_self]; rw [hl2] at hk; exact hk))
+    simp only [List.getElem_zip] at hz
+    have hr := hrow k hk
+    rw [getD_of_lt _ _ hk'] at hr
+    rw [hr] at hz
+    simp only [orbRows, List.getElem_map, List.getElem_zip, List.getElem_range, orb, getD_of_lt _ _ hk]
+    rw [← hz.1, ← hz.2]
+  have h3 : opSum C.p φ (opsO3 C (orbRows C)) = rowSum C φ P N := by
+    unfold opsO3 rowSum
+    rw [opSum_flatMap, hob, List.map_map, lsum_range]
+    refine Finset.sum_congr rfl fun k _ => ?_
+    simp only [Function.comp_apply, opSum_map, show Nat.mul C.p C.p = C.p * C.p from rfl, lsum_range]
+    refine Finset.sum_congr rfl fun t ht => ?_
+    rw [digit_sum _ _ _ (hPlt k) t (Finset.mem_range.1 ht), digit_sum _ _ _ (hNlt k) t (Finset.mem_range.1 ht)]
+    simp only [opVal, Op.mono]; push_cast; rfl
+  rw [opSum_append, opSum_O2, h3, hsum hok, zero_add, contrib_sum C φ hw]
+  unfold blockT
+  rw [← List.sum_map_add]
+  congr 1; refine List.map_congr_left fun b _ => ?_
+  rw [← List.sum_map_add]
 
 /-- **Leaf L4** (the q-part): the times-q family is `q(φ)` times the q-blocks' terms over the one monomial `[0]` —
 `Q(m)(Y) = q(φ)·Y(m)` (`q(φ∘γ) = q(φ)`), and every `t` moved onto its class's representative. -/
