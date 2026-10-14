@@ -5,7 +5,7 @@ exec(open("/home/kooshi/source/lean-dir/data/fs131/briefs/scripts/mkbrief.py").r
 import os,subprocess,sys
 def sh(*a): return subprocess.run(list(a),capture_output=True,text=True).stdout.strip()
 now=sh("date","-u","+%Y-%m-%d %H:%M UTC")
-KI=int(sys.argv[1]); KR,KC=823,832
+KI=int(sys.argv[1]); KR,KC,KS=823,832,847
 TREE="fs131-wq1"; BR="fs131-wt3"; JOB="FS131-IJ1"; W=WT+TREE+"/"; WC=WT+"fs131-wch/"
 fresh(JOB)
 assert sh("git","-C",ROOT,"branch","--list",BR)==""
@@ -64,11 +64,16 @@ count is:
 
 {DM}
 {DC}
-The three hand-backs behind this job, as I logged them (their words in quotation marks, the rulings mine):
+The three hand-backs behind this job and one ruling on a skeleton defect, as I logged them (their words in quotation
+marks, the rulings mine):
 
 {item(KR)}
 {item(KC)}
 {item(KI)}
+{item(KS)}
+Of item {KS}: `Counting.finite_quot` in `CountResidue` is not yours to repair (lane Λ2 proves it), but you edit that
+file for the replacement — leave its statement as it is. After the merge, confirm that `Rigidity.AdmissiblePair.ofPow`
+is `fs131-wt1`'s version (ruling 3).
 **Your work, in order.** (1) **The join**: the merge commit; one build under the slot of the joined tree. (2) **The
 replacement**: first show from the kernel that the two maps are one term (`Counting.toL F = ofUnitRing F` by `rfl`, both
 printed); then delete `toL`, re-point its readers, dump the count's stored statements before and after, and list every
