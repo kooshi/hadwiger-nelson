@@ -6,7 +6,29 @@ Branch `fs131-wm15`, cut from `fs131-wj` at `bda6a98f2`, in the worktree `.claud
 
 ## Theorems this phase proved
 
-(Filled as leaves fall; see the last stage.)
+Each is **[kernel]**, through `./scripts/build.sh` (stage 4). "Standard three" means it rests on nothing else. "Over the
+link" means its `sorryAx` comes only through `Rigidity.ratioAtMost_two_notMem_link`, M13's fact, which reaches here at the
+join. "Over the chain" means it also rests on the headline's leaves and on the declared `positive_entropy_rigidity` and
+`kloosterman_bound`.
+
+- `Rigidity.five_le_chromaticNumber_of_ratioAtMost` — a level-one ratio below `1/4` needs five colours — standard three — `Rigidity/SqrtClassFive`
+- `Rigidity.five_le_localBound_of_tca` — T-C(A) gives `L(F) ≥ 5` — standard three — same
+- `Rigidity.tca_iff_five_le_localBound` — **CLS is an equivalence** — over M13's leaves (through `tca_of_five_le_localBound`) — same
+- `Rigidity.two_notMem_of_isSquare` — no stable prime above 2 when some `a ≡ 7 (mod 8)` is a square in `F` — standard three — same
+- `Rigidity.stablePrime_card_of_two_notMem` — an odd stable prime lies above a prime `p ≡ 3 (mod 4)`, has `(pⁿ)²` residues with `n` odd, and every natural number that is a square in `F` is a square mod `p` — standard three — same
+- `Rigidity.five_le_chromaticNumber_of_two_notMem`, `five_le_chromaticNumber_of_isSquare`, `five_le_localBound_of_isSquare`, `five_le_localBound_of_isSquare_class` — the floor at every stable prime and `L(F) ≥ 5` — over the link — same
+- `Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound` — `L(F) ≥ 5` and `hOA` give `χ(F²) ≥ 5` — over the chain — same
+- `SqrtFortySeven.numberField_F47`, `finrank_fieldI_F47_le`, `isSquare_fortySeven` — standard three — `Instances/SqrtFortySevenFive`
+- **`SqrtFortySeven.stablePrime_card_sqrt47`** — every stable prime of `ℚ(√47, i)` has `p²` residues, `p ≡ 3 (mod 4)` prime, `47` a square mod `p` — standard three — same
+- `SqrtFortySeven.exists_stablePrime_eleven` — a stable prime holding 11 — standard three — same
+- `SqrtFortySeven.five_le_localBound_sqrt47` — `5 ≤ L(ℚ(√47))` — over the link — same
+- **`SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five`** — `χ(ℚ(√47)²) = 5`, given `hOA` — over the chain — same
+- `SqrtClassValues.isSquare_radicand`, `chromaticNumber_planeOver_sqrt143_le_five` — standard three — `Instances/SqrtClassValues`
+- `SqrtClassValues.five_le_localBound_sqrt143`, `five_le_localBound_sqrt3_sqrt5` — over the link — same
+- `SqrtClassValues.chromaticNumber_planeOver_sqrt143_eq_five`, `…sqrt311_eq_five`, `…sqrt335_eq_five`, `…sqrt3_sqrt5_eq_five`, `five_le_chromaticNumber_planeOver_sqrt167` — given `hOA` — over the chain — same
+
+None is new mathematics as a value (`CLAUDE.md` § The local–global conjecture: these are its exposed predictions, met at
+[hand] through MR); what is new is the kernel proofs, the three-radicand form and the equivalence.
 
 ## Stage 1 — SAVED: the readback
 
@@ -192,3 +214,64 @@ the class, the upper half at the ramified prime above 11 in seven, the value in 
 `ℚ(√3, √5)` and `ℚ(√167) ≥ 5` came in the same module: **125 lines in all**.
 
 **Leaves left:** one, by ruling — `Rigidity.ratioAtMost_two_notMem_link`, M13's.
+
+## Drafts for files I do not write
+
+### D1 — `data/fs131/claims-NF2.md` § Dated lines (each to follow the last)
+
+- 2026-10-14, FS131-KM15: NF2-LEAF-23 is typed and proved on branch `fs131-wm15`, over M13's
+  `Rigidity.ratioAtMost_of_two_notMem` (a private link until the join, by the coordinator's ruling) and `hOA`.
+  `numberField_F47`; every stable prime of `ℚ(√47, i)` has `p²` residues, `p ≡ 3 (mod 4)` prime, `47` a square mod `p`
+  (`SqrtFortySeven.stablePrime_card_sqrt47`, standard three); `5 ≤ L(ℚ(√47))`; `χ(ℚ(√47)²) = 5`
+  (`SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five`). The leaf's other fields are in `Instances/SqrtClassValues`:
+  `χ = 5` at `ℚ(√143)`, `ℚ(√311)`, `ℚ(√335)`, `ℚ(√3, √5)`, and `χ ≥ 5` at `ℚ(√167)`.
+- 2026-10-14, FS131-KM15: the leaf is wider than written. `5 ≤ L(F)` holds for every real number field in which some
+  `a ≡ 7 (mod 8)`, some `b ≡ 2 (mod 3)` and some `c` that is not a square mod 7 are squares
+  (`Rigidity.five_le_localBound_of_isSquare`). D:116's class is `a = b = c = d`; `ℚ(√3, √5)` is `15, 5, 3`. And CLS is
+  an equivalence: `TCA F ↔ 5 ≤ L(F)` (`Rigidity.tca_iff_five_le_localBound`).
+
+### D2 — `BIBLIOGRAPHY.md`
+
+No new source was read. Cited by key in docstrings: `[AmbrusEtAl2023]` (through `hOA`, the headline's) and
+`[Moorhouse2010]` (the question `χ(ℚ(√47)²) = 5` answers, per `CLAUDE.md` § Publication). Both entries exist. I read
+neither paper here.
+
+### D3 — `LEAN.md` § Searching — Lean (three lines, to follow the last)
+
+- At the pin `insert a ∅ = {a}` is core's `insert_empty_eq` (`LawfulSingleton`); `Set.insert_emptyc_eq` and
+  `insert_emptyc_eq` are unknown names. A field of square roots built with one radicand adjoined to `∅`
+  (`QuadraticPrime.exists_maximal_card_eq_of_ramified ∅ q`) is read at `{q}` by rewriting the goal with it, not the
+  hypotheses, whose types depend on the set (`SqrtClassValues.chromaticNumber_planeOver_sqrt143_le_five`; FS131-KM15).
+- A natural number read out of a subfield `K₀` of a ring `k`: `((p : K₀) : k) = (p : k)` is `map_natCast K₀.subtype p`
+  (rewrite right to left). `exact_mod_cast` fails between the two `NatCast` instances. `IsSquare (d : ZMod p)` is decidable
+  (`Mathlib/Data/Fintype/Parity`), so `¬ IsSquare (47 : ZMod 7)` is `decide` (FS131-KM15).
+- An odd stable prime's residue facts need no ramification theory: an integer of `F(i)` fixed by conjugation has its
+  residue in the fixed field of `Q` elements (`StandingFive.card_fixed_of_involution`), and there a square root of a
+  natural number is the image of a natural number (`pow_char_eq_of_sq_natCast`, `exists_natCast_of_pow_eq`). The degree
+  enters only to bound `n` in `Q = pⁿ`, through `Ideal.absNorm_dvd_absNorm_of_le` and `absNorm_span_natCast`
+  (`Rigidity.stablePrime_card_of_two_notMem`, `SqrtFortySeven.stablePrime_card_sqrt47`; FS131-KM15).
+  `Coloring.color_classes_independent` is deprecated at the pin for `Coloring.isIndepSet_colorClass`.
+
+## Stage 4 — SAVED: the build, the axioms, the lint
+
+- **Build** (`./scripts/build.sh` under the slot, `--mem 10 --cpus 4`, `MEMMAX=10G BATCH=8`): **OK — 259 of 259 batches,
+  4 modules rebuilt** (the three new ones and `Proofs`), 7 m 58 s (`data/fs131/km15/build-1.log`, the full output
+  `build-1-full.log`). My files produce one warning, the link's `declaration uses 'sorry'`
+  (`Rigidity/SqrtClassFive.lean:104`). The other warnings are other lines' `sorry`: `ClassRatio` ll. 214, 224, 346, 351, 359,
+  366, `Plane/OneAvoidingDensity` l. 54, `Rigidity/RingScope` l. 247.
+- **Axioms of every public declaration, from the built tree** (`probes/AxiomsBuilt.lean`, `.out`; 26 declarations). The
+  standard three alone: `five_le_chromaticNumber_of_ratioAtMost`, `five_le_localBound_of_tca`, `two_notMem_of_isSquare`,
+  `stablePrime_card_of_two_notMem`, `numberField_F47`, `finrank_fieldI_F47_le`, `isSquare_fortySeven`,
+  `stablePrime_card_sqrt47`, `exists_stablePrime_eleven`, `isSquare_radicand`, `chromaticNumber_planeOver_sqrt143_le_five`.
+  `sorryAx` with the standard three, through the link only: the six floor and `L ≥ 5` statements. `tca_iff_five_le_localBound`:
+  `sorryAx` and `kloosterman_bound`, through M13's `tca_of_five_le_localBound`. The seven `χ` statements:
+  `[propext, sorryAx, Classical.choice, Quot.sound, Rigidity.positive_entropy_rigidity, StandingFive.kloosterman_bound]`.
+  Their `sorryAx` comes through the named leaves: the link, M13's six private leaves and `Plane/OneAvoidingDensity`'s
+  under the headline, and `RingScope` l. 247 if the headline reads it — item 918 named the headline's `sorryAx` as M13's
+  six and the density leaf.
+- **Guarded lint** (`lake lint --no-build -- --no-build --trace` under the slot): exit 0, `-- Linting passed for Proofs.`,
+  14 of 14 linters `(2/2) Passed!`, no finding (`data/fs131/km15/lint-1.txt`).
+- **Doubled names** (`./scripts/dupnames.sh`): OK, no name declared by two modules, and "no repeated name appeared or
+  disappeared since the previous complete run" (`dupnames-1.txt`). **Slip:** I ran it without a slot; it is one `lean`
+  process of about 5 GiB (`LEAN.md` § Building, FS131-LC1), and it finished within a minute. Nothing was lost.
+- **Architecture**: `tools/check_architecture.py` PASS (`arch-1.txt`), with three new rows.

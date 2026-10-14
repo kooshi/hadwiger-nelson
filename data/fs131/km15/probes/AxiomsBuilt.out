@@ -1,0 +1,91 @@
+slot: admitted km15: mem 4 GiB (hard cap), cpus 6,7
+'HadwigerNelson.Rigidity.five_le_chromaticNumber_of_ratioAtMost' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Rigidity.five_le_localBound_of_tca' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.tca_iff_five_le_localBound' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound,
+ StandingFive.kloosterman_bound]
+'HadwigerNelson.Rigidity.five_le_chromaticNumber_of_two_notMem' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Rigidity.two_notMem_of_isSquare' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.stablePrime_card_of_two_notMem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.five_le_chromaticNumber_of_isSquare' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Rigidity.five_le_localBound_of_isSquare' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Rigidity.five_le_localBound_of_isSquare_class' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound,
+ Rigidity.positive_entropy_rigidity,
+ StandingFive.kloosterman_bound]
+'HadwigerNelson.SqrtFortySeven.numberField_F47' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtFortySeven.finrank_fieldI_F47_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtFortySeven.isSquare_fortySeven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtFortySeven.stablePrime_card_sqrt47' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtFortySeven.exists_stablePrime_eleven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtFortySeven.five_le_localBound_sqrt47' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound,
+ Rigidity.positive_entropy_rigidity,
+ StandingFive.kloosterman_bound]
+'HadwigerNelson.SqrtClassValues.isSquare_radicand' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtClassValues.five_le_localBound_sqrt143' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt143_le_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt143_eq_five' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound,
+ Rigidity.positive_entropy_rigidity,
+ StandingFive.kloosterman_bound]
+'HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt311_eq_five' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound,
+ Rigidity.positive_entropy_rigidity,
+ StandingFive.kloosterman_bound]
+'HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt335_eq_five' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound,
+ Rigidity.positive_entropy_rigidity,
+ StandingFive.kloosterman_bound]
+'HadwigerNelson.SqrtClassValues.five_le_localBound_sqrt3_sqrt5' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt3_sqrt5_eq_five' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound,
+ Rigidity.positive_entropy_rigidity,
+ StandingFive.kloosterman_bound]
+'HadwigerNelson.SqrtClassValues.five_le_chromaticNumber_planeOver_sqrt167' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound,
+ Rigidity.positive_entropy_rigidity,
+ StandingFive.kloosterman_bound]
