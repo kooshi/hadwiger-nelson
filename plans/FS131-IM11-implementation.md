@@ -111,3 +111,21 @@ no global `IntCast` at the pin; the docstring's `(· + n)` is this map).
 **Re-priced from the first two leaves** (brief, § Your lanes): `gram_sum_eq` 35 lines (the scratch proof), `posDef_koopman`
 13 lines plus 22 of two helpers, against the plan's 35 and 40–60 — at plan. **The lane:** 609 lines added (`git diff
 --stat`), against the plan's "500–700 lines left"; about 13 minutes from the first edit to the last leaf.
+
+## Stage 3 — SAVED: M11-T (`Rigidity/TraceSplit`) proved, 8 of 8 leaves
+
+All eight leaves are proved (`lake env lean` with the lakefile's options as `-D` flags: exit 0, no message;
+`data/fs131/im11/logs/T-final.log`), elaborated against the compiled `SpectralSubspace` of the base commit (its statements
+are unchanged, so the leaves of M11-S are read as stated).
+
+**Routes as planned.** `trace_decomp`'s coefficient identity `3 corr(y) + 1 = 4 Σ_j μ(κ0 = j ∧ κy = j)` is computed in
+`ℝ` and cast; the measure identity is Fourier uniqueness (`measure_eq_of_fourier`). `setIntegral_compl_TA_re` reads only
+the first half of `isSpectralMeasureOf_condExpL2` (the continuous part's measure is `σ_j` on `T + A`) with
+`integral_add_compl`: `∫_{(T+A)ᶜ} χ(u) dσ_j = ⟨e_j, V_u e_j⟩ − ⟨Πe_j, V_u Πe_j⟩ = 0 − E[p_j(0) p_j(u)]`; then `3σ = 4Σσ_j`
+off `T + A` (`1 ∈ T + A`), integrated, and the real part taken. `setIntegral_compl_TA_rot` is `setIntegral_map` along
+`rot u` with `rot_preimage_TA`. New private helpers: `three_mul_tetra_add_one_eq_sum` (pointwise, `fin_cases`),
+`isFiniteMeasure_nsmul`, `integral_nsmul_measure`.
+
+**Re-priced from the first two leaves:** `integral_colourInd_mul_comp` 18 lines, `trace_decomp` 54 lines with its two
+helpers' 14, against the plan's 30–50 and 60–100 — under plan. **The lane:** 175 lines added, against the plan's 350–500;
+about 9 minutes.
