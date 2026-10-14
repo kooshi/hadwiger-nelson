@@ -1,0 +1,7 @@
+read from: git main = 16b181f48c7296b6ac09deac57cd77940912a2ff
+MISMATCH data/fs131/REQUEST-2026-10-13.md | 278 chars | W2: (2026-10-13, answering the choice between the two publishable form
+MISMATCH data/fs131/claims-NF4.md | 541 chars | NF4-THEOREM: *The theorem.* (a) For every squarefree `m ≡ 11 (mod 12)`
+MISMATCH data/fs131/claims-NF4.md | 566 chars | NF4-NC: any upper bound as this project's (every upper bound here is p
+MISMATCH data/fs131/claims-NF4.md | 1457 chars | - 2026-10-13 — **Statements of the line that say more than the list, t
+MISMATCH plans/FS131-close-inventory.md | 4022 chars | 720. **FS131-KJ1 handed back: the three-and-four-colours line is one t
+quotations: 5 mismatches: 5

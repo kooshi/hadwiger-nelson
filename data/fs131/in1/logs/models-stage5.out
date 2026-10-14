@@ -1,0 +1,3 @@
+models.sh (compiled): lean exit 0; errors 0; sorry warnings 0; examples 4
+'FS131IN1Models.conj_ne_id' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IN1Models.frobenius_ne_id' depends on axioms: [propext, Classical.choice, Quot.sound]

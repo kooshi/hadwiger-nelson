@@ -1,0 +1,27 @@
+data/fs131/id1/probes/shape_plant.lean:14:4: warning: missing doc string for public def shapeCheck
+
+Note: This linter can be disabled with `set_option linter.missingDocs false`
+data/fs131/id1/probes/shape_plant.lean:20:7: warning: missing doc string for public abbrev PA
+
+Note: This linter can be disabled with `set_option linter.missingDocs false`
+data/fs131/id1/probes/shape_plant.lean:22:7: warning: missing doc string for public abbrev PB
+
+Note: This linter can be disabled with `set_option linter.missingDocs false`
+data/fs131/id1/probes/shape_plant.lean:24:7: warning: missing doc string for public abbrev PC
+
+Note: This linter can be disabled with `set_option linter.missingDocs false`
+data/fs131/id1/probes/shape_plant.lean:27:7: warning: missing doc string for public abbrev PC''
+
+Note: This linter can be disabled with `set_option linter.missingDocs false`
+data/fs131/id1/probes/shape_plant.lean:33:51: error: Tactic `decide` proved that the proposition
+  shapeCheck [3, 7] PA = true
+is false
+data/fs131/id1/probes/shape_plant.lean:34:51: error: Tactic `decide` proved that the proposition
+  shapeCheck [0, 4] PB = true
+is false
+data/fs131/id1/probes/shape_plant.lean:35:48: error: Tactic `decide` proved that the proposition
+  shapeCheck [7] PC = true
+is false
+data/fs131/id1/probes/shape_plant.lean:36:52: error: Tactic `decide` proved that the proposition
+  shapeCheck [3] PC'' = true
+is false

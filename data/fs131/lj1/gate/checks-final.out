@@ -1,0 +1,199 @@
+@HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_table : ∀ {m : ℕ},
+  Squarefree m →
+    (m % 4 ≠ 3 →
+        (SimpleGraph.induce (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {m}))
+              (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+          2) ∧
+      (m % 12 = 3 ∨ m % 12 = 7 →
+          (SimpleGraph.induce (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {m}))
+                (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+            3) ∧
+        (m % 12 = 11 →
+            4 ≤
+              (SimpleGraph.induce (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {m}))
+                  (HadwigerNelson.unitDistance ℂ)).chromaticNumber) ∧
+          (m % 12 = 11 →
+            m % 168 ≠ 47 ∧ m % 168 ≠ 143 ∧ m % 168 ≠ 167 →
+              (SimpleGraph.induce (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {m}))
+                    (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+                4)
+HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_eq_three_iff : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  ¬(SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).Colorable 2 →
+    ((SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber = 3 ↔
+      ∃ 𝔭, 𝔭.IsMaximal ∧ Nat.card (𝓞 ↥F ⧸ 𝔭) = 3)
+HadwigerNelson.ThreeFourColours.colorable_three_planeOver_iff : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).Colorable 3 ↔
+    (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).Colorable 2 ∨
+      ∃ 𝔭, 𝔭.IsMaximal ∧ Nat.card (𝓞 ↥F ⧸ 𝔭) = 3
+@HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_of_inv_three_mem : ∀ {F : Subfield ℝ},
+  3⁻¹ ∈ HadwigerNelson.SpectralChain.unitRing F →
+    ¬(SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).Colorable 2 →
+      4 ≤ (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+@HadwigerNelson.TorsionExtraction.chromaticNumber_planeOver_ne_three_of_inv_three_mem : ∀ {F : Subfield ℝ},
+  3⁻¹ ∈ HadwigerNelson.SpectralChain.unitRing F →
+    (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber ≠ 3
+@HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_of_sqrt_mem : ∀ {F : Subfield ℝ} {d : ℕ},
+  d % 12 = 11 →
+    √↑d ∈ F → 4 ≤ (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+HadwigerNelson.ThreeFourColours.localBound_le_chromaticNumber_of_le_four : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  HadwigerNelson.SpectralChain.localBound F ≤ 4 →
+    HadwigerNelson.SpectralChain.localBound F ≤
+      (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_eq_localBound_of_le_four : ∀ (F : Subfield ℝ)
+  [NumberField ↥F],
+  HadwigerNelson.SpectralChain.localBound F ≤ 4 →
+    (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+      HadwigerNelson.SpectralChain.localBound F
+HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_le_three_iff : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber ≤ 3 ↔
+    HadwigerNelson.SpectralChain.localBound F ≤ 3
+HadwigerNelson.ThreeFourColours.localBound_le_chromaticNumber_or_four_le : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  HadwigerNelson.SpectralChain.localBound F ≤
+      (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber ∨
+    4 ≤ (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+'HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_table' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_eq_three_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.ThreeFourColours.colorable_three_planeOver_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.ThreeFourColours.colorable_three_of_card_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_of_inv_three_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.TorsionExtraction.chromaticNumber_planeOver_ne_three_of_inv_three_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_of_sqrt_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_fieldOfRadicands' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.TorsionExtraction.fieldBandSet_three_eq_empty_of_sqrt_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.ThreeFourColours.localBound_le_chromaticNumber_or_four_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.ThreeFourColours.localBound_le_chromaticNumber_of_le_four' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_eq_localBound_of_le_four' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_le_three_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.DyadicQuadratic.colorable_two_planeOver_sqrt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.two_le_chromaticNumber_planeOver' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.ThreeFourColours.colorable_three_planeOver_sqrt' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.TorsionExtraction.three_le_chromaticNumber_planeOver_of_sqrt_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.DyadicQuadratic.colorable_four_planeOver_sqrt' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.ThreeFourColours.colorable_four_planeOver_sqrt_of_seven' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four_of_dyadic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four_of_seven' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.ThreeColourCriterion.targetFloor_four_weil' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine_of_colorable_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.ThreeColourCriterion.exists_maximal_conj_trivial_of_colorable_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_localBound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'FS131LJ1.row99_binder' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'FS131LJ1.site_min' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'FS131LJ1.site_min_totallyReal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'FS131LJ1.site_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'FS131LJ1.site_chain' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.SpectralChain.min_localBound_five_le_chromaticNumber' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SpectralChain.min_localBound_five_le_chromaticNumber_of_totallyReal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SpectralChain.chromaticNumber_eq_localBound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UpperHalf.chromaticNumber_eq_localBound_of_chain' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'FS131LJ1.localBound_rat_le_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131LJ1.localBound_rat_eq_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'FS131LJ1.stablePrime_nine_sqrt_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'FS131LJ1.localBound_sqrt_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'FS131LJ1.localBound_sqrt_eleven' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'FS131LJ1.clause_b_true_side' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'FS131LJ1.clause_b_false_side' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'FS131LJ1.clause_c_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131LJ1.inv_three_notMem_sqrt_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131LJ1.table_at_71_95_191' depends on axioms: [propext, Classical.choice, Quot.sound]

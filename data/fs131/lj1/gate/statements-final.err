@@ -1,0 +1,2 @@
+slot: waiting (ledger 15 + 8 > budget 22 GiB)
+slot: admitted lj1-statements: mem 8 GiB (hard cap), cpus 0,1

@@ -1,0 +1,3 @@
+box     class C m%8 in [7]: odd-N 204  even-N 0  failures 384  first (7, -9, -9, -9, 9, 36)
+residue class C m%8 in [7]: cases 12288  failures 8192  first (7, 0, 1, 3, 0, 0)
+plant=C failures=8576

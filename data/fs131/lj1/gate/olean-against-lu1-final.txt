@@ -1,0 +1,16 @@
+.olean files of Proofs: 1908 in the tree, 1902 in the last landing's manifest; same SHA-256: 1900; differing: 2 (allowed: the modules ['Proofs', 'Proofs/HadwigerNelson/Arith/QuadraticPrime', 'Proofs/HadwigerNelson/Arith/UpperHalf', 'Proofs/HadwigerNelson/Instances/UpperHalfValues']); in the tree only: 6
+  differs: Proofs.olean
+  differs: Proofs/HadwigerNelson/Arith/QuadraticPrime.olean
+  in the tree only: Proofs/HadwigerNelson/Arith/DyadicQuadratic.olean
+  in the tree only: Proofs/HadwigerNelson/Arith/ThreeColourCharacter.olean
+  in the tree only: Proofs/HadwigerNelson/Arith/ThreeColourCriterion.olean
+  in the tree only: Proofs/HadwigerNelson/Arith/ThreeFourColours.olean
+  in the tree only: Proofs/HadwigerNelson/Arith/TorsionExtraction.olean
+  in the tree only: Proofs/HadwigerNelson/Instances/UpperHalfCorollaries.olean
+  named: Proofs/HadwigerNelson/Outside/OAI158: 1 file(s), identical
+  named: Proofs/HadwigerNelson/Plane/LebesgueNumber: 1 file(s), identical
+  named: Proofs/HadwigerNelson/Plane/AeColouring: 1 file(s), identical
+  named: Proofs/HadwigerNelson/Arith/WeilKloosterman: 1 file(s), identical
+  named: Proofs/HadwigerNelson/SpectralChain: 1 file(s), identical
+olean-against-lu1: PASS
+exit=0

@@ -319,6 +319,12 @@ import Proofs.HadwigerNelson.Plane.ThreeArcs
 import Proofs.HadwigerNelson.Arith.UpperHalf
 import Proofs.HadwigerNelson.Arith.QuadraticPrime
 import Proofs.HadwigerNelson.Instances.UpperHalfValues
+import Proofs.HadwigerNelson.Arith.ThreeColourCharacter
+import Proofs.HadwigerNelson.Arith.TorsionExtraction
+import Proofs.HadwigerNelson.Arith.ThreeColourCriterion
+import Proofs.HadwigerNelson.Arith.DyadicQuadratic
+import Proofs.HadwigerNelson.Arith.ThreeFourColours
+import Proofs.HadwigerNelson.Instances.UpperHalfCorollaries
 
 /-!
 # Proofs

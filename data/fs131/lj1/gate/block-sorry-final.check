@@ -1,0 +1,24 @@
+ok    not_colorable_five: H: [Classical.choice, Quot.sound, no_proper_five_coloring, propext]
+ok    six_le_chromaticNumber_plane: H: [Classical.choice, Quot.sound, no_proper_five_coloring, propext]
+ok    chromaticNumber_plane_six_or_seven: H: [Classical.choice, Quot.sound, no_proper_five_coloring, propext]
+ok    six_le_chiM0: H: [Classical.choice, Quot.sound, no_proper_five_coloring, propext]
+ok    chiM0_six_or_seven: H: [Classical.choice, Quot.sound, no_proper_five_coloring, propext]
+FAIL  nonempty_aeColouring_of_colorable: carries sorryAx
+FAIL  colorable_iff_nonempty_aeColouring: carries sorryAx
+FAIL  chiM0_le_chromaticNumber_plane: carries sorryAx
+FAIL  chromaticNumber_plane_eq_chiM0: carries sorryAx
+FAIL  seven_le_chromaticNumber_plane_iff: carries sorryAx
+ok    properColoring_iff_colorable: clean: [Classical.choice, Quot.sound, propext]
+FAIL  direction_coe: carries sorryAx
+ok    map_coe_arcLength: clean: [Classical.choice, Quot.sound, propext]
+ok    map_prodMap_coe: clean: [Classical.choice, Quot.sound, propext]
+FAIL  weakColoring_iff_unitPairsNull: carries sorryAx
+FAIL  nonempty_aeColouring_of_weak: carries sorryAx
+FAIL  weakColoring_of_aeColouring: carries sorryAx
+FAIL  exists_weakColoring_iff_nonempty_aeColouring: carries sorryAx
+ok    exists_properColoring_seven: clean: [Classical.choice, Quot.sound, propext]
+FAIL  proper_to_borel_weak_model: carries sorryAx
+ok    anglePeriodPositive: clean: [Classical.choice, Quot.sound, propext]
+ok    angularMeasure.instIsProbabilityMeasure: clean: [Classical.choice, Quot.sound, propext]
+records filed: 22  as filed: 11 (clean 6, on H 5, on T 0)  refused: 11 ['nonempty_aeColouring_of_colorable', 'colorable_iff_nonempty_aeColouring', 'chiM0_le_chromaticNumber_plane', 'chromaticNumber_plane_eq_chiM0', 'seven_le_chromaticNumber_plane_iff', 'direction_coe', 'weakColoring_iff_unitPairsNull', 'nonempty_aeColouring_of_weak', 'weakColoring_of_aeColouring', 'exists_weakColoring_iff_nonempty_aeColouring', 'proper_to_borel_weak_model']
+CONTROL FIRED AS EXPECTED: expected refused ['chiM0_le_chromaticNumber_plane', 'chromaticNumber_plane_eq_chiM0', 'colorable_iff_nonempty_aeColouring', 'direction_coe', 'exists_weakColoring_iff_nonempty_aeColouring', 'nonempty_aeColouring_of_colorable', 'nonempty_aeColouring_of_weak', 'proper_to_borel_weak_model', 'seven_le_chromaticNumber_plane_iff', 'weakColoring_iff_unitPairsNull', 'weakColoring_of_aeColouring']

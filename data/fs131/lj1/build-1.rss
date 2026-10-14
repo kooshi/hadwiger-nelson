@@ -1,0 +1,9 @@
+sampler start 2026-10-14T02:57:20Z worktree=/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wrc interval=5s pid=1270889
+03:02:17 heartbeat samples=60 now: 0 process(es), sum-rss=0 MiB
+03:03:57 new max sum-rss=3816 MiB over 1 process(es): Proofs/HadwigerNelson/Arith/ThreeColourCriterion.lean
+03:03:57 new max one-rss=3816 MiB: Proofs/HadwigerNelson/Arith/ThreeColourCriterion.lean
+03:04:02 new max sum-rss=3859 MiB over 1 process(es): Proofs/HadwigerNelson/Arith/ThreeColourCriterion.lean
+03:04:02 new max one-rss=3859 MiB: Proofs/HadwigerNelson/Arith/ThreeColourCriterion.lean
+03:04:12 new max sum-rss=3951 MiB over 1 process(es): Proofs/HadwigerNelson/Arith/ThreeFourColours.lean
+03:04:12 new max one-rss=3951 MiB: Proofs/HadwigerNelson/Arith/ThreeFourColours.lean
+sampler end 2026-10-14T03:04:22Z samples=84 PEAK_SUM_RSS_MIB=3951 (over 1 process(es): Proofs/HadwigerNelson/Arith/ThreeFourColours.lean) PEAK_ONE_RSS_MIB=3951 (Proofs/HadwigerNelson/Arith/ThreeFourColours.lean)
