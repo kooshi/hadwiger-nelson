@@ -1,0 +1,92 @@
+slot: admitted icl2: mem 7 GiB (hard cap), cpus 1,6
+data/fs131/icl2/work/CountDescent.lean:179:48: warning: Variable name `hφ` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+data/fs131/icl2/work/CountDescent.lean:274:71: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  SProd (Set ?m.290) (K F →+ Lev F k) ?m.298
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/icl2/work/CountDescent.lean:324:28: error: `simp` made no progress
+data/fs131/icl2/work/CountDescent.lean:278:8: warning: This simp argument is unused:
+  true_and
+
+Hint: Omit it from the simp argument list.
+  simp only [hBad, Set.mem_setOf_eq, Set.mem_iUnion, Set.mem_inter_iff, Set.mem_prod,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Set.mem_univ, and_true,
+  ̵  ̵ ̵ ̵ ̵ ̵ ̵ ̵t̵r̵u̵e̵_̵a̵n̵d̵,̵ ̵Set.mem_preimage, Set.mem_singleton_iff]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/icl2/work/CountDescent.lean:366:61: error: Application type mismatch: The argument
+  hT
+has type
+  TCA F
+of sort `Prop` but is expected to have type
+  Subfield ℝ
+of sort `Type` in the application
+  @ratioLe_levR_range hT
+data/fs131/icl2/work/CountDescent.lean:399:2: error: linarith failed to find a contradiction
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+hT : TCA F
+hm : mOne < ENNReal.ofReal (1 / 4)
+φ : ℂ × K F → Fin 4
+hφ : Measurable φ
+h : SliceEdgeNull φ
+c₀ : ℝ
+hc₀ : c₀ < 1 / 4
+hc₀P : ∀ (P : StablePrime F), RatioAtMost P c₀
+c : ℝ := max c₀ 0
+hcdef : c = max c₀ 0
+hc0 : 0 ≤ c
+hc14 : c < 1 / 4
+hcP : ∀ (P : StablePrime F), RatioAtMost P c
+hm1 : mOne.toReal < 1 / 4
+M : ℝ := max mOne.toReal c
+hMdef : M = max mOne.toReal c
+hM : M < 1 / 4
+ε : ℝ := (1 - 4 * M) / 16
+hεdef : ε = (1 - 4 * M) / 16
+hε : 0 < ε
+s₀ : ℝ
+hs₀ : 0 < s₀
+hN : NRWindow ε s₀
+W : Set ℂ := squareWin 0 s₀
+hWdef : W = squareWin 0 s₀
+μ : Measure (ℂ × K F) := volume.prod (haarK F)
+hμ : μ = volume.prod (haarK F)
+bad : Fin 4 → ℕ → ℝ :=
+  fun j k =>
+    μ.real
+      {p |
+        p.1 ∈ W ∧
+          φ p = j ∧
+            (haarK F) ({x | φ (p.1, x) = j} ∩ ⇑(proj F k) ⁻¹' {(proj F k) p.2}) ≤
+              3 / 4 * (haarK F) (⇑(proj F k) ⁻¹' {(proj F k) p.2})}
+hbad :
+  bad = fun j k =>
+    μ.real
+      {p |
+        p.1 ∈ W ∧
+          φ p = j ∧
+            (haarK F) ({x | φ (p.1, x) = j} ∩ ⇑(proj F k) ⁻¹' {(proj F k) p.2}) ≤
+              3 / 4 * (haarK F) (⇑(proj F k) ⁻¹' {(proj F k) p.2})}
+hev : ∀ᶠ (k : ℕ) in atTop, 1 ≤ k ∧ ∀ (j : Fin 4), bad j k < ε * s₀ ^ 2
+k : ℕ
+hk : 1 ≤ k
+hkbad : ∀ (j : Fin 4), bad j k < ε * s₀ ^ 2
+hcol : ∀ (j : Fin 4), μ.real ({p | φ p = j} ∩ W ×ˢ Set.univ) ≤ (M + 2 * ε) * s₀ ^ 2
+hdisj : (↑Finset.univ).PairwiseDisjoint fun j => {p | φ p = j} ∩ W ×ˢ Set.univ
+hmeasj : ∀ j ∈ Finset.univ, MeasurableSet ({p | φ p = j} ∩ W ×ˢ Set.univ)
+hunion : ⋃ j ∈ Finset.univ, {p | φ p = j} ∩ W ×ˢ Set.univ = W ×ˢ Set.univ
+hWμ : μ (W ×ˢ Set.univ) = ENNReal.ofReal (s₀ ^ 2)
+htot : ∑ j, μ.real ({p | φ p = j} ∩ W ×ˢ Set.univ) = s₀ ^ 2
+hsum : s₀ ^ 2 ≤ ↑4 * ((M + 2 * ε) * s₀ ^ 2)
+hs2 : 0 < s₀ ^ 2
+this : 4 * (M + 2 * ε) < 1
+⊢ False
+failed
+Command exited with non-zero status 1
+wall=9.89s maxrss=4129208kB
+lean1: compile failed; the build's .olean of Rigidity/CountDescent linked back into the farm

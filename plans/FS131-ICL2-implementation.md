@@ -153,3 +153,42 @@ kernel's side.
 73 lines, the scratch leaf): blocks Z and R came in at 0.4–0.7 of their planned lines (≈ 524 against 900–1,200). Λ2 was
 planned at 1,350–1,900 lines; at that ratio it is **≈ 700–1,100 lines**, about half a day at the measured rate — far under a
 week. Block D (`CountDescent`, measure theory over the completion) is next.
+
+## Stage 3 — SAVED: lane Λ2 complete — `Rigidity/CountDescent` (5 leaves) proved; one statement defect found, ruled and repaired
+
+`CountDescent` holds no `sorry` and compiles in the farm with **exit 0 and no warning** (`logs/cd-3.log`; ≈ 330 lines net,
+against block D's 450–700). With stage 2, **lane Λ2 is done: 23 leaves in three files, ≈ 850 lines** (planned 1,350–1,900).
+
+**The statement defect** (message to the coordinator, this stage). `rowsEdgeNull_levelRows` as typed —
+`Measurable φ → SliceEdgeNull φ → RowsEdgeNull {d : (levR F k).range | ↑d ∈ normOneLev F k} (levelRows φ j k)` — is false
+without `TCA F`: its connection set is all of `normOneLev ∩ range`, while `SliceEdgeNull` speaks only of translations by
+`ιK u`, `u` a unit vector, i.e. of `levR k '' U`, and the two differ at a ramified stable prime. **Counterexample** (by hand,
+one mind; nothing run): `F = ℚ` (`⊥`), `k = 4`. The only stable prime of norm `≤ 4` is `(1 + i)`, so
+`Lev ℚ 4 = ℤ[i]/(1+i)^4 = ℤ[i]/(4)`. Its norm-one residues are the eight `a + bi` with `a² + b² ≡ 1 (mod 4)`; the residues of
+true unit vectors are only `±1, ±i` (if `a''² + b''² = 1` 2-adically with `b''` even, then `a''² ≡ 1 (mod 8)` forces
+`b'' ≡ 0 (mod 4)`). Let `c : ℤ[i]/4 → ZMod 4 ≅ Fin 4`, **`c(a + bi) = a + 2b`** — additive, nonzero on `±1, ±i`, zero at
+**`s = 2 + i`** (in `normOneLev`: `4 + 1 ≡ 1`; in the range: `2 + i ∈ ℤ[i] ⊆ R`). Then `φ(z, x) = c(proj 4 x)` is measurable
+and no slice edge along a unit vector is monochromatic (`φ` moves by `c(levR u) ∈ {±1, ±2}`), so `SliceEdgeNull φ` holds; at
+colour `0` the rows `levelRows φ 0 4 0` and `levelRows φ 0 4 (2 + i)` are all of `ℂ` (each coset, of positive Haar measure,
+is filled by colour `0`), and `pairSet ℂ ℂ` has infinite measure: `RowsEdgeNull` fails at `q = 0`, `s = 2 + i`.
+**The coordinator's ruling** (by message, 2026-10-14): add `(hT : TCA F)` to the public statement and prove it — a ruled
+statement change, dumped before and after (stage 6); the alternative `∀ P, ¬ IsRamified P` declined (`TCA F` is what the
+reader holds and what `image_levR_unitVectors` takes). Done: the statement now opens `theorem rowsEdgeNull_levelRows
+(hT : TCA F) {φ …}`, and its one reader, `false_of_slice`, passes its own `hT` (`rowsEdgeNull_levelRows hT hφ h j k`).
+
+**The proofs.** `measurableSet_levelRows`: `measurableSet_lt` over the fibre measure `z ↦ haarK ({x : φ(z,x) = j} ∩ C)`
+(private `measurable_haarK_fibre`, from `measurable_measure_prodMk_left`; cosets open, private `measurableSet_proj_preimage`).
+`rowsEdgeNull_levelRows`: `s = levR k u` (`image_levR_unitVectors`); translation by `ιK u` carries the coset `q` onto `q + s`
+and preserves `haarK` (`measure_preimage_add`, written as `g + x`); the colour-`j` fills of the coset `q` at `z` and of its
+translate at `z + e θ` each exceed three quarters, so they cannot be almost disjoint (private `false_of_three_quarters`, in
+`ℝ`), and their intersection is monochromatic slice edges at `u`; `((z, x), θ) ↦ ((z, θ), x)` is measure-preserving
+(`measurePreserving_prodAssoc` twice and `measurePreserving_swap`), so `Measure.measure_ae_null_of_prod_null` makes almost
+every `(z, θ)`-section null. `volume_colour_le`: a cover by the rows times their cosets and the bad points, each coset of
+measure `1/n` (`haarK_proj_preimage`, `range_proj`), with `n` read as the subgroup's card through
+`Equiv.subtypeEquivRight`; **it reads no measurability of `φ`** (outer measure only): the hypothesis is kept as stated and
+touched once (`have _ := hφ`) so that the build's unused-variable linter stays quiet — the statement is true without it (a
+generalization, INVENTORY). `tendsto_bad`: the bad sets are measurable (a finite union over the level-`k` residues), Tonelli
+(`Measure.prod_apply`), each fibre is `tendsto_haarK_bad`'s set at `κ = 1/4` (`1 − 1/4 = 3/4` in `ℝ≥0∞`), dominated
+convergence with bound `1` on the window. `false_of_slice`: as planned — `c = max (c₀, 0)` from `tca_uniform`,
+`ε = (1 − 4 max (m₁, c))/16`, `s₀` from `Plane.exists_nrWindow`, a level `k ≥ 1` where every colour's bad points are under
+`ε s₀²` (`eventually_all`), each colour `≤ (max (m₁, c) + 2ε) s₀²`, four colours fill `squareWin 0 s₀ × K` (measure `s₀²`).

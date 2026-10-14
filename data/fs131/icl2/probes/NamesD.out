@@ -1,0 +1,113 @@
+slot: waiting (ledger 20 + 6 > budget 22 GiB)
+slot: admitted icl2: mem 6 GiB (hard cap), cpus 1,6
+@measurePreserving_prodAssoc : ∀ {α : Type u_1} {β : Type u_2} {γ : Type u_3} [inst : MeasurableSpace α]
+  [inst_1 : MeasurableSpace β] [inst_2 : MeasurableSpace γ] (μa : Measure α) (μb : Measure β) (μc : Measure γ)
+  [SFinite μb] [SFinite μc],
+  MeasurePreserving (⇑MeasurableEquiv.prodAssoc) ((μa.prod μb).prod μc) (μa.prod (μb.prod μc))
+@MeasurePreserving.prod : ∀ {α : Type u_1} {β : Type u_2} {γ : Type u_3} [inst : MeasurableSpace α]
+  [inst_1 : MeasurableSpace β] [inst_2 : MeasurableSpace γ] {δ : Type u_4} [inst_3 : MeasurableSpace δ] {μa : Measure α}
+  {μb : Measure β} {μc : Measure γ} {μd : Measure δ} [SFinite μa] [SFinite μc] {f : α → β} {g : γ → δ},
+  MeasurePreserving f μa μb → MeasurePreserving g μc μd → MeasurePreserving (Prod.map f g) (μa.prod μc) (μb.prod μd)
+@Measure.measurePreserving_swap : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α]
+  [inst_1 : MeasurableSpace β] {μ : Measure α} {ν : Measure β} [SFinite ν] [SFinite μ],
+  MeasurePreserving Prod.swap (μ.prod ν) (ν.prod μ)
+@Measure.measure_ae_null_of_prod_null : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α]
+  [inst_1 : MeasurableSpace β] {μ : Measure α} {ν : Measure β} [SFinite ν] {s : Set (α × β)},
+  (μ.prod ν) s = 0 → (fun x => ν (Prod.mk x ⁻¹' s)) =ᵐ[μ] 0
+@measure_preimage_add : ∀ {G : Type u_1} [inst : MeasurableSpace G] [inst_1 : AddGroup G] [MeasurableAdd G]
+  (μ : Measure G) [μ.IsAddLeftInvariant] (g : G) (A : Set G), μ ((fun h => g + h) ⁻¹' A) = μ A
+@measurableSet_lt : ∀ {α : Type u_1} {δ : Type u_2} [inst : TopologicalSpace α] {mα : MeasurableSpace α}
+  [OpensMeasurableSpace α] {mδ : MeasurableSpace δ} [inst_2 : LinearOrder α] [SecondCountableTopology α]
+  [OrderClosedTopology α] {f g : δ → α}, Measurable f → Measurable g → MeasurableSet {a | f a < g a}
+@measurable_measure_prodMk_left : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α]
+  [inst_1 : MeasurableSpace β] {ν : Measure β} [SFinite ν] {s : Set (α × β)},
+  MeasurableSet s → Measurable fun x => ν (Prod.mk x ⁻¹' s)
+@tendsto_lintegral_of_dominated_convergence : ∀ {α : Type u_1} [inst : MeasurableSpace α] {μ : Measure α}
+  {F : ℕ → α → ENNReal} {f : α → ENNReal} (bound : α → ENNReal),
+  (∀ (n : ℕ), Measurable (F n)) →
+    (∀ (n : ℕ), F n ≤ᵐ[μ] bound) →
+      ∫⁻ (a : α), bound a ∂μ ≠ ⊤ →
+        (∀ᵐ (a : α) ∂μ, Tendsto (fun n => F n a) atTop (𝓝 (f a))) →
+          Tendsto (fun n => ∫⁻ (a : α), F n a ∂μ) atTop (𝓝 (∫⁻ (a : α), f a ∂μ))
+@Measure.prod_apply : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α] [inst_1 : MeasurableSpace β]
+  {μ : Measure α} {ν : Measure β} [SFinite ν] {s : Set (α × β)},
+  MeasurableSet s → (μ.prod ν) s = ∫⁻ (x : α), ν (Prod.mk x ⁻¹' s) ∂μ
+@Measure.prod_prod : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α] [inst_1 : MeasurableSpace β]
+  {μ : Measure α} {ν : Measure β} [SFinite ν] (s : Set α) (t : Set β), (μ.prod ν) (s ×ˢ t) = μ s * ν t
+@ENNReal.toReal_lt_of_lt_ofReal : ∀ {a : ENNReal} {b : ℝ}, a < ENNReal.ofReal b → a.toReal < b
+@eventually_all : ∀ {α : Type u_1} {ι : Sort u_2} [Finite ι] {l : Filter α} {p : ι → α → Prop},
+  (∀ᶠ (x : α) in l, ∀ (i : ι), p i x) ↔ ∀ (i : ι), ∀ᶠ (x : α) in l, p i x
+@measure_biUnion_finset : ∀ {α : Type u_1} {ι : Type u_2} {m : MeasurableSpace α} {μ : Measure α} {s : Finset ι}
+  {f : ι → Set α}, (↑s).PairwiseDisjoint f → (∀ b ∈ s, MeasurableSet (f b)) → μ (⋃ b ∈ s, f b) = ∑ p ∈ s, μ (f p)
+@ENNReal.toReal_sum : ∀ {α : Type u_1} {s : Finset α} {f : α → ENNReal},
+  (∀ a ∈ s, f a ≠ ⊤) → (∑ a ∈ s, f a).toReal = ∑ a ∈ s, (f a).toReal
+@measure_iUnion_fintype_le : ∀ {α : Type u_1} {ι : Type u_2} {F : Type u_3} [inst : FunLike F (Set α) ENNReal]
+  [OuterMeasureClass F α] [inst_2 : Fintype ι] (μ : F) (s : ι → Set α), μ (⋃ i, s i) ≤ ∑ i, μ (s i)
+data/fs131/icl2/probes/NamesD.lean:18:8: error(lean.unknownIdentifier): Unknown identifier `MeasureTheory.QuasiMeasurePreserving.preimage_null`
+@lintegral_indicator_const : ∀ {α : Type u_1} {m : MeasurableSpace α} {μ : Measure α} {s : Set α},
+  MeasurableSet s → ∀ (c : ENNReal), ∫⁻ (a : α), s.indicator (fun x => c) a ∂μ = c * μ s
+@ENNReal.toReal_mono : ∀ {a b : ENNReal}, b ≠ ⊤ → a ≤ b → a.toReal ≤ b.toReal
+@measureReal_def : ∀ {α : Type u_1} {m : MeasurableSpace α} (μ : Measure α) (s : Set α), μ.real s = (μ s).toReal
+@Measure.real : {α : Type u_1} → {m : MeasurableSpace α} → Measure α → Set α → ℝ
+@ENNReal.sub_eq_of_eq_add : ∀ {a b c : ENNReal}, b ≠ ⊤ → a = c + b → a - b = c
+@measure_union_add_inter : ∀ {α : Type u_1} {m : MeasurableSpace α} {μ : Measure α} {t : Set α} (s : Set α),
+  MeasurableSet t → μ (s ∪ t) + μ (s ∩ t) = μ s + μ t
+@ae_iff : ∀ {α : Type u_1} {F : Type u_2} [inst : FunLike F (Set α) ENNReal] [inst_1 : OuterMeasureClass F α] {μ : F}
+  {p : α → Prop}, (∀ᵐ (a : α) ∂μ, p a) ↔ μ {a | ¬p a} = 0
+@Set.indicator_le_indicator : ∀ {α : Type u_1} {M : Type u_2} [inst : Preorder M] [inst_1 : Zero M] {s : Set α}
+  {f g : α → M} {a : α}, f a ≤ g a → s.indicator f a ≤ s.indicator g a
+ENNReal.toReal_inv : ∀ (a : ENNReal), a⁻¹.toReal = a.toReal⁻¹
+HadwigerNelson.Rigidity.Counting.haarK_proj_preimage : ∀ (F : Subfield ℝ) [inst : NumberField ↥F] (k : ℕ)
+  {a : HadwigerNelson.Rigidity.Counting.Lev F k},
+  a ∈ Set.range ⇑(HadwigerNelson.Rigidity.Counting.proj F k) →
+    (HadwigerNelson.Rigidity.Counting.haarK F) (⇑(HadwigerNelson.Rigidity.Counting.proj F k) ⁻¹' {a}) =
+      (↑(Nat.card ↑(Set.range ⇑(HadwigerNelson.Rigidity.Counting.proj F k))))⁻¹
+HadwigerNelson.Rigidity.Counting.tendsto_haarK_bad : ∀ (F : Subfield ℝ) [inst : NumberField ↥F]
+  {Y : Set (HadwigerNelson.Rigidity.Counting.K F)},
+  MeasurableSet Y →
+    ∀ {κ : ENNReal},
+      0 < κ →
+        Tendsto
+          (fun k =>
+            (HadwigerNelson.Rigidity.Counting.haarK F)
+              {x |
+                x ∈ Y ∧
+                  (HadwigerNelson.Rigidity.Counting.haarK F)
+                      (Y ∩
+                        ⇑(HadwigerNelson.Rigidity.Counting.proj F k) ⁻¹'
+                          {(HadwigerNelson.Rigidity.Counting.proj F k) x}) ≤
+                    (1 - κ) *
+                      (HadwigerNelson.Rigidity.Counting.haarK F)
+                        (⇑(HadwigerNelson.Rigidity.Counting.proj F k) ⁻¹'
+                          {(HadwigerNelson.Rigidity.Counting.proj F k) x})})
+          atTop (𝓝 0)
+HadwigerNelson.Rigidity.Counting.range_proj : ∀ (F : Subfield ℝ) [inst : NumberField ↥F] (k : ℕ),
+  Set.range ⇑(HadwigerNelson.Rigidity.Counting.proj F k) = Set.range ⇑(HadwigerNelson.Rigidity.Counting.levR F k)
+data/fs131/icl2/probes/NamesD.lean:31:8: error(lean.unknownIdentifier): Unknown identifier `HadwigerNelson.Rigidity.exists_nrWindow`
+@HadwigerNelson.Plane.exists_nrWindow : ∀ {ε : ℝ}, 0 < ε → ∃ s₀, 0 < s₀ ∧ HadwigerNelson.Plane.NRWindow ε s₀
+@HadwigerNelson.Rigidity.sum_volume_inter_sq_le : ∀ {Q : Type u_1} [inst : AddCommGroup Q] [inst_1 : Fintype Q]
+  [DecidableEq Q] {S : Set Q},
+  (∀ s ∈ S, -s ∈ S) →
+    ∀ {r : ℝ},
+      HadwigerNelson.Rigidity.RatioLe S r →
+        0 ≤ r →
+          ∀ {Y : Q → Set ℂ},
+            (∀ (q : Q), MeasurableSet (Y q)) →
+              HadwigerNelson.Rigidity.RowsEdgeNull S Y →
+                ∀ {ε s₀ : ℝ},
+                  HadwigerNelson.Plane.NRWindow ε s₀ →
+                    ∀ (a : ℂ) {s : ℝ},
+                      s₀ ≤ s →
+                        ∑ q, volume.real (Y q ∩ HadwigerNelson.Plane.squareWin a s) ≤
+                          (max HadwigerNelson.Plane.mOne.toReal r + ε) * ↑(Nat.card Q) * s ^ 2
+HadwigerNelson.Rigidity.tca_uniform : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  HadwigerNelson.SpectralChain.TCA F →
+    ∃ c < 1 / 4, ∀ (P : HadwigerNelson.SpectralChain.StablePrime F), HadwigerNelson.Rigidity.RatioAtMost P c
+HadwigerNelson.Plane.volume_squareWin : ∀ (z : ℂ) {ℓ : ℝ},
+  0 ≤ ℓ → volume (HadwigerNelson.Plane.squareWin z ℓ) = ENNReal.ofReal (ℓ ^ 2)
+data/fs131/icl2/probes/NamesD.lean:36:25: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  NumberField ↥⊥
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Command exited with non-zero status 1
+wall=3.43s maxrss=4026392kB
