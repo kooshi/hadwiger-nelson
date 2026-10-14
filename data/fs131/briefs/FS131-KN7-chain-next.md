@@ -105,3 +105,24 @@ The remote is unreachable: **commit by explicit path on your branch and do not p
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 (2026-10-14 03:57 UTC) — repair R1 is ruled: make it
+
+**Ruling: R1.** Clause (4) of the declared theorem is stated with the Borel σ-algebra of the quotient, as the page
+states it, and a theorem beside it derives the old form for Polish spaces. *The alternatives I weighed:* R2, a Polish
+hypothesis on the axiom with Mathlib's σ-algebra kept — safe, but its read-back against the page then runs through a
+Mathlib theorem instead of symbol against symbol; and R0, recording the gap — declined, because an axiom that says
+more than its page anywhere is what `LEAN.md` § Assumptions: outside theorems and our own exists to rule out, and
+this one did, in the unsafe direction. *Why R1:* it is the page's sentence, and you proved the old form implies it for
+every space, so the repair can only weaken the axiom. Confidence: high. What I checked myself: the inclusion of the
+quotient's Borel σ-algebra in Mathlib's (an open set of the quotient has an open, so Borel, preimage) and that
+entropy is monotone in the σ-algebra, so the direction is as you say.
+
+**What goes with it:** the repair made in `Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean` (your touches allow
+it now) with the theorem for Polish spaces beside it; the declared statement dumped from the kernel before and
+after, showing that clause (4) is the only change; the module docstring and the record's table corrected where they
+said "Borel" of the old form; the model of the declared theorem's hypotheses re-checked against the new form; the
+read-back written again, page and line for each clause. Where a module of the chain will need the old form, it takes
+the Polish hypothesis and the bridge theorem, and that statement change of ours comes to me before it is typed. The
+implementer on the chain's entropy files works on another branch and does not touch this file. Thank you: this is
+the catch the job was for. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
