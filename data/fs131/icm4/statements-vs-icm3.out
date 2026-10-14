@@ -1,0 +1,128 @@
+BINDER-MISS HadwigerNelson.Rigidity.tca_iff (ClassRatio): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.RatioAtMost (ClassRatio): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.unitVectorsR (CountCompletion): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.exists_invariantColouring_rat (CountModels): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.not_r88TCA_rat (CountModels): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.ratColouring (CountModels): names Subfield, lacks NumberField
+NEW-MODULE Floor128 HadwigerNelson.Floor128.ev_two_mul
+ADDED-INTERNAL HadwigerNelson.Floor128.normOne_eq_image._proof_1_3
+NEW-MODULE Floor128 HadwigerNelson.Floor128.pass_snd
+ADDED-INTERNAL HadwigerNelson.Floor128.normOne_eq_image._proof_1_2
+NEW-MODULE Floor128 HadwigerNelson.Floor128.clmul_P_qBig
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Arith.Floor128.0.HadwigerNelson.Floor128.pass.match_1.eq_1
+ADDED-INTERNAL HadwigerNelson.Floor128.pass.match_1
+ADDED-INTERNAL HadwigerNelson.Floor128.charSum_128_ge._simp_1_1
+NEW-MODULE Floor128 HadwigerNelson.Floor128.pass
+ADDED-INTERNAL HadwigerNelson.Floor128.step_lt._proof_1_1
+NEW-MODULE Floor128 HadwigerNelson.Floor128.root_pow_inj
+NEW-MODULE Floor128 HadwigerNelson.Floor128.normOne_eq_image
+ADDED-GENERATED HadwigerNelson.Floor128.pass.eq_def
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Arith.Floor128.0.HadwigerNelson.Floor128.ev.match_1.splitter
+NEW-MODULE Floor128 HadwigerNelson.Floor128.countsOk
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Arith.Floor128.0.HadwigerNelson.Floor128.clmul.match_1.eq_2
+NEW-MODULE Floor128 HadwigerNelson.Floor128.exists_root_pow_eq
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Arith.Floor128.0.HadwigerNelson.Floor128.ev.match_1.eq_2
+ADDED-INTERNAL HadwigerNelson.Floor128.pass._unsafe_rec
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Arith.Floor128.0.HadwigerNelson.Floor128.clmul.match_1.splitter
+NEW-MODULE Floor128 HadwigerNelson.Floor128.a4
+ADDED-INTERNAL HadwigerNelson.Floor128.step_ne_zero._proof_1_3
+ADDED-INTERNAL HadwigerNelson.Floor128.step_ne_zero._proof_1_2
+ADDED-INTERNAL HadwigerNelson.Floor128.clmul._f
+NEW-MODULE Floor128 HadwigerNelson.Floor128.ev_two
+ADDED-INTERNAL HadwigerNelson.Floor128.pass._sunfold
+ADDED-INTERNAL HadwigerNelson.Floor128.pass_snd._proof_1_4
+NEW-MODULE Floor128 HadwigerNelson.Floor128.targetFloor_seven_128
+NEW-MODULE Floor128 HadwigerNelson.Floor128.counts_ok
+NEW-MODULE Floor128 HadwigerNelson.Floor128.ev_step
+NEW-MODULE Floor128 HadwigerNelson.Floor128.root_pow_eq_one
+ADDED-INTERNAL HadwigerNelson.Floor128.digit_sum._proof_1_1
+NEW-MODULE Floor128 HadwigerNelson.Floor128.digit_sum
+ADDED-INTERNAL HadwigerNelson.Floor128.charSum_128_ge._proof_1_4
+NEW-MODULE Floor128 HadwigerNelson.Floor128.targetFloor_eight_128
+NEW-MODULE Floor128 HadwigerNelson.Floor128.iterate_step_period
+NEW-MODULE Floor128 HadwigerNelson.Floor128.P
+NEW-MODULE Floor128 HadwigerNelson.Floor128.exists_iterate_step_eq
+NEW-MODULE Floor128 HadwigerNelson.Floor128.ev_one
+NEW-MODULE Floor128 HadwigerNelson.Floor128.b128
+NEW-MODULE Floor128 HadwigerNelson.Floor128.iterate_step_ne_zero
+NEW-MODULE Floor128 HadwigerNelson.Floor128.pass_fst
+NEW-MODULE Floor128 HadwigerNelson.Floor128.b4
+ADDED-INTERNAL HadwigerNelson.Floor128.ev.eq_1
+NEW-MODULE Floor128 HadwigerNelson.Floor128.ev_iterate_step
+ADDED-INTERNAL HadwigerNelson.Floor128.order_checks._proof_1_1
+NEW-MODULE Floor128 HadwigerNelson.Floor128.iterate_step_lt
+ADDED-INTERNAL HadwigerNelson.Floor128.ev._proof_1
+NEW-MODULE Floor128 HadwigerNelson.Floor128.ev_inj
+NEW-MODULE Floor128 HadwigerNelson.Floor128.ev
+ADDED-INTERNAL HadwigerNelson.Floor128.charSum_128_ge._simp_1_2
+ADDED-INTERNAL HadwigerNelson.Floor128.pass.eq_2
+NEW-MODULE Floor128 HadwigerNelson.Floor128.bezout4
+NEW-MODULE Floor128 HadwigerNelson.Floor128.step_ne_zero
+ADDED-INTERNAL HadwigerNelson.Floor128.ev.eq_2
+ADDED-INTERNAL HadwigerNelson.Floor128.qBig_testBit_one._proof_1_1
+NEW-MODULE Floor128 HadwigerNelson.Floor128.charSum_128_ge
+NEW-MODULE Floor128 HadwigerNelson.Floor128.ev_xor
+ADDED-INTERNAL HadwigerNelson.Floor128.pass.eq_1
+NEW-MODULE Floor128 HadwigerNelson.Floor128.ev_zero
+ADDED-INTERNAL HadwigerNelson.Floor128.pass._f
+NEW-MODULE Floor128 HadwigerNelson.Floor128.pass_class
+NEW-MODULE Floor128 HadwigerNelson.Floor128.qBig
+NEW-MODULE Floor128 HadwigerNelson.Floor128.exists_root
+ADDED-INTERNAL HadwigerNelson.Floor128.charSum_128_ge._proof_1_5
+ADDED-INTERNAL HadwigerNelson.Floor128.clmul.eq_1
+ADDED-INTERNAL HadwigerNelson.Floor128.pass_snd._proof_1_6
+ADDED-INTERNAL HadwigerNelson.Floor128.digit_sum._proof_1_2
+ADDED-GENERATED HadwigerNelson.Floor128.clmul.eq_def
+NEW-MODULE Floor128 HadwigerNelson.Floor128.a128
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Arith.Floor128.0.HadwigerNelson.Floor128.pass.match_1.eq_2
+ADDED-INTERNAL HadwigerNelson.Floor128.digit_sum._proof_1_3
+ADDED-INTERNAL HadwigerNelson.Floor128.clmul.eq_2
+ADDED-INTERNAL HadwigerNelson.Floor128.counts.eq_1
+NEW-MODULE Floor128 HadwigerNelson.Floor128.class_le
+ADDED-INTERNAL HadwigerNelson.Floor128.counts_ok._proof_1_1
+NEW-MODULE Floor128 HadwigerNelson.Floor128.qBig_lt
+ADDED-INTERNAL HadwigerNelson.Floor128.charSum_128_ge._proof_1_6
+ADDED-INTERNAL HadwigerNelson.Floor128.step_ne_zero._proof_1_1
+NEW-MODULE Floor128 HadwigerNelson.Floor128.charP_two
+NEW-MODULE Floor128 HadwigerNelson.Floor128.step
+NEW-MODULE Floor128 HadwigerNelson.Floor128.ev_clmul
+NEW-MODULE Floor128 HadwigerNelson.Floor128.minimalPeriod_step
+NEW-MODULE Floor128 HadwigerNelson.Floor128.map_ev
+ADDED-INTERNAL HadwigerNelson.Floor128.bezout4._proof_1_1
+NEW-MODULE Floor128 HadwigerNelson.Floor128.order_checks
+NEW-MODULE Floor128 HadwigerNelson.Floor128.eq_of_dvd_of_not_dvd
+ADDED-INTERNAL HadwigerNelson.Floor128.pass_snd._proof_1_5
+NEW-MODULE Floor128 HadwigerNelson.Floor128.counts
+ADDED-INTERNAL HadwigerNelson.Floor128.ev._unsafe_rec
+NEW-MODULE Floor128 HadwigerNelson.Floor128.step_lt
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Arith.Floor128.0.HadwigerNelson.Floor128.clmul.match_1.eq_1
+NEW-MODULE Floor128 HadwigerNelson.Floor128.ev_two_pow
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Arith.Floor128.0.HadwigerNelson.Floor128.ev.match_1.eq_1
+ADDED-GENERATED HadwigerNelson.Floor128.ev.eq_def
+NEW-MODULE Floor128 HadwigerNelson.Floor128.sum_range_mul_eq
+ADDED-GENERATED Equiv.mulLeft₀.congr_simp
+ADDED-INTERNAL HadwigerNelson.Floor128.qBig_lt._proof_1_1
+NEW-MODULE Floor128 HadwigerNelson.Floor128.exists_code
+NEW-MODULE Floor128 HadwigerNelson.Floor128.coeff_ev_X
+ADDED-INTERNAL HadwigerNelson.Floor128.countsOk.eq_1
+ADDED-INTERNAL HadwigerNelson.Floor128.pass_snd._proof_1_7
+NEW-MODULE Floor128 HadwigerNelson.Floor128.ev_shiftLeft_one
+ADDED-INTERNAL HadwigerNelson.Floor128.clmul._sunfold
+ADDED-INTERNAL HadwigerNelson.Floor128.bezout128._proof_1_1
+ADDED-INTERNAL HadwigerNelson.Floor128.ev.match_1
+NEW-MODULE Floor128 HadwigerNelson.Floor128.qBig_testBit_one
+ADDED-INTERNAL HadwigerNelson.Floor128.clmul._unsafe_rec
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Arith.Floor128.0.HadwigerNelson.Floor128.pass.match_1.splitter
+ADDED-INTERNAL HadwigerNelson.Floor128.normOne_eq_image._proof_1_1
+NEW-MODULE Floor128 HadwigerNelson.Floor128.clmul
+ADDED-INTERNAL HadwigerNelson.Floor128.clmul_P_qBig._proof_1_1
+NEW-MODULE Floor128 HadwigerNelson.Floor128.iterate_step_injOn
+NEW-MODULE Floor128 HadwigerNelson.Floor128.ev_eq
+NEW-MODULE Floor128 HadwigerNelson.Floor128.exists_addChar
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Arith.Floor128.0.HadwigerNelson.Floor128.ev.match_1._arg_pusher
+NEW-MODULE Floor128 HadwigerNelson.Floor128.bezout128
+NEW-MODULE Floor128 HadwigerNelson.Floor128.ev_ne_zero
+ADDED-INTERNAL HadwigerNelson.Floor128.clmul.match_1
+SAME=72 CHANGED=0 RULED=0 MISSING=0 ADDED-INTERNAL=55 ADDED-GENERATED=4 NEW-MODULE=60 ADDED-PUBLIC=0
+PRIVATE-SAME=189 PRIVATE-CHANGED=0 PRIVATE-MISSING=0
+RESULT: PASS
