@@ -1,0 +1,4 @@
+slot: admitted ikl1f: mem 4 GiB (hard cap), cpus 0,1
+farm: Arith/FibreShareIneq from Proofs/HadwigerNelson/Arith/FibreShareIneq.lean exit 0
+slot: admitted ikl1f: mem 4 GiB (hard cap), cpus 0,1
+farm: Rigidity/CertLink from Proofs/HadwigerNelson/Rigidity/CertLink.lean exit 0

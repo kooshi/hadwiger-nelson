@@ -1,0 +1,15 @@
+slot: admitted ikl1f: mem 4 GiB (hard cap), cpus 0,1
+/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/data/fs131/ikl1/scratch/root4-plant/Proofs/HadwigerNelson/Rigidity/ClassRatio.lean:35:8: warning: declaration uses `sorry`
+/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/data/fs131/ikl1/scratch/root4-plant/Proofs/HadwigerNelson/Rigidity/ClassRatio.lean:1573:16: warning: declaration uses `sorry`
+AXIOMS HadwigerNelson.Rigidity.ratioAtMost_cert : [Classical.choice, Quot.sound, propext, sorryAx]
+SORRY-FROM HadwigerNelson.Rigidity.ratioAtMost_cert : [HadwigerNelson.Rigidity.ratioAtMost_cert]
+AXIOMS HadwigerNelson.Rigidity.ratioAtMost_of_two_notMem : [Classical.choice, HadwigerNelson.StandingFive.kloosterman_bound, Quot.sound, propext, sorryAx]
+SORRY-FROM HadwigerNelson.Rigidity.ratioAtMost_of_two_notMem : [HadwigerNelson.Rigidity.ratioAtMost_cert]
+AXIOMS HadwigerNelson.Rigidity.ratioAtMost_of_five_le_chromaticNumber : [Classical.choice, HadwigerNelson.StandingFive.kloosterman_bound, Quot.sound, propext, sorryAx]
+SORRY-FROM HadwigerNelson.Rigidity.ratioAtMost_of_five_le_chromaticNumber : [HadwigerNelson.Rigidity.ratioAtMost_cert]
+AXIOMS HadwigerNelson.Rigidity.tca_of_five_le_localBound : [Classical.choice, HadwigerNelson.StandingFive.kloosterman_bound, Quot.sound, propext, sorryAx]
+SORRY-FROM HadwigerNelson.Rigidity.tca_of_five_le_localBound : [HadwigerNelson.Rigidity.ratioAtMost_cert]
+AXIOMS HadwigerNelson.Rigidity.henselCount_of_two_notMem : [Classical.choice, Quot.sound, propext]
+AXIOMS HadwigerNelson.Rigidity.newCharBound_of_two_notMem : [Classical.choice, Quot.sound, propext]
+AXIOMS HadwigerNelson.CertLink.ratioAtMost_cert_link : [Classical.choice, Quot.sound, propext]
+farm: Rigidity/ClassRatio from /home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/data/fs131/ikl1/scratch/root4-plant/Proofs/HadwigerNelson/Rigidity/ClassRatio.lean exit 0

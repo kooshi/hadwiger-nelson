@@ -1,0 +1,55 @@
+slot: admitted ikl1f: mem 4 GiB (hard cap), cpus 1,6
+@HadwigerNelson.Rigidity.ratioAtMost_cert✝ : ∀ {F : Subfield ℝ} [NumberField ↥F]
+  (P : HadwigerNelson.SpectralChain.StablePrime F),
+  2 ∉ P.P →
+    ∀ {Q : ℕ},
+      Nat.card (𝓞 ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P) = Q ^ 2 →
+        Q = 11 ∨ Q = 19 → ∃ c < 1 / 4, HadwigerNelson.Rigidity.RatioAtMost P c
+'_private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.ratioAtMost_cert' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+def HadwigerNelson.Rigidity.RatioAtMost : {F : Subfield ℝ} → HadwigerNelson.SpectralChain.StablePrime F → ℝ → Prop :=
+fun {F} P c =>
+  ∀ (m : ℕ),
+    1 ≤ m →
+      ∀ (s : Finset (𝓞 ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P ^ m)),
+        (HadwigerNelson.SpectralChain.levelTarget P m).IsIndepSet ↑s →
+          ↑s.card ≤ c * ↑(Nat.card (𝓞 ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P ^ m))
+def HadwigerNelson.SpectralChain.levelTarget : {F : Subfield ℝ} →
+  (P : HadwigerNelson.SpectralChain.StablePrime F) →
+    (m : ℕ) → SimpleGraph (𝓞 ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P ^ m) :=
+fun {F} P m =>
+  SimpleGraph.fromRel fun x y =>
+    (x - y) * (Ideal.quotientMap (P.P ^ m) (HadwigerNelson.SpectralChain.conjO F) ⋯) (x - y) = 1
+HadwigerNelson.FibreCertSound.sum_le_eleven : ∀ (φ : HadwigerNelson.FibreCertSound.V 11 → ℝ),
+  (∀ (x : HadwigerNelson.FibreCertSound.V 11), 0 ≤ φ x) →
+    (∀ (x : HadwigerNelson.FibreCertSound.V 11), φ x ≤ 1) →
+      0 ≤ HadwigerNelson.FibreCertSound.qform 11 φ →
+        ∑ x, φ x ≤ 28204320001863099628721379861820 / 1000000000000000000000000000000
+'HadwigerNelson.FibreCertSound.sum_le_eleven' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.FibreCertSound.card_le_eleven : ∀ (I : Finset (HadwigerNelson.FibreCertSound.V 11)),
+  (∀ x ∈ I, ∀ y ∈ I, y - x ∉ HadwigerNelson.FibreCertSound.unitCircle 11) →
+    ↑I.card ≤ 28204320001863099628721379861820 / 1000000000000000000000000000000
+'HadwigerNelson.FibreCertSound.card_le_eleven' depends on axioms: [propext, Classical.choice, Quot.sound]
+def HadwigerNelson.FibreCertSound.qform : (p : ℕ) → [NeZero p] → (HadwigerNelson.FibreCertSound.V p → ℝ) → ℝ :=
+fun p [NeZero p] φ => 2 * ∑ x, φ x * (1 - φ x) - ∑ x, ∑ s ∈ HadwigerNelson.FibreCertSound.unitCircle p, φ x * φ (x + s)
+def HadwigerNelson.FibreCertSound.unitCircle : (p : ℕ) → [NeZero p] → Finset (HadwigerNelson.FibreCertSound.V p) :=
+fun p [NeZero p] => {x | x.1 ^ 2 + x.2 ^ 2 = 1}
+@[reducible] def HadwigerNelson.FibreCertSound.V : ℕ → Type :=
+fun p => ZMod p × ZMod p
+@HadwigerNelson.Rigidity.ratioAtMost_of_five_le_chromaticNumber : ∀ {F : Subfield ℝ} [NumberField ↥F]
+  (P : HadwigerNelson.SpectralChain.StablePrime F),
+  5 ≤ (HadwigerNelson.SpectralChain.levelTarget P 1).chromaticNumber →
+    ∃ c < 1 / 4, HadwigerNelson.Rigidity.RatioAtMost P c
+'HadwigerNelson.Rigidity.ratioAtMost_of_five_le_chromaticNumber' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+@HadwigerNelson.Rigidity.ratioAtMost_of_two_notMem : ∀ {F : Subfield ℝ} [NumberField ↥F]
+  (P : HadwigerNelson.SpectralChain.StablePrime F),
+  2 ∉ P.P →
+    Nat.card (𝓞 ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P) ≠ 9 →
+      Nat.card (𝓞 ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P) ≠ 49 →
+        ∃ c < 1 / 4, HadwigerNelson.Rigidity.RatioAtMost P c

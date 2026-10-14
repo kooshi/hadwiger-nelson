@@ -1,0 +1,51 @@
+-- FS131-IKL1 scratch footer: the axioms of the consumers and the leaves each `sorryAx` comes from (after FS131-IN1's
+-- `data/fs131/in1/lean/AxiomsCore.lean`): `SORRY-FROM` lists the constants of the library or of this file, reachable
+-- from the declaration, whose own type or value holds `sorryAx`.
+namespace FS131IKL1Scratch
+open Lean Elab Command
+
+def sorrySources (env : Environment) (n : Name) : Array Name := Id.run do
+  let isOurs (c : Name) : Bool := match env.getModuleIdxFor? c with
+    | none => true
+    | some i => (env.header.moduleNames[i.toNat]!).getRoot == `Proofs
+  let mut seen : NameSet := {}
+  let mut stack : Array Name := #[n]
+  let mut out : Array Name := #[]
+  while !stack.isEmpty do
+    let c := stack.back!
+    stack := stack.pop
+    if seen.contains c then continue
+    seen := seen.insert c
+    if !isOurs c then continue
+    match env.find? c with
+    | none => pure ()
+    | some ci =>
+      let val : Option Expr := match ci with
+        | .thmInfo v => some v.value | .defnInfo v => some v.value | .opaqueInfo v => some v.value | _ => none
+      let used := ci.type.getUsedConstants ++ (val.map (·.getUsedConstants)).getD #[]
+      if used.contains ``sorryAx then out := out.push c
+      for u in used do stack := stack.push u
+  return out.qsort (fun a b => a.toString < b.toString)
+
+def report (user : Name) : CommandElabM Unit := do
+  let env ← getEnv
+  let cands := env.constants.fold (init := #[]) fun acc n _ =>
+    if n == user || privateToUserName? n == some user then acc.push n else acc
+  if cands.isEmpty then
+    IO.println s!"MISSING {user}"
+  for n in cands do
+    let ax ← liftCoreM <| collectAxioms n
+    IO.println s!"AXIOMS {user} : {((ax.map toString).qsort (· < ·)).toList}"
+    if ax.contains ``sorryAx then
+      let src := (sorrySources env n).map fun c => ((privateToUserName? c).getD c).toString
+      IO.println s!"SORRY-FROM {user} : {src.toList}"
+
+#eval report `HadwigerNelson.Rigidity.ratioAtMost_cert
+#eval report `HadwigerNelson.Rigidity.ratioAtMost_of_two_notMem
+#eval report `HadwigerNelson.Rigidity.ratioAtMost_of_five_le_chromaticNumber
+#eval report `HadwigerNelson.Rigidity.tca_of_five_le_localBound
+#eval report `HadwigerNelson.Rigidity.henselCount_of_two_notMem
+#eval report `HadwigerNelson.Rigidity.newCharBound_of_two_notMem
+#eval report `HadwigerNelson.CertLink.ratioAtMost_cert_link
+
+end FS131IKL1Scratch

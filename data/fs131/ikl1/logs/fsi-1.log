@@ -1,0 +1,21 @@
+slot: admitted ikl1f: mem 4 GiB (hard cap), cpus 2,3
+data/fs131/ikl1/lean/FibreShareIneq.lean:86:4: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∑ y' ∈ ?m.281, #{x | π x = y'}
+in the target expression
+  (∑ b, #({a ∈ {x | π x = y} | π a = b})) * Fintype.card H = #univ
+
+G : Type u_1
+H : Type u_2
+inst✝⁴ : AddCommGroup G
+inst✝³ : Fintype G
+inst✝² : AddCommGroup H
+inst✝¹ : Fintype H
+inst✝ : DecidableEq H
+π : G →+ H
+hπ : Function.Surjective ⇑π
+y : H
+x₀ : G
+hx₀ : π x₀ = y
+heq : ∀ (y' : H), #{x | π x = y'} = #{x | π x = y}
+⊢ (∑ b, #({a ∈ {x | π x = y} | π a = b})) * Fintype.card H = #univ
+data/fs131/ikl1/lean/FibreShareIneq.lean:242:2: error: `simp` made no progress

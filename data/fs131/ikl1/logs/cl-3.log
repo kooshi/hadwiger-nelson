@@ -1,0 +1,67 @@
+slot: waiting (ledger 20 + 4 > budget 22 GiB)
+slot: admitted ikl1f: mem 4 GiB (hard cap), cpus 0,1
+data/fs131/ikl1/lean/CertLink.lean:285:4: error: mod_cast has type
+  #(filter ?m.927 s) ≤ #(filter ?m.927 univ)
+but is expected to have type
+  (fun u => ↑(FibreShare.fibreCount π s u)) u ≤ ↑(#{x | π x = u})
+data/fs131/ikl1/lean/CertLink.lean:377:59: error: unsolved goals
+F : Subfield ℝ
+inst✝¹ : NumberField ↥F
+P : StablePrime F
+h2 : 2 ∉ P.P
+q : ℕ
+inst✝ : NeZero q
+hq : Nat.Prime q
+hQ : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P) = q ^ 2
+hH : HenselCount P q
+hL : NewCharBound P q
+U : ℝ
+hU : FibreShareBound q U
+n : ℕ
+hm : 1 ≤ n + 1
+s : Finset (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))
+hs : (levelTarget P (n + 1)).IsIndepSet ↑s
+this✝² : Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))
+this✝¹ : Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+this✝ : Fintype (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1)) := Fintype.ofFinite (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))
+this : Fintype (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := Fintype.ofFinite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+hfin : (normOneSet P (n + 1)).Finite
+hfin1 : (normOneSet P 1).Finite
+π : 𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1) →+ 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := (toLevelOne P n).toAddMonoidHom
+hπdef : π = (toLevelOne P n).toAddMonoidHom
+hπ : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1)), π x = (toLevelOne P n) x
+hπs : Function.Surjective ⇑π
+hI : ∀ x ∈ s, ∀ y ∈ s, x - y ∉ hfin.toFinset
+hL2 :
+  ↑(q ^ n) * ↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)) *
+      ∑ u, ∑ t ∈ hfin1.toFinset, ↑(FibreShare.fibreCount π s u) * ↑(FibreShare.fibreCount π s (u + t)) ≤
+    2 * ↑(q ^ n) *
+      (↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))) * ↑(#s) -
+        ↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)) * ∑ u, ↑(FibreShare.fibreCount π s u) ^ 2)
+n' : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 → ℝ := fun u => ↑(FibreShare.fibreCount π s u)
+hn' : n' = fun u => ↑(FibreShare.fibreCount π s u)
+hHq : ↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)) = ↑q ^ 2
+hHpos : 0 < ↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1))
+K : ℝ := ↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))) / ↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1))
+hKdef : K = ↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))) / ↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1))
+hGK : ↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))) = K * ↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1))
+hfibK : ∀ (u : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), ↑(#{x | π x = u}) = K
+hKpos : 0 < K
+hnK : ∀ (u : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), n' u ≤ K
+hn0 : ∀ (u : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), 0 ≤ n' u
+hsum : ↑(#s) = ∑ u, n' u
+hX : ∑ u, ∑ t ∈ hfin1.toFinset, n' u * n' (u + t) ≤ 2 * ∑ u, n' u * (K - n' u)
+e : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 ≃+ ZMod q × ZMod q
+he : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), x ∈ normOneSet P 1 ↔ (e x).1 ^ 2 + (e x).2 ^ 2 = 1
+φ : V q → ℝ := fun v => n' (e.symm v) / K
+hφ : φ = fun v => n' (e.symm v) / K
+hφe : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), φ (e x) = n' x / K
+htr : ∀ (g : V q → ℝ), ∑ v, g v = ∑ x, g (e x)
+hcirc : ∀ (g : V q → ℝ), ∑ w ∈ FibreCertSound.unitCircle q, g w = ∑ t ∈ hfin1.toFinset, g (e t)
+h0 : ∀ (v : V q), 0 ≤ φ v
+h1 : ∀ (v : V q), φ v ≤ 1
+hqf : 0 ≤ qform q φ
+hsumφ : ↑(#s) ≤ U * K
+hq2 : 0 < ↑q ^ 2
+hGq : ↑(Nat.card (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))) = K * ↑q ^ 2
+⊢ U * ↑q / ↑q = U

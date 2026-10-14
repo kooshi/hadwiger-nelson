@@ -1,0 +1,5 @@
+-- FS131-IKL1 scratch only: a stand-in for FS131-IKC4's `FibreCertSound.sum_le_nineteen` (branch `fs131-wc17`,
+-- `Arith/FibreCert19Bound`), its statement as the coordinator printed it; `sorry` here, the theorem at the landing.
+theorem HadwigerNelson.FibreCertSound.sum_le_nineteen : ∀ (φ : HadwigerNelson.FibreCertSound.V 19 → ℝ),
+    (∀ x, 0 ≤ φ x) → (∀ x, φ x ≤ 1) → 0 ≤ HadwigerNelson.FibreCertSound.qform 19 φ →
+      ∑ x, φ x ≤ 8864340098471101020193379809808304 / 100000000000000000000000000000000 := sorry

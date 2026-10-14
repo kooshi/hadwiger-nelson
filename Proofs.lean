@@ -349,6 +349,7 @@ import Proofs.HadwigerNelson.Arith.FibreCert19Seg2
 import Proofs.HadwigerNelson.Arith.FibreCert19Seg3
 import Proofs.HadwigerNelson.Arith.FibreCertFast
 import Proofs.HadwigerNelson.Arith.FibreCertSound
+import Proofs.HadwigerNelson.Arith.FibreShareIneq
 import Proofs.HadwigerNelson.Arith.TargetFloors
 import Proofs.HadwigerNelson.Arith.WeilKloosterman
 import Proofs.HadwigerNelson.Arith.GapSeven
@@ -393,6 +394,8 @@ import Proofs.HadwigerNelson.Rigidity.SpectralSubspace
 import Proofs.HadwigerNelson.Rigidity.TraceSplit
 import Proofs.HadwigerNelson.Rigidity.APlus
 import Proofs.HadwigerNelson.Rigidity.ClassRatio
+import Proofs.HadwigerNelson.Rigidity.CertLink
+import Proofs.HadwigerNelson.Rigidity.CertLinkModels
 import Proofs.HadwigerNelson.Plane.WindowDensity
 import Proofs.HadwigerNelson.Rigidity.FiniteZhang
 import Proofs.HadwigerNelson.Rigidity.PlaneZhang
