@@ -1,0 +1,30 @@
+slot: admitted in1l: mem 4 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/ZeroEntropyNames.lean:88:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ZeroEntropyNames.lean:174:85: warning: Variable name `hc` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Proofs/HadwigerNelson/Rigidity/ZeroEntropyNames.lean:199:97: warning: Variable name `hγ` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Proofs/HadwigerNelson/Rigidity/ZeroEntropyNames.lean:241:6: error: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
+  fun a_1 => Set.decidableSetOf (T^[a_1] x) fun y => nameOf T P k y ∉ heavyNames μ T P k c
+inferred
+  fun a_1 => Classical.propDecidable (T^[a_1] x ∈ {y | nameOf T P k y ∉ heavyNames μ T P k c})
+Proofs/HadwigerNelson/Rigidity/ZeroEntropyNames.lean:249:58: warning: Variable name `hθ` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Proofs/HadwigerNelson/Rigidity/ZeroEntropyNames.lean:276:14: error: typeclass instance problem is stuck
+  DecidablePred ?m.188
+
+Note: Lean will not try to resolve this typeclass instance problem because the first and second type arguments to `DecidablePred` are metavariables. These arguments must be fully determined before Lean will try to resolve the typeclass.
+
+Hint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.
+Proofs/HadwigerNelson/Rigidity/ZeroEntropyNames.lean:283:8: warning: declaration uses `sorry`
+seconds=3
+exit=1

@@ -1,0 +1,32 @@
+slot: admitted in1l: mem 4 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/SolenoidErgodic.lean:55:11: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (⇑(α.toFun ↑⟨0, ⋯⟩) ⁻¹' s) x
+in the target expression
+  x ∈ ⇑(α.toFun ↑⟨0, ⋯⟩) ⁻¹' s
+
+case mp
+d : ℕ
+X : Type u_1
+inst✝³ : AddCommGroup X
+inst✝² : TopologicalSpace X
+inst✝¹ : MeasurableSpace X
+inst✝ : BorelSpace X
+α : ZdAction d X
+Λ : AddSubgroup (Fin d → ℤ)
+μ : Measure X
+h✝ : α.IsErgodicOn Λ μ
+s : Set X
+hs : MeasurableSet s
+hinv : ∀ n ∈ Λ, ⇑(α.toFun n) ⁻¹' s =ᵐ[μ] s
+hadd : ∀ (a b : Fin d → ℤ) (x : X), (α.toFun (a + b)) x = (α.toFun a) ((α.toFun b) x)
+s' : Set X := ⋂ n, ⇑(α.toFun ↑n) ⁻¹' s
+hmeas : MeasurableSet s'
+hfix : ∀ m ∈ Λ, ⇑(α.toFun m) ⁻¹' s' = s'
+h1 : ∀ᵐ (x : X) ∂μ, ∀ (n : ↥Λ), (⇑(α.toFun ↑n) ⁻¹' s) x = s x
+x : X
+hx : ∀ (n : ↥Λ), (⇑(α.toFun ↑n) ⁻¹' s) x = s x
+h : ∀ (i : ↥Λ), x ∈ ⇑(α.toFun ↑i) ⁻¹' s
+h0 : x ∈ ⇑(α.toFun ↑⟨0, ⋯⟩) ⁻¹' s
+⊢ x ∈ s
+seconds=2
+exit=1

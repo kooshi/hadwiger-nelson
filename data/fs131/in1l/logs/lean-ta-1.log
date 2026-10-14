@@ -1,0 +1,107 @@
+slot: admitted in1l: mem 4 GiB (hard cap), cpus 4,5
+data/fs131/in1l/work/TAScratch.lean:14:8: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  HMul (Set (AddChar G Circle)) (Set (AddChar G Circle)) ?m.10
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/in1l/work/TAScratch.lean:33:37: error: Invalid `⟨...⟩` notation: The expected type of this term could not be determined
+data/fs131/in1l/work/TAScratch.lean:33:53: error: Invalid `⟨...⟩` notation: The expected type of this term could not be determined
+data/fs131/in1l/work/TAScratch.lean:60:70: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?a₁ • ?a₂ • ?b
+in the target expression
+  c.num • m • x = ↑c.den • m • c • x
+
+case smul
+G : Type u_1
+inst✝² : AddCommGroup G
+W : Type u_2
+inst✝¹ : AddCommGroup W
+inst✝ : Module ℚ W
+ι : G →+ W
+hι : Function.Injective ⇑ι
+Δ : G →+ ℝ
+s : Set G
+hs : ∀ g ∈ s, Δ g = 0
+g : G
+hg : ι g ∈ Submodule.span ℚ (⇑ι '' s)
+x✝ : W
+c : ℚ
+x : W
+hx✝ : x ∈ Submodule.span ℚ (⇑ι '' s)
+m : ℕ
+hm : m ≠ 0
+y : G
+hy : y ∈ AddSubgroup.closure s
+e : ι y = m • x
+⊢ c.num • m • x = ↑c.den • m • c • x
+data/fs131/in1l/work/TAScratch.lean:68:24: error: unsolved goals
+case add
+G : Type u_1
+inst✝² : AddCommGroup G
+W : Type u_2
+inst✝¹ : AddCommGroup W
+inst✝ : Module ℚ W
+ι : G →+ W
+hι : Function.Injective ⇑ι
+Δ : G →+ ℝ
+s : Set G
+hs : ∀ g ∈ s, Δ g = 0
+g : G
+hg : ι g ∈ Submodule.span ℚ (⇑ι '' s)
+key : ∀ x ∈ Submodule.span ℚ (⇑ι '' s), ∃ m, m ≠ 0 ∧ ∃ y ∈ AddSubgroup.closure s, ι y = m • x
+m : ℕ
+hm : m ≠ 0
+y✝ x y : G
+hx✝ : x ∈ AddSubgroup.closure s
+hy✝ : y ∈ AddSubgroup.closure s
+hx : ι x = ι (m • g) → Δ x = 0
+hy : ι y = ι (m • g) → Δ y = 0
+e : ι (x + y) = ι (m • g)
+⊢ ι y = ι (m • g)
+
+case add
+G : Type u_1
+inst✝² : AddCommGroup G
+W : Type u_2
+inst✝¹ : AddCommGroup W
+inst✝ : Module ℚ W
+ι : G →+ W
+hι : Function.Injective ⇑ι
+Δ : G →+ ℝ
+s : Set G
+hs : ∀ g ∈ s, Δ g = 0
+g : G
+hg : ι g ∈ Submodule.span ℚ (⇑ι '' s)
+key : ∀ x ∈ Submodule.span ℚ (⇑ι '' s), ∃ m, m ≠ 0 ∧ ∃ y ∈ AddSubgroup.closure s, ι y = m • x
+m : ℕ
+hm : m ≠ 0
+y✝ x y : G
+hx✝ : x ∈ AddSubgroup.closure s
+hy✝ : y ∈ AddSubgroup.closure s
+hx : ι x = ι (m • g) → Δ x = 0
+hy : ι y = ι (m • g) → Δ y = 0
+e : ι (x + y) = ι (m • g)
+⊢ ι x = ι (m • g)
+data/fs131/in1l/work/TAScratch.lean:69:17: error: unsolved goals
+case neg
+G : Type u_1
+inst✝² : AddCommGroup G
+W : Type u_2
+inst✝¹ : AddCommGroup W
+inst✝ : Module ℚ W
+ι : G →+ W
+hι : Function.Injective ⇑ι
+Δ : G →+ ℝ
+s : Set G
+hs : ∀ g ∈ s, Δ g = 0
+g : G
+hg : ι g ∈ Submodule.span ℚ (⇑ι '' s)
+key : ∀ x ∈ Submodule.span ℚ (⇑ι '' s), ∃ m, m ≠ 0 ∧ ∃ y ∈ AddSubgroup.closure s, ι y = m • x
+m : ℕ
+hm : m ≠ 0
+y x : G
+hx✝ : x ∈ AddSubgroup.closure s
+hx : ι x = ι (m • g) → Δ x = 0
+e : ι (-x) = ι (m • g)
+⊢ ι x = ι (m • g)
+seconds=3
+exit=1

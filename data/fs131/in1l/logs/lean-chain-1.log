@@ -1,0 +1,43 @@
+slot: admitted in1l: mem 4 GiB (hard cap), cpus 4,5
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:76:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:87:4: error: Type mismatch: After simplification, term
+  h1
+ has type
+  t (uvRing u * r) ^ N = 1
+but is expected to have type
+  ↑(t (uvRing u * r)) ^ N = 1
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:107:50: error(lean.unknownIdentifier): Unknown constant `AddMonoidHom.mulLeft_apply`
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:108:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  uvRing u * (uvRing ⟨(starRingEnd ℂ) ↑u, ⋯⟩ * r)
+in the target expression
+  ↑(χ ((AddMonoidHom.mulLeft (uvRing u)) ((AddMonoidHom.mulLeft (uvRing ⟨(starRingEnd ℂ) ↑u, ⋯⟩)) r))) = ↑(χ r)
+
+F : Subfield ℝ
+u : ↑(unitVectors F)
+χ : Dual F
+h1 : ↑u * (starRingEnd ℂ) ↑u = 1
+r : ↥(unitRing F)
+h2 : uvRing u * (uvRing ⟨(starRingEnd ℂ) ↑u, ⋯⟩ * r) = r
+⊢ ↑(χ ((AddMonoidHom.mulLeft (uvRing u)) ((AddMonoidHom.mulLeft (uvRing ⟨(starRingEnd ℂ) ↑u, ⋯⟩)) r))) = ↑(χ r)
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    χ ((AddMonoidHom.mulLeft (uvRing u)) ((AddMonoidHom.mulLeft (uvRing ⟨(starRingEnd ℂ) ↑u, ⋯⟩)) r))
+  has type
+    Circle
+  but is expected to have type
+    ↥(Submonoid.unitSphere ℂ)
+  in the application
+    ↑(χ ((AddMonoidHom.mulLeft (uvRing u)) ((AddMonoidHom.mulLeft (uvRing ⟨(starRingEnd ℂ) ↑u, ⋯⟩)) r)))
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:148:2: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  c ≥ 0
+where
+ c := ↑m
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:155:2: error: No goals to be solved
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:357:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:362:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:369:8: warning: declaration uses `sorry`
+seconds=5
+exit=1

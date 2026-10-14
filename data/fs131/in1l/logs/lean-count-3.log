@@ -1,0 +1,87 @@
+slot: admitted in1l: mem 4 GiB (hard cap), cpus 4,5
+data/fs131/in1l/work/CountScratch.lean:161:41: error: No goals to be solved
+data/fs131/in1l/work/CountScratch.lean:157:0: warning: automatically included section variable(s) unused in theorem `HadwigerNelson.Rigidity.listBlock_ofFn_append`:
+  [DecidableEq α]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq α] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/in1l/work/CountScratch.lean:175:11: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  listBlock (List.ofFn ?u ++ List.ofFn ?v) ?m.89 0 ?h
+in the target expression
+  listBlock (List.ofFn (Fin.append u v)) k 0 ⋯ ∈ 𝒢
+
+case mp
+α : Type u_1
+inst✝¹ : DecidableEq α
+k : ℕ
+𝒢 : Finset (Fin k → α)
+inst✝ : Fintype α
+t : ℝ
+ht : 0 ≤ t
+hk : 1 ≤ k
+r : ℕ
+u : Fin k → α
+v : Fin r → α
+h : 0 + k ≤ (List.ofFn u ++ List.ofFn v).length
+hm : listBlock (List.ofFn (Fin.append u v)) k 0 ⋯ ∈ 𝒢
+⊢ u ∈ 𝒢
+data/fs131/in1l/work/CountScratch.lean:178:11: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  listBlock (List.ofFn ?u ++ List.ofFn ?v) ?m.104 0 ?h
+in the target expression
+  listBlock (List.ofFn (Fin.append u v)) k 0 ⋯ ∈ 𝒢
+
+case mpr
+α : Type u_1
+inst✝¹ : DecidableEq α
+k : ℕ
+𝒢 : Finset (Fin k → α)
+inst✝ : Fintype α
+t : ℝ
+ht : 0 ≤ t
+hk : 1 ≤ k
+r : ℕ
+u : Fin k → α
+v : Fin r → α
+hu : u ∈ 𝒢
+⊢ listBlock (List.ofFn (Fin.append u v)) k 0 ⋯ ∈ 𝒢
+data/fs131/in1l/work/CountScratch.lean:185:4: error: No goals to be solved
+data/fs131/in1l/work/CountScratch.lean:214:26: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  singles 𝒢 (w 0 :: List.ofFn (Fin.tail w))
+in the target expression
+  t ^ singles 𝒢 (w 0 :: List.ofFn fun i => w i.succ) ≤ t * t ^ singles 𝒢 (List.ofFn (Fin.tail w))
+
+case neg
+α : Type u_1
+inst✝¹ : DecidableEq α
+k : ℕ
+𝒢 : Finset (Fin k → α)
+inst✝ : Fintype α
+t : ℝ
+ht : 0 ≤ t
+r : ℕ
+w : Fin (r + 1) → α
+h : ¬GoodW 𝒢 w
+h' :
+  ¬(1 ≤ k ∧
+      ∃ (hk : 0 + k ≤ (w 0 :: List.ofFn (Fin.tail w)).length), listBlock (w 0 :: List.ofFn (Fin.tail w)) k 0 hk ∈ 𝒢)
+⊢ t ^ singles 𝒢 (w 0 :: List.ofFn fun i => w i.succ) ≤ t * t ^ singles 𝒢 (List.ofFn (Fin.tail w))
+data/fs131/in1l/work/CountScratch.lean:222:35: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∑ _x ∈ ?m.298, ?b
+in the target expression
+  ∑ x, ∑ y, t * t ^ singles 𝒢 (List.ofFn (x, y).2) = ↑(Fintype.card α) * t * ∑ v, t ^ singles 𝒢 (List.ofFn v)
+
+α : Type u_1
+inst✝¹ : DecidableEq α
+k : ℕ
+𝒢 : Finset (Fin k → α)
+inst✝ : Fintype α
+t : ℝ
+ht : 0 ≤ t
+r : ℕ
+hterm :
+  ∀ (w : Fin (r + 1) → α),
+    (if GoodW 𝒢 w then 0 else t ^ singles 𝒢 (List.ofFn w)) ≤ t * t ^ singles 𝒢 (List.ofFn (Fin.tail w))
+⊢ ∑ x, ∑ y, t * t ^ singles 𝒢 (List.ofFn (x, y).2) = ↑(Fintype.card α) * t * ∑ v, t ^ singles 𝒢 (List.ofFn v)
+seconds=4
+exit=1

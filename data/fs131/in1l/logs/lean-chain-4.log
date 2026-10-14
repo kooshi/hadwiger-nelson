@@ -1,0 +1,6 @@
+slot: admitted in1l: mem 4 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:549:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:554:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:561:8: warning: declaration uses `sorry`
+seconds=5
+exit=0

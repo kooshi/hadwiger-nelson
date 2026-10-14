@@ -1,0 +1,11 @@
+slot: admitted in1l: mem 4 GiB (hard cap), cpus 4,5
+data/fs131/in1l/work/CountScratch.lean:65:9: error: Tactic `cases` failed with a nested error:
+Dependent elimination failed: Failed to solve equation
+  List.foldr (fun x IH => if ∀ y ∈ IH, (fun x1 x2 => x1 ≠ x2) x y then x :: IH else IH) []
+      (List.map (fun x => x + s)
+        (List.filter (fun b => decide ((fun x => ∃ (h : x + k ≤ l.length - s), listBlock (List.drop s l) k x ⋯ ∉ 𝒢) b))
+          (List.range (l.length - s + 1)))) =
+    (j + s) :: as✝
+at case `List.Mem.head`
+seconds=2
+exit=1
