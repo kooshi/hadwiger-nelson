@@ -1,0 +1,15 @@
+slot: admitted lch1: mem 2 GiB (hard cap), cpus 3
+⚠ [5844/5980] Replayed Proofs.HadwigerNelson.Rigidity.RingScope
+warning: Proofs/HadwigerNelson/Rigidity/RingScope.lean:247:8: declaration uses `sorry`
+⚠ [5917/5980] Replayed Proofs.HadwigerNelson.Rigidity.ClassRatio
+warning: Proofs/HadwigerNelson/Rigidity/ClassRatio.lean:214:16: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/ClassRatio.lean:224:16: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/ClassRatio.lean:346:16: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/ClassRatio.lean:351:16: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/ClassRatio.lean:359:16: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/ClassRatio.lean:366:16: declaration uses `sorry`
+⚠ [5922/5980] Replayed Proofs.HadwigerNelson.Plane.OneAvoidingDensity
+warning: Proofs/HadwigerNelson/Plane/OneAvoidingDensity.lean:54:8: declaration uses `sorry`
+⚠ [5976/6125] Replayed Proofs.HadwigerNelson.Rigidity.SqrtClassFive
+warning: Proofs/HadwigerNelson/Rigidity/SqrtClassFive.lean:104:16: declaration uses `sorry`
+All targets up-to-date (6125 jobs).

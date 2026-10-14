@@ -1,0 +1,11 @@
+Auto-merging ARCHITECTURE.md
+CONFLICT (content): Merge conflict in ARCHITECTURE.md
+Auto-merging Proofs.lean
+CONFLICT (content): Merge conflict in Proofs.lean
+Auto-merging Proofs/HadwigerNelson/Plane/OneAvoidingDensity.lean
+CONFLICT (add/add): Merge conflict in Proofs/HadwigerNelson/Plane/OneAvoidingDensity.lean
+Auto-merging scripts/Axioms.lean
+CONFLICT (content): Merge conflict in scripts/Axioms.lean
+Auto-merging scripts/assumptions-ledger.txt
+CONFLICT (content): Merge conflict in scripts/assumptions-ledger.txt
+Automatic merge failed; fix conflicts and then commit the result.

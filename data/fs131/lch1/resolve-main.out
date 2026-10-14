@@ -1,0 +1,7 @@
+Proofs.lean hunk 1: ours 5 lines, theirs 32, kept 37 — both sides, ours first
+ARCHITECTURE.md hunk 1: ours 1 lines, theirs 83, kept 83 — main's (OneAvoidingDensity: main's version wins whole; the density bound's rows)
+ARCHITECTURE.md hunk 2: ours 51 lines, theirs 6, kept 57 — both sides, ours first
+ARCHITECTURE.md hunk 3: ours 5 lines, theirs 32, kept 37 — both sides, ours first
+ARCHITECTURE.md hunk 4: ours 4 lines, theirs 2, kept 3 — the chain's positive_entropy_rigidity row; main's sentence, its count three (the transfer's row dropped: a theorem on main since FS131-LP1)
+scripts/Axioms.lean hunk 1: ours 8 lines, theirs 5, kept 7 — joined prose: main's two imports and the chain's third; the transfer a theorem (main)
+scripts/assumptions-ledger.txt hunk 1: ours 21 lines, theirs 0, kept 9 — the chain's RESTS rows on positive_entropy_rigidity; 12 RESTS rows on the transfer dropped (main's)

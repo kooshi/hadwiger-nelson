@@ -1,0 +1,6 @@
+FS131-LCH1 collisions: the chain lines' 57 modules (2416 constants) and the add/add copy (8) against main's 2010 modules (32014 constants): 2 collision(s)
+COLLISION THM HadwigerNelson.Plane.mOne_le_one :: chain-line Proofs.HadwigerNelson.Plane.WindowDensity :: main Proofs.HadwigerNelson.Plane.OneClass.Defs (THM)
+COLLISION DEF HadwigerNelson.Plane.mOne :: chain-line Proofs.HadwigerNelson.Plane.OneAvoidingDensity (its copy) :: main Proofs.HadwigerNelson.Plane.OneClass.Defs (DEF)
+DROPPED (in the chain's copy of Proofs.HadwigerNelson.Plane.OneAvoidingDensity, not in main's) DEF HadwigerNelson.Plane.mOne
+ADDED (in main's copy, not in the chain's) THM HadwigerNelson.Plane.BandFree.eq_1
+ADDED (in main's copy, not in the chain's) THM HadwigerNelson.Plane.mOne_eq_iSup_bandFree
