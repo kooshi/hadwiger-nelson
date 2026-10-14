@@ -1,0 +1,128 @@
+slot: admitted itt1: mem 4 GiB (hard cap), cpus 5,6
+data/fs131/itt1/work/RingScope.lean:129:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?g (∑ x ∈ ?s, ?f x)
+in the target expression
+  ↑(∏ i, n i) * ↑(∑ i, (b.repr a) i • b i) ∈ R
+
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+R : Subring ↥(fieldI F) := UnitRing.unitRing (conjOn ⋯)
+hR : R = UnitRing.unitRing (conjOn ⋯)
+T : Subalgebra ℚ ↥(fieldI F) :=
+  { carrier := {x | ∃ n, n ≠ 0 ∧ ↑n * x ∈ R}, mul_mem' := ⋯, one_mem' := ⋯, add_mem' := ⋯, zero_mem' := ⋯,
+    algebraMap_mem' := ⋯ }
+hRT : ∀ r ∈ R, r ∈ T
+hnorm : ∀ (z : ↥(fieldI F)), ‖↑z‖ = 1 → z ∈ R
+iL : ↥(fieldI F) := (toFieldI F) (0, 1)
+hiL : ↑iL = Complex.I
+hiR : iL ∈ R
+hF : ∀ (a : ↥F), (toFieldI F) (a, 0) ∈ T
+hT : ∀ (x : ↥(fieldI F)), x ∈ T
+b : Module.Basis (Module.Free.ChooseBasisIndex ℤ (𝓞 ↥(fieldI F))) ℤ (𝓞 ↥(fieldI F)) := RingOfIntegers.basis ↥(fieldI F)
+n : Module.Free.ChooseBasisIndex ℤ (𝓞 ↥(fieldI F)) → ℕ
+hn : ∀ (i : Module.Free.ChooseBasisIndex ℤ (𝓞 ↥(fieldI F))), n i ≠ 0
+hnb : ∀ (i : Module.Free.ChooseBasisIndex ℤ (𝓞 ↥(fieldI F))), ↑(n i) * ↑(b i) ∈ R
+a : 𝓞 ↥(fieldI F)
+hb : ∀ (i : Module.Free.ChooseBasisIndex ℤ (𝓞 ↥(fieldI F))), (∏ j, ↑(n j)) * ↑(b i) ∈ R
+⊢ ↑(∏ i, n i) * ↑(∑ i, (b.repr a) i • b i) ∈ R
+data/fs131/itt1/work/RingScope.lean:247:8: warning: declaration uses `sorry`
+data/fs131/itt1/work/RingScope.lean:268:55: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+N : ℕ
+hN : N ≠ 0
+R : Subring ↥(fieldI F) := UnitRing.unitRing (conjOn ⋯)
+c : ℕ
+hc : c ≠ 0
+hcO : ∀ (a : 𝓞 ↥(fieldI F)), ↑c * ↑a ∈ UnitRing.unitRing (conjOn ⋯)
+hnorm : ∀ (z : ↥(fieldI F)), ‖↑z‖ = 1 → z ∈ R
+u : ↥(fieldI F) := (toFieldI F) (3 / 5, 4 / 5)
+u' : ↥(fieldI F) := (toFieldI F) (3 / 5, -4 / 5)
+⊢ ↑3 / ↑5 = 3 / 5
+data/fs131/itt1/work/RingScope.lean:268:79: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+N : ℕ
+hN : N ≠ 0
+R : Subring ↥(fieldI F) := UnitRing.unitRing (conjOn ⋯)
+c : ℕ
+hc : c ≠ 0
+hcO : ∀ (a : 𝓞 ↥(fieldI F)), ↑c * ↑a ∈ UnitRing.unitRing (conjOn ⋯)
+hnorm : ∀ (z : ↥(fieldI F)), ‖↑z‖ = 1 → z ∈ R
+u : ↥(fieldI F) := (toFieldI F) (3 / 5, 4 / 5)
+u' : ↥(fieldI F) := (toFieldI F) (3 / 5, -4 / 5)
+⊢ ↑4 / ↑5 = 4 / 5
+data/fs131/itt1/work/RingScope.lean:269:58: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+N : ℕ
+hN : N ≠ 0
+R : Subring ↥(fieldI F) := UnitRing.unitRing (conjOn ⋯)
+c : ℕ
+hc : c ≠ 0
+hcO : ∀ (a : 𝓞 ↥(fieldI F)), ↑c * ↑a ∈ UnitRing.unitRing (conjOn ⋯)
+hnorm : ∀ (z : ↥(fieldI F)), ‖↑z‖ = 1 → z ∈ R
+u : ↥(fieldI F) := (toFieldI F) (3 / 5, 4 / 5)
+u' : ↥(fieldI F) := (toFieldI F) (3 / 5, -4 / 5)
+hu : ↑u = { re := 3 / 5, im := 4 / 5 }
+⊢ ↑3 / ↑5 = 3 / 5
+data/fs131/itt1/work/RingScope.lean:269:83: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+N : ℕ
+hN : N ≠ 0
+R : Subring ↥(fieldI F) := UnitRing.unitRing (conjOn ⋯)
+c : ℕ
+hc : c ≠ 0
+hcO : ∀ (a : 𝓞 ↥(fieldI F)), ↑c * ↑a ∈ UnitRing.unitRing (conjOn ⋯)
+hnorm : ∀ (z : ↥(fieldI F)), ‖↑z‖ = 1 → z ∈ R
+u : ↥(fieldI F) := (toFieldI F) (3 / 5, 4 / 5)
+u' : ↥(fieldI F) := (toFieldI F) (3 / 5, -4 / 5)
+hu : ↑u = { re := 3 / 5, im := 4 / 5 }
+⊢ -↑4 / ↑5 = -4 / 5
+data/fs131/itt1/work/RingScope.lean:274:59: error: unsolved goals
+case a
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+N : ℕ
+hN : N ≠ 0
+R : Subring ↥(fieldI F) := UnitRing.unitRing (conjOn ⋯)
+c : ℕ
+hc : c ≠ 0
+hcO : ∀ (a : 𝓞 ↥(fieldI F)), ↑c * ↑a ∈ UnitRing.unitRing (conjOn ⋯)
+hnorm : ∀ (z : ↥(fieldI F)), ‖↑z‖ = 1 → z ∈ R
+u : ↥(fieldI F) := (toFieldI F) (3 / 5, 4 / 5)
+u' : ↥(fieldI F) := (toFieldI F) (3 / 5, -4 / 5)
+hu : ↑u = { re := 3 / 5, im := 4 / 5 }
+hu' : ↑u' = { re := 3 / 5, im := -4 / 5 }
+hn : ∀ (a b : ℝ), a ^ 2 + b ^ 2 = 1 → ‖{ re := a, im := b }‖ = 1
+huR : u ∈ R
+hu'R : u' ∈ R
+⊢ (↑5).re / Complex.normSq ↑5 = 1 / 5
+
+case a
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+N : ℕ
+hN : N ≠ 0
+R : Subring ↥(fieldI F) := UnitRing.unitRing (conjOn ⋯)
+c : ℕ
+hc : c ≠ 0
+hcO : ∀ (a : 𝓞 ↥(fieldI F)), ↑c * ↑a ∈ UnitRing.unitRing (conjOn ⋯)
+hnorm : ∀ (z : ↥(fieldI F)), ‖↑z‖ = 1 → z ∈ R
+u : ↥(fieldI F) := (toFieldI F) (3 / 5, 4 / 5)
+u' : ↥(fieldI F) := (toFieldI F) (3 / 5, -4 / 5)
+hu : ↑u = { re := 3 / 5, im := 4 / 5 }
+hu' : ↑u' = { re := 3 / 5, im := -4 / 5 }
+hn : ∀ (a b : ℝ), a ^ 2 + b ^ 2 = 1 → ‖{ re := a, im := b }‖ = 1
+huR : u ∈ R
+hu'R : u' ∈ R
+⊢ (↑5).im = 0
+data/fs131/itt1/work/RingScope.lean:288:13: error: Type mismatch
+  H
+has type
+  AddSubgroup (mixedEmbedding.mixedSpace ↥(fieldI F))
+but is expected to have type
+  Set ?m.543
+seconds=7
+exit=1

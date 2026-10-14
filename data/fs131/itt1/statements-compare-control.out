@@ -1,0 +1,22 @@
+compared: 215 named constants of the first dump (kinds, types, modules), 62 data definitions' values, 22 example heads of the base files
+internal (not compared): 83 before, 91 after
+new public constants in the second dump: 1 (allow-list: 0)
+  NEW THM HadwigerNelson.Rigidity.planted_new_public
+new private constants in the second dump: 6
+  NEW PRIVATE THM HadwigerNelson.Rigidity.exists_nat_mul_integers_le  (Proofs.HadwigerNelson.Rigidity.RingScope)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.stableIntegers_le_span  (Proofs.HadwigerNelson.Rigidity.RingScope)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.isApprox_zero_of_integral  (Proofs.HadwigerNelson.Rigidity.TateCharacter)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.exists_nat_mul_integral_of_trace_int'  (Proofs.HadwigerNelson.Rigidity.TateLocal)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.integral_mem_stableIntegers  (Proofs.HadwigerNelson.Rigidity.TateModel)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.sigmaCompactSpace_splitAdeleRing  (Proofs.HadwigerNelson.Rigidity.TateModel)
+examples in the working files that the base does not hold: 0
+TYPE     THM HadwigerNelson.Rigidity.TateModel.π_eq_π_iff: the stored statement differs
+MISSING  THM HadwigerNelson.Rigidity.exists_trace_not_int_away: in the first dump, not in the second
+VALUE    DEF HadwigerNelson.Rigidity.archTrace: the stored definition differs
+KIND     HadwigerNelson.Rigidity.exists_isApprox: THM -> DEF
+TYPE     THM HadwigerNelson.Rigidity.TateModel.sigmaCompactSpace: the stored statement differs
+TYPE     THM HadwigerNelson.Rigidity.TateModel.thinBox_heavy: the stored statement differs
+MODULE   HadwigerNelson.Rigidity.box: Proofs.HadwigerNelson.Rigidity.ThinBoxes -> Proofs.HadwigerNelson.Rigidity.TateModel (a move the job was not given)
+AXIOMS   the modules must declare no axiom: ['HadwigerNelson.Rigidity.planted_axiom']
+NEW      THM HadwigerNelson.Rigidity.planted_new_public: a new public constant that the allow-list does not hold
+CONTROL: 9 of 9 planted faults reported — the check can fail

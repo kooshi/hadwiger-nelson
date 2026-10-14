@@ -52,6 +52,161 @@ theorem unitRing_le_stableIntegers [NumberField F] : UnitRing.unitRing (conjOn (
   UnitRing.unitRing_le_iff.mpr fun _ hu =>
     (mem_stableIntegers F).mpr fun P => UpperHalf.mem_localRing_of_mul_conj_eq_one P hu
 
+/-- (b) **`ℚ·R = L`, with a common denominator on `𝓞 L`**: every element of `F(i)` has a nonzero integer multiple in `R`
+(`i ∈ U`; for `a ∈ F`, `u = (1 + ia)/(1 − ia) ∈ U` and `ia = (u − 1)/(u + 1)`, the inverse lying in the `ℚ`-algebra of
+fractions of `R` because `u + 1` is algebraic), so some `c₀ ≥ 1` has `c₀·𝓞 L ⊆ R` (an integral basis). -/
+private theorem exists_nat_mul_integers_le [NumberField F] :
+    ∃ c : ℕ, c ≠ 0 ∧ ∀ a : 𝓞 (fieldI F), (c : fieldI F) * (a : fieldI F) ∈ UnitRing.unitRing (conjOn (fieldI_conj F)) := by
+  classical
+  set R := UnitRing.unitRing (conjOn (fieldI_conj F)) with hR
+  -- the elements with a nonzero integer multiple in `R`: a `ℚ`-subalgebra
+  let T : Subalgebra ℚ (fieldI F) :=
+    { carrier := {x | ∃ n : ℕ, n ≠ 0 ∧ (n : fieldI F) * x ∈ R}
+      mul_mem' := fun {x y} ⟨n, hn, hx⟩ ⟨m, hm, hy⟩ => ⟨n * m, mul_ne_zero hn hm, by
+        rw [Nat.cast_mul, show (n * m : fieldI F) * (x * y) = (n * x) * (m * y) by ring]
+        exact R.mul_mem hx hy⟩
+      add_mem' := fun {x y} ⟨n, hn, hx⟩ ⟨m, hm, hy⟩ => ⟨n * m, mul_ne_zero hn hm, by
+        rw [Nat.cast_mul, show (n * m : fieldI F) * (x + y) = (m : fieldI F) * (n * x) + (n : fieldI F) * (m * y) by
+          ring]
+        exact R.add_mem (R.mul_mem (natCast_mem R m) hx) (R.mul_mem (natCast_mem R n) hy)⟩
+      algebraMap_mem' := fun q => ⟨q.den, q.den_nz, by
+        rw [← map_natCast (algebraMap ℚ (fieldI F)), ← map_mul, Rat.den_mul_eq_num, map_intCast]
+        exact intCast_mem R _⟩ }
+  have hRT : ∀ r ∈ R, r ∈ T := fun r hr => ⟨1, one_ne_zero, by rw [Nat.cast_one, one_mul]; exact hr⟩
+  have hnorm : ∀ z : fieldI F, ‖(z : ℂ)‖ = 1 → z ∈ R := fun z hz =>
+    UnitRing.normOne_subset_unitRing _ ((UnitRing.mem_normOne_conjOn_iff z).2 hz)
+  -- `i ∈ R`, and each `a ∈ F` (read in `L`) is in `T`
+  let iL : fieldI F := toFieldI F (0, 1)
+  have hiL : (iL : ℂ) = Complex.I := Complex.ext (by simp [iL, toFieldI]) (by simp [iL, toFieldI])
+  have hiR : iL ∈ R := hnorm iL (by rw [hiL, Complex.norm_I])
+  have hF : ∀ a : F, toFieldI F (a, 0) ∈ T := by
+    intro a
+    set aL := toFieldI F (a, 0)
+    have haL : (aL : ℂ) = ((a : ℝ) : ℂ) := Complex.ext (by simp [aL, toFieldI]) (by simp [aL, toFieldI])
+    have h1 : (1 - iL * aL : fieldI F) ≠ 0 := fun h => by
+      have := congrArg (fun z : fieldI F => ((z : ℂ)).re) h
+      simp [hiL, haL] at this
+    have h2 : (1 + iL * aL : fieldI F) ≠ 0 := fun h => by
+      have := congrArg (fun z : fieldI F => ((z : ℂ)).re) h
+      simp [hiL, haL] at this
+    obtain ⟨u, hu⟩ : ∃ u : fieldI F, u = (1 + iL * aL) / (1 - iL * aL) := ⟨_, rfl⟩
+    have huR : u ∈ R := hnorm u (by
+      have hc : ((1 - iL * aL : fieldI F) : ℂ) = (starRingEnd ℂ) ((1 + iL * aL : fieldI F) : ℂ) := by
+        push_cast; rw [hiL, haL]; simp [Complex.conj_ofReal, sub_eq_add_neg]
+      rw [show (u : ℂ) = ((1 + iL * aL : fieldI F) : ℂ) / ((1 - iL * aL : fieldI F) : ℂ) by rw [hu]; push_cast; rfl,
+        norm_div, hc, Complex.norm_conj, div_self]
+      rw [norm_ne_zero_iff]; exact_mod_cast h2)
+    have hu2 : (u + 1) * (1 - iL * aL) = 2 := by rw [hu]; field_simp; ring
+    have hu1 : (u + 1 : fieldI F) ≠ 0 := fun h => by
+      rw [h, zero_mul] at hu2; exact two_ne_zero hu2.symm
+    have hinv : (u + 1)⁻¹ ∈ T := by
+      have hmem : u + 1 ∈ T := T.add_mem (hRT u huR) (T.one_mem)
+      exact Subalgebra.inv_mem_of_algebraic (A := T) (x := ⟨u + 1, hmem⟩) (Algebra.IsAlgebraic.isAlgebraic _)
+    have hia : iL * aL = (u - 1) * (u + 1)⁻¹ := by
+      rw [eq_mul_inv_iff_mul_eq₀ hu1, hu]; field_simp; ring
+    have hiaT : iL * aL ∈ T := by
+      rw [hia]; exact T.mul_mem (T.sub_mem (hRT u huR) T.one_mem) hinv
+    have hii : iL * iL = -1 := Subtype.ext (by push_cast; rw [hiL, Complex.I_mul_I])
+    have : aL = -(iL * (iL * aL)) := by rw [← mul_assoc, hii]; ring
+    rw [this]
+    exact T.neg_mem (T.mul_mem (hRT iL hiR) hiaT)
+  have hT : ∀ x : fieldI F, x ∈ T := by
+    intro x
+    obtain ⟨⟨a, b⟩, rfl⟩ := toFieldI_surjective F x
+    have : toFieldI F (a, b) = toFieldI F (a, 0) + toFieldI F (b, 0) * iL :=
+      Subtype.ext (Complex.ext (by simp [iL, toFieldI]) (by simp [iL, toFieldI]))
+    rw [this]
+    exact T.add_mem (hF a) (T.mul_mem (hF b) (hRT iL hiR))
+  -- a common denominator on an integral basis of `𝓞 L`
+  let b := RingOfIntegers.basis (fieldI F)
+  choose n hn hnb using fun i => hT ((b i : 𝓞 (fieldI F)) : fieldI F)
+  refine ⟨∏ i, n i, Finset.prod_ne_zero_iff.2 fun i _ => hn i, fun a => ?_⟩
+  have hb : ∀ i, (∏ j, (n j : fieldI F)) * (b i : fieldI F) ∈ R := fun i => by
+    obtain ⟨k, hk⟩ := Finset.dvd_prod_of_mem n (Finset.mem_univ i)
+    rw [← Nat.cast_prod, hk, Nat.cast_mul, mul_comm (n i : fieldI F), mul_assoc]
+    exact R.mul_mem (natCast_mem R k) (hnb i)
+  rw [← b.sum_repr a]
+  push_cast
+  rw [Finset.mul_sum]
+  refine R.sum_mem fun i _ => ?_
+  rw [zsmul_eq_mul, mul_left_comm]
+  exact R.mul_mem (intCast_mem R _) (hb i)
+
+/-- (d) **`O′ ⊆ 𝓞 L · R`** (FS91-J10-L1 (d), the overring argument by Chevalley's domination): for `x ∈ O′` the ideal
+`J = {d ∈ D : d x ∈ D}` of `D = 𝓞 L · R` is `D`; else a valuation subring `B ⊇ D` has `J` in its nonunits; `B` holds `U`,
+so it is conjugation-stable, and it is not `F(i)` (a nonzero integer lies in `J`), so it is the localization at a stable
+prime `P` (`UpperHalf.exists_stablePrime_of_valuationSubring`); `x = a/s` with `s ∉ P` puts `s` in `J`, a nonunit of
+`B` — but `s ∉ P` is a unit there. -/
+private theorem stableIntegers_le_span [NumberField F] {x : fieldI F} (hx : x ∈ stableIntegers F) :
+    x ∈ Submodule.span (𝓞 (fieldI F)) (UnitRing.unitRing (conjOn (fieldI_conj F)) : Set (fieldI F)) := by
+  classical
+  set σ := conjOn (fieldI_conj F)
+  set R := UnitRing.unitRing σ
+  set M := Submodule.span (𝓞 (fieldI F)) (R : Set (fieldI F))
+  have hMmul : ∀ y ∈ M, ∀ z ∈ M, y * z ∈ M := by
+    intro y hy z hz
+    have h := Submodule.mul_mem_mul hy hz
+    rw [Submodule.span_mul_span] at h
+    refine Submodule.span_mono ?_ h
+    rintro _ ⟨r, hr, r', hr', rfl⟩
+    exact R.mul_mem hr hr'
+  let D : Subring (fieldI F) :=
+    { carrier := M
+      mul_mem' := fun {y z} hy hz => hMmul y hy z hz
+      one_mem' := Submodule.subset_span R.one_mem
+      add_mem' := fun {y z} hy hz => M.add_mem hy hz
+      zero_mem' := M.zero_mem
+      neg_mem' := fun {y} hy => M.neg_mem hy }
+  have hRD : ∀ r ∈ R, r ∈ D := fun r hr => Submodule.subset_span hr
+  have hOD : ∀ a : 𝓞 (fieldI F), (a : fieldI F) ∈ D := fun a => by
+    have h := M.smul_mem a (Submodule.subset_span R.one_mem : (1 : fieldI F) ∈ M)
+    rwa [Algebra.smul_def, mul_one] at h
+  show x ∈ D
+  by_contra hxD
+  let J : Ideal D :=
+    { carrier := {d | (d : fieldI F) * x ∈ D}
+      add_mem' := fun {d e} hd he => by
+        show ((d : fieldI F) + e) * x ∈ D
+        rw [add_mul]; exact D.add_mem hd he
+      zero_mem' := by show (0 : fieldI F) * x ∈ D; rw [zero_mul]; exact D.zero_mem
+      smul_mem' := fun e d hd => by
+        show ((e : fieldI F) * d) * x ∈ D
+        rw [mul_assoc]; exact D.mul_mem e.2 hd }
+  have hJ : J ≠ ⊤ := fun h => hxD (by
+    have h1 : (1 : D) ∈ J := (Ideal.eq_top_iff_one J).1 h
+    have h2 : ((1 : D) : fieldI F) * x ∈ D := h1
+    rwa [OneMemClass.coe_one, one_mul] at h2)
+  obtain ⟨B, hDB, hsub⟩ := Ideal.image_subset_nonunits_valuationSubring J hJ
+  have hσ : ∀ z ∈ B, σ z ∈ B :=
+    (UnitRing.normOne_subset_iff_stable σ (conjOn_conjOn (fieldI_conj F)) B).1
+      fun u hu => hDB (hRD u (UnitRing.normOne_subset_unitRing σ hu))
+  -- a nonzero integer lies in `J`, so `B ≠ ⊤`
+  obtain ⟨m, hm0, hmx⟩ := exists_integral_multiples ℤ ℚ ({x} : Finset (fieldI F))
+  have hint : IsIntegral ℤ (m • x) := hmx x (Finset.mem_singleton_self x)
+  have hy : (m : fieldI F) * x ∈ D := by
+    have h : (m • x : fieldI F) ∈ D := hOD ⟨m • x, hint⟩
+    rwa [zsmul_eq_mul] at h
+  have hmJ : (m : D) ∈ J := by
+    show ((m : D) : fieldI F) * x ∈ D
+    push_cast; exact hy
+  have hmB : ((m : D) : fieldI F) ∈ B.nonunits := hsub ⟨_, hmJ, rfl⟩
+  have hBtop : B ≠ ⊤ := by
+    rintro rfl
+    rcases (ValuationSubring.mem_nonunits_iff_or _).1 hmB with h0 | h0
+    · exact hm0 (by exact_mod_cast h0)
+    · exact h0 (by trivial)
+  obtain ⟨P, hP⟩ := UpperHalf.exists_stablePrime_of_valuationSubring B hBtop hσ
+  obtain ⟨a, s, hs, rfl⟩ := (UpperHalf.mem_localRing P).1 ((mem_stableIntegers F).1 hx P)
+  have hs0 : (s : fieldI F) ≠ 0 := fun h0 => hs (by
+    have : s = 0 := RingOfIntegers.coe_injective (h0.trans (map_zero _).symm)
+    rw [this]; exact P.P.zero_mem)
+  have hsJ : (⟨s, hOD s⟩ : D) ∈ J := by
+    show (s : fieldI F) * ((a : fieldI F) / s) ∈ D
+    rw [mul_div_cancel₀ _ hs0]; exact hOD a
+  have hsB : (s : fieldI F) ∈ B.nonunits := hsub ⟨_, hsJ, rfl⟩
+  rw [← hP] at hsB
+  exact hs ((UpperHalf.coe_mem_nonunits_localRing_iff P s).1 hsB)
+
 /-- **`c·O′ ⊆ R`**, over every real number field, no scope (FS91-J10-L1 (e)). Route: (b) `ℚ·R = L` — `i ∈ R`, and for
 `a ∈ F`, `u_a = (1 + ia)/(1 − ia)` is of norm one with `ia = (u_a − 1)/(u_a + 1)`, so the `ℚ`-span of `R`, a finite-dimensional
 domain, is a field containing `L`; so `R` holds a `ℚ`-basis of `L` and `c₀·𝓞 L ⊆ R` for a common denominator `c₀`. (d)
@@ -60,7 +215,28 @@ domain, is a field containing `L`; so `R` holds a `ℚ`-basis of `L` and `c₀·
 (e) `O′ = Σ 𝓞 L · U`, so `c₀·O′ ⊆ R`. -/
 theorem exists_mul_stableIntegers_le [NumberField F] :
     ∃ c : ℕ, c ≠ 0 ∧ ∀ x ∈ stableIntegers F, (c : fieldI F) * x ∈ UnitRing.unitRing (conjOn (fieldI_conj F)) := by
-  sorry
+  classical
+  obtain ⟨c, hc, hcO⟩ := exists_nat_mul_integers_le F
+  -- (d) `O′ ⊆ D := 𝓞 L · R`, by Chevalley's domination; (e) `c·D ⊆ R`
+  refine ⟨c, hc, fun x hx => ?_⟩
+  have hxD := stableIntegers_le_span F hx
+  have key : ∀ y ∈ Submodule.span (𝓞 (fieldI F)) (UnitRing.unitRing (conjOn (fieldI_conj F)) : Set (fieldI F)),
+      ∀ a : 𝓞 (fieldI F), (c : fieldI F) * ((a : fieldI F) * y) ∈ UnitRing.unitRing (conjOn (fieldI_conj F)) := by
+    intro y hy
+    induction hy using Submodule.span_induction with
+    | mem r hr =>
+      intro a
+      rw [← mul_assoc]
+      exact Subring.mul_mem _ (hcO a) hr
+    | zero => intro a; rw [mul_zero, mul_zero]; exact Subring.zero_mem _
+    | add y z _ _ hy hz => intro a; rw [mul_add, mul_add]; exact Subring.add_mem _ (hy a) (hz a)
+    | smul b y _ hy =>
+      intro a
+      rw [Algebra.smul_def, show (algebraMap (𝓞 (fieldI F)) (fieldI F) b) = (b : fieldI F) from rfl,
+        ← mul_assoc (a : fieldI F), show (a : fieldI F) * (b : fieldI F) = ((a * b : 𝓞 (fieldI F)) : fieldI F) by
+          push_cast; rfl]
+      exact hy (a * b)
+  simpa using key x hxD 1
 
 /-- **`R = O′` in the scope** (Lemma C′, FS91-J07-4 = FS91-J10-T6; `LEDGER.md` row 100): for a real number field with no
 ramified stable dyadic prime, the unit-vector ring is the ring of elements integral at every stable prime. Route
@@ -80,6 +256,89 @@ every `k`, whose image is the lattice `N 5^{−k} c₀ ·` (the image of `𝓞 L
 theorem dense_mixedEmbedding_nsmul_unitRing [NumberField F] (N : ℕ) (hN : N ≠ 0) :
     Dense {y | ∃ r ∈ UnitRing.unitRing (conjOn (fieldI_conj F)),
       y = NumberField.mixedEmbedding (fieldI F) ((N : fieldI F) * r)} := by
-  sorry
+  classical
+  set R := UnitRing.unitRing (conjOn (fieldI_conj F))
+  obtain ⟨c, hc, hcO⟩ := exists_nat_mul_integers_le F
+  -- `1/5 ∈ R`: `u = (3 + 4i)/5` has norm one, and `u + ū = 6/5`
+  have hfive : (5 : fieldI F)⁻¹ ∈ R := by
+    have hnorm : ∀ z : fieldI F, ‖(z : ℂ)‖ = 1 → z ∈ R := fun z hz =>
+      UnitRing.normOne_subset_unitRing _ ((UnitRing.mem_normOne_conjOn_iff z).2 hz)
+    let u : fieldI F := toFieldI F ((3 / 5 : F), (4 / 5 : F))
+    let u' : fieldI F := toFieldI F ((3 / 5 : F), (-4 / 5 : F))
+    have hu : (u : ℂ) = ⟨3 / 5, 4 / 5⟩ :=
+      Complex.ext (by simp [u, toFieldI]; norm_cast) (by simp [u, toFieldI]; norm_cast)
+    have hu' : (u' : ℂ) = ⟨3 / 5, -4 / 5⟩ :=
+      Complex.ext (by simp [u', toFieldI]; norm_cast) (by simp [u', toFieldI]; norm_cast)
+    have hn : ∀ a b : ℝ, a ^ 2 + b ^ 2 = 1 → ‖(⟨a, b⟩ : ℂ)‖ = 1 := fun a b h => by
+      rw [Complex.norm_def, Complex.normSq_mk, show a * a + b * b = 1 by nlinarith, Real.sqrt_one]
+    have huR : u ∈ R := hnorm u (by rw [hu]; exact hn _ _ (by norm_num))
+    have hu'R : u' ∈ R := hnorm u' (by rw [hu']; exact hn _ _ (by norm_num))
+    have h5 : ((5 : fieldI F) : ℂ) = 5 := map_ofNat (fieldI F).subtype 5
+    have hmul : (5 : fieldI F) * (u + u' - 1) = 1 := Subtype.ext (by
+      show ((5 : fieldI F) : ℂ) * (((u : ℂ) + u') - 1) = 1
+      rw [h5, hu, hu']; apply Complex.ext <;> simp <;> norm_num)
+    have h : (5 : fieldI F)⁻¹ = u + u' - 1 := inv_eq_of_mul_eq_one_right hmul
+    rw [h]
+    exact R.sub_mem (R.add_mem huR hu'R) R.one_mem
+  -- `N·R`'s image is an additive subgroup
+  let H : AddSubgroup (mixedEmbedding.mixedSpace (fieldI F)) :=
+    { carrier := {y | ∃ r ∈ R, y = mixedEmbedding (fieldI F) ((N : fieldI F) * r)}
+      add_mem' := by
+        rintro _ _ ⟨r, hr, rfl⟩ ⟨r', hr', rfl⟩
+        exact ⟨r + r', R.add_mem hr hr', by rw [mul_add, map_add]⟩
+      zero_mem' := ⟨0, R.zero_mem, by rw [mul_zero, map_zero]⟩
+      neg_mem' := by
+        rintro _ ⟨r, hr, rfl⟩
+        exact ⟨-r, R.neg_mem hr, by rw [mul_neg, map_neg]⟩ }
+  change Dense (SetLike.coe H)
+  let e := integralBasis (fieldI F)
+  let lB := mixedEmbedding.latticeBasis (fieldI F)
+  -- the lattice points `m · (N c / 5^k) · ι(eᵢ)` lie in `H`
+  let δ : ℕ → ℚ := fun k => (N * c : ℚ) * (5⁻¹ : ℚ) ^ k
+  have hlat : ∀ (k : ℕ) (m : ℤ) (i), (((m : ℚ) * δ k : ℚ) : ℝ) • lB i ∈ H := by
+    intro k m i
+    refine ⟨(m : fieldI F) * ((5 : fieldI F)⁻¹ ^ k * ((c : fieldI F) * e i)),
+      R.mul_mem (intCast_mem R m) (R.mul_mem (R.pow_mem hfive k) ?_), ?_⟩
+    · have := hcO (RingOfIntegers.basis (fieldI F) i)
+      rwa [show ((RingOfIntegers.basis (fieldI F) i : 𝓞 (fieldI F)) : fieldI F) = e i from
+        (integralBasis_apply (fieldI F) i).symm] at this
+    · rw [Rat.cast_smul_eq_qsmul ℝ, mixedEmbedding.latticeBasis_apply, ← map_rat_smul, Rat.smul_def]
+      congr 1
+      simp only [δ]
+      push_cast
+      ring
+  have hδ : Filter.Tendsto (fun k => ((δ k : ℚ) : ℝ)) Filter.atTop (nhds 0) := by
+    have h5 : Filter.Tendsto (fun k : ℕ => ((5 : ℝ)⁻¹) ^ k) Filter.atTop (nhds 0) :=
+      tendsto_pow_atTop_nhds_zero_of_lt_one (by norm_num) (by norm_num)
+    simpa [δ] using h5.const_mul ((N : ℝ) * c)
+  have hδpos : ∀ k, 0 < ((δ k : ℚ) : ℝ) := fun k => by
+    simp only [δ]; push_cast
+    have : (0 : ℝ) < N * c := by positivity
+    positivity
+  rw [dense_iff_closure_eq, ← AddSubgroup.topologicalClosure_coe]
+  refine Set.eq_univ_of_forall fun x => ?_
+  rw [SetLike.mem_coe, ← lB.sum_repr x]
+  refine AddSubgroup.sum_mem _ fun i _ => ?_
+  set t := lB.repr x i
+  -- `⌊t/δ_k⌋ δ_k → t`
+  have hlim : Filter.Tendsto (fun k => ((⌊t / ((δ k : ℚ) : ℝ)⌋ : ℝ) * ((δ k : ℚ) : ℝ))) Filter.atTop (nhds t) := by
+    have hlo : Filter.Tendsto (fun k => t - ((δ k : ℚ) : ℝ)) Filter.atTop (nhds t) := by
+      simpa using (tendsto_const_nhds (x := t)).sub hδ
+    refine tendsto_of_tendsto_of_tendsto_of_le_of_le hlo tendsto_const_nhds (fun k => ?_) (fun k => ?_)
+    · have h := Int.sub_one_lt_floor (t / ((δ k : ℚ) : ℝ))
+      have := (mul_lt_mul_iff_of_pos_right (hδpos k)).2 h
+      rw [sub_mul, div_mul_cancel₀ _ (hδpos k).ne', one_mul] at this
+      exact this.le
+    · have h := Int.floor_le (t / ((δ k : ℚ) : ℝ))
+      have := (mul_le_mul_iff_of_pos_right (hδpos k)).2 h
+      rwa [div_mul_cancel₀ _ (hδpos k).ne'] at this
+  have hmem : ∀ k, ((⌊t / ((δ k : ℚ) : ℝ)⌋ : ℝ) * ((δ k : ℚ) : ℝ)) • lB i ∈ (H : Set _) := fun k => by
+    have := hlat k ⌊t / ((δ k : ℚ) : ℝ)⌋ i
+    push_cast at this
+    exact this
+  have hcl : t • lB i ∈ closure (SetLike.coe H) :=
+    mem_closure_of_tendsto (hlim.smul_const (lB i)) (Filter.Eventually.of_forall hmem)
+  rw [← AddSubgroup.topologicalClosure_coe] at hcl
+  exact hcl
 
 end HadwigerNelson.Rigidity

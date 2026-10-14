@@ -120,7 +120,7 @@ theorem tateCharFun_eq {a : SAdeleRing F} {t : fieldI F} (h : IsApprox F a t) :
     rw [← sub_eq_iff_eq_add', ← Rat.cast_sub, ← map_sub, hn, Rat.cast_intCast]
   rw [tateCharFun, ht, show 2 * Real.pi * (archTrace (fieldI F) a.1 - (Algebra.trace ℚ (fieldI F) t + n : ℝ)) =
       2 * Real.pi * (archTrace (fieldI F) a.1 - Algebra.trace ℚ (fieldI F) t) + (-n : ℤ) * (2 * Real.pi) by
-    push_cast; ring, Circle.exp_add, Circle.exp_int_mul_two_pi, mul_one]
+    rw [Int.cast_neg]; ring, Circle.exp_add, Circle.exp_int_mul_two_pi, mul_one]
 
 /-- `0` approximates a point integral at every split prime. -/
 private theorem isApprox_zero_of_integral {a : SAdeleRing F}
@@ -131,8 +131,8 @@ private theorem isApprox_zero_of_integral {a : SAdeleRing F}
     exact h w⟩
 
 theorem tateCharFun_zero : tateCharFun F 0 = 1 := by
-  rw [tateCharFun_eq F (isApprox_zero_of_integral F fun w => zero_mem _)]
-  simp
+  rw [tateCharFun_eq F (isApprox_zero_of_integral F fun w => zero_mem _),
+    show (0 : SAdeleRing F).1 = 0 from rfl, map_zero, map_zero, Rat.cast_zero, sub_zero, mul_zero, Circle.exp_zero]
 
 theorem tateCharFun_add (a b : SAdeleRing F) : tateCharFun F (a + b) = tateCharFun F a * tateCharFun F b := by
   obtain ⟨ta, hta⟩ := exists_isApprox F a
@@ -160,8 +160,7 @@ theorem tateChar_of_integral {a : SAdeleRing F}
     (h : ∀ w : SplitPlace F, a.2 w ∈ w.1.adicCompletionIntegers (fieldI F)) :
     tateChar F a = Circle.exp (2 * Real.pi * archTrace (fieldI F) a.1) := by
   show tateCharFun F a = _
-  rw [tateCharFun_eq F (isApprox_zero_of_integral F h)]
-  simp
+  rw [tateCharFun_eq F (isApprox_zero_of_integral F h), map_zero, Rat.cast_zero, sub_zero]
 
 /-- **The product formula on `O′`**: `ψ(x) = 1` for `x ∈ O′` (the approximant `x` itself, and `Tr_∞ ∘ ι_∞ = Tr`). -/
 theorem tateChar_toSAdele_of_mem {x : fieldI F} (hx : x ∈ stableIntegers F) : tateChar F (toSAdele F x) = 1 := by
@@ -231,8 +230,8 @@ theorem tatePi_toSAdele_of_mem {x : fieldI F} (hx : x ∈ stableIntegers F) : ta
 theorem tatePi_arch_mem (b : mixedEmbedding.mixedSpace (fieldI F)) : tatePi F (b, 0) ∈ archChars (unitRing F) := by
   let ψ : unitRing F →+ ℝ :=
     { toFun := fun r => 2 * Real.pi * archTrace (fieldI F) (b * mixedEmbedding (fieldI F) (ofUnitRing F r))
-      map_zero' := by simp
-      map_add' := fun r s => by simp [map_add, mul_add] }
+      map_zero' := by rw [map_zero, map_zero, mul_zero, map_zero, mul_zero]
+      map_add' := fun r s => by rw [map_add, map_add, mul_add, map_add, mul_add] }
   refine ⟨ψ, fun r => ?_⟩
   show tateChar F ((b, 0) * toSAdele F (ofUnitRing F r)) = _
   rw [tateChar_of_integral F fun w => by

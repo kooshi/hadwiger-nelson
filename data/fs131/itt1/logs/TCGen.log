@@ -1,0 +1,8 @@
+slot: admitted itt1: mem 4 GiB (hard cap), cpus 0,1
+archTrace.congr_simp present: false
+HadwigerNelson.Rigidity.archTrace.eq_1 present: true
+HadwigerNelson.Rigidity.tateCharFun.eq_1 present: false
+HadwigerNelson.Rigidity.IsApprox.eq_1 present: false
+HadwigerNelson.Rigidity.tatePi.eq_1 present: false
+seconds=9
+exit=0

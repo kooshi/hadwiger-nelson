@@ -6,7 +6,21 @@ files: `data/fs131/itt1/`. Laptop: 12 cores, 31 GB.*
 
 ## Theorems this phase proved
 
-(Filled as leaves fall; each line: declaration — grade — axioms — module.)
+Each [kernel], axioms a subset of `[propext, Classical.choice, Quot.sound]`, read from build 6's tree
+(`data/fs131/itt1/axioms-after.txt`, reader PASS); all under `HadwigerNelson.Rigidity`.
+- **T-I, `Rigidity/TateModel`:** `TateModel.mul_mem_Λ`, `TateModel.π_eq_π_iff`, `TateModel.toSAdele_mem_torsionChars`,
+  `TateModel.isOpenMap`, `TateModel.sigmaCompactSpace` (moved here; no model). Now also clean: `TateModel.mem_TA`.
+- **T-L, `Rigidity/TateLocal`:** `exists_valuation_le_one_away`, `exists_approx_completion`, `exists_int_trace_of_integral`,
+  `exists_trace_not_int_away`, `exists_nat_mul_integral_of_trace_int`, `compactSpace_adicCompletionIntegers`.
+- **T-A, `Rigidity/TateArch`:** `archTrace_mixedEmbedding`, `exists_eq_mixedEmbedding_of_archTrace_int`,
+  `archTrace_mixedEmbedding_one`.
+- **T-C, `Rigidity/TateCharacter`:** `mem_stableIntegers_iff_valuation`, `exists_isApprox`, `exists_int_trace_sub_of_isApprox`,
+  `tateCharFun_eq`, `tateCharFun_zero`, `tateCharFun_add`, `tateChar_of_integral`, `tateChar_toSAdele_of_mem`,
+  `continuous_tateChar`, `continuous_tatePi`, `tatePi_unit_mul`, `tatePi_toSAdele_of_mem`, `tatePi_arch_mem`.
+- **M9-R, `Rigidity/RingScope`:** `exists_mul_stableIntegers_le` (`c·O′ ⊆ R`, every real number field),
+  `dense_mixedEmbedding_nsmul_unitRing` (`N·R` dense in `L ⊗ ℝ`, `N ≥ 1`).
+29 leaves; 6 private helpers. `Rigidity.exists_tateModel` now rests on `sorryAx` through four leaves of `TateKernel` only
+(`surjective_tatePi`, `tatePi_exists_isCompact`, `tatePi_exists_nat_mul_mem`, `tatePi_ker_subset`).
 
 ## Stage 1 — SAVED: the join, the build, the readback, the stored statements before any edit
 
@@ -161,3 +175,104 @@ FS131-IP23". **In text** (`data/fs131/lc1/code_only_diff.py`): both files SAME o
 (`d5-code-only.out`); its plant reads DIFFERS for both (`d5-code-only-plant.out`). **From the kernel's side:** both
 modules dumped from build 2's tree before build 3 (`lean/StatementDumpD5.lean`, `d5-before.txt`); the comparison is
 stage 4's.
+
+## Stage 4 — SAVED: M9-R proved; builds 3–6; no statement changed but the move; the axioms; lint; doubled names
+
+**4.1 M9-R** (`Rigidity/RingScope`, elaborated `logs/RS-8.log`, exit 0, one `sorry` warning: `unitRing_eq_stableIntegers`,
+outside the lane). `exists_mul_stableIntegers_le` by the plan's (b), (d), (e), with **another route for (d)**: no
+localization of `D` at a maximal ideal. For `x ∈ O′` the ideal `J = {d ∈ D : d x ∈ D}` of `D = 𝓞 L · R` (the
+`𝓞 L`-span of `R`, a subring by `Submodule.span_mul_span`); if `J ≠ D`, Chevalley's domination
+(`Ideal.image_subset_nonunits_valuationSubring`) gives a valuation subring `B ⊇ D` with `J` in its nonunits; `B` holds `U`,
+so is conjugation-stable (`UnitRing.normOne_subset_iff_stable`), is not `⊤` (a nonzero integer `m` with `m x` integral lies
+in `J`), so `B = P.localRing` at a stable prime (`UpperHalf.exists_stablePrime_of_valuationSubring`); `x = a/s`, `s ∉ P`,
+puts `s` in `J`, a nonunit of `B`, against `coe_mem_nonunits_localRing_iff`. Two private helpers:
+`exists_nat_mul_integers_le` ((b): the `ℚ`-subalgebra of elements with an integer multiple in `R` holds `i` and every
+`a ∈ F` through `(u_a + 1)⁻¹`, `Subalgebra.inv_mem_of_algebraic`; a common denominator on `RingOfIntegers.basis`) and
+`stableIntegers_le_span` ((d)). `dense_mixedEmbedding_nsmul_unitRing`: `1/5 = u + ū − 1`, `u = (3+4i)/5`; the image of
+`N·R` is an additive subgroup containing `m · (Nc/5^k) · ι(eᵢ)` (`map_rat_smul`, `Rat.cast_smul_eq_qsmul`); its closure
+holds `t • ι(eᵢ)` as the limit of `⌊t/δ_k⌋δ_k • ι(eᵢ)`, so it is everything (`latticeBasis.sum_repr`). Lines: ~150 and ~85,
+against the plan's "hard child" unpriced; six elaboration rounds and eight.
+
+**4.2 The builds** (each `./scripts/build.sh` under the slot, `MEMMAX=10G BATCH=8`, exit 0, 254 of 254 batches): build 3
+(T-I, T-L, T-A, T-C, D5; 21 modules, 8 m 13 s), build 4 (M9-R; 12, 7 m 43 s), build 5 (T-C's two bare `simp`s replaced by
+`rw`; 10, 7 m 30 s), **build 6** (T-C's `push_cast` in `tateCharFun_eq` replaced by `rw [Int.cast_neg]`; 10 modules, 7 m 55 s;
+`logs/build6.log`, `build6-full.log`). **Warnings from my files at build 6: one**, `RingScope.lean:247:8: declaration uses
+sorry` (`unitRing_eq_stableIntegers`, not this job's); none other in the build. Why builds 5 and 6: build 4's dump showed a
+new public constant `archTrace.congr_simp` in `Rigidity/TateCharacter` — generated on demand by a `simp`-family tactic
+rewriting under `archTrace (fieldI F)` (`LEAN.md` § Searching, the `f.eq_1` line's sibling). An environment probe run
+after elaborating a copy (`probes/TateCharacterGen.lean`) did **not** see it, though the compiled module holds it (proof
+bodies elaborate asynchronously); the dump of the compiled module did. Gone at build 6.
+
+**4.3 No statement and no definition changed but the move, from the kernel's side.** Stage 1's dump against build 6's
+(`statements-after.txt`, `.xz` + sha256), `tools/fs131_itt1_statements.py … 432600f15 --moved`: **PASS** — 215 named
+constants of the 13 modules (kinds, stored types, modules), 62 data definitions' values (`archTrace`, `IsApprox`,
+`tateCharFun`, `tateChar`, `tatePi`, `stableIntegers`, … unchanged), 22 example heads; the move IDENTICAL as at stage 2; no
+new public constant; six new private helpers (`exists_nat_mul_integers_le`, `stableIntegers_le_span`,
+`isApprox_zero_of_integral`, `exists_nat_mul_integral_of_trace_int'`, `integral_mem_stableIntegers`,
+`sigmaCompactSpace_splitAdeleRing`) (`statements-compare.out`). **The planted changes, watched firing:** `--control` on
+these two dumps, 9 of 9 (`statements-compare-control.out`); and build 4's real `archTrace.congr_simp` was reported FAIL
+by this check before it was removed — a live positive. **D5:** `tools/fs131_itt1_d5.py`: `Rigidity/Entropy` and
+`EntropySplitMax`, 57 constants, SAME (`d5-compare.out`); plant reported (`d5-compare-plant.out`). Unread binders: none
+dropped (no statement of my files has one I could find; none was in scope of item 726's word).
+
+**4.4 The axioms of every declaration of my files, from build 6's tree** (`lean/Axioms.lean` → `axioms-after.txt`;
+`tools/fs131_itt1_axioms.py` → `axioms-verdict.out`): **PASS** — 97 records of `RingScope`, `TateModel`, `TateLocal`,
+`TateArch`, `TateCharacter`, `ThinBoxes` (public and private): **83 CLEAN** (every record of the five files but one);
+**14 OTHER-LEAF**: `unitRing_eq_stableIntegers` (its own `sorry`, outside lane M9-R) and the 13 leaves of `ThinBoxes`
+(lane K8-B's, each its own `sorry`). The planted record (`positive_entropy_rigidity_of_polishSpace`) is reported resting on
+the declared printed theorem. `--control`: 4 of 4 planted faults reported (`axioms-control.out`). Downstream, for
+information: `exists_tateModel` rests on `sorryAx` through `surjective_tatePi`, `tatePi_exists_isCompact`,
+`tatePi_exists_nat_mul_mem`, `tatePi_ker_subset` only.
+
+**4.5 The linters** (`lake lint --no-build -- --no-build --trace` under the slot): exit 0, `-- Linting passed for
+Proofs.`, 14 of 14 `(2/2) Passed!` (`logs/lint.log`). **Doubled names on the joined tree** (`./scripts/dupnames.sh`, run
+because the join can make one that neither branch's gate sees): OK — no name declared by two modules, 24 generated on
+demand, "no repeated name appeared or disappeared since the previous complete run" (`logs/dupnames.log`).
+**Architecture** (`tools/check_architecture.py`): RESULT PASS with the six rows updated (`logs/architecture.log`); a plant
+in a copy (TateModel's imports cell without `Rigidity/TateLocal`) FAILS naming it (`logs/architecture-plant.log`).
+**Not run** (item 815's ruling 2, the same branch condition): `scripts/axioms.sh`, `assumptions.sh`, `vacuity.sh` — the
+branch carries the declared printed theorem not yet declared to the audit; they run at the chain's landing.
+
+## Drafts for the landing (files this job does not write; each names its slot)
+
+**The audit's block** (`scripts/Axioms.lean`, CLEAN section, after FS131-IP23's block): `data/fs131/itt1/draft-axioms-block.lean`,
+70 `#print axioms` lines, every public declaration of the five files CLEAN at build 6, generated from the built tree's
+print; `unitRing_eq_stableIntegers` is left out until proved.
+
+**The models** (`LEAN.md` § The gate: a theorem whose hypothesis is a structure ships an inhabitant, or a note). Lane T's
+statements are over a number field alone but for: `tateCharFun_eq`, `exists_int_trace_sub_of_isApprox` (`IsApprox F a t`:
+inhabited at every `a` by `exists_isApprox`, now a theorem; at `a = ι x`, `x ∈ O′`, by `x` itself); `tateChar_of_integral`
+(integral at every split prime: `0`, and `(b, 0)` for every `b`, the case `tatePi_arch_mem` reads);
+`tateChar_toSAdele_of_mem`, `tatePi_toSAdele_of_mem` (`x ∈ O′`: `0`, `1`, every element of `R`);
+`exists_eq_mixedEmbedding_of_archTrace_int` (`Tr_∞(b·ι s) ∈ ℤ` for all `s ∈ 𝓞`: `b = ι y` for `y` in the trace dual,
+e.g. `b = 0`, `b = ι 1`); `TateModel.*` over `(D : TateModel F)` (no inhabitant until `exists_tateModel` is proved, as
+KT1 § 2.2 records); `mul_mem_Λ` (`y ∈ Λ`: `0`, and every `x ∈ O′` by `stableIntegers_le`);
+`dense_mixedEmbedding_nsmul_unitRing` (`N ≠ 0`: `N = 1`; load-bearing, `N = 0` makes the set `{0}`). Each note names
+objects for the hypotheses they satisfy only.
+
+**`ARCHITECTURE.md`** (written on this branch, the six rows: RingScope, TateModel — its imports cell now with
+`Rigidity/TateLocal`, the coordinator's word —, TateLocal, TateArch, TateCharacter, ThinBoxes 14 → 13 leaves).
+
+**`LEAN.md` § Searching — Lean**, five lines (each follows the last line there):
+- "A statement moved between modules, text unchanged, stores its instance binders under names that carry the new file's
+  module (`inst._@.<module>.<n>._hygCtx._hyg.<k>`): its stored type differs from the old in exactly those tokens and Lean's
+  hash of it is equal; a move check rewrites the two module names there and no other, for the moved constant only
+  (`tools/fs131_itt1_statements.py`, `TateModel.sigmaCompactSpace`, 21 tokens of 4,006) (FS131-ITT1)."
+- "A `simp`-family tactic (`simp`, `push_cast`) rewriting under an applied definition with a type argument
+  (`archTrace (fieldI F) x`) generates `archTrace.congr_simp` in the module that asks, a public constant; an environment
+  probe after elaborating a copy does not see it (asynchronous proof bodies), the compiled module's dump does. `rw` with
+  the cast lemma (`Int.cast_neg`) instead (FS131-ITT1)."
+- "At the pin Mathlib has no σ-compactness or local compactness lemma for a restricted product beyond
+  `weaklyLocallyCompactSpace_of_cofinite` and the group instance; for adeles over a countable field, `range structureMap`
+  of the compact `∏ O_w` (Tychonoff) plus approximation at the finitely many non-integral places writes the space as
+  `⋃_{t ∈ L} (ι t + H)` (`TateModel`'s `sigmaCompactSpace_splitAdeleRing`). `O_v`'s compactness is
+  `Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField` on `Valued.integer
+  (K_v)`, one carrier with `adicCompletionIntegers` (`suffices h : CompactSpace (Valued.integer _) from h`; the DVR
+  instance by `inferInstanceAs`) (FS131-ITT1)."
+- "The trace dual of `𝓞 K` has denominators dividing `disc K`: Mathlib's `isIntegral_discr_mul_of_mem_traceDual` at
+  `integralBasis` (with `coe_discr`); no dual basis needed. A field's countability: `Finsupp.Countable.of_moduleFinite
+  (R := ℚ)` (the namespace is `Finsupp`) (FS131-ITT1)."
+- "`refine AddChar.ext fun r => ?_` does not elaborate at the pin; `refine DFunLike.ext _ _ fun r => ?_` does. An overring
+  `D ⊇ 𝓞 L` of a number field's integers needs no localization for 'every element integral at the primes `D` does not
+  invert lies in `D`': Chevalley's `Ideal.image_subset_nonunits_valuationSubring` on `{d : d x ∈ D}` and
+  `UpperHalf.exists_stablePrime_of_valuationSubring` (`RingScope`'s `stableIntegers_le_span`) (FS131-ITT1)."

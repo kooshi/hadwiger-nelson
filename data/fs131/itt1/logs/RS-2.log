@@ -1,0 +1,42 @@
+slot: admitted itt1: mem 4 GiB (hard cap), cpus 5,6
+data/fs131/itt1/work/RingScope.lean:134:36: error: Application type mismatch: The argument
+  hb i
+has type
+  ↑(∏ j, n j) * ↑(b i) ∈ R
+but is expected to have type
+  (∏ i, ↑(n i)) * ↑(b i) ∈ R
+in the application
+  Subring.mul_mem R (intCast_mem R ((b.repr a) i)) (hb i)
+data/fs131/itt1/work/RingScope.lean:189:9: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑⟨m • x, hint⟩
+in the target expression
+  ↑⟨m • x, hint⟩ ∈ D
+
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+x : ↥(fieldI F)
+hx : x ∈ stableIntegers F
+σ : ↥(fieldI F) →+* ↥(fieldI F) := conjOn ⋯
+R : Subring ↥(fieldI F) := UnitRing.unitRing σ
+M : Submodule (𝓞 ↥(fieldI F)) ↥(fieldI F) := Submodule.span (𝓞 ↥(fieldI F)) ↑R
+hMmul : ∀ y ∈ M, ∀ z ∈ M, y * z ∈ M
+D : Subring ↥(fieldI F) := { carrier := ↑M, mul_mem' := ⋯, one_mem' := ⋯, add_mem' := ⋯, zero_mem' := ⋯, neg_mem' := ⋯ }
+hRD : ∀ r ∈ R, r ∈ D
+hOD : ∀ (a : 𝓞 ↥(fieldI F)), ↑a ∈ D
+hxD : x ∉ D
+J : Ideal ↥D := { carrier := {d | ↑d * x ∈ D}, add_mem' := ⋯, zero_mem' := ⋯, smul_mem' := ⋯ }
+hJ : J ≠ ⊤
+B : ValuationSubring ↥(fieldI F)
+hDB : D ≤ B.toSubring
+hsub : ⇑D.subtype '' ↑J ⊆ ↑B.nonunits
+hσ : ∀ z ∈ B, σ z ∈ B
+m : ℤ
+hm0 : m ≠ 0
+hmx : ∀ x_1 ∈ {x}, IsIntegral ℤ (m • x_1)
+hint : IsIntegral ℤ (m • x)
+h : ↑⟨m • x, hint⟩ ∈ D
+⊢ ↑m * x ∈ D
+data/fs131/itt1/work/RingScope.lean:248:8: warning: declaration uses `sorry`
+data/fs131/itt1/work/RingScope.lean:257:8: warning: declaration uses `sorry`
+seconds=5
+exit=1

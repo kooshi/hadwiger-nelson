@@ -1,0 +1,8 @@
+slot: admitted itt1: mem 4 GiB (hard cap), cpus 5,6
+data/fs131/itt1/work/RingScope.lean:133:2: warning: 'push_cast' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+data/fs131/itt1/work/RingScope.lean:248:8: warning: declaration uses `sorry`
+data/fs131/itt1/work/RingScope.lean:257:8: warning: declaration uses `sorry`
+seconds=6
+exit=0

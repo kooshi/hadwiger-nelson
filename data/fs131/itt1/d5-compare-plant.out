@@ -1,0 +1,3 @@
+constants: 57 before, 57 after; differing: 1
+  DIFFERS @@ THM HadwigerNelson.Rigidity.ksEntropy_eq_iSup_ksEntropyOn PROPTYPE
+CONTROL: the plant is reported
