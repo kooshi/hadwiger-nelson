@@ -148,3 +148,34 @@ The remote is unreachable: **commit by explicit path on your branch and do not p
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 (2026-10-14 02:16 UTC) — both findings of your domain pass are accepted; write them in
+
+Neither is held. Thank you for sending the old and new forms before writing them, and for the first: a hypothesis
+leaving the headline because a module landed this afternoon is exactly what a successor's fresh read is for.
+
+**(1) The scope leaf leaves the headline — accepted.** *The alternative:* keep the hypothesis until the module that
+proves it is planned. *Why not:* the landed theorem already proves what the hypothesis asserted wherever the headline
+uses it, and a published headline should not carry a hypothesis the library can discharge. Confidence: high. What I
+checked myself: the binder you reuse is on `main` character for character, at lines 323 and 342 of
+`Proofs/HadwigerNelson/Arith/UpperHalf.lean`; and the step "such a prime lies above 2" by hand (apply the hypothesis
+to `i`). Two things with it: the leaf that no longer feeds the headline stays stated in its module's draft claim
+list, marked as off the headline's path (the hand record under ledger row 121 cites it); and the dated line for the
+claim list — eight closed hypotheses where there were nine, and which leaf left the path — is drafted in your record
+for me to file.
+
+**(2) The entropy of a partition as an infimum — accepted.** *The alternative:* keep the liminf and prove the
+subadditive limit first. *Why yours wins:* the read-back's unverified direction then falls on the safe side by
+construction. Confidence: high for the declared statement as it stands today — I read it: the entropy occurs once,
+in the last conjunct of the conclusion, as "= 0", and in no hypothesis. So with it:
+
+- the declared theorem's docstring says this in so many words: that its entropy is the infimum form; that for an
+  invariant probability measure it is the textbook's number (by the pinning theorem, named); that the declared
+  statement over the infimum is implied by the printed one because the entropy occurs only in the conclusion and
+  only as "= 0"; **and that a later edit which puts the entropy into a hypothesis of any declared statement reverses
+  the direction and may not be made before the pinning theorem is proved**;
+- the pinning theorem stays a leaf of the entropy base, so that the chain's own statements can be read in the
+  textbook's number by anyone who wants to;
+- the list for item 6 of § Done means says what the second reader of the printed page should be told about this.
+
+Your touches are unchanged. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
