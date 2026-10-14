@@ -66,18 +66,20 @@ theorem dualAnnihilator_dualCoannihilator_of_isClosed [Countable G] (Y : Subgrou
 /-- **D2 for every subgroup**: the annihilator of the annihilator is the closure. -/
 theorem dualAnnihilator_dualCoannihilator [Countable G] (Y : Subgroup (AddChar G Circle)) :
     dualAnnihilator (dualCoannihilator Y) = Y.topologicalClosure := by
-  sorry
+  rw [← dualCoannihilator_topologicalClosure Y]
+  exact dualAnnihilator_dualCoannihilator_of_isClosed _ Y.isClosed_topologicalClosure
 
 /-- **The case PE-1′ reads**: a closed subgroup of the dual whose annihilator is trivial is the whole dual. -/
 theorem eq_top_of_isClosed_of_dualCoannihilator_eq_bot [Countable G] (Y : Subgroup (AddChar G Circle))
     (hY : IsClosed (Y : Set (AddChar G Circle))) (h : dualCoannihilator Y = ⊥) : Y = ⊤ := by
-  sorry
+  rw [← dualAnnihilator_dualCoannihilator_of_isClosed Y hY, h, dualAnnihilator_bot]
 
 /-- **The case, on the additive carrier** `Additive (AddChar G Circle)` (`Rigidity.PieceDual M` unfolds to it at `G = M`). -/
 theorem eq_top_of_isClosed_of_dualCoannihilator_eq_bot' [Countable G] (Y : AddSubgroup (Additive (AddChar G Circle)))
     (hY : IsClosed (Y : Set (Additive (AddChar G Circle))))
     (h : dualCoannihilator (AddSubgroup.toSubgroup' Y) = ⊥) : Y = ⊤ := by
-  sorry
+  have := eq_top_of_isClosed_of_dualCoannihilator_eq_bot (AddSubgroup.toSubgroup' Y) hY h
+  exact AddSubgroup.toSubgroup'.injective (this.trans (OrderIso.map_top _).symm)
 
 /-! ## D1: the continuous characters of the dual are the evaluations -/
 
@@ -98,7 +100,11 @@ theorem evalDualHom_apply (g : G) (χ : AddChar G Circle) : evalDualHom G (Multi
 
 /-- **The evaluation map is injective**: separation (`Rigidity.exists_apply_ne_one`). -/
 theorem evalDualHom_injective : Function.Injective (evalDualHom G) := by
-  sorry
+  refine (injective_iff_map_eq_one _).mpr fun g hg => ?_
+  by_contra hne
+  have hne' : Multiplicative.toAdd g ≠ 0 := hne
+  obtain ⟨ψ, hψ⟩ := exists_apply_ne_one hne'
+  exact hψ (congrArg (fun φ : PontryaginDual (AddChar G Circle) => φ ψ) hg)
 
 namespace Duality
 
@@ -119,29 +125,89 @@ theorem extendByPow_apply (χ : AddChar G Circle) (z : Circle) (p : G × ℤ) : 
 def graphSubgroup (ψ : PontryaginDual (AddChar G Circle)) : Subgroup (AddChar (G × ℤ) Circle) where
   carrier := {ξ | ξ (0, 1) = ψ (ξ.compAddMonoidHom (AddMonoidHom.inl G ℤ))}
   one_mem' := by
-    sorry
+    show (1 : AddChar (G × ℤ) Circle) (0, 1) =
+      ψ ((1 : AddChar (G × ℤ) Circle).compAddMonoidHom (AddMonoidHom.inl G ℤ))
+    have hc : (1 : AddChar (G × ℤ) Circle).compAddMonoidHom (AddMonoidHom.inl G ℤ) = 1 :=
+      AddChar.ext _ _ fun _ => rfl
+    rw [hc, map_one, AddChar.one_apply]
   mul_mem' := by
-    sorry
+    intro ξ η hξ hη
+    show (ξ * η) (0, 1) = ψ ((ξ * η).compAddMonoidHom (AddMonoidHom.inl G ℤ))
+    have hc : (ξ * η).compAddMonoidHom (AddMonoidHom.inl G ℤ) =
+        ξ.compAddMonoidHom (AddMonoidHom.inl G ℤ) * η.compAddMonoidHom (AddMonoidHom.inl G ℤ) :=
+      AddChar.ext _ _ fun _ => rfl
+    rw [hc, map_mul, AddChar.mul_apply, (hξ : ξ (0, 1) = _), (hη : η (0, 1) = _)]
   inv_mem' := by
-    sorry
+    intro ξ hξ
+    show ξ⁻¹ (0, 1) = ψ (ξ⁻¹.compAddMonoidHom (AddMonoidHom.inl G ℤ))
+    have hc : ξ⁻¹.compAddMonoidHom (AddMonoidHom.inl G ℤ) = (ξ.compAddMonoidHom (AddMonoidHom.inl G ℤ))⁻¹ :=
+      AddChar.ext _ _ fun _ => rfl
+    rw [hc, map_inv, AddChar.inv_apply', (hξ : ξ (0, 1) = _)]
 
 /-- The graph is closed: both sides of its equation are continuous in `ξ`. -/
 theorem isClosed_graphSubgroup (ψ : PontryaginDual (AddChar G Circle)) :
     IsClosed (graphSubgroup ψ : Set (AddChar (G × ℤ) Circle)) := by
-  sorry
+  have h1 : Continuous fun ξ : AddChar (G × ℤ) Circle => ξ (0, 1) :=
+    continuous_induced_rng.2 (continuous_evalChar (G × ℤ) (0, 1))
+  have h2 : Continuous fun ξ : AddChar (G × ℤ) Circle => ξ.compAddMonoidHom (AddMonoidHom.inl G ℤ) :=
+    continuous_induced_rng.2 (continuous_pi fun g => continuous_evalChar (G × ℤ) (g, 0))
+  exact isClosed_eq h1 (ψ.continuous.comp h2)
 
 /-- **The step of D1**: some `(g, 1)` is killed by the graph. D2 at `G × ℤ`: the character `(g, n) ↦ zⁿ` is in the graph only at
 `z = 1`, so for `z ≠ 1` the annihilator holds a `(g, n)` with `zⁿ ≠ 1`; if `1` were not among those `n`, a character of `ℤ ⧸ P`
 not `1` at `1` (separation) would be such a `z`, with `zⁿ = 1` on all of them. -/
 theorem exists_mem_dualCoannihilator_graphSubgroup [Countable G] (ψ : PontryaginDual (AddChar G Circle)) :
     ∃ g : G, (g, (1 : ℤ)) ∈ dualCoannihilator (graphSubgroup ψ) := by
-  sorry
+  set Y := graphSubgroup ψ with hYdef
+  set P : AddSubgroup ℤ := (dualCoannihilator Y).map (AddMonoidHom.snd G ℤ) with hP
+  suffices h1 : (1 : ℤ) ∈ P by
+    obtain ⟨p, hp, hp1⟩ := AddSubgroup.mem_map.mp h1
+    refine ⟨p.1, ?_⟩
+    have hp' : p = (p.1, 1) := Prod.ext rfl hp1
+    rw [← hp']
+    exact hp
+  by_contra h1
+  have hq : (QuotientAddGroup.mk 1 : ℤ ⧸ P) ≠ 0 := by
+    rwa [Ne, QuotientAddGroup.eq_zero_iff]
+  obtain ⟨θ, hθ⟩ := exists_apply_ne_one hq
+  set z := θ (QuotientAddGroup.mk 1) with hz
+  have ht : extendByPow (1 : AddChar G Circle) z ∉ Y := by
+    intro hmem
+    have he : extendByPow (1 : AddChar G Circle) z (0, 1) =
+        ψ ((extendByPow (1 : AddChar G Circle) z).compAddMonoidHom (AddMonoidHom.inl G ℤ)) := hmem
+    have hc : (extendByPow (1 : AddChar G Circle) z).compAddMonoidHom (AddMonoidHom.inl G ℤ) = 1 :=
+      AddChar.ext _ _ fun g => by simp
+    rw [hc, map_one, extendByPow_apply] at he
+    simp only [AddChar.one_apply, one_mul, zpow_one] at he
+    exact hθ he
+  rw [← dualAnnihilator_dualCoannihilator_of_isClosed Y (isClosed_graphSubgroup ψ)] at ht
+  simp only [mem_dualAnnihilator, not_forall] at ht
+  obtain ⟨p, hp, hpz⟩ := ht
+  apply hpz
+  rw [extendByPow_apply, AddChar.one_apply, one_mul]
+  have hp2 : (QuotientAddGroup.mk p.2 : ℤ ⧸ P) = 0 :=
+    (QuotientAddGroup.eq_zero_iff _).mpr (AddSubgroup.mem_map.mpr ⟨p, hp, rfl⟩)
+  rw [hz, ← AddChar.map_zsmul_eq_zpow, ← QuotientAddGroup.mk_zsmul, smul_eq_mul, mul_one, hp2,
+    AddChar.map_zero_eq_one]
 
 end Duality
 
 /-- **D1, the duality theorem for a countable discrete group**: every continuous character of `Ĝ` is an evaluation. -/
 theorem evalDualHom_surjective [Countable G] : Function.Surjective (evalDualHom G) := by
-  sorry
+  intro ψ
+  obtain ⟨g, hg⟩ := Duality.exists_mem_dualCoannihilator_graphSubgroup ψ
+  refine ⟨Multiplicative.ofAdd (-g), PontryaginDual.ext fun χ => ?_⟩
+  have hc : (Duality.extendByPow χ (ψ χ)).compAddMonoidHom (AddMonoidHom.inl G ℤ) = χ :=
+    AddChar.ext _ _ fun x => by simp
+  have hmem : Duality.extendByPow χ (ψ χ) ∈ Duality.graphSubgroup ψ := by
+    show Duality.extendByPow χ (ψ χ) (0, 1) =
+      ψ ((Duality.extendByPow χ (ψ χ)).compAddMonoidHom (AddMonoidHom.inl G ℤ))
+    rw [hc, Duality.extendByPow_apply]
+    simp
+  have h1 := hg _ hmem
+  rw [Duality.extendByPow_apply, zpow_one] at h1
+  rw [evalDualHom_apply, AddChar.map_neg_eq_inv]
+  exact (eq_inv_of_mul_eq_one_right h1).symm
 
 variable (G) in
 /-- **`G ≅ (Ĝ)^`**, by evaluation. -/

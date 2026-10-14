@@ -1,0 +1,176 @@
+slot: admitted idg1: mem 4 GiB (hard cap), cpus 6,7
+data/fs131/idg1/work/DualGroup.lean:65:43: error: Application type mismatch: The argument
+  fun g => Circle.ext (congrFun h g)
+has type
+  ∀ (g : G), χ g = ψ g
+of sort `Prop` but is expected to have type
+  AddChar ?m.29 ?m.30
+of sort `Type (max ?u.24 ?u.23)` in the application
+  AddChar.ext fun g => Circle.ext (congrFun h g)
+data/fs131/idg1/work/DualGroup.lean:74:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?ψ 0
+in the target expression
+  (fun g => ↑(χ g)) 0 = 1
+
+case mp.refine_1
+G : Type u_1
+inst✝ : AddCommGroup G
+χ : AddChar G Circle
+⊢ (fun g => ↑(χ g)) 0 = 1
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    χ g
+  has type
+    Circle
+  but is expected to have type
+    ↥(Submonoid.unitSphere ℂ)
+  in the application
+    ↑(χ g)
+data/fs131/idg1/work/DualGroup.lean:75:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?ψ (?x + ?y)
+in the target expression
+  (fun g => ↑(χ g)) (g + h) = (fun g => ↑(χ g)) g * (fun g => ↑(χ g)) h
+
+case mp.refine_2
+G : Type u_1
+inst✝ : AddCommGroup G
+χ : AddChar G Circle
+g h : G
+⊢ (fun g => ↑(χ g)) (g + h) = (fun g => ↑(χ g)) g * (fun g => ↑(χ g)) h
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    χ g
+  has type
+    Circle
+  but is expected to have type
+    ↥(Submonoid.unitSphere ℂ)
+  in the application
+    ↑(χ g)
+data/fs131/idg1/work/DualGroup.lean:81:9: error: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+data/fs131/idg1/work/DualGroup.lean:130:19: error: Invalid rewrite argument: Expected an equality or iff proof or definition name, but `?m.34` is a value of type
+  ?m.33
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    χ g
+  has type
+    Circle
+  but is expected to have type
+    ↥(Submonoid.unitSphere ℂ)
+  in the application
+    ↑(χ g)
+data/fs131/idg1/work/DualGroup.lean:163:21: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?n • 1
+in the target expression
+  (fun x => x • 1) n = ↑n
+
+f : ℚ →+ Additive Circle := AddMonoidHom.mk' (fun q => Additive.ofMul (Circle.exp (2 * Real.pi * ↑q))) ⋯
+hf : AddSubgroup.zmultiples 1 ≤ f.ker
+q : ℚ
+hx : f q = 0
+h1 : Circle.exp (2 * Real.pi * ↑q) = 1
+n : ℤ
+hn : 2 * Real.pi * ↑q = ↑n * (2 * Real.pi)
+hq : ↑q = ↑n
+hq' : q = ↑n
+⊢ (fun x => x • 1) n = ↑n
+data/fs131/idg1/work/DualGroup.lean:174:48: error: elaboration function for `Mathlib.Tactic.superscriptTerm` has not been implemented
+  ᵇ
+data/fs131/idg1/work/DualGroup.lean:175:51: error: Function expected at
+  χ
+but this term has type
+  ?m.8
+
+Note: Expected a function because this term is being applied to the argument
+  r
+data/fs131/idg1/work/DualGroup.lean:179:8: error: stuck at solving universe constraint
+  ?u.14 + 1 =?= imax (u_1 + 1) ?u.18
+while trying to unify
+  AddChar G Circle →
+    sorryAx.{?u.18 + 1} (Unit → Sort ?u.18) true
+      (Function.const Lean.Name ()
+        `data.fs131.idg1.work.DualGroup.174.48.174.51.48.51._sorry._@.data.fs131.idg1.work.DualGroup.1361023032._hygCtx._hyg.13) : Sort
+    (imax (u_1 + 1) ?u.18)
+with
+  AddChar G Circle →
+    sorryAx.{?u.18 + 1} (Unit → Sort ?u.18) true
+      (Function.const Lean.Name ()
+        `data.fs131.idg1.work.DualGroup.174.48.174.51.48.51._sorry._@.data.fs131.idg1.work.DualGroup.1361023032._hygCtx._hyg.13) : Sort
+    (imax (u_1 + 1) ?u.18)
+data/fs131/idg1/work/DualGroup.lean:179:8: error: stuck at solving universe constraint
+  ?u.15 + 1 =?= imax (u_1 + 1) ?u.18
+while trying to unify
+  AddChar G Circle →
+    sorryAx.{?u.18 + 1} (Unit → Sort ?u.18) true
+      (Function.const Lean.Name ()
+        `data.fs131.idg1.work.DualGroup.174.48.174.51.48.51._sorry._@.data.fs131.idg1.work.DualGroup.1361023032._hygCtx._hyg.13) : Sort
+    (imax (u_1 + 1) ?u.18)
+with
+  AddChar G Circle →
+    sorryAx.{?u.18 + 1} (Unit → Sort ?u.18) true
+      (Function.const Lean.Name ()
+        `data.fs131.idg1.work.DualGroup.174.48.174.51.48.51._sorry._@.data.fs131.idg1.work.DualGroup.1361023032._hygCtx._hyg.13) : Sort
+    (imax (u_1 + 1) ?u.18)
+data/fs131/idg1/work/DualGroup.lean:184:8: error: stuck at solving universe constraint
+  ?u.11 + 1 =?= imax (u_1 + 1) ?u.6
+while trying to unify
+  AddChar G Circle →
+    sorryAx.{?u.6 + 1} (Unit → Sort ?u.6) true
+      (Function.const Lean.Name ()
+        `data.fs131.idg1.work.DualGroup.174.48.174.51.48.51._sorry._@.data.fs131.idg1.work.DualGroup.1361023032._hygCtx._hyg.13) : Sort
+    (imax (u_1 + 1) ?u.6)
+with
+  AddChar G Circle →
+    sorryAx.{?u.6 + 1} (Unit → Sort ?u.6) true
+      (Function.const Lean.Name ()
+        `data.fs131.idg1.work.DualGroup.174.48.174.51.48.51._sorry._@.data.fs131.idg1.work.DualGroup.1361023032._hygCtx._hyg.13) : Sort
+    (imax (u_1 + 1) ?u.6)
+data/fs131/idg1/work/DualGroup.lean:188:8: error: stuck at solving universe constraint
+  ?u.7 + 1 =?= imax (u_1 + 1) ?u.8
+while trying to unify
+  AddChar G Circle →
+    sorryAx.{?u.8 + 1} (Unit → Sort ?u.8) true
+      (Function.const Lean.Name ()
+        `data.fs131.idg1.work.DualGroup.174.48.174.51.48.51._sorry._@.data.fs131.idg1.work.DualGroup.1361023032._hygCtx._hyg.13) : Sort
+    (imax (u_1 + 1) ?u.8)
+with
+  AddChar G Circle →
+    sorryAx.{?u.8 + 1} (Unit → Sort ?u.8) true
+      (Function.const Lean.Name ()
+        `data.fs131.idg1.work.DualGroup.174.48.174.51.48.51._sorry._@.data.fs131.idg1.work.DualGroup.1361023032._hygCtx._hyg.13) : Sort
+    (imax (u_1 + 1) ?u.8)
+data/fs131/idg1/work/DualGroup.lean:196:61: error: elaboration function for `Mathlib.Tactic.superscriptTerm` has not been implemented
+  ᵇ
+data/fs131/idg1/work/DualGroup.lean:196:8: error: stuck at solving universe constraint
+  imax (u_1 + 1) ?u.10 =?= ?u.5 + 1
+while trying to unify
+  Sort (imax (max 1 (u_1 + 1)) ?u.10) : Type (imax (max 1 (u_1 + 1)) ?u.10)
+with
+  Type ?u.5 : Type (?u.5 + 1)
+data/fs131/idg1/work/DualGroup.lean:237:66: error(lean.unknownIdentifier): Unknown identifier `fourierAlg`
+data/fs131/idg1/work/DualGroup.lean:236:91: error: unsolved goals
+G : Type u_1
+inst✝³ : AddCommGroup G
+inst✝² : Countable G
+σ σ' : Measure (AddChar G Circle)
+inst✝¹ : IsFiniteMeasure σ
+inst✝ : IsFiniteMeasure σ'
+h : ∀ (r : G), ∫ (χ : AddChar G Circle), ↑(χ r) ∂σ = ∫ (χ : AddChar G Circle), ↑(χ r) ∂σ'
+⊢ σ = σ'
+data/fs131/idg1/work/DualGroup.lean:269:6: error: Type mismatch: After simplification, term
+  Measure.haarMeasure_self
+ has type
+  @Eq ENNReal ((Measure.haarMeasure ⊤) Set.univ) 1
+but is expected to have type
+  @Eq ENNReal ((dualHaar G) Set.univ) 1
+seconds=25
+exit=1

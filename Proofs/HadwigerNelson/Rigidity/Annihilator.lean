@@ -59,8 +59,8 @@ theorem mem_dualCoannihilator {Y : Subgroup (AddChar G Circle)} {g : G} :
 
 /-- **The two annihilators kill each other**: `Y ≤ N^⊥` exactly when `N ≤ Y^⊥`. -/
 theorem le_dualAnnihilator_iff {N : AddSubgroup G} {Y : Subgroup (AddChar G Circle)} :
-    Y ≤ dualAnnihilator N ↔ N ≤ dualCoannihilator Y := by
-  sorry
+    Y ≤ dualAnnihilator N ↔ N ≤ dualCoannihilator Y :=
+  ⟨fun h _ hg _ hχ => h hχ _ hg, fun h _ hχ _ hg => h hg _ hχ⟩
 
 /-- **The Galois connection** (antitone on both sides, written through `OrderDual`); every closure statement about the pair
 is a `GaloisConnection` lemma of Mathlib. -/
@@ -89,43 +89,71 @@ theorem dualAnnihilator_antitone : Antitone (dualAnnihilator : AddSubgroup G →
 
 /-- **`((Y^⊥)^⊥)^⊥ = Y^⊥`** (the Galois connection's `u ∘ l ∘ u = u`). -/
 theorem dualCoannihilator_dualAnnihilator_dualCoannihilator (Y : Subgroup (AddChar G Circle)) :
-    dualCoannihilator (dualAnnihilator (dualCoannihilator Y)) = dualCoannihilator Y := by
-  sorry
+    dualCoannihilator (dualAnnihilator (dualCoannihilator Y)) = dualCoannihilator Y :=
+  le_antisymm (dualCoannihilator_antitone (le_dualAnnihilator_dualCoannihilator Y))
+    (le_dualCoannihilator_dualAnnihilator _)
 
 /-- `⊥^⊥ = Ĝ`: every character is `1` at `0`. -/
 @[simp]
-theorem dualAnnihilator_bot : dualAnnihilator (⊥ : AddSubgroup G) = ⊤ := by
-  sorry
+theorem dualAnnihilator_bot : dualAnnihilator (⊥ : AddSubgroup G) = ⊤ :=
+  eq_top_iff.mpr fun _ _ g hg => by rw [AddSubgroup.mem_bot.mp hg, AddChar.map_zero_eq_one]
 
 /-- `⊥^⊥ = G` on the other side: the trivial character is `1` everywhere. -/
 @[simp]
-theorem dualCoannihilator_bot : dualCoannihilator (⊥ : Subgroup (AddChar G Circle)) = ⊤ := by
-  sorry
+theorem dualCoannihilator_bot : dualCoannihilator (⊥ : Subgroup (AddChar G Circle)) = ⊤ :=
+  eq_top_iff.mpr fun g _ χ hχ => by rw [Subgroup.mem_bot.mp hχ, AddChar.one_apply]
 
 /-- **`Ĝ^⊥ = 0`**: separation (`Rigidity.exists_apply_ne_one`). -/
 @[simp]
 theorem dualCoannihilator_top : dualCoannihilator (⊤ : Subgroup (AddChar G Circle)) = ⊥ := by
-  sorry
+  refine eq_bot_iff.mpr fun g hg => AddSubgroup.mem_bot.mpr ?_
+  by_contra hne
+  obtain ⟨ψ, hψ⟩ := exists_apply_ne_one hne
+  exact hψ (hg ψ (Subgroup.mem_top ψ))
 
 /-- `{χ | χ g = 1}` is closed (read through `ℂ`, where the evaluation is continuous: in this module's environment
 `T2Space Circle` is not synthesized). -/
 theorem isClosed_setOf_apply_eq_one (g : G) : IsClosed {χ : AddChar G Circle | χ g = 1} := by
-  sorry
+  have h : {χ : AddChar G Circle | χ g = 1} = (fun χ : AddChar G Circle => (χ g : ℂ)) ⁻¹' {1} := by
+    ext χ
+    simp [Circle.ext_iff]
+  rw [h]
+  exact isClosed_singleton.preimage (continuous_evalChar G g)
 
 /-- **`N^⊥` is closed** in the pointwise topology: an intersection of the closed sets `{χ | χ g = 1}`. -/
 theorem isClosed_dualAnnihilator (N : AddSubgroup G) : IsClosed (dualAnnihilator N : Set (AddChar G Circle)) := by
-  sorry
+  have h : (dualAnnihilator N : Set (AddChar G Circle)) = ⋂ g ∈ N, {χ | χ g = 1} := by
+    ext χ
+    simp
+  rw [h]
+  exact isClosed_biInter fun g _ => isClosed_setOf_apply_eq_one g
 
 /-- **A subgroup and its closure have one annihilator**: `{χ | χ g = 1}` is closed. -/
 theorem dualCoannihilator_topologicalClosure (Y : Subgroup (AddChar G Circle)) :
     dualCoannihilator Y.topologicalClosure = dualCoannihilator Y := by
-  sorry
+  refine le_antisymm (dualCoannihilator_antitone Y.le_topologicalClosure) fun g hg χ hχ => ?_
+  have hcl : IsClosed {χ : AddChar G Circle | χ g = 1} := isClosed_setOf_apply_eq_one g
+  have hmem : χ ∈ closure (Y : Set (AddChar G Circle)) := by
+    rwa [← Subgroup.topologicalClosure_coe]
+  exact closure_minimal (fun ψ hψ => hg ψ hψ) hcl hmem
 
 /-- **`N^⊥` is finite when `G ⧸ N` is**: restriction along `G → G ⧸ N` identifies `N^⊥` with the characters of the finite
 group `G ⧸ N` (`AddChar.instFintype`). Read by PE-1′'s total irreducibility at `N ≠ 0`. -/
 theorem finite_dualAnnihilator (N : AddSubgroup G) [Finite (G ⧸ N)] :
     (dualAnnihilator N : Set (AddChar G Circle)).Finite := by
-  sorry
+  let e : dualAnnihilator N → AddChar (G ⧸ N) ℂ := fun χ =>
+    Circle.coeHom.compAddChar (AddChar.toAddMonoidHomEquiv.symm
+      (QuotientAddGroup.lift N (χ.1.toAddMonoidHom) fun g hg => by
+        show Additive.ofMul (χ.1 g) = 0
+        rw [χ.2 g hg]
+        rfl))
+  have he : Function.Injective e := by
+    intro χ ψ h
+    refine Subtype.ext (AddChar.ext _ _ fun g => Circle.ext ?_)
+    have := congrArg (fun φ : AddChar (G ⧸ N) ℂ => φ (QuotientAddGroup.mk g)) h
+    exact this
+  haveI : Finite (dualAnnihilator N) := Finite.of_injective e he
+  exact Set.toFinite _
 
 -- Spec: at `N = ⊤` the annihilator is the trivial character alone (fails if `dualAnnihilator` drifts to `{χ | ∃ g ∈ N, …}`).
 example : dualAnnihilator (⊤ : AddSubgroup ℤ) = ⊥ := by

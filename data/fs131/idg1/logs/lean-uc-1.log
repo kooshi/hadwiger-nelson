@@ -1,0 +1,12 @@
+slot: admitted idg1: mem 4 GiB (hard cap), cpus 4,5
+data/fs131/idg1/work/UnitCircle.lean:125:93: error: Application type mismatch: The argument
+  hgh
+has type
+  (fun g => uvRing (toUnitVector g)) g = (fun g => uvRing (toUnitVector g)) h
+but is expected to have type
+  ↑g = ↑h
+in the application
+  congrArg Subtype.val hgh
+data/fs131/idg1/work/UnitCircle.lean:219:8: warning: declaration uses `sorry`
+seconds=4
+exit=1

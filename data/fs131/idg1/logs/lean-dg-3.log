@@ -1,0 +1,11 @@
+slot: waiting (ledger 20 + 4 > budget 22 GiB)
+slot: admitted idg1: mem 4 GiB (hard cap), cpus 4,5
+data/fs131/idg1/work/DualGroup.lean:269:17: warning: This simp argument is unused:
+  Pi.smul_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [̵P̵i̵.̵s̵m̵u̵l̵_̵a̵p̵p̵l̵y̵,̵ ̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+seconds=10
+exit=0

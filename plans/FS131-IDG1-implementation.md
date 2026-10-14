@@ -101,3 +101,112 @@ plants eight faults and all 8 are reported, "the check can fail" (`logs/statemen
 changed definition value, a missing leaf, a theorem made a definition, a new public constant off the allow-list, an axiom,
 a moved data field of a ruled definition (`ofPow`'s `u` and `w` swapped), and a changed statement in the downstream
 `Pieces`.
+
+## Stage 2 — SAVED: lane D proved (`Rigidity/DualGroup`, 13 leaves), through build 2
+
+**Written in a copy first** (`data/fs131/idg1/work/DualGroup.lean`, while build 1 walked; `LEAN.md`, FS124-I5's line):
+three elaborations under `data/fs131/idg1/lean1.sh` (`logs/lean-dg-1.log` … `lean-dg-3.log`; the third exit 0, 10 s, no
+`sorry`), about 40 minutes from the first line. The copy differs from the skeleton only in proofs: `diff` shows the 13
+`sorry` lines and four proof heads (`:= by` → `:=` or `where`) removed, nothing else of the skeleton's text. Every leaf
+went by the plan's route (KN8 § 2.5), with one private definition or lemma where the route needed a name:
+
+- `isClosedEmbedding_coe`: `⟨⟨⟨rfl⟩, injective⟩, closed range⟩`; the range is `{f 0 = 1} ∩ ⋂ {f (g+h) = f g f h} ∩ ⋂
+  {‖f g‖ = 1}`, each closed set a `have` of its own (one `refine` over all three timed out at `isDefEq`).
+- `isTopologicalGroup_dual`: coordinates through `continuous_induced_rng`, `AddChar.mul_apply`, `AddChar.inv_apply'`,
+  `Circle.coe_inv_eq_conj`.
+- `compactSpace_dual`: the range inside `univ.pi (sphere 0 1)`, `IsInducing.isCompact_iff`.
+- `polishSpace_dual`: `IsClosedEmbedding.polishSpace`. `borelSpace_dual`: `borel_comap` and
+  `BorelSpace.measurable_eq (α := G → ℂ)`. `standardBorelSpace_dual`: `inferInstance`.
+- `exists_apply_ne_one`: `CharacterModule.exists_character_apply_ne_zero_of_ne_zero`, then the private
+  `exists_ratCircle` — `ℚ/ℤ → Additive Circle`, `q ↦ exp(2πiq)` by `QuotientAddGroup.lift`, with trivial kernel by
+  `Circle.exp_eq_one`.
+- `measure_eq_of_fourier`: the private `evalBCF r` (evaluation as a bounded continuous function, `mkOfCompact`) and
+  `fourierAlg` — **a star subalgebra whose carrier is the span of the evaluations**, closed under products by a double
+  `Submodule.span_induction` (`evalBCF (r + s) = evalBCF r * evalBCF s`), under `star` (`star (evalBCF r) =
+  evalBCF (-r)`), containing `1 = evalBCF 0`. Integrals agree on it by one span induction; separation is
+  `AddChar.ext`; `ext_of_forall_mem_subalgebra_integral_eq_of_polish` concludes. The plan's `StarAlgebra.adjoin` is not
+  needed: the span is already the algebra.
+- `isProbabilityMeasure_dualHaar`, `isHaarFourier_dualHaar` (left invariance against `ψ` with `ψ r ≠ 1`),
+  `isHaarFourier_iff` (Fourier uniqueness split at `r = 0`), `IsHaarFourier.map_dual` (`integral_map`,
+  `map_ne_zero_iff`), `IsHaarFourier.map_mul_right` (`integral_evalChar_map_mulRight`).
+
+**Re-price** (Done means item 2, from the first two leaves): `isClosedEmbedding_coe` and `isTopologicalGroup_dual`
+took two of the three iterations between them, minutes each, and the hard leaf, Fourier uniqueness, one iteration —
+the module about 40 minutes against KN8's plan, which did not price it in hours; what was left (PD-I and U) was then
+priced at under an hour each, and took about 20 minutes of writing between them (stages 3 and 4).
+
+**Build 2** (`data/fs131/idg1/build.sh 2 8`, all three lanes folded in): `==> build: OK — 249 of 249 batches, 9
+module(s) rebuilt, 6 module(s) with warnings, 7m57s`, `exit=0` (`logs/build-2.log`; full output
+`build/gate/build/20261014T063909Z-1993210.log`). Rebuilt: my six, `Pieces`, `EntropySplitMax`, `Proofs`; 482 s, peak
+3.45 GiB for one process (`build-2.times`). **The only warning from my six files is `UnitCircle.lean:219`,
+`exists_admissiblePair`'s `sorry` (lane A's leaf, not mine)**; the other 27 are `declaration uses 'sorry'` in `Pieces`,
+`EntropySplitMax`, `PositiveEntropy` and `Entropy`, none of them mine.
+
+**No statement changed, from the kernel's side** (`tools/fs131_idg1_statements.py statements-before.txt
+statements-after-2.txt 3b531d1d2`, `logs/statements-compare-2.out`): PASS — 154 named constants of the eight modules
+(kinds and types), 37 data definitions' values, the 2 ruled definitions' data views, 5 `example` heads, all the same;
+**no new public constant**; 7 new private constants, all `DualGroup`'s (`evalBCF`, `evalBCF_apply`, `evalBCF_add`,
+`evalBCF_zero`, `star_evalBCF`, `fourierAlg`, `exists_ratCircle`); internal names 84 → 115, not compared; no axiom.
+The two ruled definitions read `RULED PROOF FIELD`: `Duality.graphSubgroup` and `AdmissiblePair.ofPow`, values moved
+with their proof fields, data fields the same. **The control on the same two dumps** plants the eight faults of stage 1
+and all 8 are reported (`logs/statements-compare-2-control.out`).
+
+**Axioms, from the built tree** (`data/fs131/idg1/lean/Axioms.lean` → `axioms-after-2.txt`, read by
+`tools/fs131_idg1_axioms.py`; `logs/axioms-check-2.out`): PASS. 111 records of the six modules (`DualGroup` 31,
+`Annihilator` 18, `SubgroupHaar` 8, `Duality` 17, `DualConnected` 4, `UnitCircle` 33), private helpers included: **110 on
+the standard three or fewer**, and `exists_admissiblePair` on those and `sorryAx`, its `sorry` its own. None rests on the
+declared printed theorem. The planted record (`positive_entropy_rigidity_of_polishSpace`, on the declared theorem) is
+reported. **The control** plants `sorryAx` in `measure_eq_of_fourier`, the declared theorem in `connectedSpace_dual`
+and a downstream record whose `sorry` comes from `isClosedEmbedding_coe`: 3 of 3 reported
+(`logs/axioms-check-2-control.out`).
+
+**What the downstream modules now wait on** (the same print, `DOWNSTREAM` rows; not mine): of `Pieces`' and
+`EntropySplitMax`'s 44 records, 21 rest on no `sorry`, and the `sorry` of the other 23 comes only from those two
+modules' own leaves (`IsPiece.mulR_mem`, `pieceMul_zero`, `pieceMul_add`, `PieceDual.continuous_dualMap`,
+`isSolenoid_pieceDual`, `isTotallyIrreducible_pieceAction`, …, `condExpKernel_ergodicDecomposition`,
+`rotInv_sub_maxMultiple`), **none from a declaration of my six files**.
+
+## Stage 3 — SAVED: lane PD-I proved (`Annihilator`, `SubgroupHaar`, `Duality`, `DualConnected`), through build 2
+
+**The route copies folded in.** `data/fs131/kpd1/route/{Annihilator,SubgroupHaar,Duality,DualConnected}.lean` copied to
+`data/fs131/idg1/work/`, then over the modules. Against the skeletons each removes only `sorry` lines and four proof
+heads of `Annihilator` (`:= by` → `:=`): checked by `diff`, nothing else of the skeleton's text moves. The planner's
+docstring difference in `Annihilator` (`isClosed_setOf_apply_eq_one`'s) is not there: the texts are identical.
+
+**The two spec leaves** (KPD1 § 4.1 items 3 and 4), written in the copies (`logs/lean-sh-1.log`, `lean-dc-1.log`; exit 0):
+- `subgroupHaar_bot` (`subgroupHaar ⊥ = dirac 1`): the plan's route — `ext s hs`, `Measure.map_apply`,
+  `Measure.dirac_apply'`; every `y : ↥⊥` is `1` (`Subgroup.mem_bot`), so the preimage is `univ` or `∅` as `1 ∈ s` or
+  not; `Set.indicator_of_mem` / `indicator_of_notMem`.
+- `not_connectedSpace_dual_zmod_two`: every `χ` has `χ(1)·χ(1) = χ(1 + 1) = 1`, so `χ 1 = ±1` (`mul_self_eq_one_iff`);
+  separation gives `χ₁` with `χ₁ 1 = −1`; the real part of `χ 1` is continuous, `≤ 0` at `χ₁` and `≥ 0` at `1`, so
+  `intermediate_value_univ` gives a `χ` with real part `0` — against `±1`.
+
+**The stored terms against the dumps** (build 2; stage 2's comparison covers these four modules): no stored type moved,
+the data definitions' values (`dualAnnihilator`, `dualCoannihilator`, `subgroupHaar`, `evalDualHom`, `extendByPow`,
+`dualDualEquiv`, `additiveDualDualEquiv`) are the same, and `graphSubgroup`'s data field is the same while its three proof
+fields are now proved (the ruled difference KPD1 § 4.1 item 5 names). **`Rigidity/Pieces` against the planner's own dump**
+(`data/fs131/kpd1/dump/pieces-after.txt`, taken after its re-pointing): all 74 constants identical in kind, type and
+value to this job's dump after build 2 (`logs/pieces-vs-planner.out`). **KPD1's expectation is met**: D2
+(`dualAnnihilator_dualCoannihilator_of_isClosed`, its closure form, the case and its additive form), D1
+(`evalDualHom_surjective`, `dualDualEquiv`, `additiveDualDualEquiv`), D3 (`connectedSpace_dual`) and
+`finite_dualAnnihilator` all rest on the standard three (stage 2's axiom print).
+
+## Stage 4 — SAVED: lane U proved (`Rigidity/UnitCircle`, 7 of its 8 leaves), through build 2
+
+Written in a copy (`logs/lean-uc-1.log`, one error; `lean-uc-2.log`, exit 0, the one warning `exists_admissiblePair`'s
+`sorry`), by KN8 § 2.5's routes:
+- `uvRing_toUnitVector_mul`, `_one`: `Subtype.ext`, a `show` of the coerced equation, `Subgroup.coe_mul`,
+  `Circle.coe_mul` / `OneMemClass.coe_one`, `Circle.coe_one`.
+- `rotInv_iff`: `→` at `toUnitVector g`; `←` through `(unitCircleEquiv F).surjective`.
+- `countable_unitCircle`: `Function.Injective.countable` into `unitRing F` (countable by
+  `countable_unitRing_of_numberField`).
+- `IsHaarFourier.rotInv`: `uvRing u ≠ 0` (its norm is `1`), so `mulLeft (uvRing u)` is injective
+  (`mul_left_cancel₀`), and `IsHaarFourier.map_dual_eq` — `rot u` is by definition the dual of `mulLeft`.
+- `AdmissiblePair.u_nonTorsion`: `u^k = 1` in `unitCircle F` (coercions injective), so `zpowHom` takes `![k, 0]` to `1`;
+  injectivity and the first coordinate give `k = 0`.
+- `AdmissiblePair.ofPow`'s `generates`: `≤` by `Subfield.closure_le` (each value is a point of `unitCircle F`); `≥`:
+  `hw` at `Λ.index` (positive by `FiniteIndex.index_ne_zero`), and `w ^ Λ.index` is the value at `Λ.index • ![0, 1] ∈ Λ`
+  (`AddSubgroup.nsmul_index_mem`), so `closure {w ^ Λ.index} ≤ closure (image)`.
+
+**Not mine and untouched:** `exists_admissiblePair` (lane A). Its print rests on `sorryAx`, its own; nothing of the six
+files reads it.

@@ -1,0 +1,4 @@
+slot: admitted idg1: mem 4 GiB (hard cap), cpus 4,5
+data/fs131/idg1/work/UnitCircle.lean:219:8: warning: declaration uses `sorry`
+seconds=3
+exit=0

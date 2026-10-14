@@ -80,10 +80,14 @@ def unitCircleEquiv : unitCircle F ≃ unitVectors F where
 /-- The unit vector of a product is the product of the unit vectors, in `R`. -/
 theorem uvRing_toUnitVector_mul (g h : unitCircle F) :
     uvRing (toUnitVector (g * h)) = uvRing (toUnitVector g) * uvRing (toUnitVector h) := by
-  sorry
+  refine Subtype.ext ?_
+  show (((g * h : unitCircle F) : Circle) : ℂ) = ((g : Circle) : ℂ) * ((h : Circle) : ℂ)
+  rw [Subgroup.coe_mul, Circle.coe_mul]
 
 theorem uvRing_toUnitVector_one : uvRing (toUnitVector (1 : unitCircle F)) = 1 := by
-  sorry
+  refine Subtype.ext ?_
+  show (((1 : unitCircle F) : Circle) : ℂ) = 1
+  rw [OneMemClass.coe_one, Circle.coe_one]
 
 /-- **The rotation action** of the unit vectors on `R̂`: `(g • χ)(r) = χ(g r)` — an action because `R` is commutative. -/
 instance instMulActionDual : MulAction (unitCircle F) (Dual F) where
@@ -106,7 +110,9 @@ instance measurableConstSMul_dual : MeasurableConstSMul (unitCircle F) (Dual F) 
 
 /-- `RotInv` in the language of the action: every `g • ·` preserves the measure. -/
 theorem rotInv_iff {τ : Measure (Dual F)} : RotInv F τ ↔ ∀ g : unitCircle F, τ.map (g • ·) = τ := by
-  sorry
+  refine ⟨fun h g => h (toUnitVector g), fun h u => ?_⟩
+  obtain ⟨g, rfl⟩ := (unitCircleEquiv F).surjective u
+  exact h g
 
 /-- **`R = ℤ[U]` is countable** over a number field (`SpectralChain.countable_unitRing`), as an instance: the standard
 Borel structure of `Dual F` (`Rigidity.standardBorelSpace_dual`) reads it. -/
@@ -115,13 +121,23 @@ instance countable_unitRing_of_numberField [NumberField F] : Countable (unitRing
 
 /-- **`unitCircle F` is countable** over a number field: it injects into `R`. -/
 instance countable_unitCircle [NumberField F] : Countable (unitCircle F) := by
-  sorry
+  refine Function.Injective.countable (f := fun g : unitCircle F => uvRing (toUnitVector g)) fun g h hgh => ?_
+  have hc : (((g : unitCircle F) : Circle) : ℂ) = ((h : Circle) : ℂ) := congrArg (fun x : unitRing F => (x : ℂ)) hgh
+  exact Subtype.ext (Circle.ext hc)
 
 /-- **A Haar measure in Fourier form is rotation invariant** (with no Herglotz–Bochner): `rot u` is the dual of
 multiplication by `u`, injective on `R` (`IsHaarFourier.map_dual_eq`). -/
 theorem _root_.HadwigerNelson.SpectralInputs.IsHaarFourier.rotInv [NumberField F] {m : Measure (Dual F)}
     (hm : IsHaarFourier m) : RotInv F m := by
-  sorry
+  intro u
+  have hu : uvRing u ≠ 0 := by
+    intro h0
+    have h1 : ‖((uvRing u : unitRing F) : ℂ)‖ = 1 := u.2.2
+    rw [h0, ZeroMemClass.coe_zero, norm_zero] at h1
+    exact zero_ne_one h1
+  have hinj : Function.Injective (AddMonoidHom.mulLeft (uvRing u)) := fun a b hab =>
+    mul_left_cancel₀ hu hab
+  exact hm.map_dual_eq (AddMonoidHom.mulLeft (uvRing u)) hinj
 
 /-! ## Admissible pairs -/
 
@@ -161,7 +177,18 @@ theorem mem_subgroup {g : unitCircle F} : g ∈ p.subgroup ↔ ∃ n : Fin 2 →
 /-- **The first generator is not a root of unity** (the rotation `entropySplit` returns): `u^k = 1` would make `zpowHom`
 not injective. -/
 theorem u_nonTorsion : ∀ k : ℕ, k ≠ 0 → ((toUnitVector p.u : unitVectors F) : ℂ) ^ k ≠ 1 := by
-  sorry
+  intro k hk hpow
+  have hu : p.u ^ k = 1 := by
+    refine Subtype.ext (Circle.ext ?_)
+    rw [SubmonoidClass.coe_pow, Circle.coe_pow, OneMemClass.coe_one, Circle.coe_one]
+    exact hpow
+  have hz : zpowHom p.u p.w (Multiplicative.ofAdd ![(k : ℤ), 0]) = zpowHom p.u p.w 1 := by
+    rw [map_one]
+    show p.u ^ ((k : ℤ)) * p.w ^ (0 : ℤ) = 1
+    rw [zpow_zero, mul_one, zpow_natCast, hu]
+  have h0 := congrArg (fun n : Multiplicative (Fin 2 → ℤ) => Multiplicative.toAdd n 0) (p.injective hz)
+  simp only [toAdd_ofAdd, toAdd_one, Matrix.cons_val_zero, Pi.zero_apply, Nat.cast_eq_zero] at h0
+  exact hk h0
 
 end AdmissiblePair
 
@@ -173,7 +200,17 @@ def AdmissiblePair.ofPow (u w : unitCircle F) (hinj : Function.Injective (zpowHo
   w := w
   injective := hinj
   generates Λ hΛ := by
-    sorry
+    refine le_antisymm (Subfield.closure_le.mpr ?_) ?_
+    · rintro _ ⟨n, _, rfl⟩
+      exact (zpowHom u w (Multiplicative.ofAdd n)).2
+    · have hidx : 0 < Λ.index := Nat.pos_of_ne_zero hΛ.index_ne_zero
+      rw [← hw Λ.index hidx]
+      refine Subfield.closure_mono (Set.singleton_subset_iff.mpr ⟨Λ.index • ![0, 1], ?_, ?_⟩)
+      · exact Λ.nsmul_index_mem _
+      · show (((u ^ ((Λ.index • ![(0 : ℤ), 1]) 0) * w ^ ((Λ.index • ![(0 : ℤ), 1]) 1) : unitCircle F) : Circle) :
+            ℂ) = ((w : Circle) : ℂ) ^ Λ.index
+        simp only [Pi.smul_apply, Matrix.cons_val_zero, Matrix.cons_val_one, smul_zero, zpow_zero, one_mul,
+          nsmul_eq_mul, mul_one, zpow_natCast, SubmonoidClass.coe_pow, Circle.coe_pow]
 
 /-- **An admissible pair exists over every real number field** (FS100-X02D's Lemma W construction, l. 156, at one `u`).
 Plan: a rational prime `p` splitting completely in `F(i)` (one suffices; at a biquadratic `F(i)` by Dirichlet), a prime
