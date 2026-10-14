@@ -1,0 +1,7 @@
+MATCH                          data/fs131/REQUEST-2026-10-13.md           278 chars  'W2: (2026-10-13, answering the choice between th'
+MATCH                          data/fs131/claims-NF2.md                   228 chars  'NF2-LEAF-20: PE-2 (D:191): Lemma F (X02D:100); P'
+MATCH                          data/fs131/claims-NF2.md                   619 chars  "- 2026-10-14 — **PE-1′'s connectedness is a thir"
+MATCH                          plans/FS131-close-inventory.md            5009 chars  "761. **FS131-KN8 handed back: the chain's fourth"
+MATCH                          plans/FS131-close-inventory.md            3452 chars  '775. **FS131-KPD1 handed back: Pontryagin dualit'
+MATCH                          plans/FS131-close-inventory.md            2435 chars  '782. **FS131-IDG1 handed back: the dual group, P'
+quotations=6 bad=0 planted=False
