@@ -91,3 +91,15 @@ The remote is unreachable: **commit by explicit path on your branch and do not p
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 (2026-10-14 04:30 UTC) — option (a): one fact, one place
+
+**Ruling: move `OneClass.countable_algPlane` into the definitions file**, its statement and docstring unchanged, with
+your proof that needs no new import; delete the copy in `InvariantLaw` and your private `countable_E`, pointing their
+uses at the one public lemma. *The alternative:* (b), leave both. *Why not:* item 4 of § Done means already says no
+duplicate proof goes to the landing, and the definitions file is where a reader looks for a fact about the plane the
+others read; the stored statement does not change and the name stays visible to every downstream file, which import
+this one. Confidence: medium-high. Do **not** remove the import that `InvariantLaw` gained for it — an import removed
+can move a stored statement; leave the imports as they are. Show in your statement check that the moved constant's
+stored type is identical and that it is the only declaration whose module changed. Your touches are extended to that
+lemma's two places. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
