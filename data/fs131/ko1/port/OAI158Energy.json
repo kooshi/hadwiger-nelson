@@ -1,0 +1,16 @@
+{
+ "patches": [
+  [
+   286,
+   "EventuallyEmptyOrUniv (q ⁻¹' s) (ae μ)",
+   "EventuallyConst (q ⁻¹' s) (ae μ)",
+   "at v4.34.1 Mathlib states that a set is eventually empty or everything as `Filter.EventuallyEmptyOrUniv s l` (a definition new there, `EventuallyConst (· ∈ s) l`: `Mathlib/Order/Filter/EventuallyConst.lean:77`), which `ErgodicVAdd.aeconst_of_forall_preimage_vadd_ae_eq` concludes; at v4.32.0 it concludes `EventuallyConst s l` of the set (as `OAI158Kernels`' patch at `Kernels.lean:509`): the `have`'s type in the proof is written as this pin states it"
+  ],
+  [
+   293,
+   "eventuallyEmptyOrUniv_iff",
+   "Filter.eventuallyConst_set",
+   "at v4.34.1 Mathlib states that a set is eventually empty or everything as `Filter.EventuallyEmptyOrUniv s l` (a definition new there, `EventuallyConst (· ∈ s) l`: `Mathlib/Order/Filter/EventuallyConst.lean:77`), which `aeconst_of_forall_preimage_smul_ae_eq` concludes, with `eventuallyEmptyOrUniv_iff` its unfolding; at v4.32.0 the lemma concludes `EventuallyConst s l` and the same unfolding is `Filter.eventuallyConst_set` (`EventuallyConst.lean:74` here), with the same right-hand side (as `OAI158Amenability`'s patch at `Amenability.lean:385`)"
+  ]
+ ]
+}

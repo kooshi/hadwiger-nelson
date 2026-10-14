@@ -130,3 +130,50 @@ ruling 4); the textual statement guard (item 763) stays covered by the read-back
 *A slip of bookkeeping:* change 2's commit also carries the farm's logs of lane D's first module (`farm/
 OAI158Representations-try{1,2}.*`), written into the same folder while the 25 re-elaborated; nothing of lane D's tables
 or modules is in it.
+
+## Stage 3 — SAVED: lane D, its first four modules, and a ruling asked for SpectralMeasure
+
+*Everything here is from `lean -o` in the scratch farm (`data/fs131/ko1/farm1.sh`, unchanged, driven by
+`data/fs131/ipd1/farm-run.sh`, FS131-IPB1's with its log folder changed), not from `./scripts/build.sh`. Table entries
+written with FS131-IPB1's `data/fs131/ipb1/addentry.py`, run unchanged (its reason keys `ipm_proof`, `eventuallyConst`
+reused, the rest written out).*
+
+**3.1 The tables' instances** (every lane D instance is on a type built from the release's own definitions, so
+global, as lanes A–C's): Representations 12, 13 (`Rot`), 18, 24, 27, 30 (the actions of `Rot`), 63 (`Space k`), 117
+(`measure k ω`), 209 (`ContinuousVectors.space U`), 438, 439 (`measure Φ v`); SpectralMeasure 106, 119, 122
+(`CommutingSpectral.algebra U`); Ergodicity 327 (`Countable Rot`, as Stationary 112's `Countable K`); BorelTransfer 44
+(`space` of `representation k ω`); Energy 91 is a `local instance`. `drop_imports` of
+`Mathlib.Order.CompletePartialOrder` in Representations, the one lane D file whose dump lists it.
+
+**3.2 Per module.**
+
+| module | table (each entry with its reason) | elaboration |
+|---|---|---|
+| `OAI158Representations` | rename `Set.ofPred_forall` → `Set.setOf_forall`; patch 323 `Complex.isometry_ofReal.lipschitzWith.comp` → `….lipschitz.comp` (as Functions 551) | try1 3 errors; **try2 0, 0** |
+| `OAI158Energy` | patches 286 (the `have`'s type `EventuallyEmptyOrUniv (q ⁻¹' s) (ae μ)` written `EventuallyConst (q ⁻¹' s) (ae μ)`, as this pin's `ErgodicVAdd` concludes) and 293 `eventuallyEmptyOrUniv_iff` → `Filter.eventuallyConst_set` (as Amenability 385, Kernels 510) | try1 3 errors; **try2 0, 0** |
+| `OAI158RadialEnergy` | patches 86, 389, 454: `haveI := Measure.isProbabilityMeasure_map (hq.aemeasurable (μ := μ));` before the proof's first tactic that needs `IsProbabilityMeasure (μ.map q)` (the third for the RULED instance `differenceLaw_probability`); `hq` is the statement's | try1 8 errors; try2 not generated (my line 87 for 86: the generator refused, "patch 0 does not apply"); **try3 0, 0** |
+| `OAI158SpectralMeasure` | **two definition patches proposed, not written: a ruling is asked** (3.3); proof patches in `adjoin_comm` | try1 24 errors, 8 warnings |
+| `OAI158Ergodicity` | patch 266 `eventuallyEmptyOrUniv_iff` → `Filter.eventuallyConst_set`; rename `Measurable.of_eval` → `measurable_pi_iff.mpr` (Kernels' reason) | **0, 0 against the experimental SpectralMeasure** (3.3; `data/fs131/ipd1/expt/erg2.out`); in the farm after the ruling |
+
+**3.3 SpectralMeasure — sent to the coordinator by message (2026-10-14).** Two sites lie in definitions, and neither
+fits an earlier class:
+- `CommutingSpectral.algebra_commRing` (an instance with data). At the release `let := adjoin_comm U; inferInstance`
+  finds `IsMulCommutative.instCommRing` through Mathlib's `StarSubalgebra.isMulCommutative_topologicalClosure`, which
+  v4.32.0 does not have (the release's print with `pp.explicit`: `data/fs131/ipd1/probes/ReleaseCommRing2.out`). The
+  proposed patch supplies the one `Prop` instance at the same place: `inferInstance` → `@inferInstance _
+  (@IsMulCommutative.instCommRing _ _ ⟨⟨(StarSubalgebra.commRingTopologicalClosure _ (fun x y => mul_comm x
+  y)).mul_comm⟩⟩)`. That keeps the release's stored shape and data, and only the proof differs.
+- `BoundedMeasurable.mulLp` (a def). `MemLp.fun_mul` (v4.34.1) is `MemLp.mul'` here, with its arguments swapped and
+  the same conclusion. It stands only in the proof argument of `MemLp.toLp`, which the release stores as
+  `mulLp._proof_1` (`ReleaseCommRing.out`). The value is expected IDENTICAL, with `_proof_1` differing.
+- `algebra_commCStar` needs no change of text; its value goes through an instance absent here, so a pin difference is
+  expected (item 763 (3)'s class).
+- In the proof of `adjoin_comm`: `StarAlgebra.isMulCommutative_adjoin` has lost its `IsStarNormal` hypothesis and takes
+  `∀ x ∈ s, ∀ y ∈ s, …` for `Set.Pairwise` here, so its `apply` becomes a `refine` that keeps the release's three
+  bullets, and two `rintro` patterns drop their last `_`.
+
+The experimental copy elaborates **0 errors, 0 warnings** with exactly these changes
+(`data/fs131/ipd1/expt/SpectralMeasure-candidate.diff`, against the generated text; `sm4.out`, `sm5.out`). It was
+compiled into a scratch farm of symlinks (`build/ipd1/exptfarm`) where Ergodicity was then elaborated. None of the
+sites is a target, a declaration the density branch shares (`shared_names()`), or named by a statement of ours.
+`residual_fourier`'s statement names none of them.

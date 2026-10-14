@@ -1,0 +1,22 @@
+{
+ "patches": [
+  [
+   86,
+   "let : ErgodicVAdd Rot Y (μ.map q)",
+   "haveI := Measure.isProbabilityMeasure_map (hq.aemeasurable (μ := μ)); let : ErgodicVAdd Rot Y (μ.map q)",
+   "the class of `plans/FS131-KO1-port-plan.md` § 3.3, in a PROOF: at v4.34.1 `μ.map f` of a probability measure is one by an instance for every `f`; at v4.32.0 only through `Measure.isProbabilityMeasure_map (hf : AEMeasurable f μ)` (`Mathlib/MeasureTheory/Measure/Typeclasses/Probability.lean:124`). The instance is supplied by `haveI` from the measurability the proof's context holds; the statement is untouched (as `OAI158ConditionalSelection`'s patch at 330)"
+  ],
+  [
+   389,
+   "have he : radiusFamily μ q hq r",
+   "haveI := Measure.isProbabilityMeasure_map (hq.aemeasurable (μ := μ)); have he : radiusFamily μ q hq r",
+   "the class of `plans/FS131-KO1-port-plan.md` § 3.3, in a PROOF: at v4.34.1 `μ.map f` of a probability measure is one by an instance for every `f`; at v4.32.0 only through `Measure.isProbabilityMeasure_map (hf : AEMeasurable f μ)` (`Mathlib/MeasureTheory/Measure/Typeclasses/Probability.lean:124`). The instance is supplied by `haveI` from the measurability the proof's context holds; the statement is untouched (as `OAI158ConditionalSelection`'s patch at 330)"
+  ],
+  [
+   454,
+   "by_contra hn",
+   "haveI := Measure.isProbabilityMeasure_map (hq.aemeasurable (μ := μ)); by_contra hn",
+   "the class of `plans/FS131-KO1-port-plan.md` § 3.3, in a PROOF: at v4.34.1 `μ.map f` of a probability measure is one by an instance for every `f`; at v4.32.0 only through `Measure.isProbabilityMeasure_map (hf : AEMeasurable f μ)` (`Mathlib/MeasureTheory/Measure/Typeclasses/Probability.lean:124`), and the instance `DifferenceFourier.differenceLaw_probability` (the RULED statement of `FourierTests.lean:238`) asks it of `μ.map q`. The instance is supplied by `haveI` from `hq`, which the statement holds; the statement is untouched"
+  ]
+ ]
+}

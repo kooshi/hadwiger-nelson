@@ -1,0 +1,80 @@
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Outside/OAI158RadialEnergy.lean:135:12: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsProbabilityMeasure (Measure.map q μ)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158RadialEnergy.lean:137:6: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsProbabilityMeasure (Measure.map q μ)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158RadialEnergy.lean:132:71: error: unsolved goals
+Y : Type u_1
+inst✝⁷ : MeasurableSpace Y
+inst✝⁶ : StandardBorelSpace Y
+inst✝⁵ : Nonempty Y
+μ : Measure D
+inst✝⁴ : IsProbabilityMeasure μ
+inst✝³ : ErgodicSMul (↥K) D μ
+q : D → Y
+hq : Measurable q
+inst✝² : MulAction (↥K) Y
+inst✝¹ : MeasurableConstSMul (↥K) Y
+hqcov : ∀ (k : ↥K), ∀ᵐ (d : D) ∂μ, q (k • d) = k • q d
+inst✝ : ErgodicVAdd Rot (D × D) (RelativeProduct.law μ q hq)
+a b l h k : ↥E
+hn : ∀ (u : ↥K), ‖↑(a + kCoeff u ^ 2 * b)‖ = ‖↑(l + kCoeff u * h + kCoeff u ^ 2 * k)‖
+this : ErgodicVAdd Rot Y (Measure.map q μ) := factor_ergodic μ q hq fun g => hqcov (rotMul g)
+M : Amenable.Mean Rot := MovingMean.toMean fun x => 0
+⊢ projectedMass μ q a * projectedMass μ q b ≤ projectedMass μ q h
+Proofs/HadwigerNelson/Outside/OAI158RadialEnergy.lean:452:36: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsProbabilityMeasure (Measure.map q μ)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158RadialEnergy.lean:458:10: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsProbabilityMeasure (Measure.map q μ)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158RadialEnergy.lean:451:57: error: unsolved goals
+Y : Type u_1
+inst✝⁷ : MeasurableSpace Y
+inst✝⁶ : StandardBorelSpace Y
+inst✝⁵ : Nonempty Y
+μ : Measure D
+inst✝⁴ : IsProbabilityMeasure μ
+inst✝³ : ErgodicSMul (↥K) D μ
+q : D → Y
+hq : Measurable q
+inst✝² : MulAction (↥K) Y
+inst✝¹ : MeasurableConstSMul (↥K) Y
+hqcov : ∀ (k : ↥K), ∀ᵐ (d : D) ∂μ, q (k • d) = k • q d
+inst✝ : ErgodicVAdd Rot (D × D) (RelativeProduct.law μ q hq)
+r : ↥F
+M : Amenable.Mean Rot
+he : radiusFamily μ q hq r = sorry
+⊢ M.map sorry = massReal μ q r ^ 2
+Proofs/HadwigerNelson/Outside/OAI158RadialEnergy.lean:456:35: warning: This simp argument is unused:
+  Family.energy_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [radiusFamily_apply, Family.e̵n̵e̵r̵g̵y̵_̵a̵p̵p̵l̵y̵,̵ ̵F̵a̵m̵i̵l̵y̵.̵conditional_apply, char_symmetric]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Proofs/HadwigerNelson/Outside/OAI158RadialEnergy.lean:456:56: warning: This simp argument is unused:
+  Family.conditional_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [radiusFamily_apply, Family.energy_apply, F̵a̵m̵i̵l̵y̵.̵c̵o̵n̵d̵i̵t̵i̵o̵n̵a̵l̵_̵a̵p̵p̵l̵y̵,̵ ̵char_symmetric]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Proofs/HadwigerNelson/Outside/OAI158RadialEnergy.lean:456:82: warning: This simp argument is unused:
+  char_symmetric
+
+Hint: Omit it from the simp argument list.
+  simp only [radiusFamily_apply, Family.energy_apply, Family.conditional_apply,̵ ̵c̵h̵a̵r̵_̵s̵y̵m̵m̵e̵t̵r̵i̵c̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Proofs/HadwigerNelson/Outside/OAI158RadialEnergy.lean:525:27: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsProbabilityMeasure ν
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158RadialEnergy.lean:525:9: error: Tactic `rcases` failed: `x✝ : ?m.193` is not an inductive datatype

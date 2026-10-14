@@ -1,0 +1,36 @@
+--- Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean	2026-10-14 07:43:22.120552887 +0000
++++ data/fs131/ipd1/expt/OAI158SpectralMeasure-candidate.lean	2026-10-14 07:55:25.857849007 +0000
+@@ -117,7 +117,7 @@
+ variable {X : Type*} [MeasurableSpace X] (μ : Measure X) [IsFiniteMeasure μ]
+ /-- `[OAIMath2026]` `SpectralMeasure.lean:63`. -/
+ def mulLp (f : Func X) (g : Lp ℂ 2 μ) : Lp ℂ 2 μ :=
+-  ((memLp μ f ∞).fun_mul (Lp.memLp g)).toLp (fun point => f point * g point)
++  ((Lp.memLp g).mul' (memLp μ f ∞)).toLp (fun point => f point * g point)
+ /-- `[OAIMath2026]` `SpectralMeasure.lean:65`. -/
+ lemma mulLp_ae (f : Func X) (g : Lp ℂ 2 μ) :
+     mulLp μ f g =ᵐ[μ] fun x => f x * g x := MemLp.coeFn_toLp _
+@@ -171,20 +171,20 @@
+   StarSubalgebra.isClosed_topologicalClosure _
+ /-- `[OAIMath2026]` `SpectralMeasure.lean:108`. -/
+ lemma adjoin_comm : IsMulCommutative (StarAlgebra.adjoin ℂ (Set.range (fun g => (U g : H →L[ℂ] H)))) := by
+-  apply StarAlgebra.isMulCommutative_adjoin
++  refine (fun (_ : ∀ x ∈ Set.range (fun g => (U g : H →L[ℂ] H)), IsStarNormal x) hc hs => StarAlgebra.isMulCommutative_adjoin ℂ hc hs) ?_ ?_ ?_
+   · rintro _ ⟨element,rfl⟩
+     infer_instance
+-  · rintro _ ⟨left,rfl⟩ _ ⟨right,rfl⟩ _
++  · rintro _ ⟨left,rfl⟩ _ ⟨right,rfl⟩
+     change ((U left * U right : unitary _) : H →L[ℂ] H) = ((U right * U left : unitary _) : H →L[ℂ] H)
+     rw [← map_mul,← map_mul,mul_comm]
+-  · rintro _ ⟨left,rfl⟩ _ ⟨right,rfl⟩ _
++  · rintro _ ⟨left,rfl⟩ _ ⟨right,rfl⟩
+     change ((U left * (U right)⁻¹ : unitary _) : H →L[ℂ] H) = (((U right)⁻¹ * U left : unitary _) : H →L[ℂ] H)
+     rw [← map_inv,← map_mul,← map_mul,mul_comm]
+ open scoped IsMulCommutative in
+ /-- `[OAIMath2026]` `SpectralMeasure.lean:119`. -/
+ instance algebra_commRing : CommRing (algebra U) :=
+   let := adjoin_comm U
+-  inferInstance
++  @inferInstance _ (@IsMulCommutative.instCommRing _ _ ⟨⟨(StarSubalgebra.commRingTopologicalClosure _ (fun x y => mul_comm x y)).mul_comm⟩⟩)
+ /-- `[OAIMath2026]` `SpectralMeasure.lean:122`. -/
+ instance algebra_commCStar : CommCStarAlgebra (algebra U) where
+ 
