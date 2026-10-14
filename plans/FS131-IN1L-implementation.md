@@ -510,3 +510,15 @@ build's `unusedVariables` linter names unread hypotheses:
 
 Each statement is true without its hypothesis. They are harmless: true at every use site, and the entries state them.
 Not a defect.
+
+## Drafts for the front page
+
+None for this job. No milestone closes with it: `Rigidity/ChainAtTA` keeps three leaves that are not mine, and the
+chain lands as one unit. The gate's whole-library counts (the audit, the vacuity scan, the assumptions step) belong to
+the landing that joins these modules to `main`. The rows for that landing are the audit block above and these 21
+theorems.
+
+## Stage 5 — SAVED: the report
+
+`data/fs131/reports/FS131-IN1L.md`, the same text as the hand-back. Nothing of this job is running or queued. The
+branch `fs131-wl1` is not pushed (the brief). The tree's compiled library is current for the branch head after build 4.
