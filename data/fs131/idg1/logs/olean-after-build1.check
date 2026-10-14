@@ -1,0 +1,9 @@
+.lake/build/lib/lean/Proofs/HadwigerNelson/Rigidity/DualGroup.olean: OK
+.lake/build/lib/lean/Proofs/HadwigerNelson/Rigidity/Annihilator.olean: OK
+.lake/build/lib/lean/Proofs/HadwigerNelson/Rigidity/SubgroupHaar.olean: OK
+.lake/build/lib/lean/Proofs/HadwigerNelson/Rigidity/Duality.olean: OK
+.lake/build/lib/lean/Proofs/HadwigerNelson/Rigidity/DualConnected.olean: OK
+.lake/build/lib/lean/Proofs/HadwigerNelson/Rigidity/UnitCircle.olean: OK
+.lake/build/lib/lean/Proofs/HadwigerNelson/Rigidity/Pieces.olean: OK
+.lake/build/lib/lean/Proofs/HadwigerNelson/Rigidity/EntropySplitMax.olean: FAILED
+sha256sum: WARNING: 1 computed checksum did NOT match
