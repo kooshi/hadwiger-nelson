@@ -53,7 +53,8 @@ variable (F : Subfield ℝ)
 /-! ### Private helpers: the archimedean size, small arguments, the profinite neighbourhoods -/
 
 /-- The map of `archTop`, as an additive map: `archTop F` is induced by it (`archTop_eq`). -/
-def archHom [NumberField F] : unitRing F →+ NumberField.mixedEmbedding.mixedSpace (fieldI F) where
+-- `[NumberField F]` is the section's and is not read by the value; it is kept, since dropping it moves the stored types of every statement over `archHom` (FS-131 inventory item 863, ruling 1; FS131-IJ3, Amendment 1)
+@[nolint unusedArguments] def archHom [NumberField F] : unitRing F →+ NumberField.mixedEmbedding.mixedSpace (fieldI F) where
   toFun r := NumberField.mixedEmbedding (fieldI F) ⟨(r : ℂ), UnitRing.unitRingOver_le_planeOverSubring F r.2⟩
   map_zero' := by
     rw [← map_zero (NumberField.mixedEmbedding (fieldI F))]

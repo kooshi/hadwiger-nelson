@@ -209,7 +209,7 @@ theorem coe_nsmul (α : ZdAction d X) (q : ℕ) (n : Fin d → ℤ) : ⇑(α (q 
 measure — `g + α^n x = α^n (α^{-n} g + x)` — hence a Haar probability measure
 (`MeasureTheory.Measure.isAddHaarMeasure_of_isCompact_nonempty_interior` at `univ`), hence `m`
 (`MeasureTheory.Measure.isAddHaarMeasure_eq_of_isProbabilityMeasure`; a compact Hausdorff group is locally compact). -/
-theorem map_eq_of_isAddHaarMeasure [IsTopologicalAddGroup X] [CompactSpace X] [T2Space X] [MeasurableSpace X]
+theorem map_eq_of_isAddHaarMeasure [IsTopologicalAddGroup X] [CompactSpace X] [MeasurableSpace X]
     [BorelSpace X] (α : ZdAction d X) (ν : Measure X) [IsProbabilityMeasure ν] [ν.IsAddHaarMeasure]
     (n : Fin d → ℤ) : ν.map (α n) = ν := by
   have hcont : ∀ m, Continuous (α m) := α.continuous'

@@ -6,7 +6,27 @@ cores, 31 GB.*
 
 ## Theorems this phase proved
 
-(Filled as leaves fall; each line its declaration, its grade and its axioms as printed from a built tree.)
+Printed from build 4's tree (`data/fs131/ij3/axioms-after.txt`; reader `tools/fs131_ij3_axioms.py` PASS, control 4 of
+4); all under `HadwigerNelson.Rigidity`; [kernel] unless marked. "Standard three" = `[propext, Classical.choice, Quot.sound]`.
+- **M2b** (`BochnerTau`): `archimedean_support` (a finite measure on `R̂` with `archTop`-continuous transform gives the
+  non-archimedean characters measure `0`) — standard three; with it **`bochnerOn_tauPrime : BochnerOn (tauPrime F)`** —
+  standard three (J45 N2's `⟸` at `S = ∅`; M2b has no leaf left). Public now, statements unchanged: `archHom`,
+  `archTop_eq`, `eventually_archTop`, `norm_archHom_nsmul`, `fivePow`, `nsmul_fivePow`, `inv_five_mem`,
+  `exists_nsmul_mem_of_mem_nhds_profTop` — standard three.
+- **The split** (`EntropySplitMax`): `rotInv_sub_maxMultiple`, `measure_haarSet_eq_zero`, `not_smul_dualHaar_le_dirac_one` —
+  standard three; `ksEntropy_eq_zero_of_not_smul_le` and **`entropySplit_of_admissiblePair : ∀ {F} [NumberField F]
+  (p : AdmissiblePair F), EntropySplit F`** — the standard three and the declared `positive_entropy_rigidity` (through Lemma
+  Γ), no `sorry`.
+- **M5-E** (`EntropyFibres`): `measurable_blockLabel`, `blockEntropy_iterate`, `ksEntropy_eq_zero_of_iterate`,
+  `ksEntropy_finite_mixture_eq_zero`, `observationEntropy_comp_le`, `exists_sectionPartition`, `exists_pattern_names_le`
+  (one unread binder dropped), `ksEntropy_eq_zero_iff_of_finite`, `finFour_fibre_model` — standard three.
+- **M5-P** (`PositiveEntropy`): `ZdAction.two_le_of_not_isVirtuallyCyclic`, `ZdAction.noVirtuallyCyclicFactors_of_isIrreducible`,
+  `ZdAction.coe_nsmul`, `ZdAction.map_eq_of_isAddHaarMeasure` (one unread binder dropped),
+  `ZdAction.eq_of_isErgodicOn_of_invariant_component`, `ZdAction.invariantComponent_model`, `finTwo_haar_model`,
+  `isAddHaarMeasure_of_add_invariant` — standard three; **`haar_or_zero_entropy`** (`[EinsiedlerLindenstrauss2022]` Thm 1.2
+  from Thm 1.3, FS105-DED) — the standard three and the declared `positive_entropy_rigidity`, no `sorry`.
+- **Not proved:** `exists_admissiblePair` (lane A, planned and priced, § 2.5), `ZdAction.mulTwoThree_model` (§ 6),
+  `noRamifiedStableDyadic_of_tca` (M9-S, not reached).
 
 ## Stage 1 — SAVED: the readback, the leaves beside their plans, the stored statements before any edit
 
@@ -197,3 +217,70 @@ declared `positive_entropy_rigidity` read as stated (no `PolishSpace`); Case A b
 stage. **Not proved: `ZdAction.mulTwoThree_model`** (the model of FS105-NVC's hypotheses: `×2, ×3` on `ℝ` irreducible and
 not virtually cyclic). Its route is KN9's (closed subgroups of `ℝ` are `0`, `cℤ` or `ℝ`; `cℤ` is not doubling-invariant;
 `2^a 3^b = 1` forces `a = b = 0`), priced at 100–150 lines; left at my budget, it is on no consumer's path.
+
+## Stage 7 — SAVED: the receipts (builds 3 and 4, no statement changed, the axioms, the lint), Amendment 1, and the drafts
+
+**7.1 Two more edits after the lint.** The environment lint after build 2 (`logs/lint-after.log`, exit 1) reported two
+`unusedArguments` findings in my files, each named: `archHom`'s `[NumberField ↥F]` (exposed by its publicity) and
+`ZdAction.map_eq_of_isAddHaarMeasure`'s `[T2Space X]` (unread by my proof). The second binder is dropped under item 726's
+word; for the first, Amendment 1 (2026-10-14 17:16 UTC) ruled `@[nolint unusedArguments]` on `archHom` with a one-line
+`--` reason, item 863's remedy for `archTop` — done (`ContinuityGroup` l. 56–57; the whole file's diff against
+`226eae199` is the eight `private`s and these two lines). That red run is the lint's control.
+
+**7.2 Builds.** Build 3 (the drop; `logs/build3-full.log`): OK, 4 modules rebuilt, 6m56s. **Build 4** (the attribute;
+`logs/build4-full.log`, gate log `build/gate/build/20261014T172310Z-4023754.log`): `OK — 256 of 256 batches, 8 module(s)
+rebuilt, 14 module(s) with warnings, 7m58s`, exit 0. **Warnings from my seven files: only the remaining leaves'**
+``declaration uses `sorry` `` — `PositiveEntropy` l. 365 (`mulTwoThree_model`), `ChainAtTA` l. 550, 555, 562
+(`entropySplit`, `zeroEntropyCarried`, `noRamifiedStableDyadic_of_tca`), `UnitCircle` l. 219 (`exists_admissiblePair`).
+No other warning in the build.
+
+**7.3 No statement and no definition changed, from the kernel's side** (stage 1's dump against build 4's,
+`statements-after.txt`, 269 MB, `.xz` + sha256; reader `tools/fs131_ij3_statements.py`, new): **PASS**
+(`statements-compare.out`) — 867 named constants of the 41 modules (kind, module, stored type), 210 data definitions'
+values, 4 example heads of my files; the ruled changes and nothing else: **the eight `RULED PUBLIC`** (and
+`archHom.congr_simp`, generated with it), each stored type equal after the private names are replaced by the public
+ones everywhere (23 stored terms of the first dump touched); **two `RULED DROP`**, each type the first with exactly the
+named binder removed (hygienic binder names compared up to renaming: dropping a binder renumbers the later ones);
+**one `PROOF-ONLY VALUE`**: `BochnerTau`'s private `uFive`, whose value now cites the elaborator's shared auxiliary proof
+`asT._proof_1` where it cited `uFive._proof_1` (both theorems; its data with proofs erased is equal). No new public
+constant; 25 new private constants (24 `BochnerTau`, 1 `EntropySplitMax`); the only axiom the declared one, unchanged.
+**Control** (`--control`, ten plants: a leaf's statement, a definition's value, a leaf gone, a definition's type, a move,
+a new public, an axiom, a kind, a publicized lemma left private, an unruled binder drop): **10 of 10 reported**
+(`statements-control.out`). The reader's three readings (generated suffixes follow their lemma, binder renaming, shared
+auxiliary proofs) were added after its first run reported them, each looked at before it was accepted.
+
+**7.4 The axioms of every declaration of my seven files** (`lean/Axioms.lean` → `axioms-after.txt`; reader
+`tools/fs131_ij3_axioms.py` → `axioms-verdict.out`): **PASS**, 213 records — `BochnerTau` 79 CLEAN; `ContinuityGroup` 28
+CLEAN; `UnitCircle` 32 CLEAN, 1 OPEN-LEAF (`exists_admissiblePair`); `EntropySplitMax` 8 CLEAN, 2 IMPORTED
+(`ksEntropy_eq_zero_of_not_smul_le`, `entropySplit_of_admissiblePair`); `EntropyFibres` 10 CLEAN; `PositiveEntropy` 11
+CLEAN, 2 IMPORTED (`haar_or_zero_entropy`, `positive_entropy_rigidity_of_polishSpace`), 1 OPEN-LEAF (`mulTwoThree_model`);
+`ChainAtTA` 34 CLEAN, 5 OPEN-LEAF (its three leaves and `mrPlus`, `min_localBound_five_le_chromaticNumber_closed` over
+them). Each OPEN-LEAF's `sorry` is sourced in a leaf this job leaves open. The planted record
+(`positive_entropy_rigidity_of_polishSpace`, under `PLANT`) is reported resting on the declared theorem; `--control`:
+4 of 4 (`axioms-control.out`).
+
+**7.5 Lint and architecture.** `lake lint --no-build -- --no-build --trace` after build 4 (`logs/lint-after2.log`): exit
+0, 14 of 14 Passed, `-- Linting passed for Proofs.` (control: § 7.1's red run). `tools/check_architecture.py`
+(`logs/architecture.log`): RESULT PASS. Not run: `scripts/axioms.sh`, `assumptions.sh`, `vacuity.sh`, `dupnames.sh` (the
+landing's; my new constants are private, but the eight are new public names — none clashes in `Proofs/`, § 2.1).
+
+## Drafts for the landing (files this job does not write; each names its slot)
+
+**The audit's block** (`scripts/Axioms.lean`): `data/fs131/ij3/draft-axioms-block.lean` — 38 `#print axioms` lines for
+the CLEAN section (after FS131-IJ2's block) and 3 for the IMPORTED section (`entropySplit_of_admissiblePair`,
+`ksEntropy_eq_zero_of_not_smul_le`, `haar_or_zero_entropy`, each resting on `positive_entropy_rigidity`, whose
+`declareImport` line the landing adds with the axiom), generated from build 4's print.
+
+**The models** (`LEAN.md` § The gate). `archimedean_support`: the point mass at the trivial character (transform `1`,
+continuous for every topology); its consumer's model as in IJ2. The split: `dualHaar` and the point mass (the module's
+docstring); `not_smul_dualHaar_le_dirac_one` is the model of steps 2 and 3, a theorem now. M5-E: `finFour_fibre_model`
+(a theorem now) for the finite-fibred trio; the point mass and the identity for the power and the mixture. M5-P:
+`invariantComponent_model`, `finTwo_haar_model` (theorems now); `mulTwoThree_model` stays open, so FS105-NVC's hypotheses
+have a stated, unproved model; `haar_or_zero_entropy`'s hypotheses have none in the library (PE-1′ supplies them, its
+docstring says). Each names objects for the hypotheses they satisfy only; no new declaration.
+
+**`LEAN.md` § Searching — Lean**, seven lines (`data/fs131/ij3/draft-lean-md.txt`, each to follow the last line there).
+
+**Docstrings owed** (to the sweep): `ZdAction.map_eq_of_isAddHaarMeasure`'s "(a compact Hausdorff group is locally
+compact)" — no `T2Space` is read now; `BochnerTau`'s module docstring route (1) names "lift … through a box fundamental
+domain", the proof goes by the scaled arguments `t_k` instead.
