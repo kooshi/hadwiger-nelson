@@ -1,0 +1,16 @@
+slot: admitted ia1: mem 4 GiB (hard cap), cpus 4,5
+data/fs133/ia1/rebuild/Rebuild.lean:144:70: warning: `Lean.levelOne` has been deprecated: Use `Lean.Level.one` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.levelOne` to `Level.one x`).
+data/fs133/ia1/rebuild/Rebuild.lean:144:87: warning: `Lean.levelZero` has been deprecated: Use `Lean.Level.zero` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.levelZero` to `Level.zero x`).
+R the release's statement: KERNEL ACCEPTED `FS133IA1R.rebuilt_release_type : (rebuilt) = (declared) := Eq.refl _` — 120 constants named, all at this pin; identical as terms: false
+R plant: `≠` made `=`: KERNEL REFUSED — (kernel) declaration type mismatch, 'FS133IA1R.rebuilt_plant_Ne_to_Eq' has type   (∀ {H : Type u_1} [inst : NormedAddCommGroup H] [inst_1 : InnerProductSpace ℂ 
+R plant: a numeral changed: KERNEL REFUSED — (kernel) application type mismatch   1 argument has type   OfNat (↥HadwigerNelson.Outside.OAI158.Spectral.E) 0 but function has type   [self : OfNat (↥HadwigerN
+R plant: a binder kind changed (the kernel does not read it): KERNEL ACCEPTED `FS133IA1R.rebuilt_plant_binder_kind : (rebuilt) = (declared) := Eq.refl _` — 120 constants named, all at this pin; identical as terms: false
+R pair 1 (of type `Semiring ↥HadwigerNelson.Outside.OAI158.Spectral.E`): KERNEL ACCEPTED `(the release's instance) = (this pin's) := Eq.refl _`
+R pair 2 (of type `Semiring ℂ`): KERNEL ACCEPTED `(the release's instance) = (this pin's) := Eq.refl _`
+R pairs checked: 2
+REBUILD OK: every outcome as expected
+'FS133IA1R.rebuilt_release_type' depends on axioms: [propext, Classical.choice, Quot.sound]

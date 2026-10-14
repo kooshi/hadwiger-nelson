@@ -254,7 +254,7 @@ with exit 0, no error, no warning, no `sorry`; `exists_field` prints
 **F, `OneClass.exists_field`** — proved, on the plan's route (§ 5.1, children 1–7), over the ported module; P did not
 stall, so the plan's fallback was not taken. The statement's text is untouched; two `open … in` lines stand before
 its docstring (the proof names the ported lemmas and writes inner products), and the stored statement is the same
-term as before them (below). The private layer (`section FieldAux`, 26 private declarations, about 300 lines), each
+term as before them (below). The private layer (`section FieldAux`, 25 private declarations, about 300 lines), each
 the release's label-model lemma rewritten for an arbitrary plane system:
 
 | child of the plan | here (private) | what carries it |
@@ -262,7 +262,7 @@ the release's label-model lemma rewritten for an arbitrary plane system:
 | 1 the representation | `shiftEquiv`, `turnEquiv` (measurable equivalences from `shift_zero`/`shift_add`, `turn_one`/`turn_mul`), `planeRep` (`(U z g) ω = g (τ z ω)`), `planeTurn` (`(W u g) ω = g (ρ u ω)`), `turn_covariance` (from `IsPlaneSystem.cov`, as written) | ported `Koopman.unitary` |
 | 2 the observables | `obsVec`, `obsVec_ae`, `obsVec_turn_fixed`, `inner_obsVec_zero` | `L2.inner_def`; **the direction**: the ported unitary composes with `τ z` itself, which is the statement's `f j (τ z ω)` — no inverse, no change of sign |
 | 3 the projections | `contSpace`, `proj_turn_fixed`, `proj_range`, **`inner_proj_shift`** | ported `projection_covariance_fixed`, `projection_range`, `op_mem`, `op_orthogonal`; **the one use of the import**, through `residual_fourier_cross` at `v − proj v`, `w − proj w` |
-| 4 the fields | `orbit_range` | ported `orbitExtension`, `orbitExtension_continuous`, `orbitExtension_eq`, `clamp`, `Koopman`-free: the release's `fieldVector_range` |
+| 4 the fields | `orbit_range` | ported `orbitExtension`, `orbitExtension_continuous`, `orbitExtension_eq`, `clamp_lipschitz`, `clamp_eq`, `clamp_range`: the release's `fieldVector_range` |
 | 5 the circle | `inner_orbit_circle` | ported `orbitExtension_inner`, `circle_closed_induction` at `c ↦ c · z`, **scaled**: `w = (w / z) · z` with `‖w / z‖ = 1`; the unit case is not re-proved |
 | 6 the constant | `oneVec`, `one_fixed`, `one_mem`, `inner_one`, `inner_one_orbit` (clause (a)), `sum_orbit` (clause (b)) | density of the algebraic plane, `Unitary.inner_map_map`, `starProjection_eq_self_iff` |
 | 7 measurability | in the theorem's proof: `exists_measurable_field` per `i`, real part clamped to `[0, 1]` so that the bound holds at every point; `positive_orthogonal` (clause (c)) | ported |
@@ -279,3 +279,134 @@ modules after the three proofs against `after-A` (the skeleton with the two rule
 hypothesis in the module itself, re-elaborated, dumped: read `DIFFERENT` (`LT.lt` entering), exit 1
 (`data/fs133/ia1/moved/planted-read.txt`); the file restored from its copy and re-elaborated, and `git diff` of the
 module shows the proof and nothing of the plant.
+
+## Stage 6 — SAVED: leaf R, the rebuilt-type comparison (Amendment 1, item 4) — the full form
+
+*Run on the tree while stage 5's build walked, and again on the built tree (stage 5).* Two instruments, each with
+its control; the aim is the amendment's: nothing left to trust beyond "a Mathlib constant of one name means one thing
+at both pins".
+
+**6.1 Where the two stored statements differ, subterm by subterm** — `tools/fs133_ia1_rebuild.py emit`
+(`data/fs133/ia1/rebuild/emit.out`). The release's stored type of `residual_fourier` (the planner's print made at
+the release's pin, 264,349 characters, names mapped, `Set.ofPred` written `setOf`) and this library's (264,423
+characters, the module as it stands) are parsed into trees and walked in parallel; two applications whose heads
+differ are one pair and are not descended into. **They differ at 4 places, in 2 distinct closed subterms:**
+
+| | the release's term | this library's | of type | occurrences |
+|---|---|---|---|---|
+| pair 1 | `CommSemiring.toSemiring ↥E (SubsemiringClass.toCommSemiring …)` (3,471 characters) | `DivisionSemiring.toSemiring ↥E (Semifield.toDivisionSemiring ↥E …)` (3,521) | `Semiring ↥E` | 1 |
+| pair 2 | `CommSemiring.toSemiring ℂ (Semifield.toCommSemiring ℂ (Field.toSemifield ℂ …))` | `DivisionSemiring.toSemiring ℂ (Semifield.toDivisionSemiring ℂ (Field.toSemifield ℂ …))` | `Semiring ℂ` | 3 |
+
+**The release's print with each pair rewritten is this library's print, character for character.** Control
+(`--control`): one constant changed elsewhere in this library's print (`kCoeff`) shows as a third pair, where a
+reader sees it.
+
+**6.2 The kernel's check** — `data/fs133/ia1/rebuild/Rebuild.lean` (`Rebuild.out`). The release's print is parsed
+into a term at this pin: **all 120 constants it names exist here under the module's imports** (the four the plan's
+leaf R called absent among them). Then this pin's kernel is asked, synchronously and with its check on
+(`Environment.addDeclCore … (doCheck := true)`), for
+
+    theorem rebuilt_release_type : (the release's statement, rebuilt) = (the declared axiom's statement) := Eq.refl _
+
+**KERNEL ACCEPTED.** So the release's stored statement, rebuilt constant by constant at this pin, type-checks here
+and is definitionally the declared statement; `#print axioms rebuilt_release_type`:
+`[propext, Classical.choice, Quot.sound]` — it does not rest on the axiom it is about. Each of the two pairs on its
+own: **KERNEL ACCEPTED** `(the release's instance) = (this pin's) := Eq.refl _`, at `Semiring ↥E` and at
+`Semiring ℂ`. Controls, three planted variants of the release's print: `≠` made `=` in the hypothesis `z ≠ 0` — a
+well-typed other statement — **refused** (`declaration type mismatch`); a numeral changed — **refused**, but as
+ill-typed (the literal no longer fits its `OfNat` instance), so this plant shows the kernel type-checks the rebuilt
+term and is not a second instance of a wrong statement refused; a binder kind changed (`(U : …)` made implicit) —
+**accepted, as it must be**: the kernel does not read binder kinds or binder names. Those are read by the print
+comparison, which is why it stays: `axiom-readback/erased.out` (binders, names and every non-instance argument
+alike) and its control (a binder kind planted: refused).
+
+**6.3 What is left to trust for the declared statement, after R.** (i) That a Mathlib or core constant of one name
+means one thing at the two pins — 120 constants, among them the two pairs' six; level one of stage 2.6 printed 84 of
+this kind one step down for the ported statements and found Mathlib's own signatures differing on the same
+`Semifield → Semiring` path. (ii) The one rename, `Set.ofPred` there for `setOf` here (one definition at both pins:
+`level1.out`). (iii) That the print of the release's side is the release's stored term (the planner's dump, made by
+the dumper whose text is in the repository, on the audit's compiled copy). Not left to trust any more: that the two
+instance paths agree — the kernel checked it here.
+
+## Drafts for the landing (files this job does not write; each names its slot)
+
+**D1. `scripts/Axioms.lean`** (the landing's; the planner's § Drafts has the same line for the import).
+- IMPORTED section, one line with the four items beside it: `#eval AxiomAudit.declareImport
+  ``HadwigerNelson.Outside.OAI158.Spectral.residual_fourier`; and under IMPORTED the two records of this lane:
+  `#print axioms HadwigerNelson.Outside.OAI158.Spectral.residual_fourier_cross`,
+  `#print axioms HadwigerNelson.OneClass.exists_field` (each: the standard three and the import).
+- CLEAN: `#print axioms HadwigerNelson.Outside.OAI158.Spectral.residual_fourier_model` (the standard three; it must
+  not print the import), and the port's block as generated — `data/fs133/ia1/axioms-block.txt`
+  (`tools/fs133_ia1_port.py --axioms-block`): 47 records, every ported declaration but the one anonymous instance
+  (`ContinuousVectors.instCompleteSpaceSubtypeMemSubmoduleComplexSpace`, printed apart in
+  `data/fs133/ia1/lane-axioms-built.out`: the standard three).
+
+**D2. The model for each hypothesis** (`LEAN.md` § The gate).
+- `Spectral.residual_fourier` (the import) and `residual_fourier_cross`: **`Spectral.residual_fourier_model`**, same
+  file, kernel-checked on the standard three — `U`, `W`, `hcov`, `v ∈ (space U)ᗮ`, `hfix`, all at once, with `v ≠ 0`
+  and at every `z ≠ 0`; for the two-vector form take `w := v`.
+- `OneClass.exists_field`: its docstring names `IsInvariantLaw.isPlaneSystem` (lane B's leaf, `sorry` on this branch)
+  at an invariant law, with the indicator at the origin. **The kernel does not hold that model until lane B lands**,
+  and the model that exercises clause (c)'s premise (an almost-sure zero product at some `z ≠ 0`) is the law of
+  `exists_isInvariantLaw_unitDistance` at `z = 1`, not the point mass at the empty set (`isInvariantLaw_dirac`),
+  where the observable is `0` and the clause is exercised only trivially. The landing names which it relies on.
+- The ported module: its hypotheses are parameters (a measure-preserving family `s` with `hU`, a covariant unitary
+  `W` with `φ`, a continuous `f : T → Lp`); each is met at a real instance inside `Plane/OneClass/Field`
+  (`op_planeRep`, `turn_covariance` with `Homeomorph.mulLeft₀`, the fields), which is their consumer. The vacuity
+  scan will read them `GENERIC`.
+
+**D3. What a reader of the declared theorem's docstring should be told that it does not yet say.** The docstring
+now names the one path that still differs and the two imports (stage 2.5). After leaf R it can also say — a sentence
+this job adds if the coordinator wants the module recompiled once more for it, and drafts here otherwise: *"The
+release's stored statement, rebuilt at this pin from its print (120 constants, each present here), is accepted by
+this pin's kernel as definitionally equal to this statement, and each of the two instance terms that differ
+(`Semiring ↥E`, `Semiring ℂ`) is kernel-equal to its counterpart (`data/fs133/ia1/rebuild/`); what the comparison
+leaves to trust is that a Mathlib constant of one name means one thing at the two pins."* Also not said there: the
+statement is about `ContinuousVectors.space U` for the topology the algebraic plane has **as a subset of `ℂ`** (the
+module docstring says it; the axiom's own docstring says "continuous vectors" only).
+
+**D4. A dated note for `plans/FS133-kernel-plan.md` § 2.4** (the planner's record; *following* its last sentence
+"… and its docstring and `ARCHITECTURE.md` line must say so."): *"**2026-10-13, corrected by FS133-IA1 (the
+coordinator's Amendment 1 to that job's brief).** The cause given above is wrong as stated. The inner product of `H`
+is reached through `CStarModule` at this pin too, when `Mathlib.Analysis.CStarAlgebra.Module.Constructions` is
+imported; the four constants § 5.1's leaf R lists as absent at this pin exist here, in that module and in
+`Mathlib.Analysis.CStarAlgebra.Classes`, which `Outside/OAI158Rigidity` did not import — `RebuildProbe.lean` asked
+under the module's own five imports. With the two imports added (the axiom's text untouched) the two stored
+statements differ at four places, in two instance terms, on one path — the `Semiring` of a `Semifield`, through
+`CommSemiring` at v4.34.1 and through `DivisionSemiring` at v4.32.0 — and no import list changes that. The release's
+statement, rebuilt at this pin, is kernel-equal to the declared one (`plans/FS133-IA1-implementation.md` stages 2
+and 6)."*
+
+**D5. `LEAN.md` § Assumptions: outside theorems and our own, item 2** — one sentence, *following* the sentence the
+planner drafted for the same item (or, if that draft is not filed, following "…the landing runs it again on the
+module as recompiled on the joined tree."): *"Before blaming the pin for a stored statement that differs from its
+source's, ask whether each constant the source names exists at this pin under `import Mathlib` — not under the
+module's own imports — and, for each that does, add the Mathlib module that declares it and compare again: which
+instance a statement stores is chosen by the import list as well as by the pin (`Outside/OAI158Rigidity`: two
+import lines took the difference from 24 constants against 4 to 4 against 2); then rebuild the source's stored
+statement at this pin from its print and let the kernel check it equal to the declared one, so that what is left to
+trust is only that a Mathlib constant of one name means one thing at the two pins
+(`data/fs133/ia1/rebuild/Rebuild.lean`, `tools/fs133_ia1_rebuild.py`, FS133-IA1)."*
+
+**D6. `LEAN.md` § Searching — Lean**, new bullets.
+- "Between Mathlib `v4.32.0` and `v4.34.1`, further: `Isometry.lipschitz` became `Isometry.lipschitzWith`
+  (2026-08-16), `isAlgebraic_rat` became `isAlgebraic_ratCast` (2026-07-14), and
+  `summable_norm_of_tsum_eLpNorm_ne_top` lost its measurability hypothesis (here it is asked: `fun n =>
+  Lp.aestronglyMeasurable (g n)`). `∫ (↑(f x) : ℂ)` is `integral_complex_ofReal`; `integral_ofReal` is stated for the
+  `RCLike` coercion and does not rewrite it (FS133-IA1)."
+- "A cone computed for part of a release file can name a generated proof of a declaration outside it: the
+  release's elaborator shares `X._proof_n` between declarations of one file (`LabelModel.projected._proof_1 :
+  IsTopologicalAddGroup ℂ` in four declarations of `BorelTransfer.lean`). Print its stored statement at the source's
+  pin before deciding; a proof of a Mathlib proposition needs no port (FS133-IA1)."
+- "At the pin the kernel is called synchronously by `Environment.addDeclCore env 0 decl none` (its check on by
+  default); there is no `Environment.addDecl`. `ConstantInfo.value!` panics on a theorem at v4.34.1: read a value by
+  cases (FS133-IA1)."
+- "On the regular representation `(U z f) x = f (x + z)`, the rotations that satisfy `W k ∘ U z = U (k z) ∘ W k` act
+  by the inverse on the points, `(W k f) x = f (k⁻¹ x)`; on a plane system, where `τ z ∘ ρ u = ρ u ∘ τ (u z)`, the
+  Koopman operators compose with `τ z` and `ρ u` themselves (FS133-IA1)."
+
+**D7. Not run in this job** (the landing's, on the joined tree): `scripts/axioms.sh` (it fails by design until the
+import is declared to it), `vacuity.sh`, `dupnames.sh`, `assumptions.sh`, the lint, and the planner's two read-backs
+on the module as recompiled there. The ported names were checked against this branch's library by the build only
+(the ported module's upstream is `Outside/OAI158Rigidity` alone); `dupnames.sh` on the joined tree is what shows
+that no other module declares one of its 48 names.
