@@ -1,0 +1,8 @@
+
+/-!
+# FS-66's certificate at `p = 11`, re-encoded for the kernel (FS131-IKC3; data only)
+
+`data/fs66/b1/cert-p11.json` (706,712 bytes), re-encoded by `tools/fs131_ikc1_gen.py --nseg 8` (untrusted: a fault there
+can only make the kernel refuse). Its checks are one declaration per module, chained so that the build compiles one at
+a time (`Arith/FibreCert11Seg0` … `Seg7`, `Global`, `Psd`); `Arith/FibreCert11Bound` assembles `cert11_ok` and the bound.
+-/
