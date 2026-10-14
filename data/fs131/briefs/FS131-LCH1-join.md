@@ -124,3 +124,7 @@ local backup.
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment — 2026-10-14 21:34 UTC (Keryx, by message to this job)
+
+Your message: integration 6's two corollaries cannot sit in `Plane/OneAvoidingDensity`, because `Plane/DensityBound/Theorem` (which holds `Plane.oneAvoidingDensityBound`) imports it through `Plane/DensityBound/Window`. **Ruled: your proposal.** A new module `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wq1/Proofs/HadwigerNelson/Plane/MOneBound.lean` importing `Plane.DensityBound.Theorem`, holding the two corollaries (`mOne ≤ ENNReal.ofReal 0.2470` and `mOne < ENNReal.ofReal (1 / 4)`, each one line), with its lines in the build's lists and `ARCHITECTURE.md`; the headline's module may import it. **Touches extended:** that new module. You still start no agents of your own: only the coordinator launches agents, so that Kooshi's budget holds and every piece of work is known.
