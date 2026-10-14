@@ -1036,12 +1036,178 @@ private theorem ratioAtMost_cert [NumberField F] (P : StablePrime F) (h2 : (2 : 
     ∃ c : ℝ, c < 1 / 4 ∧ RatioAtMost P c := by
   sorry
 
+-- FS131-ICM2: **the level-one bound at a prime `Q`, in coordinates.** Through `k = k₀ ⊕ k₀ι` and `k₀ ≅ ZMod Q`, a character
+-- of the residue field is `x ↦ ζ^{αA(x) + βB(x)}` (`ζ = e^{2πi/Q}`, `(α, β) ≠ 0`), and the norm-one set is carried onto the
+-- circle `a² + b² = 1` of `UD(𝔽_Q, 2)`; so a lower bound on the circle's cosine sums is the level-one character bound.
+open Classical in
+private theorem charBound_one_of_circleCos [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P)
+    {Q : ℕ} (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) (hp : Q.Prime) [NeZero Q] {κ : ℝ}
+    (hcos : ∀ α β : ℕ, α < Q → β < Q → (α ≠ 0 ∨ β ≠ 0) →
+      -(κ * ((Q : ℝ) + 1)) ≤ ∑ v ∈ Finset.univ.filter (fun v : ZMod Q × ZMod Q => v.1 ^ 2 + v.2 ^ 2 = 1),
+        Real.cos (2 * Real.pi * (((α * v.1.val + β * v.2.val) % Q : ℕ) : ℝ) / Q)) :
+    CharBound P 1 κ := by
+  intro hfin ψ hψ
+  rw [card_levelSet_one P h2 hQ hfin]
+  haveI hmax : (P.P ^ 1).IsMaximal := by rw [pow_one]; exact P.isMaximal
+  letI : Field (𝓞 (fieldI F) ⧸ P.P ^ 1) := Ideal.Quotient.field (P.P ^ 1)
+  haveI := finite_quot_pow P 1
+  letI : Fintype (𝓞 (fieldI F) ⧸ P.P ^ 1) := Fintype.ofFinite _
+  set σ : (𝓞 (fieldI F) ⧸ P.P ^ 1) →+* (𝓞 (fieldI F) ⧸ P.P ^ 1) :=
+    Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1) with hσdef
+  have hσmk : ∀ x, σ (Ideal.Quotient.mk (P.P ^ 1) x) = Ideal.Quotient.mk (P.P ^ 1) (conjO F x) := fun x =>
+    Ideal.quotientMap_mk
+  have hσ : ∀ x, σ (σ x) = x := fun x => by
+    obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
+    rw [hσmk, hσmk, UpperHalf.conjO_conjO]
+  obtain ⟨i, hi2, hci⟩ := exists_I_int (F := F)
+  have h2k : (2 : 𝓞 (fieldI F) ⧸ P.P ^ 1) ≠ 0 := by
+    rw [← map_ofNat (Ideal.Quotient.mk (P.P ^ 1)) 2, Ne, Ideal.Quotient.eq_zero_iff_mem, pow_one]; exact h2
+  set ι := Ideal.Quotient.mk (P.P ^ 1) i with hιdef
+  have hι : ι ^ 2 = -1 := by rw [hιdef, ← map_pow, hi2, map_neg, map_one]
+  have hσι : σ ι = -ι := by rw [hιdef, hσmk, hci, map_neg]
+  obtain ⟨hcard0, -⟩ := StandingFive.card_fixed_of_involution σ hσ hι hσι h2k
+  set k₀ := σ.eqLocusField (RingHom.id _) with hk₀def
+  have hk₀ : Nat.card k₀ = Q := by
+    have e : Nat.card k₀ ^ 2 = Q ^ 2 := by rw [← hcard0, ← hQ, pow_one]
+    exact Nat.pow_left_injective two_ne_zero e
+  set u : 𝓞 (fieldI F) ⧸ P.P ^ 1 := (2 : 𝓞 (fieldI F) ⧸ P.P ^ 1)⁻¹ with hudef
+  have hu : 2 * u = 1 := mul_inv_cancel₀ h2k
+  have hσu : σ u = u := by rw [hudef, map_inv₀, map_ofNat]
+  have ha : ∀ x, u * (x + σ x) ∈ k₀ := fun x => by
+    show σ (u * (x + σ x)) = u * (x + σ x)
+    rw [map_mul, map_add, hσ, hσu]; ring
+  have hb : ∀ x, -(u * ι * (x - σ x)) ∈ k₀ := fun x => by
+    show σ (-(u * ι * (x - σ x))) = -(u * ι * (x - σ x))
+    rw [map_neg, map_mul, map_mul, map_sub, hσ, hσu, hσι]; ring
+  have hN0 : ∀ x, x * σ x ∈ k₀ := fun x => by
+    show σ (x * σ x) = x * σ x
+    rw [map_mul, hσ, mul_comm]
+  haveI : Fact Q.Prime := ⟨hp⟩
+  obtain ⟨e⟩ := Arith.nonempty_ringEquiv_zmod_of_card hp hk₀
+  -- the coordinates, and every element of `k₀` as the cast of a natural number
+  set A : (𝓞 (fieldI F) ⧸ P.P ^ 1) → ZMod Q := fun x => e ⟨_, ha x⟩ with hAdef
+  set B : (𝓞 (fieldI F) ⧸ P.P ^ 1) → ZMod Q := fun x => e ⟨_, hb x⟩ with hBdef
+  have hcast : ∀ y : k₀, (y : 𝓞 (fieldI F) ⧸ P.P ^ 1) = ((e y).val : 𝓞 (fieldI F) ⧸ P.P ^ 1) := by
+    intro y
+    have h1 : y = e.symm (((e y).val : ℕ) : ZMod Q) := by rw [ZMod.natCast_zmod_val, RingEquiv.symm_apply_apply]
+    conv_lhs => rw [h1, map_natCast]
+    push_cast
+    rfl
+  have hdec : ∀ x, x = ((A x).val : 𝓞 (fieldI F) ⧸ P.P ^ 1) + ((B x).val : 𝓞 (fieldI F) ⧸ P.P ^ 1) * ι := by
+    intro x
+    rw [← hcast ⟨_, ha x⟩, ← hcast ⟨_, hb x⟩]
+    show x = u * (x + σ x) + -(u * ι * (x - σ x)) * ι
+    linear_combination (-x) * hu + u * (x - σ x) * hι
+  have hnorm : ∀ x, x * σ x = 1 ↔ (A x) ^ 2 + (B x) ^ 2 = 1 := by
+    intro x
+    have hk : (⟨_, ha x⟩ : k₀) ^ 2 + (⟨_, hb x⟩ : k₀) ^ 2 = ⟨_, hN0 x⟩ := by
+      apply Subtype.ext
+      push_cast
+      linear_combination (2 * u + 1) * x * σ x * hu + u ^ 2 * (x - σ x) ^ 2 * hι
+    have e1 : (A x) ^ 2 + (B x) ^ 2 = e ⟨_, hN0 x⟩ := by
+      rw [hAdef, hBdef]; simp only; rw [← map_pow, ← map_pow, ← map_add, hk]
+    rw [e1, ← map_one e, e.injective.eq_iff, Subtype.ext_iff]
+    rfl
+  -- the coordinate map is a bijection onto the plane
+  have hTinj : Function.Injective fun x => (A x, B x) := by
+    intro x y hxy
+    simp only [Prod.mk.injEq] at hxy
+    rw [hdec x, hdec y, hxy.1, hxy.2]
+  have hTbij : Function.Bijective fun x => (A x, B x) := by
+    refine (Fintype.bijective_iff_injective_and_card _).2 ⟨hTinj, ?_⟩
+    rw [Fintype.card_prod, ZMod.card, ← Nat.card_eq_fintype_card, ← sq, ← hQ, pow_one]
+  -- the character in coordinates
+  have hQk : ((Q : ℕ) : 𝓞 (fieldI F) ⧸ P.P ^ 1) = 0 := by
+    have h : ((Q : ℕ) : k₀) = 0 := by
+      rw [← map_natCast e.symm Q, ZMod.natCast_self, map_zero]
+    have h' := congrArg (fun y : k₀ => (y : 𝓞 (fieldI F) ⧸ P.P ^ 1)) h
+    simpa using h'
+  have hpow1 : ψ 1 ^ Q = 1 := by
+    rw [← AddChar.map_nsmul_eq_pow, nsmul_one, hQk, AddChar.map_zero_eq_one]
+  have hpowι : ψ ι ^ Q = 1 := by
+    rw [← AddChar.map_nsmul_eq_pow, nsmul_eq_mul, hQk, zero_mul, AddChar.map_zero_eq_one]
+  have hζ := Complex.isPrimitiveRoot_exp Q hp.ne_zero
+  obtain ⟨α, hα, hαz⟩ := hζ.eq_pow_of_pow_eq_one hpow1
+  obtain ⟨β, hβ, hβz⟩ := hζ.eq_pow_of_pow_eq_one hpowι
+  set ζ := Complex.exp (2 * Real.pi * Complex.I / Q) with hζdef
+  have hψx : ∀ x, ψ x = ζ ^ ((α * (A x).val + β * (B x).val) % Q) := by
+    intro x
+    have e2 : ζ ^ ((α * (A x).val + β * (B x).val) % Q) = ζ ^ (α * (A x).val + β * (B x).val) := by
+      conv_rhs => rw [← Nat.div_add_mod (α * (A x).val + β * (B x).val) Q]
+      rw [pow_add, pow_mul, hζ.pow_eq_one, one_pow, one_mul]
+    rw [e2, pow_add, pow_mul, pow_mul, hαz, hβz, ← AddChar.map_nsmul_eq_pow, ← AddChar.map_nsmul_eq_pow,
+      ← AddChar.map_add_eq_mul, nsmul_one, nsmul_eq_mul, ← hdec x]
+  have hαβ : α ≠ 0 ∨ β ≠ 0 := by
+    by_contra h
+    push Not at h
+    apply hψ
+    ext x
+    rw [hψx, h.1, h.2, zero_mul, zero_mul, add_zero, Nat.zero_mod, pow_zero, AddChar.one_apply]
+  have hre : ∀ m : ℕ, (ζ ^ m).re = Real.cos (2 * Real.pi * (m : ℝ) / Q) := by
+    intro m
+    rw [hζdef, ← Complex.exp_nat_mul]
+    have : (m : ℂ) * (2 * Real.pi * Complex.I / Q) = ((2 * Real.pi * (m : ℝ) / Q : ℝ) : ℂ) * Complex.I := by
+      push_cast; ring
+    rw [this, Complex.exp_ofReal_mul_I_re]
+  have hS : hfin.toFinset = Finset.univ.filter fun x => x * σ x = 1 := by
+    ext x
+    rw [Set.Finite.mem_toFinset, Finset.mem_filter]
+    simp only [Finset.mem_univ, true_and]
+    exact Iff.rfl
+  have hsum : (∑ s ∈ hfin.toFinset, ψ s).re = ∑ v ∈ Finset.univ.filter (fun v : ZMod Q × ZMod Q => v.1 ^ 2 + v.2 ^ 2 = 1),
+      Real.cos (2 * Real.pi * (((α * v.1.val + β * v.2.val) % Q : ℕ) : ℝ) / Q) := by
+    rw [Complex.re_sum, hS]
+    refine Finset.sum_nbij (fun x => (A x, B x)) ?_ (hTinj.injOn) ?_ ?_
+    · intro x hx
+      rw [Finset.mem_filter] at hx ⊢
+      exact ⟨Finset.mem_univ _, (hnorm x).1 hx.2⟩
+    · intro v hv
+      rw [Finset.mem_coe, Finset.mem_filter] at hv
+      obtain ⟨x, hx⟩ := hTbij.2 v
+      refine ⟨x, ?_, hx⟩
+      rw [Finset.mem_coe, Finset.mem_filter]
+      refine ⟨Finset.mem_univ _, (hnorm x).2 ?_⟩
+      have h := hv.2
+      rw [← hx] at h
+      exact h
+    · intro x _
+      rw [hψx, hre]
+  rw [hsum]
+  push_cast
+  exact hcos α β hα hβ hαβ
+
+/-- **The circle's cosine sums at `Q ∈ {23, 31}`** (KC13 § 5.3; FS131-ICM2's split of `charBound_one_exact`): a closed
+statement about `UD(𝔽_Q, 2)`, with no number field — over the circle `a² + b² = 1`, every non-trivial character
+`(a, b) ↦ e^{2πi(αa + βb)/Q}` has real part at least `−κ(Q + 1)` for one `κ < 1/3` with `κ ≥ 2/(Q + 1)`. Its truth rests on
+KC13 § 5.3's spectrum (normalised least eigenvalue above `−1/3` by `1.6·10⁻³` at 23 and `4.9·10⁻⁶` at 31, in floating
+point); its proof is rational bounds on `cos(2πj/Q)` and the kernel's count of the circle. -/
+private theorem circleCos_bound {Q : ℕ} (hQ : Q = 23 ∨ Q = 31) [NeZero Q] :
+    ∃ κ : ℝ, κ < 1 / 3 ∧ 2 / ((Q : ℝ) + 1) ≤ κ ∧ ∀ α β : ℕ, α < Q → β < Q → (α ≠ 0 ∨ β ≠ 0) →
+      -(κ * ((Q : ℝ) + 1)) ≤ ∑ v ∈ Finset.univ.filter (fun v : ZMod Q × ZMod Q => v.1 ^ 2 + v.2 ^ 2 = 1),
+        Real.cos (2 * Real.pi * (((α * v.1.val + β * v.2.val) % Q : ℕ) : ℝ) / Q) := by
+  sorry
+
+/-- **The exact spectrum at `Q = 27`** (KC13 § 5.3; FS100-G27; FS131-ICM2's split of `charBound_one_exact`): the
+level-one target's least eigenvalue is `−8`, so `κ = 8/28` serves — a character sum in characteristic `3` over
+`𝔽₇₂₉`. -/
+private theorem charBound_one_exact_27 [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) {Q : ℕ}
+    (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) (hQ27 : Q = 27) :
+    ∃ κ : ℝ, κ < 1 / 3 ∧ 2 / ((Q : ℝ) + 1) ≤ κ ∧ CharBound P 1 κ := by
+  sorry
+
 /-- **Exact spectra at `q ∈ {23, 27, 31}`** (KC13 § 5.3; FS100-G27 at 27): level one's normalised least eigenvalue is above
 `−1/3`, so some level-one bound `κ < 1/3` with `κ ≥ 2/(Q + 1)` holds. -/
 private theorem charBound_one_exact [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) {Q : ℕ}
     (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) (hQ' : Q = 23 ∨ Q = 27 ∨ Q = 31) :
     ∃ κ : ℝ, κ < 1 / 3 ∧ 2 / ((Q : ℝ) + 1) ≤ κ ∧ CharBound P 1 κ := by
-  sorry
+  -- FS131-ICM2: at the primes `23` and `31` through the circle's cosine sums; at `27` its own leaf
+  haveI : NeZero Q := ⟨by omega⟩
+  rcases hQ' with hq | hq | hq
+  · obtain ⟨κ, hκ3, hκQ, hc⟩ := circleCos_bound (Q := Q) (Or.inl hq)
+    exact ⟨κ, hκ3, hκQ, charBound_one_of_circleCos P h2 hQ (by rw [hq]; norm_num) hc⟩
+  · exact charBound_one_exact_27 P h2 hQ hq
+  · obtain ⟨κ, hκ3, hκQ, hc⟩ := circleCos_bound (Q := Q) (Or.inr hq)
+    exact ⟨κ, hκ3, hκQ, charBound_one_of_circleCos P h2 hQ (by rw [hq]; norm_num) hc⟩
 
 -- FS131-ICM1: composed over them.
 

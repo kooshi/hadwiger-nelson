@@ -6,7 +6,8 @@ from `fs131-wcm` at `0dea51730`, in the tree `.claude/worktrees/fs131-wch`. Work
 
 ## Theorems this phase proved
 
-Read from the built tree after build 1 (`data/fs131/icm2/axioms1.out`, `axioms1-read.out`).
+Read from the built tree after build 3 (`data/fs131/icm2/axioms3.out`, `axioms3-read.out`): 159 records of `ClassRatio`,
+`CountCompletion`, `CountModels` and `count_of_oneAvoidingDensityBound` — **CLEAN 146, IMPORTED 5, UPSTREAM 8, FAIL 0**.
 
 - `Rigidity.tca_uniform`, `Rigidity.exists_uniform_tail` (`Rigidity/ClassRatio`, public) — [kernel], imported records:
   `[propext, Classical.choice, Quot.sound, StandingFive.kloosterman_bound]` — the standard three and Weil's bound, the
@@ -20,8 +21,11 @@ Read from the built tree after build 1 (`data/fs131/icm2/axioms1.out`, `axioms1-
   M13 is under it.
 - `chromaticNumber_le_four_of_small` (private, stage 3) — the standard three: at `Q ∈ {3, 7}` the level-one target is
   four-colourable.
-- Still `sorry`: `ratioAtMost_dyadic`, `charBound_one_exact`, `ratioAtMost_cert` (the last stays named, by the brief); so
-  `ratioAtMost_of_five_le_chromaticNumber` and `tca_of_five_le_localBound` rest on these three and Weil's bound.
+- `charBound_one_of_circleCos` (private, stage 4) — the standard three: at a prime `Q`, the circle's cosine sums bound
+  the level-one characters; `charBound_one_exact` is proved over two children.
+- Still `sorry` (four, all private): `ratioAtMost_dyadic`; `circleCos_bound` (`Q ∈ {23, 31}`, a closed statement about
+  `UD(𝔽_Q, 2)`); `charBound_one_exact_27`; `ratioAtMost_cert` (stays named, by the brief). So
+  `ratioAtMost_of_five_le_chromaticNumber` and `tca_of_five_le_localBound` rest on these four and Weil's bound.
 
 ## Stage 1 — SAVED: the readback
 
@@ -156,3 +160,94 @@ no stored term.
 0**; `chromaticNumber_le_four_of_small` CLEAN; the IMPORTED five as in stage 2 (`tca_uniform`, `exists_uniform_tail`
 among them). Without the leaf list **FAIL 5** (`axioms2-read-noleaves.out`, exit 1); plants **2 of 2 FAIL**
 (`axioms2-plant-read.out`).
+
+## Stage 4 — SAVED: the exact spectra at 23 and 31 reduced to `UD(𝔽_Q, 2)`; build 3; the job's state from the kernel's side
+
+**`charBound_one_exact` proved over two children** (≈ 200 lines). `charBound_one_of_circleCos` (proved, the standard
+three): at a prime `Q`, with `k = k₀ ⊕ k₀ι` and `e : k₀ ≃+* ZMod Q` as in stage 3, the coordinate map
+`x ↦ (A x, B x)` is a bijection `k → (ZMod Q)²` (injective, `x = A + Bι`; `|k| = Q²`) carrying `N(x) = 1` exactly onto
+`a² + b² = 1`; `ψ(Q·1) = ψ(0)`, so `ψ(1)`, `ψ(ι)` are `Q`-th roots of unity, `ζ^α`, `ζ^β` (`Complex.isPrimitiveRoot_exp`,
+`IsPrimitiveRoot.eq_pow_of_pow_eq_one`), `ψ(x) = ζ^{(αA(x) + βB(x)) mod Q}`, `(α, β) ≠ 0` as `ψ ≠ 1`, and
+`Re ζ^m = cos(2πm/Q)`. The two children (named, `sorry`):
+
+| child | statement | route (for the next implementer) |
+|---|---|---|
+| `circleCos_bound` | `Q ∈ {23, 31}` ⟹ `∃ κ < 1/3, 2/(Q+1) ≤ κ ∧ ∀ α β < Q, (α, β) ≠ 0 → −κ(Q+1) ≤ Σ_{a²+b²=1} cos(2π((αa.val + βb.val) mod Q)/Q)` — no number field | rational lower bounds `c_j ≤ cos(2πj/Q)`, `j < Q`: `Complex.exp_bound'` (an `n`-term Taylor bound for `‖x‖ ≤ (n+1)/2`) at a rational `x` below `2πj/Q` with `π` bracketed by `Real.pi_gt_d20`, `Real.pi_lt_d20`, and `cos` 1-Lipschitz (`Real.abs_cos_sub_cos_le`); then one kernel check, as a `Bool` over `List.all`, of the integer-scaled sums over all `(α, β)` (528 at 23, 960 at 31) |
+| `charBound_one_exact_27` | `Q = 27` ⟹ `∃ κ < 1/3, 2/(Q+1) ≤ κ ∧ CharBound P 1 κ` | KC13 § 5.3: `λ_min = −8`, an integer in characteristic 3; a model of `𝔽₇₂₉` and its `𝔽₃`-functionals |
+
+**The child is true as stated, read in floating point** (`tools/fs131_icm2_circlecos.py`, an evaluation of the stated
+formula, not a search; `data/fs131/icm2/circlecos.out`): the least normalised sum is `−0.331695299` at 23 (at
+`(α, β) = (3, 9)`, margin `1.638·10⁻³`) and `−0.333328453` at 31 (at `(0, 11)`, margin `4.880·10⁻⁶`), each circle of
+`Q + 1` points — KC13 § 5.3's margins, from a second instrument. Control (`--plant`, `circlecos-plant.out`): at 11 and 19,
+where Hoffman is known to fail, the same reading **FAILS** (`−0.3996`, `−0.3805`). So at 31 each cosine is needed to about
+`5·10⁻⁶` (an absolute margin of `1.56·10⁻⁴` over 32 terms).
+
+**Build 3** under the slot (`logs/build-3.log`, full output `logs/build-3-full.log.xz`,
+`build/gate/build/20261014T190801Z-213347.log`): **OK — 257 of 257 batches, 7 modules rebuilt, 9 m 54 s, exit 0**; the
+only warnings from this job's files are the four remaining leaves' `declaration uses 'sorry'` (`ClassRatio.lean` lines
+962, 1034, 1184, 1193); the five downstream modules built with none. `tools/check_architecture.py`: **PASS**
+(`logs/architecture-3.log`; ClassRatio's row reworded to its state).
+
+**No statement and no definition changed** (`statements-after3.txt.xz` against stage 1's dump; `statements-compare3.out`):
+**SAME 44, PRIVATE-SAME 69, CHANGED 0, MISSING 0, ADDED-PUBLIC 0**, ADDED-INTERNAL 81 — PASS; five plants fire
+(`statements-plant3.out`; among them one character of the private leaf `card_fibre`'s stored type, read PRIVATE-CHANGED).
+
+**Axioms** (`axioms3-read.out`, the four leaves named): **159 records — CLEAN 146, IMPORTED 5, UPSTREAM 8, FAIL 0**.
+IMPORTED: `tca_uniform`, `exists_uniform_tail`, `charBound_one_weil`, `ratioAtMost_weil`, `ratioAtMost_weil_lt`, each
+`[propext, Classical.choice, Quot.sound, StandingFive.kloosterman_bound]`. UPSTREAM: the four leaves; `charBound_one_exact`
+over its two children; `ratioAtMost_of_five_le_chromaticNumber`, `tca_of_five_le_localBound` over the four and Weil;
+`count_of_oneAvoidingDensityBound` over `Plane.upperDensity_le_of_oneAvoidingDensityBound` and
+`Rigidity.noRamifiedStableDyadic_of_tca` only. Without the leaf list **FAIL 7** (`axioms3-read-noleaves.out`, exit 1);
+the planted `sorry` and axiom **2 of 2 FAIL** (`axioms3-plant-read.out`). Not run by this job (the landing runs them on the
+joined tree): `scripts/dupnames.sh`, `lake lint`, `scripts/vacuity.sh`; this job added no public name.
+
+**Re-priced** (each from its first part): Lemma P ≈ 617 lines (the record's 350–700); the exclusions at 3 and 7 ≈ 60
+(KR1's 300–500 with K3); the exact spectra at 23 and 31 ≈ 200 of bridge, and the child `circleCos_bound` ≈ 300–600 more
+(KC13's 700–1,200 for the whole); 27: KC13's 400–600 stands, unread here; the dyadic branch: not begun — KR1 § 2.6 (c)'s
+route (64 exact, 128 by `Floor128`, `Q ≥ 256` by EN1-UQ4, the exclusions at dyadic `Q ≤ 32`, and a dyadic Lemma P, which
+the algebra here does not give: it asks `2` a unit) stands at its map price.
+
+## Drafts for the landing
+
+### The audit's block (`scripts/Axioms.lean`, by the landing)
+
+- `Rigidity/ClassRatio`: `RatioAtMost`, `tca_iff` CLEAN; **`tca_uniform` and `exists_uniform_tail` are IMPORTED records**
+  (`[propext, Classical.choice, Quot.sound, StandingFive.kloosterman_bound]`, no `sorry`) — two lines for the IMPORTED
+  section under the existing `AxiomAudit.declareImport` of `StandingFive.kloosterman_bound`; `ratioAtMost_of_five_le_chromaticNumber`
+  and `tca_of_five_le_localBound` UPSTREAM through `ratioAtMost_dyadic`, `circleCos_bound`, `charBound_one_exact_27` and
+  `ratioAtMost_cert` (private), and on Weil's bound.
+- `Rigidity/CountDescent`'s `count_of_oneAvoidingDensityBound`: UPSTREAM only through
+  `Plane.upperDensity_le_of_oneAvoidingDensityBound` (lane P) and `Rigidity.noRamifiedStableDyadic_of_tca` (M9-S); IMPORTED
+  on Weil's bound once those land.
+
+### `LEAN.md` § Searching — Lean (each to follow the last)
+
+- Inside a declaration named into a structure's namespace (`SqZeroInv.card_Kn_sq`), a bare name resolves there first:
+  `rw [sq]` used the structure's field `SqZeroInv.sq` ("did not find `?a * ?b`"), and `norm_sum_le` inside
+  `SqZeroInv.norm_sum_le` named the theorem being proved; write `pow_two`, `_root_.norm_sum_le` (FS131-ICM2).
+- `rwa [map_ofNat] at h` for `h : mk 2 * ↑hu.unit⁻¹ = 1` (`hu : IsUnit (mk 2)`) is "motive is not type correct": the unit's
+  proof mentions `mk 2`. `convert h using 2; exact (map_ofNat _ 2).symm` (`sqZeroInvAt`, FS131-ICM2).
+- `open Classical in` goes before a declaration's docstring; between the docstring and the keyword it is "unexpected token
+  'open'; expected 'lemma'" (FS131-ICM2).
+- `obtain ⟨x, hx⟩ := (Ideal.Quotient.factor_surjective _ : Function.Surjective (red P n)) t` stores `hx` with `factor`,
+  which a `rw` against `red P n x` does not find; state the type, `obtain ⟨x, hx⟩ : ∃ x, red P n x = t := …`, and name the
+  map in `RingHom.quotientKerEquivOfSurjective (f := red P n)` (FS131-ICM2).
+- `|𝓞 ⧸ P^m| = |𝓞 ⧸ P|^m` is the root-namespace `cardQuot_pow_of_prime` (`[P.IsPrime]`, `P ≠ ⊥`), read with
+  `Submodule.cardQuot_apply`; the kernel of a surjective ring map has `|R| / |S|` elements by
+  `Submodule.card_eq_card_quotient_mul_card` with `RingHom.quotientKerEquivOfSurjective`. In `Finset.sum_nbij'` the last
+  argument is `f a = g (i a)`: `i` runs from the left sum's index to the right's (FS131-ICM2).
+- A character of a finite ring of characteristic `p` takes `p`-th roots of unity: `ψ(p·1) = ψ 0`, then
+  `(Complex.isPrimitiveRoot_exp p _).eq_pow_of_pow_eq_one` writes `ψ 1 = ζ^α`; `AddChar.map_nsmul_eq_pow` and
+  `Complex.exp_ofReal_mul_I_re` give `Re ψ = cos` (`charBound_one_of_circleCos`, FS131-ICM2).
+
+### `ARCHITECTURE.md`
+
+`Rigidity/ClassRatio`'s row: its imports cell names `Arith/GapSeven` (stage 3); its state sentence rewritten to this job's
+state (stage 4). `tools/check_architecture.py`: PASS.
+
+### For the landing to read
+
+- `ClassRatio`'s module docstring still says "skeleton" (not edited: the brief allowed proofs, private helpers and import
+  lines); FS131-ICM1's rewording stands, with "Lemma P and the exclusions at 3 and 7 proved (FS131-ICM2)".
+- `isUnit_mk_of_notMem` (private, this module) and `UpperHalf.isUnit_mk_pow` (public) say nearly one thing in two forms
+  (an element outside `P`; an element of `P`'s prime complement): no doubled name, a tidy for the landing.
