@@ -110,3 +110,9 @@ branch and do not push**; I copy the branches to a local backup.
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 (2026-10-14 09:24 UTC) — the generator change is ruled: apply it
+
+Apply exactly `data/fs131/ip23/generator-change.diff` (sha256 `0bc7347b4bcac4a7…`) to `tools/fs131_ie1_port.py`, in its own commit before any generated module. After it, run in the real tree: the three FS131-IE1 modules regenerate byte-identical; `--check` OK; the IE1 axioms block byte-identical; the self-test refuses its 29 plants and accepts its partner. A ranged module that needs a line outside its ranges comes to me. The `ErgodicSMul` field difference between the pins is recorded as a pin difference, with both prints as evidence (inventory item 805).
+
+You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
