@@ -1,0 +1,25 @@
+'HadwigerNelson.OneClass.countable_algPlane' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.exists_foelner_finset' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.exists_invariant_of_closed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.exists_isInvariantLaw' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.exists_isInvariantLaw_unitDistance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.exists_shiftInvariant_of_foelner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.exists_turnInvariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.norm_kCoeff_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.unitDistance_algPlane_eq_circulantGraph' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.OneClass.IsShiftInvariantLaw.measure_origin_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.exists_mem_le_sectionDensity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.le_lintegral_sectionDensity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.measurable_sectionDensity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.measure_le_sectionDensity_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.ofReal_integral_le_measure_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.sectionDensity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.sectionDensity_empty' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.sectionDensity_setOf_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.sectionDensity_univ' depends on axioms: [propext, Classical.choice, Quot.sound]
+data/fs133/ib1/lean/AxiomsPlanted.lean:24:8: warning: declaration uses `sorry`
+'fs133IB1PlantedRecord' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

@@ -1,0 +1,44 @@
+'HadwigerNelson.TorsionExtraction.layer_step' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.TorsionExtraction.layer_dichotomy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.TorsionExtraction.inv5' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.TorsionExtraction.coe_inv5' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.TorsionExtraction.tendsto_layer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.TorsionExtraction.exists_torsion_mem_fieldBandSet' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.TorsionExtraction.exists_zmod_hom_of_mem_torsionBy' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.TorsionExtraction.colorable_two_iff_fieldBandSet_two_nonempty' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.TorsionExtraction.mem_fieldBandSet_two_of_inv_three_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.TorsionExtraction.colorable_two_of_inv_three_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_of_inv_three_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.TorsionExtraction.chromaticNumber_planeOver_ne_three_of_inv_three_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.TorsionExtraction.inv_natCast_mem_unitRing_of_sqrt_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.TorsionExtraction.inv_three_mem_unitRing_of_sqrt_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.TorsionExtraction.not_colorable_two_of_sqrt_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.TorsionExtraction.three_le_chromaticNumber_planeOver_of_sqrt_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_of_sqrt_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_fieldOfRadicands' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

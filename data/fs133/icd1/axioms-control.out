@@ -1,0 +1,6 @@
+plant 'sorryAx in a clean record': REPORTED (OTHER AXIOM HadwigerNelson.OneClass.AdmissibleAe: ['sorryAx'])
+plant 'the import in a clean record': REPORTED (IMPORT      SimpleGraph.le_finIndepRatio_iff: a record that must be clean prints the declared outside theorem)
+plant 'the import missing from an imported record': REPORTED (NO IMPORT   HadwigerNelson.OneClass.IsInvariantLaw.measure_origin_le_mOne: a record that must rest on the declared outside theorem does not print it)
+plant 'a record removed': REPORTED (NO RECORD   HadwigerNelson.OneClass.AdmissibleAe)
+unplanted: PASS
+CONTROL OK

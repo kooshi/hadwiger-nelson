@@ -1,0 +1,32 @@
+-- CLEAN: FS-133, Plane/OneClass/Algebraic, Fractional, Pair (FS133-ICD1): 15 records on the standard three
+#print axioms HadwigerNelson.OneClass.exists_measurable_indep_of_field
+#print axioms HadwigerNelson.OneClass.mOne_le_finIndepRatio
+#print axioms HadwigerNelson.OneClass.tendsto_minIndepNum_div_finIndepRatio
+#print axioms HadwigerNelson.OneClass.exists_periodic_indep
+#print axioms HadwigerNelson.OneClass.exists_fold_cover
+#print axioms HadwigerNelson.OneClass.fractionalChromaticNumber_plane_le
+#print axioms HadwigerNelson.OneClass.fractionalChromaticNumber_induce_le
+#print axioms HadwigerNelson.OneClass.AdmissibleOn
+#print axioms HadwigerNelson.OneClass.AdmissibleAe
+#print axioms HadwigerNelson.OneClass.IsAlgPattern
+#print axioms HadwigerNelson.OneClass.colourPattern
+#print axioms HadwigerNelson.OneClass.admissibleOn_colourPattern_iff
+#print axioms HadwigerNelson.OneClass.isAlgPattern_colourPattern
+#print axioms HadwigerNelson.OneClass.exists_admissible_colourPattern_seven
+#print axioms HadwigerNelson.OneClass.AdmissibleOn.mono
+-- IMPORTED: FS-133, the same three files (FS133-ICD1): 9 records on the standard three and
+-- HadwigerNelson.Outside.OAI158.Spectral.residual_fourier
+#print axioms HadwigerNelson.OneClass.IsInvariantLaw.measure_origin_le_mOne
+#print axioms HadwigerNelson.OneClass.finIndepRatio_algPlane_le_mOne
+#print axioms HadwigerNelson.OneClass.finIndepRatio_plane_eq_mOne
+#print axioms HadwigerNelson.OneClass.finIndepRatio_algPlane_eq_mOne
+#print axioms HadwigerNelson.OneClass.one_seventh_le_mOne
+#print axioms HadwigerNelson.OneClass.tendsto_minIndepNum_div
+#print axioms HadwigerNelson.OneClass.fractionalChromaticNumber_plane
+#print axioms HadwigerNelson.OneClass.iSup_fractionalChromaticNumber_plane
+#print axioms HadwigerNelson.OneClass.fractionalChromaticNumber_algPlane
+-- NOT YET FILED: Pair's leaves Q4 and Q5 are outstanding; once proved, the first under CLEAN, the other three under IMPORTED
+-- #print axioms HadwigerNelson.OneClass.exists_measurable_admissibleAe    -- IMPORTED
+-- #print axioms HadwigerNelson.OneClass.exists_admissibleOn_of_ae    -- CLEAN
+-- #print axioms HadwigerNelson.OneClass.exists_admissibleOn_univ_iff_ae    -- IMPORTED
+-- #print axioms HadwigerNelson.OneClass.exists_admissibleOn_univ_iff_algPlane    -- IMPORTED

@@ -1,0 +1,12 @@
+FS131-LDB1 prediction for the vacuity scan, before it runs (FS131-L5's counter on the joined build, data/fs131/ldb1/count-modules-join.out,
+against the last landing's, data/fs133/ld1/gate/count-modules-final.out):
+  counter totals: last landing 17902 declarations, 234 refutations; now 20563, 234
+  of the density bound's 83 modules: 2662 declarations, 0 refutations; outside them the counts move by -1 and 0
+  sites: no binder of a tracked carrier in the 83 modules (FS131-IDB3's reading) -> sites=1454 and every site count unchanged
+  the -1 outside the 83, read before the scan: two generated-on-demand theorems (dupnames' GENERATED rows) change the module
+  the environment attributes them to — MeasureTheory.Measure.addHaar.congr_simp from Arith.StationaryRatio to Mathlib's
+  Analysis.Calculus.BumpFunction.FiniteDimension (now in the joined closure: the counter no longer counts it as the library's),
+  and MeasureTheory.measureUnivNNReal.eq_1 from Outside.OAI158Palette to Outside.OAI158BoundedFunctions (counted either way)
+  PREDICTED: declarations=20563 (17902 + 2662 - 1) refutations-skipped=234 sites=1454, vacuous=0 stale=0 declared=3
+  witnessed=38 generic=1411 unknown=2; by module: Arith.StationaryRatio -1, OAI158Palette -1, OAI158BoundedFunctions +1,
+  the 83 modules +2662

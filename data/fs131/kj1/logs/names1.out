@@ -1,0 +1,56 @@
+@Ideal.image_subset_nonunits_valuationSubring : ∀ {K : Type u_1} [inst : Field K] {A : Subring K} (I : Ideal ↥A),
+  I ≠ ⊤ → ∃ B, A ≤ B.toSubring ∧ ⇑A.subtype '' ↑I ⊆ ↑B.nonunits
+@ValuationSubring.mem_nonunits_iff_exists_mem_maximalIdeal : ∀ {K : Type u_1} [inst : Field K] {A : ValuationSubring K}
+  {a : K}, a ∈ A.nonunits ↔ ∃ (ha : a ∈ A), ⟨a, ha⟩ ∈ IsLocalRing.maximalIdeal ↥A
+@RingHom.ker_isMaximal_of_surjective : ∀ {R : Type u_1} {K : Type u_2} {F : Type u_3} [inst : Ring R]
+  [inst_1 : DivisionRing K] [inst_2 : FunLike F R K] [inst_3 : RingHomClass F R K] (f : F),
+  Function.Surjective ⇑f → (RingHom.ker f).IsMaximal
+@IsLocalRing.eq_maximalIdeal : ∀ {R : Type u_1} [inst : CommSemiring R] [inst_1 : IsLocalRing R] {I : Ideal R},
+  I.IsMaximal → I = IsLocalRing.maximalIdeal R
+@UnitRing.normOne_subset_iff_stable : ∀ {L : Type u_1} [inst : Field L] (σ : L →+* L),
+  (∀ (z : L), σ (σ z) = z) → ∀ (B : ValuationSubring L), normOne σ ⊆ ↑B ↔ ∀ z ∈ B, σ z ∈ B
+@UnitRing.coe_mem_unitRingOver_iff : ∀ {F : Subfield ℝ} (x : ↥(UnitRing.planeOverSubfield F)),
+  ↑x ∈ UnitRing.unitRingOver F ↔ x ∈ UnitRing.unitRing (conjOn ⋯)
+@UnitRing.mem_normOne_conjOn_iff : ∀ {F : Subfield ℝ} (z : ↥(UnitRing.planeOverSubfield F)),
+  z ∈ normOne (conjOn ⋯) ↔ ‖↑z‖ = 1
+@ValuationSubring.mem_nonunits_iff_or : ∀ {K : Type u_1} [inst : Field K] (A : ValuationSubring K) {x : K},
+  x ∈ A.nonunits ↔ x = 0 ∨ x⁻¹ ∉ A
+@Ideal.Quotient.field : {R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → [I.IsMaximal] → Field (R ⧸ I)
+@Ideal.comap_ne_top : ∀ {R : Type u_1} {S : Type u_2} {F : Type u_3} [inst : Semiring R] [inst_1 : Semiring S]
+  [inst_2 : FunLike F R S] (f : F) {K : Ideal S} [inst_3 : RingHomClass F R S], K ≠ ⊤ → Ideal.comap f K ≠ ⊤
+@normOne_subset_valuationSubring : ∀ {L : Type u_1} [inst : Field L] (A : ValuationSubring L) {σ : L →+* L},
+  (∀ z ∈ A, σ z ∈ A) → (∀ (z : L), σ (σ z) = z) → normOne σ ⊆ ↑A
+@StandingFive.card_normOne : ∀ {k : Type u_1} [inst : Field k] [inst_1 : Fintype k] [inst_2 : DecidableEq k] {Q : ℕ},
+  Fintype.card k = Q ^ 2 → {u | u ^ (Q + 1) = 1}.card = Q + 1
+@StandingFive.card_fixed_of_involution : ∀ {k : Type u_1} [inst : Field k] [Finite k] (σ : k →+* k),
+  (∀ (x : k), σ (σ x) = x) →
+    ∀ {ι : k},
+      ι ^ 2 = -1 →
+        σ ι = -ι →
+          2 ≠ 0 →
+            Nat.card k = Nat.card ↥(σ.eqLocusField (RingHom.id k)) ^ 2 ∧
+              Nat.card ↥(σ.eqLocusField (RingHom.id k)) % 4 = 3
+@StandingFive.involution_eq_pow : ∀ {k : Type u_1} [inst : Field k] [inst_1 : Fintype k] (σ : k →+* k),
+  (∀ (x : k), σ (σ x) = x) → σ ≠ RingHom.id k → ∀ {Q : ℕ}, Fintype.card k = Q ^ 2 → ∀ (x : k), σ x = x ^ Q
+@ThreeColourCriterion.exists_mul_conj_inv_eq_of_mul_conj_eq_one : ∀ {k : Type u_1} [inst : Field k] (σ : k →+* k),
+  (∀ (x : k), σ (σ x) = x) → σ ≠ RingHom.id k → ∀ {t : k}, t * σ t = 1 → ∃ y, ↑y * σ ↑y⁻¹ = t
+data/fs131/kj1/probes/names1.lean:18:8: error(lean.unknownIdentifier): Unknown identifier `HadwigerNelson.UpperHalf.exists_I_integer`
+@Subring.closure_induction : ∀ {R : Type u_1} [inst : NonAssocRing R] {s : Set R}
+  {p : (x : R) → x ∈ Subring.closure s → Prop},
+  (∀ (x : R) (hx : x ∈ s), p x ⋯) →
+    p 0 ⋯ →
+      p 1 ⋯ →
+        (∀ (x y : R) (hx : x ∈ Subring.closure s) (hy : y ∈ Subring.closure s), p x hx → p y hy → p (x + y) ⋯) →
+          (∀ (x : R) (hx : x ∈ Subring.closure s), p x hx → p (-x) ⋯) →
+            (∀ (x y : R) (hx : x ∈ Subring.closure s) (hy : y ∈ Subring.closure s), p x hx → p y hy → p (x * y) ⋯) →
+              ∀ {x : R} (hx : x ∈ Subring.closure s), p x hx
+@RingHom.codRestrict : {R : Type u_1} →
+  {S : Type u_2} →
+    [inst : NonAssocSemiring R] →
+      [inst_1 : NonAssocSemiring S] →
+        {σS : Type u_3} →
+          [inst_2 : SetLike σS S] →
+            [inst_3 : SubsemiringClass σS S] → (f : R →+* S) → (s : σS) → (∀ (x : R), f x ∈ s) → R →+* ↥s
+data/fs131/kj1/probes/names1.lean:21:8: error(lean.unknownIdentifier): Unknown identifier `HadwigerNelson.UpperHalf.exists_centre`
+@Ideal.IsMaximal.eq_of_le : ∀ {α : Type u_1} [inst : Semiring α] {I J : Ideal α}, I.IsMaximal → J ≠ ⊤ → I ≤ J → I = J
+CharacterColouring.unitSet : (F : Subfield ℝ) → Set ↥(unitRing F)

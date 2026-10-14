@@ -1,0 +1,77 @@
+Proofs.HadwigerNelson.Outside.OAI158Rigidity: AXIOM-PROVED 1, IDENTICAL 6, MOVED-IDENTICAL 7
+  MOVED-IDENTICAL        def      HadwigerNelson.Outside.OAI158.ContinuousVectors.op -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        def      HadwigerNelson.Outside.OAI158.ContinuousVectors.space -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        def      HadwigerNelson.Outside.OAI158.Spectral.DiscreteE -> Proofs.HadwigerNelson.Outside.OAI158Basic
+  MOVED-IDENTICAL        def      HadwigerNelson.Outside.OAI158.Spectral.E -> Proofs.HadwigerNelson.Outside.OAI158Basic
+  MOVED-IDENTICAL        def      HadwigerNelson.Outside.OAI158.Spectral.K -> Proofs.HadwigerNelson.Outside.OAI158Basic
+  MOVED-IDENTICAL        def      HadwigerNelson.Outside.OAI158.Spectral.instCommGroupDiscreteE -> Proofs.HadwigerNelson.Outside.OAI158Basic
+  MOVED-IDENTICAL        def      HadwigerNelson.Outside.OAI158.Spectral.kCoeff -> Proofs.HadwigerNelson.Outside.OAI158Basic
+  AXIOM-PROVED           axiom    HadwigerNelson.Outside.OAI158.Spectral.residual_fourier -> Proofs.HadwigerNelson.Outside.OAI158Ergodicity
+Proofs.HadwigerNelson.Outside.OAI158Transfer: GENERATED-IDENTICAL 2, MOVED-IDENTICAL 45, MOVED-INSTANCES-ONLY 3
+  MOVED-INSTANCES-ONLY   def      HadwigerNelson.Outside.OAI158.approxField -> Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
+      only before: HadwigerNelson.Outside.OAI158.Koopman.isometry._proof_1 HadwigerNelson.Outside.OAI158.Koopman.isometry._proof_2
+      only after:  HadwigerNelson.Outside.OAI158.LabelModel.projected._proof_1 HadwigerNelson.Outside.OAI158.approxIndex._proof_1
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.approxField_measurable -> Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.approxField_tendsto -> Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
+  MOVED-INSTANCES-ONLY   def      HadwigerNelson.Outside.OAI158.approxIndex -> Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
+      only before: HadwigerNelson.Outside.OAI158.Koopman.isometry._proof_1 HadwigerNelson.Outside.OAI158.Koopman.isometry._proof_2
+      only after:  HadwigerNelson.Outside.OAI158.LabelModel.projected._proof_1 HadwigerNelson.Outside.OAI158.approxIndex._proof_2
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.dense_approx -> Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.exists_measurable_field -> Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.index_bound -> Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.index_measurable -> Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
+  MOVED-INSTANCES-ONLY   def      HadwigerNelson.Outside.OAI158.measurableField -> Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
+      only before: HadwigerNelson.Outside.OAI158.Koopman.isometry._proof_1 HadwigerNelson.Outside.OAI158.Koopman.isometry._proof_2
+      only after:  HadwigerNelson.Outside.OAI158.LabelModel.projected._proof_1 HadwigerNelson.Outside.OAI158.approxIndex._proof_1
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.measurableField_measurable -> Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.positive_orthogonal -> Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.projection_fixed_of_contraction -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        def      HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp_eq -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp_lipschitz -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp_range -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp_zero -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.ContinuousVectors.covariance_mem -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.ContinuousVectors.dist_op -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.ContinuousVectors.instCompleteSpaceSubtypeMemSubmoduleComplexSpace -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.ContinuousVectors.isClosed_space -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.ContinuousVectors.nonlinear_mem -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.ContinuousVectors.norm_op -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.ContinuousVectors.op_add -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.ContinuousVectors.op_comm -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.ContinuousVectors.op_mem -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.ContinuousVectors.op_orthogonal -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.ContinuousVectors.op_zero -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.ContinuousVectors.orbit_continuous -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.ContinuousVectors.projection_coefficient -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.ContinuousVectors.projection_covariance_fixed -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.ContinuousVectors.projection_range -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        def      HadwigerNelson.Outside.OAI158.Koopman.isometry -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.Koopman.nonlinear_commute -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        def      HadwigerNelson.Outside.OAI158.Koopman.unitary -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.Koopman.unitary_apply -> Proofs.HadwigerNelson.Outside.OAI158Representations
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.Spectral.E_countable -> Proofs.HadwigerNelson.Outside.OAI158Basic
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.Spectral.algebraic_norm -> Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.Spectral.circle_closed_induction -> Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.Spectral.dense_E -> Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
+  MOVED-IDENTICAL        def      HadwigerNelson.Outside.OAI158.Spectral.imagUnit -> Proofs.HadwigerNelson.Outside.OAI158Basic
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.Spectral.kCoeff_ne_zero -> Proofs.HadwigerNelson.Outside.OAI158Basic
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.Spectral.normalized_algebraic -> Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
+  MOVED-IDENTICAL        def      HadwigerNelson.Outside.OAI158.Spectral.orbitExtension -> Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.Spectral.orbitExtension_continuous -> Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.Spectral.orbitExtension_eq -> Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.Spectral.orbitExtension_inner -> Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
+  MOVED-IDENTICAL        theorem  HadwigerNelson.Outside.OAI158.Spectral.orbit_uniformContinuous -> Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
+  GENERATED-IDENTICAL    theorem  HadwigerNelson.Outside.OAI158.approxField.congr_simp -> Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
+  GENERATED-IDENTICAL    theorem  HadwigerNelson.Outside.OAI158.approxIndex.congr_simp -> Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
+Proofs.HadwigerNelson.Plane.OneClass.SectionDensity: BINDER-DROPPED 1, IDENTICAL 11
+  BINDER-DROPPED         theorem  HadwigerNelson.Plane.ofReal_integral_le_measure_pos
+Proofs.HadwigerNelson.Plane.OneClass.Defs: IDENTICAL 57
+Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw: IDENTICAL 28
+Proofs.HadwigerNelson.Plane.OneClass.Field: IDENTICAL 31
+Proofs.HadwigerNelson.Plane.OneClass.Algebraic: IDENTICAL 10
+Proofs.HadwigerNelson.Plane.OneClass.Fractional: IDENTICAL 18
+Proofs.HadwigerNelson.Plane.OneClass.Pair: IDENTICAL 25
+constants of the first dump: 245  AXIOM-PROVED 1  BINDER-DROPPED 1  GENERATED-IDENTICAL 2  IDENTICAL 186  MOVED-IDENTICAL 52  MOVED-INSTANCES-ONLY 3  new in the second: 0
+MOVED OK: every listed change is as listed; nothing else moved
+exit=0

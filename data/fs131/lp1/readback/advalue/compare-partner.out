@@ -1,0 +1,17 @@
+slot: admitted lp1: mem 8 GiB (hard cap), cpus 0
+recorded 80 constants in data/fs131/lp1/readback/advalue/instance-constants.txt
+ADAPTED	definition	§.CommutingSpectral.algebra_commRing	ADAPTED_VALUE: the release's own instance named with the Prop it asks proved explicitly; the read-back reads UP-TO-INSTANCES
+UP-TO-INSTANCES	lemma	§.CommutingSpectral.generator_unitary	INSTANCE_EVIDENCE: differs inside instance arguments by the release's own ['§.CommutingSpectral.algebra_commRing'], the two instance terms equal by rfl at this pin (the kernel's receipt in data/fs131/lp1/readback/evidence.out)
+  aux          AUX-ABSENT       7
+  aux          AUX-DIFFERS      10
+  aux          IDENTICAL        42
+  aux          PIN-DIFFERENCE   1
+  aux          UP-TO-INSTANCES  13
+  definition   ADAPTED          1
+  definition   IDENTICAL        12
+  definition   UP-TO-INSTANCES  7
+  lemma        IDENTICAL        23
+  lemma        UP-TO-INSTANCES  14
+  constants differing inside instance and proof arguments: 80
+constants: 130  failing: 0  fatal: 0
+READBACK OK

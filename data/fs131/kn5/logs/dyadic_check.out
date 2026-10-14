@@ -1,0 +1,7 @@
+box     class A m%4 in [1]: odd-N 740  even-N 96  failures 0  first None
+residue class A m%4 in [1]: cases 20480  failures 0  first None
+box     class B m%4 in [2]: odd-N 660  even-N 176  failures 0  first None
+residue class B m%4 in [2]: cases 12288  failures 0  first None
+box     class C m%8 in [3]: odd-N 256  even-N 272  failures 0  first None
+residue class C m%8 in [3]: cases 8192  failures 0  first None
+plant=None failures=0

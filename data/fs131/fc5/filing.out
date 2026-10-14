@@ -1,0 +1,32 @@
+D1: slot found once, replaced
+D1b: slot found once, inserted after
+D2: slot found once, replaced
+D3: counts stand (slot read once); nothing changed
+D4: slot found once, replaced
+D5: slot found once, replaced
+D6: slot found once, replaced
+D7: slot found once, replaced
+D8: slot found once, inserted after
+D9: slot found once, replaced
+D10a (the text of D5): slot found once, replaced
+D10b: slot found once, inserted after
+D10c: slot found once, replaced
+D11a: residual_fourier's table row removed (one line)
+D11b: slot found once, inserted after
+D11c: description cell of Outside/OAI158Rigidity replaced
+D11d SectionDensity: lead replaced
+D11d Defs: lead replaced
+D11d InvariantLaw: lead replaced
+D11d Field: lead replaced
+D11d Algebraic: lead replaced
+D11d Fractional: lead replaced
+D11d Pair: lead replaced
+D11e (Algebraic): slot found once, replaced
+D11e (InvariantLaw): slot found once, replaced
+D12a: slot found once, inserted after
+D12b (24 bullets): slot found once, inserted after
+D13: GATE_CHANGES entry inserted after the LP1 entry
+D13b: superseded-count entries (before the 'ℤ[i]' entry): 8961 | 9,024 | 9024 | declarations=17785 | 17785 | refutations-skipped=232 | 232 | declarations=17785 refutations-skipped=232 sites=1454
+D14: slot found once, inserted after
+filed: ARCHITECTURE.md, BIBLIOGRAPHY.md, CLAUDE.md, LEAN.md, LEDGER.md, plans/FRONTIER-STUBS.md, plans/STUB-one-class-transfer.md, tools/claude_md_fact_audit.py
+CLAUDE.md bytes 80619

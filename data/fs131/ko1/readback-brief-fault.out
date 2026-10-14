@@ -1,0 +1,7 @@
+MISMATCH data/fs131/REQUEST-2026-10-13.md (1 lines) | W4: (2026-10-14, at his check-in, after my explanation of the transfer
+MISMATCH plans/EXT-OAI1-audit.md (1 lines) | | `proper_to_borel_weak` (the transfer) | 1,997 | 32 | six to eight jo
+MISMATCH plans/EXT-OAI1-audit.md (1 lines) | | the headline | 3,520 | 70 | every module of the cone is used |
+MISMATCH plans/FS131-close-inventory.md (1 lines) | 728. **Kooshi's word at his check-in (2026-10-14 03:25 UTC), filed ver
+MISMATCH plans/FS131-close-inventory.md (1 lines) | 718. **FS133-IA1 handed back: the density equality's outside side is d
+0 matched, 5 mismatched
+exit=1

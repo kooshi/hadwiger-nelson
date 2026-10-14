@@ -1,0 +1,22 @@
+{
+ "global_instances": [
+  [
+   19,
+   "global: on a type built from the release's own definition: `IsProbabilityMeasure` of the release's law (`RelativeProduct`), found only by a search on that term (as `Kernels.lean:658`)"
+  ],
+  [
+   210,
+   "global: on a type built from the release's own definition `Family G X` (`RelativeProducts.lean`): its coercion to functions"
+  ],
+  [
+   211,
+   "global: on a type built from the release's own definition `Family G X` (`RelativeProducts.lean`): its real module structure"
+  ]
+ ],
+ "scoped": [
+  [
+   372,
+   "scoped: an instance on Mathlib's types — `MeasurableConstVAdd G (X × X)` for the product action of Mathlib's `Prod` over the section's variables (`LEAN.md` § Assumptions: an instance the source declares on a type that is Mathlib's is scoped here); the keyword, nothing else"
+  ]
+ ]
+}

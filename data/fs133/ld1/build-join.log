@@ -1,0 +1,302 @@
+slot: waiting (ledger 22 + 10 > budget 22 GiB)
+slot: admitted ld1: mem 10 GiB (hard cap), cpus 0,5,6,7
+==> build: this run's full output: build/gate/build/20261014T132220Z-3162062.log
+==> up-to-date check: exit 3 after 3s (3 means something needs building) — walking the batches
+==> 255 batches of at most 8 modules, capped at 10G
+==> [1/255] 8 modules  08:22:24
+==> [2/255] 8 modules  08:22:26
+    rebuilt: Outside.OAI158Amenability (7.8s), Outside.OAI158Basic (8.1s)
+==> [3/255] 8 modules  08:22:36
+    rebuilt: Outside.OAI158PhaseEncoding (6.7s), Outside.OAI158SmallArcs (10s), Outside.OAI158Centers (12s), Outside.OAI158NumberFields (12s), Outside.OAI158InvariantMean (16s)
+==> [4/255] 8 modules  08:22:54
+    rebuilt: Plane.OneClass.SectionDensity (2.1s)
+==> [5/255] 3 modules  08:22:57
+==> [6/255] 8 modules  08:22:58
+    rebuilt: Outside.OAI158Characters (10s), Outside.OAI158PhaseCollision (11s), Outside.OAI158Selections (11s), Outside.OAI158RelativeCenters (14s)
+==> [7/255] 8 modules  08:23:15
+==> [8/255] 2 modules  08:23:16
+==> [9/255] 8 modules  08:23:17
+==> [10/255] 8 modules  08:23:19
+==> [11/255] 8 modules  08:23:19
+==> [12/255] 8 modules  08:23:20
+==> [13/255] 8 modules  08:23:21
+==> [14/255] 8 modules  08:23:22
+==> [15/255] 8 modules  08:23:23
+==> [16/255] 8 modules  08:23:24
+==> [17/255] 8 modules  08:23:25
+==> [18/255] 8 modules  08:23:26
+    rebuilt: Outside.OAI158ConditionalSelection (5.2s)
+==> [19/255] 8 modules  08:23:32
+    rebuilt: Outside.OAI158Multipliers (4.3s)
+==> [20/255] 8 modules  08:23:38
+==> [21/255] 8 modules  08:23:40
+    rebuilt: Outside.OAI158FourierTests (3.1s)
+==> [22/255] 8 modules  08:23:44
+==> [23/255] 3 modules  08:23:46
+==> [24/255] 8 modules  08:23:47
+==> [25/255] 8 modules  08:23:48
+==> [26/255] 8 modules  08:23:50
+==> [27/255] 8 modules  08:23:51
+    rebuilt: Outside.OAI158ConditionalSpectrum (11s)
+==> [28/255] 1 modules  08:24:04
+==> [29/255] 8 modules  08:24:05
+==> [30/255] 8 modules  08:24:07
+==> [31/255] 8 modules  08:24:08
+    rebuilt: Outside.OAI158Approximation (6.6s)
+==> [32/255] 7 modules  08:24:16
+==> [33/255] 8 modules  08:24:18
+==> [34/255] 8 modules  08:24:19
+==> [35/255] 8 modules  08:24:21
+==> [36/255] 8 modules  08:24:23
+==> [37/255] 8 modules  08:24:24
+==> [38/255] 8 modules  08:24:25
+==> [39/255] 8 modules  08:24:27
+==> [40/255] 8 modules  08:24:28
+==> [41/255] 8 modules  08:24:29
+==> [42/255] 8 modules  08:24:31
+==> [43/255] 8 modules  08:24:32
+==> [44/255] 8 modules  08:24:33
+==> [45/255] 8 modules  08:24:35
+==> [46/255] 8 modules  08:24:36
+==> [47/255] 8 modules  08:24:37
+==> [48/255] 8 modules  08:24:39
+==> [49/255] 8 modules  08:24:40
+==> [50/255] 8 modules  08:24:41
+==> [51/255] 8 modules  08:24:43
+==> [52/255] 8 modules  08:24:44
+==> [53/255] 8 modules  08:24:45
+==> [54/255] 8 modules  08:24:47
+==> [55/255] 8 modules  08:24:48
+==> [56/255] 8 modules  08:24:49
+==> [57/255] 8 modules  08:24:51
+==> [58/255] 8 modules  08:24:51
+==> [59/255] 8 modules  08:24:53
+    rebuilt: Outside.OAI158ConditionalLimits (13s)
+==> [60/255] 8 modules  08:25:08
+==> [61/255] 8 modules  08:25:09
+==> [62/255] 8 modules  08:25:11
+==> [63/255] 8 modules  08:25:13
+==> [64/255] 8 modules  08:25:15
+==> [65/255] 8 modules  08:25:17
+==> [66/255] 8 modules  08:25:19
+==> [67/255] 8 modules  08:25:21
+==> [68/255] 8 modules  08:25:23
+==> [69/255] 8 modules  08:25:25
+==> [70/255] 8 modules  08:25:27
+==> [71/255] 8 modules  08:25:29
+==> [72/255] 8 modules  08:25:30
+==> [73/255] 8 modules  08:25:32
+==> [74/255] 8 modules  08:25:34
+==> [75/255] 8 modules  08:25:36
+==> [76/255] 8 modules  08:25:38
+==> [77/255] 8 modules  08:25:40
+==> [78/255] 8 modules  08:25:42
+==> [79/255] 8 modules  08:25:44
+==> [80/255] 8 modules  08:25:45
+==> [81/255] 8 modules  08:25:47
+==> [82/255] 8 modules  08:25:49
+==> [83/255] 8 modules  08:25:51
+==> [84/255] 8 modules  08:25:53
+==> [85/255] 8 modules  08:25:55
+==> [86/255] 8 modules  08:25:57
+==> [87/255] 8 modules  08:25:59
+==> [88/255] 8 modules  08:26:01
+==> [89/255] 8 modules  08:26:03
+==> [90/255] 8 modules  08:26:05
+==> [91/255] 8 modules  08:26:07
+==> [92/255] 8 modules  08:26:08
+==> [93/255] 8 modules  08:26:10
+==> [94/255] 8 modules  08:26:12
+==> [95/255] 8 modules  08:26:14
+==> [96/255] 8 modules  08:26:16
+==> [97/255] 8 modules  08:26:18
+==> [98/255] 8 modules  08:26:20
+==> [99/255] 8 modules  08:26:22
+==> [100/255] 8 modules  08:26:24
+==> [101/255] 8 modules  08:26:25
+==> [102/255] 8 modules  08:26:27
+==> [103/255] 8 modules  08:26:29
+==> [104/255] 8 modules  08:26:31
+==> [105/255] 8 modules  08:26:33
+==> [106/255] 8 modules  08:26:35
+==> [107/255] 8 modules  08:26:37
+==> [108/255] 8 modules  08:26:40
+==> [109/255] 8 modules  08:26:41
+==> [110/255] 8 modules  08:26:43
+==> [111/255] 8 modules  08:26:45
+==> [112/255] 8 modules  08:26:47
+==> [113/255] 8 modules  08:26:49
+==> [114/255] 8 modules  08:26:51
+==> [115/255] 8 modules  08:26:54
+==> [116/255] 8 modules  08:26:56
+==> [117/255] 8 modules  08:26:57
+==> [118/255] 8 modules  08:26:59
+==> [119/255] 8 modules  08:27:01
+==> [120/255] 8 modules  08:27:03
+==> [121/255] 8 modules  08:27:05
+==> [122/255] 8 modules  08:27:07
+==> [123/255] 8 modules  08:27:09
+==> [124/255] 8 modules  08:27:11
+==> [125/255] 8 modules  08:27:13
+==> [126/255] 8 modules  08:27:15
+==> [127/255] 8 modules  08:27:16
+==> [128/255] 8 modules  08:27:18
+==> [129/255] 8 modules  08:27:20
+==> [130/255] 8 modules  08:27:22
+==> [131/255] 8 modules  08:27:24
+==> [132/255] 8 modules  08:27:26
+==> [133/255] 8 modules  08:27:28
+==> [134/255] 8 modules  08:27:30
+==> [135/255] 8 modules  08:27:32
+==> [136/255] 8 modules  08:27:34
+==> [137/255] 8 modules  08:27:35
+==> [138/255] 8 modules  08:27:37
+==> [139/255] 8 modules  08:27:39
+==> [140/255] 8 modules  08:27:41
+==> [141/255] 8 modules  08:27:43
+==> [142/255] 8 modules  08:27:45
+==> [143/255] 8 modules  08:27:47
+==> [144/255] 8 modules  08:27:49
+==> [145/255] 8 modules  08:27:51
+==> [146/255] 8 modules  08:27:53
+==> [147/255] 8 modules  08:27:55
+==> [148/255] 8 modules  08:27:57
+==> [149/255] 8 modules  08:27:59
+==> [150/255] 8 modules  08:28:01
+==> [151/255] 8 modules  08:28:02
+==> [152/255] 8 modules  08:28:04
+==> [153/255] 8 modules  08:28:06
+==> [154/255] 8 modules  08:28:08
+==> [155/255] 8 modules  08:28:10
+==> [156/255] 8 modules  08:28:12
+==> [157/255] 8 modules  08:28:14
+==> [158/255] 8 modules  08:28:16
+==> [159/255] 8 modules  08:28:18
+==> [160/255] 8 modules  08:28:20
+==> [161/255] 8 modules  08:28:22
+==> [162/255] 8 modules  08:28:24
+==> [163/255] 8 modules  08:28:26
+==> [164/255] 8 modules  08:28:28
+==> [165/255] 8 modules  08:28:30
+==> [166/255] 8 modules  08:28:32
+==> [167/255] 8 modules  08:28:34
+==> [168/255] 8 modules  08:28:35
+==> [169/255] 8 modules  08:28:37
+==> [170/255] 8 modules  08:28:39
+==> [171/255] 8 modules  08:28:41
+==> [172/255] 8 modules  08:28:43
+==> [173/255] 8 modules  08:28:45
+==> [174/255] 8 modules  08:28:47
+==> [175/255] 8 modules  08:28:48
+==> [176/255] 8 modules  08:28:50
+==> [177/255] 8 modules  08:28:52
+==> [178/255] 8 modules  08:28:54
+==> [179/255] 8 modules  08:28:56
+==> [180/255] 8 modules  08:28:58
+==> [181/255] 8 modules  08:29:00
+==> [182/255] 8 modules  08:29:02
+==> [183/255] 8 modules  08:29:04
+==> [184/255] 8 modules  08:29:06
+==> [185/255] 8 modules  08:29:07
+==> [186/255] 8 modules  08:29:09
+==> [187/255] 8 modules  08:29:11
+==> [188/255] 8 modules  08:29:13
+==> [189/255] 8 modules  08:29:15
+==> [190/255] 8 modules  08:29:17
+==> [191/255] 8 modules  08:29:19
+==> [192/255] 8 modules  08:29:21
+==> [193/255] 8 modules  08:29:22
+==> [194/255] 8 modules  08:29:24
+==> [195/255] 8 modules  08:29:26
+==> [196/255] 8 modules  08:29:28
+==> [197/255] 8 modules  08:29:30
+==> [198/255] 8 modules  08:29:32
+==> [199/255] 8 modules  08:29:34
+==> [200/255] 8 modules  08:29:35
+==> [201/255] 8 modules  08:29:37
+==> [202/255] 8 modules  08:29:39
+==> [203/255] 8 modules  08:29:41
+==> [204/255] 8 modules  08:29:43
+==> [205/255] 8 modules  08:29:45
+==> [206/255] 8 modules  08:29:47
+==> [207/255] 8 modules  08:29:49
+==> [208/255] 8 modules  08:29:51
+==> [209/255] 8 modules  08:29:52
+==> [210/255] 8 modules  08:29:54
+==> [211/255] 8 modules  08:29:56
+==> [212/255] 8 modules  08:29:58
+==> [213/255] 8 modules  08:30:00
+==> [214/255] 8 modules  08:30:02
+==> [215/255] 8 modules  08:30:03
+==> [216/255] 8 modules  08:30:05
+    rebuilt: Outside.OAI158Kernels (8.4s)
+==> [217/255] 6 modules  08:30:15
+==> [218/255] 8 modules  08:30:16
+==> [219/255] 8 modules  08:30:19
+==> [220/255] 8 modules  08:30:21
+    rebuilt: Outside.OAI158BoundedFunctions (11s), Outside.OAI158Functions (11s)
+==> [221/255] 4 modules  08:30:34
+==> [222/255] 8 modules  08:30:36
+    rebuilt: Outside.OAI158RelativeProducts (12s), Outside.OAI158Factors (13s)
+==> [223/255] 8 modules  08:30:51
+==> [224/255] 4 modules  08:30:53
+==> [225/255] 8 modules  08:30:54
+    rebuilt: Outside.OAI158Stationary (6.0s), Outside.OAI158Separability (11s)
+==> [226/255] 8 modules  08:31:09
+==> [227/255] 5 modules  08:31:12
+==> [228/255] 8 modules  08:31:13
+==> [229/255] 8 modules  08:31:17
+    rebuilt: Outside.OAI158AlgebraModels (12s)
+==> [230/255] 2 modules  08:31:33
+==> [231/255] 8 modules  08:31:34
+==> [232/255] 8 modules  08:31:37
+    rebuilt: Outside.OAI158Representations (14s)
+==> [233/255] 1 modules  08:31:54
+==> [234/255] 8 modules  08:31:55
+    rebuilt: Outside.OAI158 (3.4s), Outside.OAI158Energy (11s), Outside.OAI158SpectralMeasure (29s)
+==> [235/255] 8 modules  08:32:28
+==> [236/255] 4 modules  08:32:30
+==> [237/255] 8 modules  08:32:31
+    rebuilt: Outside.OAI158Expansion (7.2s), Arith.QuadraticPrime (10s), Outside.OAI158Palette (17s)
+==> [238/255] 8 modules  08:32:53
+    rebuilt: Outside.OAI158RadialEnergy (18s)
+==> [239/255] 1 modules  08:33:13
+==> [240/255] 8 modules  08:33:14
+    rebuilt: Outside.OAI158AngularBoundary (2.1s), Outside.OAI158CircleMaps (5.2s)
+==> [241/255] 6 modules  08:33:23
+    rebuilt: Plane.SixRing.Confine (3.1s), Outside.OAI158Ergodicity (12s)
+==> [242/255] 8 modules  08:33:37
+    ⚠ [5310/5310] Built Proofs.HadwigerNelson.Outside.OAI158Rigidity (10s)
+    warning: Proofs/HadwigerNelson/Outside/OAI158Rigidity.lean:208:16: This simp argument is unused:
+      hne
+    
+    Hint: Omit it from the simp argument list.
+      simp [hx,̵ ̵h̵n̵e̵]
+    
+    Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+    rebuilt: Outside.OAI158CircleTransport (6.9s), Plane.SixRing.Basic (7.3s), Outside.OAI158BorelTransfer (10s), Outside.OAI158Rigidity (10s)
+==> [243/255] 1 modules  08:33:51
+==> [244/255] 8 modules  08:33:53
+    rebuilt: Outside.OAI158Collapse (7.3s), Arith.UpperHalf (10s), Outside.OAI158PaletteDensity (9.4s), Arith.DyadicQuadratic (17s)
+==> [245/255] 5 modules  08:34:12
+    rebuilt: Plane.OneClass.Defs (4.9s), Plane.SixRing.Chart (6.0s), Plane.SixRing.NullSets (6.3s), Plane.SixRing.StepLemma (12s)
+==> [246/255] 8 modules  08:34:28
+    rebuilt: Instances.UpperHalfValues (5.7s), Outside.OAI158PaletteTransport (5.0s), Arith.ThreeColourCharacter (8.5s), Plane.LebesgueNumber (7.0s)
+==> [247/255] 6 modules  08:34:39
+    rebuilt: Plane.SixRing.Tips (5.8s), Plane.RadiusOutside (6.0s), Plane.OneClass.InvariantLaw (10s), Plane.SixRing.Shift (12s), Plane.OneClass.Field (16s)
+==> [248/255] 8 modules  08:35:00
+    rebuilt: Instances.UpperHalfCorollaries (4.1s), Plane.SixRing.Excl (8.6s), Plane.OneClass.Algebraic (13s), Outside.OAI158BinaryPalettes (15s), Plane.OneClass.Pair (15s), Arith.TorsionExtraction (20s), Plane.SixRing.ChartMeasure (25s)
+==> [249/255] 1 modules  08:35:29
+==> [250/255] 6 modules  08:35:30
+    rebuilt: Outside.OAI158States (7.3s), Plane.SixRing.State (8.9s), Plane.SixRing.Kill (26s), Plane.OneClass.Fractional (26s)
+==> [251/255] 4 modules  08:36:01
+    rebuilt: Plane.SixRing.Orbit (2.3s), Plane.SixRing.TwoPairs (2.8s)
+==> [252/255] 2 modules  08:36:07
+==> [253/255] 2 modules  08:36:09
+    rebuilt: Arith.ThreeColourCriterion (12s)
+==> [254/255] 2 modules  08:36:23
+    rebuilt: Arith.ThreeFourColours (11s)
+==> [255/255] 1 modules  08:36:37
+    rebuilt: Proofs (2.0s)
+==> build: OK — 255 of 255 batches, 75 module(s) rebuilt, 1 module(s) with warnings, 14m19s
+    full output: build/gate/build/20261014T132220Z-3162062.log

@@ -1,0 +1,16 @@
+DUMP §.proper_to_borel_weak : theorem levels=[]
+DUMP   type  = (pi.i k (c Nat []) (pi.c inst ((((c NeZero [0]) (c Nat [])) (((c MulZeroClass.toZero [0]) (c Nat [])) (c Nat.instMulZeroClass []))) #0) (pi.i c (pi.d a (c Complex []) ((c Fin []) #2)) (pi.d hc (((c OAI.EuclideanFiveColor.ProperColoring []) #2) #0) (((c Exists [(S 0)]) (pi.d a (c Complex []) ((c Fin []) #4))) (lam.d d (pi.d a (c Complex []) ((c Fin []) #4)) (((c And []) ((((((c Measurable [0,0]) (c Complex [])) ((c Fin []) #4)) (c Complex.measurableSpace [])) ((c Fin.instMeasurableSpace []) #4)) #0)) (((c OAI.EuclideanFiveColor.WeakColoring []) #4) #0))))))))
+DUMP   etype = (pi.i k (c Nat []) (pi.c inst ((((c NeZero [0]) (c Nat [])) _) @0) (pi.i c (pi.d a (c Complex []) ((c Fin []) @0)) (pi.d hc (((c OAI.EuclideanFiveColor.ProperColoring []) @0) @2) (((c Exists [(S 0)]) (pi.d a (c Complex []) ((c Fin []) @0))) (lam.d d (pi.d a (c Complex []) ((c Fin []) @0)) (((c And []) ((((((c Measurable [0,0]) (c Complex [])) ((c Fin []) @0)) _) _) @4)) (((c OAI.EuclideanFiveColor.WeakColoring []) @0) @4))))))))
+USES §.proper_to_borel_weak : And @ Init.Prelude
+USES §.proper_to_borel_weak : Complex @ Mathlib.Basic.Complex.Basic
+USES §.proper_to_borel_weak : Exists @ Init.Core
+USES §.proper_to_borel_weak : Fin @ Init.Prelude
+USES §.proper_to_borel_weak : Measurable @ Mathlib.MeasureTheory.MeasurableSpace.Defs
+USES §.proper_to_borel_weak : Nat @ Init.Prelude
+USES §.proper_to_borel_weak : NeZero @ Init.Data.NeZero
+USES §.proper_to_borel_weak : Complex.measurableSpace @ Mathlib.MeasureTheory.Constructions.BorelSpace.Complex
+USES §.proper_to_borel_weak : Fin.instMeasurableSpace @ Mathlib.MeasureTheory.MeasurableSpace.Instances
+USES §.proper_to_borel_weak : MulZeroClass.toZero @ Mathlib.Algebra.GroupWithZero.Defs
+USES §.proper_to_borel_weak : Nat.instMulZeroClass @ Mathlib.Algebra.GroupWithZero.Nat
+USES §.proper_to_borel_weak : OAI.EuclideanFiveColor.ProperColoring @ OAI.Geometry.PlaneColoring.Coloring
+USES §.proper_to_borel_weak : OAI.EuclideanFiveColor.WeakColoring @ OAI.Geometry.PlaneColoring.Coloring

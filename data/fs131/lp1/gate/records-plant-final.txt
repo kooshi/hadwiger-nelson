@@ -1,0 +1,8 @@
+unplanted: PASS
+plant 'an axiom added to the transfer's list': FAILED (as it must) — the transfer: [('CLEAN', ['propext', 'Classical.choice', 'Quot.sound', 'sorryAx'])]
+plant 'a moved record put under IMPORTED': FAILED (as it must) — the twelve records that rested on it, each under CLEAN on exactly the three (11 of 12): HadwigerNelson.Outside.OAI158.no
+plant 'a DECLARED IMPORT of the transfer': FAILED (as it must) — no record rests on the transfer (0) and no DECLARED IMPORT names it
+plant 'an IMPORTED record removed': FAILED (as it must) — IMPORTED: 25 records, 19 on Weil's bound alone, 6 on the five-colour theorem alone
+plant 'a record printed twice': FAILED (as it must) — the transfer: [('CLEAN', ['propext', 'Classical.choice', 'Quot.sound']), ('CLEAN', ['propext', 'Classical.choice', 'Quot
+plants: every one fired; the unplanted receipt passes
+exit=0

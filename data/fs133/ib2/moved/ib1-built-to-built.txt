@@ -1,0 +1,6 @@
+Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw: DELETED 2, IDENTICAL 28, MOVED-IDENTICAL 1
+  MOVED-IDENTICAL        theorem  HadwigerNelson.OneClass.countable_algPlane -> Proofs.HadwigerNelson.Plane.OneClass.Defs
+  DELETED                theorem  _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.card_le_indepNum_induce
+  DELETED                theorem  _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.exists_indep_subset
+constants of the first dump: 31  DELETED 2  IDENTICAL 28  MOVED-IDENTICAL 1  new in the second: 56
+MOVED OK: every listed change is as listed; nothing else moved

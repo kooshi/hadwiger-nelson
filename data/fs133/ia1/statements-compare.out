@@ -1,0 +1,9 @@
+compared: 11 named constants of the first dump (types; values of definitions), 0 example heads of the base files
+axioms of the two modules: ['HadwigerNelson.Outside.OAI158.Spectral.residual_fourier'] before, ['HadwigerNelson.Outside.OAI158.Spectral.residual_fourier'] after
+internal (not compared): 27 before, 100 after
+new named constants in the second dump: 0
+examples in the working files that the base does not hold: 0
+TYPE     THM HadwigerNelson.Outside.OAI158.Spectral.residual_fourier_model: the stored statement differs
+TYPE     THM HadwigerNelson.Outside.OAI158.Spectral.residual_fourier_cross: the stored statement differs
+TYPE     AXIOM HadwigerNelson.Outside.OAI158.Spectral.residual_fourier: the stored statement differs
+FAIL: 3 difference(s)

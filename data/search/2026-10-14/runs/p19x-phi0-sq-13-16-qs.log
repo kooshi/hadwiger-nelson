@@ -1,0 +1,14 @@
+p=19 n=361 |S|=20 |maps|=40 reps=182
+SEARCH-2026-10-14: solve basis |J| = 22 of 182 reps (phi0,sq,13,16); q scalar; chars all
+build cache reloaded from cache/build-p19-c2.npz: 52370 orbits, 16653x181 product table, 21 q forms
+products a*tau_t(a'): 3014193 canonical forms (a quarter of 11957764 by the two symmetries), 52370 orbits [0.8 s]
+q forms built: 52370 orbits [0.8 s]
+orbits K=52370; PSD blocks [('M2[u=0]', 23), ('M2[u=1]', 22), ('M2[u=20]', 22), ('M2[u=81]', 22), ('M2[u=2]', 22), ('M2[u=9]', 22), ('M2[u=5]', 22), ('M2[u=8]', 22), ('M2[u=27]', 22), ('M2[u=3]', 22), ('M2[u=22]', 22), ('M2[u=7]', 22), ('M2[u=26]', 22), ('M2[u=41]', 22), ('M2[u=66]', 22), ('M2[u=45]', 22), ('M2[u=4]', 22), ('M2[u=6]', 22), ('M2[u=25]', 22)]; scalar rows 259254; equality rows 0 [13.2 s]
+  grouped 16653 representative pairs into 2783667 (pair, orbit) cells [1.7 s]
+  SEARCH-2026-10-14: 253 of 16653 representative pairs inside the basis
+assembled: (264084, 52369), nnz 1087594 [16.0 s, 903.6 MB]
+  SEARCH-2026-10-14: trimmed to 2433 of 52369 orbit variables and 11630 of 259254 scalar rows
+FLOAT READING (untrusted, double precision): value 86.372749 (dual 86.372743), status solved, 2975 iterations, 21.8 s, 903.6 MB
+  p^2/m for m = 3, 4, 5: 120.3333, 90.2500, 72.2000
+{"kind": "fs66-b1", "record_version": 1, "utc": "2026-10-14T19:09:12Z", "command": "python3 data/search/2026-10-14/fs1014_cert_make.py 19 --fast --build-jobs 1 --threads 1 --cache-dir cache --keep phi0,sq,13,16 --q-scalar --no-round", "tool_sha256": "ed432d745f5c9eca327c013e42cc1988a0b343473d7982376f1906d3293af290", "p": 19, "c": 2.0, "relaxation": "minimal", "solver": "scs 3.3.1", "solver_eps": 1e-07, "threads": 1, "float_value": 86.37274939759808, "float_dual": 86.3727428781329, "status": "solved", "iterations": 2975, "solve_s": 21.8, "rss_mb": 903.6, "digits": null, "weight_digits": null, "shift": null, "pd_failures": null, "U_num": null, "scale": null, "U_float": null, "rows": null, "blocks": null, "cascaded": null, "exact_s": null, "arbitrary_weights_seed": null, "scan_kept": null, "cert": null, "cert_sha256": null, "machine": "local x86_64", "python": "3.14.7", "trust": "float reading (untrusted)"}
+38.47 s 925332 KB

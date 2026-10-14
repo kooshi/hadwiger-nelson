@@ -1,0 +1,10 @@
+step 0: 485 constants; step 4: 541 constants
+verdicts: IDENTICAL 484, TYPE-IDENTICAL 1
+module changed: HadwigerNelson.Outside.OAI158.chiM0_le_chromaticNumber_plane: Proofs.HadwigerNelson.Outside.OAI158 -> Proofs.HadwigerNelson.Outside.OAI158Collapse
+module changed: HadwigerNelson.Outside.OAI158.chromaticNumber_plane_eq_chiM0: Proofs.HadwigerNelson.Outside.OAI158 -> Proofs.HadwigerNelson.Outside.OAI158Collapse
+module changed: HadwigerNelson.Outside.OAI158.colorable_iff_nonempty_aeColouring: Proofs.HadwigerNelson.Outside.OAI158 -> Proofs.HadwigerNelson.Outside.OAI158Collapse
+module changed: HadwigerNelson.Outside.OAI158.nonempty_aeColouring_of_colorable: Proofs.HadwigerNelson.Outside.OAI158 -> Proofs.HadwigerNelson.Outside.OAI158Collapse
+module changed: HadwigerNelson.Outside.OAI158.proper_to_borel_weak: Proofs.HadwigerNelson.Outside.OAI158 -> Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
+module changed: HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff: Proofs.HadwigerNelson.Outside.OAI158 -> Proofs.HadwigerNelson.Outside.OAI158Collapse
+new at step 4: Proofs.HadwigerNelson.Outside.OAI158BorelTransfer: 56 constants
+SWITCHDIFF OK: transfer TYPE-IDENTICAL

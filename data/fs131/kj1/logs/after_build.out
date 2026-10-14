@@ -1,0 +1,6 @@
+axioms print: lean exit 0
+axioms reader: exit 0
+statement dump: lean exit 0
+statement comparison: exit 0
+statement comparison control: exit 0
+lint: exit 0

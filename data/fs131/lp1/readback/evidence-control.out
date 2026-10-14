@@ -1,0 +1,10 @@
+unplanted: PASS (2 receipt lines, 0 failures)
+plant 'GeneratorUnitary.lean failed': REFUSED
+plant 'an error in GeneratorUnitary.lean's output': REFUSED
+plant 'generator_unitary's stored type here changed (one instance constant)': REFUSED
+plant 'a constant of the release's own in the release print's instance argument': REFUSED
+plant 'the planted control accepted (exit 0)': REFUSED
+plant 'the planted control's error moved to its partner': REFUSED
+plant 'residual_fourier's type here changed': REFUSED
+plant 'the density branch's constant not an axiom': REFUSED
+CONTROL OK: every plant refused, the unplanted inputs pass

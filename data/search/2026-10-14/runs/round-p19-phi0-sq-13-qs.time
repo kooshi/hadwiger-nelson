@@ -1,0 +1,24 @@
+slot: admitted s1014r19: mem 5 GiB (hard cap), cpus 4,5,9
+	Command being timed: "timeout 1500 /home/kooshi/venvs/fs66/bin/python fs1014_cert_make.py 19 --fast --build-jobs 1 --threads 1 --cache-dir cache --keep phi0,sq,13 --q-scalar --scan --scan-shifts 1e-8,1e-9,1e-10 --scan-digits 14 --jobs 3 --out certs/v-p19-phi0-sq-13-qs.json --record runs/records.jsonl"
+	User time (seconds): 46.68
+	System time (seconds): 0.65
+	Percent of CPU this job got: 154%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:30.55
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 929132
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 257549
+	Voluntary context switches: 237
+	Involuntary context switches: 201
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 3056
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

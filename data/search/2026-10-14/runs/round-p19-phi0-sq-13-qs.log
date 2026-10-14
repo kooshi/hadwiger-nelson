@@ -1,0 +1,27 @@
+p=19 n=361 |S|=20 |maps|=40 reps=182
+SEARCH-2026-10-14: solve basis |J| = 12 of 182 reps (phi0,sq,13); q scalar; chars all
+build cache reloaded from cache/build-p19-c2.npz: 52370 orbits, 16653x181 product table, 21 q forms
+products a*tau_t(a'): 3014193 canonical forms (a quarter of 11957764 by the two symmetries), 52370 orbits [0.8 s]
+q forms built: 52370 orbits [0.8 s]
+orbits K=52370; PSD blocks [('M2[u=0]', 13), ('M2[u=1]', 12), ('M2[u=20]', 12), ('M2[u=81]', 12), ('M2[u=2]', 12), ('M2[u=9]', 12), ('M2[u=5]', 12), ('M2[u=8]', 12), ('M2[u=27]', 12), ('M2[u=3]', 12), ('M2[u=22]', 12), ('M2[u=7]', 12), ('M2[u=26]', 12), ('M2[u=41]', 12), ('M2[u=66]', 12), ('M2[u=45]', 12), ('M2[u=4]', 12), ('M2[u=6]', 12), ('M2[u=25]', 12)]; scalar rows 259254; equality rows 0 [8.9 s]
+  grouped 16653 representative pairs into 2783667 (pair, orbit) cells [0.8 s]
+  SEARCH-2026-10-14: 78 of 16653 representative pairs inside the basis
+assembled: (260749, 52369), nnz 605459 [10.3 s, 907.4 MB]
+  SEARCH-2026-10-14: trimmed to 811 of 52369 orbit variables and 3726 of 259254 scalar rows
+FLOAT READING (untrusted, double precision): value 88.542261 (dual 88.542258), status solved, 3725 iterations, 6.2 s, 907.4 MB
+  p^2/m for m = 3, 4, 5: 120.3333, 90.2500, 72.2000
+scan: 3 rounding attempts on 3 workers [12.9 s wall]
+
+=== the rounding scan (plan §R'.4) ===
+     shift    D                  U    rows  cascaded  exact s  blocks
+     1e-10   14         88.544403…    2238      1754     6.81  20
+     1e-09   14         88.544565…    1862       666    10.07  20
+     1e-08   14         88.546357…    1895       757    12.75  20
+wrote data/search/2026-10-14/certs/v-p19-phi0-sq-13-qs.json (1552184 bytes, sha256 38abaeafc2de…)
+
+BOUND (the producer's own arithmetic -- UNTRUSTED until the checker says CERTIFIED):
+  U = 8854440343740518647773458452767964 / 100000000000000000000000000000000 = 88.544403…
+  4*U = 354.177613… < 361 -- refuses 4 colours (and fewer) at every level, by the hand links L1, L2, L6; 5*U = 442.722017… >= 361, so it says nothing about 5
+  loss against the float reading: 0.002143
+
+Next: python3 tools/fs66_b1_cert_check.py data/search/2026-10-14/certs/v-p19-phi0-sq-13-qs.json --m 2 --record data/fs66/b1/records.jsonl

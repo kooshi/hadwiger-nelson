@@ -1,0 +1,53 @@
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 4,5
+Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:140:17: error(lean.unknownIdentifier): Unknown identifier `dite_eq_left`
+Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:140:2: error: Type mismatch: After simplification, term
+  Exists.choose_spec hy
+ has type
+  κ y = (↑m)⁻¹ • ∑ i, Measure.dirac (hy.choose i)
+but is expected to have type
+  κ y =
+    (↑m)⁻¹ •
+      ∑ x,
+        Measure.dirac
+          ((if h : ∃ g, κ y = (↑m)⁻¹ • ∑ i, Measure.dirac (g i) then h.choose else fun x => Classical.choice ⋯) x)
+Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:248:10: error(lean.unknownIdentifier): Unknown constant `Measurable.of_eval`
+Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:249:10: error: No goals to be solved
+Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:280:12: error(lean.unknownIdentifier): Unknown constant `Measurable.of_eval`
+Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:281:12: error: No goals to be solved
+Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:290:12: error(lean.unknownIdentifier): Unknown constant `Measurable.of_eval`
+Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:291:12: error: No goals to be solved
+Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:361:8: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsProbabilityMeasure (Measure.map p μ)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:396:21: error(lean.unknownIdentifier): Unknown identifier `ite_eq_left`
+Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:396:6: error: Type mismatch: After simplification, term
+  hy
+ has type
+  ‖H₀ y‖ ≤ max A 0
+but is expected to have type
+  ‖if ‖H₀ y‖ ≤ max A 0 then H₀ y else 0‖ ≤ max A 0
+Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:397:20: error(lean.unknownIdentifier): Unknown identifier `ite_eq_right`
+Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:398:6: error: Type mismatch
+  le_max_right ?m.356 ?m.357
+has type
+  ?m.357 ≤ max ?m.356 ?m.357
+but is expected to have type
+  ‖if ‖H₀ y‖ ≤ max A 0 then H₀ y else 0‖ ≤ max A 0
+Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:399:55: error(lean.unknownIdentifier): Unknown identifier `ite_eq_left`
+Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:400:13: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsProbabilityMeasure (Measure.map p μ)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:397:37: warning: This simp argument is unused:
+  norm_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [H, ite_eq_right hy,̵ ̵n̵o̵r̵m̵_̵z̵e̵r̵o̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:450:27: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsProbabilityMeasure (Measure.map p μ)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158Approximation.lean:450:9: error: Tactic `rcases` failed: `x✝ : ?m.353` is not an inductive datatype

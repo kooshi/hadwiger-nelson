@@ -1,0 +1,20 @@
+'FS131IT1Models.layer_step_rotation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.layer_step_rotation_not_corner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.layer_step_corner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.layer_step_corner_not_rotation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.layer_dichotomy_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.layer_dichotomy_corner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.headline_hypotheses_eleven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.fieldBandSet_two_empty_eleven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.inv_three_mem_unitRing_sqrt_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.colorable_two_of_fieldBandSet_three_nonempty' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.fieldBandSet_three_empty_of_sqrt_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.colorable_two_of_upstream' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.four_le_eleven_of_upstream' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.fieldBandSet_three_nonempty_of_colorable_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.four_le_eleven_by_witness' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FS131IT1Models.four_le_eleven_by_family' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

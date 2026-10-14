@@ -1,0 +1,5 @@
+plant 'sorryAx in a clean record': REPORTED (OTHER AXIOM HadwigerNelson.OneClass.IsInvariantLaw: ['sorryAx'])
+plant 'the import in a clean record': REPORTED (IMPORT      SimpleGraph.le_finIndepRatio_iff: a record that must be clean prints the declared outside theorem)
+plant 'a record removed': REPORTED (NO RECORD   HadwigerNelson.OneClass.IsInvariantLaw)
+unplanted: PASS
+CONTROL OK

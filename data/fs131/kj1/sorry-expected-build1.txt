@@ -1,0 +1,16 @@
+# FS131-KJ1, after the first build of the joined tree: the public records expected to print sorryAx — the ten leaves of
+# the joining module as planned (FS131-KN4's J.1–J.10) and the two compositions the planned text proves over them.
+# Nothing of the four proved modules and nothing of the residue module is listed: the unproved dependency their reports
+# name must be gone.
+HadwigerNelson.ThreeFourColours.exists_stablePrime_of_maximal
+HadwigerNelson.ThreeFourColours.exists_unitSet_residue_eq
+HadwigerNelson.ThreeFourColours.exists_maximal_card_three_of_card_nine
+HadwigerNelson.ThreeFourColours.exists_stablePrime_conj_trivial
+HadwigerNelson.ThreeFourColours.colorable_three_planeOver_iff
+HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_eq_three_iff
+HadwigerNelson.ThreeFourColours.localBound_le_chromaticNumber_or_four_le
+HadwigerNelson.ThreeFourColours.localBound_le_chromaticNumber_of_le_four
+HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_three
+HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four_of_seven
+HadwigerNelson.ThreeFourColours.exists_stablePrime_ramified_sqrt
+HadwigerNelson.ThreeFourColours.exists_stablePrime_card_four_sqrt

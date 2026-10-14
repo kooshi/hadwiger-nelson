@@ -790,10 +790,12 @@ def declared : Array Entry := #[
   .former ``HadwigerNelson.SevenConditional.G4 .ours
     "row 103 (the 8/3 forcer: M56's 588-vertex core, one solver refusal with no proof log)",
   -- ## Hand results of ours, written out in a binder
-  .site ``HadwigerNelson.SpectralChain.min_localBound_five_le_chromaticNumber `hRow99 "Row99" .ours "row 99 (χ(F²) = L(F) at L(F) ≤ 4)",
-  .site ``HadwigerNelson.SpectralChain.min_localBound_five_le_chromaticNumber_of_totallyReal `hRow99 "Row99" .ours "row 99 (χ(F²) = L(F) at L(F) ≤ 4)",
-  .site ``HadwigerNelson.SpectralChain.chromaticNumber_eq_localBound `hRow99 "Row99" .ours "row 99 (χ(F²) = L(F) at L(F) ≤ 4)",
-  .site ``HadwigerNelson.UpperHalf.chromaticNumber_eq_localBound_of_chain `hRow99 "Row99" .ours "row 99 (χ(F²) = L(F) at L(F) ≤ 4)",
+  -- `hRow99` (row 99's lower half through four, `L(F) ≤ 4 → L(F) ≤ χ(F²)`) is not in this list since FS131-LJ1: the binder's type is
+  -- the theorem `ThreeFourColours.localBound_le_chromaticNumber_of_le_four`, term for term (`data/fs131/lj1/checks.lean` applies each of
+  -- the four takers to it). That theorem rests on a declared outside theorem — it is a `RESTS` row of `kloosterman_bound` — so the
+  -- hand result is discharged, not free: each taker still prints the standard three with the binder in its statement, and a statement
+  -- that feeds the binder with the theorem prints Weil's bound. Retired on the landing's reading: the step compares no binder's type
+  -- with any theorem's conclusion.
   .site ``HadwigerNelson.SpectralChain.min_localBound_five_le_chromaticNumber `hCLS "CLS" .ours "X23D-CLS (L(F) ≥ 5 ⟹ T-C(A) at S = ∅; X23V § 2.2)",
   .site ``HadwigerNelson.SpectralChain.min_localBound_five_le_chromaticNumber_of_totallyReal `hCLS "CLS" .ours "X23D-CLS (L(F) ≥ 5 ⟹ T-C(A) at S = ∅; X23V § 2.2)",
   .site ``HadwigerNelson.SpectralChain.chromaticNumber_eq_localBound `hCLS "CLS" .ours "X23D-CLS (L(F) ≥ 5 ⟹ T-C(A) at S = ∅; X23V § 2.2)",
@@ -845,8 +847,10 @@ def declared : Array Entry := #[
     "T-C(A) at S = ∅ in class form, a property of the field F: the theorems take it only as the conclusion of the declared hypothesis CLS and as the antecedent of hMR",
   .condition ``HadwigerNelson.Arith.IsUsablePrime "a predicate of a prime of F (maximal, residue field of size ≡ 3 mod 4): a condition on the theorem's prime",
   .condition ``HadwigerNelson.Arith.NoAffFieldHyp "the field hypotheses of NOAFF-FIELDS at k: a condition on the field F and on k",
+  .condition ``HadwigerNelson.DensityBound.DualCert.IsIndep "S is independent in the unit-distance graph on a certificate's points: a predicate of the theorem's set S (X23_atoms reads it; the empty set and each of the 13,552 independent sets of the certificate satisfy it; no declaration exhibits one — FS131-LDB1)",
   .condition ``HadwigerNelson.ExtensionOrder "a greedy extension order of a graph: an inductive predicate of the theorem's vertex list, built by its constructors",
   .condition ``HadwigerNelson.IsLift "a first-order lift of a framework: a predicate of the theorem's deformation, taken only to be refuted or transported",
+  .condition ``HadwigerNelson.OneClass.IsShiftInvariantLaw "a translation-invariant random independent set of a graph on the algebraic plane (FS-133): a predicate of the theorem's law P; exhibited by the projection of an invariant law, (isInvariantLaw_dirac G).toIsShiftInvariantLaw, which no declaration concludes as stated",
   .condition ``HadwigerNelson.Outside.OAI158.RealState "the release's state of a set of angles ([OAIMath2026] States.lean:92): the set is measurable and lies, up to a null set, in the lifted palette of every label of J — a predicate of the theorem's centre, set of angles and labels; built in the proof of SixRing.no_alternating_groups from a measurable two-valued map on the circle (FS132-L2)",
   .condition ``HadwigerNelson.Plane.AeProperRegions.IsRegion "a region (a colour and a connected component of its class): a predicate of the theorem's pair",
   .condition ``HadwigerNelson.Plane.Arc.IsUnitArc "a boundary arc of radius 1: a predicate of the theorem's arc, decided by a computation on written-down data",

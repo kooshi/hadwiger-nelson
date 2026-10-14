@@ -1,0 +1,19 @@
+slot: admitted lp1: mem 8 GiB (hard cap), cpus 0
+DIFFERENT	definition	§.CommutingSpectral.algebra_commRing	value, erased print, at char 5810: release …1),(p u_2)]) @0) @1) _) _) _) _) @6) (((c inferInstance [(S (p u_2))]) ((c CommRing [(p u_2)]) (((c Subtype [(S (p u_2))]) ((((((((((((((c C… | here …1),(p u_2)]) @0) @1) _) _) _) _) @6) (((((((((((((((c StarSubalgebra.commRingTopologicalClosure [0,(p u_2)
+UP-TO-INSTANCES	lemma	§.CommutingSpectral.generator_unitary	INSTANCE_EVIDENCE: differs inside instance arguments by the release's own ['§.CommutingSpectral.algebra_commRing'], the two instance terms equal by rfl at this pin (the kernel's receipt in data/fs131/lp1/readback/evidence.out)
+  aux          AUX-ABSENT       6
+  aux          AUX-DIFFERS      11
+  aux          IDENTICAL        42
+  aux          PIN-DIFFERENCE   1
+  aux          UP-TO-INSTANCES  13
+  definition   DIFFERENT        1
+  definition   IDENTICAL        12
+  definition   UP-TO-INSTANCES  7
+  lemma        IDENTICAL        23
+  lemma        UP-TO-INSTANCES  14
+  constants differing inside instance and proof arguments: 77
+FATAL: constants differing inside instance/proof arguments that the record does not hold: ['StarSubalgebra.subringClass']
+FATAL: recorded instance constants that no longer differ (the record is stale): ['NormedAddCommGroup.toAddCommGroup', '§.CommutingSpectral.algebra_commRing._proof_1', '§.CommutingSpectral.algebra_commRing._proof_3', '§.VectorMeasure.vectorLinear._proof_2']
+FATAL: ADAPTED_VALUE lists §.CommutingSpectral.algebra_commRing, which reads DIFFERENT
+constants: 130  failing: 1  fatal: 3
+READBACK FAILED

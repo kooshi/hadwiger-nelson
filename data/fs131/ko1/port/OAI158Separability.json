@@ -1,0 +1,36 @@
+{
+ "renames": [
+  [
+   "ite_eq_left",
+   "if_pos",
+   "core renamed `if_pos` to `ite_eq_left` after v4.32.0 (with `if_neg` → `ite_eq_right`: `LEAN.md` § Searching — Lean); at v4.32.0 only the old name, the same statement (`Init/Core.lean` at v4.34.1: `theorem if_pos … := ite_eq_left hc`)"
+  ],
+  [
+   "Finset.prod_le_prod₀",
+   "Finset.prod_le_prod",
+   "Mathlib renamed `Finset.prod_le_prod` to `Finset.prod_le_prod₀` after v4.32.0; at v4.32.0 the lemma has the old name, the same hypotheses and statement (`Mathlib/Algebra/Order/BigOperators/GroupWithZero/Finset.lean:38` here, `:39` at v4.34.1; as `OAI158PhaseEncoding`'s patch at 118)"
+  ]
+ ],
+ "adaptations": [
+  [
+   555,
+   "Family.meanNorm (μ.map q) M (covariance μ q φ v w) = 0",
+   "(haveI := MeasureTheory.Measure.isProbabilityMeasure_map (hq.aemeasurable (μ := μ)); Family.meanNorm (μ.map q) M (covariance μ q φ v w)) = 0",
+   "ADAPTED (plan § 4.3), at an INSTANCE argument of a statement: at v4.34.1 `μ.map f` of a probability measure is one by an instance for every `f`, so `Family.meanNorm (μ.map q)` finds its `[IsProbabilityMeasure (μ.map q)]`; at v4.32.0 only through `Measure.isProbabilityMeasure_map (hf : AEMeasurable f μ)` (`Mathlib/MeasureTheory/Measure/Typeclasses/Probability.lean:124`). The instance is given by `haveI` (inlined: no binder, no `let` in the stored type) from `hq : Measurable q`, which the statement already names (`PairVanishing μ q hq M`); the instance argument is a proof, so the erased print is the release's and the read-back reads UP-TO-INSTANCES, flagged ADAPTED by name (`ADAPTED_INSTANCE`)"
+  ],
+  [
+   214,
+   "(∏ i ∈ s, act (ψ i u) (project μ q hq (f i))) =ᵐ[μ]",
+   "(((∏ i ∈ s, act (ψ i u) (project μ q hq (f i)) : Func X) : X → ℂ)) =ᵐ[μ]",
+   "ADAPTED by ascription (the coordinator's ruling of 2026-10-14, option (a), in item 758's class): the same text elaborates at v4.34.1 to `Subtype.val (∏ i ∈ s, …)` (the product in `Func X`, then coerced) and at v4.32.0 to `∏ i ∈ s, Subtype.val (…)` (the coercion pushed onto each factor) — equal functions by a theorem, not by definition. The ascription `((… : Func X) : X → ℂ)` restores the release's elaboration order and so the release's stored term; no hypothesis, binder or argument. Checked by the read-back (IDENTICAL or UP-TO-INSTANCES; without the ascription DIFFERENT, `data/fs131/ipb1/readback/laneC2/compare-noascription.out`)"
+  ]
+ ],
+ "patches": [
+  [
+   556,
+   "rw [Family.meanNorm_congr (μ.map q) M",
+   "haveI := MeasureTheory.Measure.isProbabilityMeasure_map (hq.aemeasurable (μ := μ)); rw [Family.meanNorm_congr (μ.map q) M",
+   "the class of `plans/FS131-KO1-port-plan.md` § 3.3, in a PROOF: at v4.34.1 `μ.map f` of a probability measure is one by an instance for every `f`; at v4.32.0 only through `Measure.isProbabilityMeasure_map (hf : AEMeasurable f μ)` (`Mathlib/MeasureTheory/Measure/Typeclasses/Probability.lean:124`). The instance is supplied by `haveI` from the measurability the proof's context holds; the statement is untouched (as `OAI158ConditionalSelection`'s patch at 330)"
+  ]
+ ]
+}

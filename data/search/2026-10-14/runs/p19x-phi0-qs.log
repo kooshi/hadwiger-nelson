@@ -1,0 +1,13 @@
+p=19 n=361 |S|=20 |maps|=40 reps=182
+SEARCH-2026-10-14: solve basis |J| = 1 of 182 reps (phi0); q scalar; chars all
+build cache reloaded from cache/build-p19-c2.npz: 52370 orbits, 16653x181 product table, 21 q forms
+products a*tau_t(a'): 3014193 canonical forms (a quarter of 11957764 by the two symmetries), 52370 orbits [0.8 s]
+q forms built: 52370 orbits [0.8 s]
+orbits K=52370; PSD blocks [('M2[u=0]', 2), ('M2[u=1]', 1), ('M2[u=20]', 1), ('M2[u=81]', 1), ('M2[u=2]', 1), ('M2[u=9]', 1), ('M2[u=5]', 1), ('M2[u=8]', 1), ('M2[u=27]', 1), ('M2[u=3]', 1), ('M2[u=22]', 1), ('M2[u=7]', 1), ('M2[u=26]', 1), ('M2[u=41]', 1), ('M2[u=66]', 1), ('M2[u=45]', 1), ('M2[u=4]', 1), ('M2[u=6]', 1), ('M2[u=25]', 1)]; scalar rows 259254; equality rows 0 [13.5 s]
+  grouped 16653 representative pairs into 2783667 (pair, orbit) cells [1.4 s]
+  SEARCH-2026-10-14: 1 of 16653 representative pairs inside the basis
+assembled: (259275, 52369), nnz 466501 [15.8 s, 902.2 MB]
+  SEARCH-2026-10-14: trimmed to 20 of 52369 orbit variables and 59 of 259254 scalar rows
+FLOAT READING (untrusted, double precision): value 99.497973 (dual 99.497973), status solved, 275 iterations, 0.0 s, 902.2 MB
+  p^2/m for m = 3, 4, 5: 120.3333, 90.2500, 72.2000
+{"kind": "fs66-b1", "record_version": 1, "utc": "2026-10-14T19:23:49Z", "command": "python3 data/search/2026-10-14/fs1014_cert_make.py 19 --fast --build-jobs 1 --threads 1 --cache-dir cache --keep phi0 --q-scalar --no-round", "tool_sha256": "ed432d745f5c9eca327c013e42cc1988a0b343473d7982376f1906d3293af290", "p": 19, "c": 2.0, "relaxation": "minimal", "solver": "scs 3.3.1", "solver_eps": 1e-07, "threads": 1, "float_value": 99.49797307973618, "float_dual": 99.49797307972764, "status": "solved", "iterations": 275, "solve_s": 0.0, "rss_mb": 902.2, "digits": null, "weight_digits": null, "shift": null, "pd_failures": null, "U_num": null, "scale": null, "U_float": null, "rows": null, "blocks": null, "cascaded": null, "exact_s": null, "arbitrary_weights_seed": null, "scan_kept": null, "cert": null, "cert_sha256": null, "machine": "local x86_64", "python": "3.14.7", "trust": "float reading (untrusted)"}

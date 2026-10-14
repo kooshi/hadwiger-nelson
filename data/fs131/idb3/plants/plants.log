@@ -1,0 +1,19 @@
+slot: admitted idb3f: mem 5 GiB (hard cap), cpus 4,5
+data/fs131/idb3/plants/Plants.lean:11:98: error: Tactic `decide` proved that the proposition
+  distsOk ptsL enclL (P23.Ds.tail.set 5 (P23.Ds.tail[5]! + 2)) w2T = true
+is false
+data/fs131/idb3/plants/Plants.lean:18:51: error: Tactic `decide` proved that the proposition
+  rowOk ptsL badRow = true
+is false
+data/fs131/idb3/plants/Plants.lean:25:2: error: Tactic `decide` proved that the proposition
+  fr26.all (subtreeOk (boundN - 10 ^ 16 + 6 * 10 ^ 13) (List.drop KF vertsL) KF) = true
+is false
+data/fs131/idb3/plants/Plants.lean:30:85: error: Tactic `decide` proved that the proposition
+  List.map Prod.snd vertsL = groupsOf (terms (w1N + 1) w2T wcR)
+is false
+data/fs131/idb3/plants/Plants.lean:33:85: error: Tactic `decide` proved that the proposition
+  List.map packSt (collect (List.take KF vertsL) 0 0 0) = frL.tail
+is false
+Command exited with non-zero status 1
+TIME 14.73 s  RSS 2252088 KB
+exit=1

@@ -1,0 +1,38 @@
+slot: admitted idb3f: mem 6 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Plane/DensityBound/X23Dist.lean:41:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  X23pt (Fin.ofNat 23 i)
+in the target expression
+  |(fun x => ‖X23pt (Fin.ofNat 23 x.1) - X23pt (Fin.ofNat 23 x.2.1)‖) (i, j, c) - ↑D / ↑S| ≤ 1 / ↑S ∧
+    0 ≤ (fun x => ‖X23pt (Fin.ofNat 23 x.1) - X23pt (Fin.ofNat 23 x.2.1)‖) (i, j, c)
+
+e : Encl
+he : e.ok = true
+D : ℤ
+Ds : List ℤ
+i j : ℕ
+c : ℤ
+w2 : List (ℕ × ℕ × ℤ)
+hb : ∀ x ∈ (i, j, c) :: w2, x.1 < 23 ∧ x.2.1 < 23
+h : distOk e D (sqd (pt ptsL i) (pt ptsL j)) = true ∧ distsOk ptsL e Ds w2 = true
+hij : (i, j, c).1 < 23 ∧ (i, j, c).2.1 < 23
+hSS : ↑S = ↑S64
+hi : X23pt (Fin.ofNat 23 i) = toC (pt ptsL i) / 12
+hj : X23pt (Fin.ofNat 23 j) = toC (pt ptsL j) / 12
+⊢ |(fun x => ‖X23pt (Fin.ofNat 23 x.1) - X23pt (Fin.ofNat 23 x.2.1)‖) (i, j, c) - ↑D / ↑S| ≤ 1 / ↑S ∧
+    0 ≤ (fun x => ‖X23pt (Fin.ofNat 23 x.1) - X23pt (Fin.ofNat 23 x.2.1)‖) (i, j, c)
+Proofs/HadwigerNelson/Plane/DensityBound/X23Dist.lean:55:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  X23dists.tail
+in the target expression
+  List.Forall₂ (fun D x => |x - ↑D / ↑S| ≤ 1 / ↑S ∧ 0 ≤ x) P23.Ds.tail
+    (List.map (fun e => ‖X23.X e.1 - X23.X e.2.1‖) X23.w2)
+
+case refine_2
+hD : P23.Ds = 18446744073709551616 :: P23.Ds.tail
+hmap :
+  List.map (fun e => ‖X23.X e.1 - X23.X e.2.1‖) X23.w2 =
+    List.map (fun x => ‖X23pt (Fin.ofNat 23 x.1) - X23pt (Fin.ofNat 23 x.2.1)‖) w2T
+⊢ List.Forall₂ (fun D x => |x - ↑D / ↑S| ≤ 1 / ↑S ∧ 0 ≤ x) P23.Ds.tail
+    (List.map (fun e => ‖X23.X e.1 - X23.X e.2.1‖) X23.w2)
+Command exited with non-zero status 1
+TIME 1.79 s  RSS 3182016 KB
+done

@@ -1,0 +1,14 @@
+PIN-DIFFERENCE	lemma	§.AlgebraicCayley.reciprocal_denominator	COEFF: `Polynomial.coeff` is `R[X] → ℕ →₀ R` at the release's pin and `R[X] → ℕ → R` here; the same coefficient
+PIN-DIFFERENCE	lemma	§.AlgebraicCayley.coeff_polyLinear	COEFF: `Polynomial.coeff` is `R[X] → ℕ →₀ R` at the release's pin and `R[X] → ℕ → R` here; the same coefficient
+  aux          AUX-ABSENT       2
+  aux          AUX-DIFFERS      9
+  aux          IDENTICAL        51
+  aux          UP-TO-INSTANCES  10
+  definition   IDENTICAL        22
+  definition   UP-TO-INSTANCES  5
+  lemma        IDENTICAL        61
+  lemma        PIN-DIFFERENCE   2
+  lemma        UP-TO-INSTANCES  33
+  constants differing inside instance and proof arguments: 36
+constants: 195  failing: 0  fatal: 0
+READBACK OK

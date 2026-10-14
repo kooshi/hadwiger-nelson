@@ -1,0 +1,38 @@
+  aux          AUX-ABSENT       3
+  aux          AUX-DIFFERS      5
+  aux          IDENTICAL        8
+  aux          UP-TO-INSTANCES  3
+  definition   IDENTICAL        2
+  definition   UP-TO-INSTANCES  4
+  lemma        IDENTICAL        17
+  target       IDENTICAL        16
+  target       UP-TO-INSTANCES  9
+  target Spectral.E_countable: IDENTICAL
+  target Spectral.kCoeff_ne_zero: IDENTICAL
+  target Koopman.unitary: UP-TO-INSTANCES (only there ['AddGroup.toSubNegMonoid', 'AddGroupWithOne.toAddGroup', 'AddSubgroup.instAddSubgroupClass', 'AddSubgroupClass.toAddSubmonoidClass', 'AddSubmonoidClass.toAddCommMonoid', 'CommSemiring.toSemiring', 'Complex.addGroupWithOne', 'Complex.instAddCommMonoid', 'Complex.instField', 'Complex.instNonUnitalCommRing', 'Field.toDivisionRing', 'IsSemitopologicalRing.toIsSemitopologicalSemiring', 'IsSemitopologicalSemiring.toContinuousAdd', 'IsTopologicalDivisionRing.toIsTopologicalRing', 'IsTopologicalRing.toIsSemitopologicalRing', 'MeasureTheory.AEEqFun.instAddCommMonoid', 'NonUnitalCommRing.toNonUnitalNonAssocCommRing', 'NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing', 'NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring', 'NormedDivisionRing.to_isTopologicalDivisionRing', 'NormedField.toNormedDivisionRing', 'Semifield.toCommSemiring'], only here ['AddCommGroup.toAddCommMonoid', 'DivisionSemiring.toSemiring', 'MeasureTheory.Lp.instAddCommGroup', 'Semifield.toDivisionSemiring'])
+  target Koopman.unitary_apply: UP-TO-INSTANCES (only there ['AddGroupWithOne.toAddGroup', 'AddSubgroup.instAddSubgroupClass', 'AddSubgroupClass.toAddSubmonoidClass', 'AddSubmonoidClass.toAddCommMonoid', 'AddSubmonoidClass.toAddZeroClass', 'Complex.addGroupWithOne', 'Complex.instAddCommMonoid', 'Complex.instField', 'Complex.instNonUnitalCommRing', 'Field.toDivisionRing', 'IsSemitopologicalRing.toIsSemitopologicalSemiring', 'IsSemitopologicalSemiring.toContinuousAdd', 'IsTopologicalDivisionRing.toIsTopologicalRing', 'IsTopologicalRing.toIsSemitopologicalRing', 'MeasureTheory.AEEqFun.instAddCommMonoid', 'MeasureTheory.AEEqFun.instAddMonoid', 'NonUnitalCommRing.toNonUnitalNonAssocCommRing', 'NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing', 'NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring', 'NormedDivisionRing.to_isTopologicalDivisionRing', 'NormedField.toNormedDivisionRing'], only here ['AddCommGroup.toAddCommMonoid', 'MeasureTheory.Lp.instAddCommGroup'])
+  target Koopman.nonlinear_commute: UP-TO-INSTANCES (only there ['AddSubgroup.instAddSubgroupClass', 'AddSubgroupClass.toAddSubmonoidClass', 'AddSubmonoidClass.toAddZeroClass', 'IsTopologicalAddGroup.toContinuousAdd', 'MeasureTheory.AEEqFun.instAddMonoid'], only here ['AddSubgroup.toAddGroup'])
+  target ContinuousVectors.isClosed_space: IDENTICAL
+  target ContinuousVectors.op_mem: IDENTICAL
+  target ContinuousVectors.orbit_continuous: IDENTICAL
+  target projection_fixed_of_contraction: UP-TO-INSTANCES (only there ['CommSemiring.toSemiring', 'Semifield.toCommSemiring'], only here ['DivisionSemiring.toSemiring', 'Semifield.toDivisionSemiring'])
+  target ContinuousVectors.nonlinear_mem: UP-TO-INSTANCES (only there ['AddGroupWithOne.toAddGroup', 'AddSubgroup.instAddSubgroupClass', 'AddSubgroupClass.toAddSubmonoidClass', 'AddSubmonoidClass.toAddCommMonoid', 'AddSubmonoidClass.toAddZeroClass', 'Complex.addGroupWithOne', 'Complex.instAddCommMonoid', 'Complex.instField', 'Complex.instNonUnitalCommRing', 'Field.toDivisionRing', 'IsSemitopologicalRing.toIsSemitopologicalSemiring', 'IsSemitopologicalSemiring.toContinuousAdd', 'IsTopologicalDivisionRing.toIsTopologicalRing', 'IsTopologicalRing.toIsSemitopologicalRing', 'MeasureTheory.AEEqFun.instAddCommMonoid', 'MeasureTheory.AEEqFun.instAddMonoid', 'NonUnitalCommRing.toNonUnitalNonAssocCommRing', 'NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing', 'NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring', 'NormedDivisionRing.to_isTopologicalDivisionRing', 'NormedField.toNormedDivisionRing'], only here ['MeasureTheory.Lp.instAddCommGroup'])
+  target ContinuousVectors.projection_range: UP-TO-INSTANCES (only there ['AddGroupWithOne.toAddGroup', 'AddSubgroup.instAddSubgroupClass', 'AddSubgroupClass.toAddSubmonoidClass', 'AddSubmonoidClass.toAddCommMonoid', 'AddSubmonoidClass.toAddZeroClass', 'CommSemiring.toSemiring', 'Complex.addGroupWithOne', 'Complex.instAddCommMonoid', 'Complex.instField', 'Complex.instNonUnitalCommRing', 'Field.toDivisionRing', 'IsSemitopologicalRing.toIsSemitopologicalSemiring', 'IsSemitopologicalSemiring.toContinuousAdd', 'IsTopologicalDivisionRing.toIsTopologicalRing', 'IsTopologicalRing.toIsSemitopologicalRing', 'MeasureTheory.AEEqFun.instAddCommMonoid', 'MeasureTheory.AEEqFun.instAddMonoid', 'NonUnitalCommRing.toNonUnitalNonAssocCommRing', 'NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing', 'NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring', 'NormedDivisionRing.to_isTopologicalDivisionRing', 'NormedField.toNormedDivisionRing', 'Semifield.toCommSemiring'], only here ['DivisionSemiring.toSemiring', 'MeasureTheory.Lp.instAddCommGroup', 'Semifield.toDivisionSemiring'])
+  target ContinuousVectors.covariance_mem: IDENTICAL
+  target ContinuousVectors.projection_covariance_fixed: UP-TO-INSTANCES (only there ['CommSemiring.toSemiring', 'Semifield.toCommSemiring'], only here ['DivisionSemiring.toSemiring', 'Semifield.toDivisionSemiring'])
+  target ContinuousVectors.op_orthogonal: UP-TO-INSTANCES (only there ['CommSemiring.toSemiring', 'Semifield.toCommSemiring'], only here ['DivisionSemiring.toSemiring', 'Semifield.toDivisionSemiring'])
+  target ContinuousVectors.projection_coefficient: UP-TO-INSTANCES (only there ['CommSemiring.toSemiring', 'Semifield.toCommSemiring'], only here ['DivisionSemiring.toSemiring', 'Semifield.toDivisionSemiring'])
+  target Spectral.dense_E: IDENTICAL
+  target Spectral.orbit_uniformContinuous: IDENTICAL
+  target Spectral.orbitExtension: IDENTICAL
+  target Spectral.orbitExtension_continuous: IDENTICAL
+  target Spectral.orbitExtension_eq: IDENTICAL
+  target Spectral.orbitExtension_inner: IDENTICAL
+  target Spectral.normalized_algebraic: IDENTICAL
+  target Spectral.circle_closed_induction: IDENTICAL
+  target exists_measurable_field: IDENTICAL
+  target positive_orthogonal: IDENTICAL
+  constants differing inside instance and proof arguments: 37 (recorded: 37)
+cone constants: 67  failing: 0  fatal: 0  renamed map: {'Set.ofPred': 'setOf'}
+not compared here: 35 cone constants — ContinuousVectors.op, ContinuousVectors.space, Spectral.DiscreteE, Spectral.E, Spectral.K, Spectral.instCommGroupDiscreteE, Spectral.kCoeff (in `Outside/OAI158Rigidity`; read back by FS133-K1) with their generated constants; and OAI.PlaneFiveColor.LabelModel.projected._proof_1 (a generated auxiliary of a declaration that is not ported)
+READBACK OK

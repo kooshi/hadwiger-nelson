@@ -1,0 +1,6 @@
+the narrow pattern of the gate's sorry scan, on a copy of Plane/DensityBound/Theorem.lean with three forms appended:
+data/fs131/ldb1/work/sorry-plant/Proofs/Theorem.lean:75:theorem zz_a : True := sorry
+data/fs131/ldb1/work/sorry-plant/Proofs/Theorem.lean:76:theorem zz_b : True := by sorry
+data/fs131/ldb1/work/sorry-plant/Proofs/Theorem.lean:78:  sorry
+lines found: 3 (3 planted)
+the same pattern on the unplanted module: 0

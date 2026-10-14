@@ -1,0 +1,13 @@
+the run itself, before any plant: no failure
+plant 'a made-public constant's full print changed' in _private.Proofs.HadwigerNelson.Plane.OneClass.Defs.0.SimpleGraph.card_le_indepNum_induce: the run fails and names it
+plant 'a made-public constant's private copy left in' in _private.Proofs.HadwigerNelson.Plane.OneClass.Defs.0.SimpleGraph.card_le_indepNum_induce: the run fails and names it
+plant 'a made-public constant's full print changed' in _private.Proofs.HadwigerNelson.Plane.OneClass.Defs.0.SimpleGraph.exists_indep_card_eq_indepNum: the run fails and names it
+plant 'a made-public constant's private copy left in' in _private.Proofs.HadwigerNelson.Plane.OneClass.Defs.0.SimpleGraph.exists_indep_card_eq_indepNum: the run fails and names it
+plant 'a made-public constant's full print changed' in _private.Proofs.HadwigerNelson.Plane.OneClass.Defs.0.HadwigerNelson.Plane.upperDensity_congr_ae: the run fails and names it
+plant 'a made-public constant's private copy left in' in _private.Proofs.HadwigerNelson.Plane.OneClass.Defs.0.HadwigerNelson.Plane.upperDensity_congr_ae: the run fails and names it
+plant 'a constant changed in the erased and the full print' in SimpleGraph.finIndepRatio_le_of_embedding: the run fails and names it
+plant 'a constant changed in the full print only (ENNReal.instLE), --strict' in SimpleGraph.finIndepRatio_le_of_embedding: the run fails and names it
+plant 'a constant removed' in SimpleGraph.finIndepRatio_le_of_embedding: the run fails and names it
+plant 'a theorem turned into an axiom' in SimpleGraph.finIndepRatio_le_of_embedding: the run fails and names it
+plant 'an unlisted constant compiled in another module' in SimpleGraph.finIndepRatio_le_of_embedding: the run fails and names it
+CONTROL OK: each plant read as planted

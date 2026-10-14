@@ -1,0 +1,5 @@
+constants in both dumps: 20 (of 20 and 20); hash disagreements: 0
+PASS
+constants in both dumps: 20 (of 20 and 20); hash disagreements: 1
+  DISAGREE T HadwigerNelson.ThreeColourCriterion.coe_conjR
+CONTROL: the check can fail

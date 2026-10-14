@@ -1,0 +1,82 @@
+{
+ "renames": [
+  [
+   "ite_eq_left",
+   "if_pos",
+   "core renamed `if_pos` to `ite_eq_left` after v4.32.0 (with `if_neg` → `ite_eq_right`: `LEAN.md` § Searching — Lean); at v4.32.0 only the old name, the same statement (`Init/Core.lean` at v4.34.1: `theorem if_pos … := ite_eq_left hc`)"
+  ],
+  [
+   "ite_eq_right",
+   "if_neg",
+   "core renamed `if_neg` to `ite_eq_right` on 2026-07-21 (`LEAN.md`; FS132-I2's patch); at v4.32.0 only the old name, the same statement"
+  ],
+  [
+   "Measurable.of_eval",
+   "measurable_pi_lambda",
+   "`Measurable.of_eval` (v4.34.1, `Mathlib/MeasureTheory/MeasurableSpace/Constructions.lean:596`, proved there as `measurable_pi_iff.mpr hf`) is not at v4.32.0; `measurable_pi_lambda` (`Constructions.lean:590` here) is the same statement with the function explicit, which `apply` unifies (as `OAI158PhaseEncoding`'s patch at 210)"
+  ]
+ ],
+ "patches": [
+  [
+   229,
+   ":= inferInstance",
+   ":= MeasureTheory.Measure.isProbabilityMeasure_map (hp.aemeasurable (μ := μ))",
+   "the class of `plans/FS131-KO1-port-plan.md` § 3.3, in a PROOF: at v4.34.1 `μ.map f` of a probability measure is one by an instance for every `f`, so the release's `let : IsProbabilityMeasure (μ.map f) := inferInstance` is found; at v4.32.0 only through `Measure.isProbabilityMeasure_map (hf : AEMeasurable f μ)` (`Mathlib/MeasureTheory/Measure/Typeclasses/Probability.lean:124`). The `let`'s value is that lemma at the measurability the proof's context holds; the statement is untouched"
+  ],
+  [
+   292,
+   ":= inferInstance",
+   ":= MeasureTheory.Measure.isProbabilityMeasure_map (hp.aemeasurable (μ := μ))",
+   "the class of `plans/FS131-KO1-port-plan.md` § 3.3, in a PROOF: at v4.34.1 `μ.map f` of a probability measure is one by an instance for every `f`, so the release's `let : IsProbabilityMeasure (μ.map f) := inferInstance` is found; at v4.32.0 only through `Measure.isProbabilityMeasure_map (hf : AEMeasurable f μ)` (`Mathlib/MeasureTheory/Measure/Typeclasses/Probability.lean:124`). The `let`'s value is that lemma at the measurability the proof's context holds; the statement is untouched"
+  ],
+  [
+   306,
+   ":= inferInstance",
+   ":= MeasureTheory.Measure.isProbabilityMeasure_map (hv n).aemeasurable",
+   "the class of `plans/FS131-KO1-port-plan.md` § 3.3, in a PROOF: at v4.34.1 `μ.map f` of a probability measure is one by an instance for every `f`, so the release's `let : IsProbabilityMeasure (μ.map f) := inferInstance` is found; at v4.32.0 only through `Measure.isProbabilityMeasure_map (hf : AEMeasurable f μ)` (`Mathlib/MeasureTheory/Measure/Typeclasses/Probability.lean:124`). The `let`'s value is that lemma at the measurability the proof's context holds; the statement is untouched"
+  ],
+  [
+   356,
+   ":= inferInstance",
+   ":= MeasureTheory.Measure.isProbabilityMeasure_map (hb.aemeasurable (μ := μ))",
+   "the class of `plans/FS131-KO1-port-plan.md` § 3.3, in a PROOF: at v4.34.1 `μ.map f` of a probability measure is one by an instance for every `f`, so the release's `let : IsProbabilityMeasure (μ.map f) := inferInstance` is found; at v4.32.0 only through `Measure.isProbabilityMeasure_map (hf : AEMeasurable f μ)` (`Mathlib/MeasureTheory/Measure/Typeclasses/Probability.lean:124`). The `let`'s value is that lemma at the measurability the proof's context holds; the statement is untouched"
+  ],
+  [
+   402,
+   ":= inferInstance",
+   ":= MeasureTheory.Measure.isProbabilityMeasure_map (hP.aemeasurable (μ := μ))",
+   "the class of `plans/FS131-KO1-port-plan.md` § 3.3, in a PROOF: at v4.34.1 `μ.map f` of a probability measure is one by an instance for every `f`, so the release's `let : IsProbabilityMeasure (μ.map f) := inferInstance` is found; at v4.32.0 only through `Measure.isProbabilityMeasure_map (hf : AEMeasurable f μ)` (`Mathlib/MeasureTheory/Measure/Typeclasses/Probability.lean:124`). The `let`'s value is that lemma at the measurability the proof's context holds; the statement is untouched"
+  ],
+  [
+   639,
+   ":= inferInstance",
+   ":= MeasureTheory.Measure.isProbabilityMeasure_map (hp.aemeasurable (μ := μ))",
+   "the class of `plans/FS131-KO1-port-plan.md` § 3.3, in a PROOF: at v4.34.1 `μ.map f` of a probability measure is one by an instance for every `f`, so the release's `let : IsProbabilityMeasure (μ.map f) := inferInstance` is found; at v4.32.0 only through `Measure.isProbabilityMeasure_map (hf : AEMeasurable f μ)` (`Mathlib/MeasureTheory/Measure/Typeclasses/Probability.lean:124`). The `let`'s value is that lemma at the measurability the proof's context holds; the statement is untouched"
+  ],
+  [
+   652,
+   ":= inferInstance",
+   ":= MeasureTheory.Measure.isProbabilityMeasure_map (hq.aemeasurable (μ := μ))",
+   "the class of `plans/FS131-KO1-port-plan.md` § 3.3, in a PROOF: at v4.34.1 `μ.map f` of a probability measure is one by an instance for every `f`, so the release's `let : IsProbabilityMeasure (μ.map f) := inferInstance` is found; at v4.32.0 only through `Measure.isProbabilityMeasure_map (hf : AEMeasurable f μ)` (`Mathlib/MeasureTheory/Measure/Typeclasses/Probability.lean:124`). The `let`'s value is that lemma at the measurability the proof's context holds; the statement is untouched"
+  ],
+  [
+   562,
+   "Measurable.of_eval (fun _ =>",
+   "measurable_pi_lambda _ (fun _ =>",
+   "`Measurable.of_eval` (v4.34.1, `Mathlib/MeasureTheory/MeasurableSpace/Constructions.lean:596`, proved there as `measurable_pi_iff.mpr hf`) is not at v4.32.0; `measurable_pi_lambda` (`Constructions.lean:590` here) is the same statement with the function explicit, given here as `_` in a term"
+  ]
+ ],
+ "drop_imports": [
+  [
+   "Mathlib.Order.CompletePartialOrder",
+   "the module of `CompletePartialOrder.toSupSet`: under it a supremum in a complete lattice is stored through that instance, and imported here it would move a stored statement of this library that sees the port's imports (`HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff`, INSTANCES-ONLY: `data/fs131/ko1/exposure/OAI158-*`; without it, nothing moves: `OAI158-noCPO-*`); FS131-IE1 left it out of its port for the same reason. The module elaborates without it"
+  ]
+ ],
+ "nolint": [
+  [
+   "HadwigerNelson.Outside.OAI158.Spectral.instMeasurableSpaceCircle_proofs_3",
+   "defsWithUnderscore",
+   "name"
+  ]
+ ]
+}

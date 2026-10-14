@@ -1,0 +1,7 @@
+faithful copy: 0 findings over 4084 constants (PASS)
+plant changed type: FIRED (['TYPE HadwigerNelson.DensityBound.antitoneOn_norm_Jc'])
+plant changed value: FIRED (['VALUE HadwigerNelson.DensityBound.J0'])
+plant removed constant: FIRED (['REMOVED HadwigerNelson.DensityBound.antitoneOn_norm_Jc', 'ADDED public PLANT.renamed'])
+plant new public constant: FIRED (['ADDED public HadwigerNelson.DensityBound.plantedNew'])
+SELF-TEST PASS
+exit=0

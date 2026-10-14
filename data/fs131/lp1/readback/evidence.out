@@ -1,0 +1,3 @@
+# FS131-LP1: written by tools/fs131_lp1_instance_evidence.py; read by the read-back's INSTANCE_EVIDENCE and TARGET_IN_LIBRARY rules
+INSTANCE-EVIDENCE OK §.CommutingSpectral.generator_unitary: the release's Monoid path and this pin's agree by rfl in the kernel (data/fs131/lp1/rfl/GeneratorUnitary.lean); its planted control refused
+IN-LIBRARY OK §.Spectral.residual_fourier: the ported theorem's stored type is IDENTICAL to the density branch's axiom (data/fs131/ipd1/join/density.out.xz)

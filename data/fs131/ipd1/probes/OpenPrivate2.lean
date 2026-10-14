@@ -1,0 +1,8 @@
+import Proofs
+open HadwigerNelson
+set_option pp.fullNames true
+section
+open private HadwigerNelson.Outside.OAI158.instFactNeENNRealOfNatTop_proofs from Proofs.HadwigerNelson.Outside.OAI158Palette
+#print axioms HadwigerNelson.Outside.OAI158.instFactNeENNRealOfNatTop_proofs
+end
+#print axioms HadwigerNelson.Outside.OAI158.instFactNeENNRealOfNatTop_proofs

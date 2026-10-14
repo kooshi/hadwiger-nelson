@@ -1,0 +1,6 @@
+MATCH                          data/fs131/REQUEST-2026-10-13.md           278 chars  'W2: (2026-10-13, answering the choice between th'
+MATCH                          data/fs131/claims-NF4.md                   541 chars  'NF4-THEOREM: *The theorem.* (a) For every square'
+MATCH                          data/fs131/claims-NF4.md                   946 chars  '- 2026-10-13 17:51 UTC — **Three statements wide'
+MATCH                          data/fs131/claims-NF4.md                   777 chars  '- 2026-10-13 17:59 UTC — **NF4-S9 is untrue as w'
+MATCH                          data/fs131/claims-NF4.md                   615 chars  '- 2026-10-13 17:59 UTC — **Two statements added,'
+quotations=5 bad=0 planted=False

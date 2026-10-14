@@ -1,0 +1,15 @@
+planted: 1 line(s)
+==> build: OK — 264 of 264 batches, 2 module(s) rebuilt, 0 module(s) with warnings, 7m40s
+    full output: build/gate/build/20261014T203414Z-506530.log
+EXIT=0 WALL_SECONDS=464 BATCH=8
+LINT CONTROL FIRED: exit 1, the plant named
+54:[Proofs] - synTaut: (2/2) Failed with 1 messages, but these may include declarations in `nolints.json`.
+58:[Proofs] - unusedArguments: (2/2) Failed with 1 messages, but these may include declarations in `nolints.json`.
+70:/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10g/Proofs/HadwigerNelson/Plane/DensityBound/Theorem.lean:75:1: error: @zz_ldb1_lint_plant LHS equals RHS syntactically
+76:/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10g/Proofs/HadwigerNelson/Plane/DensityBound/Theorem.lean:75:1: error: @zz_ldb1_lint_plant 1 unused argument:
+restored digest: 37444cd7ef4eb7338138120d119dee732b703de1110801926392d45200153089
+digest before:   37444cd7ef4eb7338138120d119dee732b703de1110801926392d45200153089
+RESTORED: the module is the text it was
+plant's name in the file: 0 time(s)
+tracked files modified: 1
+exit=0

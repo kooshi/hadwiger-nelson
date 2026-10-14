@@ -1,0 +1,114 @@
+# Brief FS131-ICM3 — the five-colour chain: M13's last three leaves on this line
+
+*Written 2026-10-14 19:21 UTC by Keryx, the coordinator (the top-level session), at Kooshi's word of 2026-10-13. Launch line: "Your brief is on disk: read it in full first."*
+
+brief: FS131-ICM3
+  identity: de Bruijn, the implementer — your agent file (`.claude/agents/debruijn-implementer.md`) is your identity and your lane's workflow; you run on Opus, as every implementer now does (inventory item 137)
+  role: the implementer of M13's last leaves on this line — `circleCos_bound` (the exact cosine bounds at residue sizes 23 and 31, a closed statement about `ZMod Q`), `charBound_one_exact_27`, and the dyadic branch `ratioAtMost_dyadic` with its own Lemma P (the algebra so far assumes 2 a unit); the certificate link at 11 and 19 stays named until the lines are joined
+  launch: now, in the last implementer's tree (its job is finished; nobody else writes there) on a new branch cut from its branch; four other jobs share the build slot
+  mission: § Why this job
+  statements: § The statements
+  acceptance: § Done means
+  yours: § What is yours to decide
+  fences: none — nothing here is blind to you
+  channel: message the coordinator ("main") by SendMessage **at once** if a leaf is false as stated or needs a hypothesis it lacks, if a leaf's first part prices it above twice the last implementer's estimate, if a cosine bound's margin does not hold in exact arithmetic, and with one line when `ratioAtMost_of_five_le_chromaticNumber` rests on `ratioAtMost_cert` alone; the report goes to `data/fs131/reports/FS131-ICM3.md` and to "main" as your hand-back
+  standing rules: plans/STANDING-RULES.md — part of this brief; read it in full. Also `LEAN.md` in full, and `RUNNING.md` § Building and § Make the gate fail, and watch it fail
+  record: `plans/FS131-ICM3-implementation.md` (new, on branch `fs131-wcm3`)
+  touches: in the worktree `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wch` on a **new branch `fs131-wcm3`** that you cut from its head (`fs131-wcm2` at `a7501c681`; its build is current for that commit): **proofs, private helpers and import lines only — no statement changes, no definition changes** in `Proofs/HadwigerNelson/Rigidity/ClassRatio.lean` (its six private leaves, each restated in the last implementer's record); new modules under `Proofs/HadwigerNelson/Rigidity/` or `Proofs/HadwigerNelson/Arith/` for exact-spectrum checks if they are better public, with their lines in the build's lists and `ARCHITECTURE.md`; their rows where a cell's state changes; your checks under `tools/` named for this job; `plans/FS131-ICM3-implementation.md`; `data/fs131/icm3/`; `data/fs131/reports/FS131-ICM3.md`. **Not** the count's modules (proved), `Arith/FibreCert*` (another line), any module under `Outside/`, the declared `StandingFive.kloosterman_bound` (read as declared), the declared printed theorem. Untracked files of earlier jobs in `data/fs131/icl1/`, `icl2/`, `icm1/`, `icm2/`: leave them. Nothing on `main`
+  budget: about 400k by the harness's count, as guidance; hand back at a saved stage before about 500k — read your token count at every saved stage
+
+Hello. M13's uniform bound now rests on Weil's bound alone; the per-prime leaf waits on four private leaves, one of them
+the certificate link that closes at the join. You prove the other three.
+
+## Why this job
+
+Kooshi's rule for what goes out:
+
+> W2: (2026-10-13, answering the choice between the two publishable forms) I choose the second form. Any finding of ours must be formalized. I'd prefer to formalize the entire chain, so at some point I'd like to price the EL theorem to see what it would take to formalize as well.
+> — source: data/fs131/REQUEST-2026-10-13.md
+
+The count's proof reads `tca_uniform`; with Lemma P proved it rests on Weil's bound, a declared outside theorem the library
+already holds, and the standard three.
+
+## The statements
+
+The dated lines of the chain's claim list (`data/fs131/claims-NF2.md`) that say what the count reads from M13 and what
+the certificate checker holds:
+
+> - 2026-10-14 — **The count is typed** (FS131-K12A): `Rigidity.Counting.count_of_oneAvoidingDensityBound : Plane.OneAvoidingDensityBound → (chainInterface F).Count`, for every real number field, composed over 57 leaves in eight modules (`Plane/WindowDensity`, `Rigidity/FiniteZhang`, `PlaneZhang`, `CountTorus`, `CountResidue`, `CountCompletion`, `CountExtension`, `CountDescent`); it reads `tca_uniform`, `noRamifiedStableDyadic_of_tca`, `TA_subset_contChars`, `exists_mul_stableIntegers_le`, `dense_mixedEmbedding_nsmul_unitRing` and `upperDensity_le_of_oneAvoidingDensityBound`; no typed statement of another module changes.
+> — source: data/fs131/claims-NF2.md § Dated lines
+
+> - 2026-10-14 — **The class-ratio checker is proved sound** (FS131-IKC2): `FibreCertSound.sum_le_of_certOK` and `card_le_of_certOK` are kernel theorems on the standard three, their stored statements unchanged since FS131-KC13 typed them; `certOK`'s definition unchanged since FS131-IKC1 strengthened it. An accepted certificate now implies `Σφ ≤ U_num/L` on FS-66's region at its `p`. The p = 11 certificate's library modules (K1) and p = 19's form F2 are not yet built.
+> — source: data/fs131/claims-NF2.md § Dated lines
+
+The map planner's, the certificate planner's, the last implementer's and the certificate implementer's hand-backs, as I
+logged them (their words in quotation marks, the rulings mine):
+
+> 823. **FS131-KR1 handed back: the chain's whole remaining road on one map (2026-10-14 11:03 UTC; "JOB FS131-KR1 — DONE"; 560k by the harness's count — past the line, not to be resumed; branch `fs131-wkr` at `3fabd5e10`, tree `fs131-wch`; record `plans/FS131-KR1-chain-map.md` there, its § Stage 5 the map).** From its hand-back message: six new modules typed (M2a `Rigidity/Herglotz`, M3 `Rigidity/InvariantMeasure`, M10 `Rigidity/ContinuityGroup`, M2b `Rigidity/BochnerTau`, M13 `Rigidity/ClassRatio`, M12's input `Plane/OneAvoidingDensity`), M11, M12 and M15 read and priced; "My seven modules come to about 14,000–28,000 lines. About half of that is M12, the count … 6,000–12,000 lines, 3–6 weeks; it needs its own planner"; M13 "2,500–5,000 lines plus FS-66's certificates at 11 and 19 … the cost of checking them in the kernel is unmeasured"; "Every price is estimated from what Mathlib at the pin covers, not from a proved leaf"; the critical path "M13's uniform-tail lemma → M12, alongside lane T → M8b and M4 → M10 → M2b → M11"; the density bound typed as `Plane.OneAvoidingDensityBound`, "as you ruled", its model proved; two private lemmas of `ChainAtTA` M10 reads. **My receipt:** the seven commits exist; from its compiled tree (scratch `kr1/Ax.lean`): `Plane.OneAvoidingDensityBound` prints as "∀ A, NullMeasurableSet A volume → (∀ a ∈ A, ∀ b ∈ A, dist a b ≠ 1) → ∀ x, limsup (fun R => volume (A ∩ ball x R) / volume (ball x R)) atTop ≤ ENNReal.ofReal 0.2470" on `EuclideanSpace ℝ (Fin 2)` — read by me against its row 2 table: equal to the page (the page's "independent of the choice of x" makes every centre the same as one); `oneAvoidingDensityBound_model` on the standard three. **Rulings.** (1) *The two private lemmas of `ChainAtTA` (`mem_torsion_mul_arch_iff`, `exists_rat_coords`):* made public by M10's implementer, statements unchanged and dumped (one fact proved once); high. (2) *The draft claim lists' corrections (M2's "existence half", M15's model):* carried by the five dated lines, filed; the generated drafts are left as their generator writes them; high. (3) *The next slot:* M12's planner (FS131-K12, item 824) — the longest single stretch and on the critical path; alternative, the FS-66 certificate measurement for M13 — next, as a short job; medium-high. **Filed:** its five dated lines in `data/fs131/claims-NF2.md`, verbatim, this commit; every bibliography key it cites resolves (`[Rudin1962]`, `[Kakutani1938]`, `[LevitzMott1972]`, `[KMOR2016]`, `[BachocEtAl2014]`, `[Zhang2012]` each have a row); their reading-status lines and its three `LEAN.md` lines are owed to the second filing. **For Kooshi's report:** the chain is weeks from the gate, not days — about 14,000–28,000 lines in its seven unread modules by estimate, M12 alone three to six weeks, and the density bound three to six weeks more if formalized; a fork in scope that is his (what to publish before the chain lands).
+> — source: plans/FS131-close-inventory.md
+
+> 848. **FS131-KC13 handed back: the p = 11 class-ratio certificate checks in the kernel; p = 19 needs a new form; M13's per-prime leaf planned (logged 2026-10-14 13:44 UTC; "JOB FS131-KC13 — DONE"; 583k by the harness's count — past the line, not to be resumed; branch `fs131-wc13` at `7be9eef34`, tree `fs131-wnf`; record `plans/FS131-KC13-certificates.md` there).** From its hand-back message: "**The p = 11 certificate passes the kernel check.** Every part of `certOK` passes `decide +kernel` on the laptop, under the slot: 185 s of kernel time in all, at most 12.0 GB per declaration" (`segCheck cert11 0` 93.7 s / 12.0 GB, `segCheck cert11 1` 76.4 s / 11.0 GB, `psdAll cert11` 14.8 s / 2.9 GB); "What an accepted certificate means is `FibreCertSound.sum_le_of_certOK` … It is typed, but its proof is `sorry`. So this is a measured price, not yet a result of the library"; planted faults refused (five at p = 3, one at p = 11 in 56.6 s); "The kernel's caches hash a `Nat` literal by its low 64 bits … one computation took 33 s against 1.25 s"; "**The p = 19 certificate does not run in the present form.** One segment of 32 was killed at its 12 GiB cap … Form F2 is priced at about 30 minutes of kernel CPU in about 40 declarations of at most 10 GB each … extrapolated … not run"; at 23 and 31 "rational cosine bounds … About 700–1,200 lines, kernel seconds"; the per-prime leaf planned, "no defect", the q ∈ {11, 19} branch "about 3,500–6,700 lines" (K1 generated checks, K2 the checker's soundness 2,000–4,000, K3 300–500, K4 with Lemma P 1,000–1,800 shared by every branch, K5 and glue). **My receipts:** the five commits exist; `Arith/FibreCert.lean` and `Arith/FibreCert3.lean` hold no `sorry`, `Arith/FibreCertSound.lean` two; from the tree's compiled library (scratch `kc13/Ax.lean`): `FibreCert.cert3_ok : certOK cert3 = true` — `[propext]`, a `decide +kernel` proof of the p = 3 certificate. **Rulings, four parts each.** (1) *p = 11's data and checks into the library now or with the landing:* with the landing, split into four identity segments under the build's 10 GB cap and measured there; alternative, now in two segments — declined, at 11–12 GB they exceed the build's cap, and nothing reads them until the soundness theorem is proved; high. (2) *p = 19 — form F2 now, or the smaller-relaxation search first:* F2 by the next implementer, and the search request queued for the Searcher (`plans/SEARCH-QUEUE.md` row 24) — if a smaller certificate arrives first, the implementer switches; alternative, wait for the search — declined, F2 is about 300 checker lines and 30 minutes of kernel time, affordable now, and the search's yes is not certain; medium-high — changed if the Searcher's run comes before F2's checker is written. (3) *The next job:* an implementer on this branch for K2 (the soundness, the critical part: a reference checker first, then the fast one shown to imply it, the record's mitigation), K1 at p = 11 in four segments, then F2 at p = 19; K3–K5 go to the chain's line after its join, Lemma P with them; alternative, K3–K5 first — declined, they read `Rigidity/ClassRatio`, which is on the chain's unjoined branch; high. **Correction owed, for the map and for Kooshi's next report:** M13's q ∈ {11, 19} branch alone is about 3,500–6,700 lines; the map's 2,500–5,000 for the whole of M13 did not include the checker's soundness. **Generalization, noted:** `sum_le_of_certOK` needs no primality and is stated for every p ≥ 2. **Filed:** its three dated lines in `data/fs131/claims-NF2.md` (each joined onto one line as the file holds them; words unchanged), and the search request as row 24 of `plans/SEARCH-QUEUE.md`, this commit. **Owed to the second filing:** four `LEAN.md` lines (§ The kernel's cost model: the low-64-bit literal hash, intermediates retained to the declaration's end, direct `Nat.*` calls and `Nat.rec` against notation and structural recursion, literal parse and size costs) and its bibliography lines, drafted in its record § 6.2–6.3. **Slips, the job's own, credited:** a `pgrep -f` pattern that matched its own shell (exit 144; nothing lost; then stopped by PID), and a 13 GiB request where 3 GiB served (resubmitted at 5).
+> — source: plans/FS131-close-inventory.md
+
+> 905. **FS131-ICM2 handed back at stage 4: Lemma P proved, the exclusions at 3 and 7 proved, the exact spectra reduced to a closed statement (logged 2026-10-14 19:21 UTC; "JOB FS131-ICM2 — STAGE 4 SAVED"; branch `fs131-wcm2` at `a7501c681`, tree `fs131-wch`; record `plans/FS131-ICM2-implementation.md` there).** From its hand-back message: "`Rigidity.tca_uniform` and `Rigidity.exists_uniform_tail` … rest on `[propext, Classical.choice, Quot.sound, StandingFive.kloosterman_bound]` … with no `sorry`"; Lemma P's two leaves on the standard three ("at an odd stable prime with `|𝓞 ⧸ P| = Q²`, every norm-one residue at level `n + 1` has exactly `Q` norm-one lifts at level `n + 2`"; "a character non-trivial on `ker red` sums to at most `(2/(Q + 1))·|S_{n+2}|`"); "at `Q ∈ {3, 7}` the level-one target is four-colourable"; `charBound_one_exact` reduced through `charBound_one_of_circleCos` to `circleCos_bound` ("a closed statement about `ZMod Q`. Read true in floating point, with margins `1.638·10⁻³` and `4.880·10⁻⁶`"); GAP at four private leaves (`ratioAtMost_dyadic`, `circleCos_bound`, `charBound_one_exact_27`, `ratioAtMost_cert`); "`count_of_oneAvoidingDensityBound`: its `sorryAx` now comes only from `Plane.upperDensity_le_of_oneAvoidingDensityBound` and `Rigidity.noRamifiedStableDyadic_of_tca`. No leaf of M13 is under it"; statements SAME 44, PRIVATE-SAME 69, CHANGED 0; two generalizations (Lemma P in any finite ring with an involution and a square-zero ideal; K3's isomorphism "in all but name"); a tool defect (ICM1's comparator skipped internal names) fixed in its own; a grading slip corrected. **My receipt:** item 901 (`tca_uniform` printed by me: the standard three and Weil's bound). **Rulings, four parts.** (1) *The next job on this line:* `circleCos_bound` (rational cosine bounds, one kernel `List.all` check of 528 and 960 pairs), then `charBound_one_exact_27`, then the dyadic branch with its own Lemma P; `ratioAtMost_cert` at the landing's join — item 906; high. **Corrections owed:** M13's prices (Lemma P 617 lines; the exclusions 60 against 300–500; the exact spectra 200 + 300–600 against 700–1,200). **Tool defect (the tooling list):** a statement comparator that skips internal names passes a changed private leaf.
+> — source: plans/FS131-close-inventory.md
+
+> 886. **FS131-IKC2 handed back at stage 6: the class-ratio certificate checker proved sound (logged 2026-10-14 17:09 UTC; "JOB FS131-IKC2 — STAGE 6 SAVED"; 579k by the harness's count — past the line, not to be resumed; branch `fs131-wc15` at `1e0990dad`, tree `fs131-wnf`; record `plans/FS131-IKC2-implementation.md` there).** From its hand-back message: "TRUE — `HadwigerNelson.FibreCertSound.sum_le_of_certOK` is a kernel theorem … `[propext, Classical.choice, Quot.sound]`, printed from the built tree … if `certOK C = true`, then every `φ : (ℤ/p)² → [0,1]` with `q(φ) = 2Σφ(1−φ) − ΣΣ_{s∈S} φ_x φ_{x+s} ≥ 0` has `Σφ ≤ U_num/L`, for every `p` with `NeZero p`. Its stored statement is byte-identical to the one FS131-KC13 typed"; "`card_le_of_certOK` … an independent set of `Cay((ℤ/p)², S)` has at most `U_num/L` points"; the four leaves L1–L4 proved; "no change to `certOK`'s definition was made or needed"; "205 public records and 418 private theorems, every one a subset of the standard three"; "NOT REACHED — K1 at p = 11 … and F2 at p = 19"; K2 took "about 2,450 lines of proof in all"; "F2 changes `certOK` … That reopens K2's computation half … so F2 should be priced as a checker job plus a proof job". **My receipts:** the nine commits exist; from the tree's compiled library (scratch `kc13/Ax2.lean`, re-run against this build): `FibreCertSound.sum_le_of_certOK` — `[propext, Classical.choice, Quot.sound]` (item 883's receipt now complete). **So: an accepted certificate implies the class-ratio bound, a kernel theorem; with the p = 3 certificate's check (`cert3_ok`), the bound at p = 3 follows; p = 11 needs its library modules (K1), p = 19 a new checker form (F2).** **Rulings, four parts.** (1) *F2's reopening of the soundness:* priced as a checker job plus a proof job, after K1; and the Searcher's row 24 (a smaller relaxation at 19) moves up — a yes there would spare F2 entirely; medium-high. (2) *The next certificate job (K1 at p = 11):* queued; the chain's own work (the count's last leaf, M13's K3–K5 with Lemma P) takes this slot first, because it waits on nothing of this line and K1 is a generation-and-build job of minutes per module; medium — changed if the chain's join needs `cert11_ok` before K3–K5 are done. **Correction owed:** K2's price — about 2,450 lines against item 869's 1,550–2,000 (inside the planner's 2,000–4,000). **Generalization noted:** L1 reads `b.tri` exactly as decoded. **Filed:** its dated line in `data/fs131/claims-NF2.md` (joined onto one line), this commit.
+> — source: plans/FS131-close-inventory.md
+
+**Your work, in order** (each leaf restated with its route in the last implementer's record `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wch/plans/FS131-ICM2-implementation.md` § Stage 4; the
+certificate planner's § 5.3 in `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/plans/FS131-KC13-certificates.md`): (1) `circleCos_bound` — rational lower bounds on `cos(2πj/Q)` from
+`Complex.exp_bound'` with π bracketed by `Real.pi_gt_d20` and `Real.pi_lt_d20`, then one kernel `List.all` check over 528
+pairs at 23 and 960 at 31 (at 31 each cosine good to about 5·10⁻⁶). (2) `charBound_one_exact_27` (FS100-G27: `λ_min = −8`,
+ratio `2/9`). (3) `ratioAtMost_dyadic` — the dyadic branch (the map's (c): `Q = 64` exact, `128` through `Floor128`, `Q ≥ 256`
+by EN1-UQ4), with a Lemma P that does not assume 2 a unit. `ratioAtMost_cert` stays named. Re-price each from its first
+part and say so.
+
+## Done means
+
+1. **Readback** (a saved stage): the quoted lines checked against their sources; each leaf restated beside its route; the
+   stored statements of your files dumped from the built tree before any edit.
+2. **`circleCos_bound`** (a saved stage), its margins in exact arithmetic recorded.
+3. **The other two leaves** (saved stages as they fall, and the one line to me).
+4. **No statement and no definition changed**, shown from the kernel's side against item 1's dump (a planted change
+   watched firing); one build under the slot with no warning from your files but their remaining leaves'; the axioms of
+   every public declaration of your files and of `count_of_oneAvoidingDensityBound` printed from the built tree, each
+   listed, with a planted record watched showing.
+5. **Drafts for the landing**, in your record: the audit's block; any `LEAN.md` lines.
+6. The report in the standing rules' form. Leave no process running or queued.
+
+## What is yours to decide
+
+The proofs; private helpers; the new modules; imports; the order after Lemma P; another route for a leaf where the
+recorded one does not go through (tell me which). An unread binder of a statement in your files is dropped under item
+726's word, listed and named. Not yours: any other change to a statement or definition; a new declared axiom; the files
+listed as not yours; the landing.
+
+## The machine
+
+**This session is on the laptop: 12 cores, 31 GB; about 318 GB of disk free — do not copy compiled libraries between
+trees.** This tree's compiled library is current for `fs131-wcm`. One file through `lake env lean`: 3 to 24 seconds,
+3.6 GB.
+
+`env SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 python3 /home/kooshi/source/lean-dir/scripts/slot.py --mem <GiB> --cpus <n> --wait 7200 --name icm3 -- <command>`
+
+One file (with `-DautoImplicit=false -DrelaxedAutoImplicit=false`): `--mem 4 --cpus 2` from inside your worktree, and
+run every command from inside it. The build: `--mem 10 --cpus 4 -- env MEMMAX=10G BATCH=8 ./scripts/build.sh`; never
+`lake build`; do not edit a file a running build will compile. The certificate job holds up to 10 GiB of the slot for
+long stretches: on exit 75 wait ten minutes and retry. A cap kill under a `timeout` wrapper shows as exit 143, not 137.
+Stop a process by its PID, never by matching its command line. `/tmp` is wiped at power-off: anything your record cites
+lives under `data/fs131/icm3/`. Report at once any disk, memory or count reading near its limit.
+
+The remote is unreachable: **commit by explicit path on your
+branch and do not push**; I copy the branches to a local backup.
+
+You start no agents of your own (standing rule 1: delegation is one level
+deep, because the coordinator can only review work it knows exists).
+
+## Amendment — 2026-10-14 20:35 UTC (Keryx, by message to this job)
+
+The instances' planner (FS131-KM15, on the chain's joined line) needs one public fact of this module: the odd branch of `ratioAtMost_of_five_le_chromaticNumber`, with its chromatic hypothesis replaced by the two residue sizes that branch excludes. **Ruled: add it to `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wch/Proofs/HadwigerNelson/Rigidity/ClassRatio.lean` as a new public theorem, with this statement verbatim (the planner's text, its message to me):**
+
+`theorem ratioAtMost_of_two_notMem [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) (h9 : Nat.card (𝓞 (fieldI F) ⧸ P.P) ≠ 9) (h49 : Nat.card (𝓞 (fieldI F) ⧸ P.P) ≠ 49) : ∃ c : ℝ, c < 1 / 4 ∧ RatioAtMost P c`
+
+Prove it from the private leaves the odd branch already uses (`exists_card_sq`, `ratioAtMost_weil_lt`, `ratioAtMost_cert`, `charBound_one_exact` with Lemma P, `card_ne_fifteen_sq`), and make that branch of `ratioAtMost_of_five_le_chromaticNumber` read it, its `h9` and `h49` from `chromaticNumber_le_four_of_small`, so the fact is proved once. This is the one statement this amendment adds; your statement check lists it as NEW and everything else stays SAME. **Touches extended:** that theorem and that proof in that file. You still start no agents of your own: only the coordinator launches agents, so that Kooshi's budget holds and every piece of work is known.

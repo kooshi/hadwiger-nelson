@@ -1,0 +1,11 @@
+{"p": 11, "keep": "phi0,sq", "nJ": 2, "value": 34.549583, "dual": 34.549583, "status": "solved", "iterations": 275, "wall_s": 8.3, "extra": [], "log": "runs/p11-phi0-sq.log"}
+{"p": 11, "keep": "phi0,sq,1", "nJ": 8, "value": 34.549583, "dual": 34.549583, "status": "solved", "iterations": 375, "wall_s": 8.1, "extra": [], "log": "runs/p11-phi0-sq-1.log"}
+{"p": 11, "keep": "phi0,sq,2", "nJ": 8, "value": 32.105476, "dual": 32.105476, "status": "solved", "iterations": 950, "wall_s": 9.4, "extra": [], "log": "runs/p11-phi0-sq-2.log"}
+{"p": 11, "keep": "phi0,sq,3", "nJ": 8, "value": 30.056149, "dual": 30.056148, "status": "solved", "iterations": 1000, "wall_s": 9.4, "extra": [], "log": "runs/p11-phi0-sq-3.log"}
+{"p": 11, "keep": "phi0,sq,4", "nJ": 8, "value": 31.043859, "dual": 31.043858, "status": "solved", "iterations": 1000, "wall_s": 9.9, "extra": [], "log": "runs/p11-phi0-sq-4.log"}
+{"p": 11, "keep": "phi0,sq,5", "nJ": 8, "value": 32.726676, "dual": 32.726676, "status": "solved", "iterations": 1825, "wall_s": 10.9, "extra": [], "log": "runs/p11-phi0-sq-5.log"}
+{"p": 11, "keep": "phi0,sq,6", "nJ": 8, "value": 31.738266, "dual": 31.738267, "status": "solved", "iterations": 750, "wall_s": 9.8, "extra": [], "log": "runs/p11-phi0-sq-6.log"}
+{"p": 11, "keep": "phi0,sq,7", "nJ": 8, "value": 30.665522, "dual": 30.665521, "status": "solved", "iterations": 775, "wall_s": 8.8, "extra": [], "log": "runs/p11-phi0-sq-7.log"}
+{"p": 11, "keep": "phi0,sq,8", "nJ": 8, "value": 32.111616, "dual": 32.111617, "status": "solved", "iterations": 875, "wall_s": 9.3, "extra": [], "log": "runs/p11-phi0-sq-8.log"}
+{"p": 11, "keep": "phi0,sq,9", "nJ": 8, "value": 32.15717, "dual": 32.157169, "status": "solved", "iterations": 1175, "wall_s": 10.0, "extra": [], "log": "runs/p11-phi0-sq-9.log"}
+{"p": 11, "keep": "phi0,sq,10", "nJ": 8, "value": 32.31021, "dual": 32.310211, "status": "solved", "iterations": 1150, "wall_s": 9.9, "extra": [], "log": "runs/p11-phi0-sq-10.log"}

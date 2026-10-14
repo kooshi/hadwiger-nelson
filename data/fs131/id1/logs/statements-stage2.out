@@ -1,0 +1,11 @@
+Skeleton: kept (11 constants)
+Candidate: lean exit 0; errors: 0; sorry warnings: 7
+compared: 11 named constants of the first dump (11 theorems, 0 definitions; types, and values of definitions); 11 theorems written at 34d9113b2, each found in the first dump, each head compared as text
+internal (not compared): 0 before, 3 after
+new named constants in the second dump: 0
+new private declarations in the second dump (counted among the internal): 2
+  NEW PRIVATE THM HadwigerNelson.DyadicQuadratic.exists_not_all_even
+  NEW PRIVATE THM HadwigerNelson.DyadicQuadratic.rat_eq_zero_of_add_mul_irrational
+`example` heads: 4 at 34d9113b2, 4 in the working file; the Spec section compared byte for byte
+PASS: no statement changed
+CONTROL: 3 of 3 planted faults reported — the check can fail

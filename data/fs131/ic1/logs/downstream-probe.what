@@ -1,0 +1,2 @@
+# the text probed: git -C ../fs131-wr2 show 926d70f3d:Proofs/HadwigerNelson/Arith/TorsionExtraction.lean (file last changed at c007de223), sha256 f89393ad2540364663e4c11be3ff3a6aa8961f1cbea77edefc7555c88036103a
+# elaborated in fs131-wc1 against its second build's ThreeColourCharacter.olean, with data/fs131/ic1/lean/AxiomsFooter.lean appended

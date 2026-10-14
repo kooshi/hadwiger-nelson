@@ -1,0 +1,22 @@
+Proofs.HadwigerNelson.Outside.OAI158Rigidity: IDENTICAL 7, INSTANCES-ONLY 3
+  INSTANCES-ONLY  axiom    HadwigerNelson.Outside.OAI158.Spectral.residual_fourier
+      only before: InnerProductSpace.toInner NormedField.toNormedCommRing
+      only after:  AddGroup.toSubNegMonoid AddZero.toZero AddZeroClass.toAddZero CStarModule.toInner CommCStarAlgebra.toNormedCommRing Complex.instNonUnitalCommRing Complex.instNorm Complex.instStarRing Complex.partialOrder DistribMulAction.toDistribSMul DistribSMul.toSMulZeroClass Module.toDistribMulAction NonUnitalCommRing.toNonUnitalCommSemiring NonUnitalCommSemiring.toNonUnitalSemiring NormedAddCommGroup.toNorm SMulZeroClass.toSMul Semiring.toModule SubNegMonoid.toAddMonoid WithCStarModule.instCStarModuleComplex instCommCStarAlgebraComplex
+  INSTANCES-ONLY  theorem  HadwigerNelson.Outside.OAI158.Spectral.residual_fourier_cross
+      only before: InnerProductSpace.toInner NormedField.toNormedCommRing
+      only after:  AddGroup.toSubNegMonoid AddZero.toZero AddZeroClass.toAddZero CStarModule.toInner CommCStarAlgebra.toNormedCommRing Complex.instNonUnitalCommRing Complex.instNorm Complex.instStarRing Complex.partialOrder DistribMulAction.toDistribSMul DistribSMul.toSMulZeroClass Module.toDistribMulAction NonUnitalCommRing.toNonUnitalCommSemiring NonUnitalCommSemiring.toNonUnitalSemiring NormedAddCommGroup.toNorm SMulZeroClass.toSMul Semiring.toModule SubNegMonoid.toAddMonoid WithCStarModule.instCStarModuleComplex instCommCStarAlgebraComplex
+  INSTANCES-ONLY  theorem  HadwigerNelson.Outside.OAI158.Spectral.residual_fourier_model
+      only before: InnerProductSpace.toInner NormedField.toNormedCommRing
+      only after:  AddGroup.toSubNegMonoid AddZero.toZero AddZeroClass.toAddZero CStarModule.toInner CommCStarAlgebra.toNormedCommRing Complex.instNonUnitalCommRing Complex.instNorm Complex.instStarRing Complex.partialOrder DistribMulAction.toDistribSMul DistribSMul.toSMulZeroClass Module.toDistribMulAction NonUnitalCommRing.toNonUnitalCommSemiring NonUnitalCommSemiring.toNonUnitalSemiring NormedAddCommGroup.toNorm SMulZeroClass.toSMul Semiring.toModule SubNegMonoid.toAddMonoid WithCStarModule.instCStarModuleComplex instCommCStarAlgebraComplex
+Proofs.HadwigerNelson.Plane.OneClass.SectionDensity: IDENTICAL 9
+Proofs.HadwigerNelson.Plane.OneClass.Defs: IDENTICAL 48, INSTANCES-ONLY 1
+  INSTANCES-ONLY  theorem  HadwigerNelson.Plane.isIndepSet_ball_half
+      only before: NormedField.toNormedCommRing
+      only after:  CommCStarAlgebra.toNormedCommRing instCommCStarAlgebraComplex
+Proofs.HadwigerNelson.Plane.OneClass.Field: IDENTICAL 1
+Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw: IDENTICAL 10
+Proofs.HadwigerNelson.Plane.OneClass.Algebraic: IDENTICAL 9
+Proofs.HadwigerNelson.Plane.OneClass.Fractional: IDENTICAL 7
+Proofs.HadwigerNelson.Plane.OneClass.Pair: IDENTICAL 19
+constants of the first dump: 114  IDENTICAL 110  INSTANCES-ONLY 4  new in the second: 0
+MOVED OK: nothing moved outside instance and proof arguments

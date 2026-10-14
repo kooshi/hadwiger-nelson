@@ -1,0 +1,10 @@
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 2,3
+Proofs/HadwigerNelson/Outside/OAI158Multipliers.lean:80:30: error: Application type mismatch: The argument
+  Lp.aestronglyMeasurable (mul h hm hn v)
+has type
+  AEStronglyMeasurable (↑↑(mul h hm hn v)) μ
+but is expected to have type
+  ∀ᵐ (x : ?m.36) ∂?m.41, ‖?m.44 x‖ = ‖?m.45 x‖
+in the application
+  eLpNorm_congr_norm_ae (Lp.aestronglyMeasurable (mul h hm hn v))
+Proofs/HadwigerNelson/Outside/OAI158Multipliers.lean:82:2: error: No goals to be solved

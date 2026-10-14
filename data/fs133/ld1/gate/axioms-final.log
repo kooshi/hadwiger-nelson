@@ -1,0 +1,53 @@
+slot: admitted ld1-axioms: mem 8 GiB (hard cap), cpus 1,2,3,4
+==> axioms: this run's full output: build/gate/axioms/20261014T142427Z-3409082.log
+    audited: 9101 records — 9038 clean on the standard axioms, 32 axiom-free, 26 imported (resting on a declared outside theorem), 5 declared purchase(s)
+    clean records, by axiom set:
+       8858  [propext, Classical.choice, Quot.sound]
+         96  [propext, Quot.sound]
+         83  [propext]
+          1  [Quot.sound]
+         32  (no axioms): HadwigerNelson.Adjoin.approx, HadwigerNelson.Outside.OAI158.ChainJoin.joint, HadwigerNelson.Outside.OAI158.CountableApprox.truncate, HadwigerNelson.Outside.OAI158.RectangleDensity.Code, HadwigerNelson.Outside.OAI158.Spectral.MomentTest, HadwigerNelson.PartialColoring.map, HadwigerNelson.Plane.ArcMap.SemiKind.O.sizeOf_spec, HadwigerNelson.Plane.ArcMap.SemiKind.T.sizeOf_spec, HadwigerNelson.Plane.ArcMap.SemiKind.ofNat_ctorIdx, HadwigerNelson.Plane.ArcMap.fin_two_eq_of_ne, HadwigerNelson.Plane.BranchGerms.fin3_adj, HadwigerNelson.Plane.BranchGerms.mem_gapGerm, HadwigerNelson.Plane.BranchGerms.mem_gapSec, HadwigerNelson.Plane.CircleSide, HadwigerNelson.Plane.CircleSide.flip, HadwigerNelson.Plane.CircleSide.flip_flip, HadwigerNelson.Plane.CircleSide.flip_inside, HadwigerNelson.Plane.CircleSide.flip_outside, HadwigerNelson.Plane.fin_three_eq_or_of_ne, HadwigerNelson.Plane.instDecidableEqCircleSide, HadwigerNelson.Plane.labHi, HadwigerNelson.Q4.approx, HadwigerNelson.StandingFive.squaresBelow_11, HadwigerNelson.Stripe.wheel_all, HadwigerNelson.Thomassen.ReachIn.mono, HadwigerNelson.edgeGraph_adj_mono, HadwigerNelson.edgeGraph_mono, HadwigerNelson.edgeHom, HadwigerNelson.fanEdges, HadwigerNelson.sepChain, HadwigerNelson.sepIvals, HadwigerNelson.valid_comp_of_injective
+    declared purchases:
+      HadwigerNelson.moserSpindle_cnf_unsat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_lrat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindleCubes_unsat  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_cubes  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.four_le_chromaticNumber_plane_certified  [9 native, propext, Classical.choice, Quot.sound]
+    declared imports (2): HadwigerNelson.StandingFive.kloosterman_bound, HadwigerNelson.Outside.OAI158.no_proper_five_coloring
+    imported records (26):
+      HadwigerNelson.StandingFive.kloostermanBound_of_ringChar_ne_two  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.targetFloor_seven_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.targetFloor_six_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.circle_sum_le_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.standingFloor_seven_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.standingFloor_five_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.seven_le_localBound_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.five_le_chromaticNumber_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine_of_colorable_three  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeColourCriterion.exists_maximal_of_torsion  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeColourCriterion.exists_normOne_zero_of_card_ne_nine  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeColourCriterion.targetFloor_four_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_eq_localBound_of_le_four  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_eq_three_iff  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_le_three_iff  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeFourColours.colorable_three_planeOver_iff  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeFourColours.exists_maximal_card_nine_sqrt_three  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeFourColours.localBound_le_chromaticNumber_of_le_four  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeFourColours.localBound_le_chromaticNumber_or_four_le  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.Outside.OAI158.not_colorable_five  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+      HadwigerNelson.Outside.OAI158.six_le_chromaticNumber_plane  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+      HadwigerNelson.Outside.OAI158.chromaticNumber_plane_six_or_seven  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+      HadwigerNelson.Outside.OAI158.six_le_chiM0  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+      HadwigerNelson.Outside.OAI158.chiM0_six_or_seven  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+      HadwigerNelson.Plane.radius_five  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+    library axioms other than native auxiliaries (2): HadwigerNelson.Outside.OAI158.no_proper_five_coloring, HadwigerNelson.StandingFive.kloosterman_bound; native auxiliaries: 10
+    RECORDED COUNT IS STALE in CLAUDE.md § Trust ledger — update it: 8961 clean → 9038
+    --- changes since the previous complete run ---
+    previous: build/gate/axioms/20261014T134843Z-3270031.log
+    no record appeared, disappeared or changed its axioms
+    purchase ledgers agree — the docstrings warn of exactly the purchases the audit finds (5: four_le_chromaticNumber_plane_certified moserSpindle_cnf_unsat moserSpindleCubes_unsat moserSpindle_not_colorable_three_cubes moserSpindle_not_colorable_three_lrat)
+    declared imports: 2; library axioms other than native auxiliaries: 2, every one declared; native auxiliaries: 10
+==> axioms: OK — 9038 clean, 32 axiom-free, 26 imported, 5 declared purchase(s)
+    full output: build/gate/axioms/20261014T142427Z-3409082.log
+exit=0

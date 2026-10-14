@@ -1,0 +1,24 @@
+-- FS131-IT1: Arith/TorsionExtraction (18: 17 theorems, 1 definitions; every public declaration a person typed, in the
+-- file's order — the kernel's list, data/fs131/it1/statements-after.raw.txt, through data/fs131/it1/make_audit.py).
+-- Statements FS131-KN4's and FS131-KN5's; the ten leaves' proofs FS131-IT1's.  The file's 10 private helpers are
+-- not nameable here; each is read by a record below.  No declared outside theorem is read: every record is CLEAN
+-- once `Arith/ThreeColourCharacter` has no `sorry` (five compositions read its
+-- `fieldBandSet_three_nonempty_of_colorable`: `colorable_two_of_inv_three_mem` and the four theorems over it).
+#print axioms HadwigerNelson.TorsionExtraction.layer_step
+#print axioms HadwigerNelson.TorsionExtraction.layer_dichotomy
+#print axioms HadwigerNelson.TorsionExtraction.inv5
+#print axioms HadwigerNelson.TorsionExtraction.coe_inv5
+#print axioms HadwigerNelson.TorsionExtraction.tendsto_layer
+#print axioms HadwigerNelson.TorsionExtraction.exists_torsion_mem_fieldBandSet
+#print axioms HadwigerNelson.TorsionExtraction.exists_zmod_hom_of_mem_torsionBy
+#print axioms HadwigerNelson.TorsionExtraction.colorable_two_iff_fieldBandSet_two_nonempty
+#print axioms HadwigerNelson.TorsionExtraction.mem_fieldBandSet_two_of_inv_three_mem
+#print axioms HadwigerNelson.TorsionExtraction.colorable_two_of_inv_three_mem
+#print axioms HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_of_inv_three_mem
+#print axioms HadwigerNelson.TorsionExtraction.chromaticNumber_planeOver_ne_three_of_inv_three_mem
+#print axioms HadwigerNelson.TorsionExtraction.inv_natCast_mem_unitRing_of_sqrt_mem
+#print axioms HadwigerNelson.TorsionExtraction.inv_three_mem_unitRing_of_sqrt_mem
+#print axioms HadwigerNelson.TorsionExtraction.not_colorable_two_of_sqrt_mem
+#print axioms HadwigerNelson.TorsionExtraction.three_le_chromaticNumber_planeOver_of_sqrt_mem
+#print axioms HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_of_sqrt_mem
+#print axioms HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_fieldOfRadicands

@@ -1,0 +1,1660 @@
+evidence: 24 emptiness proof(s), 63 colourability witness(es)
+=== VACUITY AUDIT ===
+=== DECLARED ===
+DECLARED HadwigerNelson.core122_plane :: known vacuous and retained under this project's never-delete rule — same reason as `core9_plane`, same correction in ledger row 31, same instruction not to consume it. The 122-point carrier `core122_pigeonhole` above is the real content.
+DECLARED HadwigerNelson.core9_plane :: known vacuous and retained under this project's never-delete rule. Rung B makes `(unitDistance ℂ).Coloring (Fin 4)` empty (`Interval.lean`, `isEmpty_coloring_plane_four`), so this says nothing; it is kept because the record cites it by name, and ledger row 31 carries the correction. DO NOT CONSUME IT — the non-vacuous replacement over `K` is stubbed in `plans/STUB-four-colour-valuation-law.md`. The 1-minimal CARRIER above, `core9_pigeonhole`, is the real content and is not vacuous.
+DECLARED HadwigerNelson.vacuous_of_plane_four_coloring :: emptiness is the entire content here — this theorem exists to SAY that a statement over plane four-colourings is empty, so a gate flagging it would be flagging the detector. `scripts/Vacuity.lean`'s `vacuous_of_isEmpty` is its general form.
+=== FLAGGED ===
+UNKNOWN HadwigerNelson.planted_unknown_stuck
+UNKNOWN HadwigerNelson.planted_unknown_ae
+UNKNOWN HadwigerNelson.planted_unknown_semiconcave
+UNKNOWN HadwigerNelson.planted_unknown_stationary
+VACUOUS HadwigerNelson.planted_vacuous_prop
+UNKNOWN HadwigerNelson.planted_unknown_changePoint
+VACUOUS HadwigerNelson.planted_vacuous_normal
+VACUOUS HadwigerNelson.planted_vacuous_qArc
+VACUOUS HadwigerNelson.planted_vacuous_horn
+UNKNOWN HadwigerNelson.planted_unknown_horn
+VACUOUS HadwigerNelson.planted_vacuous_cp
+VACUOUS HadwigerNelson.planted_not_qArc.match_1_1
+VACUOUS HadwigerNelson.planted_vacuous_sectorsAt
+VACUOUS HadwigerNelson.planted_vacuous_ne
+UNKNOWN HadwigerNelson.planted_unknown_aeRegions
+VACUOUS HadwigerNelson.planted_vacuous_forces
+VACUOUS HadwigerNelson.planted_vacuous_not
+UNKNOWN HadwigerNelson.planted_unknown_hub
+VACUOUS HadwigerNelson.planted_vacuous_coloring
+UNKNOWN HadwigerNelson.planted_unknown_ringArc
+UNKNOWN HadwigerNelson.planted_unknown_condition5
+VACUOUS HadwigerNelson.planted_vacuous_valid
+UNKNOWN HadwigerNelson.planted_unknown_normal
+VACUOUS HadwigerNelson.planted_vacuous_merged
+VACUOUS HadwigerNelson.planted_vacuous_hub
+STALE HadwigerNelson.planted_stale
+UNKNOWN HadwigerNelson.planted_unknown_prop
+UNKNOWN HadwigerNelson.planted_unknown_qArc
+UNKNOWN HadwigerNelson.planted_unknown_sectorsAt
+VACUOUS HadwigerNelson.planted_vacuous_stuck
+UNKNOWN HadwigerNelson.planted_unknown_niceAt
+UNKNOWN HadwigerNelson.planted_unknown_cp
+VACUOUS HadwigerNelson.planted_vacuous_changePoint
+UNKNOWN HadwigerNelson.planted_ae_def
+UNKNOWN HadwigerNelson.planted_ae_def
+VACUOUS HadwigerNelson.planted_vacuous_niceAt
+UNKNOWN HadwigerNelson.planted_unknown_ne
+VACUOUS HadwigerNelson.planted_vacuous_semiconcave
+UNKNOWN HadwigerNelson.planted_unknown_merged
+VACUOUS HadwigerNelson.planted_vacuous_ringArc
+VACUOUS HadwigerNelson.planted_vacuous_aeRegions
+VACUOUS HadwigerNelson.planted_vacuous_condition5
+VACUOUS HadwigerNelson.planted_vacuous_ae
+UNKNOWN HadwigerNelson.hexShell_plane5
+UNKNOWN HadwigerNelson.hexShell_plane6
+=== EVIDENCE ===
+EVIDENCE EMPTY HadwigerNelson.planted_not_forces :: HadwigerNelson.Forces (SimpleGraph.pathGraph 3) 3 0 1
+EVIDENCE EMPTY HadwigerNelson.planted_not_ringArc :: HadwigerNelson.Plane.halfPlane2.IsRingArc 0 0 1 0 0
+EVIDENCE EMPTY HadwigerNelson.planted_not_valid :: (HadwigerNelson.Plane.ArcMap.const Set.univ ⋯ 0).Valid
+EVIDENCE EMPTY HadwigerNelson.planted_not_hub :: HadwigerNelson.Plane.halfPlane2.IsHub 0 (Real.pi / 2)
+EVIDENCE EMPTY HadwigerNelson.planted_not_changePoint :: HadwigerNelson.Plane.halfPlane2.IsChangePoint 0 (Real.pi / 2) 0 1
+EVIDENCE EMPTY HadwigerNelson.planted_not_qArc :: HadwigerNelson.Plane.halfPlane2.IsQArc 0 0 1
+EVIDENCE EMPTY HadwigerNelson.Plane.ArcMap.puncturedThreeSectorDisc_not_woodallNormal :: HadwigerNelson.Plane.ArcMap.puncturedThreeSectorDisc.WoodallNormal Set.univ
+EVIDENCE EMPTY HadwigerNelson.Plane.ArcMap.threeSectorDisc_not_niceAt_one :: HadwigerNelson.Plane.ArcMap.threeSectorDisc.NiceAt 1
+EVIDENCE EMPTY HadwigerNelson.Plane.instIsEmptyAeColouringOfNatNat_1 :: IsEmpty (HadwigerNelson.Plane.AeColouring 1)
+EVIDENCE EMPTY HadwigerNelson.Plane.instIsEmptyAeProperRegionsOne :: IsEmpty (HadwigerNelson.Plane.AeProperRegions 1)
+EVIDENCE EMPTY HadwigerNelson.Plane.ArcMap.unitArcPlane_not_condition5 :: HadwigerNelson.Plane.ArcMap.unitArcPlane.Condition5
+EVIDENCE EMPTY HadwigerNelson.Plane.ArcMap.bowtie_not_isStuck_I :: HadwigerNelson.Plane.bowtie.IsStuck Complex.I
+EVIDENCE EMPTY HadwigerNelson.Plane.ArcMap.threeSectorDisc_not_sectorsAt_one :: HadwigerNelson.Plane.ArcMap.threeSectorDisc.SectorsAt 1 1 ![0, 2 * Real.pi] ![0]
+EVIDENCE EMPTY HadwigerNelson.ThetaCert.tinyK4_isEmpty_winding :: IsEmpty (HadwigerNelson.ThreeColour.Winding HadwigerNelson.ThetaCert.tinyK4.gen)
+EVIDENCE EMPTY HadwigerNelson.Plane.ArcMap.bowtie_not_isHorn_I_axis :: HadwigerNelson.Plane.bowtie.IsHorn Complex.I 0 (-1) 1 1
+EVIDENCE EMPTY HadwigerNelson.Plane.instIsEmptyCPColouringOfNatNat :: IsEmpty (HadwigerNelson.Plane.CPColouring 0)
+EVIDENCE EMPTY HadwigerNelson.pathGraph_not_additivelyRigid_three :: HadwigerNelson.AdditivelyRigid HadwigerNelson.pathAddr (SimpleGraph.pathGraph 3) 3
+EVIDENCE EMPTY HadwigerNelson.Plane.not_semiconcaveWith_one_lowerArc :: HadwigerNelson.Plane.SemiconcaveWith 1 (fun s => 1 - √(1 - s ^ 2)) (Set.Ioo (1 / 10) (1 / 5))
+EVIDENCE EMPTY HadwigerNelson.Plane.instIsEmptyCPColouringOfNatNat_1 :: IsEmpty (HadwigerNelson.Plane.CPColouring 1)
+EVIDENCE EMPTY HadwigerNelson.isEmpty_coloring_plane_four :: IsEmpty ((HadwigerNelson.unitDistance ℂ).Coloring (Fin 4))
+EVIDENCE EMPTY HadwigerNelson.Plane.ArcMap.puncturedThreeSectorDisc_not_woodallMerged :: HadwigerNelson.Plane.ArcMap.puncturedThreeSectorDisc.WoodallMerged Set.univ
+EVIDENCE EMPTY HadwigerNelson.Plane.instIsEmptyAeProperRegionsZero :: IsEmpty (HadwigerNelson.Plane.AeProperRegions 0)
+EVIDENCE EMPTY HadwigerNelson.cycleGraph_six_not_additivelyRigid :: HadwigerNelson.AdditivelyRigid id (SimpleGraph.cycleGraph 6) 3
+EVIDENCE EMPTY HadwigerNelson.Plane.instIsEmptyAeColouringOfNatNat :: IsEmpty (HadwigerNelson.Plane.AeColouring 0)
+EVIDENCE WITNESS HadwigerNelson.Plane.halfDisc_niceAt :: HadwigerNelson.Plane.halfDisc.NiceAt 0
+EVIDENCE WITNESS HadwigerNelson.Plane.halfPlane2_isChangePoint :: HadwigerNelson.Plane.halfPlane2.IsChangePoint 0 0 1 0
+EVIDENCE WITNESS HadwigerNelson.rhombus_colorable_three :: (HadwigerNelson.edgeGraph 4 HadwigerNelson.rhombus).Colorable 3
+EVIDENCE WITNESS HadwigerNelson.finitePlane19QuotColoring :: (HadwigerNelson.finitePlane 19).Coloring (Fin 5)
+EVIDENCE WITNESS HadwigerNelson.Plane.ArcMap.threeSectorDisc_niceAt :: HadwigerNelson.Plane.ArcMap.threeSectorDisc.NiceAt 0
+EVIDENCE WITNESS HadwigerNelson.Plane.cuspFrag_isRingArc :: HadwigerNelson.Plane.ArcMap.cuspFrag.IsRingArc Complex.I (-(Real.pi / 2) + 1 / 10) (-(Real.pi / 2) + 2 / 5) 0 1
+EVIDENCE WITNESS HadwigerNelson.CayleyCert.colorable_finitePlane23_eight :: (HadwigerNelson.finitePlane 23).Colorable 8
+EVIDENCE WITNESS HadwigerNelson.finitePlane3ColouringDiff.toColoring :: (HadwigerNelson.finitePlane 3).Coloring (Fin 3)
+EVIDENCE WITNESS HadwigerNelson.core9_colorable_three :: (HadwigerNelson.edgeGraph 9 HadwigerNelson.core9Edges).Colorable 3
+EVIDENCE WITNESS HadwigerNelson.Plane.sq9 :: HadwigerNelson.Plane.AeColouring 9
+EVIDENCE WITNESS HadwigerNelson.AritySpec.p5_compels_rainbow :: HadwigerNelson.Compels HadwigerNelson.AritySpec.P5 3 ![1, 3, 4] id
+EVIDENCE WITNESS HadwigerNelson.pathGraph_three_colorable_two :: (SimpleGraph.pathGraph 3).Colorable 2
+EVIDENCE WITNESS HadwigerNelson.Plane.ArcMap.threeSectorDisc_sectorsAt :: HadwigerNelson.Plane.ArcMap.threeSectorDisc.SectorsAt 0 3 ![0, 2 * Real.pi / 3, 4 * Real.pi / 3, 2 * Real.pi] ![0, 1, 2]
+EVIDENCE WITNESS HadwigerNelson.eleven204_colorable_four :: (HadwigerNelson.edgeGraph 204 HadwigerNelson.eleven204.edges).Colorable 4
+EVIDENCE WITNESS HadwigerNelson.Plane.halfDisc_sectorsAt :: HadwigerNelson.Plane.halfDisc.SectorsAt 0 2 ![0, Real.pi, 2 * Real.pi] ![1, 0]
+EVIDENCE WITNESS HadwigerNelson.SqrtTwoThree.eighteen_colorable_four :: (HadwigerNelson.edgeGraph 18 HadwigerNelson.SqrtTwoThree.eighteenEdges).Colorable 4
+EVIDENCE WITNESS HadwigerNelson.moserSpindle_colorable_four :: (HadwigerNelson.edgeGraph 7 HadwigerNelson.moserSpindleEdges).Colorable 4
+EVIDENCE WITNESS HadwigerNelson.finitePlane11_colorable_five :: (HadwigerNelson.finitePlane 11).Colorable 5
+EVIDENCE WITNESS HadwigerNelson.plane_colorable_seven :: (HadwigerNelson.unitDistance ℂ).Colorable 7
+EVIDENCE WITNESS HadwigerNelson.Plane.ArcMap.l60Frag_isRingArc :: HadwigerNelson.Plane.ArcMap.l60Frag.IsRingArc 0 0 (Real.pi / 3) 0 1
+EVIDENCE WITNESS HadwigerNelson.Plane.quadRing_isRingArc :: HadwigerNelson.Plane.quadRing.IsRingArc 0 0 (Real.pi / 2) 0 2
+EVIDENCE WITNESS HadwigerNelson.Bridge.nonempty_numberField :: Nonempty { F // NumberField ↥F }
+EVIDENCE WITNESS HadwigerNelson.mycielski47_colorable_six :: (HadwigerNelson.edgeGraph HadwigerNelson.Mycielski.size HadwigerNelson.Mycielski.edges).Colorable 6
+EVIDENCE WITNESS HadwigerNelson.finitePlane11_colorable_six_periodic :: (HadwigerNelson.finitePlane 11).Colorable 6
+EVIDENCE WITNESS HadwigerNelson.finitePlane11DoubleGapColoring :: (HadwigerNelson.finitePlane 11).Coloring (Fin 5)
+EVIDENCE WITNESS HadwigerNelson.finitePlane11Colouring.toColoring :: (HadwigerNelson.finitePlane 11).Coloring (Fin 5)
+EVIDENCE WITNESS HadwigerNelson.finitePlane7QuotColoring :: (HadwigerNelson.finitePlane 7).Coloring (Fin 4)
+EVIDENCE WITNESS HadwigerNelson.Plane.ArcMap.cuspFrag_isHorn :: HadwigerNelson.Plane.ArcMap.cuspFrag.IsHorn 0 0 (-1) 1 1
+EVIDENCE WITNESS HadwigerNelson.finitePlane3Colouring.toColoring :: (HadwigerNelson.finitePlane 3).Coloring (Fin 3)
+EVIDENCE WITNESS HadwigerNelson.core122_colorable_four :: (HadwigerNelson.edgeGraph 122 HadwigerNelson.core122Edges).Colorable 4
+EVIDENCE WITNESS HadwigerNelson.Ladder.colorable_four_ladder :: (SimpleGraph.induce HadwigerNelson.Ladder.ladderSet (HadwigerNelson.unitDistance ℂ)).Colorable 4
+EVIDENCE WITNESS HadwigerNelson.Plane.ArcMap.threeSectorDisc_phantom :: HadwigerNelson.Plane.ArcMap.threeSectorDisc.SectorsAt 0 5 ![0, 2 * Real.pi / 3, 2 * Real.pi / 3, 2 * Real.pi / 3, 4 * Real.pi / 3, 2 * Real.pi] ![0, 1, 0, 1, 2]
+EVIDENCE WITNESS HadwigerNelson.plane_colorable_nine_avoiding_sqrt_three_halves :: (HadwigerNelson.distanceGraph ℂ {1, √↑(3 / 2)}).Colorable 9
+EVIDENCE WITNESS HadwigerNelson.Plane.nonempty_cpColouring_nine :: Nonempty (HadwigerNelson.Plane.CPColouring 9)
+EVIDENCE WITNESS HadwigerNelson.core23_colorable_seven :: (HadwigerNelson.edgeGraph 23 HadwigerNelson.Core23.edges).Colorable 7
+EVIDENCE WITNESS HadwigerNelson.finitePlane3_colorable_three :: (HadwigerNelson.finitePlane 3).Colorable 3
+EVIDENCE WITNESS HadwigerNelson.MetaLadder.colorable_four_fourLadder :: (SimpleGraph.induce HadwigerNelson.MetaLadder.fourLadder (HadwigerNelson.unitDistance ℂ)).Colorable 4
+EVIDENCE WITNESS HadwigerNelson.StationaryRatio.StationarySet.parity :: HadwigerNelson.StationaryRatio.StationarySet (ZMod 2)
+EVIDENCE WITNESS HadwigerNelson.hexColoring :: (SimpleGraph.cycleGraph 6).Coloring (Fin 3)
+EVIDENCE WITNESS HadwigerNelson.plane_colorable_nine :: (HadwigerNelson.unitDistance ℂ).Colorable 9
+EVIDENCE WITNESS HadwigerNelson.colorable_two_cycleGraph_four_of_gaussResidue :: (SimpleGraph.cycleGraph 4).Colorable 2
+EVIDENCE WITNESS HadwigerNelson.Plane.hornModel_isHorn :: HadwigerNelson.Plane.hornModel.IsHorn HadwigerNelson.Plane.plantPt 0 (-1 / 2) (1 / 2) 7
+EVIDENCE WITNESS HadwigerNelson.Plane.awayModel_isRingArc_gap :: HadwigerNelson.Plane.awayModel.IsRingArc HadwigerNelson.Plane.awayP (1 / 5) (3 / 10) 7 0
+EVIDENCE WITNESS HadwigerNelson.Plane.sevenBrickRegions :: HadwigerNelson.Plane.AeProperRegions 7
+EVIDENCE WITNESS HadwigerNelson.CayleyCert.colorable_finitePlane3 :: (HadwigerNelson.finitePlane 3).Colorable 3
+EVIDENCE WITNESS HadwigerNelson.four_colorable_of_seam_field :: (SimpleGraph.induce HadwigerNelson.seamPlane (HadwigerNelson.unitDistance ℂ)).Colorable 4
+EVIDENCE WITNESS HadwigerNelson.unitQuadrance_zmod121_colorable_five :: (HadwigerNelson.unitQuadrance (ZMod 121)).Colorable 5
+EVIDENCE WITNESS HadwigerNelson.AritySpec.p5_colorable :: HadwigerNelson.AritySpec.P5.Colorable 3
+EVIDENCE WITNESS HadwigerNelson.Plane.quadRing_isQArc :: HadwigerNelson.Plane.quadRing.IsQArc 0 0 (Real.pi / 2)
+EVIDENCE WITNESS HadwigerNelson.Plane.stuckModel_isHorn_pi :: HadwigerNelson.Plane.stuckModel.IsHorn HadwigerNelson.Plane.plantPt (0 + Real.pi) (-1) 1 9
+EVIDENCE WITNESS HadwigerNelson.core9_colorable_four :: (HadwigerNelson.edgeGraph 9 HadwigerNelson.core9Edges).Colorable 4
+EVIDENCE WITNESS HadwigerNelson.Plane.ArcMap.halfDisc_simple :: HadwigerNelson.Plane.halfDisc.Simple
+EVIDENCE WITNESS HadwigerNelson.heule553_colorable_five :: (HadwigerNelson.edgeGraph 553 HadwigerNelson.heule553.edges).Colorable 5
+EVIDENCE WITNESS HadwigerNelson.deGrey_colorable_five :: (HadwigerNelson.edgeGraph 1581 HadwigerNelson.deGrey.edges).Colorable 5
+EVIDENCE WITNESS HadwigerNelson.Plane.sixFrag_isRingArc :: HadwigerNelson.Plane.sixFrag.IsRingArc 0 0 (Real.pi / 6) 0 2
+EVIDENCE WITNESS HadwigerNelson.pathColoring3 :: (SimpleGraph.pathGraph 3).Coloring (Fin 3)
+EVIDENCE WITNESS HadwigerNelson.Hexagram.colorable_four_hexagram :: (SimpleGraph.induce HadwigerNelson.Hexagram.hexagram (HadwigerNelson.unitDistance ℂ)).Colorable 4
+EVIDENCE WITNESS HadwigerNelson.heule510_colorable_five :: (HadwigerNelson.edgeGraph 510 HadwigerNelson.heule510.edges).Colorable 5
+EVIDENCE WITNESS HadwigerNelson.finitePlane19_colorable_five :: (HadwigerNelson.finitePlane 19).Colorable 5
+EVIDENCE WITNESS HadwigerNelson.ThreeColour.nonempty_winding_one_two :: Nonempty (HadwigerNelson.ThreeColour.Winding ![1, 2])
+EVIDENCE WITNESS HadwigerNelson.Plane.stuckModel_isStuck :: HadwigerNelson.Plane.stuckModel.IsStuck HadwigerNelson.Plane.plantPt
+EVIDENCE WITNESS HadwigerNelson.finitePlane7_colorable_four :: (HadwigerNelson.finitePlane 7).Colorable 4
+EVIDENCE WITNESS HadwigerNelson.twoAdicFiveColouring :: (HadwigerNelson.twoAdicPlane 5).Coloring (Fin 4)
+=== SITES ===
+SITE UNKNOWN HadwigerNelson.planted_unknown_stuck :: HadwigerNelson.Plane.bowtie.IsStuck (-Complex.I)
+SITE UNKNOWN HadwigerNelson.planted_unknown_ae :: HadwigerNelson.Plane.AeColouring 3
+SITE UNKNOWN HadwigerNelson.planted_unknown_semiconcave :: HadwigerNelson.Plane.SemiconcaveWith 0 (fun x => 0) Set.univ
+SITE GENERIC HadwigerNelson.planted_generic_normal :: F.WoodallNormal K
+SITE WITNESSED HadwigerNelson.planted_witnessed_stationary :: HadwigerNelson.StationaryRatio.StationarySet (ZMod 2) [by HadwigerNelson.StationaryRatio.StationarySet.parity]
+SITE UNKNOWN HadwigerNelson.planted_unknown_stationary :: HadwigerNelson.StationaryRatio.StationarySet ℤ
+SITE GENERIC HadwigerNelson.planted_generic_horn :: F.IsHorn v α κ₁ κ₂ c
+SITE VACUOUS HadwigerNelson.planted_vacuous_prop :: HadwigerNelson.AdditivelyRigid HadwigerNelson.pathAddr (SimpleGraph.pathGraph 3) 3 [by HadwigerNelson.pathGraph_not_additivelyRigid_three]
+SITE UNKNOWN HadwigerNelson.planted_unknown_changePoint :: HadwigerNelson.Plane.sixFrag.IsChangePoint 0 (Real.pi / 4) 0 1
+SITE VACUOUS HadwigerNelson.planted_vacuous_normal :: HadwigerNelson.Plane.ArcMap.puncturedThreeSectorDisc.WoodallNormal Set.univ [by HadwigerNelson.Plane.ArcMap.puncturedThreeSectorDisc_not_woodallNormal]
+SITE VACUOUS HadwigerNelson.planted_vacuous_qArc :: HadwigerNelson.Plane.halfPlane2.IsQArc 0 0 1 [by HadwigerNelson.planted_not_qArc]
+SITE VACUOUS HadwigerNelson.planted_vacuous_horn :: HadwigerNelson.Plane.bowtie.IsHorn Complex.I 0 (-1) 1 1 [by HadwigerNelson.Plane.ArcMap.bowtie_not_isHorn_I_axis]
+SITE UNKNOWN HadwigerNelson.planted_unknown_horn :: HadwigerNelson.Plane.bowtie.IsHorn (-Complex.I) 0 (-1) 1 1
+SITE GENERIC HadwigerNelson.planted_generic_stuck :: F.IsStuck v
+SITE VACUOUS HadwigerNelson.planted_vacuous_cp :: HadwigerNelson.Plane.CPColouring 1 [by HadwigerNelson.Plane.instIsEmptyCPColouringOfNatNat_1]
+SITE VACUOUS HadwigerNelson.planted_not_qArc.match_1_1 :: HadwigerNelson.Plane.halfPlane2.IsQArc 0 0 1 [by HadwigerNelson.planted_not_qArc]
+SITE GENERIC HadwigerNelson.planted_generic_semiconcave :: HadwigerNelson.Plane.SemiconcaveWith K u J
+SITE GENERIC HadwigerNelson.planted_generic_qArc :: F.IsQArc p θ₁ θ₂
+SITE VACUOUS HadwigerNelson.planted_vacuous_sectorsAt :: HadwigerNelson.Plane.ArcMap.threeSectorDisc.SectorsAt 1 1 ![0, 2 * Real.pi] ![0] [by HadwigerNelson.Plane.ArcMap.threeSectorDisc_not_sectorsAt_one]
+SITE GENERIC HadwigerNelson.planted_generic_merged :: F.WoodallMerged K
+SITE VACUOUS HadwigerNelson.planted_vacuous_ne :: HadwigerNelson.Plane.AeColouring 1 [by HadwigerNelson.Plane.instIsEmptyAeColouringOfNatNat_1]
+SITE GENERIC HadwigerNelson.planted_generic_ne :: HadwigerNelson.Plane.AeColouring k
+SITE UNKNOWN HadwigerNelson.planted_unknown_aeRegions :: HadwigerNelson.Plane.AeProperRegions 4
+SITE VACUOUS HadwigerNelson.planted_vacuous_forces :: HadwigerNelson.Forces (SimpleGraph.pathGraph 3) 3 0 1 [by HadwigerNelson.planted_not_forces]
+SITE GENERIC HadwigerNelson.planted_generic_valid :: F.Valid
+SITE VACUOUS HadwigerNelson.planted_vacuous_not :: HadwigerNelson.Plane.AeColouring 1 [by HadwigerNelson.Plane.instIsEmptyAeColouringOfNatNat_1]
+SITE UNKNOWN HadwigerNelson.planted_unknown_hub :: HadwigerNelson.Plane.sixFrag.IsHub 0 (Real.pi / 4)
+SITE VACUOUS HadwigerNelson.planted_vacuous_coloring :: (HadwigerNelson.unitDistance ℂ).Coloring (Fin 4) [by HadwigerNelson.isEmpty_coloring_plane_four]
+SITE GENERIC HadwigerNelson.planted_generic_aeRegions :: HadwigerNelson.Plane.AeProperRegions k
+SITE UNKNOWN HadwigerNelson.planted_unknown_ringArc :: HadwigerNelson.Plane.sixFrag.IsRingArc 0 (Real.pi / 6) (Real.pi / 3) 2 4
+SITE GENERIC HadwigerNelson.planted_generic_condition5 :: F.Condition5
+SITE UNKNOWN HadwigerNelson.planted_unknown_condition5 :: HadwigerNelson.Plane.ArcMap.segPlane.Condition5
+SITE VACUOUS HadwigerNelson.planted_vacuous_valid :: (HadwigerNelson.Plane.ArcMap.const Set.univ ⋯ 0).Valid [by HadwigerNelson.planted_not_valid]
+SITE UNKNOWN HadwigerNelson.planted_unknown_normal :: HadwigerNelson.Plane.halfDisc.WoodallNormal Set.univ
+SITE VACUOUS HadwigerNelson.planted_vacuous_merged :: HadwigerNelson.Plane.ArcMap.puncturedThreeSectorDisc.WoodallMerged Set.univ [by HadwigerNelson.Plane.ArcMap.puncturedThreeSectorDisc_not_woodallMerged]
+SITE GENERIC HadwigerNelson.planted_generic_changePoint :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.planted_generic_niceAt :: F.NiceAt v
+SITE VACUOUS HadwigerNelson.planted_vacuous_hub :: HadwigerNelson.Plane.halfPlane2.IsHub 0 (Real.pi / 2) [by HadwigerNelson.planted_not_hub]
+SITE STALE HadwigerNelson.planted_stale :: (SimpleGraph.pathGraph 3).Coloring (Fin 3) [by HadwigerNelson.pathColoring3]
+SITE GENERIC HadwigerNelson.planted_generic_not :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.planted_generic_hub :: F.IsHub p ψ
+SITE GENERIC HadwigerNelson.planted_generic_sectorsAt :: F.SectorsAt v n d c
+SITE UNKNOWN HadwigerNelson.planted_unknown_prop :: HadwigerNelson.AdditivelyRigid HadwigerNelson.pathAddr (SimpleGraph.pathGraph 3) 5
+SITE UNKNOWN HadwigerNelson.planted_unknown_qArc :: HadwigerNelson.Plane.sixFrag.IsQArc 0 (Real.pi / 6) (Real.pi / 3)
+SITE UNKNOWN HadwigerNelson.planted_unknown_sectorsAt :: HadwigerNelson.Plane.halfDisc.SectorsAt 0 1 ![0, 2 * Real.pi] ![0]
+SITE VACUOUS HadwigerNelson.planted_vacuous_stuck :: HadwigerNelson.Plane.bowtie.IsStuck Complex.I [by HadwigerNelson.Plane.ArcMap.bowtie_not_isStuck_I]
+SITE UNKNOWN HadwigerNelson.planted_unknown_niceAt :: HadwigerNelson.Plane.halfDisc.NiceAt (1 / 4)
+SITE UNKNOWN HadwigerNelson.planted_unknown_cp :: HadwigerNelson.Plane.CPColouring 3
+SITE GENERIC HadwigerNelson.planted_generic_stationary :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE VACUOUS HadwigerNelson.planted_vacuous_changePoint :: HadwigerNelson.Plane.halfPlane2.IsChangePoint 0 (Real.pi / 2) 0 1 [by HadwigerNelson.planted_not_changePoint]
+SITE UNKNOWN HadwigerNelson.planted_ae_def :: HadwigerNelson.Plane.AeColouring 3
+SITE UNKNOWN HadwigerNelson.planted_ae_def :: HadwigerNelson.Plane.AeColouring 3
+SITE VACUOUS HadwigerNelson.planted_vacuous_niceAt :: HadwigerNelson.Plane.ArcMap.threeSectorDisc.NiceAt 1 [by HadwigerNelson.Plane.ArcMap.threeSectorDisc_not_niceAt_one]
+SITE UNKNOWN HadwigerNelson.planted_unknown_ne :: HadwigerNelson.Plane.AeColouring 3
+SITE VACUOUS HadwigerNelson.planted_vacuous_semiconcave :: HadwigerNelson.Plane.SemiconcaveWith 1 (fun s => 1 - √(1 - s ^ 2)) (Set.Ioo (1 / 10) (1 / 5)) [by HadwigerNelson.Plane.not_semiconcaveWith_one_lowerArc]
+SITE UNKNOWN HadwigerNelson.planted_unknown_merged :: HadwigerNelson.Plane.halfDisc.WoodallMerged Set.univ
+SITE VACUOUS HadwigerNelson.planted_vacuous_ringArc :: HadwigerNelson.Plane.halfPlane2.IsRingArc 0 0 1 0 0 [by HadwigerNelson.planted_not_ringArc]
+SITE GENERIC HadwigerNelson.planted_generic_cp :: HadwigerNelson.Plane.CPColouring k
+SITE GENERIC HadwigerNelson.planted_generic_ringArc :: F.IsRingArc p θ₁ θ₂ c c'
+SITE VACUOUS HadwigerNelson.planted_vacuous_aeRegions :: HadwigerNelson.Plane.AeProperRegions 1 [by HadwigerNelson.Plane.instIsEmptyAeProperRegionsOne]
+SITE VACUOUS HadwigerNelson.planted_vacuous_condition5 :: HadwigerNelson.Plane.ArcMap.unitArcPlane.Condition5 [by HadwigerNelson.Plane.ArcMap.unitArcPlane_not_condition5]
+SITE GENERIC HadwigerNelson.planted_generic_ae :: HadwigerNelson.Plane.AeColouring k
+SITE VACUOUS HadwigerNelson.planted_vacuous_ae :: HadwigerNelson.Plane.AeColouring 1 [by HadwigerNelson.Plane.instIsEmptyAeColouringOfNatNat_1]
+SITE GENERIC HadwigerNelson.IsAdditive.apply_eq :: Γ.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.IsAdditive.apply_eq :: HadwigerNelson.IsAdditive q C
+SITE GENERIC HadwigerNelson.Plane.ArcMap.cor3 :: F.Valid
+SITE GENERIC HadwigerNelson.forces_of_not_colorable_append_single :: (HadwigerNelson.edgeGraph n E).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.mergeAvailable_of_two_sectors :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.not_mem_coloursAt_of_mem_sphere :: F.Valid
+SITE GENERIC HadwigerNelson.extends_of_hubs :: (SimpleGraph.induce A G).Coloring (Fin (k + 1))
+SITE GENERIC HadwigerNelson.not_forces_zero_of_not_periodic :: (SimpleGraph.addCayley S).Coloring (Fin k)
+SITE WITNESSED HadwigerNelson.core122_pigeonhole :: (HadwigerNelson.edgeGraph 122 HadwigerNelson.core122Edges).Coloring (Fin 4) [by HadwigerNelson.core122_colorable_four]
+SITE GENERIC HadwigerNelson.core122_pigeonhole :: HadwigerNelson.MonoPair HadwigerNelson.core122Pairs ⇑C
+SITE GENERIC HadwigerNelson.Plane.AeColouring.exists_tight :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.toAeProperRegions :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.toAeProperRegions :: HadwigerNelson.Plane.AeProperRegions k
+SITE WITNESSED HadwigerNelson.Plane.halfDisc_niceAt :: HadwigerNelson.Plane.halfDisc.NiceAt 0 [by HadwigerNelson.Plane.halfDisc_niceAt]
+SITE GENERIC HadwigerNelson.Plane.AeColouring.openPart :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germOnQ_bar_vMinus :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.eq_add_or_eq_sub_of_dist_eq_one :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.lower_flank_horns_at_N :: F.IsStuck E
+SITE GENERIC HadwigerNelson.Plane.ArcMap.lower_flank_horns_at_N :: F.IsHorn E α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.lower_flank_horns_at_N :: F.IsHorn E (α + Real.pi) (-1) κ₄ c
+SITE GENERIC HadwigerNelson.UDCert.not_separated_of_pairsAtRatio :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.UDCert.not_separated_of_pairsAtRatio :: (HadwigerNelson.unitQuadrance R).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.UDCert.not_separated_of_pairsAtRatio :: HadwigerNelson.CoincidesAtNonedges (HadwigerNelson.unitQuadrance R) ⇑col
+SITE GENERIC HadwigerNelson.not_colorable_sup_edge_of_forces :: HadwigerNelson.Forces G k p q
+SITE GENERIC HadwigerNelson.Plane.ArcMap.localDense :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_shave_of_flankAbove :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_shave_of_flankAbove :: F.IsHorn v α κ₁ κ₂ c
+SITE WITNESSED HadwigerNelson.Plane.halfPlane2_isChangePoint :: HadwigerNelson.Plane.halfPlane2.IsChangePoint 0 0 1 0 [by HadwigerNelson.Plane.halfPlane2_isChangePoint]
+SITE GENERIC HadwigerNelson.Plane.ArcMap.CollarFit.map_R1 :: hfit.map.IsRingArc Q a b d d'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.CollarFit.map_R1 :: F.IsRingArc Q a b d d'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_horn_add_pi_of_stuck :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_horn_add_pi_of_stuck :: F.IsStuck v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_horn_add_pi_of_stuck :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.notMem_nb_iff :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.exists_pred_branch :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Compels.map :: HadwigerNelson.Compels G k S p
+SITE GENERIC HadwigerNelson.Compels.map :: HadwigerNelson.Compels G' k (⇑f ∘ S) p
+SITE GENERIC HadwigerNelson.UDCert.coord_distSq_ratio :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.Separated.image_adj_of_coincides :: (SimpleGraph.addCayley S).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Separated.image_adj_of_coincides :: HadwigerNelson.CoincidesAtNonedges (SimpleGraph.addCayley S) ⇑col
+SITE GENERIC HadwigerNelson.Separated.image_adj_of_coincides :: HadwigerNelson.Separated G k u v
+SITE GENERIC HadwigerNelson.Plane.AeColouring.hasArcChart :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringQPrimeS :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringQPrimeS :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.shadow_of_not_shave :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.coverColors.eq_1 :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.mono :: F.IsRingArc p a b c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.mono :: F.IsRingArc p a' b' c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.hfree_of_baseHyp :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.hfree_of_baseHyp :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Compulsion.no_mono_outer_triple :: (SimpleGraph.induce D (HadwigerNelson.unitDistance ℂ)).Coloring (Fin 3)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.isR2Arc_of_fixed :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.mk.inj :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.SharedGap :: P.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_vMinus :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_vMinus :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_vMinus :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.CPColouring.tendsto_not_kept :: HadwigerNelson.Plane.CPColouring k
+SITE GENERIC HadwigerNelson.additiveColoring :: Γ.Coloring G
+SITE GENERIC HadwigerNelson.Plane.ArcMap.region_far_S_of_srcG :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.volume_essBdry :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_shadow_g_chart :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_shadow_g_chart :: F.Condition5
+SITE GENERIC HadwigerNelson.Plane.ArcMap.shadow_local_contact :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Valid.dist_le_one_of_near_germ :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horn_not_shadowed_near_S :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.CPColouring.law_ne_eq :: HadwigerNelson.Plane.CPColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.v6_hubs :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.v6_hubs :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Separated.ne_of_equiv :: HadwigerNelson.Separated G k p q
+SITE GENERIC HadwigerNelson.Separated.ne_of_equiv :: G.Coloring α
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.not_mem_closure_third :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.not_mem_closure_third :: F.IsRingArc p θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.sector_alone :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_outer_fill :: F.Valid
+SITE GENERIC HadwigerNelson.Fan.widen :: HadwigerNelson.Fan G k p Q
+SITE GENERIC HadwigerNelson.Fan.widen :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.UDCert.not_separated_of_pairsAt_11 :: c.CoordsIn HadwigerNelson.Q4.sevenFree
+SITE GENERIC HadwigerNelson.Plane.ArcMap.radiusTwoArc_disjoint_openArc :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.radiusTwoArc_disjoint_openArc :: F.IsRingArc Q a✝³ b d d'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.open_allowedCone :: F.Valid
+SITE GENERIC HadwigerNelson.UDCert.not_separated_two_11 :: c.CoordsIn HadwigerNelson.Q4.sevenFree
+SITE GENERIC HadwigerNelson.Plane.AeColouring.twoColourNhd_of_halves :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.extends_compl_singleton_of_degree_le :: (SimpleGraph.induce {b}ᶜ G).Coloring (Fin (k + 1))
+SITE GENERIC HadwigerNelson.Plane.ArcMap.cvb_thom :: F.Valid
+SITE GENERIC HadwigerNelson.UDCert.drawing.congr_simp :: c✝.CoordsIn S
+SITE GENERIC HadwigerNelson.Plane.ArcMap.noBoth :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_far_end :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_collarFit :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_collarFit :: F.IsRingArc P θ₁ θ₂ c c'
+SITE WITNESSED HadwigerNelson.finitePlane19QuotColoring :: (HadwigerNelson.finitePlane 19).Coloring (Fin 5) [by HadwigerNelson.finitePlane19QuotColoring]
+SITE WITNESSED HadwigerNelson.Plane.ArcMap.threeSectorDisc_niceAt :: HadwigerNelson.Plane.ArcMap.threeSectorDisc.NiceAt 0 [by HadwigerNelson.Plane.ArcMap.threeSectorDisc_niceAt]
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Valid.pair_le :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.qcol_inner_tile :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.qcol_inner_tile :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.qcol_inner_tile :: F.IsRingArc p θ₁ θ₂ c c'
+SITE WITNESSED HadwigerNelson.Plane.cuspFrag_isRingArc :: HadwigerNelson.Plane.ArcMap.cuspFrag.IsRingArc Complex.I (-(Real.pi / 2) + 1 / 10) (-(Real.pi / 2) + 2 / 5) 0 1 [by HadwigerNelson.Plane.cuspFrag_isRingArc]
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.dir_le_dir_add_two_pi :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsTile.unitNear_self :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.open_outType_iff :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsR2Arc.of_subarc :: F.IsRingArc p a' b' c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_prev_inner :: F.SectorsAt v n d c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.open_condition5 :: F.Condition5
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_preBend :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_unenclosed_or_bad :: F.Valid
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.prod_null_iff :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.kempeSwap_apply_of_notMem :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.move_condition5 :: F.Condition5
+SITE GENERIC HadwigerNelson.CoverAtLeast.mono_subset :: HadwigerNelson.CoverAtLeast G k p Q m
+SITE GENERIC HadwigerNelson.CoverAtLeast.mono_subset :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.padicInt11_forces_eq :: HadwigerNelson.Forces (HadwigerNelson.unitQuadrance ℤ_[11]) 5 u v
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.empty :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.CoverAtLeast.of_triangle_mem :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.not_exists_lift_of_stressPairing_ne_zero :: HadwigerNelson.IsStress π x₀ L
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germ_absent_class :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.isPartialColouring :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.bend_away_whole :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.bend_away_whole :: F.IsRingArc P θ₁ θ₂ c c'
+SITE WITNESSED HadwigerNelson.finitePlane3ColouringDiff.toColoring :: (HadwigerNelson.finitePlane 3).Coloring (Fin 3) [by HadwigerNelson.finitePlane3ColouringDiff.toColoring]
+SITE GENERIC HadwigerNelson.Plane.ArcMap.dot_eq_zero_of_antipodal_contact :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_along_of_side :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_two_sectors_at_S_of_flanks :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_two_sectors_at_S_of_flanks :: F.IsStuck v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_two_sectors_at_S_of_flanks :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_two_sectors_at_S_of_flanks :: F.IsHorn v (α + Real.pi) κ₃ κ₄ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_horn_of_mem_coneAt_of_stuck :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_horn_of_mem_coneAt_of_stuck :: F.IsStuck w
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.gap_clear :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.outType_S_of_mem_closure :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ArcBend.isR2Arc_of :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.sector_side_dir :: HadwigerNelson.Plane.AeColouring k
+SITE WITNESSED HadwigerNelson.Plane.sq9 :: HadwigerNelson.Plane.AeColouring 9 [by HadwigerNelson.Plane.sq9]
+SITE GENERIC HadwigerNelson.Plane.CPColouring.RotationInvariant :: HadwigerNelson.Plane.CPColouring k
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.measurableSet_nb :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_shave_recolour :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_shave_recolour :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.outType_N_of_mem_closure :: F.Valid
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.ae_majority :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.not_forces_of_kempeClosed :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flankQ_lower_shadow :: F.Valid
+SITE GENERIC HadwigerNelson.UDCert.chromaticNumber_le_planeOver_of_sevenFree :: c.CoordsIn HadwigerNelson.Q4.sevenFree
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.free_of_isClean :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsHub.not_isSemiHub :: F.IsHub p ψ
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.coloursAt_eq :: F.IsRingArc p θ₁ θ₂ c c'
+SITE WITNESSED HadwigerNelson.AritySpec.p5_compels_rainbow :: HadwigerNelson.Compels HadwigerNelson.AritySpec.P5 3 ![1, 3, 4] id [by HadwigerNelson.AritySpec.p5_compels_rainbow]
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.HasSector :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.T_T_neg :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.Plane.ArcMap.fiveRing_no_hub :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.finite_arcs_of_bounded :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.forces_of_additivelyRigid :: HadwigerNelson.AdditivelyRigid q Γ k
+SITE GENERIC HadwigerNelson.forces_of_additivelyRigid :: Γ.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_maxRingArc :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_maxRingArc :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.le_curvDown_of_flankBelow_of_horn :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.le_curvDown_of_flankBelow_of_horn :: F.IsHorn (w + HadwigerNelson.Plane.e (α + Real.pi / 2)) α a' b' h
+SITE GENERIC HadwigerNelson.finitePlane_forces_eq :: HadwigerNelson.Forces (HadwigerNelson.finitePlane p) k u v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Valid.dist_le_one_of_near_germ_closure :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.isOpen_openPart :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.woodallCone_isHorn :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.woodallCone_isHorn :: F.Condition5
+SITE GENERIC HadwigerNelson.Plane.ArcMap.l60_tile_dist_ne_one :: F.IsRingArc P θ₁ (θ₁ + Real.pi / 3) c c'
+SITE GENERIC HadwigerNelson.compels_of_fan :: HadwigerNelson.Compels G k S p
+SITE GENERIC HadwigerNelson.not_colorable_of_spindled_fan :: HadwigerNelson.Fan G k p Q
+SITE GENERIC HadwigerNelson.not_colorable_of_fan :: HadwigerNelson.Fan G k p Q
+SITE WITNESSED HadwigerNelson.Plane.ArcMap.threeSectorDisc_sectorsAt :: HadwigerNelson.Plane.ArcMap.threeSectorDisc.SectorsAt 0 3 ![0, 2 * Real.pi / 3, 4 * Real.pi / 3, 2 * Real.pi] ![0, 1, 2] [by HadwigerNelson.Plane.ArcMap.threeSectorDisc_sectorsAt]
+SITE GENERIC HadwigerNelson.Plane.ArcMap.pseudo_ncard_le_two_of_baseHyp :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_cur_inner :: F.SectorsAt v n d c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.sixQ_isQArc :: F.IsRingArc p θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.sixQ_isQArc :: F.IsQArc p θ₁ θ₂
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.open_tile_split :: F.Valid
+SITE GENERIC HadwigerNelson.UDCert.separated_iff_adj_11 :: c.CoordsIn HadwigerNelson.Q4.sevenFree
+SITE GENERIC HadwigerNelson.repaintAt_apply_self :: P.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.niceAt_of_injective :: F.SectorsAt v n d c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.niceAt_of_injective :: F.NiceAt v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horn_bounds_of_noMerge :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horn_bounds_of_noMerge :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.coneAt_N_subset_of_horn :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.coneAt_N_subset_of_horn :: F.IsHorn v α κ₁ 1 c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.merge_outType_iff :: F.Valid
+SITE GENERIC HadwigerNelson.Arith.not_falconerFan_five_of_fanGap :: (SimpleGraph.addCayley (⇑ψ '' {u | ‖↑u‖ = 1})).Coloring (Fin 4)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.star_tip_nonempty :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.star_tip_nonempty :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.star_tip_nonempty :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.AeColouring.regJLiteral_of_saturated :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.AeColouring.exists_fan_of_isolated :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.six_le_chromaticNumber_plane_of_additivelyRigid :: HadwigerNelson.AdditivelyRigid q Γ 5
+SITE GENERIC HadwigerNelson.Plane.ArcMap.star_anti_count :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.star_anti_count :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.star_anti_count :: F.IsHub p ψ
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.majority :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_sideCone_inner :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_sideCone_inner :: F.IsRingArc z θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.not_mem_coloursAt_of_collarAt :: F.Valid
+SITE DECLARED HadwigerNelson.core122_plane :: (HadwigerNelson.unitDistance ℂ).Coloring (Fin 4) [by HadwigerNelson.isEmpty_coloring_plane_four]
+SITE WITNESSED HadwigerNelson.twoAdicFive_forces_delta :: (HadwigerNelson.twoAdicPlane 5).Coloring (Fin 4) [by HadwigerNelson.twoAdicFiveColouring]
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.ae_nb_iff :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE WITNESSED HadwigerNelson.Plane.halfDisc_sectorsAt :: HadwigerNelson.Plane.halfDisc.SectorsAt 0 2 ![0, Real.pi, 2 * Real.pi] ![1, 0] [by HadwigerNelson.Plane.halfDisc_sectorsAt]
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.cell :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.nextDir.eq_1 :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.disc1ts :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_collar_free :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_collar_free :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.mono_pair_of_clique :: (HadwigerNelson.edgeGraph n E).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.mono_pair_of_clique :: HadwigerNelson.MonoPair P ⇑C
+SITE GENERIC HadwigerNelson.Plane.AeColouring.core :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.bend_away_part :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.bend_away_part :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.hexShell_plane :: (HadwigerNelson.unitDistance ℂ).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_outer :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_outer :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_cur_outer :: F.SectorsAt v n d c
+SITE GENERIC HadwigerNelson.UDCert.coord.congr_simp :: c✝.CoordsIn S
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ring_proper :: F.Valid
+SITE GENERIC HadwigerNelson.finitePlane7_forces_eq :: HadwigerNelson.Forces (HadwigerNelson.finitePlane 7) 4 u v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ts_t_trichromatic :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.recolour_condition5 :: F.Condition5
+SITE GENERIC HadwigerNelson.Forces.image :: HadwigerNelson.Forces G k u v
+SITE GENERIC HadwigerNelson.Forces.image :: P.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.spareOn_valid :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.AeColouring.saturated_of_idomatic :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.exists_mono_pair_of_not_colorable_distanceGraph :: (HadwigerNelson.unitDistance V).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Forces.eq_of_equiv :: HadwigerNelson.Forces G k p q
+SITE GENERIC HadwigerNelson.Forces.eq_of_equiv :: G.Coloring α
+SITE GENERIC HadwigerNelson.Plane.ArcMap.l60_eq_third :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.l60_eq_third :: F.IsRingArc P θ₁ (θ₁ + Real.pi / 3) c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.wedgeMerge_niceAt :: (F.wedgeMerge v hρ hd ⋯ c).NiceAt w
+SITE GENERIC HadwigerNelson.not_forces_of_fanGap :: P.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.cvb_hole_disconnected :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Valid.pair_ge :: F.Valid
+SITE GENERIC HadwigerNelson.exists_sat_coloringCNF :: (HadwigerNelson.edgeGraph n E).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_flanks_ua :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_flanks_ua :: F.IsStuck v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_flanks_ua :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_flanks_ua :: F.IsHorn v (α + Real.pi) κ₃ κ₄ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.filledGraph_infinite :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.qcol_cw :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.qcol_cw :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.UDCert.not_separated_of_pairsAt :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.UDCert.not_separated_of_pairsAt :: (HadwigerNelson.unitQuadrance R).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.UDCert.not_separated_of_pairsAt :: HadwigerNelson.CoincidesAtNonedges (HadwigerNelson.unitQuadrance R) ⇑col
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsMaxRingArc.meet :: F.IsRingArc P a b d d'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.disjoint_openArc_of_ne :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.disjoint_openArc_of_ne :: F.IsRingArc Q a✝³ b d d'
+SITE GENERIC HadwigerNelson.Plane.AeColouring.interfaceSet :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuckAlong_of_run :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ncard_coloursAt_le_two_of_mem_openArc :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germPair_inner_ne :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germPair_inner_ne :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_cone :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_terminalMap :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Simple.wholeRestrict :: F.Simple
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Simple.wholeRestrict :: (F.wholeRestrict p ρ).Simple
+SITE GENERIC HadwigerNelson.Plane.ArcMap.pair_P' :: F.Valid
+SITE GENERIC HadwigerNelson.kempeSwap_ne_of_mem_of_notMem :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.AeColouring.isAeCover :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Fan.map :: HadwigerNelson.Fan G k p Q
+SITE GENERIC HadwigerNelson.Fan.map :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.UDCert.drawing_quad :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.Forces.mono :: HadwigerNelson.Forces G k p q
+SITE GENERIC HadwigerNelson.Forces.mono :: G'.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ne1_region :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_shaveStep :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_shaveStep :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.CPColouring.forcedSet :: HadwigerNelson.Plane.CPColouring k
+SITE GENERIC HadwigerNelson.not_colorable_of_fan_nil :: HadwigerNelson.Fan G k p []
+SITE GENERIC HadwigerNelson.Plane.ArcMap.not_mem_coloursAt_of_tile_dist :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.filledGraph_ringList :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.notMem_essBdry_of_mem_densitySet :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.AeColouring.fan_of_isolated :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Fan.of_subset :: HadwigerNelson.Fan (HadwigerNelson.edgeGraph n E') k p Q'
+SITE GENERIC HadwigerNelson.Fan.of_subset :: (HadwigerNelson.edgeGraph n E).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.germIn_closure :: F.IsRingArc p θ₁ θ₂ a a'
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.cell.eq_1 :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.star_outer_cone :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.star_outer_cone :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.fiveRing_no_changePoint :: F.Valid
+SITE GENERIC HadwigerNelson.notMem_periodicForcedSubgroup_of_ne :: (SimpleGraph.addCayley S).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.hole_subset_hole :: F.Valid
+SITE GENERIC HadwigerNelson.UDCert.drawing_map :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.forced_pair_of_forced :: (HadwigerNelson.unitDistance ℂ).Coloring α
+SITE GENERIC HadwigerNelson.Plane.sat_bound_of_mem_closure :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Extends.separated_iff :: HadwigerNelson.Extends G A k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_openStep :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_openStep :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.shaveAvailable_of_adjacent_horns :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.shaveAvailable_of_adjacent_horns :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.shaveAvailable_of_adjacent_horns :: F.IsHorn v α κ₂ κ₃ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_isStar4 :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_isStar4 :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horn_shadow_near_N :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeProperRegions.unitPairsNull_cls :: HadwigerNelson.Plane.AeProperRegions k
+SITE GENERIC HadwigerNelson.card_le_of_forces :: HadwigerNelson.Forces G k p q
+SITE WITNESSED HadwigerNelson.core9_pigeonhole :: (HadwigerNelson.edgeGraph 9 HadwigerNelson.core9Edges).Coloring (Fin 4) [by HadwigerNelson.core9_colorable_four]
+SITE GENERIC HadwigerNelson.core9_pigeonhole :: HadwigerNelson.MonoPair HadwigerNelson.core9Pairs ⇑C
+SITE GENERIC HadwigerNelson.Plane.AeColouring.RegJFan.singLocallyFinite :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.finite_inter_sphere_of_subset_Γ :: F.Condition5
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_germCol_change :: F.Valid
+SITE GENERIC HadwigerNelson.Forces.image_eq_of_aperiodic :: (SimpleGraph.addCayley S).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Forces.image_eq_of_aperiodic :: HadwigerNelson.Aperiodic ⇑col
+SITE GENERIC HadwigerNelson.Forces.image_eq_of_aperiodic :: HadwigerNelson.Forces G k u v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.bend_toward :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.bend_toward :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_open :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_open :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.eq_gluePoint_or_reflAxis_of_mem_criticalSet_of_forces :: HadwigerNelson.Forces G (k + 1) u v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.outType_N_of_flankAbove :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.finite_arcs_meeting_ball :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.CollarFit.map_hasDegree :: F.Valid
+SITE GENERIC HadwigerNelson.encard_criticalSet_le_degree_of_forces :: HadwigerNelson.Forces G (k + 1) p q
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_sectorChart_tileAt :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_sectorChart_tileAt :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.r2_notMem_region :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.r2_notMem_region :: F.IsRingArc Q a b d d'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.outType_iff :: F.Valid
+SITE GENERIC HadwigerNelson.UDCert.not_forces_two_11 :: c.CoordsIn HadwigerNelson.Q4.sevenFree
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.mk.injEq :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.clear_of_subset_interior_allowedCone :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_pair_eq_or_disjoint :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_pair_eq_or_disjoint :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_pair_eq_or_disjoint :: F.IsRingArc p u v a a'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_pair_eq_or_disjoint :: F.IsRingArc p u' v' b b'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.exists_shaveStep_aux :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germCol_rotate_ne :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_sideCone_outer :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_sideCone_outer :: F.IsRingArc z θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.one_le_of_isHorn :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_preBend_step :: F.Valid
+SITE GENERIC HadwigerNelson.pullbackRepaint_apply_of_not_mem :: P.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ArcBend.isR2Arc_left :: M.IsRingArc P a b c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flankQ_upper_of_qrOnly :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flankQ_upper_of_qrOnly :: F.IsHorn v α κ₁ 1 c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horn_lower_ne_neg_one :: F.IsHorn w β a b d
+SITE GENERIC HadwigerNelson.Plane.AeColouring.RegJLiteral.singLocallyFinite :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Chain.not_colorable_chain :: HadwigerNelson.Forces G k a b
+SITE GENERIC HadwigerNelson.Plane.ArcMap.filledGraph_oneInf :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.measurableSet_cls :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Slack.forces_eq :: HadwigerNelson.Forces G k u u'
+SITE GENERIC HadwigerNelson.Plane.CPColouring.exists_modification :: HadwigerNelson.Plane.CPColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_tangent_colour :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.eq_horn_colour_of_two_sectors :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.eq_horn_colour_of_two_sectors :: F.IsHorn w β a b d
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.T_neg_T :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.Plane.ArcMap.cv_l0 :: F.IsStuck E
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_neighbour :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_neighbour :: F.Condition5
+SITE GENERIC HadwigerNelson.Plane.ArcMap.a4six :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_structure_at_axis :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_structure_at_axis :: F.IsStuck w
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_structure_at_axis :: F.IsHorn w α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.AwayBend.join :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.AwayBend.join :: F.IsRingArc P a c₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.outward_of_cone :: F.Valid
+SITE GENERIC HadwigerNelson.not_separated_zero_of_coincides :: (SimpleGraph.addCayley S).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.echo_of_mem_closure :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ArcBend.maxBad_centre :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ArcBend.maxBad_centre :: M.IsRingArc P a b d d'
+SITE GENERIC HadwigerNelson.Plane.AeColouring.essBdry :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.mem_closure_tile_of_near :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.mem_closure_tile_of_near :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_merge_at :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.iUnion_cls :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Forces.not_colorable :: HadwigerNelson.Forces G (k + 1) p q
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsQArc.add_int_mul :: F.IsQArc P θ₁ θ₂
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsQArc.add_int_mul :: F.IsQArc P (θ₁ + 2 * Real.pi * ↑m) (θ₂ + 2 * Real.pi * ↑m)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.hex_point_in :: F.Valid
+SITE GENERIC HadwigerNelson.Outside.OAI158.weakColoring_of_aeColouring :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.chiCP_le :: HadwigerNelson.Plane.CPColouring k
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.branch :: HadwigerNelson.Plane.AeColouring k
+SITE WITNESSED HadwigerNelson.Plane.ArcMap.l60Frag_isRingArc :: HadwigerNelson.Plane.ArcMap.l60Frag.IsRingArc 0 0 (Real.pi / 3) 0 1 [by HadwigerNelson.Plane.ArcMap.l60Frag_isRingArc]
+SITE GENERIC HadwigerNelson.Plane.ArcMap.clear_of_push :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.exists_grundy :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.transferQC :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.transferQC :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_horns_ua :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_horns_ua :: F.IsStuck v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_initialPiece_of_ncard_le_three :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_initialPiece_of_ncard_le_three :: F.NonSiamese
+SITE GENERIC HadwigerNelson.arityFloor_le_of_compels :: HadwigerNelson.Compels G k S p
+SITE GENERIC HadwigerNelson.Plane.AeColouring.regJLiteral_of_locallyFinite :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flankQ_both :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flankQ_both :: F.IsHorn v α κ₁ 1 c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flankQ_both :: F.IsHorn v (α + Real.pi) κ₃ κ₄ c
+SITE GENERIC HadwigerNelson.Fan.widen.match_1_1 :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.nextDir_le_dir :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_star_data :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_star_data :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.sixQ_sphere_subset_Γ :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.u1_shadow :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.AeColouring.col_eq_of_mem_core :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.newArcs_condition5 :: F.Condition5
+SITE GENERIC HadwigerNelson.not_colorable_spindleEdges :: HadwigerNelson.Forces (HadwigerNelson.edgeGraph n E) k p q
+SITE GENERIC HadwigerNelson.Plane.ArcMap.tileOf_subset_ball :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_merge_aux :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_lens_clear :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_lens_clear :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.not_germIn_closure_rotate :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_third_change :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.star_absent :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.star_absent :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.l60_eq_outer :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.l60_eq_outer :: F.IsRingArc P θ₁ (θ₁ + Real.pi / 3) c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germR_vPlus :: F.Valid
+SITE GENERIC HadwigerNelson.repaintAt :: P.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.repaintAt :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.HasHorn :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.CollarFitOut.map_R1 :: hfit.map.IsRingArc Q a b d d'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.CollarFitOut.map_R1 :: F.IsRingArc Q a b d d'
+SITE WITNESSED HadwigerNelson.Plane.quadRing_isRingArc :: HadwigerNelson.Plane.quadRing.IsRingArc 0 0 (Real.pi / 2) 0 2 [by HadwigerNelson.Plane.quadRing_isRingArc]
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Valid.cos_nonneg_of_radial_inner :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.cell_subset_densitySet :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.measurable_T_comp :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsTile.dist_lt_one :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horn_bounds_of_interior_empty :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horn_bounds_of_interior_empty :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.three_le_arityFloor_of_aperiodic_coincides :: (SimpleGraph.addCayley S).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.three_le_arityFloor_of_aperiodic_coincides :: HadwigerNelson.Aperiodic ⇑col
+SITE GENERIC HadwigerNelson.three_le_arityFloor_of_aperiodic_coincides :: HadwigerNelson.CoincidesAtNonedges (SimpleGraph.addCayley S) ⇑col
+SITE GENERIC HadwigerNelson.criticalSet_subset_of_fan :: HadwigerNelson.Fan G (k + 1) p Q
+SITE GENERIC HadwigerNelson.Plane.ArcMap.cluster :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.qcol_ccw :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.qcol_ccw :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_arcBend_toward :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_arcBend_toward :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.v6_anti :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_clean :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horn_radial_N :: F.IsHorn v α κ₁ 1 c
+SITE GENERIC HadwigerNelson.FanGap.translate :: (SimpleGraph.addCayley S).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.CollarFit.arcBend :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.exists_cut :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.n3_end_chain :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.n3_end_chain :: F.IsStuck v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.n3_end_chain :: F.IsHorn v α (-1) 1 c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.endpoint_dist_ge :: F.Valid
+SITE GENERIC HadwigerNelson.Fan.image :: HadwigerNelson.Fan G k p Q
+SITE GENERIC HadwigerNelson.Fan.image :: P.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.measurable_T_left :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.Plane.ArcMap.disjoint_ball_of_far_witness :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.disjoint_ball_of_far_witness :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.cv_hd :: F.IsStuck E
+SITE GENERIC HadwigerNelson.Plane.ArcMap.cv_hd :: F.IsHorn E α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.cv_hd :: F.IsHorn E (α + Real.pi) κ₃ κ₄ c
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.isOpen_cell :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_r2Subdiv :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_r2Subdiv :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.exists_not_periodic :: (HadwigerNelson.finitePlane p).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.isBounded_closure_fill :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ncard_tileAt_eq :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ncard_tileAt_eq :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.SectorsAt.exists_mem_Ico :: F.SectorsAt v n d c
+SITE GENERIC HadwigerNelson.periods :: (SimpleGraph.addCayley S).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.nonempty_frontier_closure_fill :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.continuousOn_cyclicNext :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.RayConfig.exists_merge :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.bandFree_region :: F.Valid
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.measurableSet_majority :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.finitePlane19_forces_eq :: HadwigerNelson.Forces (HadwigerNelson.finitePlane 19) 5 u v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.SectorsAt.not_mem_coloursAt_of_mem_Ioo :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.SectorsAt.not_mem_coloursAt_of_mem_Ioo :: F.SectorsAt v n d c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.cor3_at :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_prev_outer :: F.SectorsAt v n d c
+SITE GENERIC HadwigerNelson.Plane.AeColouring.measurableSet_core :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.sector_shadow_S :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.sector_shadow_S :: F.Condition5
+SITE GENERIC HadwigerNelson.Plane.ArcMap.straddlers_third :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.four_of_bothKind_simple :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.four_of_bothKind_simple :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.four_of_bothKind_simple :: F.Simple
+SITE GENERIC HadwigerNelson.Plane.ArcMap.four_of_bothKind_simple :: F.IsRingArc z θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.not_fan_of_fanGap :: P.Coloring (Fin k)
+SITE WITNESSED HadwigerNelson.pathGraph_additivelyRigid :: (SimpleGraph.pathGraph 3).Coloring (Fin 2) [by HadwigerNelson.pathGraph_three_colorable_two]
+SITE GENERIC HadwigerNelson.pathGraph_additivelyRigid :: HadwigerNelson.IsAdditive HadwigerNelson.pathAddr C
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.eq_of_mem_closure :: F.IsRingArc p θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.SectorsAt.exists_normal_collarAt :: F.SectorsAt v n d c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.e_mem_allowedCone_of_col :: F.Valid
+SITE WITNESSED HadwigerNelson.finitePlane11DoubleGapColoring :: (HadwigerNelson.finitePlane 11).Coloring (Fin 5) [by HadwigerNelson.finitePlane11_colorable_five]
+SITE WITNESSED HadwigerNelson.finitePlane11Colouring.toColoring :: (HadwigerNelson.finitePlane 11).Coloring (Fin 5) [by HadwigerNelson.finitePlane11_colorable_five]
+SITE GENERIC HadwigerNelson.Plane.ArcMap.curvUp_le_of_horn_of_flankAbove :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.curvUp_le_of_horn_of_flankAbove :: F.IsHorn w α a b g
+SITE WITNESSED HadwigerNelson.finitePlane7QuotColoring :: (HadwigerNelson.finitePlane 7).Coloring (Fin 4) [by HadwigerNelson.finitePlane7QuotColoring]
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horn_shadow_near_S :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsQArc.of_subarc :: F.IsQArc p a b
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsQArc.of_subarc :: F.IsRingArc p a' b' c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsQArc.of_subarc :: F.IsQArc p a' b'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_mergeStep :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horn_unique_of_stuck :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horn_unique_of_stuck :: F.IsHorn v β a₁ a₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horn_unique_of_stuck :: F.IsHorn v β b₁ b₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.SectorsAt.not_mem_range_of_crossesAt :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.SectorsAt.not_mem_range_of_crossesAt :: F.SectorsAt v n d c
+SITE GENERIC HadwigerNelson.IsAdditive.apply_eq.match_1_1 :: Γ.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.IsAdditive.apply_eq.match_1_1 :: HadwigerNelson.IsAdditive q C
+SITE GENERIC HadwigerNelson.Plane.ArcMap.n3_end_four_colours :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.n3_end_four_colours :: F.IsStuck v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.n3_end_four_colours :: F.IsHorn v α (-1) κ₂ c
+SITE GENERIC HadwigerNelson.restrictColoring_apply :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.sector_shadow_N :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.sector_shadow_N :: F.Condition5
+SITE GENERIC HadwigerNelson.UDCert.not_separated_of_distSq :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.UDCert.not_separated_of_distSq :: (HadwigerNelson.unitQuadrance R).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.UDCert.not_separated_of_distSq :: HadwigerNelson.CoincidesAtNonedges (HadwigerNelson.unitQuadrance R) ⇑col
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.open_isContact_iff :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.SectorsAt.exists_two_absent :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.SectorsAt.exists_two_absent :: F.SectorsAt v n d c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_ringArc_of_sides :: F.Valid
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.nb.eq_1 :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.OpenConfig.exists_clearSet :: F.Valid
+SITE GENERIC HadwigerNelson.compels_two_eq.match_1_1 :: HadwigerNelson.Realizes G k S p
+SITE GENERIC HadwigerNelson.Separated.quad_sub_eq_one :: (HadwigerNelson.unitQuadrance R).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Separated.quad_sub_eq_one :: HadwigerNelson.CoincidesAtNonedges (HadwigerNelson.unitQuadrance R) ⇑col
+SITE GENERIC HadwigerNelson.Separated.quad_sub_eq_one :: HadwigerNelson.Separated G k u v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.RayConfig.exists_step :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeProperRegions.exists_three_le_multicolour :: HadwigerNelson.Plane.AeProperRegions k
+SITE GENERIC HadwigerNelson.Plane.AeColouring.exists_rescale :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.fiveRing_length :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_eleventh_of :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_rayMerge_aux :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_rayMerge_aux :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_rayMerge_aux :: F.IsHorn v α κ₃ κ₄ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.sixth_cons_of_mem_closure :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.rot_noThird :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.HasSlack :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.not_mem_closure_of_four_germs :: F.Valid
+SITE GENERIC HadwigerNelson.hexShell_pigeonhole :: (HadwigerNelson.edgeGraph 7 HadwigerNelson.hexShellEdges).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.hexShell_pigeonhole :: HadwigerNelson.MonoPair HadwigerNelson.hexShellPairs ⇑C
+SITE GENERIC HadwigerNelson.Plane.AeColouring.fillCol.eq_1 :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.FanGap :: P.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.UDCert.not_forces_of_pairsAtRatio_11 :: c.CoordsIn HadwigerNelson.Q4.sevenFree
+SITE GENERIC HadwigerNelson.Chain.add_one_le_chromaticNumber_planeOver_of_chain :: HadwigerNelson.Forces G k a b
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Valid.region_dist_ne_one :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsTile.subset_ball :: F.Valid
+SITE WITNESSED HadwigerNelson.Plane.ArcMap.cuspFrag_isHorn :: HadwigerNelson.Plane.ArcMap.cuspFrag.IsHorn 0 0 (-1) 1 1 [by HadwigerNelson.Plane.ArcMap.cuspFrag_isHorn]
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuckAlong_of_mem_stuckRun :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flankQ_lower :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flankQ_lower :: F.IsHorn v α (-1) κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_rayStep :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_rayStep :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_rayStep :: F.IsHorn v α κ₃ κ₄ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.fiveRing_finite_off_Q :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.measurableSet_grundyS :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.star_anti :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.star_anti :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.star_anti :: F.IsHub p ψ
+SITE GENERIC HadwigerNelson.Plane.ArcMap.star_anti :: F.IsHub p (ψ + Real.pi)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Valid.cone_re_nonneg_of_preconnected :: F.Valid
+SITE WITNESSED HadwigerNelson.finitePlane3Colouring.toColoring :: (HadwigerNelson.finitePlane 3).Coloring (Fin 3) [by HadwigerNelson.finitePlane3ColouringDiff.toColoring]
+SITE WITNESSED HadwigerNelson.rhombus_forces :: (HadwigerNelson.edgeGraph 4 HadwigerNelson.rhombus).Coloring (Fin 3) [by HadwigerNelson.rhombus_colorable_three]
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.hasSector_or_hasHorn :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.AeColouring.pairwise_disjoint_cls :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.coloring_ne_of_dist_mem :: (HadwigerNelson.distanceGraph V D).Coloring α
+SITE GENERIC HadwigerNelson.Plane.ArcMap.shadow_source_near_poles :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flankQ_lower_of_qrOnly :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flankQ_lower_of_qrOnly :: F.IsHorn v α (-1) κ₂ c
+SITE GENERIC HadwigerNelson.UDCert.forces_eq_11 :: c.CoordsIn HadwigerNelson.Q4.sevenFree
+SITE GENERIC HadwigerNelson.UDCert.forces_eq_11 :: HadwigerNelson.Forces (HadwigerNelson.edgeGraph n c.edges) 5 i j
+SITE GENERIC HadwigerNelson.Plane.ArcMap.clear_near_end :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.branch_contacts :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Chain.add_one_le_chromaticNumber_induce_of_chain :: HadwigerNelson.Forces G k a b
+SITE GENERIC HadwigerNelson.Plane.ArcMap.bend_away_gap :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.bend_away_gap :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_vPlus :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_vPlus :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_vPlus :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_semiHub :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_semiHub :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_semiHub :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germR_uPlus :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.CollarFit.map_degree_le :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.mergeAvailable_of_not_mem_pole :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.grundyTaken.eq_def :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.StationaryRatio.tendsto_measure_symmDiff_shift :: HadwigerNelson.StationaryRatio.StationarySet Y
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringGerm_outward :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringGerm_outward :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.CPColouring.law_ne_shift :: HadwigerNelson.Plane.CPColouring k
+SITE GENERIC HadwigerNelson.Plane.AeProperRegions.IsRegion :: HadwigerNelson.Plane.AeProperRegions k
+SITE GENERIC HadwigerNelson.Forces.of_unsat :: (HadwigerNelson.edgeGraph n E).Coloring (Fin (k + 2))
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_outer_fill_offTwo :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.TileAt.subset_ball :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.four_le_of_bothKind :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.four_le_of_bothKind :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.AeColouring.exists_fill :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsHorn.mem_coneAt_region :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.hex_adjacent :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.disjoint_tipColours_outerTileColours :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.disjoint_tipColours_outerTileColours :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.dir_mono :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_changePoint :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_changePoint :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_changePoint :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_changePoint :: F.IsChangePoint (HadwigerNelson.Plane.ringPt p ψ) (ψ + Real.pi) b a
+SITE GENERIC HadwigerNelson.Plane.sevenBrickMap_sectorsAt_tDown :: HadwigerNelson.Plane.sevenBrickMap.SectorsAt (HadwigerNelson.Plane.brickCorner c r - 2 / 5) 3 HadwigerNelson.Plane.tDownDirs (HadwigerNelson.Plane.tDownCols c r)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.cor3_local :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_woodallMerged :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Valid.unitPairsNull_region :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.echo_unique :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.not_mem_coloursAt_of_germIn :: F.Valid
+SITE GENERIC HadwigerNelson.Forces.planeIn :: HadwigerNelson.Forces G k u v
+SITE GENERIC HadwigerNelson.Forces.planeIn :: (HadwigerNelson.distanceGraph ℂ D).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.closure_fill_subset_closedBall :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.not_mem_shadow_of_mem_region :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Simple.coneAt_eq_angleIcc_sep :: F.Simple
+SITE GENERIC HadwigerNelson.Plane.ArcMap.woodallCone_isHorn_ua :: F.Valid
+SITE GENERIC HadwigerNelson.Forces.of_edges :: (HadwigerNelson.edgeGraph n E).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.padicInt19_forces_eq :: HadwigerNelson.Forces (HadwigerNelson.unitQuadrance ℤ_[19]) 5 u v
+SITE GENERIC HadwigerNelson.UDCert.not_separated_of_pairsAtRatio_11 :: c.CoordsIn HadwigerNelson.Q4.sevenFree
+SITE GENERIC HadwigerNelson.Plane.ArcMap.niceAt_of_dirColourAt :: F.NiceAt v
+SITE GENERIC HadwigerNelson.Plane.AeColouring.SingLocallyFinite :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Extends.forces_iff :: HadwigerNelson.Extends G A k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsChangePoint.not_mem_coloursAt :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsChangePoint.not_mem_coloursAt :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.forces_iff_of_quotient_fanGap :: (SimpleGraph.addCayley D).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.AeProperRegions.IsRegion.isPreconnected :: HadwigerNelson.Plane.AeProperRegions k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Valid.dist_ne_one_of_isOpen_subset_closure :: F.Valid
+SITE GENERIC HadwigerNelson.UDCert.colorable_four_of_seamFree :: c.CoordsIn HadwigerNelson.Q4.seamFree
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_ball_subset_closure_of_sole_outer :: F.Valid
+SITE GENERIC HadwigerNelson.Fan.of_not_colorable :: (HadwigerNelson.edgeGraph n E).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ProcInv.refl :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.fillCol :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germPair_dicho :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germPair_dicho :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsChangePoint.ncard_add_two_le :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsChangePoint.ncard_add_two_le :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.niceAt_of_crossing :: G.NiceAt w
+SITE GENERIC HadwigerNelson.Forces.compels :: HadwigerNelson.Forces G k (S 0) (S 1)
+SITE GENERIC HadwigerNelson.Forces.compels :: HadwigerNelson.Compels G k S ![c, d]
+SITE GENERIC HadwigerNelson.zmodPow11_forces_eq :: HadwigerNelson.Forces (HadwigerNelson.unitQuadrance (ZMod (11 ^ m))) 5 u v
+SITE GENERIC HadwigerNelson.UDCert.colorable_of_unitQuadrance :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.extends_of_extensionOrder :: (SimpleGraph.induce A G).Coloring (Fin (k + 1))
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Valid.cone_re_nonneg_of_germ :: F.Valid
+SITE GENERIC HadwigerNelson.tipFree_of_orbit :: (HadwigerNelson.unitQuadrance R).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.UDCert.not_forces_of_pairsAt_11 :: c.CoordsIn HadwigerNelson.Q4.sevenFree
+SITE GENERIC HadwigerNelson.Plane.ArcMap.const_sectorsAt :: (HadwigerNelson.Plane.ArcMap.const Set.univ ⋯ 0).SectorsAt v 1 ![0, 2 * Real.pi] ![0]
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsSectorChart.neg_one_lt_of_outType_N :: F.Condition5
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.nextDir :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.not_separated_of_coloring_eq :: G.Coloring α
+SITE GENERIC HadwigerNelson.UDCert.drawing_quad_of_distSq_ratio :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_opposite :: F.SectorsAt v n d c
+SITE GENERIC HadwigerNelson.Plane.CPColouring.law_eq_one_iff :: HadwigerNelson.Plane.CPColouring k
+SITE GENERIC HadwigerNelson.Extends.not_forces_of_colorable :: HadwigerNelson.Extends G A (k + 1)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_shadow_h :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_shadow_h :: F.Condition5
+SITE GENERIC HadwigerNelson.UDCert.coe_coord_fst :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.Plane.ArcMap.QFreeRing.isHub :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.QFreeRing.isHub :: F.IsHub p ψ
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.disjoint_coneAt :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.disjoint_coneAt :: F.IsRingArc z θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Forces.eq_of_card :: HadwigerNelson.Forces G k p q
+SITE GENERIC HadwigerNelson.Forces.eq_of_card :: G.Coloring α
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_collarFitOut :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_collarFitOut :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.merge_tile_cover :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.exists_inner_ball :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.star_coloursAt :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.star_coloursAt :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.n3_end :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.n3_end :: F.IsStuck v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.n3_end :: F.IsHorn v α (-1) κ₂ c
+SITE WITNESSED HadwigerNelson.Plane.ArcMap.threeSectorDisc_phantom :: HadwigerNelson.Plane.ArcMap.threeSectorDisc.SectorsAt 0 5 ![0, 2 * Real.pi / 3, 2 * Real.pi / 3, 2 * Real.pi / 3, 4 * Real.pi / 3, 2 * Real.pi] ![0, 1, 0, 1, 2] [by HadwigerNelson.Plane.ArcMap.threeSectorDisc_phantom]
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.φ_lt_cyclicNext :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_red :: F.Valid
+SITE GENERIC HadwigerNelson.mono_pair_of_not_colorable_append :: (HadwigerNelson.edgeGraph n E).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.mono_pair_of_not_colorable_append :: HadwigerNelson.MonoPair P ⇑C
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.exists_openConfig_down :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.outerAdj :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.outerAdj :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.outerAdj :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.outerAdj :: F.IsChangePoint p (ψ + Real.pi / 3) Y Y'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.one_le_dist_of_outType :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.woodallCone :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germOnQ_bar_uPlus :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.branch_outside_discs :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_star :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_star :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_star :: F.IsRingArc p u v c c'
+SITE GENERIC HadwigerNelson.Plane.grundyTaken_eq :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.T_add_apply :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.Plane.ArcMap.rot_out :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_pole_N :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_pole_N :: F.Condition5
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_pole_N :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_pole_N :: F.IsHorn v (α + Real.pi) κ₃ κ₄ c
+SITE GENERIC HadwigerNelson.Plane.CPColouring.law_shift :: HadwigerNelson.Plane.CPColouring k
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.nb_mono :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.Plane.ArcMap.mem_closure_of_coneAt_toward :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.mem_closure_of_coneAt_toward :: F.NonSiamese
+SITE GENERIC HadwigerNelson.finitePlane11_forces_eq :: HadwigerNelson.Forces (HadwigerNelson.finitePlane 11) 5 u v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_no_tip :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_no_tip :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.CPColouring.forcedSubgroup :: HadwigerNelson.Plane.CPColouring k
+SITE GENERIC HadwigerNelson.pullbackRepaint :: P.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.pullbackRepaint :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_arcStep :: F.Valid
+SITE GENERIC HadwigerNelson.UnitRing.add_one_le_chromaticNumber_planeOver_of_inv_mem_unitRingOver :: HadwigerNelson.Forces G k a b
+SITE GENERIC HadwigerNelson.Plane.ArcMap.relabel_condition5 :: F.Condition5
+SITE GENERIC HadwigerNelson.Plane.ArcMap.CollarFit.map_degree_and_repeated :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_turned_frame :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_turned_frame :: F.IsStuck E
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_turned_frame :: F.IsHorn E α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_turned_frame :: F.IsHorn E (α + Real.pi) κ₃ κ₄ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_crossed :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_crossed :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_crossed :: F.IsRingArc p (ψ + Real.pi / 3) (ψ + Real.pi / 3 + ℓ) a a'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_crossed :: F.IsRingArc p (ψ - Real.pi / 3 - m) (ψ - Real.pi / 3) b b'
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.branch_subset :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.horn_index :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.AeColouring.exists_motion :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.star_outer_nonempty :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.star_outer_nonempty :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Fan.map.match_1_1 :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.sevenBrickMap_woodallMerged :: HadwigerNelson.Plane.sevenBrickMap.NiceAt v
+SITE GENERIC HadwigerNelson.exists_sat_coloringCNF_cube :: (HadwigerNelson.edgeGraph n E).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.CPColouring.ae_unitPairsNull_of_modification :: HadwigerNelson.Plane.CPColouring k
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_mul :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.forces_eq_of_hom_finitePlane11 :: HadwigerNelson.Forces G 5 u u'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ray_clear :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ray_clear :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ray_clear :: F.IsHorn v α κ₃ κ₄ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_ball_subset_closure_region_of_sole_tip :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_ball_subset_closure_region_of_sole_tip :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.isStuck_of_hasRepeatedColour :: F.IsStuck x
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Valid.not_mem_closure_of_side :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.exists_contact_nextDir :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.extends_of_matching :: (SimpleGraph.induce A G).Coloring (Fin (k + 1))
+SITE GENERIC HadwigerNelson.Plane.ArcMap.isTile_of_agreesOn :: M.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.isTile_of_agreesOn :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.contact_inType_or_outType :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_gap_cap :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_gap_cap :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsHorn.exists_flankBelow :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.c_double :: F.IsStuck E
+SITE GENERIC HadwigerNelson.Plane.ArcMap.c_double :: F.IsHorn E α (-1) 1 c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.c_double :: F.IsHorn E (α + Real.pi) (-1) 1 c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.NonSiamese.tile_eq_of_mem_closure :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.NonSiamese.tile_eq_of_mem_closure :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.radial_outer :: F.IsRingArc z θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.UDCert.coord_quadrance :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsHorn.exists_flankAbove :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.changePoint_germs :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.changePoint_germs :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.CPColouring.law_ne_triangle :: HadwigerNelson.Plane.CPColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germOnQ_bar_uMinus :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.col_ne :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.UDCert.forces_eq_of_slack :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.UDCert.forces_eq_of_slack :: HadwigerNelson.Forces (HadwigerNelson.edgeGraph n c.edges) k i j
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.sides_eq_of_ringPt_eq :: F.IsRingArc p a b c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.sides_eq_of_ringPt_eq :: F.IsRingArc p a' b' d d'
+SITE GENERIC HadwigerNelson.Separated.plane :: HadwigerNelson.Separated G k u v
+SITE GENERIC HadwigerNelson.Separated.plane :: (HadwigerNelson.unitDistance ℂ).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_ne_of_doublyShadowed :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_ne_of_doublyShadowed :: F.Condition5
+SITE GENERIC HadwigerNelson.Plane.sixFrag_isQArc :: HadwigerNelson.Plane.sixFrag.IsRingArc 0 θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.sixFrag_isQArc :: HadwigerNelson.Plane.sixFrag.IsQArc 0 θ₁ θ₂
+SITE GENERIC HadwigerNelson.Plane.ArcMap.simpleOn_not_hasRepeatedColour :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.simpleOn_not_hasRepeatedColour :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.AeColouring.arcsAt :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.sides_ne_of_isClean :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Forces.transport :: HadwigerNelson.Forces G k u v
+SITE GENERIC HadwigerNelson.Forces.transport :: (HadwigerNelson.distanceGraph V D).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.inner_ne_outer :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.inner_ne_outer :: F.IsRingArc p θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.AeColouring.SingLocallyFinite.exists_ball_subset :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.UDCert.chromaticNumber_le_planeOver :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.not_colorable_of_spindled_forcer :: HadwigerNelson.Forces G k p q
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_vertexStep :: F.Valid
+SITE GENERIC HadwigerNelson.FanGap.comap :: P.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.unitNear_or_unitFar :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.tendsto_cyclicNext :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.AeColouring.ae_one_colour_of_isConnected :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.AwayBend.idle :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.semiHub_places_T :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.semiHub_places_T :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.chiM0_le :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.SectorsAt.eq_of_edge_mem_angleIcc :: F.SectorsAt v n d c
+SITE GENERIC HadwigerNelson.Plane.AeProperRegions.IsRegion.subset :: HadwigerNelson.Plane.AeProperRegions k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.collarAt_closure_of_forall_shadow :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.woodall_contacts :: F.Valid
+SITE GENERIC HadwigerNelson.Fan.of_coverage :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.cor3_half :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_not_germOnQ_inside :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_not_germOnQ_inside :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_not_germOnQ_inside :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.unitFar_of_mem_closure :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.GammaFreeRing.exists_absent_pair :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horn_radial_S :: F.IsHorn v α (-1) κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.move_step :: (HadwigerNelson.Plane.ArcMap.Near.move h K E col' hE hEf hlc).Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_shadow_h_chart :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_shadow_h_chart :: F.Condition5
+SITE GENERIC HadwigerNelson.UDCert.stressPairing_eq_zero_of_drawing :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.UDCert.stressPairing_eq_zero_of_drawing :: HadwigerNelson.IsStress (↑p) x₀ L
+SITE GENERIC HadwigerNelson.UDCert.point_mem_planeOver :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.finitePlane3_forces_eq :: HadwigerNelson.Forces (HadwigerNelson.finitePlane 3) 3 u v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.inType_iff :: F.Valid
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.prod_apply_corr :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.degree_openArc :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.lock :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.lock :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.UDCert.add_one_le_chromaticNumber_unitQuadrance :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.Plane.ArcMap.filledGraph_finSep :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.beta :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.lower_flank_horns_at_N_of :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.lower_flank_horns_at_N_of :: F.IsStuck E
+SITE GENERIC HadwigerNelson.Plane.ArcMap.lower_flank_horns_at_N_of :: F.IsHorn E α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.lower_flank_horns_at_N_of :: F.IsHorn E (α + Real.pi) (-1) κ₄ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horn_colour_eq_of_isChainVertex :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horn_colour_eq_of_isChainVertex :: F.IsHorn w β a b d
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horn_colour_eq_of_isChainVertex :: F.IsHorn w β' a' b' d'
+SITE GENERIC HadwigerNelson.extends_of_hub_matching :: (SimpleGraph.induce A G).Coloring (Fin (k + 1))
+SITE GENERIC HadwigerNelson.Plane.ArcMap.hasSectors_one_of_contacts :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.half_colour_or_bothKind :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.l60_side_tile :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.l60_side_tile :: F.IsRingArc P θ₁ (θ₁ + Real.pi / 3) c c'
+SITE GENERIC HadwigerNelson.Plane.AeColouring.exists_isMaximalCover :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.hexShell_planeIn :: (HadwigerNelson.distanceGraph ℂ D).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.hex_side_far :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.exists_densitySet_of_notMem :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.slack_addCayley_of_fanGap :: (SimpleGraph.addCayley S).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.exists_isOpen_subset_cells :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.n3_end_of_not_inType :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.n3_end_of_not_inType :: F.IsStuck v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.n3_end_of_not_inType :: F.IsHorn v α (-1) κ₂ c
+SITE UNKNOWN HadwigerNelson.hexShell_plane5 :: (HadwigerNelson.unitDistance ℂ).Coloring (Fin 5)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.not_mem_closure_wholeRestrict_R₂ :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.pair_ii :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.exists_openStep_aux :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.sevenBrickMap_sectorsAt_tUp :: HadwigerNelson.Plane.sevenBrickMap.SectorsAt (HadwigerNelson.Plane.brickCorner c r) 3 HadwigerNelson.Plane.tUpDirs (HadwigerNelson.Plane.tUpCols c r)
+SITE GENERIC HadwigerNelson.KempeClosed :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germS_absent :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germS_absent :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.exists_openConfig :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.exists_openConfig :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.sides_eq :: F.IsRingArc p a b c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.sides_eq :: F.IsRingArc p a' b' d d'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringD_subset_Γ :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ArcBend.maxBad :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ArcBend.maxBad :: M.IsRingArc Q a b d d'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.cv_exists :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.side_of_preconnected :: F.Valid
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.measurable_T_apply :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.sector_constraints :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.exists_proper_of_aeColouring :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.radiusTwoArc_inter_dom_subset_Γ :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.radiusTwoArc_inter_dom_subset_Γ :: F.IsRingArc Q a✝¹ b d d'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germCol_change_int :: F.Valid
+SITE GENERIC HadwigerNelson.unitQuadrance_fusable_of_sharedGap_base :: (HadwigerNelson.unitQuadrance R).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.fail_leavingCentre :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.semiHub_places_O :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.semiHub_places_O :: F.NonSiamese
+SITE GENERIC HadwigerNelson.mem_periods :: (SimpleGraph.addCayley S).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.tile_subset_closedBall_of_cone :: F.Valid
+SITE WITNESSED HadwigerNelson.StationaryRatio.StationarySet.parity :: HadwigerNelson.StationaryRatio.StationarySet (ZMod 2) [by HadwigerNelson.StationaryRatio.StationarySet.parity]
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.exists_sub_of_germIn :: F.IsRingArc p θ₁ θ₂ a a'
+SITE GENERIC HadwigerNelson.UDCert.coord :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.Plane.AeColouring.openPart_subset_densitySet :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.srcH_of_shadow :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.outType_S_of_flankBelow :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_coloursAt :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_coloursAt :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.finite_frontier_fill_nonRegular :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.finite_not_stripHolds :: F.Valid
+SITE GENERIC HadwigerNelson.Forces.of_equiv :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.rot_in :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_shave_aux :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_shave_aux :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.UDCert.not_forces_of_pairsAt :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.UDCert.not_forces_of_pairsAt :: (HadwigerNelson.unitQuadrance R).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.UDCert.not_forces_of_pairsAt :: HadwigerNelson.Aperiodic ⇑col
+SITE GENERIC HadwigerNelson.Plane.ArcMap.allowedCone_eq_of_agreesOn :: M.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.allowedCone_eq_of_agreesOn :: F.Valid
+SITE WITNESSED HadwigerNelson.pathGraph_three_coloring_two :: (SimpleGraph.pathGraph 3).Coloring (Fin 2) [by HadwigerNelson.pathGraph_three_colorable_two]
+SITE GENERIC HadwigerNelson.Plane.ArcMap.surgery_condition5 :: F.Condition5
+SITE WITNESSED HadwigerNelson.hexColoring :: (SimpleGraph.cycleGraph 6).Coloring (Fin 3) [by HadwigerNelson.hexColoring]
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_chain :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_chain :: F.Condition5
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_chain :: F.IsStuck v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_chain :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_chain :: F.IsStuck (v + ↑j * HadwigerNelson.Plane.e (α + Real.pi / 2))
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_structure :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_structure :: F.Condition5
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_structure :: F.IsStuck v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.surgery_step :: (F.surgery v ρ A col' hv hρ hA hAf hlc).Valid
+SITE GENERIC HadwigerNelson.CoverAtLeast.anti :: HadwigerNelson.CoverAtLeast G k p Q m
+SITE GENERIC HadwigerNelson.CoverAtLeast.anti :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_coneAt_S :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_coneAt_S :: F.IsStuck v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_coneAt_S :: F.IsHorn v α (-1) κ₂ c
+SITE GENERIC HadwigerNelson.three_le_card_of_triangle_mem :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.region_near_of_inType :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.SectorsAt.absent_at_normal :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.SectorsAt.absent_at_normal :: F.SectorsAt v n d c
+SITE GENERIC HadwigerNelson.Plane.AeColouring.regJFan_iff_singLocallyFinite :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.changePoint_germs_out :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.changePoint_germs_out :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.srcG_of_shadow :: F.Valid
+SITE GENERIC HadwigerNelson.FieldWall4.seamResidueColouring :: (SimpleGraph.induce S (HadwigerNelson.unitDistance ℂ)).Coloring HadwigerNelson.FieldWall4.F4
+SITE GENERIC HadwigerNelson.spareOn :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_ne_of_shadows :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeProperRegions.exists_three_le_multicolour_lt_one :: HadwigerNelson.Plane.AeProperRegions k
+SITE GENERIC HadwigerNelson.pullbackRepaint_apply_of_mem :: P.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.mem_closure_region_of_pseudo :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.badCount_lt_top :: F.Valid
+SITE GENERIC HadwigerNelson.isAdditive_of_addMonoidHom :: Γ.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.isAdditive_of_addMonoidHom :: HadwigerNelson.IsAdditive q C
+SITE GENERIC HadwigerNelson.Plane.const_qrOnly :: (HadwigerNelson.Plane.ArcMap.const Set.univ ⋯ j).IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.instDecidableFanGapOfFintypeOfDecidableRelAdj :: P.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ts_t :: F.Valid
+SITE GENERIC HadwigerNelson.UDCert.not_separated_of_distSq_ratio :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.UDCert.not_separated_of_distSq_ratio :: (HadwigerNelson.unitQuadrance R).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.UDCert.not_separated_of_distSq_ratio :: HadwigerNelson.CoincidesAtNonedges (HadwigerNelson.unitQuadrance R) ⇑col
+SITE GENERIC HadwigerNelson.UDCert.drawing_adj :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.Plane.ArcMap.four_of_bothKind :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.four_of_bothKind :: F.IsRingArc z θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.normOneColoringTwo :: Γ.Coloring (ZMod 2)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_outermost :: F.Valid
+SITE GENERIC HadwigerNelson.symCopy.coloringOfPerm :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.symCopy.coloringOfPerm :: (HadwigerNelson.symCopy G S).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.compels_rainbow_of_neighbors.match_1_1 :: HadwigerNelson.Realizes G k T id
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.AEIndependent :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_structure_ua :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_structure_ua :: F.IsStuck v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_branch_on_circle_of_not_stripHolds :: F.Valid
+SITE GENERIC HadwigerNelson.not_separated_of_sharedGap :: P.Coloring (Fin k)
+SITE WITNESSED HadwigerNelson.Plane.hornModel_isHorn :: HadwigerNelson.Plane.hornModel.IsHorn HadwigerNelson.Plane.plantPt 0 (-1 / 2) (1 / 2) 7 [by HadwigerNelson.Plane.hornModel_isHorn]
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germS_outward :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germS_outward :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.AeColouring.alpha :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.AeColouring.IsolatedAt :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.criticalSet_subset_union_neighborSet_of_separated :: HadwigerNelson.Separated G (k + 1) p q
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_dist_le_one :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_dist_le_one :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_dist_le_one :: F.IsRingArc p θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.colorable_append_of_avoiding :: (HadwigerNelson.edgeGraph n E).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.not_encloses_of_hull_eq :: F.Valid
+SITE GENERIC HadwigerNelson.unitQuadrance_forces_eq_of_ringHom :: HadwigerNelson.Forces (HadwigerNelson.unitQuadrance R) k u v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.echo :: F.Valid
+SITE WITNESSED HadwigerNelson.Plane.awayModel_isRingArc_gap :: HadwigerNelson.Plane.awayModel.IsRingArc HadwigerNelson.Plane.awayP (1 / 5) (3 / 10) 7 0 [by HadwigerNelson.Plane.awayModel_isRingArc_gap]
+SITE GENERIC HadwigerNelson.Separated.not_colorable :: HadwigerNelson.Separated G (k + 1) p q
+SITE GENERIC HadwigerNelson.Plane.ArcMap.coneAt_subset_allowedCone :: F.Valid
+SITE GENERIC HadwigerNelson.Forces.symm :: HadwigerNelson.Forces G k p q
+SITE GENERIC HadwigerNelson.Forces.symm :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.AwayBend.next :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.AwayBend.next :: F.IsRingArc P a c₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_flip :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_flip :: F.Condition5
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_flip :: F.IsStuck w
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_flip :: F.IsHorn w α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.l60_eq_inner :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.l60_eq_inner :: F.IsRingArc P θ₁ (θ₁ + Real.pi / 3) c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.cvb_pinch_connected :: F.Valid
+SITE DECLARED HadwigerNelson.core9_plane :: (HadwigerNelson.unitDistance ℂ).Coloring (Fin 4) [by HadwigerNelson.isEmpty_coloring_plane_four]
+SITE GENERIC HadwigerNelson.Plane.ArcMap.dist_le_one_of_mem_region :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.isPreconnected_frontier_closure_fill :: F.Valid
+SITE GENERIC HadwigerNelson.extends_symCopy :: (SimpleGraph.induce (Set.range Sum.inl) (HadwigerNelson.symCopy G S)).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.grundyTaken :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.UDCert.add_one_le_chromaticNumber_plane_of_lift :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.open_tile_cover :: F.Valid
+SITE GENERIC HadwigerNelson.UDCert.residue_eq_of_forces_11 :: c.CoordsIn HadwigerNelson.Q4.sevenFree
+SITE GENERIC HadwigerNelson.UDCert.residue_eq_of_forces_11 :: HadwigerNelson.Forces (HadwigerNelson.edgeGraph n c.edges) 5 i j
+SITE WITNESSED HadwigerNelson.Plane.sevenBrickRegions :: HadwigerNelson.Plane.AeProperRegions 7 [by HadwigerNelson.Plane.sevenBrickRegions]
+SITE GENERIC HadwigerNelson.FieldWall4.residueColouring_eq_of_forces :: HadwigerNelson.Forces (SimpleGraph.induce S (HadwigerNelson.unitDistance ℂ)) 4 p q
+SITE GENERIC HadwigerNelson.Plane.CPColouring.law_ge_ball_ne_le :: HadwigerNelson.Plane.CPColouring k
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.sector_unique :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.filledGraph_planarLike :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_shadow_outer_of_mem :: F.SectorsAt v n d c
+SITE GENERIC HadwigerNelson.Forces.isEmpty_ringHom_of_spindle_radicand_of_not_isSquare_neg_one :: HadwigerNelson.Forces G k u v
+SITE GENERIC HadwigerNelson.Plane.sat_inP :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.coneAt_S_subset_of_flankBelow :: F.Valid
+SITE GENERIC HadwigerNelson.Forces.eq_of_forall_exists_not_periodic :: HadwigerNelson.Forces (SimpleGraph.addCayley S) k x y
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germR_vMinus :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.CPColouring.law_eq_translate :: HadwigerNelson.Plane.CPColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.coloursAt_openArc :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.UDCert.not_forces_of_distSq_ratio :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.UDCert.not_forces_of_distSq_ratio :: (HadwigerNelson.unitQuadrance R).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.UDCert.not_forces_of_distSq_ratio :: HadwigerNelson.Aperiodic ⇑col
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.mergeArcs_condition5 :: F.Condition5
+SITE GENERIC HadwigerNelson.spareColorings :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.spareColorings :: G.Coloring (Fin (k + 1))
+SITE GENERIC HadwigerNelson.Slack.forces_eq_of_hom :: HadwigerNelson.Forces G k u u'
+SITE GENERIC HadwigerNelson.Plane.CPColouring.lintegral_ball_ne :: HadwigerNelson.Plane.CPColouring k
+SITE GENERIC HadwigerNelson.Forces.of_gadget :: (HadwigerNelson.edgeGraph n E).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.semiHub_places :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.semiHub_places :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.AeColouring.finite_components_of_isolated :: HadwigerNelson.Plane.AeColouring k
+SITE WITNESSED HadwigerNelson.rhombus_forces_of_gadget :: (HadwigerNelson.edgeGraph 4 HadwigerNelson.rhombus).Coloring (Fin 3) [by HadwigerNelson.rhombus_colorable_three]
+SITE GENERIC HadwigerNelson.Forces.isEmpty_ringHom_of_spindle_radicand :: HadwigerNelson.Forces G k u v
+SITE GENERIC HadwigerNelson.Plane.grundyTaken.eq_2 :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.forces_eq_of_hom_finitePlane19 :: HadwigerNelson.Forces G 5 u u'
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.mem_closure_polarRegion_of_le :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.prob_le_max_ratio :: HadwigerNelson.StationaryRatio.StationarySet (G × H)
+SITE GENERIC HadwigerNelson.Forces.comap :: HadwigerNelson.Forces G k p q
+SITE GENERIC HadwigerNelson.Forces.comap :: H.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.normOneColoring :: Γ.Coloring G
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.merge_tile_split :: F.Valid
+SITE GENERIC HadwigerNelson.UDCert.drawing.eq_1 :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.Plane.ArcMap.CollarFit.map_degree_end :: F.Valid
+SITE GENERIC HadwigerNelson.Clashes :: (SimpleGraph.induce A G).Coloring (Fin (k + 1))
+SITE GENERIC HadwigerNelson.Clashes :: (SimpleGraph.induce Aᶜ G).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.measurable_corr :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.repaintAt_apply_of_ne :: P.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.subset_closure_of_subset_shadow :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.exists_polarGraph_of_isolated :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.unitPairsNull_grundyS :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringGerm_inward :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringGerm_inward :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringGerm_inward :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.AeColouring.exists_pos_not_iccPairNull :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.grundyTaken.eq_1 :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_sideCone_other :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_sideCone_other :: F.IsRingArc z θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.woodallCone_strict :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.woodallCone_strict :: F.Condition5
+SITE GENERIC HadwigerNelson.Plane.ArcMap.finite_ringD_off_ringArc :: F.Valid
+SITE WITNESSED HadwigerNelson.Plane.quadRing_isQArc :: HadwigerNelson.Plane.quadRing.IsQArc 0 0 (Real.pi / 2) [by HadwigerNelson.Plane.quadRing_isQArc]
+SITE GENERIC HadwigerNelson.Plane.ArcMap.l60_eq_corners :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.l60_eq_corners :: F.IsRingArc P θ₁ (θ₁ + Real.pi / 3) c c'
+SITE GENERIC HadwigerNelson.addCayleyColoring :: (SimpleGraph.addCayley D).Coloring (Fin k)
+SITE DECLARED HadwigerNelson.vacuous_of_plane_four_coloring :: (HadwigerNelson.unitDistance ℂ).Coloring (Fin 4) [by HadwigerNelson.isEmpty_coloring_plane_four]
+SITE GENERIC HadwigerNelson.kempeSwap :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.kempeSwap :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_swap_of_ring :: F.Valid
+SITE GENERIC HadwigerNelson.realizes_iff_extends.match_1_1 :: HadwigerNelson.Realizes G k S p
+SITE GENERIC HadwigerNelson.Plane.AeColouring.twoColourNhd_of_h1 :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.CollarFitOut.map_R2 :: F.IsRingArc Q a b d d'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.CollarFitOut.map_R2 :: hfit.map.IsRingArc Q a b d d'
+SITE GENERIC HadwigerNelson.UDCert.not_separated_sqrt3_11 :: c.CoordsIn HadwigerNelson.Q4.sevenFree
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.dir_le_nextDir :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.grundyCls :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.filledGraph_connected :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.n2_sign :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.n2_sign :: F.IsRingArc P θ₁ θ₂ c c'
+SITE WITNESSED HadwigerNelson.Plane.stuckModel_isHorn_pi :: HadwigerNelson.Plane.stuckModel.IsHorn HadwigerNelson.Plane.plantPt (0 + Real.pi) (-1) 1 9 [by HadwigerNelson.Plane.stuckModel_isHorn_pi]
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.ae_T_iff :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germPair_swap :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germPair_swap :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.finite_maxRingArcs :: F.Valid
+SITE GENERIC HadwigerNelson.criticalSet_subset_inter_neighborSet_of_forces :: HadwigerNelson.Forces G (k + 1) p q
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.exists_lower_of_pred :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.e_eq_or_of_two_horns :: F.IsHorn v α₀ κ₁' κ₂' c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.e_eq_or_of_two_horns :: F.IsHorn v (α₀ + Real.pi) κ₃ κ₄ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.e_eq_or_of_two_horns :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.inType_iff_of_agreesOn :: M.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.inType_iff_of_agreesOn :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.disc1ts_degree :: F.Valid
+SITE GENERIC HadwigerNelson.Chain.add_one_le_chromaticNumber_unitDistance_of_chain :: HadwigerNelson.Forces G k a b
+SITE GENERIC HadwigerNelson.forces_iff_eq_of_aperiodic :: (SimpleGraph.addCayley S).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.forces_iff_eq_of_aperiodic :: HadwigerNelson.Aperiodic ⇑col
+SITE GENERIC HadwigerNelson.Plane.ArcMap.sectorsAt_one_colour :: F.SectorsAt v n d c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germCol_change_rotate :: F.Valid
+SITE GENERIC HadwigerNelson.criticalSet_eq_empty_of_forces_of_two_lt_dist :: HadwigerNelson.Forces G (k + 1) u v
+SITE GENERIC HadwigerNelson.UDCert.point_mem_seamPlane :: c.CoordsIn HadwigerNelson.Q4.seamFree
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_shadows :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_shadows :: F.Condition5
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_shadows :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringCircle_noSwap :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.SectorsAt.mem_coneAt_of_mem_Icc :: F.SectorsAt v n d c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Valid.cone_re_nonpos_of_preconnected :: F.Valid
+SITE GENERIC HadwigerNelson.UDCert.point_mem_planeOver_of_sevenFree :: c.CoordsIn HadwigerNelson.Q4.sevenFree
+SITE GENERIC HadwigerNelson.Plane.ArcMap.outType_N_of_shadow :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.chainVertex_antipodal :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.chainVertex_antipodal :: F.IsStuck E
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germR_uMinus :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_boundaryWalk :: F.Valid
+SITE GENERIC HadwigerNelson.encard_criticalSet_le_two_of_forces :: HadwigerNelson.Forces G (k + 1) u v
+SITE GENERIC HadwigerNelson.Plane.AeColouring.isOpen_setOf_forall_notMem_essSupport :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.exists_openConfig_up :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.dist_ne_one :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.compels_two_ne.match_1_1 :: HadwigerNelson.Realizes G k S p
+SITE GENERIC HadwigerNelson.Plane.ArcMap.upper_bounds_of_inType_N :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.upper_bounds_of_inType_N :: F.IsStuck E
+SITE GENERIC HadwigerNelson.Plane.ArcMap.upper_bounds_of_inType_N :: F.IsHorn E α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.upper_bounds_of_inType_N :: F.IsHorn E (α + Real.pi) κ₃ κ₄ c
+SITE GENERIC HadwigerNelson.Plane.AeColouring.regJFan_of_saturated :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.two_le_n :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.SectorsAt.exists_parabola_region :: F.SectorsAt v n d c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_cone_inner :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_cone_inner :: F.IsRingArc z θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.not_antipodal_coneAt_S_of_horn :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.not_antipodal_coneAt_S_of_horn :: F.IsHorn v α (-1) κ₂ c
+SITE GENERIC HadwigerNelson.fan_univ_of_not_colorable_delete :: G.Coloring (Fin (k + 1))
+SITE GENERIC HadwigerNelson.isAdditive_additiveColoring :: HadwigerNelson.IsAdditive id ((Γ.recolorOfEquiv e) (HadwigerNelson.additiveColoring Γ φ h))
+SITE GENERIC HadwigerNelson.Plane.ArcMap.not_mem_closure_wholeRestrict_of_inner :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.threeSectorDisc_woodallMerged :: HadwigerNelson.Plane.ArcMap.threeSectorDisc.NiceAt v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.dist_le_one_of_touch :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.merge_inType_iff :: F.Valid
+SITE WITNESSED HadwigerNelson.Plane.ArcMap.halfDisc_simple :: HadwigerNelson.Plane.halfDisc.Simple [by HadwigerNelson.Plane.ArcMap.halfDisc_simple]
+SITE GENERIC HadwigerNelson.Plane.AeColouring.gamma :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.FieldWall4.residueColouring_ne_of_separated :: HadwigerNelson.Separated (SimpleGraph.induce S (HadwigerNelson.unitDistance ℂ)) 4 p q
+SITE GENERIC HadwigerNelson.Plane.AeColouring.finite_arcs_of_isBounded :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.not_regularAt_of_max :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.not_regularAt_of_max :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.SectorsAt.coloursAt_eq :: F.SectorsAt v n d c
+SITE GENERIC HadwigerNelson.CoverAtLeast.mono_edges :: HadwigerNelson.CoverAtLeast G k p Q m
+SITE GENERIC HadwigerNelson.CoverAtLeast.mono_edges :: G'.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.kempeSwap_apply_of_mem :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.bend_toward_collar :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.bend_toward_collar :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.outType_S_of_shadow :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horn_not_shadowed_near_N :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_uMinus :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_uMinus :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_uMinus :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.witness_near_S_upper :: F.Valid
+SITE GENERIC HadwigerNelson.Realizes.congr.match_1_1 :: HadwigerNelson.Realizes G k S p
+SITE GENERIC HadwigerNelson.not_fan_of_colorable_delete.match_1_1 :: G.Coloring (Fin (k + 1))
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.dist_eq_one_of_common_contact :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.IsPeriodic :: (SimpleGraph.addCayley S).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.radial_inner :: F.IsRingArc z θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_uPlus :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_uPlus :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringTile_uPlus :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.filledGraph_rings :: F.Valid
+SITE GENERIC HadwigerNelson.periodic_kempeSwap :: (SimpleGraph.addCayley S).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.hex_side :: F.Valid
+SITE GENERIC HadwigerNelson.zmodPow19_forces_eq :: HadwigerNelson.Forces (HadwigerNelson.unitQuadrance (ZMod (19 ^ m))) 5 u v
+SITE GENERIC HadwigerNelson.UDCert.coord_distSq :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.sector_side :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.CollarFit.map_inert :: F.Valid
+SITE GENERIC HadwigerNelson.IsAdditive :: Γ.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.UDCert.drawingHom :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.Plane.ArcMap.SectorsAt.exists_prev_dir :: F.SectorsAt v n d c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.r2_side_dichotomy :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.r2_side_dichotomy :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.AeProperRegions.IsRegion.dist_lt_one :: HadwigerNelson.Plane.AeProperRegions k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_cone_outer :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringArc_cone_outer :: F.IsRingArc z θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Valid.cos_nonpos_of_radial_outer :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horn_upper_ne_one :: F.IsHorn w β a b d
+SITE GENERIC HadwigerNelson.Extends.not_separated_of_colorable :: HadwigerNelson.Extends G A (k + 1)
+SITE GENERIC HadwigerNelson.UDCert.drawing_quad_of_distSq :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.Plane.ArcMap.paint_condition5 :: F.Condition5
+SITE GENERIC HadwigerNelson.Plane.ArcMap.cvb_thom_reduced :: F.Valid
+SITE GENERIC HadwigerNelson.forces_of_gadget :: (HadwigerNelson.edgeGraph n E).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.cv_class :: F.IsStuck E
+SITE GENERIC HadwigerNelson.Plane.ArcMap.cv_class :: F.IsHorn E α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.cv_class :: F.IsHorn E (α + Real.pi) κ₃ κ₄ c
+SITE GENERIC HadwigerNelson.Plane.AeColouring.isWeakColouringOn :: HadwigerNelson.Plane.AeColouring k
+SITE WITNESSED HadwigerNelson.Plane.sixFrag_isRingArc :: HadwigerNelson.Plane.sixFrag.IsRingArc 0 0 (Real.pi / 6) 0 2 [by HadwigerNelson.Plane.sixFrag_isRingArc]
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ts_t_degree_three :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.cls :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.not_forces_of_coloring_ne :: G.Coloring α
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_shave_of_flankBelow :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_shave_of_flankBelow :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_terminalSeq :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.open_inType_iff :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.CPColouring.isClosed_forcedSet :: HadwigerNelson.Plane.CPColouring k
+SITE GENERIC HadwigerNelson.isNClique_of_forces_of_card :: HadwigerNelson.Forces G k p q
+SITE GENERIC HadwigerNelson.Plane.ArcMap.l60_le :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.l60_le :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.heule510_forces_eq :: HadwigerNelson.Forces (HadwigerNelson.edgeGraph 510 HadwigerNelson.heule510.edges) 5 i j
+SITE GENERIC HadwigerNelson.Forces.isEmpty_ringHom_of_spindle_radicand_11 :: HadwigerNelson.Forces G 5 u v
+SITE GENERIC HadwigerNelson.Separated.planeIn :: HadwigerNelson.Separated G k u v
+SITE GENERIC HadwigerNelson.Separated.planeIn :: (HadwigerNelson.distanceGraph ℂ D).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.grundyS :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Separated.compels :: HadwigerNelson.Separated G k (S 0) (S 1)
+SITE GENERIC HadwigerNelson.Separated.compels :: HadwigerNelson.Compels G k S (Function.const (Fin 2) c)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.merge_isContact_iff :: F.Valid
+SITE WITNESSED HadwigerNelson.pathColoring3 :: (SimpleGraph.pathGraph 3).Coloring (Fin 3) [by HadwigerNelson.pathColoring3]
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_merge :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.contacts_of_no_common :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.UDCert.residue_adj_of_separated_11 :: c.CoordsIn HadwigerNelson.Q4.sevenFree
+SITE GENERIC HadwigerNelson.UDCert.residue_adj_of_separated_11 :: HadwigerNelson.Separated (HadwigerNelson.edgeGraph n c.edges) 5 i j
+SITE GENERIC HadwigerNelson.kempeClosed_empty :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel_T :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel_T :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel_T :: F.IsRingArc p (ψ + Real.pi / 3 - ℓ) (ψ + Real.pi / 3) a a'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel_T :: F.IsRingArc p (ψ - Real.pi / 3) (ψ - Real.pi / 3 + m) a' a
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germ_rotate_third :: F.Valid
+SITE GENERIC HadwigerNelson.transport_pair :: (HadwigerNelson.distanceGraph ℂ D).Coloring α
+SITE GENERIC HadwigerNelson.eq_gluePoint_or_reflAxis_of_mem_criticalSet_of_forces_in :: HadwigerNelson.Forces G (k + 1) u v
+SITE GENERIC HadwigerNelson.Plane.AeColouring.singularSet :: HadwigerNelson.Plane.AeColouring k
+SITE WITNESSED HadwigerNelson.twoAdicFive_forces_of_ker :: (HadwigerNelson.twoAdicPlane 5).Coloring (Fin 4) [by HadwigerNelson.twoAdicFiveColouring]
+SITE GENERIC HadwigerNelson.Plane.ArcMap.SectorsAt.collarAt_shadow_inner_of_mem :: F.SectorsAt v n d c
+SITE GENERIC HadwigerNelson.Plane.AeProperRegions.IsRegion.chain_step :: HadwigerNelson.Plane.AeProperRegions k
+SITE GENERIC HadwigerNelson.UDCert.not_colorable_unitQuadrance :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.Forces.map :: HadwigerNelson.Forces G k p q
+SITE GENERIC HadwigerNelson.Forces.map :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.tileOf_iff_of_agreesOn :: M.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.tileOf_iff_of_agreesOn :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.NonSiamese.tile_eq_of_dist_lt :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.NonSiamese.tile_eq_of_dist_lt :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.badCount_eq_zero_iff :: F.Valid
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.T_zero_apply :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.Separated.comap :: HadwigerNelson.Separated G k u v
+SITE GENERIC HadwigerNelson.Separated.comap :: H.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ArcBend.of_away :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.coneAt_S_subset_of_horn :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.coneAt_S_subset_of_horn :: F.IsHorn v α (-1) κ₂ c
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.sector_side_next :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.extends_of_repaint :: (SimpleGraph.induce A G).Coloring (Fin (k + 1))
+SITE GENERIC HadwigerNelson.Separated.ne_of_card :: HadwigerNelson.Separated G k p q
+SITE GENERIC HadwigerNelson.Separated.ne_of_card :: G.Coloring α
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.branch_subset_interfaceSet :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.AeColouring.RegJFan :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.AeColouring.local_graph :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Fan.narrow :: HadwigerNelson.Fan G k p (q :: Q)
+SITE GENERIC HadwigerNelson.Fan.narrow :: HadwigerNelson.Separated G k p q
+SITE GENERIC HadwigerNelson.Fan.narrow :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.mergeAvailable_of_bothKind :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.mergeAvailable_of_bothKind :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.UDCert.not_forces_five_thirds_11 :: c.CoordsIn HadwigerNelson.Q4.sevenFree
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_three_le_coloursAt_square :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horns_of_two_sectors_at :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horns_of_two_sectors_at :: F.IsStuck w
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.mk.sizeOf_spec :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.UDCert.not_forces_of_pairsAtRatio :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.UDCert.not_forces_of_pairsAtRatio :: (HadwigerNelson.unitQuadrance R).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.UDCert.not_forces_of_pairsAtRatio :: HadwigerNelson.Aperiodic ⇑col
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germOnQ_bar_vPlus :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.exists_ray_subset_cell :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.star_flank_interior :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_tip_zeroAngle :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_tip_zeroAngle :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.CollarFit.map_isR2Arc :: F.Valid
+SITE GENERIC HadwigerNelson.Fan.of_unsat :: (HadwigerNelson.edgeGraph n E).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_edge_exists :: F.Valid
+SITE GENERIC HadwigerNelson.UDCert.separated_iff_adj_of_fusable :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringCircleColouring :: F.Valid
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.pull :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.pull :: HadwigerNelson.StationaryRatio.StationarySet G'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_terminal :: F.Valid
+SITE GENERIC HadwigerNelson.compels_rainbow_of_neighbors :: HadwigerNelson.Compels G k T id
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsTip.coneAt_subset :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germIn_closure_tile_of_near :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germIn_closure_tile_of_near :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.CPColouring.exists_unif :: HadwigerNelson.Plane.CPColouring k
+SITE GENERIC HadwigerNelson.adjoin11_padicInt11_forces_eq :: HadwigerNelson.Forces (HadwigerNelson.unitQuadrance (HadwigerNelson.Adjoin 11 ℤ_[11])) 5 u v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.CollarFit.side_ne_inner_of_mem_lens :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.CollarFit.side_ne_inner_of_mem_lens :: F.IsRingArc Q a b d d'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.wedgeMerge_condition5 :: F.Condition5
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stripHolds_of_two_branches :: F.Valid
+SITE UNKNOWN HadwigerNelson.hexShell_plane6 :: (HadwigerNelson.unitDistance ℂ).Coloring (Fin 6)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Simple.coneAt_eq_angleIcc :: F.Simple
+SITE GENERIC HadwigerNelson.Plane.ArcMap.dense3 :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.not_antipodal_coneAt_N_of_horn :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.not_antipodal_coneAt_N_of_horn :: F.IsHorn v α κ₁ 1 c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.CollarFit.map_hasRepeatedColour :: F.Valid
+SITE GENERIC HadwigerNelson.Forces.isEmpty_ringHom_of_spindle_radicand_of_colorable :: HadwigerNelson.Forces G k u v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.star_flank :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_lensOut_clear :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_lensOut_clear :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_shave :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_shave :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsTile.not_mem_closure_of_not_subset_ball :: F.Valid
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.prob_le_ratio_level_add :: HadwigerNelson.StationaryRatio.StationarySet (X × Y)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.unitNear_iff_of_mem_closure_inter :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Tight :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.measure_le_majority_add :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_horns :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_horns :: F.Condition5
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_horns :: F.IsStuck v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsTile.dist_le_one_of_mem_closure :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_two_sectors_at_S :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_two_sectors_at_S :: F.IsStuck v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_two_sectors_at_S :: F.IsHorn v α (-1) κ₂ c
+SITE GENERIC HadwigerNelson.UDCert.drawing :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.Plane.ArcMap.sixQ_sides :: F.IsRingArc p θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.nextDir_le_dir_add_two_pi :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.one_le_muZero :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.restrictColoring :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.restrictColoring :: (SimpleGraph.induce A G).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.exists_isOpen_ae_two_colours :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.merge_allowedCone :: F.Valid
+SITE GENERIC HadwigerNelson.UDCert.not_forces_five_11 :: c.CoordsIn HadwigerNelson.Q4.sevenFree
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsHorn.eventually_subset_region :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.coverColors :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.measurableSet_grundyTaken :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.disjoint_ball_of_far_germ :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.disjoint_ball_of_far_germ :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_two_double_tiles :: F.Valid
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.nbhd :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_two_sectors_at_S_gen :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_two_sectors_at_S_gen :: F.IsStuck v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_two_sectors_at_S_gen :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_two_sectors_at_S_gen :: F.IsHorn v (α + Real.pi) κ₃ κ₄ c
+SITE GENERIC HadwigerNelson.Plane.AeColouring.closure_essBdry_subset :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.isPreconnected_cell :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Fan.mono :: HadwigerNelson.Fan G k p Q
+SITE GENERIC HadwigerNelson.Fan.mono :: G'.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.CPColouring.forcedSet_eq_zero :: HadwigerNelson.Plane.CPColouring k
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.exists_contact_dir :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.isPreconnected_polarRegion_of_le :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Separated.transport :: HadwigerNelson.Separated G k u v
+SITE GENERIC HadwigerNelson.Separated.transport :: (HadwigerNelson.distanceGraph V D).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germS_four :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germS_four :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.region_far_N_of_srcH :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.core_dist_ne_one :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.add_one_le_chromaticNumber_unitDistance_of_additivelyRigid :: HadwigerNelson.AdditivelyRigid q Γ k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.n3_end_bothKind :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.n3_end_bothKind :: F.IsStuck v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.n3_end_bothKind :: F.IsHorn v α (-1) κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germS_inward :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.germS_inward :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsTile.closure_subset_closedBall :: F.Valid
+SITE GENERIC HadwigerNelson.UDCert.coe_coord_snd :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.Plane.ArcMap.shaveAvailable_of_not_doublyShadowed :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.shaveAvailable_of_not_doublyShadowed :: F.Condition5
+SITE GENERIC HadwigerNelson.Plane.ArcMap.shaveAvailable_of_not_doublyShadowed :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.AeColouring.arcSetting_of_isolated :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ringCircle_val_germ :: F.Valid
+SITE GENERIC HadwigerNelson.transport_pair_of_isometry :: (HadwigerNelson.distanceGraph V D).Coloring α
+SITE GENERIC HadwigerNelson.Plane.ArcMap.witness_near_S_lower :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.disc1_local :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_isMaxRingArc :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_isMaxRingArc :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.NonSiamese.eq_of_unitNear :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsHorn.isRingArc_upper :: F.IsHorn v α κ₁ 1 c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.fill_subset_hole :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.CollarFitOut.awayBend :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.closure_sector_subset_of_side :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.not_outType_N_of_flankAbove_one :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsHorn.congr :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsHorn.congr :: F.IsHorn v α' κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Simple.simpleOn :: F.Simple
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_rayMerge_of_clear :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_rayMerge_of_clear :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_rayMerge_of_clear :: F.IsHorn v α κ₃ κ₄ c
+SITE GENERIC HadwigerNelson.add_one_le_chromaticNumber_unitDistance_of_forces :: HadwigerNelson.Forces G k u v
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.couple :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.couple :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.couple :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.Plane.ArcMap.bv_l3_dbl :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.RegJLiteral :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.filledGraph_locallyFinite :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.exists_mergeStep_aux :: F.Valid
+SITE GENERIC HadwigerNelson.kempeClosed_twoColour :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.not_periodic_quarterTurn :: (HadwigerNelson.finitePlane p).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.fail_colours :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flankQ_upper :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flankQ_upper :: F.IsHorn v α κ₁ 1 c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsSectorChart.lt_one_of_outType_S :: F.Condition5
+SITE GENERIC HadwigerNelson.Plane.ArcMap.mergeAvailable_iff_of_agreesOn :: M.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.mergeAvailable_iff_of_agreesOn :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_structure_flanks :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_structure_flanks :: F.Condition5
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_structure_flanks :: F.IsStuck v
+SITE GENERIC HadwigerNelson.Plane.CPColouring.exists_discrete_forcedSet :: HadwigerNelson.Plane.CPColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.two_le_of_isHorn_of_isHorn :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.two_le_of_isHorn_of_isHorn :: F.IsHorn v α' κ₃ κ₄ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.bend_away_subdiv :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.bend_away_subdiv :: F.IsRingArc P a b c c'
+SITE GENERIC HadwigerNelson.stressPairing_eq_zero_of_lift :: HadwigerNelson.IsStress π x₀ L
+SITE GENERIC HadwigerNelson.stressPairing_eq_zero_of_lift :: HadwigerNelson.IsLift π x₀ y L
+SITE GENERIC HadwigerNelson.Plane.ArcMap.region_far_of_outType :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.eq_or_eq_of_mem_essClosure :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_rayMerge :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_rayMerge :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_rayMerge :: F.IsHorn v α κ₃ κ₄ c
+SITE GENERIC HadwigerNelson.FieldWall4.seamColouring :: (SimpleGraph.induce S (HadwigerNelson.unitDistance ℂ)).Coloring (Fin 4)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.carries_absent :: F.Valid
+SITE GENERIC HadwigerNelson.UDCert.not_forces_of_distSq :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.UDCert.not_forces_of_distSq :: (HadwigerNelson.unitQuadrance R).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.UDCert.not_forces_of_distSq :: HadwigerNelson.Aperiodic ⇑col
+SITE GENERIC HadwigerNelson.Plane.ArcMap.touchW :: F.Valid
+SITE GENERIC HadwigerNelson.exists_mono_pair_of_not_colorable_two_distance :: (HadwigerNelson.unitDistance V).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Realizes.partialColoring :: HadwigerNelson.Realizes G k S p
+SITE GENERIC HadwigerNelson.Plane.ArcMap.not_outType_S_of_flankBelow_neg_one :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.grundyS.eq_1 :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.aeIndependent_iff :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.Fan.of_edges :: (HadwigerNelson.edgeGraph n E).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.merge_condition5 :: F.Condition5
+SITE GENERIC HadwigerNelson.UDCert.not_separated_five_thirds_11 :: c.CoordsIn HadwigerNelson.Q4.sevenFree
+SITE GENERIC HadwigerNelson.Plane.AeColouring.cls.eq_1 :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.StationaryRatio.StationarySet.nb :: HadwigerNelson.StationaryRatio.StationarySet G
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Near.exists_gap :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsTile.closure_subset_closedBall_zero :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.coneAt_N_subset_of_flankAbove :: F.Valid
+SITE WITNESSED HadwigerNelson.Plane.stuckModel_isStuck :: HadwigerNelson.Plane.stuckModel.IsStuck HadwigerNelson.Plane.plantPt [by HadwigerNelson.Plane.stuckModel_isStuck]
+SITE GENERIC HadwigerNelson.periods_le_periods_comap_translate :: (SimpleGraph.addCayley S).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_far_component :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Valid.dist_lt_or_gt_of_isPreconnected :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horn_flanks_of_isChainVertex :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horn_flanks_of_isChainVertex :: F.IsHorn w β a b d
+SITE GENERIC HadwigerNelson.Plane.AeColouring.volume_compl_iUnion_core :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.fusable_of_hom_to_base :: P.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.Valid.cone_re_nonpos_of_germ :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ArcBend.maxBad_other :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ArcBend.maxBad_other :: M.IsRingArc Q a b d d'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.hex_point :: F.Valid
+SITE GENERIC HadwigerNelson.Realizes.comap :: HadwigerNelson.Realizes G' k (⇑f ∘ S) p
+SITE GENERIC HadwigerNelson.Realizes.comap :: HadwigerNelson.Realizes G k S p
+SITE GENERIC HadwigerNelson.Plane.AeColouring.mem_densitySet_of_forall_notMem_essSupport :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ArcBend.isQArc_of :: F.IsQArc Q a b
+SITE GENERIC HadwigerNelson.Plane.ArcMap.ArcBend.isQArc_of :: M.IsQArc Q a b
+SITE GENERIC HadwigerNelson.separated_iff_adj_of_coincides :: (SimpleGraph.addCayley S).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.separated_iff_adj_of_coincides :: HadwigerNelson.CoincidesAtNonedges (SimpleGraph.addCayley S) ⇑col
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsHorn.isRingArc_lower :: F.IsHorn v α (-1) κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.shift :: F.IsRingArc P s t c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.shift :: F.IsRingArc P (s + 2 * Real.pi * ↑n) (t + 2 * Real.pi * ↑n) c c'
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.col_ne_aux :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.UDCert.chromaticNumber_le_of_drawing :: c.CoordsIn S
+SITE GENERIC HadwigerNelson.not_mem_criticalSet_of_forces :: HadwigerNelson.Forces G (k + 1) p q
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.ringArc_subset_closure :: F.IsRingArc p θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Forces.quad_sub_eq_zero :: (HadwigerNelson.unitQuadrance R).Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Forces.quad_sub_eq_zero :: HadwigerNelson.Aperiodic ⇑col
+SITE GENERIC HadwigerNelson.Forces.quad_sub_eq_zero :: HadwigerNelson.Forces G k u v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.unitNear_of_mem_closure :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.semiHub_edge :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.semiHub_edge :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.exists_twoColourNhd_branch :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horn_poles_contact :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.horn_poles_contact :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.col_not_mem_of_mem_shadow :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_step :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_step :: F.Condition5
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_step :: F.IsStuck w
+SITE GENERIC HadwigerNelson.Plane.ArcMap.stuck_step :: F.IsHorn w α κ₁ κ₂ c
+SITE WITNESSED HadwigerNelson.twoAdicFiveColouring :: (HadwigerNelson.twoAdicPlane 5).Coloring (Fin 4) [by HadwigerNelson.twoAdicFiveColouring]
+SITE GENERIC HadwigerNelson.Fan.comap :: HadwigerNelson.Fan G k p Q
+SITE GENERIC HadwigerNelson.Fan.comap :: H.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.wedgeMerge_crossing :: (F.wedgeMerge v hρ hd hd2 c).NiceAt w
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_shadow_g :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_shadow_g :: F.Condition5
+SITE GENERIC HadwigerNelson.criticalSet_eq_empty_of_forces_of_two_mul_lt_dist :: HadwigerNelson.Forces G (k + 1) u v
+SITE GENERIC HadwigerNelson.Plane.ArcMap.qfree4 :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_four :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_four :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.crossed_four :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.exists_succ_branch :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.grundyCls_isMaxIn :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.not_sole_outer_of_adjacent_changePoints :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.not_sole_outer_of_adjacent_changePoints :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.not_sole_outer_of_adjacent_changePoints :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.not_sole_outer_of_adjacent_changePoints :: F.IsChangePoint p (ψ + Real.pi / 3) Y Y'
+SITE GENERIC HadwigerNelson.Plane.AeColouring.volume_badAngles_null :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.shadow_recursion :: F.IsHorn w α a b d
+SITE GENERIC HadwigerNelson.Plane.ArcMap.shadow_recursion :: F.IsHorn (w + HadwigerNelson.Plane.e (α + Real.pi / 2)) α a' b' d'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.star_recip :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.star_recip :: F.IsChangePoint p ψ X X'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flank_siamese_of_inType :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_fin_tileAt :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_fin_tileAt :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.AeColouring.exists_arc_of_isolated :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.CollarFit.map_R2 :: F.IsRingArc Q a b d d'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.CollarFit.map_R2 :: hfit.map.IsRingArc Q a b d d'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.filledGraph_offTwo_connected :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.not_mem_coloursAt_of_dist_eq_one :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.AeColouring.Fan.exists_unitCurve_branch :: HadwigerNelson.Plane.AeColouring k
+SITE GENERIC HadwigerNelson.Plane.ArcMap.flankQ_upper_shadow :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.exists_rim_vertex :: F.Valid
+SITE GENERIC HadwigerNelson.spareColorings_eq_last_iff :: G.Coloring (Fin k)
+SITE GENERIC HadwigerNelson.Plane.ArcMap.maxRingArcs_subset_of_bend :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.maxRingArcs_subset_of_bend :: M.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.maxRingArcs_subset_of_bend :: F.IsRingArc P θ₁ θ₂ c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.union :: F.IsRingArc p a b c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.union :: F.IsRingArc p a' b' c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsRingArc.union :: F.IsRingArc p (min a a') (max b b') c c'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.LocalStep.exists_clean :: F'.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.IsHorn.exists_chart_index :: F.IsHorn v α κ₁ κ₂ c
+SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel :: F.Valid
+SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel :: F.NonSiamese
+SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel :: F.IsRingArc p (ψ + Real.pi / 3) (ψ + Real.pi / 3 + ℓ) a a'
+SITE GENERIC HadwigerNelson.Plane.ArcMap.fullSemiHub_star_parallel :: F.IsRingArc p (ψ - Real.pi / 3 - m) (ψ - Real.pi / 3) a' a
+=== SCANNED === declarations=20633 refutations-skipped=236
+=== TOTALS === sites=1517 vacuous=22 stale=1 declared=3 witnessed=39 generic=1430 unknown=22 untelescoped=0

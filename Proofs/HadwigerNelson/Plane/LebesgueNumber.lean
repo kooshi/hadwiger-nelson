@@ -1,4 +1,4 @@
-import Proofs.HadwigerNelson.Outside.OAI158
+import Proofs.HadwigerNelson.Outside.OAI158Collapse
 import Proofs.HadwigerNelson.Plane.FalconerReduction
 import Proofs.HadwigerNelson.Plane.WeakColouringOn
 import Proofs.HadwigerNelson.Plane.DensityPoints
@@ -8,8 +8,8 @@ import Mathlib.Combinatorics.Compactness
 # The chromatic number of the plane is its Lebesgue-measurable chromatic number (FS-131, claims NF3)
 
 **Whose mathematics this is.** None of it is this project's beyond the composing. The module formalizes a printed
-lemma, joins it to a density-point step this library already held, and composes the result with a declared outside
-theorem:
+lemma, joins it to a density-point step this library already held, and composes the result with an outside theorem
+whose proof is ported:
 
 * **`[Davies2026]` Lemma B.1, p. 44** (J. Davies, *Measurable obstructions for unmeasurable colourings*,
   arXiv:2610.12301v1; the paper says of the lemma "We suspect that this is a folklore result, but have not found it in
@@ -25,8 +25,9 @@ theorem:
   points of a support on a compact group), which `[Davies2026]` p. 46 follows in `ℝ^d`; this library holds it as
   `Plane.AeColouring.dist_ne_one` (FS111-V0-ID1), and a second time as the ported
   `Outside.OAI158.weak_density_proper` (`[OAIMath2026]`). Used here in `Plane.AeColouring.core_dist_ne_one`.
-* **The declared outside theorem** `Outside.OAI158.proper_to_borel_weak` (`[OAIMath2026]` family 158): a proper
-  `k`-colouring of the plane gives a Borel one proper at almost every unit pair. Only the last section rests on it.
+* **The release's transfer** `Outside.OAI158.proper_to_borel_weak` (`[OAIMath2026]` family 158, its proof ported and
+  checked by this kernel, `Outside/OAI158BorelTransfer`): a proper `k`-colouring of the plane gives a Borel one proper
+  at almost every unit pair. Only the last section uses it.
 
 **The statements.** `Plane.chiLebesgue` is the **Lebesgue**-measurable chromatic number of the plane — the paper's
 `χ^(m)(ℝ²)` (its p. 2: "Requiring the colour classes to be Lebesgue measurable gives the measurable chromatic number"),
@@ -35,8 +36,8 @@ Falconer's number: the least `k` with a colouring `ℂ → Fin k` whose classes 
 
 * `Plane.chiM0_eq_chiLebesgue` — `χ_m⁰(ℝ²) = χ_m(ℝ²)`: the almost-everywhere number equals the Lebesgue-measurable
   number. On the standard three axioms; no outside theorem.
-* `Plane.chromaticNumber_plane_eq_chiLebesgue` — `χ(ℝ²) = χ_m(ℝ²)`. On the standard three axioms and the one declared
-  outside theorem `Outside.OAI158.proper_to_borel_weak`.
+* `Plane.chromaticNumber_plane_eq_chiLebesgue` — `χ(ℝ²) = χ_m(ℝ²)`. On the standard three axioms, through the ported
+  `Outside.OAI158.proper_to_borel_weak`.
 
 **What is not said.** Nothing about Borel colourings: `Plane.chiM` (`Plane/FalconerReduction`) asks a **Borel** map
 proper at every unit pair — row 130's `χ_B` — and all that is proved about it here is `chiLebesgue ≤ chiM`. The lemma's
@@ -47,7 +48,7 @@ step is not.
 
 **Read aloud.** Take any way of colouring the points of the plane with `k` colours such that no two points one unit
 apart share a colour. Then there is such a colouring, with the same number of colours, each of whose colour classes is
-a Lebesgue-measurable set — given the outside theorem; and, with no outside theorem, a Lebesgue-measurable colouring that
+a Lebesgue-measurable set — by the release's transfer; and, with no outside theorem, a Lebesgue-measurable colouring that
 breaks the rule only on a null set of pairs can be corrected on a null set of points to one that never breaks it.
 -/
 
@@ -421,7 +422,7 @@ theorem AeColouring.col_eq_of_mem_core (a : AeColouring k) {j : Fin k} {x : ℂ}
 (claim NF3-WEAK-TO-PROPER; `[Davies2026]` Lemma B.1 with the density-point step, composed). Inhabitant of the
 hypothesis: `r7_aeColouring` (seven colours); none exists with five colours given the declared outside theorem
 `Outside.OAI158.no_proper_five_coloring` (`Outside.OAI158.six_le_chiM0`), and whether one exists with six is the
-Hadwiger–Nelson problem given that theorem and `Outside.OAI158.proper_to_borel_weak`
+Hadwiger–Nelson problem given that theorem, by the ported `Outside.OAI158.proper_to_borel_weak`
 (`Outside.OAI158.colorable_iff_nonempty_aeColouring`). The theorem itself is on the standard three axioms. -/
 theorem exists_proper_of_aeColouring (a : AeColouring k) :
     ∃ f : ℂ → Fin k, NullMeasurable f volume ∧ f =ᵐ[volume] a.col ∧ ∀ x y, dist x y = 1 → f x ≠ f y := by
@@ -535,21 +536,21 @@ pair. `[Davies2026]` Lemma B.1 (formalized above) with the density-point step th
 reader's (`plans/FS131-ER1-davies-reading.md` § M). On the standard three axioms: no outside theorem. -/
 theorem chiM0_eq_chiLebesgue : chiM0 = chiLebesgue := le_antisymm chiM0_le_chiLebesgue chiLebesgue_le_chiM0
 
-/-! ## On the declared outside theorem `Outside.OAI158.proper_to_borel_weak` -/
+/-! ## Through the release's transfer `Outside.OAI158.proper_to_borel_weak` (ported) -/
 
-/-- **Colour by colour, on the outside theorem**: the plane has a `k`-colouring proper at every unit pair exactly when
+/-- **Colour by colour, through the release's transfer**: the plane has a `k`-colouring proper at every unit pair exactly when
 it has a Lebesgue-measurable one. From a proper colouring: `Outside.OAI158.proper_to_borel_weak` (`[OAIMath2026]`), then
-`exists_proper_of_aeColouring` (`[Davies2026]` Lemma B.1). Rests on the standard three axioms and that one declared
-outside theorem. Both sides hold at `k = 7` and, given `Outside.OAI158.no_proper_five_coloring`, fail at `k = 5`. -/
+`exists_proper_of_aeColouring` (`[Davies2026]` Lemma B.1). Rests on the standard three axioms (the transfer's proof is
+ported). Both sides hold at `k = 7` and, given `Outside.OAI158.no_proper_five_coloring`, fail at `k = 5`. -/
 theorem colorable_iff_exists_nullMeasurable_proper :
     (unitDistance ℂ).Colorable k ↔ ∃ f : ℂ → Fin k, NullMeasurable f volume ∧ ∀ x y, dist x y = 1 → f x ≠ f y :=
   Outside.OAI158.colorable_iff_nonempty_aeColouring.trans nonempty_aeColouring_iff_exists_nullMeasurable_proper
 
 /-- **`χ(ℝ²) = χ_m(ℝ²)`: the chromatic number of the plane is its Lebesgue-measurable chromatic number** (claim
 NF3-PLANE). A composition of two outside results, neither of which states it as far as each was read:
-`Outside.OAI158.chromaticNumber_plane_eq_chiM0` — `[OAIMath2026]`'s transfer, a declared outside theorem — and
-`chiM0_eq_chiLebesgue` — `[Davies2026]` Lemma B.1, formalized in this module. Rests on the standard three axioms and the
-one declared outside theorem `Outside.OAI158.proper_to_borel_weak`. It says nothing of Borel colourings and gives no
+`Outside.OAI158.chromaticNumber_plane_eq_chiM0` — `[OAIMath2026]`'s transfer, its proof ported — and
+`chiM0_eq_chiLebesgue` — `[Davies2026]` Lemma B.1, formalized in this module. Rests on the standard three axioms,
+through the ported `Outside.OAI158.proper_to_borel_weak`. It says nothing of Borel colourings and gives no
 value. -/
 theorem chromaticNumber_plane_eq_chiLebesgue : (unitDistance ℂ).chromaticNumber = chiLebesgue :=
   Outside.OAI158.chromaticNumber_plane_eq_chiM0.trans chiM0_eq_chiLebesgue

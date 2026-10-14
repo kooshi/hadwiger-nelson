@@ -1,0 +1,39 @@
+Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw: DIFFERENT 2, IDENTICAL 8
+  DIFFERENT       theorem  HadwigerNelson.OneClass.exists_foelner_finset
+      only before: Module Rat
+      only after:  —
+  DIFFERENT       theorem  HadwigerNelson.OneClass.exists_turnInvariant
+Proofs.HadwigerNelson.Plane.OneClass.SectionDensity: DIFFERENT 2, IDENTICAL 7
+  DIFFERENT       theorem  HadwigerNelson.Plane.sectionDensity_empty
+  DIFFERENT       theorem  HadwigerNelson.Plane.sectionDensity_univ
+constants of the first dump: 19  DIFFERENT 4  IDENTICAL 15  new in the second: 24
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.abs_sum_add_sub_sum_le
+  NEW def _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.avgMeasure
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.avgMeasure_apply
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.avgMeasure_map
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.card_le_indepNum_induce
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.continuous_shiftLab
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.continuous_turnLab
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.exists_almost_invariant
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.exists_common_fixed
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.exists_fixed_of_average
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.exists_indep_subset
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.integral_avgMeasure
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.isClopen_setOf_origin_eq
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.isClosed_setOf_of_tendsto
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.isProbabilityMeasure_avgMeasure
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.kCoeff_ne_zero'
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.map_eq_of_tendsto
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.map_eq_of_tendsto_of_eventually
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.measure_compl_eq_zero_of_tendsto
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.ncard_setOf_mem_and_add_notMem
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.tendsto_measure_of_isClopen
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.SectionDensity.0.HadwigerNelson.Plane.measurable_windowRatio
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.SectionDensity.0.HadwigerNelson.Plane.measure_inter_section
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.SectionDensity.0.HadwigerNelson.Plane.windowRatio_le_one
+ruled: 4
+  RULED-DROP      HadwigerNelson.OneClass.exists_foelner_finset: binder 2 dropped — instance `inst` : (((((c Module [0,(p u_1)]) (c Rat [])) #1) (c Rat.semiring [])) (((c AddCommGroup.toAddCommMonoid [(p u_1)]) #1) #0))
+  RULED-DROP      HadwigerNelson.OneClass.exists_turnInvariant: binder 8 dropped — explicit `hshift` : (pi.d z (((c Subtype [(S 0)]) (c Complex [])) (lam.d x (c Complex []) ((((((c Membership.mem [0,0]) (c Complex [])) ((((((c IntermediateField [0,0]) (…
+  RULED-DROP      HadwigerNelson.Plane.sectionDensity_empty: binder 3 dropped — instance `inst` : ((c MeasurableSpace [(p u_2)]) #1)
+  RULED-DROP      HadwigerNelson.Plane.sectionDensity_univ: binder 3 dropped — instance `inst` : ((c MeasurableSpace [(p u_2)]) #1)
+MOVED OK: the ruled statements are each one unread binder dropped; nothing else moved outside instance and proof arguments

@@ -1,0 +1,90 @@
+## MODULE Proofs.HadwigerNelson.Arith.ThreeColourCriterion constants=44
+@@ THM HadwigerNelson.ThreeColourCriterion.exists_normOne_zero_of_card_ne_nine
+TYPE 2423088848 sha256=ff01e0a1f070e91f135fab71259192f38f2bcded28fa4b88b014567371ebd03e len=12237 forall {k : Type} [inst._@.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.1119181560._hygCtx._hyg.3 : Field.{0} k] [inst._@.Proofs.HadwigerNelson.Arith.ThreeC
+@@ THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.finite_quotient_span_prime INTERNAL
+TYPE 2956324083 sha256=5dc441c5ba93dbe8925946a903bfbf605d6a4fc1c6094d890f99c562a5220cf2 len=10106 forall (F : Subfield.{0} Real Real.instDivisionRing) [inst._@.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.292219281._hygCtx._hyg.10 : NumberField.{0} (Subt
+@@ THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.forall_unit_eq_one_or_forall_unit_ne_zero INTERNAL
+TYPE 606909450 sha256=ffd6149e60d40d957c58267f9ca28c4c99b0e4d8dd1abb777e720fb9cc056805 len=590115 forall {F : Subfield.{0} Real Real.instDivisionRing} {I₂ : Ideal.{0} (Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0} Compl
+@@ THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.conjR_mem_unitSet INTERNAL
+TYPE 3461633058 sha256=b6d5a26813140400ac22291038b3d1abac8fa1593012a5572aaac4bcd992e20a len=16643 forall {F : Subfield.{0} Real Real.instDivisionRing} {u : Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0} Complex (NonAssoc
+@@ THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.exists_quotient_hom INTERNAL
+TYPE 169695395 sha256=de87269273f3000fbb1ae5bbaab363b4179c45c236251892363da6bf8d199e97 len=29145 forall {R : Type.{u_1}} [inst._@.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.2573954218._hygCtx._hyg.7 : CommRing.{u_1} R] (p : Nat) (m : AddMonoidHom.{u_1
+@@ THM HadwigerNelson.ThreeColourCriterion.exists_maximal_of_torsion
+TYPE 2132668392 sha256=555532f890286051a02d2729d3a315226c49f4de5717a3476ce6baf1a587b35b len=115537 forall (F : Subfield.{0} Real Real.instDivisionRing) [inst._@.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.1090627074._hygCtx._hyg.10 : NumberField.{0} (Sub
+@@ THM HadwigerNelson.ThreeColourCriterion.finite_quotient_span_natCast
+TYPE 1979570787 sha256=38f89528254894b43ce4c14a3b0c0c10e2a236290fddfdd1edb6e2bede3b04de len=10142 forall (F : Subfield.{0} Real Real.instDivisionRing) [inst._@.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.1823768554._hygCtx._hyg.10 : NumberField.{0} (Sub
+@@ THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.quotientMap_involutive INTERNAL
+TYPE 3322541408 sha256=0c40c3bc1eb00e2f45bc7b85fc6dbf315d4e628b217f4a3c6b69ae559bd7bb85 len=19814 forall {A : Type.{u_1}} [inst._@.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.3905940964._hygCtx._hyg.3 : CommRing.{u_1} A] (c : RingHom.{u_1, u_1} A A (Sem
+@@ THM HadwigerNelson.ThreeColourCriterion.conjR_conjR
+TYPE 1012677841 sha256=9a554274085439dc97106a781683542630f54d071c98242223b4b7c8a8da58a0 len=26182 forall {F : Subfield.{0} Real Real.instDivisionRing} (x : Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0} Complex (NonAssoc
+@@ THM HadwigerNelson.ThreeColourCriterion.conjR._proof_2 INTERNAL
+TYPE 3885814394 sha256=879ce900cc87fccf7c513da478f3b2ec53dc05bedf10fcafc0933cf00e1702fe len=448 SubsemiringClass.{0, 0} (Subring.{0} Complex (NonAssocCommRing.toNonAssocRing.{0} Complex (CommRing.toNonAssocCommRing.{0} Complex Complex.commRing))) Complex (
+@@ THM HadwigerNelson.ThreeColourCriterion.conjR._proof_3 INTERNAL
+TYPE 1761406156 sha256=e8cb97b34911323763fec1318094a61ffe2db1ef493eec477457c22b94690cd0 len=6765 forall (F : Subfield.{0} Real Real.instDivisionRing) (x : Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0} Complex (NonAssoc
+@@ THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.exists_maximal_conj_trivial_of_quotient INTERNAL
+TYPE 2260283763 sha256=3e340bacff9179b1ee53cd93322ca5a5a776590df118554f720604be494a41e8 len=243325 forall {F : Subfield.{0} Real Real.instDivisionRing} {I : Ideal.{0} (Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0} Comple
+@@ DEF HadwigerNelson.ThreeColourCriterion.conjR
+TYPE 454768064 sha256=4bc5797088e2aa948010fbcb2d92fadeeb01737c1d7b265ffc892de196345f84 len=5400 forall (F : Subfield.{0} Real Real.instDivisionRing), RingHom.{0, 0} (Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0} Compl
+VALUE 2553684469 sha256=8cf8e3d50277fe9a480e34fb79375de706a29feef04ca42449aa9b7c36e54688 len=4411 fun (F : Subfield.{0} Real Real.instDivisionRing) => RingHom.codRestrict.{0, 0, 0} (Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Sub
+@@ THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.one_mem_unitSet INTERNAL
+TYPE 1747570221 sha256=94c00106de16077c67ee7ed91c26a7d326ad91c8e1717486e47c49f1d5de72be len=4659 forall {F : Subfield.{0} Real Real.instDivisionRing}, Membership.mem.{0, 0} (Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0
+@@ THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.two_part_eq_one_iff_three_part_eq_zero._proof_1_1 INTERNAL
+TYPE 3123271629 sha256=35de5ea1b12d940d63f07d304ab4f28404367fa18396e9b6e0108bcef5e9f206 len=351 forall (n : Int), (LE.le.{0} Int Int.instLEInt (OfNat.ofNat.{0} Int 2 (instOfNat 2)) n) -> (LE.le.{0} Int Int.instLEInt n (OfNat.ofNat.{0} Int 4 (instOfNat 4)))
+@@ THM HadwigerNelson.ThreeColourCriterion.exists_unitSet_mul_conjR_eq
+TYPE 1611022902 sha256=b416ca2cf0153a4868a35475302838891db8bfbce234bfb8188f8b971e409a68 len=24991 forall {F : Subfield.{0} Real Real.instDivisionRing} {a : Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0} Complex (NonAssoc
+@@ THM HadwigerNelson.ThreeColourCriterion.comap_conjR_eq
+TYPE 523228987 sha256=c091af97c2941949535c30727a9df4644de4a74a0e06d930623dea12cba6ee30 len=24558 forall {F : Subfield.{0} Real Real.instDivisionRing} (I : Ideal.{0} (Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0} Comple
+@@ THM HadwigerNelson.ThreeColourCriterion.exists_maximal_conj_trivial
+TYPE 696888180 sha256=ee7cc0f99c26ae725ce23a560f39321c70236ccef46466bfdf77adf6859db358 len=11512 forall {A : Type} [inst._@.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.4143211598._hygCtx._hyg.3 : CommRing.{0} A] [inst._@.Proofs.HadwigerNelson.Arith.Thr
+@@ THM HadwigerNelson.ThreeColourCriterion.targetFloor_four_weil
+TYPE 660920704 sha256=d9c9b7c5f071d59d4f8dd769088d15d8cb1ac58b5c0130a60cb2693629bb66d0 len=341 forall {Q : Nat}, (Eq.{1} Nat (HMod.hMod.{0, 0, 0} Nat Nat Nat (instHMod.{0} Nat Nat.instMod) Q (OfNat.ofNat.{0} Nat 4 (instOfNatNat 4))) (OfNat.ofNat.{0} Nat 3
+@@ THM HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine
+TYPE 4234752620 sha256=27df98a6dcb09345030faaa8ccd14d472de7e0a4e87f9336e04d05d300afd9b8 len=13722 forall {A : Type} [inst._@.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.922726703._hygCtx._hyg.3 : CommRing.{0} A] [inst._@.Proofs.HadwigerNelson.Arith.Thre
+@@ THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.two_part_eq_one_iff_three_part_eq_zero._proof_1_2 INTERNAL
+TYPE 1715625200 sha256=8f0ded9a3f20e0d30b5dfdf13b86c194df79ec00d2613584650ce0ad7b3958c2 len=476 forall (n : Int), (LE.le.{0} Int Int.instLEInt (OfNat.ofNat.{0} Int 2 (instOfNat 2)) n) -> (LE.le.{0} Int Int.instLEInt n (OfNat.ofNat.{0} Int 4 (instOfNat 4)))
+@@ THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.two_part_eq_one_iff_three_part_eq_zero INTERNAL
+TYPE 2582607948 sha256=bb5687f4dc3c8b42cc028e2fc64ecaec12281b1edf7fb1792c1c59409284895e len=42775 forall {M : Type.{u_1}} [inst._@.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.2938001394._hygCtx._hyg.7 : AddCommGroup.{u_1} M] {τ : AddMonoidHom.{u_1, 0} M
+@@ THM HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine_of_colorable_three
+TYPE 3884594125 sha256=d505e4c6cdab0a7aaa8545d7205a8d520f9201ed5dc6075762560cb37bb547dc len=10774 forall (F : Subfield.{0} Real Real.instDivisionRing) [inst._@.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.2124043054._hygCtx._hyg.10 : NumberField.{0} (Sub
+@@ THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.comap_quotientMap_conjR INTERNAL
+TYPE 309287009 sha256=d6af6fff2de91d6f76c9c93dcac8acd9e1e5f13d92945a9ccb17aef341ff7918 len=105273 forall {F : Subfield.{0} Real Real.instDivisionRing} (I : Ideal.{0} (Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0} Comple
+@@ THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.half_ne_zero INTERNAL
+TYPE 1333350359 sha256=70a1904784b558b56ccd9b6c72875599ffb8a2b1afcb51ac66bdb4b4782d3cb1 len=4129 Ne.{1} (HasQuotient.Quotient.{0, 0} Real (AddSubgroup.{0} Real (AddCommGroup.toAddGroup.{0} Real Real.instAddCommGroup)) (QuotientAddGroup.instHasQuotientAddSub
+@@ THM HadwigerNelson.ThreeColourCriterion.coe_conjR
+TYPE 3677297423 sha256=7e503bbeb391219b71895b96a5bbd58ed59e54f0209bfb927ae7b988b4fa8688 len=14936 forall {F : Subfield.{0} Real Real.instDivisionRing} (x : Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0} Complex (NonAssoc
+@@ THM HadwigerNelson.ThreeColourCriterion.eq_zero_of_forall_normOne_eq
+TYPE 2190818873 sha256=611d8c47edfdb2b9731e32ac47d4bd2316c96bd0a4e8b088983cb0c6017ae800 len=8492 forall {k : Type.{u_1}} [inst._@.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.2732294008._hygCtx._hyg.3 : Field.{u_1} k] [inst._@.Proofs.HadwigerNelson.Arit
+@@ THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.exists_factor_functionals INTERNAL
+TYPE 3863966949 sha256=97e4c91de009217d7d7e8a574fc2ef514ac73fe01bb80bc6eb0bb5b33f90fc18 len=42553 forall {A : Type} [inst._@.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.512734312._hygCtx._hyg.3 : CommRing.{0} A] [inst._@.Proofs.HadwigerNelson.Arith.Thre
+@@ THM HadwigerNelson.ThreeColourCriterion.conj_mem_unitRing
+TYPE 437354640 sha256=a67cc3bd5cf71dce9e3a7c9939d50c374977ba8fb4156d010aec8d80fc6b21cd len=1779 forall {F : Subfield.{0} Real Real.instDivisionRing} {x : Complex}, (Membership.mem.{0, 0} Complex (Subring.{0} Complex (NonAssocCommRing.toNonAssocRing.{0} Com
+@@ THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.mk_eq_unit_mul_conj_inv INTERNAL
+TYPE 684652974 sha256=0b36035c8d517330cbfc5d8d3c315b56080f8cbbaf3627da03aa6ca467ebc2c0 len=222901 forall {F : Subfield.{0} Real Real.instDivisionRing} {I : Ideal.{0} (Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0} Comple
+@@ THM HadwigerNelson.ThreeColourCriterion.exists_maximal_conj_trivial_of_colorable_two
+TYPE 4108071516 sha256=6e9438152f0d2b631a7f3c272bcad41af46f81fe366f1518575d85e63093884f len=35212 forall (F : Subfield.{0} Real Real.instDivisionRing), (SimpleGraph.Colorable.{0} (Set.Elem.{0} Complex (HadwigerNelson.planeOver F)) (SimpleGraph.induce.{0} Com
+@@ THM HadwigerNelson.ThreeColourCriterion.eq_zero_of_forall_normOne_eq._proof_1_1 INTERNAL
+TYPE 588850691 sha256=6912974cb78bdaf2f3fa4d9f68b2c3d7744b412113bcf018d4a607944c09dc9d len=1549 forall {k : Type.{u_1}} [inst._@.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.2732294008._hygCtx._hyg.3 : Field.{u_1} k], (RingHom.{u_1, u_1} k k (Semiring.
+@@ THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.half_ne_zero._proof_1_1 INTERNAL
+TYPE 2560648388 sha256=94db59fe720b916eaad9d6cc6be49e610774111d552b2949509c6467d306ba49 len=211 forall (n : Int), (Eq.{1} Int (HMul.hMul.{0, 0, 0} Int Int Int (instHMul.{0} Int Int.instMul) (OfNat.ofNat.{0} Int 2 (instOfNat 2)) n) (OfNat.ofNat.{0} Int 1 (i
+@@ THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.card_quotient_comap_mk INTERNAL
+TYPE 1623398484 sha256=425808b3c2b2ae1a6ec2b1741af8c90cba036d0bdfb776c834c55938429b34bb len=7836 forall {R : Type.{u_1}} [inst._@.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.3469067261._hygCtx._hyg.7 : CommRing.{u_1} R] (I : Ideal.{u_1} R (CommSemiring
+@@ THM HadwigerNelson.ThreeColourCriterion.conjR._proof_1 INTERNAL
+TYPE 4134808985 sha256=f31fe21ceeaa09c996e3fb57677ee781c089bdcbccc1c20b76c926924a252f6e len=398 SubringClass.{0, 0} (Subring.{0} Complex (NonAssocCommRing.toNonAssocRing.{0} Complex (CommRing.toNonAssocCommRing.{0} Complex Complex.commRing))) Complex (NonA
+@@ THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.neg_one_mem_unitSet INTERNAL
+TYPE 3089456054 sha256=eca938c578ca3c239f44a0bb8b4dea35a69f105e0bd4f1037a640e5b6eb37edb len=6141 forall {F : Subfield.{0} Real Real.instDivisionRing}, Membership.mem.{0, 0} (Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0
+@@ THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.unitRing_induction INTERNAL
+TYPE 788132981 sha256=58230b9858ffd2e2905b691059b8ad4e620c77959932d3e575698f385a361cd2 len=12535 forall {F : Subfield.{0} Real Real.instDivisionRing} {P : (Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0} Complex (NonAsso
+@@ THM HadwigerNelson.ThreeColourCriterion.exists_mul_conj_inv_eq_of_mul_conj_eq_one
+TYPE 2985355979 sha256=742e9ac938c94a475141da76c9f2335e6af1facfc594341162a5469bd238f3d8 len=8178 forall {k : Type.{u_1}} [inst._@.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.2277961908._hygCtx._hyg.3 : Field.{u_1} k] (σ : RingHom.{u_1, u_1} k k (Semiri
+@@ THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.charP_quotient_of_isMaximal INTERNAL
+TYPE 325616868 sha256=69f9b54b9787cc5ad2078109abe20a49f2e2819bb4cbf6231171bba3017d095c len=2072 forall {A : Type.{u_1}} [inst._@.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.1122441136._hygCtx._hyg.3 : CommRing.{u_1} A] (p : Nat) [hp : Fact (Nat.Prime 
+@@ THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.mul_conjR_of_mem_unitSet INTERNAL
+TYPE 2691407249 sha256=70aa8043fcbac6102140f38b73348dfd0a771dfdc02754e4765feb37dc809d27 len=23217 forall {F : Subfield.{0} Real Real.instDivisionRing} {u : Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0} Complex (NonAssoc
+@@ THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.mul_mem_unitSet INTERNAL
+TYPE 2110404495 sha256=8515602cad3c2fcfef22eb754085604a5f884ec63a3612e2b708f0f224f0ad65 len=11387 forall {F : Subfield.{0} Real Real.instDivisionRing} {u : Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0} Complex (NonAssoc
+@@ THM HadwigerNelson.ThreeColourCriterion.fieldBandSet_two_nonempty_of_conj_trivial
+TYPE 1092398046 sha256=1fd431596456c18ea62f286859721ff49851c0c17425f1b9c4735ddbd14e95ec len=37394 forall {F : Subfield.{0} Real Real.instDivisionRing} {𝔪 : Ideal.{0} (Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0} Comple
+@@ THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine_of_quotient INTERNAL
+TYPE 174341106 sha256=796422405deb60529319a2ec16a1f8cb2b5ef4a1a39e18fd482f7f1864081d73 len=218204 forall {F : Subfield.{0} Real Real.instDivisionRing} {I : Ideal.{0} (Subtype.{1} Complex (fun (x : Complex) => Membership.mem.{0, 0} Complex (Subring.{0} Comple
+@@ THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.toAddCircle_one_two INTERNAL
+TYPE 3804752722 sha256=f35ea6b475518f0bd572614ab2768c79dd716c3347f91eba2f1107b9cfaccbd0 len=4421 Eq.{1} UnitAddCircle (DFunLike.coe.{1, 1, 1} (AddMonoidHom.{0, 0} (ZMod (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2))) UnitAddCircle (AddZeroClass.toAddZero.{0} (ZMo

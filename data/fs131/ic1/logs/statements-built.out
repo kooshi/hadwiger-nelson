@@ -1,0 +1,10 @@
+compared: 9 named constants of the first dump (9 theorems, 0 definitions; types, and values of definitions); 9 declarations written at 34d9113b2, each found in the first dump
+internal (not compared): 0 before, 11 after
+hygienic binder names replaced by ✝ in the two prints: 452
+new named constants in the second dump: 0
+new private declarations in the second dump (counted among the internal): 2
+  NEW PRIVATE THM HadwigerNelson.ThreeColourCharacter.exists_mem_box_of_forall_int
+  NEW PRIVATE THM HadwigerNelson.ThreeColourCharacter.winding_le_vertex
+`example`s: 2 at 34d9113b2, 2 in Proofs/HadwigerNelson/Arith/ThreeColourCharacter.lean; of the base's, missing as text: 0
+constants of the second dump under no declaration of this file (generated on demand for another module's definition): 0
+PASS: no statement and no definition changed

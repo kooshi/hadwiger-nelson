@@ -1,0 +1,6 @@
+DIFFERS Proofs/HadwigerNelson/Outside/OAI158Collapse.lean: 1534 characters of code at c7122cf10, 1534 now; comment characters 5635 -> 5770 (whitespace counted with them)
+DIFFERS Proofs/HadwigerNelson/Outside/OAI158.lean: 7312 characters of code at c7122cf10, 7312 now; comment characters 9827 -> 10062 (whitespace counted with them)
+DIFFERS Proofs/HadwigerNelson/Plane/RadiusOutside.lean: 3329 characters of code at c7122cf10, 3329 now; comment characters 6181 -> 6415 (whitespace counted with them)
+DIFFERS Proofs/HadwigerNelson/Plane/LebesgueNumber.lean: 19754 characters of code at c7122cf10, 19754 now; comment characters 15940 -> 16000 (whitespace counted with them)
+plant: OK
+exit=0

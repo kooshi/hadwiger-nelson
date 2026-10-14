@@ -1,0 +1,8 @@
+  Arith.ThreeColourCharacter: 11 named constants in the first dump, 11 in the second
+  Arith.TorsionExtraction: 20 named constants in the first dump, 20 in the second
+  Arith.ThreeColourCriterion: 17 named constants in the first dump, 17 in the second
+  Arith.DyadicQuadratic: 13 named constants in the first dump, 13 in the second
+  Arith.ThreeFourColours: 31 named constants in the first dump, 31 in the second
+  Instances.UpperHalfCorollaries: 4 named constants in the first dump, 4 in the second
+statements: PASS: no statement and no definition changed — 96 named constants compared in 6 module(s)
+exit=0

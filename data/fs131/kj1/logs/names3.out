@@ -1,0 +1,25 @@
+@Ideal.span_singleton_pow : ∀ {R : Type u_1} [inst : Semiring R] (s : R) [(Ideal.span {s}).IsTwoSided] (n : ℕ),
+  Ideal.span {s} ^ n = Ideal.span {s ^ n}
+@Ideal.span_singleton_mul_right_unit : ∀ {α : Type u_1} [inst : CommSemiring α] {a : α},
+  IsUnit a → ∀ (x : α), Ideal.span {x * a} = Ideal.span {x}
+@Submodule.cardQuot_apply : ∀ {R : Type u_1} {M : Type u_2} [inst : Ring R] [inst_1 : AddCommGroup M]
+  [inst_2 : Module R M] (S : Submodule R M), S.cardQuot = Nat.card (M ⧸ S)
+@Ideal.span_singleton_le_iff_mem : ∀ {α : Type u_1} [inst : Semiring α] (I : Ideal α) {x : α},
+  Ideal.span {x} ≤ I ↔ x ∈ I
+@Nat.pow_dvd_pow_iff : ∀ {a b n : ℕ}, n ≠ 0 → (a ^ n ∣ b ^ n ↔ a ∣ b)
+@FiniteField.pow_card_sub_one_eq_one : ∀ {K : Type u_1} [inst : GroupWithZero K] [inst_1 : Fintype K] (a : K),
+  a ≠ 0 → a ^ (Fintype.card K - 1) = 1
+@IntermediateField.adjoin.finiteDimensional : ∀ {K : Type u_1} [inst : Field K] {L : Type u_2} [inst_1 : Field L]
+  [inst_2 : Algebra K L] {x : L}, IsIntegral K x → FiniteDimensional K ↥K⟮x⟯
+HadwigerNelson.StandingFive.finrank_closure : ∀ (S : Set ℝ) [FiniteDimensional ℚ ↥(IntermediateField.adjoin ℚ S)],
+  Module.finrank ℚ ↥(Subfield.closure S) = Module.finrank ℚ ↥(IntermediateField.adjoin ℚ S)
+@HadwigerNelson.StandingFive.finrank_simple_le : ∀ {x : ℝ} {p : ℤ[X]},
+  p.Monic → (aeval x) p = 0 → Module.finrank ℚ ↥ℚ⟮x⟯ ≤ p.natDegree
+@natDegree_X_pow_sub_C : ∀ {R : Type u_1} [inst : Ring R] [Nontrivial R] {n : ℕ} {r : R}, (X ^ n - C r).natDegree = n
+@monic_X_pow_sub_C : ∀ {R : Type u_1} [inst : Ring R] (a : R) {n : ℕ}, n ≠ 0 → (X ^ n - C a).Monic
+@Exists.fst : ∀ {b : Prop} {p : b → Prop}, Exists p → b
+@LinearMap.finrank_le_finrank_of_surjective : ∀ {R : Type u_1} {M : Type u_2} [inst : Semiring R]
+  [inst_1 : AddCommMonoid M] [inst_2 : Module R M] [StrongRankCondition R] {M' : Type u_3} [inst_4 : AddCommMonoid M']
+  [inst_5 : Module R M'] [Module.Finite R M] {f : M →ₗ[R] M'},
+  Function.Surjective ⇑f → Module.finrank R M' ≤ Module.finrank R M
+@Finite.one_lt_card : ∀ {α : Type u_1} [Finite α] [h : Nontrivial α], 1 < Nat.card α

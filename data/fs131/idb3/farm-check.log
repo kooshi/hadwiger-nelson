@@ -1,0 +1,5 @@
+slot: admitted idb3f: mem 4 GiB (hard cap), cpus 0,1
+TIME 0.79 s  RSS 518380 KB
+slot: admitted idb3f: mem 5 GiB (hard cap), cpus 0,1
+TIME 78.08 s  RSS 3156000 KB
+exit=0

@@ -1,0 +1,14 @@
+Proofs.HadwigerNelson.Outside.OAI158Rigidity: IDENTICAL 10
+Proofs.HadwigerNelson.Plane.OneClass.SectionDensity: IDENTICAL 9
+Proofs.HadwigerNelson.Plane.OneClass.Defs: IDENTICAL 48, PROOF-FILLED 1
+  PROOF-FILLED           def      HadwigerNelson.OneClass.algPlaneEmbedding
+      only before: Bool.false DFunLike.coe Function.Embedding Function.instFunLikeEmbedding Iff Lean.Name Lean.Name.anonymous Lean.Name.num Lean.Name.str Nat OfNat.ofNat instOfNatNat sorryAx
+      only after:  HadwigerNelson.OneClass.algPlaneEmbedding._proof_2
+Proofs.HadwigerNelson.Plane.OneClass.Field: IDENTICAL 1
+Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw: IDENTICAL 9, MOVED-IDENTICAL 1
+  MOVED-IDENTICAL        theorem  HadwigerNelson.OneClass.countable_algPlane -> Proofs.HadwigerNelson.Plane.OneClass.Defs
+Proofs.HadwigerNelson.Plane.OneClass.Algebraic: IDENTICAL 9
+Proofs.HadwigerNelson.Plane.OneClass.Fractional: IDENTICAL 7
+Proofs.HadwigerNelson.Plane.OneClass.Pair: IDENTICAL 19
+constants of the first dump: 114  IDENTICAL 112  MOVED-IDENTICAL 1  PROOF-FILLED 1  new in the second: 0
+MOVED OK: every listed change is as listed; nothing else moved

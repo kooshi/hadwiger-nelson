@@ -1,0 +1,3 @@
+slot: admitted ipb1: mem 8 GiB (hard cap), cpus 4,5
+NOTCLEAN PlantSorry ipb1PlantedSorry #[sorryAx]
+SUMMARY constants=414 clean=413 other=1

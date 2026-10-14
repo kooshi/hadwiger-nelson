@@ -1,0 +1,9 @@
+IDENTICAL        §.Spectral.E
+IDENTICAL        §.Spectral.K
+IDENTICAL        §.Spectral.DiscreteE
+UP-TO-INSTANCES  §.Spectral.instCommGroupDiscreteE: only there ['§.Spectral.instCommGroupDiscreteE._aux_3', '§.Spectral.instCommGroupDiscreteE._proof_5']; only here ['Semigroup.mk', '§.Spectral.instCommGroupDiscreteE._aux_4', '§.Spectral.instCommGroupDiscreteE._proof_3']
+IDENTICAL        §.Spectral.kCoeff
+UP-TO-INSTANCES  §.Spectral.residual_fourier: only there ['CommSemiring.toSemiring', 'Complex.instCommSemiring', 'Semifield.toCommSemiring', 'SubsemiringClass.toCommSemiring']; only here ['DivisionSemiring.toSemiring', 'Semifield.toDivisionSemiring']
+IDENTICAL        §.ContinuousVectors.op
+IDENTICAL        §.ContinuousVectors.space
+declarations: 8  different: 0

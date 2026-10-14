@@ -1,0 +1,61 @@
+@layer_step : ∀ {a b a' b' : ℝ},
+  |a| ≤ 1 / 6 →
+    |b| ≤ 1 / 6 →
+      |a'| ≤ 1 / 6 →
+        |b'| ≤ 1 / 6 →
+          (∃ n, 2 * a' - b' - 2 * a - b = ↑n) →
+            (∃ n, a' + 2 * b' + a - 2 * b = ↑n) →
+              a' = (3 * a + 4 * b) / 5 ∧ b' = (-4 * a + 3 * b) / 5 ∨
+                |a| = 1 / 6 ∧ |b| = 1 / 6 ∧ |a'| = 1 / 6 ∧ |b'| = 1 / 6
+@layer_dichotomy : ∀ {a b : ℤ → ℝ},
+  (∀ (m : ℤ), |a m| ≤ 1 / 6) →
+    (∀ (m : ℤ), |b m| ≤ 1 / 6) →
+      (∀ (m : ℤ), ∃ n, 2 * a (m + 1) - b (m + 1) - 2 * a m - b m = ↑n) →
+        (∀ (m : ℤ), ∃ n, a (m + 1) + 2 * b (m + 1) + a m - 2 * b m = ↑n) →
+          (∀ (m : ℤ), a (m + 1) = (3 * a m + 4 * b m) / 5 ∧ b (m + 1) = (-4 * a m + 3 * b m) / 5) ∨
+            ∀ (m : ℤ), |a m| = 1 / 6 ∧ |b m| = 1 / 6
+@tendsto_layer : ∀ {F : Subfield ℝ} {θ : ↥(unitRing F) →+ UnitAddCircle},
+  θ ∈ fieldBandSet F (band 3) →
+    ∀ {b : ↥(unitRing F)},
+      b ∈ unitSet F →
+        ∃ t,
+          (t = ↑(1 / 2) ∨ t = ↑(1 / 3) ∨ t = ↑(2 / 3)) ∧
+            Filter.Tendsto (fun n => θ (inv5 F ^ (2 * n) * b)) Filter.atTop (nhds t)
+exists_torsion_mem_fieldBandSet : ∀ (F : Subfield ℝ),
+  (fieldBandSet F (band 3)).Nonempty → ∃ τ ∈ fieldBandSet F (band 3), τ ∈ torsionBy (↥(unitRing F)) 6
+@exists_zmod_hom_of_mem_torsionBy : ∀ {M : Type u_1} [inst : AddCommGroup M] {N : ℕ} [inst_1 : NeZero N]
+  {θ : M →+ UnitAddCircle}, θ ∈ torsionBy M N → ∃ l, ∀ (x : M), θ x = ZMod.toAddCircle (l x)
+colorable_two_iff_fieldBandSet_two_nonempty : ∀ (F : Subfield ℝ),
+  (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).Colorable 2 ↔ (fieldBandSet F (band 2)).Nonempty
+@mem_fieldBandSet_two_of_inv_three_mem : ∀ {F : Subfield ℝ},
+  3⁻¹ ∈ unitRing F →
+    ∀ {τ : ↥(unitRing F) →+ UnitAddCircle},
+      τ ∈ fieldBandSet F (band 3) → τ ∈ torsionBy (↥(unitRing F)) 6 → τ ∈ fieldBandSet F (band 2)
+@inv_natCast_mem_unitRing_of_sqrt_mem : ∀ {F : Subfield ℝ} {d n : ℕ}, d + 1 = 4 * n → √↑d ∈ F → (↑n)⁻¹ ∈ unitRing F
+@inv_three_mem_unitRing_of_sqrt_mem : ∀ {F : Subfield ℝ} {d : ℕ}, d % 12 = 11 → √↑d ∈ F → 3⁻¹ ∈ unitRing F
+@not_colorable_two_of_sqrt_mem : ∀ {F : Subfield ℝ} {d : ℕ},
+  d % 4 = 3 → √↑d ∈ F → ¬(SimpleGraph.induce (planeOver F) (unitDistance ℂ)).Colorable 2
+@ZMod.toAddCircle : {N : ℕ} → [NeZero N] → ZMod N →+ UnitAddCircle
+ZMod.toAddCircle_injective : ∀ (N : ℕ) [inst : NeZero N], Function.Injective ⇑ZMod.toAddCircle
+@ZMod.toAddCircle_intCast : ∀ {N : ℕ} [inst : NeZero N] (j : ℤ), ZMod.toAddCircle ↑j = ↑(↑j / ↑N)
+@ZMod.toAddCircle_natCast : ∀ {N : ℕ} [inst : NeZero N] (j : ℕ), ZMod.toAddCircle ↑j = ↑(↑j / ↑N)
+@colorable_of_residue : ∀ {V : Type u_1} {M : Type u_2} {G : Type u_3} [inst : AddCommGroup M] [inst_1 : AddCommGroup G]
+  {A : AddSubgroup M} [inst_2 : Fintype G] (Γ : SimpleGraph V) (f : V → M) (ψ : ↥A →+ G),
+  (∀ ⦃v w : V⦄, Γ.Adj v w → f v - f w ∈ A) →
+    (∀ ⦃v w : V⦄, Γ.Adj v w → cosetResidue ψ (f v - f w) ≠ 0) → Γ.Colorable (Fintype.card G)
+@cosetResidue_apply_of_mem : ∀ {M : Type u_1} {G : Type u_2} [inst : AddCommGroup M] [inst_1 : AddCommGroup G]
+  {A : AddSubgroup M} (ψ : ↥A →+ G) {x : M} (h : x ∈ A), cosetResidue ψ x = ψ ⟨x, h⟩
+@UnitRing.exists_sum_eq_of_mem_unitRingOver : ∀ {F : Subfield ℝ} {x : ℂ},
+  x ∈ UnitRing.unitRingOver F → ∃ m u, (∀ (j : Fin m), ‖u j‖ = 1) ∧ (∀ (j : Fin m), u j ∈ planeOver F) ∧ ∑ j, u j = x
+@UnitRing.unit_mem_unitRingOver : ∀ {F : Subfield ℝ} {z : ℂ}, z ∈ planeOver F → ‖z‖ = 1 → z ∈ UnitRing.unitRingOver F
+UnitRing.unitRingOver_le_planeOverSubring : ∀ (F : Subfield ℝ), UnitRing.unitRingOver F ≤ Chain.planeOverSubring F
+@AddCircle.coe_eq_zero_iff : ∀ {𝕜 : Type u_1} [inst : AddCommGroup 𝕜] (p : 𝕜) {x : 𝕜}, ↑x = 0 ↔ ∃ n, n • p = x
+@AddCircle.coe_nsmul : ∀ {𝕜 : Type u_1} [inst : AddCommGroup 𝕜] (p : 𝕜) {n : ℕ} {x : 𝕜}, ↑(n • x) = n • ↑x
+@AddCircle.continuous_mk' : ∀ {𝕜 : Type u_1} [inst : AddCommGroup 𝕜] (p : 𝕜) [inst_1 : TopologicalSpace 𝕜],
+  Continuous ⇑(QuotientAddGroup.mk' (AddSubgroup.zmultiples p))
+ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable : ∀ (F : Subfield ℝ),
+  (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).Colorable 3 → (fieldBandSet F (band 3)).Nonempty
+planeOver : Subfield ℝ → Set ℂ
+UnitRing.planeOverSubfield : Subfield ℝ → Subfield ℂ
+data/fs131/it1/probes/Checks.lean:28:8: error(lean.unknownIdentifier): Unknown identifier `UnitRing.planeOverSubring`
+data/fs131/it1/probes/Checks.lean:29:8: error(lean.unknownIdentifier): Unknown identifier `norm_eq_one_of_sq`

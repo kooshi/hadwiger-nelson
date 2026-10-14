@@ -1,0 +1,13 @@
+unplanted: PASS (as it must)
+plant 'a constant changed in a target (MeasureTheory.Lp, in positive_orthogonal)': REFUSED (1 failing, 0 fatal; e.g. §.positive_orthogonal)
+plant 'an undeclared constant inside an instance argument (AddCommGroup.toAddGroup, in positive_orthogonal, full print only)': REFUSED (0 failing, 1 fatal; constants differing inside instance/proof arguments that the record does not hold: ["AddCommGroup.toAddGroup'")
+plant 'a constant of the release's own inside an instance argument (for AddCommGroup.toAddCommMonoid, in projection_range)': REFUSED (1 failing, 0 fatal; e.g. §.ContinuousVectors.projection_range)
+plant 'RENAMED without Set.ofPred': REFUSED (1 failing, 0 fatal; e.g. §.Spectral.circle_closed_induction)
+plant 'RENAMED pointing Set.ofPred at Set.image': REFUSED (1 failing, 0 fatal; e.g. §.Spectral.circle_closed_induction)
+plant 'a numeral changed in a definition's value (clamp)': REFUSED (1 failing, 0 fatal; e.g. §.ContinuousVectors.clamp)
+plant 'a binder kind changed (circle_closed_induction)': REFUSED (1 failing, 0 fatal; e.g. §.Spectral.circle_closed_induction)
+plant 'a target missing from this pin's print': REFUSED (0 failing, 1 fatal; §.ContinuousVectors.projection_coefficient: not in a print)
+plant 'a target turned into an axiom': REFUSED (1 failing, 0 fatal; e.g. §.ContinuousVectors.projection_coefficient)
+plant 'a truncated print': REFUSED (0 failing, 31 fatal; a print is incomplete: DONE 67 at the release, None here, 67 cone constants)
+plant 'the record lists a constant that does not differ': REFUSED (0 failing, 1 fatal; recorded instance constants that no longer differ (the record is stale): ['NoSuch.constant'])
+SELF-TEST OK: 11 plants refused, the unplanted pair passes

@@ -1,0 +1,8 @@
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 6,7
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:718:4: error: No goals to be solved
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:794:0: error: cannot omit referenced section variable `inst✝¹`
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:819:0: error: cannot omit referenced section variable `inst✝¹`
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:832:10: error: Invalid field notation: Function `quotient_center` does not have a usable parameter of type `Embedding ...` for which to substitute `e`
+
+Note: Such a parameter must be explicit, or implicit with a unique name, to be used by field notation
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:836:0: error: cannot omit referenced section variable `inst✝¹`

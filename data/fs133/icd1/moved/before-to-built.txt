@@ -1,0 +1,21 @@
+Proofs.HadwigerNelson.Plane.OneClass.Defs: IDENTICAL 54, MADE-PUBLIC-IDENTICAL 3
+  MADE-PUBLIC-IDENTICAL  theorem  _private.Proofs.HadwigerNelson.Plane.OneClass.Defs.0.SimpleGraph.card_le_indepNum_induce
+  MADE-PUBLIC-IDENTICAL  theorem  _private.Proofs.HadwigerNelson.Plane.OneClass.Defs.0.SimpleGraph.exists_indep_card_eq_indepNum
+  MADE-PUBLIC-IDENTICAL  theorem  _private.Proofs.HadwigerNelson.Plane.OneClass.Defs.0.HadwigerNelson.Plane.upperDensity_congr_ae
+Proofs.HadwigerNelson.Plane.OneClass.Algebraic: IDENTICAL 9
+Proofs.HadwigerNelson.Plane.OneClass.Fractional: IDENTICAL 7
+Proofs.HadwigerNelson.Plane.OneClass.Pair: IDENTICAL 19
+constants of the first dump: 92  IDENTICAL 89  MADE-PUBLIC-IDENTICAL 3  new in the second: 12
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Algebraic.0.HadwigerNelson.OneClass.upperDensity_le_of_forall_ball @ Proofs.HadwigerNelson.Plane.OneClass.Algebraic
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Fractional.0.HadwigerNelson.OneClass.add_mem_periodize_iff @ Proofs.HadwigerNelson.Plane.OneClass.Fractional
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Fractional.0.HadwigerNelson.OneClass.card_sub_mem @ Proofs.HadwigerNelson.Plane.OneClass.Fractional
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Fractional.0.HadwigerNelson.OneClass.floor_latPt_im @ Proofs.HadwigerNelson.Plane.OneClass.Fractional
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Fractional.0.HadwigerNelson.OneClass.floor_latPt_re @ Proofs.HadwigerNelson.Plane.OneClass.Fractional
+  NEW def _private.Proofs.HadwigerNelson.Plane.OneClass.Fractional.0.HadwigerNelson.OneClass.latPt @ Proofs.HadwigerNelson.Plane.OneClass.Fractional
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Fractional.0.HadwigerNelson.OneClass.latPt_im @ Proofs.HadwigerNelson.Plane.OneClass.Fractional
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Fractional.0.HadwigerNelson.OneClass.latPt_re @ Proofs.HadwigerNelson.Plane.OneClass.Fractional
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Fractional.0.HadwigerNelson.OneClass.mem_iff_of_floor_eq @ Proofs.HadwigerNelson.Plane.OneClass.Fractional
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Fractional.0.HadwigerNelson.OneClass.mem_periodize_iff_corner @ Proofs.HadwigerNelson.Plane.OneClass.Fractional
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Fractional.0.HadwigerNelson.OneClass.sub_mem_iff @ Proofs.HadwigerNelson.Plane.OneClass.Fractional
+  NEW theorem _private.Proofs.HadwigerNelson.Plane.OneClass.Fractional.0.HadwigerNelson.OneClass.volume_le_card_corners @ Proofs.HadwigerNelson.Plane.OneClass.Fractional
+MOVED OK: every listed change is as listed; nothing else moved

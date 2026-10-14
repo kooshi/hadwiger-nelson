@@ -1,0 +1,23 @@
+import Proofs.HadwigerNelson.Arith.ThreeFourColours
+open HadwigerNelson HadwigerNelson.SpectralChain HadwigerNelson.UpperHalf
+#check @Ideal.image_subset_nonunits_valuationSubring
+#check @ValuationSubring.mem_nonunits_iff_exists_mem_maximalIdeal
+#check @RingHom.ker_isMaximal_of_surjective
+#check @IsLocalRing.eq_maximalIdeal
+#check @UnitRing.normOne_subset_iff_stable
+#check @UnitRing.coe_mem_unitRingOver_iff
+#check @UnitRing.mem_normOne_conjOn_iff
+#check @ValuationSubring.mem_nonunits_iff_or
+#check @Ideal.Quotient.field
+#check @Ideal.comap_ne_top
+#check @HadwigerNelson.normOne_subset_valuationSubring
+#check @HadwigerNelson.StandingFive.card_normOne
+#check @HadwigerNelson.StandingFive.card_fixed_of_involution
+#check @HadwigerNelson.StandingFive.involution_eq_pow
+#check @HadwigerNelson.ThreeColourCriterion.exists_mul_conj_inv_eq_of_mul_conj_eq_one
+#check @HadwigerNelson.UpperHalf.exists_I_integer
+#check @Subring.closure_induction
+#check @RingHom.codRestrict
+#check @HadwigerNelson.UpperHalf.exists_centre
+#check @Ideal.IsMaximal.eq_of_le
+#check @HadwigerNelson.CharacterColouring.unitSet

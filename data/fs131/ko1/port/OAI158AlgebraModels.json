@@ -1,0 +1,10 @@
+{
+ "patches": [
+  [
+   183,
+   "Measure.fst_map_prodMk hq measurable_id",
+   "Measure.fst_map_prodMk measurable_id",
+   "at v4.34.1 `Measure.fst_map_prodMk` takes `hX : Measurable X` and `hY : Measurable Y`; at v4.32.0 it takes `hY` only, with the same conclusion (`Mathlib/MeasureTheory/Measure/Prod.lean:1133` here, `:1159` there): the first argument (`hq`, the measurability of `X = q`) is dropped"
+  ]
+ ]
+}

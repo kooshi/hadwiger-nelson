@@ -1,0 +1,48 @@
+counter vs the main scan: declarations 16125 / 16125, refutations 228 / 228: agree
+counter vs the landing scan: declarations 17785 / 17785, refutations 232 / 232: agree
+main rows 1535, landing rows 1535; lost 0 (0 with a removed declaration); added 0
+  declarations: 16125 -> 17785 (+1660)
+  refutations-skipped: 228 -> 232 (+4)
+  sites: 1454 -> 1454 (+0)
+  vacuous: 0 -> 0 (+0)
+  stale: 0 -> 0 (+0)
+  declared: 3 -> 3 (+0)
+  witnessed: 38 -> 38 (+0)
+  generic: 1411 -> 1411 (+0)
+  unknown: 2 -> 2 (+0)
+  module Outside.OAI158: declarations 38 -> 31 (-7), refutations 0 -> 0 (+0)  [changed]
+  module Outside.OAI158AlgebraModels: declarations 0 -> 52 (+52), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158Amenability: declarations 0 -> 67 (+67), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158Approximation: declarations 0 -> 16 (+16), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158Basic: declarations 0 -> 114 (+114), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158BorelTransfer: declarations 0 -> 59 (+59), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158BoundedFunctions: declarations 0 -> 57 (+57), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158Centers: declarations 0 -> 116 (+116), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158Characters: declarations 0 -> 46 (+46), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158Collapse: declarations 0 -> 6 (+6), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158ConditionalLimits: declarations 0 -> 24 (+24), refutations 0 -> 1 (+1)  [new module]
+  module Outside.OAI158ConditionalSelection: declarations 0 -> 19 (+19), refutations 0 -> 1 (+1)  [new module]
+  module Outside.OAI158ConditionalSpectrum: declarations 0 -> 38 (+38), refutations 0 -> 2 (+2)  [new module]
+  module Outside.OAI158Energy: declarations 0 -> 59 (+59), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158Ergodicity: declarations 0 -> 65 (+65), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158Factors: declarations 0 -> 95 (+95), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158FourierTests: declarations 0 -> 18 (+18), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158Functions: declarations 0 -> 32 (+32), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158InvariantMean: declarations 0 -> 159 (+159), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158Kernels: declarations 0 -> 41 (+41), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158Multipliers: declarations 0 -> 34 (+34), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158NumberFields: declarations 0 -> 50 (+50), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158PhaseCollision: declarations 0 -> 26 (+26), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158PhaseEncoding: declarations 0 -> 32 (+32), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158RadialEnergy: declarations 0 -> 38 (+38), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158RelativeCenters: declarations 0 -> 44 (+44), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158RelativeProducts: declarations 0 -> 75 (+75), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158Representations: declarations 0 -> 91 (+91), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158Selections: declarations 0 -> 25 (+25), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158Separability: declarations 0 -> 61 (+61), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158SmallArcs: declarations 0 -> 20 (+20), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158SpectralMeasure: declarations 0 -> 62 (+62), refutations 0 -> 0 (+0)  [new module]
+  module Outside.OAI158Stationary: declarations 0 -> 26 (+26), refutations 0 -> 0 (+0)  [new module]
+  by module: declarations +1660, refutations +4: equal to the scans difference
+vacdiff: PASS
+exit=0

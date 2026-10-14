@@ -1,0 +1,23 @@
+'HadwigerNelson.ThreeColourCharacter.exists_int_vector_of_forall_neg' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.ThreeColour.Winding.exists_box_point' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.ThreeColourCharacter.exists_character_of_box_point' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.ThreeColourCharacter.exists_character_of_properAlong' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.ThreeColourCharacter.isClosed_band' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.ThreeColourCharacter.bandSet_nonempty_of_finite' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.ThreeColourCharacter.bandSet_three_nonempty_of_proper' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.ThreeColourCharacter.exists_character_one_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
