@@ -849,6 +849,7 @@ def declared : Array Entry := #[
   .condition ``HadwigerNelson.Arith.NoAffFieldHyp "the field hypotheses of NOAFF-FIELDS at k: a condition on the field F and on k",
   .condition ``HadwigerNelson.ExtensionOrder "a greedy extension order of a graph: an inductive predicate of the theorem's vertex list, built by its constructors",
   .condition ``HadwigerNelson.IsLift "a first-order lift of a framework: a predicate of the theorem's deformation, taken only to be refuted or transported",
+  .condition ``HadwigerNelson.OneClass.IsShiftInvariantLaw "a translation-invariant random independent set of a graph on the algebraic plane (FS-133): a predicate of the theorem's law P; exhibited by the projection of an invariant law, (isInvariantLaw_dirac G).toIsShiftInvariantLaw, which no declaration concludes as stated",
   .condition ``HadwigerNelson.Outside.OAI158.RealState "the release's state of a set of angles ([OAIMath2026] States.lean:92): the set is measurable and lies, up to a null set, in the lifted palette of every label of J — a predicate of the theorem's centre, set of angles and labels; built in the proof of SixRing.no_alternating_groups from a measurable two-valued map on the circle (FS132-L2)",
   .condition ``HadwigerNelson.Plane.AeProperRegions.IsRegion "a region (a colour and a connected component of its class): a predicate of the theorem's pair",
   .condition ``HadwigerNelson.Plane.Arc.IsUnitArc "a boundary arc of radius 1: a predicate of the theorem's arc, decided by a computation on written-down data",

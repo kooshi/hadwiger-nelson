@@ -205,7 +205,7 @@ theorem residual_fourier_model :
           change kCoeff (k * k⁻¹) = 1
           rw [mul_inv_cancel]; rfl
         rwa [← mul_assoc, hk, one_mul] at h'
-      simp [hx, hne]
+      simp [hx]
   · -- not zero
     intro h
     have h' := congrArg (fun f : lp (fun _ : E => ℂ) 2 => f 0) h

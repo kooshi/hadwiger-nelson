@@ -10,8 +10,12 @@ expected edits made explicit, so that an unlisted code change fails and a listed
                           from `ofReal_integral_le_measure_pos`
            Rigidity       the recipe's step 4: an import of `Outside/OAI158Ergodicity` added; the six copied
                           definitions (the `deriving` clause with them) and the `axiom residual_fourier` deleted —
-                          checked as: the code from `theorem residual_fourier_cross` to the end is the same, and
-                          the code before it is the base's with exactly those declarations removed
+                          checked as: the code from `theorem residual_fourier_cross` to the end is the same but for
+                          one simp argument (below), and the code before it is the base's with exactly those
+                          declarations removed; and in `residual_fourier_model`'s proof the simp argument `hne`,
+                          unused once the port's `@[simp]` lemmas `Spectral.kCoeff_inv` and `kCoeff_ne_zero` are in
+                          the environment (the build's `unusedSimpArgs` warning), dropped: `simp [hx, hne]` becomes
+                          `simp [hx]`
   SAME     Defs, InvariantLaw, Algebraic, Fractional, Pair: no code character changed (docstrings may differ)
 
 Usage: fs133_ld1_code_only.py BASE_COMMIT [--plant]
@@ -92,7 +96,10 @@ for f in SAME + list(EDITS):
 
 a, b = old_new(RIG)
 ia, ib = a.find(MARK), b.find(MARK)
-tail_same = ia >= 0 and ib >= 0 and a[ia:] == b[ib:]
+RIG_TAIL_EDIT = ("simp [hx, hne]", "simp [hx]")
+tail_old = a[ia:] if ia >= 0 else ""
+tail_edit_ok = tail_old.count(RIG_TAIL_EDIT[0]) == 1
+tail_same = ia >= 0 and ib >= 0 and tail_edit_ok and tail_old.replace(*RIG_TAIL_EDIT) == b[ib:]
 head_old, head_new = a[:ia], b[:ib]
 # the head: the base's imports plus Ergodicity's, the same opens and namespaces, the deleted declarations gone
 ok_head = "import Proofs.HadwigerNelson.Outside.OAI158Ergodicity" in head_new and \
@@ -105,7 +112,7 @@ new_words = sorted(set(head_new.split()) - set(head_old.split()))
 rig_ok = tail_same and ok_head and len(gone) == len(RIG_DELETED) and len(kept_tokens) == 4 and \
     new_words == ["Proofs.HadwigerNelson.Outside.OAI158Ergodicity"]
 print(f"{'AS-LISTED' if rig_ok else 'DIFFERS  '} {RIG}: the code from `{MARK.strip()}` to the end "
-      f"{'the same' if tail_same else 'CHANGED'} ({len(a) - ia} characters); deleted {len(gone)} of "
+      f"{'the same but for the listed simp argument' if tail_same else 'CHANGED'} ({len(a) - ia} characters); deleted {len(gone)} of "
       f"{len(RIG_DELETED)} listed declarations; the import added: {ok_head}; words new in the head: {new_words}")
 bad += rig_ok if plant else not rig_ok
 print(("plant: " if plant else "") + ("OK" if not bad else f"FAIL ({bad})"))

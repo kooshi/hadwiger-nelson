@@ -10446,6 +10446,103 @@ open private HadwigerNelson.Outside.OAI158.pickSupport from Proofs.HadwigerNelso
 end
 -- FS131-IPD1 block end
 
+/-! ## FS133-LD1 — the landing of FS-133, the one-class transfer (claims K1): the density equality, `Outside/OAI158Rigidity` and `Plane/OneClass`
+
+`α₁(ℝ²) = α₁(𝒜²) = m₁(ℝ²)`, `χ_f,0(ℝ²) = χ_f(ℝ²) = χ_f(𝒜²) = 1/m₁(ℝ²)`, `f(n)/n → m₁(ℝ²)` and the labelling claim both ways
+(FS133-K1's statements; FS133-IA1, -IB1, -IB2, -ICD1 and -IPQ1's proofs).  The module first rested on
+`Outside.OAI158.Spectral.residual_fourier` declared as an axiom over six copied definitions; at this landing the copies and
+the axiom are gone, the port's theorem of that name is read (`Outside/OAI158Ergodicity`; its record is in FS131-IPD1's
+generated block above, with the six definitions'), and every record below is on the standard three or fewer.  One record per
+theorem and definition a person typed, as FS133-K1's plan (§ 5.5) and FS133-ICD1's list file them — structures included, their
+generated fields, recursors and constructors not; private helpers not.  Fourteen of them rested on the declared theorem before
+the join (the plan's § 5.5 IMPORTED list); `tools/fs133_ld1_records.py` reads the audit's log against `data/fs133/ld1/records.txt`. -/
+-- FS133-LD1 block: `Outside/OAI158Rigidity` — 2 records (2 theorems); one of them (`residual_fourier_cross`) rested on the declared `residual_fourier` before the join
+#print axioms HadwigerNelson.Outside.OAI158.Spectral.residual_fourier_cross
+#print axioms HadwigerNelson.Outside.OAI158.Spectral.residual_fourier_model
+-- FS133-LD1 block: `Plane/OneClass/SectionDensity` — 9 records (8 theorems, 1 definition or structure)
+#print axioms HadwigerNelson.Plane.exists_mem_le_sectionDensity
+#print axioms HadwigerNelson.Plane.le_lintegral_sectionDensity
+#print axioms HadwigerNelson.Plane.measurable_sectionDensity
+#print axioms HadwigerNelson.Plane.measure_le_sectionDensity_pos
+#print axioms HadwigerNelson.Plane.ofReal_integral_le_measure_pos
+#print axioms HadwigerNelson.Plane.sectionDensity
+#print axioms HadwigerNelson.Plane.sectionDensity_empty
+#print axioms HadwigerNelson.Plane.sectionDensity_setOf_pos
+#print axioms HadwigerNelson.Plane.sectionDensity_univ
+-- FS133-LD1 block: `Plane/OneClass/Defs` — 28 records (19 theorems, 9 definitions and structures)
+#print axioms HadwigerNelson.OneClass.countable_algPlane
+#print axioms SimpleGraph.finIndepRatio
+#print axioms SimpleGraph.le_finIndepRatio_iff
+#print axioms SimpleGraph.finIndepRatio_le_of_forall_card_le
+#print axioms SimpleGraph.finIndepRatio_le_one
+#print axioms SimpleGraph.finIndepRatio_le_of_embedding
+#print axioms SimpleGraph.inv_le_finIndepRatio_of_colorable
+#print axioms SimpleGraph.inv_finIndepRatio_le_iSup_fractionalChromaticNumber
+#print axioms HadwigerNelson.Plane.mOne
+#print axioms HadwigerNelson.Plane.isIndepSet_unitDistance_iff
+#print axioms HadwigerNelson.Plane.upperDensity_le_mOne
+#print axioms HadwigerNelson.Plane.mOne_le_iff
+#print axioms HadwigerNelson.Plane.mOne_le_one
+#print axioms HadwigerNelson.Plane.isIndepSet_ball_half
+#print axioms HadwigerNelson.Plane.mOne_eq_iSup_nullMeasurableSet
+#print axioms HadwigerNelson.Plane.minIndepNum
+#print axioms HadwigerNelson.Plane.minIndepNum_one
+#print axioms HadwigerNelson.OneClass.algPlaneEmbedding
+#print axioms HadwigerNelson.OneClass.shiftLab
+#print axioms HadwigerNelson.OneClass.turnLab
+#print axioms HadwigerNelson.OneClass.IsShiftInvariantLaw
+#print axioms HadwigerNelson.OneClass.IsInvariantLaw
+#print axioms HadwigerNelson.OneClass.IsPlaneSystem
+#print axioms HadwigerNelson.OneClass.IsInvariantLaw.isPlaneSystem
+#print axioms HadwigerNelson.OneClass.isInvariantLaw_dirac
+#print axioms HadwigerNelson.Plane.upperDensity_congr_ae
+#print axioms SimpleGraph.card_le_indepNum_induce
+#print axioms SimpleGraph.exists_indep_card_eq_indepNum
+-- FS133-LD1 block: `Plane/OneClass/InvariantLaw` — 9 records (9 theorems)
+#print axioms HadwigerNelson.OneClass.exists_foelner_finset
+#print axioms HadwigerNelson.OneClass.exists_invariant_of_closed
+#print axioms HadwigerNelson.OneClass.exists_isInvariantLaw
+#print axioms HadwigerNelson.OneClass.exists_isInvariantLaw_unitDistance
+#print axioms HadwigerNelson.OneClass.exists_shiftInvariant_of_foelner
+#print axioms HadwigerNelson.OneClass.exists_turnInvariant
+#print axioms HadwigerNelson.OneClass.norm_kCoeff_mul
+#print axioms HadwigerNelson.OneClass.unitDistance_algPlane_eq_circulantGraph
+#print axioms HadwigerNelson.OneClass.IsShiftInvariantLaw.measure_origin_le
+-- FS133-LD1 block: `Plane/OneClass/Field` — 1 record (1 theorem), which rested on the declared `residual_fourier` before the join
+#print axioms HadwigerNelson.OneClass.exists_field
+-- FS133-LD1 block: `Plane/OneClass/Algebraic` — 9 records (9 theorems); 6 of them rested on the declared `residual_fourier` before the join
+#print axioms HadwigerNelson.OneClass.exists_measurable_indep_of_field
+#print axioms HadwigerNelson.OneClass.IsInvariantLaw.measure_origin_le_mOne
+#print axioms HadwigerNelson.OneClass.mOne_le_finIndepRatio
+#print axioms HadwigerNelson.OneClass.finIndepRatio_algPlane_le_mOne
+#print axioms HadwigerNelson.OneClass.finIndepRatio_plane_eq_mOne
+#print axioms HadwigerNelson.OneClass.finIndepRatio_algPlane_eq_mOne
+#print axioms HadwigerNelson.OneClass.one_seventh_le_mOne
+#print axioms HadwigerNelson.OneClass.tendsto_minIndepNum_div_finIndepRatio
+#print axioms HadwigerNelson.OneClass.tendsto_minIndepNum_div
+-- FS133-LD1 block: `Plane/OneClass/Fractional` — 7 records (7 theorems); 3 of them rested on the declared `residual_fourier` before the join
+#print axioms HadwigerNelson.OneClass.exists_periodic_indep
+#print axioms HadwigerNelson.OneClass.exists_fold_cover
+#print axioms HadwigerNelson.OneClass.fractionalChromaticNumber_plane_le
+#print axioms HadwigerNelson.OneClass.fractionalChromaticNumber_induce_le
+#print axioms HadwigerNelson.OneClass.fractionalChromaticNumber_plane
+#print axioms HadwigerNelson.OneClass.iSup_fractionalChromaticNumber_plane
+#print axioms HadwigerNelson.OneClass.fractionalChromaticNumber_algPlane
+-- FS133-LD1 block: `Plane/OneClass/Pair` — 12 records (8 theorems, 4 definitions and structures); 3 of them rested on the declared `residual_fourier` before the join
+#print axioms HadwigerNelson.OneClass.AdmissibleOn
+#print axioms HadwigerNelson.OneClass.AdmissibleAe
+#print axioms HadwigerNelson.OneClass.IsAlgPattern
+#print axioms HadwigerNelson.OneClass.colourPattern
+#print axioms HadwigerNelson.OneClass.admissibleOn_colourPattern_iff
+#print axioms HadwigerNelson.OneClass.isAlgPattern_colourPattern
+#print axioms HadwigerNelson.OneClass.exists_admissible_colourPattern_seven
+#print axioms HadwigerNelson.OneClass.AdmissibleOn.mono
+#print axioms HadwigerNelson.OneClass.exists_measurable_admissibleAe
+#print axioms HadwigerNelson.OneClass.exists_admissibleOn_of_ae
+#print axioms HadwigerNelson.OneClass.exists_admissibleOn_univ_iff_ae
+#print axioms HadwigerNelson.OneClass.exists_admissibleOn_univ_iff_algPlane
+-- FS133-LD1 block end
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

@@ -1,0 +1,4 @@
+slot: admitted ld1: mem 6 GiB (hard cap), cpus 0,5
+Try this:
+  [apply] simp only [kCoeff_inv, ne_eq, mul_eq_zero, inv_eq_zero, kCoeff_ne_zero, hx, or_self, not_false_eq_true,
+    Pi.single_eq_of_ne]
