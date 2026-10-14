@@ -224,3 +224,40 @@ That is three to four hours for lane N, against the planner's "N1 is the longest
 
 `ZeroEntropyNames` through `lake env lean`: 0 errors. Its only warnings are the two `sorry`s left (N1 and N7)
 (`logs/lean-zen-4.log`).
+
+## Stage 3b — SAVED: N1, the count (EN2-CNT), proved through `lake env lean`
+
+`card_words_badStarts_le`, by the plan's route (KN7 § 5.4 N1, from KN6 Stage 3b item 2). It has fourteen private
+declarations in a nested `section CountProof`. They were written against a scratch copy,
+`data/fs131/in1l/work/CountScratch.lean`, and moved verbatim, each made `private`.
+
+- **The parse on lists.** `listBlock l k j h` is the block of length `k` at `j`. `badSetL 𝒢 l` is the set of bad
+  starts of a list. `singles 𝒢` is the greedy parse: it skips a good head block, otherwise it counts a single and
+  steps one letter. It is well-founded on `l.length`, and `1 ≤ k` inside the condition makes it terminate at every
+  `k`. Its equations are `singles_nil`, `singles_of_good` (any list) and `singles_cons_of_not_good`. Functional
+  induction is `singles.induct`.
+- **(B)** `singles_le_card_badSetL`: `singles l ≤ #badSetL l + (k − 1)`, by functional induction, in the plan's three
+  cases.
+  - A good head: `card_badSetL_drop_le`, from `image_badSetL_drop_subset` (a bad start of `l.drop s` at `j` is one of
+    `l` at `j + s`).
+  - A single at a bad start: `card_badSetL_cons`, `0` together with the image under `j ↦ j + 1`.
+  - A single in a list shorter than `k`: `singles_le_length`.
+
+  `card_badSetL_ofFn_le` is the one bridge from `Fin n → α` to lists. The plan's quarantine held: it is the only place
+  the two meet, besides `List.ofFn` inside the weights.
+- **(A)** `weightSum_le`: with `|α| t ≤ 1/2`, `ρ ≥ 1` and `2 #𝒢 ≤ ρ^k`, `∑_{w : Fin m → α} t^{singles (ofFn w)} ≤ ρ^m`,
+  by strong induction on `m`. The sum splits into `goodSum + badSum` over the predicate `GoodL` on the list.
+  - `badSum (r + 1) ≤ |α| t · weightSum r` uses `List.ofFn_succ`, `Fin.consEquiv` and `Fintype.sum_prod_type`.
+  - `goodSum (k + r) ≤ #𝒢 · weightSum r` uses `Fin.appendEquiv`, `List.ofFn_fin_append` and
+    `listBlock_ofFn_append`. With `GoodL` on lists, not on words, the rewrite under the head-block proof goes through.
+  - `goodSum m = 0` for `m < k`.
+
+  The plan's inequality form, not the recursion's equality, makes each case local, as it said.
+- **(C)** in the theorem: `t := (2a)⁻¹` and `ρ := g^{2/k}`, so `ρ^k = g²` and `2 #𝒢 ≤ 2g ≤ g²`. Each counted word has
+  `singles ≤ θ n + k`, so `t^{θn+k} ≤ t^{singles}` (`Real.rpow_le_rpow_of_exponent_ge`). Then
+  `#W · ((2a)^{θn+k})⁻¹ ≤ ρ^n = g^{2n/k}`.
+- **Two more hypotheses the proof does not read**: `hθ : 0 ≤ θ` and `hn : k ≤ n`. The bound holds without them: for
+  `n < k` no word has a start, and `(2a)^k ≥ a^n`. They are referenced by `have _ := h`, as in Stage 3a.
+
+`ZeroEntropyNames` through `lake env lean`: 0 errors. One warning remains, the `sorry` of N7 (`logs/lean-zen-5.log`).
+N1 took about 45 minutes against the 1–2 hours priced at Stage 2.
