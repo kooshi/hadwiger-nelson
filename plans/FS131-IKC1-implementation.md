@@ -58,3 +58,61 @@ Three more places where the checker does not check what its soundness needs, fou
 
 The remedy is the brief's: `certOK` is restructured and gains these checks (each listed in § 2), and the two theorems'
 conclusions stay as they are.
+
+## Stage 2 — SAVED: the checker restructured for its proof, the gaps closed, measured where it runs
+
+### 2.1 Every change to `certOK`, beside the step of the soundness proof that needs it
+
+`Arith/FibreCert` is rewritten (`certOK C := globalOK C && segAll C && psdAll C`). The conclusions of
+`sum_le_of_certOK` and `card_le_of_certOK`, and the definitions they name (`V`, `unitCircle`, `qform`, `Cert.p`,
+`Cert.unum`, `Cert.scale`), are not touched; § 1.3's dump is the receipt to compare against at the end.
+
+| change | the step that needs it |
+|---|---|
+| every op of non-zero value checks `fSeg < nseg` (in every segment), and `globalOK` checks `nseg > 0` | K2i: the per-segment sums add up to the whole identity only if every op lands in a checked segment (§ 1.4's counterexample) |
+| the op's monomial has at most seven points (`lenU a + lenU b < 8`); phase 1 checks the same of `g A0`, `g A1`, `a_i`, `a_j` | K2d: the base-8 digits of `Σ 8^x` are the multiplicities only while each is below 8 |
+| bag key `Σ 8^x` replaces the power-sum key | K2d without Newton's identities: the digit lemma that serves the slots serves the key |
+| every times-1 block has `m = |reps| + 1`, every times-q block `m ≥ 2` | K2g: the identity reads `R` at indices below `m` only, so the matrix it reads is the one the PSD check certifies |
+| `R` is decoded once (`Blk.tri`) and every check reads that copy (`triGet`, `Blk.pairCoefs`, `symRows`) | K2a: no reader semantics is needed — each value read is used once, consistently |
+| phase 1's orbit row index checked present (`bmem`); the q-part's class index checked below `|tnu|` | K2h: a term routed to a missing row or class was dropped in silence |
+| every weight index below `|weights|` | K2g: `c`, `σ` and `κ` are read from one weight; out of range, `κ` came from a default the others did not |
+| PSD: every digit of a packed row of `M` below `2^wm`, each row below `2^(wB(m+1))`, `(m+1)·4^wm < 2^wB`; `E` computed row by row over the full symmetric rows (each Kronecker product twice; no column accumulator) | K2b/K2g: the Kronecker digit is the dot product only when nothing carries |
+| the key mismatch is a verdict (`opGood`), not a poison bit in the leaf | K2c: the leaf invariant has no poison term |
+| phase 1's packed orbit rows are certificate literals (`orows`), checked equal once (`orowsOK`), read by every segment | none: cost (each segment repeated 3.7 GB of phase 1) |
+| `κ`'s table a list (`wtab`), not 160-bit packed fields | K2g: a packed field could overflow, unchecked |
+| the rows' box expansion recursive in `B` (`boxOps`) | K2f: `Π(1 − φ)` by induction, no mask arithmetic |
+
+The converter is `tools/fs131_ikc1_gen.py` (FS131-KC13's `tools/fs131_kc13_gen.py`, copied, not edited): the new key,
+the ops in `opList`'s order, `orows`, `wm ≥ 61` (tags below `2^wm`), `--doc`/`--tail` to write library modules, and the
+plant `--corrupt dropclass`. `Arith/FibreCert3` is regenerated from it.
+
+### 2.2 Negative controls, each refused by the kernel (`decide +kernel` proves `certOK _ = false`), at p = 3
+
+| control | planted | `(globalOK, segAll, psdAll)` |
+|---|---|---|
+| `controls/Drop3v2.lean` | § 1.4's `cert3drop` | `(true, false, true)`: the coverage check |
+| `controls/DimsA.lean` (gap a) | the first times-1 block's `m` 7 → 8 | `(false, true, false)`: the size check (and the PSD reading) |
+| `controls/LenB.lean` (gap b) | the last rep `[5, 7]` → eight points | `(false, false, true)`: phase 1's length checks and the op's |
+| `controls/PsdC.lean` (gap c) | the first block's `wm` 173 → 171 | `(true, true, false)`: the digit bound |
+
+The unplanted partner `cert3_ok : certOK cert3 = true` builds (`Arith/FibreCert3`). `controls/Drop3.lean` keeps the
+refutation of the statement at FS131-KC13's checker; it no longer elaborates against the new library (its data has the
+old fields), and its output `Drop3.out` is the receipt.
+
+### 2.3 Kernel cost of the new form (the laptop, under the slot, one CPU, `/usr/bin/time -v`; `data/fs131/ikc1/logs/`)
+
+| declaration | time | peak RSS |
+|---|---|---|
+| p = 7, one segment, every op processed (`K7S0`) | 23.0 s | 2.8 GB |
+| p = 7, the same at FS131-KC13's checker (`K7old`) | 16.8 s | 2.5 GB |
+| p = 11 `globalOK` (phase 1 bookkeeping, bound, q-part; rows not yet literals) | 28.9 s | 3.9 GB |
+| p = 11 phase 1 with its packed values forced (`K11PHV`) | 27.0 s | 4.6 GB |
+| p = 11 `psdAll` | 50.6 s | 6.6 GB |
+| p = 11 `segCheck cert11 0` of 4 | 85.9 s | 9.5 GB |
+
+What moved the cost (each measured): `triGet` by random access in phase 1 (35 s, 6.3 GB for the lookups alone) → the
+flattened rows read in order; the orbit list updated in place (1.6 GB) → buckets of 16; list recursion on the op's
+monomial (`++`, `map`, `foldl`, `length`: a `brecOn` per step) → unrolled matches (p = 7: 51.6 s → 26.6 s);
+phase 1 repeated in every segment → its rows as checked literals (segment 0 at p = 11: over 12 GiB → 9.5 GB). A
+`let` chain in the op step is not a cost (no change when removed). The base of a segment — generating and reading
+all 53,813 ops — is about 4.5 GB, so `nseg = 4` leaves 9.5 GB; the landing's shape (§ K1) takes more segments.

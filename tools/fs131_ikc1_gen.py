@@ -20,13 +20,9 @@ USAGE  fs131_kc13_gen.py CERT.json OUT.lean [--name NAME] [--leaf 64]
 import json, sys, time, hashlib, argparse
 from fractions import Fraction
 
-def ptkey(x):
-    y = x + 1
-    return y + ((y * y) << 11) + ((y * y * y) << 31) + ((y * y * y * y) << 60)
-
 def bagkey(pts):
-    """the power-sum key: p1 + p2*2^11 + p3*2^31 + p4*2^60 of y = x + 1 over the multiset (dense, unlike sum 8^x)"""
-    return sum(ptkey(x) for x in pts)
+    """the bag key sum 8^x (FibreCert.bag): for at most seven points its base-8 digits are the multiplicities"""
+    return sum(1 << (3 * x) for x in pts)
 
 class Plane:
     def __init__(s, p):
@@ -134,6 +130,8 @@ def main():
     ap.add_argument('cert'); ap.add_argument('out'); ap.add_argument('--name', default=None)
     ap.add_argument('--leaf', type=int, default=64); ap.add_argument('--chunkbits', type=int, default=8192)
     ap.add_argument('--model-only', action='store_true'); ap.add_argument('--module', default=None)
+    ap.add_argument('--doc', default=None, help='a file whose text goes after the import (a module docstring)')
+    ap.add_argument('--tail', default=None, help='a file whose text goes before the closing `end` (theorems)')
     ap.add_argument('--no-psd', action='store_true'); ap.add_argument('--psd-only', type=int, default=None); ap.add_argument('--no-dd', action='store_true'); ap.add_argument('--nseg', type=int, default=1)
     ap.add_argument('--corrupt', default=None, help='plant a fault: rowlam | stream | U | Rentry | M | dropclass')
     a = ap.parse_args()
@@ -259,16 +257,17 @@ def main():
             op(m + (x, x), -2 * coef)
             for s in pl.S:
                 op(m + (x, pl.add(x, s)), -coef)
-    # (O5) rows
+    # (O5) rows, in FibreCert.boxOps's order: expand B from the front, the term without b first
     rows = C['rows']
     if a.corrupt == 'rowlam':
         rows[7][2] += 1
+    def box(A, B, neg, lam):
+        if not B:
+            op(tuple(A), -lam if neg else lam)
+        else:
+            box(A, B[1:], neg, lam); box(list(A) + [B[0]], B[1:], not neg, lam)
     for (A, B, lam) in rows:
-        k = len(B)
-        for mask in range(1 << k):
-            sub = tuple(B[i] for i in range(k) if (mask >> i) & 1)
-            sgn = -1 if bin(mask).count('1') & 1 else 1
-            op(tuple(A) + sub, sgn * lam)
+        box(list(A), list(B), False, lam)
     print(f'ops {len(ops)} [{time.time()-t0:.1f}s]', flush=True)
     # ---------------------------------------------------------------- canonical slots and the model check
     keys = {}; slotlist = []; total = 0
@@ -328,7 +327,7 @@ def main():
     json.dump({'p': P, 'n': n, 'nr': nr, 'orbits': orbits, 'slots': len(slotlist), 'ops': len(ops),
                'total_bits': total.bit_length(), 'identity_holds': not bad, 'sha256': sha},
               open(a.out + '.summary.json', 'w'), indent=1)
-    emit(a, P, n, pl, reps, W, blocks, orbits, p1stream, qtrans, tnu, rows, opstream, slotlist, total, psd, L, Unum, sha)
+    emit(a, P, n, pl, reps, W, blocks, orbits, p1stream, qtrans, tnu, rows, opstream, slotlist, total, psd, L, Unum, sha, accP, accN)
 
 def chunks(fields, k, chunkbits):
     per = max(1, chunkbits // k)
@@ -347,14 +346,14 @@ def lean_list(xs, ind='    '):
 def hexl(v):
     return hex(v)
 
-def emit(a, P, n, pl, reps, W, blocks, orbits, p1stream, qtrans, tnu, rows, opstream, slotlist, total, psd, L, Unum, sha):
+def emit(a, P, n, pl, reps, W, blocks, orbits, p1stream, qtrans, tnu, rows, opstream, slotlist, total, psd, L, Unum, sha, accP, accN):
     name = a.name or f'cert{P}'
     CB = a.chunkbits
     lb = 6; LS = 1 << lb
     nleaves = (len(slotlist) + LS - 1) // LS
     nseg = a.nseg
     ds = max(0, ((nleaves + nseg - 1) // nseg - 1).bit_length())
-    kb = (4 * ((n + 1) ** 4)).bit_length() + 61
+    kb = 3 * n + 1
     keys = []
     for lf in range(nseg << ds):
         v = 0
@@ -389,7 +388,7 @@ def emit(a, P, n, pl, reps, W, blocks, orbits, p1stream, qtrans, tnu, rows, opst
         assert per == per0
         if id(b) in psdmap:
             M, sbits = psdmap[id(b)]
-            wm = max(1, max(abs(v) for row in M for v in row).bit_length()) + 2
+            wm = max(61, max(1, max(abs(v) for row in M for v in row).bit_length()) + 2)   # tags < 2^60 < 2^wm
             Cm = (1 << (wm - 1)) + 1
             wB = (m * (2 * Cm) ** 2).bit_length() + 1
             import random as _r
@@ -400,7 +399,6 @@ def emit(a, P, n, pl, reps, W, blocks, orbits, p1stream, qtrans, tnu, rows, opst
             psdd = (0, 0, 0, [])
         return (b['weights'], m, wr, per, row0, rest, psdd)
     B1 = [blk(b) for b in t1]; BQ = [blk(b) for b in tq]
-    od = max(0, (len(orbits) - 1).bit_length())
     ng = 2 * (P + 1)
     gidx = {g: i for i, g in enumerate(pl.maps)}
     f1 = [((rho * ng + gidx[g]) * 2 + sw) for (rho, g, sw) in p1stream]
@@ -432,9 +430,11 @@ def emit(a, P, n, pl, reps, W, blocks, orbits, p1stream, qtrans, tnu, rows, opst
                 ', row0 := ' + lean_list([hexl(x) for x in row0], '        ') +
                 ', rest := ' + lean_list([hexl(x) for x in rest], '        ') + ' }')
     out = []
-    out.append(f'-- GENERATED by tools/fs131_kc13_gen.py from {a.cert} (sha256 {sha}); do not edit.')
+    out.append(f'-- GENERATED by tools/fs131_ikc1_gen.py from {a.cert} (sha256 {sha}); do not edit.')
     out.append(f'-- {len(opstream)} ops, {len(slotlist)} slots, {len(orbits)} orbits, slot width {w} bits.')
     out.append('import FibreCheck' if not a.module else f'import {a.module}')
+    if a.doc:
+        out.append(open(a.doc).read().rstrip('\n'))
     out.append('namespace HadwigerNelson.FibreCert')
     out.append(f'/-- FS-66\'s certificate at p = {P}, re-encoded for the kernel. -/')
     out.append(f'def {name} : Cert where')
@@ -446,7 +446,8 @@ def emit(a, P, n, pl, reps, W, blocks, orbits, p1stream, qtrans, tnu, rows, opst
     out.append('  blocks1 := [' + ',\n    '.join(blkL(t) for t in B1) + ']')
     out.append('  blocksq := [' + ',\n    '.join(blkL(t) for t in BQ) + ']')
     out.append('  orbits := [' + ', '.join(f'({nlist(reps[i])}, {nlist(reps[j])})' for (i, j) in orbits) + ']')
-    out.append(f'  od := {od}\n  k1 := {k1}\n  per1 := {per1}')
+    out.append('  orows := ' + lean_list([f'({hexl(sum(v << (w * t) for t, v in enumerate(accP[r])))}, {hexl(sum(v << (w * t) for t, v in enumerate(accN[r])))})' for r in range(len(orbits))]))
+    out.append(f'  k1 := {k1}\n  per1 := {per1}')
     out.append('  p1 := ' + lean_list([hexl(x) for x in p1]))
     out.append('  tnu := ' + nlist(tnu))
     out.append(f'  kq := {kq}\n  perq := {perq}')
@@ -455,9 +456,11 @@ def emit(a, P, n, pl, reps, W, blocks, orbits, p1stream, qtrans, tnu, rows, opst
     out.append('  rows := ' + lean_list([hexl(x) for x in rws]))
     out.append(f'  kw := {kw}\n  ko := {ko}\n  pero := {pero}')
     out.append('  ops := ' + lean_list([hexl(x) for x in ops]))
+    if a.tail:
+        out.append(open(a.tail).read().rstrip('\n'))
     out.append('end HadwigerNelson.FibreCert')
     open(a.out, 'w').write('\n'.join(out) + '\n')
-    print(f'wrote {a.out}: w={w} ds={ds} od={od} k1={k1} kq={kq} kr={kr} kw={kw} ko={ko}; '
+    print(f'wrote {a.out}: w={w} ds={ds} k1={k1} kq={kq} kr={kr} kw={kw} ko={ko}; '
           f'chunks ops={len(ops)} rows={len(rws)} keys={len(keys)}', flush=True)
 
 if __name__ == '__main__':
