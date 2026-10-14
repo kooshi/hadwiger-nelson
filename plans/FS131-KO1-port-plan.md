@@ -283,3 +283,156 @@ generator and tables (`--check` then compares). The elaboration logs are `trial/
 attempt kept); the shared-definition comparison is `shared/compare.txt` (both runs 8 of 8 IDENTICAL, every print with
 its type read); the exposure dumps are compressed (`exposure/*.out.xz`, `prints.sha256` for the uncompressed bytes)
 and `exposure/compare-all.txt` is the reader's verdict on all 22 runs.
+
+## Stage 4 — SAVED: the plan
+
+*Under the brief's two amendments: (a) the port lands on `main` first and the density branch takes it at its join;
+the switch for the transfer as stage 2.3 has it; whole files; `Mathlib.Order.CompletePartialOrder` out of every
+module's imports; and (Amendment 2, the coordinator's message of 2026-10-14) the adaptations table, on the conditions
+of 4.3.*
+
+### 4.1 What is ported, and how
+
+**31 generated modules**, `Proofs/HadwigerNelson/Outside/OAI158<Stem>.lean`, one per release file of 2.2, each the
+**whole file** (3.2), by **one generator**, `tools/fs131_ko1_port.py` at this stage's commit, with **one table per
+module**, `data/fs131/ko1/port/<Module>.json` (keys: `patches`, `renames`, `adaptations`, `scoped`,
+`global_instances`, `drop_open`, `drop_imports`, `more_imports`). A lane changes only the tables of its own modules;
+**the generator is frozen** for the lanes — a defect in it is a `tool defect` for the coordinator, and the planner (or a
+job the coordinator names) changes it between lanes, never two lanes at once. Every table carries
+`drop_imports: [["Mathlib.Order.CompletePartialOrder", …]]` when the dump lists that module for its file (the
+generator refuses a `drop_imports` entry the dump does not list, so the entry is written exactly where it applies).
+The `Coloring.lean` declarations stay this library's copies (`UPSTREAM`: six in `Outside/OAI158`, five in
+`Outside/OAI158Palette`); nothing of `main` is replaced.
+
+**Instances**, by the tables' rule as in the trial: `scoped` for an instance on a Mathlib type (`Spectral.E_countable`
+on `algebraicClosure ℚ ℂ`, FS133-IA1's ruling); global for an instance on a type built from the release's own
+definitions (`DiscreteE`, `K`, `D`, `PeriodGroup`, …), each listed with its reason; `local instance` needs no entry.
+
+**Every lane elaborates in a scratch farm**, never through `Proofs.lean`: `data/fs131/ko1/farm1.sh <Module>` (the
+lakefile's three options by flag, `--root=.`, `lean -o` into `build/ko1-farm`), every earlier lane's modules
+regenerated from their tables and compiled first, in the order of 2.2 (about 10 s and 3.5 GiB each). **Lane D alone
+registers** (`Proofs.lean`, `ARCHITECTURE.md`, `scripts/Axioms.lean`) and runs `./scripts/build.sh` — so no two lanes
+share a file.
+
+### 4.2 The lanes
+
+| lane | modules (release files, whole) | lines | needs | writes | price, from the trial |
+|---|---|---|---|---|---|
+| **A** — the spectral base | `Basic` ✓ and `InvariantMean` ✓ (the trial's: tables written, 0 errors), `SmallArcs`, `PhaseEncoding`, `Characters`, `PhaseCollision`, `Multipliers`, `ConditionalSelection`, `FourierTests`, `ConditionalSpectrum` | 5,035 (3,222 new) | this plan | its ten modules and tables; its record and `data/fs131/<job>/` | 2–3 h: renames and `convert` cases (about 18 lines of known tokens), `ProbabilityMeasure` on 45 lines (19 in `ConditionalSpectrum`) |
+| **B** — the factor base | `Centers` (the trial's: 5 renames in its table, the adaptations to write), `Amenability`, `NumberFields`, `Selections`, `RelativeCenters` | 2,668 | this plan (`Basic` regenerated from its table) | its five modules and tables; record; data | 2–3 h: `Centers` is the heaviest file of the cone for the adaptation class (47 `ProbabilityMeasure` lines, about ten sites), `RelativeCenters` 18 |
+| **C** — the compact factors | `Approximation`, `ConditionalLimits`, `Kernels`, `BoundedFunctions`, `Functions`, `Factors`, `RelativeProducts`, `Separability`, `Stationary`, `AlgebraModels` | 5,574 | A and B | its ten modules and tables; record; data | 4–6 h: the adaptation class is densest here (`ConditionalLimits` 23, `AlgebraModels` 19, `Kernels` 18, `Functions` 16, `RelativeProducts` 15 lines) |
+| **D** — the spectral top, the switch, the registration | `Representations`, `Energy`, `SpectralMeasure`, `RadialEnergy`, `Ergodicity`, `BorelTransfer`; the switch (4.4); the join recipe's step 0 (4.5) | 2,656 | C | its six modules and tables; **the switch's edits** (`Outside/OAI158`, the new module `Outside/OAI158Collapse`, one import line each in `Plane/RadiusOutside` and `Plane/LebesgueNumber`); `Proofs.lean` (32 lines), `ARCHITECTURE.md` (32 rows, two rows' text), `scripts/Axioms.lean` (the generated block, T's records moved to CLEAN, T's `declareImport` removed); record; data | 4–6 h with the build (the switch edits `Outside/OAI158`, so its whole downstream recompiles: about 30 modules, 15–50 minutes on the laptop) |
+
+**Order**: A and B in parallel (each from this branch; they share no file); C from their merge (clean: no shared
+file); D from C. Then the landing (Keryx's) with the gate. **Every price above is from the trial's three files** —
+Basic 4 patches in 735 lines, InvariantMean 0 in 1,078, Centers 5 renames and about ten adaptation sites in 703 — and
+the per-file counts of the class's text (3.6); the adaptation sites elsewhere are an estimate scaled from one file
+(about one per five `ProbabilityMeasure` lines in `Centers`: some 55 in all), and the lane that meets the first file
+denser than that re-prices. **Every lane's receipts**, for its own modules:
+1. `tools/fs131_ko1_port.py --check --modules <its>`: `CHECK OK`;
+2. each module elaborated by `farm1.sh` with **0 errors and 0 warnings**, the log kept;
+3. `#print axioms` of every declaration of its modules, from the farm's oleans: a subset of the standard three, none
+   `sorryAx` (the generator's `--axioms-block` lists them), with a planted `sorry` in a scratch copy watched to fire;
+4. the read-back across pins of its modules' stored statements (FS132-I2's comparator `tools/fs132_i2_readback.py`
+   imported as a module, as FS133-IA1 did, with this port's name map): each IDENTICAL, UP-TO-INSTANCES, or **ADAPTED**
+   with the strip check of 4.3; none DIFFERENT;
+5. its tables' every entry with its reason; and a statement in its record that no table entry touches a protected
+   declaration (the generator refuses, and the record says it was not asked to).
+
+### 4.3 The adaptation class (Amendment 2)
+
+**What it is.** Mathlib changed `Measure.map` and `ProbabilityMeasure.map` between the pins (3.3). An *adaptation*
+is a token of a release-internal statement or definition rewritten so that the same object is named at this pin:
+`ν.map g` (a `ProbabilityMeasure`) → `ν.map (f := g) h`, and `⟨μ.map g, inferInstance⟩` → `⟨μ.map g,
+isProbabilityMeasure_map h⟩`, with `h` the measurability of `g`. **The conditions** (the coordinator's ruling):
+- **No adaptation adds a hypothesis or a binder.** `h` is a closed term built from what the statement's context
+  already has — a translation (`(measurable_add_const v).aemeasurable`), an isometry (`O.continuous.aemeasurable`), a
+  continuous coordinate. A site that would need a new hypothesis goes to the coordinator; the lane stops that module.
+- **Refused** on the target statements (`proper_to_borel_weak`, `Spectral.residual_fourier`, and every constant the
+  declared axioms' stored statements name — all of them `UPSTREAM` copies or shared declarations here); on every
+  declaration the density branch shares (the generator reads that branch's names; its plant is refused,
+  `trial/port-selftest.out`); and on anything a statement of ours names (lane D's check: every ported constant named by
+  a stored statement of a non-generated module, listed, none ADAPTED).
+- **Listed** in the module's header with its reason (the generator does it: item "Adaptations — ADAPTED"); the
+  read-back flags each ADAPTED; and **the strip check**: the adapted declaration's instance-erased print at this pin,
+  with the inserted measurability argument removed at each adapted site, is the release's erased print — and a planted
+  control (another argument changed at an adapted site) is refused. The lane that writes the first adaptation writes
+  this check as `tools/<its prefix>_strip.py`; the later lanes import it.
+
+**The line for `LEAN.md` § Assumptions** (the coordinator's filing; slot: the bullet "An outside Lean proof may be
+ported instead of imported", following its sentence ending "…the generator refuses a patch to a statement or a
+definition (`tools/fs132_i2_port.py`), and build."): *"One exception, by ruling: an* adaptation *— a release-internal
+statement or definition whose Mathlib API changed between the pins (`Measure.map`, `ProbabilityMeasure.map` between
+v4.32.0 and v4.34.1), rewritten to name the same object here by inserting a closed measurability argument, never a
+hypothesis or a binder; refused on the target statements, on any declaration another branch holds a copy of, and on
+anything a statement of ours names; listed in the module's header, flagged ADAPTED by the read-back, and checked
+mechanically to differ from the source's print only by the inserted argument (FS131-KO1). The refusal holds for
+everything else."*
+
+### 4.4 The switch for the transfer, on `main` (lane D, in one commit with `OAI158BorelTransfer`'s registration)
+
+The ported `BorelTransfer` declares `HadwigerNelson.Outside.OAI158.proper_to_borel_weak` and imports
+`Outside/OAI158Palette`, hence `Outside/OAI158`: the axiom of that name must be gone from `Outside/OAI158` before the
+ported module is elaborated against the real library (the farm, which holds no `Proofs` module but the ported ones,
+elaborates it before).
+
+| step | what | check |
+|---|---|---|
+| 0 | before any edit: dump every named constant of `Outside/OAI158`, `Plane/RadiusOutside`, `Plane/LebesgueNumber` from the build as it stands (`tools/fs131_ko1_exposure.py`'s footer and reader on the compiled modules, or FS124-L2's `StatementDump`), and of every module downstream of `Outside/OAI158` | the dump exists, its count matches the module's named constants |
+| 1 | `Outside/OAI158`: delete the `axiom proper_to_borel_weak`; move `nonempty_aeColouring_of_colorable`, `colorable_iff_nonempty_aeColouring`, `chiM0_le_chromaticNumber_plane`, `chromaticNumber_plane_eq_chiM0`, `seven_le_chromaticNumber_plane_iff` and the `example` that applies the transfer, **character for character with their docstrings**, into the new module `Outside/OAI158Collapse` (imports `Outside/OAI158BorelTransfer` and `Plane/YesLimit`, namespace `HadwigerNelson.Outside.OAI158`); the module docstring of `OAI158` rewritten to say T is a theorem of the port | the moved text is the same bytes (a script compares the declarations' text before and after) |
+| 2 | `Plane/RadiusOutside` and `Plane/LebesgueNumber`: `import Proofs.HadwigerNelson.Outside.OAI158` → `import Proofs.HadwigerNelson.Outside.OAI158Collapse`; nothing else | the diff is those two lines |
+| 3 | build (`./scripts/build.sh` under the slot) | exit 0, no warning from any changed or generated module |
+| 4 | dump again; compare with step 0 | **every named constant IDENTICAL** (full prints), the five moved ones included and now in `OAI158Collapse`; `proper_to_borel_weak` has kind `theorem` where it had `axiom`, its stored type IDENTICAL. If it is INSTANCES-ONLY (the ported module's imports reach `Measurable`'s instances otherwise), the kernel check of FS133-IA1's leaf R (`tools/fs133_ia1_rebuild.py`, its `Rebuild.lean`): the axiom's printed type rebuilt in the new environment and `rebuilt = (type of the theorem) := Eq.refl _` accepted, with its two plants |
+| 5 | `#print axioms` of the twelve records that rested on T | each the standard three, no import |
+
+The exposure test (3.5) predicts step 4: under the port's imports without `CompletePartialOrder`, the 29 constants of
+`OAI158` and those of the two leaf modules are IDENTICAL. Stored binder names of instance arguments carry their
+module (`LEAN.md`); the canonical print erases macro scopes, so a moved declaration compares equal.
+
+### 4.5 The join recipe — the density equality's branch taking the port (for its landing brief to quote)
+
+*On a tree holding `fs133-wb1` merged with `main` after this port has landed.*
+
+| step | what | check |
+|---|---|---|
+| 0 | **before the join** (lane D, on `main`'s port): compare every declaration `fs133-wb1` copies or ports — the six definitions and derived instance of `Outside/OAI158Rigidity`, the 48 of `Outside/OAI158Transfer` — with the ported ones, from that branch's build (read only) and the port's (`data/fs131/ko1/lean/SharedPorted.lean` / `SharedDensity.lean`, the name list extended to the 55) | **every one IDENTICAL**, type and value (Basic's 8: done, 3.4); one that is not stops the join and goes to the coordinator |
+| 1 | before the merge, on `fs133-wb1`'s build: dump every named constant of its eight modules (FS133-IA1's `StatementDumpErased.lean`, its `before`) | the dump's count |
+| 2 | merge `main` into the branch | git reports conflicts only in files both changed (`Proofs.lean`, `ARCHITECTURE.md`, `scripts/Axioms.lean`); resolve by keeping both sides' lines |
+| 3 | delete `Outside/OAI158Transfer.lean`, its `Proofs.lean` line, its `ARCHITECTURE.md` row, its block in `scripts/Axioms.lean` | `rg -uu OAI158Transfer Proofs scripts ARCHITECTURE.md` finds only prose |
+| 4 | `Outside/OAI158Rigidity`: delete the six copied definitions (with the `deriving` clause) and the `axiom residual_fourier`; add `import Proofs.HadwigerNelson.Outside.OAI158Ergodicity`; keep `residual_fourier_cross`, `residual_fourier_model` and their private helpers, character for character; rewrite the module docstring (the import is gone) | the kept declarations' text is the same bytes |
+| 5 | `Plane/OneClass/Field`: `import …Outside.OAI158Transfer` → `import …Outside.OAI158BorelTransfer` | the diff is that line |
+| 6 | `./scripts/dupnames.sh` on the joined tree, **before the audit** | green: no name declared twice (the 63 constants of 2.3 are each declared once) |
+| 7 | build | exit 0 |
+| 8 | dump again (step 1's dumper); compare | every named constant of the eight modules IDENTICAL (the exposure test, 3.5, predicts it); the axiom is gone and `Spectral.residual_fourier` is a theorem of `OAI158Ergodicity`: its stored type compared with the axiom's step-1 print — IDENTICAL, or INSTANCES-ONLY and then FS133-IA1's leaf R kernel check (`rebuilt = theorem's type := Eq.refl _`, with its plants) |
+| 9 | `#print axioms` of `residual_fourier_cross`, `OneClass.exists_field` and every record of the density module | the standard three; `scripts/Axioms.lean` declares no `residual_fourier` import |
+
+### 4.6 What the landings then read
+
+**The port's landing (after lane D).** `scripts/Axioms.lean`: T's `declareImport` line removed; T's twelve records
+(5 of `OAI158Collapse`, 4 of `Plane/RadiusOutside`, 3 of `Plane/LebesgueNumber`) move from IMPORTED to CLEAN; the
+generated block of the 31 modules (about 1,400 records) under CLEAN. The audit's counts: **imported 26 → 14** (8 on
+Weil's bound, 6 on the headline), **clean +12 +the port's records**; the library's axioms **3 → 2**
+(`StandingFive.kloosterman_bound`, `Outside.OAI158.no_proper_five_coloring`). The assumptions digest:
+`axioms=3 rests=26` → **`axioms=2 rests=14`**, the other seven counts unchanged (no hypothesis is added or retired);
+`ARCHITECTURE.md` § Trust: T's line removed. `CLAUDE.md` § Trust ledger and § The aim's "on the declared outside
+theorem `Outside.OAI158.proper_to_borel_weak`" (several sentences) become "on the standard three" — Keryx's filing.
+The vacuity scan's `declarations=` count rises by the port's; its sites are read by the landing (`LEAN.md` § The gate:
+a module whose theorems range over the release's own structures adds sites that read `GENERIC`).
+**The density landing (after its join).** No new axiom: the axiom it declared is a theorem of the port;
+`residual_fourier_cross` and `exists_field` print the standard three; `scripts/assumptions.sh` sees no new import.
+
+### 4.7 Open risks, each with what would show it
+
+1. **A site of the adaptation class that needs a hypothesis** (a map whose measurability the context does not give):
+   the lane stops the module and writes to the coordinator (the ruling's condition).
+2. **A Mathlib definition other than `Measure.map` that changed between the pins** and reaches a definition of the
+   release (FS133-IA1's level-one comparison found 13 Mathlib signatures differing one level down, `MeasureTheory.Lp`
+   among them): a lane's elaboration shows it as a type mismatch in a definition; the generator refuses to patch it;
+   the coordinator rules. The pricing dump `data/fs131/ko1/lean/MathlibUses.lean` (every Mathlib constant the 31
+   files' stored terms name, with its stored type at the release's pin, for the same print at this pin) was started
+   and **had not finished when this stage was saved**; lane A may finish it to list such constants in advance.
+3. **The superset assumption of the exposure test**: the variant added the whole 67-module union to each module, a
+   superset of what each will import; instance resolution is not monotone in principle. Steps 4.4 (4) and 4.5 (8)
+   compare the real modules before and after and decide.
+4. **`Representations` and `BorelTransfer`'s shared declarations** (op, space, the 45 others) are not yet compared
+   (4.5, step 0, is the check).

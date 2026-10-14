@@ -159,7 +159,27 @@ SCAN = [
 LICENCE_NAME = "OAIMath2026-LICENSE.txt"
 LICENCE_SRC = "LICENSE"
 TABLE_KEYS = {"patches", "renames", "scoped", "global_instances", "drop_open", "drop_imports", "more_imports",
-              "aux_unported", "notes"}
+              "aux_unported", "notes", "adaptations"}
+# ADAPTATIONS (a table of their own, pending the coordinator's ruling: plans/FS131-KO1-port-plan.md § 4.3): a token of a
+# release-internal STATEMENT or DEFINITION that does not elaborate at this pin because a Mathlib API changed between the
+# pins (Mathlib's `Measure.map` / `ProbabilityMeasure.map`: § 3.3), rewritten to the same object at this pin.  Refused
+# on PROTECTED declarations: the two targets, and every declaration the density branch holds a copy of (its stored
+# term must be that copy's: § 3.4), read from that branch's names (`data/fs131/ko1/lean/names-fs133wb1.out.xz`).
+PROTECTED_TARGETS = {"OAI.EuclideanFiveColor.proper_to_borel_weak", "OAI.PlaneFiveColor.Spectral.residual_fourier"}
+SHARED_MODULES = ("Proofs.HadwigerNelson.Outside.OAI158Rigidity", "Proofs.HadwigerNelson.Outside.OAI158Transfer")
+
+
+def shared_names():
+    import lzma
+    p = ROOT / "data/fs131/ko1/lean/names-fs133wb1.out.xz"
+    out = set()
+    for ln in lzma.open(p, "rt"):
+        f = ln.rstrip("\n").split("\t")
+        if f[0] == "NAME" and f[1] in SHARED_MODULES:
+            out.add(f[3])
+    if not out:
+        raise Refused("the density branch's names are absent: no adaptation can be checked")
+    return out
 
 
 class Refused(Exception):
@@ -484,8 +504,8 @@ def emit_module(m, path, lines, decls, want, tab, names_here):
     name = base(path)
     mod = MOD_OF_REL[m]
     tree = parse(lines, decls, mod)
-    used = dict(patches=set(), scoped=set(), glob=set(), drop_open=set())
-    copied, left, examples, rooted = [], [], [], []
+    used = dict(patches=set(), scoped=set(), glob=set(), drop_open=set(), adapt=set())
+    copied, left, examples, rooted, adapted = [], [], [], [], []
 
     def has_want(node):
         for it in node["items"]:
@@ -586,6 +606,17 @@ def emit_module(m, path, lines, decls, want, tab, names_here):
                                   f"line {se[0]}, column {se[1]})")
                 text[pl - a] = row.replace(old, new, 1)
                 used["patches"].add(i)
+        for i, (al, old, new, why) in enumerate(tab["adaptations"]):
+            if a <= al <= b:
+                if o in PROTECTED_TARGETS or (not o.startswith("_private.") and here_name(o) in shared_names()):
+                    raise Refused(f"adaptation {i} ({name}:{al}) is in {o}, a target or a declaration the density "
+                                  "branch shares: its stored term must not change")
+                row = text[al - a]
+                if old not in row:
+                    raise Refused(f"adaptation {i} does not apply at {name}:{al}")
+                text[al - a] = row.replace(old, new, 1)
+                used["adapt"].add(i)
+                adapted.append((a, b, o, al))
         for (r_old, r_new, _) in tab["renames"]:
             pat = re.compile(r"(?<![A-Za-z0-9_'])" + re.escape(r_old) + r"(?![A-Za-z0-9'])")
             for j, row in enumerate(text):
@@ -640,10 +671,11 @@ def emit_module(m, path, lines, decls, want, tab, names_here):
     if missing:
         raise Refused(f"{name}: cone declarations not placed: {sorted(x[2] for x in missing)}")
     for key, u in (("patches", "patches"), ("scoped", "scoped"), ("global_instances", "glob"),
-                   ("drop_open", "drop_open")):
+                   ("drop_open", "drop_open"), ("adaptations", "adapt")):
         if len(used[u]) != len(tab[key]):
             raise Refused(f"{mod}: {key} entries not used: {sorted(set(range(len(tab[key]))) - used[u])}")
     return dict(name=name, path=path, body=body, copied=copied, left=left, examples=examples, rooted=rooted,
+                adapted=adapted,
                 tab=tab, total=len(decls), nlines=len(lines) - (1 if lines[-1] == "" else 0))
 
 
@@ -759,6 +791,15 @@ def render(mod, p):
     else:
         o.append(f"{k}. *Patches*: none. Every proof here is the release's text, unchanged.")
     k += 1
+    if t["adaptations"]:
+        o.append(f"{k}. *Adaptations* ({len(t['adaptations'])}) — ADAPTED: a token of a statement or a definition of the release, "
+                 "rewritten to the same object at")
+        o.append("   this pin because a Mathlib API changed between the pins; never in the transfer, the rigidity lemma or a")
+        o.append("   declaration the density branch shares (the script refuses):")
+        for al, old, new, why in t["adaptations"]:
+            for c in wrap_words(f"- `{q['name']}:{al}`: `{old}` → `{new}` — {why}", 112):
+                o.append("   " + c)
+        k += 1
     for r_old, r_new, why in t["renames"]:
         for i, c in enumerate(wrap_words(f"*A Mathlib name at this pin*: `{r_old}` is written `{r_new}` — {why}.", 112)):
             o.append(("   " if i else f"{k}. ") + c)
@@ -946,6 +987,14 @@ def self_test(mods):
         print(f"partner 'a patch into a proof': generation {'ACCEPTED' if gen_ok else 'REFUSED'}, file then "
               f"{'DIFFERS' if rc else 'AGREES'}")
         ok = ok and gen_ok and rc != 0
+        # an adaptation on a declaration the density branch shares (`Spectral.kCoeff`, Basic.lean:224) is refused, and
+        # one that does not apply is refused
+        if "OAI158Basic" in mods:
+            tb = full["OAI158Basic"]["tab"]
+            expect("an adaptation in a shared declaration (`Spectral.kCoeff`)",
+                   refused(tables={"OAI158Basic": dict(tb, adaptations=[[224, "u.val", "u.1", "planted"]])}))
+            expect("an adaptation that does not apply",
+                   refused(tables={"OAI158Basic": dict(tb, adaptations=[[17, "@@none@@", "x", "planted"]])}))
         # instances: a table entry withdrawn
         for x in mods:
             tx = full[x]["tab"]
