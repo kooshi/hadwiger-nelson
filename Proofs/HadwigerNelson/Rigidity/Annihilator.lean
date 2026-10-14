@@ -3,7 +3,7 @@ import Mathlib.Analysis.Fourier.FiniteAbelian.Orthogonality
 import Mathlib.Topology.Algebra.PontryaginDual
 
 /-!
-# Annihilators between a discrete abelian group and its dual (FS-131, job FS131-KPD1; skeleton)
+# Annihilators between a discrete abelian group and its dual (FS-131, job FS131-KPD1; proved by FS131-IDG1)
 
 **Read aloud, against the informal claim.** For an abelian group `G` and its characters `Ĝ = AddChar G Circle`, the pairing
 `⟨χ, g⟩ = χ g` gives two annihilators, each the set of what kills everything on the other side:
@@ -15,7 +15,7 @@ They form a Galois connection (`gc_dualAnnihilator`: `Y ≤ N^⊥ ↔ N ≤ Y^�
 are antitone and `Y ≤ (Y^⊥)^⊥` for every `Y` (`le_dualAnnihilator_dualCoannihilator`) with no topology. The topology of
 `Rigidity/DualGroup` enters twice: `N^⊥` is closed (`isClosed_dualAnnihilator`, each evaluation is continuous), and a subgroup
 and its closure have one annihilator (`dualCoannihilator_topologicalClosure`). **The converse `(Y^⊥)^⊥ ≤ Y` for closed `Y` is
-Pontryagin duality** (`Rigidity/Duality`), not proved here.
+Pontryagin duality** (`Rigidity/Duality`, `dualAnnihilator_dualCoannihilator_of_isClosed`), proved there.
 
 A finite count beside them, read by the chain's PE-1′ (`Rigidity.isTotallyIrreducible_pieceAction`, at `N ≠ 0`): if `G ⧸ N` is
 finite, `N^⊥` is finite — a character trivial on `N` is a character of the finite group `G ⧸ N`

@@ -2,7 +2,7 @@ import Proofs.HadwigerNelson.Rigidity.SubgroupHaar
 import Mathlib.Topology.Algebra.PontryaginDual
 
 /-!
-# Pontryagin duality for a countable discrete abelian group (FS-131, job FS131-KPD1; skeleton)
+# Pontryagin duality for a countable discrete abelian group (FS-131, job FS131-KPD1; proved by FS131-IDG1)
 
 **Read aloud, against the informal claim.** For a countable abelian group `G` (discrete) and its dual `Ĝ = AddChar G Circle`
 under the pointwise topology (`Rigidity/DualGroup`; compact, Polish, Borel = the cylinder σ-algebra):

@@ -124,3 +124,33 @@ took about 40 minutes with three repairs.
 - `exists_pieceChain`'s existential binder `hM` is renamed `_hM` (the coordinator's ruling, option (a)): the name is
   read by nothing, and once the proof is in the unused-variables linter warns at the statement, where no proof can reach
   it. The condition: the stored type differs from before in that binder's name only (stage 3's check).
+
+## Stage 3 — SAVED: the proofs over the module; the rows and docstrings from FS131-IDG1's drafts
+
+**The module.** `data/fs131/ig1/work/Pieces.lean` copied over `Proofs/HadwigerNelson/Rigidity/Pieces.lean`. Against the
+skeleton (`work/Pieces.skeleton.lean`) the file loses only the 15 `sorry` lines, four proof heads (`:= by` → `:=`:
+`continuous_dualMap`, `measurable_toPiece`, `pieceMul_zero`, `toPiece_rot`) and the two ruled statement texts of stage 2;
+it gains the proofs, the private helpers and one import line (`Mathlib.Algebra.Group.Subgroup.Finsupp`, for
+`AddSubgroup.mem_closure_range_iff` in `countable_of_isPiece`).
+
+**`ARCHITECTURE.md`** — the six rows of FS131-IDG1's drafts, verbatim from its record (§ Drafts for the landing):
+`DualGroup`, `Annihilator` (with `isClosed_setOf_apply_eq_one` added to its proved list after `dualCoannihilator_top`),
+`SubgroupHaar`, `Duality`, `DualConnected` ("skeleton: n leaves `sorry`" → "proved by FS131-IDG1: no `sorry`";
+"**Leaves:**" → "**Proved (FS131-IDG1):**"), `UnitCircle` ("proved by FS131-IDG1 but lane A's `exists_admissiblePair`,
+skeleton: 1 leaf `sorry`"). **`tools/check_architecture.py`: `RESULT: PASS`** (`logs/arch-1.out`). **Its control**: a copy
+with `Rigidity/Duality` struck from `Pieces`' imports cell fails, `FAIL imports of Rigidity/Pieces: stated-only [],
+real-only ['Rigidity/Duality']`, exit 1 (`work/ARCHITECTURE.plant.md`, `logs/arch-plant.out`). The `Pieces` row itself
+(still "skeleton: 15 leaves `sorry`") is not in my touches: drafted below.
+
+**The docstrings** (`data/fs131/ig1/work/docstrings.py`, which refuses unless each passage occurs once in its block): the
+titles of the six modules ("skeleton" → "proved by FS131-IDG1", `UnitCircle` "… but `exists_admissiblePair`");
+`Annihilator`'s "**The converse … is Pontryagin duality** (`Rigidity/Duality`), not proved here." → "(`Rigidity/Duality`,
+`dualAnnihilator_dualCoannihilator_of_isClosed`), proved there."; `measure_frequentVisits_le`'s docstring
+(`ZeroEntropyNames`): "stated under this library's name until lane P's port is joined; its proof is then that theorem" →
+"stated under this library's name; its proof is the port's `Outside.OAI015.excessiveOccupation_measure_bound`" — its
+proof is that term (read in the source). **Prose only, in text**: `tools/fs131_ig1_code_only.py` (IDG1's, with its
+repaired plant) reads all seven files SAME as `HEAD` with every block comment removed (`logs/code-only.out`); its plant
+(the last `:=` of each file → `:≡`) reads all seven DIFFERS, "plant: OK" (`logs/code-only-plant.out`). **From the
+kernel's side** the seven modules were dumped before the build (`data/fs131/ig1/lean/DocDump.lean`, IDG1's with one
+`PROOF <hash>` line per theorem added, so that proofs are compared too; `docdump-before.txt.xz`, 304 constants, 252
+theorems), to be compared after it (stage 4).

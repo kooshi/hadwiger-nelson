@@ -3,7 +3,7 @@ import Mathlib.Topology.Algebra.ClopenNhdofOne
 import Mathlib.Algebra.Category.Grp.Injective
 
 /-!
-# A torsion-free discrete group has a connected dual (FS-131, job FS131-KPD1; skeleton)
+# A torsion-free discrete group has a connected dual (FS-131, job FS131-KPD1; proved by FS131-IDG1)
 
 **Read aloud, against the informal claim.** For an abelian group `G` and its dual `Ĝ = AddChar G Circle` under the pointwise
 topology (`Rigidity/DualGroup`, compact):

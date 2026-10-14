@@ -7,7 +7,7 @@ import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 import Mathlib.Topology.Algebra.Group.Basic
 
 /-!
-# The dual of a discrete abelian group as a compact group: topology, Polish and Borel, Haar, Fourier uniqueness (FS-131, job FS131-KN8; module M4 of `plans/FS131-KN3-chain-plan.md`; skeleton)
+# The dual of a discrete abelian group as a compact group: topology, Polish and Borel, Haar, Fourier uniqueness (FS-131, job FS131-KN8; module M4 of `plans/FS131-KN3-chain-plan.md`; proved by FS131-IDG1)
 
 **Read aloud, against the informal claim.** For a discrete abelian group `G`, its characters `Ĝ = AddChar G Circle` carry
 the library's cylinder σ-algebra (`SpectralChain.dualMeasurableSpace`, the σ-algebra of the evaluations `χ ↦ χ(g)`) and a

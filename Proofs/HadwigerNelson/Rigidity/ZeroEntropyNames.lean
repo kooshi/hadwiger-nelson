@@ -538,8 +538,8 @@ noncomputable def visits (T : X → X) (B : Set X) (n : ℕ) (x : X) : ℕ := by
 
 /-- **The maximal ergodic inequality for an indicator** (Hopf; EN2 § 3.5 step 3, `θ μ(E) ≤ μ(B)`): the points whose orbit
 visits `B` more than `θ n` times before some time `n` have mass at most `μ(B)/θ`. **The release's
-`DukePrimeDegree.excessiveOccupation_measure_bound`** with its definitions unfolded, stated under this library's name
-until lane P's port is joined; its proof is then that theorem (module docstring). -/
+`DukePrimeDegree.excessiveOccupation_measure_bound`** with its definitions unfolded, stated under this library's name;
+its proof is the port's `Outside.OAI015.excessiveOccupation_measure_bound` (module docstring). -/
 theorem measure_frequentVisits_le {m : MeasurableSpace X} (μ : Measure X) [IsFiniteMeasure μ] {T : X → X}
     (hT : MeasurePreserving T μ μ) {B : Set X} (hB : MeasurableSet B) {θ : ℝ} (hθ : 0 < θ) :
     ENNReal.ofReal θ * μ {x | ∃ n : ℕ, θ * n < (visits T B n x : ℝ)} ≤ μ B :=

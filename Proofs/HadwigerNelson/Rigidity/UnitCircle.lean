@@ -3,7 +3,7 @@ import Mathlib.MeasureTheory.Group.Action
 import Mathlib.Dynamics.Ergodic.Action.Basic
 
 /-!
-# The unit vectors of `F²` as a group acting on `R̂`; admissible pairs (FS-131, job FS131-KN8; the vocabulary of modules M6 and M7b; skeleton)
+# The unit vectors of `F²` as a group acting on `R̂`; admissible pairs (FS-131, job FS131-KN8; the vocabulary of modules M6 and M7b; proved by FS131-IDG1 but `exists_admissiblePair`)
 
 **Read aloud, against the informal claim.** `SpectralChain` has the unit vectors of `F²` as a set of complex numbers,
 `unitVectors F`, and the rotation `rot u` of `R̂ = Dual F` by each. The entropy split reads them as a **group** acting on

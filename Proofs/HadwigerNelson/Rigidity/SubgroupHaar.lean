@@ -1,7 +1,7 @@
 import Proofs.HadwigerNelson.Rigidity.Annihilator
 
 /-!
-# The Haar measure of a compact subgroup of the dual, and its Fourier coefficients (FS-131, job FS131-KPD1; skeleton)
+# The Haar measure of a compact subgroup of the dual, and its Fourier coefficients (FS-131, job FS131-KPD1; proved by FS131-IDG1)
 
 **Read aloud, against the informal claim.** For a countable abelian group `G` and a compact subgroup `Y` of `Ĝ = AddChar G
 Circle` (pointwise topology, `Rigidity/DualGroup`), `subgroupHaar Y` is Haar measure of `Y` (Mathlib's `haarMeasure ⊤`, a
