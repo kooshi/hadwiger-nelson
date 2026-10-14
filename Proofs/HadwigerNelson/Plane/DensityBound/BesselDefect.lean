@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Plane.DensityBound.Bessel
+import Mathlib.Analysis.InnerProductSpace.Calculus
 
 /-!
 # The ODE comparison lemma for the Bessel system (FS-131, FS131-KDB1; skeleton)
@@ -15,30 +16,34 @@ namespace HadwigerNelson.DensityBound
 
 open Real Set
 
-/-- The Euclidean distance of `(J₀ x, J₁ x)` from `(u, v)`. -/
-noncomputable def jdist (x u v : ℝ) : ℝ := Real.sqrt ((J0 x - u) ^ 2 + (J1 x - v) ^ 2)
+/-- The Bessel system's right-hand side at `x`, applied to `w = w₀ + i w₁`: `(−w₁) + i(w₀ − w₁/x) = i w − i w₁/x`. -/
+noncomputable def besselField (x : ℝ) (w : ℂ) : ℂ := Complex.I * w - ((w.im / x : ℝ) : ℂ) * Complex.I
 
-/-- **The comparison lemma.** If `p₀, p₁` have derivatives `q₀, q₁` on `[a, b]` (`0 ≤ a`) and their defect
-`|q₀ + p₁| + |q₁ − p₀ + p₁/x|` is at most `D` on `(a, b)`, then `|J(x) − p(x)| ≤ |J(a) − p(a)| + (x − a)D` on `[a, b]`. -/
-theorem jdist_le_of_defect {a b D : ℝ} (ha : 0 ≤ a) {p0 p1 q0 q1 : ℝ → ℝ}
-    (hp0 : ∀ x ∈ Icc a b, HasDerivAt p0 (q0 x) x) (hp1 : ∀ x ∈ Icc a b, HasDerivAt p1 (q1 x) x)
-    (hδ : ∀ x ∈ Ioo a b, |q0 x + p1 x| + |q1 x - p0 x + p1 x / x| ≤ D) {x : ℝ} (hx : x ∈ Icc a b) :
-    jdist x (p0 x) (p1 x) ≤ jdist a (p0 a) (p1 a) + (x - a) * D := by
+/-- **The comparison lemma.** If `p : ℝ → ℂ` has derivative `q` on `[a, b]` (`0 ≤ a`) and its defect
+`‖q x − besselField x (p x)‖` is at most `D` on `(a, b)`, then `‖J(x) − p(x)‖ ≤ ‖J(a) − p(a)‖ + (x − a)D` on `[a, b]`. -/
+theorem norm_Jc_sub_le_of_defect {a b D : ℝ} (ha : 0 ≤ a) {p q : ℝ → ℂ}
+    (hp : ∀ x ∈ Icc a b, HasDerivAt p (q x) x) (hδ : ∀ x ∈ Ioo a b, ‖q x - besselField x (p x)‖ ≤ D)
+    {x : ℝ} (hx : x ∈ Icc a b) :
+    ‖Jc x - p x‖ ≤ ‖Jc a - p a‖ + (x - a) * D := by
   sorry
 
-/-- `|J₀ x − u| ≤ jdist x u v`: a cell's bound on the pair bounds `J₀`. -/
-theorem abs_J0_sub_le_jdist (x u v : ℝ) : |J0 x - u| ≤ jdist x u v := by
+/-- `J` solves its own system: `HasDerivAt Jc (besselField x (Jc x)) x` for `x ≠ 0`. -/
+theorem hasDerivAt_Jc {x : ℝ} (hx : x ≠ 0) : HasDerivAt Jc (besselField x (Jc x)) x := by
   sorry
 
-/-- **The tail read off one state**: for `x ≥ a ≥ 0`, `|J₀ x| ≤ √(u² + v²) + jdist a u v` — the energy is antitone
-(`antitoneOn_energy`) and the state `(u, v)` is within `jdist a u v` of `J(a)`. -/
-theorem abs_J0_le_of_le {a x : ℝ} (ha : 0 ≤ a) (hax : a ≤ x) (u v : ℝ) :
-    |J0 x| ≤ Real.sqrt (u ^ 2 + v ^ 2) + jdist a u v := by
+/-- `|J₀ x − w.re| ≤ ‖J(x) − w‖`: a cell's bound on the pair bounds `J₀`. -/
+theorem abs_J0_sub_re_le (x : ℝ) (w : ℂ) : |J0 x - w.re| ≤ ‖Jc x - w‖ := by
   sorry
 
-/-- **A model of the comparison lemma's hypotheses** with a nonzero defect: the constant pair `p = (1, 0)` on `[0, 1]`
-has defect `|0 + 0| + |0 − 1 + 0| = 1`, so `D = 1`. -/
-example : ∀ x ∈ Ioo (0 : ℝ) 1, |(0 : ℝ) + 0| + |(0 : ℝ) - 1 + 0 / x| ≤ 1 := by
-  intro x _; norm_num
+/-- **The tail read off one state**: for `x ≥ a ≥ 0`, `|J₀ x| ≤ ‖w‖ + ‖J(a) − w‖` — `‖J‖` is antitone
+(`antitoneOn_norm_Jc`) and the state `w` is within `‖J(a) − w‖` of `J(a)`. -/
+theorem abs_J0_le_of_le {a x : ℝ} (ha : 0 ≤ a) (hax : a ≤ x) (w : ℂ) : |J0 x| ≤ ‖w‖ + ‖Jc a - w‖ := by
+  sorry
+
+/-- **A model of the comparison lemma's hypotheses** with a nonzero defect: the constant `p = 1` (derivative `0`) on
+`[0, 1]` has defect `‖0 − (i·1 − 0)‖ = 1`, so `D = 1`. -/
+example : ∀ x ∈ Ioo (0 : ℝ) 1, ‖(0 : ℂ) - besselField x 1‖ ≤ 1 := by
+  intro x _
+  simp [besselField]
 
 end HadwigerNelson.DensityBound

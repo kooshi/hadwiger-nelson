@@ -27,10 +27,6 @@ open scoped ENNReal
 /-- **The autocorrelation** `F(z) = vol(E ∩ (E − z))`, as a real number (finite for the bounded sets it is used on). -/
 noncomputable def autocorr (E : Set ℂ) (z : ℂ) : ℝ := (volume (E ∩ (fun y => y + z) ⁻¹' E)).toReal
 
-/-- **The circle average** `f̊(r) = (2π)⁻¹ ∫₀^{2π} f(r e^{iθ}) dθ`. -/
-noncomputable def circleAvg (f : ℂ → ℝ) (r : ℝ) : ℝ :=
-  (2 * π)⁻¹ * ∫ θ in (0 : ℝ)..(2 * π), f ((r : ℂ) * Complex.exp (θ * Complex.I))
-
 /-- **`[KMOR2016]` Lemma 3.2 (1), finite-window form**: a 1-avoiding set meets no translate of itself by a unit vector. -/
 theorem autocorr_eq_zero_of_norm_eq_one {E : Set ℂ} (h1 : ∀ a ∈ E, ∀ b ∈ E, dist a b ≠ 1) {z : ℂ}
     (hz : ‖z‖ = 1) : autocorr E z = 0 := by
@@ -38,11 +34,11 @@ theorem autocorr_eq_zero_of_norm_eq_one {E : Set ℂ} (h1 : ∀ a ∈ E, ∀ b �
 
 /-- The circle average of the autocorrelation at radius `1` vanishes. -/
 theorem circleAvg_autocorr_one {E : Set ℂ} (h1 : ∀ a ∈ E, ∀ b ∈ E, dist a b ≠ 1) :
-    circleAvg (autocorr E) 1 = 0 := by
+    Real.circleAverage (autocorr E) 0 1 = 0 := by
   sorry
 
 /-- At radius `0`: `F̊(0) = F(0) = vol E`. -/
-theorem circleAvg_autocorr_zero (E : Set ℂ) : circleAvg (autocorr E) 0 = (volume E).toReal := by
+theorem circleAvg_autocorr_zero (E : Set ℂ) : Real.circleAverage (autocorr E) 0 0 = (volume E).toReal := by
   sorry
 
 /-- `F` is continuous for a measurable set of finite measure (translation is continuous in measure:
@@ -54,7 +50,7 @@ theorem continuous_autocorr {E : Set ℂ} (hE : MeasurableSet E) (hfin : volume 
 /-- **Positive definiteness against `J₀`** (the Fourier side, Gaussian-regularized). -/
 theorem sum_circleAvg_autocorr_nonneg {E : Set ℂ} (hE : MeasurableSet E) (hb : Bornology.IsBounded E)
     {ι : Type*} (s : Finset ι) (c r : ι → ℝ) (hW : ∀ t : ℝ, 0 ≤ t → 0 ≤ ∑ k ∈ s, c k * J0 (t * r k)) :
-    0 ≤ ∑ k ∈ s, c k * circleAvg (autocorr E) (r k) := by
+    0 ≤ ∑ k ∈ s, c k * Real.circleAverage (autocorr E) 0 (r k) := by
   sorry
 
 /-- **A model** of `sum_circleAvg_autocorr_nonneg`'s hypotheses with every clause exercised: `E` the open disc of radius

@@ -1,0 +1,62 @@
+@norm_Jc_sub_le_of_defect : ∀ {a b D : ℝ},
+  0 ≤ a →
+    ∀ {p q : ℝ → ℂ},
+      (∀ x ∈ Set.Icc a b, HasDerivAt p (q x) x) →
+        (∀ x ∈ Set.Ioo a b, ‖q x - besselField x (p x)‖ ≤ D) →
+          ∀ {x : ℝ}, x ∈ Set.Icc a b → ‖Jc x - p x‖ ≤ ‖Jc a - p a‖ + (x - a) * D
+antitoneOn_norm_Jc : AntitoneOn (fun x => ‖Jc x‖) (Set.Ici 0)
+@sum_circleAvg_autocorr_nonneg : ∀ {E : Set ℂ},
+  MeasurableSet E →
+    Bornology.IsBounded E →
+      ∀ {ι : Type u_1} (s : Finset ι) (c r : ι → ℝ),
+        (∀ (t : ℝ), 0 ≤ t → 0 ≤ ∑ k ∈ s, c k * J0 (t * r k)) →
+          0 ≤ ∑ k ∈ s, c k * Real.circleAverage (autocorr E) 0 (r k)
+@DualCert.window_bound : ∀ {n : ℕ} (C : DualCert n),
+  C.Valid →
+    ∀ {E : Set ℂ},
+      MeasurableSet E →
+        (∀ a ∈ E, ∀ b ∈ E, dist a b ≠ 1) →
+          ∀ {x₀ : ℂ} {R D : ℝ},
+            E ⊆ Metric.ball x₀ R →
+              (∀ (i : Fin n), ‖C.X i‖ ≤ D) →
+                (∑ i, C.w1 i) * (MeasureTheory.volume E).toReal +
+                    (List.map (fun e => e.2.2 * Real.circleAverage (autocorr E) 0 ‖C.X e.1 - C.X e.2.1‖) C.w2).sum ≤
+                  C.bound * (MeasureTheory.volume (Metric.ball x₀ (R + D))).toReal
+@DualCert.window_le : ∀ {n : ℕ} (C : DualCert n),
+  C.Valid →
+    ∀ {w0 mu : ℝ},
+      (∀ (t : ℝ), 0 ≤ t → 1 - mu ≤ C.phi w0 t) →
+        ∀ {E : Set ℂ},
+          MeasurableSet E →
+            (∀ a ∈ E, ∀ b ∈ E, dist a b ≠ 1) →
+              ∀ {x₀ : ℂ} {R D : ℝ},
+                E ⊆ Metric.ball x₀ R →
+                  (∀ (i : Fin n), ‖C.X i‖ ≤ D) →
+                    (1 - mu) * (MeasureTheory.volume E).toReal ≤
+                      C.bound * (MeasureTheory.volume (Metric.ball x₀ (R + D))).toReal
+@DualCert.limsup_le : ∀ {n : ℕ} (C : DualCert n),
+  C.Valid →
+    ∀ {w0 mu : ℝ},
+      mu < 1 →
+        (∀ (t : ℝ), 0 ≤ t → 1 - mu ≤ C.phi w0 t) →
+          ∀ {A : Set ℂ},
+            MeasureTheory.NullMeasurableSet A MeasureTheory.volume →
+              (∀ a ∈ A, ∀ b ∈ A, dist a b ≠ 1) →
+                ∀ (x₀ : ℂ),
+                  Filter.limsup
+                      (fun R => MeasureTheory.volume (A ∩ Metric.ball x₀ R) / MeasureTheory.volume (Metric.ball x₀ R))
+                      Filter.atTop ≤
+                    ENNReal.ofReal (C.bound / (1 - mu))
+@DualCert.oneAvoidingDensityBound_of : ∀ {n : ℕ} (C : DualCert n),
+  C.Valid →
+    ∀ {w0 mu : ℝ},
+      mu < 1 →
+        (∀ (t : ℝ), 0 ≤ t → 1 - mu ≤ C.phi w0 t) →
+          C.bound / (1 - mu) ≤ 0.2470 → HadwigerNelson.Plane.OneAvoidingDensityBound
+circleAverage_exp_inner : ∀ (ξ : ℂ) (r : ℝ),
+  Real.circleAverage (fun z => Complex.exp (Complex.I * ↑(inner ℝ ξ z))) 0 r = ↑(J0 (r * ‖ξ‖))
+@hasDerivAt_J1 : ∀ {x : ℝ}, x ≠ 0 → HasDerivAt J1 (J0 x - J1 x / x) x
+'HadwigerNelson.DensityBound.DualCert.oneAvoidingDensityBound_of' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

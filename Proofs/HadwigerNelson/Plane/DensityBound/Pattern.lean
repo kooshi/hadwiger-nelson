@@ -54,8 +54,11 @@ def Congruent (I J : Finset (Fin n)) : Prop :=
 /-- **The certificate's hypotheses** (`[AmbrusEtAl2023]` Proposition 1's `V(ε) ≥ 0`, read with `ν` inside `bound`, on the
 nonempty independent atoms only; the congruences of `C(X)`). -/
 structure Valid : Prop where
+  /-- Every listed congruence constraint is between congruent sets. -/
   cong : ∀ e ∈ C.wc, C.Congruent e.1 e.2.1
+  /-- `V(S) ≥ 0`, i.e. `L(S) ≤ bound`, on every nonempty independent `S`. -/
   atoms : ∀ S : Finset (Fin n), S.Nonempty → C.IsIndep S → C.L S ≤ C.bound
+  /-- The bound is nonnegative. -/
   bound_nonneg : 0 ≤ C.bound
 
 /-- The Fourier-side function `ϕ(t) = w₀ J₀(t) + Σ w₁ + Σ w₂ J₀(t |X i − X j|)` (eq. (22)). -/
@@ -66,7 +69,7 @@ noncomputable def phi (w0 t : ℝ) : ℝ :=
 theorem window_bound (hC : C.Valid) {E : Set ℂ} (hE : MeasurableSet E) (h1 : ∀ a ∈ E, ∀ b ∈ E, dist a b ≠ 1)
     {x₀ : ℂ} {R D : ℝ} (hER : E ⊆ ball x₀ R) (hD : ∀ i, ‖C.X i‖ ≤ D) :
     (∑ i, C.w1 i) * (volume E).toReal +
-        (C.w2.map fun e => e.2.2 * circleAvg (autocorr E) ‖C.X e.1 - C.X e.2.1‖).sum ≤
+        (C.w2.map fun e => e.2.2 * Real.circleAverage (autocorr E) 0 ‖C.X e.1 - C.X e.2.1‖).sum ≤
       C.bound * (volume (ball x₀ (R + D))).toReal := by
   sorry
 

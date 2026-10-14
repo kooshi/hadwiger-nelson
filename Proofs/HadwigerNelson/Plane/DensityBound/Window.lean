@@ -42,4 +42,11 @@ theorem oneAvoidingDensityBound_of (hC : C.Valid) {w0 mu : ℝ} (hmu : mu < 1)
 
 end DualCert
 
+/-- **A model of `DualCert.limsup_le`'s hypotheses, all at once**: `trivialCert` (valid, `trivialCert_valid`) with `w₀ = 0`,
+`µ = 0`, where `ϕ ≡ 1 ≥ 1 − 0`; with `A` the open disc of radius `1/2` (measurable, 1-avoiding:
+`Plane.oneAvoidingDensityBound_model` on the other plane) the conclusion is the true bound `limsup ≤ 1`. -/
+example : ∀ t : ℝ, 0 ≤ t → 1 - 0 ≤ trivialCert.phi 0 t := by
+  intro t _
+  simp [DualCert.phi, trivialCert]
+
 end HadwigerNelson.DensityBound
