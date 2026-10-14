@@ -839,12 +839,12 @@ either banner, so an audit that could not elaborate cannot read as a pass.
 
 None is an `axiom`: each is a `Prop` argument visible in the statement of every theorem that takes it, so `#print axioms`
 shows the standard three and the axiom audit counts the theorem clean. `scripts/assumptions-ledger.txt` lists every
-(hypothesis, statement) pair — 106 pairs, 52 statements — and the gate compares it with the library exactly. The gate fails
+(hypothesis, statement) pair — 102 pairs, 52 statements — and the gate compares it with the library exactly. The gate fails
 on a hypothesis that is closed (no free variable), never concluded, concluded only from another assumption, or called one
 in its docstring, and is not in the list. What it cannot find by itself is a hand result written out over a theorem's own
 variables under a docstring that does not say so; the landing that brings one declares it — and retires it, on its own
-word, when a theorem proves it: the step finds a discharged named hypothesis and not a discharged binder. Thirty-four
-entries, by kind (FS131-LT5; one retired at FS131-LU1; names under `HadwigerNelson.`):
+word, when a theorem proves it: the step finds a discharged named hypothesis and not a discharged binder. Thirty-three
+entries, by kind (FS131-LT5; one retired at FS131-LU1 and one at FS131-LJ1; names under `HadwigerNelson.`):
 
 **Outside theorems — seven entries, five theorems.** Weil's bound is listed in each form it takes: the import above (eight
 theorems rest on the axiom), and the two hypothesis forms below, which the import proves.
@@ -859,10 +859,13 @@ theorems rest on the axiom), and the two hypothesis forms below, which the impor
 | `StandingFive.KloostermanBound` | named | `[Weil1948]` p. 207, at the theorem's field; proved from the import at characteristic not 2 | 9 |
 | `hK` of `standingFloor_seven`, `standingFloor_five`, `seven_le_localBound_of_kloosterman` | in a binder | `[Weil1948]` p. 207, at every field of `q ≡ 3 (mod 4)`, `q ≥ 347` elements | 3 |
 
-**Hand results of ours — twenty-two: twelve named, ten written out in a binder.** (The upper half `χ(F²) ≤ L(F)`, `hUpper` of
+**Hand results of ours — twenty-one: twelve named, nine written out in a binder.** (Row 99's lower half through four, `hRow99` of the
+chain's four theorems, left this table at FS131-LJ1: it is the theorem `ThreeFourColours.localBound_le_chromaticNumber_of_le_four`, which
+rests on the declared outside theorem `StandingFive.kloosterman_bound` — a hand result discharged over an import, so the binder is a
+condition a library theorem meets and a statement that feeds it with that theorem is an imported record. The upper half `χ(F²) ≤ L(F)`, `hUpper` of
 `SpectralChain.chromaticNumber_eq_localBound`, left this table at FS131-LU1: it is the theorem
 `UpperHalf.chromaticNumber_planeOver_le_localBound`, and `UpperHalf.chromaticNumber_eq_localBound_of_chain` is the headline
-without it, taking the nine that remain.)
+without it, taking the nine that remained then — eight since FS131-LJ1.)
 
 | hypothesis | form | source | statements that take it |
 |---|---|---|---|
@@ -878,7 +881,6 @@ without it, taking the nine that remain.)
 | `SpectralChain.Interface.NegCircle` | named | J45 § 4.2 step 3 | 1 |
 | `Plane.Row130M1` | named | row 130 (`χ_CP ≤ χ_m⁰`) | 1 |
 | `SevenConditional.G4` | named | row 103 (a solver refusal with no proof log) | 1 |
-| `hRow99` | in a binder | row 99 (`χ(F²) = L(F)` at `L(F) ≤ 4`) | 4 |
 | `hCLS` | in a binder | X23D-CLS (`L(F) ≥ 5 ⟹` T-C(A)) | 4 |
 | `hRow123` | in a binder | row 123's chain at the standing field | 2 |
 | `hRQ4`, `hRQ5` of `cl2` | in a binder | FS89-D2-T1, FS89-D5-T2 | 1 each |

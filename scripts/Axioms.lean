@@ -211,6 +211,21 @@ declared that no audited record carries fails as `stale-declaration`. -/
 #print axioms HadwigerNelson.StandingFive.standingFloor_five_weil
 #print axioms HadwigerNelson.StandingFive.seven_le_localBound_weil
 #print axioms HadwigerNelson.StandingFive.five_le_chromaticNumber_weil
+-- FS131-LJ1: the three-colour criterion's records resting on `kloosterman_bound` (claims NF4, clause (b) toward the prime and row 99's lower half;
+-- the bound is read at one place, `targetFloor_four_weil`) — `Arith/ThreeColourCriterion` 5 (the leaves' proofs FS131-IN1's)
+#print axioms HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine
+#print axioms HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine_of_colorable_three
+#print axioms HadwigerNelson.ThreeColourCriterion.exists_maximal_of_torsion
+#print axioms HadwigerNelson.ThreeColourCriterion.exists_normOne_zero_of_card_ne_nine
+#print axioms HadwigerNelson.ThreeColourCriterion.targetFloor_four_weil
+-- FS131-LJ1: … and `Arith/ThreeFourColours` 7 (clause (b) in both forms, row 99 in four, one model; FS131-KJ1's)
+#print axioms HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_eq_localBound_of_le_four
+#print axioms HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_eq_three_iff
+#print axioms HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_le_three_iff
+#print axioms HadwigerNelson.ThreeFourColours.colorable_three_planeOver_iff
+#print axioms HadwigerNelson.ThreeFourColours.exists_maximal_card_nine_sqrt_three
+#print axioms HadwigerNelson.ThreeFourColours.localBound_le_chromaticNumber_of_le_four
+#print axioms HadwigerNelson.ThreeFourColours.localBound_le_chromaticNumber_or_four_le
 
 #eval AxiomAudit.declareImport ``HadwigerNelson.Outside.OAI158.no_proper_five_coloring
 #eval AxiomAudit.declareImport ``HadwigerNelson.Outside.OAI158.proper_to_borel_weak
@@ -8863,6 +8878,109 @@ each, under CLEAN, on exactly the standard three; over the whole log the records
 #print axioms HadwigerNelson.UpperHalf.exists_stablePrime_rat
 #print axioms HadwigerNelson.UpperHalf.chromaticNumber_planeOver_rat
 -- FS131-LU1 block end
+
+/-! ## FS131-LJ1 — the three-and-four-colours line (claims NF4 with NF1; statements FS131-KN4's, passes FS131-KN5; joined by FS131-KJ1)
+
+Ninety-six records: every public declaration a person typed in `Arith/ThreeColourCharacter`, `Arith/TorsionExtraction`,
+`Arith/ThreeColourCriterion`, `Arith/DyadicQuadratic`, `Arith/ThreeFourColours` and `Instances/UpperHalfCorollaries` — 94 theorems and 2
+definitions (the kernel's list: `data/fs131/lj1/decls.lean`; the lines are FS131-KJ1's block, `data/fs131/kj1/audit-block.txt`, made from
+the compiled modules).  The files' private helpers are not nameable here; each is read by a record of the block.  **Eighty-four here,
+under CLEAN; twelve under IMPORTED, above**, each on the standard three and exactly one declared outside theorem,
+`StandingFive.kloosterman_bound` (Weil's bound) — five of `Arith/ThreeColourCriterion` and seven of `Arith/ThreeFourColours`: the direction
+of the three-colour criterion from a colouring to the prime, and row 99's lower half.  Clause (a)'s table, clause (c) and the lower bound
+of four are under CLEAN.  `data/fs131/lj1/lj1_records.py` reads the kernel's list of the six modules against the audit's log: one record
+each, the twelve under IMPORTED on the standard three and exactly that import, every other under CLEAN on a subset of the standard three. -/
+-- FS131-LJ1 block: `Arith/ThreeColourCharacter` — 11 records under CLEAN (the eight leaves' proofs FS131-IC1's, two statements FS131-KJ1's)
+#print axioms HadwigerNelson.ThreeColour.Winding.exists_box_point
+#print axioms HadwigerNelson.ThreeColourCharacter.bandSet_nonempty_of_finite
+#print axioms HadwigerNelson.ThreeColourCharacter.bandSet_three_nonempty_of_proper
+#print axioms HadwigerNelson.ThreeColourCharacter.bandSet_three_nonempty_zmod_five
+#print axioms HadwigerNelson.ThreeColourCharacter.exists_character_of_box_point
+#print axioms HadwigerNelson.ThreeColourCharacter.exists_character_of_properAlong
+#print axioms HadwigerNelson.ThreeColourCharacter.exists_character_one_two
+#print axioms HadwigerNelson.ThreeColourCharacter.exists_int_vector_of_forall_neg
+#print axioms HadwigerNelson.ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable
+#print axioms HadwigerNelson.ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable_unitRing
+#print axioms HadwigerNelson.ThreeColourCharacter.isClosed_band
+-- FS131-LJ1 block: `Arith/TorsionExtraction` — 20 records under CLEAN (19 theorems and the definition `inv5`; the ten leaves' proofs FS131-IT1's, two statements FS131-KJ1's)
+#print axioms HadwigerNelson.TorsionExtraction.chromaticNumber_planeOver_ne_three_of_inv_three_mem
+#print axioms HadwigerNelson.TorsionExtraction.coe_inv5
+#print axioms HadwigerNelson.TorsionExtraction.colorable_two_iff_fieldBandSet_two_nonempty
+#print axioms HadwigerNelson.TorsionExtraction.colorable_two_of_fieldBandSet_three_nonempty
+#print axioms HadwigerNelson.TorsionExtraction.colorable_two_of_inv_three_mem
+#print axioms HadwigerNelson.TorsionExtraction.exists_torsion_mem_fieldBandSet
+#print axioms HadwigerNelson.TorsionExtraction.exists_zmod_hom_of_mem_torsionBy
+#print axioms HadwigerNelson.TorsionExtraction.fieldBandSet_three_eq_empty_of_sqrt_mem
+#print axioms HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_fieldOfRadicands
+#print axioms HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_of_inv_three_mem
+#print axioms HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_of_sqrt_mem
+#print axioms HadwigerNelson.TorsionExtraction.inv5
+#print axioms HadwigerNelson.TorsionExtraction.inv_natCast_mem_unitRing_of_sqrt_mem
+#print axioms HadwigerNelson.TorsionExtraction.inv_three_mem_unitRing_of_sqrt_mem
+#print axioms HadwigerNelson.TorsionExtraction.layer_dichotomy
+#print axioms HadwigerNelson.TorsionExtraction.layer_step
+#print axioms HadwigerNelson.TorsionExtraction.mem_fieldBandSet_two_of_inv_three_mem
+#print axioms HadwigerNelson.TorsionExtraction.not_colorable_two_of_sqrt_mem
+#print axioms HadwigerNelson.TorsionExtraction.tendsto_layer
+#print axioms HadwigerNelson.TorsionExtraction.three_le_chromaticNumber_planeOver_of_sqrt_mem
+-- FS131-LJ1 block: `Arith/ThreeColourCriterion` — 12 records under CLEAN (11 theorems and the definition `conjR`; the leaves' proofs FS131-IN1's; its other five records are under IMPORTED)
+#print axioms HadwigerNelson.ThreeColourCriterion.coe_conjR
+#print axioms HadwigerNelson.ThreeColourCriterion.comap_conjR_eq
+#print axioms HadwigerNelson.ThreeColourCriterion.conjR
+#print axioms HadwigerNelson.ThreeColourCriterion.conjR_conjR
+#print axioms HadwigerNelson.ThreeColourCriterion.conj_mem_unitRing
+#print axioms HadwigerNelson.ThreeColourCriterion.eq_zero_of_forall_normOne_eq
+#print axioms HadwigerNelson.ThreeColourCriterion.exists_maximal_conj_trivial
+#print axioms HadwigerNelson.ThreeColourCriterion.exists_maximal_conj_trivial_of_colorable_two
+#print axioms HadwigerNelson.ThreeColourCriterion.exists_mul_conj_inv_eq_of_mul_conj_eq_one
+#print axioms HadwigerNelson.ThreeColourCriterion.exists_unitSet_mul_conjR_eq
+#print axioms HadwigerNelson.ThreeColourCriterion.fieldBandSet_two_nonempty_of_conj_trivial
+#print axioms HadwigerNelson.ThreeColourCriterion.finite_quotient_span_natCast
+-- FS131-LJ1 block: `Arith/DyadicQuadratic` — 13 records under CLEAN (the ten leaves' proofs FS131-ID1's, two statements FS131-KJ1's)
+#print axioms HadwigerNelson.DyadicQuadratic.colorable_four_planeOver_sqrt
+#print axioms HadwigerNelson.DyadicQuadratic.colorable_planeOver_of_addMonoidHom
+#print axioms HadwigerNelson.DyadicQuadratic.colorable_two_planeOver_sqrt
+#print axioms HadwigerNelson.DyadicQuadratic.colorable_two_planeOver_sqrt_of_mod_four
+#print axioms HadwigerNelson.DyadicQuadratic.dyadic_shape_one_mod_four
+#print axioms HadwigerNelson.DyadicQuadratic.dyadic_shape_three_mod_eight
+#print axioms HadwigerNelson.DyadicQuadratic.dyadic_shape_two_mod_four
+#print axioms HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_one_mod_four
+#print axioms HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_three_mod_eight
+#print axioms HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_two_mod_four
+#print axioms HadwigerNelson.DyadicQuadratic.exists_int_solution_of_mem_unitVectors
+#print axioms HadwigerNelson.DyadicQuadratic.exists_rat_add_mul_sqrt_eq
+#print axioms HadwigerNelson.DyadicQuadratic.mod_four_of_squarefree
+-- FS131-LJ1 block: `Arith/ThreeFourColours` — 24 records under CLEAN (the joining module, FS131-KJ1's; its other seven records are under IMPORTED)
+#print axioms HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four
+#print axioms HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four_of_dyadic
+#print axioms HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four_of_seven
+#print axioms HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four_of_seven_of_mod
+#print axioms HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_three
+#print axioms HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_three_of_mod
+#print axioms HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_two
+#print axioms HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_table
+#print axioms HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_three
+#print axioms HadwigerNelson.ThreeFourColours.colorable_four_planeOver_sqrt_of_seven
+#print axioms HadwigerNelson.ThreeFourColours.colorable_three_of_card_three
+#print axioms HadwigerNelson.ThreeFourColours.colorable_three_planeOver_sqrt
+#print axioms HadwigerNelson.ThreeFourColours.exists_maximal_card_three_of_card_nine
+#print axioms HadwigerNelson.ThreeFourColours.exists_maximal_card_three_of_stablePrime_card_nine
+#print axioms HadwigerNelson.ThreeFourColours.exists_maximal_conj_trivial_sqrt_two
+#print axioms HadwigerNelson.ThreeFourColours.exists_stablePrime_card_four_sqrt
+#print axioms HadwigerNelson.ThreeFourColours.exists_stablePrime_card_nine
+#print axioms HadwigerNelson.ThreeFourColours.exists_stablePrime_conj_trivial
+#print axioms HadwigerNelson.ThreeFourColours.exists_stablePrime_of_maximal
+#print axioms HadwigerNelson.ThreeFourColours.exists_stablePrime_ramified_sqrt
+#print axioms HadwigerNelson.ThreeFourColours.exists_unitSet_residue_eq
+#print axioms HadwigerNelson.ThreeFourColours.fieldBandSet_three_nonempty_sqrt_three
+#print axioms HadwigerNelson.ThreeFourColours.levelTarget_colorable_three_of_card_nine
+#print axioms HadwigerNelson.ThreeFourColours.levelTarget_colorable_two_of_ramified
+-- FS131-LJ1 block: `Instances/UpperHalfCorollaries` — 4 records under CLEAN (FS131-KJ1's)
+#print axioms HadwigerNelson.UpperHalf.chromaticNumber_planeOver_eq_two_of_localBound_le_two
+#print axioms HadwigerNelson.UpperHalf.chromaticNumber_planeOver_sqrt_247_le_five
+#print axioms HadwigerNelson.UpperHalf.chromaticNumber_planeOver_sqrt_five_le_five
+#print axioms HadwigerNelson.UpperHalf.two_notMem_stablePrime_seven
+-- FS131-LJ1 block end
 
 #eval IO.println "=== PURCHASED ==="
 
