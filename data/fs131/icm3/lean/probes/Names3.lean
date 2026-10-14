@@ -1,0 +1,9 @@
+import Mathlib
+#check @SimpleGraph.colorable_of_fintype
+#check @FiniteField.card
+#check @Nat.dvd_prime_pow
+#check @Fintype.one_lt_card
+#check @Ideal.Quotient.eq
+#check @CharTwo.of_one_ne_zero_of_two_eq_zero
+#check @SimpleGraph.Colorable.chromaticNumber_le
+#check @neg_div_neg_eq

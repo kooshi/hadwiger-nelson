@@ -138,3 +138,57 @@ UPSTREAM: the two leaves; `ratioAtMost_of_five_le_chromaticNumber`, `tca_of_five
 `count_of_oneAvoidingDensityBound` over `Plane.upperDensity_le_of_oneAvoidingDensityBound` and
 `Rigidity.noRamifiedStableDyadic_of_tca` only. Without the leaf list **FAIL 4** (`axioms1-read-noleaves.out`, exit 1); the
 planted `sorry` and axiom **2 of 2 FAIL** (`axioms1-plant-read.out`).
+
+## Stage 4 — SAVED: the dyadic branch cut — Lemma P with no unit `2` proved; `ratioAtMost_dyadic` proved over three closed children; build 2
+
+**Proved** (≈ 680 lines net in `Rigidity/ClassRatio`, all private; the stored statements unchanged — below).
+
+*Lemma P with no unit `2`* (`section LemmaPAlgebraT`, ≈ 200 lines, and the residue rings, ≈ 330). The odd algebra
+(`SqZeroInv`) used `2u = 1` and `ι` with `σι = −ι` only to split `K`; the split needs only an element `θ` with `θ − σθ` a
+unit (inverse `δ`, so `σδ = −δ`). `SqZeroInvT`: `σ`, `K` with `K·K = 0`, `σK ⊆ K`, `θ`, `δ`, `(θ − σθ)δ = 1`.
+- `card_Kn_sq`: `K = Kn ⊕ θ·Kn` (`(a, b) ↦ a + θb`, inverse `f ↦ (f − θb, b)`, `b = δ(f + σf)`), so `|Kn|² = |K|`.
+- `card_lift` (Hensel with no `1/2`): the norm-one lifts of `x₀` are `(σx₀)⁻¹(w + f₀)`, `w ∈ Kn`, `f₀ = −θδd`.
+- `norm_sum_le`, `pm_of_good`, `sum_Kn`: FS131-ICM2's proofs, which never read `u` or `ι`, copied onto `SqZeroInvT`.
+- At the residue rings, `sqZeroInvTAt P ha n` with `θ` the residue of any `a` with `conjO a − a ∉ P` (so `¬ IsRamified P`;
+  `θ − σθ` is a unit modulo every power of `P`): `card_KnT_at`, `card_fibreT`, `card_levelSet_oneT`, `card_res_fibreT`,
+  `card_levelSet_succT`, `norm_charSum_new_leT`, and **`charBound_of_charBound_oneT`** — a level-one bound `κ ≥ 2/(Q + 1)`
+  holds at every level, at any stable prime conjugation moves, in any residue characteristic. FS131-ICM2's odd chain is
+  untouched (its constants PRIVATE-SAME); the new chain is a second copy with `a` in place of the unit `2`, by the brief's
+  "no statement changes" — a refactor onto one chain is a tidy for the landing.
+
+*The dyadic glue* (≈ 150 lines): `card_eq_sq_of_involution` (a finite field with an involution moving `θ` has `|k| =
+|k^σ|²`, by the same `θ`-split), `exists_card_two_pow_sq` (`|𝓞 ⧸ P| = (2^f)²` at an unramified dyadic stable prime),
+`charBound_one_of_charSum` (a bound on the norm-one character sums of every field of `Q²` elements is a level-one
+`CharBound`), `chromaticNumber_le_four_dyadic` (`f = 0` impossible, `f = 1` one colour per element, `2 ≤ f ≤ 5` a child),
+and **`ratioAtMost_dyadic`**: `f ≤ 5` excluded; `f = 6` `κ = 15/65`; `f = 7` `κ = 19/129` by **`Floor128.charSum_128_ge`**
+(the kernel's, no outside theorem); `f ≥ 8` `κ = 3/10`; then `charBound_of_charBound_oneT` and `ratioAtMost_of_charBound`.
+
+**Three named children, each a closed statement about finite fields (no number field):**
+
+| child | statement | grounds for truth | route |
+|---|---|---|---|
+| `colorable_four_dyadic_small` | `2 ≤ f ≤ 5`, `|k| = (2^f)²` ⟹ `Cay(k, {u : u^(2^f+1) = 1})` is 4-colourable | X26B-T1 [tools exact]: 10, 36, 68 codimension-2 `𝔽₂`-subspaces avoiding `μ_{Q+1}` at `Q = 4, 8, 16`; 11 `𝔽₄`-hyperplanes at 32 | a certificate per `f` in a model of `𝔽_{2^{2f}}`, as `Floor128`'s at `2¹⁴` (a primitive polynomial, the register's orbit, the subspace's two coordinate functionals checked off `μ`) |
+| `charSum_64_ge` | `|k| = 64²`, `ψ ≠ 1` ⟹ `Re Σ_{u^65=1} ψ u ≥ −15` | X26B-T1 and EN1's control: `λ_min(U₆₄) = −15` [tools exact] | `Floor128`'s certificate and bridge at `2¹²` (period `4095`, classes modulo 63, counters `≤ 40`) |
+| `charSum_dyadic_large` | `f ≥ 8`, `|k| = (2^f)²`, `ψ ≠ 1` ⟹ `Re Σ_{u^(Q+1)=1} ψ u ≥ −(3/10)(Q + 1)` | EN1-UQ4 [hand, one mind]: `|λ|⁴ ≤ 2Q³ − 2Q² − 3Q − 1`; re-derived here (a second reading) | the fourth-moment count — **proved in a working file at this stage** (`data/fs131/icm3/lean/UQ4Work.lean`, no `sorry`), installed at stage 5 |
+
+`3/10` against EN1-UQ4's bound at `Q = 256`: `(2Q³ − 3Q − 1)^{1/4} = 76.1 < 77.1 = (3/10)·257` (the count proved uses the
+cruder `N ≤ 3(Q + 1)²`, which gives `2Q³ − 3Q − 1`; still enough).
+
+**Build 2** under the slot (`logs/build-2.log`, full output `logs/build-2-full.log.xz`,
+`build/gate/build/20261014T201553Z-452261.log`): **OK — 257 of 257 batches, 7 modules rebuilt, 8 m 15 s, exit 0**; the
+only warnings from this job's files are the four `declaration uses 'sorry'` of the three children and `ratioAtMost_cert`
+(`ClassRatio.lean` lines 1649, 1657, 1665, 1820).
+
+**No statement and no definition changed** (`statements-compare2.out`): **SAME 44, PRIVATE-SAME 129, CHANGED 0, MISSING 0,
+ADDED-PUBLIC 0**, ADDED-INTERNAL 101, NEW-MODULE 27 — PASS; five plants fire (`statements-plant2.out`).
+
+**Axioms** (`axioms2-read.out`, the four `sorry` leaves named): **234 records — CLEAN 218, IMPORTED 7, UPSTREAM 9, FAIL 0**.
+CLEAN: the whole `SqZeroInvT` chain, `charBound_of_charBound_oneT`, `card_eq_sq_of_involution`, `exists_card_two_pow_sq`,
+`charBound_one_of_charSum`. UPSTREAM: the three children and `ratioAtMost_cert`; `chromaticNumber_le_four_dyadic`,
+`ratioAtMost_dyadic`, `ratioAtMost_of_five_le_chromaticNumber`, `tca_of_five_le_localBound` over them;
+`count_of_oneAvoidingDensityBound` as before. Without the leaf list **FAIL 8** (`axioms2-read-noleaves.out`, exit 1).
+
+**Re-priced:** Lemma P with no unit `2` ≈ 530 lines (most of it ICM2's text over the new algebra); the glue ≈ 150; the
+fourth-moment count ≈ 260 (KR1's "about 300"). Left: the two certificate children — a generic form of `Floor128`'s bridge
+(its 661 lines are specific to one polynomial), ≈ 400–600 lines, then five certificates (degrees 4, 6, 8, 10 for the
+colourings, 12 for the spectrum), ≈ 60–120 lines each with their generators: **≈ 700–1,200 lines** in all.
