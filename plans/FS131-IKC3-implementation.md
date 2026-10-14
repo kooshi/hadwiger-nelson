@@ -112,3 +112,102 @@ as FS131-IKC1 measured; halving the segments again would save little.
   The new records: `cert11` `[]`; `cert11_seg0` … `seg7`, `cert11_global`, `cert11_psd` `[propext]`; `cert11_ok`
   `[propext, Quot.sound]`; `sum_le_eleven`, `card_le_eleven`, `model_eleven` the standard three; the four `rfl` facts `[]`.
   `native_decide`: nowhere in these files (`grep`).
+
+## Stage 3 — SAVED: F2 at p = 19 — the parts measured, the design, and what the data weighs
+
+`certOK`'s definition is **not changed** in this job (§ 2.4: `FibreCert` byte-identical). F2's new checker parts are
+written and run as **probes** under `data/fs131/ikc3/` (each imports the built library and adds definitions beside it),
+because any change to `Cert` or `certOK` regenerates `cert3` and `cert11` and reopens K2 at once, and that is one job —
+§ 3.4. Every probe ran under the slot, one at a time, `lake env lean` with `/usr/bin/time -v`
+(`data/fs131/ikc3/run_probes.sh`; logs `data/fs131/ikc3/logs/probes1` … `probes5`). Time and peak RSS are the whole
+process: Lean's start (about 0.75 s, 0.84 GB, the tiny block `B2`), the file's literal parse, and the kernel.
+
+### 3.1 The parts measured
+
+| part (F2 item, KC13 record § 3.2) | probe | p | time | peak RSS | verdict |
+|---|---|---|---|---|---|
+| PSD, one 183 × 183 block, witness scale `2^120` (item 4) | `p19/psd/B1.lean` (2.7 MB) | 19 | 62.4 s | 5.93 GB | `psdCheck blk = true` |
+| the same, block 35 | `B35.lean` | 19 | 62.6 s | 5.91 GB | true |
+| the same block, witness scale `2^40` | `B1s40.lean` (1.3 MB) | 19 | 44.9 s | 5.27 GB | true |
+| a 2 × 2 times-q block | `B2.lean` | 19 | 0.75 s | 0.84 GB | true |
+| **control**: `M[0][0]` doubled | `B1digit.lean` | 19 | 25.6 s | 2.21 GB | `= false` proved |
+| **control**: `R[1][2] = R[2][1]` moved by `2^200` | `B1entry.lean` | 19 | 27.1 s | 2.25 GB | `= false` proved |
+| K table as a literal, maps 0–4 of 40 against `ktable` (item 1) | `f2/KT19.lean` (17.4 MB) | 19 | 113.6 s | 3.61 GB | `ktabChk mini kt 5 0 = true` |
+| **control**: one slot of map 0 moved by one | `KT19bad.lean` | 19 | 104.5 s | 0.84 GB | `= false` proved |
+| the same check, maps 5–9 of 24 | `KT11.lean` (1.8 MB) | 11 | 9.9 s | 1.05 GB | true |
+| **control**: one slot of map 5 moved by one | `KT11bad.lean` | 11 | 5.9 s | 0.84 GB | `= false` proved |
+| phase 1, orbits [0, 55) of 218 (item 2) | `f2/p1/P1R0.lean` | 11 | 21.9 s | 3.41 GB | `p1Chk … = true` |
+| orbits [55, 110) | `P1R1.lean` | 11 | 24.4 s | 3.66 GB | true |
+| orbits [110, 165) | `P1R2.lean` | 11 | 25.9 s | 3.72 GB | true |
+| orbits [165, 2^14) | `P1R3.lean` | 11 | 22.9 s | 3.48 GB | true |
+| **control**: orbit 60's row moved by one | `P1R1bad.lean` | 11 | 22.5 s | 3.38 GB | `= false` proved |
+| cross-check of § 2.2's sampler: `cert11_seg0` | `FibreCert11Seg0.lean` | 11 | 52.7 s | 7.14 GB (6.81 GiB) | sampler: 6.82 GiB |
+
+Readings:
+* **PSD per block needs no new checker part**: `psdAll` is `(blocks1 ++ blocksq).all psdCheck`, so one declaration per
+  block, assembled by `List.all_eq_true`, is the cut. At p = 19 that is 19 large blocks at 45–62 s and 5.3–5.9 GB each
+  (about 15–20 min of kernel CPU), against the planner's 15–25 s each. The parse is in the price: the controls, which
+  stop at row 0, still take 25–27 s.
+* **A witness scale of `2^40` instead of `2^120` is a converter-only change**: `psdCheck` reads `sb`, `wm`, `wB` from the
+  block, and L1's proof reads only the check's bounds (FS131-IKC2 § Stage 2). The converter's model still finds block 1
+  diagonally dominant at `2^40` (`tools/fs131_ikc3_psdprobe.py` exits on a failing block). It halves the witness (2.7 →
+  1.3 MB of text per block) and the time (62 → 45 s). At p = 11 the model holds at `2^30` too (block 1). Every block must
+  be tried before it is adopted.
+* **The K table check** (`ktabChk`, defined in the probe: maps `[r·k, r·k + k)` of `ktable C` against the literal, entry by
+  entry, by `Nat.beq`) costs about 10 s and 2.8 GB for five maps at p = 19 once the literal is parsed; the parse of the
+  17.4 MB literal is about 100 s (the control stops at map 0 and still takes 104 s). Eight pieces of five maps: about
+  80 s of kernel time. In the library the parse is paid once, in the data module.
+* **Phase 1 by orbit range** (`p1stepR`: a pair whose orbit lies in `[lo, hi)` is exactly the library's `p1step`, any
+  other only advances the stream and the coefficients; `p1Chk`: the in-range verdict, the bound share, the in-range rows
+  against `orows`). The four shares sum to phase 1's bound exactly and the compiled evaluation passes all four pieces
+  (`f2/p1/P1Eval.lean`, `logs/p1eval.log`). In the kernel each piece is 22–26 s and 3.4–3.7 GB at p = 11, **including the
+  K table, which each piece recomputes** (14.7 s and 2.5 GB alone, KC13 record § 3.1); with the K table as a literal
+  (item 1) a piece pays the stream and coefficient walk over every pair plus its own pairs. At p = 19 that is not measured
+  (it needs the p = 19 data compiled, § 3.3).
+
+### 3.2 The data at p = 19 — a finding
+
+The converter's output at p = 19 (`tools/fs131_ikc1_gen.py data/fs66/b1/cert-p19.json … --nseg 1`, 6 min 20 s, 0.97 GB;
+model: 602,989 ops, 52,370 slots, 16,653 pairs in 984 orbits, identity HOLDS, 38 blocks diagonally dominant, slot width
+131 bits) is **96.0 MB of text** in one `def`: the blocks 51.3 MB (19 PSD witnesses of 183 rows of 54.5 kbit), `orows`
+23.3 MB (984 × 2 rows of 361 × 131 bits), `keys` 14.1 MB (52,370 bag keys of `3n + 1 = 1,084` bits), the op stream
+5.1 MB, the rows 2.1 MB. F2's K table adds 17.4 MB. Elaborated as one probe file it **stopped at the elaborator's
+default 200,000 heartbeats after 3 min 14 s (1.06 GB), in the fourth of the 19 large blocks**
+(`logs/probes3/Cert19probe.log`, `isDefEq` timeout at line 2083); the run with `maxHeartbeats 0` is § 3.5's.
+So the p = 19 data must be cut into many definitions (one per block, one per long field), each in its own module so they
+elaborate in parallel, and about 110 MB of generated text in git is the coordinator's decision. What reduces it:
+the witness at `2^40` (about −25 MB, converter only); denser slot keys (the sorted point codes of a monomial, 4 × 9 bits,
+instead of `Σ 8^x`: −13.6 MB, but `opGood`'s key check and `dec_bag` change, so K2's computation half reopens there).
+
+### 3.3 F2 as designed here
+
+`certOK C` becomes a conjunction of indexed families, each element one declaration:
+`shapeOK C && kAll C && p1All C && segAll C && psdAll C`, each `…All C = (List.range n).all (piece C)`.
+
+| item | the check | its soundness step | what of K2 it reopens | lines |
+|---|---|---|---|---|
+| (a) PSD | unchanged; one declaration per block | none (assembly) | nothing | 0 |
+| (b) K table | new field `ktab`; `ktabChk C r` as in the probe; `phase1` folds `p1step C C.ktab km` | the pieces and `ktab.length = (gList p).length` give `C.ktab = ktable C` (entry equality from `Nat.beq`, `rowsEq` by induction) | L3 reads `ktable C` through `ktable_getD` and `Inv1_step`: one rewrite | 40–60 |
+| (c) phase 1 | `p1stepR`/`p1Chk` as in the probe, cuts `lo_0 = 0 < … < lo_last`, the last range to `2^k1` (so a pair naming no orbit is in range somewhere and fails `bmem` as now); new fields: the cuts, the shares; `shapeOK`: `Σ shares < 2^w` | a simulation lemma by induction over the pairs: a pair's orbit, verdict, row increment and share depend on the pair and the shared stream state only (`bmod` leaves `A0`, `A1` and the bucket shape alone), so the full fold's verdict is the conjunction of the pieces', its bound their sum, its rows in each range the piece's — the three facts `globalOK` gave L3 (verdict, bound, `orowsOK`) | none of L3's proof; `globalOK_of`'s use | 250–350 |
+| (d) the scatter | each segment's own stream lists its ops **by position in `opList`**, strictly increasing, with slot and witness; the op at a position generated directly (`opAt`: O1, O2 by offset; O3 `(ρ, t)` from `orows` by a cursor or a tree; O4 `(μ, x, j)`; O5 `(row, j)` from the rows); `segOf[pos] = k` read from a packed tree literal (603k × 5 bits); the entry count equal to `cnt[k]`; `shapeOK`: `Σ cnt = N`. Leaves balanced as now | `opSum (opList …) = Σ_{pos < N} v(opAt pos)·Y(…)` (one generic flatMap-indexing lemma per family); the cover (strictly increasing ⇒ distinct; `segOf` ⇒ disjoint; counts ⇒ the union is `[0, N)`); `Inv` as now with the op from `opAt` and the slot from the entry | `sum_shadow`, `seg_shadow`, `covered`, `rdNext`, `contrib`, `shadow`, `opSum_eq_zero`; `Inv_step`'s key and witness half reused as is | 450–650 |
+| assembly | `certOK`'s families; `cert3`, `cert11` regenerated in the new form | `opSum_eq_zero` from (b)–(d) | — | 50 |
+
+The alternative to (d), checkpointed source ranges (one segment over all slots, leaves in a tree, the fold cut by the
+leaf state as a literal every 40–50k ops), was rejected on data: 14 checkpoints × 1.7 MB of leaf state is about 48 MB of
+text more. A tree is still needed in (d) for random access to `orows` and the rows (or a cursor, which the sorted
+positions allow).
+
+### 3.4 F2's price, re-made from what was measured
+
+* **Kernel at p = 19**: PSD 19 × 45–62 s (15–20 min; 10–14 min at `2^40`); the K table about 80 s in 8 pieces; phase 1
+  about 150 s of processing (planner, extrapolated) plus each piece's walk over all 16,653 pairs; the scatter about 20 min
+  (planner, extrapolated, not run); the data modules' elaboration (§ 3.5). **About 40–50 minutes of kernel CPU** in about
+  45–60 declarations, each under about 7 GB where measured — against the planner's 30 minutes, the difference PSD's.
+* **Lines**: checker about 300 (b–d), converter about 350 (a copy of `tools/fs131_ikc1_gen.py` emitting the new fields
+  and per-definition data modules), proof 800–1,100 (the table), and `cert3`/`cert11` regenerated. A checker job plus a
+  proof job, as FS131-IKC2 said; F2's checker parts (b) and (c) are written and refused their planted faults here, (d)
+  is designed only.
+
+### 3.5 The p = 19 data module with unlimited heartbeats
+
+(stage 4: the run was still going when this stage was saved)

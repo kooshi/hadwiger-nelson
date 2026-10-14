@@ -1,0 +1,7 @@
+B2 exit 0
+KT11 exit 0
+KT11bad exit 0
+B1 exit 0
+B1digit exit 0
+B1entry exit 0
+B35 exit 0
