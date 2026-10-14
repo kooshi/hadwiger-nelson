@@ -33,10 +33,73 @@ noncomputable section
 
 variable (F : Subfield ℝ)
 
+/-- The inclusion `R → L`, additive. -/
+private def toFieldI : unitRing F →+ fieldI F where
+  toFun r := ⟨(r : ℂ), UnitRing.unitRingOver_le_planeOverSubring F r.2⟩
+  map_zero' := rfl
+  map_add' _ _ := rfl
+
+private theorem toFieldI_injective : Function.Injective (toFieldI F) := fun _ _ h =>
+  Subtype.ext (congrArg (fun z : fieldI F => (z : ℂ)) h)
+
 /-- **J28V-7**: `N·R` has finite index in `R = ℤ[U_F]` for every `N ≥ 1` (`R` is torsion-free of rank `[L : ℚ]`). -/
 theorem finite_quotient_nsmul [NumberField F] (N : ℕ) (hN : N ≠ 0) :
     Finite (unitRing F ⧸ (nsmulAddMonoidHom (α := unitRing F) N).range) := by
-  sorry
+  classical
+  haveI : NeZero N := ⟨hN⟩
+  set H := (nsmulAddMonoidHom (α := unitRing F) N).range with hH
+  set d := Module.finrank ℚ (fieldI F) with hd
+  by_contra hfin
+  rw [not_finite_iff_infinite] at hfin
+  obtain ⟨s, hs⟩ := Infinite.exists_subset_card_eq (unitRing F ⧸ H) (N ^ d + 1)
+  -- lifts of the members of `s`, and the finitely generated group `B` they span
+  let lift : s → unitRing F := fun g => Quotient.out (g : unitRing F ⧸ H)
+  have hlift : ∀ g : s, ((lift g : unitRing F) : unitRing F ⧸ H) = g := fun g => QuotientAddGroup.out_eq' _
+  let B : Submodule ℤ (unitRing F) := Submodule.span ℤ (Set.range lift)
+  haveI : Module.Finite ℤ B := Module.Finite.span_of_finite ℤ (Set.finite_range lift)
+  haveI : Module.Free ℤ B := Module.free_of_finite_type_torsion_free'
+  set r := Module.finrank ℤ B with hr
+  let bB := Module.finBasis ℤ B
+  -- the rank of `B` is at most `[L : ℚ]`
+  have hrd : r ≤ d := by
+    let f : B →ₗ[ℤ] fieldI F := (toFieldI F).toIntLinearMap.comp B.subtype
+    have hf : LinearMap.ker f = ⊥ := LinearMap.ker_eq_bot.2 fun a b hab =>
+      Subtype.ext (toFieldI_injective F hab)
+    have hli : LinearIndependent ℤ (f ∘ bB) := bB.linearIndependent.map' f hf
+    have := ((LinearIndependent.iff_fractionRing ℤ ℚ).mp hli).fintype_card_le_finrank
+    simpa using this
+  -- the coordinates modulo `N`: two members of `s` agree, so they are equal
+  let mem : ∀ g : s, lift g ∈ B := fun g => Submodule.subset_span ⟨g, rfl⟩
+  let co : s → (Fin r → ZMod N) := fun g i => ((bB.repr ⟨lift g, mem g⟩ i : ℤ) : ZMod N)
+  have hcard : Fintype.card (Fin r → ZMod N) < Fintype.card s := by
+    rw [Fintype.card_fun, ZMod.card, Fintype.card_fin, Fintype.card_coe, hs]
+    have : N ^ r ≤ N ^ d := Nat.pow_le_pow_right (Nat.pos_of_ne_zero hN) hrd
+    omega
+  obtain ⟨g₁, g₂, hne, heq⟩ := Fintype.exists_ne_map_eq_of_card_lt co hcard
+  apply hne
+  -- the difference has coordinates divisible by `N`
+  have hdiv : ∀ i, ∃ e : ℤ, bB.repr (⟨lift g₁, mem g₁⟩ - ⟨lift g₂, mem g₂⟩) i = N * e := by
+    intro i
+    have h := congrFun heq i
+    rw [map_sub, Finsupp.sub_apply]
+    have h' : (((bB.repr ⟨lift g₁, mem g₁⟩ i - bB.repr ⟨lift g₂, mem g₂⟩ i : ℤ)) : ZMod N) = 0 := by
+      push_cast
+      exact sub_eq_zero.2 h
+    exact (ZMod.intCast_zmod_eq_zero_iff_dvd _ N).1 h'
+  choose e he using hdiv
+  have hv : (⟨lift g₁, mem g₁⟩ - ⟨lift g₂, mem g₂⟩ : B) = (N : ℤ) • ∑ i, e i • bB i := by
+    rw [← bB.sum_repr (⟨lift g₁, mem g₁⟩ - ⟨lift g₂, mem g₂⟩), Finset.smul_sum]
+    refine Finset.sum_congr rfl fun i _ => ?_
+    rw [he i, smul_smul]
+  have hmem : -lift g₁ + lift g₂ ∈ H := by
+    have h2 := congrArg (fun v : B => (v : unitRing F)) hv
+    simp only [Submodule.coe_sub, Submodule.coe_smul] at h2
+    refine ⟨-((∑ i, e i • bB i : B) : unitRing F), ?_⟩
+    rw [nsmulAddMonoidHom_apply, smul_neg, ← natCast_zsmul, ← h2]
+    abel
+  apply Subtype.ext
+  rw [← hlift g₁, ← hlift g₂]
+  exact QuotientAddGroup.eq.2 hmem
 
 /-- **Bochner in support form for the archimedean topology**: a finite measure on `R̂` whose transform is continuous for
 `archTop F` is carried by the archimedean characters. -/
@@ -967,7 +1030,74 @@ theorem exists_twisted_parts [NumberField F] (σ : Measure (Dual F)) [IsFiniteMe
 measure `ρ_t` (`bochnerHerglotz_of_countable`), carried by `A` (`archimedean_support`); `Σ_t (t ·)_* ρ_t` has transform `φ`
 and is carried by `T·A`; uniqueness (`measure_eq_of_fourier`) identifies it with `σ`. -/
 theorem bochnerOn_tauPrime [NumberField F] : BochnerOn (tauPrime F) := by
-  sorry
+  intro σ hσ hc
+  haveI : Countable F := Finsupp.Countable.of_moduleFinite (R := ℚ) (M := F)
+  haveI : Countable (unitRing F) := countable_unitRing
+  rw [contChars_tauPrime]
+  obtain ⟨ψ, hPD, hcont, hsum, hhas⟩ := exists_twisted_parts F σ hc
+  -- each twisted part is the transform of a finite measure carried by `A`
+  have hρ : ∀ t : torsionChars (unitRing F), ∃ ρ : Measure (Dual F), IsFiniteMeasure ρ ∧
+      (∀ y, ∫ χ, (χ y : ℂ) ∂ρ = (starRingEnd ℂ) ((t : Dual F) y : ℂ) * ψ t y) ∧
+      ρ (archChars (unitRing F))ᶜ = 0 := by
+    intro t
+    obtain ⟨ρ, hρf, hρF, -⟩ := bochnerHerglotz_of_countable (unitRing F) _ (hPD t)
+    haveI := hρf
+    refine ⟨ρ, hρf, hρF, archimedean_support F ρ ?_⟩
+    have e : (fun y => ∫ χ, (χ y : ℂ) ∂ρ) = fun y => (starRingEnd ℂ) ((t : Dual F) y : ℂ) * ψ t y := funext hρF
+    rw [e]
+    exact hcont t
+  choose ρ hρf hρF hρA using hρ
+  have h0 : ∀ t, (((ρ t).real Set.univ : ℝ) : ℂ) = ψ t 0 := fun t => by
+    haveI := hρf t
+    have h := hρF t 0
+    simp only [AddChar.map_zero_eq_one, Circle.coe_one, map_one, one_mul, integral_const, Complex.real_smul,
+      mul_one] at h
+    exact h
+  have hre0 : ∀ t, 0 ≤ (ψ t 0).re := fun t => by
+    rw [← h0 t, Complex.ofReal_re]
+    exact measureReal_nonneg
+  have hmass : ∀ t, ρ t Set.univ = ENNReal.ofReal (ψ t 0).re := fun t => by
+    haveI := hρf t
+    rw [← h0 t, Complex.ofReal_re, measureReal_def, ENNReal.ofReal_toReal (measure_ne_top _ _)]
+  -- the sum of the twisted measures, each moved to its coset `t·A`
+  set ν : Measure (Dual F) := Measure.sum fun t : torsionChars (unitRing F) => (ρ t).map (· * (t : Dual F))
+    with hν
+  have hνuniv : ν Set.univ = ENNReal.ofReal (∑' t, (ψ t 0).re) := by
+    rw [hν, Measure.sum_apply _ MeasurableSet.univ]
+    simp only [Measure.map_apply (measurable_mulRight _) MeasurableSet.univ, Set.preimage_univ, hmass]
+    exact (ENNReal.ofReal_tsum_of_nonneg hre0 hsum).symm
+  haveI hνf : IsFiniteMeasure ν := ⟨by rw [hνuniv]; exact ENNReal.ofReal_lt_top⟩
+  -- its transform is `φ`
+  have hνF : ∀ y, ∫ χ, (χ y : ℂ) ∂ν = ∫ χ, (χ y : ℂ) ∂σ := by
+    intro y
+    have hint : Integrable (fun χ : Dual F => (χ y : ℂ)) ν :=
+      Integrable.of_bound (measurable_evalChar y).aestronglyMeasurable 1
+        (Eventually.of_forall fun χ => by rw [Circle.norm_coe])
+    rw [hν, integral_sum_measure hint]
+    have ht : ∀ t : torsionChars (unitRing F), ∫ χ, (χ y : ℂ) ∂((ρ t).map (· * (t : Dual F))) = ψ t y := by
+      intro t
+      haveI := hρf t
+      rw [integral_map (measurable_mulRight _).aemeasurable (measurable_evalChar y).aestronglyMeasurable]
+      simp only [AddChar.mul_apply, Circle.coe_mul]
+      rw [integral_mul_const, hρF t y]
+      have hu : (starRingEnd ℂ) ((t : Dual F) y : ℂ) * ((t : Dual F) y : ℂ) = 1 := by
+        rw [mul_comm, Complex.mul_conj, Complex.normSq_eq_norm_sq, Circle.norm_coe]
+        norm_num
+      linear_combination ψ t y * hu
+    simp only [ht]
+    exact (hhas y).tsum_eq
+  have hσν : σ = ν := measure_eq_of_fourier fun r => (hνF r).symm
+  -- `ν` is carried by `T·A`
+  rw [hσν, hν, Measure.sum_apply _ (measurableSet_TA F).compl]
+  refine ENNReal.tsum_eq_zero.2 fun t => ?_
+  rw [Measure.map_apply (measurable_mulRight _) (measurableSet_TA F).compl]
+  have hsub : (fun χ : Dual F => χ * (t : Dual F)) ⁻¹' (TA F)ᶜ ⊆ (archChars (unitRing F))ᶜ := by
+    intro χ hχ hA
+    apply hχ
+    show χ * (t : Dual F) ∈ TA F
+    rw [mul_comm]
+    exact Set.mul_mem_mul t.2 hA
+  exact measure_mono_null hsub (hρA t)
 
 end
 

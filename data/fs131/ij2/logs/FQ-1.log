@@ -1,0 +1,22 @@
+slot: admitted ij2: mem 4 GiB (hard cap), cpus 4,5
+data/fs131/ij2/work/FQ.lean:18:76: warning: Variable name `a` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+data/fs131/ij2/work/FQ.lean:18:78: warning: Variable name `b` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+data/fs131/ij2/work/FQ.lean:48:15: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Fintype (Fin r → ZMod N)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/ij2/work/FQ.lean:53:31: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Fintype (Fin r → ZMod N)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/ij2/work/FQ.lean:53:9: error: Tactic `rcases` failed: `x✝ : ?m.369` is not an inductive datatype
+seconds=3
+exit=1
