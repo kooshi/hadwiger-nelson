@@ -1,0 +1,15 @@
+slot: admitted kt1: mem 4 GiB (hard cap), cpus 4,5
+data/fs131/kt1/scratch/FormG.lean:38:46: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Insert (HeightOneSpectrum (𝓞 K)) (Finset (HeightOneSpectrum (𝓞 K)))
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/kt1/scratch/FormG.lean:43:14: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Decidable (↑w = v)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/kt1/scratch/FormG.lean:53:6: error: `simp` made no progress
+data/fs131/kt1/scratch/FormG.lean:56:63: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  DecidableEq (HeightOneSpectrum (𝓞 K))
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+exit=1

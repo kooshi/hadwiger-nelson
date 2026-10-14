@@ -196,6 +196,8 @@ import Proofs.HadwigerNelson.Rigidity.EntropyFibres
 import Proofs.HadwigerNelson.Rigidity.PositiveEntropy
 import Proofs.HadwigerNelson.Rigidity.ChainAtTA
 import Proofs.HadwigerNelson.Rigidity.RingScope
+import Proofs.HadwigerNelson.Rigidity.TateExists
+import Proofs.HadwigerNelson.Rigidity.TateModel
 import Proofs.HadwigerNelson.Rigidity.ZeroEntropyNames
 import Proofs.HadwigerNelson.Rigidity.SolenoidErgodic
 import Proofs.HadwigerNelson.Rigidity.HaarMultiple

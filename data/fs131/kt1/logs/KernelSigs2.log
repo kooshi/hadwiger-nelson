@@ -1,0 +1,57 @@
+slot: admitted kt1: mem 4 GiB (hard cap), cpus 0,1
+structure HadwigerNelson.Rigidity.TateModel (F : Subfield ℝ) [NumberField ↥F] : Type
+number of parameters: 2
+fields:
+  HadwigerNelson.Rigidity.TateModel.π : AddChar (SAdeleRing F) (HadwigerNelson.SpectralChain.Dual F)
+  HadwigerNelson.Rigidity.TateModel.continuous_π : Continuous ⇑self.π
+  HadwigerNelson.Rigidity.TateModel.π_unit_mul : ∀ (u : ↑(HadwigerNelson.SpectralChain.unitVectors F))
+      (a : SAdeleRing F), self.π ((toSAdele F) (unitL u) * a) = HadwigerNelson.SpectralChain.rot u (self.π a)
+  HadwigerNelson.Rigidity.TateModel.surjective_π : Function.Surjective ⇑self.π
+  HadwigerNelson.Rigidity.TateModel.ker_subset : ∀ (a : SAdeleRing F), self.π a = 1 → ∃ y, a = (toSAdele F) y
+  HadwigerNelson.Rigidity.TateModel.stableIntegers_le : ∀ x ∈ stableIntegers F, self.π ((toSAdele F) x) = 1
+  HadwigerNelson.Rigidity.TateModel.exists_nat_mul_mem : ∃ d,
+      d ≠ 0 ∧ ∀ (y : ↥(HadwigerNelson.SpectralChain.fieldI F)), self.π ((toSAdele F) y) = 1 → ↑d * y ∈ stableIntegers F
+  HadwigerNelson.Rigidity.TateModel.exists_isCompact : ∃ K,
+      IsCompact K ∧ ∀ (a : SAdeleRing F), ∃ k ∈ K, ∃ x ∈ stableIntegers F, a = k + (toSAdele F) x
+  HadwigerNelson.Rigidity.TateModel.arch_mem : ∀
+      (b : NumberField.mixedEmbedding.mixedSpace ↥(HadwigerNelson.SpectralChain.fieldI F)),
+      self.π (b, 0) ∈ archChars ↥(HadwigerNelson.SpectralChain.unitRing F)
+constructor:
+  HadwigerNelson.Rigidity.TateModel.mk {F : Subfield ℝ} [NumberField ↥F]
+    (π : AddChar (SAdeleRing F) (HadwigerNelson.SpectralChain.Dual F)) (continuous_π : Continuous ⇑π)
+    (π_unit_mul :
+      ∀ (u : ↑(HadwigerNelson.SpectralChain.unitVectors F)) (a : SAdeleRing F),
+        π ((toSAdele F) (unitL u) * a) = HadwigerNelson.SpectralChain.rot u (π a))
+    (surjective_π : Function.Surjective ⇑π) (ker_subset : ∀ (a : SAdeleRing F), π a = 1 → ∃ y, a = (toSAdele F) y)
+    (stableIntegers_le : ∀ x ∈ stableIntegers F, π ((toSAdele F) x) = 1)
+    (exists_nat_mul_mem :
+      ∃ d, d ≠ 0 ∧ ∀ (y : ↥(HadwigerNelson.SpectralChain.fieldI F)), π ((toSAdele F) y) = 1 → ↑d * y ∈ stableIntegers F)
+    (exists_isCompact :
+      ∃ K, IsCompact K ∧ ∀ (a : SAdeleRing F), ∃ k ∈ K, ∃ x ∈ stableIntegers F, a = k + (toSAdele F) x)
+    (arch_mem :
+      ∀ (b : NumberField.mixedEmbedding.mixedSpace ↥(HadwigerNelson.SpectralChain.fieldI F)),
+        π (b, 0) ∈ archChars ↥(HadwigerNelson.SpectralChain.unitRing F)) :
+    TateModel F
+@TateModel.Λ : {F : Subfield ℝ} →
+  [inst : NumberField ↥F] → TateModel F → AddSubgroup ↥(HadwigerNelson.SpectralChain.fieldI F)
+@TateModel.ker_eq : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (D : TateModel F) (a : SAdeleRing F),
+  D.π a = 1 ↔ ∃ y ∈ D.Λ, a = (toSAdele F) y
+@TateModel.mul_mem_Λ : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (D : TateModel F)
+  (r : ↥(HadwigerNelson.SpectralChain.unitRing F)) {y : ↥(HadwigerNelson.SpectralChain.fieldI F)},
+  y ∈ D.Λ → (ofUnitRing F) r * y ∈ D.Λ
+@TateModel.π_eq_π_iff : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (D : TateModel F) (a b : SAdeleRing F),
+  D.π a = D.π b ↔ ∃ y ∈ D.Λ, a = b + (toSAdele F) y
+@TateModel.toSAdele_mem_torsionChars : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (D : TateModel F)
+  (t : ↥(HadwigerNelson.SpectralChain.fieldI F)),
+  D.π ((toSAdele F) t) ∈ torsionChars ↥(HadwigerNelson.SpectralChain.unitRing F)
+@TateModel.mem_TA : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (D : TateModel F)
+  (t : ↥(HadwigerNelson.SpectralChain.fieldI F))
+  (b : NumberField.mixedEmbedding.mixedSpace ↥(HadwigerNelson.SpectralChain.fieldI F)),
+  D.π ((toSAdele F) t + (b, 0)) ∈ TA F
+@TateModel.isOpenMap : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (D : TateModel F), IsOpenMap ⇑D.π
+SplitAdeleRing : (F : Subfield ℝ) → [NumberField ↥F] → Type
+SAdeleRing : (F : Subfield ℝ) → [NumberField ↥F] → Type
+toSAdele : (F : Subfield ℝ) → [inst : NumberField ↥F] → ↥(HadwigerNelson.SpectralChain.fieldI F) →+* SAdeleRing F
+'HadwigerNelson.Rigidity.TateModel.mem_TA' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.TateModel.ker_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit=0

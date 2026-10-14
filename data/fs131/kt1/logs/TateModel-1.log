@@ -1,0 +1,98 @@
+slot: admitted kt1: mem 4 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:60:3: error: unexpected token 'ʳ'; expected '(', '[', '_', '{', '⦃' or identifier
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:64:67: error: Function expected at
+  SplitAdeleRing
+but this term has type
+  Type
+
+Note: Expected a function because this term is being applied to the argument
+  F
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:67:32: error: Function expected at
+  SplitAdeleRing
+but this term has type
+  Type
+
+Note: Expected a function because this term is being applied to the argument
+  F
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:78:15: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  NonAssocSemiring (SAdeleRing F)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:94:6: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  AddMonoid (SAdeleRing F)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:115:18: error(lean.unknownIdentifier): Unknown identifier `TateModel`
+
+Note: It is not possible to treat `TateModel` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:123:15: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+D : sorry
+⊢ sorry () = 1
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:126:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  1⁻¹
+in the target expression
+  1 = 1
+
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+D : sorry
+x : ↥(fieldI F)
+hx : sorry = 1
+⊢ 1 = 1
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:121:33: warning: This simp argument is unused:
+  map_add
+
+Hint: Omit it from the simp argument list.
+  simp only [Set.mem_setOf_eq, m̵a̵p̵_̵a̵d̵d̵,̵ ̵AddChar.map_add_eq_mul] at hx hy ⊢
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:121:42: warning: This simp argument is unused:
+  AddChar.map_add_eq_mul
+
+Hint: Omit it from the simp argument list.
+  simp only [Set.mem_setOf_eq, map_add,̵ ̵A̵d̵d̵C̵h̵a̵r̵.̵m̵a̵p̵_̵a̵d̵d̵_̵e̵q̵_̵m̵u̵l̵] at hx hy ⊢
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:125:33: warning: This simp argument is unused:
+  map_neg
+
+Hint: Omit it from the simp argument list.
+  simp only [Set.mem_setOf_eq, m̵a̵p̵_̵n̵e̵g̵,̵ ̵AddChar.map_neg_eq_inv] at hx ⊢
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:125:42: warning: This simp argument is unused:
+  AddChar.map_neg_eq_inv
+
+Hint: Omit it from the simp argument list.
+  simp only [Set.mem_setOf_eq, map_neg,̵ ̵A̵d̵d̵C̵h̵a̵r̵.̵m̵a̵p̵_̵n̵e̵g̵_̵e̵q̵_̵i̵n̵v̵] at hx ⊢
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:128:31: error: typeclass instance problem is stuck
+  Membership ↥(fieldI F) ?m.5
+
+Note: Lean will not try to resolve this typeclass instance problem because the second type argument to `Membership` is a metavariable. This argument must be fully determined before Lean will try to resolve the typeclass.
+
+Hint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:131:48: error: typeclass instance problem is stuck
+  Membership ?m.7 (?m.15 y)
+
+Note: Lean will not try to resolve this typeclass instance problem because the second type argument to `Membership` contains metavariables. This argument must be fully determined before Lean will try to resolve the typeclass.
+
+Hint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:141:56: error: typeclass instance problem is stuck
+  Membership ↥(fieldI F) ?m.6
+
+Note: Lean will not try to resolve this typeclass instance problem because the second type argument to `Membership` is a metavariable. This argument must be fully determined before Lean will try to resolve the typeclass.
+
+Hint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:145:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:149:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:155:20: error: typeclass instance problem is stuck
+  TopologicalSpace ?m.4
+
+Note: Lean will not try to resolve this typeclass instance problem because the type argument to `TopologicalSpace` is a metavariable. This argument must be fully determined before Lean will try to resolve the typeclass.
+
+Hint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.
+exit=1
