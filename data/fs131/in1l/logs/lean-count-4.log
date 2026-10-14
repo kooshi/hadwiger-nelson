@@ -1,0 +1,19 @@
+slot: waiting (ledger 22 + 4 > budget 22 GiB)
+slot: admitted in1l: mem 4 GiB (hard cap), cpus 4,5
+data/fs131/in1l/work/CountScratch.lean:156:71: error: unexpected token 'omit'; expected 'lemma'
+data/fs131/in1l/work/CountScratch.lean:162:41: error: No goals to be solved
+data/fs131/in1l/work/CountScratch.lean:159:56: error: unsolved goals
+α : Type u_1
+k r : ℕ
+u : Fin k → α
+v : Fin r → α
+h : 0 + k ≤ (List.ofFn u ++ List.ofFn v).length
+i : Fin k
+⊢ (List.ofFn u)[0 + ↑i] = u i
+data/fs131/in1l/work/CountScratch.lean:164:40: warning: Variable name `ht` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+seconds=14
+exit=1

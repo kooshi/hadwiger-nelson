@@ -1,0 +1,17 @@
+slot: admitted ie1: mem 5 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Outside/OAI015Maximal.lean:52:5: error: unknown namespace `IsDiscreteValuationRing`
+Proofs/HadwigerNelson/Outside/OAI015Maximal.lean:54:23: error: unknown namespace `IsDiscreteValuationRing`
+Proofs/HadwigerNelson/Outside/OAI015Maximal.lean:57:5: error: unknown namespace `NumberField`
+Proofs/HadwigerNelson/Outside/OAI015Maximal.lean:58:12: error: unknown namespace `NumberField`
+Proofs/HadwigerNelson/Outside/OAI015Maximal.lean:59:25: error: unknown namespace `ArithmeticFunction.zeta`
+Proofs/HadwigerNelson/Outside/OAI015Maximal.lean:62:16: error: unknown namespace `ArithmeticFunction`
+Proofs/HadwigerNelson/Outside/OAI015Maximal.lean:68:11: error: unknown namespace `NumberField`
+Proofs/HadwigerNelson/Outside/OAI015Maximal.lean:69:25: error: unknown namespace `NumberField`
+Proofs/HadwigerNelson/Outside/OAI015Maximal.lean:70:73: error: unknown namespace `NumberField`
+Proofs/HadwigerNelson/Outside/OAI015Maximal.lean:71:37: error: unknown namespace `NumberField`
+Proofs/HadwigerNelson/Outside/OAI015Maximal.lean:73:73: error: unknown namespace `NumberField`
+Proofs/HadwigerNelson/Outside/OAI015Maximal.lean:74:37: error: unknown namespace `NumberField`
+Proofs/HadwigerNelson/Outside/OAI015Maximal.lean:98:59: error: unknown namespace `Matrix.Norms.Elementwise`
+Proofs/HadwigerNelson/Outside/OAI015Maximal.lean:99:59: error: unknown namespace `Matrix.Norms.Elementwise`
+seconds=3
+exit=1

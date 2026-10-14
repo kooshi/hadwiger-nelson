@@ -1,0 +1,12 @@
+slot: admitted ie1: mem 5 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/Entropy.lean:198:51: warning: `Set.left_mem_Ici` has been deprecated: Use `Set.self_mem_Ici` instead
+Proofs/HadwigerNelson/Rigidity/Entropy.lean:238:8: warning: This simp argument is unused:
+  Function.comp_def
+
+Hint: Omit it from the simp argument list.
+  simp [F̵u̵n̵c̵t̵i̵o̵n̵.̵c̵o̵m̵p̵_̵d̵e̵f̵,̵ ̵blockEntropy_eq_observationEntropy]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Proofs/HadwigerNelson/Rigidity/Entropy.lean:384:8: warning: declaration uses `sorry`
+seconds=3
+exit=0

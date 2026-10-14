@@ -1,0 +1,13 @@
+slot: admitted in1l: mem 4 GiB (hard cap), cpus 4,5
+'HadwigerNelson.Rigidity.maxMultiple_smul_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.map_sub_maxMultiple' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.not_smul_le_sub_maxMultiple' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.maxMultiple_self' depends on axioms: [propext, Classical.choice, Quot.sound]
+data/fs131/in1l/work/HaarMultipleAx.lean:131:25: error: Type mismatch
+  rfl
+has type
+  ?m.7 = ?m.7
+but is expected to have type
+  1 = 2
+seconds=2
+exit=1

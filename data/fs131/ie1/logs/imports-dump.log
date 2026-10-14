@@ -1,0 +1,20 @@
+slot: waiting (ledger 20 + 5 > budget 22 GiB)
+slot: admitted ie1: mem 5 GiB (hard cap), cpus 0,1
+MODULE	Proofs.HadwigerNelson.Outside.OAI015Shannon	constants=52	modules-named=132	kept=6
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015Shannon	Mathlib.Algebra.Order.Ring.Star
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015Shannon	Mathlib.Analysis.SpecialFunctions.Log.NegMulLog
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015Shannon	Mathlib.Analysis.Subadditive
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015Shannon	Mathlib.Dynamics.Ergodic.MeasurePreserving
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015Shannon	Mathlib.MeasureTheory.Measure.Real
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015Shannon	Mathlib.Order.CompletePartialOrder
+MODULE	Proofs.HadwigerNelson.Outside.OAI015Mixtures	constants=38	modules-named=207	kept=1
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015Mixtures	Proofs.HadwigerNelson.Outside.OAI015Shannon
+MODULE	Proofs.HadwigerNelson.Outside.OAI015Maximal	constants=29	modules-named=136	kept=6
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015Maximal	Mathlib.Algebra.Order.Ring.Star
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015Maximal	Mathlib.Algebra.Order.Star.Real
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015Maximal	Mathlib.Analysis.InnerProductSpace.Basic
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015Maximal	Mathlib.Dynamics.BirkhoffSum.Basic
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015Maximal	Mathlib.MeasureTheory.Integral.Bochner.Set
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015Maximal	Mathlib.Order.CompletePartialOrder
+seconds=347
+exit=0

@@ -1,0 +1,5 @@
+slot: admitted in1l: mem 4 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/ZeroEntropyNames.lean:88:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ZeroEntropyNames.lean:289:8: warning: declaration uses `sorry`
+seconds=3
+exit=0

@@ -1,0 +1,1 @@
+'HadwigerNelson.Rigidity.ksEntropy_eq_iSup_ksEntropyOn' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

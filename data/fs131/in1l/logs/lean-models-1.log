@@ -1,0 +1,5 @@
+slot: admitted in1l: mem 4 GiB (hard cap), cpus 0,1
+data/fs131/in1l/work/ModelDrafts.lean:8:28: error: unsolved goals
+⊢ 1 / 8 * Real.log 4 ≤ Real.log 4 / 8
+seconds=2
+exit=1

@@ -1,0 +1,44 @@
+slot: admitted in1l: mem 4 GiB (hard cap), cpus 0,1
+data/fs131/in1l/work/TAScratch.lean:121:44: error: unsolved goals
+G : Type u_1
+inst✝³ : AddCommGroup G
+W : Type u
+inst✝² : AddCommGroup W
+inst✝¹ : Module ℚ W
+inst✝ : FiniteDimensional ℚ W
+ι : G →+ W
+hι : Function.Injective ⇑ι
+b : Set W
+hbS : b ⊆ Set.range ⇑ι
+hspan : Submodule.span ℚ b = Submodule.span ℚ (Set.range ⇑ι)
+hli : LinearIndependent ℚ Subtype.val
+this✝ : Finite ↑b
+this : Fintype ↑b := Fintype.ofFinite ↑b
+V : Submodule ℚ W := Submodule.span ℚ (Set.range Subtype.val)
+hV : V = Submodule.span ℚ (Set.range Subtype.val)
+hrange : Set.range Subtype.val = b
+hmem : ∀ (g : G), ι g ∈ V
+B : Module.Basis ↑b ℚ ↥V := Module.Basis.span hli
+c : G →+ ↥V := { toFun := fun g => ⟨ι g, ⋯⟩, map_zero' := ⋯, map_add' := ⋯ }
+q : ↑b → G →+ ℚ := fun j => (B.coord j).toAddMonoidHom.comp c
+ψ : G →+ ℝ
+gen : ↑b → G
+hgen : ∀ (i : ↑b), ι (gen i) = ↑i
+g : G
+Δ : G →+ ℝ := ψ - ∑ j, ψ (gen j) • (Rat.castHom ℝ).toAddMonoidHom.comp (q j)
+hΔ : ∀ (g : G), Δ g = ψ g - ∑ j, ↑((q j) g) * ψ (gen j)
+hcgen : ∀ (i : ↑b), c (gen i) = B i
+i : ↑b
+hq : ∀ (j : ↑b), (q j) (gen i) = if i = j then 1 else 0
+⊢ ψ (gen i) = ∑ x, ↑(if i = x then 1 else 0) * ψ (gen x)
+data/fs131/in1l/work/TAScratch.lean:156:7: warning: `continuous_finset_sum` has been deprecated: Use `continuous_finsetSum` instead
+data/fs131/in1l/work/TAScratch.lean:181:83: error: Application type mismatch: The argument
+  h
+has type
+  ι x = ι y
+but is expected to have type
+  x = y
+in the application
+  congrArg Subtype.val h
+seconds=4
+exit=1

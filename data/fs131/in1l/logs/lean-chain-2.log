@@ -1,0 +1,29 @@
+slot: admitted in1l: mem 4 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:76:8: warning: declaration uses `sorry`
+F : Subfield ℝ
+hq : ∀ (q : ℚ), ↑q ∈ F
+h3 : 3 / 5 ∈ F
+h4 : 4 / 5 ∈ F
+hnorm : ‖{ re := 3 / 5, im := 4 / 5 }‖ = 1
+m : ℕ
+hn : m.succ ≠ 0
+a b : ℤ
+h : ↑a + ↑b * Complex.I = ↑(5 ^ (m + 1))
+hab : (3 + 4 * Complex.I) ^ (m + 1) = ↑a + ↑b * Complex.I
+hb : b % 5 = 4
+hu : { re := 3 / 5, im := 4 / 5 } = (3 + 4 * Complex.I) / 5
+h5 : 5 ^ (m + 1) = ↑(5 ^ (m + 1))
+him : ↑b = (5 ^ (m + 1)).im
+⊢ False
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:131:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:143:35: warning: 'norm_num' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:143:35: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:356:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:361:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:368:8: warning: declaration uses `sorry`
+seconds=4
+exit=0

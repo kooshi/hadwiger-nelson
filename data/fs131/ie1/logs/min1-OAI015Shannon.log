@@ -1,0 +1,15 @@
+slot: admitted ie1: mem 5 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Outside/OAI015Shannon.lean:54:5: error: unknown namespace `IsDiscreteValuationRing`
+Proofs/HadwigerNelson/Outside/OAI015Shannon.lean:56:23: error: unknown namespace `IsDiscreteValuationRing`
+Proofs/HadwigerNelson/Outside/OAI015Shannon.lean:59:5: error: unknown namespace `NumberField`
+Proofs/HadwigerNelson/Outside/OAI015Shannon.lean:60:12: error: unknown namespace `NumberField`
+Proofs/HadwigerNelson/Outside/OAI015Shannon.lean:61:25: error: unknown namespace `ArithmeticFunction.zeta`
+Proofs/HadwigerNelson/Outside/OAI015Shannon.lean:64:16: error: unknown namespace `ArithmeticFunction`
+Proofs/HadwigerNelson/Outside/OAI015Shannon.lean:70:11: error: unknown namespace `NumberField`
+Proofs/HadwigerNelson/Outside/OAI015Shannon.lean:71:25: error: unknown namespace `NumberField`
+Proofs/HadwigerNelson/Outside/OAI015Shannon.lean:72:73: error: unknown namespace `NumberField`
+Proofs/HadwigerNelson/Outside/OAI015Shannon.lean:73:37: error: unknown namespace `NumberField`
+Proofs/HadwigerNelson/Outside/OAI015Shannon.lean:75:73: error: unknown namespace `NumberField`
+Proofs/HadwigerNelson/Outside/OAI015Shannon.lean:76:37: error: unknown namespace `NumberField`
+seconds=4
+exit=1

@@ -1,0 +1,10 @@
+slot: admitted in1l: mem 4 GiB (hard cap), cpus 4,5
+PROBE A-before-CountProof false
+PROBE B-before-N1 false
+PROBE C-after-N1 true
+PROBE D-before-N5 true
+PROBE E-after-N5 true
+PROBE F-before-N7 true
+PROBE G-after-N7 true
+seconds=11
+exit=0

@@ -1,0 +1,4 @@
+records expected: 33; clean (a subset of the standard three): 31, of which axiom-free: 3
+AXIOMS   HadwigerNelson.Rigidity.positive_entropy_rigidity: ['HadwigerNelson.Rigidity.positive_entropy_rigidity'] beyond the standard three
+AXIOMS   HadwigerNelson.Rigidity.haar_or_zero_entropy: ['sorryAx'] beyond the standard three
+AXIOMS FAILED: 2

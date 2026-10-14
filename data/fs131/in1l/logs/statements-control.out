@@ -1,0 +1,15 @@
+compared: 61 named constants of the first dump (types; values of definitions), 2 example heads of the base files
+axioms of the modules: [] before, ['HadwigerNelson.Rigidity.planted_axiom'] after
+internal (not compared): 9 before, 9 after
+new public constants in the second dump: 1 (allow-list: 0)
+  NEW THM HadwigerNelson.Rigidity.planted_new_public
+new private constants in the second dump: 0
+examples in the working files that the base does not hold: 0
+VALUE    DEF HadwigerNelson.Rigidity.maxMultiple: the stored definition differs
+KIND     HadwigerNelson.Rigidity.measure_frequentVisits_le: THM -> DEF
+TYPE     THM HadwigerNelson.Rigidity.card_words_badStarts_le: the stored statement differs
+MISSING  THM HadwigerNelson.Rigidity.rot_preimage_TA: in the first dump, not in the second
+AXIOMS   the modules declare axioms: [] before, ['HadwigerNelson.Rigidity.planted_axiom'] after
+NEW      THM HadwigerNelson.Rigidity.planted_new_public: a new public constant that the allow-list does not hold
+CONTROL: 6 of 6 planted faults reported — the check can fail
+exit=0
