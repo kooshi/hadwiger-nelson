@@ -98,7 +98,9 @@ def sList (p : Nat) : List Nat :=
 
 /-- A leaf holds the packed keys of its slots and two packed accumulators (positive and negative parts). -/
 inductive Tr where
+  /-- a leaf: packed keys, packed positive part, packed negative part -/
   | leaf (keys pos neg : Nat)
+  /-- an inner node -/
   | node (l r : Tr)
 
 /-- Build a complete tree of depth `d` from a list of leaf keys. -/
@@ -311,7 +313,9 @@ def kfL (p : Nat) (m : List Nat) : Nat → Nat → Nat → Nat → Nat := fun c 
 
 /-- An orbit row: its representative pair and the packed positive and negative parts over `t`. -/
 inductive OT where
+  /-- an orbit row: the representative pair `(a0, a1)` and the packed parts over `t` -/
   | leaf (a0 a1 : List Nat) (P N : Nat)
+  /-- an inner node -/
   | node (l r : OT)
 
 /-- Build the orbit tree of depth `d` from the orbit list (missing leaves are empty). -/

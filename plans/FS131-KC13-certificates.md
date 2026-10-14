@@ -243,6 +243,17 @@ recorded in § 4.2.
   * `card_le_of_certOK`, its level-one form for an independent set of `Cay((ℤ/p)², S)`.
   * `model`: the hypotheses hold together at `cert3` with `φ = 0`.
 
+### 4.2 The build
+
+`./scripts/build.sh` under the slot (`--mem 10 --cpus 4`, `MEMMAX=10G BATCH=8`).
+* The first build: OK in 7m33s, 4 modules rebuilt (`logs/build1.log`). Its warnings were the missing docstrings of four
+  constructors.
+* After documenting those constructors: OK in 7m2s (`logs/build2.log`). The only warnings left are the two planned
+  `sorry`s of `Arith/FibreCertSound`.
+* `cert3_ok` builds as part of `Arith/FibreCert3` in 1.3 s.
+
+The gate's scans were not run. This is a skeleton with two planned `sorry`s, not a landing.
+
 ## Stage 5 — SAVED: the per-prime leaf, planned
 
 ### 5.1 The statement, read against the map planner's route
