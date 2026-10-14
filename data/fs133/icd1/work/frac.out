@@ -1,0 +1,2 @@
+slot: admitted icd1: mem 4 GiB (hard cap), cpus 6,7
+data/fs133/icd1/work/Fractional.lean:102:8: warning: declaration uses `sorry`

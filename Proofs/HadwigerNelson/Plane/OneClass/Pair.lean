@@ -58,18 +58,42 @@ def colourPattern (Λ : Type*) : ℝ → Λ → Λ → Prop := fun r a b => r = 
 /-- Drift check: admissible for the colouring pattern is proper. -/
 theorem admissibleOn_colourPattern_iff {X : Set ℂ} {ℓ : ℂ → Λ} :
     AdmissibleOn (colourPattern Λ) X ℓ ↔ ∀ x ∈ X, ∀ y ∈ X, dist x y = 1 → ℓ x ≠ ℓ y := by
-  sorry
+  simp only [AdmissibleOn, colourPattern, not_and, ne_eq]
 
 /-- A model of `IsAlgPattern`: the colouring pattern. -/
 theorem isAlgPattern_colourPattern (Λ : Type*) : IsAlgPattern (colourPattern Λ) := by
-  sorry
+  refine ⟨(Set.countable_singleton (1 : ℝ)).mono ?_, ?_, ?_⟩
+  · rintro r ⟨a, b, hr, -⟩
+    exact hr
+  · rintro r a b ⟨rfl, -⟩
+    exact one_pos
+  · rintro r a b ⟨rfl, -⟩
+    exact isAlgebraic_one
 
 /-- A model of all three notions at once: the plane has a Borel seven-labelling admissible for the colouring
 pattern at every pair, hence on the algebraic plane and almost everywhere. -/
 theorem exists_admissible_colourPattern_seven :
     ∃ ℓ : ℂ → Fin 7, Measurable ℓ ∧ AdmissibleOn (colourPattern (Fin 7)) univ ℓ ∧
       AdmissibleAe (colourPattern (Fin 7)) ℓ := by
-  sorry
+  -- the brick colouring (`Instances/Seven`): floors of affine functions of the coordinates, read through a table
+  have hrow : Measurable sevenBrick.row :=
+    Int.measurable_floor.comp (Complex.measurable_im.div_const _)
+  have hcol : Measurable sevenBrick.col :=
+    Int.measurable_floor.comp ((Complex.measurable_re.sub ((measurable_const.mul
+      (measurable_from_top.comp hrow)))).div_const _)
+  have hm : Measurable sevenBrick.color := by
+    show Measurable ((fun p : ℤ × ℤ => sevenBrick.table (zmodIdx sevenBrick.m sevenBrick.m_pos p.1)
+      (zmodIdx sevenBrick.n sevenBrick.n_pos p.2)) ∘ fun z => (sevenBrick.col z, sevenBrick.row z))
+    exact (measurable_of_countable _).comp (hcol.prodMk hrow)
+  have hprop : ∀ x y : ℂ, dist x y = 1 → sevenBrick.color x ≠ sevenBrick.color y := fun x y h =>
+    sevenBrick.avoids (List.mem_singleton.mpr rfl) sevenBrick_check (by rw [h]; simp)
+  refine ⟨sevenBrick.color, hm, admissibleOn_colourPattern_iff.2 fun x _ y _ => hprop x y, fun r => ?_⟩
+  refine Eventually.of_forall fun p hp => ?_
+  obtain ⟨hr, heq⟩ := hp
+  subst hr
+  refine hprop p.1 (p.1 + ((1 : ℝ) : ℂ) * e p.2) ?_ heq
+  rw [dist_eq_norm]
+  simp
 
 /-- Admissibility passes to a subset. -/
 theorem AdmissibleOn.mono {N : ℝ → Λ → Λ → Prop} {X Y : Set ℂ} {ℓ : ℂ → Λ} (h : AdmissibleOn N Y ℓ)

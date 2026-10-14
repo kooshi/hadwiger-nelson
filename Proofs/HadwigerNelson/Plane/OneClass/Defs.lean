@@ -39,11 +39,11 @@ noncomputable def finIndepRatio (G : SimpleGraph V) : ℝ≥0∞ :=
   ⨅ (S : Finset V) (_ : S.Nonempty), ((G.induce (S : Set V)).indepNum : ℝ≥0∞) / S.card
 
 /-! The bridge between the induced graph on a finite vertex set and the independent subsets of that set: its
-independence number is the largest size of one (two private lemmas; every reading of `finIndepRatio` below goes
-through them). -/
+independence number is the largest size of one (two lemmas; every reading of `finIndepRatio` below goes through
+them). -/
 
 /-- An independent subset of a finite vertex set has at most the independence number of the induced graph. -/
-private theorem card_le_indepNum_induce (G : SimpleGraph V) (S : Finset V) {J : Finset V}
+theorem card_le_indepNum_induce (G : SimpleGraph V) (S : Finset V) {J : Finset V}
     (hJS : J ⊆ S) (hJ : G.IsIndepSet (J : Set V)) : J.card ≤ (G.induce (S : Set V)).indepNum := by
   classical
   have hind : (G.induce (S : Set V)).IsIndepSet
@@ -58,7 +58,7 @@ private theorem card_le_indepNum_induce (G : SimpleGraph V) (S : Finset V) {J : 
 
 /-- The independence number of the graph induced on a finite vertex set is the size of an independent subset of
 it. -/
-private theorem exists_indep_card_eq_indepNum (G : SimpleGraph V) (S : Finset V) :
+theorem exists_indep_card_eq_indepNum (G : SimpleGraph V) (S : Finset V) :
     ∃ J : Finset V, J ⊆ S ∧ G.IsIndepSet (J : Set V) ∧ J.card = (G.induce (S : Set V)).indepNum := by
   classical
   obtain ⟨J', hJ'⟩ := (G.induce (S : Set V)).exists_isNIndepSet_indepNum
@@ -217,8 +217,8 @@ theorem mOne_le_iff {r : ℝ≥0∞} :
 theorem mOne_le_one : mOne ≤ 1 :=
   iSup₂_le fun A _ => iSup_le fun _ => upperDensity_le_one A
 
-/-- An inhabitant of the supremum's index set: the open disc of radius `1 / 2` is measurable and holds no two points
-at distance one. -/
+/-- The open disc of radius `1 / 2` holds no two points at distance one (its measurability is Mathlib's
+`measurableSet_ball`; the two together make it an inhabitant of the supremum's index set). -/
 theorem isIndepSet_ball_half : (unitDistance ℂ).IsIndepSet (Metric.ball (0 : ℂ) (1 / 2)) := by
   rw [isIndepSet_unitDistance_iff]
   intro x hx y hy hxy
@@ -228,7 +228,7 @@ theorem isIndepSet_ball_half : (unitDistance ℂ).IsIndepSet (Metric.ball (0 : �
   linarith
 
 /-- Sets equal almost everywhere have one upper density. -/
-private theorem upperDensity_congr_ae {A B : Set ℂ} (h : A =ᵐ[volume] B) : upperDensity A = upperDensity B := by
+theorem upperDensity_congr_ae {A B : Set ℂ} (h : A =ᵐ[volume] B) : upperDensity A = upperDensity B := by
   unfold upperDensity
   congr 1
   funext R
