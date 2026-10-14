@@ -1,0 +1,2 @@
+MEASURE exit=0 wall=3.5s peak=0.22 GiB max-rss=0.88 GiB :: lake build --no-build Proofs
+MEASURE exit=0 wall=5.1s peak=0.42 GiB max-rss=3.02 GiB :: lake env lean data/fs131/ldb1/lean/StatementDump.lean

@@ -1,0 +1,9 @@
+match    data/fs131/REQUEST-2026-10-13.md | W2: (2026-10-13, answering the choice between the two publishable form
+match    data/fs131/claims-NF2.md | - 2026-10-14 — **The density bound has a route with no periodic reduct
+match    plans/FS131-close-inventory.md | 845. **FS131-KDB1 handed back: the density bound planned to its leaves
+match    plans/FS131-close-inventory.md | 866. **FS131-IDB1 handed back: the density bound's covering and its Be
+match    plans/FS131-close-inventory.md | 895. **FS131-IDB2 handed back at stage 5: the density bound's Fourier 
+match    plans/FS131-close-inventory.md | 911. **FS131-IDB3 handed back: the density bound proved (logged 2026-1
+match    data/fs131/REQUEST-2026-10-13.md | Yes, prove the density bound. (inline)
+matched: 7  mismatched: 0
+exit=0
