@@ -239,3 +239,82 @@ left. Its landing waits on lane D** (`Rigidity/DualGroup`'s leaves 1, 2, 3, 4, 5
 planner planned and priced; leaf 8, Fourier uniqueness, is the hard one, and every theorem of this lane stands on it.
 
 **The route: H.** Measured cheaper by inclusion, and built to two leaves short of complete.
+
+## Stage 4 — SAVED: a plan per leaf, and the lanes
+
+### 4.1 The four new modules (one lane, **PD-I**)
+
+The proofs are in `data/fs131/kpd1/route/`. They elaborate against the skeletons' statements, with Mathlib names checked at the
+pin. The implementer's work:
+1. **Before anything else, take the statements' print**: dump the four skeleton modules' stored constants from the compiled tree
+   as given (`data/fs131/kpd1/dump/PiecesDump.lean`'s format, with the four module names).
+2. **Copy each route file over its module** (`cp data/fs131/kpd1/route/X.lean Proofs/HadwigerNelson/Rigidity/X.lean`). The route
+   copies differ from the skeletons only inside proofs and in one docstring (`isClosed_setOf_apply_eq_one`'s, identical text).
+3. **`subgroupHaar_bot`** (about 14 lines): `ext s hs`; `rw [subgroupHaar, Measure.map_apply measurable_subtype_coe hs,
+   Measure.dirac_apply' _ hs]`. Then `by_cases h1 : (1 : AddChar G Circle) ∈ s`. If so, the preimage is `Set.univ`, since
+   `y.1 = 1` for every `y : ↥⊥` (`Subgroup.mem_bot`); `measure_univ` against the probability instance on `haarMeasure ⊤`, which
+   is `⟨by simpa using Measure.haarMeasure_self (G := _) (K₀ := ⊤)⟩` as in `isProbabilityMeasure_subgroupHaar`, and
+   `Set.indicator_of_mem`. If not, the preimage is `∅` and `Set.indicator_of_notMem` applies. Hard: nothing.
+4. **`not_connectedSpace_dual_zmod_two`** (about 22 lines). `intro hc`. Put `f χ := (χ 1 : ℂ).re`, continuous by
+   `Complex.continuous_re.comp (continuous_evalChar _ 1)`. Take `χ₁` from `exists_apply_ne_one (one_ne_zero : (1 : ZMod 2) ≠ 0)`.
+   Every `χ` has `(χ 1)^2 = χ (2 • 1) = χ 0 = 1` (`AddChar.map_nsmul_eq_pow`; `(2 • 1 : ZMod 2) = 0` by `decide`), so
+   `(χ 1 : ℂ) = 1 ∨ (χ 1 : ℂ) = -1` (`mul_self_eq_one_iff`, after `sq`). So `f χ₁ = -1` and `f 1 = 1`, and
+   `intermediate_value_univ χ₁ 1 hf` gives a `χ` with `f χ = 0`, against `±1`. Hard: the coercions `Circle → ℂ`; the
+   `±1` dichotomy is cleanest stated once as a `have` over every `χ`.
+5. **Build, then print again and compare** with the print of step 1. The stored types must be identical; the definitions' values
+   (`dualAnnihilator`, `dualCoannihilator`, `subgroupHaar`, `evalDualHom`, `extendByPow`, `graphSubgroup`, `dualDualEquiv`,
+   `additiveDualDualEquiv`) must also be identical. The one exception is `graphSubgroup`, whose proof fields are now proved:
+   compare its data field `carrier` instead (`LEAN.md`, FS124-I3's line). Then run the lint and
+   `data/fs131/kpd1/probes/SorrySources.lean` on the built tree. Expected: every headline reaches `sorryAx` only through
+   `Rigidity/DualGroup`'s leaves, which § 3.2 lists, and `finite_dualAnnihilator` reaches none.
+
+Mathlib names the proofs use, each one elaborated at the pin in the route copies: `Measure.isProbabilityMeasure_map`,
+`Measure.haarMeasure_self`, `Measure.map_apply`, `integral_map`, `integral_mul_left_eq_self`, `integral_const_mul`,
+`IsOpen.measure_pos`, `Subtype.range_coe`, `isCompact_range`, `isCompact_iff_compactSpace`, `Circle.ext`, `Circle.ext_iff`,
+`Circle.coe_mul`, `Circle.coe_one`, `Circle.coeHom`, `MonoidHom.compAddChar`, `AddChar.toAddMonoidHomEquiv`,
+`QuotientAddGroup.lift`, `QuotientAddGroup.eq_zero_iff`, `QuotientAddGroup.mk_zsmul`, `AddChar.map_zsmul_eq_zpow`,
+`AddChar.map_nsmul_eq_pow`, `AddChar.inv_apply'`, `Finite.of_injective`, `closure_minimal`, `Subgroup.topologicalClosure_coe`,
+`Subgroup.isClosed_topologicalClosure`, `OrderIso.map_top`, `AddSubgroup.toSubgroup'`, `injective_iff_map_eq_one`,
+`PontryaginDual.ext`, `ContinuousMonoidHom.continuous`, `continuous_induced_rng`, `continuous_pi`, `isClosed_eq`,
+`isClosed_biInter`, `isClosed_singleton`, `AddCircle.toCircle_add`, `AddCircle.homeomorphCircle`,
+`AddCircle.homeomorphCircle_apply`, `Module.Baer.of_divisible`, `Module.Baer.extension_property_addMonoidHom`, `nsmulAddMonoidHom`,
+`IsAddTorsionFree.nsmul_right_injective`, `connectedSpace_iff_clopen`, `IsTopologicalGroup.exist_openSubgroup_sub_clopen_nhds_of_one`,
+`Subgroup.quotient_finite_of_isOpen`, `Subgroup.normal_of_isMulCommutative`, `Subgroup.index_ne_zero_of_finite`,
+`Subgroup.pow_index_mem`.
+
+### 4.2 What `Rigidity/Pieces` leaves 8 and 9 read now (for lane G; their statements unchanged, their plans re-pointed)
+
+Each step below elaborates at the consumer's types by `exact` (`data/fs131/kpd1/probes/Consumer.lean`, exit 0). In the leaves,
+`M` is `↥M` for `M : AddSubgroup (unitRing F)`, countable by `countable_unitRing_of_numberField`.
+- **Leaf 8, `isSolenoid_pieceDual`.**
+  - `connectedSpace := connectedSpace_dual` at `G := ↥M`. It needs `IsAddTorsionFree ↥M`: `unitRing F ⊆ ℂ` is a char-zero
+    domain, so `IsAddTorsionFree.of_isCancelMulZero_charZero` applies, and the property passes to `↥M` along
+    `Subtype.val_injective` (Mathlib's `Function.Injective.isMulTorsionFree`, additive form; `#check` its name at use).
+    **The last planner's route through profinite structure theory leaves the plan.**
+  - `dual_embeds`: compose `(additiveDualDualEquiv ↥M).symm.toMonoidHom`, into `Multiplicative ↥M`, with the multiplicative form
+    of an injective `↥M →+ (Fin n → ℚ)` — `M ⊆ fieldI F`, a finite-dimensional `ℚ`-space by KN8's plan, its basis. Injective by
+    `MulEquiv.injective`.
+- **Leaf 9, `isTotallyIrreducible_pieceAction`.** Put `N := dualCoannihilator (AddSubgroup.toSubgroup' Y) : AddSubgroup ↥M`.
+  - If `N = ⊥`: `Or.inr (eq_top_of_isClosed_of_dualCoannihilator_eq_bot' Y hY hN)`.
+  - If `N ≠ ⊥`, the leaf's own mathematics: `N` is `Λ`-stable (from `α_Λ`-invariance of `Y`), `ℚN = F(i)`, and `M ⧸ N` is finite
+    (Lemma F). Then `Or.inl`: `(Y : Set _) ⊆ dualAnnihilator N` by `le_dualAnnihilator_dualCoannihilator _`, and that set is
+    finite by `finite_dualAnnihilator N`; finish with `Set.Finite.subset`.
+  - Neither branch reads more duality than this.
+
+**Leaves 8 and 9 no longer wait on lane PD's proofs, only on its statements, which are typed.** Lane G can prove them now.
+
+### 4.3 The lanes (no two share a file)
+
+| lane | writes | needs | who | size |
+|---|---|---|---|---|
+| **PD-I** | `Rigidity/Annihilator`, `SubgroupHaar`, `Duality`, `DualConnected` | nothing (their upstream `sorry`s are lane D's) | one implementer | two leaves of 14 and 22 lines, a copy, one build, the print and the lint: **about two to three hours** |
+| **D** (unchanged, KN8 § 5.1) | `Rigidity/DualGroup` | Mathlib | an implementer | as planned; **now on PD's landing path**: leaves 1, 2, 3, 4, 5, 7, 8 |
+| **G** (re-pointed) | `Rigidity/Pieces` | PD's statements (typed), D, U, M5, E, C0's Lemma F | an implementer | leaves 8–9 **unblocked now** (§ 4.2) |
+
+The order is free: PD-I and G can run beside D. The chain's landing needs all three.
+
+### 4.4 Optional, not typed (no consumer asks)
+
+`(N^⊥)^⊥ = N` for every `N ⊆ G` (separation at `G ⧸ N`; ten lines). With D2 it makes the Galois connection an order isomorphism
+between the subgroups of `G` and the closed subgroups of `Ĝ`, which is HX-1 step 1's correspondence in full. Type it when HX-1
+is typed.
