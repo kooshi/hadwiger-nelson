@@ -200,3 +200,77 @@ measure exist, so the binders of SI-3, remark (ii), `factorLaw_trace_null` and `
 `EqualAtUnits` is a step inside a proof by contradiction; its docstring names the model over `ℚ` (the residue colouring at
 the ramified prime above 2 with a fair bit) as described, not a declaration. `IsSpectralMeasureOf` hypotheses are inhabited
 by `exists_isSpectralMeasureOf` for every vector.
+
+## Stage 3 — SAVED: the plan per leaf
+
+Mathlib names `#check`ed at the pin in `data/fs131/km11/probes/Names.out`, or used in the scratch proofs (elaborated).
+Prices are lines of Lean including docstrings; "scratch" means a proof exists in `data/fs131/km11/scratch/` and elaborated.
+
+### 3.1 M11a — `Rigidity/SpectralSubspace` (lane S)
+
+| leaf | route | names | hard part | price |
+|---|---|---|---|---|
+| `gram_sum_eq` | `Complex.ext`; real part: `‖Σ c_x v_x‖² = ΣΣ c_x c_y ⟨v_y, v_x⟩` (`real_inner_self_eq_norm_sq`, `sum_inner`, `inner_sum`); imaginary part cancels by `Finset.sum_comm` and `real_inner_comm` | — | none | **scratch, proved**: 35 (`Gram.lean`) |
+| `posDef_koopman` | `⟨f, V_{x−y} f⟩ = ⟨V_y f, V_x f⟩` (`compMeasurePreserving_add`, isometry preserves `inner`: `Lp.isometry_compMeasurePreserving`, polarization or `LinearIsometry.inner_map_map` on `Lp.compMeasurePreservingₗᵢ`), `integral_mul_comp_eq_inner`, then `gram_sum_eq` | `integral_mul_comp_eq_inner` | the inner-product transport | 40–60 |
+| `comp_mem_contVec` | `‖V_z V_y h − V_y h‖ = ‖V_y (V_z h − h)‖ = ‖V_z h − h‖` (commuting from `hadd` and `add_comm`; `Lp.norm_compMeasurePreserving`) | `compMeasurePreserving_add` | none | 20–30 |
+| `inner_comp_eq_inner_comp_neg` | apply `V_{−y}` (an isometry) to both arguments; `V_{−y} V_y = V_0 = id` (`compMeasurePreserving_zero`) | as above | none | 20–30 |
+| `IsSpectralMeasureOf.add_of_orthogonal` | expand `⟨h + r, V_y(h + r)⟩`; `⟨r, V_y h⟩ = 0` by `comp_mem_contVec`, `⟨h, V_y r⟩ = ⟨V_{−y} h, r⟩ = 0`; `integral_add_measure` | `integral_add_measure` | none | 40–60 |
+| `exists_trigPoly_tendsto` | the evaluations span a star subalgebra of `C(R̂, ℂ)` separating points; Stone–Weierstrass; `ContinuousMap.toLp_denseRange` (weak regularity by `Measure.WeaklyRegular.of_pseudoMetrizableSpace_of_isFiniteMeasure`); `‖F‖² = ∫‖F‖²` | `ContinuousMap.starSubalgebra_topologicalClosure_eq_top_of_separatesPoints`, `ContinuousMap.toLp_denseRange`, `ContinuousMap.coeFn_toLp`, `indicatorConstLp_coeFn` | **API: the hard leaf of step (d)** — resolved | **scratch, proved**: 145 with its helpers (`Density.lean`; standard three) |
+| `norm_sq_koopmanSum_re_add_im` | `koopmanSum` of `Finsupp` coefficients as a `Finset` sum over `a.support`; `∫ |Σ a_y χ(y)|² dσ = ΣΣ a_x ā_y σ̂(x − y)` (expand `normSq`, `integral_finsetSum`, `coe_char_sub`); `σ̂(x − y) = ⟨V_y f, V_x f⟩` (as in `posDef_koopman`); `gram_sum_eq` | `SpectralInputs.coe_char_sub`, `integral_finsetSum` | the Finsupp/Finset bookkeeping | 60–100 |
+| `inner_koopmanSum_re` | `⟨Σ b_y V_y f, f⟩ = Σ b_y ⟨V_y f, f⟩`, `⟨V_y f, f⟩ = σ̂(y)` real; `Re ∫ P_a dσ = Σ Re(a_y) σ̂(y)` | `integral_finsetSum`, `real_inner_comm` | none | 25–40 |
+| `comp_koopmanSum` | linearity of `V_z`, `compMeasurePreserving_add`, `Finsupp.linearCombination_mapDomain` | as named | none | 20–30 |
+| `exists_spectral_vector` | Cauchy sequence of `Σ Re(a_n,y) V_y f`, `cauchySeq_tendsto_of_complete`; the pairing through `∫‖P_n − 1_A‖ → 0` (`‖g‖ ≤ δ + ‖g‖²/δ`); the bound by `‖(c − 1)P‖² ≤ 2‖(c − 1)1_A‖² + 8‖P − 1_A‖²` and `le_of_tendsto_of_tendsto'` | `Finsupp.mapDomain_mapRange`, `Finsupp.linearCombination_mapDomain`, `integral_indicator`, `Lp.isometry_compMeasurePreserving` | **the assembly of step (d)** — resolved | **scratch, elaborated over the four leaves above**: 156 + 85 of helpers (`SpectralVector.lean`) |
+| `spectral_null_of_orthogonal` | `exists_spectral_vector`; `w ∈ contVec l`: `‖V_z w − w‖ ≤ (2∫_A|χ z − 1|²)^{1/2} → 0` by `tendsto_integral_filter_of_dominated_convergence` (bound `4`, each `χ ∈ A` tends to `1` by `hAl`); then `horth w` gives `σ.real A = 0` | `tendsto_integral_filter_of_dominated_convergence` | none | 40–60 |
+| `isSpectralMeasureOf_condExpL2` | `σ_h`, `σ_r` exist; `σ = σ_h + σ_r` (`add_of_orthogonal` with `condExpL2_mem_contVec`, `inner_sub_condExpL2_eq_zero`, uniqueness; `f = h + (f − h)`); `σ_h((contChars t)ᶜ) = 0` (`spectral_carried_iff`, ⟸); `σ_r(contChars t) = 0` (`spectral_contChars_null_of_orthogonal`); restrict | `Measure.restrict_add`, `Measure.restrict_eq_self_of_ae_mem` | none | 50–80 |
+| `spectral_null_model` | `T n x = x + (n : Fin 2)` on `Fin 2` with `Measure.count`; `f = 1_{0} − ½`; `σ = ½ δ_{χ₋}`, `χ₋ n = (−1)ⁿ` (an `AddChar ℤ Circle` from `zmultiplesHom` or `AddChar.ofInt`); `contVec ⊤` are the invariant vectors, here the constants | `Measure.count`, `AddChar` on `ℤ` | building `χ₋` and computing in `Lp` of a two-point space | 80–140 |
+
+**M11a: about 900–1,100 lines, of which about 420 are written and elaborate.**
+
+### 3.2 M11b — `Rigidity/TraceSplit` (lane T)
+
+| leaf | route | names | hard part | price |
+|---|---|---|---|---|
+| `integral_colourInd_mul_comp` | `Lp.coeFn_compMeasurePreserving`, `indicatorConstLp_coeFn`; product of indicators is the indicator of the intersection; `hequiv` moves `κ (T y ω) 0` to `κ ω y` | `integral_indicator_one`-type, `Measure.real` | ae bookkeeping | 30–50 |
+| `three_mul_tetra_add_one` | **proved** in the skeleton (`split_ifs; norm_num`) | — | — | 4 |
+| `trace_decomp` | coefficient at `y`: `3 corr(y) + 1 = 4 μ(κ0 = κy) = 4 Σ_j μ(κ0 = j, κy = j)` (`three_mul_tetra_add_one`, `integral_map`, a sum over `Fin 4` of indicators); then `measure_eq_of_fourier` | `integral_map`, `Measure.integral_smul_nat`-type, `integral_finset_sum_measure` (`integral_finsetSum_measure` at the pin) | the `ℕ`-smul of measures against integrals | 60–100 |
+| `condLaw_comp_colourShift` | `condExp_comp_measurePreserving` with `comap_factorSigma_eq_of_action` (`colourShift_add`, `colourShift_zero`); the indicator of `{c (x) = j}` composed with `shift_y` is that of `{c (x + y) = j}` | as named | none | 20–30 |
+| `inner_colourInd_comp_unit` | `integral_colourInd_mul_comp` at `κ = id`; `{c 0 = j ∧ c u = j} ⊆ (X₄)ᶜ`, `μ.carried` | `measure_mono_null` | none | 20–30 |
+| `colourCond_ae_eq_condLaw` | `MemLp.condExpL2_ae_eq_condExp` on the indicator | as named | the `indicatorConstLp` / `MemLp.toLp` match (`indicatorConstLp_coeFn`, `Lp.ext`) | 15–30 |
+| `integral_colourCond_mul_comp` | `colourCond_ae_eq_condLaw`, `Lp.coeFn_compMeasurePreserving`, `condLaw_comp_colourShift` at `x = 0` | as named | none | 25–40 |
+| `setIntegral_compl_TA_re` | `σ_j` (`exists_isSpectralMeasureOf`); `trace_decomp` at `κ = id`; `isSpectralMeasureOf_condExpL2` at `tauPrime F` (with `contChars_tauPrime`, `isTopologicalAddGroup_tauPrime`, `isCountablyGenerated_nhds_tauPrime`, `bochnerOn_tauPrime`, `measurableSet_TA`); restrict `3σ + δ₁ = 4Σσ_j` to `(TA F)ᶜ` (`δ₁((TA F)ᶜ) = 0`, `one_mem_TA`); `∫ χ(u) dσ_{r_j} = ⟨e_j, V_u e_j⟩ − ⟨Πe_j, V_u Πe_j⟩` from the two restrictions' coefficients; `inner_colourInd_comp_unit`, `integral_colourCond_mul_comp`; take real parts | `setIntegral_eq_integral_of_forall_compl_eq_zero`-type, `integral_re` | the composition's length | 100–160 |
+| `setIntegral_compl_TA_rot` | `rotInv_of_isTraceSpectral (bochnerHerglotz_of_countable _)`; `setIntegral_map` with `rot_preimage_TA` (complement) and `rot_apply`; `uvRing u * 1 = uvRing u` | `setIntegral_map`, `Measure.restrict_map` | none | 30–50 |
+
+**M11b: about 350–500 lines.**
+
+### 3.3 M11c — `Rigidity/APlus` (lane A)
+
+| leaf | route | names | hard part | price |
+|---|---|---|---|---|
+| `tendsto_mul_nhds_tauPrime` | `tauPrime = profTop ⊓ archTop`: `nhds_inf`; on `profTop`, `nhds_iInf` and `nhds_induced`, `r · (N+1)R ⊆ (N+1)R`; on `archTop`, `archHom (r y) = mixedEmbedding r * archHom y` (`map_mul`) and `continuous_mul_left` on the mixed space. M10's helpers `mem_nhds_profTop`, `eventually_archTop`, `archHom` are **private** there: reprove here (about 40 lines), or `open private … from Proofs.HadwigerNelson.Rigidity.ContinuityGroup` (Batteries; `LEAN.md` § Searching) | `nhds_inf`, `nhds_iInf`, `nhds_induced`, `map_mul` | the private helpers | 60–110 |
+| `comap_colourRot_colourFactor` | `measurableSet_factorSigma_iff`, `mem_factorSets_iff` (`μ(T_y⁻¹ A ∆ A) → 0`); `colourShift y ∘ colourRot u = colourRot u ∘ colourShift (u y)`; `measure_preimage` of `colourRot u`; `tendsto_mul_nhds_tauPrime` composed; both inclusions, the second through `ū` (`rot_conj_rot`'s computation, private in `ChainAtTA`: restate) | as named | none | 50–80 |
+| `factorColouring_shift_ae` | `si4_equivariant_factorSigma` with `hcomm` from `colourShift_add`, `hinv : colourShift (−y) ∘ colourShift y = id`, `π v = v + y`; `funext` under the `ae` | as named | none | 20–30 |
+| `factorColouring_rot_ae` | `si4_equivariant` with `comap_colourRot_colourFactor`, `μ.measurePreserving_rot`, `π v = uvRing u * v` | as named | none | 20–30 |
+| `integral_condLaw_mul_eq_zero_of_adj` | `⟨y − x, hxy⟩ : unitVectors F`, `uvRing` of it `= y − x`; `condLaw_comp_colourShift` twice; `integral_map` of the measure-preserving shift | as named | none | 30–50 |
+| `factorColouring_mem_X4` | `si4` with `adj x y := (y : ℂ) − x ∈ unitVectors F`, `hdisj` from the leaf above, `f = minSel`, `hf = minSel_mem` | `si4` | none | 15–25 |
+| `factorLaw_carried` | `Measure.map_apply` with `measurableSet_X4` (countability), `measure_eq_zero_iff_ae_notMem` | as named | none | 10–20 |
+| `factorLaw_shift_inv`, `factorLaw_rot_inv` | `Measure.map_map`, `Measure.map_congr` with the two `_ae` lemmas, then `μ.shift_inv`, `μ.rot_inv` | as named | none | 20–30 each |
+| `factorLaw_trace_null` | `trace_decomp` at `κ = factorColouring μ` (`hequiv` from `factorColouring_shift_ae` at `0`, `zero_add`); each `e″_j` is `𝒜`-measurable (`measurable_factorColouring_apply`), so in `lpMeas` (`mem_lpMeas_indicatorConstLp`), so in `contVec` (`contVec_eq_lpMeas`), so `σ″_j((TA F)ᶜ) = 0` (`spectral_carried_iff` ⟸, `contChars_tauPrime`); evaluate `3σ′ + δ₁ = 4Σσ″_j` at `(TA F)ᶜ` | `mem_lpMeas_indicatorConstLp` | none | 50–80 |
+| `equalAtUnits_of_not_neg` | `setIntegral_compl_TA_re_nonpos` at `1` gives `= 0`; `setIntegral_compl_TA_rot` gives `= 0` at every `u`; `setIntegral_compl_TA_re` and `integral_condLaw_mul_nonneg`: a sum of nonnegatives that is `0` (`Finset.sum_eq_zero_iff_of_nonneg`) | as named | `uvRing ⟨1, _⟩ = 1` | 30–50 |
+| `numberField_bot` | `⊥ = (algebraMap ℚ ℝ).fieldRange` (`Subfield.bot_eq_of_charZero`-type, or `mem_bot`); `Module.Finite ℚ ⊥` from a surjection `ℚ → ⊥` (`Module.Finite.of_surjective`) | `Module.Finite.of_surjective` | finding the `⊥` characterization | 15–30 |
+| `aPlusOfR88`, `nonempty_invariantColouring_bot`, `aplus_model`, `minSel_mem`, `factorLaw_isProb`, `measurable_factorColouring(_apply)` | **proved in the skeleton** (compositions) | — | — | — |
+
+**M11c: about 350–550 lines.**
+
+### 3.4 Classical inputs, each searched for by name at the pin; formalize or declare
+
+| input | where | status |
+|---|---|---|
+| Stone–Weierstrass, complex star subalgebras | `ContinuousMap.starSubalgebra_topologicalClosure_eq_top_of_separatesPoints` | Mathlib; used in the scratch proof |
+| density of continuous functions in `Lᵖ` of a weakly regular finite measure | `ContinuousMap.toLp_denseRange` | Mathlib; used |
+| weak regularity of finite measures on pseudometrizable spaces | `Measure.WeaklyRegular.of_pseudoMetrizableSpace_of_isFiniteMeasure` (a theorem, `haveI`) | Mathlib; used |
+| completeness of `L²`; dominated convergence along a countably generated filter | instances; `tendsto_integral_filter_of_dominated_convergence` | Mathlib |
+| `E[· | 𝒜]` in `L²` is the conditional expectation | `MemLp.condExpL2_ae_eq_condExp` | Mathlib |
+| Herglotz–Bochner on a countable group; Fourier uniqueness | `bochnerHerglotz_of_countable` (M2a), `measure_eq_of_fourier` (M4) | this library, standard three |
+| Bochner for `τ′_∅` | `bochnerOn_tauPrime` (M2b) | this library, typed, being proved |
+
+**No axiom is declared, and none is needed.** `[Rudin1962]` 1.4.3 is not read by any M11 proof (M2b's route avoids it).
