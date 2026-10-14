@@ -38,3 +38,20 @@ entries, so L1 is true for `b.tri` and would be false for a general `tri` — th
 `data/fs131/ikc2/statements-before.txt` (441 constants: 217 in `FibreCert`, 3 in `FibreCert3`, 221 in `FibreCertSound`;
 sha256 `7d01d5e40ec00cc0f98d5d8ea8f0f2a841985ce0777f421fe376d784eda4b41d`). It is byte-identical to FS131-IKC1's
 `statements-after.txt`, so the chain of comparisons runs from the planner's dump through FS131-IKC1's to this one.
+
+## Stage 2 — SAVED: L1 `psd_of_psdCheck` proved
+
+No `sorry`; the module elaborates with three `sorry` warnings left (L2, L3, L4). 460 lines (the record priced 250–350),
+in `Arith/FibreCertSound` § Leaf L1, every helper private:
+
+* the decoder's shape — `readK_length`, `trows_length`, `tri_rows` (`Blk.tri`'s row `k` has exactly `m − k` entries);
+  `rec_iter` (a `Nat.rec` loop is `f^[n]`), `symStep_iter`, `symRows_eq` (`symRows` is `triGet` on `m × m`);
+* the check's parts named (`pDigs`, `pRev`, `pSig`, `pE`, `pFold`, `pRowOK`, `pAll`, `pOkB`) with `psdCheck_eq : psdCheck b =
+  (pOkB b && (pAll b).2) := rfl`, and the two folds computed (`rowFold`, `allFold`);
+* the arithmetic — `base_expand` (a number below `B^K` is the sum of its digits), `horner`, `cauchy` (the product of two
+  base-`B` numbers coefficient by coefficient), `kron` (digit `m + 1` of `row_i · rev_j` is `Σ_{k=1}^m d_ik d_jk` when every
+  digit is below `A` and `(m+1)·A² < B`), `pE_eq` (the entry the check computes is `s·R_ij − Σ_k (d_ik − Cm)(d_jk − Cm)`);
+* `dd_nonneg` (a symmetric, diagonally dominant matrix is PSD), `gram_sum`; then `s·vᵀRv = Σ_k (Σ_i u_ik v_i)² + vᵀEv ≥ 0`.
+
+What the proof reads from the check: `|mrows| = m`; each row below `2^(wB(m+1))`; every digit below `2^wm`;
+`(m+1)·4^wm < 2^wB`; and each row's dominance. It does not read the tag digit's value, `Cm`'s value or `s`'s beyond `s > 0`.

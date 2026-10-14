@@ -631,9 +631,467 @@ private theorem opSum_O1 (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) :
 private def PSDN (tri : List (List ℤ)) (m : ℕ) : Prop :=
   ∀ v : ℕ → ℝ, 0 ≤ ∑ i ∈ Finset.range m, ∑ j ∈ Finset.range m, (triGet tri i j : ℝ) * v i * v j
 
+/-! ### Leaf L1: the PSD check certifies its block's matrix -/
+
+/-- Rows `1..` of a block's triangle, as `Blk.tri` decodes them. -/
+private def trows (wr per : ℕ) (toI : List ℕ → List ℤ) (n : ℕ) : ℕ → Rd → List (List ℤ) :=
+  Nat.rec (motive := fun _ => ℕ → Rd → List (List ℤ)) (fun _ _ => [])
+    (fun _ ih len r => let x := Rd.readK wr per len r; toI x.1 :: ih (Nat.sub len 1) x.2) n
+
+private theorem tri_eq (b : Blk) : b.tri = (readN b.wr b.per b.m b.row0).map (fun x => sfield x b.wr) ::
+    trows b.wr b.per (fun l => l.map fun x => sfield x b.wr) (Nat.sub b.m 1) (Nat.sub b.m 1) ⟨0, 0, b.rest⟩ := rfl
+
+private theorem readK_length (k per : ℕ) : ∀ (cnt : ℕ) (r : Rd), (Rd.readK k per cnt r).1.length = cnt
+  | 0, _ => rfl
+  | cnt + 1, r => by
+    show ((r.read k per).1 :: (Rd.readK k per cnt (r.read k per).2).1).length = cnt + 1
+    rw [List.length_cons, readK_length k per cnt]
+
+private theorem trows_length (wr per : ℕ) (toI : List ℕ → List ℤ) (htoI : ∀ l, (toI l).length = l.length) :
+    ∀ (n len : ℕ) (r : Rd), (trows wr per toI n len r).length = n ∧
+      ∀ k < n, ((trows wr per toI n len r).getD k []).length = len - k
+  | 0, _, _ => ⟨rfl, fun k hk => absurd hk (Nat.not_lt_zero k)⟩
+  | n + 1, len, r => by
+    have e : trows wr per toI (n + 1) len r = toI (Rd.readK wr per len r).1 ::
+        trows wr per toI n (Nat.sub len 1) (Rd.readK wr per len r).2 := rfl
+    obtain ⟨h1, h2⟩ := trows_length wr per toI htoI n (Nat.sub len 1) (Rd.readK wr per len r).2
+    rw [e]
+    refine ⟨by rw [List.length_cons, h1], fun k hk => ?_⟩
+    cases k with
+    | zero => simp [htoI, readK_length]
+    | succ k => rw [List.getD_cons_succ, h2 k (by omega), Nat.sub_eq]; omega
+
+/-- `Blk.tri` decodes rows of exactly `m − k` entries. -/
+private theorem tri_rows (b : Blk) (hm : 0 < b.m) : ∀ k < b.m, (b.tri.getD k []).length = b.m - k := by
+  intro k hk
+  have htoI : ∀ l : List ℕ, (l.map fun x => sfield x b.wr).length = l.length := fun l => List.length_map _
+  obtain ⟨-, h2⟩ := trows_length b.wr b.per _ htoI (Nat.sub b.m 1) (Nat.sub b.m 1) ⟨0, 0, b.rest⟩
+  rw [tri_eq]
+  cases k with
+  | zero => simp [readN, readK_length]
+  | succ k => rw [List.getD_cons_succ, h2 k (by simp only [Nat.sub_eq]; omega), Nat.sub_eq]; omega
+
+private theorem rec_iter {α : Type} (f : α → α) : ∀ (n : ℕ) (s : α),
+    (Nat.rec (motive := fun _ => α → α) (fun s => s) (fun _ ih s => ih (f s)) n) s = f^[n] s
+  | 0, _ => rfl
+  | n + 1, s => by
+    show (Nat.rec (motive := fun _ => α → α) (fun s => s) (fun _ ih s => ih (f s)) n) (f s) = f^[n + 1] s
+    rw [rec_iter f n, Function.iterate_succ_apply]
+
+/-- One step of `symRows`. -/
+private def symStep (s : List (List ℤ) × List (List ℤ) × List (List ℤ)) :
+    List (List ℤ) × List (List ℤ) × List (List ℤ) :=
+  let r := s.2.1.headD []
+  (s.1 ++ [s.2.2.map (fun t => t.headD 0) ++ r], s.2.1.tail, s.2.2.map List.tail ++ [r.tail])
+
+private theorem symRows_iter (tri : List (List ℤ)) (m : ℕ) : symRows tri m = (symStep^[m] ([], tri, [])).1 := by
+  unfold symRows
+  exact congrArg Prod.fst (rec_iter symStep m _)
+
+private theorem headD_drop {α : Type} (l : List α) (j : ℕ) (d : α) : (l.drop j).headD d = l.getD j d := by
+  simp [List.headD_eq_head?_getD, List.head?_drop, List.getD_eq_getElem?_getD]
+
+private theorem map_range_getD {α : Type} (l : List α) (d : α) :
+    (List.range l.length).map (fun i => l.getD i d) = l := by
+  refine List.ext_getElem (by simp) fun i h1 h2 => ?_
+  simp [List.getD_eq_getElem?_getD, List.getElem?_eq_getElem h2]
+
+private theorem triGet_lt (tri : List (List ℤ)) (i j : ℕ) (h : j < i) :
+    triGet tri i j = (tri.getD j []).getD (i - j) 0 := by
+  have : Nat.ble i j = false := Bool.eq_false_iff.2 fun h' => by rw [Nat.ble_eq] at h'; omega
+  simp [triGet, this]
+
+private theorem triGet_le (tri : List (List ℤ)) (i j : ℕ) (h : i ≤ j) :
+    triGet tri i j = (tri.getD i []).getD (j - i) 0 := by
+  have : Nat.ble i j = true := by rw [Nat.ble_eq]; exact h
+  simp [triGet, this]
+
+private theorem triGet_symm (tri : List (List ℤ)) (i j : ℕ) : triGet tri i j = triGet tri j i := by
+  rcases lt_trichotomy i j with h | rfl | h
+  · rw [triGet_le _ _ _ h.le, triGet_lt _ _ _ h]
+  · rfl
+  · rw [triGet_lt _ _ _ h, triGet_le _ _ _ h.le]
+
+private theorem symRow (tri : List (List ℤ)) (m k : ℕ) (hk : k < m) (hl : (tri.getD k []).length = m - k) :
+    (List.range k).map (fun c => ((tri.getD c []).drop (k - c)).headD 0) ++ (tri.drop k).headD [] =
+      (List.range m).map (triGet tri k) := by
+  rw [headD_drop, show m = k + (m - k) by omega, List.range_add, List.map_append, List.map_map]
+  congr 1
+  · refine List.map_congr_left fun c hc => ?_
+    rw [headD_drop, triGet_lt _ _ _ (List.mem_range.1 hc)]
+  · conv_lhs => rw [← map_range_getD (tri.getD k []) 0, hl]
+    refine List.map_congr_left fun j _ => ?_
+    simp only [Function.comp_apply]
+    rw [triGet_le _ _ _ (Nat.le_add_right k j), Nat.add_sub_cancel_left]
+
+private theorem symStep_iter (tri : List (List ℤ)) (m : ℕ) (hl : ∀ k < m, (tri.getD k []).length = m - k) :
+    ∀ k ≤ m, symStep^[k] ([], tri, []) = ((List.range k).map (fun i => (List.range m).map (triGet tri i)),
+      tri.drop k, (List.range k).map fun c => (tri.getD c []).drop (k - c))
+  | 0, _ => rfl
+  | k + 1, hk => by
+    rw [Function.iterate_succ_apply', symStep_iter tri m hl k (by omega)]
+    simp only [symStep, List.range_succ, List.map_append, List.map_cons, List.map_nil, List.map_map]
+    refine Prod.ext ?_ (Prod.ext ?_ ?_)
+    · simp only [List.append_cancel_left_eq, List.cons.injEq, and_true]
+      exact symRow tri m k (by omega) (hl k (by omega))
+    · exact List.tail_drop
+    · simp only
+      congr 1
+      · refine List.map_congr_left fun c hc => ?_
+        have := List.mem_range.1 hc
+        simp only [Function.comp_apply, List.tail_drop]
+        congr 1; omega
+      · simp only [List.cons.injEq, and_true]
+        rw [headD_drop, Nat.add_sub_cancel_left, List.drop_one]
+
+/-- With rows of exactly `m − k` entries, `symRows` is `triGet` on `m × m`. -/
+private theorem symRows_eq (tri : List (List ℤ)) (m : ℕ) (hl : ∀ k < m, (tri.getD k []).length = m - k) :
+    symRows tri m = (List.range m).map fun i => (List.range m).map (triGet tri i) := by
+  rw [symRows_iter, symStep_iter tri m hl m le_rfl]
+
+/-! The PSD check's parts, named (`psdCheck_eq` is `rfl`). -/
+
+private def pB (b : Blk) : ℕ := Nat.shiftLeft 1 b.wB
+private def pCm (b : Blk) : ℕ := Nat.add (Nat.shiftLeft 1 (Nat.sub b.wm 1)) 1
+private def pDigs (b : Blk) : List (List ℕ) := b.mrows.map fun f => (List.range (Nat.add b.m 1)).map (digit f b.wB)
+private def pRev (b : Blk) : List ℕ :=
+  (pDigs b).map fun ds => Nat.add (ds.headD 0) (Nat.mul (ds.tail.foldl (fun a d => Nat.add (Nat.mul a (pB b)) d) 0) (pB b))
+private def pSig (b : Blk) : List ℕ := (pDigs b).map fun ds => ds.tail.foldl Nat.add 0
+private def pE (b : Blk) (fi si : ℕ) (x : ℤ × ℕ × ℕ) : ℤ :=
+  Int.sub (Int.mul (Int.ofNat (Nat.add (Nat.shiftLeft 1 b.sb) 1)) x.1)
+    (Int.add (Int.subNatNat (digit (Nat.mul fi x.2.1) b.wB (Nat.add b.m 1)) (Nat.mul (pCm b) (Nat.add si x.2.2)))
+      (Int.ofNat (Nat.mul b.m (Nat.mul (pCm b) (pCm b)))))
+private def pFold (b : Blk) (i fi si : ℕ) (Ri : List ℤ) : ℕ × ℤ × ℤ :=
+  (Ri.zip ((pRev b).zip (pSig b))).foldl (fun (a : ℕ × ℤ × ℤ) x =>
+    cond (Nat.beq a.1 i) (Nat.add a.1 1, pE b fi si x, a.2.2)
+      (Nat.add a.1 1, a.2.1, Int.add a.2.2 (Int.ofNat (Int.natAbs (pE b fi si x))))) (0, 0, 0)
+private def pRowOK (b : Blk) (i fi si : ℕ) (Ri : List ℤ) : Bool :=
+  nonneg (Int.sub (pFold b i fi si Ri).2.1 (pFold b i fi si Ri).2.2)
+private def pAll (b : Blk) : ℕ × Bool :=
+  ((b.mrows.zip (pSig b)).zip (symRows b.tri b.m)).foldl (fun (a : ℕ × Bool) x =>
+    (Nat.add a.1 1, a.2 && pRowOK b a.1 x.1.1 x.1.2 x.2)) (0, true)
+private def pOkB (b : Blk) : Bool :=
+  Nat.beq b.mrows.length b.m && b.mrows.all (fun f => Nat.blt f (Nat.shiftLeft 1 (Nat.mul b.wB (Nat.add b.m 1)))) &&
+    (pDigs b).all (fun ds => ds.all fun x => Nat.blt x (Nat.shiftLeft 1 b.wm)) &&
+    Nat.blt (Nat.mul (Nat.add b.m 1) (Nat.mul (Nat.shiftLeft 1 b.wm) (Nat.shiftLeft 1 b.wm))) (pB b)
+
+private theorem psdCheck_eq (b : Blk) : psdCheck b = (pOkB b && (pAll b).2) := rfl
+
+private theorem nonneg_iff (x : ℤ) : nonneg x = true ↔ 0 ≤ x := by
+  cases x with
+  | ofNat n => simp [nonneg]
+  | negSucc n => simp [nonneg]
+
+private theorem zip_range {α β : Type} (f : ℕ → α) (g : ℕ → β) (n : ℕ) :
+    ((List.range n).map f).zip ((List.range n).map g) = (List.range n).map fun i => (f i, g i) :=
+  List.ext_getElem (by simp) fun i h1 h2 => by simp
+
+private theorem rowFold {α : Type} (i : ℕ) (e : α → ℤ) (h : ℕ → α) : ∀ n : ℕ,
+    ((List.range n).map h).foldl (fun (a : ℕ × ℤ × ℤ) x => cond (Nat.beq a.1 i) (Nat.add a.1 1, e x, a.2.2)
+      (Nat.add a.1 1, a.2.1, Int.add a.2.2 (Int.ofNat (Int.natAbs (e x))))) (0, 0, 0) =
+      (n, if i < n then e (h i) else 0, ∑ j ∈ Finset.range n, if j = i then 0 else |e (h j)|)
+  | 0 => by simp
+  | n + 1 => by
+    rw [List.range_succ, List.map_append, List.foldl_append, rowFold i e h n]
+    simp only [List.map_cons, List.map_nil, List.foldl_cons, List.foldl_nil, Finset.sum_range_succ]
+    by_cases hn : n = i
+    · subst hn
+      simp [Nat.beq_refl]
+    · have hb : Nat.beq n i = false := Bool.eq_false_iff.2 fun h' => hn (Nat.eq_of_beq_eq_true h')
+      have hlt : (i < n + 1) = (i < n) := by apply propext; omega
+      simp only [hb, cond_false, hlt, hn, if_false, Int.ofNat_eq_natCast, Int.natCast_natAbs, Nat.add_eq]
+      rfl
+
+private theorem allFold {α : Type} (R : ℕ → α → Bool) (h : ℕ → α) : ∀ n : ℕ,
+    ((List.range n).map h).foldl (fun (a : ℕ × Bool) x => (Nat.add a.1 1, a.2 && R a.1 x)) (0, true) =
+      (n, (List.range n).all fun i => R i (h i))
+  | 0 => rfl
+  | n + 1 => by
+    rw [List.range_succ, List.map_append, List.foldl_append, allFold R h n]
+    simp [List.all_append]
+
+/-- A number below `B^K` is the sum of its base-`B` digits. -/
+private theorem base_expand (B K x : ℕ) (hx : x < B ^ K) : x = ∑ k ∈ Finset.range K, x / B ^ k % B * B ^ k := by
+  have : ∀ K, x % B ^ K = ∑ k ∈ Finset.range K, x / B ^ k % B * B ^ k := by
+    intro K
+    induction K with
+    | zero => simp [Nat.mod_one]
+    | succ K ih => rw [Nat.mod_pow_succ, ih, Finset.sum_range_succ, mul_comm (B ^ K)]
+  rw [← this K, Nat.mod_eq_of_lt hx]
+
+private theorem horner (B : ℕ) (h : ℕ → ℕ) : ∀ n : ℕ,
+    ((List.range n).map h).foldl (fun a d => Nat.add (Nat.mul a B) d) 0 = ∑ r ∈ Finset.range n, h (n - 1 - r) * B ^ r
+  | 0 => rfl
+  | n + 1 => by
+    rw [List.range_succ, List.map_append, List.foldl_append, horner B h n]
+    simp only [List.map_cons, List.map_nil, List.foldl_cons, List.foldl_nil, Nat.mul_eq, Nat.add_eq,
+      Finset.sum_range_succ', Finset.sum_mul, Nat.add_sub_cancel, Nat.sub_zero, pow_zero, mul_one]
+    congr 1
+    refine Finset.sum_congr rfl fun r hr => ?_
+    have := Finset.mem_range.1 hr
+    rw [mul_assoc, ← pow_succ]; congr 2; omega
+
+/-- **The Cauchy product** of two base-`B` numbers of `K` digits, coefficient by coefficient. -/
+private theorem cauchy (B K : ℕ) (a c : ℕ → ℕ) :
+    (∑ l ∈ Finset.range K, a l * B ^ l) * (∑ r ∈ Finset.range K, c r * B ^ r) =
+      ∑ n ∈ Finset.range (2 * K), (∑ l ∈ Finset.range K, if l ≤ n ∧ n - l < K then a l * c (n - l) else 0) * B ^ n := by
+  rw [Finset.sum_mul_sum]
+  simp only [Finset.sum_mul]
+  conv_rhs => rw [Finset.sum_comm]
+  refine Finset.sum_congr rfl fun l hl => ?_
+  have hl' := Finset.mem_range.1 hl
+  simp only [ite_mul, zero_mul]
+  rw [← Finset.sum_filter]
+  have hf : (Finset.range (2 * K)).filter (fun n => l ≤ n ∧ n - l < K) = (Finset.range K).map (addLeftEmbedding l) := by
+    ext n
+    simp only [Finset.mem_filter, Finset.mem_range, Finset.mem_map, addLeftEmbedding_apply]
+    constructor
+    · rintro ⟨h1, h2, h3⟩; exact ⟨n - l, h3, by omega⟩
+    · rintro ⟨r, hr, rfl⟩; omega
+  rw [hf, Finset.sum_map]
+  refine Finset.sum_congr rfl fun r _ => ?_
+  simp only [addLeftEmbedding_apply, Nat.add_sub_cancel_left, pow_add]; ring
+
+/-- **The Kronecker digit**: digit `m + 1` of `row_i · rev_j` is `Σ_{k=1}^m d_ik d_jk` when every digit is below `A`
+and `(m + 1)·A² < B`. -/
+private theorem kron (B A m : ℕ) (d e : ℕ → ℕ) (hd : ∀ k < m + 1, d k < A) (he : ∀ k < m + 1, e k < A)
+    (hAB : (m + 1) * (A * A) < B) :
+    (∑ l ∈ Finset.range (m + 1), d l * B ^ l) * (e 0 + (∑ r ∈ Finset.range m, e (m - r) * B ^ r) * B) /
+      B ^ (m + 1) % B = ∑ k ∈ Finset.range m, d (k + 1) * e (k + 1) := by
+  let e' : ℕ → ℕ := fun r => if r = 0 then e 0 else e (m + 1 - r)
+  have hrev : e 0 + (∑ r ∈ Finset.range m, e (m - r) * B ^ r) * B =
+      ∑ r ∈ Finset.range (m + 1), e' r * B ^ r := by
+    rw [Finset.sum_range_succ', Finset.sum_mul]
+    simp only [e', Nat.add_one_ne_zero, if_false, if_true, pow_zero, mul_one, add_comm (e 0)]
+    congr 1
+    refine Finset.sum_congr rfl fun r hr => ?_
+    rw [mul_assoc, ← pow_succ]; congr 2; omega
+  have he' : ∀ r < m + 1, e' r < A := fun r hr => by
+    simp only [e']; split_ifs
+    · exact he 0 (by omega)
+    · exact he _ (by omega)
+  rw [hrev, cauchy]
+  have hc : ∀ n < 2 * (m + 1), (∑ l ∈ Finset.range (m + 1),
+      if l ≤ n ∧ n - l < m + 1 then d l * e' (n - l) else 0) < B := by
+    intro n _
+    refine lt_of_le_of_lt ?_ hAB
+    calc _ ≤ ∑ _l ∈ Finset.range (m + 1), A * A := Finset.sum_le_sum fun l hl => by
+            split_ifs with h
+            · exact Nat.mul_le_mul (hd l (Finset.mem_range.1 hl)).le (he' _ h.2).le
+            · exact Nat.zero_le _
+      _ = (m + 1) * (A * A) := by simp
+  rw [sum_digit B _ (2 * (m + 1)) hc (m + 1) (by omega), Finset.sum_range_succ']
+  simp only [Nat.zero_le, Nat.sub_zero, lt_irrefl, and_false, if_false, add_zero]
+  refine Finset.sum_congr rfl fun k hk => ?_
+  have := Finset.mem_range.1 hk
+  rw [if_pos (by omega)]
+  simp only [e']
+  rw [if_neg (by omega)]
+  congr 2; omega
+
+/-- **Diagonal dominance**: a symmetric matrix whose every diagonal entry is at least its row's off-diagonal mass is
+positive semidefinite. -/
+private theorem dd_nonneg (m : ℕ) (E : ℕ → ℕ → ℝ) (hsym : ∀ i < m, ∀ j < m, E i j = E j i)
+    (hdom : ∀ i < m, ∑ j ∈ Finset.range m, (if j = i then 0 else |E i j|) ≤ E i i) (v : ℕ → ℝ) :
+    0 ≤ ∑ i ∈ Finset.range m, ∑ j ∈ Finset.range m, E i j * v i * v j := by
+  let T : ℕ → ℕ → ℝ := fun i j => if j = i then 0 else |E i j|
+  have hT : ∀ i < m, ∀ j < m, T i j = T j i := fun i hi j hj => by
+    simp only [T]; by_cases h : j = i
+    · subst h; rfl
+    · rw [if_neg h, if_neg (Ne.symm h), hsym i hi j hj]
+  have key : ∀ i j, 2 * (if j = i then E i i * v i ^ 2 else 0) - T i j * (v i ^ 2 + v j ^ 2) ≤
+      2 * (E i j * v i * v j) := by
+    intro i j
+    simp only [T]
+    by_cases h : j = i
+    · subst h; simp; ring_nf; rfl
+    · simp only [if_neg h, mul_zero, zero_sub]
+      have h1 : 2 * |E i j * v i * v j| ≤ |E i j| * (v i ^ 2 + v j ^ 2) := by
+        rw [abs_mul, abs_mul, mul_assoc]
+        have := two_mul_le_add_sq |v i| |v j|
+        rw [sq_abs, sq_abs] at this
+        nlinarith [abs_nonneg (E i j)]
+      linarith [neg_abs_le (E i j * v i * v j)]
+  have hswap : ∑ i ∈ Finset.range m, ∑ j ∈ Finset.range m, T i j * v j ^ 2 =
+      ∑ i ∈ Finset.range m, ∑ j ∈ Finset.range m, T i j * v i ^ 2 := by
+    rw [Finset.sum_comm]
+    refine Finset.sum_congr rfl fun i hi => Finset.sum_congr rfl fun j hj => ?_
+    rw [hT j (Finset.mem_range.1 hj) i (Finset.mem_range.1 hi)]
+  have hsum : ∑ i ∈ Finset.range m, ∑ j ∈ Finset.range m,
+      (2 * (if j = i then E i i * v i ^ 2 else 0) - T i j * (v i ^ 2 + v j ^ 2)) =
+      2 * ∑ i ∈ Finset.range m, (E i i - ∑ j ∈ Finset.range m, T i j) * v i ^ 2 := by
+    simp only [Finset.sum_sub_distrib, mul_add, Finset.sum_add_distrib, hswap, ← Finset.mul_sum,
+      Finset.sum_ite_eq', Finset.mem_range]
+    rw [Finset.sum_congr rfl fun i hi => if_pos (Finset.mem_range.1 hi)]
+    simp only [sub_mul, Finset.sum_sub_distrib, Finset.sum_mul]
+    ring
+  have h0 : 0 ≤ ∑ i ∈ Finset.range m, (E i i - ∑ j ∈ Finset.range m, T i j) * v i ^ 2 :=
+    Finset.sum_nonneg fun i hi => mul_nonneg (sub_nonneg.2 (hdom i (Finset.mem_range.1 hi))) (sq_nonneg _)
+  have h2 := Finset.sum_le_sum fun i (_ : i ∈ Finset.range m) =>
+    Finset.sum_le_sum fun j (_ : j ∈ Finset.range m) => key i j
+  rw [hsum] at h2
+  simp only [← Finset.mul_sum] at h2
+  linarith
+
+private theorem foldl_nadd (l : List ℕ) (a : ℕ) : l.foldl Nat.add a = a + l.sum := by
+  induction l generalizing a with
+  | nil => simp
+  | cons x l ih => rw [List.foldl_cons, ih, List.sum_cons, Nat.add_eq, add_assoc]
+
+private theorem tail_digits (g : ℕ → ℕ) (m : ℕ) :
+    ((List.range (m + 1)).map g).tail = (List.range m).map fun k => g (k + 1) := by
+  rw [List.range_succ_eq_map, List.map_cons, List.tail_cons, List.map_map]; rfl
+
+private theorem head_digits (g : ℕ → ℕ) (m : ℕ) : ((List.range (m + 1)).map g).headD 0 = g 0 := by
+  rw [List.range_succ_eq_map, List.map_cons]; rfl
+
+/-- The Gram matrix of integer vectors is positive semidefinite. -/
+private theorem gram_sum (m : ℕ) (u : ℕ → ℕ → ℝ) (v : ℕ → ℝ) :
+    ∑ i ∈ Finset.range m, ∑ j ∈ Finset.range m, (∑ k ∈ Finset.range m, u i k * u j k) * v i * v j =
+      ∑ k ∈ Finset.range m, (∑ i ∈ Finset.range m, u i k * v i) ^ 2 := by
+  calc _ = ∑ i ∈ Finset.range m, ∑ j ∈ Finset.range m, ∑ k ∈ Finset.range m, u i k * v i * (u j k * v j) := by
+          refine Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun j _ => ?_
+          rw [Finset.sum_mul, Finset.sum_mul]; exact Finset.sum_congr rfl fun k _ => by ring
+    _ = ∑ i ∈ Finset.range m, ∑ k ∈ Finset.range m, ∑ j ∈ Finset.range m, u i k * v i * (u j k * v j) :=
+          Finset.sum_congr rfl fun i _ => Finset.sum_comm
+    _ = ∑ k ∈ Finset.range m, ∑ i ∈ Finset.range m, ∑ j ∈ Finset.range m, u i k * v i * (u j k * v j) :=
+          Finset.sum_comm
+    _ = _ := by simp only [sq, Finset.sum_mul_sum]
+
+private theorem pE_val (b : Blk) (fv si : ℕ) (x : ℤ) (rv sj : ℕ) : pE b fv si (x, rv, sj) =
+    ((Nat.add (Nat.shiftLeft 1 b.sb) 1 : ℕ) : ℤ) * x - (Int.subNatNat (digit (Nat.mul fv rv) b.wB (Nat.add b.m 1))
+      (Nat.mul (pCm b) (Nat.add si sj)) + ((Nat.mul b.m (Nat.mul (pCm b) (pCm b)) : ℕ) : ℤ)) := rfl
+
+/-- The check's entry: `s·R − (Σ_k (M + Cm)_ik (M + Cm)_jk − Cm(σ_i + σ_j) + m·Cm²)` is `s·R − Σ_k M_ik M_jk`. -/
+private theorem pE_eq (b : Blk) (a c : ℕ → ℕ) (si sj : ℕ) (x : ℤ) (fv rv : ℕ)
+    (hd : digit (Nat.mul fv rv) b.wB (Nat.add b.m 1) = ∑ k ∈ Finset.range b.m, a k * c k)
+    (hsi : si = ∑ k ∈ Finset.range b.m, a k) (hsj : sj = ∑ k ∈ Finset.range b.m, c k) :
+    pE b fv si (x, rv, sj) = ((2 ^ b.sb + 1 : ℕ) : ℤ) * x -
+      ∑ k ∈ Finset.range b.m, (((a k : ℕ) : ℤ) - (pCm b : ℤ)) * (((c k : ℕ) : ℤ) - (pCm b : ℤ)) := by
+  have e1 : ∑ k ∈ Finset.range b.m, (((a k : ℕ) : ℤ) - (pCm b : ℤ)) * (((c k : ℕ) : ℤ) - (pCm b : ℤ)) =
+      ∑ k ∈ Finset.range b.m, ((a k : ℤ) * (c k : ℤ)) - (pCm b : ℤ) * (∑ k ∈ Finset.range b.m, (a k : ℤ)) -
+        (pCm b : ℤ) * (∑ k ∈ Finset.range b.m, (c k : ℤ)) +
+        (b.m : ℤ) * ((pCm b : ℤ) * (pCm b : ℤ)) := by
+    rw [Finset.sum_congr rfl fun k _ => show (((a k : ℕ) : ℤ) - (pCm b : ℤ)) * (((c k : ℕ) : ℤ) - (pCm b : ℤ)) =
+        (a k : ℤ) * (c k : ℤ) - (pCm b : ℤ) * (a k : ℤ) - (pCm b : ℤ) * (c k : ℤ) + (pCm b : ℤ) * (pCm b : ℤ) by ring]
+    simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib, ← Finset.mul_sum, Finset.sum_const, Finset.card_range,
+      nsmul_eq_mul]
+    ring
+  rw [e1, pE_val, Int.subNatNat_eq_coe, hd, hsi, hsj, shl_one]
+  simp only [Nat.mul_eq, Nat.add_eq]
+  push_cast
+  ring
+
 /-- **Leaf L1** (K2b, K2g): the PSD check certifies its block's matrix. -/
 private theorem psd_of_psdCheck (b : Blk) (h : psdCheck b = true) : PSDN b.tri b.m := by
-  sorry
+  intro v
+  rcases Nat.eq_zero_or_pos b.m with hm0 | hm
+  · simp [hm0]
+  rw [psdCheck_eq, Bool.and_eq_true] at h
+  obtain ⟨hok, hall⟩ := h
+  simp only [pOkB, Bool.and_eq_true, Nat.beq_eq, List.all_eq_true, Nat.blt_eq] at hok
+  obtain ⟨⟨⟨hlen, hrow⟩, hdig⟩, hAB⟩ := hok
+  have hpB : pB b = 2 ^ b.wB := shl_one _
+  let f : ℕ → ℕ := fun i => b.mrows.getD i 0
+  let d : ℕ → ℕ → ℕ := fun i k => digit (f i) b.wB k
+  have hmrows : b.mrows = (List.range b.m).map f := by
+    conv_lhs => rw [← map_range_getD b.mrows 0, hlen]
+  have hdigs : pDigs b = (List.range b.m).map fun i => (List.range (b.m + 1)).map (d i) := by
+    simp only [pDigs, hmrows, List.map_map]; rfl
+  have hdlt : ∀ i < b.m, ∀ k < b.m + 1, d i k < 2 ^ b.wm := fun i hi k hk => by
+    have := hdig _ (by rw [hdigs]; exact List.mem_map.2 ⟨i, List.mem_range.2 hi, rfl⟩) (d i k)
+      (List.mem_map.2 ⟨k, List.mem_range.2 hk, rfl⟩)
+    rwa [shl_one] at this
+  have hfexp : ∀ i < b.m, f i = ∑ l ∈ Finset.range (b.m + 1), d i l * (2 ^ b.wB) ^ l := fun i hi => by
+    have hlt := hrow (f i) (by rw [hmrows]; exact List.mem_map.2 ⟨i, List.mem_range.2 hi, rfl⟩)
+    rw [shl_one, Nat.mul_eq, Nat.add_eq, pow_mul] at hlt
+    conv_lhs => rw [base_expand _ _ _ hlt]
+    exact Finset.sum_congr rfl fun l _ => by simp only [d, digit_eq]
+  let sg : ℕ → ℕ := fun i => ∑ k ∈ Finset.range b.m, d i (k + 1)
+  let rv : ℕ → ℕ := fun i => d i 0 + (∑ r ∈ Finset.range b.m, d i (b.m - r) * (2 ^ b.wB) ^ r) * 2 ^ b.wB
+  have hsig : pSig b = (List.range b.m).map sg := by
+    simp only [pSig, hdigs, List.map_map]
+    refine List.map_congr_left fun i _ => ?_
+    simp only [Function.comp_apply, tail_digits, foldl_nadd, zero_add, sg, lsum_range]
+  have hrev : pRev b = (List.range b.m).map rv := by
+    simp only [pRev, hdigs, List.map_map]
+    refine List.map_congr_left fun i _ => ?_
+    simp only [Function.comp_apply]
+    rw [tail_digits, head_digits, horner, hpB]
+    simp only [rv, Nat.add_eq, Nat.mul_eq]
+    have : ∀ r ∈ Finset.range b.m, d i (b.m - 1 - r + 1) * (2 ^ b.wB) ^ r = d i (b.m - r) * (2 ^ b.wB) ^ r :=
+      fun r hr => by have := Finset.mem_range.1 hr; congr 2; omega
+    rw [Finset.sum_congr rfl this]
+  have hsym := symRows_eq b.tri b.m (tri_rows b hm)
+  have hrows : ∀ i < b.m, pRowOK b i (f i) (sg i) ((List.range b.m).map (triGet b.tri i)) = true := by
+    simp only [pAll, hmrows, hsig, hsym, zip_range] at hall
+    have := allFold (fun i (x : (ℕ × ℕ) × List ℤ) => pRowOK b i x.1.1 x.1.2 x.2)
+      (fun i => ((f i, sg i), (List.range b.m).map (triGet b.tri i))) b.m
+    rw [this] at hall
+    simpa only [List.all_eq_true, List.mem_range] using hall
+  have hAB' : (b.m + 1) * (2 ^ b.wm * 2 ^ b.wm) < 2 ^ b.wB := by
+    simpa only [shl_one, hpB, Nat.mul_eq, Nat.add_eq] using hAB
+  -- the entries of `E`
+  let s : ℕ := 2 ^ b.sb + 1
+  let G : ℕ → ℕ → ℤ := fun i j =>
+    ∑ k ∈ Finset.range b.m, (((d i (k + 1) : ℕ) : ℤ) - (pCm b : ℤ)) * (((d j (k + 1) : ℕ) : ℤ) - (pCm b : ℤ))
+  let Ez : ℕ → ℕ → ℤ := fun i j => (s : ℤ) * triGet b.tri i j - G i j
+  have hE : ∀ i < b.m, ∀ j < b.m, pE b (f i) (sg i) (triGet b.tri i j, rv j, sg j) = Ez i j := by
+    intro i hi j hj
+    have hd : digit (Nat.mul (f i) (rv j)) b.wB (Nat.add b.m 1) =
+        ∑ k ∈ Finset.range b.m, d i (k + 1) * d j (k + 1) := by
+      rw [digit_eq, Nat.mul_eq, Nat.add_eq, hfexp i hi]
+      exact kron _ _ _ (d i) (d j) (hdlt i hi) (hdlt j hj) hAB'
+    exact pE_eq b (fun k => d i (k + 1)) (fun k => d j (k + 1)) (sg i) (sg j) (triGet b.tri i j) (f i) (rv j) hd rfl rfl
+  -- every row is dominated
+  have hdomz : ∀ i < b.m, ∑ j ∈ Finset.range b.m, (if j = i then 0 else |Ez i j|) ≤ Ez i i := by
+    intro i hi
+    have hr := hrows i hi
+    simp only [pRowOK, nonneg_iff] at hr
+    have hfold : pFold b i (f i) (sg i) ((List.range b.m).map (triGet b.tri i)) =
+        (b.m, if i < b.m then pE b (f i) (sg i) (triGet b.tri i i, rv i, sg i) else 0,
+          ∑ j ∈ Finset.range b.m, if j = i then 0 else |pE b (f i) (sg i) (triGet b.tri i j, rv j, sg j)|) := by
+      simp only [pFold, hrev, hsig, zip_range]
+      exact rowFold i (pE b (f i) (sg i)) (fun j => (triGet b.tri i j, rv j, sg j)) b.m
+    rw [hfold] at hr
+    simp only [if_pos hi] at hr
+    rw [hE i hi i hi, Finset.sum_congr rfl fun j hj => by rw [hE i hi j (Finset.mem_range.1 hj)]] at hr
+    change 0 ≤ Ez i i - _ at hr
+    linarith
+  -- the real matrices
+  let E : ℕ → ℕ → ℝ := fun i j => (Ez i j : ℝ)
+  have hEsym : ∀ i < b.m, ∀ j < b.m, E i j = E j i := fun i _ j _ => by
+    simp only [E, Ez, G, triGet_symm b.tri i j]
+    congr 2
+    exact Finset.sum_congr rfl fun k _ => mul_comm _ _
+  have hEdom : ∀ i < b.m, ∑ j ∈ Finset.range b.m, (if j = i then 0 else |E i j|) ≤ E i i := fun i hi => by
+    have := hdomz i hi
+    have h' : ((∑ j ∈ Finset.range b.m, (if j = i then 0 else |Ez i j|) : ℤ) : ℝ) ≤ (Ez i i : ℝ) := by exact_mod_cast this
+    simpa [E, apply_ite (Int.cast : ℤ → ℝ), Int.cast_abs] using h'
+  have hdd := dd_nonneg b.m E hEsym hEdom v
+  have hgram := gram_sum b.m (fun i k => ((d i (k + 1) : ℕ) : ℝ) - (pCm b : ℝ)) v
+  have hsplit : ∀ i j, (s : ℝ) * (triGet b.tri i j : ℝ) =
+      (∑ k ∈ Finset.range b.m, (((d i (k + 1) : ℕ) : ℝ) - (pCm b : ℝ)) * (((d j (k + 1) : ℕ) : ℝ) - (pCm b : ℝ))) +
+        E i j := fun i j => by
+    simp only [E, Ez, G]; push_cast; ring
+  have hs : (0 : ℝ) < s := by positivity
+  have htot : (s : ℝ) * ∑ i ∈ Finset.range b.m, ∑ j ∈ Finset.range b.m, (triGet b.tri i j : ℝ) * v i * v j =
+      ∑ k ∈ Finset.range b.m, (∑ i ∈ Finset.range b.m, (((d i (k + 1) : ℕ) : ℝ) - (pCm b : ℝ)) * v i) ^ 2 +
+        ∑ i ∈ Finset.range b.m, ∑ j ∈ Finset.range b.m, E i j * v i * v j := by
+    rw [← hgram, ← Finset.sum_add_distrib, Finset.mul_sum]
+    refine Finset.sum_congr rfl fun i _ => ?_
+    rw [Finset.mul_sum, ← Finset.sum_add_distrib]
+    refine Finset.sum_congr rfl fun j _ => ?_
+    rw [show (s : ℝ) * ((triGet b.tri i j : ℝ) * v i * v j) = ((s : ℝ) * (triGet b.tri i j : ℝ)) * v i * v j by ring,
+      hsplit]
+    ring
+  have hsq : 0 ≤ ∑ k ∈ Finset.range b.m,
+      (∑ i ∈ Finset.range b.m, (((d i (k + 1) : ℕ) : ℝ) - (pCm b : ℝ)) * v i) ^ 2 :=
+    Finset.sum_nonneg fun k _ => sq_nonneg _
+  by_contra hneg
+  push Not at hneg
+  have := mul_neg_of_pos_of_neg hs hneg
+  linarith
 
 /-- A block's terms at the moments, over a list of representative monomials: for each of its weights
 `R₀₀ c² Y([]) + Σ_a 2 R₀,₁₊ₐ c σ Y(a) + Σ_{a,a'} R₁₊ₐ,₁₊ₐ' Σ_t κ(t) Y(a ∪ (a' + t))` (`SOUNDNESS.md` § 4). -/
