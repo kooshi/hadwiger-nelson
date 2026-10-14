@@ -54,3 +54,35 @@ under the slot: `data/fs131/idb2/statements-before.txt` — 53 constants (6 + 36
 `tools/fs131_idb2_statement_diff.py` (FS131-IDB1's reader, its module list changed); its self-test (a changed type, a changed
 value, a removed constant, a new public constant, each planted in a copy of the dump) fires on all four, and the faithful copy
 reads 0 differences over 47 constants.
+
+## Stage 2 — SAVED: lane F, the Fourier side (`Autocorr`, 5 leaves)
+
+All five leaves of `Plane/DensityBound/Autocorr` are proved, in the copy `data/fs131/idb2/work/Autocorr.lean` (elaborated under
+the slot with `-DautoImplicit=false`, 5.4 s, 3.2 GB, no error and no warning) and copied over the module; the text diff against
+the skeleton removes exactly the five `sorry` lines and adds the proofs, nine private helpers and one import line
+(`Mathlib.Analysis.Fourier.Inversion`, whose own imports — `PeakFunction`, `Gaussian.FourierTransform` — the module already
+had, so the instance paths its stored statements read cannot move; the kernel-side check is stage 4's). Each leaf's axioms,
+printed from the copy: `[propext, Classical.choice, Quot.sound]`.
+
+| leaf | proof |
+|---|---|
+| `autocorr_eq_zero_of_norm_eq_one` | the planner's scratch proof, folded in unchanged |
+| `circleAvg_autocorr_one` | `Real.circleAverage_const_on_circle` with the leaf above |
+| `circleAvg_autocorr_zero` | the same, on `sphere 0 0 = {0}` |
+| `continuous_autocorr` | `tendsto_measure_symmDiff_preimage_nhds_zero` for the family `z ↦ (· + z)` (`ContinuousMap.curry`), with a private `|vol(E ∩ A) − vol(E ∩ B)| ≤ vol(A Δ B)` |
+| `sum_circleAvg_autocorr_nonneg` | below |
+
+**The route actually taken for the positive definiteness** — the plan's, with Mathlib's Fourier inversion machinery doing the
+Gaussian work. Private helpers: `fourier_autocorr` — `𝓕 F = |𝓕 1_E|²` for `F = autocorr E` (one Fubini on `(w, y)`, a
+translation, `integral_conj`); `tendsto_smooth` — for integrable `f` continuous at `z`,
+`∫ e^{−‖ξ‖²/a + 2πi⟨z,ξ⟩} 𝓕f(ξ) dξ → f(z)` as `a → ∞` (Mathlib's `Real.tendsto_integral_gaussian_smul'`, its
+peak-function limit, carried to the Fourier side by `VectorFourier.integral_fourierIntegral_smul_eq_flip` and
+`fourier_gaussian_innerProductSpace'`, as in Mathlib's own proof of the inversion formula); `circleAverage_fourierWeight` — for
+continuous integrable `w`, the circle average of `z ↦ ∫ w(ξ) e^{2πi⟨z,ξ⟩}` at radius `r` is `∫ w(ξ) J₀(2πr‖ξ‖)` (Fubini on
+`[0, 2π] × ℂ`, then `circleAverage_exp_inner`). The assembly: with `w_a = e^{−‖ξ‖²/a}|𝓕1_E|² ≥ 0`, the smoothed
+autocorrelation `Φ_a` has `Σ c_k F̊_a(r_k) = ∫ w_a Σ c_k J₀(2π‖ξ‖ r_k) ≥ 0` by `hW`; `‖Φ_a(z)‖ ≤ Φ_a(0) → vol E` dominates the
+circle averages (no Gaussian normalization is computed: the positive-definite bound `|Φ(z)| ≤ Φ(0)` replaces it), and
+`Φ_a → F` pointwise; so the limit `Σ c_k F̊(r_k)` is `≥ 0`.
+
+**Re-priced.** The planner priced lane F at 900 lines; the five leaves came to 365 lines with the helpers (the two first leaves
+13 lines together; the positive definiteness about 300). **0.4×** the plan. No message owed.
