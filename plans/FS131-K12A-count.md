@@ -110,3 +110,86 @@ eight modules then missing rows: `logs/architecture-base.log`).
   `CountExtension`, and is `exists_slice`'s conclusion.
 - `toL` repeats lane T's `Rigidity.ofUnitRing` (`Rigidity/TateModel`) under another name in another namespace; neither module
   imports the other. At the join the two can be made one (a question, INVENTORY).
+
+## Stage 3 — SAVED: the obligation pass, and the plan per leaf (61 leaves)
+
+### 3.1 The obligation pass (`debruijn-obligation-modeling`, invoked fresh)
+
+- **Quantifier order for the consumer.** The count fixes one window and then sends the level `k → ∞`; the window bound is
+  applied to the lonely sets of every row at every level. So the plane's neighbourhood ratio must hold at **one scale for
+  every set**: `volume_inter_sq_le_essNbhd` (`∀ Z, ∃ s₀`) was replaced by `NRWindow ε s₀` and `exists_nrWindow`
+  (`∃ s₀, ∀ Z`), and `sum_volume_inter_sq_le` now takes `NRWindow ε s₀` and any `s ≥ s₀` (no `∃` of its own). Under the
+  old order the count's proof could not be written (the scale would depend on the level).
+- **Generalised for the proof:** `le_upperDensity_of_periodic` at every cell `sq b L` (the periodisation of `A ∩ sq a s`
+  is read in the cell `sq a (s + 2)`, where it is exactly the trace).
+- **Named children added:** `unitPairsNull_diff_essNbhd_union` (C14.1-e's union, the heart of the neighbourhood ratio),
+  `Delta_circle_mul_mem_closure_pow` (what the completion reads of the torus), `resR_eq_zero_of_le` and
+  `exists_level_mem_nsmul` (Lemma C (d) in the form the topology comparison reads), `hasBasis_nhds_zero_K` (read by the
+  extension's choice of neighbourhoods and by the cylinder approximation).
+- **Removed, no consumer:** `Delta_mul`.
+- **Every hypothesis is read** by its route below; the one structure hypothesis of a block whose hypotheses are a step in a
+  proof by contradiction (`false_of_slice`, `exists_slice`) says so in its docstring, with the model of the parts that do not
+  read `TCA` (`F = ℚ`).
+
+### 3.2 The plan per leaf
+
+*Names `#check`ed at the pin: `data/fs131/k12a/probes/Names.out`, `Readback.out`, `Inst.out`. "Hard" marks the leaf a lane
+should open with.*
+
+| module | leaf | route; Mathlib and library names | hard? |
+|---|---|---|---|
+| WindowDensity | `measurableSet_sq`, `volume_sq` | preimage of `Ico ×ˢ Ico` under the measurable equivalence; `Complex.volume_preserving_equiv_real_prod`, `Measure.prod_prod`, `Real.volume_Ico` | low |
+| | `densitySet_bandFree` | `Plane.dist_ne_one_of_mem_densitySet` with `Plane.upperDensityAt_pos_of_mem_densitySet`; a.e. equality from `Plane.volume_diff_densitySet`, `Plane.volume_densitySet_diff` (`Plane/Cover`) | low |
+| | `le_upperDensity_of_periodic` | the cells `sq (b + L(m + ni)) L` inside `ball 0 R` number at least `λ(ball 0 (R − √2 L))/L²`; each holds `λ(P ∩ sq b L)` (`measure_preimage_add_right` and periodicity); `Filter.le_limsup_of_frequently_le'` along `R → ∞` | medium |
+| | `bandFree_periodize` | two points of distinct copies differ by at least `2` in one coordinate (`|Re|` or `|Im|`), so their distance exceeds `1` | low |
+| | `volume_inter_sq_le` | the three above at `L = s + 2`, the cell `sq a (s + 2)`; `upperDensity P ≤ mOne` (`le_iSup₂`) | low |
+| | `exists_periodic_near_mOne` | `mOne` is a supremum: a measurable 1-avoiding `A` with `upperDensity A > m₁ − ε/3`; a ball where the ratio exceeds it; a grid square of side `s` inside the ball's cover with ratio `> m₁ − 2ε/3` (pigeonhole over finitely many squares); periodise at `s + 2`, `s` large | medium |
+| | `unitPairsNull_diff_essNbhd_union` | three kinds of pairs: inside `J` none; inside `Z` null; across, the slice `{θ : x + e θ ∈ Z}` is null for `x ∉ N_e[Z]` and `Plane.volume_slice_swap` for the reverse orientation; `Plane.unitPairsNull_iff_ae_phi_eq_zero` | medium |
+| | `exists_nrWindow` | **the block's hard leaf**: `J` from the last-but-one; for `t ∈ sq 0 L`, `volume_inter_sq_le` on `((J + t) \ N_e[Z]) ∪ Z`; `∫_{t ∈ sq 0 L} λ((J + t) ∩ M) dt = λ(J ∩ sq 0 L) λ(M)` (Tonelli, `lintegral_prod_swap`, periodicity); `s₀` from `4s + 4 ≤ ε s²/2` and `m₁ − δ_J ≤ ε/2` — independent of `Z` | hard |
+| | `essNbhd ∅` example | `phi ∅ = 0` | low |
+| FiniteZhang | `card_le_mul_card_closedNbhd` | a maximum independent `J`; for each `t`, `((J + t) \ N[I]) ∪ I` is independent; `Σ_t |(J + t) ∩ N[I]| = |J| |N[I]|` (`Finset.sum_comm`); divide by `|G|` | medium |
+| | `ratioLe_prod` | **the hard leaf**: rows `X_b`, social/lonely in `G₁`, `A_x`, `B(x)`; `|A_x| ≤ c (|G₂| − |B(x)|)` (NR in `G₂`, `A_x` independent, `N[A_x] ∩ B(x) = ∅`), `Σ_b |X*_b| ≤ c Σ_x |B(x)|` (NR in `G₁`); sum — the finite form of PlaneZhang's count | medium |
+| | `ratioLe_pi` | induction on the finite index (`Finite.induction_empty_option`), the product split by `Equiv.piOptionEquivProd`; empty index: one point, the connection set `univ ∋ 0`, ratio `0 ≤ c` | medium |
+| | `ratioLe_subgroup` | an independent `I ⊆ A` translated by a transversal of `A` in `G` is independent in `G` (edges stay in cosets: `S ⊆ A`); `|G| = [G : A] |A|` (`AddSubgroup.card_mul_index`) | low |
+| PlaneZhang | `measurableSet_lonely`, `unitPairsNull_lonely` | `measurable_phi`; a lonely point's slice in its row is null, so the pair set of the lonely set is null (`Plane.pairSet_null_iff_ae_slice`) | low |
+| | `ae_sIndep_social` | for each `q` and `t ∈ S` (finitely many): `{z ∈ Y (q + t) : phi (Y q) z ≠ 0}` is null by `RowsEdgeNull` at `(q + t, −t)`; `measure_iUnion_null` over the finite pairs | medium |
+| | `ae_disjoint_touched` | J28D (ii′)'s cases — `b ∈ A_z` against `z ∈ X*_b` (disjoint by definition); `b ∈ A_z` against `phi (X*_b) z ≠ 0` (swap of the lonely slice); `b − a ∈ S` against `z ∈ X*_b` and against `phi (X*_b) z ≠ 0` (edge-nullity at `(b, a − b)`, `(a, b − a)`) | medium-hard |
+| | `sum_volume_inter_sq_le` | **the hard leaf**: `Σ_q λ(Y q ∩ W) = ∫_W |{q : z ∈ Y q}| = ∫_W |A_z| + Σ_b λ(X*_b ∩ W)` (finite sums of indicators, `lintegral_finset_sum`); `|A_z| ≤ r (|Q| − |B(z)|)` a.e.; `Σ_b λ(X*_b ∩ W) ≤ m₁ Σ_b λ(N_e[X*_b] ∩ W) + ε |Q| s² = m₁ ∫_W |B(z)| + ε |Q| s²`; combine in `ℝ` | hard |
+| CountTorus | `mem_normOneL_iff` | `‖u‖ = 1 ⟺ u ū = 1` (`Complex.mul_conj`, `Complex.normSq`) | low |
+| | `Delta_ratCast` | `map_add`, `map_mul`, `map_ratCast` of `mixedEmbedding`; `Complex.re`/`im` of `q₁ + q₂ i` | low |
+| | `Delta_circle_mem_closure` | `φ(t) = (1 − t² + 2ti)/(1 + t²)`, `t ∈ ℚ`, dense in the circle (`Rat.denseRange_cast`, `φ` continuous, onto the circle minus `−1`); `Delta_ratCast`; `Delta` continuous (finite-dimensional, `LinearMap.continuous_of_finiteDimensional`) | medium |
+| | `mem_closure_pow` | **the hard leaf of the block**: `x = φ(t₀)` (`t₀ = (x − x̄)/(i(x + x̄ + 2))` read in `F`) or `x = −1 = i²`; `φ(t)^h = φ(Q_h(t)/P_h(t))` (`ring`/`field_simp`); coordinates `NumberField.mixedEmbedding.mixedEmbedding_apply_isReal`/`_isComplex` of `F`'s mixed space; `ξ_v = exp(log φ(σ_v t₀)/h)` (`Complex.exp_log`, `Complex.neg_pi_lt_log_im`, `Complex.log_im_le_pi`: `ξ ≠ −1`); `y_v = (ξ_v − 1)/(i(ξ_v + 1))`, real at a real place; `t ∈ F` near `y` (density of `F` in its mixed space from `latticeBasis` and `ℚ`-multiples, or `InfinitePlace.denseRange_algebraMap_pi`); transfer from `F`'s mixed space to `L`'s by a continuous linear map on `e(F ⊕ Fi)` | hard |
+| | `Delta_circle_mul_mem_closure_pow` | `Submonoid.topologicalClosure` of the submonoid `e '' ((·^h) '' normOneL)`; `Submonoid.le_topologicalClosure`; the two above | low |
+| | `pow_mem_normOneL`, `mul_mem_normOneL` | `map_pow`, `map_mul` of `conjOn` | low |
+| CountResidue | `toL_mem_localRing` | `Rigidity.unitRing_le_stableIntegers`, `mem_stableIntegers`, `UnitRing.coe_mem_unitRingOver_iff` | low |
+| | `isIndepSet_levelTarget_iff`, `neg_mem_normOneQ` | `SimpleGraph.fromRel_adj`; `0 ∉ normOneQ` at `m ≥ 1` (`1 ≠ 0` in `𝓞/P^m`); `map_neg`, `neg_mul_neg` | low |
+| | `finite_quot` | `Ideal.finiteQuotientOfFreeOfNeBot`, `P^m ≠ ⊥` (`pow_ne_zero`, a maximal ideal of a number ring is `≠ ⊥`) | low |
+| | `ratioLe_normOneQ` | `isIndepSet_levelTarget_iff`, `RatioAtMost` unfolded | low |
+| | `exists_normOneL_residue` | **Hilbert 90 mod `P^m`**: lift `s` to `a ∈ 𝓞` (`Ideal.Quotient.mk_surjective`); `z = w + a·w̄` with `w = 1` or `w = ζ`, `ζ̄ − ζ ∉ P` (from `¬ IsRamified P`); `z ∉ P` in either case; `x = z / z̄`; `P.residue` of a quotient (`UpperHalf.residue_div`) and of conjugation (`UpperHalf.residue_conj`) | medium |
+| | `exists_normOneL_residues` | `IsDedekindDomain.exists_forall_sub_mem_ideal` for the `z_P` and for `w`; distinct stable primes have distinct ideals (`stablePrime_injective`) | medium |
+| | `exists_unitRing_of_normOneL` | `x = a + bi`, `a² + b² = 1`, so `(x : ℂ) ∈ unitVectors F ⊆ unitRing F` (`unitVectors_subset_unitRing`) | low |
+| | `exists_mem_nsmul_of_resR_eq_zero` | `c` from `exists_mul_stableIntegers_le`; `Φ` the stable primes containing `N c`, `m` with `P^m ∣ N c` for each; residues zero ⟹ `r/(N c) ∈ O′` (valuations: `UpperHalf.mem_localRing`, the localisation's maximal ideal); then `c·(r/(N c)) ∈ R` | medium |
+| | `resR_eq_zero_of_le` | `Ideal.pow_le_pow_right` and the factorisation of `P.residue` through `Ideal.Quotient.factor` | low |
+| | `mem_level` | `Set.Finite.mem_toFinset` | low |
+| | `exists_level_mem_nsmul` | `k = max m (max of absNorm over Φ)`; `resR_eq_zero_of_le` | low |
+| | `image_levR_unitVectors` | `⊆`: a ring map keeps `x x̄ = 1` (`UpperHalf.residue_conj`); `⊇`: `exists_normOneL_residues` at `level F k` with `ratio_unramified_of_tca`, then `exists_unitRing_of_normOneL` | medium |
+| | `ratioLe_levR_range` | `ratioLe_pi` over `level F k` (each factor `ratioLe_normOneQ`), `ratioLe_subgroup` for `(levR F k).range ⊇ normOneLev F k` (`image_levR_unitVectors`) | low |
+| CountCompletion | `CompactSpace (K F)`, `continuous_proj` | `Pi.compactSpace`, `Finite.compactSpace`; `AddSubgroup.isClosed_topologicalClosure`, `IsClosed.isCompact`; `continuous_apply` | low |
+| | `range_proj` | `⊇` from `proj_ιK`; `⊆`: `proj` is continuous into a discrete space, so the preimage of `range (levR F k)` is clopen and holds the dense `range ιK` | low |
+| | `proj_eq_zero_of_le` | the reduction `Lev F k → Lev F k'` composed with `levR F k` is `levR F k'`; the set where `proj k x = 0 → proj k' x = 0` is closed and holds `range ιK` | medium |
+| | `hasBasis_nhds_zero_K` | `nhds_pi` (finitely many coordinates), `proj_eq_zero_of_le` to the largest, `nhds_subtype` | medium |
+| | `IsProbabilityMeasure haarK`, `IsAddLeftInvariant` | `Measure.addHaarMeasure_self` at `⊤`; `Measure.isAddHaarMeasure_addHaarMeasure` | low |
+| | `haarK_proj_preimage` | the level-`k` cosets are translates of one open subgroup (`measure_preimage_add`), finitely many, covering `K` | low |
+| | `tendsto_haarK_bad` | **the hard leaf of the block**: regularity (`MeasurableSet.exists_isOpen_sdiff_lt`, `MeasurableSet.exists_isCompact_sdiff_lt`); a compact set inside an open one is inside a finite union of level-`k₀` cosets inside the open set (`hasBasis_nhds_zero_K`, `IsCompact.elim_finite_subcover`); for `k ≥ k₀` the bad points of a coset that the cylinder holds cost `κ`-fraction of the cylinder's excess | medium-hard |
+| | `denseRange_ιG` | a basic open set `B(v, δ) × (ιK r₀ + ker proj k)`; `r = r₀ + M y` with `M = ∏_{P ∈ level k} absNorm P^k ∈ P^k`, and `M·R` dense in `L ⊗ ℝ` (`Rigidity.dense_mixedEmbedding_nsmul_unitRing`) | medium |
+| | `mem_closure_ιG` | `h = Monoid.exponent (Lev F k)ˣ` (`Monoid.pow_exponent_eq_one`): `levR k (w^h) = 1` for a unit vector `w`; `u·w^h` with `e(w^h) ≈ e(ū)Δ(e^{iθ})` from `Delta_circle_mul_mem_closure_pow` and `e(u) e(ū) = 1`; `hasBasis_nhds_zero_K` | medium |
+| CountExtension | `measure_ne_eq` | `corr = ∫ tetra (c 0) (c y) = 1 − (4/3) P(c 0 ≠ c y)` (`integral_indicator`, the two values of `tetra`) | low |
+| | `comap_ιG_le_nhds_tauPrime` | `nhds_inf` for `tauPrime = profTop ⊓ archTop`; profinite part by `exists_level_mem_nsmul` at `N + 1`; archimedean part by the first coordinate of `ιG` (`nhds_induced`) | medium |
+| | `tendsto_measure_ne` | `tendsto_integral_filter_of_dominated_convergence` along `comap ιG (𝓝 0)` (countably generated: `G` first countable), bound `1`, pointwise limit `1` on `TA F` (`Rigidity.TA_subset_contChars` and `comap_ιG_le_nhds_tauPrime`), `σ (TA F)ᶜ = 0`; then `measure_ne_eq` | medium |
+| | `exists_extension` | **the hard leaf of the module**: neighbourhoods `O_n` (basic, from `hasBasis_nhds_zero_K` and balls) with `P(c 0 ≠ c y) ≤ 2^{−n}` on `ιG⁻¹(O_n + O_n + O_n)`; `π_n g` = the first `r` in an enumeration of `R` (`countable_unitRing`) with `ιG r ∈ g + O_n` (`denseRange_ιG`; `measurable_find`); `f c g` = the eventual value of `c (π_n g)` (`measure_limsup_atTop_eq_zero` on the summable increments, shift invariance `InvariantColouring.shift_inv`); the edge bound through `InvariantColouring.carried` (`c ∈ X₄`) | hard |
+| | `exists_slice` | Tonelli over `μ × (volume × haarK) × arcLength` (`lintegral_prod`) for each of countably many `u`; `mem_closure_ιG`; one sample off a countable union of null sets | medium |
+| CountDescent | `measurableSet_levelRows` | `Measurable.measure_of_isPiSystem`-free: `z ↦ haarK (section)` is measurable for a measurable set of the product (`measurable_measure_prodMk_left`) | low |
+| | `rowsEdgeNull_levelRows` | **the hard leaf of the module**: for `s = levR k u`, translation by `ιK u` carries coset `q` to `q + s` (`IsAddLeftInvariant`); two fills above `3/4` share more than `1/2` of a coset; Tonelli turns a positive measure of row pairs into a positive measure of monochromatic slice edges at `u` | medium-hard |
+| | `volume_colour_le` | Tonelli; on each coset either the fill exceeds `3/4` (the row) or the point is bad; `haarK_proj_preimage` | medium |
+| | `tendsto_bad` | per `z`, `tendsto_haarK_bad` at `κ = 1/4`; `tendsto_lintegral_filter_of_dominated_convergence` over the window | medium |
+| | `false_of_slice` | `tca_uniform` gives `c`; `ε` with `4 (max(m₁, c) + 2ε) < 1`; `s₀` from `exists_nrWindow`; one window `sq 0 s₀`; `k ≥ 1` with each bad term `≤ ε s₀²` (`tendsto_bad`); `sum_volume_inter_sq_le` at level `k` with `ratioLe_levR_range` and `rowsEdgeNull_levelRows`; the four colours sum to `s₀²` | medium |

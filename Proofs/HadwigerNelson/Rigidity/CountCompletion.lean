@@ -72,6 +72,10 @@ theorem range_proj (k : ℕ) : Set.range (proj F k) = Set.range (levR F k) := by
 theorem proj_eq_zero_of_le {k k' : ℕ} (hk : k' ≤ k) {x : K F} (hx : proj F k x = 0) : proj F k' x = 0 := by
   sorry
 
+/-- **The level kernels are a basis of the neighbourhoods of `0` in `K`.** -/
+theorem hasBasis_nhds_zero_K : (𝓝 (0 : K F)).HasBasis (fun _ : ℕ => True) (fun k => {x | proj F k x = 0}) := by
+  sorry
+
 /-- **The Haar probability measure of `K`.** -/
 def haarK : Measure (K F) := Measure.addHaarMeasure ⊤
 

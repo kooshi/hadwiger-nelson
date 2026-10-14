@@ -58,11 +58,6 @@ theorem Delta_ratCast (q₁ q₂ : ℚ) :
       NumberField.mixedEmbedding (fieldI F) ((q₁ : fieldI F) + (q₂ : fieldI F) * iL F) := by
   sorry
 
-/-- `Δ` is multiplicative on the unit circle's points that come from `ℚ(i)`, and in general: it is the `ℝ`-algebra map
-`ℚ(i) ⊗ ℝ → L ⊗ ℝ`. -/
-theorem Delta_mul (z w : ℂ) : Delta F (z * w) = Delta F z * Delta F w := by
-  sorry
-
 /-- **The unit circle of `Δ` lies in the closure of the unit vectors.** -/
 theorem Delta_circle_mem_closure (θ : ℝ) :
     Delta F (Complex.exp (θ * Complex.I)) ∈ closure (NumberField.mixedEmbedding (fieldI F) '' normOneL F) := by
@@ -71,6 +66,14 @@ theorem Delta_circle_mem_closure (θ : ℝ) :
 /-- **Weak approximation by `h`-th powers** — what the count reads of the archimedean torus. -/
 theorem mem_closure_pow {x : fieldI F} (hx : x ∈ normOneL F) {h : ℕ} (hh : 1 ≤ h) :
     NumberField.mixedEmbedding (fieldI F) x ∈
+      closure (NumberField.mixedEmbedding (fieldI F) '' ((· ^ h) '' normOneL F)) := by
+  sorry
+
+/-- **What the completion reads**: `Δ(e^{iθ}) · e(x)` is a limit of images of `h`-th powers of unit vectors — the closure
+of a multiplicatively closed set is multiplicatively closed (`Submonoid.topologicalClosure`), and it holds `Δ(S¹)` and
+`e(U)` (the two theorems above). -/
+theorem Delta_circle_mul_mem_closure_pow (θ : ℝ) {x : fieldI F} (hx : x ∈ normOneL F) {h : ℕ} (hh : 1 ≤ h) :
+    Delta F (Complex.exp (θ * Complex.I)) * NumberField.mixedEmbedding (fieldI F) x ∈
       closure (NumberField.mixedEmbedding (fieldI F) '' ((· ^ h) '' normOneL F)) := by
   sorry
 

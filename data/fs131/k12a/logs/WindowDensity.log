@@ -6,5 +6,6 @@ Proofs/HadwigerNelson/Plane/WindowDensity.lean:62:8: warning: declaration uses `
 Proofs/HadwigerNelson/Plane/WindowDensity.lean:67:8: warning: declaration uses `sorry`
 Proofs/HadwigerNelson/Plane/WindowDensity.lean:72:8: warning: declaration uses `sorry`
 Proofs/HadwigerNelson/Plane/WindowDensity.lean:77:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Plane/WindowDensity.lean:83:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Plane/WindowDensity.lean:98:0: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/WindowDensity.lean:84:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/WindowDensity.lean:97:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Plane/WindowDensity.lean:110:0: warning: declaration uses `sorry`

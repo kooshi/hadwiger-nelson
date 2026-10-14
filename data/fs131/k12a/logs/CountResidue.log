@@ -8,6 +8,8 @@ Proofs/HadwigerNelson/Rigidity/CountResidue.lean:81:8: warning: declaration uses
 Proofs/HadwigerNelson/Rigidity/CountResidue.lean:87:8: warning: declaration uses `sorry`
 Proofs/HadwigerNelson/Rigidity/CountResidue.lean:94:8: warning: declaration uses `sorry`
 Proofs/HadwigerNelson/Rigidity/CountResidue.lean:99:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Rigidity/CountResidue.lean:119:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Rigidity/CountResidue.lean:138:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Rigidity/CountResidue.lean:143:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountResidue.lean:104:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountResidue.lean:124:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountResidue.lean:144:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountResidue.lean:149:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountResidue.lean:154:8: warning: declaration uses `sorry`

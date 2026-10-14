@@ -18,7 +18,8 @@ for every `q` and `s ∈ S`, the pairs `(z, θ)` with `z ∈ Y q` and `z + e^{i�
 * `touched Y z` — the rows `b` with `z` in the essential neighbourhood of `lonely Y b` (`B^j(x)`); for almost every `z` it
   misses `N[social Y z]` (`ae_disjoint_touched`, J28D (ii′)).
 * `sum_volume_inter_sq_le` — **the count**: `|social| ≤ r (|Q| − |touched|)` (finite neighbourhood ratio,
-  `card_le_mul_card_closedNbhd`) and `Σ_b |lonely ∩ Q| ≤ m₁ ∫_Q |touched| + ε s²` (`Plane.volume_inter_sq_le_essNbhd`).
+  `card_le_mul_card_closedNbhd`) and `Σ_b |lonely ∩ Q| ≤ m₁ ∫_Q |touched| + ε |Q| s²` (`Plane.NRWindow`, whose scale is
+  uniform in the set: `Plane.exists_nrWindow`).
 
 **Models.** Every row empty; or `Q` a single point with `S = ∅` and one row the disc of radius `1/3`.
 -/
@@ -62,11 +63,11 @@ theorem ae_disjoint_touched {S : Set Q} (hS : ∀ s ∈ S, -s ∈ S) {Y : Q → 
     (h : RowsEdgeNull S Y) : ∀ᵐ z ∂volume, Disjoint (closedNbhd S (social Y z)) (touched Y z) := by
   sorry
 
-/-- **Zhang's count on `UD(ℝ²) ⊗ Cay(Q, S)`, in a window.** -/
+/-- **Zhang's count on `UD(ℝ²) ⊗ Cay(Q, S)`, in a window**, at the scale `s₀` of the plane's neighbourhood ratio — so
+uniform in `Q`, `S` and the rows. -/
 theorem sum_volume_inter_sq_le {S : Set Q} (hS : ∀ s ∈ S, -s ∈ S) {r : ℝ} (hr : RatioLe S r) (hr0 : 0 ≤ r)
-    {Y : Q → Set ℂ} (hY : ∀ q, MeasurableSet (Y q)) (h : RowsEdgeNull S Y) {ε : ℝ} (hε : 0 < ε) :
-    ∃ s₀ : ℝ, 0 < s₀ ∧ ∀ (a : ℂ) (s : ℝ), s₀ ≤ s →
-      ∑ q, volume.real (Y q ∩ sq a s) ≤ (max mOne.toReal r + ε) * Nat.card Q * s ^ 2 := by
+    {Y : Q → Set ℂ} (hY : ∀ q, MeasurableSet (Y q)) (h : RowsEdgeNull S Y) {ε s₀ : ℝ} (hN : NRWindow ε s₀) (a : ℂ)
+    {s : ℝ} (hs : s₀ ≤ s) : ∑ q, volume.real (Y q ∩ sq a s) ≤ (max mOne.toReal r + ε) * Nat.card Q * s ^ 2 := by
   sorry
 
 /-! ## Spec examples -/

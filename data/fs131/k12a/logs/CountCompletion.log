@@ -3,9 +3,10 @@ Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:49:0: warning: declaration u
 Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:65:8: warning: declaration uses `sorry`
 Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:68:8: warning: declaration uses `sorry`
 Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:72:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:78:0: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:81:0: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:84:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:89:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:101:8: warning: declaration uses `sorry`
-Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:108:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:76:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:82:0: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:85:0: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:88:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:93:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:105:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/CountCompletion.lean:112:8: warning: declaration uses `sorry`

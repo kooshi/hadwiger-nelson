@@ -16,10 +16,11 @@ measure-zero form of "1-avoiding"):
   1-avoiding set; a periodic set's upper density is at least its density in one cell (`le_upperDensity_of_periodic`), and
   every such upper density is at most `m₁` (the definition).
 * `exists_periodic_near_mOne` — **a periodic 1-avoiding set of density near `m₁`**, from the supremum defining `m₁`.
-* `volume_inter_sq_le_essNbhd` — **the neighbourhood ratio** (C14.1-e): `|Z ∩ sq a s| ≤ m₁ |N_e[Z] ∩ sq a s| + O(s) + ε s²`,
-  where `N_e[Z] = Z ∪ {x : the unit circle about x meets Z in positive length}` (`essNbhd`). Route: for a near-optimal
-  periodic `J` and `t` in its cell, `((J + t) \ N_e[Z]) ∪ Z` has null unit pairs, so the window bound applies to it;
-  averaging over `t` gives `|Z ∩ Q| + δ_J |Q \ N_e[Z]| ≤ m₁ (s + 2)²`.
+* `exists_nrWindow` — **the neighbourhood ratio** (C14.1-e), with one scale for every set (`NRWindow ε s₀`):
+  `|Z ∩ sq a s| ≤ m₁ |N_e[Z] ∩ sq a s| + ε s²` for `s ≥ s₀`, where `N_e[Z] = Z ∪ {x : the unit circle about x meets Z in
+  positive length}` (`essNbhd`). Route: for a near-optimal periodic `J` and `t` in its cell, `((J + t) \ N_e[Z]) ∪ Z` has
+  null unit pairs (`unitPairsNull_diff_essNbhd_union`), so the window bound applies to it; averaging over `t` gives
+  `|Z ∩ Q| + δ_J |Q \ N_e[Z]| ≤ m₁ (s + 2)²`.
 
 Nothing here reads the outside theorem `[AmbrusEtAl2023]`: `m₁` is the library's supremum, and the count applies
 `Plane.mOne_lt_quarter` to it. All three are the derivation's window lemmas restated for one plane — the count's
@@ -58,9 +59,9 @@ theorem densitySet_bandFree {A : Set ℂ} (hA : MeasurableSet A) (h : UnitPairsN
     BandFree (densitySet A) 0 ∧ densitySet A =ᵐ[volume] A := by
   sorry
 
-/-- **A periodic set's upper density is at least its density in one cell.** -/
-theorem le_upperDensity_of_periodic {P : Set ℂ} {L : ℝ} (hL : 0 < L) (hP : MeasurableSet P) (hper : IsPeriodicSet L P) :
-    volume (P ∩ sq 0 L) / ENNReal.ofReal (L ^ 2) ≤ upperDensity P := by
+/-- **A periodic set's upper density is at least its density in any one cell.** -/
+theorem le_upperDensity_of_periodic {P : Set ℂ} {L : ℝ} (hL : 0 < L) (hP : MeasurableSet P) (hper : IsPeriodicSet L P)
+    (b : ℂ) : volume (P ∩ sq b L) / ENNReal.ofReal (L ^ 2) ≤ upperDensity P := by
   sorry
 
 /-- **The periodisation of a 1-avoiding set's trace on a square**, at spacing `s + 2`, is 1-avoiding. -/
@@ -79,10 +80,22 @@ theorem exists_periodic_near_mOne {ε : ℝ} (hε : 0 < ε) :
       mOne.toReal - ε ≤ volume.real (J ∩ sq 0 L) / L ^ 2 := by
   sorry
 
-/-- **The neighbourhood ratio of the unit-distance graph, in a window** (C14.1-e). -/
-theorem volume_inter_sq_le_essNbhd {Z : Set ℂ} (hZ : MeasurableSet Z) (h : UnitPairsNull Z) {ε : ℝ} (hε : 0 < ε) :
-    ∃ s₀ : ℝ, 0 < s₀ ∧ ∀ (a : ℂ) (s : ℝ), s₀ ≤ s →
-      volume.real (Z ∩ sq a s) ≤ mOne.toReal * volume.real (essNbhd Z ∩ sq a s) + ε * s ^ 2 := by
+/-- **C14.1-e's union**: a 1-avoiding set with the essential neighbourhood of a set with null unit pairs removed, together
+with that set, has null unit pairs. -/
+theorem unitPairsNull_diff_essNbhd_union {J Z : Set ℂ} (hJ : MeasurableSet J) (hJ1 : BandFree J 0)
+    (hZ : MeasurableSet Z) (hZ1 : UnitPairsNull Z) : UnitPairsNull ((J \ essNbhd Z) ∪ Z) := by
+  sorry
+
+/-- **The neighbourhood ratio of the unit-distance graph, in a window, at scale `s₀` and slack `ε`** (C14.1-e) — uniform
+in the set, as the count reads it (one `s₀` for the lonely sets of every row at every level). -/
+def NRWindow (ε s₀ : ℝ) : Prop :=
+  ∀ Z : Set ℂ, MeasurableSet Z → UnitPairsNull Z → ∀ (a : ℂ) (s : ℝ), s₀ ≤ s →
+    volume.real (Z ∩ sq a s) ≤ mOne.toReal * volume.real (essNbhd Z ∩ sq a s) + ε * s ^ 2
+
+/-- **The neighbourhood ratio holds at every slack, from some scale on.** Route: a near-optimal periodic `J`
+(`exists_periodic_near_mOne`); for `t` in its cell, `((J + t) \ N_e[Z]) ∪ Z` has null unit pairs
+(`unitPairsNull_diff_essNbhd_union`), so `volume_inter_sq_le` bounds it; average over `t`. -/
+theorem exists_nrWindow {ε : ℝ} (hε : 0 < ε) : ∃ s₀ : ℝ, 0 < s₀ ∧ NRWindow ε s₀ := by
   sorry
 
 theorem mOne_le_one : mOne ≤ 1 :=

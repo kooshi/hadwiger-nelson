@@ -100,6 +100,11 @@ theorem exists_mem_nsmul_of_resR_eq_zero {N : ℕ} (hN : N ≠ 0) :
     ∃ (Φ : Finset (StablePrime F)) (m : ℕ), ∀ r : unitRing F, (∀ P ∈ Φ, resR P m r = 0) → ∃ y : unitRing F, r = N • y := by
   sorry
 
+/-- A residue zero at `P^k` is zero at every coarser power. -/
+theorem resR_eq_zero_of_le (P : StablePrime F) {m k : ℕ} (hmk : m ≤ k) {r : unitRing F} (hr : resR P k r = 0) :
+    resR P m r = 0 := by
+  sorry
+
 theorem ratio_unramified_of_tca (h : TCA F) (P : StablePrime F) : ¬ IsRamified P :=
   (noRamifiedStableDyadic_iff F).mp (noRamifiedStableDyadic_of_tca F h) P
 
@@ -133,6 +138,12 @@ def levR (k : ℕ) : unitRing F →+* Lev F k := RingHom.pi fun P : level F k =>
 
 /-- **The product connection set of level `k`.** -/
 def normOneLev (k : ℕ) : Set (Lev F k) := {d | ∀ P : level F k, d P ∈ normOneQ P.1 k}
+
+/-- **Lemma C (d) in level form** — what the completion reads: some level's residues zero put an element of `R` in
+`N·R` (`exists_mem_nsmul_of_resR_eq_zero`, then `k` past `m` and past every norm in `Φ`). -/
+theorem exists_level_mem_nsmul {N : ℕ} (hN : N ≠ 0) :
+    ∃ k : ℕ, ∀ r : unitRing F, levR F k r = 0 → ∃ y : unitRing F, r = N • y := by
+  sorry
 
 /-- **`[S9]` at level `k`**: the unit vectors map onto the product connection set. -/
 theorem image_levR_unitVectors (h : TCA F) (k : ℕ) :
