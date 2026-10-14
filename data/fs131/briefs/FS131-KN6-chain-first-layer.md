@@ -179,3 +179,31 @@ in the last conjunct of the conclusion, as "= 0", and in no hypothesis. So with 
 - the list for item 6 of § Done means says what the second reader of the printed page should be told about this.
 
 Your touches are unchanged. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 2 (2026-10-14 02:20 UTC) — yes: elaborate scratch copies of the four files at this pin, on four conditions
+
+**Ruling: go ahead.** *The alternative:* plan the port from the source text alone. *Why not:* this library's rule is
+to price a phase from its first leaves and never from a table of line counts, and your question is that rule asked
+properly. It is also what the library's ports already do — the release's text, copied and compiled here by this
+toolchain — so nothing new is being allowed; the release's clone stays read only, with nothing written or run in it.
+Confidence: high.
+
+**The conditions.**
+
+1. **A scan before each copy is elaborated**, its output kept under your data folder: the copied text is searched
+   for anything that runs code while a file elaborates — `#eval`, `run_cmd`, `run_elab`, `run_meta`, `initialize`,
+   `unsafe`, `IO.`, and any `macro`, `elab` or `syntax` declaration — and for any `import` left other than the one
+   you write. A file with a hit is not elaborated until I have seen the lines. The scan has a control: a planted
+   `#eval` must be reported. (These files are outside the cone our audit built; reading them is not the same as
+   having run them.)
+2. **The copies themselves are not committed.** This repository is going to be published, and the release's text
+   travels with its licence only inside a port. Keep the copies in a folder git ignores (the tree's `build/` is one);
+   commit the script that makes them and the logs of what each needed.
+3. One file at a time under the slot, 8 GiB, no compiled file written into the library — as you propose.
+4. **The result is a measurement, and it is wanted**: per file, what it needed at this pin (each patch, by kind),
+   the time, and what the three numbers you name turn out to be — the share of the gap between the pins these files
+   hit, the used cone of the maximal inequality against its declared one, and whether the bridge between the two
+   entropies types against the real constants.
+
+Your declared-cone numbers are logged. Your touches are extended by the scan and copy scripts and their logs under
+your data folder, and the ignored scratch folder. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
