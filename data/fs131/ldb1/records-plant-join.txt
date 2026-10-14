@@ -1,0 +1,10 @@
+unplanted: PASS
+plant 'a record of the block removed': FAILED (as it must) — the block's records, each once under CLEAN on a subset of the three (722 of 723): HadwigerNelson.DensityBound.J0
+plant 'a record of the block put under IMPORTED': FAILED (as it must) — the block's records, each once under CLEAN on a subset of the three (722 of 723): HadwigerNelson.DensityBound.J0
+plant 'sorryAx added to the headline': FAILED (as it must) — the block's records, each once under CLEAN on a subset of the three (722 of 723): HadwigerNelson.Plane.oneAvoidingDensit
+plant 'a record printed twice': FAILED (as it must) — the block's records, each once under CLEAN on a subset of the three (722 of 723): HadwigerNelson.DensityBound.J0
+plant 'a public constant UNREACHED': FAILED (as it must) — coverage: public 2490 = records 723 + reached 1767; unreached 1: UNREACHED THM HadwigerNelson.DensityBound.planted
+plant 'a record ABSENT': FAILED (as it must) — coverage: 723 records read, 1 absent from the 83 modules
+plant 'the control's lines dropped': FAILED (as it must) — coverage control: 418 removed; 0 of 418 reported, 0 in all (at most lane X's 427 public constants)
+plants: every one fired; the unplanted inputs pass
+exit=0

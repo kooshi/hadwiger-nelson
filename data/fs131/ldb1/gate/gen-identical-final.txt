@@ -1,0 +1,2 @@
+tracked files the generators rewrote with other bytes (git status --porcelain, untracked hidden):
+count=0

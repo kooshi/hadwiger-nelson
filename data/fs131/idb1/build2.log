@@ -1,0 +1,292 @@
+slot: admitted idb1: mem 10 GiB (hard cap), cpus 0,5,6,7
+==> build: this run's full output: build/gate/build/20261014T141849Z-3383307.log
+==> up-to-date check: exit 3 after 4s (3 means something needs building) — walking the batches
+==> 249 batches of at most 8 modules, capped at 10G
+==> [1/249] 8 modules  09:18:53
+==> [2/249] 8 modules  09:18:54
+==> [3/249] 8 modules  09:18:56
+    ⚠ [2738/2878] Replayed Proofs.HadwigerNelson.Plane.DensityBound.Bessel
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Bessel.lean:38:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Bessel.lean:41:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Bessel.lean:45:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Bessel.lean:48:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Bessel.lean:51:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Bessel.lean:54:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Bessel.lean:58:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Bessel.lean:63:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Bessel.lean:66:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Bessel.lean:69:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Bessel.lean:74:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Bessel.lean:78:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Bessel.lean:83:8: declaration uses `sorry`
+    rebuilt: Plane.DensityBound.BesselCheck (757ms)
+==> [4/249] 5 modules  09:18:58
+==> [5/249] 8 modules  09:18:59
+==> [6/249] 8 modules  09:19:00
+    ⚠ [2795/3022] Replayed Proofs.HadwigerNelson.Plane.DensityBound.Autocorr
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Autocorr.lean:31:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Autocorr.lean:36:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Autocorr.lean:41:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Autocorr.lean:46:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Autocorr.lean:51:8: declaration uses `sorry`
+    ⚠ [2800/3022] Replayed Proofs.HadwigerNelson.Plane.DensityBound.BesselDefect
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/BesselDefect.lean:24:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/BesselDefect.lean:31:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/BesselDefect.lean:35:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/BesselDefect.lean:40:8: declaration uses `sorry`
+==> [7/249] 8 modules  09:19:02
+==> [8/249] 8 modules  09:19:03
+==> [9/249] 8 modules  09:19:04
+==> [10/249] 8 modules  09:19:04
+==> [11/249] 8 modules  09:19:05
+==> [12/249] 8 modules  09:19:06
+==> [13/249] 8 modules  09:19:07
+==> [14/249] 8 modules  09:19:09
+==> [15/249] 8 modules  09:19:09
+==> [16/249] 8 modules  09:19:10
+==> [17/249] 8 modules  09:19:12
+    ⚠ [2803/2842] Replayed Proofs.HadwigerNelson.Plane.DensityBound.Pattern
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Pattern.lean:69:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Pattern.lean:82:8: declaration uses `sorry`
+    rebuilt: Plane.DensityBound.BesselCert (23s)
+==> [18/249] 8 modules  09:19:36
+==> [19/249] 8 modules  09:19:38
+==> [20/249] 8 modules  09:19:39
+==> [21/249] 2 modules  09:19:40
+==> [22/249] 8 modules  09:19:42
+==> [23/249] 8 modules  09:19:43
+==> [24/249] 8 modules  09:19:44
+==> [25/249] 8 modules  09:19:46
+==> [26/249] 8 modules  09:19:47
+==> [27/249] 8 modules  09:19:49
+==> [28/249] 8 modules  09:19:50
+==> [29/249] 7 modules  09:19:51
+    ⚠ [2788/3093] Replayed Proofs.HadwigerNelson.Plane.OneAvoidingDensity
+    warning: Proofs/HadwigerNelson/Plane/OneAvoidingDensity.lean:54:8: declaration uses `sorry`
+==> [30/249] 8 modules  09:19:53
+==> [31/249] 8 modules  09:19:54
+==> [32/249] 8 modules  09:19:56
+==> [33/249] 8 modules  09:19:57
+==> [34/249] 8 modules  09:19:59
+==> [35/249] 8 modules  09:20:00
+==> [36/249] 8 modules  09:20:01
+==> [37/249] 8 modules  09:20:03
+==> [38/249] 8 modules  09:20:04
+==> [39/249] 8 modules  09:20:05
+==> [40/249] 8 modules  09:20:07
+==> [41/249] 8 modules  09:20:08
+==> [42/249] 8 modules  09:20:10
+==> [43/249] 8 modules  09:20:11
+==> [44/249] 8 modules  09:20:12
+==> [45/249] 8 modules  09:20:14
+==> [46/249] 8 modules  09:20:15
+==> [47/249] 8 modules  09:20:16
+==> [48/249] 8 modules  09:20:18
+==> [49/249] 8 modules  09:20:19
+==> [50/249] 8 modules  09:20:20
+==> [51/249] 8 modules  09:20:22
+==> [52/249] 8 modules  09:20:23
+==> [53/249] 8 modules  09:20:24
+==> [54/249] 8 modules  09:20:26
+==> [55/249] 8 modules  09:20:26
+==> [56/249] 8 modules  09:20:28
+    ⚠ [3143/3269] Replayed Proofs.HadwigerNelson.Plane.DensityBound.Window
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Window.lean:23:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Window.lean:30:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Window.lean:38:8: declaration uses `sorry`
+==> [57/249] 8 modules  09:20:29
+==> [58/249] 8 modules  09:20:31
+==> [59/249] 8 modules  09:20:33
+==> [60/249] 8 modules  09:20:34
+==> [61/249] 8 modules  09:20:36
+==> [62/249] 8 modules  09:20:38
+==> [63/249] 8 modules  09:20:40
+==> [64/249] 8 modules  09:20:42
+==> [65/249] 8 modules  09:20:44
+==> [66/249] 8 modules  09:20:46
+==> [67/249] 8 modules  09:20:48
+==> [68/249] 8 modules  09:20:50
+==> [69/249] 8 modules  09:20:52
+==> [70/249] 8 modules  09:20:53
+==> [71/249] 8 modules  09:20:55
+==> [72/249] 8 modules  09:20:57
+==> [73/249] 8 modules  09:20:59
+==> [74/249] 8 modules  09:21:01
+==> [75/249] 8 modules  09:21:03
+==> [76/249] 8 modules  09:21:05
+==> [77/249] 8 modules  09:21:07
+==> [78/249] 8 modules  09:21:08
+==> [79/249] 8 modules  09:21:10
+==> [80/249] 8 modules  09:21:12
+==> [81/249] 8 modules  09:21:14
+==> [82/249] 8 modules  09:21:16
+==> [83/249] 8 modules  09:21:18
+==> [84/249] 8 modules  09:21:20
+==> [85/249] 8 modules  09:21:22
+==> [86/249] 8 modules  09:21:24
+==> [87/249] 8 modules  09:21:26
+==> [88/249] 8 modules  09:21:28
+==> [89/249] 8 modules  09:21:29
+==> [90/249] 8 modules  09:21:31
+==> [91/249] 8 modules  09:21:33
+==> [92/249] 8 modules  09:21:35
+==> [93/249] 8 modules  09:21:37
+==> [94/249] 8 modules  09:21:39
+==> [95/249] 8 modules  09:21:41
+==> [96/249] 8 modules  09:21:43
+==> [97/249] 8 modules  09:21:45
+==> [98/249] 8 modules  09:21:47
+==> [99/249] 8 modules  09:21:49
+==> [100/249] 8 modules  09:21:51
+==> [101/249] 8 modules  09:21:53
+==> [102/249] 8 modules  09:21:54
+==> [103/249] 8 modules  09:21:56
+==> [104/249] 8 modules  09:21:58
+==> [105/249] 8 modules  09:22:00
+==> [106/249] 8 modules  09:22:02
+==> [107/249] 8 modules  09:22:04
+==> [108/249] 8 modules  09:22:06
+==> [109/249] 8 modules  09:22:08
+==> [110/249] 8 modules  09:22:10
+==> [111/249] 8 modules  09:22:12
+==> [112/249] 8 modules  09:22:13
+==> [113/249] 8 modules  09:22:15
+==> [114/249] 8 modules  09:22:17
+==> [115/249] 8 modules  09:22:19
+==> [116/249] 8 modules  09:22:21
+==> [117/249] 8 modules  09:22:23
+==> [118/249] 8 modules  09:22:25
+==> [119/249] 8 modules  09:22:27
+==> [120/249] 8 modules  09:22:29
+==> [121/249] 8 modules  09:22:31
+==> [122/249] 8 modules  09:22:33
+==> [123/249] 8 modules  09:22:35
+==> [124/249] 8 modules  09:22:37
+==> [125/249] 8 modules  09:22:38
+==> [126/249] 8 modules  09:22:40
+==> [127/249] 8 modules  09:22:42
+==> [128/249] 8 modules  09:22:44
+==> [129/249] 8 modules  09:22:46
+==> [130/249] 8 modules  09:22:48
+==> [131/249] 8 modules  09:22:50
+==> [132/249] 8 modules  09:22:52
+==> [133/249] 8 modules  09:22:54
+==> [134/249] 8 modules  09:22:56
+==> [135/249] 8 modules  09:22:57
+==> [136/249] 8 modules  09:22:59
+==> [137/249] 8 modules  09:23:01
+==> [138/249] 8 modules  09:23:03
+==> [139/249] 8 modules  09:23:05
+==> [140/249] 8 modules  09:23:06
+==> [141/249] 8 modules  09:23:08
+==> [142/249] 8 modules  09:23:10
+==> [143/249] 8 modules  09:23:12
+==> [144/249] 8 modules  09:23:14
+==> [145/249] 8 modules  09:23:15
+==> [146/249] 8 modules  09:23:17
+==> [147/249] 8 modules  09:23:19
+==> [148/249] 8 modules  09:23:21
+==> [149/249] 8 modules  09:23:23
+==> [150/249] 8 modules  09:23:25
+==> [151/249] 8 modules  09:23:26
+==> [152/249] 8 modules  09:23:28
+==> [153/249] 8 modules  09:23:30
+==> [154/249] 8 modules  09:23:32
+==> [155/249] 8 modules  09:23:34
+==> [156/249] 8 modules  09:23:36
+==> [157/249] 8 modules  09:23:38
+==> [158/249] 8 modules  09:23:40
+==> [159/249] 8 modules  09:23:41
+==> [160/249] 8 modules  09:23:43
+==> [161/249] 8 modules  09:23:45
+==> [162/249] 8 modules  09:23:47
+==> [163/249] 8 modules  09:23:49
+==> [164/249] 8 modules  09:23:50
+==> [165/249] 8 modules  09:23:52
+==> [166/249] 8 modules  09:23:54
+==> [167/249] 8 modules  09:23:56
+==> [168/249] 8 modules  09:23:58
+==> [169/249] 8 modules  09:24:00
+==> [170/249] 8 modules  09:24:01
+==> [171/249] 8 modules  09:24:03
+==> [172/249] 8 modules  09:24:05
+==> [173/249] 8 modules  09:24:07
+==> [174/249] 8 modules  09:24:09
+==> [175/249] 8 modules  09:24:11
+==> [176/249] 8 modules  09:24:13
+==> [177/249] 8 modules  09:24:15
+==> [178/249] 8 modules  09:24:17
+==> [179/249] 8 modules  09:24:19
+==> [180/249] 8 modules  09:24:21
+==> [181/249] 8 modules  09:24:22
+==> [182/249] 8 modules  09:24:24
+==> [183/249] 8 modules  09:24:26
+==> [184/249] 8 modules  09:24:28
+==> [185/249] 8 modules  09:24:30
+==> [186/249] 8 modules  09:24:32
+==> [187/249] 8 modules  09:24:35
+==> [188/249] 8 modules  09:24:37
+==> [189/249] 8 modules  09:24:39
+==> [190/249] 8 modules  09:24:41
+==> [191/249] 8 modules  09:24:43
+==> [192/249] 8 modules  09:24:45
+==> [193/249] 8 modules  09:24:47
+==> [194/249] 8 modules  09:24:49
+==> [195/249] 8 modules  09:24:51
+==> [196/249] 8 modules  09:24:53
+==> [197/249] 8 modules  09:24:55
+==> [198/249] 8 modules  09:24:57
+==> [199/249] 8 modules  09:24:59
+==> [200/249] 8 modules  09:25:01
+==> [201/249] 8 modules  09:25:04
+==> [202/249] 8 modules  09:25:06
+==> [203/249] 8 modules  09:25:08
+==> [204/249] 8 modules  09:25:10
+==> [205/249] 8 modules  09:25:12
+==> [206/249] 8 modules  09:25:14
+==> [207/249] 8 modules  09:25:17
+==> [208/249] 8 modules  09:25:18
+==> [209/249] 8 modules  09:25:20
+==> [210/249] 8 modules  09:25:22
+==> [211/249] 8 modules  09:25:25
+==> [212/249] 8 modules  09:25:26
+==> [213/249] 8 modules  09:25:28
+==> [214/249] 5 modules  09:25:29
+==> [215/249] 8 modules  09:25:31
+==> [216/249] 8 modules  09:25:34
+==> [217/249] 8 modules  09:25:36
+==> [218/249] 2 modules  09:25:38
+==> [219/249] 8 modules  09:25:39
+==> [220/249] 8 modules  09:25:41
+==> [221/249] 2 modules  09:25:43
+==> [222/249] 8 modules  09:25:44
+==> [223/249] 8 modules  09:25:48
+==> [224/249] 3 modules  09:25:49
+==> [225/249] 8 modules  09:25:51
+==> [226/249] 8 modules  09:25:54
+==> [227/249] 1 modules  09:25:56
+==> [228/249] 8 modules  09:25:57
+==> [229/249] 8 modules  09:26:00
+==> [230/249] 8 modules  09:26:02
+==> [231/249] 8 modules  09:26:06
+==> [232/249] 2 modules  09:26:08
+==> [233/249] 8 modules  09:26:09
+==> [234/249] 8 modules  09:26:13
+==> [235/249] 2 modules  09:26:16
+==> [236/249] 8 modules  09:26:18
+==> [237/249] 5 modules  09:26:21
+==> [238/249] 7 modules  09:26:25
+==> [239/249] 8 modules  09:26:29
+==> [240/249] 3 modules  09:26:32
+==> [241/249] 8 modules  09:26:35
+==> [242/249] 2 modules  09:26:39
+==> [243/249] 7 modules  09:26:42
+==> [244/249] 5 modules  09:26:46
+==> [245/249] 4 modules  09:26:50
+==> [246/249] 2 modules  09:26:53
+==> [247/249] 2 modules  09:26:56
+==> [248/249] 2 modules  09:26:58
+==> [249/249] 1 modules  09:27:00
+    rebuilt: Proofs (3.8s)
+==> build: OK — 249 of 249 batches, 3 module(s) rebuilt, 6 module(s) with warnings, 8m14s
+    full output: build/gate/build/20261014T141849Z-3383307.log

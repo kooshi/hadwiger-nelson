@@ -1,0 +1,3 @@
+slot: admitted ldb1-uptodate: mem 4 GiB (hard cap), cpus 0,1
+All targets up-to-date (6278 jobs).
+exit=0

@@ -1,0 +1,20 @@
+slot: admitted idb2: mem 10 GiB (hard cap), cpus 4,5,6,7
+==> build: this run's full output: build/gate/build/20261014T170544Z-3964288.log
+    ⚠ [3990/4044] Replayed Proofs.HadwigerNelson.Plane.DensityBound.Autocorr
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Autocorr.lean:31:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Autocorr.lean:36:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Autocorr.lean:41:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Autocorr.lean:46:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Autocorr.lean:51:8: declaration uses `sorry`
+    ⚠ [4149/4280] Replayed Proofs.HadwigerNelson.Plane.DensityBound.Pattern
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Pattern.lean:69:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Pattern.lean:82:8: declaration uses `sorry`
+    ⚠ [4254/4280] Replayed Proofs.HadwigerNelson.Plane.OneAvoidingDensity
+    warning: Proofs/HadwigerNelson/Plane/OneAvoidingDensity.lean:54:8: declaration uses `sorry`
+    ⚠ [4483/4635] Replayed Proofs.HadwigerNelson.Plane.DensityBound.Window
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Window.lean:23:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Window.lean:30:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/DensityBound/Window.lean:38:8: declaration uses `sorry`
+    All targets up-to-date (6068 jobs).
+==> build: OK — all 1943 modules already up to date, nothing built, 4 module(s) with warnings, 4s
+    full output: build/gate/build/20261014T170544Z-3964288.log

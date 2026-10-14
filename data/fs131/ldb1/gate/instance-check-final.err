@@ -1,0 +1,2 @@
+slot: admitted ldb1-instance-check: mem 6 GiB (hard cap), cpus 0,1
+exit=0

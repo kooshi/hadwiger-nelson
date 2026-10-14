@@ -1,0 +1,46 @@
+build exit=0
+build log lines holding "warning": 1
+lake full log lines holding "warning": 0
+uptodate exit=0
+count-modules exit=0
+sorry (narrow) lines=0
+sorry (wide) lines=55
+line-initial axiom declarations in Proofs/=3
+files of the density bound naming native_decide=1
+dupnames exit=0
+dupnames-selftest exit=0
+axioms exit=0
+axioms-selftest exit=0
+coverage exit=0
+records exit=0
+records-plant exit=0
+gen-check exit=0
+gen-cells-chain exit=0
+gen-cells-modules exit=0
+gen-x23 exit=0
+generators: count=0
+vacuity exit=0
+vacuity-selftest exit=0
+vacdiff exit=0
+vacdiff-plant exit=1
+assumptions exit=0
+assumptions-selftest exit=0
+arch exit=0
+lint exit=0
+notes-l5 exit=0
+notes-qa4-selftest exit=0
+statements exit=0
+statements-diff exit=0
+statements-controls exit=0
+statements-unruled exit=1
+statements-selftest exit=0
+instance-check exit=0
+code-only exit=0
+code-only-plant exit=0
+baseline-check exit=0
+digest-axioms exit=0
+digest-vacuity exit=0
+digest-assumptions exit=0
+tracked files modified after the pass: 0
+pass-exit=done
+run-gate exit=0

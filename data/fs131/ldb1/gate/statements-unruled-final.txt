@@ -1,0 +1,7 @@
+FAIL REMOVED HadwigerNelson.Plane.mOne
+FAIL TYPE HadwigerNelson.DensityBound.DualCert.window_le
+FAIL TYPE HadwigerNelson.DensityBound.DualCert.limsup_le
+FAIL ADDED public HadwigerNelson.Plane.mOne_eq_iSup_bandFree
+checked 4083 constants of the base dump; 4 differences; 0 private additions
+FAIL
+exit=1

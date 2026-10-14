@@ -1,0 +1,11 @@
+sampler start 2026-10-14T20:05:14Z worktree=/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10g interval=5s pid=421177
+20:05:35 new max sum-rss=6064 MiB over 2 process(es): Proofs/HadwigerNelson/Plane/DensityBound/Autocorr.lean Proofs/HadwigerNelson/Plane/DensityBound/BesselDefect.lean
+20:05:35 new max one-rss=3071 MiB: Proofs/HadwigerNelson/Plane/DensityBound/Autocorr.lean
+20:05:55 new max one-rss=3095 MiB: Proofs/HadwigerNelson/Plane/DensityBound/BesselCert.lean
+20:06:00 new max one-rss=3175 MiB: Proofs/HadwigerNelson/Plane/DensityBound/BesselCert.lean
+20:06:05 new max one-rss=3193 MiB: Proofs/HadwigerNelson/Plane/DensityBound/BesselCert.lean
+20:06:10 new max one-rss=3241 MiB: Proofs/HadwigerNelson/Plane/DensityBound/BesselCert.lean
+20:10:11 heartbeat samples=60 now: 0 process(es), sum-rss=0 MiB
+20:13:17 new max one-rss=3740 MiB: Proofs/HadwigerNelson/Plane/OneAvoidingDensity.lean
+20:13:32 new max one-rss=3758 MiB: Proofs/HadwigerNelson/Plane/DensityBound/Theorem.lean
+sampler end 2026-10-14T20:13:47Z samples=102 PEAK_SUM_RSS_MIB=6064 (over 2 process(es): Proofs/HadwigerNelson/Plane/DensityBound/Autocorr.lean Proofs/HadwigerNelson/Plane/DensityBound/BesselDefect.lean) PEAK_ONE_RSS_MIB=3758 (Proofs/HadwigerNelson/Plane/DensityBound/Theorem.lean)

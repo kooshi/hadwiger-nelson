@@ -1,0 +1,1 @@
+--redefined=HadwigerNelson.Plane.mOne:Proofs.HadwigerNelson.Plane.OneClass.Defs --added=HadwigerNelson.Plane.mOne_eq_iSup_bandFree --instances-only=HadwigerNelson.DensityBound.DualCert.window_le,HadwigerNelson.DensityBound.DualCert.limsup_le

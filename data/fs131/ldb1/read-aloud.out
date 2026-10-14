@@ -1,0 +1,50 @@
+slot: admitted ldb1-readaloud: mem 6 GiB (hard cap), cpus 0,1
+HadwigerNelson.Plane.oneAvoidingDensityBound : HadwigerNelson.Plane.OneAvoidingDensityBound
+def HadwigerNelson.Plane.OneAvoidingDensityBound : Prop :=
+∀ (A : Set (EuclideanSpace ℝ (Fin 2))),
+  MeasureTheory.NullMeasurableSet A MeasureTheory.volume →
+    (∀ a ∈ A, ∀ b ∈ A, dist a b ≠ 1) →
+      ∀ (x : EuclideanSpace ℝ (Fin 2)),
+        Filter.limsup
+            (fun (R : ℝ) => MeasureTheory.volume (A ∩ Metric.ball x R) / MeasureTheory.volume (Metric.ball x R))
+            Filter.atTop ≤
+          ENNReal.ofReal 0.2470
+'HadwigerNelson.Plane.oneAvoidingDensityBound' depends on axioms: [propext, Classical.choice, Quot.sound]
+@HadwigerNelson.DensityBound.DualCert.oneAvoidingDensityBound_of : ∀ {n : ℕ}
+  (C : HadwigerNelson.DensityBound.DualCert n),
+  C.Valid →
+    ∀ {w0 mu : ℝ},
+      mu < 1 →
+        (∀ (t : ℝ), 0 ≤ t → 1 - mu ≤ C.phi w0 t) →
+          C.bound / (1 - mu) ≤ 0.2470 → HadwigerNelson.Plane.OneAvoidingDensityBound
+def HadwigerNelson.Plane.mOne : ENNReal :=
+⨆ (A : Set ℂ),
+  ⨆ (_ : MeasurableSet A), ⨆ (_ : (HadwigerNelson.unitDistance ℂ).IsIndepSet A), HadwigerNelson.Plane.upperDensity A
+HadwigerNelson.Plane.mOne_eq_iSup_bandFree : HadwigerNelson.Plane.mOne =
+  ⨆ (A : Set ℂ),
+    ⨆ (_ : MeasureTheory.NullMeasurableSet A MeasureTheory.volume ∧ HadwigerNelson.Plane.BandFree A 0),
+      HadwigerNelson.Plane.upperDensity A
+'HadwigerNelson.Plane.mOne_eq_iSup_bandFree' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.Plane.mOne_le_one : HadwigerNelson.Plane.mOne ≤ 1
+HadwigerNelson.OneClass.one_seventh_le_mOne : 7⁻¹ ≤ HadwigerNelson.Plane.mOne
+def HadwigerNelson.Plane.upperDensity : Set ℂ → ENNReal :=
+fun (S : Set ℂ) =>
+  Filter.limsup (fun (R : ℝ) => MeasureTheory.volume (S ∩ Metric.ball 0 R) / MeasureTheory.volume (Metric.ball 0 R))
+    Filter.atTop
+def HadwigerNelson.Plane.BandFree : Set ℂ → ℝ → Prop :=
+fun (A : Set ℂ) (ε : ℝ) => ∀ x ∈ A, ∀ y ∈ A, dist x y < 1 - ε ∨ 1 + ε < dist x y
+HadwigerNelson.Plane.mOne_le_of_oneAvoidingDensityBound : HadwigerNelson.Plane.OneAvoidingDensityBound →
+  HadwigerNelson.Plane.mOne ≤ ENNReal.ofReal 0.2470
+HadwigerNelson.Plane.mOne_lt_quarter : HadwigerNelson.Plane.OneAvoidingDensityBound →
+  HadwigerNelson.Plane.mOne < ENNReal.ofReal (1 / 4)
+HadwigerNelson.Plane.mOne_lt_quarter
+  HadwigerNelson.Plane.oneAvoidingDensityBound : HadwigerNelson.Plane.mOne < ENNReal.ofReal (1 / 4)
+HadwigerNelson.Plane.upperDensity_le_of_oneAvoidingDensityBound : HadwigerNelson.Plane.OneAvoidingDensityBound →
+  ∀ {A : Set ℂ},
+    MeasureTheory.NullMeasurableSet A MeasureTheory.volume →
+      HadwigerNelson.Plane.BandFree A 0 → HadwigerNelson.Plane.upperDensity A ≤ ENNReal.ofReal 0.2470
+'HadwigerNelson.Plane.mOne_lt_quarter' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.DensityBound.DualCert.oneAvoidingDensityBound_of' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+exit=0

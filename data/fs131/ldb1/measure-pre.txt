@@ -1,0 +1,9 @@
+MEASURE exit=0 wall=3.5s peak=0.22 GiB max-rss=0.88 GiB :: lake build --no-build Proofs
+MEASURE exit=0 wall=5.1s peak=0.42 GiB max-rss=3.02 GiB :: lake env lean data/fs131/ldb1/lean/StatementDump.lean
+MEASURE exit=0 wall=4.2s peak=0.42 GiB max-rss=3.02 GiB :: lake env lean data/fs131/ldb1/lean/Coverage.lean
+MEASURE exit=0 wall=3.1s peak=0.41 GiB max-rss=3.02 GiB :: lake env lean data/fs131/ldb1/lean/Coverage.lean
+MEASURE exit=0 wall=24.7s peak=0.53 GiB max-rss=4.47 GiB :: lake env lean data/fs131/ldb1/lean/MainNames.lean
+MEASURE exit=0 wall=5.8s peak=0.08 GiB max-rss=0.11 GiB :: python3 tools/fs131_kdb1_x23.py --write
+MEASURE exit=0 wall=0.9s peak=0.08 GiB max-rss=0.11 GiB :: python3 tools/fs131_idb1_cells.py chain
+MEASURE exit=0 wall=1.0s peak=0.08 GiB max-rss=0.10 GiB :: python3 tools/fs131_idb1_cells.py modules
+MEASURE exit=0 wall=6.2s peak=0.43 GiB max-rss=3.64 GiB :: lake env lean data/fs131/ldb1/lean/StatementDump.lean

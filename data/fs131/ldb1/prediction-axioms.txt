@@ -1,0 +1,3 @@
+FS131-LDB1 prediction, before the audit runs (from the three implementers' printed axioms, data/fs131/idb{1,2,3}/axioms.txt):
+records filed 723: on a nonempty subset of the three 400, axiom-free 323, other 0, not printed by an implementer 0
+audit: records 9101 + 723 = 9824; clean 9038 + 400 = 9438; axiom-free 32 + 323 = 355; imported 26; purchases 5

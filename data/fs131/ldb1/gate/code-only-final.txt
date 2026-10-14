@@ -1,0 +1,9 @@
+AS-LISTED Proofs/HadwigerNelson/Plane/DensityBound/Autocorr.lean: code the same; text reworded (listed); 0 listed code edit(s)
+AS-LISTED Proofs/HadwigerNelson/Plane/DensityBound/Bessel.lean: code the same; text reworded (listed); 0 listed code edit(s)
+AS-LISTED Proofs/HadwigerNelson/Plane/DensityBound/BesselDefect.lean: code the same; text reworded (listed); 0 listed code edit(s)
+AS-LISTED Proofs/HadwigerNelson/Plane/DensityBound/Pattern.lean: code the same; text reworded (listed); 0 listed code edit(s)
+AS-LISTED Proofs/HadwigerNelson/Plane/DensityBound/Window.lean: code the same; text reworded (listed); 0 listed code edit(s)
+AS-LISTED Proofs/HadwigerNelson/Plane/OneAvoidingDensity.lean: code the same; text reworded (listed); 3 listed code edit(s)
+files read: 83; as listed: 83
+OK
+exit=0

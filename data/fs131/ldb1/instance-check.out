@@ -1,0 +1,10 @@
+slot: admitted ldb1-instcheck: mem 6 GiB (hard cap), cpus 3,4
+HadwigerNelson.DensityBound.DualCert.window_le: new-instance occurrences 3, after the replacement 0; old-instance occurrences after 3
+OLD-HASH HadwigerNelson.DensityBound.DualCert.window_le rebuilt=3481863677 dump-before=3481863677 MATCH
+KERNEL-OK HadwigerNelson.DensityBound.DualCert.window_le: Eq.refl new : old = new
+HadwigerNelson.DensityBound.DualCert.limsup_le: new-instance occurrences 3, after the replacement 0; old-instance occurrences after 3
+OLD-HASH HadwigerNelson.DensityBound.DualCert.limsup_le rebuilt=2608129148 dump-before=2608129148 MATCH
+KERNEL-OK HadwigerNelson.DensityBound.DualCert.limsup_le: Eq.refl new : old = new
+CONTROL REFUSED (as it must be): window_le's old type = limsup_le's new type
+INSTANCES KERNEL-OK: NormedField.toNormedCommRing ℂ = CommCStarAlgebra.toNormedCommRing ℂ
+exit=0

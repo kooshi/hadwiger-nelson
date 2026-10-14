@@ -1,0 +1,11 @@
+unplanted: PASS
+plant the redefined constant left in the 83 modules: FIRED (REDEFINED-NOT HadwigerNelson.Plane.mOne: still a constant of the 83 modules)
+plant the redefined constant found in another module: FIRED (REDEFINED-NOT HadwigerNelson.Plane.mOne: found in Proofs.Elsewhere, not Proofs.HadwigerNelson.Plane.)
+plant the redefined constant absent by name: FIRED (REDEFINED-NOT HadwigerNelson.Plane.mOne: not found by name in the second dump)
+plant the redefined constant's TYPE changed: FIRED (REDEFINED-NOT HadwigerNelson.Plane.mOne: its stored TYPE is not the first dump's)
+plant the redefined constant's VALUE the old one: FIRED (REDEFINED-NOT HadwigerNelson.Plane.mOne: its VALUE is the first dump's (nothing was redefined))
+plant a ruled addition missing, an unruled one added: FIRED (ADDED-RULED-MISSING HadwigerNelson.Plane.mOne_eq_iSup_bandFree: the ruling adds it, and the second d)
+plant an instances-only type changed elsewhere too: FIRED (TYPE HadwigerNelson.DensityBound.DualCert.window_le)
+plant an instances-only type moved to another instance: FIRED (TYPE HadwigerNelson.DensityBound.DualCert.window_le)
+CONTROLS PASS
+exit=0

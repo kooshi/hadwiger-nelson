@@ -1,0 +1,2 @@
+wrote /home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10g/data/fs131/idb1/gen/Chain.lean 847 cells
+exit=0

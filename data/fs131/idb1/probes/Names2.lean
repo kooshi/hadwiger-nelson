@@ -1,0 +1,2 @@
+import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
+#check @intervalIntegral.hasDerivAt_integral_of_dominated_loc_of_deriv_le
