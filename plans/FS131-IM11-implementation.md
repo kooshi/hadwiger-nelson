@@ -1,0 +1,88 @@
+# FS131-IM11 — the five-colour chain: M11 (A⁺ at the empty set), proved
+
+*de Bruijn, the implementer. Brief: `data/fs131/briefs/FS131-IM11-aplus.md` (on `main`). Branch `fs131-wm12`, cut from
+`fs131-wm11` at `3d7ed3d82`, in the tree `.claude/worktrees/fs132-wi1`. Working files: `data/fs131/im11/`. Report:
+`data/fs131/reports/FS131-IM11.md`. The planner's record: `plans/FS131-KM11-aplus.md` (this branch).*
+
+## Theorems this phase proved
+
+*(filled at the last stage)*
+
+## Stage 1 — SAVED: the readback
+
+### 1.1 The quotations (standing rule 3)
+
+`tools/fs131_im11_readback.py` (FS131-KM11's `tools/fs131_km11_readback.py`, copied with the brief's path changed; that
+one is not edited) reads every block quotation of the brief and requires it, character for character, as one whole line of
+its source on `main`'s working tree. Output `data/fs131/im11/readback.out`: **6 quotations, 6 IDENTICAL** — W2
+(`data/fs131/REQUEST-2026-10-13.md`), the three dated lines of 2026-10-14 (`data/fs131/claims-NF2.md`), inventory items 873
+and 863 (`plans/FS131-close-inventory.md`). Control (`--plant`, `data/fs131/im11/readback-plant.out`): one character
+changed in each quotation in memory, **6 of 6 reported**, exit 0 as the control requires.
+
+### 1.2 The branch and the build
+
+`git checkout -b fs131-wm12` at `3d7ed3d82` (the tree was on `fs131-wm11`, clean). Build under the slot
+(`slot.py --mem 10 --cpus 4 -- env MEMMAX=10G BATCH=8 ./scripts/build.sh`): **`build: OK — all 1932 modules already up to
+date, nothing built, 21 module(s) with warnings, 4s`** (`data/fs131/im11/build0.log`;
+`build/gate/build/20261014T155840Z-3751940.log`). The tree's compiled library is current for the branch.
+
+### 1.3 The stored statements, before any edit
+
+`data/fs131/im11/lean/StatementDump.lean` (FS131-IJ1's dumper aimed at ten modules: the four I write —
+`Rigidity/SpectralSubspace`, `TraceSplit`, `APlus`, `ContinuityGroup` — and the six downstream of `ContinuityGroup`:
+`BochnerTau`, `CountTorus`, `CountResidue`, `CountCompletion`, `CountExtension`, `CountDescent`), run through `lake env lean`
+under the slot against the compiled library as given: `data/fs131/im11/statements-before.txt`, 267 constants (20, 31, 30,
+49, 4, 13, 70, 33, 6, 11 by module). The reader comparing it with the dump after the last build is
+`tools/fs131_im11_statements.py` (stage 5).
+
+### 1.4 The leaves, each restated in one line beside its plan (planner's record § 3)
+
+Notation: `V_y f = f ∘ T y` (Koopman), `σ̂_f(y) = ⟨f, V_y f⟩`, `P_a(χ) = Σ_y a_y χ(y)`, `e_j = 1{κ₀ = j}`, `Π = E[· | 𝒜]`.
+
+**M11-S (`Rigidity/SpectralSubspace`), 13 `sorry`:**
+
+| # | leaf | restated | plan (§ 3.1) |
+|---|---|---|---|
+| S1 | `gram_sum_eq` | `Σ_{x,y∈s} z_x z̄_y ⟨v_y, v_x⟩ = ‖Σ Re z_x v_x‖² + ‖Σ Im z_x v_x‖²` in a real inner product space | scratch `Gram.lean` |
+| S2 | `posDef_koopman` | `y ↦ ⟨f, V_y f⟩` is positive definite | `⟨f, V_{x−y} f⟩ = ⟨V_y f, V_x f⟩`, then S1 |
+| S3 | `comp_mem_contVec` | `V_y` maps `l`-continuous vectors to `l`-continuous vectors | `‖V_z V_y h − V_y h‖ = ‖V_z h − h‖` |
+| S4 | `inner_comp_eq_inner_comp_neg` | `⟨g, V_y f⟩ = ⟨V_{−y} g, f⟩` | apply the isometry `V_{−y}` to both |
+| S5 | `IsSpectralMeasureOf.add_of_orthogonal` | `σ_{h+r} = σ_h + σ_r` for `h` continuous, `r ⊥` continuous vectors | the cross terms vanish by S3, S4 |
+| S6 | `exists_trigPoly_tendsto` | some `P_{a_n} → 1_A` in `L²(σ)`, `σ` finite on the dual of a countable group | scratch `Density.lean` |
+| S7 | `norm_sq_koopmanSum_re_add_im` | `‖Σ Re a_y V_y f‖² + ‖Σ Im a_y V_y f‖² = ∫ ‖P_a‖² dσ_f` | expand `‖P_a‖²`, coefficients, S1 |
+| S8 | `inner_koopmanSum_re` | `⟨Σ Re a_y V_y f, f⟩ = Re ∫ P_a dσ_f` | linearity, `σ̂_f` real |
+| S9 | `comp_koopmanSum` | `V_z (Σ b_y V_y f) = Σ b_y V_{y+z} f` | linearity, `compMeasurePreserving_add`, `linearCombination_mapDomain` |
+| S10 | `exists_spectral_vector` | some `w` with `⟨w, f⟩ = σ_f(A)` and `‖V_z w − w‖² ≤ 2∫_A ‖χ z − 1‖² dσ_f` for all `z` | scratch `SpectralVector.lean` |
+| S11 | `spectral_null_of_orthogonal` | `f ⊥ contVec l`, `A` measurable of characters tending to `1` along countably generated `l` ⟹ `σ_f(A) = 0` | S10, dominated convergence |
+| S12 | `isSpectralMeasureOf_condExpL2` | `σ_{Πf} = σ_f|_{contChars t}` and `σ_{f−Πf} = σ_f|_{(contChars t)ᶜ}` | S5, uniqueness, `spectral_carried_iff`, S11 at `contChars` |
+| S13 | `spectral_null_model` | `ℤ` flipping `Fin 2` (counting measure), `f = 1_{0} − ½`, `σ = ½δ_{χ₋}` meets every hypothesis of S11 with `σ ≠ 0` | explicit |
+
+**M11-T (`Rigidity/TraceSplit`), 8 `sorry`:**
+
+| # | leaf | restated | plan (§ 3.2) |
+|---|---|---|---|
+| T1 | `integral_colourInd_mul_comp` | `⟨e_j, V_y e_j⟩ = μ(κ0 = j ∧ κy = j)` for `κ` moved equivariantly at `0` | indicators, `hequiv` |
+| T2 | `trace_decomp` | `3σ + δ₁ = 4 Σ_j σ_{e_j}` | coefficients by T1 and `3 tetra + 1 = 4[=]`; Fourier uniqueness |
+| T3 | `condLaw_comp_colourShift` | `p_j(x) ∘ shift_y = p_j(x + y)` a.e. | `condExp_comp_measurePreserving`, `comap_factorSigma_eq_of_action` |
+| T4 | `inner_colourInd_comp_unit` | `⟨e_j, V_u e_j⟩ = 0` for a unit vector `u` | T1 at `κ = id`; `μ` carried by `X₄` |
+| T5 | `colourCond_ae_eq_condLaw` | `Πe_j = p_j(0)` a.e. | `MemLp.condExpL2_ae_eq_condExp` |
+| T6 | `integral_colourCond_mul_comp` | `⟨Πe_j, V_y Πe_j⟩ = E[p_j(0) p_j(y)]` | T5, T3 at `x = 0` |
+| T7 | `setIntegral_compl_TA_re` | SI-3: `∫_{(T+A)ᶜ} Re χ(u) dσ = −(4/3) Σ_j E[p_j(0) p_j(u)]` | T2, S12 at `tauPrime F`, T4, T6 |
+| T8 | `setIntegral_compl_TA_rot` | remark (ii): `∫_{(T+A)ᶜ} Re χ(u) dσ = ∫_{(T+A)ᶜ} Re χ(1) dσ` | `rotInv_of_isTraceSpectral`, `rot_preimage_TA` |
+
+**M11-A (`Rigidity/APlus`), 12 `sorry`:**
+
+| # | leaf | restated | plan (§ 3.3) |
+|---|---|---|---|
+| A1 | `tendsto_mul_nhds_tauPrime` | `y ↦ r y` is continuous at `0` for `τ′_∅` | `nhds_inf`; `(N+1)R` stable; `archHom` multiplicative on the mixed space |
+| A2 | `comap_colourRot_colourFactor` | `rot_u⁻¹ 𝒜 = 𝒜` | `mem_factorSets_iff`, `shift_y ∘ rot_u = rot_u ∘ shift_{uy}`, A1 |
+| A3 | `factorColouring_shift_ae` | `c′(shift_y c) = shift_y (c′ c)` a.s. | `si4_equivariant_factorSigma` |
+| A4 | `factorColouring_rot_ae` | `c′(rot_u c) = rot_u (c′ c)` a.s. | `si4_equivariant` with A2 |
+| A5 | `integral_condLaw_mul_eq_zero_of_adj` | `EqualAtUnits μ`, `y − x` a unit vector ⟹ `E[p_j(x) p_j(y)] = 0` | T3 twice, shift invariance |
+| A6 | `factorColouring_mem_X4` | `EqualAtUnits μ` ⟹ `c′ ∈ X₄` a.s. | `si4` with A5 |
+| A7 | `factorLaw_carried` | `EqualAtUnits μ` ⟹ the law of `c′` gives `X₄ᶜ` measure `0` | A6, `Measure.map_apply` |
+| A8 | `factorLaw_shift_inv` | the law of `c′` is shift-invariant | A3, `μ.shift_inv` |
+| A9 | `factorLaw_rot_inv` | the law of `c′` is rotation-invariant | A4, `μ.rot_inv` |
+| A10 | `factorLaw_trace_null` | every trace spectral measure of the law of `c′` is null off `T + A` | T2 at `κ = c′`, each `e″_j` `𝒜`-measurable, `spectral_carried_iff` |
+| A11 | `equalAtUnits_of_not_neg` | `¬ (∫_{(T+A)ᶜ} Re χ(1) dσ < 0)` ⟹ `EqualAtUnits μ` | T7, T8, nonnegative summands |
+| A12 | `numberField_bot` | `⊥ : Subfield ℝ` is a number field | `Module.Finite` from `ℚ` onto `⊥` |
