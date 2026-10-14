@@ -94,3 +94,33 @@ measurable 1-avoiding `T ⊆ squareWin 0 ℓ` with `(m₁ − δ) ℓ² ≤ |T|`
 part of a near-optimal set by `NullMeasurableSet.exists_measurable_subset_ae_eq`, `exists_squareWin_dense`, translated),
 `arith_periodic`, `lintegral_volume_translate_inter`, `arith_nrWindow`. `exists_periodic_near_mOne` is now read by no proof in
 the count (`exists_nrWindow` no longer goes through it); it stays a theorem of the module, proved.
+
+## Stage 3 — SAVED: Λ1, `Rigidity/PlaneZhang` — five leaves proved (elaborated in a farm; the build is stage 4's); Λ1 re-priced
+
+All five `sorry`s of `Rigidity/PlaneZhang` replaced. Elaborated against a farm (`data/fs131/icl1/lean1.sh`: a symlink copy of
+the tree's compiled library with this job's `WindowDensity` compiled over it, the lakefile's three options passed): **exit 0, no
+warning, 5.1 s, 3.4 GB** (`data/fs131/icl1/logs/pz-3.log`; three elaborations). **209 lines added.**
+
+| leaf | how | lines |
+|---|---|---|
+| `measurableSet_lonely` | `(hY b).inter (measurable_phi (hY b) (measurableSet_singleton 0))` | 2 |
+| `unitPairsNull_lonely` | the unit pairs of the lonely set lie in its pairs into the row, null because `phi (Y b) = 0` on it (private `pairSet_lonely_null`) | 3 + 6 |
+| `ae_sIndep_social` | a finite union of edge slices `{z ∈ Y y : phi (Y x) z ≠ 0}`, `x − y ∈ S`, each null (private `null_edge`, reading `RowsEdgeNull` at `(x, y − x)`) | 12 |
+| `ae_disjoint_touched` | J28D (ii′)'s four cases: one contradicts pointwise, one is the lonely slice swapped (private `null_lonely_swap`), two are edge slices (one through `phi (lonely Y b) ≤ phi (Y b)`) | 30 |
+| `sum_volume_inter_sq_le` | each row split into its social and lonely parts; `NRWindow` on each lonely set; the social and touched counts integrated over the window (`integral_finsetSum`, `integral_indicator_one`), bounded a.e. by `max(m₁, r) |Q|` through `card_le_mul_card_closedNbhd` and the disjointness | 92 |
+
+Private helpers: `pairSet_lonely_null`, `pairSet_null_swap` (the scratch leaf's swap, made a lemma), `null_of_pairSet_null`,
+`null_edge`, `null_lonely_swap`, `mem_social`, `mem_touched`, `volume_squareWin_le` (a window of negative side is empty, so
+`ε ≥ 0` is never needed), `sum_indicator_eq_card`.
+
+**Read from outside the lane:** `card_le_mul_card_closedNbhd` (`Rigidity/FiniteZhang`, lane Λ2), a `sorry` leaf there, read as
+stated: `sum_volume_inter_sq_le` rests on `sorryAx` through it until Λ2 lands. Nothing else outside Λ1 is read.
+
+**Unread binders dropped (item 726's word)**, by `omit … in` above each statement: `measurableSet_lonely` and
+`unitPairsNull_lonely` read none of `[AddCommGroup Q] [Fintype Q] [DecidableEq Q]`; `ae_sIndep_social` and
+`ae_disjoint_touched` do not read `[DecidableEq Q]`. `sum_volume_inter_sq_le` keeps all three. Listed again with the kernel's
+dump at stage 4.
+
+**Λ1 re-priced from its first two leaves** (`exists_nrWindow` with its two helpers, about 155 lines in three elaborations;
+`sum_volume_inter_sq_le` with its helpers, about 140 lines in three): the lane is **done at 511 lines** (302 + 209) against the
+planner's 800–1,150, in about 45 minutes of active work from the first edit. No price message is owed (the lane is under a day).
