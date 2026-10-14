@@ -155,3 +155,124 @@ slot: admitted kn6: mem 12 GiB (hard cap), cpus 0,1,2,3
 ==> [138/249] 8 modules  21:46:52
 ==> [139/249] 8 modules  21:46:54
 ==> [140/249] 8 modules  21:46:55
+==> [141/249] 8 modules  21:46:57
+==> [142/249] 8 modules  21:46:59
+==> [143/249] 8 modules  21:47:00
+==> [144/249] 8 modules  21:47:02
+==> [145/249] 8 modules  21:47:03
+==> [146/249] 8 modules  21:47:05
+==> [147/249] 8 modules  21:47:07
+==> [148/249] 8 modules  21:47:08
+==> [149/249] 8 modules  21:47:10
+==> [150/249] 8 modules  21:47:12
+==> [151/249] 8 modules  21:47:13
+==> [152/249] 8 modules  21:47:15
+==> [153/249] 8 modules  21:47:16
+==> [154/249] 8 modules  21:47:18
+==> [155/249] 8 modules  21:47:20
+==> [156/249] 8 modules  21:47:21
+==> [157/249] 8 modules  21:47:23
+==> [158/249] 8 modules  21:47:24
+==> [159/249] 8 modules  21:47:26
+==> [160/249] 8 modules  21:47:28
+==> [161/249] 8 modules  21:47:29
+==> [162/249] 8 modules  21:47:31
+==> [163/249] 8 modules  21:47:32
+==> [164/249] 8 modules  21:47:34
+==> [165/249] 8 modules  21:47:36
+==> [166/249] 8 modules  21:47:37
+==> [167/249] 8 modules  21:47:39
+==> [168/249] 8 modules  21:47:40
+==> [169/249] 8 modules  21:47:42
+==> [170/249] 8 modules  21:47:44
+==> [171/249] 8 modules  21:47:46
+==> [172/249] 8 modules  21:47:47
+==> [173/249] 8 modules  21:47:49
+==> [174/249] 8 modules  21:47:51
+==> [175/249] 8 modules  21:47:52
+==> [176/249] 8 modules  21:47:54
+==> [177/249] 8 modules  21:47:56
+==> [178/249] 8 modules  21:47:58
+==> [179/249] 8 modules  21:48:00
+==> [180/249] 8 modules  21:48:01
+==> [181/249] 8 modules  21:48:03
+==> [182/249] 8 modules  21:48:05
+==> [183/249] 8 modules  21:48:07
+==> [184/249] 8 modules  21:48:08
+==> [185/249] 8 modules  21:48:10
+==> [186/249] 8 modules  21:48:12
+==> [187/249] 8 modules  21:48:14
+==> [188/249] 8 modules  21:48:15
+==> [189/249] 8 modules  21:48:17
+==> [190/249] 8 modules  21:48:19
+==> [191/249] 8 modules  21:48:21
+==> [192/249] 8 modules  21:48:22
+==> [193/249] 8 modules  21:48:24
+==> [194/249] 8 modules  21:48:26
+==> [195/249] 8 modules  21:48:28
+==> [196/249] 8 modules  21:48:30
+==> [197/249] 8 modules  21:48:31
+==> [198/249] 8 modules  21:48:33
+==> [199/249] 8 modules  21:48:35
+==> [200/249] 8 modules  21:48:37
+==> [201/249] 8 modules  21:48:38
+==> [202/249] 8 modules  21:48:40
+==> [203/249] 8 modules  21:48:42
+==> [204/249] 8 modules  21:48:44
+==> [205/249] 8 modules  21:48:46
+==> [206/249] 8 modules  21:48:47
+==> [207/249] 8 modules  21:48:49
+==> [208/249] 8 modules  21:48:51
+==> [209/249] 8 modules  21:48:53
+==> [210/249] 8 modules  21:48:55
+==> [211/249] 8 modules  21:48:56
+==> [212/249] 8 modules  21:48:58
+==> [213/249] 8 modules  21:48:59
+==> [214/249] 5 modules  21:49:01
+==> [215/249] 8 modules  21:49:02
+==> [216/249] 8 modules  21:49:05
+==> [217/249] 8 modules  21:49:06
+==> [218/249] 2 modules  21:49:07
+==> [219/249] 8 modules  21:49:09
+==> [220/249] 8 modules  21:49:11
+==> [221/249] 2 modules  21:49:12
+==> [222/249] 8 modules  21:49:14
+==> [223/249] 8 modules  21:49:16
+==> [224/249] 3 modules  21:49:18
+==> [225/249] 8 modules  21:49:19
+==> [226/249] 8 modules  21:49:22
+==> [227/249] 1 modules  21:49:23
+==> [228/249] 8 modules  21:49:25
+==> [229/249] 8 modules  21:49:27
+==> [230/249] 8 modules  21:49:29
+==> [231/249] 8 modules  21:49:32
+==> [232/249] 2 modules  21:49:34
+==> [233/249] 8 modules  21:49:35
+==> [234/249] 8 modules  21:49:38
+==> [235/249] 2 modules  21:49:41
+==> [236/249] 8 modules  21:49:42
+==> [237/249] 5 modules  21:49:45
+==> [238/249] 7 modules  21:49:48
+==> [239/249] 8 modules  21:49:51
+==> [240/249] 2 modules  21:49:54
+==> [241/249] 8 modules  21:49:57
+==> [242/249] 2 modules  21:50:00
+    ⚠ [3681/3681] Built Proofs.HadwigerNelson.Rigidity.ChainAtTA (2.6s)
+    warning: Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:72:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:77:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:81:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:247:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:252:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:259:8: declaration uses `sorry`
+    rebuilt: Rigidity.ChainAtTA (2.6s)
+==> [243/249] 5 modules  21:50:05
+==> [244/249] 5 modules  21:50:08
+==> [245/249] 4 modules  21:50:11
+==> [246/249] 2 modules  21:50:14
+==> [247/249] 1 modules  21:50:15
+==> [248/249] 1 modules  21:50:17
+==> [249/249] 1 modules  21:50:18
+    rebuilt: Proofs (2.5s)
+==> build: OK — 249 of 249 batches, 4 module(s) rebuilt, 3 module(s) with warnings, 6m54s
+    full output: build/gate/build/20261014T024327Z-1231022.log
+exit=0

@@ -7,7 +7,25 @@ record `plans/FS131-KN3-chain-plan.md` (cited as KN3 § n) and the deriver's `pl
 
 ## Theorems this phase proved
 
-*(filled in as the stages land; a planning job — the chain's leaves are not proved here)*
+A planning job: the chain's leaves are not proved here. What it proved while testing its plans, each **[kernel]**, through
+`./scripts/build.sh` (build 2), axiom lists from the built tree (`data/fs131/kn6/logs/AxiomsCheck.log`) — the standard
+three unless said:
+
+- `Rigidity.colorable_two_levelTarget_one_of_isRamified` — at a stable prime on whose residue field conjugation is the
+  identity, the level-one target is two-colourable — `Rigidity/ChainAtTA.lean`
+- `Rigidity.noRamifiedStableDyadic_of_three_le_localBound` — `3 ≤ L(F)` excludes a ramified stable prime, for every
+  subfield `F` of `ℝ` — `Rigidity/ChainAtTA.lean`
+- `Rigidity.IsRamified.isDyadic`, `Rigidity.noRamifiedStableDyadic_iff` — a ramified stable prime is dyadic — `Rigidity/ChainAtTA.lean`
+- `Rigidity.partitionEntropy_le_liminf` — the infimum form of the entropy on a partition is below the `liminf` form, for
+  every measure and map — `Rigidity/Entropy.lean`
+- `Rigidity.mem_nameCell_self` (no axioms), `partitionEntropy_le`, `partitionEntropy_le_ksEntropyOn`,
+  `partitionEntropy_le_ksEntropy`, `ksEntropy_eq_zero_iff`, `ksEntropyOn_le_ksEntropy`, `blockEntropy_nonneg` — the entropy
+  definitions' reasoning surface — `Rigidity/Entropy.lean`
+
+**Not theorems of the library**: `Rigidity.min_localBound_five_le_chromaticNumber_of_closed` with eight hypotheses is a
+composition the kernel checked over leaves that are `sorry` (it prints `sorryAx`). In a scratch bundle only, not in the
+library: `nameCell_eq_orbitName_fibre`, `blockEntropy_eq_observationEntropy` (`data/fs131/kn6/bridge-statements.lean`).
+The branch is a skeleton — fifteen `sorry` leaves and one undeclared `axiom` — and is not at the gate.
 
 ## Stage 1 — SAVED: the readback
 
@@ -337,3 +355,212 @@ EN2-ZE changed in memory): M8 `DIFFERS`, exit 1. The first drafts are in git at 
   stable prime on whose residue field conjugation is trivial the level-one target is two-colourable (proved, over
   `Arith/UpperHalf`), so `5 ≤ L(F)` excludes one. The leaf that left the headline's path is FS100-EXC's
   (`Rigidity.noRamifiedStableDyadic_of_tca`); it stays stated in module M9's draft claim list, marked off the path."
+
+## Stage 5 — SAVED: the entropy base, planned to its leaves
+
+### 5.1 The port (module M0): which files, their cones, and what they need at this pin — measured
+
+Declared cones, by `tools/fs131_kn6_import_cone.py` (the closure of `import` lines inside the release, read only;
+`--self-test` plants a commented import and requires it to be ignored; `data/fs131/kn6/logs/import-cone.out`). The used
+cone and the needs at this pin, by **trial elaboration of scratch copies** (Amendment 2 of the brief):
+`tools/fs131_kn6_release_copy.py make` writes each bundle under the ignored `build/fs131-kn6/release-copies/` (not
+committed) with its import lines replaced by `import Mathlib` and the recorded renames applied; `scan` searches the copy
+for `#eval`, `run_cmd`/`run_elab`/`run_meta`, `initialize`, `unsafe`, `IO.`, a `macro`/`elab`/`syntax` declaration and any
+other import, and `--plant` requires a planted `#eval` and a second import to be reported; `data/fs131/kn6/trial.sh`
+elaborates one copy at a time under an 8 GiB slot, writing no compiled file, only when the scan has no hit. Logs:
+`data/fs131/kn6/logs/{make,scan,trial}-*`.
+
+| lane | release files | lines | declared cone | scan | needs at this pin | elaboration |
+|---|---|---|---|---|---|---|
+| **M0-shannon** | `PrimePackets/ShannonEntropy.lean` | 453 | 1 file (Mathlib only) | 0 hits; control fired | 2 renames: `Set.ofPred_and` → `Set.setOf_and` | 0 errors, 8 s |
+| **M0-mix** | `PrimePackets/EntropyMixtures.lean` | 540 | 2 files, 993 lines | 0 hits; control fired | 3 renames: `ite_eq_right` → `if_neg` (2), `ite_eq_left` → `if_pos` (1) | 0 errors, 7 s (with the file above) |
+| **M0-max** | `DukePrimeDegree/Dynamics/HopfMaximal.lean`, `Dynamics/MaximalOccupation.lean`, and `PrimePackets/InverseEntropy.lean` ll. 247–257, 285–290 (`visitCount`, `visitCount_cast`, `measurable_visitCount`) | 107 + 120 + 16 | 89 files, 43,434 lines | 0 hits; control fired | 2 renames: `birkhoffSum_succ_apply'` → `birkhoffSum_succ'`, `Set.ofPred_mem_eq` → `Set.setOf_mem_eq` | 0 errors, 4 s and 5 s |
+| M0-gen (T2; module M7's input) | `PrimePackets/EntropyGeneratingSupremum.lean` and eight more | — | 11 files, 1,843 lines, all entropy | not trialled | — | — |
+| M0-erg (T1; module M7's input) | `PrimePackets/ErgodicDecomposition.lean` | 509 | 28 files, 22,632 lines | not trialled | **used cone unmeasured** | — |
+| M0-inv (module M5's input) | `DukePrimeDegree/Entropy/EntropyInverse.lean` | 92 | 2 files, 545 lines | not trialled | — | — |
+
+**The three numbers.** (a) Of the gap between the pins (1,502 Mathlib commits by the release's own count), these 1,236
+lines hit **five names, each a rename, seven tokens in all; no proof was repaired**. (b) The maximal inequality's used
+cone is **243 lines** against a declared 89 files and 43,434 lines: with its two import lines replaced nothing is
+missing, as the deriver read. (c) **The bridge types against the real constants** (bundle `Bridge`: the release's file,
+this library's `Rigidity/Entropy`, and `data/fs131/kn6/bridge-statements.lean`; 0 errors): `nameCell_eq_orbitName_fibre`
+and `blockEntropy_eq_observationEntropy` are proved there; `partitionEntropy_eq_ofReal_observationEntropyRate` and
+`ksEntropy_eq_measureEntropy` are typed with `sorry`, for a probability measure and every map, with no invariance.
+*What the times measure*: elaboration with Mathlib's compiled files in the page cache; the first run of the first file
+read 484 s on the wrapper's clock because it waited for the slot behind another job.
+
+**How the port is made** (`LEAN.md` § Assumptions, "An outside Lean proof may be ported"): by FS-132's generator's method
+(`tools/fs132_i2_port.py`: copy by line range, refuse a patch to a statement or a definition, the licence text beside the
+modules — `Proofs/HadwigerNelson/Outside/OAIMath2026-LICENSE.txt` is already there — and each header the notice of
+change), into `Outside/OAI015Shannon`, `Outside/OAI015Mixtures`, `Outside/OAI015Maximal`; the renames above are the whole
+patch list for these three. The release's four scoped-instance and namespace questions are the generator's. **Held for
+the coordinator**: the read-back across pins compares stored terms and needs the release's compiled constants; for
+M0-shannon and M0-mix that is two files over the release's Mathlib, for M0-max it would be its declared cone of 89 files
+— I propose the read-back for the first two and, for M0-max, the generator's text identity alone (the kernel checks the
+proofs here either way; the statement is the classical maximal inequality, read against EN2 § 5.1 row 4 by me: it is
+that row word for word).
+
+### 5.2 The chain's entropy pinned to the number the printed theorem means — the read-back
+
+The page's number (`[EinsiedlerLindenstrauss2022]` Thm 1.3 (4), "`h_{µ_j}(αⁿ_{X/G_j}) = 0`"): for a probability measure
+`µ` preserved by `T`, `h_µ(T) = sup_ξ lim_n (1/n) H_µ(ξ ∨ T⁻¹ξ ∨ … ∨ T^{−(n−1)}ξ)` over finite measurable partitions
+`ξ`, natural logarithm (no page for the definition is held: the first planner's prior-art debt stands).
+
+| the textbook's clause | this library | relation | how it is known |
+|---|---|---|---|
+| a finite measurable partition `ξ` | a measurable label map `P : X → Fin k` (empty cells allowed; a cell of mass `0` adds `negMulLog 0 = 0`) | the same supremum | by reading; `ksEntropy_eq_measureEntropy` (typed) says the release's independent definition agrees |
+| the atoms of `⋁_{j<n} T^{−j}ξ` | `nameCell T P n w` | equal | `mem_nameCell` (proved, `Iff.rfl`) |
+| `H_µ` of that partition | `blockEntropy μ T P n` | equal | the definition; drift checks `blockEntropy_one` (leaf), `blockEntropy_nonneg` (proved) |
+| `lim_n H_n / n` | `partitionEntropy μ T P = inf_n H_{n+1}/(n+1)` | **`≤` for every measure and map, with nothing to prove** (`partitionEntropy_le_liminf`, proved); **`=` for a preserved probability measure** | the pinning theorem `tendsto_blockEntropy_div` — **a leaf, not proved** |
+| the supremum over `ξ` | `ksEntropy μ T` | equal | the definition |
+| the factor `X/G_j` | the quotient σ-algebra: `ksEntropy` of the pushed measure is `ksEntropyOn` of the pulled-back σ-algebra | equal | `ksEntropy_map` — a leaf |
+
+**What this closes and what it leaves.** The first planner's hole was "is `ksEntropy` larger than the textbook's number
+anywhere the axiom reads it?" — **closed by construction**: the entropy occurs in the declared statement once, in the
+conclusion, as "`= 0`" (the stored statement re-read from the kernel after this job, Stage 5.5), and the infimum is below
+every reading of the limit. Left, and read only by our own proofs: that it is not *smaller* (the pinning theorem), and
+the positive model (the two-shift at `log 2`, draft M1's statement 6) — **not typed here**: it needs a product measure
+on sequences, and its lower bound wants the release's `measureEntropy_lower_of_good_atoms` through the bridge.
+
+### 5.3 The statements, typed and compiled
+
+In `Rigidity/Entropy` (through the build, Stage 5.5), `sorry` at the leaves only: `tendsto_blockEntropy_div`,
+`blockEntropy_one`, `ksEntropy_id`, `ksEntropy_dirac`, `ksEntropy_map`, `exists_blockEntropy_le_mul`,
+`ksEntropy_eq_iSup_ksEntropyOn`, `ksEntropy_bind_eq_zero`. In `data/fs131/kn6/bridge-statements.lean` (compiled only in
+the scratch bundle, because their constants exist in the library only after the port): the four bridge lemmas, two
+proved. **Not typed in Lean by this job**: EN2-CNT and EN2-ZE (their statements are in M8's claim list, EN2-ZE also in
+this library's words) — lane M8a's first step is a planner's, or this record's successor's; and the two-shift.
+
+### 5.4 A plan per leaf (lane M1: one file, `Rigidity/Entropy`)
+
+Every Mathlib name below was `#check`ed at the pin under `import Mathlib` (`data/fs131/kn6/checks.lean`, log
+`logs/checks.log`: 31 names found; one asked for and absent, `Measure.sub`, which no leaf here uses). A name exists at the
+pin; whether the module's imports see it is checked by the implementer where it is used (`LEAN.md`).
+
+*Needing no port — can start today:*
+
+1. **`blockEntropy_one`.** Reindex the sum over `Fin 1 → Fin k` by `Equiv.funUnique (Fin 1) (Fin k)` (`Fintype.sum_equiv`);
+   the cell of `w` at length one is `P ⁻¹' {w 0}` (`Set.ext`, `mem_nameCell`, `Function.iterate_zero`). Nothing hard.
+2. **`ksEntropy_id`.** `ksEntropy_eq_zero_iff`; child `blockEntropy_id : blockEntropy μ id P (n + 1) = blockEntropy μ id P 1`
+   (a word that is not constant has an empty cell, `Real.negMulLog_zero`; the constant word `c` has cell `P ⁻¹' {c}`;
+   `Function.iterate_id`); then `partitionEntropy_le` at every `n` and `H_1 / (n + 1) → 0`. Hard: the reindexing in the
+   child (constant words against labels) — `Finset.sum_subset` over the image of `c ↦ fun _ => c`.
+3. **`ksEntropy_dirac`.** `ksEntropy_eq_zero_iff`; each cell is measurable (`measurableSet_nameCell hT hP`), so
+   `Measure.dirac_apply'` makes its mass `0` or `1`; `Real.negMulLog_zero`, `Real.negMulLog_one`; every `H_n` is `0` and
+   so is the infimum. Nothing hard.
+4. **`ksEntropy_map`.** Stage 3b item 4 (three children and the case `IsEmpty X`).
+
+*After M0-shannon lands* (the lane's first act then: add the import, and move the four bridge lemmas of
+`data/fs131/kn6/bridge-statements.lean` into the file, the first two with their proofs):
+
+5. **`partitionEntropy_eq_ofReal_observationEntropyRate`** (bridge). `Monotone.map_csInf_of_continuousAt` for
+   `ENNReal.ofReal` (`ENNReal.ofReal_mono`, `ENNReal.continuous_ofReal`) on the image over `Set.Ici 1`, bounded below by
+   `0` (`blockEntropy_nonneg` through `blockEntropy_eq_observationEntropy`); then `sInf_image` and the reindexing
+   `n ∈ Ici 1 ↔ n = j + 1`. Hard: that reindexing, and the cast `((j + 1 : ℕ) : ℝ) = (j : ℝ) + 1` (`Nat.cast_succ`).
+6. **`ksEntropy_eq_measureEntropy`** (bridge). `iSup_congr` twice; `Measurable P ↔ ∀ a, MeasurableSet {y | P y = a}` for
+   a map into `Fin k` (`→` by `measurableSet_singleton`, `←` by `measurable_to_countable'`); leaf 5.
+7. **`tendsto_blockEntropy_div`** (the pinning theorem). The release's `tendsto_observationEntropyRate μ hT P _` (its
+   fibre hypothesis from `hP`), composed with `ENNReal.continuous_ofReal`, shifted by `tendsto_add_atTop_iff_nat 1`, and
+   rewritten by leaves 5 and `blockEntropy_eq_observationEntropy`. (Fekete's lemma itself is Mathlib's
+   `Subadditive.tendsto_lim`, already used inside the release's proof.)
+8. **`exists_blockEntropy_le_mul`.** Leaf 7 with `h0` gives convergence to `0`; `tendsto_order` gives eventually
+   `< ENNReal.ofReal ε`; with `Filter.eventually_ge_atTop K` take one `n`; `ENNReal.ofReal_lt_ofReal_iff hε` and
+   `div_lt_iff₀` give `H_{n+1} < ε (n + 1)`. Nothing hard.
+
+*After M0-mix lands:*
+
+9. **`ksEntropy_bind_eq_zero`.** Leaf 6 on both sides (a Markov kernel's values and `τ.bind κ` are probability
+   measures), then the release's `measureEntropy_kernel_zero τ κ hT hκ _`, whose `κ ∘ₘ τ` is `τ.bind κ` (the implementer
+   confirms the unfolding at the pin). Nothing hard.
+
+*After M0-gen lands (module M7's input; not needed by M8a):*
+
+10. **`ksEntropy_eq_iSup_ksEntropyOn`** (T2). `≥`: `ksEntropyOn_le_ksEntropy` with `𝒜 i ≤ m` from `hgen`. `≤`: the
+    release's `measureEntropy_eq_iSup_generating` for finite partitions `Q_n` that increase and generate — built from
+    countable generators of the `𝒜 i` by a diagonal enumeration, `Q_n` measurable for `𝒜 n` by `hmono`; then
+    `partitionEntropy_le_ksEntropyOn`. **Hard, and open in this plan**: I read that theorem only by its head in the
+    first planner's survey; lane M0-gen's implementer reads its exact hypotheses before this leaf is started, and if
+    they do not fit the statement typed here the leaf comes back to a planner.
+
+### 5.5 The second build, and the declared statement read again from the kernel
+
+After the passes and the typing: `./scripts/build.sh` under the slot, `BATCH=8` — `==> build: OK — 249 of 249 batches,
+4 module(s) rebuilt, 3 module(s) with warnings, 6m54s`, `exit=0` (`logs/build-2.log`); rebuilt: `Rigidity.Entropy`,
+`Rigidity.PositiveEntropy`, `Rigidity.ChainAtTA`, `Proofs`; fifteen warnings, each `declaration uses 'sorry'` (`Entropy`
+8, `PositiveEntropy` 1, `ChainAtTA` 6), **no other**. Memory sample 7.86 GiB summed, 6.22 GiB the largest — **that
+figure is my own `import Mathlib` check that ran beside the build**, not a compiler of the build (each module compiled
+in under 3 s). `lake lint`: `exit=0`, `Linting passed for Proofs`, 14 linters passed (`logs/lint-2.log`).
+`tools/check_architecture.py`: PASS (it failed, as it should, on `ChainAtTA`'s new import until the map's row said so).
+
+- **The axiom's stored statement is unchanged**: `#check @positive_entropy_rigidity` from the built tree
+  (`logs/FirstLayerCheck-after.log`) is character for character the first planner's print (1,764 characters);
+  `tools/fs131_kn3_axiom_binders.py` on the new print: the four instance binders are bound.
+- **The headline as the kernel has it** takes eight hypotheses; the first planner's print has nine, the one that left
+  being `(SpectralChain.TCA F → NoRamifiedStableDyadic F)` — read by eye from the two prints. (A comparison I scripted
+  inline for the headline found neither block and so compared nothing with nothing; it is not cited.)
+- Axiom lists from the built tree (`logs/AxiomsCheck.log`): § Theorems this phase proved.
+
+### 5.6 The lanes, and what each writes
+
+| lane | writes | needs | who |
+|---|---|---|---|
+| **P** — the port, M0-shannon, M0-mix, M0-max | three new files under `Outside/`; their rows in `Proofs.lean` and `ARCHITECTURE.md` | Mathlib | an implementer, with FS-132's generator; hours |
+| **E** — entropy, M1 | `Rigidity/Entropy.lean` only | leaves 1–4 nothing; 5–9 lane P's first two files; 10 M0-gen | an implementer from § 5.4 |
+| **N** — the names at entropy zero, M8a | one new file, `Rigidity/ZeroEntropyNames.lean` | lane P's `OAI015Maximal`; `exists_blockEntropy_le_mul` (stated) | first a planner's hour to type EN2-CNT and EN2-ZE, then an implementer from Stage 3b items 2–3 |
+| **C** — the smaller set, C0 | `Rigidity/ChainAtTA.lean` only: `measurableSet_TA` (Stage 3b item 5), `rot_preimage_TA`, `exists_nonTorsion_unitVector`, and "the point mass at `1` is rotation-invariant" | — | an implementer |
+
+No two lanes write one module. `Proofs.lean` and `ARCHITECTURE.md` gain one row per new module in lanes P and N; the
+landing joins them.
+
+## Stage 6 — SAVED: what the four items of the declared theorem still lack (for the coordinator)
+
+`Rigidity.positive_entropy_rigidity`, against `LEAN.md` § Assumptions' four items, after this job:
+
+1. **Docstring** — names the key, the theorem, § 1.1, pp. 2–3 of arXiv:2101.11120v1, and now says in what sense its
+   entropy is meant and in which direction. **Lacks**: the journal's page numbers (ETDS 42 (2022) 691–736; only the
+   arXiv text was read).
+2. **Read-back** — the first planner's table (KN3 § 5.3) stands, and this job adds § 5.2's table for the entropy.
+   **Lacks**: a second reader against the page. **What that reader should be told**:
+   - *the entropy*: clause (4) is stated with the infimum of `H_n / n`, not a limit. It is the textbook's number for the
+     measures the clause is about (a leaf, `tendsto_blockEntropy_div`, not proved), and the statement is within the
+     page whether or not that leaf is ever proved, because the entropy occurs once, in the conclusion, as "`= 0`" —
+     the reader should confirm exactly that against the stored statement, and that no hypothesis mentions an entropy;
+   - *three senses the page leaves open*: "no virtually cyclic factors" (FS105-VC's forced sense — the residual trust
+     of the axiom; a reading that asked less of the action would make the axiom stronger than the page); "ergodic" as
+     triviality of the *strictly* invariant sets — formally the weaker property, hence the stronger axiom, and equal to
+     the textbook's for a countable group by an argument that is **not a theorem of this library**; the `ν j` as
+     probability measures;
+   - *the factor*: the σ-algebra on `X/G_j` is the quotient σ-algebra. That it is the Borel σ-algebra of the quotient
+     for a solenoid is asserted in the first planner's table from Mathlib's `QuotientAddGroup.borelSpace` and is **not
+     a theorem of this library for `IsSolenoid X`** (it needs the solenoid to be Polish, from the countable dual). Read
+     measure-theoretically the two agree with no topology: the quotient σ-algebra pulled back to `X` is the
+     `G_j`-invariant Borel sets, which is what "the factor `X/G_j`" means for a measure;
+   - "compact group" is read as Hausdorff; `d ≥ 2` is explicit; every binder is in the signature and the stored type
+     was read from the kernel after this job.
+3. **A model of the hypotheses** — `positive_entropy_rigidity_model`, on the standard three axioms, **degenerate** (the
+   one-point solenoid: the clause on factors is empty). **Lacks**: the model that exercises every clause, PE-1′ (module
+   M6). The axiom's conclusion is true at the degenerate model (`J = 1`, `G = ⊤`); that is said here and is not a
+   theorem of the library.
+4. **`ARCHITECTURE.md` § Trust and the audit** — nothing is written: the branch is a skeleton. **Lacks, at the first
+   landing that proves a record from it**: the § Trust line (KN3 § 5.3 item 4's draft, to which add "its entropy is the
+   infimum form; see the docstring") and one `AxiomAudit.declareImport` line. Also owed by the pipeline, not by this
+   statement: the `LEAN.md` rule on an axiom's binders (inventory item 659 (a)).
+
+## Drafts for files I do not write
+
+- **`LEAN.md` § Searching — Lean**, a new line: "With two `MeasurableSpace X` binders in scope, `(μ : Measure X)` is a
+  measure for the last one, even when both are implicit: a statement about a sub-σ-algebra `𝒜` of `m` writes
+  `(μ : @Measure X m)` (`Rigidity.ksEntropyOn_mono`, `ksEntropyOn_le_ksEntropy`; found by a type mismatch in a one-line
+  proof — with a `sorry` body it would have stood as a statement about a measure on `𝒜`) (FS131-KN6)."
+- **`LEAN.md` § Assumptions**, to follow the port paragraph: "A port is priced from a trial, not from a line count:
+  copy the files into the ignored `build/` with their imports replaced, scan the copies for anything that runs code at
+  elaboration (with a planted control), and elaborate one at a time at this pin
+  (`tools/fs131_kn6_release_copy.py`, `data/fs131/kn6/trial.sh`): four entropy files of `[OAIMath2026]` family 015,
+  1,236 lines, needed seven one-token renames and no repaired proof; a declared import cone (89 files) can be 370 times
+  the used one (243 lines) (FS131-KN6)."
+- **`data/fs131/claims-NF2.md` § Dated lines**: the three lines of Stage 4.
+- **`BIBLIOGRAPHY.md`, `[OAIMath2026]`**, reading status, to follow the first planner's line: "family 015's
+  `PrimePackets/ShannonEntropy.lean`, `EntropyMixtures.lean`, `DukePrimeDegree/Dynamics/HopfMaximal.lean`,
+  `MaximalOccupation.lean` and three declarations of `PrimePackets/InverseEntropy.lean` elaborated at this library's pin
+  in scratch copies by FS131-KN6 (2026-10-14; 0 errors after seven renames; no proof read by it beyond the lines its
+  errors named)."
