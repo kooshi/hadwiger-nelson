@@ -50,7 +50,8 @@ once, at a parameter nothing refutes.
 - `Plane/OneClass/Defs`: "**FS-133 (FS133-K1; a skeleton).**" → "**FS-133 (FS133-K1's statements, FS133-IB2's
   proofs; no `sorry`).**"; and the row gains "`countable_algPlane` (the algebraic plane is countable; moved here from
   `InvariantLaw`, FS133-IB2)". Its imports cell is unchanged: no import was added.
-- `Plane/OneClass/InvariantLaw`: if its row names `countable_algPlane`, the name leaves it.
+- `Plane/OneClass/InvariantLaw`: its row does not name `countable_algPlane`, so the move changes nothing in it
+  (FS133-IB1's draft DB5 for that row stands).
 
 **DC5. `LEAN.md` § Searching — Lean**, new bullets:
 - "A point mass on `E → Bool` sees single labellings only when the index set is countable: `ae_dirac_eq` asks
