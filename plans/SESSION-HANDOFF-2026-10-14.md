@@ -46,11 +46,7 @@ backup --all`** after each commit. Agent ids: scratch `agents.txt`, copies `~/so
    line and hand-back: check the commits after the green one touch only records; merge `--no-ff`; check; report to Kooshi; then the
    filing (a Clerk; copy `data/fs131/briefs/scripts/mk-fs131-fc5.py`; fact-audit base `8eece67b0`; previous receipts
    `data/fs133/ld1/gate/`).
-2. **FS131-IJN1 — the chain's join** (tree `fs131-wq1`, branch `fs131-wj`): `fs131-wla` (M11, lane A) and `fs131-wcm` (the count, M13
-   composed) merged into `fs131-wt5` (M2b, the entropy side); M9-S proved (its unread `[NumberField ↥F]` dropped, item 913);
-   `mulTwoThree_model`; the landing's code rulings (entropySplit/zeroEntropyCarried moved to `ZeroEntropyClosed`; the declared
-   printed theorem `positive_entropy_rigidity` registered — axioms.sh OK, 34 imported; lane N's binders; Lemma F); the headline
-   closed, whose `sorryAx` comes only through M13's six private leaves and the density bound's instance.
+2. **FS131-KM15 — M15, the instances, `ℚ(√47)` first** (tree `fs131-wq1`, branch `fs131-wm15` from `fs131-wj` at `bda6a98f2`, item 919): typed, priced, then proved as far as its budget reaches; the density bound a hypothesis at most. **The join (FS131-IJN1) handed back, item 918**: the headline `Rigidity.min_localBound_five_le_chromaticNumber` (`Rigidity/ChainHeadline`) stated on `fs131-wj` with `hOA` and `hRow99` kept, its `sorryAx` through seven leaves of other lines (each proved or assigned, item 918); its drafts for the chain's landing in `fs131-wq1:data/fs131/ijn1/`.
 3. **FS131-ICM3 — M13's last leaves on the count's line** (tree `fs131-wch`, branch `fs131-wcm3` from `fs131-wcm2`, where Lemma P and
    the exclusions at 3 and 7 are proved and `tca_uniform` rests on Weil's bound alone, item 905): `circleCos_bound` (q = 23, 31),
    `charBound_one_exact_27`, the dyadic branch. `ratioAtMost_cert` (q = 11, 19) stays named until the lines are joined.
