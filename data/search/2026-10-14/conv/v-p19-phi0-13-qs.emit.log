@@ -2,3 +2,6 @@ p=19 n=361 |S|=20 maps=40 sha=f94ed6360c11
 reps 182; pairs 16653; orbits 984
 ops 20274 [2.2s]
 slots 1783; identity model: HOLDS; total magnitude bits 125 [8.8s]
+PSD witnesses: 20 blocks diagonally dominant [59.9s]
+wrote data/search/2026-10-14/conv/v-p19-phi0-13-qs.lean: w=127 ds=5 k1=17 kq=10 kr=158 kw=18 ko=11; chunks ops=72 rows=37 keys=32
+EXIT=0
