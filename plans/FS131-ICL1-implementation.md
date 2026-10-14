@@ -73,3 +73,24 @@ needs "a periodic set fills every cell of its period alike" — no lemma of the 
 *window* `T` (`T ⊆ squareWin 0 ℓ`, `|T| ≥ (m₁ − ε/4) ℓ²`) over the translates `T + t` that meet `W`, `t` in a square of side
 `s + ℓ`, gives `|Z ∩ W| (s + ℓ)² + |T| |W ∖ N_e[Z]| ≤ m₁ (s + 2)² (s + ℓ)²` by Tonelli on `ℂ × ℂ` alone; choosing `ℓ ≥ 12 s/ε`
 after `s` makes `|T|/(s + ℓ)² ≥ m₁ − ε/2`. The scale `s₀ = max(1, 16/ε)` still depends on `ε` only, as `NRWindow` asks.
+
+## Stage 2 — SAVED: Λ1, `Plane/WindowDensity` — six leaves proved (elaborated; the build is stage 4's)
+
+All six `sorry`s of `Plane/WindowDensity` replaced; `lake env lean` with `-DautoImplicit=false -DrelaxedAutoImplicit=false`
+(iteration only): **exit 0, no warning, 8.5 s, 3.4 GB** (`data/fs131/icl1/logs/wd-3.log`; three elaborations, `wd-1` to
+`wd-3`). **302 lines added** (proofs and five private helpers), against the planner's 300–450 for block P.
+
+| leaf | how | lines |
+|---|---|---|
+| `densitySet_bandFree` | as planned: `dist_ne_one_of_mem_densitySet` at a pair of density points; `(ae_eq_densitySet hA).symm` | 7 |
+| `volume_inter_sq_le` | as planned: the density set's trace on the window, `bandFree_periodize` at `ε = 0`, `upperDensity_periodize`, `le_iSup₂`, `ENNReal.div_le_iff` | 18 |
+| `exists_periodic_near_mOne` | the private `exists_dense_window` at `δ = ε/2`, side `ℓ ≥ 16/ε + 1`, periodised at `ℓ + 2`; the cell holds the window's copy (`m = n = 0`); arithmetic in the private `arith_periodic` | 25 + 22 |
+| `unitPairsNull_diff_essNbhd_union` | the scratch proof (`data/fs131/k12a/leaves/LeafP.lean`) folded in unchanged | 37 |
+| `exists_nrWindow` | **another route than the plan's** (stage 1.4): one dense window averaged over its translates meeting `W` (private `lintegral_volume_translate_inter`, Tonelli on `ℂ × ℂ` with `Measure.prod_apply`, `prod_apply_symm`, `measurePreserving_sub_left`); `s₀ = max 1 (16/ε)`; side `ℓ = ⌈s⌉₊ + ⌈12 s/ε⌉₊ + 1`; arithmetic in the private `arith_nrWindow` | 85 + 37 + 33 |
+| `essNbhd ∅ = ∅` (example) | `simp [essNbhd, phi]` | 2 |
+
+Private helpers (none public; none another module needs): `mOne_ne_top`, `mOne_toReal_le_one`, `exists_dense_window` (a
+measurable 1-avoiding `T ⊆ squareWin 0 ℓ` with `(m₁ − δ) ℓ² ≤ |T|`, for every positive integer `ℓ`: the supremum, a measurable
+part of a near-optimal set by `NullMeasurableSet.exists_measurable_subset_ae_eq`, `exists_squareWin_dense`, translated),
+`arith_periodic`, `lintegral_volume_translate_inter`, `arith_nrWindow`. `exists_periodic_near_mOne` is now read by no proof in
+the count (`exists_nrWindow` no longer goes through it); it stays a theorem of the module, proved.
