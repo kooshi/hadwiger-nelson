@@ -261,3 +261,31 @@ declarations in a nested `section CountProof`. They were written against a scrat
 
 `ZeroEntropyNames` through `lake env lean`: 0 errors. One warning remains, the `sorry` of N7 (`logs/lean-zen-5.log`).
 N1 took about 45 minutes against the 1–2 hours priced at Stage 2.
+
+## Stage 3c — SAVED: N7, EN2-ZE, proved through `lake env lean`; lane N complete
+
+`exists_forall_exp_le_measureReal_nameCell`, by the deriver's six steps as the plan lays them out (KN7 § 5.4 N7). It
+was written against `data/fs131/in1l/work/ZEScratch.lean`, which elaborates over the joined tree's compiled statements,
+and moved verbatim. Each step is a typed `have`:
+
+1. `1 ≤ a` (`nonempty_of_isProbabilityMeasure`, `Fin 0` empty). `θ := min (η/2) (β/(8 log 2a))`, so
+   `θ log 2a ≤ β/8` and `θ ≤ η/2`.
+2. `exists_blockEntropy_le_mul` at `ε := (β/8) θ²` and `K := ⌈log 2/(β/8)⌉₊` gives `k`, with `(β/8) k ≥ log 2`. Then:
+   - `𝒢 :=` the heavy names at `e^{−(β/8)k}`;
+   - `g := e^{(β/8)k} ≥ 2`, and `#𝒢 ≤ g` by N2;
+   - `B :=` the light points, with `μ(B) ≤ θ²` by N3.
+3. N8 gives `μ(E) ≤ θ` for `E := {x | ∃ n, θ n < visits}`. The cancellation is in `ℝ≥0∞`, by
+   `ENNReal.mul_le_mul_iff_right`. `E` is measurable by the port's `measurableSet_excessiveOccupation`, accepted by
+   definitional unfolding.
+4. Off `E`, every name lies in `W_n :=` the words with at most `θ n` bad starts (N5). For `n ≥ N₁ := max k ⌈k/θ⌉₊`,
+   N1 and N4 give `#W_n ≤ e^{βn/2}`, using `g^{2n/k} = e^{2(β/8)n}` (`Real.exp_mul`).
+5. `S_n :=` the points with a name in `W_n` and a cell lighter than `e^{−βn}`. By N6, `μ.real S_n ≤ r^n` with
+   `r := e^{−β/2}`.
+6. The private `exists_geom_tail_le` gives `N₂` with `r^{N₀}/(1 − r) ≤ η/2`. With `N₀ := max N₁ N₂`,
+   `U := ⋃_n S_{n+N₀}` has `μ(U) ≤ η/2`: `measure_iUnion_le`, `ENNReal.ofReal_tsum_of_nonneg`, the geometric `tsum`.
+   Then `X′ := (E ∪ U)ᶜ` has `μ.real X′ ≥ 1 − θ − η/2 ≥ 1 − η`. For `x ∈ X′` and `n ≥ N₀`, `x ∉ S_n` with a name in
+   `W_n` gives the bound.
+
+`ZeroEntropyNames` through `lake env lean`: 0 errors, 0 warnings, no `sorry` (`logs/lean-zen-6.log`). N7 took about 25
+minutes. **Lanes H, C and N are proved.** In my four files the only `sorry`s left are the three leaves of
+`ChainAtTA` that are not mine: `entropySplit`, `zeroEntropyCarried` and `noRamifiedStableDyadic_of_tca`.

@@ -1,0 +1,6 @@
+slot: admitted in1l: mem 4 GiB (hard cap), cpus 4,5
+data/fs131/in1l/work/ZEScratch.lean:77:32: error(lean.unknownIdentifier): Unknown identifier `Outside.OAI015.measurableSet_excessiveOccupation`
+data/fs131/in1l/work/ZEScratch.lean:83:11: error(lean.unknownIdentifier): Unknown constant `ENNReal.mul_le_mul_left`
+data/fs131/in1l/work/ZEScratch.lean:121:22: error(lean.unknownIdentifier): Unknown constant `Real.exp_lt_one.mpr`
+seconds=6
+exit=1
