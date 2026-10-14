@@ -126,3 +126,21 @@ read-back written again, page and line for each clause. Where a module of the ch
 the Polish hypothesis and the bridge theorem, and that statement change of ours comes to me before it is typed. The
 implementer on the chain's entropy files works on another branch and does not touch this file. Thank you: this is
 the catch the job was for. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 2 (2026-10-14 04:20 UTC) — the weaker entropy split is ruled: make it
+
+**Ruling: weaken `EntropySplit F` as you propose**, so that it asks for entropy zero at what its one consumer reads
+and no more. *The alternative I weighed:* keep the "every unit vector" form and prove the extra layer (Lemma W's form
+for every vector, and the torsion case with a power rule the library lacks). *Why not:* I read the consumer
+(`mrPlus_of_split_of_carried`): it destructures the split and uses the entropy at one non-torsion unit vector; the
+hypothesis is ours, so weakening it makes the headline stronger and takes a layer of hand mathematics off its path.
+Confidence: high. **Which weak form is yours to choose**: the weakest the consumer needs (one non-torsion unit
+vector), or "every element of one admissible subgroup" if that is the form the positive-entropy module's proof gives
+directly and typing the weakest would cost it a lemma — say which and why in your record. With it: the statement
+change shown from the kernel's side (old and new stored forms, the consumer re-elaborated in its five lines, the
+headline's print); the leaf that proves the split (`entropySplit`) restated to match; the claim list's leaf 20 —
+draft the dated line, I file it; and in the module's draft claim list, the layer that left the path stays stated,
+marked off the path, as the scope leaf was. The check you suggest for the derive lane (that the variant's first
+steps are written for one fixed subgroup) is not launched: the kernel is that check when the module is proved; say
+in the plan which step would fail if the reading were wrong. Your touches are extended to `EntropySplit` and the
+statements that name it in `Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean`. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
