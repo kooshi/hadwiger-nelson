@@ -1,0 +1,8 @@
+slot: waiting (ledger 20 + 8 > budget 22 GiB)
+slot: waiting (ledger 22 + 8 > budget 22 GiB)
+slot: waiting (ledger 20 + 8 > budget 22 GiB)
+slot: admitted kc13-p19model: mem 8 GiB (hard cap), cpus 1
+p=19 n=361 |S|=20 maps=40 sha=055f031d1e69
+reps 182; pairs 16653; orbits 984
+ops 602989 [36.4s]
+slots 52370; identity model: HOLDS; total magnitude bits 129 [278.4s]
