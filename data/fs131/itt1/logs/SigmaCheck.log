@@ -1,0 +1,10 @@
+slot: admitted itt1: mem 4 GiB (hard cap), cpus 0,1
+@HadwigerNelson.Rigidity.TateModel.sigmaCompactSpace : ∀ {F : Subfield ℝ} [inst : NumberField ↥F],
+  SigmaCompactSpace (HadwigerNelson.Rigidity.SAdeleRing F)
+@HadwigerNelson.Rigidity.TateModel.measurableSet_image : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (D : HadwigerNelson.Rigidity.TateModel F) {s : Set (HadwigerNelson.Rigidity.SAdeleRing F)},
+  IsClosed s → MeasurableSet (⇑D.π '' s)
+@HadwigerNelson.Rigidity.TateModel.isOpenMap : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (D : HadwigerNelson.Rigidity.TateModel F), IsOpenMap ⇑D.π
+seconds=3
+exit=0
