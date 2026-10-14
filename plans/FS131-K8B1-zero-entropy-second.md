@@ -424,3 +424,21 @@ another's proofs). `LEAN.md`: "A kernel leaf priced from a plan's table is price
 - **`ARCHITECTURE.md`**: written by this job (six rows, § 3); § Trust: nothing new (no axiom, no purchase).
 - **`scripts/Axioms.lean`**: nothing to add while the modules are skeletons; at their landing,
   `zeroEntropyCarried_of_numberField` (and the moved `zeroEntropyCarried`) are records to audit.
+
+### 6.4 The checks at the hand-back
+
+- **Build 1** (`./scripts/build.sh` under the slot, `MEMMAX=10G BATCH=8`): `exit=0`, 254 of 254 batches, 7 modules rebuilt (the six
+  new ones and `Proofs`), 7 m 15 s (`logs/build1.log`). **Lint 1**: `exit=1` — `exists_heavy_nameCells` had an unused
+  `[NumberField F]` (a proved theorem, so the linter reads it; `lake env lean` does not), and `unitL_eq_ofUnitRing` drew the
+  build's unused-section-variable warning. Both now `omit [NumberField F] in` (`logs/lint.log`).
+- **Build 2**: `exit=0`, 254 of 254, 7 rebuilt, 7 m 36 s; the six new modules' only warnings are their `sorry`s (gate log
+  `build/gate/build/20261014T094320Z-2493748.log`; `logs/build2.log`). **Lint 2**: `exit=0`, `-- Linting passed for Proofs.`, 14
+  linters `Passed` (`logs/lint2.log`).
+- **Architecture** (`tools/check_architecture.py`): coverage `[1]` passes (376 rows, 376 modules, the six new ones included); `[2]`
+  reports one failure, inherited — `Rigidity/ZeroEntropyNames`' imports cell, fixed on `fs131-wdg` by FS131-IDG1 (FS131-KN9 § 5.3,
+  FS131-KT1 § 2.6); the six new rows pass (`logs/architecture.log`).
+- **The kernel's print** after the passes (`logs/KernelSigs2.log`): `zeroEntropyCarried_of_numberField : ∀ (F : Subfield ℝ)
+  [NumberField ↥F], ZeroEntropyCarried F`, axioms `[propext, sorryAx, Classical.choice, Quot.sound]`.
+- **The gate's other steps** (axiom audit, vacuity, assumptions, doubled names) are the landing's: these modules are skeletons and
+  print `sorryAx`, so `scripts/axioms.sh` reads them as debt by design. For the vacuity scan: every statement takes
+  `(D : TateModel F)`, read `GENERIC`, inhabited by `exists_tateModel` (lane T); no colouring binder is added.

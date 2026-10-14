@@ -146,6 +146,7 @@ theorem nameCell_subset {C : ℝ} (hC : D.IsGap C) {u : unitVectors F} {p : WPla
 
 end TateModel
 
+omit [NumberField F] in
 /-- **(iii′) Zero entropy gives heavy names** (EN2-L31, part (iii′)): EN2-ZE at `T = rot u`, which preserves `μ`, and the
 rate of the partition `P` is at most the entropy (`partitionEntropy_le_ksEntropy`), which is `0`. -/
 theorem exists_heavy_nameCells (μ : Measure (Dual F)) [IsProbabilityMeasure μ] (hμ : RotInv F μ) {u : unitVectors F}

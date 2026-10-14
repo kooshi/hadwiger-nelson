@@ -179,6 +179,8 @@ theorem one_le_prod_absAt_of_mem_stableIntegers {x : fieldI F} (hx : x ∈ stabl
 theorem ofUnitRing_mem_stableIntegers (r : unitRing F) : ofUnitRing F r ∈ stableIntegers F := by
   sorry
 
+omit [NumberField F] in
+/-- A unit vector read in `L` is its element of `R` read in `L`. -/
 theorem unitL_eq_ofUnitRing (u : unitVectors F) : unitL u = ofUnitRing F (uvRing u) := rfl
 
 /-- **A product-formula gap for the lattice of `D`** (X01D § 3.1, Lemma PF, with `C = 1/C_Λ`): a nonzero point of `Λ` that is
