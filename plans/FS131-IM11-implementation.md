@@ -86,3 +86,28 @@ Notation: `V_y f = f ∘ T y` (Koopman), `σ̂_f(y) = ⟨f, V_y f⟩`, `P_a(χ) 
 | A10 | `factorLaw_trace_null` | every trace spectral measure of the law of `c′` is null off `T + A` | T2 at `κ = c′`, each `e″_j` `𝒜`-measurable, `spectral_carried_iff` |
 | A11 | `equalAtUnits_of_not_neg` | `¬ (∫_{(T+A)ᶜ} Re χ(1) dσ < 0)` ⟹ `EqualAtUnits μ` | T7, T8, nonnegative summands |
 | A12 | `numberField_bot` | `⊥ : Subfield ℝ` is a number field | `Module.Finite` from `ℚ` onto `⊥` |
+
+## Stage 2 — SAVED: M11-S (`Rigidity/SpectralSubspace`) proved, 13 of 13 leaves
+
+All thirteen leaves are proved in the module (`lake env lean` with `-DautoImplicit=false -DrelaxedAutoImplicit=false
+-Dlinter.missingDocs=true`: exit 0, no message; `data/fs131/im11/logs/S-final.log`). The build and the axiom print come at
+the gate stage, once for the three modules.
+
+**Routes as planned**, with the planner's three scratch proofs folded in: `gram_sum_eq` (`Gram.lean`, verbatim);
+`exists_trigPoly_tendsto` (`Density.lean`: its helpers `evC`, `evC_add`, `evC_zero`, `star_evC`, `trigAlg`,
+`trigAlg_separatesPoints`, `trigC`, `trigC_apply`, `exists_trigC_near`, `integral_norm_sq_eq` made `private`);
+`exists_spectral_vector` (`SpectralVector.lean`: the primed helpers made `private` under their unprimed names —
+`trigPoly_sub`, `trigPoly_eq_sum`, `measurable_trigPoly`, `norm_trigPoly_le`, `integrable_err`,
+`tendsto_integral_norm_of_sq`, `trigPoly_mapDomain_add`). New private helpers: `inner_comp_comp_same` (each `V_y` preserves
+`⟨·,·⟩`, from `Lp.compMeasurePreservingₗᵢ`), `inner_comp_comp` (`⟨V_y f, V_x f⟩ = ⟨f, V_{x−y} f⟩`), `koopmanSum_mapRange`
+(a Koopman sum of mapped coefficients as a sum over `a.support`).
+
+**One route changed (mine to decide, said here):** `spectral_null_model` takes its `σ` from
+`exists_isSpectralMeasureOf` (Herglotz–Bochner on `ℤ`, M2a, standard three) instead of writing `½ δ_{χ₋}`, and shows
+`σ ≠ 0` from `∫ χ(0) dσ = ‖f‖² ≠ 0`. The statement is an existential and is unchanged; by uniqueness the `σ` it takes is
+`½ δ_{χ₋}`, so the docstring's description stays true. The action is written `T y i = i + y • 1` on `Fin 2` (`Fin 2` has
+no global `IntCast` at the pin; the docstring's `(· + n)` is this map).
+
+**Re-priced from the first two leaves** (brief, § Your lanes): `gram_sum_eq` 35 lines (the scratch proof), `posDef_koopman`
+13 lines plus 22 of two helpers, against the plan's 35 and 40–60 — at plan. **The lane:** 609 lines added (`git diff
+--stat`), against the plan's "500–700 lines left"; about 13 minutes from the first edit to the last leaf.
