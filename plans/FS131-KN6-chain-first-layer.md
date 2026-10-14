@@ -148,3 +148,68 @@ in three batches (`Entropy` with `Solenoid`; `PositiveEntropy`; `ChainAtTA`), so
 
 Nothing was flagged, so nothing was fixed at this stage. The one line went to the coordinator with the wall time and the
 memory figures as measured.
+
+## Stage 3a — SAVED: the domain pass (`debruijn-domain-modeling`, a fresh invocation, scoped to the four files)
+
+Run on every definition and headline of the four files, in the skill's order: simulate, reframe, search the shelf, read
+the ugliness, validate the seams. Both changes of form went to the coordinator before they were written and were accepted
+(Amendment 1 of the brief). Every changed file elaborates under `data/fs131/kn6/lean1.sh` (the lakefile's two
+`autoImplicit` options by flag; logs `data/fs131/kn6/logs/lean1-*.log`, each `exit=0`); the build is Stage 5's.
+
+### 3a.1 What it changed
+
+| # | declaration | old form | new form | reason |
+|---|---|---|---|---|
+| D1 | `Rigidity.partitionEntropy` (definition) | `liminf (fun n : ℕ => ENNReal.ofReal (blockEntropy μ T P (n + 1) / (n + 1))) atTop` | `⨅ n : ℕ, ENNReal.ofReal (blockEntropy μ T P (n + 1) / (n + 1))` | (a) the axiom concludes "entropy = 0", and the infimum is below the `liminf` for every measure and map with nothing to prove (`partitionEntropy_le_liminf`, new, proved by `iInf_le_liminf`): the axiom over the infimum is implied by the axiom over any reading of the limit, so the unverified direction of the read-back is the safe one by construction; (b) it is the release's form (`sInf {H_N / N}`), so `ksEntropy = measureEntropy` needs no invariance; (c) it is the form EN2-ZE is stated in ("If `inf_{n ≥ 1} H_n/n = 0`"). For an invariant probability measure the two are one number: the pinning theorem `tendsto_blockEntropy_div` (new, a leaf) |
+| D2 | `Rigidity.ksEntropy_id` (leaf) | `(μ : Measure X) [IsFiniteMeasure μ] : ksEntropy μ id = 0` | `(μ : Measure X) : ksEntropy μ id = 0` | the statement does not read finiteness (`μ.real` is finite; `H_n = H_1` for `n ≥ 1`); with a `sorry` body no linter would have said so |
+| D3 | `Rigidity.min_localBound_five_le_chromaticNumber_of_closed` (headline) | nine hypotheses, among them `(hScope : TCA F → NoRamifiedStableDyadic F)` | eight: `hScope` is gone; the proof reads `noRamifiedStableDyadic_of_three_le_localBound F (le_trans (by decide) h5)` | **a shorter route.** `Arith/UpperHalf` (landed on `main` today, joined in Stage 2) carries `IsRamified P` word for word as the binder `hram` of `UpperHalf.two_mem_of_conj_trivial` and `colorable_two_planeOver_of_ramified`. New and proved here: `IsRamified.isDyadic`; `noRamifiedStableDyadic_iff` (the word "dyadic" in the scope is free); `colorable_two_levelTarget_one_of_isRamified` (at a ramified stable prime `𝓞 ⧸ P` has characteristic 2 and trivial conjugation, so adjacency in the level-one target is `x − y = 1`, and `TwoColourResidue.exists_addMonoidHom_zmod_two_apply_one_ne_zero` colours it); `noRamifiedStableDyadic_of_three_le_localBound`. `ChainAtTA` gains the import `Arith/UpperHalf` |
+| D4 | `Rigidity.noRamifiedStableDyadic_of_tca` (leaf) | on the headline's path | **stated, off the headline's path**; docstring says so and gives its route (a colour class of that two-colouring holds at least half of `𝓞 ⧸ P`) | FS100-EXC in its own words stays a statement of the library (the hand record under row 121 cites it); the headline needs only the local-bound form |
+| D5 | the axiom's docstring, `Rigidity/PositiveEntropy` (no change to the statement) | — | four sentences: the entropy in clause (4) is the infimum form; for a preserved probability measure it is the textbook's number by `tendsto_blockEntropy_div`; the statement is implied by the printed one whether or not that is proved, because the entropy occurs once, in the conclusion, as "= 0"; a later edit that puts the entropy into a hypothesis of a declared statement reverses the direction and may not be made before the pinning theorem is proved | Amendment 1 (2) |
+
+`Rigidity/Entropy` also gains the import `Mathlib.Dynamics.Ergodic.MeasurePreserving` (the pinning theorem's hypothesis).
+
+### 3a.2 What it weighed and kept, with what decided
+
+- **`ksEntropy` stays this library's own definition; the release's `measureEntropy` is not put under the axiom.** The
+  first layer then builds over Mathlib alone and does not wait on the port, and the axiom is read against five short
+  definitions in one file. After D1 the two are the same number for every `μ` and `T` (a leaf of Stage 5), so nothing is
+  paid for having both.
+- **`ksEntropyOn` as the form on a sub-σ-algebra** (no separate conditional entropy): the one statement that reads it is
+  `ksEntropy_map`, true as typed with no invariance (the cells of a factor pull back to cells).
+- **`blockEntropy` in `ℝ` through `μ.real`; `ksEntropy` in `ℝ≥0∞`.** Entropy is read here only for a probability measure
+  the map preserves (checked at every occurrence: the axiom's clause (4), `haar_or_zero_entropy`, `EntropySplit`,
+  `ZeroEntropyCarried`); elsewhere it is a junk value, and the module's docstring now says so. `EntropySplit`'s `b • ρ`
+  with `ρ` a probability is what keeps it that way, and is kept.
+- **`TA F` as a `Set (Dual F)`, a product of two sets written by comprehension.** Against `Subgroup (Dual F)` (the join
+  of Mathlib's `CommGroup.torsion` and the range of `ψ ↦ exp ∘ ψ`): every consumer reads membership or the measure of the
+  set, the interface takes sets, the comprehension is the claim's sentence, and closure under multiplication is one lemma
+  away (`Subgroup.mem_sup`) for the one reader that may want it (M10). No change.
+- **`IsRamified P := ∀ x, conjO F x - x ∈ P.P`.** Against Mathlib's ramification index: both proofs that read the
+  predicate (FS100-EXC's matching; the two-colour theorem on `main`) consume "conjugation is the identity on `𝓞 ⧸ P`", and
+  `main` chose the same sentence independently. The equivalence with `e(P | P ∩ 𝓞_F) = 2` is a readability lemma owed to
+  module M9, not a change of definition. `IsDyadic` is kept so that the scope reads as the claim line does.
+- **`IsSolenoid` as a `Prop`-structure with instance-valued fields; `ZdAction` as a structure.** Against mixin classes and
+  `Multiplicative (Fin d → ℤ) →* …`: the axiom's hypothesis then reads as the page's sentence, with no `Multiplicative` in
+  the statement. Owed to M5/M6 as lemma API, not typed here: `α (-n) (α n x) = x`, `α (k • n) = (α n)^[k]`-forms,
+  measurability of `α n`.
+- **`IsErgodicOn` on strictly invariant sets** — Mathlib's own convention for one map (`PreErgodic`). As the axiom's
+  hypothesis this is formally the weaker property; for a countable group it is the textbook's (an almost invariant set
+  differs by a null set from the intersection of its translates). Listed for the second reader (Stage 6).
+- **`NoVirtuallyCyclicFactors`** quantifies over every closed invariant `Y ≠ ⊤`: the strongest reading of the hypothesis,
+  hence the weakest axiom; a connected group has no proper closed subgroup of finite index, so "non-trivial factor" has
+  one meaning.
+- **`MRPlus`, `EntropySplit`, `ZeroEntropyCarried`, `chainInterface`**: no change. `EntropySplit` asserts that a measure
+  with `IsHaarFourier` exists (even at `τ = 0`); that is module M4's theorem (or `BochnerHerglotz`'s), noted for the re-cut.
+
+### 3a.3 The seams
+
+- *Models.* `MRPlus`, `EntropySplit`: the zero measure. `ZeroEntropyCarried`: the point mass at the trivial character with
+  `(3 + 4i)/5` — every clause exercised (it is rotation-invariant, a probability, of entropy zero, and carried by `T + A`
+  because `1 ∈ TA F`); the two facts it needs are leaves of Stage 5 (`ksEntropy_dirac`, and in C0 "the point mass at `1`
+  is rotation-invariant"). The headline: `ℚ(√47)`, module M15, not in the library — the docstring now says so.
+- *The unsampled member.* `partitionEntropy` at a measure the map does not preserve: the infimum and the `liminf` differ
+  there and nothing reads it. `ksEntropy_map` at `k = 0` with `X` empty and `Y` not: no label map `Y → Fin 0` exists, and
+  both sides are `0` (a case split for its implementer, Stage 3b).
+- *The adversarial member for the axiom.* `J = 1`, `Λ = ⊤`, `G = ⊤` gives translation invariance (Haar); `G = ⊥` gives
+  entropy zero on `X` itself: the two ends of Theorem 1.2, as they should be. At the degenerate model the conclusion is
+  true (`J = 1`, `G = ⊤`, the one-point quotient).

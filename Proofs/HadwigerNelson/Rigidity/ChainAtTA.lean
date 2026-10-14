@@ -1,8 +1,9 @@
 import Proofs.HadwigerNelson.Arith.SpectralInputs
+import Proofs.HadwigerNelson.Arith.UpperHalf
 import Proofs.HadwigerNelson.Rigidity.Entropy
 
 /-!
-# The chain to five, run at `T + A`: its hypotheses as closed statements about a field (FS-131, job FS131-KN3; skeleton)
+# The chain to five, run at `T + A`: its hypotheses as closed statements about a field (FS-131, jobs FS131-KN3 and FS131-KN6; skeleton)
 
 **Read aloud, against the informal claim.** `SpectralChain` proves `χ(F²) ≥ min(L(F), 5)` over an *interface*: a set `E` of
 characters of `R = ℤ[U_F]`, a part `TA` and an entropy-like function are free data, and the project's hand results are
@@ -22,15 +23,20 @@ characters of `R = ℤ[U_F]`, a part `TA` and an entropy-like function are free 
 * **`ZeroEntropyCarried F`** — EF_F⁺ (FS100-EFP), at its own strength: zero entropy at *one* non-torsion unit vector puts a
   rotation-invariant probability measure on `T + A`.
 * **`NoRamifiedStableDyadic F`** — the scope of EF_F⁺ (`R_F = O′`; `LEDGER.md` row 100): no conjugation-stable prime of `F(i)`
-  above 2 on whose residue field conjugation acts trivially.
+  above 2 on whose residue field conjugation acts trivially. `IsRamified P` is the hypothesis of
+  `UpperHalf.two_mem_of_conj_trivial` and `UpperHalf.colorable_two_planeOver_of_ramified`, word for word; a ramified stable
+  prime is dyadic (`IsRamified.isDyadic`), so the scope says that no stable prime is ramified (`noRamifiedStableDyadic_iff`).
 
 **Proved here:** `mrPlus_of_split_of_carried` (EN1-FROM-TWO: PE-2 and EF_F⁺ give MR⁺, five lines, no R-U, no Haar-null
-clause); `five_le_chromaticNumber_of_mrPlus`; and **the headline with closed hypotheses**,
-`min_localBound_five_le_chromaticNumber_of_closed`.
+clause); `five_le_chromaticNumber_of_mrPlus`; **the scope from the local bound**,
+`noRamifiedStableDyadic_of_three_le_localBound` (at a ramified stable prime the level-one target is two-colourable,
+`colorable_two_levelTarget_one_of_isRamified`, so `L(F) ≤ 2`); and **the headline with closed hypotheses**,
+`min_localBound_five_le_chromaticNumber_of_closed` — eight of them: the scope is no longer one (FS131-KN6).
 
 **Leaves (`sorry`), each a module of the architecture in `plans/FS131-KN3-chain-plan.md`:** `measurableSet_TA`,
 `rot_preimage_TA`, `exists_nonTorsion_unitVector` (module C0); `entropySplit` (PE-2: modules M5–M7); `zeroEntropyCarried`
-(EF_F⁺: module M8); `noRamifiedStableDyadic_of_tca` (FS100-EXC: module M9).
+(EF_F⁺: module M8). **Stated and off the headline's path:** `noRamifiedStableDyadic_of_tca` (FS100-EXC in its own words,
+module M9), which the hand record under `LEDGER.md` row 121 cites and no theorem of this module reads.
 
 **Inhabitants.** `one_mem_TA`. `MRPlus`, `EntropySplit` and `ZeroEntropyCarried` quantify over measures, of which the zero
 measure and (given Herglotz–Bochner) Haar measure are instances. `NoRamifiedStableDyadic` **fails at `F = ℚ`** (the prime
@@ -124,6 +130,55 @@ def IsRamified (P : StablePrime F) : Prop := ∀ x : 𝓞 (fieldI F), conjO F x 
 `R_F = O′` (`LEDGER.md` row 100, Lemma C′). -/
 def NoRamifiedStableDyadic : Prop := ∀ P : StablePrime F, IsDyadic P → ¬ IsRamified P
 
+variable {F} in
+/-- A ramified stable prime is dyadic: `ī − i = −2i` lies in it and `i` is a unit (`UpperHalf.two_mem_of_conj_trivial`). -/
+theorem IsRamified.isDyadic {P : StablePrime F} (h : IsRamified P) : IsDyadic P :=
+  UpperHalf.two_mem_of_conj_trivial P h
+
+/-- The word "dyadic" in the scope is free: the scope says that no stable prime is ramified. -/
+theorem noRamifiedStableDyadic_iff : NoRamifiedStableDyadic F ↔ ∀ P : StablePrime F, ¬ IsRamified P :=
+  ⟨fun h P hP => h P hP.isDyadic hP, fun h P _ => h P⟩
+
+variable {F} in
+/-- **At a ramified stable prime the level-one target is two-colourable** (FS100-EXC's matching): conjugation is the
+identity on the field `𝓞 ⧸ P` of characteristic two, so `x` and `y` are adjacent exactly when `(x − y)² = 1`, that is
+`x − y = 1`, and an additive functional to `ZMod 2` that does not vanish at `1` is a proper colouring. -/
+theorem colorable_two_levelTarget_one_of_isRamified {P : StablePrime F} (h : IsRamified P) :
+    (levelTarget P 1).Colorable 2 := by
+  have e : P.P ^ 1 = P.P := pow_one _
+  haveI : (P.P ^ 1).IsPrime := by rw [e]; exact P.isMaximal.isPrime
+  haveI : CharP (𝓞 (fieldI F) ⧸ P.P ^ 1) 2 := by
+    refine CharTwo.of_one_ne_zero_of_two_eq_zero one_ne_zero ?_
+    have h2 : (2 : 𝓞 (fieldI F) ⧸ P.P ^ 1) = Ideal.Quotient.mk (P.P ^ 1) 2 := (map_ofNat _ 2).symm
+    rw [h2, Ideal.Quotient.eq_zero_iff_mem, e]
+    exact h.isDyadic
+  have hid : ∀ t, Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1) t = t := by
+    intro t
+    obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective t
+    rw [Ideal.quotientMap_mk, Ideal.Quotient.eq, e]
+    exact h a
+  have hone : ∀ t : 𝓞 (fieldI F) ⧸ P.P ^ 1, t * Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1) t = 1 → t = 1 := by
+    intro t ht
+    rw [hid] at ht
+    exact frobenius_inj _ 2 (by rw [frobenius_def, frobenius_def, one_pow, sq, ht])
+  obtain ⟨l, hl⟩ := exists_addMonoidHom_zmod_two_apply_one_ne_zero (𝓞 (fieldI F) ⧸ P.P ^ 1)
+  have hcol : (levelTarget P 1).Coloring (ZMod 2) :=
+    SimpleGraph.Coloring.mk (fun x => l x) fun {x y} hxy hc => by
+      rcases ((SimpleGraph.fromRel_adj _ x y).mp hxy).2 with hr | hr
+      · have h1 := hone _ hr
+        exact hl (by rw [← h1, map_sub, hc, sub_self])
+      · have h1 := hone _ hr
+        exact hl (by rw [← h1, map_sub, hc, sub_self])
+  simpa using hcol.colorable
+
+/-- **The scope from the local bound** (FS100-EXC, in the form the headline reads): a field whose local bound is at least
+`3` has no ramified stable prime — at one the level-one target is two-colourable, so `L(F) ≤ 2`. -/
+theorem noRamifiedStableDyadic_of_three_le_localBound (h : 3 ≤ localBound F) : NoRamifiedStableDyadic F := by
+  intro P _ hram
+  have h2 : localBound F ≤ 2 :=
+    (iInf_le _ P).trans (colorable_two_levelTarget_one_of_isRamified hram).chromaticNumber_le
+  exact absurd (h.trans h2) (by decide)
+
 /-- **MR⁺ from PE-2 and EF_F⁺** (FS131-EN1, EN1-FROM-TWO): for an invariant `τ` null on `T + A`, write `τ = a·m + b·ρ`; if
 `b ≠ 0` then `ρ` is null on `T + A` and, having entropy zero at a non-torsion unit vector, null off it — impossible for a
 probability measure; so `τ = a·m`. Reads no R-U, no `E`, no Haar-null clause. -/
@@ -165,19 +220,23 @@ theorem five_le_chromaticNumber_of_mrPlus [NumberField F] (hBH : BochnerHerglotz
 - `hBH`, `hL1` — Herglotz–Bochner and the invariant measure on closed sets (classical; to be formalized);
 - `hCount` — the count: T-C(A) at `S = ∅` in class form gives no colouring measure with spectrum on `T + A` (R88-TCA);
 - `hAP` — A⁺ at `S = ∅` from it (J45);
-- `hPE` — PE-2, the entropy split; `hEF` — EF_F⁺ in its scope; `hScope` — the class lies in the scope (FS100-EXC);
+- `hPE` — PE-2, the entropy split; `hEF` — EF_F⁺ in its scope;
 - `hCLS` — CLS; `hRow99` — row 99 at `L ≤ 4`.
-Every hypothesis is a sentence about `F`; none mentions a free set, a free function or R-U. -/
+Every hypothesis is a sentence about `F`; none mentions a free set, a free function or R-U. That the class lies in the
+scope is not a hypothesis: `5 ≤ L(F)` excludes a ramified stable prime (`noRamifiedStableDyadic_of_three_le_localBound`).
+The model of the hypotheses is `ℚ(√47)` (the instances' module, `data/fs131/kn3/claims-M15-instances.md`); none is in the
+library yet. -/
 theorem min_localBound_five_le_chromaticNumber_of_closed [NumberField F] (hBH : BochnerHerglotz (unitRing F))
     (hL1 : InvariantMeasureOnClosed F) (hCount : (chainInterface F).Count) (hAP : (chainInterface F).APlusOfR88)
     (hPE : EntropySplit F) (hEF : NoRamifiedStableDyadic F → ZeroEntropyCarried F)
-    (hScope : TCA F → NoRamifiedStableDyadic F) (hCLS : 5 ≤ localBound F → TCA F)
+    (hCLS : 5 ≤ localBound F → TCA F)
     (hRow99 : localBound F ≤ 4 → localBound F ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber) :
     min (localBound F) 5 ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber := by
   by_cases h5 : 5 ≤ localBound F
   · have hT := hCLS h5
     exact min_le_of_right_le (five_le_chromaticNumber_of_mrPlus F hBH hL1 (hAP (hCount hT))
-      (mrPlus_of_split_of_carried F hPE (hEF (hScope hT))))
+      (mrPlus_of_split_of_carried F hPE
+        (hEF (noRamifiedStableDyadic_of_three_le_localBound F (le_trans (by decide) h5)))))
   · have h4 : localBound F ≤ 4 := Order.le_of_lt_succ (not_le.mp h5)
     exact min_le_of_left_le (hRow99 h4)
 
@@ -193,8 +252,10 @@ with no ramified stable dyadic place. -/
 theorem zeroEntropyCarried [NumberField F] (h : NoRamifiedStableDyadic F) : ZeroEntropyCarried F := by
   sorry
 
-/-- **The class lies in the scope** (FS100-EXC): at a ramified stable dyadic prime the level-one target is a perfect
-matching, of independence ratio `1/2`, so T-C(A) fails. -/
+/-- **The class lies in the scope** (FS100-EXC, in its own words): at a ramified stable dyadic prime the level-one target
+is a perfect matching, of independence ratio `1/2`, so T-C(A) fails. **Off the headline's path** since FS131-KN6: the
+headline reads `noRamifiedStableDyadic_of_three_le_localBound`. Route: a colour class of the two-colouring
+`colorable_two_levelTarget_one_of_isRamified` is independent and holds at least half of `𝓞 ⧸ P`. -/
 theorem noRamifiedStableDyadic_of_tca [NumberField F] (h : TCA F) : NoRamifiedStableDyadic F := by
   sorry
 
@@ -202,15 +263,15 @@ theorem noRamifiedStableDyadic_of_tca [NumberField F] (h : TCA F) : NoRamifiedSt
 theorem mrPlus [NumberField F] (h : NoRamifiedStableDyadic F) : MRPlus F :=
   mrPlus_of_split_of_carried F (entropySplit F) (zeroEntropyCarried F h)
 
-/-- **The headline over the two classical theorems and the chain's four other hand results**: PE-2, EF_F⁺ and the scope
-are the theorems above. -/
+/-- **The headline over the two classical theorems and the chain's four other hand results**: PE-2 and EF_F⁺ are the
+theorems above. -/
 theorem min_localBound_five_le_chromaticNumber_closed [NumberField F] (hBH : BochnerHerglotz (unitRing F))
     (hL1 : InvariantMeasureOnClosed F) (hCount : (chainInterface F).Count) (hAP : (chainInterface F).APlusOfR88)
     (hCLS : 5 ≤ localBound F → TCA F)
     (hRow99 : localBound F ≤ 4 → localBound F ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber) :
     min (localBound F) 5 ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber :=
   min_localBound_five_le_chromaticNumber_of_closed F hBH hL1 hCount hAP (entropySplit F) (zeroEntropyCarried F)
-    (noRamifiedStableDyadic_of_tca F) hCLS hRow99
+    hCLS hRow99
 
 end
 

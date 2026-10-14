@@ -24,7 +24,8 @@ declared as an axiom**. The page:
 statement fixes a sense the page leaves to the reader, each chosen so that the axiom says no more than the page: "no
 virtually cyclic factors" is `ZdAction.NoVirtuallyCyclicFactors` (the literal phrase is met by no action; module docstring of
 `Rigidity/Solenoid`); the `µ_j` are probability measures (the page's "ergodic" and its factor `1/J`); the entropy on `X/G_j`
-is `ksEntropy` for the quotient σ-algebra, which for a solenoid is the Borel σ-algebra of `X/G_j`.
+is `ksEntropy` for the quotient σ-algebra, which for a solenoid is the Borel σ-algebra of `X/G_j` — the infimum form of
+the entropy, on the safe side of the page with nothing to prove (the axiom's docstring).
 
 **Model of its hypotheses** (`positive_entropy_rigidity_model`): the one-point solenoid with the trivial action of `ℤ²`
 and the point mass — degenerate, its clause on factors empty. The model that exercises every clause is PE-1′, a leaf of the
@@ -51,7 +52,15 @@ For a `ℤ^d`-action `α`, `d ≥ 2`, by automorphisms of a solenoid `X` with no
 ergodic probability measure `µ`: a finite-index `Λ` and mutually singular probability measures `ν 1, …, ν J` with
 `µ = (1/J) Σ ν j`, each `α_Λ`-ergodic, each invariant under translation by a closed `α_Λ`-invariant subgroup `G j`, permuted
 with their subgroups by every `αⁿ`, and each inducing on `X/G j` a measure for which every `αⁿ`, `n ∈ Λ`, has entropy zero.
-The page is quoted in the module docstring; the read-back is `plans/FS131-KN3-chain-plan.md` § The four items. -/
+The page is quoted in the module docstring; the read-back is `plans/FS131-KN3-chain-plan.md` § The four items.
+
+**The entropy in clause (4) is the infimum form**, `Rigidity.ksEntropy`: the supremum over finite measurable partitions
+of `inf_n H_n / n`. For a probability measure that the map preserves — which the measure induced on `X/G j` is, for
+`n ∈ Λ` — it is the textbook's number `lim_n H_n / n` (`Rigidity.tendsto_blockEntropy_div`, the pinning theorem). **This
+statement is implied by the printed one whether or not that theorem is proved**, because the entropy occurs here once, in
+the conclusion, and only as "`= 0`": the infimum is below every reading of the limit (`Rigidity.partitionEntropy_le_liminf`).
+**A later edit that puts the entropy into a hypothesis of this or of any declared statement reverses that direction and
+may not be made before the pinning theorem is proved.** -/
 axiom positive_entropy_rigidity {X : Type*} [AddCommGroup X] [TopologicalSpace X] [MeasurableSpace X] [BorelSpace X]
     (hX : IsSolenoid X) {d : ℕ} (hd : 2 ≤ d) (α : ZdAction d X)
     (hα : α.NoVirtuallyCyclicFactors) (μ : Measure X) (hμ : IsProbabilityMeasure μ) (herg : α.IsErgodicOn ⊤ μ) :
