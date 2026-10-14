@@ -208,6 +208,22 @@ ADAPTED_INSTANCE = {"§.BoundedMeasurable.covariance_mean_zero"}
 # reads IDENTICAL or UP-TO-INSTANCES, fatal otherwise.  Its control is the elaboration without the ascription, kept:
 # `data/fs131/ipb1/readback/laneC2/compare-noascription.out` (DIFFERENT).
 ADAPTED_ASCRIPTION = {"§.BoundedMeasurable.prod_act_project_lift"}
+# FS131-IPD1's rules (lane D: the coordinator's rulings of 2026-10-14 on `SpectralMeasure`, FS131-IPD1 Amendment 1),
+# each with its planted controls in `--self-test`:
+#   * ADAPTED_VALUE (ruling (1)): a definition's VALUE adapted at one token — `CommutingSpectral.algebra_commRing`, its
+#     `inferInstance` given the release's own instance `IsMulCommutative.instCommRing` with the `Prop` it asks proved
+#     explicitly — flagged ADAPTED when the read-back reads IDENTICAL or UP-TO-INSTANCES (the proof erased), fatal
+#     otherwise.  Its elaboration control (another instance path, `StarSubalgebra.commRingTopologicalClosure`, as the
+#     whole value) is kept under the label and reads DIFFERENT;
+#   * PROOF_ONLY (ruling (2)): a proof patch inside a definition's proof argument — `BoundedMeasurable.mulLp` — leaves
+#     the definition IDENTICAL and only the named auxiliary differing (AUX-DIFFERS); anything else is fatal;
+#   * PIN-DIFFERENCE (ruling (3), item 763 (3)'s class): `CommutingSpectral.algebra_commCStar`, same text and full type,
+#     its value elaborated through this pin's instances (the release's `IsMulCommutative.instCommCStarAlgebra` is not
+#     at v4.32.0); its note in PIN_NOTES;
+#   * TARGETS_HERE (plan § 4.3): the two target statements, which no table entry may touch, must read IDENTICAL.
+ADAPTED_VALUE = {"§.CommutingSpectral.algebra_commRing"}
+PROOF_ONLY = {"§.BoundedMeasurable.mulLp": "§.BoundedMeasurable.mulLp._proof_1"}
+TARGETS_HERE = {"§.proper_to_borel_weak", "§.Spectral.residual_fourier"}
 # rule -> (the declarations it may touch, the note its PIN-DIFFERENCE carries); each rule's flag is STATE[rule.lower()]
 RELEASE_REWRITES = {
     "COEFF": (COEFF_LEMMAS, "`Polynomial.coeff` is `R[X] → ℕ →₀ R` at the release's pin and `R[X] → ℕ → R` here; the "
@@ -216,7 +232,10 @@ RELEASE_REWRITES = {
                             "at `Prop` here; the same proposition by definition"),
 }
 PIN_DIFFERENCE = {"§.Spectral.instCommGroupDiscreteE", "§.Spectral.instCommGroupDiscreteF",
-                  "§.InvariantMean.instAddCommGroupPeriodGroup"}
+                  "§.InvariantMean.instAddCommGroupPeriodGroup", "§.CommutingSpectral.algebra_commCStar"}
+PIN_NOTES = {"§.CommutingSpectral.algebra_commCStar":
+             "its value is elaborated through this pin's instances (the release's goes through "
+             "`IsMulCommutative.instCommCStarAlgebra`, which v4.32.0 does not have); the text is the release's"}
 RULED = {"§.DifferenceFourier.differenceLaw_probability": ["MeasurableMul₂", "MeasurableInv"]}
 # label -> [(head constant, number of arguments here, position of the inserted argument)]
 ADAPTED = {}
@@ -576,7 +595,8 @@ def ruled_compare(rel_text, our_text, renamed=None, record=None, quiet=False, wr
             ro, oo = rel.get(owner), our.get(owner)
             if ro and oo and ro["kind"] == oo["kind"] == "def" and ro["levels"] == oo["levels"] \
                     and ro["type"] == oo["type"]:
-                verdict, why = "PIN-DIFFERENCE", f"`Monoid`'s parents changed between the pins; {owner}'s type is identical"
+                verdict, why = "PIN-DIFFERENCE", PIN_NOTES.get(owner, "`Monoid`'s parents changed between the pins") + \
+                    f"; {owner}'s type is identical"
             else:
                 verdict, why = "DIFFERENT", f"PIN-DIFFERENCE refused: {owner}'s kind, levels or full type differ"
         elif lab in STRIP and verdict == "DIFFERENT":
@@ -613,6 +633,21 @@ def ruled_compare(rel_text, our_text, renamed=None, record=None, quiet=False, wr
                                   "statement's own measurability; a proof, erased, so the erased prints agree")
             else:
                 fatal.append(f"ADAPTED_INSTANCE lists {t[1]}, which reads {t[3]}, not UP-TO-INSTANCES")
+        if t[1] in ADAPTED_VALUE:
+            if t[3] in ("IDENTICAL", "UP-TO-INSTANCES"):
+                out[k] = t[:3] + ("ADAPTED", t[4], t[5], f"ADAPTED_VALUE: the release's own instance named with the Prop "
+                                  f"it asks proved explicitly; the read-back reads {t[3]}")
+            else:
+                fatal.append(f"ADAPTED_VALUE lists {t[1]}, which reads {t[3]}")
+    vmap = {t[1]: t[3] for t in out}
+    for d, aux in PROOF_ONLY.items():
+        if d in vmap or aux in vmap:
+            if vmap.get(d) != "IDENTICAL" or vmap.get(aux) != "AUX-DIFFERS":
+                fatal.append(f"PROOF_ONLY: {d} reads {vmap.get(d)} and {aux} {vmap.get(aux)}, not IDENTICAL and "
+                             "AUX-DIFFERS")
+    for tg in sorted(TARGETS_HERE):
+        if tg in vmap and vmap[tg] != "IDENTICAL":
+            fatal.append(f"TARGETS_HERE: the target {tg} reads {vmap[tg]}, not IDENTICAL")
     for t in out:
         if t[1] in STRIP and t[3] in ("IDENTICAL", "UP-TO-INSTANCES"):
             fatal.append(f"STRIP lists {t[1]}, which does not differ (the list is stale)")
@@ -950,6 +985,27 @@ def self_test(label):
             expect(f"STRIP {lmem}: a head listed that does not occur in it")
         finally:
             STRIP[lmem] = ([], [_CE])
+    # FS131-IPD1's rules: each refuses what its ruling does not cover
+    for lab in sorted(ADAPTED_VALUE & set(rel)):
+        expect(f"ADAPTED_VALUE: {lab}'s value changed outright", plant(lab, "(c IsMulCommutative.instCommRing [",
+               "(c Planted.instCommRing [", fields=("value ", "evalue")), want_fatal="ADAPTED_VALUE")
+    for d, aux in sorted(PROOF_ONLY.items()):
+        if d in rel:
+            expect(f"PROOF_ONLY: {d}'s value changed", plant(d, "(c MeasureTheory.MemLp.toLp [",
+                   "(c Planted.toLp [", fields=("value ", "evalue")), want_fatal="PROOF_ONLY")
+        if aux in rel:
+            saved_po = dict(PROOF_ONLY)
+            PROOF_ONLY[d] = d + "._proof_99"
+            try:
+                expect(f"PROOF_ONLY: the auxiliary named wrongly ({d}._proof_99)", want_fatal="PROOF_ONLY")
+            finally:
+                PROOF_ONLY.clear()
+                PROOF_ONLY.update(saved_po)
+    for tg in sorted(TARGETS_HERE & set(rel)):
+        expect(f"TARGETS_HERE: {tg}'s full type changed in an instance argument",
+               plant(tg, "(c Nat.instMulZeroClass [", "(c Planted.instMulZeroClass [", fields=("type  ",))
+               if "(c Nat.instMulZeroClass [" in rel[tg]["type"] else
+               plant(tg, "(c Complex [", "(c Planted.Complex [", fields=("type  ",)), want_fatal="TARGETS_HERE")
     for owner in sorted(PIN_DIFFERENCE):
         if owner in rel:
             expect(f"PIN-DIFFERENCE: the full type of {owner} changed",

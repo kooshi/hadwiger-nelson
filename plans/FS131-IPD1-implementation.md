@@ -305,3 +305,84 @@ file of a split run showed every constant started. The run that worked is the sa
 reproduce them. The comparator: FS131-IPA1's `tools/fs131_ipa1_readback_port.py` with this job's rules (ADAPTED_VALUE,
 PROOF_ONLY, the `algebra_commCStar` PIN-DIFFERENCE with its note, TARGETS_HERE), each with planted controls. A first
 comparison was killed at its 14 GiB cap; the second runs at 20 GiB, alone on the machine (result: 5.4).
+
+**5.4 The comparison** (`compare.out`, `verdicts.tsv`, `instance-constants.txt`, 128 constants recorded; the 20 GiB run
+finished): **`READBACK FAILED` — 13 failing, 1 fatal, of 524.** What passed: definitions 62 IDENTICAL, 22
+UP-TO-INSTANCES, 1 ADAPTED; lemmas 161 IDENTICAL, 77 UP-TO-INSTANCES; auxiliaries 111 IDENTICAL, 21 UP-TO-INSTANCES,
+1 PIN-DIFFERENCE, 26 AUX-ABSENT and 29 AUX-DIFFERS (counted). **The three rulings of Amendment 1 hold as ruled:**
+`algebra_commRing` is ADAPTED (UP-TO-INSTANCES, ADAPTED_VALUE); `mulLp` is IDENTICAL and `mulLp._proof_1` AUX-DIFFERS
+(PROOF_ONLY: no fatal); `algebra_commCStar` is UP-TO-INSTANCES (its value through `NormedCommRing.mk` here,
+`IsMulCommutative.instCommCStarAlgebra` there), with `_proof_3` PIN-DIFFERENCE. **The transfer
+`proper_to_borel_weak` is IDENTICAL to the release's statement.** What is open, each item with the class it falls in:
+1. `ConvexAverage.setIntegral_bm` and `setIntegral_of_limit` — "EQSET rewrote a constant it does not list": `s =ᵐ[μ]
+   t` of sets, FS131-IPB1's EQSET class (standing word, item 772). Owed: the two added to `EQSET_LEMMAS`, then
+   PIN-DIFFERENCE (EQSET).
+2. `Spectral.instAddCommGroupRot` (from `def Rot := Additive K deriving AddCommGroup`) and 9 of its `_proof_n` — differ
+   by its own `_aux_n`, the `Monoid` parents class of item 763 (3), as `instCommGroupDiscreteE`. Owed: the instance added
+   to `PIN_DIFFERENCE` (its full type identical, which the rule requires).
+3. `CommutingSpectral.generator_unitary` — its statement's instance path passes through the release's own
+   `algebra_commRing` there and not here (UP-TO-INSTANCES refused, since the differing constants include a release
+   declaration). **Not ruled; for the coordinator**: both paths give the monoid of `algebra U`, whose data is the
+   closure's ring at both pins. The evidence would be a check at this pin that the two instance terms agree by `rfl`,
+   which was not run.
+4. **FATAL `TARGETS_HERE`: `Spectral.residual_fourier` reads UP-TO-INSTANCES against the release's statement, not
+   IDENTICAL.** The differing constants are Mathlib's alone (`CommSemiring.toSemiring Complex.instCommSemiring
+   Semifield.toCommSemiring SubsemiringClass.toCommSemiring` there, `DivisionSemiring.toSemiring
+   Semifield.toDivisionSemiring` here): the hierarchy reflow. Against the density branch's declared axiom at this pin
+   it is IDENTICAL (4.7), and FS133-IA1's leaf R checked that axiom's type against the release's rebuilt statement by
+   `Eq.refl`. My rule asked for more than the plan does (§ 4.4 step 4 allows INSTANCES-ONLY with leaf R).
+   **For the coordinator**: whether the target rule is IDENTICAL-or-UP-TO-INSTANCES with Mathlib's constants only.
+Not run: the comparator's `--self-test` on lane D with the new rules, the ADAPTED_VALUE elaboration control (the
+variant module is written: `build/ipd1/ctlsrc/…/OAI158SpectralMeasure.lean`, with `commRingTopologicalClosure` as the
+whole value), and level one for lane D. The comparator's new rules are committed untested by their self-test.
+
+## Stage 6 — SAVED: what the landing reads (drafts; none of these files is this job's)
+
+- **`CLAUDE.md` § Trust ledger** (the sentence "the current audit reads 7531 clean and 5 declared purchases, and 38
+  imported (and 28 axiom-free; 7,602 records …)"): *"the current audit reads 8961 clean and 5 declared purchases, and 26
+  imported (and 32 axiom-free; 9,024 records at the landing of the port of `[OAIMath2026]`'s transfer proof,
+  FS131-IPD1)"*; the following sentence: the library declares **two** outside axioms, `StandingFive.kloosterman_bound`
+  (twenty imported records) and `Outside.OAI158.no_proper_five_coloring` (six); `Outside.OAI158.proper_to_borel_weak`
+  is the release's theorem, its proof ported (31 modules `Outside/OAI158Basic` … `OAI158BorelTransfer`), on the
+  standard three, and its twelve former records are CLEAN. The digest line: `axioms=2 rests=27 named=19 inline=14
+  outside=7 ours=21 open=5 takes=102 mentions=1` (5.2), after `./scripts/assumptions.sh --write-ledger` retires the
+  twelve `RESTS … proper_to_borel_weak` lines of `scripts/assumptions-ledger.txt`.
+- **`CLAUDE.md` § The gate**: `declarations=17785 refutations-skipped=232 sites=1454`, `vacuous=0 stale=0 declared=3
+  witnessed=38 generic=1411 unknown=2` (the landing reads the four new skipped refutations).
+- **`CLAUDE.md` § The aim, § Where the problem stands, the Frontier**: every "on the declared outside theorem
+  `Outside.OAI158.proper_to_borel_weak`" (the collapse `χ(ℝ²) = χ_m⁰(ℝ²)`, the criterion `7 ≤ χ(ℝ²) ⟺ lim µ₆(ε) < 1`, `χ(ℝ²)
+  = χ_m(ℝ²)`, the half of the disc criterion toward seven) becomes "on the standard three axioms (the transfer is a
+  theorem of the port since FS131-IPD1)"; "This library holds `6 ≤ χ(ℝ²) ≤ 7` on one declared outside theorem" stays
+  (that one is H).
+- **`ARCHITECTURE.md` § Trust**: the row of `Outside.OAI158.proper_to_borel_weak` (`Outside/OAI158`) removed, or rewritten
+  as "no longer a purchase: a theorem of `Outside/OAI158BorelTransfer` since FS131-IPD1".
+- **`scripts/axioms-controls.txt`** (its baseline counts read the library's state): `COUNT imported=38` → `26`,
+  `declared=3` → `2`, `library=3` → `2`, the `old` digests' texts and `banner_dropped`'s consequences as its header
+  describes, and the header's sentence on three declared imports. `./scripts/axioms.sh --self-test` fails on the baseline
+  until then (not run here).
+- **`LEAN.md`**, gathered: plan § Drafts F1 (the adaptation line; the whole-file line) and F2 (three § Searching
+  bullets); FS131-IPA1's ruled-statement-change class; FS131-IPB1's COEFF, CLASS_PARAMS, EQSET, the ascription and
+  instance adaptations, inductive constructors; and this job's —
+  (a) § Assumptions, after the adaptation line: *"An adaptation may stand in a definition's value: the release's own
+  instance named with the `Prop` it asks proved explicitly, where this pin lacks the instance that proves it
+  (`CommutingSpectral.algebra_commRing`); a proof patch inside a definition's proof argument goes under the same table
+  key, and the read-back requires the definition IDENTICAL and only its auxiliary differing (`BoundedMeasurable.mulLp`;
+  FS131-IPD1)."*
+  (b) § Searching — Lean: *"`#eval` holds what the evaluated code prints in a captured stdout and emits it as one message
+  when it ends, so a dump of hundreds of MB never finishes and a flush shows nothing: re-point stdout at a file for the
+  loop (`IO.setStdout (IO.FS.Stream.ofHandle h)`), or write to a handle (`data/fs131/ipd1/readback/laneD/
+  ReleaseDumpFile.lean`). A tree print of a term is its size as a tree, and a definition's value can be millions of nodes
+  (`LabelModel.representation`: 5.5 million) (FS131-IPD1)."*
+  (c) § Searching — Lean: *"A private declaration of another module is nameable in a `section` that opens it with
+  Batteries' `open private <name> from <module>`, in the library's import closure; `#print axioms` then prints the record
+  under its full private name (`scripts/Axioms.lean`'s port block; FS131-IPD1)."*
+  (d) § Building: *"A module whose upstream must change before it can elaborate (a port whose name an upstream axiom
+  holds) is elaborated in a symbolic copy of the compiled library (`cp -as` of `.lake/build/lib/lean/Proofs`), each
+  module compiled there written over its link after the link is removed, and the copied-from oleans checked unchanged by
+  hash (`data/fs131/ipd1/farm2-run.sh`; FS131-IPD1)."*
+- **`ARCHITECTURE.md` § 3**: written by this job (4.5).
+- **The landing's tree needs**: this branch (`fs131-wpl`) merged onto `main`; a rebuild of the downstream of
+  `Outside/OAI158` (this tree's `.lake/build` holds it, 58 modules, gated by this job's build); the gate in full, with
+  `scripts/assumptions-ledger.txt` rewritten (`--write-ledger`) and `scripts/axioms-controls.txt` brought to the new
+  counts; the read-back items of 5.4; and, at the density equality's join, steps 1–9 of plan § 4.5 under the ruling of
+  4.7.
