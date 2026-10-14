@@ -1,0 +1,20 @@
+slot: admitted ijn1e: mem 4 GiB (hard cap), cpus 0,1
+data/fs131/ijn1/work/M23.lean:25:23: error(lean.unknownIdentifier): Unknown constant `Nat.mul_eq_one.mp`
+data/fs131/ijn1/work/M23.lean:25:11: error: Tactic `rcases` failed: `x✝ : ?m.263` is not an inductive datatype
+case refine_2
+x✝ : mulTwoThree.IsVirtuallyCyclic
+n : Fin 2 → ℤ
+Λ : AddSubgroup (Fin 2 → ℤ)
+hΛ : Λ.FiniteIndex
+hm : ∀ m ∈ Λ, ∃ k, mulTwoThree.toFun m = mulTwoThree.toFun (k • n)
+hN : Λ.index ≠ 0
+k₁ : ℤ
+hk₁ : mulTwoThree.toFun (Λ.index • ![1, 0]) = mulTwoThree.toFun (k₁ • n)
+k₂ : ℤ
+hk₂ : mulTwoThree.toFun (Λ.index • ![0, 1]) = mulTwoThree.toFun (k₂ • n)
+e₁ : 2 ^ (Λ.index • ![1, 0]) 0 * 3 ^ (Λ.index • ![1, 0]) 1 = 2 ^ (k₁ • n) 0 * 3 ^ (k₁ • n) 1
+e₂ : 2 ^ (Λ.index • ![0, 1]) 0 * 3 ^ (Λ.index • ![0, 1]) 1 = 2 ^ (k₂ • n) 0 * 3 ^ (k₂ • n) 1
+⊢ False
+data/fs131/ijn1/work/M23.lean:58:8: warning: declaration uses `sorry`
+seconds=3
+exit=1

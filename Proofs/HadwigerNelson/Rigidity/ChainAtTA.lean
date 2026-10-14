@@ -3,7 +3,7 @@ import Proofs.HadwigerNelson.Arith.UpperHalf
 import Proofs.HadwigerNelson.Rigidity.Entropy
 
 /-!
-# The chain to five, run at `T + A`: its hypotheses as closed statements about a field (FS-131, jobs FS131-KN3 and FS131-KN6; lane C proved by FS131-IN1L; three leaves `sorry`)
+# The chain to five, run at `T + A`: its hypotheses as closed statements about a field (FS-131, jobs FS131-KN3 and FS131-KN6; lane C proved by FS131-IN1L; no `sorry` since FS131-IJN1)
 
 **Read aloud, against the informal claim.** `SpectralChain` proves `χ(F²) ≥ min(L(F), 5)` over an *interface*: a set `E` of
 characters of `R = ℤ[U_F]`, a part `TA` and an entropy-like function are free data, and the project's hand results are
@@ -36,11 +36,14 @@ clause, and no leaf: the non-torsion rotation comes with the split); `entropySpl
 `min_localBound_five_le_chromaticNumber_of_closed` — eight of them: the scope is no longer one (FS131-KN6).
 
 **Proved by FS131-IN1L** (module C0): `measurableSet_TA`, `rot_preimage_TA`, `exists_nonTorsion_unitVector`.
-**Leaves (`sorry`), each a module of the architecture in `plans/FS131-KN3-chain-plan.md`:** `entropySplit` (PE-2 at one
-non-torsion rotation: modules M5–M7); `zeroEntropyCarried` (EF_F⁺: module M8). **Stated and off the headline's path:** `noRamifiedStableDyadic_of_tca`
-(FS100-EXC in its own words, module M9), which the hand record under `LEDGER.md` row 121 cites and no theorem of this module
-reads; and `EntropySplitEvery`, PE-2 at every rotation (its proof's extra layer — Lemma W for every vector and the torsion
-case — is in module M7's draft claim list, marked off the path).
+**Proved by FS131-IJN1** (lane M9-S): `noRamifiedStableDyadic_of_tca` (FS100-EXC in its own words, module M9), which the
+hand record under `LEDGER.md` row 121 cites and the count reads (`Rigidity/CountResidue`). **Moved downstream** at the
+chain's join (FS131-IJN1; inventory items 761 and 811): the leaves `entropySplit` (PE-2 at one non-torsion rotation, modules
+M5–M7) and `zeroEntropyCarried` (EF_F⁺, module M8), with `mrPlus` and `min_localBound_five_le_chromaticNumber_closed`, are
+in `Rigidity/ZeroEntropyClosed`, downstream of their proofs; the headline with every proved hypothesis discharged is
+`Rigidity/ChainHeadline`'s. **Stated and off the headline's path:** `EntropySplitEvery`, PE-2 at every rotation (its
+proof's extra layer — Lemma W for every vector and the torsion case — is in module M7's draft claim list, marked off the
+path).
 
 **Inhabitants.** `one_mem_TA`; `zeroEntropyCarried_model` (the point mass at the trivial character meets every
 hypothesis of `ZeroEntropyCarried`'s clause, and its conclusion, at every non-torsion vector). `MRPlus`, `EntropySplit` and `ZeroEntropyCarried` quantify over measures, of which the zero
@@ -541,40 +544,47 @@ theorem min_localBound_five_le_chromaticNumber_of_closed [NumberField F] (hBH : 
   · have h4 : localBound F ≤ 4 := Order.le_of_lt_succ (not_le.mp h5)
     exact min_le_of_left_le (hRow99 h4)
 
-/-! ## The two deductions and the scope, as closed statements — the leaves under MR⁺ -/
-
-/-- **PE-2 at one non-torsion rotation** (FS100-PE2; [hand], X02D and X02V; the variant EN2-PE2-MAX of
-`plans/FS131-EN2-derivation.md` § 5.2): the entropy split holds over every real number field, with the entropy zero at a
-rotation of one admissible `Γ`. Rests on `Rigidity.positive_entropy_rigidity` through `Rigidity.haar_or_zero_entropy` on
-the pieces `M̂`; needs no Lemma W for every vector and no torsion case (FS131-KN7). -/
-theorem entropySplit [NumberField F] : EntropySplit F := by
-  sorry
-
-/-- **EF_F⁺** (FS100-EFP; [hand], X01D, X12B, FS105-B): zero entropy is carried by `T + A`, over every real number field
-with no ramified stable dyadic place. -/
-theorem zeroEntropyCarried [NumberField F] (h : NoRamifiedStableDyadic F) : ZeroEntropyCarried F := by
-  sorry
+/-! ## The scope from T-C(A) -/
 
 /-- **The class lies in the scope** (FS100-EXC, in its own words): at a ramified stable dyadic prime the level-one target
-is a perfect matching, of independence ratio `1/2`, so T-C(A) fails. **Off the headline's path** since FS131-KN6: the
-headline reads `noRamifiedStableDyadic_of_three_le_localBound`. Route: a colour class of the two-colouring
-`colorable_two_levelTarget_one_of_isRamified` is independent and holds at least half of `𝓞 ⧸ P`. -/
+is a perfect matching, of independence ratio `1/2`, so T-C(A) fails. Read by the count (`Rigidity/CountResidue`); the
+headline's own scope step reads `noRamifiedStableDyadic_of_three_le_localBound` (FS131-KN6). Proved (FS131-IJN1): the two
+colour classes of `colorable_two_levelTarget_one_of_isRamified` are independent and cover `𝓞 ⧸ P`, so one holds at least
+half of it, against T-C(A)'s `c < 1/4` at level one; an infinite quotient has `Nat.card` zero, and one point is
+independent. -/
 theorem noRamifiedStableDyadic_of_tca [NumberField F] (h : TCA F) : NoRamifiedStableDyadic F := by
-  sorry
-
-/-- **MR⁺(F)**, for a real number field with no ramified stable dyadic place. -/
-theorem mrPlus [NumberField F] (h : NoRamifiedStableDyadic F) : MRPlus F :=
-  mrPlus_of_split_of_carried F (entropySplit F) (zeroEntropyCarried F h)
-
-/-- **The headline over the two classical theorems and the chain's four other hand results**: PE-2 and EF_F⁺ are the
-theorems above. -/
-theorem min_localBound_five_le_chromaticNumber_closed [NumberField F] (hBH : BochnerHerglotz (unitRing F))
-    (hL1 : InvariantMeasureOnClosed F) (hCount : (chainInterface F).Count) (hAP : (chainInterface F).APlusOfR88)
-    (hCLS : 5 ≤ localBound F → TCA F)
-    (hRow99 : localBound F ≤ 4 → localBound F ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber) :
-    min (localBound F) 5 ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber :=
-  min_localBound_five_le_chromaticNumber_of_closed F hBH hL1 hCount hAP (entropySplit F) (zeroEntropyCarried F)
-    hCLS hRow99
+  intro P _ hram
+  obtain ⟨c, hc, hb⟩ := h P
+  obtain ⟨C⟩ := colorable_two_levelTarget_one_of_isRamified hram
+  -- a colour class is independent
+  have hind : ∀ (i : Fin 2) (s : Finset (𝓞 (fieldI F) ⧸ P.P ^ 1)), (∀ x ∈ s, C x = i) →
+      (levelTarget P 1).IsIndepSet (s : Set (𝓞 (fieldI F) ⧸ P.P ^ 1)) := by
+    intro i s hs x hx y hy _ hadj
+    exact C.valid hadj ((hs x hx).trans (hs y hy).symm)
+  rcases finite_or_infinite (𝓞 (fieldI F) ⧸ P.P ^ 1) with hQ | hQ
+  · -- the two colour classes cover the residue field, so one holds at least half of it
+    classical
+    haveI := Fintype.ofFinite (𝓞 (fieldI F) ⧸ P.P ^ 1)
+    set s0 := Finset.univ.filter fun x : 𝓞 (fieldI F) ⧸ P.P ^ 1 => C x = 0
+    set s1 := Finset.univ.filter fun x : 𝓞 (fieldI F) ⧸ P.P ^ 1 => ¬ C x = 0
+    have hsum : s0.card + s1.card = Nat.card (𝓞 (fieldI F) ⧸ P.P ^ 1) := by
+      rw [Finset.card_filter_add_card_filter_not, Finset.card_univ, Nat.card_eq_fintype_card]
+    have h0 := hb 1 le_rfl s0 (hind 0 s0 fun x hx => (Finset.mem_filter.mp hx).2)
+    have h1 := hb 1 le_rfl s1 (hind 1 s1 fun x hx => by
+      have hx0 := (Finset.mem_filter.mp hx).2
+      have : ∀ j : Fin 2, ¬ j = 0 → j = 1 := by decide
+      exact this _ hx0)
+    have hpos : (0 : ℝ) < Nat.card (𝓞 (fieldI F) ⧸ P.P ^ 1) := by exact_mod_cast Nat.card_pos
+    have hsumR : (s0.card : ℝ) + s1.card = Nat.card (𝓞 (fieldI F) ⧸ P.P ^ 1) := by exact_mod_cast hsum
+    have hlt : c * Nat.card (𝓞 (fieldI F) ⧸ P.P ^ 1) < 1 / 4 * Nat.card (𝓞 (fieldI F) ⧸ P.P ^ 1) :=
+      mul_lt_mul_of_pos_right hc hpos
+    linarith
+  · -- an infinite quotient has `Nat.card` zero, and a single point is independent
+    have h0 := hb 1 le_rfl {0} (by
+      rw [Finset.coe_singleton]
+      exact Set.pairwise_singleton _ _)
+    rw [Nat.card_eq_zero_of_infinite, Finset.card_singleton] at h0
+    norm_num at h0
 
 end
 
