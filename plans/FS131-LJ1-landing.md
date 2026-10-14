@@ -508,3 +508,39 @@ standard three alone: clause (a) whole, including the lower bound of four; claus
 the prime to the colouring; NF4-S6, S7, S9 at level one; the dictionary J1–J4; the two dyadic statements. On the
 standard three and Weil's bound: clause (b) as claimed and without `hnb`, and row 99 in its four forms, with the model
 `exists_maximal_card_nine_sqrt_three`. Twelve records in all, and one private helper.
+
+## Stage 7 — SAVED (FS131-LJ1): before the pass — `main` merged once more, the two planted controls, the slots
+
+**`main` merged in again** (`data/fs131/lj1/merge-2.out`): it had moved to `3a6f8876b`. The eleven paths it brought are
+all under `data/` and `plans/`, among them inventory items 723–731 and the claim list's dated line of 03:30 UTC (this
+job's read-aloud, filed in its words). The trial was clean (`merge-2-trial.out`), and the merge was by hash and
+automatic (`457cd8e70`), so the commit the gate reads holds them. The coordinator's item 731 says "no reply sent — it
+goes on unless told": the read-aloud's two findings do not stop the pass.
+
+**The zero-`sorry` search's plant** (`data/fs131/lj1/sorry-plant.sh`, FS131-LU1's pointed at
+`Instances/UpperHalfCorollaries`; `sorry-plant.out`). A theorem with a `sorry` body was appended, never built and never
+committed. The narrow search found 0 lines before and 1 with the plant: "PLANT FIRED: the search finds the planted
+sorry and nothing else". The module was restored by `git checkout` ("RESTORED", digest `1488efc2…` before and after);
+the search then found 0 lines again, and 0 tracked files were modified.
+
+**The lint's negative control** (`data/fs131/lj1/lint-plant.sh`; `lint-plant-run.out`). `theorem zz_lj1_lint_plant
+[Nonempty ℕ] : (1 : ℕ) = 1 := rfl` was planted at the end of `Instances/UpperHalfCorollaries.lean`, never committed, and
+built: "build: OK — 249 of 249 batches, 5 module(s) rebuilt, **0 module(s) with warnings**, 7m54s"
+(`lint-plant-build.log`). The five were the torsion module, whose docstring stage 5 edited; the two modules downstream
+of it; the planted module; and the root. The build's own linters do not see the plant. Then the guarded lint: **exit 1**,
+"`unusedArguments`: (2/2) Failed with 1 messages", "`@zz_lj1_lint_plant` 1 unused argument", with `synTaut` failing on
+the same plant (`lint-plant.log`). The file was restored by `git checkout` under a trap: "RESTORED: the module is the
+text it was", the plant's name 0 times, "tracked files modified: 0". Nothing ran beside the plant. The pass's build
+recompiles the module and the root from the restored text.
+
+**The drafts' slots, read on `main` at `3a6f8876b`** (`data/fs131/lj1/drafts-slots.py`, FS131-LU1's with this
+landing's slots; `drafts-slots.out`): 21 of 21 found exactly once, the control absent. One slot first occurred twice: the
+bibliography's sentence on `χ(ℚ(√11)²) ≤ 4`, which two rows carry. Its slot now includes the words before it in the
+`[Fischer1990]` row.
+
+**What stands for "nothing else was recompiled"**, since this job copied no compiled file. The joining job copied the
+whole `.lake/build` of `fs131-wnf`, the tree whose gate passed last (its stage 2). The pass therefore compares every
+`.olean` of this tree with the last landing's manifest of that tree, `data/fs131/lu1/olean-manifest.txt`
+(`data/fs131/lj1/olean_against_lu1.py`, with four plants). Only the last landing's three modules and the root may
+differ, because that landing recompiled them after making its manifest; and only the line's six modules may be new. It
+also dumps the last two landings' modules as stored and compares them with those landings' own final dumps.
