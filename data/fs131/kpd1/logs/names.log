@@ -1,0 +1,51 @@
+slot: admitted kpd1: mem 4 GiB (hard cap), cpus 4,5
+@ext_of_forall_mem_subalgebra_integral_eq_of_polish : ∀ {E : Type u_1} {𝕜 : Type u_2} [inst : RCLike 𝕜]
+  [inst_1 : MeasurableSpace E] [inst_2 : TopologicalSpace E] [PolishSpace E] [BorelSpace E] {P P' : Measure E}
+  [IsFiniteMeasure P] [IsFiniteMeasure P'] {A : StarSubalgebra 𝕜 (BoundedContinuousFunction E 𝕜)},
+  (StarSubalgebra.map (BoundedContinuousFunction.toContinuousMapStarₐ 𝕜) A).SeparatesPoints →
+    (∀ g ∈ A, ∫ (x : E), g x ∂P = ∫ (x : E), g x ∂P') → P = P'
+@Measure.haarMeasure : {G : Type u_1} →
+  [inst : Group G] →
+    [inst_1 : TopologicalSpace G] →
+      [IsTopologicalGroup G] →
+        [inst : MeasurableSpace G] → [BorelSpace G] → TopologicalSpace.PositiveCompacts G → Measure G
+@integral_mul_left_eq_self : ∀ {G : Type u_1} {E : Type u_2} [inst : MeasurableSpace G] [inst_1 : NormedAddCommGroup E]
+  [inst_2 : NormedSpace ℝ E] {μ : Measure G} [inst_3 : Group G] [MeasurableMul G] [μ.IsMulLeftInvariant] (f : G → E)
+  (g : G), ∫ (x : G), f (g * x) ∂μ = ∫ (x : G), f x ∂μ
+@Measure.IsOpenPosMeasure.open_pos : ∀ {X : Type u_1} {inst : TopologicalSpace X} {m : MeasurableSpace X}
+  {μ : Measure X} [self : μ.IsOpenPosMeasure] (U : Set X), IsOpen U → U.Nonempty → μ U ≠ 0
+ClosedSubgroup : (G : Type u_1) → [Group G] → [TopologicalSpace G] → Type u_1
+@IsTopologicalGroup.exist_openSubgroup_sub_clopen_nhds_of_one : ∀ {G : Type u_1} [inst : Group G]
+  [inst_1 : TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] {W : Set G}, IsClopen W → 1 ∈ W → ∃ H, ↑H ⊆ W
+@Subgroup.quotient_finite_of_isOpen' : ∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G]
+  [IsTopologicalGroup G] [CompactSpace G] (U : Subgroup G) (K : Subgroup ↥U), IsOpen ↑U → IsOpen ↑K → Finite (↥U ⧸ K)
+Module.Baer.of_divisible : ∀ (A : Type u_1) [inst : AddCommGroup A] [DivisibleBy A ℤ], Module.Baer ℤ A
+@Module.Baer.extension_property_addMonoidHom : ∀ {Q : Type u_1} [inst : AddCommGroup Q] {M : Type u_2} {N : Type u_3}
+  [inst_1 : AddCommGroup M] [inst_2 : AddCommGroup N],
+  Module.Baer ℤ Q → ∀ (f : M →+ N), Function.Injective ⇑f → ∀ (g : M →+ Q), ∃ h, h.comp f = g
+@AddCircle.injective_toCircle : ∀ {T : ℝ}, T ≠ 0 → Function.Injective AddCircle.toCircle
+@AddCircle.homeomorphCircle : {T : ℝ} → T ≠ 0 → AddCircle T ≃ₜ Circle
+@connectedSpace_iff_clopen : ∀ {α : Type u_1} [inst : TopologicalSpace α],
+  ConnectedSpace α ↔ Nonempty α ∧ ∀ (s : Set α), IsClopen s → s = ∅ ∨ s = Set.univ
+AddChar.instFintype : (G : Type u_1) →
+  (R : Type u_2) → [inst : AddCommGroup G] → [inst_1 : RCLike R] → [Finite G] → Fintype (AddChar G R)
+@AddSubgroup.toSubgroup' : {G : Type u_1} → [inst : Group G] → AddSubgroup (Additive G) ≃o Subgroup G
+Int.subgroup_cyclic : ∀ (H : AddSubgroup ℤ), ∃ a, H = AddSubgroup.closure {a}
+PontryaginDual : (A : Type u_1) → [Monoid A] → [TopologicalSpace A] → Type u_1
+@Subtype.borelSpace : ∀ {α : Type u_1} [inst : TopologicalSpace α] [inst_1 : MeasurableSpace α] [hα : BorelSpace α]
+  (p : α → Prop), BorelSpace (Subtype p)
+@Measure.map_apply : ∀ {α : Type u_1} {β : Type u_2} {mα : MeasurableSpace α} {mβ : MeasurableSpace β} {μ : Measure α}
+  {f : α → β}, Measurable f → ∀ {s : Set β}, MeasurableSet s → (Measure.map f μ) s = μ (f ⁻¹' s)
+@exists_apply_ne_one : ∀ {G : Type u_1} [inst : AddCommGroup G] {r : G}, r ≠ 0 → ∃ ψ, ψ r ≠ 1
+@measure_eq_of_fourier : ∀ {G : Type u_1} [inst : AddCommGroup G] [Countable G] {σ σ' : Measure (AddChar G Circle)}
+  [IsFiniteMeasure σ] [IsFiniteMeasure σ'],
+  (∀ (r : G), ∫ (χ : AddChar G Circle), ↑(χ r) ∂σ = ∫ (χ : AddChar G Circle), ↑(χ r) ∂σ') → σ = σ'
+@isHaarFourier_iff : ∀ {G : Type u_1} [inst : AddCommGroup G] [inst_1 : Countable G] {m : Measure (AddChar G Circle)},
+  SpectralInputs.IsHaarFourier m ↔ m = dualHaar G
+continuous_evalChar : ∀ (G : Type u_1) [inst : AddCommGroup G] (g : G), Continuous fun χ => ↑(χ g)
+@CharacterModule.dual_surjective_of_injective : ∀ {R : Type u_1} [inst : CommRing R] {A : Type u_2}
+  [inst_1 : AddCommGroup A] {B : Type u_3} [inst_2 : AddCommGroup B] [inst_3 : Module R A] [inst_4 : Module R B]
+  (f : A →ₗ[R] B), Function.Injective ⇑f → Function.Surjective ⇑(CharacterModule.dual f)
+@Module.free_of_finite_type_torsion_free' : ∀ {R : Type u_1} [inst : CommRing R] {M : Type u_2}
+  [inst_1 : AddCommGroup M] [inst_2 : Module R M] [IsPrincipalIdealRing R] [IsDomain R] [Module.Finite R M]
+  [Module.IsTorsionFree R M], Module.Free R M
