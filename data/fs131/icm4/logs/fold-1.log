@@ -1,0 +1,2 @@
+slot: admitted icm4f: mem 4 GiB (hard cap), cpus 2,3
+data/fs131/icm4/lean/ClassRatioFold.lean:1544:16: warning: declaration uses `sorry`

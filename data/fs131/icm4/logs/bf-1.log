@@ -1,0 +1,117 @@
+slot: waiting (ledger 20 + 4 > budget 22 GiB)
+slot: admitted icm4: mem 4 GiB (hard cap), cpus 8,9
+Proofs/HadwigerNelson/Arith/BinaryField.lean:140:6: error: Type mismatch: After simplification, term
+  h
+ has type
+  x.testBit (n - 1) = false
+but is expected to have type
+  1 ≤ n → x.testBit (n - 1) = false
+Proofs/HadwigerNelson/Arith/BinaryField.lean:223:57: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ev t ((step n P)^[m] 1)
+in the target expression
+  t * ev t ((fun x => if x.testBit (n - 1) = true then x <<< 1 ^^^ P else x <<< 1)^[m] 1) + ev t P =
+    t ^ (m + 1) + ev t P * (t * c + 1)
+
+n P : ℕ
+R : Type u_1
+inst✝¹ : CommRing R
+inst✝ : CharP R 2
+t : R
+m : ℕ
+c : R
+hc : ev t ((step n P)^[m] 1) = t ^ m + ev t P * c
+h✝ : ((fun x => if x.testBit (n - 1) = true then x <<< 1 ^^^ P else x <<< 1)^[m] 1).testBit (n - 1) = true
+⊢ t * ev t ((fun x => if x.testBit (n - 1) = true then x <<< 1 ^^^ P else x <<< 1)^[m] 1) + ev t P =
+    t ^ (m + 1) + ev t P * (t * c + 1)
+Proofs/HadwigerNelson/Arith/BinaryField.lean:224:45: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ev t ((step n P)^[m] 1)
+in the target expression
+  t * ev t ((fun x => if x.testBit (n - 1) = true then x <<< 1 ^^^ P else x <<< 1)^[m] 1) =
+    t ^ (m + 1) + ev t P * (t * c)
+
+n P : ℕ
+R : Type u_1
+inst✝¹ : CommRing R
+inst✝ : CharP R 2
+t : R
+m : ℕ
+c : R
+hc : ev t ((step n P)^[m] 1) = t ^ m + ev t P * c
+h✝ : ¬((fun x => if x.testBit (n - 1) = true then x <<< 1 ^^^ P else x <<< 1)^[m] 1).testBit (n - 1) = true
+⊢ t * ev t ((fun x => if x.testBit (n - 1) = true then x <<< 1 ^^^ P else x <<< 1)^[m] 1) =
+    t ^ (m + 1) + ev t P * (t * c)
+Proofs/HadwigerNelson/Arith/BinaryField.lean:262:23: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ⇑(evalRingHom ?r)
+in the target expression
+  eval g (ev X P) = ev (eval g X) P
+
+n P : ℕ
+hP : IsPrimitiveCode n P
+k : Type u_1
+inst✝¹ : Field k
+inst✝ : Fintype k
+hk : Fintype.card k = 2 ^ n
+this : CharP k 2
+c : k[X]
+hc : 1 = X ^ (2 ^ n - 1) + ev X P * c
+hdvd : ev X P ∣ X ^ Fintype.card k - X
+hs : (X ^ Fintype.card k - X).Splits
+hdeg : (ev X P).degree ≠ 0
+g : k
+hg : eval g (ev X P) = 0
+h : eval g (ev X P) = ev (eval g X) P
+⊢ ev g P = 0
+Proofs/HadwigerNelson/Arith/BinaryField.lean:274:12: error: don't know how to synthesize implicit argument `n`
+  @ev_iterate_step ?m.40 P k inst✝¹.toCommRing inst✝ g hg (2 ^ n - 1) 1
+context:
+n P : ℕ
+k : Type u_1
+inst✝¹ : Field k
+inst✝ : CharP k 2
+g : k
+hP : IsPrimitiveCode n P
+hg : ev g P = 0
+⊢ ℕ
+Proofs/HadwigerNelson/Arith/BinaryField.lean:274:7: error: failed to infer `have` declaration type
+Proofs/HadwigerNelson/Arith/BinaryField.lean:273:94: error: unsolved goals
+n P : ℕ
+k : Type u_1
+inst✝¹ : Field k
+inst✝ : CharP k 2
+g : k
+hP : IsPrimitiveCode n P
+hg : ev g P = 0
+⊢ g ^ (2 ^ n - 1) = 1
+Proofs/HadwigerNelson/Arith/BinaryField.lean:449:2: error: linarith failed to find a contradiction
+n P : ℕ
+hP : IsPrimitiveCode n P
+Q B : ℕ
+hQ : Q ^ 2 = 2 ^ n
+hB : ∀ r < Q - 1, ∑ j ∈ range (Q + 1), (step n P)^[(Q - 1) * j + r] 1 % 2 ≤ B
+k : Type u_1
+inst✝² : Field k
+inst✝¹ : Fintype k
+inst✝ : DecidableEq k
+hk : Fintype.card k = Q ^ 2
+hk' : Fintype.card k = 2 ^ n
+this : CharP k 2
+hQ2 : 2 ≤ Q
+hQN : (Q - 1) * (Q + 1) = 2 ^ n - 1
+g : k
+hg : ev g P = 0
+ψ₀ : AddChar k ℂ
+hψ₀ : ψ₀ ≠ 1
+hval : ∀ (m : ℕ), ψ₀ (g ^ m) = 1 - 2 * ↑((step n P)^[m] 1 % 2)
+i : ℕ
+hψ : ψ₀.mulShift (g ^ i) ≠ 1
+ha : g ^ i ≠ 0
+hv : (g ^ ((Q - 1) * (i / (Q - 1)))) ^ (Q + 1) = 1
+hv0 : g ^ ((Q - 1) * (i / (Q - 1))) ≠ 0
+hsum :
+  ∑ u with u ^ (Q + 1) = 1, (ψ₀.mulShift (g ^ i)) u =
+    ∑ j ∈ range (Q + 1), (1 - 2 * ↑((step n P)^[(Q - 1) * j + i % (Q - 1)] 1 % 2))
+hle : ∑ j ∈ range (Q + 1), (step n P)^[(Q - 1) * j + i % (Q - 1)] 1 % 2 ≤ B
+hle' : ↑(∑ j ∈ range (Q + 1), (step n P)^[(Q - 1) * j + i % (Q - 1)] 1 % 2) ≤ ↑B
+a✝ : ↑Q + 1 - 2 * ∑ x ∈ range (Q + 1), ↑((step n P)^[(Q - 1) * x + i % (Q - 1)] 1 % 2) < ↑Q + 1 - 2 * ↑B
+⊢ False
+failed

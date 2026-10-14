@@ -1,0 +1,13 @@
+slot: admitted icm4f: mem 4 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Arith/DyadicCerts.lean:125:2: error: linarith failed to find a contradiction
+k : Type u_1
+inst✝² : Field k
+inst✝¹ : Fintype k
+inst✝ : DecidableEq k
+hcard : Fintype.card k = 64 ^ 2
+ψ : AddChar k ℂ
+hψ : ψ ≠ 1
+h : -15 ≤ ∑ i with i ^ 65 = 1, (ψ i).re
+a✝ : (∑ u with u ^ (64 + 1) = 1, ψ u).re < -15
+⊢ False
+failed
