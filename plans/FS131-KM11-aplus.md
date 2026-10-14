@@ -6,7 +6,12 @@
 
 ## Theorems this phase proved
 
-A planning job; filled at the last stage.
+A planning job. **No theorem of the library is proved here.** In scratch (`data/fs131/km11/scratch/`), against the module's
+own statements: `exists_trigPoly_tendsto` and `gram_sum_eq` — [kernel, standard three; through `lake env lean`, not the
+build or the gate]; `exists_spectral_vector` elaborated over four of its module's leaves. Composed in the skeleton over
+`sorry` leaves, so **not** theorems of the library yet: `Rigidity.aPlusOfR88`, `spectral_contChars_null_of_orthogonal`,
+`setIntegral_compl_TA_re_nonpos`, `nonempty_invariantColouring_bot`, `aplus_model`. With no `sorry` under them, through the
+build: `IsSpectralMeasureOf.unique`, `three_mul_tetra_add_one`, `minSel_mem` (standard three; skeleton spec lemmas).
 
 ## Stage 1 — SAVED: the readback
 
@@ -318,3 +323,52 @@ leaves re-price it, as `LEAN.md` § The kernel's cost model says they should. It
 One implementer can run them in the order S, T, A; three can run them at once. Lane A's `tendsto_mul_nhds_tauPrime` reads
 M10's private helpers (`mem_nhds_profTop`, `eventually_archTop`, `archHom`): reprove, or `open private`. No lane changes a
 typed statement of another module; M2b's `BochnerTau` is read as stated.
+
+### 4.4 The gate items run on this branch
+
+`tools/check_architecture.py`: **PASS** (`data/fs131/km11/arch.out`; the three rows added). `lake lint --no-build --
+--no-build --trace` (`data/fs131/km11/lint.out`): exit 1 on **one** finding, `Rigidity.archTop`'s unused
+`[NumberField ↥F]` in `ContinuityGroup` — item 863's ruling 1, owed by the chain's implementer on its line, not here; **no
+finding in the three new modules**.
+
+## Stage 5 — SAVED: drafts for files I do not write
+
+### 5.1 Dated lines for `data/fs131/claims-NF2.md` § Dated lines (each to follow the last)
+
+- 2026-10-14 — **M11 typed** (FS131-KM11): `Rigidity.aPlusOfR88 (F) [NumberField F] : (chainInterface F).APlusOfR88`,
+  composed over three modules (`Rigidity/SpectralSubspace`, `Rigidity/TraceSplit`, `Rigidity/APlus`; 33 leaves `sorry`);
+  no hypothesis beyond `[NumberField F]`, no typed statement of another module changed.
+- 2026-10-14 — **The cyclic-subspace step is a lemma, and reads no Bochner theorem** (FS131-KM11):
+  `Rigidity.spectral_null_of_orthogonal` — for an action of a countable abelian group, a countably generated filter `l`, a
+  measurable set of characters each tending to `1` along `l`, and a vector orthogonal to the `l`-continuous vectors, its
+  spectral measure gives the set measure `0`. `BochnerOn (tauPrime F)` is read twice by M11, by N2's `⟸` in
+  `setIntegral_compl_TA_re` and in `factorLaw_trace_null`.
+- 2026-10-14 — **SI-1 and SI-3 in colour indicators** (FS131-KM11): the trace measure is decomposed as
+  `3σ + δ₁ = 4 Σ_j σ_{e_j}`, `e_j = 1{c(0) = j}` (`Rigidity.trace_decomp`), in place of J45's tetrahedral coordinates
+  `g_k`; SI-3's identity is then stated verbatim (`Rigidity.setIntegral_compl_TA_re`).
+
+### 5.2 `BIBLIOGRAPHY.md`
+
+Nothing new: no M11 proof reads an outside paper (Stone–Weierstrass, `Lᵖ` density, dominated convergence and conditional
+expectation are Mathlib's; Herglotz–Bochner and Fourier uniqueness are this library's). `[Rudin1962]` 1.4.3 is not read by
+any M11 route; its row's reading status is unchanged.
+
+### 5.3 `LEAN.md` § Searching — Lean, three lines
+
+- A lemma meant for dot notation on another module's structure (`μ.measurePreserving_shift` for
+  `SpectralChain.InvariantColouring`) declared inside `namespace HadwigerNelson.Rigidity` is `Rigidity.InvariantColouring.…`,
+  which `μ.…` does not find ("Invalid field"); name it `_root_.HadwigerNelson.SpectralChain.InvariantColouring.…`. A
+  structure's `Prop`-valued instance field is made an instance with `attribute [scoped instance] InvariantColouring.isProb`
+  rather than restated (FS131-KM11).
+- Trigonometric polynomials are dense in `L²(σ)` for a finite measure on the dual of a countable group in about 145 lines:
+  the evaluations span a `StarSubalgebra` of `C(R̂, ℂ)` (copy `DualGroup`'s private `fourierAlg` proof in `C(·, ℂ)`),
+  `ContinuousMap.starSubalgebra_topologicalClosure_eq_top_of_separatesPoints`, `ContinuousMap.toLp_denseRange`;
+  `Measure.WeaklyRegular.of_pseudoMetrizableSpace_of_isFiniteMeasure` is a theorem, not an instance (`haveI`)
+  (`data/fs131/km11/scratch/Density.lean`, FS131-KM11).
+- `simp only [f]` does not unfold a partially applied definition used as a function (`Measurable (trigPoly a)`): state its
+  pointwise equation and `funext`. Shifting coefficients: `Finsupp.linearCombination_mapDomain`,
+  `Finsupp.mapDomain_mapRange` (FS131-KM11).
+
+### 5.4 `ARCHITECTURE.md`
+
+Written on this branch (three rows after `Rigidity/BochnerTau`; I write `ARCHITECTURE.md` in jobs that touch it).
