@@ -108,3 +108,7 @@ backup.
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment — 2026-10-14 19:56 UTC (Keryx, by message to this job)
+
+Your message reported that the joined tree's root fails to build: this line's `Plane/OneAvoidingDensity` and `main`'s `Plane/OneClass/Defs` both declare `HadwigerNelson.Plane.mOne`. **Ruled: option (a) with a bridge.** Delete this line's `def mOne`; `Plane/OneAvoidingDensity` imports `Plane/OneClass/Defs`; `mOne_le_of_oneAvoidingDensityBound` and `mOne_lt_quarter` keep their text and read `main`'s `mOne` (their change of constant shown by a dump before and after); and one new theorem in that module states the deleted definition as an equality, its right-hand side the deleted definition's text verbatim, proved from `main`'s `mOne_eq_iSup_nullMeasurableSet` and `isIndepSet_unitDistance_iff`, its name yours, listed in your record as a ruled new statement. **Touches extended:** the import line, the new theorem and the docstring's sentence on the definition in `/home/kooshi/source/lean-dir/.claude/worktrees/fs131-w10g/Proofs/HadwigerNelson/Plane/OneAvoidingDensity.lean`. The chain's line is not yours. You still start no agents of your own: only the coordinator launches agents, so that Kooshi's budget holds and every piece of work is known.

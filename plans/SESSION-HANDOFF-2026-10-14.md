@@ -73,7 +73,7 @@ on `main` is W6's trigger.
 **Rulings to carry at the chain's landing:** M3's private copies of `main`'s `Plane/OneClass/InvariantLaw` helpers made one shared
 copy (item 876); the `UnitCircle` and `ClassRatio` docstrings (items 897, 893) if the join has not done them; the generated
 `congr_simp` names allowed (items 850, 881); every ruled statement change the jobs listed (binder drops under item 726's word;
-`rowsEdgeNull_levelRows` gains `TCA F`, item 878; `finite_quot` gains `[NumberField F]` and `countable_splitPlace` its binder, item 847).
+`rowsEdgeNull_levelRows` gains `TCA F`, item 878; `finite_quot` gains `[NumberField F]` and `countable_splitPlace` its binder, item 847). **The density bound's `mOne` (item 916):** at the density bound's landing this line's definition is deleted for `main`'s, with a bridge theorem stating the old definition as an equality; at the chain's landing `Plane/WindowDensity`, `CountDescent` and `PlaneZhang` (which read the old definition by its shape) are rewritten through that bridge, and the chain's copy of `Plane/OneAvoidingDensity` gives way to `main`'s.
 
 **Rank 4, the p-adic result (row 75):** unplanned; after the chain.
 
