@@ -28,3 +28,7 @@ new files, and one proof in `Rigidity/ChainAtTA.lean`; can start now
 ## Not claimed
 
 Any size or price. That the statements marked "to type" elaborate as written. What I read: FS91-J07-4 and FS100-EXC read at their entries; not typed beyond the first statement.
+
+## Dated lines
+
+- 2026-10-14 (FS131-KN6, Amendment 1 of its brief) — **the scope lemma is off the headline's path and stays stated.** `Rigidity.noRamifiedStableDyadic_of_tca` (FS100-EXC in its own words: `TCA F → NoRamifiedStableDyadic F`) is no longer read by `Rigidity.min_localBound_five_le_chromaticNumber_of_closed`, which takes eight closed hypotheses and derives the scope from `5 ≤ localBound F` (`Rigidity.noRamifiedStableDyadic_of_three_le_localBound`, proved, over `Arith/UpperHalf`). The leaf stays a statement of this module (the hand record under `LEDGER.md` row 121 cites it); its route is now one step: a colour class of `Rigidity.colorable_two_levelTarget_one_of_isRamified` is independent and holds at least half of `𝓞 ⧸ P`, against T-C(A)'s `c < 1/4` at level one (if `𝓞 ⧸ P` were infinite, `Nat.card` is `0` and a one-point set already contradicts the bound). New for this module, a readability lemma owed: `IsRamified P` is equivalent to ramification index 2 over `P ∩ 𝓞_F` in Mathlib's sense (`LEAN.md` § Searching — Lean names the two ramification APIs at the pin).

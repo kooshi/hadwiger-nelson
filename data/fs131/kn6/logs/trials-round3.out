@@ -1,0 +1,18 @@
+== EntropyMixtures
+scanned EntropyMixtures.lean: lines=996 hits=0
+control FIRED
+errors=0 warnings=0
+seconds=7
+exit=0
+== HopfMaximal
+scanned HopfMaximal.lean: lines=109 hits=0
+control FIRED
+errors=0 warnings=0
+seconds=4
+exit=0
+== MaximalOccupation
+scanned MaximalOccupation.lean: lines=258 hits=0
+control FIRED
+errors=0 warnings=0
+seconds=5
+exit=0

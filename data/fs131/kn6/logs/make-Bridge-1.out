@@ -1,0 +1,5 @@
+ShannonEntropy: 456 lines from ['ShannonEntropy.lean']; patches by kind: {'a Mathlib rename between the pins (setOf became Set.ofPred, 2026-07-09)': 2}
+EntropyMixtures: 996 lines from ['ShannonEntropy.lean', 'EntropyMixtures.lean']; patches by kind: {'a Mathlib rename between the pins (setOf became Set.ofPred, 2026-07-09)': 2, 'a core rename between the pins (if_neg became ite_eq_right, 2026-07-21)': 2, 'a core rename between the pins (if_pos became ite_eq_left)': 1}
+HopfMaximal: 109 lines from ['HopfMaximal.lean']; patches by kind: {"a Mathlib rename between the pins (the pointwise lemma is birkhoffSum_succ' here)": 1}
+MaximalOccupation: 258 lines from ['InverseEntropy.lean', 'HopfMaximal.lean', 'MaximalOccupation.lean']; patches by kind: {'a Mathlib rename between the pins (setOf became Set.ofPred, 2026-07-09)': 1, "a Mathlib rename between the pins (the pointwise lemma is birkhoffSum_succ' here)": 1}
+Bridge: 629 lines from ['ShannonEntropy.lean', 'Entropy.lean', 'bridge-statements.lean']; patches by kind: {'a Mathlib rename between the pins (setOf became Set.ofPred, 2026-07-09)': 2}

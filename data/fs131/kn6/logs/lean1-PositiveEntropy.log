@@ -1,4 +1,3 @@
-slot: waiting (ledger 22 + 5 > budget 22 GiB)
 slot: admitted kn6s: mem 5 GiB (hard cap), cpus 0,1
 Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:93:8: warning: declaration uses `sorry`
 exit=0

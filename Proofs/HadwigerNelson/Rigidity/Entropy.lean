@@ -3,6 +3,7 @@ import Mathlib.MeasureTheory.Measure.Typeclasses.Probability
 import Mathlib.MeasureTheory.Measure.Real
 import Mathlib.MeasureTheory.Measure.Map
 import Mathlib.Dynamics.Ergodic.MeasurePreserving
+import Mathlib.Probability.Kernel.Defs
 import Mathlib.Order.LiminfLimsup
 import Mathlib.Topology.Instances.ENNReal.Lemmas
 
@@ -82,7 +83,7 @@ noncomputable def ksEntropyOn {m : MeasurableSpace X} (𝒜 : MeasurableSpace X)
 noncomputable def ksEntropy {m : MeasurableSpace X} (μ : Measure X) (T : X → X) : ℝ≥0∞ :=
   ksEntropyOn m μ T
 
-theorem ksEntropyOn_self {m : MeasurableSpace X} (μ : Measure X) (T : X → X) : ksEntropyOn m μ T = ksEntropy μ T := rfl
+@[simp] theorem ksEntropyOn_self {m : MeasurableSpace X} (μ : Measure X) (T : X → X) : ksEntropyOn m μ T = ksEntropy μ T := rfl
 
 @[simp] theorem nameCell_zero {k : ℕ} (T : X → X) (P : X → Fin k) (w : Fin 0 → Fin k) : nameCell T P 0 w = Set.univ :=
   Set.eq_univ_of_forall fun _ j => j.elim0
@@ -137,6 +138,86 @@ theorem tendsto_blockEntropy_div {m : MeasurableSpace X} (μ : Measure X) [IsPro
 theorem ksEntropy_map {m : MeasurableSpace X} {Y : Type*} [mY : MeasurableSpace Y] (μ : Measure X) {T : X → X} {π : X → Y}
     (hπ : Measurable π) {S : Y → Y} (hS : Measurable S) (h : ∀ x, π (T x) = S (π x)) :
     ksEntropy (μ.map π) S = ksEntropyOn (mY.comap π) μ T := by
+  sorry
+
+/-! ## The reasoning surface: what the next modules read, so that nobody unfolds a definition (FS131-KN6)
+
+Proved here over Mathlib alone: membership in a cell, the two inequalities that say "an entropy is a supremum of infima",
+`ksEntropy_eq_zero_iff`, and `blockEntropy_nonneg`. Leaves: the point mass (`ksEntropy_dirac`), long blocks of small
+entropy (`exists_blockEntropy_le_mul`, what EN2-ZE reads of "entropy zero"), the limit along increasing σ-algebras
+(`ksEntropy_eq_iSup_ksEntropyOn`, T2) and the mixture lemma (`ksEntropy_bind_eq_zero`, the consequence of Jacobs's formula
+the chain reads). The last three and the pinning theorem are proved from the release's entropy files once they are ported
+(`plans/FS131-KN6-chain-first-layer.md` § Stage 5); the bridge is `data/fs131/kn6/bridge-statements.lean`. -/
+
+@[simp] theorem mem_nameCell {k : ℕ} {T : X → X} {P : X → Fin k} {n : ℕ} {w : Fin n → Fin k} {x : X} :
+    x ∈ nameCell T P n w ↔ ∀ j : Fin n, P (T^[j] x) = w j := Iff.rfl
+
+/-- Every point lies in the cell of its own name. -/
+theorem mem_nameCell_self {k : ℕ} (T : X → X) (P : X → Fin k) (n : ℕ) (x : X) :
+    x ∈ nameCell T P n (fun j => P (T^[j] x)) := fun _ => rfl
+
+/-- The entropy on a partition is below each `H_n / n`. -/
+theorem partitionEntropy_le {m : MeasurableSpace X} (μ : Measure X) {k : ℕ} (T : X → X) (P : X → Fin k) (n : ℕ) :
+    partitionEntropy μ T P ≤ ENNReal.ofReal (blockEntropy μ T P (n + 1) / (n + 1)) :=
+  iInf_le _ n
+
+/-- The entropy on a sub-σ-algebra is above the entropy on each of its partitions. -/
+theorem partitionEntropy_le_ksEntropyOn {m : MeasurableSpace X} {𝒜 : MeasurableSpace X} (μ : @Measure X m) (T : X → X)
+    {k : ℕ} {P : X → Fin k} (hP : Measurable[𝒜] P) : partitionEntropy μ T P ≤ ksEntropyOn 𝒜 μ T :=
+  le_iSup_of_le k (le_iSup_of_le P (le_iSup_of_le hP le_rfl))
+
+/-- The entropy is above the entropy on each measurable partition. -/
+theorem partitionEntropy_le_ksEntropy {m : MeasurableSpace X} (μ : Measure X) (T : X → X) {k : ℕ} {P : X → Fin k}
+    (hP : Measurable P) : partitionEntropy μ T P ≤ ksEntropy μ T :=
+  partitionEntropy_le_ksEntropyOn μ T hP
+
+/-- **Entropy zero, read partition by partition** — the form in which every consumer of "entropy zero" takes it. -/
+theorem ksEntropy_eq_zero_iff {m : MeasurableSpace X} (μ : Measure X) (T : X → X) :
+    ksEntropy μ T = 0 ↔ ∀ (k : ℕ) (P : X → Fin k), Measurable P → partitionEntropy μ T P = 0 := by
+  simp only [ksEntropy, ksEntropyOn, ENNReal.iSup_eq_zero]
+
+-- With two `MeasurableSpace X` binders in scope `(μ : Measure X)` is a measure for the LAST one (here `𝒜`): the measure's
+-- σ-algebra is written out, `@Measure X m`, in every statement that names a sub-σ-algebra (FS131-KN6, found by a mismatch).
+/-- A sub-σ-algebra carries at most the entropy. -/
+theorem ksEntropyOn_le_ksEntropy {m : MeasurableSpace X} {𝒜 : MeasurableSpace X} (h : 𝒜 ≤ m) (μ : @Measure X m)
+    (T : X → X) : ksEntropyOn 𝒜 μ T ≤ ksEntropy μ T :=
+  ksEntropyOn_mono h μ T
+
+/-- For a probability measure every `H_n` is non-negative (each cell has mass in `[0, 1]`; no measurability is read). -/
+theorem blockEntropy_nonneg {m : MeasurableSpace X} (μ : Measure X) [IsProbabilityMeasure μ] {k : ℕ} (T : X → X)
+    (P : X → Fin k) (n : ℕ) : 0 ≤ blockEntropy μ T P n :=
+  Finset.sum_nonneg fun _ _ => Real.negMulLog_nonneg measureReal_nonneg measureReal_le_one
+
+/-- **A point mass has entropy zero**, for every measurable map: each cell has mass `0` or `1`. With it the point mass at
+the trivial character is the `ρ` of `EntropySplit` when the non-Haar part vanishes, and the model of `ZeroEntropyCarried`. -/
+theorem ksEntropy_dirac {m : MeasurableSpace X} {T : X → X} (hT : Measurable T) (x : X) :
+    ksEntropy (Measure.dirac x) T = 0 := by
+  sorry
+
+/-- **Entropy zero gives long blocks of small entropy** (FS131-EN2, EN2-ZE step 2; EN2 § 5.1 items 1–2): for a probability
+measure that `T` preserves and a measurable partition of rate zero, every `ε > 0` and every `K` have a block length
+`n ≥ K` with `H_n ≤ ε n`. Route: the pinning theorem (`H_n / n` converges to the infimum, which is `0`). -/
+theorem exists_blockEntropy_le_mul {m : MeasurableSpace X} (μ : Measure X) [IsProbabilityMeasure μ] {T : X → X}
+    (hT : MeasurePreserving T μ μ) {k : ℕ} {P : X → Fin k} (hP : Measurable P) (h0 : partitionEntropy μ T P = 0)
+    {ε : ℝ} (hε : 0 < ε) (K : ℕ) : ∃ n : ℕ, K ≤ n ∧ 0 < n ∧ blockEntropy μ T P n ≤ ε * n := by
+  sorry
+
+/-- **T2, the entropy along increasing σ-algebras** (`plans/FS100-X02D-derivation.md` l. 173; read by Lemma Γ): for
+countably generated sub-σ-algebras that increase and generate the whole σ-algebra, the entropy is the supremum of the
+entropies on them. From the release's `measureEntropy_eq_iSup_generating` (finite partitions that increase and generate). -/
+theorem ksEntropy_eq_iSup_ksEntropyOn {m : MeasurableSpace X} (μ : Measure X) [IsProbabilityMeasure μ] {T : X → X}
+    (hT : MeasurePreserving T μ μ) (𝒜 : ℕ → MeasurableSpace X) (hmono : Monotone 𝒜) (hgen : ⨆ i, 𝒜 i = m)
+    (hcg : ∀ i, @MeasurableSpace.CountablyGenerated X (𝒜 i)) :
+    ksEntropy μ T = ⨆ i, ksEntropyOn (𝒜 i) μ T := by
+  sorry
+
+/-- **A mixture of invariant measures of entropy zero has entropy zero** — the one consequence of Jacobs's formula the
+chain reads (`plans/FS100-X02D-derivation.md` ll. 207, 217; FS131-EN2 § 4.2 step 4). The release's
+`measureEntropy_kernel_zero`, word for word, over `ksEntropy`. -/
+theorem ksEntropy_bind_eq_zero {Z : Type*} [MeasurableSpace Z] {m : MeasurableSpace X} (τ : Measure Z)
+    [IsProbabilityMeasure τ] (κ : ProbabilityTheory.Kernel Z X) [ProbabilityTheory.IsMarkovKernel κ] {T : X → X}
+    (hT : Measurable T) (hκ : ∀ᵐ z ∂τ, MeasurePreserving T (κ z) (κ z)) (hzero : ∀ᵐ z ∂τ, ksEntropy (κ z) T = 0) :
+    ksEntropy (τ.bind κ) T = 0 := by
   sorry
 
 end HadwigerNelson.Rigidity

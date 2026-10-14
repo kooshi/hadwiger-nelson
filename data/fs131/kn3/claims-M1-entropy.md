@@ -38,3 +38,7 @@ edits `Rigidity/Entropy.lean`; no other module does
 ## Not claimed
 
 Any size or price. That the statements marked "to type" elaborate as written. What I read: definitions typed and elaborated by me; no lemma proved beyond `ksEntropy_zero_measure`, `ksEntropyOn_mono`, `measurableSet_nameCell`.
+
+## Dated lines
+
+- 2026-10-14 (FS131-KN6) — **typed, and planned to its leaves**: `plans/FS131-KN6-chain-first-layer.md` § Stage 5. `partitionEntropy` is now an infimum (Stage 3a, D1). Statement 2 (the bridge) holds for every probability measure and every map, with no invariance, and is typed against the release's constants (`data/fs131/kn6/bridge-statements.lean`). Statements 3 and 4 are typed in `Rigidity/Entropy` (`ksEntropy_eq_iSup_ksEntropyOn`, `ksEntropy_bind_eq_zero`). New leaves: `tendsto_blockEntropy_div` (the pinning theorem), `ksEntropy_dirac`, `exists_blockEntropy_le_mul`. Statement 5 is module M5's to type; statement 6 (the two-shift at `log 2`) is not typed.

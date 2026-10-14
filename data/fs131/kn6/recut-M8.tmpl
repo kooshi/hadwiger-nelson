@@ -1,0 +1,62 @@
+# Draft claim list M8-zero-entropy-carried — EF_F⁺: zero entropy is carried by `T + A` (the pigeonhole carried to the field); re-cut by FS131-KN6 from the deriver's answer (FS131-EN2)
+
+*Drafted by FS131-KN3, rewritten by FS131-KN6 (2026-10-14) for Keryx to fix; a draft, not a fixed claim list. Written by `tools/fs131_kn6_recut.py` from `data/fs131/kn6/recut-M8.tmpl`: every quoted line is copied by script. The first draft is in git (`758af9d28`). Kind: two lanes — **M8a**, the names at entropy zero (an implementer, from the plan in `plans/FS131-KN6-chain-first-layer.md` § Stage 5); **M8b**, the model, the pigeonhole and the wandering step (its own planner).*
+
+## The leaves it carries (quoted by script)
+
+{{NF2-LEAF-21}}
+
+{{NF2-LEAF-18}}
+
+**NF2-LEAF-18 is answered** (FS131-EN2, inventory item 706): the lemma needs neither the theorem it names nor the scheme the first draft of this list asked about; it needs EN2-ZE below.
+
+## Statements
+
+1. `Rigidity.zeroEntropyCarried [NumberField F] (h : NoRamifiedStableDyadic F) : ZeroEntropyCarried F` — typed, `sorry` (unchanged).
+2. to type (M8b) — the model of `Dual F` as `𝔸_𝒮/D` and, in it, `TA F` = the classes with a lift whose finite part is on the diagonal (FS105-B-M1; X01D § 2.0). Needs `R = O′` (M9).
+3. **M8a, the count** — fresh, pure combinatorics, no measure:
+
+{{EN2-CNT}}
+
+4. **M8a, the names at entropy zero** — fresh; in place of Shannon–McMillan–Breiman:
+
+{{EN2-ZE}}
+
+   In this library's words: for `[IsProbabilityMeasure μ]`, `MeasurePreserving T μ μ`, `Measurable P` and `partitionEntropy μ T P = 0` (the infimum form — the deriver's hypothesis word for word since FS131-KN6's change of that definition), for `β, η > 0` there are `N₀` and a measurable `X′` with `μ X′ ≥ 1 − η` and `exp (−β n) ≤ μ.real (nameCell T P n (fun j => P (T^[j] x)))` for `x ∈ X′`, `n ≥ N₀`.
+5. to type (M8b) — Lemma 3.1′, its statement unchanged and the third part of its proof on statement 4:
+
+{{EN2-L31}}
+
+## The classical statements this module now reads, and where each comes from
+
+| statement | from | status |
+|---|---|---|
+| the rate of one partition is zero when the entropy is | the definition: `Rigidity.ksEntropy_eq_zero_iff` | **proved** (`Rigidity/Entropy`, FS131-KN6) |
+| a long block with `H_k ≤ ε k` | `Rigidity.exists_blockEntropy_le_mul`, from the pinning theorem | typed, a leaf of M1 |
+| Markov on the terms of one `H_k`: `γ k · μ(B) ≤ H_k` for `B` the union of the cells lighter than `e^{−γk}` | fresh, over `Real.negMulLog` | to type (M8a) |
+| **the maximal ergodic inequality for the indicator of a set** | the release, `excessiveOccupation_measure_bound` over `finite_hopf_maximal` — **by port**: 243 lines (two files and three declarations) that elaborate at this pin after two renames (measured, FS131-KN6 § Stage 5) | module M0, lane M0-max |
+| a geometric series; a countable union bound | Mathlib | — |
+
+## What leaves the chain's list of classical inputs here
+
+Shannon–McMillan–Breiman (in neither library); Egorov; Jacobs's formula and the ergodic decomposition for the single map `u*`; conditional information; the martingale theorem.
+
+## Derivation addresses
+
+`plans/FS131-EN2-derivation.md` § 3.5 (EN2-CNT, EN2-ZE), § 3.6 (EN2-L31), § 5.1 (what the module reads); EN1 § 8.1 row 12: FS100-EFP (`plans/FS100-derivation.md` l. 162); `plans/FS100-X01D-derivation.md` § 2.0 (l. 118), l. 208 (Lemma PF), §§ 3.2–3.8; `plans/FS100-X12B-derivation.md` §§ 2.1–2.2; `plans/FS105-derivation.md` ll. 76, 86, 106, 110; FS100-EFG (b) (`plans/FS100-derivation.md` l. 216)
+
+## Imports
+
+M8a: `Rigidity/Entropy` (M1), M0-max. M8b: M8a, M9, Mathlib's adeles and `NumberField.prod_abs_eq_one`
+
+## Exports
+
+`zeroEntropyCarried`
+
+## Can run beside
+
+M8a: one new file (`Rigidity/ZeroEntropyNames`), after M0-max and M1's `exists_blockEntropy_le_mul` are stated (they are); shares no file. M8b: new files; after M9
+
+## Not claimed
+
+Any size or price of M8b. That the statements marked "to type" elaborate as written. The deriver's entries are [hand], one mind; the kernel is their second check, and the deriver names where to attack first (EN2 § 3.7: step 4's "the block of `name_n(x)` at `j` is `name_k(T^j x)`", and step 3's use of the inequality for every `n`). What I read: EN2 §§ 3.0, 3.5–3.7, 5.1 in full; X01D not read by me.

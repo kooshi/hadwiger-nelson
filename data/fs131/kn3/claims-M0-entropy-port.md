@@ -37,3 +37,7 @@ new files under `Proofs/HadwigerNelson/Outside/` only; shares none
 ## Not claimed
 
 Any size or price. That the statements marked "to type" elaborate as written. What I read: statement heads read; no proof read; nothing built. Size unknown; the release names its own friction (1,502 Mathlib commits between the pins).
+
+## Dated lines
+
+- 2026-10-14 (FS131-KN6) — **measured, and re-cut into lanes**: `plans/FS131-KN6-chain-first-layer.md` § Stage 5.1. `ShannonEntropy`, `EntropyMixtures`, and the maximal inequality (`HopfMaximal`, `MaximalOccupation`, three declarations of `InverseEntropy` — not in this list's first draft) elaborate at this pin after seven one-token renames. Statement 3 (`EntropyInverse`) and statement 5's `observationEntropyRate_blocks` are module M5's inputs and were not trialled; statement 4's eleven files and statement 5's `action_ergodic_decomposition` are module M7's and were not trialled.

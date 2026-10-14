@@ -1,0 +1,62 @@
+slot: admitted kn6c: mem 8 GiB (hard cap), cpus 4,5
+@Subadditive.tendsto_lim : ∀ {u : ℕ → ℝ} (h : Subadditive u),
+  BddBelow (Set.range fun n => u n / ↑n) → Filter.Tendsto (fun n => u n / ↑n) Filter.atTop (nhds h.lim)
+@Subadditive.lim : {u : ℕ → ℝ} → Subadditive u → ℝ
+@Subadditive.apply_mul_add_le : ∀ {u : ℕ → ℝ}, Subadditive u → ∀ (k n r : ℕ), u (k * n + r) ≤ ↑k * u n + u r
+@Monotone.map_csInf_of_continuousAt : ∀ {α : Type u_1} {β : Type u_2} [inst : ConditionallyCompleteLinearOrder α]
+  [inst_1 : TopologicalSpace α] [OrderTopology α] [inst_3 : ConditionallyCompleteLinearOrder β]
+  [inst_4 : TopologicalSpace β] [OrderClosedTopology β] {f : α → β} {A : Set α},
+  ContinuousAt f (sInf A) →
+    Monotone f →
+      A.Nonempty → autoParam (BddBelow A) Monotone.map_csInf_of_continuousAt._auto_1 → f (sInf A) = sInf (f '' A)
+ENNReal.continuous_ofReal : Continuous ENNReal.ofReal
+@ENNReal.ofReal_lt_ofReal_iff : ∀ {p q : ℝ}, 0 < q → (ENNReal.ofReal p < ENNReal.ofReal q ↔ p < q)
+@Filter.iInf_le_liminf : ∀ {α : Type u_1} {β : Type u_2} [inst : CompleteLattice α] {f : Filter β} {u : β → α},
+  ⨅ n, u n ≤ Filter.liminf u f
+@tendsto_order : ∀ {α : Type u_1} {β : Type u_2} [ts : TopologicalSpace α] [inst : Preorder α] [OrderTopology α]
+  {f : β → α} {a : α} {x : Filter β},
+  Filter.Tendsto f x (nhds a) ↔ (∀ a' < a, ∀ᶠ (b : β) in x, a' < f b) ∧ ∀ a' > a, ∀ᶠ (b : β) in x, f b < a'
+@Real.negMulLog_nonneg : ∀ {x : ℝ}, 0 ≤ x → x ≤ 1 → 0 ≤ x.negMulLog
+@measureReal_le_one : ∀ {α : Type u_1} {m0 : MeasurableSpace α} {μ : Measure α} [IsZeroOrProbabilityMeasure μ]
+  {s : Set α}, μ.real s ≤ 1
+@Measure.dirac_apply' : ∀ {α : Type u_1} [inst : MeasurableSpace α] {s : Set α} (a : α),
+  MeasurableSet s → (Measure.dirac a) s = s.indicator 1 a
+@Measure.map_apply : ∀ {α : Type u_1} {β : Type u_2} {mα : MeasurableSpace α} {mβ : MeasurableSpace β} {μ : Measure α}
+  {f : α → β}, Measurable f → ∀ {s : Set β}, MeasurableSet s → (Measure.map f μ) s = μ (f ⁻¹' s)
+@Function.Semiconj.iterate_right : ∀ {α : Type u_1} {β : Type u_2} {f : α → β} {ga : α → α} {gb : β → β},
+  Function.Semiconj f ga gb → ∀ (n : ℕ), Function.Semiconj f ga^[n] gb^[n]
+@MeasurableSpace.measurableSet_comap : ∀ {α : Type u_1} {β : Type u_2} {s : Set α} {f : α → β} {m : MeasurableSpace β},
+  MeasurableSet s ↔ ∃ s', MeasurableSet s' ∧ f ⁻¹' s' = s
+@Measure.bind : {α : Type u_1} →
+  {β : Type u_2} → {mα : MeasurableSpace α} → {mβ : MeasurableSpace β} → Measure α → (α → Measure β) → Measure β
+@ProbabilityTheory.condExpKernel : {Ω : Type u_1} →
+  [mΩ : MeasurableSpace Ω] →
+    [StandardBorelSpace Ω] →
+      (μ : Measure Ω) → [IsFiniteMeasure μ] → (m : MeasurableSpace Ω) → ProbabilityTheory.Kernel Ω Ω
+MeasurableSpace.CountablyGenerated : (α : Type u_1) → [m : MeasurableSpace α] → Prop
+@Finset.sum_nonneg : ∀ {ι : Type u_1} {N : Type u_2} [inst : AddCommMonoid N] [inst_1 : Preorder N] {f : ι → N}
+  {s : Finset ι} [AddLeftMono N], (∀ i ∈ s, 0 ≤ f i) → 0 ≤ ∑ i ∈ s, f i
+@Fin.appendEquiv : {α : Type u_1} → (m n : ℕ) → (Fin m → α) × (Fin n → α) ≃ (Fin (m + n) → α)
+@Fintype.sum_equiv : ∀ {ι : Type u_1} {κ : Type u_2} {M : Type u_3} [inst : Fintype ι] [inst_1 : Fintype κ]
+  [inst_2 : AddCommMonoid M] (e : ι ≃ κ) (f : ι → M) (g : κ → M), (∀ (x : ι), f x = g (e x)) → ∑ x, f x = ∑ x, g x
+Equiv.funUnique : (α : Sort u_1) → (β : Sort u_2) → [Unique α] → (α → β) ≃ β
+Real.concaveOn_negMulLog : ConcaveOn ℝ (Set.Ici 0) Real.negMulLog
+@birkhoffSum_succ' : ∀ {α : Type u_1} {M : Type u_2} [inst : AddCommMonoid M] (f : α → α) (g : α → M) (n : ℕ) (x : α),
+  birkhoffSum f g (n + 1) x = g x + birkhoffSum f g n (f x)
+@IsCompact.measurableSet : ∀ {α : Type u_1} {s : Set α} [inst : TopologicalSpace α] [inst_1 : MeasurableSpace α]
+  [OpensMeasurableSpace α] [T2Space α], IsCompact s → MeasurableSet s
+@Pi.borelSpace : ∀ {ι : Type u_1} {X : ι → Type u_2} [Countable ι] [inst : (i : ι) → TopologicalSpace (X i)]
+  [inst_1 : (i : ι) → MeasurableSpace (X i)] [∀ (i : ι), SecondCountableTopology (X i)] [∀ (i : ι), BorelSpace (X i)],
+  BorelSpace ((i : ι) → X i)
+@Subgroup.mem_sup : ∀ {C : Type u_1} [inst : CommGroup C] {s t : Subgroup C} {x : C},
+  x ∈ s ⊔ t ↔ ∃ y ∈ s, ∃ z ∈ t, y * z = x
+CommGroup.torsion : (G : Type u_1) → [inst : CommGroup G] → Subgroup G
+@isOfFinOrder_iff_pow_eq_one : ∀ {G : Type u_1} [inst : Monoid G] {x : G}, IsOfFinOrder x ↔ ∃ n, 0 < n ∧ x ^ n = 1
+@measure_iUnion_le : ∀ {α : Type u_1} {ι : Type u_2} {F : Type u_3} [inst : FunLike F (Set α) ENNReal]
+  [OuterMeasureClass F α] {μ : F} [Countable ι] (s : ι → Set α), μ (⋃ i, s i) ≤ ∑' (i : ι), μ (s i)
+@tsum_geometric_of_lt_one : ∀ {r : ℝ}, 0 ≤ r → r < 1 → ∑' (n : ℕ), r ^ n = (1 - r)⁻¹
+data/fs131/kn6/checks.lean:34:8: error(lean.unknownIdentifier): Unknown constant `MeasureTheory.Measure.sub`
+@setIntegral_condExp : ∀ {α : Type u_1} {E : Type u_2} {m m₀ : MeasurableSpace α} {μ : Measure α} {f : α → E}
+  {s : Set α} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [CompleteSpace E] (hm : m ≤ m₀)
+  [SigmaFinite (μ.trim hm)], Integrable f μ → MeasurableSet s → ∫ (x : α) in s, μ[f | m] x ∂μ = ∫ (x : α) in s, f x ∂μ
+exit=1

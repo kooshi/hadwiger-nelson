@@ -213,3 +213,127 @@ the ugliness, validate the seams. Both changes of form went to the coordinator b
 - *The adversarial member for the axiom.* `J = 1`, `Λ = ⊤`, `G = ⊤` gives translation invariance (Haar); `G = ⊥` gives
   entropy zero on `X` itself: the two ends of Theorem 1.2, as they should be. At the degenerate model the conclusion is
   true (`J = 1`, `G = ⊤`, the one-point quotient).
+
+## Stage 3b — SAVED: the obligation pass (`debruijn-obligation-modeling`, a fresh invocation) on the leaves the plan calls long
+
+No statement changed. For each long leaf: the statement the proof derives from, its children (each one library
+application or one identity), and what is hard. The children that belong to the entropy base are typed in Stage 5.
+
+1. **Subadditivity of `H_n` and the pinning theorem.** The statement the proof derives from is not about names: it is
+   about *the Shannon entropy of a finite-valued observation* `Q : X → A` — `H(Q, R) ≤ H(Q) + H(R)`, `H(Q ∘ T) = H(Q)`
+   under invariance, `H(e ∘ Q) = H(Q)` for an equivalence `e` — and `name_{a+b} ≃ (name_a, name_b ∘ T^a)`. That factoring
+   **is** the release's file (`observationEntropy`, `observationEntropy_joint_le`, `observationEntropy_comp_preserving`,
+   `orbitName_add`, `orbitEntropy_subadditive`), which elaborates here (Stage 5.1). So the children are: the port; `nameCell`
+   is a fibre of `orbitName`; `blockEntropy` is `observationEntropy ∘ orbitName` (both proved in the scratch bundle);
+   then `Subadditive.tendsto_lim` or the release's `tendsto_observationEntropyRate`, with
+   `Monotone.map_csInf_of_continuousAt` for `ENNReal.ofReal (sInf S) = ⨅ …` (every `H_n ≥ 0`: `blockEntropy_nonneg`,
+   proved). Hard: nothing; the `Fin (a + b)` plumbing is already paid by the release. Fallback if the port is refused:
+   the one real inequality is `H(Q, R) ≤ H(Q) + H(R)` (Gibbs, from `Real.log_le_sub_one_of_pos`), about sixty lines.
+2. **EN2-CNT, the count.** The hand proof's parse is an injection into token sequences; the Lean proof should not build
+   that object. Define on lists `singles : List α → ℕ` by the parse's own recursion (a block of `𝒢` at the head: recurse
+   on `drop k`; otherwise `1 +` the tail) and prove two statements by functional induction on it:
+   (A) *the weighted count, as an inequality*: `∑ over words of length m of t^(singles w) ≤ ρ^m`, with `t = 1/(2a)`,
+   `ρ = g^(2/k)`, by strong induction on `m` — the words whose head block is in `𝒢` inject into `𝒢 × words (m − k)` and
+   the others into `α × words (m − 1)`; `a·t = 1/2`, `#𝒢·ρ^(−k) ≤ 1/2`, `ρ ≥ 1`. (The hand proof's *equality* recursion
+   and the bijection onto token sequences are not needed: this is the weakening that makes each case local.)
+   (B) `singles w ≤ badStarts w + (k − 1)`: three cases — a block (the bad starts of `drop k w` are bad starts of `w`), a
+   single at a bad start (`badStarts w ≥ 1 + badStarts (tail)`), a single in the last `k − 1` letters (then
+   `singles w = length w < k`).
+   (C) from (A) and (B): `#W · t^(θn + k) ≤ ρ^n`. Hard: the bookkeeping between `Fin n → α` (the consumer's words) and
+   `List α` (the recursion's); quarantine it in one corollary that restates (C) for `Fin n → α` through `List.ofFn`.
+3. **EN2-ZE.** Six children, in the deriver's order, each typed in words: (Z0) a block length `k` with `γk ≥ log 2` and
+   `H_k ≤ γθ²k` — `exists_blockEntropy_le_mul`, typed; (Z1) Markov on the terms of `H_k`: with `𝒢` the words of mass
+   `≥ e^(−γk)` and `B` the union of the other cells, `γk · μ.real B ≤ H_k`, and `#𝒢 ≤ e^(γk)`; (Z2) the maximal
+   inequality, `ENNReal.ofReal θ * μ (excessiveOccupation T B θ) ≤ μ B` — the port; (Z3) off that set, the bad starts of
+   the name of `x` of length `n` are among the visits of the orbit to `B` (the block at `j` of the name of `x` is the name
+   of `T^j x`: `Function.iterate_add_apply`), so at most `θn`; (Z4) with EN2-CNT, at most `e^(βn/2)` such names once
+   `n ≥ k/θ` — the arithmetic stated as its own real-variable lemma; (Z5) the union of their cells of mass `< e^(−βn)`
+   has mass `≤ e^(−βn/2)`; (Z6) the set, a geometric series and `measure_iUnion_le`. Hard: (Z3)–(Z4), where the dynamics
+   meets the count — the deriver's own first place to attack.
+4. **`ksEntropy_map`.** Children: a label map measurable for `mY.comap π` is `Q ∘ π` for a measurable `Q` (hard part:
+   when `X` is empty and `Y` is not there is no `Q : Y → Fin 0`, and both sides are `0` — split on `IsEmpty X`); the
+   cells of `(T, Q ∘ π)` are the preimages under `π` of the cells of `(S, Q)` (`Function.Semiconj.iterate_right`);
+   `Measure.map_apply` on a measurable cell (`measurableSet_nameCell`, which is why `hS` is in the statement).
+5. **`measurableSet_TA`** (module C0's; longer than "an implementer, no planner" suggested). Children: (i) `χ ∈ TA F ↔
+   ∃ N ≠ 0, χ ^ N ∈ archChars` (`⇐`: divide the lift by `N`); (ii) `χ ↦ χ ^ N` is measurable for the cylinder σ-algebra;
+   (iii) `archChars` is the image of a finite-dimensional real space under a continuous map into `unitRing F → Circle`
+   — an additive `ψ : R → ℝ` extends to a `ℚ`-linear functional on `F(i)`; (iv) that image is a countable union of
+   compact sets, closed in the product, measurable there (`Pi.borelSpace`, `Countable (unitRing F)`), and pulled back
+   along the evaluation map that defines the cylinder σ-algebra; (v) the union over `N`. Hard: (iii). Lemma F (the
+   countability of the torsion characters) is **not** read on this route.
+
+## Stage 3c — SAVED: the experience pass (`debruijn-experience-modeling`, a fresh invocation)
+
+For the three readers of the four files: a mathematician at the headline and the axiom; the implementers of the next
+modules; `simp` and `exact?`.
+
+**Changed (no statement's meaning; additions and one attribute).** `Rigidity/Entropy` gains the reasoning surface the
+next modules read, proved over Mathlib alone so that nobody unfolds a definition: `mem_nameCell` (`@[simp]`),
+`mem_nameCell_self`, `partitionEntropy_le`, `partitionEntropy_le_ksEntropyOn`, `partitionEntropy_le_ksEntropy`,
+`ksEntropy_eq_zero_iff` (the form in which every consumer takes "entropy zero"), `ksEntropyOn_le_ksEntropy`,
+`blockEntropy_nonneg`; `ksEntropyOn_self` is now `@[simp]` (normal form: `ksEntropy`). The headline's docstring names the
+model of its hypotheses and says that none is in the library yet.
+
+**Found while writing them — a trap for every later statement about a sub-σ-algebra.** With two `MeasurableSpace X`
+binders in scope, `(μ : Measure X)` is a measure for the *last* one: `ksEntropyOn_le_ksEntropy` written with
+`{m} {𝒜} … (μ : Measure X)` was a statement about a measure on `𝒜`, caught by a type mismatch in its one-line proof.
+The measure's σ-algebra is written out, `(μ : @Measure X m)`, as the first planner's `ksEntropyOn_mono` already does;
+the file says so in a comment. A draft line for `LEAN.md` is in the report's drafts.
+
+**Weighed and left.** The two headline names differ by `_of` (`…_of_closed`, eight hypotheses; `…_closed`, six): opaque
+to a cold reader, but both are quoted in two records, an inventory item and an amendment, and the landing's read-aloud
+is the place to rename them. `IsRamified`, `IsDyadic` are not in `StablePrime`'s namespace (`P.IsRamified` does not
+read); `h.isDyadic` does. Explicit `(hμ : IsProbabilityMeasure μ)` in the axiom: the read-back's form, kept. No
+notation is minted anywhere.
+
+## Stage 4 — SAVED: the re-cut of the two modules the deriver's answers change
+
+`tools/fs131_kn6_recut.py` writes `data/fs131/kn3/claims-M7-entropy-split.md` and `claims-M8-zero-entropy-carried.md`
+from the templates `data/fs131/kn6/recut-M7.tmpl`, `recut-M8.tmpl`: every statement of the deriver's is its entry's
+`statement:` field copied by script (eight entries: EN2-CNT, -ZE, -L31; EN2-PE2-MAX, -PE2-SING, -LEB-INV, -AC-ERG,
+-SING-COMP), every leaf line the fixed claim list's. `--check`: both identical; `--check --plant` (one character of
+EN2-ZE changed in memory): M8 `DIFFERS`, exit 1. The first drafts are in git at `758af9d28`; the first planner's
+`tools/fs131_kn3_claimlists.py --check` now reports these two files as differing from its regeneration, as it should.
+
+**The choices.**
+- **M8 reads EN2-ZE in place of the entropy theorem**, and is cut in two: **M8a**, the names at entropy zero (EN2-CNT,
+  EN2-ZE — pure, one new file, an implementer from Stage 3b's decomposition), and **M8b**, the model, the pigeonhole
+  and the wandering step (its own planner). **The maximal inequality is ported, not written fresh** (my call, item 711
+  (a)): its used cone is 243 lines that elaborate at this pin after two renames (Stage 5.1), against a fresh proof of
+  about the same length with nothing to copy.
+- **M7 is built on the deriver's variant, EN2-PE2-MAX** (the largest Haar multiple below the measure), not on the
+  Lebesgue decomposition: the typed `EntropySplit` is exactly the sentence the variant proves; it reads neither the
+  Lebesgue decomposition nor the ergodicity of Haar measure; and the Fourier uniqueness it reads instead is read by
+  Lemma Γ already and is module M2's theorem. The Lebesgue route (EN2-PE2-SING with its three lemmas) is kept in the
+  claim list as the second route — it gives more (`τ′ ⟂ m`; the ergodic form), and is the one to build if a later
+  statement reads the ergodic form; none of the chain's does.
+- **Where each classical statement now comes from** is each claim list's table. In one line: from Mathlib — conditional
+  expectation and its kernel, the difference of measures, a geometric series; from the release by port — the maximal
+  inequality, the mixture lemma, the limit along σ-algebras, the ergodic decomposition in canonical form (existence);
+  fresh — Markov on the terms of one `H_k`, EN2-CNT; from another module of the chain — Fourier uniqueness (M2), Haar
+  measure on the dual (M4).
+- **What leaves the chain's list of classical inputs**: Shannon–McMillan–Breiman; Egorov; Jacobs's formula as a
+  formula; the ergodic decomposition for a single map and for the whole group `U`; the uniqueness of the ergodic
+  decomposition; the measurability of `{m}` in a space of measures; conditional information and the martingale theorem
+  (for M8); the Lebesgue decomposition and the ergodicity of Haar measure (on M7's chosen route).
+
+**Dated lines drafted for `data/fs131/claims-NF2.md` § Dated lines** (Keryx files; each follows the last line there):
+
+- "2026-10-14 — **NF2-LEAF-18 is answered (FS131-EN2, inventory item 706; re-cut by FS131-KN6).** Lemma 3.1′ needs
+  neither Shannon–McMillan–Breiman nor the scheme the chain's first planner asked about; it reads the deriver's EN2-ZE
+  (rate zero puts no atom of the names of length `n` below `e^{−βn}` on a set of measure `≥ 1 − η`, for every large
+  `n`), whose inputs are the definition of entropy, Markov's inequality at one block length, a count of words (EN2-CNT)
+  and the maximal ergodic inequality for the indicator of a set — the last by port from `[OAIMath2026]` family 015 (243
+  lines that elaborate at this library's pin). Module M8's draft claim list is rewritten
+  (`data/fs131/kn3/claims-M8-zero-entropy-carried.md` on branch `fs131-wch`)."
+- "2026-10-14 — **NF2-LEAF-17 is answered in part (FS131-EN2, inventory item 707; FS131-KN3 § 4.2; re-cut by
+  FS131-KN6).** T1 is read only as existence in canonical form, for `Γ ≅ ℤ²`, never its uniqueness and never for `U`
+  (by port from the release's `action_ergodic_decomposition`; its used cone is not yet measured); T3 is read only as
+  'a mixture of invariant measures of entropy zero has entropy zero' (by port, measured); T2 and T4 are read inside
+  Lemma Γ, T2 by port, T4 from Herglotz–Bochner's uniqueness. No page is owed for T1–T3 as theorems to declare: none is
+  declared. Module M7's draft claim list is rewritten on the deriver's variant EN2-PE2-MAX."
+- "2026-10-14 — **The headline with closed hypotheses takes eight, not nine (FS131-KN6, Amendment 1 of its brief).**
+  `Rigidity.min_localBound_five_le_chromaticNumber_of_closed` no longer takes `TCA F → NoRamifiedStableDyadic F`: at a
+  stable prime on whose residue field conjugation is trivial the level-one target is two-colourable (proved, over
+  `Arith/UpperHalf`), so `5 ≤ L(F)` excludes one. The leaf that left the headline's path is FS100-EXC's
+  (`Rigidity.noRamifiedStableDyadic_of_tca`); it stays stated in module M9's draft claim list, marked off the path."

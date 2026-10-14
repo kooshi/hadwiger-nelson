@@ -32,10 +32,19 @@ BUNDLES = {
     "MaximalOccupation": [(NT + "PrimePackets/InverseEntropy.lean", [(247, 257), (285, 290)], (WRAP_OPEN, WRAP_CLOSE)),
                           (NT + "DukePrimeDegree/Dynamics/HopfMaximal.lean", None, None),
                           (NT + "DukePrimeDegree/Dynamics/MaximalOccupation.lean", None, None)],
+    # the bridge: the release's file, then this library's own entropy module and bridge statements ("ours:" paths are
+    # relative to this repository, their import lines removed like the others)
+    "Bridge": [(NT + "PrimePackets/ShannonEntropy.lean", None, None),
+               ("ours:Proofs/HadwigerNelson/Rigidity/Entropy.lean", None, None),
+               ("ours:data/fs131/kn6/bridge-statements.lean", None, None)],
 }
 # (bundle or "*", old, new, kind) — applied in order to the bundle's text; `old` must occur.
 PATCHES = [
     ("*", "Set.ofPred_and", "Set.setOf_and", "a Mathlib rename between the pins (setOf became Set.ofPred, 2026-07-09)"),
+    ("*", "Set.ofPred_mem_eq", "Set.setOf_mem_eq", "a Mathlib rename between the pins (setOf became Set.ofPred, 2026-07-09)"),
+    ("*", "ite_eq_right ", "if_neg ", "a core rename between the pins (if_neg became ite_eq_right, 2026-07-21)"),
+    ("*", "ite_eq_left ", "if_pos ", "a core rename between the pins (if_pos became ite_eq_left)"),
+    ("*", "birkhoffSum_succ_apply'", "birkhoffSum_succ'", "a Mathlib rename between the pins (the pointwise lemma is birkhoffSum_succ' here)"),
 ]
 
 IMPORT = re.compile(r"^\s*(?:public\s+)?import\s")
@@ -69,7 +78,8 @@ def make(root, outdir):
             text.append(f"-- ==== FS131-KN6 scratch copy of {rel}" + (f" lines {ranges}" if ranges else "") + " ====")
             if wrap:
                 text.extend(wrap[0].splitlines())
-            text.extend(body(root / rel, ranges))
+            src = (pathlib.Path(__file__).resolve().parent.parent / rel[5:]) if rel.startswith("ours:") else root / rel
+            text.extend(body(src, ranges))
             if wrap:
                 text.extend(wrap[1].splitlines())
             text.append("")
