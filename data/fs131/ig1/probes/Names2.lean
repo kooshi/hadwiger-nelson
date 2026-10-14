@@ -1,0 +1,47 @@
+import Proofs.HadwigerNelson.Rigidity.Pieces
+open MeasureTheory
+#check @Rat.mul_den_eq_num
+#check @Rat.smul_def
+#check @IntermediateField.adjoin_algebraic_toSubalgebra
+#check @Algebra.adjoin_eq_span
+#check @Submonoid.closure_eq
+#check @IntermediateField.subset_adjoin
+#check @Subfield.closure_le
+#check @RingHom.toRatAlgHom
+#check @IsIntegral.of_finite
+#check @IsIntegral.map
+#check @IsIntegral.isAlgebraic
+#check @AddSubgroup.map_closure
+#check @AddSubgroup.ne_bot_iff_exists_ne_zero
+#check @AddSubgroup.mem_map_iff_mem
+#check @nsmul_right_injective
+#check @AddChar.map_sub_eq_div
+#check @AddSubgroup.mem_zmultiples_iff
+#check @AddSubgroup.FiniteIndex.index_ne_zero
+#check @MeasureTheory.integral_const_mul
+#check @MeasureTheory.isProbabilityMeasure_map
+#check @AddSubgroup.index_top
+#check @AddMonoidHom.toMultiplicative
+#check @AddSubgroup.exists_finsupp_of_mem_closure_range
+#check @Submodule.span_induction
+#check @AddSubgroup.closure_induction
+#check @Multiplicative.ofAdd_inj
+#check @AddMonoidHom.mulLeft_apply
+#check @AddSubgroup.mem_toSubgroup'
+#check @Int.emod_def
+#check @Int.toNat_of_nonneg
+#check @Int.emod_nonneg
+#check @Int.emod_lt_of_pos
+#check @HadwigerNelson.UnitRing.unitRingOver_le_planeOverSubring
+#check @MeasurableSpace.comap_mono
+#check @measurable_iff_comap_le
+#check @comap_measurable
+#check @Measurable.comap_le
+#check @MeasureTheory.SMulInvariantMeasure.measure_preimage_smul
+#check @Finset.induction_on
+#check @AddSubgroup.finiteIndex_iff
+#check @Circle.coe_mul
+#check @AddChar.mul_apply
+example : Countable ((Fin 2 → ℤ) × ℕ →₀ ℤ) := inferInstance
+example : IsAddTorsionFree ℂ := inferInstance
+example (Λ : AddSubgroup (Fin 2 → ℤ)) : (⊤ : AddSubgroup (Fin 2 → ℤ)).FiniteIndex := inferInstance

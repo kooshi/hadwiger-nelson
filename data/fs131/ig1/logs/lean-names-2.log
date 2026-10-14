@@ -1,0 +1,93 @@
+slot: admitted ig1: mem 4 GiB (hard cap), cpus 2,3
+Rat.mul_den_eq_num : ∀ (q : ℚ), q * ↑q.den = ↑q.num
+@Rat.smul_def : ∀ {K : Type u_1} [inst : DivisionRing K] (a : ℚ) (x : K), a • x = ↑a * x
+data/fs131/ig1/probes/Names2.lean:5:8: warning: `IntermediateField.adjoin_algebraic_toSubalgebra` has been deprecated: Use `IntermediateField.adjoin_toSubalgebra_of_isAlgebraic` instead
+@IntermediateField.adjoin_algebraic_toSubalgebra : ∀ {F : Type u_1} [inst : Field F] {E : Type u_2} [inst_1 : Field E]
+  [inst_2 : Algebra F E] {S : Set E},
+  (∀ x ∈ S, IsAlgebraic F x) → (IntermediateField.adjoin F S).toSubalgebra = Algebra.adjoin F S
+Algebra.adjoin_eq_span : ∀ (R : Type u_1) {A : Type u_2} [inst : CommSemiring R] [inst_1 : Semiring A]
+  [inst_2 : Algebra R A] (s : Set A),
+  Subalgebra.toSubmodule (Algebra.adjoin R s) = Submodule.span R ↑(Submonoid.closure s)
+@Submonoid.closure_eq : ∀ {M : Type u_1} [inst : MulOneClass M] (S : Submonoid M), Submonoid.closure ↑S = S
+IntermediateField.subset_adjoin : ∀ (F : Type u_1) [inst : Field F] {E : Type u_2} [inst_1 : Field E]
+  [inst_2 : Algebra F E] (S : Set E), S ⊆ ↑(IntermediateField.adjoin F S)
+@Subfield.closure_le : ∀ {K : Type u_1} [inst : DivisionRing K] {s : Set K} {t : Subfield K},
+  Subfield.closure s ≤ t ↔ s ⊆ ↑t
+@RingHom.toRatAlgHom : {R : Type u_1} →
+  {S : Type u_2} →
+    [inst : Ring R] → [inst_1 : Ring S] → [inst_2 : Algebra ℚ R] → [inst_3 : Algebra ℚ S] → (R →+* S) → R →ₐ[ℚ] S
+IsIntegral.of_finite : ∀ (R : Type u_1) {B : Type u_2} [inst : CommRing R] [inst_1 : Ring B] [inst_2 : Algebra R B]
+  [Module.Finite R B] (x : B), IsIntegral R x
+@IsIntegral.map : ∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]
+  {B : Type u_3} {C : Type u_4} {F : Type u_5} [inst_3 : Ring B] [inst_4 : Ring C] [inst_5 : Algebra R B]
+  [inst_6 : Algebra A B] [inst_7 : Algebra R C] [IsScalarTower R A B] [inst_9 : Algebra A C] [IsScalarTower R A C]
+  {b : B} [inst_11 : FunLike F B C] [AlgHomClass F A B C] (f : F), IsIntegral R b → IsIntegral R (f b)
+@IsIntegral.isAlgebraic : ∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : Ring A] [inst_2 : Algebra R A]
+  [Nontrivial R] {x : A}, IsIntegral R x → IsAlgebraic R x
+data/fs131/ig1/probes/Names2.lean:14:8: error(lean.unknownIdentifier): Unknown constant `AddSubgroup.map_closure`
+@AddSubgroup.ne_bot_iff_exists_ne_zero : ∀ {G : Type u_1} [inst : AddGroup G] {H : AddSubgroup G}, H ≠ ⊥ ↔ ∃ a, a ≠ 0
+@AddSubgroup.mem_map_iff_mem : ∀ {G : Type u_1} [inst : AddGroup G] {N : Type u_2} [inst_1 : AddGroup N] {f : G →+ N},
+  Function.Injective ⇑f → ∀ {K : AddSubgroup G} {x : G}, f x ∈ AddSubgroup.map f K ↔ x ∈ K
+@nsmul_right_injective : ∀ {M : Type u_1} [inst : AddMonoid M] [IsAddTorsionFree M] {n : ℕ},
+  n ≠ 0 → Function.Injective fun a => n • a
+@AddChar.map_sub_eq_div : ∀ {A : Type u_1} {M : Type u_2} [inst : AddCommGroup A] [inst_1 : DivisionCommMonoid M]
+  (ψ : AddChar A M) (a b : A), ψ (a - b) = ψ a / ψ b
+@AddSubgroup.mem_zmultiples_iff : ∀ {G : Type u_1} [inst : AddGroup G] {g h : G},
+  h ∈ AddSubgroup.zmultiples g ↔ ∃ k, k • g = h
+@AddSubgroup.FiniteIndex.index_ne_zero : ∀ {G : Type u_1} {inst : AddGroup G} {H : AddSubgroup G}
+  [self : H.FiniteIndex], H.index ≠ 0
+@integral_const_mul : ∀ {α : Type u_1} {m : MeasurableSpace α} {μ : Measure α} {L : Type u_2} [inst : RCLike L] (r : L)
+  (f : α → L), ∫ (a : α), r * f a ∂μ = r * ∫ (a : α), f a ∂μ
+data/fs131/ig1/probes/Names2.lean:22:8: error(lean.unknownIdentifier): Unknown identifier `MeasureTheory.isProbabilityMeasure_map`
+@AddSubgroup.index_top : ∀ {G : Type u_1} [inst : AddGroup G], ⊤.index = 1
+@AddMonoidHom.toMultiplicative : {α : Type u_1} →
+  {β : Type u_2} →
+    [inst : AddZeroClass α] → [inst_1 : AddZeroClass β] → (α →+ β) ≃ (Multiplicative α →* Multiplicative β)
+data/fs131/ig1/probes/Names2.lean:25:8: error(lean.unknownIdentifier): Unknown constant `AddSubgroup.exists_finsupp_of_mem_closure_range`
+@Submodule.span_induction : ∀ {R : Type u_1} {M : Type u_2} [inst : Semiring R] [inst_1 : AddCommMonoid M]
+  [inst_2 : Module R M] {s : Set M} {p : (x : M) → x ∈ Submodule.span R s → Prop},
+  (∀ (x : M) (h : x ∈ s), p x ⋯) →
+    p 0 ⋯ →
+      (∀ (x y : M) (hx : x ∈ Submodule.span R s) (hy : y ∈ Submodule.span R s), p x hx → p y hy → p (x + y) ⋯) →
+        (∀ (a : R) (x : M) (hx : x ∈ Submodule.span R s), p x hx → p (a • x) ⋯) →
+          ∀ {x : M} (hx : x ∈ Submodule.span R s), p x hx
+@AddSubgroup.closure_induction : ∀ {G : Type u_1} [inst : AddGroup G] {k : Set G}
+  {p : (g : G) → g ∈ AddSubgroup.closure k → Prop},
+  (∀ (x : G) (hx : x ∈ k), p x ⋯) →
+    p 0 ⋯ →
+      (∀ (x y : G) (hx : x ∈ AddSubgroup.closure k) (hy : y ∈ AddSubgroup.closure k), p x hx → p y hy → p (x + y) ⋯) →
+        (∀ (x : G) (hx : x ∈ AddSubgroup.closure k), p x hx → p (-x) ⋯) →
+          ∀ {x : G} (hx : x ∈ AddSubgroup.closure k), p x hx
+data/fs131/ig1/probes/Names2.lean:28:8: error(lean.unknownIdentifier): Unknown constant `Multiplicative.ofAdd_inj`
+data/fs131/ig1/probes/Names2.lean:29:8: error(lean.unknownIdentifier): Unknown constant `AddMonoidHom.mulLeft_apply`
+@AddSubgroup.mem_toSubgroup' : ∀ {G : Type u_1} [inst : Group G] (S : AddSubgroup (Additive G)) (g : G),
+  g ∈ AddSubgroup.toSubgroup' S ↔ Additive.ofMul g ∈ S
+Int.emod_def : ∀ (a b : ℤ), a % b = a - b * (a / b)
+@Int.toNat_of_nonneg : ∀ {a : ℤ}, 0 ≤ a → ↑a.toNat = a
+Int.emod_nonneg : ∀ (a : ℤ) {b : ℤ}, b ≠ 0 → 0 ≤ a % b
+Int.emod_lt_of_pos : ∀ (a : ℤ) {b : ℤ}, 0 < b → a % b < b
+HadwigerNelson.UnitRing.unitRingOver_le_planeOverSubring : ∀ (F : Subfield ℝ),
+  HadwigerNelson.UnitRing.unitRingOver F ≤ HadwigerNelson.Chain.planeOverSubring F
+@MeasurableSpace.comap_mono : ∀ {α : Type u_1} {β : Type u_2} {m₁ m₂ : MeasurableSpace α} {g : β → α},
+  m₁ ≤ m₂ → MeasurableSpace.comap g m₁ ≤ MeasurableSpace.comap g m₂
+@measurable_iff_comap_le : ∀ {α : Type u_1} {β : Type u_2} {m₁ : MeasurableSpace α} {m₂ : MeasurableSpace β}
+  {f : α → β}, Measurable f ↔ MeasurableSpace.comap f m₂ ≤ m₁
+@comap_measurable : ∀ {α : Type u_1} {β : Type u_2} {m : MeasurableSpace β} (f : α → β), Measurable f
+@Measurable.comap_le : ∀ {α : Type u_1} {β : Type u_2} {m₁ : MeasurableSpace α} {m₂ : MeasurableSpace β} {f : α → β},
+  Measurable f → MeasurableSpace.comap f m₂ ≤ m₁
+@SMulInvariantMeasure.measure_preimage_smul : ∀ {M : Type u_1} {α : Type u_2} {inst : SMul M α} {x : MeasurableSpace α}
+  {μ : Measure α} [self : SMulInvariantMeasure M α μ] (c : M) ⦃s : Set α⦄,
+  MeasurableSet s → μ ((fun x => c • x) ⁻¹' s) = μ s
+@Finset.induction_on : ∀ {α : Type u_1} {motive : Finset α → Prop} [inst : DecidableEq α] (s : Finset α),
+  motive ∅ → (∀ (a : α) (s : Finset α), a ∉ s → motive s → motive (insert a s)) → motive s
+@AddSubgroup.finiteIndex_iff : ∀ {G : Type u_1} [inst : AddGroup G] {H : AddSubgroup G}, H.FiniteIndex ↔ H.index ≠ 0
+Circle.coe_mul : ∀ (z w : Circle), ↑(z * w) = ↑z * ↑w
+@AddChar.mul_apply : ∀ {A : Type u_1} {M : Type u_2} [inst : AddMonoid A] [inst_1 : CommMonoid M] (ψ φ : AddChar A M)
+  (a : A), (ψ * φ) a = ψ a * φ a
+data/fs131/ig1/probes/Names2.lean:47:9: warning: Variable name `Λ` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+seconds=3
+exit=1

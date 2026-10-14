@@ -1,0 +1,12 @@
+slot: admitted ig1: mem 4 GiB (hard cap), cpus 2,3
+data/fs131/ig1/work/Pieces.lean:428:8: warning: declaration uses `sorry`
+data/fs131/ig1/work/Pieces.lean:435:8: warning: declaration uses `sorry`
+data/fs131/ig1/work/Pieces.lean:441:8: warning: declaration uses `sorry`
+data/fs131/ig1/work/Pieces.lean:448:8: warning: declaration uses `sorry`
+data/fs131/ig1/work/Pieces.lean:455:8: warning: declaration uses `sorry`
+data/fs131/ig1/work/Pieces.lean:461:8: warning: declaration uses `sorry`
+data/fs131/ig1/work/Pieces.lean:469:8: warning: declaration uses `sorry`
+data/fs131/ig1/work/Pieces.lean:478:8: warning: declaration uses `sorry`
+data/fs131/ig1/work/Pieces.lean:488:8: warning: declaration uses `sorry`
+seconds=7
+exit=0

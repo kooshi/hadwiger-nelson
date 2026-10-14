@@ -1,0 +1,34 @@
+slot: admitted ig1: mem 4 GiB (hard cap), cpus 0,1
+@mul_nsmul : ∀ {M : Type u_1} [inst : AddMonoid M] (a : M) (m n : ℕ), (m * n) • a = n • m • a
+@mul_nsmul' : ∀ {M : Type u_1} [inst : AddMonoid M] (a : M) (m n : ℕ), (m * n) • a = m • n • a
+@Finset.notMem_empty : ∀ {α : Type u_1} (a : α), a ∉ ∅
+@exists_apply_ne_one : ∀ {G : Type u_1} [inst : AddCommGroup G] {r : G}, r ≠ 0 → ∃ ψ, ψ r ≠ 1
+@nsmulAddMonoidHom_apply : ∀ {α : Type u_1} [inst : AddCommMonoid α] (n : ℕ) (x : α), (nsmulAddMonoidHom n) x = n • x
+@AddMonoidHom.coe_rangeRestrict : ∀ {G : Type u_1} [inst : AddGroup G] {N : Type u_2} [inst_1 : AddGroup N] (f : G →+ N)
+  (g : G), ↑(f.rangeRestrict g) = f g
+@AddMonoidHom.rangeRestrict_surjective : ∀ {G : Type u_1} [inst : AddGroup G] {N : Type u_2} [inst_1 : AddGroup N]
+  (f : G →+ N), Function.Surjective ⇑f.rangeRestrict
+@AddSubgroup.mem_map : ∀ {G : Type u_1} [inst : AddGroup G] {N : Type u_2} [inst_1 : AddGroup N] {f : G →+ N}
+  {K : AddSubgroup G} {y : N}, y ∈ AddSubgroup.map f K ↔ ∃ x ∈ K, f x = y
+@AddMonoidHom.mem_range : ∀ {G : Type u_1} [inst : AddGroup G] {N : Type u_2} [inst_1 : AddGroup N] {f : G →+ N}
+  {y : N}, y ∈ f.range ↔ ∃ x, f x = y
+@AddSubmonoidClass.coe_nsmul : ∀ {M : Type u_2} [inst : AddMonoid M] {A : Type u_1} [inst_1 : SetLike A M]
+  [inst_2 : AddSubmonoidClass A M] {S : A} (x : ↥S) (n : ℕ), ↑(n • x) = n • ↑x
+@AddSubgroup.mem_map_of_mem : ∀ {G : Type u_1} [inst : AddGroup G] {N : Type u_2} [inst_1 : AddGroup N] (f : G →+ N)
+  {K : AddSubgroup G} {x : G}, x ∈ K → f x ∈ AddSubgroup.map f K
+@connectedSpace_dual : ∀ {G : Type u_1} [inst : AddCommGroup G] [IsAddTorsionFree G], ConnectedSpace (AddChar G Circle)
+additiveDualDualEquiv : (G : Type u_1) →
+  [inst : AddCommGroup G] →
+    [Countable G] → Multiplicative G ≃* PontryaginDual (Multiplicative (Additive (AddChar G Circle)))
+@Measurable.const_mul : ∀ {M : Type u_1} {α : Type u_2} [inst : MeasurableSpace M] [inst_1 : Mul M]
+  {m : MeasurableSpace α} {f : α → M} [MeasurableMul M], Measurable f → ∀ (c : M), Measurable fun x => c * f x
+@Measurable.mul_const : ∀ {M : Type u_1} {α : Type u_2} [inst : MeasurableSpace M] [inst_1 : Mul M]
+  {m : MeasurableSpace α} {f : α → M} [MeasurableMul M], Measurable f → ∀ (c : M), Measurable fun x => f x * c
+data/fs131/ig1/probes/Names4.lean:20:65: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+n k : ℕ
+z : ℤ × ℤ
+⊢ k • n • z = n • k • z
+seconds=3
+exit=1

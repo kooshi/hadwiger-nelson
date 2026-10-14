@@ -75,3 +75,52 @@ eight faults and all 8 are reported, "the check can fail" (`logs/statements-cont
 (`isTotallyIrreducible_pieceAction`), a changed definition value (`pieceAction`), a missing leaf (`exists_pieceChain`),
 a theorem made a definition (`toPiece_rot`), a new public constant off the allow-list, an axiom, a moved data field of a
 ruled definition, and a changed statement in the downstream `EntropySplitMax`.
+
+## Stage 2 — SAVED: the fifteen leaves proved in a copy
+
+**Amendment 1 applied** (prose only): `Rigidity/Pieces`' module docstring, ll. 34–35, "at each piece, with
+`[PolishSpace (PieceDual M)]` from `Rigidity.polishSpace_dual`." → "at each piece (it takes no `PolishSpace` since
+FS131-KN9)." (the line wrap kept). The skeleton with that edit is `data/fs131/ig1/work/Pieces.skeleton.lean`.
+
+**Written in a copy** (`data/fs131/ig1/work/Pieces.lean`; `LEAN.md`, FS124-I5's line), four elaborations under
+`data/fs131/ig1/lean1.sh` (`logs/lean-pc-1.log` … `lean-pc-4.log`): the first with leaves 1–5 (exit 0, nine `sorry`s left);
+the second with all fifteen (four errors, two linter warnings); the third and fourth after the repairs and the two ruled
+differences below — **exit 0, no `sorry`, no warning**, 10 s. The probes of names at the pin are
+`data/fs131/ig1/probes/Names*.lean` (logs `lean-names-1.log` … `-4.log`). Re-price (Done means item 2): leaves 1–5 went
+through on the first elaboration, about 20 minutes from the first line; the other ten were then priced at an hour and
+took about 40 minutes with three repairs.
+
+**The routes** (KN8 § 2.5 and KPD1 § 4.2 unless said; private helpers named):
+- 1 `continuous_dualMap`: `continuous_induced_rng`, `continuous_pi`, `continuous_evalChar`. 2 `measurable_toPiece`:
+  `measurable_of_evalChar`. 3 `IsPiece.mulR_mem`: `closure_le` into the comap (helper `mulR_add_apply`).
+  4 `pieceMul_zero`, `pieceMul_add`: `mulR_zero_apply`, `mulR_add_apply`, `add_comm`. 5 `toPiece_rot`: `rfl`.
+- 8 `isSolenoid_pieceDual`: as planned — `connectedSpace_dual` at `M`, torsion-free through the injective
+  `pieceToFieldI`; `dual_embeds` is `(additiveDualDualEquiv M).symm` followed by `M → F(i) ≅ ℚⁿ`
+  (`Module.finBasis ℚ (fieldI F)`).
+- 9 `isTotallyIrreducible_pieceAction`: as planned, with Lemma F proved here (not typed in the library, stage 1):
+  `finiteIndex_range_nsmul_prime` (`G ⧸ qG` is an `𝔽_q`-space of dimension at most `[F(i) : ℚ]` — the argument of
+  `main`'s `ThreeColourCriterion.finite_quotient_span_prime`, for a group with an injective map into `F(i)`) and
+  `finiteIndex_range_nsmul` (products by `relIndex_mul_index` and `index_comap_of_surjective`). `N = Y^⊥` is
+  `Λ`-stable; `ℚN = F(i)` by `exists_nat_mul_mem_closure` at `Λ` (below) applied to `x/y`; one integer kills `M ⧸ N`
+  through the coset representatives `[0, i)²` of `ℤ² ⧸ Λ` (`i = [ℤ² : Λ]`) and `exists_common_nsmul_mem`.
+- 6 `not_isVirtuallyCyclic_pieceAction`: as planned; the infinite index of `ℤn` read off `i·e₀, i·e₁ ∈ ℤn`.
+- 7 `isPiece_closure_one`: `exists_nat_mul_mem_closure` at `Λ = ⊤` — the `γ_n` are algebraic
+  (`isAlgebraic_of_mem_fieldI`), so `Subfield.closure = IntermediateField.adjoin` has the carrier `Algebra.adjoin`
+  (`adjoin_toSubalgebra_of_isAlgebraic`), the `ℚ`-span of the monoid of the `γ_n` (`Algebra.adjoin_eq_span`), and
+  denominators clear (`exists_nat_mul_mem_of_mem_span`); carried to `R` by `AddMonoidHom.map_closure`.
+- 10 `exists_pieceChain`: as planned. 11 `isErgodicOn_map_toPiece`: as planned (helper `map_rot_eq`;
+  `aeconst_of_forall_preimage_smul_ae_eq`, `Filter.eventuallyConst_set'`). 12 `ksEntropy_rot_eq_iSup`: T2 over
+  `𝒜_k = comap (toPiece (M k))` — monotone (`comap_toPiece_mono`, through `restrictPiece`), generating (the cylinder
+  σ-algebra is `⨆_r` of the evaluations' comaps), countably generated (`countable_of_isPiece`, `BorelSpace` and second
+  countability of the dual) — each term by `ksEntropy_map_toPiece`. 13 `integral_eq_zero_of_isAddHaarMeasure`: as
+  planned, `MeasurableAdd (PieceDual M)` a private theorem used by `haveI` (no instance added). 14 Lemma Γ: as planned
+  (thirty lines).
+
+**Two ruled differences in the statements** (both reported to the coordinator at once):
+- `isSolenoid_pieceDual` **drops its unread binder `(hM : IsPiece p M)`** (inventory item 726's standing word; the
+  coordinator's message of the same hour: "fine as you describe: listed, with its callers checked"): `M̂` is a solenoid
+  for every `M ⊆ R` over a number field — the proof reads no piece. Its one caller is Lemma Γ in this file
+  (`isSolenoid_pieceDual (M := M k)`); no other module of the tree names it (`grep`: two docstrings only).
+- `exists_pieceChain`'s existential binder `hM` is renamed `_hM` (the coordinator's ruling, option (a)): the name is
+  read by nothing, and once the proof is in the unused-variables linter warns at the statement, where no proof can reach
+  it. The condition: the stored type differs from before in that binder's name only (stage 3's check).
