@@ -847,6 +847,7 @@ def declared : Array Entry := #[
     "T-C(A) at S = ∅ in class form, a property of the field F: the theorems take it only as the conclusion of the declared hypothesis CLS and as the antecedent of hMR",
   .condition ``HadwigerNelson.Arith.IsUsablePrime "a predicate of a prime of F (maximal, residue field of size ≡ 3 mod 4): a condition on the theorem's prime",
   .condition ``HadwigerNelson.Arith.NoAffFieldHyp "the field hypotheses of NOAFF-FIELDS at k: a condition on the field F and on k",
+  .condition ``HadwigerNelson.DensityBound.DualCert.IsIndep "S is independent in the unit-distance graph on a certificate's points: a predicate of the theorem's set S (X23_atoms reads it; the empty set and each of the 13,552 independent sets of the certificate satisfy it; no declaration exhibits one — FS131-LDB1)",
   .condition ``HadwigerNelson.ExtensionOrder "a greedy extension order of a graph: an inductive predicate of the theorem's vertex list, built by its constructors",
   .condition ``HadwigerNelson.IsLift "a first-order lift of a framework: a predicate of the theorem's deformation, taken only to be refuted or transported",
   .condition ``HadwigerNelson.OneClass.IsShiftInvariantLaw "a translation-invariant random independent set of a graph on the algebraic plane (FS-133): a predicate of the theorem's law P; exhibited by the projection of an invariant law, (isInvariantLaw_dirac G).toIsShiftInvariantLaw, which no declaration concludes as stated",

@@ -4,7 +4,8 @@ Every Lebesgue-measurable planar set with no two points at distance one has uppe
 (`HadwigerNelson.Plane.oneAvoidingDensityBound`, `Plane/DensityBound/Theorem`), proved from the paper's certificate with no
 periodic reduction and no Bessel citation (FS131-KDB1's statements; FS131-IDB1, -IDB2 and -IDB3's proofs).  The three blocks
 below are the three implementers' drafts, filed unchanged and in landing order: FS131-IDB1's (its record § 5.3,
-`data/fs131/idb1/audit-block.txt`, 264 records), FS131-IDB2's (§ 5.3, `data/fs131/idb2/audit-block.txt`, 41 records) and
+`data/fs131/idb1/audit-block.txt`, 264 records), FS131-IDB2's (§ 5.3, `data/fs131/idb2/audit-block.txt`, 41 records, `Plane.mOne` replaced by the ruled bridge
+`Plane.mOne_eq_iSup_bandFree`: the brief's Amendment deleted this line's `mOne`) and
 FS131-IDB3's (D1, `data/fs131/idb3/audit-block.txt`, 418 records) — each the public constants of its modules as the kernel
 stores them, inductive types, constructors and recursors left out (their structures' other generated declarations kept, as
 the drafts list them), the 847 cell theorems and 847 cell definitions of `Cells/Part00`–`Part45` read through their parts'
@@ -281,7 +282,7 @@ theorem.  `tools/fs131_ldb1_records.py` reads the audit's log against the kernel
 #print axioms HadwigerNelson.DensityBound.BesselCert.Cells.code0
 #print axioms HadwigerNelson.DensityBound.BesselCert.Cells.us23
 -- FS131-IDB1 block end
--- FS131-IDB2 block: `Plane/DensityBound/Autocorr`, `Pattern`, `Window` and `Plane/OneAvoidingDensity` — 41 records, in stored order (FS131-IDB2 § 5.3)
+-- FS131-IDB2 block: `Plane/DensityBound/Autocorr`, `Pattern`, `Window` and `Plane/OneAvoidingDensity` — 41 records, in stored order (FS131-IDB2 § 5.3; `mOne` replaced by the bridge, the brief's Amendment)
 #print axioms HadwigerNelson.DensityBound.autocorr
 #print axioms HadwigerNelson.DensityBound.autocorr_eq_zero_of_norm_eq_one
 #print axioms HadwigerNelson.DensityBound.continuous_autocorr
@@ -321,7 +322,9 @@ theorem.  `tools/fs131_ldb1_records.py` reads the audit's log against the kernel
 #print axioms HadwigerNelson.Plane.OneAvoidingDensityBound
 #print axioms HadwigerNelson.Plane.mOne_le_of_oneAvoidingDensityBound
 #print axioms HadwigerNelson.Plane.upperDensity_le_of_oneAvoidingDensityBound
-#print axioms HadwigerNelson.Plane.mOne
+-- the brief's Amendment (2026-10-14): this module's `def mOne` is deleted (`main`'s, `Plane/OneClass/Defs`, is audited in
+-- FS133-LD1's block above), and the ruled bridge takes its place
+#print axioms HadwigerNelson.Plane.mOne_eq_iSup_bandFree
 #print axioms HadwigerNelson.Plane.mOne_lt_quarter
 -- FS131-IDB2 block end
 -- FS131-IDB3 block: the certificate's 27 modules, `Plane/DensityBound/X23Check` … `Theorem` — 418 records, in stored order (FS131-IDB3 D1); `HadwigerNelson.Plane.oneAvoidingDensityBound` among them

@@ -14,7 +14,9 @@
 # (tools/fs131_kdb1_x23.py --write, the same); the vacuity scan and its self-test, and the scan against the last landing's
 # row for row (FS131-L5's vacdiff), with its plants; the assumptions step and its self-test; the architecture check; the
 # guarded lint; the notes check and its self-test as the last landing ran them; the stored statements of the density
-# bound's 83 modules against the dump before the merge (tools/fs131_ldb1_statement_diff.py, and its self-test); the 83
+# bound's 83 modules against the dump before the merge (tools/fs131_ldb1_statement_diff.py with the ruled verdicts —
+# the brief's Amendment — their controls, the same comparison unruled, which must fail, and its self-test), and the
+# kernel's check of the two instance-only moves (data/fs131/ldb1/lean/InstanceCheck.lean); the 83
 # files in text with every block comment removed against the commit before the merge, with its plant; the baseline's
 # entries and the scans' sources against main's; the three digests against the last landing's receipts (FS133-LD1's,
 # data/fs133/ld1/gate/receipt-*-final.log).
@@ -105,8 +107,12 @@ plain() { local name="$1"; shift; local t0=$(date +%s.%N); "$@" > "$d/$name-$tag
   plain notes-l5 python3 tools/fs131_l5_notes.py --only-flagged
   plain notes-qa4-selftest python3 tools/fs131_qa4_notes.py --self-test
   lean1 statements 8 $L/lean/StatementDump.lean
-  plain statements-diff python3 tools/fs131_ldb1_statement_diff.py $L/statements-before.txt "$d/statements-$tag.out"
+  RULED="$(cat $L/statements-ruled-flags.txt)"
+  plain statements-diff python3 tools/fs131_ldb1_statement_diff.py $L/statements-before.txt "$d/statements-$tag.out" $RULED
+  plain statements-controls python3 tools/fs131_ldb1_statement_diff.py $L/statements-before.txt "$d/statements-$tag.out" $RULED --controls
+  plain statements-unruled python3 tools/fs131_ldb1_statement_diff.py $L/statements-before.txt "$d/statements-$tag.out"
   plain statements-selftest python3 tools/fs131_ldb1_statement_diff.py --self-test "$d/statements-$tag.out"
+  lean1 instance-check 6 $L/lean/InstanceCheck.lean
   [ -f "$d/statements-$tag.out" ] && { sha256sum "$d/statements-$tag.out" > "$d/statements-$tag.sha256"; xz -T2 -f "$d/statements-$tag.out"; }
   plain code-only python3 tools/fs131_ldb1_code_only.py $BASE
   plain code-only-plant python3 tools/fs131_ldb1_code_only.py $BASE --plant

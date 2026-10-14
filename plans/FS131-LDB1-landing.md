@@ -114,3 +114,107 @@ build waits on the ruling.
   hypothesis" or "external" and that no entry declares (`FAIL undeclared-by-docstring`), so the rewording is needed for the
   gate, not only for the reader; the two corollaries say "given the outside theorem"; five module headers and
   `OneAvoidingDensity`'s say "skeleton".
+
+## Stage 3 — SAVED (FS131-LDB1): the ruling, the ruled edit, the build, and the join's gate steps
+
+**3.1 The ruling** (the coordinator's message, and the brief's `## Amendment — 2026-10-14 19:56 UTC`, on `main`): option (a)
+with a bridge. This line's `def mOne` deleted; `Plane/OneAvoidingDensity` imports `Plane/OneClass/Defs`;
+`mOne_le_of_oneAvoidingDensityBound` and `mOne_lt_quarter` keep their text and read `main`'s `mOne`; one new theorem states
+the deleted definition as an equality, its right-hand side the deleted definition's text verbatim. Touches extended to the
+import line, the new theorem and the docstring's sentence on the definition in that file.
+
+**3.2 The ruled edit** (commit `d09c6df27`, written in a copy first, `data/fs131/ldb1/work/OneAvoidingDensity.lean`):
+- `import Proofs.HadwigerNelson.Plane.OneClass.Defs` added;
+- `noncomputable def mOne : ENNReal := ⨆ (A : Set ℂ) (_ : NullMeasurableSet A volume ∧ BandFree A 0), upperDensity A`
+  deleted, and in its place **the ruled new statement**
+  `theorem mOne_eq_iSup_bandFree : mOne = ⨆ (A : Set ℂ) (_ : NullMeasurableSet A volume ∧ BandFree A 0), upperDensity A`
+  — its right-hand side the deleted line 41 character for character — proved in nine lines from `main`'s
+  `mOne_eq_iSup_nullMeasurableSet`, `iSup_and`, `isIndepSet_unitDistance_iff` and `ne_iff_lt_or_gt`, on the standard three
+  (it needed no hypothesis);
+- `mOne_le_of_oneAvoidingDensityBound`'s proof routed through it (`mOne_eq_iSup_bandFree ▸ iSup₂_le …`, the rest as it was);
+  `mOne_lt_quarter`'s proof unchanged;
+- the module docstring's sentence on the definition rewritten (`mOne` defined once, in `Plane/OneClass/Defs`, over Borel sets;
+  the bridge states it over Lebesgue-measurable sets with `BandFree A 0`, the form this module first defined it by).
+
+With it, the stale prose (`data/fs131/ldb1/docstring-edits.py`, ten replacements in six files, each old text found once):
+`OneAvoidingDensityBound`'s docstring ("External: a named hypothesis standing for an outside theorem, not proved in the
+library" → "Proved in the library: `oneAvoidingDensityBound` (`Plane/DensityBound/Theorem`), from the paper's certificate"),
+the module header and its "An external theorem … a named hypothesis" sentence, the two corollaries' "given the outside
+theorem", and "skeleton" in the headers of `Autocorr`, `Window`, `BesselDefect`, `Bessel` and `Pattern`.
+
+**In text** (`tools/fs131_ldb1_code_only.py`, the 83 files with every block comment removed against `9fe574044`, the three
+code edits listed; `data/fs131/ldb1/code-only.out`): **83 of 83 as listed** — 77 files untouched; the five headers reworded,
+code the same; `OneAvoidingDensity` reworded, its code the base's with exactly the three listed edits. With `--plant` every
+file DIFFERS (`code-only-plant.out`). Before the edits the same tool read the six files as "text untouched (listed)" and
+failed — the control for an edit that did not happen.
+
+**3.3 The build** (`build-sampled.sh build-fix`): **`build: OK — 264 of 264 batches, 12 module(s) rebuilt, 0 module(s) with
+warnings, 8m28s`**, exit 0, 513 s (`data/fs131/ldb1/build-fix.log`; Lake's full output, 0 lines holding "warning"). The 12
+are the six edited modules, `BesselCert`, `Cells/Covering`, `X23`, `X23Dist`, `Theorem` and the root — the predicted set
+(`data/fs131/lc1/dependents.py`); none of the 46 cell parts and none of the 21 certificate check modules.
+
+**3.4 Every constant of the density bound, after** (`StatementDump.lean`, now with a by-name section for `Plane.mOne` →
+`statements-after-fix.txt`), against stage 1.5's dump, `tools/fs131_ldb1_statement_diff.py` with the ruled verdicts
+(`statements-ruled-flags.txt`; `statements-fix-diff.txt`): **PASS, 0 differences over 4,083 constants**, and four ruled
+readings:
+- **`Plane.mOne` REDEFINED**: gone from the 83 modules; by name it is `Proofs.HadwigerNelson.Plane.OneClass.Defs`'s, stored
+  type identical (`ENNReal`), value hash `3605416353 → 3350729776`. So the two corollaries' stored types, identical in text,
+  now name `main`'s `mOne`: the change of constant the ruling asked shown.
+- **`Plane.mOne_eq_iSup_bandFree` ADDED-RULED** (a theorem).
+- **`DualCert.window_le` and `DualCert.limsup_le` INSTANCES-ONLY**, which the ruling did not name and the import brought:
+  `Plane/OneClass/Defs` puts the port's `CommCStarAlgebra ℂ` in `Plane/DensityBound/Window`'s closure, and in the two stored
+  types `NormedCommRing ℂ` is now `CommCStarAlgebra.toNormedCommRing ℂ instCommCStarAlgebraComplex` where it was
+  `NormedField.toNormedCommRing ℂ Complex.instNormedField` — three places each, the rest of each type the same character for
+  character. **The kernel's check** (`data/fs131/ldb1/lean/InstanceCheck.lean` → `instance-check.out`): each old type rebuilt
+  from the new by replacing exactly that instance term, its hash **equal to the dump made before the merge**
+  (3481863677, 2608129148); `Eq.refl new : old = new` **accepted by the kernel** for both (`Environment.addDeclCore`); the
+  control, one theorem's old type against the other's new type, **refused**; the two instance terms equal by `rfl` in the
+  kernel. Sent to the coordinator as a notice.
+- Every other stored type and definition value identical. Unruled, the same comparison fails on exactly these five
+  (`statements-fix-unruled.txt`: REMOVED `mOne`, ADDED public bridge, TYPE ×2 — before the instances verdict existed).
+  The ruled verdicts' plants (`--controls`, `statements-fix-controls.txt`): eight, each FIRED — the redefined constant left in
+  the modules, found in another module, absent by name, its type changed, its value the old one; the ruled addition missing;
+  an instances-only type changed elsewhere too; one moved to another instance — and the unplanted text passes. The reader's
+  own four plants pass as before (`--self-test`).
+
+**3.5 The join's gate steps, each on this build** (the final pass, stage 5, runs them again on one commit):
+- **doubled names** (`dupnames-join.log`): "dupnames: OK — no name is declared by two modules (26 generated on demand)" —
+  `mOne` once.
+- **axioms** (`axioms-join.log`, receipt `receipt-axioms-join.log`): **"audited: 9824 records — 9438 clean on the standard
+  axioms, 355 axiom-free, 26 imported (resting on a declared outside theorem), 5 declared purchase(s)"**, "axioms: OK" —
+  stage 2.4's prediction, each count. Its first run read "audited more than once: HadwigerNelson.Plane.mOne": FS131-IDB2's
+  block listed this line's `mOne` and FS133-LD1's block lists `main`'s, now one constant. The block's `Plane.mOne` record is
+  replaced by the bridge's (`scripts/Axioms.lean`, with a comment; the counts are unchanged by the swap, both on the three).
+- **coverage and records** (`coverage-join.out`, `records-join.txt`): **"records: PASS"** — the 723 records each once under
+  CLEAN on a subset of the three, 400 and 323; the headline on exactly the three; IMPORTED 26 = 20 + 6; 9,824 records, none
+  twice; the coverage 83 modules, 4,084 constants, 2,490 public = 723 records + 1,767 reached, 0 unreached, the control 418
+  of 418. Its seven plants each FAILED, as they must (`records-plant-join.txt`).
+- **vacuity** (`vacuity-join.log`, receipt `receipt-vacuity-join.log`): **"scanned: declarations=20563
+  refutations-skipped=234"**, **"sites: sites=1454 vacuous=0 stale=0 declared=3 witnessed=38 generic=1411 unknown=2"**,
+  "vacuity: OK" — the prediction written before it ran (`prediction-vacuity.txt`: the counter's 20,563 = 17,902 + 2,662 − 1,
+  the −1 a generated-on-demand theorem, `MeasureTheory.Measure.addHaar.congr_simp`, now attributed to Mathlib's
+  `Analysis.Calculus.BumpFunction.FiniteDimension`, which the density bound brings into the closure). Against the last
+  landing row for row (`tools/fs131_l5_vacdiff.py`, `vacdiff-join.txt`): **"vacdiff: PASS"**, no row lost or added, "by
+  module: declarations +2661, refutations +0: equal to the scans difference" — `Arith.StationaryRatio` −1,
+  `OAI158Palette` −1 and `OAI158BoundedFunctions` +1 (`measureUnivNNReal.eq_1` re-attributed), the 83 modules +2,662. The
+  baseline's header count line refiled on this branch (17902 → 20563; its entries unchanged); `CLAUDE.md` § The gate is a
+  draft.
+- **assumptions** (`assumptions-join.log`): one failure, **`FAIL undeclared-never-concluded
+  HadwigerNelson.DensityBound.DualCert.IsIndep`** — taken by `X23Check.X23_atoms`, concluded by no theorem. It is a
+  condition on the theorem's own set `S` ("`S` is independent in the unit-distance graph on the certificate's points"), so it
+  is declared one, by `LEAN.md` § The gate's rule: `.condition ``HadwigerNelson.DensityBound.DualCert.IsIndep "…"` in
+  `AssumptionAudit.declared` (`scripts/Assumptions.lean`). With it (`assumptions-join2.log`, receipt
+  `receipt-assumptions-join2.log`): **"assumptions: OK — 2 outside theorem(s) as axioms, with 27 theorem(s) resting on them;
+  19 named and 14 inline hypotheses (7 outside, 21 ours, 5 open), taken by 102 statement(s) and mentioned by 1"**; the
+  ledger's header and `CLAUDE.md` § Trust ledger "match (9 of 9 compared)" — the nine counts unchanged; conditions 41 → 42.
+  `OneAvoidingDensityBound`'s three closed takers (`upperDensity_le_of_…`, `mOne_le_of_…`, `mOne_lt_quarter`) read
+  **`CLOSED ESTABLISHED`**: the library proves the hypothesis they take. With its docstring as FS131-KR1 wrote it ("named
+  hypothesis", "External") the step would have failed it as `undeclared-by-docstring`.
+- **the guarded lint** (`lint-join.log`): exit 0, "-- Linting passed for Proofs.", 14 linters "(2/2) Passed!".
+- **the sorry search's plant** (`sorry-plant.out`): the narrow pattern finds the three forms appended to a copy of
+  `Plane/DensityBound/Theorem.lean`, and 0 lines in the module.
+- **the generators**, each rewriting its modules in place (`gen-x23-pre.txt`, `gen-cells-chain-pre.txt`,
+  `gen-cells-modules-pre.txt`): `tools/fs131_kdb1_x23.py --write` (5.8 s) and `tools/fs131_idb1_cells.py chain` then
+  `modules` (about 1 s each) — **no tracked file changed** (`git status`): the 23 certificate modules, `summary.json`, the 48
+  covering modules and `Chain.lean` are each the generator's output byte for byte. Neither generator has a `--check` mode;
+  this rewrite-and-compare is that check. `Chain.out` (the compiled evaluator's run of the chain) was not recomputed.

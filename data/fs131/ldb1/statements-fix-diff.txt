@@ -1,0 +1,7 @@
+REDEFINED HadwigerNelson.Plane.mOne: now Proofs.HadwigerNelson.Plane.OneClass.Defs's, TYPE identical, VALUE 3605416353 -> 3350729776
+INSTANCES-ONLY HadwigerNelson.DensityBound.DualCert.window_le: 3 instance argument(s) moved, the rest identical
+INSTANCES-ONLY HadwigerNelson.DensityBound.DualCert.limsup_le: 3 instance argument(s) moved, the rest identical
+ADDED-RULED THM HadwigerNelson.Plane.mOne_eq_iSup_bandFree
+checked 4083 constants of the base dump; 0 differences; 4 private additions
+PASS
+exit=0

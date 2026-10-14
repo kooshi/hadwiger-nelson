@@ -14,6 +14,11 @@ without them the comparison fails on exactly what the ruling changed:
                             `## BYNAME` section finds in MODULE, its stored TYPE identical to BEFORE's and its VALUE
                             another (a definition of `main`'s read in place of this line's): `REDEFINED`
   --added=NAME[,NAME]       public constants the ruling adds: `ADDED-RULED`
+  --instances-only=NAME,…   constants whose stored TYPE the ruled import moved in an instance argument only: the new
+                            type's text with `CommCStarAlgebra.toNormedCommRing.{0} Complex instCommCStarAlgebraComplex`
+                            replaced by `NormedField.toNormedCommRing.{0} Complex Complex.instNormedField` must be the
+                            old type's text, character for character (`INSTANCES-ONLY`); the kernel's own check that the
+                            old and new types are equal by `rfl` is `data/fs131/ldb1/lean/InstanceCheck.lean`
 
 Usage: tools/fs131_ldb1_statement_diff.py BEFORE AFTER [--redefined=NAME:MODULE] [--added=NAME,…]
        tools/fs131_ldb1_statement_diff.py --self-test BEFORE    (plants a changed type, a changed value, a removed
@@ -57,7 +62,15 @@ def parse(text, byname=None):
     return consts
 
 
-def compare(a, b, byname=None, redefined=None, added=()):
+NEW_INST = 'CommCStarAlgebra.toNormedCommRing.{0} Complex instCommCStarAlgebraComplex'
+OLD_INST = 'NormedField.toNormedCommRing.{0} Complex Complex.instNormedField'
+
+
+def body(t):
+    return t.split(' ', 1)[1] if t and ' ' in t else t
+
+
+def compare(a, b, byname=None, redefined=None, added=(), instances=()):
     bad, notes = [], []
     redefined = redefined or {}
     for n, mod in redefined.items():
@@ -87,7 +100,12 @@ def compare(a, b, byname=None, redefined=None, added=()):
         if c['kind'] != d['kind']:
             bad.append(f'KIND {n}: {c["kind"]} -> {d["kind"]}')
         if c['type'] != d['type']:
-            bad.append(f'TYPE {n}')
+            if n in instances and NEW_INST in body(d['type']) and body(d['type']).replace(NEW_INST, OLD_INST) == body(c['type']):
+                notes.append(f'INSTANCES-ONLY {n}: {body(d["type"]).count(NEW_INST)} instance argument(s) moved, the rest identical')
+            else:
+                bad.append(f'TYPE {n}')
+        elif n in instances:
+            bad.append(f'INSTANCES-ONLY-NOT {n}: listed, and its stored TYPE did not move')
         if c['kind'] == 'DEF' and c['value'] != d['value']:
             bad.append(f'VALUE {n}')
     for n, d in b.items():
@@ -138,20 +156,22 @@ def main(argv):
     if len(pos) != 2:
         print(__doc__)
         return 2
-    redefined, added = {}, ()
+    redefined, added, instances = {}, (), ()
     for f in flags:
         if f.startswith('--redefined='):
             n, m = f[len('--redefined='):].split(':')
             redefined[n] = m
         elif f.startswith('--added='):
             added = tuple(x for x in f[len('--added='):].split(',') if x)
+        elif f.startswith('--instances-only='):
+            instances = tuple(x for x in f[len('--instances-only='):].split(',') if x)
         elif f != '--controls':
             print(f'unknown flag {f}'); return 2
     byname = {}
     a, b = parse(open(pos[0]).read()), parse(open(pos[1]).read(), byname)
     if '--controls' in flags:
-        return controls(a, open(pos[1]).read(), redefined, added)
-    bad, notes, checked = compare(a, b, byname, redefined, added)
+        return controls(a, open(pos[1]).read(), redefined, added, instances)
+    bad, notes, checked = compare(a, b, byname, redefined, added, instances)
     for x in notes:
         print(x)
     for x in bad:
@@ -161,13 +181,13 @@ def main(argv):
     return 0 if not bad else 1
 
 
-def controls(a, after_text, redefined, added):
+def controls(a, after_text, redefined, added, instances=()):
     """The ruled verdicts' own plants, on the second dump's text: each must fail; the unplanted text must pass."""
     import re as _re
     ok = True
     def run(txt):
         bn = {}
-        bad, _, _ = compare(a, parse(txt, bn), bn, redefined, added)
+        bad, _, _ = compare(a, parse(txt, bn), bn, redefined, added, instances)
         return bad
     base_bad = run(after_text)
     print(f'unplanted: {"PASS" if not base_bad else "FAIL " + str(base_bad[:2])}')
@@ -183,6 +203,13 @@ def controls(a, after_text, redefined, added):
         'the redefined constant\'s VALUE the old one': _re.sub(r'(## BYNAME [^\n]*\nTYPE [^\n]*\nVALUE )\S+', lambda m: m.group(1) + a[n]['value'], after_text, count=1),
         'a ruled addition missing, an unruled one added': after_text.replace(f'@@ THM {added[0]}\n', '@@ THM HadwigerNelson.Plane.zz_unruled\n', 1),
     }
+    if instances:
+        k = after_text.index(f'@@ THM {instances[0]}\n')
+        t = after_text.index('TYPE ', k)
+        e = after_text.index('\n', t)
+        line = after_text[t:e]
+        plants['an instances-only type changed elsewhere too'] = after_text[:t] + line.replace('forall', 'forall {zz : Nat}', 1) + after_text[e:]
+        plants['an instances-only type moved to another instance'] = after_text[:t] + line.replace(NEW_INST, 'Other.toNormedCommRing.{0} Complex x', 1) + after_text[e:]
     for what, txt in plants.items():
         bad = run(txt)
         print(f'plant {what}: {"FIRED" if bad else "SILENT"}' + (f' ({bad[0][:100]})' if bad else ''))

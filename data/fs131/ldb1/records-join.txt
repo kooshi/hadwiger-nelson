@@ -1,0 +1,13 @@
+  ok    the block: 723 records, distinct, the headline and lane X's 418 among them
+  ok    the block's records, each once under CLEAN on a subset of the three (723 of 723)
+  ok    axiom-free 323 (predicted 323), on a non-empty subset 400 (predicted 400)
+  ok    the headline HadwigerNelson.Plane.oneAvoidingDensityBound: [('CLEAN', ['propext', 'Classical.choice', 'Quot.sound'])]
+  ok    declared imports: ['HadwigerNelson.StandingFive.kloosterman_bound', 'HadwigerNelson.Outside.OAI158.no_proper_five_coloring']
+  ok    IMPORTED: 26 records, 20 on Weil's bound alone, 6 on the five-colour theorem alone
+  ok    records: 9824 ({'IMPORTED': 26, 'CLEAN': 9793, 'PURCHASED': 5}), 9824 predicted (CLEAN 9793, IMPORTED 26, PURCHASED 5); printed twice: []
+  ok    coverage: modules 83 (83), the print complete
+  ok    coverage: 723 records read, 0 absent from the 83 modules
+  ok    coverage: public 2490 = records 723 + reached 1767; unreached 0
+  ok    coverage control: 418 removed; 418 of 418 reported, 427 in all (at most lane X's 427 public constants)
+records: PASS
+exit=0
