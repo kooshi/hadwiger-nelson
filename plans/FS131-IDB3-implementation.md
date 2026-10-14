@@ -102,11 +102,11 @@ The statements are the planner's typed block (FS131-KDB1 § 3.3) with `bound = w
 
 | file | lines | what |
 |---|---|---|
-| `Proofs/HadwigerNelson/Plane/DensityBound/X23Check.lean` (core, no import) | 330 | the checker (§ 1.4), 12 spec examples by `decide` |
-| `tools/fs131_kdb1_x23.py` | 560 | the generator: checksums, read-backs (Table 1 transcribed in `data/fs131/idb3/paper-table1.txt`, Table 2's text in `paper-table2.txt`, `P23`), the integer data, an exact Python mirror of every check, the modules |
+| `Proofs/HadwigerNelson/Plane/DensityBound/X23Check.lean` (core, no import) | 324 | the checker (§ 1.4), 12 spec examples by `decide` |
+| `tools/fs131_kdb1_x23.py` | 571 | the generator: checksums, read-backs (Table 1 transcribed in `data/fs131/idb3/paper-table1.txt`, Table 2's text in `paper-table2.txt`, `P23`), the integer data, an exact Python mirror of every check, the modules |
 | `Proofs/HadwigerNelson/Plane/DensityBound/X23Data.lean`, `X23Cong00`–`07`, `X23Atoms00`–`12`, `X23All` (generated, core) | — | the data and 8 + 103 + 8 `decide +kernel` theorems, assembled in `X23All` (`wcR_ok`, `frL_ok`) |
-| `Proofs/HadwigerNelson/Plane/DensityBound/X23.lean` (Mathlib) | 790 | the semantics and `X23_valid` |
-| `Proofs/HadwigerNelson/Plane/DensityBound/X23Dist.lean`, `Theorem.lean` | 60, 85 | `X23_close`, `X23_phi`, `X23_ratio`, `Plane.oneAvoidingDensityBound` |
+| `Proofs/HadwigerNelson/Plane/DensityBound/X23.lean` (Mathlib) | 834 | the semantics and `X23_valid` |
+| `Proofs/HadwigerNelson/Plane/DensityBound/X23Dist.lean`, `Theorem.lean` | 60, 73 | `X23_close`, `X23_phi`, `X23_ratio`, `Plane.oneAvoidingDensityBound` |
 
 **Deviations from the design, and one finding.** (i) The scale is `10²¹`, not `10²⁰`: one `w_C` row of `g23.csv`,
 `5.4369049825320215e-05`, has 21 decimals, and is not an integer at `10²⁰` — the planner's prototype `proto_atoms.py` read
@@ -198,8 +198,8 @@ Times are Lake's (`Built … (Ns)`; two modules at a time on three cores); peaks
 
 **Kernel time in all: about 25 minutes of CPU** — the atom check 1,288 s (the planner's 12 minutes, × 1.8: the terms decoded
 per test and the depth-15 cut), the congruences 115 s, the data's eight checks 91 s. No module near the cap or an hour; the
-largest 3.09 GB. The planner's lane X at 700 lines and the last implementer's 900–1,400: this lane is 1,265 hand-written
-lines of Lean (`X23Check` 330, `X23` 790, `X23Dist` 60, `Theorem` 85) and a 560-line generator — **1.8× the planner's, inside
+largest 3.09 GB. The planner's lane X at 700 lines and the last implementer's 900–1,400: this lane is 1,291 hand-written
+lines of Lean (`X23Check` 324, `X23` 834, `X23Dist` 60, `Theorem` 73) and a 571-line generator — **1.8× the planner's, inside
 the last implementer's range**.
 
 ### 3.4 The theorem, read aloud
@@ -236,3 +236,97 @@ at the mask of any independent set (used so in `X23_atoms`); `tval_pack` by ever
   The new public names are all under `HadwigerNelson.DensityBound.X23Check`, `HadwigerNelson.DensityBound.X23*` and
   `HadwigerNelson.Plane.oneAvoidingDensityBound`; no hypothesis of any new statement is an assumption (none is declared or
   owed to `scripts/Assumptions.lean`).
+
+
+## Stage 5 — SAVED: drafts for the landing
+
+## Drafts for the front page
+
+*For the coordinator; this job files none. Each names its slot.*
+
+### D1. The audit's block for the whole density bound (`scripts/Axioms.lean`, CLEAN section)
+
+The density bound's records come in three blocks, in landing order, each under CLEAN (every record on a subset of the standard
+three; none on `sorryAx`, none on a native axiom):
+
+1. FS131-IDB1's (`data/fs131/idb1/audit-block.txt`, 270 lines: `Bessel`, `BesselDefect`, `BesselCheck`, `BesselCert`,
+   `Cells/*`), as drafted in its record § 5.3;
+2. FS131-IDB2's (`data/fs131/idb2/audit-block.txt`, 41 records: `Autocorr`, `Pattern`, `Window`, `Plane/OneAvoidingDensity`),
+   its record § 5.3;
+3. this job's, after FS131-IDB2's: `data/fs131/idb3/audit-block.txt` — 418 records, every public declaration of the 27
+   modules `Plane/DensityBound/X23Check`, `X23Data`, `X23Cong00`–`07`, `X23Atoms00`–`12`, `X23All`, `X23`, `X23Dist`,
+   `Theorem`, in stored order. Banner:
+   > `## FS131-IDB3 — the density bound's certificate and the theorem (FS-131; plan FS131-KDB1)` — 418 records, every
+   > public declaration of the certificate's 27 modules, `HadwigerNelson.Plane.oneAvoidingDensityBound` among them; every
+   > record under CLEAN (`data/fs131/idb3/axioms.txt`, `tools/fs131_idb3_axioms.py`).
+
+### D2. `LEAN.md` § The kernel's cost model, after the line on `∀ x ∈ l`
+
+- A DFS of mask tests over packed terms (`mask + 2²³·(c + 2⁷⁰)`) costs about 140 µs per test in the kernel: `[AmbrusEtAl2023]`'s
+  atom check, 7.12 M tests below a depth-15 frontier of 492 states, is 103 theorems of at most 80,000 tests, about 11 s and
+  at most 2.4 GB each; a module of eight peaks at one theorem's memory. The frontier is checked once against the DFS's own
+  prefix (`collect … = frL`), so the chunks need no completeness argument of their own (`Plane/DensityBound/X23Data`,
+  FS131-IDB3).
+- A congruence row checked as an explicit isometry in `ℤ[√3, √11]` is about 27 ms: 300 rows of up to 8 points in 8 s and
+  1.6 GB (`X23Cong00`, FS131-IDB3).
+- Read a certificate's decimals at the scale that makes every one exact, and assert it in the generator: `g23.csv` holds one
+  coefficient with 21 decimals (`5.4369049825320215e-05`), so `10²⁰` is not exact and `int(v·10²⁰)` truncates it in silence
+  (FS131-KDB1's `proto_atoms.py` did; the check `Fr(c, WS)·WS == c` it carried is true of every integer). Lane X is exact at
+  `10²¹` (FS131-IDB3).
+
+### D3. `LEAN.md` § Searching — Lean, after its last bullet
+
+- `Nat.testBit_lor`, `Nat.testBit_land` are Mathlib's (`Mathlib/Data/Nat/Bitwise`), outside a module that imports only
+  analysis; core's `Nat.testBit_or`, `Nat.testBit_and`, `Nat.testBit_xor`, `Nat.testBit_two_pow`,
+  `Nat.testBit_shiftRight` and `Nat.zero_testBit` are in scope everywhere. `List.getD_map`, `List.getD_eq_getElem` and
+  `List.sum_map_neg` are not in that closure either: `List.getD_eq_getElem?_getD` with `List.getElem?_map` is (FS131-IDB3).
+- `simp` rewrites `1 &&& U = 1` to `U % 2 = 1` before a hypothesis stated about the first form can fire: close such case
+  splits with `rw [if_pos h, if_pos (this.2 h)]`, not `simp [h]`. A `set U := maskOf S` hides `maskOf S` from a lemma stated at
+  it: instantiate the lemma as a `have` at `U` and give that to `simp` (FS131-IDB3).
+- `induction` on a `List.Forall₂ R (f x) (g x)` fails ("index in target's type is not a variable"): state what is needed
+  for arbitrary lists as a lemma (`X23Check.forall₂_exists_left`, `_right`) and apply it (FS131-IDB3).
+- In a core-only checker, `Bool.rec` in a `def` is refused by the code generator; `bif … then … else …` (`cond`) is what the
+  kernel and the compiler both take (FS131-IDB3).
+
+### D4. `BIBLIOGRAPHY.md`
+
+- `[AmbrusEtAl2023]`, read column (row 281 and the library table, line 566): add "pp. 4, 16–19 re-read and Tables 1–2 read
+  line by line against the notebook's points and `g23.csv` (FS131-IDB3, 2026-10-14: Table 1 = the notebook's list,
+  Table 2 = `g23.csv`, exactly; p. 18's `J0′(t) = J1(t)` should be `−J1(t)`, not material: the paper uses `|J0′|`)".
+  Role column: add "Theorem 1 kernel-checked from the paper's certificate, unchanged but read at scale `10²¹`
+  (`HadwigerNelson.Plane.oneAvoidingDensityBound`, FS131-IDB3), on the standard three axioms; no periodic reduction, no
+  Watson §§ 7.21, 13.74, 15.31".
+- `[KMOR2016]`, role column: add "Lemma 3.2 (1), finite-window form, kernel-checked (`autocorr_eq_zero_of_norm_eq_one`,
+  FS131-IDB2); now a step of the kernel proof of `[AmbrusEtAl2023]` Theorem 1 (FS131-IDB3)". No new key.
+
+### D5. `data/fs131/claims-NF2.md` § Dated lines, after its last line
+
+- 2026-10-14 — **The density bound is a kernel theorem** (FS131-IDB3): `HadwigerNelson.Plane.oneAvoidingDensityBound :
+  Plane.OneAvoidingDensityBound` (`Plane/DensityBound/Theorem`), on `[propext, Classical.choice, Quot.sound]` —
+  `[AmbrusEtAl2023]` Theorem 1 from the paper's certificate (Table 1, `g23.csv`, `ν = 10⁻⁵`, `µ = 6·10⁻⁵`) read at scale
+  `10²¹`; the 2,321 congruences, the 47 edges, the 13,552 independent atoms (by a DFS of 7.19 M mask tests in 103 chunks) and
+  the 27 distances checked by `decide +kernel` in core-only modules, about 25 minutes of kernel CPU; with it
+  `mOne_le_of_oneAvoidingDensityBound` and `mOne_lt_quarter` (`m₁(ℝ²) < 1/4`) hold with no hypothesis.
+
+### D6. Ledger row 129 (`LEDGER.md`), its bracketed grade note
+
+The row reads "…`[AmbrusEtAl2023]` Theorem 1; Croft's set), not the kernel's, which holds `1/7 ≤ m₁(ℝ²) ≤ 1`]". Draft
+replacement of "not the kernel's, which holds `1/7 ≤ m₁(ℝ²) ≤ 1`": "the upper bound `m₁(ℝ²) ≤ 0.2470` in the kernel since
+FS131-IDB3 (`HadwigerNelson.Plane.oneAvoidingDensityBound`, with `Plane.mOne_le_of_oneAvoidingDensityBound`; standard
+three), the lower bound `1/7` the kernel's". The row's own claim (the fractional principle) is not regraded by this job: it
+rests on more than the density bound. **For the coordinator to decide**: whether any row's hypothesis `OneAvoidingDensityBound`
+(the count's, `Rigidity.Counting.count_of_oneAvoidingDensityBound`, on another branch) is now discharged at the join — it
+is, by `HadwigerNelson.Plane.oneAvoidingDensityBound`, once the branches meet.
+
+### D7. `CLAUDE.md` — the Frontier's "Last filed" sentence and § Trust ledger / § The gate
+
+- Frontier, "Last filed:" — draft clause: "**the density bound proved** (FS131-IDB3, 2026-10-14: `Plane/DensityBound/X23Check`
+  … `Theorem`, 27 modules, 418 public theorems and definitions, all on the standard three or fewer;
+  `HadwigerNelson.Plane.oneAvoidingDensityBound`: `[AmbrusEtAl2023]` Theorem 1, `m₁(ℝ²) ≤ 0.2470`, from the paper's
+  certificate with no periodic reduction and no Bessel citation; with FS131-IDB1 and FS131-IDB2 the whole density bound in
+  the kernel; other people's theorem, the kernel proof ours; no value moved)".
+- § Trust ledger and § The gate counts: **not computed by this job** — the landing's gate (`axioms.sh`, `vacuity.sh`,
+  `assumptions.sh`, `dupnames.sh`) runs on the joined tree. What this lane adds to them: 418 audit records, all CLEAN; no
+  axiom, no assumption, no `IsEmpty`/`Coloring` binder (the vacuity scan should read no new site; its count of
+  declarations rises by the new constants).
+- Proof Atlas: `[AmbrusEtAl2023]` Theorem 1 from [external] to [kernel].
