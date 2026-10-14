@@ -1,0 +1,7 @@
+OK: OAI015Shannon.lean is the generated text, 499 lines, sha256 6cd3587d88723379
+OK: OAI015Mixtures.lean is the generated text, 602 lines, sha256 5fe6b82c972bd266
+OK: OAI015Maximal.lean is the generated text, 342 lines, sha256 2a9c07b1bdc97453
+FAIL: OAI015Generating.lean is absent
+FAIL: OAI015ErgodicDecomposition.lean is absent
+OK: OAIMath2026-LICENSE.txt is the release's LICENSE byte for byte, 11357 bytes, sha256 c71d239df91726fc
+CHECK FAILED

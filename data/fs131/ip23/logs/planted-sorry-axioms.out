@@ -1,0 +1,48 @@
+slot: admitted ip23: mem 4 GiB (hard cap), cpus 4,5
+build/fs131-ip23/planted/PlantedSorry.lean:159:6: warning: declaration uses `sorry`
+'HadwigerNelson.Outside.OAI015.fixedPoint_mem_closed_convex_orbit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.exists_convex_orbit_approximants' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.actionInvariantSigma' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.actionInvariantSigma_le' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.measurable_actionInvariantSigma' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.exists_pointwise_invariant_representative' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.orbitConvexHull' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.orbitConvexHull_measurable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.orbitConvexHull_interval' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.orbitConvexHull_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.orbitConvexHull_setIntegral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.lp_convex_orbit_representative' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.exists_invariant_orbit_average_limit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.orbitConvexHull_aeSetIntegral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.invariant_set_independent_of_orbit_indicator_limit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.ergodicSMul_of_orbit_indicator_limits' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.condExpKernel_invariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.invariant_kernel_decomposition' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.condExpKernel_ae_constant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.action_ergodic_decomposition' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+seconds=5
+exit=0

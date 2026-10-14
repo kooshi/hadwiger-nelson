@@ -1,0 +1,4 @@
+records expected: 20; clean (a subset of the standard three): 18, of which axiom-free: 0
+AXIOMS   HadwigerNelson.Outside.OAI015.actionInvariantSigma_le: ['sorryAx'] beyond the standard three
+AXIOMS   HadwigerNelson.Outside.OAI015.action_ergodic_decomposition: ['sorryAx'] beyond the standard three
+AXIOMS FAILED: 2

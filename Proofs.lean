@@ -309,6 +309,8 @@ import Proofs.HadwigerNelson.Outside.OAI158AngularBoundary
 import Proofs.HadwigerNelson.Outside.OAI015Shannon
 import Proofs.HadwigerNelson.Outside.OAI015Mixtures
 import Proofs.HadwigerNelson.Outside.OAI015Maximal
+import Proofs.HadwigerNelson.Outside.OAI015Generating
+import Proofs.HadwigerNelson.Outside.OAI015ErgodicDecomposition
 import Proofs.HadwigerNelson.Plane.SixRing.Confine
 import Proofs.HadwigerNelson.Plane.SixRing.Orbit
 import Proofs.HadwigerNelson.Plane.SixRing.Basic
