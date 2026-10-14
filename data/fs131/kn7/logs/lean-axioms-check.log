@@ -1,0 +1,23 @@
+slot: waiting (ledger 20 + 6 > budget 22 GiB)
+slot: admitted kn7s: mem 6 GiB (hard cap), cpus 0,1
+'HadwigerNelson.Rigidity.positive_entropy_rigidity_of_polishSpace' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ positive_entropy_rigidity]
+'HadwigerNelson.Rigidity.positive_entropy_rigidity_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.mrPlus_of_split_of_carried' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.entropySplit_of_every' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.nameOf_apply' does not depend on any axioms
+'HadwigerNelson.Rigidity.mem_nameCell_iff_nameOf' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Rigidity.mem_nameCell_nameOf' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Rigidity.measurable_nameOf' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.wordBlock_nameOf' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Rigidity.mem_heavyNames' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.zeroEntropyNames_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.le_maxMultiple' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber_of_closed' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+seconds=58
+exit=0

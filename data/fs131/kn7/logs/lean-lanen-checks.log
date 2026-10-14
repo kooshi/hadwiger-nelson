@@ -1,0 +1,56 @@
+slot: admitted kn7s: mem 6 GiB (hard cap), cpus 0,1
+@sum_measure_preimage_singleton : ∀ {α : Type u_1} {β : Type u_2} {m : MeasurableSpace α} {μ : Measure α} (s : Finset β)
+  {f : α → β}, (∀ y ∈ s, MeasurableSet (f ⁻¹' {y})) → ∑ b ∈ s, μ (f ⁻¹' {b}) = μ (f ⁻¹' ↑s)
+@measureReal_biUnion_finset : ∀ {α : Type u_1} {ι : Type u_2} {x : MeasurableSpace α} {μ : Measure α} {s : Finset ι}
+  {f : ι → Set α},
+  (↑s).PairwiseDisjoint f →
+    (∀ b ∈ s, MeasurableSet (f b)) →
+      autoParam (∀ b ∈ s, μ (f b) ≠ ⊤) measureReal_biUnion_finset._auto_1 →
+        μ.real (⋃ b ∈ s, f b) = ∑ p ∈ s, μ.real (f p)
+@Real.negMulLog_nonneg : ∀ {x : ℝ}, 0 ≤ x → x ≤ 1 → 0 ≤ x.negMulLog
+@Real.log_lt_log : ∀ {x y : ℝ}, 0 < x → x < y → Real.log x < Real.log y
+@Real.exp_log : ∀ {x : ℝ}, 0 < x → Real.exp (Real.log x) = x
+@Real.rpow_def_of_pos : ∀ {x : ℝ}, 0 < x → ∀ (y : ℝ), x ^ y = Real.exp (Real.log x * y)
+@Real.exp_le_exp : ∀ {x y : ℝ}, Real.exp x ≤ Real.exp y ↔ x ≤ y
+@Real.log_pos : ∀ {x : ℝ}, 1 < x → 0 < Real.log x
+Real.rpow_natCast : ∀ (x : ℝ) (n : ℕ), x ^ ↑n = x ^ n
+@Real.rpow_le_rpow_of_exponent_ge : ∀ {x y z : ℝ}, 0 < x → x ≤ 1 → z ≤ y → x ^ y ≤ x ^ z
+@Real.rpow_le_rpow_left_iff : ∀ {x y z : ℝ}, 1 < x → (x ^ y ≤ x ^ z ↔ y ≤ z)
+@tsum_geometric_of_lt_one : ∀ {r : ℝ}, 0 ≤ r → r < 1 → ∑' (n : ℕ), r ^ n = (1 - r)⁻¹
+@measure_iUnion_le : ∀ {α : Type u_1} {ι : Type u_2} {F : Type u_3} [inst : FunLike F (Set α) ENNReal]
+  [OuterMeasureClass F α] {μ : F} [Countable ι] (s : ι → Set α), μ (⋃ i, s i) ≤ ∑' (i : ι), μ (s i)
+@measure_union_le : ∀ {α : Type u_1} {F : Type u_2} [inst : FunLike F (Set α) ENNReal] [OuterMeasureClass F α] {μ : F}
+  (s t : Set α), μ (s ∪ t) ≤ μ s + μ t
+@ae_all_iff : ∀ {α : Type u_1} {F : Type u_2} [inst : FunLike F (Set α) ENNReal] [inst_1 : OuterMeasureClass F α]
+  {μ : F} {ι : Sort u_3} [Countable ι] {p : α → ι → Prop},
+  (∀ᵐ (a : α) ∂μ, ∀ (i : ι), p a i) ↔ ∀ (i : ι), ∀ᵐ (a : α) ∂μ, p a i
+@MeasurableSet.iInter : ∀ {α : Type u_1} {ι : Sort u_2} {m : MeasurableSpace α} [Countable ι] {f : ι → Set α},
+  (∀ (b : ι), MeasurableSet (f b)) → MeasurableSet (⋂ b, f b)
+@measure_congr : ∀ {α : Type u_1} {F : Type u_2} [inst : FunLike F (Set α) ENNReal] [inst_1 : OuterMeasureClass F α]
+  {μ : F} {s t : Set α}, s =ᵐ[μ] t → μ s = μ t
+@Finset.card_le_card : ∀ {α : Type u_1} {s t : Finset α}, s ⊆ t → s.card ≤ t.card
+@Finset.card_filter_le : ∀ {α : Type u_1} (s : Finset α) (p : α → Prop) [inst : DecidablePred p],
+  (Finset.filter p s).card ≤ s.card
+@Finset.sum_le_sum : ∀ {ι : Type u_1} {N : Type u_2} [inst : AddCommMonoid N] [inst_1 : Preorder N] {f g : ι → N}
+  {s : Finset ι} [AddLeftMono N], (∀ i ∈ s, f i ≤ g i) → ∑ i ∈ s, f i ≤ ∑ i ∈ s, g i
+@Fintype.sum_equiv : ∀ {ι : Type u_1} {κ : Type u_2} {M : Type u_3} [inst : Fintype ι] [inst_1 : Fintype κ]
+  [inst_2 : AddCommMonoid M] (e : ι ≃ κ) (f : ι → M) (g : κ → M), (∀ (x : ι), f x = g (e x)) → ∑ x, f x = ∑ x, g x
+@Fin.append : {m n : ℕ} → {α : Sort u_1} → (Fin m → α) → (Fin n → α) → Fin (m + n) → α
+@Fin.appendEquiv : {α : Type u_1} → (m n : ℕ) → (Fin m → α) × (Fin n → α) ≃ (Fin (m + n) → α)
+@List.ofFn : {α : Type u_1} → {n : ℕ} → (Fin n → α) → List α
+@measurable_pi_lambda : ∀ {α : Type u_1} {δ : Type u_2} {X : δ → Type u_3} [inst : MeasurableSpace α]
+  [inst_1 : (a : δ) → MeasurableSpace (X a)] (f : α → (a : δ) → X a),
+  (∀ (a : δ), Measurable fun c => f c a) → Measurable f
+@Function.iterate_add_apply : ∀ {α : Type u_1} (f : α → α) (m n : ℕ) (x : α), f^[m + n] x = f^[m] (f^[n] x)
+@Equiv.addRight : {G : Type u_1} → [AddGroup G] → G → Equiv.Perm G
+data/fs131/kn7/lean/LaneNChecks.lean:31:8: error(lean.unknownIdentifier): Unknown constant `Real.add_pow_le_pow_mul_pow_of_sq_le_sq`
+@ENNReal.ofReal_le_ofReal : ∀ {p q : ℝ}, p ≤ q → ENNReal.ofReal p ≤ ENNReal.ofReal q
+@Nat.ceil_le : ∀ {α : Type u_1} [inst : Semiring α] [inst_1 : PartialOrder α] [inst_2 : FloorSemiring α] {a : α}
+  {n : ℕ}, ⌈a⌉₊ ≤ n ↔ a ≤ ↑n
+Real.exp_neg : ∀ (x : ℝ), Real.exp (-x) = (Real.exp x)⁻¹
+Real.tendsto_exp_neg_atTop_nhds_zero : Filter.Tendsto (fun x => Real.exp (-x)) Filter.atTop (nhds 0)
+@measureReal_compl : ∀ {α : Type u_1} {x : MeasurableSpace α} {μ : Measure α} {s : Set α} [IsFiniteMeasure μ],
+  MeasurableSet s → μ.real sᶜ = μ.real Set.univ - μ.real s
+data/fs131/kn7/lean/LaneNChecks.lean:37:8: error(lean.unknownIdentifier): Unknown constant `MeasureTheory.Measure.exists_measurable_superset_iff_measure_eq_zero`
+seconds=5
+exit=1

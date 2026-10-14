@@ -1,0 +1,7 @@
+slot: admitted kn7s: mem 6 GiB (hard cap), cpus 2,3
+data/fs131/kn7/lean/PolishProbe.lean:9:8: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  TopologicalSpace.MetrizableSpace X
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+seconds=5
+exit=1

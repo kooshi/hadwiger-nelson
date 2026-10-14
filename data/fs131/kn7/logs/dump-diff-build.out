@@ -1,0 +1,6 @@
+SAME    theorem HadwigerNelson.Rigidity.haar_or_zero_entropy
+SAME    axiom HadwigerNelson.Rigidity.positive_entropy_rigidity
+SAME    theorem HadwigerNelson.Rigidity.positive_entropy_rigidity_model
+SAME    theorem HadwigerNelson.Rigidity.positive_entropy_rigidity_of_polishSpace
+ADDED=0 REMOVED=0 CHANGED=0 SAME=4
+exit=0

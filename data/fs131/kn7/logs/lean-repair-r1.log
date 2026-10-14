@@ -1,0 +1,14 @@
+slot: admitted kn7s: mem 5 GiB (hard cap), cpus 6,7
+'HadwigerNelson.Rigidity.KN7Scratch.ksEntropy_map_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.KN7Scratch.entropy_borel_le_quotient' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Rigidity.KN7Scratch.current_clause_four_implies_r1' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Rigidity.KN7Scratch.positive_entropy_rigidity_of_polishSpace' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ positive_entropy_rigidity_r1]
+seconds=3
+exit=0

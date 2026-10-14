@@ -1,0 +1,40 @@
+slot: waiting (ledger 18 + 8 > budget 22 GiB)
+slot: admitted kn7t: mem 8 GiB (hard cap), cpus 0,1
+build/fs131-kn7/release-copies/ErgDecomp.lean:135:18: error(lean.unknownIdentifier): Unknown constant `Set.ofPred_forall`
+build/fs131-kn7/release-copies/ErgDecomp.lean:135:4: error: Type mismatch: After simplification, term
+  MeasurableSet.iInter fun g => measurableSet_eq_fun (Measurable.comp hf (hm g)) hf
+ has type
+  MeasurableSet (⋂ b, {x | f (b • x) = f x})
+but is expected to have type
+  MeasurableSet {y | ∀ (g : H), f (g • y) = f y}
+build/fs131-kn7/release-copies/ErgDecomp.lean:371:6: error(lean.unknownIdentifier): Unknown identifier `eventuallyEmptyOrUniv_iff`
+build/fs131-kn7/release-copies/ErgDecomp.lean:347:25: error: unsolved goals
+H : Type u_1
+Y : Type u_2
+inst✝² : Group H
+inst✝¹ : MulAction H Y
+mY : MeasurableSpace Y
+ν : Measure Y
+inst✝ : IsProbabilityMeasure ν
+hp : ∀ (g : H), MeasurePreserving (fun y => g • y) ν ν
+C : Set (Set Y)
+hgen : mY = MeasurableSpace.generateFrom C
+hpi : IsPiSystem C
+havg :
+  ∀ B ∈ C,
+    ∃ c F,
+      (∀ (k : ℕ), F k ∈ orbitConvexHull (B.indicator fun x => 1)) ∧ ∀ᵐ (y : Y) ∂ν, Tendsto (fun k => F k y) atTop (𝓝 c)
+S : Set Y
+hS : MeasurableSet S
+hSfix : ∀ (g : H), (fun x => g • x) ⁻¹' S =ᵐ[ν] S
+hmeas : ∀ B ∈ C, MeasurableSet B
+hind : ∀ B ∈ C, ν.real (B ∩ S) = ν.real S * ν.real B
+he : ν.restrict S = ν S • ν
+hreal : (ν S).toReal = (ν S).toReal * (ν S).toReal
+hz : (ν S).toReal * ((ν S).toReal - 1) = 0
+⊢ EventuallyConst S (ae ν)
+build/fs131-kn7/release-copies/ErgDecomp.lean:450:62: error(lean.unknownIdentifier): Unknown identifier `Function.diag`
+build/fs131-kn7/release-copies/ErgDecomp.lean:501:49: error(lean.unknownIdentifier): Unknown identifier `Function.diag`
+build/fs131-kn7/release-copies/ErgDecomp.lean:503:48: error(lean.unknownIdentifier): Unknown identifier `Function.diag`
+seconds=303
+exit=1

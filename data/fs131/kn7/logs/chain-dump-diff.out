@@ -1,0 +1,38 @@
+CHANGED def HadwigerNelson.Rigidity.EntropySplit
+  common prefix 1577 chars, common suffix 5685 chars
+  before: …∀ (u : @Set.Elem.{0} Complex (HadwigerNelson.SpectralChain.unitVectors F)), @Eq.{1} ENNReal (@HadwigerNelson.Rigidity.ksEntropy.{0} (HadwigerNelson.SpectralChain.Dual F) (@HadwigerNelson.SpectralChain.dualMeasurableSpace.{0} (↥(HadwigerNelson.SpectralChain.unitRing F)) (@Ring.toAddCommGroup.{0} (↥(HadwigerNelson.SpectralChain.unitRing F)) (@Subring.toRing.{0} Complex (@CommRing.toRing.{0} Complex Complex.commRing) (HadwigerNelson.SpectralChain.unitRing F)))) ρ (@HadwigerNelson.SpectralChain.rot F u)) (@OfNat.ofNat.{0} ENNReal (nat_lit 0) (@Zero.toOfNat0.{0} ENNReal ENNReal.instZero…
+  after:  …∃ u, And (∀ (n : Nat), @Ne.{1} Nat n (@OfNat.ofNat.{0} Nat (nat_lit 0) (instOfNatNat (nat_lit 0))) → @Ne.{1} Complex (@HPow.hPow.{0, 0, 0} Complex Nat Complex (@instHPow.{0, 0} Complex Nat (@NPow.toPow.{0} Complex (@Monoid.toNPow.{0} Complex (@Semiring.toMonoid.{0} Complex Complex.instSemiring)))) (@Subtype.val.{1} Complex (fun x => @Membership.mem.{0, 0} Complex (Set.{0} Complex) (@Set.instMembership.{0} Complex) (HadwigerNelson.SpectralChain.unitVectors F) x) u) n) (@OfNat.ofNat.{0} Complex (nat_lit 1) (@One.toOfNat1.{0} Complex Complex.instOne))) (@Eq.{1} ENNReal (@HadwigerNelson.Rigidity.ksEntropy.{0} (HadwigerNelson.SpectralChain.Dual F) (@HadwigerNelson.SpectralChain.dualMeasurableSpace.{0} (↥(HadwigerNelson.SpectralChain.unitRing F)) (@Ring.toAddCommGroup.{0} (↥(HadwigerNelson.SpectralChain.unitRing F)) (@Subring.toRing.{0} Complex (@CommRing.toRing.{0} Complex Complex.commRing) (HadwigerNelson.SpectralChain.unitRing F)))) ρ (@HadwigerNelson.SpectralChain.rot F u)) (@OfNat.ofNat.{0} ENNReal (nat_lit 0) (@Zero.toOfNat0.{0} ENNReal ENNReal.instZero)…
+SAME    theorem HadwigerNelson.Rigidity.EntropySplit._proof_1
+ADDED   def HadwigerNelson.Rigidity.EntropySplitEvery
+SAME    def HadwigerNelson.Rigidity.IsDyadic
+SAME    theorem HadwigerNelson.Rigidity.IsDyadic._proof_1
+SAME    def HadwigerNelson.Rigidity.IsRamified
+SAME    theorem HadwigerNelson.Rigidity.IsRamified.isDyadic
+SAME    def HadwigerNelson.Rigidity.MRPlus
+SAME    theorem HadwigerNelson.Rigidity.MRPlus._proof_1
+SAME    def HadwigerNelson.Rigidity.NoRamifiedStableDyadic
+SAME    def HadwigerNelson.Rigidity.TA
+SAME    def HadwigerNelson.Rigidity.ZeroEntropyCarried
+SAME    def HadwigerNelson.Rigidity.archChars
+SAME    def HadwigerNelson.Rigidity.chainInterface
+SAME    theorem HadwigerNelson.Rigidity.chainInterface._proof_1
+SAME    theorem HadwigerNelson.Rigidity.colorable_two_levelTarget_one_of_isRamified
+SAME    theorem HadwigerNelson.Rigidity.entropySplit
+ADDED   theorem HadwigerNelson.Rigidity.entropySplit_of_every
+SAME    theorem HadwigerNelson.Rigidity.exists_nonTorsion_unitVector
+SAME    theorem HadwigerNelson.Rigidity.five_le_chromaticNumber_of_mrPlus
+SAME    theorem HadwigerNelson.Rigidity.interface_mr_iff
+SAME    theorem HadwigerNelson.Rigidity.measurableSet_TA
+SAME    theorem HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber_closed
+SAME    theorem HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber_of_closed
+SAME    theorem HadwigerNelson.Rigidity.mrPlus
+SAME    theorem HadwigerNelson.Rigidity.mrPlus_of_split_of_carried
+SAME    theorem HadwigerNelson.Rigidity.noRamifiedStableDyadic_iff
+SAME    theorem HadwigerNelson.Rigidity.noRamifiedStableDyadic_of_tca
+SAME    theorem HadwigerNelson.Rigidity.noRamifiedStableDyadic_of_three_le_localBound
+SAME    theorem HadwigerNelson.Rigidity.one_mem_TA
+SAME    theorem HadwigerNelson.Rigidity.rot_preimage_TA
+SAME    def HadwigerNelson.Rigidity.torsionChars
+SAME    theorem HadwigerNelson.Rigidity.zeroEntropyCarried
+ADDED=2 REMOVED=0 CHANGED=1 SAME=30
+exit=0

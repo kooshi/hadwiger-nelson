@@ -1,6 +1,6 @@
 # Draft claim list M7-entropy-split — PE-2: Lemma Γ and the passage from `Γ` to `U`; re-cut by FS131-KN6 from the deriver's answer (FS131-EN2)
 
-*Drafted by FS131-KN3, rewritten by FS131-KN6 (2026-10-14) for Keryx to fix; a draft, not a fixed claim list. Written by `tools/fs131_kn6_recut.py` from `data/fs131/kn6/recut-M7.tmpl`: every quoted line is copied by script. The first draft is in git (`758af9d28`). Kind: planner and implementer.*
+*Drafted by FS131-KN3, rewritten by FS131-KN6 (2026-10-14), statement 1 restated by FS131-KN7 (2026-10-14, Amendment 2; by hand, so `tools/fs131_kn6_recut.py --check` reports this file as differing from its template, as it should) for Keryx to fix; a draft, not a fixed claim list. Written by `tools/fs131_kn6_recut.py` from `data/fs131/kn6/recut-M7.tmpl`: every quoted line is copied by script. The first draft is in git (`758af9d28`). Kind: planner and implementer.*
 
 ## The leaves it carries (quoted by script)
 
@@ -14,7 +14,17 @@
 
 ## Statements
 
-1. `Rigidity.entropySplit [NumberField F] : EntropySplit F` — typed, `sorry` (unchanged).
+1. `Rigidity.entropySplit [NumberField F] : EntropySplit F` — typed, `sorry`. **Since FS131-KN7 (Amendment 2 of its brief)
+   `EntropySplit F` asks for entropy zero at one rotation by a non-torsion unit vector**, which is all its one consumer
+   (`mrPlus_of_split_of_carried`) reads; the variant below proves it for every rotation of one admissible `Γ`, and a
+   generator of `Γ` is non-torsion. PE-2 at every rotation is `Rigidity.EntropySplitEvery F`, which implies it
+   (`entropySplit_of_every`, proved).
+1′. **Off the headline's path since FS131-KN7, kept stated** (as FS100-EXC's scope leaf was): the layer that extends the
+   variant from one admissible `Γ` to every `u ∈ U` — **Lemma W** for every non-torsion `u` ("every non-torsion `u ∈ U` lies in an
+   admissible `Γ = ⟨u, w⟩`", X02D l. 156, over Chebotarev, NF2-LEAF-19) and **the torsion case** ("torsion `u` has `h_μ(u) = 0`",
+   X02D l. 166, which reads `h(uᵏ) = k·h(u)`, not in the library). Needed only for `EntropySplitEvery F`. What stays on the path
+   is **one admissible `Γ`** (its existence at a general field is X02D's Lemma W construction for one `u`; at `ℚ(√47)`, by
+   NF2-LEAF-19, Dirichlet suffices).
 2. to type — **Lemma Γ** (X02D § 3.1): for admissible `Γ` and a `Γ`-invariant, `Γ`-ergodic probability `ρ` on `Dual F`: `IsHaarFourier ρ`, or `ksEntropy ρ (rot γ) = 0` for every `γ ∈ Γ`.
 3. **The route that is built — the largest Haar multiple** (the deriver offers two; this one is chosen because the typed `EntropySplit` is exactly the sentence it proves, and it reads neither the Lebesgue decomposition nor the ergodicity of Haar measure):
 
