@@ -197,3 +197,104 @@ reconciles the +117 and the +2 module by module.
 **2.12 The guarded lint** (`lake lint --no-build -- --no-build --trace` under the slot, `lint-join.log`): exit 0,
 **`-- Linting passed for Proofs.`**, every linter `(2/2) Passed!` — FS133-IPQ1's one finding (the unused
 `[IsProbabilityMeasure μ]` of `ofReal_integral_le_measure_pos`) gone with correction 1.
+
+**2.13 The lint's planted control** (`data/fs133/ld1/lint-plant.sh`, FS131-LP1's script with this module, the plant's
+name and the paths changed): an unused anonymous instance binder planted at the end of `Plane/OneClass/Pair` (a leaf:
+only the root imports it), the tree built (`build: OK — 255 of 255 batches, 2 module(s) rebuilt`, 770 s), the lint run:
+**`LINT CONTROL FIRED: exit 1, the plant named`** — `synTaut` and `unusedArguments` each `(2/2) Failed with 1
+messages`, both the plant's (`Pair.lean:494:1: … @zz_ld1_lint_plant`), nothing else (`lint-plant.log`); the module
+restored by `git checkout`, its digest the one taken before the plant (`lint-plant-restore.txt`: "RESTORED: the module
+is the text it was"). The final pass rebuilds `Pair` and the root from the restored text.
+
+## Stage 3 — SAVED (FS133-LD1): the two ruled corrections, from the kernel's side
+
+**Correction 1 (item 789, ruling 1): the unread `[IsProbabilityMeasure μ]` of `Plane.ofReal_integral_le_measure_pos`
+dropped.** Against stage 1's dump (before the merge), the dump after the join (2.6) reads **BINDER-DROPPED** for that
+theorem and IDENTICAL for every other constant of the seven `Plane/OneClass` modules (180): its stored type is the old
+one with exactly the second binder named `inst` — the probability instance; the first `inst` is `MeasurableSpace Ω`,
+which the statement reads — removed, every de Bruijn index past it lowered by one, the erased print likewise, and no
+index pointing at it (the binder was read nowhere). The reader's four plants on this verdict each fail the run
+(2.6). Its one caller, `sectionDensity_setOf_pos`, passed the instance implicitly: its text is unchanged (2.2's
+code-only check) and its stored statement IDENTICAL. The proof of the corrected theorem is unchanged in text; it holds
+for any measure, and the docstring now says so. The linter's finding is gone (2.12). **The dropped binder is the only
+change of a stored statement in the module.**
+
+**Correction 2 (item 789, ruling 2): FS133-ICD1's block wording, corrected from FS133-IPQ1's DQ1.** FS133-ICD1's draft
+block for `scripts/Axioms.lean` (`data/fs133/icd1/axioms-block.txt`) ended in a commented line "NOT YET FILED: Pair's
+leaves Q4 and Q5 are outstanding; once proved, the first under CLEAN, the other three under IMPORTED", where the tags
+on the lines below it, and the printed axioms, put the **second** record (`exists_admissibleOn_of_ae`) under CLEAN and
+the first under IMPORTED (DQ1's correction owed). The block as filed (`scripts/Axioms.lean`, "FS133-LD1 block") has no
+such line and no IMPORTED part: with `residual_fourier` a theorem of the port, all 77 records are under CLEAN, the four
+of `Pair` among them, and the audit prints each on the standard three (2.8); the fourteen that FS133-ICD1's and
+FS133-IPQ1's tables carried under IMPORTED are listed by name in `data/fs133/ld1/records-rf.txt` and checked to be
+exactly the three. The drafts below carry the corrected wording where FS133-ICD1's DD1 and DD4 said "IMPORTED" or "on
+the declared outside theorem": draft 3 (the front page), draft 9 (`ARCHITECTURE.md`'s rows), with C133-PAIR held
+(FS133-ICD1's DD4 said it was not yet in the kernel).
+
+## Stage 4 — SAVED (FS133-LD1): read aloud
+
+*Each headline's statement as the kernel stores it — `#check @…` with every binder, from the built tree
+(`data/fs133/ld1/lean/ReadAloud.lean` → `data/fs133/ld1/read-aloud.out`) — against its claim-list entry, verbatim
+(`data/fs133/claims-K1.md`), and the definitions the statements name, printed in the same file.*
+
+**The definitions, as stored.** `unitDistance V` joins `x, y` when `dist x y = 1`, exactly. `SimpleGraph.finIndepRatio G
+:= ⨅ S, ⨅ (_ : S.Nonempty), ↑(G.induce ↑S).indepNum / ↑S.card` in `ℝ≥0∞`, over finite sets `S` of vertices — `α₁`, the
+infimum of `α(G[S])/|S|`. `Plane.mOne := ⨆ A, ⨆ (_ : MeasurableSet A), ⨆ (_ : (unitDistance ℂ).IsIndepSet A),
+upperDensity A` — `m₁(ℝ²)` over Borel sets with no two points at distance one (`mOne_eq_iSup_nullMeasurableSet`, a
+record of the module, gives the same number over Lebesgue-measurable sets), `upperDensity S := limsup_{R→∞} vol(S ∩
+B(0,R)) / vol(B(0,R))`. `Spectral.E := algebraicClosure ℚ ℂ` (the port's, the release's term) — `𝒜`, the algebraic
+numbers, the plane `𝒜²` read in `ℂ`. `SimpleGraph.fractionalChromaticNumber G := ⨅ b n, ⨅ (_ : 0 < b), ⨅ (_ :
+G.FractionalColorable b n), ↑n / ↑b` — `χ_f`. `Plane.minIndepNum n := ⨅ S : {S : Finset ℂ // S.card = n},
+((unitDistance ℂ).induce S).indepNum` — `f(n)`. `AdmissibleOn N X ℓ := ∀ x ∈ X, ∀ y ∈ X, ¬ N (dist x y) (ℓ x) (ℓ y)`;
+`AdmissibleAe N ℓ := ∀ r, ∀ᵐ p ∂(volume ⊗ arcLength), ¬ N r (ℓ p.1) (ℓ (p.1 + r·e(p.2)))` with `arcLength` Lebesgue
+measure on `[0, 2π)` and `e θ = exp(iθ)`; `IsAlgPattern N`: the distances `{r | ∃ a b, N r a b}` countable, each
+positive and algebraic over `ℚ`.
+
+**K133-ONE** — "`α₁(ℝ²) = α₁(𝒜²) = m₁(ℝ²)`, and `χ_f,0(ℝ²) = χ_f(ℝ²) = χ_f(𝒜²) = 1/m₁(ℝ²)`". Carried by five
+theorems, each on `[propext, Classical.choice, Quot.sound]`:
+- `OneClass.finIndepRatio_plane_eq_mOne : (unitDistance ℂ).finIndepRatio = Plane.mOne` — `α₁(ℝ²) = m₁(ℝ²)`;
+- `OneClass.finIndepRatio_algPlane_eq_mOne : (unitDistance ↥E).finIndepRatio = Plane.mOne` — `α₁(𝒜²) = m₁(ℝ²)`;
+- `OneClass.iSup_fractionalChromaticNumber_plane : ⨆ S, ((unitDistance ℂ).induce ↑S).fractionalChromaticNumber =
+  mOne⁻¹` — `χ_f,0(ℝ²)`, the supremum over the finite subgraphs, is `1/m₁(ℝ²)`;
+- `OneClass.fractionalChromaticNumber_plane : (unitDistance ℂ).fractionalChromaticNumber = mOne⁻¹` — `χ_f(ℝ²)`;
+- `OneClass.fractionalChromaticNumber_algPlane : (unitDistance ↥E).fractionalChromaticNumber = mOne⁻¹` — `χ_f(𝒜²)`.
+No hypothesis: each is a closed equation. `1/m₁` is `mOne⁻¹` in `ℝ≥0∞`; it is the reciprocal of a positive finite
+number, since `7⁻¹ ≤ mOne` (`OneClass.one_seventh_le_mOne`, on the three) and `mOne ≤ 1` (`Plane.mOne_le_one`). **The
+statements say what the entry says, and no more**: no value of `m₁(ℝ²)` is stated beyond `1/7 ≤ m₁(ℝ²) ≤ 1`, which
+the entry's *not claimed* allows ("any value of `m₁(ℝ²)`" — the bound `1/7` is not a value), and nothing at a number
+field's plane or at six colours.
+
+**K133-FN** — "`f(n)/n → m₁(ℝ²)` as `n → ∞`, where `f(n)` is the minimum of `α(G)` over `n`-point subsets `G` of the
+plane". Carried by `OneClass.tendsto_minIndepNum_div : Tendsto (fun n => ↑(minIndepNum n) / ↑n) atTop (𝓝 mOne)`, on the
+three, the quotient in `ℝ≥0∞` (at `n = 0` it is `0/0 = 0` there, which a limit at infinity does not read). `minIndepNum
+n` is the infimum over `n`-element `Finset`s, which is the minimum of the entry (a set of naturals attains its
+infimum). Equal to the entry.
+
+**K133-PAIR** — "an admissible `ℓ : ℝ² → Λ` exists if and only if a Lebesgue-measurable `ℓ : ℝ² → Λ` admissible almost
+everywhere exists; and an admissible `ℓ : ℝ² → Λ` exists if and only if an admissible `ℓ : E → Λ` exists", in the
+derivation's setting (`plans/FS133-E1-derivation.md` § Stage 6, its definitions: `Λ` finite, `R` a countable set of
+positive real algebraic numbers, for each `r ∈ R` a symmetric `N_r ⊆ Λ × Λ`). Carried by:
+- `OneClass.exists_admissibleOn_univ_iff_ae : ∀ {Λ} [Finite Λ] {N}, IsAlgPattern N → ((∃ ℓ, AdmissibleOn N univ ℓ) ↔ ∃
+  ℓ, (∀ a, NullMeasurableSet (ℓ ⁻¹' {a}) volume) ∧ AdmissibleAe N ℓ)` — the first clause; "Lebesgue-measurable" is
+  every fibre null-measurable (`LEAN.md`: the same as `NullMeasurable ℓ volume`);
+- `OneClass.exists_admissibleOn_univ_iff_algPlane : ∀ {Λ} [Finite Λ] {N}, IsAlgPattern N → ((∃ ℓ, AdmissibleOn N univ
+  ℓ) ↔ ∃ ℓ, AdmissibleOn N ↑E ℓ)` — the second clause;
+both on the three. **Two differences of form, each said here.** (1) The second clause's right side is a labelling of
+`ℂ` admissible on the set `E`, where the entry has `ℓ : E → Λ`: the same condition — a labelling of `ℂ` restricts to
+`E` with the same distances, and a labelling of `E` extends to `ℂ` (by any label: `E` is not empty, so `Λ` is not) —
+so the two sides say the same thing. (2) The pattern is a relation `N : ℝ → Λ → Λ → Prop` with the conditions of
+`IsAlgPattern`, not required symmetric: `AdmissibleOn` reads every ordered pair `(x, y)`, so a pattern and its
+symmetrisation have the same admissible labellings and the statement is the entry's, for every pattern the entry
+allows. Its two directions also stand alone, and say more than the entry where they can:
+`exists_measurable_admissibleAe` (forward, from the algebraic plane) gives a labelling with **Borel** fibres; and
+`exists_admissibleOn_of_ae` (converse) asks only that the distances be positive — not algebraic, not countably many
+(FS133-IPQ1's ruled drop) — and is on the three as it was before the join.
+
+**K133-NC-ONE and K133-NC-ALL** (the not-claimed lines) hold of the statements: no value of `m₁(ℝ²)` or of a chromatic
+number, `m₁(ℝ²) = δ_Croft` nowhere, no finite graph attaining `sup χ_f`, nothing at a number field's plane, nothing at
+six colours; and the result is not this project's: `[Davies2026]` (posted 8 October 2026) proves the same sentence in
+dimension four and up and names the plane as its aim — the kernel proof here is this project's, and
+`Spectral.residual_fourier`, which the forward halves read, is `[OAIMath2026]`'s, ported.
+
+**No statement says more or less than its entry**, but for the two differences of form in K133-PAIR, each equivalent
+and said above. Nothing to message.
