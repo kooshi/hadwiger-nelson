@@ -1,4 +1,4 @@
-slot: admitted ie1: mem 5 GiB (hard cap), cpus 0,1
+slot: admitted ie1: mem 5 GiB (hard cap), cpus 4,5
 'HadwigerNelson.Rigidity.blockEntropy' depends on axioms: [propext, Classical.choice, Quot.sound]
 'HadwigerNelson.Rigidity.blockEntropy_eq_observationEntropy' depends on axioms: [propext, Classical.choice, Quot.sound]
 'HadwigerNelson.Rigidity.blockEntropy_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -17,8 +17,11 @@ plant 'an instance that is in neither table': REFUSED
 plant 'two ported declarations of one name': REFUSED
 plant 'a selected declaration absent from the partial file': REFUSED
 plant 'a namespace the script does not map': REFUSED
+plant 'a NOLINT entry whose declaration is not ported': REFUSED
+plant 'a NOLINT entry for another linter': REFUSED
+plant 'a NOLINT entry withdrawn (the files then differ)': REFUSED
 plant 'the licence copy changed by one byte': REFUSED
 plant 'the licence copy absent': REFUSED
 plant 'a module generated with `import Mathlib` whole': REFUSED
-SELF-TEST OK: 19 plants refused and 1 partner accepted
+SELF-TEST OK: 22 plants refused and 1 partner accepted
 exit=0

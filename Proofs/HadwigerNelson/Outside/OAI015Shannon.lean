@@ -20,7 +20,7 @@ changed copy of `PrimePackets/ShannonEntropy.lean`.** The changes, all of them:
 
 1. *The namespaces*: `OAI.PrimeDegreePackets` and `OAI.DukePrimeDegree` there, `HadwigerNelson.Outside.OAI015`
    here (one namespace; no two ported declarations share a name).
-2. *The imports*: `Mathlib.Algebra.Order.Ring.Star`, `Mathlib.Analysis.SpecialFunctions.Log.NegMulLog`, `Mathlib.Analysis.Subadditive`, `Mathlib.Dynamics.Ergodic.MeasurePreserving`, `Mathlib.MeasureTheory.Measure.Real` — the least set under which the text elaborates as it does under `import Mathlib` (measured: `tools/fs131_ie1_port.py`, MATHLIB); the release's files import `Mathlib` whole and, for the maximal inequality, modules of the release that its text does not use.
+2. *The imports*: `Mathlib.Algebra.Order.Ring.Star`, `Mathlib.Analysis.SpecialFunctions.Log.NegMulLog`, `Mathlib.Analysis.Subadditive`, `Mathlib.Dynamics.Ergodic.MeasurePreserving`, `Mathlib.MeasureTheory.Measure.Real` — the least set under which the text elaborates as it does under `import Mathlib` (measured: `tools/fs131_ie1_port.py`, MATHLIB); the release's files import `Mathlib` whole and, for the maximal inequality, modules of the release that its text does not use. Left out of the measured list: `Mathlib.Order.CompletePartialOrder`. Under it a supremum in `ℝ≥0∞` is stored through `CompletePartialOrder.toSupSet`, and `Rigidity/Entropy`, which imports this module, would store its own definition `ksEntropyOn` through it too, moving a definition the chain's statements read; without it `measureEntropy` is the release's up to that instance path (the read-back records it), and is stored as `ksEntropy` is.
 3. *The `open` lines*: taken out, being namespaces that do not exist under these imports — `ArithmeticFunction`, `ArithmeticFunction.zeta`, `BoundingSieve`, `FractionalIdeal`, `IsDiscreteValuationRing`, `IsLocalRing`, `NumberField`, `RealInnerProductSpace`, `UniqueFactorizationMonoid`. Every other `open` is the release's.
 4. *Docstrings*: every declaration's docstring opens with its source line at the commit; where the release
    has a docstring it follows the address, and where it has none the address is the docstring.
@@ -35,6 +35,12 @@ measure-preserving map, the names of an orbit (`orbitName`), the subadditivity o
 (`orbitEntropy_subadditive`), the rate as an infimum and as a limit (`observationEntropyRate`,
 `tendsto_observationEntropyRate`), the entropy of a map as a supremum over finite partitions (`measureEntropy`), and
 lower bounds from small atoms. All of it is kernel-checked in this library: no axiom, no `sorry`.
+
+**Compared with the release** as the kernel stores both (`tools/fs131_ie1_port_readback.py`, FS132-I2's comparator;
+its tables under `data/fs131/ie1/readback/`): each declaration's stored statement and each definition's stored value
+at the release's pin against this pin's — the same term, or, where the table says so, the same once instance arguments
+and proof arguments are set aside. What that comparison leaves to trust: that Mathlib's instances of one class on one
+type agree at the two pins. The proofs need no such comparison: the kernel checked them here.
 -/
 
 -- ==== `[OAIMath2026]` `OAI/NumberTheory/PrimePackets/ShannonEntropy.lean` ====

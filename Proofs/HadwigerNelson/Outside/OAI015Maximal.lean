@@ -22,7 +22,7 @@ changed copy of part of `PrimePackets/InverseEntropy.lean` and `DukePrimeDegree/
 
 1. *The namespaces*: `OAI.PrimeDegreePackets` and `OAI.DukePrimeDegree` there, `HadwigerNelson.Outside.OAI015`
    here (one namespace; no two ported declarations share a name).
-2. *The imports*: `Mathlib.Algebra.Order.Ring.Star`, `Mathlib.Algebra.Order.Star.Real`, `Mathlib.Analysis.InnerProductSpace.Basic`, `Mathlib.Dynamics.BirkhoffSum.Basic`, `Mathlib.MeasureTheory.Integral.Bochner.Set` — the least set under which the text elaborates as it does under `import Mathlib` (measured: `tools/fs131_ie1_port.py`, MATHLIB); the release's files import `Mathlib` whole and, for the maximal inequality, modules of the release that its text does not use.
+2. *The imports*: `Mathlib.Algebra.Order.Ring.Star`, `Mathlib.Algebra.Order.Star.Real`, `Mathlib.Analysis.InnerProductSpace.Basic`, `Mathlib.Dynamics.BirkhoffSum.Basic`, `Mathlib.MeasureTheory.Integral.Bochner.Set` — the least set under which the text elaborates as it does under `import Mathlib` (measured: `tools/fs131_ie1_port.py`, MATHLIB); the release's files import `Mathlib` whole and, for the maximal inequality, modules of the release that its text does not use. Left out of the measured list: `Mathlib.Order.CompletePartialOrder`, for the reason given in `Outside/OAI015Shannon`'s header.
 3. *The `open` lines*: taken out, being namespaces that do not exist under these imports — `ArithmeticFunction`, `ArithmeticFunction.zeta`, `BoundingSieve`, `FractionalIdeal`, `IsDiscreteValuationRing`, `Matrix.Norms.Elementwise`, `NumberField` — and `PrimeDegreePackets` where it is opened inside `DukePrimeDegree` (one namespace here). Every other `open` is the release's.
 4. *Docstrings*: every declaration's docstring opens with its source line at the commit; where the release
    has a docstring it follows the address, and where it has none the address is the docstring.
@@ -35,6 +35,10 @@ What is here: the maximal ergodic inequality in its finite Hopf form (`finite_ho
 an orbit to a set (`visitCount`), and the bound `δ · μ {x | some time n has more than δ n visits to A} ≤ μ A`
 (`excessiveOccupation_measure_bound`) with its almost-sure consequence along decreasing sets. All of it is
 kernel-checked in this library: no axiom, no `sorry`.
+
+**Not read back across the pins**: the release's print of these files would need 89 files of the release compiled
+(FS131-KN6's measurement); what stands for it is that this script copies the text and refuses to touch a statement or
+a definition. The proofs are the kernel's here either way.
 -/
 
 -- ==== `[OAIMath2026]` `OAI/NumberTheory/PrimePackets/InverseEntropy.lean` (the declarations `visitCount`, `visitCount_cast`, `measurable_visitCount` only) ====

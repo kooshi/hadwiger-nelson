@@ -156,6 +156,38 @@ PATCHES = [
      "`birkhoffSum_succ'`; Mathlib renamed it between the pins"),
 ]
 
+# (release file, declaration, linter) -> the one-line comment placed beside the attribute.  A ported statement keeps the
+# source's arguments, used or not; the linter that reports an unused one is silenced BY NAME on that declaration
+# (Amendment 1 of the brief, FS131-IE1: the coordinator's ruling).  The script refuses an entry whose declaration is
+# not ported, a linter not in NOLINT_LINTERS, and any `nolint` the release's text itself carries.
+NOLINT_LINTERS = {"unusedArguments"}
+_UNUSED = ("-- the release's statement takes this instance and its proof does not read it; kept so that the statement "
+           "stays the release's")
+NOLINT = {
+    (MIXTURES, "observationEntropy_finite_mixture_bounds", "unusedArguments"): _UNUSED,
+    (MIXTURES, "kernelCell_preserving", "unusedArguments"): _UNUSED,
+    (MIXTURES, "kernelCell_real", "unusedArguments"): _UNUSED,
+}
+
+# module -> a sentence for the header's item on imports (what was measured and left out, and what it costs)
+IMPORT_NOTES = {
+    "OAI015Shannon": ("Left out of the measured list: `Mathlib.Order.CompletePartialOrder`. Under it a supremum in `ℝ≥0∞` is "
+                      "stored through `CompletePartialOrder.toSupSet`, and `Rigidity/Entropy`, which imports this module, "
+                      "would store its own definition `ksEntropyOn` through it too, moving a definition the chain's "
+                      "statements read; without it `measureEntropy` is the release's up to that instance path (the "
+                      "read-back records it), and is stored as `ksEntropy` is."),
+    "OAI015Mixtures": ("Left out of the measured list: three `Mathlib.RingTheory` modules (`Etale.Weakly`, "
+                       "`Flat.TorsionFree`, `TotallySplit`), which the text does not need and without which no stored "
+                       "term moves (the read-back)."),
+    "OAI015Maximal": ("Left out of the measured list: `Mathlib.Order.CompletePartialOrder`, for the reason given in "
+                      "`Outside/OAI015Shannon`'s header."),
+}
+READBACK_NOTES = {
+    "OAI015Shannon": "read back",
+    "OAI015Mixtures": "read back",
+    "OAI015Maximal": "not read back",
+}
+
 # instances: release name -> why it is scoped / why it may be global
 SCOPED = {}
 GLOBAL_INSTANCES = {
@@ -344,6 +376,9 @@ def convert_scaffold(rel, no, s, drop_open, dropped):
     return s
 
 
+nolint_used = set()
+
+
 def plan_module(module, ours, files, patches, select, clone):
     body, decls, dropped, used = [], [], [], set()
     stats = []
@@ -410,10 +445,25 @@ def plan_module(module, ours, files, patches, select, clone):
                             raise Refused(f"{fname}:{kwno}: a scoped instance that does not begin with the keyword")
                         text[drows] = "scoped " + text[drows]
                 addr = f"`[OAIMath2026]` `{fname}:{kwno}`."
+                if any("nolint" in row for row in text):
+                    raise Refused(f"{fname}:{kwno}: the release's text of {name} carries a `nolint`: not handled")
+                nl = [(lint, why) for (nf, nn, lint), why in NOLINT.items() if nf == rel and nn == name]
+                for lint, _ in nl:
+                    if lint not in NOLINT_LINTERS:
+                        raise Refused(f"NOLINT entry for {name}: the linter {lint} is not one this script silences")
+                    nolint_used.add((rel, name, lint))
+                if nl and not KEYWORD.match(text[drows]).group(0).startswith(("lemma", "theorem")):
+                    raise Refused(f"{fname}:{kwno}: a `nolint` on {name}, whose keyword line carries attributes or "
+                                  "modifiers: not handled")
                 if drows == 0:
                     out.append(f"/-- {addr} -/")
                 else:
                     text[0] = f"/-- {addr} " + text[0][3:].lstrip()
+                    out.extend(text[:drows])
+                    text = text[drows:]
+                for lint, why in nl:
+                    out.append(why)
+                    out.append(f"@[nolint {lint}]")
                 out.extend(text)
                 decls.append((rel, kwno, b, kind, name))
                 nd += 1
@@ -476,7 +526,7 @@ def render(module, ours, files, what, p, patches, mathlib):
     o.append("2. *The imports*: " + ", ".join(f"`{m}`" for m in ([PFX + x for x in ours] + mathlib))
              + " — the least set under which the text elaborates as it does under `import Mathlib`"
              " (measured: `tools/fs131_ie1_port.py`, MATHLIB); the release's files import `Mathlib` whole and, for the"
-             " maximal inequality, modules of the release that its text does not use.")
+             " maximal inequality, modules of the release that its text does not use. " + IMPORT_NOTES[module])
     dt = sorted({t for _, t in dropped})
     if dt:
         o.append(f"3. *The `open` lines*: taken out, being namespaces that do not exist under these imports — "
@@ -502,8 +552,29 @@ def render(module, ours, files, what, p, patches, mathlib):
         o.append("6. *Instances*: " + "; ".join(
             f"`{d[4]}` is " + ("`scoped` here — " + SCOPED[d[4]] if d[4] in SCOPED else
                                "global, as in the release — " + GLOBAL_INSTANCES[d[4]]) for d in inst) + ".")
+    nlm = sorted({nn for (nf, nn, _) in NOLINT if nf in files})
+    if nlm:
+        o.append("7. *Linter attributes*: `@[nolint unusedArguments]` on " + ", ".join(f"`{x}`" for x in nlm)
+                 + " — each release statement takes an instance argument its proof does not read; it is kept so that the"
+                 " statement stays the release's, and the linter is silenced by name on that declaration, with a"
+                 " comment beside the attribute (Amendment 1 of FS131-IE1's brief). The attribute is not part of the"
+                 " stored statement.")
     o.append("")
     o.extend(wrap_words(f"What is here: {what}. All of it is kernel-checked in this library: no axiom, no `sorry`.", 118))
+    o.append("")
+    if READBACK_NOTES[module] == "read back":
+        o.extend(wrap_words(
+            "**Compared with the release** as the kernel stores both (`tools/fs131_ie1_port_readback.py`, FS132-I2's "
+            "comparator; its tables under `data/fs131/ie1/readback/`): each declaration's stored statement and each "
+            "definition's stored value at the release's pin against this pin's — the same term, or, where the table says "
+            "so, the same once instance arguments and proof arguments are set aside. What that comparison leaves to "
+            "trust: that Mathlib's instances of one class on one type agree at the two pins. The proofs need no such "
+            "comparison: the kernel checked them here.", 118))
+    else:
+        o.extend(wrap_words(
+            "**Not read back across the pins**: the release's print of these files would need 89 files of the release "
+            "compiled (FS131-KN6's measurement); what stands for it is that this script copies the text and refuses to "
+            "touch a statement or a definition. The proofs are the kernel's here either way.", 118))
     o.append("-/")
     o.append("")
     o.extend(body)
@@ -535,6 +606,7 @@ def generate(patches=None, clone=CLONE, select=None, mathlib=None, modules=None)
     if head != COMMIT:
         raise Refused(f"the clone is at {head}, not the audited commit {COMMIT}")
     texts, plans, used, names = {}, {}, set(), {}
+    nolint_used.clear()
     for module, ours, files, what in modules:
         p = plan_module(module, ours, files, patches, select, clone)
         used |= p[3]
@@ -546,6 +618,8 @@ def generate(patches=None, clone=CLONE, select=None, mathlib=None, modules=None)
         texts[module] = render(module, ours, files, what, p, patches, mathlib[module])
     if len(used) != len(patches):
         raise Refused(f"patches not used: {sorted(set(range(len(patches))) - used)}")
+    if nolint_used != set(NOLINT):
+        raise Refused(f"NOLINT entries not placed: {sorted(set(NOLINT) - nolint_used)}")
     for nm in list(SCOPED) + list(GLOBAL_INSTANCES):
         if nm not in names:
             raise Refused(f"instance table entry {nm} is not a ported declaration")
@@ -733,6 +807,21 @@ def self_test() -> int:
                       "a namespace the script does not map", "does not map")
         finally:
             COMMIT = real
+        # a NOLINT entry whose declaration is not ported; a NOLINT entry for a linter this script does not silence
+        global NOLINT
+        keep_nl = dict(NOLINT)
+        try:
+            NOLINT = dict(keep_nl)
+            NOLINT[(MIXTURES, "no_such_declaration", "unusedArguments")] = "-- planted"
+            expect("a NOLINT entry whose declaration is not ported", refused("NOLINT entries not placed"))
+            NOLINT = dict(keep_nl)
+            NOLINT[(MIXTURES, "kernelCell_real", "docBlame")] = "-- planted"
+            expect("a NOLINT entry for another linter", refused("is not one this script silences"))
+            NOLINT = dict(keep_nl)
+            del NOLINT[(MIXTURES, "kernelCell_real", "unusedArguments")]
+            expect("a NOLINT entry withdrawn (the files then differ)", check(outdir=td, quiet=True))
+        finally:
+            NOLINT = keep_nl
         # the licence copy: one byte changed; absent
         lic = td / LICENCE_NAME
         b = lic.read_bytes()

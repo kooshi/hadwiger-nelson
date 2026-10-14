@@ -19,7 +19,7 @@ changed copy of `PrimePackets/EntropyMixtures.lean`.** The changes, all of them:
 
 1. *The namespaces*: `OAI.PrimeDegreePackets` and `OAI.DukePrimeDegree` there, `HadwigerNelson.Outside.OAI015`
    here (one namespace; no two ported declarations share a name).
-2. *The imports*: `Proofs.HadwigerNelson.Outside.OAI015Shannon`, `Mathlib.Algebra.Order.Star.Real`, `Mathlib.MeasureTheory.Integral.DominatedConvergence`, `Mathlib.Probability.Kernel.Composition.MeasureComp` — the least set under which the text elaborates as it does under `import Mathlib` (measured: `tools/fs131_ie1_port.py`, MATHLIB); the release's files import `Mathlib` whole and, for the maximal inequality, modules of the release that its text does not use.
+2. *The imports*: `Proofs.HadwigerNelson.Outside.OAI015Shannon`, `Mathlib.Algebra.Order.Star.Real`, `Mathlib.MeasureTheory.Integral.DominatedConvergence`, `Mathlib.Probability.Kernel.Composition.MeasureComp` — the least set under which the text elaborates as it does under `import Mathlib` (measured: `tools/fs131_ie1_port.py`, MATHLIB); the release's files import `Mathlib` whole and, for the maximal inequality, modules of the release that its text does not use. Left out of the measured list: three `Mathlib.RingTheory` modules (`Etale.Weakly`, `Flat.TorsionFree`, `TotallySplit`), which the text does not need and without which no stored term moves (the read-back).
 3. *The `open` lines*: taken out, being namespaces that do not exist under these imports — `ArithmeticFunction`, `ArithmeticFunction.zeta`, `BoundingSieve`, `FractionalIdeal`, `IsDiscreteValuationRing`, `Matrix.Norms.Elementwise`, `NumberField`. Every other `open` is the release's.
 4. *Docstrings*: every declaration's docstring opens with its source line at the commit; where the release
    has a docstring it follows the address, and where it has none the address is the docstring.
@@ -29,11 +29,18 @@ changed copy of `PrimePackets/EntropyMixtures.lean`.** The changes, all of them:
    - `EntropyMixtures.lean` line 264: `ite_eq_left hzi` → `if_pos hzi` — core's `if_neg` and `if_pos` were renamed `ite_eq_right` and `ite_eq_left` on 2026-07-21 (`Init/Core.lean`; at v4.34.1 the old names are deprecated aliases); at v4.32.0 the lemmas have only the old names
    - `EntropyMixtures.lean` line 264: `ite_eq_right hn` → `if_neg hn` — core's `if_neg` and `if_pos` were renamed `ite_eq_right` and `ite_eq_left` on 2026-07-21 (`Init/Core.lean`; at v4.34.1 the old names are deprecated aliases); at v4.32.0 the lemmas have only the old names
 6. *Instances*: `kernelCell_probability` is global, as in the release — `IsProbabilityMeasure (kernelCell τ κ Q i)`: the class is Mathlib's, the term's head `kernelCell` is the release's own definition (not reducible), so the instance can fire only on a term that names it.
+7. *Linter attributes*: `@[nolint unusedArguments]` on `kernelCell_preserving`, `kernelCell_real`, `observationEntropy_finite_mixture_bounds` — each release statement takes an instance argument its proof does not read; it is kept so that the statement stays the release's, and the linter is silenced by name on that declaration, with a comment beside the attribute (Amendment 1 of FS131-IE1's brief). The attribute is not part of the stored statement.
 
 What is here: entropy under mixtures: the rate of a finite convex combination of invariant measures is the combination
 of the rates (`observationEntropyRate_finite_mixture`), the cells of a kernel (`kernelCell`), and the mixture lemma —
 a kernel mixture of invariant measures of entropy zero has entropy zero (`measureEntropy_kernel_zero`). All of it is
 kernel-checked in this library: no axiom, no `sorry`.
+
+**Compared with the release** as the kernel stores both (`tools/fs131_ie1_port_readback.py`, FS132-I2's comparator;
+its tables under `data/fs131/ie1/readback/`): each declaration's stored statement and each definition's stored value
+at the release's pin against this pin's — the same term, or, where the table says so, the same once instance arguments
+and proof arguments are set aside. What that comparison leaves to trust: that Mathlib's instances of one class on one
+type agree at the two pins. The proofs need no such comparison: the kernel checked them here.
 -/
 
 -- ==== `[OAIMath2026]` `OAI/NumberTheory/PrimePackets/EntropyMixtures.lean` ====
@@ -121,6 +128,8 @@ lemma finiteShannon_mixture_bounds {ι α : Type*} [Fintype ι] [Fintype α]
     exact Finset.sum_le_sum (fun a _ => negMulLog_sum_le _ (fun i => mul_nonneg (hw i) (hp i a)))
 
 /-- `[OAIMath2026]` `EntropyMixtures.lean:84`. -/
+-- the release's statement takes this instance and its proof does not read it; kept so that the statement stays the release's
+@[nolint unusedArguments]
 lemma observationEntropy_finite_mixture_bounds {Y ι α : Type*} [MeasurableSpace Y]
     [Fintype ι] [Fintype α] (μ : Measure Y) [IsProbabilityMeasure μ]
     (ν : ι → Measure Y) [∀ i, IsProbabilityMeasure (ν i)] (w : ι → ℝ)
@@ -213,6 +222,8 @@ instance kernelCell_probability (τ : Measure Z) [IsProbabilityMeasure τ]
     infer_instance
 
 /-- `[OAIMath2026]` `EntropyMixtures.lean:174`. -/
+-- the release's statement takes this instance and its proof does not read it; kept so that the statement stays the release's
+@[nolint unusedArguments]
 lemma kernelCell_preserving (τ : Measure Z) [IsProbabilityMeasure τ]
     (κ : Kernel Z Y) (Q : Z → ι) (i : ι)
     {T : Y → Y} (hT : Measurable T)
@@ -257,6 +268,8 @@ lemma kernel_finite_cells [Fintype ι] (τ : Measure Z) [IsProbabilityMeasure τ
   | @insert i s hi ih => simp only [Finset.sum_insert hi, Measure.comp_add, ih]
 
 /-- `[OAIMath2026]` `EntropyMixtures.lean:215`. -/
+-- the release's statement takes this instance and its proof does not read it; kept so that the statement stays the release's
+@[nolint unusedArguments]
 lemma kernelCell_real (τ : Measure Z) [IsProbabilityMeasure τ]
     (κ : Kernel Z Y) [IsMarkovKernel κ] (Q : Z → ι) (i : ι)
     (h : τ {z | Q z = i} ≠ 0) {S : Set Y} (hS : MeasurableSet S) :

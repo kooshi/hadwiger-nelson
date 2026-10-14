@@ -1,4 +1,4 @@
-slot: admitted ie1: mem 5 GiB (hard cap), cpus 2,3
+slot: admitted ie1: mem 5 GiB (hard cap), cpus 4,5
 ## MODULE Proofs.HadwigerNelson.Rigidity.Entropy constants=47
 @@ DEF HadwigerNelson.Rigidity.blockEntropy
 TYPE 3613106229 forall {X : Type.{u_1}} {m : MeasurableSpace.{u_1} X}, (MeasureTheory.Measure.{u_1} X m) -> (forall {k : Nat}, (X -> X) -> (X -> (Fin k)) -> Nat -> Real)
