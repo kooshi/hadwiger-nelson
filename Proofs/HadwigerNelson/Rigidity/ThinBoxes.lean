@@ -125,7 +125,7 @@ theorem exists_box_partition {ε : ℝ} (hε : 0 < ε) :
 first, by a point `a` whose first `n` images under `u` all lie in `Q(2ε)`. The induction on `i < n − 1`: if `u^i a ∈ Q(2ε)`,
 the common cell at time `i + 1` gives `b ∈ Q(2ε)` with `y′ := u·u^i a − b ∈ Λ`, of archimedean modulus `< 2ε(1 + v u)` and
 split size `≤ max(1, |u|_w)`; by the choice of `ε` and the gap, `y′ = 0`. -/
-theorem exists_orbit_box {C : ℝ} (hC : D.IsGap C) {u : unitVectors F} {ε : ℝ} (hε : 0 < ε)
+theorem exists_orbit_box {C : ℝ} (hC : D.IsGap C) {u : unitVectors F} {ε : ℝ}
     (hεC : (∏ v : InfinitePlace (fieldI F), (2 * ε * (1 + v (unitL u))) ^ v.mult) * splitHeight (unitL u) < C)
     {k : ℕ} {c : Fin k → SAdeleRing F} {P : Dual F → Fin k} (hP : ∀ x : Dual F, ∃ q ∈ box F ε, x = D.π (c (P x) + q))
     {n : ℕ} (hn : 0 < n) {x y : Dual F} (hxy : nameOf (rot u) P n x = nameOf (rot u) P n y)
@@ -136,7 +136,7 @@ theorem exists_orbit_box {C : ℝ} (hC : D.IsGap C) {u : unitVectors F} {ε : �
 /-- **Bowen atoms are thin at an expanding place** (X01D l. 236): the name cell of `x` lies in
 `π(x̃ + Q_p(2ε, max(2ε, 1)·|u|_p^{−(n−1)}))`, for every lift `x̃`. From `exists_orbit_box` and `size_toSAdele_mul`. -/
 theorem nameCell_subset {C : ℝ} (hC : D.IsGap C) {u : unitVectors F} {p : WPlace F} (hp : 1 < p.absAt (unitL u))
-    {ε : ℝ} (hε : 0 < ε)
+    {ε : ℝ}
     (hεC : (∏ v : InfinitePlace (fieldI F), (2 * ε * (1 + v (unitL u))) ^ v.mult) * splitHeight (unitL u) < C)
     {k : ℕ} {c : Fin k → SAdeleRing F} {P : Dual F → Fin k} (hP : ∀ x : Dual F, ∃ q ∈ box F ε, x = D.π (c (P x) + q))
     {n : ℕ} (hn : 0 < n) {x : Dual F} {xw : SAdeleRing F} (hxw : D.π xw = x) :

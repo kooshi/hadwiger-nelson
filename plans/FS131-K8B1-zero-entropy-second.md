@@ -285,9 +285,8 @@ moves, `ZeroEntropyClosed` is its first half. I have not edited `ChainAtTA` (not
 ### 4.5 Models
 
 `TateModel.shell`'s lemmas: a finite invariant measure, `c > 0`, `|g|_w < 1` are met at once by `δ_1`, `c = 1`, and
-`exists_unitVector_absAt_lt_one`; the shell is then nonempty only if some `π(ι t + a)` with `|a_w|_w = 1` exists, which holds for
-`a = ι(1)` restricted… (no: `ι(1) ∉ W_p` at every `p`) — the shells are nonempty for the `a ∈ W_p` with `a_w ≠ 0`, which exist
-(`W_p` contains every point with `p`-component `0`, e.g. `(0, 1_w)` at a split `w ≠ p`). The composition's model is
+`exists_unitVector_absAt_lt_one`. The shells are nonempty: `W_p` holds points with `|a_w|_w = 1` at a split `w ≠ p` (a point
+of `W` whose only nonzero component is `1` at `w`), so the wandering statement is not vacuous. The composition's model is
 `zeroEntropyCarried_model` (its conclusion at `δ_1`) and `exists_tateModel` (its structure).
 
 ### 4.6 A plan per leaf
@@ -301,3 +300,127 @@ moves, `ZeroEntropyClosed` is its first half. I have not edited `ChainAtTA` (not
 | `exists_absAt_eq_norm` | `‖z‖ = toNNReal (Valued.v z)` (`FinitePlace.norm_def`); `Valued.v z = Valued.v y` for `y ∈ L` close to `z` (`UniformSpace.Completion.denseRange_coe` and the ultrametric `‖z − y‖ < ‖z‖ ⟹ ‖y‖ = ‖z‖`, `IsUltrametricDist.norm_add_eq_max_of_norm_ne_norm`-shape); `y ≠ 0` since `‖y‖ = ‖z‖ > 0` | as named; the last to confirm by `exact?` |
 | `TateModel.leafSet_subset` | `χ = π a`, `a′ := a − ι t ∈ W_p`; if `∀ w, a′.2 w = 0` then `a′ = (a′.1, 0)` (`Prod.ext`, `RestrictedProduct.ext`) and `χ = π(ι t + (a′.1, 0)) ∈ TA F` (`mem_TA`); else `exists_absAt_eq_norm` at a `w` with `a′.2 w ≠ 0` puts `χ` in a shell (`Set.mem_iUnion`) | `RestrictedProduct.ext`, `TateModel.mem_TA` |
 | `TateModel.measure_compl_TA_eq_zero` | `(TA F)ᶜ ⊆ (leafSet p)ᶜ ∪ ⋃ shells` (`leafSet_subset`, `Set.compl_subset_compl`); `measure_union_null` with `hY` and `measure_iUnion_null` four times (`countable_splitPlace`, `countable_fieldI`; each shell null by `measure_shell_eq_zero`, `c = absAt y > 0` by `absAt_eq_zero`, `absAt_nonneg`); `measure_mono_null` | `measure_iUnion_null`, `measure_mono_null` |
+
+## Stage 5 — SAVED: the domain pass and the obligation pass
+
+### 5.1 The domain pass (`debruijn-domain-modeling`, a fresh invocation, scoped to this job's new definitions)
+
+- **`WPlace` an inductive with two named constructors** — the change stage 2 records (the `Sum` abbrev lost dot notation). The
+  next lemma states in the vocabulary in one line (`size_toSAdele_mul`, `eq_zero_of_toSAdele_mem_hyperplane`), and every
+  statement that must treat the expanding place as archimedean *or* split treats it as one `p : WPlace F`.
+- **`size` (on `W`) and `absAt` (on `L`) are two costumes of one absolute value, bridged** by `size_toSAdele` — the bridge is
+  typed the same day, so they cannot drift. `hyperplane p` is defined through `size`, which makes closedness and stability
+  under the diagonal one line each, against a component-wise definition that would need both cases twice.
+- **`splitHeight` is a `finprod` with no junk value**: its factors are `max 1 (·)`, equal to `1` off a finite set for every
+  `x` (`exists_finset_absAt_le_one`), so the infinite-support case where `finprod` returns `1` never arises; consumers read it
+  through `splitHeight_eq_prod` at a finite set of their choosing.
+- **`IsGap C` is "smaller than `C` forces `0`" over every finite `T` outside which the point is integral**, not a `finprod` over
+  all split primes: true for every such `T` (the omitted factors are at most `1`, so the product over `T` is at least the full
+  one), and it lets each consumer — the orbit step, the two scales — choose its `T` without proving a support. The adversary
+  `C ≤ 0` satisfies `IsGap` vacuously; `exists_isGap` asks `0 < C`, and every consumer that needs the gap to bite asks it too
+  (`exists_point_of_heavy`'s `hC0`).
+- **Four boxes, not two** (`box`/`closedBox`, `thinBox`/`closedThinBox`): considered as "declarations identical modulo naming"
+  and kept. The open box is read by the partition (openness) and by Lemma 3.1′'s statement (EN2-L31's `Q_{v*}(2ε, δ)`, kept word
+  for word); the closed one by the pigeonhole (Borel images). Collapsing to the closed box would weaken Lemma 3.1′'s statement
+  below the derivation's; the transfer costs one `measureReal_mono`.
+- **`multiplier` by its coordinates**, with `coe_multiplier` the bridge to `(1 + 2bi)/(1 − 2bi)`: membership in `unitVectors F` is
+  then a fact about rationals.
+- **`Collision` a structure of data** — Step 3's output is exactly this tuple and Step 4 consumes two; as an existential the
+  two collisions' parts would be destructured and re-bound in every consumer. Its parameters `(D, x̃, p, ε, δ, B)` are what
+  every bound reads.
+- **`shell` indexed by a real `c` with `0 < c` a named hypothesis** rather than by `y ∈ Lˣ`: the hypothesis is per-use (the
+  shell at `c = 0` is the large set `a_w = 0`, and only the wandering lemma excludes it); the union in `leafSet_subset` is over
+  `y ≠ 0`.
+- **Names**: no new declaration clashes with a name of the library (searched by full statement head, `data/fs131/k8b1` § 5.1's
+  grep; the one `shell` elsewhere is `Coset`'s, in another namespace).
+- **Unsampled member**: `F = ℚ` (`L = ℚ(i)`), where every definition reads as intended — the split primes lie over
+  `p ≡ 1 (mod 4)`, `(3 + 4i)/5` expands at the prime `(2 − i)` above `5`, and `v_1 = (−3 + 4i)/5`. No definition changed by this
+  pass beyond stage 2's.
+
+### 5.2 The obligation pass (`debruijn-obligation-modeling`, a fresh invocation, scoped to this job's new statements)
+
+The space of each nontrivial leaf, its induction, and what the pass changed:
+
+- `exists_orbit_box`: induction on `i < n` with the statement's own conclusion as the invariant (`u^i a ∈ Q(2ε)`); the step reads
+  the shared cell at time `i + 1` (from `hxy`) and the invariant at `i`, and closes by the gap — local, one application of
+  `hC`. The base needs one shared cell: `0 < n` (stage 2.2; the statement is false without it).
+- `exists_point_of_heavy`: induction on the scale index `j` with invariant "the point at scale `j` is the point at scale `0`";
+  the step is `point_eq`, the limit is one inequality. The measure is the scale index, strictly increasing scales `B_{j+1} = 3B_j²`.
+- `exists_delta_of_one_lt`: `n` is the least length thinner than `δ` — a `Nat.find`; no induction.
+- **Mutation audit** (each hypothesis deleted once, in thought, against its proof route): `hu` of `exists_one_lt_absAt` is
+  load-bearing (`u = 1` is isometric everywhere); `hc` of the shell lemmas (the shell at `c = 0` does not wander); `hC0` of
+  `exists_point_of_heavy` (every `C ≤ 0` is a gap, and the scale condition `8M^{−10} < C` then fails); `hp` of Lemma 3.1′ (no
+  thinning without expansion); `hε16` of `point_eq` (the archimedean factors `16ε`). **Dead hypotheses removed** (each implied by
+  another binder, so each removal strengthens the statement and changes no reader): `(hε : 0 < ε)` of `exists_orbit_box` and
+  `nameCell_subset` (`hP` makes `box ε` nonempty); `hε`, `hB` of `Collision.point_eq` (`hB` from `c₁.mem₁`); `hε16`, `hB`, `hδ` of
+  `Collision.size_sub_point_le` (it reads no `ε`; `δ ≥ 0` and `B ≥ 1` follow from the collision's own fields); `hε` of
+  `exists_point_of_heavy`. Re-elaborated: `logs/ThinBoxes-s5.log`, `GlobalPoint-s5.log`, `WanderingShells-s5.log`,
+  `ZeroEntropyClosed-s5.log`, each `exit=0` with 14, 11, 7, 0 `sorry`s; the composition still elaborates.
+- **Kept, though not strictly needed**: `hc : 0 < c` of `exists_delta_of_one_lt` (the least-`n` route takes `log(c/δ)`), and
+  `hε : 0 < ε` of `thinBox_heavy` (the partition (i) reads it).
+- **Prove / test / assume.** Prove: every leaf above. Test: the spec examples of each definition (`rfl`/`Iff.rfl`). Assume:
+  nothing new — the module's only assumptions are the interface (a structure, inhabited by lane T) and the leaves of other
+  lanes it cites by statement (`mem_stableIntegers_iff_valuation`, EN2-ZE, `DualGroup`'s scoped instances).
+
+## Stage 6 — SAVED: the lanes, the price, the drafts, the checks
+
+### 6.1 The lanes (none shares a file with another)
+
+Every module's statements are typed and elaborate, so the five lanes can run beside each other now, each against the others'
+statements; the order matters only for the landing.
+
+| lane | writes | needs (statements only, unless said) | leaves |
+|---|---|---|---|
+| **K8-A** — the places | `Rigidity/PlaceSizes` | Mathlib; `mem_stableIntegers_iff_valuation` (lane T-C's leaf in `Rigidity/TateCharacter`); `unitRing_le_stableIntegers` (proved) | 23 |
+| **K8-M** — the multipliers | `Rigidity/Multipliers` | K8-A's statements | 6 |
+| **K8-B** — the thin boxes, Lemma 3.1′ | `Rigidity/ThinBoxes` | K8-A's; `TateModel.isOpenMap`, `π_eq_π_iff` (lane T-I); EN2-ZE (lane N, proved); `Rigidity/DualGroup`'s scoped instances (compact, Borel: KN8's M4 leaves) | 14 |
+| **K8-G** — the pigeonhole and the global point | `Rigidity/GlobalPoint` | K8-A's, K8-M's, K8-B's; `TateModel.mul_mem_Λ`, `π_eq_π_iff` (T-I) | 11 |
+| **K8-S** — the shells | `Rigidity/WanderingShells` | K8-G's; `TateModel.mem_TA` (proved over T-I's `toSAdele_mem_torsionChars`) | 7 |
+| *(landing)* | `Rigidity/ZeroEntropyClosed`, the move of `zeroEntropyCarried` out of `Rigidity/ChainAtTA` (§ 4.4) | everything above and lane T (`exists_tateModel`) | — |
+
+**What M8b needs of lane T**, for its records to print the standard three: T-I's four leaves of `Rigidity/TateModel`
+(`mul_mem_Λ`, `π_eq_π_iff`, `toSAdele_mem_torsionChars`, `isOpenMap`), T-C's `mem_stableIntegers_iff_valuation`, and — through
+`exists_tateModel` in the assembly — all of lane T. M8b reads no other lane-T name.
+
+### 6.2 The price (from the plan's tables, not from an elaborated leaf — re-price from the first two)
+
+About 1,600–1,900 lines: K8-A about 500 (Lemma PF and its `finprod` bookkeeping the bulk), K8-M about 150, K8-B about 450
+(the orbit induction and the partition), K8-G about 500 (the bounds of `point_eq`), K8-S about 200. About two and a half
+agent-days of implementer work; under a day of wall time with three lanes at once (K8-A, K8-B and K8-S first: none waits on
+another's proofs). `LEAN.md`: "A kernel leaf priced from a plan's table is priced high" — the first two leaves re-price it.
+
+### 6.3 Drafts for files I do not write
+
+- **`data/fs131/claims-NF2.md` § Dated lines** (each follows the last line there):
+  - "2026-10-14 — **M8b's parts 2–4 are typed over `TateModel F`, and EF_F⁺ is stated with no scope (FS131-K8B1).** Lemma PF,
+    Step 0, the multipliers `(1 + 2bi)/(1 − 2bi)`, the thin boxes and Lemma 3.1′ (EN2-L31 word for word, its part (iii′) over
+    EN2-ZE as typed), the pigeonhole, two scales, the global point, the leaves and the shells, in five modules
+    (`Rigidity/PlaceSizes`, `Multipliers`, `ThinBoxes`, `GlobalPoint`, `WanderingShells`); their composition
+    `Rigidity.zeroEntropyCarried_of_tateModel (D : TateModel F) : ZeroEntropyCarried F` is proved from the leaves, and with
+    `exists_tateModel` gives `Rigidity.zeroEntropyCarried_of_numberField (F) [NumberField F] : ZeroEntropyCarried F`
+    (`Rigidity/ZeroEntropyClosed`). No step reads `NoRamifiedStableDyadic F` or `R = O′`: once the leaves land, EF_F⁺ holds over
+    every real number field (a plan, one mind; the kernel is its test)."
+  - "2026-10-14 — **EF_F⁺'s Steps 6–7 on a shorter route (FS131-K8B1; a plan, one mind).** The lift of a point of a leaf
+    `π(ι t + W_{v*})` is unique (`ι(L) ∩ W_{v*} = 0`), so the shells `π(ι t + {a ∈ W_{v*} : |a_w|_w = c})`, `c > 0`, wander under
+    `rot g` for any unit vector `g` with `|g|_w < 1` — `g = γ/γ̄`, `γ ∈ 𝔓_w ∖ σ𝔓_w`, no class number — and a finite invariant measure
+    makes `rot g` conservative: every shell is null. Finite `U`-orbits on `L/Λ`, the stabiliser `U_t`, the measure `ν_t` and the
+    Borel isomorphism `φ_t` leave EF_F⁺'s inputs. Step 0 reads no product formula (integral or not, then Kronecker)."
+- **`LEAN.md` § Searching — Lean**, new lines:
+  - "An `abbrev` over `Sum` loses dot notation: `p.size` for `p : A ⊕ B` looks for `Sum.size` ('Invalid field'). A type of places
+    of two kinds is an `inductive` with named constructors (`Rigidity.WPlace`, FS131-K8B1)."
+  - "A combining character is not an identifier character: `x̃` (x with U+0303) is 'expected token' at the binder (FS131-K8B1)."
+  - "At the pin `NumberField.mixedEmbedding.normAtPlace w` is a `MonoidWithZeroHom` (`mixedSpace K →*₀ ℝ`): `map_mul` is its
+    multiplicativity (no `normAtPlace_mul` exists); there is no `IsSigmaCompact.measurableSet` (a countable union of
+    `IsCompact.measurableSet`); `NumberField.Embeddings.pow_eq_one_of_norm_eq_one` is in
+    `Mathlib.NumberTheory.NumberField.InfinitePlace.Embeddings` (FS131-K8B1, `data/fs131/k8b1/probes/Names*.lean`)."
+  - "A wandering set of a finite invariant measure is null with no periodicity argument: `MeasurePreserving.conservative` and
+    `Conservative.exists_mem_iterate_mem` (a null-measurable set of positive measure has a point returning under some
+    `f^[m]`, `m ≠ 0`); the pigeonhole on measure is `exists_nonempty_inter_of_measure_univ_lt_sum_measure` (FS131-K8B1)."
+  - "A new module that another new module imports needs its `.olean` for `lake env lean`: elaborate them in order with
+    `lean -o` into the build directory, new modules only (`data/fs131/k8b1/seq.sh`, after FS131-KT1's `seq.sh`)."
+- **`BIBLIOGRAPHY.md`**: no new row. This job read no outside source; it cites `[Tate1950]`, `[ChothiEverestWard1997]`
+  and `[EinsiedlerFish2010]` only through X01D and EN2 (none read here), and Kronecker's theorem and the product formula as
+  Mathlib's.
+- **`ARCHITECTURE.md`**: written by this job (six rows, § 3); § Trust: nothing new (no axiom, no purchase).
+- **`scripts/Axioms.lean`**: nothing to add while the modules are skeletons; at their landing,
+  `zeroEntropyCarried_of_numberField` (and the moved `zeroEntropyCarried`) are records to audit.

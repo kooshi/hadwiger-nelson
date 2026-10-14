@@ -86,3 +86,21 @@ over `(D : TateModel F)`**; the existence `Rigidity.exists_tateModel` is lane T 
 `TateCharacter`, `TateKernel`, assembled in `TateExists`), on form G of the character, priced at about two agent-days. The
 statement-2 line above ("the model of `Dual F` as `𝔸_𝒮/D` … Needs `R = O′`") is superseded: the model reads `R` through
 `R ⊆ O′` and `c·O′ ⊆ R` only.
+
+## Since FS131-K8B1 (2026-10-14; by hand — the text above is kept)
+
+M8b's parts 2–4 are typed over `(D : TateModel F)`, each with `sorry` at its leaves only and a plan per leaf
+(`plans/FS131-K8B1-zero-entropy-second.md`): `Rigidity/PlaceSizes` (the places of `W`, Lemma PF for `O′` and `Λ`, Step 0, the
+shells' multiplier), `Rigidity/Multipliers` (`(1 + 2bi)/(1 − 2bi)`), `Rigidity/ThinBoxes` (Lemma 3.1′ as EN2-L31 states it, its
+part (iii′) proved over EN2-ZE as typed), `Rigidity/GlobalPoint` (the pigeonhole, two scales, the global point),
+`Rigidity/WanderingShells` (leaves and shells). Statement 1 is now proved, as a composition of those leaves, **without its
+scope binder**: `Rigidity.zeroEntropyCarried_of_tateModel (D : TateModel F) : ZeroEntropyCarried F` and
+`Rigidity.zeroEntropyCarried_of_numberField (F) [NumberField F] : ZeroEntropyCarried F` (module `Rigidity/ZeroEntropyClosed`, the
+proposed home of statement 1's proof); no step reads `NoRamifiedStableDyadic F` or `R = O′`. Statement 2 (the model of the dual) is
+`TateModel F` (FS131-KT1). Statement 5 is `Rigidity.TateModel.thinBox_heavy`. Steps 6–7 run on a shorter route: the shells
+wander under one rotation, so no finite orbits, stabiliser, `ν_t`, Borel isomorphism or class group is read.
+
+**Imports, now:** M8b reads `Rigidity/TateCharacter` (for `mem_stableIntegers_iff_valuation`, a lane T-C leaf), `Rigidity/TateModel`,
+`Rigidity/ZeroEntropyNames` (M8a), Mathlib's product formula, Kronecker's theorem and conservative maps; `Rigidity/TateExists` only
+in the assembly. **Not read, of the list above:** `c·O′ ⊆ R` (M9-R), the density of `R`, `R = O′`, the class number, strong
+approximation, Lusin–Souslin.

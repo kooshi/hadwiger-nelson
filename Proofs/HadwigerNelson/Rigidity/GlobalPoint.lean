@@ -124,14 +124,14 @@ theorem mul_sub_point (c : Collision D xw p ε δ B) :
 
 /-- **Step 4: two scales give one point** (X01D § 3.5): collisions at the scales `B` and `3B²` with the thinness `δ(·)` have
 the same point, once `8M(B)^{−10}` is below the gap `C` and `16ε ≤ 1`. -/
-theorem point_eq {C : ℝ} (hC : D.IsGap C) (hε : 0 < ε) (hε16 : 16 * ε ≤ 1) (hB : 1 ≤ B)
+theorem point_eq {C : ℝ} (hC : D.IsGap C) (hε16 : 16 * ε ≤ 1)
     (hBC : 8 * (scaleHeight F B)⁻¹ ^ 10 < C)
     (c₁ : Collision D xw p ε (scaleThin F B) B) (c₂ : Collision D xw p ε (scaleThin F (3 * B ^ 2)) (3 * B ^ 2)) :
     c₁.point = c₂.point := by
   sorry
 
 /-- **Step 5: the point is global at `p`, up to the scale** (X01D § 3.6): `|x̃ − t|_p ≤ 2^{[L:ℚ]+2}·M(B)³·δ`. -/
-theorem size_sub_point_le (hε16 : 16 * ε ≤ 1) (hB : 1 ≤ B) (hδ : 0 ≤ δ) (c : Collision D xw p ε δ B) :
+theorem size_sub_point_le (c : Collision D xw p ε δ B) :
     p.size (xw - toSAdele F c.point) ≤ 2 ^ (Module.finrank ℚ (fieldI F) + 2) * scaleHeight F B ^ 3 * δ := by
   sorry
 
@@ -156,7 +156,7 @@ scales `B_{j+1} = 3B_j²`; at each a collision (`exists_collision`: `B·δ(B)^β
 open one); consecutive points agree (`Collision.point_eq`), so all equal one `t`; and `|x̃ − t|_p ≤ 2^{[L:ℚ]+2}M(B_j)^{−13} → 0`
 (`Collision.size_sub_point_le`). -/
 theorem exists_point_of_heavy (μ : Measure (Dual F)) [IsProbabilityMeasure μ] (hμ : RotInv F μ) {p : WPlace F}
-    {C : ℝ} (hC0 : 0 < C) (hC : D.IsGap C) {ε : ℝ} (hε : 0 < ε) (hε16 : 16 * ε ≤ 1) {δ₀ : ℝ} (hδ₀ : 0 < δ₀)
+    {C : ℝ} (hC0 : 0 < C) (hC : D.IsGap C) {ε : ℝ} (hε16 : 16 * ε ≤ 1) {δ₀ : ℝ} (hδ₀ : 0 < δ₀)
     {xw : SAdeleRing F}
     (hheavy : ∀ δ : ℝ, 0 < δ → δ ≤ δ₀ → δ ^ heavyExponent F ≤ μ.real (D.π '' ((xw + ·) '' thinBox p (2 * ε) δ))) :
     ∃ t : fieldI F, xw - toSAdele F t ∈ hyperplane p := by
