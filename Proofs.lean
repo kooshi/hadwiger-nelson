@@ -270,6 +270,7 @@ import Proofs.HadwigerNelson.Arith.Floor128
 import Proofs.HadwigerNelson.Arith.TargetFloors
 import Proofs.HadwigerNelson.Arith.WeilKloosterman
 import Proofs.HadwigerNelson.Arith.GapSeven
+import Proofs.HadwigerNelson.Arith.CircleCos
 import Proofs.HadwigerNelson.Arith.ProductFactor
 import Proofs.HadwigerNelson.Arith.MajorityVote
 import Proofs.HadwigerNelson.Arith.NegCircleModel

@@ -1,0 +1,22 @@
+slot: admitted icm2: mem 4 GiB (hard cap), cpus 4,5
+data/fs131/icm2/lean/ClassRatioWork.lean:962:16: warning: declaration uses `sorry`
+data/fs131/icm2/lean/ClassRatioWork.lean:1034:16: warning: declaration uses `sorry`
+data/fs131/icm2/lean/ClassRatioWork.lean:1139:88: error: Application type mismatch: The argument
+  ι
+has type
+  𝓞 ↥(fieldI F) ⧸ P.P ^ 1
+but is expected to have type
+  ℕ
+in the application
+  mul_comm (B x).val ι
+data/fs131/icm2/lean/ClassRatioWork.lean:1171:10: error: Invalid projection: Projections extract constructor fields for one-constructor inductive types. The expression
+  hx
+has type `(A x, B x) = v` which has no fields.
+data/fs131/icm2/lean/ClassRatioWork.lean:1170:17: warning: This simp argument is unused:
+  Prod.mk.injEq
+
+Hint: Omit it from the simp argument list.
+  simp only [̵P̵r̵o̵d̵.̵m̵k̵.̵i̵n̵j̵E̵q̵]̵ ̵at hx
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/icm2/lean/ClassRatioWork.lean:1181:16: warning: declaration uses `sorry`
