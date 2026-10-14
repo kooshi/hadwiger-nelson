@@ -11308,6 +11308,30 @@ theorem.  `tools/fs131_ldb1_records.py` reads the audit's log against the kernel
 #print axioms HadwigerNelson.Plane.oneAvoidingDensityBound
 -- FS131-IDB3 block end
 
+/-! ## FS-131 (job FS131-LCH1) — the five-colour chain's landing, part 1: the records `main`'s modules gained
+
+`Plane/MOneBound`'s two corollaries (`m₁(ℝ²) ≤ 0.2470`, `m₁(ℝ²) < 1/4`, no hypothesis); the eleven helpers of
+`Plane/OneClass/InvariantLaw` made public (one copy, read by `Rigidity/InvariantMeasure`); `UpperHalf.exists_I_integer`
+made public (read by `Rigidity/SqrtClassFive`). The chain's own block is part 2's (`plans/FS131-LCH1-join.md`,
+§ Drafts for part 2). -/
+
+-- FS131-LCH1 block: 14 records (2 + 11 + 1), each expected on a subset of the standard three
+#print axioms HadwigerNelson.Plane.mOne_le_0_2470
+#print axioms HadwigerNelson.Plane.mOne_lt_one_quarter
+#print axioms HadwigerNelson.OneClass.avgMeasure
+#print axioms HadwigerNelson.OneClass.avgMeasure_apply
+#print axioms HadwigerNelson.OneClass.isProbabilityMeasure_avgMeasure
+#print axioms HadwigerNelson.OneClass.avgMeasure_map
+#print axioms HadwigerNelson.OneClass.integral_avgMeasure
+#print axioms HadwigerNelson.OneClass.map_eq_of_tendsto
+#print axioms HadwigerNelson.OneClass.map_eq_of_tendsto_of_eventually
+#print axioms HadwigerNelson.OneClass.measure_compl_eq_zero_of_tendsto
+#print axioms HadwigerNelson.OneClass.isClosed_setOf_of_tendsto
+#print axioms HadwigerNelson.OneClass.exists_fixed_of_average
+#print axioms HadwigerNelson.OneClass.exists_common_fixed
+#print axioms HadwigerNelson.UpperHalf.exists_I_integer
+-- FS131-LCH1 block end
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
