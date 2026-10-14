@@ -1,0 +1,5 @@
+occurrences of the quotient instance before: 2 after: 0
+occurrences of borel before: 0 after: 2
+ksEntropy at 5874 of 17948 ; first instance occurrence at 6117
+before with the two instances replaced by borel == after: True
+control (one occurrence replaced) == after: False
