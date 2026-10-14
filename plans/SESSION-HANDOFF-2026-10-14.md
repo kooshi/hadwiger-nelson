@@ -37,9 +37,9 @@ backup --all`** after each commit. Agent ids: scratch `agents.txt`, copies `~/so
 - **Today's search** (SEARCH-2026-10-14, item 908): smaller class-ratio certificates at p = 19 and p = 11, each accepted by FS-66's
   frozen checker, in `data/search/2026-10-14/certs/` (read there; not copied to `data/fs66/`). Search queue row 24: done.
 
-## 3. Running now (four jobs, 3.5 slots)
+## 3. Running now (four jobs, four slots)
 
-1. **FS131-FC6 — the density bound's filing** (the Clerk, tree `fs133-wk1`, branch `fs131-f6` from `main` at `2dfc01e82`, item 928): the 16 drafts of `plans/FS131-LDB1-landing.md` verbatim; fact-audit base `8eece67b0`. At its hand-back: read its `CHECK:` lines, rule, merge `--no-ff`, push.
+1. **FS131-LCH1 — the chain's landing, part 1** (tree `fs131-wq1`, branch `fs131-wlc` from `fs131-wm15`, `main` and `fs131-wcm3` merged in, item 931): the eight ruled integrations; the joined tree's gate steps; drafts for part 2. **The density bound's filing is merged** (FS131-FC6, `faa9a919c`, item 930); **the next filing's fact-audit base is `faa9a919c`**.
 2. **FS131-IKL1 — the certificate link** (tree `fs132-wi1`, branch `fs131-wkl` from `fs131-wcm3` with `fs131-wc16` merged, item 929): K3–K5 in a module `ClassRatio` can import; `q = 11` closed, `q = 19` over a named hypothesis in `sum_le_eleven`'s shape.
 3. **FS131-ICM4 — M13's two dyadic certificates** (tree `fs131-wch`, branch `fs131-wcm4` from `fs131-wcm3`, item 923); `ClassRatio` is its file.
 4. **FS131-IKC4 — the bound at p = 19** (tree `fs131-wnf`, branch `fs131-wc17` from `fs131-wc16`); the certificate modules are its files.
@@ -67,14 +67,7 @@ copy (item 876); the `UnitCircle` and `ClassRatio` docstrings (items 897, 893) i
 
 ## 5. The queue (launch into each slot as it frees)
 
-1. **The chain's lander, part 1 — the join** (next free slot; tree `fs131-wq1`, whose build is current for `fs131-wm15`): a branch
-   from `fs131-wm15` merging `main` (trial: conflicts in `ARCHITECTURE.md`, `Proofs.lean`, `Plane/OneAvoidingDensity.lean`
-   add/add — `main`'s wins —, `scripts/Axioms.lean`, `scripts/assumptions-ledger.txt`) and `fs131-wcm3`; then the rulings
-   carried in § 4 and items 916, 918, 922, 926, 927: the chain's readers of the old `mOne` through the bridge; `hOA`
-   discharged by `Plane.oneAvoidingDensityBound` and `hRow99` by `ThreeFourColours.localBound_le_chromaticNumber_of_le_four`;
-   the M15 link deleted for `ratioAtMost_of_two_notMem`; `exists_I_integer` once; the old conditional retired; the two
-   corollaries `m₁ ≤ 0.2470`, `m₁ < 1/4` stated; one of `zeroEntropyCarried`/`…_of_numberField` removed; `archTop`'s binder;
-   the docstring sweep (28 "skeleton" titles; items 893, 897). **Part 2** at the hand-backs of FS131-ICM4, FS131-IKC4 and
+1. **The chain's lander, part 1 — running (FS131-LCH1, above).** **Part 2** at the hand-backs of FS131-ICM4, FS131-IKC4 and
    FS131-IKL1: merge `fs131-wcm4`, `fs131-wc17`, `fs131-wkl`; `ratioAtMost_cert` one line; `q = 19`'s hypothesis
    discharged; the full gate on one commit (item 808's rule); drafts; the filing. **Then the W6 publication pass**, each
    irreversible step confirmed with Kooshi. The ~110 MB of p = 19 text, if F2 is built in full, goes to him then (item 902).
