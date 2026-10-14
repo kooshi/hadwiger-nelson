@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-14, afternoon: the port and the density equality on `main`; four jobs running on the chain and the density bound
 
-*Rewritten 2026-10-14 14:58 UTC by Keryx, between hand-backs, so a compaction loses nothing. Current state only. A successor reads this
-file first, then `plans/FS131-close-inventory.md` items 837–861 (everything since the last rewrite, each with its receipt and its ruling
+*Rewritten 2026-10-14 14:58 UTC, § 3–5 updated 2026-10-14 16:20 UTC, by Keryx, between hand-backs, so a compaction loses nothing. Current state only. A successor reads this
+file first, then `plans/FS131-close-inventory.md` items 837–878 (everything since the last rewrite, each with its receipt and its ruling
 in four parts; items 750–836 are the morning's, and their written times in 750–810 are wrong by up to six and a half hours, item 812).
 `plans/SESSION-HANDOFF-2026-10-13.md` is older: read it only for the parked frontier (its § 8) and the older corrections (its § 7).*
 
@@ -36,50 +36,51 @@ push -q backup --all`** after each commit. Agent ids: scratch `agents.txt`, copy
   `main`: `fs133-wk1`** (its build is the gated one; it is on branch `fs131-f5`, merged).
 - Kooshi has had a report at each landing (port; density equality). The next is due at the next gate.
 
-## 3. Running now (four jobs, four slots)
+## 3. Running now (four jobs, four slots; updated 2026-10-14 16:20 UTC)
 
-1. **FS131-IJ1 — the chain's join, then M10, M2a, M3, M2b** (tree `fs131-wq1`, branch `fs131-wt3`; the join `3ae198eac` builds, item
-   854). Then `Counting.toL` → `ofUnitRing`; `ChainAtTA`'s two lemmas public; the four modules. Carries item 847 and item 850 ruling 2.
-2. **FS131-IKC1 — the certificate checker's soundness, p = 11 in four segments, p = 19 in form F2** (tree `fs131-wnf`, branch
-   `fs131-wc14`). **It found the checker unsound** (a kernel counterexample, item 853): `certOK` is being strengthened; the soundness
-   theorems' statements unchanged; p = 11's 185 s / 12 GB are superseded until re-measured. Search request row 24 (a smaller
-   relaxation) is queued for the Searcher.
-3. **FS131-IDB1 — the density bound's lanes C then B** (tree `fs131-w10g`, branch `fs131-wdb1`): **the whole J₀ covering passes in
-   the kernel** (`BesselCert.Cells.phiApprox_ge`, standard three, item 861) and lane B's 17 leaves are proved; its report is coming.
-4. **FS131-ICL1 — the count's lanes Λ1 (the plane) then Λ4 (the extension)** (tree `fs131-wch`, branch `fs131-wcl` from the join
-   `3ae198eac`; the first build compiles the proof line's modules).
+1. **FS131-IJ3** — M2b's last leaf `archimedean_support` (with `ContinuityGroup`'s eight lemmas public), then the entropy side:
+   lane A `exists_admissiblePair` (planned and proved there), the split's leaves (`EntropySplitMax`), M5-E (`EntropyFibres`),
+   M5-P (`PositiveEntropy`), M9-S last. Tree `fs131-wq1`, branch `fs131-wt5` from `fs131-wt4` (where M3 and M2b's hard leaf are
+   proved, item 876).
+2. **FS131-IM11** — M11 (A⁺ at the empty set; `Rigidity.aPlusOfR88` over 33 leaves in `SpectralSubspace`, `TraceSplit`,
+   `APlus`), three `ContinuityGroup` helpers public. Tree `fs132-wi1`, branch `fs131-wm12` from the planner's `fs131-wm11`.
+3. **FS131-ICL2** — the count's Λ2 and Λ3, `finite_quot`'s repair, the model at ℚ in `Rigidity/CountModels`. Tree `fs131-wch`,
+   branch `fs131-wcl2` (the chain's line at `1e438c171` merged with `fs131-wcl`, where Λ1 and Λ4 are proved, item 871).
+   **Ruled mid-job (item 878):** `rowsEdgeNull_levelRows` gains `(hT : TCA F)`.
+4. **FS131-IKC2** — the certificate checker's soundness, its four leaves (`psd_of_psdCheck`, `blockT_nonneg`, `opSum_O23_eq`,
+   `opSum_O4_eq`); p = 11's library modules at eight segments; F2 at p = 19. Tree `fs131-wnf`, branch `fs131-wc15`. The checker
+   was found unsound and strengthened (items 853, 869).
 
 ## 4. Where each line stands
 
-**The five-colour chain** — one line again: `fs131-wt3` (the join of `fs131-wt2`, where lane T, M8b and the zero-entropy side are
-proved — `zeroEntropyCarried_of_numberField` on the standard three, item 850 — with `fs131-wk12`, the map's six typed modules and the
-count's eight). Branches growing from it: `fs131-wt3` (IJ1), `fs131-wcl` (ICL1). Still to prove: the count's Λ2 (`FiniteZhang`,
-`CountResidue`, `CountDescent`; it repairs `Counting.finite_quot`'s missing `[NumberField F]`, item 847) and Λ3 (`CountTorus`,
-`CountCompletion`), both after IJ1's replacement in those files; M13's K3–K5 with Lemma P (on the chain's line, reading `ClassRatio`)
-after IKC1's soundness; M11 (a planner first); lane A `exists_admissiblePair` (a planner first); M5-E/M5-P; the split's leaves 2–6;
-M9-S; M15. **Rulings to carry at the chain's landing:** `entropySplit`/`zeroEntropyCarried` move to `ZeroEntropyClosed` (items 761,
-811); the declared printed theorem `positive_entropy_rigidity` registered with the audit; lane N's five unread binders dropped by a
-planner with a dump (item 770); Lemma F made public if read twice (item 801).
+**The five-colour chain** — its branches now: `fs131-wt5` (IJ3; contains M10, M2a, M3, M2b but one leaf, lane T, M8b, the
+zero-entropy side), `fs131-wm12` (IM11), `fs131-wcl2` (ICL2; the count). All grow from the joined line `fs131-wt3`; they must
+be joined again before the chain's landing (each touches different files; `ContinuityGroup` is edited by IJ3 and IM11 on
+different lines, and by IJ2's one attribute). **Still unassigned:** M13's K3–K5 with Lemma P (on the chain's line, reading
+`ClassRatio`; after IKC2's soundness); M15 (the instances, `ℚ(√47)` first). **Rulings to carry at the chain's landing:**
+`entropySplit`/`zeroEntropyCarried` move to `ZeroEntropyClosed` (items 761, 811); `positive_entropy_rigidity` registered with the
+audit; lane N's five unread binders dropped by a planner with a dump (item 770); Lemma F public if read twice (item 801); M3's
+private copies of `main`'s `InvariantLaw` helpers made one shared public copy (item 876).
 
-**The density bound** — `fs131-wdb` (the planner's skeleton, `Plane/DensityBound/*`, 28 leaves) and `fs131-wdb1` (IDB1: lanes C and
-B). Still to prove: lanes F (`Autocorr`, 900 planned lines), P (`Pattern`, `Window`, and `Plane/OneAvoidingDensity`'s one leaf — a
-proof in that file, approved, item 845), X (the `X23` instance and the theorem, 700; the atom check in about 75 theorems). Then its
-landing on its own line from `main`; the chain reads it.
+**The density bound** — `fs131-wdb1` (IDB1: lanes C and B proved, item 866) on the planner's `fs131-wdb`. **Unassigned:** lanes F
+(`Autocorr`), P (`Pattern`, `Window`, `Plane/OneAvoidingDensity`'s leaf), X (the `X23` instance and the theorem; it must read the
+paper's eq. (22) itself and prove `X23_phi` from `BesselCert.Cells.phiApprox_ge`, item 866 ruling 2). Its tree `fs131-w10g` is
+built for `fs131-wdb1` — use it, never switch it to the chain (its 46 cell modules cost 41 minutes of kernel time).
 
 **Rank 4, the p-adic result (row 75):** unplanned; after the chain.
 
-## 5. The queue (four slots; launch into each as it frees)
+## 5. The queue (launch into each slot as it frees)
 
-1. When IDB1 hands back: **the density bound's lanes F, P, X** (one or two implementers; F and P first, X reads P's definitions).
-2. When IJ1 hands back: **the count's Λ2 and Λ3** on the joined line (one implementer each, or one for both), Λ2 carrying item 847's
-   repair; then **the M11 planner**.
-3. When IKC1 hands back: **M13's K3–K5 and Lemma P** on the chain's line, with the strengthened checker's p = 11 and p = 19 checks.
-4. **Planners**: M11; lane A. **Landings in order:** the density bound → its filing → the chain → the W6 publication pass.
+1. **The density bound's lanes F and P** (one implementer, tree `fs131-w10g`), then **X** (another, or the same).
+2. **M13's K3–K5 and Lemma P** on the chain's line, after IKC2's soundness.
+3. **M15** after the count and M13.
+4. **The chain's re-join and landing** — a landing planner's or implementer's job (the join of `fs131-wt5`, `fs131-wm12`,
+   `fs131-wcl2` and the M13 line with `main`), then the full gate; **then the W6 publication pass** (each irreversible step with
+   Kooshi's word).
+5. **The density bound's landing** on its own line from `main` (before or with the chain's).
 
-Generators: `data/fs131/briefs/scripts/mk-*.py` on `mkbrief.py` (`fresh(JOB)` refuses a used id — and an id whose lower-case form
-names a folder under any `data/fs13*/`, item 844). Gate every brief (`python3 .claude/skills/keryx/scripts/brief_gate.py all <brief>`)
-and **commit only inside `if <gate>; then … fi`**. Paths in full under the job's tree; a file not yet written goes in words. Filing
-generators: `mk-fs131-fc4.py`, `mk-fs131-fc5.py` (copy the latter for the next).
+Generators: `data/fs131/briefs/scripts/mk-*.py` on `mkbrief.py`. Gate every brief and **commit only inside `if <gate>; then …
+fi`**. Filing generators: copy `mk-fs131-fc5.py`. **Reference compiled tree for `main`: `fs133-wk1`.**
 
 ## 6. Owed, not done
 
