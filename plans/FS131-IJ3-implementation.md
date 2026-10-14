@@ -182,3 +182,18 @@ Proved, each by KN9's route: `ZdAction.two_le_of_not_isVirtuallyCyclic` (`interv
 `ZdAction.invariantComponent_model`, `finTwo_haar_model` (`map_add_right_eq_self` for the counting measure),
 `isAddHaarMeasure_of_add_invariant`. **Left:** `noVirtuallyCyclicFactors_of_isIrreducible`,
 `eq_of_isErgodicOn_of_invariant_component`, `mulTwoThree_model`, `haar_or_zero_entropy`.
+
+## Stage 6 — SAVED: M5-P's deduction — `haar_or_zero_entropy` proved; `mulTwoThree_model` left
+
+`logs/PE-3.log`, `PE-4.log` (the last exit 0, the only warning `mulTwoThree_model`'s ``declaration uses `sorry` ``).
+Proved, each by KN9's decomposition (§ 2.4 there): `ZdAction.noVirtuallyCyclicFactors_of_isIrreducible` (a continuous
+additive map into the finite `Y` has a clopen zero set, so it is `0` on the connected `X`; then `α m = α (k • n)`),
+`ZdAction.eq_of_isErgodicOn_of_invariant_component` (`A = ⋂_{k ≠ j₀}` null sets, `A′ = ⋂_n (αⁿ)⁻¹ A` exactly invariant
+by reindexing, ergodicity, and every other component would give `A′ᶜ` mass), and **`haar_or_zero_entropy`** — the
+declared `positive_entropy_rigidity` read as stated (no `PolishSpace`); Case A by `isAddHaarMeasure_of_add_invariant`,
+`map_eq_of_isAddHaarMeasure` and the invariant component; Case B by total irreducibility at `Λ` (each `G j` finite),
+`ksEntropy_eq_zero_iff_of_finite` on clause (4), `ksEntropy_finite_mixture_eq_zero`, and `coe_nsmul` with
+`ksEntropy_eq_zero_of_iterate` at `q = [ℤ^d : Λ]`. It rests on the declared axiom; its record is printed in the last
+stage. **Not proved: `ZdAction.mulTwoThree_model`** (the model of FS105-NVC's hypotheses: `×2, ×3` on `ℝ` irreducible and
+not virtually cyclic). Its route is KN9's (closed subgroups of `ℝ` are `0`, `cℤ` or `ℝ`; `cℤ` is not doubling-invariant;
+`2^a 3^b = 1` forces `a = b = 0`), priced at 100–150 lines; left at my budget, it is on no consumer's path.

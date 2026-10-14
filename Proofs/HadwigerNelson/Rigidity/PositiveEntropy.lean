@@ -163,7 +163,33 @@ virtually cyclic modulo `Y`, then for `m ∈ Λ` the continuous homomorphism `α
 finite `Y`, its zero set is clopen and contains `0`, so it vanishes: the action is virtually cyclic. -/
 theorem noVirtuallyCyclicFactors_of_isIrreducible [IsTopologicalAddGroup X] [T1Space X] [ConnectedSpace X]
     (α : ZdAction d X) (hirr : α.IsIrreducible) (hvc : ¬ α.IsVirtuallyCyclic) : α.NoVirtuallyCyclicFactors := by
-  sorry
+  intro Y hY hinv hne hmod
+  have hYfin : (Y : Set X).Finite := (hirr Y hY hinv).resolve_right hne
+  -- a continuous additive map with values in the finite `Y` vanishes on the connected `X`
+  have hzero : ∀ f : X →+ X, Continuous f → (∀ x, f x ∈ Y) → f = 0 := by
+    intro f hf hfY
+    have hclosed : IsClosed (f ⁻¹' {0}) := isClosed_singleton.preimage hf
+    have hopen : IsOpen (f ⁻¹' {0}) := by
+      have hc : IsClosed (f ⁻¹' ((Y : Set X) \ {0})) :=
+        (hYfin.subset Set.sdiff_subset).isClosed.preimage hf
+      have he : f ⁻¹' {0} = (f ⁻¹' ((Y : Set X) \ {0}))ᶜ := by
+        ext x
+        simp only [Set.mem_preimage, Set.mem_singleton_iff, Set.mem_compl_iff, Set.mem_sdiff, not_and, not_not]
+        exact ⟨fun h _ => h, fun h => h (hfY x)⟩
+      rw [he]
+      exact hc.isOpen_compl
+    have huniv := (IsClopen.eq_univ ⟨hclosed, hopen⟩ ⟨0, by simp⟩)
+    ext x
+    have hx : x ∈ f ⁻¹' {0} := huniv ▸ Set.mem_univ x
+    simpa using hx
+  apply hvc
+  obtain ⟨n, Λ, hΛ, h⟩ := hmod
+  refine ⟨n, Λ, hΛ, fun m hm => ?_⟩
+  obtain ⟨k, hk⟩ := h m hm
+  refine ⟨k, ?_⟩
+  have h0 := hzero (α m - α (k • n)) ((α.continuous' m).sub (α.continuous' (k • n))) fun x => by
+    simpa using hk x
+  exact sub_eq_zero.1 h0
 
 /-- **`α^{q n}` is the `q`-th iterate of `α^n`**: `map_add'` and induction on `q`. -/
 theorem coe_nsmul (α : ZdAction d X) (q : ℕ) (n : Fin d → ℤ) : ⇑(α (q • n)) = (⇑(α n))^[q] := by
@@ -216,7 +242,103 @@ theorem eq_of_isErgodicOn_of_invariant_component [MeasurableSpace X] [BorelSpace
     (herg : α.IsErgodicOn ⊤ μ) {J : ℕ} (ν : Fin J → Measure X) (hμ : μ = (J : ℝ≥0∞)⁻¹ • ∑ j, ν j)
     (hsing : ∀ i j, i ≠ j → ν i ⟂ₘ ν j) (hprob : ∀ j, IsProbabilityMeasure (ν j)) (j₀ : Fin J)
     (hinv : ∀ n, (ν j₀).map (α n) = ν j₀) : μ = ν j₀ := by
-  sorry
+  classical
+  have hmeas : ∀ n, Measurable (α n) := fun n => (α.continuous' n).measurable
+  -- `A`: null for every `ν k`, `k ≠ j₀`, and conull for `ν j₀`
+  let N : Fin J → Set X := fun k => if h : k = j₀ then Set.univ else (hsing k j₀ h).nullSet
+  have hNm : ∀ k, MeasurableSet (N k) := fun k => by
+    by_cases h : k = j₀
+    · simp [N, h]
+    · simp only [N, dif_neg h]
+      exact (hsing k j₀ h).measurableSet_nullSet
+  set A := ⋂ k, N k with hA
+  have hAm : MeasurableSet A := MeasurableSet.iInter hNm
+  have hAk : ∀ k, k ≠ j₀ → ν k A = 0 := fun k hk =>
+    measure_mono_null (Set.iInter_subset _ k) (by
+      rw [show N k = (hsing k j₀ hk).nullSet from dif_neg hk]
+      exact (hsing k j₀ hk).measure_nullSet)
+  have hAj₀ : ν j₀ Aᶜ = 0 := by
+    rw [hA, Set.compl_iInter]
+    refine measure_iUnion_null fun k => ?_
+    by_cases h : k = j₀
+    · simp [N, h]
+    · rw [show N k = (hsing k j₀ h).nullSet from dif_neg h]
+      exact (hsing k j₀ h).measure_compl_nullSet
+  -- `A′ = ⋂ₙ (αⁿ)⁻¹ A`, exactly invariant
+  set A' := ⋂ n : Fin d → ℤ, (α n) ⁻¹' A with hA'
+  have hA'm : MeasurableSet A' := MeasurableSet.iInter fun n => hmeas n hAm
+  have hA'inv : ∀ m, (α m) ⁻¹' A' = A' := by
+    intro m
+    ext x
+    simp only [hA', Set.mem_preimage, Set.mem_iInter]
+    constructor
+    · intro h n
+      have := h (n - m)
+      have e : α (n - m) (α m x) = α n x := by
+        have h1 := α.map_add' (n - m) m
+        rw [sub_add_cancel] at h1
+        exact (DFunLike.congr_fun h1 x).symm
+      rwa [e] at this
+    · intro h n
+      have e : α n (α m x) = α (n + m) x := by
+        have h1 := α.map_add' n m
+        exact (DFunLike.congr_fun h1 x).symm
+      rw [e]
+      exact h (n + m)
+  have hA'j₀ : ν j₀ A'ᶜ = 0 := by
+    rw [hA', Set.compl_iInter]
+    refine measure_iUnion_null fun n => ?_
+    rw [← Set.preimage_compl, ← Measure.map_apply (hmeas n) hAm.compl, hinv n]
+    exact hAj₀
+  have hA'k : ∀ k, k ≠ j₀ → ν k A' = 0 := fun k hk =>
+    measure_mono_null (fun x hx => by
+      have := Set.mem_iInter.1 hx 0
+      have e : α 0 x = x := by
+        show α.toFun 0 x = x
+        rw [α.map_zero']
+        rfl
+      rwa [Set.mem_preimage, e] at this) (hAk k hk)
+  -- ergodicity
+  have hJ : (J : ℝ≥0∞) ≠ 0 := by
+    have : 0 < J := Fin.pos_iff_nonempty.2 ⟨j₀⟩
+    exact_mod_cast this.ne'
+  rcases herg.2 A' hA'm (fun n _ => hA'inv n) with h0 | h0
+  · -- `μ A′ ≥ J⁻¹ ν j₀ A′ = J⁻¹`
+    exfalso
+    have h1 : ν j₀ A' = 1 := by
+      haveI := hprob j₀
+      have := prob_add_prob_compl (μ := ν j₀) hA'm
+      rw [hA'j₀, add_zero] at this
+      exact this
+    rw [hμ, Measure.smul_apply, Measure.coe_finsetSum, Finset.sum_apply, smul_eq_mul, mul_eq_zero] at h0
+    rcases h0 with h0 | h0
+    · exact ENNReal.inv_ne_zero.2 (ENNReal.natCast_ne_top J) h0
+    · have := (Finset.sum_eq_zero_iff.1 h0) j₀ (Finset.mem_univ _)
+      rw [h1] at this
+      exact one_ne_zero this
+  · -- no other component: each would give `A′ᶜ` mass
+    have hall : ∀ k, k = j₀ := by
+      intro k
+      by_contra hk
+      have h1 : ν k A'ᶜ = 1 := by
+        haveI := hprob k
+        have := prob_add_prob_compl (μ := ν k) hA'm
+        rw [hA'k k hk, zero_add] at this
+        exact this
+      rw [hμ, Measure.smul_apply, Measure.coe_finsetSum, Finset.sum_apply, smul_eq_mul, mul_eq_zero] at h0
+      rcases h0 with h0 | h0
+      · exact ENNReal.inv_ne_zero.2 (ENNReal.natCast_ne_top J) h0
+      · have := (Finset.sum_eq_zero_iff.1 h0) k (Finset.mem_univ _)
+        rw [h1] at this
+        exact one_ne_zero this
+    have hcard : J = 1 := by
+      have := Fintype.card_le_one_iff.2 fun a b => (hall a).trans (hall b).symm
+      have h1 : 0 < J := Fin.pos_iff_nonempty.2 ⟨j₀⟩
+      simp only [Fintype.card_fin] at this
+      omega
+    subst hcard
+    rw [hμ, Fin.sum_univ_one, Nat.cast_one, inv_one, one_smul]
+    rw [Subsingleton.elim j₀ 0]
 
 /-- **`×2, ×3` on the line**: `n ↦ (x ↦ 2^{n₀} 3^{n₁} x)`, an action of `ℤ²` by continuous automorphisms of `ℝ` — the model of
 FS105-NVC's hypotheses (`mulTwoThree_model`). -/
@@ -310,6 +432,51 @@ theorem haar_or_zero_entropy {X : Type*} [AddCommGroup X] [TopologicalSpace X] [
     (hX : IsSolenoid X) {d : ℕ} (α : ZdAction d X) (hirr : α.IsTotallyIrreducible)
     (hvc : ¬ α.IsVirtuallyCyclic) (μ : Measure X) (hμ : IsProbabilityMeasure μ) (herg : α.IsErgodicOn ⊤ μ) :
     μ.IsAddHaarMeasure ∨ ∀ n : Fin d → ℤ, ksEntropy μ (α n) = 0 := by
-  sorry
+  haveI := hX.isTopologicalAddGroup
+  haveI := hX.t2Space
+  haveI := hX.compactSpace
+  haveI := hX.connectedSpace
+  have hd := ZdAction.two_le_of_not_isVirtuallyCyclic α hvc
+  have hnvc := ZdAction.noVirtuallyCyclicFactors_of_isIrreducible α hirr.isIrreducible hvc
+  obtain ⟨Λ, J, ν, G, hΛ, hJ, hμeq, hsing, hj⟩ := positive_entropy_rigidity hX hd α hnvc μ hμ herg
+  by_cases hA : ∃ j, G j = ⊤
+  · -- Case A: a component invariant under every translation is Haar, and is `μ`
+    left
+    obtain ⟨j₀, hj₀⟩ := hA
+    obtain ⟨hprob, -, ⟨-, -, htr⟩, -, -⟩ := hj j₀
+    haveI := hprob
+    haveI hhaar : (ν j₀).IsAddHaarMeasure :=
+      isAddHaarMeasure_of_add_invariant (ν j₀) fun g B hB => htr g (by rw [hj₀]; trivial) B hB
+    have heq := ZdAction.eq_of_isErgodicOn_of_invariant_component α μ herg ν hμeq hsing (fun j => (hj j).1) j₀
+      fun n => ZdAction.map_eq_of_isAddHaarMeasure α (ν j₀) n
+    rw [heq]
+    exact hhaar
+  · -- Case B: every `G j` is finite, so entropy zero passes up from the factors
+    right
+    push Not at hA
+    have hfin : ∀ j, ((G j : AddSubgroup X) : Set X).Finite := fun j => by
+      obtain ⟨-, -, ⟨hcl, hinvG, -⟩, -, -⟩ := hj j
+      exact (hirr Λ hΛ (G j) hcl hinvG).resolve_right (hA j)
+    have hΛzero : ∀ n ∈ Λ, ksEntropy μ (α n) = 0 := by
+      intro n hn
+      have hcomp : ∀ j, ksEntropy (ν j) (α n) = 0 := by
+        intro j
+        obtain ⟨hprob, hergj, ⟨-, hinvG, -⟩, -, h4⟩ := hj j
+        haveI := hprob
+        have hle : G j ≤ (G j).comap (α n) := by
+          intro g hg
+          have h1 := hinvG n hn
+          rw [AddSubgroup.mem_comap, ← h1]
+          exact AddSubgroup.mem_map_of_mem _ hg
+        exact (ksEntropy_eq_zero_iff_of_finite (G j) (hfin j) (α n) (α.continuous' n) hle (ν j)
+          (hergj.1 n hn)).1 (h4 n hn hle)
+      rw [hμeq]
+      exact ksEntropy_finite_mixture_eq_zero ν (fun j => (hj j).1) (α.continuous' n).measurable
+        (fun j => (hj j).2.1.1 n hn) hcomp
+    intro n
+    have hq : 0 < Λ.index := Nat.pos_of_ne_zero hΛ.index_ne_zero
+    have h1 := hΛzero _ (Λ.nsmul_index_mem n)
+    rw [ZdAction.coe_nsmul] at h1
+    exact ksEntropy_eq_zero_of_iterate μ (α.continuous' n).measurable hq h1
 
 end HadwigerNelson.Rigidity

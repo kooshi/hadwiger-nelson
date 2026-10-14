@@ -1,0 +1,49 @@
+slot: admitted ij3f: mem 5 GiB (hard cap), cpus 4,5
+data/fs131/ij3/work/PositiveEntropy.lean:177:79: warning: `Set.mem_diff` has been deprecated: Use `Set.mem_sdiff` instead
+data/fs131/ij3/work/PositiveEntropy.lean:257:50: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+data/fs131/ij3/work/PositiveEntropy.lean:263:6: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+data/fs131/ij3/work/PositiveEntropy.lean:306:10: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?m.502 A' = 0
+in the target expression
+  (ν j₀) A'ᶜ = 0
+
+d : ℕ
+X : Type u_1
+inst✝³ : AddCommGroup X
+inst✝² : TopologicalSpace X
+inst✝¹ : MeasurableSpace X
+inst✝ : BorelSpace X
+α : ZdAction d X
+μ : Measure X
+herg : α.IsErgodicOn ⊤ μ
+J : ℕ
+ν : Fin J → Measure X
+hμ : μ = (↑J)⁻¹ • ∑ j, ν j
+hsing : ∀ (i j : Fin J), i ≠ j → ν i ⟂ₘ ν j
+hprob : ∀ (j : Fin J), IsProbabilityMeasure (ν j)
+j₀ : Fin J
+hinv : ∀ (n : Fin d → ℤ), Measure.map (⇑(α.toFun n)) (ν j₀) = ν j₀
+hmeas : ∀ (n : Fin d → ℤ), Measurable ⇑(α.toFun n)
+N : Fin J → Set X := fun k => if h : k = j₀ then Set.univ else ⋯.nullSet
+hNm : ∀ (k : Fin J), MeasurableSet (N k)
+A : Set X := ⋂ k, N k
+hA : A = ⋂ k, N k
+hAm : MeasurableSet A
+hAk : ∀ (k : Fin J), k ≠ j₀ → (ν k) A = 0
+hAj₀ : (ν j₀) Aᶜ = 0
+A' : Set X := ⋂ n, ⇑(α.toFun n) ⁻¹' A
+hA' : A' = ⋂ n, ⇑(α.toFun n) ⁻¹' A
+hA'm : MeasurableSet A'
+hA'inv : ∀ (m : Fin d → ℤ), ⇑(α.toFun m) ⁻¹' A' = A'
+hA'j₀ : (ν j₀) A'ᶜ = 0
+hA'k : ∀ (k : Fin J), k ≠ j₀ → (ν k) A' = 0
+hJ : ↑J ≠ 0
+h0 : μ A' = 0
+⊢ (ν j₀) A' = 1
+data/fs131/ij3/work/PositiveEntropy.lean:361:8: warning: declaration uses `sorry`
+seconds=2
+exit=1
