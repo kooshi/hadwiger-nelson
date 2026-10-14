@@ -37,12 +37,12 @@ backup --all`** after each commit. Agent ids: scratch `agents.txt`, copies `~/so
 - **Today's search** (SEARCH-2026-10-14, item 908): smaller class-ratio certificates at p = 19 and p = 11, each accepted by FS-66's
   frozen checker, in `data/search/2026-10-14/certs/` (read there; not copied to `data/fs66/`). Search queue row 24: done.
 
-## 3. Running now (four jobs, four slots)
+## 3. Running now (two jobs; two slots left free on purpose)
 
-1. **FS131-LCH1 — the chain's landing, part 1** (tree `fs131-wq1`, branch `fs131-wlc` from `fs131-wm15`, `main` and `fs131-wcm3` merged in, item 931): the eight ruled integrations; the joined tree's gate steps; drafts for part 2. **The density bound's filing is merged** (FS131-FC6, `faa9a919c`, item 930); **the next filing's fact-audit base is `faa9a919c`**.
-2. **FS131-IKL1 — the certificate link** (tree `fs132-wi1`, branch `fs131-wkl` from `fs131-wcm3` with `fs131-wc16` merged, item 929): K3–K5 in a module `ClassRatio` can import; `q = 11` closed, `q = 19` over a named hypothesis in `sum_le_eleven`'s shape.
-3. **FS131-ICM4 — M13's two dyadic certificates** (tree `fs131-wch`, branch `fs131-wcm4` from `fs131-wcm3`, item 923); `ClassRatio` is its file.
-4. **FS131-IKC4 — the bound at p = 19** (tree `fs131-wnf`, branch `fs131-wc17` from `fs131-wc16`); the certificate modules are its files.
+1. **FS131-LCH1 — the chain's landing, part 1** (tree `fs131-wq1`, branch `fs131-wlc` from `fs131-wm15`, item 931, amended in items 933, 934, 938): merging `main`, **`fs131-wcm4`** (M13 with its dyadic certificates, item 938) and **`fs131-wc17`** (the bound at p = 19, item 937); the eight ruled integrations; the joined tree's gate steps; drafts for part 2.
+2. **FS131-IKL1 — the certificate link** (tree `fs132-wi1`, branch `fs131-wkl` from `fs131-wcm3` with `fs131-wc16` merged, item 929): K3–K5 in a module `ClassRatio` imports; Hensel's count and the per-character bound as hypotheses discharged at part 2 by `ClassRatio`'s `card_res_fibreT` and `norm_charSum_le_of_resT` with `exists_conj_sub_notMem` (items 932, 938); `q = 19` over `FibreShareBound 19 U`, discharged by `FibreCertSound.sum_le_nineteen`.
+
+**Why two slots are free:** nothing else is on the chain's critical path, the memory tool's 22 GiB is the bottleneck for the two Lean jobs, and the second filing waits for the chain's records to reach `main` (item 938's turn). **Handed back since the last rewrite:** FS131-IKC4 (item 937: the bound at p = 19 on the standard three, the checker unchanged, F2 not built; 49 MB of generated p = 19 text in git — to Kooshi with the publication pass; search queue row 25 would shrink it below 1 MB), FS131-ICM4 (item 938: M13 rests on `ratioAtMost_cert` alone).
 
 **Landed today since the last rewrite:** **the density bound** (FS131-LDB1, merged `2d71a0872`, item 927; `main` equal to the gated `7a2acfef8` outside `plans/` and `data/`; announced). **Handed back:** the join (FS131-IJN1, item 918), M13's leaves (FS131-ICM3, item 922), the instances (FS131-KM15, item 926: `χ(ℚ(√47)²) = 5` over `hOA`, through the headline's leaves and one link, `fs131-wm15` in `fs131-wq1`, whose build is current). **Reference compiled tree for `main`: `fs131-w10g`** (the gated build). **Counts on `main`:** audit 9,824 records (9,438 clean, 355 axiom-free, 26 imported, 5 purchases); `axioms=2 rests=27` unchanged; vacuity `declarations=20563`.
 
@@ -67,8 +67,7 @@ copy (item 876); the `UnitCircle` and `ClassRatio` docstrings (items 897, 893) i
 
 ## 5. The queue (launch into each slot as it frees)
 
-1. **The chain's lander, part 1 — running (FS131-LCH1, above).** **Part 2** at the hand-backs of FS131-ICM4, FS131-IKC4 and
-   FS131-IKL1: merge `fs131-wcm4`, `fs131-wc17`, `fs131-wkl`; `ratioAtMost_cert` one line; `q = 19`'s hypothesis
+1. **The chain's lander, part 1 — running (FS131-LCH1, above).** **Part 2** at FS131-IKL1's hand-back (FS131-ICM4's and FS131-IKC4's lines join in part 1): merge `fs131-wkl`; `ratioAtMost_cert` one line; `q = 19`'s hypothesis
    discharged; the full gate on one commit (item 808's rule); drafts; the filing. **Then the W6 publication pass**, each
    irreversible step confirmed with Kooshi. The ~110 MB of p = 19 text, if F2 is built in full, goes to him then (item 902).
 2. F2's remaining parts if FS131-IKC4 needs them.
