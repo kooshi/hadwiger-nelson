@@ -1,4 +1,4 @@
-import Proofs.HadwigerNelson.Rigidity.CountDescent
+import Proofs.HadwigerNelson.Rigidity.CountModels
 /-!
 FS131-ICM1 — every constant of this job's modules, as the kernel holds it: read-only (after FS124-I2's dumper).
 
@@ -20,7 +20,7 @@ namespace FS131ICM1Dump
 
 def modules : List Name :=
   [`Proofs.HadwigerNelson.Rigidity.ClassRatio, `Proofs.HadwigerNelson.Rigidity.CountCompletion,
-   `Proofs.HadwigerNelson.Rigidity.CountDescent]
+   `Proofs.HadwigerNelson.Rigidity.CountDescent, `Proofs.HadwigerNelson.Rigidity.CountModels]
 
 def kindOf : ConstantInfo → String
   | .thmInfo _ => "THM" | .axiomInfo _ => "AXIOM" | .defnInfo _ => "DEF" | .opaqueInfo _ => "OPAQUE"

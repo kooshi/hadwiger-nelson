@@ -176,19 +176,6 @@ theorem haarK_proj_preimage (k : ℕ) {a : Lev F k} (ha : a ∈ Set.range (proj 
   rw [hcard] at hsum
   exact ENNReal.eq_inv_of_mul_eq_one_left (by rw [mul_comm]; exact hsum.symm)
 
-/-- **Density along cosets.** -/
-theorem tendsto_haarK_bad {Y : Set (K F)} (hY : MeasurableSet Y) {κ : ENNReal} (hκ : 0 < κ) :
-    Tendsto (fun k => haarK F {x | x ∈ Y ∧
-      haarK F (Y ∩ proj F k ⁻¹' {proj F k x}) ≤ (1 - κ) * haarK F (proj F k ⁻¹' {proj F k x})}) atTop (𝓝 0) := by
-  sorry
-
-/-- **The completion `G_∅ = (L ⊗ ℝ) × K`.** -/
-abbrev G := NumberField.mixedEmbedding.mixedSpace (fieldI F) × K F
-
-/-- `R → G_∅`, diagonally: the canonical embedding of `L` and `ιK`. -/
-def ιG : unitRing F →+ G F :=
-  AddMonoidHom.prod ((NumberField.mixedEmbedding (fieldI F)).toAddMonoidHom.comp (ofUnitRing F).toAddMonoidHom) (ιK F)
-
 -- FS131-ICL2: a neighbourhood of a point `κ` of `K` holds the level-`k` coset of `κ` for some `k`.
 private theorem exists_coset_subset {κ : K F} {t : Set (K F)} (ht : t ∈ 𝓝 κ) :
     ∃ k : ℕ, ∀ x : K F, proj F k (x - κ) = 0 → x ∈ t := by
@@ -200,6 +187,142 @@ private theorem exists_coset_subset {κ : K F} {t : Set (K F)} (ht : t ∈ 𝓝 
   refine ⟨k, fun x hx => ?_⟩
   have := hk hx
   simpa using this
+
+-- FS131-ICM1: a coset filled by `Y` to at most `1 − κ` (`κ ≤ 1`, finite measures) leaves at least `κ` of it outside `Y`.
+private theorem mul_le_of_le_one_sub {a b κ : ENNReal} (ha : a ≠ ⊤) (hb : b ≠ ⊤) (hκ : κ ≤ 1)
+    (h : a ≤ (1 - κ) * (a + b)) : κ * (a + b) ≤ b := by
+  have hκt : κ ≠ ⊤ := ne_top_of_le_ne_top ENNReal.one_ne_top hκ
+  have hab : a + b ≠ ⊤ := ENNReal.add_ne_top.2 ⟨ha, hb⟩
+  have h1 : (1 - κ) ≠ ⊤ := ENNReal.sub_ne_top ENNReal.one_ne_top
+  rw [← ENNReal.toReal_le_toReal (ENNReal.mul_ne_top hκt hab) hb]
+  rw [← ENNReal.toReal_le_toReal ha (ENNReal.mul_ne_top h1 hab)] at h
+  rw [ENNReal.toReal_mul, ENNReal.toReal_add ha hb] at h ⊢
+  rw [ENNReal.toReal_sub_of_le hκ ENNReal.one_ne_top, ENNReal.toReal_one] at h
+  linarith
+
+-- FS131-ICM1: the badly filled points of `Y` at level `k`, against a set `Z` that is a union of level-`k` cosets: those
+-- outside `Z` lie in `Y \ Z`, and the bad cosets inside `Z` leave a `κ`-share of themselves in `Z \ Y`.
+private theorem haarK_bad_le {Y Z : Set (K F)} (hY : MeasurableSet Y) {κ : ENNReal} (hκ : 0 < κ) (hκ1 : κ ≤ 1)
+    {k : ℕ} (hsat : ∀ a b : K F, proj F k a = proj F k b → b ∈ Z → a ∈ Z) :
+    haarK F {x | x ∈ Y ∧
+      haarK F (Y ∩ proj F k ⁻¹' {proj F k x}) ≤ (1 - κ) * haarK F (proj F k ⁻¹' {proj F k x})}
+      ≤ haarK F (Y \ Z) + haarK F (Z \ Y) / κ := by
+  classical
+  haveI := Fintype.ofFinite (Lev F k)
+  set μ := haarK F with hμ
+  set D : Lev F k → Set (K F) := fun a => proj F k ⁻¹' {a} with hD
+  have hDm : ∀ a, MeasurableSet (D a) := fun a =>
+    ((isOpen_discrete {a}).preimage (continuous_proj F k)).measurableSet
+  have hdisjU : (Set.univ : Set (Lev F k)).PairwiseDisjoint D :=
+    fun a _ b _ hab => Set.disjoint_left.2 fun x ha hb => hab ((Set.mem_singleton_iff.1 ha).symm.trans hb)
+  set A : Finset (Lev F k) := Finset.univ.filter fun a => D a ⊆ Z ∧ μ (Y ∩ D a) ≤ (1 - κ) * μ (D a) with hA
+  have hdisj : (↑A : Set (Lev F k)).PairwiseDisjoint D := hdisjU.subset (Set.subset_univ _)
+  set W := ⋃ a ∈ A, D a with hW
+  -- the bad points lie in `Y \ Z` or in a bad coset inside `Z`
+  have hsub : {x | x ∈ Y ∧ μ (Y ∩ proj F k ⁻¹' {proj F k x}) ≤ (1 - κ) * μ (proj F k ⁻¹' {proj F k x})} ⊆
+      (Y \ Z) ∪ W := by
+    rintro x ⟨hxY, hbad⟩
+    by_cases hxZ : x ∈ Z
+    · refine Or.inr (Set.mem_biUnion (x := proj F k x) ?_ (rfl : proj F k x = proj F k x))
+      simp only [hA, Finset.coe_filter, Finset.mem_univ, true_and, Set.mem_setOf_eq]
+      exact ⟨fun y hy => hsat y x hy hxZ, hbad⟩
+    · exact Or.inl ⟨hxY, hxZ⟩
+  -- `κ·μ W ≤ μ (Z \ Y)`
+  have hterm : ∀ a ∈ A, κ * μ (D a) ≤ μ (D a \ Y) := by
+    intro a ha
+    simp only [hA, Finset.mem_filter, Finset.mem_univ, true_and] at ha
+    have hsplit : μ (D a ∩ Y) + μ (D a \ Y) = μ (D a) := measure_inter_add_sdiff _ hY
+    rw [← hsplit]
+    refine mul_le_of_le_one_sub (measure_ne_top _ _) (measure_ne_top _ _) hκ1 ?_
+    rw [hsplit, Set.inter_comm]
+    exact ha.2
+  have hWκ : κ * μ W ≤ μ (Z \ Y) := by
+    have h1 : μ W = ∑ a ∈ A, μ (D a) := measure_biUnion_finset hdisj fun a _ => hDm a
+    have h2 : μ (⋃ a ∈ A, (D a \ Y)) = ∑ a ∈ A, μ (D a \ Y) :=
+      measure_biUnion_finset (hdisj.mono fun a => Set.sdiff_subset) fun a _ => (hDm a).diff hY
+    have h3 : (⋃ a ∈ A, (D a \ Y)) ⊆ Z \ Y := by
+      refine Set.iUnion₂_subset fun a ha x hx => ⟨?_, hx.2⟩
+      simp only [hA, Finset.mem_filter, Finset.mem_univ, true_and] at ha
+      exact ha.1 hx.1
+    calc κ * μ W = ∑ a ∈ A, κ * μ (D a) := by rw [h1, Finset.mul_sum]
+      _ ≤ ∑ a ∈ A, μ (D a \ Y) := Finset.sum_le_sum hterm
+      _ = μ (⋃ a ∈ A, (D a \ Y)) := h2.symm
+      _ ≤ μ (Z \ Y) := measure_mono h3
+  have hκt : κ ≠ ⊤ := ne_top_of_le_ne_top ENNReal.one_ne_top hκ1
+  have hW' : μ W ≤ μ (Z \ Y) / κ := by
+    rw [ENNReal.le_div_iff_mul_le (Or.inl hκ.ne') (Or.inl hκt), mul_comm]
+    exact hWκ
+  calc _ ≤ μ ((Y \ Z) ∪ W) := measure_mono hsub
+    _ ≤ μ (Y \ Z) + μ W := measure_union_le _ _
+    _ ≤ μ (Y \ Z) + μ (Z \ Y) / κ := add_le_add le_rfl hW'
+
+-- FS131-ICM1: the leaf at `κ ≤ 1` — a compact `C ⊆ Y` and an open `U ⊇ Y` close to `Y` (Haar is regular), finitely many
+-- level cosets inside `U` covering `C`, their union `Z` a union of level-`k` cosets for every `k` past their levels.
+private theorem tendsto_haarK_bad_of_le_one {Y : Set (K F)} (hY : MeasurableSet Y) {κ : ENNReal} (hκ : 0 < κ)
+    (hκ1 : κ ≤ 1) :
+    Tendsto (fun k => haarK F {x | x ∈ Y ∧
+      haarK F (Y ∩ proj F k ⁻¹' {proj F k x}) ≤ (1 - κ) * haarK F (proj F k ⁻¹' {proj F k x})}) atTop (𝓝 0) := by
+  rw [ENNReal.tendsto_atTop_zero]
+  intro ε hε
+  have hκt : κ ≠ ⊤ := ne_top_of_le_ne_top ENNReal.one_ne_top hκ1
+  have hε2 : ε / 2 ≠ 0 := (ENNReal.half_pos hε.ne').ne'
+  set δ := κ * (ε / 2) with hδ
+  have hδ0 : δ ≠ 0 := mul_ne_zero hκ.ne' hε2
+  obtain ⟨C, hCY, hC, hYC⟩ := hY.exists_isCompact_sdiff_lt (measure_ne_top (haarK F) _) hδ0
+  obtain ⟨U, hYU, hU, -, hUY⟩ := hY.exists_isOpen_sdiff_lt (measure_ne_top (haarK F) _) hδ0
+  have hcos : ∀ x ∈ U, ∃ j : ℕ, ∀ y : K F, proj F j (y - x) = 0 → y ∈ U := fun x hx =>
+    exists_coset_subset F (hU.mem_nhds hx)
+  choose! j hj using hcos
+  set V : K F → Set (K F) := fun x => {y | proj F (j x) (y - x) = 0} with hV
+  have hVopen : ∀ x, IsOpen (V x) := fun x =>
+    (isOpen_discrete {(0 : Lev F (j x))}).preimage ((continuous_proj F (j x)).comp (continuous_sub_right x))
+  obtain ⟨t, htC, hCt⟩ := hC.elim_nhds_subcover V fun x _ =>
+    (hVopen x).mem_nhds (show proj F (j x) (x - x) = 0 by rw [sub_self, map_zero])
+  set Z := ⋃ x ∈ t, V x with hZ
+  have hZU : Z ⊆ U := Set.iUnion₂_subset fun x hx y hy => hj x (hYU (hCY (htC x hx))) y hy
+  refine ⟨t.sup j, fun k hk => ?_⟩
+  have hsat : ∀ a b : K F, proj F k a = proj F k b → b ∈ Z → a ∈ Z := by
+    intro a b hab hb
+    simp only [hZ, Set.mem_iUnion] at hb ⊢
+    obtain ⟨x, hx, hbx⟩ := hb
+    refine ⟨x, hx, ?_⟩
+    have hjk : j x ≤ k := (Finset.le_sup hx).trans hk
+    have h0 : proj F k (a - b) = 0 := by rw [map_sub, hab, sub_self]
+    have h1 := proj_eq_zero_of_le F hjk h0
+    have hbx' : proj F (j x) (b - x) = 0 := hbx
+    show proj F (j x) (a - x) = 0
+    rw [show a - x = (a - b) + (b - x) by abel, map_add, h1, hbx', add_zero]
+  have hYZ : haarK F (Y \ Z) ≤ δ := by
+    have hs : Y \ Z ⊆ Y \ C := fun x hx => ⟨hx.1, fun hxC => hx.2 (hCt hxC)⟩
+    exact (measure_mono hs).trans hYC.le
+  have hZY : haarK F (Z \ Y) ≤ δ := by
+    have hs : Z \ Y ⊆ U \ Y := fun x hx => ⟨hZU hx.1, hx.2⟩
+    exact (measure_mono hs).trans hUY.le
+  have hδε : δ ≤ ε / 2 := mul_le_of_le_one_left zero_le hκ1
+  have hδκ : δ / κ ≤ ε / 2 := ENNReal.div_le_of_le_mul (le_of_eq (mul_comm _ _))
+  calc _ ≤ haarK F (Y \ Z) + haarK F (Z \ Y) / κ := haarK_bad_le F hY hκ hκ1 hsat
+    _ ≤ ε / 2 + ε / 2 := add_le_add (hYZ.trans hδε) ((ENNReal.div_le_div_right hZY κ).trans hδκ)
+    _ = ε := ENNReal.add_halves ε
+
+/-- **Density along cosets.** -/
+theorem tendsto_haarK_bad {Y : Set (K F)} (hY : MeasurableSet Y) {κ : ENNReal} (hκ : 0 < κ) :
+    Tendsto (fun k => haarK F {x | x ∈ Y ∧
+      haarK F (Y ∩ proj F k ⁻¹' {proj F k x}) ≤ (1 - κ) * haarK F (proj F k ⁻¹' {proj F k x})}) atTop (𝓝 0) := by
+  -- Route: the bad set only grows as `κ` falls, so `κ' = min κ 1` bounds it.
+  have hκ' : 0 < min κ 1 := lt_min hκ one_pos
+  refine tendsto_of_tendsto_of_tendsto_of_le_of_le tendsto_const_nhds
+    (tendsto_haarK_bad_of_le_one F hY hκ' (min_le_right _ _)) (fun k => zero_le) fun k => measure_mono ?_
+  rintro x ⟨hxY, hx⟩
+  refine ⟨hxY, hx.trans ?_⟩
+  gcongr
+  exact min_le_left _ _
+
+/-- **The completion `G_∅ = (L ⊗ ℝ) × K`.** -/
+abbrev G := NumberField.mixedEmbedding.mixedSpace (fieldI F) × K F
+
+/-- `R → G_∅`, diagonally: the canonical embedding of `L` and `ιK`. -/
+def ιG : unitRing F →+ G F :=
+  AddMonoidHom.prod ((NumberField.mixedEmbedding (fieldI F)).toAddMonoidHom.comp (ofUnitRing F).toAddMonoidHom) (ιK F)
 
 theorem denseRange_ιG : DenseRange (ιG F) := by
   -- Route: a neighbourhood of `(v, κ)` holds `t₁ × (the level-k coset of κ)`; `r₀` with `proj k (ιK r₀) = proj k κ`
