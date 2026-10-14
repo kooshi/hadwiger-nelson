@@ -4,8 +4,10 @@
 Generates three modules under `Proofs/HadwigerNelson/Outside/` from the clone of the release (github.com/openai/math)
 at the audited commit — `OAI015Shannon` (the release's `PrimePackets/ShannonEntropy.lean`, whole), `OAI015Mixtures`
 (`PrimePackets/EntropyMixtures.lean`, whole) and `OAI015Maximal` (three declarations of `PrimePackets/InverseEntropy.lean`,
-then `DukePrimeDegree/Dynamics/HopfMaximal.lean` and `MaximalOccupation.lean`, whole).  Nothing is retyped: every
-declaration is copied by line range.  The kernel then checks every proof in this library; no axiom enters.
+then `DukePrimeDegree/Dynamics/HopfMaximal.lean` and `MaximalOccupation.lean`, whole); and, for FS131-IP23 (lanes P3
+and P2), `OAI015Generating` (the nine files of `PrimePackets/` from `ConditionalShannon.lean` to
+`EntropyGeneratingSupremum.lean`, whole) and `OAI015ErgodicDecomposition` (line ranges of `PrimePackets/KernelEntropy.lean`
+and `PrimePackets/ErgodicDecomposition.lean`, RANGES).  Nothing is retyped: every declaration is copied by line range.  The kernel then checks every proof in this library; no axiom enters.
 (`tools/fs132_i2_port.py` is the pattern, and is not edited; that one selects a cone inside each file from the
 release's compiled constants, this one copies whole files — and, for the one partial file, the declarations SELECT
 names — so it reads the declarations off the text: a declaration starts at a keyword in column 0 and runs to the next
@@ -26,7 +28,11 @@ What this script changes in the copied text, and nothing else:
   5. the PATCHES below — each a token of a PROOF that does not elaborate at this library's pin (Lean v4.32.0, Mathlib
      v4.32.0; the release is at v4.34.1), with its reason.  The script refuses a patch that touches a definition, an
      instance whose value is a term, or a theorem's statement (anything before the declaration's top-level `:=`);
-  6. for the partial file, declarations outside SELECT are left out.
+  6. for the partial file, declarations outside SELECT are left out; for a file in RANGES, the lines outside its ranges
+     (FS131-IP23), the declarations inside them checked against RANGE_DECLS.
+A declaration's `omit … in` lines above it and an attribute block alone on a line above its keyword are part of it
+(FS131-IP23): copied with it, scanned, and refused to every patch, as its statement is.  Each module's header names the
+job that added it (JOB).
 Every `instance` of the text must be in exactly one of SCOPED (on a type that is Mathlib's: the keyword `scoped` is
 added, `LEAN.md` § Assumptions) or GLOBAL_INSTANCES (on a term whose head is the release's own definition), or the
 script refuses.
@@ -73,6 +79,13 @@ MIXTURES = "PrimePackets/EntropyMixtures.lean"
 INVERSE = "PrimePackets/InverseEntropy.lean"
 HOPF = "DukePrimeDegree/Dynamics/HopfMaximal.lean"
 OCCUPATION = "DukePrimeDegree/Dynamics/MaximalOccupation.lean"
+# FS131-IP23: lane P2 (the ergodic decomposition) and lane P3 (the generating-sequence theorem)
+KERNEL = "PrimePackets/KernelEntropy.lean"
+ERGDEC = "PrimePackets/ErgodicDecomposition.lean"
+GENERATING = ["PrimePackets/" + f + ".lean" for f in (
+    "ConditionalShannon", "ConditionalObservations", "ObservationRefinement", "ConditionalOrbitEntropy",
+    "ObservationConditionalProbability", "ObservationSigmaAlgebra", "ConditionalProbabilityExpectation",
+    "GeneratingObservationEntropy", "EntropyGeneratingSupremum")]
 
 # module -> (this job's modules it imports, [release file, ...] in order, what it holds)
 MODULES = [
@@ -91,9 +104,55 @@ MODULES = [
      "the maximal ergodic inequality in its finite Hopf form (`finite_hopf_maximal`), the count of visits of an orbit "
      "to a set (`visitCount`), and the bound `δ · μ {x | some time n has more than δ n visits to A} ≤ μ A` "
      "(`excessiveOccupation_measure_bound`) with its almost-sure consequence along decreasing sets"),
+    ("OAI015Generating", ["OAI015Mixtures"], GENERATING,
+     "conditional Shannon entropy of finite observations and its chain rule, submodularity and refinement inequalities "
+     "(`conditionalObservationEntropy`, `observationEntropy_submodular`), the one-step comparison of entropy rates "
+     "(`observationEntropyRate_le_add_conditional`), conditional probabilities of a finite observation as conditional "
+     "expectations on the σ-algebra it generates (`observationSigma`, `observationConditionalProbability_ae_eq_condExp`), "
+     "their convergence along an increasing generating sequence (`conditionalObservationEntropy_tendsto_zero`), and the "
+     "entropy of a map as the supremum of the rates of a generating sequence of finite observations "
+     "(`measureEntropy_eq_iSup_generating`)"),
+    ("OAI015ErgodicDecomposition", [], [KERNEL, ERGDEC],
+     "the fixed point in the closed convex hull of an orbit of a unitary representation "
+     "(`fixedPoint_mem_closed_convex_orbit`), the σ-algebra of the sets fixed by every element of a group acting "
+     "(`actionInvariantSigma`), invariant representatives and orbit averages for a countable group "
+     "(`exists_pointwise_invariant_representative`, `exists_invariant_orbit_average_limit`), ergodicity from limits of "
+     "orbit averages of indicators (`ergodicSMul_of_orbit_indicator_limits`), the invariance of the conditional-"
+     "expectation kernel on an invariant σ-algebra (`condExpKernel_invariant`), and the ergodic decomposition in "
+     "canonical form for a countable group acting on a standard Borel space (`action_ergodic_decomposition`)"),
 ]
+# the job that added each module (its header names it); a module not listed is FS131-IE1's
+JOB = {"OAI015Generating": "FS131-IP23", "OAI015ErgodicDecomposition": "FS131-IP23"}
 # a partial file: release file -> the names copied, in source order; every other declaration of it is left out
 SELECT = {INVERSE: ["visitCount", "visitCount_cast", "measurable_visitCount"]}
+# a file copied by line ranges (FS131-IP23): release file -> [(first, last), ...], 1-based inclusive, in source order,
+# and the declarations those ranges hold, in source order (refused unless exactly these).  Every line of a range is
+# copied as the whole-file parser classifies it; a range that begins or ends inside a declaration, a docstring or a
+# module docstring is refused.  Each range's reason is RANGE_WHY's.  The cut is FS131-KN7's trial (its § Stage 4): the
+# release's ll. 48–219 of KernelEntropy (the entropy of kernels) and ll. 180–505 of ErgodicDecomposition (the packet
+# applications) are not read by the decomposition.
+RANGES = {
+    KERNEL: [(4, 47), (220, 558)],
+    ERGDEC: [(4, 179), (506, 509)],
+}
+RANGE_DECLS = {
+    KERNEL: ["fixedPoint_mem_closed_convex_orbit", "exists_convex_orbit_approximants", "actionInvariantSigma",
+             "actionInvariantSigma_le", "measurable_actionInvariantSigma", "exists_pointwise_invariant_representative",
+             "orbitConvexHull", "orbitConvexHull_measurable", "orbitConvexHull_interval", "orbitConvexHull_integral",
+             "orbitConvexHull_setIntegral", "lp_convex_orbit_representative", "exists_invariant_orbit_average_limit",
+             "orbitConvexHull_aeSetIntegral", "invariant_set_independent_of_orbit_indicator_limit",
+             "ergodicSMul_of_orbit_indicator_limits"],
+    ERGDEC: ["condExpKernel_invariant", "invariant_kernel_decomposition", "condExpKernel_ae_constant",
+             "action_ergodic_decomposition"],
+}
+RANGE_WHY = {
+    KERNEL: ("the file's header (lines 4–47: its namespaces, sections and `open` lines) and its second half (lines "
+             "220–558), which is what the ergodic decomposition reads of it; its first half, the entropy of kernels, "
+             "is not read"),
+    ERGDEC: ("the file's header and its first four declarations (lines 4–179), ending with "
+             "`action_ergodic_decomposition`, and its closing lines (506–509); the packet applications between are not "
+             "read"),
+}
 
 # module -> the Mathlib modules it imports.  Measured, not chosen: the last `Imports increased to` of Mathlib's
 # `linter.minImports` on the module generated with `--mathlib-whole` (data/fs131/ie1/logs/minimports-*.log), which is
@@ -119,6 +178,12 @@ MATHLIB = {
     "OAI015Maximal": ["Mathlib.Algebra.Order.Ring.Star", "Mathlib.Algebra.Order.Star.Real",
                       "Mathlib.Analysis.InnerProductSpace.Basic", "Mathlib.Dynamics.BirkhoffSum.Basic",
                       "Mathlib.MeasureTheory.Integral.Bochner.Set"],
+    # FS131-IP23
+    "OAI015Generating": ["Mathlib.Probability.Martingale.Convergence"],
+    "OAI015ErgodicDecomposition": ["Mathlib.Algebra.Ring.IsFormallyReal", "Mathlib.Dynamics.Ergodic.Action.Basic",
+                                   "Mathlib.MeasureTheory.MeasurableSpace.Invariants", "Mathlib.MeasureTheory.SetAlgebra",
+                                   "Mathlib.Probability.Kernel.Condexp", "Mathlib.Topology.EMetricSpace.Paracompact",
+                                   "Mathlib.Topology.Separation.CompletelyRegular"],
 }
 
 # `open` tokens taken out, per module: exactly the namespaces that do not exist under that module's imports, as
@@ -134,7 +199,13 @@ DROP_OPEN = {
                        "BoundingSieve", "FractionalIdeal", "Matrix.Norms.Elementwise"},
     "OAI015Maximal": {"IsDiscreteValuationRing", "NumberField", "ArithmeticFunction.zeta", "ArithmeticFunction",
                       "BoundingSieve", "FractionalIdeal", "Matrix.Norms.Elementwise"},
+    # FS131-IP23 (`data/fs131/ip23/lean/OpenProbe-<module>.lean`, `data/fs131/ip23/logs/openprobe-<module>.log`)
+    "OAI015Generating": set(),
+    "OAI015ErgodicDecomposition": {"ArithmeticFunction", "ArithmeticFunction.zeta", "BoundingSieve", "FractionalIdeal",
+                                   "IsDiscreteValuationRing", "NumberField"},
 }
+# where `--open-probe <job>` writes its files
+PROBE_DIR = {"FS131-IE1": "data/fs131/ie1/lean", "FS131-IP23": "data/fs131/ip23/lean"}
 # opened inside `namespace DukePrimeDegree`, which is the same namespace here
 SELF_OPEN = {"PrimeDegreePackets"}
 
@@ -144,6 +215,13 @@ SETOF = ("Mathlib renamed `setOf` to `Set.ofPred` on 2026-07-09 and its lemmas w
          "old name, the same statement")
 ITE = ("core's `if_neg` and `if_pos` were renamed `ite_eq_right` and `ite_eq_left` on 2026-07-21 (`Init/Core.lean`; at "
        "v4.34.1 the old names are deprecated aliases); at v4.32.0 the lemmas have only the old names")
+EVCONST = ("Mathlib defined `EventuallyEmptyOrUniv s l := EventuallyConst (· ∈ s) l` on 2026-08-25 and restated the "
+           "field of `ErgodicSMul` and the set form of `eventuallyConst_pred` with it (`eventuallyEmptyOrUniv_iff`); at "
+           "v4.32.0 that field is `EventuallyConst s (ae μ)`, and the same two disjuncts in the same order are "
+           "`eventuallyConst_set`")
+DIAG = ("`Function.diag` (`fun a ↦ (a, a)`) is a definition of the later pin, with which v4.34.1 states "
+        "`compProd_trim_condExpKernel`; at v4.32.0 that lemma is stated with `fun ω ↦ (id ω, id ω)`, which is written "
+        "out here")
 PATCHES = [
     (SHANNON, 190, "Set.ofPred_and", "Set.setOf_and", SETOF),
     (SHANNON, 205, "Set.ofPred_and", "Set.setOf_and", SETOF),
@@ -154,6 +232,21 @@ PATCHES = [
     (HOPF, 47, "birkhoffSum_succ_apply'", "birkhoffSum_succ'",
      "at v4.32.0 the pointwise lemma `birkhoffSum f g (n + 1) x = g x + birkhoffSum f g n (f x)` is named "
      "`birkhoffSum_succ'`; Mathlib renamed it between the pins"),
+    # FS131-IP23 (each measured: the module generated without it does not elaborate at this pin, `data/fs131/ip23/logs/`)
+    (KERNEL, 306, "Set.ofPred_forall", "Set.setOf_forall", SETOF),
+    (KERNEL, 542, "eventuallyEmptyOrUniv_iff", "eventuallyConst_set", EVCONST),
+    (ERGDEC, 63, "Function.diag", "(fun y => (id y, id y))", DIAG),
+    (ERGDEC, 69, "Function.diag", "(fun y => (id y, id y))", DIAG),
+    (ERGDEC, 114, "Function.diag", "(fun y => (id y, id y))", DIAG),
+    (ERGDEC, 116, "Function.diag", "(fun y => (id y, id y))", DIAG),
+    (GENERATING[1], 25, "Set.ofPred_and", "Set.setOf_and", SETOF),
+    (GENERATING[1], 92, "Set.mem_ofPred_eq", "Set.mem_setOf_eq", SETOF),
+    (GENERATING[1], 102, "Set.mem_ofPred_eq", "Set.mem_setOf_eq", SETOF),
+    (GENERATING[2], 25, "Set.mem_ofPred_eq", "Set.mem_setOf_eq", SETOF),
+    (GENERATING[2], 66, "Set.mem_ofPred_eq", "Set.mem_setOf_eq", SETOF),
+    (GENERATING[5], 24, "Set.mem_ofPred_eq", "Set.mem_setOf_eq", SETOF),
+    (GENERATING[5], 47, "Set.mem_ofPred_eq", "Set.mem_setOf_eq", SETOF),
+    (GENERATING[6], 53, "Set.mem_ofPred_eq", "Set.mem_setOf_eq", SETOF),
 ]
 
 # (release file, declaration, linter) -> the one-line comment placed beside the attribute.  A ported statement keeps the
@@ -181,11 +274,26 @@ IMPORT_NOTES = {
                        "term moves (the read-back)."),
     "OAI015Maximal": ("Left out of the measured list: `Mathlib.Order.CompletePartialOrder`, for the reason given in "
                       "`Outside/OAI015Shannon`'s header."),
+    # FS131-IP23: TO BE MEASURED
+    "OAI015Generating": "",
+    "OAI015ErgodicDecomposition": "",
 }
 READBACK_NOTES = {
     "OAI015Shannon": "read back",
     "OAI015Mixtures": "read back",
     "OAI015Maximal": "not read back",
+    "OAI015Generating": "read back",
+    "OAI015ErgodicDecomposition": "read back",
+}
+# module -> the clause of the header's item on imports that says what the release's files import
+RELEASE_IMPORTS_IE1 = ("the release's files import `Mathlib` whole and, for the maximal inequality, modules of the "
+                       "release that its text does not use.")
+RELEASE_IMPORTS = {
+    "OAI015Generating": ("the release's files import one another in a chain that starts at `EntropyMixtures.lean` "
+                         "(here `Outside/OAI015Mixtures`), and through it `Mathlib` whole."),
+    "OAI015ErgodicDecomposition": ("the release's files import `Mathlib` whole, `ErgodicDecomposition.lean` imports "
+                                   "`KernelEntropy.lean`, and `KernelEntropy.lean` imports two files of the release "
+                                   "(`AtomMass.lean`, `EntropyMixtures.lean`) that the copied lines do not use."),
 }
 
 # instances: release name -> why it is scoped / why it may be global
@@ -198,6 +306,11 @@ GLOBAL_INSTANCES = {
 
 KEYWORD = re.compile(r"^(?:@\[[^\]]*\]\s*)*(?:(?:private|protected|noncomputable|scoped|local)\s+)*"
                      r"(lemma|theorem|def|abbrev|instance|structure|inductive|class)\s+([^\s:({\[]+)")
+# FS131-IP23: lines that belong to the declaration below them — `omit … in` (above its docstring) and an attribute
+# block alone on its line (between its docstring and its keyword).  Both are part of the statement: a patch on one is
+# refused as a patch to the statement.
+OMIT_LINE = re.compile(r"^omit\s.*\sin$")
+ATTR_LINE = re.compile(r"^@\[[^\]]*\]$")
 PROOFKINDS = ("lemma", "theorem")
 IMPORT = re.compile(r"^\s*(?:public\s+)?import\s")
 HIT = [
@@ -258,11 +371,19 @@ def statement_end(text):
     return None
 
 
-def parse(rel, lines):
+def parse(rel, lines, start=1, stop=None):
     """-> items in source order: ('blank', no) | ('scaffold', no, text) | ('moddoc', a, b) | ('decl', a, b, kind,
-    name, doc_rows) where a..b are 1-based inclusive source lines (a is the docstring's first line when it has one)."""
-    items, no, n = [], 1, len(lines)
-    while no <= n:
+    name, (omit_rows, doc_rows, attr_rows)) where a..b are 1-based inclusive source lines (a is the first line of the
+    declaration's `omit … in` lines, docstring or attribute lines when it has any, in that order above its keyword).
+    With `start`/`stop` (FS131-IP23: a line range of the file) only lines start..stop are read, and nothing may run
+    past `stop`: a docstring or module docstring not closed by it, or a declaration that continues after it, is
+    refused."""
+    n = len(lines)
+    stop = n if stop is None else stop
+    if not (1 <= start <= stop <= n):
+        raise Refused(f"{rel}: the range {start}–{stop} is not inside the file's {n} lines")
+    items, no = [], start
+    while no <= stop:
         s = lines[no - 1]
         if s.strip() == "":
             items.append(("blank", no))
@@ -274,30 +395,46 @@ def parse(rel, lines):
             b = no
             while "-/" not in lines[b - 1]:
                 b += 1
-                if b > n:
-                    raise Refused(f"{rel}:{no}: a module docstring is not closed")
+                if b > stop:
+                    raise Refused(f"{rel}:{no}: a module docstring is not closed" + ("" if stop == n else
+                                                                                    f" by line {stop}"))
             items.append(("moddoc", no, b))
             no = b + 1
-        elif s.startswith("/--") or KEYWORD.match(s):
-            a = no
-            if s.startswith("/--"):
-                d = no
+        elif s.startswith("/--") or KEYWORD.match(s) or OMIT_LINE.match(s) or ATTR_LINE.match(s):
+            a = k = no
+            while k <= stop and OMIT_LINE.match(lines[k - 1]):
+                k += 1
+            orows = k - a
+            if k <= stop and lines[k - 1].startswith("/--"):
+                d = k
                 while "-/" not in lines[d - 1]:
                     d += 1
-                    if d > n:
-                        raise Refused(f"{rel}:{no}: a docstring is not closed")
-                kwno = d + 1
-                if kwno > n or not KEYWORD.match(lines[kwno - 1]):
-                    raise Refused(f"{rel}:{no}: a docstring not followed by a declaration")
-            else:
-                kwno = no
+                    if d > stop:
+                        raise Refused(f"{rel}:{k}: a docstring is not closed" + ("" if stop == n else
+                                                                                f" by line {stop}"))
+                k = d + 1
+            drows = k - a - orows
+            while k <= stop and ATTR_LINE.match(lines[k - 1]):
+                k += 1
+            arows = k - a - orows - drows
+            kwno = k
+            if kwno > stop or not KEYWORD.match(lines[kwno - 1]):
+                raise Refused(f"{rel}:{no}: " + ("a docstring" if drows else "an `omit … in` line" if orows else
+                                                 "an attribute line") + " not followed by a declaration")
             m = KEYWORD.match(lines[kwno - 1])
             b = kwno
-            while b + 1 <= n and (lines[b].strip() == "" or lines[b][0] in " \t"):
+            while b + 1 <= stop and (lines[b].strip() == "" or lines[b][0] in " \t"):
                 b += 1
+            if b == stop and stop < n:
+                nxt = stop + 1
+                while nxt <= n and lines[nxt - 1].strip() == "":
+                    nxt += 1
+                if nxt <= n and lines[nxt - 1][0] in " \t":
+                    raise Refused(f"{rel}: the range ending at line {stop} ends inside the declaration "
+                                  f"{m.group(2)} (line {nxt} continues it)")
             while lines[b - 1].strip() == "":
                 b -= 1
-            items.append(("decl", a, b, m.group(1), m.group(2), kwno - a))
+            items.append(("decl", a, b, m.group(1), m.group(2), (orows, drows, arows)))
             no = b + 1
         elif re.match(r"^(namespace \S+|end(?: \S+)?|section(?: \S+)?|noncomputable section|open .*|universe .*)$", s):
             if re.search(r"\sin$", s):
@@ -306,13 +443,30 @@ def parse(rel, lines):
             no += 1
         elif s.startswith("variable "):
             b = no
-            while b + 1 <= n and lines[b].strip() != "" and lines[b][0] in " \t":
+            while b + 1 <= stop and lines[b].strip() != "" and lines[b][0] in " \t":
                 b += 1
+            if b == stop and stop < n and lines[stop].strip() != "" and lines[stop][0] in " \t":
+                raise Refused(f"{rel}: the range ending at line {stop} ends inside a `variable` line")
             for k in range(no, b + 1):
                 items.append(("scaffold", k, lines[k - 1]))
             no = b + 1
         else:
             raise Refused(f"{rel}:{no}: a line this script does not classify: {s!r}")
+    return items
+
+
+def parse_ranges(rel, lines, ranges, want):
+    """FS131-IP23: the items of the line ranges of a file, each range read by `parse`; the declarations found must be
+    exactly `want`, in source order."""
+    items, last = [], 0
+    for a, b in ranges:
+        if a <= last:
+            raise Refused(f"{rel}: the ranges {ranges} are not increasing and disjoint")
+        items.extend(parse(rel, lines, a, b))
+        last = b
+    found = [it[4] for it in items if it[0] == "decl"]
+    if found != list(want):
+        raise Refused(f"{rel}: RANGES hold {found} but RANGE_DECLS lists {list(want)} (in source order)")
     return items
 
 
@@ -333,7 +487,7 @@ def parse_partial(rel, lines, select):
                 b += 1
             while lines[b - 1].strip() == "":
                 b -= 1
-            items.append(("decl", no, b, m.group(1), m.group(2), 0))
+            items.append(("decl", no, b, m.group(1), m.group(2), (0, 0, 0)))
             found.append(m.group(2))
             no = b + 1
         elif scaffold.match(s):
@@ -379,7 +533,9 @@ def convert_scaffold(rel, no, s, drop_open, dropped):
 nolint_used = set()
 
 
-def plan_module(module, ours, files, patches, select, clone):
+def plan_module(module, ours, files, patches, select, clone, ranges=None, range_decls=None):
+    ranges = RANGES if ranges is None else ranges
+    range_decls = RANGE_DECLS if range_decls is None else range_decls
     body, decls, dropped, used = [], [], [], set()
     stats = []
     for rel in files:
@@ -387,7 +543,10 @@ def plan_module(module, ours, files, patches, select, clone):
         if lines and lines[-1] == "":
             lines = lines[:-1]
         fname = rel.rsplit("/", 1)[-1]
-        items = parse_partial(rel, lines, select[rel]) if rel in select else parse(rel, lines)
+        if rel in select and rel in ranges:
+            raise Refused(f"{rel}: in both SELECT and RANGES")
+        items = (parse_partial(rel, lines, select[rel]) if rel in select else
+                 parse_ranges(rel, lines, ranges[rel], range_decls[rel]) if rel in ranges else parse(rel, lines))
         copied = [no for it in items if it[0] in ("scaffold",) for no in [it[1]]]
         for it in items:
             if it[0] in ("decl", "moddoc"):
@@ -395,6 +554,7 @@ def plan_module(module, ours, files, patches, select, clone):
         scan(rel, lines, sorted(copied))
         out = [f"-- ==== `[OAIMath2026]` `{SRC[5:]}{rel}`"
                + (" (the declarations " + ", ".join(f"`{x}`" for x in select[rel]) + " only)" if rel in select else "")
+               + (" (lines " + ", ".join(f"{a}–{b}" for a, b in ranges[rel]) + " only)" if rel in ranges else "")
                + " ===="]
         nd = 0
         for it in items:
@@ -409,12 +569,13 @@ def plan_module(module, ours, files, patches, select, clone):
                 if c is not None:
                     out.append(c)
             else:
-                _, a, b, kind, name, drows = it
+                _, a, b, kind, name, (orows, drows, arows) = it
                 text = lines[a - 1:b]
-                kwno = a + drows
-                se = statement_end(text[drows:])
+                kwrow = orows + drows + arows
+                kwno = a + kwrow
+                se = statement_end(text[kwrow:])
                 if se is not None:
-                    se = (se[0] + drows, se[1])
+                    se = (se[0] + kwrow, se[1])
                 for i, (pf, pl, old, new, _) in enumerate(patches):
                     if pf != rel or not (a <= pl <= b):
                         continue
@@ -441,9 +602,9 @@ def plan_module(module, ours, files, patches, select, clone):
                         raise Refused(f"{fname}:{kwno}: the instance {name} must be in exactly one of SCOPED and "
                                       "GLOBAL_INSTANCES")
                     if name in SCOPED:
-                        if not text[drows].startswith("instance "):
+                        if not text[kwrow].startswith("instance "):
                             raise Refused(f"{fname}:{kwno}: a scoped instance that does not begin with the keyword")
-                        text[drows] = "scoped " + text[drows]
+                        text[kwrow] = "scoped " + text[kwrow]
                 addr = f"`[OAIMath2026]` `{fname}:{kwno}`."
                 if any("nolint" in row for row in text):
                     raise Refused(f"{fname}:{kwno}: the release's text of {name} carries a `nolint`: not handled")
@@ -452,9 +613,13 @@ def plan_module(module, ours, files, patches, select, clone):
                     if lint not in NOLINT_LINTERS:
                         raise Refused(f"NOLINT entry for {name}: the linter {lint} is not one this script silences")
                     nolint_used.add((rel, name, lint))
-                if nl and not KEYWORD.match(text[drows]).group(0).startswith(("lemma", "theorem")):
+                if nl and (arows or not KEYWORD.match(text[kwrow]).group(0).startswith(("lemma", "theorem"))):
                     raise Refused(f"{fname}:{kwno}: a `nolint` on {name}, whose keyword line carries attributes or "
                                   "modifiers: not handled")
+                # the `omit … in` lines, then the docstring (the address, then the release's docstring if any), then
+                # the attribute lines and the declaration
+                out.extend(text[:orows])
+                text = text[orows:]
                 if drows == 0:
                     out.append(f"/-- {addr} -/")
                 else:
@@ -499,7 +664,7 @@ def render(module, ours, files, what, p, patches, mathlib):
     o = [f"import {PFX}{m}" for m in ours] + [f"import {m}" for m in mathlib]
     o += ["", "/-!",
           f"# `[OAIMath2026]` family 015, ported: {', '.join('`' + f.rsplit('/', 1)[-1] + '`' for f in files)} "
-          "(job FS131-IE1)",
+          f"(job {JOB.get(module, 'FS131-IE1')})",
           "",
           "**GENERATED by `tools/fs131_ie1_port.py` from `[OAIMath2026]` family 015 (github.com/openai/math at commit",
           f"`{COMMIT}`), under `{SRC}`:",
@@ -509,7 +674,8 @@ def render(module, ours, files, what, p, patches, mathlib):
           "root of the release; http://www.apache.org/licenses/LICENSE-2.0); a byte-identical copy of that licence text is",
           f"beside this file, `Outside/{LICENCE_NAME}` (this script's `--check` compares the two). **This file is a",
           "changed copy of " + " and ".join(
-              (f"part of `{f}`" if f in SELECT else f"`{f}`") for f in files) + ".** The changes, all of them:",
+              (f"part of `{f}`" if f in SELECT or f in RANGES else f"`{f}`") for f in files)
+          + ".** The changes, all of them:",
           ""]
     for (rel, nl, nd, _) in stats:
         if rel in SELECT:
@@ -518,6 +684,11 @@ def render(module, ours, files, what, p, patches, mathlib):
                      + ", ".join(f"`{d[4]}` (lines {d[1]}–{d[2]})" for d in rows)
                      + " — what the maximal inequality's text names of that file; with the file's `namespace`, "
                      "`section` and `open` lines, so that they elaborate in the release's context.")
+        elif rel in RANGES:
+            rows = [d for d in decls if d[0] == rel]
+            o.append(f"- *A selection by lines.* Of `{rel}` ({nl} lines), lines "
+                     + ", ".join(f"{a}–{b}" for a, b in RANGES[rel]) + f" are copied, holding {nd} declarations: "
+                     + ", ".join(f"`{d[4]}` (lines {d[1]}–{d[2]})" for d in rows) + " — " + RANGE_WHY[rel] + ".")
         else:
             o.append(f"- `{rel}`: the whole file, {nl} lines, {nd} declarations.")
     o.append("")
@@ -525,8 +696,8 @@ def render(module, ours, files, what, p, patches, mathlib):
     o.append("   here (one namespace; no two ported declarations share a name).")
     o.append("2. *The imports*: " + ", ".join(f"`{m}`" for m in ([PFX + x for x in ours] + mathlib))
              + " — the least set under which the text elaborates as it does under `import Mathlib`"
-             " (measured: `tools/fs131_ie1_port.py`, MATHLIB); the release's files import `Mathlib` whole and, for the"
-             " maximal inequality, modules of the release that its text does not use. " + IMPORT_NOTES[module])
+             " (measured: `tools/fs131_ie1_port.py`, MATHLIB); " + RELEASE_IMPORTS.get(module, RELEASE_IMPORTS_IE1)
+             + " " + IMPORT_NOTES[module])
     dt = sorted({t for _, t in dropped})
     if dt:
         o.append(f"3. *The `open` lines*: taken out, being namespaces that do not exist under these imports — "
@@ -597,7 +768,7 @@ def wrap_words(text: str, width: int):
     return out
 
 
-def generate(patches=None, clone=CLONE, select=None, mathlib=None, modules=None):
+def generate(patches=None, clone=CLONE, select=None, mathlib=None, modules=None, ranges=None, range_decls=None):
     patches = PATCHES if patches is None else patches
     select = SELECT if select is None else select
     mathlib = MATHLIB if mathlib is None else mathlib
@@ -608,7 +779,7 @@ def generate(patches=None, clone=CLONE, select=None, mathlib=None, modules=None)
     texts, plans, used, names = {}, {}, set(), {}
     nolint_used.clear()
     for module, ours, files, what in modules:
-        p = plan_module(module, ours, files, patches, select, clone)
+        p = plan_module(module, ours, files, patches, select, clone, ranges, range_decls)
         used |= p[3]
         for (rel, a, b, kind, name) in p[1]:
             if name in names:
@@ -666,15 +837,26 @@ def check(outdir=OUTDIR, quiet=False, **kw) -> int:
     return 1 if bad else 0
 
 
-def axioms_block(plans) -> str:
-    o = ["/-! ## FS131-IE1 — the port of `[OAIMath2026]` family 015's entropy base (`Outside/OAI015Shannon`,",
-         "`OAI015Mixtures`, `OAI015Maximal`), generated by `tools/fs131_ie1_port.py --axioms-block`; no axiom, no outside",
-         "theorem -/", "-- FS131-IE1"]
+AXIOMS_TITLE = {
+    "FS131-IE1": ["/-! ## FS131-IE1 — the port of `[OAIMath2026]` family 015's entropy base (`Outside/OAI015Shannon`,",
+                  "`OAI015Mixtures`, `OAI015Maximal`), generated by `tools/fs131_ie1_port.py --axioms-block`; no axiom, "
+                  "no outside", "theorem -/"],
+    "FS131-IP23": ["/-! ## FS131-IP23 — the port of `[OAIMath2026]` family 015's generating-sequence theorem and ergodic",
+                   "decomposition (`Outside/OAI015Generating`, `OAI015ErgodicDecomposition`), generated by",
+                   "`tools/fs131_ie1_port.py --axioms-block FS131-IP23`; no axiom, no outside theorem -/"],
+}
+
+
+def axioms_block(plans, job="FS131-IE1") -> str:
+    """the audit's records for the modules of one job (FS131-IE1's by default, as before)"""
+    o = AXIOMS_TITLE[job] + [f"-- {job}"]
     for module, _, _, _ in MODULES:
+        if JOB.get(module, "FS131-IE1") != job:
+            continue
         o.append(f"-- Outside/{module}")
         for (rel, a, b, kind, name) in plans[module][1]:
             o.append(f"#print axioms {NS_NEW}.{name}")
-    o.append("-- FS131-IE1: end of the block")
+    o.append(f"-- {job}: end of the block")
     return "\n".join(o) + "\n"
 
 
@@ -754,7 +936,7 @@ def self_test() -> int:
         clone2 = td / "clone"
         (clone2 / SRC / "PrimePackets").mkdir(parents=True)
         (clone2 / SRC / "DukePrimeDegree/Dynamics").mkdir(parents=True)
-        for rel in (SHANNON, MIXTURES, INVERSE, HOPF, OCCUPATION):
+        for rel in sorted({f for _, _, files, _ in MODULES for f in files}):
             shutil.copy(CLONE / SRC / rel, clone2 / SRC / rel)
         shutil.copy(CLONE / LICENCE_SRC, clone2 / LICENCE_SRC)
         subprocess.run(["git", "init", "-q", str(clone2)], check=True)
@@ -805,8 +987,30 @@ def self_test() -> int:
                       "a selected declaration absent from the partial file", "SELECT")
             with_edit(SHANNON, lambda t: t.replace("\nnamespace PrimeDegreePackets", "\nnamespace Elsewhere", 1),
                       "a namespace the script does not map", "does not map")
+            # FS131-IP23: an attribute line above a keyword is part of the statement; one followed by no declaration
+            # is refused (`ConditionalShannon.lean`: `lemma finiteShannon_mul` is line 17)
+            with_edit(GENERATING[0], lambda t: t.replace("\nlemma finiteShannon_mul", "\n@[simp]\nlemma finiteShannon_mul", 1),
+                      "a patch into an attribute line above a keyword (the statement)", "touches the statement",
+                      patches=PATCHES + [(GENERATING[0], 17, "simp", "simp ", "planted")])
+            with_edit(GENERATING[0], lambda t: t.replace("\nlemma finiteShannon_mul", "\n@[simp]\n\nlemma finiteShannon_mul", 1),
+                      "an attribute line followed by no declaration", "not followed by a declaration")
         finally:
             COMMIT = real
+        # FS131-IP23: an `omit … in` line is part of the statement (`ConditionalOrbitEntropy.lean` line 27)
+        expect("a patch into an `omit … in` line (the statement)",
+               refused("touches the statement",
+                       patches=PATCHES + [(GENERATING[3], 27, "MeasurableSpace", "MeasurableSpace'", "planted")]))
+        # FS131-IP23: line ranges — one that ends inside a declaration (`exists_pointwise_invariant_representative`,
+        # KernelEntropy lines 297–328), one that begins inside one (line 230, inside `fixedPoint_mem_closed_convex_orbit`),
+        # and declarations that are not RANGE_DECLS's
+        expect("a range that ends inside a declaration",
+               refused("ends inside the declaration", ranges={**RANGES, KERNEL: [(4, 47), (220, 300)]}))
+        expect("a range that begins inside a declaration",
+               refused("does not classify", ranges={**RANGES, KERNEL: [(4, 47), (230, 558)]}))
+        expect("a range whose declarations are not RANGE_DECLS's",
+               refused("RANGE_DECLS lists", range_decls={**RANGE_DECLS, ERGDEC: RANGE_DECLS[ERGDEC][:-1]}))
+        expect("a file in both SELECT and RANGES", refused("in both SELECT and RANGES",
+                                                           select={**SELECT, KERNEL: ["actionInvariantSigma"]}))
         # a NOLINT entry whose declaration is not ported; a NOLINT entry for a linter this script does not silence
         global NOLINT
         keep_nl = dict(NOLINT)
@@ -856,8 +1060,12 @@ def main() -> int:
     if "--open-probe" in sys.argv:
         # one file per module: its imports, then every namespace its release files `open`, each in a section of its
         # own, so that each that does not exist is reported on its own line (`unknown namespace`); read with the log
-        pdir = ROOT / "data/fs131/ie1/lean"
+        job = sys.argv[sys.argv.index("--open-probe") + 1] if len(sys.argv) > sys.argv.index("--open-probe") + 1 \
+            else "FS131-IE1"
+        pdir = ROOT / PROBE_DIR[job]
         for module, ours, files, _ in MODULES:
+            if JOB.get(module, "FS131-IE1") != job:
+                continue
             toks = []
             for rel in files:
                 for ln in (CLONE / SRC / rel).read_text().split("\n"):
@@ -866,7 +1074,7 @@ def main() -> int:
                             if t != "scoped" and t not in toks:
                                 toks.append(t)
             o = [f"import {PFX}{m}" for m in ours] + [f"import {m}" for m in MATHLIB[module]]
-            o.append(f"-- FS131-IE1 (generated by tools/fs131_ie1_port.py --open-probe): every namespace the release's "
+            o.append(f"-- {job} (generated by tools/fs131_ie1_port.py --open-probe): every namespace the release's "
                      f"files of {module} open, each opened alone under the module's imports; `unknown namespace` names "
                      "the ones that do not exist there")
             for t in toks:
@@ -875,7 +1083,8 @@ def main() -> int:
             print(f"wrote OpenProbe-{module}.lean: {len(toks)} namespaces")
         return 0
     if "--axioms-block" in sys.argv:
-        sys.stdout.write(axioms_block(plans))
+        i = sys.argv.index("--axioms-block")
+        sys.stdout.write(axioms_block(plans, sys.argv[i + 1] if len(sys.argv) > i + 1 else "FS131-IE1"))
         return 0
     if "--names" in sys.argv:
         for module, _, _, _ in MODULES:
@@ -891,7 +1100,7 @@ def main() -> int:
                 rows = [d for d in decls if d[0] == rel]
                 nlines = sum(d[2] - d[1] + 1 for d in rows)
                 print(f"{module} <- {rel}: {nl} lines; {nd} declarations copied ({nlines} lines)"
-                      + (f" of a partial file" if rel in SELECT else ""))
+                      + (f" of a partial file" if rel in SELECT or rel in RANGES else ""))
                 for (_, a, b, kind, name) in rows:
                     print(f"    {a}–{b}\t{kind}\t{name}")
                 tot += nd
