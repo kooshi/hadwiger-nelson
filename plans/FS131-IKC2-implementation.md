@@ -75,3 +75,20 @@ lines against 250–350, L2 about 335 with the shared part against 200–300: ab
 L3 (priced 350–500) and L4 (150–250) at that ratio are about 500–700 and 150–300 (L4 reuses the shared part), so K2 is
 about **2,200–2,500 lines** in all (600 before this job, 795 now, 650–1,000 left) — inside the planner's 2,000–4,000 and
 above FS131-IKC1's 1,550–2,000. No message owed (the brief's line is 4,000).
+
+## Stage 4 — SAVED: L4 `opSum_O4_eq` proved
+
+No `sorry` in L4; one left (L3). About 340 lines (§ Leaf L4: the q-part; the record priced 150–250). The route is
+the record's:
+
+* `opSum_qmono` — one q-form's ops are `cf·q(φ)·Y(m)`: per point `x` the three families are, at every map `γ`,
+  `Π_m φγ · cf·(2φ(γx) − 2φ(γx)² − Σ_{s∈S} φ(γx)φ(γ(x + s)))` (`sum_sList`: the codes `sList` are the circle, which
+  needs `p ≥ 2`, read from `globalOK`); then `qbracket` (`act_add`, `sum_lin_S`: the linear part of `γ` permutes `S`;
+  `sum_act`: `γ` permutes `V`) makes the bracket `q(φ)`;
+* the q-part's coefficients read off `qcoefs` (`qfold`, `foldl_cond`, `zip_range_map`), the transporter at every `t`
+  (`Ym_transport`, with `gList_getD_le`: a map of `gList`, or the default, has coordinates at most `p`), and the classes
+  regrouped (`Finset.sum_ite_eq`, the class below `|tnu|` from the check); the double list sum over blocks and weights
+  handled as one functional (`Lam`, `Lam_add`, `Lam_mul`, `Lam_fsum`, `Lam_congr`).
+
+What it reads from `globalOK`: `p ≥ 2` and the q-part's verdict (every `t` has a class `ν < |tnu|` and a unit map `g`
+with `g(t_ν) = t`).

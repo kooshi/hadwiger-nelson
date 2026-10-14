@@ -1443,11 +1443,360 @@ private theorem opSum_O23_eq (C : Cert) [NeZero C.p] (hC : globalOK C = true) (�
     opSum C.p φ (opsO2 C ++ opsO3 C (orbRows C)) = (C.blocks1.map fun b => blockT C φ b C.reps).sum := by
   sorry
 
+/-! ### Leaf L4: the q-part -/
+
+private theorem opVal_opI (a : List ℕ) (t : ℕ) (b : List ℕ) (v : ℤ) : opVal (opI a t b v) = v := by
+  simp only [opVal, opI]; exact Int.toNat_sub_toNat_neg v
+
+private theorem opSum_cons (p : ℕ) [NeZero p] (φ : V p → ℝ) (o : Op) (l : List Op) :
+    opSum p φ (o :: l) = (opVal o : ℝ) * Ym p φ (o.mono p) + opSum p φ l := by simp [opSum]
+
+private theorem opSum_flatMap {α : Type} (p : ℕ) [NeZero p] (φ : V p → ℝ) (g : α → List Op) (l : List α) :
+    opSum p φ (l.flatMap g) = (l.map fun x => opSum p φ (g x)).sum := by
+  induction l with
+  | nil => simp [opSum]
+  | cons x l ih => rw [List.flatMap_cons, opSum_append, ih, List.map_cons, List.sum_cons]
+
+private theorem opSum_map {α : Type} (p : ℕ) [NeZero p] (φ : V p → ℝ) (g : α → Op) (l : List α) :
+    opSum p φ (l.map g) = (l.map fun x => (opVal (g x) : ℝ) * Ym p φ ((g x).mono p)).sum := by
+  simp [opSum, List.map_map, Function.comp_def]
+
+/-- The factor of a monomial under one map. -/
+private noncomputable def Pm {p : ℕ} (φ : V p → ℝ) (γ : V p × V p × Bool) (m : List ℕ) : ℝ :=
+  (m.map fun y => φ (act γ (pt p y))).prod
+
+private theorem Ym_append (p : ℕ) [NeZero p] (φ : V p → ℝ) (m l : List ℕ) :
+    Ym p φ (m ++ l) = ∑ γ ∈ affs p, Pm φ γ m * Pm φ γ l := by
+  simp [Ym, Pm, List.map_append, List.prod_append]
+
+/-- A map of `affs` is a bijection of `V`. -/
+private theorem sum_act (p : ℕ) [NeZero p] {γ : V p × V p × Bool} (hγ : γ ∈ affs p) (F : V p → ℝ) :
+    ∑ z : V p, F (act γ z) = ∑ z : V p, F z := by
+  refine Fintype.sum_equiv ⟨act γ, act (inv γ), fun z => ?_, fun z => ?_⟩ _ _ fun z => rfl
+  · rw [← act_comp, inv_comp hγ]; simp [act, cmul, cj]
+  · rw [← act_comp, comp_inv hγ]; simp [act, cmul, cj]
+
+private theorem act_add {p : ℕ} (γ : V p × V p × Bool) (z s : V p) :
+    act γ (z + s) = act γ z + act (0, γ.2.1, γ.2.2) s := by
+  simp only [act, cj_add, cmul_add, add_zero]; exact add_right_comm _ _ _
+
+private theorem lin_mem {p : ℕ} [NeZero p] {γ : V p × V p × Bool} (hγ : γ ∈ affs p) : ((0 : V p), γ.2.1, γ.2.2) ∈ affs p := by
+  rw [mem_affs] at *; exact hγ
+
+private theorem act_lin_mem {p : ℕ} [NeZero p] {δ : V p × V p × Bool} (hδ : δ ∈ affs p) (h0 : δ.1 = 0) {s : V p}
+    (hs : s ∈ unitCircle p) : act δ s ∈ unitCircle p := by
+  rw [mem_unitCircle] at *; rw [mem_affs] at hδ
+  simp only [act, h0, add_zero, norm_cmul, norm_cj, hδ, hs, one_mul]
+
+/-- The linear part of a map of `affs` is a bijection of `S`. -/
+private theorem sum_lin_S (p : ℕ) [NeZero p] {γ : V p × V p × Bool} (hγ : γ ∈ affs p) (F : V p → ℝ) :
+    ∑ s ∈ unitCircle p, F (act (0, γ.2.1, γ.2.2) s) = ∑ s ∈ unitCircle p, F s := by
+  have hδ := lin_mem hγ
+  have hδ' := inv_mem hδ
+  have hinv0 : (inv ((0 : V p), γ.2.1, γ.2.2)).1 = 0 := by simp [inv, cmul_zero, cj_zero]
+  refine Finset.sum_nbij' (act (0, γ.2.1, γ.2.2)) (act (inv (0, γ.2.1, γ.2.2))) (fun s hs => act_lin_mem hδ rfl hs)
+    (fun s hs => act_lin_mem hδ' hinv0 hs) (fun s _ => ?_) (fun s _ => ?_) (fun _ _ => rfl)
+  · rw [← act_comp, inv_comp hδ]; simp [act, cmul, cj]
+  · rw [← act_comp, comp_inv hδ]; simp [act, cmul, cj]
+
+private theorem sum_filter_range (P : ℕ → Bool) (g : ℕ → ℝ) : ∀ n : ℕ,
+    (((List.range n).filter P).map g).sum = ∑ x ∈ Finset.range n, if P x = true then g x else 0
+  | 0 => rfl
+  | n + 1 => by
+    rw [List.range_succ, List.filter_append, List.map_append, List.sum_append, sum_filter_range P g n,
+      Finset.sum_range_succ]
+    cases h : P n <;> simp [List.filter, h]
+
+private theorem isUnit_iff (p : ℕ) [NeZero p] (hp : 2 ≤ p) (x : ℕ) :
+    isUnit p (Nat.div x p) (Nat.mod x p) = true ↔ pt p x ∈ unitCircle p := by
+  rw [mem_unitCircle]
+  simp only [isUnit, Nat.beq_eq, nmod, ndiv, Nat.add_eq, Nat.mul_eq, pt]
+  rw [show ((x / p : ℕ) : ZMod p) ^ 2 + ((x % p : ℕ) : ZMod p) ^ 2 = (((x / p) * (x / p) + (x % p) * (x % p) : ℕ) : ZMod p)
+    by push_cast; ring, show (1 : ZMod p) = ((1 : ℕ) : ZMod p) by simp, ZMod.natCast_eq_natCast_iff' _ _ p,
+    Nat.mod_eq_of_lt (by omega : 1 < p)]
+
+/-- The unit circle's codes, summed. -/
+private theorem sum_sList (p : ℕ) [NeZero p] (hp : 2 ≤ p) (G : V p → ℝ) :
+    ((sList p).map fun s => G (pt p s)).sum = ∑ s ∈ unitCircle p, G s := by
+  unfold sList
+  rw [show Nat.mul p p = p * p from rfl, sum_filter_range, ← Finset.sum_filter]
+  rw [show ∑ x ∈ Finset.range (p * p) with isUnit p (Nat.div x p) (Nat.mod x p) = true, G (pt p x) =
+      ∑ x ∈ Finset.range (p * p), (if pt p x ∈ unitCircle p then G (pt p x) else 0) by
+    rw [Finset.sum_filter]; exact Finset.sum_congr rfl fun x _ => by simp only [isUnit_iff p hp]]
+  rw [sum_codes p (fun z => if z ∈ unitCircle p then G z else 0), ← Finset.sum_filter]
+  congr 1; ext z; simp [unitCircle]
+
+private theorem sum_sList' (p : ℕ) [NeZero p] (hp : 2 ≤ p) (g : ℕ → ℝ) (G : V p → ℝ) (h : ∀ s, g s = G (pt p s)) :
+    ((sList p).map g).sum = ∑ s ∈ unitCircle p, G s := by
+  rw [List.map_congr_left fun s _ => h s]; exact sum_sList p hp G
+
+private theorem mono_opI (p : ℕ) (a : List ℕ) (t : ℕ) (b : List ℕ) (v : ℤ) :
+    (opI a t b v).mono p = a ++ b.map fun x => addP p x t := rfl
+
+private theorem Ym_Pm (p : ℕ) [NeZero p] (φ : V p → ℝ) (m : List ℕ) : Ym p φ m = ∑ γ ∈ affs p, Pm φ γ m := rfl
+
+/-- The bracket of `Q` at one map is `q(φ)`. -/
+private theorem qbracket (p : ℕ) [NeZero p] (φ : V p → ℝ) {γ : V p × V p × Bool} (hγ : γ ∈ affs p) :
+    ∑ z : V p, (2 * φ (act γ z) - 2 * (φ (act γ z) * φ (act γ z)) -
+      ∑ s ∈ unitCircle p, φ (act γ z) * φ (act γ (z + s))) = qform p φ := by
+  have h1 : ∀ z, ∑ s ∈ unitCircle p, φ (act γ z) * φ (act γ (z + s)) =
+      ∑ s ∈ unitCircle p, φ (act γ z) * φ (act γ z + s) := fun z => by
+    simp only [act_add]; exact sum_lin_S p hγ (fun s => φ (act γ z) * φ (act γ z + s))
+  simp only [h1]
+  rw [sum_act p hγ (fun w => 2 * φ w - 2 * (φ w * φ w) - ∑ s ∈ unitCircle p, φ w * φ (w + s))]
+  unfold qform
+  rw [Finset.sum_sub_distrib, Finset.sum_sub_distrib, Finset.mul_sum]
+  congr 1
+  rw [← Finset.sum_sub_distrib]
+  exact Finset.sum_congr rfl fun z _ => by ring
+
+/-- **One q-form** `Q(m)`: its ops evaluate to `cf · q(φ) · Y(m)`. -/
+private theorem opSum_qmono (C : Cert) [NeZero C.p] (hp : 2 ≤ C.p) (φ : V C.p → ℝ) (m : List ℕ) (cf : ℤ) :
+    opSum C.p φ ((List.range (C.p * C.p)).flatMap fun x =>
+      opI m 0 [x] (Int.mul 2 cf) :: opI m 0 [x, x] (Int.neg (Int.mul 2 cf)) ::
+        (sList C.p).map fun s => opI m 0 [x, addP C.p x s] (Int.neg cf)) =
+      (cf : ℝ) * qform C.p φ * Ym C.p φ m := by
+  rw [opSum_flatMap, lsum_range]
+  have hx : ∀ x, opSum C.p φ (opI m 0 [x] (Int.mul 2 cf) :: opI m 0 [x, x] (Int.neg (Int.mul 2 cf)) ::
+      (sList C.p).map fun s => opI m 0 [x, addP C.p x s] (Int.neg cf)) =
+      ∑ γ ∈ affs C.p, Pm φ γ m * ((cf : ℝ) * (2 * φ (act γ (pt C.p x)) -
+        2 * (φ (act γ (pt C.p x)) * φ (act γ (pt C.p x))) -
+        ∑ s ∈ unitCircle C.p, φ (act γ (pt C.p x)) * φ (act γ (pt C.p x + s)))) := by
+    intro x
+    rw [opSum_cons, opSum_cons, opSum_map]
+    simp only [opVal_opI, mono_opI, Ym_append]
+    rw [sum_sList' C.p hp _ (fun w => ((Int.neg cf : ℤ) : ℝ) * ∑ γ ∈ affs C.p, Pm φ γ m *
+      (φ (act γ (pt C.p x)) * φ (act γ (pt C.p x + w)))) fun s => by simp [Pm, pt_addP, pt_zero]]
+    simp only [Pm, List.map_cons, List.map_nil, List.prod_cons, List.prod_nil, mul_one, pt_addP, pt_zero, add_zero]
+    simp only [show Int.mul 2 cf = 2 * cf from rfl, show Int.neg (2 * cf) = -(2 * cf) from rfl,
+      show Int.neg cf = -cf from rfl, Finset.mul_sum]
+    rw [Finset.sum_comm (s := unitCircle C.p), ← Finset.sum_add_distrib, ← Finset.sum_add_distrib]
+    refine Finset.sum_congr rfl fun γ _ => ?_
+    simp only [← mul_assoc, ← Finset.mul_sum]
+    push_cast; ring
+  rw [Finset.sum_congr rfl fun x _ => hx x, Finset.sum_comm]
+  rw [Ym_Pm, Finset.mul_sum]
+  refine Finset.sum_congr rfl fun γ hγ => ?_
+  rw [← Finset.mul_sum, ← Finset.mul_sum]
+  rw [sum_codes C.p (fun z => 2 * φ (act γ z) - 2 * (φ (act γ z) * φ (act γ z)) -
+    ∑ s ∈ unitCircle C.p, φ (act γ z) * φ (act γ (z + s))), qbracket C.p φ hγ]
+  ring
+
+private theorem qfold {T : Type} (F : T → ℕ → ℤ) : ∀ (l : List (List ℕ × T)) (a0 : ℤ),
+    l.foldl (fun a b => b.1.foldl (fun a wi => Int.add a (F b.2 wi)) a) a0 =
+      a0 + (l.map fun b => (b.1.map (F b.2)).sum).sum
+  | [], a0 => by simp
+  | b :: l, a0 => by
+    rw [List.foldl_cons, qfold F l, foldl_iadd, List.map_cons, List.sum_cons]; ring
+
+private theorem foldl_cond {α : Type} (P : α → Bool) (g : α → ℤ) : ∀ (l : List α) (a : ℤ),
+    l.foldl (fun s x => cond (P x) (Int.add s (g x)) s) a = a + (l.map fun x => if P x = true then g x else 0).sum
+  | [], a => by simp
+  | x :: l, a => by
+    rw [List.foldl_cons, foldl_cond P g l, List.map_cons, List.sum_cons]
+    cases h : P x
+    · simp
+    · simp only [cond_true, if_true]; show a + g x + _ = _; ring
+
+private theorem finset_list_comm {α : Type} (s : Finset ℕ) (L : List α) (g : ℕ → α → ℝ) :
+    ∑ ν ∈ s, (L.map (g ν)).sum = (L.map fun b => ∑ ν ∈ s, g ν b).sum := by
+  induction L with
+  | nil => simp
+  | cons b L ih => simp only [List.map_cons, List.sum_cons, Finset.sum_add_distrib, ih]
+
+private theorem gList_bound (p : ℕ) (hp : 0 < p) : ∀ g ∈ gList p, g.1 < p ∧ g.2.1 < p := by
+  suffices h : ∀ (l : List ℕ), (∀ x ∈ l, x < p * p) → ∀ g ∈ l.foldr (fun x acc =>
+      cond (isUnit p (Nat.div x p) (Nat.mod x p)) ((Nat.div x p, Nat.mod x p, 0) :: (Nat.div x p, Nat.mod x p, 1) :: acc)
+        acc) [], g.1 < p ∧ g.2.1 < p from h _ fun x hx => List.mem_range.1 hx
+  intro l hl
+  induction l with
+  | nil => simp
+  | cons x l ih =>
+    intro g hg
+    rw [List.foldr_cons] at hg
+    have hx := hl x List.mem_cons_self
+    have h1 : x / p < p := Nat.div_lt_of_lt_mul hx
+    have h2 : x % p < p := Nat.mod_lt _ hp
+    have ih' := ih fun y hy => hl y (List.mem_cons_of_mem _ hy)
+    cases hu : isUnit p (Nat.div x p) (Nat.mod x p) <;> simp only [hu, cond_true, cond_false] at hg
+    · exact ih' g hg
+    · rcases List.mem_cons.1 hg with rfl | hg
+      · exact ⟨h1, h2⟩
+      rcases List.mem_cons.1 hg with rfl | hg
+      · exact ⟨h1, h2⟩
+      exact ih' g hg
+
+private theorem getD_cases {α : Type*} (l : List α) (k : ℕ) (d : α) : l.getD k d ∈ l ∨ l.getD k d = d := by
+  rw [List.getD_eq_getElem?_getD]
+  cases h : l[k]? with
+  | none => right; rfl
+  | some a => left; exact List.mem_of_getElem? h
+
+/-- A map of `gList` (or the default) has coordinates at most `p`. -/
+private theorem gList_getD_le (p : ℕ) (hp : 0 < p) (k : ℕ) :
+    ((gList p).getD k (0, 0, 0)).1 ≤ p ∧ ((gList p).getD k (0, 0, 0)).2.1 ≤ p := by
+  rcases getD_cases (gList p) k (0, 0, 0) with h | h
+  · exact ⟨(gList_bound p hp _ h).1.le, (gList_bound p hp _ h).2.le⟩
+  · rw [h]; exact ⟨Nat.zero_le _, Nat.zero_le _⟩
+
+/-- **The q-part's transporter**: `g(t₀) = t` with `g` a unit map gives `Y([0, t]) = Y([0, t₀])`. -/
+private theorem Ym_transport (p : ℕ) [NeZero p] (φ : V p → ℝ) (c d e t0 t : ℕ) (hc : c ≤ p) (hd : d ≤ p)
+    (hu : isUnit p c d = true) (h : gmap p c d e t0 = t) :
+    Ym p φ ([0] ++ [0].map fun x => addP p x t) = Ym p φ [0, t0] := by
+  have hδ : ((0 : V p), ((c : ZMod p), (d : ZMod p)), !Nat.beq e 0) ∈ affs p := (mem_affs _).2 (isUnit_norm p c d hu)
+  rw [Ym_eq, Ym_eq]
+  conv_rhs => rw [← Yv_map_act φ hδ]
+  congr 1
+  simp only [List.cons_append, List.nil_append, List.map_cons, List.map_nil, pt_addP, pt_zero, zero_add, ← h,
+    pt_gmap p c d e t0 hc hd, act, cj_zero, cmul_zero, add_zero]
+
+private theorem zip_range_map {α β : Type} (l : List α) (g : α → β) (d : α) (n : ℕ) (hl : l.length = n) :
+    (List.range n).zip (l.map g) = (List.range n).map fun i => (i, g (l.getD i d)) := by
+  subst hl
+  refine List.ext_getElem (by simp) fun i h1 h2 => ?_
+  simp only [List.getElem_zip, List.getElem_range, List.getElem_map]
+  rw [getD_of_lt _ _ (by simpa using h2)]
+
+/-- A double list sum over blocks and their weights. -/
+private def Lam (L : List Blk) (F : Blk → ℕ → ℝ) : ℝ := (L.map fun b => (b.wts.map (F b)).sum).sum
+
+private theorem Lam_add (L : List Blk) (F G : Blk → ℕ → ℝ) : Lam L (fun b wi => F b wi + G b wi) = Lam L F + Lam L G := by
+  simp only [Lam, List.sum_map_add]
+
+private theorem Lam_mul (L : List Blk) (F : Blk → ℕ → ℝ) (y : ℝ) : Lam L F * y = Lam L fun b wi => F b wi * y := by
+  simp only [Lam, ← List.sum_map_mul_right]
+
+private theorem Lam_fsum (L : List Blk) (s : Finset ℕ) (G : ℕ → Blk → ℕ → ℝ) :
+    ∑ ν ∈ s, Lam L (G ν) = Lam L fun b wi => ∑ ν ∈ s, G ν b wi := by
+  simp only [Lam]
+  rw [finset_list_comm]
+  congr 1; refine List.map_congr_left fun b _ => ?_
+  exact finset_list_comm s b.wts fun ν => G ν b
+
+private theorem Lam_congr (L : List Blk) (F G : Blk → ℕ → ℝ) (h : ∀ b ∈ L, ∀ wi ∈ b.wts, F b wi = G b wi) :
+    Lam L F = Lam L G := by
+  simp only [Lam]; congr 1; refine List.map_congr_left fun b hb => ?_
+  congr 1; exact List.map_congr_left fun wi hwi => h b hb wi hwi
+
+private theorem zip_map_range {α β : Type} (l : List α) (g : ℕ → β) (d : α) :
+    l.zip ((List.range l.length).map g) = (List.range l.length).map fun i => (l.getD i d, g i) := by
+  refine List.ext_getElem (by simp) fun i h1 h2 => ?_
+  simp only [List.getElem_zip, List.getElem_range, List.getElem_map]
+  rw [getD_of_lt _ _ (by simpa using h2)]
+
 /-- **Leaf L4** (the q-part): the times-q family is `q(φ)` times the q-blocks' terms over the one monomial `[0]` —
 `Q(m)(Y) = q(φ)·Y(m)` (`q(φ∘γ) = q(φ)`), and every `t` moved onto its class's representative. -/
 private theorem opSum_O4_eq (C : Cert) [NeZero C.p] (hC : globalOK C = true) (φ : V C.p → ℝ) :
     opSum C.p φ (opsO4 C (qcoefs C)) = qform C.p φ * (C.blocksq.map fun b => blockT C φ b [[0]]).sum := by
-  sorry
+  have hp2 : 2 ≤ C.p := by
+    simp only [globalOK, Bool.and_eq_true, Nat.ble_eq] at hC; exact hC.1.1.1.1.1.1.1.1.1
+  have hok : (qcoefs C).2.2.2 = true := by
+    simp only [globalOK, Bool.and_eq_true] at hC; exact hC.1.1.1.2
+  have hp : 0 < C.p := by omega
+  -- the ops
+  have h1 : opSum C.p φ (opsO4 C (qcoefs C)) =
+      ((qmonos C (qcoefs C)).map fun mc => (mc.2 : ℝ) * qform C.p φ * Ym C.p φ mc.1).sum := by
+    unfold opsO4; rw [opSum_flatMap]; congr 1
+    exact List.map_congr_left fun mc _ => opSum_qmono C hp2 φ mc.1 mc.2
+  rw [h1]
+  -- the classes and their transporters
+  let ng := Nat.mul 2 (Nat.add C.p 1)
+  let fs := readN C.kq C.perq (Nat.mul C.p C.p) C.qt
+  have hfs : fs.length = C.p * C.p := readK_length _ _ _ _
+  let cl : ℕ → ℕ := fun t => Nat.div (fs.getD t 0) ng
+  have htr : ∀ t < C.p * C.p, cl t < C.tnu.length ∧
+      Ym C.p φ ([0] ++ [0].map fun x => addP C.p x t) = Ym C.p φ [0, C.tnu.getD (cl t) 0] := by
+    intro t ht
+    have hall : ((List.range (Nat.mul C.p C.p)).zip (fs.map id)).all (fun x =>
+        Nat.blt (Nat.div x.2 ng) C.tnu.length && isUnit C.p ((gList C.p).getD (Nat.mod x.2 ng) (0, 0, 0)).1
+          ((gList C.p).getD (Nat.mod x.2 ng) (0, 0, 0)).2.1 &&
+        Nat.beq (gmap C.p ((gList C.p).getD (Nat.mod x.2 ng) (0, 0, 0)).1
+          ((gList C.p).getD (Nat.mod x.2 ng) (0, 0, 0)).2.1 ((gList C.p).getD (Nat.mod x.2 ng) (0, 0, 0)).2.2
+          (C.tnu.getD (Nat.div x.2 ng) 0)) x.1) = true := by
+      rw [List.map_id]; exact hok
+    rw [zip_range_map fs id 0 (Nat.mul C.p C.p) hfs, List.all_eq_true] at hall
+    have := hall _ (List.mem_map.2 ⟨t, List.mem_range.2 ht, rfl⟩)
+    simp only [Bool.and_eq_true, Nat.blt_eq, Nat.beq_eq, id] at this
+    obtain ⟨⟨hν, hu⟩, hg⟩ := this
+    have hb := gList_getD_le C.p hp (Nat.mod (fs.getD t 0) ng)
+    exact ⟨hν, Ym_transport C.p φ _ _ _ _ t hb.1 hb.2 hu hg⟩
+  -- the coefficients
+  have ha0 : ((qcoefs C).1 : ℝ) = (C.blocksq.map fun b => (b.wts.map fun wi =>
+      (triGet b.tri 0 0 : ℝ) * ((cval C wi : ℝ) * (cval C wi : ℝ))).sum).sum := by
+    have h := qfold (fun (tri : List (List ℤ)) wi => Int.mul (triGet tri 0 0) (Int.mul (cval C wi) (cval C wi)))
+      (C.blocksq.map fun b => (b.wts, b.tri)) 0
+    have e : (qcoefs C).1 = _ := h
+    rw [e]; push_cast; simp [List.map_map, Function.comp_def]
+  have ha1 : ((qcoefs C).2.1 : ℝ) = (C.blocksq.map fun b => (b.wts.map fun wi =>
+      2 * (triGet b.tri 0 1 : ℝ) * ((cval C wi : ℝ) * (sigma C wi : ℝ))).sum).sum := by
+    have h := qfold (fun (tri : List (List ℤ)) wi => Int.mul (Int.mul 2 (triGet tri 0 1)) (Int.mul (cval C wi) (sigma C wi)))
+      (C.blocksq.map fun b => (b.wts, b.tri)) 0
+    have e : (qcoefs C).2.1 = _ := h
+    rw [e]; push_cast; simp [List.map_map, Function.comp_def]
+  have hbeta : ∀ ν, ((((C.blocksq.map fun b => (b.wts, b.tri)).foldl (fun a b => b.1.foldl (fun a wi =>
+      Int.add a (Int.mul (triGet b.2 1 1) (((List.range (Nat.mul C.p C.p)).zip (fs.map fun f => Nat.div f ng)).foldl
+        (fun s x => cond (Nat.beq x.2 ν) (Int.add s (kappa C wi x.1)) s) 0))) a) 0) : ℤ) : ℝ) =
+      (C.blocksq.map fun b => (b.wts.map fun wi => (triGet b.tri 1 1 : ℝ) *
+        ∑ t ∈ Finset.range (C.p * C.p), if cl t = ν then (kappa C wi t : ℝ) else 0).sum).sum := by
+    intro ν
+    have h := qfold (fun (tri : List (List ℤ)) wi => Int.mul (triGet tri 1 1)
+      (((List.range (Nat.mul C.p C.p)).zip (fs.map fun f => Nat.div f ng)).foldl
+        (fun s x => cond (Nat.beq x.2 ν) (Int.add s (kappa C wi x.1)) s) 0)) (C.blocksq.map fun b => (b.wts, b.tri)) 0
+    rw [h]
+    push_cast
+    simp only [zero_add, List.map_map, Function.comp_def]
+    congr 1; refine List.map_congr_left fun b _ => ?_
+    rw [Int.cast_list_sum, List.map_map]
+    congr 1; refine List.map_congr_left fun wi _ => ?_
+    have h2 := foldl_cond (fun x : ℕ × ℕ => Nat.beq x.2 ν) (fun x => kappa C wi x.1)
+      ((List.range (Nat.mul C.p C.p)).zip (fs.map fun f => Nat.div f ng)) 0
+    simp only [Function.comp_apply]
+    show ((triGet b.tri 1 1 * _ : ℤ) : ℝ) = _
+    rw [h2, zip_range_map fs _ 0 (Nat.mul C.p C.p) hfs]
+    push_cast
+    simp only [zero_add, List.map_map, Function.comp_def]
+    rw [lsum_range]
+    congr 1
+    refine Finset.sum_congr rfl fun t _ => ?_
+    simp only [Nat.beq_eq, cl]
+    split_ifs <;> simp
+  -- the left side, term by term
+  have hq : (qcoefs C).2.2.1 = (List.range C.tnu.length).map fun ν =>
+      (C.blocksq.map fun b => (b.wts, b.tri)).foldl (fun a b => b.1.foldl (fun a wi =>
+        Int.add a (Int.mul (triGet b.2 1 1) (((List.range (Nat.mul C.p C.p)).zip (fs.map fun f => Nat.div f ng)).foldl
+          (fun s x => cond (Nat.beq x.2 ν) (Int.add s (kappa C wi x.1)) s) 0))) a) 0 := rfl
+  simp only [qmonos, List.map_cons, List.sum_cons, List.map_map, Function.comp_def]
+  rw [hq, zip_map_range C.tnu _ 0, List.map_map, lsum_range]
+  simp only [Function.comp_def, hbeta, ha0, ha1]
+  -- the right side
+  have hR : (C.blocksq.map fun b => blockT C φ b [[0]]).sum = Lam C.blocksq fun b wi =>
+      (triGet b.tri 0 0 : ℝ) * ((cval C wi : ℝ) * (cval C wi : ℝ)) * Ym C.p φ [] +
+      2 * (triGet b.tri 0 1 : ℝ) * ((cval C wi : ℝ) * (sigma C wi : ℝ)) * Ym C.p φ [0] +
+      ∑ ν ∈ Finset.range C.tnu.length, (triGet b.tri 1 1 : ℝ) *
+        (∑ t ∈ Finset.range (C.p * C.p), if cl t = ν then (kappa C wi t : ℝ) else 0) * Ym C.p φ [0, C.tnu.getD ν 0] := by
+    simp only [Lam, blockT]
+    congr 1; refine List.map_congr_left fun b _ => ?_
+    congr 1; refine List.map_congr_left fun wi _ => ?_
+    simp only [List.length_singleton, Finset.sum_range_one, List.getD_cons_zero, add_zero]
+    congr 1
+    · ring
+    · simp only [Finset.mul_sum, Finset.sum_mul, ite_mul, zero_mul, mul_ite, mul_zero]
+      rw [Finset.sum_comm]
+      refine Finset.sum_congr rfl fun t ht => ?_
+      obtain ⟨hcl, hY⟩ := htr t (Finset.mem_range.1 ht)
+      rw [Finset.sum_ite_eq, if_pos (Finset.mem_range.2 hcl), hY]
+      ring
+  rw [hR]
+  have hL : ∀ F : Blk → ℕ → ℝ, (C.blocksq.map fun b => (b.wts.map (F b)).sum).sum = Lam C.blocksq F := fun F => rfl
+  simp only [hL, Lam_mul]
+  rw [Lam_fsum, ← Lam_add, ← Lam_add, mul_comm (qform C.p φ), Lam_mul]
+  refine Lam_congr _ _ _ fun b _ wi _ => ?_
+  rw [add_mul, add_mul, Finset.sum_mul, add_assoc]
+  congr 1
+  · ring
+  congr 1
+  · ring
+  · exact Finset.sum_congr rfl fun ν _ => by ring
 
 private theorem globalOK_of (C : Cert) (hC : certOK C = true) : globalOK C = true := by
   simp only [certOK, Bool.and_eq_true] at hC; exact hC.1.1
