@@ -1,0 +1,27 @@
+D1: slot found once, replaced
+D2: slot found once, replaced
+D3: counts stand (slot read once); nothing changed
+D4: slot found once, inserted after
+D4b: slot found once, replaced
+D5: slot found once, replaced
+D6: slot found once, replaced
+D7: slot found once, replaced
+D8: slot found once, replaced
+D9a: description cell of Plane/OneAvoidingDensity replaced
+D9b Bessel: lead replaced
+D9b BesselDefect: lead replaced
+D9b Autocorr: lead replaced
+D9b Pattern: lead replaced
+D9b Window: lead replaced
+D9c: slot found once, inserted after
+D10a: slot found once, inserted after
+D10b: slot found once, inserted after
+D10c: slot found once, replaced
+D11a: slot found once, inserted after
+D11b: slot found once, replaced
+D12 (6 bullets): slot found once, inserted after
+D13 (16 bullets): slot found once, inserted after
+D14: GATE_CHANGES entry inserted after the FS133-LD1 entry
+D15: IDB3's D5 and the LDB1 line inserted after the slot's line (the slot's line is not the file's last line: see CHECK)
+filed: ARCHITECTURE.md, BIBLIOGRAPHY.md, CLAUDE.md, LEAN.md, LEDGER.md, data/fs131/claims-NF2.md, tools/claude_md_fact_audit.py
+CLAUDE.md bytes 78773
