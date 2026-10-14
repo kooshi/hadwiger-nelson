@@ -1093,6 +1093,161 @@ private theorem psd_of_psdCheck (b : Blk) (h : psdCheck b = true) : PSDN b.tri b
   have := mul_neg_of_pos_of_neg hs hneg
   linarith
 
+/-! ### Codes, weights and moments, read on points (for L2–L4) -/
+
+/-- The code `a·p + b` of a point. -/
+private def code {p : ℕ} (z : V p) : ℕ := z.1.val * p + z.2.val
+
+/-- **Codes below `p²` are the points.** -/
+private theorem sum_codes (p : ℕ) [NeZero p] {M : Type*} [AddCommMonoid M] (F : V p → M) :
+    ∑ t ∈ Finset.range (p * p), F (pt p t) = ∑ z : V p, F z := by
+  have hp : 0 < p := Nat.pos_of_ne_zero (NeZero.ne p)
+  refine Finset.sum_nbij' (pt p) code (fun _ _ => Finset.mem_univ _) (fun z _ => ?_) (fun t ht => ?_)
+    (fun z _ => ?_) (fun _ _ => rfl)
+  · simp only [Finset.mem_range, code]
+    have h1 := z.1.val_lt; have h2 := z.2.val_lt
+    nlinarith
+  · have ht' := Finset.mem_range.1 ht
+    simp only [code, pt, ZMod.val_natCast]
+    rw [Nat.mod_eq_of_lt (Nat.div_lt_of_lt_mul ht'), Nat.mod_mod]
+    exact Nat.div_add_mod' t p
+  · simp only [code, pt]
+    have h2 := z.2.val_lt
+    rw [add_comm, Nat.add_mul_div_right _ _ hp, Nat.div_eq_of_lt h2, zero_add, Nat.add_mul_mod_self_right,
+      Nat.mod_eq_of_lt h2]
+    simp
+
+private theorem sum_range_zmod (p : ℕ) [NeZero p] {M : Type*} [AddCommMonoid M] (G : ℕ → M) :
+    ∑ j ∈ Finset.range p, G j = ∑ j : ZMod p, G j.val :=
+  Finset.sum_nbij' (fun j => (j : ZMod p)) (fun j => j.val) (fun _ _ => Finset.mem_univ _)
+    (fun j _ => Finset.mem_range.2 (ZMod.val_lt j)) (fun j hj => ZMod.val_cast_of_lt (Finset.mem_range.1 hj))
+    (fun j _ => ZMod.natCast_zmod_val j) (fun j hj => by rw [ZMod.val_cast_of_lt (Finset.mem_range.1 hj)])
+
+private theorem foldl_iadd {α : Type} (l : List α) (g : α → ℤ) (a : ℤ) :
+    l.foldl (fun a j => Int.add a (g j)) a = a + (l.map g).sum := by
+  induction l generalizing a with
+  | nil => simp
+  | cons x l ih => rw [List.foldl_cons, ih, List.map_cons, List.sum_cons]; show a + g x + _ = _; ring
+
+/-- `⟨u, z⟩` for a direction given by its code. -/
+private def dz {p : ℕ} (u : ℕ) (z : V p) : ZMod p := (pt p u).1 * z.1 + (pt p u).2 * z.2
+
+private theorem dz_sub {p : ℕ} (u : ℕ) (z z' : V p) : dz u z' - dz u z = dz u (z' - z) := by
+  simp only [dz, Prod.fst_sub, Prod.snd_sub]; ring
+
+private theorem dotP_eq (p : ℕ) [NeZero p] (u t : ℕ) : dotP p u t = (dz u (pt p t)).val := by
+  have e : dz u (pt p t) = ((u / p * (t / p) + u % p * (t % p) : ℕ) : ZMod p) := by
+    simp only [dz, pt]; push_cast; ring
+  rw [e, ZMod.val_natCast]; rfl
+
+/-- `f` of a weight, read on `ZMod p`. -/
+private def fz (C : Cert) [NeZero C.p] (fp : ℕ) (r : ZMod C.p) : ℤ := fval C fp r.val
+
+/-- The virtual weight `x ↦ f(j + ⟨u, x⟩)` (`u ≠ 0`), `x ↦ f(0)` (`u = 0`). -/
+private def gw (C : Cert) [NeZero C.p] (u fp : ℕ) (j : ZMod C.p) (z : V C.p) : ℤ :=
+  if u = 0 then fz C fp 0 else fz C fp (j + dz u z)
+
+/-- `κ` read on points. -/
+private def kz (C : Cert) [NeZero C.p] (u fp : ℕ) (z : V C.p) : ℤ :=
+  if u = 0 then ((C.p * C.p : ℕ) : ℤ) * (fz C fp 0 * fz C fp 0)
+  else (C.p : ℤ) * ∑ j : ZMod C.p, fz C fp j * fz C fp (j + dz u z)
+
+private theorem getD_of_lt {α : Type*} (l : List α) (d : α) {n : ℕ} (h : n < l.length) : l.getD n d = l[n] := by
+  rw [List.getD_eq_getElem?_getD, List.getElem?_eq_getElem h]; rfl
+
+private theorem weight_mem (C : Cert) (wi : ℕ) (hwi : wi < C.weights.length) :
+    C.weights.getD wi (0, 0, 0) ∈ C.weights := getD_mem _ _ _ hwi
+
+private theorem kappa_eq (C : Cert) [NeZero C.p] (wi : ℕ) (hwi : wi < C.weights.length) (t : ℕ) :
+    kappa C wi t = kz C (C.weights.getD wi (0, 0, 0)).2.1 (C.weights.getD wi (0, 0, 0)).2.2 (pt C.p t) := by
+  have hp : 0 < C.p := Nat.pos_of_ne_zero (NeZero.ne C.p)
+  have hw : (wtab C).getD wi (0, []) = ((C.weights.getD wi (0, 0, 0)).2.1,
+      (List.range C.p).map (autoc C (C.weights.getD wi (0, 0, 0)).2.1 (C.weights.getD wi (0, 0, 0)).2.2)) := by
+    rw [getD_of_lt _ _ (by simpa [wtab] using hwi), getD_of_lt _ _ hwi]
+    simp [wtab]
+  generalize C.weights.getD wi (0, 0, 0) = W at hw
+  obtain ⟨c0, u, fp⟩ := W
+  simp only [kappa, kap, hw]
+  have hidx : cond (Nat.beq u 0) 0 (dotP C.p u t) < C.p := by
+    cases Nat.beq u 0
+    · rw [dotP_eq]; exact ZMod.val_lt _
+    · exact hp
+  rw [getD_of_lt _ _ (by simpa using hidx), List.getElem_map, List.getElem_range]
+  unfold autoc kz
+  by_cases hu : u = 0
+  · subst hu; simp [fz, ZMod.val_zero]
+  · have hb : Nat.beq u 0 = false := Bool.eq_false_iff.2 fun h' => hu (Nat.eq_of_beq_eq_true h')
+    simp only [hb, cond_false, hu, if_false]
+    rw [foldl_iadd, zero_add, lsum_range, sum_range_zmod]
+    show (C.p : ℤ) * _ = _
+    congr 1
+    refine Finset.sum_congr rfl fun j _ => ?_
+    simp only [fz, dotP_eq, ZMod.val_add, Nat.add_eq]
+    rfl
+
+private theorem sigma_eq (C : Cert) [NeZero C.p] (wi : ℕ) (z : V C.p) :
+    sigma C wi = (C.p : ℤ) * ∑ j : ZMod C.p,
+      gw C (C.weights.getD wi (0, 0, 0)).2.1 (C.weights.getD wi (0, 0, 0)).2.2 j z := by
+  unfold sigma
+  generalize C.weights.getD wi (0, 0, 0) = W
+  obtain ⟨c0, u, fp⟩ := W
+  by_cases hu : u = 0
+  · subst hu
+    simp [gw, fz, ZMod.val_zero, Finset.sum_const, Finset.card_univ, ZMod.card]
+    ring
+  · have hb : Nat.beq u 0 = false := Bool.eq_false_iff.2 fun h' => hu (Nat.eq_of_beq_eq_true h')
+    simp only [hb, cond_false, gw, hu, if_false]
+    rw [foldl_iadd, zero_add, lsum_range, sum_range_zmod]
+    show (C.p : ℤ) * _ = _
+    congr 1
+    exact (Fintype.sum_equiv (Equiv.addRight (dz u z)) (fun x => fz C fp (x + dz u z)) (fz C fp)
+      fun x => rfl).symm
+
+/-- **The autocorrelation**: `p · Σ_j g_j(z) g_j(z') = κ(z' − z)`. -/
+private theorem sum_gw_mul (C : Cert) [NeZero C.p] (u fp : ℕ) (z z' : V C.p) :
+    (C.p : ℤ) * ∑ j : ZMod C.p, gw C u fp j z * gw C u fp j z' = kz C u fp (z' - z) := by
+  unfold gw kz
+  by_cases hu : u = 0
+  · subst hu
+    simp [Finset.sum_const, Finset.card_univ, ZMod.card]; ring
+  · simp only [hu, if_false]
+    congr 1
+    rw [← dz_sub]
+    refine Fintype.sum_equiv (Equiv.addRight (dz u z)) _ _ fun j => ?_
+    simp only [Equiv.coe_addRight]
+    congr 2; ring
+
+/-- The factor of a monomial at one translate: `Π_{y ∈ A} φ(γ(y + z))`. -/
+private noncomputable def Psi {p : ℕ} (φ : V p → ℝ) (γ : V p × V p × Bool) (A : List ℕ) (z : V p) : ℝ :=
+  (A.map fun y => φ (act γ (pt p y + z))).prod
+
+private theorem act_trans {p : ℕ} (z w : V p) : act (z, ((1 : ZMod p), (0 : ZMod p)), false) w = w + z := by
+  simp [act, cmul, cj]
+
+private theorem trans_mem {p : ℕ} [NeZero p] (z : V p) : (z, ((1 : ZMod p), (0 : ZMod p)), false) ∈ affs p := by
+  rw [mem_affs]; simp
+
+/-- **(S1)** a translate's factor averages to the moment. -/
+private theorem sum_Psi (p : ℕ) [NeZero p] (φ : V p → ℝ) (A : List ℕ) (z : V p) :
+    ∑ γ ∈ affs p, Psi φ γ A z = Ym p φ A := by
+  rw [Ym_eq, ← Yv_map_act φ (trans_mem z)]
+  unfold Yv Psi
+  refine Finset.sum_congr rfl fun γ _ => ?_
+  simp only [List.map_map, Function.comp_def, act_trans]
+
+/-- **(S2)** two translates' factors average to the moment of the pair, moved by the first translate. -/
+private theorem sum_Psi_mul (p : ℕ) [NeZero p] (φ : V p → ℝ) (A A' : List ℕ) (z z' : V p) :
+    ∑ γ ∈ affs p, Psi φ γ A z * Psi φ γ A' z' = Yv p φ (A.map (pt p) ++ (A'.map (pt p)).map (· + (z' - z))) := by
+  rw [← Yv_map_act φ (trans_mem z)]
+  unfold Yv Psi
+  refine Finset.sum_congr rfl fun γ _ => ?_
+  simp only [List.map_append, List.map_map, Function.comp_def, act_trans, List.prod_append]
+  congr 3; funext y; congr 2; ring
+
+private theorem Ym_pair (p : ℕ) [NeZero p] (φ : V p → ℝ) (A A' : List ℕ) (t : ℕ) :
+    Ym p φ (A ++ A'.map fun x => addP p x t) = Yv p φ (A.map (pt p) ++ (A'.map (pt p)).map (· + pt p t)) := by
+  rw [Ym_eq]; simp only [List.map_append, List.map_map, Function.comp_def, pt_addP]
+
 /-- A block's terms at the moments, over a list of representative monomials: for each of its weights
 `R₀₀ c² Y([]) + Σ_a 2 R₀,₁₊ₐ c σ Y(a) + Σ_{a,a'} R₁₊ₐ,₁₊ₐ' Σ_t κ(t) Y(a ∪ (a' + t))` (`SOUNDNESS.md` § 4). -/
 private noncomputable def blockT (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (b : Blk) (reps : List (List ℕ)) : ℝ :=
@@ -1104,12 +1259,183 @@ private noncomputable def blockT (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (b
       ∑ t ∈ Finset.range (C.p * C.p),
         (kappa C wi t : ℝ) * Ym C.p φ (reps.getD a [] ++ (reps.getD a' []).map fun x => addP C.p x t)).sum
 
+/-- A quadratic form on a vector `(c, w₀, …, w_{N−1}, 0, …)`. -/
+private theorem bvec_quad (tri : List (List ℤ)) (m N : ℕ) (c : ℝ) (w : ℕ → ℝ) (hm : N + 1 ≤ m) :
+    ∑ i ∈ Finset.range m, ∑ l ∈ Finset.range m, (triGet tri i l : ℝ) *
+      (if i = 0 then c else if i - 1 < N then w (i - 1) else 0) *
+      (if l = 0 then c else if l - 1 < N then w (l - 1) else 0) =
+    (triGet tri 0 0 : ℝ) * c ^ 2 + ∑ a ∈ Finset.range N, 2 * (triGet tri 0 (1 + a) : ℝ) * c * w a +
+      ∑ a ∈ Finset.range N, ∑ a' ∈ Finset.range N, (triGet tri (1 + a) (1 + a') : ℝ) * (w a * w a') := by
+  let v : ℕ → ℝ := fun k => if k = 0 then c else if k - 1 < N then w (k - 1) else 0
+  let v' : ℕ → ℝ := fun k => if k = 0 then c else w (k - 1)
+  have hv0 : ∀ k, N + 1 ≤ k → v k = 0 := fun k hk => by
+    simp only [v]; rw [if_neg (by omega), if_neg (by omega)]
+  have hvv : ∀ k ∈ Finset.range (N + 1), v k = v' k := fun k hk => by
+    have := Finset.mem_range.1 hk
+    simp only [v, v']; split_ifs <;> first | rfl | omega
+  have hsub := Finset.range_subset_range.2 hm
+  show ∑ i ∈ Finset.range m, ∑ l ∈ Finset.range m, (triGet tri i l : ℝ) * v i * v l = _
+  rw [← Finset.sum_subset hsub fun i _ hi => Finset.sum_eq_zero fun l _ => by
+    rw [hv0 i (by simpa using hi)]; ring]
+  rw [Finset.sum_congr rfl fun i _ => (Finset.sum_subset hsub fun l _ hl => by
+    rw [hv0 l (by simpa using hl)]; ring).symm]
+  rw [Finset.sum_congr rfl fun i hi => Finset.sum_congr rfl fun l hl => by rw [hvv i hi, hvv l hl]]
+  simp only [Finset.sum_range_succ', v', if_true, Nat.add_one_ne_zero, if_false, Nat.add_sub_cancel]
+  rw [Finset.sum_add_distrib]
+  have e1 : ∑ a ∈ Finset.range N, (triGet tri (a + 1) 0 : ℝ) * w a * c +
+      ∑ a ∈ Finset.range N, (triGet tri 0 (a + 1) : ℝ) * c * w a =
+      ∑ a ∈ Finset.range N, 2 * (triGet tri 0 (1 + a) : ℝ) * c * w a := by
+    rw [← Finset.sum_add_distrib]
+    refine Finset.sum_congr rfl fun a _ => ?_
+    rw [triGet_symm tri (a + 1) 0, add_comm a 1]; ring
+  have e2 : ∑ a ∈ Finset.range N, ∑ a' ∈ Finset.range N, (triGet tri (a + 1) (a' + 1) : ℝ) * w a * w a' =
+      ∑ a ∈ Finset.range N, ∑ a' ∈ Finset.range N, (triGet tri (1 + a) (1 + a') : ℝ) * (w a * w a') :=
+    Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun a' _ => by rw [add_comm a 1, add_comm a' 1]; ring
+  rw [← e1, ← e2]; ring
+
+/-- Sums over the pairs `(γ, j)`, expanded. -/
+private theorem quad_expand {ι : Type*} (X : Finset ι) (N : ℕ) (K : ℝ) (L : ℕ → ℝ) (M : ℕ → ℕ → ℝ) (f : ι → ℕ → ℝ) :
+    ∑ x ∈ X, (K + ∑ a ∈ Finset.range N, L a * f x a + ∑ a ∈ Finset.range N, ∑ a' ∈ Finset.range N,
+      M a a' * (f x a * f x a')) =
+    X.card * K + ∑ a ∈ Finset.range N, L a * ∑ x ∈ X, f x a +
+      ∑ a ∈ Finset.range N, ∑ a' ∈ Finset.range N, M a a' * ∑ x ∈ X, f x a * f x a' := by
+  rw [Finset.sum_add_distrib, Finset.sum_add_distrib, Finset.sum_const, nsmul_eq_mul]
+  congr 2
+  · rw [Finset.sum_comm]; exact Finset.sum_congr rfl fun a _ => (Finset.mul_sum _ _ _).symm
+  · rw [Finset.sum_comm]
+    refine Finset.sum_congr rfl fun a _ => ?_
+    rw [Finset.sum_comm]
+    exact Finset.sum_congr rfl fun a' _ => (Finset.mul_sum _ _ _).symm
+
+/-- The virtual coordinate `w_a(γ, j) = Σ_z g_j(z) Ψ_γ(A_a, z)`. -/
+private noncomputable def wv (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (u fp : ℕ) (A : List ℕ)
+    (x : (V C.p × V C.p × Bool) × ZMod C.p) : ℝ :=
+  ∑ z : V C.p, (gw C u fp x.2 z : ℝ) * Psi φ x.1 A z
+
+private theorem card_V (p : ℕ) [NeZero p] : ((Finset.univ : Finset (V p)).card : ℝ) = (p * p : ℕ) := by
+  simp [Finset.card_univ, ZMod.card]
+
+/-- **(H1)** the linear coordinate, summed: `p · Σ w_a = n · σ · Y(A_a)`. -/
+private theorem sum_wv (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (wi : ℕ) (A : List ℕ) :
+    (C.p : ℝ) * ∑ x ∈ affs C.p ×ˢ (Finset.univ : Finset (ZMod C.p)),
+      wv C φ (C.weights.getD wi (0, 0, 0)).2.1 (C.weights.getD wi (0, 0, 0)).2.2 A x =
+    ((C.p * C.p : ℕ) : ℝ) * (sigma C wi : ℝ) * Ym C.p φ A := by
+  set u := (C.weights.getD wi (0, 0, 0)).2.1
+  set fp := (C.weights.getD wi (0, 0, 0)).2.2
+  unfold wv
+  rw [Finset.sum_comm, Finset.mul_sum]
+  have : ∀ z : V C.p, (C.p : ℝ) * ∑ x ∈ affs C.p ×ˢ (Finset.univ : Finset (ZMod C.p)),
+      (gw C u fp x.2 z : ℝ) * Psi φ x.1 A z = (sigma C wi : ℝ) * Ym C.p φ A := fun z => by
+    rw [Finset.sum_product, Finset.sum_comm, ← sum_Psi C.p φ A z]
+    simp only [← Finset.mul_sum]
+    rw [← Finset.sum_mul, ← mul_assoc]
+    congr 1
+    rw [sigma_eq C wi z]; push_cast; rfl
+  rw [Finset.sum_congr rfl fun z _ => this z, Finset.sum_const, nsmul_eq_mul, card_V]; ring
+
+/-- **(H2)** the quadratic coordinate, summed: `p · Σ w_a w_a' = n · Σ_t κ(t) Y(A_a ∪ (A_a' + t))`. -/
+private theorem sum_wv_mul (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (wi : ℕ) (hwi : wi < C.weights.length)
+    (A A' : List ℕ) :
+    (C.p : ℝ) * ∑ x ∈ affs C.p ×ˢ (Finset.univ : Finset (ZMod C.p)),
+      wv C φ (C.weights.getD wi (0, 0, 0)).2.1 (C.weights.getD wi (0, 0, 0)).2.2 A x *
+      wv C φ (C.weights.getD wi (0, 0, 0)).2.1 (C.weights.getD wi (0, 0, 0)).2.2 A' x =
+    ((C.p * C.p : ℕ) : ℝ) * ∑ t ∈ Finset.range (C.p * C.p),
+      (kappa C wi t : ℝ) * Ym C.p φ (A ++ A'.map fun x => addP C.p x t) := by
+  set u := (C.weights.getD wi (0, 0, 0)).2.1
+  set fp := (C.weights.getD wi (0, 0, 0)).2.2
+  unfold wv
+  simp only [Finset.sum_mul_sum]
+  rw [Finset.sum_comm]
+  have inner : ∀ z z' : V C.p, (C.p : ℝ) * ∑ x ∈ affs C.p ×ˢ (Finset.univ : Finset (ZMod C.p)),
+      (gw C u fp x.2 z : ℝ) * Psi φ x.1 A z * ((gw C u fp x.2 z' : ℝ) * Psi φ x.1 A' z') =
+      (kz C u fp (z' - z) : ℝ) * Yv C.p φ (A.map (pt C.p) ++ (A'.map (pt C.p)).map (· + (z' - z))) := fun z z' => by
+    rw [Finset.sum_product, Finset.sum_comm, ← sum_Psi_mul C.p φ A A' z z', ← sum_gw_mul C u fp z z']
+    push_cast
+    rw [mul_assoc, Finset.sum_mul]
+    congr 1
+    refine Finset.sum_congr rfl fun j _ => ?_
+    rw [Finset.mul_sum]
+    refine Finset.sum_congr rfl fun γ _ => ?_
+    ring
+  have hz : ∀ z : V C.p, (C.p : ℝ) * ∑ x ∈ affs C.p ×ˢ (Finset.univ : Finset (ZMod C.p)), ∑ z' : V C.p,
+      (gw C u fp x.2 z : ℝ) * Psi φ x.1 A z * ((gw C u fp x.2 z' : ℝ) * Psi φ x.1 A' z') =
+      ∑ w : V C.p, (kz C u fp w : ℝ) * Yv C.p φ (A.map (pt C.p) ++ (A'.map (pt C.p)).map (· + w)) := fun z => by
+    rw [Finset.sum_comm, Finset.mul_sum, Finset.sum_congr rfl fun z' _ => inner z z']
+    exact Fintype.sum_equiv (Equiv.subRight z) _ _ fun z' => rfl
+  rw [Finset.mul_sum, Finset.sum_congr rfl fun z _ => hz z, Finset.sum_const, nsmul_eq_mul, card_V]
+  congr 1
+  rw [← sum_codes C.p]
+  refine Finset.sum_congr rfl fun t _ => ?_
+  rw [kappa_eq C wi hwi t, Ym_pair]
+
+/-- One weight's terms are non-negative. -/
+private theorem weight_nonneg (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (b : Blk) (reps : List (List ℕ))
+    (hpsd : PSDN b.tri b.m) (hm : reps.length + 1 ≤ b.m) (wi : ℕ) (hwi : wi < C.weights.length) :
+    0 ≤ (triGet b.tri 0 0 : ℝ) * (cval C wi : ℝ) ^ 2 * Ym C.p φ [] +
+    ∑ a ∈ Finset.range reps.length,
+      2 * (triGet b.tri 0 (1 + a) : ℝ) * (cval C wi : ℝ) * (sigma C wi : ℝ) * Ym C.p φ (reps.getD a []) +
+    ∑ a ∈ Finset.range reps.length, ∑ a' ∈ Finset.range reps.length, (triGet b.tri (1 + a) (1 + a') : ℝ) *
+      ∑ t ∈ Finset.range (C.p * C.p),
+        (kappa C wi t : ℝ) * Ym C.p φ (reps.getD a [] ++ (reps.getD a' []).map fun x => addP C.p x t) := by
+  set u := (C.weights.getD wi (0, 0, 0)).2.1
+  set fp := (C.weights.getD wi (0, 0, 0)).2.2
+  set c := (cval C wi : ℝ)
+  set N := reps.length
+  let X := affs C.p ×ˢ (Finset.univ : Finset (ZMod C.p))
+  let f : (V C.p × V C.p × Bool) × ZMod C.p → ℕ → ℝ := fun x a => wv C φ u fp (reps.getD a []) x
+  have hQ : ∀ x ∈ X, 0 ≤ (triGet b.tri 0 0 : ℝ) * c ^ 2 +
+      ∑ a ∈ Finset.range N, 2 * (triGet b.tri 0 (1 + a) : ℝ) * c * f x a +
+      ∑ a ∈ Finset.range N, ∑ a' ∈ Finset.range N, (triGet b.tri (1 + a) (1 + a') : ℝ) * (f x a * f x a') :=
+    fun x _ => by
+      have := hpsd fun k => if k = 0 then c else if k - 1 < N then f x (k - 1) else 0
+      rwa [bvec_quad b.tri b.m N c (f x) hm] at this
+  have hsum := Finset.sum_nonneg hQ
+  rw [quad_expand X N _ (fun a => 2 * (triGet b.tri 0 (1 + a) : ℝ) * c) (fun a a' => (triGet b.tri (1 + a) (1 + a') : ℝ)) f] at hsum
+  have hp : (0 : ℝ) < C.p := by exact_mod_cast Nat.pos_of_ne_zero (NeZero.ne C.p)
+  have hX : (X.card : ℝ) = gsize C.p * C.p := by
+    simp [X, gsize, Finset.card_product, Finset.card_univ, ZMod.card]
+  have key : (C.p : ℝ) * ((X.card : ℝ) * ((triGet b.tri 0 0 : ℝ) * c ^ 2) +
+      ∑ a ∈ Finset.range N, 2 * (triGet b.tri 0 (1 + a) : ℝ) * c * ∑ x ∈ X, f x a +
+      ∑ a ∈ Finset.range N, ∑ a' ∈ Finset.range N, (triGet b.tri (1 + a) (1 + a') : ℝ) * ∑ x ∈ X, f x a * f x a') =
+      ((C.p * C.p : ℕ) : ℝ) * ((triGet b.tri 0 0 : ℝ) * c ^ 2 * Ym C.p φ [] +
+    ∑ a ∈ Finset.range N,
+      2 * (triGet b.tri 0 (1 + a) : ℝ) * c * (sigma C wi : ℝ) * Ym C.p φ (reps.getD a []) +
+    ∑ a ∈ Finset.range N, ∑ a' ∈ Finset.range N, (triGet b.tri (1 + a) (1 + a') : ℝ) *
+      ∑ t ∈ Finset.range (C.p * C.p),
+        (kappa C wi t : ℝ) * Ym C.p φ (reps.getD a [] ++ (reps.getD a' []).map fun x => addP C.p x t)) := by
+    rw [mul_add, mul_add, mul_add, mul_add, Finset.mul_sum, Finset.mul_sum, Finset.mul_sum, Finset.mul_sum]
+    congr 1; congr 1
+    · rw [hX, Ym_nil]; push_cast; ring
+    · refine Finset.sum_congr rfl fun a _ => ?_
+      have := sum_wv C φ wi (reps.getD a [])
+      calc (C.p : ℝ) * (2 * (triGet b.tri 0 (1 + a) : ℝ) * c * ∑ x ∈ X, f x a) =
+          2 * (triGet b.tri 0 (1 + a) : ℝ) * c * ((C.p : ℝ) * ∑ x ∈ X, f x a) := by ring
+        _ = _ := by rw [this]; ring
+    · refine Finset.sum_congr rfl fun a _ => ?_
+      rw [Finset.mul_sum, Finset.mul_sum]
+      refine Finset.sum_congr rfl fun a' _ => ?_
+      have := sum_wv_mul C φ wi hwi (reps.getD a []) (reps.getD a' [])
+      calc (C.p : ℝ) * ((triGet b.tri (1 + a) (1 + a') : ℝ) * ∑ x ∈ X, f x a * f x a') =
+          (triGet b.tri (1 + a) (1 + a') : ℝ) * ((C.p : ℝ) * ∑ x ∈ X, f x a * f x a') := by ring
+        _ = _ := by rw [this]; ring
+  have hn : (0 : ℝ) < ((C.p * C.p : ℕ) : ℝ) := by
+    have := Nat.pos_of_ne_zero (NeZero.ne C.p); exact_mod_cast Nat.mul_pos this this
+  have h2 := mul_nonneg hp.le hsum
+  rw [key] at h2
+  by_contra hneg
+  push Not at hneg
+  have := mul_neg_of_pos_of_neg hn hneg
+  linarith
+
 /-- **Leaf L2** (K2g, `SOUNDNESS.md` M6): a block whose matrix is positive semidefinite contributes a non-negative
 number, for any `φ` — `p·T = Σ_j Σ_γ vᵀ R v` with `v₀ = c`, `v₁₊ₐ = Σ_x f(j + ⟨u, x⟩) Π_{a}(φ ∘ γ ∘ (· + x))`. -/
 private theorem blockT_nonneg (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (b : Blk) (reps : List (List ℕ))
     (hpsd : PSDN b.tri b.m) (hm : reps.length + 1 ≤ b.m) (hw : ∀ wi ∈ b.wts, wi < C.weights.length) :
     0 ≤ blockT C φ b reps := by
-  sorry
+  unfold blockT
+  refine List.sum_nonneg fun x hx => ?_
+  obtain ⟨wi, hwi, rfl⟩ := List.mem_map.1 hx
+  exact weight_nonneg C φ b reps hpsd hm wi (hw wi hwi)
 
 /-- **Leaf L3** (K2h): the times-1 families are the blocks' terms — the orbit rows are phase 1's (`orowsOK`), each
 pair's transporter moves its term onto its orbit's representative, `R` is symmetric and `κ` even. -/

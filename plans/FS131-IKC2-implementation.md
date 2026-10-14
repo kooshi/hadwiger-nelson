@@ -55,3 +55,23 @@ in `Arith/FibreCertSound` § Leaf L1, every helper private:
 
 What the proof reads from the check: `|mrows| = m`; each row below `2^(wB(m+1))`; every digit below `2^wm`;
 `(m+1)·4^wm < 2^wB`; and each row's dominance. It does not read the tag digit's value, `Cm`'s value or `s`'s beyond `s > 0`.
+
+## Stage 3 — SAVED: L2 `blockT_nonneg` proved; the price re-made from the first two leaves
+
+No `sorry` in L2; two left (L3, L4). In `Arith/FibreCertSound`:
+
+* **shared with L3 and L4** (§ Codes, weights and moments, about 155 lines): `sum_codes` (a sum over the codes below `p²`
+  is a sum over `V`), `sum_range_zmod`, `dotP_eq` (`dotP p u t = ⟨pt u, pt t⟩.val`), the weights read on points (`fz`,
+  `gw` the virtual weight `x ↦ f(j + ⟨u, x⟩)`, or `f(0)` at `u = 0`; `kz`), `kappa_eq` (`κ(t) = kz(pt t)` for a weight in
+  range), `sigma_eq` (`σ = p·Σ_j g_j(z)` at every `z`), `sum_gw_mul` (`p·Σ_j g_j(z) g_j(z') = κ(z' − z)`: the shift
+  `j ↦ j + ⟨u, z⟩`, no primality), `Psi`, `sum_Psi` and `sum_Psi_mul` (translation invariance), `Ym_pair`;
+* **L2 itself** (about 180 lines): `bvec_quad` (the form on `(c, w₀, …, w_{N−1}, 0, …)`, `R` symmetric), `quad_expand`,
+  `sum_wv` (`p·Σ_{γ,j} w_a = p²·σ·Y(A_a)`), `sum_wv_mul` (`p·Σ_{γ,j} w_a w_a' = p²·Σ_t κ(t) Y(A_a ∪ (A_a' + t))`: the
+  pair's moment moved by `−z`, then `z' = z + w`), `weight_nonneg` (`p·Σ_{γ,j} vᵀRv = p²·(the weight's terms)`, the left
+  side `≥ 0` by `PSDN`).
+
+**Re-priced from the first two leaves** (LEAN.md: re-price from two leaves, never from a plan's table). L1 took 460
+lines against 250–350, L2 about 335 with the shared part against 200–300: about 1.3–1.5 times the record's figures.
+L3 (priced 350–500) and L4 (150–250) at that ratio are about 500–700 and 150–300 (L4 reuses the shared part), so K2 is
+about **2,200–2,500 lines** in all (600 before this job, 795 now, 650–1,000 left) — inside the planner's 2,000–4,000 and
+above FS131-IKC1's 1,550–2,000. No message owed (the brief's line is 4,000).
