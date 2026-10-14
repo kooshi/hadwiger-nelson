@@ -35,12 +35,100 @@
    "ite_eq_right",
    "if_neg",
    "core renamed `if_neg` to `ite_eq_right` on 2026-07-21 (`LEAN.md`; FS132-I2's patch); at v4.32.0 only the old name, the same statement"
+  ],
+  [
+   682,
+   "e.frequencyLaw (μ.map T) (T z)",
+   "e.frequencyLaw (μ.map (f := T) hT.aemeasurable) (T z)",
+   "the class of plan § 3.3, in a PROOF: `ProbabilityMeasure.map` takes the map's measurability at v4.32.0 (`ProbabilityMeasure.lean:606`); the map here is the automorphism `T`, its measurability `hT` from the statement's context (the same term as the statement's adaptation at line 679)"
+  ],
+  [
+   688,
+   "Measure.map_smul _ O.continuous.aemeasurable",
+   "Measure.map_smul _ _ ⇑O",
+   "at v4.34.1 `Measure.map_smul (c) {μ} {f} (hf : AEMeasurable f μ)`; at v4.32.0 `Measure.map_smul (c) (μ) (f)`, with no measurability and the same conclusion (`Mathlib/MeasureTheory/Measure/Map.lean:127` here, `:142` there)"
+  ],
+  [
+   567,
+   "(f := fun point : ℂ => point + -v) (continuous_id.add_const (-v)).aemeasurable",
+   "(f := fun point : ℂ => point + -v)",
+   "at v4.34.1 `Measure.map_smul (c) {μ} {f} (hf : AEMeasurable f μ)`; at v4.32.0 `Measure.map_smul (c) (μ) (f)`, with no measurability and the same conclusion (`Mathlib/MeasureTheory/Measure/Map.lean:127` here, `:142` there)"
+  ],
+  [
+   510,
+   "exact Measure.map_smul ((μ : Measure G) (e.coset z))⁻¹",
+   "",
+   "at v4.32.0 `Measure.map_smul (c) (μ) (f)` takes no measurability and is a `simp` lemma, so the release's `simp` on the line before closes the goal and the release's `exact Measure.map_smul …` (lines 510–511) would meet none (`No goals to be solved`); the two lines are left empty (`Mathlib/MeasureTheory/Measure/Map.lean:127` here, `:142` at v4.34.1)"
+  ],
+  [
+   511,
+   "(e.measurable_coordinate.comp (measurable_id.div_const z)).aemeasurable",
+   "",
+   "the release's measurability argument to `Measure.map_smul` (line 510), which the lemma does not take at v4.32.0 (`Map.lean:127`)"
   ]
  ],
  "drop_imports": [
   [
    "Mathlib.Order.CompletePartialOrder",
    "the module of `CompletePartialOrder.toSupSet`: under it a supremum in a complete lattice is stored through that instance, and imported here it would move a stored statement of this library that sees the port's imports (`HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff`, INSTANCES-ONLY: `data/fs131/ko1/exposure/OAI158-*`; without it, nothing moves: `OAI158-noCPO-*`); FS131-IE1 left it out of its port for the same reason. The module elaborates without it"
+  ]
+ ],
+ "adaptations": [
+  [
+   350,
+   "μ.map (fun point => point + v)",
+   "μ.map (f := fun point => point + v) (measurable_add_const v).aemeasurable",
+   "ADAPTED (plan § 4.3, Amendment 2 of FS131-KO1's brief): at v4.34.1 `ProbabilityMeasure.map ν f` takes the map and no proof; at v4.32.0 `ProbabilityMeasure.map ν {f} (f_aemble : AEMeasurable f ν)` (`Mathlib/MeasureTheory/Measure/ProbabilityMeasure.lean:606`) — the same object for a measurable map. The map here is a translation, its measurability the closed term `(measurable_add_const v).aemeasurable`; no hypothesis or binder added"
+  ],
+  [
+   371,
+   "μ.map O)",
+   "μ.map (f := O) O.continuous.aemeasurable)",
+   "ADAPTED (plan § 4.3, Amendment 2 of FS131-KO1's brief): at v4.34.1 `ProbabilityMeasure.map ν f` takes the map and no proof; at v4.32.0 `ProbabilityMeasure.map ν {f} (f_aemble : AEMeasurable f ν)` (`Mathlib/MeasureTheory/Measure/ProbabilityMeasure.lean:606`) — the same object for a measurable map. The map here is the linear isometry `O` of the statement, its measurability the closed term `O.continuous.aemeasurable`; no hypothesis or binder added"
+  ],
+  [
+   560,
+   "(e.frequencyLaw μ z).map (fun point => point + -v)",
+   "(e.frequencyLaw μ z).map (f := fun point => point + -v) (measurable_add_const (-v)).aemeasurable",
+   "ADAPTED (plan § 4.3, Amendment 2 of FS131-KO1's brief): at v4.34.1 `ProbabilityMeasure.map ν f` takes the map and no proof; at v4.32.0 `ProbabilityMeasure.map ν {f} (f_aemble : AEMeasurable f ν)` (`Mathlib/MeasureTheory/Measure/ProbabilityMeasure.lean:606`) — the same object for a measurable map. The map here is a translation, its measurability the closed term `(measurable_add_const (-v)).aemeasurable`; no hypothesis or binder added"
+  ],
+  [
+   679,
+   "e.frequencyLaw (μ.map T) (T z)",
+   "e.frequencyLaw (μ.map (f := T) hT.aemeasurable) (T z)",
+   "ADAPTED (plan § 4.3, Amendment 2 of FS131-KO1's brief): at v4.34.1 `ProbabilityMeasure.map ν f` takes the map and no proof; at v4.32.0 `ProbabilityMeasure.map ν {f} (f_aemble : AEMeasurable f ν)` (`Mathlib/MeasureTheory/Measure/ProbabilityMeasure.lean:606`) — the same object for a measurable map. The map here is the automorphism `T`, its measurability the statement's own hypothesis `hT : Measurable T` (the section's variable, `include hT in` at the release); no hypothesis or binder added"
+  ],
+  [
+   680,
+   "(e.frequencyLaw μ z).map O",
+   "(e.frequencyLaw μ z).map (f := O) O.continuous.aemeasurable",
+   "ADAPTED (plan § 4.3, Amendment 2 of FS131-KO1's brief): at v4.34.1 `ProbabilityMeasure.map ν f` takes the map and no proof; at v4.32.0 `ProbabilityMeasure.map ν {f} (f_aemble : AEMeasurable f ν)` (`Mathlib/MeasureTheory/Measure/ProbabilityMeasure.lean:606`) — the same object for a measurable map. The map here is the linear isometry `O`, its measurability the closed term `O.continuous.aemeasurable`; no hypothesis or binder added"
+  ],
+  [
+   694,
+   "e.center (μ.map T) (T z)",
+   "e.center (μ.map (f := T) hT.aemeasurable) (T z)",
+   "ADAPTED (plan § 4.3, Amendment 2 of FS131-KO1's brief): at v4.34.1 `ProbabilityMeasure.map ν f` takes the map and no proof; at v4.32.0 `ProbabilityMeasure.map ν {f} (f_aemble : AEMeasurable f ν)` (`Mathlib/MeasureTheory/Measure/ProbabilityMeasure.lean:606`) — the same object for a measurable map. The map here is the automorphism `T`, its measurability the statement's own hypothesis `hT : Measurable T` (`include hT in` at the release); no hypothesis or binder added"
+  ],
+  [
+   501,
+   "inferInstance⟩",
+   "MeasureTheory.Measure.isProbabilityMeasure_map (e.measurable_coordinate.comp (measurable_id.div_const z)).aemeasurable⟩",
+   "RULED STATEMENT CHANGE by adaptation (the coordinator's ruling on FS131-IPA1, Amendment 3 of its brief, in ruling (1)'s class), in a DEFINITION: at v4.34.1 `μ.map f` of a probability measure is one by an instance for every `f`, which the release's `inferInstance` finds; at v4.32.0 only through `Measure.isProbabilityMeasure_map (hf : AEMeasurable f μ)` (`Mathlib/MeasureTheory/Measure/Typeclasses/Probability.lean:124`), and `map` of a map that is not almost-everywhere measurable is `0`. The measurability is the release's own term (its `Centers.lean:511`), whose `div_const` uses the section's `[MeasurableMul₂ G] [MeasurableInv G]` (`Centers.lean:426`): exactly those two become binders of `frequencyLaw`'s stored type, and of every declaration whose type names it or `center` (the cascade; checked by the read-back's strip check, verdict RULED)"
+  ]
+ ],
+ "drop_omit": [
+  [
+   578,
+   "part of the ruled cascade of `frequencyLaw` (the coordinator's rulings on FS131-IPA1, Amendments 3 and 4 of its brief): the declaration's statement names `e.center`, which at this pin takes the release's own section variables `[MeasurableMul₂ G] [MeasurableInv G]` (`Centers.lean:426`), so the release's `omit` of exactly those two is left out and they become its binders — checked by the read-back's strip check, verdict RULED"
+  ],
+  [
+   600,
+   "part of the ruled cascade of `frequencyLaw` (the coordinator's rulings on FS131-IPA1, Amendments 3 and 4 of its brief): the declaration's statement names `e.center`, which at this pin takes the release's own section variables `[MeasurableMul₂ G] [MeasurableInv G]` (`Centers.lean:426`), so the release's `omit` of exactly those two is left out and they become its binders — checked by the read-back's strip check, verdict RULED"
+  ],
+  [
+   615,
+   "part of the ruled cascade of `frequencyLaw` (the coordinator's rulings on FS131-IPA1, Amendments 3 and 4 of its brief): the declaration's statement names `e.center`, which at this pin takes the release's own section variables `[MeasurableMul₂ G] [MeasurableInv G]` (`Centers.lean:426`), so the release's `omit` of exactly those two is left out and they become its binders — checked by the read-back's strip check, verdict RULED"
   ]
  ]
 }

@@ -1,0 +1,37 @@
+# FS131-IPA1: the constants by which a ported declaration's stored term differs from the release's INSIDE instance
+# arguments and proof arguments only (verdict UP-TO-INSTANCES).  Written by `compare --record`; read before committing.
+AddCommMonoid.toAddMonoid
+AddGroup.toSubNegMonoid
+AddSubmonoidClass.toAddCommMonoid
+CommRing.toNonAssocCommRing
+CommSemiring.toSemiring
+Complex.commRing
+Complex.instAddCommMonoid
+Complex.instCommSemiring
+Complex.instSemiring
+DivisionRing.toDivisionSemiring
+DivisionSemiring.toSemiring
+Field.toSemifield
+IntermediateField.instSubfieldClass
+IntermediateField.toField
+NonAssocCommRing.toNonAssocRing
+Real.commRing
+Real.instCommSemiring
+Real.instField
+Ring.toSemiring
+Semifield.toCommSemiring
+Semifield.toDivisionSemiring
+Semiring.toAddCommMonoid
+Semiring.toNonAssocSemiring
+SubNegMonoid.toAddMonoid
+Subfield.instSubfieldClass
+Subfield.toField
+SubfieldClass.toSubringClass
+SubmonoidClass.toMonoid
+SubringClass.toSubsemiringClass
+SubsemiringClass.toAddSubmonoidClass
+SubsemiringClass.toCommSemiring
+SubsemiringClass.toSubmonoidClass
+§.AlgebraicCayley.asN._proof_1
+§.AlgebraicCayley.asN._proof_11
+§.AlgebraicCayley.asN._proof_2

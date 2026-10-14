@@ -144,3 +144,87 @@ formula alone, with `MemLp := AEStronglyMeasurable f μ ∧ eLpNorm f p μ < ∞
 are equivalent, and so are the `Lp` subgroups; no statement or definition of lanes A–B names `eLpNorm` itself; `MemLp`
 reaches one release statement (`LpMultiplier.mul_memLp`), `Lp` 24. Lanes C and D: a release statement naming
 `eLpNorm` of a function not known to be measurable means another number at the two pins.
+
+## Stage 3 — SAVED: lane B, the factor base — four of five modules elaborate; two generator revisions; the job stops here at its budget
+
+**3.1 State per module** (farm, `data/fs131/ipa1/farm/`; tables `data/fs131/ko1/port/<Module>.json`; `--check` on the
+five: `CHECK OK`, `gen-check-laneB.out`, before RelativeCenters was set aside).
+
+| module | table | elaboration | axioms | read-back |
+|---|---|---|---|---|
+| `OAI158Amenability` | 1 patch: 385 `eventuallyEmptyOrUniv_iff.mp` → `Filter.eventuallyConst_set.mp` (`EventuallyEmptyOrUniv` is a definition new at v4.34.1) | 0, 0 (`-try2`) | clean (below) | in `laneB1` (below) |
+| `OAI158NumberFields` | 2 patches: 483, 487 `isAlgebraic_natCast` → `isAlgebraic_nat` | 0, 0 (`-try1`) | clean | **8 DIFFERENT, not yet read** (below) |
+| `OAI158Selections` | none | 0, 0 (`-try1`) | clean | in `laneB1` |
+| `OAI158Centers` | the trial's 5 renames; 7 adaptations (350, 371, 560, 679, 680, 694 closed-term ADAPTED; **501 the RULED adaptation of `frequencyLaw`**); 5 more patches (567, 682, 688, 510, 511); 3 `drop_omit` (578, 600, 615) | **0 errors, 0 warnings** (`-try5`) | not run | **not run** |
+| `OAI158RelativeCenters` | 4 global instances (427, 520, 525, 529), `drop_imports` | **13 errors, 1 warning** (`-try2`): not finished | — | — |
+
+Axioms of Amenability, NumberFields and Selections (`axioms/AxiomslaneB1.out`): `SUMMARY constants=225 clean=225
+other=0` (the control of stage 2.1 is the same footer). Read-back `laneB1` (195 constants): `READBACK FAILED` —
+**8 DIFFERENT, all in `NumberFields`** (`AlgebraicCayley.minpoly_reverse_eval_ne_zero`, `linearFraction_polynomials`,
+`reciprocal_denominator`, `realLine`, `coeff_polyLinear`, `eval_polyLinear`, `polyLinear_eq_zero_iff`,
+`cayley_annihilation`); the first difference of each sits in a `CommSemiring`/`Semiring` instance path to ℚ
+(`Rat.commSemiring`, `CommSemiring.toSemiring`) at an argument the erased print keeps — the shape of ANTIDIAG, at
+another projection or class parameter. **Not read further; it is the successor's first item, and a ruling's if it is a
+new class.** `compare.out`, `instance-constants.txt` (35, recorded from this failing run: read again before trusting).
+
+**3.2 Rulings received in this stage, and what was done under each.**
+- *Amendment 2 — the indented declaration* (`RelativeCenters.lean:40`, ` theorem finite_uniform_fibers`, the only one
+  in the 31 files): the generator's `KEYWORD` allows leading whitespace, commit **`9138f57b3`**, its own; a self-test
+  partner copies an indented declaration (it fails under the old `KEYWORD`: `gen-fix-selftest-oldkeyword.out`);
+  `--check` on the 14 modules generated so far identical before and after, every file byte-identical
+  (`gen-fix-check-{before,after}.out`, `gen-fix-files-before.sha256`); `--parse-all` passes; self-test **19 plants
+  refused, 3 partners accepted**.
+- *Amendment 3 — `CosetCenter.Embedding.frequencyLaw`* (Centers.lean:496–501, a definition): at the release's pin
+  `frequencyLaw` and `center` take no `[MeasurableMul₂ G] [MeasurableInv G]` (`probes/FrequencyLawRelease.out`); at
+  this pin the proof field `inferInstance` needs the measurability of `d ↦ e.coordinate (d / z)`, which only the
+  section's two instances give. **Ruled (a)**: the adaptation at 501 inserts the release's own term
+  `(e.measurable_coordinate.comp (measurable_id.div_const z)).aemeasurable`, and exactly the two section variables
+  become binders of `frequencyLaw` and of every declaration whose type names it or `center` (the cascade).
+- *Amendment 4 — `drop_omit`*: the cascade met three `omit [MeasurableMul₂ G] [MeasurableInv G] in` lines
+  (`center_mem_coset` 578, `quotient_center` 600, `center_mem_ordinary_iff` 615: `cannot omit referenced section
+  variable`), which no table key reached. The generator's new key `drop_omit: [[line, reason]]`, commit
+  **`666fafdc4`**, its own: refused unless the line is a one-line `omit … in` attached to a copied declaration, refused
+  unused, listed in the header; a plant (an entry on a line that is no omit) refused, a partner (an entry removes exactly
+  that line, on Centers) accepted; `--check` on the 14 modules identical before and after, every file byte-identical
+  (`gen-fix2-*`); `--parse-all` passes; self-test **20 plants refused, 4 partners accepted**. *Its limit:* the plant is
+  refused as an unused entry; the branch that refuses an `… in` line that is not an `omit` (an `include … in`) is not
+  exercised by a plant.
+
+**3.3 The cascade, as far as measured.** Elaboration shows it reaches at least: `frequencyLaw` (the adaptation),
+`center`, and the three theorems whose `omit` was dropped. **The full list is not measured**: it is the read-back of
+Centers (verdict RULED per declaration, with the strip check of `tools/fs131_ipa1_readback_port.py`, whose `RULED`
+table must then list every member) — the successor's second item, owed to the coordinator for lanes C and D (Amendment
+3, condition 3). The other five `omit` lines of Centers (525, 539, 634, 646, 653) stay.
+
+**3.4 RelativeCenters** (generated text kept at `data/fs131/ipa1/pending/OAI158RelativeCenters.lean`, sha256
+`cb82af80…`, *not* under `Proofs/`: it does not elaborate). Its 13 errors, by source line: the `ProbabilityMeasure.map`
+class at 103 (`μ.map (e.center μ)`, whose measurability is to be found in its context) and 382; `eventuallyEmptyOrUniv_iff`
+at 129 (Amenability's patch); `compProd_map_condDistrib` with two arguments at 163, 261, 293, 443 (SmallArcs' patch);
+`condDistrib_comp` taking the map at 189 (ConditionalSelection's patch); `cannot omit referenced section variable` at the
+declaration of line 344 (`centerMap_law_ordinary` region: the cascade reaching RelativeCenters — a `drop_omit` under
+Amendment 4 if its statement names `center`), and the unsolved goals that follow.
+
+**3.5 Re-pricing (Done item 5), from what lanes A and B cost.** Lane A: 22 patches in 5,035 lines (one per ~230 lines),
+all renames or argument changes in proofs, each 3–15 minutes; the real cost was the read-back (one comparator with five
+named classes, ~1.5 h) and four findings needing rulings. Lane B: Centers' adaptation class was as the trial said
+(about ten sites), but **one site needed a binder** and cascaded, and the file needed two generator revisions. For lane C
+(the adaptation class densest, `ProbabilityMeasure` on 91 lines of its files) and lane D: expect the cascade of 3.3 to
+continue wherever `Embedding.center` or `frequencyLaw` is named, more definitions whose proof field is `inferInstance` of
+a `map` (each a RULED-class question, not an adaptation, when the map's measurability needs a section instance), and
+the `eLpNorm`/`MemLp` change (2.4) wherever a statement names `eLpNorm`. Price per lane: C 6–10 h, D 6–10 h with its
+build, against the plan's 4–6 h each; the read-back per lane is now a reuse of this job's comparator (minutes), the
+rulings are not.
+
+**3.6 Every table entry has its reason** (in its table; patches and adaptations with the Mathlib file and line at each
+pin), and **no entry touches a protected declaration**: the generator refuses an adaptation on the two targets and on
+every declaration the density branch shares (`shared_names()`), and was asked to place none there; no lane A or B
+module holds a declaration a statement of ours names (our statements name only `Outside/OAI158`'s and
+`Outside/OAI158Palette`'s copies, which are upstream, not regenerated); the RULED entries (`differenceLaw_probability`,
+`frequencyLaw` and its cascade) are in neither class. *Lane D's check of the last condition, across the whole port, is
+still owed (plan § 4.3).*
+
+**3.7 Not done** (for the successor, in order): (1) read NumberFields' 8 DIFFERENT (3.1); (2) the read-back of Centers,
+with the RULED list of the cascade measured and the ADAPTED strip check for its six closed-term sites (the comparator's
+`ADAPTED` table is empty: each site is `ProbabilityMeasure.map` with 7 arguments here, the 7th inserted) and its
+planted control, written as `tools/fs131_ipa1_strip.py` if the plan's name is wanted; (3) RelativeCenters' entries
+(3.4); (4) axioms and level one for Centers and RelativeCenters; (5) the pricing dump, not started.

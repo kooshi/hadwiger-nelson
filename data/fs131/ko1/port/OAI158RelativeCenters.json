@@ -1,0 +1,26 @@
+{
+ "global_instances": [
+  [
+   427,
+   "global: on a type built from the release's own definition `centerKernel` (a `noncomputable def`, `RelativeCenters.lean:419`): `IsMarkovKernel (centerKernel κ)` is found only by a search on that term"
+  ],
+  [
+   520,
+   "global: on a type built from the release's own definition: `D := PontryaginDual DiscreteE` (`Basic.lean:48`), `DiscreteE` the release's `def`; as `Basic.lean:62`'s instance on `D`, global by the trial's table"
+  ],
+  [
+   525,
+   "global: on a type built from the release's own definitions: `MulDistribMulAction K D`, `K` the release's subgroup of `Circle` (`Basic.lean:11`) and `D` above; as `Basic.lean:234`'s `MulAction K D`, global by the trial's table"
+  ],
+  [
+   529,
+   "global: on a type built from the release's own definitions: `MeasurableConstSMul K D`, `K` and `D` as above"
+  ]
+ ],
+ "drop_imports": [
+  [
+   "Mathlib.Order.CompletePartialOrder",
+   "the module of `CompletePartialOrder.toSupSet`: under it a supremum in a complete lattice is stored through that instance, and imported here it would move a stored statement of this library that sees the port's imports (`HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff`, INSTANCES-ONLY: `data/fs131/ko1/exposure/OAI158-*`; without it, nothing moves: `OAI158-noCPO-*`); FS131-IE1 left it out of its port for the same reason. The module elaborates without it"
+  ]
+ ]
+}
