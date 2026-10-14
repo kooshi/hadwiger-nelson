@@ -217,6 +217,9 @@ import Proofs.HadwigerNelson.Rigidity.Herglotz
 import Proofs.HadwigerNelson.Rigidity.InvariantMeasure
 import Proofs.HadwigerNelson.Rigidity.ContinuityGroup
 import Proofs.HadwigerNelson.Rigidity.BochnerTau
+import Proofs.HadwigerNelson.Rigidity.SpectralSubspace
+import Proofs.HadwigerNelson.Rigidity.TraceSplit
+import Proofs.HadwigerNelson.Rigidity.APlus
 import Proofs.HadwigerNelson.Rigidity.ClassRatio
 import Proofs.HadwigerNelson.Plane.OneAvoidingDensity
 import Proofs.HadwigerNelson.Plane.WindowDensity
@@ -230,6 +233,7 @@ import Proofs.HadwigerNelson.Rigidity.CountDescent
 import Proofs.HadwigerNelson.Rigidity.SubgroupHaar
 import Proofs.HadwigerNelson.Rigidity.Duality
 import Proofs.HadwigerNelson.Rigidity.DualConnected
+import Proofs.HadwigerNelson.Rigidity.AdmissiblePrime
 import Proofs.HadwigerNelson.Rigidity.UnitCircle
 import Proofs.HadwigerNelson.Rigidity.Pieces
 import Proofs.HadwigerNelson.Rigidity.EntropySplitMax

@@ -1,0 +1,2 @@
+# item 873 ruling 1: private removed (archHom and eventually_archTop stay private: the route reads neither)
+HadwigerNelson.Rigidity.mem_nhds_profTop

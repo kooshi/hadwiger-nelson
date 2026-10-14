@@ -1,0 +1,18 @@
+records: 121 (printer count 121); CLEAN 112; OPEN-LEAF 5
+  APlus: 30 records, 25 CLEAN
+  ContinuityGroup: 28 records, 28 CLEAN
+  SpectralSubspace: 40 records, 39 CLEAN
+  TraceSplit: 23 records, 20 CLEAN
+  OPEN-LEAF APlus HadwigerNelson.Rigidity.aplus_model: from ['HadwigerNelson.Rigidity.exists_rotInvariant_of_shiftInvariant', 'HadwigerNelson.Rigidity.exists_shiftInvariant_on']
+  OPEN-LEAF APlus HadwigerNelson.Rigidity.equalAtUnits_of_not_neg: from ['HadwigerNelson.Rigidity.bochnerOn_tauPrime']
+  OPEN-LEAF APlus HadwigerNelson.Rigidity.factorLaw_trace_null: from ['HadwigerNelson.Rigidity.bochnerOn_tauPrime']
+  OPEN-LEAF APlus HadwigerNelson.Rigidity.nonempty_invariantColouring_bot: from ['HadwigerNelson.Rigidity.exists_rotInvariant_of_shiftInvariant', 'HadwigerNelson.Rigidity.exists_shiftInvariant_on']
+  OPEN-LEAF TraceSplit HadwigerNelson.Rigidity.setIntegral_compl_TA_re_nonpos: from ['HadwigerNelson.Rigidity.bochnerOn_tauPrime']
+planted record: reported, resting on HadwigerNelson.Rigidity.positive_entropy_rigidity
+info: bochnerOn_tauPrime ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx'], sorry from ['HadwigerNelson.Rigidity.bochnerOn_tauPrime']
+info: invariantMeasureOnClosed_of_countable ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx'], sorry from ['HadwigerNelson.Rigidity.exists_rotInvariant_of_shiftInvariant', 'HadwigerNelson.Rigidity.exists_shiftInvariant_on']
+AXIOM HadwigerNelson.Rigidity.aPlusOfR88: ['HadwigerNelson.Rigidity.positive_entropy_rigidity', 'sorryAx']
+AXIOM HadwigerNelson.Rigidity.gram_sum_eq: ['HadwigerNelson.Rigidity.planted_axiom']
+SORRY-MINE HadwigerNelson.Rigidity.setIntegral_compl_TA_re: from ['HadwigerNelson.Rigidity.exists_spectral_vector'], in a module this job writes
+NOT-CLEAN HadwigerNelson.Rigidity.trace_decomp: rests on ['HadwigerNelson.Rigidity.bochnerOn_tauPrime']
+CONTROL: 4 of 4 planted faults reported — the check can fail

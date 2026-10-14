@@ -1,0 +1,43 @@
+data/fs131/ila1/work/AdmissiblePrime.lean:357:8: error: Type mismatch
+  Ideal.mul_mem_left (P ^ 2) ?m.378 hz
+has type
+  ?m.378 * z ∈ P ^ 2
+but is expected to have type
+  z ^ (0 + n + 1) ∈ P ^ 1 * P
+data/fs131/ila1/work/AdmissiblePrime.lean:382:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ((Algebra.norm ℤ) ?r).natAbs
+in the target expression
+  padicValNat p (Ideal.absNorm (Ideal.span {z ^ m - ↑p * (conjO F) z ^ m})) = 1
+
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+p : ℕ
+hp : Fact (Nat.Prime p)
+φ : 𝓞 ↥(fieldI F) →+* ZMod p
+z : 𝓞 ↥(fieldI F)
+k : ℕ
+hk : 0 < k
+P : Ideal (𝓞 ↥(fieldI F)) := RingHom.ker φ
+hsq : ↑p ∉ P ^ 2
+hz : z ∈ P ^ 2
+hzQ : ∀ (Q : Ideal (𝓞 ↥(fieldI F))), Q.IsMaximal → ↑p ∈ Q → Q ≠ P → z ∉ Q
+hzb : (conjO F) z ∉ P
+hPdef : P = RingHom.ker φ
+hPm : P.IsMaximal
+hpP : ↑p ∈ P
+hcard : Ideal.absNorm P = p
+hzP : z ∈ P
+hx : ∀ (m : ℕ), 0 < m → padicValNat p (Ideal.absNorm (Ideal.span {z ^ m - ↑p * (conjO F) z ^ m})) = 1
+Zb : ↥(fieldI F) := ↑((conjO F) z)
+hZb : Zb = ↑((conjO F) z)
+hZb0 : Zb ≠ 0
+W : ↥(fieldI F) := ↑z / Zb
+hW : W = ↑z / Zb
+B : ℤ := padicValRat p ((Algebra.norm ℚ) Zb)
+m : ℕ
+hm : 0 < m
+hcoe : ↑(z ^ m - ↑p * (conjO F) z ^ m) = (W ^ m - ↑p) * Zb ^ m
+hval : padicValNat p (Ideal.absNorm (Ideal.span {z ^ m - ↑p * (conjO F) z ^ m})) = 1
+⊢ padicValRat p ((Algebra.norm ℚ) (W ^ m - ↑p)) = 1 - ↑m * B
+data/fs131/ila1/work/AdmissiblePrime.lean:465:8: warning: declaration uses `sorry`
+lean-exit 1

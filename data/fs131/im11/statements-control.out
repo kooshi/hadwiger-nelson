@@ -1,0 +1,49 @@
+compared: 172 named constants of the first dump (kinds, types, modules), 41 data definitions' values, 6 example heads of the base files
+internal (not compared): 95 before, 119 after
+publicized (ruled): ['HadwigerNelson.Rigidity.mem_nhds_profTop']
+new public constants in the second dump: 4 (allow-list: 3)
+  NEW THM HadwigerNelson.Rigidity.factorColouring.congr_simp
+  NEW THM HadwigerNelson.Rigidity.koopmanSum.congr_simp
+  NEW THM HadwigerNelson.Rigidity.planted_new_public
+  NEW THM MeasureTheory.Lp.compMeasurePreservingₗ.congr_simp
+new private constants in the second dump: 26
+  NEW PRIVATE THM HadwigerNelson.Rigidity.colourRot_preimage_mem  (Proofs.HadwigerNelson.Rigidity.APlus)
+  NEW PRIVATE DEF HadwigerNelson.Rigidity.conjUV  (Proofs.HadwigerNelson.Rigidity.APlus)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.uvRing_mul_conjUV  (Proofs.HadwigerNelson.Rigidity.APlus)
+  NEW PRIVATE DEF HadwigerNelson.Rigidity.evC  (Proofs.HadwigerNelson.Rigidity.SpectralSubspace)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.evC_add  (Proofs.HadwigerNelson.Rigidity.SpectralSubspace)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.evC_zero  (Proofs.HadwigerNelson.Rigidity.SpectralSubspace)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.exists_trigC_near  (Proofs.HadwigerNelson.Rigidity.SpectralSubspace)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.inner_comp_comp  (Proofs.HadwigerNelson.Rigidity.SpectralSubspace)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.inner_comp_comp_same  (Proofs.HadwigerNelson.Rigidity.SpectralSubspace)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.integrable_err  (Proofs.HadwigerNelson.Rigidity.SpectralSubspace)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.integral_norm_sq_eq  (Proofs.HadwigerNelson.Rigidity.SpectralSubspace)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.koopmanSum_mapRange  (Proofs.HadwigerNelson.Rigidity.SpectralSubspace)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.measurable_trigPoly  (Proofs.HadwigerNelson.Rigidity.SpectralSubspace)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.norm_trigPoly_le  (Proofs.HadwigerNelson.Rigidity.SpectralSubspace)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.star_evC  (Proofs.HadwigerNelson.Rigidity.SpectralSubspace)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.tendsto_integral_norm_of_sq  (Proofs.HadwigerNelson.Rigidity.SpectralSubspace)
+  NEW PRIVATE DEF HadwigerNelson.Rigidity.trigAlg  (Proofs.HadwigerNelson.Rigidity.SpectralSubspace)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.trigAlg_separatesPoints  (Proofs.HadwigerNelson.Rigidity.SpectralSubspace)
+  NEW PRIVATE DEF HadwigerNelson.Rigidity.trigC  (Proofs.HadwigerNelson.Rigidity.SpectralSubspace)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.trigC_apply  (Proofs.HadwigerNelson.Rigidity.SpectralSubspace)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.trigPoly_eq_sum  (Proofs.HadwigerNelson.Rigidity.SpectralSubspace)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.trigPoly_mapDomain_add  (Proofs.HadwigerNelson.Rigidity.SpectralSubspace)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.trigPoly_sub  (Proofs.HadwigerNelson.Rigidity.SpectralSubspace)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.integral_nsmul_measure  (Proofs.HadwigerNelson.Rigidity.TraceSplit)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.isFiniteMeasure_nsmul  (Proofs.HadwigerNelson.Rigidity.TraceSplit)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.three_mul_tetra_add_one_eq_sum  (Proofs.HadwigerNelson.Rigidity.TraceSplit)
+examples in the working files that the base does not hold: 0
+RULED DROP THM HadwigerNelson.Rigidity.inner_colourInd_comp_unit: the stored statement differs (a dropped unread binder)
+RULED PUBLIC THM HadwigerNelson.Rigidity.mem_nhds_profTop: was _private.Proofs.HadwigerNelson.Rigidity.ContinuityGroup.0.HadwigerNelson.Rigidity.mem_nhds_profTop; kind, module and stored type (after SUBST) identical
+MODULE   HadwigerNelson.Rigidity.trigPoly: Proofs.HadwigerNelson.Rigidity.SpectralSubspace -> Proofs.HadwigerNelson.Rigidity.TraceSplit (a move the job was not given)
+TYPE     THM HadwigerNelson.Rigidity.spectral_null_of_orthogonal: the stored statement differs
+KIND     HadwigerNelson.Rigidity.setIntegral_compl_TA_rot: THM -> DEF
+VALUE    DEF HadwigerNelson.Rigidity.colourShift: the stored definition differs
+MISSING  THM HadwigerNelson.Rigidity.factorLaw_trace_null: in the first dump, not in the second
+TYPE     THM _private.Proofs.HadwigerNelson.Rigidity.ContinuityGroup.0.HadwigerNelson.Rigidity.mem_nhds_profTop: the stored statement differs
+TYPE     THM _private.Proofs.HadwigerNelson.Rigidity.ContinuityGroup.0.HadwigerNelson.Rigidity.tendsto_archHom: the stored statement differs
+TYPE     THM HadwigerNelson.Rigidity.Counting.count_of_oneAvoidingDensityBound: the stored statement differs
+AXIOMS   the modules must declare no axiom: ['HadwigerNelson.Rigidity.planted_axiom']
+NEW      THM HadwigerNelson.Rigidity.planted_new_public: a new public constant that the allow-list does not hold
+CONTROL: 10 of 10 planted faults reported — the check can fail

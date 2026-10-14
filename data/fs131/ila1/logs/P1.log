@@ -1,0 +1,2 @@
+data/fs131/ila1/probes/P1.lean:4:78: error: `exact?` could not close the goal. Try `apply?` to see partial suggestions.
+lean-exit 1

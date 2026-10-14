@@ -1,0 +1,7 @@
+# No new public declaration is written by this job. The three below are theorems Lean generates on demand in the
+# module whose proof asks for them (reserved `congr_simp` names, which no author can declare; `scripts/dupnames.sh`
+# counts this class as GENERATED and fails only if two copies' axioms differ). Each is in the module that asked:
+# SpectralSubspace (koopmanSum, Lp.compMeasurePreservingₗ), APlus (factorColouring).
+HadwigerNelson.Rigidity.koopmanSum.congr_simp
+HadwigerNelson.Rigidity.factorColouring.congr_simp
+MeasureTheory.Lp.compMeasurePreservingₗ.congr_simp

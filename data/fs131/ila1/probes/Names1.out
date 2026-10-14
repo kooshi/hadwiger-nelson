@@ -1,0 +1,97 @@
+@Algebra.norm_norm : ∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]
+  [Module.Free R S] {A : Type u_3} [inst_4 : Ring A] [inst_5 : Algebra R A] [inst_6 : Algebra S A] [IsScalarTower R S A]
+  [Module.Free S A] {a : A}, (Algebra.norm R) ((Algebra.norm S) a) = (Algebra.norm R) a
+@Algebra.norm_algebraMap : ∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : Ring S] [inst_2 : Algebra R S]
+  [Module.Free R S] (x : R), (Algebra.norm R) ((algebraMap R S) x) = x ^ Module.finrank R S
+@IntermediateField.algebraMap_apply : ∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : Field L]
+  [inst_2 : Algebra K L] (S : IntermediateField K L) (x : ↥S), (algebraMap (↥S) L) x = ↑x
+@padicValRat.pow : ∀ {p : ℕ} [hp : Fact (Nat.Prime p)] (q : ℚ) {k : ℕ}, padicValRat p (q ^ k) = ↑k * padicValRat p q
+@padicValRat.div : ∀ {p : ℕ} [hp : Fact (Nat.Prime p)] {q r : ℚ},
+  q ≠ 0 → r ≠ 0 → padicValRat p (q / r) = padicValRat p q - padicValRat p r
+@padicValRat.mul : ∀ {p : ℕ} [hp : Fact (Nat.Prime p)] {q r : ℚ},
+  q ≠ 0 → r ≠ 0 → padicValRat p (q * r) = padicValRat p q + padicValRat p r
+@padicValRat.of_int : ∀ {p : ℕ} {z : ℤ}, padicValRat p ↑z = ↑(padicValInt p z)
+padicValInt : ℕ → ℤ → ℕ
+@Algebra.coe_norm_int : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] (x : 𝓞 K),
+  ↑((Algebra.norm ℤ) x) = (Algebra.norm ℚ) ↑x
+@Ideal.absNorm_span_singleton : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S]
+  [inst_2 : Module.Free ℤ S] [Module.Finite ℤ S] (r : S), Ideal.absNorm (Ideal.span {r}) = ((Algebra.norm ℤ) r).natAbs
+@Ideal.IsPrime.mul_mem_pow : ∀ {R : Type u_1} [inst : CommRing R] [IsDedekindDomain R] (I : Ideal R) [hI : I.IsPrime]
+  {a b : R} {n : ℕ}, a * b ∈ I ^ n → a ∈ I ∨ b ∈ I ^ n
+@Ideal.dvd_iff_le : ∀ {A : Type u_1} [inst : CommRing A] [IsDedekindDomain A] {I J : Ideal A}, I ∣ J ↔ J ≤ I
+@Ideal.absNorm_apply : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S] [inst_2 : Module.Free ℤ S]
+  (I : Ideal S), Ideal.absNorm I = Submodule.cardQuot I
+@exists_prime_addOrderOf_dvd_card : ∀ {G : Type u_1} [inst : AddGroup G] [inst_1 : Fintype G] (p : ℕ)
+  [Fact (Nat.Prime p)], p ∣ Fintype.card G → ∃ x, addOrderOf x = p
+Field.exists_primitive_element : ∀ (F : Type u_1) (E : Type u_2) [inst : Field F] [inst_1 : Field E]
+  [inst_2 : Algebra F E] [FiniteDimensional F E] [Algebra.IsSeparable F E], ∃ α, F⟮α⟯ = ⊤
+data/fs131/ila1/probes/Names1.lean:19:8: error(lean.unknownIdentifier): Unknown identifier `exists_integral_multiple`
+@RingOfIntegers.exponent : {K : Type u_1} → [inst : Field K] → 𝓞 K → ℕ
+@RingOfIntegers.ZModXQuotSpanEquivQuotSpan : {K : Type u_1} →
+  [inst : Field K] →
+    [NumberField K] →
+      {θ : 𝓞 K} →
+        {p : ℕ} →
+          [inst_2 : Fact (Nat.Prime p)] →
+            ¬p ∣ RingOfIntegers.exponent θ →
+              (ZMod p)[X] ⧸ Ideal.span {map (Int.castRingHom (ZMod p)) (minpoly ℤ θ)} ≃+* 𝓞 K ⧸ Ideal.span {↑p}
+@RingOfIntegers.ZModXQuotSpanEquivQuotSpan_mk_apply : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K]
+  {θ : 𝓞 K} {p : ℕ} [inst_2 : Fact (Nat.Prime p)] (hp : ¬p ∣ RingOfIntegers.exponent θ) (Q : ℤ[X]),
+  (RingOfIntegers.ZModXQuotSpanEquivQuotSpan hp)
+      ((Ideal.Quotient.mk (Ideal.span {map (Int.castRingHom (ZMod p)) (minpoly ℤ θ)}))
+        (map (Int.castRingHom (ZMod p)) Q)) =
+    (Ideal.Quotient.mk (Ideal.span {↑p})) ((aeval θ) Q)
+conductor_mul_differentIdeal : ∀ (A : Type u_2) (K : Type u_3) (L : Type u_1) {B : Type u_4} [inst : CommRing A]
+  [inst_1 : Field K] [inst_2 : CommRing B] [inst_3 : Field L] [inst_4 : Algebra A K] [inst_5 : Algebra B L]
+  [inst_6 : Algebra A B] [inst_7 : Algebra K L] [inst_8 : Algebra A L] [IsScalarTower A K L] [IsScalarTower A B L]
+  [inst_11 : IsDomain A] [IsFractionRing A K] [FiniteDimensional K L] [Algebra.IsSeparable K L]
+  [IsIntegralClosure B A L] [IsIntegrallyClosed A] [inst_17 : IsDedekindDomain B] [inst_18 : Module.IsTorsionFree A B]
+  (x : B),
+  K[(algebraMap B L) x] = ⊤ → conductor A x * differentIdeal A B = Ideal.span {(aeval x) (derivative (minpoly A x))}
+@Ideal.absNorm_mem : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S] [inst_2 : Module.Free ℤ S]
+  (I : Ideal S), ↑(Ideal.absNorm I) ∈ I
+@Ideal.absNorm_eq_zero_iff : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S]
+  [inst_2 : Module.Free ℤ S] [Module.Finite ℤ S] {I : Ideal S}, Ideal.absNorm I = 0 ↔ I = ⊥
+Int.ideal_span_absNorm_eq_self : ∀ (J : Ideal ℤ), Ideal.span {↑(Ideal.absNorm J)} = J
+not_dvd_discr_iff_forall_mem : ∀ (K : Type u_1) (𝒪 : Type u_2) [inst : Field K] [inst_1 : NumberField K]
+  [inst_2 : CommRing 𝒪] [inst_3 : Algebra 𝒪 K] [IsIntegralClosure 𝒪 ℤ K] {p : ℤ},
+  Prime p → (¬p ∣ NumberField.discr K ↔ ∀ (P : Ideal 𝒪) (x : P.IsPrime), ↑p ∈ P → Algebra.IsUnramifiedAt ℤ P)
+discr_ne_zero : ∀ (K : Type u_1) [inst : Field K] [inst_1 : NumberField K], NumberField.discr K ≠ 0
+@Ideal.ramificationIdx_eq_one : ∀ {S : Type u_1} [inst : CommRing S] (q : Ideal S) (R : Type u_2) [inst_1 : CommRing R]
+  [inst_2 : Algebra R S] [inst_3 : q.IsPrime] [Algebra.EssFiniteType R S] [Algebra.IsUnramifiedAt R q],
+  q.ramificationIdx R = 1
+@Ideal.ramificationIdx'_eq_ramificationIdx : ∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S]
+  [inst_2 : Algebra R S] (p : Ideal R) (q : Ideal S) [IsDomain R] [IsDedekindDomain S] [Module.IsTorsionFree R S]
+  [q.LiesOver p] [hq : q.IsPrime], p ≠ ⊥ → p.ramificationIdx' q = q.ramificationIdx R
+@Ideal.ramificationIdx'_ne_one_iff : ∀ {R : Type u_1} [inst : CommRing R] {S : Type u_2} [inst_1 : CommRing S]
+  [inst_2 : Algebra R S] {p : Ideal R} {P : Ideal S},
+  Ideal.map (algebraMap R S) p ≤ P → (p.ramificationIdx' P ≠ 1 ↔ Ideal.map (algebraMap R S) p ≤ P ^ 2)
+data/fs131/ila1/probes/Names1.lean:32:8: error(lean.unknownIdentifier): Unknown identifier `HadwigerNelson.QuadraticPrime.isMaximal_ker_and_card`
+@sub_dvd_eval_sub : ∀ {R : Type u_1} [inst : CommRing R] (a b : R) (p : R[X]), a - b ∣ eval a p - eval b p
+@Nat.exists_prime_and_dvd : ∀ {n : ℕ}, n ≠ 1 → ∃ p, Nat.Prime p ∧ p ∣ n
+@IntermediateField.adjoin_simple_eq_top_iff_of_isAlgebraic : ∀ {F : Type u_1} [inst : Field F] {E : Type u_2}
+  [inst_1 : Field E] [inst_2 : Algebra F E] {x : E}, IsAlgebraic F x → (F⟮x⟯ = ⊤ ↔ F[x] = ⊤)
+@IntermediateField.finrank_eq_one_iff : ∀ {F : Type u_1} [inst : Field F] {E : Type u_2} [inst_1 : Field E]
+  [inst_2 : Algebra F E] {K : IntermediateField F E}, Module.finrank F ↥K = 1 ↔ K = ⊥
+@IntermediateField.eq_of_le_of_finrank_eq : ∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : Field L]
+  [inst_2 : Algebra K L] {F E : IntermediateField K L} [FiniteDimensional K ↥E],
+  F ≤ E → Module.finrank K ↥F = Module.finrank K ↥E → F = E
+Module.finrank_mul_finrank : ∀ (F : Type u_1) (K : Type u_2) (A : Type u_3) [inst : Semiring F] [inst_1 : Semiring K]
+  [inst_2 : AddCommMonoid A] [inst_3 : Module F K] [inst_4 : Module K A] [inst_5 : Module F A] [IsScalarTower F K A]
+  [StrongRankCondition F] [StrongRankCondition K] [Module.Free F K] [Module.Free K A],
+  Module.finrank F K * Module.finrank K A = Module.finrank F A
+HadwigerNelson.SpectralChain.conjO : (F : Subfield ℝ) →
+  𝓞 ↥(HadwigerNelson.SpectralChain.fieldI F) →+* 𝓞 ↥(HadwigerNelson.SpectralChain.fieldI F)
+HadwigerNelson.SpectralChain.fieldI_conj : ∀ (F : Subfield ℝ),
+  ∀ z ∈ HadwigerNelson.SpectralChain.fieldI F, (starRingEnd ℂ) z ∈ HadwigerNelson.SpectralChain.fieldI F
+@HadwigerNelson.conjOn : {L : Subfield ℂ} → (∀ z ∈ L, (starRingEnd ℂ) z ∈ L) → ↥L →+* ↥L
+@Ideal.IsPrime.mul_le : ∀ {R : Type u_1} [inst : CommSemiring R] {I J P : Ideal R},
+  P.IsPrime → (I * J ≤ P ↔ I ≤ P ∨ J ≤ P)
+@Ideal.comap_isMaximal_of_surjective : ∀ {R : Type u_1} {S : Type u_2} {F : Type u_3} [inst : Ring R] [inst_1 : Ring S]
+  [inst_2 : FunLike F R S] [inst_3 : RingHomClass F R S] (f : F),
+  Function.Surjective ⇑f → ∀ {K : Ideal S} [H : K.IsMaximal], (Ideal.comap f K).IsMaximal
+@RingHom.ker_isMaximal_of_surjective : ∀ {R : Type u_1} {K : Type u_2} {F : Type u_3} [inst : Ring R]
+  [inst_1 : DivisionRing K] [inst_2 : FunLike F R K] [inst_3 : RingHomClass F R K] (f : F),
+  Function.Surjective ⇑f → (RingHom.ker f).IsMaximal
+@Ideal.exists_le_maximal : ∀ {α : Type u_1} [inst : Semiring α] (I : Ideal α), I ≠ ⊤ → ∃ M, M.IsMaximal ∧ I ≤ M
+data/fs131/ila1/probes/Names1.lean:46:8: error(lean.unknownIdentifier): Unknown constant `Ideal.IsCoprime`

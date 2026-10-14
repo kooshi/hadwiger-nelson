@@ -193,7 +193,7 @@ theorem exists_nsmul_mem_of_mem_nhds_profTop {A : Set (unitRing F)} (hA : A ∈ 
     exact hM₂ _
 
 /-- A coset of `(N + 1)·R` is a profinite neighbourhood of its points. -/
-private theorem mem_nhds_profTop (N : ℕ) (y : unitRing F) :
+theorem mem_nhds_profTop (N : ℕ) (y : unitRing F) :
     {x | ∃ z : unitRing F, y = x + (N + 1) • z} ∈ @nhds _ (profTop F) y := by
   have : {x | QuotientAddGroup.mk' (nsmulAddMonoidHom (α := unitRing F) (N + 1)).range x =
       QuotientAddGroup.mk' (nsmulAddMonoidHom (α := unitRing F) (N + 1)).range y} ∈ @nhds _ (profTop F) y := by

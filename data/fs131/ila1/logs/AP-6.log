@@ -1,0 +1,7 @@
+data/fs131/ila1/work/AdmissiblePrime.lean:22:16: warning: declaration uses `sorry`
+data/fs131/ila1/work/AdmissiblePrime.lean:31:26: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Algebra.IsAlgebraic ℤ K
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/ila1/work/AdmissiblePrime.lean:31:9: error: Tactic `rcases` failed: `x✝ : ?m.30` is not an inductive datatype
+lean-exit 1

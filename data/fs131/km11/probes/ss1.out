@@ -1,0 +1,12 @@
+slot: admitted km11p: mem 5 GiB (hard cap), cpus 1,2
+Proofs/HadwigerNelson/Rigidity/SpectralSubspace.lean:67:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SpectralSubspace.lean:89:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SpectralSubspace.lean:95:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SpectralSubspace.lean:103:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SpectralSubspace.lean:115:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SpectralSubspace.lean:121:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SpectralSubspace.lean:130:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SpectralSubspace.lean:136:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SpectralSubspace.lean:144:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SpectralSubspace.lean:175:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SpectralSubspace.lean:194:8: warning: declaration uses `sorry`
