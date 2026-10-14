@@ -1,0 +1,10 @@
+slot: admitted ijn1f: mem 5 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/ZeroEntropyClosed.lean:43:34: error: Function expected at
+  exists_admissiblePair
+but this term has type
+  Nonempty (AdmissiblePair ?m.6)
+
+Note: Expected a function because this term is being applied to the argument
+  F
+seconds=2
+exit=1

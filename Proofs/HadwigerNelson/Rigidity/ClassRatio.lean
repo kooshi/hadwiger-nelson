@@ -2,7 +2,7 @@ import Proofs.HadwigerNelson.Arith.WeilKloosterman
 import Proofs.HadwigerNelson.Rigidity.ChainAtTA
 
 /-!
-# CLS: a local bound of at least five gives T-C(A) at `S = ∅`; the uniform tail (FS-131, job FS131-KR1; module M13; skeleton)
+# CLS: a local bound of at least five gives T-C(A) at `S = ∅`; the uniform tail (FS-131, job FS131-KR1; module M13; composed by FS131-ICM1 over six named private leaves)
 
 **Read aloud, against the informal claim.** `RatioAtMost P c` says that at the stable prime `P` every independent set of
 every level's residue target `levelTarget P m` (`m ≥ 1`) holds at most the fraction `c` of `𝓞 ⧸ P^m`; T-C(A) at `S = ∅`,

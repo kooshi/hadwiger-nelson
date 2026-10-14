@@ -165,12 +165,14 @@ bibliography key (item 1; `declareImport` refuses otherwise) and `ARCHITECTURE.m
 backticks (item 4; `arch-missing`). Any other axiom fails wherever it appears — under CLEAN, here,
 under PURCHASED — and so does any axiom the library declares without a `declareImport` line, audited or
 not (`undeclared-library-axiom`, from `libraryAxioms`, the file's last command). The library
-declares three imports at present: wave 10's `StandingFive.kloosterman_bound` (`[Weil1948]` p. 207, FS131-K10c), with
+declares four imports at present: wave 10's `StandingFive.kloosterman_bound` (`[Weil1948]` p. 207, FS131-K10c), with
 eight records below, and FS-132's `Outside.OAI158.no_proper_five_coloring` and `Outside.OAI158.proper_to_borel_weak`
 (`[OAIMath2026]` family 158, FS132-I1), with six and twelve (the fifth on the transfer is FS132-L1's; one on the first and four on
 the transfer are of FS-124's radius clause, `Plane/RadiusOutside`, FS124-I1, landed by FS124-L1; three more on the transfer are of
-FS-131's measurable number, `Plane/LebesgueNumber`, FS131-KC1, landed by FS131-LC1); its first, wave 2's
-`falconer_lemma2_nonempty`, is a theorem since FS131-IF1 (FS131-L10B's join).
+FS-131's measurable number, `Plane/LebesgueNumber`, FS131-KC1, landed by FS131-LC1); and, on the five-colour chain's
+branch, FS-131's `Rigidity.positive_entropy_rigidity` (`[EinsiedlerLindenstrauss2022]` Thm 1.3, FS131-KN3; declared to the
+audit at the chain's join, FS131-IJN1), with eight; its first, wave 2's `falconer_lemma2_nonempty`, is a theorem since
+FS131-IF1 (FS131-L10B's join).
 
 **Why this section comes first.** The gate reads the sections in any order, but two things do not move:
 PURCHASED stays last, because `tools/check_architecture.py` reads every `#print axioms` after its banner
@@ -238,6 +240,20 @@ declared that no audited record carries fails as `stale-declaration`. -/
 #print axioms HadwigerNelson.Plane.colorable_iff_exists_nullMeasurable_proper
 #print axioms HadwigerNelson.Plane.chromaticNumber_plane_eq_chiLebesgue
 #print axioms HadwigerNelson.Plane.chromaticNumber_euclidean_plane_eq_chiLebesgue
+
+#eval AxiomAudit.declareImport ``HadwigerNelson.Rigidity.positive_entropy_rigidity
+
+-- FS131-IJN1: the records resting on `Rigidity.positive_entropy_rigidity` (`[EinsiedlerLindenstrauss2022]` Thm 1.3;
+-- the four items: plans/FS131-KN3-chain-plan.md § 5.3, plans/FS131-KN6-chain-first-layer.md § Stage 6, plans/FS131-KN7-chain-next.md
+-- § 3.3) — every public declaration of the five-colour chain's branch `fs131-wj` that rests on it and on no `sorryAx`
+#print axioms HadwigerNelson.Rigidity.positive_entropy_rigidity_of_polishSpace
+#print axioms HadwigerNelson.Rigidity.haar_or_zero_entropy
+#print axioms HadwigerNelson.Rigidity.isHaarFourier_or_ksEntropy_eq_zero
+#print axioms HadwigerNelson.Rigidity.ksEntropy_eq_zero_of_not_smul_le
+#print axioms HadwigerNelson.Rigidity.entropySplit_of_admissiblePair
+#print axioms HadwigerNelson.Rigidity.entropySplit
+#print axioms HadwigerNelson.Rigidity.mrPlus
+#print axioms HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber_closed
 
 #eval IO.println "=== CLEAN ==="
 

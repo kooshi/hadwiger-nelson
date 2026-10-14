@@ -1,0 +1,27 @@
+slot: admitted ijn1f: mem 5 GiB (hard cap), cpus 0,1
+'HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.Rigidity.entropySplit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity]
+'HadwigerNelson.Rigidity.zeroEntropyCarried' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.mrPlus' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity]
+'HadwigerNelson.Rigidity.noRamifiedStableDyadic_of_tca' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.ZdAction.mulTwoThree_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  HadwigerNelson.Plane.OneAvoidingDensityBound →
+    (HadwigerNelson.SpectralChain.localBound F ≤ 4 →
+        HadwigerNelson.SpectralChain.localBound F ≤
+          (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber) →
+      min (HadwigerNelson.SpectralChain.localBound F) 5 ≤
+        (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+seconds=3
+exit=0

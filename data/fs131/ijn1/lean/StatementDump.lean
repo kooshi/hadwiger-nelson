@@ -3,6 +3,7 @@ import Proofs.HadwigerNelson.Rigidity.AdmissiblePrime
 import Proofs.HadwigerNelson.Rigidity.Annihilator
 import Proofs.HadwigerNelson.Rigidity.BochnerTau
 import Proofs.HadwigerNelson.Rigidity.ChainAtTA
+import Proofs.HadwigerNelson.Rigidity.ChainHeadline
 import Proofs.HadwigerNelson.Rigidity.ClassRatio
 import Proofs.HadwigerNelson.Rigidity.ContinuityGroup
 import Proofs.HadwigerNelson.Rigidity.CountCompletion

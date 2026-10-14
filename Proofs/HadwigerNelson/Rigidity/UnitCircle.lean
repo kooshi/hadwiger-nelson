@@ -4,7 +4,7 @@ import Mathlib.MeasureTheory.Group.Action
 import Mathlib.Dynamics.Ergodic.Action.Basic
 
 /-!
-# The unit vectors of `F²` as a group acting on `R̂`; admissible pairs (FS-131, job FS131-KN8; the vocabulary of modules M6 and M7b; proved by FS131-IDG1 but `exists_admissiblePair`)
+# The unit vectors of `F²` as a group acting on `R̂`; admissible pairs (FS-131, job FS131-KN8; the vocabulary of modules M6 and M7b; proved by FS131-IDG1; `exists_admissiblePair` by FS131-ILA1)
 
 **Read aloud, against the informal claim.** `SpectralChain` has the unit vectors of `F²` as a set of complex numbers,
 `unitVectors F`, and the rotation `rot u` of `R̂ = Dual F` by each. The entropy split reads them as a **group** acting on
@@ -23,10 +23,10 @@ import Mathlib.Dynamics.Ergodic.Action.Basic
   finite-index `Γ′ ⊆ Γ`", read through `ℤ² ≅ Γ` as the axiom's `IsTotallyIrreducible` reads finite index). Its subgroup is
   `AdmissiblePair.subgroup`, the range of `zpowHom`. X02D's sufficient condition ("in particular if `Γ` contains a `w` with
   `ℚ(wᵏ) = L` for every `k ≥ 1`") is `AdmissiblePair.ofPow`; its existence over a real number field is
-  `exists_admissiblePair` (X02D's Lemma W construction at one `u`).
+  `exists_admissiblePair` (from `Rigidity.exists_unitPair`: one degree-one unramified prime for `w`, a second for `u`).
 
 **Models.** `toUnitVector`, the action and `zpowHom` are defined for every `F`; `AdmissiblePair F` is inhabited over every
-real number field (`exists_admissiblePair`, a leaf) — at `ℚ` by `u = (3 + 4i)/5`, `w = (5 + 12i)/13` (the leaf's plan).
+real number field (`exists_admissiblePair`) — at `ℚ`, for instance, by `u = (3 + 4i)/5`, `w = (5 + 12i)/13`.
 -/
 
 namespace HadwigerNelson.Rigidity
@@ -214,9 +214,10 @@ def AdmissiblePair.ofPow (u w : unitCircle F) (hinj : Function.Injective (zpowHo
           nsmul_eq_mul, mul_one, zpow_natCast, SubmonoidClass.coe_pow, Circle.coe_pow]
 
 /-- **An admissible pair exists over every real number field** (FS100-X02D's Lemma W construction, l. 156, at one `u`).
-Plan: a rational prime `p` splitting completely in `F(i)` (one suffices; at a biquadratic `F(i)` by Dirichlet), a prime
-`𝔓 ∣ p` of `F(i)` with `𝔓 ≠ 𝔓̄`, `(z) = 𝔓ʰ`, `w = z/z̄`; then `ℚ(wᵏ) = F(i)` for every `k ≥ 1` (X02D's valuation argument)
-and `u` a second such element at another prime, independent by valuations; `AdmissiblePair.ofPow`. -/
+Proved from `exists_unitPair` (`Rigidity/AdmissiblePrime`): `w = z/z̄` at a degree-one unramified prime `𝔓` above an
+odd `p` (`z ∈ 𝔓²`, in no other prime above `p`), `ℚ(wᵏ) = F(i)` for every `k ≥ 1` by the `p`-adic valuations of the
+norms of `wᵏ − p` and `w²ᵏ − p`; `u = z′/z̄′` at a second such prime, independent by membership;
+`AdmissiblePair.ofPow`. No completely split prime and no principal power is needed. -/
 theorem exists_admissiblePair [NumberField F] : Nonempty (AdmissiblePair F) := by
   obtain ⟨u, w, hu, hu1, hw, hw1, hind, hgen⟩ := exists_unitPair F
   let u' : unitCircle F := ⟨⟨u, mem_sphere_zero_iff_norm.mpr hu1⟩, hu⟩

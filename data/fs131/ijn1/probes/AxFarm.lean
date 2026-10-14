@@ -1,0 +1,8 @@
+import Proofs.HadwigerNelson.Rigidity.ChainHeadline
+#print axioms HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber
+#print axioms HadwigerNelson.Rigidity.entropySplit
+#print axioms HadwigerNelson.Rigidity.zeroEntropyCarried
+#print axioms HadwigerNelson.Rigidity.mrPlus
+#print axioms HadwigerNelson.Rigidity.noRamifiedStableDyadic_of_tca
+#print axioms HadwigerNelson.Rigidity.ZdAction.mulTwoThree_model
+#check @HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber

@@ -94,3 +94,85 @@ for both stages); the commit of this stage holds the two leaves' files.
   both rewritten, no code character elsewhere.
 
 **Re-priced:** M9-S was a few minutes; the model about 20 minutes and 100 lines against 100–150, three rounds.
+
+## Stage 3 — SAVED: the landing rulings that are code, each shown from the kernel's side
+
+All in build 2 (stage 2). **The statement check** (`tools/fs131_ijn1_statements.py`, new; the merged dump of stage 1
+against build 2's, `statements-after.txt`, 321 MB, `.xz` + sha256; with `drop-expect.txt`):
+**PASS** (`statements-compare.out`) — 46 → 47 modules; **1,132 named constants** compared (kind, module, propness, stored
+type up to hygienic binder names), **246 data definitions' values**, 4 example heads of the base commit's eight touched
+files; the ruled changes and nothing else: **4 RULED MOVE**, **6 RULED DROP** (each second type equal to the kernel's
+term surgery on the first), **1 NEW** (the headline); 4 new private constants (stage 2's helpers), 0 private constants
+gone, 0 new examples. **Control** (`--control`, ten plants: a leaf's statement, a definition's value, a leaf gone, a move
+to the wrong module, a drop not as ruled, a new public constant, an axiom, a kind, an unruled drop, an unruled move):
+**10 of 10 planted constants reported, 0 reports naming no plant** (`statements-control.out`). Its first control run
+counted reports, 12 against 10 (a wrong move is also "the ruled move not seen"), and read a value change made in the
+`VALUE` line alone as proof-only (the plant had left the proof-erased `DATA` line equal): both fixed in the reader (count
+planted constants; plant both lines) before the run above. Its first real run stopped at a name declared by two modules —
+`SpectralChain.corr.eq_1`, generated on demand in two (`dupnames.sh`'s one `GENERATED` row): the reader now keeps both
+copies of an internal name.
+
+1. **`entropySplit`, `zeroEntropyCarried` and its readers moved to `Rigidity/ZeroEntropyClosed`** (item 761 ruling 5,
+   item 811 ruling 1). Cut so that no cycle forms: `ZeroEntropyClosed` imports `EntropySplitMax` (for
+   `entropySplit_of_admissiblePair`; `UnitCircle`'s `exists_admissiblePair` comes through `Pieces`); nothing imports
+   `ZeroEntropyClosed` but the new `ChainHeadline` and the root. Moved, each its own name, kind and propness, module exactly
+   `ChainAtTA` → `ZeroEntropyClosed`:
+   - `entropySplit (F) [NumberField F] : EntropySplit F := entropySplit_of_admissiblePair (exists_admissiblePair (F := F)).some`
+     — stored type unchanged (the brief's `(exists_admissiblePair _).some`: the theorem takes `F` implicitly).
+     **Axioms: the standard three and the declared `positive_entropy_rigidity`; no `sorry`.**
+   - `zeroEntropyCarried (F) [NumberField F] : ZeroEntropyCarried F := zeroEntropyCarried_of_numberField F` — **the scope
+     binder `h : NoRamifiedStableDyadic F` dropped** (RULED DROP). It and `zeroEntropyCarried_of_numberField` now have one
+     stored type; both are kept (no ruling removes either) — held for the coordinator. **Axioms: the standard three.**
+   - `mrPlus (F) [NumberField F] : MRPlus F` — its scope binder dropped, unread once `zeroEntropyCarried` has none (RULED
+     DROP; "the scope binder dropped where unread"). **Axioms: the standard three and the declared theorem.**
+   - `min_localBound_five_le_chromaticNumber_closed` — stored type unchanged; its `hEF` is now `fun _ => zeroEntropyCarried F`.
+     **Axioms: the standard three and the declared theorem.**
+2. **`Rigidity.positive_entropy_rigidity` registered with the audit** (`scripts/Axioms.lean`): one `declareImport` line
+   and its eight records (every public declaration of the branch on it and on no `sorryAx`, from `axioms-all.txt`:
+   `positive_entropy_rigidity_of_polishSpace`, `haar_or_zero_entropy`, `isHaarFourier_or_ksEntropy_eq_zero`,
+   `ksEntropy_eq_zero_of_not_smul_le`, `entropySplit_of_admissiblePair`, `entropySplit`, `mrPlus`,
+   `min_localBound_five_le_chromaticNumber_closed`) after FS131-KC1's block; the banner's count of imports ("three" →
+   "four") and its sentence. **Its four items** (`LEAN.md` § Assumptions), as KN6 § Stage 6 and KN7 § 3.3 leave them: (1)
+   the docstring names `[EinsiedlerLindenstrauss2022]` Thm 1.3, § 1.1, pp. 2–3 of arXiv:2101.11120v1, and the page and line
+   of clause (4)'s σ-algebra — it lacks the journal's page numbers; (2) the read-back, clause by clause, KN3 § 5.3 and, for
+   clause (4) after R1, KN7 § 3.3 — no second reader against the page yet; (3) the model `positive_entropy_rigidity_model`,
+   degenerate (the one-point solenoid); (4) **`ARCHITECTURE.md` § Trust, a new row** (this commit), with KN3's draft, KN6's
+   "infimum form" and KN7's σ-algebra added, the page quoted in fragments with their lines. **From the kernel's side:**
+   `./scripts/axioms.sh` on the joined tree **OK — 7447 clean, 28 axiom-free, 34 imported, 5 declared purchases**
+   (`logs/axioms-sh-1.log`; 26 imported before, 8 added; "declared imports (4)"; the digest flags this branch's `CLAUDE.md`
+   count, 26, as stale, which is the landing's to refile). **Control:** the `declareImport` line removed in place — the
+   audit fails, 18 FAILs, `undeclared-library-axiom HadwigerNelson.Rigidity.positive_entropy_rigidity` among them, and each
+   of the eight records `undeclared-in-imported` and `stale-import` (`logs/axioms-sh-plant.log`); restored by copy
+   (`cmp` equal) and run again green (`logs/axioms-sh-2.log`), so `build/gate/axioms/latest` is not the planted run.
+   **`scripts/assumptions-ledger.txt`:** the nine `RESTS` rows of the declared theorem, exactly the rows the step prints
+   (`./scripts/assumptions.sh`, `logs/assumptions-1-full.log`), inserted in the file's sort order (the eight records and the
+   headline); the header's counts are left for the landing's `--write-ledger`. The step's other findings on this branch
+   are the landing's (§ Drafts).
+3. **The five unread binders of lane N dropped** (item 770 ruling 2), each RULED DROP from the kernel's side:
+   `mul_card_heavyNames_le` [`hc : 0 < c`], `mul_measureReal_light_le_blockEntropy` [`hγ : 0 ≤ γ`], `rpow_mul_exp_le_exp`
+   [`hθ : 0 ≤ θ`], `card_words_badStarts_le` [`hθ : 0 ≤ θ`, `hn : k ≤ n`]; their `have _ :=` lines and comments removed;
+   the callers in `exists_forall_exp_le_measureReal_nameCell` pass the variable by name where the dropped proof had fixed it
+   (`(c := …)`, `(γ := β / 8)`, `(θ := θ) (n := n)`) and one local left unread (`hkn`) is removed; docstrings say what
+   was dropped and why. The `example` that models `card_words_badStarts_le`'s hypotheses still lists the two dropped
+   clauses (a superset, unchanged: not mine to change). **Axioms: each the standard three.**
+4. **Lemma F public if a second module reads it** (item 801 ruling 1): **no second module reads it** — `Pieces`'
+   `finiteIndex_range_nsmul_prime` and `finiteIndex_range_nsmul` are read only in `Pieces`. The nearest fact elsewhere is
+   `BochnerTau.finite_quotient_nsmul` (`R ⧸ N·R` finite, the instance `G = R`, proved separately, J28V-7), in a module that
+   `Pieces` does not import. Left private; a note for the landing planner with `main`'s
+   `ThreeColourCriterion.finite_quotient_span_prime`.
+5. **M3's private copies of `main`'s `Plane/OneClass/InvariantLaw` helpers** (noted for the landing): `Rigidity/InvariantMeasure`
+   holds private copies of `avgMeasure_apply`, `isProbabilityMeasure_avgMeasure`, `avgMeasure_map`, `integral_avgMeasure`,
+   `map_eq_of_tendsto`, `map_eq_of_tendsto_of_eventually`, `measure_compl_eq_zero_of_tendsto`, `isClosed_setOf_of_tendsto`,
+   `exists_fixed_of_average`, `exists_common_fixed` (and the definition `avgMeasure`), all `private` on `main` too. **They
+   cannot be shared on this branch**: `Plane/OneClass/InvariantLaw` is not in this tree's ancestry. The landing, which
+   joins `main`, can make one copy public in a module both import, or leave both private (private names do not meet).
+6. **Docstrings** where a moved or proved declaration's text was stale: `UnitCircle`'s four (lane A's D2, item 897 ruling
+   1: the title, the module paragraph, the models, `exists_admissiblePair`'s plan replaced by its proof's route);
+   `ClassRatio`'s title ("skeleton" → "composed by FS131-ICM1 over six named private leaves"); `ChainAtTA`'s title and
+   module paragraph and `noRamifiedStableDyadic_of_tca`'s; `EntropySplitMax`'s sentence on where `entropySplit` sits;
+   `RingScope`'s on the scope lemma; `PositiveEntropy`'s (stage 2). Twenty-eight other module titles on the branch still say
+   "skeleton" though their modules hold no `sorry` (`rg -n 'skeleton\)' Proofs/HadwigerNelson/Rigidity`): the landing's
+   sweep, not done here.
+7. **`ARCHITECTURE.md`**: rows of `ChainAtTA`, `PositiveEntropy`, `ZeroEntropyClosed`, `ZeroEntropyNames`, `TraceSplit`,
+   `APlus` (the last two said M2b "until it lands"), a new row for `Rigidity/ChainHeadline`, and the § Trust row;
+   `tools/check_architecture.py`: PASS (`logs/arch-1.log`). `Proofs.lean`: the new module.

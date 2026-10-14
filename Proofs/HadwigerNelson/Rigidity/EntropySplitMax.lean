@@ -26,8 +26,8 @@ chain reads (`Rigidity.EntropySplit`: entropy zero at **one** non-torsion rotati
 Then **the split** (`entropySplit_of_admissiblePair`): `τ = a·m + b·ρ` with `ρ` the normalised remainder (or the point mass
 at the trivial character when the remainder is `0`, `Rigidity.ksEntropy_dirac`), the rotation the first generator of the
 pair (`AdmissiblePair.u_nonTorsion`). With `Rigidity.exists_admissiblePair` it is the chain's leaf `Rigidity.entropySplit`,
-which stays in `Rigidity/ChainAtTA` (upstream of this module) until the landing moves it here or replaces its `sorry` by
-`entropySplit_of_admissiblePair _ (exists_admissiblePair _).some`.
+which moved from `Rigidity/ChainAtTA` (upstream of this module) to `Rigidity/ZeroEntropyClosed` at the chain's join and is
+proved there as `entropySplit_of_admissiblePair (exists_admissiblePair (F := F)).some` (FS131-IJN1).
 
 **The release's decomposition enters as a leaf under a name of its own** (`LEAN.md` § Searching: no lemma under one name in
 two modules): `condExpKernel_ergodicDecomposition` is `PrimeDegreePackets.action_ergodic_decomposition`

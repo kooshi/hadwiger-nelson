@@ -25,8 +25,8 @@ conjugation-stable prime: the intersection of the valuation subrings `P.localRin
   completion: a basic open set there is `(r + N·R̂) × V`. Route EN1 § 8.2 item 4: `1/5 ∈ R` and a full lattice in `R`. The
   deriver's row 3; not a numbered leaf.
 
-**The scope lemma** `Rigidity.noRamifiedStableDyadic_of_tca` is stated in `Rigidity/ChainAtTA`, off the headline's path; its
-proof is planned in `plans/FS131-KN9-chain-zero-entropy.md` § Stage 3 and is one proof in that file.
+**The scope lemma** `Rigidity.noRamifiedStableDyadic_of_tca` is in `Rigidity/ChainAtTA`, proved there (FS131-IJN1) by the
+route `plans/FS131-KN9-chain-zero-entropy.md` § Stage 3 plans; the count reads it (`Rigidity/CountResidue`).
 
 **Inhabitants.** `R ⊆ O′` and `c·O′ ⊆ R` hold at every real number field; their model is `ℚ` (`F = ⊥`), where both rings are
 `ℤ[i][1/p : p ≡ 1 (4)]`. The scope `NoRamifiedStableDyadic F` fails at `ℚ` (the prime `(1 + i)` is stable, dyadic and

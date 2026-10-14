@@ -10,9 +10,10 @@ import Mathlib.Analysis.SpecificLimits.Basic
 of the chain, `data/fs131/kn3/claims-M8-zero-entropy-carried.md`).
 
 * **EN2-CNT** (`card_words_badStarts_le`): over an alphabet `α` of `a ≥ 1` letters, with `k ≥ 1`, a set `𝒢` of words of
-  length `k`, a real `g ≥ 2` with `#𝒢 ≤ g`, `θ ≥ 0` and `n ≥ k`, the words `w` of length `n` with at most `θ n` *bad starts*
+  length `k`, a real `g ≥ 2` with `#𝒢 ≤ g`, and any `θ` and `n`, the words `w` of length `n` with at most `θ n` *bad starts*
   — positions `0 ≤ j ≤ n − k` whose block `w[j, j + k)` is not in `𝒢` (`badStarts`, over `wordBlock`) — number at most
-  `(2a)^{θn + k} · g^{2n/k}`. Pure combinatorics; no measure.
+  `(2a)^{θn + k} · g^{2n/k}`. Pure combinatorics; no measure. The entry's `θ ≥ 0` and `n ≥ k` are not read (for `n < k` no
+  word has a start, and `(2a)^k ≥ a^n`) and were dropped at the chain's join (FS131-IJN1; inventory item 770, ruling 2).
 * **EN2-ZE** (`exists_forall_exp_le_measureReal_nameCell`): for a probability measure `μ`, a map `T` preserving it, a
   measurable `P : X → Fin a` with `partitionEntropy μ T P = 0` (the infimum form, `inf_{n ≥ 1} H_n / n = 0`, the entry's
   hypothesis word for word), and `β, η > 0`, there are `N₀` and a measurable `X′` with `μ(X′) ≥ 1 − η` such that the cell
@@ -343,15 +344,13 @@ end CountProof
 
 /-- **EN2-CNT, the count** (`plans/FS131-EN2-derivation.md` § 3.5, the entry at l. 458; [hand], one mind, checked by
 enumeration on 228 cases): over an alphabet of `a ≥ 1` letters, with `k ≥ 1`, a set `𝒢` of words of length `k`, a real
-`g ≥ 2` with `#𝒢 ≤ g`, `θ ≥ 0` and `n ≥ k`, at most `(2a)^{θn + k} · g^{2n/k}` words of length `n` have at most `θ n` bad
-starts. -/
+`g ≥ 2` with `#𝒢 ≤ g`, and any `θ` and `n`, at most `(2a)^{θn + k} · g^{2n/k}` words of length `n` have at most `θ n` bad
+starts. The entry's `θ ≥ 0` and `n ≥ k` are not read — for `n < k` no word has a start, and `(2a)^k ≥ a^n` — and were
+dropped (FS131-IJN1; inventory item 770, ruling 2). -/
 theorem card_words_badStarts_le [Fintype α] [DecidableEq α] [Nonempty α] {k : ℕ} (hk : 1 ≤ k)
-    (𝒢 : Finset (Fin k → α)) {g : ℝ} (hg : 2 ≤ g) (h𝒢 : (𝒢.card : ℝ) ≤ g) {θ : ℝ} (hθ : 0 ≤ θ) {n : ℕ}
-    (hn : k ≤ n) :
+    (𝒢 : Finset (Fin k → α)) {g : ℝ} (hg : 2 ≤ g) (h𝒢 : (𝒢.card : ℝ) ≤ g) {θ : ℝ} {n : ℕ} :
     (((Finset.univ : Finset (Fin n → α)).filter fun w => (badStarts 𝒢 w : ℝ) ≤ θ * n).card : ℝ) ≤
       (2 * (Fintype.card α : ℝ)) ^ (θ * n + k) * g ^ (2 * n / k : ℝ) := by
-  have _ := hθ
-  have _ := hn
   have ha : (1 : ℝ) ≤ Fintype.card α := by exact_mod_cast Fintype.card_pos
   have h2a : (0 : ℝ) < 2 * Fintype.card α := by linarith
   set t : ℝ := (2 * (Fintype.card α : ℝ))⁻¹ with ht_def
@@ -482,12 +481,11 @@ private theorem sum_measureReal_nameCell {m : MeasurableSpace X} (μ : Measure X
   rw [← measureReal_nameOf_preimage μ hT hP n Finset.univ, Finset.coe_univ, Set.preimage_univ, probReal_univ]
 
 /-- **Few heavy names** (EN2 § 3.5 step 2, `#𝒢 ≤ e^{γk}`): the cells are disjoint and measurable, so at most `1/c` of them
-have mass `≥ c`. -/
+have mass `≥ c` — for every `c` (for `c ≤ 0` the bound is immediate); the planner's `0 < c` is not read and was dropped
+(FS131-IJN1; inventory item 770, ruling 2). -/
 theorem mul_card_heavyNames_le {m : MeasurableSpace X} (μ : Measure X) [IsProbabilityMeasure μ] {T : X → X}
-    (hT : Measurable T) {a : ℕ} {P : X → Fin a} (hP : Measurable P) (n : ℕ) {c : ℝ} (hc : 0 < c) :
+    (hT : Measurable T) {a : ℕ} {P : X → Fin a} (hP : Measurable P) (n : ℕ) {c : ℝ} :
     c * (heavyNames μ T P n c).card ≤ 1 := by
-  -- `0 < c` is not read: for `c ≤ 0` the bound is immediate, and the proof below covers every `c`.
-  have _ := hc
   calc c * (heavyNames μ T P n c).card = ∑ _w ∈ heavyNames μ T P n c, c := by
         rw [Finset.sum_const, nsmul_eq_mul, mul_comm]
     _ ≤ ∑ w ∈ heavyNames μ T P n c, μ.real (nameCell T P n w) :=
@@ -509,13 +507,12 @@ private theorem mul_le_negMulLog_of_lt_exp {p s : ℝ} (hp : 0 ≤ p) (hps : p <
 
 /-- **Markov on the terms of `H_n`** (EN2 § 3.5 step 2, `H_k ≥ γk · μ(B)`): the points whose name's cell is lighter than
 `e^{−γn}` have mass at most `H_n / (γ n)`. Each light cell's term `−p log p` is at least `γ n · p`, and every term is
-non-negative. -/
+non-negative. The step holds for every `γ`; the planner's `0 ≤ γ` is not read and was dropped (FS131-IJN1; inventory item
+770, ruling 2). -/
 theorem mul_measureReal_light_le_blockEntropy {m : MeasurableSpace X} (μ : Measure X) [IsProbabilityMeasure μ]
-    {T : X → X} (hT : Measurable T) {a : ℕ} {P : X → Fin a} (hP : Measurable P) (n : ℕ) {γ : ℝ} (hγ : 0 ≤ γ) :
+    {T : X → X} (hT : Measurable T) {a : ℕ} {P : X → Fin a} (hP : Measurable P) (n : ℕ) {γ : ℝ} :
     γ * n * μ.real {x | nameOf T P n x ∉ heavyNames μ T P n (Real.exp (-(γ * n)))} ≤ blockEntropy μ T P n := by
   classical
-  -- `0 ≤ γ` is not read: the Markov step holds for every `γ`.
-  have _ := hγ
   set S := heavyNames μ T P n (Real.exp (-(γ * n)))
   have hset : {x | nameOf T P n x ∉ S} = nameOf T P n ⁻¹' ↑(Sᶜ) := by
     ext x
@@ -562,12 +559,12 @@ theorem badStarts_nameOf_le_visits {m : MeasurableSpace X} (μ : Measure X) {T :
   exact hbad
 
 /-- **The arithmetic of step 4** (EN2 § 3.5): with `γ = β/8` and `θ log(2a) ≤ β/8`, once `k ≤ θ n` the count's bound
-`(2a)^{θn + k} · e^{2γn}` is at most `e^{βn/2}`. A real-variable lemma (`LEAN.md`: one inequality, its own hypotheses). -/
-theorem rpow_mul_exp_le_exp {a β θ n k : ℝ} (ha : 1 ≤ a) (hθ : 0 ≤ θ) (hθβ : θ * Real.log (2 * a) ≤ β / 8)
+`(2a)^{θn + k} · e^{2γn}` is at most `e^{βn/2}`. A real-variable lemma (`LEAN.md`: one inequality, its own hypotheses).
+`k ≤ θ n` and `0 ≤ n` carry what the exponent needs; the planner's `0 ≤ θ` is not read and was dropped (FS131-IJN1; inventory
+item 770, ruling 2). -/
+theorem rpow_mul_exp_le_exp {a β θ n k : ℝ} (ha : 1 ≤ a) (hθβ : θ * Real.log (2 * a) ≤ β / 8)
     (hn : 0 ≤ n) (hkn : k ≤ θ * n) :
     (2 * a) ^ (θ * n + k) * Real.exp (2 * (β / 8) * n) ≤ Real.exp (β * n / 2) := by
-  -- `0 ≤ θ` is not read: `k ≤ θ n` and `0 ≤ n` carry what the exponent needs.
-  have _ := hθ
   have h2a : 1 < 2 * a := by linarith
   rw [Real.rpow_def_of_pos (by linarith), ← Real.exp_add, Real.exp_le_exp]
   have hlog : 0 < Real.log (2 * a) := Real.log_pos h2a
@@ -646,7 +643,7 @@ theorem exists_forall_exp_le_measureReal_nameCell {m : MeasurableSpace X} (μ : 
     calc (2 : ℝ) = Real.exp (Real.log 2) := (Real.exp_log (by norm_num)).symm
       _ ≤ Real.exp (β / 8 * k) := Real.exp_le_exp.mpr hγk
   have h𝒢g : (𝒢.card : ℝ) ≤ Real.exp (β / 8 * k) := by
-    have h := mul_card_heavyNames_le μ hTm hP k (Real.exp_pos (-(β / 8 * k)))
+    have h := mul_card_heavyNames_le μ hTm hP k (c := Real.exp (-(β / 8 * k)))
     have e : (𝒢.card : ℝ) = Real.exp (β / 8 * k) * (Real.exp (-(β / 8 * k)) * 𝒢.card) := by
       rw [← mul_assoc, ← Real.exp_add, add_neg_cancel, Real.exp_zero, one_mul]
     rw [e]
@@ -657,7 +654,7 @@ theorem exists_forall_exp_le_measureReal_nameCell {m : MeasurableSpace X} (μ : 
   have hBm : MeasurableSet B :=
     measurable_nameOf hTm hP k (show MeasurableSet {w : Fin k → Fin a | w ∉ 𝒢} from (Set.toFinite _).measurableSet)
   have hB : μ.real B ≤ θ ^ 2 := by
-    have h := mul_measureReal_light_le_blockEntropy μ hTm hP k hγpos.le
+    have h := mul_measureReal_light_le_blockEntropy μ hTm hP k (γ := β / 8)
     have h2 : β / 8 * k * μ.real B ≤ β / 8 * k * θ ^ 2 :=
       calc β / 8 * k * μ.real B ≤ blockEntropy μ T P k := h
         _ ≤ β / 8 * θ ^ 2 * k := hHk
@@ -685,18 +682,17 @@ theorem exists_forall_exp_le_measureReal_nameCell {m : MeasurableSpace X} (μ : 
   set N₁ := max k ⌈(k : ℝ) / θ⌉₊ with hN₁def
   have hWcard : ∀ n, N₁ ≤ n → ((W n).card : ℝ) ≤ Real.exp (β * n / 2) := by
     intro n hn
-    have hkn : k ≤ n := le_trans (le_max_left _ _) hn
     have hkθ : (k : ℝ) ≤ θ * n := by
       have h1 : (k : ℝ) / θ ≤ n := (Nat.le_ceil _).trans (by exact_mod_cast le_trans (le_max_right _ _) hn)
       rw [div_le_iff₀ hθpos] at h1
       linarith
-    have h1 := card_words_badStarts_le hk1 𝒢 hg2 h𝒢g hθpos.le hkn
+    have h1 := card_words_badStarts_le hk1 𝒢 hg2 h𝒢g (θ := θ) (n := n)
     rw [Fintype.card_fin] at h1
     have hgpow : Real.exp (β / 8 * k) ^ (2 * n / k : ℝ) = Real.exp (2 * (β / 8) * n) := by
       rw [← Real.exp_mul]
       congr 1
       field_simp
-    have h2 := rpow_mul_exp_le_exp (a := (a : ℝ)) (n := (n : ℝ)) (k := (k : ℝ)) ha' hθpos.le hθL (by positivity) hkθ
+    have h2 := rpow_mul_exp_le_exp (a := (a : ℝ)) (n := (n : ℝ)) (k := (k : ℝ)) ha' hθL (by positivity) hkθ
     calc ((W n).card : ℝ) ≤ (2 * (a : ℝ)) ^ (θ * n + k) * Real.exp (β / 8 * k) ^ (2 * n / k : ℝ) := h1
       _ = (2 * (a : ℝ)) ^ (θ * n + k) * Real.exp (2 * (β / 8) * n) := by rw [hgpow]
       _ ≤ Real.exp (β * n / 2) := h2
