@@ -137,3 +137,96 @@ the same before and after. Three prints, each `DONE 130`. The partner (this side
 print, at char 5810: … `inferInstance` … | here … `StarSubalgebra.commRingTopologicalClosure`") and **`FATAL:
 ADAPTED_VALUE lists §.CommutingSpectral.algebra_commRing, which reads DIFFERENT`**, READBACK FAILED, exit 1
 (`compare-variant.out`). The rule refuses another instance path, as ruled.
+
+**2.6 The comparator's `--self-test`, streaming, with every new rule.** `self_test_stream`: the in-memory self-test's
+plants, each planted into the stream (a block replaced or removed, a truncation, a rule's list or flag changed for one
+pass) and each a full streaming pass under the 8 GiB cap; its selections (the first theorem with an explicit binder, the
+first definition with a numeral, the users of a ruled head, …) made by one streaming survey with the in-memory
+predicates. **Its equivalence, plant for plant**: on every small label where the unplanted pair passes (seven of the
+eight; FS131-IPA1's early `laneB1` fails unplanted in both readers alike), the streaming self-test prints the in-memory
+one's plant lines exactly — every plant, verdict and count (`data/fs131/lp1/readback/selftest-small/*-{inmemory,stream,stream2}.out`:
+0 differing lines, before and after the two changes below).
+- **First run on lane D** (`selftest-run1.out`, exit 1): 30 plants, 28 REFUSED and two not. (i) *CLASS_PARAMS
+  `Algebra.algebraMap` withdrawn*: SILENT — lane D's one user of the head (`BoundedMeasurable.avg_orbit_const`) has
+  the same argument 3 at both pins, so withdrawing the rule can fire nothing here; the plant's failure mode is
+  unreachable on this label (`RUNNING.md` § Make the gate fail: a control whose failure is unreachable has not been
+  tested by passing). The self-test now measures it: the survey reads every user with the rule withdrawn, and where no
+  user's erased prints differ it prints `UNREACHABLE … not a plant, not counted`; where one does (FS131-IPB1's `laneC2`,
+  `NumberFields`) the plant runs as before (the small labels' lines unchanged). Its partner, *its argument 2 changed*,
+  stays REFUSED. (ii) *ADAPTED_VALUE: the value changed outright*: REFUSED FOR ANOTHER REASON — FS131-IPD1's plant
+  changed `IsMulCommutative.instCommRing`, which stands in an instance argument (erased), so the read-back reads
+  UP-TO-INSTANCES, which the rule accepts by its ruling; only the record of instance constants refused it. The rule
+  refuses what is not IDENTICAL or UP-TO-INSTANCES, so its plant now changes the value's head `inferInstance` (an
+  explicit position) and wants the ADAPTED_VALUE fatal, and the instance-argument plant is kept as a second plant that
+  wants the record's refusal. Neither change loosens a rule: the first removes a plant that cannot fire, with the count
+  that shows it cannot; the second aims the plant at what the ruling refuses.
+- **Second run on lane D** (`selftest.out`, exit 0): **`SELF-TEST OK: 30 plants refused, the unplanted pair passes`**,
+  the CLASS_PARAMS withdrawal `UNREACHABLE` (0 of 1 user). The new rules' plants, each REFUSED: PIN-DIFFERENCE —
+  `instAddCommGroupRot`'s full type changed (15 failing), taken out of the list (10 failing); EQSET —
+  `setIntegral_of_limit` taken out of the list (1 failing), with the three EQSET plants on `setIntegral_bm`;
+  INSTANCE_EVIDENCE — no receipt, the allowed constants withdrawn, another constant of the release's own planted in
+  `generator_unitary`'s instance argument, the receipt's line reading FAILED (each 1 failing and the rule's fatal);
+  TARGET_IN_LIBRARY — `residual_fourier` taken out of the list, no receipt, a constant outside Mathlib planted in its
+  instance argument, a differing constant's `USES` line placed outside Mathlib (each the TARGETS_HERE fatal);
+  ADAPTED_VALUE — the head changed (its fatal), an instance argument changed (the record's fatal); PROOF_ONLY's two; the
+  two TARGETS_HERE plants on the full types of `proper_to_borel_weak` and `residual_fourier`.
+- About two minutes a plant on this machine (each pass reads and normalises 2.9 GB); the run is resumable
+  (`--resume`, its progress in `data/fs131/lp1/readback/selftest-progress/`), not needed.
+
+**2.7 Level one for lane D** (`emit-level1`, then `ReleaseLevel1.lean` at v4.34.1 and `HereLevel1.lean` here; FS131-IPB1's
+EQSET `rfl` examples appended to the release side, copied from `laneC2`): the release side `DONE 309`, exit 1 with
+exactly one error, the EQSET control's (`tᶜ`, line 453: "Type mismatch … `(s =ᶠ[l] t) = (s =ᶠ[l] tᶜ)`"), so the two
+`rfl` examples beside it are accepted by the release's kernel; this side `DONE 308` (the one UNFOLDED name not printed
+here). **`LEVEL1 OK` — 252 IDENTICAL, 21 MOVED, 35 DIFFERENT of 308** (`data/fs131/lp1/readback/laneD/level1.out`).
+MOVED: each a module path (`Mathlib.Basic.*` there, `Mathlib.Data.*` here; `SubNegMonoid`'s `_autoParam`s,
+`IsMulCommutative`). DIFFERENT, read by hand, every one in a class already named: the hierarchy's instance paths —
+`Monoid.toMul`/`Semigroup.toMul`, `AddMonoid.toAdd`/`AddSemigroup.toAdd`, `CommSemiring.toSemiring`/`DivisionSemiring.toSemiring`,
+`AddSubmonoidClass.toAddCommMonoid`/`AddCommGroup.toAddCommMonoid` (item 763 (3), item 769's standing word):
+`AddCommGroup`, `AddCommGroup.mk`, `AddCommMonoid`, `AddGroup`, `CommCStarAlgebra`, `CommCStarAlgebra.mk`, `CommGroup`,
+`CommRing`, `ContinuousMap.toLp`, `InnerProductSpace`, `IntermediateField`, `LinearMap.extendOfNorm`,
+`Lp.compMeasurePreserving`, `Measure.restrict`, `NormedAddCommGroup`, `NormedSpace`, `Semiring`,
+`Submodule.HasOrthogonalProjection`, `Submodule.orthogonal`, `Submodule.starProjection`, `SubtractionMonoid`,
+`Unitary.linearIsometryEquiv`, `WeakDual.characterSpace`, `algebraicClosure`; `eLpNorm`/`MemLp`/`Lp` (lane A's class):
+`MeasureTheory.eLpNorm`, `MemLp`, `Lp`; `Measure.map` (item 758's): `MeasureTheory.Measure.map` (its hygienic auxiliary's
+name); EQSET: `ErgodicSMul`, `ErgodicVAdd`; the order of `max`'s arguments in a structure's universe:
+`LinearIsometry`, `.mk`, `LinearIsometryEquiv`, `.mk`; a proof auxiliary's number: `StarAlgEquiv.toStarAlgHom`. Lane C's
+level one (FS131-IPB1) differed at 17 constants, every one of them in this list or its classes.
+
+**2.8 Lane D's print here, from the library rebuilt after stage 3's docstrings** (the queued step `dump-here`): sha256
+`43aa2be5…`, **byte-identical** to the print the read-back above was made on. So the read-back's verdicts are those of
+the module as recompiled on this branch; the gate's pass runs the comparison again.
+
+## Stage 3 — SAVED (FS131-LP1): the docstrings, prose only
+
+Commit `5fab41e17`. The script that made every edit is kept (`data/fs131/lp1/doc_edits.py`: each replacement asserted
+to match exactly once). What each file said of the transfer, and what it says now:
+- `Outside/OAI158Collapse` (6 edits): the module docstring's apology ("Where a docstring below says a theorem 'rests on
+  the standard three axioms and `proper_to_borel_weak`', it now names a theorem") replaced by the sentence it pointed
+  at; the four docstrings that said "Rests on the standard three axioms and `proper_to_borel_weak`" now say the
+  standard three, through the ported transfer; "holds on this import in its place" and "(which rests on the other
+  import)" — written while two imports stood — now name the standard three and `no_proper_five_coloring`.
+- `Outside/OAI158` (2 edits; FS131-IPD1 had rewritten the module docstring at the switch): the read-back sentence ("the
+  statements of H and T are … term for term") now says "of T while it was declared here", and that T as the port's
+  theorem is read back by this landing (IDENTICAL, stage 2); the models paragraph says T's model is kept as its model.
+- `Plane/RadiusOutside` (7 edits): the title ("on the two outside theorems"), the bullets for `radius_down` and the join,
+  and the four docstrings that said "rests on the declared outside theorem `Outside.OAI158.proper_to_borel_weak`" now
+  say the standard three, through the release's transfer, its proof ported. The two `--` line comments in the proofs
+  ("the half on the declared outside theorem") are left as they are: a line comment is code to the code-only check, and
+  the brief says docstrings.
+- `Plane/LebesgueNumber` (9 edits): "composes the result with a declared outside theorem", its bullet "**The declared
+  outside theorem**", the statements' summary, the read-aloud's "given the outside theorem", the section heading
+  `/-! ## On the declared outside theorem … -/` and the three docstrings of its last section.
+Every "declared outside theorem" left in the four files names `no_proper_five_coloring`, the one still declared.
+
+**Docstrings only, in text**: `data/fs131/lc1/code_only_diff.py c7122cf10 <the four>` — **SAME** four times (1534, 7312,
+3329, 19754 characters of code before and after); its plant (the first `:=` made `:≡` in memory) **DIFFERS** four
+times (`data/fs131/lp1/code-only.out`, `code-only-plant.out`). **From the kernel's side**: stage 4's build, then the
+stage-1 dumper again.
+
+**From the kernel's side.** The build of `5fab41e17` (queued after the self-test's first run; `./scripts/build.sh` under
+the slot, `--mem 10 --cpus 4`, `MEMMAX=10G BATCH=8`): **`build: OK — 253 of 253 batches, 28 module(s) rebuilt, 0
+module(s) with warnings, 9m10s`** (`data/fs131/lp1/build/build1.log`; Lake's full log
+`build/gate/build/20261014T103833Z-2652823.log`) — `Outside/OAI158` and every module downstream of it (the palette chain,
+`SixRing`, `BorelTransfer`, `Collapse`, the two leaves) and the root. Then the stage-1 dumper again
+(`data/fs131/lp1/stmt/after.out`, `DONE 541`): **byte-identical** to the dump made before any edit (`cmp`; sha256
+`1e6ae66d…` both). No stored type and no definition's value moved.
