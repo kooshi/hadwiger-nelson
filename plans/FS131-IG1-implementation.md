@@ -328,3 +328,9 @@ block above and the theorems listed in this record.
 ## Stage 5 — SAVED: the drafts
 
 The drafts above. Nothing of this job is running or queued.
+
+## Stage 6 — SAVED: the report
+
+`data/fs131/reports/FS131-IG1.md`, the same text as the hand-back. Nothing of this job is running or queued. The branch
+`fs131-wpg` is not pushed (the brief). The tree's compiled library is current for the branch head after build 3 (the
+commits after it touch no Lean file).
