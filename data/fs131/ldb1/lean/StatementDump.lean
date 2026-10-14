@@ -1,6 +1,6 @@
 import Proofs.HadwigerNelson.Plane.DensityBound.Theorem
 /-!
-FS131-LDB1 (FS131-IDB3's dumper, the import and the module count changed) — every constant of every module of the density bound (`Plane/DensityBound/*`, `Cells/*`,
+FS131-LDB1 (FS131-IDB3's dumper, the import and the module count changed, and a by-name section for the constant the ruling moved) — every constant of every module of the density bound (`Plane/DensityBound/*`, `Cells/*`,
 `Plane/OneAvoidingDensity`) as the kernel holds it, read from the modules' own compiled data (after FS131-IDB2's dump; the
 value is printed by hash only, the cell literals being megabytes):
 
@@ -44,6 +44,18 @@ def run : CommandElabM Unit := do
       | _ => pure ()
   IO.println s!"## MODULES {count}"
   if count != 83 then throwError "{count} modules of the density bound are imported, not 83"
+  -- By name, wherever it is declared: the constant the coordinator's ruling moved (the brief's Amendment, 2026-10-14):
+  -- this line's `def mOne` deleted, `main`'s (`Plane/OneClass/Defs`) read in its place.
+  for n in [`HadwigerNelson.Plane.mOne] do
+    match env.find? n with
+    | none => IO.println s!"## BYNAME {n} ABSENT"
+    | some ci =>
+      let m := (env.getModuleIdxFor? n).map (mods[·]!)
+      IO.println s!"## BYNAME {n} module={m.getD `none} kind={kindOf ci}"
+      IO.println s!"TYPE {ci.type.hash} {ci.type}"
+      match ci with
+      | .defnInfo v => IO.println s!"VALUE {v.value.hash}"
+      | _ => pure ()
 
 #eval run
 

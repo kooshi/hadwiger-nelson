@@ -1,8 +1,9 @@
 import Proofs.HadwigerNelson.Plane.Suprema
+import Proofs.HadwigerNelson.Plane.OneClass.Defs
 import Mathlib.Analysis.InnerProductSpace.PiL2
 
 /-!
-# `m₁(ℝ²) < 1/4`: the density of planar sets avoiding unit distances, as a named outside hypothesis (FS-131, job FS131-KR1; module M12's input; skeleton)
+# `m₁(ℝ²) < 1/4`: the density of planar sets avoiding unit distances (FS-131: the statement FS131-KR1's, its leaf FS131-IDB2's; module M12's input)
 
 **Read aloud, against the paper.** `OneAvoidingDensityBound` is `[AmbrusEtAl2023]` Theorem 1 (arXiv:2207.14179 v3, p. 4) in
 the paper's own form: "Any Lebesgue measurable, 1-avoiding planar set has upper density at most 0.2470", with the paper's
@@ -10,13 +11,16 @@ definitions (p. 2): a set is *1-avoiding* when it is independent in the unit dis
 `δ(A) = lim sup_{R→∞} λ₂(A ∩ B₂(x, R)) / λ₂(B₂(x, R))` "where `x ∈ ℝ^d` is fixed", the paper adding that it "is known to be
 independent of the choice of `x`" — so the statement is made for every centre `x`. Lebesgue measurable is
 `NullMeasurableSet A volume`; the plane is `EuclideanSpace ℝ (Fin 2)` with its Lebesgue measure; `B₂(x, R)` is the open ball
-(an open and a closed ball differ by a null sphere, so the limsup is the same). **An external theorem, computer-assisted, a
-named hypothesis of the library standing for it — not declared as an axiom** (the coordinator's ruling of 2026-10-14: an
-axiom is Kooshi's decision; FS131-KR1 drafts its four items in `plans/FS131-KR1-chain-map.md`).
+(an open and a closed ball differ by a null sphere, so the limsup is the same). **A theorem of the library**:
+`oneAvoidingDensityBound` (`Plane/DensityBound/Theorem`) proves it from the paper's certificate, checked by the kernel with no
+`native_decide` (FS131-KDB1's plan; FS131-IDB1, -IDB2 and -IDB3's proofs). It entered the library as a hypothesis of the
+theorems below, never as an axiom.
 
 **The library's form.** `mOne` is `m₁(ℝ²)` on the library's plane `ℂ` (eq. (1) of the paper: the supremum of the upper
-densities of measurable 1-avoiding sets), with `Plane.upperDensity` (balls centred at `0`) and `BandFree A 0` (no pair at
-distance exactly `1`). `upperDensity_le_of_oneAvoidingDensityBound` carries the paper's form to `ℂ` through the isometry
+densities of measurable 1-avoiding sets), defined once, in `Plane/OneClass/Defs` (over Borel sets); `mOne_eq_iSup_bandFree`
+states it over Lebesgue-measurable sets with `Plane.upperDensity` (balls centred at `0`) and `BandFree A 0` (no pair at
+distance exactly `1`), the form this module first defined it by (the coordinator's ruling at FS131-LDB1, when the two
+lines met). `upperDensity_le_of_oneAvoidingDensityBound` carries the paper's form to `ℂ` through the isometry
 `Complex.orthonormalBasisOneI.repr`, which preserves volume; `mOne_lt_quarter` is what the count (module M12) reads.
 
 **Model of the hypotheses** (`LEAN.md` § Assumptions, item 3): `oneAvoidingDensityBound_model` — the open ball of radius
@@ -28,17 +32,27 @@ namespace HadwigerNelson.Plane
 open MeasureTheory Filter Metric
 
 /-- **`[AmbrusEtAl2023]` Theorem 1, as printed** (arXiv:2207.14179 v3, p. 4; definitions p. 2 and eq. (1)): every Lebesgue
-measurable, 1-avoiding planar set has upper density at most `0.2470`, at every centre. External: a named hypothesis standing
-for an outside theorem, not proved in the library. -/
+measurable, 1-avoiding planar set has upper density at most `0.2470`, at every centre. Proved in the library:
+`oneAvoidingDensityBound` (`Plane/DensityBound/Theorem`), from the paper's certificate. -/
 def OneAvoidingDensityBound : Prop :=
   ∀ A : Set (EuclideanSpace ℝ (Fin 2)), NullMeasurableSet A volume → (∀ a ∈ A, ∀ b ∈ A, dist a b ≠ 1) →
     ∀ x : EuclideanSpace ℝ (Fin 2),
       limsup (fun R : ℝ => volume (A ∩ ball x R) / volume (ball x R)) atTop ≤ ENNReal.ofReal 0.2470
 
-/-- **`m₁(ℝ²)`** on the library's plane: the supremum of the upper densities of Lebesgue-measurable sets with no pair at
-distance `1`. -/
-noncomputable def mOne : ENNReal :=
-  ⨆ (A : Set ℂ) (_ : NullMeasurableSet A volume ∧ BandFree A 0), upperDensity A
+/-- **`m₁(ℝ²)` over Lebesgue-measurable sets**: `mOne` (`Plane/OneClass/Defs`, a supremum over Borel sets) is the supremum
+of the upper densities of the Lebesgue-measurable sets with no pair at distance `1` — by `mOne_eq_iSup_nullMeasurableSet`,
+and `isIndepSet_unitDistance_iff` for `BandFree A 0`. -/
+theorem mOne_eq_iSup_bandFree :
+    mOne = ⨆ (A : Set ℂ) (_ : NullMeasurableSet A volume ∧ BandFree A 0), upperDensity A := by
+  rw [mOne_eq_iSup_nullMeasurableSet]
+  refine iSup_congr fun A => ?_
+  rw [iSup_and]
+  refine iSup_congr fun _ => ?_
+  have h : (unitDistance ℂ).IsIndepSet A ↔ BandFree A 0 := by
+    rw [isIndepSet_unitDistance_iff]
+    simp only [BandFree, sub_zero, add_zero]
+    exact forall₂_congr fun x _ => forall₂_congr fun y _ => ne_iff_lt_or_gt
+  exact iSup_congr_Prop h fun _ => rfl
 
 /-- **A model of the hypotheses** of `OneAvoidingDensityBound`: the open ball of radius `1/2` about `0`. -/
 theorem oneAvoidingDensityBound_model :
@@ -73,11 +87,11 @@ theorem upperDensity_le_of_oneAvoidingDensityBound (h : OneAvoidingDensityBound)
   rw [upperDensity, hfun]
   exact h _ hA₂ h1₂ 0
 
-/-- `m₁(ℝ²) ≤ 0.2470`, given the outside theorem. -/
+/-- `m₁(ℝ²) ≤ 0.2470`, given `OneAvoidingDensityBound`, which `oneAvoidingDensityBound` proves. -/
 theorem mOne_le_of_oneAvoidingDensityBound (h : OneAvoidingDensityBound) : mOne ≤ ENNReal.ofReal 0.2470 :=
-  iSup₂_le fun _ hA => upperDensity_le_of_oneAvoidingDensityBound h hA.1 hA.2
+  mOne_eq_iSup_bandFree ▸ iSup₂_le fun _ hA => upperDensity_le_of_oneAvoidingDensityBound h hA.1 hA.2
 
-/-- **`m₁(ℝ²) < 1/4`**, given the outside theorem — the form the count reads. -/
+/-- **`m₁(ℝ²) < 1/4`**, given `OneAvoidingDensityBound`, which `oneAvoidingDensityBound` proves — the form the count reads. -/
 theorem mOne_lt_quarter (h : OneAvoidingDensityBound) : mOne < ENNReal.ofReal (1 / 4) :=
   (mOne_le_of_oneAvoidingDensityBound h).trans_lt ((ENNReal.ofReal_lt_ofReal_iff (by norm_num)).mpr (by norm_num))
 

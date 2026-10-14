@@ -6,7 +6,7 @@ import Mathlib.MeasureTheory.Measure.Lebesgue.Complex
 import Mathlib.Analysis.Fourier.Inversion
 
 /-!
-# The autocorrelation of a bounded planar set is positive definite against `J₀` (FS-131, FS131-KDB1; skeleton)
+# The autocorrelation of a bounded planar set is positive definite against `J₀` (FS-131: FS131-KDB1's statements, FS131-IDB2's proofs)
 
 `autocorr E z = vol(E ∩ (E − z))`. For a bounded measurable `E ⊆ ℂ`, radii `r_k` and reals `c_k`,
 

@@ -2,7 +2,7 @@ import Proofs.HadwigerNelson.Plane.DensityBound.Pattern
 import Proofs.HadwigerNelson.Plane.OneAvoidingDensity
 
 /-!
-# Proposition 1 in finite-window form, and the composition proving `OneAvoidingDensityBound` (FS-131, FS131-KDB1; skeleton)
+# Proposition 1 in finite-window form, and the composition proving `OneAvoidingDensityBound` (FS-131: FS131-KDB1's statements, FS131-IDB2's proofs)
 
 Any dual certificate `C` (valid) with a `w₀` and `µ < 1` such that `ϕ(t) ≥ 1 − µ` for all `t ≥ 0` bounds the upper density
 of every Lebesgue-measurable 1-avoiding planar set by `C.bound / (1 − µ)`, at every centre. With `[AmbrusEtAl2023]`'s

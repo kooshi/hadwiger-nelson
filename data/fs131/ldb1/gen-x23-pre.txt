@@ -1,0 +1,53 @@
+slot: admitted ldb1-genx23: mem 4 GiB (hard cap), cpus 5
+{
+ "points": 23,
+ "edges": 47,
+ "w2": 26,
+ "rows": 2321,
+ "terms": 4669,
+ "group_sizes": [
+  23,
+  1,
+  1,
+  9,
+  55,
+  26,
+  4,
+  47,
+  44,
+  117,
+  64,
+  106,
+  129,
+  174,
+  155,
+  263,
+  361,
+  282,
+  369,
+  510,
+  616,
+  872,
+  441
+ ],
+ "frontier_depth": 15,
+ "frontier": 492,
+ "tests": 7123866,
+ "chunks": 103,
+ "max_subtree": 48049,
+ "max_den": 444,
+ "bound": 246982629459983080000,
+ "maxL": 246972696582420860700,
+ "minV_minus_nu": -6.712243778070151e-08,
+ "atoms_ok": true,
+ "congruences_ok": true,
+ "distances_ok": true,
+ "table_mismatches": 0,
+ "sha256": {
+  "data/pa-ambrus2023/verification23.nb": "7d230f20d41a2a3355bee78241c9d626134548c18eeec4de8a1d1217a74cecec",
+  "data/pa-ambrus2023/g23.csv": "cbfe22f5028f23a84f17d97802a93517e702eea0181d692ad7f5477763cf7274"
+ }
+}
+chunk tests: min 32097 max 79916
+WROTE 23 modules; data/fs131/idb3/gen/summary.json
+exit=0

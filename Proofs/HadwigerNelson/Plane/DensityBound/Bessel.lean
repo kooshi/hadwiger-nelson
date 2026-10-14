@@ -5,7 +5,7 @@ import Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic
 import Mathlib.MeasureTheory.Integral.CircleAverage
 
 /-!
-# `J₀` and `J₁` from their integrals; the Bessel system, its energy, the circle average (FS-131, FS131-KDB1; skeleton)
+# `J₀` and `J₁` from their integrals; the Bessel system, its energy, the circle average (FS-131: FS131-KDB1's statements, FS131-IDB1's proofs)
 
 Mathlib at the pin has no Bessel function. This module defines the two this proof needs by their integrals over a full
 period,

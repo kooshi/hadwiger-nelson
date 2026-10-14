@@ -2,7 +2,7 @@ import Proofs.HadwigerNelson.Plane.DensityBound.Bessel
 import Mathlib.Analysis.InnerProductSpace.Calculus
 
 /-!
-# The ODE comparison lemma for the Bessel system (FS-131, FS131-KDB1; skeleton)
+# The ODE comparison lemma for the Bessel system (FS-131: FS131-KDB1's statements, FS131-IDB1's proofs)
 
 The kernel certifies `J₀` on an interval by any differentiable pair `p = (p₀, p₁)` whose **defect** against the Bessel
 system `J₀′ = −J₁`, `J₁′ = J₀ − J₁/x` is small: the error `e = J − p` satisfies `e′ = A(x)e − δ` with

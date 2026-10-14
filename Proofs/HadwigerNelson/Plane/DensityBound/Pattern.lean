@@ -1,7 +1,7 @@
 import Proofs.HadwigerNelson.Plane.DensityBound.Autocorr
 
 /-!
-# Dual certificates and the pattern expectation (FS-131, FS131-KDB1; skeleton)
+# Dual certificates and the pattern expectation (FS-131: FS131-KDB1's statements, FS131-IDB2's proofs)
 
 `[AmbrusEtAl2023]` Proposition 1 (pp. 13–14) is LP weak duality over the atoms of a Venn diagram, written for a periodic
 set and an O(2)-average. Here it is one expectation over a **finite window**: for a bounded Borel 1-avoiding `E` and a
