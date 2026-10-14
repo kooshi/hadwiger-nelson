@@ -102,3 +102,9 @@ branch and do not push**; I copy the branches to a local backup.
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 (2026-10-14 06:16 UTC) — two more lemmas made public; one import
+
+Your touches are extended in two ways. First, `SimpleGraph.card_le_indepNum_induce` and `exists_indep_card_eq_indepNum` in `Defs` are made public, with their statements unchanged and dumped, and listed with the visibility change; no private copy goes elsewhere. Second, `import Proofs.HadwigerNelson.Instances.Seven` is added to `Algebraic` for A4, with its stored statements compared before and after and the ARCHITECTURE imports cell drafted (inventory item 774).
+
+You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
