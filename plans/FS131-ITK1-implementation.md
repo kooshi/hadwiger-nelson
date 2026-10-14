@@ -6,7 +6,12 @@
 
 ## Theorems this phase proved
 
-(Filled as stages are saved.)
+Each [kernel], axioms `[propext, Classical.choice, Quot.sound]` as printed from the built tree; all under
+`HadwigerNelson.Rigidity`.
+- **T-K, `Rigidity/TateKernel`** (build 1; `data/fs131/itk1/logs/AxTK.log`): `exists_eq_mixedEmbedding_of_mem_oAnn`,
+  `eq_zero_of_mem_oAnn`, `exists_nat_forall_mem_oAnn`, `tatePi_ker_subset`, `tatePi_exists_nat_mul_mem`,
+  `tatePi_exists_isCompact`, `tatePi_eq_one_forall_imp`, `surjective_tatePi`. With them **`exists_tateModel : ∀ (F :
+  Subfield ℝ) [NumberField ↥F], Nonempty (TateModel F)`** prints the standard three: lane T is complete.
 
 ## Stage 1 — SAVED: the readback; the stored statements before any edit
 
@@ -89,3 +94,40 @@ to another module, a new public constant, an axiom, a leaf become a definition) 
 | | `TateModel.measure_shell_eq_zero` | shells null | `MeasurePreserving.conservative` |
 | | `exists_absAt_eq_norm` | `‖L_w ∖ 0‖ = |L ∖ 0|_w` | density, ultrametric |
 | | `TateModel.leafSet_subset`, `measure_compl_TA_eq_zero` | leaf set `⊆ T + A ∪` shells; `μ` carried by `T + A` | `mem_TA`; countable null union |
+
+## Stage 2 — SAVED: lane T-K proved; `exists_tateModel` on the standard three
+
+**2.1 The leaves**, all eight by the plan's routes (FS131-KT1 §§ 4.2–4.3), in two elaboration rounds (`logs/TK-1.log`: six
+errors — `RestrictedProduct.ext`'s explicit arguments, two rewrites under a `show` that had unfolded the completion's
+coercion, a `field_simp` under a `let`, the instance `Countable (unitRing F)`; `logs/TK-2.log`: exit 0, no warning). About
+230 lines against the plan's ~350. Routes, where they differ in detail from the table:
+- `eq_zero_of_mem_oAnn`: as § 4.2 step 4; the congruence at `w₀` is `c s − t₀ = −c(t₀/c − s)` (`mul_div_cancel₀`), at
+  `w ≠ w₀` both terms integral.
+- `exists_nat_forall_mem_oAnn`: steps 1–3 with `c := ι(d₀)·(b − ι y)` and `b = ι y` from `ι(d₀⁻¹)·c = b − ι y`.
+- `tatePi_ker_subset`, `tatePi_exists_nat_mul_mem` through one private helper, `toSAdele_mul_mem_oAnn` (`π a = 1` and
+  `c·O′ ⊆ R` put `ι(c)·a` in `oAnn`; the element `c s ∈ R` read as a point of `unitRing F` by
+  `UnitRing.coe_mem_unitRingOver_iff`).
+- `tatePi_exists_isCompact`: `K = closure(ZSpan.fundamentalDomain latticeBasis) ×ˢ range structureMap`; the integer part
+  `ZSpan.floor` lies in `mixedEmbedding.integerLattice` (`mem_span_latticeBasis`), so is `ι_∞ s`, `s ∈ 𝓞 L`, and
+  `a − ι(t + s)` has archimedean part `ZSpan.fract`.
+- `tatePi_eq_one_forall_imp`: `b = ι_∞(q·x⁻¹)`, `q = 1/(2[L:ℚ])`; `e(2π·½) = 1` would make `½` an integer.
+- `surjective_tatePi`: the range of `π.toMonoidHom` is `π(K)`; `Countable (unitRing F)` supplied in the proof from
+  `SpectralChain.countable_unitRing` (no new import).
+Eleven private helpers (`valuation_coe_le_one`, `coe_mem_integers_iff`, `coe_mem_stableIntegers`,
+`mem_stableIntegers_of_away`, `snd_mul_apply`, `snd_sub_apply`, `toSAdele_snd_apply`, `exists_int_of_exp_eq_one`,
+`toSAdele_injective`, `sub_toSAdele_mem_oAnn`, `toSAdele_mul_mem_oAnn`).
+
+**2.2 Build 1** (`./scripts/build.sh` under the slot, `MEMMAX=10G BATCH=8`): `OK — 254 of 254 batches, 4 module(s)
+rebuilt, 11 module(s) with warnings, 7m50s`, exit 0 (`logs/build1.log`; gate log
+`build/gate/build/20261014T123916Z-3023456.log`). Rebuilt: `TateKernel`, `TateExists`, `ZeroEntropyClosed`, `Proofs`.
+Every warning is ``declaration uses `sorry` ``, none from `TateKernel`.
+
+**2.3 The axioms** (`probes/AxTK.lean` on build 1's tree, `logs/AxTK.log`): the eight leaves and `exists_tateModel`, each
+`[propext, Classical.choice, Quot.sound]`; `zeroEntropyCarried_of_numberField` `[propext, sorryAx, Classical.choice,
+Quot.sound]` (the M8b leaves). The one line was sent to the coordinator.
+
+**2.4 No statement changed, from the kernel's side** (build 1's dump `statements-b1.txt`, `.xz` and sha256 committed,
+against stage 1's): **PASS** — 141 named constants, 40 data definitions' values, 17 example heads; no new public
+constant; the eleven private helpers listed; internal constants 35 → 37 (`statements-compare-b1.out`).
+
+**2.5 Re-priced.** T-K came in at about two thirds of its plan, in two rounds for the whole lane.

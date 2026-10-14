@@ -1,0 +1,127 @@
+slot: admitted itk1: mem 4 GiB (hard cap), cpus 5,6
+Proofs/HadwigerNelson/Rigidity/TateKernel.lean:132:20: error: Application type mismatch: The argument
+  RestrictedProduct.ext ?m.441
+has type
+  ∀ (A : (i : ?m.439) → Set (?m.441 i)) {𝓕 : Filter ?m.439} {x y : Πʳ (i : ?m.439), [?m.441 i, A i]_[𝓕]},
+    (∀ (i : ?m.439), x i = y i) → x = y
+but is expected to have type
+  c.2 = 0.2
+in the application
+  Prod.ext h1 (RestrictedProduct.ext ?m.441)
+Proofs/HadwigerNelson/Rigidity/TateKernel.lean:132:43: error: Application type mismatch: The argument
+  h2
+has type
+  ∀ (w : SplitPlace F), c.2 w = 0
+of sort `Prop` but is expected to have type
+  ?m.439 → Type ?u.187
+of sort `Type (max (?u.187 + 1) ?u.188)` in the application
+  RestrictedProduct.ext h2
+Proofs/HadwigerNelson/Rigidity/TateKernel.lean:159:17: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (algebraMap (↥(fieldI F)) (adicCompletion ↥(fieldI F) ↑w)) ?x *
+    (algebraMap (↥(fieldI F)) (adicCompletion ↥(fieldI F) ↑w)) ?y
+in the target expression
+  { toCompletion := ↑((WithVal.equiv (valuation ↥(fieldI F) ↑w)).symm ↑d₀) } * b.2 w -
+      { toCompletion := ↑((WithVal.equiv (valuation ↥(fieldI F) ↑w)).symm ↑d₀) } *
+        { toCompletion := ↑((WithVal.equiv (valuation ↥(fieldI F) ↑w)).symm y) } ∈
+    adicCompletionIntegers ↥(fieldI F) ↑w
+
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+d₀ : ℕ
+hd₀ : d₀ ≠ 0
+hd :
+  ∀ (y : ↥(fieldI F)),
+    (∀ (s : 𝓞 ↥(fieldI F)), ∃ n, (Algebra.trace ℚ ↥(fieldI F)) (y * ↑s) = ↑n) →
+      ∀ (v : HeightOneSpectrum (𝓞 ↥(fieldI F))), (valuation (↥(fieldI F)) v) (↑d₀ * y) ≤ 1
+a : SAdeleRing F
+ha : a ∈ oAnn F
+t : ↥(fieldI F)
+ht : IsApprox F a t
+b : SAdeleRing F
+hb : b = a - (toSAdele F) t
+hbO : b ∈ oAnn F
+hbint : ∀ (w : SplitPlace F), b.2 w ∈ adicCompletionIntegers ↥(fieldI F) ↑w
+y : ↥(fieldI F)
+hy : b.1 = (mixedEmbedding ↥(fieldI F)) y
+htry : ∀ (s : 𝓞 ↥(fieldI F)), ∃ n, (Algebra.trace ℚ ↥(fieldI F)) (y * ↑s) = ↑n
+hdyO : ↑d₀ * y ∈ stableIntegers F
+c : SAdeleRing F
+hc : c = (toSAdele F) ↑d₀ * (b - (toSAdele F) y)
+hc1 : c.1 = 0
+w : SplitPlace F
+⊢ { toCompletion := ↑((WithVal.equiv (valuation ↥(fieldI F) ↑w)).symm ↑d₀) } * b.2 w -
+      { toCompletion := ↑((WithVal.equiv (valuation ↥(fieldI F) ↑w)).symm ↑d₀) } *
+        { toCompletion := ↑((WithVal.equiv (valuation ↥(fieldI F) ↑w)).symm y) } ∈
+    adicCompletionIntegers ↥(fieldI F) ↑w
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    w
+  has type
+    SplitPlace F
+  but is expected to have type
+    { v // ¬IsStablePlace F v }
+  in the application
+    ↑w
+Proofs/HadwigerNelson/Rigidity/TateKernel.lean:238:10: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (algebraMap (↥(fieldI F)) (adicCompletion ↥(fieldI F) ↑w)) (?x + ?y)
+in the target expression
+  a.2 w - { toCompletion := ↑((WithVal.equiv (valuation ↥(fieldI F) ↑w)).symm (t + ↑s)) } ∈
+    adicCompletionIntegers ↥(fieldI F) ↑w
+
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+this : ∀ (w : SplitPlace F), CompactSpace ↥(adicCompletionIntegers ↥(fieldI F) ↑w)
+B : Module.Basis (Module.Free.ChooseBasisIndex ℤ (𝓞 ↥(fieldI F))) ℝ (mixedEmbedding.mixedSpace ↥(fieldI F)) :=
+  mixedEmbedding.latticeBasis ↥(fieldI F)
+H : Set (SplitAdeleRing F) :=
+  Set.range
+    (RestrictedProduct.structureMap (fun w => adicCompletion ↥(fieldI F) ↑w)
+      (fun w => ↑(adicCompletionIntegers ↥(fieldI F) ↑w)) Filter.cofinite)
+hH : IsCompact H
+hD : IsCompact (closure (ZSpan.fundamentalDomain B))
+a : SAdeleRing F
+t : ↥(fieldI F)
+ht : IsApprox F a t
+s : 𝓞 ↥(fieldI F)
+hs :
+  ((mixedEmbedding ↥(fieldI F)).comp (algebraMap (𝓞 ↥(fieldI F)) ↥(fieldI F))).toIntAlgHom.toLinearMap s =
+    ↑(ZSpan.floor B (a - (toSAdele F) t).1)
+hs' : (mixedEmbedding ↥(fieldI F)) ↑s = ↑(ZSpan.floor B (a - (toSAdele F) t).1)
+w : SplitPlace F
+⊢ a.2 w - { toCompletion := ↑((WithVal.equiv (valuation ↥(fieldI F) ↑w)).symm (t + ↑s)) } ∈
+    adicCompletionIntegers ↥(fieldI F) ↑w
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    w
+  has type
+    SplitPlace F
+  but is expected to have type
+    { v // ¬IsStablePlace F v }
+  in the application
+    ↑w
+Proofs/HadwigerNelson/Rigidity/TateKernel.lean:266:61: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+r : ↥(unitRing F)
+h : ∀ (a : SAdeleRing F), ((tatePi F) a) r = 1
+hr : ¬r = 0
+hx : (ofUnitRing F) r ≠ 0
+hn : ↑(Module.finrank ℚ ↥(fieldI F)) ≠ 0
+q : ℚ := 1 / (2 * ↑(Module.finrank ℚ ↥(fieldI F)))
+b : mixedEmbedding.mixedSpace ↥(fieldI F) :=
+  (mixedEmbedding ↥(fieldI F)) ((algebraMap ℚ ↥(fieldI F)) q * ((ofUnitRing F) r)⁻¹)
+h1 : Circle.exp (2 * Real.pi * ↑(Module.finrank ℚ ↥(fieldI F) • q)) = 1
+h2 : ((b, 0) * (toSAdele F) ((ofUnitRing F) r)).1 = (mixedEmbedding ↥(fieldI F)) ((algebraMap ℚ ↥(fieldI F)) q)
+m : ℤ
+hm : ↑(Module.finrank ℚ ↥(fieldI F) • q) = ↑m
+⊢ ↑(Module.finrank ℚ ↥(fieldI F)) * q * 2 = 1
+Proofs/HadwigerNelson/Rigidity/TateKernel.lean:295:15: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Countable ↥(unitRing F)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+seconds=12
+exit=1
