@@ -220,3 +220,84 @@ T's `exists_tateModel`) and the measure hypotheses of Lemma 3.1′ (stage 2.3's 
 | `TateModel.exists_point_of_heavy` | § 3.1's arithmetic for `B₀` (`scaleThin` and `8M^{−10}` tend to `0`: `tendsto_pow_atTop_nhds_zero_of_lt_one` on `M⁻¹`); `B_j := Nat.rec B₀ (fun _ B => 3B²)`; a collision at each (`exists_collision`, `Classical.choice`), the heavy bound transferred to the closed box (`measureReal_mono`, `thinBox_subset_closedThinBox`); `point_eq` by induction gives one `t`; `size_sub_point_le` and `le_of_forall_pos_lt_add`-shape on `2^{D+2}M(B_j)^{−13} → 0` (`M(B_j) ≥ 3^{2^j}`), so `p.size (x̃ − ι t) = 0` (`size_nonneg`) | as named |
 | `TateModel.measurableSet_leafSet` | `leafSet = ⋃ t, π '' ((ι t + ·) '' hyperplane p)` (`Set.image_iUnion`, `sub_eq_iff_eq_add`); `MeasurableSet.iUnion` over the countable `L` (`countable_fieldI`), `measurableSet_image` of the closed `(ι t + ·) '' W_p` | as named |
 | `TateModel.measure_leafSet_compl_eq_zero` | for `η > 0`: `thinBox_heavy` at `β = heavyExponent F` (`heavyExponent_pos`); for `x ∈ X′` a lift (`surjective_π`) and `exists_point_of_heavy` put `x` in `leafSet`; so `1 − η < μ.real X′ ≤ μ.real leafSet` for every `η`, `μ.real leafSet = 1`, and `μ leafSetᶜ = 0` (`prob_compl_eq_one_sub`, `measurableSet_leafSet`) | `prob_compl_eq_one_sub`, `measureReal_mono` |
+
+## Stage 4 — SAVED: part 4 typed (leaves and wandering shells), ending at `zeroEntropyCarried`'s statement
+
+Two new modules: `Rigidity/WanderingShells` (7 leaves; `logs/WanderingShells-s4.log`, `exit=0`) and `Rigidity/ZeroEntropyClosed`
+(no leaf of its own; `logs/ZeroEntropyClosed-s4.log`, `exit=0`). **The composition is proved from the parts' statements**:
+`zeroEntropyCarried_of_tateModel (D : TateModel F) : ZeroEntropyCarried F` (five lines over `exists_one_lt_absAt`,
+`exists_isGap`, `exists_eps_lt`, `measure_leafSet_compl_eq_zero`, `measure_compl_TA_eq_zero`), and
+`zeroEntropyCarried_of_numberField (F) [NumberField F] : ZeroEntropyCarried F := (exists_tateModel F).elim
+zeroEntropyCarried_of_tateModel`. The kernel's print (`probes/KernelSigs.lean`, `logs/KernelSigs.log`):
+`zeroEntropyCarried_of_numberField : ∀ (F : Subfield ℝ) [NumberField ↥F], ZeroEntropyCarried F`, axioms `[propext, sorryAx,
+Classical.choice, Quot.sound]` (the `sorryAx` through the leaves of M8b and lane T); `zeroEntropyCarried`, for comparison,
+`∀ (F) [NumberField ↥F], NoRamifiedStableDyadic F → ZeroEntropyCarried F`.
+
+### 4.1 The shorter route for X01D §§ 3.7 (ii)–(iii) and 3.8 (a finding; sent to the coordinator at this stage)
+
+X01D fixes `t`, takes the stabiliser `U_t` of finite index (finite `U`-orbits on `L/Λ`), pulls `μ` back to `ν_t` on `W_{v*}` along
+the Borel isomorphism `φ_t`, and runs the shells for `g^k ∈ U_t`, `g = γ/σ(γ)` with `(γ) = 𝔓_w^h`. FS131-KN9 § 4.1 replaced
+strong approximation by `O′/nO′` finite and Lusin–Souslin by σ-compactness. **Here none of these is read.** The shells are sets
+of `R̂`, `S(t, c) := π(ι t + {a ∈ W_p : |a_w|_w = c})`, indexed by `t ∈ L` and `c > 0`, and they **wander** under `rot g` itself:
+`(rot g)^m S(t, c) ⊆ S(g^m t, |g|_w^m c)`, and the uniqueness of the lift on a leaf (X01D's own § 3.7 (i), `ι(L) ∩ W_p = 0`) makes
+that set disjoint from `S(t, c)` — the uniqueness does what the stabiliser did. A finite invariant measure makes `rot g`
+conservative (Mathlib's `MeasurePreserving.conservative`), so every shell is null; countably many shells cover the leaf set
+outside `π(L + L_∞)`. `g` needs only `|g|_w < 1`: `γ/γ̄` for any `γ ∈ 𝔓_w ∖ σ𝔓_w`. **Inputs that leave M8b:** the finiteness of
+`O′/nO′`, the stabiliser, `ν_t` and the Borel isomorphism `φ_t`, the class group. The step reads `π_eq_π_iff`, `π_unit_mul`,
+`mem_TA` and Borel images only.
+
+### 4.2 Read aloud against X01D
+
+- `TateModel.eq_of_π_add_eq`: X01D l. 291, "`t + a ≡ t′ + a′ (mod Λ)` forces `t − t′ − λ ∈ L ∩ W_{v*} = 0`" — its consequence
+  `a = a′`, which is what is read.
+- `TateModel.shell`, `iterate_rot_not_mem_shell`, `measure_shell_eq_zero`: X01D ll. 303–305, "the shells `A_j := {a ∈ W_{v*} :
+  |a_w|_w = N𝔓_w^{j}}` … satisfy `g^k A_j = A_{j−hk}`, so `ν_t(A_j)` is periodic in `j`; their sum … is finite; so every
+  `ν_t(A_j) = 0`" — here the shell is the image in `R̂` of `A_j` on the leaf of `t`, `N𝔓_w^j` is any `c > 0`, and "periodic and
+  summable" is "wandering for a conservative map".
+- `leafSet_subset`, `measure_compl_TA_eq_zero`: X01D ll. 305–306, "Over the countably many split `w`: `ν_t` is carried by
+  `W_{v*} ∩ L_∞` … Hence `μ` is carried by `⋃_t π(t + L_∞) = T + A`", with `π(t + L_∞) ⊆ T + A` from `TateModel.mem_TA` (the
+  inclusion Step 7 reads, FS131-KT1 § 2.5). The split place `v*` itself needs no case: its shells are empty (`a_{v*} = 0`).
+- `zeroEntropyCarried_of_tateModel`, `zeroEntropyCarried_of_numberField`: EF_F⁺ (X01D l. 194, "every `U`-invariant finite
+  positive Borel measure `μ` on `R̂` such that `h_μ(u*) = 0` for one non-torsion `u* ∈ U` satisfies `μ(R̂ ∖ (T + A)) = 0`") at a
+  probability measure, which is `ZeroEntropyCarried`'s own reading.
+
+### 4.3 Is `NoRamifiedStableDyadic F` read? (brief item 5)
+
+**No step of the plan reads it.** Its parts read the interface's fields (stage 1.3), `R ⊆ O′` (`ofUnitRing_mem_stableIntegers`,
+through `unitRing_le_stableIntegers`, proved over every real number field) and Mathlib; nothing reads `R = O′`
+(`unitRing_eq_stableIntegers`, the only theorem of the chain that takes the scope's place) or the scope itself. The kernel
+says the same of the statements: `zeroEntropyCarried_of_tateModel` and `zeroEntropyCarried_of_numberField` elaborate with no
+scope binder, and the five parts they compose take none (`logs/KernelSigs.log`). Lane T's `exists_tateModel` takes none either
+(FS131-KT1 § 1). So, once the leaves are proved, **the implementer of the landing drops the binder** under the standing rule
+(inventory item 788's ruling), and EF_F⁺ — hence MR⁺ given `entropySplit` — holds over every real number field: the KN9 dated
+line's reading, now typed. Where a reader might look for it and it is not: Lemma PF reads `O′`, not `R` (`c·O′ ⊆ R`,
+`exists_mul_stableIntegers_le`, is not read either: the pigeonhole's `ℓ` lies in `R ⊆ O′`, and Lemma PF for `O′` is what bounds it).
+
+### 4.4 The home of `zeroEntropyCarried`'s proof (proposed)
+
+`Rigidity/ZeroEntropyClosed`, downstream of `Rigidity/WanderingShells` and `Rigidity/TateExists`. At the landing:
+`zeroEntropyCarried` leaves `Rigidity/ChainAtTA` (upstream of the parts — an import cycle otherwise) and is stated in
+`Rigidity/ZeroEntropyClosed` without its scope binder, proved by `zeroEntropyCarried_of_numberField` (or replaced by it); its
+readers in `ChainAtTA` — `mrPlus` and `min_localBound_five_le_chromaticNumber_closed` — move with it, beside `entropySplit`'s move
+downstream of `Rigidity/EntropySplitMax` (inventory item 761, ruling 5). If the landing prefers one assembly module for both
+moves, `ZeroEntropyClosed` is its first half. I have not edited `ChainAtTA` (not mine).
+
+### 4.5 Models
+
+`TateModel.shell`'s lemmas: a finite invariant measure, `c > 0`, `|g|_w < 1` are met at once by `δ_1`, `c = 1`, and
+`exists_unitVector_absAt_lt_one`; the shell is then nonempty only if some `π(ι t + a)` with `|a_w|_w = 1` exists, which holds for
+`a = ι(1)` restricted… (no: `ι(1) ∉ W_p` at every `p`) — the shells are nonempty for the `a ∈ W_p` with `a_w ≠ 0`, which exist
+(`W_p` contains every point with `p`-component `0`, e.g. `(0, 1_w)` at a split `w ≠ p`). The composition's model is
+`zeroEntropyCarried_model` (its conclusion at `δ_1`) and `exists_tateModel` (its structure).
+
+### 4.6 A plan per leaf
+
+| leaf | route | names |
+|---|---|---|
+| `TateModel.eq_of_π_add_eq` | `π_eq_π_iff`: `ι t + a = ι t′ + a′ + ι y`; `a − a′ = ι(t′ + y − t)` lies in `W_p` (`size_add_le`, `size_neg`, `size_nonneg`: `W_p` is a subgroup), so `t′ + y − t = 0` (`eq_zero_of_toSAdele_mem_hyperplane`) and `a = a′` | as named |
+| `TateModel.measurableSet_shell` | `(ι t + ·) '' {a ∈ W_p : size (split w) a = c}` is closed (`isClosed_hyperplane`, `isClosed_eq (continuous_size _)`, `Homeomorph.addLeft`'s closedness); `measurableSet_image` | `Homeomorph.isClosedMap` |
+| `TateModel.iterate_rot_not_mem_shell` | `χ = π(ι t + a)`; `iterate_rot_π`, `map_mul`, `mul_add`: `(rot g)^[m] χ = π(ι(g^m t) + ι(g^m)a)`, `ι(g^m)a ∈ W_p` (`toSAdele_mul_mem_hyperplane`); if it equals `π(ι t + a′)` with `a′` in the shell, `eq_of_π_add_eq` gives `ι(g^m)a = a′`, and `size_toSAdele_mul`, `absAt_mul` (power) give `|g|_w^m c = c`, against `pow_lt_one₀` (`absAt_nonneg`, `hm`) and `c > 0` | `pow_lt_one₀` |
+| `TateModel.measure_shell_eq_zero` | `g` from `exists_unitVector_absAt_lt_one w`; `MeasurePreserving (rot g) μ μ` (`measurable_rot`, `hμ g`); `.conservative`; `by_contra`, `Conservative.exists_mem_iterate_mem` (`measurableSet_shell`'s `.nullMeasurableSet`) gives a returning point, against `iterate_rot_not_mem_shell` | `MeasurePreserving.conservative`, `Conservative.exists_mem_iterate_mem` |
+| `exists_absAt_eq_norm` | `‖z‖ = toNNReal (Valued.v z)` (`FinitePlace.norm_def`); `Valued.v z = Valued.v y` for `y ∈ L` close to `z` (`UniformSpace.Completion.denseRange_coe` and the ultrametric `‖z − y‖ < ‖z‖ ⟹ ‖y‖ = ‖z‖`, `IsUltrametricDist.norm_add_eq_max_of_norm_ne_norm`-shape); `y ≠ 0` since `‖y‖ = ‖z‖ > 0` | as named; the last to confirm by `exact?` |
+| `TateModel.leafSet_subset` | `χ = π a`, `a′ := a − ι t ∈ W_p`; if `∀ w, a′.2 w = 0` then `a′ = (a′.1, 0)` (`Prod.ext`, `RestrictedProduct.ext`) and `χ = π(ι t + (a′.1, 0)) ∈ TA F` (`mem_TA`); else `exists_absAt_eq_norm` at a `w` with `a′.2 w ≠ 0` puts `χ` in a shell (`Set.mem_iUnion`) | `RestrictedProduct.ext`, `TateModel.mem_TA` |
+| `TateModel.measure_compl_TA_eq_zero` | `(TA F)ᶜ ⊆ (leafSet p)ᶜ ∪ ⋃ shells` (`leafSet_subset`, `Set.compl_subset_compl`); `measure_union_null` with `hY` and `measure_iUnion_null` four times (`countable_splitPlace`, `countable_fieldI`; each shell null by `measure_shell_eq_zero`, `c = absAt y > 0` by `absAt_eq_zero`, `absAt_nonneg`); `measure_mono_null` | `measure_iUnion_null`, `measure_mono_null` |
