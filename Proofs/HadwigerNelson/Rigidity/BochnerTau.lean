@@ -48,8 +48,9 @@ theorem archimedean_support [NumberField F] (ρ : Measure (Dual F)) [IsFiniteMea
 theorem exists_twisted_parts [NumberField F] (σ : Measure (Dual F)) [IsFiniteMeasure σ]
     (h : @Continuous (unitRing F) ℂ (tauPrime F) _ fun y => ∫ χ, (χ y : ℂ) ∂σ) :
     ∃ ψ : torsionChars (unitRing F) → unitRing F → ℂ,
-      (∀ t, PosDef fun y => (starRingEnd ℂ) ((t : Dual F) y : ℂ) * ψ t y) ∧
-      (∀ t, @Continuous (unitRing F) ℂ (archTop F) _ fun y => (starRingEnd ℂ) ((t : Dual F) y : ℂ) * ψ t y) ∧
+      (∀ t : torsionChars (unitRing F), PosDef fun y => (starRingEnd ℂ) ((t : Dual F) y : ℂ) * ψ t y) ∧
+      (∀ t : torsionChars (unitRing F),
+        @Continuous (unitRing F) ℂ (archTop F) _ fun y => (starRingEnd ℂ) ((t : Dual F) y : ℂ) * ψ t y) ∧
       Summable (fun t => (ψ t 0).re) ∧ ∀ y, HasSum (fun t => ψ t y) (∫ χ, (χ y : ℂ) ∂σ) := by
   sorry
 

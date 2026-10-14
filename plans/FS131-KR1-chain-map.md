@@ -6,7 +6,11 @@
 
 ## Theorems this phase proved
 
-None yet (a planning job). Updated at each saved stage.
+A planning job. One theorem has no `sorry` under it: `Plane.oneAvoidingDensityBound_model` — [kernel, standard three; through
+`./scripts/build.sh`, not at the gate] — `Proofs/HadwigerNelson/Plane/OneAvoidingDensity.lean` (the open ball of radius `1/2`
+is measurable and 1-avoiding: the model of the outside hypothesis's hypotheses). Composed over `sorry` leaves, so **not**
+theorems of the library yet: `Rigidity.bochnerHerglotz_of_countable`, `invariantMeasureOnClosed_of_countable`,
+`contChars_tauPrime`, `tca_of_five_le_localBound`, `Plane.mOne_le_of_oneAvoidingDensityBound`, `Plane.mOne_lt_quarter`.
 
 ## Stage 1 — SAVED: the readback
 
@@ -307,8 +311,14 @@ invoked fresh) and obligation pass (`debruijn-obligation-modeling`, invoked fres
 
 ### 4.4 The build
 
-`./scripts/build.sh` under `scripts/slot.py --mem 10 --cpus 4` (`MEMMAX=10G BATCH=8`): log
-`data/fs131/kr1/logs/build-1.log` (result in § 4.5 below).
+`./scripts/build.sh` under `scripts/slot.py --mem 10 --cpus 4` (`MEMMAX=10G BATCH=8`). **Build 1** (`data/fs131/kr1/logs/build-1.log`):
+FAIL at `Rigidity/BochnerTau` l. 51–52 — in `exists_twisted_parts` the binder `∀ t` took its type from the ascription
+`(t : Dual F)` and not from `ψ`'s domain; fixed by writing `∀ t : torsionChars (unitRing F)` (no other change). **Build 2**
+(`data/fs131/kr1/logs/build-2.log`, full output `build-2-full.log`): **exit 0, 255 of 255 batches, 7 m 28 s**; in the six
+modules every warning is `declaration uses 'sorry'`. **As the kernel stores them** (`data/fs131/kr1/probes/KernelSigs.out`):
+the binders of the twelve principal statements are those of § 4.1, no section variable dropped or added;
+`oneAvoidingDensityBound_model` rests on the standard three; the composed theorems print `sorryAx` through their leaves, as a
+skeleton must.
 
 ## Stage 5 — SAVED: the map — the chain's whole remaining road
 
