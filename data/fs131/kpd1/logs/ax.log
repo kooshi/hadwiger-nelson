@@ -1,0 +1,26 @@
+slot: admitted kpd1: mem 4 GiB (hard cap), cpus 0,1
+'HadwigerNelson.Rigidity.mem_dualAnnihilator' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.mem_dualCoannihilator' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.dualCoannihilator_antitone' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.dualAnnihilator_antitone' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.gc_dualAnnihilator' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.le_dualAnnihilator_dualCoannihilator' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Rigidity.integral_subgroupHaar_eq' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.dualAnnihilator_dualCoannihilator_of_isClosed' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Rigidity.evalDualHom_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.Duality.extendByPow_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.dualDualEquiv_apply' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.additiveDualDualEquiv_apply' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Rigidity.isTotallyIrreducible_pieceAction' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

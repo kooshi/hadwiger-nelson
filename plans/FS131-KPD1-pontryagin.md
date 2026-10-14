@@ -6,7 +6,18 @@ this one classical input. Brief: `data/fs131/briefs/FS131-KPD1-pontryagin.md`. B
 
 ## Theorems this phase proved
 
-None yet (a planning job; any route-test leaves proved are listed here as they land).
+**In the library (on `fs131-wpd`, read from the built tree, `data/fs131/kpd1/logs/ax.log`), on the standard three axioms:**
+`Rigidity.mem_dualAnnihilator`, `Rigidity.mem_dualCoannihilator`, `Rigidity.dualCoannihilator_antitone`,
+`Rigidity.dualAnnihilator_antitone`, `Rigidity.evalDualHom_apply`, `Rigidity.Duality.extendByPow_apply` [kernel], and the spec
+example `dualAnnihilator (⊤ : AddSubgroup ℤ) = ⊥` [kernel]. **Proved over the skeleton's leaves** (their axioms list `sorryAx`,
+which comes from the leaves): `Rigidity.dualAnnihilator_dualCoannihilator_of_isClosed` (D2), `gc_dualAnnihilator`,
+`le_dualAnnihilator_dualCoannihilator`, `le_dualCoannihilator_dualAnnihilator`, `integral_subgroupHaar_eq`, `dualDualEquiv_apply`,
+`additiveDualDualEquiv_apply`.
+
+**Not in the library — route measurements** (§ 3.2; `data/fs131/kpd1/route/`, elaborated in a scratch farm at the pin with the
+lakefile's options, never built into the library): 26 of the lane's 28 leaves, among them D1 (`evalDualHom_surjective`), D2's
+case and closure forms, D3 (`connectedSpace_dual`), and `finite_dualAnnihilator`, which reaches no `sorryAx` there. Grade:
+**elaborated, not landed**; they reach `sorryAx` only through `Rigidity/DualGroup`'s leaves (`logs/sorry-sources.log`).
 
 ## Stage 1 — SAVED: the readback
 
@@ -384,3 +395,18 @@ So M8b's planner reads D2 from this lane and prices only the arithmetic.
   **neither held**, title recalled, not checked.
 - **`ARCHITECTURE.md`**: the four rows and Pieces' imports cell are in this branch (written here: the brief makes me its pen
   for new modules). § Trust: nothing new.
+
+## Stage 6 — SAVED: the checks at the hand-back
+
+- **Build** (`./scripts/build.sh` under the slot, `MEMMAX=10G BATCH=8`): exit 0, 250 of 250 batches, 6 modules rebuilt
+  (`Annihilator`, `SubgroupHaar`, `Duality`, `Pieces`, `EntropySplitMax`, `Proofs`), 7 m 26 s. Every one of its 477 warnings is a
+  `sorry` warning (`data/fs131/kpd1/logs/build2.log`, `build2-full.log`). The first build, at stage 2, also exited 0
+  (`build1.log`: 7 rebuilt, 6 m 32 s).
+- **Lint** (`lake lint --no-build -- --no-build --trace`): exit 0, `-- Linting passed for Proofs.`, 14 linters `Passed`
+  (`logs/lint.log`).
+- **Architecture** (`tools/check_architecture.py`): `RESULT: PASS` (`logs/architecture.log`).
+- **No name collides with another branch**: `git grep` on `main`, `fs131-wch` and `fs132-wi1` finds none of the new declaration
+  names.
+- **Pieces' stored constants unchanged** by the re-pointing: stage 2 § 2.1, 74 of 74, with a control that fires.
+- **Peak memory**: each one-file compile under 5 GiB, the build inside its 10 GiB cap. The laptop showed no disk or memory
+  reading near a limit.
