@@ -1,0 +1,13 @@
+a constant changed in a statement (HSMul.hSMul, in §.Spectral.fixed_of_finite_orbit)	REFUSED
+a numeral changed in a definition's value (§.Spectral.minusOne)	REFUSED
+a binder kind changed (§.Spectral.scalar_apply)	REFUSED
+a declaration missing from this pin's print (§.Spectral.scalar_one)	REFUSED
+a theorem turned into an axiom (§.Spectral.scalar_one)	REFUSED
+a truncated print	REFUSED
+the record lists a constant that does not differ	REFUSED
+RULED §.DifferenceFourier.differenceLaw_probability: one other binder inserted	REFUSED
+RULED §.DifferenceFourier.differenceLaw_probability: a second MeasurableInv binder inserted	REFUSED
+ANTIDIAG: the antidiagonal's type argument changed (§.PhaseEncoding.newton_elem)	REFUSED
+ANTIDIAG withdrawn (§.PhaseEncoding.newton_elem)	REFUSED
+PIN-DIFFERENCE: the full type of §.InvariantMean.instAddCommGroupPeriodGroup changed	REFUSED
+RENAMED without Set.ofPred	REFUSED

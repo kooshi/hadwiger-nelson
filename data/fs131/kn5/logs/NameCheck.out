@@ -1,0 +1,96 @@
+@colorable_of_residue : ∀ {V : Type u_1} {M : Type u_2} {G : Type u_3} [inst : AddCommGroup M] [inst_1 : AddCommGroup G]
+  {A : AddSubgroup M} [inst_2 : Fintype G] (Γ : SimpleGraph V) (f : V → M) (ψ : ↥A →+ G),
+  (∀ ⦃v w : V⦄, Γ.Adj v w → f v - f w ∈ A) →
+    (∀ ⦃v w : V⦄, Γ.Adj v w → cosetResidue ψ (f v - f w) ≠ 0) → Γ.Colorable (Fintype.card G)
+@cosetResidue_apply_of_mem : ∀ {M : Type u_1} {G : Type u_2} [inst : AddCommGroup M] [inst_1 : AddCommGroup G]
+  {A : AddSubgroup M} (ψ : ↥A →+ G) {x : M} (h : x ∈ A), cosetResidue ψ x = ψ ⟨x, h⟩
+@colorable_unitDistance_induce_of_residue : ∀ {A : Subring ℂ},
+  (∀ z ∈ A, (starRingEnd ℂ) z ∈ A) →
+    ∀ {G : Type u_1} [inst : CommRing G] [Nontrivial G] [inst_2 : Fintype G] (ψ : ↥A →+* G) {S : Set ℂ},
+      (∀ z ∈ S, ∀ w ∈ S, dist z w = 1 → z - w ∈ A) → (SimpleGraph.induce S (unitDistance ℂ)).Colorable (Fintype.card G)
+@Nat.card_eq_fintype_card : ∀ {α : Type u_1} [inst : Fintype α], Nat.card α = Fintype.card α
+Fintype.ofFinite : (α : Type u_1) → [Finite α] → Fintype α
+@unitDistance_adj : ∀ {V : Type u_1} [inst : MetricSpace V] {x y : V}, (unitDistance V).Adj x y ↔ dist x y = 1
+Complex.dist_eq : ∀ (z w : ℂ), dist z w = ‖z - w‖
+@Subfield.closure_induction : ∀ {K : Type u_1} [inst : DivisionRing K] {s : Set K}
+  {p : (x : K) → x ∈ Subfield.closure s → Prop},
+  (∀ (x : K) (hx : x ∈ s), p x ⋯) →
+    p 1 ⋯ →
+      (∀ (x y : K) (hx : x ∈ Subfield.closure s) (hy : y ∈ Subfield.closure s), p x hx → p y hy → p (x + y) ⋯) →
+        (∀ (x : K) (hx : x ∈ Subfield.closure s), p x hx → p (-x) ⋯) →
+          (∀ (x : K) (hx : x ∈ Subfield.closure s), p x hx → p x⁻¹ ⋯) →
+            (∀ (x y : K) (hx : x ∈ Subfield.closure s) (hy : y ∈ Subfield.closure s), p x hx → p y hy → p (x * y) ⋯) →
+              ∀ {x : K} (h : x ∈ Subfield.closure s), p x h
+@Real.mul_self_sqrt : ∀ {x : ℝ}, 0 ≤ x → √x * √x = x
+@irrational_sqrt_natCast_iff : ∀ {n : ℕ}, Irrational √↑n ↔ ¬IsSquare n
+@Irrational.ne_rat : ∀ {x : ℝ}, Irrational x → ∀ (q : ℚ), x ≠ ↑q
+irrational_iff_ne_rational : ∀ (x : ℝ), Irrational x ↔ ∀ (a b : ℤ), b ≠ 0 → x ≠ ↑a / ↑b
+@ZMod.val_intCast : ∀ {n : ℕ} (a : ℤ) [NeZero n], ↑(↑a).val = a % ↑n
+ZMod.natCast_mod : ∀ (a n : ℕ), ↑(a % n) = ↑a
+@ZMod.intCast_cast : ∀ {n : ℕ} {R : Type u_1} [inst : Ring R] (i : ZMod n), ↑i.cast = i.cast
+@Int.odd_iff : ∀ {n : ℤ}, Odd n ↔ n % 2 = 1
+@Int.even_iff : ∀ {n : ℤ}, Even n ↔ n % 2 = 0
+Int.emod_emod_of_dvd : ∀ (n : ℤ) {m k : ℤ}, m ∣ k → n % k % m = n % m
+@Rat.cast_add_of_ne_zero : ∀ {α : Type u_1} [inst : DivisionRing α] {q r : ℚ},
+  ↑q.den ≠ 0 → ↑r.den ≠ 0 → ↑(q + r) = ↑q + ↑r
+@Rat.cast_sub_of_ne_zero : ∀ {α : Type u_1} [inst : DivisionRing α] {p q : ℚ},
+  ↑p.den ≠ 0 → ↑q.den ≠ 0 → ↑(p - q) = ↑p - ↑q
+@Rat.cast_mul_of_ne_zero : ∀ {α : Type u_1} [inst : DivisionRing α] {p q : ℚ},
+  ↑p.den ≠ 0 → ↑q.den ≠ 0 → ↑(p * q) = ↑p * ↑q
+Rat.add_den_dvd : ∀ (q₁ q₂ : ℚ), (q₁ + q₂).den ∣ q₁.den * q₂.den
+Rat.num_div_den : ∀ (r : ℚ), ↑r.num / ↑r.den = r
+@AddMonoidHom.mk' : {M : Type u_1} →
+  {G : Type u_2} →
+    [inst : AddGroup G] → [inst_1 : AddZeroClass M] → (f : M → G) → (∀ (a b : M), f (a + b) = f a + f b) → M →+ G
+@AddMonoidHom.prod : {M : Type u_1} →
+  {N : Type u_2} →
+    {P : Type u_3} →
+      [inst : AddZeroClass M] → [inst_1 : AddZeroClass N] → [inst_2 : AddZeroClass P] → (M →+ N) → (M →+ P) → M →+ N × P
+@AddSubgroup.equivMapOfInjective : {G : Type u_1} →
+  [inst : AddGroup G] →
+    {N : Type u_2} →
+      [inst_1 : AddGroup N] → (H : AddSubgroup G) → (f : G →+ N) → Function.Injective ⇑f → ↥H ≃+ ↥(AddSubgroup.map f H)
+@Nat.find : {p : ℕ → Prop} → [DecidablePred p] → (∃ n, p n) → ℕ
+@SimpleGraph.Colorable.of_hom : ∀ {V : Type u_1} {G : SimpleGraph V} {V' : Type u_2} {G' : SimpleGraph V'} {n : ℕ}
+  (f : G →g G'), G'.Colorable n → G.Colorable n
+@SimpleGraph.induceHomOfLE : {V : Type u_1} →
+  (G : SimpleGraph V) → {s s' : Set V} → s ⊆ s' → SimpleGraph.induce s G ↪g SimpleGraph.induce s' G
+@Subfield.closure_le : ∀ {K : Type u_1} [inst : DivisionRing K] {s : Set K} {t : Subfield K},
+  Subfield.closure s ≤ t ↔ s ⊆ ↑t
+Real.sqrt_one : √1 = 1
+@Nat.isUnit_iff : ∀ {n : ℕ}, IsUnit n ↔ n = 1
+@SquareClass.fieldOfRadicands_mono : ∀ {D₁ D₂ : Set ℕ},
+  D₁ ⊆ D₂ → SquareClass.fieldOfRadicands D₁ ≤ SquareClass.fieldOfRadicands D₂
+@Ideal.isMaximal_iff : ∀ {α : Type u_1} [inst : Semiring α] {I : Ideal α},
+  I.IsMaximal ↔ 1 ∉ I ∧ ∀ (J : Ideal α) (x : α), I ≤ J → x ∉ I → x ∈ J → 1 ∈ J
+@Submodule.span_induction : ∀ {R : Type u_1} {M : Type u_2} [inst : Semiring R] [inst_1 : AddCommMonoid M]
+  [inst_2 : Module R M] {s : Set M} {p : (x : M) → x ∈ Submodule.span R s → Prop},
+  (∀ (x : M) (h : x ∈ s), p x ⋯) →
+    p 0 ⋯ →
+      (∀ (x y : M) (hx : x ∈ Submodule.span R s) (hy : y ∈ Submodule.span R s), p x hx → p y hy → p (x + y) ⋯) →
+        (∀ (a : R) (x : M) (hx : x ∈ Submodule.span R s), p x hx → p (a • x) ⋯) →
+          ∀ {x : M} (hx : x ∈ Submodule.span R s), p x hx
+@Ideal.subset_span : ∀ {α : Type u_1} [inst : Semiring α] {s : Set α}, s ⊆ ↑(Ideal.span s)
+@UnitRing.exists_sum_eq_of_mem_unitRingOver : ∀ {F : Subfield ℝ} {x : ℂ},
+  x ∈ UnitRing.unitRingOver F → ∃ m u, (∀ (j : Fin m), ‖u j‖ = 1) ∧ (∀ (j : Fin m), u j ∈ planeOver F) ∧ ∑ j, u j = x
+@ZMod.toAddCircle : {N : ℕ} → [NeZero N] → ZMod N →+ UnitAddCircle
+ZMod.toAddCircle_injective : ∀ (N : ℕ) [inst : NeZero N], Function.Injective ⇑ZMod.toAddCircle
+@ZMod.toAddCircle_intCast : ∀ {N : ℕ} [inst : NeZero N] (j : ℤ), ZMod.toAddCircle ↑j = ↑(↑j / ↑N)
+@AddCircle.coe_eq_zero_iff : ∀ {𝕜 : Type u_1} [inst : AddCommGroup 𝕜] (p : 𝕜) {x : 𝕜}, ↑x = 0 ↔ ∃ n, n • p = x
+@LinearMap.continuous_of_finiteDimensional : ∀ {𝕜 : Type u_1} [hnorm : NontriviallyNormedField 𝕜] {E : Type u_2}
+  [inst : AddCommGroup E] [inst_1 : Module 𝕜 E] [inst_2 : TopologicalSpace E] [IsTopologicalAddGroup E]
+  [ContinuousSMul 𝕜 E] {F' : Type u_3} [inst_5 : AddCommGroup F'] [inst_6 : Module 𝕜 F'] [inst_7 : TopologicalSpace F']
+  [IsTopologicalAddGroup F'] [ContinuousSMul 𝕜 F'] [CompleteSpace 𝕜] [T2Space E] [FiniteDimensional 𝕜 E]
+  (f : E →ₗ[𝕜] F'), Continuous ⇑f
+@Rat.denseRange_cast : ∀ {𝕜 : Type u_1} [inst : Field 𝕜] [inst_1 : LinearOrder 𝕜] [IsStrictOrderedRing 𝕜]
+  [inst_3 : TopologicalSpace 𝕜] [OrderTopology 𝕜] [Archimedean 𝕜], DenseRange Rat.cast
+@DenseRange.exists_mem_open : ∀ {X : Type u_1} [inst : TopologicalSpace X] {α : Type u_2} {f : α → X} {s : Set X},
+  DenseRange f → IsOpen s → s.Nonempty → ∃ a, f a ∈ s
+@isOpen_iInter_of_finite : ∀ {X : Type u_1} {ι : Sort u_2} [inst : TopologicalSpace X] [Finite ι] {s : ι → Set X},
+  (∀ (i : ι), IsOpen (s i)) → IsOpen (⋂ i, s i)
+@isOpen_lt : ∀ {α : Type u_1} {β : Type u_2} [inst : TopologicalSpace α] [inst_1 : LinearOrder α]
+  [OrderClosedTopology α] [inst_3 : TopologicalSpace β] {f g : β → α},
+  Continuous f → Continuous g → IsOpen {b | f b < g b}
+@DenseRange.piMap : ∀ {ι : Type u_1} {X : ι → Type u_2} {Y : ι → Type u_3} [inst : (i : ι) → TopologicalSpace (Y i)]
+  {f : (i : ι) → X i → Y i}, (∀ (i : ι), DenseRange (f i)) → DenseRange (Pi.map f)
+namecheck exit=0

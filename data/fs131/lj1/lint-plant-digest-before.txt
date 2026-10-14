@@ -1,0 +1,1 @@
+1488efc26a8703d595d359efa068e11af081115c6cb76d2c16c25e14bdf443ae  Proofs/HadwigerNelson/Instances/UpperHalfCorollaries.lean

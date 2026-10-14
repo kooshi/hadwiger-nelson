@@ -26,7 +26,9 @@ everything else.*
    holds is [P₆] on saturated six-colourings." REG-J′ is superseded as a target by local finiteness of cyclic centres at six.
 6. **Kooshi made it literature and set the plan** — § 1. His three messages are verbatim in `data/external/EXT-OAI1-request.md`.
 
-## 0f. READ THIS FIRST — THE DIRECTION CHANGED ON 2026-10-13: wind down, publish; the Lean backlog restarts on the number-field results
+**SUPERSEDED AS THE FIRST READ: the current handoff is `plans/SESSION-HANDOFF-2026-10-13.md`. This file is the earlier state.**
+
+## 0f. (earlier) READ THIS FIRST — THE DIRECTION CHANGED ON 2026-10-13: wind down, publish; the Lean backlog restarts on the number-field results
 
 *Written 2026-10-13 16:05 UTC by Keryx. Sections 0e and below are the state this started from; where they differ, this is current.*
 

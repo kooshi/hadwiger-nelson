@@ -1,0 +1,7 @@
+src-before exit=0
+cp exit=0
+dst exit=0
+src-after exit=0
+cmp before-dest exit=0
+cmp before-after exit=0
+20712

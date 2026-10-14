@@ -1,0 +1,9 @@
+a constant changed in a statement (DFunLike.coe, in §.BoundedMeasurable.meanNorm_zero_of_dense)	REFUSED
+a numeral changed in a definition's value (§.BoundedMeasurable.codeCell)	REFUSED
+a binder kind changed (§.BoundedMeasurable.covariance_zero_of_dense)	REFUSED
+a declaration missing from this pin's print (§.RelativeProduct.graph_mixture)	REFUSED
+a theorem turned into an axiom (§.RelativeProduct.graph_mixture)	REFUSED
+a truncated print	REFUSED
+the record lists a constant that does not differ	REFUSED
+ADAPTED_INSTANCE lists an IDENTICAL declaration (§.RelativeProduct.graph_mixture)	REFUSED
+RENAMED without Set.ofPred	REFUSED

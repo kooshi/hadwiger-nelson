@@ -1,0 +1,11 @@
+HEAD=4ba2188f2f7bfa363836be13aaa5be6cf1fb2e6e
+narrow lines before the plant: 0
+narrow lines with the plant: 1
+Proofs/HadwigerNelson/Instances/UpperHalfValues.lean:218:theorem zz_lu1_sorry_plant : (1 : ℕ) = 2 := by sorry
+PLANT FIRED: the search finds the planted sorry and nothing else
+digest before: 09fe50cb8f34a73cda75118dcbc3ed4a613c545a0bbc321d8fe092e0c543aca5
+digest after:  09fe50cb8f34a73cda75118dcbc3ed4a613c545a0bbc321d8fe092e0c543aca5
+RESTORED: the module is the text it was
+plant's name in the file: 0 time(s)
+narrow lines after the restore: 0
+tracked files modified: 0

@@ -1,0 +1,78 @@
+WOULD DELETE 63 compiled libraries, 301.1 GiB
+  fs131-w1 4.4G
+  fs131-w10 4.7G
+  fs131-w10b 4.7G
+  fs131-w10c 4.7G
+  fs131-w10d 4.7G
+  fs131-w10e 4.7G
+  fs131-w10f 4.7G
+  fs131-w10g 4.9G
+  fs131-w10k 4.9G
+  fs131-w10l 4.9G
+  fs131-w10m 4.9G
+  fs131-w2d 4.4G
+  fs131-w3b 4.4G
+  fs131-w4 4.6G
+  fs131-w4c 4.5G
+  fs131-w4m 4.5G
+  fs131-w4mm 4.7G
+  fs131-w5 4.7G
+  fs131-w5a 4.8G
+  fs131-w5b 4.5G
+  fs131-w5c 4.8G
+  fs131-w5k 4.8G
+  fs131-w5p 4.5G
+  fs131-w5s 4.8G
+  fs131-w5t 4.5G
+  fs131-w5x 4.5G
+  fs131-w5y 4.8G
+  fs131-w5z 4.8G
+  fs131-w6 4.9G
+  fs131-w6c 4.8G
+  fs131-w6f 4.8G
+  fs131-w6g 4.8G
+  fs131-w6j 4.9G
+  fs131-w6k 4.9G
+  fs131-w6l 4.9G
+  fs131-w6m 4.8G
+  fs131-w6p 4.8G
+  fs131-w6z 4.9G
+  fs131-w7 4.9G
+  fs131-w7a 4.8G
+  fs131-w7b 4.9G
+  fs131-w7f 4.9G
+  fs131-w7m 4.8G
+  fs131-w8 4.9G
+  fs131-w8a 4.9G
+  fs131-w8b 4.9G
+  fs131-w8c 4.9G
+  fs131-w8d 4.9G
+  fs131-w8l 5.0G
+  fs131-w9 4.9G
+  fs131-w9b 4.9G
+  fs131-wc1 5.1G
+  fs131-wd1 4.8G
+  fs131-wd2 4.8G
+  fs131-wdq 5.1G
+  fs131-wf1 4.9G
+  fs131-wlt 4.9G
+  fs131-wm 4.7G
+  fs131-wmb 4.8G
+  fs131-wop 4.7G
+  fs131-wr2 5.1G
+  fs131-wt5 4.9G
+  fs132-wi1 5.0G
+NOT TOUCHED, uncommitted or untracked files: 5
+   fs131-leb | ?? data/fs131/leb/gate-sorry.log
+   fs131-w2 | ?? build-i2e-0.log ; ?? build-i2e-1.log ; ?? build-i2e-2.log ; ?? build-i2e-3.log ; ?? build-i2f-0.log
+   fs131-w3 | ?? data/fs131/i3/build-g1.log ; ?? data/fs131/i3/build-g2.log ; ?? data/fs131/i3/build-stage1.log ; ?? data/fs131/i3/build-stage4.log ; ?? data/fs131/i3/build-stage4b.log
+   fs131-ww | ?? data/fs131/iwb/scratch/q.lean ; ?? data/fs131/iwc/scratch/BasicW.lean ; ?? data/fs131/iwc/scratch/MergeW.lean ; ?? data/fs131/iwc/scratch/basic_helpers.txt ; ?? data/fs131/iwc/scratch/chk.lean
+   fs132-wk1 | ?? data/fs132/k1/probe/Confine.out ; ?? data/fs132/k1/probe/CyclicCentre.out ; ?? data/fs132/k1/probe/OAI158Palette.out ; ?? data/fs132/k1/probe/Orbit.out ; ?? data/fs132/k1/probe/Winding.out
+SKIPPED: 7
+   fs131-wch — kept: in use or reference or parked
+   fs131-wnf — kept: in use or reference or parked
+   fs131-wq1 — kept: in use or reference or parked
+   fs131-wrc — kept: in use or reference or parked
+   fs133-wk1 — kept: in use or reference or parked
+   fs136-wk1 — kept: in use or reference or parked
+   fs38-stubs-paper — no compiled library

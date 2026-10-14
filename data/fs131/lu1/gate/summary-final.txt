@@ -1,0 +1,453 @@
+
+=== head
+HEAD=c2f4e4f546c93f833d9c04a692d138a9a897cbc1  2026-10-13T21:02:16Z  host=the machine cores=12 mem=31 GiB
+status (tracked files modified, and untracked outside data/ and plans/):
+--
+main (3087fe75d) against this commit, paths that differ under Proofs/ Proofs.lean scripts/ tools/ ARCHITECTURE.md:
+ARCHITECTURE.md
+Proofs.lean
+Proofs/HadwigerNelson/Arith/QuadraticPrime.lean
+Proofs/HadwigerNelson/Arith/UpperHalf.lean
+Proofs/HadwigerNelson/Instances/UpperHalfValues.lean
+scripts/Assumptions.lean
+scripts/Axioms.lean
+scripts/assumptions-ledger.txt
+scripts/vacuity-baseline.txt
+--
+dupnames latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/build/gate/dupnames/20261013T211033Z-961061.log
+dupnames-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/build/gate/dupnames-self-test/20261013T211038Z-961443.log
+axioms latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/build/gate/axioms/20261013T211111Z-964047.log
+axioms-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/build/gate/axioms-self-test/20261013T211120Z-964619.log
+vacuity latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/build/gate/vacuity/20261013T211521Z-977928.log
+vacuity-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/build/gate/vacuity-self-test/20261013T211729Z-984330.log
+assumptions latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/build/gate/assumptions/20261013T211939Z-991575.log
+assumptions-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/build/gate/assumptions-self-test/20261013T212133Z-997864.log
+
+=== every step's exit
+build exit=0
+build log lines holding "warning": 1
+lake full log lines holding "warning": 0
+uptodate exit=0
+count-modules exit=0
+decls exit=0
+sorry (narrow) lines=0
+sorry (wide) lines=24
+line-initial axiom declarations in Proofs/=4
+dupnames exit=0
+dupnames-selftest exit=0
+unfiled exit=0
+axioms exit=0
+axioms-selftest exit=0
+records exit=0
+records-plant exit=0
+theorem-lines exit=0
+block exit=0
+port-check exit=0
+port-selftest exit=0
+vacuity exit=0
+vacuity-selftest exit=0
+vacdiff exit=0
+vacdiff-plant exit=1
+assumptions exit=0
+assumptions-selftest exit=0
+arch exit=0
+lint exit=0
+notes-l5 exit=0
+notes-qa4-selftest exit=0
+statements exit=0
+statements-compact exit=0
+statements exit=0
+statements-plant exit=0
+code-only exit=0
+code-only-plant exit=0
+checks exit=0
+compiled-unchanged exit=0
+compiled-unchanged-plant exit=0
+statements-lc1 exit=0
+statements-lc1-compact exit=0
+statements-lc1 exit=0
+baseline-check exit=0
+digest-axioms exit=0
+digest-vacuity exit=0
+digest-assumptions exit=0
+tracked files modified after the pass: 0
+pass-exit=done
+
+=== build
+198:    rebuilt: Instances.UpperHalfValues (3.1s)
+206:    rebuilt: Proofs (1.0s)
+207:==> build: OK — 200 of 200 batches, 2 module(s) rebuilt, 0 module(s) with warnings, 5m48s
+sampler end 2026-10-13T21:08:13Z samples=71 PEAK_SUM_RSS_MIB=4404 (over 1 process(es): /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs.lean) PEAK_ONE_RSS_MIB=4404 (/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs.lean)
+
+=== uptodate
+All targets up-to-date (5999 jobs).
+exit=0
+
+=== sorry / axiom lines
+   0 data/fs131/lu1/gate/sorry-narrow-final.txt
+  24 data/fs131/lu1/gate/sorry-wide-final.txt
+   4 data/fs131/lu1/gate/axiom-lines-final.txt
+  28 total
+Proofs/HadwigerNelson/Outside/OAI158.lean:111:axiom no_proper_five_coloring : ¬ ∃ c : ℂ → Fin 5, ProperColoring 5 c
+Proofs/HadwigerNelson/Outside/OAI158.lean:123:axiom proper_to_borel_weak {k : ℕ} [NeZero k] {c : ℂ → Fin k} (hc : ProperColoring k c) :
+Proofs/HadwigerNelson/Sat/Lrat.lean:85:axiom foo._native.native_decide.ax_1_1 : decide (check π cnf = true) = true
+Proofs/HadwigerNelson/Arith/WeilKloosterman.lean:51:axiom kloosterman_bound.{u} (F : Type u) [Field F] [Fintype F] [DecidableEq F] (hp : ringChar F ≠ 
+
+=== dupnames
+data/fs131/lu1/gate/dupnames-final.log:1:slot: admitted lu1-dupnames: mem 8 GiB (hard cap), cpus 4,5,6,7
+data/fs131/lu1/gate/dupnames-final.log:2:==> dupnames: this run's full output: build/gate/dupnames/20261013T211033Z-961061.log
+data/fs131/lu1/gate/dupnames-final.log:30:==> dupnames: OK — no name is declared by two modules (24 generated on demand, listed above)
+
+=== unfiled
+declarations the landing brings: 52 (of 60 constants in 3 modules); with one line: 52; unfiled: 0; doubled: 0; `#print axioms` lines in the script: 7506, names twice: 0
+exit=0
+
+=== decls
+LU1MODULE Proofs.HadwigerNelson.Arith.QuadraticPrime constants=14
+LU1MODULE Proofs.HadwigerNelson.Arith.UpperHalf constants=36
+LU1MODULE Proofs.HadwigerNelson.Instances.UpperHalfValues constants=10
+LU1TOTAL modules=3 constants=60
+slot: admitted lu1-decls: mem 8 GiB (hard cap), cpus 4,5
+
+=== axioms
+data/fs131/lu1/gate/axioms-final.log:2:slot: admitted lu1-axioms: mem 8 GiB (hard cap), cpus 4,5,6,7
+data/fs131/lu1/gate/axioms-final.log:3:==> axioms: this run's full output: build/gate/axioms/20261013T211111Z-964047.log
+data/fs131/lu1/gate/axioms-final.log:4:    audited: 7506 records — 7447 clean on the standard axioms, 28 axiom-free, 26 imported (resting on a declared outside theorem), 5 declared purchase(s)
+data/fs131/lu1/gate/axioms-final.log:46:    RECORDED COUNT IS STALE in CLAUDE.md § Trust ledger — update it: 7395 clean → 7447
+data/fs131/lu1/gate/axioms-final.log:52:==> axioms: OK — 7447 clean, 28 axiom-free, 26 imported, 5 declared purchase(s)
+data/fs131/lu1/gate/axioms-selftest-final.log:2:==> axioms-self-test: this run's full output: build/gate/axioms-self-test/20261013T211120Z-964619.log
+data/fs131/lu1/gate/axioms-selftest-final.log:3:==> axioms self-test: 23 controls, each planted in a copy of scripts/Axioms.lean
+data/fs131/lu1/gate/axioms-selftest-final.log:10:            digest off: exit 0, 'RECORDED COUNT IS STALE'
+data/fs131/lu1/gate/axioms-selftest-final.log:89:==> axioms self-test: OK — every planted fault fired, and every partner passed.
+
+=== records
+landing: 60 constants in 3 modules; declarations it brings: 52 (49 THM, 3 DEF, 0 IND; Arith.UpperHalf 30, Arith.QuadraticPrime 13, Instances.UpperHalfValues 9); records in the log: 7506
+  landing records on exactly the three: 52
+  headlines under CLEAN on exactly the three: 31 of 31
+  whole log: records carrying kloosterman_bound: 8 (filed: 8); of the landing's: 0
+  whole log: records carrying no_proper_five_coloring: 6 (filed: 6); of the landing's: 0
+  whole log: records carrying proper_to_borel_weak: 12 (filed: 12); of the landing's: 0
+  whole log: records under IMPORTED 26; carrying two imports 0; carrying sorryAx 0
+records: PASS
+exit=0
+plants: every one of 15 fired; the unplanted lists pass
+exit=0
+
+=== block / port
+wrong, read as a plain check: exit 1 (red, as it must be)
+sorry, read as a plain check: exit 1 (red, as it must be)
+block: PASS — every record as filed; both controls fired
+exit=0
+CHECK OK
+exit=0
+SELF-TEST OK: 10 plants refused and 1 partner accepted
+exit=0
+
+=== vacuity
+data/fs131/lu1/gate/vacuity-final.log:1:slot: admitted lu1-vacuity: mem 8 GiB (hard cap), cpus 0,1,2,3
+data/fs131/lu1/gate/vacuity-final.log:2:==> vacuity: this run's full output: build/gate/vacuity/20261013T211521Z-977928.log
+data/fs131/lu1/gate/vacuity-final.log:3:    scanned: declarations=16029  refutations-skipped=228
+data/fs131/lu1/gate/vacuity-final.log:4:    sites:   sites=1454  vacuous=0  stale=0  declared=3  witnessed=38  generic=1411  unknown=2
+data/fs131/lu1/gate/vacuity-final.log:6:    recorded counts in scripts/vacuity-baseline.txt's header: match (9 of 9 compared)
+data/fs131/lu1/gate/vacuity-final.log:7:    RECORDED COUNTS ARE STALE in CLAUDE.md § The gate — update it: declarations 15969 → 16029
+data/fs131/lu1/gate/vacuity-final.log:59:==> vacuity: OK
+data/fs131/lu1/gate/vacuity-selftest-final.log:2:==> vacuity-self-test: this run's full output: build/gate/vacuity-self-test/20261013T211729Z-984330.log
+data/fs131/lu1/gate/vacuity-selftest-final.log:5:==> vacuity self-test: the planted controls, each watched to fire (the count is printed at the end)
+data/fs131/lu1/gate/vacuity-selftest-final.log:17:    ok    STALE planted_stale — a VACUITY DECLARED: annotation whose claim is false
+data/fs131/lu1/gate/vacuity-selftest-final.log:71:==> vacuity self-test: OK — all 65 controls behaved: every one fired, and the silent ones stayed silent.
+
+=== vacdiff
+counter vs the main scan: declarations 15969 / 15969, refutations 228 / 228: agree
+counter vs the landing scan: declarations 16029 / 16029, refutations 228 / 228: agree
+main rows 1535, landing rows 1535; lost 0 (0 with a removed declaration); added 0
+  declarations: 15969 -> 16029 (+60)
+  refutations-skipped: 228 -> 228 (+0)
+  sites: 1454 -> 1454 (+0)
+  vacuous: 0 -> 0 (+0)
+  stale: 0 -> 0 (+0)
+  declared: 3 -> 3 (+0)
+  witnessed: 38 -> 38 (+0)
+  generic: 1411 -> 1411 (+0)
+  unknown: 2 -> 2 (+0)
+  module Arith.QuadraticPrime: declarations 0 -> 14 (+14), refutations 0 -> 0 (+0)  [new module]
+  module Arith.UpperHalf: declarations 0 -> 36 (+36), refutations 0 -> 0 (+0)  [new module]
+  module Instances.UpperHalfValues: declarations 0 -> 10 (+10), refutations 0 -> 0 (+0)  [new module]
+  by module: declarations +60, refutations +0: equal to the scans difference
+vacdiff: PASS
+exit=0
+  by module: declarations +60, refutations +0: MODULE-SUM differs from the scans
+vacdiff: FAIL (5)
+exit=1
+
+=== assumptions
+data/fs131/lu1/gate/assumptions-final.log:1:slot: admitted lu1-assumptions: mem 8 GiB (hard cap), cpus 0,1,2,3
+data/fs131/lu1/gate/assumptions-final.log:2:==> assumptions: this run's full output: build/gate/assumptions/20261013T211939Z-991575.log
+data/fs131/lu1/gate/assumptions-final.log:3:    scanned: constants=15140  theorems=11323  formers=362  hypotheses=19705  closed=1473
+data/fs131/lu1/gate/assumptions-final.log:4:    assumed: axioms=3  rests=26  named=19  inline=15  outside=7  ours=22  open=5  takes=106  mentions=1
+data/fs131/lu1/gate/assumptions-final.log:88:    recorded counts in scripts/assumptions-ledger.txt's header: match (9 of 9 compared)
+data/fs131/lu1/gate/assumptions-final.log:89:    RECORDED COUNTS ARE STALE in CLAUDE.md § Trust ledger — update it: inline 16 → 15, ours 23 → 22, takes 98 → 106
+data/fs131/lu1/gate/assumptions-final.log:94:    every row: rg '^(AXIOM|RESTS|ASSUMPTION|TAKES|MENTIONS|PRODUCES|REFUTES|SITE|CLOSED|CONDITION|SILENT|DERIVED|WRAPS|COHYP|HINT|FAIL) ' build/gate/assumptions/20261013T211939Z-991575.log
+data/fs131/lu1/gate/assumptions-final.log:101:==> assumptions: OK — 3 outside theorem(s) as axioms, with 26 theorem(s) resting on them; 19 named and 15 inline hypotheses (7 outside, 22 ours, 5 open), taken by 106 statement(s) and mentioned by 1
+data/fs131/lu1/gate/assumptions-selftest-final.log:2:==> assumptions-self-test: this run's full output: build/gate/assumptions-self-test/20261013T212133Z-997864.log
+data/fs131/lu1/gate/assumptions-selftest-final.log:3:==> assumptions self-test: 21 controls, planted together in one copy of scripts/Assumptions.lean
+data/fs131/lu1/gate/assumptions-selftest-final.log:29:    ok    accounting: the TOTALS line dropped (a scan that died before its end) — FAIL accounting, 'did not run to its end'
+data/fs131/lu1/gate/assumptions-selftest-final.log:30:    ok    accounting: one TAKES row dropped (rows that disagree with the totals) — FAIL accounting, 'TOTALS records takes='
+data/fs131/lu1/gate/assumptions-selftest-final.log:31:    ok    accounting: an untelescoped declaration — FAIL accounting, 'could not be telescoped'
+data/fs131/lu1/gate/assumptions-selftest-final.log:32:    ok    ledger: a missing ledger fails (FAIL ledger-missing), never a free pass
+data/fs131/lu1/gate/assumptions-selftest-final.log:34:    ok    digest stale — exit 0, 'RECORDED COUNTS ARE STALE'
+data/fs131/lu1/gate/assumptions-selftest-final.log:39:    ok    digest ledger-header — exit 0, 'RECORDED COUNTS ARE STALE in'
+data/fs131/lu1/gate/assumptions-selftest-final.log:40:==> assumptions self-test: OK — all 33 checks behaved: every planted fault fired, and every partner stayed silent.
+=== TOTALS === axioms=3 rests=26 named=19 inline=15 outside=7 ours=22 open=5 takes=106 mentions=1 produces=8 sites=31 conditions=40 declaredClosed=33 established=1435 premises=2 refuted=3 refutes=0 silent=1 derived=1 wrappers=0 cohyp=60 hints=0 unseen=17589 fails=0
+
+=== arch
+RESULT: PASS
+exit=0
+
+=== lint
+14
+64:-- Linting passed for Proofs.
+65:exit=0
+
+=== notes
+w5c	Procedure	2781	exists_arcStep	IsPlaneMap	l60Frag	LOCAL-SAID:IsPlaneMap
+notes read: 196 LOCAL-SAID=31 NO-OBJECT=48 NONE-SAID=59 no-conflict=58
+exit=0
+self-test: OK (6 controls, 1 planted)
+exit=0
+
+=== statements
+  Arith.QuadraticPrime: 13 named constants in the first dump, 13 in the second
+  Instances.UpperHalfValues: 9 named constants in the first dump, 9 in the second
+statements: PASS: no statement and no definition changed — 52 named constants compared in 3 module(s)
+exit=0
+plants: every one of 4 fired; the unplanted pair passes
+exit=0
+slot: admitted lu1-statements: mem 8 GiB (hard cap), cpus 0,1
+
+=== code only
+SAME    Proofs/HadwigerNelson/Arith/UpperHalf.lean: 17276 characters of code at 0585a35c4, 17276 now; comment characters 9121 -> 9229 (whitespace counted with them)
+SAME    Proofs/HadwigerNelson/Arith/QuadraticPrime.lean: 18686 characters of code at 0585a35c4, 18686 now; comment characters 6123 -> 6729 (whitespace counted with them)
+SAME    Proofs/HadwigerNelson/Instances/UpperHalfValues.lean: 8063 characters of code at 0585a35c4, 8063 now; comment characters 3660 -> 4075 (whitespace counted with them)
+OK
+exit=0
+plant: OK
+exit=0
+paths under Proofs/ and Proofs.lean that differ from the commit before the edits (0585a35c4):
+ Proofs/HadwigerNelson/Arith/QuadraticPrime.lean      | 13 +++++++++----
+ Proofs/HadwigerNelson/Arith/UpperHalf.lean           |  5 +++--
+ Proofs/HadwigerNelson/Instances/UpperHalfValues.lean | 10 +++++++---
+ 3 files changed, 19 insertions(+), 9 deletions(-)
+
+=== checks
+46
+slot: admitted lu1-checks: mem 8 GiB (hard cap), cpus 0,1
+
+=== compiled
+.olean files of Proofs: 1902 in the tree, 1902 in the manifest; allowed to move: 4 (moved since the manifest: 3: Proofs.olean, Proofs/HadwigerNelson/Arith/QuadraticPrime.olean, Proofs/HadwigerNelson/I
+every other file: same SHA-256, same mtime, written before the copy (2026-10-13T20:21:30Z); the latest of them: 2026-10-13T19:44:17Z
+  identical f763d277289dc114 2026-10-13T18:32:48Z Proofs/HadwigerNelson/Outside/OAI158.olean
+  identical 852967b780c122c2 2026-10-13T18:35:22Z Proofs/HadwigerNelson/Outside/OAI158Palette.olean
+  identical 800612bb98d73f7f 2026-10-13T18:36:59Z Proofs/HadwigerNelson/Outside/OAI158CircleMaps.olean
+  identical 1507067ed18e6b30 2026-10-13T18:37:33Z Proofs/HadwigerNelson/Outside/OAI158CircleTransport.olean
+  identical e99ccf8d430ef561 2026-10-13T18:35:05Z Proofs/HadwigerNelson/Outside/OAI158Expansion.olean
+  identical 5a22b03f77e28966 2026-10-13T18:38:05Z Proofs/HadwigerNelson/Outside/OAI158PaletteDensity.olean
+  identical bb1359b106688ee0 2026-10-13T18:38:30Z Proofs/HadwigerNelson/Outside/OAI158PaletteTransport.olean
+  identical 89a5371c8b20b613 2026-10-13T18:36:57Z Proofs/HadwigerNelson/Outside/OAI158AngularBoundary.olean
+  identical 9c250c0267f4f6f0 2026-10-13T18:38:44Z Proofs/HadwigerNelson/Outside/OAI158BinaryPalettes.olean
+  identical 2303775ba8ebdf6e 2026-10-13T18:39:29Z Proofs/HadwigerNelson/Outside/OAI158States.olean
+  identical c2d9ff2df4bbba94 2026-10-13T17:55:23Z Proofs/HadwigerNelson/Plane/AeColouring.olean
+  identical b0aa2e2ebc1684d7 2026-10-13T17:56:14Z Proofs/HadwigerNelson/Plane/FalconerReduction.olean
+  identical fdc8e45e1a39da88 2026-10-13T19:44:17Z Proofs/HadwigerNelson/Plane/LebesgueNumber.olean
+compiled-unchanged: PASS
+exit=0
+plants: every one of 4 fired; the unplanted pair passes
+exit=0
+
+=== statements of the last landing's three modules
+  Plane.LebesgueNumber: 34 named constants in the first dump, 34 in the second
+statements: PASS: no statement and no definition changed — 87 named constants compared in 3 module(s)
+exit=0
+
+=== baseline
+baseline entries: unchanged from main's (2)
+lines of scripts/Vacuity.lean that differ from main's: 0
+lines of scripts/Assumptions.lean that differ from main's: 8
+lines of scripts/Axioms.lean that differ from main's: 67
+lines of scripts/axioms-controls.txt that differ from main's: 0
+lines of scripts/assumptions-controls.txt that differ from main's: 0
+lines of scripts/assumptions-ledger.txt that differ from main's: 12
+lines of scripts/vacuity-baseline.txt that differ from main's: 2
+lines of scripts/vacuity-controls.lean that differ from main's: 0
+lines of scripts/DupNames.lean that differ from main's: 0
+lines of scripts/dupnames-controls.txt that differ from main's: 0
+lines of scripts/gate_report.py that differ from main's: 0
+lines of scripts/axioms.sh that differ from main's: 0
+lines of scripts/vacuity.sh that differ from main's: 0
+lines of scripts/assumptions.sh that differ from main's: 0
+lines of scripts/dupnames.sh that differ from main's: 0
+lines of scripts/build.sh that differ from main's: 0
+
+=== digests
+--- axioms
+    audited: 7506 records — 7447 clean on the standard axioms, 28 axiom-free, 26 imported (resting on a declared outside theorem), 5 declared purchase(s)
+    clean records, by axiom set:
+       7278  [propext, Classical.choice, Quot.sound]
+         87  [propext, Quot.sound]
+         81  [propext]
+          1  [Quot.sound]
+         28  (no axioms): HadwigerNelson.Adjoin.approx, HadwigerNelson.PartialColoring.map, HadwigerNelson.Plane.ArcMap.SemiKind.O.sizeOf_spec, HadwigerNelson.Plane.ArcMap.SemiKind.T.sizeOf_spec, HadwigerNelson.Plane.ArcMap.SemiKind.ofNat_ctorIdx, HadwigerNels
+    declared purchases:
+      HadwigerNelson.moserSpindle_cnf_unsat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_lrat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindleCubes_unsat  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_cubes  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.four_le_chromaticNumber_plane_certified  [9 native, propext, Classical.choice, Quot.sound]
+    declared imports (3): HadwigerNelson.StandingFive.kloosterman_bound, HadwigerNelson.Outside.OAI158.no_proper_five_coloring, HadwigerNelson.Outside.OAI158.proper_to_borel_weak
+    imported records (26):
+      HadwigerNelson.StandingFive.kloostermanBound_of_ringChar_ne_two  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.targetFloor_seven_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.targetFloor_six_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.circle_sum_le_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.standingFloor_seven_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.standingFloor_five_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.seven_le_localBound_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.five_le_chromaticNumber_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.Outside.OAI158.not_colorable_five  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+      HadwigerNelson.Outside.OAI158.six_le_chromaticNumber_plane  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+      HadwigerNelson.Outside.OAI158.chromaticNumber_plane_six_or_seven  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+      HadwigerNelson.Outside.OAI158.six_le_chiM0  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+      HadwigerNelson.Outside.OAI158.chiM0_six_or_seven  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+      HadwigerNelson.Outside.OAI158.nonempty_aeColouring_of_colorable  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+      HadwigerNelson.Outside.OAI158.colorable_iff_nonempty_aeColouring  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+      HadwigerNelson.Outside.OAI158.chiM0_le_chromaticNumber_plane  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+      HadwigerNelson.Outside.OAI158.chromaticNumber_plane_eq_chiM0  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+      HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+      HadwigerNelson.Plane.radius_five  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+      HadwigerNelson.Plane.exists_isWeakColouringOn_of_colorable  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+      HadwigerNelson.Plane.radius_down  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+      HadwigerNelson.Plane.colorable_iff_forall_ball  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+      HadwigerNelson.Plane.seven_le_chromaticNumber_plane_iff_exists_ball  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+      HadwigerNelson.Plane.colorable_iff_exists_nullMeasurable_proper  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+      HadwigerNelson.Plane.chromaticNumber_plane_eq_chiLebesgue  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.proper_to_borel_weak]
+--- vacuity
+    scanned: declarations=16029  refutations-skipped=228
+    sites:   sites=1454  vacuous=0  stale=0  declared=3  witnessed=38  generic=1411  unknown=2
+    evidence: 18 emptiness proof(s), 63 witness(es)
+    recorded counts in scripts/vacuity-baseline.txt's header: match (9 of 9 compared)
+    RECORDED COUNTS ARE STALE in CLAUDE.md § The gate — update it: declarations 15969 → 16029
+    --- witnessed (38), with the evidence behind each ---
+    WITNESSED HadwigerNelson.AritySpec.p5_compels_rainbow :: HadwigerNelson.Compels HadwigerNelson.AritySpec.P5 3 ![1, 3, 4] id [by HadwigerNelson.AritySpec.p5_compels_rainbow]
+    WITNESSED HadwigerNelson.Plane.ArcMap.cuspFrag_isHorn :: HadwigerNelson.Plane.ArcMap.cuspFrag.IsHorn 0 0 (-1) 1 1 [by HadwigerNelson.Plane.ArcMap.cuspFrag_isHorn]
+    WITNESSED HadwigerNelson.Plane.ArcMap.halfDisc_simple :: HadwigerNelson.Plane.halfDisc.Simple [by HadwigerNelson.Plane.ArcMap.halfDisc_simple]
+    WITNESSED HadwigerNelson.Plane.ArcMap.l60Frag_isRingArc :: HadwigerNelson.Plane.ArcMap.l60Frag.IsRingArc 0 0 (Real.pi / 3) 0 1 [by HadwigerNelson.Plane.ArcMap.l60Frag_isRingArc]
+    WITNESSED HadwigerNelson.Plane.ArcMap.threeSectorDisc_niceAt :: HadwigerNelson.Plane.ArcMap.threeSectorDisc.NiceAt 0 [by HadwigerNelson.Plane.ArcMap.threeSectorDisc_niceAt]
+    WITNESSED HadwigerNelson.Plane.ArcMap.threeSectorDisc_phantom :: HadwigerNelson.Plane.ArcMap.threeSectorDisc.SectorsAt 0 5 ![0, 2 * Real.pi / 3, 2 * Real.pi / 3, 2 * Real.pi / 3, 4 * Real.pi / 3, 2 * Real.pi] ![0, 1, 0, 1, 2] [by HadwigerNelson.Plane.ArcMa
+    WITNESSED HadwigerNelson.Plane.ArcMap.threeSectorDisc_sectorsAt :: HadwigerNelson.Plane.ArcMap.threeSectorDisc.SectorsAt 0 3 ![0, 2 * Real.pi / 3, 4 * Real.pi / 3, 2 * Real.pi] ![0, 1, 2] [by HadwigerNelson.Plane.ArcMap.threeSectorDisc_sectorsAt]
+    WITNESSED HadwigerNelson.Plane.awayModel_isRingArc_gap :: HadwigerNelson.Plane.awayModel.IsRingArc HadwigerNelson.Plane.awayP (1 / 5) (3 / 10) 7 0 [by HadwigerNelson.Plane.awayModel_isRingArc_gap]
+    WITNESSED HadwigerNelson.Plane.cuspFrag_isRingArc :: HadwigerNelson.Plane.ArcMap.cuspFrag.IsRingArc Complex.I (-(Real.pi / 2) + 1 / 10) (-(Real.pi / 2) + 2 / 5) 0 1 [by HadwigerNelson.Plane.cuspFrag_isRingArc]
+    WITNESSED HadwigerNelson.Plane.halfDisc_niceAt :: HadwigerNelson.Plane.halfDisc.NiceAt 0 [by HadwigerNelson.Plane.halfDisc_niceAt]
+    WITNESSED HadwigerNelson.Plane.halfDisc_sectorsAt :: HadwigerNelson.Plane.halfDisc.SectorsAt 0 2 ![0, Real.pi, 2 * Real.pi] ![1, 0] [by HadwigerNelson.Plane.halfDisc_sectorsAt]
+    WITNESSED HadwigerNelson.Plane.halfPlane2_isChangePoint :: HadwigerNelson.Plane.halfPlane2.IsChangePoint 0 0 1 0 [by HadwigerNelson.Plane.halfPlane2_isChangePoint]
+    WITNESSED HadwigerNelson.Plane.hornModel_isHorn :: HadwigerNelson.Plane.hornModel.IsHorn HadwigerNelson.Plane.plantPt 0 (-1 / 2) (1 / 2) 7 [by HadwigerNelson.Plane.hornModel_isHorn]
+    WITNESSED HadwigerNelson.Plane.quadRing_isQArc :: HadwigerNelson.Plane.quadRing.IsQArc 0 0 (Real.pi / 2) [by HadwigerNelson.Plane.quadRing_isQArc]
+    WITNESSED HadwigerNelson.Plane.quadRing_isRingArc :: HadwigerNelson.Plane.quadRing.IsRingArc 0 0 (Real.pi / 2) 0 2 [by HadwigerNelson.Plane.quadRing_isRingArc]
+    WITNESSED HadwigerNelson.Plane.sevenBrickRegions :: HadwigerNelson.Plane.AeProperRegions 7 [by HadwigerNelson.Plane.sevenBrickRegions]
+    WITNESSED HadwigerNelson.Plane.sixFrag_isRingArc :: HadwigerNelson.Plane.sixFrag.IsRingArc 0 0 (Real.pi / 6) 0 2 [by HadwigerNelson.Plane.sixFrag_isRingArc]
+    WITNESSED HadwigerNelson.Plane.sq9 :: HadwigerNelson.Plane.AeColouring 9 [by HadwigerNelson.Plane.sq9]
+    WITNESSED HadwigerNelson.Plane.stuckModel_isHorn_pi :: HadwigerNelson.Plane.stuckModel.IsHorn HadwigerNelson.Plane.plantPt (0 + Real.pi) (-1) 1 9 [by HadwigerNelson.Plane.stuckModel_isHorn_pi]
+    WITNESSED HadwigerNelson.Plane.stuckModel_isStuck :: HadwigerNelson.Plane.stuckModel.IsStuck HadwigerNelson.Plane.plantPt [by HadwigerNelson.Plane.stuckModel_isStuck]
+    WITNESSED HadwigerNelson.StationaryRatio.StationarySet.parity :: HadwigerNelson.StationaryRatio.StationarySet (ZMod 2) [by HadwigerNelson.StationaryRatio.StationarySet.parity]
+    WITNESSED HadwigerNelson.core122_pigeonhole :: (HadwigerNelson.edgeGraph 122 HadwigerNelson.core122Edges).Coloring (Fin 4) [by HadwigerNelson.core122_colorable_four]
+    WITNESSED HadwigerNelson.core9_pigeonhole :: (HadwigerNelson.edgeGraph 9 HadwigerNelson.core9Edges).Coloring (Fin 4) [by HadwigerNelson.core9_colorable_four]
+    WITNESSED HadwigerNelson.finitePlane11Colouring.toColoring :: (HadwigerNelson.finitePlane 11).Coloring (Fin 5) [by HadwigerNelson.finitePlane11_colorable_five]
+    WITNESSED HadwigerNelson.finitePlane11DoubleGapColoring :: (HadwigerNelson.finitePlane 11).Coloring (Fin 5) [by HadwigerNelson.finitePlane11_colorable_five]
+    WITNESSED HadwigerNelson.finitePlane19QuotColoring :: (HadwigerNelson.finitePlane 19).Coloring (Fin 5) [by HadwigerNelson.finitePlane19QuotColoring]
+    WITNESSED HadwigerNelson.finitePlane3Colouring.toColoring :: (HadwigerNelson.finitePlane 3).Coloring (Fin 3) [by HadwigerNelson.finitePlane3ColouringDiff.toColoring]
+    WITNESSED HadwigerNelson.finitePlane3ColouringDiff.toColoring :: (HadwigerNelson.finitePlane 3).Coloring (Fin 3) [by HadwigerNelson.finitePlane3ColouringDiff.toColoring]
+    WITNESSED HadwigerNelson.finitePlane7QuotColoring :: (HadwigerNelson.finitePlane 7).Coloring (Fin 4) [by HadwigerNelson.finitePlane7QuotColoring]
+    WITNESSED HadwigerNelson.hexColoring :: (SimpleGraph.cycleGraph 6).Coloring (Fin 3) [by HadwigerNelson.hexColoring]
+    WITNESSED HadwigerNelson.pathColoring3 :: (SimpleGraph.pathGraph 3).Coloring (Fin 3) [by HadwigerNelson.pathColoring3]
+    WITNESSED HadwigerNelson.pathGraph_additivelyRigid :: (SimpleGraph.pathGraph 3).Coloring (Fin 2) [by HadwigerNelson.pathGraph_three_colorable_two]
+    WITNESSED HadwigerNelson.pathGraph_three_coloring_two :: (SimpleGraph.pathGraph 3).Coloring (Fin 2) [by HadwigerNelson.pathGraph_three_colorable_two]
+    WITNESSED HadwigerNelson.rhombus_forces :: (HadwigerNelson.edgeGraph 4 HadwigerNelson.rhombus).Coloring (Fin 3) [by HadwigerNelson.rhombus_colorable_three]
+--- assumptions
+    scanned: constants=15140  theorems=11323  formers=362  hypotheses=19705  closed=1473
+    assumed: axioms=3  rests=26  named=19  inline=15  outside=7  ours=22  open=5  takes=106  mentions=1
+    decided: declaredClosed=33  established=1435  premises=2  refuted=3  conditions=40  fails=0
+    counted, not decided: cohyp=60  hints=0  silent=1  unseen=17589  produces=8  refutes=0  wrappers=0
+    --- outside theorems declared as axioms (3) ---
+    HadwigerNelson.Outside.OAI158.no_proper_five_coloring ref=bib:OAIMath2026 theorems=6
+    HadwigerNelson.Outside.OAI158.proper_to_borel_weak ref=bib:OAIMath2026 theorems=12
+    HadwigerNelson.StandingFive.kloosterman_bound ref=bib:Weil1948 theorems=8
+    --- hypotheses, kind outside (7) ---
+    HadwigerNelson.Bridge.RealAlgebraicDescent form=named kind=outside ref=bib:Lang1953 consumers=6 :: [Lang1953] Artin–Lang (equivalently Tarski 1951, quantifier elimination); row 107's one named hypothesis
+    HadwigerNelson.Plane.Voronov11 form=named kind=outside ref=bib:Voronov2023 consumers=2 :: [Voronov2023] Thm 1.1 (Euclidean norm, six colours); its one consumer is a half of FS106-COMP's equivalence
+    HadwigerNelson.SpectralChain.BochnerHerglotz form=named kind=outside ref=bib:Rudin1962 consumers=14 :: [Rudin1962] 1.4.3 (Bochner on a locally compact abelian group) and 1.3.6 (uniqueness); the read-back against the page is owed (FS131-L10A, planner's § 5.
+    HadwigerNelson.SpectralChain.InvariantMeasureOnClosed form=named kind=outside ref=bib:Kakutani1938 consumers=8 :: [Kakutani1938] Markov–Kakutani, for ℤ[U] and then for U on the ℤ[U]-invariant measures (FS-100's L1, X11K); no page read
+    HadwigerNelson.SpectralInputs.BochnerOn form=named kind=outside ref=bib:Rudin1962 consumers=1 :: [Rudin1962] 1.4.3, for a topology induced from a locally compact abelian group (J45 Lemma N2's ⟸)
+    HadwigerNelson.StandingFive.KloostermanBound form=named kind=outside ref=bib:Weil1948 consumers=9 :: [Weil1948] p. 207 (Weil's bound for Kloosterman sums over a finite field), in hypothesis form: the same outside theorem as the import StandingFive.klooster
+    inline:KloostermanFrom347 form=inline kind=outside ref=bib:Weil1948 consumers=3 :: [Weil1948] p. 207, at every finite field of q ≡ 3 (mod 4), q ≥ 347 elements (KloostermanBound at a closed family; the import proves it there)
+    --- hypotheses, kind ours (22) ---
+    HadwigerNelson.CharacterColouring.OrderBound form=named kind=ours ref=entry:FS89-S0A-3 consumers=2 :: FS89-S0A-3 (k = 4, N = 168, on Weil); J08-11 at 5, J08-10 at 6
+    HadwigerNelson.Plane.Row130M1 form=named kind=ours ref=row:130 consumers=1 :: row 130 (FS-103's M1, hard direction: χ_CP ≤ χ_m⁰)
+    HadwigerNelson.SevenConditional.G4 form=named kind=ours ref=row:103 consumers=1 :: row 103 (the 8/3 forcer: M56's 588-vertex core, one solver refusal with no proof log)
+    HadwigerNelson.SpectralChain.Interface.APlus0 form=named kind=ours ref=entry:J45 consumers=3 :: J45 § 3, remark (ii) (A⁺ at S = ∅; blind X05V; row 113)
+    HadwigerNelson.SpectralChain.Interface.APlusOfR88 form=named kind=ours ref=entry:J45 consumers=4 :: J45 (A⁺ from R88-TCA: SI-3, SI-4, N2; field-free, X23V § 2.3)
+    HadwigerNelson.SpectralChain.Interface.Count form=named kind=ours ref=entry:X23D-TCA consumers=4 :: X23D-TCA (the count: R88-TCA at S = ∅ in the class; X23V § 2.3; at a complex place X29C's ruling)
+    HadwigerNelson.SpectralChain.Interface.EFPlus form=named kind=ours ref=entry:FS100-X01D consumers=7 :: FS100-X01D line 194 (EF_F⁺; second derivation X12B)
+    HadwigerNelson.SpectralChain.Interface.MR form=named kind=ours ref=row:120 consumers=1 :: row 120 (measure rigidity for the unit-vector group, in Fourier form; over [EinsiedlerLindenstrauss2022] Thm 1.3 by statement)
+    HadwigerNelson.SpectralChain.Interface.MulStable form=named kind=ours ref=entry:J45 consumers=1 :: J45 § 4.2 step 2 (m⁻¹(E) ⊆ E; on J28V-7)
+    HadwigerNelson.SpectralChain.Interface.NegCircle form=named kind=ours ref=entry:J45 consumers=1 :: J45 § 4.2 step 3 (no Lean model on file)
+    HadwigerNelson.SpectralChain.Interface.PE2 form=named kind=ours ref=entry:X02D consumers=7 :: X02D (PE-2, over [EinsiedlerLindenstrauss2022] Thm 1.2; blind X02V)
+    HadwigerNelson.SpectralChain.Interface.RU form=named kind=ours ref=entry:J45 consumers=7 :: J45 § 5.4 (R-U; blind J46), plans/FS84-SI-D-derivation.md
+    inline:Alpha11 form=inline kind=ours ref=row:68 consumers=1 :: row 68 (FS-50's certificate at 11, α(Γ₁₁) ≤ 29; the conclusion is kernel-checked by another route, chromaticNumber_finitePlane11)
+    inline:Alpha23 form=inline kind=ours ref=row:71 consumers=1 :: row 71 (α(Γ₂₃) ≤ 105, [cert]: data/fs54/cert-q23-l3-N105.json, tools/fs54_l3_cert_check.py)
+    inline:Alpha83 form=inline kind=ours ref=row:68 consumers=1 :: row 68 (α(Γ₈₃) ≤ 1046 ≤ 1148, exact certificate, FS-50)
+    inline:CLS form=inline kind=ours ref=entry:X23D-CLS consumers=4 :: X23D-CLS (L(F) ≥ 5 ⟹ T-C(A) at S = ∅; X23V § 2.2)
+    inline:RQ4 form=inline kind=ours ref=entry:FS89-D2-T1 consumers=1 :: FS89-D2-T1 (Θ₄(ℤ[U_ℚ]) ⊆ T + A)
+    inline:RQ5 form=inline kind=ours ref=entry:FS89-D5-T2 consumers=1 :: FS89-D5-T2 (Θ₅(ℤ[U_ℚ]) ⊆ T + A)
+    inline:Row123Chain form=inline kind=ours ref=row:123 consumers=2 :: row 123 (min(L(F), 5) ≤ χ(F²) at the standing field; in the kernel over named hypotheses, SpectralChain.min_localBound_five_le_chromaticNumber)
+    inline:Row78 form=inline kind=ours ref=row:78 consumers=1 :: row 78 (on the lattice, a difference every four-colouring identifies lies in 8Λ)
+    inline:Row88 form=inline kind=ours ref=row:88 consumers=1 :: row 88 (the forced group is 0 or P, and if it is P every four-colouring is periodic)
+    inline:Row99 form=inline kind=ours ref=row:99 consumers=4 :: row 99 (χ(F²) = L(F) at L(F) ≤ 4)
+    --- hypotheses, kind open (5) ---
+
+=== measure
+MEASURE build mem-cap=10G cpus=8 BATCH=10 exit=0 wall=352s (slot wait included) sampler end 2026-10-13T21:08:13Z samples=71 PEAK_SUM_RSS_MIB=4404 (over 1 process(es): /ho
+MEASURE uptodate mem-cap=4G cpus=2 exit=0 wall=3.8s peak=0.21 GiB max-rss=0.88 GiB :: lake build --no-build Proofs
+MEASURE count-modules mem-cap=8G cpus=2 exit=0 wall=68.9s peak=0.54 GiB max-rss=4.44 GiB :: lake env lean data/fs131/l5/count-modules.lean
+MEASURE decls mem-cap=8G cpus=2 exit=0 wall=63.7s peak=0.54 GiB max-rss=4.37 GiB :: lake env lean data/fs131/lu1/decls.lean
+MEASURE dupnames mem-cap=8G cpus=4 exit=0 wall=5.2s peak=0.52 GiB max-rss=4.35 GiB :: ./scripts/dupnames.sh
+MEASURE dupnames-selftest mem-cap=4G cpus=4 exit=0 wall=27.6s peak=0.76 GiB max-rss=1.53 GiB :: ./scripts/dupnames.sh --self-test
+MEASURE unfiled (no slot: a script) exit=0 wall=0.0s
+MEASURE axioms mem-cap=8G cpus=4 exit=0 wall=8.8s peak=0.71 GiB max-rss=4.51 GiB :: ./scripts/axioms.sh
+MEASURE axioms-selftest mem-cap=8G cpus=4 exit=0 wall=196.6s peak=1.18 GiB max-rss=4.92 GiB :: ./scripts/axioms.sh --self-test
+MEASURE records (no slot: a script) exit=0 wall=0.1s
+MEASURE records-plant (no slot: a script) exit=0 wall=0.2s
+MEASURE theorem-lines (no slot: a script) exit=0 wall=0.1s
+MEASURE block (no slot: a script) exit=0 wall=43.4s
+MEASURE port-check (no slot: a script) exit=0 wall=0.1s
+MEASURE port-selftest (no slot: a script) exit=0 wall=0.9s
+MEASURE vacuity mem-cap=8G cpus=4 exit=0 wall=127.4s peak=0.60 GiB max-rss=4.50 GiB :: ./scripts/vacuity.sh
+MEASURE vacuity-selftest mem-cap=8G cpus=4 exit=0 wall=130.1s peak=0.59 GiB max-rss=4.51 GiB :: ./scripts/vacuity.sh --self-test
+MEASURE vacdiff (no slot: a script) exit=0 wall=0.1s
+MEASURE vacdiff-plant (no slot: a script) exit=1 wall=0.1s
+MEASURE assumptions mem-cap=8G cpus=4 exit=0 wall=114.4s peak=0.66 GiB max-rss=4.56 GiB :: ./scripts/assumptions.sh
+MEASURE assumptions-selftest mem-cap=8G cpus=4 exit=0 wall=118.3s peak=0.69 GiB max-rss=4.60 GiB :: ./scripts/assumptions.sh --self-test
+MEASURE arch (no slot: a script) exit=0 wall=4.0s
+MEASURE lint mem-cap=8G cpus=4 exit=0 wall=9.1s peak=0.85 GiB max-rss=4.93 GiB :: lake lint --no-build -- --no-build --trace
+MEASURE notes-l5 (no slot: a script) exit=0 wall=3.7s
+MEASURE notes-qa4-selftest (no slot: a script) exit=0 wall=0.0s
+MEASURE statements mem-cap=8G cpus=2 exit=0 wall=4.2s peak=0.63 GiB max-rss=4.45 GiB :: lake env lean data/fs131/lu1/StatementDump.lean
+MEASURE statements (no slot: a script) exit=0 wall=0.0s
+MEASURE statements-plant (no slot: a script) exit=0 wall=0.0s
+MEASURE code-only (no slot: a script) exit=0 wall=0.1s
+MEASURE code-only-plant (no slot: a script) exit=0 wall=0.1s
+MEASURE checks mem-cap=8G cpus=2 exit=0 wall=3.2s peak=0.54 GiB max-rss=4.37 GiB :: lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false data/fs131/lu1/checks.l
+MEASURE compiled-unchanged (no slot: a script) exit=0 wall=2.2s
+MEASURE compiled-unchanged-plant (no slot: a script) exit=0 wall=2.4s
+MEASURE statements-lc1 mem-cap=8G cpus=2 exit=0 wall=2.7s peak=0.52 GiB max-rss=4.34 GiB :: lake env lean data/fs131/lc1/StatementDump.lean
+MEASURE statements-lc1 (no slot: a script) exit=0 wall=0.0s
+MEASURE digest-axioms (no slot: a script) exit=0 wall=0.2s
+MEASURE digest-vacuity (no slot: a script) exit=0 wall=0.0s
+MEASURE digest-assumptions (no slot: a script) exit=0 wall=0.0s

@@ -1,0 +1,25 @@
+slot: admitted kn2: mem 8 GiB (hard cap), cpus 0,1
+Command exited with non-zero status 1
+	Command being timed: "env SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 python3 scripts/slot.py --mem 8 --cpus 2 --name kn2 -- lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false data/fs131/kn2/probes/p1.lean"
+	User time (seconds): 2.19
+	System time (seconds): 4.60
+	Percent of CPU this job got: 28%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:23.80
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3555352
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 12754
+	Minor (reclaiming a frame) page faults: 105883
+	Voluntary context switches: 35933
+	Involuntary context switches: 2422
+	Swaps: 0
+	File system inputs: 8889656
+	File system outputs: 40
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1

@@ -1,0 +1,9 @@
+Skeleton: lean exit 0; errors: 0; sorry warnings: 8
+Candidate: lean exit 0; errors: 0; sorry warnings: 8
+compared: 9 named constants of the first dump (9 theorems, 0 definitions; types, and values of definitions); 9 declarations written at 34d9113b2, each found in the first dump
+internal (not compared): 0 before, 0 after
+new named constants in the second dump: 0
+new private declarations in the second dump (counted among the internal): 0
+`example`s: 1 at 34d9113b2, 1 in Proofs/HadwigerNelson/Arith/ThreeColourCharacter.lean; of the base's, missing as text: 0
+PASS: no statement and no definition changed
+CONTROL: 3 of 3 planted faults reported — the check can fail

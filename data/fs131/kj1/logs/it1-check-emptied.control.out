@@ -1,0 +1,5 @@
+records: 20 (expected 20); on the standard three: 18; with `sorryAx` as listed: 0 of 0 listed; not as expected: 2; listed and not printed: 0; error lines in the print: 0
+  NOT AS EXPECTED Planted.one: beyond the standard three: ['sorryAx']
+  NOT AS EXPECTED Planted.two: beyond the standard three: ['Some.undeclared_axiom']
+names against data/fs131/it1/audit-block.txt: the same list, in order (18 listed)
+CONTROL: 2 of 2 planted records reported — the check can fail

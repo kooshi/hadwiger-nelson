@@ -29,3 +29,12 @@ worktree's `.lake/build` is its own copy; never replace it with a symlink. `/tmp
 cites under your `data/` folder, never in `/tmp`. Nothing with a `sorry` reaches `main`.
 '''
 NOSPAWN="You start no agents of your own (standing rule 1: delegation is one level\ndeep, because the coordinator can only review work it knows exists)."
+def fresh(job):
+    # A job id must be new: no record, report, data folder, brief or commit subject of that id anywhere (item 754:
+    # FS131-IN1 was issued twice). Call it in every generator before writing the brief.
+    import glob,subprocess
+    low=job.split("-",1)[1].lower()
+    hits=[p for pat in (f"plans/{job}-*",f"plans/{job}.md",f"data/fs13*/reports/{job}.md",f"data/fs13*/{low}",f"data/fs13*/briefs/{job}-*")
+          for p in glob.glob(ROOT+pat)]
+    log=subprocess.run(["git","-C",ROOT,"log","--all","--format=%s","--fixed-strings","--grep",job+":"],capture_output=True,text=True).stdout
+    assert not hits and not log.strip(), (job,"is taken",hits[:3],log.splitlines()[:2])

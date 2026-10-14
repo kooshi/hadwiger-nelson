@@ -790,14 +790,20 @@ def declared : Array Entry := #[
   .former ``HadwigerNelson.SevenConditional.G4 .ours
     "row 103 (the 8/3 forcer: M56's 588-vertex core, one solver refusal with no proof log)",
   -- ## Hand results of ours, written out in a binder
-  .site ``HadwigerNelson.SpectralChain.min_localBound_five_le_chromaticNumber `hRow99 "Row99" .ours "row 99 (χ(F²) = L(F) at L(F) ≤ 4)",
-  .site ``HadwigerNelson.SpectralChain.min_localBound_five_le_chromaticNumber_of_totallyReal `hRow99 "Row99" .ours "row 99 (χ(F²) = L(F) at L(F) ≤ 4)",
-  .site ``HadwigerNelson.SpectralChain.chromaticNumber_eq_localBound `hRow99 "Row99" .ours "row 99 (χ(F²) = L(F) at L(F) ≤ 4)",
+  -- `hRow99` (row 99's lower half through four, `L(F) ≤ 4 → L(F) ≤ χ(F²)`) is not in this list since FS131-LJ1: the binder's type is
+  -- the theorem `ThreeFourColours.localBound_le_chromaticNumber_of_le_four`, term for term (`data/fs131/lj1/checks.lean` applies each of
+  -- the four takers to it). That theorem rests on a declared outside theorem — it is a `RESTS` row of `kloosterman_bound` — so the
+  -- hand result is discharged, not free: each taker still prints the standard three with the binder in its statement, and a statement
+  -- that feeds the binder with the theorem prints Weil's bound. Retired on the landing's reading: the step compares no binder's type
+  -- with any theorem's conclusion.
   .site ``HadwigerNelson.SpectralChain.min_localBound_five_le_chromaticNumber `hCLS "CLS" .ours "X23D-CLS (L(F) ≥ 5 ⟹ T-C(A) at S = ∅; X23V § 2.2)",
   .site ``HadwigerNelson.SpectralChain.min_localBound_five_le_chromaticNumber_of_totallyReal `hCLS "CLS" .ours "X23D-CLS (L(F) ≥ 5 ⟹ T-C(A) at S = ∅; X23V § 2.2)",
   .site ``HadwigerNelson.SpectralChain.chromaticNumber_eq_localBound `hCLS "CLS" .ours "X23D-CLS (L(F) ≥ 5 ⟹ T-C(A) at S = ∅; X23V § 2.2)",
-  .site ``HadwigerNelson.SpectralChain.chromaticNumber_eq_localBound `hUpper "UpperHalf" .ours
-    "row 52 (the upper half χ(F²) ≤ L(F), at ring level; the field step is row 57's gap)",
+  .site ``HadwigerNelson.UpperHalf.chromaticNumber_eq_localBound_of_chain `hCLS "CLS" .ours "X23D-CLS (L(F) ≥ 5 ⟹ T-C(A) at S = ∅; X23V § 2.2)",
+  -- The upper half `χ(F²) ≤ L(F)` (`hUpper` of `SpectralChain.chromaticNumber_eq_localBound`, label "UpperHalf", row 52) is not in
+  -- this list since FS131-LU1: `UpperHalf.chromaticNumber_planeOver_le_localBound` proves that binder over the theorem's own
+  -- variables, and `UpperHalf.chromaticNumber_eq_localBound_of_chain` is the headline without it.  Retired on the landing's
+  -- word: the step has no check that finds a `.site` a theorem has proved (`FAIL discharged` reads named formers only).
   .site ``HadwigerNelson.StandingFive.five_le_chromaticNumber `hRow123 "Row123Chain" .ours
     "row 123 (min(L(F), 5) ≤ χ(F²) at the standing field; in the kernel over named hypotheses, SpectralChain.min_localBound_five_le_chromaticNumber)",
   .site ``HadwigerNelson.StandingFive.five_le_chromaticNumber_weil `hRow123 "Row123Chain" .ours

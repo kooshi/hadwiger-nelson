@@ -1,0 +1,8 @@
+records: 18 (expected 18); on the standard three: 18; with `sorryAx` as listed: 0 of 5 listed; not as expected: 5; listed and not printed: 0; error lines in the print: 0
+  NOT AS EXPECTED HadwigerNelson.TorsionExtraction.colorable_two_of_inv_three_mem: listed as reading the upstream leaf, but its extra axioms are []
+  NOT AS EXPECTED HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_of_inv_three_mem: listed as reading the upstream leaf, but its extra axioms are []
+  NOT AS EXPECTED HadwigerNelson.TorsionExtraction.chromaticNumber_planeOver_ne_three_of_inv_three_mem: listed as reading the upstream leaf, but its extra axioms are []
+  NOT AS EXPECTED HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_of_sqrt_mem: listed as reading the upstream leaf, but its extra axioms are []
+  NOT AS EXPECTED HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_fieldOfRadicands: listed as reading the upstream leaf, but its extra axioms are []
+names against data/fs131/it1/audit-block.txt: the same list, in order (18 listed)
+FAIL

@@ -1,0 +1,20 @@
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 2,3
+Proofs/HadwigerNelson/Outside/OAI158AlgebraModels.lean:225:14: error: Function expected at
+  Measure.fst_map_prodMk hq
+but this term has type
+  (Measure.map (fun a => (?m.95 a, q a)) ?m.97).fst = Measure.map ?m.95 ?m.97
+
+Note: Expected a function because this term is being applied to the argument
+  measurable_id
+Proofs/HadwigerNelson/Outside/OAI158AlgebraModels.lean:225:2: error: Type mismatch: After simplification, term
+  he
+ has type
+  (Measure.map (fun x => (q x, id x)) (⇑κ ∘ₘ ν)).fst = ν
+but is expected to have type
+  Measure.map q (⇑κ ∘ₘ ν) = ν
+Proofs/HadwigerNelson/Outside/OAI158AlgebraModels.lean:338:4: warning: missing doc string for public constructor FiniteTensor.tensor
+
+Note: This linter can be disabled with `set_option linter.missingDocs false`
+Proofs/HadwigerNelson/Outside/OAI158AlgebraModels.lean:339:4: warning: missing doc string for public constructor FiniteTensor.add
+
+Note: This linter can be disabled with `set_option linter.missingDocs false`

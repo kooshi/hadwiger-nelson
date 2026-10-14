@@ -1,0 +1,13 @@
+compared: 30 named constants of the first dump (27 theorems, 3 definitions; types, and values of definitions); 30 declarations written at 223241b0a, each found in the first dump
+internal (not compared): 15 before, 26 after
+new named constants in the second dump: 0
+new private declarations in the second dump (counted among the internal): 6
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.conj_mem_nonunits_iff
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.exists_I_integer
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.exists_centre
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.integer_mem_valuationSubring
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.residue_mul_conj_eq_one
+  NEW PRIVATE THM HadwigerNelson.UpperHalf.sub_mul_conj_eq_one
+`example` heads: 0 at 223241b0a, 0 in the working file
+TYPE     THM HadwigerNelson.UpperHalf.localRing_ne_top: the stored statement differs
+FAIL: 1 difference(s)

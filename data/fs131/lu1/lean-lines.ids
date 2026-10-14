@@ -1,0 +1,37 @@
+=== identifiers
+FS131-KN2: 3 line(s) from plans/FS131-KN2-upper-half-plan.md
+    in the modules     IsDedekindDomain.HeightOneSpectrum.valuationSubringAtPrime
+    in the modules     ValuationSubring.eq_of_le_of_ne_top
+    in the modules     IntermediateField.nonempty_algHom_adjoin_of_splits
+    in the modules     Polynomial.Splits
+    in the modules     Polynomial.Splits.X_sub_C
+    NOT in the modules Polynomial.Splits.of_dvd
+    NOT in the modules Polynomial.splits_X_sub_C
+    NOT in the modules Polynomial.splits_of_splits_of_dvd
+    in the modules     QuadraticPrime.isMaximal_ker_and_card
+    in the modules     RingHom.ker_isMaximal_of_surjective
+    in the modules     RingHom.quotientKerEquivOfSurjective
+    in the modules     ZMod.ringHom_surjective
+FS131-IU1: 4 line(s) from plans/FS131-IU1-implementation.md
+    in the modules     RingOfIntegers.coe_eq_zero_iff
+    in the modules     RingOfIntegers.coe_injective
+    NOT in the modules RingOfIntegers.val
+    NOT in the modules Name.isInternalDetail
+    in the modules     Subtype.ext
+    in the modules     UpperHalf.sub_mul_conj_eq_one
+    in the modules     UpperHalf.residue_conj
+FS131-IQ1: 4 line(s) from plans/FS131-IQ1-implementation.md
+    NOT in the modules RingOfIntegers.val
+    in the modules     QuadraticPrime.exists_coords
+    in the modules     Subfield.closure_induction
+    in the modules     Padic.norm_le_one_iff_val_nonneg
+    in the modules     Padic.valuation_mul
+    in the modules     Padic.valuation_natCast
+    in the modules     Padic.valuation_pow
+FS131-IV1: 5 line(s) from plans/FS131-IV1-implementation.md
+    in the modules     UpperHalf.exists_stablePrime_rat
+    in the modules     Complex.add_conj
+    NOT in the modules Complex.isIntegral_int_I
+    in the modules     Complex.mul_conj
+    in the modules     Complex.sub_conj
+    in the modules     IsIntegrallyClosed.isIntegral_iff

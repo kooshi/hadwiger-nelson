@@ -1,0 +1,5 @@
+slot: waiting (ledger 20 + 6 > budget 22 GiB)
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Outside/OAI158Kernels.lean:588:2: warning: 'change EventuallyConst s (ae ν)' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`

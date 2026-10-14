@@ -1,0 +1,23 @@
+{
+ "global_instances": [
+  [
+   327,
+   "global: on a type built from the release's own definition `Rot` (`Representations.lean:10`), as `Stationary.lean:112`'s `Countable K`, global by lane C's table"
+  ]
+ ],
+ "patches": [
+  [
+   266,
+   "eventuallyEmptyOrUniv_iff",
+   "Filter.eventuallyConst_set",
+   "at v4.34.1 Mathlib states that a set is eventually empty or everything as `Filter.EventuallyEmptyOrUniv s l` (a definition new there, `EventuallyConst (· ∈ s) l`: `Mathlib/Order/Filter/EventuallyConst.lean:77`), which `aeconst_of_forall_preimage_smul_ae_eq` concludes, with `eventuallyEmptyOrUniv_iff` its unfolding; at v4.32.0 the lemma concludes `EventuallyConst s l` and the same unfolding is `Filter.eventuallyConst_set` (`EventuallyConst.lean:74` here), with the same right-hand side (as `OAI158Amenability`'s patch at `Amenability.lean:385`)"
+  ]
+ ],
+ "renames": [
+  [
+   "Measurable.of_eval",
+   "measurable_pi_iff.mpr",
+   "`Measurable.of_eval {f} (hf : ∀ a, Measurable fun c => f c a)` (v4.34.1, `Mathlib/MeasureTheory/MeasurableSpace/Constructions.lean:596`, proved there as `measurable_pi_iff.mpr hf`, in the section of `measurable_pi_iff`) is not at v4.32.0; `measurable_pi_iff.mpr` is that proof, with the same variables and the same statement (`Constructions.lean:573` here)"
+  ]
+ ]
+}

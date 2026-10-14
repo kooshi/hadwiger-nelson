@@ -1,0 +1,17 @@
+axioms.sh (source): lean exit 0
+records: 37 (17 public, 20 private); error lines in the print: 0
+on the standard three alone: 30
+resting on the declared outside theorem HadwigerNelson.StandingFive.kloosterman_bound: 6
+  IMPORTED HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine
+  IMPORTED HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine_of_colorable_three  (also sorryAx, from upstream)
+  IMPORTED HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine_of_quotient
+  IMPORTED HadwigerNelson.ThreeColourCriterion.exists_maximal_of_torsion  (also sorryAx, from upstream)
+  IMPORTED HadwigerNelson.ThreeColourCriterion.exists_normOne_zero_of_card_ne_nine
+  IMPORTED HadwigerNelson.ThreeColourCriterion.targetFloor_four_weil
+holding `sorryAx`: 3
+  SORRY HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine_of_colorable_three — from ['HadwigerNelson.ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable', 'HadwigerNelson.TorsionExtraction.colorable_two_iff_fieldBandSet_two_nonempty', 'HadwigerNelson.TorsionExtraction.exists_torsion_mem_fieldBandSet', 'HadwigerNelson.TorsionExtraction.exists_zmod_hom_of_mem_torsionBy']
+  SORRY HadwigerNelson.ThreeColourCriterion.exists_maximal_conj_trivial_of_colorable_two — from ['HadwigerNelson.TorsionExtraction.colorable_two_iff_fieldBandSet_two_nonempty']
+  SORRY HadwigerNelson.ThreeColourCriterion.exists_maximal_of_torsion — from ['HadwigerNelson.TorsionExtraction.exists_zmod_hom_of_mem_torsionBy']
+PASS: every record is filed as planned, and no `sorry` is this module's
+CONTROL: 4 of 4 planted records reported — the check can fail
+axioms.sh: check exit 0, control exit 0

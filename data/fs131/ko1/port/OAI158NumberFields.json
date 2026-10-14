@@ -1,0 +1,19 @@
+{
+ "notes": [
+  "no instance in the release file (FS131-IPA1)"
+ ],
+ "patches": [
+  [
+   483,
+   "isAlgebraic_natCast",
+   "isAlgebraic_nat",
+   "Mathlib renamed `isAlgebraic_nat` to `isAlgebraic_natCast` after v4.32.0 (at v4.34.1 the old name is a deprecated alias; the trial's patch in `Basic.lean:402`, the same); at v4.32.0 the lemma has only the old name, the same statement (`Mathlib/RingTheory/Algebraic/Basic.lean:145`)"
+  ],
+  [
+   487,
+   "isAlgebraic_natCast",
+   "isAlgebraic_nat",
+   "Mathlib renamed `isAlgebraic_nat` to `isAlgebraic_natCast` after v4.32.0 (at v4.34.1 the old name is a deprecated alias; the trial's patch in `Basic.lean:402`, the same); at v4.32.0 the lemma has only the old name, the same statement (`Mathlib/RingTheory/Algebraic/Basic.lean:145`)"
+  ]
+ ]
+}

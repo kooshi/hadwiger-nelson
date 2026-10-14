@@ -1,0 +1,66 @@
+=== LU1 DECLS ===
+LU1MODULE Proofs.HadwigerNelson.Arith.QuadraticPrime constants=14
+LU1MODULE Proofs.HadwigerNelson.Arith.UpperHalf constants=36
+LU1MODULE Proofs.HadwigerNelson.Instances.UpperHalfValues constants=10
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.QuadraticPrime HadwigerNelson.QuadraticPrime.exists_maximal_card_eq
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.QuadraticPrime HadwigerNelson.QuadraticPrime.exists_maximal_card_eq_of_ramified
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.QuadraticPrime HadwigerNelson.QuadraticPrime.exists_maximal_card_eq_sqrt
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.QuadraticPrime HadwigerNelson.QuadraticPrime.exists_maximal_card_of_padic
+LU1DECL DEF aux - Proofs.HadwigerNelson.Arith.QuadraticPrime HadwigerNelson.QuadraticPrime.exists_maximal_card_of_padic.match_1_1
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.QuadraticPrime HadwigerNelson.QuadraticPrime.exists_padicInt_sq_eq
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.QuadraticPrime HadwigerNelson.QuadraticPrime.exists_ringHom_zmod_of_padic
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.QuadraticPrime HadwigerNelson.QuadraticPrime.fieldOfRadicands_eq_adjoin
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.QuadraticPrime HadwigerNelson.QuadraticPrime.instNumberFieldFieldOfRadicands
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.QuadraticPrime HadwigerNelson.QuadraticPrime.isIntegral_sqrt_natCast
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.QuadraticPrime HadwigerNelson.QuadraticPrime.isMaximal_ker_and_card
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.QuadraticPrime HadwigerNelson.QuadraticPrime.nonempty_ringHom_padic
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.QuadraticPrime HadwigerNelson.QuadraticPrime.nonempty_ringHom_zmod_of_ramified_sqrt
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.QuadraticPrime HadwigerNelson.QuadraticPrime.numberField_fieldOfRadicands
+LU1DECL DEF written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.SpectralChain.StablePrime.heightOne
+LU1DECL DEF written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.SpectralChain.StablePrime.localRing
+LU1DECL DEF written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.SpectralChain.StablePrime.residue
+LU1DECL THM aux - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.SpectralChain.levelTarget.eq_1
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.chromaticNumber_eq_localBound_of_chain
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_finitePlane
+LU1DECL DEF aux - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_finitePlane.match_1_1
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_levelTarget
+LU1DECL DEF aux - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_levelTarget.match_1_1
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_localBound
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_unitQuadrance
+LU1DECL DEF aux - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_unitQuadrance.match_1_1
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.coe_conjO
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.coe_mem_nonunits_localRing_iff
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.colorable_planeOver_of_finitePlane
+LU1DECL DEF aux - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.colorable_planeOver_of_finitePlane.match_1_1
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.colorable_two_planeOver_of_ramified
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.conjO_conjO
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.conjO_mem_iff
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.conj_mem_localRing
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.exists_hom_levelTarget
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.exists_stablePrime_of_valuationSubring
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.heightOne_asIdeal
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.inv_natCast_mem_unitRingOver_iff_forall_stablePrime
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.isUnit_mk_pow
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.localRing_ne_top
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.mem_localRing
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.mem_localRing_of_mul_conj_eq_one
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.nonempty_hom_finitePlane
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.nonempty_hom_levelTarget_one
+LU1DECL DEF aux - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.nonempty_hom_levelTarget_one.match_1_1
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.nonempty_hom_unitQuadrance
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.residue_algebraMap
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.residue_conj
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.residue_div
+LU1DECL THM written - Proofs.HadwigerNelson.Arith.UpperHalf HadwigerNelson.UpperHalf.two_mem_of_conj_trivial
+LU1DECL THM written - Proofs.HadwigerNelson.Instances.UpperHalfValues HadwigerNelson.UpperHalf.chromaticNumber_planeOver_eleven
+LU1DECL THM written - Proofs.HadwigerNelson.Instances.UpperHalfValues HadwigerNelson.UpperHalf.chromaticNumber_planeOver_rat
+LU1DECL DEF aux - Proofs.HadwigerNelson.Instances.UpperHalfValues HadwigerNelson.UpperHalf.chromaticNumber_planeOver_rat.match_1_1
+LU1DECL THM written - Proofs.HadwigerNelson.Instances.UpperHalfValues HadwigerNelson.UpperHalf.chromaticNumber_planeOver_sqrt167_le_eight
+LU1DECL THM written - Proofs.HadwigerNelson.Instances.UpperHalfValues HadwigerNelson.UpperHalf.chromaticNumber_planeOver_sqrt47_le_five_of_prime
+LU1DECL THM written - Proofs.HadwigerNelson.Instances.UpperHalfValues HadwigerNelson.UpperHalf.colorable_planeOver_fieldOfRadicands
+LU1DECL THM written - Proofs.HadwigerNelson.Instances.UpperHalfValues HadwigerNelson.UpperHalf.exists_stablePrime_rat
+LU1DECL THM written - Proofs.HadwigerNelson.Instances.UpperHalfValues HadwigerNelson.UpperHalf.instNumberFieldBot
+LU1DECL THM written - Proofs.HadwigerNelson.Instances.UpperHalfValues HadwigerNelson.UpperHalf.numberField_bot
+LU1DECL THM written - Proofs.HadwigerNelson.Instances.UpperHalfValues HadwigerNelson.UpperHalf.two_le_chromaticNumber_planeOver
+LU1TOTAL modules=3 constants=60
+=== END ===

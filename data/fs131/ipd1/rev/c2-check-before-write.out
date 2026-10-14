@@ -1,0 +1,27 @@
+FAIL: OAI158Basic.lean differs from the generated text
+FAIL: OAI158InvariantMean.lean differs from the generated text
+FAIL: OAI158NumberFields.lean differs from the generated text
+FAIL: OAI158PhaseEncoding.lean differs from the generated text
+FAIL: OAI158SmallArcs.lean differs from the generated text
+FAIL: OAI158Amenability.lean differs from the generated text
+FAIL: OAI158Centers.lean differs from the generated text
+FAIL: OAI158Characters.lean differs from the generated text
+FAIL: OAI158PhaseCollision.lean differs from the generated text
+FAIL: OAI158Selections.lean differs from the generated text
+FAIL: OAI158RelativeCenters.lean differs from the generated text
+FAIL: OAI158Multipliers.lean differs from the generated text
+FAIL: OAI158ConditionalSelection.lean differs from the generated text
+FAIL: OAI158FourierTests.lean differs from the generated text
+FAIL: OAI158ConditionalSpectrum.lean differs from the generated text
+FAIL: OAI158Approximation.lean differs from the generated text
+FAIL: OAI158ConditionalLimits.lean differs from the generated text
+FAIL: OAI158Kernels.lean differs from the generated text
+FAIL: OAI158BoundedFunctions.lean differs from the generated text
+FAIL: OAI158Functions.lean differs from the generated text
+FAIL: OAI158Factors.lean differs from the generated text
+FAIL: OAI158RelativeProducts.lean differs from the generated text
+FAIL: OAI158Separability.lean differs from the generated text
+FAIL: OAI158Stationary.lean differs from the generated text
+FAIL: OAI158AlgebraModels.lean differs from the generated text
+OK: OAIMath2026-LICENSE.txt is the release's LICENSE byte for byte, sha256 c71d239df91726fc
+CHECK FAILED

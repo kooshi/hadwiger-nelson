@@ -1,0 +1,3 @@
+Proofs/HadwigerNelson/Outside/OAI158.lean:112:axiom no_proper_five_coloring : ¬ ∃ c : ℂ → Fin 5, ProperColoring 5 c
+Proofs/HadwigerNelson/Sat/Lrat.lean:85:axiom foo._native.native_decide.ax_1_1 : decide (check π cnf = true) = true
+Proofs/HadwigerNelson/Arith/WeilKloosterman.lean:51:axiom kloosterman_bound.{u} (F : Type u) [Field F] [Fintype F] [DecidableEq F] (hp : ringChar F ≠ 2)

@@ -1,0 +1,66 @@
+slot: admitted lj1-vacuity-given: mem 8 GiB (hard cap), cpus 0,1
+==> vacuity: this run's full output: build/gate/vacuity/20261014T025258Z-1263862.log
+    scanned: declarations=16125  refutations-skipped=228
+    sites:   sites=1454  vacuous=0  stale=0  declared=3  witnessed=38  generic=1411  unknown=2
+    evidence: 18 emptiness proof(s), 63 witness(es)
+    RECORDED COUNTS ARE STALE in scripts/vacuity-baseline.txt's header — update it: declarations 16029 → 16125
+    RECORDED COUNTS ARE STALE in CLAUDE.md § The gate — update it: declarations 16029 → 16125
+    --- witnessed (38), with the evidence behind each ---
+    WITNESSED HadwigerNelson.AritySpec.p5_compels_rainbow :: HadwigerNelson.Compels HadwigerNelson.AritySpec.P5 3 ![1, 3, 4] id [by HadwigerNelson.AritySpec.p5_compels_rainbow]
+    WITNESSED HadwigerNelson.Plane.ArcMap.cuspFrag_isHorn :: HadwigerNelson.Plane.ArcMap.cuspFrag.IsHorn 0 0 (-1) 1 1 [by HadwigerNelson.Plane.ArcMap.cuspFrag_isHorn]
+    WITNESSED HadwigerNelson.Plane.ArcMap.halfDisc_simple :: HadwigerNelson.Plane.halfDisc.Simple [by HadwigerNelson.Plane.ArcMap.halfDisc_simple]
+    WITNESSED HadwigerNelson.Plane.ArcMap.l60Frag_isRingArc :: HadwigerNelson.Plane.ArcMap.l60Frag.IsRingArc 0 0 (Real.pi / 3) 0 1 [by HadwigerNelson.Plane.ArcMap.l60Frag_isRingArc]
+    WITNESSED HadwigerNelson.Plane.ArcMap.threeSectorDisc_niceAt :: HadwigerNelson.Plane.ArcMap.threeSectorDisc.NiceAt 0 [by HadwigerNelson.Plane.ArcMap.threeSectorDisc_niceAt]
+    WITNESSED HadwigerNelson.Plane.ArcMap.threeSectorDisc_phantom :: HadwigerNelson.Plane.ArcMap.threeSectorDisc.SectorsAt 0 5 ![0, 2 * Real.pi / 3, 2 * Real.pi / 3, 2 * Real.pi / 3, 4 * Real.pi / 3, 2 * Real.pi] ![0, 1, 0, 1, 2] [by HadwigerNelson.Plane.ArcMap.threeSectorDisc_phantom]
+    WITNESSED HadwigerNelson.Plane.ArcMap.threeSectorDisc_sectorsAt :: HadwigerNelson.Plane.ArcMap.threeSectorDisc.SectorsAt 0 3 ![0, 2 * Real.pi / 3, 4 * Real.pi / 3, 2 * Real.pi] ![0, 1, 2] [by HadwigerNelson.Plane.ArcMap.threeSectorDisc_sectorsAt]
+    WITNESSED HadwigerNelson.Plane.awayModel_isRingArc_gap :: HadwigerNelson.Plane.awayModel.IsRingArc HadwigerNelson.Plane.awayP (1 / 5) (3 / 10) 7 0 [by HadwigerNelson.Plane.awayModel_isRingArc_gap]
+    WITNESSED HadwigerNelson.Plane.cuspFrag_isRingArc :: HadwigerNelson.Plane.ArcMap.cuspFrag.IsRingArc Complex.I (-(Real.pi / 2) + 1 / 10) (-(Real.pi / 2) + 2 / 5) 0 1 [by HadwigerNelson.Plane.cuspFrag_isRingArc]
+    WITNESSED HadwigerNelson.Plane.halfDisc_niceAt :: HadwigerNelson.Plane.halfDisc.NiceAt 0 [by HadwigerNelson.Plane.halfDisc_niceAt]
+    WITNESSED HadwigerNelson.Plane.halfDisc_sectorsAt :: HadwigerNelson.Plane.halfDisc.SectorsAt 0 2 ![0, Real.pi, 2 * Real.pi] ![1, 0] [by HadwigerNelson.Plane.halfDisc_sectorsAt]
+    WITNESSED HadwigerNelson.Plane.halfPlane2_isChangePoint :: HadwigerNelson.Plane.halfPlane2.IsChangePoint 0 0 1 0 [by HadwigerNelson.Plane.halfPlane2_isChangePoint]
+    WITNESSED HadwigerNelson.Plane.hornModel_isHorn :: HadwigerNelson.Plane.hornModel.IsHorn HadwigerNelson.Plane.plantPt 0 (-1 / 2) (1 / 2) 7 [by HadwigerNelson.Plane.hornModel_isHorn]
+    WITNESSED HadwigerNelson.Plane.quadRing_isQArc :: HadwigerNelson.Plane.quadRing.IsQArc 0 0 (Real.pi / 2) [by HadwigerNelson.Plane.quadRing_isQArc]
+    WITNESSED HadwigerNelson.Plane.quadRing_isRingArc :: HadwigerNelson.Plane.quadRing.IsRingArc 0 0 (Real.pi / 2) 0 2 [by HadwigerNelson.Plane.quadRing_isRingArc]
+    WITNESSED HadwigerNelson.Plane.sevenBrickRegions :: HadwigerNelson.Plane.AeProperRegions 7 [by HadwigerNelson.Plane.sevenBrickRegions]
+    WITNESSED HadwigerNelson.Plane.sixFrag_isRingArc :: HadwigerNelson.Plane.sixFrag.IsRingArc 0 0 (Real.pi / 6) 0 2 [by HadwigerNelson.Plane.sixFrag_isRingArc]
+    WITNESSED HadwigerNelson.Plane.sq9 :: HadwigerNelson.Plane.AeColouring 9 [by HadwigerNelson.Plane.sq9]
+    WITNESSED HadwigerNelson.Plane.stuckModel_isHorn_pi :: HadwigerNelson.Plane.stuckModel.IsHorn HadwigerNelson.Plane.plantPt (0 + Real.pi) (-1) 1 9 [by HadwigerNelson.Plane.stuckModel_isHorn_pi]
+    WITNESSED HadwigerNelson.Plane.stuckModel_isStuck :: HadwigerNelson.Plane.stuckModel.IsStuck HadwigerNelson.Plane.plantPt [by HadwigerNelson.Plane.stuckModel_isStuck]
+    WITNESSED HadwigerNelson.StationaryRatio.StationarySet.parity :: HadwigerNelson.StationaryRatio.StationarySet (ZMod 2) [by HadwigerNelson.StationaryRatio.StationarySet.parity]
+    WITNESSED HadwigerNelson.core122_pigeonhole :: (HadwigerNelson.edgeGraph 122 HadwigerNelson.core122Edges).Coloring (Fin 4) [by HadwigerNelson.core122_colorable_four]
+    WITNESSED HadwigerNelson.core9_pigeonhole :: (HadwigerNelson.edgeGraph 9 HadwigerNelson.core9Edges).Coloring (Fin 4) [by HadwigerNelson.core9_colorable_four]
+    WITNESSED HadwigerNelson.finitePlane11Colouring.toColoring :: (HadwigerNelson.finitePlane 11).Coloring (Fin 5) [by HadwigerNelson.finitePlane11_colorable_five]
+    WITNESSED HadwigerNelson.finitePlane11DoubleGapColoring :: (HadwigerNelson.finitePlane 11).Coloring (Fin 5) [by HadwigerNelson.finitePlane11_colorable_five]
+    WITNESSED HadwigerNelson.finitePlane19QuotColoring :: (HadwigerNelson.finitePlane 19).Coloring (Fin 5) [by HadwigerNelson.finitePlane19QuotColoring]
+    WITNESSED HadwigerNelson.finitePlane3Colouring.toColoring :: (HadwigerNelson.finitePlane 3).Coloring (Fin 3) [by HadwigerNelson.finitePlane3ColouringDiff.toColoring]
+    WITNESSED HadwigerNelson.finitePlane3ColouringDiff.toColoring :: (HadwigerNelson.finitePlane 3).Coloring (Fin 3) [by HadwigerNelson.finitePlane3ColouringDiff.toColoring]
+    WITNESSED HadwigerNelson.finitePlane7QuotColoring :: (HadwigerNelson.finitePlane 7).Coloring (Fin 4) [by HadwigerNelson.finitePlane7QuotColoring]
+    WITNESSED HadwigerNelson.hexColoring :: (SimpleGraph.cycleGraph 6).Coloring (Fin 3) [by HadwigerNelson.hexColoring]
+    WITNESSED HadwigerNelson.pathColoring3 :: (SimpleGraph.pathGraph 3).Coloring (Fin 3) [by HadwigerNelson.pathColoring3]
+    WITNESSED HadwigerNelson.pathGraph_additivelyRigid :: (SimpleGraph.pathGraph 3).Coloring (Fin 2) [by HadwigerNelson.pathGraph_three_colorable_two]
+    WITNESSED HadwigerNelson.pathGraph_three_coloring_two :: (SimpleGraph.pathGraph 3).Coloring (Fin 2) [by HadwigerNelson.pathGraph_three_colorable_two]
+    WITNESSED HadwigerNelson.rhombus_forces :: (HadwigerNelson.edgeGraph 4 HadwigerNelson.rhombus).Coloring (Fin 3) [by HadwigerNelson.rhombus_colorable_three]
+    WITNESSED HadwigerNelson.rhombus_forces_of_gadget :: (HadwigerNelson.edgeGraph 4 HadwigerNelson.rhombus).Coloring (Fin 3) [by HadwigerNelson.rhombus_colorable_three]
+    WITNESSED HadwigerNelson.twoAdicFiveColouring :: (HadwigerNelson.twoAdicPlane 5).Coloring (Fin 4) [by HadwigerNelson.twoAdicFiveColouring]
+    WITNESSED HadwigerNelson.twoAdicFive_forces_delta :: (HadwigerNelson.twoAdicPlane 5).Coloring (Fin 4) [by HadwigerNelson.twoAdicFiveColouring]
+    WITNESSED HadwigerNelson.twoAdicFive_forces_of_ker :: (HadwigerNelson.twoAdicPlane 5).Coloring (Fin 4) [by HadwigerNelson.twoAdicFiveColouring]
+    --- changes since the previous complete run ---
+    previous: build/gate/vacuity/20261007T150836Z-2893925.log
+    counts: declarations 14923 → 16125, refutations-skipped 215 → 228, sites 1448 → 1454, generic 1405 → 1411
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.col_eq_of_mem_core :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.core :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.core_dist_ne_one :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.measurableSet_core :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.AeColouring.volume_compl_iUnion_core :: HadwigerNelson.Plane.AeColouring k
+    + SITE GENERIC HadwigerNelson.Plane.exists_proper_of_aeColouring :: HadwigerNelson.Plane.AeColouring k
+    every site and piece of evidence: rg '^(SITE|EVIDENCE) ' build/gate/vacuity/20261014T025258Z-1263862.log
+    --- declared empty, by design (3) ---
+    DECLARED HadwigerNelson.core122_plane :: known vacuous and retained under this project's never-delete rule — same reason as `core9_plane`, same correction in ledger row 31, same instruction not to consume it. The 122-point carrier `core122_pigeonhole` above is the real content.
+    DECLARED HadwigerNelson.core9_plane :: known vacuous and retained under this project's never-delete rule. Rung B makes `(unitDistance ℂ).Coloring (Fin 4)` empty (`Interval.lean`, `isEmpty_coloring_plane_four`), so this says nothing; it is kept because the record cites it by name, and ledger row 31 carries the correction. DO NOT CONSUME IT — the non-vacuous replacement over `K` is stubbed in `plans/STUB-four-colour-valuation-law.md`. The 1-minimal CARRIER above, `core9_pigeonhole`, is the real content and is not vacuous.
+    DECLARED HadwigerNelson.vacuous_of_plane_four_coloring :: emptiness is the entire content here — this theorem exists to SAY that a statement over plane four-colourings is empty, so a gate flagging it would be flagging the detector. `scripts/Vacuity.lean`'s `vacuous_of_isEmpty` is its general form.
+    --- unknown, held by the baseline (2) ---
+    UNKNOWN HadwigerNelson.hexShell_plane5
+    UNKNOWN HadwigerNelson.hexShell_plane6
+==> vacuity: OK
+    full output: build/gate/vacuity/20261014T025258Z-1263862.log
+exit=0

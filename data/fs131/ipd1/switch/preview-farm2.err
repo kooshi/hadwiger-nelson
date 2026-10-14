@@ -1,0 +1,3 @@
+slot: waiting (ledger 20 + 9 > budget 22 GiB)
+slot: waiting (ledger 14 + 9 > budget 22 GiB)
+slot: admitted ipd1: mem 9 GiB (hard cap), cpus 0,1

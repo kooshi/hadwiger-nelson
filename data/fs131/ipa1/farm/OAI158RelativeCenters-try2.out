@@ -1,0 +1,159 @@
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Outside/OAI158RelativeCenters.lean:161:11: error: Application type mismatch: The argument
+  e.center μ
+has type
+  G → G
+of sort `Type u_1` but is expected to have type
+  AEMeasurable ?m.14 ↑μ
+of sort `Prop` in the application
+  μ.map (e.center μ)
+Proofs/HadwigerNelson/Outside/OAI158RelativeCenters.lean:187:8: error(lean.unknownIdentifier): Unknown identifier `eventuallyEmptyOrUniv_iff.mp`
+Proofs/HadwigerNelson/Outside/OAI158RelativeCenters.lean:223:4: error: Function expected at
+  compProd_map_condDistrib (Measurable.aemeasurable hp)
+but this term has type
+  Measure.map ?m.133 ?m.141 ⊗ₘ condDistrib p ?m.133 ?m.141 = Measure.map (fun a => (?m.133 a, p a)) ?m.141
+
+Note: Expected a function because this term is being applied to the argument
+  hf.aemeasurable
+Proofs/HadwigerNelson/Outside/OAI158RelativeCenters.lean:219:60: error: unsolved goals
+X : Type u_1
+Y : Type u_2
+Z : Type u_3
+inst✝⁵ : MeasurableSpace X
+inst✝⁴ : MeasurableSpace Y
+inst✝³ : MeasurableSpace Z
+inst✝² : StandardBorelSpace Z
+inst✝¹ : Nonempty Z
+μ : Measure X
+inst✝ : IsFiniteMeasure μ
+f : X → Z
+p : X → Y
+hf : Measurable f
+hp : Measurable p
+R : Y ≃ᵐ Y
+⊢ Measure.map (fun x => ((⇑R ∘ p) x, f x)) μ = Measure.map (Prod.map (⇑R) id) (Measure.map p μ ⊗ₘ condDistrib f p μ)
+Proofs/HadwigerNelson/Outside/OAI158RelativeCenters.lean:249:39: error: Application type mismatch: The argument
+  Measurable.aemeasurable hp
+has type
+  AEMeasurable p ?m.329
+of sort `Prop` but is expected to have type
+  X → ?m.311
+of sort `Type (max ?u.175 u_1)` in the application
+  condDistrib_comp (Measurable.aemeasurable hp)
+Proofs/HadwigerNelson/Outside/OAI158RelativeCenters.lean:327:30: error: Function expected at
+  compProd_map_condDistrib (Measurable.aemeasurable hp)
+but this term has type
+  Measure.map ?m.86 ?m.94 ⊗ₘ condDistrib p ?m.86 ?m.94 = Measure.map (fun a => (?m.86 a, p a)) ?m.94
+
+Note: Expected a function because this term is being applied to the argument
+  hd.aemeasurable
+Proofs/HadwigerNelson/Outside/OAI158RelativeCenters.lean:326:61: error: unsolved goals
+Y : Type u_1
+G : Type u_2
+inst✝⁷ : MeasurableSpace Y
+inst✝⁶ : CommGroup G
+inst✝⁵ : MeasurableSpace G
+inst✝⁴ : MeasurableMul₂ G
+inst✝³ : MeasurableInv G
+e : CosetCenter.Embedding G
+X : Type u_3
+inst✝² : MeasurableSpace X
+inst✝¹ : StandardBorelSpace G
+μ : Measure X
+inst✝ : IsProbabilityMeasure μ
+d : X → G
+p : X → Y
+hd : Measurable d
+hp : Measurable p
+⊢ ∫⁻ (p_1 : Y × G), cosetMass e (condDistrib d p μ) p_1 ∂Measure.map p μ ⊗ₘ condDistrib d p μ =
+    ∫⁻ (x : X), cosetMass e (condDistrib d p μ) (p x, d x) ∂μ
+Proofs/HadwigerNelson/Outside/OAI158RelativeCenters.lean:359:8: error: Function expected at
+  compProd_map_condDistrib (Measurable.aemeasurable hp)
+but this term has type
+  Measure.map ?m.408 ?m.416 ⊗ₘ condDistrib p ?m.408 ?m.416 = Measure.map (fun a => (?m.408 a, p a)) ?m.416
+
+Note: Expected a function because this term is being applied to the argument
+  hd.aemeasurable
+Proofs/HadwigerNelson/Outside/OAI158RelativeCenters.lean:413:0: error: cannot omit referenced section variable `inst✝²`
+Proofs/HadwigerNelson/Outside/OAI158RelativeCenters.lean:420:6: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Outside/OAI158RelativeCenters.lean:454:8: error: Application type mismatch: The argument
+  fun point => k • point
+has type
+  G → G
+of sort `Type u_2` but is expected to have type
+  AEMeasurable ?m.283 ↑(probabilityKernel (condDistrib d p μ) (p x))
+of sort `Prop` in the application
+  (probabilityKernel (condDistrib d p μ) (p x)).map fun point => k • point
+Proofs/HadwigerNelson/Outside/OAI158RelativeCenters.lean:446:68: error: unsolved goals
+Y : Type u_1
+G : Type u_2
+inst✝¹⁵ : MeasurableSpace Y
+inst✝¹⁴ : CommGroup G
+inst✝¹³ : MeasurableSpace G
+inst✝¹² : MeasurableMul₂ G
+inst✝¹¹ : MeasurableInv G
+e : CosetCenter.Embedding G
+X : Type u_3
+inst✝¹⁰ : MeasurableSpace X
+K : Type u_4
+inst✝⁹ : Group K
+inst✝⁸ : MulAction K X
+inst✝⁷ : MulAction K Y
+inst✝⁶ : MulDistribMulAction K G
+inst✝⁵ : MeasurableConstSMul K X
+inst✝⁴ : MeasurableConstSMul K Y
+inst✝³ : MeasurableConstSMul K G
+inst✝² : StandardBorelSpace G
+μ : Measure X
+inst✝¹ : IsProbabilityMeasure μ
+inst✝ : SMulInvariantMeasure K X μ
+d : X → G
+p : X → Y
+hd : Measurable d
+hp : Measurable p
+hde : ∀ (k : K), ∀ᵐ (x : X) ∂μ, d (k • x) = k • d x
+hpe : ∀ (k : K), ∀ᵐ (x : X) ∂μ, p (k • x) = k • p x
+O : K → ℂ ≃ₗᵢ[ℝ] ℂ
+he : ∀ (k : K) (t : ℂ), k • e.j t = e.j ((O k) t)
+ha : ∀ᵐ (x : X) ∂μ, cosetMass e (condDistrib d p μ) (p x, d x) ≠ 0
+k : K
+hk :
+  ∀ᵐ (y : Y) ∂Measure.map p μ,
+    (condDistrib d p μ) ((MeasurableEquiv.smul k) y) = Measure.map (fun z => k • z) ((condDistrib d p μ) y)
+hxk :
+  ∀ᵐ (x : X) ∂μ,
+    (condDistrib d p μ) ((MeasurableEquiv.smul k) (p x)) = Measure.map (fun z => k • z) ((condDistrib d p μ) (p x))
+x : X
+hx : (condDistrib d p μ) ((MeasurableEquiv.smul k) (p x)) = Measure.map (fun z => k • z) ((condDistrib d p μ) (p x))
+hd' : d (k • x) = k • d x
+hp' : p (k • x) = k • p x
+ha' : cosetMass e (condDistrib d p μ) (p x, d x) ≠ 0
+⊢ centerMap e μ d p (k • x) = k • centerMap e μ d p x
+Proofs/HadwigerNelson/Outside/OAI158RelativeCenters.lean:522:34: error: Function expected at
+  compProd_map_condDistrib (Measurable.aemeasurable hp)
+but this term has type
+  Measure.map ?m.147 ?m.155 ⊗ₘ condDistrib p ?m.147 ?m.155 = Measure.map (fun a => (?m.147 a, p a)) ?m.155
+
+Note: Expected a function because this term is being applied to the argument
+  hd.aemeasurable
+Proofs/HadwigerNelson/Outside/OAI158RelativeCenters.lean:518:44: error: unsolved goals
+Y : Type u_1
+G : Type u_2
+inst✝⁷ : MeasurableSpace Y
+inst✝⁶ : CommGroup G
+inst✝⁵ : MeasurableSpace G
+inst✝⁴ : MeasurableMul₂ G
+inst✝³ : MeasurableInv G
+e : CosetCenter.Embedding G
+X : Type u_3
+inst✝² : MeasurableSpace X
+inst✝¹ : StandardBorelSpace G
+μ : Measure X
+inst✝ : IsProbabilityMeasure μ
+d : X → G
+p : X → Y
+hd : Measurable d
+hp : Measurable p
+⊢ Measure.map (fun x => (p x, centerMap e μ d p x)) μ =
+    Measure.map (fun q => (q.1, e.center (probabilityKernel (condDistrib d p μ) q.1) q.2))
+      (Measure.map p μ ⊗ₘ condDistrib d p μ)

@@ -147,3 +147,33 @@ The remote is unreachable: **commit by explicit path on your branch and do not p
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 (2026-10-13 20:39 UTC) — your three notes: retire the entry as you say; the read-aloud is accepted; no cold rebuild
+
+Thank you for all three, and most for the first: you ran the step before editing anything and found that a sentence
+this brief, the planner and the last implementer all carried about the tool is not what the tool does.
+
+1. **The assumptions step.** Go on exactly as you describe: the `hUpper` entry out, the two entries for the new
+   theorem in, the ledger rewritten by the step's own flag, and the counts the step then prints set beside this
+   brief's prediction. *The alternative I weighed:* leave the entry until the tool can find it by itself; declined,
+   because the statement is now a theorem and a list of assumptions that still names it tells a reader the library
+   assumes more than it does. Confidence: high. Three small things for your record and drafts: the mechanism as you
+   found it, with the receipt's path; a corrected sentence for `LEAN.md` § The gate (the clause "or one a theorem
+   proves over its own variables" holds of a named hypothesis only; an entry written out in a binder is retired, as it
+   is declared, on the landing's own word); and one line for the tooling list saying what a check on such an entry
+   would have to read. The brief's sentence was mine to verify and I did not; it is logged as my slip.
+2. **The read-aloud.** Accepted as you read it, and your docstring edits with it (a wrong file name and "exhibited"
+   where two of three fields only use the prime are what the read-aloud is for; the three files' docstrings are in
+   your touches). I have put (a), (b) and (d) into `data/fs131/claims-NF1.md` as dated lines in your words, so the
+   claim list no longer says less, or denies more, than the module. On (e): "into" stands; the planner's "onto" in its
+   draft for the ledger's row 57 will not be filed, and your draft's wording is the one I file.
+3. **The copied compiled files.** Accepted; no cold rebuild before the fast-forward. *The alternative:* recompile
+   the 117 modules here (47 minutes on this machine). *Why not:* what I checked — between the tip of the tree that
+   gated them and your tip, the sources under `Proofs/`, the root list, `scripts/`, the lakefile, the manifest and
+   the toolchain file differ only by your three new modules and three lines of the root list — so every copied file
+   was compiled from a source identical to yours, which is what the build's own trace check also said, and the
+   publication gate replays every module in an independent kernel run in any case. Confidence: medium-high; it would
+   change if any gate step printed a stored statement that differs from your dump of the three modules. Say in your
+   record what was copied, from which tree, and how it was compared.
+
+Your touches are unchanged. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).

@@ -1,0 +1,32 @@
+ref main = b937f33d1cf5cb3a53fca1055f731b46e9d1588f
+OK   1 time(s) in CLAUDE.md: 1 audit sentence
+OK   1 time(s) in CLAUDE.md: 2 vacuity counts
+OK   1 time(s) in CLAUDE.md: 3 nine counts and their sentence
+OK   1 time(s) in tools/claude_md_fact_audit.py: 4 GATE_CHANGES, the entry it follows
+OK   1 time(s) in CLAUDE.md: 5 the theory paragraph's sentence on the upper bound
+OK   1 time(s) in CLAUDE.md: 6 what the kernel holds
+OK   1 time(s) in CLAUDE.md: 7 FS-101's first slot
+OK   1 time(s) in CLAUDE.md: 7 a sentence that stays (the lower end, not in the kernel)
+OK   1 time(s) in CLAUDE.md: 7 a sentence that stays (publication)
+OK   1 time(s) in LEDGER.md: 8 row 52, the grade
+OK   1 time(s) in LEDGER.md: 8 row 52, the sentence the new one follows
+OK   1 time(s) in LEDGER.md: 8 row 57
+OK   1 time(s) in LEDGER.md: 8 row 63
+OK   1 time(s) in LEDGER.md: 8 row 73
+OK   1 time(s) in LEDGER.md: 8 row 99
+OK   1 time(s) in LEDGER.md: 8 row 105
+OK   1 time(s) in LEDGER.md: 8 row 119
+OK   1 time(s) in LEDGER.md: 8 row 121
+OK   1 time(s) in LEDGER.md: 8 row 123
+OK   1 time(s) in LEDGER.md: 8 row 127
+OK   1 time(s) in LEAN.md: 9 LEAN.md § The gate, the assumptions bullet
+OK   1 time(s) in LEAN.md: 11 LEAN.md § The gate, the vacuity bullet's last sentence
+OK   1 time(s) in LEAN.md: 11 LEAN.md § Building, the bullet the new one follows
+OK   1 time(s) in LEAN.md: 11 LEAN.md § Searching, the bullet the new ones follow
+OK   1 time(s) in plans/FS131-KN1-number-field-kernel-map.md: 12 the map, [S1b]'s size
+OK   1 time(s) in plans/FS131-KN1-number-field-kernel-map.md: 12 the map, [S2]'s second sentence
+OK   1 time(s) in plans/FS131-KN1-number-field-kernel-map.md: 12 the map, X8
+OK   1 time(s) in data/fs131/claims-NF1.md: 13 the claim list, the line the regrade follows
+OK   1 time(s) in CLAUDE.md: 14 the Frontier's Last filed
+CONTROL FIRED AS EXPECTED: absent — CLAUDE.md
+slots: 29 checked, 0 bad

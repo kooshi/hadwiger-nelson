@@ -1,0 +1,6 @@
+decls-given exit=0
+dupnames-given exit=0
+assumptions-selftest-first exit=0
+assumptions-given exit=1
+vacuity-given exit=0
+PROBE-GIVEN DONE 2026-10-14T02:54:59Z

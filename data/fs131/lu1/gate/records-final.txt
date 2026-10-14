@@ -1,0 +1,9 @@
+landing: 60 constants in 3 modules; declarations it brings: 52 (49 THM, 3 DEF, 0 IND; Arith.UpperHalf 30, Arith.QuadraticPrime 13, Instances.UpperHalfValues 9); records in the log: 7506
+  landing records on exactly the three: 52
+  headlines under CLEAN on exactly the three: 31 of 31
+  whole log: records carrying kloosterman_bound: 8 (filed: 8); of the landing's: 0
+  whole log: records carrying no_proper_five_coloring: 6 (filed: 6); of the landing's: 0
+  whole log: records carrying proper_to_borel_weak: 12 (filed: 12); of the landing's: 0
+  whole log: records under IMPORTED 26; carrying two imports 0; carrying sorryAx 0
+records: PASS
+exit=0

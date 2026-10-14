@@ -1,0 +1,33 @@
+@card_nsmul_eq_zero' : ∀ {G : Type u_1} [inst : AddGroup G] {x : G}, Nat.card G • x = 0
+@RingHom.quotientKerEquivRange : {R : Type u_1} →
+  [inst : Ring R] → {S : Type u_2} → [inst_1 : Ring S] → (f : R →+* S) → R ⧸ RingHom.ker f ≃+* ↥f.range
+@Nat.card_le_card_of_injective : ∀ {α : Type u_1} {β : Type u_2} [Finite β] (f : α → β),
+  Function.Injective f → Nat.card α ≤ Nat.card β
+@addOrderOf_dvd_natCard : ∀ {G : Type u_1} [inst : AddGroup G] (x : G), addOrderOf x ∣ Nat.card G
+@addOrderOf_dvd_of_nsmul_eq_zero : ∀ {G : Type u_1} [inst : AddMonoid G] {x : G} {n : ℕ}, n • x = 0 → addOrderOf x ∣ n
+@AddMonoid.addOrderOf_eq_one_iff : ∀ {G : Type u_1} [inst : AddMonoid G] {x : G}, addOrderOf x = 1 ↔ x = 0
+@Ideal.finiteQuotientOfFreeOfNeBot : ∀ {S : Type u_1} [inst : CommRing S] [IsDomain S] [Module.Free ℤ S]
+  [Module.Finite ℤ S] (I : Ideal S), I ≠ ⊥ → Finite (S ⧸ I)
+@Nat.finite_of_card_ne_zero : ∀ {α : Type u_1}, Nat.card α ≠ 0 → Finite α
+@Fintype.card_subtype : ∀ {α : Type u_1} [inst : Fintype α] (p : α → Prop) [inst_1 : Fintype { a // p a }]
+  [inst_2 : DecidablePred p], Fintype.card { x // p x } = {x | p x}.card
+@Ideal.isMaximal_comap_of_isIntegral_of_isMaximal : ∀ {R : Type u_1} [inst : CommRing R] {S : Type u_2}
+  [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.IsIntegral R S] (I : Ideal S) [hI : I.IsMaximal],
+  (Ideal.comap (algebraMap R S) I).IsMaximal
+@Ideal.absNorm_dvd_absNorm_of_le : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S]
+  [inst_2 : Module.Free ℤ S] {I J : Ideal S}, J ≤ I → Ideal.absNorm I ∣ Ideal.absNorm J
+@Ideal.absNorm_span_singleton : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S]
+  [inst_2 : Module.Free ℤ S] [Module.Finite ℤ S] (r : S), Ideal.absNorm (Ideal.span {r}) = ((Algebra.norm ℤ) r).natAbs
+@Ideal.absNorm_apply : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S] [inst_2 : Module.Free ℤ S]
+  (I : Ideal S), Ideal.absNorm I = Submodule.cardQuot I
+Module.finrank_mul_finrank : ∀ (F : Type u_1) (K : Type u_2) (A : Type u_3) [inst : Semiring F] [inst_1 : Semiring K]
+  [inst_2 : AddCommMonoid A] [inst_3 : Module F K] [inst_4 : Module K A] [inst_5 : Module F A] [IsScalarTower F K A]
+  [StrongRankCondition F] [StrongRankCondition K] [Module.Free F K] [Module.Free K A],
+  Module.finrank F K * Module.finrank K A = Module.finrank F A
+NumberField.RingOfIntegers.rank : ∀ (K : Type u_1) [inst : Field K] [inst_1 : NumberField K],
+  Module.finrank ℤ (NumberField.RingOfIntegers K) = Module.finrank ℚ K
+@Algebra.norm_algebraMap : ∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : Ring S] [inst_2 : Algebra R S]
+  [Module.Free R S] (x : R), (Algebra.norm R) ((algebraMap R S) x) = x ^ Module.finrank R S
+@Ideal.absNorm_span_natCast : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S]
+  [inst_2 : Module.Free ℤ S] [Module.Finite ℤ S] (n : ℕ), Ideal.absNorm (Ideal.span {↑n}) = n ^ Module.finrank ℤ S
+data/fs131/kj1/probes/names2.lean:19:8: error(lean.unknownIdentifier): Unknown identifier `HadwigerNelson.UpperHalfValues.two_le_chromaticNumber_planeOver`

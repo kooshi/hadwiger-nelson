@@ -133,3 +133,113 @@ The remote is unreachable: **commit by explicit path on your branch and do not p
 
 You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review
 work it knows exists).
+
+## Amendment 1 (2026-10-13 20:37 UTC) — the outside theorem enters as the release's `residual_fourier`, declared; its generic lemmas are ported
+
+Your proposal is accepted as you made it. Thank you for measuring the port before proposing against it, and for the
+second finding: it takes the heaviest link out of the module.
+
+**The ruling, in four parts.** *Choice:* declare the release's `residual_fourier` in
+`Proofs/HadwigerNelson/Outside/OAI158.lean`, the third declared theorem from the release, over copies of the seven
+constants you name. *The alternative I weighed:* declare `wild_fourier`, which is the manuscript's numbered
+Theorem 2.3, and build the spectral measure of a vector in this library. *Why yours wins:* both statements are
+kernel-checked in the same file at the same pin, so the trust bought is the same release either way; what differs is
+how much of the release a reader must compare by eye, and yours copies seven short constants where the other copies
+the character group, the wild condition and the action on it, and then spends about 125 declarations here to arrive
+at the line the release already proves. A port now is declined for this job and priced for later (item 4 below).
+*Confidence:* high. What would change it: one of the seven constants turning out not to be short once its own
+dependencies are followed (a definition that pulls in the functional calculus), or the model on the regular
+representation not going through with a non-zero vector — tell me at once in either case.
+
+**What I ask the declaration to carry**, beyond the four items of `LEAN.md` § Assumptions: outside theorems and our own:
+
+1. **Its docstring says what it is, so no reader takes it for the printed Theorem 2.3**: a lemma of the release's
+   Lean, by file and line at the pin (I read the `lemma` keyword on line 403 of
+   `~/source/math/lean/OAI/Analysis/PlaneSpectrum/Ergodicity.lean`, where you wrote 402 — cite the line as the pin
+   has it); the rigidity theorem composed with the spectral theorem for the representation; not a numbered statement
+   of the manuscript; and the manuscript passage whose step it is, by key, section and page, with Theorem 2.3 named as
+   what it rests on.
+2. **The axioms line of `residual_fourier` itself** at the release's pin, from the compiled constants, recorded in
+   your plan with the command or the dump line that shows it. What I checked: it is consumed by
+   `projected_unit_correlation` on line 61 of `~/source/math/lean/OAI/Geometry/PlaneColoring/BorelTransfer.lean`, and
+   the audit has the axioms line for `wild_fourier`; I have not seen the line for this lemma, and an inference from a
+   neighbour's line is not a receipt.
+3. **Its binders in its own signature**, as the brief already says, and the read-back across the two pins with a
+   control that fires (`tools/fs132_i1_readback.py` is the pattern); the landing runs it again.
+4. **The port's price, as a table in your plan**: your count for this lemma's cone beside the audit's rows —
+> | `proper_to_borel_weak` (the transfer) | 1,997 | 32 | six to eight jobs; about 16,600 lines |
+> — source: plans/EXT-OAI1-audit.md § The pieces to adopt, and what each rests on (measured)
+
+> | `wild_fourier` | 1,644 | 29 | inside the previous |
+> — source: plans/EXT-OAI1-audit.md § The pieces to adopt, and what each rests on (measured)
+
+   — and one sentence on whether this lemma's cone lies inside the transfer's (the transfer consumes it, so I expect
+   so; say what the compiled constants say). If it does, one port would turn two of the library's declared theorems
+   into theorems under their present names. That is a later job and a decision for the publication pass
+   (`LEAN.md` § Assumptions: outside theorems and our own, its last bullet); your plan only has to hold the measurement.
+
+**The generic lemmas: port them, yes.** Plan them as a ported module of their own, made by the generator the last
+port used (`tools/fs132_i2_port.py`, which refuses a patch to a statement or a definition; its read-back
+`tools/fs132_i2_readback.py`; the licence text `Proofs/HadwigerNelson/Outside/OAIMath2026-LICENSE.txt` beside it),
+with the cone computed from the release's compiled constants and the line ranges in your plan. Keep the lines you
+rewrite for an arbitrary invariant law in a separate module of this library's own: a ported module's header says it
+is the release's text unchanged, and that has to stay true. Whether you run the generator yourself or leave it to an
+implementer as a leaf is yours to decide by which is cheaper. The density-point statement already in the library is
+cited in your plan by its declaration names, as you gave them.
+
+Your touches are unchanged: the declaration's line in the module above, new modules of this milestone, your record
+and your data folder. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 2 (2026-10-13 20:44 UTC) — the declaration goes in a module of its own, as you propose; one sentence of yours to correct
+
+**Ruling: the new module stands** (the module OAI158Rigidity you name, in the folder of the release's other modules; yours to write). *The
+alternative:* the module that holds the release's other two, as Amendment 1 said. *Why yours wins:* that module is
+imported by four others (I counted: two of the ported modules, the disc criterion's last module and the
+measurable-number module), its two declarations are compared with the release term for term, and an import added
+there can change an instance one of them stores — a risk bought for nothing, since a reader finds "the release's
+third declared theorem" as easily in a file beside it. Confidence: high. It is inside your touches as a new module of
+this milestone. Thank you for the three measurements; each has its receipt where you said.
+
+**One sentence to correct in your plan.** Your message says one port of the transfer's cone "would turn all three
+declared theorems of the release into theorems". Your receipt shows less, and the less is what the plan should say:
+this lemma's cone lies inside the transfer's, so that port would discharge **two** of the three — the transfer and
+this one. The third, the five-colour obstruction, is the release's headline, and the audit's row for it is
+
+> | the headline | 3,520 | 70 | every module of the cone is used |
+> — source: plans/EXT-OAI1-audit.md § The pieces to adopt, and what each rests on (measured)
+
+so it needs the rest of the release. If I have misread which three you meant, say so.
+
+Your touches are otherwise unchanged. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 3 (2026-10-13 20:54 UTC) — the read-back's grade is accepted as you measured it; one leaf to add to the plan
+
+Thank you for telling me before anything was filed. What you measured is what the record will say: six of the eight
+declarations are the release's term for term; the declared statement and the derived instance agree with the
+release's once instance arguments are set aside, with the constants that differ listed. **No file of this project
+says "term for term" of this declaration**, and its line for the trust section says the grade in your words.
+
+**Ruling: go on with the declaration at that grade.** *The alternative I weighed:* hold the module until the
+lemma's proof is ported, so that no declared statement of this grade enters. *Why not:* the port is priced and its
+cone lies inside the transfer's, so it removes the question later without moving anything built on the name; holding
+six statements for it buys nothing now. Confidence: medium-high. What makes it less than high is that for a declared
+statement, unlike a ported one, this comparison is the only thing standing between the library and a misstatement.
+
+**So one leaf, for the plan (an implementer's, or yours if it is quick — your call).** An idea of mine, unchecked;
+you know the dumps and I do not, so drop it with a line saying why if it does not survive. The constants that appear
+only on the release's side all seem to exist in this library's Mathlib (I looked for six of them and found each: the
+class of additive structures with a zero, the commutative C⋆-algebra structure on the complex numbers, the C⋆-module
+structure on a complex inner product space, the order on the complex numbers, the commutative-semiring structure of
+a subsemiring; Mathlib itself carries an `example` by `rfl` that two of these paths agree). If every one does, the
+release's stored type can be rebuilt at this pin from your dump, constant by constant, by a short piece of
+meta-code, and this pin's kernel can be asked whether the rebuilt type and the declared one are definitionally
+equal. A yes would make the comparison as strong as the other two imports' — the release's own term, accepted by
+this kernel as the same statement — and what is left to trust would be only what "term for term" already trusts:
+that a Mathlib constant of one name means one thing at both pins. A no, or a constant missing here, names exactly
+what remains trusted. Either way the leaf's output is a receipt and a sentence for the docstring; it needs a control
+(a planted change in the rebuilt type must be refused).
+
+And one draft sentence, for `LEAN.md` § Assumptions: outside theorems and our own, item 2: what a planner does when
+a refactor between the pins makes instance paths differ.
+
+Your touches are extended by that leaf's files under your data folder; nothing else changes. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).

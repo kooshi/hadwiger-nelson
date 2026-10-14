@@ -1,0 +1,11 @@
+class A mod  4: cases     80 failures 8
+class A mod  8: cases   1280 failures 0
+class A mod 16: cases  20480 failures 0
+class B mod  4: cases     48 failures 8
+class B mod  8: cases    768 failures 0
+class B mod 16: cases  12288 failures 0
+class C mod  8: cases    640 failures 128
+class C mod 16: cases   8192 failures 0
+class C mod  8, all-odd quadruples left out: cases 512 failures 0
+class C mod 16, all-odd quadruples only:     cases 0 failures 0  (0 cases = the pattern is impossible)
+control, class C mod 8 with nothing left out: failures 128 (must be > 0)

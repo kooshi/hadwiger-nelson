@@ -1,0 +1,20 @@
+trial: c75fe9a2047faaad3fd011f3933e4a3bc4f6f462
+exit=0
+Merge made by the 'ort' strategy.
+ data/fs131/briefs/FS131-IN1-leaves.md     |  25 +++
+ data/fs131/briefs/FS131-LU1-landing.md    |  30 ++++
+ data/fs131/briefs/scripts/mk-fs133-k1.py  | 123 +++++++++++++++
+ data/fs131/claims-NF1.md                  |   1 +
+ data/fs131/claims-NF4.md                  |   2 +
+ data/fs133/briefs/FS133-K1-kernel-plan.md | 245 ++++++++++++++++++++++++++++++
+ data/fs133/claims-K1.md                   |  22 +++
+ plans/FS131-close-inventory.md            |   9 ++
+ plans/FS133-close-inventory.md            |   4 +
+ plans/SESSION-HANDOFF-2026-10-07.md       |   4 +-
+ plans/SESSION-HANDOFF-2026-10-13.md       | 145 ++++++++++++++++++
+ 11 files changed, 609 insertions(+), 1 deletion(-)
+ create mode 100644 data/fs131/briefs/scripts/mk-fs133-k1.py
+ create mode 100644 data/fs133/briefs/FS133-K1-kernel-plan.md
+ create mode 100644 data/fs133/claims-K1.md
+ create mode 100644 plans/SESSION-HANDOFF-2026-10-13.md
+exit=0

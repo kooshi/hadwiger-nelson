@@ -1,0 +1,6 @@
+plant: a manifest hash altered: FIRED — CHANGED Proofs/Basic.olean: SHA-256 differs from the last landing's manifest
+plant: a tree file dropped: FIRED — GONE Proofs/Basic.olean: in the last landing's manifest, not in this tree
+plant: a file added outside the six: FIRED — EXTRA Proofs/HadwigerNelson/ZzPlanted.olean: not in the manifest and not one of the six modules
+plant: the six modules' files of one module absent: FIRED — SIX-MISSING Proofs/HadwigerNelson/Arith/DyadicQuadratic: no compiled file of this module in the tree
+plants: every one of 4 fired; the unplanted comparison passes
+exit=0

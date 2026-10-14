@@ -1,0 +1,50 @@
+PIN-DIFFERENCE	lemma	§.AlgebraicCayley.reciprocal_denominator	COEFF: `Polynomial.coeff` is `R[X] → ℕ →₀ R` at the release's pin and `R[X] → ℕ → R` here; the same coefficient
+PIN-DIFFERENCE	lemma	§.AlgebraicCayley.coeff_polyLinear	COEFF: `Polynomial.coeff` is `R[X] → ℕ →₀ R` at the release's pin and `R[X] → ℕ → R` here; the same coefficient
+ADAPTED	lemma	§.Location.center_translate	binders none; inserted arguments at MeasureTheory.ProbabilityMeasure.map ×1
+ADAPTED	lemma	§.Location.center_orthogonal	binders none; inserted arguments at MeasureTheory.ProbabilityMeasure.map ×1
+RULED	definition	§.CosetCenter.Embedding.frequencyLaw	binders ['MeasurableMul₂', 'MeasurableInv']; inserted arguments at none
+RULED	lemma	§.CosetCenter.Embedding.frequencyLaw_measure	binders none; inserted arguments at §.CosetCenter.Embedding.frequencyLaw ×1
+RULED	lemma	§.CosetCenter.Embedding.measurable_frequencyLaw	binders none; inserted arguments at §.CosetCenter.Embedding.frequencyLaw ×1
+RULED	lemma	§.CosetCenter.Embedding.frequencyLaw_shift	binders none; inserted arguments at MeasureTheory.ProbabilityMeasure.map ×1, §.CosetCenter.Embedding.frequencyLaw ×2
+RULED	definition	§.CosetCenter.Embedding.center	binders ['MeasurableMul₂', 'MeasurableInv']; inserted arguments at §.CosetCenter.Embedding.frequencyLaw ×1
+RULED	lemma	§.CosetCenter.Embedding.measurable_center	binders none; inserted arguments at §.CosetCenter.Embedding.center ×1
+RULED	lemma	§.CosetCenter.Embedding.center_mem_coset	binders ['MeasurableMul₂', 'MeasurableInv']; inserted arguments at §.CosetCenter.Embedding.center ×1
+RULED	lemma	§.CosetCenter.Embedding.center_mul_j	binders none; inserted arguments at §.CosetCenter.Embedding.center ×2
+RULED	lemma	§.CosetCenter.Embedding.center_eq_of_mem_coset	binders none; inserted arguments at §.CosetCenter.Embedding.center ×2
+RULED	lemma	§.CosetCenter.Embedding.quotient_center	binders ['MeasurableMul₂', 'MeasurableInv']; inserted arguments at §.CosetCenter.Embedding.center ×1
+RULED	lemma	§.CosetCenter.Embedding.center_eq_iff	binders none; inserted arguments at §.CosetCenter.Embedding.center ×2
+RULED	lemma	§.CosetCenter.Embedding.center_mem_ordinary_iff	binders ['MeasurableMul₂', 'MeasurableInv']; inserted arguments at §.CosetCenter.Embedding.center ×1
+RULED	lemma	§.CosetCenter.Embedding.preimage_center_singleton	binders none; inserted arguments at §.CosetCenter.Embedding.center ×2
+RULED	lemma	§.CosetCenter.Embedding.measurable_center_fixed	binders none; inserted arguments at §.CosetCenter.Embedding.center ×1
+RULED	lemma	§.CosetCenter.Embedding.frequencyLaw_equiv	binders none; inserted arguments at MeasureTheory.ProbabilityMeasure.map ×2, §.CosetCenter.Embedding.frequencyLaw ×2
+RULED	lemma	§.CosetCenter.Embedding.center_equivariant	binders none; inserted arguments at MeasureTheory.ProbabilityMeasure.map ×1, §.CosetCenter.Embedding.center ×2
+RULED	lemma	§.CosetCenter.Embedding.center_law_ordinary	binders none; inserted arguments at MeasureTheory.ProbabilityMeasure.map ×1, §.CosetCenter.Embedding.center ×1
+RULED	lemma	§.RelativeCenters.positive_mass_finite_centers	binders none; inserted arguments at §.CosetCenter.Embedding.center ×2
+RULED	definition	§.RelativeCenters.centerMap	binders ['MeasurableMul₂', 'MeasurableInv']; inserted arguments at §.CosetCenter.Embedding.center ×1
+RULED	lemma	§.RelativeCenters.measurable_centerMap	binders none; inserted arguments at §.RelativeCenters.centerMap ×1
+RULED	lemma	§.RelativeCenters.centerMap_mem_ordinary_iff	binders ['MeasurableMul₂', 'MeasurableInv']; inserted arguments at §.RelativeCenters.centerMap ×1
+RULED	lemma	§.RelativeCenters.centerMap_law_ordinary	binders none; inserted arguments at §.RelativeCenters.centerMap ×1
+RULED	lemma	§.RelativeCenters.centerMap_equivariant	binders none; inserted arguments at §.RelativeCenters.centerMap ×2
+RULED	definition	§.RelativeCenters.centerKernel	binders ['MeasurableMul₂', 'MeasurableInv']; inserted arguments at §.CosetCenter.Embedding.center ×1
+RULED	lemma	§.RelativeCenters.measurable_fiberCenter	binders none; inserted arguments at §.CosetCenter.Embedding.center ×1
+RULED	lemma	§.RelativeCenters.centerKernel_markov	binders none; inserted arguments at §.RelativeCenters.centerKernel ×1
+RULED	lemma	§.RelativeCenters.centerKernel_apply	binders none; inserted arguments at §.CosetCenter.Embedding.center ×1, §.RelativeCenters.centerKernel ×1
+RULED	lemma	§.RelativeCenters.condDistrib_centerMap	binders none; inserted arguments at §.RelativeCenters.centerKernel ×1, §.RelativeCenters.centerMap ×1
+RULED	lemma	§.RelativeCenters.centerKernel_comp_map	binders none; inserted arguments at §.RelativeCenters.centerKernel ×1, §.RelativeCenters.centerMap ×1
+RULED	lemma	§.RelativeCenters.finite_center_reduction	binders none; inserted arguments at §.RelativeCenters.centerMap ×6
+RULED	lemma	§.CosetCenter.Embedding.finite_uniform_centers	binders none; inserted arguments at §.CosetCenter.Embedding.center ×2
+  aux          AUX-ABSENT       3
+  aux          AUX-DIFFERS      14
+  aux          IDENTICAL        73
+  aux          UP-TO-INSTANCES  11
+  definition   IDENTICAL        46
+  definition   RULED            4
+  definition   UP-TO-INSTANCES  6
+  lemma        ADAPTED          2
+  lemma        IDENTICAL        144
+  lemma        PIN-DIFFERENCE   2
+  lemma        RULED            27
+  lemma        UP-TO-INSTANCES  37
+  constants differing inside instance and proof arguments: 40
+constants: 369  failing: 0  fatal: 0
+READBACK OK

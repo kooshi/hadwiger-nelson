@@ -1,0 +1,81 @@
+@IsUnit.of_mul_eq_one : ∀ {M : Type u_1} [inst : Monoid M] [IsDedekindFiniteMonoid M] {a : M} (b : M),
+  a * b = 1 → IsUnit a
+@Ideal.Quotient.eq : ∀ {R : Type u_1} [inst : Ring R] {I : Ideal R} {x y : R} [inst_1 : I.IsTwoSided],
+  (Ideal.Quotient.mk I) x = (Ideal.Quotient.mk I) y ↔ x - y ∈ I
+@Ideal.Quotient.eq_zero_iff_mem : ∀ {R : Type u_1} [inst : Ring R] {I : Ideal R} {a : R} [inst_1 : I.IsTwoSided],
+  (Ideal.Quotient.mk I) a = 0 ↔ a ∈ I
+@IsLocalization.ringHom_ext : ∀ {R : Type u_1} [inst : CommSemiring R] (M : Submonoid R) {S : Type u_2}
+  [inst_1 : CommSemiring S] [inst_2 : Algebra R S] [IsLocalization M S] {P : Type u_3} [inst_4 : Semiring P]
+  ⦃j k : S →+* P⦄, j.comp (algebraMap R S) = k.comp (algebraMap R S) → j = k
+@ValuationSubring.mem_nonunits_iff_exists_mem_maximalIdeal : ∀ {K : Type u_1} [inst : Field K] {A : ValuationSubring K}
+  {a : K}, a ∈ A.nonunits ↔ ∃ (ha : a ∈ A), ⟨a, ha⟩ ∈ IsLocalRing.maximalIdeal ↥A
+@IsLocalization.AtPrime.to_map_mem_maximal_iff : ∀ {R : Type u_1} [inst : CommSemiring R] (S : Type u_2)
+  [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (I : Ideal R) [hI : I.IsPrime] [inst_3 : IsLocalization.AtPrime S I]
+  (x : R) (h : optParam (IsLocalRing S) ⋯), (algebraMap R S) x ∈ IsLocalRing.maximalIdeal S ↔ x ∈ I
+@HeightOneSpectrum.valuationSubringAtPrime_eq_valuationSubring : ∀ {R : Type u_1} [inst : CommRing R]
+  [inst_1 : IsDedekindDomain R] {K : Type u_2} [inst_2 : Field K] [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K]
+  (v : HeightOneSpectrum R),
+  HeightOneSpectrum.valuationSubringAtPrime K v = (HeightOneSpectrum.valuation K v).valuationSubring
+@Submodule.exists_mem_ne_zero_of_ne_bot : ∀ {R : Type u_1} {M : Type u_2} [inst : Semiring R] [inst_1 : AddCommMonoid M]
+  [inst_2 : Module R M] {p : Submodule R M}, p ≠ ⊥ → ∃ b ∈ p, b ≠ 0
+@Subring.equivMapOfInjective : {R : Type u_1} →
+  {S : Type u_2} →
+    [inst : NonAssocRing R] →
+      [inst_1 : NonAssocRing S] → (s : Subring R) → (f : R →+* S) → Function.Injective ⇑f → ↥s ≃+* ↥(Subring.map f s)
+@Ideal.Quotient.nontrivial_iff : ∀ {R : Type u_1} [inst : Ring R] {I : Ideal R}, Nontrivial (R ⧸ I) ↔ I ≠ ⊤
+@Ideal.pow_le_self : ∀ {R : Type u_1} [inst : Semiring R] {I : Ideal R} {n : ℕ}, n ≠ 0 → I ^ n ≤ I
+@Ideal.Quotient.field : {R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → [I.IsMaximal] → Field (R ⧸ I)
+@CharTwo.of_one_ne_zero_of_two_eq_zero : ∀ {R : Type u_1} [inst : AddMonoidWithOne R], 1 ≠ 0 → 2 = 0 → CharP R 2
+@Ideal.Quotient.ringHom_ext : ∀ {R : Type u_1} [inst : Ring R] {I : Ideal R} {S : Type u_2} [inst_1 : I.IsTwoSided]
+  [inst_2 : NonAssocSemiring S] ⦃f g : R ⧸ I →+* S⦄, f.comp (Ideal.Quotient.mk I) = g.comp (Ideal.Quotient.mk I) → f = g
+@RingOfIntegers.isIntegral_coe : ∀ {K : Type u_1} [inst : Field K] (x : 𝓞 K), IsIntegral ℤ ((algebraMap (𝓞 K) K) x)
+@Ideal.comap_isPrime : ∀ {R : Type u_1} {S : Type u_2} {F : Type u_3} [inst : Semiring R] [inst_1 : Semiring S]
+  [inst_2 : FunLike F R S] (f : F) (K : Ideal S) [inst_3 : RingHomClass F R S] [H : K.IsPrime],
+  (Ideal.comap f K).IsPrime
+IsFractionRing.div_surjective : ∀ (A : Type u_1) [inst : CommRing A] {K : Type u_2} [inst_1 : Field K]
+  [inst_2 : Algebra A K] [IsFractionRing A K] (z : K),
+  ∃ x, ∃ y ∈ nonZeroDivisors A, (algebraMap A K) x / (algebraMap A K) y = z
+@Ideal.IsPrime.isMaximal : ∀ {R : Type u_1} [inst : CommRing R] [Ring.DimensionLEOne R] {p : Ideal R},
+  p.IsPrime → p ≠ ⊥ → p.IsMaximal
+@ValuationSubring.eq_of_le_of_ne_top : ∀ {K : Type u_1} [inst : Field K] (A : ValuationSubring K) [Ring.KrullDimLE 1 ↥A]
+  {B : ValuationSubring K}, A ≤ B → B ≠ ⊤ → A = B
+UnitRing.inv_natCast_mem_unitRingOver_iff : ∀ (F : Subfield ℝ) {n : ℕ},
+  n ≠ 0 →
+    ((↑n)⁻¹ ∈ UnitRing.unitRingOver F ↔
+      ∀ (B : ValuationSubring ↥(UnitRing.planeOverSubfield F)), (∀ z ∈ B, (conjOn ⋯) z ∈ B) → ↑n ∉ B.nonunits)
+@isIntegral_algebraMap : ∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : Ring A] [inst_2 : Algebra R A]
+  {x : R}, IsIntegral R ((algebraMap R A) x)
+@Module.Finite.of_injective : ∀ {R : Type u_1} {S : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Semiring R]
+  [inst_1 : Semiring S] [inst_2 : AddCommMonoid M] [inst_3 : AddCommMonoid N] [inst_4 : Module R M]
+  [inst_5 : Module S N] [IsNoetherian S N] {σ : R →+* S} {σ' : S →+* R} [RingHomInvPair σ σ'] [RingHomInvPair σ' σ]
+  (f : M →ₛₗ[σ] N), Function.Injective ⇑f → Module.Finite R M
+@ZMod.natCast_zmod_surjective : ∀ {n : ℕ} [NeZero n], Function.Surjective Nat.cast
+ZMod.intCast_zmod_eq_zero_iff_dvd : ∀ (a : ℤ) (b : ℕ), ↑a = 0 ↔ ↑b ∣ a
+@Polynomial.map_dvd : ∀ {R : Type u_1} {S : Type u_2} [inst : Semiring R] [inst_1 : Semiring S] (f : R →+* S)
+  {x y : Polynomial R}, x ∣ y → Polynomial.map f x ∣ Polynomial.map f y
+@Subfield.closure_empty : ∀ {K : Type u_1} [inst : DivisionRing K], Subfield.closure ∅ = ⊥
+@two_le_chromaticNumber_of_adj : ∀ {V : Type u_1} {G : SimpleGraph V} {u v : V}, G.Adj u v → 2 ≤ G.chromaticNumber
+@Ideal.exists_le_maximal : ∀ {α : Type u_1} [inst : Semiring α] (I : Ideal α), I ≠ ⊤ → ∃ M, M.IsMaximal ∧ I ≤ M
+@colorable_two_unitDistance_induce_of_valuationSubring : ∀ {L : Subfield ℂ} (hL : ∀ z ∈ L, (starRingEnd ℂ) z ∈ L)
+  (A : ValuationSubring ↥L) (hσ : ∀ z ∈ A, (conjOn hL) z ∈ A) {k : Type u_1} [inst : CommRing k] [IsReduced k]
+  [CharP k 2] (ψ : ↥A.toSubring →+* k),
+  (∀ (z : ↥A.toSubring), ψ (((conjOn hL).restrict A.toSubring A.toSubring hσ) z) = ψ z) →
+    ∀ {S : Set ℂ}, S ⊆ ↑L → (induce S (unitDistance ℂ)).Colorable 2
+@ValuationSubring.mem_nonunits_iff_or : ∀ {K : Type u_1} [inst : Field K] (A : ValuationSubring K) {x : K},
+  x ∈ A.nonunits ↔ x = 0 ∨ x⁻¹ ∉ A
+@RingOfIntegers.coe_injective : ∀ {K : Type u_1} [inst : Field K], Function.Injective ⇑(algebraMap (𝓞 K) K)
+@Subfield.closure_induction : ∀ {K : Type u_1} [inst : DivisionRing K] {s : Set K}
+  {p : (x : K) → x ∈ Subfield.closure s → Prop},
+  (∀ (x : K) (hx : x ∈ s), p x ⋯) →
+    p 1 ⋯ →
+      (∀ (x y : K) (hx : x ∈ Subfield.closure s) (hy : y ∈ Subfield.closure s), p x hx → p y hy → p (x + y) ⋯) →
+        (∀ (x : K) (hx : x ∈ Subfield.closure s), p x hx → p (-x) ⋯) →
+          (∀ (x : K) (hx : x ∈ Subfield.closure s), p x hx → p x⁻¹ ⋯) →
+            (∀ (x y : K) (hx : x ∈ Subfield.closure s) (hy : y ∈ Subfield.closure s), p x hx → p y hy → p (x * y) ⋯) →
+              ∀ {x : K} (h : x ∈ Subfield.closure s), p x h
+@Padic.valuation_mul : ∀ {p : ℕ} [hp : Fact (Nat.Prime p)] {x y : ℚ_[p]},
+  x ≠ 0 → y ≠ 0 → (x * y).valuation = x.valuation + y.valuation
+@SubfieldClass.ratCast_mem : ∀ {K : Type u_1} [inst : DivisionRing K] {S : Type u_2} [inst_1 : SetLike S K]
+  [h : SubfieldClass S K] (s : S) (q : ℚ), ↑q ∈ s
+@Ideal.IsMaximal.exists_inv_pow : ∀ {R : Type u_1} [inst : CommSemiring R] (I : Ideal R) [I.IsMaximal] {x : R},
+  x ∉ I → ∀ (n : ℕ), ∃ y, ∃ i ∈ I ^ n, y * x + i = 1

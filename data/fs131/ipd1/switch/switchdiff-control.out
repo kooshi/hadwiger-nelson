@@ -1,0 +1,8 @@
+partner (the expected moves only): PASS
+plant INSTANCES-ONLY at HadwigerNelson.HasDensityOneAt: REPORTED
+plant DIFFERENT at HadwigerNelson.Outside.OAI158.tendsto_integral_norm_comp_sub: REPORTED
+plant MISSING at _private.Proofs.HadwigerNelson.Outside.OAI158Palette.0.HadwigerNelson.Outside.OAI158.instFactNeENNRealOfNatTop_proofs: REPORTED
+plant TYPE-DIFFERENT at HadwigerNelson.Outside.OAI158.proper_to_borel_weak: REPORTED
+plant 'the transfer left an axiom': REPORTED
+plant 'another constant moved module': REPORTED
+CONTROL OK

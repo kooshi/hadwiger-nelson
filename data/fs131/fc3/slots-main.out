@@ -1,0 +1,24 @@
+ref main = 324311dca4adeac3aa17e9790117b6bcebc6537c
+OK   1 time(s) in CLAUDE.md: 1 audit sentence
+OK   1 time(s) in CLAUDE.md: 1b the import's count of records
+OK   1 time(s) in CLAUDE.md: 1b a sentence that stays
+OK   1 time(s) in CLAUDE.md: 2 vacuity counts
+OK   1 time(s) in CLAUDE.md: 3 nine counts and their sentence
+OK   1 time(s) in tools/claude_md_fact_audit.py: 4 GATE_CHANGES, the entry it follows
+OK   1 time(s) in CLAUDE.md: 5 what the kernel holds, the sentence it follows
+OK   1 time(s) in CLAUDE.md: 6 the Frontier's Last filed
+OK   1 time(s) in LEDGER.md: 7 row 52
+OK   1 time(s) in LEDGER.md: 7 row 73
+OK   1 time(s) in LEDGER.md: 7 row 79, the grade
+OK   1 time(s) in LEDGER.md: 7 row 82, the grade (with the row's head, to be unique)
+OK   1 time(s) in LEDGER.md: 7 row 82, not claimed
+OK   1 time(s) in LEDGER.md: 7 row 99, the grade
+OK   1 time(s) in LEDGER.md: 7 row 99, not claimed
+OK   1 time(s) in LEDGER.md: 7 row 105
+OK   1 time(s) in LEAN.md: 8 LEAN.md § Searching, the bullet the new ones follow
+OK   1 time(s) in LEAN.md: 8 LEAN.md § The gate, the sentence the new one follows
+OK   1 time(s) in BIBLIOGRAPHY.md: 9 the bibliography row, what rests on it (with the words before it, to be unique)
+OK   1 time(s) in BIBLIOGRAPHY.md: 9 the bibliography row, its reading
+OK   1 time(s) in CLAUDE.md: 10 the theory paragraph
+CONTROL FIRED AS EXPECTED: absent — CLAUDE.md
+slots: 21 checked, 0 bad

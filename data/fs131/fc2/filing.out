@@ -1,0 +1,35 @@
+D1: slot found once, replaced
+D2: slot found once, replaced
+D3: slot found once, replaced
+D5: slot found once, replaced
+D6: slot found once, replaced
+D7: slot found once, replaced
+D14a: Frontier 'Last filed' clause inserted first, joined by '; before it '
+D4a: GATE_CHANGES entry inserted after the LC1 entry
+D4b: superseded-count entries: 7395, 7,454, declarations=15969, inline=16, ours=23, takes=98, thirty-five hypotheses, sixteen written out, twenty-three for hand results, 98 (hypothesis, statement) pairs by 51 statements
+D8 row 52 grade: slot found once, replaced
+D8 row 52 text: slot found once, inserted after
+D8 row 57: slot found once, replaced
+D8 row 63: slot found once, replaced
+D8 row 73: slot found once, replaced
+D8 row 99: slot found once, inserted after
+D8 row 105: slot found once, replaced
+D8 row 119: slot found once, inserted after
+D8 row 121: slot found once, inserted after
+D8 row 123: slot found once, inserted after
+D8 row 127: slot found once, replaced
+D9: slot found once, replaced
+D11a: slot found once, inserted after
+D11b: slot found once, inserted after
+D11c: slot found once, inserted after
+D12a: slot found once, replaced
+D12b: slot found once, inserted after
+D12c: slot found once, inserted after
+D13: dated line inserted after the whole 20:39 UTC line
+D10: no slot named ('the list is the coordinator's') - HELD - CHECK
+D14 atlas: HELD (brief choice 4; no facts for the atlas) - CHECK
+D15: nothing to file
+D16 BIBLIOGRAPHY.md: HELD (not in the brief's touches; no slot named) - CHECK
+D7 optional sentence on row 119: not drafted as a replacement - nothing filed
+filed: CLAUDE.md, LEAN.md, LEDGER.md, data/fs131/claims-NF1.md, plans/FS131-KN1-number-field-kernel-map.md, tools/claude_md_fact_audit.py
+CLAUDE.md bytes 73020

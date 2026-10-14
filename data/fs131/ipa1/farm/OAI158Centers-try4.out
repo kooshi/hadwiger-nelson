@@ -1,0 +1,7 @@
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:741:14: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:741:4: warning: 'all_goals exact Measure.map_smul ((μ : Measure G) (e.coset z))⁻¹ _ _' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`

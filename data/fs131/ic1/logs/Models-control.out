@@ -1,0 +1,3 @@
+data/fs131/ic1/stmt/Copy.lean:309:13: error: unsolved goals
+x✝ : Unit
+⊢ False

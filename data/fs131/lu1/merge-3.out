@@ -1,0 +1,13 @@
+5efc74e369d07354ee8a90f984efa0e98090c923
+Merge made by the 'ort' strategy.
+ data/fs131/briefs/FS131-EN2-two-questions.md | 105 +++++++++++++++++++
+ data/fs131/briefs/scripts/mk-fs131-en2.py    | 107 ++++++++++++++++++++
+ data/fs131/briefs/scripts/mk-fs131-kj1.py    | 144 +++++++++++++++++++++++++++
+ data/fs131/claims-EN2.md                     |  14 +++
+ plans/FS131-close-inventory.md               |   2 +
+ 5 files changed, 372 insertions(+)
+ create mode 100644 data/fs131/briefs/FS131-EN2-two-questions.md
+ create mode 100644 data/fs131/briefs/scripts/mk-fs131-en2.py
+ create mode 100644 data/fs131/briefs/scripts/mk-fs131-kj1.py
+ create mode 100644 data/fs131/claims-EN2.md
+exit=0

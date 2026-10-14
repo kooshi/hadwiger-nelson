@@ -1,0 +1,69 @@
+{
+ "global_instances": [
+  [
+   12,
+   "global: on a type built from the release's own definition `Rot` (`Representations.lean:10`, `Additive K`, `K` the release's `def` subgroup of `Circle`)"
+  ],
+  [
+   13,
+   "global: on a type built from the release's own definition `Rot` (`Representations.lean:10`)"
+  ],
+  [
+   18,
+   "global: on a type built from the release's own definition `Rot` (`Representations.lean:10`): the action of `Rot` on a `K`-space, `AddAction Rot X`"
+  ],
+  [
+   24,
+   "global: on a type built from the release's own definition `Rot` (`Representations.lean:10`): the action of `Rot` on a `K`-space is measurable"
+  ],
+  [
+   27,
+   "global: on a type built from the release's own definition `Rot` (`Representations.lean:10`): a `K`-invariant measure is `Rot`-invariant"
+  ],
+  [
+   30,
+   "global: on a type built from the release's own definition `Rot` (`Representations.lean:10`): a `K`-ergodic measure is `Rot`-ergodic"
+  ],
+  [
+   63,
+   "global: on a type built from the release's own definition `Space k` (`Representations.lean`)"
+  ],
+  [
+   117,
+   "global: on a type built from the release's own definition `measure k ω` (`Representations.lean`)"
+  ],
+  [
+   209,
+   "global: on a type built from the release's own definition `ContinuousVectors.space U` (`Representations.lean`)"
+  ],
+  [
+   438,
+   "global: on a type built from the release's own definition `measure Φ v` (`Representations.lean`)"
+  ],
+  [
+   439,
+   "global: on a type built from the release's own definition `measure Φ v` (`Representations.lean`)"
+  ]
+ ],
+ "drop_imports": [
+  [
+   "Mathlib.Order.CompletePartialOrder",
+   "the module of `CompletePartialOrder.toSupSet`: under it a supremum in a complete lattice is stored through that instance, and imported here it would move a stored statement of this library that sees the port's imports (`HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff`, INSTANCES-ONLY: `data/fs131/ko1/exposure/OAI158-*`; without it, nothing moves: `OAI158-noCPO-*`); FS131-IE1 left it out of its port for the same reason. The module elaborates without it"
+  ]
+ ],
+ "renames": [
+  [
+   "Set.ofPred_forall",
+   "Set.setOf_forall",
+   "Mathlib renamed `setOf` and its lemmas to `Set.ofPred` on 2026-07-09 (`LEAN.md` § Searching — Lean; FS132-I2's patches); at v4.32.0 the lemma is `Set.setOf_forall` (`Mathlib/Data/Set/Lattice.lean:139`), the same statement"
+  ]
+ ],
+ "patches": [
+  [
+   323,
+   "Complex.isometry_ofReal.lipschitzWith.comp",
+   "Complex.isometry_ofReal.lipschitz.comp",
+   "Mathlib renamed `Isometry.lipschitz` to `Isometry.lipschitzWith` after v4.32.0: at v4.34.1 `theorem lipschitzWith (h : Isometry f) : LipschitzWith 1 f` (`Mathlib/Topology/MetricSpace/Isometry.lean:77`), at v4.32.0 `theorem lipschitz (h : Isometry f) : LipschitzWith 1 f` (`Isometry.lean:77`), the same statement; a patch at the site, a dot-notation token (as `OAI158Functions`' patch at `Functions.lean:551`)"
+  ]
+ ]
+}

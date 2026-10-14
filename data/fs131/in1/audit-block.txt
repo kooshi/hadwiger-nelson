@@ -1,0 +1,22 @@
+-- FS131-IN1: Arith/ThreeColourCriterion (17 public declarations a person typed: 16 theorems, 1 definition; in the
+-- file's order; the 20 private helpers are not nameable here, and each is read by a record below).
+-- Statements FS131-KN4's and FS131-KN5's, three of them widened by ruling (FS131-IN1, Amendments 1 and 2); the proofs FS131-IN1's.
+-- CLEAN (12): for the landing's CLEAN block.
+#print axioms HadwigerNelson.ThreeColourCriterion.exists_mul_conj_inv_eq_of_mul_conj_eq_one
+#print axioms HadwigerNelson.ThreeColourCriterion.eq_zero_of_forall_normOne_eq
+#print axioms HadwigerNelson.ThreeColourCriterion.exists_maximal_conj_trivial
+#print axioms HadwigerNelson.ThreeColourCriterion.conj_mem_unitRing
+#print axioms HadwigerNelson.ThreeColourCriterion.conjR
+#print axioms HadwigerNelson.ThreeColourCriterion.coe_conjR
+#print axioms HadwigerNelson.ThreeColourCriterion.conjR_conjR
+#print axioms HadwigerNelson.ThreeColourCriterion.exists_unitSet_mul_conjR_eq
+#print axioms HadwigerNelson.ThreeColourCriterion.comap_conjR_eq
+#print axioms HadwigerNelson.ThreeColourCriterion.finite_quotient_span_natCast
+#print axioms HadwigerNelson.ThreeColourCriterion.fieldBandSet_two_nonempty_of_conj_trivial
+#print axioms HadwigerNelson.ThreeColourCriterion.exists_maximal_conj_trivial_of_colorable_two
+-- IMPORTED (5): for the IMPORTED section, under `declareImport ``HadwigerNelson.StandingFive.kloosterman_bound` (Weil's bound, [Weil1948] p. 207).
+#print axioms HadwigerNelson.ThreeColourCriterion.targetFloor_four_weil
+#print axioms HadwigerNelson.ThreeColourCriterion.exists_normOne_zero_of_card_ne_nine
+#print axioms HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine
+#print axioms HadwigerNelson.ThreeColourCriterion.exists_maximal_of_torsion
+#print axioms HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine_of_colorable_three

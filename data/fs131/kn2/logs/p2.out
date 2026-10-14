@@ -1,0 +1,59 @@
+@IntermediateField.nonempty_algHom_adjoin_of_splits : ∀ {F : Type u_1} {E : Type u_2} {K : Type u_3} [inst : Field F]
+  [inst_1 : Field E] [inst_2 : Field K] [inst_3 : Algebra F E] [inst_4 : Algebra F K] {S : Set E},
+  (∀ s ∈ S, IsIntegral F s ∧ (Polynomial.map (algebraMap F K) (minpoly F s)).Splits) →
+    Nonempty (↥(IntermediateField.adjoin F S) →ₐ[F] K)
+@PadicInt.norm_lt_one_iff_dvd : ∀ {p : ℕ} [hp : Fact (Nat.Prime p)] (x : ℤ_[p]), ‖x‖ < 1 ↔ ↑p ∣ x
+@PadicInt.norm_int_lt_one_iff_dvd : ∀ {p : ℕ} [hp : Fact (Nat.Prime p)] (k : ℤ), ‖↑k‖ < 1 ↔ ↑p ∣ k
+@PadicInt.ker_toZMod : ∀ {p : ℕ} [hp_prime : Fact (Nat.Prime p)],
+  RingHom.ker PadicInt.toZMod = IsLocalRing.maximalIdeal ℤ_[p]
+@PadicInt.isUnit_iff : ∀ {p : ℕ} [hp : Fact (Nat.Prime p)] {z : ℤ_[p]}, IsUnit z ↔ ‖z‖ = 1
+@PadicInt.toZMod_spec : ∀ {p : ℕ} [hp_prime : Fact (Nat.Prime p)] (x : ℤ_[p]),
+  x - (PadicInt.toZMod x).cast ∈ IsLocalRing.maximalIdeal ℤ_[p]
+PadicInt.mem_subring_iff : ∀ (p : ℕ) [hp : Fact (Nat.Prime p)] {x : ℚ_[p]}, x ∈ PadicInt.subring p ↔ ‖x‖ ≤ 1
+@PadicInt.norm_le_one : ∀ {p : ℕ} [hp : Fact (Nat.Prime p)] (z : ℤ_[p]), ‖z‖ ≤ 1
+@Padic.norm_le_one_iff_val_nonneg : ∀ {p : ℕ} [hp : Fact (Nat.Prime p)] (x : ℚ_[p]), ‖x‖ ≤ 1 ↔ 0 ≤ x.valuation
+data/fs131/kn2/probes/p2.lean:18:8: error(lean.unknownIdentifier): Unknown constant `PadicInt.coe_toZMod`
+data/fs131/kn2/probes/p2.lean:19:8: error(lean.unknownIdentifier): Unknown constant `PadicInt.toZMod_natCast`
+@IsIntegral.map : ∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]
+  {B : Type u_3} {C : Type u_4} {F : Type u_5} [inst_3 : Ring B] [inst_4 : Ring C] [inst_5 : Algebra R B]
+  [inst_6 : Algebra A B] [inst_7 : Algebra R C] [IsScalarTower R A B] [inst_9 : Algebra A C] [IsScalarTower R A C]
+  {b : B} [inst_11 : FunLike F B C] [AlgHomClass F A B C] (f : F), IsIntegral R b → IsIntegral R (f b)
+@IsIntegral.tower_top : ∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A]
+  [inst_2 : Ring B] [inst_3 : Algebra R A] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] {x : B},
+  IsIntegral R x → IsIntegral A x
+@Polynomial.Splits.of_dvd : ∀ {R : Type u_1} [inst : CommRing R] {f g : Polynomial R} [IsDomain R],
+  g.Splits → g ≠ 0 → f ∣ g → f.Splits
+data/fs131/kn2/probes/p2.lean:23:8: warning: `Polynomial.splits_of_splits_of_dvd` has been deprecated: Use `Polynomial.Splits.of_dvd` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.splits_of_splits_of_dvd` to `Polynomial.Splits.of_dvd x`).
+@Polynomial.splits_of_splits_of_dvd : ∀ {R : Type u_1} [inst : CommRing R] {f g : Polynomial R} [IsDomain R],
+  g.Splits → g ≠ 0 → f ∣ g → f.Splits
+minpoly.dvd : ∀ (A : Type u_1) {B : Type u_2} [inst : Field A] [inst_1 : Ring B] [inst_2 : Algebra A B] (x : B)
+  {p : Polynomial A}, (Polynomial.aeval x) p = 0 → minpoly A x ∣ p
+@IntermediateField.finiteDimensional_adjoin : ∀ {K : Type u_1} [inst : Field K] {L : Type u_2} [inst_1 : Field L]
+  [inst_2 : Algebra K L] {S : Set L} [Finite ↑S],
+  (∀ x ∈ S, IsIntegral K x) → FiniteDimensional K ↥(IntermediateField.adjoin K S)
+@IntermediateField.adjoin.finiteDimensional : ∀ {K : Type u_1} [inst : Field K] {L : Type u_2} [inst_1 : Field L]
+  [inst_2 : Algebra K L] {x : L}, IsIntegral K x → FiniteDimensional K ↥K⟮x⟯
+@Subfield.closure_mono : ∀ {K : Type u_1} [inst : DivisionRing K] ⦃s t : Set K⦄,
+  s ⊆ t → Subfield.closure s ≤ Subfield.closure t
+@RingOfIntegers.mapRingHom : {K : Type u_1} →
+  {L : Type u_2} → [inst : Field K] → [inst_1 : Field L] → (K →+* L) → 𝓞 K →+* 𝓞 L
+data/fs131/kn2/probes/p2.lean:29:8: error(lean.unknownIdentifier): Unknown constant `ZMod.natCast_self_eq_zero`
+@Nat.card_congr : ∀ {α : Type u_1} {β : Type u_2} (f : α ≃ β), Nat.card α = Nat.card β
+Nat.card_zmod : ∀ (n : ℕ), Nat.card (ZMod n) = n
+@isIntegral_algebraMap_iff : ∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A]
+  [inst_2 : Ring B] [inst_3 : Algebra R A] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] {x : A},
+  Function.Injective ⇑(algebraMap A B) → (IsIntegral R ((algebraMap A B) x) ↔ IsIntegral R x)
+data/fs131/kn2/probes/p2.lean:33:8: error(lean.unknownIdentifier): Unknown constant `Polynomial.X_sub_C_mul_X_sub_C`
+@Polynomial.Splits.mul : ∀ {R : Type u_1} [inst : Semiring R] {f g : Polynomial R}, f.Splits → g.Splits → (f * g).Splits
+@Polynomial.Splits.X_sub_C : ∀ {R : Type u_1} [inst : Ring R] (a : R), (Polynomial.X - Polynomial.C a).Splits
+data/fs131/kn2/probes/p2.lean:36:8: warning: `Polynomial.splits_X_sub_C` has been deprecated: Use `Polynomial.Splits.X_sub_C` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.splits_X_sub_C` to `Polynomial.Splits.X_sub_C x`).
+@Polynomial.splits_X_sub_C : ∀ {R : Type u_1} [inst : Ring R] (a : R), (Polynomial.X - Polynomial.C a).Splits
+@IsIntegral.of_pow : ∀ {R : Type u_1} {B : Type u_2} [inst : CommRing R] [inst_1 : Ring B] [inst_2 : Algebra R B]
+  {x : B} {n : ℕ}, 0 < n → IsIntegral R (x ^ n) → IsIntegral R x
+@Real.sq_sqrt : ∀ {x : ℝ}, 0 ≤ x → √x ^ 2 = x
+data/fs131/kn2/probes/p2.lean:39:8: error(lean.unknownIdentifier): Unknown constant `IsIntegral.sqrt`
+data/fs131/kn2/probes/p2.lean:43:0: error(lean.dependsOnNoncomputable): failed to compile definition, consider marking it as 'noncomputable' because it depends on 'PadicInt.algebra', which is 'noncomputable'

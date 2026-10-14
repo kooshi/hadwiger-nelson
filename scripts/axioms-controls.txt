@@ -16,13 +16,14 @@
 # `declareImport` and `#print axioms` lines that use it. Lines starting with `# ` outside a block are comments.
 # Planted names start `t3c_`.
 #
-# The `baseline` and `imported_declared` counts, and `banner_dropped`'s consequences, read the library's state: three declared
-# imports — `StandingFive.kloosterman_bound` (`[Weil1948]` p. 207; FS-131 wave 10, FS131-L10B's join), with eight IMPORTED records,
-# and `Outside.OAI158.no_proper_five_coloring` and `Outside.OAI158.proper_to_borel_weak` (`[OAIMath2026]` family 158; FS-132,
-# FS132-L1's landing), with six and twelve — five each at that landing, one and four more of FS-124's radius clause
-# (`Plane/RadiusOutside`; FS124-L1's landing, which brings records and no import), and three more on the transfer of FS-131's
-# measurable number (`Plane/LebesgueNumber`; FS131-LC1's landing, records and no import): twenty-six IMPORTED records.
-# (The first import, `falconer_lemma2_nonempty`, is a theorem since FS131-IF1.) A later import, or one's proof, or a later record resting on
+# The `baseline` and `imported_declared` counts, and `banner_dropped`'s consequences, read the library's state: two declared
+# imports — `StandingFive.kloosterman_bound` (`[Weil1948]` p. 207; FS-131 wave 10, FS131-L10B's join), with twenty IMPORTED records — eight at that join and twelve of the
+# three-colour criterion (`Arith/ThreeColourCriterion`, `Arith/ThreeFourColours`; FS131-LJ1's landing, records and no import) —,
+# and `Outside.OAI158.no_proper_five_coloring` (`[OAIMath2026]` family 158; FS-132, FS132-L1's landing), with six — five at that
+# landing and one of FS-124's radius clause (`Plane/RadiusOutside`; FS124-L1's landing, which brings records and no import):
+# twenty-six IMPORTED records. (The first import, `falconer_lemma2_nonempty`, is a theorem since FS131-IF1; the third,
+# `Outside.OAI158.proper_to_borel_weak`, is the release's theorem with its proof ported since FS131-IPD1's switch, and its twelve
+# records are CLEAN since the port's landing, FS131-LP1.) A later import, or one's proof, or a later record resting on
 # a declared import, moves them again — per declared import, `declared` and `library`
 # rise by one in both controls and `imported` by its records, the `old` digests' texts follow, and `banner_dropped` gains
 # `FAIL outside-banners <one of its records>` and `FAIL stale-declaration <the axiom>` (FS131-I2n's edit, `082f86c9`, is the
@@ -31,8 +32,8 @@
 ## control baseline
 ## expect PASS
 ## expect COUNT imported=26
-## expect COUNT declared=3
-## expect COUNT library=3
+## expect COUNT declared=2
+## expect COUNT library=2
 ## digest old 0 the sentence is in its older form, which records no imported count, and the audit has 26 imported
 ## digest new 0 match (clean, purchases and imported compared)
 ## digest doubled 3 not one
@@ -40,8 +41,8 @@
 ## control imported_declared
 ## expect PASS
 ## expect COUNT imported=27
-## expect COUNT declared=4
-## expect COUNT library=4
+## expect COUNT declared=3
+## expect COUNT library=3
 ## arch t3c_import
 ## digest new 0 match (clean, purchases and imported compared)
 ## digest off 0 RECORDED COUNT IS STALE
@@ -215,6 +216,4 @@ theorem t3c_mixed : True := (And.intro t3c_ax_c moserSpindle_cnf_unsat).1
 ## expect FAIL stale-declaration kloosterman_bound
 ## expect FAIL outside-banners not_colorable_five
 ## expect FAIL stale-declaration no_proper_five_coloring
-## expect FAIL outside-banners seven_le_chromaticNumber_plane_iff
-## expect FAIL stale-declaration proper_to_borel_weak
 ## drop-banner IMPORTED

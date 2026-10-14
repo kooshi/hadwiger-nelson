@@ -1,0 +1,10 @@
+slot: admitted ko1: mem 10 GiB (hard cap), cpus 4,5
+@Embedding.frequencyLaw : {G : Type u_1} →
+  [inst : CommGroup G] →
+    [inst_1 : MeasurableSpace G] →
+      Embedding G → MeasureTheory.ProbabilityMeasure G → G → MeasureTheory.ProbabilityMeasure ℂ
+@Embedding.center : {G : Type u_1} →
+  [inst : CommGroup G] → [inst_1 : MeasurableSpace G] → Embedding G → MeasureTheory.ProbabilityMeasure G → G → G
+@Embedding.frequencyMeasure : {G : Type u_1} →
+  [inst : CommGroup G] →
+    [inst_1 : MeasurableSpace G] → Embedding G → MeasureTheory.Measure G → G → MeasureTheory.Measure ℂ

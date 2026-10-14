@@ -1,0 +1,11 @@
+slot: admitted kn4j: mem 4 GiB (hard cap), cpus 10,11
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wr2/data/fs131/kn4/lean/ThreeFourColours.lean:39:8: warning: declaration uses `sorry`
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wr2/data/fs131/kn4/lean/ThreeFourColours.lean:46:8: warning: declaration uses `sorry`
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wr2/data/fs131/kn4/lean/ThreeFourColours.lean:54:8: warning: declaration uses `sorry`
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wr2/data/fs131/kn4/lean/ThreeFourColours.lean:59:8: warning: declaration uses `sorry`
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wr2/data/fs131/kn4/lean/ThreeFourColours.lean:75:8: warning: declaration uses `sorry`
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wr2/data/fs131/kn4/lean/ThreeFourColours.lean:83:8: warning: declaration uses `sorry`
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wr2/data/fs131/kn4/lean/ThreeFourColours.lean:92:8: warning: declaration uses `sorry`
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wr2/data/fs131/kn4/lean/ThreeFourColours.lean:106:8: warning: declaration uses `sorry`
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wr2/data/fs131/kn4/lean/ThreeFourColours.lean:113:8: warning: declaration uses `sorry`
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wr2/data/fs131/kn4/lean/ThreeFourColours.lean:143:8: warning: declaration uses `sorry`

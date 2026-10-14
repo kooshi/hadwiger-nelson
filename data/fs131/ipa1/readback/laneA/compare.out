@@ -1,0 +1,18 @@
+PIN-DIFFERENCE	definition	§.Spectral.instCommGroupDiscreteE	`Monoid`'s parents changed between the pins; §.Spectral.instCommGroupDiscreteE's type is identical
+PIN-DIFFERENCE	definition	§.Spectral.instCommGroupDiscreteF	`Monoid`'s parents changed between the pins; §.Spectral.instCommGroupDiscreteF's type is identical
+RULED	lemma	§.DifferenceFourier.differenceLaw_probability	the release's statement with exactly the binders ['MeasurableMul₂', 'MeasurableInv'] inserted
+PIN-DIFFERENCE	definition	§.InvariantMean.instAddCommGroupPeriodGroup	`Monoid`'s parents changed between the pins; §.InvariantMean.instAddCommGroupPeriodGroup's type is identical
+  aux          AUX-ABSENT       8
+  aux          AUX-DIFFERS      17
+  aux          IDENTICAL        152
+  aux          PIN-DIFFERENCE   40
+  aux          UP-TO-INSTANCES  18
+  definition   IDENTICAL        82
+  definition   PIN-DIFFERENCE   3
+  definition   UP-TO-INSTANCES  24
+  lemma        IDENTICAL        274
+  lemma        RULED            1
+  lemma        UP-TO-INSTANCES  71
+  constants differing inside instance and proof arguments: 83
+constants: 690  failing: 0  fatal: 0
+READBACK OK

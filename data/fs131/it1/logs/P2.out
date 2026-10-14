@@ -1,0 +1,27 @@
+@QuotientAddGroup.mk_surjective : ∀ {α : Type u_1} [inst : AddGroup α] {s : AddSubgroup α},
+  Function.Surjective QuotientAddGroup.mk
+@AddCircle.coe_nsmul : ∀ {𝕜 : Type u_1} [inst : AddCommGroup 𝕜] (p : 𝕜) {n : ℕ} {x : 𝕜}, ↑(n • x) = n • ↑x
+@AddCircle.coe_add : ∀ {𝕜 : Type u_1} [inst : AddCommGroup 𝕜] (p x y : 𝕜), ↑(x + y) = ↑x + ↑y
+@AddCircle.coe_sub : ∀ {𝕜 : Type u_1} [inst : AddCommGroup 𝕜] (p x y : 𝕜), ↑(x - y) = ↑x - ↑y
+Complex.norm_add_mul_I : ∀ (x y : ℝ), ‖↑x + ↑y * Complex.I‖ = √(x ^ 2 + y ^ 2)
+ZMod.card : ∀ (n : ℕ) [inst : Fintype (ZMod n)], Fintype.card (ZMod n) = n
+@ofNat_mem : ∀ {S : Type u_1} {R : Type u_2} [inst : AddMonoidWithOne R] [inst_1 : SetLike S R]
+  [AddSubmonoidWithOneClass S R] (s : S) (n : ℕ) [inst_3 : n.AtLeastTwo], OfNat.ofNat n ∈ s
+@natCast_mem : ∀ {S : Type u_1} {R : Type u_2} [inst : AddMonoidWithOne R] [inst_1 : SetLike S R] (s : S)
+  [AddSubmonoidWithOneClass S R] (n : ℕ), ↑n ∈ s
+@tendsto_pow_atTop_nhds_zero_of_lt_one : ∀ {𝕜 : Type u_1} [inst : Semifield 𝕜] [inst_1 : LinearOrder 𝕜]
+  [IsStrictOrderedRing 𝕜] [ExistsAddOfLE 𝕜] [Archimedean 𝕜] [inst_5 : TopologicalSpace 𝕜] [OrderTopology 𝕜] {r : 𝕜},
+  0 ≤ r → r < 1 → Filter.Tendsto (fun n => r ^ n) Filter.atTop (nhds 0)
+@tendsto_nhds_unique : ∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [T2Space X] {f : Y → X}
+  {l : Filter Y} {a b : X} [l.NeBot], Filter.Tendsto f l (nhds a) → Filter.Tendsto f l (nhds b) → a = b
+@AddCircle.coe_eq_coe_iff_of_mem_Ico : ∀ {𝕜 : Type u_1} [inst : AddCommGroup 𝕜] {p : 𝕜} [inst_1 : LinearOrder 𝕜]
+  [IsOrderedAddMonoid 𝕜] [hp : Fact (0 < p)] {a : 𝕜} [Archimedean 𝕜] {x y : 𝕜},
+  x ∈ Set.Ico a (a + p) → y ∈ Set.Ico a (a + p) → (↑x = ↑y ↔ x = y)
+@AddCircle.coe_eq_zero_iff : ∀ {𝕜 : Type u_1} [inst : AddCommGroup 𝕜] (p : 𝕜) {x : 𝕜}, ↑x = 0 ↔ ∃ n, n • p = x
+unitDistance : (V : Type u_1) → [MetricSpace V] → SimpleGraph V
+def HadwigerNelson.unitDistance.{u_4} : (V : Type u_4) → [MetricSpace V] → SimpleGraph V :=
+fun V [MetricSpace V] => { Adj := fun x y => dist x y = 1, symm := ⋯, loopless := ⋯ }
+Complex.norm_eq_sqrt_sq_add_sq : ∀ (z : ℂ), ‖z‖ = √(z.re ^ 2 + z.im ^ 2)
+@comap_adj : ∀ {V : Type u_1} {W : Type u_2} {u v : V} {G : SimpleGraph W} {f : V → W},
+  (SimpleGraph.comap f G).Adj u v ↔ G.Adj (f u) (f v)
+@induce : {V : Type u_1} → (s : Set V) → SimpleGraph V → SimpleGraph ↑s

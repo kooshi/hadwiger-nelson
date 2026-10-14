@@ -1,0 +1,312 @@
+==> build: this run's full output: build/gate/build/20261013T193712Z-694087.log
+==> up-to-date check: exit 3 after 3s (3 means something needs building) — walking the batches
+==> 248 batches of at most 8 modules, capped at 10G
+==> [1/248] 8 modules  14:37:15
+==> [2/248] 8 modules  14:37:17
+==> [3/248] 8 modules  14:37:18
+==> [4/248] 3 modules  14:37:19
+==> [5/248] 8 modules  14:37:21
+    rebuilt: Plane.CircleCrossing (3.4s)
+==> [6/248] 6 modules  14:37:25
+==> [7/248] 8 modules  14:37:27
+==> [8/248] 8 modules  14:37:28
+==> [9/248] 8 modules  14:37:28
+==> [10/248] 8 modules  14:37:29
+==> [11/248] 8 modules  14:37:30
+==> [12/248] 8 modules  14:37:31
+==> [13/248] 8 modules  14:37:32
+==> [14/248] 8 modules  14:37:33
+==> [15/248] 8 modules  14:37:34
+==> [16/248] 8 modules  14:37:35
+==> [17/248] 6 modules  14:37:36
+==> [18/248] 8 modules  14:37:38
+==> [19/248] 8 modules  14:37:39
+==> [20/248] 8 modules  14:37:40
+    rebuilt: Plane.WeakColouringOn (2.7s)
+==> [21/248] 2 modules  14:37:44
+==> [22/248] 8 modules  14:37:46
+==> [23/248] 8 modules  14:37:47
+==> [24/248] 8 modules  14:37:48
+==> [25/248] 8 modules  14:37:50
+==> [26/248] 8 modules  14:37:51
+==> [27/248] 8 modules  14:37:52
+==> [28/248] 8 modules  14:37:54
+==> [29/248] 6 modules  14:37:55
+==> [30/248] 8 modules  14:37:56
+==> [31/248] 8 modules  14:37:57
+==> [32/248] 8 modules  14:37:59
+==> [33/248] 8 modules  14:38:00
+==> [34/248] 8 modules  14:38:02
+==> [35/248] 8 modules  14:38:04
+==> [36/248] 8 modules  14:38:06
+==> [37/248] 8 modules  14:38:07
+==> [38/248] 8 modules  14:38:09
+==> [39/248] 8 modules  14:38:10
+==> [40/248] 8 modules  14:38:11
+==> [41/248] 8 modules  14:38:12
+==> [42/248] 8 modules  14:38:13
+==> [43/248] 8 modules  14:38:14
+==> [44/248] 8 modules  14:38:15
+==> [45/248] 8 modules  14:38:17
+==> [46/248] 8 modules  14:38:18
+==> [47/248] 8 modules  14:38:19
+==> [48/248] 8 modules  14:38:20
+==> [49/248] 8 modules  14:38:21
+==> [50/248] 8 modules  14:38:22
+==> [51/248] 8 modules  14:38:23
+==> [52/248] 8 modules  14:38:24
+==> [53/248] 8 modules  14:38:26
+==> [54/248] 8 modules  14:38:27
+==> [55/248] 8 modules  14:38:28
+==> [56/248] 7 modules  14:38:29
+==> [57/248] 8 modules  14:38:30
+==> [58/248] 8 modules  14:38:31
+==> [59/248] 8 modules  14:38:33
+==> [60/248] 8 modules  14:38:34
+==> [61/248] 8 modules  14:38:36
+==> [62/248] 8 modules  14:38:37
+==> [63/248] 8 modules  14:38:39
+==> [64/248] 8 modules  14:38:41
+==> [65/248] 8 modules  14:38:43
+==> [66/248] 8 modules  14:38:44
+==> [67/248] 8 modules  14:38:46
+==> [68/248] 8 modules  14:38:48
+==> [69/248] 8 modules  14:38:50
+==> [70/248] 8 modules  14:38:52
+==> [71/248] 8 modules  14:38:54
+==> [72/248] 8 modules  14:38:55
+==> [73/248] 8 modules  14:38:57
+==> [74/248] 8 modules  14:38:59
+==> [75/248] 8 modules  14:39:01
+==> [76/248] 8 modules  14:39:03
+==> [77/248] 8 modules  14:39:05
+==> [78/248] 8 modules  14:39:07
+==> [79/248] 8 modules  14:39:09
+==> [80/248] 8 modules  14:39:11
+==> [81/248] 8 modules  14:39:12
+==> [82/248] 8 modules  14:39:14
+==> [83/248] 8 modules  14:39:16
+==> [84/248] 8 modules  14:39:18
+==> [85/248] 8 modules  14:39:20
+==> [86/248] 8 modules  14:39:22
+==> [87/248] 8 modules  14:39:24
+==> [88/248] 8 modules  14:39:26
+==> [89/248] 8 modules  14:39:28
+==> [90/248] 8 modules  14:39:29
+==> [91/248] 8 modules  14:39:31
+==> [92/248] 8 modules  14:39:33
+==> [93/248] 8 modules  14:39:35
+==> [94/248] 8 modules  14:39:37
+==> [95/248] 8 modules  14:39:39
+==> [96/248] 8 modules  14:39:41
+==> [97/248] 8 modules  14:39:43
+==> [98/248] 8 modules  14:39:44
+==> [99/248] 8 modules  14:39:46
+==> [100/248] 8 modules  14:39:48
+==> [101/248] 8 modules  14:39:50
+==> [102/248] 8 modules  14:39:52
+==> [103/248] 8 modules  14:39:54
+==> [104/248] 8 modules  14:39:56
+==> [105/248] 8 modules  14:39:57
+==> [106/248] 8 modules  14:39:59
+==> [107/248] 8 modules  14:40:01
+==> [108/248] 8 modules  14:40:03
+==> [109/248] 8 modules  14:40:05
+==> [110/248] 8 modules  14:40:07
+==> [111/248] 8 modules  14:40:08
+==> [112/248] 8 modules  14:40:10
+==> [113/248] 8 modules  14:40:12
+==> [114/248] 8 modules  14:40:14
+==> [115/248] 8 modules  14:40:16
+==> [116/248] 8 modules  14:40:17
+==> [117/248] 8 modules  14:40:19
+==> [118/248] 8 modules  14:40:21
+==> [119/248] 8 modules  14:40:23
+==> [120/248] 8 modules  14:40:25
+==> [121/248] 8 modules  14:40:27
+==> [122/248] 8 modules  14:40:29
+==> [123/248] 8 modules  14:40:30
+==> [124/248] 8 modules  14:40:32
+==> [125/248] 8 modules  14:40:34
+==> [126/248] 8 modules  14:40:36
+==> [127/248] 8 modules  14:40:38
+==> [128/248] 8 modules  14:40:40
+==> [129/248] 8 modules  14:40:42
+==> [130/248] 8 modules  14:40:43
+==> [131/248] 8 modules  14:40:45
+==> [132/248] 8 modules  14:40:47
+==> [133/248] 8 modules  14:40:49
+==> [134/248] 8 modules  14:40:51
+==> [135/248] 8 modules  14:40:53
+==> [136/248] 8 modules  14:40:55
+==> [137/248] 8 modules  14:40:56
+==> [138/248] 8 modules  14:40:58
+==> [139/248] 8 modules  14:41:00
+==> [140/248] 8 modules  14:41:02
+==> [141/248] 8 modules  14:41:04
+==> [142/248] 8 modules  14:41:06
+==> [143/248] 8 modules  14:41:08
+==> [144/248] 8 modules  14:41:10
+==> [145/248] 8 modules  14:41:11
+==> [146/248] 8 modules  14:41:13
+==> [147/248] 8 modules  14:41:15
+==> [148/248] 8 modules  14:41:17
+==> [149/248] 8 modules  14:41:19
+==> [150/248] 8 modules  14:41:21
+==> [151/248] 8 modules  14:41:23
+==> [152/248] 8 modules  14:41:25
+==> [153/248] 8 modules  14:41:26
+==> [154/248] 8 modules  14:41:28
+==> [155/248] 8 modules  14:41:30
+==> [156/248] 8 modules  14:41:32
+==> [157/248] 8 modules  14:41:34
+==> [158/248] 8 modules  14:41:36
+==> [159/248] 8 modules  14:41:37
+==> [160/248] 8 modules  14:41:39
+==> [161/248] 8 modules  14:41:41
+==> [162/248] 8 modules  14:41:43
+==> [163/248] 8 modules  14:41:45
+==> [164/248] 8 modules  14:41:47
+==> [165/248] 8 modules  14:41:48
+==> [166/248] 8 modules  14:41:50
+==> [167/248] 8 modules  14:41:52
+==> [168/248] 8 modules  14:41:54
+==> [169/248] 8 modules  14:41:56
+==> [170/248] 8 modules  14:41:58
+==> [171/248] 8 modules  14:42:00
+==> [172/248] 8 modules  14:42:01
+==> [173/248] 8 modules  14:42:03
+==> [174/248] 8 modules  14:42:05
+==> [175/248] 8 modules  14:42:07
+==> [176/248] 8 modules  14:42:09
+==> [177/248] 8 modules  14:42:11
+==> [178/248] 8 modules  14:42:12
+==> [179/248] 8 modules  14:42:14
+==> [180/248] 8 modules  14:42:16
+==> [181/248] 8 modules  14:42:18
+==> [182/248] 8 modules  14:42:20
+==> [183/248] 8 modules  14:42:21
+==> [184/248] 8 modules  14:42:23
+==> [185/248] 8 modules  14:42:25
+==> [186/248] 8 modules  14:42:27
+==> [187/248] 8 modules  14:42:29
+==> [188/248] 8 modules  14:42:31
+==> [189/248] 8 modules  14:42:32
+==> [190/248] 8 modules  14:42:34
+==> [191/248] 8 modules  14:42:36
+==> [192/248] 8 modules  14:42:38
+==> [193/248] 8 modules  14:42:40
+==> [194/248] 8 modules  14:42:42
+==> [195/248] 8 modules  14:42:44
+==> [196/248] 8 modules  14:42:45
+==> [197/248] 8 modules  14:42:47
+==> [198/248] 8 modules  14:42:49
+==> [199/248] 8 modules  14:42:51
+==> [200/248] 8 modules  14:42:53
+==> [201/248] 8 modules  14:42:55
+==> [202/248] 8 modules  14:42:57
+==> [203/248] 8 modules  14:42:58
+==> [204/248] 8 modules  14:43:00
+==> [205/248] 8 modules  14:43:02
+==> [206/248] 8 modules  14:43:04
+==> [207/248] 8 modules  14:43:06
+==> [208/248] 8 modules  14:43:08
+==> [209/248] 8 modules  14:43:10
+==> [210/248] 8 modules  14:43:11
+==> [211/248] 8 modules  14:43:13
+==> [212/248] 8 modules  14:43:15
+==> [213/248] 8 modules  14:43:16
+    rebuilt: Plane.Radius (2.4s)
+==> [214/248] 5 modules  14:43:20
+==> [215/248] 8 modules  14:43:21
+==> [216/248] 8 modules  14:43:24
+==> [217/248] 8 modules  14:43:25
+    rebuilt: Plane.OnePiece (4.9s)
+==> [218/248] 2 modules  14:43:32
+==> [219/248] 8 modules  14:43:33
+==> [220/248] 8 modules  14:43:35
+    rebuilt: Plane.ThreePiece (6.6s)
+==> [221/248] 2 modules  14:43:43
+==> [222/248] 8 modules  14:43:44
+    rebuilt: Plane.ClosePair (4.2s)
+==> [223/248] 8 modules  14:43:52
+==> [224/248] 3 modules  14:43:53
+==> [225/248] 8 modules  14:43:55
+==> [226/248] 8 modules  14:43:57
+    rebuilt: Plane.ClosePairWitness (25s)
+==> [227/248] 1 modules  14:44:25
+==> [228/248] 8 modules  14:44:26
+==> [229/248] 8 modules  14:44:29
+    rebuilt: Plane.ClosePairModel (1.0s)
+==> [230/248] 8 modules  14:44:32
+    rebuilt: Outside.OAI158 (3.6s)
+==> [231/248] 8 modules  14:44:39
+    rebuilt: Plane.ThreeArcs (4.9s)
+==> [232/248] 2 modules  14:44:46
+==> [233/248] 8 modules  14:44:47
+    rebuilt: Outside.OAI158Expansion (4.1s), Outside.OAI158Palette (14s)
+==> [234/248] 8 modules  14:45:04
+    rebuilt: Plane.SectorPoint (1.0s), Plane.RadiusOutside (2.0s)
+==> [235/248] 8 modules  14:45:09
+    rebuilt: Outside.OAI158AngularBoundary (2.0s), Outside.OAI158CircleMaps (4.7s)
+==> [236/248] 5 modules  14:45:16
+    rebuilt: Plane.SixRing.Confine (2.4s)
+==> [237/248] 7 modules  14:45:21
+    rebuilt: Outside.OAI158CircleTransport (3.1s), Plane.SixRing.Basic (3.5s)
+==> [238/248] 8 modules  14:45:27
+    ⚠ [5158/5161] Built Proofs.HadwigerNelson.Arith.DyadicQuadratic (2.7s)
+    warning: Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:51:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:59:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:66:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:77:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:86:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:95:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:106:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:112:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:119:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean:129:8: declaration uses `sorry`
+    rebuilt: Arith.DyadicQuadratic (2.7s), Plane.SixRing.Chart (3.7s), Plane.SixRing.NullSets (4.1s), Outside.OAI158PaletteDensity (4.7s)
+==> [239/248] 2 modules  14:45:35
+    rebuilt: Plane.SixRing.StepLemma (8.8s)
+==> [240/248] 8 modules  14:45:46
+    rebuilt: Plane.SixRing.Tips (5.4s), Outside.OAI158PaletteTransport (6.1s), Arith.ThreeColourCharacter (7.6s), Plane.SixRing.Shift (8.4s)
+==> [241/248] 1 modules  14:45:58
+==> [242/248] 6 modules  14:45:59
+    ⚠ [5227/5230] Built Proofs.HadwigerNelson.Arith.TorsionExtraction (2.7s)
+    warning: Proofs/HadwigerNelson/Arith/TorsionExtraction.lean:48:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/TorsionExtraction.lean:56:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/TorsionExtraction.lean:74:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/TorsionExtraction.lean:82:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/TorsionExtraction.lean:90:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/TorsionExtraction.lean:97:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/TorsionExtraction.lean:102:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/TorsionExtraction.lean:143:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/TorsionExtraction.lean:148:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/TorsionExtraction.lean:155:8: declaration uses `sorry`
+    rebuilt: Arith.TorsionExtraction (2.7s), Plane.SixRing.Excl (2.7s), Outside.OAI158BinaryPalettes (5.4s), Plane.SixRing.ChartMeasure (15s)
+==> [243/248] 5 modules  14:46:17
+    rebuilt: Outside.OAI158States (4.5s), Plane.SixRing.State (5.7s), Plane.SixRing.Kill (21s)
+==> [244/248] 4 modules  14:46:42
+    rebuilt: Plane.SixRing.Orbit (2.1s), Plane.SixRing.TwoPairs (2.5s)
+==> [245/248] 2 modules  14:46:47
+==> [246/248] 2 modules  14:46:48
+    ⚠ [3823/3823] Built Proofs.HadwigerNelson.Arith.ThreeColourCriterion (2.3s)
+    warning: Proofs/HadwigerNelson/Arith/ThreeColourCriterion.lean:57:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/ThreeColourCriterion.lean:62:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/ThreeColourCriterion.lean:71:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/ThreeColourCriterion.lean:79:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/ThreeColourCriterion.lean:88:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/ThreeColourCriterion.lean:97:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/ThreeColourCriterion.lean:108:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/ThreeColourCriterion.lean:123:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/ThreeColourCriterion.lean:128:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/ThreeColourCriterion.lean:133:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/ThreeColourCriterion.lean:142:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/ThreeColourCriterion.lean:151:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/ThreeColourCriterion.lean:175:8: declaration uses `sorry`
+    rebuilt: Arith.ThreeColourCriterion (2.3s)
+==> [247/248] 1 modules  14:46:52
+==> [248/248] 1 modules  14:46:53
+    rebuilt: Proofs (2.8s)
+==> build: OK — 248 of 248 batches, 39 module(s) rebuilt, 3 module(s) with warnings, 9m44s
+    full output: build/gate/build/20261013T193712Z-694087.log

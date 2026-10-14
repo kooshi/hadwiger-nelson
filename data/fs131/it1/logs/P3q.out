@@ -1,0 +1,4 @@
+data/fs131/it1/probes/P3q.lean:9:8: warning: declaration uses `sorry`
+Try this:
+  [apply] simp only [Complex.inv_re, Complex.natCast_re, Complex.normSq_natCast, div_self_mul_self', Complex.sub_re,
+    Complex.re_ofNat]

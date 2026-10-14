@@ -1,0 +1,20 @@
+slot: admitted ko1: mem 10 GiB (hard cap), cpus 0,1
+@[instance_reducible] def OAI.EuclideanFiveColor.CommutingSpectral.algebra_commRing.{u_1, u_2} : {G : Type u_1} →
+  {H : Type u_2} →
+    [inst : CommGroup G] →
+      [inst_1 : NormedAddCommGroup H] →
+        [inst_2 : InnerProductSpace ℂ H] →
+          [inst_3 : CompleteSpace H] →
+            (U : G →* ↥(unitary (H →L[ℂ] H))) → CommRing ↥(OAI.EuclideanFiveColor.CommutingSpectral.algebra U) :=
+fun {G} {H} [CommGroup G] [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H] U =>
+  have this := OAI.EuclideanFiveColor.CommutingSpectral.adjoin_comm U;
+  inferInstance
+def OAI.EuclideanFiveColor.BoundedMeasurable.mulLp.{u_1} : {X : Type u_1} →
+  [inst : MeasurableSpace X] →
+    (μ : MeasureTheory.Measure X) →
+      [MeasureTheory.IsFiniteMeasure μ] →
+        OAI.EuclideanFiveColor.BoundedMeasurable.Func X → ↥(MeasureTheory.Lp ℂ 2 μ) → ↥(MeasureTheory.Lp ℂ 2 μ) :=
+fun {X} [MeasurableSpace X] μ [MeasureTheory.IsFiniteMeasure μ] f g =>
+  MeasureTheory.MemLp.toLp (fun point => ↑f point * ↑↑g point)
+    (OAI.EuclideanFiveColor.BoundedMeasurable.mulLp._proof_1 μ f g)
+data/fs131/ipd1/probes/ReleaseCommRing.lean:5:8: error(lean.unknownIdentifier): Unknown identifier `MemLp.fun_mul`

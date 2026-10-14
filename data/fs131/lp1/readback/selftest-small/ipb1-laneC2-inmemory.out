@@ -1,0 +1,11 @@
+unplanted: PASS (as it must)
+plant 'a constant changed in a statement (DFunLike.coe, in §.BoundedMeasurable.meanNorm_zero_of_dense)': REFUSED (1 failing, 0 fatal)
+plant 'a numeral changed in a definition's value (§.BoundedMeasurable.codeCell)': REFUSED (1 failing, 0 fatal)
+plant 'a binder kind changed (§.BoundedMeasurable.covariance_zero_of_dense)': REFUSED (1 failing, 0 fatal)
+plant 'a declaration missing from this pin's print (§.RelativeProduct.graph_mixture)': REFUSED (0 failing, 1 fatal)
+plant 'a theorem turned into an axiom (§.RelativeProduct.graph_mixture)': REFUSED (1 failing, 0 fatal)
+plant 'a truncated print': REFUSED (0 failing, 180 fatal)
+plant 'the record lists a constant that does not differ': REFUSED (0 failing, 1 fatal)
+plant 'ADAPTED_INSTANCE lists an IDENTICAL declaration (§.RelativeProduct.graph_mixture)': REFUSED (0 failing, 1 fatal)
+plant 'RENAMED without Set.ofPred': REFUSED (1 failing, 0 fatal)
+SELF-TEST OK: 9 plants refused, the unplanted pair passes

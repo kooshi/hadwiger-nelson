@@ -1,0 +1,9 @@
+match    data/fs131/REQUEST-2026-10-13.md (1 lines) | W4: (2026-10-14, at his check-in, after my explanation of the transfer
+match    plans/FS131-close-inventory.md (1 lines) | 759. **FS131-KO1 handed back: the port's plan is written (2026-10-14 0
+match    plans/FS131-close-inventory.md (1 lines) | 763. **FS131-IPA1 — lane A's ten modules elaborate; three read-back fi
+match    plans/FS131-close-inventory.md (1 lines) | 764. **FS131-IPA1 — a fourth Mathlib definition changed between the pi
+match    plans/FS131-close-inventory.md (1 lines) | 766. **FS131-IPA1 — a generator defect: an indented declaration (2026-
+match    plans/FS131-close-inventory.md (1 lines) | 767. **FS131-IPA1 — a definition needs the measurability binders: `Cos
+match    plans/FS131-close-inventory.md (1 lines) | 768. **FS131-IPA1 — the cascade reaches three `omit … in` lines the ge
+match    plans/FS131-close-inventory.md (1 lines) | 769. **FS131-IPA1 handed back at its line: the port's lane A done, lan
+8 matched, 0 mismatched

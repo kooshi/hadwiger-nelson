@@ -108,3 +108,28 @@ The remote is unreachable: **commit by explicit path on your branch and do not p
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 (2026-10-13 20:28 UTC) — make the two widenings: a statement that carries a hypothesis its proof never reads is not what this library publishes
+
+You kept the skeleton's form and told me, exactly as the brief asks. My ruling, now that I have your proofs' word for
+it: **drop the two unread hypotheses** — `[Finite k]` from `exists_mul_conj_inv_eq_of_mul_conj_eq_one` and `hσσ` from
+`eq_zero_of_forall_normOne_eq` — with the two `have _ := …` lines that kept the linters quiet, and adjust the one
+consumer in the file that passed the second. Why: these statements will be read by people outside the project, and a
+line whose only purpose is to hide an unused hypothesis from a linter is the kind of thing a reader takes as a sign
+that the statement was not understood; the claim list carries the change as a dated line. Your touches are extended
+to **those two statements and their consumer, and nothing else of the skeleton's statements**. In your statement
+check, show these two as the only differences from the skeleton (a planted third must still be reported). The joining
+module reads the first at a finite residue field and is not compiled in your tree; say in your drafts that its call
+site needs no change, or what change it needs.
+
+Thank you for the note on this tree's build: the one build at the end compiling about forty modules is expected, and
+your scratch farm is a fine way to iterate until then. You start no agents of your own (standing rule 1: delegation is
+one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 2 (2026-10-13 20:32 UTC) — widen the third statement too
+
+By the same reason as Amendment 1: `exists_maximal_conj_trivial` loses its hypothesis `hcc`, its docstring says "an
+endomorphism" where it said "an involution", and its one call stops passing the argument. Your touches are extended to
+that statement and its docstring. The three-part keeps its hypothesis, since its proof reads it. In your statement
+check these three are the only differences from the skeleton. You start no agents of your own (standing rule 1:
+delegation is one level deep, because the coordinator can only review work it knows exists).

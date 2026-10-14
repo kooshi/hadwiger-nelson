@@ -1,0 +1,41 @@
+build exit=0
+build log lines holding "warning": 1
+lake full log lines holding "warning": 0
+uptodate exit=0
+count-modules exit=0
+sorry (narrow) lines=0
+sorry (wide) lines=55
+line-initial axiom declarations in Proofs/=3
+dupnames exit=0
+dupnames-selftest exit=0
+axioms exit=0
+axioms-selftest exit=0
+records exit=0
+records-plant exit=0
+register exit=0
+gen-check exit=0
+gen-parse-all exit=0
+gen-selftest exit=0
+vacuity exit=0
+vacuity-selftest exit=0
+vacdiff exit=0
+vacdiff-plant exit=1
+assumptions exit=0
+assumptions-selftest exit=0
+arch exit=0
+lint exit=0
+notes-l5 exit=0
+notes-qa4-selftest exit=0
+statements exit=0
+code-only exit=0
+code-only-plant exit=0
+dump-here exit=0
+evidence exit=0
+evidence-control exit=0
+readback exit=0
+baseline-check exit=0
+digest-axioms exit=0
+digest-vacuity exit=0
+digest-assumptions exit=0
+tracked files modified after the pass: 1
+pass-exit=done
