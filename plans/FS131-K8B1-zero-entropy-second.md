@@ -159,3 +159,64 @@ not in the library. `exists_one_lt_absAt`'s hypothesis is inhabited by `(3 + 4i)
 | `exists_delta_of_one_lt` | real arithmetic: `n := max (N₀ + 1) (⌈log(c/δ)/log s⌉₊ + 1)`-shaped, or `Nat.find` on `c·s⁻¹^(n−1) ≤ δ` (`tendsto_pow_atTop_nhds_zero_of_lt_one`); then `Real.exp_log`, `Real.rpow_natCast`, `Real.rpow_le_rpow_left_iff` and `δ₀ := min (c·s⁻¹^{N₀}) (c⁻¹·s⁻²)`-shaped | as named |
 | `TateModel.thinBox_heavy` | the docstring's route; `measureReal_mono` (finite measure) from `nameCell_subset` and `thinBox_mono` (with `Set.image_mono` twice); `1 − η < 1 − η/2 ≤ μ.real X′` | `measureReal_mono` |
 | `exists_eps_lt` | `A := max_v (1 + v x)` (a finite `sup'`; `InfinitePlace` nonempty), `ε := min (1/16) (min (1/(2A)) (C/(2·2A·splitHeight x)))`; every factor `(2εA)^{mult} ≤ 2εA ≤ 1` (`pow_le_of_le_one`, `one_le_mult`), and one factor exists, so the product `≤ 2εA` | `InfinitePlace.one_le_mult` |
+
+## Stage 3 — SAVED: part 3 typed (the pigeonhole and the global point), on the shorter height input
+
+One new module, `Rigidity/GlobalPoint` (11 leaves; `logs/GlobalPoint-s4.log`, `exit=0`, warnings only its `sorry`s), over
+`Rigidity/ThinBoxes` and `Rigidity/Multipliers`.
+
+### 3.1 The scales, on the second dated line
+
+The dated line (FS131-KN8): "Lemma 3.2′(a)'s pigeonhole needs `#V_M ≥ c·M^{α′}` for some `α′ > 0` only (its `β` is chosen after
+`α′`); `z = 1 + 2bi` gives `α′ = 1/(2[F:ℚ])`". Here the scales are indexed by `B`, the number of multipliers: `v_1, …, v_B`
+have heights `≤ (1 + 2B)^D ≤ (3B)^D =: M(B)` (`D = [L:ℚ] = 2[F:ℚ]`; `splitHeight_multiplier_le`), so `#V = B = M^{1/D}/3`:
+`α′ = 1/D`, the dated line's `1/(2[F:ℚ])`. X01D's constants with `α′` for `α`: `K = 16`, `β = α′/(2K) = 1/(32D)`
+(`heavyExponent`), `δ(B) = M(B)^{−K}` (`scaleThin`). Then `δ(B)^β = (3B)^{−1/2}` and the pigeonhole's
+`B·δ(B)^β = (B/3)^{1/2} > 1` holds for every `B ≥ 4` — the count's constant `c₀` and X01D's `M₁`, `M₂` become one explicit bound.
+X01D's two scales `M` and `M²` are `B` and `3B²`: `M(3B²) = (9B²)^D = M(B)²` (`scaleHeight_three_mul_sq`).
+
+### 3.2 Read aloud against X01D
+
+- `Collision D x̃ p ε δ B`: X01D l. 255, "there are `v₁ ≠ v₂ ∈ V_M` and `a₁, a₂ ∈ Q_{v*}(2ε, δ(M))` with `r := v₁(x̃ + a₁) −
+  v₂(x̃ + a₂) ∈ Λ`" — the data as a structure, `V_M` as `{v_b : 1 ≤ b ≤ B}`, `Q` as the closed box (`closedThinBox`: every bound
+  of X01D's table reads `≤ 2ε`, `≤ δ`; the closed box's image is Borel, which the pigeonhole's additivity needs). `ℓ`, `point`,
+  `mul_sub_point`: "`ℓ := v₁ − v₂ ∈ R ∖ {0}` and `e := ℓx̃ − r = v₂a₂ − v₁a₁`" (l. 256), "`t := r₁/ℓ₁`" (l. 275), "`e_j = ℓ_j(x̃ − t)`"
+  (l. 281).
+- `exists_collision`: Step 3 (ll. 254–256), with `B·μ(box) > 1` in place of `Σ_{v ∈ V_M} μ(vB) ≥ c₀M^{α/2} > μ(R̂)`.
+- `Collision.point_eq`: Step 4 (ll. 270–275): "`z := ℓ₂r₁ − ℓ₁r₂ = ℓ₁e₂ − ℓ₂e₁ ∈ Λ` … `∏ ≤ (16ε)^{[L:ℚ]}·M^{9−K}` … `< 1/C_Λ`
+  for `M` large (and `ε < 1/16`). (An archimedean `v*`: its factor is `≤ (8δ(M))²` …)" — here, both cases at once, the product
+  is `≤ 8δ(B)M(B)²M(3B²)² = 8M(B)^{−10}`: at an archimedean `p` the archimedean product is `≤ (8δ)^{mult p} ≤ 8δ` (the other
+  factors `≤ 16ε ≤ 1`), at a split `p` it is `≤ 1` and the split product carries `δ`. The hypothesis `8M(B)^{−10} < C` is X01D's
+  "`M` large".
+- `Collision.size_sub_point_le`: Step 5 (ll. 281–284), "`|ℓ_j|_{v*} ≥ 4^{−[L:ℚ]/2}·M_j^{−2}` … `|x̃ − t|_{v*} ≤ 2^{[L:ℚ]}·M_j^{3−K}`"; the
+  bound is stated as `2^{D+2}·M(B)³·δ` for any thinness `δ`, with a factor of `4` of slack over the derivation's (an
+  archimedean `p` gives `|ℓ|_p ≥ |ℓ|_p^{mult}/2`).
+- `exists_point_of_heavy`: "Iterate the scales `M, M², M⁴, …` with one choice `(ℓ, r)` per scale; each consecutive pair gives
+  `z = 0`, so all share one `t`. Letting `j → ∞`: `(x̃ − t)_{v*} = 0`" (ll. 283–284) — for a fixed lift (X01D: "a fixed lift"),
+  so the hypothesis is the heavy bound at that lift only, a weaker hypothesis than Lemma 3.1′'s conclusion gives.
+- `measure_leafSet_compl_eq_zero`: "So every `x ∈ X′` lies in `T + K_{v*}` …; as `η` was arbitrary, `μ(R̂ ∖ (T + K_{v*})) = 0`.
+  **Borel:** `W_{v*}` is closed in the σ-compact `W`, so `π(W_{v*})` is σ-compact, and `T = π(L)` is countable" (ll. 286–287) —
+  `leafSet p = π(L + W_p) = T + K_{v*}`, Borel by the same argument (`measurableSet_leafSet`).
+
+### 3.3 Models
+
+`Collision` is inhabited exactly when two moved boxes meet; at the point mass `δ_1` and the lift `0` (`π 0 = 1`), every
+moved box holds `1`, so `exists_collision` gives one at every `B ≥ 2` (its hypothesis `1 < B · 1`); at `B = 1` the
+hypothesis is false, as it must be — one multiplier makes no collision. The other statements take `(D : TateModel F)` (lane
+T's `exists_tateModel`) and the measure hypotheses of Lemma 3.1′ (stage 2.3's model).
+
+### 3.4 A plan per leaf
+
+| leaf | route | names |
+|---|---|---|
+| `heavyExponent_pos` | `finrank_pos` and `positivity` | `Module.finrank_pos` |
+| `scaleHeight_three_mul_sq` | `push_cast`, `mul_pow`, `pow_mul`: `(3·3B²)^D = ((3B)²)^D = ((3B)^D)²` | `ring` |
+| `Collision.ℓ_ne_zero` | `sub_ne_zero`, `multiplier_injective` with `c.ne`, `unitL` injective (`Subtype.ext`) | as named |
+| `Collision.ℓ_eq_ofUnitRing` | `unitL_eq_ofUnitRing`, `map_sub` | as named |
+| `Collision.mul_sub_point` | `c.eq`, `map_mul`, `map_sub`, `map_div₀`, `mul_div_cancel₀` with `ℓ_ne_zero`, `ring` in the commutative ring `W` | as named |
+| `Collision.point_eq` | `z := c₂.ℓ * c₁.y − c₁.ℓ * c₂.y ∈ Λ` (`mul_mem_Λ` with `ℓ_eq_ofUnitRing`, `AddSubgroup.sub_mem`); `ι z = ι(ℓ₁)e₂ − ι(ℓ₂)e₁` from `mul_sub_point` twice and `ring`; sizes by `size_toSAdele`, `size_toSAdele_mul`, `size_add_le`, `size_add_le_max`, `absAt_multiplier_arch` (`|ℓ|_v ≤ 2`), `absAt_le_splitHeight` with `splitHeight_multiplier_le` (`|v|_w ≤ M`), `size_le_one_iff` (split components of the box points integral); `T :=` the union of the four multipliers' supports and `p` if split (`exists_finset_absAt_le_one`); the split product `≤ ∏ max(1,·)` of the four, `= ∏ splitHeight ≤ M(B)²M(3B²)²` (`splitHeight_eq_prod`, `Finset.prod_le_prod`, `Finset.prod_mul_distrib`); `scaleHeight_three_mul_sq`; `hC z` with `z = 0` gives `ℓ₂y₁ = ℓ₁y₂`, `div_eq_div_iff` | as named |
+| `Collision.size_sub_point_le` | `size_toSAdele_mul` on `mul_sub_point`: `|ℓ|_p·|x̃ − t|_p = |e|_p ≤ 2Mδ`; `|ℓ|_p ≥ 1/(2^{D}M²)` from `one_le_prod_absAt_of_mem_stableIntegers` for `ℓ ∈ O′` (`ofUnitRing_mem_stableIntegers`) with `T` the two multipliers' supports and `p`, every other factor bounded as in `point_eq`; `le_div_iff₀` | as named |
+| `TateModel.exists_collision` | the `B` sets `t b := (rot v_b)⁻¹' S`, `S := π '' ((x̃ + ·) '' closedThinBox p (2ε) δ)`, Borel (`measurableSet_image` of the closed `(x̃ + ·) '' …`: `Homeomorph.addLeft` is a closed map, `isClosed_closedThinBox`; `measurable_rot`), each of measure `μ S` (`Measure.map_apply` with `hμ v_b`); `μ univ = 1 < B·μ S = ∑ μ (t b)` (`measureReal` and `ENNReal.ofReal` bookkeeping); `exists_nonempty_inter_of_measure_univ_lt_sum_measure`; for `χ` in two of them, `χ = π c` (`surjective_π`), `iterate_rot_π`/`π_unit_mul` and `π_eq_π_iff` give `ι v_{b}c ≡ x̃ + a_b (mod Λ)`; multiplying the first by `ι v_{b′}` and the second by `ι v_b` (`mul_mem_Λ`) gives `v_{b′}(x̃ + a_b) − v_b(x̃ + a_{b′}) ∈ ιΛ`, a collision with `(b₁, b₂) := (b′, b)` — preimages, not images: no inverse rotation is needed | `exists_nonempty_inter_of_measure_univ_lt_sum_measure`, `Measure.map_apply` |
+| `TateModel.exists_point_of_heavy` | § 3.1's arithmetic for `B₀` (`scaleThin` and `8M^{−10}` tend to `0`: `tendsto_pow_atTop_nhds_zero_of_lt_one` on `M⁻¹`); `B_j := Nat.rec B₀ (fun _ B => 3B²)`; a collision at each (`exists_collision`, `Classical.choice`), the heavy bound transferred to the closed box (`measureReal_mono`, `thinBox_subset_closedThinBox`); `point_eq` by induction gives one `t`; `size_sub_point_le` and `le_of_forall_pos_lt_add`-shape on `2^{D+2}M(B_j)^{−13} → 0` (`M(B_j) ≥ 3^{2^j}`), so `p.size (x̃ − ι t) = 0` (`size_nonneg`) | as named |
+| `TateModel.measurableSet_leafSet` | `leafSet = ⋃ t, π '' ((ι t + ·) '' hyperplane p)` (`Set.image_iUnion`, `sub_eq_iff_eq_add`); `MeasurableSet.iUnion` over the countable `L` (`countable_fieldI`), `measurableSet_image` of the closed `(ι t + ·) '' W_p` | as named |
+| `TateModel.measure_leafSet_compl_eq_zero` | for `η > 0`: `thinBox_heavy` at `β = heavyExponent F` (`heavyExponent_pos`); for `x ∈ X′` a lift (`surjective_π`) and `exists_point_of_heavy` put `x` in `leafSet`; so `1 − η < μ.real X′ ≤ μ.real leafSet` for every `η`, `μ.real leafSet = 1`, and `μ leafSetᶜ = 0` (`prob_compl_eq_one_sub`, `measurableSet_leafSet`) | `prob_compl_eq_one_sub`, `measureReal_mono` |
