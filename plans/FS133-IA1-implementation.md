@@ -244,3 +244,38 @@ no error, no warning, no `sorry` (`data/fs133/ia1/rigidity-elab.out`).
 
 The module docstring's sentence that called the two "a leaf of FS-133's skeleton" now says they are kernel-checked
 (a docstring, not a statement).
+
+## Stage 4 — SAVED: F, the field theorem
+
+*From `lake env lean` (stage 5 is the build and the prints from the built tree).* `Plane/OneClass/Field` elaborates
+with exit 0, no error, no warning, no `sorry`; `exists_field` prints
+`[propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.Spectral.residual_fourier]`.
+
+**F, `OneClass.exists_field`** — proved, on the plan's route (§ 5.1, children 1–7), over the ported module; P did not
+stall, so the plan's fallback was not taken. The statement's text is untouched; two `open … in` lines stand before
+its docstring (the proof names the ported lemmas and writes inner products), and the stored statement is the same
+term as before them (below). The private layer (`section FieldAux`, 26 private declarations, about 300 lines), each
+the release's label-model lemma rewritten for an arbitrary plane system:
+
+| child of the plan | here (private) | what carries it |
+|---|---|---|
+| 1 the representation | `shiftEquiv`, `turnEquiv` (measurable equivalences from `shift_zero`/`shift_add`, `turn_one`/`turn_mul`), `planeRep` (`(U z g) ω = g (τ z ω)`), `planeTurn` (`(W u g) ω = g (ρ u ω)`), `turn_covariance` (from `IsPlaneSystem.cov`, as written) | ported `Koopman.unitary` |
+| 2 the observables | `obsVec`, `obsVec_ae`, `obsVec_turn_fixed`, `inner_obsVec_zero` | `L2.inner_def`; **the direction**: the ported unitary composes with `τ z` itself, which is the statement's `f j (τ z ω)` — no inverse, no change of sign |
+| 3 the projections | `contSpace`, `proj_turn_fixed`, `proj_range`, **`inner_proj_shift`** | ported `projection_covariance_fixed`, `projection_range`, `op_mem`, `op_orthogonal`; **the one use of the import**, through `residual_fourier_cross` at `v − proj v`, `w − proj w` |
+| 4 the fields | `orbit_range` | ported `orbitExtension`, `orbitExtension_continuous`, `orbitExtension_eq`, `clamp`, `Koopman`-free: the release's `fieldVector_range` |
+| 5 the circle | `inner_orbit_circle` | ported `orbitExtension_inner`, `circle_closed_induction` at `c ↦ c · z`, **scaled**: `w = (w / z) · z` with `‖w / z‖ = 1`; the unit case is not re-proved |
+| 6 the constant | `oneVec`, `one_fixed`, `one_mem`, `inner_one`, `inner_one_orbit` (clause (a)), `sum_orbit` (clause (b)) | density of the algebraic plane, `Unitary.inner_map_map`, `starProjection_eq_self_iff` |
+| 7 measurability | in the theorem's proof: `exists_measurable_field` per `i`, real part clamped to `[0, 1]` so that the bound holds at every point; `positive_orthogonal` (clause (c)) | ported |
+
+**Priced against the plan.** The plan priced F at 4–8 implementer-hours after P; from the first line of its private
+layer to a clean elaboration it took three elaborations (the `noncomputable` marker; one lemma name,
+`integral_complex_ofReal` for `integral_ofReal`). The two things the plan called hard were each one line: the
+direction convention (the unitary composes with `τ z`; nothing to invert) and the scaling of the circle (the
+ported induction applied to `c ↦ ⟪p, field (c · z)⟫`).
+
+**No statement moved by the proofs** (iteration; stage 5 repeats it on the built tree): the dump of all eight
+modules after the three proofs against `after-A` (the skeleton with the two ruled imports): **114 named constants,
+114 IDENTICAL in the full print**. *A planted change, end to end:* `0 ≤ f i ω` made `0 < f i ω` in `exists_field`'s
+hypothesis in the module itself, re-elaborated, dumped: read `DIFFERENT` (`LT.lt` entering), exit 1
+(`data/fs133/ia1/moved/planted-read.txt`); the file restored from its copy and re-elaborated, and `git diff` of the
+module shows the proof and nothing of the plant.
