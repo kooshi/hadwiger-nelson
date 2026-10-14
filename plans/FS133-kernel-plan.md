@@ -81,6 +81,16 @@ another class at v4.34.1 than at v4.32.0. What this leaves to trust, as for the 
 `H`, the ring structure of the algebraic plane and of `ℂ`. The library's other two declared theorems of the release
 are term for term; this one is at the weaker grade, and its docstring and `ARCHITECTURE.md` line must say so.
 
+**2026-10-13, corrected by FS133-IA1 (the coordinator's Amendment 1 to that job's brief).** The cause given above is
+wrong as stated. The inner product of `H` is reached through `CStarModule` at this pin too, when
+`Mathlib.Analysis.CStarAlgebra.Module.Constructions` is imported; the four constants § 5.1's leaf R lists as absent at
+this pin exist here, in that module and in `Mathlib.Analysis.CStarAlgebra.Classes`, which `Outside/OAI158Rigidity` did
+not import — `RebuildProbe.lean` asked under the module's own five imports. With the two imports added (the axiom's
+text untouched) the two stored statements differ at four places, in two instance terms, on one path — the `Semiring`
+of a `Semifield`, through `CommSemiring` at v4.34.1 and through `DivisionSemiring` at v4.32.0 — and no import list
+changes that. The release's statement, rebuilt at this pin, is kernel-equal to the declared one
+(`plans/FS133-IA1-implementation.md` stages 2 and 6).
+
 *Controls.* `readback_terms.py --control` plants four faults in this pin's print (the axiom's first explicit binder
 made implicit; its first instance binder made explicit; a constant changed in the definition `K`; a declaration
 missing): each refused (`decls-control.out`). `readback_erased.py --control` plants a binder kind and a constant

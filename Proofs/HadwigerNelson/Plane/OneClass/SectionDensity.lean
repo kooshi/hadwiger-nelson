@@ -37,20 +37,62 @@ variable {X Ω : Type*} [MeasurableSpace X] [MeasurableSpace Ω]
 noncomputable def sectionDensity (lam : Measure X) (Xn : ℕ → Set X) (W : Set (X × Ω)) (ω : Ω) : ℝ≥0∞ :=
   limsup (fun n => lam (Xn n ∩ {x | (x, ω) ∈ W}) / lam (Xn n)) atTop
 
+omit [MeasurableSpace Ω] in
 /-- Drift check: the section of the whole space has density `1` along any windows of finite positive measure. -/
 theorem sectionDensity_univ (lam : Measure X) {Xn : ℕ → Set X} (hpos : ∀ n, lam (Xn n) ≠ 0)
     (hfin : ∀ n, lam (Xn n) ≠ ⊤) (ω : Ω) : sectionDensity lam Xn (univ : Set (X × Ω)) ω = 1 := by
-  sorry
+  have h : (fun n => lam (Xn n ∩ {x | (x, ω) ∈ (univ : Set (X × Ω))}) / lam (Xn n)) = fun _ => 1 := by
+    funext n
+    simp only [mem_univ, setOf_true, inter_univ]
+    exact ENNReal.div_self (hpos n) (hfin n)
+  unfold sectionDensity
+  rw [h]
+  exact limsup_const 1
 
+omit [MeasurableSpace Ω] in
 /-- Drift check: the empty set has density `0`. -/
 theorem sectionDensity_empty (lam : Measure X) (Xn : ℕ → Set X) (ω : Ω) :
     sectionDensity lam Xn (∅ : Set (X × Ω)) ω = 0 := by
-  sorry
+  have h : (fun n => lam (Xn n ∩ {x | (x, ω) ∈ (∅ : Set (X × Ω))}) / lam (Xn n)) = fun _ => 0 := by
+    funext n
+    simp only [mem_empty_iff_false, setOf_false, inter_empty, measure_empty, ENNReal.zero_div]
+  unfold sectionDensity
+  rw [h]
+  exact limsup_const 0
+
+omit [MeasurableSpace Ω] in
+/-- The part of a window in the section at `ω`, as the restricted measure of the section. -/
+private theorem measure_inter_section (lam : Measure X) {Xn : ℕ → Set X} (hXm : ∀ n, MeasurableSet (Xn n)) (n : ℕ)
+    (W : Set (X × Ω)) (ω : Ω) :
+    lam (Xn n ∩ {x | (x, ω) ∈ W}) = (lam.restrict (Xn n)) ((fun x => (x, ω)) ⁻¹' W) := by
+  rw [Measure.restrict_apply' (hXm n), inter_comm]
+  rfl
+
+/-- Each window average is a measurable function of `ω`. -/
+private theorem measurable_windowRatio (lam : Measure X) {Xn : ℕ → Set X} {W : Set (X × Ω)} (hW : MeasurableSet W)
+    (hXm : ∀ n, MeasurableSet (Xn n)) (hfin : ∀ n, lam (Xn n) ≠ ⊤) (n : ℕ) :
+    Measurable fun ω => lam (Xn n ∩ {x | (x, ω) ∈ W}) / lam (Xn n) := by
+  haveI : IsFiniteMeasure (lam.restrict (Xn n)) :=
+    ⟨by rw [Measure.restrict_apply_univ]; exact (hfin n).lt_top⟩
+  have h := (measurable_measure_prodMk_right (μ := lam.restrict (Xn n)) hW).div_const (lam (Xn n))
+  have he : (fun ω => lam (Xn n ∩ {x | (x, ω) ∈ W}) / lam (Xn n)) =
+      fun ω => (lam.restrict (Xn n)) ((fun x => (x, ω)) ⁻¹' W) / lam (Xn n) := by
+    funext ω
+    rw [measure_inter_section lam hXm]
+  rw [he]
+  exact h
+
+omit [MeasurableSpace Ω] in
+/-- A window average is at most `1`. -/
+private theorem windowRatio_le_one (lam : Measure X) (Xn : ℕ → Set X) (W : Set (X × Ω)) (n : ℕ) (ω : Ω) :
+    lam (Xn n ∩ {x | (x, ω) ∈ W}) / lam (Xn n) ≤ 1 :=
+  ENNReal.div_le_of_le_mul (by rw [one_mul]; exact measure_mono inter_subset_left)
 
 /-- The density of the section is a measurable function of `ω` (Tonelli on each window, which has finite measure). -/
 theorem measurable_sectionDensity (lam : Measure X) {Xn : ℕ → Set X} {W : Set (X × Ω)} (hW : MeasurableSet W)
-    (hXm : ∀ n, MeasurableSet (Xn n)) (hfin : ∀ n, lam (Xn n) ≠ ⊤) : Measurable (sectionDensity lam Xn W) := by
-  sorry
+    (hXm : ∀ n, MeasurableSet (Xn n)) (hfin : ∀ n, lam (Xn n) ≠ ⊤) : Measurable (sectionDensity lam Xn W) :=
+  show Measurable fun ω => limsup (fun n => lam (Xn n ∩ {x | (x, ω) ∈ W}) / lam (Xn n)) atTop from
+    Measurable.limsup fun n => measurable_windowRatio lam hW hXm hfin n
 
 /-- **The reverse Fatou step.** If, in each window, almost every point is covered by the random set with probability
 at least `α`, the mean upper density of the random set is at least `α`. -/
@@ -58,14 +100,49 @@ theorem le_lintegral_sectionDensity (lam : Measure X) (μ : Measure Ω) [IsProba
     {W : Set (X × Ω)} (hW : MeasurableSet W) (hXm : ∀ n, MeasurableSet (Xn n)) (hpos : ∀ n, lam (Xn n) ≠ 0)
     (hfin : ∀ n, lam (Xn n) ≠ ⊤) {α : ℝ≥0∞} (hcov : ∀ n, ∀ᵐ x ∂lam.restrict (Xn n), α ≤ μ {ω | (x, ω) ∈ W}) :
     α ≤ ∫⁻ ω, sectionDensity lam Xn W ω ∂μ := by
-  sorry
+  -- every window average has mean at least `α` (Tonelli on the window)
+  have hA : ∀ n, α ≤ ∫⁻ ω, lam (Xn n ∩ {x | (x, ω) ∈ W}) / lam (Xn n) ∂μ := by
+    intro n
+    haveI : IsFiniteMeasure (lam.restrict (Xn n)) :=
+      ⟨by rw [Measure.restrict_apply_univ]; exact (hfin n).lt_top⟩
+    have h1 : ∫⁻ ω, lam (Xn n ∩ {x | (x, ω) ∈ W}) ∂μ = ∫⁻ x, μ {ω | (x, ω) ∈ W} ∂lam.restrict (Xn n) :=
+      (lintegral_congr fun ω => measure_inter_section lam hXm n W ω).trans
+        ((Measure.prod_apply_symm (μ := lam.restrict (Xn n)) (ν := μ) hW).symm.trans (Measure.prod_apply hW))
+    have h2 : α * lam (Xn n) ≤ ∫⁻ x, μ {ω | (x, ω) ∈ W} ∂lam.restrict (Xn n) :=
+      calc α * lam (Xn n) = ∫⁻ _, α ∂lam.restrict (Xn n) := by
+            rw [lintegral_const, Measure.restrict_apply_univ]
+        _ ≤ ∫⁻ x, μ {ω | (x, ω) ∈ W} ∂lam.restrict (Xn n) := lintegral_mono_ae (hcov n)
+    calc α = α * lam (Xn n) / lam (Xn n) := (ENNReal.mul_div_cancel_right (hpos n) (hfin n)).symm
+      _ ≤ (∫⁻ ω, lam (Xn n ∩ {x | (x, ω) ∈ W}) ∂μ) / lam (Xn n) :=
+          ENNReal.div_le_div_right (h2.trans_eq h1.symm) _
+      _ = ∫⁻ ω, lam (Xn n ∩ {x | (x, ω) ∈ W}) / lam (Xn n) ∂μ := by
+          simp only [div_eq_mul_inv]
+          rw [lintegral_mul_const' _ _ (ENNReal.inv_ne_top.2 (hpos n))]
+  -- the reverse Fatou lemma, the averages being at most `1`
+  calc α = limsup (fun _ : ℕ => α) atTop := (limsup_const α).symm
+    _ ≤ limsup (fun n => ∫⁻ ω, lam (Xn n ∩ {x | (x, ω) ∈ W}) / lam (Xn n) ∂μ) atTop :=
+        limsup_le_limsup (Eventually.of_forall hA)
+    _ ≤ ∫⁻ ω, limsup (fun n => lam (Xn n ∩ {x | (x, ω) ∈ W}) / lam (Xn n)) atTop ∂μ :=
+        limsup_lintegral_le 1 (fun n => measurable_windowRatio lam hW hXm hfin n)
+          (fun n => Eventually.of_forall fun ω => windowRatio_le_one lam Xn W n ω) (by simp)
 
 /-- With positive probability the random set has upper density at least `α` along the windows. -/
 theorem measure_le_sectionDensity_pos (lam : Measure X) (μ : Measure Ω) [IsProbabilityMeasure μ] {Xn : ℕ → Set X}
     {W : Set (X × Ω)} (hW : MeasurableSet W) (hXm : ∀ n, MeasurableSet (Xn n)) (hpos : ∀ n, lam (Xn n) ≠ 0)
     (hfin : ∀ n, lam (Xn n) ≠ ⊤) {α : ℝ≥0∞} (hcov : ∀ n, ∀ᵐ x ∂lam.restrict (Xn n), α ≤ μ {ω | (x, ω) ∈ W}) :
     0 < μ {ω | α ≤ sectionDensity lam Xn W ω} := by
-  sorry
+  by_contra h0
+  have hnull : μ {ω | α ≤ sectionDensity lam Xn W ω} = 0 := nonpos_iff_eq_zero.1 (not_lt.1 h0)
+  have hlt : ∀ᵐ ω ∂μ, sectionDensity lam Xn W ω < α := by
+    filter_upwards [measure_eq_zero_iff_ae_notMem.1 hnull] with ω hω
+    exact not_le.1 hω
+  have hD1 : ∀ ω, sectionDensity lam Xn W ω ≤ 1 := fun ω =>
+    limsup_le_of_le (h := Eventually.of_forall fun n => windowRatio_le_one lam Xn W n ω)
+  have hfin' : ∫⁻ ω, sectionDensity lam Xn W ω ∂μ ≠ ⊤ :=
+    ((lintegral_mono hD1).trans_lt (by simp)).ne
+  have hstrict := lintegral_strict_mono (IsProbabilityMeasure.ne_zero μ) aemeasurable_const hfin' hlt
+  rw [lintegral_const, measure_univ, mul_one] at hstrict
+  exact absurd (le_lintegral_sectionDensity lam μ hW hXm hpos hfin hcov) (not_le.2 hstrict)
 
 /-- Every event of full probability holds an `ω` at which the random set has upper density at least `α`. -/
 theorem exists_mem_le_sectionDensity (lam : Measure X) (μ : Measure Ω) [IsProbabilityMeasure μ] {Xn : ℕ → Set X}
@@ -79,7 +156,24 @@ theorem exists_mem_le_sectionDensity (lam : Measure X) (μ : Measure Ω) [IsProb
 /-- A function at most `1` is positive with probability at least its mean (the entry's "`1_{H > 0} ≥ H`"). -/
 theorem ofReal_integral_le_measure_pos (μ : Measure Ω) [IsProbabilityMeasure μ] {h : Ω → ℝ} (hm : Measurable h)
     (h1 : ∀ ω, h ω ≤ 1) : ENNReal.ofReal (∫ ω, h ω ∂μ) ≤ μ {ω | 0 < h ω} := by
-  sorry
+  by_cases hi : Integrable h μ
+  · have hS : MeasurableSet {ω | 0 < h ω} := measurableSet_lt measurable_const hm
+    have h2 : ∫ ω, h ω ∂μ ≤ (∫⁻ ω, ENNReal.ofReal (h ω) ∂μ).toReal := by
+      rw [integral_eq_lintegral_pos_part_sub_lintegral_neg_part hi]
+      exact sub_le_self _ ENNReal.toReal_nonneg
+    have h3 : ∫⁻ ω, ENNReal.ofReal (h ω) ∂μ ≤ μ {ω | 0 < h ω} := by
+      rw [← lintegral_indicator_one hS]
+      refine lintegral_mono fun ω => ?_
+      by_cases hω : 0 < h ω
+      · rw [indicator_of_mem (show ω ∈ {ω | 0 < h ω} from hω)]
+        exact ENNReal.ofReal_le_one.2 (h1 ω)
+      · rw [indicator_of_notMem (show ω ∉ {ω | 0 < h ω} from hω), ENNReal.ofReal_of_nonpos (not_lt.1 hω)]
+    calc ENNReal.ofReal (∫ ω, h ω ∂μ) ≤ ENNReal.ofReal ((∫⁻ ω, ENNReal.ofReal (h ω) ∂μ).toReal) :=
+          ENNReal.ofReal_le_ofReal h2
+      _ ≤ ∫⁻ ω, ENNReal.ofReal (h ω) ∂μ := ENNReal.ofReal_toReal_le
+      _ ≤ μ {ω | 0 < h ω} := h3
+  · rw [integral_undef hi, ENNReal.ofReal_zero]
+    exact zero_le
 
 /-- **C133-DENS-CLASS, as its entry states it** (no σ-finiteness and no lower bound on `H` are needed): for a
 jointly measurable `H ≤ 1` whose mean is at least `α` at almost every point, and windows of finite positive measure,

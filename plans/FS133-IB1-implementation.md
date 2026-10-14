@@ -173,3 +173,53 @@ theorems of the file `[propext, Classical.choice, Quot.sound]`. Stored statement
 
 **3.6 Re-pricing of what is left**: `SectionDensity`'s six leaves, each short (Tonelli on a window, the reverse
 Fatou lemma, a strict integral inequality); then the build and the receipts.
+
+## Stage 4 — SAVED: `SectionDensity` (D1–D5 and the child), Amendments 2 and 3 carried out, the draft D4 filed
+
+*Under `lake env lean` with the lakefile's options; neither file holds a `sorry`, and each elaborates with no
+warning. The build is stage 5.*
+
+**4.1 The leaves of `SectionDensity`.**
+- **D1 `sectionDensity_univ`, D2 `sectionDensity_empty` — proved** (the window ratio is the constant `1`, `0`).
+- **D3 `measurable_sectionDensity` — proved**, on the plan's route: `measurable_measure_prodMk_right` for the finite
+  measure `lam.restrict (Xn n)`, a constant divisor, `Measurable.limsup`.
+- **D4 `le_lintegral_sectionDensity` — proved**, on the plan's route: Tonelli on each window
+  (`Measure.prod_apply_symm`, `Measure.prod_apply`), so every window average has mean at least `α`; then
+  `limsup_lintegral_le` with the bound `1`.
+- **D5 `measure_le_sectionDensity_pos` — proved**: were the event null, `D < α` almost everywhere, and
+  `lintegral_strict_mono` against the constant gives `∫⁻ D < α`, against D4. It does not use D3 (the constant is
+  the measurable side).
+- **child `ofReal_integral_le_measure_pos` — proved**, through `∫ h ≤ (∫⁻ ofReal ∘ h).toReal` and
+  `ofReal (h ω) ≤ 1_{h > 0} ω`: the module's imports hold no set integral (`integral_indicator_one` is not in their
+  closure), and no import was added to this file.
+- Private helpers: `measure_inter_section`, `measurable_windowRatio`, `windowRatio_le_one`.
+
+**4.2 The amendments** (each read on disk in the coordinator's tree).
+- *Amendment 2* (03:06 UTC): **`exists_foelner_finset` loses `[Module ℚ A]`**; its docstring says "a countable
+  commutative group", and so does its line in the module docstring (prose about the same statement; an edit one
+  line beyond the amendment's letter, named in the report).
+- *Amendment 3* (03:09 UTC): **`omit [MeasurableSpace Ω] in` above `sectionDensity_univ` and
+  `sectionDensity_empty`**. The file's `variable` line put the instance into both stored statements; the definition
+  `sectionDensity` takes only `[MeasurableSpace X]`, so neither the statements nor the proofs read it, and with the
+  proofs in the build's `unusedSectionVars` linter reported both. And its standing word: a binder of a statement of
+  these two files that neither the statement nor its proof reads is dropped without asking and listed. **No further
+  one was found**: both files elaborate with no linter message, and every other hypothesis is used by name in its
+  proof.
+
+**4.3 The four ruled differences** — the only stored statements of the two files that differ from stage 1's dump
+(`data/fs133/ib1/stage4-moved.txt`: 15 IDENTICAL, 4 DIFFERENT; the reading of each as "one unread binder dropped
+and nothing else" is stage 5's, on the built tree):
+
+| statement | the binder dropped | why it was unread |
+|---|---|---|
+| `OneClass.exists_turnInvariant` | `hshift : ∀ z, MapsTo (shiftLab z) C C` | a rotation of a translation-invariant law is translation-invariant by the covariance alone, whatever its carrier |
+| `OneClass.exists_foelner_finset` | `[Module ℚ A]` | the Følner sequence comes from polynomial growth of a commutative group; no basis, no scalar |
+| `Plane.sectionDensity_univ` | `[MeasurableSpace Ω]` | put in by the section's `variable` line; the definition takes only `[MeasurableSpace X]` and the statement measures nothing on `Ω` |
+| `Plane.sectionDensity_empty` | `[MeasurableSpace Ω]` | the same |
+
+**4.4 Axioms**, from the footers (`data/fs133/ib1/stage4-axioms.out`): all eighteen public theorems of the two files
+`[propext, Classical.choice, Quot.sound]`.
+
+**4.5 The draft D4 filed** (Done, item 6): the first implementer's dated note, word for word (its text taken from
+`plans/FS133-IA1-implementation.md` by script and re-wrapped), in `plans/FS133-kernel-plan.md` § 2.4, as a paragraph
+of its own following the sentence the draft names ("… and its docstring and `ARCHITECTURE.md` line must say so.").

@@ -12,7 +12,7 @@ The derivation's entry C133-INV-CLASS (`plans/FS133-E1-derivation.md`, stage 4),
 
 * `IsShiftInvariantLaw.measure_origin_le` — its step (1): a translation-invariant random independent set of **any**
   graph on the algebraic plane has density at most the graph's finitary independence ratio;
-* `exists_foelner_finset` — a countable rational vector space has a Følner sequence of finite sets;
+* `exists_foelner_finset` — a countable commutative group has a Følner sequence of finite sets;
 * `exists_shiftInvariant_of_foelner` — its step (2), for labellings: a limit of Følner averages of translates;
 * `exists_turnInvariant` — its step (3), for labellings: a common fixed point of the rotations, in place of the
   Markov–Kakutani theorem;
@@ -442,9 +442,9 @@ theorem countable_algPlane : Countable E := by
   rw [heq]
   exact Algebraic.countable ℚ ℂ
 
-/-- **A Følner sequence**: a countable rational vector space has finite nonempty sets `F n` such that, for every
-`z`, the proportion of `F n` that `z` translates out of `F n` tends to `0`. -/
-theorem exists_foelner_finset (A : Type*) [AddCommGroup A] [Module ℚ A] [Countable A] :
+/-- **A Følner sequence**: a countable commutative group has finite nonempty sets `F n` such that, for every `z`,
+the proportion of `F n` that `z` translates out of `F n` tends to `0`. -/
+theorem exists_foelner_finset (A : Type*) [AddCommGroup A] [Countable A] :
     ∃ F : ℕ → Finset A, (∀ n, (F n).Nonempty) ∧ ∀ z : A,
       Tendsto (fun n => ({a | a ∈ F n ∧ a + z ∉ F n}.ncard : ℝ) / (F n).card) atTop (𝓝 0) := by
   classical
