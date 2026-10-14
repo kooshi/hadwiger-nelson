@@ -1,0 +1,94 @@
+Proofs/HadwigerNelson/Arith/FibreCertFast.lean:640:8: error: 'show' tactic failed, pattern
+  (Rd.read k per (readIter k per 0 { cur := 0, left := 0, rest := chunks })).snd = ?m.108
+is not definitionally equal to target
+  readIter k per (0 * per + (0 + 1)) { cur := 0, left := 0, rest := chunks } =
+    { cur := (chunks.getD 0 0).shiftRight (k.mul (0 + 1)), left := per.sub (0 + 1), rest := List.drop (0 + 1) chunks }
+Proofs/HadwigerNelson/Arith/FibreCertFast.lean:649:14: error(lean.unknownIdentifier): Unknown constant `Nat.beq_eq_false_iff_ne`
+Proofs/HadwigerNelson/Arith/FibreCertFast.lean:651:15: error(lean.unknownIdentifier): Unknown identifier `congrArg₂`
+Proofs/HadwigerNelson/Arith/FibreCertFast.lean:652:8: error: No goals to be solved
+Proofs/HadwigerNelson/Arith/FibreCertFast.lean:669:15: error(lean.unknownIdentifier): Unknown identifier `congrArg₂`
+Proofs/HadwigerNelson/Arith/FibreCertFast.lean:670:8: error: No goals to be solved
+Proofs/HadwigerNelson/Arith/FibreCertFast.lean:677:14: error(lean.unknownIdentifier): Unknown constant `Nat.beq_eq_false_iff_ne`
+Proofs/HadwigerNelson/Arith/FibreCertFast.lean:679:15: error(lean.unknownIdentifier): Unknown identifier `congrArg₂`
+Proofs/HadwigerNelson/Arith/FibreCertFast.lean:680:8: error: No goals to be solved
+Proofs/HadwigerNelson/Arith/FibreCertFast.lean:668:43: warning: This simp argument is unused:
+  Nat.mul_one
+
+Hint: Omit it from the simp argument list.
+  simp only [Rd.read, hl, cond_true, N̵a̵t̵.̵m̵u̵l̵_̵o̵n̵e̵,̵ ̵List.drop_drop]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Proofs/HadwigerNelson/Arith/FibreCertFast.lean:668:56: warning: This simp argument is unused:
+  List.drop_drop
+
+Hint: Omit it from the simp argument list.
+  simp only [Rd.read, hl, cond_true, Nat.mul_one,̵ ̵L̵i̵s̵t̵.̵d̵r̵o̵p̵_̵d̵r̵o̵p̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Proofs/HadwigerNelson/Arith/FibreCertFast.lean:689:44: error(lean.unknownIdentifier): Unknown constant `Nat.beq_eq_false_iff_ne`
+Proofs/HadwigerNelson/Arith/FibreCertFast.lean:725:4: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  c ≥ 0
+  b ≥ 0
+  a ≥ 0
+  a - b - c ≥ 2
+where
+ a := ↑(n + 1) * ↑(n + 1)
+ b := ↑n
+ c := ↑(n + 1) * ↑n
+Proofs/HadwigerNelson/Arith/FibreCertFast.lean:750:54: error: unsolved goals
+b : Blk
+hper : 0 < b.per
+n : Nat
+hn : n ≤ triCount b.m
+e : triCount b.m = n + (triCount b.m).sub n
+⊢ n ≤ n
+Proofs/HadwigerNelson/Arith/FibreCertFast.lean:751:4: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (List.map ?f ?m.87).length
+in the target expression
+  List.map (fun x => sfield x b.wr)
+      (Rd.readK b.wr b.per ((triCount b.m).sub n)
+          (Rd.readK b.wr b.per n { cur := 0, left := 0, rest := b.rest }).snd).fst =
+    List.drop n
+        (List.map (fun y => sfield y b.wr) (Rd.readK b.wr b.per n { cur := 0, left := 0, rest := b.rest }).fst) ++
+      List.map (fun y => sfield y b.wr)
+        (Rd.readK b.wr b.per ((triCount b.m).sub n)
+            (Rd.readK b.wr b.per n { cur := 0, left := 0, rest := b.rest }).snd).fst
+
+b : Blk
+hper : 0 < b.per
+n : Nat
+hn : n ≤ triCount b.m
+e : triCount b.m = n + (triCount b.m).sub n
+⊢ List.map (fun x => sfield x b.wr)
+      (Rd.readK b.wr b.per ((triCount b.m).sub n)
+          (Rd.readK b.wr b.per n { cur := 0, left := 0, rest := b.rest }).snd).fst =
+    List.drop n
+        (List.map (fun y => sfield y b.wr) (Rd.readK b.wr b.per n { cur := 0, left := 0, rest := b.rest }).fst) ++
+      List.map (fun y => sfield y b.wr)
+        (Rd.readK b.wr b.per ((triCount b.m).sub n)
+            (Rd.readK b.wr b.per n { cur := 0, left := 0, rest := b.rest }).snd).fst
+Command exited with non-zero status 1
+	Command being timed: "env LEAN_PATH=/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/build/ikc4farm:/home/kooshi/.elan/toolchains/leanprover--lean4---v4.32.0/lib/lean /home/kooshi/.elan/toolchains/leanprover--lean4---v4.32.0/bin/lean -DautoImplicit=false -DrelaxedAutoImplicit=false Proofs/HadwigerNelson/Arith/FibreCertFast.lean"
+	User time (seconds): 2.50
+	System time (seconds): 0.11
+	Percent of CPU this job got: 97%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:02.68
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 553140
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 3
+	Minor (reclaiming a frame) page faults: 18290
+	Voluntary context switches: 4785
+	Involuntary context switches: 4335
+	Swaps: 0
+	File system inputs: 15336
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1
