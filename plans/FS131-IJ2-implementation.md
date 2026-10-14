@@ -6,11 +6,20 @@ cores, 31 GB.*
 
 ## Theorems this phase proved
 
-Each [kernel]; under `HadwigerNelson.Rigidity`. Axioms as printed from an elaboration of the module's text
-(`data/fs131/ij2/logs/M3ax.log`); the print from the built tree is the last stage's.
+Each [kernel], axioms exactly `[propext, Classical.choice, Quot.sound]`, printed from build 2's tree
+(`data/fs131/ij2/axioms-after.txt`; reader `tools/fs131_ij2_axioms.py` PASS, control 4 of 4); under
+`HadwigerNelson.Rigidity`.
 - **M3, `Rigidity/InvariantMeasure`** (2 leaves): `exists_shiftInvariant_on`, `exists_rotInvariant_of_shiftInvariant`;
   with them **`invariantMeasureOnClosed_of_countable : ∀ (F : Subfield ℝ) [Countable ↥(unitRing F)],
-  InvariantMeasureOnClosed F`** has no leaf below it — `[propext, Classical.choice, Quot.sound]` each.
+  InvariantMeasureOnClosed F`** (every nonempty closed measurable set of colourings `R → Fin 4` stable under the shifts
+  and the rotations carries a probability measure invariant under both) has no leaf below it. 19 records, all CLEAN.
+- **M2b, `Rigidity/BochnerTau`**, three of its four leaves: **`finite_quotient_nsmul : ∀ (F : Subfield ℝ) [NumberField ↥F]
+  (N : ℕ), N ≠ 0 → Finite (↥(unitRing F) ⧸ (nsmulAddMonoidHom N).range)`** (J28V-7); **`exists_twisted_parts`** (a
+  finite measure on `R̂` with `τ′_∅`-continuous transform `φ` has `φ = Σ_{t ∈ T} ψ_t` pointwise, each `t̄·ψ_t`
+  positive-definite and `archTop`-continuous, the masses `Re ψ_t(0)` summable). 53 of the module's 55 records CLEAN.
+- **Not a theorem yet**: `bochnerOn_tauPrime` is proved over `archimedean_support`, the one leaf left `sorry`; both print
+  `sorryAx`, sourced in `archimedean_support` alone.
+- The attribute on `archTop` (`ContinuityGroup`): its 28 records CLEAN, as before.
 
 ## Stage 1 — SAVED: the readback, the leaves beside their plans, the stored statements before any edit
 
@@ -140,3 +149,97 @@ to 972), against IJ1's 900–1,200 for all of M2b. The rest, priced from this le
 450–700 (the lattices `5^{−k}Λ`, a one-variable Dirichlet bound for tightness uniform in `k`, Mathlib's Prokhorov on
 `EuclideanSpace ℝ (Fin d)`, uniqueness): **M2b about 1,550–1,950 lines in all** — under the 2,000 the brief names, so no
 message was sent; about 1.3–1.6 times IJ1's re-price, 0.7–0.8 of the planner's 2,000–2,500.
+
+## Stage 5 — SAVED: M2b's other two proved leaves, build 2, the receipts; `archimedean_support` left
+
+**5.1 `finite_quotient_nsmul`** (`work/FQ.lean`, rounds `logs/FQ-1.log`, `FQ-2.log`; about 60 lines): by contradiction, an
+infinite quotient has `N^d + 1` cosets (`d = [L : ℚ]`); their lifts span a finitely generated, torsion-free, hence free
+(`Module.free_of_finite_type_torsion_free'`) `ℤ`-module `B` of rank `≤ d` (a basis stays independent over `ℚ` in `L`,
+`LinearIndependent.iff_fractionRing`); two lifts agree in their coordinates modulo `N` (pigeonhole into
+`Fin r → ZMod N`), so their difference is in `N·B ⊆ N·R`. Two private helpers: `toFieldI` (the inclusion `R →+ L`, a
+private definition) and `toFieldI_injective`.
+
+**5.2 `bochnerOn_tauPrime`** (about 90 lines; over `archimedean_support`): the parts of `exists_twisted_parts`; each
+`t̄·ψ_t` is the transform of a finite `ρ_t` (`bochnerHerglotz_of_countable`), carried by `A` (`archimedean_support`); `ν =
+Σ_t (· * t)_* ρ_t` (`Measure.sum`) has mass `Σ_t Re ψ_t(0) < ∞` and transform `Σ_t ψ_t = φ` (`integral_sum_measure`,
+`HasSum.tsum_eq`); uniqueness (`measure_eq_of_fourier`) gives `σ = ν`; `ν` is carried by `T·A = TA F`
+(`measurableSet_TA`, `measurable_mulRight`), and `contChars_tauPrime` turns that into the statement.
+
+**5.3 Build 2** (`./scripts/build.sh` under the slot, `MEMMAX=10G BATCH=8`; `logs/build2.log`, full output
+`logs/build2-full.log`, gate log `build/gate/build/20261014T160009Z-3758166.log`): `OK — 256 of 256 batches, 2 module(s)
+rebuilt, 17 module(s) with warnings, 7m32s`, exit 0 (rebuilt: `BochnerTau`, `Proofs`). **The only warning from my three
+files is `BochnerTau.lean:106:8: declaration uses `sorry`` — `archimedean_support`, the remaining leaf.**
+
+**5.4 No statement and no definition changed, from the kernel's side** (stage 1's dump against build 2's,
+`statements-after.txt`, `.xz` + sha256): **PASS** (`statements-compare.out`) — 111 named constants, 30 data definitions'
+values, 3 example heads; no new public constant; 67 new private constants (16 of `InvariantMeasure`, 51 of `BochnerTau`);
+internal 78 → 132. **The two imports added to `BochnerTau` and its `open … Filter Topology` moved no stored term**, and
+the five downstream modules are unchanged. Control: 8 of 8 (`statements-control.out`).
+
+**5.5 The axioms of every declaration of my three files** (`data/fs131/ij2/lean/Axioms.lean` → `axioms-after.txt`;
+`tools/fs131_ij2_axioms.py` → `axioms-verdict.out`): **PASS** — 102 records: `ContinuityGroup` 28, `InvariantMeasure` 19,
+all CLEAN; `BochnerTau` 55, 53 CLEAN, 2 OPEN-LEAF (`archimedean_support` and `bochnerOn_tauPrime`, each sourced in
+`archimedean_support` alone). The planted record (`positive_entropy_rigidity_of_polishSpace`) is reported resting on the
+declared printed theorem. `--control`: 4 of 4 (`axioms-control.out`).
+
+**5.6 Lint and architecture.** `lake lint --no-build -- --no-build --trace` after build 2 (`logs/lint-after2.log`): exit 0,
+14 of 14 Passed (its control is § 2.3's red run). `tools/check_architecture.py` (`logs/architecture.log`): RESULT PASS,
+with the rows of `InvariantMeasure` ("no `sorry`") and `BochnerTau` ("1 leaf `sorry`") updated on this branch. Not run
+(as for FS131-IJ1): `scripts/axioms.sh`, `assumptions.sh`, `vacuity.sh`, `dupnames.sh` — my new constants are all
+private, so no name can be doubled.
+
+**5.7 Why `archimedean_support` is left, and its route.** My count read about 390k at build 2; the leaf priced at
+450–700 lines would not close with the receipts inside the brief's line, so it is handed on with its route. **The route,
+refined here (the plan's, made concrete; one mind, not elaborated):**
+1. A `ℚ`-basis `b_j ∈ R` of `L` (`c·`(an integral basis), `c·𝓞_L ⊆ R` by `ContinuityGroup`'s private
+   `exists_nat_mul_integers_mem`, read by `open private` as this module reads `archHom`), with additive coordinates
+   `q_j : R → ℚ`, `r = Σ_j q_j(r) b_j`.
+2. `t_k : R̂ → E = EuclideanSpace ℝ (Fin d)`, `t_k(χ)_j = 5^k · arg χ(b_j / 5^k)` (`fivePow`; measurable by
+   `Complex.measurable_arg`). For `y = Σ n_j b_j/5^k`, `exp(i⟨t_k χ, Q y⟩) = χ(y)` with `Q y = (q_j(y))_j`; so
+   `charFun (t_k)_*ρ` agrees with `ψ` on `Q(Λ_k)`, `Λ_k = ⊕ ℤ b_j/5^k`.
+3. **Tightness, uniform in `k`**: `ρ{|t_k(χ)_j| > M} ≤ 2·sup{m − Re ψ(y) : ‖ι y‖ ≤ 4π‖ι b_j‖/M}`, from the one-variable
+   inequality `(1/L)Σ_{n<L}(1 − cos nθ) ≥ 1/2` for `2π/L ≤ |θ| ≤ π` (`|Σ_{n<L} e^{inθ}| ≤ π/|θ|`), with `L =
+   ⌈2π·5^k/M⌉`; for `M > π·5^k` the event is empty. Then `isCompact_closure_of_isTightMeasureSet` (root namespace) and
+   a cluster point `μ̃` along an ultrafilter, as `exists_twisted_parts` takes its limit.
+4. `e : E → R̂`, `e(t)(r) = Circle.exp ⟨t, Q r⟩`, an archimedean character; `ν = e_*μ̃` has transform `charFun μ̃ ∘ Q`,
+   equal to `ψ` on `D = ⋃_k Λ_k`, and on all of `R` by density: `Q(D) = ℤ[1/5]^d` is dense in `E`, and `Q(d_m) → Q(r)`
+   forces `ι(d_m − r) = Σ_j q_j(d_m − r) ι(b_j) → 0`, so `ψ(d_m) → ψ(r)` (only continuity at `0` is read, through
+   `∫ ‖χ(w) − 1‖ dρ`, as in `exists_E_small`).
+5. Uniqueness (`measure_eq_of_fourier`): `ρ = ν`; `ν` is carried by `range e ⊆ A`, measurable as a countable union of
+   compact images of balls (the route of `measurableSet_TA` in `ChainAtTA`).
+
+## Drafts for the landing (files this job does not write; each names its slot)
+
+**The audit's block** (`scripts/Axioms.lean`, CLEAN section, after FS131-IJ1's block): `data/fs131/ij2/draft-axioms-block.lean`,
+5 `#print axioms` lines — `InvariantMeasure`'s 3 public declarations and `BochnerTau`'s `finite_quotient_nsmul`,
+`exists_twisted_parts` — CLEAN at build 2, generated from the built tree's print. `archTop`'s attribute adds no record.
+`bochnerOn_tauPrime` and `archimedean_support` join when the leaf lands.
+
+**The models** (`LEAN.md` § The gate). `exists_shiftInvariant_on`: any `F` with `unitRing F` countable (`F = ⊥`), `K =
+Set.univ` (nonempty, closed, measurable, stable under every shift). `exists_rotInvariant_of_shiftInvariant`: `K =
+Set.univ` and `μ₀` the point mass at a constant colouring (a shift fixes it); `X₄(⊥)` with the two-colouring of `ℚ²` is
+the consumer's model (`SpectralChain.isClosed_X4`, `measurableSet_X4`, `shift_mem_X4`, `rot_mem_X4`).
+`finite_quotient_nsmul`: `N = 1`. `exists_twisted_parts`, `archimedean_support`: the point mass at the trivial character
+(constant transform `1`, continuous for every topology). Each note names objects for the hypotheses they satisfy only;
+none is a declaration (this job adds no public constant).
+
+**`LEAN.md` § Searching — Lean**, five lines (each follows the last line there):
+- "A proof module may read another module's private lemmas with Batteries' `open private <names> from <module>` (after
+  the module's `variable`s): `Rigidity/BochnerTau` reads `ContinuityGroup`'s `archHom`, `eventually_archTop`, `fivePow`,
+  `exists_nsmul_mem_of_mem_nhds_profTop`, … — one fact proved once, the other module unedited; a statement that names
+  `‖archHom F r‖` is elaborated under `open scoped Classical in` so its norm instance is the private lemma's (FS131-IJ2)."
+- "A bounded complex sequence needs no Cauchy argument to have a limit with every closed property it has eventually: take
+  an ultrafilter finer than `atTop` (`Ultrafilter.of atTop`, `Ultrafilter.of_le`) and
+  `(isCompact_closedBall 0 m).ultrafilter_le_nhds`; positive-definiteness, sums over a finite set and inequalities pass to
+  it by `tendsto_finsetSum`, `ge_of_tendsto`, `le_of_tendsto_of_tendsto'` (`Rigidity.exists_twisted_parts`, FS131-IJ2)."
+- "At the pin `HasSum` is `HasProd`'s additive form over a `SummationFilter`: `unfold HasSum` and
+  `rw [SummationFilter.unconditional_filter, Metric.tendsto_atTop]` give the `ε`–finite-set form. `AddChar.ext` takes
+  both characters explicitly (`AddChar.ext _ _ fun g => …`); `Fintype (ZMod N)` needs `NeZero N` as an instance
+  (`haveI : NeZero N := ⟨hN⟩` first); the complex characters of a finite abelian group sum by `AddChar.sum_apply_eq_ite`
+  (`Mathlib.Analysis.Fourier.FiniteAbelian.PontryaginDuality`) (FS131-IJ2)."
+- "`set G := <a type>` in a proof whose hypotheses mention that type replaces it in their types and shadows the variables
+  (`x✝`): later hypotheses then speak of the shadowed copy and `rw [hx]` finds nothing. Write the type out (FS131-IJ2,
+  `twK_cont`). A docstring must directly precede its declaration: `open scoped Classical in` goes before the docstring."
+- "Representatives of small archimedean size for the cosets of `N·R` need no density theorem: `r ↦ r/5` permutes the
+  finite quotient (`1/5 ∈ R`), so by pigeonhole `r/5^e ≡ r` and then `r/5^{ek} ≡ r` for every `k`
+  (`BochnerTau`'s private `exists_small_rep`, FS131-IJ2)."

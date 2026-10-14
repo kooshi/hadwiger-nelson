@@ -1,0 +1,9 @@
+records: 102 (printer count 102); CLEAN 100; OPEN-LEAF 2
+  BochnerTau: 55 records, 53 CLEAN
+  ContinuityGroup: 28 records, 28 CLEAN
+  InvariantMeasure: 19 records, 19 CLEAN
+  OPEN-LEAF BochnerTau HadwigerNelson.Rigidity.archimedean_support: from ['HadwigerNelson.Rigidity.archimedean_support']
+  OPEN-LEAF BochnerTau HadwigerNelson.Rigidity.bochnerOn_tauPrime: from ['HadwigerNelson.Rigidity.archimedean_support']
+planted record: reported, resting on HadwigerNelson.Rigidity.positive_entropy_rigidity
+info: AdmissiblePair.ofPow ['Classical.choice', 'Quot.sound', 'propext']
+PASS

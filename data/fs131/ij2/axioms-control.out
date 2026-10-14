@@ -1,0 +1,12 @@
+records: 102 (printer count 102); CLEAN 97; OPEN-LEAF 1
+  BochnerTau: 55 records, 52 CLEAN
+  ContinuityGroup: 28 records, 27 CLEAN
+  InvariantMeasure: 19 records, 18 CLEAN
+  OPEN-LEAF BochnerTau HadwigerNelson.Rigidity.archimedean_support: from ['HadwigerNelson.Rigidity.archimedean_support']
+planted record: reported, resting on HadwigerNelson.Rigidity.positive_entropy_rigidity
+info: AdmissiblePair.ofPow ['Classical.choice', 'Quot.sound', 'propext']
+SORRY-PROVED HadwigerNelson.Rigidity.bochnerOn_tauPrime: from ['HadwigerNelson.Rigidity.exists_shiftInvariant_on'], in a module this job proved
+AXIOM HadwigerNelson.Rigidity.exists_twisted_parts: ['HadwigerNelson.Rigidity.positive_entropy_rigidity']
+SORRY-PROVED HadwigerNelson.Rigidity.TA_subset_contChars: from ['HadwigerNelson.Rigidity.mem_archChars_of_continuousAt'], in a module this job proved
+AXIOM HadwigerNelson.Rigidity.exists_shiftInvariant_on: ['HadwigerNelson.Rigidity.planted_axiom']
+CONTROL: 4 of 4 planted faults reported — the check can fail
