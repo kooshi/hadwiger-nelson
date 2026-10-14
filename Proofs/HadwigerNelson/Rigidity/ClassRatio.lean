@@ -3,6 +3,8 @@ import Proofs.HadwigerNelson.Rigidity.ChainAtTA
 import Proofs.HadwigerNelson.Arith.GapSeven
 import Proofs.HadwigerNelson.Arith.CircleCos
 import Proofs.HadwigerNelson.Arith.DyadicCerts
+import Proofs.HadwigerNelson.Rigidity.CertLink
+import Proofs.HadwigerNelson.Arith.FibreCert19Bound
 
 /-!
 # CLS: a local bound of at least five gives T-C(A) at `S = ∅`; the uniform tail (FS-131, job FS131-KR1; module M13; composed by FS131-ICM1 over six named private leaves)
@@ -16,7 +18,8 @@ the library's `SpectralChain.TCA`, is "every stable prime has some `c < 1/4`" (`
   `q ∉ {3, 7}` and dyadic inert `Q ≥ 64` (a stable prime ramified in `F(i)/F` is dyadic and its level-one target is
   two-colourable, `colorable_two_levelTarget_one_of_isRamified`); Lemma P carries level one to every level; level one by Weil
   for `q ≥ 37` (the declared import `kloosterman_bound`), exact spectra at 23, 27, 31 and 64, `Floor128` at 128, the
-  fourth-moment count EN1-UQ4 for `Q ≥ 256`, and FS-66's fibre-share bound with its certificates at 11 and 19.
+  fourth-moment count EN1-UQ4 for `Q ≥ 256`, and FS-66's fibre-share bound with its certificates at 11 and 19, read
+  through the certificate link `Rigidity/CertLink` (FS131-IKL1; joined by FS131-LCH1).
 * `tca_of_five_le_localBound` — **CLS**, the headline's `hCLS`: composed here from the per-prime statement.
 * `exists_uniform_tail` — **one constant for all but finitely many stable primes**: every stable prime of absolute norm
   above some `B` has all-levels ratio at most one `c < 1/4` (Weil and Lemma P; R88-J28V-3's tail). And `tca_uniform`: T-C(A)
@@ -125,15 +128,6 @@ private theorem ratioAtMost_of_charBound [NumberField F] (P : StablePrime F) {κ
   rw [e, e2] at hkey
   exact le_of_mul_le_mul_right hkey hSpos
 
--- FS131-ICM1: `i` is an integer of `F(i)`, with `i² = −1` and `ī = −i` (as `UpperHalf`'s private `exists_I_integer`).
-private theorem exists_I_int : ∃ i : 𝓞 (fieldI F), i ^ 2 = -1 ∧ conjO F i = -i := by
-  let iL : fieldI F := ⟨Complex.I, by simp [zero_mem], by simp [one_mem]⟩
-  have hiL : iL ^ 2 = -1 := Subtype.ext Complex.I_sq
-  have hint : IsIntegral ℤ iL := IsIntegral.of_pow (n := 2) (by norm_num) (by rw [hiL]; exact isIntegral_one.neg)
-  refine ⟨⟨iL, hint⟩, RingOfIntegers.coe_injective ?_, RingOfIntegers.coe_injective ?_⟩
-  · rw [map_pow, map_neg, map_one]; exact hiL
-  · rw [map_neg]; exact Subtype.ext Complex.conj_I
-
 -- FS131-ICM1: at an odd stable prime the residue field has `Q²` elements, `Q ≡ 3 (mod 4)`
 -- (`StandingFive.card_fixed_of_involution` at the residue of `i`).
 private theorem exists_card_sq [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) :
@@ -146,7 +140,7 @@ private theorem exists_card_sq [NumberField F] (P : StablePrime F) (h2 : (2 : �
   have hσ : ∀ x, σ (σ x) = x := fun x => by
     obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
     rw [hσmk, hσmk, UpperHalf.conjO_conjO]
-  obtain ⟨i, hi2, hci⟩ := exists_I_int (F := F)
+  obtain ⟨i, hi2, hci⟩ := UpperHalf.exists_I_integer (F := F)
   have h2k : (2 : 𝓞 (fieldI F) ⧸ P.P) ≠ 0 := by
     rw [← map_ofNat (Ideal.Quotient.mk P.P) 2, Ne, Ideal.Quotient.eq_zero_iff_mem]; exact h2
   obtain ⟨hcard, hmod⟩ := StandingFive.card_fixed_of_involution σ hσ (ι := Ideal.Quotient.mk P.P i)
@@ -594,7 +588,7 @@ private theorem sub_conjO_notMem (P : StablePrime F) {a : 𝓞 (fieldI F)} (ha :
 -- case of Lemma P is `SqZeroInvT` at `θ = i` (FS131-ICM2's `SqZeroInv`, folded onto it).
 private theorem exists_conj_sub_notMem (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) :
     ∃ a : 𝓞 (fieldI F), conjO F a - a ∉ P.P := by
-  obtain ⟨i, hi2, hci⟩ := exists_I_int (F := F)
+  obtain ⟨i, hi2, hci⟩ := UpperHalf.exists_I_integer (F := F)
   refine ⟨i, fun h => h2 ?_⟩
   have e : (2 : 𝓞 (fieldI F)) = (conjO F i - i) * i := by
     rw [hci]
@@ -959,7 +953,7 @@ private theorem charBound_one_weil [NumberField F] (P : StablePrime F) (h2 : (2 
   have hσ : ∀ x, σ (σ x) = x := fun x => by
     obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
     rw [hσmk, hσmk, UpperHalf.conjO_conjO]
-  obtain ⟨i, hi2, hci⟩ := exists_I_int (F := F)
+  obtain ⟨i, hi2, hci⟩ := UpperHalf.exists_I_integer (F := F)
   have h2k : (2 : 𝓞 (fieldI F) ⧸ P.P ^ 1) ≠ 0 := by
     rw [← map_ofNat (Ideal.Quotient.mk (P.P ^ 1)) 2, Ne, Ideal.Quotient.eq_zero_iff_mem, pow_one]; exact h2
   have hι : Ideal.Quotient.mk (P.P ^ 1) i ^ 2 = -1 := by rw [← map_pow, hi2, map_neg, map_one]
@@ -1488,7 +1482,7 @@ private theorem chromaticNumber_le_four_of_small [NumberField F] (P : StablePrim
   have hσ : ∀ x, σ (σ x) = x := fun x => by
     obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
     rw [hσmk, hσmk, UpperHalf.conjO_conjO]
-  obtain ⟨i, hi2, hci⟩ := exists_I_int (F := F)
+  obtain ⟨i, hi2, hci⟩ := UpperHalf.exists_I_integer (F := F)
   have h2k : (2 : 𝓞 (fieldI F) ⧸ P.P ^ 1) ≠ 0 := by
     rw [← map_ofNat (Ideal.Quotient.mk (P.P ^ 1)) 2, Ne, Ideal.Quotient.eq_zero_iff_mem, pow_one]; exact h2
   set ι := Ideal.Quotient.mk (P.P ^ 1) i with hιdef
@@ -1538,13 +1532,42 @@ private theorem chromaticNumber_le_four_of_small [NumberField F] (P : StablePrim
     · exact ⟨SimpleGraph.Coloring.mk GapSeven.gamma fun {u v} h => GapSeven.gamma_proper u v h⟩
   exact (hcol.of_hom ((unitQuadrance.map e.toRingHom).comp φ)).chromaticNumber_le
 
-/-- **The certificate branch at `q ∈ {11, 19}`** (KC13 § 5.2: K1 the checks `cert11_ok`, `cert19_ok`; K2
-`FibreCertSound.sum_le_of_certOK`, proved on the line `fs131-wc15`; K3 the level-one target as `Cay((ℤ/q)², S)`; K4 the
-fibre shares at every level; K5 `U₁₁/121 < 1/4`, `U₁₉/361 < 1/4`): the link to that line, closed when the lines are joined. -/
+/-- **Hensel's count in the certificate link's words** (FS131-IKL1): at a stable prime not above `2` with
+`|𝓞 ⧸ P| = Q²`, every norm-one residue at level one has `Q^n` norm-one lifts at level `n + 1` (`card_res_fibreT` at
+`θ = i`, `exists_conj_sub_notMem`). -/
+theorem henselCount_of_two_notMem [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) {Q : ℕ}
+    (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) : CertLink.HenselCount P Q :=
+  fun n hfin _ ht => card_res_fibreT P (exists_conj_sub_notMem P h2).choose_spec hQ n hfin ht
+
+/-- **The bound on new characters in the certificate link's words** (FS131-IKL1; FS-66's L1): at a stable prime not
+above `2` with `|𝓞 ⧸ P| = Q²`, a character of level `n + 1` not trivial on the kernel of the map to level one sums to at
+most `2Q^n` in modulus over the norm-one set (`norm_charSum_le_of_resT` at `θ = i`, and `|S_{n+1}| = Q^n(Q + 1)`,
+`card_levelSet_succT`). -/
+theorem newCharBound_of_two_notMem [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) {Q : ℕ}
+    (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) : CertLink.NewCharBound P Q := by
+  intro n hfin ψ hψ
+  have ha := (exists_conj_sub_notMem P h2).choose_spec
+  have hb := norm_charSum_le_of_resT P ha hQ n hfin ψ hψ
+  rw [card_levelSet_succT P ha hQ n hfin] at hb
+  have hQ1 : (0 : ℝ) < (Q : ℝ) + 1 := by positivity
+  refine hb.trans (le_of_eq ?_)
+  push_cast
+  field_simp
+
+/-- **FS-66's fibre-share bound at `p = 19`, in the certificate link's words** (FS131-LCH1, from FS131-IKL1's draft): some
+`U < 361/4` bounds `∑ φ` over `(ℤ/19)²` for every `φ` with values in `[0, 1]` and `qform 19 φ ≥ 0`
+(`FibreCertSound.sum_le_nineteen`, the p = 19 certificate checked by the kernel). -/
+theorem _root_.HadwigerNelson.CertLink.exists_fibreShareBound_nineteen :
+    ∃ U : ℝ, U < 361 / 4 ∧ CertLink.FibreShareBound 19 U :=
+  ⟨_, by norm_num, FibreCertSound.sum_le_nineteen⟩
+
+/-- **The certificate branch at `q ∈ {11, 19}`**: `CertLink.ratioAtMost_cert_link` with Hensel's count
+and the bound on new characters from Lemma P (`henselCount_of_two_notMem`, `newCharBound_of_two_notMem`) and FS-66's
+bound at 19 (`FibreCertSound.sum_le_nineteen`). -/
 private theorem ratioAtMost_cert [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) {Q : ℕ}
     (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) (hQ1119 : Q = 11 ∨ Q = 19) :
-    ∃ c : ℝ, c < 1 / 4 ∧ RatioAtMost P c := by
-  sorry
+    ∃ c : ℝ, c < 1 / 4 ∧ RatioAtMost P c :=
+  CertLink.ratioAtMost_cert_link P h2 hQ hQ1119 (henselCount_of_two_notMem P h2 hQ) (newCharBound_of_two_notMem P h2 hQ) CertLink.exists_fibreShareBound_nineteen
 
 -- FS131-ICM2: **the level-one bound at a prime `Q`, in coordinates.** Through `k = k₀ ⊕ k₀ι` and `k₀ ≅ ZMod Q`, a character
 -- of the residue field is `x ↦ ζ^{αA(x) + βB(x)}` (`ζ = e^{2πi/Q}`, `(α, β) ≠ 0`), and the norm-one set is carried onto the
@@ -1569,7 +1592,7 @@ private theorem charBound_one_of_circleCos [NumberField F] (P : StablePrime F) (
   have hσ : ∀ x, σ (σ x) = x := fun x => by
     obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
     rw [hσmk, hσmk, UpperHalf.conjO_conjO]
-  obtain ⟨i, hi2, hci⟩ := exists_I_int (F := F)
+  obtain ⟨i, hi2, hci⟩ := UpperHalf.exists_I_integer (F := F)
   have h2k : (2 : 𝓞 (fieldI F) ⧸ P.P ^ 1) ≠ 0 := by
     rw [← map_ofNat (Ideal.Quotient.mk (P.P ^ 1)) 2, Ne, Ideal.Quotient.eq_zero_iff_mem, pow_one]; exact h2
   set ι := Ideal.Quotient.mk (P.P ^ 1) i with hιdef

@@ -109,15 +109,6 @@ theorem zero_notMem_normOneSet (P : StablePrime F) {m : ℕ} (hm : 1 ≤ m) :
     exact h1.symm
   exact P.isMaximal.ne_top ((Ideal.eq_top_iff_one _).2 (Ideal.pow_le_self (by omega) hmem))
 
-/-- `i` is an integer of `F(i)`, with `i² = −1` and `ī = −i`. -/
-private theorem exists_I_mem : ∃ i : 𝓞 (fieldI F), i ^ 2 = -1 ∧ conjO F i = -i := by
-  let iL : fieldI F := ⟨Complex.I, by simp [zero_mem], by simp [one_mem]⟩
-  have hiL : iL ^ 2 = -1 := Subtype.ext Complex.I_sq
-  have hint : IsIntegral ℤ iL := IsIntegral.of_pow (n := 2) (by norm_num) (by rw [hiL]; exact isIntegral_one.neg)
-  refine ⟨⟨iL, hint⟩, RingOfIntegers.coe_injective ?_, RingOfIntegers.coe_injective ?_⟩
-  · rw [map_pow, map_neg, map_one]; exact hiL
-  · rw [map_neg]; exact Subtype.ext Complex.conj_I
-
 /-! ### K3: the level-one target in coordinates -/
 
 /-- **K3** (KC13 § 5.2): at a stable prime not above `2` with `|𝓞 ⧸ P| = q²`, `q` prime, the residue field is `(ℤ/q)²`
@@ -140,7 +131,7 @@ theorem exists_addEquiv_zmod [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞
   have hσ : ∀ x, σ (σ x) = x := fun x => by
     obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
     rw [hσmk, hσmk, UpperHalf.conjO_conjO]
-  obtain ⟨i, hi2, hci⟩ := exists_I_mem (F := F)
+  obtain ⟨i, hi2, hci⟩ := UpperHalf.exists_I_integer (F := F)
   have h2k : (2 : 𝓞 (fieldI F) ⧸ P.P ^ 1) ≠ 0 := by
     rw [← map_ofNat (Ideal.Quotient.mk (P.P ^ 1)) 2, Ne, Ideal.Quotient.eq_zero_iff_mem, pow_one]; exact h2
   set ι := Ideal.Quotient.mk (P.P ^ 1) i with hιdef

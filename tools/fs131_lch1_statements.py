@@ -4,7 +4,8 @@ kernel's side. Reads the indexes `data/fs131/lch1/split_dump.py` writes (module,
 hash, data hash per constant; hashes are Lean's `Expr.hash`, which reads no binder name):
   CHAIN-BEFORE — the chain tree before any edit was compiled (fs131-wm15 at 77d9d27ce);
   MAIN-BEFORE  — main's gated build (fs131-w10g);
-  M13          — FS131-ICM3's last dump on fs131-wcm3 (full text; its two modules' constants);
+  M13          — FS131-ICM4's last dump on fs131-wcm4 (data/fs131/icm4/statements-after2.txt; full text; its four
+                 modules' constants: CircleCos, ClassRatio, BinaryField, DyadicCerts);
   AFTER        — the joined tree after the build being checked.
 Expected: a constant of a module main holds is as in MAIN-BEFORE; of a chain-line module, as in CHAIN-BEFORE (M13's
 two modules: as in M13). The ruled changes (the brief's § The integrations, the amendments), each checked as stated:
@@ -52,7 +53,10 @@ DROPPED = {NS + n for n in [
 NEW = {NS + 'Plane.mOne_le_0_2470': 'Proofs.HadwigerNelson.Plane.MOneBound',
        NS + 'Plane.mOne_lt_one_quarter': 'Proofs.HadwigerNelson.Plane.MOneBound'}
 OAD = 'Proofs.HadwigerNelson.Plane.OneAvoidingDensity'
-M13MODS = {'Proofs.HadwigerNelson.Arith.CircleCos', 'Proofs.HadwigerNelson.Rigidity.ClassRatio'}
+M13MODS = {'Proofs.HadwigerNelson.Arith.CircleCos', 'Proofs.HadwigerNelson.Rigidity.ClassRatio',
+           'Proofs.HadwigerNelson.Arith.BinaryField', 'Proofs.HadwigerNelson.Arith.DyadicCerts'}
+# the p = 19 line's modules (fs131-wc17): merged whole, edited by no one here; their constants are counted, not compared
+INCOMING = 'Proofs.HadwigerNelson.Arith.FibreCert'
 
 def read_idx(path):
     d = {}
@@ -107,7 +111,7 @@ def main():
         after[NS + 'Rigidity.PLANTED_new'] = dict(mod='Proofs.HadwigerNelson.Rigidity.ChainHeadline', kind='THM',
                                                   flags='', th='1', vh='', dh='')
         readd[NS + 'SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five'] = 'PLANTED'
-    reports, ok = [], {'same': 0, 'renamed': 0, 'deleted': 0, 'public': 0, 'dropped': 0, 'new': 0, 'instance': 0}
+    reports, ok = [], {'same': 0, 'renamed': 0, 'deleted': 0, 'public': 0, 'dropped': 0, 'new': 0, 'instance': 0, 'incoming': 0}
     pub_after = {n for _, n in PUBLIC}
     pub_before = {priv(m, n): n for m, n in PUBLIC}
     del_priv = {priv(m, n) for m, n in DELETED_PRIVATE}
@@ -150,6 +154,7 @@ def main():
     for n, g in sorted(after.items()):
         if n in exp or n in pub_after: continue
         if n in NEW and NEW[n] == g['mod']: ok['new'] += 1; continue
+        if g['mod'].startswith(INCOMING): ok['incoming'] += 1; continue
         if internal_under(n, set(NEW) | pub_after): ok['new'] += 1; continue
         reports.append(f'UNRULED-NEW {n} ({g["mod"]}, {g["kind"]})')
     # the chain's moved copies: gone from the chain's modules

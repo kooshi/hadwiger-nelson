@@ -1,5 +1,6 @@
 import Proofs.HadwigerNelson.Rigidity.CertLink
 import Proofs.HadwigerNelson.Arith.ThreeFourColours
+import Proofs.HadwigerNelson.Rigidity.ClassRatio
 
 /-!
 # Models for the certificate link's stable-prime hypotheses (FS131-IKL1)
@@ -50,5 +51,22 @@ theorem exists_addEquiv_zmod_sqrt_three :
       ∀ x, x ∈ normOneSet P 1 ↔ (e x).1 ^ 2 + (e x).2 ^ 2 = 1 := by
   obtain ⟨P, h2, hQ⟩ := exists_stablePrime_sqrt_three
   exact ⟨P, exists_addEquiv_zmod P h2 (by norm_num) hQ⟩
+
+/-- **FS-66's fibre-share bound at `p = 3`** (`FibreCertSound.sum_le_of_certOK cert3 cert3_ok`): the model of
+`FibreShareBound`'s clause at `q = 3`. -/
+theorem fibreShareBound_three :
+    FibreShareBound 3 ((FibreCert.cert3.unum : ℝ) / FibreCert.cert3.scale) :=
+  fun φ h0 h1 hq => by
+    haveI : NeZero FibreCert.cert3.p := ⟨by decide⟩
+    exact FibreCertSound.sum_le_of_certOK FibreCert.cert3 FibreCert.cert3_ok φ h0 h1 hq
+
+/-- **The full model of `card_le_of_fibreShareBound`** (at `q = 3`, `F = ℚ(√3)`). -/
+theorem card_le_of_fibreShareBound_model :
+    ∃ P : StablePrime (fieldOfRadicands {3}), (2 : 𝓞 (fieldI (fieldOfRadicands {3}))) ∉ P.P ∧
+      Nat.card (𝓞 (fieldI (fieldOfRadicands {3})) ⧸ P.P) = 3 ^ 2 ∧ HenselCount P 3 ∧ NewCharBound P 3 ∧
+      FibreShareBound 3 ((FibreCert.cert3.unum : ℝ) / FibreCert.cert3.scale) := by
+  obtain ⟨P, h2, hQ⟩ := exists_stablePrime_sqrt_three
+  exact ⟨P, h2, hQ, Rigidity.henselCount_of_two_notMem P h2 hQ, Rigidity.newCharBound_of_two_notMem P h2 hQ,
+    fibreShareBound_three⟩
 
 end HadwigerNelson.CertLink
