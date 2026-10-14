@@ -1,0 +1,9 @@
+slot: admitted ip23: mem 4 GiB (hard cap), cpus 2,3
+data/fs131/ip23/lean/OpenProbe-OAI015ErgodicDecomposition.lean:40:5: error: unknown namespace `IsDiscreteValuationRing`
+data/fs131/ip23/lean/OpenProbe-OAI015ErgodicDecomposition.lean:46:5: error: unknown namespace `NumberField`
+data/fs131/ip23/lean/OpenProbe-OAI015ErgodicDecomposition.lean:52:5: error: unknown namespace `ArithmeticFunction.zeta`
+data/fs131/ip23/lean/OpenProbe-OAI015ErgodicDecomposition.lean:61:5: error: unknown namespace `ArithmeticFunction`
+data/fs131/ip23/lean/OpenProbe-OAI015ErgodicDecomposition.lean:64:5: error: unknown namespace `BoundingSieve`
+data/fs131/ip23/lean/OpenProbe-OAI015ErgodicDecomposition.lean:76:5: error: unknown namespace `FractionalIdeal`
+seconds=3
+exit=1

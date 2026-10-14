@@ -1,0 +1,17 @@
+slot: admitted ip23: mem 4 GiB (hard cap), cpus 2,3
+MODULE	Proofs.HadwigerNelson.Outside.OAI015Generating	constants=67	modules-named=179	kept=4
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015Generating	Mathlib.AlgebraicTopology.SimplexCategory.Basic
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015Generating	Mathlib.Order.CompletePartialOrder
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015Generating	Mathlib.Probability.Martingale.Convergence
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015Generating	Proofs.HadwigerNelson.Outside.OAI015Mixtures
+MODULE	Proofs.HadwigerNelson.Outside.OAI015ErgodicDecomposition	constants=23	modules-named=187	kept=8
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015ErgodicDecomposition	Mathlib.Algebra.Ring.IsFormallyReal
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015ErgodicDecomposition	Mathlib.Dynamics.Ergodic.Action.Basic
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015ErgodicDecomposition	Mathlib.MeasureTheory.MeasurableSpace.Invariants
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015ErgodicDecomposition	Mathlib.MeasureTheory.SetAlgebra
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015ErgodicDecomposition	Mathlib.Order.CompletePartialOrder
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015ErgodicDecomposition	Mathlib.Probability.Kernel.Condexp
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015ErgodicDecomposition	Mathlib.Topology.EMetricSpace.Paracompact
+IMPORT	Proofs.HadwigerNelson.Outside.OAI015ErgodicDecomposition	Mathlib.Topology.Separation.CompletelyRegular
+seconds=18
+exit=0
