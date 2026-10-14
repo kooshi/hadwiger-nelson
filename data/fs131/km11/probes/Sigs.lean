@@ -15,3 +15,8 @@ open Lean Elab Command in
         out := out.push (s!"{m.getString!} {kind} {n}", s!"{ty}")
   for (h, t) in out.qsort (fun a b => a.1 < b.1) do
     IO.println s!"{h} :\n  {t}"
+#print axioms HadwigerNelson.Rigidity.aPlusOfR88
+#print axioms HadwigerNelson.Rigidity.aplus_model
+#print axioms HadwigerNelson.Rigidity.spectral_contChars_null_of_orthogonal
+#print axioms HadwigerNelson.Rigidity.IsSpectralMeasureOf.unique
+#print axioms HadwigerNelson.Rigidity.three_mul_tetra_add_one

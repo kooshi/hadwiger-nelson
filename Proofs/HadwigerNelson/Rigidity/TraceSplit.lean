@@ -63,7 +63,7 @@ theorem colourShift_zero : colourShift (0 : unitRing F) = id := by
 attribute [scoped instance] InvariantColouring.isProb
 
 /-- Each shift preserves the law of an invariant colouring. -/
-theorem InvariantColouring.measurePreserving_shift (μ : InvariantColouring F) (y : unitRing F) :
+theorem _root_.HadwigerNelson.SpectralChain.InvariantColouring.measurePreserving_shift (μ : InvariantColouring F) (y : unitRing F) :
     MeasurePreserving (colourShift y) μ.μ μ.μ :=
   ⟨measurable_colourShift y, μ.shift_inv y⟩
 
@@ -141,7 +141,7 @@ def colourCond [NumberField F] (μ : InvariantColouring F) (j : Fin 4) : Lp ℝ 
 
 /-- `Πe_j = p_j(0)` almost everywhere (`MemLp.condExpL2_ae_eq_condExp`). -/
 theorem colourCond_ae_eq_condLaw [NumberField F] (μ : InvariantColouring F) (j : Fin 4) :
-    (colourCond μ j : unitRing F → Fin 4 → ℝ) =ᵐ[μ.μ] condLaw (colourFactor μ) μ.μ (fun c => c) 0 j := by
+    (colourCond μ j : (unitRing F → Fin 4) → ℝ) =ᵐ[μ.μ] condLaw (colourFactor μ) μ.μ (fun c => c) 0 j := by
   sorry
 
 /-- **The continuous part of a colour indicator is its conditional law**: `⟨Πe_j, V_y Πe_j⟩ = E[p_j(0) p_j(y)]`

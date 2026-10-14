@@ -44,7 +44,7 @@ def colourRot (u : unitVectors F) (c : unitRing F → Fin 4) : unitRing F → Fi
 theorem measurable_colourRot (u : unitVectors F) : Measurable (colourRot u) :=
   measurable_pi_lambda _ fun _ => measurable_pi_apply _
 
-theorem InvariantColouring.measurePreserving_rot (μ : InvariantColouring F) (u : unitVectors F) :
+theorem _root_.HadwigerNelson.SpectralChain.InvariantColouring.measurePreserving_rot (μ : InvariantColouring F) (u : unitVectors F) :
     MeasurePreserving (colourRot u) μ.μ μ.μ :=
   ⟨measurable_colourRot u, μ.rot_inv u⟩
 

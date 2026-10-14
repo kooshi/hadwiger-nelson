@@ -1,0 +1,395 @@
+slot: admitted km11p: mem 5 GiB (hard cap), cpus 0,1
+APlus def HadwigerNelson.Rigidity.EqualAtUnits :
+  {F : Subfield ℝ} → [NumberField ↥F] → HadwigerNelson.SpectralChain.InvariantColouring F → Prop
+APlus def HadwigerNelson.Rigidity.colourRot :
+  {F : Subfield ℝ} →
+  ↑(HadwigerNelson.SpectralChain.unitVectors F) →
+    (↥(HadwigerNelson.SpectralChain.unitRing F) → Fin 4) → ↥(HadwigerNelson.SpectralChain.unitRing F) → Fin 4
+APlus def HadwigerNelson.Rigidity.factorColouring :
+  {F : Subfield ℝ} →
+  [NumberField ↥F] →
+    HadwigerNelson.SpectralChain.InvariantColouring F →
+      (↥(HadwigerNelson.SpectralChain.unitRing F) → Fin 4) → ↥(HadwigerNelson.SpectralChain.unitRing F) → Fin 4
+APlus def HadwigerNelson.Rigidity.factorLaw :
+  {F : Subfield ℝ} →
+  [inst : NumberField ↥F] →
+    (μ : HadwigerNelson.SpectralChain.InvariantColouring F) →
+      HadwigerNelson.Rigidity.EqualAtUnits μ → HadwigerNelson.SpectralChain.InvariantColouring F
+APlus def HadwigerNelson.Rigidity.minSel :
+  Finset (Fin 4) → Fin 4
+APlus theorem HadwigerNelson.Rigidity.aPlusOfR88 :
+  ∀ (F : Subfield ℝ) [inst : NumberField ↥F], (HadwigerNelson.Rigidity.chainInterface F).APlusOfR88
+APlus theorem HadwigerNelson.Rigidity.aplus_model :
+  ∃ μ σ, HadwigerNelson.SpectralChain.IsTraceSpectral ⊥ μ.μ σ
+APlus theorem HadwigerNelson.Rigidity.comap_colourRot_colourFactor :
+  ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (μ : HadwigerNelson.SpectralChain.InvariantColouring F)
+  (u : ↑(HadwigerNelson.SpectralChain.unitVectors F)),
+  MeasurableSpace.comap (HadwigerNelson.Rigidity.colourRot u) (HadwigerNelson.Rigidity.colourFactor μ) =
+    HadwigerNelson.Rigidity.colourFactor μ
+APlus theorem HadwigerNelson.Rigidity.equalAtUnits_of_not_neg :
+  ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (μ : HadwigerNelson.SpectralChain.InvariantColouring F)
+  {σ : MeasureTheory.Measure (HadwigerNelson.SpectralChain.Dual F)},
+  HadwigerNelson.SpectralChain.IsTraceSpectral F μ.μ σ →
+    ¬∫ (χ : HadwigerNelson.SpectralChain.Dual F) in (HadwigerNelson.Rigidity.TA F)ᶜ, (↑(χ 1)).re ∂σ < 0 →
+      HadwigerNelson.Rigidity.EqualAtUnits μ
+APlus theorem HadwigerNelson.Rigidity.factorColouring_mem_X4 :
+  ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (μ : HadwigerNelson.SpectralChain.InvariantColouring F),
+  HadwigerNelson.Rigidity.EqualAtUnits μ →
+    ∀ᵐ (c : ↥(HadwigerNelson.SpectralChain.unitRing F) → Fin 4) ∂μ.μ,
+      HadwigerNelson.Rigidity.factorColouring μ c ∈ HadwigerNelson.SpectralChain.X4 F
+APlus theorem HadwigerNelson.Rigidity.factorColouring_rot_ae :
+  ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (μ : HadwigerNelson.SpectralChain.InvariantColouring F)
+  (u : ↑(HadwigerNelson.SpectralChain.unitVectors F)),
+  ∀ᵐ (c : ↥(HadwigerNelson.SpectralChain.unitRing F) → Fin 4) ∂μ.μ,
+    HadwigerNelson.Rigidity.factorColouring μ (HadwigerNelson.Rigidity.colourRot u c) =
+      HadwigerNelson.Rigidity.colourRot u (HadwigerNelson.Rigidity.factorColouring μ c)
+APlus theorem HadwigerNelson.Rigidity.factorColouring_shift_ae :
+  ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (μ : HadwigerNelson.SpectralChain.InvariantColouring F)
+  (y : ↥(HadwigerNelson.SpectralChain.unitRing F)),
+  ∀ᵐ (c : ↥(HadwigerNelson.SpectralChain.unitRing F) → Fin 4) ∂μ.μ,
+    HadwigerNelson.Rigidity.factorColouring μ (HadwigerNelson.Rigidity.colourShift y c) =
+      HadwigerNelson.Rigidity.colourShift y (HadwigerNelson.Rigidity.factorColouring μ c)
+APlus theorem HadwigerNelson.Rigidity.factorLaw_carried :
+  ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (μ : HadwigerNelson.SpectralChain.InvariantColouring F),
+  HadwigerNelson.Rigidity.EqualAtUnits μ →
+    (MeasureTheory.Measure.map (HadwigerNelson.Rigidity.factorColouring μ) μ.μ) (HadwigerNelson.SpectralChain.X4 F)ᶜ = 0
+APlus theorem HadwigerNelson.Rigidity.factorLaw_isProb :
+  ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (μ : HadwigerNelson.SpectralChain.InvariantColouring F),
+  MeasureTheory.IsProbabilityMeasure (MeasureTheory.Measure.map (HadwigerNelson.Rigidity.factorColouring μ) μ.μ)
+APlus theorem HadwigerNelson.Rigidity.factorLaw_rot_inv :
+  ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (μ : HadwigerNelson.SpectralChain.InvariantColouring F)
+  (u : ↑(HadwigerNelson.SpectralChain.unitVectors F)),
+  MeasureTheory.Measure.map (fun c x => c (HadwigerNelson.SpectralChain.uvRing u * x))
+      (MeasureTheory.Measure.map (HadwigerNelson.Rigidity.factorColouring μ) μ.μ) =
+    MeasureTheory.Measure.map (HadwigerNelson.Rigidity.factorColouring μ) μ.μ
+APlus theorem HadwigerNelson.Rigidity.factorLaw_shift_inv :
+  ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (μ : HadwigerNelson.SpectralChain.InvariantColouring F)
+  (y : ↥(HadwigerNelson.SpectralChain.unitRing F)),
+  MeasureTheory.Measure.map (fun c x => c (x + y))
+      (MeasureTheory.Measure.map (HadwigerNelson.Rigidity.factorColouring μ) μ.μ) =
+    MeasureTheory.Measure.map (HadwigerNelson.Rigidity.factorColouring μ) μ.μ
+APlus theorem HadwigerNelson.Rigidity.factorLaw_trace_null :
+  ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (μ : HadwigerNelson.SpectralChain.InvariantColouring F)
+  {σ' : MeasureTheory.Measure (HadwigerNelson.SpectralChain.Dual F)},
+  HadwigerNelson.SpectralChain.IsTraceSpectral F
+      (MeasureTheory.Measure.map (HadwigerNelson.Rigidity.factorColouring μ) μ.μ) σ' →
+    σ' (HadwigerNelson.Rigidity.TA F)ᶜ = 0
+APlus theorem HadwigerNelson.Rigidity.integral_condLaw_mul_eq_zero_of_adj :
+  ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (μ : HadwigerNelson.SpectralChain.InvariantColouring F),
+  HadwigerNelson.Rigidity.EqualAtUnits μ →
+    ∀ {x y : ↥(HadwigerNelson.SpectralChain.unitRing F)},
+      ↑y - ↑x ∈ HadwigerNelson.SpectralChain.unitVectors F →
+        ∀ (j : Fin 4),
+          ∫ (c : ↥(HadwigerNelson.SpectralChain.unitRing F) → Fin 4),
+              HadwigerNelson.SpectralInputs.condLaw (HadwigerNelson.Rigidity.colourFactor μ) μ.μ (fun c => c) x j c *
+                HadwigerNelson.SpectralInputs.condLaw (HadwigerNelson.Rigidity.colourFactor μ) μ.μ (fun c => c) y j
+                  c ∂μ.μ =
+            0
+APlus theorem HadwigerNelson.Rigidity.measurable_colourRot :
+  ∀ {F : Subfield ℝ} (u : ↑(HadwigerNelson.SpectralChain.unitVectors F)), Measurable (HadwigerNelson.Rigidity.colourRot u)
+APlus theorem HadwigerNelson.Rigidity.measurable_factorColouring :
+  ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (μ : HadwigerNelson.SpectralChain.InvariantColouring F),
+  Measurable (HadwigerNelson.Rigidity.factorColouring μ)
+APlus theorem HadwigerNelson.Rigidity.measurable_factorColouring_apply :
+  ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (μ : HadwigerNelson.SpectralChain.InvariantColouring F)
+  (x : ↥(HadwigerNelson.SpectralChain.unitRing F)), Measurable fun c => HadwigerNelson.Rigidity.factorColouring μ c x
+APlus theorem HadwigerNelson.Rigidity.minSel_mem :
+  ∀ {s : Finset (Fin 4)}, s.Nonempty → HadwigerNelson.Rigidity.minSel s ∈ s
+APlus theorem HadwigerNelson.Rigidity.nonempty_invariantColouring_bot :
+  Nonempty (HadwigerNelson.SpectralChain.InvariantColouring ⊥)
+APlus theorem HadwigerNelson.Rigidity.numberField_bot :
+  NumberField ↥⊥
+APlus theorem HadwigerNelson.Rigidity.tendsto_mul_nhds_tauPrime :
+  ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (r : ↥(HadwigerNelson.SpectralChain.unitRing F)),
+  Filter.Tendsto (fun y => r * y) (nhds 0) (nhds 0)
+APlus theorem HadwigerNelson.SpectralChain.InvariantColouring.measurePreserving_rot :
+  ∀ {F : Subfield ℝ} (μ : HadwigerNelson.SpectralChain.InvariantColouring F)
+  (u : ↑(HadwigerNelson.SpectralChain.unitVectors F)),
+  MeasureTheory.MeasurePreserving (HadwigerNelson.Rigidity.colourRot u) μ.μ μ.μ
+SpectralSubspace def HadwigerNelson.Rigidity.koopmanSum :
+  {R : Type u_1} →
+  {Ω : Type u_2} →
+    [inst : MeasurableSpace Ω] →
+      {μ : MeasureTheory.Measure Ω} →
+        (T : R → Ω → Ω) →
+          (∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ) →
+            ↥(MeasureTheory.Lp ℝ 2 μ) → (R →₀ ℝ) →ₗ[ℝ] ↥(MeasureTheory.Lp ℝ 2 μ)
+SpectralSubspace def HadwigerNelson.Rigidity.trigPoly :
+  {R : Type u_1} → [inst : AddCommGroup R] → (R →₀ ℂ) → AddChar R Circle → ℂ
+SpectralSubspace theorem HadwigerNelson.Rigidity.IsSpectralMeasureOf.add_of_orthogonal :
+  ∀ {R : Type u_1} [inst : AddCommGroup R] {Ω : Type u_2} [inst_1 : MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω}
+  (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ),
+  (∀ (x y : R), T (x + y) = T x ∘ T y) →
+    ∀ (l : Filter R) {h r : ↥(MeasureTheory.Lp ℝ 2 μ)},
+      h ∈ HadwigerNelson.SpectralInputs.contVec T hT l →
+        (∀ g ∈ HadwigerNelson.SpectralInputs.contVec T hT l, inner ℝ r g = 0) →
+          ∀ {σh σr : MeasureTheory.Measure (AddChar R Circle)},
+            HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT h σh →
+              HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT r σr →
+                HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT (h + r) (σh + σr)
+SpectralSubspace theorem HadwigerNelson.Rigidity.IsSpectralMeasureOf.unique :
+  ∀ {R : Type u_1} [inst : AddCommGroup R] {Ω : Type u_2} [inst_1 : MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω}
+  [Countable R] {T : R → Ω → Ω} {hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ}
+  {f : ↥(MeasureTheory.Lp ℝ 2 μ)} {σ σ' : MeasureTheory.Measure (AddChar R Circle)},
+  HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT f σ →
+    HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT f σ' → σ = σ'
+SpectralSubspace theorem HadwigerNelson.Rigidity.comp_koopmanSum :
+  ∀ {R : Type u_1} [inst : AddCommGroup R] {Ω : Type u_2} [inst_1 : MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω}
+  (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ),
+  (∀ (x y : R), T (x + y) = T x ∘ T y) →
+    ∀ (f : ↥(MeasureTheory.Lp ℝ 2 μ)) (b : R →₀ ℝ) (z : R),
+      (MeasureTheory.Lp.compMeasurePreserving (T z) ⋯) ((HadwigerNelson.Rigidity.koopmanSum T hT f) b) =
+        (HadwigerNelson.Rigidity.koopmanSum T hT f) (Finsupp.mapDomain (fun x => x + z) b)
+SpectralSubspace theorem HadwigerNelson.Rigidity.comp_mem_contVec :
+  ∀ {R : Type u_1} [inst : AddCommGroup R] {Ω : Type u_2} [inst_1 : MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω}
+  (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ),
+  (∀ (x y : R), T (x + y) = T x ∘ T y) →
+    ∀ (l : Filter R) {h : ↥(MeasureTheory.Lp ℝ 2 μ)},
+      h ∈ HadwigerNelson.SpectralInputs.contVec T hT l →
+        ∀ (y : R), (MeasureTheory.Lp.compMeasurePreserving (T y) ⋯) h ∈ HadwigerNelson.SpectralInputs.contVec T hT l
+SpectralSubspace theorem HadwigerNelson.Rigidity.exists_isSpectralMeasureOf :
+  ∀ {R : Type u_1} [inst : AddCommGroup R] {Ω : Type u_2} [inst_1 : MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω}
+  [Countable R] (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ),
+  (∀ (x y : R), T (x + y) = T x ∘ T y) →
+    ∀ (f : ↥(MeasureTheory.Lp ℝ 2 μ)), ∃ σ, HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT f σ
+SpectralSubspace theorem HadwigerNelson.Rigidity.exists_spectral_vector :
+  ∀ {R : Type u_1} [inst : AddCommGroup R] {Ω : Type u_2} [inst_1 : MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω}
+  [Countable R] (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ),
+  (∀ (x y : R), T (x + y) = T x ∘ T y) →
+    ∀ {f : ↥(MeasureTheory.Lp ℝ 2 μ)} {σ : MeasureTheory.Measure (AddChar R Circle)},
+      HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT f σ →
+        ∀ {A : Set (AddChar R Circle)},
+          MeasurableSet A →
+            ∃ w,
+              inner ℝ w f = σ.real A ∧
+                ∀ (z : R),
+                  ‖(MeasureTheory.Lp.compMeasurePreserving (T z) ⋯) w - w‖ ^ 2 ≤
+                    2 * ∫ (χ : AddChar R Circle) in A, ‖↑(χ z) - 1‖ ^ 2 ∂σ
+SpectralSubspace theorem HadwigerNelson.Rigidity.exists_trigPoly_tendsto :
+  ∀ {R : Type u_1} [inst : AddCommGroup R] [Countable R] (σ : MeasureTheory.Measure (AddChar R Circle))
+  [MeasureTheory.IsFiniteMeasure σ] {A : Set (AddChar R Circle)},
+  MeasurableSet A →
+    ∃ a,
+      Filter.Tendsto
+        (fun n => ∫ (χ : AddChar R Circle), ‖HadwigerNelson.Rigidity.trigPoly (a n) χ - A.indicator 1 χ‖ ^ 2 ∂σ)
+        Filter.atTop (nhds 0)
+SpectralSubspace theorem HadwigerNelson.Rigidity.gram_sum_eq :
+  ∀ {E : Type u_3} [inst : NormedAddCommGroup E] [inst_1 : InnerProductSpace ℝ E] {ι : Type u_4} (v : ι → E)
+  (s : Finset ι) (z : ι → ℂ),
+  ∑ x ∈ s, ∑ y ∈ s, z x * star (z y) * ↑(inner ℝ (v y) (v x)) =
+    ↑(‖∑ x ∈ s, (z x).re • v x‖ ^ 2 + ‖∑ x ∈ s, (z x).im • v x‖ ^ 2)
+SpectralSubspace theorem HadwigerNelson.Rigidity.inner_comp_eq_inner_comp_neg :
+  ∀ {R : Type u_1} [inst : AddCommGroup R] {Ω : Type u_2} [inst_1 : MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω}
+  (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ),
+  (∀ (x y : R), T (x + y) = T x ∘ T y) →
+    ∀ (g f : ↥(MeasureTheory.Lp ℝ 2 μ)) (y : R),
+      inner ℝ g ((MeasureTheory.Lp.compMeasurePreserving (T y) ⋯) f) =
+        inner ℝ ((MeasureTheory.Lp.compMeasurePreserving (T (-y)) ⋯) g) f
+SpectralSubspace theorem HadwigerNelson.Rigidity.inner_koopmanSum_re :
+  ∀ {R : Type u_1} [inst : AddCommGroup R] {Ω : Type u_2} [inst_1 : MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω}
+  (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ) {f : ↥(MeasureTheory.Lp ℝ 2 μ)}
+  {σ : MeasureTheory.Measure (AddChar R Circle)},
+  HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT f σ →
+    ∀ (a : R →₀ ℂ),
+      inner ℝ ((HadwigerNelson.Rigidity.koopmanSum T hT f) (Finsupp.mapRange Complex.re Complex.zero_re a)) f =
+        (∫ (χ : AddChar R Circle), HadwigerNelson.Rigidity.trigPoly a χ ∂σ).re
+SpectralSubspace theorem HadwigerNelson.Rigidity.isSpectralMeasureOf_condExpL2 :
+  ∀ {R : Type u_1} [inst : AddCommGroup R] {Ω : Type u_2} [inst_1 : MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω}
+  [Countable R] (t : TopologicalSpace R),
+  IsTopologicalAddGroup R →
+    (nhds 0).IsCountablyGenerated →
+      HadwigerNelson.SpectralInputs.BochnerOn t →
+        MeasurableSet (HadwigerNelson.SpectralInputs.contChars t) →
+          ∀ [inst_3 : MeasureTheory.IsProbabilityMeasure μ] (T : R → Ω → Ω)
+            (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ),
+            (∀ (x y : R), T (x + y) = T x ∘ T y) →
+              ∀ {f : ↥(MeasureTheory.Lp ℝ 2 μ)} {σ : MeasureTheory.Measure (AddChar R Circle)},
+                HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT f σ →
+                  HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT (↑((MeasureTheory.condExpL2 ℝ ℝ ⋯) f))
+                      (σ.restrict (HadwigerNelson.SpectralInputs.contChars t)) ∧
+                    HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT (f - ↑((MeasureTheory.condExpL2 ℝ ℝ ⋯) f))
+                      (σ.restrict (HadwigerNelson.SpectralInputs.contChars t)ᶜ)
+SpectralSubspace theorem HadwigerNelson.Rigidity.norm_sq_koopmanSum_re_add_im :
+  ∀ {R : Type u_1} [inst : AddCommGroup R] {Ω : Type u_2} [inst_1 : MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω}
+  (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ),
+  (∀ (x y : R), T (x + y) = T x ∘ T y) →
+    ∀ {f : ↥(MeasureTheory.Lp ℝ 2 μ)} {σ : MeasureTheory.Measure (AddChar R Circle)},
+      HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT f σ →
+        ∀ (a : R →₀ ℂ),
+          ‖(HadwigerNelson.Rigidity.koopmanSum T hT f) (Finsupp.mapRange Complex.re Complex.zero_re a)‖ ^ 2 +
+              ‖(HadwigerNelson.Rigidity.koopmanSum T hT f) (Finsupp.mapRange Complex.im Complex.zero_im a)‖ ^ 2 =
+            ∫ (χ : AddChar R Circle), ‖HadwigerNelson.Rigidity.trigPoly a χ‖ ^ 2 ∂σ
+SpectralSubspace theorem HadwigerNelson.Rigidity.posDef_koopman :
+  ∀ {R : Type u_1} [inst : AddCommGroup R] {Ω : Type u_2} [inst_1 : MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω}
+  (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ),
+  (∀ (x y : R), T (x + y) = T x ∘ T y) →
+    ∀ (f : ↥(MeasureTheory.Lp ℝ 2 μ)),
+      HadwigerNelson.SpectralChain.PosDef fun y =>
+        ↑(∫ (ω : Ω), ↑↑f ω * ↑↑((MeasureTheory.Lp.compMeasurePreserving (T y) ⋯) f) ω ∂μ)
+SpectralSubspace theorem HadwigerNelson.Rigidity.spectral_contChars_null_of_orthogonal :
+  ∀ {R : Type u_1} [inst : AddCommGroup R] {Ω : Type u_2} [inst_1 : MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω}
+  [Countable R] (t : TopologicalSpace R),
+  (nhds 0).IsCountablyGenerated →
+    MeasurableSet (HadwigerNelson.SpectralInputs.contChars t) →
+      ∀ (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ),
+        (∀ (x y : R), T (x + y) = T x ∘ T y) →
+          ∀ {f : ↥(MeasureTheory.Lp ℝ 2 μ)} {σ : MeasureTheory.Measure (AddChar R Circle)},
+            HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT f σ →
+              (∀ g ∈ HadwigerNelson.SpectralInputs.contVec T hT (nhds 0), inner ℝ f g = 0) →
+                σ (HadwigerNelson.SpectralInputs.contChars t) = 0
+SpectralSubspace theorem HadwigerNelson.Rigidity.spectral_null_model :
+  ∃ T,
+  ∃ (hT : ∀ (y : ℤ), MeasureTheory.MeasurePreserving (T y) MeasureTheory.Measure.count MeasureTheory.Measure.count),
+    ∃ f σ,
+      (∀ (x y : ℤ), T (x + y) = T x ∘ T y) ∧
+        HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT f σ ∧
+          σ ≠ 0 ∧
+            (∀ g ∈ HadwigerNelson.SpectralInputs.contVec T hT ⊤, inner ℝ f g = 0) ∧
+              ∀ χ ∈ {1}, Filter.Tendsto (fun y => ↑(χ y)) ⊤ (nhds 1)
+SpectralSubspace theorem HadwigerNelson.Rigidity.spectral_null_of_orthogonal :
+  ∀ {R : Type u_1} [inst : AddCommGroup R] {Ω : Type u_2} [inst_1 : MeasurableSpace Ω] {μ : MeasureTheory.Measure Ω}
+  [Countable R] (T : R → Ω → Ω) (hT : ∀ (y : R), MeasureTheory.MeasurePreserving (T y) μ μ),
+  (∀ (x y : R), T (x + y) = T x ∘ T y) →
+    ∀ (l : Filter R) [l.IsCountablyGenerated] {A : Set (AddChar R Circle)},
+      MeasurableSet A →
+        (∀ χ ∈ A, Filter.Tendsto (fun y => ↑(χ y)) l (nhds 1)) →
+          ∀ {f : ↥(MeasureTheory.Lp ℝ 2 μ)} {σ : MeasureTheory.Measure (AddChar R Circle)},
+            HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT f σ →
+              (∀ g ∈ HadwigerNelson.SpectralInputs.contVec T hT l, inner ℝ f g = 0) → σ A = 0
+TraceSplit def HadwigerNelson.Rigidity.colourCond :
+  {F : Subfield ℝ} →
+  [NumberField ↥F] → (μ : HadwigerNelson.SpectralChain.InvariantColouring F) → Fin 4 → ↥(MeasureTheory.Lp ℝ 2 μ.μ)
+TraceSplit def HadwigerNelson.Rigidity.colourFactor :
+  {F : Subfield ℝ} →
+  [NumberField ↥F] →
+    HadwigerNelson.SpectralChain.InvariantColouring F →
+      MeasurableSpace (↥(HadwigerNelson.SpectralChain.unitRing F) → Fin 4)
+TraceSplit def HadwigerNelson.Rigidity.colourInd :
+  {Ω : Type u_1} →
+  [inst : MeasurableSpace Ω] →
+    (μ : MeasureTheory.Measure Ω) →
+      [MeasureTheory.IsFiniteMeasure μ] → (κ₀ : Ω → Fin 4) → Measurable κ₀ → Fin 4 → ↥(MeasureTheory.Lp ℝ 2 μ)
+TraceSplit def HadwigerNelson.Rigidity.colourShift :
+  {F : Subfield ℝ} →
+  ↥(HadwigerNelson.SpectralChain.unitRing F) →
+    (↥(HadwigerNelson.SpectralChain.unitRing F) → Fin 4) → ↥(HadwigerNelson.SpectralChain.unitRing F) → Fin 4
+TraceSplit theorem HadwigerNelson.Rigidity.colourCond_ae_eq_condLaw :
+  ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (μ : HadwigerNelson.SpectralChain.InvariantColouring F) (j : Fin 4),
+  ↑↑(HadwigerNelson.Rigidity.colourCond μ j) =ᵐ[μ.μ]
+    HadwigerNelson.SpectralInputs.condLaw (HadwigerNelson.Rigidity.colourFactor μ) μ.μ (fun c => c) 0 j
+TraceSplit theorem HadwigerNelson.Rigidity.colourFactor.congr_simp :
+  ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (μ μ_1 : HadwigerNelson.SpectralChain.InvariantColouring F),
+  μ = μ_1 → HadwigerNelson.Rigidity.colourFactor μ = HadwigerNelson.Rigidity.colourFactor μ_1
+TraceSplit theorem HadwigerNelson.Rigidity.colourShift_add :
+  ∀ {F : Subfield ℝ} (x y : ↥(HadwigerNelson.SpectralChain.unitRing F)),
+  HadwigerNelson.Rigidity.colourShift (x + y) =
+    HadwigerNelson.Rigidity.colourShift x ∘ HadwigerNelson.Rigidity.colourShift y
+TraceSplit theorem HadwigerNelson.Rigidity.colourShift_zero :
+  ∀ {F : Subfield ℝ}, HadwigerNelson.Rigidity.colourShift 0 = id
+TraceSplit theorem HadwigerNelson.Rigidity.condLaw_comp_colourShift :
+  ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (μ : HadwigerNelson.SpectralChain.InvariantColouring F)
+  (x y : ↥(HadwigerNelson.SpectralChain.unitRing F)) (j : Fin 4),
+  HadwigerNelson.SpectralInputs.condLaw (HadwigerNelson.Rigidity.colourFactor μ) μ.μ (fun c => c) x j ∘
+      HadwigerNelson.Rigidity.colourShift y =ᵐ[μ.μ]
+    HadwigerNelson.SpectralInputs.condLaw (HadwigerNelson.Rigidity.colourFactor μ) μ.μ (fun c => c) (x + y) j
+TraceSplit theorem HadwigerNelson.Rigidity.inner_colourInd_comp_unit :
+  ∀ {F : Subfield ℝ} [NumberField ↥F] (μ : HadwigerNelson.SpectralChain.InvariantColouring F)
+  (u : ↑(HadwigerNelson.SpectralChain.unitVectors F)) (j : Fin 4),
+  ∫ (c : ↥(HadwigerNelson.SpectralChain.unitRing F) → Fin 4),
+      ↑↑(HadwigerNelson.Rigidity.colourInd μ.μ (fun c => c 0) ⋯ j) c *
+        ↑↑((MeasureTheory.Lp.compMeasurePreserving
+                  (HadwigerNelson.Rigidity.colourShift (HadwigerNelson.SpectralChain.uvRing u)) ⋯)
+                (HadwigerNelson.Rigidity.colourInd μ.μ (fun c => c 0) ⋯ j))
+          c ∂μ.μ =
+    0
+TraceSplit theorem HadwigerNelson.Rigidity.integral_colourCond_mul_comp :
+  ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (μ : HadwigerNelson.SpectralChain.InvariantColouring F)
+  (y : ↥(HadwigerNelson.SpectralChain.unitRing F)) (j : Fin 4),
+  ∫ (c : ↥(HadwigerNelson.SpectralChain.unitRing F) → Fin 4),
+      ↑↑(HadwigerNelson.Rigidity.colourCond μ j) c *
+        ↑↑((MeasureTheory.Lp.compMeasurePreserving (HadwigerNelson.Rigidity.colourShift y) ⋯)
+                (HadwigerNelson.Rigidity.colourCond μ j))
+          c ∂μ.μ =
+    ∫ (c : ↥(HadwigerNelson.SpectralChain.unitRing F) → Fin 4),
+      HadwigerNelson.SpectralInputs.condLaw (HadwigerNelson.Rigidity.colourFactor μ) μ.μ (fun c => c) 0 j c *
+        HadwigerNelson.SpectralInputs.condLaw (HadwigerNelson.Rigidity.colourFactor μ) μ.μ (fun c => c) y j c ∂μ.μ
+TraceSplit theorem HadwigerNelson.Rigidity.integral_colourInd_mul_comp :
+  ∀ {F : Subfield ℝ} {Ω : Type u_1} [inst : MeasurableSpace Ω] (μ : MeasureTheory.Measure Ω)
+  [inst_1 : MeasureTheory.IsProbabilityMeasure μ] (T : ↥(HadwigerNelson.SpectralChain.unitRing F) → Ω → Ω)
+  (hT : ∀ (y : ↥(HadwigerNelson.SpectralChain.unitRing F)), MeasureTheory.MeasurePreserving (T y) μ μ)
+  (κ : Ω → ↥(HadwigerNelson.SpectralChain.unitRing F) → Fin 4)
+  (hκ : ∀ (x : ↥(HadwigerNelson.SpectralChain.unitRing F)), Measurable fun ω => κ ω x),
+  (∀ (y : ↥(HadwigerNelson.SpectralChain.unitRing F)), ∀ᵐ (ω : Ω) ∂μ, κ (T y ω) 0 = κ ω y) →
+    ∀ (y : ↥(HadwigerNelson.SpectralChain.unitRing F)) (j : Fin 4),
+      ∫ (ω : Ω),
+          ↑↑(HadwigerNelson.Rigidity.colourInd μ (fun ω => κ ω 0) ⋯ j) ω *
+            ↑↑((MeasureTheory.Lp.compMeasurePreserving (T y) ⋯)
+                    (HadwigerNelson.Rigidity.colourInd μ (fun ω => κ ω 0) ⋯ j))
+              ω ∂μ =
+        μ.real {ω | κ ω 0 = j ∧ κ ω y = j}
+TraceSplit theorem HadwigerNelson.Rigidity.integral_condLaw_mul_nonneg :
+  ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (μ : HadwigerNelson.SpectralChain.InvariantColouring F)
+  (x y : ↥(HadwigerNelson.SpectralChain.unitRing F)) (j : Fin 4),
+  0 ≤
+    ∫ (c : ↥(HadwigerNelson.SpectralChain.unitRing F) → Fin 4),
+      HadwigerNelson.SpectralInputs.condLaw (HadwigerNelson.Rigidity.colourFactor μ) μ.μ (fun c => c) x j c *
+        HadwigerNelson.SpectralInputs.condLaw (HadwigerNelson.Rigidity.colourFactor μ) μ.μ (fun c => c) y j c ∂μ.μ
+TraceSplit theorem HadwigerNelson.Rigidity.measurable_colourShift :
+  ∀ {F : Subfield ℝ} (y : ↥(HadwigerNelson.SpectralChain.unitRing F)), Measurable (HadwigerNelson.Rigidity.colourShift y)
+TraceSplit theorem HadwigerNelson.Rigidity.setIntegral_compl_TA_re :
+  ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (μ : HadwigerNelson.SpectralChain.InvariantColouring F)
+  {σ : MeasureTheory.Measure (HadwigerNelson.SpectralChain.Dual F)},
+  HadwigerNelson.SpectralChain.IsTraceSpectral F μ.μ σ →
+    ∀ (u : ↑(HadwigerNelson.SpectralChain.unitVectors F)),
+      ∫ (χ : HadwigerNelson.SpectralChain.Dual F) in (HadwigerNelson.Rigidity.TA F)ᶜ,
+          (↑(χ (HadwigerNelson.SpectralChain.uvRing u))).re ∂σ =
+        -(4 / 3) *
+          ∑ j,
+            ∫ (c : ↥(HadwigerNelson.SpectralChain.unitRing F) → Fin 4),
+              HadwigerNelson.SpectralInputs.condLaw (HadwigerNelson.Rigidity.colourFactor μ) μ.μ (fun c => c) 0 j c *
+                HadwigerNelson.SpectralInputs.condLaw (HadwigerNelson.Rigidity.colourFactor μ) μ.μ (fun c => c)
+                  (HadwigerNelson.SpectralChain.uvRing u) j c ∂μ.μ
+TraceSplit theorem HadwigerNelson.Rigidity.setIntegral_compl_TA_re_nonpos :
+  ∀ {F : Subfield ℝ} [NumberField ↥F] (μ : HadwigerNelson.SpectralChain.InvariantColouring F)
+  {σ : MeasureTheory.Measure (HadwigerNelson.SpectralChain.Dual F)},
+  HadwigerNelson.SpectralChain.IsTraceSpectral F μ.μ σ →
+    ∀ (u : ↑(HadwigerNelson.SpectralChain.unitVectors F)),
+      ∫ (χ : HadwigerNelson.SpectralChain.Dual F) in (HadwigerNelson.Rigidity.TA F)ᶜ,
+          (↑(χ (HadwigerNelson.SpectralChain.uvRing u))).re ∂σ ≤
+        0
+TraceSplit theorem HadwigerNelson.Rigidity.setIntegral_compl_TA_rot :
+  ∀ {F : Subfield ℝ} [NumberField ↥F] (μ : HadwigerNelson.SpectralChain.InvariantColouring F)
+  {σ : MeasureTheory.Measure (HadwigerNelson.SpectralChain.Dual F)},
+  HadwigerNelson.SpectralChain.IsTraceSpectral F μ.μ σ →
+    ∀ (u : ↑(HadwigerNelson.SpectralChain.unitVectors F)),
+      ∫ (χ : HadwigerNelson.SpectralChain.Dual F) in (HadwigerNelson.Rigidity.TA F)ᶜ,
+          (↑(χ (HadwigerNelson.SpectralChain.uvRing u))).re ∂σ =
+        ∫ (χ : HadwigerNelson.SpectralChain.Dual F) in (HadwigerNelson.Rigidity.TA F)ᶜ, (↑(χ 1)).re ∂σ
+TraceSplit theorem HadwigerNelson.Rigidity.three_mul_tetra_add_one :
+  ∀ (i k : Fin 4), 3 * HadwigerNelson.SpectralChain.tetra i k + 1 = if i = k then 4 else 0
+TraceSplit theorem HadwigerNelson.Rigidity.trace_decomp :
+  ∀ {F : Subfield ℝ} [NumberField ↥F] {Ω : Type u_1} [inst : MeasurableSpace Ω] (μ : MeasureTheory.Measure Ω)
+  [inst_1 : MeasureTheory.IsProbabilityMeasure μ] (T : ↥(HadwigerNelson.SpectralChain.unitRing F) → Ω → Ω)
+  (hT : ∀ (y : ↥(HadwigerNelson.SpectralChain.unitRing F)), MeasureTheory.MeasurePreserving (T y) μ μ)
+  (κ : Ω → ↥(HadwigerNelson.SpectralChain.unitRing F) → Fin 4)
+  (hκ : ∀ (x : ↥(HadwigerNelson.SpectralChain.unitRing F)), Measurable fun ω => κ ω x),
+  (∀ (y : ↥(HadwigerNelson.SpectralChain.unitRing F)), ∀ᵐ (ω : Ω) ∂μ, κ (T y ω) 0 = κ ω y) →
+    ∀ {σ : MeasureTheory.Measure (HadwigerNelson.SpectralChain.Dual F)},
+      HadwigerNelson.SpectralChain.IsTraceSpectral F (MeasureTheory.Measure.map κ μ) σ →
+        ∀ {σc : Fin 4 → MeasureTheory.Measure (HadwigerNelson.SpectralChain.Dual F)},
+          (∀ (j : Fin 4),
+              HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT
+                (HadwigerNelson.Rigidity.colourInd μ (fun ω => κ ω 0) ⋯ j) (σc j)) →
+            3 • σ + MeasureTheory.Measure.dirac 1 = 4 • ∑ j, σc j
+TraceSplit theorem HadwigerNelson.SpectralChain.InvariantColouring.measurePreserving_shift :
+  ∀ {F : Subfield ℝ} (μ : HadwigerNelson.SpectralChain.InvariantColouring F)
+  (y : ↥(HadwigerNelson.SpectralChain.unitRing F)),
+  MeasureTheory.MeasurePreserving (HadwigerNelson.Rigidity.colourShift y) μ.μ μ.μ
+'HadwigerNelson.Rigidity.aPlusOfR88' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.aplus_model' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.spectral_contChars_null_of_orthogonal' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Rigidity.IsSpectralMeasureOf.unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.three_mul_tetra_add_one' depends on axioms: [propext, Classical.choice, Quot.sound]
