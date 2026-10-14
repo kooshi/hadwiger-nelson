@@ -1064,6 +1064,23 @@ def self_test(mods):
             om_ok = False
         print(f"partner 'a drop_omit entry (Centers.lean:{ol}) removes exactly that line': {'REMOVED' if om_ok else 'FAILED'}")
         ok = ok and om_ok
+        # drop_omit's other refusal (FS131-IPB1, the coordinator's item 769 ruling 3): an entry on an `… in` line that
+        # is attached to a copied declaration and is no `omit` (that `omit` line made an `include e in` in a copy of
+        # the source) must be refused by that branch — read from its message, so that a refusal for another reason
+        # (an unused entry, an unclassified line) does not count
+        src_i = list(src_c)
+        src_i[ol - 1] = "include e in"
+        try:
+            generate(["OAI158Centers"], tables={"OAI158Centers": dict(tc, drop_omit=tc["drop_omit"] + [[ol, "planted"]])},
+                     sources={REL_OF_MOD["OAI158Centers"][0]: src_i})
+            why_i = None
+        except Refused as e:
+            why_i = str(e)
+        n += 1
+        hit_i = why_i is not None and "is not a one-line `omit … in`" in why_i
+        print(f"plant 'a drop_omit entry on an `include … in` line (Centers.lean:{ol} in a copy)': "
+              f"{'REFUSED' if hit_i else 'SILENT' if why_i is None else 'REFUSED FOR ANOTHER REASON: ' + why_i}")
+        ok = ok and hit_i
         # an upstream copy that is not upstream
         expect("an upstream entry removed", refused_upstream())
         # licence

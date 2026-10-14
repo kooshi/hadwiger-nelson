@@ -1,0 +1,27 @@
+unplanted: PASS (as it must)
+plant 'a generated file changed by two spaces': REFUSED
+plant 'a generated file absent': REFUSED
+plant 'the DECL line of Spectral.K_pow_surjective removed': REFUSED
+partner 'the CONE lines of Spectral.K_pow_surjective removed' (whole files copy it anyway): AGREES
+plant 'a CONE line in a file outside the plan': REFUSED
+plant 'a NORANGE constant that is no auxiliary': REFUSED
+plant 'a patch that does not apply': REFUSED
+plant 'a patch into a statement': REFUSED
+plant 'a patch into a definition': REFUSED
+partner 'a patch into a proof': generation ACCEPTED, file then DIFFERS
+plant 'an adaptation in a shared declaration (`Spectral.kCoeff`)': REFUSED
+plant 'an adaptation that does not apply': REFUSED
+plant 'OAI158Basic: a scoped entry withdrawn (an instance in neither table)': REFUSED
+plant 'OAI158Basic: a global_instances entry withdrawn': REFUSED
+plant 'the scan: `set_option` in a copied proof': REFUSED
+plant 'the scan: `IO.` in a copied line': REFUSED
+plant 'an unclassified `#eval` line': REFUSED
+partner 'an indented declaration (Spectral.K_pow_surjective) copied as such': COPIED
+plant 'a drop_omit entry on a line that is no `omit`': REFUSED
+partner 'a drop_omit entry (Centers.lean:525) removes exactly that line': REMOVED
+plant 'a drop_omit entry on an `include … in` line (Centers.lean:525 in a copy)': REFUSED
+plant 'an upstream entry removed': REFUSED
+plant 'the licence copy changed by one byte': REFUSED
+plant 'the licence copy absent': REFUSED
+plant 'the clone at another commit': REFUSED
+SELF-TEST OK: 21 plants refused and 4 partners accepted
