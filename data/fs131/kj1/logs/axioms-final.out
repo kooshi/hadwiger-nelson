@@ -1,0 +1,28 @@
+ThreeColourCharacter: 13 records (11 public) — CLEAN 13
+TorsionExtraction: 30 records (20 public) — CLEAN 30
+ThreeColourCriterion: 37 records (17 public) — CLEAN 31, WEIL 6
+    WEIL public HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine
+    WEIL public HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine_of_colorable_three
+    WEIL private HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine_of_quotient
+    WEIL public HadwigerNelson.ThreeColourCriterion.exists_maximal_of_torsion
+    WEIL public HadwigerNelson.ThreeColourCriterion.exists_normOne_zero_of_card_ne_nine
+    WEIL public HadwigerNelson.ThreeColourCriterion.targetFloor_four_weil
+DyadicQuadratic: 34 records (13 public) — CLEAN 34
+UpperHalf: 36 records (30 public) — CLEAN 36
+QuadraticPrime: 21 records (13 public) — CLEAN 21
+UpperHalfValues: 11 records (9 public) — CLEAN 11
+ThreeFourColours: 46 records (31 public) — CLEAN 39, WEIL 7
+    WEIL public HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_eq_localBound_of_le_four
+    WEIL public HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_eq_three_iff
+    WEIL public HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_le_three_iff
+    WEIL public HadwigerNelson.ThreeFourColours.colorable_three_planeOver_iff
+    WEIL public HadwigerNelson.ThreeFourColours.exists_maximal_card_nine_sqrt_three
+    WEIL public HadwigerNelson.ThreeFourColours.localBound_le_chromaticNumber_of_le_four
+    WEIL public HadwigerNelson.ThreeFourColours.localBound_le_chromaticNumber_or_four_le
+UpperHalfCorollaries: 4 records (4 public) — CLEAN 4
+PLANTED: 3 records (3 public) — CLEAN 1, SORRY 1, WEIL 1
+    WEIL public FS131KJ1Axioms.planted_weil
+    SORRY public FS131KJ1Axioms.planted_sorry   from FS131KJ1Axioms.planted_sorry
+CONTROL: 3 of 3 planted records read as planted (a sorry shows as SORRY, the import as WEIL)
+SORRY records: 0, equal to the expected list (0)
+PASS
