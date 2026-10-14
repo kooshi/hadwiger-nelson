@@ -101,3 +101,77 @@ bound): **75 records — CLEAN 70, UPSTREAM 5, FAIL 0** (`axioms1-read.out`). `t
 `Rigidity.noRamifiedStableDyadic_of_tca` and `Rigidity.tca_uniform`** — no leaf of the count's own (the one line sent to
 the coordinator). Control (`AxiomsPlant.lean`: a planted `sorry` and a planted axiom): **2 of 2 read FAIL**
 (`axioms1-plant-read.out`).
+
+## Stage 3 — SAVED: M13 — the three public leaves composed; Weil at level one, the ratio bound at every level and the tail proved; five named private leaves
+
+`Rigidity/ClassRatio` (≈ 330 lines net; one import line added, `Rigidity/ChainAtTA`, for `IsRamified` and
+`colorable_two_levelTarget_one_of_isRamified`; its `ARCHITECTURE.md` row's imports cell carries it). No statement and no
+definition of the file changed (§ the check below); every addition is private. The private vocabulary: `levelSet P m`, the
+connection set of `levelTarget P m`; `CharBound P m κ` — every non-trivial additive character of `𝓞 ⧸ P^m` sums to real
+part at least `−κ·|S_m|` over it.
+
+**Proved** (each private unless named):
+
+| helper | what it says | lines |
+|---|---|---|
+| `ratioAtMost_of_charBound` | the ratio bound at every level: `CharBound P m κ` for all `m ≥ 1`, `κ ≥ 0` ⟹ `RatioAtMost P (κ/(1 + κ))` (`RatioBound.card_mul_le_of_indep`; `1 ∈ S_m`, so `|S_m| > 0`) | ≈ 50 |
+| `charBound_one_weil` | **Weil at level one**: at a stable prime with `2 ∉ P` and `|𝓞 ⧸ P| = Q²`, `CharBound P 1 (2√Q/(Q + 1))` — the residue field with its involution (`card_fixed_of_involution` at the residue of `i` gives `Q ≡ 3 (mod 4)`, `involution_eq_pow` gives `σ = (·)^Q`, `card_normOne` gives `|S₁| = Q + 1`), then `StandingFive.normOne_charSum_ge` over `kloostermanBound_of_ringChar_ne_two` | ≈ 65 |
+| `exists_card_sq` | at an odd stable prime, `|𝓞 ⧸ P| = Q²` with `Q ≡ 3 (mod 4)` | ≈ 20 |
+| `card_ne_fifteen_sq` | no residue field has `15²` elements | ≈ 15 |
+| `ratioAtMost_weil`, `weil_ratio_le`, `ratioAtMost_weil_lt` | the Weil branch at every level over Lemma P; its constant `κ/(1 + κ)` is `≤ c` when `2√Q(1 − c) ≤ c(Q + 1)`, so `< 1/4` (at `249/1000`) from `Q ≥ 35` and `≤ 2/9` from `Q ≥ 49` | ≈ 50 |
+| `finite_stablePrime_absNorm_le`, `stablePrime_ext`, `ratioAtMost_mono`, `finite_quot_pow`, `exists_I_int`, `two_div_le_weil`, `sqrt_ge_of_sq_le` | small facts | ≈ 45 |
+| **`exists_uniform_tail`** (public) | `c = 2/9`, `B = max (2^[𝓞 L : ℤ]) 2401`: a stable prime of norm above `2^[L:ℚ]` does not hold `2` (`Ideal.absNorm_dvd_absNorm_of_le`, `absNorm_span_natCast`), so `Q ≥ 49`, and the Weil branch | ≈ 25 |
+| **`tca_uniform`** (public) | the tail's constant and the maximum of `TCA`'s constants over the finitely many stable primes of norm at most `B` (`Ideal.finite_setOf_absNorm_le`, `Finset.exists_max_image`) | ≈ 20 |
+| **`ratioAtMost_of_five_le_chromaticNumber`** (public) | the case split: ramified — excluded (`χ ≤ 2`); dyadic unramified — leaf; odd: `Q ≥ 35` — the Weil branch; `Q < 35`, `Q ≡ 3 (mod 4)`: `3, 7` excluded by a leaf, `15` impossible, `11, 19` the certificate leaf, `23, 27, 31` the exact-spectrum leaf, then Lemma P and the ratio bound | ≈ 35 |
+
+**The five named leaves** (private, `sorry`), each restated in one line:
+
+| leaf | statement | route (owed) |
+|---|---|---|
+| `charBound_of_charBound_one` — **Lemma P** | `2 ∉ P`, `|𝓞 ⧸ P| = Q²`, `κ ≥ 2/(Q + 1)`, `CharBound P 1 κ` ⟹ `CharBound P m κ` for every `m ≥ 1` | below |
+| `ratioAtMost_dyadic` | `2 ∈ P`, `¬ IsRamified P`, `5 ≤ χ(levelTarget P 1)` ⟹ `∃ c < 1/4, RatioAtMost P c` | KR1 § 2.6 (c): `Q = 64` exact, `128` `Floor128`, `Q ≥ 256` EN1-UQ4; Lemma P's dyadic form (`|λ| ≤ Q^{m−1}`) |
+| `chromaticNumber_le_four_of_small` | `2 ∉ P`, `|𝓞 ⧸ P| = Q²`, `Q ∈ {3, 7}` ⟹ `χ(levelTarget P 1) ≤ 4` | the level-one target as `Γ_Q` (K3's isomorphism), then the library's colourings of `UD(𝔽₃, 2)`, `UD(𝔽₇, 2)` |
+| `ratioAtMost_cert` — **the link to line `fs131-wc15`** | `2 ∉ P`, `|𝓞 ⧸ P| = Q²`, `Q ∈ {11, 19}` ⟹ `∃ c < 1/4, RatioAtMost P c` | closed at the join: K1 (`cert11_ok`, `cert19_ok`; not yet built), K2 `FibreCertSound.sum_le_of_certOK` (proved there; read by address, `Arith/FibreCertSound.lean:2620` at `1e0990dad`, not copied), K3 (`levelTarget P 1 ≃g Cay((ℤ/q)², S)`), K4's fibre-share half, K5 (`U₁₁/121`, `U₁₉/361 < 1/4`) |
+| `charBound_one_exact` | `2 ∉ P`, `|𝓞 ⧸ P| = Q²`, `Q ∈ {23, 27, 31}` ⟹ `∃ κ < 1/3, 2/(Q + 1) ≤ κ ∧ CharBound P 1 κ` | KC13 § 5.3: rational cosine bounds at 23 and 31, the integer spectrum at 27 (FS100-G27) |
+
+**Lemma P's route, made precise** (my reading; one mind; for the next implementer). `R_m = 𝓞 ⧸ P^m`, `K = P^{m−1}/P^m`
+(a one-dimensional `𝓞/P`-space; `P` is inert: stable, and `σ` is non-trivial on `𝓞/P` because `2 ∉ P`), `S_m` the
+norm-one set. Induction on `m`. For `m ≥ 2` and `x ∈ S_m`, `(x + e)σ(x + e) = 1 + Tr(σ(x)e)` for `e ∈ K` (`eσ(e) ∈ P^{2m−2}
+⊆ P^m`), so `S_m ∩ (x + K) = x + W_x`, `W_x = {e ∈ K : Tr(σ(x)e) = 0}` — a `k₀`-line of `K` (`Q` elements) depending only on
+`x mod P`, and every point of `S_{m−1}` lifts (Hensel), so the fibres of `S_m → S_{m−1}` all have `Q` points.
+(A) `ψ` trivial on `K`: `ψ = ψ' ∘ π` with `ψ' ≠ 1` on `R_{m−1}`, and `Σ_{S_m} ψ = Q·Σ_{S_{m−1}} ψ'`, which the induction bounds by
+`−κ·Q·|S_{m−1}| = −κ|S_m|`. (B) `ψ` non-trivial on `K`: averaging over the fibres, `Σ_{S_m} ψ = Σ_{x ∈ S_m} ψ(x)·avg_{W_x} ψ`,
+and `avg_{W_x} ψ` is `1` or `0` as `ψ` is trivial on `W_x` or not; the kernel of `ψ|_K`, an `𝔽_p`-hyperplane, holds exactly
+one `k₀`-line (a `k₀`-linear functional `λ` with `ψ = ψ₀ ∘ Tr ∘ λ` has its kernel there, and `λ` kills any other `k₀`-line it
+contains), and `W_x = x̄⁻¹·V₀ = x·V₀` is that line for at most two residues `x mod P` (a ratio in `k₀` of norm one is `±1`).
+So `|Σ_{S_m} ψ| ≤ 2|S_m|/(Q + 1) ≤ κ|S_m|`. Price, from this reading: 500–900 lines (fibre constancy by Hensel ≈ 150;
+`K` as a one-dimensional space with `σ`, the line count ≈ 250; the character descent along `R_m → R_{m−1}` ≈ 100; assembly
+≈ 100–200). The planner's K4 (1,000–1,800) holds Lemma P and the fibre shares together.
+
+**Re-priced from the first two leaves** (`ratioAtMost_of_charBound`, ≈ 50 lines in two elaborations; `charBound_one_weil`,
+≈ 65 lines in three): the Weil branch, the tail and `tca_uniform` came in at ≈ 330 lines in all, inside one stage. The
+map priced M13 at 2,500–5,000 lines (KR1 § 2.6), with no line for this composition; what is left is the five leaves:
+Lemma P 500–900 (above), the dyadic branch 400–800 (64 exact, 128's ratio from `Floor128`, EN1-UQ4 ≈ 300), the exclusions
+at 3 and 7 with K3 300–500, the exact spectra 1,100–1,800 (KC13 § 5.3), and the certificate link's K3/K4/K5 on the join
+(KC13 § 5.2, less K2, which is proved). About **2,800–4,500 lines left**, of which Lemma P alone unblocks the count:
+`tca_uniform` now rests on Lemma P only (and Weil's bound).
+
+**Build 2** under the slot (`data/fs131/icm1/logs/build-2.log`, full output
+`build/gate/build/20261014T174250Z-4099276.log`): **OK — 257 of 257 batches, 7 modules rebuilt, 7 m 40 s, exit 0**;
+`ClassRatio` rebuilt and its downstream (`CountResidue`, `CountCompletion`, `CountExtension`, `CountDescent`,
+`CountModels`) with no warning; the only warnings from this job's files are the five named leaves' `declaration uses
+'sorry'` (`ClassRatio.lean` lines 174, 242, 247, 255, 262). `tools/check_architecture.py`: **PASS**
+(`logs/architecture-2.log`).
+
+**No statement changed, from the kernel's side, across the new import line** (`statements-after2.txt` against stage 1's;
+`statements-compare2.out`): **SAME 41, CHANGED 0, MISSING 0, ADDED-PUBLIC 0**, ADDED-INTERNAL 105, NEW-MODULE 3 — PASS;
+the four plants fire (`statements-plant2.out`). The import of `Rigidity/ChainAtTA` moved no stored instance.
+
+**Axioms** (`axioms2.out`, `axioms2-read.out`, the five leaves named by `--leaves`): **96 records — CLEAN 83, IMPORTED 1,
+UPSTREAM 12, FAIL 0**. IMPORTED: `charBound_one_weil` — `[propext, Classical.choice, Quot.sound,
+StandingFive.kloosterman_bound]`. UPSTREAM: the five leaves themselves; `ratioAtMost_weil`, `ratioAtMost_weil_lt`,
+`exists_uniform_tail` and **`tca_uniform`** — Weil's bound and `sorryAx` from **Lemma P alone**
+(`charBound_of_charBound_one`); `ratioAtMost_of_five_le_chromaticNumber`, `tca_of_five_le_localBound` — Weil and the five
+leaves; and **`count_of_oneAvoidingDensityBound`** — Weil's bound and `sorryAx` from
+`Plane.upperDensity_le_of_oneAvoidingDensityBound`, `Rigidity.noRamifiedStableDyadic_of_tca` and Lemma P. Control: **2 of
+2 planted records read FAIL** (`axioms2-plant-read.out`).
