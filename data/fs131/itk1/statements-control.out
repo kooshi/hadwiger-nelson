@@ -1,0 +1,15 @@
+compared: 141 named constants of the first dump (kinds, types, modules), 40 data definitions' values, 17 example heads of the base files
+internal (not compared): 35 before, 35 after
+new public constants in the second dump: 1 (allow-list: 0)
+  NEW THM HadwigerNelson.Rigidity.planted_new_public
+new private constants in the second dump: 0
+examples in the working files that the base does not hold: 0
+TYPE     THM HadwigerNelson.Rigidity.eq_zero_of_mem_oAnn: the stored statement differs
+MISSING  THM HadwigerNelson.Rigidity.exists_one_lt_absAt: in the first dump, not in the second
+VALUE    DEF HadwigerNelson.Rigidity.box: the stored definition differs
+KIND     HadwigerNelson.Rigidity.TateModel.exists_collision: THM -> DEF
+MODULE   HadwigerNelson.Rigidity.TateModel.shell: Proofs.HadwigerNelson.Rigidity.WanderingShells -> Proofs.HadwigerNelson.Rigidity.GlobalPoint (a move the job was not given)
+TYPE     THM HadwigerNelson.Rigidity.zeroEntropyCarried_of_numberField: the stored statement differs
+AXIOMS   the modules must declare no axiom: ['HadwigerNelson.Rigidity.planted_axiom']
+NEW      THM HadwigerNelson.Rigidity.planted_new_public: a new public constant that the allow-list does not hold
+CONTROL: 8 of 8 planted faults reported — the check can fail

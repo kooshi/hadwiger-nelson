@@ -1,0 +1,6 @@
+compared: 141 named constants of the first dump (kinds, types, modules), 40 data definitions' values, 17 example heads of the base files
+internal (not compared): 35 before, 35 after
+new public constants in the second dump: 0 (allow-list: 0)
+new private constants in the second dump: 0
+examples in the working files that the base does not hold: 0
+PASS: no statement and no definition changed
