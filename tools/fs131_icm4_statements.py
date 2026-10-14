@@ -240,7 +240,7 @@ def main(argv):
         fired = len(m4) > len(binder_misses(before))
         print(f"PLANT binder in {ce[0]}: misses={len(m4)} -> {'FIRED' if fired else 'SILENT'}")
         ok &= fired
-        pv = [n for n in border if private_user(n) and n in after and (private_user(n) or "").endswith("card_fibre")]
+        pv = [n for n in border if private_user(n) and n in after and (private_user(n) or "").endswith("colorable_four_dyadic_small")]
         if not pv:
             print("FAIL: no private leaf to plant into")
             return 1

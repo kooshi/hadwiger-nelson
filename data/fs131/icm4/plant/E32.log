@@ -1,0 +1,4 @@
+slot: admitted icm4f: mem 4 GiB (hard cap), cpus 0,1
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wch/data/fs131/icm4/plant/DyadicCerts_E32.lean:83:71: error: Tactic `decide` proved that the proposition
+  colourCheck 10 P10 (2 ^ 5) E32.1 E32.2 = true
+is false

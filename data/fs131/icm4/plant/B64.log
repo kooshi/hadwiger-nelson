@@ -1,0 +1,10 @@
+slot: admitted icm4f: mem 4 GiB (hard cap), cpus 0,1
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wch/data/fs131/icm4/plant/DyadicCerts_B64.lean:105:50: error: [Error pretty printing: maximum recursion depth has been reached
+use `set_option maxRecDepth <num>` to increase limit
+use `set_option diagnostics true` to get diagnostic information]
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wch/data/fs131/icm4/plant/DyadicCerts_B64.lean:116:2: error: Type mismatch
+  h1
+has type
+  (pass 12 P12 63 (63 * 65) 1 0 0).2 / 2 ^ (8 * r) % 256 ≤ B64
+but is expected to have type
+  (pass 12 P12 63 (63 * 65) 1 0 0).2 / 2 ^ (8 * r) % 256 ≤ 40

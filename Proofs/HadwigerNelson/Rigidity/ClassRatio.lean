@@ -2,6 +2,7 @@ import Proofs.HadwigerNelson.Arith.WeilKloosterman
 import Proofs.HadwigerNelson.Rigidity.ChainAtTA
 import Proofs.HadwigerNelson.Arith.GapSeven
 import Proofs.HadwigerNelson.Arith.CircleCos
+import Proofs.HadwigerNelson.Arith.DyadicCerts
 
 /-!
 # CLS: a local bound of at least five gives T-C(A) at `S = ∅`; the uniform tail (FS-131, job FS131-KR1; module M13; skeleton)
@@ -1648,16 +1649,18 @@ by an `𝔽₂`-linear colouring — a codimension-2 `𝔽₂`-subspace of `𝔽
 finite fields; its proof is a certificate in a model of `𝔽_{Q²}` (as `Arith/Floor128`'s at `2¹⁴`). -/
 private theorem colorable_four_dyadic_small {f : ℕ} (hf2 : 2 ≤ f) (hf5 : f ≤ 5) (k : Type) [Field k] [Fintype k]
     (hk : Fintype.card k = (2 ^ f) ^ 2) :
-    (SimpleGraph.fromRel fun x y : k => (x - y) ^ (2 ^ f + 1) = 1).Colorable 4 := by
-  sorry
+    (SimpleGraph.fromRel fun x y : k => (x - y) ^ (2 ^ f + 1) = 1).Colorable 4 :=
+  -- FS131-ICM4: `Arith/DyadicCerts`' certificates, read through `Arith/BinaryField`'s bridge
+  DyadicCerts.colorable_four_two_pow hf2 hf5 k hk
 
 /-- **The exact spectrum at `Q = 64`** (X26B-T1: `λ_min(U₆₄) = −15`, ratio `3/16`): every non-trivial additive character of a
 field of `64²` elements sums to real part at least `−15` over `μ₆₅`. A closed statement about finite fields, of
 `Floor128.charSum_128_ge`'s shape at `2¹²`. -/
 private theorem charSum_64_ge {k : Type} [Field k] [Fintype k] [DecidableEq k] (hcard : Fintype.card k = 64 ^ 2)
     (ψ : AddChar k ℂ) (hψ : ψ ≠ 1) :
-    -(15 : ℝ) ≤ (∑ u ∈ Finset.univ.filter (fun u : k => u ^ (64 + 1) = 1), ψ u).re := by
-  sorry
+    -(15 : ℝ) ≤ (∑ u ∈ Finset.univ.filter (fun u : k => u ^ (64 + 1) = 1), ψ u).re :=
+  -- FS131-ICM4: `Arith/DyadicCerts`' class counts at degree 12, read through `Arith/BinaryField`'s bridge
+  DyadicCerts.charSum_64_ge hcard ψ hψ
 
 -- FS131-ICM3: **EN1-UQ4, the fourth-moment count** (`plans/FS131-EN1-derivation.md` § 7.3), over a field `k` of `Q²`
 -- elements of characteristic 2: `uqSum b = Σ_{u ∈ μ} ψ(bu)`; `Σ_b uqSum(b)⁴ = |k|·N`, `N` the solutions of

@@ -1,0 +1,9 @@
+partner (unplanted): rc=0 errors=0 PASS
+P4: 'def P4 : ℕ := 19' -> 'def P4 : ℕ := 31': rc=1, errors at lines [64, 77]; prim4 (line 64) REFUSED (fired)
+P12: 'def P12 : ℕ := 4179' -> 'def P12 : ℕ := 4097': rc=1, errors at lines [72, 136]; prim12 (line 72) REFUSED (fired)
+E4: 'def E4 : ℕ × ℕ := (0, 1)' -> 'def E4 : ℕ × ℕ := (0, 0)': rc=1, errors at lines [77]; colour4 (line 77) REFUSED (fired)
+E8: 'def E8 : ℕ × ℕ := (2, 16)' -> 'def E8 : ℕ × ℕ := (2, 2)': rc=1, errors at lines [79]; colour8 (line 79) REFUSED (fired)
+E16: 'def E16 : ℕ × ℕ := (0, 28)' -> 'def E16 : ℕ × ℕ := (0, 0)': rc=1, errors at lines [81]; colour16 (line 81) REFUSED (fired)
+E32: 'def E32 : ℕ × ℕ := (3, 344)' -> 'def E32 : ℕ × ℕ := (3, 3)': rc=1, errors at lines [83]; colour32 (line 83) REFUSED (fired)
+B64: 'def B64 : ℕ := 40' -> 'def B64 : ℕ := 39': rc=1, errors at lines [105, 116]; counts64_ok (line 105) REFUSED (fired)
+ALL PLANTS FIRED
