@@ -8,7 +8,23 @@ only), possibly a new module under `Plane/OneClass/` for the two new pieces, thi
 
 ## Theorems this phase proved
 
-(Filled at the build of record.)
+Each [kernel], printed from the built tree (stage 4.3; `data/fs133/ipq1/axioms-built.out`); statements FS133-K1's,
+one binder dropped (stage 3.3, ruled by the standing word of item 726); proofs this job's. "Std" is
+`[propext, Classical.choice, Quot.sound]`; "Std + RF" is those and the declared outside theorem
+`HadwigerNelson.Outside.OAI158.Spectral.residual_fourier`.
+
+`Proofs/HadwigerNelson/Plane/OneClass/Pair.lean`:
+- `OneClass.exists_measurable_admissibleAe` (Q4) — C133-PAIR forward: a labelling of the algebraic plane admissible
+  for an algebraic pattern gives a labelling of the plane with Borel fibres admissible almost everywhere. Std + RF.
+- `OneClass.exists_admissibleOn_of_ae` (Q5) — C133-PAIR converse: a labelling with Lebesgue-measurable fibres
+  admissible almost everywhere, for a pattern at positive distances (no countability, no algebraicity), gives a
+  labelling admissible at every pair. Std.
+- With these, both clauses of **C133-PAIR** have no `sorry` beneath them: `OneClass.exists_admissibleOn_univ_iff_ae`
+  and `OneClass.exists_admissibleOn_univ_iff_algPlane` — each Std + RF.
+- Six private helpers (not records): `kCoeff_one_pair`, `kCoeff_mul_pair`, `isPlaneSystem_lab`, `dist_kCoeff_mul`,
+  `exists_slice_ne_zero`, `prod_pairs_ne_zero`.
+
+The module `Plane/OneClass` now has no `sorry`.
 
 ## Stage 1 — SAVED: the readback, the leaves restated, the stored statements dumped before any edit
 
@@ -132,3 +148,150 @@ output `PairAx-q5.out`): `exists_admissibleOn_of_ae` on `[propext, Classical.cho
 `exists_measurable_admissibleAe`, `exists_admissibleOn_univ_iff_ae`, `exists_admissibleOn_univ_iff_algPlane` on those
 and `HadwigerNelson.Outside.OAI158.Spectral.residual_fourier` — each the plan's § 5.5 list. The build of record and the
 receipts from the built tree are stage 4.
+
+## Stage 4 — SAVED: the build of record, and every receipt from the built tree
+
+**4.1 The build** (Done, item 4). `data/fs133/ipq1/build.sh build-record` (the slot at 10 GiB and 4 cpus,
+`MEMMAX=10G BATCH=8`): **`build: OK — 249 of 249 batches, 2 module(s) rebuilt, 0 module(s) with warnings, 7m16s`**,
+exit 0 (`data/fs133/ipq1/build-record.log`, full output `build-record-full.log`): `✔ Built
+Proofs.HadwigerNelson.Plane.OneClass.Pair (4.4s)` and `Proofs` — **no warning from `Pair`**. `sorry` in the seven
+files of `Plane/OneClass`: 0 each (`grep -c`); in `Outside/OAI158Transfer`, one line, a docstring saying "no
+`sorry`". No generated constant from another module's definition: every constant compiled into `Pair`'s `.olean`
+listed (`data/fs133/ipq1/lean/PairConstants.lean` → `pair-constants-built.out`, 32): the 19 named of the dump, the six
+private helpers, `AdmissibleAe._proof_1`, two `_simp_1_*` auxiliaries inside this job's proofs and
+`admissibleOn_colourPattern_iff._simp_1_3`, `IsAlgPattern.mk._flat_ctor`; the two `eq_1` lemmas are of `Pair`'s own
+definitions (`AdmissibleOn`, `colourPattern`) and were there before (24 constants before: 32 = 24 + 6 + 2).
+
+**4.2 No statement changed but the ruled one** (Done, item 4), from the kernel's side.
+`tools/fs133_ipq1_moved.py` (FS133-ICD1's reader, its verdicts unchanged, with one more ruled verdict,
+`--binder-dropped=N:B`: the second dump's full print must equal the first's with the leading-spine binder `B` removed
+and every de Bruijn index beneath it that points past it lowered by one — an index pointing at it fails — and the
+erased print the same with every local `@m` after the binder lowered; a small parser of the dump's print, which
+round-trips all 404 prints of the first dump). `--strict --binder-dropped=HadwigerNelson.OneClass.exists_admissibleOn_of_ae:hcount`,
+`moved/before.out.xz` (stage 1) against `moved/built.out.xz` (sha256 in `built.sha256`):
+**175 constants — 174 IDENTICAL, 1 BINDER-DROPPED (`exists_admissibleOn_of_ae`); `MOVED OK`**; new: the six private
+helpers, nothing public (`moved/before-to-built.txt`). The other six modules: every constant IDENTICAL.
+**Controls** (`moved/control-built.txt`): nine plants — the dropped binder left in, another change beside the drop,
+the named binder absent from the first print, the dropped binder read in the first print (checked separately to land
+on the verdict `DROPPED-BUT-BINDER-READ`), and FS133-ICD1's five (a constant changed in both prints, in the full print
+only under `--strict`, removed, made an axiom, moved to another module) — each fails the run and is named; unplanted,
+no failure. **End to end** (`data/fs133/ipq1/plant/`): a copy of the final `Pair` elaborated with FS133-IB2's footer at
+another path reads **19 of 19 IDENTICAL** to the compiled module (`copy-verdict.txt`); the copy with `hcount` put back
+(and passed by the two callers) reads `DIFFERENT … exists_admissibleOn_of_ae`, `MOVED FAILED: 1`, exit 1, against the
+compiled module (`planted-verdict.txt`) — **and 19 of 19 IDENTICAL against the dump made before any edit**
+(`planted-vs-before.txt`): the statement with the binder restored is the statement FS133-K1 stored, so the drop is
+the only stored difference, by a second route; the copy against the first dump under the ruled verdict reads
+BINDER-DROPPED 1, IDENTICAL 18 (`copy-vs-before.txt`). **The ruled difference**: one, the binder `hcount` of
+`exists_admissibleOn_of_ae` (stage 3.3).
+
+**4.3 The axioms of every public declaration of the module** (Done, item 4). `data/fs133/ipq1/lean/Axioms.lean`
+(FS133-ICD1's 125 records, list unchanged) → `axioms-built.out`; `tools/fs133_ipq1_axioms.py` (FS133-ICD1's reader,
+unchanged but its first line) against `axioms-expect.tsv` (FS133-ICD1's table, its four OPEN rows given their final
+kinds by the plan's § 5.5: `exists_admissibleOn_of_ae` CLEAN, the other three IMPORTED): **125 records — 111 on the
+standard three, 14 on those and `Spectral.residual_fourier`, none on `sorryAx`; `AXIOMS OK`** (`axioms-verdict.out`) —
+every record matches § 5.5, and no record of its standard-three list prints the import. Controls
+(`axioms-control.out`): a `sorryAx` in a clean record, the import in a clean record, the import missing from an
+imported record, a record removed — each reported; end to end, a theorem on `sorry` planted beside the 125
+(`lean/AxiomsPlanted.lean`) prints `[sorryAx]` and is reported, exit 1 (`axioms-planted-verdict.out`).
+
+**4.4 The models, checked** (`data/fs133/ipq1/work/Models.lean` → `Models.out`, no error, no warning): the brick
+colouring meets `exists_admissibleOn_of_ae`'s and `exists_measurable_admissibleAe`'s hypotheses at once at
+`colourPattern (Fin 7)` and both conclusions are reached from it; the private helpers' hypotheses, written out, are
+met by `univ` with `x = 0, y = 1, r = 1`, and by the point mass of a constant labelling.
+
+**4.5 The environment linters — one failure, not in `Pair`.** `lake lint --no-build -- --no-build --trace` under the
+slot (`data/fs133/ipq1/lint.out`): exit 1, **one message, `unusedArguments`, at
+`HadwigerNelson.Plane.ofReal_integral_le_measure_pos` (`Plane/OneClass/SectionDensity.lean` l. 156): "argument 4:
+[MeasureTheory.IsProbabilityMeasure μ]"** — FS133-IB1's module (its last commit `9e779ee61`), outside this job's
+touches; the inequality holds for any measure, so the binder is unread, and dropping it changes a stored statement
+of `SectionDensity`. Every other linter passed; no message names `Pair`. Held for the coordinator.
+
+**4.6 Not run here** (the landing's, on the joined tree): `scripts/axioms.sh`, `vacuity.sh`, `dupnames.sh`,
+`assumptions.sh`. Every private helper's name carries its module.
+
+## Drafts for the front page (files this job does not write; each names its slot) — Stage 5, SAVED
+
+*The gate's counts for `CLAUDE.md` § The gate and § Trust ledger are the landing's, from the whole-library gate on the
+joined tree (stage 4.6); this job's contribution to them is DQ1's four records. C133-PAIR has no ledger row (it is
+the derivation's entry; row 129 carries C133-ONE, whose regrade FS133-ICD1's DD4 drafted), so no row is regraded
+here; DQ3 is its front-page sentence.*
+
+**DQ1. `scripts/Axioms.lean`** — the four records FS133-ICD1's block DD1 held back (`data/fs133/icd1/axioms-block.txt`,
+its last five lines, commented). Under **CLEAN**, appended to FS133-ICD1's CLEAN block for the three files (which
+then holds 16 records):
+
+```
+#print axioms HadwigerNelson.OneClass.exists_admissibleOn_of_ae
+```
+
+Under **IMPORTED**, appended to FS133-ICD1's IMPORTED block (which then holds 12 records, each on the standard three
+and `HadwigerNelson.Outside.OAI158.Spectral.residual_fourier` and on nothing else):
+
+```
+#print axioms HadwigerNelson.OneClass.exists_measurable_admissibleAe
+#print axioms HadwigerNelson.OneClass.exists_admissibleOn_univ_iff_ae
+#print axioms HadwigerNelson.OneClass.exists_admissibleOn_univ_iff_algPlane
+```
+
+The block's line "-- NOT YET FILED: … once proved, the first under CLEAN, the other three under IMPORTED" is then
+deleted. (A correction owed in that draft line: its own tags, and FS133-ICD1's record DD1, put the **second** record,
+`exists_admissibleOn_of_ae`, under CLEAN and the first under IMPORTED; the printed axioms agree with the tags.) With
+these four the module's audit reads 125 records: 111 on the standard three, 14 on those and the import, none open.
+The private helpers this job added (`kCoeff_one_pair`, `kCoeff_mul_pair`, `isPlaneSystem_lab`, `dist_kCoeff_mul`,
+`exists_slice_ne_zero`, `prod_pairs_ne_zero`) are not records.
+
+**DQ2. The model for each new hypothesis** (`LEAN.md` § The gate; checked by the elaborator in a scratch file,
+`data/fs133/ipq1/work/Models.lean`, `Models.out`). No public statement gained a hypothesis; `exists_admissibleOn_of_ae`
+lost one (`hcount`). FS133-ICD1's DD2 names the model of every public hypothesis of `Pair`; it stands, with
+`exists_admissibleOn_of_ae`'s now `hpos`, `hm`, `h`: the brick colouring `sevenBrick.color` at
+`colourPattern (Fin 7)` (`exists_admissible_colourPattern_seven`; `hpos` from `isAlgPattern_colourPattern`, `hm` from
+its Borel fibres), and from it both conclusions are reached in the scratch file. The private helpers' hypotheses,
+each met by one object at once: `exists_slice_ne_zero` and `prod_pairs_ne_zero` — `A = B = univ` (null-measurable,
+density one everywhere, `hasDensityOneAt_univ`), `x = 0`, `y = 1`, `r = 1`; `isPlaneSystem_lab` — the point mass of a
+constant labelling (`Measure.map_dirac'`), and the law `exists_invariant_of_closed` gives inside Q4's proof;
+`dist_kCoeff_mul` has none. The vacuity scan reads `Pair`'s binders `GENERIC` (no colouring binder of a tracked
+predicate); the assumptions step has nothing to declare (no hypothesis of `Pair` stands for an outside theorem or a hand
+result).
+
+**DQ3. `CLAUDE.md` § Where the problem stands, "What the kernel holds, beyond the interval"**, a sentence following
+FS133-ICD1's DD4 sentence on the density equality (its grade [kernel] on one declared outside theorem until the port
+lands `residual_fourier` as a theorem; not on `main` and not through the gate until the landing):
+
+"**Labellings with forbidden pairs of labels at algebraic distances** (FS-133, C133-PAIR): for a finite set of labels
+and a pattern forbidding, at each of countably many positive algebraic distances, some ordered pairs of labels, the
+plane has a labelling admissible at every pair of points if and only if the algebraic plane has one, and if and only if
+the plane has a Lebesgue-measurable labelling admissible at almost every pair `(x, x + r e^{iθ})`
+(`OneClass.exists_admissibleOn_univ_iff_algPlane`, `OneClass.exists_admissibleOn_univ_iff_ae`), on the declared
+outside theorem `Outside.OAI158.Spectral.residual_fourier`, which only the direction from the algebraic plane to a
+measurable labelling reads (`exists_measurable_admissibleAe`; its labelling has Borel fibres); the converse — a
+Lebesgue-measurable labelling admissible almost everywhere gives one admissible at every pair, at any positive
+distances, algebraic or not, countably many or not — is on the standard three (`exists_admissibleOn_of_ae`). For one
+distance with equal labels forbidden this is `[OAIMath2026]` family 158's Theorem 1.3; the general pattern was not
+found in print at the scope of the plan's § PA.2. Not claimed: any constraint on three or more points; in the forward
+direction any distance that is not algebraic; infinitely many labels; that the measurable labelling resembles the one
+started from; a measurable labelling admissible at every pair."
+
+**DQ4. `ARCHITECTURE.md` § 3, the row of `Plane/OneClass/Pair`**: FS133-ICD1's DD3 draft for it
+("**FS-133 (FS133-K1's statements, FS133-ICD1's proofs; … `Pair` two leaves, Q4 and Q5).**") becomes "**FS-133
+(FS133-K1's statements, FS133-ICD1's and FS133-IPQ1's proofs; no `sorry`; one unread binder dropped from
+`exists_admissibleOn_of_ae`, FS133-IPQ1).**"; its imports cell is unchanged (this job added no import).
+
+**DQ5. `plans/FS133-kernel-plan.md`**, notes for the planner's record (§ 5.4): Q4 needed no port of the release's
+`positiveSelect` — any choice of a label with positive field works, and the labelling is Borel as a function of the
+finite type `Λ → Bool`; Q5's extension is not the library's `exists_proper_ae_eq_of_proper_on_conull` rerun but
+simpler (no agreement with `ℓ'` is asked: one conull set, `exists_translate_mem` at `V x = T`,
+`Finset.rado_selection`); Q5 reads no countability (`hcount` dropped); `davies_lemma_B1` was not an instance (its
+`havoid` is one relation within one set; a pattern relates two sets).
+
+**DQ6. `LEAN.md` § Searching — Lean**, new bullets.
+- "A function from `ℂ` to a finite type is Borel with no case analysis when it factors through a measurable map into
+  `Λ → Bool`: `measurable_pi_iff`, `measurable_to_bool` for each coordinate, then `measurable_of_finite` for the
+  function out of `Λ → Bool` (`OneClass.exists_measurable_admissibleAe`, its choice of a label by `Exists.choose`)
+  (FS133-IPQ1)."
+- "Positivity of a product measure from its slices in the second factor, with no measurability:
+  `(Measure.measurePreserving_swap).quasiMeasurePreserving.preimage_null` pulls a null set of `ℂ × ℝ` back to
+  `ℝ × ℂ`, and `Measure.measure_ae_null_of_prod_null` reads its sections (`OneClass` Pair's `prod_pairs_ne_zero`)
+  (FS133-IPQ1)."
+- "`IsClosed.preimage` with a continuous map into `Λ × Λ` built inline by `(continuous_apply x).prodMk …` fails
+  to unify the product's topology when `Λ`'s topology is a `letI`; name the map with its type ascribed
+  (`Continuous (fun m : E → Λ => ((m x, m y) : Λ × Λ))`) and apply that (FS133-IPQ1)."

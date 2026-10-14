@@ -1,0 +1,4 @@
+records: 125  table: 125 (111 CLEAN, 14 IMPORTED)
+   14  [Classical.choice, Quot.sound, propext, HadwigerNelson.Outside.OAI158.Spectral.residual_fourier]
+  111  [Classical.choice, Quot.sound, propext]
+AXIOMS OK
