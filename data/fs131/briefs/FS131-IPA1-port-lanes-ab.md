@@ -118,3 +118,9 @@ You start no agents of your own (standing rule 1: delegation is one level deep, 
 `CosetCenter.Embedding.frequencyLaw` gains exactly the release's own section variables `[MeasurableMul₂ G] [MeasurableInv G]`. So does every declaration whose release type names `frequencyLaw` or `center`, directly or through the cascade, and lacks them. An `omit` of those two binders on such a declaration is dropped for it, and listed as the same change. Nothing beyond those two binders is added. Each entry is RULED with the strip check and a planted control. The cascade's full list is recorded, measured, once Centers and RelativeCenters elaborate. The cascade stops, and comes to me, if it would reach a target statement, a declaration the density branch shares, or anything a statement of ours names (inventory item 767).
 
 You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 4 (2026-10-14 05:56 UTC) — one more generator change: the `drop_omit` key
+
+Your touches are extended by one new table key in `tools/fs131_ko1_port.py`: `drop_omit: [[line, reason]]`. No other logic changes. The generator refuses an entry whose line is not an `omit … in` command attached to a copied declaration, and refuses any unused entry. Add a plant (an entry on a line that is no `omit`) refused and a partner (a used entry removes exactly that line). `--check` is byte-identical on every module generated so far, before and after, `--parse-all` passes, and the change goes in its own commit. Centers' three entries are listed as part of the ruled cascade of Amendment 3, each with its strip check (inventory item 768).
+
+You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
