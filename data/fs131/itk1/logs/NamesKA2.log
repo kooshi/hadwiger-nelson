@@ -1,0 +1,52 @@
+slot: admitted itk1: mem 4 GiB (hard cap), cpus 8,9
+@mem_integers_of_valuation_le_one : ∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2)
+  [inst_2 : Field K] [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (x : K),
+  (∀ (v : HeightOneSpectrum R), (valuation K v) x ≤ 1) → x ∈ (algebraMap R K).range
+@InfinitePlace.map_natCast : ∀ {K : Type u_1} [inst : Field K] (v : InfinitePlace K) (n : ℕ), v ↑n = ↑n
+@InfinitePlace.apply : ∀ {K : Type u_1} [inst : Field K] (φ : K →+* ℂ) (x : K), (InfinitePlace.mk φ) x = ‖φ x‖
+data/fs131/itk1/probes/NamesKA2.lean:6:8: error(lean.unknownIdentifier): Unknown constant `NumberField.InfinitePlace.mk_apply`
+@UnitRing.mem_normOne_conjOn_iff : ∀ {F : Subfield ℝ} (z : ↥(UnitRing.planeOverSubfield F)),
+  z ∈ normOne (conjOn ⋯) ↔ ‖↑z‖ = 1
+data/fs131/itk1/probes/NamesKA2.lean:8:8: error(lean.unknownIdentifier): Unknown identifier `UnitRing.mem_normOne`
+Embeddings.pow_eq_one_of_norm_eq_one : ∀ (K : Type u_1) [inst : Field K] [NumberField K] (A : Type u_2)
+  [inst_2 : NormedField A] [IsAlgClosed A] [NormedAlgebra ℚ A] {x : K},
+  IsIntegral ℤ x → (∀ (φ : K →+* A), ‖φ x‖ = 1) → ∃ n, ∃ (_ : 0 < n), x ^ n = 1
+@Ideal.IsMaximal.eq_of_le : ∀ {α : Type u_1} [inst : Semiring α] {I J : Ideal α}, I.IsMaximal → J ≠ ⊤ → I ≤ J → I = J
+@Ideal.comap_ne_top : ∀ {R : Type u_1} {S : Type u_2} {F : Type u_3} [inst : Semiring R] [inst_1 : Semiring S]
+  [inst_2 : FunLike F R S] (f : F) {K : Ideal S} [inst_3 : RingHomClass F R S], K ≠ ⊤ → Ideal.comap f K ≠ ⊤
+@isMaximal : ∀ {R : Type u_1} [inst : CommRing R] [IsDedekindDomain R] (v : HeightOneSpectrum R), v.asIdeal.IsMaximal
+@InfinitePlace.prod_eq_abs_norm : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] (x : K),
+  ∏ w, w x ^ w.mult = ↑|(Algebra.norm ℚ) x|
+@prod_abs_eq_one : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] {x : K},
+  x ≠ 0 → (∏ w, w x ^ w.mult) * ∏ᶠ (w : FinitePlace K), w x = 1
+@finprod_comp_equiv : ∀ {α : Type u_1} {β : Type u_2} {M : Type u_3} [inst : CommMonoid M] (e : α ≃ β) {f : β → M},
+  ∏ᶠ (i : α), f (e i) = ∏ᶠ (i' : β), f i'
+@Function.HasFiniteMulSupport : {α : Type u_1} → {M : Type u_2} → [One M] → (α → M) → Prop
+@Finset.prod_sdiff : ∀ {ι : Type u_1} {M : Type u_2} {s₁ s₂ : Finset ι} [inst : CommMonoid M] {f : ι → M}
+  [inst_1 : DecidableEq ι], s₁ ⊆ s₂ → (∏ x ∈ s₂ \ s₁, f x) * ∏ x ∈ s₁, f x = ∏ x ∈ s₂, f x
+@Finset.prod_image : ∀ {ι : Type u_1} {κ : Type u_2} {M : Type u_3} [inst : CommMonoid M] {f : ι → M}
+  [inst_1 : DecidableEq ι] {s : Finset κ} {g : κ → ι}, Set.InjOn g ↑s → ∏ x ∈ Finset.image g s, f x = ∏ x ∈ s, f (g x)
+@Finset.mul_prod_erase : ∀ {ι : Type u_1} {M : Type u_2} [inst : CommMonoid M] [inst_1 : DecidableEq ι] (s : Finset ι)
+  (f : ι → M) {a : ι}, a ∈ s → f a * ∏ x ∈ s.erase a, f x = ∏ x ∈ s, f x
+@InfinitePlace.mult : {K : Type u_1} → [inst : Field K] → InfinitePlace K → ℕ
+@Finset.prod_pow_eq_pow_sum : ∀ {ι : Type u_1} {M : Type u_2} [inst : CommMonoid M] (s : Finset ι) (f : ι → ℕ) (a : M),
+  ∏ i ∈ s, a ^ f i = a ^ ∑ i ∈ s, f i
+@InfinitePlace.sum_mult_eq : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K],
+  ∑ w, w.mult = Module.finrank ℚ K
+@FinitePlace.equivHeightOneSpectrum : {K : Type u_1} →
+  [inst : Field K] → [inst_1 : NumberField K] → FinitePlace K ≃ HeightOneSpectrum (𝓞 K)
+@UpperHalf.coe_conjO : ∀ {F : Subfield ℝ} (a : 𝓞 ↥(SpectralChain.fieldI F)),
+  ↑((SpectralChain.conjO F) a) = (conjOn ⋯) ↑a
+SpectralChain.conjO : (F : Subfield ℝ) → 𝓞 ↥(SpectralChain.fieldI F) →+* 𝓞 ↥(SpectralChain.fieldI F)
+@coe_conjOn : ∀ {L : Subfield ℂ} (hL : ∀ z ∈ L, (starRingEnd ℂ) z ∈ L) (z : ↥L), ↑((conjOn hL) z) = (starRingEnd ℂ) ↑z
+@InfinitePlace.comap_apply : ∀ {k : Type u_1} [inst : Field k] {K : Type u_2} [inst_1 : Field K] (w : InfinitePlace K)
+  (f : k →+* K) (x : k), (w.comap f) x = w (f x)
+@IsIntegral.map : ∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]
+  {B : Type u_3} {C : Type u_4} {F : Type u_5} [inst_3 : Ring B] [inst_4 : Ring C] [inst_5 : Algebra R B]
+  [inst_6 : Algebra A B] [inst_7 : Algebra R C] [IsScalarTower R A B] [inst_9 : Algebra A C] [IsScalarTower R A C]
+  {b : B} [inst_11 : FunLike F B C] [AlgHomClass F A B C] (f : F), IsIntegral R b → IsIntegral R (f b)
+@RingOfIntegers.isIntegral_coe : ∀ {K : Type u_1} [inst : Field K] (x : 𝓞 K), IsIntegral ℤ ((algebraMap (𝓞 K) K) x)
+Try this:
+  [apply] exact InfinitePlace.map_natCast v n
+seconds=12
+exit=1

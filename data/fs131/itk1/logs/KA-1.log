@@ -1,0 +1,58 @@
+slot: admitted itk1: mem 4 GiB (hard cap), cpus 8,9
+data/fs131/itk1/work/PlaceSizes.lean:86:44: error(lean.unknownIdentifier): Unknown identifier `one_lt_absNorm_nnreal`
+data/fs131/itk1/work/PlaceSizes.lean:92:56: error(lean.unknownIdentifier): Unknown identifier `absNorm_ne_zero`
+data/fs131/itk1/work/PlaceSizes.lean:90:32: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+v : HeightOneSpectrum (𝓞 ↥(fieldI F))
+z : adicCompletion (↥(fieldI F)) v
+⊢ Valued.v z ≤ 1 ∧ ¬(WithZeroMulInt.toNNReal ⋯) (Valued.v z) = 1 ↔ Valued.v z ≤ 1 ∧ Valued.v z ≠ 1
+data/fs131/itk1/work/PlaceSizes.lean:168:30: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (algebraMap (↥(fieldI F)) (adicCompletion ↥(fieldI F) ↑w)) ↑?n
+in the target expression
+  Valued.v { toCompletion := ↑((WithVal.equiv (valuation ↥(fieldI F) ↑w)).symm ↑n) } ≤ 1
+
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+w : SplitPlace F
+n : ℕ
+⊢ Valued.v { toCompletion := ↑((WithVal.equiv (valuation ↥(fieldI F) ↑w)).symm ↑n) } ≤ 1
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    w
+  has type
+    SplitPlace F
+  but is expected to have type
+    { v // ¬IsStablePlace F v }
+  in the application
+    ↑w
+data/fs131/itk1/work/PlaceSizes.lean:224:29: error: Application type mismatch: The argument
+  fun w x => le_max_left (?m.42 w x) (?m.43 w x)
+has type
+  ∀ (w : SplitPlace F) (x : ?m.39 w), ?m.42 w x ≤ max (?m.42 w x) (?m.43 w x)
+but is expected to have type
+  ∀ (i : SplitPlace F), 1 ≤ max 1 ((split i).absAt x)
+in the application
+  Finset.one_le_prod'' fun w x => le_max_left (?m.42 w x) (?m.43 w x)
+data/fs131/itk1/work/PlaceSizes.lean:224:8: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  MulLeftMono ℝ
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/itk1/work/PlaceSizes.lean:226:109: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+w : SplitPlace F
+x : ↥(fieldI F)
+T : Finset (SplitPlace F)
+hT : ∀ w ∉ T, (split w).absAt x ≤ 1
+hT' : ∀ w' ∉ insert w T, (split w').absAt x ≤ 1
+⊢ w ∉ T → max 1 ((split w).absAt x) = 1
+data/fs131/itk1/work/PlaceSizes.lean:235:8: warning: declaration uses `sorry`
+data/fs131/itk1/work/PlaceSizes.lean:259:8: warning: declaration uses `sorry`
+data/fs131/itk1/work/PlaceSizes.lean:264:8: warning: declaration uses `sorry`
+data/fs131/itk1/work/PlaceSizes.lean:270:8: warning: declaration uses `sorry`
+data/fs131/itk1/work/PlaceSizes.lean:279:9: warning: declaration uses `sorry`
+seconds=4
+exit=1

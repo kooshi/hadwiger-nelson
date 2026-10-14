@@ -1,0 +1,56 @@
+slot: admitted itk1: mem 4 GiB (hard cap), cpus 0,1
+data/fs131/itk1/work/Multipliers.lean:51:0: warning: automatically included section variable(s) unused in theorem `HadwigerNelson.Rigidity.coe_multiplier`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/itk1/work/Multipliers.lean:61:0: warning: automatically included section variable(s) unused in theorem `HadwigerNelson.Rigidity.multiplier_one`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/itk1/work/Multipliers.lean:65:0: warning: automatically included section variable(s) unused in theorem `HadwigerNelson.Rigidity.multiplier_injective`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+data/fs131/itk1/work/Multipliers.lean:123:69: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+b : ℕ
+x : ↥(fieldI F) := unitL (multiplier F b)
+hxdef : x = unitL (multiplier F b)
+zb : ↥(fieldI F) := 1 - ↑(2 * b) * iL F
+hzb : zb = 1 - ↑(2 * b) * iL F
+z : ↥(fieldI F) := 1 + ↑(2 * b) * iL F
+hz : z = 1 + ↑(2 * b) * iL F
+⊢ 1 - ↑2 * ↑b * Complex.I = 1 - ↑b * Complex.I * 2
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+data/fs131/itk1/work/Multipliers.lean:125:67: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+b : ℕ
+x : ↥(fieldI F) := unitL (multiplier F b)
+hxdef : x = unitL (multiplier F b)
+zb : ↥(fieldI F) := 1 - ↑(2 * b) * iL F
+hzb : zb = 1 - ↑(2 * b) * iL F
+z : ↥(fieldI F) := 1 + ↑(2 * b) * iL F
+hz : z = 1 + ↑(2 * b) * iL F
+hzbC : ↑zb = 1 - 2 * ↑b * Complex.I
+⊢ 1 + ↑2 * ↑b * Complex.I = 1 + ↑b * Complex.I * 2
+seconds=6
+exit=1

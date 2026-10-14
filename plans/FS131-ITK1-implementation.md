@@ -131,3 +131,34 @@ against stage 1's): **PASS** — 141 named constants, 40 data definitions' value
 constant; the eleven private helpers listed; internal constants 35 → 37 (`statements-compare-b1.out`).
 
 **2.5 Re-priced.** T-K came in at about two thirds of its plan, in two rounds for the whole lane.
+
+## Stage 3 — SAVED: lanes K8-A, K8-M, K8-B proved in the modules (elaborated file by file; the build is stage 5)
+
+Each module written against a copy under `data/fs131/itk1/work/` and elaborated there under `lake env lean` with the
+lakefile's two options (`data/fs131/itk1/lean1.sh`), exit 0 and no warning, then copied over the module: `PlaceSizes`
+(`logs/KA-2.log`), `Multipliers` (`KM-4.log`), `ThinBoxes` (`KB-3.log`). No `sorry` is left in the three files; the
+only lines removed are the `sorry`s and three `:= by` that became `:=` before a term proof (`git diff -U0`). The kernel's
+side is stage 5's.
+
+| lane | leaves | route as planned? | lines (est. → written) | rounds |
+|---|---|---|---|---|
+| K8-A `PlaceSizes` | the 23 | yes, but for: `size_le_one_iff` and the split norms through one private helper `‖z‖ ≤ 1 ↔ v z ≤ 1` (`FinitePlace.norm_def`, `WithZeroMulInt.toNNReal_le_one_iff`); Lemma PF with the stable/split split as `Finset.prod_sdiff` over `mulSupport ∪ T` (no filter); `exists_one_lt_absAt` with `u ū = 1` computed in `ℂ` (`Complex.mul_conj`) | ~500 → ~240 | 2 |
+| K8-M `Multipliers` | the 6 | `absAt_multiplier_arch` **by another route**: `v_b = q₁ + q₂ i` with `q₁, q₂ ∈ ℚ`, so an embedding sends it to `q₁ ± q₂ i`, of modulus `‖v_b‖ = 1` — no `(1 + 2bi)/(1 − 2bi)` at the archimedean places. `splitHeight_multiplier_le` **by another route**: Lemma PF for `z̄ = 1 − 2bi` (`one_le_prod_absAt_of_mem_stableIntegers`) in place of the product formula over all finite places — `∏_T max(1, |v_b|_w) ≤ (∏_T |z̄|_w)⁻¹ ≤ ∏_v v(z̄)^{mult} ≤ (1 + 2b)^{[L:ℚ]}` | ~150 → ~110 | 4 |
+| K8-B `ThinBoxes` | the 13 | yes; `exists_orbit_box`'s step as one private helper `orbit_step` (the gap at `y′ = l₂ − l₁`, `ι y′ = ι(u)·a′ − b`); the partition's label by `Nat.find` over the subcover extended to `ℕ`; `exists_delta_of_one_lt` with `n = ⌈log(c/δ)/log s⌉₊ + 1` and `δ₀ = c·e^{−K log s}`, `K = max(N₀, 2 log c/log s + 3)` (no `Nat.find`) | ~450 → ~300 | 3 |
+
+**Private helpers added**: `PlaceSizes` — `norm_le_one_iff_valued`, `norm_lt_one_iff_valued`, `norm_coe_le_one_iff`,
+`coe_natCast_completion`, `coe_mul_completion`; `Multipliers` — `iL` (a private definition: `i` in `L`), `embedding_iL`,
+`norm_embedding_iL`; `ThinBoxes` — `absAt_pow`, `orbit_step`.
+
+**One linter question, decided and held for the coordinator.** `multiplier_mem` (private, the skeleton's proof field of
+`multiplier`) takes the section's `[NumberField F]`, which its proof does not read, and once proved the build's
+unused-section-variable linter warns. Dropping the binder (`omit … in`) **changes the stored type of the definition
+`multiplier`** — it then takes no `[NumberField F]` — and of every statement that mentions it (seen at once: three
+readers then drew the same warning, `logs/KM-2.log`). So the binder stays, and the linter is switched off for that one
+private declaration (`set_option linter.unusedSectionVars false in`, with a `--` comment saying why); nothing stored
+changes. The alternative — drop it under item 726's word and let `multiplier`'s type lose the instance — is the
+coordinator's to choose; it is not a binder of the declaration alone.
+
+**Re-priced** from the first leaves of each lane: K8-A came in at about half its plan, K8-M at about three quarters,
+K8-B at about two thirds, each in two to four elaboration rounds. What is left is K8-G (11 leaves, planned ~500) and
+K8-S (7, planned ~200): at these rates about 450 lines, a few hours.
