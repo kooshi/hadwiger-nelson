@@ -1,0 +1,118 @@
+slot: waiting (ledger 20 + 4 > budget 22 GiB)
+slot: admitted km15: mem 4 GiB (hard cap), cpus 5,6
+HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  HadwigerNelson.Plane.OneAvoidingDensityBound →
+    (HadwigerNelson.SpectralChain.localBound F ≤ 4 →
+        HadwigerNelson.SpectralChain.localBound F ≤
+          (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber) →
+      Min.min (HadwigerNelson.SpectralChain.localBound F) 5 ≤
+        (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+def HadwigerNelson.SpectralChain.localBound : Subfield ℝ → ℕ∞ :=
+fun F => ⨅ P, (levelTarget P 1).chromaticNumber
+structure HadwigerNelson.SpectralChain.StablePrime (F : Subfield ℝ) : Type
+number of parameters: 1
+fields:
+  HadwigerNelson.SpectralChain.StablePrime.P : Ideal (𝓞 ↥(fieldI F))
+  HadwigerNelson.SpectralChain.StablePrime.isMaximal : self.P.IsMaximal
+  HadwigerNelson.SpectralChain.StablePrime.comap_conj : Ideal.comap (conjO F) self.P = self.P
+constructor:
+  HadwigerNelson.SpectralChain.StablePrime.mk {F : Subfield ℝ} (P : Ideal (𝓞 ↥(fieldI F))) (isMaximal : P.IsMaximal)
+    (comap_conj : Ideal.comap (conjO F) P = P) : StablePrime F
+def HadwigerNelson.SpectralChain.levelTarget : {F : Subfield ℝ} →
+  (P : StablePrime F) → (m : ℕ) → SimpleGraph (𝓞 ↥(fieldI F) ⧸ P.P ^ m) :=
+fun {F} P m => SimpleGraph.fromRel fun x y => (x - y) * (Ideal.quotientMap (P.P ^ m) (conjO F) ⋯) (x - y) = 1
+@[reducible] def HadwigerNelson.SqrtFortySeven.F47 : Subfield ℝ :=
+SquareClass.fieldOfRadicands {47}
+SqrtFortySeven.chromaticNumber_planeOver_sqrt47_le_five : (SimpleGraph.induce (planeOver SqrtFortySeven.F47)
+      (unitDistance ℂ)).chromaticNumber ≤
+  5
+@Rigidity.RatioAtMost : {F : Subfield ℝ} → StablePrime F → ℝ → Prop
+@Rigidity.ratioAtMost_of_five_le_chromaticNumber : ∀ {F : Subfield ℝ} [NumberField ↥F] (P : StablePrime F),
+  5 ≤ (levelTarget P 1).chromaticNumber → ∃ c < 1 / 4, Rigidity.RatioAtMost P c
+Rigidity.tca_of_five_le_localBound : ∀ (F : Subfield ℝ) [NumberField ↥F], 5 ≤ localBound F → TCA F
+Plane.OneAvoidingDensityBound : Prop
+'HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound,
+ Rigidity.positive_entropy_rigidity,
+ StandingFive.kloosterman_bound]
+QuadraticPrime.instNumberFieldFieldOfRadicands {47}
+@StandingFive.card_fixed_of_involution : ∀ {k : Type u_1} [inst : Field k] [Finite k] (σ : k →+* k),
+  (∀ (x : k), σ (σ x) = x) →
+    ∀ {ι : k},
+      ι ^ 2 = -1 →
+        σ ι = -ι →
+          2 ≠ 0 →
+            Nat.card k = Nat.card ↥(σ.eqLocusField (RingHom.id k)) ^ 2 ∧
+              Nat.card ↥(σ.eqLocusField (RingHom.id k)) % 4 = 3
+@StandingFive.isIntegral_of_sq_add : ∀ {K : Type u_1} [inst : Field K] {x : K} (b c : ℤ),
+  x ^ 2 + ↑b * x + ↑c = 0 → IsIntegral ℤ x
+@StandingFive.pow_char_eq_of_sq_natCast : ∀ {k : Type u_1} [inst : Field k] [Finite k] {p n : ℕ}
+  [hp : Fact (Nat.Prime p)] [CharP k p], Nat.card k = p ^ n → Odd n → p ≠ 2 → ∀ {s : k} {t : ℕ}, s ^ 2 = ↑t → s ^ p = s
+@StandingFive.exists_natCast_of_pow_eq : ∀ {k : Type u_1} [inst : Field k] {p : ℕ} [Fact (Nat.Prime p)] [CharP k p]
+  {x : k}, x ^ p = x → ∃ c < p, ↑c = x
+@StandingFive.mod_four_of_pow : ∀ {p n : ℕ}, p ^ n % 4 = 3 → p % 4 = 3 ∧ Odd n
+@StandingFive.pow_natCard : ∀ {k : Type u_1} [inst : Field k] [Finite k] (x : k), x ^ Nat.card k = x
+@UpperHalf.conjO_mem_iff : ∀ {F : Subfield ℝ} (P : StablePrime F) {a : 𝓞 ↥(fieldI F)}, (conjO F) a ∈ P.P ↔ a ∈ P.P
+@UpperHalf.conjO_conjO : ∀ {F : Subfield ℝ} (a : 𝓞 ↥(fieldI F)), (conjO F) ((conjO F) a) = a
+@UpperHalf.coe_conjO : ∀ {F : Subfield ℝ} (a : 𝓞 ↥(fieldI F)), ↑((conjO F) a) = (conjOn ⋯) ↑a
+@coe_conjOn : ∀ {L : Subfield ℂ} (hL : ∀ z ∈ L, (starRingEnd ℂ) z ∈ L) (z : ↥L), ↑((conjOn hL) z) = (starRingEnd ℂ) ↑z
+SqrtFortySeven.sqrt47_mem : SqrtFortySeven.s ∈ SqrtFortySeven.F47
+toFieldI_surjective : ∀ (F : Subfield ℝ), Function.Surjective ⇑(toFieldI F)
+@Ideal.absNorm_span_natCast : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S]
+  [inst_2 : Module.Free ℤ S] [Module.Finite ℤ S] (n : ℕ), Ideal.absNorm (Ideal.span {↑n}) = n ^ Module.finrank ℤ S
+@Ideal.absNorm_dvd_absNorm_of_le : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S]
+  [inst_2 : Module.Free ℤ S] {I J : Ideal S}, J ≤ I → Ideal.absNorm I ∣ Ideal.absNorm J
+@Ideal.absNorm_apply : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S] [inst_2 : Module.Free ℤ S]
+  (I : Ideal S), Ideal.absNorm I = Submodule.cardQuot I
+@Submodule.cardQuot_apply : ∀ {R : Type u_1} {M : Type u_2} [inst : Ring R] [inst_1 : AddCommGroup M]
+  [inst_2 : Module R M] (S : Submodule R M), S.cardQuot = Nat.card (M ⧸ S)
+RingOfIntegers.rank : ∀ (K : Type u_1) [inst : Field K] [inst_1 : NumberField K],
+  Module.finrank ℤ (𝓞 K) = Module.finrank ℚ K
+@card_nsmul_eq_zero' : ∀ {G : Type u_1} [inst : AddGroup G] {x : G}, Nat.card G • x = 0
+FiniteField.card' : ∀ (K : Type u_1) [inst : Field K] [inst_1 : Fintype K],
+  ∃ p, CharP K p ∧ ∃ n, Nat.Prime p ∧ Fintype.card K = p ^ ↑n
+CharP.natCast_eq_natCast : ∀ (R : Type u_1) [inst : AddMonoidWithOne R] (p : ℕ) [CharP R p] {a b : ℕ}
+  [IsRightCancelAdd R], ↑a = ↑b ↔ a ≡ b [MOD p]
+@RingHom.eqLocusField : {K : Type u_1} →
+  [inst : DivisionRing K] → {L : Type u_2} → [inst_1 : Semiring L] → (K →+* L) → (K →+* L) → Subfield K
+@Nat.pow_dvd_pow_iff_le_right : ∀ {x k l : ℕ}, 1 < x → (x ^ k ∣ x ^ l ↔ k ≤ l)
+@Nat.dvd_prime_pow : ∀ {p : ℕ}, Nat.Prime p → ∀ {m i : ℕ}, i ∣ p ^ m ↔ ∃ k ≤ m, i = p ^ k
+@Finset.exists_le_card_fiber_of_mul_le_card_of_maps_to : ∀ {α : Type u_1} {β : Type u_2} [inst : DecidableEq β]
+  {s : Finset α} {t : Finset β} {f : α → β} {n : ℕ},
+  (∀ a ∈ s, f a ∈ t) → t.Nonempty → t.card * n ≤ s.card → ∃ y ∈ t, n ≤ {x ∈ s | f x = y}.card
+@SimpleGraph.Coloring.colorClass : {V : Type u_1} → {G : SimpleGraph V} → {α : Type u_2} → G.Coloring α → α → Set V
+data/fs131/km15/probes/ReadBack.lean:51:8: warning: `SimpleGraph.Coloring.color_classes_independent` has been deprecated: Use `SimpleGraph.Coloring.isIndepSet_colorClass` instead
+
+Note: The updated constant has a different type:
+  ∀ {V : Type u} {G : SimpleGraph V} {α : Type u_2} (C : G.Coloring α) (c : α), G.IsIndepSet (C.colorClass c)
+instead of
+  ∀ {V : Type u} {G : SimpleGraph V} {α : Type u_2} (C : G.Coloring α) (c : α), IsAntichain G.Adj (C.colorClass c)
+@SimpleGraph.Coloring.color_classes_independent : ∀ {V : Type u_1} {G : SimpleGraph V} {α : Type u_2} (C : G.Coloring α)
+  (c : α), IsAntichain G.Adj (C.colorClass c)
+@add_one_le_chromaticNumber_iff_not_colorable : ∀ {W : Type u_1} {G : SimpleGraph W} {n : ℕ},
+  ↑(n + 1) ≤ G.chromaticNumber ↔ ¬G.Colorable n
+@SimpleGraph.Colorable.chromaticNumber_le : ∀ {V : Type u_1} {G : SimpleGraph V} {n : ℕ},
+  G.Colorable n → G.chromaticNumber ≤ ↑n
+@Ideal.Quotient.eq_zero_iff_mem : ∀ {R : Type u_1} [inst : Ring R] {I : Ideal R} {a : R} [inst_1 : I.IsTwoSided],
+  (Ideal.Quotient.mk I) a = 0 ↔ a ∈ I
+@Ideal.IsPrime.mem_or_mem : ∀ {α : Type u_1} [inst : Semiring α] {I : Ideal α},
+  I.IsPrime → ∀ {x y : α}, x * y ∈ I → x ∈ I ∨ y ∈ I
+@RingOfIntegers.coe_injective : ∀ {K : Type u_1} [inst : Field K], Function.Injective ⇑(algebraMap (𝓞 K) K)
+@Subfield.subtype_injective : ∀ {K : Type u_1} [inst : DivisionRing K] (s : Subfield K), Function.Injective ⇑s.subtype
+@Ideal.quotientMap_mk : ∀ {R : Type u_1} [inst : Ring R] {S : Type u_2} [inst_1 : Ring S] {J : Ideal R} {I : Ideal S}
+  [inst_2 : I.IsTwoSided] [inst_3 : J.IsTwoSided] {f : R →+* S} {H : J ≤ Ideal.comap f I} {x : R},
+  (Ideal.quotientMap I f H) ((Ideal.Quotient.mk J) x) = (Ideal.Quotient.mk I) (f x)
+@LinearMap.finrank_le_finrank_of_surjective : ∀ {R : Type u_1} {M : Type u_2} [inst : Semiring R]
+  [inst_1 : AddCommMonoid M] [inst_2 : Module R M] [StrongRankCondition R] {M' : Type u_3} [inst_4 : AddCommMonoid M']
+  [inst_5 : Module R M'] [Module.Finite R M] {f : M →ₗ[R] M'},
+  Function.Surjective ⇑f → Module.finrank R M' ≤ Module.finrank R M
+@Module.finrank_prod : ∀ {R : Type u_1} {M : Type u_2} {M' : Type u_3} [inst : Semiring R] [inst_1 : AddCommMonoid M]
+  [inst_2 : AddCommMonoid M'] [inst_3 : Module R M] [inst_4 : Module R M'] [StrongRankCondition R] [Module.Free R M]
+  [Module.Free R M'] [Module.Finite R M] [Module.Finite R M'],
+  Module.finrank R (M × M') = Module.finrank R M + Module.finrank R M'
+@Ideal.span_le : ∀ {α : Type u_1} [inst : Semiring α] {s : Set α} {I : Ideal α}, Ideal.span s ≤ I ↔ s ⊆ ↑I
+CharP.cast_eq_zero_iff : ∀ (R : Type u_1) {inst : AddMonoidWithOne R} (p : outParam ℕ) [self : CharP R p] (x : ℕ),
+  ↑x = 0 ↔ p ∣ x
+@FiniteField.pow_card : ∀ {K : Type u_1} [inst : GroupWithZero K] [inst_1 : Fintype K] (a : K), a ^ Fintype.card K = a
