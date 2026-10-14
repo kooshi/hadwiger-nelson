@@ -1,0 +1,14 @@
+slot: admitted k12a: mem 5 GiB (hard cap), cpus 4,5
+data/fs131/k12a/leaves/ProbeA.lean:4:0: error: failed to synthesize
+  Algebra ↥F ↥(fieldI F)
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+@Rat.denseRange_cast : ∀ {𝕜 : Type u_1} [inst : Field 𝕜] [inst_1 : LinearOrder 𝕜] [IsStrictOrderedRing 𝕜]
+  [inst_3 : TopologicalSpace 𝕜] [OrderTopology 𝕜] [Archimedean 𝕜], DenseRange Rat.cast
+@InfinitePlace.comap : {k : Type u_1} →
+  [inst : Field k] → {K : Type u_2} → [inst_1 : Field K] → InfinitePlace K → (k →+* K) → InfinitePlace k
+@ComplexEmbedding.IsReal : {K : Type u_1} → [inst : Field K] → (K →+* ℂ) → Prop
+UnitRing.planeOverSubfield : Subfield ℝ → Subfield ℂ
+data/fs131/k12a/leaves/ProbeA.lean:9:0: error(lean.dependsOnNoncomputable): failed to compile definition, consider marking it as 'noncomputable' because it depends on 'instInnerProductSpaceRealComplex', which is 'noncomputable'
+Command exited with non-zero status 1
+wall=2.10s maxrss=3660852kB

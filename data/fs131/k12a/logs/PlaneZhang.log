@@ -1,0 +1,6 @@
+slot: admitted k12a: mem 5 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/PlaneZhang.lean:50:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaneZhang.lean:53:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaneZhang.lean:57:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaneZhang.lean:62:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaneZhang.lean:68:8: warning: declaration uses `sorry`
