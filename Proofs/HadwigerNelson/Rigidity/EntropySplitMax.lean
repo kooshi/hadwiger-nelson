@@ -3,6 +3,7 @@ import Proofs.HadwigerNelson.Rigidity.HaarMultiple
 import Proofs.HadwigerNelson.Rigidity.ChainAtTA
 import Mathlib.Probability.Kernel.Condexp
 import Mathlib.MeasureTheory.MeasurableSpace.Invariants
+import Proofs.HadwigerNelson.Outside.OAI015ErgodicDecomposition
 
 /-!
 # The entropy split by the largest Haar multiple (FS-131, job FS131-KN8; module M7b; skeleton)
@@ -65,8 +66,10 @@ theorem condExpKernel_ergodicDecomposition {H Y : Type*} [Group H] [Countable H]
     [StandardBorelSpace Y] [Nonempty Y] (μ : Measure Y) [IsProbabilityMeasure μ]
     (hp : ∀ g : H, MeasurePreserving (fun y : Y => g • y) μ μ) :
     condExpKernel μ (invariantSigma H Y) ∘ₘ μ.trim (invariantSigma_le H Y) = μ ∧
-      ∀ᵐ x ∂μ.trim (invariantSigma_le H Y), ErgodicSMul H Y (condExpKernel μ (invariantSigma H Y) x) := by
-  sorry
+      ∀ᵐ x ∂μ.trim (invariantSigma_le H Y), ErgodicSMul H Y (condExpKernel μ (invariantSigma H Y) x) :=
+  -- the release's `actionInvariantSigma H Y` is `invariantSigma H Y` by its body, so the two statements are one term up
+  -- to unfolding it
+  Outside.OAI015.action_ergodic_decomposition μ hp
 
 variable {F : Subfield ℝ}
 

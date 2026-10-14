@@ -6,7 +6,7 @@ import Mathlib.Dynamics.Ergodic.MeasurePreserving
 import Mathlib.Probability.Kernel.Defs
 import Mathlib.Order.LiminfLimsup
 import Mathlib.Topology.Instances.ENNReal.Lemmas
-import Proofs.HadwigerNelson.Outside.OAI015Mixtures
+import Proofs.HadwigerNelson.Outside.OAI015Generating
 
 /-!
 # Kolmogorov–Sinai entropy of a map for a measure (FS-131, jobs FS131-KN3 and FS131-KN6; skeleton)
@@ -385,7 +385,64 @@ theorem ksEntropy_eq_iSup_ksEntropyOn {m : MeasurableSpace X} (μ : Measure X) [
     (hT : MeasurePreserving T μ μ) (𝒜 : ℕ → MeasurableSpace X) (hmono : Monotone 𝒜) (hgen : ⨆ i, 𝒜 i = m)
     (hcg : ∀ i, @MeasurableSpace.CountablyGenerated X (𝒜 i)) :
     ksEntropy μ T = ⨆ i, ksEntropyOn (𝒜 i) μ T := by
-  sorry
+  classical
+  have hle : ∀ i, 𝒜 i ≤ m := fun i => hgen ▸ le_iSup 𝒜 i
+  refine le_antisymm ?_ (iSup_le fun i => ksEntropyOn_le_ksEntropy (hle i) μ T)
+  -- a countable generating sequence of each `𝒜 i`
+  let A : ℕ → ℕ → Set X := fun i => @MeasurableSpace.natGeneratingSequence X (𝒜 i) (hcg i)
+  have hA : ∀ i j, MeasurableSet[𝒜 i] (A i j) := fun i j =>
+    @MeasurableSpace.measurableSet_natGeneratingSequence X (𝒜 i) (hcg i) j
+  have hAgen : ∀ i, MeasurableSpace.generateFrom (Set.range (A i)) = 𝒜 i := fun i =>
+    @MeasurableSpace.generateFrom_natGeneratingSequence X (𝒜 i) (hcg i)
+  -- the observation at stage `n`: the indicators of the `A i j` with `i, j ≤ n`, read as one label
+  let v : ∀ n, X → (Fin (n + 1) × Fin (n + 1) → Bool) := fun n x p => decide (x ∈ A p.1 p.2)
+  let e : ∀ n, (Fin (n + 1) × Fin (n + 1) → Bool) ≃ Fin (Fintype.card (Fin (n + 1) × Fin (n + 1) → Bool)) :=
+    fun n => Fintype.equivFin _
+  let Q : ∀ n, X → Fin (Fintype.card (Fin (n + 1) × Fin (n + 1) → Bool)) := fun n x => e n (v n x)
+  -- each `Q n` is measurable for `𝒜 n`
+  have hQ𝒜 : ∀ n, Measurable[𝒜 n] (Q n) := by
+    intro n
+    have hv : Measurable[𝒜 n] (v n) := by
+      refine @measurable_pi_lambda X _ (fun _ => Bool) (𝒜 n) _ (v n) fun p => ?_
+      have hs : MeasurableSet[𝒜 n] (A p.1 p.2) := hmono (Nat.lt_succ_iff.mp p.1.2) _ (hA _ _)
+      refine @measurable_to_countable' Bool X _ _ (𝒜 n) _ fun b => ?_
+      cases b
+      · convert hs.compl using 1
+        ext x
+        simp [v]
+      · convert hs using 1
+        ext x
+        simp [v]
+    exact (measurable_of_finite (e n)).comp hv
+  have hQm : ∀ n, Measurable (Q n) := fun n => (hQ𝒜 n).mono (hle n) le_rfl
+  have hQ : ∀ n b, MeasurableSet {y | Q n y = b} := fun n b => hQm n (measurableSet_singleton b)
+  -- the stages increase: `Q n` factors through `Q (n + 1)`
+  have hmono' : Monotone (fun n => Outside.OAI015.observationSigma (Q n)) := by
+    refine monotone_nat_of_le_succ fun n => ?_
+    let r : (Fin (n + 2) × Fin (n + 2) → Bool) → (Fin (n + 1) × Fin (n + 1) → Bool) :=
+      fun w p => w (Fin.castSucc p.1, Fin.castSucc p.2)
+    have hfac : Q n = (e n ∘ r ∘ (e (n + 1)).symm) ∘ Q (n + 1) := by
+      funext x
+      simp only [Function.comp_apply, Q, Equiv.symm_apply_apply]
+      congr 1
+    show MeasurableSpace.comap (Q n) ⊤ ≤ MeasurableSpace.comap (Q (n + 1)) ⊤
+    rw [hfac, ← MeasurableSpace.comap_comp]
+    exact MeasurableSpace.comap_mono le_top
+  -- the stages generate
+  have hgen' : (⨆ n, Outside.OAI015.observationSigma (Q n)) = m := by
+    refine le_antisymm (iSup_le fun n => measurable_iff_comap_le.1 (hQm n)) ?_
+    refine hgen.ge.trans (iSup_le fun i => (hAgen i).ge.trans ?_)
+    refine MeasurableSpace.generateFrom_le ?_
+    rintro _ ⟨j, rfl⟩
+    refine le_iSup (fun n => Outside.OAI015.observationSigma (Q n)) (max i j) _ ?_
+    refine ⟨{c | (e (max i j)).symm c (⟨i, Nat.lt_succ_of_le (le_max_left i j)⟩,
+      ⟨j, Nat.lt_succ_of_le (le_max_right i j)⟩) = true}, trivial, ?_⟩
+    ext x
+    simp [Q, v]
+  rw [ksEntropy_eq_measureEntropy, Outside.OAI015.measureEntropy_eq_iSup_generating μ hT Q hQ hmono' hgen']
+  refine iSup_le fun n => ?_
+  rw [← partitionEntropy_eq_ofReal_observationEntropyRate]
+  exact le_iSup_of_le n (partitionEntropy_le_ksEntropyOn μ T (hQ𝒜 n))
 
 /-- **A mixture of invariant measures of entropy zero has entropy zero** — the one consequence of Jacobs's formula the
 chain reads (`plans/FS100-X02D-derivation.md` ll. 207, 217; FS131-EN2 § 4.2 step 4). The release's

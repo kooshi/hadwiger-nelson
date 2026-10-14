@@ -1,0 +1,4 @@
+slot: admitted ip23: mem 4 GiB (hard cap), cpus 4,5
+'HadwigerNelson.Rigidity.ksEntropy_eq_iSup_ksEntropyOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+seconds=4
+exit=0

@@ -163,3 +163,48 @@ and `action_ergodic_decomposition`, `['sorryAx'] beyond the standard three`, exi
 
 **2.8 The map.** `ARCHITECTURE.md`: two rows after `Outside/OAI015Maximal`; `Proofs.lean`: two lines;
 `tools/check_architecture.py`: PASS (`logs/arch-1.out`).
+
+## Stage 3 — SAVED: the entropy file's tenth leaf, `ksEntropy_eq_iSup_ksEntropyOn` (T2)
+
+*From `lake env lean` on a copy under `data/fs131/ip23/work/` against the build-1 library; the build and the kernel-side
+statement check are Stage 5's.*
+
+**The route** is the third planner's (KN7 § Stage 4, "What each needs at the consumer"), as written. `≥`:
+`ksEntropyOn_le_ksEntropy` at each `i` (`𝒜 i ≤ m` from `hgen`). `≤`: for each `i`, `A i = natGeneratingSequence` of
+`(X, 𝒜 i)` (`hcg i`; `MeasurableSpace.measurableSet_natGeneratingSequence`, `generateFrom_natGeneratingSequence`); the
+stage-`n` observation `Q n x = equivFin (p ↦ decide (x ∈ A p.1 p.2))` over `p : Fin (n+1) × Fin (n+1)`, a label in
+`Fin (card (Fin (n+1) × Fin (n+1) → Bool))`. Then: `Q n` is `𝒜 n`-measurable (`measurable_pi_lambda` with each
+coordinate's two fibres `A`, `Aᶜ`, then `measurable_of_finite` for the equivalence; `A i j ∈ 𝒜 i ≤ 𝒜 n` by `hmono`);
+the observation σ-algebras increase, since `Q n` factors through `Q (n+1)` (restriction along `Fin.castSucc`;
+`MeasurableSpace.comap_comp`, `comap_mono`); they generate `m` (`≤` by measurability of each `Q n`; `≥` because each
+`A i j` is `Q (max i j)`'s preimage of a set, `MeasurableSpace.generateFrom_le`); so the ported
+`Outside.OAI015.measureEntropy_eq_iSup_generating` applies with exactly its hypotheses, after `ksEntropy_eq_measureEntropy`;
+and each rate is `partitionEntropy μ T (Q n)` (`partitionEntropy_eq_ofReal_observationEntropyRate`) `≤ ksEntropyOn (𝒜 n)
+μ T` (`partitionEntropy_le_ksEntropyOn`). The encoding of finitely many indicators as one label was the plan's one hard
+step; nothing else needed.
+
+**The edit to `Rigidity/Entropy.lean`:** the import `Outside/OAI015Mixtures` replaced by `Outside/OAI015Generating` (which
+imports it) and the leaf's `sorry` by the proof; no other line (`diff` against the base: the import line and ll. 388–445).
+No helper was needed. **Elaborated:** 0 errors, 0 warnings, no `sorry` left in the file (`logs/leaf-entropy-1.log`).
+**Axioms**, the copy with `#print axioms` appended: `[propext, Classical.choice, Quot.sound]`
+(`logs/leafcheck-EntropyAx.log`). **A planted fault fires:** the copy with `le_max_left` made `le_max_right` in the proof
+is refused (`Application type mismatch`, exit 1; `logs/leafcheck-EntropyPlanted.log`).
+
+## Stage 4 — SAVED: the split's first leaf, `condExpKernel_ergodicDecomposition` (T1, canonical form)
+
+**The proof** is the ported theorem itself: `Outside.OAI015.action_ergodic_decomposition μ hp`. The release's
+`actionInvariantSigma H Y` is `⨅ g : H, MeasurableSpace.invariants (fun y : Y => g • y)`, which is `invariantSigma H Y`'s
+body word for word, so the two statements are one term up to unfolding the release's definition; the elaborator accepts
+the release's proof term at the leaf's stated type with nothing else (the `trim` proofs agree by proof irrelevance). The
+hypotheses are the release's exactly — `[Group H] [Countable H] [MulAction H Y] [MeasurableSpace Y]
+[StandardBorelSpace Y] [Nonempty Y]`, a probability `μ`, each `g • ·` measure-preserving — so no binder is unread and
+none is dropped. **The edit to `Rigidity/EntropySplitMax.lean`:** one import line (`Outside/OAI015ErgodicDecomposition`)
+and the leaf's body (with a `--` comment saying why the term is accepted). **Elaborated:** 0 errors; the five `sorry`
+warnings left are the module's other leaves, not this job's (`logs/leaf-split-1.log`). **Axioms:**
+`[propext, Classical.choice, Quot.sound]` (`logs/leafcheck-SplitAx.log`). **A planted fault fires:** the release's theorem
+applied at the wrong group (`H := Unit`) is refused (`Type mismatch`, exit 1; `logs/leafcheck-SplitPlanted.log`).
+
+**The map** for both leaves: `ARCHITECTURE.md`'s rows of `Rigidity/Entropy` (state: no `sorry`; the tenth leaf proved;
+imports cell `Outside/OAI015Generating`) and `Rigidity/EntropySplitMax` (5 leaves; the first proved; imports cell with
+`Outside/OAI015ErgodicDecomposition`) — the imports cells are what `tools/check_architecture.py` holds against the
+import graph; PASS (`logs/arch-2.out`).
