@@ -1,0 +1,10 @@
+slot: admitted ij3f: mem 5 GiB (hard cap), cpus 4,5
+data/fs131/ij3/work/EntropyFibres.lean:323:0: warning: automatically included section variable(s) unused in theorem `HadwigerNelson.Rigidity.exists_pattern_names_le`:
+  [IsTopologicalAddGroup X]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [IsTopologicalAddGroup X] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/ij3/work/EntropyFibres.lean:473:8: warning: declaration uses `sorry`
+seconds=3
+exit=0

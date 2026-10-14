@@ -1,0 +1,109 @@
+slot: admitted ij3f: mem 5 GiB (hard cap), cpus 4,5
+data/fs131/ij3/work/EntropyFibres.lean:83:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑(e₁ (?j, ?i))
+in the target expression
+  P (T^[↑i] (T^[q]^[↑j] x)) =
+    Function.curry ((e₁.symm.arrowCongr (Equiv.refl (Fin k))) (Outside.OAI015.orbitName T P (q * n) x)) j i
+
+case e_6
+X : Type u_1
+m : MeasurableSpace X
+μ : Measure X
+k : ℕ
+T : X → X
+P : X → Fin k
+q n : ℕ
+e₁ : Fin n × Fin q ≃ Fin (q * n) := finProdFinEquiv.trans (finCongr ⋯)
+e : (Fin (q * n) → Fin k) ≃ (Fin n → Fin (k ^ q)) :=
+  (e₁.arrowCongr (Equiv.refl (Fin k))).symm.trans
+    ((Equiv.curry (Fin n) (Fin q) (Fin k)).trans (Equiv.piCongrRight fun x => finFunctionFinEquiv))
+he₁ : ∀ (j : Fin n) (i : Fin q), ↑(e₁ (j, i)) = ↑i + q * ↑j
+x : X
+j : Fin n
+i : Fin q
+⊢ P (T^[↑i] (T^[q]^[↑j] x)) =
+    Function.curry ((e₁.symm.arrowCongr (Equiv.refl (Fin k))) (Outside.OAI015.orbitName T P (q * n) x)) j i
+data/fs131/ij3/work/EntropyFibres.lean:79:48: warning: This simp argument is unused:
+  Equiv.arrowCongr_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [Outside.OAI015.orbitName, blockLabel, e, Equiv.trans_apply, Equiv.piCongrRight_apply,
+        Equiv.curry_apply, Equiv.arrowCongr_symm, Equiv.a̵rr̵o̵w̵C̵o̵n̵g̵r̵_̵a̵p̵p̵l̵y̵,̵ ̵E̵q̵u̵i̵v̵.̵r̵efl_symm, Equiv.refl_apply,
+        Function.comp_apply, Function.curry_apply, Equiv.symm_symm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/EntropyFibres.lean:79:89: warning: This simp argument is unused:
+  Equiv.refl_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [Outside.OAI015.orbitName, blockLabel, e, Equiv.trans_apply, Equiv.piCongrRight_apply,
+        Equiv.curry_apply, Equiv.arrowCongr_symm, Equiv.arrowCongr_apply, Equiv.refl_symm, ̵E̵q̵u̵i̵v̵.̵r̵e̵f̵l̵_̵a̵p̵p̵l̵y̵,̵
+        Function.comp_apply, Function.curry_apply, Equiv.symm_symm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/EntropyFibres.lean:80:6: warning: This simp argument is unused:
+  Function.comp_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [Outside.OAI015.orbitName, blockLabel, e, Equiv.trans_apply, Equiv.piCongrRight_apply,
+        Equiv.curry_apply, Equiv.arrowCongr_symm, Equiv.arrowCongr_apply, Equiv.refl_symm,
+  ̲  ̲ ̲ ̲ ̲ ̲Equiv.refl_apply,
+  ̵  ̵ ̵ ̵ ̵ ̵Function.co̵m̵p̵_̵a̵p̵p̵l̵y̵,̵ ̵F̵un̵c̵t̵i̵o̵n̵.̵c̵u̵rry_apply, Equiv.symm_symm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/EntropyFibres.lean:80:27: warning: This simp argument is unused:
+  Function.curry_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [Outside.OAI015.orbitName, blockLabel, e, Equiv.trans_apply, Equiv.piCongrRight_apply,
+        Equiv.curry_apply, Equiv.arrowCongr_symm, Equiv.arrowCongr_apply, Equiv.refl_symm,
+  ̲  ̲ ̲ ̲ ̲ ̲Equiv.refl_apply,
+  ̵  ̵ ̵ ̵ ̵ ̵Function.comp_apply, F̵u̵n̵c̵t̵i̵o̵n̵.̵c̵u̵r̵r̵y̵_̵a̵p̵p̵l̵y̵,̵ ̵Equiv.symm_symm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/EntropyFibres.lean:80:49: warning: This simp argument is unused:
+  Equiv.symm_symm
+
+Hint: Omit it from the simp argument list.
+  simp only [Outside.OAI015.orbitName, blockLabel, e, Equiv.trans_apply, Equiv.piCongrRight_apply,
+        Equiv.curry_apply, Equiv.arrowCongr_symm, Equiv.arrowCongr_apply, Equiv.refl_symm,
+  ̲  ̲ ̲ ̲ ̲ ̲Equiv.refl_apply,
+  ̵  ̵ ̵ ̵ ̵ ̵Function.comp_apply, Function.curry_apply,̵ ̵E̵q̵u̵i̵v̵.̵s̵y̵m̵m̵_̵s̵y̵m̵m̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/EntropyFibres.lean:97:25: error: Function expected at
+  zero_le
+but this term has type
+  0 ≤ ?m.64
+
+Note: Expected a function because this term is being applied to the argument
+  _
+data/fs131/ij3/work/EntropyFibres.lean:112:9: error(lean.unknownIdentifier): Unknown identifier `le_or_lt`
+data/fs131/ij3/work/EntropyFibres.lean:112:27: error: Tactic `rcases` failed: `x✝ : ?m.330` is not an inductive datatype
+data/fs131/ij3/work/EntropyFibres.lean:142:26: warning: `MeasureTheory.Measure.coe_finset_sum` has been deprecated: Use `MeasureTheory.Measure.coe_finsetSum` instead
+data/fs131/ij3/work/EntropyFibres.lean:182:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∑ x ∈ ?s, if x = ?a then ?b x else 0
+in the target expression
+  (∑ x, if f a = x then (μ.real {y | A y = a}).negMulLog else 0) = (μ.real {y | A y = a}).negMulLog
+
+Y : Type u_2
+α : Type u_3
+β : Type u_4
+inst✝³ : MeasurableSpace Y
+inst✝² : Fintype α
+inst✝¹ : Fintype β
+μ : Measure Y
+inst✝ : IsFiniteMeasure μ
+A : Y → α
+hA : ∀ (a : α), MeasurableSet {y | A y = a}
+f : α → β
+hfib : ∀ (b : β), μ.real {y | f (A y) = b} = ∑ a, if f a = b then μ.real {y | A y = a} else 0
+hle : ∀ (b : β), (μ.real {y | f (A y) = b}).negMulLog ≤ ∑ a, if f a = b then (μ.real {y | A y = a}).negMulLog else 0
+a : α
+x✝ : a ∈ Finset.univ
+⊢ (∑ x, if f a = x then (μ.real {y | A y = a}).negMulLog else 0) = (μ.real {y | A y = a}).negMulLog
+data/fs131/ij3/work/EntropyFibres.lean:196:8: warning: declaration uses `sorry`
+data/fs131/ij3/work/EntropyFibres.lean:211:8: warning: declaration uses `sorry`
+data/fs131/ij3/work/EntropyFibres.lean:227:8: warning: declaration uses `sorry`
+seconds=3
+exit=1

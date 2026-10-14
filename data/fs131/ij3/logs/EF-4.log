@@ -1,0 +1,65 @@
+slot: admitted ij3f: mem 5 GiB (hard cap), cpus 0,1
+data/fs131/ij3/work/EntropyFibres.lean:292:17: error: don't know how to synthesize implicit argument `N`
+  @QuotientAddGroup.isOpenMap_coe X inst✝⁵ inst✝⁶.toAddGroup instSeparatelyContinuousAddOfContinuousAdd ?m.947
+    (Subtype.val '' O) h1
+context:
+X : Type u_1
+inst✝⁶ : AddCommGroup X
+inst✝⁵ : TopologicalSpace X
+inst✝⁴ : IsTopologicalAddGroup X
+inst✝³ : MeasurableSpace X
+inst✝² : BorelSpace X
+inst✝¹ : CompactSpace X
+inst✝ : T1Space X
+G : AddSubgroup X
+hG : (↑G).Finite
+hV : IsOpen (↑G \ {0})ᶜ
+hV0 : 0 ∈ (↑G \ {0})ᶜ
+U₀ : Set X
+hU₀ : IsOpen U₀
+hU₀0 : 0 ∈ U₀
+hU₀V : ∀ v ∈ U₀, ∀ w ∈ U₀, v + w ∈ (↑G \ {0})ᶜ
+U : Set X := ⋯
+hUdef : U = U₀ ∩ (fun x => -x) ⁻¹' U₀
+hU : IsOpen U
+hU0 : 0 ∈ U
+hUU : ∀ a ∈ U, ∀ b ∈ U, ∀ g ∈ G, a + g = b → g = 0
+t : Finset X
+ht : Set.univ ⊆ ⋃ g ∈ t, (fun x => g + x) ⁻¹' U
+W : X → Set X := ⋯
+hW : W = fun g => (fun h => g + h) ⁻¹' U
+hWopen : ∀ (g : X), IsOpen (W g)
+c : Fin t.card → X := ⋯
+hcover : ∀ (x : X), ∃ i, x ∈ W (c i)
+Q : X → Fin t.card := ⋯
+hQmem : ∀ (x : X), x ∈ W (c (Q x))
+hQle : ∀ (x : X) (j : Fin t.card), x ∈ W (c j) → Q x ≤ j
+hQeq : ∀ (x : X) (i : Fin t.card), Q x = i ↔ x ∈ W (c i) ∧ ∀ j < i, x ∉ W (c j)
+hWm : ∀ (g : X), MeasurableSet (W g)
+hcell : ∀ (i : Fin t.card), Q ⁻¹' {i} = W (c i) ∩ ⋂ j, {x | j < i → x ∉ W (c j)}
+hcellm : ∀ (i : Fin t.card), MeasurableSet (Q ⁻¹' {i})
+i : Fin t.card
+S : Set X
+hS : MeasurableSet S
+this✝ : MeasurableSpace (X ⧸ G) := ⋯
+this : BorelSpace (X ⧸ G)
+Wi : Set X := ⋯
+f : ↑Wi → X ⧸ G := ⋯
+hfc : Continuous f
+hfinj : Function.Injective f
+O : Set ↑Wi
+hO : IsOpen O
+h1 : IsOpen (Subtype.val '' O)
+⊢ AddSubgroup X
+data/fs131/ij3/work/EntropyFibres.lean:292:11: error: failed to infer `have` declaration type
+data/fs131/ij3/work/EntropyFibres.lean:197:0: warning: automatically included section variable(s) unused in theorem `HadwigerNelson.Rigidity.exists_sectionPartition`:
+  [IsTopologicalAddGroup X]
+  [BorelSpace X]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [IsTopologicalAddGroup X] [BorelSpace X] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/ij3/work/EntropyFibres.lean:323:8: warning: declaration uses `sorry`
+data/fs131/ij3/work/EntropyFibres.lean:339:8: warning: declaration uses `sorry`
+seconds=4
+exit=1

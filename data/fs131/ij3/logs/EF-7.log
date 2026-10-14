@@ -1,0 +1,16 @@
+slot: admitted ij3f: mem 5 GiB (hard cap), cpus 4,5
+data/fs131/ij3/work/EntropyFibres.lean:407:10: error: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
+  Quot.instMeasurableSpace
+inferred
+  borel (X ⧸ G)
+data/fs131/ij3/work/EntropyFibres.lean:445:19: error: Application type mismatch: The argument
+  hc.left
+has type
+  Q ⋯.choose = Q y
+but is expected to have type
+  Q h.choose = Q y
+in the application
+  hdet h.choose y hc.left
+data/fs131/ij3/work/EntropyFibres.lean:476:8: warning: declaration uses `sorry`
+seconds=4
+exit=1

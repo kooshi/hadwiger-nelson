@@ -1,0 +1,19 @@
+slot: admitted ij3f: mem 5 GiB (hard cap), cpus 5,6
+data/fs131/ij3/work/EntropyFibres.lean:203:56: warning: `Set.diff_subset` has been deprecated: Use `Set.sdiff_subset` instead
+data/fs131/ij3/work/EntropyFibres.lean:256:6: error: Type mismatch: After simplification, term
+  MeasurableSet.compl (hWm (c j))
+ has type
+  MeasurableSet (W (c j))
+but is expected to have type
+  Measurable fun x => x ∉ W (c j)
+data/fs131/ij3/work/EntropyFibres.lean:197:0: warning: automatically included section variable(s) unused in theorem `HadwigerNelson.Rigidity.exists_sectionPartition`:
+  [IsTopologicalAddGroup X]
+  [BorelSpace X]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [IsTopologicalAddGroup X] [BorelSpace X] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/ij3/work/EntropyFibres.lean:315:8: warning: declaration uses `sorry`
+data/fs131/ij3/work/EntropyFibres.lean:331:8: warning: declaration uses `sorry`
+seconds=4
+exit=1
