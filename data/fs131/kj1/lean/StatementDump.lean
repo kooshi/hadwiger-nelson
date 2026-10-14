@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Arith.ThreeFourColours
+import Proofs.HadwigerNelson.Instances.UpperHalfCorollaries
 /-! FS131-KJ1 — every named constant of the line's compiled modules as the kernel holds it, one line each:
 
   STMT <module> <THM|DEF|…> <full name> type=<hash of the stored type> [value=<hash of a definition's stored value>]
@@ -28,5 +29,6 @@ def run (mods : List Name) : CommandElabM Unit := do
 #eval run [`Proofs.HadwigerNelson.Arith.ThreeColourCharacter, `Proofs.HadwigerNelson.Arith.TorsionExtraction,
   `Proofs.HadwigerNelson.Arith.ThreeColourCriterion, `Proofs.HadwigerNelson.Arith.DyadicQuadratic,
   `Proofs.HadwigerNelson.Arith.UpperHalf, `Proofs.HadwigerNelson.Arith.QuadraticPrime,
-  `Proofs.HadwigerNelson.Instances.UpperHalfValues, `Proofs.HadwigerNelson.Arith.ThreeFourColours]
+  `Proofs.HadwigerNelson.Instances.UpperHalfValues, `Proofs.HadwigerNelson.Arith.ThreeFourColours,
+  `Proofs.HadwigerNelson.Instances.UpperHalfCorollaries]
 end FS131KJ1Dump

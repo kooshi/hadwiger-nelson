@@ -611,6 +611,23 @@ theorem localBound_le_chromaticNumber_of_le_four (F : Subfield ℝ) [NumberField
     localBound F ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber :=
   (localBound_le_chromaticNumber_or_four_le F).elim id fun h4 => h.trans h4
 
+/-- **Row 99, its second sentence**: `χ(F²) = L(F)` for every real number field with `L(F) ≤ 4` — the residue module's
+upper half `χ ≤ L` and `localBound_le_chromaticNumber_of_le_four`. Rests on Weil's bound (the lower half at three). -/
+theorem chromaticNumber_planeOver_eq_localBound_of_le_four (F : Subfield ℝ) [NumberField F] (h : localBound F ≤ 4) :
+    ((unitDistance ℂ).induce (planeOver F)).chromaticNumber = localBound F :=
+  le_antisymm (chromaticNumber_planeOver_le_localBound F) (localBound_le_chromaticNumber_of_le_four F h)
+
+/-- **Row 99, its first sentence**: `χ(F²) ≤ 3 ⟺ L(F) ≤ 3`, every real number field — three colours obey the local–global
+conjecture. (`⟸` is the residue module's upper half, prior art; `⟹` is this project's, on Weil's bound.) -/
+theorem chromaticNumber_planeOver_le_three_iff (F : Subfield ℝ) [NumberField F] :
+    ((unitDistance ℂ).induce (planeOver F)).chromaticNumber ≤ 3 ↔ localBound F ≤ 3 := by
+  constructor
+  · intro h
+    rcases localBound_le_chromaticNumber_or_four_le F with hL | h4
+    · exact hL.trans h
+    · exact absurd (h4.trans h) (by norm_num)
+  · exact fun h => (chromaticNumber_planeOver_le_localBound F).trans h
+
 /-! ## Clause (a): the table for real quadratic fields, one theorem per row -/
 
 /-- A natural number's class modulo `p`, read in `ZMod p`. -/

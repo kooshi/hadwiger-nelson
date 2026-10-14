@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Arith.ThreeFourColours
+import Proofs.HadwigerNelson.Instances.UpperHalfCorollaries
 
 /-! FS131-KJ1 — the axioms of every theorem and definition of the line's modules, read from the COMPILED modules of this
 worktree's library (private helpers included; names Lean generates inside a declaration skipped), one line each:
@@ -83,4 +84,5 @@ run_cmd do
   runModule `Proofs.HadwigerNelson.Arith.QuadraticPrime
   runModule `Proofs.HadwigerNelson.Instances.UpperHalfValues
   runModule `Proofs.HadwigerNelson.Arith.ThreeFourColours
+  runModule `Proofs.HadwigerNelson.Instances.UpperHalfCorollaries
   run "PLANTED" #[``planted_sorry, ``planted_weil, ``planted_clean]
