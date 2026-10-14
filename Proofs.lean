@@ -167,6 +167,7 @@ import Proofs.HadwigerNelson.Plane.Suprema
 import Proofs.HadwigerNelson.Plane.OneAvoidingDensity
 import Proofs.HadwigerNelson.Plane.DensityBound.Bessel
 import Proofs.HadwigerNelson.Plane.DensityBound.BesselDefect
+import Proofs.HadwigerNelson.Plane.DensityBound.BesselCert
 import Proofs.HadwigerNelson.Plane.DensityBound.Autocorr
 import Proofs.HadwigerNelson.Plane.DensityBound.Pattern
 import Proofs.HadwigerNelson.Plane.DensityBound.Window
