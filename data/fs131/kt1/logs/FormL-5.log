@@ -1,0 +1,18 @@
+slot: admitted kt1: mem 4 GiB (hard cap), cpus 2,3
+data/fs131/kt1/scratch/FormL.lean:78:58: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern in the current goal
+
+p : ℕ
+inst✝ : Fact (Nat.Prime p)
+x : ℚ_[p]
+k : ℕ
+hk : ‖↑p ^ k * x‖ ≤ 1
+y : ℤ_[p] := ⟨↑p ^ k * x, hk⟩
+hy : y - ↑(y.appr k) ∈ Ideal.span {↑p ^ k}
+z : ℤ_[p]
+hz : y - ↑(y.appr k) = z * ↑p ^ k
+hp : ↑p ^ k ≠ 0
+hz' : ↑p ^ k * x - ↑(y.appr k) = ↑z * ↑p ^ k
+hyx : ↑p ^ k * x = ↑y
+⊢ ↑↑(y.appr k) / ↑p ^ k = x - ↑z
+data/fs131/kt1/scratch/FormL.lean:84:8: warning: declaration uses `sorry`
+exit=1

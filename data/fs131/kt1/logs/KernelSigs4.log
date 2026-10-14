@@ -1,0 +1,116 @@
+slot: admitted kt1: mem 4 GiB (hard cap), cpus 2,3
+@exists_valuation_le_one_away : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K]
+  (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers K)) (s : K),
+  ∃ t,
+    (∀ (w : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers K)),
+        w ≠ v → (IsDedekindDomain.HeightOneSpectrum.valuation K w) t ≤ 1) ∧
+      (IsDedekindDomain.HeightOneSpectrum.valuation K v) (s - t) ≤ 1
+@exists_approx_completion : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K]
+  (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers K))
+  (z : IsDedekindDomain.HeightOneSpectrum.adicCompletion K v),
+  ∃ t,
+    (∀ (w : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers K)),
+        w ≠ v → (IsDedekindDomain.HeightOneSpectrum.valuation K w) t ≤ 1) ∧
+      z - { toCompletion := ↑((WithVal.equiv (IsDedekindDomain.HeightOneSpectrum.valuation K v)).symm t) } ∈
+        IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers K v
+@exists_int_trace_of_integral : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] (x : K),
+  (∀ (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers K)),
+      (IsDedekindDomain.HeightOneSpectrum.valuation K v) x ≤ 1) →
+    ∃ n, (Algebra.trace ℚ K) x = ↑n
+@exists_trace_not_int_away : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K]
+  (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers K)),
+  ∃ t,
+    (∀ (w : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers K)),
+        w ≠ v → (IsDedekindDomain.HeightOneSpectrum.valuation K w) t ≤ 1) ∧
+      ∀ (n : ℤ), (Algebra.trace ℚ K) t ≠ ↑n
+@exists_nat_mul_integral_of_trace_int : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K],
+  ∃ d₀,
+    d₀ ≠ 0 ∧
+      ∀ (y : K),
+        (∀ (s : NumberField.RingOfIntegers K), ∃ n, (Algebra.trace ℚ K) (y * ↑s) = ↑n) →
+          ∀ (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers K)),
+            (IsDedekindDomain.HeightOneSpectrum.valuation K v) (↑d₀ * y) ≤ 1
+@compactSpace_adicCompletionIntegers : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K]
+  (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers K)),
+  CompactSpace ↥(IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers K v)
+archTrace : (K : Type u_1) → [inst : Field K] → [NumberField K] → NumberField.mixedEmbedding.mixedSpace K →ₗ[ℝ] ℝ
+@archTrace_mixedEmbedding : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] (x : K),
+  (archTrace K) ((NumberField.mixedEmbedding K) x) = ↑((Algebra.trace ℚ K) x)
+@exists_eq_mixedEmbedding_of_archTrace_int : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K]
+  (b : NumberField.mixedEmbedding.mixedSpace K),
+  (∀ (s : NumberField.RingOfIntegers K), ∃ n, (archTrace K) (b * (NumberField.mixedEmbedding K) ↑s) = ↑n) →
+    ∃ y, b = (NumberField.mixedEmbedding K) y
+@archTrace_mixedEmbedding_one : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K],
+  (archTrace K) ((NumberField.mixedEmbedding K) 1) = ↑(Module.finrank ℚ K)
+mem_stableIntegers_iff_valuation : ∀ (F : Subfield ℝ) [inst : NumberField ↥F]
+  {x : ↥(HadwigerNelson.SpectralChain.fieldI F)},
+  x ∈ stableIntegers F ↔
+    ∀ (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F))),
+      IsStablePlace F v →
+        (IsDedekindDomain.HeightOneSpectrum.valuation (↥(HadwigerNelson.SpectralChain.fieldI F)) v) x ≤ 1
+IsApprox : (F : Subfield ℝ) → [inst : NumberField ↥F] → SAdeleRing F → ↥(HadwigerNelson.SpectralChain.fieldI F) → Prop
+exists_isApprox : ∀ (F : Subfield ℝ) [inst : NumberField ↥F] (a : SAdeleRing F), ∃ t, IsApprox F a t
+exists_int_trace_sub_of_isApprox : ∀ (F : Subfield ℝ) [inst : NumberField ↥F] {a : SAdeleRing F}
+  {t t' : ↥(HadwigerNelson.SpectralChain.fieldI F)},
+  IsApprox F a t → IsApprox F a t' → ∃ n, (Algebra.trace ℚ ↥(HadwigerNelson.SpectralChain.fieldI F)) (t - t') = ↑n
+tateCharFun : (F : Subfield ℝ) → [inst : NumberField ↥F] → SAdeleRing F → Circle
+tateCharFun_eq : ∀ (F : Subfield ℝ) [inst : NumberField ↥F] {a : SAdeleRing F}
+  {t : ↥(HadwigerNelson.SpectralChain.fieldI F)},
+  IsApprox F a t →
+    tateCharFun F a =
+      Circle.exp
+        (2 * Real.pi *
+          ((archTrace ↥(HadwigerNelson.SpectralChain.fieldI F)) a.1 -
+            ↑((Algebra.trace ℚ ↥(HadwigerNelson.SpectralChain.fieldI F)) t)))
+tateChar : (F : Subfield ℝ) → [inst : NumberField ↥F] → AddChar (SAdeleRing F) Circle
+tateChar_of_integral : ∀ (F : Subfield ℝ) [inst : NumberField ↥F] {a : SAdeleRing F},
+  (∀ (w : SplitPlace F),
+      a.2 w ∈ IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ↑w) →
+    (tateChar F) a = Circle.exp (2 * Real.pi * (archTrace ↥(HadwigerNelson.SpectralChain.fieldI F)) a.1)
+tateChar_toSAdele_of_mem : ∀ (F : Subfield ℝ) [inst : NumberField ↥F] {x : ↥(HadwigerNelson.SpectralChain.fieldI F)},
+  x ∈ stableIntegers F → (tateChar F) ((toSAdele F) x) = 1
+continuous_tateChar : ∀ (F : Subfield ℝ) [inst : NumberField ↥F], Continuous ⇑(tateChar F)
+tatePi : (F : Subfield ℝ) → [inst : NumberField ↥F] → AddChar (SAdeleRing F) (HadwigerNelson.SpectralChain.Dual F)
+tatePi_apply : ∀ (F : Subfield ℝ) [inst : NumberField ↥F] (a : SAdeleRing F)
+  (r : ↥(HadwigerNelson.SpectralChain.unitRing F)),
+  ((tatePi F) a) r = (tateChar F) (a * (toSAdele F) ((ofUnitRing F) r))
+continuous_tatePi : ∀ (F : Subfield ℝ) [inst : NumberField ↥F], Continuous ⇑(tatePi F)
+tatePi_unit_mul : ∀ (F : Subfield ℝ) [inst : NumberField ↥F] (u : ↑(HadwigerNelson.SpectralChain.unitVectors F))
+  (a : SAdeleRing F), (tatePi F) ((toSAdele F) (unitL u) * a) = HadwigerNelson.SpectralChain.rot u ((tatePi F) a)
+tatePi_toSAdele_of_mem : ∀ (F : Subfield ℝ) [inst : NumberField ↥F] {x : ↥(HadwigerNelson.SpectralChain.fieldI F)},
+  x ∈ stableIntegers F → (tatePi F) ((toSAdele F) x) = 1
+tatePi_arch_mem : ∀ (F : Subfield ℝ) [inst : NumberField ↥F]
+  (b : NumberField.mixedEmbedding.mixedSpace ↥(HadwigerNelson.SpectralChain.fieldI F)),
+  (tatePi F) (b, 0) ∈ archChars ↥(HadwigerNelson.SpectralChain.unitRing F)
+oAnn : (F : Subfield ℝ) → [inst : NumberField ↥F] → Set (SAdeleRing F)
+@exists_eq_mixedEmbedding_of_mem_oAnn : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] {a : SAdeleRing F},
+  a ∈ oAnn F →
+    (∀ (w : SplitPlace F),
+        a.2 w ∈ IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ↑w) →
+      ∃ y,
+        a.1 = (NumberField.mixedEmbedding ↥(HadwigerNelson.SpectralChain.fieldI F)) y ∧
+          ∀ (s : NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F)),
+            ∃ n, (Algebra.trace ℚ ↥(HadwigerNelson.SpectralChain.fieldI F)) (y * ↑s) = ↑n
+@eq_zero_of_mem_oAnn : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] {c : SAdeleRing F},
+  c ∈ oAnn F →
+    c.1 = 0 →
+      (∀ (w : SplitPlace F),
+          c.2 w ∈
+            IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ↑w) →
+        c = 0
+exists_nat_forall_mem_oAnn : ∀ (F : Subfield ℝ) [inst : NumberField ↥F],
+  ∃ d₀, d₀ ≠ 0 ∧ ∀ a ∈ oAnn F, ∃ x, a = (toSAdele F) x ∧ ↑d₀ * x ∈ stableIntegers F
+tatePi_ker_subset : ∀ (F : Subfield ℝ) [inst : NumberField ↥F] (a : SAdeleRing F),
+  (tatePi F) a = 1 → ∃ y, a = (toSAdele F) y
+tatePi_exists_nat_mul_mem : ∀ (F : Subfield ℝ) [inst : NumberField ↥F],
+  ∃ d,
+    d ≠ 0 ∧
+      ∀ (y : ↥(HadwigerNelson.SpectralChain.fieldI F)), (tatePi F) ((toSAdele F) y) = 1 → ↑d * y ∈ stableIntegers F
+tatePi_exists_isCompact : ∀ (F : Subfield ℝ) [inst : NumberField ↥F],
+  ∃ K, IsCompact K ∧ ∀ (a : SAdeleRing F), ∃ k ∈ K, ∃ x ∈ stableIntegers F, a = k + (toSAdele F) x
+tatePi_eq_one_forall_imp : ∀ (F : Subfield ℝ) [inst : NumberField ↥F] (r : ↥(HadwigerNelson.SpectralChain.unitRing F)),
+  (∀ (a : SAdeleRing F), ((tatePi F) a) r = 1) → r = 0
+surjective_tatePi : ∀ (F : Subfield ℝ) [inst : NumberField ↥F], Function.Surjective ⇑(tatePi F)
+exists_tateModel : ∀ (F : Subfield ℝ) [inst : NumberField ↥F], Nonempty (TateModel F)
+'HadwigerNelson.Rigidity.exists_tateModel' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+exit=0

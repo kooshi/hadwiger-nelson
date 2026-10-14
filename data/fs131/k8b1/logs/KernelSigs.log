@@ -1,0 +1,97 @@
+slot: admitted k8b1: mem 4 GiB (hard cap), cpus 0,1
+@HadwigerNelson.Rigidity.zeroEntropyCarried_of_tateModel : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (D : HadwigerNelson.Rigidity.TateModel F), HadwigerNelson.Rigidity.ZeroEntropyCarried F
+HadwigerNelson.Rigidity.zeroEntropyCarried_of_numberField : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  HadwigerNelson.Rigidity.ZeroEntropyCarried F
+HadwigerNelson.Rigidity.zeroEntropyCarried : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  HadwigerNelson.Rigidity.NoRamifiedStableDyadic F → HadwigerNelson.Rigidity.ZeroEntropyCarried F
+'HadwigerNelson.Rigidity.zeroEntropyCarried_of_numberField' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+@HadwigerNelson.Rigidity.TateModel.thinBox_heavy : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (D : HadwigerNelson.Rigidity.TateModel F) (μ : MeasureTheory.Measure (HadwigerNelson.SpectralChain.Dual F))
+  [MeasureTheory.IsProbabilityMeasure μ],
+  HadwigerNelson.SpectralChain.RotInv F μ →
+    ∀ {u : ↑(HadwigerNelson.SpectralChain.unitVectors F)},
+      HadwigerNelson.Rigidity.ksEntropy μ (HadwigerNelson.SpectralChain.rot u) = 0 →
+        ∀ {p : HadwigerNelson.Rigidity.WPlace F},
+          1 < p.absAt (HadwigerNelson.Rigidity.unitL u) →
+            ∀ {C : ℝ},
+              D.IsGap C →
+                ∀ {ε : ℝ},
+                  0 < ε →
+                    (∏ v, (2 * ε * (1 + v (HadwigerNelson.Rigidity.unitL u))) ^ v.mult) *
+                          HadwigerNelson.Rigidity.splitHeight (HadwigerNelson.Rigidity.unitL u) <
+                        C →
+                      ∀ {β η : ℝ},
+                        0 < β →
+                          0 < η →
+                            ∃ δ₀,
+                              0 < δ₀ ∧
+                                ∃ X',
+                                  MeasurableSet X' ∧
+                                    1 - η < μ.real X' ∧
+                                      ∀ x ∈ X',
+                                        ∀ (xw : HadwigerNelson.Rigidity.SAdeleRing F),
+                                          D.π xw = x →
+                                            ∀ (δ : ℝ),
+                                              0 < δ →
+                                                δ ≤ δ₀ →
+                                                  δ ^ β ≤
+                                                    μ.real
+                                                      (⇑D.π ''
+                                                        (fun x => xw + x) ''
+                                                          HadwigerNelson.Rigidity.thinBox p (2 * ε) δ)
+@HadwigerNelson.Rigidity.TateModel.exists_point_of_heavy : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (D : HadwigerNelson.Rigidity.TateModel F) (μ : MeasureTheory.Measure (HadwigerNelson.SpectralChain.Dual F))
+  [MeasureTheory.IsProbabilityMeasure μ],
+  HadwigerNelson.SpectralChain.RotInv F μ →
+    ∀ {p : HadwigerNelson.Rigidity.WPlace F} {C : ℝ},
+      0 < C →
+        D.IsGap C →
+          ∀ {ε : ℝ},
+            0 < ε →
+              16 * ε ≤ 1 →
+                ∀ {δ₀ : ℝ},
+                  0 < δ₀ →
+                    ∀ {xw : HadwigerNelson.Rigidity.SAdeleRing F},
+                      (∀ (δ : ℝ),
+                          0 < δ →
+                            δ ≤ δ₀ →
+                              δ ^ HadwigerNelson.Rigidity.heavyExponent F ≤
+                                μ.real (⇑D.π '' (fun x => xw + x) '' HadwigerNelson.Rigidity.thinBox p (2 * ε) δ)) →
+                        ∃ t, xw - (HadwigerNelson.Rigidity.toSAdele F) t ∈ HadwigerNelson.Rigidity.hyperplane p
+@HadwigerNelson.Rigidity.TateModel.measure_compl_TA_eq_zero : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (D : HadwigerNelson.Rigidity.TateModel F) (μ : MeasureTheory.Measure (HadwigerNelson.SpectralChain.Dual F))
+  [MeasureTheory.IsFiniteMeasure μ],
+  HadwigerNelson.SpectralChain.RotInv F μ →
+    ∀ (p : HadwigerNelson.Rigidity.WPlace F), μ (D.leafSet p)ᶜ = 0 → μ (HadwigerNelson.Rigidity.TA F)ᶜ = 0
+@HadwigerNelson.Rigidity.exists_one_lt_absAt : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (u : ↑(HadwigerNelson.SpectralChain.unitVectors F)),
+  (∀ (n : ℕ), n ≠ 0 → ↑u ^ n ≠ 1) → ∃ p, 1 < p.absAt (HadwigerNelson.Rigidity.unitL u)
+@HadwigerNelson.Rigidity.TateModel.exists_orbit_box : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (D : HadwigerNelson.Rigidity.TateModel F) {C : ℝ},
+  D.IsGap C →
+    ∀ {u : ↑(HadwigerNelson.SpectralChain.unitVectors F)} {ε : ℝ},
+      0 < ε →
+        (∏ v, (2 * ε * (1 + v (HadwigerNelson.Rigidity.unitL u))) ^ v.mult) *
+              HadwigerNelson.Rigidity.splitHeight (HadwigerNelson.Rigidity.unitL u) <
+            C →
+          ∀ {k : ℕ} {c : Fin k → HadwigerNelson.Rigidity.SAdeleRing F}
+            {P : HadwigerNelson.SpectralChain.Dual F → Fin k},
+            (∀ (x : HadwigerNelson.SpectralChain.Dual F),
+                ∃ q ∈ HadwigerNelson.Rigidity.box F ε, x = D.π (c (P x) + q)) →
+              ∀ {n : ℕ},
+                0 < n →
+                  ∀ {x y : HadwigerNelson.SpectralChain.Dual F},
+                    HadwigerNelson.Rigidity.nameOf (HadwigerNelson.SpectralChain.rot u) P n x =
+                        HadwigerNelson.Rigidity.nameOf (HadwigerNelson.SpectralChain.rot u) P n y →
+                      ∀ {xw : HadwigerNelson.Rigidity.SAdeleRing F},
+                        D.π xw = x →
+                          ∃ a ∈ HadwigerNelson.Rigidity.box F (2 * ε),
+                            (∀ i < n,
+                                (HadwigerNelson.Rigidity.toSAdele F) (HadwigerNelson.Rigidity.unitL u ^ i) * a ∈
+                                  HadwigerNelson.Rigidity.box F (2 * ε)) ∧
+                              y = D.π (xw + a)
+exit=0

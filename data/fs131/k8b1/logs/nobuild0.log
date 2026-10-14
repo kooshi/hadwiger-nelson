@@ -1,0 +1,149 @@
+slot: admitted k8b1: mem 4 GiB (hard cap), cpus 2,3
+⚠ [5834/5960] Replayed Proofs.HadwigerNelson.Rigidity.Entropy
+warning: Proofs/HadwigerNelson/Rigidity/Entropy.lean:384:8: declaration uses `sorry`
+⚠ [5839/5960] Replayed Proofs.HadwigerNelson.Rigidity.EntropyFibres
+warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:60:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:66:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:73:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:82:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:94:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:110:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:125:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:141:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:151:8: declaration uses `sorry`
+⚠ [5840/5960] Replayed Proofs.HadwigerNelson.Rigidity.PositiveEntropy
+warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:150:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:157:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:162:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:169:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:179:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:207:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:213:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:224:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:235:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:256:8: declaration uses `sorry`
+⚠ [5842/5960] Replayed Proofs.HadwigerNelson.Rigidity.ChainAtTA
+warning: Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:549:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:554:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:561:8: declaration uses `sorry`
+⚠ [5843/5960] Replayed Proofs.HadwigerNelson.Rigidity.RingScope
+warning: Proofs/HadwigerNelson/Rigidity/RingScope.lean:61:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/RingScope.lean:71:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/RingScope.lean:80:8: declaration uses `sorry`
+⚠ [5844/5960] Replayed Proofs.HadwigerNelson.Rigidity.TateArch
+warning: Proofs/HadwigerNelson/Rigidity/TateArch.lean:36:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateArch.lean:41:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateArch.lean:47:8: declaration uses `sorry`
+⚠ [5856/5960] Replayed Proofs.HadwigerNelson.Rigidity.DualGroup
+warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:64:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:68:16: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:75:16: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:82:16: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:88:16: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:93:9: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:100:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:107:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:117:9: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:126:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:133:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:143:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:149:8: declaration uses `sorry`
+⚠ [5862/5960] Replayed Proofs.HadwigerNelson.Rigidity.TateModel
+warning: Proofs/HadwigerNelson/Rigidity/TateModel.lean:161:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateModel.lean:165:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateModel.lean:170:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateModel.lean:181:8: declaration uses `sorry`
+⚠ [5877/5960] Replayed Proofs.HadwigerNelson.Rigidity.TateLocal
+warning: Proofs/HadwigerNelson/Rigidity/TateLocal.lean:39:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateLocal.lean:45:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateLocal.lean:50:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateLocal.lean:57:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateLocal.lean:63:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateLocal.lean:71:8: declaration uses `sorry`
+⚠ [5878/5960] Replayed Proofs.HadwigerNelson.Rigidity.TateCharacter
+warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:38:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:50:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:55:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:65:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:69:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:72:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:82:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:88:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:92:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:108:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:112:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:118:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:122:8: declaration uses `sorry`
+⚠ [5879/5960] Replayed Proofs.HadwigerNelson.Rigidity.Annihilator
+warning: Proofs/HadwigerNelson/Rigidity/Annihilator.lean:61:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Annihilator.lean:91:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Annihilator.lean:97:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Annihilator.lean:102:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Annihilator.lean:107:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Annihilator.lean:112:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Annihilator.lean:116:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Annihilator.lean:120:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Annihilator.lean:126:8: declaration uses `sorry`
+⚠ [5880/5960] Replayed Proofs.HadwigerNelson.Rigidity.SubgroupHaar
+warning: Proofs/HadwigerNelson/Rigidity/SubgroupHaar.lean:40:9: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/SubgroupHaar.lean:44:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/SubgroupHaar.lean:48:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/SubgroupHaar.lean:55:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/SubgroupHaar.lean:60:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/SubgroupHaar.lean:75:8: declaration uses `sorry`
+⚠ [5881/5960] Replayed Proofs.HadwigerNelson.Rigidity.Duality
+warning: Proofs/HadwigerNelson/Rigidity/Duality.lean:67:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Duality.lean:72:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Duality.lean:77:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Duality.lean:100:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Duality.lean:119:4: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Duality.lean:129:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Duality.lean:136:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Duality.lean:143:8: declaration uses `sorry`
+⚠ [5882/5960] Replayed Proofs.HadwigerNelson.Rigidity.TateKernel
+warning: Proofs/HadwigerNelson/Rigidity/TateKernel.lean:46:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateKernel.lean:53:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateKernel.lean:59:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateKernel.lean:66:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateKernel.lean:70:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateKernel.lean:75:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateKernel.lean:80:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/TateKernel.lean:84:8: declaration uses `sorry`
+⚠ [5892/5960] Replayed Proofs.HadwigerNelson.Rigidity.DualConnected
+warning: Proofs/HadwigerNelson/Rigidity/DualConnected.lean:36:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/DualConnected.lean:41:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/DualConnected.lean:46:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/DualConnected.lean:53:8: declaration uses `sorry`
+⚠ [5893/5960] Replayed Proofs.HadwigerNelson.Rigidity.UnitCircle
+warning: Proofs/HadwigerNelson/Rigidity/UnitCircle.lean:81:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UnitCircle.lean:85:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UnitCircle.lean:108:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UnitCircle.lean:117:9: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UnitCircle.lean:122:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UnitCircle.lean:163:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UnitCircle.lean:170:4: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UnitCircle.lean:182:8: declaration uses `sorry`
+⚠ [5894/5960] Replayed Proofs.HadwigerNelson.Rigidity.Pieces
+warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:90:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:103:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:131:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:139:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:143:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:155:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:164:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:171:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:177:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:184:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:191:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:197:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:205:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:214:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:224:8: declaration uses `sorry`
+⚠ [5897/5960] Replayed Proofs.HadwigerNelson.Rigidity.EntropySplitMax
+warning: Proofs/HadwigerNelson/Rigidity/EntropySplitMax.lean:64:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/EntropySplitMax.lean:76:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/EntropySplitMax.lean:90:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/EntropySplitMax.lean:98:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/EntropySplitMax.lean:109:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/EntropySplitMax.lean:114:8: declaration uses `sorry`
+All targets up-to-date (6064 jobs).

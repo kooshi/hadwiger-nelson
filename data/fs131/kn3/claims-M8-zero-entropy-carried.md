@@ -65,3 +65,42 @@ M8a: one new file (`Rigidity/ZeroEntropyNames`), after M0-max and M1's `exists_b
 ## Not claimed
 
 Any size or price of M8b. That the statements marked "to type" elaborate as written. The deriver's entries are [hand], one mind; the kernel is their second check, and the deriver names where to attack first (EN2 § 3.7: step 4's "the block of `name_n(x)` at `j` is `name_k(T^j x)`", and step 3's use of the inequality for every `n`). What I read: EN2 §§ 3.0, 3.5–3.7, 5.1 in full; X01D not read by me.
+
+## Since FS131-KN9 (2026-10-14; by hand — the text above is kept)
+
+M8b's vocabulary decided, not typed (`plans/FS131-KN9-chain-zero-entropy.md` § Stage 4): the model built for `O′` and read for
+`R` through `R ⊆ O′` and `c·O′ ⊆ R` (module M9) — **not `R = O′`** (the coordinator's ruling: plan on the weaker reading; the
+scope binder of statement 1 stays until the proof shows it unread); a structure `TateModel F` over the concrete
+`W = L_∞ × ∏′_{split} L_w` carrying the five facts M8b reads, built by **lane T** (Tate's duality in that form: a planner and
+implementer job; strong approximation and Lusin–Souslin are not needed on its routes); M8b-2 (thin boxes, Lemma 3.1′ over
+EN2-ZE), M8b-3 (the pigeonhole over `z = 1 + 2bi`), M8b-4 (leaves and shells) over `(D : TateModel F)`.
+
+## Since FS131-KT1 (2026-10-14; by hand — the text above is kept)
+
+M8b's vocabulary is typed as an interface, `Rigidity.TateModel F` (module `Rigidity/TateModel`, `plans/FS131-KT1-tate.md`
+§ Stage 2): over `W = Rigidity.SAdeleRing F` (the mixed space of `F(i)` times the split adeles), a continuous
+`π : W → Dual F`, equivariant for the unit vectors, onto, with kernel on the diagonal, `O′ ⊆ Λ ⊆ d⁻¹·O′`, `W = K + O′` with `K`
+compact, and `π(b, 0) ∈ archChars`. Proved or planned over it: `TateModel.ker_eq`, `mul_mem_Λ`, `π_eq_π_iff`,
+`toSAdele_mem_torsionChars`, `mem_TA` (`π(L + L_∞) ⊆ TA F`, the inclusion Step 7 reads), `isOpenMap`. **M8b-2..4 are stated
+over `(D : TateModel F)`**; the existence `Rigidity.exists_tateModel` is lane T (modules `Rigidity/TateLocal`, `TateArch`,
+`TateCharacter`, `TateKernel`, assembled in `TateExists`), on form G of the character, priced at about two agent-days. The
+statement-2 line above ("the model of `Dual F` as `𝔸_𝒮/D` … Needs `R = O′`") is superseded: the model reads `R` through
+`R ⊆ O′` and `c·O′ ⊆ R` only.
+
+## Since FS131-K8B1 (2026-10-14; by hand — the text above is kept)
+
+M8b's parts 2–4 are typed over `(D : TateModel F)`, each with `sorry` at its leaves only and a plan per leaf
+(`plans/FS131-K8B1-zero-entropy-second.md`): `Rigidity/PlaceSizes` (the places of `W`, Lemma PF for `O′` and `Λ`, Step 0, the
+shells' multiplier), `Rigidity/Multipliers` (`(1 + 2bi)/(1 − 2bi)`), `Rigidity/ThinBoxes` (Lemma 3.1′ as EN2-L31 states it, its
+part (iii′) proved over EN2-ZE as typed), `Rigidity/GlobalPoint` (the pigeonhole, two scales, the global point),
+`Rigidity/WanderingShells` (leaves and shells). Statement 1 is now proved, as a composition of those leaves, **without its
+scope binder**: `Rigidity.zeroEntropyCarried_of_tateModel (D : TateModel F) : ZeroEntropyCarried F` and
+`Rigidity.zeroEntropyCarried_of_numberField (F) [NumberField F] : ZeroEntropyCarried F` (module `Rigidity/ZeroEntropyClosed`, the
+proposed home of statement 1's proof); no step reads `NoRamifiedStableDyadic F` or `R = O′`. Statement 2 (the model of the dual) is
+`TateModel F` (FS131-KT1). Statement 5 is `Rigidity.TateModel.thinBox_heavy`. Steps 6–7 run on a shorter route: the shells
+wander under one rotation, so no finite orbits, stabiliser, `ν_t`, Borel isomorphism or class group is read.
+
+**Imports, now:** M8b reads `Rigidity/TateCharacter` (for `mem_stableIntegers_iff_valuation`, a lane T-C leaf), `Rigidity/TateModel`,
+`Rigidity/ZeroEntropyNames` (M8a), Mathlib's product formula, Kronecker's theorem and conservative maps; `Rigidity/TateExists` only
+in the assembly. **Not read, of the list above:** `c·O′ ⊆ R` (M9-R), the density of `R`, `R = O′`, the class number, strong
+approximation, Lusin–Souslin.

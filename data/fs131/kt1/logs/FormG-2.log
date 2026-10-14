@@ -1,0 +1,3 @@
+slot: admitted kt1: mem 4 GiB (hard cap), cpus 4,5
+data/fs131/kt1/scratch/FormG.lean:84:8: error(lean.unknownIdentifier): Unknown constant `IsDedekindDomain.HeightOneSpectrum.adicCompletion.coe_sub`
+exit=1

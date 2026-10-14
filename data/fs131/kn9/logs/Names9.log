@@ -1,0 +1,88 @@
+slot: waiting (ledger 20 + 5 > budget 22 GiB)
+slot: admitted kn9: mem 5 GiB (hard cap), cpus 0,1
+mixedEmbedding : (K : Type u_1) → [inst : Field K] → K →+* mixedEmbedding.mixedSpace K
+mixedEmbedding.mixedSpace : (K : Type u_1) → [Field K] → Type u_1
+mixedEmbedding.latticeBasis : (K : Type u_1) →
+  [inst : Field K] →
+    [inst_1 : NumberField K] → Module.Basis (Module.Free.ChooseBasisIndex ℤ (𝓞 K)) ℝ (mixedEmbedding.mixedSpace K)
+@Ideal.ramificationIdx' : {R : Type u_1} →
+  [inst : CommRing R] → {S : Type u_2} → [inst_1 : CommRing S] → [Algebra R S] → Ideal R → Ideal S → ℕ
+@Ideal.ramificationIdx : {S : Type u_1} →
+  [inst : CommRing S] → Ideal S → (R : Type u_2) → [inst_1 : CommRing R] → [Algebra R S] → ℕ
+@Ideal.inertiaDeg' : {R : Type u_1} →
+  [inst : CommRing R] → {S : Type u_2} → [inst_1 : CommRing S] → [Algebra R S] → Ideal R → Ideal S → ℕ
+@Ideal.sum_ramification_inertia : ∀ {R : Type u_1} [inst : CommRing R] (S : Type u_2) [inst_1 : CommRing S]
+  [inst_2 : Algebra R S] [inst_3 : IsDedekindDomain S] (K : Type u_3) (L : Type u_4) [inst_4 : Field K]
+  [inst_5 : Field L] [IsDedekindDomain R] [inst_7 : Algebra R K] [IsFractionRing R K] [inst_9 : Algebra S L]
+  [IsFractionRing S L] [inst_11 : Algebra K L] [inst_12 : Algebra R L] [IsScalarTower R S L] [IsScalarTower R K L]
+  [Module.Finite R S] {p : Ideal R} [p.IsMaximal],
+  p ≠ ⊥ → ∑ P ∈ IsDedekindDomain.primesOverFinset p S, p.ramificationIdx' P * p.inertiaDeg' P = Module.finrank K L
+data/fs131/kn9/lean/Names9.lean:10:8: error(lean.unknownIdentifier): Unknown constant `NumberField.RingOfIntegers.algebraMap_mem`
+@Ideal.Quotient.stabilizerHom_surjective : ∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B]
+  [inst_2 : Algebra A B] (G : Type u_3) [inst_3 : Group G] [Finite G] [inst_5 : MulSemiringAction G B]
+  [inst_6 : SMulCommClass G A B] (P : Ideal A) (Q : Ideal B) [Q.IsPrime] [inst_8 : Q.LiesOver P]
+  [Algebra.IsInvariant A B G], Function.Surjective ⇑(Ideal.Quotient.stabilizerHom Q P G)
+@Ideal.card_inertia_eq_ramificationIdxIn : ∀ {R : Type u_1} {S : Type u_2} {G : Type u_3} [inst : CommRing R]
+  [inst_1 : CommRing S] [inst_2 : Algebra R S] [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [IsGaloisGroup G R S]
+  [Finite G] [IsDomain R] [IsDomain S] [Module.Finite R S] [Module.Flat R S] (p : Ideal R) (P : Ideal S) [P.LiesOver p]
+  [inst_12 : p.IsPrime] [P.IsPrime] [PerfectField p.ResidueField], Nat.card ↥(Ideal.inertia G P) = p.ramificationIdxIn S
+InfiniteAdeleRing : (K : Type u_1) → [Field K] → Type u_1
+AdeleRing : (R : Type u_1) →
+  (K : Type u_2) →
+    [inst : CommRing R] →
+      [IsDedekindDomain R] → [inst_2 : Field K] → [inst_3 : Algebra R K] → [IsFractionRing R K] → Type (max u_2 u_2 u_1)
+IsDedekindDomain.FiniteAdeleRing : (R : Type u_1) →
+  [inst : CommRing R] →
+    [IsDedekindDomain R] →
+      (K : Type u_2) → [inst_2 : Field K] → [inst_3 : Algebra R K] → [IsFractionRing R K] → Type (max u_2 u_1)
+@RestrictedProduct : {ι : Type u_1} → (R : ι → Type u_2) → ((i : ι) → Set (R i)) → Filter ι → Type (max u_1 u_2)
+data/fs131/kn9/lean/Names9.lean:17:8: error(lean.unknownIdentifier): Unknown constant `NumberField.AdeleRing.discrete`
+data/fs131/kn9/lean/Names9.lean:18:8: error(lean.unknownIdentifier): Unknown constant `NumberField.AdeleRing.isCompact_quotient`
+data/fs131/kn9/lean/Names9.lean:19:8: error(lean.unknownIdentifier): Unknown constant `NumberField.isCompact_quotient_adeleRing`
+@IsDedekindDomain.HeightOneSpectrum.adicCompletion : {R : Type u_1} →
+  [inst : CommRing R] →
+    [IsDedekindDomain R] →
+      (K : Type u_2) →
+        [inst_2 : Field K] →
+          [inst_3 : Algebra R K] → [IsFractionRing R K] → IsDedekindDomain.HeightOneSpectrum R → Type u_2
+@prod_abs_eq_one : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] {x : K},
+  x ≠ 0 → (∏ w, w x ^ w.mult) * ∏ᶠ (w : FinitePlace K), w x = 1
+Embeddings.pow_eq_one_of_norm_eq_one : ∀ (K : Type u_1) [inst : Field K] [NumberField K] (A : Type u_2)
+  [inst_2 : NormedField A] [IsAlgClosed A] [NormedAlgebra ℚ A] {x : K},
+  IsIntegral ℤ x → (∀ (φ : K →+* A), ‖φ x‖ = 1) → ∃ n, ∃ (_ : 0 < n), x ^ n = 1
+data/fs131/kn9/lean/Names9.lean:23:8: error(lean.unknownIdentifier): Unknown constant `NumberField.Units.pow_eq_one_of_norm_eq_one`
+@ClassGroup.fintypeOfAdmissibleOfFinite : {R : Type u_1} →
+  {S : Type u_2} →
+    (K : Type u_3) →
+      (L : Type u_4) →
+        [inst : EuclideanDomain R] →
+          [inst_1 : CommRing S] →
+            [inst_2 : IsDomain S] →
+              [inst_3 : Field K] →
+                [inst_4 : Field L] →
+                  [inst_5 : Algebra R K] →
+                    [IsFractionRing R K] →
+                      [inst_7 : Algebra K L] →
+                        [FiniteDimensional K L] →
+                          [Algebra.IsSeparable K L] →
+                            [algRL : Algebra R L] →
+                              [IsScalarTower R K L] →
+                                [inst_11 : Algebra R S] →
+                                  [inst_12 : Algebra S L] →
+                                    [ist : IsScalarTower R S L] →
+                                      {abv : AbsoluteValue R ℤ} →
+                                        abv.IsAdmissible →
+                                          [Infinite R] →
+                                            [DecidableEq R] → [IsIntegralClosure S R L] → Fintype (ClassGroup S)
+classNumber : (K : Type u_1) → [inst : Field K] → [NumberField K] → ℕ
+data/fs131/kn9/lean/Names9.lean:26:8: error(lean.unknownIdentifier): Unknown constant `AddChar.continuous`
+@AddCircle.toCircle : {T : ℝ} → AddCircle T → Circle
+@IsDedekindDomain.HeightOneSpectrum.valuation : {R : Type u_1} →
+  [inst : CommRing R] →
+    [IsDedekindDomain R] →
+      (K : Type u_2) →
+        [inst_2 : Field K] →
+          [inst_3 : Algebra R K] →
+            [IsFractionRing R K] → IsDedekindDomain.HeightOneSpectrum R → Valuation K (WithZero (Multiplicative ℤ))
+FinitePlace : (K : Type u_1) → [inst : Field K] → [NumberField K] → Type u_1
+InfinitePlace : (K : Type u_1) → [Field K] → Type u_1

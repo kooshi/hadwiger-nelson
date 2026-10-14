@@ -1,0 +1,51 @@
+slot: admitted kn9: mem 5 GiB (hard cap), cpus 4,5
+@QuotientAddGroup.isOpenMap_coe : ∀ {G : Type u_1} [inst : TopologicalSpace G] [inst_1 : AddGroup G]
+  [SeparatelyContinuousAdd G] {N : AddSubgroup G}, IsOpenMap QuotientAddGroup.mk
+@Topology.IsOpenEmbedding.of_continuous_injective_isOpenMap : ∀ {X : Type u_1} {Y : Type u_2} {f : X → Y}
+  [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y],
+  Continuous f → Function.Injective f → IsOpenMap f → Topology.IsOpenEmbedding f
+@Topology.IsOpenEmbedding.measurableEmbedding : ∀ {α : Type u_1} {β : Type u_2} [inst : TopologicalSpace α]
+  [mα : MeasurableSpace α] [BorelSpace α] [mβ : TopologicalSpace β] [inst_2 : MeasurableSpace β] [BorelSpace β]
+  {f : α → β}, Topology.IsOpenEmbedding f → MeasurableEmbedding f
+@MeasurableEmbedding.measurableSet_image : ∀ {α : Type u_1} {β : Type u_2} {s : Set α} {mα : MeasurableSpace α}
+  [inst : MeasurableSpace β] {f : α → β}, MeasurableEmbedding f → (MeasurableSet (f '' s) ↔ MeasurableSet s)
+@AddSubgroup.map_le_iff_le_comap : ∀ {G : Type u_1} [inst : AddGroup G] {N : Type u_2} [inst_1 : AddGroup N]
+  {f : G →+ N} {K : AddSubgroup G} {H : AddSubgroup N}, AddSubgroup.map f K ≤ H ↔ K ≤ AddSubgroup.comap f H
+@AddSubgroup.FiniteIndex.index_ne_zero : ∀ {G : Type u_1} {inst : AddGroup G} {H : AddSubgroup G}
+  [self : H.FiniteIndex], H.index ≠ 0
+@succ_nsmul : ∀ {M : Type u_1} [inst : AddMonoid M] (a : M) (n : ℕ), (n + 1) • a = n • a + a
+@Function.iterate_succ : ∀ {α : Type u_1} (f : α → α) (n : ℕ), f^[n.succ] = f^[n] ∘ f
+data/fs131/kn9/lean/Names5c.lean:11:8: error(lean.unknownIdentifier): Unknown identifier `isProbabilityMeasure_map`
+@QuotientAddGroup.map : {G : Type u_1} →
+  {H : Type u_2} →
+    [inst : AddGroup G] →
+      [inst_1 : AddGroup H] →
+        (N : AddSubgroup G) →
+          [nN : N.Normal] →
+            (M : AddSubgroup H) → [inst_2 : M.Normal] → (f : G →+ H) → N ≤ AddSubgroup.comap f M → G ⧸ N →+ H ⧸ M
+@Continuous.quotient_map' : ∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y]
+  {s : Setoid X} {t : Setoid Y} {f : X → Y},
+  Continuous f → ∀ (H : Relator.LiftFun (⇑s) (⇑t) f f), Continuous (Quotient.map' f H)
+data/fs131/kn9/lean/Names5c.lean:14:8: error(lean.unknownIdentifier): Unknown identifier `QuotientAddGroup.continuous_map`
+data/fs131/kn9/lean/Names5c.lean:15:8: error(lean.unknownIdentifier): Unknown constant `Real.subgroup_dense_or_cyclic`
+@AddSubgroup.dense_or_cyclic : ∀ {G : Type u_1} [inst : AddCommGroup G] [inst_1 : LinearOrder G] [IsOrderedAddMonoid G]
+  [inst_3 : TopologicalSpace G] [OrderTopology G] [Archimedean G] (S : AddSubgroup G),
+  Dense ↑S ∨ ∃ a, S = AddSubgroup.closure {a}
+@Equiv.sum_comp : ∀ {ι : Type u_1} {κ : Type u_2} {M : Type u_3} [inst : Fintype ι] [inst_1 : Fintype κ]
+  [inst_2 : AddCommMonoid M] (e : ι ≃ κ) (g : κ → M), ∑ i, g (e i) = ∑ i, g i
+@finProdFinEquiv : {m n : ℕ} → Fin m × Fin n ≃ Fin (m * n)
+@Function.iterate_add_apply : ∀ {α : Type u_1} (f : α → α) (m n : ℕ) (x : α), f^[m + n] x = f^[m] (f^[n] x)
+@Function.iterate_mul : ∀ {α : Type u_1} (f : α → α) (m n : ℕ), f^[m * n] = f^[m] ^[n]
+@lintegral_count : ∀ {α : Type u_1} [inst : MeasurableSpace α] [MeasurableSingletonClass α] (f : α → ENNReal),
+  ∫⁻ (a : α), f a ∂Measure.count = ∑' (a : α), f a
+data/fs131/kn9/lean/Names5c.lean:22:8: error(lean.unknownIdentifier): Unknown constant `ProbabilityTheory.Kernel.IsMarkovKernel`
+@Measure.count_univ : ∀ {α : Type u_1} [inst : MeasurableSpace α], Measure.count Set.univ = ↑(ENat.card α)
+@Measure.bind : {α : Type u_1} →
+  {β : Type u_2} → {mα : MeasurableSpace α} → {mβ : MeasurableSpace β} → Measure α → (α → Measure β) → Measure β
+@Set.Finite.isClosed : ∀ {X : Type u_1} [inst : TopologicalSpace X] [T1Space X] {s : Set X}, s.Finite → IsClosed s
+@MeasurableSpace.comap_le_iff_le_map : ∀ {α : Type u_1} {β : Type u_2} {m : MeasurableSpace α} {m' : MeasurableSpace β}
+  {f : α → β}, MeasurableSpace.comap f m' ≤ m ↔ m' ≤ MeasurableSpace.map f m
+@Measurable.comap_le : ∀ {α : Type u_1} {β : Type u_2} {m₁ : MeasurableSpace α} {m₂ : MeasurableSpace β} {f : α → β},
+  Measurable f → MeasurableSpace.comap f m₂ ≤ m₁
+@MeasurableSet.preimage : ∀ {α : Type u_1} {β : Type u_2} {f : α → β} {m : MeasurableSpace α} {mβ : MeasurableSpace β}
+  {t : Set β}, MeasurableSet t → Measurable f → MeasurableSet (f ⁻¹' t)

@@ -1,0 +1,23 @@
+SAME    axiom HadwigerNelson.Rigidity.positive_entropy_rigidity
+SAME    theorem HadwigerNelson.Rigidity.positive_entropy_rigidity_model
+SAME    theorem HadwigerNelson.Rigidity.positive_entropy_rigidity_of_polishSpace
+PASS check 2: binder occurrences in before = 1; before minus binder == after: True
+ADDED   theorem HadwigerNelson.Rigidity.ZdAction.IsTotallyIrreducible.isIrreducible
+ADDED   theorem HadwigerNelson.Rigidity.ZdAction.coe_nsmul
+ADDED   theorem HadwigerNelson.Rigidity.ZdAction.eq_of_isErgodicOn_of_invariant_component
+ADDED   theorem HadwigerNelson.Rigidity.ZdAction.invariantComponent_model
+ADDED   theorem HadwigerNelson.Rigidity.ZdAction.map_eq_of_isAddHaarMeasure
+ADDED   def HadwigerNelson.Rigidity.ZdAction.mulTwoThree
+ADDED   theorem HadwigerNelson.Rigidity.ZdAction.mulTwoThree._proof_1
+ADDED   theorem HadwigerNelson.Rigidity.ZdAction.mulTwoThree._proof_2
+ADDED   theorem HadwigerNelson.Rigidity.ZdAction.mulTwoThree._proof_3
+ADDED   theorem HadwigerNelson.Rigidity.ZdAction.mulTwoThree._proof_4
+ADDED   theorem HadwigerNelson.Rigidity.ZdAction.mulTwoThree._proof_5
+ADDED   theorem HadwigerNelson.Rigidity.ZdAction.mulTwoThree._proof_6
+ADDED   theorem HadwigerNelson.Rigidity.ZdAction.mulTwoThree_model
+ADDED   theorem HadwigerNelson.Rigidity.ZdAction.noVirtuallyCyclicFactors_of_isIrreducible
+ADDED   theorem HadwigerNelson.Rigidity.ZdAction.two_le_of_not_isVirtuallyCyclic
+ADDED   theorem HadwigerNelson.Rigidity.finTwo_haar_model
+ADDED   theorem HadwigerNelson.Rigidity.isAddHaarMeasure_of_add_invariant
+PASS check 3: removed = []; added = 17
+check 1: PASS

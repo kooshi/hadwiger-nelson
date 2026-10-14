@@ -1,0 +1,480 @@
+slot: admitted k8b1: mem 10 GiB (hard cap), cpus 0,1,2,3
+==> build: this run's full output: build/gate/build/20261014T094320Z-2493748.log
+==> up-to-date check: exit 3 after 3s (3 means something needs building) — walking the batches
+==> 254 batches of at most 8 modules, capped at 10G
+==> [1/254] 8 modules  04:43:23
+==> [2/254] 8 modules  04:43:24
+==> [3/254] 8 modules  04:43:26
+==> [4/254] 8 modules  04:43:27
+    ⚠ [3210/3406] Replayed Proofs.HadwigerNelson.Rigidity.TateArch
+    warning: Proofs/HadwigerNelson/Rigidity/TateArch.lean:36:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateArch.lean:41:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateArch.lean:47:8: declaration uses `sorry`
+    ⚠ [3371/3406] Replayed Proofs.HadwigerNelson.Rigidity.TateLocal
+    warning: Proofs/HadwigerNelson/Rigidity/TateLocal.lean:39:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateLocal.lean:45:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateLocal.lean:50:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateLocal.lean:57:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateLocal.lean:63:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateLocal.lean:71:8: declaration uses `sorry`
+==> [5/254] 1 modules  04:43:29
+==> [6/254] 8 modules  04:43:29
+==> [7/254] 8 modules  04:43:31
+==> [8/254] 8 modules  04:43:32
+==> [9/254] 8 modules  04:43:33
+==> [10/254] 8 modules  04:43:33
+==> [11/254] 8 modules  04:43:34
+==> [12/254] 8 modules  04:43:35
+==> [13/254] 8 modules  04:43:35
+==> [14/254] 8 modules  04:43:36
+==> [15/254] 8 modules  04:43:37
+==> [16/254] 8 modules  04:43:38
+==> [17/254] 8 modules  04:43:39
+==> [18/254] 7 modules  04:43:40
+    ⚠ [2734/2764] Replayed Proofs.HadwigerNelson.Rigidity.Entropy
+    warning: Proofs/HadwigerNelson/Rigidity/Entropy.lean:384:8: declaration uses `sorry`
+==> [19/254] 8 modules  04:43:41
+==> [20/254] 8 modules  04:43:42
+==> [21/254] 8 modules  04:43:43
+    ⚠ [2852/2852] Replayed Proofs.HadwigerNelson.Rigidity.EntropyFibres
+    warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:60:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:66:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:73:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:82:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:94:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:110:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:125:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:141:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:151:8: declaration uses `sorry`
+==> [22/254] 4 modules  04:43:44
+==> [23/254] 8 modules  04:43:46
+==> [24/254] 8 modules  04:43:47
+==> [25/254] 8 modules  04:43:48
+==> [26/254] 8 modules  04:43:49
+==> [27/254] 1 modules  04:43:50
+    ⚠ [2722/2722] Replayed Proofs.HadwigerNelson.Rigidity.PositiveEntropy
+    warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:150:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:157:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:162:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:169:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:179:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:207:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:213:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:224:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:235:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:256:8: declaration uses `sorry`
+==> [28/254] 8 modules  04:43:51
+==> [29/254] 8 modules  04:43:53
+==> [30/254] 8 modules  04:43:54
+==> [31/254] 6 modules  04:43:55
+==> [32/254] 8 modules  04:43:56
+==> [33/254] 8 modules  04:43:57
+==> [34/254] 8 modules  04:43:59
+==> [35/254] 8 modules  04:44:00
+==> [36/254] 8 modules  04:44:02
+==> [37/254] 8 modules  04:44:03
+==> [38/254] 8 modules  04:44:04
+==> [39/254] 8 modules  04:44:05
+==> [40/254] 8 modules  04:44:06
+==> [41/254] 8 modules  04:44:07
+==> [42/254] 8 modules  04:44:08
+==> [43/254] 8 modules  04:44:09
+==> [44/254] 8 modules  04:44:10
+==> [45/254] 8 modules  04:44:12
+==> [46/254] 8 modules  04:44:13
+==> [47/254] 8 modules  04:44:14
+==> [48/254] 8 modules  04:44:15
+==> [49/254] 8 modules  04:44:16
+==> [50/254] 8 modules  04:44:17
+==> [51/254] 8 modules  04:44:18
+==> [52/254] 8 modules  04:44:19
+==> [53/254] 8 modules  04:44:20
+==> [54/254] 8 modules  04:44:21
+==> [55/254] 8 modules  04:44:22
+==> [56/254] 8 modules  04:44:24
+==> [57/254] 8 modules  04:44:24
+==> [58/254] 7 modules  04:44:26
+==> [59/254] 8 modules  04:44:27
+==> [60/254] 8 modules  04:44:28
+==> [61/254] 8 modules  04:44:30
+==> [62/254] 8 modules  04:44:32
+==> [63/254] 8 modules  04:44:33
+==> [64/254] 8 modules  04:44:35
+==> [65/254] 8 modules  04:44:36
+==> [66/254] 8 modules  04:44:38
+==> [67/254] 8 modules  04:44:40
+==> [68/254] 8 modules  04:44:41
+==> [69/254] 8 modules  04:44:43
+==> [70/254] 8 modules  04:44:44
+==> [71/254] 8 modules  04:44:46
+==> [72/254] 8 modules  04:44:47
+==> [73/254] 8 modules  04:44:49
+==> [74/254] 8 modules  04:44:50
+==> [75/254] 8 modules  04:44:52
+==> [76/254] 8 modules  04:44:54
+==> [77/254] 8 modules  04:44:55
+==> [78/254] 8 modules  04:44:57
+==> [79/254] 8 modules  04:44:58
+==> [80/254] 8 modules  04:45:00
+==> [81/254] 8 modules  04:45:02
+==> [82/254] 8 modules  04:45:03
+==> [83/254] 8 modules  04:45:05
+==> [84/254] 8 modules  04:45:06
+==> [85/254] 8 modules  04:45:08
+==> [86/254] 8 modules  04:45:10
+==> [87/254] 8 modules  04:45:12
+==> [88/254] 8 modules  04:45:14
+==> [89/254] 8 modules  04:45:16
+==> [90/254] 8 modules  04:45:17
+==> [91/254] 8 modules  04:45:19
+==> [92/254] 8 modules  04:45:21
+==> [93/254] 8 modules  04:45:23
+==> [94/254] 8 modules  04:45:25
+==> [95/254] 8 modules  04:45:27
+==> [96/254] 8 modules  04:45:29
+==> [97/254] 8 modules  04:45:30
+==> [98/254] 8 modules  04:45:32
+==> [99/254] 8 modules  04:45:34
+==> [100/254] 8 modules  04:45:36
+==> [101/254] 8 modules  04:45:38
+==> [102/254] 8 modules  04:45:40
+==> [103/254] 8 modules  04:45:42
+==> [104/254] 8 modules  04:45:44
+==> [105/254] 8 modules  04:45:45
+==> [106/254] 8 modules  04:45:47
+==> [107/254] 8 modules  04:45:49
+==> [108/254] 8 modules  04:45:51
+==> [109/254] 8 modules  04:45:53
+==> [110/254] 8 modules  04:45:55
+==> [111/254] 8 modules  04:45:57
+==> [112/254] 8 modules  04:45:59
+==> [113/254] 8 modules  04:46:01
+==> [114/254] 8 modules  04:46:03
+==> [115/254] 8 modules  04:46:05
+==> [116/254] 8 modules  04:46:07
+==> [117/254] 8 modules  04:46:08
+==> [118/254] 8 modules  04:46:10
+==> [119/254] 8 modules  04:46:12
+==> [120/254] 8 modules  04:46:14
+==> [121/254] 8 modules  04:46:16
+==> [122/254] 8 modules  04:46:18
+==> [123/254] 8 modules  04:46:20
+==> [124/254] 8 modules  04:46:22
+==> [125/254] 8 modules  04:46:23
+==> [126/254] 8 modules  04:46:25
+==> [127/254] 8 modules  04:46:27
+==> [128/254] 8 modules  04:46:29
+==> [129/254] 8 modules  04:46:31
+==> [130/254] 8 modules  04:46:33
+==> [131/254] 8 modules  04:46:35
+==> [132/254] 8 modules  04:46:37
+==> [133/254] 8 modules  04:46:38
+==> [134/254] 8 modules  04:46:40
+==> [135/254] 8 modules  04:46:42
+==> [136/254] 8 modules  04:46:44
+==> [137/254] 8 modules  04:46:46
+==> [138/254] 8 modules  04:46:47
+==> [139/254] 8 modules  04:46:49
+==> [140/254] 8 modules  04:46:51
+==> [141/254] 8 modules  04:46:53
+==> [142/254] 8 modules  04:46:55
+==> [143/254] 8 modules  04:46:57
+==> [144/254] 8 modules  04:46:59
+==> [145/254] 8 modules  04:47:00
+==> [146/254] 8 modules  04:47:02
+==> [147/254] 8 modules  04:47:04
+==> [148/254] 8 modules  04:47:06
+==> [149/254] 8 modules  04:47:08
+==> [150/254] 8 modules  04:47:10
+==> [151/254] 8 modules  04:47:11
+==> [152/254] 8 modules  04:47:13
+==> [153/254] 8 modules  04:47:15
+==> [154/254] 8 modules  04:47:17
+==> [155/254] 8 modules  04:47:19
+==> [156/254] 8 modules  04:47:21
+==> [157/254] 8 modules  04:47:23
+==> [158/254] 8 modules  04:47:25
+==> [159/254] 8 modules  04:47:27
+==> [160/254] 8 modules  04:47:29
+==> [161/254] 8 modules  04:47:30
+==> [162/254] 8 modules  04:47:32
+==> [163/254] 8 modules  04:47:34
+==> [164/254] 8 modules  04:47:36
+==> [165/254] 8 modules  04:47:38
+==> [166/254] 8 modules  04:47:40
+==> [167/254] 8 modules  04:47:41
+==> [168/254] 8 modules  04:47:43
+==> [169/254] 8 modules  04:47:45
+==> [170/254] 8 modules  04:47:47
+==> [171/254] 8 modules  04:47:49
+==> [172/254] 8 modules  04:47:51
+==> [173/254] 8 modules  04:47:53
+==> [174/254] 8 modules  04:47:55
+==> [175/254] 8 modules  04:47:56
+==> [176/254] 8 modules  04:47:58
+==> [177/254] 8 modules  04:48:00
+==> [178/254] 8 modules  04:48:02
+==> [179/254] 8 modules  04:48:04
+==> [180/254] 8 modules  04:48:06
+==> [181/254] 8 modules  04:48:08
+==> [182/254] 8 modules  04:48:09
+==> [183/254] 8 modules  04:48:11
+==> [184/254] 8 modules  04:48:13
+==> [185/254] 8 modules  04:48:15
+==> [186/254] 8 modules  04:48:17
+==> [187/254] 8 modules  04:48:19
+==> [188/254] 8 modules  04:48:21
+==> [189/254] 8 modules  04:48:22
+==> [190/254] 8 modules  04:48:24
+==> [191/254] 8 modules  04:48:26
+==> [192/254] 8 modules  04:48:28
+==> [193/254] 8 modules  04:48:30
+==> [194/254] 8 modules  04:48:32
+==> [195/254] 8 modules  04:48:34
+==> [196/254] 8 modules  04:48:35
+==> [197/254] 8 modules  04:48:37
+==> [198/254] 8 modules  04:48:39
+==> [199/254] 8 modules  04:48:41
+==> [200/254] 8 modules  04:48:43
+==> [201/254] 8 modules  04:48:45
+==> [202/254] 8 modules  04:48:47
+==> [203/254] 8 modules  04:48:49
+==> [204/254] 8 modules  04:48:50
+==> [205/254] 8 modules  04:48:52
+==> [206/254] 8 modules  04:48:54
+==> [207/254] 8 modules  04:48:56
+==> [208/254] 8 modules  04:48:58
+==> [209/254] 8 modules  04:49:00
+==> [210/254] 8 modules  04:49:02
+==> [211/254] 8 modules  04:49:04
+==> [212/254] 8 modules  04:49:05
+==> [213/254] 8 modules  04:49:07
+==> [214/254] 8 modules  04:49:09
+==> [215/254] 8 modules  04:49:10
+==> [216/254] 5 modules  04:49:11
+==> [217/254] 8 modules  04:49:13
+==> [218/254] 8 modules  04:49:16
+==> [219/254] 8 modules  04:49:17
+==> [220/254] 2 modules  04:49:19
+==> [221/254] 8 modules  04:49:20
+==> [222/254] 8 modules  04:49:22
+==> [223/254] 2 modules  04:49:23
+==> [224/254] 8 modules  04:49:24
+==> [225/254] 8 modules  04:49:27
+==> [226/254] 3 modules  04:49:29
+==> [227/254] 8 modules  04:49:30
+==> [228/254] 8 modules  04:49:33
+==> [229/254] 1 modules  04:49:35
+==> [230/254] 8 modules  04:49:36
+==> [231/254] 8 modules  04:49:39
+==> [232/254] 8 modules  04:49:40
+==> [233/254] 8 modules  04:49:43
+==> [234/254] 2 modules  04:49:45
+==> [235/254] 8 modules  04:49:46
+==> [236/254] 8 modules  04:49:50
+==> [237/254] 2 modules  04:49:53
+==> [238/254] 8 modules  04:49:55
+==> [239/254] 5 modules  04:49:58
+==> [240/254] 7 modules  04:50:01
+==> [241/254] 8 modules  04:50:05
+==> [242/254] 2 modules  04:50:09
+==> [243/254] 8 modules  04:50:12
+==> [244/254] 3 modules  04:50:15
+    ⚠ [3699/3757] Replayed Proofs.HadwigerNelson.Rigidity.ChainAtTA
+    warning: Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:549:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:554:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:561:8: declaration uses `sorry`
+    ⚠ [3757/3757] Replayed Proofs.HadwigerNelson.Rigidity.DualGroup
+    warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:64:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:68:16: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:75:16: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:82:16: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:88:16: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:93:9: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:100:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:107:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:117:9: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:126:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:133:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:143:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/DualGroup.lean:149:8: declaration uses `sorry`
+==> [245/254] 8 modules  04:50:17
+    ⚠ [5240/5268] Replayed Proofs.HadwigerNelson.Rigidity.Annihilator
+    warning: Proofs/HadwigerNelson/Rigidity/Annihilator.lean:61:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Annihilator.lean:91:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Annihilator.lean:97:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Annihilator.lean:102:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Annihilator.lean:107:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Annihilator.lean:112:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Annihilator.lean:116:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Annihilator.lean:120:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Annihilator.lean:126:8: declaration uses `sorry`
+    ⚠ [5244/5268] Replayed Proofs.HadwigerNelson.Rigidity.DualConnected
+    warning: Proofs/HadwigerNelson/Rigidity/DualConnected.lean:36:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/DualConnected.lean:41:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/DualConnected.lean:46:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/DualConnected.lean:53:8: declaration uses `sorry`
+    ⚠ [5410/5410] Replayed Proofs.HadwigerNelson.Rigidity.RingScope
+    warning: Proofs/HadwigerNelson/Rigidity/RingScope.lean:61:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/RingScope.lean:71:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/RingScope.lean:80:8: declaration uses `sorry`
+==> [246/254] 1 modules  04:50:21
+    ⚠ [3496/3496] Replayed Proofs.HadwigerNelson.Rigidity.UnitCircle
+    warning: Proofs/HadwigerNelson/Rigidity/UnitCircle.lean:81:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/UnitCircle.lean:85:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/UnitCircle.lean:108:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/UnitCircle.lean:117:9: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/UnitCircle.lean:122:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/UnitCircle.lean:163:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/UnitCircle.lean:170:4: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/UnitCircle.lean:182:8: declaration uses `sorry`
+==> [247/254] 7 modules  04:50:23
+    ⚠ [5253/5289] Replayed Proofs.HadwigerNelson.Rigidity.SubgroupHaar
+    warning: Proofs/HadwigerNelson/Rigidity/SubgroupHaar.lean:40:9: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/SubgroupHaar.lean:44:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/SubgroupHaar.lean:48:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/SubgroupHaar.lean:55:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/SubgroupHaar.lean:60:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/SubgroupHaar.lean:75:8: declaration uses `sorry`
+    ⚠ [5425/5425] Replayed Proofs.HadwigerNelson.Rigidity.TateModel
+    warning: Proofs/HadwigerNelson/Rigidity/TateModel.lean:161:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateModel.lean:165:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateModel.lean:170:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateModel.lean:181:8: declaration uses `sorry`
+==> [248/254] 6 modules  04:50:26
+    ⚠ [5260/5283] Replayed Proofs.HadwigerNelson.Rigidity.Duality
+    warning: Proofs/HadwigerNelson/Rigidity/Duality.lean:67:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Duality.lean:72:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Duality.lean:77:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Duality.lean:100:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Duality.lean:119:4: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Duality.lean:129:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Duality.lean:136:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Duality.lean:143:8: declaration uses `sorry`
+    ⚠ [5449/5449] Replayed Proofs.HadwigerNelson.Rigidity.TateCharacter
+    warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:38:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:50:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:55:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:65:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:69:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:72:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:82:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:88:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:92:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:108:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:112:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:118:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateCharacter.lean:122:8: declaration uses `sorry`
+==> [249/254] 5 modules  04:50:30
+    ⚠ [3976/4000] Replayed Proofs.HadwigerNelson.Rigidity.Pieces
+    warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:90:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:103:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:131:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:139:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:143:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:155:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:164:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:171:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:177:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:184:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:191:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:197:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:205:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:214:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Pieces.lean:224:8: declaration uses `sorry`
+    ⚠ [4154/4155] Replayed Proofs.HadwigerNelson.Rigidity.TateKernel
+    warning: Proofs/HadwigerNelson/Rigidity/TateKernel.lean:46:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateKernel.lean:53:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateKernel.lean:59:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateKernel.lean:66:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateKernel.lean:70:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateKernel.lean:75:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateKernel.lean:80:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/TateKernel.lean:84:8: declaration uses `sorry`
+    ⚠ [4155/4155] Built Proofs.HadwigerNelson.Rigidity.PlaceSizes (3.1s)
+    warning: Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:83:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:87:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:92:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:96:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:100:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:103:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:106:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:109:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:112:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:115:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:119:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:123:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:155:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:160:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:165:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:168:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:173:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:179:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:197:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:202:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:208:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:213:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:217:9: declaration uses `sorry`
+    rebuilt: Rigidity.PlaceSizes (3.1s)
+==> [250/254] 5 modules  04:50:35
+    ⚠ [3874/4019] Replayed Proofs.HadwigerNelson.Rigidity.EntropySplitMax
+    warning: Proofs/HadwigerNelson/Rigidity/EntropySplitMax.lean:64:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropySplitMax.lean:76:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropySplitMax.lean:90:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropySplitMax.lean:98:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropySplitMax.lean:109:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/EntropySplitMax.lean:114:8: declaration uses `sorry`
+    ⚠ [4018/4019] Built Proofs.HadwigerNelson.Rigidity.Multipliers (2.3s)
+    warning: Proofs/HadwigerNelson/Rigidity/Multipliers.lean:32:16: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Multipliers.lean:43:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Multipliers.lean:48:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Multipliers.lean:52:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Multipliers.lean:56:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/Multipliers.lean:61:8: declaration uses `sorry`
+    ⚠ [4019/4019] Built Proofs.HadwigerNelson.Rigidity.ThinBoxes (3.2s)
+    warning: Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:76:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:79:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:88:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:92:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:96:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:104:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:109:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:113:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:119:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:128:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:138:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:165:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:174:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:186:8: declaration uses `sorry`
+    rebuilt: Rigidity.Multipliers (2.3s), Rigidity.ThinBoxes (3.2s)
+==> [251/254] 2 modules  04:50:39
+    ⚠ [3961/3961] Built Proofs.HadwigerNelson.Rigidity.GlobalPoint (3.6s)
+    warning: Proofs/HadwigerNelson/Rigidity/GlobalPoint.lean:61:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/GlobalPoint.lean:65:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/GlobalPoint.lean:111:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/GlobalPoint.lean:115:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/GlobalPoint.lean:120:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/GlobalPoint.lean:127:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/GlobalPoint.lean:134:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/GlobalPoint.lean:147:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/GlobalPoint.lean:158:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/GlobalPoint.lean:173:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/GlobalPoint.lean:179:8: declaration uses `sorry`
+    rebuilt: Rigidity.GlobalPoint (3.6s)
+==> [252/254] 1 modules  04:50:45
+    ⚠ [3822/3822] Built Proofs.HadwigerNelson.Rigidity.WanderingShells (2.5s)
+    warning: Proofs/HadwigerNelson/Rigidity/WanderingShells.lean:55:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/WanderingShells.lean:67:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/WanderingShells.lean:72:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/WanderingShells.lean:79:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/WanderingShells.lean:87:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/WanderingShells.lean:97:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Rigidity/WanderingShells.lean:104:8: declaration uses `sorry`
+    rebuilt: Rigidity.WanderingShells (2.5s)
+==> [253/254] 1 modules  04:50:49
+    rebuilt: Rigidity.ZeroEntropyClosed (1.0s)
+==> [254/254] 1 modules  04:50:53
+    rebuilt: Proofs (2.2s)
+==> build: OK — 254 of 254 batches, 7 module(s) rebuilt, 23 module(s) with warnings, 7m36s
+    full output: build/gate/build/20261014T094320Z-2493748.log
+exit=0
