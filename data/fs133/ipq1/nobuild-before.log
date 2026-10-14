@@ -1,0 +1,5 @@
+slot: admitted ipq1: mem 4 GiB (hard cap), cpus 2,3
+⚠ [6046/6048] Replayed Proofs.HadwigerNelson.Plane.OneClass.Pair
+warning: Proofs/HadwigerNelson/Plane/OneClass/Pair.lean:106:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Plane/OneClass/Pair.lean:114:8: declaration uses `sorry`
+All targets up-to-date (6048 jobs).
