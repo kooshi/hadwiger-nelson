@@ -52,7 +52,7 @@ variable (F : Subfield ℝ)
 /-! ### Private helpers: the archimedean size, small arguments, the profinite neighbourhoods -/
 
 /-- The map of `archTop`, as an additive map: `archTop F` is induced by it (`archTop_eq`). -/
-private def archHom [NumberField F] : unitRing F →+ NumberField.mixedEmbedding.mixedSpace (fieldI F) where
+def archHom [NumberField F] : unitRing F →+ NumberField.mixedEmbedding.mixedSpace (fieldI F) where
   toFun r := NumberField.mixedEmbedding (fieldI F) ⟨(r : ℂ), UnitRing.unitRingOver_le_planeOverSubring F r.2⟩
   map_zero' := by
     rw [← map_zero (NumberField.mixedEmbedding (fieldI F))]
@@ -191,7 +191,7 @@ private theorem exists_nsmul_mem_of_mem_nhds_profTop {A : Set (unitRing F)} (hA 
     exact hM₂ _
 
 /-- A coset of `(N + 1)·R` is a profinite neighbourhood of its points. -/
-private theorem mem_nhds_profTop (N : ℕ) (y : unitRing F) :
+theorem mem_nhds_profTop (N : ℕ) (y : unitRing F) :
     {x | ∃ z : unitRing F, y = x + (N + 1) • z} ∈ @nhds _ (profTop F) y := by
   have : {x | QuotientAddGroup.mk' (nsmulAddMonoidHom (α := unitRing F) (N + 1)).range x =
       QuotientAddGroup.mk' (nsmulAddMonoidHom (α := unitRing F) (N + 1)).range y} ∈ @nhds _ (profTop F) y := by

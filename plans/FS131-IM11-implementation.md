@@ -129,3 +129,37 @@ off `T + A` (`1 ∈ T + A`), integrated, and the real part taken. `setIntegral_c
 **Re-priced from the first two leaves:** `integral_colourInd_mul_comp` 18 lines, `trace_decomp` 54 lines with its two
 helpers' 14, against the plan's 30–50 and 60–100 — under plan. **The lane:** 175 lines added, against the plan's 350–500;
 about 9 minutes.
+
+## Stage 4 — SAVED: M11-A (`Rigidity/APlus`) proved, 12 of 12 leaves; two helpers of `ContinuityGroup` made public
+
+**`ContinuityGroup`:** `private` removed from `archHom` and `mem_nhds_profTop` and nothing else (item 873 ruling 1).
+**`eventually_archTop` is left private**, a choice I report for the coordinator: the route I took for
+`tendsto_mul_nhds_tauPrime` does not read it, and it carries no docstring, so made public it would warn under the
+lakefile's `linter.missingDocs` — and the brief allows me no other line of that file. The build with the two made public
+and lanes S and T proved: **`build: OK — 256 of 256 batches, 11 module(s) rebuilt, 19 module(s) with warnings, 7m14s`**
+(`data/fs131/im11/build1.log`; `build/gate/build/20261014T162219Z-3807280.log`): `ContinuityGroup`, `SpectralSubspace`,
+`TraceSplit` rebuilt with no warning; `APlus` (still the skeleton then), `BochnerTau` and the five `Count*` modules
+rebuilt with their own `sorry` warnings only. Lane A's proofs were written meanwhile in a copy
+(`data/fs131/im11/work/APlus.lean`) and put over the module after the build.
+
+**All twelve leaves are proved** (`lake env lean` with the lakefile's options: exit 0, no message;
+`data/fs131/im11/logs/A-final.log`).
+
+**One route changed (mine to decide, said here): `tendsto_mul_nhds_tauPrime`.** The profinite half is the plan's
+(`mem_nhds_profTop`, `r · (N + 1)R ⊆ (N + 1)R`), through `nhds_iInf`, `nhds_induced` and `tendsto_pure`. The archimedean
+half uses no norm: `archTop` is induced by `archHom` (`rfl`), `archHom (r y) = archHom r · archHom y` (`map_mul` of the
+mixed embedding), so the map is `(archHom r · ·) ∘ archHom` and continuity of multiplication on the mixed space
+(`continuous_const_mul`) with `tendsto_comap` finishes — `eventually_archTop` and its classical norm are not read.
+`numberField_bot` is `UpperHalf.numberField_bot` (`Instances/UpperHalfValues`, already imported).
+
+New private helpers: `conjUV` (the conjugate of a unit vector, `ChainAtTA`'s private `conj_mem_unitVectors` restated as
+a value), `uvRing_mul_conjUV` (`u (ū y) = y`), `colourRot_preimage_mem` (the rotated preimage of an event of `𝒜` is in
+`𝒜`: `shift_y⁻¹ rot_u⁻¹ A = rot_u⁻¹ shift_{ūy}⁻¹ A`, then `tendsto_mul_nhds_tauPrime` at `ū`), from which
+`comap_colourRot_colourFactor` is the two inclusions.
+
+**Re-priced from the first two leaves:** `tendsto_mul_nhds_tauPrime` 41 lines, `comap_colourRot_colourFactor` 16 lines
+plus 44 of three helpers, against the plan's 60–110 and 50–80 — at or under plan. **The lane:** 203 lines added, against
+the plan's 350–550; about 10 minutes of writing during the build and 2 minutes after it.
+
+**M11 as a whole:** 33 of 33 leaves proved, 987 lines added to the three modules (609 + 175 + 203) against the plan's
+1,170–1,720 still to write (§ 4.2 of the planner's record, its ~430 written lines subtracted) — about 0.6–0.85 of plan.
