@@ -159,7 +159,7 @@ SCAN = [
 LICENCE_NAME = "OAIMath2026-LICENSE.txt"
 LICENCE_SRC = "LICENSE"
 TABLE_KEYS = {"patches", "renames", "scoped", "global_instances", "drop_open", "drop_imports", "more_imports",
-              "aux_unported", "notes", "adaptations"}
+              "aux_unported", "notes", "adaptations", "drop_omit"}
 # ADAPTATIONS (a table of their own, pending the coordinator's ruling: plans/FS131-KO1-port-plan.md § 4.3): a token of a
 # release-internal STATEMENT or DEFINITION that does not elaborate at this pin because a Mathlib API changed between the
 # pins (Mathlib's `Measure.map` / `ProbabilityMeasure.map`: § 3.3), rewritten to the same object at this pin.  Refused
@@ -504,7 +504,7 @@ def emit_module(m, path, lines, decls, want, tab, names_here):
     name = base(path)
     mod = MOD_OF_REL[m]
     tree = parse(lines, decls, mod)
-    used = dict(patches=set(), scoped=set(), glob=set(), drop_open=set(), adapt=set())
+    used = dict(patches=set(), scoped=set(), glob=set(), drop_open=set(), adapt=set(), drop_omit=set())
     copied, left, examples, rooted, adapted = [], [], [], [], []
 
     def has_want(node):
@@ -571,6 +571,14 @@ def emit_module(m, path, lines, decls, want, tab, names_here):
                     continue
                 for p in pending:
                     s = lines[p - 1]
+                    # the table's `drop_omit` (FS131-IPA1's revision, the coordinator's Amendment 4): a one-line
+                    # `omit … in` attached to this copied declaration, left out
+                    hit = [i for i, (ol, _) in enumerate(tab["drop_omit"]) if ol == p]
+                    if hit:
+                        if not re.match(r"^omit\s.*\sin$", s):
+                            raise Refused(f"{mod}: drop_omit {hit[0]} (line {p}) is not a one-line `omit … in`")
+                        used["drop_omit"].update(hit)
+                        continue
                     if s.startswith("open"):
                         s = open_line(p, s)
                     if s is not None:
@@ -671,7 +679,7 @@ def emit_module(m, path, lines, decls, want, tab, names_here):
     if missing:
         raise Refused(f"{name}: cone declarations not placed: {sorted(x[2] for x in missing)}")
     for key, u in (("patches", "patches"), ("scoped", "scoped"), ("global_instances", "glob"),
-                   ("drop_open", "drop_open"), ("adaptations", "adapt")):
+                   ("drop_open", "drop_open"), ("adaptations", "adapt"), ("drop_omit", "drop_omit")):
         if len(used[u]) != len(tab[key]):
             raise Refused(f"{mod}: {key} entries not used: {sorted(set(range(len(tab[key]))) - used[u])}")
     return dict(name=name, path=path, body=body, copied=copied, left=left, examples=examples, rooted=rooted,
@@ -802,6 +810,10 @@ def render(mod, p):
         k += 1
     for r_old, r_new, why in t["renames"]:
         for i, c in enumerate(wrap_words(f"*A Mathlib name at this pin*: `{r_old}` is written `{r_new}` — {why}.", 112)):
+            o.append(("   " if i else f"{k}. ") + c)
+        k += 1
+    for ol, why in t["drop_omit"]:
+        for i, c in enumerate(wrap_words(f"*An `omit … in` left out*: `{q['name']}:{ol}` — {why}.", 112)):
             o.append(("   " if i else f"{k}. ") + c)
         k += 1
     for dl, tok, why in t["drop_open"]:
@@ -1032,6 +1044,26 @@ def self_test(mods):
             ind_ok = False
         print(f"partner 'an indented declaration ({short(o)}) copied as such': {'COPIED' if ind_ok else 'REFUSED'}")
         ok = ok and ind_ok
+        # drop_omit (Amendment 4): an entry on a line that is no `omit … in` is refused; a used entry removes exactly
+        # that line (the partner, on `OAI158Centers`, whose release file has such lines)
+        expect("a drop_omit entry on a line that is no `omit`",
+               refused(tables={m0: dict(tab, drop_omit=[[a, "planted"]])}))
+        tc = load_tables("OAI158Centers")
+        base_c, _ = generate(["OAI158Centers"], tables={"OAI158Centers": dict(tc, drop_omit=[])})
+        src_c = (CLONE / SRCROOT / REL_OF_MOD["OAI158Centers"][1]).read_text().split("\n")
+        ol = next(i + 1 for i, x in enumerate(src_c) if re.match(r"^omit\s.*\sin$", x))
+        try:
+            dropped, _ = generate(["OAI158Centers"], tables={"OAI158Centers": dict(tc, drop_omit=[[ol, "planted"]])})
+            bl = base_c["OAI158Centers"].split("\n")
+            dl = dropped["OAI158Centers"].split("\n")
+            body_b = bl[bl.index("-/") + 1:]
+            body_d = dl[dl.index("-/") + 1:]
+            om_ok = len(body_b) == len(body_d) + 1 and \
+                any(body_b[:i] + body_b[i + 1:] == body_d and body_b[i] == src_c[ol - 1] for i in range(len(body_b)))
+        except Refused:
+            om_ok = False
+        print(f"partner 'a drop_omit entry (Centers.lean:{ol}) removes exactly that line': {'REMOVED' if om_ok else 'FAILED'}")
+        ok = ok and om_ok
         # an upstream copy that is not upstream
         expect("an upstream entry removed", refused_upstream())
         # licence
@@ -1051,7 +1083,7 @@ def self_test(mods):
         if check(mods, outdir=td, quiet=True) != 0:
             print("SELF-TEST FAILED: the scratch copy does not pass after the plants were undone")
             return 1
-    print(f"SELF-TEST OK: {n} plants refused and 3 partners accepted" if ok else "SELF-TEST FAILED")
+    print(f"SELF-TEST OK: {n} plants refused and 4 partners accepted" if ok else "SELF-TEST FAILED")
     return 0 if ok else 1
 
 
