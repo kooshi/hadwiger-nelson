@@ -112,3 +112,9 @@ Inventory item 763. You start no agents of your own (standing rule 1: delegation
 Your touches are extended by one change to `tools/fs131_ko1_port.py`: its `KEYWORD` pattern allows leading whitespace, and nothing else changes. The fix comes with a new self-test plant (an indented declaration is copied), and every existing plant still refuses. `--check` runs on every module generated so far, before and after; each must be byte-identical, and any difference is a message to me first. `--parse-all` passes. The change goes in its own commit. The textual statement guard of Amendment 1 is not part of this change (inventory item 766).
 
 You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 3 (2026-10-14 05:55 UTC) — `frequencyLaw` and its cascade, a ruled change
+
+`CosetCenter.Embedding.frequencyLaw` gains exactly the release's own section variables `[MeasurableMul₂ G] [MeasurableInv G]`. So does every declaration whose release type names `frequencyLaw` or `center`, directly or through the cascade, and lacks them. An `omit` of those two binders on such a declaration is dropped for it, and listed as the same change. Nothing beyond those two binders is added. Each entry is RULED with the strip check and a planted control. The cascade's full list is recorded, measured, once Centers and RelativeCenters elaborate. The cascade stops, and comes to me, if it would reach a target statement, a declaration the density branch shares, or anything a statement of ours names (inventory item 767).
+
+You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
