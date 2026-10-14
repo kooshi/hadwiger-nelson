@@ -173,3 +173,69 @@ a leaf). `Duality`: the case's hypotheses inhabited at `ℤ` (`⟨⊤, isClosed_
 `not_connectedSpace_dual_zmod_two` (a leaf). Every statement elaborates in the farm (`data/fs131/kpd1/logs/{annihilator,
 SubgroupHaar,Duality,DualConnected,pieces}.log`, each exit 0 with `sorry` warnings only; options as the lakefile's:
 `autoImplicit` off, `linter.missingDocs` on).
+
+## Stage 3 — SAVED: the route, chosen by measurement
+
+### 3.1 Two routes for D2
+
+- **Route H (Haar on closed subgroups of `Ĝ`).** For closed `Y`, put `Z := (Y^⊥)^⊥ ⊇ Y`; `Z^⊥ = Y^⊥` is the Galois connection's
+  `u ∘ l ∘ u = u`, nothing to prove. The Haar probabilities of `Y` and of `Z`, carried into `Ĝ`, have Fourier coefficients
+  `1` on `Y^⊥` and `0` off it (left invariance against one `y₀ ∈ Y` with `y₀(g) ≠ 1`), so they are equal by Fourier uniqueness on
+  `Ĝ` (`Rigidity.measure_eq_of_fourier`, already typed in `Rigidity/DualGroup`: Stone–Weierstrass over the evaluations, which
+  separate the points of `Ĝ` by definition). The first lives on `Y`; the second charges every open set meeting `Z`; `Yᶜ` is open;
+  so `Z ⊆ Y`. **No Peter–Weyl and no `L²`:** Peter–Weyl's work is to produce characters on a compact group that separate points,
+  and on the dual of a discrete group they are given. **The general D2 costs the same as the case**: the case is the general
+  statement at `Y^⊥ = 0`, where `Z = Ĝ` and the comparison is with `dualHaar`; nothing in the proof shortens there.
+  **D1 from D2 at `G × ℤ`**: for continuous `ψ` on `Ĝ`, `graphSubgroup ψ := {ξ | ξ(0,1) = ψ(ξ ∘ inl)}` is closed; the characters
+  `(g, n) ↦ zⁿ` lie in it only at `z = 1`, so by D2 its annihilator's projection `P ⊆ ℤ` is all of `ℤ` (else a character of
+  `ℤ ⧸ P` not `1` at `1`, by separation, gives a `z ≠ 1` with `zⁿ = 1` on `P`); a `(g, 1)` in the annihilator gives `ψ = ev_{−g}`.
+- **Route T (ruling 2's: finitely generated subgroups and tori).** A closed `Y ∌ χ₀` misses a box `{χ : |χ(gᵢ) − χ₀(gᵢ)| < ε}`;
+  `Φ : Ĝ → T^k`, `χ ↦ (χ(gᵢ))ᵢ`, carries `Y` to a closed subgroup missing `Φ(χ₀)`; D2 for `T^k` gives `n ∈ ℤ^k` killing `Φ(Y)` with
+  `Φ(χ₀)ⁿ ≠ 1`, and `Σ nᵢgᵢ ∈ Y^⊥` separates `χ₀` from `Y`. Correct, and it avoids the finite part of `⟨g₁, …, g_k⟩` (no structure
+  theorem: `Φ` lands in `T^k` directly).
+
+**Mathlib's coverage of route T at the pin, by name** (`grep` of `Mathlib/` at `v4.32.0`): `UnitAddTorus` with multivariate
+Fourier series — `mFourier`, `mFourierSubalgebra_closure_eq_top`, `orthonormal_mFourier`, `mFourierBasis`
+(`Analysis/Fourier/AddCircleMulti.lean`): Fourier uniqueness on `T^k` **is** there. Kronecker in dimension one only:
+`AddCircle.denseRange_zsmul_iff` (`Topology/Instances/AddCircle/DenseSubgroup.lean`). **Absent:** closed subgroups of `ℝⁿ` or of
+`T^k` (`ZLattice` covers discrete subgroups that span, `ZLattice.module_free`; nothing classifies closed ones), Kronecker in
+several variables, the dual of `ℤ^k` as `T^k` (no Pontryagin isomorphism for any group; `Topology/Algebra/PontryaginDual.lean` is
+the definition, `map`, and finiteness for compact discrete groups). Characters of finitely generated groups: nothing beyond
+`AddChar` on finite groups (`AddChar.instFintype`, RCLike codomain).
+
+**So route T contains route H.** D2 for `T^k` is not in Mathlib; the one proof of it in reach with Mathlib's tools is route H's
+argument run on `T^k` (Haar of a closed subgroup of `T^k`, `mFourier` uniqueness) — or the structure theorem for closed subgroups
+of `ℝ^k`, absent and larger than everything here. Route T is then route H on `T^k` plus the reduction (the box neighbourhood and
+`Φ`) plus the identification of `AddChar (Fin k → ℤ) Circle` with `UnitAddTorus k`. Priced from its first leaf in words — the
+reduction, about forty lines — and **not built**: it is dominated by inclusion, so no measurement of it can make it cheaper than
+route H.
+
+### 3.2 Route H, measured from its leaves (not from a table)
+
+I wrote route H's proofs in copies of the four skeleton modules, `data/fs131/kpd1/route/{Annihilator,SubgroupHaar,Duality,
+DualConnected}.lean`. Each states exactly the skeleton's statements: a script compared every declaration head up to its first
+`:=`, and all are equal (18, 8, 17, 4). The copies elaborate in sequence, each against the one before, in a scratch farm under
+the lakefile's options (`data/fs131/kpd1/lean1.sh`; `data/fs131/kpd1/logs/route-*-chain.log`, every exit 0).
+
+| module | leaves | proved in the copy | lines of proof | compiles to green | left |
+|---|---|---|---|---|---|
+| `Annihilator` | 9 (with `isClosed_setOf_apply_eq_one`) | 9 | 28 | 4 | — |
+| `SubgroupHaar` | 6 | 5 | 32 | 2 | `subgroupHaar_bot` (the spec) |
+| `Duality` | 9 | 9 | 66 | 1 | — |
+| `DualConnected` | 4 | 3 | 39 | 2 | `not_connectedSpace_dual_zmod_two` (the negative partner) |
+
+Each compile is 2–4 s and under 5 GiB. Writing the copies took me about an hour of work.
+
+**What the headlines still wait on**, read from the compiled copies by `data/fs131/kpd1/probes/SorrySources.lean`
+(`data/fs131/kpd1/logs/sorry-sources.log`). For each headline the script lists the library declarations it reaches whose own
+term holds `sorryAx`. Its control fires: the two leaves left open list themselves.
+- D2 (`dualAnnihilator_dualCoannihilator_of_isClosed`, the case and its additive form): `Rigidity/DualGroup`'s
+  `isClosedEmbedding_coe`, `isTopologicalGroup_dual`, `compactSpace_dual`, `borelSpace_dual`, `measure_eq_of_fourier`.
+- D1 (`evalDualHom_surjective`, `additiveDualDualEquiv`): the same five, and `exists_apply_ne_one`.
+- D3 (`connectedSpace_dual`): `compactSpace_dual`, `isTopologicalGroup_dual`.
+- `finite_dualAnnihilator`: **nothing**.
+When `measure_eq_of_fourier` is proved, its proof will also reach `polishSpace_dual`. **So lane PD has no open mathematics
+left. Its landing waits on lane D** (`Rigidity/DualGroup`'s leaves 1, 2, 3, 4, 5, 7, 8 of the KN8 record § 2.5), which the last
+planner planned and priced; leaf 8, Fourier uniqueness, is the hard one, and every theorem of this lane stands on it.
+
+**The route: H.** Measured cheaper by inclusion, and built to two leaves short of complete.
