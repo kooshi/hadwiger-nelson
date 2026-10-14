@@ -12,5 +12,39 @@
    122,
    "global: on a type built from the release's own definition `CommutingSpectral.algebra U` (`SpectralMeasure.lean`)"
   ]
+ ],
+ "patches": [
+  [
+   109,
+   "apply StarAlgebra.isMulCommutative_adjoin",
+   "refine (fun (_ : ∀ x ∈ Set.range (fun g => (U g : H →L[ℂ] H)), IsStarNormal x) hc hs => StarAlgebra.isMulCommutative_adjoin ℂ hc hs) ?_ ?_ ?_",
+   "at v4.34.1 `StarAlgebra.isMulCommutative_adjoin` takes `(hnormal : ∀ x ∈ s, IsStarNormal x) (hcomm : s.Pairwise Commute) (hcomm_star : s.Pairwise (Commute · <| star ·))` (`Mathlib/Algebra/Star/Subalgebra.lean:587`); at v4.32.0 `(hcomm : ∀ x ∈ s, ∀ y ∈ s, x * y = y * x) (hcomm_star : ∀ a ∈ s, ∀ b ∈ s, a * star b = star b * a)` (`:589`), with the same conclusion. The `apply` becomes a `refine` that still leaves the release's three goals, so the release's three bullets stand (the first, `IsStarNormal`, is proved and not used); the coordinator's ruling of 2026-10-14 (FS131-IPD1, Amendment 1)"
+  ],
+  [
+   112,
+   "rintro _ ⟨left,rfl⟩ _ ⟨right,rfl⟩ _",
+   "rintro _ ⟨left,rfl⟩ _ ⟨right,rfl⟩",
+   "at v4.32.0 the hypothesis of `StarAlgebra.isMulCommutative_adjoin` is `∀ x ∈ s, ∀ y ∈ s, …` (`Mathlib/Algebra/Star/Subalgebra.lean:589`) where v4.34.1's `Set.Pairwise` adds `x ≠ y` (`:587`): one fewer binder to introduce, the `change` after it unchanged (patch 109's lemma; the coordinator's ruling of 2026-10-14, FS131-IPD1 Amendment 1)"
+  ],
+  [
+   115,
+   "rintro _ ⟨left,rfl⟩ _ ⟨right,rfl⟩ _",
+   "rintro _ ⟨left,rfl⟩ _ ⟨right,rfl⟩",
+   "at v4.32.0 the hypothesis of `StarAlgebra.isMulCommutative_adjoin` is `∀ x ∈ s, ∀ y ∈ s, …` (`Mathlib/Algebra/Star/Subalgebra.lean:589`) where v4.34.1's `Set.Pairwise` adds `x ≠ y` (`:587`): one fewer binder to introduce, the `change` after it unchanged (patch 109's lemma; the coordinator's ruling of 2026-10-14, FS131-IPD1 Amendment 1)"
+  ]
+ ],
+ "adaptations": [
+  [
+   121,
+   "inferInstance",
+   "@inferInstance _ (@IsMulCommutative.instCommRing _ _ ⟨⟨(StarSubalgebra.commRingTopologicalClosure _ (fun x y => mul_comm x y)).mul_comm⟩⟩)",
+   "ADAPTED, in a definition's value (the coordinator's ruling of 2026-10-14, FS131-IPD1 Amendment 1, item 758's class): at v4.34.1 the release's `inferInstance` finds its own instance `IsMulCommutative.instCommRing` (scoped, `Mathlib/Algebra/Ring/Defs.lean`) over the ring of `algebra U` through Mathlib's `StarSubalgebra.isMulCommutative_topologicalClosure`, which v4.32.0 does not have; here the same instance is named with the one `Prop` it asks, `IsMulCommutative (algebra U)`, proved explicitly from `StarSubalgebra.commRingTopologicalClosure` (`Mathlib/Topology/Algebra/StarSubalgebra.lean:137`). The stored value keeps the release's shape, `have this := adjoin_comm U; @inferInstance (CommRing …) (@IsMulCommutative.instCommRing … <proof>)`; no hypothesis, no binder; the read-back must read it IDENTICAL or UP-TO-INSTANCES, with a control on another instance path"
+  ],
+  [
+   64,
+   "(memLp μ f ∞).fun_mul (Lp.memLp g)",
+   "(Lp.memLp g).mul' (memLp μ f ∞)",
+   "a PROOF patch by the coordinator's ruling of 2026-10-14 (FS131-IPD1 Amendment 1), written under this key because the generator refuses every `patches` entry inside a definition: the token is the proof argument of `MemLp.toLp`, which the elaborator abstracts as `mulLp._proof_1` (the release stores `MemLp.toLp (fun point => …) (mulLp._proof_1 μ f g)`), so the stored value of `mulLp` is unchanged and only that auxiliary's proof differs. `MemLp.fun_mul (hφ : MemLp φ p μ) (hf : MemLp f q μ)` (v4.34.1, `@[to_fun]` of `MemLp.mul`, `Mathlib/MeasureTheory/Function/LpSeminorm/CompareExp.lean:536`) is `MemLp.mul' (hf : MemLp f q μ) (hφ : MemLp φ p μ)` at v4.32.0 (`:325`), the same conclusion `MemLp (fun x => φ x * f x) r μ`, its two arguments in the other order"
+  ]
  ]
 }

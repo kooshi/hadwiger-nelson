@@ -1,5 +1,5 @@
 import Proofs.HadwigerNelson.Plane.Radius
-import Proofs.HadwigerNelson.Outside.OAI158
+import Proofs.HadwigerNelson.Outside.OAI158Collapse
 
 /-!
 # The radius clause, on the two outside theorems: every open set has a weak colouring, and five fail on a disc (FS-124)

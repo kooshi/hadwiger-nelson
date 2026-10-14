@@ -177,3 +177,92 @@ The experimental copy elaborates **0 errors, 0 warnings** with exactly these cha
 compiled into a scratch farm of symlinks (`build/ipd1/exptfarm`) where Ergodicity was then elaborated. None of the
 sites is a target, a declaration the density branch shares (`shared_names()`), or named by a statement of ours.
 `residual_fourier`'s statement names none of them.
+
+## Stage 4 — SAVED: lane D's modules, the switch (steps 0–5), the registration, the build, and the join's step 0
+
+**4.1 SpectralMeasure under the coordinator's rulings (Amendment 1 of this brief, by message)** — written into its table:
+`algebra_commRing` as an ADAPTATION in a definition's value (`SpectralMeasure.lean:121`, the one token `inferInstance`,
+item 758's class); `mulLp` as a PROOF patch (`:64`) — written under the table's `adaptations` key, since the generator
+refuses every `patches` entry inside a definition; its reason says it is a proof patch by ruling, and the read-back must
+show the definition IDENTICAL with only `mulLp._proof_1` differing; `algebra_commCStar` nothing patched (a pin
+difference, item 763 (3)); the three proof patches of `adjoin_comm` (109, 112, 115). Elaboration in the farm:
+**SpectralMeasure try2 0 errors, 0 warnings**; **Ergodicity try1 0, 0** (the table of stage 3).
+
+**4.2 BorelTransfer** — it imports `Outside/OAI158Palette`, hence `Outside/OAI158`, which declared the axiom of the same
+name, so it was elaborated after the switch's step 1, in a second scratch farm, `build/ipd1/farm2`: a symbolic copy of
+the tree's compiled library (`cp -as`, every file a link into `.lake/build`) with the ported modules' oleans linked in and
+each module elaborated there written over its link — the link removed first (`data/fs131/ipd1/farm2-run.sh`), and the
+two upstream oleans of `.lake/build` checked unchanged by hash after (`OK`). Table: renames `isAlgebraic_ratCast` →
+`isAlgebraic_rat` (Basic's reason), `dite_eq_left` → `dif_pos` (Approximation's), `measurableSet_setOfPred` →
+`measurableSet_setOf`; patches 284 — `summable_norm_of_tsum_eLpNorm_ne_top` takes `(hf : ∀ n, AEStronglyMeasurable (f n)
+μ)` at v4.32.0 (item 764's `eLpNorm` class, **in a proof**; each `f n` is in `Lp`, so `Lp.aestronglyMeasurable (g n)`;
+no lane D statement names `eLpNorm`) — and 186 (an unused `simp` argument the linter reports here). try1 6 errors;
+**try2 0 errors, 0 warnings** (`data/fs131/ipd1/farm2/OAI158BorelTransfer-try2.out`).
+
+**4.3 The five receipts, lane D.**
+1. `--check` on all 31 modules: **`CHECK OK`** (`data/fs131/ipd1/gen-check-31.out`, 31 modules and the licence copy);
+   `--parse-all` passes; `--self-test` **21 plants refused and 8 partners accepted**.
+2. Every module **0 errors, 0 warnings** (farm logs above; and the build, 4.6: 0 modules with warnings).
+3. Axioms (`data/fs131/ipd1/axioms/`, FS131-IPA1's footer generator run unchanged, every constant the six modules and
+   `OAI158Collapse` declare): **`SUMMARY constants=562 clean=562 other=0`**; the control (a scratch `PlantSorry`
+   importing BorelTransfer): `NOTCLEAN PlantSorry ipd1PlantedSorry #[sorryAx]`, `constants=563 clean=562 other=1`.
+4. The read-back across pins: stage 5.
+5. Every table entry has its reason; the protected-declaration check: stage 5.
+
+**4.4 The switch** (plan § 4.4; `tools/fs131_ipd1_switch.py`, `tools/fs131_ipd1_switchdiff.py`, `data/fs131/ipd1/switch/`).
+- **Step 0**, before any edit: every named constant (and private one) of `Outside/OAI158` and of its 24 downstream
+  modules (`data/fs131/ipd1/switch-downstream.txt`), from the build as it stands, in FS132-I2's full and erased prints
+  (`data/fs131/ipd1/lean/SwitchDump.lean`, FS131-KO1's footer functions with a last command reading each module's own
+  compiled data): **485 constants, 25 modules** (`step0.out.xz`); `OAI158` 29, `Plane/RadiusOutside` 8,
+  `Plane/LebesgueNumber` 34 — the exposure test's counts (plan § 3.5).
+- **Steps 1–2** (`fs131_ipd1_switch.py apply 5692c3288`, the stage-1 commit; the files were unchanged since): the axiom and
+  its docstring deleted; the five theorems and the `example` moved to `Outside/OAI158Collapse` (imports
+  `Outside/OAI158BorelTransfer`, `Plane/YesLimit`; `open MeasureTheory`; the namespace); `OAI158`'s module docstring
+  rewritten for one outside theorem and the transfer as a theorem of the port, and its heading over the outside theorems
+  made singular; the one import line in each leaf module. `check`: **`SWITCH-CHECK OK`: 6 blocks moved, 71 lines** — each
+  block byte for byte once in `OAI158Collapse` and absent from `OAI158`, `OAI158` its old text less exactly those blocks and
+  the axiom, the leaf modules differing in exactly the import line. Control: four plants each REPORTED
+  (`step1-control.out`).
+- **Step 3**: the build (4.6), exit 0, no warning from any module.
+- **Step 4**: the same dumper after the build (`SwitchDump4.lean`, the 25 modules and `OAI158Collapse`,
+  `OAI158BorelTransfer`): `fs131_ipd1_switchdiff.py step0 step4`: **484 IDENTICAL and `proper_to_borel_weak`
+  TYPE-IDENTICAL** — kind `axiom` → `theorem`, its full type print the axiom's; the five moved now in `OAI158Collapse`, the
+  transfer in `OAI158BorelTransfer`, nothing else changed module (`step4-diff.out`). Its control: an instance-only change,
+  a real change, a removed constant, the transfer's type, the transfer left an axiom, another constant moved — each
+  REPORTED as planted (`switchdiff-control.out`). No kernel check of leaf R was needed (TYPE-IDENTICAL).
+- **Step 5**: `./scripts/axioms.sh` on the registered library: **OK — 8961 clean, 32 axiom-free, 26 imported, 5
+  declared purchases; declared imports 2, library axioms 2**, every one declared (`axioms.out.xz`, the receipt
+  `axioms-receipt.log.xz`). The twelve records that rested on the transfer, and the transfer itself, each print
+  **exactly `[propext, Classical.choice, Quot.sound]`** (`step5-records.txt`, 13 lines). The audit flags CLAUDE.md's
+  recorded count as stale (7531 → 8961 clean, 38 → 26 imported): the landing's filing.
+
+**4.5 The registration** (`tools/fs131_ipd1_register.py apply 5692c3288`; `check`: **`REGISTER-CHECK OK`: 32 modules,
+32 rows, 1,422 generated records and 12 moved**; its control: an extra line in each of the three files and a record of
+the transfer left under IMPORTED, each REPORTED). `Proofs.lean`: 32 lines after `OAI158AngularBoundary`'s.
+`ARCHITECTURE.md`: 32 rows after `Outside/OAI158AngularBoundary`'s, and the text of **three** rows — `Outside/OAI158`
+(one outside theorem; the transfer a theorem of the port; its consumers moved), `Plane/RadiusOutside` and
+`Plane/LebesgueNumber` (their imports cell, required by `tools/check_architecture.py`, and the words calling the
+transfer a declared outside theorem); `tools/check_architecture.py`: exit 0, 382 rows, 0 import mismatches.
+`scripts/Axioms.lean`: the transfer's `declareImport` removed; its twelve records with their comment lines moved from
+IMPORTED to CLEAN, above the PURCHASED banner, under a header; under them the 1,422 records of `--axioms-block` on the 31
+modules (one private, `pickSupport`, in a `section` with `open private`); the IMPORTED prose on the number of imports
+made true.
+
+**4.6 The build** — `./scripts/build.sh` under the slot (`--mem 10 --cpus 4`, `MEMMAX=10G BATCH=8`): **OK — 253 of 253
+batches, 58 modules rebuilt, 0 with warnings, 11 m 15 s** (`build/gate/build/20261014T082252Z-2310929.log`; the job's
+log kept as `data/fs131/ipd1/build.log`). Resumable by Lake: a relaunch rebuilds only what is out of date.
+
+**4.7 The join recipe's step 0** (plan § 4.5; `data/fs131/ipd1/join/`). The density side: every named constant of
+`Outside/OAI158Transfer` (50) and Rigidity's 7 copies with its axiom `residual_fourier`, from `fs133-wk1`'s compiled
+library (read only; tree at `110f1c923`, branch `fs133-wpq`; the two oleans' hashes `density-oleans.sha256`), by
+`data/fs131/ipd1/lean/JoinDensity.lean`; the port's side, the same 58 names from this tree's registered build
+(`JoinPorted.lean`); compared by FS131-KO1's exposure reader: **54 IDENTICAL, 3 INSTANCES-ONLY** — `approxField`,
+`approxIndex`, `measurableField` (BorelTransfer's definitions): types IDENTICAL, values differing only in which generated
+proof auxiliary they cite — the density copy `Koopman.isometry._proof_1` (`IsTopologicalAddGroup ℂ`) and `_proof_2`
+(`Nat.AtLeastTwo (1 + 1)`), the port `LabelModel.projected._proof_1` and `approxIndex._proof_1` / `_proof_2`, whose types
+print alike on both sides (`aux-density.out`, `aux-ported.out`); the port holds `Koopman.isometry._proof_1/_2` too, and the
+elaborator shares an earlier identical auxiliary of the file, which whole files put elsewhere. And `residual_fourier`:
+axiom there, theorem of `OAI158Ergodicity` here, **its type IDENTICAL** (full print), which the join's step 8 will see.
+Sent at once; **ruled (by message): the three up to proof arguments, the join may proceed** — on two conditions: this
+record names the auxiliaries each side cites and that their types print alike (above), and the join's step 8 dump of the
+eight density modules must read IDENTICAL, or the join stops and comes to the coordinator.

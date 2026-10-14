@@ -1,4 +1,4 @@
-import Proofs.HadwigerNelson.Outside.OAI158
+import Proofs.HadwigerNelson.Outside.OAI158Collapse
 import Proofs.HadwigerNelson.Plane.FalconerReduction
 import Proofs.HadwigerNelson.Plane.WeakColouringOn
 import Proofs.HadwigerNelson.Plane.DensityPoints

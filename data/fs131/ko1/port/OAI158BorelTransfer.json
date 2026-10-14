@@ -4,5 +4,36 @@
    44,
    "global: on a type built from the release's own definition `ContinuousVectors.space` (`Representations.lean`) of the release's `representation k ω`"
   ]
+ ],
+ "renames": [
+  [
+   "isAlgebraic_ratCast",
+   "isAlgebraic_rat",
+   "Mathlib renamed `isAlgebraic_rat` to `isAlgebraic_ratCast` on 2026-07-14 (FS133-IA1's patch, the same); at v4.32.0 the lemma has only the old name, the same statement (`Mathlib/RingTheory/Algebraic/Basic.lean:153`)"
+  ],
+  [
+   "dite_eq_left",
+   "dif_pos",
+   "core renamed `dif_pos` to `dite_eq_left` after v4.32.0 (with `if_pos` → `ite_eq_left`); at v4.32.0 only the old name, the same statement (as `OAI158PhaseCollision`'s patch at 368)"
+  ],
+  [
+   "measurableSet_setOfPred",
+   "measurableSet_setOf",
+   "Mathlib renamed `setOf` and its lemmas to `Set.ofPred` on 2026-07-09 (`LEAN.md` § Searching — Lean; FS132-I2's patches); at v4.32.0 the lemma is `measurableSet_setOf : MeasurableSet {a | p a} ↔ Measurable p` (`Mathlib/MeasureTheory/MeasurableSpace/Constructions.lean:863`), the same statement"
+  ]
+ ],
+ "patches": [
+  [
+   284,
+   "apply summable_norm_of_tsum_eLpNorm_ne_top (by norm_num : (1:ℝ≥0∞) ≤ 2)",
+   "apply summable_norm_of_tsum_eLpNorm_ne_top (by norm_num : (1:ℝ≥0∞) ≤ 2) (fun n => Lp.aestronglyMeasurable (g n))",
+   "a PROOF site of item 764's class (`eLpNorm`): at v4.34.1 `eLpNorm f p μ` is `∞` where `f` is not AE strongly measurable, and `summable_norm_of_tsum_eLpNorm_ne_top (hp) (h'f : ∑' n, eLpNorm (f n) p μ ≠ ∞)` asks no more; at v4.32.0 `eLpNorm` is the formula alone and the lemma takes `(hf : ∀ n, AEStronglyMeasurable (f n) μ)` before `h'f` (`Mathlib/MeasureTheory/Function/LpSpace/InfiniteSum.lean:30`). Here each `f n` is an element of `Lp`, so the measurability is `Lp.aestronglyMeasurable (g n)`, a closed term of the proof's context; no statement names `eLpNorm`"
+  ],
+  [
+   186,
+   "by simp [Circle.norm_coe])",
+   "by simp)",
+   "the linter `linter.unusedSimpArgs` at v4.32.0 reports `Circle.norm_coe` unused here (`simp` closes `‖(u : ℂ)‖ ≠ 0` from its own simp set at this pin, where `Circle.norm_coe` is a `simp` lemma already); the argument is left out so the module elaborates with no warning, the goal and the closing tactic unchanged"
+  ]
  ]
 }
