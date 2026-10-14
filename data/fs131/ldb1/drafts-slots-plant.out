@@ -23,5 +23,6 @@ ok   9c [ARCHITECTURE.md at HEAD]: occurs 1 time(s)
 ok   9d [ARCHITECTURE.md at HEAD]: occurs 1 time(s)
 ok   9e [ARCHITECTURE.md at HEAD]: occurs 1 time(s)
 ok   9f [ARCHITECTURE.md at HEAD]: occurs 1 time(s)
-slots: 24 checked, control absent: see above; FAIL (10)
+ok   9g ARCHITECTURE § Trust, the sentence it follows [ARCHITECTURE.md at HEAD]: occurs 1 time(s)
+slots: 25 checked, control absent: see above; FAIL (10)
 exit=1

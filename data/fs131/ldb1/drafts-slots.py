@@ -39,6 +39,7 @@ SLOTS_HEAD = [
     ("9d", A, "| `Plane/DensityBound/Autocorr` | **FS-131 (FS131-KDB1), skeleton: 5 leaves `sorry`.**"),
     ("9e", A, "| `Plane/DensityBound/Pattern` | **FS-131 (FS131-KDB1), skeleton: 2 leaves `sorry`.**"),
     ("9f", A, "| `Plane/DensityBound/Window` | **FS-131 (FS131-KDB1), skeleton: 3 leaves `sorry`.**"),
+    ("9g ARCHITECTURE § Trust, the sentence it follows", A, "its stored type the declared one's, and its fourteen consumers are clean (FS133-LD1)."),
 ]
 
 

@@ -1,5 +1,4 @@
-slot: waiting (ledger 20 + 5 > budget 22 GiB)
-slot: admitted ldb1-readaloud: mem 5 GiB (hard cap), cpus 5,6
+slot: admitted ldb1-readaloud: mem 6 GiB (hard cap), cpus 0,1
 HadwigerNelson.Plane.oneAvoidingDensityBound : HadwigerNelson.Plane.OneAvoidingDensityBound
 def HadwigerNelson.Plane.OneAvoidingDensityBound : Prop :=
 ∀ (A : Set (EuclideanSpace ℝ (Fin 2))),
@@ -20,8 +19,14 @@ def HadwigerNelson.Plane.OneAvoidingDensityBound : Prop :=
           C.bound / (1 - mu) ≤ 0.2470 → HadwigerNelson.Plane.OneAvoidingDensityBound
 def HadwigerNelson.Plane.mOne : ENNReal :=
 ⨆ (A : Set ℂ),
-  ⨆ (_ : MeasureTheory.NullMeasurableSet A MeasureTheory.volume ∧ HadwigerNelson.Plane.BandFree A 0),
-    HadwigerNelson.Plane.upperDensity A
+  ⨆ (_ : MeasurableSet A), ⨆ (_ : (HadwigerNelson.unitDistance ℂ).IsIndepSet A), HadwigerNelson.Plane.upperDensity A
+HadwigerNelson.Plane.mOne_eq_iSup_bandFree : HadwigerNelson.Plane.mOne =
+  ⨆ (A : Set ℂ),
+    ⨆ (_ : MeasureTheory.NullMeasurableSet A MeasureTheory.volume ∧ HadwigerNelson.Plane.BandFree A 0),
+      HadwigerNelson.Plane.upperDensity A
+'HadwigerNelson.Plane.mOne_eq_iSup_bandFree' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.Plane.mOne_le_one : HadwigerNelson.Plane.mOne ≤ 1
+HadwigerNelson.OneClass.one_seventh_le_mOne : 7⁻¹ ≤ HadwigerNelson.Plane.mOne
 def HadwigerNelson.Plane.upperDensity : Set ℂ → ENNReal :=
 fun (S : Set ℂ) =>
   Filter.limsup (fun (R : ℝ) => MeasureTheory.volume (S ∩ Metric.ball 0 R) / MeasureTheory.volume (Metric.ball 0 R))
