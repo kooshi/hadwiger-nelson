@@ -120,3 +120,56 @@ Both callers supply it. Sent to the coordinator with the line on the two leaves.
 one pass over a shared set of helpers and closed in seven elaborations, the errors each a missing annotation; about
 400 lines. The rest is priced from that: I2 (the Følner sequence) is now the heaviest — bookkeeping in coordinates,
 no library to lean on; I1 and I5 a few dozen lines each over the helpers above; I6, I7, D1–D5 short.
+
+## Stage 3 — SAVED: the rest of `InvariantLaw` (I1, I2, I5, I6, I7), and Amendment 1 carried out
+
+*Under `lake env lean` with the lakefile's options; no `sorry` is left in the file, and it elaborates with no
+warning.*
+
+**3.1 Amendment 1 of the brief** (2026-10-14 02:59 UTC; read on disk in the coordinator's tree, with the dated line
+it put in `data/fs133/claims-K1.md`). Item 3: **`exists_turnInvariant` loses `hshift`** — the binder, the line that
+kept the linter quiet, and the argument at its two call sites (`exists_invariant_of_closed`, `exists_isInvariantLaw`,
+both in this file; no other file of the library names the theorem: `grep` over `Proofs/`); its docstring now says
+what is asked and why the translations' stability is not. Nothing else of the skeleton's statements is touched.
+Item 4: the two private lemmas stay (3.3).
+
+**3.2 The leaves.**
+- **I1 `IsShiftInvariantLaw.measure_origin_le` — proved**, on the plan's route: for each nonempty finite `S`,
+  `P {I 0} · #S = ∑_{g ∈ S} P {I g} = ∫⁻ #{g ∈ S | I g}`, and the integrand is at most the independence number of
+  the induced graph almost surely.
+- **I2 `exists_foelner_finset` — proved, by another route than the plan's** (sent to the coordinator). The plan: a
+  `ℚ`-basis and boxes of points with bounded denominators. Taken: **polynomial growth**. For a finite `Z ⊆ A` let
+  `G N` be the image of the box `[0, N]^Z` under `c ↦ ∑ c z • z`; then `#G N ≤ (N + 1)^#Z`, `G N ⊆ G (N + 1)` and
+  `G N + z ⊆ G (N + 1)` for `z ∈ Z`, so if every step grew by more than the factor `1 + ε` then
+  `(1 + ε)^N ≤ (N + 1)^#Z` for all `N`, against `tendsto_pow_const_div_const_pow_of_one_lt`; a step that does not
+  is a set that loses at most `ε · #G N` points under each `z ∈ Z` (`exists_almost_invariant`, private). The
+  sequence is the diagonal along an enumeration of `A`. No basis, no coordinates, no injectivity.
+  **The proof does not read `[Module ℚ A]`**: it is a theorem about any countable commutative group (3.4).
+- **I5 `exists_isInvariantLaw` — proved**, on the plan's route: the indicators of independent sets are a closed
+  set (an intersection over pairs of preimages of subsets of the discrete `Bool × Bool`), stable under the
+  translations and the rotations; I2 at `E`; an independent subset of `F n` of the ratio's size; I3 at `a := true`;
+  I4; `≤` by I1.
+- **I6 `norm_kCoeff_mul`, I7 `unitDistance_algPlane_eq_circulantGraph` — proved.**
+
+**3.3 The two private lemmas that read the ratio on a finite set** (Amendment 1, item 4): `card_le_indepNum_induce`
+(an independent subset of a finite vertex set has at most the independence number of the induced graph) and
+`exists_indep_subset` (a nonempty finite vertex set holds an independent set of at least the ratio times its size).
+They unfold `finIndepRatio`, so that this file prints the standard three while `Defs`'s `le_finIndepRatio_iff` and
+`finIndepRatio_le_one` are unproved. **For the join** (the line the amendment asks for, repeated in the drafts):
+when `Defs` is proved, `exists_indep_subset` is `(le_finIndepRatio_iff G).1 le_rfl S hS` and
+`card_le_indepNum_induce` is the bridge `Defs` names `indepNum_induce_finset`; both are re-pointed at the public
+lemmas or deleted — no duplicate proof goes to the landing.
+
+**3.4 A second finding about a statement** (a generalization; the statement is **not** changed, and no line hides
+the binder). `exists_foelner_finset (A) [AddCommGroup A] [Module ℚ A] [Countable A]`: the instance `[Module ℚ A]` is
+not read by the proof. The build's linters do not report an unread instance binder; the environment linter
+(`unusedArguments`, the landing's `lake lint`) will. By Amendment 1's reasoning the binder should go — its one
+caller, `exists_invariant_of_closed`, and I5 pass no explicit instance — but my touches do not reach this
+statement: sent to the coordinator for a ruling.
+
+**3.5 Receipts** (the footer on the file as it stands). Axioms (`data/fs133/ib1/stage3-axioms.out`): all ten public
+theorems of the file `[propext, Classical.choice, Quot.sound]`. Stored statements against stage 1's dump
+(`stage3-moved.txt`): `InvariantLaw` **9 IDENTICAL, 1 DIFFERENT — `exists_turnInvariant`, the ruled widening**.
+
+**3.6 Re-pricing of what is left**: `SectionDensity`'s six leaves, each short (Tonelli on a window, the reverse
+Fatou lemma, a strict integral inequality); then the build and the receipts.

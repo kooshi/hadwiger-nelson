@@ -273,10 +273,165 @@ private theorem exists_common_fixed {ι : Type*} {p : Measure X → Prop}
 
 end Weak
 
+
+/-! ### The finitary ratio read on a finite set, and almost-invariant finite sets (private) -/
+
+/-- An independent subset of a finite vertex set has at most the independence number of the induced graph. -/
+private theorem card_le_indepNum_induce {V : Type*} (G : SimpleGraph V) (S : Finset V) {J : Finset V}
+    (hJS : J ⊆ S) (hJ : G.IsIndepSet (J : Set V)) : J.card ≤ (G.induce (S : Set V)).indepNum := by
+  classical
+  have hind : (G.induce (S : Set V)).IsIndepSet
+      ((J.subtype (· ∈ (S : Set V)) : Finset (S : Set V)) : Set (S : Set V)) := by
+    intro x hx y hy hxy hadj
+    exact hJ (Finset.mem_subtype.1 hx) (Finset.mem_subtype.1 hy) (fun h => hxy (Subtype.ext h))
+      (SimpleGraph.induce_adj.1 hadj)
+  have hcard : (J.subtype (· ∈ (S : Set V))).card = J.card := by
+    rw [Finset.card_subtype, Finset.filter_true_of_mem fun x hx => Finset.mem_coe.2 (hJS hx)]
+  rw [← hcard]
+  exact SimpleGraph.IsIndepSet.card_le_indepNum hind
+
+/-- A nonempty finite vertex set holds an independent set of at least the finitary ratio times its size. -/
+private theorem exists_indep_subset {V : Type*} (G : SimpleGraph V) {S : Finset V} (hS : S.Nonempty) :
+    ∃ J : Finset V, J ⊆ S ∧ G.IsIndepSet (J : Set V) ∧ G.finIndepRatio * S.card ≤ J.card := by
+  classical
+  obtain ⟨J', hJ'⟩ := (G.induce (S : Set V)).exists_isNIndepSet_indepNum
+  refine ⟨J'.map (Function.Embedding.subtype _), ?_, ?_, ?_⟩
+  · intro x hx
+    obtain ⟨y, -, rfl⟩ := Finset.mem_map.1 hx
+    exact y.2
+  · intro x hx y hy hxy hadj
+    obtain ⟨x', hx', rfl⟩ := Finset.mem_map.1 (Finset.mem_coe.1 hx)
+    obtain ⟨y', hy', rfl⟩ := Finset.mem_map.1 (Finset.mem_coe.1 hy)
+    exact hJ'.isIndepSet (Finset.mem_coe.2 hx') (Finset.mem_coe.2 hy') (fun h => hxy (congrArg _ h))
+      (SimpleGraph.induce_adj.2 hadj)
+  · rw [Finset.card_map, hJ'.card_eq]
+    have h : G.finIndepRatio ≤ ((G.induce (S : Set V)).indepNum : ℝ≥0∞) / S.card :=
+      iInf₂_le (f := fun (S : Finset V) (_ : S.Nonempty) =>
+        ((G.induce (S : Set V)).indepNum : ℝ≥0∞) / S.card) S hS
+    have hcard : (S.card : ℝ≥0∞) ≠ 0 := by simpa using hS.ne_empty
+    exact (ENNReal.le_div_iff_mul_le (Or.inl hcard) (Or.inl (ENNReal.natCast_ne_top _))).1 h
+
+/-- The points of a finite set that a translation moves out of it, counted as a `Finset`. -/
+private theorem ncard_setOf_mem_and_add_notMem {A : Type*} [AddCommGroup A] [DecidableEq A] (F : Finset A)
+    (z : A) : {a | a ∈ F ∧ a + z ∉ F}.ncard = (F.filter fun a => a + z ∉ F).card := by
+  have h : {a | a ∈ F ∧ a + z ∉ F} = ((F.filter fun a => a + z ∉ F : Finset A) : Set A) := by
+    ext a; simp
+  rw [h, Set.ncard_coe_finset]
+
+/-- **Polynomial growth gives almost-invariant sets.** In a commutative group, for finitely many `z` and `ε > 0`,
+some finite nonempty `F` loses at most `ε · #F` of its points under the translation by each `z`: the images
+`G N` of the boxes `[0, N]^Z` under `c ↦ ∑ c z • z` have at most `(N + 1)^#Z` points and `G N + z ⊆ G (N + 1)`,
+so some step grows by a factor at most `1 + ε`. -/
+private theorem exists_almost_invariant {A : Type*} [AddCommGroup A] (Z : Finset A) {ε : ℝ} (hε : 0 < ε) :
+    ∃ F : Finset A, F.Nonempty ∧ ∀ z ∈ Z, ({a | a ∈ F ∧ a + z ∉ F}.ncard : ℝ) ≤ ε * F.card := by
+  classical
+  set φ : (Z → ℕ) → A := fun c => ∑ w : Z, c w • (w : A) with hφ
+  set G : ℕ → Finset A := fun N => (Fintype.piFinset fun _ : Z => Finset.range (N + 1)).image φ with hGdef
+  have hne : ∀ N, (G N).Nonempty := fun N =>
+    ⟨φ 0, Finset.mem_image_of_mem _ (Fintype.mem_piFinset.2 fun _ => Finset.mem_range.2 (Nat.succ_pos N))⟩
+  have hcard : ∀ N, (G N).card ≤ (N + 1) ^ Z.card := fun N =>
+    Finset.card_image_le.trans (le_of_eq (by simp [Fintype.card_piFinset]))
+  have hmono : ∀ N, G N ⊆ G (N + 1) := fun N =>
+    Finset.image_subset_image (Fintype.piFinset_subset _ _ fun _ => Finset.range_mono (Nat.le_succ _))
+  have hstep : ∀ N, ∀ z ∈ Z, ∀ a ∈ G N, a + z ∈ G (N + 1) := by
+    intro N z hz a ha
+    obtain ⟨c, hc, rfl⟩ := Finset.mem_image.1 ha
+    refine Finset.mem_image.2 ⟨c + Pi.single ⟨z, hz⟩ 1, Fintype.mem_piFinset.2 fun w => ?_, ?_⟩
+    · have h1 := Finset.mem_range.1 (Fintype.mem_piFinset.1 hc w)
+      have h2 : (Pi.single (⟨z, hz⟩ : Z) 1 : Z → ℕ) w ≤ 1 := by
+        by_cases h : w = ⟨z, hz⟩
+        · rw [h, Pi.single_eq_same]
+        · rw [Pi.single_eq_of_ne h]; exact Nat.zero_le 1
+      exact Finset.mem_range.2 (by rw [Pi.add_apply]; omega)
+    · simp only [hφ, Pi.add_apply, add_smul, Finset.sum_add_distrib]
+      congr 1
+      rw [Finset.sum_eq_single (⟨z, hz⟩ : Z) (fun w _ hw => by rw [Pi.single_eq_of_ne hw, zero_smul])
+        (fun h => absurd (Finset.mem_univ _) h), Pi.single_eq_same, one_smul]
+  -- some step grows by a factor at most `1 + ε`: otherwise `#G N ≥ (1 + ε)^N` against `#G N ≤ (N + 1)^#Z`
+  have hgrow : ∃ N, ((G (N + 1)).card : ℝ) ≤ (1 + ε) * (G N).card := by
+    by_contra hcon
+    push Not at hcon
+    have hexp : ∀ N, (1 + ε) ^ N ≤ ((G N).card : ℝ) := by
+      intro N
+      induction N with
+      | zero =>
+        rw [pow_zero]
+        exact_mod_cast (hne 0).card_pos
+      | succ N ih =>
+        calc (1 + ε) ^ (N + 1) = (1 + ε) * (1 + ε) ^ N := pow_succ' _ _
+          _ ≤ (1 + ε) * (G N).card := mul_le_mul_of_nonneg_left ih (by linarith)
+          _ ≤ (G (N + 1)).card := (hcon N).le
+    have hr : (1 : ℝ) < 1 + ε := by linarith
+    have ht := tendsto_pow_const_div_const_pow_of_one_lt Z.card hr
+    obtain ⟨N, hN⟩ := eventually_atTop.1 (ht.eventually (gt_mem_nhds (inv_pos.2 (by linarith : (0 : ℝ) < 1 + ε))))
+    have h1 := hN (N + 1) (Nat.le_succ N)
+    have h2 : (1 + ε) ^ N ≤ ((N + 1 : ℕ) : ℝ) ^ Z.card := (hexp N).trans (by exact_mod_cast hcard N)
+    have hpos : (0 : ℝ) < (1 + ε) ^ (N + 1) := by positivity
+    have h3 : (1 + ε)⁻¹ * (1 + ε) ^ (N + 1) = (1 + ε) ^ N := by
+      rw [pow_succ']; field_simp
+    rw [div_lt_iff₀ hpos, h3] at h1
+    exact absurd h2 (not_le.2 h1)
+  obtain ⟨N, hN⟩ := hgrow
+  refine ⟨G N, hne N, fun z hz => ?_⟩
+  rw [ncard_setOf_mem_and_add_notMem]
+  have hinj : ((G N).filter fun a => a + z ∉ G N).card ≤ (G (N + 1) \ G N).card := by
+    rw [← Finset.card_map (addRightEmbedding z)]
+    refine Finset.card_le_card fun s hs => ?_
+    obtain ⟨a, ha, rfl⟩ := Finset.mem_map.1 hs
+    obtain ⟨ha1, ha2⟩ := Finset.mem_filter.1 ha
+    exact Finset.mem_sdiff.2 ⟨hstep N z hz a ha1, ha2⟩
+  have hsd : ((G (N + 1) \ G N).card : ℝ) = (G (N + 1)).card - (G N).card := by
+    rw [Finset.card_sdiff_of_subset (hmono N), Nat.cast_sub (Finset.card_le_card (hmono N))]
+  calc (((G N).filter fun a => a + z ∉ G N).card : ℝ) ≤ (G (N + 1) \ G N).card := by exact_mod_cast hinj
+    _ = (G (N + 1)).card - (G N).card := hsd
+    _ ≤ ε * (G N).card := by linarith
+
+/-- A rotation is not the zero of the algebraic plane. -/
+private theorem kCoeff_ne_zero' (u : K) : kCoeff u ≠ 0 := fun h =>
+  Circle.coe_ne_zero u.val (congrArg (fun z : E => (z : ℂ)) h)
+
 /-- **C133-INV-CLASS, the upper bound** (step (1); any graph on the algebraic plane, translations only). -/
 theorem IsShiftInvariantLaw.measure_origin_le {G : SimpleGraph E} {P : Measure (E → Bool)}
     (h : IsShiftInvariantLaw G P) : P {I | I 0 = true} ≤ G.finIndepRatio := by
-  sorry
+  classical
+  haveI := h.prob
+  have hT : ∀ g : E, MeasurableSet {I : E → Bool | I g = true} := fun g =>
+    show MeasurableSet ((fun I : E → Bool => I g) ⁻¹' {true}) from
+      measurable_pi_apply g (measurableSet_singleton true)
+  have hshift : ∀ g : E, P {I | I g = true} = P {I | I 0 = true} := by
+    intro g
+    have hm : Measurable (shiftLab g : (E → Bool) → E → Bool) :=
+      measurable_pi_lambda _ fun x => measurable_pi_apply _
+    have h1 : P.map (shiftLab g) {I | I 0 = true} = P {I | I 0 = true} := by rw [h.shift g]
+    rw [Measure.map_apply hm (hT 0)] at h1
+    rw [← h1]
+    congr 1
+    ext I
+    show I g = true ↔ I (0 + g) = true
+    rw [zero_add]
+  unfold SimpleGraph.finIndepRatio
+  refine le_iInf₂ fun S hS => ?_
+  have hcard : (S.card : ℝ≥0∞) ≠ 0 := by simpa using hS.ne_empty
+  rw [ENNReal.le_div_iff_mul_le (Or.inl hcard) (Or.inl (ENNReal.natCast_ne_top _))]
+  calc P {I | I 0 = true} * S.card = ∑ g ∈ S, P {I | I g = true} := by
+        rw [Finset.sum_congr rfl fun g _ => hshift g, Finset.sum_const, nsmul_eq_mul, mul_comm]
+    _ = ∫⁻ I, ∑ g ∈ S, ({I : E → Bool | I g = true}.indicator 1 I : ℝ≥0∞) ∂P := by
+        rw [lintegral_finsetSum _ fun g _ => measurable_one.indicator (hT g)]
+        exact Finset.sum_congr rfl fun g _ => (lintegral_indicator_one (hT g)).symm
+    _ ≤ ∫⁻ _, ((G.induce (S : Set E)).indepNum : ℝ≥0∞) ∂P := by
+        refine lintegral_mono_ae (h.indep.mono fun I hI => ?_)
+        -- the sum counts the points of `S` in the random set
+        have hsum : ∑ g ∈ S, ({I : E → Bool | I g = true}.indicator 1 I : ℝ≥0∞) =
+            ((S.filter fun g => I g = true).card : ℝ≥0∞) := by
+          rw [Finset.card_filter, Nat.cast_sum]
+          refine Finset.sum_congr rfl fun g _ => ?_
+          by_cases hg : I g = true
+          · rw [indicator_of_mem (show I ∈ {I : E → Bool | I g = true} from hg), if_pos hg]; simp
+          · rw [indicator_of_notMem (show I ∉ {I : E → Bool | I g = true} from hg), if_neg hg]; simp
+        rw [hsum]
+        exact_mod_cast card_le_indepNum_induce G S (Finset.filter_subset _ S)
+          (Set.Pairwise.mono (fun g hg => (Finset.mem_filter.1 hg).2) hI)
+    _ = (G.induce (S : Set E)).indepNum := by rw [lintegral_const, measure_univ, mul_one]
 
 /-- The algebraic plane is countable (the release's `E_countable`; a theorem, not an instance: `E` is Mathlib's
 type). -/
@@ -292,7 +447,17 @@ theorem countable_algPlane : Countable E := by
 theorem exists_foelner_finset (A : Type*) [AddCommGroup A] [Module ℚ A] [Countable A] :
     ∃ F : ℕ → Finset A, (∀ n, (F n).Nonempty) ∧ ∀ z : A,
       Tendsto (fun n => ({a | a ∈ F n ∧ a + z ∉ F n}.ncard : ℝ) / (F n).card) atTop (𝓝 0) := by
-  sorry
+  classical
+  obtain ⟨e, he⟩ := exists_surjective_nat A
+  choose F hFne hF using fun n : ℕ =>
+    exists_almost_invariant ((Finset.range n).image e) (ε := 1 / ((n : ℝ) + 1)) (by positivity)
+  refine ⟨F, hFne, fun z => ?_⟩
+  obtain ⟨k, rfl⟩ := he z
+  refine squeeze_zero' (Eventually.of_forall fun n => by positivity) ?_ tendsto_one_div_add_atTop_nhds_zero_nat
+  filter_upwards [eventually_gt_atTop k] with n hn
+  have hc : (0 : ℝ) < (F n).card := by exact_mod_cast (hFne n).card_pos
+  rw [div_le_iff₀ hc]
+  exact hF n (e k) (Finset.mem_image_of_mem e (Finset.mem_range.2 hn))
 
 variable {Λ : Type*} [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] [MeasurableSpace Λ]
   [MeasurableSingletonClass Λ]
@@ -395,18 +560,16 @@ theorem exists_shiftInvariant_of_foelner {F : ℕ → Finset E} (hF : ∀ n, (F 
             mul_comm]
 
 /-- **The rotations have a common fixed point** (step (3), with no Markov–Kakutani theorem: the rotations are
-countably many commuting continuous maps, and a Cesàro limit fixes one at a time). From a translation-invariant
-probability carried by a closed set `C` that translations and rotations preserve: one invariant under both, carried
-by `C`, with the same law of the label at the origin. -/
-theorem exists_turnInvariant {C : Set (E → Λ)} (hC : IsClosed C) (hshift : ∀ z, MapsTo (shiftLab z) C C)
+commuting continuous maps, a Cesàro limit fixes one at a time, and compactness fixes them all). From a
+translation-invariant probability carried by a closed set `C` that the rotations preserve: one invariant under
+both, carried by `C`, with the same law of the label at the origin. (That the translations preserve `C` is not
+asked: a rotation of a translation-invariant law is translation-invariant by the covariance alone.) -/
+theorem exists_turnInvariant {C : Set (E → Λ)} (hC : IsClosed C)
     (hturn : ∀ u, MapsTo (turnLab u) C C) {P₀ : Measure (E → Λ)} [IsProbabilityMeasure P₀] (h0 : P₀ Cᶜ = 0)
     (hinv : ∀ z, P₀.map (shiftLab z) = P₀) :
     ∃ P : Measure (E → Λ), IsProbabilityMeasure P ∧ P Cᶜ = 0 ∧ (∀ z, P.map (shiftLab z) = P) ∧
       (∀ u, P.map (turnLab u) = P) ∧ ∀ a, P {ℓ | ℓ 0 = a} = P₀ {ℓ | ℓ 0 = a} := by
   classical
-  -- the proof does not read `hshift`: a rotation of a translation-invariant law is translation-invariant by the
-  -- covariance alone, whatever its carrier
-  have _ := hshift
   haveI := countable_algPlane
   have hmeas_shift : ∀ z : E, Measurable (shiftLab z : (E → Λ) → E → Λ) := fun z => (continuous_shiftLab z).measurable
   have hmeas_turn : ∀ u : K, Measurable (turnLab u : (E → Λ) → E → Λ) := fun u => (continuous_turnLab u).measurable
@@ -474,7 +637,7 @@ theorem exists_invariant_of_closed {C : Set (E → Λ)} (hC : IsClosed C) (hne :
   obtain ⟨F, hF, hFz⟩ := exists_foelner_finset E
   obtain ⟨P₀, hP₀, h0, hinv, -⟩ :=
     exists_shiftInvariant_of_foelner hF hFz hC hshift (fun _ => ℓ₀) (fun _ => hℓ₀)
-  obtain ⟨P, hP, hPC, hs, ht, -⟩ := exists_turnInvariant hC hshift hturn h0 hinv
+  obtain ⟨P, hP, hPC, hs, ht, -⟩ := exists_turnInvariant hC hturn h0 hinv
   exact ⟨P, hP, hPC, hs, ht⟩
 
 /-- **C133-INV-CLASS.** For a set `S` of the algebraic plane invariant under the algebraic rotations, some
@@ -483,16 +646,99 @@ ratio. (With `IsShiftInvariantLaw.measure_origin_le`: no translation-invariant o
 theorem exists_isInvariantLaw (S : Set E) (hS : ∀ u : K, ∀ s ∈ S, kCoeff u * s ∈ S) :
     ∃ P : Measure (E → Bool), IsInvariantLaw (circulantGraph S) P ∧
       P {I | I 0 = true} = (circulantGraph S).finIndepRatio := by
-  sorry
+  classical
+  haveI := countable_algPlane
+  set G : SimpleGraph E := circulantGraph S with hG
+  set C : Set (E → Bool) := {I | G.IsIndepSet {z | I z = true}} with hCdef
+  have hC : IsClosed C := by
+    have : C = ⋂ a, ⋂ b, {I : E → Bool | I a = true → I b = true → a ≠ b → ¬ G.Adj a b} := by
+      ext I
+      simp only [hCdef, mem_setOf_eq, mem_iInter, SimpleGraph.IsIndepSet, Set.Pairwise]
+      exact ⟨fun h x y hx hy => h hx hy, fun h x hx y hy => h x y hx hy⟩
+    rw [this]
+    exact isClosed_iInter fun a => isClosed_iInter fun b =>
+      show IsClosed ((fun I : E → Bool => (I a, I b)) ⁻¹'
+        {p : Bool × Bool | p.1 = true → p.2 = true → a ≠ b → ¬ G.Adj a b}) from
+      (isClosed_discrete _).preimage ((continuous_apply a).prodMk (continuous_apply b))
+  have hshift : ∀ z, MapsTo (shiftLab z) C C := by
+    intro z I hI
+    show Set.Pairwise {x | I (x + z) = true} fun v w => ¬ G.Adj v w
+    intro x hx y hy hxy hadj
+    refine hI (show I (x + z) = true from hx) (show I (y + z) = true from hy)
+      (fun h => hxy (add_right_cancel h)) ?_
+    rw [hG, circulantGraph_adj] at hadj ⊢
+    refine ⟨fun h => hxy (add_right_cancel h), ?_⟩
+    rw [add_sub_add_right_eq_sub, add_sub_add_right_eq_sub]
+    exact hadj.2
+  have hturn : ∀ u, MapsTo (turnLab u) C C := by
+    intro u I hI
+    show Set.Pairwise {x | I (kCoeff u * x) = true} fun v w => ¬ G.Adj v w
+    intro x hx y hy hxy hadj
+    have hne : kCoeff u * x ≠ kCoeff u * y := fun h => hxy (mul_left_cancel₀ (kCoeff_ne_zero' u) h)
+    refine hI (show I (kCoeff u * x) = true from hx) (show I (kCoeff u * y) = true from hy) hne ?_
+    rw [hG, circulantGraph_adj] at hadj ⊢
+    refine ⟨hne, ?_⟩
+    rw [← mul_sub, ← mul_sub]
+    exact hadj.2.imp (hS u _) (hS u _)
+  obtain ⟨F, hF, hFz⟩ := exists_foelner_finset E
+  choose J hJF hJind hJcard using fun n => exists_indep_subset G (hF n)
+  set ℓ : ℕ → E → Bool := fun n x => decide (x ∈ J n) with hℓ
+  have hset : ∀ n, {z : E | ℓ n z = true} = (J n : Set E) := fun n => by
+    ext z; simp [hℓ]
+  have hℓC : ∀ n, ℓ n ∈ C := fun n => by
+    show G.IsIndepSet {z | ℓ n z = true}
+    rw [hset]
+    exact hJind n
+  have hr : G.finIndepRatio ≠ ⊤ := by
+    intro htop
+    have h1 := hJcard 0
+    rw [htop, ENNReal.top_mul (by simpa using (hF 0).ne_empty)] at h1
+    exact ENNReal.natCast_ne_top _ (top_le_iff.1 h1)
+  obtain ⟨P₀, hP₀, h0, hinv, hlab⟩ := exists_shiftInvariant_of_foelner hF hFz hC hshift ℓ hℓC
+  have hge : G.finIndepRatio ≤ P₀ {I | I 0 = true} := by
+    have h1 := hlab true G.finIndepRatio.toReal fun n => by
+      have hsub : {r | r ∈ F n ∧ ℓ n r = true} = (J n : Set E) := by
+        ext r
+        simp only [hℓ, mem_setOf_eq, decide_eq_true_eq, Finset.mem_coe]
+        exact ⟨fun h => h.2, fun h => ⟨hJF n h, h⟩⟩
+      rw [hsub, Set.ncard_coe_finset]
+      have h2 := ENNReal.toReal_mono (ENNReal.natCast_ne_top _) (hJcard n)
+      simpa [ENNReal.toReal_mul] using h2
+    rwa [ENNReal.ofReal_toReal hr] at h1
+  haveI := hP₀
+  obtain ⟨P, hP, hPC, hPs, hPt, hPlab⟩ := exists_turnInvariant hC hturn h0 hinv
+  have hlaw : IsInvariantLaw G P :=
+    { prob := hP
+      indep := by
+        filter_upwards [measure_eq_zero_iff_ae_notMem.1 hPC] with I hI
+        exact not_not.1 hI
+      shift := hPs
+      turn := hPt }
+  refine ⟨P, hlaw, le_antisymm hlaw.toIsShiftInvariantLaw.measure_origin_le ?_⟩
+  rw [hPlab true]
+  exact hge
 
 /-- A rotation preserves the modulus of a point of the algebraic plane. -/
 theorem norm_kCoeff_mul (u : K) (z : E) : ‖((kCoeff u * z : E) : ℂ)‖ = ‖(z : ℂ)‖ := by
-  sorry
+  show ‖((u.val : Circle) : ℂ) * (z : ℂ)‖ = ‖(z : ℂ)‖
+  rw [norm_mul, Circle.norm_coe, one_mul]
 
 /-- The unit-distance graph of the algebraic plane is the Cayley graph of its unit circle. -/
 theorem unitDistance_algPlane_eq_circulantGraph :
     unitDistance E = circulantGraph {z : E | ‖(z : ℂ)‖ = 1} := by
-  sorry
+  ext a b
+  have hd : dist a b = ‖((a - b : E) : ℂ)‖ := by
+    rw [Subtype.dist_eq, dist_eq_norm]
+    rfl
+  have hrev : ‖((b - a : E) : ℂ)‖ = ‖((a - b : E) : ℂ)‖ := by
+    show ‖(b : ℂ) - (a : ℂ)‖ = ‖(a : ℂ) - (b : ℂ)‖
+    exact norm_sub_rev _ _
+  rw [unitDistance_adj, circulantGraph_adj, hd]
+  simp only [mem_setOf_eq, hrev, or_self]
+  refine ⟨fun h => ⟨?_, h⟩, fun h => h.2⟩
+  rintro rfl
+  rw [sub_self] at h
+  simp at h
 
 /-- **C133-INV, as posed, with equality**: the unit-distance graph of the algebraic plane has an invariant random
 independent set whose density is its finitary independence ratio. -/

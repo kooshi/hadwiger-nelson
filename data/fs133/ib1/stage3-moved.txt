@@ -1,0 +1,14 @@
+Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw: DIFFERENT 1, IDENTICAL 9
+  DIFFERENT       theorem  HadwigerNelson.OneClass.exists_turnInvariant
+Proofs.HadwigerNelson.Plane.OneClass.SectionDensity: MISSING 9
+  MISSING         theorem  HadwigerNelson.Plane.exists_mem_le_sectionDensity
+  MISSING         theorem  HadwigerNelson.Plane.le_lintegral_sectionDensity
+  MISSING         theorem  HadwigerNelson.Plane.measurable_sectionDensity
+  MISSING         theorem  HadwigerNelson.Plane.measure_le_sectionDensity_pos
+  MISSING         theorem  HadwigerNelson.Plane.ofReal_integral_le_measure_pos
+  MISSING         def      HadwigerNelson.Plane.sectionDensity
+  MISSING         theorem  HadwigerNelson.Plane.sectionDensity_empty
+  MISSING         theorem  HadwigerNelson.Plane.sectionDensity_setOf_pos
+  MISSING         theorem  HadwigerNelson.Plane.sectionDensity_univ
+constants of the first dump: 19  DIFFERENT 1  IDENTICAL 9  MISSING 9  new in the second: 0
+MOVED FAILED: 10
