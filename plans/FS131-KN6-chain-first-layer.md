@@ -564,3 +564,17 @@ landing joins them.
   `MaximalOccupation.lean` and three declarations of `PrimePackets/InverseEntropy.lean` elaborated at this library's pin
   in scratch copies by FS131-KN6 (2026-10-14; 0 errors after seven renames; no proof read by it beyond the lines its
   errors named)."
+
+## Stage 7 — SAVED: the checks at the hand-back
+
+- **No copied compiled file was rewritten.** `sha256sum -c` of the manifest made after the copy (Stage 2.2), run after the
+  second build (`data/fs131/kn6/logs/manifest-check.out`): of 1,906 `.olean`, five differ — `Rigidity/Entropy`,
+  `Rigidity/Solenoid`, `Rigidity/PositiveEntropy`, `Rigidity/ChainAtTA` and the root `Proofs` — exactly the modules the two
+  builds report as rebuilt.
+- **Nothing of this job is running or queued**: no `lean` or `lake` process has this worktree as its working directory;
+  the slot ledger's one entry is another job's.
+- **The scratch copies** of the release's files stay under the ignored `build/fs131-kn6/release-copies/` (five files;
+  `git check-ignore` names them); nothing of the release's text is in a commit of this branch. Nothing was written or run
+  in `~/source/math`.
+- **Not pushed** (the brief: the server is unreachable). Nothing on `main`; nothing in another tree beyond reading
+  `fs131-wnf`'s compiled files.

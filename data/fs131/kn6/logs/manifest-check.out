@@ -1,0 +1,5 @@
+./Proofs/HadwigerNelson/Rigidity/ChainAtTA.olean: FAILED
+./Proofs/HadwigerNelson/Rigidity/Entropy.olean: FAILED
+./Proofs/HadwigerNelson/Rigidity/PositiveEntropy.olean: FAILED
+./Proofs/HadwigerNelson/Rigidity/Solenoid.olean: FAILED
+./Proofs.olean: FAILED
