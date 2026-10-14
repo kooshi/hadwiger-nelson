@@ -13,6 +13,9 @@ and reports, for every constant of BEFORE that is not an internal name (`Name.is
   MISSING   absent from AFTER                                         -> FAIL
 and for AFTER's constants absent from BEFORE:
   ADDED-INTERNAL   a private helper or a generated name (allowed: proofs and private helpers are this job's)
+  ADDED-GENERATED  a reserved name Lean generates on demand where a tactic asks (`f.congr_simp`, `f.eq_<n>`, `f.eq_def`;
+                   no author can declare one) — allowed, listed; `scripts/dupnames.sh` reads whether another module
+                   holds a copy
   ADDED-PUBLIC     a public declaration                               -> FAIL (the brief allows none)
 
 It also reads every stored type of BEFORE (or of one dump, with --binders-only) for the class binders its section declares
@@ -26,7 +29,10 @@ public constant dropped; one public constant added) and requires each to be repo
 Usage: fs131_icl1_statements.py BEFORE AFTER [--ruled NAME ...] [--plant]
        fs131_icl1_statements.py --binders-only DUMP
 """
+import re
 import sys
+
+GENERATED = re.compile(r"\.(congr_simp|eq_def|eq_\d+)$")
 
 PZ = "Proofs.HadwigerNelson.Rigidity.PlaneZhang"
 CE = "Proofs.HadwigerNelson.Rigidity.CountExtension"
@@ -73,7 +79,8 @@ def binder_misses(consts):
 
 def compare(before, after, ruled, quiet=False):
     bad, lines = 0, []
-    counts = {"SAME": 0, "CHANGED": 0, "RULED": 0, "MISSING": 0, "ADDED-INTERNAL": 0, "ADDED-PUBLIC": 0}
+    counts = {"SAME": 0, "CHANGED": 0, "RULED": 0, "MISSING": 0, "ADDED-INTERNAL": 0, "ADDED-GENERATED": 0,
+              "ADDED-PUBLIC": 0}
     for n, b in before.items():
         if b["internal"]:
             continue
@@ -101,6 +108,9 @@ def compare(before, after, ruled, quiet=False):
         if a["internal"]:
             counts["ADDED-INTERNAL"] += 1
             lines.append(f"ADDED-INTERNAL {n}")
+        elif GENERATED.search(n):
+            counts["ADDED-GENERATED"] += 1
+            lines.append(f"ADDED-GENERATED {n}")
         else:
             counts["ADDED-PUBLIC"] += 1
             bad += 1

@@ -155,3 +155,66 @@ one): **done at 295 lines** against the planner's 700–1,100.
 **The model the module's docstring owes is not built** (`InvariantColouring` at `F = ℚ` with its trace spectral measure on
 `T + A`): a public declaration, which the brief does not allow this job to add. Its route is drafted at stage 6; held for the
 coordinator.
+
+## Stage 5 — SAVED: the build, no statement changed but five ruled, the axioms, the doubled names, the lint
+
+### 5.1 Build 2
+
+Under the slot (`--mem 10 --cpus 4`, `MEMMAX=10G BATCH=8`; `data/fs131/icl1/logs/build-2.log`, full output
+`build/gate/build/20261014T152745Z-3620264.log`): **OK — 256 of 256 batches, 5 modules rebuilt (`Plane.WindowDensity` 8.1 s,
+`Rigidity.PlaneZhang` 4.9 s, `Rigidity.CountExtension` 7.2 s, `Rigidity.CountDescent`, `Proofs`), 7 m 40 s, exit 0.** Of the 17
+modules with warnings none is this job's: **no warning from the three files**, and every warning in the full log is
+`declaration uses 'sorry'` (a grep for any other warning line finds none). The three files hold no `sorry`. On `Proofs/` the
+branch differs from `3ae198eac` in these three files only (`git diff --stat`: 806 insertions, 18 deletions).
+
+### 5.2 No statement and no definition changed but the five ruled, from the kernel's side
+
+The dumper re-run on the built tree: `data/fs131/icl1/statements-after.txt` (69 constants: WindowDensity 22, PlaneZhang 30,
+CountExtension 17). `tools/fs131_icl1_statements.py BEFORE AFTER --ruled <five>` (`data/fs131/icl1/statements-compare.out`):
+**SAME=19 CHANGED=0 RULED=5 MISSING=0 ADDED-INTERNAL=43 ADDED-GENERATED=2 ADDED-PUBLIC=0 — PASS.** Every definition's stored
+value is among the 19 SAME (`essNbhd`, `NRWindow`, `lonely`, `social`, `touched`, `RowsEdgeNull`, `SliceEdgeNull`). Unruled, the
+same comparison reads exactly the five ruled statements CHANGED (`statements-compare-unruled.out`).
+
+- **The five ruled** (item 726's word: an unread instance binder dropped, `omit … in`): `Rigidity.measurableSet_lonely` and
+  `Rigidity.unitPairsNull_lonely` lose `[AddCommGroup Q] [Fintype Q] [DecidableEq Q]`; `Rigidity.ae_sIndep_social` and
+  `Rigidity.ae_disjoint_touched` lose `[DecidableEq Q]`; `Rigidity.Counting.measure_ne_eq` loses `[NumberField ↥F]`.
+  `tools/fs131_icl1_ruled.py` strips exactly those binders from each BEFORE type and finds the AFTER type **character for
+  character, 5 EXACT** (`data/fs131/icl1/ruled.out`). Each only widens the statement; no reader outside the files.
+- **ADDED-GENERATED**: `Rigidity.closedNbhd.congr_simp`, `Rigidity.Counting.Lev.congr_simp` — reserved names Lean generates where
+  a tactic asks; no other module holds a copy (5.4).
+- **ADDED-INTERNAL**: the 17 private helpers and Lean's `_proof_n`/auxiliary names.
+- **Controls** (`--plant`, `data/fs131/icl1/statements-plant.out`): one character of a stored type → CHANGED; a constant dropped →
+  MISSING; a public constant added → ADDED-PUBLIC; a `NumberField` binder renamed → BINDER-MISS — **all four fired**.
+  `fs131_icl1_ruled.py --plant` (one class too few stripped): **5 DIFFERS, fired** (`ruled-plant.out`).
+- **The class-binder reading after the proofs**: the same nine definition-level misses as stage 1.3 and none on a theorem.
+
+### 5.3 The axioms of every declaration of the three files
+
+`data/fs131/icl1/lean/Axioms.lean` (FS131-IN1's printer, which names the leaf each `sorryAx` comes from) over every constant of
+the three modules' compiled data; read by `tools/fs131_icl1_axioms.py` (`data/fs131/icl1/axioms.out`, `axioms-read.out`):
+**43 records — CLEAN 37, UPSTREAM 6, FAIL 0** (printed count 43 = records read). Every private helper is CLEAN.
+
+| record | axioms | `sorryAx` from (each a leaf of another module) |
+|---|---|---|
+| all 15 of `Plane/WindowDensity` (9 public, 6 private) | the standard three | — |
+| `Rigidity.lonely`, `social`, `touched`, `RowsEdgeNull`, `measurableSet_lonely`, `unitPairsNull_lonely`, `ae_sIndep_social`, `ae_disjoint_touched`, 9 private helpers, `closedNbhd.congr_simp` | the standard three | — |
+| `Rigidity.sum_volume_inter_sq_le` | standard three + `sorryAx` | `card_le_mul_card_closedNbhd` (`FiniteZhang`, Λ2) |
+| `Counting.measure_ne_eq`, 2 private helpers, `Lev.congr_simp` | the standard three | — |
+| `Counting.SliceEdgeNull` (definition) | standard three + `sorryAx` | `instCompactSpaceK` (`CountCompletion`, Λ3), `toL_mem_localRing` (`CountResidue`, Λ2; read by the definitions `toLocal` → `resR` → `levR` → `ιK`) |
+| `Counting.comap_ιG_le_nhds_tauPrime` | + `sorryAx` | `exists_level_mem_nsmul`, `hasBasis_nhds_zero_K`, `toL_mem_localRing` |
+| `Counting.tendsto_measure_ne` | + `sorryAx` | the three above, `finite_quot`, `Rigidity.TA_subset_contChars` (M10) |
+| `Counting.exists_extension` | + `sorryAx` | those, and `denseRange_ιG` |
+| `Counting.exists_slice` | + `sorryAx` | those, and `instCompactSpaceK`, `instIsProbabilityMeasureKHaarK`, `mem_closure_ιG` |
+
+**Control** (`data/fs131/icl1/lean/AxiomsPlant.lean`: a theorem with a `sorry` and one resting on a declared axiom, both counted as
+this job's; `axioms-plant-read.out`): **2 of 2 read FAIL** — the planted axiom by name, the planted `sorry` as a `sorry` inside
+the job's files.
+
+### 5.4 The doubled names, and the lint (both whole-library; run for this tree, not required by the brief)
+
+`./scripts/dupnames.sh` under the slot (`data/fs131/icl1/logs/dupnames.log`, full output
+`build/gate/dupnames/20261014T154248Z-3696492.log`): **OK — no name is declared by two modules**; 24 generated on demand, none
+of this job's (the two `congr_simp` of 5.2 have one copy each). The lint (`lake lint --no-build -- --no-build --trace`,
+`data/fs131/icl1/logs/lint.log`): **exit 1, one finding, not in these files** — `unusedArguments` on
+`Rigidity.archTop`'s `[NumberField ↥F]` (`Rigidity/ContinuityGroup.lean:42`, a file this branch does not change); 13 of 14
+linters passed; nothing reported in the three files.
