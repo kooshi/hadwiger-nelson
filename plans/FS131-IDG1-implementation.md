@@ -317,3 +317,111 @@ or `Entropy`. No `sorry` in my six files but that leaf's (`grep`: `UnitCircle.le
 
 The whole-library gate steps — `scripts/axioms.sh` with the CLEAN block below, `vacuity.sh`, `assumptions.sh` and
 their counts — belong to the landing that joins the chain to `main`, as for FS131-IN1L; I ran none of them.
+
+## Drafts for the landing
+
+### `scripts/Axioms.lean` — the CLEAN block
+
+`data/fs131/idg1/audit-block.lean`, generated from the built tree (build 3's axiom print) by
+`tools/fs131_idg1_audit_block.py` (FS131-IN1L's generator; it also leaves out what `structure` generates beside the
+fields — `casesOn`, `noConfusion`, `mk.injEq`, …): **91 `#print axioms` lines**, every public record of the six
+modules on the standard three, Lean's generated names left out. `exists_admissiblePair` (on `sorryAx`, lane A's leaf) is
+listed in a comment and left out. **Slot:** the end of CLEAN, just above the PURCHASED banner, with the chain's other
+modules (FS131-IN1L's block, `data/fs131/in1l/audit-block.lean`) when they land.
+
+### `ARCHITECTURE.md` § 3, the rows of my six modules (outside my touches)
+
+- `Rigidity/DualGroup`: "**FS-131 (FS131-KN8), skeleton: 13 leaves `sorry`.**" → "**FS-131 (FS131-KN8, proved by
+  FS131-IDG1): no `sorry`.**"
+- `Rigidity/Annihilator`: "**FS-131 (FS131-KPD1), skeleton: 8 leaves `sorry`.**" → "**FS-131 (FS131-KPD1, proved by
+  FS131-IDG1): no `sorry`.**"; "**Leaves:**" → "**Proved (FS131-IDG1):**", and `isClosed_setOf_apply_eq_one` added to
+  that list after `dualCoannihilator_top` (separation)` — **the row is stale on this one**: the skeleton holds 9 `sorry`s,
+  `isClosed_setOf_apply_eq_one` among them, and the row counts 8 and does not name it.
+- `Rigidity/SubgroupHaar`, `Rigidity/Duality`, `Rigidity/DualConnected`: "skeleton: 6 / 9 / 4 leaves `sorry`." →
+  "proved by FS131-IDG1: no `sorry`." inside the bold head (as above); "**Leaves:**" → "**Proved (FS131-IDG1):**"
+  (DualConnected: "**Leaves:** all four." → "**Proved (FS131-IDG1):** all four.").
+- `Rigidity/UnitCircle`: "**FS-131 (FS131-KN8), skeleton: 8 leaves `sorry`.**" → "**FS-131 (FS131-KN8; proved by
+  FS131-IDG1 but lane A's `exists_admissiblePair`), skeleton: 1 leaf `sorry`.**"
+
+The imports cells are right as they stand (`tools/check_architecture.py` PASS).
+
+### Module and theorem docstrings now stale (prose only)
+
+- **My six modules' titles** say "skeleton": `Rigidity/DualGroup` ("…; module M4 of `plans/FS131-KN3-chain-plan.md`;
+  skeleton)"), `Annihilator`, `SubgroupHaar`, `Duality`, `DualConnected` ("…; job FS131-KPD1; skeleton)") and
+  `UnitCircle` ("…; the vocabulary of modules M6 and M7b; skeleton)") → "proved by FS131-IDG1" (UnitCircle: "proved by
+  FS131-IDG1 but `exists_admissiblePair`"). `Annihilator`'s docstring says "**The converse `(Y^⊥)^⊥ ≤ Y` for closed `Y`
+  is Pontryagin duality** (`Rigidity/Duality`), not proved here" — true of the module, and now proved there.
+- **`Rigidity/ZeroEntropyNames`, `measure_frequentVisits_le`'s docstring**: "stated under this library's name until
+  lane P's port is joined; its proof is then that theorem (module docstring)" → "stated under this library's name; its
+  proof is the port's `Outside.OAI015.excessiveOccupation_measure_bound` (module docstring)". Not a module docstring,
+  so not in my touches.
+- A docstring edit recompiles the module's importers (`LEAN.md` § Building): `DualGroup`'s is under all five others,
+  `Pieces`, `EntropySplitMax` and `Proofs`.
+
+### Models of the hypotheses, for the landing's reading
+
+The vacuity scan has no tracked carrier among these modules' binders (no colouring), so it will be silent on them;
+each structure of hypotheses, its kernel model, and whether the library holds it:
+
+| statement(s) | hypotheses | model | in the library? |
+|---|---|---|---|
+| `measure_eq_of_fourier` | `[Countable G]`, `σ`, `σ'` finite, equal coefficients | `G = ℤ`, `σ = σ' = dualHaar ℤ` | **no** — draft below |
+| `isHaarFourier_iff`, `IsHaarFourier.map_mul_right(_eq)` | `IsHaarFourier m` | `dualHaar G` (`isHaarFourier_dualHaar`, now standard three) | yes: `exists_isHaarFourier_of_countable` |
+| `IsHaarFourier.map_dual(_eq)` | `IsHaarFourier m`, `φ` injective | `dualHaar ℤ`, `n ↦ 2n` | **no** — draft below |
+| `exists_apply_ne_one` | `r ≠ 0` | `G = ℤ`, `r = 1` (the `ZMod 2` case is used in `not_connectedSpace_dual_zmod_two`) | yes, inside that proof |
+| `finite_dualAnnihilator` | `[Finite (G ⧸ N)]` | `N = ⊤` (the module docstring's model) | **no** term — draft below |
+| `subgroupHaar` and its four facts | `[CompactSpace Y]` | `Y = ⊥` | yes: `subgroupHaar_bot` |
+| `subgroupHaar_pos` | `U` open, `U ∩ Y` non-empty | `U = univ`, `Y = ⊥` | **no** — draft below |
+| `integral_subgroupHaar_eq` | `Y^⊥ = Z^⊥` | `Z = (Y^⊥)^⊥` (D2's own use) | yes, inside `dualAnnihilator_dualCoannihilator_of_isClosed` |
+| D2 and its case | `Y` closed (with `Y^⊥ = ⊥`) | `Y = ⊤`; and a closed subgroup neither `⊥` nor `⊤`, `(2ℤ)^⊥` | yes: `Duality`'s `example` (`⊤`); `(2ℤ)^⊥` drafted below |
+| `surjective_compAddMonoidHom` | `f` injective | `n ↦ 2n` on `ℤ` | **no** — draft below |
+| `exists_pow_eq`, `connectedSpace_dual` | `[IsAddTorsionFree G]` | `G = ℤ` | yes: `DualConnected`'s `example`; the negative partner shows the hypothesis needed |
+| `countable_unitCircle`, `IsHaarFourier.rotInv` | `[NumberField F]` | `F = ⊥` (`Instances.UpperHalfValues.instNumberFieldBot`, downstream) | yes, downstream |
+| `AdmissiblePair.u_nonTorsion`, `AdmissiblePair.ofPow` | an admissible pair; `hinj`, `hw` | at `ℚ`, `u = (3 + 4i)/5`, `w = (5 + 12i)/13` (UnitCircle's docstring) | **no: open in the kernel** — it is `exists_admissiblePair`, lane A's leaf. The local hypotheses alone: `hinj` and `hw` together are that leaf's content at one `F`; no object of the library satisfies them yet |
+
+Draft models (`data/fs131/idg1/work/ModelDrafts.lean`, against the built tree: `logs/lean-models-1.log`, exit 0; the
+same file with a planted `example : (1 : ℕ) = 2 := rfl` fails, `logs/lean-models-plant.log`): `measure_eq_of_fourier`'s
+hypotheses at `dualHaar ℤ`; `IsHaarFourier.map_dual`'s at `dualHaar ℤ` with `zmultiplesHom ℤ 2`; `subgroupHaar_pos`'s at
+`univ` and `⊥`; `Finite (ℤ ⧸ ⊤)`; the injectivity of `n ↦ 2n` for `surjective_compAddMonoidHom`; the closedness of
+`(2ℤ)^⊥`. **Slot:** each as an `example` beside its statement, in its module.
+
+### `LEAN.md` § Searching — Lean (Keryx files; each a new bullet at the section's end)
+
+- Fourier uniqueness on the dual of a countable discrete group needs no Peter–Weyl and no `StarAlgebra.adjoin`: the
+  evaluations as bounded continuous functions (`BoundedContinuousFunction.mkOfCompact` on the compact dual) have a
+  **span** closed under products (`ev_r · ev_s = ev_{r+s}`), `star` (`ev_{-r}`) and holding `1 = ev_0`, so the span is a
+  `StarSubalgebra` by its fields, integrals agree on it by one `Submodule.span_induction`, and
+  `ext_of_forall_mem_subalgebra_integral_eq_of_polish` concludes (`Rigidity.measure_eq_of_fourier`, FS131-IDG1).
+  `clear` the membership hypothesis before `induction … using Submodule.span_induction`, or every case's hypothesis
+  carries it as a premise.
+- `ℚ/ℤ` into the circle with trivial kernel: `QuotientAddGroup.lift` of `q ↦ Additive.ofMul (Circle.exp (2π q))`,
+  the kernel by `Circle.exp_eq_one`; with `CharacterModule.exists_character_apply_ne_zero_of_ne_zero` it separates the
+  points of any abelian group by characters into `Circle` (`Rigidity.exists_apply_ne_one`, FS131-IDG1).
+- At the pin: `AddChar.ext` takes both characters explicitly (`AddChar.ext _ _ h`); the family argument of
+  `Pi.borelSpace` is `X`, not `π` — `BorelSpace.measurable_eq (α := G → ℂ)` names the instance; `→ᵇ` is notation scoped
+  in `BoundedContinuousFunction` (write the type out, or open the scope); an `instance` of a `Prop`-valued class is
+  stored as a theorem (FS131-IDG1's dump).
+- After `rintro ⟨χ, rfl⟩` in `Set.range (fun χ => fun g => (χ g : ℂ))`, the goal holds a β-redex that `rw` cannot see
+  through, and the error prints as a type mismatch `Circle` against `↥(Submonoid.unitSphere ℂ)`: `show` the reduced
+  goal first. Three closed sets of `G → ℂ` written as `{f | …}` in one `refine` timed out at `isDefEq`; one `have` per
+  set elaborates at once (`Rigidity.isClosedEmbedding_coe`, FS131-IDG1).
+- A dump that compares definitions' stored values must not compare a `Prop`-valued instance's (a proof), and a
+  definition that holds proofs as structure fields (`Duality.graphSubgroup`, `AdmissiblePair.ofPow`) is compared by
+  its value with every proof subterm erased (`Meta.transform` with `isProof` → `True.intro`; `data/fs131/idg1/lean/
+  StatementDump.lean`'s `DATA` line), which generalizes FS124-I3's "compare its data fields" to any nesting
+  (FS131-IDG1).
+- FS131-LC1's code-only plant (the first `:=` → `:≡`) cannot fire on a file whose first `:=` is inside a docstring —
+  three of four files here; plant the last `:=`, or check that the planted text's code differs (`tools/
+  fs131_idg1_code_only.py`, FS131-IDG1).
+
+## Drafts for the front page
+
+None for this job. No milestone closes with it: the chain lands as one unit, and `Rigidity/UnitCircle` keeps lane A's
+leaf. The gate's whole-library counts belong to the landing that joins the chain to `main`; its rows are the audit block
+above and the theorems of this record's list.
+
+## Stage 6 — SAVED: the drafts
+
+The drafts above, with the CLEAN block regenerated from build 3's print (`data/fs131/idg1/audit-block.lean`, identical
+to the one from build 2's). Nothing of this job is running or queued.
