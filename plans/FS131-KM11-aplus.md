@@ -274,3 +274,47 @@ Prices are lines of Lean including docstrings; "scratch" means a proof exists in
 | Bochner for `τ′_∅` | `bochnerOn_tauPrime` (M2b) | this library, typed, being proved |
 
 **No axiom is declared, and none is needed.** `[Rudin1962]` 1.4.3 is not read by any M11 proof (M2b's route avoids it).
+
+## Stage 4 — SAVED: priced from first leaves, and the lanes
+
+### 4.1 The first leaves (written in scratch, elaborated, measured)
+
+Each against the module's own statement (the scratch files restate `trigPoly` verbatim, or import the module), run as one
+file through `lake env lean` under `slot.py --mem 5 --cpus 2` (3.6 GiB resident, 6–10 s per run):
+
+| leaf | file | lines | rounds to green | result |
+|---|---|---|---|---|
+| `exists_trigPoly_tendsto` — **step (d)'s hard leaf** (the only one with API risk: Stone–Weierstrass on the scoped dual topology, `toLp` density, weak regularity) | `scratch/Density.lean` | 145 with its helpers (`evC`, `trigAlg`, `trigC`, `exists_trigC_near`, `integral_norm_sq_eq`) | 2 (one `dist_comm`) | **proved, `[propext, Classical.choice, Quot.sound]`** |
+| `gram_sum_eq` | `scratch/Gram.lean` | 35 | 1 | **proved** |
+| `exists_spectral_vector` — step (d)'s assembly (the Cauchy sequence, its limit, the pairing, the continuity bound) | `scratch/SpectralVector.lean` | 156, plus 85 of helpers (`trigPoly_eq_sum'`, `measurable_trigPoly'`, `norm_trigPoly_le'`, `integrable_err'`, `tendsto_integral_norm_of_sq'`, `trigPoly_mapDomain_add'`) | 6 | **elaborated with no `sorry` of its own**, over the module's four leaves `exists_trigPoly_tendsto`, `norm_sq_koopmanSum_re_add_im`, `inner_koopmanSum_re`, `comp_koopmanSum` |
+
+**About 420 lines written and green in about 50 minutes of active work** — the Mathlib API the plan names exists at the pin
+under the module's imports, and step (d) is no longer the step no record states: it is stated, its hard leaf is proved and
+its assembly elaborates. The implementer pastes the three into `Rigidity/SpectralSubspace` (the primed helpers as
+`private` lemmas or public ones under their unprimed names).
+
+### 4.2 The price
+
+| module | lines (plan, § 3) | of which written | waits on |
+|---|---|---|---|
+| M11a `SpectralSubspace` | 900–1,100 | ~420 | nothing |
+| M11b `TraceSplit` | 350–500 | 4 | M11a's statements (fixed); `bochnerOn_tauPrime` (M2b) as a typed theorem |
+| M11c `APlus` | 350–550 | the composition and the models | M11a's and M11b's statements; M3 for the models only |
+| **M11** | **1,600–2,150** | ~430 | — |
+
+Against the map's "1,500–2,500 lines, about 3–5 days" (FS131-KR1 § 2.4): the lines agree; the time does not. At the rate
+measured here (about 400–500 lines per active hour of a planner in scratch) and the chain's scored ratio (implementers at
+0.4–0.45 of a planner's lines, inventory item 863), **M11 is about one implementer-day, not three to five** — the first
+leaves re-price it, as `LEAN.md` § The kernel's cost model says they should. It prices far under a week: no message owed.
+
+### 4.3 The lanes (sharing no file)
+
+| lane | file | leaves | can start | measured price |
+|---|---|---|---|---|
+| **S** | `Rigidity/SpectralSubspace.lean` | 12 `sorry` (3 with scratch proofs to paste) | **now** | 500–700 lines left |
+| **T** | `Rigidity/TraceSplit.lean` | 8 `sorry` | **now**, against S's typed statements; its theorems print `sorryAx` until S and M2b land | 350–500 |
+| **A** | `Rigidity/APlus.lean` | 13 `sorry` | **now**, against S's and T's typed statements | 350–550 |
+
+One implementer can run them in the order S, T, A; three can run them at once. Lane A's `tendsto_mul_nhds_tauPrime` reads
+M10's private helpers (`mem_nhds_profTop`, `eventually_archTop`, `archHom`): reprove, or `open private`. No lane changes a
+typed statement of another module; M2b's `BochnerTau` is read as stated.
