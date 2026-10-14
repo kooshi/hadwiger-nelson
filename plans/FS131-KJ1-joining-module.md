@@ -133,3 +133,97 @@ if the set of records printing `sorryAx` differs from `sorry-expected-build1.txt
 `data/fs131/it1/sorry-expected.txt` as the torsion implementer left it: exit 1, "with `sorryAx` as listed: 0 of 5 listed; not as
 expected: 5" (`logs/it1-check-with-list.out`). The file is now empty; the same check: exit 0, 18 records on the standard three
 (`logs/it1-check-emptied.out`); its control: 2 of 2 planted records reported.
+
+## Stage 3 — SAVED: the statements the implementers named, and those the join needed
+
+Each is typed and proved; "read back" is against the claim list's line or the report's sentence it answers. The kernel's side
+(axioms, and that no existing statement moved) is stage 5's print from the built tree.
+
+| module | added | read back against |
+|---|---|---|
+| `Arith/TorsionExtraction` | `colorable_two_of_fieldBandSet_three_nonempty (h3 : (3 : ℂ)⁻¹ ∈ unitRing F) (h : (fieldBandSet F (band 3)).Nonempty) : Colorable 2` | item 679, the first character-form statement: FS81-T4 "in the ledger's own words" (`1/3 ∈ ℤ[U_F]` and `Θ₃(F) ≠ ∅` make `F²` bipartite). Says the same |
+| | `fieldBandSet_three_eq_empty_of_sqrt_mem (hd : d % 12 = 11) (hF : √d ∈ F) : fieldBandSet F (band 3) = ∅` | item 679, the second: clause (a) in character form. The probe had `¬ Nonempty`; typed as `= ∅`, which is the ledger's "`Θ₃(R_F) = ∅`" |
+| `Arith/ThreeColourCharacter` | `fieldBandSet_three_nonempty_of_colorable_unitRing (F) (h : ((unitDistance ℂ).induce (unitRing F : Set ℂ)).Colorable 3) : (fieldBandSet F (band 3)).Nonempty` | item 685's first generalization: the headline read on the ring of unit vectors. Wider than NF4-S6 as claimed (dated line drafted below) |
+| | `bandSet_three_nonempty_zmod_five : (bandSet ({1} : Set (ZMod 5)) (band 3)).Nonempty` | item 685's second: the forward half for every abelian group and step set **is the statement as the skeleton typed it** (`bandSet_three_nonempty_of_proper`, `exists_character_of_properAlong`); what was missing is its model at a group with torsion — the 5-cycle, colours `0, 1, 0, 1, 2` |
+| | two `example`s (`2/3 ∈ band 3`, `0 ∉ band 3`); the module docstring's "Inhabitants" paragraph replaced, and a paragraph "Wider than the ledger's row 79" | FS131-IC1's drafts D2 and D3 item 5 (item 685 left them to the landing; they are made here because the module is recompiled by this job anyway) |
+| `Arith/DyadicQuadratic` | `colorable_two_planeOver_sqrt_of_mod_four (h : m % 4 = 1 ∨ m % 4 = 2) : Colorable 2`, `mod_four_of_squarefree` | item 689: the two-colour statement without squarefreeness (FS131-ID1's probe, moved). **Not** "`m % 4 ≠ 3`" alone: `m = 12` is `ℚ(√3)` |
+| | the three `exists_addMonoidHom_*` docstrings and the route paragraph reworded to the one-form subgroup; one `example` (`m = 9`, `18`) | item 689's three docstrings |
+| `Arith/ThreeColourCriterion` | docstrings only (stage 4). `data/fs131/lc1/code_only_diff.py cd657318f`: SAME, 38699 characters of code | — |
+| `Arith/ThreeFourColours` | `exists_stablePrime_card_nine`, `exists_maximal_card_three_of_stablePrime_card_nine` (J.3 is now their composition) | K-1: what J.7's call site needs. The second holds for every subfield of `ℝ` |
+| | `levelTarget_colorable_two_of_ramified`, `levelTarget_colorable_three_of_card_nine` | the two colourings of level targets J.7 needs: the first upper bounds on a `levelTarget`'s chromatic number in the library |
+| | `colorable_three_planeOver_sqrt`, `chromaticNumber_planeOver_sqrt_eq_three_of_mod`, `colorable_four_planeOver_sqrt_of_seven`, `chromaticNumber_planeOver_sqrt_eq_four_of_seven_of_mod` | K-3: the rows at 3 and at 4-through-7 with squarefreeness replaced by what is read (`9 ∤ m` at `3 ∣ m`; `49 ∤ m` at `7 ∣ m`; nothing otherwise). The planned J.8, J.9 are their corollaries, statements unchanged |
+| | `chromaticNumber_planeOver_sqrt_eq_four`, `chromaticNumber_planeOver_sqrt_table` | K-4: NF4-THEOREM (a)'s row at 4 in the claim's words, and the whole table as one statement |
+| | `chromaticNumber_planeOver_sqrt_three`, `fieldBandSet_three_nonempty_sqrt_three`, `exists_maximal_card_nine_sqrt_three`, `exists_maximal_conj_trivial_sqrt_two`; six `example`s of the table (2 at `√2`, 3 at `√7`, 4 at `√11` and `√23`, `≥ 4` at `√47`, `√167`) | item 698's four model rows: a three-chromatic and a two-colourable plane over a number field, and the hypotheses of J.3 and J.4 inhabited at them |
+
+**No joining leaf was restated**: the ten planned statements are in the module character for character (stage 5's statement
+comparison). J.2's call of Hilbert 90 needed no change, as item 698 said.
+
+**Decided not to state**, with the reason:
+- *The model of `exists_maximal_card_nine`'s hypotheses on the field of nine elements* (item 698's ruling (a): "if it falls in a few
+  lines"). It does not: it needs a nine-element ring with a conjugation as an object. What the kernel holds instead: the clause
+  that carries the content, for every nine-element field with an involution moving a square root of `−1` — the private
+  `nine_functional_ne_zero` (`−(u + ū) + ι(u − ū) ≠ 0` at a norm-one `u`) — and the conclusion at `ℚ(√3)`
+  (`exists_maximal_card_nine_sqrt_three`). The module docstring's sentence stands.
+- *The converse of the criterion's forward half for every abelian group* (item 685: "five lines [hand, one mind, the
+  implementer; prior art not searched]"): not asked, not searched for prior art, and no statement here reads it.
+- *`1/2 ∉ ℤ[U_ℚ]` and `2 ≤ L(ℚ)`* (item 702: kernel-checked terms of a checks file): no call site of this line needed either.
+  What J.10 needed, `1/2 ∉ ℤ[U_F]` at `m ≡ 3 (mod 8)`, is inside its proof.
+
+**Dated lines drafted for `data/fs131/claims-NF4.md`** (the coordinator files; each "[kernel] on branch `fs131-wj1`, not
+through the gate" until the landing):
+
+> - 2026-10-13 — **Statements of the line that say more than the list, typed by the joining job (FS131-KJ1).** (1) NF4-S6
+> holds reading the colouring only on the ring of unit vectors: a three-colouring of the unit-distance graph on `ℤ[U_F]`
+> gives the character (`ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable_unitRing`; found by FS131-IC1). (2)
+> Clause (a) in character form: `Θ₃(R_F) = ∅` for every subfield `F ∋ √d`, `d ≡ 11 (mod 12)`
+> (`TorsionExtraction.fieldBandSet_three_eq_empty_of_sqrt_mem`; named by FS131-IT1). (3) The table's rows need less than
+> squarefreeness: two colours for every `m ≡ 1, 2 (mod 4)` (found by FS131-ID1); three for `m ≡ 3 (mod 4)` with
+> `m ≡ 1 (mod 3)`, or `3 ∣ m` and `9 ∤ m`; four for `m ≡ 11 (mod 12)` with `m ≡ 1, 2, 4 (mod 7)`, or `7 ∣ m` and `49 ∤ m`;
+> four for every `m ≡ 11 (mod 24)`. Squarefreeness cannot be dropped whole: `m = 12` is `ℚ(√3)` (three colours, and
+> `12 ≢ 3 (mod 4)`), `m = 99` is `ℚ(√11)` (four, and `99 ≡ 3 (mod 12)`). (4) Two upper bounds on level targets, the first
+> in the library: a stable prime modulo which conjugation is the identity has a two-colourable target, and one whose
+> quotient has nine elements a three-colourable one (`ThreeFourColours.levelTarget_colorable_two_of_ramified`,
+> `levelTarget_colorable_three_of_card_nine`). (5) NF4-DYADIC-FOUR as worded holds at every `m ≡ 3 (mod 8)`, not only
+> `m ≡ 11 (mod 24)` (`exists_stablePrime_card_four_sqrt`). No statement defect found.
+
+## Stage 4 — SAVED: the attributions, read against `[Fischer1990]`
+
+**What was read.** K. G. Fischer, *Additive k-colorable extensions of the rational plane*, Discrete Math. 82 (1990) 181–195:
+the library's copy `~/source/library/papers/1-s2.0-0012365X9090324B-main.pdf`, all fifteen pages in its text layer
+(`pdftotext -layout`, page by page, in the session's scratch directory; nothing of the paper is committed). Read for this job:
+§1 (pp. 181–182), Theorem 1 with its proof (p. 183), Theorem 7 (p. 189), Theorems 8, 9, 10 with their proofs (pp. 189–194),
+Example 4 (p. 194), the references (p. 195). **Not re-read:** `[Johnson2000]`, `[Johnson1987]`, `[Moorhouse2010]`,
+`[Madore2015]` — where a docstring names them the bibliography's row is copied.
+
+| kernel statement | the paper | value only, or also the map? |
+|---|---|---|
+| `DyadicQuadratic.colorable_planeOver_of_addMonoidHom` | Thm 1(i), p. 183: "If `F^d` has an additive k-coloring, then `F^d` can be k-colored" | the same construction (colour `C₀`, copy to its translates). **Credit was missing** |
+| `TorsionExtraction.colorable_two_iff_fieldBandSet_two_nonempty` | Thm 1(ii), p. 183: "`F^d` can be 2-colored iff there exists an additive map `v : C₀(F^d) → ℤ/(2)` so that `v(ξ) = [1]` if `‖ξ‖ = 1`" | the same statement, read in `ℝ/ℤ`. **Credit was missing** |
+| `ThreeColourCriterion.exists_maximal_conj_trivial_of_colorable_two`, `fieldBandSet_two_nonempty_of_conj_trivial` | Thm 1(iii), p. 183: "The plane `F²` can be 2-colored iff there exists a non-zero ring homomorphism `v : C₀(F²) → ℤ/(2)`" | the equivalence "in the ring's words"; the docstrings credited only the outside model, whose part is the passage from that homomorphism to a prime of `F(i)`. **Credit was missing** |
+| two colours off `3 (mod 4)`: `colorable_two_planeOver_sqrt`, the row at 2 | Thm 8, p. 189 (proof pp. 190–191); the "if" half independently his reference [8] = `[Johnson1987]` | **value and map**: at `N ≡ 2 (mod 4)` his `t = (a₁ + b₁ + 2b₂)/c` is the proof's form exactly; at `N ≡ 1 (mod 4)` his `s = (a₁ + b₁ + a₂ + b₂)/c` differs from the proof's in two signs and is the same map on the group the unit vectors generate. The case analysis modulo 4 and 8 is his |
+| at least three on `3 (mod 4)`: `not_colorable_two_of_sqrt_mem`, `three_le_…_of_sqrt_mem` | Thm 8 "only if", p. 190, through Thm 7 (p. 189) | the same unit vector `(b + √N·i)/(2a)` and the same relation; his for squarefree `N` and `ℚ(√N)`, the kernel's for every subfield holding `√d` (the dated widening G-1). The docstring said "Thm 10(ii)'s vector" — true, and Thm 8's first |
+| three at `3, 7 (mod 12)`: the row at 3, `colorable_three_planeOver_sqrt` | Thm 9 and the sentence after it, p. 192 (proof pp. 192–193) | **value and map**: his `(a₁ + b₁)/c` (at `3 ∣ N`) and `(a₁ + b₁ + a₂ + b₂)/c` (at `N ≡ 1`) modulo 3 are the residue at a prime above 3 followed by `x + y` on `𝔽₃²`, the colouring `finitePlane3_colorable_three` holds |
+| four colours at `3 (mod 8)`: `colorable_four_planeOver_sqrt`, `exists_addMonoidHom_three_mod_eight` | Thm 10(i), p. 193 (proof pp. 193–194) | **value only**: his additive colouring is into `ℤ/(4)` (`2(a₁ + b₁)/c` modulo 4), the kernel's into `𝔽₂ × 𝔽₂`: different quotient groups, different colourings. The docstring said "prior art: the residue colouring at the dyadic prime, `𝔽₄`-valued" — reworded to the value |
+| `1/3 ∈ ℤ[U]`, the additive obstruction | Thm 10(ii), pp. 193–194; Ex. 4, p. 194; §1, p. 182 | as the docstrings said; his at `N ≡ −1 (mod 24)`, the kernel's at `d ≡ 11 (mod 12)` by the same vector |
+| "`[Fischer1990]` §1 poses the question" (`ThreeColourCriterion`) | p. 182: "whether some algebraic criterion can be found to determine the chromatic number of `F²` where `F` is a subfield of `ℝ`, of finite degree over `ℚ`" | borne out |
+| "`χ = 3` at `ℚ(√3)`, Thm 9" (three docstrings) | Thm 9 at `N = 3` | borne out |
+
+**No credit in the line's modules is one the paper fails to bear out.** The docstrings of the four modules and of the joining
+module now carry theorem number and page, and say "value and map" or "value only" where it applies. Sent to the coordinator
+mid-job.
+
+**Two corrections drafted for files that are not this job's to edit** (docstrings; each recompiles what imports the file):
+
+- `Proofs/HadwigerNelson/Instances/SqrtEleven.lean:29` and `:242` — for "`χ(ℚ(√11)²) ≤ 4` is `[Fischer1990]` Thm 9" read
+  "**`[Fischer1990]` Thm 10(i) (p. 193: an additive 4-colouring for `N ≡ 3 (mod 8)`)**". Thm 9 is three colours at
+  `N ≢ 2 (mod 3)` and says nothing at 11. Both lines also say the bound "is not in the kernel": since the residue module
+  landed it is (`UpperHalf.chromaticNumber_planeOver_eleven`), and again through the dyadic prime
+  (`ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four_of_dyadic` at 11).
+- `Proofs/HadwigerNelson/Instances/UpperHalfValues.lean:21` — for "upper bound is `[Fischer1990]`'s" read "the upper bound
+  is `[Fischer1990]` Thm 10(i), p. 193 — by an additive colouring into `ℤ/(4)`; the proof here is the residue plane at 7
+  (`[Moorhouse2010]`, `[Madore2015]`)".
+
+**For `BIBLIOGRAPHY.md`'s row `[Fischer1990]`** (draft; slot: its last cell): "re-read 2026-10-13 by FS131-KJ1 (Thm 1 and its
+proof, Thms 7–10 and their proofs, Ex. 4, against the kernel statements of the three-and-four-colours line): Thm 1(i)–(iii)
+are three kernel statements; the two-colour and three-colour maps are his; his four-colouring at `N ≡ 3 (mod 8)` is
+`ℤ/(4)`-valued and is not the kernel's."
