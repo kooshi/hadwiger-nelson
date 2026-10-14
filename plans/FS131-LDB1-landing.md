@@ -218,3 +218,67 @@ readings:
   `modules` (about 1 s each) — **no tracked file changed** (`git status`): the 23 certificate modules, `summary.json`, the 48
   covering modules and `Chain.lean` are each the generator's output byte for byte. Neither generator has a `--check` mode;
   this rewrite-and-compare is that check. `Chain.out` (the compiled evaluator's run of the chain) was not recomputed.
+
+## Stage 4 — SAVED (FS131-LDB1): read aloud
+
+*The headline as the kernel stores it — `#check`/`#print` from the built tree (`data/fs131/ldb1/lean/ReadAloud.lean` →
+`data/fs131/ldb1/read-aloud.out`, run again on the final build, stage 5) — against `[AmbrusEtAl2023]` Theorem 1, read by me
+this job from the held v3 (`~/source/library/pdf/arXiv-2207.14179-…pdf`, sha256 `12850eb7…`, FS131-IDB3's; `pdftotext
+-layout`, pp. 2 and 4).*
+
+**The paper, word for word.** Theorem 1 (p. 4): "Any Lebesgue measurable, 1-avoiding planar set has upper density at most
+0.2470." Its definitions (p. 2): "A set A ⊂ Rd which is independent in the unit distance graph is said to avoid unit
+distances, or to be 1-avoiding or unit-distance free. Assume that A ⊂ Rd is measurable. The upper density of A, denoted by
+δ(A), is defined by δ(A) = lim sup_{R→∞} λd(A ∩ Bd(x, R)) / λd(Bd(x, R)), where x ∈ Rd is fixed, λd is the d-dimensional
+Lebesgue measure, and Bd(x, R) denotes the d-dimensional ball of radius R centered at x. The definition is valid since the
+upper density is known to be independent of the choice of x ∈ Rd."
+
+**The library, as stored.** `HadwigerNelson.Plane.oneAvoidingDensityBound : HadwigerNelson.Plane.OneAvoidingDensityBound`,
+on `[propext, Classical.choice, Quot.sound]`, no hypothesis; the definition it names, as stored:
+`∀ (A : Set (EuclideanSpace ℝ (Fin 2))), MeasureTheory.NullMeasurableSet A MeasureTheory.volume → (∀ a ∈ A, ∀ b ∈ A, dist a
+b ≠ 1) → ∀ (x : EuclideanSpace ℝ (Fin 2)), Filter.limsup (fun (R : ℝ) => MeasureTheory.volume (A ∩ Metric.ball x R) /
+MeasureTheory.volume (Metric.ball x R)) Filter.atTop ≤ ENNReal.ofReal 0.2470`.
+
+**Clause by clause.** "planar set" — `A : Set (EuclideanSpace ℝ (Fin 2))`, the Euclidean plane; "Lebesgue measurable" —
+`NullMeasurableSet A volume`, `volume` the Lebesgue measure of `EuclideanSpace ℝ (Fin 2)` (null-measurable for Lebesgue
+measure is Lebesgue measurability: `LEAN.md` § Searching — Lean); "1-avoiding", independent in the unit-distance graph — `∀ a
+∈ A, ∀ b ∈ A, dist a b ≠ 1` (for `a = b` the distance is `0`, so the clause asks no more than independence); "upper density"
+— the `limsup` as `R → ∞` of `vol(A ∩ B(x, R)) / vol(B(x, R))` in `ℝ≥0∞`, `B(x, R)` the open ball (the closed ball differs by a
+null sphere); "at most 0.2470" — `≤ ENNReal.ofReal 0.2470`. **The centre**: the paper fixes one `x` and states that the value
+does not depend on it; the library states the bound at every `x` (`∀ x`), which is the paper's statement read at each centre
+it allows, and so asks no help from the independence fact. **No word of the sentence is missing from the statement, and the
+statement adds none**: it says what Theorem 1 says.
+
+**The three places the library asks for less** (FS131-IDB2's reading, its record § Stage 4, read again here against the
+same pages). They are in the route theorem `DualCert.oneAvoidingDensityBound_of : ∀ {n} (C : DualCert n), C.Valid → ∀ {w0 mu
+: ℝ}, mu < 1 → (∀ t, 0 ≤ t → 1 - mu ≤ C.phi w0 t) → C.bound / (1 - mu) ≤ 0.2470 → OneAvoidingDensityBound` (Proposition 1 in
+finite-window form), whose hypotheses `X23_valid`, `X23_phi` and `X23_ratio` discharge for the paper's certificate; asking
+less there makes the route theorem stronger and leaves the headline the paper's:
+1. **Atoms.** The paper asks `V(ε) ≥ 0` for every `ε ∈ σ(n)` (eq. (20), p. 16); `Valid.atoms` asks `L S ≤ bound` only for
+   non-empty independent `S`, with `bound ≥ 0` (`Valid.bound_nonneg`) for `S = ∅` — `V = bound − L(S)` term for term.
+2. **Congruent pairs.** The paper's `C(X)` (p. 9) asks `I ≠ J`; `Valid.cong` does not.
+3. **`ϕ`.** The library asks `ϕ ≥ 1 − µ` on all of `[0, ∞)` (one hypothesis), where the paper shows `ϕ(t) > 1 − µ` on `[0, T]`
+   and `ϕ(t) > 1` past `T` (p. 18): the paper's two facts imply the library's one, which asks nothing past `T` beyond
+   `1 − µ`.
+
+**The certificate is the paper's**: `ν = 10⁻⁵` (p. 16) and `µ = 6·10⁻⁵` (p. 18), so `X23.bound/(1 − µ) = 0.24699745… ≤
+0.2470` (`X23_ratio`, the paper's p. 19 "(wT + ν)/(1 − µ) = 0.24699 … < 0.2470"); Table 1 is the notebook's point list and
+Table 2 is `g23.csv`, exactly (FS131-IDB3 § 2.2). One misprint of the paper, not material: p. 18's "J0′(t) = J1(t)" is
+`−J1(t)` (`Bessel.hasDerivAt_J0`); the proof reads only `|J0′|`.
+
+**The corollaries, after the ruling.** `Plane.mOne_le_of_oneAvoidingDensityBound : OneAvoidingDensityBound → mOne ≤
+ENNReal.ofReal 0.2470` and `Plane.mOne_lt_quarter : OneAvoidingDensityBound → mOne < ENNReal.ofReal (1 / 4)`, each on the
+standard three, over the one `Plane.mOne` of `Plane/OneClass/Defs`, `⨆ A, ⨆ (_ : MeasurableSet A), ⨆ (_ : (unitDistance
+ℂ).IsIndepSet A), upperDensity A`, `upperDensity` the `limsup` along discs about `0` (`Plane/Suprema`); the ruled bridge
+`Plane.mOne_eq_iSup_bandFree : mOne = ⨆ (A : Set ℂ) (_ : NullMeasurableSet A volume ∧ BandFree A 0), upperDensity A`
+(standard three) is the same number over Lebesgue-measurable sets, `BandFree A 0` being no pair at distance exactly `1`.
+**With no hypothesis**, `m₁(ℝ²) ≤ 0.2470` and `m₁(ℝ²) < 1/4` are the terms `mOne_le_of_oneAvoidingDensityBound
+oneAvoidingDensityBound` and `mOne_lt_quarter oneAvoidingDensityBound` (the second `#check`ed in `read-aloud.out`): the
+library holds them, and no declaration states them closed — a front-page sentence should name them as the application.
+With `main`'s `OneClass.one_seventh_le_mOne` and `Plane.mOne_le_one`, the kernel holds `1/7 ≤ m₁(ℝ²) ≤ 0.2470` on one
+constant.
+
+**Nothing to message**: the statement says what the paper's sentence says. **Whose it is**: the theorem and its certificate
+are `[AmbrusEtAl2023]`'s; the finite-window route (no periodic reduction, no Bessel citation: `J₀` by its integral, its ODE
+and the antitone `‖J₀ + iJ₁‖`), the formalization and the kernel check are this project's (FS131-KDB1, -IDB1, -IDB2,
+-IDB3; this landing).
