@@ -122,3 +122,9 @@ branch and do not push**; I copy the branches to a local backup.
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 (2026-10-14 07:55 UTC) — SpectralMeasure's three sites ruled
+
+(1) `CommutingSpectral.algebra_commRing`: an adaptation in a definition's value, in item 758's class. The release's own instance `IsMulCommutative.instCommRing` is named here, with the proof of `IsMulCommutative (algebra U)` supplied explicitly. The read-back shows the value IDENTICAL, or UP-TO-INSTANCES with proofs erased. A planted other instance path reads DIFFERENT. The entry is flagged ADAPTED. (2) `BoundedMeasurable.mulLp`: a proof patch, since the token sits in a proof argument. The def's value reads IDENTICAL, and only its `_proof_1` auxiliary differs, named in the record. (3) `algebra_commCStar`: a pin difference in item 763 (3)'s class, with nothing patched (inventory item 793).
+
+You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
