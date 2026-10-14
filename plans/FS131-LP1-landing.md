@@ -283,3 +283,65 @@ moved`. **The generator** on the 31 modules (`--check`): `CHECK OK`.
 
 **4.5 Not edited, a note for the tooling job**: `scripts/Vacuity.lean` line 561, inside FS132-L1's paragraph of its
 history, still calls the transfer "the imported `proper_to_borel_weak`" — history, and not a file this brief opens.
+
+## Stage 5 — SAVED (FS131-LP1): read aloud
+
+**The transfer's stored statement against the release's.** `HadwigerNelson.Outside.OAI158.proper_to_borel_weak`, as
+the kernel stores it here (lane D's print at this pin, `data/fs131/lp1/readaloud/transfer-Here.txt`), and
+`OAI.EuclideanFiveColor.proper_to_borel_weak` as the kernel stores it at the release's pin, v4.34.1
+(`transfer-Release.txt`): kind `theorem`, no universe parameters, at both; **the full type print (564 characters) and the
+erased print identical** once each library's root is written `§.` — the read-back's verdict IDENTICAL (stage 2), and
+my own comparison of the two lines. Term for term:
+
+```
+(pi.i k (c Nat [])
+ (pi.c inst ((((c NeZero [0]) (c Nat [])) (((c MulZeroClass.toZero [0]) (c Nat [])) (c Nat.instMulZeroClass []))) #0)
+ (pi.i c (pi.d a (c Complex []) ((c Fin []) #2))
+ (pi.d hc (((c §.ProperColoring []) #2) #0)
+  (((c Exists [(S 0)]) (pi.d a (c Complex []) ((c Fin []) #4)))
+   (lam.d d (pi.d a (c Complex []) ((c Fin []) #4))
+    (((c And []) ((((((c Measurable [0,0]) (c Complex [])) ((c Fin []) #4)) (c Complex.measurableSpace []))
+                    ((c Fin.instMeasurableSpace []) #4)) #0))
+                 (((c §.WeakColoring []) #4) #0))))))))
+```
+
+Read: *for every natural number `k` with `k ≠ 0` (`NeZero k`, through `Nat`'s own zero) and every map `c : ℂ → Fin k`,
+if `c` is a `ProperColoring k` — gives different colours to every two points `x, y` with `‖x − y‖ = 1` — then there is a
+map `d : ℂ → Fin k` that is Borel measurable (`Complex.measurableSpace`, `Fin`'s measurable space) and a `WeakColoring
+k` — almost-everywhere measurable, and `d p.1 ≠ d (p.1 + direction p.2)` for almost every pair `p` of a point of the plane
+and an angle, plane measure times normalized Haar measure on the circle of angles.* `ProperColoring`, `WeakColoring`,
+`Angles`, `angularMeasure` and `direction` are the release's definitions copied into `Outside/OAI158` and read back term
+for term against the release at FS132-I1; the source text of the theorem is the release's `BorelTransfer.lean:436–437`
+(`lemma proper_to_borel_weak {k : ℕ} [NeZero k] {c : ℂ → Fin k} (hc : ProperColoring k c) : ∃ d : ℂ → Fin k, Measurable
+d ∧ WeakColoring k d`), copied by the generator with no patch to it (it is a target: the generator refuses one). Against
+the informal claim on the front page ("a proper `k`-colouring of the plane gives a Borel one proper at almost every unit
+pair"): the same, with `k ≥ 1` explicit (at `k = 0` there is no map `ℂ → Fin 0`, so nothing is lost), and "proper at
+almost every unit pair" read as the release reads it — almost every point and almost every direction, not almost every
+pair of the plane's unit-distance graph in another measure. It says nothing of how `d` relates to `c`. **Its stored
+type is also the deleted axiom's** (FS131-IPD1's switch, TYPE-IDENTICAL), so every statement of this library that cited
+the axiom cites a theorem of the same type.
+
+**Its axioms, and the twelve records that rested on it, from the audit run on this branch at stage 4's commit**
+(`data/fs131/lp1/stage4/receipt-axioms.log`; the gate's pass prints them again):
+
+| record | banner | axioms |
+|---|---|---|
+| `HadwigerNelson.Outside.OAI158.proper_to_borel_weak` | CLEAN | `[propext, Classical.choice, Quot.sound]` |
+| `HadwigerNelson.Outside.OAI158.nonempty_aeColouring_of_colorable` | CLEAN | `[propext, Classical.choice, Quot.sound]` |
+| `HadwigerNelson.Outside.OAI158.colorable_iff_nonempty_aeColouring` | CLEAN | `[propext, Classical.choice, Quot.sound]` |
+| `HadwigerNelson.Outside.OAI158.chiM0_le_chromaticNumber_plane` | CLEAN | `[propext, Classical.choice, Quot.sound]` |
+| `HadwigerNelson.Outside.OAI158.chromaticNumber_plane_eq_chiM0` | CLEAN | `[propext, Classical.choice, Quot.sound]` |
+| `HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff` | CLEAN | `[propext, Classical.choice, Quot.sound]` |
+| `HadwigerNelson.Plane.exists_isWeakColouringOn_of_colorable` | CLEAN | `[propext, Classical.choice, Quot.sound]` |
+| `HadwigerNelson.Plane.radius_down` | CLEAN | `[propext, Classical.choice, Quot.sound]` |
+| `HadwigerNelson.Plane.colorable_iff_forall_ball` | CLEAN | `[propext, Classical.choice, Quot.sound]` |
+| `HadwigerNelson.Plane.seven_le_chromaticNumber_plane_iff_exists_ball` | CLEAN | `[propext, Classical.choice, Quot.sound]` |
+| `HadwigerNelson.Plane.colorable_iff_exists_nullMeasurable_proper` | CLEAN | `[propext, Classical.choice, Quot.sound]` |
+| `HadwigerNelson.Plane.chromaticNumber_plane_eq_chiLebesgue` | CLEAN | `[propext, Classical.choice, Quot.sound]` |
+| `HadwigerNelson.Plane.chromaticNumber_euclidean_plane_eq_chiLebesgue` | CLEAN | `[propext, Classical.choice, Quot.sound]` |
+
+`tools/fs131_lp1_records.py` on that receipt: **records: PASS** — the transfer and the twelve under CLEAN on exactly the
+three; no record rests on the transfer and no `DECLARED IMPORT` names it; the declared imports exactly Weil's bound and
+`no_proper_five_coloring`; IMPORTED 26 records, 20 on the first alone and 6 on the second alone; 9,024 records, none
+printed twice. Its five plants (an axiom added to the transfer's list; a moved record put under IMPORTED; a DECLARED
+IMPORT of the transfer; an IMPORTED record removed; a record printed twice) each FAIL, the unplanted receipt passes.
