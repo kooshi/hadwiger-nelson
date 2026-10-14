@@ -1,0 +1,18 @@
+holds	Mathlib.Order.CompletePartialOrder	(closure read: 1 modules)	chain: Mathlib.Order.CompletePartialOrder
+holds	Mathlib	(closure read: 8357 modules)	chain: Mathlib -> Mathlib.Order.CompletePartialOrder
+lacks	Mathlib.Analysis.SpecialFunctions.Log.NegMulLog	(closure read: 2130 modules)
+lacks	Mathlib.MeasureTheory.Measure.Typeclasses.Probability	(closure read: 1622 modules)
+lacks	Mathlib.MeasureTheory.Measure.Real	(closure read: 1624 modules)
+lacks	Mathlib.MeasureTheory.Measure.Map	(closure read: 1613 modules)
+lacks	Mathlib.Dynamics.Ergodic.MeasurePreserving	(closure read: 1628 modules)
+lacks	Mathlib.Probability.Kernel.Defs	(closure read: 1742 modules)
+lacks	Mathlib.Order.LiminfLimsup	(closure read: 727 modules)
+lacks	Mathlib.Topology.Instances.ENNReal.Lemmas	(closure read: 1430 modules)
+lacks	Mathlib.Algebra.Order.Ring.Star	(closure read: 757 modules)
+lacks	Mathlib.Analysis.Subadditive	(closure read: 1308 modules)
+lacks	Mathlib.Algebra.Order.Star.Real	(closure read: 1431 modules)
+lacks	Mathlib.MeasureTheory.Integral.DominatedConvergence	(closure read: 2494 modules)
+lacks	Mathlib.Probability.Kernel.Composition.MeasureComp	(closure read: 1800 modules)
+lacks	Mathlib.MeasureTheory.Integral.Bochner.Set	(closure read: 2441 modules)
+lacks	Mathlib.Dynamics.BirkhoffSum.Basic	(closure read: 593 modules)
+lacks	Mathlib.Analysis.InnerProductSpace.Basic	(closure read: 1856 modules)

@@ -1,0 +1,41 @@
+slot: admitted ie1: mem 5 GiB (hard cap), cpus 0,1
+'HadwigerNelson.Rigidity.blockEntropy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.blockEntropy_eq_observationEntropy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.blockEntropy_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.blockEntropy_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.blockEntropy_zero_measure' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.exists_blockEntropy_le_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.ksEntropy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.ksEntropyOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.ksEntropyOn_le_ksEntropy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.ksEntropyOn_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.ksEntropyOn_self' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.ksEntropy_bind_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.ksEntropy_dirac' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.ksEntropy_eq_measureEntropy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.ksEntropy_eq_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.ksEntropy_id' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.ksEntropy_map' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.ksEntropy_zero_measure' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.measurableSet_nameCell' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.mem_nameCell' does not depend on any axioms
+'HadwigerNelson.Rigidity.mem_nameCell_self' does not depend on any axioms
+'HadwigerNelson.Rigidity.nameCell' does not depend on any axioms
+'HadwigerNelson.Rigidity.nameCell_eq_orbitName_fibre' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Rigidity.nameCell_zero' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Rigidity.partitionEntropy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.partitionEntropy_eq_ofReal_observationEntropyRate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Rigidity.partitionEntropy_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.partitionEntropy_le_ksEntropy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.partitionEntropy_le_ksEntropyOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.partitionEntropy_le_liminf' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.tendsto_blockEntropy_div' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.positive_entropy_rigidity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity]
+'HadwigerNelson.Rigidity.haar_or_zero_entropy' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+seconds=3
+exit=0

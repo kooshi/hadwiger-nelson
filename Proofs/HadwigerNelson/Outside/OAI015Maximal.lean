@@ -3,7 +3,6 @@ import Mathlib.Algebra.Order.Star.Real
 import Mathlib.Analysis.InnerProductSpace.Basic
 import Mathlib.Dynamics.BirkhoffSum.Basic
 import Mathlib.MeasureTheory.Integral.Bochner.Set
-import Mathlib.Order.CompletePartialOrder
 
 /-!
 # `[OAIMath2026]` family 015, ported: `InverseEntropy.lean`, `HopfMaximal.lean`, `MaximalOccupation.lean` (job FS131-IE1)
@@ -23,7 +22,7 @@ changed copy of part of `PrimePackets/InverseEntropy.lean` and `DukePrimeDegree/
 
 1. *The namespaces*: `OAI.PrimeDegreePackets` and `OAI.DukePrimeDegree` there, `HadwigerNelson.Outside.OAI015`
    here (one namespace; no two ported declarations share a name).
-2. *The imports*: `Mathlib.Algebra.Order.Ring.Star`, `Mathlib.Algebra.Order.Star.Real`, `Mathlib.Analysis.InnerProductSpace.Basic`, `Mathlib.Dynamics.BirkhoffSum.Basic`, `Mathlib.MeasureTheory.Integral.Bochner.Set`, `Mathlib.Order.CompletePartialOrder` — the least set under which the text elaborates as it does under `import Mathlib` (measured: `tools/fs131_ie1_port.py`, MATHLIB); the release's files import `Mathlib` whole and, for the maximal inequality, modules of the release that its text does not use.
+2. *The imports*: `Mathlib.Algebra.Order.Ring.Star`, `Mathlib.Algebra.Order.Star.Real`, `Mathlib.Analysis.InnerProductSpace.Basic`, `Mathlib.Dynamics.BirkhoffSum.Basic`, `Mathlib.MeasureTheory.Integral.Bochner.Set` — the least set under which the text elaborates as it does under `import Mathlib` (measured: `tools/fs131_ie1_port.py`, MATHLIB); the release's files import `Mathlib` whole and, for the maximal inequality, modules of the release that its text does not use.
 3. *The `open` lines*: taken out, being namespaces that do not exist under these imports — `ArithmeticFunction`, `ArithmeticFunction.zeta`, `BoundingSieve`, `FractionalIdeal`, `IsDiscreteValuationRing`, `Matrix.Norms.Elementwise`, `NumberField` — and `PrimeDegreePackets` where it is opened inside `DukePrimeDegree` (one namespace here). Every other `open` is the release's.
 4. *Docstrings*: every declaration's docstring opens with its source line at the commit; where the release
    has a docstring it follows the address, and where it has none the address is the docstring.

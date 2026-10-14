@@ -1,0 +1,103 @@
+slot: admitted ie1: mem 5 GiB (hard cap), cpus 0,1
+'HadwigerNelson.Outside.OAI015.finiteShannon' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.finiteShannon_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.negMulLog_le_cross' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.finiteShannon_le_cross' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.finiteShannon_joint_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.finiteShannon_le_log_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationEntropy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.observation_distribution_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationEntropy_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationEntropy_equiv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.observation_joint_row' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationEntropy_joint_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationEntropy_comp_preserving' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.orbitName' does not depend on any axioms
+'HadwigerNelson.Outside.OAI015.orbitName_measurable_fiber' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.orbitName_add' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Outside.OAI015.orbitEntropy_subadditive' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationEntropyRate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.tendsto_observationEntropyRate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.measureEntropy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.negMulLog_lower_of_le_exp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.finiteShannon_split_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.sum_good_observation_masses' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationEntropy_lower_of_good_atoms' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationEntropyRate_lower_of_good_atoms' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.measureEntropy_lower_of_good_atoms' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.negMulLog_sum_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.finiteShannon_mixture_joint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.finiteShannon_mixture_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationEntropy_finite_mixture_bounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationEntropyRate_finite_mixture' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.kernel_comp_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.kernel_mixture_preserving' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.kernelCell' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.kernelCell_probability' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.kernelCell_preserving' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.weighted_kernelCell' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.kernel_finite_cells' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.kernelCell_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.measurable_kernel_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.integrable_kernel_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.finite_measurable_small_fibers' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.continuous_finiteShannon' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.measurable_kernel_entropy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.integrable_kernel_entropy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.ae_nonnull_fiber' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.kernelCell_real_close' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.kernel_entropy_finite_approx' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.integrable_finite_values' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.integral_finite_values' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationEntropyRate_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationEntropyRate_le_block' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.kernel_entropyRate_le_block' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.normalized_orbit_entropy_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationEntropyRate_eq_zero_of_measureEntropy' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.measureEntropy_kernel_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.visitCount' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.visitCount_cast' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.measurable_visitCount' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.positiveRunningSum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.positiveRunningSum_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.positiveRunningSum_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.birkhoffSum_le_positiveRunningSum' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.measurable_positiveRunningSum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.integrable_positiveRunningSum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.finite_hopf_maximal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.visitCount_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.excessiveOccupation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.excessiveOccupation_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.measurableSet_excessiveOccupation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.excessiveOccupation_measure_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.ae_uniform_small_occupation_of_decreasing' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+seconds=4
+exit=0

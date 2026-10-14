@@ -7,7 +7,7 @@ plant 'a binder kind changed (measureEntropy_kernel_zero)': REFUSED (1 failing, 
 plant 'a declaration missing from this pin's print': REFUSED (0 failing, 1 fatal; §.tendsto_observationEntropyRate: not in a print)
 plant 'a theorem turned into an axiom': REFUSED (1 failing, 0 fatal)
 plant 'a truncated print': REFUSED (0 failing, 27 fatal; a print is incomplete: DONE 56 at the release, None here, 56 cone constants)
-plant 'RENAMED without Set.ofPred': REFUSED (33 failing, 0 fatal)
+plant 'RENAMED without Set.ofPred': REFUSED (33 failing, 1 fatal; recorded instance constants that no longer differ (the record is stale): ['CompleteLattice.toCompletePartialOr)
 plant 'the record lists a constant that does not differ': REFUSED (0 failing, 1 fatal; recorded instance constants that no longer differ (the record is stale): ['NoSuch.constant'])
 SELF-TEST OK: 10 plants refused, the unplanted pair passes
 exit=0

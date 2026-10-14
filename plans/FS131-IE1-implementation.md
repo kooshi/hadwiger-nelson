@@ -6,7 +6,31 @@ cut from `afd9df200`. Working files: `data/fs131/ie1/`. Not pushed (the brief: t
 
 ## Theorems this phase proved
 
-*(filled as the stages fall; each line: the declaration, its axioms as printed, where it is)*
+*Each line: the declaration, its axioms as printed from the built tree (Stage 4), the file. Grade: [kernel] for every
+line. The informal statement each was read against is § 1.3's column.*
+
+- `HadwigerNelson.Rigidity.blockEntropy_one` — `[propext, Classical.choice, Quot.sound]` — `Rigidity/Entropy.lean`
+- `HadwigerNelson.Rigidity.ksEntropy_id` — `[propext, Classical.choice, Quot.sound]` — same
+- `HadwigerNelson.Rigidity.ksEntropy_dirac` — `[propext, Classical.choice, Quot.sound]` — same
+- `HadwigerNelson.Rigidity.ksEntropy_map` — `[propext, Classical.choice, Quot.sound]` — same
+- `HadwigerNelson.Rigidity.nameCell_eq_orbitName_fibre` — `[propext, Quot.sound]` — same (FS131-KN6's statement and proof, compiled in the library for the first time)
+- `HadwigerNelson.Rigidity.blockEntropy_eq_observationEntropy` — `[propext, Classical.choice, Quot.sound]` — same (FS131-KN6's statement and proof)
+- `HadwigerNelson.Rigidity.partitionEntropy_eq_ofReal_observationEntropyRate` — `[propext, Classical.choice, Quot.sound]` — same (FS131-KN6's statement)
+- `HadwigerNelson.Rigidity.ksEntropy_eq_measureEntropy` — `[propext, Classical.choice, Quot.sound]` — same (FS131-KN6's statement)
+- `HadwigerNelson.Rigidity.tendsto_blockEntropy_div` (the pinning theorem) — `[propext, Classical.choice, Quot.sound]` — same
+- `HadwigerNelson.Rigidity.exists_blockEntropy_le_mul` — `[propext, Classical.choice, Quot.sound]` — same
+- `HadwigerNelson.Rigidity.ksEntropy_bind_eq_zero` (the mixture lemma) — `[propext, Classical.choice, Quot.sound]` — same
+- Private helpers, each `[propext, Classical.choice, Quot.sound]` or fewer by the same audit's file: `blockEntropy_id`,
+  `preimage_nameCell`, `partitionEntropy_map`, `exists_measurable_comp_of_comap` — same file
+- **The port: 72 declarations of `[OAIMath2026]` family 015, kernel-checked here** (the release's theorems, not ours),
+  each `[propext, Classical.choice, Quot.sound]` or fewer (`orbitName` axiom-free), none the declared theorem's: the full
+  list is `data/fs131/ie1/port-names.txt`; among them `Outside.OAI015.tendsto_observationEntropyRate`,
+  `orbitEntropy_subadditive`, `measureEntropy_lower_of_good_atoms` (`Outside/OAI015Shannon`),
+  `observationEntropyRate_finite_mixture`, `measureEntropy_kernel_zero` (`Outside/OAI015Mixtures`),
+  `finite_hopf_maximal`, `excessiveOccupation_measure_bound`, `ae_uniform_small_occupation_of_decreasing`
+  (`Outside/OAI015Maximal`)
+- Not proved, not this job's: `HadwigerNelson.Rigidity.ksEntropy_eq_iSup_ksEntropyOn` (the tenth leaf) —
+  `[propext, sorryAx, Classical.choice, Quot.sound]`
 
 ## Stage 1 — SAVED: the readback, the leaves restated, the statements as the kernel holds them before any edit
 
@@ -188,3 +212,61 @@ job's) (`data/fs131/ie1/logs/entropy-3.log`; the first full pass had two other w
 `Set.left_mem_Ici` and an unused simp argument, both fixed). **Re-pricing** (the brief's item 3): leaves 1–3 took one
 elaboration each and leaf 4 one more; leaves 5–9 went through on the first elaboration once the port was in. The
 plan's routes were exact; nothing is left of lane E but the tenth leaf.
+
+## Stage 4 — SAVED: the build under the slot, and every receipt from the built tree
+
+**4.1 A stored definition moved, and why it no longer does.** The first build (`data/fs131/ie1/logs/build-1.log`: OK,
+249 of 249 batches, 7 modules rebuilt, 7m12s) and the statement dump after it: **two stored terms of `Rigidity/Entropy`
+had moved** — the value of the definition `ksEntropyOn` and the stored type of the tenth leaf
+(`statements-compare-1.out`, `statements-after-1.txt`; nothing moved in the other three modules, the declared theorem
+included). The cause, read off the two terms: the supremum `⨆` in `ℝ≥0∞` was stored through
+`ConditionallyCompletePartialOrder…` and is now stored through `CompletePartialOrder.toSupSet`, the instance of
+`Mathlib.Order.CompletePartialOrder` — a module the imports dump had listed for `OAI015Shannon` and `OAI015Maximal`
+because their terms, compiled under `import Mathlib`, name that instance. No other import of the new closure brings it
+(`tools/fs131_ie1_closure.py`, Mathlib's import graph read from the source headers; its controls: the module itself and
+`Mathlib` read `holds`; `data/fs131/ie1/logs/closure.out`). Taken out of both lists (the generator's MATHLIB table says
+why): the ported modules elaborate without it, 0 errors, 0 warnings (`logs/min3-*.log`); the read-back now reads 51
+IDENTICAL and 5 UP-TO-INSTANCES — `measureEntropy` joins the four of 2.6, its supremum stored through the same
+`ConditionallyCompletePartialOrder` path as `ksEntropy`'s, and its ten differing instance constants are recorded
+(`data/fs131/ie1/readback/instance-constants.txt`, every one Mathlib's); `READBACK OK`; the self-test's 10 plants
+refused again. The generator's `--check` and `--self-test` (19 plants, 1 partner) pass on the regenerated text. *This is
+the statement check doing its job*: a check that compared text would have passed, since no line of `Rigidity/Entropy`'s
+definitions changed.
+
+**4.2 The build.** `./scripts/build.sh` under a 10 GiB slot, `BATCH=8` (`logs/build-2.log`; full output
+`build/gate/build/20261014T034451Z-1444368.log`): **OK — 249 of 249 batches, 7 modules rebuilt** (`Outside.OAI015Shannon`,
+`OAI015Maximal`, `OAI015Mixtures`, `Rigidity.Entropy`, `Rigidity.PositiveEntropy`, `Rigidity.ChainAtTA`, `Proofs`),
+7m58s, exit 0. Warnings from this job's files: **one**, `Entropy.lean:384:8: declaration uses 'sorry'` — the tenth leaf;
+none from the three ported modules (the other warnings are the six leaves of `ChainAtTA` and one of `PositiveEntropy`,
+another lane's).
+
+**4.3 No statement and no definition changed, from the kernel's side.** `StatementDump.lean` again on the built tree
+(`statements-after.txt`) against Stage 1's dump: **PASS — 97 named constants compared (types; values of definitions),
+none moved**; the modules' one axiom the same in both; new public constants exactly the allow-list, the four bridge
+lemmas (`data/fs131/ie1/allowed-new.txt`); new private constants the four helpers (`statements-compare.out`). The
+control on the same pair: **6 of 6 planted faults reported** (`statements-compare-control.out`). The first run (4.1)
+is the unplanted fault the check caught.
+
+**4.4 Axioms, from the built tree.** `Rigidity/Entropy` (`data/fs131/ie1/lean/EntropyAxioms.lean`, every public
+declaration, 32): **31 records clean** — a subset of the standard three, three of them axiom-free — and the tenth leaf
+apart, `[propext, sorryAx, Classical.choice, Quot.sound]` (`axioms-entropy-verdict.out`, `axioms-tenth-leaf.out`); no
+record holds the declared theorem. **The planted records, watched showing** (`EntropyAxiomsPlanted.lean`: the same 31
+and two more printed by the kernel): the declared theorem `Rigidity.positive_entropy_rigidity` and the `sorry` leaf
+`Rigidity.haar_or_zero_entropy` — the reader fails naming exactly those two (`axioms-entropy-planted-verdict.out`). The
+port: **72 records clean** again (`axioms-port-verdict.out`).
+
+**4.5 `lake lint`** (`lake lint --no-build -- --no-build --trace` under a slot; `logs/lint.log`): **exit 1** — 13
+linters pass and `unusedArguments` fails on three ported statements of `EntropyMixtures.lean`, each taking an instance
+argument its proof does not use: `observationEntropy_finite_mixture_bounds` (`[IsProbabilityMeasure μ]`, source l. 84),
+`kernelCell_preserving` (`[IsProbabilityMeasure τ]`, l. 174), `kernelCell_real` (`[IsProbabilityMeasure τ]`, l. 215).
+They are the release's statements; the generator refuses to touch a statement; the library has no `nolint` and no
+`nolints.json`. **Sent to the coordinator at once** (the brief's channel: the port needs a change on something other
+than a proof line), with three options — an `@[nolint unusedArguments]` attribute placed by the generator (no stored type
+moves), a `nolints.json` entry, or the landing's ruling — and my preference, the first. Nothing of `Rigidity/Entropy` is
+reported by any linter.
+
+**4.6 `sorry`.** None in the three ported modules (their headers say "no `sorry`" in prose, the only matches); one in
+`Rigidity/Entropy`, the tenth leaf's.
+
+**4.7 Nothing running or queued.** Every process of this job ended with its command; the slot ledger holds no `ie1`
+entry after the last run.

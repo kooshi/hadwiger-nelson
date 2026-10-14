@@ -99,15 +99,26 @@ SELECT = {INVERSE: ["visitCount", "visitCount_cast", "measurable_visitCount"]}
 # `linter.minImports` on the module generated with `--mathlib-whole` (data/fs131/ie1/logs/minimports-*.log), which is
 # the least set under which every command of the text elaborates as it does under `import Mathlib` — syntax, tactics
 # and instances included.
+# Measured instead (the linter ran five minutes on one file with no output and was stopped): the modules declaring the
+# constants that the modules' stored terms name when compiled under `import Mathlib` (`data/fs131/ie1/lean/ImportsDump.lean`),
+# reduced, then the elaboration at this pin decides.  Left out of that list, each with its reason:
+#   `Mathlib.Order.CompletePartialOrder` (listed for Shannon and Maximal): the module of `CompletePartialOrder.toSupSet`.
+#     Under it a supremum in `ℝ≥0∞` is stored through that instance; `Rigidity/Entropy`, which imports these modules,
+#     stored `ksEntropyOn`'s value through another (`ConditionallyCompletePartialOrder…`), and imported it would move a
+#     definition the chain's statements read (`data/fs131/ie1/statements-compare-1.out`); no other import brings it
+#     (`tools/fs131_ie1_closure.py`, `data/fs131/ie1/logs/closure.out`).  Without it the ported modules elaborate, and
+#     the read-back records the instance path by which their suprema differ from the release's;
+#   `Mathlib.RingTheory.Etale.Weakly`, `Mathlib.RingTheory.Flat.TorsionFree`, `Mathlib.RingTheory.TotallySplit` (listed
+#     for Mixtures): not needed to elaborate, and the read-back shows no stored term moved without them.
 MATHLIB = {
     "OAI015Shannon": ["Mathlib.Algebra.Order.Ring.Star", "Mathlib.Analysis.SpecialFunctions.Log.NegMulLog",
                       "Mathlib.Analysis.Subadditive", "Mathlib.Dynamics.Ergodic.MeasurePreserving",
-                      "Mathlib.MeasureTheory.Measure.Real", "Mathlib.Order.CompletePartialOrder"],
+                      "Mathlib.MeasureTheory.Measure.Real"],
     "OAI015Mixtures": ["Mathlib.Algebra.Order.Star.Real", "Mathlib.MeasureTheory.Integral.DominatedConvergence",
                        "Mathlib.Probability.Kernel.Composition.MeasureComp"],
     "OAI015Maximal": ["Mathlib.Algebra.Order.Ring.Star", "Mathlib.Algebra.Order.Star.Real",
                       "Mathlib.Analysis.InnerProductSpace.Basic", "Mathlib.Dynamics.BirkhoffSum.Basic",
-                      "Mathlib.MeasureTheory.Integral.Bochner.Set", "Mathlib.Order.CompletePartialOrder"],
+                      "Mathlib.MeasureTheory.Integral.Bochner.Set"],
 }
 
 # `open` tokens taken out, per module: exactly the namespaces that do not exist under that module's imports, as

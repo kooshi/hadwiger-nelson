@@ -1,0 +1,4 @@
+HadwigerNelson.Rigidity.nameCell_eq_orbitName_fibre
+HadwigerNelson.Rigidity.blockEntropy_eq_observationEntropy
+HadwigerNelson.Rigidity.partitionEntropy_eq_ofReal_observationEntropyRate
+HadwigerNelson.Rigidity.ksEntropy_eq_measureEntropy

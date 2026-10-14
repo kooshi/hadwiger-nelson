@@ -18,7 +18,7 @@ target	orbitName_add	theorem	IDENTICAL	—	—
 target	orbitEntropy_subadditive	theorem	IDENTICAL	—	—	
 target	observationEntropyRate	def	IDENTICAL	—	—	
 target	tendsto_observationEntropyRate	theorem	IDENTICAL	—	—	
-target	measureEntropy	def	IDENTICAL	—	—	
+target	measureEntropy	def	UP-TO-INSTANCES	CompleteLattice.toCompletePartialOrder CompleteLinearOrder.toCompletelyDistribLattice CompletePartialOrder.toSupSet CompletelyDistribLattice.toCompleteLattice	CompleteLinearOrder.toConditionallyCompleteLinearOrderBot ConditionallyCompleteLattice.toConditionallyCompletePartialOrder ConditionallyCompleteLinearOrder.toConditionallyCompleteLattice ConditionallyCompleteLinearOrderBot.toConditionallyCompleteLinearOrder ConditionallyCompletePartialOrder.toConditionallyCompletePartialOrderSup ConditionallyCompletePartialOrderSup.toSupSet	
 target	negMulLog_lower_of_le_exp	theorem	IDENTICAL	—	—	
 target	finiteShannon_split_lower	theorem	IDENTICAL	—	—	
 target	sum_good_observation_masses	theorem	IDENTICAL	—	—	

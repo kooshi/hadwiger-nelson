@@ -1,5 +1,6 @@
-  target       IDENTICAL        52
-  target       UP-TO-INSTANCES  4
+recorded 10 constants in data/fs131/ie1/readback/instance-constants.txt
+  target       IDENTICAL        51
+  target       UP-TO-INSTANCES  5
   target finiteShannon: IDENTICAL
   target finiteShannon_nonneg: IDENTICAL
   target negMulLog_le_cross: IDENTICAL
@@ -19,7 +20,7 @@
   target orbitEntropy_subadditive: IDENTICAL
   target observationEntropyRate: IDENTICAL
   target tendsto_observationEntropyRate: IDENTICAL
-  target measureEntropy: IDENTICAL
+  target measureEntropy: UP-TO-INSTANCES (only there ['CompleteLattice.toCompletePartialOrder', 'CompleteLinearOrder.toCompletelyDistribLattice', 'CompletePartialOrder.toSupSet', 'CompletelyDistribLattice.toCompleteLattice'], only here ['CompleteLinearOrder.toConditionallyCompleteLinearOrderBot', 'ConditionallyCompleteLattice.toConditionallyCompletePartialOrder', 'ConditionallyCompleteLinearOrder.toConditionallyCompleteLattice', 'ConditionallyCompleteLinearOrderBot.toConditionallyCompleteLinearOrder', 'ConditionallyCompletePartialOrder.toConditionallyCompletePartialOrderSup', 'ConditionallyCompletePartialOrderSup.toSupSet'])
   target negMulLog_lower_of_le_exp: IDENTICAL
   target finiteShannon_split_lower: IDENTICAL
   target sum_good_observation_masses: IDENTICAL
@@ -56,7 +57,7 @@
   target normalized_orbit_entropy_le: IDENTICAL
   target observationEntropyRate_eq_zero_of_measureEntropy: IDENTICAL
   target measureEntropy_kernel_zero: IDENTICAL
-  constants differing inside instance and proof arguments: 0 (recorded: 0)
+  constants differing inside instance and proof arguments: 10 (recorded: 10)
 cone constants: 56  failing: 0  fatal: 0  renamed map: {'Set.ofPred': 'setOf'}
 READBACK OK
 exit=0
