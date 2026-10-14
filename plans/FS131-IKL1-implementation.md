@@ -5,7 +5,25 @@ Brief: `data/fs131/briefs/FS131-IKL1-cert-link.md`. Working files: `data/fs131/i
 
 ## Theorems this phase proved
 
-*(filled at the last stage)*
+Kernel theorems on branch `fs131-wkl`, built by build 2; axioms printed from the built tree (`data/fs131/ikl1/axioms-built.out`).
+"standard three" = `[propext, Classical.choice, Quot.sound]`.
+
+* `HadwigerNelson.FibreShare.fibreShare_le` (`Arith/FibreShareIneq`): FS-66's L2 in the abstract. Axioms: standard three.
+* `HadwigerNelson.FibreShare.exists_eq_compAddMonoidHom`, `card_fibre_mul`, `sum_weighted_sq_mul_charSum`, `sum_weighted_sq`,
+  `fibreShare_le_model`. Axioms: standard three.
+* `HadwigerNelson.CertLink.exists_addEquiv_zmod` (`Rigidity/CertLink`): K3. Axioms: standard three.
+* `HadwigerNelson.CertLink.card_le_of_fibreShareBound`: K4, over `HenselCount`, `NewCharBound`, `FibreShareBound`. Axioms:
+  standard three.
+* `HadwigerNelson.CertLink.ratioAtMost_eleven`: K5 at 11, over `HenselCount P 11`, `NewCharBound P 11`. Axioms: standard
+  three.
+* `HadwigerNelson.CertLink.ratioAtMost_nineteen`: at 19, over the same and `∃ U < 361/4, FibreShareBound 19 U`. Axioms:
+  standard three.
+* `HadwigerNelson.CertLink.ratioAtMost_cert_link`: the composition, the statement `ratioAtMost_cert` reads. Axioms: standard
+  three.
+* `HadwigerNelson.CertLink.fibreShareBound_eleven`, `finite_quotient_pow`, `toLevelOne_mk`, `toLevelOne_surjective`,
+  `toLevelOne_mem_normOneSet`, `zero_notMem_normOneSet`, and the private `exists_I_mem`. Axioms: standard three.
+* `HadwigerNelson.CertLink.exists_stablePrime_sqrt_three`, `exists_addEquiv_zmod_sqrt_three` (`Rigidity/CertLinkModels`):
+  models. Axioms: standard three and `StandingFive.kloosterman_bound`.
 
 ## Stage 1 — SAVED: the readback, the branch, the merge, build 1
 
@@ -177,3 +195,126 @@ symlink copy of the tree's compiled library (`data/fs131/ikl1/farm.sh`), so the 
   Against wcm4 (FS131-ICM4's last dump, `data/fs131/icm4/statements-after2.txt.xz` on `fs131-wcm4`, its ClassRatio module extracted to `scratch/icm4-classratio.txt.xz`; no `Proofs/` change after it): **SAME 173, CHANGED 0,
   MISSING 0**. Only the new declarations and their generated names were added (16 ADDED-ALLOWED: the two lemmas, the
   stand-in, the footer). Controls 3/3 in each run (`scratch/statements-wcm3.out`, `statements-wcm4.out`).
+
+## Stage 3 — SAVED: the gate's items for this job's files
+
+* **Build 2** (slot, `MEMMAX=10G BATCH=8`): **OK — 262 of 262 batches, 4 modules rebuilt** (`Arith/FibreShareIneq`
+  2.6 s, `Rigidity/CertLink` 13 s, `Rigidity/CertLinkModels` 2.5 s, `Proofs`), 8 m 7 s (`logs/build-2.log`; full output
+  `build/gate/build/20261014T223758Z-921949.log`). **No warning from this job's files.** The ten modules that warn are build
+  1's, each `declaration uses 'sorry'` at a skeleton leaf of M13's line.
+* **Axioms, from the built tree** (`data/fs131/ikl1/lean/Axioms.lean`, every theorem and definition the three modules store,
+  private included; reader `tools/fs131_ikl1_axioms.py`): **27 records, CLEAN 25, IMPORTED 2, FAIL 0**
+  (`axioms-built.out`, `axioms-built-read.out`). The IMPORTED two are `exists_stablePrime_sqrt_three` and
+  `exists_addEquiv_zmod_sqrt_three`, on `StandingFive.kloosterman_bound`. Control: `IKL1_AXIOMS_PLANT=…ratioAtMost_eleven`
+  adds `sorryAx` to that record's printed list; the reader then exits 1, and `--expect-fail` confirms it failed on that
+  record alone (`axioms-plant.out`, `axioms-plant-read.out`).
+* **Lint** (`lake lint --no-build -- --no-build --trace`, slot 6 GiB): one finding in 15,015 declarations — `unusedArguments` at
+  `Rigidity.archTop` (`Rigidity/ContinuityGroup`, M13's line, already known and ruled; item 922). **No finding in this job's
+  files** (`logs/lint-2.log`). That one finding, in the same run, is the positive signal that the linters ran and report.
+* **No existing statement or definition changed, from the kernel's side.** Dumps after build 1 and after build 2 cover
+  `CircleCos`, `ClassRatio`, `CountCompletion`, `CountDescent`, `CountModels`, `FibreCert`, `FibreCert3`, `FibreCertSound`,
+  `FibreCert11Bound`, `FibreCert11Psd`, `FibreCert11Global`, `UpperHalf`, `StandingFive`, `RatioBound` and `SpectralChain`.
+  Result: **SAME 1,678, CHANGED 0, MISSING 0, ADDED 0**; the three new modules are NEW-MODULE; plants 3/3
+  (`statements-after2-vs-merged.out`). For the merge's own receipt (SAME 1,209 against both lines' dumps) see § 1.2.
+* **Doubled names** (`./scripts/dupnames.sh`, slot): **OK** — no name declared by two modules; 24 generated on demand, none
+  of this job's (`logs/dupnames-2.log`). `FibreShare.fibreCount.congr_simp` is generated in its own module.
+* `tools/check_architecture.py`: PASS with the three new rows (`logs/architecture-2.log`).
+
+## Stage 4 — SAVED: drafts for the landing
+
+### 4.1 `Rigidity/ClassRatio` at part 2 (against wcm4's file, checked in the scratch, § 2.3)
+
+* Imports: `import Proofs.HadwigerNelson.Rigidity.CertLink` and FS131-IKC4's `import Proofs.HadwigerNelson.Arith.FibreCert19Bound`.
+  The scratch held the first. The second's effect on ClassRatio's stored statements is not measured here, since its
+  module is not in this tree: the landing compares once more, as § 2.3 did.
+* The two lemmas, before the leaf's docstring, verbatim from `data/fs131/ikl1/scratch/discharge-wcm4.lean.txt` (21 lines):
+  `henselCount_of_two_notMem` (`card_res_fibreT P (exists_conj_sub_notMem P h2).choose_spec hQ n hfin ht`) and
+  `newCharBound_of_two_notMem` (`norm_charSum_le_of_resT` with `card_levelSet_succT`, then `2/(Q+1)·Q^n(Q+1) = 2Q^n` by
+  `field_simp`). I drafted them **public**: their statements are in public vocabulary, and they are what concludes the
+  link's two formers for the assumptions step.
+* **The one line** (the body of `ratioAtMost_cert`):
+  ```lean
+    CertLink.ratioAtMost_cert_link P h2 hQ hQ1119 (henselCount_of_two_notMem P h2 hQ) (newCharBound_of_two_notMem P h2 hQ) CertLink.exists_fibreShareBound_nineteen
+  ```
+  Here `CertLink.exists_fibreShareBound_nineteen : ∃ U : ℝ, U < 361 / 4 ∧ FibreShareBound 19 U :=
+  ⟨_, by norm_num, FibreCertSound.sum_le_nineteen⟩` is a new theorem for the landing, in `Rigidity/CertLinkModels` or
+  wherever `Arith/FibreCert19Bound` is in scope. It is drafted as a theorem because the hypothesis is *closed*. With it
+  stated in the library, the assumptions step finds the closed hypothesis of `ratioAtMost_nineteen` and
+  `ratioAtMost_cert_link` proved. Without it, those two would read `undeclared` there. The scratch checked the
+  inline form `⟨_, by norm_num, FibreCertSound.sum_le_nineteen⟩` (`scratch/oneline.lean.txt`); the two forms are the same term.
+* The leaf's docstring: "**The certificate branch at `q ∈ {11, 19}`**: `CertLink.ratioAtMost_cert_link` with Hensel's count
+  and the bound on new characters from Lemma P (`henselCount_of_two_notMem`, `newCharBound_of_two_notMem`) and FS-66's
+  bound at 19 (`FibreCertSound.sum_le_nineteen`)." The module docstring's "certificates at 11 and 19" sentence then
+  names `Rigidity/CertLink`.
+
+### 4.2 `Rigidity/CertLinkModels` at the landing
+
+Add `import Proofs.HadwigerNelson.Rigidity.ClassRatio` and the full model of `card_le_of_fibreShareBound`
+(`data/fs131/ikl1/scratch/landing/FullModel.lean`, checked against the scratch ClassRatio: `FullModel.out`, axioms
+`[propext, Classical.choice, Quot.sound, StandingFive.kloosterman_bound]`). It has two theorems:
+`fibreShareBound_three : FibreShareBound 3 (cert3.unum / cert3.scale)` (from `sum_le_of_certOK cert3 cert3_ok`), and
+`card_le_of_fibreShareBound_model : ∃ P : StablePrime (fieldOfRadicands {3}), 2 ∉ P.P ∧ |𝓞 ⧸ P| = 3² ∧ HenselCount P 3 ∧
+NewCharBound P 3 ∧ FibreShareBound 3 _`. With them every hypothesis of the engine is inhabited at once, at `q = 3`.
+
+### 4.3 The audit's block (`scripts/Axioms.lean`)
+
+Under CLEAN (`-- FS131-IKL1: the certificate link`):
+```
+#print axioms HadwigerNelson.FibreShare.exists_eq_compAddMonoidHom
+#print axioms HadwigerNelson.FibreShare.card_fibre_mul
+#print axioms HadwigerNelson.FibreShare.sum_weighted_sq_mul_charSum
+#print axioms HadwigerNelson.FibreShare.sum_weighted_sq
+#print axioms HadwigerNelson.FibreShare.fibreShare_le
+#print axioms HadwigerNelson.FibreShare.fibreShare_le_model
+#print axioms HadwigerNelson.CertLink.fibreShareBound_eleven
+#print axioms HadwigerNelson.CertLink.finite_quotient_pow
+#print axioms HadwigerNelson.CertLink.toLevelOne_mk
+#print axioms HadwigerNelson.CertLink.toLevelOne_surjective
+#print axioms HadwigerNelson.CertLink.toLevelOne_mem_normOneSet
+#print axioms HadwigerNelson.CertLink.zero_notMem_normOneSet
+#print axioms HadwigerNelson.CertLink.exists_addEquiv_zmod
+#print axioms HadwigerNelson.CertLink.card_le_of_fibreShareBound
+#print axioms HadwigerNelson.CertLink.ratioAtMost_eleven
+#print axioms HadwigerNelson.CertLink.ratioAtMost_nineteen
+#print axioms HadwigerNelson.CertLink.ratioAtMost_cert_link
+```
+and, at the landing, `HadwigerNelson.Rigidity.henselCount_of_two_notMem`, `…newCharBound_of_two_notMem`,
+`HadwigerNelson.CertLink.exists_fibreShareBound_nineteen`. Under IMPORTED, with the `kloosterman_bound` records
+(`-- FS131-IKL1: the link's models, through ThreeFourColours.exists_maximal_card_nine_sqrt_three`):
+`HadwigerNelson.CertLink.exists_stablePrime_sqrt_three`, `…exists_addEquiv_zmod_sqrt_three`, and at the landing
+`…card_le_of_fibreShareBound_model`.
+
+### 4.4 The assumptions step and the vacuity scan
+
+* `HenselCount`, `NewCharBound` and `FibreShareBound` are Prop-formers that the link's theorems take over their own
+  variables. They are conditions, not outside theorems. At the landing they are concluded by `henselCount_of_two_notMem`,
+  `newCharBound_of_two_notMem` and `fibreShareBound_eleven`/`fibreShareBound_three`, so none needs a `.former` line. Their
+  docstrings use none of the words "named hypothesis", "outside the backlog" or "external".
+* The one closed hypothesis, `∃ U : ℝ, U < 361 / 4 ∧ FibreShareBound 19 U` (in `ratioAtMost_nineteen` and
+  `ratioAtMost_cert_link`), is proved at the landing by `exists_fibreShareBound_nineteen` (§ 4.1). On this branch alone the
+  assumptions step would read it as undeclared, since the theorem that proves it is IKC4's.
+* Vacuity: the link's binders are a stable prime, a prime `q`, sizes, and the three formers. All are inhabited at `q = 3`
+  by § 4.2's model. At `q = 11` and `q = 19` every clause but the stable prime of that size is a library theorem; this
+  branch exhibits no stable prime of residue size `11²` or `19²` (at `ℚ`: the inert primes `11`, `19` of `ℤ[i]`).
+
+### 4.5 `ARCHITECTURE.md`
+
+The three rows are in this branch (`Arith/FibreShareIneq`, `Rigidity/CertLink`, `Rigidity/CertLinkModels`). At the landing,
+`Rigidity/ClassRatio`'s row replaces "the certificate link at `q ∈ {11, 19}` (to `FibreCertSound` on line `fs131-wc15`)"
+with "the certificate link, `Rigidity/CertLink`, read in one line", and its imports cell gains `Rigidity/CertLink` and
+`Arith/FibreCert19Bound`. `Rigidity/CertLinkModels`' imports cell gains `Rigidity/ClassRatio` with § 4.2.
+
+### 4.6 `LEAN.md` § Searching — Lean (each a line, after the last)
+
+- `set X := <a type> with h` re-states every hypothesis whose type mentions it. A Finset over the old type stays as `s✝`,
+  and a later `Fintype.card` is then elaborated at another instance than an earlier term's. Write a type out where
+  hypotheses mention it (`CertLink.card_le_of_fibreShareBound`, FS131-IKL1).
+- An induction hypothesis applied to a proof about a set that is defeq but differently named (`levelSet P m` against
+  `normOneSet P m`) builds its `Finset` on the other name, and `linarith` reads two atoms. Ascribe the `have` in the
+  goal's words (`have hih : ‖∑ t ∈ hfin'.toFinset, ψ' t‖ ≤ … := ih hfin' ψ' hnew`) (FS131-IKL1).
+- `rw [pow_succ]` in a goal that mentions an ideal power `P.P ^ (n + 1)` inside a quotient type rewrites that too, and fails
+  with "motive is not type correct": name the base, `pow_succ (Q : ℝ) n` (FS131-IKL1).
+- A scratch check of a module that another job owns compiles a copy *as that module*: `lean -R <root>` on
+  `<root>/Proofs/…/X.lean`, into a farm (a symlink copy of the compiled library). Every constant the copy stores is then
+  compared with the real module's dump, since hygienic and private names carry the module name
+  (`data/fs131/ikl1/farm.sh`, `tools/fs131_ikl1_scratch.py`, `tools/fs131_ikl1_statements.py`; FS131-IKL1).

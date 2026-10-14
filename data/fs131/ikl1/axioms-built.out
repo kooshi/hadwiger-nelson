@@ -1,0 +1,32 @@
+slot: admitted ikl1f: mem 4 GiB (hard cap), cpus 0,1
+AXIOMS public Proofs.HadwigerNelson.Arith.FibreShareIneq HadwigerNelson.FibreShare.exists_eq_compAddMonoidHom : [Classical.choice, Quot.sound, propext]
+AXIOMS public Proofs.HadwigerNelson.Arith.FibreShareIneq HadwigerNelson.FibreShare.fibreShare_le : [Classical.choice, Quot.sound, propext]
+AXIOMS public Proofs.HadwigerNelson.Arith.FibreShareIneq HadwigerNelson.FibreShare.fibreCount : [Quot.sound, propext]
+AXIOMS public Proofs.HadwigerNelson.Arith.FibreShareIneq HadwigerNelson.FibreShare.sum_weighted_sq_mul_charSum : [Classical.choice, Quot.sound, propext]
+AXIOMS public Proofs.HadwigerNelson.Arith.FibreShareIneq HadwigerNelson.FibreShare.card_fibre_mul : [Classical.choice, Quot.sound, propext]
+AXIOMS public Proofs.HadwigerNelson.Arith.FibreShareIneq HadwigerNelson.FibreShare.fibreShare_le_model : [Classical.choice, Quot.sound, propext]
+AXIOMS public Proofs.HadwigerNelson.Arith.FibreShareIneq HadwigerNelson.FibreShare.fibreCount.congr_simp : [Quot.sound, propext]
+AXIOMS public Proofs.HadwigerNelson.Arith.FibreShareIneq HadwigerNelson.FibreShare.sum_weighted_sq : [Classical.choice, Quot.sound, propext]
+MODULE Proofs.HadwigerNelson.Arith.FibreShareIneq records=8
+AXIOMS public Proofs.HadwigerNelson.Rigidity.CertLink HadwigerNelson.CertLink.toLevelOne_mem_normOneSet : [Classical.choice, Quot.sound, propext]
+AXIOMS public Proofs.HadwigerNelson.Rigidity.CertLink HadwigerNelson.CertLink.toLevelOne_mk : [Classical.choice, Quot.sound, propext]
+AXIOMS public Proofs.HadwigerNelson.Rigidity.CertLink HadwigerNelson.CertLink.zero_notMem_normOneSet : [Classical.choice, Quot.sound, propext]
+AXIOMS public Proofs.HadwigerNelson.Rigidity.CertLink HadwigerNelson.CertLink.finite_quotient_pow : [Classical.choice, Quot.sound, propext]
+AXIOMS public Proofs.HadwigerNelson.Rigidity.CertLink HadwigerNelson.CertLink.exists_addEquiv_zmod : [Classical.choice, Quot.sound, propext]
+AXIOMS public Proofs.HadwigerNelson.Rigidity.CertLink HadwigerNelson.CertLink.toLevelOne : [Classical.choice, Quot.sound, propext]
+AXIOMS public Proofs.HadwigerNelson.Rigidity.CertLink HadwigerNelson.CertLink.HenselCount : [Classical.choice, Quot.sound, propext]
+AXIOMS public Proofs.HadwigerNelson.Rigidity.CertLink HadwigerNelson.CertLink.normOneSet : [Classical.choice, Quot.sound, propext]
+AXIOMS public Proofs.HadwigerNelson.Rigidity.CertLink HadwigerNelson.CertLink.card_le_of_fibreShareBound : [Classical.choice, Quot.sound, propext]
+AXIOMS public Proofs.HadwigerNelson.Rigidity.CertLink HadwigerNelson.CertLink.NewCharBound : [Classical.choice, Quot.sound, propext]
+AXIOMS private Proofs.HadwigerNelson.Rigidity.CertLink HadwigerNelson.CertLink.exists_I_mem : [Classical.choice, Quot.sound, propext]
+AXIOMS public Proofs.HadwigerNelson.Rigidity.CertLink HadwigerNelson.CertLink.FibreShareBound : [Classical.choice, Quot.sound, propext]
+AXIOMS public Proofs.HadwigerNelson.Rigidity.CertLink HadwigerNelson.CertLink.ratioAtMost_cert_link : [Classical.choice, Quot.sound, propext]
+AXIOMS public Proofs.HadwigerNelson.Rigidity.CertLink HadwigerNelson.CertLink.fibreShareBound_eleven : [Classical.choice, Quot.sound, propext]
+AXIOMS public Proofs.HadwigerNelson.Rigidity.CertLink HadwigerNelson.CertLink.ratioAtMost_eleven : [Classical.choice, Quot.sound, propext]
+AXIOMS public Proofs.HadwigerNelson.Rigidity.CertLink HadwigerNelson.CertLink.toLevelOne_surjective : [Classical.choice, Quot.sound, propext]
+AXIOMS public Proofs.HadwigerNelson.Rigidity.CertLink HadwigerNelson.CertLink.ratioAtMost_nineteen : [Classical.choice, Quot.sound, propext]
+MODULE Proofs.HadwigerNelson.Rigidity.CertLink records=17
+AXIOMS public Proofs.HadwigerNelson.Rigidity.CertLinkModels HadwigerNelson.CertLink.exists_stablePrime_sqrt_three : [Classical.choice, HadwigerNelson.StandingFive.kloosterman_bound, Quot.sound, propext]
+AXIOMS public Proofs.HadwigerNelson.Rigidity.CertLinkModels HadwigerNelson.CertLink.exists_addEquiv_zmod_sqrt_three : [Classical.choice, HadwigerNelson.StandingFive.kloosterman_bound, Quot.sound, propext]
+MODULE Proofs.HadwigerNelson.Rigidity.CertLinkModels records=2
+AXIOMS-COUNT 27

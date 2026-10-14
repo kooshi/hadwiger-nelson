@@ -1,0 +1,7 @@
+import Proofs.HadwigerNelson.Rigidity.CountModels
+import Proofs.HadwigerNelson.Arith.FibreCert11Bound
+import Proofs.HadwigerNelson.Rigidity.CertLinkModels
+/-!
+slot: admitted ikl1f: mem 4 GiB (hard cap), cpus 0,1
+1731
+7e59e8a624af7a6de29080ac380df5de22feb7fd837d82873a5dc17f90f3c0f4  data/fs131/ikl1/statements-after2.txt.xz
