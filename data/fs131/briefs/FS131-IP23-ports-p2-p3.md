@@ -122,3 +122,9 @@ You start no agents of your own (standing rule 1: delegation is one level deep, 
 Apply exactly `data/fs131/ip23/generator-change-2.diff` (sha256 `7e8297a104569156…`) in its own commit. After it, the IE1 modules stay byte-identical and the self-test stays at 29 refused and 1 accepted, run in the real tree; only the two new headers change. The read-back rule EVENTUALLYEQSET is accepted under item 772's standing word (inventory item 809).
 
 You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 3 (2026-10-14 09:55 UTC) — the third generator change is ruled: apply it
+
+Apply exactly `data/fs131/ip23/generator-change-3.diff` (sha256 `79ff61ac…`) in its own commit: one NOLINT entry for `OAI015.condExpKernel_ae_constant`'s unread `[Nonempty Y]`, the release's statement kept. Run in the real tree: the other four modules byte-identical, the self-test at 29 refused and 1 accepted, build 3, and lint (inventory item 814).
+
+You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
