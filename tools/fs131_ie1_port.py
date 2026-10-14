@@ -260,6 +260,8 @@ NOLINT = {
     (MIXTURES, "observationEntropy_finite_mixture_bounds", "unusedArguments"): _UNUSED,
     (MIXTURES, "kernelCell_preserving", "unusedArguments"): _UNUSED,
     (MIXTURES, "kernelCell_real", "unusedArguments"): _UNUSED,
+    # FS131-IP23: `[Nonempty Y]` (`lake lint`, data/fs131/ip23/logs/lint-1.log)
+    (ERGDEC, "condExpKernel_ae_constant", "unusedArguments"): _UNUSED,
 }
 
 # module -> a sentence for the header's item on imports (what was measured and left out, and what it costs)
