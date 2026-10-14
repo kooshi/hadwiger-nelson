@@ -1,0 +1,6 @@
+match    data/fs131/REQUEST-2026-10-13.md | W2: (2026-10-13, answering the choice between the two publishable form
+match    data/fs133/claims-K1.md | K133-INV-CLASS: (entry at line 284 of the derivation file) let `S ⊆ E 
+match    data/fs133/claims-K1.md | K133-NC-INV-CLASS: that the invariant law is ergodic, or unique; that 
+match    data/fs133/claims-K1.md | K133-DENS-CLASS: (entry at line 191 of the derivation file) let `(X, λ
+match    data/fs133/claims-K1.md | K133-NC-DENS-CLASS: that almost every `ω` has `D(ω) ≥ α` — in the mixt
+matched: 5  mismatched: 0

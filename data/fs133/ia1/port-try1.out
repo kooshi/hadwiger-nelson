@@ -1,0 +1,17 @@
+slot: admitted ia1: mem 4 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Outside/OAI158Transfer.lean:361:47: error(lean.unknownIdentifier): Unknown constant `Complex.isometry_ofReal.lipschitzWith.comp`
+Proofs/HadwigerNelson/Outside/OAI158Transfer.lean:461:62: error(lean.unknownIdentifier): Unknown identifier `isAlgebraic_ratCast`
+Proofs/HadwigerNelson/Outside/OAI158Transfer.lean:462:62: error(lean.unknownIdentifier): Unknown identifier `isAlgebraic_ratCast`
+Proofs/HadwigerNelson/Outside/OAI158Transfer.lean:544:39: warning: This simp argument is unused:
+  Circle.norm_coe
+
+Hint: Omit it from the simp argument list.
+  simp ̵[̵C̵i̵r̵c̵l̵e̵.̵n̵o̵r̵m̵_̵c̵o̵e̵]̵
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Proofs/HadwigerNelson/Outside/OAI158Transfer.lean:603:4: error: Type mismatch: After simplification, term
+  tsum_enorm_ne_top_iff_summable_norm.mpr hs
+ has type
+  ∑' (i : ℕ), ‖g i‖ₑ ≠ ∞
+but is expected to have type
+  ∀ (n : ℕ), AEStronglyMeasurable (↑↑(g n)) μ

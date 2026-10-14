@@ -1,0 +1,41 @@
+slot: admitted ib2: mem 4 GiB (hard cap), cpus 0,1
+'SimpleGraph.finIndepRatio' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SimpleGraph.le_finIndepRatio_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SimpleGraph.finIndepRatio_le_of_forall_card_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SimpleGraph.finIndepRatio_le_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SimpleGraph.finIndepRatio_le_of_embedding' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SimpleGraph.inv_le_finIndepRatio_of_colorable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SimpleGraph.inv_finIndepRatio_le_iSup_fractionalChromaticNumber' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Plane.mOne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isIndepSet_unitDistance_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.upperDensity_le_mOne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.mOne_le_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.mOne_le_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.isIndepSet_ball_half' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.mOne_eq_iSup_nullMeasurableSet' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.minIndepNum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.minIndepNum_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.algPlaneEmbedding' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.shiftLab' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.turnLab' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.countable_algPlane' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.IsShiftInvariantLaw' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.IsInvariantLaw' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.IsPlaneSystem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.IsInvariantLaw.isPlaneSystem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.isInvariantLaw_dirac' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.IsShiftInvariantLaw.measure_origin_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.OneClass.exists_foelner_finset' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.exists_shiftInvariant_of_foelner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.exists_turnInvariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.exists_invariant_of_closed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.exists_isInvariantLaw' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.norm_kCoeff_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.OneClass.unitDistance_algPlane_eq_circulantGraph' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.OneClass.exists_isInvariantLaw_unitDistance' depends on axioms: [propext, Classical.choice, Quot.sound]

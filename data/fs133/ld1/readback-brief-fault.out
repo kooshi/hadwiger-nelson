@@ -1,0 +1,12 @@
+MISMATCH data/fs131/REQUEST-2026-10-13.md | W2: (2026-10-13, answering the choice between the two publishable form
+MISMATCH data/fs133/claims-K1.md | K133-ONE: (entry at line 469 of the derivation file) `α₁(ℝ²) = α₁(𝒜²) 
+MISMATCH data/fs133/claims-K1.md | K133-FN: (entry at line 487 of the derivation file) `f(n)/n → m₁(ℝ²)` 
+MISMATCH data/fs133/claims-K1.md | K133-PAIR: (entry at line 649 of the derivation file) an admissible `ℓ
+MISMATCH data/fs133/claims-K1.md | K133-NC-ONE: any value of `m₁(ℝ²)` or of a chromatic number; `m₁(ℝ²) =
+MISMATCH data/fs133/claims-K1.md | K133-NC-ALL: any value of the densities or of a chromatic number; anyt
+MISMATCH plans/FS131-close-inventory.md | 779. **FS133-ICD1 handed back: the density equality's headlines have n
+MISMATCH plans/FS131-close-inventory.md | 789. **FS133-IPQ1 handed back: the density equality's module has no `s
+MISMATCH plans/FS131-close-inventory.md | 798. **FS131-IPD1 — the switch's steps 0–5 done; the join's step 0: th
+MISMATCH plans/FS131-close-inventory.md | 840. **FS131-LP1 handed back: the port of the transfer proof through t
+MISMATCH plans/FS131-close-inventory.md | 841. **The port merged into `main`; item 808's announcement rule met (
+matched: 0  mismatched: 11

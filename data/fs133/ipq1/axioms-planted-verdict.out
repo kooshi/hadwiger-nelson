@@ -1,0 +1,6 @@
+records: 126  table: 126 (112 CLEAN, 14 IMPORTED)
+   14  [Classical.choice, Quot.sound, propext, HadwigerNelson.Outside.OAI158.Spectral.residual_fourier]
+  111  [Classical.choice, Quot.sound, propext]
+    1  [sorryAx]
+OTHER AXIOM fs133_ipq1_planted: ['sorryAx']
+AXIOMS FAILED: 1

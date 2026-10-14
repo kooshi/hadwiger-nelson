@@ -1,0 +1,10 @@
+Proofs.HadwigerNelson.Outside.OAI158Rigidity: IDENTICAL 10
+Proofs.HadwigerNelson.Plane.OneClass.SectionDensity: IDENTICAL 9
+Proofs.HadwigerNelson.Plane.OneClass.Defs: IDENTICAL 49
+Proofs.HadwigerNelson.Plane.OneClass.Field: IDENTICAL 1
+Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw: IDENTICAL 10
+Proofs.HadwigerNelson.Plane.OneClass.Algebraic: IDENTICAL 9
+Proofs.HadwigerNelson.Plane.OneClass.Fractional: IDENTICAL 7
+Proofs.HadwigerNelson.Plane.OneClass.Pair: IDENTICAL 19
+constants of the first dump: 114  IDENTICAL 114  new in the second: 0
+MOVED OK: nothing moved outside instance and proof arguments

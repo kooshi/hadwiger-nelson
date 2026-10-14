@@ -1,0 +1,10 @@
+IDENTICAL  Spectral.E: def there, def here; 529 characters of term; 9 constants named
+IDENTICAL  Spectral.K: def there, def here; 3096 characters of term; 41 constants named
+IDENTICAL  Spectral.DiscreteE: def there, def here; 1037 characters of term; 14 constants named
+DIFFERENT  Spectral.instCommGroupDiscreteE: value at char 173: release …ctral.DiscreteE [])) ((((((((((c Monoid.mk [0]) (c §.Spectral.DiscreteE [])) (((c One.mk [0]) (c §.Spectral.DiscreteE []… | here …ctral.DiscreteE [])) (((((((((c Monoid.mk [0]) (c §.Spectral.DiscreteE [])) ((((c Semigroup.mk [0]) (c §.Spectral.Discre…; constants named: only at the release ['§.Spectral.instCommGroupDiscreteE._aux_3', '§.Spectral.instCommGroupDiscreteE._proof_5']; only here ['Semigroup.mk', '§.Spectral.instCommGroupDiscreteE._aux_4', '§.Spectral.instCommGroupDiscreteE._proof_3']
+IDENTICAL  Spectral.kCoeff: def there, def here; 5502 characters of term; 35 constants named
+IDENTICAL  ContinuousVectors.op: def there, def here; 339193 characters of term; 48 constants named
+IDENTICAL  ContinuousVectors.space: def there, def here; 148843 characters of term; 65 constants named
+DIFFERENT  Spectral.residual_fourier: type at char 162569: release …§.Spectral.E [])) #0)))) (((c CommSemiring.toSemiring [0]) (((c Subtype [(S 0)]) (c Complex [])) (lam.d x (c Complex [])… | here …§.Spectral.E [])) #0)))) (((c DivisionSemiring.toSemiring [0]) (((c Subtype [(S 0)]) (c Complex [])) (lam.d x (c Complex…; constants named: only at the release ['CommSemiring.toSemiring', 'Complex.instCommSemiring', 'Semifield.toCommSemiring', 'SubsemiringClass.toCommSemiring']; only here ['DivisionSemiring.toSemiring', 'Semifield.toDivisionSemiring']
+declarations: 8  compared: 8  identical: 6  different: 2 ['Spectral.instCommGroupDiscreteE', 'Spectral.residual_fourier']
+READ-BACK DIFFERS

@@ -1,0 +1,6 @@
+slot: admitted k133: mem 8 GiB (hard cap), cpus 6,7
+'OAI.PlaneFiveColor.Spectral.residual_fourier' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OAI.PlaneFiveColor.Spectral.wild_fourier' depends on axioms: [propext, Classical.choice, Quot.sound]
+CONE residual_fourier=1802 transfer=1997 wild_fourier=1644
+CONE residual_fourier not in transfer: 0 []
+CONE wild_fourier not in residual_fourier: 0

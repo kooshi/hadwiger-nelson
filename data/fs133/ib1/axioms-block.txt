@@ -1,0 +1,26 @@
+/-! ## FS133-IB1 — lane B of FS-133 (the one-class transfer), two of its files: `Plane/OneClass/InvariantLaw` (C133-INV-CLASS: the
+bound for a translation-invariant random independent set, a Følner sequence of a countable commutative group, the invariant
+limit of Følner averages, a common fixed point of the rotations, the invariant law of the best density) and
+`Plane/OneClass/SectionDensity` (C133-DENS-CLASS: the reverse Fatou step for the window densities of a random set).
+Statements FS133-K1's (four widened by the coordinator's rulings: one unread binder each), proofs FS133-IB1's; no axiom,
+no outside theorem: every record on a subset of the standard three (the plan's § 5.5). -/
+-- FS133-IB1 block: 19 records (18 theorems, 1 definition) — every public declaration of the two modules, one line each.
+#print axioms HadwigerNelson.OneClass.countable_algPlane
+#print axioms HadwigerNelson.OneClass.exists_foelner_finset
+#print axioms HadwigerNelson.OneClass.exists_invariant_of_closed
+#print axioms HadwigerNelson.OneClass.exists_isInvariantLaw
+#print axioms HadwigerNelson.OneClass.exists_isInvariantLaw_unitDistance
+#print axioms HadwigerNelson.OneClass.exists_shiftInvariant_of_foelner
+#print axioms HadwigerNelson.OneClass.exists_turnInvariant
+#print axioms HadwigerNelson.OneClass.norm_kCoeff_mul
+#print axioms HadwigerNelson.OneClass.unitDistance_algPlane_eq_circulantGraph
+#print axioms HadwigerNelson.OneClass.IsShiftInvariantLaw.measure_origin_le
+#print axioms HadwigerNelson.Plane.exists_mem_le_sectionDensity
+#print axioms HadwigerNelson.Plane.le_lintegral_sectionDensity
+#print axioms HadwigerNelson.Plane.measurable_sectionDensity
+#print axioms HadwigerNelson.Plane.measure_le_sectionDensity_pos
+#print axioms HadwigerNelson.Plane.ofReal_integral_le_measure_pos
+#print axioms HadwigerNelson.Plane.sectionDensity
+#print axioms HadwigerNelson.Plane.sectionDensity_empty
+#print axioms HadwigerNelson.Plane.sectionDensity_setOf_pos
+#print axioms HadwigerNelson.Plane.sectionDensity_univ

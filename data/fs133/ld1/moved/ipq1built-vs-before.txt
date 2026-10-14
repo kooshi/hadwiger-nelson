@@ -1,0 +1,9 @@
+Proofs.HadwigerNelson.Plane.OneClass.SectionDensity: IDENTICAL 12
+Proofs.HadwigerNelson.Plane.OneClass.Defs: IDENTICAL 57
+Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw: IDENTICAL 28
+Proofs.HadwigerNelson.Plane.OneClass.Field: IDENTICAL 31
+Proofs.HadwigerNelson.Plane.OneClass.Algebraic: IDENTICAL 10
+Proofs.HadwigerNelson.Plane.OneClass.Fractional: IDENTICAL 18
+Proofs.HadwigerNelson.Plane.OneClass.Pair: IDENTICAL 25
+constants of the first dump: 181  IDENTICAL 181  new in the second: 64
+MOVED OK: every listed change is as listed; nothing else moved

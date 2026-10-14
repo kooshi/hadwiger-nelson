@@ -1,0 +1,13 @@
+data/fs133/ld1/lean/StatementDump.lean:32:4: warning: missing doc string for public def bi
+
+Note: This linter can be disabled with `set_option linter.missingDocs false`
+data/fs133/ld1/lean/StatementDump.lean:91:4: warning: missing doc string for public def kindOf
+
+Note: This linter can be disabled with `set_option linter.missingDocs false`
+data/fs133/ld1/lean/StatementDump.lean:137:4: warning: missing doc string for public def runAll
+
+Note: This linter can be disabled with `set_option linter.missingDocs false`
+data/fs133/ld1/lean/StatementDump.lean:140:4: warning: missing doc string for public def runLevel1
+
+Note: This linter can be disabled with `set_option linter.missingDocs false`
+LD1 DUMP WRITTEN: 245 constants (58 by name) to data/fs133/ld1/moved/after-join.out

@@ -1,0 +1,128 @@
+the run itself, before any plant: no failure
+plant 'a dropped binder left in' in HadwigerNelson.Plane.ofReal_integral_le_measure_pos: the run fails and names it
+plant 'another change beside the drop' in HadwigerNelson.Plane.ofReal_integral_le_measure_pos: the run fails and names it
+plant 'the named binder absent from the first print' in HadwigerNelson.Plane.ofReal_integral_le_measure_pos: the run fails and names it
+plant 'the dropped binder read in the first print' in HadwigerNelson.Plane.ofReal_integral_le_measure_pos: the run fails and names it
+plant 'a constant changed in the erased and the full print' in HadwigerNelson.Outside.OAI158.Spectral.residual_fourier_cross: the run fails and names it
+plant 'a constant changed in the full print only (AddCommGroup.toAddCommMonoid), --strict' in HadwigerNelson.Outside.OAI158.Spectral.residual_fourier_cross: the run fails and names it
+plant 'a constant removed' in HadwigerNelson.Outside.OAI158.Spectral.residual_fourier_cross: the run fails and names it
+plant 'a theorem turned into an axiom' in HadwigerNelson.Outside.OAI158.Spectral.residual_fourier_cross: the run fails and names it
+plant 'an unlisted constant compiled in another module' in HadwigerNelson.Outside.OAI158.Spectral.residual_fourier_cross: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.ContinuousVectors.op: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.ContinuousVectors.op: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.ContinuousVectors.space: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.ContinuousVectors.space: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.Spectral.DiscreteE: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.Spectral.DiscreteE: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.Spectral.E: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.Spectral.E: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.Spectral.K: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.Spectral.K: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.Spectral.instCommGroupDiscreteE: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.Spectral.instCommGroupDiscreteE: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.Spectral.kCoeff: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.Spectral.kCoeff: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.approxField_measurable: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.approxField_measurable: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.approxField_tendsto: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.approxField_tendsto: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.dense_approx: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.dense_approx: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.exists_measurable_field: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.exists_measurable_field: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.index_bound: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.index_bound: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.index_measurable: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.index_measurable: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.measurableField_measurable: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.measurableField_measurable: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.positive_orthogonal: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.positive_orthogonal: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.projection_fixed_of_contraction: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.projection_fixed_of_contraction: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp_eq: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp_eq: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp_lipschitz: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp_lipschitz: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp_range: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp_range: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp_zero: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.ContinuousVectors.clamp_zero: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.ContinuousVectors.covariance_mem: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.ContinuousVectors.covariance_mem: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.ContinuousVectors.dist_op: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.ContinuousVectors.dist_op: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.ContinuousVectors.instCompleteSpaceSubtypeMemSubmoduleComplexSpace: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.ContinuousVectors.instCompleteSpaceSubtypeMemSubmoduleComplexSpace: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.ContinuousVectors.isClosed_space: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.ContinuousVectors.isClosed_space: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.ContinuousVectors.nonlinear_mem: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.ContinuousVectors.nonlinear_mem: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.ContinuousVectors.norm_op: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.ContinuousVectors.norm_op: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.ContinuousVectors.op_add: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.ContinuousVectors.op_add: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.ContinuousVectors.op_comm: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.ContinuousVectors.op_comm: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.ContinuousVectors.op_mem: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.ContinuousVectors.op_mem: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.ContinuousVectors.op_orthogonal: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.ContinuousVectors.op_orthogonal: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.ContinuousVectors.op_zero: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.ContinuousVectors.op_zero: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.ContinuousVectors.orbit_continuous: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.ContinuousVectors.orbit_continuous: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.ContinuousVectors.projection_coefficient: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.ContinuousVectors.projection_coefficient: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.ContinuousVectors.projection_covariance_fixed: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.ContinuousVectors.projection_covariance_fixed: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.ContinuousVectors.projection_range: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.ContinuousVectors.projection_range: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.Koopman.isometry: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.Koopman.isometry: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.Koopman.nonlinear_commute: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.Koopman.nonlinear_commute: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.Koopman.unitary: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.Koopman.unitary: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.Koopman.unitary_apply: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.Koopman.unitary_apply: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.Spectral.E_countable: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.Spectral.E_countable: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.Spectral.algebraic_norm: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.Spectral.algebraic_norm: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.Spectral.circle_closed_induction: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.Spectral.circle_closed_induction: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.Spectral.dense_E: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.Spectral.dense_E: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.Spectral.imagUnit: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.Spectral.imagUnit: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.Spectral.kCoeff_ne_zero: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.Spectral.kCoeff_ne_zero: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.Spectral.normalized_algebraic: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.Spectral.normalized_algebraic: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.Spectral.orbitExtension: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.Spectral.orbitExtension: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.Spectral.orbitExtension_continuous: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.Spectral.orbitExtension_continuous: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.Spectral.orbitExtension_eq: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.Spectral.orbitExtension_eq: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.Spectral.orbitExtension_inner: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.Spectral.orbitExtension_inner: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.Outside.OAI158.Spectral.orbit_uniformContinuous: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.Outside.OAI158.Spectral.orbit_uniformContinuous: the run fails and names it
+plant 'a proved axiom's type changed in the full print' in HadwigerNelson.Outside.OAI158.Spectral.residual_fourier: the run fails and names it
+plant 'a proved axiom left an axiom' in HadwigerNelson.Outside.OAI158.Spectral.residual_fourier: the run fails and names it
+plant 'a moved-instances definition's type changed' in HadwigerNelson.Outside.OAI158.approxField: the run fails and names it
+plant 'a moved-instances definition's erased value changed' in HadwigerNelson.Outside.OAI158.approxField: the run fails and names it
+plant 'a moved-instances definition left in its old module' in HadwigerNelson.Outside.OAI158.approxField: the run fails and names it
+plant 'a moved-instances definition's type changed' in HadwigerNelson.Outside.OAI158.approxIndex: the run fails and names it
+plant 'a moved-instances definition's erased value changed' in HadwigerNelson.Outside.OAI158.approxIndex: the run fails and names it
+plant 'a moved-instances definition left in its old module' in HadwigerNelson.Outside.OAI158.approxIndex: the run fails and names it
+plant 'a moved-instances definition's type changed' in HadwigerNelson.Outside.OAI158.measurableField: the run fails and names it
+plant 'a moved-instances definition's erased value changed' in HadwigerNelson.Outside.OAI158.measurableField: the run fails and names it
+plant 'a moved-instances definition left in its old module' in HadwigerNelson.Outside.OAI158.measurableField: the run fails and names it
+plant 'a generated theorem's type changed' in HadwigerNelson.Outside.OAI158.approxField.congr_simp: the run fails and names it
+plant 'a generated theorem's type changed' in HadwigerNelson.Outside.OAI158.approxIndex.congr_simp: the run fails and names it
+CONTROL OK: each plant read as planted

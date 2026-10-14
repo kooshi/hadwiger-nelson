@@ -1,0 +1,11 @@
+the run itself, before any plant: no failure
+plant 'a dropped binder left in' in HadwigerNelson.OneClass.exists_admissibleOn_of_ae: the run fails and names it
+plant 'another change beside the drop' in HadwigerNelson.OneClass.exists_admissibleOn_of_ae: the run fails and names it
+plant 'the named binder absent from the first print' in HadwigerNelson.OneClass.exists_admissibleOn_of_ae: the run fails and names it
+plant 'the dropped binder read in the first print' in HadwigerNelson.OneClass.exists_admissibleOn_of_ae: the run fails and names it
+plant 'a constant changed in the erased and the full print' in HadwigerNelson.Plane.exists_mem_le_sectionDensity: the run fails and names it
+plant 'a constant changed in the full print only (ENNReal.instLE), --strict' in HadwigerNelson.Plane.exists_mem_le_sectionDensity: the run fails and names it
+plant 'a constant removed' in HadwigerNelson.Plane.exists_mem_le_sectionDensity: the run fails and names it
+plant 'a theorem turned into an axiom' in HadwigerNelson.Plane.exists_mem_le_sectionDensity: the run fails and names it
+plant 'an unlisted constant compiled in another module' in HadwigerNelson.Plane.exists_mem_le_sectionDensity: the run fails and names it
+CONTROL OK: each plant read as planted

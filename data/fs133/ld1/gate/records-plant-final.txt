@@ -1,0 +1,8 @@
+unplanted: PASS
+plant 'an axiom added to a record that rested on the declared theorem': FAILED (as it must) — the module's records, each once under CLEAN on a non-empty subset of the three (76 of 77): HadwigerNelson.OneClass.exist
+plant 'a module record put under IMPORTED': FAILED (as it must) — the module's records, each once under CLEAN on a non-empty subset of the three (76 of 77): HadwigerNelson.OneClass.exist
+plant 'a DECLARED IMPORT of residual_fourier': FAILED (as it must) — no record rests on residual_fourier (0) and no DECLARED IMPORT names it
+plant 'a module record removed': FAILED (as it must) — the module's records, each once under CLEAN on a non-empty subset of the three (76 of 77): HadwigerNelson.OneClass.exist
+plant 'a record printed twice': FAILED (as it must) — the module's records, each once under CLEAN on a non-empty subset of the three (76 of 77): HadwigerNelson.OneClass.exist
+plants: every one fired; the unplanted receipt passes
+exit=0

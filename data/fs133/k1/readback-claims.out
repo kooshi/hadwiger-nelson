@@ -1,0 +1,14 @@
+match    K133-DENS-CLASS = C133-DENS-CLASS
+match    K133-INV-CLASS = C133-INV-CLASS
+match    K133-ALG = C133-ALG
+match    K133-ONE = C133-ONE
+match    K133-FN = C133-FN
+match    K133-PAIR = C133-PAIR
+match    K133-NC-DENS-CLASS = C133-DENS-CLASS
+match    K133-NC-INV-CLASS = C133-INV-CLASS
+match    K133-NC-ALG = C133-ALG
+match    K133-NC-ONE = C133-ONE
+match    K133-NC-FN = C133-FN
+match    K133-NC-PAIR = C133-PAIR
+NO ENTRY C133-ALL (a line of the claim list's own)
+matched: 12  mismatched: 0

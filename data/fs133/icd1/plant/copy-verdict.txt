@@ -1,0 +1,3 @@
+Proofs.HadwigerNelson.Plane.OneClass.Pair: IDENTICAL 19
+constants of the first dump: 19  IDENTICAL 19  new in the second: 0
+MOVED OK: every listed change is as listed; nothing else moved

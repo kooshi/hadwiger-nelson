@@ -1,0 +1,19 @@
+slot: admitted ia1: mem 4 GiB (hard cap), cpus 0,1
+OUT Mathlib.Algebra.AlgebraicCard
+OUT Mathlib.Algebra.Order.Ring.Star
+OUT Mathlib.Analysis.CStarAlgebra.Module.Constructions
+IN  Mathlib.Analysis.Complex.Circle
+IN  Mathlib.FieldTheory.AlgebraicClosure
+OUT Mathlib.MeasureTheory.Function.L2Space
+OUT Mathlib.MeasureTheory.Function.LpSpace.InfiniteSum
+OUT Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+OUT Mathlib.RingTheory.Flat.TorsionFree
+OUT Mathlib.RingTheory.SimpleRing.Principal
+OUT Mathlib.MeasureTheory.Function.LpSpace.ContinuousCompMeasurePreserving
+IN  Mathlib.Analysis.InnerProductSpace.Projection.Basic
+IN  Mathlib.MeasureTheory.Constructions.BorelSpace.Complex
+IN  Mathlib.LinearAlgebra.Complex.FiniteDimensional
+IN  Mathlib.Analysis.InnerProductSpace.l2Space
+IN  Mathlib.MeasureTheory.Function.LpSpace.Complete
+OUT Mathlib.Topology.Algebra.UniformGroup.Basic
+modules in the closure: 4428

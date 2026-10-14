@@ -340,6 +340,14 @@ import Proofs.HadwigerNelson.Plane.WeakColouringOn
 import Proofs.HadwigerNelson.Plane.Radius
 import Proofs.HadwigerNelson.Plane.RadiusOutside
 import Proofs.HadwigerNelson.Plane.LebesgueNumber
+import Proofs.HadwigerNelson.Outside.OAI158Rigidity
+import Proofs.HadwigerNelson.Plane.OneClass.SectionDensity
+import Proofs.HadwigerNelson.Plane.OneClass.Defs
+import Proofs.HadwigerNelson.Plane.OneClass.Field
+import Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw
+import Proofs.HadwigerNelson.Plane.OneClass.Algebraic
+import Proofs.HadwigerNelson.Plane.OneClass.Fractional
+import Proofs.HadwigerNelson.Plane.OneClass.Pair
 import Proofs.HadwigerNelson.Plane.CircleCrossing
 import Proofs.HadwigerNelson.Plane.OnePiece
 import Proofs.HadwigerNelson.Plane.ThreePiece

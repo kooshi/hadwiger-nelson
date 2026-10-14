@@ -1,0 +1,9 @@
+sampler start 2026-10-14T13:40:04Z worktree=/home/kooshi/source/lean-dir/.claude/worktrees/fs133-wk1 interval=5s pid=3236978
+13:45:00 heartbeat samples=60 now: 0 process(es), sum-rss=0 MiB
+13:47:01 new max sum-rss=3661 MiB over 1 process(es): Proofs/HadwigerNelson/Outside/OAI158Rigidity.lean
+13:47:01 new max one-rss=3661 MiB: Proofs/HadwigerNelson/Outside/OAI158Rigidity.lean
+13:47:26 new max sum-rss=7797 MiB over 2 process(es): Proofs/HadwigerNelson/Plane/OneClass/InvariantLaw.lean Proofs/HadwigerNelson/Plane/OneClass/Field.lean
+13:47:26 new max one-rss=3932 MiB: Proofs/HadwigerNelson/Plane/OneClass/Field.lean
+13:47:31 new max one-rss=4000 MiB: Proofs/HadwigerNelson/Plane/OneClass/Field.lean
+13:48:01 new max one-rss=4002 MiB: Proofs/HadwigerNelson/Plane/OneClass/Fractional.lean
+sampler end 2026-10-14T13:48:21Z samples=99 PEAK_SUM_RSS_MIB=7797 (over 2 process(es): Proofs/HadwigerNelson/Plane/OneClass/InvariantLaw.lean Proofs/HadwigerNelson/Plane/OneClass/Field.lean) PEAK_ONE_RSS_MIB=4002 (Proofs/HadwigerNelson/Plane/OneClass/Fractional.lean)

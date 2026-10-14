@@ -1,0 +1,10 @@
+AS-LISTED Proofs/HadwigerNelson/Plane/OneClass/Defs.lean: 0 listed edit(s)
+AS-LISTED Proofs/HadwigerNelson/Plane/OneClass/InvariantLaw.lean: 0 listed edit(s)
+AS-LISTED Proofs/HadwigerNelson/Plane/OneClass/Algebraic.lean: 0 listed edit(s)
+AS-LISTED Proofs/HadwigerNelson/Plane/OneClass/Fractional.lean: 0 listed edit(s)
+AS-LISTED Proofs/HadwigerNelson/Plane/OneClass/Pair.lean: 0 listed edit(s)
+AS-LISTED Proofs/HadwigerNelson/Plane/OneClass/Field.lean: 1 listed edit(s)
+AS-LISTED Proofs/HadwigerNelson/Plane/OneClass/SectionDensity.lean: 1 listed edit(s)
+AS-LISTED Proofs/HadwigerNelson/Outside/OAI158Rigidity.lean: the code from `theorem residual_fourier_cross` to the end the same but for the listed simp argument (7352 characters); deleted 7 of 7 listed declarations; the import added: True; words new in the head: ['Proofs.HadwigerNelson.Outside.OAI158Ergodicity']
+OK
+exit=0

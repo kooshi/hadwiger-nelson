@@ -1,0 +1,6 @@
+slot: admitted ipq1: mem 4 GiB (hard cap), cpus 4,5
+data/fs133/ipq1/work/PairAx.lean:313:8: warning: declaration uses `sorry`
+'HadwigerNelson.OneClass.exists_measurable_admissibleAe' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.Spectral.residual_fourier]
