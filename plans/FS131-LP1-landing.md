@@ -230,3 +230,56 @@ module(s) with warnings, 9m10s`** (`data/fs131/lp1/build/build1.log`; Lake's ful
 `SixRing`, `BorelTransfer`, `Collapse`, the two leaves) and the root. Then the stage-1 dumper again
 (`data/fs131/lp1/stmt/after.out`, `DONE 541`): **byte-identical** to the dump made before any edit (`cmp`; sha256
 `1e6ae66d…` both). No stored type and no definition's value moved.
+
+## Stage 4 — SAVED (FS131-LP1): the registrations
+
+Logs under `data/fs131/lp1/stage4/` (each step's own output, and the gate's full output as `*.full.log.xz`).
+
+**4.1 The audit's state-reading controls** (`scripts/axioms-controls.txt`). Seen red first, on the file as it stood:
+`./scripts/axioms.sh --self-test` — **`FAIL — 3 of 23 control(s) did not behave as designed`**, exactly the three that
+read the library's state (`axioms-selftest-old-controls.log`): `baseline` ("passed; expected COUNTS imported=38 …
+declared=3 … library=3", and the `old` digest's text), `imported_declared` (39, 4, 4), `banner_dropped` ("expected 'FAIL
+outside-banners' naming seven_le_chromaticNumber_plane_iff, expected 'FAIL stale-declaration' naming
+proper_to_borel_weak"); the other twenty behaved. Then moved by the file's own rule (its header: per declared import
+`declared` and `library` by one in both controls and `imported` by its records, the `old` digests' texts with them, and
+`banner_dropped` losing that import's two expectations) — `data/fs131/lp1/controls_edit.py`, four blocks, each matched
+exactly once: `imported` 38 → 26 and 39 → 27, `declared` and `library` 3 → 2 and 4 → 3, the two `old` texts, the two
+lines of `banner_dropped`, and the header's description of the state (two declared imports; the transfer a theorem since
+the switch, its twelve records CLEAN since this landing). Then: **`axioms self-test: OK — every planted fault fired, and
+every partner passed`** (23 of 23; `axioms-selftest-new-controls.log`), 3 m 54 s, 5.3 GiB.
+
+**4.2 The assumptions step, then its ledger by its own flag.** Run as it stood (`assumptions-before-ledger.log`):
+**`FAIL — 12 check(s) failed`, each `FAIL stale-consumer`**, each the transfer's consumer — "the ledger lists 'RESTS
+HadwigerNelson.Outside.OAI158.proper_to_borel_weak <record>' and the scan does not find it" for the five of
+`Outside/OAI158Collapse`, the four of `Plane/RadiusOutside`, the three of `Plane/LebesgueNumber`; nothing else failed;
+"assumed: axioms=2 rests=27 named=19 inline=14 outside=7 ours=21 open=5 takes=102 mentions=1". Then `./scripts/
+assumptions.sh --write-ledger` (`assumptions-write-ledger.log`): "rows the ledger gains (+) and loses (-)": **twelve
+lost, none gained**, exactly those twelve `RESTS` rows; "ledger written (130 rows)"; the ledger's header counts
+`axioms=3 rests=39` → `axioms=2 rests=27`, the other seven unchanged (`git diff`: 1 line in, 13 out). Then the step
+again: **`assumptions: OK — 2 outside theorem(s) as axioms, with 27 theorem(s) resting on them; 19 named and 14 inline
+hypotheses (7 outside, 21 ours, 5 open), taken by 102 statement(s) and mentioned by 1`**, and "RECORDED COUNTS ARE STALE
+in CLAUDE.md § Trust ledger — update it: axioms 3 → 2, rests 39 → 27" (draft 3). `scripts/Assumptions.lean` needs no
+edit: it declares no hypothesis the port touches (its one mention of the family is `no_proper_five_coloring`'s, in two
+sources).
+
+**4.3 The vacuity scan** (`vacuity.log`): **OK** — `declarations=17785 refutations-skipped=232`, `sites=1454 vacuous=0
+stale=0 declared=3 witnessed=38 generic=1411 unknown=2`, as the brief predicts; flagged stale, not failed, in the
+baseline's header and in `CLAUDE.md` § The gate ("declarations 16125 → 17785, refutations-skipped 228 → 232"). The
+baseline's header refiled (one line; its two entries unchanged). **The four new skipped refutations, by name**
+(`data/fs131/lp1/lean/Refutations.lean`, the scan's own `isRefutation` and filter copied, over the constants of every
+`Outside/OAI158*` module: six, of which two are the palette chain's, FS132-L2's — `triangleAngle_ratio_irrational`,
+`two_state_impossible`): `FiniteModule.common_fiber_contradiction` (`OAI158ConditionalSelection`),
+`Spectral.finite_uniform_successor_contradiction` and `Spectral.finite_uniform_precision_contradiction`
+(`OAI158ConditionalSpectrum`), `Spectral.ambient_uniform_precision_contradiction` (`OAI158ConditionalLimits`) — each the
+release's own step inside a proof by contradiction, concluding `False` from hypotheses meant to be jointly unsatisfiable;
+none is a statement of ours. The scan adds **no site** for the port (FS131-IPD1's reading: its colourings and measures
+are the release's own structures, which the scan does not track — `LEAN.md` § The gate's silence clause); the twelve
+consumers' sites are as before.
+
+**4.4 The doubled-name check** (`dupnames.log`): **OK — no name is declared by two modules** (26 generated on demand).
+**The architecture check** (`arch.out`): `RESULT: PASS`, exit 0. **The registration** (FS131-IPD1's
+`tools/fs131_ipd1_register.py check 5692c3288`): `REGISTER-CHECK OK: 32 modules, 32 rows, 1422 generated records and 12
+moved`. **The generator** on the 31 modules (`--check`): `CHECK OK`.
+
+**4.5 Not edited, a note for the tooling job**: `scripts/Vacuity.lean` line 561, inside FS132-L1's paragraph of its
+history, still calls the transfer "the imported `proper_to_borel_weak`" — history, and not a file this brief opens.
