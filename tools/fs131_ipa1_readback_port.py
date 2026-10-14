@@ -197,7 +197,9 @@ COEFF_LEMMAS = {"§.AlgebraicCayley.reciprocal_denominator", "§.AlgebraicCayley
 # EQSET_LEMMAS lists, each then PIN-DIFFERENCE (EQSET); the release's kernel checks `EventuallyEqSet l s t =
 # EventuallyEq l s t` by `rfl` in the level-one print (`ReleaseLevel1.lean`).
 EQSET_HEAD = "Filter.EventuallyEqSet"
-EQSET_LEMMAS = {"§.KernelCompact.exists_invariant_set"}
+EQSET_LEMMAS = {"§.KernelCompact.exists_invariant_set",
+                # FS131-LP1 (the coordinator's item 807 ruling 3, item 772's standing word): lane D's two
+                "§.ConvexAverage.setIntegral_bm", "§.ConvexAverage.setIntegral_of_limit"}
 # ADAPTED_INSTANCE (FS131-IPB1, plan § 4.3): a statement adapted at an INSTANCE argument — `IsProbabilityMeasure (μ.map f)`
 # supplied by an inlined `haveI := Measure.isProbabilityMeasure_map h` from a measurability the statement names.  The
 # instance is a proof, so the erased prints agree and the verdict would be UP-TO-INSTANCES; each listed declaration is
@@ -232,11 +234,36 @@ RELEASE_REWRITES = {
                             "at `Prop` here; the same proposition by definition"),
 }
 PIN_DIFFERENCE = {"§.Spectral.instCommGroupDiscreteE", "§.Spectral.instCommGroupDiscreteF",
-                  "§.InvariantMean.instAddCommGroupPeriodGroup", "§.CommutingSpectral.algebra_commCStar"}
+                  "§.InvariantMean.instAddCommGroupPeriodGroup", "§.CommutingSpectral.algebra_commCStar",
+                  # FS131-LP1 (item 807 ruling 3, item 763 (3)'s class): `def Rot := Additive K deriving
+                  # AddCommGroup`, its value and auxiliaries through `Monoid`'s parents, as `instCommGroupDiscreteE`
+                  "§.Spectral.instAddCommGroupRot"}
 PIN_NOTES = {"§.CommutingSpectral.algebra_commCStar":
              "its value is elaborated through this pin's instances (the release's goes through "
              "`IsMulCommutative.instCommCStarAlgebra`, which v4.32.0 does not have); the text is the release's"}
 RULED = {"§.DifferenceFourier.differenceLaw_probability": ["MeasurableMul₂", "MeasurableInv"]}
+# FS131-LP1's rules (the coordinator's item 807 rulings 1 and 2), read by the streaming reader only, each with its
+# planted controls in `--self-test`, each resting on a receipt line of EVIDENCE (`tools/fs131_lp1_instance_evidence.py`):
+#   * INSTANCE_EVIDENCE (ruling 1): a declaration whose stored term differs from the release's inside an instance argument
+#     by constants of the release's own — refused by FS132-I2's `compare` — reads UP-TO-INSTANCES when those constants
+#     are all among the ones listed for it and the receipt holds the line `INSTANCE-EVIDENCE OK <label>` (a kernel
+#     check at this pin that the two instance terms agree by `rfl`, with a planted non-agreeing term refused); a listed
+#     declaration that then does not read UP-TO-INSTANCES under the rule is fatal (the list is stale);
+#   * TARGET_IN_LIBRARY (ruling 2): a target of TARGETS_HERE reads IDENTICAL, or UP-TO-INSTANCES when it is listed here,
+#     every constant by which its prints differ is one its own print's USES lines place in Mathlib or core, and the
+#     receipt holds `IN-LIBRARY OK <label>` (its stored type IDENTICAL to the axiom it replaces in the library).
+EVIDENCE = ROOT / "data/fs131/lp1/readback/evidence.out"
+INSTANCE_EVIDENCE = {"§.CommutingSpectral.generator_unitary": {"§.CommutingSpectral.algebra_commRing"}}
+TARGET_IN_LIBRARY = {"§.Spectral.residual_fourier"}
+LIBRARY_MODULES = ("Mathlib.", "Init.", "Std.", "Lean.", "Batteries.")
+
+
+def evidence_lines():
+    return set(EVIDENCE.read_text().splitlines()) if EVIDENCE.exists() else set()
+
+
+def has_evidence(kind, lab):
+    return any(ln.startswith(f"{kind} OK {lab}:") for ln in evidence_lines())
 # label -> [(head constant, number of arguments here, position of the inserted argument)]
 ADAPTED = {}
 # STRIP (FS131-IPB1): the ruled cascade of `frequencyLaw` (the coordinator's item 767 ruling (a), and item 768) and the
@@ -718,15 +745,18 @@ def emit(label, mods):
 
 def emit_level1(label):
     setup(label)
-    rel_text, _ = prints(label)
-    rel, _ = rb.load(rel_text, renamed={})
+    # FS131-LP1: the release's print read block by block (the streaming reader's `blocks`), each block parsed by
+    # FS132-I2's `load` alone; the same constants as reading it whole (each block's own fields only)
     outside = set()
-    for lab, dd in rel.items():
-        if dd["kind"] == "ABSENT":
+    for kind_, *rest in blocks(raw_lines(print_paths(label)[0])):
+        if kind_ != "B":
             continue
-        for c in rb.constants(dd["etype"]) | (rb.constants(dd["evalue"]) if dd["kind"] == "def" else set()):
-            if not c.startswith("§"):
-                outside.add(c)
+        for lab, dd in rb.load("\n".join(rest[1]), renamed={})[0].items():
+            if dd["kind"] == "ABSENT":
+                continue
+            for c in rb.constants(dd["etype"]) | (rb.constants(dd["evalue"]) if dd["kind"] == "def" else set()):
+                if not c.startswith("§"):
+                    outside.add(c)
     unf = {u[0] for u in rb.UNFOLDED}
     names = sorted(outside | set(RENAMED) | unf)
     d = label_dir(label)
@@ -1159,6 +1189,7 @@ def ruled_compare_stream(rel_src, our_src, renamed=None, record=None, quiet=Fals
     rs, os_ = Stepper(rel_src, order), Stepper(our_src, order)
     fatal_nip, table, seen_inst, touched_by, ruled_rows = [], [], set(), {}, []
     owners = {}  # PIN_DIFFERENCE owner -> (release (kind, levels, type), here (kind, levels, type))
+    target_ok = {}  # a target reading UP-TO-INSTANCES -> (TARGET_IN_LIBRARY holds, why not)
     for name, stem, src_decl, kind in rows:
         lab = label_of(name)
         rb_, ob_ = rs.take(lab), os_.take(lab)
@@ -1192,10 +1223,27 @@ def ruled_compare_stream(rel_src, our_src, renamed=None, record=None, quiet=Fals
                 verdict = "AUX-DIFFERS"
         if verdict == "UP-TO-INSTANCES":
             badc = [c for c in there + here if not rb.allowed_instance_constant(c)]
-            if badc:
+            if badc and lab in INSTANCE_EVIDENCE and set(badc) <= INSTANCE_EVIDENCE[lab] \
+                    and has_evidence("INSTANCE-EVIDENCE", lab):
+                why = (f"INSTANCE_EVIDENCE: differs inside instance arguments by the release's own {badc}, the two "
+                       "instance terms equal by rfl at this pin (the kernel's receipt in " +
+                       str(EVIDENCE.relative_to(ROOT)) + ")")
+                seen_inst |= set(there) | set(here)
+            elif badc:
                 verdict, why = "DIFFERENT", f"differs inside instance arguments by the release's own constants {badc}"
             else:
                 seen_inst |= set(there) | set(here)
+        if lab in TARGETS_HERE and verdict == "UP-TO-INSTANCES":
+            outside = [c for c in there if not r["uses"].get(c, "").startswith(LIBRARY_MODULES)] + \
+                [c for c in here if not o["uses"].get(c, "").startswith(LIBRARY_MODULES)]
+            ev = has_evidence("IN-LIBRARY", lab)
+            target_ok[lab] = (lab in TARGET_IN_LIBRARY and not outside and ev,
+                              f"constants not placed in Mathlib or core by their print's USES lines: {outside}" if outside
+                              else "not listed in TARGET_IN_LIBRARY" if lab not in TARGET_IN_LIBRARY
+                              else "no IN-LIBRARY receipt line" if not ev else "")
+            if target_ok[lab][0]:
+                why = (f"TARGET_IN_LIBRARY: Mathlib's instance constants only (there {there}, here {here}); its stored "
+                       "type IDENTICAL to the axiom it replaces in the library (the receipt)")
         cls = ("target" if lab[2:] in rb.TARGETS else "aux" if aux else "definition" if r["kind"] == "def" else "lemma")
         t = (cls, lab, r["kind"], verdict, there, here, why)
         table.append(t)
@@ -1269,10 +1317,10 @@ def ruled_compare_stream(rel_src, our_src, renamed=None, record=None, quiet=Fals
             else:
                 verdict, why = "DIFFERENT", f"PIN-DIFFERENCE refused: {owner}'s kind, levels or full type differ"
         out.append((cls, lab, kind, verdict, there, here, why))
-    return _ruled_finish(out, fatal, seen_inst, quiet, write)
+    return _ruled_finish(out, fatal, seen_inst, quiet, write, target_ok=target_ok, streaming=True)
 
 
-def _ruled_finish(out, fatal, seen, quiet, write):
+def _ruled_finish(out, fatal, seen, quiet, write, target_ok=None, streaming=False):
     """`ruled_compare`'s tail (its post-processing, its file and its printed text), on the rows of the table."""
     for k, t in enumerate(out):
         if t[1] in ADAPTED_ASCRIPTION:
@@ -1301,10 +1349,19 @@ def _ruled_finish(out, fatal, seen, quiet, write):
                              "AUX-DIFFERS")
     for tg in sorted(TARGETS_HERE):
         if tg in vmap and vmap[tg] != "IDENTICAL":
-            fatal.append(f"TARGETS_HERE: the target {tg} reads {vmap[tg]}, not IDENTICAL")
+            if streaming and vmap[tg] == "UP-TO-INSTANCES" and (target_ok or {}).get(tg, (False,))[0]:
+                continue
+            note = (target_ok or {}).get(tg, (False, ""))[1] if streaming else ""
+            fatal.append(f"TARGETS_HERE: the target {tg} reads {vmap[tg]}, not IDENTICAL" + (f" ({note})" if note else ""))
     for t in out:
         if t[1] in STRIP and t[3] in ("IDENTICAL", "UP-TO-INSTANCES"):
             fatal.append(f"STRIP lists {t[1]}, which does not differ (the list is stale)")
+    if streaming:
+        for lab in sorted(INSTANCE_EVIDENCE):
+            if lab in vmap and not (vmap[lab] == "UP-TO-INSTANCES" and
+                                    next(t[6] for t in out if t[1] == lab).startswith("INSTANCE_EVIDENCE")):
+                fatal.append(f"INSTANCE_EVIDENCE lists {lab}, which reads {vmap[lab]} without the rule (the list is "
+                             "stale, or the receipt or the allowed constants do not cover it)")
     failing = [t for t in out if t[3] in ("DIFFERENT", "ABSENT-HERE")]
     counts = {}
     for t in out:
@@ -1317,7 +1374,8 @@ def _ruled_finish(out, fatal, seen, quiet, write):
                     fh.write("\t".join([t[0], t[1], t[2], t[3], " ".join(t[4]) or "—", " ".join(t[5]) or "—", t[6]]) + "\n")
     if not quiet:
         for t in out:
-            if t[3] in ("DIFFERENT", "ABSENT-HERE", "RULED", "ADAPTED") or (t[3] == "PIN-DIFFERENCE" and t[0] != "aux"):
+            if t[3] in ("DIFFERENT", "ABSENT-HERE", "RULED", "ADAPTED") or (t[3] == "PIN-DIFFERENCE" and t[0] != "aux") \
+                    or (streaming and t[6].startswith(("INSTANCE_EVIDENCE", "TARGET_IN_LIBRARY"))):
                 print(f"{t[3]}\t{t[0]}\t{t[1]}\t{t[6][:300]}")
         for (c, v), k in sorted(counts.items()):
             print(f"  {c:12s} {v:16s} {k}")
@@ -1326,6 +1384,381 @@ def _ruled_finish(out, fatal, seen, quiet, write):
             print(f"FATAL: {f}")
         print(f"constants: {len(out)}  failing: {len(failing)}  fatal: {len(fatal)}")
     return out, failing, fatal, seen
+
+
+def self_test_stream(label):
+    """`self_test`'s plants, planted into the stream (every one a full streaming pass, so the self-test runs within the
+    reader's memory), and FS131-LP1's plants for its rules.  The selections the in-memory self-test read off the whole
+    loaded print are made by one streaming survey with the same predicates; the planted blocks are read by a second.
+    Each plant's verdict is appended to data/fs131/lp1/readback/selftest-progress/<label>.txt as it is reached; `--resume` skips the plants
+    already recorded there (the survey and the unplanted pass are run again: about two minutes)."""
+    setup(label)
+    rp, op = print_paths(label)
+    base_r, base_o = source(rp), source(op)
+    record = rb.RECORD.read_text() if rb.RECORD.exists() else None
+    # FS131-LP1: the progress file under this job's directory, never under another job's label (a label holding a
+    # `/` is another job's directory: data/fs131/ipb1/readback/…)
+    pdir = ROOT / "data/fs131/lp1/readback/selftest-progress"
+    pdir.mkdir(parents=True, exist_ok=True)
+    prog = pdir / (re.sub(r"[^\w.-]+", "_", str(label)) + ".txt")
+    done = {}
+    if "--resume" in sys.argv and prog.exists():
+        for ln in prog.read_text().splitlines():
+            what, _, verdict = ln.rpartition("\t")
+            done[what] = verdict
+    else:
+        prog.write_text("")
+    _, failing, fatal, _ = ruled_compare_stream(base_r, base_o, quiet=True)
+    if failing or fatal:
+        print(f"SELF-TEST FAILED: the unplanted pair does not pass ({len(failing)} failing, {len(fatal)} fatal)")
+        return 1
+    print("unplanted: PASS (as it must)", flush=True)
+    # the survey: the in-memory self-test's selections, made block by block on the same loaded dicts
+    rows = cone_constants()
+    order = {label_of(n): k for k, (n, _, _, _) in enumerate(rows)}
+    rs, os_ = Stepper(base_r, order), Stepper(base_o, order)
+    kinds, present = {}, []
+    defs, thms, mathc, anti, ident, uses_ofpred = [], [], None, [], None, False
+    users = {h: [] for h in CLASS_PARAMS}
+    types = {}
+    ai_here = sorted((ADAPTED_INSTANCE | ADAPTED_ASCRIPTION) & set(order))
+    for name, _, _, _ in rows:
+        lab = label_of(name)
+        rbk, obk = rs.take(lab), os_.take(lab)
+        if rbk is None:
+            continue
+        d = rb.load("\n".join(rbk))[0].get(lab)
+        if d is None:
+            continue
+        present.append(lab)
+        kinds[lab] = d["kind"]
+        plain = not rb.AUXNAME.search(lab) and not lab.startswith("§private.")
+        if d["kind"] == "def" and "(nat " in (d["value"] or "") and plain:
+            defs.append(lab)
+        if d["kind"] == "theorem" and "(pi.d " in (d["type"] or "") and plain:
+            thms.append(lab)
+            if mathc is None:
+                cs = [c for c in sorted(rb.constants(d["etype"])) if c.startswith("Mathlib") is False
+                      and not c.startswith("§") and "." in c]
+                if cs:
+                    mathc = (lab, cs[0])
+        if ANTIDIAG in (d["type"] or ""):
+            anti.append(lab)
+        for h in CLASS_PARAMS:
+            if f"(c {h} [" in (d["etype"] or "") and not rb.AUXNAME.search(lab):
+                users[h].append(lab)
+        if "(c setOf [" in (d["type"] or "") + (d["value"] or ""):
+            uses_ofpred = True
+        if lab in TARGETS_HERE or lab in PIN_DIFFERENCE:
+            types[lab] = d["type"] or ""
+        if ident is None and lab not in ai_here and d["kind"] == "theorem" and obk is not None:
+            o = rb.load("\n".join(obk), here=True)[0].get(lab)
+            if o and o["type"] == d["type"]:
+                ident = lab
+    here_lines = sum(1 for _ in raw_lines(op))
+    # FS131-LP1: a withdrawn rule is a control only where it is load-bearing.  CLASS_PARAMS: the users whose erased prints
+    # differ at the two pins with the rule off (read block by block, the rule withdrawn for the read); where none does,
+    # the rule is idle on this label and its withdrawal can fire nothing — reported UNREACHABLE, not counted
+    cp_needed = {h: [] for h in CLASS_PARAMS}
+    want_cp = {u for us in users.values() for u in us}
+    if want_cp:
+        saved_cp0 = dict(CLASS_PARAMS)
+        CLASS_PARAMS.clear()
+        try:
+            rs2, os2 = Stepper(base_r, order), Stepper(base_o, order)
+            for name, _, _, _ in rows:
+                lab = label_of(name)
+                rbk, obk = rs2.take(lab), os2.take(lab)
+                if lab not in want_cp or rbk is None or obk is None:
+                    continue
+                r0 = rb.load("\n".join(rbk))[0].get(lab)
+                o0 = rb.load("\n".join(obk), here=True)[0].get(lab)
+                if r0 and o0 and (r0["etype"] != o0["etype"] or r0["evalue"] != o0["evalue"]):
+                    for h in saved_cp0:
+                        if lab in users.get(h, []):
+                            cp_needed[h].append(lab)
+        finally:
+            CLASS_PARAMS.update(saved_cp0)
+    pset = set(present)
+    strip_here = [lab for lab in STRIP if lab in pset]
+    need = set(thms[:3]) | set(defs[:1]) | set(anti[:1]) | {u[0] for u in users.values() if u} | \
+        set(sorted(COEFF_LEMMAS & pset)[:1]) | set(sorted(EQSET_LEMMAS & pset)[:1]) | set(strip_here) | \
+        (set(RULED) & pset) | (ADAPTED_VALUE & pset) | (set(PROOF_ONLY) & pset) | (TARGETS_HERE & pset) | \
+        (PIN_DIFFERENCE & pset) | (set(INSTANCE_EVIDENCE) & pset) | ({mathc[0]} if mathc else set())
+    blk = {"rel": {}, "here": {}}
+    for side, path in (("rel", rp), ("here", op)):
+        for kind, *rest in blocks(raw_lines(path)):
+            if kind == "B" and rest[0] in need and rest[0] not in blk[side]:
+                blk[side][rest[0]] = rest[1]
+    print(f"survey: {len(present)} constants, {len(thms)} theorems with an explicit binder, {len(defs)} definitions "
+          f"with a numeral; {len(need)} blocks read for the plants; this pin's print {here_lines} lines", flush=True)
+    ok, n = True, 0
+
+    def expect(what, our=None, rel=None, renamed=None, rec=None, want_fatal=None, setup_fn=None, undo_fn=None):
+        nonlocal ok, n
+        n += 1
+        if what in done:
+            print(f"plant '{what}': {done[what]} (recorded; --resume)")
+            ok = ok and done[what] == "REFUSED"
+            return
+        if setup_fn:
+            setup_fn()
+        try:
+            _, f, ft, _ = ruled_compare_stream(rel or base_r, our or base_o, renamed=renamed, quiet=True,
+                                               record=record if rec is None else rec)
+        finally:
+            if undo_fn:
+                undo_fn()
+        fired = bool(f or ft)
+        hit = fired and (want_fatal is None or any(want_fatal in x for x in ft))
+        verdict = "REFUSED" if hit else "SILENT" if not fired else "REFUSED FOR ANOTHER REASON"
+        print(f"plant '{what}': {verdict} ({len(f)} failing, {len(ft)} fatal)", flush=True)
+        with open(prog, "a") as fh:
+            fh.write(f"{what}\t{verdict}\n")
+        ok = ok and hit
+
+    def over(side, lab, lines):
+        return source(rp if side == "rel" else op, {lab: lines})
+
+    def plant(lab, old, new, fields=("type  ", "etype ", "value ", "evalue"), side="here"):
+        out = list(blk[side][lab])
+        k = 0
+        for i in range(1, len(out)):
+            if out[i][7:13] in fields and old in out[i]:
+                out[i] = out[i].replace(old, new, 1)
+                k += 1
+        assert k, (lab, old)
+        return over(side, lab, out)
+
+    def plant_arg(side, lab, head, pos, new, field="etype "):
+        out = list(blk[side][lab])
+        k = next(x for x in range(1, len(out)) if out[x][7:13] == field)
+        t = parse(out[k][15:])
+        hit = [0]
+
+        def go(x):
+            if isinstance(x, str):
+                return x
+            if is_app(x):
+                h, args = spine(x)
+                h, args = go(h), [go(a) for a in args]
+                if not hit[0] and isinstance(h, list) and h[:2] == ["c", head] and len(args) > pos:
+                    hit[0] = 1
+                    if callable(new):
+                        return new(h, args)
+                    args = args[:pos] + [new] + args[pos + 1:]
+                return build(h, args)
+            return [go(y) for y in x]
+        out[k] = out[k][:15] + unparse(go(t))
+        assert hit[0], (lab, head)
+        return over(side, lab, out)
+
+    def swap(name, value):
+        saved = {}
+
+        def do():
+            saved["v"] = globals()[name]
+            globals()[name] = value
+
+        def undo():
+            globals()[name] = saved["v"]
+        return do, undo
+
+    # FS131-IPA1's and FS131-IPB1's plants (self_test's), in its order
+    if mathc:
+        lab1, c1 = mathc
+        expect(f"a constant changed in a statement ({c1}, in {lab1})", plant(lab1, f"(c {c1} [", f"(c {c1}' ["))
+    if defs:
+        m = re.search(r"\(nat (\d+)\)", next(ln for ln in blk["here"][defs[0]] if ln[7:13] == "value "))
+        expect(f"a numeral changed in a definition's value ({defs[0]})",
+               plant(defs[0], f"(nat {m.group(1)})", f"(nat {int(m.group(1)) + 1})"))
+    expect(f"a binder kind changed ({thms[1]})", plant(thms[1], "(pi.d ", "(pi.i "))
+    expect(f"a declaration missing from this pin's print ({thms[2]})", over("here", thms[2], None))
+    hb = list(blk["here"][thms[2]])
+    hb[0] = hb[0].replace(": theorem", ": axiom")
+    expect(f"a theorem turned into an axiom ({thms[2]})", over("here", thms[2], hb))
+    expect("a truncated print", source(op, truncate=here_lines // 2))
+    expect("the record lists a constant that does not differ", rec=(record or "") + "\nNoSuch.constant\n",
+           want_fatal="stale")
+    for lab, classes in RULED.items():
+        if lab not in pset:
+            continue
+        b = list(blk["here"][lab])
+        k = next(x for x in range(1, len(b)) if b[x][7:13] == "etype ")
+        first = re.search(r"\(pi\.d ", b[k])
+        for what, ins in (("one other binder inserted", "(pi.c inst ((c MeasurableSpace [(p u_1)]) @0) "),
+                          (f"a second {classes[-1]} binder inserted",
+                           f"(pi.c inst (((({'c'} {classes[-1]} [(p u_1)]) @0) _) _) ")):
+            o2 = list(b)
+            o2[k] = o2[k][:first.start()] + ins + o2[k][first.start():] + ")"
+            expect(f"RULED {lab}: {what}", over("here", lab, o2))
+    if anti:
+        a0 = anti[0]
+        expect(f"ANTIDIAG: the antidiagonal's type argument changed ({a0})",
+               plant(a0, f"(c {ANTIDIAG} [0]) (c Nat []))", f"(c {ANTIDIAG} [0]) (c Int []))", fields=("etype ",)))
+        do, undo = swap("ANTIDIAG", "No.such.constant")
+        expect(f"ANTIDIAG withdrawn ({a0})", setup_fn=do, undo_fn=undo)
+    for head, pos in sorted(CLASS_PARAMS.items()):
+        if not users[head]:
+            continue
+        u0 = users[head][0]
+        expect(f"CLASS_PARAMS {head}: its argument {pos - 1} changed ({u0})",
+               plant_arg("here", u0, head, pos - 1, "(c Planted.instance [])"))
+        saved_cp = dict(CLASS_PARAMS)
+        if cp_needed[head]:
+            expect(f"CLASS_PARAMS {head} withdrawn ({len(users[head])} users)", setup_fn=CLASS_PARAMS.clear,
+                   undo_fn=lambda: CLASS_PARAMS.update(saved_cp))
+        else:
+            print(f"CLASS_PARAMS {head} withdrawn: UNREACHABLE on this label — of its {len(users[head])} user(s), none "
+                  "has erased prints that differ at the two pins with the rule withdrawn (the rule is idle here); not "
+                  "a plant, not counted", flush=True)
+    coeff_here = sorted(COEFF_LEMMAS & pset)
+    if coeff_here:
+        c0 = coeff_here[0]
+
+        # self_test's plant: the first coercion of the release's etype whose type is a `Finsupp` gets another head
+        b = list(blk["rel"][c0])
+        k = next(x for x in range(1, len(b)) if b[x][7:13] == "etype ")
+        t = parse(b[k][15:])
+        hit = [0]
+
+        def go2(x):
+            if isinstance(x, str):
+                return x
+            if is_app(x):
+                h, args = spine(x)
+                h, args = go2(h), [go2(a) for a in args]
+                if not hit[0] and isinstance(h, list) and h[:2] == ["c", COEFF_HEAD] and len(args) == 6 and \
+                        isinstance(args[0], list) and spine(args[0])[0][:2] == ["c", "Finsupp"]:
+                    hit[0] = 1
+                    return build(["c", COEFF_HEAD + "'", h[2]], args)
+                return build(h, args)
+            return [go2(y) for y in x]
+        b[k] = b[k][:15] + unparse(go2(t))
+        assert hit[0], c0
+        expect(f"COEFF: another coercion head at a site ({c0})", rel=over("rel", c0, b))
+        expect(f"COEFF withdrawn ({len(coeff_here)} lemmas)", setup_fn=lambda: STATE.update(coeff=False),
+               undo_fn=lambda: STATE.update(coeff=True))
+        expect(f"COEFF: {c0} taken out of the list", setup_fn=lambda: COEFF_LEMMAS.discard(c0),
+               undo_fn=lambda: COEFF_LEMMAS.add(c0))
+    eq_here = sorted(EQSET_LEMMAS & pset)
+    if eq_here:
+        e0 = eq_here[0]
+        expect(f"EQSET: another head at a site ({e0})",
+               rel=plant(e0, f"(c {EQSET_HEAD} [", f"(c {EQSET_HEAD}' [", fields=("etype ",), side="rel"))
+        expect(f"EQSET withdrawn ({len(eq_here)} lemmas)", setup_fn=lambda: STATE.update(eqset=False),
+               undo_fn=lambda: STATE.update(eqset=True))
+        expect(f"EQSET: {e0} taken out of the list", setup_fn=lambda: EQSET_LEMMAS.discard(e0),
+               undo_fn=lambda: EQSET_LEMMAS.add(e0))
+    if (ADAPTED_INSTANCE | ADAPTED_ASCRIPTION) & pset and ident:
+        expect(f"ADAPTED_INSTANCE lists an IDENTICAL declaration ({ident})", want_fatal="ADAPTED_INSTANCE",
+               setup_fn=lambda: ADAPTED_INSTANCE.add(ident), undo_fn=lambda: ADAPTED_INSTANCE.discard(ident))
+    if strip_here:
+        def raw(h):
+            return h if not h.startswith("§.") else "HadwigerNelson.Outside.OAI158." + h[2:]
+        bmem = next(lab for lab in strip_here if STRIP[lab][0] and kinds[lab] == "theorem")
+        b = list(blk["here"][bmem])
+        k = next(x for x in range(1, len(b)) if b[x][7:13] == "etype ")
+        first = re.search(r"\(pi\.d ", b[k])
+        for what, ins in (("one other binder inserted", "(pi.c inst ((c MeasurableSpace [(p u_1)]) @0) "),
+                          ("a second MeasurableInv binder inserted",
+                           "(pi.c inst ((((c MeasurableInv [(p u_1)]) @0) _) _) ")):
+            o2 = list(b)
+            o2[k] = o2[k][:first.start()] + ins + o2[k][first.start():] + ")"
+            expect(f"STRIP {bmem}: {what}", over("here", bmem, o2))
+        amem = next(lab for lab in strip_here if not STRIP[lab][0] and _CE in STRIP[lab][1])
+        expect(f"STRIP {amem}: another argument (3) changed at a `center` site",
+               plant_arg("here", amem, raw(_CE), 3, "(c Planted.embedding [])"))
+        pmem = next(lab for lab in strip_here if STRIP[lab][1] == [_PM])
+        expect(f"STRIP {pmem}: the map (argument 5) changed at a `ProbabilityMeasure.map` site",
+               plant_arg("here", pmem, _PM, 5, "(c Planted.map [])"))
+        saved_st = dict(STRIP)
+        expect(f"STRIP withdrawn ({len(strip_here)} declarations)", setup_fn=STRIP.clear,
+               undo_fn=lambda: STRIP.update(saved_st))
+        lmem = next(lab for lab in strip_here if STRIP[lab] == ([], [_CE]))
+        expect(f"STRIP {lmem}: a head listed that does not occur in it",
+               setup_fn=lambda: STRIP.__setitem__(lmem, ([], [_CE, _PM])),
+               undo_fn=lambda: STRIP.__setitem__(lmem, ([], [_CE])))
+    # FS131-IPD1's rules
+    for lab in sorted(ADAPTED_VALUE & pset):
+        # FS131-LP1: the rule refuses what does not read IDENTICAL or UP-TO-INSTANCES, so its plant changes the value
+        # where the erased print sees it (its head `inferInstance`, an explicit position); an instance argument changed
+        # alone reads UP-TO-INSTANCES, which the rule accepts by its ruling, and is refused by the record of instance
+        # constants — that second plant says so
+        expect(f"ADAPTED_VALUE: {lab}'s value changed outright (its head, an explicit position)",
+               plant(lab, "(c inferInstance [", "(c Planted.inferInstance [", fields=("value ", "evalue")),
+               want_fatal="ADAPTED_VALUE")
+        expect(f"ADAPTED_VALUE: {lab}'s value changed in an instance argument only (the record refuses it)",
+               plant(lab, "(c IsMulCommutative.instCommRing [", "(c Planted.instCommRing [", fields=("value ", "evalue")),
+               want_fatal="the record does not hold")
+    for d, aux in sorted(PROOF_ONLY.items()):
+        if d in pset:
+            expect(f"PROOF_ONLY: {d}'s value changed", plant(d, "(c MeasureTheory.MemLp.toLp [",
+                   "(c Planted.toLp [", fields=("value ", "evalue")), want_fatal="PROOF_ONLY")
+        if aux in pset:
+            saved_po = dict(PROOF_ONLY)
+            expect(f"PROOF_ONLY: the auxiliary named wrongly ({d}._proof_99)", want_fatal="PROOF_ONLY",
+                   setup_fn=lambda: PROOF_ONLY.__setitem__(d, d + "._proof_99"),
+                   undo_fn=lambda: (PROOF_ONLY.clear(), PROOF_ONLY.update(saved_po)))
+    for tg in sorted(TARGETS_HERE & pset):
+        expect(f"TARGETS_HERE: {tg}'s full type changed in an instance argument",
+               plant(tg, "(c Nat.instMulZeroClass [", "(c Planted.instMulZeroClass [", fields=("type  ",))
+               if "(c Nat.instMulZeroClass [" in types[tg] else
+               plant(tg, "(c Complex [", "(c Planted.Complex [", fields=("type  ",)), want_fatal="TARGETS_HERE")
+    for owner in sorted(PIN_DIFFERENCE):
+        if owner in pset:
+            expect(f"PIN-DIFFERENCE: the full type of {owner} changed",
+                   plant(owner, "(c CommGroup [", "(c CommGroup' [", fields=("type  ",)) if "(c CommGroup [" in
+                   types[owner] else plant(owner, "(c AddCommGroup [", "(c AddCommGroup' [", fields=("type  ",)))
+            break
+    if uses_ofpred:
+        expect("RENAMED without Set.ofPred", renamed={})
+    # FS131-LP1's plants: the four read-back items' rules
+    rot = "§.Spectral.instAddCommGroupRot"
+    if rot in pset:
+        expect(f"PIN-DIFFERENCE: the full type of {rot} changed",
+               plant(rot, "(c AddCommGroup [", "(c AddCommGroup' [", fields=("type  ",)))
+        expect(f"PIN-DIFFERENCE: {rot} taken out of the list", setup_fn=lambda: PIN_DIFFERENCE.discard(rot),
+               undo_fn=lambda: PIN_DIFFERENCE.add(rot))
+    for e in sorted(EQSET_LEMMAS & pset)[1:]:
+        expect(f"EQSET: {e} taken out of the list", setup_fn=lambda e=e: EQSET_LEMMAS.discard(e),
+               undo_fn=lambda e=e: EQSET_LEMMAS.add(e))
+    gu = "§.CommutingSpectral.generator_unitary"
+    if gu in pset:
+        nowhere = ROOT / "data/fs131/lp1/readback/no-such-evidence.out"
+        do, undo = swap("EVIDENCE", nowhere)
+        expect(f"INSTANCE_EVIDENCE: {gu} with no receipt", want_fatal="INSTANCE_EVIDENCE", setup_fn=do, undo_fn=undo)
+        saved_ie = {k: set(v) for k, v in INSTANCE_EVIDENCE.items()}
+        expect(f"INSTANCE_EVIDENCE: {gu}'s allowed constants withdrawn", want_fatal="INSTANCE_EVIDENCE",
+               setup_fn=lambda: INSTANCE_EVIDENCE.__setitem__(gu, set()),
+               undo_fn=lambda: INSTANCE_EVIDENCE.update(saved_ie))
+        expect(f"INSTANCE_EVIDENCE: another constant of the release's own in {gu}'s instance argument",
+               plant(gu, "(c Semigroup.toMul [", "(c HadwigerNelson.Outside.OAI158.Planted.toMul [", fields=("type  ",)),
+               want_fatal="INSTANCE_EVIDENCE")
+        failed = label_dir(label) / "evidence-planted-failed.out"
+        failed.write_text(EVIDENCE.read_text().replace(f"INSTANCE-EVIDENCE OK {gu}:", f"INSTANCE-EVIDENCE FAILED {gu}:"))
+        do, undo = swap("EVIDENCE", failed)
+        expect(f"INSTANCE_EVIDENCE: the receipt's line for {gu} reads FAILED", want_fatal="INSTANCE_EVIDENCE",
+               setup_fn=do, undo_fn=undo)
+        failed.unlink()
+    for tg in sorted(TARGET_IN_LIBRARY & pset):
+        saved_tl = set(TARGET_IN_LIBRARY)
+        expect(f"TARGET_IN_LIBRARY: {tg} taken out of the list", want_fatal="TARGETS_HERE",
+               setup_fn=lambda tg=tg: TARGET_IN_LIBRARY.discard(tg),
+               undo_fn=lambda: TARGET_IN_LIBRARY.update(saved_tl))
+        nowhere = ROOT / "data/fs131/lp1/readback/no-such-evidence.out"
+        do, undo = swap("EVIDENCE", nowhere)
+        expect(f"TARGET_IN_LIBRARY: {tg} with no receipt", want_fatal="TARGETS_HERE", setup_fn=do, undo_fn=undo)
+        expect(f"TARGET_IN_LIBRARY: a constant outside Mathlib in {tg}'s instance argument",
+               plant(tg, "(c DivisionSemiring.toSemiring [", "(c Planted.toSemiring [", fields=("type  ",)),
+               want_fatal="TARGETS_HERE")
+        b = [ln.replace("DivisionSemiring.toSemiring @ Mathlib.", "DivisionSemiring.toSemiring @ Proofs.Planted.")
+             if ln.startswith("USES ") else ln for ln in blk["here"][tg]]
+        assert b != blk["here"][tg]
+        expect(f"TARGET_IN_LIBRARY: a differing constant's USES line placed outside Mathlib ({tg})",
+               over("here", tg, b), want_fatal="TARGETS_HERE")
+    print(f"SELF-TEST OK: {n} plants refused, the unplanted pair passes" if ok else "SELF-TEST FAILED")
+    return 0 if ok else 1
 
 
 def equivalence(label):

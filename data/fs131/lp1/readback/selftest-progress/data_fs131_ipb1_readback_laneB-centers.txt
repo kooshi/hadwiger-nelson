@@ -1,0 +1,14 @@
+a constant changed in a statement (HSub.hSub, in §.Location.kernel_diff_bound)	REFUSED
+a numeral changed in a definition's value (§.Location.Ambient)	REFUSED
+a binder kind changed (§.Location.integrable_kernel)	REFUSED
+a declaration missing from this pin's print (§.Location.objective_zero)	REFUSED
+a theorem turned into an axiom (§.Location.objective_zero)	REFUSED
+a truncated print	REFUSED
+the record lists a constant that does not differ	REFUSED
+STRIP §.CosetCenter.Embedding.center_mem_coset: one other binder inserted	REFUSED
+STRIP §.CosetCenter.Embedding.center_mem_coset: a second MeasurableInv binder inserted	REFUSED
+STRIP §.CosetCenter.Embedding.measurable_center: another argument (3) changed at a `center` site	REFUSED
+STRIP §.Location.center_translate: the map (argument 5) changed at a `ProbabilityMeasure.map` site	REFUSED
+STRIP withdrawn (18 declarations)	REFUSED
+STRIP §.CosetCenter.Embedding.measurable_center: a head listed that does not occur in it	REFUSED
+RENAMED without Set.ofPred	REFUSED

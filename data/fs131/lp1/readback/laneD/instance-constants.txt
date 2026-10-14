@@ -17,6 +17,7 @@ Algebra.toModule
 BoundedOrder.toOrderBot
 CStarAlgebra.toNormedRing
 CommCStarAlgebra.toNormedCommRing
+CommRing.toCommSemiring
 CommRing.toNonAssocCommRing
 CommSemiring.toSemiring
 CompleteLattice.toBoundedOrder
@@ -31,7 +32,9 @@ Complex.instCommSemiring
 Complex.instField
 Complex.instNonUnitalCommRing
 Complex.instNormedField
+Complex.instRing
 Complex.instSemiring
+ContinuousLinearMap.ring
 DivisionRing.toDivisionSemiring
 DivisionRing.toRing
 DivisionSemiring.toSemiring
@@ -53,6 +56,7 @@ MeasureTheory.AEEqFun.instAddMonoid
 MeasureTheory.Lp.instAddCommGroup
 Monoid.toMul
 Monoid.toSemigroup
+MulOne.toMul
 NonAssocCommRing.toNonAssocRing
 NonUnitalCommRing.toNonUnitalNonAssocCommRing
 NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing
@@ -81,6 +85,7 @@ SeminormedCommRing.toNonUnitalSeminormedCommRing
 Semiring.toAddCommMonoid
 Semiring.toMonoid
 Semiring.toNonAssocSemiring
+StarSubalgebra.subsemiringClass
 Subalgebra
 Subalgebra.algebra
 Subalgebra.instModuleSubtypeMem
@@ -91,13 +96,23 @@ Subgroup.instSubgroupClass
 Subgroup.toGroup
 SubgroupClass.toSubmonoidClass
 SubmonoidClass.toMonoid
+SubmonoidClass.toMonoid._proof_5
+SubmonoidClass.toMulMemClass
+SubringClass.toRing._proof_8
 SubringClass.toSubsemiringClass
 SubsemiringClass.toAddSubmonoidClass
 SubsemiringClass.toCommSemiring
+SubsemiringClass.toSemiring._proof_7
 SubsemiringClass.toSubmonoidClass
 instCommCStarAlgebraComplex
 instOfNatAtLeastTwo
 §.BoundedMeasurable.mulLpLinear._proof_3
+§.CommutingSpectral.algebra._proof_1
+§.CommutingSpectral.algebra._proof_2
+§.CommutingSpectral.algebra._proof_3
+§.CommutingSpectral.algebra._proof_8
+§.CommutingSpectral.algebra_commRing
+§.CommutingSpectral.algebra_commRing._proof_1
 §.CommutingSpectral.algebra_commRing._proof_2
 §.CommutingSpectral.algebra_commRing._proof_3
 §.CommutingSpectral.calculus._proof_1
@@ -128,3 +143,7 @@ instOfNatAtLeastTwo
 §.VectorMeasure.cyclicIsometry._proof_1
 §.VectorMeasure.cyclicIsometry._proof_2
 §.VectorMeasure.cyclicMap._proof_10
+§.VectorMeasure.vectorLinear._proof_2
+§.VectorMeasure.vectorLinear._proof_3
+§.VectorMeasure.vectorLinear._proof_4
+§.VectorMeasure.vectorLinear._proof_6
