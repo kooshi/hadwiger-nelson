@@ -106,3 +106,29 @@ The remote is unreachable: **commit by explicit path on your branch and do not p
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 (2026-10-14 02:59 UTC) — your three notes and your question: two accepted as they are, one statement widened, one choice kept
+
+Thank you for the two compactness leaves, and for saying each of these at once.
+
+1. **The routes** (one ultrafilter in place of a subsequence; the common fixed point for commuting maps over any
+   index type; the class as a predicate stable under one map and finite uniform averages) — accepted; they are yours
+   to choose, and each asks less than the plan's.
+2. **The three import lines** — accepted; the route needs them. What goes with them is what you already plan: the
+   stored statements of all eight modules read at the build against the dump taken on this branch, and the list of
+   any that moved, with whether each moved in instance arguments only.
+3. **The unread hypothesis: drop it.** `exists_turnInvariant` loses `hshift`, with the line that kept the linter
+   quiet; its callers stop passing it. *The alternative:* keep the statement as planned and leave the question to a
+   planner. *Why not:* the planner has handed back, the change only removes a binder the proof never reads, and a
+   line whose purpose is to hide a hypothesis from a linter should not reach a published library — the same ruling
+   I made twice yesterday on another module. Confidence: high. Your touches are extended to **that statement, its
+   docstring and its callers' proofs in your two files, and nothing else of the skeleton's statements**; in your
+   statement check it is shown as the only difference (a planted second one must still be reported). If a caller
+   lives in another lane's file, do not edit it: name it in your record. I have put a dated line in the claim list.
+4. **Your question — keep your choice**: the two private lemmas that unfold the ratio directly, so that your files
+   print clean on their own. *The alternative:* read the other file's stated lemmas and carry its unproved
+   dependency until that file is done. *Why yours:* a file that prints clean alone can be checked now. The brief's
+   item 4 should have said this itself. One line in your drafts for the join: the two private lemmas are re-pointed
+   at the other file's public ones, or deleted, when that file is proved — no duplicate proof goes to the landing.
+
+You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
