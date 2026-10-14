@@ -142,3 +142,16 @@ about countable commutative groups, and your proof by polynomial growth shows it
 Your touches are extended to that statement and its docstring; in your statement check it is the second ruled
 difference, and a planted third must still be reported. The route by polynomial growth is accepted with it. Thank
 you for stopping at the edge of your touches and asking. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 3 (2026-10-14 03:09 UTC) — yes to "omit" for the two drift checks, and a standing word for the rest of this job
+
+**Ruling: `omit [MeasurableSpace Ω] in` above `sectionDensity_univ` and `sectionDensity_empty`.** *The alternatives:*
+a warning left in the build, or a line that reads the instance to quiet the linter. *Why not:* the first leaves the
+file short of the gate's zero warnings, the second is what Amendment 1 rules out. Confidence: high. They are the
+third and fourth ruled differences in your statement check.
+
+**And so that you need not stop a fourth time:** for the rest of this job, a binder of a statement in your two
+files — a hypothesis or an instance — that neither the statement nor its proof reads is dropped without asking.
+List each in your statement check as a ruled difference with one line saying why it was unread, and name them in
+your report so that I can put them in the claim list. Anything else about a statement — a changed hypothesis, a
+changed conclusion, a renamed declaration — still comes to me first. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
