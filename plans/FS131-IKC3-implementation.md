@@ -18,6 +18,8 @@ Each [kernel], printed from the built tree (`data/fs131/ikc3/axioms.txt`):
 - `HadwigerNelson.FibreCertSound.model_eleven` — the hypotheses of both inhabited together (`φ = 0`; `I = {0}`); the
   standard three.
 - `cert11_p`, `cert11_unum`, `cert11_scale`, `cert11_nseg` — the certificate's stored numbers, by `rfl`; no axioms.
+- In a probe file, not the library (`data/fs131/ikc3/f2/KtabSound.lean`): `FS131IKC3KT.ktable_eq_of_chk` — F2's K-table
+  pieces passing, with the lengths, give `ktable C = kt`; `[propext, Quot.sound]` (`logs/ktabsound-axioms.txt`).
 
 ## Stage 1 — SAVED: the readback
 
@@ -210,4 +212,98 @@ positions allow).
 
 ### 3.5 The p = 19 data module with unlimited heartbeats
 
-(stage 4: the run was still going when this stage was saved)
+See § Stage 4.
+
+## Stage 4 — SAVED: the p = 19 data elaborated whole, the K-table check proved sound in a probe, the smaller witness checked
+
+* **The p = 19 data as one `def`, with `maxHeartbeats 0` and `maxRecDepth 400000`** (`p19/Cert19probeH.lean`, the
+  converter's output with those two options, `logs/probes5/`): elaborates in **10 min 36 s at 1.51 GB**. So the 96 MB
+  of literals parse at about 0.15 MB/s in one process; cut into per-block and per-field definitions in about ten modules
+  they would elaborate in parallel in about a minute each. The default heartbeat limit is the only thing that stopped
+  § 3.2's run.
+* **The K-table check is sound** (F2 item (b)'s soundness step, written ahead of the wiring): `ktable_eq_of_chk` in
+  `data/fs131/ikc3/f2/KtabSound.lean` (core Lean, about 50 lines with `rowsEq_eq`, `entEq_eq`): if
+  `(ktable C).length = kt.length`, `kt.length ≤ R·k` and `ktabChk C kt k r = true` for every `r < R`, then
+  `ktable C = kt`. `[propext, Quot.sound]`, printed with a planted `sorry` record reading `[sorryAx]`
+  (`logs/ktabsound-axioms.txt`).
+* **The `2^40` witness holds at every block** in the converter's model: all 22 blocks at p = 11 and all 38 at p = 19
+  stay diagonally dominant (`data/fs131/ikc3/f2/witness_scale.py`, imports the converter's own `mp_cholesky_int` and
+  `check_dd`; `logs/witness11.log`, `logs/witness19.log`, `FAILS 0`; its failure path is the converter's model, whose
+  refusal of a non-dominant block is the `SystemExit` exercised by `tools/fs131_ikc3_psdprobe.py`). The kernel check of
+  one such block passed (§ 3.1, `B1s40`). Adopting it is a converter option, no proof change.
+* **The environment linters**: `lake lint --no-build -- --no-build --trace` under the slot: `-- Linting passed for
+  Proofs.`, exit 0 (`logs/lint.log`).
+* **Not run** (the landing's): the axiom audit, the vacuity scan, the assumptions step and the doubled-names scan over the
+  whole library. For the vacuity scan's reading: `sum_le_eleven`'s and `card_le_eleven`'s hypotheses are inhabited by
+  `model_eleven` (`φ = 0`; `I = {0}`, a non-empty independent set). Their only structure is `cert11`, a closed term
+  whose acceptance is `cert11_ok`.
+
+### Slips, my own
+
+* A waiter on build 1 was armed on `==> build:`, which `build.sh` prints as its first line, so it fired at once (the
+  documented failure, `RUNNING.md` § Make the gate fail). Seen in its output at once; nothing was acted on; the waiters
+  after it were armed on the exit file, each checked absent before arming.
+
+## Drafts for the front page
+
+### `scripts/Axioms.lean`, CLEAN (for the landing; a block after FS131-IKC2's)
+
+```
+-- FS131-IKC3 block: `Arith/FibreCert11*` — 17 records: FS-66's p = 11 certificate accepted, the bound at p = 11
+#print axioms HadwigerNelson.FibreCert.cert11_seg0
+#print axioms HadwigerNelson.FibreCert.cert11_seg1
+#print axioms HadwigerNelson.FibreCert.cert11_seg2
+#print axioms HadwigerNelson.FibreCert.cert11_seg3
+#print axioms HadwigerNelson.FibreCert.cert11_seg4
+#print axioms HadwigerNelson.FibreCert.cert11_seg5
+#print axioms HadwigerNelson.FibreCert.cert11_seg6
+#print axioms HadwigerNelson.FibreCert.cert11_seg7
+#print axioms HadwigerNelson.FibreCert.cert11_global
+#print axioms HadwigerNelson.FibreCert.cert11_psd
+#print axioms HadwigerNelson.FibreCert.cert11_p
+#print axioms HadwigerNelson.FibreCert.cert11_unum
+#print axioms HadwigerNelson.FibreCert.cert11_scale
+#print axioms HadwigerNelson.FibreCert.cert11_nseg
+#print axioms HadwigerNelson.FibreCert.cert11_ok
+#print axioms HadwigerNelson.FibreCertSound.sum_le_eleven
+#print axioms HadwigerNelson.FibreCertSound.card_le_eleven
+#print axioms HadwigerNelson.FibreCertSound.model_eleven
+-- FS131-IKC3 block end
+```
+(18 lines; each a subset of the standard three in the built tree, § 2.4.)
+
+### `data/fs131/claims-NF2.md` § Dated lines (to follow the last)
+
+- 2026-10-14 — **FS-66's p = 11 certificate is accepted in the library, and the class-ratio bound at p = 11 is a kernel
+  theorem** (FS131-IKC3): `FibreCert.cert11_ok : certOK cert11 = true` from ten `decide +kernel` declarations (eight
+  identity segments, the shape, positive definiteness), each at most 6.82 GiB and 56 s, 394 s in all;
+  `FibreCertSound.sum_le_eleven` (`Σφ ≤ U/L = 28.2043…` for `φ : (ℤ/11)² → [0,1]` with `q(φ) ≥ 0`) and
+  `card_le_eleven`, on the standard three. `certOK`'s definition and the soundness theorems' statements unchanged.
+- 2026-10-14 — **F2 at p = 19 is designed and three of its parts probed; not built** (FS131-IKC3 § Stage 3): PSD per block
+  (no checker change; 45–62 s and 5.3–5.9 GB a block), the K table as a checked literal (10 s and 2.8 GB per five maps
+  after a 100 s parse; its soundness lemma proved in a probe), phase 1 by orbit range (four pieces at p = 11, each
+  22–26 s and 3.7 GB, shares summing to phase 1's bound), each refusing a planted fault in the kernel. The p = 19 data is
+  96 MB of text (17 MB more with the K table) and elaborates in 10 min 36 s only with the heartbeat limit lifted. F2 is
+  re-priced at about 40–50 minutes of kernel CPU and 800–1,100 proof lines; the scatter by position is designed, not
+  written.
+
+### `LEAN.md` § Building (after the bullet on the laptop)
+
+- **Heavy generated modules that import only their data sit on one level of the import graph, and `build.sh` cuts its
+  batches from one level**: ten certificate checks of 5–7 GB importing one data module would be compiled side by side
+  under one cap. Chained by imports (each check module imports the previous), each is the only module of its batch that
+  needs compiling, and the build stays under `MEMMAX=10G` at `BATCH=8` (`Arith/FibreCert11Seg0` … `Psd`; read the plan
+  with `python3 scripts/build_order.py 8` first) (FS131-IKC3).
+- A module's peak resident set during the build can be read by sampling `ps -C lean -o pid=,rss=,args=` every half
+  second for its file name (`data/fs131/ikc3/rss_sampler.sh`): 6.82 GiB sampled against 6.81 GiB from `/usr/bin/time -v`
+  on the same module (FS131-IKC3).
+
+### `LEAN.md` § The kernel's cost model (after the last bullet)
+
+- **One `def` holding about 96 MB of hex literals exceeds the elaborator's default `maxHeartbeats` (200,000)**: it
+  stopped after 3 min 14 s, and with the limit lifted (and `maxRecDepth 400000`) elaborated in 10 min 36 s at 1.51 GB,
+  about 0.15 MB/s. A 17.4 MB file of 1,520 literals of 47 kbit parses in about 100 s. Cut certificate data into a
+  definition per block or field, in modules that elaborate in parallel (FS131-IKC3, p = 19).
+- **A PSD witness's scale is a converter choice the proof does not see** (`psdCheck` reads `sb`, `wm`, `wB` from the
+  block): FS-66's blocks stay diagonally dominant at `2^40` as at `2^120` (22 at p = 11, 38 at p = 19), and a 183 × 183
+  block's check went from 62 s and 5.9 GB to 45 s and 5.3 GB, its text from 2.7 to 1.3 MB (FS131-IKC3).

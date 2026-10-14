@@ -1,0 +1,24 @@
+sb=40 block=0 m=63 dominant=True row=None Mbits=93 0.3s
+sb=40 block=1 m=63 dominant=True row=None Mbits=57 0.2s
+sb=40 block=2 m=2 dominant=True row=None Mbits=55 0.0s
+sb=40 block=3 m=63 dominant=True row=None Mbits=58 0.2s
+sb=40 block=4 m=2 dominant=True row=None Mbits=55 0.0s
+sb=40 block=5 m=63 dominant=True row=None Mbits=57 0.2s
+sb=40 block=6 m=2 dominant=True row=None Mbits=55 0.0s
+sb=40 block=7 m=63 dominant=True row=None Mbits=58 0.2s
+sb=40 block=8 m=2 dominant=True row=None Mbits=55 0.0s
+sb=40 block=9 m=63 dominant=True row=None Mbits=58 0.2s
+sb=40 block=10 m=2 dominant=True row=None Mbits=56 0.0s
+sb=40 block=11 m=63 dominant=True row=None Mbits=57 0.2s
+sb=40 block=12 m=2 dominant=True row=None Mbits=55 0.0s
+sb=40 block=13 m=63 dominant=True row=None Mbits=57 0.2s
+sb=40 block=14 m=2 dominant=True row=None Mbits=55 0.0s
+sb=40 block=15 m=63 dominant=True row=None Mbits=57 0.2s
+sb=40 block=16 m=2 dominant=True row=None Mbits=55 0.0s
+sb=40 block=17 m=63 dominant=True row=None Mbits=58 0.2s
+sb=40 block=18 m=2 dominant=True row=None Mbits=55 0.0s
+sb=40 block=19 m=63 dominant=True row=None Mbits=57 0.2s
+sb=40 block=20 m=2 dominant=True row=None Mbits=55 0.0s
+sb=40 block=21 m=2 dominant=True row=None Mbits=89 0.0s
+FAILS 0
+exit 0
