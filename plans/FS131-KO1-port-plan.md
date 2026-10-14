@@ -436,3 +436,30 @@ a module whose theorems range over the release's own structures adds sites that 
    compare the real modules before and after and decide.
 4. **`Representations` and `BorelTransfer`'s shared declarations** (op, space, the 45 others) are not yet compared
    (4.5, step 0, is the check).
+
+## Drafts for the filing (files this job does not write; each names its slot)
+
+**F1. `LEAN.md` § Assumptions, the bullet "An outside Lean proof may be ported instead of imported"** — the adaptation
+line of 4.3; and, following it: *"A cone computed from the source's compiled constants misses what a proof uses only
+definitionally — an `rfl` lemma a `simp` rewrites with leaves no constant in the term (eight unknown identifiers and
+most of 53 errors in three files, FS131-KO1) — so where the files of the cone import nothing outside it, the port copies
+whole files and the cone is the check that nothing it holds is missed."*
+
+**F2. `LEAN.md` § Searching — Lean**, new bullets.
+- *"Between Mathlib `v4.32.0` and `v4.34.1` `Measure.map` changed its definition: at `v4.32.0` the push-forward by a map
+  that is not almost-everywhere measurable is `0`, at `v4.34.1` a measure of the same mass; and
+  `ProbabilityMeasure.map (ν) {f} (f_aemble : AEMeasurable f ν)` there takes only `(f)`. A text written at the later pin
+  that writes `ν.map g` for a probability measure, or `⟨μ.map g, inferInstance⟩`, names the same object here as
+  `ν.map (f := g) h` and `⟨μ.map g, isProbabilityMeasure_map h⟩` (FS131-KO1)."*
+- *"Importing `Mathlib.Order.CompletePartialOrder` reroutes the `SupSet` of a supremum in a complete lattice through
+  `CompletePartialOrder.toSupSet`: four stored statements of this library that take a `⨆` moved, instance arguments
+  only, when a module saw it (`seven_le_chromaticNumber_plane_iff`, `Plane.mOne`, …; `data/fs131/ko1/exposure/`).
+  A port leaves it out of its imports (FS131-IE1, FS131-KO1)."*
+- *"`convert h using 1` can leave two goals at the pin where the source's pin left one; the source's closing tactic
+  then closes the first and leaves the second: run it with `all_goals` (FS132-I2, FS131-KO1). `isAlgebraic_natCast`
+  is `isAlgebraic_nat` at the pin."*
+
+**F3. `ARCHITECTURE.md`** — no row now (the trial's modules are not registered); lane D writes the 32 rows.
+
+**F4. `BIBLIOGRAPHY.md`** — no new work; `[OAIMath2026]`'s row may add: "the transfer's cone, measured from its
+compiled constants: 1,299 declarations, 12,005 source lines in 32 files (FS131-KO1)".
