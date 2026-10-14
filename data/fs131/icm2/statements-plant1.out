@@ -1,0 +1,90 @@
+BINDER-MISS HadwigerNelson.Rigidity.tca_iff (ClassRatio): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.RatioAtMost (ClassRatio): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.unitVectorsR (CountCompletion): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.exists_invariantColouring_rat (CountModels): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.not_r88TCA_rat (CountModels): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.ratColouring (CountModels): names Subfield, lacks NumberField
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.σK
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.res
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.recOn
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.sum_Kn
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvAt._proof_5
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.rec
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.σu
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.res_mk
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvAt._proof_10
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvAt._proof_8
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvAt._proof_9
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.ι
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.σι
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.ι_sq
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.sub_mem_Kn
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvAt._proof_7
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.card_res_fibre
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv._sizeOf_1
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.Kp
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.res._proof_2
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.isUnit_mk_of_notMem
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.Kn
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.two_u
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.mk._flat_ctor
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvAt_K
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvAt._proof_12
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.mk.sizeOf_spec
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.noConfusion
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvAt._proof_4
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.card_Kp_eq
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvAt._proof_1
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.mem_Kn
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.card_Kf_eq
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.sq
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvAt
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.σ
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.natCard_ker_red
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.res_red
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.card_Kn_sq
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.red_conj
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.Kf
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.card_levelSet_succ
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.conj_conj_at
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.card_levelSet_one._simp_1_1
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.noConfusionType
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.invol
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.mem_Kp
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvAt._proof_6
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvAt._proof_2
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvAt._proof_3
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.K
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.mk
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.casesOn
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.mk_mem_ker_red
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvAt._proof_11
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.card_lift
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.res_mem_levelSet
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.natCard_quot_pow
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.u
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.res._proof_1
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.res_zero
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.neg_mem_levelSet
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.mk.injEq
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.add_mem_Kn
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv._sizeOf_inst
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.ctorIdx
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.norm_sum_le
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.mk.noConfusion
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvAt_σ
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.card_Kn_at
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.pm_of_good
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.norm_charSum_new_le._simp_1_1
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.card_levelSet_one
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.mem_Kf
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.mk.inj
+SAME=44 CHANGED=0 RULED=0 MISSING=0 ADDED-INTERNAL=76 ADDED-GENERATED=0 NEW-MODULE=0 ADDED-PUBLIC=0
+PRIVATE-SAME=69 PRIVATE-CHANGED=0 PRIVATE-MISSING=0
+PLANT type-char in HadwigerNelson.Rigidity.Counting.instSecondCountableTopologyK: CHANGED=1 -> FIRED
+PLANT drop HadwigerNelson.Rigidity.Counting.instSecondCountableTopologyK: MISSING=1 -> FIRED
+PLANT add public in CountCompletion: ADDED-PUBLIC=1 -> FIRED
+PLANT binder in HadwigerNelson.Rigidity.tca_of_five_le_localBound: misses=7 -> FIRED
+PLANT type-char in private HadwigerNelson.Rigidity.card_fibre: PRIVATE-CHANGED=1 -> FIRED
+plant: ALL FIRED

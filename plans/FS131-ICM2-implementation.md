@@ -6,7 +6,18 @@ from `fs131-wcm` at `0dea51730`, in the tree `.claude/worktrees/fs131-wch`. Work
 
 ## Theorems this phase proved
 
-*(filled at each saved stage)*
+Read from the built tree after build 1 (`data/fs131/icm2/axioms1.out`, `axioms1-read.out`).
+
+- `Rigidity.tca_uniform`, `Rigidity.exists_uniform_tail` (`Rigidity/ClassRatio`, public) — [kernel, outside]:
+  `[propext, Classical.choice, Quot.sound, StandingFive.kloosterman_bound]` — Weil's bound (declared) and the standard three;
+  no `sorry`. Read against: "T-C(A) with one constant — the tail's constant and the finitely many primes below `B`"
+  (its docstring), the form the count reads.
+- Private, the standard three: `card_fibre` (Hensel's fibre count), `norm_charSum_new_le` (a character new at a level),
+  and so `charBound_of_charBound_one` (Lemma P), with their helpers (`SqZeroInv.card_lift`, `SqZeroInv.norm_sum_le`,
+  `SqZeroInv.pm_of_good`, `card_res_fibre`, `card_levelSet_succ`, …).
+- `Rigidity.Counting.count_of_oneAvoidingDensityBound` (`CountDescent`, not this job's file) — its `sorryAx` now comes
+  only from `Plane.upperDensity_le_of_oneAvoidingDensityBound` and `Rigidity.noRamifiedStableDyadic_of_tca`; no leaf of
+  M13 is under it.
 
 ## Stage 1 — SAVED: the readback
 
@@ -58,3 +69,57 @@ declares: nothing to send.
 | `ratioAtMost_dyadic` | `2 ∈ P`, `¬ IsRamified P`, `5 ≤ χ(levelTarget P 1)` ⟹ `∃ c < 1/4, RatioAtMost P c` | KR1 § 2.6 (c): `Q = 64` exact, `128` `Floor128`, `Q ≥ 256` EN1-UQ4; Lemma P's dyadic form | — |
 | `charBound_one_exact` | `2 ∉ P`, `|𝓞 ⧸ P| = Q²`, `Q ∈ {23, 27, 31}` ⟹ `∃ κ < 1/3, 2/(Q+1) ≤ κ ∧ CharBound P 1 κ` | KC13 § 5.3: exact rational cosine bounds at 23 and 31, the integer spectrum at 27 | — |
 | `ratioAtMost_cert` | `2 ∉ P`, `|𝓞 ⧸ P| = Q²`, `Q ∈ {11, 19}` ⟹ `∃ c < 1/4, RatioAtMost P c` | stays named: the link to line `fs131-wc15`/`fs131-wc16` | — |
+
+## Stage 2 — SAVED: Lemma P's two leaves proved; `tca_uniform` rests on Weil's bound and the standard three
+
+**Proved** (≈ 617 lines net in `Rigidity/ClassRatio`, all private; no statement, no definition of the file changed —
+§ the check below). The price was ≈ 350–700 lines; it came in at the top of that.
+
+*The algebra, once, in the abstract* (`section LemmaPAlgebra`, ≈ 260 lines). `SqZeroInv R`: a finite commutative ring
+with an involution `σ`, an ideal `K` with `K·K = 0` and `σK ⊆ K`, `2u = 1`, and `ι` with `ι² = −1`, `σι = −ι`. `Kn` is
+`K`'s `−1` part, `Kp` its `+1` part.
+- `card_Kn_sq`: `|Kn|² = |K|` (`K = Kp ⊕ Kn` by `f ↦ (u(f + σf), u(f − σf))`, and `ι·` swaps the parts).
+- `card_lift` (**Hensel**): if `N(x₀) − 1 = d ∈ K`, the `e ∈ K` with `N(x₀ + e) = 1` are `e = (σx₀)⁻¹(w − ud)`, `w ∈ Kn`
+  (`(σx₀)⁻¹ = x₀(1 − d)`), so there are `|Kn|` of them.
+- `norm_sum_le` (**averaging over `1 + Kn`**): each `1 + w`, `w ∈ Kn`, has norm one (`w² = 0`), so
+  `|Kn|·Σ_S ψ = Σ_{x∈S} ψ(x)·Σ_{w∈Kn} ψ(xw)`, the inner sum `|Kn|` or `0`, and `‖Σ_S ψ‖ ≤ #{x ∈ S : ψ kills x·Kn}`.
+- `pm_of_good` (**two lines in `ker ψ` are one**): if `ψ` is non-trivial on `K` and kills `x·Kn` and `x'·Kn`, then
+  `x' ≡ ±x` modulo any prime `M` outside which everything is a unit — else `σx'·x − x'·σx` is a unit, so `(a, b) ↦ xa + x'b`
+  is injective on `Kn × Kn`, hence onto `K` by `|Kn|² = |K|`, and `ψ` is trivial on `K`.
+
+*At the residue rings* (≈ 360 lines). `sqZeroInvAt P h2 n` at `R = 𝓞 ⧸ P^{n+2}`, `K = ker red`: `K·K ⊆ P^{2n+2}/P^{n+2} = 0`;
+`2` a unit modulo `P^m` (`isUnit_mk_of_notMem`: `ya + i = 1`, `i ∈ P`, and a geometric sum); `ι` the residue of `i`.
+`|𝓞 ⧸ P^m| = Q^{2m}` (`cardQuot_pow_of_prime`), so `|ker red| = Q²` (`Submodule.card_eq_card_quotient_mul_card` with
+`RingHom.quotientKerEquivOfSurjective`) and `|Kn| = Q` (`card_Kn_at`).
+- **`card_fibre`**: a lift `x₀` of `t`; `x ↦ x − x₀` carries the fibre onto the lifts of norm one; `card_lift`.
+- **`norm_charSum_new_le`**: `norm_sum_le`; the good `x` lie in two residue classes modulo `P` (`pm_of_good` with
+  `M = ker res`, `res : 𝓞 ⧸ P^{n+2} → 𝓞 ⧸ P`); each class has `Q^{n+1}` norm-one elements (`card_res_fibre`, by
+  induction from `card_fibre`), and `|S_{n+2}| = Q^{n+1}(Q + 1)` (`card_levelSet_succ`, with `|S₁| = Q + 1` by
+  `card_levelSet_one`, `card_normOne` as in `charBound_one_weil`). So `‖Σ‖ ≤ 2Q^{n+1} = (2/(Q + 1))·|S_{n+2}|`.
+
+**The route differs from the recorded one, and needs less.** No uniformizer, no inertness of `P` over `F`, no
+`k₀`-vector-space structure on `P^{n+1}/P^{n+2}`: the count of `K` from the norms of `P`'s powers replaces
+one-dimensionality, and averaging over the subgroup `1 + Kn` replaces averaging over the fibres (the recorded route's
+"`W_x` depends only on `x mod P`" is not used). The abstract lemmas need no number field: any finite ring with an
+involution and a square-zero stable ideal in which `2` is a unit and `−1` is a square with `σι = −ι`.
+
+**Build 1** under the slot (`--mem 10 --cpus 4`, `MEMMAX=10G BATCH=8`; `data/fs131/icm2/logs/build-1.log`, full output
+`logs/build-1-full.log.xz`, `build/gate/build/20261014T183347Z-111841.log`): **OK — 257 of 257 batches, 7 modules
+rebuilt, 7 m 51 s, exit 0**. `ClassRatio` (9.3 s) and its downstream `CountResidue`, `CountCompletion`, `CountExtension`,
+`CountDescent`, `CountModels` rebuilt; the only warnings from this job's files are the four remaining leaves' `declaration
+uses 'sorry'` (`ClassRatio.lean` lines 961, 966, 974, 981). `tools/check_architecture.py`: **PASS**
+(`logs/architecture-1.log`).
+
+**No statement and no definition changed, from the kernel's side** (`statements-after1.txt.xz` against stage 1's;
+`statements-compare1.out`): **SAME 44, CHANGED 0, MISSING 0, ADDED-PUBLIC 0; PRIVATE-SAME 69, PRIVATE-CHANGED 0** (the six
+leaves, `levelSet`, `CharBound`, `red` and every earlier private helper among them), ADDED-INTERNAL 76 — PASS; **five
+plants fire** (`statements-plant1.out`, the private leaf's among them).
+
+**Axioms** (`data/fs131/icm2/lean/Axioms.lean`, FS131-ICM1's printer; reader `tools/fs131_icm2_axioms.py`, the four
+remaining leaves named by `--leaves`; `axioms1-read.out`): **156 records — CLEAN 144, IMPORTED 5, UPSTREAM 7, FAIL 0**.
+IMPORTED (Weil's bound and the standard three, no `sorry`): **`tca_uniform`**, **`exists_uniform_tail`**, `charBound_one_weil`,
+`ratioAtMost_weil`, `ratioAtMost_weil_lt`. UPSTREAM: the four leaves; `ratioAtMost_of_five_le_chromaticNumber` and
+`tca_of_five_le_localBound` over them; `count_of_oneAvoidingDensityBound` over `Plane.upperDensity_le_of_oneAvoidingDensityBound`
+and `Rigidity.noRamifiedStableDyadic_of_tca` only. Read with no leaf list the same output gives **FAIL 6**
+(`axioms1-read-noleaves.out`, exit 1: the four leaves and their two consumers); the planted `sorry` and axiom **2 of 2
+FAIL** (`axioms1-plant-read.out`). The one line was sent to the coordinator.

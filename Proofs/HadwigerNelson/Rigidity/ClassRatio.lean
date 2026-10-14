@@ -166,6 +166,308 @@ private theorem card_ne_fifteen_sq [NumberField F] (P : StablePrime F) : Nat.car
   rw [hp3] at h5
   exact absurd (Nat.prime_five.dvd_of_dvd_pow h5) (by norm_num)
 
+section LemmaPAlgebra
+
+open Finset
+
+-- FS131-ICM2: Lemma P's algebra, in a finite ring with an involution `σ` and an ideal `K` of square zero stable under
+-- `σ`, in which `2` is a unit (`2u = 1`) and some `ι` has `ι² = −1`, `σι = −ι`. `Kn` is the `−1` part of `K`, `Kp` the
+-- `+1` part.
+private structure SqZeroInv (R : Type*) [CommRing R] where
+  σ : R →+* R
+  invol : ∀ x, σ (σ x) = x
+  K : Ideal R
+  sq : ∀ a ∈ K, ∀ b ∈ K, a * b = 0
+  σK : ∀ a ∈ K, σ a ∈ K
+  u : R
+  two_u : 2 * u = 1
+  ι : R
+  ι_sq : ι ^ 2 = -1
+  σι : σ ι = -ι
+
+open Classical in
+private noncomputable def SqZeroInv.Kn {R : Type*} [CommRing R] [Fintype R] (D : SqZeroInv R) : Finset R :=
+  univ.filter fun w => w ∈ D.K ∧ D.σ w = -w
+
+open Classical in
+private noncomputable def SqZeroInv.Kp {R : Type*} [CommRing R] [Fintype R] (D : SqZeroInv R) : Finset R :=
+  univ.filter fun w => w ∈ D.K ∧ D.σ w = w
+
+open Classical in
+private noncomputable def SqZeroInv.Kf {R : Type*} [CommRing R] [Fintype R] (D : SqZeroInv R) : Finset R :=
+  univ.filter fun w => w ∈ D.K
+
+section SqZeroInv
+
+variable {R : Type*} [CommRing R] [Fintype R]
+
+private theorem SqZeroInv.mem_Kn (D : SqZeroInv R) {w : R} : w ∈ D.Kn ↔ w ∈ D.K ∧ D.σ w = -w := by
+  classical
+  unfold SqZeroInv.Kn
+  simp
+
+private theorem SqZeroInv.mem_Kp (D : SqZeroInv R) {w : R} : w ∈ D.Kp ↔ w ∈ D.K ∧ D.σ w = w := by
+  classical
+  unfold SqZeroInv.Kp
+  simp
+
+private theorem SqZeroInv.mem_Kf (D : SqZeroInv R) {w : R} : w ∈ D.Kf ↔ w ∈ D.K := by
+  classical
+  unfold SqZeroInv.Kf
+  simp
+
+omit [Fintype R] in
+private theorem SqZeroInv.σu (D : SqZeroInv R) : D.σ D.u = D.u := by
+  have h := congrArg D.σ D.two_u
+  rw [map_mul, map_ofNat, map_one] at h
+  linear_combination D.u * h - D.σ D.u * D.two_u
+
+private theorem SqZeroInv.card_Kp_eq (D : SqZeroInv R) : D.Kp.card = D.Kn.card := by
+  refine card_nbij' (fun a => D.ι * a) (fun b => -(D.ι * b)) ?_ ?_ ?_ ?_
+  · intro a ha
+    rw [Finset.mem_coe, D.mem_Kp] at ha
+    rw [Finset.mem_coe, D.mem_Kn]
+    refine ⟨D.K.mul_mem_left _ ha.1, ?_⟩
+    rw [map_mul, D.σι, ha.2]; ring
+  · intro b hb
+    rw [Finset.mem_coe, D.mem_Kn] at hb
+    rw [Finset.mem_coe, D.mem_Kp]
+    refine ⟨D.K.neg_mem (D.K.mul_mem_left _ hb.1), ?_⟩
+    rw [map_neg, map_mul, D.σι, hb.2]; ring
+  · intro a _
+    show -(D.ι * (D.ι * a)) = a
+    linear_combination (-a) * D.ι_sq
+  · intro b _
+    show D.ι * -(D.ι * b) = b
+    linear_combination (-b) * D.ι_sq
+
+private theorem SqZeroInv.card_Kf_eq (D : SqZeroInv R) : D.Kf.card = D.Kp.card * D.Kn.card := by
+  rw [← card_product]
+  symm
+  refine card_nbij' (fun p => p.1 + p.2) (fun f => (D.u * (f + D.σ f), D.u * (f - D.σ f))) ?_ ?_ ?_ ?_
+  · rintro ⟨a, b⟩ hab
+    rw [Finset.mem_coe, mem_product, D.mem_Kp, D.mem_Kn] at hab
+    rw [Finset.mem_coe, D.mem_Kf]
+    exact D.K.add_mem hab.1.1 hab.2.1
+  · intro f hf
+    rw [Finset.mem_coe, D.mem_Kf] at hf
+    rw [Finset.mem_coe, mem_product, D.mem_Kp, D.mem_Kn]
+    have hσf := D.σK f hf
+    refine ⟨⟨D.K.mul_mem_left _ (D.K.add_mem hf hσf), ?_⟩, ⟨D.K.mul_mem_left _ (D.K.sub_mem hf hσf), ?_⟩⟩
+    · rw [map_mul, map_add, D.invol, D.σu]; ring
+    · rw [map_mul, map_sub, D.invol, D.σu]; ring
+  · rintro ⟨a, b⟩ hab
+    rw [Finset.mem_coe, mem_product, D.mem_Kp, D.mem_Kn] at hab
+    simp only [map_add, hab.1.2, hab.2.2, Prod.mk.injEq]
+    constructor
+    · linear_combination a * D.two_u
+    · linear_combination b * D.two_u
+  · intro f _
+    show D.u * (f + D.σ f) + D.u * (f - D.σ f) = f
+    linear_combination f * D.two_u
+
+/-- The `−1` part of `K` has a square's worth of `K`. -/
+private theorem SqZeroInv.card_Kn_sq (D : SqZeroInv R) : D.Kn.card ^ 2 = D.Kf.card := by
+  rw [D.card_Kf_eq, D.card_Kp_eq, pow_two]
+
+open Classical in
+/-- **Hensel in the abstract**: the lifts `x₀ + e`, `e ∈ K`, of norm one are as many as the `−1` part of `K`, whenever
+`N(x₀) ≡ 1 (mod K)` — they are `e = z(w − u·d)`, `w` in the `−1` part, `d = N(x₀) − 1`, `z = (σx₀)⁻¹`. -/
+private theorem SqZeroInv.card_lift (D : SqZeroInv R) {x₀ : R} (hx₀ : x₀ * D.σ x₀ - 1 ∈ D.K) :
+    (D.Kf.filter fun e => (x₀ + e) * D.σ (x₀ + e) = 1).card = D.Kn.card := by
+  obtain ⟨d, hd⟩ : ∃ d, x₀ * D.σ x₀ - 1 = d := ⟨_, rfl⟩
+  rw [hd] at hx₀
+  have hxy : x₀ * D.σ x₀ = 1 + d := by rw [← hd]; ring
+  have hσd : D.σ d = d := by rw [← hd, map_sub, map_mul, D.invol, map_one]; ring
+  have hdd : d * d = 0 := D.sq d hx₀ d hx₀
+  have hyz : D.σ x₀ * (x₀ * (1 - d)) = 1 := by linear_combination (1 - d) * hxy - hdd
+  symm
+  refine card_nbij' (fun w => x₀ * (1 - d) * (w - D.u * d)) (fun e => D.σ x₀ * e + D.u * d) ?_ ?_ ?_ ?_
+  · intro w hw
+    rw [Finset.mem_coe, D.mem_Kn] at hw
+    rw [Finset.mem_coe, Finset.mem_filter, D.mem_Kf]
+    have heK : x₀ * (1 - d) * (w - D.u * d) ∈ D.K :=
+      D.K.mul_mem_left _ (D.K.sub_mem hw.1 (D.K.mul_mem_left _ hx₀))
+    refine ⟨heK, ?_⟩
+    have hee := D.sq _ heK _ (D.σK _ heK)
+    have heσ : x₀ * (1 - d) * (w - D.u * d) * D.σ x₀ = w - D.u * d := by
+      linear_combination (w - D.u * d) * hyz
+    have hσe' : D.σ (x₀ * (1 - d) * (w - D.u * d)) = D.σ x₀ * (1 - d) * (-w - D.u * d) := by
+      simp only [map_mul, map_sub, map_one, hσd, hw.2, D.σu]
+    have hσe : x₀ * D.σ (x₀ * (1 - d) * (w - D.u * d)) = -w - D.u * d := by
+      rw [hσe']
+      linear_combination (1 - d) * (-w - D.u * d) * hxy - (-w - D.u * d) * hdd
+    rw [map_add]
+    linear_combination hxy + hσe + heσ + hee - d * D.two_u
+  · intro e he
+    rw [Finset.mem_coe, Finset.mem_filter, D.mem_Kf] at he
+    rw [Finset.mem_coe, D.mem_Kn]
+    refine ⟨D.K.add_mem (D.K.mul_mem_left _ he.1) (D.K.mul_mem_left _ hx₀), ?_⟩
+    have hee : e * D.σ e = 0 := D.sq e he.1 _ (D.σK e he.1)
+    have hN := he.2
+    rw [map_add] at hN
+    rw [map_add, map_mul, map_mul, D.invol, D.σu, hσd]
+    linear_combination hN - hxy - hee + d * D.two_u
+  · intro w _
+    show D.σ x₀ * (x₀ * (1 - d) * (w - D.u * d)) + D.u * d = w
+    linear_combination (w - D.u * d) * hyz
+  · intro e _
+    show x₀ * (1 - d) * (D.σ x₀ * e + D.u * d - D.u * d) = e
+    linear_combination e * hyz
+
+/-- The `−1` part of `K` is closed under adding one of its own. -/
+private theorem SqZeroInv.add_mem_Kn (D : SqZeroInv R) {w w₁ : R} (hw : w ∈ D.Kn) (hw₁ : w₁ ∈ D.Kn) :
+    w + w₁ ∈ D.Kn := by
+  rw [D.mem_Kn] at hw hw₁ ⊢
+  exact ⟨D.K.add_mem hw.1 hw₁.1, by rw [map_add, hw.2, hw₁.2]; ring⟩
+
+private theorem SqZeroInv.sub_mem_Kn (D : SqZeroInv R) {w w₁ : R} (hw : w ∈ D.Kn) (hw₁ : w₁ ∈ D.Kn) :
+    w - w₁ ∈ D.Kn := by
+  rw [D.mem_Kn] at hw hw₁ ⊢
+  exact ⟨D.K.sub_mem hw.1 hw₁.1, by rw [map_sub, hw.2, hw₁.2]; ring⟩
+
+/-- A character's sum over `x·Kn` is `|Kn|` if it is trivial there and `0` otherwise. -/
+private theorem SqZeroInv.sum_Kn (D : SqZeroInv R) (ψ : AddChar R ℂ) (x : R) [Decidable (∀ w ∈ D.Kn, ψ (x * w) = 1)] :
+    ∑ w ∈ D.Kn, ψ (x * w) = if (∀ w ∈ D.Kn, ψ (x * w) = 1) then (D.Kn.card : ℂ) else 0 := by
+  split_ifs with hg
+  · rw [Finset.sum_congr rfl hg, sum_const, nsmul_eq_mul, mul_one]
+  · push Not at hg
+    obtain ⟨w₁, hw₁, hψ₁⟩ := hg
+    have hshift : ∑ w ∈ D.Kn, ψ (x * w) = ψ (x * w₁) * ∑ w ∈ D.Kn, ψ (x * w) := by
+      rw [mul_sum]
+      refine sum_nbij' (fun w => w - w₁) (fun w => w + w₁) (fun w hw => D.sub_mem_Kn hw hw₁)
+        (fun w hw => D.add_mem_Kn hw hw₁) (fun w _ => by ring) (fun w _ => by ring) ?_
+      intro w _
+      rw [← AddChar.map_add_eq_mul]
+      congr 1
+      ring
+    have h0 : (1 - ψ (x * w₁)) * ∑ w ∈ D.Kn, ψ (x * w) = 0 := by linear_combination hshift
+    rcases mul_eq_zero.1 h0 with h | h
+    · exact absurd (sub_eq_zero.1 h).symm hψ₁
+    · exact h
+
+open Classical in
+/-- **Averaging over `1 + Kn`**: the sum of a character over the norm-one set is at most, in modulus, the number of
+norm-one `x` whose line `x·Kn` it kills. -/
+private theorem SqZeroInv.norm_sum_le (D : SqZeroInv R) (ψ : AddChar R ℂ) :
+    ‖∑ x ∈ univ.filter (fun x => x * D.σ x = 1), ψ x‖ ≤
+      ((univ.filter fun x => x * D.σ x = 1).filter fun x => ∀ w ∈ D.Kn, ψ (x * w) = 1).card := by
+  set S := univ.filter (fun x : R => x * D.σ x = 1) with hS
+  have hmemS : ∀ x, x ∈ S ↔ x * D.σ x = 1 := fun x => by simp [hS]
+  have hww : ∀ w ∈ D.Kn, w * w = 0 := fun w hw => by
+    rw [D.mem_Kn] at hw
+    exact D.sq w hw.1 w hw.1
+  -- each translate by `1 + w` permutes `S`
+  have htr : ∀ w ∈ D.Kn, ∑ x ∈ S, ψ x = ∑ x ∈ S, ψ (x * (1 + w)) := by
+    intro w hw
+    have hσw : D.σ w = -w := (D.mem_Kn.1 hw).2
+    refine sum_nbij' (fun x => x * (1 - w)) (fun x => x * (1 + w)) ?_ ?_ ?_ ?_ ?_
+    · intro x hx
+      rw [hmemS] at hx ⊢
+      rw [map_mul, map_sub, map_one, hσw]
+      linear_combination (1 - w * w) * hx - hww w hw
+    · intro x hx
+      rw [hmemS] at hx ⊢
+      rw [map_mul, map_add, map_one, hσw]
+      linear_combination (1 - w * w) * hx - hww w hw
+    · intro x _
+      show x * (1 - w) * (1 + w) = x
+      linear_combination (-x) * hww w hw
+    · intro x _
+      show x * (1 + w) * (1 - w) = x
+      linear_combination (-x) * hww w hw
+    · intro x _
+      show ψ x = ψ (x * (1 - w) * (1 + w))
+      congr 1
+      linear_combination x * hww w hw
+  have hmain : (D.Kn.card : ℂ) * ∑ x ∈ S, ψ x =
+      ∑ x ∈ S, ψ x * (if (∀ w ∈ D.Kn, ψ (x * w) = 1) then (D.Kn.card : ℂ) else 0) := by
+    calc (D.Kn.card : ℂ) * ∑ x ∈ S, ψ x = ∑ w ∈ D.Kn, ∑ x ∈ S, ψ (x * (1 + w)) := by
+          rw [Finset.sum_congr rfl (fun w hw => (htr w hw).symm), sum_const, nsmul_eq_mul]
+      _ = ∑ x ∈ S, ∑ w ∈ D.Kn, ψ x * ψ (x * w) := by
+          rw [Finset.sum_comm]
+          refine Finset.sum_congr rfl fun x _ => Finset.sum_congr rfl fun w _ => ?_
+          rw [← AddChar.map_add_eq_mul]
+          congr 1
+          ring
+      _ = _ := by
+          refine Finset.sum_congr rfl fun x _ => ?_
+          rw [← mul_sum, D.sum_Kn ψ x]
+  have hpos : (0 : ℝ) < D.Kn.card := by
+    have : (0 : R) ∈ D.Kn := by rw [D.mem_Kn]; exact ⟨D.K.zero_mem, by simp⟩
+    exact_mod_cast Finset.card_pos.2 ⟨0, this⟩
+  have hle : (D.Kn.card : ℝ) * ‖∑ x ∈ S, ψ x‖ ≤
+      (D.Kn.card : ℝ) * (S.filter fun x => ∀ w ∈ D.Kn, ψ (x * w) = 1).card := by
+    have h1 : ‖(D.Kn.card : ℂ) * ∑ x ∈ S, ψ x‖ = (D.Kn.card : ℝ) * ‖∑ x ∈ S, ψ x‖ := by
+      rw [norm_mul, Complex.norm_natCast]
+    rw [← h1, hmain]
+    refine (_root_.norm_sum_le _ _).trans ?_
+    have h2 : ∀ x ∈ S, ‖ψ x * (if (∀ w ∈ D.Kn, ψ (x * w) = 1) then (D.Kn.card : ℂ) else 0)‖ =
+        if (∀ w ∈ D.Kn, ψ (x * w) = 1) then (D.Kn.card : ℝ) else 0 := by
+      intro x _
+      rw [norm_mul, AddChar.norm_apply, one_mul]
+      split_ifs <;> simp
+    rw [Finset.sum_congr rfl h2, Finset.sum_ite, sum_const_zero, add_zero, sum_const, nsmul_eq_mul]
+    rw [mul_comm]
+  exact le_of_mul_le_mul_left hle hpos
+
+/-- **Two lines in the kernel of a character are one**: if `ψ` is non-trivial on `K` and kills both `x·Kn` and
+`x'·Kn` (`x`, `x'` of norm one), then `x' ≡ ±x` modulo a prime `M` outside which every element is a unit. -/
+private theorem SqZeroInv.pm_of_good (D : SqZeroInv R) (M : Ideal R) [hMp : M.IsPrime]
+    (hM : ∀ x, x ∉ M → IsUnit x) (ψ : AddChar R ℂ) (hψ : ∃ e ∈ D.K, ψ e ≠ 1) {x x' : R}
+    (hx : x * D.σ x = 1) (hx' : x' * D.σ x' = 1) (gx : ∀ w ∈ D.Kn, ψ (x * w) = 1)
+    (gx' : ∀ w ∈ D.Kn, ψ (x' * w) = 1) : x' - x ∈ M ∨ x' + x ∈ M := by
+  classical
+  by_contra hcon
+  push Not at hcon
+  obtain ⟨e, he, hψe⟩ := hψ
+  apply hψe
+  have hμ : IsUnit (D.σ x' * x - x' * D.σ x) := by
+    refine hM _ fun hμ => ?_
+    have h1 : (x' - x) * (x' + x) ∈ M := by
+      have h := M.mul_mem_left (x * x') hμ
+      have e : x * x' * (D.σ x' * x - x' * D.σ x) = -((x' - x) * (x' + x)) := by
+        linear_combination x ^ 2 * hx' - x' ^ 2 * hx
+      rw [e] at h
+      exact (M.neg_mem_iff).1 h
+    rcases hMp.mem_or_mem h1 with h | h
+    · exact hcon.1 h
+    · exact hcon.2 h
+  have hx'u : IsUnit x' := IsUnit.of_mul_eq_one _ hx'
+  have hinj : ∀ (p : R × R) (hp : p ∈ D.Kn ×ˢ D.Kn) (p' : R × R) (hp' : p' ∈ D.Kn ×ˢ D.Kn),
+      x * p.1 + x' * p.2 = x * p'.1 + x' * p'.2 → p = p' := by
+    rintro ⟨a, b⟩ hp ⟨a', b'⟩ hp' heq
+    rw [mem_product] at hp hp'
+    have hc := D.sub_mem_Kn hp.1 hp'.1
+    have hd := D.sub_mem_Kn hp'.2 hp.2
+    have hxc : x * (a - a') = x' * (b' - b) := by linear_combination heq
+    have hσxc : D.σ x * (a - a') = D.σ x' * (b' - b) := by
+      have := congrArg D.σ hxc
+      rw [map_mul, map_mul, (D.mem_Kn.1 hc).2, (D.mem_Kn.1 hd).2] at this
+      linear_combination -this
+    have hc0 : (D.σ x' * x - x' * D.σ x) * (a - a') = 0 := by
+      linear_combination D.σ x' * hxc - x' * hσxc
+    have ha : a - a' = 0 := (hμ.mul_right_eq_zero).1 hc0
+    have hb : x' * (b' - b) = 0 := by rw [← hxc, ha, mul_zero]
+    have hb' : b' - b = 0 := (hx'u.mul_right_eq_zero).1 hb
+    simp only [Prod.mk.injEq]
+    exact ⟨sub_eq_zero.1 ha, (sub_eq_zero.1 hb').symm⟩
+  have hsurj := Finset.surj_on_of_inj_on_of_card_le (s := D.Kn ×ˢ D.Kn) (t := D.Kf)
+    (fun p _ => x * p.1 + x' * p.2)
+    (fun p hp => by
+      rw [mem_product, D.mem_Kn, D.mem_Kn] at hp
+      rw [D.mem_Kf]
+      exact D.K.add_mem (D.K.mul_mem_left _ hp.1.1) (D.K.mul_mem_left _ hp.2.1))
+    (fun p p' hp hp' h => hinj p hp p' hp' h)
+    (by rw [card_product, ← pow_two, D.card_Kn_sq])
+  obtain ⟨⟨a, b⟩, hab, rfl⟩ := hsurj e (D.mem_Kf.2 he)
+  rw [mem_product] at hab
+  rw [AddChar.map_add_eq_mul, gx a hab.1, gx' b hab.2, one_mul]
+
+end SqZeroInv
+
+end LemmaPAlgebra
+
 -- FS131-ICM1: the named leaves.
 
 -- FS131-ICM1: the reduction from level `n + 2` to level `n + 1`.
@@ -207,6 +509,112 @@ private theorem exists_addChar_descent (P : StablePrime F) (n : ℕ) (ψ : AddCh
     rw [hker _ (Function.surjInv hsurj a + Function.surjInv hsurj b) (by rw [hs, map_add, hs, hs]),
       AddChar.map_add_eq_mul]
 
+-- FS131-ICM2: Lemma P at the residue rings — the abstract algebra above at `R = 𝓞 ⧸ P^{n+2}`, `K = ker red`.
+
+-- FS131-ICM2: an element outside `P` is a unit modulo every power of `P` (`ya + i = 1`, `i ∈ P`, and a geometric sum).
+private theorem isUnit_mk_of_notMem (P : StablePrime F) (m : ℕ) {a : 𝓞 (fieldI F)} (ha : a ∉ P.P) :
+    IsUnit (Ideal.Quotient.mk (P.P ^ m) a) := by
+  obtain ⟨y, i, hi, hyi⟩ := P.isMaximal.exists_inv ha
+  refine IsUnit.of_mul_eq_one (Ideal.Quotient.mk _ (y * ∑ j ∈ Finset.range m, i ^ j)) ?_
+  have e : a * (y * ∑ j ∈ Finset.range m, i ^ j) = 1 - i ^ m := by
+    rw [← mul_neg_geom_sum]
+    linear_combination (∑ j ∈ Finset.range m, i ^ j) * hyi
+  rw [← map_mul, e, map_sub, map_one, Ideal.Quotient.eq_zero_iff_mem.2 (Ideal.pow_mem_pow hi m), sub_zero]
+
+-- FS131-ICM2: a residue at level `n + 2` lies over `0` at level `n + 1` exactly when it comes from `P^{n+1}`.
+private theorem mk_mem_ker_red (P : StablePrime F) (n : ℕ) (a : 𝓞 (fieldI F)) :
+    Ideal.Quotient.mk (P.P ^ (n + 2)) a ∈ RingHom.ker (red P n) ↔ a ∈ P.P ^ (n + 1) := by
+  rw [RingHom.mem_ker, red_mk, Ideal.Quotient.eq_zero_iff_mem]
+
+-- FS131-ICM2: conjugation is an involution at every level.
+private theorem conj_conj_at (P : StablePrime F) (m : ℕ) (x : 𝓞 (fieldI F) ⧸ P.P ^ m) :
+    Ideal.quotientMap (P.P ^ m) (conjO F) (P.le_comap m) (Ideal.quotientMap (P.P ^ m) (conjO F) (P.le_comap m) x) =
+      x := by
+  obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
+  rw [Ideal.quotientMap_mk, Ideal.quotientMap_mk, UpperHalf.conjO_conjO]
+
+-- FS131-ICM2: the reduction commutes with conjugation.
+private theorem red_conj (P : StablePrime F) (n : ℕ) (x : 𝓞 (fieldI F) ⧸ P.P ^ (n + 2)) :
+    red P n (Ideal.quotientMap (P.P ^ (n + 2)) (conjO F) (P.le_comap (n + 2)) x) =
+      Ideal.quotientMap (P.P ^ (n + 1)) (conjO F) (P.le_comap (n + 1)) (red P n x) := by
+  obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
+  rw [Ideal.quotientMap_mk, red_mk, red_mk, Ideal.quotientMap_mk]
+
+-- FS131-ICM2: the data of the abstract algebra at level `n + 2`.
+private noncomputable def sqZeroInvAt (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) (n : ℕ) :
+    SqZeroInv (𝓞 (fieldI F) ⧸ P.P ^ (n + 2)) where
+  σ := Ideal.quotientMap (P.P ^ (n + 2)) (conjO F) (P.le_comap (n + 2))
+  invol := conj_conj_at P (n + 2)
+  K := RingHom.ker (red P n)
+  sq := by
+    intro a ha b hb
+    obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective a
+    obtain ⟨b, rfl⟩ := Ideal.Quotient.mk_surjective b
+    rw [mk_mem_ker_red] at ha hb
+    rw [← map_mul, Ideal.Quotient.eq_zero_iff_mem]
+    have h := Ideal.mul_mem_mul ha hb
+    rw [← pow_add] at h
+    exact Ideal.pow_le_pow_right (by omega) h
+  σK := by
+    intro a ha
+    obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective a
+    rw [mk_mem_ker_red] at ha
+    rw [Ideal.quotientMap_mk, mk_mem_ker_red]
+    exact P.le_comap (n + 1) ha
+  u := ((isUnit_mk_of_notMem P (n + 2) h2).unit⁻¹ : (𝓞 (fieldI F) ⧸ P.P ^ (n + 2))ˣ)
+  two_u := by
+    have h := (isUnit_mk_of_notMem P (n + 2) h2).mul_val_inv
+    convert h using 2
+    exact (map_ofNat _ 2).symm
+  ι := Ideal.Quotient.mk _ (exists_I_int (F := F)).choose
+  ι_sq := by rw [← map_pow, (exists_I_int (F := F)).choose_spec.1, map_neg, map_one]
+  σι := by rw [Ideal.quotientMap_mk, (exists_I_int (F := F)).choose_spec.2, map_neg]
+
+private theorem sqZeroInvAt_σ (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) (n : ℕ) :
+    (sqZeroInvAt P h2 n).σ = Ideal.quotientMap (P.P ^ (n + 2)) (conjO F) (P.le_comap (n + 2)) := rfl
+
+private theorem sqZeroInvAt_K (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) (n : ℕ) :
+    (sqZeroInvAt P h2 n).K = RingHom.ker (red P n) := rfl
+
+-- FS131-ICM2: `|𝓞 ⧸ P^m| = Q^{2m}` (`cardQuot_pow_of_prime`).
+private theorem natCard_quot_pow [NumberField F] (P : StablePrime F) {Q : ℕ}
+    (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) (m : ℕ) : Nat.card (𝓞 (fieldI F) ⧸ P.P ^ m) = Q ^ (2 * m) := by
+  haveI := P.isMaximal.isPrime
+  have h := cardQuot_pow_of_prime (S := 𝓞 (fieldI F)) (P := P.P) P.heightOne.ne_bot (i := m)
+  rw [Submodule.cardQuot_apply, Submodule.cardQuot_apply, hQ, ← pow_mul] at h
+  exact h
+
+-- FS131-ICM2: the kernel of the reduction has `Q²` elements.
+private theorem natCard_ker_red [NumberField F] (P : StablePrime F) {Q : ℕ}
+    (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) (n : ℕ) : Nat.card (RingHom.ker (red P n)) = Q ^ 2 := by
+  have h := Submodule.card_eq_card_quotient_mul_card (RingHom.ker (red P n))
+  rw [Nat.card_congr (RingHom.quotientKerEquivOfSurjective (f := red P n)
+    (Ideal.Quotient.factor_surjective _ : Function.Surjective (red P n))).toEquiv,
+    natCard_quot_pow P hQ, natCard_quot_pow P hQ] at h
+  have hQ0 : 0 < Q := by
+    rcases Nat.eq_zero_or_pos Q with h0 | h0
+    · haveI : Finite (𝓞 (fieldI F) ⧸ P.P) := Ideal.finiteQuotientOfFreeOfNeBot _ P.heightOne.ne_bot
+      have hpos : 0 < Nat.card (𝓞 (fieldI F) ⧸ P.P) := Nat.card_pos
+      rw [hQ, h0] at hpos
+      norm_num at hpos
+    · exact h0
+  have e : Q ^ (2 * (n + 2)) = Q ^ 2 * Q ^ (2 * (n + 1)) := by ring
+  rw [e] at h
+  exact (Nat.eq_of_mul_eq_mul_right (pow_pos hQ0 _) h).symm
+
+-- FS131-ICM2: at level `n + 2` the `−1` part of `K` has `Q` elements.
+private theorem card_Kn_at [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) {Q : ℕ}
+    (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) (n : ℕ) [Fintype (𝓞 (fieldI F) ⧸ P.P ^ (n + 2))] :
+    (sqZeroInvAt P h2 n).Kn.card = Q := by
+  classical
+  have hKf : (sqZeroInvAt P h2 n).Kf.card = Q ^ 2 := by
+    rw [← natCard_ker_red P hQ n, ← sqZeroInvAt_K P h2 n, Nat.card_eq_fintype_card, Fintype.card_subtype]
+    unfold SqZeroInv.Kf
+    congr 1
+  have h := (sqZeroInvAt P h2 n).card_Kn_sq
+  rw [hKf] at h
+  exact Nat.pow_left_injective two_ne_zero h
+
 open Classical in
 /-- **Hensel at level `n + 2`** (Lemma P's fibre count; KC13 § 5.2 K4): at an odd stable prime with `|𝓞 ⧸ P| = Q²`, every
 norm-one residue at level `n + 1` has exactly `Q` norm-one lifts at level `n + 2` — the lifts `x + e`, `e ∈ P^{n+1}/P^{n+2}`,
@@ -215,7 +623,160 @@ private theorem card_fibre [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (
     (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) (n : ℕ) (hfin : (levelSet P (n + 2)).Finite)
     {t : 𝓞 (fieldI F) ⧸ P.P ^ (n + 1)} (ht : t ∈ levelSet P (n + 1)) :
     (hfin.toFinset.filter fun x => red P n x = t).card = Q := by
-  sorry
+  haveI := finite_quot_pow P (n + 2)
+  letI : Fintype (𝓞 (fieldI F) ⧸ P.P ^ (n + 2)) := Fintype.ofFinite _
+  set D := sqZeroInvAt P h2 n with hD
+  obtain ⟨x₀, hx₀⟩ : ∃ x₀, red P n x₀ = t := Ideal.Quotient.factor_surjective _ t
+  have hσ : ∀ x, D.σ x = Ideal.quotientMap (P.P ^ (n + 2)) (conjO F) (P.le_comap (n + 2)) x := fun _ => rfl
+  have hK : ∀ x, x ∈ D.K ↔ red P n x = 0 := fun _ => RingHom.mem_ker
+  have hmem : ∀ x, x ∈ hfin.toFinset ↔ x * D.σ x = 1 := fun x => by
+    rw [Set.Finite.mem_toFinset, hσ]; exact Iff.rfl
+  have ht' : t * Ideal.quotientMap (P.P ^ (n + 1)) (conjO F) (P.le_comap (n + 1)) t = 1 := ht
+  have hxK : x₀ * D.σ x₀ - 1 ∈ D.K := by
+    rw [hK, hσ, map_sub, map_mul, map_one, red_conj, hx₀, ht', sub_self]
+  rw [← card_Kn_at P h2 hQ n, ← D.card_lift hxK]
+  refine Finset.card_nbij' (fun x => x - x₀) (fun e => x₀ + e) ?_ ?_ ?_ ?_
+  · intro x hx
+    rw [Finset.mem_coe, Finset.mem_filter, hmem] at hx
+    rw [Finset.mem_coe, Finset.mem_filter, D.mem_Kf, hK, map_sub, hx.2, hx₀, sub_self, add_sub_cancel]
+    exact ⟨rfl, hx.1⟩
+  · intro e he
+    rw [Finset.mem_coe, Finset.mem_filter, D.mem_Kf, hK] at he
+    rw [Finset.mem_coe, Finset.mem_filter, hmem]
+    refine ⟨he.2, ?_⟩
+    show red P n (x₀ + e) = t
+    rw [map_add, he.1, hx₀, add_zero]
+  · intro x _
+    show x₀ + (x - x₀) = x
+    ring
+  · intro e _
+    show x₀ + e - x₀ = e
+    ring
+
+-- FS131-ICM2: the residue map from level `n + 1` to level one.
+private def res (P : StablePrime F) (n : ℕ) : (𝓞 (fieldI F) ⧸ P.P ^ (n + 1)) →+* (𝓞 (fieldI F) ⧸ P.P ^ 1) :=
+  Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.le_add_left 1 n))
+
+private theorem res_mk (P : StablePrime F) (n : ℕ) (a : 𝓞 (fieldI F)) :
+    res P n (Ideal.Quotient.mk _ a) = Ideal.Quotient.mk _ a := Ideal.Quotient.factor_mk _ a
+
+private theorem res_red (P : StablePrime F) (n : ℕ) (x : 𝓞 (fieldI F) ⧸ P.P ^ (n + 2)) :
+    res P n (red P n x) = res P (n + 1) x := by
+  obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
+  rw [red_mk, res_mk, res_mk]
+
+private theorem res_zero (P : StablePrime F) (x : 𝓞 (fieldI F) ⧸ P.P ^ (0 + 1)) : res P 0 x = x := by
+  obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
+  exact res_mk P 0 a
+
+-- FS131-ICM2: the residue map carries the norm-one set into the norm-one set at level one.
+private theorem res_mem_levelSet (P : StablePrime F) (n : ℕ) {x : 𝓞 (fieldI F) ⧸ P.P ^ (n + 1)}
+    (hx : x ∈ levelSet P (n + 1)) : res P n x ∈ levelSet P 1 := by
+  obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
+  have hx' : Ideal.Quotient.mk _ a * Ideal.quotientMap (P.P ^ (n + 1)) (conjO F) (P.le_comap (n + 1))
+      (Ideal.Quotient.mk _ a) = 1 := hx
+  show res P n (Ideal.Quotient.mk _ a) * Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1)
+    (res P n (Ideal.Quotient.mk _ a)) = 1
+  rw [Ideal.quotientMap_mk] at hx'
+  rw [res_mk, Ideal.quotientMap_mk, ← map_mul, ← res_mk P n, map_mul, hx', map_one]
+
+private theorem neg_mem_levelSet (P : StablePrime F) (m : ℕ) {x : 𝓞 (fieldI F) ⧸ P.P ^ m}
+    (hx : x ∈ levelSet P m) : -x ∈ levelSet P m := by
+  show -x * Ideal.quotientMap (P.P ^ m) (conjO F) (P.le_comap m) (-x) = 1
+  rw [map_neg, neg_mul_neg]
+  exact hx
+
+-- FS131-ICM2: `|S₁| = Q + 1` (as in `charBound_one_weil`: the residue field, `σ = (·)^Q`, `card_normOne`).
+private theorem card_levelSet_one [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) {Q : ℕ}
+    (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) (hfin : (levelSet P 1).Finite) : hfin.toFinset.card = Q + 1 := by
+  classical
+  haveI hmax : (P.P ^ 1).IsMaximal := by rw [pow_one]; exact P.isMaximal
+  letI : Field (𝓞 (fieldI F) ⧸ P.P ^ 1) := Ideal.Quotient.field (P.P ^ 1)
+  haveI := finite_quot_pow P 1
+  letI : Fintype (𝓞 (fieldI F) ⧸ P.P ^ 1) := Fintype.ofFinite _
+  set σ : (𝓞 (fieldI F) ⧸ P.P ^ 1) →+* (𝓞 (fieldI F) ⧸ P.P ^ 1) :=
+    Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1) with hσdef
+  have hσmk : ∀ x, σ (Ideal.Quotient.mk (P.P ^ 1) x) = Ideal.Quotient.mk (P.P ^ 1) (conjO F x) := fun x =>
+    Ideal.quotientMap_mk
+  have hσ : ∀ x, σ (σ x) = x := fun x => by
+    obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
+    rw [hσmk, hσmk, UpperHalf.conjO_conjO]
+  obtain ⟨i, hi2, hci⟩ := exists_I_int (F := F)
+  have h2k : (2 : 𝓞 (fieldI F) ⧸ P.P ^ 1) ≠ 0 := by
+    rw [← map_ofNat (Ideal.Quotient.mk (P.P ^ 1)) 2, Ne, Ideal.Quotient.eq_zero_iff_mem, pow_one]; exact h2
+  have hι : Ideal.Quotient.mk (P.P ^ 1) i ^ 2 = -1 := by rw [← map_pow, hi2, map_neg, map_one]
+  have hσι : σ (Ideal.Quotient.mk (P.P ^ 1) i) = -Ideal.Quotient.mk (P.P ^ 1) i := by rw [hσmk, hci, map_neg]
+  have hne : σ ≠ RingHom.id _ := by
+    intro h
+    have h1 : σ (Ideal.Quotient.mk (P.P ^ 1) i) = Ideal.Quotient.mk (P.P ^ 1) i := by rw [h]; rfl
+    rw [hσι] at h1
+    have hz : (2 : 𝓞 (fieldI F) ⧸ P.P ^ 1) * Ideal.Quotient.mk (P.P ^ 1) i = 0 := by linear_combination -h1
+    rcases mul_eq_zero.1 hz with h0 | h0
+    · exact h2k h0
+    · have : (Ideal.Quotient.mk (P.P ^ 1) i) ^ 2 = 0 := by rw [h0]; ring
+      rw [hι] at this
+      exact one_ne_zero (neg_eq_zero.1 this)
+  have hcardk : Fintype.card (𝓞 (fieldI F) ⧸ P.P ^ 1) = Q ^ 2 := by
+    rw [← Nat.card_eq_fintype_card, ← hQ, pow_one]
+  have hpow := StandingFive.involution_eq_pow σ hσ hne hcardk
+  have hS : hfin.toFinset = Finset.univ.filter fun u : 𝓞 (fieldI F) ⧸ P.P ^ 1 => u ^ (Q + 1) = 1 := by
+    ext u
+    rw [Set.Finite.mem_toFinset, Finset.mem_filter]
+    simp only [Finset.mem_univ, true_and]
+    show u * σ u = 1 ↔ u ^ (Q + 1) = 1
+    rw [hpow, ← pow_succ']
+  rw [hS, StandingFive.card_normOne hcardk]
+
+open Classical in
+-- FS131-ICM2: every norm-one residue at level one has `Q^n` norm-one lifts at level `n + 1` (`card_fibre`, by
+-- induction).
+private theorem card_res_fibre [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) {Q : ℕ}
+    (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) (n : ℕ) (hfin : (levelSet P (n + 1)).Finite)
+    {s : 𝓞 (fieldI F) ⧸ P.P ^ 1} (hs : s ∈ levelSet P 1) :
+    (hfin.toFinset.filter fun x => res P n x = s).card = Q ^ n := by
+  induction n with
+  | zero =>
+    rw [pow_zero, Finset.card_eq_one]
+    refine ⟨s, Finset.ext fun x => ?_⟩
+    rw [Finset.mem_filter, Set.Finite.mem_toFinset, Finset.mem_singleton, res_zero]
+    constructor
+    · rintro ⟨_, h⟩
+      exact h
+    · rintro rfl
+      exact ⟨hs, rfl⟩
+  | succ n ih =>
+    haveI := finite_quot_pow P (n + 1)
+    have hfin' : (levelSet P (n + 1)).Finite := Set.toFinite _
+    have hmaps : ∀ x ∈ hfin.toFinset.filter (fun x => res P (n + 1) x = s),
+        red P n x ∈ hfin'.toFinset.filter (fun y => res P n y = s) := by
+      intro x hx
+      rw [Finset.mem_filter, Set.Finite.mem_toFinset] at hx ⊢
+      exact ⟨red_mem_levelSet P n hx.1, by rw [res_red]; exact hx.2⟩
+    rw [Finset.card_eq_sum_card_fiberwise hmaps]
+    have hfib : ∀ y ∈ hfin'.toFinset.filter (fun y => res P n y = s),
+        ((hfin.toFinset.filter fun x => res P (n + 1) x = s).filter fun x => red P n x = y).card = Q := by
+      intro y hy
+      rw [Finset.mem_filter, Set.Finite.mem_toFinset] at hy
+      rw [Finset.filter_filter, ← card_fibre P h2 hQ n hfin hy.1]
+      congr 1
+      refine Finset.filter_congr fun x _ => ?_
+      constructor
+      · exact fun h => h.2
+      · intro h
+        exact ⟨by rw [← res_red, h, hy.2], h⟩
+    rw [Finset.sum_congr rfl hfib, Finset.sum_const, smul_eq_mul, ih hfin', pow_succ, mul_comm]
+
+-- FS131-ICM2: `|S_{n+1}| = Q^n (Q + 1)`.
+private theorem card_levelSet_succ [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) {Q : ℕ}
+    (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) (n : ℕ) (hfin : (levelSet P (n + 1)).Finite) :
+    hfin.toFinset.card = Q ^ n * (Q + 1) := by
+  classical
+  haveI := finite_quot_pow P 1
+  have hfin1 : (levelSet P 1).Finite := Set.toFinite _
+  rw [Finset.card_eq_sum_card_fiberwise (f := res P n) (t := hfin1.toFinset) (fun x hx =>
+    hfin1.mem_toFinset.2 (res_mem_levelSet P n (hfin.mem_toFinset.1 hx)))]
+  rw [Finset.sum_congr rfl fun s hs => card_res_fibre P h2 hQ n hfin (hfin1.mem_toFinset.1 hs),
+    Finset.sum_const, card_levelSet_one P h2 hQ hfin1, smul_eq_mul, mul_comm]
 
 /-- **A character new at level `n + 2`** (Lemma P's bound; X26B-L1): at an odd stable prime with `|𝓞 ⧸ P| = Q²`, a
 character non-trivial on the kernel of the reduction sums to at most `2|S_{n+2}|/(Q + 1)` in modulus over `S_{n+2}` —
@@ -225,7 +786,61 @@ private theorem norm_charSum_new_le [NumberField F] (P : StablePrime F) (h2 : (2
     (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) (n : ℕ) (hfin : (levelSet P (n + 2)).Finite)
     (ψ : AddChar (𝓞 (fieldI F) ⧸ P.P ^ (n + 2)) ℂ) (hψ : ∃ e, red P n e = 0 ∧ ψ e ≠ 1) :
     ‖∑ s ∈ hfin.toFinset, ψ s‖ ≤ 2 / ((Q : ℝ) + 1) * hfin.toFinset.card := by
-  sorry
+  classical
+  haveI := finite_quot_pow P (n + 2)
+  letI : Fintype (𝓞 (fieldI F) ⧸ P.P ^ (n + 2)) := Fintype.ofFinite _
+  set D := sqZeroInvAt P h2 n with hD
+  have hσ : ∀ x, D.σ x = Ideal.quotientMap (P.P ^ (n + 2)) (conjO F) (P.le_comap (n + 2)) x := fun _ => rfl
+  have hmem : ∀ x, x ∈ hfin.toFinset ↔ x * D.σ x = 1 := fun x => by
+    rw [Set.Finite.mem_toFinset, hσ]; exact Iff.rfl
+  have hS : hfin.toFinset = Finset.univ.filter fun x => x * D.σ x = 1 := by
+    ext x
+    rw [hmem, Finset.mem_filter]
+    simp only [Finset.mem_univ, true_and]
+  haveI : (P.P ^ 1).IsPrime := by rw [pow_one]; exact P.isMaximal.isPrime
+  haveI : (RingHom.ker (res P (n + 1))).IsPrime := RingHom.ker_isPrime _
+  have hM : ∀ x, x ∉ RingHom.ker (res P (n + 1)) → IsUnit x := by
+    intro x hx
+    obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
+    refine isUnit_mk_of_notMem P (n + 2) fun ha => hx ?_
+    rw [RingHom.mem_ker, res_mk, Ideal.Quotient.eq_zero_iff_mem, pow_one]
+    exact ha
+  have hψ' : ∃ e ∈ D.K, ψ e ≠ 1 := by
+    obtain ⟨e, he, hψe⟩ := hψ
+    exact ⟨e, RingHom.mem_ker.2 he, hψe⟩
+  have h1 := D.norm_sum_le ψ
+  rw [← hS] at h1
+  have hG : (hfin.toFinset.filter fun x => ∀ w ∈ D.Kn, ψ (x * w) = 1).card ≤ 2 * Q ^ (n + 1) := by
+    rcases (hfin.toFinset.filter fun x => ∀ w ∈ D.Kn, ψ (x * w) = 1).eq_empty_or_nonempty with hG | ⟨x₀, hx₀⟩
+    · rw [hG, Finset.card_empty]
+      exact Nat.zero_le _
+    · rw [Finset.mem_filter] at hx₀
+      have hx₀S : x₀ * D.σ x₀ = 1 := (hmem x₀).1 hx₀.1
+      have hs : res P (n + 1) x₀ ∈ levelSet P 1 := res_mem_levelSet P (n + 1) (hfin.mem_toFinset.1 hx₀.1)
+      have hsub : (hfin.toFinset.filter fun x => ∀ w ∈ D.Kn, ψ (x * w) = 1) ⊆
+          (hfin.toFinset.filter fun x => res P (n + 1) x = res P (n + 1) x₀) ∪
+            (hfin.toFinset.filter fun x => res P (n + 1) x = -res P (n + 1) x₀) := by
+        intro x hx
+        rw [Finset.mem_filter] at hx
+        have hxS : x * D.σ x = 1 := (hmem x).1 hx.1
+        rcases D.pm_of_good _ hM ψ hψ' hx₀S hxS hx₀.2 hx.2 with h | h
+        · refine Finset.mem_union_left _ (Finset.mem_filter.2 ⟨hx.1, ?_⟩)
+          rw [RingHom.mem_ker, map_sub, sub_eq_zero] at h
+          exact h
+        · refine Finset.mem_union_right _ (Finset.mem_filter.2 ⟨hx.1, ?_⟩)
+          rw [RingHom.mem_ker, map_add, add_eq_zero_iff_eq_neg] at h
+          exact h
+      refine (Finset.card_le_card hsub).trans ((Finset.card_union_le _ _).trans ?_)
+      rw [card_res_fibre P h2 hQ (n + 1) hfin hs, card_res_fibre P h2 hQ (n + 1) hfin (neg_mem_levelSet P 1 hs),
+        two_mul]
+  rw [card_levelSet_succ P h2 hQ (n + 1) hfin]
+  have hQ1 : (0 : ℝ) < (Q : ℝ) + 1 := by positivity
+  calc ‖∑ s ∈ hfin.toFinset, ψ s‖ ≤ ((hfin.toFinset.filter fun x => ∀ w ∈ D.Kn, ψ (x * w) = 1).card : ℝ) := h1
+    _ ≤ ((2 * Q ^ (n + 1) : ℕ) : ℝ) := by exact_mod_cast hG
+    _ = 2 / ((Q : ℝ) + 1) * ((Q ^ (n + 1) * (Q + 1) : ℕ) : ℝ) := by
+      push_cast
+      rw [div_mul_eq_mul_div, eq_div_iff hQ1.ne']
+      ring
 
 /-- **Lemma P** (KC13 § 5.2, K4's first half; X26B-L1): at an odd stable prime with `|𝓞 ⧸ P| = Q²`, a level-one character
 bound `κ ≥ 2/(Q + 1)` holds at every level — by induction: a character trivial on the kernel of `R_{m+1} → R_m` descends,
