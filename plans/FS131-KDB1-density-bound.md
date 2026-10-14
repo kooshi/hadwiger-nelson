@@ -76,3 +76,84 @@ congruences exact (the notebook's own test proved only similarity), H3 13,552 at
 `(w_T + 10⁻⁶)/(1 − 6·10⁻⁵) = 0.246988449 < 0.2470`, `d_min = 0.21494` over the 26 `w₂` pairs; J49 (`plans/FS100-KT1-ambrus-ball.md`) — H4
 on `[0, 10⁴]` in arb at 80 bits on J26's 493,471-point covering, margin `2.348·10⁻⁶`, H5 (tail) `1.0107 > 1`, both resting on Watson
 §13.74 and §15.31 by citation. The paper's eq. (23) typo `w₁(4)` for `w₁(1)` (J26).
+
+## Stage 2 — SAVED: the route
+
+### 2.1 The route in one paragraph, and where it leaves the paper
+
+The certificate is the paper's (`X₂₃`, `g23.csv`, J26's exact reading); the argument around it is restructured so that every step is
+either a finite exact check or a short piece of real analysis that Mathlib nearly holds. **(R1) A finite window replaces the periodic
+reduction (P1).** Fix `A` (Lebesgue measurable, 1-avoiding), a centre `x₀` and `R > 0`; replace `A` by a Borel subset of full measure
+(still 1-avoiding) and put `E = A ∩ B(x₀, R)`. Everything below is about the one bounded Borel set `E`; no density, no lattice, no torus.
+The result of R2–R4 is `(1 − µ)·vol E ≤ (w_T + ν)·vol B(x₀, R + D)` with `D = max |x_i| = √3`, for every `R`; hence the ratio is at most
+`β·((R + D)/R)²` with `β = (w_T + ν)/(1 − µ) = 0.246988449… < 0.2470`, and the `limsup` is at most `β`. **(R2) An expectation over
+patterns replaces the LP atoms (P3, P4, P6's atom half).** Parametrize O(2) as `ρ_{θ,b}(z) = e^{iθ}·(b ? z̄ : z)`, `θ ∈ [0, 2π]`,
+`b ∈ Bool`, and put `pat(y, θ, b) = {i : y + ρ_{θ,b}(x_i) ∈ E}`. Integrating over `y ∈ ℂ` (Lebesgue, **not** normalized) and `(θ, b)`:
+`P(S) = Σ_b ∫_θ vol{y : pat = S}`, `N(I) = Σ_{S ⊇ I} P(S) = Σ_b ∫_θ vol ⋂_{i∈I}(E − ρx_i)` for `I ≠ ∅`. Then `N({i}) = 4π vol E`,
+`N({i,j}) = 4π F̊(|x_i − x_j|)` with `F(z) = vol(E ∩ (E − z))` and `F̊` its circle average, `N(I) = N(J)` for congruent index sets, `P(S) = 0`
+unless `S` is independent, and `Σ_{S ≠ ∅} P(S) ≤ 4π vol B(x₀, R + D)` (a nonempty pattern puts `y` in that ball). The certificate's
+`V(S) ≥ −ν` on nonempty independent `S`, summed against `P`, gives `w₁·vol E + Σ w₂ F̊(d_ij) ≤ (w_T + ν)·vol B(x₀, R + D)` — exact, with
+no boundary error, because translation invariance is used on all of `ℂ` and normalization only at the end. **(R3) Gaussian
+regularization replaces the Fourier series (P5).** For `E` bounded, `F` is continuous and integrable, and for radii `r_k` and reals
+`c_k` with `Σ c_k J₀(t r_k) ≥ 0` for all `t ≥ 0`, `Σ c_k F̊(r_k) ≥ 0`: write `Q_ε(v) = ∬ 1_E(y)1_E(y′)Γ_ε(y′ − y − v)`; by the Gaussian's
+Fourier integral and Fubini, `Σ c_k (circle average of Q_ε)(r_k) = (4π²)⁻¹∫ e^{−ε|ξ|²/4}|1̂_E(ξ)|² Σ c_k J₀(r_k|ξ|) dξ ≥ 0`, and `Q_ε → F`
+pointwise as `ε → 0` (a peak-function limit at a point of continuity), boundedly. Applied with `c = (w₀ at r = 1, w₁ − (1 − µ) at r = 0,
+w₂ at d_ij)`, `F̊(1) = 0` (KMOR Lemma 3.2 (1)'s analogue: `E ∩ (E − z) = ∅` for `|z| = 1`) and `F(0) = vol E`, it gives
+`(1 − µ) vol E ≤ w₁ vol E + Σ w₂ F̊(d_ij)`. **(R4) `J₀` from its integral, its ODE, and certified polynomial chains replace the paper's
+"interval arithmetic" and both Watson citations (P7).** `J₀(x) = (2π)⁻¹∫₀^{2π} cos(x sin θ)dθ`, `J₁(x) = (2π)⁻¹∫₀^{2π} sin θ sin(x sin θ)dθ`;
+`J = (J₀, J₁)` solves `J₀′ = −J₁`, `J₁′ = J₀ − J₁/x` (`x > 0`), `J(0) = (1, 0)`; `|J|²` has derivative `−2J₁²/x ≤ 0`, so `|J|` is
+antitone on `(0, ∞)`. (a) **An ODE comparison lemma**: if a polynomial pair `p` has defect `|p′ − A(x)p| ≤ D` on `[a, b]`, then
+`|J(x) − p(x)| ≤ |J(a) − p(a)| + (x − a)D` there — the contraction `⟨e, A e⟩ = −e₁²/x ≤ 0` is what keeps errors from compounding. (b) The
+kernel builds each polynomial itself (the Taylor recurrence of the ODE from the cell's entry value), bounds its defect exactly, and
+propagates the state; any polynomial would do — the recurrence is only a good guess. (c) On each cell `[t₀, t₀ + w]` of `t`, the 27
+polynomials combine into one polynomial `Q(τ)`, re-centred, whose quadratic part is minimized exactly and higher part bounded crudely;
+`Q − errors ≥ 1 − µ`. (d) **The tail**: for `t ≥ T₁ = 800`, `|J₀(t d)| ≤ |J(T₁ d)|` by antitonicity, read from the chain's last state:
+`w₁ − Σ|w_k||J(800 d_k)| ≥ 1 − µ` with slack `0.0100`. Watson §13.74 (used by J26/J49 for Lipschitz constants) and §15.31 (decreasing
+extrema, for the tail) are **not needed**. **(R5) The finite checks**: unit edges and congruences exactly in `ℚ(√3, √11)(i)`
+(`Field/Quadratic`'s tower), the 27 distances to `2⁻⁶⁴` (`Field/Approx`'s style), the atom check by a DFS over independent sets — all
+`decide +kernel` on integer data; no `native_decide`.
+
+**Against the paper's chain (§ 1.4):** P1 and P5 are replaced (R1, R3) — the periodic approximation [deOV10, KeMOR16] and the Fourier
+series on a torus are never used; P3–P4 and P6 are the same mathematics reorganized as one expectation (R2); P7's analytic half is
+replaced (R4), its numbers kept; P8 kept (R5). **A finding, reported at once (§ 2.5):** the bound needs neither the periodic reduction nor
+any Bessel fact beyond the ODE `J₀′ = −J₁, (xJ₁)′ = xJ₀` and the integral formula — not Schoenberg's identification beyond the circle
+average (`Ω₂ = J₀` is our definition), not Watson §7.21, §13.74 or §15.31.
+
+### 2.2 Each step: what Mathlib holds (each name `#check`ed at the pin, `data/fs131/kdb1/probes/Names.lean`), what must be built
+
+| step | Mathlib at the pin | to build | lines (est.) |
+|---|---|---|---|
+| R1 window and `limsup` | `NullMeasurableSet.exists_measurable_subset_ae_eq`, `Complex.volume_ball`, `EuclideanSpace.volume_ball`, `ENNReal.limsup_mul_le`, `limsup_le_of_le`, `LinearIsometryEquiv.measurePreserving`, `Complex.orthonormalBasisOneI` | the ratio bound `β((R+D)/R)²` and its `limsup`; the transfer `ℂ → EuclideanSpace ℝ (Fin 2)` (balls, distances, volume) | 250 |
+| R2 patterns | `Measure.prod_apply`, `lintegral_prod`, `lintegral_finsetSum`, `measure_biUnion_finset`, `measure_preimage_add_right`, `Function.Periodic.intervalIntegral_add_eq`, `measurePreserving_add_right` | `pat` and its measurability; the Venn identity `N(I) = Σ_{S⊇I} P(S)`; translation, rotation and reflection invariance; independence; the ball bound; the summation against the certificate (`ℝ`-valued, finite sums over `Finset (Fin 23)`, never computed) | 900 |
+| R3 positive definiteness | `GaussianFourier.integral_cexp_neg_mul_sq_norm_add`, `GaussianFourier.integral_rexp_neg_mul_sq_norm`, `tendsto_integral_comp_smul_smul_of_integrable'`, `tendsto_measure_symmDiff_preimage_nhds_zero`, `integral_prod`, `integral_integral_swap`, `intervalIntegral.tendsto_integral_filter_of_dominated_convergence`, `Complex.norm_exp_ofReal_mul_I` | `F` continuous and integrable; the Fubini chain for `Q_ε`; the circle average of `exp(i⟨ξ, r e^{iθ}⟩)` is `J₀(r|ξ|)`; the limit | 900 |
+| R4 `J₀`, ODE, energy | `intervalIntegral.hasDerivAt_integral_of_dominated_loc_of_deriv_le`, `intervalIntegral.integral_mul_deriv_eq_deriv_mul`, `antitoneOn_of_deriv_nonpos`, `image_sub_le_mul_sub_of_deriv_le`; **no Bessel function anywhere in Mathlib** (grep) | definitions, `J(0)`, bounds `|J₀|, |J₁| ≤ 1`, the two derivatives (one integration by parts), the energy, the comparison lemma (via `√(|e|² + κ²)`, `κ → 0`) | 600 |
+| R4 certificate semantics | — | integer polynomials and their evaluation; the defect computation's soundness; one cell's soundness (`Q`'s assembly, the shift, the quadratic minimum); the covering assembly; the tail | 900 |
+| R5 exact algebra | `Field/Quadratic` (`Adjoin`, `eval`), `Field/Approx` (`Ival`, `SqrtBounds`), `IndepSearch.nbrMask_and_two_pow_eq_zero` (in the library) | the 23 points ×12 in `Adjoin 11 (Adjoin 3 ℤ)`; 47 edges; 2,321 congruences through a generic "cross-ratio identities give an isometry" lemma; the 27 distances' bounds; the atom DFS and its soundness | 700 |
+| data | — | generated modules: points, edges, congruence witnesses, the dual (2,350 coefficients), cell states (847 × 27 × 3 integers), atom groups | generated |
+
+About 4,250 hand-written lines plus generated data. **Routes weighed where there were two:**
+- *Fourier side:* (i) Gaussian regularization on `ℂ` (chosen); (ii) the paper's torus — Mathlib holds `UnitAddTorus`/`mFourier`
+  (`Mathlib/Analysis/Fourier/AddCircleMulti.lean`), but the route needs the periodic reduction first (a separate argument of its own,
+  §2 of the paper cites it) and lattice bookkeeping for `2πL*`; (i) needs neither. (iii) Bochner's theorem on ℝ² — not in Mathlib,
+  larger than (i).
+- *`J₀`:* (i) integral definition + ODE + defect-certified chains (chosen: one analytic lemma, any accuracy at any argument, cost linear
+  in the range); (ii) the power series — exact, but costs `O(x)` terms per evaluation (`x` up to 1,833 here) and needs termwise
+  integration; (iii) Hankel's asymptotic expansion with error bounds — the textbook tool for the tail, a large formalization; replaced by
+  the energy bound at `T₁ = 800`.
+- *The tail threshold:* `T₁ = 600` already passes (tail sum 0.0570 < 0.0594); 800 is taken for slack (0.0494; measured on the Lean-run
+  chain: 0.04940).
+- *The atom check:* (i) DFS over independent sets, each term added when its highest vertex is decided (chosen; 7.19 M mask tests at the
+  natural order, 4.98 M by incidence order); (ii) recomputing `L(S)` at every leaf — 63 M tests; (iii) aggregating equal masks — 4,669
+  terms on 3,640 masks, a 22 % saving that costs a regrouping proof; not taken.
+
+### 2.3 What is not ours and must be said
+
+The certificate, the point set, the LP and its dual form are `[AmbrusEtAl2023]`'s; the averaging, the inclusion–exclusion constraints
+and the Fourier relaxation descend from `[OliveiraVallentin2010]`, `[KMOR2016]` and `[Szekely1984]`. Gaussian regularization and the
+energy monotonicity of `J₀² + J₁²` are classical techniques; nothing here is new mathematics. What is this route's: the arrangement that
+needs no periodic reduction and no Bessel asymptotics, and the kernel certification of the analytic half.
+
+### 2.4 The probes this stage rests on
+
+`data/fs131/kdb1/proto/proto_chain.py` (the covering, exact Fractions), `proto_atoms.py` (the atom DFS), `data/fs131/kdb1/probes/`
+(`CellProbe.lean` and its generators); their numbers are Stage 4's.
