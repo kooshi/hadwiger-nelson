@@ -318,3 +318,69 @@ The order is free: PD-I and G can run beside D. The chain's landing needs all th
 `(N^⊥)^⊥ = N` for every `N ⊆ G` (separation at `G ⧸ N`; ten lines). With D2 it makes the Galois connection an order isomorphism
 between the subgroups of `G` and the closed subgroups of `Ĝ`, which is HX-1 step 1's correspondence in full. Type it when HX-1
 is typed.
+
+## Stage 5 — SAVED: the price, Tate in words, and the drafts
+
+### 5.1 The price (from stage 3's measurement)
+
+- **Lane PD-I: about two to three hours of implementer work, under a quarter of an agent-day.** That is a copy, two leaves
+  of about 14 and 22 lines, one build of about 7 minutes with only small modules stale, and the stored-term print and the lint.
+- **This planning job:** about half an agent-day, the route copies included.
+- **What PD's landing also waits on** is lane D (`Rigidity/DualGroup`), as KN8 planned and priced it. It is not repriced here.
+- **Not over a week**, so no fallback axiom is drafted (§ Done means item 5) and no `[Rudin1962]` import is proposed. The
+  library gains no axiom from this lane.
+
+### 5.2 Whether Tate's self-duality shares the route (in words; the brief's question, KN8 § Stage 4)
+
+**In part.** The model is `π : W → Dual F`, `π a := (r ↦ ψ(a r))`, with `W` the restricted product. It needs `π` onto, kernel
+`Λ`, and open:
+- **Onto: this route.** `π(W)` is a subgroup of `R̂` whose annihilator `{r ∈ R | ψ(a r) = 1 ∀ a}` is `0` — one place's
+  character is non-degenerate. Once `π(W)` is closed, D2's case (`eq_top_of_isClosed_of_dualCoannihilator_eq_bot`) gives
+  `π(W) = R̂`. Closedness: `Λ ⊆ ker π` and `W/Λ` is compact, so `π(W)` is the image of a compact set.
+- **Kernel `Λ = R^∨`** (the inverse different, place by place) **and cocompactness**: adelic arithmetic, not duality, so not on
+  this route. Mathlib has the adele rings and `RestrictedProduct`, but not the compactness of `𝔸_L / L` as far as KN8 read.
+- **Open**: free. A continuous bijection from the compact `W/Λ` onto the Hausdorff `R̂` is a homeomorphism.
+
+So M8b's planner reads D2 from this lane and prices only the arithmetic.
+
+### 5.3 Drafts for files I do not write
+
+- **`data/fs131/claims-NF2.md` § Dated lines** (Keryx files; each follows the last line there):
+  - "2026-10-14 — **Pontryagin duality for a countable discrete group needs no Peter–Weyl, and the general D2 costs what the case
+    costs (FS131-KPD1).** On `Ĝ = AddChar G Circle` with the pointwise topology, Fourier uniqueness (`Rigidity.measure_eq_of_fourier`,
+    Stone–Weierstrass over the evaluations) and the Haar measure of a closed subgroup (`Rigidity.subgroupHaar`) give D2 for every
+    closed subgroup (`Rigidity.dualAnnihilator_dualCoannihilator_of_isClosed`: `Z := (Y^⊥)^⊥` has `Z^⊥ = Y^⊥` for free, and the
+    Haar measures of `Y` and `Z` have one Fourier transform), and D1 follows from D2 at `G × ℤ` (`Rigidity.evalDualHom_surjective`).
+    Typed in `Rigidity/Annihilator`, `Rigidity/SubgroupHaar`, `Rigidity/Duality`; 26 of the lane's 28 leaves elaborate in copies
+    (`data/fs131/kpd1/route/`), the headlines resting on `Rigidity/DualGroup`'s leaves only. The torus route of inventory item 761
+    contains it: Mathlib has no D2 for tori."
+  - "2026-10-14 — **PE-1′'s connectedness is a third duality fact, D3 (FS131-KPD1).** `IsSolenoid`'s `connectedSpace` at
+    `PieceDual M` reads that a torsion-free discrete group has a connected dual (`Rigidity.connectedSpace_dual`: the dual is
+    divisible, and a clopen neighbourhood of `1` in a compact group contains an open subgroup of finite index), not D1 and the
+    structure theory of compact groups that KN8's plan read. The total irreducibility's branch `N ≠ 0` reads no duality: `Y ⊆
+    N^⊥`, finite when `M ⧸ N` is (`Rigidity.finite_dualAnnihilator`). Leaves 8 and 9 of `Rigidity/Pieces` now wait on PD's
+    statements only."
+  - "2026-10-14 — **Tate's self-duality reads D2 for its surjectivity (FS131-KPD1, in words).** `π(W) ⊆ R̂` has zero annihilator,
+    and is closed once `W/Λ` is compact, so `π` is onto by `Rigidity.eq_top_of_isClosed_of_dualCoannihilator_eq_bot`, and open
+    for free; its kernel `Λ = R^∨` and the cocompactness are the adelic part M8b must price."
+- **`LEAN.md` § Searching — Lean** (each a line):
+  - "`IsTopologicalGroup ↥Y` is not synthesized at the pin for `Y : ClosedSubgroup G` (the subgroup instance is keyed on
+    `Subgroup`'s membership). For Haar measure on a compact subgroup take `Y : Subgroup G` with `[CompactSpace Y]`, and supply it
+    from closedness by `isCompact_iff_compactSpace.mp hY.isCompact` (`Rigidity.subgroupHaar`, FS131-KPD1)."
+  - "`T2Space Circle` is not synthesized in `Rigidity/Annihilator`'s environment (`Rigidity/DualGroup`,
+    `Mathlib.Analysis.Fourier.FiniteAbelian.Orthogonality`, `Mathlib.Topology.Algebra.PontryaginDual`), so `isClosed_eq` into
+    `Circle` fails there. Downstream, in `Rigidity/Duality`, it is synthesized, as `t2Space_of_metrizableSpace`. Read
+    `{χ | χ g = 1}` through `ℂ` (`Rigidity.isClosed_setOf_apply_eq_one`) (FS131-KPD1)."
+  - "At the pin `isProbabilityMeasure_map` is `MeasureTheory.Measure.isProbabilityMeasure_map`; `Subgroup.normal_of_comm` is
+    deprecated for `Subgroup.normal_of_isMulCommutative`; `AddChar.instFintype` asks an `RCLike` codomain — for characters into
+    `Circle` compose with `Circle.coeHom.compAddChar` (`Rigidity.finite_dualAnnihilator`) (FS131-KPD1)."
+  - "`PontryaginDual (AddChar G Circle)` and `PontryaginDual (Multiplicative (Additive (AddChar G Circle)))` are definitionally
+    equal: a `MulEquiv` into one is accepted as a term into the other (`Rigidity.additiveDualDualEquiv := dualDualEquiv G`, its
+    `apply` lemma `rfl`). `IsClosed (Y : Set (PieceDual M))` is accepted as `IsClosed (AddSubgroup.toSubgroup' Y : Set (AddChar M
+    Circle))` (`data/fs131/kpd1/probes/Consumer.lean`) (FS131-KPD1)."
+- **`BIBLIOGRAPHY.md`, the `[Rudin1962]` row's reading status**, appended: "§§ 1.7 (the duality theorem) and 2.1 (annihilators)
+  cited by FS131-KPD1 as the textbook form of D1 and D2: recalled, not read; section numbers not checked against a copy." And a
+  library request: a copy of `[Rudin1962]`, or of Deitmar–Echterhoff, *Principles of Harmonic Analysis* (Springer), Ch. 3 —
+  **neither held**, title recalled, not checked.
+- **`ARCHITECTURE.md`**: the four rows and Pieces' imports cell are in this branch (written here: the brief makes me its pen
+  for new modules). § Trust: nothing new.
