@@ -129,3 +129,29 @@ changes undone by `data/fs131/lch1/lean/ReAdd.lean`'s term surgery.
    `Instances/SqrtFortySeven`, `WindowDensity`, and the new `Plane/MOneBound` row. **Comment-stripped code unchanged**
    in the 30 files whose edits are prose only (`tools/fs131_lch1_code_only.py` from `06840bd6a` to `bf6436b54`: 30/30 the
    same, `code-only.out`; its control adds one code character to each and sees 30/30 differ, `code-only-plant.out`).
+
+## Stage 2b — SAVED (two more merges, by the brief's third amendment, 22:32 UTC)
+
+**The first build, stopped twice.** (1) `BATCH=8` (`data/fs131/lch1/build-1-oom.log`, full log `build-1-oom-full.log`):
+batch 21 of 275, eight `Plane/DensityBound/Cells/PartNN` modules, exit 143 twice ("Terminated") after 125 and 129 s; the
+user journal records `The kernel OOM killer killed some processes in this unit` / `Failed with result 'oom-kill'` for
+both scopes (`build-1-oom-journal.txt`). **Mechanism:** eight `decide +kernel` cell modules at about 2 GB each
+(LEAN.md: "1.95 GB resident", "1.6–2.4 GB") exceed the 10 GiB cap; the cap killed its own scope, nothing else. Rerun
+at `BATCH=3`. (2) At `BATCH=3` (`build-1-stopped.log`): stopped by me at batch 364 of 699 (22:36 UTC), process group
+845264 signalled, the group absent from `ps` and the log static over 10 s, so that the third amendment's merges could
+be made without editing files a running build would compile ("a run that blocks something is presumed killable"). It
+forfeited only the walk's position: the 32 modules it had compiled are kept (Lake skips them).
+
+3. **M13's dyadic certificates, `fs131-wcm4` at `ff3ac0c73`** (contains `fs131-wcm3`), merged on top as `eba5fc3a4`. One
+   conflict, `ARCHITECTURE.md`'s Rigidity rows (`data/fs131/lch1/resolve_rows.py`, `resolve-wcm4.out`): the chain's rows
+   kept, M13's `ClassRatio` row taken. `Rigidity/ClassRatio`, `Proofs.lean` auto-merged; `Arith/BinaryField`,
+   `Arith/DyadicCerts` added. Not edited by me (the amendment).
+4. **The bound at p = 19, `fs131-wc17` at `3aeb2c624`** (contains `fs131-wc16`), merged as `a9d839f8b`. No conflict on the
+   tree that already held `wcm4`: `ARCHITECTURE.md` and `Proofs.lean` auto-merged (no doubled import, no doubled row);
+   81 `Arith/FibreCert*` modules added. Not edited by me.
+
+**Collisions, for the late lines** — prediction: none. Source-level prescan of the 370 public names the two lines'
+added or changed files declare against both before-dumps' names: **0 declared in another module**
+(`collisions-late-prescan.out`). The kernel-side scan for them is `scripts/dupnames.sh` on the joined tree (stage 4),
+which reads each module's compiled constants. `tools/check_architecture.py` on the joined source: PASS (`arch-pre.out`).
+The build of the four-way join: `data/fs131/lch1/build-2.log`, `BATCH=3`, `MEMMAX=10G`.

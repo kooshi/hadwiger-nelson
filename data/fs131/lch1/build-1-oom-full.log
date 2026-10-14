@@ -1,0 +1,145 @@
+### up-to-date check, lake build --no-build over 2068 modules: exit 3 after 3s
+✖ [3114/3119] Building Proofs.HadwigerNelson.Arith.CircleCos
+error: target is out-of-date and needs to be rebuilt
+✖ [4012/4256] Building Proofs.HadwigerNelson.Outside.OAI158Amenability
+error: target is out-of-date and needs to be rebuilt
+✖ [4041/4256] Building Proofs.HadwigerNelson.Outside.OAI158Basic
+error: target is out-of-date and needs to be rebuilt
+✖ [4055/4256] Building Proofs.HadwigerNelson.Outside.OAI158Centers
+error: target is out-of-date and needs to be rebuilt
+✖ [4137/4256] Building Proofs.HadwigerNelson.Outside.OAI158InvariantMean
+error: target is out-of-date and needs to be rebuilt
+✖ [4147/4256] Building Proofs.HadwigerNelson.Outside.OAI158NumberFields
+error: target is out-of-date and needs to be rebuilt
+✖ [4149/4256] Building Proofs.HadwigerNelson.Outside.OAI158PhaseEncoding
+error: target is out-of-date and needs to be rebuilt
+✖ [4150/4256] Building Proofs.HadwigerNelson.Outside.OAI158SmallArcs
+error: target is out-of-date and needs to be rebuilt
+✖ [4157/4256] Building Proofs.HadwigerNelson.Plane.DensityBound.Bessel
+error: target is out-of-date and needs to be rebuilt
+✖ [4158/4256] Building Proofs.HadwigerNelson.Plane.DensityBound.BesselCheck
+error: target is out-of-date and needs to be rebuilt
+✖ [4159/4256] Building Proofs.HadwigerNelson.Plane.DensityBound.X23Check
+error: target is out-of-date and needs to be rebuilt
+✖ [4161/4256] Building Proofs.HadwigerNelson.Plane.OneClass.SectionDensity
+error: target is out-of-date and needs to be rebuilt
+✖ [4168/4256] Building Proofs.HadwigerNelson.Rigidity.FiniteZhang
+error: target is out-of-date and needs to be rebuilt
+✖ [4170/4256] Building Proofs.HadwigerNelson.Rigidity.Solenoid
+error: target is out-of-date and needs to be rebuilt
+✖ [4171/4256] Building Proofs.HadwigerNelson.Rigidity.TateArch
+error: target is out-of-date and needs to be rebuilt
+✖ [4187/4256] Building Proofs.HadwigerNelson.Rigidity.TateLocal
+error: target is out-of-date and needs to be rebuilt
+✖ [4420/4579] Building Proofs.HadwigerNelson.Rigidity.Entropy
+error: target is out-of-date and needs to be rebuilt
+✖ [6146/6324] Building Proofs.HadwigerNelson.Outside.OAI158
+error: target is out-of-date and needs to be rebuilt
+✖ [6226/6324] Building Proofs.HadwigerNelson.Arith.DyadicQuadratic
+error: target is out-of-date and needs to be rebuilt
+✖ [6229/6324] Building Proofs.HadwigerNelson.Arith.UpperHalf
+error: target is out-of-date and needs to be rebuilt
+✖ [6230/6324] Building Proofs.HadwigerNelson.Instances.SqrtFortySeven
+error: target is out-of-date and needs to be rebuilt
+✖ [6259/6324] Building Proofs.HadwigerNelson.Arith.ThreeColourCharacter
+error: target is out-of-date and needs to be rebuilt
+✖ [6301/6324] Building Proofs.HadwigerNelson.Rigidity.Herglotz
+error: target is out-of-date and needs to be rebuilt
+Some required targets logged failures:
+- Proofs.HadwigerNelson.Arith.CircleCos
+- Proofs.HadwigerNelson.Outside.OAI158Amenability
+- Proofs.HadwigerNelson.Outside.OAI158Basic
+- Proofs.HadwigerNelson.Outside.OAI158Centers
+- Proofs.HadwigerNelson.Outside.OAI158InvariantMean
+- Proofs.HadwigerNelson.Outside.OAI158NumberFields
+- Proofs.HadwigerNelson.Outside.OAI158PhaseEncoding
+- Proofs.HadwigerNelson.Outside.OAI158SmallArcs
+- Proofs.HadwigerNelson.Plane.DensityBound.Bessel
+- Proofs.HadwigerNelson.Plane.DensityBound.BesselCheck
+- Proofs.HadwigerNelson.Plane.DensityBound.X23Check
+- Proofs.HadwigerNelson.Plane.OneClass.SectionDensity
+- Proofs.HadwigerNelson.Rigidity.FiniteZhang
+- Proofs.HadwigerNelson.Rigidity.Solenoid
+- Proofs.HadwigerNelson.Rigidity.TateArch
+- Proofs.HadwigerNelson.Rigidity.TateLocal
+- Proofs.HadwigerNelson.Rigidity.Entropy
+- Proofs.HadwigerNelson.Outside.OAI158
+- Proofs.HadwigerNelson.Arith.DyadicQuadratic
+- Proofs.HadwigerNelson.Arith.UpperHalf
+- Proofs.HadwigerNelson.Instances.SqrtFortySeven
+- Proofs.HadwigerNelson.Arith.ThreeColourCharacter
+- Proofs.HadwigerNelson.Rigidity.Herglotz
+### batch 1/275, attempt 1: exit 0 after 20s: Proofs.Basic Proofs.HadwigerNelson.Arith.CircleCos Proofs.HadwigerNelson.Arith.Dyadic Proofs.HadwigerNelson.Arith.FalconerFan Proofs.HadwigerNelson.Arith.MajorityVote Proofs.HadwigerNelson.Arith.NoAffine Proofs.HadwigerNelson.Arith.RatioBound Proofs.HadwigerNelson.Arith.StationaryRatio
+✔ [3938/3938] Built Proofs.HadwigerNelson.Arith.CircleCos (18s)
+Build completed successfully (3938 jobs).
+### batch 2/275, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Coset Proofs.HadwigerNelson.Field.Quadratic Proofs.HadwigerNelson.Fractional Proofs.HadwigerNelson.Greedy Proofs.HadwigerNelson.Instances.Core23.Edges Proofs.HadwigerNelson.Instances.SpindleLrat Proofs.HadwigerNelson.Instances.ZMod121Four.Pts Proofs.HadwigerNelson.Outside.OAI015ErgodicDecomposition
+Build completed successfully (3012 jobs).
+### batch 3/275, attempt 1: exit 0 after 20s: Proofs.HadwigerNelson.Outside.OAI015Maximal Proofs.HadwigerNelson.Outside.OAI015Shannon Proofs.HadwigerNelson.Outside.OAI158Amenability Proofs.HadwigerNelson.Outside.OAI158Basic Proofs.HadwigerNelson.Outside.OAI158Centers Proofs.HadwigerNelson.Outside.OAI158InvariantMean Proofs.HadwigerNelson.Outside.OAI158NumberFields Proofs.HadwigerNelson.Outside.OAI158PhaseEncoding
+✔ [3529/3534] Built Proofs.HadwigerNelson.Outside.OAI158PhaseEncoding (5.0s)
+✔ [3530/3534] Built Proofs.HadwigerNelson.Outside.OAI158Centers (13s)
+✔ [3531/3534] Built Proofs.HadwigerNelson.Outside.OAI158NumberFields (14s)
+✔ [3532/3534] Built Proofs.HadwigerNelson.Outside.OAI158Basic (14s)
+✔ [3533/3534] Built Proofs.HadwigerNelson.Outside.OAI158Amenability (14s)
+✔ [3534/3534] Built Proofs.HadwigerNelson.Outside.OAI158InvariantMean (18s)
+Build completed successfully (3534 jobs).
+### batch 4/275, attempt 1: exit 0 after 5s: Proofs.HadwigerNelson.Outside.OAI158SmallArcs Proofs.HadwigerNelson.Pattern Proofs.HadwigerNelson.Plane.Basic Proofs.HadwigerNelson.Plane.CircleColouring Proofs.HadwigerNelson.Plane.DensityBound.Bessel Proofs.HadwigerNelson.Plane.DensityBound.BesselCheck Proofs.HadwigerNelson.Plane.DensityBound.X23Check Proofs.HadwigerNelson.Plane.MetricalBoundary
+✔ [3070/3073] Built Proofs.HadwigerNelson.Plane.DensityBound.BesselCheck (990ms)
+✔ [3071/3073] Built Proofs.HadwigerNelson.Plane.DensityBound.X23Check (951ms)
+✔ [3072/3073] Built Proofs.HadwigerNelson.Plane.DensityBound.Bessel (3.6s)
+✔ [3073/3073] Built Proofs.HadwigerNelson.Outside.OAI158SmallArcs (4.2s)
+Build completed successfully (3073 jobs).
+### batch 5/275, attempt 1: exit 0 after 8s: Proofs.HadwigerNelson.Plane.OneClass.SectionDensity Proofs.HadwigerNelson.Plane.RingCalculus.HubCount Proofs.HadwigerNelson.RealClosed Proofs.HadwigerNelson.Rigidity.FiniteZhang Proofs.HadwigerNelson.Rigidity.HaarMultiple Proofs.HadwigerNelson.Rigidity.Solenoid Proofs.HadwigerNelson.Rigidity.TateArch Proofs.HadwigerNelson.Rigidity.TateLocal
+✔ [3410/3414] Built Proofs.HadwigerNelson.Rigidity.Solenoid (2.8s)
+✔ [3411/3414] Built Proofs.HadwigerNelson.Plane.OneClass.SectionDensity (3.5s)
+✔ [3412/3414] Built Proofs.HadwigerNelson.Rigidity.FiniteZhang (4.4s)
+✔ [3413/3414] Built Proofs.HadwigerNelson.Rigidity.TateArch (4.5s)
+✔ [3414/3414] Built Proofs.HadwigerNelson.Rigidity.TateLocal (6.6s)
+Build completed successfully (3414 jobs).
+### batch 6/275, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Sat.Mask Proofs.HadwigerNelson.Strip Proofs.HadwigerNelson.Stripe Proofs.HadwigerNelson.Thomassen Proofs.HadwigerNelson.ThreeColour Proofs.HadwigerNelson.Topology.SpernerGrid Proofs.HadwigerNelson.UnitDistance
+Build completed successfully (1475 jobs).
+### batch 7/275, attempt 1: exit 0 after 11s: Proofs.HadwigerNelson.Brick Proofs.HadwigerNelson.EdgeList Proofs.HadwigerNelson.Field.Approx Proofs.HadwigerNelson.FractionalSpec Proofs.HadwigerNelson.Outside.OAI015Mixtures Proofs.HadwigerNelson.Outside.OAI158Characters Proofs.HadwigerNelson.Outside.OAI158PhaseCollision Proofs.HadwigerNelson.Outside.OAI158RelativeCenters
+✔ [3502/3504] Built Proofs.HadwigerNelson.Outside.OAI158Characters (6.7s)
+✔ [3503/3504] Built Proofs.HadwigerNelson.Outside.OAI158PhaseCollision (6.6s)
+✔ [3504/3504] Built Proofs.HadwigerNelson.Outside.OAI158RelativeCenters (9.7s)
+Build completed successfully (3504 jobs).
+### batch 8/275, attempt 1: exit 0 after 8s: Proofs.HadwigerNelson.Outside.OAI158Selections Proofs.HadwigerNelson.Plane.ArcMap Proofs.HadwigerNelson.Plane.CPColouring Proofs.HadwigerNelson.Plane.Chord Proofs.HadwigerNelson.Plane.CircleCrossing Proofs.HadwigerNelson.Plane.DensityBound.Autocorr Proofs.HadwigerNelson.Plane.DensityBound.BesselDefect Proofs.HadwigerNelson.Plane.DensityBound.Cells.Data
+✔ [3386/3389] Built Proofs.HadwigerNelson.Plane.DensityBound.Cells.Data (287ms)
+✔ [3387/3389] Built Proofs.HadwigerNelson.Plane.DensityBound.BesselDefect (6.1s)
+✔ [3388/3389] Built Proofs.HadwigerNelson.Outside.OAI158Selections (6.5s)
+✔ [3389/3389] Built Proofs.HadwigerNelson.Plane.DensityBound.Autocorr (6.8s)
+Build completed successfully (3389 jobs).
+### batch 9/275, attempt 1: exit 0 after 67s: Proofs.HadwigerNelson.Plane.DensityBound.X23Data Proofs.HadwigerNelson.Plane.PlaneTopology Proofs.HadwigerNelson.Plane.UnitPairs Proofs.HadwigerNelson.Rigidity.SolenoidErgodic Proofs.HadwigerNelson.Sat.ClauseTable Proofs.HadwigerNelson.ThetaCert Proofs.HadwigerNelson.Topology.LebesgueCovering Proofs.HadwigerNelson.TwoCircle
+✔ [2882/2883] Built Proofs.HadwigerNelson.Rigidity.SolenoidErgodic (1.6s)
+✔ [2883/2883] Built Proofs.HadwigerNelson.Plane.DensityBound.X23Data (66s)
+Build completed successfully (2883 jobs).
+### batch 10/275, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Certificate Proofs.HadwigerNelson.DistanceGraph Proofs.HadwigerNelson.FieldWall Proofs.HadwigerNelson.IndepSearch Proofs.HadwigerNelson.Instances.Core122.Cnf.Table00 Proofs.HadwigerNelson.Instances.Core122.Cnf.Table01 Proofs.HadwigerNelson.Instances.Core122.Cnf.Table02 Proofs.HadwigerNelson.Instances.Core122.Cnf.Table03
+Build completed successfully (2561 jobs).
+### batch 11/275, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Core122.Cnf.Table04 Proofs.HadwigerNelson.Instances.Core122.Cnf.Table05 Proofs.HadwigerNelson.Instances.Core122.Cnf.Table06 Proofs.HadwigerNelson.Instances.Core122.Cnf.Table07 Proofs.HadwigerNelson.Instances.Core122.Cnf.Table08 Proofs.HadwigerNelson.Instances.Core122.Cnf.Table09 Proofs.HadwigerNelson.Instances.Core122.Cnf.Table10 Proofs.HadwigerNelson.Instances.Core122.Cnf.Table11
+Build completed successfully (11 jobs).
+### batch 12/275, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Core122.Cnf.Table12 Proofs.HadwigerNelson.Instances.Core122.Cnf.Table13 Proofs.HadwigerNelson.Instances.Core122.Cnf.Table14 Proofs.HadwigerNelson.Instances.Core122.Cnf.Table15 Proofs.HadwigerNelson.Instances.Core23.Cnf.Table00 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table00 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table01 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table02
+Build completed successfully (11 jobs).
+### batch 13/275, attempt 1: exit 0 after 0s: Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table03 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table04 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table05 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table06 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table07 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table08 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table09 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table10
+Build completed successfully (11 jobs).
+### batch 14/275, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table11 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table12 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table13 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table14 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table15 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Table00 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Table01 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Table02
+Build completed successfully (11 jobs).
+### batch 15/275, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Table03 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Table00 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Table01 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Table02 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Table03 Proofs.HadwigerNelson.Instances.Mycielski.Cnf.Table00 Proofs.HadwigerNelson.Instances.Seven Proofs.HadwigerNelson.Instances.SqrtEleven.Cnf.Table00
+Build completed successfully (2408 jobs).
+### batch 16/275, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.SqrtEleven.Cnf.Table01 Proofs.HadwigerNelson.Instances.SqrtEleven.Cnf.Table02 Proofs.HadwigerNelson.Instances.SqrtEleven.Cnf.Table03 Proofs.HadwigerNelson.Instances.SqrtOneSixSeven.Cert Proofs.HadwigerNelson.Instances.Triangle Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table00 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table01 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table02
+Build completed successfully (2411 jobs).
+### batch 17/275, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table03 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table04 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table05 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table06 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table07 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table08 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table09 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table10
+Build completed successfully (11 jobs).
+### batch 18/275, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table11 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table12 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table13 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table14 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table15 Proofs.HadwigerNelson.Instances.TwoAdicFive.Edges Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Table00 Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Table01
+Build completed successfully (1352 jobs).
+### batch 19/275, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Table02 Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Table03 Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Table04 Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Table05 Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Table06 Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Table07 Proofs.HadwigerNelson.Instances.ZMod121Four.Edges Proofs.HadwigerNelson.Outside.OAI015Generating
+Build completed successfully (3019 jobs).
+### batch 20/275, attempt 1: exit 0 after 86s: Proofs.HadwigerNelson.Outside.OAI158ConditionalSelection Proofs.HadwigerNelson.Outside.OAI158Multipliers Proofs.HadwigerNelson.Plane.AeColouring Proofs.HadwigerNelson.Plane.DensityBound.BesselCert Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part00 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part01 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part02 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part03
+✔ [3586/3592] Built Proofs.HadwigerNelson.Outside.OAI158Multipliers (14s)
+✔ [3587/3592] Built Proofs.HadwigerNelson.Outside.OAI158ConditionalSelection (16s)
+✔ [3588/3592] Built Proofs.HadwigerNelson.Plane.DensityBound.BesselCert (37s)
+✔ [3589/3592] Built Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part00 (78s)
+✔ [3590/3592] Built Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part02 (80s)
+✔ [3591/3592] Built Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part01 (81s)
+✔ [3592/3592] Built Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part03 (84s)
+Build completed successfully (3592 jobs).
+### batch 21/275, attempt 1: exit 143 after 125s: Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part04 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part05 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part06 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part07 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part08 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part09 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part10 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part11
+### batch 21/275, attempt 2: exit 143 after 129s: Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part04 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part05 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part06 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part07 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part08 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part09 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part10 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part11
