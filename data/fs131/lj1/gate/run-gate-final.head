@@ -1,0 +1,26 @@
+HEAD=def7c07f8e7bda496e33aac52ee076cfab554d17  2026-10-14T03:40:05Z  host=the machine cores=12 mem=31 GiB
+status (tracked files modified, and untracked outside data/ and plans/):
+--
+main (3a6f8876b) against this commit, paths that differ under Proofs/ Proofs.lean scripts/ tools/ ARCHITECTURE.md:
+ARCHITECTURE.md
+Proofs.lean
+Proofs/HadwigerNelson/Arith/DyadicQuadratic.lean
+Proofs/HadwigerNelson/Arith/ThreeColourCharacter.lean
+Proofs/HadwigerNelson/Arith/ThreeColourCriterion.lean
+Proofs/HadwigerNelson/Arith/ThreeFourColours.lean
+Proofs/HadwigerNelson/Arith/TorsionExtraction.lean
+Proofs/HadwigerNelson/Instances/UpperHalfCorollaries.lean
+scripts/Assumptions.lean
+scripts/Axioms.lean
+scripts/assumptions-ledger.txt
+scripts/axioms-controls.txt
+scripts/vacuity-baseline.txt
+--
+dupnames latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wrc/build/gate/dupnames/20261014T035008Z-1466617.log
+dupnames-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wrc/build/gate/dupnames-self-test/20261014T035015Z-1467055.log
+axioms latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wrc/build/gate/axioms/20261014T035043Z-1469617.log
+axioms-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wrc/build/gate/axioms-self-test/20261014T035052Z-1470215.log
+vacuity latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wrc/build/gate/vacuity/20261014T035415Z-1483540.log
+vacuity-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wrc/build/gate/vacuity-self-test/20261014T035614Z-1486394.log
+assumptions latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wrc/build/gate/assumptions/20261014T035818Z-1491515.log
+assumptions-self-test latest: /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wrc/build/gate/assumptions-self-test/20261014T040020Z-1499953.log

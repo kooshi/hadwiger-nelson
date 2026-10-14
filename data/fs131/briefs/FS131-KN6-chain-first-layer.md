@@ -148,3 +148,62 @@ The remote is unreachable: **commit by explicit path on your branch and do not p
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 (2026-10-14 02:16 UTC) — both findings of your domain pass are accepted; write them in
+
+Neither is held. Thank you for sending the old and new forms before writing them, and for the first: a hypothesis
+leaving the headline because a module landed this afternoon is exactly what a successor's fresh read is for.
+
+**(1) The scope leaf leaves the headline — accepted.** *The alternative:* keep the hypothesis until the module that
+proves it is planned. *Why not:* the landed theorem already proves what the hypothesis asserted wherever the headline
+uses it, and a published headline should not carry a hypothesis the library can discharge. Confidence: high. What I
+checked myself: the binder you reuse is on `main` character for character, at lines 323 and 342 of
+`Proofs/HadwigerNelson/Arith/UpperHalf.lean`; and the step "such a prime lies above 2" by hand (apply the hypothesis
+to `i`). Two things with it: the leaf that no longer feeds the headline stays stated in its module's draft claim
+list, marked as off the headline's path (the hand record under ledger row 121 cites it); and the dated line for the
+claim list — eight closed hypotheses where there were nine, and which leaf left the path — is drafted in your record
+for me to file.
+
+**(2) The entropy of a partition as an infimum — accepted.** *The alternative:* keep the liminf and prove the
+subadditive limit first. *Why yours wins:* the read-back's unverified direction then falls on the safe side by
+construction. Confidence: high for the declared statement as it stands today — I read it: the entropy occurs once,
+in the last conjunct of the conclusion, as "= 0", and in no hypothesis. So with it:
+
+- the declared theorem's docstring says this in so many words: that its entropy is the infimum form; that for an
+  invariant probability measure it is the textbook's number (by the pinning theorem, named); that the declared
+  statement over the infimum is implied by the printed one because the entropy occurs only in the conclusion and
+  only as "= 0"; **and that a later edit which puts the entropy into a hypothesis of any declared statement reverses
+  the direction and may not be made before the pinning theorem is proved**;
+- the pinning theorem stays a leaf of the entropy base, so that the chain's own statements can be read in the
+  textbook's number by anyone who wants to;
+- the list for item 6 of § Done means says what the second reader of the printed page should be told about this.
+
+Your touches are unchanged. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 2 (2026-10-14 02:20 UTC) — yes: elaborate scratch copies of the four files at this pin, on four conditions
+
+**Ruling: go ahead.** *The alternative:* plan the port from the source text alone. *Why not:* this library's rule is
+to price a phase from its first leaves and never from a table of line counts, and your question is that rule asked
+properly. It is also what the library's ports already do — the release's text, copied and compiled here by this
+toolchain — so nothing new is being allowed; the release's clone stays read only, with nothing written or run in it.
+Confidence: high.
+
+**The conditions.**
+
+1. **A scan before each copy is elaborated**, its output kept under your data folder: the copied text is searched
+   for anything that runs code while a file elaborates — `#eval`, `run_cmd`, `run_elab`, `run_meta`, `initialize`,
+   `unsafe`, `IO.`, and any `macro`, `elab` or `syntax` declaration — and for any `import` left other than the one
+   you write. A file with a hit is not elaborated until I have seen the lines. The scan has a control: a planted
+   `#eval` must be reported. (These files are outside the cone our audit built; reading them is not the same as
+   having run them.)
+2. **The copies themselves are not committed.** This repository is going to be published, and the release's text
+   travels with its licence only inside a port. Keep the copies in a folder git ignores (the tree's `build/` is one);
+   commit the script that makes them and the logs of what each needed.
+3. One file at a time under the slot, 8 GiB, no compiled file written into the library — as you propose.
+4. **The result is a measurement, and it is wanted**: per file, what it needed at this pin (each patch, by kind),
+   the time, and what the three numbers you name turn out to be — the share of the gap between the pins these files
+   hit, the used cone of the maximal inequality against its declared one, and whether the bridge between the two
+   entropies types against the real constants.
+
+Your declared-cone numbers are logged. Your touches are extended by the scan and copy scripts and their logs under
+your data folder, and the ignored scratch folder. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).

@@ -1,0 +1,332 @@
+## MODULE Proofs.HadwigerNelson.Arith.ThreeColourCharacter constants=22
+C THM HadwigerNelson.ThreeColourCharacter.exists_int_vector_of_forall_neg._simp_1_3 INTERNAL TYPE=cf55e889f99db8b90029e0ac VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCharacter.0.HadwigerNelson.ThreeColourCharacter.winding_le_vertex._proof_1_1 INTERNAL TYPE=8fe7870e10cfb973997b06ff VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCharacter.exists_character_one_two TYPE=2acc3e02721ec5b0e916595e VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCharacter.exists_int_vector_of_forall_neg._simp_1_1 INTERNAL TYPE=5b1dd41da47b7b9d39a9e7e9 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColour.Winding.exists_box_point TYPE=23545448fd3e4731e45f0230 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable TYPE=bd0f6eeeaaadf82ba3ee4f8c VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable_unitRing TYPE=29c7109970cd7d644fc55fed VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCharacter.exists_int_vector_of_forall_neg TYPE=bb2f383786f9902b46e4624a VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCharacter.0.HadwigerNelson.ThreeColourCharacter.exists_mem_box_of_forall_int INTERNAL TYPE=8235d96ebaa16a8db97ac281 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCharacter.exists_character_of_box_point TYPE=d33254ee5fcb444638d3b70a VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCharacter.0.HadwigerNelson.ThreeColourCharacter.winding_le_vertex INTERNAL TYPE=3ab48d66f8c609cade943fcc VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCharacter.exists_int_vector_of_forall_neg._simp_1_6 INTERNAL TYPE=b84ed43e284b431edd25ded8 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCharacter.exists_int_vector_of_forall_neg._simp_1_2 INTERNAL TYPE=5f2822f027e66ea9439af706 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCharacter.exists_int_vector_of_forall_neg._simp_1_7 INTERNAL TYPE=38b40303f62fdb14550c7895 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCharacter.bandSet_three_nonempty_zmod_five TYPE=c6bf8233d2c4fd458341e649 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCharacter.exists_int_vector_of_forall_neg._simp_1_4 INTERNAL TYPE=a789e8a05704042d6b055671 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCharacter.isClosed_band TYPE=df2899030c734a2002629a20 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCharacter.exists_character_of_properAlong TYPE=ab99c0543ebca724e3a38d49 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCharacter.bandSet_three_nonempty_of_proper TYPE=cdad210af58715a65f46ac14 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCharacter.bandSet_nonempty_of_finite TYPE=bfdfed7ebe585a6cbc80b858 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCharacter.0.HadwigerNelson.ThreeColourCharacter.winding_le_vertex._proof_1_2 INTERNAL TYPE=0cafd31744c12f228f22a3f4 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCharacter.exists_int_vector_of_forall_neg._simp_1_5 INTERNAL TYPE=d140ba623c140aefc82aed5c VALUE=- DATA=-
+## MODULE Proofs.HadwigerNelson.Arith.TorsionExtraction constants=52
+C DEF HadwigerNelson.TorsionExtraction.inv5 TYPE=78a6f26d0e28c1a3eb8cd94d VALUE=94b97f0d305a54a821da15dc DATA=-
+C THM HadwigerNelson.TorsionExtraction.inv_natCast_mem_unitRing_of_sqrt_mem TYPE=4d2564ac40694a9a45a11b27 VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.inv_three_mem_unitRing_of_sqrt_mem._proof_1_1 INTERNAL TYPE=f11a7e502348c9e2ddf5a7bc VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_of_sqrt_mem TYPE=10d1e9844fa305d2b9f42ae8 VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.inv5._proof_1 INTERNAL TYPE=efc57008dc0f79e1af17b7a7 VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.mem_fieldBandSet_two_of_inv_three_mem TYPE=9dc3b3b16d8d0851d7e75731 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.TorsionExtraction.0.HadwigerNelson.TorsionExtraction.unitRing_induction INTERNAL TYPE=7773e2998b6f872d938fdf91 VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.fieldBandSet_three_eq_empty_of_sqrt_mem TYPE=876ee690273b6b580eba651b VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.TorsionExtraction.0.HadwigerNelson.TorsionExtraction.abs_eq_of_one_le_abs_form INTERNAL TYPE=450c761079324654037e10a9 VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.tendsto_layer._simp_1_1 INTERNAL TYPE=9007ba31a5ca78ac65f22509 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.TorsionExtraction.0.HadwigerNelson.TorsionExtraction.half_ne_zero INTERNAL TYPE=70a1904784b558b56ccd9b6c VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.TorsionExtraction.0.HadwigerNelson.TorsionExtraction.rotation_layer._simp_1_6 INTERNAL TYPE=b84ed43e284b431edd25ded8 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.TorsionExtraction.0.HadwigerNelson.TorsionExtraction.rotation_layer._simp_1_7 INTERNAL TYPE=38b40303f62fdb14550c7895 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.TorsionExtraction.0.HadwigerNelson.TorsionExtraction.rotation_layer._simp_1_4 INTERNAL TYPE=a789e8a05704042d6b055671 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.TorsionExtraction.0.HadwigerNelson.TorsionExtraction.rotation_layer._simp_1_2 INTERNAL TYPE=5f2822f027e66ea9439af706 VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.mem_fieldBandSet_two_of_inv_three_mem._proof_1_1 INTERNAL TYPE=4f7525d33d2fe019b7a89ea9 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.TorsionExtraction.0.HadwigerNelson.TorsionExtraction.exists_unitVectors_inv_natCast._proof_1_1 INTERNAL TYPE=9dc4cf561e6b19a135bcfea9 VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.not_colorable_two_of_sqrt_mem._proof_1_1 INTERNAL TYPE=32e6df063824be0e3c953d52 VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.three_le_chromaticNumber_planeOver_of_sqrt_mem TYPE=614082b14852cb98f4339490 VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.inv_three_mem_unitRing_of_sqrt_mem TYPE=a8ab96ed29214de37148d0fc VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.colorable_two_of_fieldBandSet_three_nonempty TYPE=077f790bd2915fd8efd73b3b VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.TorsionExtraction.0.HadwigerNelson.TorsionExtraction.exists_unitVectors_inv_natCast INTERNAL TYPE=0153a41c32b1d0706d1da0a3 VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.not_colorable_two_of_sqrt_mem TYPE=9b7d8b62d055533c83ad819d VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.colorable_two_iff_fieldBandSet_two_nonempty TYPE=0297363595a8ef7e7d181978 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.TorsionExtraction.0.HadwigerNelson.TorsionExtraction.exists_orbit INTERNAL TYPE=ce8f79118398b04f559eb30d VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_fieldOfRadicands TYPE=147287cf3f463d5deee709dc VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.coe_inv5 TYPE=ca724cc513d33ba984dcdd92 VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.not_colorable_two_of_sqrt_mem._proof_1_2 INTERNAL TYPE=e900d7b0d64117cca96ea2f2 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.TorsionExtraction.0.HadwigerNelson.TorsionExtraction.no_rotation_at_corner INTERNAL TYPE=01f502429812cbbf63900b89 VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_of_inv_three_mem TYPE=d802c4fc24f1c0944d920e21 VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.tendsto_layer._simp_1_2 INTERNAL TYPE=e0ff3b06dd37c5a18b1a65dc VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.TorsionExtraction.0.HadwigerNelson.TorsionExtraction.half_ne_zero._proof_1_1 INTERNAL TYPE=94db59fe720b916eaad9d6cc VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.exists_zmod_hom_of_mem_torsionBy TYPE=d9a7bf72881bf2bd93b56693 VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.colorable_two_of_inv_three_mem TYPE=e013a18249638a2961d54f3e VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.three_le_chromaticNumber_planeOver_of_sqrt_mem._proof_1_1 INTERNAL TYPE=e7185fbd3de647a8ae47b83e VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.layer_step TYPE=fd5190d2faebd4fc0327605d VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.chromaticNumber_planeOver_ne_three_of_inv_three_mem TYPE=af1ace94882d6a9dc10a2847 VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.exists_torsion_mem_fieldBandSet TYPE=afeca99eae0f155d9136b259 VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_of_inv_three_mem._proof_1_1 INTERNAL TYPE=8d0edb70039090ef1b940e67 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.TorsionExtraction.0.HadwigerNelson.TorsionExtraction.rotation_layer._simp_1_3 INTERNAL TYPE=cf55e889f99db8b90029e0ac VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.TorsionExtraction.0.HadwigerNelson.TorsionExtraction.exists_lift_of_mem_band_three INTERNAL TYPE=5e5d49db12b4d952d078b4bd VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.TorsionExtraction.0.HadwigerNelson.TorsionExtraction.rotation_layer._simp_1_5 INTERNAL TYPE=d140ba623c140aefc82aed5c VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.layer_dichotomy TYPE=55508b76a506fa036c55a3ee VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.TorsionExtraction.0.HadwigerNelson.TorsionExtraction.eq_half_of_mem_band_two INTERNAL TYPE=df655be014657de6156bc780 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.TorsionExtraction.0.HadwigerNelson.TorsionExtraction.corner_layer INTERNAL TYPE=e6bc2aa153deb3d38f50398c VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_of_sqrt_mem._proof_1_1 INTERNAL TYPE=0be988a3fea951fbfeef46a5 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.TorsionExtraction.0.HadwigerNelson.TorsionExtraction.rotation_layer._simp_1_1 INTERNAL TYPE=5b1dd41da47b7b9d39a9e7e9 VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.inv_three_mem_unitRing_of_sqrt_mem._proof_1_2 INTERNAL TYPE=83122a1881665386b27952d1 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.TorsionExtraction.0.HadwigerNelson.TorsionExtraction.rotation_layer INTERNAL TYPE=51e8491a897beccc600c1e40 VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.inv5._proof_2 INTERNAL TYPE=ed149021f941e424aa585e6c VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.tendsto_layer TYPE=bca5731e7d09a6877d8686ad VALUE=- DATA=-
+C THM HadwigerNelson.TorsionExtraction.fieldBandSet_three_eq_empty_of_sqrt_mem._proof_1_1 INTERNAL TYPE=0be988a3fea951fbfeef46a5 VALUE=- DATA=-
+## MODULE Proofs.HadwigerNelson.Arith.ThreeColourCriterion constants=44
+C THM HadwigerNelson.ThreeColourCriterion.exists_normOne_zero_of_card_ne_nine TYPE=ff01e0a1f070e91f135fab71 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.finite_quotient_span_prime INTERNAL TYPE=5dc441c5ba93dbe8925946a9 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.forall_unit_eq_one_or_forall_unit_ne_zero INTERNAL TYPE=ffd6149e60d40d957c58267f VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.conjR_mem_unitSet INTERNAL TYPE=b6d5a26813140400ac222910 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.exists_quotient_hom INTERNAL TYPE=de87269273f3000fbb1ae5bb VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCriterion.exists_maximal_of_torsion TYPE=555532f890286051a02d2729 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCriterion.finite_quotient_span_natCast TYPE=38f89528254894b43ce4c14a VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.quotientMap_involutive INTERNAL TYPE=0c40c3bc1eb00e2f45bc7b85 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCriterion.conjR_conjR TYPE=9a554274085439dc97106a78 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCriterion.conjR._proof_2 INTERNAL TYPE=879ce900cc87fccf7c513da4 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCriterion.conjR._proof_3 INTERNAL TYPE=e8cb97b34911323763fec131 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.exists_maximal_conj_trivial_of_quotient INTERNAL TYPE=3e340bacff9179b1ee53cd93 VALUE=- DATA=-
+C DEF HadwigerNelson.ThreeColourCriterion.conjR TYPE=4bc5797088e2aa948010fbcb VALUE=8cf8e3d50277fe9a480e34fb DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.one_mem_unitSet INTERNAL TYPE=94c00106de16077c67ee7ed9 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.two_part_eq_one_iff_three_part_eq_zero._proof_1_1 INTERNAL TYPE=35de5ea1b12d940d63f07d30 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCriterion.exists_unitSet_mul_conjR_eq TYPE=b416ca2cf0153a4868a35475 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCriterion.comap_conjR_eq TYPE=c091af97c2941949535c3072 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCriterion.exists_maximal_conj_trivial TYPE=ee7cc0f99c26ae725ce23a56 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCriterion.targetFloor_four_weil TYPE=d9c9b7c5f071d59d4f8dd769 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine TYPE=27df98a6dcb09345030faaa8 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.two_part_eq_one_iff_three_part_eq_zero._proof_1_2 INTERNAL TYPE=8f0ded9a3f20e0d30b5dfdf1 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.two_part_eq_one_iff_three_part_eq_zero INTERNAL TYPE=bb5687f4dc3c8b42cc028e2f VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine_of_colorable_three TYPE=d505e4c6cdab0a7aaa8545d7 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.comap_quotientMap_conjR INTERNAL TYPE=d6af6fff2de91d6f76c9c93d VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.half_ne_zero INTERNAL TYPE=70a1904784b558b56ccd9b6c VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCriterion.coe_conjR TYPE=7e503bbeb391219b71895b96 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCriterion.eq_zero_of_forall_normOne_eq TYPE=611d8c47edfdb2b9731e32ac VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.exists_factor_functionals INTERNAL TYPE=97e4c91de009217d7d7e8a57 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCriterion.conj_mem_unitRing TYPE=a67cc3bd5cf71dce9e3a7c99 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.mk_eq_unit_mul_conj_inv INTERNAL TYPE=0b36035c8d517330cbfc5d8d VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCriterion.exists_maximal_conj_trivial_of_colorable_two TYPE=6e9438152f0d2b631a7f3c27 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCriterion.eq_zero_of_forall_normOne_eq._proof_1_1 INTERNAL TYPE=6912974cb78bdaf2f3fa4d9f VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.half_ne_zero._proof_1_1 INTERNAL TYPE=94db59fe720b916eaad9d6cc VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.card_quotient_comap_mk INTERNAL TYPE=425808b3c2b2ae1a6ec2b174 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCriterion.conjR._proof_1 INTERNAL TYPE=f31fe21ceeaa09c996e3fb57 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.neg_one_mem_unitSet INTERNAL TYPE=eca938c578ca3c239f44a0bb VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.unitRing_induction INTERNAL TYPE=58230b9858ffd2e2905b6910 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCriterion.exists_mul_conj_inv_eq_of_mul_conj_eq_one TYPE=742e9ac938c94a475141da76 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.charP_quotient_of_isMaximal INTERNAL TYPE=69f9b54b9787cc5ad2078109 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.mul_conjR_of_mem_unitSet INTERNAL TYPE=70aa8043fcbac6102140f38b VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.mul_mem_unitSet INTERNAL TYPE=8515602cad3c2fcfef22eb75 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeColourCriterion.fieldBandSet_two_nonempty_of_conj_trivial TYPE=1fd431596456c18ea62f2868 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine_of_quotient INTERNAL TYPE=796422405deb60529319a2ec VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeColourCriterion.0.HadwigerNelson.ThreeColourCriterion.toAddCircle_one_two INTERNAL TYPE=f35ea6b475518f0bd572614a VALUE=- DATA=-
+## MODULE Proofs.HadwigerNelson.Arith.DyadicQuadratic constants=131
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.sq_emod_sixteen_ne_eight._proof_1_2 INTERNAL TYPE=7c936602e7e33e2a8f78b4ef VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.emod_four_mul_self_modEq._proof_1_1 INTERNAL TYPE=d535a2484383067b655f57a0 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_three_mod_eight._proof_1_2 INTERNAL TYPE=640a753bb2f04486697a1b3c VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.shape_of_check._proof_1_1 INTERNAL TYPE=8e7661d2372c78733bf690e7 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.sq_emod_sixteen_ne_eight._proof_1_3 INTERNAL TYPE=a964abea368676fd99dd0a9c VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.not_isSquare_of_mod_four INTERNAL TYPE=926eb5234581e74a21972dce VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.not_odd_of_three_mod_eight._proof_1_3 INTERNAL TYPE=f4e61a36666daae921f206a6 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.not_odd_of_three_mod_eight._proof_1_2 INTERNAL TYPE=75630ef02d2d9b3efb3156ce VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.dyadic_shape_two_mod_four._simp_1_1 INTERNAL TYPE=368d63a49eb9d4efb913970d VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.sq_emod_sixteen_ne_eight._proof_1_5 INTERNAL TYPE=85988b47b1a7db6b43580675 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.exists_not_all_even INTERNAL TYPE=31d55a9651217deb54a6835f VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.dyadic_shape_one_mod_four._proof_1_3 INTERNAL TYPE=5c133db867b6f3c1d814aadd VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_of_form._simp_1_8 INTERNAL TYPE=38b40303f62fdb14550c7895 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_of_lattice._simp_1_3 INTERNAL TYPE=5f2822f027e66ea9439af706 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_one_mod_four._proof_1_1 INTERNAL TYPE=27ff4cda1937ae27ff2d6450 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.dyadic_shape_three_mod_eight._proof_1_4 INTERNAL TYPE=b8e3119d6ead8052ad561328 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.sq_emod_sixteen_ne_eight INTERNAL TYPE=abb5cbda46cac7bb2c7b2ecb VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_three_mod_eight TYPE=51ce7f0612d613d068326276 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_two_mod_four._proof_1_4 INTERNAL TYPE=68d13328e556f48c4c3ffd2f VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_three_mod_eight._simp_1_7 INTERNAL TYPE=d140ba623c140aefc82aed5c VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.exists_nat_eq_emod_four._proof_1_2 INTERNAL TYPE=01fbb82c112f415ecd930a8f VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_rat_add_mul_sqrt_eq TYPE=1746fbf7a5c6ab32e720254d VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_three_mod_eight._simp_1_4 INTERNAL TYPE=5f2822f027e66ea9439af706 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_of_lattice._simp_1_5 INTERNAL TYPE=a789e8a05704042d6b055671 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_three_mod_eight._simp_1_6 INTERNAL TYPE=a789e8a05704042d6b055671 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.red._proof_2 INTERNAL TYPE=91e557cbf6316f9b922680fc VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_of_form._simp_1_5 INTERNAL TYPE=a789e8a05704042d6b055671 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.exists_not_all_even._proof_1_1 INTERNAL TYPE=96e7ef12db748f8dd07d107d VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.sq_emod_eight_of_odd._proof_1_3 INTERNAL TYPE=d0071b0801af1dfaa83ef98b VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.sq_emod_eight_of_odd._proof_1_2 INTERNAL TYPE=01c5d4a3231336dcca8e8729 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.dyadic_shape_one_mod_four._simp_1_2 INTERNAL TYPE=8a2d20b81be3642d4cc68b75 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.dyadic_shape_one_mod_four._simp_1_4 INTERNAL TYPE=834c5416ed0a30924818fe8e VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.form_div_eq INTERNAL TYPE=c7db06b00ff6766d02b736c5 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.dyadic_shape_three_mod_eight._simp_1_2 INTERNAL TYPE=8a2d20b81be3642d4cc68b75 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.dyadic_shape_three_mod_eight._simp_1_7 INTERNAL TYPE=834c5416ed0a30924818fe8e VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.rat_eq_zero_of_add_mul_irrational INTERNAL TYPE=25d4f4f36f16eeab00846eb1 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.sq_emod_sixteen_ne_eight._proof_1_4 INTERNAL TYPE=a8ae4ab10aa4f7e6fbda98ed VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.oddDen._proof_1 INTERNAL TYPE=af8aeb74e303af25ec65a61c VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.dyadic_shape_two_mod_four._proof_1_4 INTERNAL TYPE=e872598afb4198ae5067010f VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_three_mod_eight._proof_1_10 INTERNAL TYPE=355b2d162962ad9e3381404c VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_one_mod_four._proof_1_5 INTERNAL TYPE=021f98e722bc9444338db0b1 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_three_mod_eight._proof_1_12 INTERNAL TYPE=2567f8725e4071818133324c VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_of_form._simp_1_4 INTERNAL TYPE=cf55e889f99db8b90029e0ac VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.colorable_two_planeOver_sqrt TYPE=2d81c00a3b0512ad5dc47058 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.dyadic_shape_three_mod_eight._proof_1_5 INTERNAL TYPE=c33ce5cd991c8bfabb4daeff VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_of_form._simp_1_2 INTERNAL TYPE=5b1dd41da47b7b9d39a9e7e9 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.not_isSquare_of_mod_four._proof_1_3 INTERNAL TYPE=a40e6d7d3afce5da8673d55e VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_of_form._simp_1_6 INTERNAL TYPE=d140ba623c140aefc82aed5c VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_of_form._simp_1_7 INTERNAL TYPE=b84ed43e284b431edd25ded8 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.mod_four_of_squarefree TYPE=faf182bc825d658674962d88 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.not_isSquare_of_mod_four._proof_1_2 INTERNAL TYPE=8ecc1967171a659691d4e300 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.dyadic_shape_three_mod_eight._proof_1_3 INTERNAL TYPE=eb07302627ee13b60136c296 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.not_isSquare_of_mod_four._proof_1_5 INTERNAL TYPE=83fe668efb2caf70531ca5f0 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_two_mod_four._proof_1_3 INTERNAL TYPE=c688c8cc65f84715bea81957 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.shape_of_check INTERNAL TYPE=a7729ddfb1f4c4065df116d4 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_two_mod_four._proof_1_2 INTERNAL TYPE=457f4c7a8f8b9826fe022eab VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.emod_four_mul_self_modEq INTERNAL TYPE=f93146134efefd8753330cc3 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.dyadic_shape_two_mod_four._simp_1_2 INTERNAL TYPE=8a2d20b81be3642d4cc68b75 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.colorable_two_planeOver_sqrt_of_mod_four TYPE=0ff28037d738cb6c8f5cb270 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.dyadic_shape_two_mod_four._simp_1_4 INTERNAL TYPE=834c5416ed0a30924818fe8e VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.sq_emod_eight_of_odd INTERNAL TYPE=f03ee05a3304de2c4ad4a8b8 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_of_form._proof_1_1 INTERNAL TYPE=395af2ec35be4e76db697262 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.dyadic_shape_two_mod_four TYPE=7770c4d3f59266520cc93e51 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.dyadic_shape_three_mod_eight._proof_1_6 INTERNAL TYPE=9488b7697363d36c64dc64a3 VALUE=- DATA=-
+C DEF _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.shapeCheck INTERNAL TYPE=b5dcd34364ab75a0e441dec5 VALUE=efb763bb5b806b835e14985e DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_two_mod_four._proof_1_1 INTERNAL TYPE=c40ac9a756a9ce54403adb32 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_of_lattice INTERNAL TYPE=fa21e85deefd31d93651572a VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_one_mod_four._proof_1_4 INTERNAL TYPE=68d13328e556f48c4c3ffd2f VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.red_ne_zero._proof_1_1 INTERNAL TYPE=faa5491da3696bd8169d6fec VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.dyadic_shape_two_mod_four._proof_1_5 INTERNAL TYPE=0a1296400c6007a6eb2207a9 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.colorable_planeOver_of_addMonoidHom TYPE=49ef6a684605151ddd37aeea VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.dyadic_shape_two_mod_four._proof_1_3 INTERNAL TYPE=c7a88e255cda64b1f4eee45b VALUE=- DATA=-
+C DEF _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.oddDen INTERNAL TYPE=66f82235c364e8269cbe7753 VALUE=629fb53ce3127fb62dc1c19d DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.not_isSquare_of_mod_four._proof_1_1 INTERNAL TYPE=19cb8db151c30ae4ae5bb971 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.not_isSquare_of_mod_four._proof_1_4 INTERNAL TYPE=fdefd0114eec03ecfc398f1e VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.dyadic_shape_one_mod_four._simp_1_1 INTERNAL TYPE=368d63a49eb9d4efb913970d VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.form._proof_1 INTERNAL TYPE=069e8e4fe25090a66b27e00b VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.form_div_eq._proof_1_1 INTERNAL TYPE=7efae7803d6f6f075ae07021 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_of_lattice._simp_1_7 INTERNAL TYPE=b84ed43e284b431edd25ded8 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_three_mod_eight._simp_1_5 INTERNAL TYPE=cf55e889f99db8b90029e0ac VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.dyadic_shape_one_mod_four._proof_1_5 INTERNAL TYPE=e33df7a655986232a01823f5 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_of_lattice._simp_1_2 INTERNAL TYPE=5b1dd41da47b7b9d39a9e7e9 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_of_lattice._simp_1_6 INTERNAL TYPE=d140ba623c140aefc82aed5c VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_of_lattice._simp_1_4 INTERNAL TYPE=cf55e889f99db8b90029e0ac VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.coordHom.eq_1 INTERNAL TYPE=92d0905f680dc94ac0f26bbd VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_three_mod_eight._simp_1_3 INTERNAL TYPE=5b1dd41da47b7b9d39a9e7e9 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.sq_emod_eight_of_odd._proof_1_1 INTERNAL TYPE=e0e44a97d052283d6ffbf3e5 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_three_mod_eight._simp_1_8 INTERNAL TYPE=b84ed43e284b431edd25ded8 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_of_form INTERNAL TYPE=bbc15a16569504515ca070f9 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.colorable_four_planeOver_sqrt TYPE=0358a0af4d477fa37ff3ec08 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_three_mod_eight._simp_1_9 INTERNAL TYPE=38b40303f62fdb14550c7895 VALUE=- DATA=-
+C DEF _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.coordHom INTERNAL TYPE=d020af1fe2d9e1fa19e439e0 VALUE=d5dfe4d787b9efe9e1665b80 DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.coordHom._proof_1 INTERNAL TYPE=15f6502e4600ba80411596e4 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_two_mod_four._proof_1_5 INTERNAL TYPE=3130ed8feb5dd175b263a5b5 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.natCast_den_ne_zero INTERNAL TYPE=7d86ecafce883bd25574b083 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_int_solution_of_mem_unitVectors TYPE=84a8f0ad06e93e348f2b91bf VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.exists_nat_eq_emod_four._proof_1_1 INTERNAL TYPE=37ac83ed5c4a703feead34d5 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.exists_nat_eq_emod_four INTERNAL TYPE=f539afe70a5b65a381f77eda VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_three_mod_eight._proof_1_13 INTERNAL TYPE=68d13328e556f48c4c3ffd2f VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.oddDen._proof_2 INTERNAL TYPE=46100dbf04d8a70c53631beb VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_one_mod_four._proof_1_3 INTERNAL TYPE=7b0d531891ee01f5906ed3f8 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.oddDen._proof_3 INTERNAL TYPE=d8976121ac855e9aaa611f86 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_one_mod_four._proof_1_2 INTERNAL TYPE=457f4c7a8f8b9826fe022eab VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.dyadic_shape_three_mod_eight._proof_1_8 INTERNAL TYPE=60d6bd53402fed1e1cd8e5d8 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.mem_oddDen_of_eq_div INTERNAL TYPE=62914aa362ac71d43137ff64 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.dyadic_shape_one_mod_four TYPE=3f385f3b67f5ac625f369319 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.not_odd_of_three_mod_eight._proof_1_4 INTERNAL TYPE=831e8096542a363712a98f9b VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_of_lattice._simp_1_8 INTERNAL TYPE=38b40303f62fdb14550c7895 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.not_odd_of_three_mod_eight._proof_1_1 INTERNAL TYPE=83b2fa0d620b25320f2a8574 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_of_form._simp_1_3 INTERNAL TYPE=5f2822f027e66ea9439af706 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.dyadic_shape_one_mod_four._proof_1_4 INTERNAL TYPE=e9373e213a9699d9496086ef VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_three_mod_eight._proof_1_1 INTERNAL TYPE=ac6edabce68d251ceaac7336 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.dyadic_shape_three_mod_eight._simp_1_1 INTERNAL TYPE=368d63a49eb9d4efb913970d VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_one_mod_four TYPE=37e2e7eedccc7340ba57aaac VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.sq_emod_sixteen_ne_eight._proof_1_1 INTERNAL TYPE=d535a2484383067b655f57a0 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.form.eq_1 INTERNAL TYPE=4e805e76b0c875126b4ddde9 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.dyadic_shape_three_mod_eight TYPE=900c6fe6c3db92ab69cb100c VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.red_ne_zero INTERNAL TYPE=d6d60cf7ed504c445c9f1648 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_three_mod_eight._proof_1_14 INTERNAL TYPE=bd35690a12e3d8714d514651 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.sq_emod_sixteen_ne_eight._proof_1_6 INTERNAL TYPE=4681c45f4906b66cf4829759 VALUE=- DATA=-
+C DEF _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.red INTERNAL TYPE=90cb4c32cf90ce365bbfee78 VALUE=ba7ce30d518ee4eab7b871c1 DATA=-
+C THM HadwigerNelson.DyadicQuadratic.mod_four_of_squarefree._proof_1_2 INTERNAL TYPE=a1d4d02c006a6565ce376406 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.red._proof_1 INTERNAL TYPE=1b0a5d9a2dbb4fcdfb65a90f VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.colorable_two_planeOver_sqrt._proof_1_2 INTERNAL TYPE=6b5397fc8b6806d85574ef2e VALUE=- DATA=-
+C DEF _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.form INTERNAL TYPE=bd823ee2f2d78e0a180dd87b VALUE=87b0cf0d6dc96a98f0c994f1 DATA=-
+C THM HadwigerNelson.DyadicQuadratic.colorable_two_planeOver_sqrt._proof_1_1 INTERNAL TYPE=ec8bc2107c4412e650d89979 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.mod_four_of_squarefree._proof_1_1 INTERNAL TYPE=2351c59e09279c6707639775 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.not_odd_of_three_mod_eight INTERNAL TYPE=27a59ddc5111739cb89667f6 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.DyadicQuadratic.0.HadwigerNelson.DyadicQuadratic.coordHom_injective INTERNAL TYPE=5361bd8cdbe5cd975d1deac6 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_two_mod_four TYPE=5cc8f0f34e0bcb207065ca59 VALUE=- DATA=-
+C THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_three_mod_eight._proof_1_11 INTERNAL TYPE=457f4c7a8f8b9826fe022eab VALUE=- DATA=-
+## MODULE Proofs.HadwigerNelson.Arith.ThreeFourColours constants=73
+C THM HadwigerNelson.ThreeFourColours.exists_unitSet_residue_eq TYPE=fe6d4a820d977616c82c6e72 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.levelTarget_colorable_three_of_card_nine TYPE=42f02d25bea282dd1ecb8bfe VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.exists_stablePrime_conj_trivial TYPE=6c76b3c84ce742b658705454 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four_of_dyadic._proof_1_1 INTERNAL TYPE=24a830f644fab4ecc54cb7f9 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.exists_stablePrime_card_four_sqrt._proof_1_1 INTERNAL TYPE=821e96cb80307bd5861d6505 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.colorable_three_planeOver_iff TYPE=d1930b6065a226f29ce7c03a VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four._proof_1_5 INTERNAL TYPE=463232a2b56d521b87f82d7e VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.ringResidue._proof_7 INTERNAL TYPE=5c70df5822ff77e329711edc VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.residue_one_eq_zero_iff INTERNAL TYPE=76a5b6f4a8e018f80bd592ba VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_le_three_iff TYPE=29131876d779bce932c49dd3 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four_of_seven_of_mod TYPE=a1a56e979979090e40309b2a VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_three._proof_1_1 INTERNAL TYPE=1d4c8c66ca7d0c30253f2241 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.conjO_upO INTERNAL TYPE=6e074dcb076d854f127deafa VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.nine_functional_ne_zero INTERNAL TYPE=47224d263783747f8780a71d VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.finrank_fieldI_le_two_mul INTERNAL TYPE=985e66cabe82aba9774dba53 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.ringResidue._proof_4 INTERNAL TYPE=5f3355f113bfc33e8f031b46 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.ringResidue._proof_1 INTERNAL TYPE=9fbbce9dd013f2a2e1812e7a VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four TYPE=d5f1b8fbfd9a7bcfc657f77d VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four._proof_1_1 INTERNAL TYPE=eab91286bf173f5a70a15033 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.three_le_chromaticNumber_of_not_colorable_two INTERNAL TYPE=889dd1797e4e5494bd10db22 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four._proof_1_4 INTERNAL TYPE=f863bbb31c76f8e271dfeac3 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.exists_maximal_card_three_of_stablePrime_card_nine TYPE=82e0d6a0ec13ee9d90ec5915 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.exists_stablePrime_card_nine._proof_1_1 INTERNAL TYPE=8f48e6a437973c5b237e53c7 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four_of_seven._proof_1_1 INTERNAL TYPE=18d24e0e932b55212d479f80 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.localBound_le_chromaticNumber_or_four_le._proof_1_1 INTERNAL TYPE=8d0edb70039090ef1b940e67 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.exists_stablePrime_of_maximal TYPE=15d8f3ce1f957f9f0be18273 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.colorable_three_of_card_three TYPE=3ac9f41bb91007733857e215 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.fieldBandSet_three_nonempty_sqrt_three TYPE=8e3127ef4600d2cb9a887a8f VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.colorable_four_planeOver_sqrt_of_seven TYPE=7ca4e60786503d1429706328 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.ringResidue._proof_6 INTERNAL TYPE=ae85f8fb1d814cc607d51843 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_table TYPE=a8ca5d61cb7b1f7c564f9414 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.exists_maximal_card_three_of_card_nine TYPE=57a03080e646603680644efe VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.levelTarget_colorable_two_of_ramified TYPE=8953c2812ea36c340195c03c VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.colorable_three_planeOver_sqrt TYPE=2339ed9ee327bd2b415e5af2 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.toFieldIHom._proof_1 INTERNAL TYPE=6208b3ed5782bba6d7692055 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.exists_I_integer'._simp_1_2 INTERNAL TYPE=70dd8e738b568ac456fbec3c VALUE=- DATA=-
+C DEF _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.ringResidue INTERNAL TYPE=872840be3a75170d1813f499 VALUE=7b9d4bc073bbd9a836ea42c1 DATA=-
+C THM HadwigerNelson.ThreeFourColours.localBound_le_chromaticNumber_of_le_four TYPE=8276ef78b96382d27216615b VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four_of_dyadic TYPE=f4ab049f4151431f5edf35e8 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_eq_localBound_of_le_four TYPE=ab5831577889a55beb53b9e0 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four._proof_1_2 INTERNAL TYPE=0f4576f8bf1e3c41e0ad8952 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four._proof_1_3 INTERNAL TYPE=32fc1681c87657e24f077707 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.mul_conjR_eq_one INTERNAL TYPE=70aa8043fcbac6102140f38b VALUE=- DATA=-
+C DEF _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.upO INTERNAL TYPE=1e2410a87043a160afe3dc52 VALUE=d575adb4e1fa33082b06d10d DATA=-
+C THM HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four_of_seven TYPE=9563f1c19172beedd592fd25 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.exists_stablePrime_ramified_sqrt TYPE=7b6a644a55b0857396dc8ebe VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.localBound_le_chromaticNumber_or_four_le TYPE=6b4820355a5540e5c10cdaea VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.exists_stablePrime_card_nine TYPE=9b5753f8fe0c99e8cb0f71f7 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_three TYPE=ffad4cd65b9f2ebb8f075d12 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_eq_three_iff TYPE=b0d814fd1c4f15f1943201c0 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.quotientMap_conjO_involutive INTERNAL TYPE=fcd504377e4c7bba9397ea22 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.natCast_zmod_of_mod INTERNAL TYPE=42e3dc8992548aa21afa7291 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_three._proof_1_3 INTERNAL TYPE=ab4dfef2eede293623535c5c VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_three._proof_1_2 INTERNAL TYPE=0041916f7ad2817a0d72cd0f VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.ringResidue._proof_2 INTERNAL TYPE=879ce900cc87fccf7c513da4 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.ringResidue._proof_3 INTERNAL TYPE=92f41bba341a48bf190b7d5a VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.exists_stablePrime_card_four_sqrt._proof_1_2 INTERNAL TYPE=ffb91572d64ca2053f724300 VALUE=- DATA=-
+C DEF _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.toFieldIHom INTERNAL TYPE=fda417533d52aef61e50c6e5 VALUE=f47fa369790a40ea66e44d0d DATA=-
+C THM HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_two TYPE=ce3aac28ed17f77bdc8ae3de VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.exists_I_integer' INTERNAL TYPE=d7df37a8ce9819d0c4a4aa67 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four_of_dyadic._proof_1_2 INTERNAL TYPE=1c2eaca0ec55c44e3dd3f71d VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.isMaximal_pow_one INTERNAL TYPE=497437e822ed2c90d8925af0 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.exists_maximal_conj_trivial_sqrt_two TYPE=5b63834ce90c7a987c9acedf VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.finrank_fieldOfRadicands_singleton_le INTERNAL TYPE=f7f63b2301522a8119d0da30 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.exists_stablePrime_card_four_sqrt TYPE=e3b298f8c0095f7f4dd5fde9 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.exists_I_integer'._simp_1_1 INTERNAL TYPE=4e9ec655ca6215818f17eb70 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_three TYPE=459c368e1103f39647e44341 VALUE=- DATA=-
+C THM HadwigerNelson.ThreeFourColours.exists_maximal_card_nine_sqrt_three TYPE=d74fa1cd9921c0fe9b64a5e9 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.three_le_chromaticNumber_of_not_colorable_two._proof_1_1 INTERNAL TYPE=dda06d78c97a887de2118def VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.ringResidue._proof_5 INTERNAL TYPE=f31fe21ceeaa09c996e3fb57 VALUE=- DATA=-
+C THM _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.ringResidue_apply INTERNAL TYPE=64fabe45bd0920c8202fc085 VALUE=- DATA=-
+C DEF _private.Proofs.HadwigerNelson.Arith.ThreeFourColours.0.HadwigerNelson.ThreeFourColours.residue_one_eq_zero_iff.match_1_1 INTERNAL TYPE=3ff569368a96208f7c0d0d79 VALUE=fcee45df9a88291755aa0d4d DATA=-
+C THM HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_three_of_mod TYPE=b9ab14c3f1db7dbd6cea786c VALUE=- DATA=-
+## MODULE Proofs.HadwigerNelson.Instances.UpperHalfCorollaries constants=4
+C THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_sqrt_247_le_five TYPE=2d39a59be2969b0c35962e7b VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.two_notMem_stablePrime_seven TYPE=0178e3c5621aa84c77d4527f VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_eq_two_of_localBound_le_two TYPE=81c7d988a5dddd03ce5c9bcc VALUE=- DATA=-
+C THM HadwigerNelson.UpperHalf.chromaticNumber_planeOver_sqrt_five_le_five TYPE=c69374f23427ec9a3b1dfa1a VALUE=- DATA=-

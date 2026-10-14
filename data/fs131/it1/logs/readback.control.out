@@ -1,0 +1,6 @@
+[W2: (2026-10-13, answering the choice be…]: DIFFERS (278 characters; verbatim, whitespace collapsed; source data/fs131/REQUEST-2026-10-13.md)
+[NF4-THEOREM: *The theorem.* (a) For ever…]: DIFFERS (541 characters; verbatim substring; source data/fs131/claims-NF4.md)
+[- 2026-10-13 17:51 UTC — **Three stateme…]: DIFFERS (946 characters; a whole line, character for character; source data/fs131/claims-NF4.md)
+[- 2026-10-13 17:59 UTC — **NF4-S9 is unt…]: DIFFERS (777 characters; a whole line, character for character; source data/fs131/claims-NF4.md)
+[- 2026-10-13 17:59 UTC — **Two statement…]: DIFFERS (615 characters; a whole line, character for character; source data/fs131/claims-NF4.md)
+compared=5 differing=5 mode=control

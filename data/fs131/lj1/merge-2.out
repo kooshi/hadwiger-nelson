@@ -1,0 +1,18 @@
+Merge made by the 'ort' strategy.
+ data/fs131/REQUEST-2026-10-13.md                |   4 +
+ data/fs131/briefs/FS131-IE1-entropy-base.md     | 116 ++++++++++++++++++
+ data/fs131/briefs/FS131-KN7-chain-next.md       | 107 +++++++++++++++++
+ data/fs131/briefs/scripts/mk-fs131-ie1.py       | 126 ++++++++++++++++++++
+ data/fs131/briefs/scripts/mk-fs131-kn7.py       | 119 +++++++++++++++++++
+ data/fs131/claims-NF2.md                        |   3 +
+ data/fs131/claims-NF4.md                        |   1 +
+ data/fs133/briefs/FS133-IB1-laws-and-density.md |  49 ++++++++
+ data/fs133/claims-K1.md                         |   3 +
+ plans/FS131-close-inventory.md                  |  10 ++
+ plans/SESSION-HANDOFF-2026-10-14.md             | 150 ++++++++++++++++++++++++
+ 11 files changed, 688 insertions(+)
+ create mode 100644 data/fs131/briefs/FS131-IE1-entropy-base.md
+ create mode 100644 data/fs131/briefs/FS131-KN7-chain-next.md
+ create mode 100644 data/fs131/briefs/scripts/mk-fs131-ie1.py
+ create mode 100644 data/fs131/briefs/scripts/mk-fs131-kn7.py
+ create mode 100644 plans/SESSION-HANDOFF-2026-10-14.md

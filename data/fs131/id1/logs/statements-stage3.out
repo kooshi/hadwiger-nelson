@@ -1,0 +1,30 @@
+Skeleton: kept (11 constants)
+Candidate: lean exit 0; errors: 0; sorry warnings: 0
+compared: 11 named constants of the first dump (11 theorems, 0 definitions; types, and values of definitions); 11 theorems written at 34d9113b2, each found in the first dump, each head compared as text
+internal (not compared): 0 before, 116 after
+new named constants in the second dump: 0
+new private declarations in the second dump (counted among the internal): 21
+  NEW PRIVATE DEF HadwigerNelson.DyadicQuadratic.coordHom
+  NEW PRIVATE THM HadwigerNelson.DyadicQuadratic.coordHom_injective
+  NEW PRIVATE THM HadwigerNelson.DyadicQuadratic.emod_four_mul_self_modEq
+  NEW PRIVATE THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_of_form
+  NEW PRIVATE THM HadwigerNelson.DyadicQuadratic.exists_addMonoidHom_of_lattice
+  NEW PRIVATE THM HadwigerNelson.DyadicQuadratic.exists_nat_eq_emod_four
+  NEW PRIVATE THM HadwigerNelson.DyadicQuadratic.exists_not_all_even
+  NEW PRIVATE DEF HadwigerNelson.DyadicQuadratic.form
+  NEW PRIVATE THM HadwigerNelson.DyadicQuadratic.form_div_eq
+  NEW PRIVATE THM HadwigerNelson.DyadicQuadratic.mem_oddDen_of_eq_div
+  NEW PRIVATE THM HadwigerNelson.DyadicQuadratic.natCast_den_ne_zero
+  NEW PRIVATE THM HadwigerNelson.DyadicQuadratic.not_isSquare_of_mod_four
+  NEW PRIVATE THM HadwigerNelson.DyadicQuadratic.not_odd_of_three_mod_eight
+  NEW PRIVATE DEF HadwigerNelson.DyadicQuadratic.oddDen
+  NEW PRIVATE THM HadwigerNelson.DyadicQuadratic.rat_eq_zero_of_add_mul_irrational
+  NEW PRIVATE DEF HadwigerNelson.DyadicQuadratic.red
+  NEW PRIVATE THM HadwigerNelson.DyadicQuadratic.red_ne_zero
+  NEW PRIVATE DEF HadwigerNelson.DyadicQuadratic.shapeCheck
+  NEW PRIVATE THM HadwigerNelson.DyadicQuadratic.shape_of_check
+  NEW PRIVATE THM HadwigerNelson.DyadicQuadratic.sq_emod_eight_of_odd
+  NEW PRIVATE THM HadwigerNelson.DyadicQuadratic.sq_emod_sixteen_ne_eight
+`example` heads: 4 at 34d9113b2, 4 in the working file; the Spec section compared byte for byte
+PASS: no statement changed
+CONTROL: 3 of 3 planted faults reported — the check can fail

@@ -1,0 +1,28 @@
+Axioms: lean exit 0; errors: 0; warnings: 0
+AxiomsControl: lean exit 0; errors: 0; warnings: 1
+records: 11 (9 public, 2 private); of the skeleton's nine theorems missing: []; resting on an axiom beyond the standard three: 0
+  public  HadwigerNelson.ThreeColour.Winding.exists_box_point : ['Classical.choice', 'Quot.sound', 'propext']
+  public  HadwigerNelson.ThreeColourCharacter.bandSet_nonempty_of_finite : ['Classical.choice', 'Quot.sound', 'propext']
+  public  HadwigerNelson.ThreeColourCharacter.bandSet_three_nonempty_of_proper : ['Classical.choice', 'Quot.sound', 'propext']
+  public  HadwigerNelson.ThreeColourCharacter.exists_character_of_box_point : ['Classical.choice', 'Quot.sound', 'propext']
+  public  HadwigerNelson.ThreeColourCharacter.exists_character_of_properAlong : ['Classical.choice', 'Quot.sound', 'propext']
+  public  HadwigerNelson.ThreeColourCharacter.exists_character_one_two : ['Classical.choice', 'Quot.sound', 'propext']
+  public  HadwigerNelson.ThreeColourCharacter.exists_int_vector_of_forall_neg : ['Classical.choice', 'Quot.sound', 'propext']
+  private HadwigerNelson.ThreeColourCharacter.exists_mem_box_of_forall_int : ['Classical.choice', 'Quot.sound', 'propext']
+  public  HadwigerNelson.ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable : ['Classical.choice', 'Quot.sound', 'propext']
+  public  HadwigerNelson.ThreeColourCharacter.isClosed_band : ['Classical.choice', 'Quot.sound', 'propext']
+  private HadwigerNelson.ThreeColourCharacter.winding_le_vertex : ['Classical.choice', 'Quot.sound', 'propext']
+PASS: every record is on the standard three
+records: 11 (9 public, 2 private); of the skeleton's nine theorems missing: []; resting on an axiom beyond the standard three: 3
+  public  HadwigerNelson.ThreeColour.Winding.exists_box_point : ['Classical.choice', 'Quot.sound', 'propext']
+  public  HadwigerNelson.ThreeColourCharacter.bandSet_nonempty_of_finite : ['Classical.choice', 'Quot.sound', 'propext']
+  public  HadwigerNelson.ThreeColourCharacter.bandSet_three_nonempty_of_proper : ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+  public  HadwigerNelson.ThreeColourCharacter.exists_character_of_box_point : ['Classical.choice', 'Quot.sound', 'propext']
+  public  HadwigerNelson.ThreeColourCharacter.exists_character_of_properAlong : ['Classical.choice', 'Quot.sound', 'propext']
+  public  HadwigerNelson.ThreeColourCharacter.exists_character_one_two : ['Classical.choice', 'Quot.sound', 'propext']
+  public  HadwigerNelson.ThreeColourCharacter.exists_int_vector_of_forall_neg : ['Classical.choice', 'Quot.sound', 'propext']
+  private HadwigerNelson.ThreeColourCharacter.exists_mem_box_of_forall_int : ['Classical.choice', 'Quot.sound', 'propext']
+  public  HadwigerNelson.ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable : ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+  public  HadwigerNelson.ThreeColourCharacter.isClosed_band : ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+  private HadwigerNelson.ThreeColourCharacter.winding_le_vertex : ['Classical.choice', 'Quot.sound', 'propext']
+CONTROL: sorryAx reported on 3 records, expected exactly ['HadwigerNelson.ThreeColourCharacter.bandSet_three_nonempty_of_proper', 'HadwigerNelson.ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable', 'HadwigerNelson.ThreeColourCharacter.isClosed_band'] — the check can fail, and names the leaf

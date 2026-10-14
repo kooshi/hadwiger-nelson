@@ -1,0 +1,8 @@
+
+/-!
+# FS-66's certificate at `p = 3`, checked by the kernel (FS131-KC13, FS131-IKC1; spec example of `Arith/FibreCert`)
+
+`data/fs66/b1/proto-cert-p3.json` (4,417 bytes; SOUNDNESS.md § 9 works its constant coefficient by hand), re-encoded by
+`tools/fs131_ikc1_gen.py`. `cert3_ok`: the whole check passes in the kernel, in under a second. The p = 11 certificate is
+`Arith/FibreCert11`; planted faults are in `data/fs131/ikc1/lean/controls/`.
+-/

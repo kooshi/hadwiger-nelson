@@ -1,0 +1,15 @@
+Skeleton: lean exit 0; errors: 0; sorry warnings: 10
+Candidate: lean exit 0; errors: 0; sorry warnings: 2
+compared: 18 named constants of the first dump (17 theorems, 1 definitions; types, and values of definitions); 18 declarations written at 34d9113b2, each found in the first dump
+internal (not compared): 5 before, 18 after
+new named constants in the second dump: 0
+new private declarations in the second dump (counted among the internal): 6
+  NEW PRIVATE THM HadwigerNelson.TorsionExtraction.abs_eq_of_one_le_abs_form
+  NEW PRIVATE THM HadwigerNelson.TorsionExtraction.eq_half_of_mem_band_two
+  NEW PRIVATE THM HadwigerNelson.TorsionExtraction.exists_unitVectors_inv_natCast
+  NEW PRIVATE THM HadwigerNelson.TorsionExtraction.half_ne_zero
+  NEW PRIVATE THM HadwigerNelson.TorsionExtraction.no_rotation_at_corner
+  NEW PRIVATE THM HadwigerNelson.TorsionExtraction.unitRing_induction
+`example` heads: 6 at 34d9113b2, 6 in the working file
+PASS: no statement and no definition changed
+CONTROL: 3 of 3 planted faults reported — the check can fail

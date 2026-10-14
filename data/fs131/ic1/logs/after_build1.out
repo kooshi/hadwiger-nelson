@@ -1,0 +1,45 @@
+-rw-r--r-- 1 kooshi kooshi 931536 2026-10-13 19:45:55.589443111 +0000 .lake/build/lib/lean/Proofs/HadwigerNelson/Arith/ThreeColourCharacter.olean
+== 1. dump of the compiled module
+lean exit 0; errors: 0; ## MODULE Proofs.HadwigerNelson.Arith.ThreeColourCharacter constants=22
+== 2. no statement changed (skeleton's print against the built module's)
+compared: 9 named constants of the first dump (9 theorems, 0 definitions; types, and values of definitions); 9 declarations written at 34d9113b2, each found in the first dump
+internal (not compared): 0 before, 13 after
+hygienic binder names replaced by ✝ in the two prints: 464
+new named constants in the second dump: 0
+new private declarations in the second dump (counted among the internal): 2
+  NEW PRIVATE THM HadwigerNelson.ThreeColourCharacter.exists_mem_box_of_forall_int
+  NEW PRIVATE THM HadwigerNelson.ThreeColourCharacter.winding_le_vertex
+`example`s: 2 at 34d9113b2, 2 in Proofs/HadwigerNelson/Arith/ThreeColourCharacter.lean; of the base's, missing as text: 0
+PASS: no statement and no definition changed
+CONTROL: 3 of 3 planted faults reported — the check can fail
+== 3. the audit block; the axioms of the public theorems, from the built module
+wrote 9 records (9 theorems, 0 definitions); private helpers in the source: 2: ['winding_le_vertex', 'exists_mem_box_of_forall_int']
+lean exit 0
+records: 9 (expected 9); resting on an axiom beyond the standard three: 0; error lines in the print: 0
+  HadwigerNelson.ThreeColourCharacter.exists_int_vector_of_forall_neg : ['propext', 'Classical.choice', 'Quot.sound']
+  HadwigerNelson.ThreeColour.Winding.exists_box_point : ['propext', 'Classical.choice', 'Quot.sound']
+  HadwigerNelson.ThreeColourCharacter.exists_character_of_box_point : ['propext', 'Classical.choice', 'Quot.sound']
+  HadwigerNelson.ThreeColourCharacter.exists_character_of_properAlong : ['propext', 'Classical.choice', 'Quot.sound']
+  HadwigerNelson.ThreeColourCharacter.isClosed_band : ['propext', 'Classical.choice', 'Quot.sound']
+  HadwigerNelson.ThreeColourCharacter.bandSet_nonempty_of_finite : ['propext', 'Classical.choice', 'Quot.sound']
+  HadwigerNelson.ThreeColourCharacter.bandSet_three_nonempty_of_proper : ['propext', 'Classical.choice', 'Quot.sound']
+  HadwigerNelson.ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable : ['propext', 'Classical.choice', 'Quot.sound']
+  HadwigerNelson.ThreeColourCharacter.exists_character_one_two : ['propext', 'Classical.choice', 'Quot.sound']
+names against data/fs131/ic1/audit-block.txt: the same list, in order (9 listed)
+PASS: every record is on the standard three
+CONTROL: 2 of 2 planted records reported — the check can fail
+== 4. the models, against the built module
+models (built): lean exit 0; errors: 0; theorems in the body: 10; axiom records printed: 9
+records: 9 (expected 9); resting on an axiom beyond the standard three: 0; error lines in the print: 0
+  FS131IC1Models.int_vector_model : ['propext', 'Classical.choice', 'Quot.sound']
+  FS131IC1Models.box_point_model : ['propext', 'Classical.choice', 'Quot.sound']
+  FS131IC1Models.character_of_box_point_model : ['propext', 'Classical.choice', 'Quot.sound']
+  FS131IC1Models.properAlong_model : ['propext', 'Classical.choice', 'Quot.sound']
+  FS131IC1Models.finite_model : ['propext', 'Classical.choice', 'Quot.sound']
+  FS131IC1Models.proper_model : ['propext', 'Classical.choice', 'Quot.sound']
+  FS131IC1Models.proper_model_torsion : ['propext', 'Classical.choice', 'Quot.sound']
+  FS131IC1Models.band_two_thirds : ['propext', 'Classical.choice', 'Quot.sound']
+  FS131IC1Models.band_zero_not_mem : ['propext', 'Classical.choice', 'Quot.sound']
+PASS: every record is on the standard three
+CONTROL: 2 of 2 planted records reported — the check can fail
+== after_build: every step as expected

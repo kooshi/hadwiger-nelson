@@ -1,0 +1,6 @@
+slot: admitted ikc3p: mem 1 GiB (hard cap), cpus 7
+B1: times=1 {'m': 183, 'wr': 45, 'wm': 144, 'wB': 297, 'mrow_bits': 54495, 'r_fields': 16836} bytes=2686380
+B2: times=q {'m': 2, 'wr': 37, 'wm': 140, 'wB': 283, 'mrow_bits': 706, 'r_fields': 3} bytes=841
+B35: times=1 {'m': 183, 'wr': 42, 'wm': 142, 'wB': 293, 'mrow_bits': 53761, 'r_fields': 16836} bytes=2640179
+B1digit: times=1 {'m': 183, 'wr': 45, 'wm': 144, 'wB': 297, 'mrow_bits': 54495, 'r_fields': 16836} bytes=2686382
+B1entry: times=1 {'m': 183, 'wr': 202, 'wm': 144, 'wB': 297, 'mrow_bits': 54495, 'r_fields': 16836} bytes=3351085

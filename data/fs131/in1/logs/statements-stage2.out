@@ -1,0 +1,21 @@
+Skeleton: lean exit 0; errors: 0; sorry warnings: 13
+data/fs131/in1/stmt/Skeleton.raw.txt (374565 bytes, sha256 c36084f7cadceb01ea892fc4b54d59baddf5aaa79f0ef094e4a7e0dcafdb3894) -> data/fs131/in1/stmt/stage2-Skeleton.txt (6838 bytes), 21 stored terms
+Candidate: lean exit 0; errors: 0; sorry warnings: 7
+data/fs131/in1/stmt/Candidate.raw.txt (428033 bytes, sha256 922a41e408910cf3d09abffe9bb7890ac8dda3dee3d5f82eb51994502a1a76e6) -> data/fs131/in1/stmt/stage2-Candidate.txt (8303 bytes), 25 stored terms
+widenings: the skeleton's form of each widened leaf is one application of the working module's (the Candidate's error count above is theirs too); control (an argument too few): 1 error(s) — the check can fail
+compared: 17 named constants of the first dump (16 theorems, 1 definitions; types, and values of definitions); 17 declarations written at 34d9113b2, each found in the first dump
+internal (not compared): 3 before, 7 after
+widened by ruling (stored type differs, as it must): 3 of 3
+  WIDENED HadwigerNelson.ThreeColourCriterion.exists_mul_conj_inv_eq_of_mul_conj_eq_one — Amendment 1: `[Finite k]` dropped
+  WIDENED HadwigerNelson.ThreeColourCriterion.eq_zero_of_forall_normOne_eq — Amendment 1: `hσσ` dropped
+  WIDENED HadwigerNelson.ThreeColourCriterion.exists_maximal_conj_trivial — Amendment 2: `hcc` dropped
+new named constants in the second dump: 0
+new private declarations in the second dump (counted among the internal): 3
+  NEW PRIVATE THM HadwigerNelson.ThreeColourCriterion.charP_quotient_of_isMaximal
+  NEW PRIVATE THM HadwigerNelson.ThreeColourCriterion.exists_factor_functionals
+  NEW PRIVATE THM HadwigerNelson.ThreeColourCriterion.quotientMap_involutive
+names outside `HadwigerNelson.ThreeColourCriterion`: 0 before, 0 after
+`example`s, compared whole as text: 3 at 34d9113b2, 3 in the working file
+PASS: no statement and no definition changed but the 3 widened by ruling
+CONTROL: 4 of 4 planted faults reported — the check can fail
+statements.sh: diff exit 0, control exit 0

@@ -1,0 +1,32 @@
+ThreeColourCharacter: 11 records (9 public) — CLEAN 11
+TorsionExtraction: 28 records (18 public) — CLEAN 28
+ThreeColourCriterion: 37 records (17 public) — CLEAN 31, WEIL 6
+    WEIL public HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine
+    WEIL public HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine_of_colorable_three
+    WEIL private HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine_of_quotient
+    WEIL public HadwigerNelson.ThreeColourCriterion.exists_maximal_of_torsion
+    WEIL public HadwigerNelson.ThreeColourCriterion.exists_normOne_zero_of_card_ne_nine
+    WEIL public HadwigerNelson.ThreeColourCriterion.targetFloor_four_weil
+DyadicQuadratic: 32 records (11 public) — CLEAN 32
+UpperHalf: 36 records (30 public) — CLEAN 36
+QuadraticPrime: 21 records (13 public) — CLEAN 21
+UpperHalfValues: 11 records (9 public) — CLEAN 11
+ThreeFourColours: 15 records (15 public) — CLEAN 3, SORRY 12
+    SORRY public HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_eq_three_iff   from HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_eq_three_iff
+    SORRY public HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four_of_seven   from HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four_of_seven
+    SORRY public HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_three   from HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_three
+    SORRY public HadwigerNelson.ThreeFourColours.colorable_three_planeOver_iff   from HadwigerNelson.ThreeFourColours.colorable_three_planeOver_iff
+    SORRY public HadwigerNelson.ThreeFourColours.exists_maximal_card_three_of_card_nine   from HadwigerNelson.ThreeFourColours.exists_maximal_card_three_of_card_nine
+    SORRY public HadwigerNelson.ThreeFourColours.exists_stablePrime_card_four_sqrt   from HadwigerNelson.ThreeFourColours.exists_stablePrime_card_four_sqrt
+    SORRY public HadwigerNelson.ThreeFourColours.exists_stablePrime_conj_trivial   from HadwigerNelson.ThreeFourColours.exists_stablePrime_conj_trivial
+    SORRY public HadwigerNelson.ThreeFourColours.exists_stablePrime_of_maximal   from HadwigerNelson.ThreeFourColours.exists_stablePrime_of_maximal
+    SORRY public HadwigerNelson.ThreeFourColours.exists_stablePrime_ramified_sqrt   from HadwigerNelson.ThreeFourColours.exists_stablePrime_conj_trivial
+    SORRY public HadwigerNelson.ThreeFourColours.exists_unitSet_residue_eq   from HadwigerNelson.ThreeFourColours.exists_unitSet_residue_eq
+    SORRY public HadwigerNelson.ThreeFourColours.localBound_le_chromaticNumber_of_le_four   from HadwigerNelson.ThreeFourColours.localBound_le_chromaticNumber_or_four_le
+    SORRY public HadwigerNelson.ThreeFourColours.localBound_le_chromaticNumber_or_four_le   from HadwigerNelson.ThreeFourColours.localBound_le_chromaticNumber_or_four_le
+PLANTED: 3 records (3 public) — CLEAN 1, SORRY 1, WEIL 1
+    WEIL public FS131KJ1Axioms.planted_weil
+    SORRY public FS131KJ1Axioms.planted_sorry   from FS131KJ1Axioms.planted_sorry
+CONTROL: 3 of 3 planted records read as planted (a sorry shows as SORRY, the import as WEIL)
+SORRY records: 12, equal to the expected list (12)
+PASS

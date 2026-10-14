@@ -1,0 +1,3 @@
+lean exit 0; lines 33; AXIOMS-COUNT 33; lines with an axiom beyond the standard three: 1
+AXIOMS public HadwigerNelson.DyadicQuadratic.planted_sorry : [sorryAx]
+CONTROL: the planted sorry is reported — the check can fail

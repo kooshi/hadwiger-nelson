@@ -1,0 +1,16 @@
+import Proofs.HadwigerNelson.Arith.ThreeFourColours
+open Polynomial
+#check @Ideal.span_singleton_pow
+#check @Ideal.span_singleton_mul_right_unit
+#check @Submodule.cardQuot_apply
+#check @Ideal.span_singleton_le_iff_mem
+#check @Nat.pow_dvd_pow_iff
+#check @FiniteField.pow_card_sub_one_eq_one
+#check @IntermediateField.adjoin.finiteDimensional
+#check @HadwigerNelson.StandingFive.finrank_closure
+#check @HadwigerNelson.StandingFive.finrank_simple_le
+#check @Polynomial.natDegree_X_pow_sub_C
+#check @Polynomial.monic_X_pow_sub_C
+#check @Exists.fst
+#check @LinearMap.finrank_le_finrank_of_surjective
+#check @Finite.one_lt_card

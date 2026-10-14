@@ -184,6 +184,21 @@ import Proofs.HadwigerNelson.Arith.RatioBound
 import Proofs.HadwigerNelson.Arith.NormOneTarget
 import Proofs.HadwigerNelson.Arith.FloorPlanes
 import Proofs.HadwigerNelson.Arith.Floor128
+import Proofs.HadwigerNelson.Arith.FibreCert
+import Proofs.HadwigerNelson.Arith.FibreCert3
+import Proofs.HadwigerNelson.Arith.FibreCert11
+import Proofs.HadwigerNelson.Arith.FibreCert11Bound
+import Proofs.HadwigerNelson.Arith.FibreCert11Global
+import Proofs.HadwigerNelson.Arith.FibreCert11Psd
+import Proofs.HadwigerNelson.Arith.FibreCert11Seg0
+import Proofs.HadwigerNelson.Arith.FibreCert11Seg1
+import Proofs.HadwigerNelson.Arith.FibreCert11Seg2
+import Proofs.HadwigerNelson.Arith.FibreCert11Seg3
+import Proofs.HadwigerNelson.Arith.FibreCert11Seg4
+import Proofs.HadwigerNelson.Arith.FibreCert11Seg5
+import Proofs.HadwigerNelson.Arith.FibreCert11Seg6
+import Proofs.HadwigerNelson.Arith.FibreCert11Seg7
+import Proofs.HadwigerNelson.Arith.FibreCertSound
 import Proofs.HadwigerNelson.Arith.TargetFloors
 import Proofs.HadwigerNelson.Arith.WeilKloosterman
 import Proofs.HadwigerNelson.Arith.GapSeven
@@ -369,6 +384,12 @@ import Proofs.HadwigerNelson.Plane.ThreeArcs
 import Proofs.HadwigerNelson.Arith.UpperHalf
 import Proofs.HadwigerNelson.Arith.QuadraticPrime
 import Proofs.HadwigerNelson.Instances.UpperHalfValues
+import Proofs.HadwigerNelson.Arith.ThreeColourCharacter
+import Proofs.HadwigerNelson.Arith.TorsionExtraction
+import Proofs.HadwigerNelson.Arith.ThreeColourCriterion
+import Proofs.HadwigerNelson.Arith.DyadicQuadratic
+import Proofs.HadwigerNelson.Arith.ThreeFourColours
+import Proofs.HadwigerNelson.Instances.UpperHalfCorollaries
 
 /-!
 # Proofs

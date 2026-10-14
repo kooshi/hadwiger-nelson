@@ -1,0 +1,24 @@
+D1: slot found once, replaced
+D1b: slot found once, replaced
+D2: slot found once, replaced
+D3: slot found once, replaced
+D5: slot found once, inserted after
+D6: slot found once, replaced
+D10: slot found once, replaced
+D4: GATE_CHANGES entry inserted after the LU1 entry
+D4b: superseded-count entries (before the 'ℤ[i]' entry): 7447 | 7,506 | 7506 | 26 imported | with eight | declarations=16029 | 16029 | declarations=16029 refutations-skipped=228 sites=1454 | rests=26 | inline=15 | ours=22 | takes=106 | axioms=3 rests=26 named=19 inline=15 outside=7 ours=22 open=5 takes=106 mentions=1 | twenty-six theorems resting | thirty-four hypotheses | fifteen written out | twenty-two for hand results | 106 (hypothesis, statement) pairs by 52 statements
+D7 row 52: slot found once, replaced
+D7 row 73: slot found once, inserted after
+D7 row 79: slot found once, inserted after
+D7 row 82 grade: slot found once, replaced
+D7 row 82 not claimed: slot found once, replaced
+D7 row 99 grade: slot found once, replaced
+D7 row 99 not claimed: slot found once, replaced
+D7 row 105: slot found once, replaced
+D8 IT1: 5 bullets under the record's 'five lines' header
+D8 five records (16 bullets: IC1 1, IT1 4, IN1 4, ID1 3, KJ1 4): slot found once, inserted after
+D8 'this landing's two' (LEAN.md § The gate, § Trust ledger): HELD - CHECK (slot falls mid-sentence; no slot for the Trust ledger line)
+D9a: slot found once, inserted after
+D9b: slot found once, inserted after
+filed: BIBLIOGRAPHY.md, CLAUDE.md, LEAN.md, LEDGER.md, tools/claude_md_fact_audit.py
+CLAUDE.md bytes 75366

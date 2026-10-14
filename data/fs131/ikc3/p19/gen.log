@@ -1,0 +1,31 @@
+slot: waiting (ledger 20 + 4 > budget 22 GiB)
+slot: admitted ikc3g: mem 4 GiB (hard cap), cpus 6
+p=19 n=361 |S|=20 maps=40 sha=055f031d1e69
+reps 182; pairs 16653; orbits 984
+ops 602989 [30.4s]
+slots 52370; identity model: HOLDS; total magnitude bits 129 [305.1s]
+PSD witnesses: 38 blocks diagonally dominant [376.9s]
+wrote data/fs131/ikc3/p19/Cert19.lean: w=131 ds=10 k1=17 kq=10 kr=157 kw=18 ko=16; chunks ops=2513 rows=1030 keys=1024
+	Command being timed: "python3 -I tools/fs131_ikc1_gen.py data/fs66/b1/cert-p19.json data/fs131/ikc3/p19/Cert19.lean --nseg 1 --name cert19 --module Proofs.HadwigerNelson.Arith.FibreCert"
+	User time (seconds): 378.29
+	System time (seconds): 0.54
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 6:20.22
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 970324
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 183258
+	Voluntary context switches: 149
+	Involuntary context switches: 3154
+	Swaps: 0
+	File system inputs: 12736
+	File system outputs: 187592
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

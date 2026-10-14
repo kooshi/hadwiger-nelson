@@ -1,0 +1,266 @@
+slot: waiting (ledger 20 + 10 > budget 22 GiB)
+slot: admitted ikc3: mem 10 GiB (hard cap), cpus 2,3,4,5
+==> build: this run's full output: build/gate/build/20261014T175840Z-4181548.log
+==> up-to-date check: exit 3 after 3s (3 means something needs building) — walking the batches
+==> 251 batches of at most 8 modules, capped at 10G
+==> [1/251] 8 modules  12:58:43
+==> [2/251] 8 modules  12:58:45
+==> [3/251] 8 modules  12:58:46
+==> [4/251] 4 modules  12:58:47
+==> [5/251] 8 modules  12:58:48
+    rebuilt: Arith.FibreCert11 (29s)
+==> [6/251] 8 modules  12:59:19
+==> [7/251] 8 modules  12:59:20
+    rebuilt: Arith.FibreCert11Seg0 (56s)
+==> [8/251] 8 modules  13:00:17
+==> [9/251] 8 modules  13:00:18
+==> [10/251] 8 modules  13:00:18
+==> [11/251] 8 modules  13:00:19
+==> [12/251] 8 modules  13:00:20
+==> [13/251] 8 modules  13:00:20
+==> [14/251] 8 modules  13:00:22
+==> [15/251] 8 modules  13:00:22
+==> [16/251] 8 modules  13:00:23
+==> [17/251] 8 modules  13:00:24
+==> [18/251] 8 modules  13:00:25
+    rebuilt: Arith.FibreCert11Seg1 (36s)
+==> [19/251] 8 modules  13:01:02
+==> [20/251] 8 modules  13:01:04
+==> [21/251] 3 modules  13:01:05
+==> [22/251] 8 modules  13:01:06
+    rebuilt: Arith.FibreCert11Seg2 (39s)
+==> [23/251] 8 modules  13:01:46
+==> [24/251] 8 modules  13:01:47
+==> [25/251] 8 modules  13:01:49
+==> [26/251] 1 modules  13:01:50
+==> [27/251] 8 modules  13:01:51
+    rebuilt: Arith.FibreCert11Seg3 (38s)
+==> [28/251] 8 modules  13:02:30
+==> [29/251] 8 modules  13:02:32
+==> [30/251] 7 modules  13:02:33
+==> [31/251] 8 modules  13:02:34
+    rebuilt: Arith.FibreCert11Seg4 (37s)
+==> [32/251] 8 modules  13:03:12
+==> [33/251] 8 modules  13:03:13
+==> [34/251] 8 modules  13:03:15
+==> [35/251] 8 modules  13:03:17
+==> [36/251] 8 modules  13:03:18
+==> [37/251] 8 modules  13:03:19
+==> [38/251] 8 modules  13:03:20
+==> [39/251] 8 modules  13:03:22
+==> [40/251] 8 modules  13:03:23
+==> [41/251] 8 modules  13:03:24
+==> [42/251] 8 modules  13:03:26
+==> [43/251] 8 modules  13:03:27
+==> [44/251] 8 modules  13:03:28
+==> [45/251] 8 modules  13:03:30
+==> [46/251] 8 modules  13:03:31
+==> [47/251] 8 modules  13:03:32
+==> [48/251] 8 modules  13:03:34
+==> [49/251] 8 modules  13:03:35
+==> [50/251] 8 modules  13:03:36
+==> [51/251] 8 modules  13:03:37
+==> [52/251] 8 modules  13:03:39
+==> [53/251] 8 modules  13:03:40
+==> [54/251] 8 modules  13:03:41
+==> [55/251] 8 modules  13:03:43
+==> [56/251] 8 modules  13:03:44
+==> [57/251] 8 modules  13:03:45
+==> [58/251] 8 modules  13:03:46
+    rebuilt: Arith.FibreCert11Seg5 (37s)
+==> [59/251] 8 modules  13:04:25
+==> [60/251] 8 modules  13:04:27
+==> [61/251] 8 modules  13:04:29
+==> [62/251] 8 modules  13:04:31
+==> [63/251] 8 modules  13:04:32
+==> [64/251] 8 modules  13:04:34
+==> [65/251] 8 modules  13:04:36
+==> [66/251] 8 modules  13:04:38
+==> [67/251] 8 modules  13:04:40
+==> [68/251] 8 modules  13:04:42
+==> [69/251] 8 modules  13:04:44
+==> [70/251] 8 modules  13:04:45
+==> [71/251] 8 modules  13:04:47
+==> [72/251] 8 modules  13:04:49
+==> [73/251] 8 modules  13:04:51
+==> [74/251] 8 modules  13:04:53
+==> [75/251] 8 modules  13:04:55
+==> [76/251] 8 modules  13:04:57
+==> [77/251] 8 modules  13:04:59
+==> [78/251] 8 modules  13:05:01
+==> [79/251] 8 modules  13:05:03
+==> [80/251] 8 modules  13:05:04
+==> [81/251] 8 modules  13:05:06
+==> [82/251] 8 modules  13:05:08
+==> [83/251] 8 modules  13:05:10
+==> [84/251] 8 modules  13:05:12
+==> [85/251] 8 modules  13:05:14
+==> [86/251] 8 modules  13:05:16
+==> [87/251] 8 modules  13:05:17
+==> [88/251] 8 modules  13:05:19
+==> [89/251] 8 modules  13:05:21
+==> [90/251] 8 modules  13:05:23
+==> [91/251] 8 modules  13:05:25
+==> [92/251] 8 modules  13:05:27
+==> [93/251] 8 modules  13:05:28
+==> [94/251] 8 modules  13:05:30
+==> [95/251] 8 modules  13:05:32
+==> [96/251] 8 modules  13:05:34
+==> [97/251] 8 modules  13:05:36
+==> [98/251] 8 modules  13:05:38
+==> [99/251] 8 modules  13:05:40
+==> [100/251] 8 modules  13:05:42
+==> [101/251] 8 modules  13:05:43
+==> [102/251] 8 modules  13:05:45
+==> [103/251] 8 modules  13:05:47
+==> [104/251] 8 modules  13:05:49
+==> [105/251] 8 modules  13:05:51
+==> [106/251] 8 modules  13:05:53
+==> [107/251] 8 modules  13:05:55
+==> [108/251] 8 modules  13:05:56
+==> [109/251] 8 modules  13:05:58
+==> [110/251] 8 modules  13:06:00
+==> [111/251] 8 modules  13:06:02
+==> [112/251] 8 modules  13:06:04
+==> [113/251] 8 modules  13:06:05
+==> [114/251] 8 modules  13:06:07
+==> [115/251] 8 modules  13:06:09
+==> [116/251] 8 modules  13:06:11
+==> [117/251] 8 modules  13:06:13
+==> [118/251] 8 modules  13:06:15
+==> [119/251] 8 modules  13:06:16
+==> [120/251] 8 modules  13:06:18
+==> [121/251] 8 modules  13:06:20
+==> [122/251] 8 modules  13:06:22
+==> [123/251] 8 modules  13:06:24
+==> [124/251] 8 modules  13:06:26
+==> [125/251] 8 modules  13:06:27
+==> [126/251] 8 modules  13:06:29
+==> [127/251] 8 modules  13:06:31
+==> [128/251] 8 modules  13:06:33
+==> [129/251] 8 modules  13:06:35
+==> [130/251] 8 modules  13:06:37
+==> [131/251] 8 modules  13:06:38
+==> [132/251] 8 modules  13:06:40
+==> [133/251] 8 modules  13:06:42
+==> [134/251] 8 modules  13:06:44
+==> [135/251] 8 modules  13:06:46
+==> [136/251] 8 modules  13:06:48
+==> [137/251] 8 modules  13:06:49
+==> [138/251] 8 modules  13:06:51
+==> [139/251] 8 modules  13:06:53
+==> [140/251] 8 modules  13:06:55
+==> [141/251] 8 modules  13:06:57
+==> [142/251] 8 modules  13:06:59
+==> [143/251] 8 modules  13:07:01
+==> [144/251] 8 modules  13:07:03
+==> [145/251] 8 modules  13:07:04
+==> [146/251] 8 modules  13:07:06
+==> [147/251] 8 modules  13:07:08
+==> [148/251] 8 modules  13:07:10
+==> [149/251] 8 modules  13:07:12
+==> [150/251] 8 modules  13:07:14
+==> [151/251] 8 modules  13:07:15
+==> [152/251] 8 modules  13:07:17
+==> [153/251] 8 modules  13:07:19
+==> [154/251] 8 modules  13:07:21
+==> [155/251] 8 modules  13:07:23
+==> [156/251] 8 modules  13:07:25
+==> [157/251] 8 modules  13:07:26
+==> [158/251] 8 modules  13:07:28
+==> [159/251] 8 modules  13:07:30
+==> [160/251] 8 modules  13:07:32
+==> [161/251] 8 modules  13:07:33
+==> [162/251] 8 modules  13:07:35
+==> [163/251] 8 modules  13:07:37
+==> [164/251] 8 modules  13:07:39
+==> [165/251] 8 modules  13:07:40
+==> [166/251] 8 modules  13:07:42
+==> [167/251] 8 modules  13:07:44
+==> [168/251] 8 modules  13:07:46
+==> [169/251] 8 modules  13:07:47
+==> [170/251] 8 modules  13:07:49
+==> [171/251] 8 modules  13:07:51
+==> [172/251] 8 modules  13:07:53
+==> [173/251] 8 modules  13:07:54
+==> [174/251] 8 modules  13:07:56
+==> [175/251] 8 modules  13:07:58
+==> [176/251] 8 modules  13:08:00
+==> [177/251] 8 modules  13:08:02
+==> [178/251] 8 modules  13:08:03
+==> [179/251] 8 modules  13:08:05
+==> [180/251] 8 modules  13:08:07
+==> [181/251] 8 modules  13:08:09
+==> [182/251] 8 modules  13:08:11
+==> [183/251] 8 modules  13:08:12
+==> [184/251] 8 modules  13:08:14
+==> [185/251] 8 modules  13:08:16
+==> [186/251] 8 modules  13:08:18
+==> [187/251] 8 modules  13:08:19
+==> [188/251] 8 modules  13:08:21
+==> [189/251] 8 modules  13:08:23
+==> [190/251] 8 modules  13:08:25
+==> [191/251] 8 modules  13:08:26
+==> [192/251] 8 modules  13:08:28
+==> [193/251] 8 modules  13:08:30
+==> [194/251] 8 modules  13:08:32
+==> [195/251] 8 modules  13:08:33
+==> [196/251] 8 modules  13:08:35
+==> [197/251] 8 modules  13:08:37
+==> [198/251] 8 modules  13:08:38
+==> [199/251] 8 modules  13:08:40
+==> [200/251] 8 modules  13:08:42
+==> [201/251] 8 modules  13:08:44
+==> [202/251] 8 modules  13:08:45
+==> [203/251] 8 modules  13:08:47
+==> [204/251] 8 modules  13:08:49
+==> [205/251] 8 modules  13:08:51
+==> [206/251] 8 modules  13:08:52
+==> [207/251] 8 modules  13:08:54
+==> [208/251] 8 modules  13:08:56
+==> [209/251] 8 modules  13:08:57
+==> [210/251] 8 modules  13:08:59
+==> [211/251] 8 modules  13:09:01
+==> [212/251] 8 modules  13:09:03
+==> [213/251] 8 modules  13:09:04
+==> [214/251] 8 modules  13:09:05
+==> [215/251] 6 modules  13:09:06
+==> [216/251] 8 modules  13:09:08
+    rebuilt: Arith.FibreCert11Seg6 (37s)
+==> [217/251] 8 modules  13:09:46
+==> [218/251] 8 modules  13:09:47
+==> [219/251] 3 modules  13:09:49
+==> [220/251] 8 modules  13:09:50
+    rebuilt: Arith.FibreCert11Seg7 (27s)
+==> [221/251] 8 modules  13:10:18
+==> [222/251] 3 modules  13:10:19
+==> [223/251] 8 modules  13:10:21
+    rebuilt: Arith.FibreCert11Global (43s)
+==> [224/251] 8 modules  13:11:05
+==> [225/251] 4 modules  13:11:06
+==> [226/251] 8 modules  13:11:08
+    rebuilt: Arith.FibreCert11Psd (44s)
+==> [227/251] 8 modules  13:11:54
+==> [228/251] 2 modules  13:11:55
+==> [229/251] 8 modules  13:11:56
+    !! batch failed with status 1. What it printed, before the retry:
+    ✖ [3549/3711] Building Proofs.HadwigerNelson.Arith.FibreCert11Bound (1.2s)
+    error: Proofs/HadwigerNelson/Arith/FibreCert11Bound.lean:85:56: unsolved goals
+    ⊢ ¬0 = 1
+    error: Lean exited with code 1
+    Some required targets logged failures:
+    - Proofs.HadwigerNelson.Arith.FibreCert11Bound
+    error: build failed
+    !! retrying ONCE. If this line is common, the machine is unwell and the build is not the
+       thing to fix.
+    ✖ [3612/3793] Building Proofs.HadwigerNelson.Arith.FibreCert11Bound (1.3s)
+    error: Proofs/HadwigerNelson/Arith/FibreCert11Bound.lean:85:56: unsolved goals
+    ⊢ ¬0 = 1
+    error: Lean exited with code 1
+    Some required targets logged failures:
+    - Proofs.HadwigerNelson.Arith.FibreCert11Bound
+    error: build failed
+    BATCH FAILED. Once it is fixed, rerun ./scripts/build.sh — modules that already built are
+    skipped. Never a bare or named lake build (RUNNING.md § Building).
+==> build: FAIL — 229 of 251 batches, 11 module(s) rebuilt, 0 module(s) with warnings, 13m19s
+    full output: build/gate/build/20261014T175840Z-4181548.log

@@ -1,0 +1,4 @@
+Proofs/HadwigerNelson/Arith/ThreeFourColours.lean:236:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/ThreeFourColours.lean:243:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/ThreeFourColours.lean:308:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/ThreeFourColours.lean:463:8: warning: declaration uses `sorry`

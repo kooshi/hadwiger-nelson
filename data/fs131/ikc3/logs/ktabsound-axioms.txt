@@ -1,0 +1,3 @@
+'FS131IKC3KT.ktable_eq_of_chk' depends on axioms: [propext, Quot.sound]
+data/fs131/ikc3/f2/KtabSoundAx.lean:75:8: warning: declaration uses `sorry`
+'FS131IKC3KT.planted' depends on axioms: [sorryAx]

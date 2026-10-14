@@ -1,0 +1,3 @@
+/-- **The p = 3 certificate passes**, by kernel reduction: the shape, the identity and the six blocks' positive
+definiteness. -/
+theorem cert3_ok : certOK cert3 = true := by decide +kernel
