@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Rigidity.DualGroup
+import Proofs.HadwigerNelson.Rigidity.AdmissiblePrime
 import Mathlib.MeasureTheory.Group.Action
 import Mathlib.Dynamics.Ergodic.Action.Basic
 
@@ -217,7 +218,21 @@ Plan: a rational prime `p` splitting completely in `F(i)` (one suffices; at a bi
 `𝔓 ∣ p` of `F(i)` with `𝔓 ≠ 𝔓̄`, `(z) = 𝔓ʰ`, `w = z/z̄`; then `ℚ(wᵏ) = F(i)` for every `k ≥ 1` (X02D's valuation argument)
 and `u` a second such element at another prime, independent by valuations; `AdmissiblePair.ofPow`. -/
 theorem exists_admissiblePair [NumberField F] : Nonempty (AdmissiblePair F) := by
-  sorry
+  obtain ⟨u, w, hu, hu1, hw, hw1, hind, hgen⟩ := exists_unitPair F
+  let u' : unitCircle F := ⟨⟨u, mem_sphere_zero_iff_norm.mpr hu1⟩, hu⟩
+  let w' : unitCircle F := ⟨⟨w, mem_sphere_zero_iff_norm.mpr hw1⟩, hw⟩
+  refine ⟨AdmissiblePair.ofPow u' w' ?_ fun k hk => hgen k hk⟩
+  rw [injective_iff_map_eq_one]
+  intro n hn
+  have h : u ^ (Multiplicative.toAdd n 0) * w ^ (Multiplicative.toAdd n 1) = 1 := by
+    have h' := congrArg (fun g : unitCircle F => ((g : Circle) : ℂ)) hn
+    simpa only [zpowHom, MonoidHom.coe_mk, OneHom.coe_mk, Subgroup.coe_mul, SubgroupClass.coe_zpow,
+      Circle.coe_mul, Circle.coe_zpow, OneMemClass.coe_one, Circle.coe_one] using h'
+  obtain ⟨h0, h1⟩ := hind _ _ h
+  refine Multiplicative.toAdd.injective (funext fun i => ?_)
+  fin_cases i
+  · exact h0
+  · exact h1
 
 end
 

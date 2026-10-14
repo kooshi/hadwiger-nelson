@@ -110,3 +110,32 @@ whose kernel `𝔓` does not hold `p` in its square — a prime of degree one ov
 the plan's 280–380 (A1 ~80, A2 200–300). The lane is far below the brief's 1,500-line line; no message is owed for the
 price. The rest (A4, the norm core, the CRT element, independence, assembly) I price at 250–350 lines from the route of
 § 1.3, so the lane at 400–500 lines against the plan's 800–1,250.
+
+## Stage 3 — SAVED: the rest of the leaves proved, the module and the proof installed
+
+Rounds `data/fs131/ila1/logs/AP-13.log` … `AP-22.log` on the working copy (the last exit 0, no warning), then
+`data/fs131/ila1/work/UCtest.lean` — the module's text after `import Proofs.HadwigerNelson.Rigidity.UnitCircle` (built,
+unchanged) and `exists_admissiblePair`'s proof as an `example` — log `UC-1.log`: exit 0, no warning;
+`exists_unitPair` and `exists_residueHom_unramified` print `[propext, Classical.choice, Quot.sound]` there.
+
+| leaf | helper(s) | route, as § 1.3 planned it unless said |
+|---|---|---|
+| A4 `𝔓̄ ≠ 𝔓` | `comap_conjO_ker_ne` (with `toC`, `toC_conjO`, `conjO_conjO'`, `conjO_surjective`, `iO`, `toC_iO`, `comap_conjO_isMaximal`, `natCast_mem_comap_conjO`) | `ZMod.ringHom_eq_of_ker_eq` on `φ ∘ conj` and `φ`; `4 = 4(φ(i)² + 1) + 2φ(i)(−φ(i) − φ(i))` by `linear_combination`; `p ∣ 2²` |
+| the CRT element `z` | `exists_mem_sq_forall_notMem` | `p𝓞 = 𝔓R`, `R ⊄ 𝔓`, `R ⊔ 𝔓² = ⊤` (`Ideal.sup_pow_eq_top`), `1 = b + a`; a maximal `Q ∋ p` other than `𝔓` holds `R` (`Ideal.IsPrime.mul_le`) |
+| A5 the core | `padicValNat_absNorm_span_eq_one`, `dvd_padicValRat_norm`, `adjoin_pow_eq_top` | `span{x} = 𝔓J`, `p ∤ N(J)` (a maximal `Q ∣ J` above `p` from `Ideal.exists_isMaximal_dvd_of_dvd_absNorm` would be `𝔓` and put `x` in `𝔓²`); `N_{L/ℚ}(y) = N_{ℚ⟮α⟯/ℚ}(y)^d`; `zᵐ − p z̄ᵐ = (wᵐ − p) z̄ᵐ` in `L`, `v_p` of its norm `1` (`Algebra.coe_norm_int`, `Ideal.absNorm_span_singleton`), so `v_p(N(wᵐ − p)) = 1 − m·v_p(N(z̄))`; at `gen − p` and `gen² − p`, `d ∣ 2(1 − kB) − (1 − 2kB) = 1`; `IntermediateField.finrank_eq_one_iff_eq_top` |
+| `ℚ⟮α⟯ = ⊤` read in `ℂ` | `closure_eq_of_adjoin_eq_top` | `Subfield.toIntermediateField` of the comap of the closure; `adjoin_simple_le_iff` |
+| A6 independence | `div_pow_mul_div_pow_ne_one`, `eq_zero_of_zpow_mul_zpow_eq_one`, `exists_mem_notMem_three` (`z′` by CRT against the product of the three other maximal ideals) | by the sign of `b`, then of `a`; `(y₁/y₂)ⁿ(a/ā)ᵇ = 1` clears to `y₁ⁿaᵇ = y₂ⁿāᵇ` in `𝓞`, the left side in the prime, the right not |
+| A7 assembly | `exists_unitPair` (public), `norm_div_conj`; `exists_admissiblePair` in `UnitCircle` | two calls of `exists_residueHom_unramified` (`M = 2`, then `M = 2p`); `AdmissiblePair.ofPow`, injectivity by `injective_iff_map_eq_one` and the coercions of `zpow` through the subgroup and the circle |
+
+**Installed** (the working copy over the new file; `UnitCircle`: one import line and the proof, nothing else — its
+docstring, which still describes the plan's route, is left as it was and a reworded one is drafted for the landing;
+`Proofs.lean`: one import line; `ARCHITECTURE.md`: the new row and `UnitCircle`'s state and imports cells;
+`tools/check_architecture.py` exit 0, RESULT: PASS, `data/fs131/ila1/arch.out`). The module is 572 lines with its
+docstrings: 2 public theorems (`exists_residueHom_unramified`, `exists_unitPair`), 2 private definitions, 23 private
+theorems; `UnitCircle` gains 15 lines. **The lane is about 590 lines** against the plan's 800–1,250 and stage 2's
+re-price of 400–500 (the independence and the conjugation leaves took more than I priced).
+
+Tools written for the gate, not yet run: `data/fs131/ila1/lean/Axioms.lean` with `tools/fs131_ila1_axioms.py` (every
+record of the two modules this job writes CLEAN; a planted record, a leaf of `Rigidity/EntropySplitMax` that rests on
+`sorry` in this tree, must show), and `tools/fs131_ila1_statements.py` (the dumps before and after; eight planted
+faults). Build 1 (`./scripts/build.sh` under the slot, `MEMMAX=10G BATCH=8`; `data/fs131/ila1/build1.log`) started.

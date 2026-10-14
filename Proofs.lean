@@ -233,6 +233,7 @@ import Proofs.HadwigerNelson.Rigidity.CountDescent
 import Proofs.HadwigerNelson.Rigidity.SubgroupHaar
 import Proofs.HadwigerNelson.Rigidity.Duality
 import Proofs.HadwigerNelson.Rigidity.DualConnected
+import Proofs.HadwigerNelson.Rigidity.AdmissiblePrime
 import Proofs.HadwigerNelson.Rigidity.UnitCircle
 import Proofs.HadwigerNelson.Rigidity.Pieces
 import Proofs.HadwigerNelson.Rigidity.EntropySplitMax

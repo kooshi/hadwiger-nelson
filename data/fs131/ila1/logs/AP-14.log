@@ -1,0 +1,16 @@
+data/fs131/ila1/work/AdmissiblePrime.lean:335:16: warning: declaration uses `sorry`
+data/fs131/ila1/work/AdmissiblePrime.lean:348:30: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?f ↑?q
+in the target expression
+  (fieldI F).subtype ((algebraMap ℚ ↥(fieldI F)) q) ∈ Subfield.closure {↑α}
+
+F : Subfield ℝ
+α : ↥(fieldI F)
+h : ℚ⟮α⟯ = ⊤
+x : ℂ
+hx : x ∈ fieldI F
+q : ℚ
+⊢ (fieldI F).subtype ((algebraMap ℚ ↥(fieldI F)) q) ∈ Subfield.closure {↑α}
+data/fs131/ila1/work/AdmissiblePrime.lean:370:16: warning: declaration uses `sorry`
+data/fs131/ila1/work/AdmissiblePrime.lean:383:8: warning: declaration uses `sorry`
+lean-exit 1

@@ -1,0 +1,10 @@
+data/fs131/ila1/work/AdmissiblePrime.lean:343:15: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsDedekindDomain (𝓞 ↥(fieldI F))
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/ila1/work/AdmissiblePrime.lean:349:21: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsDedekindDomain (𝓞 ↥(fieldI F))
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/ila1/work/AdmissiblePrime.lean:465:8: warning: declaration uses `sorry`
+lean-exit 1
