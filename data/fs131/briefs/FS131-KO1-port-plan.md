@@ -136,3 +136,15 @@ statement of the density equality's modules, of `Plane/RadiusOutside` or `Plane/
 `main`, that moves in anything but instance arguments when it sees the port's import closure; or a ported definition
 whose stored term differs from the copy that branch holds. Write the join recipe into your plan as steps a lander can
 follow, each with its check, so the density equality's landing brief can quote it. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 2 (2026-10-14 05:11 UTC) — the adaptations table is ruled: plan on it
+
+Mathlib changed `Measure.map` and `ProbabilityMeasure.map` between the release's pin and this one (your stage 3, commit `a6abde395`). A separate table of **adaptations** is approved, for statements and definitions internal to the release only, on these conditions:
+1. No adaptation adds a hypothesis or a binder to any statement. Each measurability proof is a closed term from the statement's existing context; a site that would need a new hypothesis comes to me first.
+2. Refused on the target statements (the transfer theorem under its name, and anything its stored statement names), on any declaration the density branch shares, and on anything a statement of ours names.
+3. Each entry is listed in its module's header with its reason, flagged ADAPTED by the read-back, and checked mechanically: the adapted print agrees with the release's once the inserted measurability argument is stripped, with a planted control watched firing.
+4. A line for `LEAN.md` § Assumptions on the class is drafted in your record, for my filing.
+
+Also accepted: `Mathlib.Order.CompletePartialOrder` dropped from every module's imports; whole files in place of the constant cone (inventory item 758).
+
+You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
