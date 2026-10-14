@@ -436,6 +436,8 @@ lemma decode_encode (p : X → Y) (x : X) : decode (encode (K := K) p x) = p x :
 
 omit [Nonempty Y] [MeasurableConstSMul K X] in
 /-- `[OAIMath2026]` `Factors.lean:292`. -/
+-- nolint (FS131-LP1, inventory item 831): the release's binder, kept as it is (unusedArguments)
+@[nolint unusedArguments]
 lemma encode_as_comp [MulAction K Y] [MeasurableConstSMul K Y]
     (μ : Measure X) (p : X → Y) (hpe : ∀ k : K, ∀ᵐ x ∂μ, p (k • x) = k • p x) :
     ∀ᵐ x ∂μ, encode (K := K) p x = encode (K := K) (id : Y → Y) (p x) := by

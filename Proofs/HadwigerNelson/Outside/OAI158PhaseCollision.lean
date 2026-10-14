@@ -63,6 +63,8 @@ section
 
 variable {ι κ V : Type*} [Fintype ι] [Fintype κ]
 /-- `[OAIMath2026]` `PhaseCollision.lean:22`. -/
+-- nolint (FS131-LP1, inventory item 831): the release's name, kept as it is (defsWithUnderscore)
+@[nolint defsWithUnderscore]
 local instance : DecidableEq ι := Classical.decEq ι
 /-- `[OAIMath2026]` `PhaseCollision.lean:23`. -/
 local instance : DecidableEq κ := Classical.decEq κ
@@ -439,6 +441,8 @@ end HadwigerNelson.Outside.OAI158.PhaseCollision
 
 namespace HadwigerNelson.Outside.OAI158.EncodedCollision
 /-- `[OAIMath2026]` `PhaseCollision.lean:386`. -/
+-- nolint (FS131-LP1, inventory item 831): the release's name, kept as it is (defsWithUnderscore)
+@[nolint defsWithUnderscore]
 local instance : MeasurableSpace Circle := borel Circle
 /-- `[OAIMath2026]` `PhaseCollision.lean:387`. -/
 local instance : BorelSpace Circle := ⟨rfl⟩

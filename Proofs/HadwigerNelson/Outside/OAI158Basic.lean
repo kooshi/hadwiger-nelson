@@ -139,6 +139,8 @@ theorem K_pow_surjective (n : ℕ) (hn : n ≠ 0) :
   exact hz
 
 /-- `[OAIMath2026]` `Basic.lean:32`. -/
+-- nolint (FS131-LP1, inventory item 831): the release's name, kept as it is (defsWithUnderscore)
+@[nolint defsWithUnderscore]
 instance K_rootable : RootableBy K ℕ := rootableByOfPowLeftSurj K ℕ (fun {n} hn => K_pow_surjective n hn)
 
 /-- `[OAIMath2026]` `Basic.lean:35`. The group-theoretic step behind the zero-mass coset argument. -/

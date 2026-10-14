@@ -142,6 +142,8 @@ theorem list_of_uniform_atoms (κ : Measure G)
       exact (Equiv.sum_comp e.symm (fun d : S => Measure.dirac d.val)).symm
 
 /-- `[OAIMath2026]` `Approximation.lean:69`. -/
+-- nolint (FS131-LP1, inventory item 831): the release's binder, kept as it is (unusedArguments)
+@[nolint unusedArguments]
 theorem constant_uniform_lists (ν : Measure Y) [IsProbabilityMeasure ν]
     (κ : Kernel Y G) [IsMarkovKernel κ] (a : ℝ≥0∞) (ha : 0 < a)
     (hf : ∀ᵐ y ∂ν, ∃ S : Finset G, S.Nonempty ∧
@@ -186,10 +188,14 @@ variable {G Y : Type*} [CommGroup G] [MeasurableSpace G]
   [MeasurableMul₂ G] [MeasurableInv G] [MeasurableSpace Y]
 
 /-- `[OAIMath2026]` `Approximation.lean:112`. -/
+-- nolint (FS131-LP1, inventory item 831): the release's binder, kept as it is (unusedArguments)
+@[nolint unusedArguments]
 noncomputable def differenceLaw (ν : Measure Y) (κ : Kernel Y G) [IsMarkovKernel κ] : Measure G :=
   ((κ ×ₖ κ) ∘ₘ ν).map (fun p : G × G => p.1 / p.2)
 
 /-- `[OAIMath2026]` `Approximation.lean:115`. -/
+-- nolint (FS131-LP1, inventory item 831): the release's binder, kept as it is (unusedArguments)
+@[nolint unusedArguments]
 lemma invariant (ν : Measure Y) [IsProbabilityMeasure ν]
     (κ : Kernel Y G) [IsMarkovKernel κ]
     (R : Y → Y) (hR : MeasurePreserving R ν ν)
@@ -264,6 +270,8 @@ lemma pi_dist_sq_le_sum {I : Type*} [Fintype I] (a b : I → ℂ) :
   nlinarith [Real.sq_sqrt hs, Real.sqrt_nonneg (∑ i, dist (a i) (b i)^2), dist_nonneg (x := a) (y := b)]
 
 /-- `[OAIMath2026]` `Approximation.lean:185`. -/
+-- nolint (FS131-LP1, inventory item 831): the release's binder, kept as it is (unusedArguments)
+@[nolint unusedArguments]
 lemma vector_of_scalar (ν : Measure Y) [IsProbabilityMeasure ν]
     (q : Y → W) (hq : Measurable q) [MeasurableConstSMul K Y]
     (hs : Scalar (K := K) ν q) : Vector (K := K) ν q := by
@@ -402,6 +410,8 @@ lemma relative_difference_invariant (μ : Measure X) [IsProbabilityMeasure μ]
     (scalarHom (kCoeff k)) (measurable_const_smul k) he
 
 /-- `[OAIMath2026]` `Approximation.lean:320`. -/
+-- nolint (FS131-LP1, inventory item 831): the release's binder, kept as it is (unusedArguments)
+@[nolint unusedArguments]
 lemma finite_encoding_approximation_of_compact
     [StandardBorelSpace X] [Nonempty X] [StandardBorelSpace Y] [Nonempty Y]
     [StandardBorelSpace W] [Nonempty W]
@@ -516,6 +526,8 @@ def At (ν : Measure Y) (q : Y → W) (m : ℕ) (H : Y → Fin m → ℂ) (ε : 
       (∫ y, dist (H (k • y)) (∑ i, a (q y) i • Hf i y)^2 ∂ν) < ε^2
 
 /-- `[OAIMath2026]` `Approximation.lean:432`. -/
+-- nolint (FS131-LP1, inventory item 831): the release's binder, kept as it is (unusedArguments)
+@[nolint unusedArguments]
 lemma lift_at
     (ν : Measure Y) [IsProbabilityMeasure ν]
     (p : Y → Z) (q : Z → W) (hp : Measurable p) (hq : Measurable q)

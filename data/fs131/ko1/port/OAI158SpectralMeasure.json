@@ -46,5 +46,17 @@
    "(Lp.memLp g).mul' (memLp μ f ∞)",
    "a PROOF patch by the coordinator's ruling of 2026-10-14 (FS131-IPD1 Amendment 1), written under this key because the generator refuses every `patches` entry inside a definition: the token is the proof argument of `MemLp.toLp`, which the elaborator abstracts as `mulLp._proof_1` (the release stores `MemLp.toLp (fun point => …) (mulLp._proof_1 μ f g)`), so the stored value of `mulLp` is unchanged and only that auxiliary's proof differs. `MemLp.fun_mul (hφ : MemLp φ p μ) (hf : MemLp f q μ)` (v4.34.1, `@[to_fun]` of `MemLp.mul`, `Mathlib/MeasureTheory/Function/LpSeminorm/CompareExp.lean:536`) is `MemLp.mul' (hf : MemLp f q μ) (hφ : MemLp φ p μ)` at v4.32.0 (`:325`), the same conclusion `MemLp (fun x => φ x * f x) r μ`, its two arguments in the other order"
   ]
+ ],
+ "nolint": [
+  [
+   "HadwigerNelson.Outside.OAI158.CommutingSpectral.algebra_commRing",
+   "defsWithUnderscore",
+   "name"
+  ],
+  [
+   "HadwigerNelson.Outside.OAI158.CommutingSpectral.algebra_commCStar",
+   "defsWithUnderscore",
+   "name"
+  ]
  ]
 }

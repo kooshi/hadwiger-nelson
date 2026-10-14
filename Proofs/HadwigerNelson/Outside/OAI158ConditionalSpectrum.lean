@@ -98,6 +98,8 @@ instance dualPolishSpace : PolishSpace D := by
   exact ContinuousMonoidHom.isClosedEmbedding_coe.polishSpace
 
 /-- `[OAIMath2026]` `ConditionalSpectrum.lean:43`. -/
+-- nolint (FS131-LP1, inventory item 831): the release's name, kept as it is (defsWithUnderscore)
+@[nolint defsWithUnderscore]
 local instance : MeasurableSpace Circle := borel Circle
 /-- `[OAIMath2026]` `ConditionalSpectrum.lean:44`. -/
 local instance : BorelSpace Circle := ⟨rfl⟩

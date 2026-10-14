@@ -24,5 +24,12 @@
    "Set.preimage_setOf_eq",
    "Mathlib renamed `Set.preimage_setOf_eq` to `Set.preimage_ofPred_eq` with the rest of `setOf`'s lemmas on 2026-07-09 (`LEAN.md` § Searching — Lean); at v4.32.0 the lemma is `Set.preimage_setOf_eq` (`Mathlib/Data/Set/Image.lean:103` at both pins), the same statement"
   ]
+ ],
+ "nolint": [
+  [
+   "HadwigerNelson.Outside.OAI158.Spectral.instMeasurableSpaceCircle_proofs",
+   "defsWithUnderscore",
+   "name"
+  ]
  ]
 }

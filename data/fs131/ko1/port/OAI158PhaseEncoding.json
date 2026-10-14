@@ -15,5 +15,12 @@
    "measurable_pi_lambda",
    "`Measurable.of_eval` (v4.34.1, `Mathlib/MeasureTheory/MeasurableSpace/Constructions.lean:596`, proved there as `measurable_pi_iff.mpr hf`) is not at v4.32.0; `measurable_pi_lambda` (`Constructions.lean:590` here) is the same statement with the function explicit, which `apply` unifies"
   ]
+ ],
+ "nolint": [
+  [
+   "HadwigerNelson.Outside.OAI158.PhaseEncoding.measurable_kernelEncoding",
+   "unusedArguments",
+   "binder"
+  ]
  ]
 }

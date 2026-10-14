@@ -15,5 +15,12 @@
    "compProd_map_condDistrib hb.aemeasurable",
    "at v4.34.1 `compProd_map_condDistrib` takes `hX : AEMeasurable X μ` and `hY : AEMeasurable Y μ`; at v4.32.0 it takes `hY` only, with the same conclusion (`Mathlib/Probability/Kernel/CondDistrib.lean:82` at both pins): the first argument is dropped"
   ]
+ ],
+ "nolint": [
+  [
+   "HadwigerNelson.Outside.OAI158.SmallArc.instMeasurableSpaceCircle_proofs",
+   "defsWithUnderscore",
+   "name"
+  ]
  ]
 }

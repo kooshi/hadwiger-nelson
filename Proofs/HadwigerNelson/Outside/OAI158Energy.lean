@@ -155,6 +155,8 @@ end
 open HadwigerNelson.Outside.OAI158.InvariantMean
 variable {G : Type*} [AddCommGroup G] [TopologicalSpace G] [DiscreteTopology G]
 /-- `[OAIMath2026]` `Energy.lean:91`. -/
+-- nolint (FS131-LP1, inventory item 831): the release's name, kept as it is (defsWithUnderscore)
+@[nolint defsWithUnderscore]
 local instance : DecidableEq G := Classical.decEq _
 /-- `[OAIMath2026]` `Energy.lean:92`. -/
 def cubeSupport : List G → ℕ → Finset G
@@ -455,7 +457,8 @@ def char (z : E) : Func D := ⟨fun d => (eval z d : ℂ), measurable_eval_coe z
 /-- `[OAIMath2026]` `Energy.lean:370`. -/
 @[simp] lemma char_apply (z : E) (d : D) : char z d = (eval z d : ℂ) := rfl
 /-- `[OAIMath2026]` `Energy.lean:371`. -/
-@[simp] lemma norm_char (z : E) (d : D) : ‖char z d‖ = 1 := Circle.norm_coe _
+-- nolint (FS131-LP1, inventory item 831): simp's normal form of the release's lemma, kept as it is (simpNF)
+@[nolint simpNF, simp] lemma norm_char (z : E) (d : D) : ‖char z d‖ = 1 := Circle.norm_coe _
 /-- `[OAIMath2026]` `Energy.lean:372`. -/
 @[simp] lemma char_zero : char 0 = 1 := by ext d; simp
 /-- `[OAIMath2026]` `Energy.lean:373`. -/

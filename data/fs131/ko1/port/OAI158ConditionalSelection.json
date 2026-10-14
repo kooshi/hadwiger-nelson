@@ -21,5 +21,12 @@
    "(haveI := MeasureTheory.Measure.isProbabilityMeasure_map (hp.aemeasurable (μ := μ)); GoodFiber.simultaneous_good_fiber (μ.map p))",
    "the class of `plans/FS131-KO1-port-plan.md` § 3.3, in a PROOF: at v4.34.1 `μ.map f` of a probability measure is one by an instance for every `f`; at v4.32.0 only through `Measure.isProbabilityMeasure_map (hf : AEMeasurable f μ)` (`Mathlib/MeasureTheory/Measure/Typeclasses/Probability.lean:124`). The instance is supplied by `haveI` from the measurability the proof's context holds; the statement is untouched"
   ]
+ ],
+ "nolint": [
+  [
+   "HadwigerNelson.Outside.OAI158.FiniteModule.instMeasurableSpaceCircle_proofs",
+   "defsWithUnderscore",
+   "name"
+  ]
  ]
 }

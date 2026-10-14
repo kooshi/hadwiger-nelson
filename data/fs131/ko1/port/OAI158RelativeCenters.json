@@ -80,5 +80,22 @@
    343,
    "part of the ruled cascade of `frequencyLaw` (the coordinator's rulings on FS131-IPA1, Amendments 3 and 4 of its brief; item 767 ruling (a)): the declaration's statement names a definition of the cascade, which at this pin takes the release's own section variables `[MeasurableMul₂ G] [MeasurableInv G]`, so the `omit` of exactly those two cannot stand; the strip check of `tools/fs131_ipa1_readback_port.py` (STRIP) shows the stored statement is the release's with those binders inserted"
   ]
+ ],
+ "nolint": [
+  [
+   "HadwigerNelson.Outside.OAI158.RelativeCenters.cosetMass",
+   "unusedArguments",
+   "binder"
+  ],
+  [
+   "HadwigerNelson.Outside.OAI158.RelativeCenters.differenceLaw",
+   "unusedArguments",
+   "binder"
+  ],
+  [
+   "HadwigerNelson.Outside.OAI158.Spectral.wild_map_of_equivariant",
+   "unusedArguments",
+   "binder"
+  ]
  ]
 }

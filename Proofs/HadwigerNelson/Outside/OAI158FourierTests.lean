@@ -294,6 +294,8 @@ variable {G Y : Type*} [MeasurableSpace G] [MeasurableSpace Y]
   [CommGroup G] [MeasurableMul₂ G] [MeasurableInv G]
 
 /-- `[OAIMath2026]` `FourierTests.lean:235`. -/
+-- nolint (FS131-LP1, inventory item 831): the release's binder, kept as it is (unusedArguments)
+@[nolint unusedArguments]
 noncomputable def differenceLaw (ν : Measure Y) (κ : Kernel Y G) [IsMarkovKernel κ] :
     Measure G := ((κ ×ₖ κ) ∘ₘ ν).map (fun p : G × G => p.1 / p.2)
 

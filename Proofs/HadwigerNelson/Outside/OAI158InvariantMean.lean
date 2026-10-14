@@ -70,6 +70,8 @@ open Filter Topology
 namespace HadwigerNelson.Outside.OAI158.InvariantMean
 
 /-- `[OAIMath2026]` `InvariantMean.lean:16`. -/
+-- nolint (FS131-LP1, inventory item 831): the release's name, kept as it is (defsWithUnderscore)
+@[nolint defsWithUnderscore]
 local instance (α : Type*) : DecidableEq α := Classical.decEq α
 
 variable {G : Type*} [AddCommGroup G] [TopologicalSpace G] [DiscreteTopology G]
@@ -273,6 +275,8 @@ lemma approx_norm_le (i : Finset G × ℕ) (f : G →ᵇ ℝ) : ‖approx i f‖
   ((cube i.1.toList i.2 f).norm_coe_le_norm 0).trans (cube_norm_le _ _ _)
 
 /-- `[OAIMath2026]` `InvariantMean.lean:195`. One fixed ultrafilter is used for all functions. -/
+-- nolint (FS131-LP1, inventory item 831): the release's binder, kept as it is (unusedArguments)
+@[nolint unusedArguments]
 def averagingUF (G : Type*) [AddCommGroup G] : Ultrafilter (Finset G × ℕ) :=
   Ultrafilter.of atTop
 

@@ -336,6 +336,8 @@ lemma measurable_probabilityKernel (κ : Kernel Y G) [IsMarkovKernel κ] :
     Measurable (probabilityKernel κ) := κ.measurable.subtype_mk
 
 /-- `[OAIMath2026]` `RelativeCenters.lean:225`. -/
+-- nolint (FS131-LP1, inventory item 831): the release's binder, kept as it is (unusedArguments)
+@[nolint unusedArguments]
 noncomputable def cosetMass (κ : Kernel Y G) [IsMarkovKernel κ] (p : Y × G) : ℝ≥0∞ :=
   κ p.1 (e.coset p.2)
 
@@ -347,6 +349,8 @@ lemma measurable_cosetMass (κ : Kernel Y G) [IsMarkovKernel κ] :
 
 /-- `[OAIMath2026]` `RelativeCenters.lean:235`. The relative difference law uses two independent samples of the same
 conditional probability law; it is not an independent marginal difference. -/
+-- nolint (FS131-LP1, inventory item 831): the release's binder, kept as it is (unusedArguments)
+@[nolint unusedArguments]
 noncomputable def differenceLaw (ν : Measure Y) (κ : Kernel Y G) [IsMarkovKernel κ] :
     Measure G := ((κ ×ₖ κ) ∘ₘ ν).map (fun p : G × G => p.1 / p.2)
 
@@ -699,6 +703,8 @@ variable {X Y : Type*} [MeasurableSpace X] [MeasurableSpace Y]
   [MeasurableConstSMul K X] [MeasurableConstSMul K Y]
 
 /-- `[OAIMath2026]` `RelativeCenters.lean:560`. -/
+-- nolint (FS131-LP1, inventory item 831): the release's binder, kept as it is (unusedArguments)
+@[nolint unusedArguments]
 theorem wild_map_of_equivariant (μ : Measure X) [IsProbabilityMeasure μ]
     [SMulInvariantMeasure K X μ] (b : X → D) (hb : Measurable b)
     (hbe : ∀ k : K, ∀ᵐ x ∂μ, b (k • x) = k • b x)

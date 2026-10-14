@@ -266,6 +266,8 @@ def kernelEncoding (β : Kernel Y G) (χ : G → ℂ) (m : ℕ) (y : Y) : Fin m 
   fun i => fromPowers (fun n => (m : ℂ) * ∫ d, χ d ^ n ∂β y) (i.val + 1)
 
 /-- `[OAIMath2026]` `PhaseEncoding.lean:207`. -/
+-- nolint (FS131-LP1, inventory item 831): the release's binder, kept as it is (unusedArguments)
+@[nolint unusedArguments]
 theorem measurable_kernelEncoding (β : Kernel Y G) [IsMarkovKernel β]
     (χ : G → ℂ) (hχ : Measurable χ) (m : ℕ) :
     Measurable (kernelEncoding β χ m) := by

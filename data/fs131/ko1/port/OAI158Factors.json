@@ -87,5 +87,12 @@
    "measurable_pi_iff.mpr",
    "`Measurable.of_eval {f} (hf : ∀ a, Measurable fun c => f c a)` (v4.34.1, `Mathlib/MeasureTheory/MeasurableSpace/Constructions.lean:596`, proved there as `measurable_pi_iff.mpr hf`, in the section of `measurable_pi_iff`) is not at v4.32.0; `measurable_pi_iff.mpr` is that proof, with the same variables and the same statement (`Constructions.lean:573` here)"
   ]
+ ],
+ "nolint": [
+  [
+   "HadwigerNelson.Outside.OAI158.FactorCode.encode_as_comp",
+   "unusedArguments",
+   "binder"
+  ]
  ]
 }

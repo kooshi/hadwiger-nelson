@@ -9,5 +9,17 @@
    "dif_pos (hx i hi)",
    "core renamed `dif_pos` to `dite_eq_left` after v4.32.0 (with `if_pos`/`if_neg`); at v4.32.0 only the old name, the same statement (`Init/Core.lean:1197` here; at v4.34.1 `theorem dif_pos … := dite_eq_left hc`, `:1210`)"
   ]
+ ],
+ "nolint": [
+  [
+   "HadwigerNelson.Outside.OAI158.PhaseCollision.instDecidableEq_proofs",
+   "defsWithUnderscore",
+   "name"
+  ],
+  [
+   "HadwigerNelson.Outside.OAI158.EncodedCollision.instMeasurableSpaceCircle_proofs",
+   "defsWithUnderscore",
+   "name"
+  ]
  ]
 }

@@ -315,6 +315,8 @@ open MeasureTheory ProbabilityTheory
 open scoped BigOperators
 open ConditionalFiber
 /-- `[OAIMath2026]` `ConditionalSelection.lean:251`. -/
+-- nolint (FS131-LP1, inventory item 831): the release's name, kept as it is (defsWithUnderscore)
+@[nolint defsWithUnderscore]
 local instance : MeasurableSpace Circle := borel Circle
 /-- `[OAIMath2026]` `ConditionalSelection.lean:252`. -/
 local instance : BorelSpace Circle := ⟨rfl⟩

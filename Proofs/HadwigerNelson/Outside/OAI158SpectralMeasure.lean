@@ -224,10 +224,14 @@ lemma adjoin_comm : IsMulCommutative (StarAlgebra.adjoin ℂ (Set.range (fun g =
     rw [← map_inv,← map_mul,← map_mul,mul_comm]
 open scoped IsMulCommutative in
 /-- `[OAIMath2026]` `SpectralMeasure.lean:119`. -/
+-- nolint (FS131-LP1, inventory item 831): the release's name, kept as it is (defsWithUnderscore)
+@[nolint defsWithUnderscore]
 instance algebra_commRing : CommRing (algebra U) :=
   let := adjoin_comm U
   @inferInstance _ (@IsMulCommutative.instCommRing _ _ ⟨⟨(StarSubalgebra.commRingTopologicalClosure _ (fun x y => mul_comm x y)).mul_comm⟩⟩)
 /-- `[OAIMath2026]` `SpectralMeasure.lean:122`. -/
+-- nolint (FS131-LP1, inventory item 831): the release's name, kept as it is (defsWithUnderscore)
+@[nolint defsWithUnderscore]
 instance algebra_commCStar : CommCStarAlgebra (algebra U) where
 
 /-- `[OAIMath2026]` `SpectralMeasure.lean:124`. -/

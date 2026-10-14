@@ -40,5 +40,37 @@
    "haveI := MeasureTheory.Measure.isProbabilityMeasure_map (hp.aemeasurable (μ := μ)); obtain ⟨m, hm, g, hg⟩ := UniformEnumeration.constant_uniform_lists",
    "the class of `plans/FS131-KO1-port-plan.md` § 3.3, in a PROOF: at v4.34.1 `μ.map f` of a probability measure is one by an instance for every `f`; at v4.32.0 only through `Measure.isProbabilityMeasure_map (hf : AEMeasurable f μ)` (`Mathlib/MeasureTheory/Measure/Typeclasses/Probability.lean:124`). The instance is supplied by `haveI` from the measurability the proof's context holds; the statement is untouched (as `OAI158ConditionalSelection`'s patch at 330)"
   ]
+ ],
+ "nolint": [
+  [
+   "HadwigerNelson.Outside.OAI158.UniformEnumeration.constant_uniform_lists",
+   "unusedArguments",
+   "binder"
+  ],
+  [
+   "HadwigerNelson.Outside.OAI158.DifferenceInvariant.differenceLaw",
+   "unusedArguments",
+   "binder"
+  ],
+  [
+   "HadwigerNelson.Outside.OAI158.DifferenceInvariant.invariant",
+   "unusedArguments",
+   "binder"
+  ],
+  [
+   "HadwigerNelson.Outside.OAI158.CompactApproximation.vector_of_scalar",
+   "unusedArguments",
+   "binder"
+  ],
+  [
+   "HadwigerNelson.Outside.OAI158.Spectral.finite_encoding_approximation_of_compact",
+   "unusedArguments",
+   "binder"
+  ],
+  [
+   "HadwigerNelson.Outside.OAI158.CompactApproximation.lift_at",
+   "unusedArguments",
+   "binder"
+  ]
  ]
 }

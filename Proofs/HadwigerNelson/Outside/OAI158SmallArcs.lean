@@ -251,6 +251,8 @@ theorem small_arc_bound {N : ℕ} (hN : 0 < N) {c : ℝ} (hc : 0 ≤ c)
     _ = _ := by field_simp
 
 /-- `[OAIMath2026]` `SmallArcs.lean:201`. -/
+-- nolint (FS131-LP1, inventory item 831): the release's name, kept as it is (defsWithUnderscore)
+@[nolint defsWithUnderscore]
 local instance : MeasurableSpace Circle := borel Circle
 /-- `[OAIMath2026]` `SmallArcs.lean:202`. -/
 local instance : BorelSpace Circle := ⟨rfl⟩

@@ -472,6 +472,8 @@ end
 open MeasureTheory ProbabilityTheory HadwigerNelson.Outside.OAI158
 open scoped BigOperators ENNReal
 /-- `[OAIMath2026]` `ConditionalLimits.lean:363`. -/
+-- nolint (FS131-LP1, inventory item 831): the release's name, kept as it is (defsWithUnderscore)
+@[nolint defsWithUnderscore]
 local instance : MeasurableSpace Circle := borel Circle
 /-- `[OAIMath2026]` `ConditionalLimits.lean:364`. -/
 local instance : BorelSpace Circle := ⟨rfl⟩
