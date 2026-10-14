@@ -4,7 +4,9 @@ import Proofs.HadwigerNelson.Rigidity.EntropySplitMax
 /-!
 FS131-ILA1 — every constant of the three modules this job's edit can reach, as the kernel holds it: read-only.
 The one this job writes (`Rigidity/UnitCircle`: the proof of `exists_admissiblePair`, private helpers, import lines) and
-the two downstream of it (`Rigidity/Pieces`, `Rigidity/EntropySplitMax`: they recompile when `UnitCircle` does).
+the two downstream of it (`Rigidity/Pieces`, `Rigidity/EntropySplitMax`: they recompile when `UnitCircle` does). The first
+dump was taken with these three; the module list gained the new `Rigidity/AdmissiblePrime` after it (the dump before
+the edit cannot import a module that did not exist), and nothing else of this file changed.
 
 For each constant stored in a module's compiled data (`env.header.moduleData`) it prints
 
@@ -23,11 +25,12 @@ open Lean Elab Command Meta
 
 namespace FS131ILA1Dump
 
-/-- The three modules. -/
+/-- The three modules, and (in the dump after the edit only) the new `Rigidity/AdmissiblePrime`. -/
 def modules : List Name :=
   [`Proofs.HadwigerNelson.Rigidity.UnitCircle,
    `Proofs.HadwigerNelson.Rigidity.Pieces,
-   `Proofs.HadwigerNelson.Rigidity.EntropySplitMax]
+   `Proofs.HadwigerNelson.Rigidity.EntropySplitMax,
+   `Proofs.HadwigerNelson.Rigidity.AdmissiblePrime]
 
 /-- The kind of a constant, as the kernel classes it. -/
 def kindOf : ConstantInfo → String

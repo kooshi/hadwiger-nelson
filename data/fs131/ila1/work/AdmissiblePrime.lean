@@ -29,12 +29,14 @@ PE-1′); through `AdmissiblePair.ofPow` it is enough that `wᵏ` generates `L` 
   `[L : M]` divides `2(1 − kB) − (1 − 2kB) = 1`. **Independence by membership**: `u^a w^b = 1` with `b > 0` clears to an
   equation in `𝓞 L` whose one side lies in `𝔓` and whose other does not; at `b = 0` the same at `𝔓′`.
 
-No ring of integers of a subfield, no class group and no valuation enter. The archimedean places cannot replace the
-`p`-adic step: when `F` is totally real, `L` is a CM field and every conjugate of a unit vector lies on the circle.
+No ring of integers of a subfield, no class group and no valuation of `L` enter (only the `p`-adic valuation of rational
+norms). The archimedean places cannot replace the `p`-adic step: when `F` is totally real, `L` is a CM field and every
+conjugate of a unit vector lies on the circle.
 
 **Models.** Both theorems are existence statements over every number field (resp. every real number field) with no
-hypothesis beyond `NumberField`; `NumberField ℚ` and `NumberField ↥(⊥ : Subfield ℝ)` are instances, so each is
-inhabited at `ℚ`. At `F = ℚ`, `L = ℚ(i)`, `p = 5`, `𝔓 = (2 + i)`: `z = (2 + i)² = 3 + 4i` (`z − 1 = 2i(2 − i)`) and
+hypothesis beyond `NumberField`, and each is inhabited at `ℚ`: `NumberField ℚ` is an instance, and
+`NumberField ↥(⊥ : Subfield ℝ)` is the theorem `UpperHalf.numberField_bot`. At `F = ℚ`, `L = ℚ(i)`, `p = 5`,
+`𝔓 = (2 + i)`: `z = (2 + i)² = 3 + 4i` (`z − 1 = 2i(2 − i)`) and
 `w = (3 + 4i)/(3 − 4i) = (−7 + 24i)/25`.
 -/
 
@@ -138,7 +140,7 @@ private theorem exists_dvd_of_dvd_exponent (K : Type*) [Field K] [NumberField K]
     exact hne (Ideal.span_singleton_eq_bot.mp hC.symm)
   refine ⟨Ideal.absNorm (conductor ℤ θ), Ideal.absNorm_eq_zero_iff.not.mpr hCbot, fun q hqe => ?_⟩
   have hmem : ((Ideal.absNorm (conductor ℤ θ) : ℤ)) ∈ Ideal.under ℤ (conductor ℤ θ) := by
-    rw [Ideal.under, Ideal.mem_comap, eq_intCast, Int.cast_natCast]
+    rw [Ideal.mem_under, eq_intCast, Int.cast_natCast]
     exact Ideal.absNorm_mem _
   rw [← Int.ideal_span_absNorm_eq_self (Ideal.under ℤ (conductor ℤ θ)), Ideal.mem_span_singleton] at hmem
   exact hqe.trans (Int.natCast_dvd_natCast.mp hmem)
@@ -225,7 +227,7 @@ private theorem padicValNat_absNorm_span_eq_one {K : Type*} [Field K] [NumberFie
       have h : ((p : ℤ)) ∈ Ideal.under ℤ Q := by
         rw [hQu]
         exact Ideal.mem_span_singleton_self _
-      simpa using h
+      rwa [Ideal.mem_under, eq_intCast, Int.cast_natCast] at h
     have hJQ : J ≤ Q := Ideal.le_of_dvd hQJ
     have hxQ : x ∈ Q := hJQ (Ideal.mul_le_left (hJ ▸ Ideal.mem_span_singleton_self x))
     obtain rfl := hother Q hQ hpQ hxQ
@@ -511,8 +513,8 @@ private theorem eq_zero_of_zpow_mul_zpow_eq_one {P P' : Ideal (𝓞 (fieldI F))}
 
 end FieldI
 
-/-- **Two unit vectors of `F²` for an admissible pair, at every real number field** (FS100-X02D's Lemma W
-construction; FS131-ILA1's route): complex numbers `u, w` of modulus one in `F(i)`, multiplicatively independent
+/-- **Two unit vectors of `F²` for an admissible pair, at every real number field** (FS100-X02D l. 146's admissible
+`Γ`, by FS131-ILA1's route in place of Lemma W's completely split prime): complex numbers `u, w` of modulus one in `F(i)`, multiplicatively independent
 (`u^a w^b = 1` only at `a = b = 0`), with `wᵏ` generating `F(i)` for every `k ≥ 1`. At degree-one, unramified primes `𝔓`,
 `𝔓′` above distinct odd primes `p`, `p′` (`exists_residueHom_unramified`): `w = z/z̄` with `z ∈ 𝔓²` in no other prime above
 `p`, and `u = z′/z̄′` with `z′ ∈ 𝔓′` and `z′ ∉ 𝔓̄′, 𝔓, 𝔓̄`. -/

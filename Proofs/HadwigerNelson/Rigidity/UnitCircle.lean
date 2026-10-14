@@ -226,8 +226,10 @@ theorem exists_admissiblePair [NumberField F] : Nonempty (AdmissiblePair F) := b
   intro n hn
   have h : u ^ (Multiplicative.toAdd n 0) * w ^ (Multiplicative.toAdd n 1) = 1 := by
     have h' := congrArg (fun g : unitCircle F => ((g : Circle) : ℂ)) hn
-    simpa only [zpowHom, MonoidHom.coe_mk, OneHom.coe_mk, Subgroup.coe_mul, SubgroupClass.coe_zpow,
-      Circle.coe_mul, Circle.coe_zpow, OneMemClass.coe_one, Circle.coe_one] using h'
+    change (((u' ^ Multiplicative.toAdd n 0 * w' ^ Multiplicative.toAdd n 1 : unitCircle F) : Circle) : ℂ) =
+      (((1 : unitCircle F) : Circle) : ℂ) at h'
+    simpa only [Subgroup.coe_mul, SubgroupClass.coe_zpow, Circle.coe_mul, Circle.coe_zpow, OneMemClass.coe_one,
+      Circle.coe_one] using h'
   obtain ⟨h0, h1⟩ := hind _ _ h
   refine Multiplicative.toAdd.injective (funext fun i => ?_)
   fin_cases i

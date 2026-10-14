@@ -5,7 +5,12 @@ cut from `fs131-wm12` at `e736212f2`. Working files: `data/fs131/ila1/`.
 
 ## Theorems this phase proved
 
-(none yet)
+- `HadwigerNelson.Rigidity.exists_admissiblePair` — [kernel], `Proofs/HadwigerNelson/Rigidity/UnitCircle.lean`;
+  axioms `[propext, Classical.choice, Quot.sound]` (build 3 of `fs131-wla`, `data/fs131/ila1/axioms-after.txt`).
+- `HadwigerNelson.Rigidity.exists_unitPair` — [kernel], `Proofs/HadwigerNelson/Rigidity/AdmissiblePrime.lean`;
+  axioms `[propext, Classical.choice, Quot.sound]`.
+- `HadwigerNelson.Rigidity.exists_residueHom_unramified` — [kernel], `Proofs/HadwigerNelson/Rigidity/AdmissiblePrime.lean`;
+  axioms `[propext, Classical.choice, Quot.sound]`.
 
 ## Stage 1 — SAVED: readback, the statement as the kernel holds it, the route restated, names checked, the dump before any edit
 
@@ -139,3 +144,144 @@ Tools written for the gate, not yet run: `data/fs131/ila1/lean/Axioms.lean` with
 record of the two modules this job writes CLEAN; a planted record, a leaf of `Rigidity/EntropySplitMax` that rests on
 `sorry` in this tree, must show), and `tools/fs131_ila1_statements.py` (the dumps before and after; eight planted
 faults). Build 1 (`./scripts/build.sh` under the slot, `MEMMAX=10G BATCH=8`; `data/fs131/ila1/build1.log`) started.
+
+## Stage 4 — SAVED: the gate items of the brief, from the built tree
+
+**Build 1** (`data/fs131/ila1/build1.log`; gate log `build/gate/build/20261014T173423Z-4070515.log`): OK — 256 of 256
+batches, 5 modules rebuilt (`AdmissiblePrime`, `UnitCircle`, `Pieces`, `EntropySplitMax`, `Proofs`), 7 m 10 s, no warning
+from this job's files. Its dump with the new module (`data/fs131/ila1/statements-build1.txt`) showed **two generated
+equation lemmas** this job's proofs had asked for: `zpowHom.eq_1` in `UnitCircle` (from `simpa only [zpowHom, …]`) and
+`Ideal.under.eq_1` in `AdmissiblePrime` (from `rw [Ideal.under, …]`, Mathlib's definition). Both removed — `change` to
+the unfolded form in `UnitCircle` (tested first in `data/fs131/ila1/work/UCtest2.lean`, log `UC-2.log`), `Ideal.mem_under`
+in the module's two readings of `under` (log `AP-23.log`) — so `UnitCircle`'s compiled data is again its 58 constants.
+Its axiom print (`axioms-build1.txt`) was already all clean; the one-line message went to the coordinator from it.
+
+**Build 2** (`data/fs131/ila1/build2.log`; gate log `build/gate/build/20261014T174330Z-4102978.log`): **OK — 256 of 256
+batches, 5 modules rebuilt, 8 m 11 s, exit 0; no warning from `AdmissiblePrime` or `UnitCircle`** (the build's 95
+warnings are all `declaration uses 'sorry'`, in 17 other modules, as before the job).
+
+**Statements** (`tools/fs131_ila1_statements.py` on `statements-before.txt` (§ 1.5) and `statements-after.txt`, base
+`e736212f2`; `data/fs131/ila1/statements-verdict.out`): **PASS** — 108 named constants of `UnitCircle`, `Pieces` and
+`EntropySplitMax` compared (kind, stored type, module), 32 data definitions' stored values, no `example` in the three
+files; every stored type identical, so the new import moved no instance in any stored statement. New: exactly the two
+allowed public theorems (`data/fs131/ila1/allow-new.txt`), 25 private constants and 6 internal ones (generated
+`_proof_n`), all in `AdmissiblePrime`. **Control** (`statements-control.out`): 8 of 8 planted faults reported (a stored
+statement of the leaf, a definition's value, a constant gone, a downstream statement, a move, an unlisted public
+constant, an axiom, a theorem become a definition). The dumper's module list gained `AdmissiblePrime` after the first
+dump and nothing else (the module did not exist before the edit; recorded in the dumper's docstring).
+
+**Axioms** (`data/fs131/ila1/lean/Axioms.lean` → `axioms-after.txt`; `tools/fs131_ila1_axioms.py` →
+`axioms-verdict.out`): **PASS — 60 records, all CLEAN**: `AdmissiblePrime` 27 (2 public theorems, 2 private
+definitions, 23 private theorems), `UnitCircle` 33, among them `exists_admissiblePair`,
+`exists_unitPair` and `exists_residueHom_unramified`, each `[propext, Classical.choice, Quot.sound]`. The planted record,
+`EntropySplitMax`'s `rotInv_sub_maxMultiple`, a skeleton leaf in this tree, **reported** as resting on `sorryAx`.
+**Control** (`axioms-control.out`): 4 of 4 planted faults reported.
+
+**A docstring corrected after build 2**: the module's **Models** paragraph called `NumberField ↥(⊥ : Subfield ℝ)` an
+instance; it is the theorem `UpperHalf.numberField_bot`. Reworded (docstring only), with two more docstring corrections of
+the module made before build 3 read it: "no valuation enter" → "no valuation of `L` enter (only the `p`-adic valuation
+of rational norms)", and `exists_unitPair`'s attribution "(FS100-X02D's Lemma W construction …)" → "(FS100-X02D l. 146's
+admissible `Γ`, by FS131-ILA1's route in place of Lemma W's completely split prime)".
+
+**Build 3** (`data/fs131/ila1/build3.log`; gate log `build/gate/build/20261014T180733Z-19285.log`): **OK — 256 of 256
+batches, 5 modules rebuilt, 8 m 12 s, exit 0; no warning from this job's files** (95 `sorry` warnings, 17 other modules).
+**The receipts above are re-run on build 3, and are the ones that stand**: dump 33 + 58 + 110 + 10 constants;
+statements PASS (108 constants, 32 values; 2 allowed public, 25 private, 6 internal, all in `AdmissiblePrime`), control
+8/8; axioms 60 of 60 CLEAN, planted record reported, control 4/4; the three public theorems on the standard three. The
+lint and the doubled-name scan below were run on build 2; build 3 differs from it only in the module's docstrings.
+
+**Lint** (`lake lint --no-build -- --no-build --trace` under the slot; `data/fs131/ila1/lint.out`): exit 1 on **one**
+finding, `archTop`'s unused `[NumberField ↥F]` (`ContinuityGroup` l. 42), the pre-existing one IM11 recorded (inventory
+item 863); **no finding in `AdmissiblePrime` or `UnitCircle`**; 13 of 14 linters `(2/2) Passed!`.
+
+**Doubled names** (`./scripts/dupnames.sh` under the slot; `data/fs131/ila1/dupnames.out`): OK — no name declared by two
+modules, 24 generated on demand, none in this job's modules. Its "changed since the previous complete run" lists two
+generated names gone since the 07:31 run in this tree (`Measure.addHaar.congr_simp`, from `Arith/StationaryRatio`;
+`measureUnivNNReal.eq_1`, from `Outside/OAI158Palette`), modules this job did not touch.
+
+**Architecture**: `tools/check_architecture.py` PASS (§ Stage 3; `data/fs131/ila1/arch.out`).
+
+**Not run here, and why**: `scripts/axioms.sh`, `scripts/vacuity.sh`, `scripts/assumptions.sh` and their self-tests read
+the whole library, which on this branch still holds other lanes' `sorry` (95 warnings in 17 modules), so their verdict
+belongs to the landing. For the landing's vacuity and assumptions reading: the two new public theorems take only
+`[Field K] [NumberField K] (M : ℕ) (hM : M ≠ 0)` and `[NumberField F]` — no structure, no colouring, no named
+hypothesis — and are inhabited at `ℚ` (`NumberField ℚ` an instance; `NumberField ↥(⊥ : Subfield ℝ)` the theorem
+`UpperHalf.numberField_bot`); `hM` is a condition on a parameter.
+
+**Read aloud, the three kernel theorems against their informal statements.**
+- `exists_admissiblePair : ∀ {F : Subfield ℝ} [NumberField ↥F], Nonempty (AdmissiblePair F)` — over every real number
+  field there are unit vectors `u, w` of `F²` with `ℤ² → ⟨u, w⟩` injective and every finite-index subgroup generating
+  `F(i)`: X02D l. 146's admissible `Γ` exists, as § 1.2 restated it.
+- `exists_unitPair (F) [NumberField F] : ∃ u w : ℂ, u ∈ fieldI F ∧ ‖u‖ = 1 ∧ w ∈ fieldI F ∧ ‖w‖ = 1 ∧
+  (∀ a b : ℤ, u ^ a * w ^ b = 1 → a = 0 ∧ b = 0) ∧ ∀ k : ℕ, 0 < k → Subfield.closure {w ^ k} = fieldI F` — two complex
+  numbers of modulus one in `F(i)`, multiplicatively independent, every positive power of `w` generating `F(i)`: X02D's
+  "in particular" form (l. 146–147) with independence.
+- `exists_residueHom_unramified (K) [Field K] [NumberField K] (M) (hM : M ≠ 0) : ∃ (p : ℕ) (φ : 𝓞 K →+* ZMod p),
+  p.Prime ∧ ¬ p ∣ M ∧ (p : 𝓞 K) ∉ RingHom.ker φ ^ 2` — infinitely many rational primes have a prime of `K` of degree one
+  above them, unramified (a classical fact, a weak form of Chebotarev's density theorem; the kernel proof ours).
+
+## Drafts for the landing
+
+**D1. The audit's block** (`scripts/Axioms.lean`, CLEAN section; every public declaration of the two modules this job
+writes whose axioms are the standard three at build 1 of `fs131-wla`):
+
+```
+-- FS131-ILA1: Rigidity/AdmissiblePrime (new), and lane A's leaf of Rigidity/UnitCircle
+#print axioms HadwigerNelson.Rigidity.exists_residueHom_unramified
+#print axioms HadwigerNelson.Rigidity.exists_unitPair
+#print axioms HadwigerNelson.Rigidity.exists_admissiblePair
+```
+
+**D2. `UnitCircle`'s docstrings, which still describe the plan's route** (not mine to edit: the brief gave me the proof,
+helpers and imports only). Slot: `Proofs/HadwigerNelson/Rigidity/UnitCircle.lean`.
+- Module title (l. 7), the words "proved by FS131-IDG1 but `exists_admissiblePair`" → "proved by FS131-IDG1;
+  `exists_admissiblePair` by FS131-ILA1".
+- Module doc, l. 26, "`exists_admissiblePair` (X02D's Lemma W construction at one `u`)" → "`exists_admissiblePair`
+  (from `Rigidity.exists_unitPair`: one degree-one unramified prime for `w`, a second for `u`)".
+- **Models**, ll. 28–29, "(`exists_admissiblePair`, a leaf) — at `ℚ` by `u = (3 + 4i)/5`, `w = (5 + 12i)/13` (the
+  leaf's plan)" → "(`exists_admissiblePair`) — at `ℚ`, for instance, by `u = (3 + 4i)/5`, `w = (5 + 12i)/13`".
+- `exists_admissiblePair`'s docstring, the sentences from "Plan: a rational prime `p` splitting completely" to the end →
+  "Proved from `exists_unitPair` (`Rigidity/AdmissiblePrime`): `w = z/z̄` at a degree-one unramified prime `𝔓` above an
+  odd `p` (`z ∈ 𝔓²`, in no other prime above `p`), `ℚ(wᵏ) = F(i)` for every `k ≥ 1` by the `p`-adic valuations of the
+  norms of `wᵏ − p` and `w²ᵏ − p`; `u = z′/z̄′` at a second such prime, independent by membership;
+  `AdmissiblePair.ofPow`. No completely split prime and no principal power is needed."
+
+**D3. Bibliography** (`BIBLIOGRAPHY.md`; Keryx files). One proposed row, and one reading line:
+- New row: `| **[Schur1912]** | I. Schur, *Über die Existenz unendlich vieler Primzahlen in einigen speziellen
+  arithmetischen Progressionen*, Sitzungsber. Berl. Math. Ges. 11 (1912) 40–50 — **cited from memory: title, venue and
+  pages unchecked** | the classical fact that a nonconstant integral polynomial has prime divisors of its values outside
+  any finite set; proved in the kernel here by the textbook argument (`Rigidity/AdmissiblePrime`, private `schur_prime`,
+  FS131-ILA1); nothing rests on the paper, and the module's docstrings name it as "Schur's argument" with no key | not
+  held | **recalled, not read** |`. If the landing prefers no row for a fact proved with its argument, the docstrings carry no
+  key and nothing breaks.
+- `FS100-X02D` is a derivation entry, not a bibliography row: read by this job at `plans/FS100-X02D-derivation.md`
+  ll. 144–166 (PE-1′'s admissible `Γ`, l. 146, and Lemma W, ll. 156–163), in full.
+
+**D4. `LEAN.md` lines** (§ Searching — Lean, appended at its end; each measured in this job's rounds, `data/fs131/ila1/logs/`):
+- A prime of degree one above `p`, unramified, at every number field needs no Chebotarev and no residue map built by
+  hand: an integral primitive `θ` (`Field.exists_primitive_element`, then `(IsFractionRing.isAlgebraic_iff ℤ ℚ K).mpr …
+  |>.exists_integral_multiple`), Mathlib's Kummer–Dedekind isomorphism `RingOfIntegers.ZModXQuotSpanEquivQuotSpan`
+  (at `¬ p ∣ RingOfIntegers.exponent θ`) followed by evaluation at a root of `minpoly ℤ θ` modulo `p`
+  (`Ideal.Quotient.lift`, `eval_intCast_map`, `Int.cast_id`); the exponent is nonzero because the conductor times the
+  different is `(f′(θ))` (`conductor_mul_differentIdeal`) and `(absNorm C : 𝓞) ∈ C` (`Ideal.absNorm_mem`,
+  `Int.ideal_span_absNorm_eq_self`); `p ∉ 𝔓²` from `p ∤ discr K` through `NumberField.not_dvd_discr_iff_forall_mem`,
+  `Ideal.ramificationIdx_eq_one`, `Ideal.ramificationIdx'_eq_ramificationIdx` (its `LiesOver` by
+  `Ideal.liesOver_span_iff`) and `Ideal.ramificationIdx'_ne_one_iff` (`Rigidity.exists_residueHom_unramified`, FS131-ILA1).
+- `ℚ⟮α⟯ = L` with no ring of integers of the subfield: for `y : ℚ⟮α⟯`, `N_{L/ℚ}(y) = N_{ℚ⟮α⟯/ℚ}(y)^d` by
+  `rw [← IntermediateField.algebraMap_apply, ← Algebra.norm_norm (S := ℚ⟮α⟯), Algebra.norm_algebraMap, map_pow]`, so `d`
+  divides `padicValRat p (N y)` (`padicValRat.pow`); `IntermediateField.finrank_eq_one_iff_eq_top` closes. The `p`-adic
+  valuation of the norm of an integral `x` is `padicValNat p (absNorm (span {x}))` through `Algebra.coe_norm_int`,
+  `padicValRat.of_int`, `padicValInt` (a definition: unfold it by `rw`) and `Ideal.absNorm_span_singleton` (FS131-ILA1).
+- `Algebra.IsAlgebraic ℤ K` is not an instance at the pin for a number field `K`; `IsFractionRing.isAlgebraic_iff ℤ ℚ K`
+  gives `IsAlgebraic ℤ x`. `Algebra.norm R` is a `MonoidHom`: `map_zero` does not rewrite `Algebra.norm ℤ 0` ("failed to
+  synthesize `ZeroHomClass`"); `Algebra.norm_zero` does. `padicValNat.zero` is deprecated for `padicValNat_zero_right`.
+  `rw [pow_succ]` on `z ^ (n + 1) ∈ P ^ 2` rewrites `P ^ 2` first: name the base, `pow_succ z` (FS131-ILA1).
+
+**D5. The front page** (`CLAUDE.md`; Keryx files). No ledger row was filed for lane A when Derived, so none is regraded.
+- § Frontier, the paragraph on the chain's lanes, or wherever lane A is named open: "lane A, `exists_admissiblePair`"
+  → "lane A, `exists_admissiblePair` — [kernel] on the standard three since FS131-ILA1 (`Rigidity/AdmissiblePrime`, on
+  `fs131-wla`): an admissible pair exists over every real number field, by two degree-one unramified primes and the
+  `p`-adic valuations of norms; no Chebotarev".
+- § The gate and § Trust ledger: no counts from this job — the whole-library steps are the landing's (Stage 4). The axiom
+  audit gains three CLEAN records with D1, and no purchase or import.
+- Proof Atlas: lane A's leaf moves from open to [kernel].
