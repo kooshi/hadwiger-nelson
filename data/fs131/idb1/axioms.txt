@@ -140,7 +140,7 @@ REC Proofs.HadwigerNelson.Plane.DensityBound.BesselCheck DEF HadwigerNelson.Dens
 REC Proofs.HadwigerNelson.Plane.DensityBound.BesselCheck DEF HadwigerNelson.DensityBound.BesselCert.chainEnd []
 REC Proofs.HadwigerNelson.Plane.DensityBound.BesselCheck DEF HadwigerNelson.DensityBound.BesselCert.decodeAux []
 REC Proofs.HadwigerNelson.Plane.DensityBound.BesselCheck DEF HadwigerNelson.DensityBound.BesselCert.homogL []
-MODULE Proofs.HadwigerNelson.Plane.DensityBound.BesselCert 276
+MODULE Proofs.HadwigerNelson.Plane.DensityBound.BesselCert 277
 REC Proofs.HadwigerNelson.Plane.DensityBound.BesselCert THM HadwigerNelson.DensityBound.BesselCert.core_eq []
 REC Proofs.HadwigerNelson.Plane.DensityBound.BesselCert THM HadwigerNelson.DensityBound.BesselCert.S_real [propext, Classical.choice, Quot.sound]
 REC Proofs.HadwigerNelson.Plane.DensityBound.BesselCert THM HadwigerNelson.DensityBound.BesselCert.abs_ev_le [propext, Classical.choice, Quot.sound]
@@ -176,6 +176,7 @@ REC Proofs.HadwigerNelson.Plane.DensityBound.BesselCert THM HadwigerNelson.Densi
 REC Proofs.HadwigerNelson.Plane.DensityBound.BesselCert THM HadwigerNelson.DensityBound.BesselCert.pw.eq_def []
 REC Proofs.HadwigerNelson.Plane.DensityBound.BesselCert THM HadwigerNelson.DensityBound.BesselCert.affX.eq_def []
 REC Proofs.HadwigerNelson.Plane.DensityBound.BesselCert DEF HadwigerNelson.DensityBound.BesselCert.St.Valid [propext, Classical.choice, Quot.sound]
+REC Proofs.HadwigerNelson.Plane.DensityBound.BesselCert THM HadwigerNelson.DensityBound.BesselCert.close_self [propext, Classical.choice, Quot.sound]
 REC Proofs.HadwigerNelson.Plane.DensityBound.BesselCert THM HadwigerNelson.DensityBound.BesselCert.mul_ev_le_cdiv' [propext, Classical.choice, Quot.sound]
 REC Proofs.HadwigerNelson.Plane.DensityBound.BesselCert THM HadwigerNelson.DensityBound.BesselCert.tailSum_sound [propext, Classical.choice, Quot.sound]
 REC Proofs.HadwigerNelson.Plane.DensityBound.BesselCert THM HadwigerNelson.DensityBound.BesselCert.tailSum.eq_def [propext]

@@ -18,7 +18,7 @@ a native axiom.**
   `[propext, Classical.choice, Quot.sound]`.
 - `BesselCert.covering_sound`, `chain_sound`, `cellCheck_sound`, `termsOut_sound`, `coreOf_sound`, `defect_bound`,
   `quadOk_sound`, `tailCheck_sound`, `tailSum_sound`, `abs_J0_tail`, `statesValid_init` and the polynomial lemmas
-  (`Plane/DensityBound/BesselCert`, 61 theorems) — [kernel], the standard three.
+  (`Plane/DensityBound/BesselCert`), with `close_self`, the model of `Close` that `Cells/Covering` instantiates at `P23` — [kernel], the standard three.
 - The 847 cells `Cells.cN_ok : CellOk P23 cN` and the 46 `Cells.segNN_ok`, `allCells_ok`, `allCells_linked`, `code0_init`,
   `allCells_tail` — [kernel] by `decide +kernel`, `[propext]`.
 - `Bessel` (13): `J0_eq_integral`, `J1_eq_integral`, `J0_zero`, `J1_zero`, `abs_J0_le_one`, `abs_J1_le_one`,
@@ -507,13 +507,24 @@ FS-133's density equality as the port's theorem, and its fourteen consumers ther
 
 ### 5.3 The audit's block for this job's files (`scripts/Axioms.lean`, CLEAN section, after the last landing's block)
 
-`data/fs131/idb1/audit-block.txt` — 263 records (156 theorems, 107 definitions), every public theorem and definition of
+`data/fs131/idb1/audit-block.txt` — 264 records (157 theorems, 107 definitions), every public theorem and definition of
 `Bessel`, `BesselDefect`, `BesselCheck`, `BesselCert` in each module's stored order, and of the generated modules `P23`,
 the 46 `segNN_ok` and `Cells/Covering`'s seven. The 847 cell theorems and their 847 definitions are not listed one by one:
 each is read by its part's `segNN_ok`, whose proof names it, and `collectAxioms` is transitive; the landing may list them
 all instead (1,694 more lines). Every record goes under CLEAN: none reads a declared outside theorem. A banner for it:
 
-> `## FS131-IDB1 — the density bound's covering and the Bessel lemmas (FS-131; plan FS131-KDB1)` — 263 records, every
+> `## FS131-IDB1 — the density bound's covering and the Bessel lemmas (FS-131; plan FS131-KDB1)` — 264 records, every
 > public declaration of `Plane/DensityBound/Bessel`, `BesselDefect`, `BesselCheck`, `BesselCert` and the assembly records
 > of the generated `Plane/DensityBound/Cells/*`; every record under CLEAN, on the standard three or fewer
 > (`data/fs131/idb1/axioms.txt`, `tools/fs131_idb1_axioms.py`).
+
+## Stage 6 — SAVED: a model of `Close`, the last build, the linters
+
+`BesselCert.close_self` (the listed distances themselves satisfy `Close` when nonnegative) and, in the generated
+`Cells/Covering`, `example : Close P23.Ds (P23.Ds.map fun D => (D : ℝ) / S)` — a model of `phiApprox_ge`'s one
+hypothesis. Regenerated: only `Covering.lean` changed (`data/fs131/idb1/gen/run4.sha256` against `run3.sha256`); the parts'
+sources are byte-identical, so the build recompiled 3 modules (`BesselCert`, `Covering`, `Proofs`): **exit 0**, 8 m 12 s,
+warnings from the other lanes' four modules only (`data/fs131/idb1/build4.log`). Axioms re-printed on that tree: 2,016
+records, 997 on a subset of the standard three, 1,019 on none; both plants seen (`tools/fs131_idb1_axioms.py`, PASS).
+Environment linters, `lake lint --no-build -- --no-build --trace` under the slot: exit 0, `-- Linting passed for
+Proofs.`, every linter passed, no finding in `Plane/DensityBound/` (`data/fs131/idb1/lint.log`).

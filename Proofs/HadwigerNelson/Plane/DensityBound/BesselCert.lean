@@ -222,6 +222,15 @@ def StatesValid (Ds : List ℤ) (sts : List St) (T : ℝ) : Prop :=
 def Close (Ds : List ℤ) (d : List ℝ) : Prop :=
   List.Forall₂ (fun (D : ℤ) (x : ℝ) => |x - (D : ℝ) / S| ≤ 1 / (S : ℝ) ∧ 0 ≤ x) Ds d
 
+/-- **A model of `Close`**: the listed distances themselves, when nonnegative. -/
+theorem close_self (Ds : List ℤ) (h : ∀ D ∈ Ds, 0 ≤ D) : Close Ds (Ds.map fun D => (D : ℝ) / S) := by
+  induction Ds with
+  | nil => exact List.Forall₂.nil
+  | cons D Ds ih =>
+    refine List.Forall₂.cons ⟨?_, ?_⟩ (ih fun E hE => h E (List.mem_cons_of_mem D hE))
+    · simp only [sub_self, abs_zero]; exact div_nonneg zero_le_one S_pos.le
+    · exact div_nonneg (by exact_mod_cast h D List.mem_cons_self) S_pos.le
+
 /-- `Σₖ Wₖ J₀(t dₖ)`. -/
 noncomputable def jsum : List ℤ → List ℝ → ℝ → ℝ
   | W :: Ws, x :: d, t => W * J0 (t * x) + jsum Ws d t

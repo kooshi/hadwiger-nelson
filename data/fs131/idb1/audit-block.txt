@@ -127,7 +127,7 @@
 #print axioms HadwigerNelson.DensityBound.BesselCert.chainEnd
 #print axioms HadwigerNelson.DensityBound.BesselCert.decodeAux
 #print axioms HadwigerNelson.DensityBound.BesselCert.homogL
--- FS131-IDB1 block: `Plane/DensityBound/BesselCert` — 82 records (76 theorems, 6 definitions)
+-- FS131-IDB1 block: `Plane/DensityBound/BesselCert` — 83 records (77 theorems, 6 definitions)
 #print axioms HadwigerNelson.DensityBound.BesselCert.core_eq
 #print axioms HadwigerNelson.DensityBound.BesselCert.S_real
 #print axioms HadwigerNelson.DensityBound.BesselCert.abs_ev_le
@@ -163,6 +163,7 @@
 #print axioms HadwigerNelson.DensityBound.BesselCert.pw.eq_def
 #print axioms HadwigerNelson.DensityBound.BesselCert.affX.eq_def
 #print axioms HadwigerNelson.DensityBound.BesselCert.St.Valid
+#print axioms HadwigerNelson.DensityBound.BesselCert.close_self
 #print axioms HadwigerNelson.DensityBound.BesselCert.mul_ev_le_cdiv'
 #print axioms HadwigerNelson.DensityBound.BesselCert.tailSum_sound
 #print axioms HadwigerNelson.DensityBound.BesselCert.tailSum.eq_def

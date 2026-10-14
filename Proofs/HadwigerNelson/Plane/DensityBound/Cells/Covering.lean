@@ -83,4 +83,7 @@ theorem phiApprox_ge : ∀ d : List ℝ, Close P23.Ds d → ∀ t : ℝ, 0 ≤ t
     (P23.TN : ℝ) / P23.TD ≤ P23.w1N / P23.WS + jsum P23.Ws d t / P23.WS :=
   covering_sound P23 allCells code0 us23 allCells_ok allCells_linked code0_init allCells_tail
 
+/-- A model of `phiApprox_ge`'s hypothesis `Close`: the listed distances themselves (all nonnegative). -/
+example : Close P23.Ds (P23.Ds.map fun D => (D : ℝ) / S) := close_self _ (by decide +kernel)
+
 end HadwigerNelson.DensityBound.BesselCert.Cells
