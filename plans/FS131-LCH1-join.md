@@ -155,3 +155,35 @@ added or changed files declare against both before-dumps' names: **0 declared in
 (`collisions-late-prescan.out`). The kernel-side scan for them is `scripts/dupnames.sh` on the joined tree (stage 4),
 which reads each module's compiled constants. `tools/check_architecture.py` on the joined source: PASS (`arch-pre.out`).
 The build of the four-way join: `data/fs131/lch1/build-2.log`, `BATCH=3`, `MEMMAX=10G`.
+
+## Stage 2c — SAVED (the certificate link, by the brief's fourth amendment, 22:52 UTC)
+
+**The second build, stopped twice.** `BATCH=3`, 10 GiB (`build-2-oom.log`, `build-2-oom-full.log`): batch 201 of 725 —
+`Additive`, `Arith/FibreCert11Seg5`, `Arith/FibreCert19C0` — exit 143 twice, the journal's `oom-kill` for both scopes
+(`build-2-oom-journal.txt`). **Mechanism:** FS131-IKC4's check modules peak at 5.4–7.3 GiB each (its record § 3.2: `C0`–`C7`
+5.36–6.61, `Seg0`–`Seg3` 5.64–7.28, `Psd*` 4.85–5.85); two in one batch pass 10 GiB. Rerun at `BATCH=2` under
+`--mem 16 MEMMAX=16G` (2 × 7.3 < 16; the slot was empty: "reserved 0 GiB"). That run (`build-3-stopped.log`) was
+stopped by me at batch 489 of 1,084 for the fourth amendment's merge (process group signalled, absent, log static); it
+forfeited the walk's position only.
+
+5. **The certificate link, `fs131-wkl` at `b2a2b06d3`**, merged as `5b164748f`. Conflicts (`resolve-wkl.out`):
+   `ARCHITECTURE.md`, two hunks — the chain's rows kept, the link's `Rigidity/CertLink` and `Rigidity/CertLinkModels` rows
+   added; `Proofs.lean` — the link's two imports added, its duplicate `Plane.OneAvoidingDensity` import removed.
+6. **The link's drafts applied** (its record `fs132-wi1:plans/FS131-IKL1-implementation.md` § 4.1–4.2, 4.5), commit
+   `7f5ecfbd8`: `Rigidity/ClassRatio` imports `Rigidity.CertLink` and `Arith.FibreCert19Bound`; the two discharge lemmas
+   `henselCount_of_two_notMem`, `newCharBound_of_two_notMem` verbatim from `data/fs131/ikl1/scratch/discharge-wcm4.lean.txt`
+   (public, as drafted), before the leaf; `CertLink.exists_fibreShareBound_nineteen : ∃ U : ℝ, U < 361 / 4 ∧
+   CertLink.FibreShareBound 19 U := ⟨_, by norm_num, FibreCertSound.sum_le_nineteen⟩`, stated in `ClassRatio` (as
+   `_root_.HadwigerNelson.CertLink.…`: the first module where both `Arith/FibreCert19Bound` and `Rigidity/CertLink` are in
+   scope and that the one line can read); `ratioAtMost_cert`'s body the one line, its docstring the drafted one, the module
+   docstring's "certificates at 11 and 19" sentence naming `Rigidity/CertLink`. `Rigidity/CertLinkModels` imports
+   `Rigidity.ClassRatio` and holds the full model (`fibreShareBound_three`, `card_le_of_fibreShareBound_model`, from
+   `data/fs131/ikl1/scratch/landing/FullModel.lean`, its `#print axioms` line left out). `ARCHITECTURE.md`: `ClassRatio`'s
+   row and imports cell, `CertLinkModels`' imports cell (`check_architecture.py` PASS, `arch-pre2.out`).
+7. **"`i` is an integer of `F(i)`", one public copy** (integration 4 extended): `UpperHalf.exists_I_integer` (public since
+   stage 3) is upstream of all three other modules (`ThreeFourColours`, `CertLink` import `Arith/UpperHalf`; `ClassRatio`
+   through `Rigidity/CertLink`); their private copies `exists_I_integer'`, `exists_I_mem`, `exists_I_int` (one statement
+   text, `∃ i : 𝓞 (fieldI F), i ^ 2 = -1 ∧ conjO F i = -i`, the one `SpectralChain.conjO`, `{F : Subfield ℝ}`) deleted,
+   their 4 + 1 + 5 readers reading `UpperHalf.exists_I_integer`.
+
+The build of the five-way join: `build-4.log`, `BATCH=2`, `--mem 16`, `MEMMAX=16G`.
