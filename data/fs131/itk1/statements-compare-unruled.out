@@ -1,0 +1,48 @@
+compared: 141 named constants of the first dump (kinds, types, modules), 40 data definitions' values, 17 example heads of the base files
+internal (not compared): 35 before, 85 after
+new public constants in the second dump: 5 (allow-list: 0)
+  NEW THM HadwigerNelson.Rigidity.SAdeleRing.congr_simp
+  NEW THM HadwigerNelson.Rigidity.TateModel.congr_simp
+  NEW THM HadwigerNelson.Rigidity.WPlace.absAt.congr_simp
+  NEW THM HadwigerNelson.Rigidity.multiplier.congr_simp
+  NEW THM HadwigerNelson.Rigidity.splitHeight.congr_simp
+new private constants in the second dump: 30
+  NEW PRIVATE THM HadwigerNelson.Rigidity.Collision.absAt_ℓ_arch  (Proofs.HadwigerNelson.Rigidity.GlobalPoint)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.Collision.absAt_ℓ_split  (Proofs.HadwigerNelson.Rigidity.GlobalPoint)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.Collision.e_eq  (Proofs.HadwigerNelson.Rigidity.GlobalPoint)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.Collision.max_le_mul_max  (Proofs.HadwigerNelson.Rigidity.GlobalPoint)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.Collision.prod_le_mul_prod_erase  (Proofs.HadwigerNelson.Rigidity.GlobalPoint)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.Collision.size_e_arch  (Proofs.HadwigerNelson.Rigidity.GlobalPoint)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.Collision.size_e_split  (Proofs.HadwigerNelson.Rigidity.GlobalPoint)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.Collision.splitHeight_le_scaleHeight  (Proofs.HadwigerNelson.Rigidity.GlobalPoint)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.embedding_iL  (Proofs.HadwigerNelson.Rigidity.Multipliers)
+  NEW PRIVATE DEF HadwigerNelson.Rigidity.iL  (Proofs.HadwigerNelson.Rigidity.Multipliers)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.norm_embedding_iL  (Proofs.HadwigerNelson.Rigidity.Multipliers)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.WPlace.coe_mul_completion  (Proofs.HadwigerNelson.Rigidity.PlaceSizes)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.WPlace.coe_natCast_completion  (Proofs.HadwigerNelson.Rigidity.PlaceSizes)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.WPlace.norm_coe_le_one_iff  (Proofs.HadwigerNelson.Rigidity.PlaceSizes)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.WPlace.norm_le_one_iff_valued  (Proofs.HadwigerNelson.Rigidity.PlaceSizes)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.WPlace.norm_lt_one_iff_valued  (Proofs.HadwigerNelson.Rigidity.PlaceSizes)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.coe_mem_integers_iff  (Proofs.HadwigerNelson.Rigidity.TateKernel)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.coe_mem_stableIntegers  (Proofs.HadwigerNelson.Rigidity.TateKernel)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.exists_int_of_exp_eq_one  (Proofs.HadwigerNelson.Rigidity.TateKernel)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.mem_stableIntegers_of_away  (Proofs.HadwigerNelson.Rigidity.TateKernel)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.snd_mul_apply  (Proofs.HadwigerNelson.Rigidity.TateKernel)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.snd_sub_apply  (Proofs.HadwigerNelson.Rigidity.TateKernel)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.sub_toSAdele_mem_oAnn  (Proofs.HadwigerNelson.Rigidity.TateKernel)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.toSAdele_injective  (Proofs.HadwigerNelson.Rigidity.TateKernel)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.toSAdele_mul_mem_oAnn  (Proofs.HadwigerNelson.Rigidity.TateKernel)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.toSAdele_snd_apply  (Proofs.HadwigerNelson.Rigidity.TateKernel)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.valuation_coe_le_one  (Proofs.HadwigerNelson.Rigidity.TateKernel)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.TateModel.orbit_step  (Proofs.HadwigerNelson.Rigidity.ThinBoxes)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.absAt_pow  (Proofs.HadwigerNelson.Rigidity.ThinBoxes)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.TateModel.absAt_pow'  (Proofs.HadwigerNelson.Rigidity.WanderingShells)
+examples in the working files that the base does not hold: 0
+TYPE     THM HadwigerNelson.Rigidity.countable_splitPlace: the stored statement differs
+TYPE     THM HadwigerNelson.Rigidity.scaleHeight_three_mul_sq: the stored statement differs
+NEW      THM HadwigerNelson.Rigidity.SAdeleRing.congr_simp: a new public constant that the allow-list does not hold
+NEW      THM HadwigerNelson.Rigidity.TateModel.congr_simp: a new public constant that the allow-list does not hold
+NEW      THM HadwigerNelson.Rigidity.WPlace.absAt.congr_simp: a new public constant that the allow-list does not hold
+NEW      THM HadwigerNelson.Rigidity.multiplier.congr_simp: a new public constant that the allow-list does not hold
+NEW      THM HadwigerNelson.Rigidity.splitHeight.congr_simp: a new public constant that the allow-list does not hold
+FAIL: 7 difference(s)

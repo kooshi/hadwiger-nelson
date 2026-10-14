@@ -243,8 +243,8 @@ stored-type changes, each named (`statements-compare.out`):
   `simp`-family and `linarith` calls over the same atoms) would generate them in turn; each exists **once** in the library
   (`dupnames` below).
 **The planted changes, watched firing:** `--control` on these two dumps, 8 of 8 reported
-(`statements-compare-control.out`); and the same two dumps without the ruled lists FAIL, naming `countable_splitPlace`
-and the five generated constants (stage 5's first run, kept in this record's history).
+(`statements-compare-control.out`); and the same two dumps without the ruled lists FAIL with 7 differences, naming
+`countable_splitPlace`, `scaleHeight_three_mul_sq` and the five generated constants (`statements-compare-unruled.out`).
 `multiplier_mem`'s `[NumberField F]` was **not** dropped (stage 3): `multiplier`'s stored value is unchanged, as the check
 shows.
 
