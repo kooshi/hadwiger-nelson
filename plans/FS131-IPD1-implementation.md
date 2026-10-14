@@ -266,3 +266,42 @@ axiom there, theorem of `OAI158Ergodicity` here, **its type IDENTICAL** (full pr
 Sent at once; **ruled (by message): the three up to proof arguments, the join may proceed** — on two conditions: this
 record names the auxiliaries each side cites and that their types print alike (above), and the join's step 8 dump of the
 eight density modules must read IDENTICAL, or the join stops and comes to the coordinator.
+
+## Stage 5 — SAVED: the protected-declaration check, the whole-library steps, and lane D's read-back
+
+**5.1 The protected-declaration check across the whole port** (plan § 4.3; `data/fs131/ipd1/lean/ProtectedCheck.lean`,
+`protected-check.out`). The modules of ours that can name a ported constant are those downstream of the 31 generated
+modules: `Outside/OAI158Collapse`, `Plane/RadiusOutside`, `Plane/LebesgueNumber` (from the import graph). Every
+constant of their compiled data, its stored type and its stored value, was read for constants declared in a generated
+module: **one line in all** — `nonempty_aeColouring_of_colorable`'s **value** (its proof) names `proper_to_borel_weak`.
+**No stored statement of ours names a ported constant**, and the one ported constant a term of ours names is the target,
+which no table entry touches: none is ADAPTED or RULED (lanes A–C's RULED 32 and ADAPTED 4, `verdicts.tsv`; lane D adds
+`algebra_commRing`, ADAPTED, which nothing of ours names). The generator refuses an adaptation on a target or a shared
+declaration and was asked for none there.
+
+**5.2 The whole-library steps on the registered library** (not the landing's gate; what it will read):
+- `./scripts/dupnames.sh`: **OK — no name declared by two modules** (26 generated on demand; new since the last run:
+  `OAI158.angularSum.eq_1`, `MeasureTheory.Measure.addHaar.congr_simp`, `MeasureTheory.measureUnivNNReal.eq_1`, each
+  GENERATED; `gate-dupnames.out`).
+- `./scripts/vacuity.sh`: **OK** — `declarations=17785 refutations-skipped=232 sites=1454`, `vacuous=0 stale=0
+  declared=3 witnessed=38 generic=1411 unknown=2`: the port adds 1,660 declarations, 4 skipped refutations and **no
+  site** (`gate-vacuity.out`).
+- `./scripts/assumptions.sh`: **12 FAIL `stale-consumer`**, exactly the twelve: `scripts/assumptions-ledger.txt` still
+  lists `RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak <record>` for each, and no axiom of that name exists
+  now. Digest: `axioms=2 rests=27 named=19 inline=14 outside=7 ours=21 open=5 takes=102 mentions=1` (only `axioms`
+  3 → 2 and `rests` 39 → 27 move). The ledger file is not this job's to write: the landing runs `--write-ledger`
+  (`gate-assumptions.out`).
+
+**5.3 Lane D's read-back across pins** (`data/fs131/ipd1/readback/laneD/`; 524 constants: 328 source declarations, 196
+generated auxiliaries). *Why the dumps took three tries.* The release-side dump wrote nothing for 24 minutes and was
+stopped (forfeit: that run). `#eval` holds what the dumper prints in its captured stdout until the whole run is done,
+and lane D's prints are about 1.4 GB on each side: FS132-I2's printer writes terms as trees, and
+`CommutingSpectral.character_apply` (222 MB), `character._proof_6` (206 MB), `LabelModel.representation` (104 MB; its
+value is a term of 5.5 million nodes) and a few more are large. Constants dumped alone took seconds, and the progress
+file of a split run showed every constant started. The run that worked is the same dumper with one change, in
+`runAll`: stdout re-pointed at the output file for the loop (`{Release,Here}DumpFile.lean`). Both sides **`DONE
+524`, exit 0, about two minutes each**; the here side from the registered build (`lake env lean`); `prints.sha256`
+(release `8574ca43…`, here `43aa2be5…`). The prints are not committed (1.4 GB each); the dumpers are, and they
+reproduce them. The comparator: FS131-IPA1's `tools/fs131_ipa1_readback_port.py` with this job's rules (ADAPTED_VALUE,
+PROOF_ONLY, the `algebra_commCStar` PIN-DIFFERENCE with its note, TARGETS_HERE), each with planted controls. A first
+comparison was killed at its 14 GiB cap; the second runs at 20 GiB, alone on the machine (result: 5.4).
