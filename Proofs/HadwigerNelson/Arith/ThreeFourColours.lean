@@ -410,6 +410,122 @@ theorem exists_maximal_card_three_of_card_nine {𝔪 : Ideal (unitRing F)} (h�
   obtain ⟨P, hP⟩ := exists_stablePrime_card_nine h𝔪 h9
   exact exists_maximal_card_three_of_stablePrime_card_nine P hP
 
+/-! ### The level-one target at the two kinds of prime the criterion meets -/
+
+omit [NumberField F] in
+/-- **A ramified stable prime has a two-colourable level-one target**: if conjugation is the identity modulo `P`, then
+`2 ∈ P`, an edge of `levelTarget P 1` joins `x` and `x + 1` (`(x − y)² = 1` in characteristic 2), and an `𝔽₂`-linear
+functional with value 1 at 1 two-colours it. -/
+theorem levelTarget_colorable_two_of_ramified (P : StablePrime F)
+    (hram : ∀ x : 𝓞 (fieldI F), conjO F x - x ∈ P.P) : (levelTarget P 1).Colorable 2 := by
+  haveI := isMaximal_pow_one P
+  letI := Ideal.Quotient.field (P.P ^ 1)
+  have hid : ∀ t : 𝓞 (fieldI F) ⧸ P.P ^ 1, Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1) t = t := fun t => by
+    obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective t
+    rw [Ideal.quotientMap_mk, Ideal.Quotient.eq, pow_one]
+    exact hram a
+  have h2 : (2 : 𝓞 (fieldI F) ⧸ P.P ^ 1) = 0 := by
+    have h := two_mem_of_conj_trivial P hram
+    rw [← pow_one P.P] at h
+    have h' := Ideal.Quotient.eq_zero_iff_mem.mpr h
+    rwa [map_ofNat] at h'
+  -- an `𝔽₂`-linear functional with value 1 at 1
+  letI : Module (ZMod 2) (𝓞 (fieldI F) ⧸ P.P ^ 1) := AddCommGroup.zmodModule (n := 2) fun x => by
+    rw [nsmul_eq_mul, Nat.cast_ofNat, h2, zero_mul]
+  obtain ⟨g, hg⟩ := LinearMap.exists_leftInverse_of_injective
+    (LinearMap.toSpanSingleton (ZMod 2) (𝓞 (fieldI F) ⧸ P.P ^ 1) 1) (LinearMap.ker_eq_bot'.mpr fun r hr => by
+      rcases (by decide : ∀ r : ZMod 2, r = 0 ∨ r = 1) r with rfl | rfl
+      · rfl
+      · rw [LinearMap.toSpanSingleton_apply, one_smul] at hr
+        exact absurd hr one_ne_zero)
+  have hg1 : g 1 = 1 := by
+    have h := LinearMap.congr_fun hg 1
+    rwa [LinearMap.comp_apply, LinearMap.toSpanSingleton_apply, one_smul, LinearMap.id_apply] at h
+  -- an edge's difference is `1`, where `g` is `1`
+  have hedge : ∀ x y : 𝓞 (fieldI F) ⧸ P.P ^ 1,
+      (x - y) * Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1) (x - y) = 1 → g x ≠ g y := by
+    intro x y h hgxy
+    rw [hid] at h
+    have h0 : (x - y - 1) * (x - y - 1) = 0 := by linear_combination h + (1 - (x - y)) * h2
+    have h1 : x - y = 1 := sub_eq_zero.mp (mul_self_eq_zero.mp h0)
+    have hg0 : g (x - y) = 0 := by rw [map_sub, hgxy, sub_self]
+    rw [h1, hg1] at hg0
+    exact one_ne_zero hg0
+  have C : (levelTarget P 1).Coloring (ZMod 2) := Coloring.mk (fun x => g x) (by
+    intro x y hxy
+    obtain ⟨-, h | h⟩ := (SimpleGraph.fromRel_adj _ x y).mp hxy
+    · exact hedge x y h
+    · exact fun e => hedge y x h e.symm)
+  have hC := C.colorable
+  rwa [ZMod.card] at hC
+
+/-- In a field of nine elements with an involution `σ` that sends a square root `ι` of `−1` to `−ι`, the additive map
+`x ↦ −(x + σx) + ι(x − σx)` — `a + b` at `x = a + bι` — vanishes at no element of norm one (they are `±1`, `±ι`): a zero
+`u` has `u² = −ι`, so `u⁴ = −1`, while `u·σu = u⁴ = 1`. -/
+private theorem nine_functional_ne_zero {k : Type*} [Field k] [Fintype k] (σ : k →+* k) (hσσ : ∀ x, σ (σ x) = x)
+    (hcard : Fintype.card k = 3 ^ 2) (h3 : (3 : k) = 0) {ι : k} (hι2 : ι ^ 2 = -1) (hσι : σ ι = -ι) {u : k}
+    (hu : u * σ u = 1) : -(u + σ u) + ι * (u - σ u) ≠ 0 := by
+  intro hl
+  have h2 : (2 : k) ≠ 0 := fun h => one_ne_zero (by linear_combination h3 - h)
+  have hσne : σ ≠ RingHom.id k := fun h => by
+    rw [h, RingHom.id_apply] at hσι
+    have hι0 : ι = 0 := (mul_eq_zero.mp (by linear_combination hσι : (2 : k) * ι = 0)).resolve_left h2
+    rw [hι0] at hι2
+    norm_num at hι2
+  have hpow := StandingFive.involution_eq_pow σ hσσ hσne hcard u
+  have e1 : u ^ 2 * (ι - 1) = ι + 1 := by linear_combination u * hl + (ι + 1) * hu
+  have e2 : u ^ 2 = -ι := by linear_combination (ι + 1) * e1 - (u ^ 2 - 1) * hι2 + (u ^ 2 + ι) * h3
+  have e4 : u ^ 4 = -1 := by linear_combination (u ^ 2 - ι) * e2 + hι2
+  have e5 : u ^ 4 = 1 := by rw [hpow] at hu; linear_combination hu
+  exact h2 (by linear_combination e4 - e5)
+
+omit [NumberField F] in
+/-- **A stable prime whose quotient has nine elements has a three-colourable level-one target** (it is the plane over
+`𝔽₃`): colour `x` by `−(x + x̄) + ι(x − x̄)`, which lies in the three-element fixed field of conjugation and is not `0`
+at a norm-one element. -/
+theorem levelTarget_colorable_three_of_card_nine (P : StablePrime F)
+    (h9 : Nat.card (𝓞 (fieldI F) ⧸ P.P ^ 1) = 9) : (levelTarget P 1).Colorable 3 := by
+  classical
+  haveI := isMaximal_pow_one P
+  letI := Ideal.Quotient.field (P.P ^ 1)
+  haveI : Finite (𝓞 (fieldI F) ⧸ P.P ^ 1) := Nat.finite_of_card_ne_zero (by rw [h9]; norm_num)
+  letI : Fintype (𝓞 (fieldI F) ⧸ P.P ^ 1) := Fintype.ofFinite _
+  have hσσ := quotientMap_conjO_involutive P
+  have h3κ : (3 : 𝓞 (fieldI F) ⧸ P.P ^ 1) = 0 := by
+    have h : Nat.card (𝓞 (fieldI F) ⧸ P.P ^ 1) • (1 : 𝓞 (fieldI F) ⧸ P.P ^ 1) = 0 := card_nsmul_eq_zero'
+    rw [h9, nsmul_eq_mul, mul_one] at h
+    have e : (3 : 𝓞 (fieldI F) ⧸ P.P ^ 1) * 3 = ((9 : ℕ) : 𝓞 (fieldI F) ⧸ P.P ^ 1) := by norm_num
+    exact mul_self_eq_zero.mp (e.trans h)
+  have h2κ : (2 : 𝓞 (fieldI F) ⧸ P.P ^ 1) ≠ 0 := fun h => one_ne_zero (by linear_combination h3κ - h)
+  obtain ⟨i, hi2, hci⟩ := exists_I_integer' (F := F)
+  have hι2 : (Ideal.Quotient.mk (P.P ^ 1) i) ^ 2 = -1 := by rw [← map_pow, hi2, map_neg, map_one]
+  have hσι : Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1) (Ideal.Quotient.mk (P.P ^ 1) i) =
+      -Ideal.Quotient.mk (P.P ^ 1) i := by rw [Ideal.quotientMap_mk, hci, map_neg]
+  obtain ⟨hQ2, -⟩ := StandingFive.card_fixed_of_involution _ hσσ hι2 hσι h2κ
+  have hQ : Nat.card ↥((Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1)).eqLocusField (RingHom.id _)) = 3 :=
+    Nat.pow_left_injective (by norm_num : 2 ≠ 0) (show _ ^ 2 = 3 ^ 2 by rw [← hQ2, h9])
+  have hcard : Fintype.card (𝓞 (fieldI F) ⧸ P.P ^ 1) = 3 ^ 2 := by rw [← Nat.card_eq_fintype_card, h9]; norm_num
+  -- the colouring, into the fixed field
+  generalize Ideal.Quotient.mk (P.P ^ 1) i = ι at hι2 hσι
+  set σ := Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1) with hσdef
+  have hfix : ∀ x, σ (-(x + σ x) + ι * (x - σ x)) = RingHom.id _ (-(x + σ x) + ι * (x - σ x)) := fun x => by
+    simp only [map_add, map_neg, map_mul, map_sub, hσσ, hσι, RingHom.id_apply]
+    ring
+  letI : Fintype ↥(σ.eqLocusField (RingHom.id _)) := Fintype.ofFinite _
+  have C : (levelTarget P 1).Coloring ↥(σ.eqLocusField (RingHom.id _)) :=
+    Coloring.mk (fun x => ⟨-(x + σ x) + ι * (x - σ x), hfix x⟩) (by
+      intro x y hxy heq
+      have hl : -(x + σ x) + ι * (x - σ x) = -(y + σ y) + ι * (y - σ y) := congrArg Subtype.val heq
+      obtain ⟨-, h | h⟩ := (SimpleGraph.fromRel_adj _ x y).mp hxy
+      · refine nine_functional_ne_zero σ hσσ hcard h3κ hι2 hσι h ?_
+        simp only [map_sub]
+        linear_combination hl
+      · refine nine_functional_ne_zero σ hσσ hcard h3κ hι2 hσι h ?_
+        simp only [map_sub]
+        linear_combination -hl)
+  have hC := C.colorable
+  rwa [← Nat.card_eq_fintype_card, hQ] at hC
+
 end Dictionary
 
 /-! ## Clause (b) -/
@@ -467,7 +583,28 @@ theorem chromaticNumber_planeOver_eq_three_iff (F : Subfield ℝ) [NumberField F
 theorem localBound_le_chromaticNumber_or_four_le (F : Subfield ℝ) [NumberField F] :
     localBound F ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber ∨
       4 ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber := by
-  sorry
+  by_cases h3 : ((unitDistance ℂ).induce (planeOver F)).Colorable 3
+  · left
+    by_cases h2 : ((unitDistance ℂ).induce (planeOver F)).Colorable 2
+    · -- two colours: a stable prime with trivial conjugation, whose target is two-colourable
+      obtain ⟨𝔪, h𝔪, htriv⟩ := exists_maximal_conj_trivial_of_colorable_two F h2
+      obtain ⟨P, hP⟩ := exists_stablePrime_conj_trivial h𝔪 htriv
+      calc localBound F ≤ (levelTarget P 1).chromaticNumber := iInf_le _ P
+        _ ≤ 2 := (levelTarget_colorable_two_of_ramified P hP).chromaticNumber_le
+        _ ≤ _ := two_le_chromaticNumber_planeOver F
+    · -- three colours and not two: a stable prime with nine elements in its quotient, whose target is three-colourable
+      obtain ⟨𝔪, h𝔪, h9⟩ := exists_maximal_card_nine_of_colorable_three F h3 h2
+      obtain ⟨P, hP⟩ := exists_stablePrime_card_nine h𝔪 h9
+      calc localBound F ≤ (levelTarget P 1).chromaticNumber := iInf_le _ P
+        _ ≤ 3 := (levelTarget_colorable_three_of_card_nine P hP).chromaticNumber_le
+        _ ≤ _ := three_le_chromaticNumber_of_not_colorable_two h2
+  · right
+    have h : ((4 : ℕ) : ℕ∞) ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber := by
+      rw [SimpleGraph.le_chromaticNumber_iff_colorable]
+      intro k hk
+      by_contra hlt
+      exact h3 (hk.mono (by omega))
+    exact_mod_cast h
 
 /-- **`hRow99` of `SpectralChain.min_localBound_five_le_chromaticNumber`, discharged.** -/
 theorem localBound_le_chromaticNumber_of_le_four (F : Subfield ℝ) [NumberField F] (h : localBound F ≤ 4) :
@@ -617,12 +754,110 @@ theorem exists_stablePrime_ramified_sqrt {m : ℕ} (hm : Squarefree m) (h4 : m %
   obtain ⟨𝔪, h𝔪, htriv⟩ := exists_maximal_conj_trivial_of_colorable_two _ (colorable_two_planeOver_sqrt hm h4)
   exact exists_stablePrime_conj_trivial h𝔪 htriv
 
+/-- `[F(i) : ℚ] ≤ 2·[F : ℚ]` (`F × F → F(i)` is onto). -/
+private theorem finrank_fieldI_le_two_mul (F : Subfield ℝ) [NumberField F] :
+    Module.finrank ℚ (fieldI F) ≤ 2 * Module.finrank ℚ F := by
+  have h := LinearMap.finrank_le_finrank_of_surjective (toFieldI_surjective F)
+  rwa [Module.finrank_prod, ← two_mul] at h
+
+/-- `[ℚ(√m) : ℚ] ≤ 2`. -/
+private theorem finrank_fieldOfRadicands_singleton_le (m : ℕ) :
+    Module.finrank ℚ (fieldOfRadicands ({m} : Set ℕ)) ≤ 2 := by
+  have hS : fieldOfRadicands ({m} : Set ℕ) = Subfield.closure ({Real.sqrt m} : Set ℝ) := by
+    unfold fieldOfRadicands
+    rw [Set.image_singleton]
+  rw [hS]
+  haveI : FiniteDimensional ℚ (IntermediateField.adjoin ℚ ({Real.sqrt m} : Set ℝ)) :=
+    IntermediateField.adjoin.finiteDimensional (QuadraticPrime.isIntegral_sqrt_natCast m)
+  rw [StandingFive.finrank_closure]
+  have h := StandingFive.finrank_simple_le (x := Real.sqrt m) (p := Polynomial.X ^ 2 - Polynomial.C (m : ℤ))
+    (Polynomial.monic_X_pow_sub_C _ (by norm_num)) (by simp [Real.sq_sqrt (Nat.cast_nonneg m)])
+  rwa [Polynomial.natDegree_X_pow_sub_C] at h
+
 /-- **NF4-DYADIC-FOUR, as worded**: for `m ≡ 3 (mod 8)` a stable prime of `ℚ(√m)(i)` above 2 with four elements in its
-quotient (its target has four vertices). -/
+quotient (its target has four vertices). (`1/2 ∉ ℤ[U_F]`: the additive map of
+`DyadicQuadratic.exists_addMonoidHom_three_mod_eight` is `0` at `1 = 1/2 + 1/2`; so some stable prime `P` holds 2
+(`UpperHalf.inv_natCast_mem_unitRingOver_iff_forall_stablePrime`). `P ∋ 1 + i`, and the norm of `(1 + i)` squares to
+`2^[F(i):ℚ] ∣ 16`, so `|𝓞 ⧸ P| ∣ 4`; it is not `2`, where conjugation would be the identity and the plane two-colourable,
+against `TorsionExtraction.not_colorable_two_of_sqrt_mem`.) -/
 theorem exists_stablePrime_card_four_sqrt {m : ℕ} (h8 : m % 8 = 3) :
     ∃ P : StablePrime (fieldOfRadicands {m}), (2 : 𝓞 (fieldI (fieldOfRadicands {m}))) ∈ P.P ∧
       Nat.card (𝓞 (fieldI (fieldOfRadicands {m})) ⧸ P.P ^ 1) = 4 := by
-  sorry
+  classical
+  -- `1/2 ∉ ℤ[U_F]`
+  obtain ⟨Λ, ψ, hψ⟩ := exists_addMonoidHom_three_mod_eight h8
+  have hhalf : (2 : ℂ)⁻¹ ∉ UnitRing.unitRingOver (fieldOfRadicands {m}) := by
+    intro h
+    obtain ⟨n, u, hu1, hu2, hsum⟩ := UnitRing.exists_sum_eq_of_mem_unitRingOver h
+    have hhΛ : (2 : ℂ)⁻¹ ∈ Λ := by
+      rw [← hsum]
+      exact Λ.sum_mem fun j _ => (hψ (u j) ⟨hu2 j, hu1 j⟩).fst
+    obtain ⟨h1Λ, h1ne⟩ := hψ 1 ⟨⟨by simp, by simp⟩, by simp⟩
+    have e : (⟨1, h1Λ⟩ : Λ) = ⟨(2 : ℂ)⁻¹, hhΛ⟩ + ⟨(2 : ℂ)⁻¹, hhΛ⟩ := Subtype.ext (by
+      show (1 : ℂ) = (2 : ℂ)⁻¹ + (2 : ℂ)⁻¹
+      norm_num)
+    apply h1ne
+    rw [e, map_add]
+    generalize ψ ⟨(2 : ℂ)⁻¹, hhΛ⟩ = z
+    revert z
+    decide
+  -- a stable prime over 2
+  obtain ⟨P, h2P⟩ : ∃ P : StablePrime (fieldOfRadicands {m}), (2 : 𝓞 (fieldI (fieldOfRadicands {m}))) ∈ P.P := by
+    by_contra hcon
+    push Not at hcon
+    refine hhalf ?_
+    have h := (inv_natCast_mem_unitRingOver_iff_forall_stablePrime (fieldOfRadicands {m}) (n := 2) two_ne_zero).mpr
+      (fun P => by simpa using hcon P)
+    simpa using h
+  refine ⟨P, h2P, ?_⟩
+  haveI := isMaximal_pow_one P
+  letI := Ideal.Quotient.field (P.P ^ 1)
+  haveI : Finite (𝓞 (fieldI (fieldOfRadicands {m})) ⧸ P.P ^ 1) :=
+    Ideal.finiteQuotientOfFreeOfNeBot _ (by rw [pow_one]; exact P.heightOne.ne_bot)
+  letI : Fintype (𝓞 (fieldI (fieldOfRadicands {m})) ⧸ P.P ^ 1) := Fintype.ofFinite _
+  -- the count divides 4
+  have hdvd : Nat.card (𝓞 (fieldI (fieldOfRadicands {m})) ⧸ P.P ^ 1) ∣ 4 := by
+    obtain ⟨i, hi2, -⟩ := exists_I_integer' (F := fieldOfRadicands {m})
+    have hsq : (1 + i) ^ 2 = 2 * i := by linear_combination hi2
+    have h1i : 1 + i ∈ P.P :=
+      P.isMaximal.isPrime.mem_of_pow_mem 2 (by rw [hsq]; exact P.P.mul_mem_right i h2P)
+    have h1 := Ideal.absNorm_dvd_absNorm_of_le ((Ideal.span_singleton_le_iff_mem P.P).mpr h1i)
+    have hunit : IsUnit i := IsUnit.of_mul_eq_one (-i) (by linear_combination -hi2)
+    have h2 : Ideal.absNorm (Ideal.span {1 + i}) ^ 2 = 2 ^ Module.finrank ℚ (fieldI (fieldOfRadicands {m})) := by
+      rw [← map_pow, Ideal.span_singleton_pow, hsq, Ideal.span_singleton_mul_right_unit hunit]
+      have h := Ideal.absNorm_span_natCast (S := 𝓞 (fieldI (fieldOfRadicands {m}))) 2
+      rw [NumberField.RingOfIntegers.rank] at h
+      exact_mod_cast h
+    have hd : Module.finrank ℚ (fieldI (fieldOfRadicands {m})) ≤ 4 :=
+      (finrank_fieldI_le_two_mul _).trans (by have := finrank_fieldOfRadicands_singleton_le m; omega)
+    have h3 : Ideal.absNorm (Ideal.span {1 + i}) ^ 2 ∣ 4 ^ 2 := by
+      rw [h2]
+      exact (pow_dvd_pow 2 hd).trans (by norm_num)
+    have h4 : Ideal.absNorm (Ideal.span {1 + i}) ∣ 4 := (Nat.pow_dvd_pow_iff (by norm_num)).mp h3
+    have hcardeq : Nat.card (𝓞 (fieldI (fieldOfRadicands {m})) ⧸ P.P ^ 1) = Ideal.absNorm P.P := by
+      rw [pow_one, Ideal.absNorm_apply, Submodule.cardQuot_apply]
+    rw [hcardeq]
+    exact h1.trans h4
+  -- not 2: conjugation would be the identity modulo `P`, and the plane two-colourable
+  have hne2 : Nat.card (𝓞 (fieldI (fieldOfRadicands {m})) ⧸ P.P ^ 1) ≠ 2 := by
+    intro h2c
+    have hc2 : Fintype.card (𝓞 (fieldI (fieldOfRadicands {m})) ⧸ P.P ^ 1) = 2 := by
+      rw [← Nat.card_eq_fintype_card, h2c]
+    have h01 : ∀ t : 𝓞 (fieldI (fieldOfRadicands {m})) ⧸ P.P ^ 1, t = 0 ∨ t = 1 := fun t => by
+      by_cases ht : t = 0
+      · exact Or.inl ht
+      · have h := FiniteField.pow_card_sub_one_eq_one t ht
+        rw [hc2] at h
+        exact Or.inr (by simpa using h)
+    have hram : ∀ x : 𝓞 (fieldI (fieldOfRadicands {m})), conjO (fieldOfRadicands {m}) x - x ∈ P.P := fun x => by
+      rw [← pow_one P.P, ← Ideal.Quotient.eq, ← Ideal.quotientMap_mk (f := conjO (fieldOfRadicands {m})) (H := P.le_comap 1)]
+      rcases h01 (Ideal.Quotient.mk (P.P ^ 1) x) with h | h <;> rw [h] <;> simp
+    exact TorsionExtraction.not_colorable_two_of_sqrt_mem (d := m) (by omega)
+      (sqrt_mem_fieldOfRadicands (Set.mem_singleton m)) (colorable_two_planeOver_of_ramified P hram)
+  have hne1 : Nat.card (𝓞 (fieldI (fieldOfRadicands {m})) ⧸ P.P ^ 1) ≠ 1 := (Finite.one_lt_card).ne'
+  have hle : Nat.card (𝓞 (fieldI (fieldOfRadicands {m})) ⧸ P.P ^ 1) ≤ 4 := Nat.le_of_dvd (by norm_num) hdvd
+  generalize Nat.card (𝓞 (fieldI (fieldOfRadicands {m})) ⧸ P.P ^ 1) = c at hdvd hne1 hne2 hle
+  interval_cases c <;> simp_all
 
 /-! ## Spec: the models the line's docstrings name, and the table at four fields -/
 
