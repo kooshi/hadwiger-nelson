@@ -1,7 +1,7 @@
 # Session handoff — 2026-10-14, afternoon: the port and the density equality on `main`; four jobs running on the chain and the density bound
 
 *Rewritten 2026-10-14 14:58 UTC, § 3–5 updated 2026-10-14 19:31 UTC, by Keryx, between hand-backs, so a compaction loses nothing. Current state only. A successor reads this
-file first, then `plans/FS131-close-inventory.md` items 837–910 (everything since the last rewrite, each with its receipt and its ruling
+file first, then `plans/FS131-close-inventory.md` items 837–912 (everything since the last rewrite, each with its receipt and its ruling
 in four parts; items 750–836 are the morning's, and their written times in 750–810 are wrong by up to six and a half hours, item 812).
 `plans/SESSION-HANDOFF-2026-10-13.md` is older: read it only for the parked frontier (its § 8) and the older corrections (its § 7).*
 
@@ -47,8 +47,10 @@ push -q backup --all`** after each commit. Agent ids: scratch `agents.txt`, copy
 3. **FS131-IKC4 — the bound at p = 19** (tree `fs131-wnf`, branch `fs131-wc17` from `fs131-wc16`, where `card_le_eleven` is
    proved, item 899): the day's search's reduced certificate (`data/search/2026-10-14/certs/v-p19-phi0-13-qs.json`, 1.5 MB,
    margin 1.607, item 908) through the present checker first, measured; only the parts of F2 the measurement needs.
-4. **FS131-IDB3 — the density bound's lane X** (tree `fs131-w10g`, branch `fs131-wdb3`): **`Plane.oneAvoidingDensityBound`
-   proved on the standard three** (item 910, my receipt); its gate items and report to come. Its announcement rule is item 910's.
+4. **FS131-LDB1 — the density bound's landing** (tree `fs131-w10g`, branch `fs131-wldb` from `fs131-wdb3`, where
+   `Plane.oneAvoidingDensityBound` is proved on the standard three, items 910–911): `main` merged in, the full gate on one
+   commit, the drafts; announcement rule item 910's. At its green line: merge, check, report to Kooshi, then the filing
+   (copy `mk-fs131-fc5.py`; base `8eece67b0`).
 
 ## 4. Where each line stands
 
