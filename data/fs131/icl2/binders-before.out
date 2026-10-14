@@ -1,0 +1,11 @@
+BINDER-MISS HadwigerNelson.Rigidity.SIndep: binds G, lacks Finite
+BINDER-MISS HadwigerNelson.Rigidity.RatioLe: binds G, lacks Finite
+BINDER-MISS HadwigerNelson.Rigidity.Counting.Delta: names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.normOneL: names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.iL: names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.mem_normOneL_iff: names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.normOneQ: names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.finite_quot: names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.stablePrime_injective: names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.unitVectorsR: names Subfield, lacks NumberField
+binder misses: 10 of 78 public constants
