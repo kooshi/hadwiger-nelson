@@ -1019,6 +1019,368 @@ def self_test(label):
     return 0 if ok else 1
 
 
+# ---------------------------------------------------------------------------------------------------------------------
+# FS131-LP1: the streaming reader (the coordinator's item 807 ruling 4: the comparator runs within 8 GiB).  The in-memory
+# `ruled_compare` above holds both prints whole, and loads the release's three times over (lane D's prints are 1.4 GB
+# each: 20 GiB).  Every verdict is a function of ONE constant's two blocks — but for PIN-DIFFERENCE, which reads its
+# owner's kind, universe parameters and full type, kept for the PIN_DIFFERENCE owners only — and of the rules' lists, so
+# `ruled_compare_stream` reads the two prints block by block, in step (both are printed in the cone's row order), each
+# block parsed by FS132-I2's own `load` on that block's text alone, and keeps per constant only its row of the table.
+# The aggregate checks (DONE counts, the record, the rules' stale lists, PROOF_ONLY, TARGETS_HERE) are made at the end,
+# in the in-memory function's order, so its output is the same text.  Its equivalence with `ruled_compare` is a command
+# (`equivalence LABEL`, every label whose prints are small) and its planted controls are `--self-test`, which plants
+# into the stream: a SOURCE is a print's path with per-block overrides (a block replaced or removed) and a truncation.
+# A block is a header line `DUMP <label> : …` and every line after it up to the next header or `DONE`; the lines are
+# those of `read_text().splitlines()` (universal newlines, then every separator `splitlines` knows), as `rb.read` and
+# `rb.load` give them.  A block whose label is not the row asked for and comes before it in the row order — a label
+# printed twice, out of order, or not a row — is consumed and reported FATAL (`stray`), where the in-memory reader kept
+# the last copy in silence.
+
+import lzma as _lzma
+
+
+def source(path, overrides=None, truncate=None):
+    """A print to stream: its path, {label: [lines] | None (the block removed)}, and the number of lines kept."""
+    return {"path": Path(path), "over": overrides or {}, "trunc": truncate}
+
+
+def print_paths(label):
+    d = label_dir(label)
+
+    def pick(stem):
+        for p in (d / f"{stem}.out.xz", d / f"{stem}.out"):
+            if p.exists():
+                return p
+        raise SystemExit(f"no print {stem}.out[.xz] under {d}")
+    return pick("ReleaseDump"), pick("HereDump")
+
+
+def raw_lines(path):
+    path = Path(path)
+    fh = _lzma.open(path, "rt", encoding="utf-8") if path.suffix == ".xz" else open(path, encoding="utf-8")
+    with fh:
+        for ln in fh:
+            for part in ln.splitlines():
+                yield part
+
+
+def src_lines(src):
+    """The source's lines: overrides applied block by block, then the truncation (a count of the lines as planted)."""
+    over, k, cur = src["over"], 0, None
+    for ln in raw_lines(src["path"]):
+        if ln.startswith("DUMP ") and not ln.startswith("DUMP   "):
+            m = re.match(r"DUMP (\S+) : ", ln)
+            cur = m.group(1) if m else None
+            if cur in over:
+                for x in (over[cur] or []):
+                    if src["trunc"] is not None and k >= src["trunc"]:
+                        return
+                    k += 1
+                    yield x
+                continue
+        elif ln.startswith("DONE "):
+            cur = None
+        elif cur in over:
+            continue
+        if src["trunc"] is not None and k >= src["trunc"]:
+            return
+        k += 1
+        yield ln
+
+
+def blocks(lines):
+    """-> ("B", label, [lines]) per block and ("D", n) per DONE line, in file order."""
+    cur = None
+    for ln in lines:
+        if ln.startswith("DUMP ") and not ln.startswith("DUMP   ") and re.match(r"DUMP (\S+) : (\w+)(?: levels=(.*))?$", ln):
+            if cur:
+                yield ("B", cur[0], cur[1])
+            cur = (ln.split()[1], [ln])
+        elif ln.startswith("DONE "):
+            if cur:
+                yield ("B", cur[0], cur[1])
+                cur = None
+            yield ("D", int(ln.split()[1]))
+        elif cur:
+            cur[1].append(ln)
+    if cur:
+        yield ("B", cur[0], cur[1])
+
+
+class Stepper:
+    """One print, read block by block in the row order, with one block of lookahead."""
+
+    def __init__(self, src, order):
+        self.it, self.order, self.peek, self.done, self.stray = blocks(src_lines(src)), order, None, None, []
+
+    def _next(self):
+        while self.peek is None:
+            x = next(self.it, None)
+            if x is None:
+                return None
+            if x[0] == "D":
+                self.done = x[1]
+                continue
+            self.peek = x
+        return self.peek
+
+    def take(self, lab):
+        i = self.order[lab]
+        while True:
+            b = self._next()
+            if b is None:
+                return None
+            if b[1] == lab:
+                self.peek = None
+                return b[2]
+            j = self.order.get(b[1])
+            if j is None or j < i:
+                self.stray.append(b[1])
+                self.peek = None
+                continue
+            return None
+
+    def finish(self):
+        while self._next() is not None:
+            self.stray.append(self.peek[1])
+            self.peek = None
+
+
+def ruled_compare_stream(rel_src, our_src, renamed=None, record=None, quiet=False, write=False):
+    """`ruled_compare` (FS132-I2's compare, then this job's ruled classes), read block by block; the same return value
+    and the same printed text.  Every rule is read from the same globals at call time."""
+    rows = cone_constants()
+    order = {}
+    for k, (name, _, _, _) in enumerate(rows):
+        order.setdefault(label_of(name), k)
+    if len(order) != len(rows):
+        # two rows under one label would be judged on one block (the in-memory reader judged both on the last copy)
+        raise SystemExit(f"STREAM REFUSED: {len(rows)} rows under {len(order)} labels")
+    rs, os_ = Stepper(rel_src, order), Stepper(our_src, order)
+    fatal_nip, table, seen_inst, touched_by, ruled_rows = [], [], set(), {}, []
+    owners = {}  # PIN_DIFFERENCE owner -> (release (kind, levels, type), here (kind, levels, type))
+    for name, stem, src_decl, kind in rows:
+        lab = label_of(name)
+        rb_, ob_ = rs.take(lab), os_.take(lab)
+        rel = rb.load("\n".join(rb_), renamed)[0] if rb_ is not None else {}
+        our = rb.load("\n".join(ob_), renamed, here=True)[0] if ob_ is not None else {}
+        # the rewrites' touched constants (ruled_compare: the release's print read once more without each rewrite)
+        for rule in RELEASE_REWRITES:
+            flag = rule.lower()
+            saved = STATE.get(flag, True)
+            STATE[flag] = False
+            try:
+                rel_raw = rb.load("\n".join(rb_), renamed)[0] if rb_ is not None else {}
+            finally:
+                STATE[flag] = saved
+            for lb, d in rel.items():
+                if lb in rel_raw and any(d[f] != rel_raw[lb][f] for f in ("type", "etype", "value", "evalue")):
+                    touched_by.setdefault(lb, set()).add(rule)
+        r, o = rel.get(lab), our.get(lab)
+        if lab in PIN_DIFFERENCE:
+            owners[lab] = tuple((d["kind"], d["levels"], d["type"]) if d else None for d in (r, o))
+        # FS132-I2's `compare`, its loop body
+        if r is None or o is None or r["kind"] == "ABSENT":
+            fatal_nip.append(f"{lab}: not in a print")
+            continue
+        aux = (not src_decl) or bool(rb.AUXNAME.search(lab)) or lab.startswith("§private.")
+        if o["kind"] == "ABSENT":
+            verdict, why, there, here = ("AUX-ABSENT" if aux else "ABSENT-HERE"), "", [], []
+        else:
+            verdict, why, there, here = rb.judge(r, o)
+            if verdict == "DIFFERENT" and aux:
+                verdict = "AUX-DIFFERS"
+        if verdict == "UP-TO-INSTANCES":
+            badc = [c for c in there + here if not rb.allowed_instance_constant(c)]
+            if badc:
+                verdict, why = "DIFFERENT", f"differs inside instance arguments by the release's own constants {badc}"
+            else:
+                seen_inst |= set(there) | set(here)
+        cls = ("target" if lab[2:] in rb.TARGETS else "aux" if aux else "definition" if r["kind"] == "def" else "lemma")
+        t = (cls, lab, r["kind"], verdict, there, here, why)
+        table.append(t)
+        # `ruled_compare`'s branch for this row, with the strip checks, which read this constant alone
+        owner = next((p for p in PIN_DIFFERENCE if lab == p or lab.startswith(p + ".")), None)
+        rules = touched_by.get(lab)
+        if rules:
+            unlisted = sorted(x for x in rules if lab not in RELEASE_REWRITES[x][0])
+            if unlisted:
+                verdict, why = "DIFFERENT", f"{', '.join(unlisted)} rewrote a constant it does not list"
+            elif verdict in ("IDENTICAL", "UP-TO-INSTANCES"):
+                verdict, why = "PIN-DIFFERENCE", "; ".join(f"{x}: {RELEASE_REWRITES[x][1]}" for x in sorted(rules))
+        elif owner is not None and verdict not in ("IDENTICAL", "UP-TO-INSTANCES"):
+            verdict, why = ("OWNER", owner), None  # resolved once every owner has been read
+        elif lab in STRIP and verdict == "DIFFERENT":
+            good, note = strip_check(r, o, lab)
+            binders, hl = STRIP[lab]
+            cls_ = "RULED" if binders or any(h != _PM for h in hl) else "ADAPTED"
+            verdict, why = (cls_, note) if good else ("DIFFERENT", note)
+        elif lab in RULED and verdict == "DIFFERENT":
+            st = strip_binders(o["etype"], RULED[lab]) if o and o["etype"] else None
+            if r["kind"] == o["kind"] and st is not None and st == r["etype"]:
+                verdict, why = "RULED", f"the release's statement with exactly the binders {RULED[lab]} inserted"
+            else:
+                verdict, why = "DIFFERENT", f"RULED strip check refused (binders {RULED[lab]})"
+        elif lab in ADAPTED and verdict == "DIFFERENT":
+            ok = r["kind"] == o["kind"]
+            for er in ("etype", "evalue"):
+                if r[er] is None and o[er] is None:
+                    continue
+                st = strip_inserted(o[er], ADAPTED[lab]) if o[er] else None
+                ok = ok and ((st is not None and st == r[er]) or r[er] == o[er])
+            verdict, why = ("ADAPTED", "the release's print once the inserted argument is removed") if ok else \
+                ("DIFFERENT", "ADAPTED strip check refused")
+        ruled_rows.append((cls, lab, r["kind"], verdict, there, here, why))
+    rs.finish()
+    os_.finish()
+    # FS132-I2's `compare`, after its loop: the DONE counts first, then the rows not in a print, then the record
+    fatal = []
+    if rs.done != len(rows) or os_.done != len(rows):
+        fatal.append(f"a print is incomplete: DONE {rs.done} at the release, {os_.done} here, {len(rows)} cone constants")
+    fatal += fatal_nip
+    for side, st in (("the release's", rs), ("this pin's", os_)):
+        if st.stray:
+            fatal.append(f"{side} print holds {len(st.stray)} block(s) out of the row order (a label printed twice, out "
+                         f"of order, or not a row): {st.stray[:5]}")
+    rec = None
+    if record is None and rb.RECORD.exists():
+        record = rb.RECORD.read_text()
+    if record is not None:
+        rec = {ln.strip() for ln in record.splitlines() if ln.strip() and not ln.startswith("#")}
+        new, gone = sorted(seen_inst - rec), sorted(rec - seen_inst)
+        if new:
+            fatal.append(f"constants differing inside instance/proof arguments that the record does not hold: {new}")
+        if gone:
+            fatal.append(f"recorded instance constants that no longer differ (the record is stale): {gone}")
+    else:
+        fatal.append("no record of the instance constants (run with --record, read the file, commit it)")
+    for rule in RELEASE_REWRITES:
+        for lab in sorted(RELEASE_REWRITES[rule][0] & {t[1] for t in table}):
+            if rule not in touched_by.get(lab, set()) and STATE.get(rule.lower(), True):
+                fatal.append(f"{rule} lists {lab}, which the rewrite does not touch (the list is stale)")
+    out = []
+    for (cls, lab, kind, verdict, there, here, why) in ruled_rows:
+        if isinstance(verdict, tuple):
+            owner = verdict[1]
+            ro, oo = owners.get(owner, (None, None))
+            if ro and oo and ro[0] == oo[0] == "def" and ro[1] == oo[1] and ro[2] == oo[2]:
+                verdict, why = "PIN-DIFFERENCE", PIN_NOTES.get(owner, "`Monoid`'s parents changed between the pins") + \
+                    f"; {owner}'s type is identical"
+            else:
+                verdict, why = "DIFFERENT", f"PIN-DIFFERENCE refused: {owner}'s kind, levels or full type differ"
+        out.append((cls, lab, kind, verdict, there, here, why))
+    return _ruled_finish(out, fatal, seen_inst, quiet, write)
+
+
+def _ruled_finish(out, fatal, seen, quiet, write):
+    """`ruled_compare`'s tail (its post-processing, its file and its printed text), on the rows of the table."""
+    for k, t in enumerate(out):
+        if t[1] in ADAPTED_ASCRIPTION:
+            if t[3] in ("IDENTICAL", "UP-TO-INSTANCES"):
+                out[k] = t[:3] + ("ADAPTED", t[4], t[5], f"ADAPTED_ASCRIPTION: an ascription restores the release's "
+                                  f"stored term; the read-back reads {t[3]}")
+            else:
+                fatal.append(f"ADAPTED_ASCRIPTION lists {t[1]}, which reads {t[3]}")
+        if t[1] in ADAPTED_INSTANCE:
+            if t[3] == "UP-TO-INSTANCES":
+                out[k] = t[:3] + ("ADAPTED", t[4], t[5], "ADAPTED_INSTANCE: an instance argument supplied from the "
+                                  "statement's own measurability; a proof, erased, so the erased prints agree")
+            else:
+                fatal.append(f"ADAPTED_INSTANCE lists {t[1]}, which reads {t[3]}, not UP-TO-INSTANCES")
+        if t[1] in ADAPTED_VALUE:
+            if t[3] in ("IDENTICAL", "UP-TO-INSTANCES"):
+                out[k] = t[:3] + ("ADAPTED", t[4], t[5], f"ADAPTED_VALUE: the release's own instance named with the Prop "
+                                  f"it asks proved explicitly; the read-back reads {t[3]}")
+            else:
+                fatal.append(f"ADAPTED_VALUE lists {t[1]}, which reads {t[3]}")
+    vmap = {t[1]: t[3] for t in out}
+    for d, aux in PROOF_ONLY.items():
+        if d in vmap or aux in vmap:
+            if vmap.get(d) != "IDENTICAL" or vmap.get(aux) != "AUX-DIFFERS":
+                fatal.append(f"PROOF_ONLY: {d} reads {vmap.get(d)} and {aux} {vmap.get(aux)}, not IDENTICAL and "
+                             "AUX-DIFFERS")
+    for tg in sorted(TARGETS_HERE):
+        if tg in vmap and vmap[tg] != "IDENTICAL":
+            fatal.append(f"TARGETS_HERE: the target {tg} reads {vmap[tg]}, not IDENTICAL")
+    for t in out:
+        if t[1] in STRIP and t[3] in ("IDENTICAL", "UP-TO-INSTANCES"):
+            fatal.append(f"STRIP lists {t[1]}, which does not differ (the list is stale)")
+    failing = [t for t in out if t[3] in ("DIFFERENT", "ABSENT-HERE")]
+    counts = {}
+    for t in out:
+        counts[(t[0], t[3])] = counts.get((t[0], t[3]), 0) + 1
+    if write:
+        with open(rb.OUT / "verdicts.tsv", "w") as fh:
+            fh.write("class\tname\tkind\tverdict\tconstants only at the release's pin\tconstants only at this pin\tnote\n")
+            for t in out:
+                if t[3] != "IDENTICAL":
+                    fh.write("\t".join([t[0], t[1], t[2], t[3], " ".join(t[4]) or "—", " ".join(t[5]) or "—", t[6]]) + "\n")
+    if not quiet:
+        for t in out:
+            if t[3] in ("DIFFERENT", "ABSENT-HERE", "RULED", "ADAPTED") or (t[3] == "PIN-DIFFERENCE" and t[0] != "aux"):
+                print(f"{t[3]}\t{t[0]}\t{t[1]}\t{t[6][:300]}")
+        for (c, v), k in sorted(counts.items()):
+            print(f"  {c:12s} {v:16s} {k}")
+        print(f"  constants differing inside instance and proof arguments: {len(seen)}")
+        for f in fatal:
+            print(f"FATAL: {f}")
+        print(f"constants: {len(out)}  failing: {len(failing)}  fatal: {len(fatal)}")
+    return out, failing, fatal, seen
+
+
+def equivalence(label):
+    """The streaming reader against the in-memory one, on one label (small prints only): the same rows, failing, fatal
+    and recorded constants, with the record as committed and with no record; and with a block removed, a block
+    duplicated, and the print truncated, the same verdict where the in-memory reader reads one (a duplicate is the one
+    case the streaming reader refuses and the in-memory reader passes: that difference is asserted, not ignored)."""
+    setup(label)
+    rp, op = print_paths(label)
+    if rp.stat().st_size + op.stat().st_size > 50_000_000:
+        print(f"EQUIVALENCE REFUSED: the prints of {label} are too large for the in-memory reader")
+        return 2
+    rel_text, our_text = rb.read(rp), rb.read(op)
+    bad = 0
+
+    def same(what, a, b):
+        nonlocal bad
+        eq = a == b
+        bad += not eq
+        print(f"  {'SAME' if eq else 'DIFFER'}  {what}" + ("" if eq else f": in-memory {str(a)[:300]} | streaming {str(b)[:300]}"))
+
+    for rec_what, rec in (("the record as committed", None), ("no record", "")):
+        a = ruled_compare(rel_text, our_text, quiet=True, record=rec)
+        b = ruled_compare_stream(source(rp), source(op), quiet=True, record=rec)
+        same(f"{rec_what}: rows", a[0], b[0])
+        same(f"{rec_what}: failing, fatal, recorded constants", a[1:], b[1:])
+        if rec is None:
+            base_a, base_b = a, b
+    lines = our_text.splitlines()
+    heads = [k for k, ln in enumerate(lines) if ln.startswith("DUMP ") and not ln.startswith("DUMP   ")]
+    i = heads[len(heads) // 2]
+    lab = lines[i].split()[1]
+    j = next((k for k in heads if k > i), len(lines))
+    blk = lines[i:j]
+    # a block removed
+    a = ruled_compare(rel_text, "\n".join(lines[:i] + lines[j:]), quiet=True)
+    b = ruled_compare_stream(source(rp), source(op, {lab: None}), quiet=True)
+    same(f"a block removed ({lab}): failing, fatal", (len(a[1]), a[2]), (len(b[1]), b[2]))
+    # the print truncated at half its lines
+    a = ruled_compare(rel_text, "\n".join(lines[:len(lines) // 2]), quiet=True)
+    b = ruled_compare_stream(source(rp), source(op, truncate=len(lines) // 2), quiet=True)
+    same("truncated at half its lines: failing, fatal", (len(a[1]), a[2]), (len(b[1]), b[2]))
+    # a block printed twice: the in-memory reader keeps the second copy in silence; the streaming one refuses it
+    a = ruled_compare(rel_text, "\n".join(lines[:j] + blk + lines[j:]), quiet=True)
+    b = ruled_compare_stream(source(rp), source(op, {lab: blk + blk}), quiet=True)
+    stray = [f for f in b[2] if "out of the row order" in f]
+    dup_ok = (len(a[1]), a[2]) == (len(base_a[1]), base_a[2]) and len(stray) == 1 and \
+        (len(b[1]), [f for f in b[2] if f not in stray]) == (len(base_b[1]), base_b[2])
+    bad += not dup_ok
+    print(f"  {'AS DESIGNED' if dup_ok else 'DIFFER'}  a block printed twice ({lab}): in-memory as unplanted "
+          f"({len(a[1])} failing, {len(a[2])} fatal); streaming as unplanted and one more fatal: {stray[:1]}")
+    print(f"EQUIVALENCE {'OK' if not bad else 'FAILED'}: {label}")
+    return 1 if bad else 0
+
+
 def main(argv):
     if len(argv) < 3:
         print(__doc__)
@@ -1027,20 +1389,24 @@ def main(argv):
     if cmd == "emit":
         return emit(label, argv[3].split(","))
     if cmd == "--self-test":
+        return self_test_stream(label)
+    if cmd == "--self-test-inmemory":
         return self_test(label)
+    if cmd == "equivalence":
+        return equivalence(label)
     setup(label)
     if cmd == "emit-level1":
         return emit_level1(label)
     if cmd == "compare":
-        rel_text, our_text = prints(label)
+        rp, op = print_paths(label)
         if "--record" in argv:
-            _, _, _, seen = rb.compare(rel_text, our_text, None, quiet=True, record="")
+            _, _, _, seen = ruled_compare_stream(source(rp), source(op), None, quiet=True, record="")
             rb.RECORD.write_text("# FS131-IPA1: the constants by which a ported declaration's stored term differs from "
                                  "the release's INSIDE instance\n# arguments and proof arguments only (verdict "
                                  "UP-TO-INSTANCES).  Written by `compare --record`; read before committing.\n"
                                  + "\n".join(sorted(seen)) + "\n")
             print(f"recorded {len(seen)} constants in {rb.RECORD.relative_to(ROOT)}")
-        _, failing, fatal, _ = ruled_compare(rel_text, our_text, None, write=True)
+        _, failing, fatal, _ = ruled_compare_stream(source(rp), source(op), None, write=True)
         print("READBACK " + ("OK" if not failing and not fatal else "FAILED"))
         return 1 if failing or fatal else 0
     if cmd == "level1":
