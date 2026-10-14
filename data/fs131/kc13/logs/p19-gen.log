@@ -1,0 +1,7 @@
+slot: admitted kc13-gen19: mem 8 GiB (hard cap), cpus 4
+p=19 n=361 |S|=20 maps=40 sha=055f031d1e69
+reps 182; pairs 16653; orbits 984
+ops 602989 [22.1s]
+slots 52370; identity model: HOLDS; total magnitude bits 129 [280.6s]
+PSD witnesses: 0 blocks diagonally dominant [280.6s]
+wrote data/fs131/kc13/p19/Cert19.lean: w=131 ds=5 od=10 k1=17 kq=10 kr=157 kw=18 ko=16; chunks ops=2513 rows=1030 keys=1024

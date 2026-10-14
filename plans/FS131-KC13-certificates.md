@@ -146,8 +146,13 @@ and the sha256 of `Cert11.lean` and `FibreCheck.lean` is in `logs/p11-final-sha.
 | declaration | what it checks | kernel time | peak memory |
 |---|---|---|---|
 | `segCheck cert11 0 = true` | identity, leaves 0–31 (all 53,813 ops read) | 93.7 s | 12.0 GB |
-| `segCheck cert11 1 = true` | identity, leaves 32–63 | see § 2.4 | see § 2.4 |
-| `psdAll cert11 = true` | the 22 blocks | see § 2.4 | see § 2.4 |
+| `segCheck cert11 1 = true` | identity, leaves 32–63 | 76.4 s | 11.0 GB |
+| `psdAll cert11 = true` | the 22 blocks | 14.8 s | 2.9 GB |
+| **total** | **the whole p = 11 certificate** | **185 s of kernel time** | **12.0 GB per process** |
+
+Two earlier encodings, kept in the logs because they are what the cost model was learned from:
+* `k11s0.log` and `k11s1.log` (bag keys, unsalted): 92.8 s and 78.8 s.
+* `k11psd.log` (PSD rows untagged, scale `2^240`): over 10 minutes, killed. One block took 88 s, against 1.3 s now.
 
 The generated data module `Cert11.lean` is 4.3 MB of text and elaborates in 4.3 s (6.0 MB `.olean`). The converter runs
 in 13 s. The compiled checker (`#eval`) takes 5 s.
@@ -163,3 +168,22 @@ in 13 s. The compiled checker (`#eval`) takes 5 s.
   * two blocks' PSD witnesses swapped.
 * p = 11, in the kernel: with `U_num − 1`, the kernel proves `segCheck cert11 0 = false` (56.6 s, 9.2 GB,
   `logs/kf11U.log`). The compiled check gives `(false, true)`: the fault lies in segment 0, and segment 1 is unaffected.
+
+## Stage 4 — SAVED: the library skeleton
+
+Three modules, registered in `Proofs.lean` and `ARCHITECTURE.md` (`tools/check_architecture.py`: PASS). The build is
+recorded in § 4.2.
+
+* **`Arith/FibreCert`**: the checker of § 2.1, as measured, with every field documented. Two checks were added, both
+  needed for soundness and both found by reading the statement the checker must imply: `p ≥ 2`, and `L > 0` (without it
+  the division `U_num / L` is `0` in `ℝ` and the conclusion is false). `segAll`, `certOK`. Core only, no `sorry`.
+* **`Arith/FibreCert3`**: the `p = 3` certificate, and `cert3_ok : certOK cert3 = true` by `decide +kernel`. This is the
+  spec example; p = 11 and p = 19 stay data under `data/fs131/kc13/` until the landing chooses their segment modules
+  (§ 5.4).
+* **`Arith/FibreCertSound`** (two leaves `sorry`):
+  * `sum_le_of_certOK (C) [NeZero C.p] (hC : certOK C = true) (φ : ZMod C.p × ZMod C.p → ℝ) (h0 : ∀ x, 0 ≤ φ x)
+    (h1 : ∀ x, φ x ≤ 1) (hq : 0 ≤ qform C.p φ) : ∑ x, φ x ≤ (C.unum : ℝ) / C.scale`, which is FS-66's L4. Read aloud
+    against SOUNDNESS.md § 0 and § 4: the region, the quadratic (constant 2) and the conclusion are FS-66's symbol for
+    symbol.
+  * `card_le_of_certOK`, its level-one form for an independent set of `Cay((ℤ/p)², S)`.
+  * `model`: the hypotheses hold together at `cert3` with `φ = 0`.

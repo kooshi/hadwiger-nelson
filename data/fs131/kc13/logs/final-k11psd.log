@@ -1,5 +1,14 @@
-slot: waiting (ledger 10 + 13 > budget 22 GiB)
-slot: waiting (ledger 14 + 13 > budget 22 GiB)
-slot: waiting (ledger 10 + 13 > budget 22 GiB)
-slot: waiting (ledger 14 + 13 > budget 22 GiB)
-slot: waiting (ledger 10 + 13 > budget 22 GiB)
+slot: admitted kc13-psd: mem 5 GiB (hard cap), cpus 2
+type checking took 14.8s
+cumulative profiling times:
+	attribute application 0.0103ms
+	elaboration 0.426ms
+	fix level params 0.00475ms
+	instantiate metavars 0.00728ms
+	let-to-have transformation 0.00738ms
+	process pre-definitions 0.351ms
+	share common exprs 0.0112ms
+	tactic execution 0.334ms
+	type checking 14.8s
+	typeclass inference 0.252ms
+15.01 s wall, 14.39 s user, 2932064 KB peak

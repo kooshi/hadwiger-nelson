@@ -134,7 +134,7 @@ def main():
     ap.add_argument('cert'); ap.add_argument('out'); ap.add_argument('--name', default=None)
     ap.add_argument('--leaf', type=int, default=64); ap.add_argument('--chunkbits', type=int, default=8192)
     ap.add_argument('--model-only', action='store_true'); ap.add_argument('--module', default=None)
-    ap.add_argument('--no-psd', action='store_true'); ap.add_argument('--nseg', type=int, default=1)
+    ap.add_argument('--no-psd', action='store_true'); ap.add_argument('--psd-only', type=int, default=None); ap.add_argument('--no-dd', action='store_true'); ap.add_argument('--nseg', type=int, default=1)
     ap.add_argument('--corrupt', default=None, help='plant a fault: rowlam | stream | U | Rentry | M')
     a = ap.parse_args()
     t0 = time.time()
@@ -300,10 +300,13 @@ def main():
     psd = []
     for bi, b in (enumerate(blocks) if not a.no_psd else []):
         R = b['R']
+        if a.psd_only is not None and bi != a.psd_only:
+            psd.append(([[0] * len(R) for _ in R], 240)); continue
         M, sbits = mp_cholesky_int(R, 120)
-        ok, row = check_dd(R, M, sbits)
-        if not ok:
-            raise SystemExit(f'block {bi}: diagonal dominance fails at row {row}')
+        if not a.no_dd:
+            ok, row = check_dd(R, M, sbits)
+            if not ok:
+                raise SystemExit(f'block {bi}: diagonal dominance fails at row {row}')
         psd.append((M, sbits))
     print(f'PSD witnesses: {len(psd)} blocks diagonally dominant [{time.time()-t0:.1f}s]', flush=True)
     if a.corrupt == 'M':
