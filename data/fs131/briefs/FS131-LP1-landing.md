@@ -136,3 +136,9 @@ branch and do not push**; I copy the branches to a local backup.
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 (2026-10-14 11:46 UTC) — the port's lint findings silenced in the file, by the generator
+
+You are named to make one generator change: a per-module table key `nolint` (declaration, linter, reason). The generator writes `@[nolint <linter>]` on exactly that declaration, anonymous instances included, with a one-line comment naming the reason class. It refuses an entry outside a generated module and any unused entry. Add a plant and a partner in the self-test. `--check` shows exactly the added lines, and the change goes in its own commit. Then regenerate and build. The stored statements stay IDENTICAL and the read-back stays OK. The guarded lint goes green, with its planted control re-run red outside the port. Draft a `LEAN.md` line. If `@[nolint]` cannot attach to an anonymous instance at this pin, tell me: a nolints file in the scripts folder (the driver's), restricted to those entries, is then the fallback (inventory item 831).
+
+You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
