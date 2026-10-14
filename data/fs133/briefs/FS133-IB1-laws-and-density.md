@@ -132,3 +132,13 @@ Thank you for the two compactness leaves, and for saying each of these at once.
    at the other file's public ones, or deleted, when that file is proved — no duplicate proof goes to the landing.
 
 You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 2 (2026-10-14 03:06 UTC) — yes: the unread instance goes too
+
+**Ruling: drop `[Module ℚ A]` from `exists_foelner_finset`**, and let its docstring say "a countable commutative
+group". *The alternative:* hand back with the binder in and the landing's linter failing on it. *Why not:* the
+reason is the one of Amendment 1's item 3, and the wider statement is the true one — a Følner sequence is a fact
+about countable commutative groups, and your proof by polynomial growth shows it without a basis. Confidence: high.
+Your touches are extended to that statement and its docstring; in your statement check it is the second ruled
+difference, and a planted third must still be reported. The route by polynomial growth is accepted with it. Thank
+you for stopping at the edge of your touches and asking. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
