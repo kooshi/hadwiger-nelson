@@ -19,7 +19,7 @@ open Lean Elab Command Meta
 namespace FS131ICM3Dump
 
 def modules : List Name :=
-  [`Proofs.HadwigerNelson.Rigidity.ClassRatio, `Proofs.HadwigerNelson.Rigidity.CountCompletion,
+  [`Proofs.HadwigerNelson.Arith.CircleCos, `Proofs.HadwigerNelson.Rigidity.ClassRatio, `Proofs.HadwigerNelson.Rigidity.CountCompletion,
    `Proofs.HadwigerNelson.Rigidity.CountDescent, `Proofs.HadwigerNelson.Rigidity.CountModels]
 
 def kindOf : ConstantInfo → String

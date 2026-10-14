@@ -1,6 +1,7 @@
 import Proofs.HadwigerNelson.Arith.WeilKloosterman
 import Proofs.HadwigerNelson.Rigidity.ChainAtTA
 import Proofs.HadwigerNelson.Arith.GapSeven
+import Proofs.HadwigerNelson.Arith.CircleCos
 
 /-!
 # CLS: a local bound of at least five gives T-C(A) at `S = ∅`; the uniform tail (FS-131, job FS131-KR1; module M13; skeleton)
@@ -1184,8 +1185,9 @@ point); its proof is rational bounds on `cos(2πj/Q)` and the kernel's count of 
 private theorem circleCos_bound {Q : ℕ} (hQ : Q = 23 ∨ Q = 31) [NeZero Q] :
     ∃ κ : ℝ, κ < 1 / 3 ∧ 2 / ((Q : ℝ) + 1) ≤ κ ∧ ∀ α β : ℕ, α < Q → β < Q → (α ≠ 0 ∨ β ≠ 0) →
       -(κ * ((Q : ℝ) + 1)) ≤ ∑ v ∈ Finset.univ.filter (fun v : ZMod Q × ZMod Q => v.1 ^ 2 + v.2 ^ 2 = 1),
-        Real.cos (2 * Real.pi * (((α * v.1.val + β * v.2.val) % Q : ℕ) : ℝ) / Q) := by
-  sorry
+        Real.cos (2 * Real.pi * (((α * v.1.val + β * v.2.val) % Q : ℕ) : ℝ) / Q) :=
+  -- FS131-ICM3: the certificate of `Arith/CircleCos` (rational cosine bounds and one kernel pass over the circle)
+  CircleCos.circleCos_ge hQ
 
 /-- **The exact spectrum at `Q = 27`** (KC13 § 5.3; FS100-G27; FS131-ICM2's split of `charBound_one_exact`): the
 level-one target's least eigenvalue is `−8`, so `κ = 8/28` serves — a character sum in characteristic `3` over
@@ -1193,7 +1195,130 @@ level-one target's least eigenvalue is `−8`, so `κ = 8/28` serves — a chara
 private theorem charBound_one_exact_27 [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) {Q : ℕ}
     (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) (hQ27 : Q = 27) :
     ∃ κ : ℝ, κ < 1 / 3 ∧ 2 / ((Q : ℝ) + 1) ≤ κ ∧ CharBound P 1 κ := by
-  sorry
+  -- FS131-ICM3: Weil's level-one bound `−2√27 > −10.4`, sharpened by the arithmetic of characteristic 3. A character
+  -- takes cube roots of unity, so `Re Σ = N₀ − (28 − N₀)/2` with `N₀ = #{s : ψ s = 1}`; `s ↦ −s` pairs those `s`
+  -- with no fixed point, so `N₀` is even; Weil gives `N₀ ≥ 3`, hence `N₀ ≥ 4` and `Re Σ ≥ −8 = −(2/7)·28`.
+  classical
+  subst hQ27
+  refine ⟨2 / 7, by norm_num, by norm_num, ?_⟩
+  intro hfin ψ hψ
+  have hW := charBound_one_weil P h2 hQ hfin ψ hψ
+  have hcard := card_levelSet_one P h2 hQ hfin
+  rw [hcard] at hW ⊢
+  set S := hfin.toFinset with hSdef
+  haveI hmax : (P.P ^ 1).IsMaximal := by rw [pow_one]; exact P.isMaximal
+  letI : Field (𝓞 (fieldI F) ⧸ P.P ^ 1) := Ideal.Quotient.field (P.P ^ 1)
+  haveI := finite_quot_pow P 1
+  letI : Fintype (𝓞 (fieldI F) ⧸ P.P ^ 1) := Fintype.ofFinite _
+  -- characteristic 3
+  have h3 : (3 : 𝓞 (fieldI F) ⧸ P.P ^ 1) = 0 := by
+    obtain ⟨p, hchar⟩ := CharP.exists (𝓞 (fieldI F) ⧸ P.P ^ 1)
+    obtain ⟨n, hp, hpn⟩ := FiniteField.card (𝓞 (fieldI F) ⧸ P.P ^ 1) p
+    have hc : Fintype.card (𝓞 (fieldI F) ⧸ P.P ^ 1) = 3 ^ 6 := by
+      rw [← Nat.card_eq_fintype_card, pow_one, hQ]; norm_num
+    rw [hc] at hpn
+    have h3p : p ∣ 3 ^ 6 := by rw [hpn]; exact dvd_pow_self p n.ne_zero
+    have hp3 : p = 3 := (Nat.prime_dvd_prime_iff_eq hp Nat.prime_three).1 (hp.dvd_of_dvd_pow h3p)
+    subst hp3
+    exact_mod_cast CharP.cast_eq_zero (𝓞 (fieldI F) ⧸ P.P ^ 1) 3
+  have hcube : ∀ x, ψ x ^ 3 = 1 := fun x => by
+    rw [← AddChar.map_nsmul_eq_pow, nsmul_eq_mul, Nat.cast_ofNat, h3, zero_mul, AddChar.map_zero_eq_one]
+  -- a cube root of unity other than `1` has real part `−1/2`
+  have hre : ∀ x, ψ x ≠ 1 → (ψ x).re = -1 / 2 := by
+    intro x hx
+    have h := hcube x
+    have hq : ψ x ^ 2 + ψ x + 1 = 0 := by
+      have e : (ψ x - 1) * (ψ x ^ 2 + ψ x + 1) = 0 := by linear_combination h
+      rcases mul_eq_zero.1 e with e | e
+      · exact absurd (sub_eq_zero.1 e) hx
+      · exact e
+    have hr := congrArg Complex.re hq
+    have hi := congrArg Complex.im hq
+    simp only [sq, Complex.add_re, Complex.mul_re, Complex.one_re, Complex.zero_re, Complex.add_im, Complex.mul_im,
+      Complex.one_im, Complex.zero_im] at hr hi
+    have hb : (ψ x).im * (2 * (ψ x).re + 1) = 0 := by linarith
+    rcases mul_eq_zero.1 hb with hb | hb
+    · rw [hb] at hr
+      nlinarith [sq_nonneg ((ψ x).re + 1 / 2)]
+    · linarith
+  -- the real part counts `N₀`
+  set T := S.filter fun s => ψ s = 1 with hTdef
+  set U := S.filter fun s => ¬ ψ s = 1 with hUdef
+  have hTU : T.card + U.card = 27 + 1 := by
+    rw [hTdef, hUdef, Finset.card_filter_add_card_filter_not, hcard]
+  have hsplit : (∑ s ∈ S, ψ s).re = (T.card : ℝ) - (U.card : ℝ) / 2 := by
+    rw [← Finset.sum_filter_add_sum_filter_not S (fun s => ψ s = 1), Complex.add_re, Complex.re_sum, Complex.re_sum,
+      ← hTdef, ← hUdef]
+    have e1 : ∑ s ∈ T, (ψ s).re = ∑ s ∈ T, (1 : ℝ) := Finset.sum_congr rfl fun s hs => by
+      rw [(Finset.mem_filter.1 hs).2, Complex.one_re]
+    have e2 : ∑ s ∈ U, (ψ s).re = ∑ s ∈ U, (-1 / 2 : ℝ) := Finset.sum_congr rfl fun s hs =>
+      hre s (Finset.mem_filter.1 hs).2
+    rw [e1, e2, Finset.sum_const, Finset.sum_const, nsmul_eq_mul, nsmul_eq_mul, mul_one]
+    ring
+  -- `s ↦ −s` is a fixed-point-free involution of `T`
+  have hnegT : ∀ s ∈ T, -s ∈ T := by
+    intro s hs
+    obtain ⟨hsS, hψs⟩ := Finset.mem_filter.1 hs
+    refine Finset.mem_filter.2 ⟨?_, ?_⟩
+    · rw [hSdef, Set.Finite.mem_toFinset] at hsS ⊢
+      exact neg_mem_levelSet P 1 hsS
+    · rw [AddChar.map_neg_eq_inv, hψs, inv_one]
+  have h2k : (2 : 𝓞 (fieldI F) ⧸ P.P ^ 1) ≠ 0 := by
+    rw [← map_ofNat (Ideal.Quotient.mk (P.P ^ 1)) 2, Ne, Ideal.Quotient.eq_zero_iff_mem, pow_one]; exact h2
+  have hne : ∀ s ∈ T, -s ≠ s := by
+    intro s hs he
+    obtain ⟨hsS, -⟩ := Finset.mem_filter.1 hs
+    rw [hSdef, Set.Finite.mem_toFinset] at hsS
+    have h0 : (2 : 𝓞 (fieldI F) ⧸ P.P ^ 1) * s = 0 := by linear_combination -he
+    rcases mul_eq_zero.1 h0 with h0 | h0
+    · exact h2k h0
+    · have h1 : s * Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1) s = 1 := hsS
+      rw [h0, zero_mul] at h1
+      exact zero_ne_one h1
+  have hpar : Even T.card := by
+    let f : Function.End {x // x ∈ T} := fun x => ⟨-x.1, hnegT x.1 x.2⟩
+    have hf2 : f ^ 2 ^ 1 = 1 := by
+      funext x
+      apply Subtype.ext
+      show -(-x.1) = x.1
+      exact neg_neg _
+    haveI : Fact (Nat.Prime 2) := ⟨Nat.prime_two⟩
+    have h := Equiv.Perm.card_fixedPoints_modEq (f := f) (p := 2) (n := 1) hf2
+    have hfix : Fintype.card (Function.fixedPoints f) = 0 := by
+      rw [Fintype.card_eq_zero_iff]
+      constructor
+      rintro ⟨x, hx⟩
+      exact hne x.1 x.2 (congrArg Subtype.val hx)
+    rw [hfix, Fintype.card_coe] at h
+    exact Nat.even_iff.2 h
+  -- Weil: `Re Σ ≥ −2√27 > −10.4`, so `N₀ ≥ 3`, hence `N₀ ≥ 4`
+  have hsqrt : Real.sqrt 27 < 26 / 5 := by
+    rw [Real.sqrt_lt' (by norm_num)]
+    norm_num
+  have hW' : -(2 * Real.sqrt 27) ≤ (∑ s ∈ S, ψ s).re := by
+    have e : 2 * Real.sqrt ((27 : ℕ) : ℝ) / (((27 : ℕ) : ℝ) + 1) * (((27 + 1 : ℕ)) : ℝ) = 2 * Real.sqrt 27 := by
+      push_cast
+      field_simp
+      norm_num
+    rw [e] at hW
+    exact hW
+  have hU : (U.card : ℝ) = 28 - T.card := by
+    have := hTU
+    have h' : ((T.card + U.card : ℕ) : ℝ) = ((27 + 1 : ℕ) : ℝ) := by rw [this]
+    push_cast at h'
+    linarith
+  have hT3 : 3 ≤ T.card := by
+    by_contra hlt
+    have hle : (T.card : ℝ) ≤ 2 := by exact_mod_cast (by omega : T.card ≤ 2)
+    rw [hsplit, hU] at hW'
+    linarith
+  have hT4 : 4 ≤ T.card := by
+    obtain ⟨k, hk⟩ := hpar
+    omega
+  have hT4r : (4 : ℝ) ≤ T.card := by exact_mod_cast hT4
+  rw [hsplit, hU]
+  push_cast
+  linarith
 
 /-- **Exact spectra at `q ∈ {23, 27, 31}`** (KC13 § 5.3; FS100-G27 at 27): level one's normalised least eigenvalue is above
 `−1/3`, so some level-one bound `κ < 1/3` with `κ ≥ 2/(Q + 1)` holds. -/
