@@ -74,3 +74,15 @@ scope binder of statement 1 stays until the proof shows it unread); a structure 
 `W = L_∞ × ∏′_{split} L_w` carrying the five facts M8b reads, built by **lane T** (Tate's duality in that form: a planner and
 implementer job; strong approximation and Lusin–Souslin are not needed on its routes); M8b-2 (thin boxes, Lemma 3.1′ over
 EN2-ZE), M8b-3 (the pigeonhole over `z = 1 + 2bi`), M8b-4 (leaves and shells) over `(D : TateModel F)`.
+
+## Since FS131-KT1 (2026-10-14; by hand — the text above is kept)
+
+M8b's vocabulary is typed as an interface, `Rigidity.TateModel F` (module `Rigidity/TateModel`, `plans/FS131-KT1-tate.md`
+§ Stage 2): over `W = Rigidity.SAdeleRing F` (the mixed space of `F(i)` times the split adeles), a continuous
+`π : W → Dual F`, equivariant for the unit vectors, onto, with kernel on the diagonal, `O′ ⊆ Λ ⊆ d⁻¹·O′`, `W = K + O′` with `K`
+compact, and `π(b, 0) ∈ archChars`. Proved or planned over it: `TateModel.ker_eq`, `mul_mem_Λ`, `π_eq_π_iff`,
+`toSAdele_mem_torsionChars`, `mem_TA` (`π(L + L_∞) ⊆ TA F`, the inclusion Step 7 reads), `isOpenMap`. **M8b-2..4 are stated
+over `(D : TateModel F)`**; the existence `Rigidity.exists_tateModel` is lane T (modules `Rigidity/TateLocal`, `TateArch`,
+`TateCharacter`, `TateKernel`, assembled in `TateExists`), on form G of the character, priced at about two agent-days. The
+statement-2 line above ("the model of `Dual F` as `𝔸_𝒮/D` … Needs `R = O′`") is superseded: the model reads `R` through
+`R ⊆ O′` and `c·O′ ⊆ R` only.
