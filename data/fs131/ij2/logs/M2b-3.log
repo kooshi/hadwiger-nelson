@@ -1,0 +1,94 @@
+slot: admitted ij2: mem 4 GiB (hard cap), cpus 0,5
+data/fs131/ij2/work/BT2.lean:14:8: warning: declaration uses `sorry`
+data/fs131/ij2/work/BT2.lean:323:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  RCLike.re (∫ (x : Dual F), ↑(x w) ∂σ)
+in the target expression
+  σ.real Set.univ - ∫ (χ : Dual F), ‖↑(χ w) - 1‖ ∂σ ≤ (∫ (χ : Dual F), ↑(χ w) ∂σ).re
+
+F : Subfield ℝ
+σ : Measure (Dual F)
+inst✝ : IsFiniteMeasure σ
+w : ↥(unitRing F)
+⊢ σ.real Set.univ - ∫ (χ : Dual F), ‖↑(χ w) - 1‖ ∂σ ≤ (∫ (χ : Dual F), ↑(χ w) ∂σ).re
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    χ w
+  has type
+    Circle
+  but is expected to have type
+    ↥(Submonoid.unitSphere ℂ)
+  in the application
+    ↑(χ w)
+data/fs131/ij2/work/BT2.lean:356:4: error: Type mismatch
+  χ (M • s)
+has type
+  Circle
+but is expected to have type
+  ℂ
+data/fs131/ij2/work/BT2.lean:384:4: error: linarith failed to find a contradiction
+F : Subfield ℝ
+σ : Measure (Dual F)
+inst✝¹ : IsFiniteMeasure σ
+inst✝ : NumberField ↥F
+ε : ℝ
+hε : 0 < ε
+m : ℝ := σ.real Set.univ
+hm : m = σ.real Set.univ
+φ : ↥(unitRing F) → ℂ := fun y => ∫ (χ : Dual F), ↑(χ y) ∂σ
+h : Continuous[tauPrime F, _] φ
+hφ : φ = fun y => ∫ (χ : Dual F), ↑(χ y) ∂σ
+hm0 : 0 ≤ m
+η : ℝ := ε / (2 * (m + 1))
+hη : η = ε / (2 * (m + 1))
+hη0 : 0 < η
+hct : Tendsto φ (𝓝 0) (𝓝 (φ 0))
+hev : ∀ᶠ (w : ↥(unitRing F)) in 𝓝 0 ⊓ 𝓝 0, ‖φ w - φ 0‖ < η * ε / 4
+t₁ : Set ↥(unitRing F)
+ht₁ : t₁ ∈ 𝓝 0
+t₂ : Set ↥(unitRing F)
+ht₂ : t₂ ∈ 𝓝 0
+hsub : t₁ ∩ t₂ ⊆ {x | (fun w => ‖φ w - φ 0‖ < η * ε / 4) x}
+M : ℕ
+hM : M ≠ 0
+hMt : ∀ (y : ↥(unitRing F)), M • y ∈ t₁
+δ : ℝ
+hδ : δ > 0
+hδt : ∀ (r : ↥(unitRing F)), ‖(archHom F) r‖ < δ → r ∈ t₂
+s : ↥(unitRing F)
+hs : ‖(archHom F) (M • s)‖ < δ
+hw : ‖φ (M • s) - φ 0‖ < η * ε / 4
+hφ0 : φ 0 = ↑m
+hpt : ∀ (χ : Dual F), ‖↑(χ (M • s)) - 1‖ ≤ η + 2 / η - 2 / η * (↑(χ (M • s))).re
+hint1 : Integrable (fun χ => ‖↑(χ (M • s)) - 1‖) σ
+hintre : Integrable (fun χ => (↑(χ (M • s))).re) σ
+hint2 : Integrable (fun χ => η + 2 / η - 2 / η * (↑(χ (M • s))).re) σ
+hre : ∫ (χ : Dual F), (↑(χ (M • s))).re ∂σ = (φ (M • s)).re
+this : |(φ (M • s)).re - m| ≤ ‖φ (M • s) - ↑m‖
+a✝ : η * ε / 4 ≤ m - (φ (M • s)).re
+⊢ False
+failed
+data/fs131/ij2/work/BT2.lean:408:8: warning: automatically included section variable(s) unused in theorem `_private.data.fs131.ij2.work.BT2.0.HadwigerNelson.Rigidity.twK_zero`:
+  [IsFiniteMeasure σ]
+  [Nonempty G]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [IsFiniteMeasure σ] [Nonempty G] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/ij2/work/BT2.lean:464:16: error: Application type mismatch: The argument
+  ha
+has type
+  a ∈ ?m.74
+but is expected to have type
+  a ∈ S
+in the application
+  hld a ha
+data/fs131/ij2/work/BT2.lean:467:65: error: Type mismatch
+  Eq.symm (Finset.sum_image hinj)
+has type
+  ∑ x ∈ S, ?m.141 (descOr x) = ∑ x ∈ Finset.image descOr S, ?m.141 x
+but is expected to have type
+  ∑ t ∈ S, twW x (liftChar (descOr t)) χ = ∑ ψ ∈ Finset.image descOr S, twW x (liftChar ψ) χ
+seconds=8
+exit=1

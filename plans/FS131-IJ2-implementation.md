@@ -104,3 +104,39 @@ read (`hmeas` by `Measure.map_apply` and `Measure.dirac_apply'`).
 **Re-priced:** M3 at about 0.5 of its plan, in two elaboration rounds. **A docstring now describes another route**: the
 module's docstring and `Herglotz`'s docstring of `exists_almostInvariant_weights` ("Read by M2a … and M3") name the
 weights; M3 reads none. Docstrings are not mine to edit here; a correction owed (report).
+
+## Stage 4 — SAVED: M2b's hard leaf, `exists_twisted_parts`, proved over `finite_quotient_nsmul`
+
+Written against copies (`data/fs131/ij2/work/BochnerTwist.lean`, `chunk2.lean` … `chunk4.lean`, assembled as
+`work/BochnerTau.lean`; rounds `logs/M2b-1.log` … `M2b-9.log`, the last exit 0 with no warning but the three remaining
+leaves' ``declaration uses `sorry` ``), then copied over the module. `exists_twisted_parts` has no `sorry` of its own; it
+reads `finite_quotient_nsmul` (a leaf, still `sorry`). Not built yet (the build is a later stage).
+
+**The route** (the plan's twisted Riemann sums, made positive and taken along an ultrafilter; no Cauchy argument). At level
+`n`, with `N = (n+1)!` and representatives `x_c` of the cosets `c ∈ R ⧸ N·R` of archimedean size `< 1/(n+1)`:
+- the weight `W_n(t, χ) = |Σ_c t̄(x_c) χ(x_c)|² / |R ⧸ NR|² ∈ [0, 1]` and the part `K_n(t, y) = ∫ χ(y) W_n(t, χ) dσ`, kept
+  only for `t` trivial on `N·R`; `t̄·K_n(t, ·)` is positive-definite (a non-negative weight, `posDef_twisted`);
+- **Parseval** over the complex characters of the finite quotient (`AddChar.sum_apply_eq_ite`, read on `R` by `liftChar`,
+  back by `descChar`): `Σ_t W_n(t, χ) = 1`, so any finite set of such `t` has weight `≤ 1` (Bessel, `sum_twW_le`) and
+  `‖φ(y) − Σ_S K_n(t, y)‖ ≤ σ(univ) − Σ_S K_n(t, 0)` (`norm_sub_sum_twK_le`);
+- **concentration** (`concentration`): from `τ′_∅`-continuity, `∫ ‖χ(w) − 1‖ dσ < ε` on `M·R ∩ B_δ` (`exists_E_small`),
+  so at every finer level the characters of `R ⧸ (M+1)!·R` keep weight `≥ σ(univ) − ε` (orthogonality on the coarse
+  quotient and Cauchy–Schwarz on the fibre sizes, `card_sq_le_pairs`);
+- **continuity** (`twK_cont`): reindexing the cosets by `c ↦ c + [z]` gives `‖t̄(z)χ(z) − 1‖·W ≤ |G|⁻¹ Σ_c ‖χ(w_c) − 1‖`
+  with `w_c ∈ N·R` small, so `t̄·K_n(t, ·)` moves by `≤ ε` under arch-small `z`;
+- `ψ_t(y)` is the limit of `K_n(t, y)` along an ultrafilter finer than `atTop` (compactness of a closed ball in `ℂ`); the
+  four clauses pass to the limit. Representatives of small size need no density theorem: `r ↦ r/5` permutes the finite
+  quotient, so `r/5^{ek}` lies in the coset of `r` (`exists_small_rep`).
+
+**Imports added**: `Mathlib.Analysis.Fourier.FiniteAbelian.PontryaginDuality` (characters of finite abelian groups),
+`Mathlib.Algebra.Order.Chebyshev` (`sq_sum_le_card_mul_sum_sq`); the module's `open` line gains `Filter Topology`.
+Whether either moved a stored term is the build stage's dump. **Private helpers of `ContinuityGroup` read** through
+Batteries' `open private` (`archHom`, `archTop_eq`, `eventually_archTop`, `norm_archHom_nsmul`, `fivePow`, `nsmul_fivePow`,
+`inv_five_mem`, `exists_nsmul_mem_of_mem_nhds_profTop`), not restated: one fact proved once, `ContinuityGroup` unedited.
+
+**Re-priced from the hard leaf** (the brief's ask): the leaf with its helpers is about 900 lines (the module grew from 65
+to 972), against IJ1's 900–1,200 for all of M2b. The rest, priced from this leaf's rate: `finite_quotient_nsmul` 80–150,
+`bochnerOn_tauPrime` 120–200 (a composition over M2a, `archimedean_support` and uniqueness), `archimedean_support`
+450–700 (the lattices `5^{−k}Λ`, a one-variable Dirichlet bound for tightness uniform in `k`, Mathlib's Prokhorov on
+`EuclideanSpace ℝ (Fin d)`, uniqueness): **M2b about 1,550–1,950 lines in all** — under the 2,000 the brief names, so no
+message was sent; about 1.3–1.6 times IJ1's re-price, 0.7–0.8 of the planner's 2,000–2,500.

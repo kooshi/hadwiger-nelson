@@ -1,0 +1,150 @@
+slot: waiting (ledger 20 + 4 > budget 22 GiB)
+slot: waiting (ledger 21 + 4 > budget 22 GiB)
+slot: admitted ij2: mem 4 GiB (hard cap), cpus 0,5
+data/fs131/ij2/work/BochnerTwist.lean:14:8: warning: declaration uses `sorry`
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+data/fs131/ij2/work/BochnerTwist.lean:29:109: error: unsolved goals
+F : Subfield ℝ
+N k : ℕ
+s : ↥(unitRing F)
+⊢ ↑(↑N * fivePow F k s) = ↑(↑N * s) * (1 / 5) ^ k
+data/fs131/ij2/work/BochnerTwist.lean:32:38: warning: This simp argument is unused:
+  AddSubmonoidClass.coe_nsmul
+
+Hint: Omit it from the simp argument list.
+  simp only [nsmulAddMonoidHom_apply, A̵d̵d̵S̵u̵b̵m̵o̵n̵o̵i̵d̵C̵l̵a̵s̵s̵.̵c̵o̵e̵_̵n̵s̵m̵u̵l̵,̵ ̵nsmul_eq_mul, coe_fivePow]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij2/work/BochnerTwist.lean:59:78: error: unexpected token 'open'; expected 'lemma'
+data/fs131/ij2/work/BochnerTwist.lean:74:8: error(lean.unknownIdentifier): Unknown constant `AddSubgroupClass.coe_neg`
+data/fs131/ij2/work/BochnerTwist.lean:78:10: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  5⁻¹ ^ j
+in the target expression
+  5⁻¹ ^ (j - i) * ↑r - ↑r = ↑(5 ^ i * -(-fivePow F i r + fivePow F j r))
+
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+N : ℕ
+hN : N ≠ 0
+r : ↥(unitRing F)
+δ : ℝ
+hδ : 0 < δ
+this : Finite (↥(unitRing F) ⧸ (nsmulAddMonoidHom N).range)
+i✝ j✝ : ℕ
+hij✝ : i✝ ≠ j✝
+hq : ↑(fivePow F i✝ r) = ↑(fivePow F j✝ r)
+i j : ℕ
+hij : i < j
+h : -fivePow F i r + fivePow F j r ∈ nR F N
+h5 : 5 ^ i * 5⁻¹ ^ i = 1
+hj : 5⁻¹ ^ j = 5⁻¹ ^ (j - i) * 5⁻¹ ^ i
+⊢ 5⁻¹ ^ (j - i) * ↑r - ↑r = ↑(5 ^ i * -(-fivePow F i r + fivePow F j r))
+data/fs131/ij2/work/BochnerTwist.lean:73:43: warning: This simp argument is unused:
+  AddSubmonoidClass.coe_nsmul
+
+Hint: Omit it from the simp argument list.
+  simp only [AddSubgroupClass.coe_sub, A̵d̵d̵S̵u̵b̵m̵o̵n̵o̵i̵d̵C̵l̵a̵s̵s̵.̵c̵o̵e̵_̵n̵s̵m̵u̵l̵,̵ ̵nsmul_eq_mul, coe_fivePow, AddSubgroupClass.coe_neg,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Subring.coe_add, Nat.cast_pow, Nat.cast_ofNat]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij2/work/BochnerTwist.lean:74:34: warning: This simp argument is unused:
+  Subring.coe_add
+
+Hint: Omit it from the simp argument list.
+  simp only [AddSubgroupClass.coe_sub, AddSubmonoidClass.coe_nsmul, nsmul_eq_mul, coe_fivePow,
+          AddSubgroupClass.coe_neg, S̵u̵b̵r̵i̵n̵g̵.̵c̵o̵e̵_̵a̵d̵d̵,̵ ̵Nat.cast_pow, Nat.cast_ofNat]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij2/work/BochnerTwist.lean:105:67: error: unexpected token 'open'; expected 'lemma'
+data/fs131/ij2/work/BochnerTwist.lean:117:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  -r + x
+in the target expression
+  -x + r ∈ nR F N
+
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+N : ℕ
+hN : N ≠ 0
+δ : ℝ
+hδ : 0 < δ
+r x : ↥(unitRing F)
+hx : x - r ∈ nR F N
+hxs : ‖(archHom F) x‖ < δ
+this : -r + x = x - r
+⊢ -x + r ∈ nR F N
+data/fs131/ij2/work/BochnerTwist.lean:140:21: error: Application type mismatch: The argument
+  fun g => ?m.22
+has type
+  (g : ?m.20) → ?m.23 g
+but is expected to have type
+  AddChar ?m.16 ?m.17
+in the application
+  AddChar.ext fun g => ?m.22
+data/fs131/ij2/work/BochnerTwist.lean:165:14: error: Application type mismatch: The argument
+  fun x => Circle.ext rfl
+has type
+  ∀ (x : ?m.23), ?m.28 x = ?m.28 x
+of sort `Prop` but is expected to have type
+  AddChar ?m.19 ?m.20
+of sort `Type (max ?u.24 ?u.23)` in the application
+  AddChar.ext fun x => Circle.ext rfl
+data/fs131/ij2/work/BochnerTwist.lean:182:32: error: Tactic `rewrite` failed: motive is not type correct:
+  fun _a => (if _a then ↑(Fintype.card G) else 0) = if g = 0 then ↑(Fintype.card G) else 0
+Error: Application type mismatch: The argument
+  inst✝ (-g) 0
+has type
+  Decidable (-g = 0)
+but is expected to have type
+  Decidable _a
+in the application
+  @ite ℂ _a (inst✝ (-g) 0)
+
+Explanation: The rewrite tactic rewrites an expression 'e' using an equality 'a = b' by the following process. First, it looks for all 'a' in 'e'. Second, it tries to abstract these occurrences of 'a' to create a function 'm := fun _a => ...', called the *motive*, with the property that 'm a' is definitionally equal to 'e'. Third, we observe that 'congrArg' implies that 'm a = m b', which can be used with lemmas such as 'Eq.mpr' to change the goal. However, if 'e' depends on specific properties of 'a', then the motive 'm' might not typecheck.
+
+Possible solutions: use rewrite's 'occs' configuration option to limit which occurrences are rewritten, or use 'simp' or 'conv' mode, which have strategies for certain kinds of dependencies (these tactics can handle proofs and 'Decidable' instances whose types depend on the rewritten term, and 'simp' can apply user-defined '@[congr]' theorems as well).
+
+G : Type u_1
+inst✝² : AddCommGroup G
+inst✝¹ : Fintype G
+inst✝ : DecidableEq G
+g : G
+⊢ (if -g = 0 then ↑(Fintype.card G) else 0) = if g = 0 then ↑(Fintype.card G) else 0
+data/fs131/ij2/work/BochnerTwist.lean:207:18: warning: This simp argument is unused:
+  Nat.cast_id
+
+Hint: Omit it from the simp argument list.
+  simp only [norm_mul, RCLike.norm_conj, Circle.norm_coe, mul_one, Finset.sum_const,
+  ̲  ̲ ̲ ̲Finset.card_univ,
+  ̵  ̵ ̵ ̵nsmul_eq_mul,̵ ̵N̵a̵t̵.̵c̵a̵s̵t̵_̵i̵d̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij2/work/BochnerTwist.lean:233:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ‖?z‖ ^ 2
+in the target expression
+  ↑‖twSum x t χ‖ ^ 2 = ∑ c, ∑ c', (starRingEnd ℂ) ↑(t (x c - x c')) * ↑(χ (x c - x c'))
+
+case e_a
+F : Subfield ℝ
+G : Type u_1
+inst✝ : Fintype G
+x : G → ↥(unitRing F)
+t χ : Dual F
+⊢ ↑‖twSum x t χ‖ ^ 2 = ∑ c, ∑ c', (starRingEnd ℂ) ↑(t (x c - x c')) * ↑(χ (x c - x c'))
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    t (x c - x c')
+  has type
+    Circle
+  but is expected to have type
+    ↥(Submonoid.unitSphere ℂ)
+  in the application
+    ↑(t (x c - x c'))
+seconds=475
+exit=1

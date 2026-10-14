@@ -1,0 +1,12 @@
+slot: admitted ij2: mem 4 GiB (hard cap), cpus 0,5
+data/fs131/ij2/work/BT2.lean:14:8: warning: declaration uses `sorry`
+data/fs131/ij2/work/BT2.lean:466:42: error: Application type mismatch: The argument
+  S
+has type
+  Finset (Dual F)
+but is expected to have type
+  Set (Dual ?m.73)
+in the application
+  Set.InjOn descOr S
+seconds=9
+exit=1
