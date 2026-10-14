@@ -7,9 +7,21 @@ files: `data/fs133/ld1/`; the gate's logs `data/fs133/ld1/gate/`. "Std" is `[pro
 
 ## Theorems this phase proved
 
-None of its own: this job proves no new theorem. It lands FS-133's module (FS133-K1's statements, FS133-IA1 to
-FS133-IPQ1's proofs) through the gate; the kernel theorems it lands are listed, with their axioms as the gate prints
-them, in the stage that reads them aloud.
+No new theorem is this job's: it lands FS-133's module (FS133-K1's statements; FS133-IA1, -IB1, -IB2, -ICD1 and
+-IPQ1's proofs) through the gate on `860538ddf`. Its one proof edit is one simp argument (stage 2.4). The headlines it
+lands, each **[kernel]**, each on `[propext, Classical.choice, Quot.sound]` as the gated audit prints them
+(`data/fs133/ld1/gate/receipt-axioms-final.log`; all 77 records of the module the same or fewer):
+- `HadwigerNelson.OneClass.finIndepRatio_plane_eq_mOne` — `α₁(ℝ²) = m₁(ℝ²)` (`Plane/OneClass/Algebraic`)
+- `HadwigerNelson.OneClass.finIndepRatio_algPlane_eq_mOne` — `α₁(𝒜²) = m₁(ℝ²)` (`Algebraic`)
+- `HadwigerNelson.OneClass.iSup_fractionalChromaticNumber_plane` — `χ_f,0(ℝ²) = 1/m₁(ℝ²)` (`Fractional`)
+- `HadwigerNelson.OneClass.fractionalChromaticNumber_plane` — `χ_f(ℝ²) = 1/m₁(ℝ²)` (`Fractional`)
+- `HadwigerNelson.OneClass.fractionalChromaticNumber_algPlane` — `χ_f(𝒜²) = 1/m₁(ℝ²)` (`Fractional`)
+- `HadwigerNelson.OneClass.tendsto_minIndepNum_div` — `f(n)/n → m₁(ℝ²)` (`Algebraic`)
+- `HadwigerNelson.OneClass.exists_admissibleOn_univ_iff_ae` — C133-PAIR, first clause (`Pair`)
+- `HadwigerNelson.OneClass.exists_admissibleOn_univ_iff_algPlane` — C133-PAIR, second clause (`Pair`)
+- `HadwigerNelson.OneClass.one_seventh_le_mOne` — `1/7 ≤ m₁(ℝ²)` (`Algebraic`)
+- `HadwigerNelson.Outside.OAI158.Spectral.residual_fourier_cross` — two vectors, by polarisation (`Outside/OAI158Rigidity`)
+- `HadwigerNelson.Plane.ofReal_integral_le_measure_pos` — for any measure, its binder dropped here (`SectionDensity`)
 
 ## Stage 1 — SAVED (FS133-LD1): the readback, and the dump before the merge
 
@@ -298,3 +310,314 @@ dimension four and up and names the plane as its aim — the kernel proof here i
 
 **No statement says more or less than its entry**, but for the two differences of form in K133-PAIR, each equivalent
 and said above. Nothing to message.
+
+## Stage 5 — SAVED (FS133-LD1): the full gate on one commit — `860538ddf` — green on its first pass
+
+One pass ran every step in order, one at a time, under the slot (`data/fs133/ld1/run-gate.sh final 80ac103c1 8`,
+FS131-LP1's pass with this landing's steps, launched from a snapshot copy, `build/ld1-run-gate-snapshot.sh`). Every
+log is under `data/fs133/ld1/gate/` with its exit status on its last line; `run-pass-final.out` holds every step's
+exit, `measure-final.txt` every step's wall time and memory (the scope's charged peak and the largest process's
+resident set, by FS131-LJ1's `in-scope.sh`), and `run-gate-final.head` the commit,
+**`860538ddfcc8d420ff13970441aa58c03253b900`**, with **no tracked file modified at its start and none after it**.
+**Every step exited 0 but the one planted control that must exit 1** (the scan difference's plants). The axiom
+self-test's receipt is kept compressed (`receipt-axioms-self-test-final.log.xz`, 23 MB as text). Every count below is
+read from the saved logs.
+
+| step | result, read from its saved log (`data/fs133/ld1/gate/<step>-final.*`) | wall | peak / max-rss |
+|---|---|---|---|
+| build (`BATCH=8`, `--mem 10 --cpus 4`) | "build: OK — 255 of 255 batches, 2 module(s) rebuilt, 0 module(s) with warnings, 7m20s" (`Plane/OneClass/Pair`, restored after the lint's control, and the root); the one log line holding "warning" is that sentence; Lake's full log has 0; then `lake build --no-build Proofs`: "All targets up-to-date (6192 jobs)" | 444 s (slot wait included) | its batches are sibling scopes; 4.46 GiB the build wrapper's largest child |
+| `sorry` | the narrow pattern over `Proofs/` and `Proofs.lean`: **0** lines; `\bsorry\b`: 55, every one prose, the port's landing's 55 (this module adds none); the search's plant fired before the pass (three forms appended to a copy of `Pair.lean`: 3 lines found; `data/fs133/ld1/sorry-plant.out`) | — | — |
+| `axiom` lines in `Proofs/` | 3 line-initial: the two axioms (`no_proper_five_coloring`, `kloosterman_bound`) and one line of a docstring's code block — `main`'s three; `residual_fourier`'s is gone | — | — |
+| doubled names, before the audit | "dupnames: OK — no name is declared by two modules (26 generated on demand)"; its self-test "OK — all 15 controls behaved" | 4.8 s; 25 s | 0.54 / 4.49 GiB; 0.67 / 1.53 |
+| axioms | "audited: 9101 records — **9038 clean** on the standard axioms, **32 axiom-free**, **26 imported** (resting on a declared outside theorem), **5 declared purchase(s)**"; "declared imports (2): HadwigerNelson.StandingFive.kloosterman_bound, HadwigerNelson.Outside.OAI158.no_proper_five_coloring"; "axioms: OK"; `CLAUDE.md` § Trust ledger flagged stale, "8961 clean → 9038" (draft 1) | 11 s | 1.17 / 4.95 |
+| its self-test | "axioms self-test: OK — every planted fault fired, and every partner passed" | 226 s | 1.39 / 5.21 |
+| the records check (`tools/fs133_ld1_records.py`) | "records: PASS" (stage 2.8's eight checks, on this log); its five plants each "FAILED (as it must)" | 0.1 s | — |
+| the generator | `tools/fs131_ko1_port.py --check` on the port's 31 modules: **CHECK OK** (unchanged by this job) | 0.8 s | — |
+| vacuity | "scanned: **declarations=17902 refutations-skipped=234**"; "sites: **sites=1454 vacuous=0 stale=0 declared=3 witnessed=38 generic=1411 unknown=2**"; "vacuity: OK"; the baseline's header "match (9 of 9 compared)"; `CLAUDE.md` § The gate flagged stale, "declarations 17785 → 17902, refutations-skipped 232 → 234" (draft 2) | 142 s | 0.78 / 4.63 |
+| the scan against the port's landing's, row for row (`tools/fs131_l5_vacdiff.py`) | the counter agrees with both scans; rows 1535 and 1535, lost 0, added 0; "by module: declarations +117, refutations +2: equal to the scans difference" — `Outside/OAI158Rigidity` +2, `Plane/OneClass/SectionDensity` +9, `Defs` +58 (1 refutation), `InvariantLaw` +9, `Field` +1, `Algebraic` +9, `Fractional` +8, `Pair` +21 (1 refutation); "vacdiff: PASS"; its plants "vacdiff: FAIL (5)", exit 1, as they must | 0.1 s | — |
+| its self-test | "OK — all 65 controls behaved: every one fired, and the silent ones stayed silent." | 161 s | 0.65 / 4.62 |
+| assumptions | "assumptions: OK — 2 outside theorem(s) as axioms, with **27** theorem(s) resting on them; 19 named and 14 inline hypotheses (7 outside, 21 ours, 5 open), taken by 102 statement(s) and mentioned by 1"; the ledger's header and `CLAUDE.md` § Trust ledger "match (9 of 9 compared)" | 164 s | 0.69 / 4.70 |
+| its self-test | "OK — all 33 checks behaved: every planted fault fired, and every partner stayed silent." | 171 s | 0.72 / 4.73 |
+| architecture | "RESULT: PASS" | 6.1 s | — |
+| guarded lint (`lake lint --no-build -- --no-build --trace`, `--mem 8`) | exit 0, "-- Linting passed for Proofs.", 14 linters each "(2/2) Passed!"; its control red before the pass (stage 2.13) | 18 s | 1.27 / 5.09 |
+| notes, as the last landing ran them | "notes read: 196 LOCAL-SAID=31 NO-OBJECT=48 NONE-SAID=59 no-conflict=58", the port's landing's count; "self-test: OK (6 controls, 1 planted)" | 4.9 s | — |
+| the stored statements (recipe step 8, again) | the dump: "245 constants (58 by name)"; against stage 1's dump, `tools/fs133_ld1_moved.py --strict` with the ruled verdicts: **"MOVED OK"** — IDENTICAL 186, MOVED-IDENTICAL 52, MOVED-INSTANCES-ONLY 3, GENERATED-IDENTICAL 2, **AXIOM-PROVED 1** (`Spectral.residual_fourier`), **BINDER-DROPPED 1** (`ofReal_integral_le_measure_pos`), new 0; its 126 plants "CONTROL OK"; the dump's text is byte for byte the dump after the join (stage 2.6; one sha256, `0850fa7c…`) | 15 s; 0.5 s; 6.6 s | 0.65 / 3.87 |
+| the edited files in text, block comments removed, against `74135d1b7` | every file AS-LISTED (stage 2.2's edits and 2.4's argument); the plant DIFFERS in all eight | — | — |
+| the baseline and the scans' sources against `main`'s | baseline entries unchanged (2); lines that differ: `scripts/Axioms.lean` 97 (the block), `scripts/Assumptions.lean` 1 (the `.condition`), `scripts/vacuity-baseline.txt` 2 (the header's count line); every other script and the scans' own sources 0 | — | — |
+| the three digests against the port's landing's receipts (`data/fs131/lp1/gate/receipt-*-final.log`) | **axioms**: 77 rows added (each `+ … CLEAN`), 0 removed, 0 changed; stale: `CLAUDE.md` § Trust ledger's "8961 clean" (with it the sentence's "9,024 records"). **vacuity**: "counts: declarations 17785 → 17902, refutations-skipped 232 → 234", "rows: none changed"; stale: `CLAUDE.md` § The gate's count line. **assumptions**: one row added, `CONDITION HadwigerNelson.OneClass.IsShiftInvariantLaw`; counts of the scan's own constants up by the module (constants 16893 → 17057, theorems 12750 → 12888, formers 379 → 386, conditions 40 → 41); the nine counts unchanged; nothing stale | — | — |
+
+**The brief's prediction, and this landing's, against the gate**: the audit 9,101 records — 9,038 clean, 32
+axiom-free, 26 imported, 5 purchases — with 2 declared imports and 2 library axioms; the nine assumption counts
+unchanged; no new site. **Met, each count.** The two refutations the scan now skips are the module's, each a statement
+whose conclusion the scan reads through to `→ False` and which refutes nothing: `Plane.isIndepSet_ball_half` (a disc of
+radius `1/2` is independent: `IsIndepSet` is "no two points adjacent", a negation; the statement is closed) and
+`OneClass.AdmissibleOn.mono` (admissibility on a subset; `AdmissibleOn` is a negation under binders) — both read here.
+The module's binders that are hypotheses read `GENERIC` (no colouring binder of a tracked predicate): their models are
+FS133-ICD1's DD2 and FS133-IPQ1's DQ2, checked by the elaborator in `data/fs133/ipq1/work/Models.lean`; the scan adds
+no site for them.
+
+**Read against the informal claim** (stage 4 in full). The claim of this landing: the density equality —
+`α₁(ℝ²) = α₁(𝒜²) = m₁(ℝ²)`, `χ_f,0(ℝ²) = χ_f(ℝ²) = χ_f(𝒜²) = 1/m₁(ℝ²)`, `f(n)/n → m₁(ℝ²)` — and the labelling claim
+both ways are theorems of this library, checked by this kernel, on the standard three axioms, through `[OAIMath2026]`'s
+rigidity step, whose proof is ported. What the gate shows: no `axiom` and no `sorry` enters `Proofs/`; the library
+declares the same two axioms as before, neither of them this module's; every record of the module is audited on the
+three or fewer; no name is declared twice, so each printed list is the list of the proof the kernel checked; the
+axiom the branch declared is gone and the port's theorem of that name has its stored type; no stored statement of the
+module moved between the build before the merge and this commit but the one ruled binder. **What the gate does not
+show, and this record says**: that the result is new (it is not: `[Davies2026]`); any value of `m₁(ℝ²)`; that the
+release's mathematics is right beyond what its Lean proves.
+
+## Drafts for the front page (FS133-LD1)
+
+*For the coordinator to file; this job files none of them. Each draft names its slot: the file, the section, and the
+exact words it replaces or follows; `data/fs133/ld1/drafts-slots.py` checks that each slot occurs exactly once (on
+this branch, whose front files are `main`'s unchanged and whose `ARCHITECTURE.md` rows are the ones the filing edits;
+output `data/fs133/ld1/drafts-slots.out`: 29 slots, each once; the control string absent). Each count names the log
+line it comes from; the gated commit and its logs are stage 5 (`data/fs133/ld1/gate/*-final.*`; the scans' full
+outputs `receipt-axioms-final.log`, `receipt-vacuity-final.log`, `receipt-assumptions-final.log`).*
+
+**Whose it is.** The statement is not new: a paper posted on 8 October 2026 proves the same sentence in dimension four
+and up and names the plane as its aim (`[Davies2026]`; the claim list's K133-NC-ALL). The kernel proof — the
+statements (FS133-K1's), the proofs (FS133-IA1, -IB1, -IB2, -ICD1, -IPQ1's) and this landing — is this project's.
+The transfer and the residual Fourier step (`Outside.OAI158.Spectral.residual_fourier`: the release's Theorem 2.3
+composed with the spectral theorem) are `[OAIMath2026]`'s, family 158, its proofs ported (FS131-KO1 to FS131-LP1).
+No value moves: the kernel holds `1/7 ≤ m₁(ℝ²) ≤ 1` and nothing else about the number.
+
+**1. `CLAUDE.md` § Trust ledger, the audit's sentence.** *Replaces* "the current audit reads 8961 clean and 5 declared
+purchases, and 26 imported (and 32 axiom-free; 9,024 records at the landing of the port of `[OAIMath2026]`'s transfer
+proof, FS131-LP1, 2026-10-14)". From `axioms-final.log`, "audited: 9101 records — 9038 clean on the standard axioms,
+32 axiom-free, 26 imported (resting on a declared outside theorem), 5 declared purchase(s)":
+
+> the current audit reads 9038 clean and 5 declared purchases, and 26 imported (and 32 axiom-free; 9,101 records at the
+> landing of FS-133's density equality, FS133-LD1, 2026-10-14)
+
+9,024 + 77 = 9,101 (the module's records: stage 2.9); clean 8,961 + 77 = 9,038; axiom-free, imported, purchases
+unchanged.
+
+**1b. The same paragraph.** *Follows* "its first import, `[Falconer1981]` Lemma 2 (i), is a theorem since FS131-IF1."
+*with*
+
+> The release's rigidity step `Outside.OAI158.Spectral.residual_fourier` (`[OAIMath2026]` family 158, `Ergodicity.lean`
+> l. 403: its Theorem 2.3 composed with the spectral theorem) never entered `main` as an import: FS-133's branch
+> declared it as an axiom over six copied definitions, and at the density equality's landing the copies and the axiom
+> were deleted and the port's theorem read, its stored type the declared one's constant for constant (FS133-LD1); the
+> fourteen records that rested on it there are clean.
+
+**2. `CLAUDE.md` § The gate, the vacuity scan's counts.** *Replaces* "`declarations=17785 refutations-skipped=232
+sites=1454`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1411 unknown=2`." From `vacuity-final.log`, "scanned:
+declarations=17902 refutations-skipped=234" and "sites: sites=1454 vacuous=0 stale=0 declared=3 witnessed=38
+generic=1411 unknown=2":
+
+> `declarations=17902 refutations-skipped=234 sites=1454`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1411 unknown=2`.
+
+Two counts move: declarations +117, refutations +2, both the module's (stage 5's vacdiff, module by module). No site
+is added. The baseline's header is refiled on the branch.
+
+**3. `CLAUDE.md` § Trust ledger, the nine counts.** *No change.* `receipt-assumptions-final.log`'s totals read
+`axioms=2 rests=27 named=19 inline=14 outside=7 ours=21 open=5 takes=102 mentions=1`, and the step reports
+"recorded counts in CLAUDE.md § Trust ledger: match (9 of 9 compared)". The module adds no axiom and no declared
+hypothesis; it adds one `.condition` (`OneClass.IsShiftInvariantLaw`, stage 2.10), which no count reads.
+
+**4. `CLAUDE.md` § Frontier, Last filed.** *Replaces* "Last filed: **the landing of the port of `[OAIMath2026]`'s
+transfer proof** (FS131-LP1, 2026-10-14:" *by*
+
+> Last filed: **the landing of FS-133, the density equality** (FS133-LD1, 2026-10-14: `Outside/OAI158Rigidity` and
+> the seven modules of `Plane/OneClass` through the gate on the standard three axioms — 77 records; `α₁(ℝ²) = α₁(𝒜²) =
+> m₁(ℝ²)`, `χ_f,0(ℝ²) = χ_f(ℝ²) = χ_f(𝒜²) = 1/m₁(ℝ²)`, `f(n)/n → m₁(ℝ²)` and the labelling claim both ways; the rigidity
+> step `[OAIMath2026]`'s, ported; FS-133 Closed; the statement not new, `[Davies2026]`; no value moved); before it **the
+> landing of the port of `[OAIMath2026]`'s transfer proof** (FS131-LP1, 2026-10-14:
+
+**5. `CLAUDE.md` § Frontier, Open milestones, FS-133.** *Replaces* "**Derived 2026-10-07: FS-133, the one-class
+transfer** (`plans/FS133-E1-derivation.md`, 13 entries, each derived, one mind; stub `plans/STUB-one-class-transfer.md`;
+a short milestone, unranked — it bears none on six against seven): `α₁(ℝ²) = m₁(ℝ²)` and `χ_f,0(ℝ²) = χ_f(ℝ²) =
+1/m₁(ℝ²)` with no hypothesis, over `[OAIMath2026]`'s rigidity theorem (row 129); Closed when its Lean module passes the
+gate." *by*
+
+> **Closed 2026-10-14: FS-133, the one-class transfer** (Derived 2026-10-07, `plans/FS133-E1-derivation.md`, 13
+> entries, each derived, one mind; stub `plans/STUB-one-class-transfer.md`; a short milestone, unranked — it bears none
+> on six against seven; its Lean module through the gate, FS133-LD1): `α₁(ℝ²) = α₁(𝒜²) = m₁(ℝ²)`, `χ_f,0(ℝ²) =
+> χ_f(ℝ²) = χ_f(𝒜²) = 1/m₁(ℝ²)` and `f(n)/n → m₁(ℝ²)` with no hypothesis, and for a finite set of labels and forbidden
+> pairs at countably many positive algebraic distances an admissible labelling of the plane exists iff one of the
+> algebraic plane does, iff a Lebesgue-measurable one admissible almost everywhere does — each kernel-checked on the
+> standard three axioms, through `[OAIMath2026]`'s rigidity step `Outside.OAI158.Spectral.residual_fourier`, ported
+> (row 129; `OneClass.finIndepRatio_plane_eq_mOne`, `finIndepRatio_algPlane_eq_mOne`,
+> `iSup_fractionalChromaticNumber_plane`, `fractionalChromaticNumber_plane`, `fractionalChromaticNumber_algPlane`,
+> `tendsto_minIndepNum_div`, `exists_admissibleOn_univ_iff_ae`, `exists_admissibleOn_univ_iff_algPlane`). Not new:
+> `[Davies2026]` proves the same sentence in dimension four and up and names the plane as its aim; the kernel proof is
+> this project's.
+
+**6. `CLAUDE.md` § Publication, "Held so far".** *Replaces* "with no hypothesis, over `[OAIMath2026]`'s rigidity
+theorem, row 129 (FS-133; one mind) answers the first clause of `[DuczVarga2026]`'s Conjecture 1 and `[MatolcsiEtAl2025]`
+§2's equality question." *by*
+
+> with no hypothesis, row 129's plane clause (FS-133) answers the first clause of `[DuczVarga2026]`'s Conjecture 1 and
+> `[MatolcsiEtAl2025]` §2's equality question — formalized: in the kernel since FS133-LD1, on the standard three axioms,
+> through `[OAIMath2026]`'s rigidity step, ported; the statement is not new (`[Davies2026]`, in dimension four and up,
+> names the plane as its aim), the kernel proof is this project's.
+
+(The list this clause sits in opens "Held so far at [hand]:"; with this clause in the kernel, the filing may want the
+head to say so.)
+
+**7. `CLAUDE.md` § The aim, the program.** *Replaces* "on `[OAIMath2026]`, **FS-132, six by the nerve**, and **FS-133,
+the one-class transfer**;" *by* "on `[OAIMath2026]`, **FS-132, six by the nerve**, and **FS-133, the one-class transfer —
+closed** (row 129; FS133-LD1);".
+
+**8. `CLAUDE.md` § Where the problem stands, "What the kernel holds, beyond the interval".** *Follows* "The lower bound
+of four against every colouring, the three-colour criterion and the clause for subfields are this project's, with every
+kernel proof;" *with* (FS133-ICD1's DD4 and FS133-IPQ1's DQ3, corrected: on the standard three, C133-PAIR held)
+
+> **the density equality for the plane** (FS-133, FS133-LD1): `α₁(ℝ²) = α₁(𝒜²) = m₁(ℝ²)` — the infimum of
+> `α(G)/|G|` over finite point sets of the plane, and of the algebraic plane, is the supremum of the upper densities of
+> the measurable sets with no two points at distance one — and `χ_f,0(ℝ²) = χ_f(ℝ²) = χ_f(𝒜²) = 1/m₁(ℝ²)`, and
+> `f(n)/n → m₁(ℝ²)` (`[DuczVarga2026]` Conjecture 1, first clause; `[MatolcsiEtAl2025]` §2's equality question)
+> (`OneClass.finIndepRatio_plane_eq_mOne`, `…_algPlane_eq_mOne`, `fractionalChromaticNumber_plane`,
+> `iSup_fractionalChromaticNumber_plane`, `fractionalChromaticNumber_algPlane`, `tendsto_minIndepNum_div`); and
+> labellings with forbidden pairs of labels at countably many positive algebraic distances — the plane has one admissible
+> at every pair iff the algebraic plane has one, iff the plane has a Lebesgue-measurable one admissible almost
+> everywhere (`OneClass.exists_admissibleOn_univ_iff_algPlane`, `…_iff_ae`; the converse at any positive distances,
+> algebraic or not, `exists_admissibleOn_of_ae`); all on the standard three axioms, through `[OAIMath2026]`'s
+> `Spectral.residual_fourier`, ported. Not claimed: any value of `m₁(ℝ²)` beyond `1/7 ≤ m₁(ℝ²)`, or of a chromatic
+> number; `m₁(ℝ²) = δ_Croft`; anything at a number field's plane or at six colours; that the result is new
+> (`[Davies2026]`). The kernel proof is this project's;
+
+**9. `LEDGER.md` row 129, its grade.** *Replaces* "the plane's clause since FS-133 not MR's: C133-ONE [hand], one
+mind, kernel pending, over `[OAIMath2026]` Theorem 2.3 (kernel-checked in the release's library, audited:
+`plans/EXT-OAI1-audit.md`)" *by*
+
+> the plane's clause since FS-133 not MR's: C133-ONE and C133-FN **[kernel]** since FS133-LD1
+> (`OneClass.finIndepRatio_plane_eq_mOne`, `finIndepRatio_algPlane_eq_mOne`, `iSup_fractionalChromaticNumber_plane`,
+> `fractionalChromaticNumber_plane`, `fractionalChromaticNumber_algPlane`, `tendsto_minIndepNum_div`; each on
+> `[propext, Classical.choice, Quot.sound]`), through `[OAIMath2026]` Theorem 2.3 composed with the spectral theorem —
+> the release's `Spectral.residual_fourier`, its proof ported (`Outside/OAI158Ergodicity`, FS131-KO1 to FS131-LP1);
+> the interval `[4.04876, 4.35987]` for `1/m₁(ℝ²)` is the literature's (`[AmbrusEtAl2023]` Theorem 1; Croft's set), not
+> the kernel's, which holds `1/7 ≤ m₁(ℝ²) ≤ 1`
+
+The rest of the row keeps its grade: the field form (given MR), FS-103's certificates and the mechanism.
+
+**10a. `plans/FRONTIER-STUBS.md` § Open milestones, FS-133.** The same slot and the same replacement as draft 5.
+
+**10b. The same file, § Closed, absorbed and demoted.** *Follows* "## Closed, absorbed and demoted" *with* the line
+
+> * **FS-133 the one-class transfer** — `plans/STUB-one-class-transfer.md`. Derivation `plans/FS133-E1-derivation.md`;
+>   kernel plan `plans/FS133-kernel-plan.md`; landing `plans/FS133-LD1-landing.md`; close inventory
+>   `plans/FS133-close-inventory.md`. **Closed 2026-10-14**: its Lean module (`Outside/OAI158Rigidity`, `Plane/OneClass`,
+>   eight files, 77 records) through the gate on the standard three axioms (row 129's plane clause, C133-FN, C133-PAIR);
+>   the rigidity step `[OAIMath2026]`'s, ported; the statement not new (`[Davies2026]`).
+
+**10c. `plans/STUB-one-class-transfer.md`, the banner.** *Replaces* the banner line "> **Derived 2026-10-07 (FS133-E1;
+FS-133 inventory item 3).** All four posed claims are derived, [hand], one mind, kernel pending: … Closed when its Lean
+module passes the gate." (the whole line) *by*
+
+> > **Closed 2026-10-14 (FS133-LD1): its Lean module passed the gate.** `α₁(ℝ²) = α₁(𝒜²) = m₁(ℝ²)`, `χ_f,0(ℝ²) =
+> > χ_f(ℝ²) = χ_f(𝒜²) = 1/m₁(ℝ²)`, `f(n)/n → m₁(ℝ²)` and the labelling claim both ways are kernel theorems on the
+> > standard three axioms (`Plane/OneClass`; `plans/FS133-LD1-landing.md` stage 4 reads each aloud against the claim
+> > list), through `[OAIMath2026]` family 158's rigidity step, ported (`Outside.OAI158.Spectral.residual_fourier`). Derived
+> > 2026-10-07 (FS133-E1; FS-133 inventory item 3): `plans/FS133-E1-derivation.md`; row 129 carries it. Prior art: the
+> > statement is not new — `[Davies2026]` (8 October 2026) proves it in dimension four and up and names the plane as its
+> > aim (`plans/FS131-ER1-davies-reading.md`).
+
+**11. `ARCHITECTURE.md`.**
+- *(a) § Trust, Imported outside theorems:* the row whose head is "| `Outside.OAI158.Spectral.residual_fourier`
+  (`Outside/OAI158Rigidity`) | `[OAIMath2026]` family 158, `lean/OAI/Analysis/PlaneSpectrum/Ergodicity.lean` line 403
+  at commit `adc7f124`" *removed* (it came to `main` with this branch; the axiom is gone).
+- *(b) the paragraph under the table, following* "is a theorem since FS131-IF1 — `falconer_lemma2_nonempty`, proved in
+  `Plane/MetricalBoundary` — and is no longer in this table." *:* " `Outside.OAI158.Spectral.residual_fourier`
+  (`[OAIMath2026]` family 158, `Ergodicity.lean` l. 403), declared on FS-133's branch over six copied definitions, never
+  reached `main` as a purchase: at the density equality's landing it is the port's theorem (`Outside/OAI158Ergodicity`),
+  its stored type the declared one's, and its fourteen consumers are clean (FS133-LD1)."
+- *(c) the row of `Outside/OAI158Rigidity`, its description cell* (head "**FS-133 (planned by FS133-K1, proved by
+  FS133-IA1; no `sorry`). One imported outside theorem**", to the cell's end "… (the regular representation on `ℓ²` of
+  the algebraic plane, the point mass at the origin; on the standard three) are proved.") *replaced by* "**FS-133
+  (planned by FS133-K1, proved by FS133-IA1; landed by FS133-LD1; no `sorry`).** Two vectors and a model, over
+  `[OAIMath2026]`'s `Spectral.residual_fourier`, a theorem of the port (`Outside/OAI158Ergodicity`; the release's Lean
+  lemma, `Ergodicity.lean` l. 403 — its Theorem 2.3 composed with the spectral theorem): `residual_fourier_cross` (two
+  rotation-fixed vectors orthogonal to the continuous vectors are uncorrelated at every non-zero translate, by
+  polarisation) and `residual_fourier_model` (the regular representation on `ℓ²` of the algebraic plane, the point mass
+  at the origin), each on the standard three. The module first declared the lemma as an axiom over six copied
+  definitions (FS133-IA1); the landing removed both and reads the port's (`plans/FS131-KO1-port-plan.md` § 4.5)."
+- *(d) the seven rows of `Plane/OneClass`, their leads:* `SectionDensity`, `Defs`, `InvariantLaw` — "**FS-133 (FS133-K1;
+  a skeleton).**" *by* "**FS-133 (FS133-K1's statements, FS133-IB1's proofs; landed by FS133-LD1; no `sorry`).**" for
+  `SectionDensity`; the same with "FS133-IB1's proofs, two lemmas FS133-IB2's" for `InvariantLaw` and "FS133-IB2's
+  proofs" for `Defs` (for `SectionDensity` add: "`ofReal_integral_le_measure_pos` for any measure: an unread
+  `[IsProbabilityMeasure μ]` dropped at the landing (inventory item 789)"; for `Defs`: "three lemmas made public by
+  FS133-ICD1 (`upperDensity_congr_ae`, `card_le_indepNum_induce`, `exists_indep_card_eq_indepNum`)"); `Field` —
+  "**FS-133 (FS133-K1 the statement, FS133-IA1 the proof; no `sorry`), on the imported `Spectral.residual_fourier`.**"
+  *by* "**FS-133 (FS133-K1 the statement, FS133-IA1 the proof; landed by FS133-LD1; no `sorry`), through `[OAIMath2026]`'s
+  `Spectral.residual_fourier`, ported.**"; `Algebraic`, `Fractional`, `Pair` — "**FS-133 (FS133-K1; a skeleton), on the
+  imported `Spectral.residual_fourier`.**" *by* "**FS-133 (FS133-K1's statements, FS133-ICD1's proofs [`Pair`: and
+  FS133-IPQ1's]; landed by FS133-LD1; no `sorry`), through `[OAIMath2026]`'s `Spectral.residual_fourier`, ported.**" (for
+  `Algebraic` add: "its imports include Mathlib's `Analysis.Subadditive` (FS133-ICD1, accepted by inventory item 779
+  ruling 2)"; for `Pair`: "one unread binder dropped from `exists_admissibleOn_of_ae`, FS133-IPQ1").
+- *(e) two stale names in those rows* (`tools/check_architecture.py` [3] lists both as declared nowhere): in
+  `Algebraic`'s row "**C133-ALG** `IsInvariantLaw.measure_zero_le_mOne`" → "**C133-ALG**
+  `IsInvariantLaw.measure_origin_le_mOne`"; in `InvariantLaw`'s row "C133-INV-CLASS: `IsShiftInvariantLaw.measure_zero_le`
+  (any graph)" → "C133-INV-CLASS: `IsShiftInvariantLaw.measure_origin_le` (any graph)" (FS133-ICD1's naming note).
+
+**12. `LEAN.md`** — the implementers' lines, from their records (none is on `main`), and this landing's.
+- *(a) § Assumptions, the item-2 bullet, following* "the landing runs it again on the module as recompiled on the joined
+  tree.": FS133-IA1's D5, verbatim from `plans/FS133-IA1-implementation.md` (on this branch) § Drafts, D5.
+- *(b) § Searching — Lean, following its last bullet* (ending "and the linter's name must be declared where the
+  attribute is elaborated (`data/fs131/lp1/nolint/probes/attrs.lean`; FS131-LP1)."), in this order and verbatim from
+  the records on this branch: FS133-IA1's D6 (four bullets), FS133-IB1's DB6 (six), FS133-IB2's DC5 (three),
+  FS133-ICD1's DD5 (five), FS133-IPQ1's DQ6 (three), and this landing's three:
+  - *"A join that brings a port can turn a simp argument of a proof that stays unused: the port's `@[simp]` lemmas
+    enter every module downstream of it, and a fact a proof gave `simp` by hand is found by `simp` itself — the build's
+    `unusedSimpArgs` warning, which the gate's zero-warning line reads. `simp?` on a copy names the lemmas that took
+    over (`Spectral.kCoeff_inv`, `kCoeff_ne_zero`, `Outside/OAI158Basic`; `residual_fourier_model`, FS133-LD1)."*
+  - *"Across a join that deletes copies and reads a port's declarations, a statement dump made per module loses the
+    moved constants: dump the old modules' every constant before the merge and, after it, the same names found where
+    they are now declared (`env.getModuleIdxFor?`), then compare by name with the moves, the axiom proved and the
+    instance-only values ruled (`data/fs133/ld1/lean/StatementDump.lean`, `tools/fs133_ld1_moved.py`, FS133-LD1). A
+    statement with two instance binders prints both `inst`; a dropped one is named by its occurrence (`inst#2`)."*
+  - *"A structure taken as a hypothesis whose only model is the projection of a child structure's model
+    (`(isInvariantLaw_dirac G).toIsShiftInvariantLaw`) reads `undeclared-never-concluded` to the assumptions step:
+    no declaration concludes it as stated. Declare it a `.condition` with that model in its reason
+    (`OneClass.IsShiftInvariantLaw`, FS133-LD1)."*
+
+**13. `tools/claude_md_fact_audit.py`, `GATE_CHANGES`.** One entry after `(("7531", "5"), ("8961", "5")):`'s:
+
+```python
+    (("8961", "5"), ("9038", "5")): "FS-133, the landing of the density equality — Outside/OAI158Rigidity and Plane/OneClass through the gate: alpha_1(R^2) = alpha_1(A^2) = m_1(R^2), chi_f,0(R^2) = chi_f(R^2) = chi_f(A^2) = 1/m_1(R^2), f(n)/n -> m_1(R^2) and the labelling claim both ways, on the standard three axioms through [OAIMath2026]'s Spectral.residual_fourier, ported (the copies and the axiom of FS-133's branch deleted at the join); the statement not new ([Davies2026]), the kernel proof ours (FS133-LD1; copy data/fs133/ld1/gate/receipt-axioms-final.log, gated commit 860538ddf): 9,101 records, 9,038 clean, 32 axiom-free, 26 imported, 5 purchases",
+```
+
+**13b. The same file's table of superseded counts.** Every token the drafts retire, in that table's form, each with its
+value as the reason: `"8961"` (9038 clean); `"9,024"` and `"9024"` (9,101 records); `"declarations=17785"`,
+`"17785"` (17902); `"refutations-skipped=232"`, `"232"` (234 — the bare number, which the audit tokenizes alone: FC4's
+ruling on `"228"`); `"declarations=17785 refutations-skipped=232 sites=1454"` (17902, 234). The reason for each:
+"superseded gate count, refiled at FS133-LD1's landing from data/fs133/ld1/gate/receipt-axioms-final.log (the vacuity
+count from receipt-vacuity-final.log); the old count stays in data/fs131/lp1/gate/ and in GATE_CHANGES". **The next
+landing's previous receipts are `data/fs133/ld1/gate/receipt-{axioms,vacuity,assumptions}-final.log`.**
+
+**14. `BIBLIOGRAPHY.md`, `[OAIMath2026]`'s row, what rests on it.** *Follows* "is the release's theorem with its proof
+ported since FS131-IPD1's switch and FS131-LP1's landing, and its twelve records are clean;" *with* " its rigidity step
+`Spectral.residual_fourier` (`Ergodicity.lean` l. 403; Theorem 2.3 composed with the spectral theorem) is read by
+FS-133's density equality as the port's theorem, and its fourteen consumers there are clean (FS133-LD1);".
+
+## Open gate items at this landing
+
+*Each named, with what would close it; none of them is a red check of this gate.*
+
+1. **`lean4checker`** (the publication gate, `LEAN.md` § Trust ledger) has not been run over this module or the port.
+2. **The proof edit in a kept declaration** (stage 2.4): `residual_fourier_model`'s `simp [hx, hne]` → `simp [hx]`,
+   against the recipe's "character for character"; the `have hne` it fed stays, unread. The coordinator rules whether
+   it stands or whether the dead `have` goes too.
+3. **`IsShiftInvariantLaw` declared a `.condition`** (stage 2.10), on this landing's word; an alternative is a theorem
+   concluding it at its model, which would be a new statement and is not this brief's.
+4. **Item 798's three instances-only values** (`approxField`, `approxIndex`, `measurableField`) stand as ruled: their
+   values cite other generated proof auxiliaries; nothing downstream stores them.
+5. **Carried from the port's landing** (item 840), unchanged here: `scripts/Vacuity.lean` line 561's history paragraph;
+   EXT-OAI1's line count; `hexShell_plane5`'s classing; the generator's text-only statement guard; ADAPTED_VALUE.
+6. **`ARCHITECTURE.md`'s rows' prose** (draft 11) is the filing's; on this branch the rows still say "a skeleton" and
+   "on the imported `Spectral.residual_fourier`", and `check_architecture.py` [3] lists the two stale names of draft
+   11 (e), which do not fail it.
+
+## Stage 6 — SAVED (FS133-LD1): the green line, and where the branch stands
+
+- **The gated commit is `860538ddf`**, on `fs133-wl1` in `.claude/worktrees/fs133-wk1`; the commits after it add only
+  records (this file, `data/fs133/ld1/`, the report). Nothing is pushed (the brief: the server is unreachable); the
+  merge into `main` is the coordinator's. `main` has moved since the merge, in `data/` and `plans/` only (nine files,
+  none the gate reads), so a merge of this branch into it should meet no conflict outside those.
+- The tree's `.lake/build` is the gated build: `lake build --no-build Proofs` "All targets up-to-date (6192 jobs)".
+- No process of this job is running or queued (`ps`, the slot's ledger: only other jobs' slots).
+- The drafts' slots: `data/fs133/ld1/drafts-slots.py` "slots: 29 checked on HEAD, control absent: yes; SLOTS OK"
+  (`drafts-slots.out`).

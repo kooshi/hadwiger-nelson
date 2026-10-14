@@ -1,0 +1,29 @@
+planted: dropped `EVIDENCE EMPTY HadwigerNelson.Plane.ArcMap.bowtie_not_isHorn_I_axis ::…`; a row on main's `Complex.I.eq_1`; an UNKNOWN row on new `HadwigerNelson.OneClass.AdmissibleOn.eq_1`; declarations +1
+counter vs the main scan: declarations 17785 / 17785, refutations 232 / 232: agree
+counter vs the landing scan: declarations 17902 / 17903, refutations 234 / 234: COUNTER-DISAGREES
+LOST EVIDENCE EMPTY HadwigerNelson.Plane.ArcMap.bowtie_not_isHorn_I_axis :: HadwigerNelson.Plane.bowtie.IsHorn Complex.I 0 (-1) 1 1
+NOT NEW SITE GENERIC Complex.I.eq_1 :: F.Valid
+FLAGGED SITE UNKNOWN HadwigerNelson.OneClass.AdmissibleOn.eq_1 :: F.Valid
+main rows 1535, landing rows 1536; lost 1 (0 with a removed declaration); added 2
+  added SITE UNKNOWN on Valid: 1
+  added rows in Plane.OneClass.Pair: 1
+  declarations: 17785 -> 17903 (+118)
+  refutations-skipped: 232 -> 234 (+2)
+  sites: 1454 -> 1454 (+0)
+  vacuous: 0 -> 0 (+0)
+  stale: 0 -> 0 (+0)
+  declared: 3 -> 3 (+0)
+  witnessed: 38 -> 38 (+0)
+  generic: 1411 -> 1411 (+0)
+  unknown: 2 -> 2 (+0)
+  module Outside.OAI158Rigidity: declarations 0 -> 2 (+2), refutations 0 -> 0 (+0)  [new module]
+  module Plane.OneClass.Algebraic: declarations 0 -> 9 (+9), refutations 0 -> 0 (+0)  [new module]
+  module Plane.OneClass.Defs: declarations 0 -> 58 (+58), refutations 0 -> 1 (+1)  [new module]
+  module Plane.OneClass.Field: declarations 0 -> 1 (+1), refutations 0 -> 0 (+0)  [new module]
+  module Plane.OneClass.Fractional: declarations 0 -> 8 (+8), refutations 0 -> 0 (+0)  [new module]
+  module Plane.OneClass.InvariantLaw: declarations 0 -> 9 (+9), refutations 0 -> 0 (+0)  [new module]
+  module Plane.OneClass.Pair: declarations 0 -> 21 (+21), refutations 0 -> 1 (+1)  [new module]
+  module Plane.OneClass.SectionDensity: declarations 0 -> 9 (+9), refutations 0 -> 0 (+0)  [new module]
+  by module: declarations +117, refutations +2: MODULE-SUM differs from the scans
+vacdiff: FAIL (5)
+exit=1
