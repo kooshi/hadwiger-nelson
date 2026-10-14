@@ -91,7 +91,7 @@ statements section must hold the quotations. Templates by kind: an implementer o
 - **The second filing** (base `8eece67b0`): the older handoff's § 7 list; the `LEAN.md` lines drafted in today's records (KN7, KN8,
   KN9, KT1, K8B1, KPD1, KR1, K12A, KDB1, KC13, KM11, ITK1, IJ1, IJ2, IJ3, IM11, ILA1, ICL1, ICL2, ICM1, ICM2, IKC1–IKC3, IDB1–IDB3,
   IN1L, IDG1, IG1, IPA1, IPB1, IPD1, IP23, ITT1, the port's classes); bibliography lines (`[EinsiedlerLindenstrauss2022]`,
-  `[OAIMath2026]`, `[Rudin1962]`, `[AmbrusEtAl2023]` with p. 18's sign of `J₀′`, `[KMOR2016]`, `[Schur1912]` "recalled, not read", and
+  `[OAIMath2026]`, `[Rudin1962]`, `[AmbrusEtAl2023]` with p. 18's sign of `J₀′`, `[KMOR2016]`, Schur 1912 (key `Schur1912`, "recalled, not read"), and
   those KR1, K12A, KC13 drafted); corrections: `plans/EXT-OAI1-audit.md` 16,600 → 12,005 lines; `scripts/Vacuity.lean` l. 561; the
   density bound's price (items 818, 823); M13's prices (items 848, 893, 905); K2's price (item 886); F2's price (item 902); J26/J49's
   grade note (item 845); KDB1's prototype truncation (item 911); the IDB1 record's mis-headed last section (item 895); J45's erratum

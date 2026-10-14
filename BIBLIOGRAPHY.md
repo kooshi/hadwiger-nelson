@@ -428,6 +428,7 @@ needs no entry here.*
 | `[Bekka2008]` | **`[BekkaHarpeValette2008]`** | as spelled in the body of `plans/EXT-OAI2-reading.md` |
 | `[TaoDisintegration2008]` | **`[Tao2008ergodicity]`** | as spelled in the body of `plans/EXT-OAI2-reading.md` |
 | arXiv:2008.07987 | **`[GwynStavrianos2022]`** | its arXiv numbering, which `[OAIMath2026]` cites: 'Lemma 2.10 and Theorem 2.11' there are the journal's Lemma 2 and Theorem 2 (`plans/EXT-OAI2-reading.md` § 5.5; the two numberings not matched line by line) |
+| **[Schur1912]** | I. Schur, *Über die Existenz unendlich vieler Primzahlen in einigen speziellen arithmetischen Progressionen*, Sitzungsber. Berl. Math. Ges. 11 (1912) 40–50 — **cited from memory: title, venue and pages unchecked** | the classical fact that a nonconstant integral polynomial has prime divisors of its values outside any finite set; proved in the kernel here by the textbook argument (`Rigidity/AdmissiblePrime`, private `schur_prime`, FS131-ILA1); nothing rests on the paper, and the module's docstrings name it as "Schur's argument" with no key | not held | **recalled, not read** |
 
 ## B. The library — every held file, with its key and read status
 
