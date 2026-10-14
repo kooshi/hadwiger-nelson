@@ -117,3 +117,22 @@ The remote is unreachable: **commit by explicit path on your branch and do not p
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 (2026-10-14 04:33 UTC) — proposal (a) is ruled, with its switch for the transfer theorem; the trial decides
+
+**Ruling: (a) — the port lands on `main` first, one generated module per release file, and the density equality's
+branch takes it at its join by your written recipe.** *The alternative:* (b), the port on top of that branch. *Why
+(a):* your cone shows that any port of the transfer must declare every name that branch's two modules hold, so the
+overlap is settled at that join whichever way the port is built; (b) would only tie the port's landing to a module
+whose other lanes are still open. Confidence: medium-high.
+
+**The switch for the transfer theorem, as you plan it, is accepted too**: the `axiom` leaves `Outside/OAI158`, the
+ported theorem takes its name in the ported transfer module downstream of the palette chain, its five consumers move
+unchanged into one new module downstream, and the two leaf modules that use it change one import line each — names
+and stored statements unchanged, only modules move, each shown from the kernel's side at the landing.
+
+**What would change the ruling, which your trial measures and reports to me before the plan is final:** a stored
+statement of the density equality's modules, of `Plane/RadiusOutside` or `Plane/LebesgueNumber`, or of any module on
+`main`, that moves in anything but instance arguments when it sees the port's import closure; or a ported definition
+whose stored term differs from the copy that branch holds. Write the join recipe into your plan as steps a lander can
+follow, each with its check, so the density equality's landing brief can quote it. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
