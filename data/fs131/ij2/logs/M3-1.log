@@ -1,0 +1,14 @@
+slot: admitted ij2: mem 4 GiB (hard cap), cpus 0,1
+data/fs131/ij2/work/InvariantMeasure.lean:290:78: error: Function expected at
+  h
+but this term has type
+  ?m.229 ∈ ?m.228
+
+Note: Expected a function because this term is being applied to the argument
+  hc₀
+data/fs131/ij2/work/InvariantMeasure.lean:294:4: error: 'show' tactic failed, pattern
+  c (x + z + y) = c (x + y + z)
+is not definitionally equal to target
+  ((fun c x => c (x + y)) ∘ fun c x => c (x + z)) c x = ((fun c x => c (x + z)) ∘ fun c x => c (x + y)) c x
+seconds=4
+exit=1

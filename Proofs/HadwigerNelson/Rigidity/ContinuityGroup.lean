@@ -40,7 +40,8 @@ variable (F : Subfield ℝ)
     (QuotientAddGroup.mk' (nsmulAddMonoidHom (α := unitRing F) (N + 1)).range) ⊥
 
 /-- **The archimedean topology on `R`**: induced by the canonical embedding of `L = F(i)` into its mixed space. -/
-@[reducible] def archTop [NumberField F] : TopologicalSpace (unitRing F) :=
+-- `[NumberField F]` is not read by the value at the pin; it is kept, since dropping it moves the stored types of `archTop`, `tauPrime` and every statement over them (FS-131 inventory item 863, ruling 1)
+@[reducible, nolint unusedArguments] def archTop [NumberField F] : TopologicalSpace (unitRing F) :=
   TopologicalSpace.induced
     (fun r : unitRing F =>
       NumberField.mixedEmbedding (fieldI F) ⟨(r : ℂ), UnitRing.unitRingOver_le_planeOverSubring F r.2⟩)

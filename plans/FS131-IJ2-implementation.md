@@ -6,7 +6,11 @@ cores, 31 GB.*
 
 ## Theorems this phase proved
 
-(Filled at each saved stage; the axioms are printed from the built tree at the build stage.)
+Each [kernel]; under `HadwigerNelson.Rigidity`. Axioms as printed from an elaboration of the module's text
+(`data/fs131/ij2/logs/M3ax.log`); the print from the built tree is the last stage's.
+- **M3, `Rigidity/InvariantMeasure`** (2 leaves): `exists_shiftInvariant_on`, `exists_rotInvariant_of_shiftInvariant`;
+  with them **`invariantMeasureOnClosed_of_countable : ∀ (F : Subfield ℝ) [Countable ↥(unitRing F)],
+  InvariantMeasureOnClosed F`** has no leaf below it — `[propext, Classical.choice, Quot.sound]` each.
 
 ## Stage 1 — SAVED: the readback, the leaves beside their plans, the stored statements before any edit
 
@@ -44,3 +48,59 @@ eight modules this job's edits can reach: the three it writes — `ContinuityGro
 stored type can lack one. The files declare no instance; their definitions are `ContinuityGroup`'s `profTop`, `archTop`,
 `tauPrime` and the private `archHom`, `fivePow`, each with its written binders in its stored type (`archTop`, `tauPrime`,
 `archHom` carry `[NumberField ↥F]`, as written; `profTop`, `fivePow` none). No finding.
+
+## Stage 2 — SAVED: the attribute on `archTop`, and the lint
+
+**2.1 The attribute** (item 863 ruling 1). `Proofs/HadwigerNelson/Rigidity/ContinuityGroup.lean` l. 43–44: `@[reducible]`
+became `@[reducible, nolint unusedArguments]` (one attribute block, `LEAN.md` FS131-LP1), with a one-line `--` comment
+above it giving the reason ("`[NumberField F]` is not read by the value at the pin; it is kept, since dropping it moves the
+stored types of `archTop`, `tauPrime` and every statement over them (FS-131 inventory item 863, ruling 1)"). `git diff`
+on the file: that comment line and that attribute line, nothing else.
+
+**2.2 Build 1** (with M3's proofs in their module, stage 3; `./scripts/build.sh` under the slot, `MEMMAX=10G BATCH=8`;
+`logs/build1.log`, full output `logs/build1-full.log`, gate log `build/gate/build/20261014T151200Z-3563909.log`): `OK — 256 of
+256 batches, 9 module(s) rebuilt, 17 module(s) with warnings, 7m57s`, exit 0. Rebuilt: `InvariantMeasure`,
+`ContinuityGroup`, `BochnerTau`, `CountTorus`, `CountResidue`, `CountCompletion`, `CountExtension`, `CountDescent`,
+`Proofs`. **No warning from `ContinuityGroup` or `InvariantMeasure`**; `BochnerTau`'s four warnings are its four leaves'
+``declaration uses `sorry` ``.
+
+**2.3 The lint** (`lake lint --no-build -- --no-build --trace` under the slot). **Control first, on the tree before the
+attribute** (`logs/lint-before.log`): exit 1, `unusedArguments` "Failed with 1 messages", the one message
+`ContinuityGroup.lean:42:1: error: HadwigerNelson.Rigidity.archTop 1 unused argument: argument 2: [NumberField ↥F]` — the
+finding present, the gate red and naming it. **After build 1** (`logs/lint-after1.log`): exit 0, 14 of 14 linters
+"Passed!", `-- Linting passed for Proofs.`
+
+**2.4 No statement changed, from the kernel's side** (stage 1's dump against build 1's, `statements-b1.txt`, `.xz` +
+sha256; `tools/fs131_ij2_statements.py before b1 1e438c171`, FS131-IJ1's reader aimed at the eight modules, its ruled-change
+options unused): **PASS** (`statements-compare-b1.out`) — 111 named constants (kind, stored type, module), 30 data
+definitions' values (`profTop`, `archTop`, `tauPrime` among them: the attribute moved no stored term), 3 example heads; no
+new public constant; 16 new private constants, all `InvariantMeasure`'s helpers (stage 3); internal constants 78 → 80.
+The five downstream modules unchanged. **Control** (`--control`, 8 plants: an M3 leaf's type, `archTop`'s value, an M2b
+leaf missing, `count_of_oneAvoidingDensityBound`'s type downstream, `tauPrime` moved, a new public constant, an axiom, a
+leaf become a definition): **8 of 8 reported** (`statements-control-b1.out`).
+
+## Stage 3 — SAVED: M3, `Rigidity/InvariantMeasure`, both leaves
+
+Written against a copy (`data/fs131/ij2/work/InvariantMeasure.lean`; rounds `logs/M3-1.log`, `M3-2.log`, the second exit 0
+with **no warning**, under `lake env lean` with the lakefile's two options), then copied over the module; built in build 1
+(§ 2.2) with no warning. `git diff -U0` on the module removes the two `sorry` lines and adds proofs, private helpers and
+one `--` comment; no statement, docstring or import changed. About 305 lines against the plan's 500–800 (about 0.5).
+
+| leaf | route as planned? |
+|---|---|
+| `exists_shiftInvariant_on` | **another route, shorter** (no almost-invariant weights): FS133-IB1's (`Plane/OneClass/InvariantLaw` on `main`, private there): a closed nonempty class of probabilities on a compact space, stable under one continuous map and under finite uniform averages, holds a probability the map fixes (a Cesàro limit along an ultrafilter); a commuting family is fixed at once by compactness of the class (`IsCompact.inter_iInter_nonempty`), the finite case by induction. Here the class is `{μ : μ Kᶜ = 0}` (closed by the portmanteau inequality for the closed `K`), the maps the shifts, the start the point mass at `c₀ ∈ K` |
+| `exists_rotInvariant_of_shiftInvariant` | the same theorem with the class `{μ : μ Kᶜ = 0 ∧ every shift fixes μ}` (closed: a weak limit of fixed probabilities is fixed) and the maps the rotations, which commute with each other; a rotation keeps the class by `shift_y ∘ rot_u = rot_u ∘ shift_{uy}` |
+
+**Private helpers** (16): from `Plane/OneClass/InvariantLaw` (FS133-IB1) with their proofs — `avgMeasure` (a private
+definition), `avgMeasure_apply`, `isProbabilityMeasure_avgMeasure`, `avgMeasure_map`, `integral_avgMeasure`,
+`map_eq_of_tendsto`, `map_eq_of_tendsto_of_eventually`, `measure_compl_eq_zero_of_tendsto`, `isClosed_setOf_of_tendsto`,
+`exists_fixed_of_average`, `exists_common_fixed` (its averaging step through `avgMeasure_map_eq`); new —
+`avgMeasure_eq_zero`, `avgMeasure_map_eq`, `continuous_shiftCol`, `continuous_rotCol`, `map_compl_eq_zero`. The copies
+are private, so no name is declared twice (their stored names carry the module); `Plane/OneClass/InvariantLaw` is not on
+this branch's ancestry and imports the `[OAIMath2026]` port, so it is not imported here. No import added (a trial with
+`Mathlib.MeasureTheory.Measure.Portmanteau` showed it unneeded: `logs/M3noimp.log`). Every hypothesis of both leaves is
+read (`hmeas` by `Measure.map_apply` and `Measure.dirac_apply'`).
+
+**Re-priced:** M3 at about 0.5 of its plan, in two elaboration rounds. **A docstring now describes another route**: the
+module's docstring and `Herglotz`'s docstring of `exists_almostInvariant_weights` ("Read by M2a … and M3") name the
+weights; M3 reads none. Docstrings are not mine to edit here; a correction owed (report).
