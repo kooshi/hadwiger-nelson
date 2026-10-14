@@ -145,6 +145,6 @@ brief or record names it; **`fs131-wnf` holds the reference copy of `main`'s com
 moved** (items 701, 715). Once a job has said its hand-back is next, a correction to its record goes into the
 inventory, not into a message (item 704). Search for a capitalised phrase case-insensitively before telling a job
 that something is absent (item 713). A message to a running job bills its context: give a standing word when the
-same kind of question comes a third time (item 726). Trees with builds in use: `fs131-wrc` (the landing),
+same kind of question comes a third time (item 726). **Clean up after every job** (Kooshi, 2026-10-14; item 734): reuse a finished tree, and delete a finished tree's `.lake/build` at its hand-back — 63 such copies (301 GB) were deleted that day; the disk is at 82 %. Trees with builds in use: `fs131-wrc` (the landing),
 `fs133-wk1`, `fs131-wch`, `fs131-wnf` (reference); `fs131-wr2`, `fs131-wc1`, `fs131-wdq` hold branches already merged
 into the landing's and are free once it is on `main`.
