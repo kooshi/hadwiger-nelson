@@ -252,7 +252,7 @@ machinery stands.**
    `exists_rat_coords`. Making them public changes no statement; it is an edit to another module's file, so it is a question
    for the coordinator (INVENTORY), not done here.
 
-## Stage 4 — SAVED: six modules typed (31 statements, 18 leaves `sorry`)
+## Stage 4 — SAVED: six modules typed (27 theorems and 6 definitions; 19 leaves `sorry`)
 
 New modules, each elaborated alone under `lake env lean` (logs `data/fs131/kr1/logs/*.log`: exit 0, every warning
 `declaration uses 'sorry'`), then the whole library through `./scripts/build.sh` (§ 4.4). Domain pass (`debruijn-domain-modeling`,
