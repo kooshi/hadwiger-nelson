@@ -1248,6 +1248,13 @@ private theorem Ym_pair (p : ℕ) [NeZero p] (φ : V p → ℝ) (A A' : List ℕ
     Ym p φ (A ++ A'.map fun x => addP p x t) = Yv p φ (A.map (pt p) ++ (A'.map (pt p)).map (· + pt p t)) := by
   rw [Ym_eq]; simp only [List.map_append, List.map_map, Function.comp_def, pt_addP]
 
+/-- A map of `affs` is a bijection of `V`. -/
+private theorem sum_act (p : ℕ) [NeZero p] {γ : V p × V p × Bool} (hγ : γ ∈ affs p) (F : V p → ℝ) :
+    ∑ z : V p, F (act γ z) = ∑ z : V p, F z := by
+  refine Fintype.sum_equiv ⟨act γ, act (inv γ), fun z => ?_, fun z => ?_⟩ _ _ fun z => rfl
+  · rw [← act_comp, inv_comp hγ]; simp [act, cmul, cj]
+  · rw [← act_comp, comp_inv hγ]; simp [act, cmul, cj]
+
 /-- A block's terms at the moments, over a list of representative monomials: for each of its weights
 `R₀₀ c² Y([]) + Σ_a 2 R₀,₁₊ₐ c σ Y(a) + Σ_{a,a'} R₁₊ₐ,₁₊ₐ' Σ_t κ(t) Y(a ∪ (a' + t))` (`SOUNDNESS.md` § 4). -/
 private noncomputable def blockT (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (b : Blk) (reps : List (List ℕ)) : ℝ :=
@@ -1437,12 +1444,6 @@ private theorem blockT_nonneg (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (b : 
   obtain ⟨wi, hwi, rfl⟩ := List.mem_map.1 hx
   exact weight_nonneg C φ b reps hpsd hm wi (hw wi hwi)
 
-/-- **Leaf L3** (K2h): the times-1 families are the blocks' terms — the orbit rows are phase 1's (`orowsOK`), each
-pair's transporter moves its term onto its orbit's representative, `R` is symmetric and `κ` even. -/
-private theorem opSum_O23_eq (C : Cert) [NeZero C.p] (hC : globalOK C = true) (φ : V C.p → ℝ) :
-    opSum C.p φ (opsO2 C ++ opsO3 C (orbRows C)) = (C.blocks1.map fun b => blockT C φ b C.reps).sum := by
-  sorry
-
 /-! ### Leaf L4: the q-part -/
 
 private theorem opVal_opI (a : List ℕ) (t : ℕ) (b : List ℕ) (v : ℤ) : opVal (opI a t b v) = v := by
@@ -1468,13 +1469,6 @@ private noncomputable def Pm {p : ℕ} (φ : V p → ℝ) (γ : V p × V p × Bo
 private theorem Ym_append (p : ℕ) [NeZero p] (φ : V p → ℝ) (m l : List ℕ) :
     Ym p φ (m ++ l) = ∑ γ ∈ affs p, Pm φ γ m * Pm φ γ l := by
   simp [Ym, Pm, List.map_append, List.prod_append]
-
-/-- A map of `affs` is a bijection of `V`. -/
-private theorem sum_act (p : ℕ) [NeZero p] {γ : V p × V p × Bool} (hγ : γ ∈ affs p) (F : V p → ℝ) :
-    ∑ z : V p, F (act γ z) = ∑ z : V p, F z := by
-  refine Fintype.sum_equiv ⟨act γ, act (inv γ), fun z => ?_, fun z => ?_⟩ _ _ fun z => rfl
-  · rw [← act_comp, inv_comp hγ]; simp [act, cmul, cj]
-  · rw [← act_comp, comp_inv hγ]; simp [act, cmul, cj]
 
 private theorem act_add {p : ℕ} (γ : V p × V p × Bool) (z s : V p) :
     act γ (z + s) = act γ z + act (0, γ.2.1, γ.2.2) s := by
@@ -1598,7 +1592,7 @@ private theorem foldl_cond {α : Type} (P : α → Bool) (g : α → ℤ) : ∀ 
     · simp
     · simp only [cond_true, if_true]; show a + g x + _ = _; ring
 
-private theorem finset_list_comm {α : Type} (s : Finset ℕ) (L : List α) (g : ℕ → α → ℝ) :
+private theorem finset_list_comm {α : Type} {M : Type*} [AddCommMonoid M] (s : Finset ℕ) (L : List α) (g : ℕ → α → M) :
     ∑ ν ∈ s, (L.map (g ν)).sum = (L.map fun b => ∑ ν ∈ s, g ν b).sum := by
   induction L with
   | nil => simp
@@ -1683,6 +1677,606 @@ private theorem zip_map_range {α β : Type} (l : List α) (g : ℕ → β) (d :
   refine List.ext_getElem (by simp) fun i h1 h2 => ?_
   simp only [List.getElem_zip, List.getElem_range, List.getElem_map]
   rw [getD_of_lt _ _ (by simpa using h2)]
+
+/-! ### Leaf L3: phase 1's buckets -/
+
+/-- Buckets of at most 16, every one but the last full. -/
+private def Bk {α : Type} (L : List (List α)) : Prop :=
+  ∀ k < L.length, (L.getD k []).length ≤ 16 ∧ (k + 1 < L.length → (L.getD k []).length = 16)
+
+private theorem Bk_cons {α : Type} {b : List α} {L : List (List α)} (h : Bk (b :: L)) :
+    b.length ≤ 16 ∧ (L ≠ [] → b.length = 16) ∧ Bk L := by
+  refine ⟨(h 0 (by simp)).1, fun hL => (h 0 (by simp)).2 (by simpa using List.length_pos_of_ne_nil hL),
+    fun k hk => ?_⟩
+  have := h (k + 1) (by simp; omega)
+  simp only [List.getD_cons_succ, List.length_cons] at this
+  exact ⟨this.1, fun h' => this.2 (by omega)⟩
+
+private theorem modify_append {α : Type} (f : α → α) : ∀ (l l' : List α) (r : ℕ),
+    (l ++ l').modify r f = if r < l.length then l.modify r f ++ l' else l ++ l'.modify (r - l.length) f
+  | [], l', r => by simp
+  | a :: l, l', r => by
+    rw [List.cons_append, List.modify_cons, List.modify_cons]
+    cases r with
+    | zero => simp
+    | succ r =>
+      simp only [Nat.add_one_ne_zero, if_false, Nat.add_sub_cancel, modify_append f l l' r, List.length_cons]
+      by_cases h : r < l.length
+      · rw [if_pos h, if_pos (by omega)]; rfl
+      · rw [if_neg h, if_neg (by omega), Nat.add_sub_add_right]; rfl
+
+private theorem getD_app {α : Type} (l l' : List α) (d : α) {n : ℕ} (h : n < l.length) :
+    (l ++ l').getD n d = l.getD n d := by
+  rw [List.getD_eq_getElem?_getD, List.getElem?_append_left h, ← List.getD_eq_getElem?_getD]
+
+private theorem getD_app_right {α : Type} (l l' : List α) (d : α) {n : ℕ} (h : l.length ≤ n) :
+    (l ++ l').getD n d = l'.getD (n - l.length) d := by
+  rw [List.getD_eq_getElem?_getD, List.getElem?_append_right h, ← List.getD_eq_getElem?_getD]
+
+private theorem getD_default {α : Type} (l : List α) (d : α) {n : ℕ} (h : l.length ≤ n) : l.getD n d = d := by
+  rw [List.getD_eq_getElem?_getD, List.getElem?_eq_none h]; rfl
+
+private theorem Bk_getD {α : Type} (d : α) : ∀ (L : List (List α)), Bk L → ∀ r,
+    L.flatten.getD r d = (L.getD (r / 16) []).getD (r % 16) d
+  | [], _, r => by simp
+  | b :: L, h, r => by
+    obtain ⟨hb, hb16, hL⟩ := Bk_cons h
+    rw [List.flatten_cons]
+    by_cases hr : r < 16
+    · rw [Nat.div_eq_of_lt hr, Nat.mod_eq_of_lt hr, List.getD_cons_zero]
+      by_cases hrb : r < b.length
+      · exact getD_app _ _ _ hrb
+      · by_cases hL0 : L = []
+        · subst hL0; simp
+        · exact absurd (hb16 hL0) (by omega)
+    · have e1 : r / 16 = (r - 16) / 16 + 1 := by omega
+      have e2 : r % 16 = (r - 16) % 16 := by omega
+      rw [e1, e2, List.getD_cons_succ]
+      by_cases hL0 : L = []
+      · subst hL0; simp only [List.flatten_nil, List.append_nil, List.getD_nil]
+        rw [getD_default _ _ (by omega)]
+      · rw [getD_app_right _ _ _ (by rw [hb16 hL0]; omega), hb16 hL0]
+        exact Bk_getD d L hL (r - 16)
+
+private theorem Bk_mem (L : List (List ORow)) (h : Bk L) (r : ℕ) : bmem L r = true ↔ r < L.flatten.length := by
+  induction L generalizing r with
+  | nil => simp [bmem]
+  | cons b L ih =>
+    obtain ⟨hb, hb16, hL⟩ := Bk_cons h
+    simp only [bmem, Bool.and_eq_true, Nat.blt_eq, ndiv, nmod, List.flatten_cons, List.length_append,
+      List.length_cons] at ih ⊢
+    by_cases hr : r < 16
+    · rw [Nat.div_eq_of_lt hr, Nat.mod_eq_of_lt hr, List.getD_cons_zero]
+      by_cases hL0 : L = []
+      · subst hL0; simp
+      · rw [hb16 hL0]; omega
+    · have e1 : r / 16 = (r - 16) / 16 + 1 := by omega
+      have e2 : r % 16 = (r - 16) % 16 := by omega
+      rw [e1, e2, List.getD_cons_succ]
+      by_cases hL0 : L = []
+      · subst hL0; simp; omega
+      · rw [hb16 hL0]
+        have := ih hL (r - 16)
+        constructor
+        · rintro ⟨h1, h2⟩; have := this.1 ⟨by omega, h2⟩; omega
+        · intro h'; have := this.2 (by omega); exact ⟨by omega, this.2⟩
+
+private theorem Bk_mod (L : List (List ORow)) (h : Bk L) (r : ℕ) (f : ORow → ORow) :
+    Bk (bmod L r f) ∧ (bmod L r f).flatten = L.flatten.modify r f := by
+  constructor
+  · intro k hk
+    simp only [bmod, List.length_modify] at hk ⊢
+    rw [getD_modify _ _ _ _ _ hk]
+    split_ifs
+    · rw [List.length_modify]; exact h k hk
+    · exact h k hk
+  · induction L generalizing r with
+    | nil => simp [bmod]
+    | cons b L ih =>
+      obtain ⟨hb, hb16, hL⟩ := Bk_cons h
+      simp only [bmod, ndiv, nmod] at ih ⊢
+      rw [List.modify_cons, List.flatten_cons, modify_append]
+      by_cases hr : r < 16
+      · rw [if_pos (Nat.div_eq_of_lt hr), Nat.mod_eq_of_lt hr, List.flatten_cons]
+        by_cases hrb : r < b.length
+        · rw [if_pos hrb]
+        · by_cases hL0 : L = []
+          · subst hL0; rw [if_neg hrb, List.modify_eq_self (by omega)]; simp
+          · exact absurd (hb16 hL0) (by omega)
+      · rw [if_neg (by omega), List.flatten_cons]
+        by_cases hL0 : L = []
+        · subst hL0; simp only [List.modify_nil, List.flatten_nil, List.append_nil]
+          rw [if_neg (by omega)]
+        · rw [if_neg (by rw [hb16 hL0]; omega), hb16 hL0]
+          have e1 : r / 16 - 1 = (r - 16) / 16 := by omega
+          have e2 : r % 16 = (r - 16) % 16 := by omega
+          rw [e1, e2, ih hL (r - 16)]
+
+private theorem bget_eq (L : List (List ORow)) (h : Bk L) (r : ℕ) : bget L r = L.flatten.getD r ([], [], 0, 0) := by
+  rw [Bk_getD _ L h r]; rfl
+
+/-- `bucket16`'s recursion. -/
+private def brec {α : Type} (n : ℕ) : List α → List (List α) :=
+  Nat.rec (motive := fun _ => List α → List (List α)) (fun _ => [])
+    (fun _ ih l => cond l.isEmpty [] (l.take 16 :: ih (l.drop 16))) n
+
+private theorem brec_spec {α : Type} : ∀ (n : ℕ) (l : List α), l.length ≤ 16 * n →
+    (brec n l).flatten = l ∧ Bk (brec n l) ∧ (brec n l = [] → l = [])
+  | 0, l, h => by
+    have : l = [] := List.eq_nil_of_length_eq_zero (by omega)
+    subst this; exact ⟨rfl, fun k hk => absurd hk (by simp [brec]), fun _ => rfl⟩
+  | n + 1, l, h => by
+    have e : brec (n + 1) l = cond l.isEmpty [] (l.take 16 :: brec n (l.drop 16)) := rfl
+    cases hl : l.isEmpty
+    · rw [e, hl, cond_false]
+      have hne : l ≠ [] := by intro h'; subst h'; simp at hl
+      obtain ⟨h1, h2, h3⟩ := brec_spec n (l.drop 16) (by rw [List.length_drop]; omega)
+      refine ⟨by rw [List.flatten_cons, h1, List.take_append_drop], fun k hk => ?_, fun h' => by simp at h'⟩
+      cases k with
+      | zero =>
+        simp only [List.getD_cons_zero, List.length_take, List.length_cons]
+        refine ⟨min_le_left _ _, fun h' => ?_⟩
+        have : brec n (l.drop 16) ≠ [] := by intro h0; rw [h0] at h'; simp at h'
+        have : l.drop 16 ≠ [] := fun h0 => this (by rw [h0]; cases n <;> rfl)
+        have : 16 < l.length := by
+          by_contra hc; exact this (List.drop_eq_nil_of_le (by omega))
+        omega
+      | succ k =>
+        simp only [List.getD_cons_succ, List.length_cons] at hk ⊢
+        exact ⟨(h2 k (by omega)).1, fun h' => (h2 k (by omega)).2 (by omega)⟩
+    · have : l = [] := List.isEmpty_iff.1 hl
+      subst this; rw [e]; exact ⟨rfl, fun k hk => absurd hk (by simp), fun _ => rfl⟩
+
+private theorem bucket16_spec {α : Type} (l : List α) : (bucket16 l).flatten = l ∧ Bk (bucket16 l) := by
+  obtain ⟨h1, h2, -⟩ := brec_spec (Nat.add (Nat.div l.length 16) 1) l
+    (by simp only [Nat.add_eq, ndiv]; omega)
+  exact ⟨h1, h2⟩
+
+/-! ### Leaf L3: the transport, the swap and the pairs -/
+
+private theorem kz_neg (C : Cert) [NeZero C.p] (u fp : ℕ) (w : V C.p) : kz C u fp (-w) = kz C u fp w := by
+  unfold kz
+  split_ifs with hu
+  · rfl
+  · congr 1
+    have hd : dz u (-w) = -dz u w := by simp only [dz, Prod.fst_neg, Prod.snd_neg]; ring
+    rw [hd]
+    refine Fintype.sum_equiv (Equiv.addRight (-dz u w)) _ _ fun j => ?_
+    simp only [Equiv.coe_addRight, neg_add_cancel_right]; ring
+
+/-- The moment of `X ∪ (Y + w)`, read from `Y`'s side. -/
+private theorem act_trans_fun {p : ℕ} (z : V p) : act (z, ((1 : ZMod p), (0 : ZMod p)), false) = fun w => w + z :=
+  funext (act_trans z)
+
+private theorem Yv_pair_swap (p : ℕ) [NeZero p] (φ : V p → ℝ) (X Y : List (V p)) (w : V p) :
+    Yv p φ (X ++ Y.map (· + w)) = Yv p φ (Y ++ X.map (· + -w)) := by
+  rw [← Yv_map_act φ (trans_mem (-w))]
+  refine Yv_perm φ ?_
+  simp only [List.map_append, List.map_map, Function.comp_def, act_trans_fun, add_neg_cancel_right, List.map_id']
+  exact List.perm_append_comm
+
+/-- **The swap**: `Σ_w κ(w) Y(Y_j ∪ (Y_i + w)) = Σ_w κ(w) Y(Y_i ∪ (Y_j + w))` (`κ` even). -/
+private theorem sum_pair_swap (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (u fp : ℕ) (X Y : List (V C.p)) :
+    ∑ w : V C.p, (kz C u fp w : ℝ) * Yv C.p φ (Y ++ X.map (· + w)) =
+      ∑ w : V C.p, (kz C u fp w : ℝ) * Yv C.p φ (X ++ Y.map (· + w)) := by
+  simp only [Yv_pair_swap C.p φ Y X]
+  refine Fintype.sum_equiv (Equiv.neg _) _ _ fun w => ?_
+  simp only [Equiv.neg_apply, kz_neg]
+
+private theorem act_lin_add {p : ℕ} (s : V p) (e : Bool) (y z : V p) :
+    act ((0 : V p), s, e) (y + z) = act (0, s, e) y + act (0, s, e) z := by
+  simp only [act, cj_add, cmul_add, add_zero]
+
+/-- **The transport** of one orbit row onto its pair, for one weight. -/
+private theorem transport_w (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (u fp : ℕ) (A0 A1 ai aj : List ℕ)
+    (c d e : ℕ) (hc : c ≤ C.p) (hd : d ≤ C.p) (hu : isUnit C.p c d = true)
+    (hsw : ((A0.map (gmap C.p c d e)).Perm ai ∧ (A1.map (gmap C.p c d e)).Perm aj) ∨
+      ((A0.map (gmap C.p c d e)).Perm aj ∧ (A1.map (gmap C.p c d e)).Perm ai)) :
+    ∑ t ∈ Finset.range (C.p * C.p), (kz C u fp (pt C.p (gmap C.p c d e t)) : ℝ) *
+      Ym C.p φ (A0 ++ A1.map fun x => addP C.p x t) =
+    ∑ t ∈ Finset.range (C.p * C.p), (kz C u fp (pt C.p t) : ℝ) * Ym C.p φ (ai ++ aj.map fun x => addP C.p x t) := by
+  set δ : V C.p × V C.p × Bool := ((0 : V C.p), ((c : ZMod C.p), (d : ZMod C.p)), !Nat.beq e 0)
+  have hδ : δ ∈ affs C.p := (mem_affs _).2 (isUnit_norm C.p c d hu)
+  have hg : ∀ x, pt C.p (gmap C.p c d e x) = act δ (pt C.p x) := fun x => by
+    rw [pt_gmap C.p c d e x hc hd]; simp [δ, act]
+  simp only [Ym_pair, hg]
+  rw [sum_codes C.p (fun z => (kz C u fp (act δ z) : ℝ) * Yv C.p φ (A0.map (pt C.p) ++ (A1.map (pt C.p)).map (· + z))),
+    sum_codes C.p (fun z => (kz C u fp z : ℝ) * Yv C.p φ (ai.map (pt C.p) ++ (aj.map (pt C.p)).map (· + z)))]
+  have hlin : ∀ y z : V C.p, act δ (y + z) = act δ y + act δ z := act_lin_add _ _
+  have himg : ∀ z, Yv C.p φ (A0.map (pt C.p) ++ (A1.map (pt C.p)).map (· + z)) =
+      Yv C.p φ ((A0.map (gmap C.p c d e)).map (pt C.p) ++ ((A1.map (gmap C.p c d e)).map (pt C.p)).map (· + act δ z)) :=
+    fun z => by
+      rw [← Yv_map_act φ hδ]
+      congr 1
+      simp only [List.map_append, List.map_map, Function.comp_def, hg, hlin]
+  simp only [himg]
+  rcases hsw with ⟨h0, h1⟩ | ⟨h0, h1⟩
+  · simp only [Yv_perm φ ((h0.map (pt C.p)).append ((h1.map (pt C.p)).map _))]
+    exact sum_act C.p hδ (fun w => (kz C u fp w : ℝ) * Yv C.p φ (ai.map (pt C.p) ++ (aj.map (pt C.p)).map (· + w)))
+  · simp only [Yv_perm φ ((h0.map (pt C.p)).append ((h1.map (pt C.p)).map _))]
+    rw [sum_act C.p hδ (fun w => (kz C u fp w : ℝ) * Yv C.p φ (aj.map (pt C.p) ++ (ai.map (pt C.p)).map (· + w)))]
+    exact sum_pair_swap C φ u fp _ _
+
+/-- `W(i, j)`, the pair's moment sum, is symmetric. -/
+private theorem W_symm (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (u fp : ℕ) (ai aj : List ℕ) :
+    ∑ t ∈ Finset.range (C.p * C.p), (kz C u fp (pt C.p t) : ℝ) * Ym C.p φ (aj ++ ai.map fun x => addP C.p x t) =
+    ∑ t ∈ Finset.range (C.p * C.p), (kz C u fp (pt C.p t) : ℝ) * Ym C.p φ (ai ++ aj.map fun x => addP C.p x t) := by
+  simp only [Ym_pair]
+  rw [sum_codes C.p (fun z => (kz C u fp z : ℝ) * Yv C.p φ (aj.map (pt C.p) ++ (ai.map (pt C.p)).map (· + z))),
+    sum_codes C.p (fun z => (kz C u fp z : ℝ) * Yv C.p φ (ai.map (pt C.p) ++ (aj.map (pt C.p)).map (· + z)))]
+  exact sum_pair_swap C φ u fp _ _
+
+/-- The pairs `i ≤ j`, as a double sum. -/
+private theorem repPairs_sum {M : Type*} [AddCommMonoid M] (G : ℕ × ℕ → M) (N : ℕ) :
+    ((repPairs N).map G).sum = ∑ i ∈ Finset.range N, ∑ k ∈ Finset.range (N - i), G (i, i + k) := by
+  have hfm : ∀ (l : List ℕ) (f : ℕ → List (ℕ × ℕ)), ((l.flatMap f).map G).sum = (l.map fun i => ((f i).map G).sum).sum := by
+    intro l f; induction l with
+    | nil => rfl
+    | cons x l ih => rw [List.flatMap_cons, List.map_append, List.sum_append, ih, List.map_cons, List.sum_cons]
+  rw [repPairs, hfm, lsum_range]
+  refine Finset.sum_congr rfl fun i _ => ?_
+  rw [List.range'_eq_map_range, List.map_map, List.map_map, lsum_range]; rfl
+
+/-- **Doubling**: over the pairs `i ≤ j`, `mult·F` sums to the full double sum of a symmetric `F`. -/
+private theorem pairs_double (F : ℕ → ℕ → ℝ) (hF : ∀ i j, F i j = F j i) : ∀ N : ℕ,
+    ∑ i ∈ Finset.range N, ∑ k ∈ Finset.range (N - i), (if i = i + k then (1 : ℝ) else 2) * F i (i + k) =
+      ∑ a ∈ Finset.range N, ∑ a' ∈ Finset.range N, F a a'
+  | 0 => by simp
+  | N + 1 => by
+    have hrow : ∀ i ∈ Finset.range N, ∑ k ∈ Finset.range (N + 1 - i), (if i = i + k then (1 : ℝ) else 2) * F i (i + k) =
+        ∑ k ∈ Finset.range (N - i), (if i = i + k then (1 : ℝ) else 2) * F i (i + k) + 2 * F i N := fun i hi => by
+      have := Finset.mem_range.1 hi
+      rw [show N + 1 - i = (N - i) + 1 by omega, Finset.sum_range_succ, if_neg (by omega),
+        show i + (N - i) = N by omega]
+    rw [Finset.sum_range_succ, Finset.sum_congr rfl hrow, Finset.sum_add_distrib, pairs_double F hF N]
+    simp only [Nat.add_sub_cancel_left, Finset.sum_range_one, add_zero, if_pos, one_mul]
+    rw [Finset.sum_range_succ, Finset.sum_range_succ]
+    simp only [Finset.sum_range_succ, Finset.sum_add_distrib]
+    rw [← Finset.mul_sum]
+    have : ∑ a ∈ Finset.range N, F N a = ∑ a ∈ Finset.range N, F a N := Finset.sum_congr rfl fun a _ => hF N a
+    rw [this]; ring
+
+/-! ### Leaf L3: one pair of phase 1 -/
+
+private theorem shl_eq (a k : ℕ) : Nat.shiftLeft a k = a * 2 ^ k := by
+  rw [show Nat.shiftLeft a k = a <<< k from rfl, Nat.shiftLeft_eq]
+
+private theorem foldl_nadd' {α : Type} (l : List α) (h : α → ℕ) (a : ℕ) :
+    l.foldl (fun a x => Nat.add a (h x)) a = a + (l.map h).sum := by
+  induction l generalizing a with
+  | nil => simp
+  | cons x l ih => rw [List.foldl_cons, ih, List.map_cons, List.sum_cons, Nat.add_eq, add_assoc]
+
+private theorem zip_map_same {α β γ : Type} (l : List α) (f : α → β) (g : α → γ) :
+    (l.map f).zip (l.map g) = l.map fun x => (f x, g x) := by
+  induction l with
+  | nil => rfl
+  | cons x l ih => simp [ih]
+
+private theorem list_sum_comm {α β : Type} (l1 : List α) (l2 : List β) (f : α → β → ℝ) :
+    (l1.map fun x => (l2.map (f x)).sum).sum = (l2.map fun y => (l1.map fun x => f x y).sum).sum := by
+  induction l1 with
+  | nil => simp
+  | cons x l1 ih => simp only [List.map_cons, List.sum_cons, ih, ← List.sum_map_add]
+
+private theorem list_sub_sum {α : Type} (l : List α) (f g : α → ℝ) :
+    (l.map f).sum - (l.map g).sum = (l.map fun x => f x - g x).sum := by
+  induction l with
+  | nil => simp
+  | cons x l ih => simp only [List.map_cons, List.sum_cons, ← ih]; ring
+
+/-- Two lists of at most seven points with one bag key are one multiset. -/
+private theorem bag_perm (l l' : List ℕ) (h : bag l = bag l') (hl : l.length < 8) (hl' : l'.length < 8) : l.Perm l' := by
+  have hx : ∀ x ∈ l, x < l.sum + l'.sum + 1 := fun x hx => by have := List.le_sum_of_mem hx; omega
+  have hx' : ∀ x ∈ l', x < l.sum + l'.sum + 1 := fun x hx => by have := List.le_sum_of_mem hx; omega
+  have h1 := dec_bag _ l hl hx
+  have h2 := dec_bag _ l' hl' hx'
+  rw [h] at h1
+  exact h1.symm.trans h2
+
+private theorem pack_succ (B : ℕ) (a : ℕ → ℕ) (k n : ℕ) :
+    (∑ i ∈ Finset.range n, a (k + 1 + i) * B ^ i) * B + a k = ∑ i ∈ Finset.range (n + 1), a (k + i) * B ^ i := by
+  rw [Finset.sum_range_succ', Finset.sum_mul]
+  simp only [add_zero, pow_zero, mul_one]
+  congr 1
+  refine Finset.sum_congr rfl fun i _ => ?_
+  rw [pow_succ, ← mul_assoc, show k + 1 + i = k + (i + 1) by omega]
+
+/-- `krow` packs `t ↦ max(±v_t, 0)` at width `w`. -/
+private theorem krow_eq (C : Cert) (bt : List (ℕ × List ℤ)) (c d e : ℕ) :
+    krow C bt c d e = (∑ t ∈ Finset.range (C.p * C.p), Int.toNat (kblock C bt (gmap C.p c d e t)) * (2 ^ C.w) ^ t,
+      ∑ t ∈ Finset.range (C.p * C.p), Int.toNat (Int.neg (kblock C bt (gmap C.p c d e t))) * (2 ^ C.w) ^ t) := by
+  unfold krow
+  rw [show Nat.mul C.p C.p = C.p * C.p from rfl, List.range_eq_range']
+  generalize C.p * C.p = n
+  suffices ∀ k, (List.range' k n).foldr (fun t acc =>
+      (Nat.add (Nat.shiftLeft acc.1 C.w) (Int.toNat (kblock C bt (gmap C.p c d e t))),
+        Nat.add (Nat.shiftLeft acc.2 C.w) (Int.toNat (Int.neg (kblock C bt (gmap C.p c d e t)))))) (0, 0) =
+      (∑ i ∈ Finset.range n, Int.toNat (kblock C bt (gmap C.p c d e (k + i))) * (2 ^ C.w) ^ i,
+        ∑ i ∈ Finset.range n, Int.toNat (Int.neg (kblock C bt (gmap C.p c d e (k + i)))) * (2 ^ C.w) ^ i) by
+    simpa using this 0
+  induction n with
+  | zero => intro k; rfl
+  | succ n ih =>
+    intro k
+    rw [List.range'_succ, List.foldr_cons, ih (k + 1)]
+    simp only [shl_eq, Nat.add_eq]
+    exact Prod.ext (pack_succ _ (fun t => Int.toNat (kblock C bt (gmap C.p c d e t))) k n)
+      (pack_succ _ (fun t => Int.toNat (Int.neg (kblock C bt (gmap C.p c d e t)))) k n)
+
+private theorem kmax_ge (C : Cert) (b : Blk) (x : ℕ) (hx : x < C.p * C.p) :
+    Int.natAbs (kblock C (btab C b) x) ≤ kmax C b := by
+  unfold kmax
+  have : ∀ (l : List ℕ) (a : ℕ), (x ∈ l → Int.natAbs (kblock C (btab C b) x) ≤
+      l.foldl (fun a x => Nat.max a (Int.natAbs (kblock C (btab C b) x))) a) ∧
+      a ≤ l.foldl (fun a x => Nat.max a (Int.natAbs (kblock C (btab C b) x))) a := by
+    intro l
+    induction l with
+    | nil => intro a; simp
+    | cons y l ih =>
+      intro a
+      rw [List.foldl_cons]
+      obtain ⟨h1, h2⟩ := ih (Nat.max a (Int.natAbs (kblock C (btab C b) y)))
+      refine ⟨fun hm => ?_, le_trans (Nat.le_max_left _ _) h2⟩
+      rcases List.mem_cons.1 hm with rfl | hm
+      · exact le_trans (Nat.le_max_right _ _) h2
+      · exact h1 hm
+  exact (this _ 0).1 (List.mem_range.2 hx)
+
+/-- `K_b` as a sum over the block's weights. -/
+private theorem kblock_eq (C : Cert) (b : Blk) (x : ℕ) :
+    kblock C (btab C b) x = (b.wts.map fun wi => kappa C wi x).sum := by
+  unfold kblock btab
+  rw [foldl_iadd, zero_add, List.map_map]; rfl
+
+/-! ### Leaf L3: phase 1's invariant -/
+
+/-- Orbit row `r`'s representative pair. -/
+private def orb (C : Cert) (r : ℕ) : List ℕ × List ℕ := C.orbits.getD r ([], [])
+
+private def p1f (C : Cert) (s : P1St) : ℕ := (s.2.2.2.1.read C.k1 C.per1).1
+private def p1rho (C : Cert) (s : P1St) : ℕ := Nat.div (Nat.div (p1f C s) 2) (Nat.mul 2 (Nat.add C.p 1))
+private def p1ent (C : Cert) (kt : List ((ℕ × ℕ × ℕ) × List (ℕ × ℕ))) (s : P1St) : (ℕ × ℕ × ℕ) × List (ℕ × ℕ) :=
+  kt.getD (Nat.mod (Nat.div (p1f C s) 2) (Nat.mul 2 (Nat.add C.p 1))) ((0, 0, 0), [])
+private def p1coefs (s : P1St) (ij : ℕ × ℕ) : List ℤ :=
+  s.2.2.2.2.map fun l => Int.mul (cond (Nat.beq ij.1 ij.2) 1 2) (l.headD 0)
+private def p1addP (C : Cert) (kt : List ((ℕ × ℕ × ℕ) × List (ℕ × ℕ))) (s : P1St) (ij : ℕ × ℕ) : ℕ :=
+  ((p1coefs s ij).zip (p1ent C kt s).2).foldl (fun a x =>
+    Nat.add a (Nat.add (Nat.mul (Int.toNat x.1) x.2.1) (Nat.mul (Int.toNat (Int.neg x.1)) x.2.2))) 0
+private def p1addN (C : Cert) (kt : List ((ℕ × ℕ × ℕ) × List (ℕ × ℕ))) (s : P1St) (ij : ℕ × ℕ) : ℕ :=
+  ((p1coefs s ij).zip (p1ent C kt s).2).foldl (fun a x =>
+    Nat.add a (Nat.add (Nat.mul (Int.toNat x.1) x.2.2) (Nat.mul (Int.toNat (Int.neg x.1)) x.2.1))) 0
+private def p1bnd (km : List ℕ) (s : P1St) (ij : ℕ × ℕ) : ℕ :=
+  ((p1coefs s ij).zip km).foldl (fun a x => Nat.add a (Nat.mul (Int.natAbs x.1) x.2)) 0
+private def p1good (C : Cert) (kt : List ((ℕ × ℕ × ℕ) × List (ℕ × ℕ))) (s : P1St) (ij : ℕ × ℕ) : Bool :=
+  (cond (Nat.beq (Nat.mod (p1f C s) 2) 0)
+      (Nat.beq (bag ((bget s.1 (p1rho C s)).1.map (gmap C.p (p1ent C kt s).1.1 (p1ent C kt s).1.2.1 (p1ent C kt s).1.2.2)))
+          (bag (C.reps.getD ij.1 [])) &&
+        Nat.beq (bag ((bget s.1 (p1rho C s)).2.1.map (gmap C.p (p1ent C kt s).1.1 (p1ent C kt s).1.2.1 (p1ent C kt s).1.2.2)))
+          (bag (C.reps.getD ij.2 [])))
+      (Nat.beq (bag ((bget s.1 (p1rho C s)).1.map (gmap C.p (p1ent C kt s).1.1 (p1ent C kt s).1.2.1 (p1ent C kt s).1.2.2)))
+          (bag (C.reps.getD ij.2 [])) &&
+        Nat.beq (bag ((bget s.1 (p1rho C s)).2.1.map (gmap C.p (p1ent C kt s).1.1 (p1ent C kt s).1.2.1 (p1ent C kt s).1.2.2)))
+          (bag (C.reps.getD ij.1 [])))) &&
+    bmem s.1 (p1rho C s) && isUnit C.p (p1ent C kt s).1.1 (p1ent C kt s).1.2.1 &&
+    Nat.blt ((bget s.1 (p1rho C s)).1.map (gmap C.p (p1ent C kt s).1.1 (p1ent C kt s).1.2.1 (p1ent C kt s).1.2.2)).length 8 &&
+    Nat.blt ((bget s.1 (p1rho C s)).2.1.map (gmap C.p (p1ent C kt s).1.1 (p1ent C kt s).1.2.1 (p1ent C kt s).1.2.2)).length 8 &&
+    Nat.blt (C.reps.getD ij.1 []).length 8 && Nat.blt (C.reps.getD ij.2 []).length 8
+
+private theorem p1step_eq (C : Cert) (kt : List ((ℕ × ℕ × ℕ) × List (ℕ × ℕ))) (km : List ℕ) (s : P1St) (ij : ℕ × ℕ) :
+    p1step C kt km s ij = (bmod s.1 (p1rho C s) (fun o => (o.1, o.2.1, Nat.add o.2.2.1 (p1addP C kt s ij),
+      Nat.add o.2.2.2 (p1addN C kt s ij))), s.2.1 && p1good C kt s ij, Nat.add s.2.2.1 (p1bnd km s ij),
+      (s.2.2.2.1.read C.k1 C.per1).2, s.2.2.2.2.map List.tail) := rfl
+
+/-- A times-1 coefficient of a pair. -/
+private def R1 (b : Blk) (ij : ℕ × ℕ) : ℤ := triGet b.tri (1 + ij.1) (1 + ij.2)
+/-- The multiplicity of a pair `i ≤ j`. -/
+private def mlt (ij : ℕ × ℕ) : ℤ := if ij.1 = ij.2 then 1 else 2
+
+/-- `W_b(i, j) = Σ_{ŵ ∈ b} Σ_t κ_ŵ(t) Y(a_i ∪ (a_j + t))`. -/
+private noncomputable def Wb (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (b : Blk) (ij : ℕ × ℕ) : ℝ :=
+  (b.wts.map fun wi => ∑ t ∈ Finset.range (C.p * C.p),
+    (kappa C wi t : ℝ) * Ym C.p φ (C.reps.getD ij.1 [] ++ (C.reps.getD ij.2 []).map fun x => addP C.p x t)).sum
+
+/-- A pair's share of the identity. -/
+private noncomputable def contrib1 (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (ij : ℕ × ℕ) : ℝ :=
+  (C.blocks1.map fun b => ((mlt ij * R1 b ij : ℤ) : ℝ) * Wb C φ b ij).sum
+
+/-- The rows hold `(A0, A1, Σ_t P_t B^t, Σ_t N_t B^t)`, in buckets. -/
+private def RowsOK (C : Cert) (L : List (List ORow)) (P N : ℕ → ℕ → ℕ) : Prop :=
+  Bk L ∧ L.flatten.length = C.orbits.length ∧ ∀ r < C.orbits.length, L.flatten.getD r ([], [], 0, 0) =
+    ((orb C r).1, (orb C r).2, ∑ t ∈ Finset.range (C.p * C.p), P r t * (2 ^ C.w) ^ t,
+      ∑ t ∈ Finset.range (C.p * C.p), N r t * (2 ^ C.w) ^ t)
+
+/-- The orbit rows at the moments. -/
+private noncomputable def rowSum (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (P N : ℕ → ℕ → ℕ) : ℝ :=
+  ∑ r ∈ Finset.range C.orbits.length, ∑ t ∈ Finset.range (C.p * C.p),
+    ((P r t : ℝ) - N r t) * Ym C.p φ ((orb C r).1 ++ (orb C r).2.map fun x => addP C.p x t)
+
+/-- **Phase 1's invariant.** -/
+private def Inv1 (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (s : P1St) (Φ : ℝ) : Prop :=
+  ∃ P N : ℕ → ℕ → ℕ, RowsOK C s.1 P N ∧ (∀ r t, P r t + N r t ≤ s.2.2.1) ∧ (s.2.1 = true → rowSum C φ P N = Φ)
+
+private theorem ktable_getD (C : Cert) (k : ℕ) :
+    (ktable C).getD k ((0, 0, 0), []) = ((0, 0, 0), []) ∨
+      ((ktable C).getD k ((0, 0, 0), [])).1 ∈ gList C.p ∧ ((ktable C).getD k ((0, 0, 0), [])).2 =
+        C.blocks1.map fun b => krow C (btab C b) ((ktable C).getD k ((0, 0, 0), [])).1.1
+          ((ktable C).getD k ((0, 0, 0), [])).1.2.1 ((ktable C).getD k ((0, 0, 0), [])).1.2.2 := by
+  by_cases hk : k < (ktable C).length
+  · right
+    have hk' : k < (gList C.p).length := by simpa [ktable] using hk
+    rw [getD_of_lt _ _ hk]
+    simp only [ktable, List.getElem_map, List.map_map, Function.comp_def]
+    exact ⟨List.getElem_mem hk', trivial⟩
+  · left; exact getD_default _ _ (by omega)
+
+/-- The transport of one pair, for one block: the orbit row's slots read at the pair. -/
+private theorem transport_b (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (b : Blk)
+    (hw : ∀ wi ∈ b.wts, wi < C.weights.length) (A0 A1 : List ℕ) (ij : ℕ × ℕ) (c d e : ℕ) (hc : c ≤ C.p) (hd : d ≤ C.p)
+    (hu : isUnit C.p c d = true)
+    (hsw : ((A0.map (gmap C.p c d e)).Perm (C.reps.getD ij.1 []) ∧ (A1.map (gmap C.p c d e)).Perm (C.reps.getD ij.2 [])) ∨
+      ((A0.map (gmap C.p c d e)).Perm (C.reps.getD ij.2 []) ∧ (A1.map (gmap C.p c d e)).Perm (C.reps.getD ij.1 []))) :
+    ∑ t ∈ Finset.range (C.p * C.p), (kblock C (btab C b) (gmap C.p c d e t) : ℝ) *
+      Ym C.p φ (A0 ++ A1.map fun x => addP C.p x t) = Wb C φ b ij := by
+  simp only [kblock_eq, Int.cast_list_sum, List.map_map, Function.comp_def, ← List.sum_map_mul_right]
+  rw [finset_list_comm]
+  unfold Wb
+  congr 1; refine List.map_congr_left fun wi hwi => ?_
+  simp only [kappa_eq C wi (hw wi hwi)]
+  exact transport_w C φ _ _ A0 A1 _ _ c d e hc hd hu hsw
+
+private theorem Inv1_step (C : Cert) [NeZero C.p] (hp : 2 ≤ C.p)
+    (hw : ∀ b ∈ C.blocks1, ∀ wi ∈ b.wts, wi < C.weights.length) (φ : V C.p → ℝ) (s : P1St) (Φ : ℝ) (ij : ℕ × ℕ)
+    (rest : List (ℕ × ℕ)) (h : Inv1 C φ s Φ) (hco : s.2.2.2.2 = C.blocks1.map fun b => (ij :: rest).map (R1 b)) :
+    Inv1 C φ (p1step C (ktable C) (C.blocks1.map (kmax C)) s ij) (Φ + contrib1 C φ ij) ∧
+      (p1step C (ktable C) (C.blocks1.map (kmax C)) s ij).2.2.2.2 = C.blocks1.map (fun b => rest.map (R1 b)) ∧
+      ((p1step C (ktable C) (C.blocks1.map (kmax C)) s ij).2.1 = true → s.2.1 = true) ∧
+      s.2.2.1 ≤ (p1step C (ktable C) (C.blocks1.map (kmax C)) s ij).2.2.1 := by
+  rw [p1step_eq]
+  obtain ⟨P, N, ⟨hBk, hlen, hrow⟩, hbnd, hsum⟩ := h
+  have hp0 : 0 < C.p := by omega
+  -- the coefficients and the bound
+  have hcoef : p1coefs s ij = C.blocks1.map fun b => mlt ij * R1 b ij := by
+    simp only [p1coefs, hco, List.map_map, Function.comp_def, List.map_cons, List.headD_cons]
+    refine List.map_congr_left fun b _ => ?_
+    simp only [mlt]; cases h : Nat.beq ij.1 ij.2
+    · rw [if_neg (fun h' => by rw [h', Nat.beq_refl] at h; exact absurd h (by simp))]; rfl
+    · rw [if_pos (Nat.eq_of_beq_eq_true h)]; rfl
+  have hbq : p1bnd (C.blocks1.map (kmax C)) s ij =
+      (C.blocks1.map fun b => Int.natAbs (mlt ij * R1 b ij) * kmax C b).sum := by
+    rw [p1bnd, hcoef, zip_map_same, foldl_nadd', zero_add, List.map_map]; rfl
+  refine ⟨?_, by simp [hco, List.map_map, Function.comp_def], fun hok => by
+    simp only [Bool.and_eq_true] at hok; exact hok.1, Nat.le_add_right _ _⟩
+  -- the entry
+  set e := p1ent C (ktable C) s with he_def
+  have hele : e.1.1 ≤ C.p ∧ e.1.2.1 ≤ C.p := by
+    rcases ktable_getD C (Nat.mod (Nat.div (p1f C s) 2) (Nat.mul 2 (Nat.add C.p 1))) with h0 | ⟨h1, -⟩
+    · rw [he_def, p1ent, h0]; exact ⟨Nat.zero_le _, Nat.zero_le _⟩
+    · exact ⟨(gList_bound C.p hp0 _ h1).1.le, (gList_bound C.p hp0 _ h1).2.le⟩
+  rcases ktable_getD C (Nat.mod (Nat.div (p1f C s) 2) (Nat.mul 2 (Nat.add C.p 1))) with h0 | ⟨-, h2⟩
+  · -- the default entry adds nothing and fails the unit check
+    have he0 : e = ((0, 0, 0), []) := by rw [he_def, p1ent, h0]
+    have hP : p1addP C (ktable C) s ij = 0 := by simp [p1addP, ← he_def, he0]
+    have hN : p1addN C (ktable C) s ij = 0 := by simp [p1addN, ← he_def, he0]
+    have hg : p1good C (ktable C) s ij = false := by
+      have hu : isUnit C.p 0 0 = false := by
+        simp only [isUnit]
+        exact Bool.eq_false_iff.2 fun h' => by
+          have := Nat.eq_of_beq_eq_true h'
+          rw [show Nat.mod 0 C.p = 0 % C.p from rfl, Nat.zero_mod] at this; omega
+      simp [p1good, ← he_def, he0, hu]
+    refine ⟨P, N, ⟨(Bk_mod _ hBk _ _).1, ?_, fun r hr => ?_⟩, fun r t => le_trans (hbnd r t) (Nat.le_add_right _ _),
+      fun hok => by simp [hg] at hok⟩
+    · rw [(Bk_mod _ hBk _ _).2, List.length_modify, hlen]
+    · rw [(Bk_mod _ hBk _ _).2, getD_modify _ _ _ _ _ (by rw [hlen]; exact hr), hrow r hr, hP, hN]
+      split_ifs <;> rfl
+  -- a map of `gList`: the packed rows of every block
+  let K : Blk → ℕ → ℤ := fun b t => kblock C (btab C b) (gmap C.p e.1.1 e.1.2.1 e.1.2.2 t)
+  let cb : Blk → ℤ := fun b => mlt ij * R1 b ij
+  let IP : ℕ → ℕ := fun t => (C.blocks1.map fun b =>
+    Int.toNat (cb b) * Int.toNat (K b t) + Int.toNat (Int.neg (cb b)) * Int.toNat (Int.neg (K b t))).sum
+  let IN : ℕ → ℕ := fun t => (C.blocks1.map fun b =>
+    Int.toNat (cb b) * Int.toNat (Int.neg (K b t)) + Int.toNat (Int.neg (cb b)) * Int.toNat (K b t)).sum
+  have he2 : e.2 = C.blocks1.map fun b => krow C (btab C b) e.1.1 e.1.2.1 e.1.2.2 := h2
+  have hzip : (p1coefs s ij).zip e.2 = C.blocks1.map fun b => (cb b, krow C (btab C b) e.1.1 e.1.2.1 e.1.2.2) := by
+    rw [hcoef, he2, zip_map_same]
+  have hpack : ∀ (F G : Blk → ℕ → ℕ) (u v : Blk → ℕ),
+      (C.blocks1.map fun b => u b * (∑ t ∈ Finset.range (C.p * C.p), F b t * (2 ^ C.w) ^ t) +
+        v b * (∑ t ∈ Finset.range (C.p * C.p), G b t * (2 ^ C.w) ^ t)).sum =
+      ∑ t ∈ Finset.range (C.p * C.p), (C.blocks1.map fun b => u b * F b t + v b * G b t).sum * (2 ^ C.w) ^ t := by
+    intro F G u v
+    simp only [← List.sum_map_mul_right]
+    rw [finset_list_comm]
+    congr 1; refine List.map_congr_left fun b _ => ?_
+    rw [Finset.mul_sum, Finset.mul_sum, ← Finset.sum_add_distrib]
+    exact Finset.sum_congr rfl fun t _ => by ring
+  have hP : p1addP C (ktable C) s ij = ∑ t ∈ Finset.range (C.p * C.p), IP t * (2 ^ C.w) ^ t := by
+    rw [p1addP, ← he_def, hzip, foldl_nadd', zero_add, List.map_map]
+    simp only [Function.comp_def, krow_eq, Nat.add_eq, Nat.mul_eq]
+    exact hpack _ _ _ _
+  have hN : p1addN C (ktable C) s ij = ∑ t ∈ Finset.range (C.p * C.p), IN t * (2 ^ C.w) ^ t := by
+    rw [p1addN, ← he_def, hzip, foldl_nadd', zero_add, List.map_map]
+    simp only [Function.comp_def, krow_eq, Nat.add_eq, Nat.mul_eq]
+    exact hpack _ _ _ _
+  have hIPN : ∀ t, IP t + IN t ≤ p1bnd (C.blocks1.map (kmax C)) s ij := fun t => by
+    rw [hbq]
+    simp only [IP, IN, ← List.sum_map_add]
+    refine List.sum_le_sum fun b _ => ?_
+    have h1 : Int.toNat (cb b) * Int.toNat (K b t) + Int.toNat (Int.neg (cb b)) * Int.toNat (Int.neg (K b t)) +
+        (Int.toNat (cb b) * Int.toNat (Int.neg (K b t)) + Int.toNat (Int.neg (cb b)) * Int.toNat (K b t)) =
+        (Int.toNat (cb b) + Int.toNat (Int.neg (cb b))) * (Int.toNat (K b t) + Int.toNat (Int.neg (K b t))) := by ring
+    rw [h1, show Int.neg (cb b) = -cb b from rfl, show Int.neg (K b t) = -K b t from rfl,
+      Int.toNat_add_toNat_neg_eq_natAbs, Int.toNat_add_toNat_neg_eq_natAbs]
+    exact Nat.mul_le_mul_left _ (kmax_ge C b _ (gmap_lt _ _ _ _ _))
+  have hdiff : ∀ t, ((IP t : ℝ) - IN t) = (C.blocks1.map fun b => (cb b : ℝ) * (K b t : ℝ)).sum := fun t => by
+    simp only [IP, IN, Nat.cast_list_sum, List.map_map, Function.comp_def, list_sub_sum]
+    congr 1; refine List.map_congr_left fun b _ => ?_
+    have hc : ((Int.toNat (cb b) : ℝ) - (Int.toNat (Int.neg (cb b)) : ℝ)) = (cb b : ℝ) := by
+      exact_mod_cast Int.toNat_sub_toNat_neg (cb b)
+    have hk : ((Int.toNat (K b t) : ℝ) - (Int.toNat (Int.neg (K b t)) : ℝ)) = (K b t : ℝ) := by
+      exact_mod_cast Int.toNat_sub_toNat_neg (K b t)
+    rw [← hc, ← hk]; push_cast; ring
+  set ρ := p1rho C s with hρ
+  refine ⟨fun r t => P r t + if r = ρ then IP t else 0, fun r t => N r t + if r = ρ then IN t else 0,
+    ⟨(Bk_mod _ hBk _ _).1, ?_, fun r hr => ?_⟩, fun r t => ?_, fun hok => ?_⟩
+  · rw [(Bk_mod _ hBk _ _).2, List.length_modify, hlen]
+  · rw [(Bk_mod _ hBk _ _).2, getD_modify _ _ _ _ _ (by rw [hlen]; exact hr), hrow r hr, hP, hN]
+    by_cases hr' : ρ = r
+    · subst hr'
+      simp only [if_true, Nat.add_eq, add_mul, Finset.sum_add_distrib]
+    · simp only [hr', if_false, Ne.symm hr', add_zero]
+  · have := hbnd r t
+    have := hIPN t
+    dsimp only
+    split_ifs <;> simp only [Nat.add_eq] <;> omega
+  -- the identity's share: only row `ρ` moves, by the pair's transported terms
+  simp only [Bool.and_eq_true] at hok
+  obtain ⟨hok0, hgood⟩ := hok
+  simp only [p1good, Bool.and_eq_true, Nat.blt_eq, ← he_def, ← hρ] at hgood
+  obtain ⟨⟨⟨⟨⟨⟨hbag, hmem⟩, hu⟩, hl0⟩, hl1⟩, hli⟩, hlj⟩ := hgood
+  have hρlt : ρ < C.orbits.length := by rw [← hlen]; exact (Bk_mem _ hBk ρ).1 hmem
+  have hget : bget s.1 ρ = ((orb C ρ).1, (orb C ρ).2, ∑ t ∈ Finset.range (C.p * C.p), P ρ t * (2 ^ C.w) ^ t,
+      ∑ t ∈ Finset.range (C.p * C.p), N ρ t * (2 ^ C.w) ^ t) := by rw [bget_eq _ hBk, hrow ρ hρlt]
+  rw [hget] at hbag hl0 hl1
+  have hsw : (((orb C ρ).1.map (gmap C.p e.1.1 e.1.2.1 e.1.2.2)).Perm (C.reps.getD ij.1 []) ∧
+      ((orb C ρ).2.map (gmap C.p e.1.1 e.1.2.1 e.1.2.2)).Perm (C.reps.getD ij.2 [])) ∨
+      (((orb C ρ).1.map (gmap C.p e.1.1 e.1.2.1 e.1.2.2)).Perm (C.reps.getD ij.2 []) ∧
+      ((orb C ρ).2.map (gmap C.p e.1.1 e.1.2.1 e.1.2.2)).Perm (C.reps.getD ij.1 [])) := by
+    cases hs : Nat.beq (Nat.mod (p1f C s) 2) 0 <;> simp only [hs, cond_true, cond_false, Bool.and_eq_true,
+      Nat.beq_eq] at hbag
+    · exact Or.inr ⟨bag_perm _ _ hbag.1 hl0 hlj, bag_perm _ _ hbag.2 hl1 hli⟩
+    · exact Or.inl ⟨bag_perm _ _ hbag.1 hl0 hli, bag_perm _ _ hbag.2 hl1 hlj⟩
+  have hrs : rowSum C φ (fun r t => P r t + if r = ρ then IP t else 0) (fun r t => N r t + if r = ρ then IN t else 0) =
+      rowSum C φ P N + ∑ t ∈ Finset.range (C.p * C.p), ((IP t : ℝ) - IN t) *
+        Ym C.p φ ((orb C ρ).1 ++ (orb C ρ).2.map fun x => addP C.p x t) := by
+    unfold rowSum
+    have hr : ∀ r ∈ Finset.range C.orbits.length, ∑ t ∈ Finset.range (C.p * C.p),
+        (((P r t + if r = ρ then IP t else 0 : ℕ) : ℝ) - ((N r t + if r = ρ then IN t else 0 : ℕ) : ℝ)) *
+          Ym C.p φ ((orb C r).1 ++ (orb C r).2.map fun x => addP C.p x t) =
+        ∑ t ∈ Finset.range (C.p * C.p), ((P r t : ℝ) - N r t) *
+          Ym C.p φ ((orb C r).1 ++ (orb C r).2.map fun x => addP C.p x t) +
+        if r = ρ then ∑ t ∈ Finset.range (C.p * C.p), ((IP t : ℝ) - IN t) *
+          Ym C.p φ ((orb C r).1 ++ (orb C r).2.map fun x => addP C.p x t) else 0 := fun r _ => by
+      split_ifs with h'
+      · rw [← Finset.sum_add_distrib]; refine Finset.sum_congr rfl fun t _ => ?_; push_cast; ring
+      · simp
+    simp only []
+    rw [Finset.sum_congr rfl hr, Finset.sum_add_distrib, Finset.sum_ite_eq', if_pos (Finset.mem_range.2 hρlt)]
+  rw [hrs, hsum hok0]
+  congr 1
+  simp only [hdiff, ← List.sum_map_mul_right]
+  rw [finset_list_comm]
+  unfold contrib1
+  congr 1; refine List.map_congr_left fun b hb => ?_
+  simp only [mul_assoc, ← Finset.mul_sum]
+  congr 1
+  exact transport_b C φ b (hw b hb) _ _ ij _ _ _ hele.1 hele.2 hu hsw
+
+/-- **Leaf L3** (K2h): the times-1 families are the blocks' terms — the orbit rows are phase 1's (`orowsOK`), each
+pair's transporter moves its term onto its orbit's representative, `R` is symmetric and `κ` even. -/
+private theorem opSum_O23_eq (C : Cert) [NeZero C.p] (hC : globalOK C = true) (φ : V C.p → ℝ) :
+    opSum C.p φ (opsO2 C ++ opsO3 C (orbRows C)) = (C.blocks1.map fun b => blockT C φ b C.reps).sum := by
+  sorry
 
 /-- **Leaf L4** (the q-part): the times-q family is `q(φ)` times the q-blocks' terms over the one monomial `[0]` —
 `Q(m)(Y) = q(φ)·Y(m)` (`q(φ∘γ) = q(φ)`), and every `t` moved onto its class's representative. -/
