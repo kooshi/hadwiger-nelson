@@ -335,7 +335,7 @@ modules (FS131-IN1L's block, `data/fs131/in1l/audit-block.lean`) when they land.
   FS131-IDG1): no `sorry`.**"
 - `Rigidity/Annihilator`: "**FS-131 (FS131-KPD1), skeleton: 8 leaves `sorry`.**" → "**FS-131 (FS131-KPD1, proved by
   FS131-IDG1): no `sorry`.**"; "**Leaves:**" → "**Proved (FS131-IDG1):**", and `isClosed_setOf_apply_eq_one` added to
-  that list after `dualCoannihilator_top` (separation)` — **the row is stale on this one**: the skeleton holds 9 `sorry`s,
+  that list after `dualCoannihilator_top` (separation) — **the row is stale on this one**: the skeleton holds 9 `sorry`s,
   `isClosed_setOf_apply_eq_one` among them, and the row counts 8 and does not name it.
 - `Rigidity/SubgroupHaar`, `Rigidity/Duality`, `Rigidity/DualConnected`: "skeleton: 6 / 9 / 4 leaves `sorry`." →
   "proved by FS131-IDG1: no `sorry`." inside the bold head (as above); "**Leaves:**" → "**Proved (FS131-IDG1):**"
@@ -425,3 +425,8 @@ above and the theorems of this record's list.
 
 The drafts above, with the CLEAN block regenerated from build 3's print (`data/fs131/idg1/audit-block.lean`, identical
 to the one from build 2's). Nothing of this job is running or queued.
+
+## Stage 7 — SAVED: the report
+
+`data/fs131/reports/FS131-IDG1.md`, the same text as the hand-back. Nothing of this job is running or queued. The branch
+`fs131-wdg` is not pushed (the brief). The tree's compiled library is current for the branch head after build 3.
