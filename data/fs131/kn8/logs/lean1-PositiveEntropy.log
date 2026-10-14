@@ -1,0 +1,3 @@
+slot: admitted kn8s: mem 4 GiB (hard cap), cpus 4,5
+Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:144:8: warning: declaration uses `sorry`
+exit=0

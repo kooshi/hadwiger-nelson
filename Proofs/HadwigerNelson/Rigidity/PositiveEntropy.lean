@@ -132,9 +132,17 @@ example : PolishSpace Unit := inferInstance
 `µ = m_X` is the Haar measure of `X`, or the entropy `h_µ(αⁿ) = 0` vanishes for all `n ∈ ℤ^d`." **Ours to prove** from
 `positive_entropy_rigidity` (FS105-DED): Theorem 1.3 applies (FS105-NVC); each `G j` is finite or `X`; some `G j = X` makes
 `µ` translation-invariant; every `G j` finite gives entropy zero through the finite-fibred factors. No inhabitant of the
-hypotheses is in the library yet: PE-1′ supplies the pieces `M̂`. -/
+hypotheses is in the library yet: PE-1′ supplies the pieces `M̂`.
+
+**`[PolishSpace X]`** (FS131-KN8, on the coordinator's standing word, inventory item 750 ruling 2): the finite-fibred step
+reads clause (4) over Mathlib's quotient σ-algebra — with a finite `G j` and a finite Borel partition `Q` of `X` whose cells
+meet each coset in at most one point, `Q ∨ π⁻¹(Σ)` is the Borel σ-algebra of `X` exactly when the image `π(B ∩ q)` of each
+Borel set is measurable in `Σ`, which the quotient σ-algebra gives by definition and the Borel one of `X ⧸ G j` gives only
+through Lusin–Souslin, that is for Polish `X` — so the proof runs over `positive_entropy_rigidity_of_polishSpace`. Every use
+on the headline's path is at a piece `Rigidity.PieceDual M` of a countable group, Polish by
+`Rigidity.polishSpace_dual` (module `Rigidity/DualGroup`). -/
 theorem haar_or_zero_entropy {X : Type*} [AddCommGroup X] [TopologicalSpace X] [MeasurableSpace X] [BorelSpace X]
-    (hX : IsSolenoid X) {d : ℕ} (α : ZdAction d X) (hirr : α.IsTotallyIrreducible)
+    [PolishSpace X] (hX : IsSolenoid X) {d : ℕ} (α : ZdAction d X) (hirr : α.IsTotallyIrreducible)
     (hvc : ¬ α.IsVirtuallyCyclic) (μ : Measure X) (hμ : IsProbabilityMeasure μ) (herg : α.IsErgodicOn ⊤ μ) :
     μ.IsAddHaarMeasure ∨ ∀ n : Fin d → ℤ, ksEntropy μ (α n) = 0 := by
   sorry

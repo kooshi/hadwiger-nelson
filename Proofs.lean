@@ -197,6 +197,9 @@ import Proofs.HadwigerNelson.Rigidity.ChainAtTA
 import Proofs.HadwigerNelson.Rigidity.ZeroEntropyNames
 import Proofs.HadwigerNelson.Rigidity.SolenoidErgodic
 import Proofs.HadwigerNelson.Rigidity.HaarMultiple
+import Proofs.HadwigerNelson.Rigidity.DualGroup
+import Proofs.HadwigerNelson.Rigidity.UnitCircle
+import Proofs.HadwigerNelson.Rigidity.Pieces
 import Proofs.HadwigerNelson.Plane.LocalMap
 import Proofs.HadwigerNelson.Plane.LocalMapExamples
 import Proofs.HadwigerNelson.Plane.CircleColouring

@@ -1,0 +1,9 @@
+CHANGED theorem HadwigerNelson.Rigidity.haar_or_zero_entropy
+  common prefix 153 chars, common suffix 1925 chars
+  before: ……
+  after:  … [@PolishSpace.{u_1} X inst_1]…
+SAME    axiom HadwigerNelson.Rigidity.positive_entropy_rigidity
+SAME    theorem HadwigerNelson.Rigidity.positive_entropy_rigidity_model
+SAME    theorem HadwigerNelson.Rigidity.positive_entropy_rigidity_of_polishSpace
+ADDED=0 REMOVED=0 CHANGED=1 SAME=3
+exit=0
