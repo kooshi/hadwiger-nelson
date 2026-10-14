@@ -1,0 +1,100 @@
+slot: waiting (ledger 21 + 4 > budget 22 GiB)
+slot: admitted k8b1: mem 4 GiB (hard cap), cpus 6,7
+@measureReal_mono : ∀ {α : Type u_1} {x : MeasurableSpace α} {μ : Measure α} {s₁ s₂ : Set α},
+  s₁ ⊆ s₂ → autoParam (μ s₂ ≠ ⊤) measureReal_mono._auto_1 → μ.real s₁ ≤ μ.real s₂
+@IsCompact.image : ∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {s : Set X}
+  {f : X → Y}, IsCompact s → Continuous f → IsCompact (f '' s)
+data/fs131/k8b1/probes/Names2.lean:7:8: warning: `continuous_add_right` has been deprecated: Use `continuous_add_const` instead
+@continuous_add_right : ∀ {M : Type u_1} [inst : TopologicalSpace M] [inst_1 : Add M] [SeparatelyContinuousAdd M]
+  (m : M), Continuous fun x => x + m
+@Homeomorph.addLeft : {G : Type u_1} →
+  [inst : TopologicalSpace G] → [inst_1 : AddGroup G] → [SeparatelyContinuousAdd G] → G → G ≃ₜ G
+@Homeomorph.isClosedMap : ∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y]
+  (h : X ≃ₜ Y), IsClosedMap ⇑h
+@RestrictedProduct.ext : ∀ {ι : Type u_1} (R : ι → Type u_2) (A : (i : ι) → Set (R i)) {𝓕 : Filter ι}
+  {x y : RestrictedProduct (fun i => R i) (fun i => A i) 𝓕}, (∀ (i : ι), x i = y i) → x = y
+@SetLike.not_le_iff_exists : ∀ {A : Type u_1} {B : Type u_2} [inst : SetLike A B] [inst_1 : LE A] [IsConcreteLE A B]
+  {p q : A}, ¬p ≤ q ↔ ∃ x ∈ p, x ∉ q
+@Ideal.IsMaximal.eq_of_le : ∀ {α : Type u_1} [inst : Semiring α] {I J : Ideal α}, I.IsMaximal → J ≠ ⊤ → I ≤ J → I = J
+data/fs131/k8b1/probes/Names2.lean:13:8: error(lean.unknownIdentifier): Unknown constant `NumberField.mem_ringOfIntegers`
+@IsIntegral.map : ∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]
+  {B : Type u_3} {C : Type u_4} {F : Type u_5} [inst_3 : Ring B] [inst_4 : Ring C] [inst_5 : Algebra R B]
+  [inst_6 : Algebra A B] [inst_7 : Algebra R C] [IsScalarTower R A B] [inst_9 : Algebra A C] [IsScalarTower R A C]
+  {b : B} [inst_11 : FunLike F B C] [AlgHomClass F A B C] (f : F), IsIntegral R b → IsIntegral R (f b)
+@Function.Injective.countable : ∀ {α : Sort u_1} {β : Sort u_2} [Countable β] {f : α → β},
+  Function.Injective f → Countable α
+@Set.countable_iUnion : ∀ {α : Type u_1} {ι : Sort u_2} {t : ι → Set α} [Countable ι],
+  (∀ (i : ι), (t i).Countable) → (⋃ i, t i).Countable
+@Set.Finite.countable : ∀ {α : Type u_1} {s : Set α}, s.Finite → s.Countable
+@Finsupp.Countable.of_moduleFinite : ∀ {M : Type u_1} {R : Type u_2} [inst : Semiring R] [inst_1 : AddCommMonoid M]
+  [inst_2 : Module R M] [Countable R] [Module.Finite R M], Countable M
+@measurable_to_countable' : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α] [Countable α]
+  [inst_2 : MeasurableSpace β] {f : β → α}, (∀ (x : α), MeasurableSet (f ⁻¹' {x})) → Measurable f
+@MeasurePreserving.measure_preimage : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α]
+  [inst_1 : MeasurableSpace β] {μa : Measure α} {μb : Measure β} {f : α → β},
+  MeasurePreserving f μa μb → ∀ {s : Set β}, NullMeasurableSet s μb → μa (f ⁻¹' s) = μb s
+@Measure.map_apply : ∀ {α : Type u_1} {β : Type u_2} {mα : MeasurableSpace α} {mβ : MeasurableSpace β} {μ : Measure α}
+  {f : α → β}, Measurable f → ∀ {s : Set β}, MeasurableSet s → (Measure.map f μ) s = μ (f ⁻¹' s)
+Real.rpow_natCast : ∀ (x : ℝ) (n : ℕ), x ^ ↑n = x ^ n
+@Real.rpow_le_rpow_left_iff : ∀ {x y z : ℝ}, 1 < x → (x ^ y ≤ x ^ z ↔ y ≤ z)
+@Real.exp_log : ∀ {x : ℝ}, 0 < x → Real.exp (Real.log x) = x
+data/fs131/k8b1/probes/Names2.lean:25:8: error(lean.unknownIdentifier): Unknown constant `Real.add_pow_le_pow_mul_pow_of_sq_le_sq`
+@tendsto_pow_atTop_nhds_zero_of_lt_one : ∀ {𝕜 : Type u_1} [inst : Semifield 𝕜] [inst_1 : LinearOrder 𝕜]
+  [IsStrictOrderedRing 𝕜] [ExistsAddOfLE 𝕜] [Archimedean 𝕜] [inst_5 : TopologicalSpace 𝕜] [OrderTopology 𝕜] {r : 𝕜},
+  0 ≤ r → r < 1 → Filter.Tendsto (fun n => r ^ n) Filter.atTop (nhds 0)
+@Filter.Tendsto.eventually_lt : ∀ {α : Type u_1} {γ : Type u_2} [inst : TopologicalSpace α] [inst_1 : LinearOrder α]
+  [OrderClosedTopology α] {l : Filter γ} {f g : γ → α} {y z : α},
+  Filter.Tendsto f l (nhds y) → Filter.Tendsto g l (nhds z) → y < z → ∀ᶠ (x : γ) in l, f x < g x
+@measure_compl : ∀ {α : Type u_1} {m : MeasurableSpace α} {μ : Measure α} {s : Set α},
+  MeasurableSet s → μ s ≠ ⊤ → μ sᶜ = μ Set.univ - μ s
+@prob_compl_eq_one_sub : ∀ {α : Type u_1} {m0 : MeasurableSpace α} {μ : Measure α} {s : Set α} [IsProbabilityMeasure μ],
+  MeasurableSet s → μ sᶜ = 1 - μ s
+@ENNReal.toReal_mono : ∀ {a b : ENNReal}, b ≠ ⊤ → a ≤ b → a.toReal ≤ b.toReal
+@Set.Countable.measure_zero : ∀ {α : Type u_1} {m0 : MeasurableSpace α} {s : Set α},
+  s.Countable → ∀ (μ : Measure α) [NullSingletonClass μ], μ s = 0
+@measure_biUnion_null_iff : ∀ {α : Type u_1} {ι : Type u_2} {F : Type u_3} [inst : FunLike F (Set α) ENNReal]
+  [OuterMeasureClass F α] {μ : F} {I : Set ι},
+  I.Countable → ∀ {s : ι → Set α}, μ (⋃ i ∈ I, s i) = 0 ↔ ∀ i ∈ I, μ (s i) = 0
+@measure_mono_null : ∀ {α : Type u_1} {F : Type u_2} [inst : FunLike F (Set α) ENNReal] [OuterMeasureClass F α] {μ : F}
+  {s t : Set α}, s ⊆ t → μ t = 0 → μ s = 0
+@RingOfIntegers.coe_injective : ∀ {K : Type u_1} [inst : Field K], Function.Injective ⇑(algebraMap (𝓞 K) K)
+@UniformSpace.Completion.coe_mul : ∀ {α : Type u_1} [inst : Ring α] [inst_1 : UniformSpace α] [IsTopologicalRing α]
+  (a b : α), ↑(a * b) = ↑a * ↑b
+@adicCompletion.coe_mul : ∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2)
+  [inst_2 : Field K] [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R) (x y : K),
+  { toCompletion := ↑((WithVal.equiv (valuation K v)).symm (x * y)) } =
+    { toCompletion := ↑((WithVal.equiv (valuation K v)).symm x) } *
+      { toCompletion := ↑((WithVal.equiv (valuation K v)).symm y) }
+@norm_mul : ∀ {α : Type u_1} [inst : Norm α] [inst_1 : Mul α] [NormMulClass α] (a b : α), ‖a * b‖ = ‖a‖ * ‖b‖
+@Finset.prod_le_prod : ∀ {ι : Type u_1} {R : Type u_2} [inst : CommMonoidWithZero R] [inst_1 : Preorder R]
+  [ZeroLEOneClass R] [PosMulMono R] {f g : ι → R} {s : Finset ι},
+  (∀ i ∈ s, 0 ≤ f i) → (∀ i ∈ s, f i ≤ g i) → ∏ i ∈ s, f i ≤ ∏ i ∈ s, g i
+@Finset.prod_le_one : ∀ {ι : Type u_1} {R : Type u_2} [inst : CommMonoidWithZero R] [inst_1 : Preorder R]
+  [ZeroLEOneClass R] [PosMulMono R] {f : ι → R} {s : Finset ι},
+  (∀ i ∈ s, 0 ≤ f i) → (∀ i ∈ s, f i ≤ 1) → ∏ i ∈ s, f i ≤ 1
+@Finset.one_le_prod' : ∀ {ι : Type u_1} {N : Type u_2} [inst : CommMonoid N] [inst_1 : Preorder N] {f : ι → N}
+  {s : Finset ι} [MulLeftMono N], (∀ i ∈ s, 1 ≤ f i) → 1 ≤ ∏ i ∈ s, f i
+data/fs131/k8b1/probes/Names2.lean:41:8: error(lean.unknownIdentifier): Unknown identifier `finprod_mem_le_finprod_mem`
+@Ideal.absNorm : {S : Type u_1} → [inst : CommRing S] → [IsDedekindDomain S] → [Module.Free ℤ S] → Ideal S →*₀ ℕ
+@InfinitePlace.mult_pos : ∀ {K : Type u_1} [inst : Field K] {w : InfinitePlace K}, 0 < w.mult
+@mixedEmbedding.normAtPlace_apply_of_isComplex : ∀ {K : Type u_1} [inst : Field K] {w : InfinitePlace K}
+  (hw : w.IsComplex) (x : mixedEmbedding.mixedSpace K), (mixedEmbedding.normAtPlace w) x = ‖x.2 ⟨w, hw⟩‖
+@Valued.isOpen_valuationSubring : ∀ {Γ₀ : Type u_1} [inst : LinearOrderedCommGroupWithZero Γ₀] (K : Type u_2)
+  [inst_1 : Field K] [hv : Valued K Γ₀], IsOpen ↑Valued.v.valuationSubring
+@Valued.isClosed_valuationSubring : ∀ {Γ₀ : Type u_1} [inst : LinearOrderedCommGroupWithZero Γ₀] (K : Type u_2)
+  [inst_1 : Field K] [hv : Valued K Γ₀], IsClosed ↑Valued.v.valuationSubring
+@ValuationSubring.mem_of_valuation_le_one : ∀ {K : Type u_1} [inst : Field K] (A : ValuationSubring K) (x : K),
+  A.valuation x ≤ 1 → x ∈ A
+mem_adicCompletionIntegers : ∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2)
+  [inst_2 : Field K] [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R)
+  {x : adicCompletion K v}, x ∈ adicCompletionIntegers K v ↔ Valued.v x ≤ 1
+HadwigerNelson.Rigidity.zeroEntropyCarried_model : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  IsProbabilityMeasure (Measure.dirac 1) ∧
+    HadwigerNelson.SpectralChain.RotInv F (Measure.dirac 1) ∧
+      (∃ u, ∀ (n : ℕ), n ≠ 0 → ↑u ^ n ≠ 1) ∧
+        (∀ (u : ↑(HadwigerNelson.SpectralChain.unitVectors F)),
+            (∀ (n : ℕ), n ≠ 0 → ↑u ^ n ≠ 1) →
+              HadwigerNelson.Rigidity.ksEntropy (Measure.dirac 1) (HadwigerNelson.SpectralChain.rot u) = 0) ∧
+          (Measure.dirac 1) (HadwigerNelson.Rigidity.TA F)ᶜ = 0
+HadwigerNelson.Rigidity.exists_nonTorsion_unitVector : ∀ (F : Subfield ℝ), ∃ u, ∀ (n : ℕ), n ≠ 0 → ↑u ^ n ≠ 1
+exit=1

@@ -203,6 +203,9 @@ import Proofs.HadwigerNelson.Rigidity.TateKernel
 import Proofs.HadwigerNelson.Rigidity.TateLocal
 import Proofs.HadwigerNelson.Rigidity.TateModel
 import Proofs.HadwigerNelson.Rigidity.ZeroEntropyNames
+import Proofs.HadwigerNelson.Rigidity.PlaceSizes
+import Proofs.HadwigerNelson.Rigidity.Multipliers
+import Proofs.HadwigerNelson.Rigidity.ThinBoxes
 import Proofs.HadwigerNelson.Rigidity.SolenoidErgodic
 import Proofs.HadwigerNelson.Rigidity.HaarMultiple
 import Proofs.HadwigerNelson.Rigidity.DualGroup
