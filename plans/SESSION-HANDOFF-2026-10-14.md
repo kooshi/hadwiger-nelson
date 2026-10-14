@@ -1,127 +1,109 @@
-# Session handoff — 2026-10-14, midday: four jobs running; the port, the density equality and much of the chain proved on branches
+# Session handoff — 2026-10-14, afternoon: the port and the density equality on `main`; four jobs running on the chain and the density bound
 
-*Written 2026-10-14 12:45 UTC by Keryx, at Kooshi's word ("Let's compact. Is the handoff up to date?"). Current state only. A
-successor reads this file first, then `plans/FS131-close-inventory.md` items 750–835 (everything since the last compaction,
-each with its receipt and its ruling in four parts). Times in items 750–810 are wrong by up to six and a half hours (item 812):
-the commit times are the times. `plans/SESSION-HANDOFF-2026-10-13.md` is older: read it only for the parked frontier (its § 8)
-and the older corrections still owed (its § 7).*
+*Rewritten 2026-10-14 14:58 UTC by Keryx, between hand-backs, so a compaction loses nothing. Current state only. A successor reads this
+file first, then `plans/FS131-close-inventory.md` items 837–861 (everything since the last rewrite, each with its receipt and its ruling
+in four parts; items 750–836 are the morning's, and their written times in 750–810 are wrong by up to six and a half hours, item 812).
+`plans/SESSION-HANDOFF-2026-10-13.md` is older: read it only for the parked frontier (its § 8) and the older corrections (its § 7).*
 
 ## 1. Kooshi's words in force
 
-Verbatim in `data/fs131/REQUEST-2026-10-13.md`: **W1–W3** (wind the project down and publish the repository; every finding
-of ours formalized; reports only at a gate, a decision that is his, or his check-in); **W4** (the port approved; the toolchain
-and Mathlib stay at v4.32.0 for good — memory `mathlib-pin-permanent`); **W5** (2026-10-14 morning): **four agents at once**
-(the Sonnet half-slot unchanged; `.claude/output-styles/keryx.md` § Staffing rewritten) and **time estimates are Lean lines
-divided by the measured rate** — about 850–950 net hand-written lines per active hour (item 825: last 7 days 913, last night
-851, the whole history 850); planners' line counts have run high (implementers came in at 0.5–0.75 of them, item 829);
-**W6**: Rudin's book (now held, `[Rudin1962]`); **"Yes, prove the density bound."** (`m₁(ℝ²) ≤ 0.2470`, `[AmbrusEtAl2023]`
-Thm 1 — formalized, not declared); and a **conditional instruction**: *when the five-colour chain lands* (row 121's
-`χ(ℚ(√47)²) = 5` through the gate on `main`, no hypothesis of ours left) — sanitization, git history rewrites, READMEs, a public
-readable roadmap of what is left to formalize, a push to GitHub; "Not a full writeup"; then back to work. **Each irreversible
-step of that pass (a history rewrite, a public push) is confirmed with him at the time.** Nothing is published before the chain
-lands. **Nothing is waiting on him now.** His last report was the interim report (item 825); both its decisions are answered.
+Verbatim in `data/fs131/REQUEST-2026-10-13.md`: **W1–W3** (wind down and publish the repository; every finding of ours formalized;
+reports only at a gate, a decision that is his, or his check-in); **W4** (the port approved; Lean/Mathlib stay at v4.32.0 for good);
+**W5**: **four agents at once** (a Sonnet agent counts half; `.claude/output-styles/keryx.md` § Staffing on disk says four — a stale
+injected copy may show three; the file governs), and **time estimates are Lean lines ÷ the measured rate** (about 850–950 net
+hand-written lines per active hour, item 825; implementers write 0.5–0.85 of their planners' lines, items 829, 845, 850); **W6**: Rudin's
+book (held); **"Yes, prove the density bound."** (`m₁(ℝ²) ≤ 0.2470`, `[AmbrusEtAl2023]` Thm 1 — formalized, not declared); and the
+**conditional instruction**: *when the five-colour chain lands* (row 121's `χ(ℚ(√47)²) = 5` through the gate on `main`, no hypothesis of
+ours left) — sanitization, history rewrites, READMEs, a public readable roadmap, a push to GitHub; "Not a full writeup"; **each
+irreversible step confirmed with him at the time**; nothing published before the chain lands. **Nothing is waiting on him.**
 
-**Machine, disk, network.** Laptop, 12 cores, 31 GB; disk 83 %, 316 GB free. Memory tool:
-`env SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 python3 scripts/slot.py --mem <GiB> --cpus <n> --wait 7200 --name <tag> -- <cmd>`;
-jobs may ask up to 12 GiB without telling me (the certificate checks use 11–12). A cap kill under a `timeout` wrapper shows as
-exit 143, not 137 — read `journalctl` for "oom-kill" on the scope (item 835). **The remote is down** (back within the
-week): every commit is local; **`git push -q backup --all` after each commit** (the bare repository `a local backup repository`,
-never forced, never pruned). Agent ids: scratch `agents.txt`, copy at `~/source/lean-dir-tmp-rescue-2026-10-13/agents.txt`.
+**Machine.** Laptop, 12 cores, 31 GB; disk 83 %, 318 GB free. Memory tool: `env SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 python3
+scripts/slot.py --mem <GiB> --cpus <n> --wait 7200 --name <tag> -- <cmd>`; jobs may ask up to 12 GiB without telling me. A cap kill
+under `timeout` shows as 143 — read `journalctl` for "oom-kill" (item 835). **The remote is down**: commit locally, then **`git
+push -q backup --all`** after each commit. Agent ids: scratch `agents.txt`, copy `~/source/lean-dir-tmp-rescue-2026-10-13/agents.txt`.
 
-## 2. Held on `main` (unchanged since the last handoff)
+## 2. Held on `main` (since this morning)
 
-The measurable-number module (FS131-LC1); the first number-field module (FS131-LU1); the three-and-four-colours line
-(FS131-LJ1, filed at `747e139d0` — **the next filing's fact-audit base**). Front page: 7,602 records, 7,531 clean, 38
-imported; `axioms=3 rests=39 …`; vacuity `declarations=16125`. No Lean file on `main` has changed since `747e139d0`. Reference
-compiled copy: tree `fs131-wrc` (never written to; copied from twice today, items 826, 830).
+- **The port** (FS131-LP1, merged `398523e99`; item 841): the transfer `Outside.OAI158.proper_to_borel_weak` is `[OAIMath2026]`'s
+  theorem ported with its proof; the library declares **two** outside axioms (Weil's bound, the release's five-colouring theorem).
+  Filed (FS131-FC4, `684d5fe5e`).
+- **The density equality — FS-133 Closed** (FS133-LD1, merged `5e4a6ac65`; items 856–857; FS-133's own inventory ticked):
+  `α₁(ℝ²) = α₁(𝒜²) = m₁(ℝ²)`, `χ_f(ℝ²) = χ_f(𝒜²) = 1/m₁(ℝ²)`, `f(n)/n → m₁`, the labelling claim both ways — standard three, no
+  import; not new (`[Davies2026]`, dimension ≥ 4). Filed (FS131-FC5, `8eece67b0`; item 859): the "Last filed" chain's older entries
+  moved to `plans/FILINGS.md` under the size budget (`CLAUDE.md` 77,141 of 80,000 bytes).
+- **Counts on `main`:** audit 9,101 records (9,038 clean, 32 axiom-free, 26 imported, 5 purchases); `axioms=2 rests=27 …`; vacuity
+  `declarations=17902 refutations-skipped=234`. **The next filing's fact-audit base: `8eece67b0`.** **Reference compiled tree for
+  `main`: `fs133-wk1`** (its build is the gated one; it is on branch `fs131-f5`, merged).
+- Kooshi has had a report at each landing (port; density equality). The next is due at the next gate.
 
-## 3. Running now (four jobs)
+## 3. Running now (four jobs, four slots)
 
-1. **FS131-LP1 — the port's landing** (brief `data/fs131/briefs/FS131-LP1-landing.md` + Amendment 1; tree `fs132-wi1`, branch
-   `fs131-wlp`). The transfer theorem `Outside.OAI158.proper_to_borel_weak` is a theorem there on the standard three (item 797),
-   its type the axiom's; 31 generated modules registered; read-back OK; audit 9,024 records (8,961 clean, 32 axiom-free, 26
-   imported, 5 purchases), `axioms=2 rests=27`, `declarations=17785`. **Held for its final pass:** the guarded lint's 25 findings
-   on the release's own declarations, ruled (b) — in-file `@[nolint …]` written by the generator's new `nolint` key (item 831).
-   **Announcement rule (item 808):** reported to Kooshi as held only when the gate is green on one commit, merged into `main`,
-   and `main` checked equal to it outside `plans/` and `data/`. **At its green line:** receipts; merge `--no-ff`; check; the
-   report; the Clerk's filing (its drafts in its record; the fact audit with `--base 747e139d0`); then the density landing.
-2. **FS131-KC13 — the class-ratio certificates in the kernel** (tree `fs131-wnf`, branch `fs131-wc13`). p = 11's identity passes
-   `decide +kernel` in about 3 minutes, ≤ 12 GiB per segment (item 833); p = 19 extrapolates to 45–60 minutes in about 12
-   segments; positive definiteness of 22 blocks and the soundness theorem in progress; then M13's per-prime leaf planned.
-3. **FS131-KDB1 — the density bound's planner** (tree `fs131-w10g`, branch `fs131-wdb` from `main`; its first commit takes
-   `Plane/OneAvoidingDensity.lean` from `fs131-wkr`, text unchanged). Stage 1 saved; route chosen; `J₀` covering ≈ 45 minutes of
-   kernel CPU, splittable; an atom-check probe cap-killed at 8 GiB and diagnosed (item 835) — retry allowed up to 12 GiB.
-4. **FS131-ITK1 — the adelic model's last lane and M8b** (tree `fs131-wq1`, branch `fs131-wt2` from `fs131-wt1`): T-K's nine
-   leaves (`exists_tateModel` to the standard three), then M8b's five lanes (PlaceSizes, Multipliers, ThinBoxes, GlobalPoint,
-   WanderingShells).
+1. **FS131-IJ1 — the chain's join, then M10, M2a, M3, M2b** (tree `fs131-wq1`, branch `fs131-wt3`; the join `3ae198eac` builds, item
+   854). Then `Counting.toL` → `ofUnitRing`; `ChainAtTA`'s two lemmas public; the four modules. Carries item 847 and item 850 ruling 2.
+2. **FS131-IKC1 — the certificate checker's soundness, p = 11 in four segments, p = 19 in form F2** (tree `fs131-wnf`, branch
+   `fs131-wc14`). **It found the checker unsound** (a kernel counterexample, item 853): `certOK` is being strengthened; the soundness
+   theorems' statements unchanged; p = 11's 185 s / 12 GB are superseded until re-measured. Search request row 24 (a smaller
+   relaxation) is queued for the Searcher.
+3. **FS131-IDB1 — the density bound's lanes C then B** (tree `fs131-w10g`, branch `fs131-wdb1`): **the whole J₀ covering passes in
+   the kernel** (`BesselCert.Cells.phiApprox_ge`, standard three, item 861) and lane B's 17 leaves are proved; its report is coming.
+4. **FS131-ICL1 — the count's lanes Λ1 (the plane) then Λ4 (the extension)** (tree `fs131-wch`, branch `fs131-wcl` from the join
+   `3ae198eac`; the first build compiles the proof line's modules).
 
 ## 4. Where each line stands
 
-**The port** — § 3 item 1. After it: the density equality's landing.
+**The five-colour chain** — one line again: `fs131-wt3` (the join of `fs131-wt2`, where lane T, M8b and the zero-entropy side are
+proved — `zeroEntropyCarried_of_numberField` on the standard three, item 850 — with `fs131-wk12`, the map's six typed modules and the
+count's eight). Branches growing from it: `fs131-wt3` (IJ1), `fs131-wcl` (ICL1). Still to prove: the count's Λ2 (`FiniteZhang`,
+`CountResidue`, `CountDescent`; it repairs `Counting.finite_quot`'s missing `[NumberField F]`, item 847) and Λ3 (`CountTorus`,
+`CountCompletion`), both after IJ1's replacement in those files; M13's K3–K5 with Lemma P (on the chain's line, reading `ClassRatio`)
+after IKC1's soundness; M11 (a planner first); lane A `exists_admissiblePair` (a planner first); M5-E/M5-P; the split's leaves 2–6;
+M9-S; M15. **Rulings to carry at the chain's landing:** `entropySplit`/`zeroEntropyCarried` move to `ZeroEntropyClosed` (items 761,
+811); the declared printed theorem `positive_entropy_rigidity` registered with the audit; lane N's five unread binders dropped by a
+planner with a dump (item 770); Lemma F made public if read twice (item 801).
 
-**The density equality (FS-133)** — complete, no `sorry`, on `fs133-wpq` at `110f1c923` (tree `fs133-wk1`, its compiled library
-current for it; keep it for the landing): `α₁(ℝ²) = m₁(ℝ²)`, `χ_f(ℝ²) = 1/m₁(ℝ²)`, C133-PAIR both ways, on the standard three and
-`Spectral.residual_fourier` (which the port proves). Answers `[DuczVarga2026]` Conj. 1's first clause and `[MatolcsiEtAl2025]`
-§2. **Its landing** runs the join recipe (`fs132-wi1:plans/FS131-KO1-port-plan.md` § 4.5; step 0 done: 54 of 57 IDENTICAL, 3 up
-to proof arguments, ruled, item 798), drops the unread `[IsProbabilityMeasure μ]` of `ofReal_integral_le_measure_pos`, fixes
-ICD1's block wording (items 789, 779).
+**The density bound** — `fs131-wdb` (the planner's skeleton, `Plane/DensityBound/*`, 28 leaves) and `fs131-wdb1` (IDB1: lanes C and
+B). Still to prove: lanes F (`Autocorr`, 900 planned lines), P (`Pattern`, `Window`, and `Plane/OneAvoidingDensity`'s one leaf — a
+proof in that file, approved, item 845), X (the `X23` instance and the theorem, 700; the atom check in about 75 theorems). Then its
+landing on its own line from `main`; the chain reads it.
 
-**The five-colour chain (rank 1)** — headline `min_localBound_five_le_chromaticNumber_of_closed`, its composition on the
-standard three over eight hypotheses (seven once it joins `main`). Branches: **`fs131-wt1`** (`72c8520a7`, tree `fs131-wq1`) is the
-joined line — proofs (dual group, Pontryagin duality, pieces with Lemma Γ, entropy file, ports P2–P3, the split's first leaf,
-lane T's 29 leaves, M9-R) and plans (M5, M9, the interface `TateModel F`, M8b's five modules); **`fs131-wt2`** grows from it
-(ITK1, running); **`fs131-wkr`** (`3fabd5e10`) and **`fs131-wk12`** (`f6898c132`, tree `fs131-wch`) hold the map's six typed
-modules (M2a `Herglotz`, M3 `InvariantMeasure`, M10 `ContinuityGroup`, M2b `BochnerTau`, M13 `ClassRatio`, `Plane/OneAvoidingDensity`)
-and the count's eight modules (`count_of_oneAvoidingDensityBound`, 57 leaves) — **not yet joined with `fs131-wt1`/`wt2`.** The
-map: `fs131-wch:plans/FS131-KR1-chain-map.md` § Stage 5; the count re-priced at 4,150–6,000 lines from first leaves (item 832).
-**Rulings to carry at the chain's join and landing:** `Counting.toL` replaced by lane T's `ofUnitRing` (item 832); `entropySplit`
-and `zeroEntropyCarried` (with its readers) move downstream into `Rigidity/ZeroEntropyClosed`, the scope binder dropped if
-unread (items 761, 811); `ChainAtTA`'s `mem_torsion_mul_arch_iff` and `exists_rat_coords` made public for M10 (item 823); the
-declared printed theorem `Rigidity.positive_entropy_rigidity` registered with the audit (its four items: KN6 § Stage 6, KN7's
-repair R1); the five unread binders of lane N's statements dropped by a planner with a dump (item 770); Lemma F made public if a
-second module reads it (item 801).
-
-**The density bound** — § 3 item 3; lands on its own line from `main`, read by the count.
-
-**Rank 4, the p-adic result (ledger row 75):** unplanned; after the chain.
+**Rank 4, the p-adic result (row 75):** unplanned; after the chain.
 
 ## 5. The queue (four slots; launch into each as it frees)
 
-1. **The join of the chain's lines**: `fs131-wt2` (after ITK1) with `fs131-wk12` (the map's and the count's modules) — an
-   implementer, conflicts expected in `ARCHITECTURE.md` and `Proofs.lean`, then `Counting.toL` → `ofUnitRing`.
-2. **Implementer lanes ready** (each from its planner's record): the count's Λ1–Λ4 (`fs131-wch:plans/FS131-K12A-count.md` § 5.2,
-   each opening with its hard leaf); M2a, M3, M10, M2b (KR1 § 2.1–2.4); M5-E, M5-P (KN9 § 5.1); the split's leaves 2–6
-   (`EntropySplitMax`); M9-S; lane A `exists_admissiblePair` (a planner first; my unchecked note on a completely split prime in
-   item 761 ruling 4); M15 (KR1 § 2.7); M13's per-prime leaf after KC13.
-3. **Planners**: M11 (A⁺ at the empty set; KR1 § 2.4 — the cyclic-subspace step no record states).
-4. **Landings in order**: the port (LP1) → its filing (the Clerk) → the density equality → its filing → the density bound →
-   the chain → **the W6 publication pass** (confirm each irreversible step with Kooshi).
+1. When IDB1 hands back: **the density bound's lanes F, P, X** (one or two implementers; F and P first, X reads P's definitions).
+2. When IJ1 hands back: **the count's Λ2 and Λ3** on the joined line (one implementer each, or one for both), Λ2 carrying item 847's
+   repair; then **the M11 planner**.
+3. When IKC1 hands back: **M13's K3–K5 and Lemma P** on the chain's line, with the strengthened checker's p = 11 and p = 19 checks.
+4. **Planners**: M11; lane A. **Landings in order:** the density bound → its filing → the chain → the W6 publication pass.
 
-Brief generators: `data/fs131/briefs/scripts/mk-*.py` on `mkbrief.py` (`fresh(JOB)` refuses a used id, item 754). Gate every
-brief (`python3 .claude/skills/keryx/scripts/brief_gate.py all <brief>`) and **commit only inside `if <gate>; then … fi`**
-(item 821). Write every path in full under the job's tree (the gate resolves short paths on `main`); a file not yet written goes
-in words; the gate reads "independent" in a role line as naming a second mind — reword.
+Generators: `data/fs131/briefs/scripts/mk-*.py` on `mkbrief.py` (`fresh(JOB)` refuses a used id — and an id whose lower-case form
+names a folder under any `data/fs13*/`, item 844). Gate every brief (`python3 .claude/skills/keryx/scripts/brief_gate.py all <brief>`)
+and **commit only inside `if <gate>; then … fi`**. Paths in full under the job's tree; a file not yet written goes in words. Filing
+generators: `mk-fs131-fc4.py`, `mk-fs131-fc5.py` (copy the latter for the next).
 
 ## 6. Owed, not done
 
-- **The second filing**: the older handoff's § 7 list; `LEAN.md` lines drafted in the records of FS131-KN7, KN8, KN9, KT1,
-  K8B1, KPD1, KR1, K12A, IN1L, IDG1, IG1, IPA1, IPB1, IPD1, IP23, ITT1 and the port's classes (adaptations, ruled statement
-  changes, the cascade, pin differences, the comparator's rules, the nolint key); bibliography reading-status lines
-  (`[EinsiedlerLindenstrauss2022]`, `[OAIMath2026]`, `[Rudin1962]`, `[AmbrusEtAl2023]`, and those KR1 and K12A drafted); the
-  correction to `plans/EXT-OAI1-audit.md` ("about 16,600 lines" → 12,005 measured, item 759).
-- **One sweep of older docstrings** (the last handoff's list).
-- **The tooling list**: `slot.py` reads a cap kill only at 137 (item 835); the port comparator's memory (fixed to stream by LP1);
-  `data/fs131/lc1/code_only_diff.py` plants at the first `:=` (item 782); dumpers under `#eval` buffer their output (item 804);
-  the assumptions step cannot see a discharged written-out hypothesis; the brief gate's "independent" false positive; the port
-  generator's textual statement guard (item 763).
-- **Cleanup pass** (each needs his word, now folded into W6's publication pass): transcript backups out of history, final states
-  for open milestones, a README, a proof-atlas rebuild, finished trees' untracked logs.
+- **The second filing** (base `8eece67b0`): the older handoff's § 7 list; the `LEAN.md` lines drafted in the records of FS131-KN7, KN8,
+  KN9, KT1, K8B1, KPD1, KR1, K12A, KDB1, KC13, ITK1, IN1L, IDG1, IG1, IPA1, IPB1, IPD1, IP23, ITT1 and the port's classes; bibliography
+  reading-status lines (`[EinsiedlerLindenstrauss2022]`, `[OAIMath2026]`, `[Rudin1962]`, `[AmbrusEtAl2023]`, `[KMOR2016]`, and those KR1,
+  K12A and KC13 drafted); corrections: `plans/EXT-OAI1-audit.md` "about 16,600 lines" → 12,005 (15,964 with scaffolding);
+  `scripts/Vacuity.lean` line 561's history paragraph; the density bound's price in items 818 and 823; M13's price (KC13: the q ∈ {11,
+  19} branch alone 3,500–6,700 lines); a grade note on J26/J49's records (no Watson needed, item 845); the `--dupes` +1 run of FC5;
+  FS-133's deriver's predictions to score (`plans/FS133-close-inventory.md` § The close).
+- **One sweep of older docstrings and proof hygiene** (the last handoff's list; the unread `have hne` in `residual_fourier_model`).
+- **The tooling list**: `slot.py` reads a cap kill only at 137; `data/fs131/lc1/code_only_diff.py` plants at the first `:=`; dumpers
+  under `#eval` buffer; the assumptions step cannot see a discharged written-out hypothesis, nor a projection's model; the brief gate's
+  "independent" false positive; the port generator's textual statement guard; `fresh()`'s cross-milestone folder match; **a skeleton
+  `instance`/`def` with a `sorry` body drops the section's instance variables** (item 847 — a planner's dump must check class binders);
+  `tools/fs133_ipq1_moved.py --binder-dropped`'s first-binder pick.
+- **Cleanup pass** (folded into W6's publication pass, each irreversible step with his word).
 
 ## 7. Rules from today
 
-Times in the inventory come from `date -u` (item 812). A hand-back is quoted "from its hand-back message" (item 775). A fact is
-proved once: move a statement upstream rather than copy it (items 747, 752, 811, 819). An unread binder of a statement of ours
-is dropped with a dump; a port keeps the source's statement and silences a linter in the file by name with a reason (item 831).
-Port rules: adaptations (closed terms, no new binder), ruled statement changes (the release's own section variables), pin
-differences, and comparator rules under a standing word (items 758, 763, 772). Read a probe's "does not exist" with its import
-list and namespace (item 811). A memory or disk reading near its limit is reported at once.
+Times from `date -u`. Hand-backs quoted "from its hand-back message". A fact is proved once: move a statement upstream rather than copy
+it. An unread binder of ours is dropped with a dump. A port keeps the source's statement and silences a linter in the file by name with a
+reason. **A landing is announced only when the gate is green on one commit, merged into `main`, and `main` checked equal to it outside
+`plans/` and `data/`** (items 808, 844) — the merge is mine, after the hand-back, once the commits after the green one are shown to touch
+only records. **The size budget is met by a move to a file read by address, its lost tokens given that home in the fact audit's
+`EXTERNAL_HOMES`** (item 859). Read a probe's "does not exist" with its import list and namespace (items 811, 855). A memory or disk
+reading near its limit is reported at once.
