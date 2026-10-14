@@ -627,17 +627,79 @@ private theorem opSum_O1 (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) :
   push_cast
   ring
 
+/-- A block's matrix is positive semidefinite on its `m` indices. -/
+private def PSDN (tri : List (List ℤ)) (m : ℕ) : Prop :=
+  ∀ v : ℕ → ℝ, 0 ≤ ∑ i ∈ Finset.range m, ∑ j ∈ Finset.range m, (triGet tri i j : ℝ) * v i * v j
+
+/-- **Leaf L1** (K2b, K2g): the PSD check certifies its block's matrix. -/
+private theorem psd_of_psdCheck (b : Blk) (h : psdCheck b = true) : PSDN b.tri b.m := by
+  sorry
+
+/-- A block's terms at the moments, over a list of representative monomials: for each of its weights
+`R₀₀ c² Y([]) + Σ_a 2 R₀,₁₊ₐ c σ Y(a) + Σ_{a,a'} R₁₊ₐ,₁₊ₐ' Σ_t κ(t) Y(a ∪ (a' + t))` (`SOUNDNESS.md` § 4). -/
+private noncomputable def blockT (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (b : Blk) (reps : List (List ℕ)) : ℝ :=
+  (b.wts.map fun wi =>
+    (triGet b.tri 0 0 : ℝ) * (cval C wi : ℝ) ^ 2 * Ym C.p φ [] +
+    ∑ a ∈ Finset.range reps.length,
+      2 * (triGet b.tri 0 (1 + a) : ℝ) * (cval C wi : ℝ) * (sigma C wi : ℝ) * Ym C.p φ (reps.getD a []) +
+    ∑ a ∈ Finset.range reps.length, ∑ a' ∈ Finset.range reps.length, (triGet b.tri (1 + a) (1 + a') : ℝ) *
+      ∑ t ∈ Finset.range (C.p * C.p),
+        (kappa C wi t : ℝ) * Ym C.p φ (reps.getD a [] ++ (reps.getD a' []).map fun x => addP C.p x t)).sum
+
+/-- **Leaf L2** (K2g, `SOUNDNESS.md` M6): a block whose matrix is positive semidefinite contributes a non-negative
+number, for any `φ` — `p·T = Σ_j Σ_γ vᵀ R v` with `v₀ = c`, `v₁₊ₐ = Σ_x f(j + ⟨u, x⟩) Π_{a}(φ ∘ γ ∘ (· + x))`. -/
+private theorem blockT_nonneg (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (b : Blk) (reps : List (List ℕ))
+    (hpsd : PSDN b.tri b.m) (hm : reps.length + 1 ≤ b.m) (hw : ∀ wi ∈ b.wts, wi < C.weights.length) :
+    0 ≤ blockT C φ b reps := by
+  sorry
+
+/-- **Leaf L3** (K2h): the times-1 families are the blocks' terms — the orbit rows are phase 1's (`orowsOK`), each
+pair's transporter moves its term onto its orbit's representative, `R` is symmetric and `κ` even. -/
+private theorem opSum_O23_eq (C : Cert) [NeZero C.p] (hC : globalOK C = true) (φ : V C.p → ℝ) :
+    opSum C.p φ (opsO2 C ++ opsO3 C (orbRows C)) = (C.blocks1.map fun b => blockT C φ b C.reps).sum := by
+  sorry
+
+/-- **Leaf L4** (the q-part): the times-q family is `q(φ)` times the q-blocks' terms over the one monomial `[0]` —
+`Q(m)(Y) = q(φ)·Y(m)` (`q(φ∘γ) = q(φ)`), and every `t` moved onto its class's representative. -/
+private theorem opSum_O4_eq (C : Cert) [NeZero C.p] (hC : globalOK C = true) (φ : V C.p → ℝ) :
+    opSum C.p φ (opsO4 C (qcoefs C)) = qform C.p φ * (C.blocksq.map fun b => blockT C φ b [[0]]).sum := by
+  sorry
+
+private theorem globalOK_of (C : Cert) (hC : certOK C = true) : globalOK C = true := by
+  simp only [certOK, Bool.and_eq_true] at hC; exact hC.1.1
+
+private theorem psdAll_of (C : Cert) (hC : certOK C = true) : ∀ b ∈ C.blocks1 ++ C.blocksq, psdCheck b = true := by
+  simp only [certOK, psdAll, Bool.and_eq_true, List.all_eq_true] at hC; exact hC.2
+
+private theorem shape_of (C : Cert) (hC : globalOK C = true) :
+    (∀ b ∈ C.blocks1, b.m = C.reps.length + 1) ∧ (∀ b ∈ C.blocksq, 2 ≤ b.m) ∧
+    (∀ b ∈ C.blocks1 ++ C.blocksq, ∀ wi ∈ b.wts, wi < C.weights.length) := by
+  simp only [globalOK, Bool.and_eq_true, List.all_eq_true, Nat.beq_eq, Nat.ble_eq, Nat.blt_eq] at hC
+  exact ⟨hC.1.1.2, hC.1.2, hC.2⟩
+
 /-- **The times-1 blocks** (K2g, K2h): their constant, linear and quadratic terms sum to a non-negative number. -/
 private theorem opSum_O23_nonneg (C : Cert) [NeZero C.p] (hC : certOK C = true) (φ : V C.p → ℝ)
     (h0 : ∀ x, 0 ≤ φ x) (h1 : ∀ x, φ x ≤ 1) :
     0 ≤ opSum C.p φ (opsO2 C ++ opsO3 C (orbRows C)) := by
-  sorry
+  have hg := globalOK_of C hC
+  obtain ⟨hm, -, hw⟩ := shape_of C hg
+  rw [opSum_O23_eq C hg]
+  refine List.sum_nonneg fun x hx => ?_
+  obtain ⟨b, hb, rfl⟩ := List.mem_map.1 hx
+  exact blockT_nonneg C φ b C.reps (psd_of_psdCheck b (psdAll_of C hC b (List.mem_append_left _ hb)))
+    (hm b hb).ge (hw b (List.mem_append_left _ hb))
 
 /-- **The times-q blocks** (K2g, the q-part): `q(φ)` times a non-negative number. -/
 private theorem opSum_O4_nonneg (C : Cert) [NeZero C.p] (hC : certOK C = true) (φ : V C.p → ℝ)
     (h0 : ∀ x, 0 ≤ φ x) (h1 : ∀ x, φ x ≤ 1) (hq : 0 ≤ qform C.p φ) :
     0 ≤ opSum C.p φ (opsO4 C (qcoefs C)) := by
-  sorry
+  have hg := globalOK_of C hC
+  obtain ⟨-, hm, hw⟩ := shape_of C hg
+  rw [opSum_O4_eq C hg]
+  refine mul_nonneg hq (List.sum_nonneg fun x hx => ?_)
+  obtain ⟨b, hb, rfl⟩ := List.mem_map.1 hx
+  exact blockT_nonneg C φ b [[0]] (psd_of_psdCheck b (psdAll_of C hC b (List.mem_append_right _ hb)))
+    (hm b hb) (hw b (List.mem_append_right _ hb))
 
 /-- A row's ops evaluate to `± lam · Σ_γ Π_A φ∘γ · Π_B (1 − φ∘γ)`. -/
 private theorem opSum_boxOps (p : ℕ) [NeZero p] (φ : V p → ℝ) (lam : ℕ) : ∀ (B A : List ℕ) (neg : Bool),
