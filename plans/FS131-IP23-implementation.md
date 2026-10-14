@@ -208,3 +208,46 @@ applied at the wrong group (`H := Unit`) is refused (`Type mismatch`, exit 1; `l
 imports cell `Outside/OAI015Generating`) and `Rigidity/EntropySplitMax` (5 leaves; the first proved; imports cell with
 `Outside/OAI015ErgodicDecomposition`) — the imports cells are what `tools/check_architecture.py` holds against the
 import graph; PASS (`logs/arch-2.out`).
+
+## Stage 5 — SAVED: the build under the slot, and every receipt from the built tree
+
+**5.1 Build 2** (`data/fs131/ip23/build.sh 2 8`: the slot at 10 GiB, `MEMMAX=10G BATCH=8 ./scripts/build.sh`): **exit 0**,
+`250 of 250 batches, 9 module(s) rebuilt`, 8 m 05 s, peak 4.45 GiB summed, 3.59 GiB one process
+(`logs/build-2.log`, `.times`, `.rss`; the full output `build/gate/build/20261014T094506Z-2501458.log`). Rebuilt: the two
+ported modules (their Amendment 2 headers), `Rigidity/Entropy`, `PositiveEntropy`, `ZeroEntropyNames`, `ChainAtTA`,
+`Pieces`, `EntropySplitMax`, `Proofs`. **No warning from any line this job wrote**: none from `Entropy` or the two
+ported modules; `EntropySplitMax`'s five `declaration uses 'sorry'` are its other five leaves (ll. 79, 93, 101, 112,
+117: `rotInv_sub_maxMultiple`, `measure_haarSet_eq_zero`, `ksEntropy_eq_zero_of_not_smul_le`,
+`entropySplit_of_admissiblePair`, `not_smul_dualHaar_le_dirac_one`), not this job's. (Build 1, Stage 2, was the port
+alone: exit 0, 7 m 30 s, the two modules rebuilt with no warning.)
+
+**5.2 No statement changed, from the kernel's side.** The six modules dumped again from the built tree
+(`statements-after.txt`, compressed at the commit) against Stage 1's dump: **PASS** — 209 named constants (kinds and
+types), 48 data definitions' values, 3 example heads; the one declared axiom unchanged; no new public constant, no new
+private constant; internal 129 and 129 (`statements-compare.out`). So neither the two proofs nor the two new import lines
+moved a stored term of `Entropy`, `EntropySplitMax` or the four modules downstream of `Entropy`. **The control** on the
+same pair: 8 of 8 planted faults reported, "the check can fail" (`statements-compare-control.out`). No binder was
+dropped (no `--dropped` list).
+
+**5.3 The axioms of every declaration of the two leaves' files**, printed from the built tree
+(`lean/Axioms.lean`, IG1's printer aimed at the two modules; `axioms-after.txt`) and classed by
+`tools/fs131_ip23_axioms.py` (`axioms-verdict.out`): **45 records, 40 CLEAN, 5 OTHER-LEAF, 0 failing; AXIOMS OK**.
+`Rigidity/Entropy`: all 36 CLEAN (31 public, 4 private, plus `nameCell`'s generated record counted by the printer as
+the file's) — among them **`ksEntropy_eq_iSup_ksEntropyOn`: `[propext, Classical.choice, Quot.sound]`**.
+`Rigidity/EntropySplitMax`: 9 records — CLEAN `invariantSigma`, `invariantSigma_le`, `haarSet` and **
+`condExpKernel_ergodicDecomposition`: `[propext, Classical.choice, Quot.sound]`**; OTHER-LEAF the five leaves not this
+job's, each `sorryAx` from itself alone. The planted record (`positive_entropy_rigidity_of_polishSpace`) is read as
+resting on the declared theorem. **The control**: 4 of 4 planted faults reported and the plant fired
+(`axioms-control.out`) — a `sorry` in the tenth leaf, an unknown axiom, a `sorry` from a leaf outside the named five, and
+the declared theorem in the first leaf.
+
+**5.4 The port, again from the built tree.** The 64 records: all a subset of the standard three
+(`port-axioms-built-verdict.out`); the print of this pin made again from the build's `.olean`s is byte-identical to
+Stage 2's (`readback/HereDump.out`), and READBACK OK (`logs/readback-compare-built.out`).
+
+**5.5 The environment linters** (`lake lint --no-build -- --no-build --trace` under a 7 GiB slot; `logs/lint-1.log`): 13 of
+14 pass; **`unusedArguments` reports one declaration**, the port's `OAI015.condExpKernel_ae_constant`
+(ErgodicDecomposition l. 104), whose release statement takes `[Nonempty Y]` that its proof does not read. The class is
+FS131-IE1's Amendment 1 (the binder kept, the linter silenced by name in the generator's NOLINT table): proposed to the
+coordinator as a third generator change (`generator-change-3.diff`, sha256 `79ff61ac…`, commit `2ab2e397f`), not applied
+at this stage.

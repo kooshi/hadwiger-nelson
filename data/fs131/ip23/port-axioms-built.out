@@ -1,0 +1,143 @@
+slot: admitted ip23: mem 4 GiB (hard cap), cpus 0,1
+'HadwigerNelson.Outside.OAI015.finiteShannon_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.finiteShannon_mass_decomposition' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.finiteShannon_joint_mass_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.finiteShannon_submodular' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.finiteShannon_fst_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.finiteShannon_joint_decomposition' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationPair_measurable_fiber' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.conditionalObservationEntropy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationEntropy_swap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationEntropy_assoc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.conditionalObservationEntropy_nonneg' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.conditionalObservationEntropy_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.conditionalObservationEntropy_chain' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationEntropy_submodular' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.conditionalObservationEntropy_conditioning_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.conditionalObservationEntropy_pair_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationEntropy_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.conditionalObservationEntropy_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.conditionalObservationEntropy_comp_preserving' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.conditionalObservationEntropy_coarsening_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.conditionalObservationEntropy_pair_pair_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationEntropy_le_add_conditional' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationEntropy_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.orbitName_one' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Outside.OAI015.conditionalOrbitEntropy_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.conditionalOrbitEntropy_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationEntropyRate_le_add_conditional' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationConditionalProbability' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationConditionalProbability_nonneg' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationConditionalProbability_le_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationConditionalProbability_sum' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationConditionalProbability_ae_sum' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.conditionalObservationEntropy_eq_sum' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.conditionalObservationEntropy_eq_integral' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationSigma' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationSigma_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.stronglyMeasurable_observation_values' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.setIntegral_eq_of_observation_atoms' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.observation_values_ae_eq_condExp' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.setIntegral_observationConditionalProbability' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationConditionalProbability_ae_eq_condExp' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.observationConditionalProbability_tendsto' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.conditionalObservationEntropy_tendsto_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.measureEntropy_eq_iSup_generating' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.fixedPoint_mem_closed_convex_orbit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.exists_convex_orbit_approximants' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.actionInvariantSigma' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.actionInvariantSigma_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.measurable_actionInvariantSigma' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.exists_pointwise_invariant_representative' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.orbitConvexHull' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.orbitConvexHull_measurable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.orbitConvexHull_interval' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.orbitConvexHull_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.orbitConvexHull_setIntegral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.lp_convex_orbit_representative' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.exists_invariant_orbit_average_limit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.orbitConvexHull_aeSetIntegral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.invariant_set_independent_of_orbit_indicator_limit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.ergodicSMul_of_orbit_indicator_limits' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.condExpKernel_invariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.invariant_kernel_decomposition' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Outside.OAI015.condExpKernel_ae_constant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Outside.OAI015.action_ergodic_decomposition' depends on axioms: [propext, Classical.choice, Quot.sound]
+seconds=2
+exit=0
