@@ -134,7 +134,7 @@ theorem exists_trigPoly_tendsto [Countable R] (σ : Measure (AddChar R Circle)) 
       rw [div_le_iff₀ (by positivity)]
       nlinarith [norm_nonneg L, hε]
     calc dist (L (trigC a)) I ≤ dist (L (trigC a)) (L g) + dist (L g) I := dist_triangle _ _ _
-      _ < 1 / (n + 1) + 1 / (n + 1) := by linarith
+      _ < 1 / (n + 1) + 1 / (n + 1) := by rw [dist_comm] at hg; linarith
       _ = 2 / (n + 1) := by ring
   choose a ha using hstep
   refine ⟨a, ?_⟩
@@ -159,3 +159,5 @@ theorem exists_trigPoly_tendsto [Countable R] (σ : Measure (AddChar R Circle)) 
 end
 
 end HadwigerNelson.Rigidity.KM11Scratch
+
+#print axioms HadwigerNelson.Rigidity.KM11Scratch.exists_trigPoly_tendsto
