@@ -62,6 +62,15 @@ section Spectral
 
 variable {R : Type*} [AddCommGroup R] {Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω}
 
+/-- **The complex Gram identity in a real inner product space**: for vectors `v_x` and complex weights `z_x`,
+`Σ_{x,y} z_x z̄_y ⟨v_y, v_x⟩ = ‖Σ Re z_x v_x‖² + ‖Σ Im z_x v_x‖²` (the Gram matrix is real and symmetric, so the imaginary
+part cancels). The one finite-sum identity under `posDef_koopman` and `norm_sq_koopmanSum_re_add_im`. -/
+theorem gram_sum_eq {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] {ι : Type*} (v : ι → E) (s : Finset ι)
+    (z : ι → ℂ) :
+    ∑ x ∈ s, ∑ y ∈ s, z x * star (z y) * ((inner ℝ (v y) (v x) : ℝ) : ℂ) =
+      ((‖∑ x ∈ s, (z x).re • v x‖ ^ 2 + ‖∑ x ∈ s, (z x).im • v x‖ ^ 2 : ℝ) : ℂ) := by
+  sorry
+
 /-- **The Koopman correlation is positive definite**: `Σ_{x,y} z_x z̄_y ⟨f, V_{x−y} f⟩ = ‖Σ Re z_x V_x f‖² + ‖Σ Im z_x V_x
 f‖²` (the Gram matrix `⟨V_x f, V_y f⟩` is real and symmetric). -/
 theorem posDef_koopman (T : R → Ω → Ω) (hT : ∀ y, MeasurePreserving (T y) μ μ)
@@ -138,9 +147,23 @@ theorem comp_koopmanSum (T : R → Ω → Ω) (hT : ∀ y, MeasurePreserving (T 
     Lp.compMeasurePreserving (T z) (hT z) (koopmanSum T hT f b) = koopmanSum T hT f (b.mapDomain (· + z)) := by
   sorry
 
+/-- **The spectral vector of a set** (the cyclic-subspace construction, `w = 1_A(V) f`): for a measurable set `A` of
+characters there is a vector `w` with `⟨w, f⟩ = σ_f(A)` and `‖V_z w − w‖² ≤ 2 ∫_A |χ(z) − 1|² dσ_f` for every `z` — the
+`L²`-limit of the real Koopman sums `Σ Re(a_y) V_y f` along trigonometric polynomials `P_a → 1_A` in `L²(σ_f)`
+(`exists_trigPoly_tendsto`; Cauchy by `norm_sq_koopmanSum_re_add_im`; the pairing by `inner_koopmanSum_re`; the bound by
+`comp_koopmanSum` and `|(χ(z) − 1)P| ≤ |(χ(z) − 1)1_A| + 2|P − 1_A|`). Reads no orthogonality and no filter. -/
+theorem exists_spectral_vector [Countable R] (T : R → Ω → Ω) (hT : ∀ y, MeasurePreserving (T y) μ μ)
+    (hadd : ∀ x y, T (x + y) = T x ∘ T y) {f : Lp ℝ 2 μ} {σ : Measure (AddChar R Circle)}
+    (hσ : IsSpectralMeasureOf T hT f σ) {A : Set (AddChar R Circle)} (hA : MeasurableSet A) :
+    ∃ w : Lp ℝ 2 μ, inner ℝ w f = σ.real A ∧
+      ∀ z : R, ‖Lp.compMeasurePreserving (T z) (hT z) w - w‖ ^ 2 ≤
+        2 * ∫ χ in A, ‖((χ z : Circle) : ℂ) - 1‖ ^ 2 ∂σ := by
+  sorry
+
 /-- **The cyclic-subspace step** (FS131-KR1's step (d)): a vector orthogonal to every `l`-continuous vector has a spectral
 measure that gives measure `0` to every measurable set `A` of characters tending to `1` along `l`, for `l` countably
-generated. The vector `w = 1_A(V) f` is built as a limit of real Koopman sums and is `l`-continuous; `σ(A) = ⟨w, f⟩ = 0`. -/
+generated. The spectral vector `w` of `A` (`exists_spectral_vector`) is `l`-continuous (its bound tends to `0` along `l` by
+dominated convergence, each `χ ∈ A` tending to `1`), so `σ(A) = ⟨w, f⟩ = 0`. -/
 theorem spectral_null_of_orthogonal [Countable R] (T : R → Ω → Ω) (hT : ∀ y, MeasurePreserving (T y) μ μ)
     (hadd : ∀ x y, T (x + y) = T x ∘ T y) (l : Filter R) [l.IsCountablyGenerated] {A : Set (AddChar R Circle)}
     (hA : MeasurableSet A) (hAl : ∀ χ ∈ A, Tendsto (fun y => ((χ y : Circle) : ℂ)) l (𝓝 1))

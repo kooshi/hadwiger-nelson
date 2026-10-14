@@ -81,6 +81,21 @@ def colourInd {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω) [IsFiniteMeasu
     (hκ₀ : Measurable κ₀) (j : Fin 4) : Lp ℝ 2 μ :=
   indicatorConstLp 2 (hκ₀ (measurableSet_singleton j)) (measure_ne_top μ _) 1
 
+/-- The tetrahedral form against the diagonal: `3 ⟨e_i, e_k⟩ + 1 = 4 [i = k]`. -/
+theorem three_mul_tetra_add_one (i k : Fin 4) : 3 * tetra i k + 1 = if i = k then 4 else 0 := by
+  unfold tetra
+  split_ifs <;> norm_num
+
+/-- **A colour indicator's Koopman correlation** is the probability of one colour at `0` and at `y`:
+`⟨e_j, V_y e_j⟩ = μ(κ(0) = j, κ(y) = j)`, for a random colouring moved equivariantly at `0`. -/
+theorem integral_colourInd_mul_comp {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω) [IsProbabilityMeasure μ]
+    (T : unitRing F → Ω → Ω) (hT : ∀ y, MeasurePreserving (T y) μ μ) (κ : Ω → unitRing F → Fin 4)
+    (hκ : ∀ x, Measurable fun ω => κ ω x) (hequiv : ∀ y, ∀ᵐ ω ∂μ, κ (T y ω) 0 = κ ω y) (y : unitRing F) (j : Fin 4) :
+    ∫ ω, colourInd μ (fun ω => κ ω 0) (hκ 0) j ω *
+        Lp.compMeasurePreserving (T y) (hT y) (colourInd μ (fun ω => κ ω 0) (hκ 0) j) ω ∂μ =
+      μ.real {ω | κ ω 0 = j ∧ κ ω y = j} := by
+  sorry
+
 /-- **The trace measure in colour indicators** (finding 1): for a random colouring `κ` on a probability space with an
 action `T` of `R` that moves it equivariantly at `0` (`κ (T y ω) 0 = κ ω y` almost surely), a trace spectral measure `σ` of
 its law and spectral measures `σ_j` of its colour indicators satisfy `3σ + δ₁ = 4 Σ_j σ_j`. Coefficient by coefficient:

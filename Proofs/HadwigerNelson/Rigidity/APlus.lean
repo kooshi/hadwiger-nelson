@@ -93,7 +93,10 @@ theorem factorColouring_rot_ae [NumberField F] (μ : InvariantColouring F) (u : 
   sorry
 
 /-- **Equality in SI-3 at every unit vector**: `E[p_j(0) p_j(u)] = 0` for every `u ∈ U` and every colour `j` — by SI-3, the
-mean of `Re χ(u)` off `T + A` is `0` at every `u`. -/
+mean of `Re χ(u)` off `T + A` is `0` at every `u`. MODEL (described, not a declaration): over `ℚ`, the law of
+`x ↦ φ(x) + ξ`, `φ : R → 𝔽₂` the residue map at the ramified prime above 2 and `ξ` a fair bit, is `𝒜`-measurable (its
+spectrum is torsion), so `p_j(x) = 1{c(x) = j}` and every product vanishes across an edge. At a field where R88-TCA holds
+it is refuted for every `μ` (`aPlusOfR88` through `equalAtUnits_of_not_neg`): it is a step inside a proof by contradiction. -/
 def EqualAtUnits [NumberField F] (μ : InvariantColouring F) : Prop :=
   ∀ (u : unitVectors F) (j : Fin 4),
     ∫ c, condLaw (colourFactor μ) μ.μ (fun c => c) 0 j c * condLaw (colourFactor μ) μ.μ (fun c => c) (uvRing u) j c ∂μ.μ = 0
@@ -136,9 +139,10 @@ def factorLaw [NumberField F] (μ : InvariantColouring F) (h : EqualAtUnits μ) 
 
 /-- **The factor colouring's trace measure is null off `T + A`** (A⁺'s proof, ll. 244–247): `3σ′ + δ₁ = 4 Σ_j σ_{e″_j}`
 (`trace_decomp` at `κ = c′`), each `e″_j = 1{c′(0) = j}` is `𝒜`-measurable, so `τ′_∅`-continuous (`contVec_eq_lpMeas`), so
-its spectral measure is carried by `contChars (tauPrime F) = T + A` (`spectral_carried_iff` over `bochnerOn_tauPrime`). -/
-theorem factorLaw_trace_null [NumberField F] (μ : InvariantColouring F) (h : EqualAtUnits μ) {σ' : Measure (Dual F)}
-    (hσ' : IsTraceSpectral F (factorLaw μ h).μ σ') : σ' (TA F)ᶜ = 0 := by
+its spectral measure is carried by `contChars (tauPrime F) = T + A` (`spectral_carried_iff` over `bochnerOn_tauPrime`).
+Stated for the law of `c′` whatever `μ`: neither properness of `c′` nor SI-3's equality is read. -/
+theorem factorLaw_trace_null [NumberField F] (μ : InvariantColouring F) {σ' : Measure (Dual F)}
+    (hσ' : IsTraceSpectral F (μ.μ.map (factorColouring μ)) σ') : σ' (TA F)ᶜ = 0 := by
   sorry
 
 /-! ### A⁺ -/
@@ -160,7 +164,7 @@ theorem aPlusOfR88 (F : Subfield ℝ) [NumberField F] : (chainInterface F).APlus
   haveI : Countable F := Finsupp.Countable.of_moduleFinite (R := ℚ) (M := F)
   haveI : Countable (unitRing F) := countable_unitRing
   obtain ⟨σ', hfin, hσ', -⟩ := bochnerHerglotz_of_countable (unitRing F) _ (posDef_corr (factorLaw μ hEq))
-  exact hR (factorLaw μ hEq) σ' ⟨hfin, hσ'⟩ (factorLaw_trace_null μ hEq ⟨hfin, hσ'⟩)
+  exact hR (factorLaw μ hEq) σ' ⟨hfin, hσ'⟩ (factorLaw_trace_null μ ⟨hfin, hσ'⟩)
 
 /-! ## Models -/
 
