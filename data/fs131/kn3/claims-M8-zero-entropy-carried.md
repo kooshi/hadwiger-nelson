@@ -65,3 +65,12 @@ M8a: one new file (`Rigidity/ZeroEntropyNames`), after M0-max and M1's `exists_b
 ## Not claimed
 
 Any size or price of M8b. That the statements marked "to type" elaborate as written. The deriver's entries are [hand], one mind; the kernel is their second check, and the deriver names where to attack first (EN2 § 3.7: step 4's "the block of `name_n(x)` at `j` is `name_k(T^j x)`", and step 3's use of the inequality for every `n`). What I read: EN2 §§ 3.0, 3.5–3.7, 5.1 in full; X01D not read by me.
+
+## Since FS131-KN9 (2026-10-14; by hand — the text above is kept)
+
+M8b's vocabulary decided, not typed (`plans/FS131-KN9-chain-zero-entropy.md` § Stage 4): the model built for `O′` and read for
+`R` through `R ⊆ O′` and `c·O′ ⊆ R` (module M9) — **not `R = O′`** (the coordinator's ruling: plan on the weaker reading; the
+scope binder of statement 1 stays until the proof shows it unread); a structure `TateModel F` over the concrete
+`W = L_∞ × ∏′_{split} L_w` carrying the five facts M8b reads, built by **lane T** (Tate's duality in that form: a planner and
+implementer job; strong approximation and Lusin–Souslin are not needed on its routes); M8b-2 (thin boxes, Lemma 3.1′ over
+EN2-ZE), M8b-3 (the pigeonhole over `z = 1 + 2bi`), M8b-4 (leaves and shells) over `(D : TateModel F)`.
