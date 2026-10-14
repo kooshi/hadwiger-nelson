@@ -1,0 +1,4 @@
+slot: waiting (ledger 21 + 4 > budget 22 GiB)
+slot: waiting (ledger 22 + 4 > budget 22 GiB)
+slot: waiting (ledger 21 + 4 > budget 22 GiB)
+slot: waiting (ledger 22 + 4 > budget 22 GiB)
