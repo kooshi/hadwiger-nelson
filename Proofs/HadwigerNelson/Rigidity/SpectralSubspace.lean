@@ -4,7 +4,7 @@ import Mathlib.MeasureTheory.Function.ConditionalExpectation.Basic
 import Mathlib.Topology.ContinuousMap.StoneWeierstrass
 
 /-!
-# Spectral measures of Koopman vectors, the cyclic-subspace step, and `Π = E[· | 𝒜]` in spectral form (FS-131, job FS131-KM11; module M11a; skeleton)
+# Spectral measures of Koopman vectors, the cyclic-subspace step, and `Π = E[· | 𝒜]` in spectral form (FS-131, job FS131-KM11; module M11a)
 
 **Read aloud, against the informal claim.** Let a countable abelian group `R` act on a measure space `(Ω, μ)` by
 measure-preserving maps `T y` (`T (x + y) = T x ∘ T y`), with Koopman operators `V_y f = f ∘ T y` on the real space

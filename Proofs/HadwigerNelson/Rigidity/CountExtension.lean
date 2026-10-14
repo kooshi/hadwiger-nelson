@@ -2,7 +2,7 @@ import Proofs.HadwigerNelson.Rigidity.CountCompletion
 import Proofs.HadwigerNelson.Plane.UnitPairs
 
 /-!
-# The count's extension: spectrum on `T + A` gives a measurable colouring of the completion, proper almost everywhere (FS-131, job FS131-K12A; module M12, block E; skeleton)
+# The count's extension: spectrum on `T + A` gives a measurable colouring of the completion, proper almost everywhere (FS-131, job FS131-K12A; module M12, block E)
 
 **Read aloud, against the derivation** (R88-TC-ext = J28V-1; J28D § 3.2 C1–C3). For an invariant random proper
 four-colouring `μ` of `Cay(R, U)` whose trace spectral measure `σ` is carried by `T + A`:

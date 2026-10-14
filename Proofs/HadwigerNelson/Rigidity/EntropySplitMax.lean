@@ -6,7 +6,7 @@ import Mathlib.MeasureTheory.MeasurableSpace.Invariants
 import Proofs.HadwigerNelson.Outside.OAI015ErgodicDecomposition
 
 /-!
-# The entropy split by the largest Haar multiple (FS-131, job FS131-KN8; module M7b; skeleton)
+# The entropy split by the largest Haar multiple (FS-131, job FS131-KN8; module M7b)
 
 **Read aloud, against the informal claim** (`plans/FS131-EN2-derivation.md` § 5.2, EN2-PE2-MAX: "For every real number field
 `F` and every `U`-invariant finite positive measure `τ` on `R̂`, the set of reals `c ≥ 0` with `c·m ≤ τ` has a largest element

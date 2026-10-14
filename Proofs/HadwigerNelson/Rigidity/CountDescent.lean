@@ -2,11 +2,12 @@ import Proofs.HadwigerNelson.Rigidity.CountExtension
 import Proofs.HadwigerNelson.Rigidity.PlaneZhang
 
 /-!
-# The count: from the slice `Δ × K` down to the finite levels, and `TCA F → R88TCA` (FS-131, job FS131-K12A; module M12, block D; skeleton)
+# The count: from the slice `Δ × K` down to the finite levels, and `TCA F → R88TCA` (FS-131, job FS131-K12A; module M12, block D)
 
 **Read aloud, against the derivation** (R88-TCA; J28D § 3.3: "the count reads `1 = Σ_j p_j ≤ 4 max(α(Y′), r_X) < 1` — no
 such `μ`"; FS100-TCA). The headline's hypothesis `hCount : (chainInterface F).Count` is `TCA F → R88TCA`, and this module
-proves it over the named outside hypothesis `Plane.OneAvoidingDensityBound` (`[AmbrusEtAl2023]` Thm 1):
+proves it over `Plane.OneAvoidingDensityBound` (`[AmbrusEtAl2023]` Thm 1, a theorem of the library,
+`Plane.oneAvoidingDensityBound`, which the headline applies):
 
 * `levelRows φ j k q` — **the descent**: for a colouring `φ` of `ℂ × K`, a colour `j` and a level `k`, the points `z` at
   which colour `j` fills more than three quarters of the level-`k` coset `q` of the fibre `{x : φ(z, x) = j}`. Indexed by the
@@ -402,7 +403,8 @@ theorem false_of_slice (hT : TCA F) (hm : mOne < ENNReal.ofReal (1 / 4)) {φ : �
   have h5 := mul_lt_mul_of_pos_right h4 hs2
   linarith
 
-/-- **The count** (R88-TCA at `S = ∅`, class form), over the outside theorem `[AmbrusEtAl2023]` Thm 1. -/
+/-- **The count** (R88-TCA at `S = ∅`, class form), over `[AmbrusEtAl2023]` Thm 1 as printed (proved in the library:
+`Plane.oneAvoidingDensityBound`). -/
 theorem count_of_oneAvoidingDensityBound (hOA : Plane.OneAvoidingDensityBound) : (chainInterface F).Count := by
   intro hT μ σ hσ hTA
   obtain ⟨φ, hφ, hnull⟩ := exists_slice μ hσ hTA

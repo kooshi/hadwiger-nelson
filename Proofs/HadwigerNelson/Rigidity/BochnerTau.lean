@@ -4,7 +4,7 @@ import Mathlib.Analysis.Fourier.FiniteAbelian.PontryaginDuality
 import Mathlib.Algebra.Order.Chebyshev
 
 /-!
-# Bochner's theorem for the topology `τ′_∅` (FS-131, job FS131-KR1; module M2b; skeleton)
+# Bochner's theorem for the topology `τ′_∅` (FS-131, job FS131-KR1; module M2b)
 
 **Read aloud, against the informal claim.** `bochnerOn_tauPrime : BochnerOn (tauPrime F)`: a finite measure on the dual of
 `R = ℤ[U_F]` whose Fourier transform is continuous for the profinite-plus-archimedean topology is carried by the continuous

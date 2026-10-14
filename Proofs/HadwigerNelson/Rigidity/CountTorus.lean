@@ -2,7 +2,7 @@ import Proofs.HadwigerNelson.Rigidity.ContinuityGroup
 import Mathlib.Analysis.SpecialFunctions.Complex.Log
 
 /-!
-# The count's archimedean factor: one plane, at every number field (FS-131, job FS131-K12A; module M12, block A; skeleton)
+# The count's archimedean factor: one plane, at every number field (FS-131, job FS131-K12A; module M12, block A)
 
 **Read aloud, against the derivation** (J28D § 3.2 C3: "`T_S := ∏_v T(F_v)` … is the closure of `U` in `G_S` (weak
 approximation, CLG-c (W))"; FS100-TCA's "C14.3's induction" at `n` real places; FS100-CX at a complex place). The count

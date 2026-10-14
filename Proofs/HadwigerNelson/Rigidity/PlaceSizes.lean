@@ -3,7 +3,7 @@ import Mathlib.NumberTheory.NumberField.ProductFormula
 import Mathlib.NumberTheory.NumberField.InfinitePlace.Embeddings
 
 /-!
-# The places of `W`, their sizes, and the product-formula gap (FS-131, job FS131-K8B1; module M8b-2a; skeleton)
+# The places of `W`, their sizes, and the product-formula gap (FS-131, job FS131-K8B1; module M8b-2a)
 
 The arithmetic M8b's three parts read (`plans/FS131-K8B1-zero-entropy-second.md`; X01D §§ 3.1–3.2, `plans/FS100-X01D-derivation.md`
 ll. 203–219). `L = F(i)` is `fieldI F`; `W = SAdeleRing F`, the mixed space of `L` times the split adeles (`Rigidity/TateModel`).

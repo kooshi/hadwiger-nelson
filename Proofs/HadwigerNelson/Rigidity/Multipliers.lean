@@ -1,7 +1,7 @@
 import Proofs.HadwigerNelson.Rigidity.PlaceSizes
 
 /-!
-# The pigeonhole's multipliers `(1 + 2bi)/(1 − 2bi)` (FS-131, job FS131-K8B1; module M8b-3a; skeleton)
+# The pigeonhole's multipliers `(1 + 2bi)/(1 − 2bi)` (FS-131, job FS131-K8B1; module M8b-3a)
 
 The multipliers of Lemma 3.2′(a) (X01D § 3.4, `plans/FS100-X01D-derivation.md` l. 248) on the shorter height input of
 FS131-KN8 (`data/fs131/claims-NF2.md` § Dated lines, 2026-10-14: "`z = 1 + 2bi` gives `α′ = 1/(2[F:ℚ])` with no Pythagorean

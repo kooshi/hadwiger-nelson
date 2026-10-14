@@ -2,7 +2,7 @@ import Proofs.HadwigerNelson.Rigidity.ThinBoxes
 import Proofs.HadwigerNelson.Rigidity.Multipliers
 
 /-!
-# The pigeonhole, two scales and one global point (FS-131, job FS131-K8B1; module M8b-3b; skeleton)
+# The pigeonhole, two scales and one global point (FS-131, job FS131-K8B1; module M8b-3b)
 
 Part 3 of M8b (`plans/FS131-K8B1-zero-entropy-second.md`; X01D §§ 3.4–3.6, `plans/FS100-X01D-derivation.md` ll. 246–287), over
 `(D : TateModel F)`, with FS131-KN8's multipliers (`Rigidity/Multipliers`).

@@ -2,7 +2,7 @@ import Mathlib.NumberTheory.NumberField.CanonicalEmbedding.Basic
 import Mathlib.RingTheory.Trace.Basic
 
 /-!
-# Lane T, the archimedean place: the trace on `K ⊗ ℝ` and its duality (FS-131, job FS131-KT1; skeleton)
+# Lane T, the archimedean place: the trace on `K ⊗ ℝ` and its duality (FS-131, job FS131-KT1)
 
 The archimedean half of the standard character of form G (`plans/FS131-KT1-tate.md` § Stage 3): `ψ_∞(b) := e(Tr_∞ b)` on
 Mathlib's mixed space of a number field `K`.

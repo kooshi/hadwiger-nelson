@@ -7,7 +7,7 @@ import Mathlib.Topology.Algebra.Group.OpenMapping
 import Mathlib.Topology.Baire.LocallyCompactRegular
 
 /-!
-# The model of the dual: `TateModel F`, the facts the zero-entropy side reads of `R̂ = W/Λ` (FS-131, job FS131-KT1; skeleton)
+# The model of the dual: `TateModel F`, the facts the zero-entropy side reads of `R̂ = W/Λ` (FS-131, job FS131-KT1)
 
 The interface between module M8b of the chain under "five colours at the square root of 47" (EF_F⁺, the zero-entropy side)
 and lane T, the construction of the model by Tate's self-duality (`plans/FS131-KT1-tate.md`; the coordinator's ruling 1 of

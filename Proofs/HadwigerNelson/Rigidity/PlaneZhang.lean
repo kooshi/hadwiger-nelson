@@ -2,7 +2,7 @@ import Proofs.HadwigerNelson.Plane.WindowDensity
 import Proofs.HadwigerNelson.Rigidity.FiniteZhang
 
 /-!
-# Zhang's count on the plane times a finite Cayley graph, in a window (FS-131, job FS131-K12A; module M12, block C; skeleton)
+# Zhang's count on the plane times a finite Cayley graph, in a window (FS-131, job FS131-K12A; module M12, block C)
 
 **Read aloud, against the derivation** (J28D § 3.2 C5: "social and lonely points, essential neighbourhoods,
 `p_j ≤ ¼(1 − β_j) + r_X β_j`"; R88-TC-count; `[Zhang2012]` Thm 1.8's counting). A finite additive group `Q` with a symmetric

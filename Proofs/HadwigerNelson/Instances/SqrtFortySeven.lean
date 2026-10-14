@@ -25,7 +25,9 @@ crossed here, only stepped around for one field, as Theorem B's parity descent d
 * `A`, `phi` — the 11-integral subring and its residue map;
 * `int_descent`, `unit_mem_A` — every unit vector is 11-integral;
 * `chromaticNumber_planeOver_sqrt47_le_five` — **`χ(ℚ(√47)²) ≤ 5`**, standard three axioms;
-* `chromaticNumber_planeOver_sqrt47_eq_five_of_chain` — `χ(ℚ(√47)²) = 5` given SP-Cor's named hypotheses (`SpectralChain`).
+* `countable_F47` — `ℚ(√47)` is countable. `χ(ℚ(√47)²) = 5` itself, with no hypothesis, is
+  `chromaticNumber_planeOver_sqrt47_eq_five` (`Instances/SqrtFortySevenFive`); the conditional form over SP-Cor's named
+  hypotheses this module held was retired at the five-colour chain's landing (FS131-LCH1).
 -/
 
 namespace HadwigerNelson
@@ -406,7 +408,7 @@ example : (1 / 2 : ℚ) ∈ z11 := by
 -- The descent is not vacuous: the unit vector `(1, 0)` and the 11-integral `(3/5, 4/5)` satisfy its hypotheses.
 example : (3 / 5 : ℚ) ^ 2 + 47 * 0 ^ 2 + (4 / 5) ^ 2 + 47 * 0 ^ 2 = 1 ∧ (3 / 5 : ℚ) * 0 + 4 / 5 * 0 = 0 := by norm_num
 
-/-! ### The five-colour clause, conditional on SP-Cor's chain -/
+/-! ### Countability -/
 
 /-- `ℚ(√47)` is countable: it lies in `{a + b√47 : a, b ∈ ℚ}`. -/
 theorem countable_F47 : Countable F47 := by
@@ -414,18 +416,6 @@ theorem countable_F47 : Countable F47 := by
     obtain ⟨a, b, hab⟩ := f47_le_q47 hx
     exact ⟨(a, b), hab.symm⟩
   exact ((Set.countable_range _).mono h).to_subtype
-
-/-- **`χ(ℚ(√47)²) = 5`, conditional on SP-Cor's chain** (X11K; `SpectralChain`): Herglotz–Bochner on `ℤ[U]`, L1 in its classical
-form (`InvariantMeasureOnClosed`), and an interface `(E, T + A, h)` satisfying R-U, A⁺ at `S = ∅`, PE-2 and EF_F⁺. The upper
-half is unconditional (`chromaticNumber_planeOver_sqrt47_le_five`). -/
-theorem chromaticNumber_planeOver_sqrt47_eq_five_of_chain
-    (hBH : SpectralChain.BochnerHerglotz (SpectralChain.unitRing F47))
-    (hL1 : SpectralChain.InvariantMeasureOnClosed F47) (I : SpectralChain.Interface F47) (hRU : I.RU) (hA : I.APlus0)
-    (hPE : I.PE2) (hEF : I.EFPlus) :
-    ((unitDistance ℂ).induce (planeOver F47)).chromaticNumber = 5 := by
-  haveI := countable_F47
-  haveI : Countable (SpectralChain.unitRing F47) := SpectralChain.countable_unitRing
-  exact le_antisymm chromaticNumber_planeOver_sqrt47_le_five (I.five_le_chromaticNumber hBH hL1 hRU hA hPE hEF)
 
 end SqrtFortySeven
 end HadwigerNelson

@@ -4,7 +4,7 @@ import Proofs.HadwigerNelson.Plane.UnitAvoiding
 import Proofs.HadwigerNelson.Plane.Slack
 
 /-!
-# `m₁` in a window, and the neighbourhood ratio of the unit-distance graph (FS-131, job FS131-K12A; module M12, block P; skeleton)
+# `m₁` in a window, and the neighbourhood ratio of the unit-distance graph (FS-131, job FS131-K12A; module M12, block P)
 
 **Read aloud, against the derivation** (J28D § 3.2 C4, "Lemma X′" and C14.1-e; `plans/FS86-R88-D-derivation.md`). The count
 reads the plane's measurable independence ratio `m₁ = Plane.mOne` in two finite forms, both about one square window
@@ -15,7 +15,8 @@ measure-zero form of "1-avoiding"):
   density points of `A` form a measurable 1-avoiding set equal to `A` almost everywhere (`Plane.measurableSet_densitySet`,
   `Plane.dist_ne_one_of_mem_densitySet`); its trace on the window, periodised at `s + 2` (`Plane.periodize`,
   `Plane.bandFree_periodize`, `Plane.measurableSet_periodize` of `Plane/Slack`), is 1-avoiding with upper density
-  `|trace| / (s + 2)²` (`Plane.upperDensity_periodize`), which `m₁` bounds by its definition.
+  `|trace| / (s + 2)²` (`Plane.upperDensity_periodize`), which `m₁` bounds (`Plane.mOne_eq_iSup_bandFree`: `m₁` over
+  Lebesgue-measurable sets with no pair at distance `1`).
 * `exists_periodic_near_mOne` — **a periodic 1-avoiding set of density near `m₁`**: the supremum defining `m₁`, a dense
   window (`Plane.exists_squareWin_dense`), periodised.
 * `exists_nrWindow` — **the neighbourhood ratio** (C14.1-e), with one scale for every set (`NRWindow ε s₀`):
@@ -24,8 +25,9 @@ measure-zero form of "1-avoiding"):
   null unit pairs (`unitPairsNull_diff_essNbhd_union`), so the window bound applies to it; averaging over `t` gives
   `|Z ∩ Q| + δ_J |Q \ N_e[Z]| ≤ m₁ (s + 2)²`.
 
-Nothing here reads the outside theorem `[AmbrusEtAl2023]`: `m₁` is the library's supremum, and the count applies
-`Plane.mOne_lt_quarter` to it. All three are the derivation's window lemmas restated for one plane — the count's
+Nothing here reads `[AmbrusEtAl2023]`: `m₁` is the library's supremum (`Plane/OneClass/Defs`, read here through
+`Plane.mOne_eq_iSup_bandFree` since the chain's landing, FS131-LCH1), and the count applies `Plane.mOne_lt_quarter` to
+it. All three are the derivation's window lemmas restated for one plane — the count's
 archimedean factor is one copy of `UD(ℝ²)` at every number field (module `Rigidity/CountTorus`, the slice `Δ = ℚ(i) ⊗ ℝ`).
 
 **Models.** The empty set and the open disc of radius `1/3` have null unit pairs (`Plane.unitPairsNull_of_dist_lt_one`);
@@ -70,8 +72,9 @@ theorem volume_inter_sq_le {A : Set ℂ} (hA : MeasurableSet A) (h : UnitPairsNu
   have hTbf : BandFree T 0 := fun x hx y hy => hbf x hx.1 y hy.1
   have hP : BandFree (periodize T (s + 2)) 0 := bandFree_periodize hTw (by norm_num) hTbf
   have hPm : MeasurableSet (periodize T (s + 2)) := measurableSet_periodize hTm (s + 2)
-  have hle : upperDensity (periodize T (s + 2)) ≤ mOne :=
-    le_iSup₂ (f := fun (B : Set ℂ) (_ : NullMeasurableSet B volume ∧ BandFree B 0) => upperDensity B)
+  have hle : upperDensity (periodize T (s + 2)) ≤ mOne := by
+    rw [mOne_eq_iSup_bandFree]
+    exact le_iSup₂ (f := fun (B : Set ℂ) (_ : NullMeasurableSet B volume ∧ BandFree B 0) => upperDensity B)
       (periodize T (s + 2)) ⟨hPm.nullMeasurableSet, hP⟩
   rw [upperDensity_periodize hTm hs hTw] at hle
   have hne0 : ENNReal.ofReal ((s + 2) ^ 2) ≠ 0 := by
@@ -81,12 +84,12 @@ theorem volume_inter_sq_le {A : Set ℂ} (hA : MeasurableSet A) (h : UnitPairsNu
 
 /-- `m₁` is finite. -/
 private theorem mOne_ne_top : mOne ≠ ⊤ :=
-  ne_top_of_le_ne_top ENNReal.one_ne_top (iSup₂_le fun A _ => upperDensity_le_one A)
+  ne_top_of_le_ne_top ENNReal.one_ne_top mOne_le_one
 
 /-- `m₁ ≤ 1`, read in `ℝ`. -/
 private theorem mOne_toReal_le_one : mOne.toReal ≤ 1 :=
   calc mOne.toReal ≤ (1 : ENNReal).toReal :=
-        ENNReal.toReal_mono ENNReal.one_ne_top (iSup₂_le fun A _ => upperDensity_le_one A)
+        ENNReal.toReal_mono ENNReal.one_ne_top mOne_le_one
     _ = 1 := ENNReal.toReal_one
 
 /-- **A dense window of every positive integer side**: a measurable 1-avoiding set inside `squareWin 0 ℓ` of measure at
@@ -105,6 +108,7 @@ private theorem exists_dense_window {δ : ℝ} (hδ : 0 < δ) (ℓ : ℕ) (hℓ 
   have hdlt : ENNReal.ofReal d < mOne := by
     rw [← ENNReal.ofReal_toReal mOne_ne_top]
     exact (ENNReal.ofReal_lt_ofReal_iff (by linarith)).mpr (by linarith)
+  rw [mOne_eq_iSup_bandFree] at hdlt
   obtain ⟨A, hA⟩ := lt_iSup_iff.mp hdlt
   obtain ⟨⟨hAm, hAbf⟩, hAd⟩ := lt_iSup_iff.mp hA
   obtain ⟨B, hBA, hBm, hBae⟩ := hAm.exists_measurable_subset_ae_eq
@@ -374,9 +378,6 @@ theorem exists_nrWindow {ε : ℝ} (hε : 0 < ε) : ∃ s₀ : ℝ, 0 < s₀ ∧
   rw [hEr, ← measureReal_def, ← measureReal_def] at hreal
   exact arith_nrWindow mOne_toReal_le_one hε hs1 hs16 hℓs hℓε hYs hTv
     measureReal_nonneg measureReal_nonneg hreal
-
-theorem mOne_le_one : mOne ≤ 1 :=
-  iSup₂_le fun A _ => upperDensity_le_one A
 
 /-! ## Spec examples -/
 

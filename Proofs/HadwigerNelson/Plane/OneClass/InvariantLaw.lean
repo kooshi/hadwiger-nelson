@@ -38,25 +38,29 @@ section Average
 variable {X : Type*} [MeasurableSpace X]
 
 /-- The uniform average of the measures `μ i`, `i ∈ s`. -/
-private noncomputable def avgMeasure {ι : Type*} (s : Finset ι) (μ : ι → Measure X) : Measure X :=
+noncomputable def avgMeasure {ι : Type*} (s : Finset ι) (μ : ι → Measure X) : Measure X :=
   (s.card : ℝ≥0∞)⁻¹ • ∑ i ∈ s, μ i
 
-private theorem avgMeasure_apply {ι : Type*} (s : Finset ι) (μ : ι → Measure X) (A : Set X) :
+/-- The value of a uniform average on a set: the average of the values. -/
+theorem avgMeasure_apply {ι : Type*} (s : Finset ι) (μ : ι → Measure X) (A : Set X) :
     avgMeasure s μ A = (s.card : ℝ≥0∞)⁻¹ * ∑ i ∈ s, μ i A := by
   simp only [avgMeasure, Measure.smul_apply, Measure.coe_finsetSum, Finset.sum_apply, smul_eq_mul]
 
-private theorem isProbabilityMeasure_avgMeasure {ι : Type*} {s : Finset ι} (hs : s.Nonempty) {μ : ι → Measure X}
+/-- A uniform average of probability measures over a nonempty finite set is a probability measure. -/
+theorem isProbabilityMeasure_avgMeasure {ι : Type*} {s : Finset ι} (hs : s.Nonempty) {μ : ι → Measure X}
     (hμ : ∀ i ∈ s, IsProbabilityMeasure (μ i)) : IsProbabilityMeasure (avgMeasure s μ) := by
   refine ⟨?_⟩
   rw [avgMeasure_apply, Finset.sum_congr rfl fun i hi => (hμ i hi).measure_univ, Finset.sum_const, nsmul_eq_mul,
     mul_one]
   exact ENNReal.inv_mul_cancel (by simpa using hs.ne_empty) (ENNReal.natCast_ne_top _)
 
-private theorem avgMeasure_map {ι : Type*} (s : Finset ι) (μ : ι → Measure X) {g : X → X} (hg : Measurable g) :
+/-- The push-forward of a uniform average by a measurable map is the uniform average of the push-forwards. -/
+theorem avgMeasure_map {ι : Type*} (s : Finset ι) (μ : ι → Measure X) {g : X → X} (hg : Measurable g) :
     (avgMeasure s μ).map g = avgMeasure s fun i => (μ i).map g := by
   simp only [avgMeasure, ← Measure.mapₗ_apply_of_measurable hg, map_smul, map_sum]
 
-private theorem integral_avgMeasure {ι : Type*} (s : Finset ι) {μ : ι → Measure X} {f : X → ℝ}
+/-- The integral against a uniform average is the average of the integrals. -/
+theorem integral_avgMeasure {ι : Type*} (s : Finset ι) {μ : ι → Measure X} {f : X → ℝ}
     (hf : ∀ i ∈ s, Integrable f (μ i)) :
     ∫ x, f x ∂avgMeasure s μ = (s.card : ℝ)⁻¹ * ∑ i ∈ s, ∫ x, f x ∂μ i := by
   rw [avgMeasure, integral_smul_measure, integral_finsetSum_measure hf, ENNReal.toReal_inv, ENNReal.toReal_natCast,
@@ -102,7 +106,7 @@ section Weak
 variable {X : Type*} [TopologicalSpace X] [MeasurableSpace X] [BorelSpace X] [HasOuterApproxClosed X]
 
 /-- A weak limit of probabilities that are asymptotically invariant under a continuous map is invariant. -/
-private theorem map_eq_of_tendsto {ι : Type*} {L : Filter ι} [L.NeBot] {ν : ι → ProbabilityMeasure X}
+theorem map_eq_of_tendsto {ι : Type*} {L : Filter ι} [L.NeBot] {ν : ι → ProbabilityMeasure X}
     {Q : ProbabilityMeasure X} (hν : Tendsto ν L (𝓝 Q)) {g : X → X} (hg : Continuous g)
     (h : ∀ f : X →ᵇ ℝ,
       Tendsto (fun i => ∫ x, f (g x) ∂(ν i : Measure X) - ∫ x, f x ∂(ν i : Measure X)) L (𝓝 0)) :
@@ -116,7 +120,7 @@ private theorem map_eq_of_tendsto {ι : Type*} {L : Filter ι} [L.NeBot] {ν : �
   exact sub_eq_zero.1 (tendsto_nhds_unique (h1.sub h2) (h f))
 
 /-- A weak limit of probabilities invariant under a continuous map is invariant. -/
-private theorem map_eq_of_tendsto_of_eventually {ι : Type*} {L : Filter ι} [L.NeBot]
+theorem map_eq_of_tendsto_of_eventually {ι : Type*} {L : Filter ι} [L.NeBot]
     {ν : ι → ProbabilityMeasure X} {Q : ProbabilityMeasure X} (hν : Tendsto ν L (𝓝 Q)) {g : X → X}
     (hg : Continuous g) (h : ∀ᶠ i in L, (ν i : Measure X).map g = ν i) : (Q : Measure X).map g = Q := by
   refine map_eq_of_tendsto hν hg fun f => tendsto_const_nhds.congr' (h.mono fun i hi => ?_)
@@ -127,7 +131,7 @@ private theorem map_eq_of_tendsto_of_eventually {ι : Type*} {L : Filter ι} [L.
   rw [← h1, sub_self]
 
 /-- A weak limit of probabilities carried by a closed set is carried by it. -/
-private theorem measure_compl_eq_zero_of_tendsto {ι : Type*} {L : Filter ι} [L.NeBot]
+theorem measure_compl_eq_zero_of_tendsto {ι : Type*} {L : Filter ι} [L.NeBot]
     {ν : ι → ProbabilityMeasure X} {Q : ProbabilityMeasure X} (hν : Tendsto ν L (𝓝 Q)) {C : Set X}
     (hC : IsClosed C) (h : ∀ᶠ i in L, (ν i : Measure X) Cᶜ = 0) : (Q : Measure X) Cᶜ = 0 := by
   rw [prob_compl_eq_zero_iff hC.measurableSet]
@@ -146,7 +150,7 @@ private theorem tendsto_measure_of_isClopen {ι : Type*} {L : Filter ι} {ν : �
 
 omit [HasOuterApproxClosed X] in
 /-- A property of measures that passes to weak limits defines a closed set of probabilities. -/
-private theorem isClosed_setOf_of_tendsto {p : Measure X → Prop}
+theorem isClosed_setOf_of_tendsto {p : Measure X → Prop}
     (h : ∀ (L : Filter (ProbabilityMeasure X)) (_ : L.NeBot) (Q : ProbabilityMeasure X), Tendsto id L (𝓝 Q) →
       (∀ᶠ P : ProbabilityMeasure X in L, p (P : Measure X)) → p (Q : Measure X)) :
     IsClosed {Q : ProbabilityMeasure X | p (Q : Measure X)} :=
@@ -156,7 +160,7 @@ variable [CompactSpace X] [T2Space X]
 
 /-- **One map** (Krylov–Bogolyubov inside a closed class): a closed nonempty class of probabilities on a compact
 space, stable under a continuous map and under finite uniform averages, holds a probability the map fixes. -/
-private theorem exists_fixed_of_average {p : Measure X → Prop}
+theorem exists_fixed_of_average {p : Measure X → Prop}
     (hcl : IsClosed {Q : ProbabilityMeasure X | p (Q : Measure X)})
     (hne : ∃ Q : ProbabilityMeasure X, p (Q : Measure X)) {g : X → X} (hg : Continuous g)
     (hmap : ∀ μ : Measure X, IsProbabilityMeasure μ → p μ → p (μ.map g))
@@ -223,7 +227,7 @@ private theorem exists_fixed_of_average {p : Measure X → Prop}
 /-- **A common fixed point** (in place of the Markov–Kakutani theorem): a closed nonempty class of probabilities on
 a compact space, stable under each of a family of commuting continuous maps and under finite uniform averages,
 holds a probability that every map of the family fixes. -/
-private theorem exists_common_fixed {ι : Type*} {p : Measure X → Prop}
+theorem exists_common_fixed {ι : Type*} {p : Measure X → Prop}
     (hcl : IsClosed {Q : ProbabilityMeasure X | p (Q : Measure X)})
     (hne : ∃ Q : ProbabilityMeasure X, p (Q : Measure X)) {g : ι → X → X} (hg : ∀ i, Continuous (g i))
     (hcomm : ∀ i j, g i ∘ g j = g j ∘ g i)

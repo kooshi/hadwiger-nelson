@@ -5,7 +5,7 @@ import Mathlib.Logic.Equiv.Fin.Basic
 import Mathlib.MeasureTheory.Measure.Count
 
 /-!
-# Entropy under powers, finite mixtures and finite-fibred factors (FS-131, job FS131-KN9; skeleton)
+# Entropy under powers, finite mixtures and finite-fibred factors (FS-131, job FS131-KN9)
 
 **What this module is for.** The deduction of `[EinsiedlerLindenstrauss2022]` Theorem 1.2 from its Theorem 1.3
 (FS105-DED, `plans/FS105-D-deduction.md` § 2.1, [hand], two minds) reads three facts about the entropy of a map, its classical

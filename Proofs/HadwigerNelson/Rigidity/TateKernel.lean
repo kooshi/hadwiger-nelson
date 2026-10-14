@@ -2,7 +2,7 @@ import Proofs.HadwigerNelson.Rigidity.TateCharacter
 import Proofs.HadwigerNelson.Rigidity.Duality
 
 /-!
-# Lane T, Tate's `L^⊥ = L` in the form the model reads: the kernel, its bound, the cover, the surjectivity (FS-131, job FS131-KT1; skeleton)
+# Lane T, Tate's `L^⊥ = L` in the form the model reads: the kernel, its bound, the cover, the surjectivity (FS-131, job FS131-KT1)
 
 **Read aloud.** `oAnn F` is the annihilator of `O′` in `W` under the standard character, `{a | ψ(a s) = 1 for all s ∈ O′}`.
 * `exists_eq_mixedEmbedding_of_mem_oAnn` — **the archimedean step**: a point of `oAnn` integral at every split prime has its

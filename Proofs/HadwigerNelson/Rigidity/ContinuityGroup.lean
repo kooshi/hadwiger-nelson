@@ -1,7 +1,7 @@
 import Proofs.HadwigerNelson.Rigidity.RingScope
 
 /-!
-# The continuity group at `S = ∅`: the profinite-plus-archimedean topology on `ℤ[U_F]`, and its continuous characters are `T + A` (FS-131, job FS131-KR1; module M10; skeleton)
+# The continuity group at `S = ∅`: the profinite-plus-archimedean topology on `ℤ[U_F]`, and its continuous characters are `T + A` (FS-131, job FS131-KR1; module M10)
 
 **Read aloud, against the informal claim.** J45's `τ′_∅` (`plans/FS84-SI-D-derivation.md` l. 105, at `S = ∅`) is the
 topology on `R = ℤ[U_F]` induced by its diagonal map into `R̂_prof × (L ⊗ ℝ)`. Here it is `tauPrime F`, the topology

@@ -4,7 +4,7 @@ import Proofs.HadwigerNelson.Rigidity.ClassRatio
 import Proofs.HadwigerNelson.Rigidity.FiniteZhang
 
 /-!
-# The count's finite levels: residues of the unit vectors, and the ratio of every level (FS-131, job FS131-K12A; module M12, block R; skeleton)
+# The count's finite levels: residues of the unit vectors, and the ratio of every level (FS-131, job FS131-K12A; module M12, block R)
 
 **Read aloud, against the derivation and the claim list.** `[S9]` (NF2-LEAF-07): "at a stable prime the image of `U` in
 `𝓞/P^m` is every norm-one element" — the caveat of `SpectralChain`: "`levelTarget` uses the norm-one elements of `𝓞/P^m`;

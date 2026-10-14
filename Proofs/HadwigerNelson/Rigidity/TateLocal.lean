@@ -9,7 +9,7 @@ import Mathlib.RingTheory.DedekindDomain.Different
 import Mathlib.NumberTheory.NumberField.Discriminant.Defs
 
 /-!
-# Lane T, the finite places: approximation away from one prime, integral traces, compact integers (FS-131, job FS131-KT1; skeleton)
+# Lane T, the finite places: approximation away from one prime, integral traces, compact integers (FS-131, job FS131-KT1)
 
 The arithmetic of a number field `K` that the standard character of form G reads (`plans/FS131-KT1-tate.md` § Stage 3: the
 local character `ψ_v(z) := e(−Tr_{K/ℚ}(t))` for any `t ∈ K` integral at every prime `≠ v` with `z − t ∈ O_v`). Every statement

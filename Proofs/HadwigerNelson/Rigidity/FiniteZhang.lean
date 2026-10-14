@@ -9,7 +9,7 @@ import Mathlib.Algebra.BigOperators.Ring.Finset
 import Mathlib.Tactic.Ring
 
 /-!
-# Independence ratios of Cayley graphs on finite abelian groups, and of their products (FS-131, job FS131-K12A; module M12, block Z; skeleton)
+# Independence ratios of Cayley graphs on finite abelian groups, and of their products (FS-131, job FS131-K12A; module M12, block Z)
 
 **Read aloud, against the derivation** (J28D § 3.2 C5, "the stationary Zhang count", and NH-Y′; X25B-PZ;
 `[Zhang2012]` Thm 1.8's counting). A connection set `S` of a finite additive group `G` defines the Cayley graph

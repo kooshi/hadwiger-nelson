@@ -9,7 +9,7 @@ import Mathlib.Topology.Instances.ENNReal.Lemmas
 import Proofs.HadwigerNelson.Outside.OAI015Generating
 
 /-!
-# Kolmogorov–Sinai entropy of a map for a measure (FS-131, jobs FS131-KN3 and FS131-KN6; skeleton)
+# Kolmogorov–Sinai entropy of a map for a measure (FS-131, jobs FS131-KN3 and FS131-KN6)
 
 **Read aloud, against the informal claim.** For a map `T : X → X`, a measure `μ` and a finite measurable partition given by
 its label map `P : X → Fin k`, the *name* of a point through time `n` is the word `(P x, P (T x), …, P (T^[n-1] x))`; the

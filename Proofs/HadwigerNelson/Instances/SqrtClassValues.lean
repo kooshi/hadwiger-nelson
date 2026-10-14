@@ -5,8 +5,9 @@ import Proofs.HadwigerNelson.Instances.UpperHalfValues
 # The five-colour instances after `ℚ(√47)`: `ℚ(√143)`, `ℚ(√311)`, `ℚ(√335)`, `ℚ(√3, √5)`, and `ℚ(√167) ≥ 5` (FS-131, job FS131-KM15; module M15)
 
 **Read aloud, against the informal claim** (`data/fs131/claims-NF2.md`, NF2-LEAF-23: "Then `ℚ(√143)`, `ℚ(√311)`,
-`ℚ(√335)` (D:275), `ℚ(√3,√5)` (D:301), `ℚ(√167) ≥ 5` (D:279)"). Given `[AmbrusEtAl2023]` Theorem 1 as printed
-(`Plane.OneAvoidingDensityBound`):
+`ℚ(√335)` (D:275), `ℚ(√3,√5)` (D:301), `ℚ(√167) ≥ 5` (D:279)"), each with no hypothesis (`[AmbrusEtAl2023]` Theorem 1,
+which the chain's count reads, is the library's `Plane.oneAvoidingDensityBound`, discharged at the chain's landing,
+FS131-LCH1):
 
 * **`χ(ℚ(√143)²) = 5`**, **`χ(ℚ(√311)²) = 5`**, **`χ(ℚ(√335)²) = 5`**: each radicand is in D:116's class
   (`143 ≡ 143`, `311 ≡ 143`, `335 ≡ 167 (mod 168)`), so `L ≥ 5` (`Rigidity.five_le_localBound_of_isSquare_class`) and
@@ -21,11 +22,10 @@ import Proofs.HadwigerNelson.Instances.UpperHalfValues
 **Not claimed:** any value of `L` at these fields; `χ(ℚ(√167)²) ≥ 6` (the conjecture's prediction there); that any value
 is new mathematics (`CLAUDE.md` § The local–global conjecture: these are its exposed predictions, met at [hand] through MR).
 
-**What rests on what:** the lower bounds rest on the chain's headline and `Rigidity.ratioAtMost_two_notMem_link`, as
+**What rests on what:** the lower bounds rest on the chain's headline and M13's `Rigidity.ratioAtMost_of_two_notMem`, as
 `χ(ℚ(√47)²) = 5` does; the upper bounds on the standard three axioms.
 
-**Inhabitants.** `hOA` is an outside theorem (`Plane.oneAvoidingDensityBound_model` models its clause). Every other
-statement is closed.
+**Inhabitants.** Every statement is closed.
 -/
 
 namespace HadwigerNelson.SqrtClassValues
@@ -52,30 +52,30 @@ theorem chromaticNumber_planeOver_sqrt143_le_five :
   exact (colorable_planeOver_of_finitePlane _ ⟨hmax, by rw [hcard]⟩ (by norm_num) hcard
     finitePlane11_colorable_five).chromaticNumber_le
 
-/-- **`χ(ℚ(√143)²) = 5`**, given `[AmbrusEtAl2023]` Theorem 1 as printed. -/
-theorem chromaticNumber_planeOver_sqrt143_eq_five (hOA : Plane.OneAvoidingDensityBound) :
+/-- **`χ(ℚ(√143)²) = 5`**. -/
+theorem chromaticNumber_planeOver_sqrt143_eq_five :
     ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {143}))).chromaticNumber = 5 :=
   le_antisymm chromaticNumber_planeOver_sqrt143_le_five
-    (Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound _ hOA five_le_localBound_sqrt143)
+    (Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound _ five_le_localBound_sqrt143)
 
 /-! ### `ℚ(√311)` and `ℚ(√335)` -/
 
-/-- **`χ(ℚ(√311)²) = 5`**, given `[AmbrusEtAl2023]` Theorem 1 as printed; the upper half at 11 (`311 ≡ 5²`). -/
-theorem chromaticNumber_planeOver_sqrt311_eq_five (hOA : Plane.OneAvoidingDensityBound) :
+/-- **`χ(ℚ(√311)²) = 5`**: the upper half at 11 (`311 ≡ 5²`). -/
+theorem chromaticNumber_planeOver_sqrt311_eq_five :
     ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {311}))).chromaticNumber = 5 :=
   le_antisymm
     (colorable_planeOver_fieldOfRadicands {311} (p := 11) (by norm_num) (by norm_num)
       (by rintro d rfl; exact ⟨by decide, ⟨5, by decide⟩⟩) finitePlane11_colorable_five).chromaticNumber_le
-    (Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound _ hOA
+    (Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound _
       (Rigidity.five_le_localBound_of_isSquare_class _ (isSquare_radicand rfl) (by norm_num)))
 
-/-- **`χ(ℚ(√335)²) = 5`**, given `[AmbrusEtAl2023]` Theorem 1 as printed; the upper half at 11 (`335 ≡ 4²`). -/
-theorem chromaticNumber_planeOver_sqrt335_eq_five (hOA : Plane.OneAvoidingDensityBound) :
+/-- **`χ(ℚ(√335)²) = 5`**: the upper half at 11 (`335 ≡ 4²`). -/
+theorem chromaticNumber_planeOver_sqrt335_eq_five :
     ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {335}))).chromaticNumber = 5 :=
   le_antisymm
     (colorable_planeOver_fieldOfRadicands {335} (p := 11) (by norm_num) (by norm_num)
       (by rintro d rfl; exact ⟨by decide, ⟨4, by decide⟩⟩) finitePlane11_colorable_five).chromaticNumber_le
-    (Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound _ hOA
+    (Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound _
       (Rigidity.five_le_localBound_of_isSquare_class _ (isSquare_radicand rfl) (by norm_num)))
 
 /-! ### `ℚ(√3, √5)` -/
@@ -94,8 +94,8 @@ theorem five_le_localBound_sqrt3_sqrt5 : 5 ≤ localBound (fieldOfRadicands {3, 
     (by norm_num)
     (isSquare_radicand (D := {3, 5}) (d := 3) (by simp)) (by norm_num)
 
-/-- **`χ(ℚ(√3, √5)²) = 5`**, given `[AmbrusEtAl2023]` Theorem 1 as printed; the upper half at 11. -/
-theorem chromaticNumber_planeOver_sqrt3_sqrt5_eq_five (hOA : Plane.OneAvoidingDensityBound) :
+/-- **`χ(ℚ(√3, √5)²) = 5`**: the upper half at 11. -/
+theorem chromaticNumber_planeOver_sqrt3_sqrt5_eq_five :
     ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {3, 5}))).chromaticNumber = 5 :=
   le_antisymm
     (colorable_planeOver_fieldOfRadicands {3, 5} (p := 11) (by norm_num) (by norm_num)
@@ -103,14 +103,14 @@ theorem chromaticNumber_planeOver_sqrt3_sqrt5_eq_five (hOA : Plane.OneAvoidingDe
         rintro d (rfl | rfl)
         · exact ⟨by decide, ⟨5, by decide⟩⟩
         · exact ⟨by decide, ⟨4, by decide⟩⟩) finitePlane11_colorable_five).chromaticNumber_le
-    (Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound _ hOA five_le_localBound_sqrt3_sqrt5)
+    (Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound _ five_le_localBound_sqrt3_sqrt5)
 
 /-! ### `ℚ(√167)` -/
 
-/-- **`χ(ℚ(√167)²) ≥ 5`**, given `[AmbrusEtAl2023]` Theorem 1 as printed. -/
-theorem five_le_chromaticNumber_planeOver_sqrt167 (hOA : Plane.OneAvoidingDensityBound) :
+/-- **`χ(ℚ(√167)²) ≥ 5`**. -/
+theorem five_le_chromaticNumber_planeOver_sqrt167 :
     5 ≤ ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {167}))).chromaticNumber :=
-  Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound _ hOA
+  Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound _
     (Rigidity.five_le_localBound_of_isSquare_class _ (isSquare_radicand rfl) (by norm_num))
 
 /-! ## Spec -/

@@ -1,7 +1,7 @@
 import Proofs.HadwigerNelson.Rigidity.TateKernel
 
 /-!
-# Tate's self-duality in the form the zero-entropy side reads: a Tate model exists (FS-131, job FS131-KT1; skeleton)
+# Tate's self-duality in the form the zero-entropy side reads: a Tate model exists (FS-131, job FS131-KT1)
 
 Lane T's exit (`plans/FS131-KT1-tate.md` § Stage 4): over every real number field `F`, the dual of `R = ℤ[U_F]` has a Tate
 model (`Rigidity.TateModel`) — `W = L_∞ × ∏′_{w split} L_w`, the standard character `ψ`, and `π a := (r ↦ ψ(a r))`, with the

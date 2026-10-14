@@ -2,7 +2,7 @@ import Proofs.HadwigerNelson.Rigidity.GlobalPoint
 import Mathlib.Dynamics.Ergodic.Conservative
 
 /-!
-# Leaves and wandering shells: EF_F⁺ over the Tate model (FS-131, job FS131-K8B1; module M8b-4; skeleton)
+# Leaves and wandering shells: EF_F⁺ over the Tate model (FS-131, job FS131-K8B1; module M8b-4)
 
 Part 4 of M8b (`plans/FS131-K8B1-zero-entropy-second.md`; X01D §§ 3.7–3.8, `plans/FS100-X01D-derivation.md` ll. 289–308), over
 `(D : TateModel F)`, and the composition of parts 2–4: **`zeroEntropyCarried_of_tateModel`**, `ZeroEntropyCarried F` from any

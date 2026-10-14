@@ -3,7 +3,7 @@ import Proofs.HadwigerNelson.Rigidity.BochnerTau
 import Proofs.HadwigerNelson.Arith.FactorAction
 
 /-!
-# SI-1 and SI-3 at `T + A`: the trace measure of an invariant colouring off `T + A` (FS-131, job FS131-KM11; module M11b; skeleton)
+# SI-1 and SI-3 at `T + A`: the trace measure of an invariant colouring off `T + A` (FS-131, job FS131-KM11; module M11b)
 
 **Read aloud, against the informal claim.** For a real number field `F`, an invariant random proper four-colouring `μ` of
 `Cay(R, U)` (`R = ℤ[U_F]`) and a trace spectral measure `σ` of it, J45's Lemma SI-3 at `S = ∅`

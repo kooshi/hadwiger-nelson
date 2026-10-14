@@ -5,7 +5,7 @@ import Proofs.HadwigerNelson.Rigidity.DualConnected
 import Mathlib.Algebra.Group.Subgroup.Finsupp
 
 /-!
-# The pieces `M̂` and Lemma Γ (FS-131, job FS131-KN8; module M6 of `plans/FS131-KN3-chain-plan.md`; skeleton)
+# The pieces `M̂` and Lemma Γ (FS-131, job FS131-KN8; module M6 of `plans/FS131-KN3-chain-plan.md`)
 
 **Read aloud, against the informal claim** (FS100-X02D § 2.2, PE-1′, and § 3.1, Lemma Γ). `R̂` is compact, but no subgroup
 `Γ ≅ ℤ²` of the unit vectors acts on it totally irreducibly: `R` is not finitely generated over `ℤ[Γ]`. The derivation reads

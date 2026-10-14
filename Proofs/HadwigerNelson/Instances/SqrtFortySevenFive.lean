@@ -13,20 +13,21 @@ import Proofs.HadwigerNelson.Instances.SqrtFortySeven
   residue size `Q = pⁿ` of `Rigidity.stablePrime_card_of_two_notMem` has `n = 1` because `Q² ∣ p^[ℚ(√47, i) : ℚ]` and the
   degree is at most 4. So the targets are `Γ₁₁, Γ₁₉, Γ₂₃, Γ₃₁, Γ₄₃, Γ₄₇, Γ₆₇, …`.
 * `five_le_localBound_sqrt47` — **`5 ≤ L(ℚ(√47))`**: `47` is in D:116's class (`Rigidity.five_le_localBound_of_isSquare_class`).
-* `chromaticNumber_planeOver_sqrt47_eq_five` — **`χ(ℚ(√47)²) = 5`**, given `[AmbrusEtAl2023]` Theorem 1 as printed
-  (`Plane.OneAvoidingDensityBound`): the chain's lower bound and the kernel's upper half
-  (`chromaticNumber_planeOver_sqrt47_le_five`). It answers `[Moorhouse2010]`'s question and the existence half of
-  Soifer's Open Problem 55.1 (`CLAUDE.md` § Publication), over the outside theorem and the chain's leaves.
+* `chromaticNumber_planeOver_sqrt47_eq_five` — **`χ(ℚ(√47)²) = 5`**, with no hypothesis: the chain's lower bound
+  (`Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound`) and the kernel's upper half
+  (`chromaticNumber_planeOver_sqrt47_le_five`). `[AmbrusEtAl2023]` Theorem 1, which the chain's count reads, is a theorem
+  of the library (`Plane.oneAvoidingDensityBound`), discharged at the chain's landing (FS131-LCH1). It answers
+  `[Moorhouse2010]`'s question and the existence half of Soifer's Open Problem 55.1 (`CLAUDE.md` § Publication).
 
 **What rests on what:** `#print axioms` of the value prints the standard three, the declared `positive_entropy_rigidity`
-and `kloosterman_bound`, and `sorryAx` through the leaves of other lines and `Rigidity.ratioAtMost_two_notMem_link`.
+and `kloosterman_bound`, and, until the lines still running land, `sorryAx` through their leaves (record
+`plans/FS131-LCH1-join.md`).
 
 **Not claimed:** `L(ℚ(√47)) = 5`; that every listed `p` carries a stable prime (only `p = 11` is exhibited); that the value
 is new mathematics.
 
 **Inhabitants.** `StablePrime F47` is inhabited above 11 (`exists_stablePrime_eleven`): `1/11` is not in `ℤ[U]`, since
-every unit vector has 11-integral coordinates (`unit_mem_A`). `Plane.OneAvoidingDensityBound` is an outside theorem
-(`Plane.oneAvoidingDensityBound_model` models its clause).
+every unit vector has 11-integral coordinates (`unit_mem_A`).
 -/
 
 namespace HadwigerNelson.SqrtFortySeven
@@ -130,11 +131,11 @@ theorem exists_stablePrime_eleven : ∃ P : StablePrime F47, (11 : 𝓞 (fieldI 
 theorem five_le_localBound_sqrt47 : 5 ≤ localBound F47 :=
   Rigidity.five_le_localBound_of_isSquare_class F47 isSquare_fortySeven (by norm_num)
 
-/-- **`χ(ℚ(√47)²) = 5`**, given `[AmbrusEtAl2023]` Theorem 1 as printed. -/
-theorem chromaticNumber_planeOver_sqrt47_eq_five (hOA : Plane.OneAvoidingDensityBound) :
+/-- **`χ(ℚ(√47)²) = 5`**. -/
+theorem chromaticNumber_planeOver_sqrt47_eq_five :
     ((unitDistance ℂ).induce (planeOver F47)).chromaticNumber = 5 :=
   le_antisymm chromaticNumber_planeOver_sqrt47_le_five
-    (Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound F47 hOA five_le_localBound_sqrt47)
+    (Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound F47 five_le_localBound_sqrt47)
 
 /-! ## Spec -/
 

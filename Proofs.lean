@@ -247,6 +247,7 @@ import Proofs.HadwigerNelson.Plane.DensityBound.X23All
 import Proofs.HadwigerNelson.Plane.DensityBound.X23
 import Proofs.HadwigerNelson.Plane.DensityBound.X23Dist
 import Proofs.HadwigerNelson.Plane.DensityBound.Theorem
+import Proofs.HadwigerNelson.Plane.MOneBound
 import Proofs.HadwigerNelson.Plane.CPColouring
 import Proofs.HadwigerNelson.Plane.MaximalCover
 import Proofs.HadwigerNelson.Plane.Slack

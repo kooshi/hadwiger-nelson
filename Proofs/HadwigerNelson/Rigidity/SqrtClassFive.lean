@@ -16,26 +16,25 @@ For a real field `F` and natural numbers that are squares in `F`:
 * `five_le_chromaticNumber_of_isSquare`, `five_le_localBound_of_isSquare` — **if `F` holds square roots of some
   `a ≡ 7 (mod 8)`, some `b ≡ 2 (mod 3)` and some `c` that is not a square modulo 7, every stable prime's level-one target
   needs five colours, so `5 ≤ L(F)`**: no stable prime is dyadic and no residue field has 9 or 49 elements; M13's ratio at
-  every other odd stable prime is below `1/4` (`ratioAtMost_two_notMem_link`), and a level-one ratio below `1/4` excludes a
-  four-colouring (`five_le_chromaticNumber_of_ratioAtMost`). The three radicands may differ: at `ℚ(√3, √5)`, `15`, `5`, `3`.
+  every other odd stable prime is below `1/4` (`Rigidity.ratioAtMost_of_two_notMem`, `Rigidity/ClassRatio`), and a
+  level-one ratio below `1/4` excludes a four-colouring (`five_le_chromaticNumber_of_ratioAtMost`). The three radicands may differ: at `ℚ(√3, √5)`, `15`, `5`, `3`.
 * `five_le_localBound_of_isSquare_class` — **D:116's class**: one `d ≡ 47, 143 or 167 (mod 168)` serves as all three.
-* `five_le_chromaticNumber_planeOver_of_five_le_localBound` — **`L(F) ≥ 5` gives `χ(F²) ≥ 5`**, given `[AmbrusEtAl2023]`
-  Theorem 1 as printed (`Plane.OneAvoidingDensityBound`, the headline's `hOA`): the chain's headline, whose row-99
-  hypothesis is idle at `L ≥ 5`.
+* `five_le_chromaticNumber_planeOver_of_five_le_localBound` — **`L(F) ≥ 5` gives `χ(F²) ≥ 5`**: the chain's headline
+  (`Rigidity.min_localBound_five_le_chromaticNumber`, which takes no hypothesis since the chain's landing) at `L ≥ 5`.
 * `tca_iff_five_le_localBound` — **CLS is an equivalence**: T-C(A) at `S = ∅` holds exactly when `L(F) ≥ 5`.
 
-**What rests on what.** `ratioAtMost_two_notMem_link` is the one `sorry` of this module: the link to M13's line, where
-`Rigidity.ratioAtMost_of_two_notMem` (the odd branch of `ratioAtMost_of_five_le_chromaticNumber`, its chromatic hypothesis
-replaced by the two residue sizes it excludes) is added to `Rigidity/ClassRatio` with this statement (the coordinator's
-ruling of 2026-10-14 on FS131-KM15's notice). The join deletes the link and its one reader reads that name.
+**What rests on what.** The odd primes read M13's `Rigidity.ratioAtMost_of_two_notMem` (`Rigidity/ClassRatio`: the odd
+branch of `ratioAtMost_of_five_le_chromaticNumber`, its chromatic hypothesis replaced by the two residue sizes it
+excludes). FS131-KM15 proved this module over a private link of that statement; the chain's landing (FS131-LCH1) deleted
+the link, and `five_le_chromaticNumber_of_two_notMem` reads M13's theorem, its stored statement compared with the link's
+from the kernel's side first.
 
 **Not claimed:** the converse of any implication here but CLS's; that `L(F) = 5`; anything at a `d` outside the class;
 that any statement is new mathematics.
 
 **Inhabitants.** The hypotheses that are structures are a stable prime and a number field: a stable prime of `ℚ(√47)`
 above 11 is `SqrtFortySeven.exists_stablePrime_eleven` (`Instances/SqrtFortySevenFive`), where `47` is a square serving as
-`a`, `b` and `c` at once. `d = 47, 143, 167, 311, 335` are in the class (the spec below). `Plane.OneAvoidingDensityBound`: `Plane.oneAvoidingDensityBound_model` models its clause; the
-statement is an outside theorem.
+`a`, `b` and `c` at once. `d = 47, 143, 167, 311, 335` are in the class (the spec below).
 -/
 
 namespace HadwigerNelson.Rigidity
@@ -98,20 +97,12 @@ variable (F) in
 theorem tca_iff_five_le_localBound [NumberField F] : TCA F ↔ 5 ≤ localBound F :=
   ⟨five_le_localBound_of_tca F, tca_of_five_le_localBound F⟩
 
-/-- **The link to M13's line** (`Rigidity.ratioAtMost_of_two_notMem`, added to `Rigidity/ClassRatio` with this statement
-on that line, by the coordinator's ruling of 2026-10-14): at an odd stable prime whose residue field has neither 9 nor 49
-elements, the all-levels ratio is below `1/4`. Deleted at the join; its one reader then reads M13's name. -/
-private theorem ratioAtMost_two_notMem_link [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P)
-    (h9 : Nat.card (𝓞 (fieldI F) ⧸ P.P) ≠ 9) (h49 : Nat.card (𝓞 (fieldI F) ⧸ P.P) ≠ 49) :
-    ∃ c : ℝ, c < 1 / 4 ∧ RatioAtMost P c := by
-  sorry
-
 /-- **The floor at an odd stable prime**: unless the residue field has 9 or 49 elements, the level-one target needs five
 colours. -/
 theorem five_le_chromaticNumber_of_two_notMem [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P)
     (h9 : Nat.card (𝓞 (fieldI F) ⧸ P.P) ≠ 9) (h49 : Nat.card (𝓞 (fieldI F) ⧸ P.P) ≠ 49) :
     5 ≤ (levelTarget P 1).chromaticNumber := by
-  obtain ⟨c, hc, hP⟩ := ratioAtMost_two_notMem_link P h2 h9 h49
+  obtain ⟨c, hc, hP⟩ := ratioAtMost_of_two_notMem P h2 h9 h49
   exact five_le_chromaticNumber_of_ratioAtMost P hc hP
 
 /-! ### Three integers of `F(i)` when `d` is a square in `F` -/
@@ -134,15 +125,6 @@ private theorem exists_sqrt_integer {d : ℕ} (hd : IsSquare (d : F)) :
   · show ((conjO F ⟨sL, hint⟩ : 𝓞 (fieldI F)) : fieldI F) = sL
     rw [UpperHalf.coe_conjO]
     exact Subtype.ext (by rw [coe_conjOn]; exact Complex.conj_ofReal _)
-
--- `i` is an integer of `F(i)` with `ī = −i` (the same fact is private in `Arith/UpperHalf` and `Rigidity/ClassRatio`).
-private theorem exists_I_integer : ∃ i : 𝓞 (fieldI F), i ^ 2 = -1 ∧ conjO F i = -i := by
-  let iL : fieldI F := ⟨Complex.I, by simp [zero_mem], by simp [one_mem]⟩
-  have hiL : iL ^ 2 = -1 := Subtype.ext Complex.I_sq
-  have hint : IsIntegral ℤ iL := IsIntegral.of_pow (n := 2) (by norm_num) (by rw [hiL]; exact isIntegral_one.neg)
-  refine ⟨⟨iL, hint⟩, RingOfIntegers.coe_injective ?_, RingOfIntegers.coe_injective ?_⟩
-  · rw [map_pow, map_neg, map_one]; exact hiL
-  · rw [map_neg]; exact Subtype.ext Complex.conj_I
 
 -- `ω = (1 + i√a)/2` is an integer of `F(i)` when `a ≡ 3 (mod 4)`, with `ω(1 − ω) = (a + 1)/4` and `ω̄ = 1 − ω`.
 private theorem exists_omega_integer {a : ℕ} (ha : IsSquare (a : F)) (h4 : a % 4 = 3) :
@@ -217,7 +199,7 @@ theorem stablePrime_card_of_two_notMem [NumberField F] (P : StablePrime F) (h2 :
     obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
     rw [hσmk, hσmk, UpperHalf.conjO_conjO]
   -- (b) it moves the residue of `i`, and `2 ≠ 0`
-  obtain ⟨i, hi2, hci⟩ := exists_I_integer (F := F)
+  obtain ⟨i, hi2, hci⟩ := UpperHalf.exists_I_integer (F := F)
   have h2k : (2 : 𝓞 (fieldI F) ⧸ P.P) ≠ 0 := by
     rw [← map_ofNat (Ideal.Quotient.mk P.P) 2, Ne, Ideal.Quotient.eq_zero_iff_mem]; exact h2
   -- (c) the fixed field `K₀` has `Q` elements, `Q ≡ 3 (mod 4)`, and the residue field `Q²`
@@ -290,11 +272,10 @@ theorem five_le_localBound_of_isSquare_class [NumberField F] {d : ℕ} (hd : IsS
   five_le_localBound_of_isSquare F hd (by omega) hd (by omega) hd (by omega)
 
 variable (F) in
-/-- **`χ(F²) ≥ 5`** for every real number field with `L(F) ≥ 5`, given `[AmbrusEtAl2023]` Theorem 1 as printed: the
-chain's headline, whose row-99 hypothesis is idle there. -/
-theorem five_le_chromaticNumber_planeOver_of_five_le_localBound [NumberField F] (hOA : Plane.OneAvoidingDensityBound)
+/-- **`χ(F²) ≥ 5`** for every real number field with `L(F) ≥ 5`: the chain's headline there. -/
+theorem five_le_chromaticNumber_planeOver_of_five_le_localBound [NumberField F]
     (h5 : 5 ≤ localBound F) : 5 ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber := by
-  have h := min_localBound_five_le_chromaticNumber F hOA fun h4 => absurd (h5.trans h4) (by decide)
+  have h := min_localBound_five_le_chromaticNumber F
   rwa [min_eq_right h5] at h
 
 /-! ## Spec -/

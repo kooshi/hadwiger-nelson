@@ -2,7 +2,7 @@ import Proofs.HadwigerNelson.Rigidity.PlaceSizes
 import Proofs.HadwigerNelson.Rigidity.ZeroEntropyNames
 
 /-!
-# Thin boxes are heavy: Lemma 3.1′ over the Tate model (FS-131, job FS131-K8B1; module M8b-2b; skeleton)
+# Thin boxes are heavy: Lemma 3.1′ over the Tate model (FS-131, job FS131-K8B1; module M8b-2b)
 
 Part 2 of M8b (`plans/FS131-K8B1-zero-entropy-second.md`; X01D § 3.3, `plans/FS100-X01D-derivation.md` ll. 221–241; EN2-L31,
 `plans/FS131-EN2-derivation.md` § 3.6), over `(D : TateModel F)`.

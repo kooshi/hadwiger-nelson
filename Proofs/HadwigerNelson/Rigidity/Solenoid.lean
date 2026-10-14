@@ -6,7 +6,7 @@ import Mathlib.MeasureTheory.Measure.Dirac
 import Mathlib.MeasureTheory.Constructions.BorelSpace.Basic
 
 /-!
-# Actions of `ℤ^d` by automorphisms of a solenoid: the words of the printed rigidity theorem (FS-131, job FS131-KN3; skeleton)
+# Actions of `ℤ^d` by automorphisms of a solenoid: the words of the printed rigidity theorem (FS-131, job FS131-KN3)
 
 **Read aloud, against the page.** `[EinsiedlerLindenstrauss2022]` § 1, p. 2 (arXiv:2101.11120v1): "In the following a
 solenoid `X` is a compact, connected, abelian group whose Pontryagin dual `X̂` can be embedded into a finite-dimensional vector

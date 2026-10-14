@@ -7,9 +7,9 @@ import Proofs.HadwigerNelson.Rigidity.EntropySplitMax
 
 **EF_F⁺.** A Tate model exists at every real number field (`Rigidity.exists_tateModel`, lane T), and over any Tate model
 EF_F⁺ holds (`zeroEntropyCarried_of_tateModel`, M8b's parts 2–4). **No step reads the scope**, so the statement proved here
-has none (`zeroEntropyCarried_of_numberField`). The chain's leaf `zeroEntropyCarried` moved here from `Rigidity/ChainAtTA`
-at the chain's join (FS131-IJN1; the coordinator's ruling of inventory item 811), its scope binder
-`NoRamifiedStableDyadic F` dropped, unread; it is `zeroEntropyCarried_of_numberField` under the name the chain reads.
+has none (`zeroEntropyCarried`). The chain's leaf `zeroEntropyCarried` moved here from `Rigidity/ChainAtTA` at the chain's
+join (FS131-IJN1; the coordinator's ruling of inventory item 811), its scope binder `NoRamifiedStableDyadic F` dropped,
+unread; the second name it had beside it for the same statement was removed at the chain's landing (FS131-LCH1).
 
 **PE-2 at one non-torsion rotation.** The chain's leaf `entropySplit` moved here from `Rigidity/ChainAtTA` at the same join
 (inventory item 761, ruling 5): `entropySplit_of_admissiblePair` (`Rigidity/EntropySplitMax`) at the admissible pair that
@@ -29,11 +29,6 @@ namespace HadwigerNelson.Rigidity
 
 open MeasureTheory SimpleGraph SpectralChain SpectralInputs NumberField
 
-/-- **EF_F⁺ over every real number field** (FS100-EFP; X01D § 3; [kernel] over lane T's and M8b's leaves): every
-rotation-invariant probability measure on `R̂` of entropy zero under one non-torsion rotation is carried by `T + A`. -/
-theorem zeroEntropyCarried_of_numberField (F : Subfield ℝ) [NumberField F] : ZeroEntropyCarried F :=
-  (exists_tateModel F).elim zeroEntropyCarried_of_tateModel
-
 /-- **PE-2 at one non-torsion rotation** (FS100-PE2; [hand], X02D and X02V; the variant EN2-PE2-MAX of
 `plans/FS131-EN2-derivation.md` § 5.2): the entropy split holds over every real number field, with the entropy zero at a
 rotation of one admissible `Γ` — `entropySplit_of_admissiblePair` at the pair of `exists_admissiblePair`. Rests on
@@ -42,11 +37,13 @@ every vector and no torsion case (FS131-KN7). -/
 theorem entropySplit (F : Subfield ℝ) [NumberField F] : EntropySplit F :=
   entropySplit_of_admissiblePair (exists_admissiblePair (F := F)).some
 
-/-- **EF_F⁺** (FS100-EFP; X01D, X12B, FS105-B): zero entropy is carried by `T + A`, over every real number field —
-`zeroEntropyCarried_of_numberField`, the chain's name for it. The scope `NoRamifiedStableDyadic F` it was first stated
-under is read by no step (FS131-K8B1) and was dropped when it moved here (FS131-IJN1). -/
+/-- **EF_F⁺ over every real number field** (FS100-EFP; X01D § 3, X12B, FS105-B; [kernel] over lane T's and M8b's
+leaves): every rotation-invariant probability measure on `R̂` of entropy zero under one non-torsion rotation is carried
+by `T + A` — a Tate model (`exists_tateModel`) and `zeroEntropyCarried_of_tateModel`. The scope
+`NoRamifiedStableDyadic F` it was first stated under is read by no step (FS131-K8B1) and was dropped when it moved here
+(FS131-IJN1). -/
 theorem zeroEntropyCarried (F : Subfield ℝ) [NumberField F] : ZeroEntropyCarried F :=
-  zeroEntropyCarried_of_numberField F
+  (exists_tateModel F).elim zeroEntropyCarried_of_tateModel
 
 /-- **MR⁺(F)**, for every real number field: PE-2 and EF_F⁺ by `mrPlus_of_split_of_carried`. -/
 theorem mrPlus (F : Subfield ℝ) [NumberField F] : MRPlus F :=

@@ -310,7 +310,7 @@ theorem chromaticNumber_eq_localBound_of_chain [NumberField.IsTotallyReal F]
 
 omit [NumberField F] in
 /-- `i` is an integer of `F(i)`, with `i² = −1` and `ī = −i`. -/
-private theorem exists_I_integer : ∃ i : 𝓞 (fieldI F), i ^ 2 = -1 ∧ conjO F i = -i := by
+theorem exists_I_integer : ∃ i : 𝓞 (fieldI F), i ^ 2 = -1 ∧ conjO F i = -i := by
   let iL : fieldI F := ⟨Complex.I, by simp [zero_mem], by simp [one_mem]⟩
   have hiL : iL ^ 2 = -1 := Subtype.ext Complex.I_sq
   have hint : IsIntegral ℤ iL := IsIntegral.of_pow (n := 2) (by norm_num) (by rw [hiL]; exact isIntegral_one.neg)

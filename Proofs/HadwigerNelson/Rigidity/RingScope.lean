@@ -2,7 +2,7 @@ import Proofs.HadwigerNelson.Rigidity.ChainAtTA
 import Mathlib.NumberTheory.NumberField.CanonicalEmbedding.Basic
 
 /-!
-# The ring and the scope: `R ⊆ O′`, `c·O′ ⊆ R`, `R = O′` in the scope, the density of `R` (FS-131, job FS131-KN9; skeleton)
+# The ring and the scope: `R ⊆ O′`, `c·O′ ⊆ R`, `R = O′` in the scope, the density of `R` (FS-131, job FS131-KN9; one leaf open, `unitRing_eq_stableIntegers`)
 
 Module M9 of the chain under "five colours at the square root of 47" (`plans/FS131-KN3-chain-plan.md`, its table). It holds
 the two results the chain's leaf list does not number (NF2-NC: "the density of the ring in its completion, and the ring

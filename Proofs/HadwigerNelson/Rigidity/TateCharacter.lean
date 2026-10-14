@@ -3,7 +3,7 @@ import Proofs.HadwigerNelson.Rigidity.TateLocal
 import Proofs.HadwigerNelson.Rigidity.TateArch
 
 /-!
-# Lane T, the standard character of `W` and the map `π` (FS-131, job FS131-KT1; skeleton)
+# Lane T, the standard character of `W` and the map `π` (FS-131, job FS131-KT1)
 
 Form G of the standard character (`plans/FS131-KT1-tate.md` § Stage 3), on `W = L_∞ × ∏′_{w split} L_w` with `L = F(i)`:
 

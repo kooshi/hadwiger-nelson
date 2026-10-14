@@ -4,7 +4,7 @@ import Proofs.HadwigerNelson.Rigidity.InvariantMeasure
 import Proofs.HadwigerNelson.Instances.UpperHalfValues
 
 /-!
-# A⁺ at `S = ∅`: the chain's hypothesis `(chainInterface F).APlusOfR88`, proved (FS-131, job FS131-KM11; module M11c; skeleton)
+# A⁺ at `S = ∅`: the chain's hypothesis `(chainInterface F).APlusOfR88`, proved (FS-131, job FS131-KM11; module M11c)
 
 **Read aloud, against the informal claim.** `aPlusOfR88 : (chainInterface F).APlusOfR88` for every real number field `F`:
 if no invariant random proper four-colouring of `Cay(ℤ[U_F], U_F)` has a trace spectral measure null off `T + A`

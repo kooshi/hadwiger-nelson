@@ -3,7 +3,7 @@ import Mathlib.MeasureTheory.Measure.Haar.Basic
 import Mathlib.Topology.Algebra.Group.Pointwise
 
 /-!
-# The count's completion: the stable profinite part `K`, its Haar measure, and the edges in the closure (FS-131, job FS131-K12A; module M12, block K; skeleton)
+# The count's completion: the stable profinite part `K`, its Haar measure, and the edges in the closure (FS-131, job FS131-K12A; module M12, block K)
 
 **Read aloud, against the derivation** (J28D § 3.2 C1–C3: `G_S := (L ⊗ ℝ) × ∏_{v stable} O_{L_v} × …`, "`R` embedded
 diagonally", "dense", "`T_S` … is the closure of `U`"). The completion is built from residues only:

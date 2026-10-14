@@ -2,7 +2,7 @@ import Proofs.HadwigerNelson.Rigidity.DualGroup
 import Mathlib.MeasureTheory.Measure.Prokhorov
 
 /-!
-# Herglotz–Bochner on a countable discrete abelian group, existence half (FS-131, job FS131-KR1; module M2a; skeleton)
+# Herglotz–Bochner on a countable discrete abelian group, existence half (FS-131, job FS131-KR1; module M2a)
 
 **Read aloud, against the informal claim.** Every positive-definite `C : G → ℂ` on a countable abelian group `G` is the
 Fourier–Stieltjes transform of a finite positive measure on the dual `Ĝ = AddChar G Circle`, and that measure is unique:

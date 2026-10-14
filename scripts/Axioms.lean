@@ -2041,7 +2041,6 @@ the interface, measurability on `R̂`, and the local bound `L(F)` with Mathlib's
 #print axioms HadwigerNelson.SpectralChain.min_localBound_five_le_chromaticNumber_of_totallyReal
 #print axioms HadwigerNelson.SpectralChain.chromaticNumber_eq_localBound
 #print axioms HadwigerNelson.SqrtFortySeven.countable_F47
-#print axioms HadwigerNelson.SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five_of_chain
 
 /-! ## FS-131 (job FS131-K1) — the foundation of the regularity wall's plane
 
