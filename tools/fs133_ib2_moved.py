@@ -2,7 +2,7 @@
 """FS133-IB2 — did a stored statement of `Plane/OneClass/Defs` or `Plane/OneClass/InvariantLaw` move, and how.
 
   fs133_ib2_moved.py <before.out> <after.out> [--first-module=M,…] [--moved=NAME,…] [--deleted=NAME,…]
-                     [--proof-filled=NAME,…] [--strict] [--ignore-new] [--control]
+                     [--proof-filled=NAME,…] [--strict] [--ignore-new] [--ignore-module] [--public-only] [--control]
 
 The reader of FS133-IB1 (`tools/fs133_ib1_moved.py`; its `load` and `judge` unchanged), with this job's verdicts in
 place of the ruled drops (this job drops no binder).  The two files are outputs of a dumper of FS132-I2's form
@@ -25,7 +25,9 @@ The coordinator's rulings and the job's own changes, each checked, never assumed
   --proof-filled=N  N must be a definition whose stored type is identical in the full print and whose value reads
                     INSTANCES-ONLY — a proof argument filled, nothing else moved (PROOF-FILLED); the constants its
                     value names at one side only are printed.
-A constant only in the second dump is listed as NEW (with `--ignore-new` counted only).
+A constant only in the second dump is listed as NEW (with `--ignore-new` counted only).  `--ignore-module` reads every
+constant's module as unchanged: for a second dump made by a footer on a working copy, whose module is `(this file)`;
+`--public-only` drops the private declarations from the first dump (a footer's dump holds none).
 
 `--control` plants, in a copy of the second dump, one fault per verdict and requires each to be read as planted:
 a constant changed in an erased print (DIFFERENT), in a full print only (INSTANCES-ONLY, a failure under --strict),
@@ -107,13 +109,16 @@ def lst(flag):
     return out
 
 
+IGNORE_MODULE = "--ignore-module" in sys.argv
+
+
 def verdicts(before, wb, after, wa, moved, deleted, filled, strict):
     """-> (rows, failures): one row per constant of the first dump."""
     rows, bad = [], []
     for name, b in before.items():
         a = after.get(name)
         v, gone, came = judge(b, a)
-        same_mod = a is not None and wa.get(name) == wb.get(name)
+        same_mod = a is not None and (IGNORE_MODULE or wa.get(name) == wb.get(name))
         if name in deleted:
             if not name.startswith("_private."):
                 verdict = "DELETED-NOT-PRIVATE"
@@ -149,6 +154,8 @@ def main():
             print(f"FIRST-MODULE FILTER KEEPS NOTHING: {first_mods}")
             return 2
         before = {n: d for n, d in before.items() if n in keep}
+    if "--public-only" in sys.argv:
+        before = {n: d for n, d in before.items() if not n.startswith("_private.")}
     for n in moved + deleted + filled:
         if n not in before:
             print(f"LISTED NAME NOT IN THE FIRST DUMP: {n}")

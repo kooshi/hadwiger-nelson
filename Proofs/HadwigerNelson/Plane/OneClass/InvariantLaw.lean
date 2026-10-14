@@ -375,9 +375,9 @@ theorem IsShiftInvariantLaw.measure_origin_le {G : SimpleGraph E} {P : Measure (
     show I g = true ↔ I (0 + g) = true
     rw [zero_add]
   rw [SimpleGraph.le_finIndepRatio_iff]
-  intro S hS
+  intro S _
   -- a largest independent subset `J` of `S`: the random set meets `S` in at most `#J` points
-  obtain ⟨J, hJmem, hJmax⟩ := Finset.exists_max_image (S.powerset.filter fun J => G.IsIndepSet (J : Set E))
+  obtain ⟨J, hJmem, hJmax⟩ := Finset.exists_max_image (S.powerset.filter fun J : Finset E => G.IsIndepSet (J : Set E))
     Finset.card ⟨∅, Finset.mem_filter.2 ⟨Finset.empty_mem_powerset S, by simp⟩⟩
   obtain ⟨hJS, hJ⟩ := Finset.mem_filter.1 hJmem
   refine ⟨J, Finset.mem_powerset.1 hJS, hJ, ?_⟩

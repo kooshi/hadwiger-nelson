@@ -1,0 +1,13 @@
+the run itself, before any plant: no failure
+plant 'a constant changed in the erased and the full print' in SimpleGraph.finIndepRatio_le_of_embedding: the run fails and names it
+plant 'a constant changed in the full print only (ENNReal.instLE), --strict' in SimpleGraph.finIndepRatio_le_of_embedding: the run fails and names it
+plant 'a constant removed' in SimpleGraph.finIndepRatio_le_of_embedding: the run fails and names it
+plant 'a theorem turned into an axiom' in SimpleGraph.finIndepRatio_le_of_embedding: the run fails and names it
+plant 'an unlisted constant compiled in another module' in SimpleGraph.finIndepRatio_le_of_embedding: the run fails and names it
+plant 'a moved constant's full print changed' in HadwigerNelson.OneClass.countable_algPlane: the run fails and names it
+plant 'a moved constant left in its old module' in HadwigerNelson.OneClass.countable_algPlane: the run fails and names it
+plant 'a deleted private put back' in _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.card_le_indepNum_induce: the run fails and names it
+plant 'a deleted private put back' in _private.Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw.0.HadwigerNelson.OneClass.exists_indep_subset: the run fails and names it
+plant 'a proof-filled definition's erased value changed' in HadwigerNelson.OneClass.algPlaneEmbedding: the run fails and names it
+plant 'a proof-filled definition's type changed' in HadwigerNelson.OneClass.algPlaneEmbedding: the run fails and names it
+CONTROL OK: each plant read as planted

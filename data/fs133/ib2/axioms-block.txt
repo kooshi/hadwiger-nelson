@@ -1,0 +1,33 @@
+/-! ## FS133-IB2 — lane B of FS-133 (the one-class transfer), its definitions file: `Plane/OneClass/Defs` (the finitary
+independence ratio and its two readings, its bound by colourings and by embeddings, the reciprocal against the fractional
+chromatic numbers of finite induced subgraphs; `m₁(ℝ²)` and its Lebesgue form; `f(n)`; the algebraic plane in the plane;
+the labellings' two actions; the law structures, the plane system, their models; the countability of the algebraic plane).
+Statements FS133-K1's, `countable_algPlane` moved here from `Plane/OneClass/InvariantLaw` by the coordinator's ruling
+(FS133-IB2, Amendment 1; its stored type unchanged); proofs FS133-IB2's; no axiom, no outside theorem: every record on a
+subset of the standard three (the plan's § 5.5). -/
+-- FS133-IB2 block: 25 records (16 theorems, 6 definitions, 3 structures) — every public declaration of the module, one line each.
+#print axioms SimpleGraph.finIndepRatio
+#print axioms SimpleGraph.le_finIndepRatio_iff
+#print axioms SimpleGraph.finIndepRatio_le_of_forall_card_le
+#print axioms SimpleGraph.finIndepRatio_le_one
+#print axioms SimpleGraph.finIndepRatio_le_of_embedding
+#print axioms SimpleGraph.inv_le_finIndepRatio_of_colorable
+#print axioms SimpleGraph.inv_finIndepRatio_le_iSup_fractionalChromaticNumber
+#print axioms HadwigerNelson.Plane.mOne
+#print axioms HadwigerNelson.Plane.isIndepSet_unitDistance_iff
+#print axioms HadwigerNelson.Plane.upperDensity_le_mOne
+#print axioms HadwigerNelson.Plane.mOne_le_iff
+#print axioms HadwigerNelson.Plane.mOne_le_one
+#print axioms HadwigerNelson.Plane.isIndepSet_ball_half
+#print axioms HadwigerNelson.Plane.mOne_eq_iSup_nullMeasurableSet
+#print axioms HadwigerNelson.Plane.minIndepNum
+#print axioms HadwigerNelson.Plane.minIndepNum_one
+#print axioms HadwigerNelson.OneClass.algPlaneEmbedding
+#print axioms HadwigerNelson.OneClass.shiftLab
+#print axioms HadwigerNelson.OneClass.turnLab
+#print axioms HadwigerNelson.OneClass.countable_algPlane
+#print axioms HadwigerNelson.OneClass.IsShiftInvariantLaw
+#print axioms HadwigerNelson.OneClass.IsInvariantLaw
+#print axioms HadwigerNelson.OneClass.IsPlaneSystem
+#print axioms HadwigerNelson.OneClass.IsInvariantLaw.isPlaneSystem
+#print axioms HadwigerNelson.OneClass.isInvariantLaw_dirac
