@@ -1,0 +1,24 @@
+slot: admitted itt1: mem 4 GiB (hard cap), cpus 0,1
+@Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField : ∀ {K : Type u_2}
+  {Γ₀ : Type u_3} [inst : Field K] [inst_1 : LinearOrderedCommGroupWithZero Γ₀] [inst_2 : Valued K Γ₀]
+  [Valued.v.RankOne],
+  CompactSpace ↥(Valued.integer K) ↔
+    CompleteSpace ↥(Valued.integer K) ∧ IsDiscreteValuationRing ↥(Valued.integer K) ∧ Finite (Valued.ResidueField K)
+Valued.isClosed_integer : ∀ (R : Type u_3) [inst : Ring R] {Γ₀ : Type u_2} [inst_1 : LinearOrderedCommGroupWithZero Γ₀]
+  [_i : Valued R Γ₀], IsClosed ↑Valued.v.integer
+@IsClosed.completeSpace_coe : ∀ {α : Type u_2} [inst : UniformSpace α] [CompleteSpace α] {s : Set α} [hs : IsClosed s],
+  CompleteSpace ↑s
+@Ideal.finiteQuotientOfFreeOfNeBot : ∀ {S : Type u_2} [inst : CommRing S] [IsDomain S] [Module.Free ℤ S]
+  [Module.Finite ℤ S] (I : Ideal S), I ≠ ⊥ → Finite (S ⧸ I)
+@Valuation.Integers.isUnit_iff_valuation_eq_one : ∀ {F : Type u_2} {Γ₀ : Type u_3} [inst : Field F]
+  [inst_1 : LinearOrderedCommGroupWithZero Γ₀] {v : Valuation F Γ₀} {O : Type u_4} [inst_2 : CommRing O]
+  [inst_3 : Algebra O F], v.Integers O → ∀ {x : O}, IsUnit x ↔ v ((algebraMap O F) x) = 1
+@Valuation.integer.integers : ∀ {R : Type u_2} {Γ₀ : Type u_3} [inst : CommRing R]
+  [inst_1 : LinearOrderedCommGroupWithZero Γ₀] (v : Valuation R Γ₀), v.Integers ↥v.integer
+data/fs131/itt1/probes/Compact.lean:22:84: error: unexpected token 'ᵐ'; expected ')'
+data/fs131/itt1/probes/Compact.lean:25:68: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Finite (𝓞 K ⧸ v.asIdeal)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+seconds=3
+exit=1

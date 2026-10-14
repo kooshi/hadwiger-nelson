@@ -1,0 +1,23 @@
+slot: admitted itt1: mem 4 GiB (hard cap), cpus 5,6
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:150:44: error: Function expected at
+  RestrictedProduct.isEmbedding_structureMap
+but this term has type
+  Topology.IsEmbedding (RestrictedProduct.structureMap ?m.136 ?m.137 ?m.138)
+
+Note: Expected a function because this term is being applied to the argument
+  _
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:158:4: error: Type mismatch: After simplification, term
+  h
+ has type
+  @Set.Finite (SplitPlace F) {x | ↑a x ∉ adicCompletionIntegers ↥(fieldI F) ↑x}
+but is expected to have type
+  @Set.Finite (SplitPlace F) {w | a w ∉ adicCompletionIntegers ↥(fieldI F) ↑w}
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:166:6: error: Type mismatch: After simplification, term
+  this
+ has type
+  True
+but is expected to have type
+  { toCompletion := ↑(∑ x ∈ S, WithVal.toVal (valuation ↥(fieldI F) ↑w) (t x)) } =
+    ∑ x ∈ S, { toCompletion := ↑(WithVal.toVal (valuation ↥(fieldI F) ↑w) (t x)) }
+seconds=9
+exit=1

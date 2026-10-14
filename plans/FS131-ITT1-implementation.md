@@ -114,3 +114,50 @@ position and no other, for the moved constant only. **Controls:** `--control` on
 reported (`statements-compare-move-control.out`; plant 9 changes the moved statement in its new home and is reported
 `TYPE`); and the same two dumps without `--moved` FAIL with `MOVE …: ThinBoxes -> TateModel; expected ThinBoxes ->
 ThinBoxes` (`statements-compare-move-unmoved.out`) — the check sees the move.
+
+## Stage 3 — SAVED: lanes T-I, T-L, T-A, T-C proved in the modules (elaborated file by file; the build is stage 4)
+
+Each module elaborated under `lake env lean` with the lakefile's two options (`data/fs131/itt1/lean1.sh`), exit 0 and no
+warning: `TateModel` (`logs/TI-5.log`), `TateLocal` (`TL-7.log`), `TateArch` (`TA-4.log`), `TateCharacter` (`TC-4.log`).
+No `sorry` is left in the four files. Every change is a proof, a private helper or an import line (`git diff` read file by
+file: the only lines removed are the `sorry`s); the kernel's side is stage 4's.
+
+| lane | leaves | route as planned? | lines (est. → written) | rounds |
+|---|---|---|---|---|
+| T-I `TateModel` | `mul_mem_Λ`, `π_eq_π_iff`, `toSAdele_mem_torsionChars`, `isOpenMap` | yes (the stabiliser subring and `Subring.closure_le`; `AddChar.map_sub_eq_div`; `exists_integral_multiples` and `AddChar.map_nsmul_eq_pow`; `MonoidHom.isOpenMap_of_sigmaCompact` on `π.toMonoidHom`) | 85 → 55 | 3 |
+| | `sigmaCompactSpace` (moved here, no model) | **no** — the ruled intrinsic route, shortened (§ 3.1) | — → 50 | 2 |
+| T-L `TateLocal` | the three route copies | folded from `FormG.lean` verbatim but for one name | 72 → 72 | 0 |
+| | `exists_nat_mul_integral_of_trace_int` | **another route**: `isIntegral_discr_mul_of_mem_traceDual` (Mathlib's `Different.lean`) at the integral basis, `d₀ := |disc K|` — no dual basis, no common denominator | 50 → 30 | 2 |
+| | `exists_trace_not_int_away` | as planned, with `ϖ ∈ v ∖ 0` in place of a uniformizer and only inequalities in `ℤᵐ⁰` | 45 → 45 | 2 |
+| | `compactSpace_adicCompletionIntegers` | as planned (`compactSpace_iff_…_finite_residueField`; the residue field a quotient of `𝓞 ⧸ v` by density and `exists_valuation_sub_lt_of_integer`) | 80 → 60 | 4 |
+| T-A `TateArch` | `archTrace_mixedEmbedding`, `archTrace_mixedEmbedding_one` | yes | 30 → 12 | 2 |
+| | `exists_eq_mixedEmbedding_of_archTrace_int` | **another route**: no Gram-matrix solve — `Φ b = (Tr_∞(b·ι eⱼ))ⱼ` is `ℝ`-linear and onto `ℝ^n` (the trace dual basis hits each `Pi.single`), hence injective by dimension; `y := Σ nⱼ e_j^∨` | 70 → 35 | 4 |
+| T-C `TateCharacter` | all thirteen | yes; `exists_isApprox` as § 4.6's four children | ~270 → 190 | 4 |
+
+**3.1 `TateModel.sigmaCompactSpace`, the route taken** (the coordinator ruled the intrinsic route and named the box cover;
+I took a shorter one with fewer inputs and said so before typing it): `H := range structureMap` of `∏_w O_w` is compact
+(Tychonoff with `compactSpace_adicCompletionIntegers`); every split adele is `ι(t) + h`, `t ∈ L`, `h ∈ H`
+(`exists_approx_completion` at the finitely many non-integral places, summed); so `∏′ L_w = ⋃_{t ∈ L} (ι t + H)`,
+countable because `L` is; `W` is its product with the mixed space (Mathlib's instances). No σ-compactness of `L_w`, no
+`ProperSpace`, no countability of the places: `countable_splitPlace` stays a K8-A leaf in `PlaceSizes`, and the move
+Amendment 1 allowed is not made. `isOpenMap` now reads `sigmaCompactSpace` itself; the private `D`-helper of stage 1's plan
+is gone (one fact, one proof). `TateModel` imports `TateLocal` (which imports only Mathlib) and
+`Mathlib.Topology.Baire.LocallyCompactRegular` (the Baire instance of the compact `R̂`); `TateLocal` imports
+`Mathlib.RingTheory.DedekindDomain.Different` and `Mathlib.NumberTheory.NumberField.Discriminant.Defs`.
+
+**3.2 Re-priced from the first two leaves of each lane.** Every lane came in under its estimate: T-I about 0.7 of the
+plan, T-L about 0.75, T-A about 0.5, T-C about 0.7, at two to four elaboration rounds a leaf. Lane T's remainder after this
+job is T-K (`Rigidity/TateKernel`, 9 leaves, planned ~440 lines): at T-C's rate about 300 lines, half a day of an
+implementer.
+
+**3.3 The drafts D5 applied** (item 815's ruling 1; prose only): `Rigidity/EntropySplitMax`'s module docstring ("closed by
+the port (lane P2) at the join" → "proved by the port (lane P2, FS131-IP23)") and `condExpKernel_ergodicDecomposition`'s
+("**Closed by the port at the join** …" → "**Proved by the port** (lane P2, FS131-IP23): the release's theorem,
+`Outside.OAI015.action_ergodic_decomposition`, is its proof, `actionInvariantSigma` being `invariantSigma` by its body.");
+`Rigidity/Entropy`'s § "The reasoning surface": the draft's "…" filled from the sentence it replaces — the point mass
+(`ksEntropy_dirac`, proved over Mathlib alone, read in the file) joins the first sentence, and "Proved from the release's
+ported entropy files:" takes the other three and the pinning theorem, T2 with "over `Outside/OAI015Generating`,
+FS131-IP23". **In text** (`data/fs131/lc1/code_only_diff.py`): both files SAME outside block comments
+(`d5-code-only.out`); its plant reads DIFFERS for both (`d5-code-only-plant.out`). **From the kernel's side:** both
+modules dumped from build 2's tree before build 3 (`lean/StatementDumpD5.lean`, `d5-before.txt`); the comparison is
+stage 4's.

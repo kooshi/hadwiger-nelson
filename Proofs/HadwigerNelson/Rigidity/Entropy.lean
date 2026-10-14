@@ -300,10 +300,10 @@ theorem ksEntropy_map {m : MeasurableSpace X} {Y : Type*} [mY : MeasurableSpace 
 /-! ## The reasoning surface: what the next modules read, so that nobody unfolds a definition (FS131-KN6)
 
 Proved here over Mathlib alone: membership in a cell, the two inequalities that say "an entropy is a supremum of infima",
-`ksEntropy_eq_zero_iff`, and `blockEntropy_nonneg`. Leaves: the point mass (`ksEntropy_dirac`), long blocks of small
-entropy (`exists_blockEntropy_le_mul`, what EN2-ZE reads of "entropy zero"), the limit along increasing σ-algebras
-(`ksEntropy_eq_iSup_ksEntropyOn`, T2) and the mixture lemma (`ksEntropy_bind_eq_zero`, the consequence of Jacobs's formula
-the chain reads). The last three and the pinning theorem are proved from the release's entropy files once they are ported
+`ksEntropy_eq_zero_iff`, `blockEntropy_nonneg`, and the point mass (`ksEntropy_dirac`). Proved from the release's ported
+entropy files: long blocks of small entropy (`exists_blockEntropy_le_mul`, what EN2-ZE reads of "entropy zero"), the limit
+along increasing σ-algebras (`ksEntropy_eq_iSup_ksEntropyOn`, T2, over `Outside/OAI015Generating`, FS131-IP23), the mixture
+lemma (`ksEntropy_bind_eq_zero`, the consequence of Jacobs's formula the chain reads), and the pinning theorem
 (`plans/FS131-KN6-chain-first-layer.md` § Stage 5); the bridge is `data/fs131/kn6/bridge-statements.lean`. -/
 
 @[simp] theorem mem_nameCell {k : ℕ} {T : X → X} {P : X → Fin k} {n : ℕ} {w : Fin n → Fin k} {x : X} :

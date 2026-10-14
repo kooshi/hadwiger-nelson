@@ -1,8 +1,10 @@
 import Proofs.HadwigerNelson.Rigidity.RingScope
 import Proofs.HadwigerNelson.Rigidity.DualGroup
+import Proofs.HadwigerNelson.Rigidity.TateLocal
 import Mathlib.RingTheory.DedekindDomain.FiniteAdeleRing
 import Mathlib.NumberTheory.NumberField.CanonicalEmbedding.Basic
 import Mathlib.Topology.Algebra.Group.OpenMapping
+import Mathlib.Topology.Baire.LocallyCompactRegular
 
 /-!
 # The model of the dual: `TateModel F`, the facts the zero-entropy side reads of `R̂ = W/Λ` (FS-131, job FS131-KT1; skeleton)
@@ -130,6 +132,57 @@ structure TateModel where
   /-- Fact 5: an archimedean point `(b, 0)` maps to an archimedean character, one with an additive real lift. -/
   arch_mem : ∀ b : mixedEmbedding.mixedSpace (fieldI F), π (b, 0) ∈ archChars (unitRing F)
 
+/-- **The split adeles are σ-compact**, with no model: `H = ∏_w O_w` is compact (Tychonoff, each `O_w` compact:
+`compactSpace_adicCompletionIntegers`), and every split adele is `ι(t) + h` with `t ∈ L`, `h ∈ H` (an approximant at the
+finitely many places where it is not integral, `exists_approx_completion`, summed), so the space is the union of the
+compact sets `ι(t) + H` over the countable `L`. -/
+private theorem sigmaCompactSpace_splitAdeleRing : SigmaCompactSpace (SplitAdeleRing F) := by
+  classical
+  haveI : ∀ w : SplitPlace F, CompactSpace (w.1.adicCompletionIntegers (fieldI F)) :=
+    fun w => compactSpace_adicCompletionIntegers w.1
+  haveI : Countable (fieldI F) := Finsupp.Countable.of_moduleFinite (R := ℚ)
+  have hO : ∀ (w : SplitPlace F) (t : fieldI F), w.1.valuation (fieldI F) t ≤ 1 →
+      (t : w.1.adicCompletion (fieldI F)) ∈ w.1.adicCompletionIntegers (fieldI F) := fun w t ht => by
+    rw [mem_adicCompletionIntegers, valuedAdicCompletion_eq_valuation']; exact ht
+  let H : Set (SplitAdeleRing F) := Set.range (RestrictedProduct.structureMap
+    (fun w : SplitPlace F => w.1.adicCompletion (fieldI F))
+    (fun w => (w.1.adicCompletionIntegers (fieldI F) : Set (w.1.adicCompletion (fieldI F)))) Filter.cofinite)
+  have hH : IsCompact H := isCompact_range RestrictedProduct.isEmbedding_structureMap.continuous
+  refine SigmaCompactSpace.of_countable (Set.range fun t : fieldI F => (toSplitAdele F t + ·) '' H)
+    (Set.countable_range _) ?_ ?_
+  · rintro _ ⟨t, rfl⟩
+    exact hH.image (continuous_const_add _)
+  refine Set.eq_univ_of_forall fun a => ?_
+  have hfin : {w : SplitPlace F | a w ∉ w.1.adicCompletionIntegers (fieldI F)}.Finite :=
+    Filter.eventually_cofinite.1 a.2
+  choose t ht hat using fun w : SplitPlace F => exists_approx_completion w.1 (a w)
+  let S := hfin.toFinset
+  let s : fieldI F := ∑ w ∈ S, t w
+  have hcoe : ∀ w : SplitPlace F, (toSplitAdele F s) w = ∑ w' ∈ S, (t w' : w.1.adicCompletion (fieldI F)) :=
+    fun w => by
+      show ((∑ w' ∈ S, t w' : fieldI F) : w.1.adicCompletion (fieldI F)) = _
+      exact map_sum (algebraMap (fieldI F) (w.1.adicCompletion (fieldI F))) t S
+  have hother : ∀ w w' : SplitPlace F, w' ≠ w →
+      (t w' : w.1.adicCompletion (fieldI F)) ∈ w.1.adicCompletionIntegers (fieldI F) := fun w w' hne =>
+    hO w _ (ht w' w.1 fun h => hne (Subtype.ext h.symm))
+  have hmem : ∀ w : SplitPlace F, (a - toSplitAdele F s) w ∈ w.1.adicCompletionIntegers (fieldI F) := by
+    intro w
+    show a w - toSplitAdele F s w ∈ _
+    rw [hcoe]
+    by_cases hw : w ∈ S
+    · rw [← Finset.add_sum_erase S _ hw, ← sub_sub]
+      exact sub_mem (hat w) (sum_mem fun w' hw' => hother w w' (Finset.ne_of_mem_erase hw'))
+    · have haw : a w ∈ w.1.adicCompletionIntegers (fieldI F) := by
+        by_contra h; exact hw (hfin.mem_toFinset.2 h)
+      exact sub_mem haw (sum_mem fun w' hw' => hother w w' fun h => hw (h ▸ hw'))
+  obtain ⟨h, hh⟩ := RestrictedProduct.exists_structureMap_eq_of_forall _ _ hmem
+  exact Set.mem_sUnion.2 ⟨_, ⟨s, rfl⟩, ⟨_, ⟨h, hh⟩, by simp⟩⟩
+
+/-- An element of `L` integral over `ℤ` lies in `O′`: it is `a / 1` with `a ∈ 𝓞 L` at every stable prime. -/
+private theorem integral_mem_stableIntegers {x : fieldI F} (hx : IsIntegral ℤ x) : x ∈ stableIntegers F := by
+  refine (mem_stableIntegers F).2 fun P => (UpperHalf.mem_localRing P).2 ⟨⟨x, hx⟩, 1, ?_, by simp⟩
+  exact (Ideal.ne_top_iff_one _).1 P.isMaximal.ne_top
+
 namespace TateModel
 
 variable {F} (D : TateModel F)
@@ -159,16 +212,47 @@ theorem ker_eq (a : SAdeleRing F) : D.π a = 1 ↔ ∃ y ∈ D.Λ, a = toSAdele 
 /-- **`Λ` is an `R`-module** (X01D l. 119: a fractional `R`-ideal), from the equivariance: `Λ` is stable under the unit
 vectors, hence under the ring they generate. -/
 theorem mul_mem_Λ (r : unitRing F) {y : fieldI F} (hy : y ∈ D.Λ) : ofUnitRing F r * y ∈ D.Λ := by
-  sorry
+  -- the stabiliser of `Λ`, a subring of `L`
+  let M : Subring (fieldI F) :=
+    { carrier := {x | ∀ y ∈ D.Λ, x * y ∈ D.Λ}
+      mul_mem' := fun {a b} ha hb y hy => by rw [mul_assoc]; exact ha _ (hb y hy)
+      one_mem' := fun y hy => by rwa [one_mul]
+      add_mem' := fun {a b} ha hb y hy => by rw [add_mul]; exact D.Λ.add_mem (ha y hy) (hb y hy)
+      zero_mem' := fun y _ => by rw [zero_mul]; exact D.Λ.zero_mem
+      neg_mem' := fun {a} ha y hy => by rw [neg_mul]; exact D.Λ.neg_mem (ha y hy) }
+  have hrot : ∀ u : unitVectors F, rot u (1 : Dual F) = 1 := fun u => by
+    ext r; rfl
+  have hgen : {z : ℂ | z ∈ planeOver F ∧ ‖z‖ = 1} ⊆ (M.map (fieldI F).subtype : Set ℂ) := by
+    intro z hz
+    refine ⟨unitL ⟨z, hz⟩, fun y hy => ?_, rfl⟩
+    show D.π (toSAdele F (unitL ⟨z, hz⟩ * y)) = 1
+    rw [map_mul, D.π_unit_mul, (D.mem_Λ).1 hy, hrot]
+  obtain ⟨m, hm, hmr⟩ := Subring.mem_map.1 (Subring.closure_le.2 hgen r.2)
+  have hrm : ofUnitRing F r = m := Subtype.ext hmr.symm
+  rw [hrm]
+  exact hm y hy
 
 /-- **Two lifts of one character differ by a point of `Λ`** (the form Steps 3–4 of X01D read, ll. 256, 271). -/
 theorem π_eq_π_iff (a b : SAdeleRing F) : D.π a = D.π b ↔ ∃ y ∈ D.Λ, a = b + toSAdele F y := by
-  sorry
+  rw [← div_eq_one, ← AddChar.map_sub_eq_div, D.ker_eq]
+  simp only [sub_eq_iff_eq_add']
 
 /-- **Global points are torsion** (X01D l. 121: `T = L/R^∨`, the half Step 7 reads): for `t ∈ L`, `π(t)` has finite order —
 `N t ∈ 𝓞 L ⊆ O′ ⊆ Λ` for some integer `N ≥ 1`. -/
 theorem toSAdele_mem_torsionChars (t : fieldI F) : D.π (toSAdele F t) ∈ torsionChars (unitRing F) := by
-  sorry
+  obtain ⟨y, hy0, hy⟩ := exists_integral_multiples ℤ ℚ ({t} : Finset (fieldI F))
+  have hint : IsIntegral ℤ (y • t) := hy t (Finset.mem_singleton_self t)
+  have hNint : IsIntegral ℤ ((y.natAbs : fieldI F) * t) := by
+    rcases Int.natAbs_eq y with h | h
+    · have : (y.natAbs : fieldI F) * t = y • t := by
+        rw [zsmul_eq_mul]; nth_rewrite 2 [h]; rw [Int.cast_natCast]
+      rwa [this]
+    · have : (y.natAbs : fieldI F) * t = -(y • t) := by
+        rw [zsmul_eq_mul]; nth_rewrite 2 [h]; rw [Int.cast_neg, Int.cast_natCast, neg_mul, neg_neg]
+      rw [this]; exact hint.neg
+  refine ⟨y.natAbs, Int.natAbs_ne_zero.2 hy0, ?_⟩
+  have h1 := D.stableIntegers_le _ (integral_mem_stableIntegers F hNint)
+  rwa [map_mul, map_natCast, ← nsmul_eq_mul, AddChar.map_nsmul_eq_pow] at h1
 
 /-- **Fact 5, as M8b reads it: `π(L + L_∞) ⊆ T + A`** (X01D l. 121, the inclusion Step 7 reads at l. 306). -/
 theorem mem_TA (t : fieldI F) (b : mixedEmbedding.mixedSpace (fieldI F)) :
@@ -178,12 +262,19 @@ theorem mem_TA (t : fieldI F) (b : mixedEmbedding.mixedSpace (fieldI F)) :
 
 /-- **`W` is σ-compact**: the countable union of the compact sets `K + ι(x)`, `x ∈ O′` (`exists_isCompact`; `L` countable). -/
 theorem sigmaCompactSpace : SigmaCompactSpace (SAdeleRing F) := by
-  sorry
+  haveI := sigmaCompactSpace_splitAdeleRing F
+  infer_instance
 
 /-- **`π` is open** (read by Lemma 3.1′ (i), X01D l. 230): the open mapping theorem for the σ-compact `W`
 (`AddChar.toMonoidHom` and `MonoidHom.isOpenMap_of_sigmaCompact`). -/
 theorem isOpenMap : IsOpenMap D.π := by
-  sorry
+  haveI : SigmaCompactSpace (Multiplicative (SAdeleRing F)) := sigmaCompactSpace
+  have hf : IsOpenMap (D.π.toMonoidHom) :=
+    MonoidHom.isOpenMap_of_sigmaCompact D.π.toMonoidHom (fun χ => by
+        obtain ⟨a, ha⟩ := D.surjective_π χ
+        exact ⟨Multiplicative.ofAdd a, ha⟩)
+      (D.continuous_π.comp continuous_toAdd)
+  exact hf
 
 end TateModel
 

@@ -32,7 +32,7 @@ which stays in `Rigidity/ChainAtTA` (upstream of this module) until the landing 
 **The release's decomposition enters as a leaf under a name of its own** (`LEAN.md` § Searching: no lemma under one name in
 two modules): `condExpKernel_ergodicDecomposition` is `PrimeDegreePackets.action_ergodic_decomposition`
 (`[OAIMath2026]`, `PrimePackets/ErgodicDecomposition.lean` ll. 127–134) with the release's `actionInvariantSigma` unfolded
-to its body (`KernelEntropy.lean` l. 279, here `invariantSigma`), closed by the port (lane P2) at the join.
+to its body (`KernelEntropy.lean` l. 279, here `invariantSigma`), proved by the port (lane P2, FS131-IP23).
 
 **Models.** Step 2's and step 3's hypotheses — a `Γ`-invariant probability carrying no positive multiple of Haar measure —
 are met by the point mass at the trivial character (`not_smul_dualHaar_le_dirac_one`), given an admissible pair
@@ -60,8 +60,8 @@ theorem invariantSigma_le (H Y : Type*) [Group H] [MulAction H Y] [mY : Measurab
 `PrimeDegreePackets.action_ergodic_decomposition`, `PrimePackets/ErgodicDecomposition.lean` ll. 127–134, with
 `actionInvariantSigma` unfolded): for a countable group acting on a standard Borel space and an invariant probability `μ`,
 the conditional-expectation kernel of `μ` on the invariant σ-algebra integrates to `μ`, and almost every value is ergodic.
-**Closed by the port at the join** (lane P2, `plans/FS131-KN7-chain-next.md` § Stage 4: 559 release lines, three renames
-inside proofs). -/
+**Proved by the port** (lane P2, FS131-IP23): the release's theorem, `Outside.OAI015.action_ergodic_decomposition`,
+is its proof, `actionInvariantSigma` being `invariantSigma` by its body. -/
 theorem condExpKernel_ergodicDecomposition {H Y : Type*} [Group H] [Countable H] [MulAction H Y] [MeasurableSpace Y]
     [StandardBorelSpace Y] [Nonempty Y] (μ : Measure Y) [IsProbabilityMeasure μ]
     (hp : ∀ g : H, MeasurePreserving (fun y : Y => g • y) μ μ) :
