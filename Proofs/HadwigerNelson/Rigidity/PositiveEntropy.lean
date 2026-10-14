@@ -1,9 +1,11 @@
 import Proofs.HadwigerNelson.Rigidity.Entropy
 import Proofs.HadwigerNelson.Rigidity.Solenoid
+import Proofs.HadwigerNelson.Rigidity.EntropyFibres
 import Mathlib.MeasureTheory.Measure.MutuallySingular
 import Mathlib.MeasureTheory.Group.Measure
 import Mathlib.GroupTheory.QuotientGroup.Basic
 import Mathlib.MeasureTheory.Constructions.Polish.Basic
+import Mathlib.MeasureTheory.Measure.Haar.Unique
 
 /-!
 # The positive entropy rigidity theorem of Einsiedler and Lindenstrauss, declared; its totally irreducible case, stated (FS-131, jobs FS131-KN3 and FS131-KN7; skeleton)
@@ -127,6 +129,114 @@ theorem positive_entropy_rigidity_model :
 example : BorelSpace Unit := inferInstance
 example : PolishSpace Unit := inferInstance
 
+/-! ## The deduction's steps (FS105-DED, `plans/FS105-D-deduction.md` § 2.1; FS131-KN9's plan, `plans/FS131-KN9-chain-zero-entropy.md` § Stage 2)
+
+Step 0 is FS105-NVC: the hypotheses of the declared theorem follow from those of Theorem 1.2
+(`ZdAction.two_le_of_not_isVirtuallyCyclic`, `ZdAction.noVirtuallyCyclicFactors_of_isIrreducible`). Step 1 is total
+irreducibility read at `Λ`, inline in the proof. Step 2 (Case A, some `G j = X`) is `isAddHaarMeasure_of_add_invariant`,
+`ZdAction.map_eq_of_isAddHaarMeasure` and `ZdAction.eq_of_isErgodicOn_of_invariant_component`. Step 3 (Case B, every `G j`
+finite) is `Rigidity/EntropyFibres`: the finite-fibred step, the finite mixture, and the power, with `ZdAction.coe_nsmul`. -/
+
+namespace ZdAction
+
+variable {d : ℕ} {X : Type*} [AddCommGroup X] [TopologicalSpace X]
+
+/-- **Total irreducibility gives irreducibility**: read it at `Λ = ℤ^d`. -/
+theorem IsTotallyIrreducible.isIrreducible {α : ZdAction d X} (h : α.IsTotallyIrreducible) : α.IsIrreducible :=
+  fun Y hY hinv => h ⊤ inferInstance Y hY hinv
+
+/-- **FS105-NVC, the rank** (FS105-DED step 0a): an action of `ℤ⁰` or `ℤ¹` is virtually cyclic (`n = 0`, resp. `n = 1`, with
+`Λ = ℤ^d` and `k = m₀`), so an action that is not has `d ≥ 2`. No hypothesis on `X`. -/
+theorem two_le_of_not_isVirtuallyCyclic (α : ZdAction d X) (h : ¬ α.IsVirtuallyCyclic) : 2 ≤ d := by
+  sorry
+
+/-- **FS105-NVC, the factors** (FS105-DED step 0d, the primal route): an irreducible action on a connected T1 group that is
+not virtually cyclic has no virtually cyclic factor. A closed invariant `Y ≠ X` is finite by irreducibility; if the action is
+virtually cyclic modulo `Y`, then for `m ∈ Λ` the continuous homomorphism `α^m − α^{kn}` maps the connected `X` into the
+finite `Y`, its zero set is clopen and contains `0`, so it vanishes: the action is virtually cyclic. -/
+theorem noVirtuallyCyclicFactors_of_isIrreducible [IsTopologicalAddGroup X] [T1Space X] [ConnectedSpace X]
+    (α : ZdAction d X) (hirr : α.IsIrreducible) (hvc : ¬ α.IsVirtuallyCyclic) : α.NoVirtuallyCyclicFactors := by
+  sorry
+
+/-- **`α^{q n}` is the `q`-th iterate of `α^n`**: `map_add'` and induction on `q`. -/
+theorem coe_nsmul (α : ZdAction d X) (q : ℕ) (n : Fin d → ℤ) : ⇑(α (q • n)) = (⇑(α n))^[q] := by
+  sorry
+
+/-- **Haar measure is invariant under every `α^n`** (C1 of FS105-DED § 2.2): `(α^n)_* m` is a left-invariant probability
+measure — `g + α^n x = α^n (α^{-n} g + x)` — hence a Haar probability measure
+(`MeasureTheory.Measure.isAddHaarMeasure_of_isCompact_nonempty_interior` at `univ`), hence `m`
+(`MeasureTheory.Measure.isAddHaarMeasure_eq_of_isProbabilityMeasure`; a compact Hausdorff group is locally compact). -/
+theorem map_eq_of_isAddHaarMeasure [IsTopologicalAddGroup X] [CompactSpace X] [T2Space X] [MeasurableSpace X]
+    [BorelSpace X] (α : ZdAction d X) (ν : Measure X) [IsProbabilityMeasure ν] [ν.IsAddHaarMeasure]
+    (n : Fin d → ℤ) : ν.map (α n) = ν := by
+  sorry
+
+/-- **An ergodic measure with an invariant component is that component** (FS105-DED step 2, C3, with no use of clause (3)
+of the declared theorem): if `µ = J⁻¹(ν 1 + … + ν J)` with mutually singular probability measures and `ν j₀` is
+`α`-invariant, then `µ = ν j₀`. Route: `A := ⋂_{k ≠ j₀}` of the null sets of `ν k ⟂ ν j₀`, `A′ := ⋂_n (α^n)⁻¹ A`, exactly
+invariant, `ν j₀ (A′ᶜ) = 0` and `ν k A′ = 0` for `k ≠ j₀`; so `µ A′ = J⁻¹` and `µ A′ᶜ = (J − 1)/J`, and ergodicity
+forces `J = 1`. Where `J ≥ 2` the hypotheses have no model — that is the content. -/
+theorem eq_of_isErgodicOn_of_invariant_component [MeasurableSpace X] [BorelSpace X] (α : ZdAction d X) (μ : Measure X)
+    (herg : α.IsErgodicOn ⊤ μ) {J : ℕ} (ν : Fin J → Measure X) (hμ : μ = (J : ℝ≥0∞)⁻¹ • ∑ j, ν j)
+    (hsing : ∀ i j, i ≠ j → ν i ⟂ₘ ν j) (hprob : ∀ j, IsProbabilityMeasure (ν j)) (j₀ : Fin J)
+    (hinv : ∀ n, (ν j₀).map (α n) = ν j₀) : μ = ν j₀ := by
+  sorry
+
+/-- **`×2, ×3` on the line**: `n ↦ (x ↦ 2^{n₀} 3^{n₁} x)`, an action of `ℤ²` by continuous automorphisms of `ℝ` — the model of
+FS105-NVC's hypotheses (`mulTwoThree_model`). -/
+noncomputable def mulTwoThree : ZdAction 2 ℝ where
+  toFun n := AddMonoidHom.mulLeft ((2 : ℝ) ^ n 0 * (3 : ℝ) ^ n 1)
+  map_zero' := by
+    ext x
+    simp
+  map_add' m n := by
+    ext x
+    simp only [Pi.add_apply, AddMonoidHom.coe_mulLeft, AddMonoidHom.coe_comp, Function.comp_apply]
+    rw [zpow_add₀ two_ne_zero, zpow_add₀ three_ne_zero]
+    ring
+  continuous' n := continuous_const_mul _
+
+-- `α^{(1, 0)}` doubles.
+example : mulTwoThree ![1, 0] 1 = 2 := by
+  simp [mulTwoThree]
+
+/-- **A model of FS105-NVC's hypotheses**, every clause exercised: `×2, ×3` on `ℝ` (a connected T1 group) is irreducible —
+a closed subgroup of `ℝ` is `0`, cyclic or `ℝ` (`Real.subgroup_dense_or_cyclic`-shape), and `cℤ` with `c ≠ 0` is not
+invariant under doubling — and not virtually cyclic — `2^a 3^b = 1` forces `a = b = 0` (unique factorisation), so a
+finite-index `Λ ∋ (N, 0), (0, N)` is not inside one line `ℤn`. -/
+theorem mulTwoThree_model : mulTwoThree.IsIrreducible ∧ ¬ mulTwoThree.IsVirtuallyCyclic := by
+  sorry
+
+/-- **A model of the invariant-component statement's hypotheses** at `J = 1` (where its conclusion is `µ = ν 0`): the
+trivial action on the one-point group, `µ = ν 0` the point mass. At `J ≥ 2` the hypotheses have no model; that is the
+statement's content. -/
+theorem invariantComponent_model :
+    (trivial 2 Unit).IsErgodicOn ⊤ (Measure.dirac ()) ∧
+      Measure.dirac () = ((1 : ℕ) : ℝ≥0∞)⁻¹ • ∑ j : Fin 1, (fun _ => Measure.dirac ()) j ∧
+      IsProbabilityMeasure (Measure.dirac ()) ∧ ∀ n, (Measure.dirac ()).map ((trivial 2 Unit) n) = Measure.dirac () := by
+  sorry
+
+end ZdAction
+
+/-- **A model of the Haar statements' hypotheses**: the uniform probability on the compact group `ℤ/2` is invariant under
+every translation (`isAddHaarMeasure_of_add_invariant`), and so is a Haar probability measure, the hypothesis of
+`ZdAction.map_eq_of_isAddHaarMeasure`. -/
+theorem finTwo_haar_model :
+    IsProbabilityMeasure ((2 : ℝ≥0∞)⁻¹ • Measure.count : Measure (Fin 2)) ∧
+      ∀ (g : Fin 2) (B : Set (Fin 2)), MeasurableSet B →
+        ((2 : ℝ≥0∞)⁻¹ • Measure.count : Measure (Fin 2)) ((fun x => x + g) ⁻¹' B) =
+          ((2 : ℝ≥0∞)⁻¹ • Measure.count : Measure (Fin 2)) B := by
+  sorry
+
+/-- **A translation-invariant probability measure on a compact group is a Haar measure** (C1 of FS105-DED § 2.2, the half
+read in Case A): clause (2) of the declared theorem with `G j = X` says `ν((· + g)⁻¹ B) = ν B` for every `g` and measurable
+`B`, which is left invariance (`X` is commutative); then
+`MeasureTheory.Measure.isAddHaarMeasure_of_isCompact_nonempty_interior` at `K = univ`. -/
+theorem isAddHaarMeasure_of_add_invariant {X : Type*} [AddCommGroup X] [TopologicalSpace X] [IsTopologicalAddGroup X]
+    [CompactSpace X] [MeasurableSpace X] [BorelSpace X] (ν : Measure X) [IsProbabilityMeasure ν]
+    (h : ∀ g : X, ∀ B : Set X, MeasurableSet B → ν ((fun x => x + g) ⁻¹' B) = ν B) : ν.IsAddHaarMeasure := by
+  sorry
+
 /-- **`[EinsiedlerLindenstrauss2022]` Theorem 1.2 (p. 2)**: "Let `α` be a totally irreducible, not virtually-cyclic
 `ℤ^d`-action by automorphisms of a solenoid `X`. Let `µ` be an `α`-invariant and ergodic probability measure. Then either
 `µ = m_X` is the Haar measure of `X`, or the entropy `h_µ(αⁿ) = 0` vanishes for all `n ∈ ℤ^d`." **Ours to prove** from
@@ -134,15 +244,17 @@ example : PolishSpace Unit := inferInstance
 `µ` translation-invariant; every `G j` finite gives entropy zero through the finite-fibred factors. No inhabitant of the
 hypotheses is in the library yet: PE-1′ supplies the pieces `M̂`.
 
-**`[PolishSpace X]`** (FS131-KN8, on the coordinator's standing word, inventory item 750 ruling 2): the finite-fibred step
-reads clause (4) over Mathlib's quotient σ-algebra — with a finite `G j` and a finite Borel partition `Q` of `X` whose cells
-meet each coset in at most one point, `Q ∨ π⁻¹(Σ)` is the Borel σ-algebra of `X` exactly when the image `π(B ∩ q)` of each
-Borel set is measurable in `Σ`, which the quotient σ-algebra gives by definition and the Borel one of `X ⧸ G j` gives only
-through Lusin–Souslin, that is for Polish `X` — so the proof runs over `positive_entropy_rigidity_of_polishSpace`. Every use
-on the headline's path is at a piece `Rigidity.PieceDual M` of a countable group, Polish by
-`Rigidity.polishSpace_dual` (module `Rigidity/DualGroup`). -/
+**No `PolishSpace`** (FS131-KN9, the coordinator's ruling of 2026-10-14; the binder FS131-KN8 added is gone): the
+finite-fibred step holds over the Borel σ-algebra of `X ⧸ G j` that clause (4) of the declared theorem states, for every
+compact T1 group (`Rigidity.ksEntropy_eq_zero_iff_of_finite`: the projection is an open embedding on each translate of a
+small open set, so no Lusin–Souslin is read), and Haar uniqueness asks local compactness only. So the proof reads
+`positive_entropy_rigidity` as declared.
+
+**Its proof's children** (FS131-KN9, `plans/FS131-KN9-chain-zero-entropy.md` § Stage 2) are the statements of the section
+above and of `Rigidity/EntropyFibres`: step 0 by FS105-NVC, the declared theorem as stated, step 1 inline, Case A
+through Haar measure and the invariant component, Case B through the finite-fibred step, the finite mixture and the power. -/
 theorem haar_or_zero_entropy {X : Type*} [AddCommGroup X] [TopologicalSpace X] [MeasurableSpace X] [BorelSpace X]
-    [PolishSpace X] (hX : IsSolenoid X) {d : ℕ} (α : ZdAction d X) (hirr : α.IsTotallyIrreducible)
+    (hX : IsSolenoid X) {d : ℕ} (α : ZdAction d X) (hirr : α.IsTotallyIrreducible)
     (hvc : ¬ α.IsVirtuallyCyclic) (μ : Measure X) (hμ : IsProbabilityMeasure μ) (herg : α.IsErgodicOn ⊤ μ) :
     μ.IsAddHaarMeasure ∨ ∀ n : Fin d → ℤ, ksEntropy μ (α n) = 0 := by
   sorry
