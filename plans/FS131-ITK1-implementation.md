@@ -162,3 +162,25 @@ coordinator's to choose; it is not a binder of the declaration alone.
 **Re-priced** from the first leaves of each lane: K8-A came in at about half its plan, K8-M at about three quarters,
 K8-B at about two thirds, each in two to four elaboration rounds. What is left is K8-G (11 leaves, planned ~500) and
 K8-S (7, planned ~200): at these rates about 450 lines, a few hours.
+
+## Stage 4 — SAVED: lane K8-G proved in its module (elaborated; the build is stage 5)
+
+`Rigidity/GlobalPoint`, all 11 leaves, against a copy (`data/fs131/itk1/work/GlobalPoint.lean`; rounds `logs/KG-1.log` …
+`KG-13.log`, the last exit 0 with no warning), copied over the module; the only lines removed are the `sorry`s.
+
+| leaf | route as planned? |
+|---|---|
+| `heavyExponent_pos`, `scaleHeight_three_mul_sq` | yes |
+| `Collision.ℓ_ne_zero`, `ℓ_eq_ofUnitRing`, `mul_sub_point` | yes |
+| `Collision.point_eq` | yes, with the split per place: archimedean sizes of `z` by `2(|a₁₂| + |a₂₂|) + 2(|a₁₁| + |a₂₁|)`, split ones by `max(1,|v₁₁|)·max(1,|v₁₂|)·max(1,|v₂₁|)·max(1,|v₂₂|)·max σ`; then `cases p`: at an archimedean `p` the archimedean product `≤ 8δ` and the split product `≤ M⁶`; at a split `p` the archimedean product `≤ 1` and the split product (over the supports with `p` inserted) `≤ M⁶·δ`; both `≤ 8M^{−10}` |
+| `Collision.size_sub_point_le` | yes: `1 ≤ |ℓ|_p·2^{[L:ℚ]+1}M²` from Lemma PF for `ℓ` with the factor at `p` kept, and `|e|_p ≤ 2Mδ` |
+| `TateModel.exists_collision` | yes (preimages under `rot v_b`; `Nat.card_Icc`) |
+| `TateModel.exists_point_of_heavy` | yes, with `δ(B)^β = e^{−log(3B)/2}` computed in logarithms (no `rpow` algebra), `B₀ = max(4, ⌈1/δ₀⌉₊ + ⌈8/C⌉₊ + 1)`, `B_j ≥ B₀ + j`, and `|x̃ − t|_p ≤ 2^{[L:ℚ]+2}/B_j` |
+| `TateModel.measurableSet_leafSet`, `measure_leafSet_compl_eq_zero` | yes |
+
+Private helpers: `e_eq`, `size_e_arch`, `size_e_split`, `absAt_ℓ_arch`, `absAt_ℓ_split`, `max_le_mul_max`,
+`splitHeight_le_scaleHeight`, `prod_le_mul_prod_erase`. **One unread binder dropped** (item 726's word):
+`scaleHeight_three_mul_sq` did not read the section's `[NumberField F]` (`scaleHeight` reads only `finrank`), and the
+build's linter said so once it was proved; `omit [NumberField F] in` drops it from this theorem's stored type alone (no
+definition mentions it). Listed for stage 5's check as a ruled drop. About 420 lines against the plan's ~500, in 13 rounds
+(casts of a `let`-bound `ℕ → ℕ` into `ℝ` cost four of them: `(Bs j : ℝ)` does not elaborate, `(Nat.cast (Bs j) : ℝ)` does).

@@ -1,0 +1,98 @@
+slot: waiting (ledger 21 + 4 > budget 22 GiB)
+slot: admitted itk1: mem 4 GiB (hard cap), cpus 0,1
+data/fs131/itk1/work/GlobalPoint.lean:615:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  Real.log (?m.656 * ↑B)
+in the target expression
+  0 < Real.log ↑B + -(Real.log (3 * Real.exp (Real.log ↑B)) / 2)
+
+F : Subfield ℝ
+inst✝¹ : NumberField ↥F
+D : TateModel F
+μ : Measure (Dual F)
+inst✝ : IsProbabilityMeasure μ
+hμ : RotInv F μ
+p : WPlace F
+C : ℝ
+hC0 : 0 < C
+hC : D.IsGap C
+ε : ℝ
+hε16 : 16 * ε ≤ 1
+δ₀ : ℝ
+hδ₀ : 0 < δ₀
+xw : SAdeleRing F
+hheavy : ∀ (δ : ℝ), 0 < δ → δ ≤ δ₀ → δ ^ heavyExponent F ≤ μ.real (⇑D.π '' (fun x => xw + x) '' thinBox p (2 * ε) δ)
+hn : 0 < Module.finrank ℚ ↥(fieldI F)
+hMB : ∀ (B : ℕ), 1 ≤ B → ↑B ≤ scaleHeight F B
+hinv : ∀ (B : ℕ), 1 ≤ B → (scaleHeight F B)⁻¹ ≤ 1 / ↑B
+hinv1 : ∀ (B : ℕ), 1 ≤ B → (scaleHeight F B)⁻¹ ≤ 1
+hinv0 : ∀ (B : ℕ), 0 ≤ (scaleHeight F B)⁻¹
+hδB : ∀ (B : ℕ), 1 ≤ B → scaleThin F B ≤ 1 / ↑B
+hCB : ∀ (B : ℕ), 1 ≤ B → 8 * (scaleHeight F B)⁻¹ ^ 10 ≤ 8 / ↑B
+B : ℕ
+hB : 4 ≤ B
+hδ : scaleThin F B ≤ δ₀
+hB0 : 0 < ↑B
+hB3 : 3 < ↑B
+hδpos : 0 < scaleThin F B
+hh : Real.exp (-(Real.log (3 * ↑B) / 2)) ≤ μ.real (⇑D.π '' (fun x => xw + x) '' thinBox p (2 * ε) (scaleThin F B))
+hsub :
+  ⇑D.π '' (fun x => xw + x) '' thinBox p (2 * ε) (scaleThin F B) ⊆
+    ⇑D.π '' (fun x => xw + x) '' closedThinBox p (2 * ε) (scaleThin F B)
+hmono :
+  μ.real (⇑D.π '' (fun x => xw + x) '' thinBox p (2 * ε) (scaleThin F B)) ≤
+    μ.real (⇑D.π '' (fun x => xw + x) '' closedThinBox p (2 * ε) (scaleThin F B))
+hlogδ : Real.log (scaleThin F B) * heavyExponent F = -(Real.log (3 * ↑B) / 2)
+⊢ 0 < Real.log ↑B + -(Real.log (3 * Real.exp (Real.log ↑B)) / 2)
+data/fs131/itk1/work/GlobalPoint.lean:615:26: error: unsolved goals
+F : Subfield ℝ
+inst✝¹ : NumberField ↥F
+D : TateModel F
+μ : Measure (Dual F)
+inst✝ : IsProbabilityMeasure μ
+hμ : RotInv F μ
+p : WPlace F
+C : ℝ
+hC0 : 0 < C
+hC : D.IsGap C
+ε : ℝ
+hε16 : 16 * ε ≤ 1
+δ₀ : ℝ
+hδ₀ : 0 < δ₀
+xw : SAdeleRing F
+hheavy : ∀ (δ : ℝ), 0 < δ → δ ≤ δ₀ → δ ^ heavyExponent F ≤ μ.real (⇑D.π '' (fun x => xw + x) '' thinBox p (2 * ε) δ)
+hn : 0 < Module.finrank ℚ ↥(fieldI F)
+hMB : ∀ (B : ℕ), 1 ≤ B → ↑B ≤ scaleHeight F B
+hinv : ∀ (B : ℕ), 1 ≤ B → (scaleHeight F B)⁻¹ ≤ 1 / ↑B
+hinv1 : ∀ (B : ℕ), 1 ≤ B → (scaleHeight F B)⁻¹ ≤ 1
+hinv0 : ∀ (B : ℕ), 0 ≤ (scaleHeight F B)⁻¹
+hδB : ∀ (B : ℕ), 1 ≤ B → scaleThin F B ≤ 1 / ↑B
+hCB : ∀ (B : ℕ), 1 ≤ B → 8 * (scaleHeight F B)⁻¹ ^ 10 ≤ 8 / ↑B
+B : ℕ
+hB : 4 ≤ B
+hδ : scaleThin F B ≤ δ₀
+hB0 : 0 < ↑B
+hB3 : 3 < ↑B
+hδpos : 0 < scaleThin F B
+hh : Real.exp (-(Real.log (3 * ↑B) / 2)) ≤ μ.real (⇑D.π '' (fun x => xw + x) '' thinBox p (2 * ε) (scaleThin F B))
+hsub :
+  ⇑D.π '' (fun x => xw + x) '' thinBox p (2 * ε) (scaleThin F B) ⊆
+    ⇑D.π '' (fun x => xw + x) '' closedThinBox p (2 * ε) (scaleThin F B)
+hmono :
+  μ.real (⇑D.π '' (fun x => xw + x) '' thinBox p (2 * ε) (scaleThin F B)) ≤
+    μ.real (⇑D.π '' (fun x => xw + x) '' closedThinBox p (2 * ε) (scaleThin F B))
+hlogδ : Real.log (scaleThin F B) * heavyExponent F = -(Real.log (3 * ↑B) / 2)
+⊢ ¬?m.656 = 0
+data/fs131/itk1/work/GlobalPoint.lean:646:51: error: mod_cast has type
+  B₀ ≤ Bs j
+but is expected to have type
+  ↑B₀ ≤ ?m.1248
+data/fs131/itk1/work/GlobalPoint.lean:646:31: error: Type mismatch
+  Bs j
+has type
+  ℕ
+but is expected to have type
+  ℝ
+data/fs131/itk1/work/GlobalPoint.lean:698:8: warning: declaration uses `sorry`
+data/fs131/itk1/work/GlobalPoint.lean:704:8: warning: declaration uses `sorry`
+seconds=24
+exit=1

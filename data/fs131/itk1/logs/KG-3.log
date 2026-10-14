@@ -1,0 +1,8 @@
+slot: admitted itk1: mem 4 GiB (hard cap), cpus 4,5
+data/fs131/itk1/work/GlobalPoint.lean:401:8: warning: declaration uses `sorry`
+data/fs131/itk1/work/GlobalPoint.lean:414:8: warning: declaration uses `sorry`
+data/fs131/itk1/work/GlobalPoint.lean:425:8: warning: declaration uses `sorry`
+data/fs131/itk1/work/GlobalPoint.lean:440:8: warning: declaration uses `sorry`
+data/fs131/itk1/work/GlobalPoint.lean:446:8: warning: declaration uses `sorry`
+seconds=14
+exit=0

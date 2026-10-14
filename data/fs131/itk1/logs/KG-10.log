@@ -1,0 +1,11 @@
+slot: admitted itk1: mem 4 GiB (hard cap), cpus 0,1
+data/fs131/itk1/work/GlobalPoint.lean:688:23: error: Type mismatch
+  Bs j
+has type
+  ℕ
+but is expected to have type
+  ℝ
+data/fs131/itk1/work/GlobalPoint.lean:702:8: warning: declaration uses `sorry`
+data/fs131/itk1/work/GlobalPoint.lean:708:8: warning: declaration uses `sorry`
+seconds=18
+exit=1

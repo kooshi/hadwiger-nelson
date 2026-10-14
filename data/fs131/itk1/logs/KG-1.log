@@ -1,0 +1,15 @@
+slot: admitted itk1: mem 4 GiB (hard cap), cpus 4,5
+data/fs131/itk1/work/GlobalPoint.lean:66:0: warning: automatically included section variable(s) unused in theorem `HadwigerNelson.Rigidity.scaleHeight_three_mul_sq`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/itk1/work/GlobalPoint.lean:212:8: warning: declaration uses `sorry`
+data/fs131/itk1/work/GlobalPoint.lean:219:8: warning: declaration uses `sorry`
+data/fs131/itk1/work/GlobalPoint.lean:232:8: warning: declaration uses `sorry`
+data/fs131/itk1/work/GlobalPoint.lean:243:8: warning: declaration uses `sorry`
+data/fs131/itk1/work/GlobalPoint.lean:258:8: warning: declaration uses `sorry`
+data/fs131/itk1/work/GlobalPoint.lean:264:8: warning: declaration uses `sorry`
+seconds=8
+exit=0

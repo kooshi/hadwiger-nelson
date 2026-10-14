@@ -1,0 +1,65 @@
+slot: admitted itk1: mem 4 GiB (hard cap), cpus 1,2
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+data/fs131/itk1/work/GlobalPoint.lean:683:17: error: unsolved goals
+F : Subfield ℝ
+inst✝¹ : NumberField ↥F
+D : TateModel F
+μ : Measure (Dual F)
+inst✝ : IsProbabilityMeasure μ
+hμ : RotInv F μ
+p : WPlace F
+C : ℝ
+hC0 : 0 < C
+hC : D.IsGap C
+ε : ℝ
+hε16 : 16 * ε ≤ 1
+δ₀ : ℝ
+hδ₀ : 0 < δ₀
+xw : SAdeleRing F
+hheavy : ∀ (δ : ℝ), 0 < δ → δ ≤ δ₀ → δ ^ heavyExponent F ≤ μ.real (⇑D.π '' (fun x => xw + x) '' thinBox p (2 * ε) δ)
+hn : 0 < Module.finrank ℚ ↥(fieldI F)
+hMB : ∀ (B : ℕ), 1 ≤ B → ↑B ≤ scaleHeight F B
+hinv : ∀ (B : ℕ), 1 ≤ B → (scaleHeight F B)⁻¹ ≤ 1 / ↑B
+hinv1 : ∀ (B : ℕ), 1 ≤ B → (scaleHeight F B)⁻¹ ≤ 1
+hinv0 : ∀ (B : ℕ), 0 ≤ (scaleHeight F B)⁻¹
+hδB : ∀ (B : ℕ), 1 ≤ B → scaleThin F B ≤ 1 / ↑B
+hCB : ∀ (B : ℕ), 1 ≤ B → 8 * (scaleHeight F B)⁻¹ ^ 10 ≤ 8 / ↑B
+hcol : ∀ (B : ℕ), 4 ≤ B → scaleThin F B ≤ δ₀ → Nonempty (Collision D xw p ε (scaleThin F B) B)
+B₀ : ℕ := max 4 (⌈1 / δ₀⌉₊ + ⌈8 / C⌉₊ + 1)
+hB₀ : B₀ = max 4 (⌈1 / δ₀⌉₊ + ⌈8 / C⌉₊ + 1)
+hB₀4 : 4 ≤ B₀
+hB₀δ : 1 / ↑B₀ ≤ δ₀
+hB₀C : 8 / ↑B₀ < C
+Bs : ℕ → ℕ := fun j => Nat.rec B₀ (fun x b => 3 * b ^ 2) j
+hBs : ∀ (j : ℕ), B₀ + j ≤ Bs j
+hBs4 : ∀ (j : ℕ), 4 ≤ Bs j
+hB₀pos : 0 < ↑B₀
+hB₀le : ∀ (j : ℕ), ↑B₀ ≤ ↑(Bs j)
+hBs1 : ∀ (j : ℕ), 1 ≤ Bs j
+hBsδ : ∀ (j : ℕ), scaleThin F (Bs j) ≤ δ₀
+hBsC : ∀ (j : ℕ), 8 * (scaleHeight F (Bs j))⁻¹ ^ 10 < C
+col : (j : ℕ) → Collision D xw p ε (scaleThin F (Bs j)) (Bs j) := fun j => ⋯.some
+hpt : ∀ (j : ℕ), (col j).point = (col 0).point
+j : ℕ
+h :
+  p.size (xw - (toSAdele F) (col 0).point) ≤
+    2 ^ (Module.finrank ℚ ↥(fieldI F) + 2) * scaleHeight F (Bs j) ^ 3 * scaleThin F (Bs j)
+hB1 : 1 ≤ Bs j
+hM : 0 < scaleHeight F (Bs j)
+h13 : scaleHeight F (Bs j) ^ 3 * scaleThin F (Bs j) ≤ 1 / ↑(Bs j)
+⊢ (↑(Bs j))⁻¹ * 2 ^ Module.finrank ℚ ↥(fieldI F) * 4 = ?m.1566⁻¹ * 2 ^ Module.finrank ℚ ↥(fieldI F) * 4
+data/fs131/itk1/work/GlobalPoint.lean:664:102: error: Type mismatch
+  Bs j
+has type
+  ℕ
+but is expected to have type
+  ℝ
+data/fs131/itk1/work/GlobalPoint.lean:702:8: warning: declaration uses `sorry`
+data/fs131/itk1/work/GlobalPoint.lean:708:8: warning: declaration uses `sorry`
+seconds=19
+exit=1
