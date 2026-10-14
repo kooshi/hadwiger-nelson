@@ -60,6 +60,174 @@ source; its eight hypotheses' definitions read in `SpectralChain.lean` (ll. 114�
 
 So five of the eight are this job's modules (M2, M3, M11 with M10, M12, M13), and M15 composes the instance.
 
+## Stage 2 — SAVED: the seven modules read and priced
+
+*Every price below is **from Mathlib's coverage at the pin and from the derivations' structure, not from an elaborated
+leaf**, unless it says otherwise; `LEAN.md` § The kernel's cost model says a plan's table prices high, and these should be
+re-priced from each lane's first two leaves. Line counts include docstrings. "Days" are agent-days of an implementer.*
+
+### 2.1 M2 — Herglotz–Bochner, existence half; and `BochnerOn` at `τ′_∅`
+
+**As its consumers read it.** `BochnerHerglotz (unitRing F)` is read by `rotInv_of_isTraceSpectral` (the trace spectral
+measure exists) and by `ext_of_fourier` (uniqueness). Uniqueness is now `DualGroup.measure_eq_of_fourier` at countable `G`
+(item 757), so M2a must prove **existence**: every `PosDef C` on a countable `G` is the Fourier transform of a finite measure
+on `AddChar G Circle`. `BochnerOn t` (`SpectralInputs` l. 788) is read once, by `spectral_carried_iff`'s `⟸`, which M11 uses
+twice (§ 2.4); M12 does not read it (§ 2.5, C1 is the `⟹` direction).
+
+**M2a, route (mine; not Rudin's).** (i) *Almost-invariant weights* on a countable abelian `G`, with no structure theorem: for
+an enumeration `g₁, g₂, …`, let `ν` be the convolution of the uniform measures on `{0, gⱼ, …, (M−1)gⱼ}`, `j ≤ k`, and
+`w = ν/‖ν‖₂`; Young's inequality and `‖u * f‖₂² ≥ ‖f‖₂²/M` for `f ≥ 0` give `‖τ_{gⱼ}w − w‖₂ ≤ 2/√M`, so
+`⟨w, τ_z w⟩ → 1` for every `z` as `k, M → ∞`. (ii) *Fejér densities*: `p_w(χ) = Σ_{x,y} w(x)w(y)C(x−y)·χ̄(x−y) ≥ 0` is
+`PosDef` itself (weights `z_x = w(x)χ̄(x)`; the library's `PosDef` takes a `Finset` and a function, so this is direct).
+(iii) `σ_w := p_w • dualHaar G` has `∫ χ(z) dσ_w = C(z)·⟨w, τ_z w⟩` by `isHaarFourier_dualHaar` (M4), mass `C(0)`.
+(iv) The `σ_w` lie in a compact set of finite measures on the compact metrizable dual
+(`MeasureTheory.isCompact_setOf_finiteMeasure_le_of_compactSpace`, Mathlib `Measure/Prokhorov.lean` l. 69); a convergent
+subsequence; `χ ↦ χ(z)` is bounded continuous, so the limit's coefficients are `C(z)` (`FiniteMeasure.tendsto_iff_forall_integral_tendsto`).
+**Price: 600–900 lines, about 1.5–2 days.** Needs M4 (`Rigidity/DualGroup`: compactness, `borelSpace_dual`, `dualHaar`
+and its Fourier form — typed by FS131-KN8, 13 leaves `sorry` on this branch). **Formalize.**
+
+**M2b, `BochnerOn τ′_∅`: route as messaged to the coordinator (ruled: formalize).** (1) *The archimedean part, Bochner
+in support form with no Bochner on `ℝ^m`*: let `ρ` be a finite measure on `R̂` whose transform `ψ` is continuous at `0` for
+the archimedean topology. Restrict to the lattices `Λ_k = 5^{−k}c₀𝓞_L ⊆ R` (`1/5 ∈ R`; `c₀𝓞_L ⊆ R` from M9's
+`exists_mul_stableIntegers_le`), lift the restricted measure from the torus `Λ̂_k` to `V* = Hom(L ⊗ ℝ, ℝ)` through the box
+fundamental domain `{ℓ : ℓ(5^{−k}c₀bⱼ) ∈ (−π, π]}`; a one-variable Dirichlet-kernel inequality bounds the mass outside
+`|ℓ(bⱼ)| ≤ C/δ` by `2·sup_{|y|<δ}|ψ(0) − ψ(y)|`, uniformly in `k` (tightness); Prokhorov on `V*` (Mathlib
+`isCompact_closure_of_isTightMeasureSet`, `Prokhorov.lean` l. 504) gives a limit `ρ̃` whose characteristic function equals
+`ψ` on `ℤ[1/5]c₀𝓞_L`, dense in `V` (M9's density); both are continuous, so they agree on `R`; uniqueness (M4) gives
+`ρ = exp_*ρ̃`, carried by `A`. (2) *The profinite part*: for `t ∈ T`, `ψ_t(y) := lim_{N′} |R/N′R|⁻¹ Σ_{c ∈ R/N′R} t̄(x_c)·φ(y + x_c)`
+with representatives `x_c` arch-small (density), the limit Cauchy by `τ′`-uniform continuity of the positive-definite `φ`;
+`t̄·ψ_t` is positive-definite and arch-continuous, so (1) gives `ν_t` on `t·A`; `Σ_{t ∈ T_N} ψ_t(y)` is the fibre average of
+`φ`, which tends to `φ(y)`; `ν := Σ_t ν_t` has transform `φ`, and uniqueness gives `σ = ν`, carried by `T·A = TA F`. Needs
+`|R/NR| < ∞` (J28V-7: every finite subset of `R` spans a free group of rank `≤ [L:ℚ]`, so `|R/NR| ≤ N^{[L:ℚ]}`; about 150
+lines), M10's `τ′`, M9's density, M4. **Price: 2,000–2,500 lines, about 4–6 days.** **Formalize** (`[Rudin1962]` 1.4.3 is the
+printed theorem; this route reads none of it).
+
+### 2.2 M3 — the invariant measure on a closed invariant set
+
+**As its consumer reads it.** `exists_invariantColouring` (`SpectralChain` l. 393) applies `InvariantMeasureOnClosed F` to
+`K = X₄(F)`. **Route (mine; no Markov–Kakutani):** the `ℓ¹` form of § 2.1 (i)'s weights on the countable group `R`; average
+the push-forwards `(shift_y)_*δ_c` of a point mass at `c ∈ K`; limit points (Prokhorov on the compact metrizable
+`unitRing F → Fin 4`, Borel = product σ-algebra for a countable product of finite discrete spaces) are shift-invariant
+(weights almost invariant; push-forward along a continuous map is continuous in the weak topology) and carried by the
+closed `K` (portmanteau for closed sets). Then the same averaging over the countable abelian group `U` acting by rotations:
+`shift_y ∘ rot_u = rot_u ∘ shift_{uy}`, so rotating a shift-invariant measure keeps it shift-invariant, and the limit is
+invariant under both. `MeasurableSet K` is used only to state `μ Kᶜ = 0`. **Price: 500–800 lines, about 1–2 days**, sharing
+the weights lemma with M2a. **Formalize.**
+
+### 2.3 M10 — the continuity group `T + A`
+
+**As its consumer reads it.** `spectral_carried_iff` needs, for a topology `t` on `R`: `IsTopologicalAddGroup`,
+`(𝓝 0).IsCountablyGenerated`, `BochnerOn t` (M2b); and M11 needs `contChars t = TA F`. **The topology `τ′_∅`**: the infimum
+(Mathlib's order: the finer, generated topology) of the topology induced by `r ↦ (r mod N·R)_{N ≥ 1}` into a product of
+discrete quotients and the topology induced by `r ↦ mixedEmbedding L r`. No profinite completion is constructed: a basic
+neighbourhood of `0` is `N·R ∩ B_δ`. **The four statements and their routes.** Group topology: inf of two topologies
+induced by additive maps (`topologicalAddGroup_induced`, `topologicalAddGroup_inf`). Countably generated: both inducing
+spaces first-countable. `TA ⊆ contChars`: a torsion character kills `N·R` (`χ(Nr) = (χ^N)(r)`), so it is locally constant; an
+additive `ψ : R → ℝ` is `Σ qⱼ tⱼ` over `ℚ`-coordinates (`ChainAtTA.exists_rat_coords`, private there — **to be made public
+or restated**), and `ℚ`-coordinates along a `ℚ`-basis of `L` are continuous for the mixed embedding (an integral basis maps to
+an `ℝ`-basis, `NumberField.mixedEmbedding.latticeBasis`). `contChars ⊆ TA`: from continuity, `Re χ > 0` on `N·R ∩ B_δ`, so
+`|arg χ^N(r)| < π/(2k)` on `R ∩ B_{δ/(Nk)}` (no small subgroups); `χ^N` is then arch-continuous; on the lattices
+`5^{−k}c₀𝓞_L` it is `exp(iℓ_k)` with `ℓ_k` stabilising (bounded, and consecutive ones differ by a vector of a dual lattice
+whose minimum grows like `5^k`), so `χ^N exp(−iℓ)` kills the dense subgroup `ℤ[1/5]c₀𝓞_L` and is arch-continuous, hence
+trivial; so `χ^N ∈ A` and `χ ∈ TA` (`ChainAtTA.mem_torsion_mul_arch_iff`, private there). **Price: 800–1,200 lines, about
+2–3 days.** Needs M9-R (density, `c₀𝓞_L ⊆ R`). **Formalize** (no classical theorem; J45 N1 (a) at `S = ∅` is ours).
+
+### 2.4 M11 — A⁺ at `S = ∅`
+
+**As its consumer reads it.** `(chainInterface F).APlusOfR88`: for every `InvariantColouring μ` and trace spectral `σ`,
+`R88TCA` ⟹ `∫_{TAᶜ} Re χ(1) dσ < 0`. **Route (J45 SI-1, SI-3, SI-4, A⁺ with remark (ii)).** With `g_k` the three
+tetrahedral coordinates of `c(0)` in `L²(μ)` (real), `𝒜 := factorSigma` for `𝓝[τ′] 0`, `h_k := E[g_k | 𝒜]`, `r_k = g_k − h_k`:
+(a) `σ = ⅓Σσ_{g_k}` (uniqueness); (b) `σ_{g_k} = σ_{h_k} + σ_{r_k}` (cross terms vanish: `contVec` is shift-invariant and so
+is its complement); (c) `σ_{h_k}(TAᶜ) = 0` — **N2's `⟸`, over `BochnerOn τ′_∅` and `contChars = TA`**; (d) `σ_{r_k}(TA) = 0` —
+**the step no record states as a lemma**: if not, the vector `w ∈` the cyclic subspace of `r_k` with `σ_w = σ_{r_k}|_{TA}`
+(trigonometric polynomials are dense in `L²(σ_r)` — by Fourier uniqueness applied to the positive and negative parts of a
+complex measure with vanishing coefficients — and real-coefficient ones suffice since `σ_r` and `TA` are symmetric) lies in
+`contVec` (N2's `⟹`, dominated convergence) and has `⟨w, r_k⟩ = σ_{r_k}(TA) > 0`, against `r_k ⊥ contVec`; (e) SI-3:
+`∫_{TAᶜ} Re χ(u) dσ = −(4/3)Σ_j E[p_j(0)p_j(u)] ≤ 0`; (f) remark (ii): the integral is constant on `U`
+(`rotInv_of_isTraceSpectral`, kernel); (g) if it is `0` at `u = 1`, SI-4 (kernel: `si4`, `si4_equivariant`,
+`FactorAction.si4_equivariant_factorSigma`) gives the factor colouring `c′`; its law is an `InvariantColouring` (a.s.
+equivariance under shifts and rotations; carried by `X₄`); its coordinates are `𝒜`-measurable, so its trace spectral measure is
+carried by `TA` (N2's `⟸` again); `R88TCA` refuses it. **Price: 1,500–2,500 lines, about 3–5 days.** Needs M10, M2b, M4.
+**Formalize** (ours).
+
+### 2.5 M12 — the count, `TCA F → R88TCA`; `m₁(ℝ²) < 1/4`
+
+**As its consumer reads it.** `(chainInterface F).Count`: every stable prime of all-levels ratio `< 1/4` ⟹ no
+`InvariantColouring` has trace spectral measure null off `TA`. **The blocks** (R88-TCA with R88-TC-ext, -J28V-2, -TC-reg,
+-TC-count, -J28V-3; FS100-TCA; FS100-CX; J28D § 3.2 C1–C5 read today, `plans/FS86-R88-D-derivation.md` ll. 142–201):
+- *C1* spectrum on `TA` ⟹ `P(c(0) ≠ c(y)) → 0` as `y → 0` in `G_∅ = (L ⊗ ℝ) × ∏_{stable} 𝓞_{L_v}` — dominated convergence, **no
+  Bochner**; but "torsion characters are stable-continuous" reads Lemma C (d) (item 791 ruling 4's question, **carried to
+  M12's planner**: with `τ′`'s profinite part the step is free; with the stable-adic topology it reads `R ∩ ∏𝔔^K ⊆ NR`).
+- *C2* extension to `G_∅` and a jointly measurable modification (Doob–Cohn). **Not in Mathlib.**
+- *C3* a.e. properness on the edges `x ~ x + w`, `w ∈ T_∅`: the closure of `U` is `T_∅` (weak approximation for the norm-one
+  torus at the archimedean places, `[S9]` at each stable level). **Not in Mathlib** (weak approximation for a number field
+  at its infinite places is; the torus step is a rational parametrisation over it).
+- *C4* regularisation of edge-null sets to independent ones (Lebesgue differentiation along `E_n = C_n × V_n`, which is not
+  doubling on the infinite product — R88-J28V-2) and C14.1–C14.4's window lemmas.
+- *C5* the count: a product of factors each of ratio `< 1/4` has ratio `max(m₁, sup_v c_v) < 1/4` (X25B-PZ, stationary
+  Zhang; `[Zhang2012]` Thm 1.8 in finite form); the archimedean factor `UD(ℝ²)^{×n}` has ratio `m₁` (C14.3's induction); a
+  complex place by restriction to its compact real form (FS100-CX). **A uniformity the hypothesis does not give:** `TCA F`
+  gives each stable prime its own `c_P < 1/4`; the count needs `sup_P c_P < 1/4`. It holds at every number field because all
+  but finitely many stable primes have `q ≥ 37`, where Weil (the declared import) and Lemma P give a uniform Hoffman ratio
+  (R88-J28V-3). So the proof of `Count` reads Weil; the uniform-tail lemma goes **once, upstream, in M13** (ruled, item 3 of
+  the coordinator's reply) and M12 imports it. No typed statement changes.
+- Kernel already holding part of C5: `Arith/StationaryRatio` (929 lines; a stationary ratio at a wider class).
+**Price: 6,000–12,000 lines, about 3–6 agent-weeks; its own planner** (as the architecture said). Classical inputs:
+Doob–Cohn (formalize, about a week by itself), Lebesgue differentiation along a Vitali family (Mathlib has the doubling case;
+the product's is custom), weak approximation for the norm-one torus (formalize), measurable Hoffman (`[BachocEtAl2014]`
+Thm 2.2, held; formalize), `m₁(ℝ²) < 1/4` (below).
+
+**`m₁(ℝ²) < 1/4` — source, statement, price.** `[AmbrusEtAl2023]` (held: `~/source/library/pdf/arXiv-2207.14179-…pdf`; read in
+full by J26; certificate re-checked exactly at H1–H3, H6 and in ball arithmetic at H4, H5 by J49 — `BIBLIOGRAPHY.md` l. 281),
+arXiv v3, **Theorem 1, p. 4**: "Any Lebesgue measurable, 1-avoiding planar set has upper density at most 0.2470." **p. 2**:
+"The upper density of A, denoted by δ(A), is defined by δ(A) = lim sup_{R→∞} λ_d(A ∩ B_d(x, R)) / λ_d(B_d(x, R)), where x ∈ ℝ^d is
+fixed … The definition is valid since the upper density is known to be independent of the choice of x"; **eq. (1)**:
+"m₁(ℝ^d) = sup{δ(A) : A ⊂ ℝ^d is 1-avoiding and measurable}". (Copied from the PDF's text layer today.) **Price as a
+formalization: 3–6 agent-weeks**, not from a leaf. What Mathlib lacks: positive-definite functions and autocorrelations on
+`ℝ²`; the Bessel function `J₀` (the rotation average of a plane wave) and any rigorous bounds on it; the reduction from upper
+density of a measurable set to periodic sets. A **first leaf**: for a periodic 1-avoiding set `A`, `f(x) = δ(A ∩ (A − x))` is
+positive-definite and vanishes on the unit circle (`[KMOR2016]` Lemma 3.2 (1)) — Fourier series on a torus (Mathlib
+`Analysis/Fourier/AddCircleMulti`) plus a density argument, about 300–500 lines; the 23-point inclusion–exclusion (Lemma 1)
+is finite and cheap; the cost is the Fourier side of § 5 (certified `J₀` values at the certificate's points: series with
+remainder in exact arithmetic). **Ruling (coordinator, today): typed as a named outside hypothesis, not declared; the four
+items drafted here (§ Drafts); Kooshi decides.**
+
+### 2.6 M13 — CLS, `5 ≤ localBound F → TCA F`
+
+**As its consumer reads it.** The headline feeds `hCLS h5` to `hCount`. `TCA F` asks, at each stable prime, one `c < 1/4`
+bounding every independent set of every level's target. **Route (FS100-CLS, -DLP, -G27; X26B-L1; EN1-UQ4).** (a) `L ≥ 5`
+excludes: ramified stable primes (level-one target two- or three-colourable: the kernel has the dyadic case,
+`colorable_two_levelTarget_one_of_isRamified`; the odd ramified one is a cycle `Cay(𝔽_q, {±1})`), inert residue sizes
+`q ∈ {3, 7}`, dyadic inert `Q ≤ 32`. (b) Levels: the fibres of `S_m → S_{m−1}` and Lemma P (a character new at level
+`m ≥ 2` has `|λ| ≤ 2q^{m−1}`, dyadic `Q^{m−1}`), so an all-levels Hoffman bound follows from level one wherever level one's
+normalised least eigenvalue is above `−1/3`. (c) Level one by residue size: `q ≥ 37` (Weil, declared; the kernel's
+`RatioBound.card_mul_le_of_indep` and `NormOneTarget.targetFloor_of_charSum` are the Hoffman bound in exactly this shape);
+`q ∈ {23, 27, 31}` exact spectra (Hoffman margins `1.6·10⁻³`, `+`, `4.9·10⁻⁶` at 31 — an exact certificate, not floats);
+dyadic `Q = 64` exact, `128` in the kernel (`Floor128`; to check that it gives the ratio and not only the floor), `Q ≥ 256`
+EN1-UQ4 (the fourth-moment count, about 300 lines, one mind, no printed bound read). (d) **`q = 11, 19`: Hoffman fails
+(0.2855, 0.2756); the all-levels ratio rests on FS-66's fibre-share inequality [hand] and its exact integer
+sum-of-squares certificates [cert], checked by a frozen Python checker — not in the kernel.** Sizes: `data/fs66/b1/cert-p11.json`
+0.7 MB, `cert-p19.json` 10.4 MB (second-level moment relaxation, translation-Fourier blocks). Kernel-checking them is a
+**measurement owed before a price** (`LEAN.md`: literals, not built tables; GMP `Nat`); the fibre-share inequality holds for
+every twisted cover of `Γ_p` (Lemma T), which is what a ramified base needs. (e) **The uniform tail** (shared with M12):
+one `c < 1/4` for all stable primes with `q ≥ 37`, at all levels. **Price: 2,500–5,000 lines plus the two certificate checks
+(unmeasured), about 1–2.5 agent-weeks.** **Formalize** (Weil is the one outside theorem, already declared).
+
+### 2.7 M15 — the instances, `ℚ(√47)` first
+
+**Statements.** `NumberField` for the `Subfield ℝ` of `√47`; `5 ≤ localBound` there; `χ(ℚ(√47)²) = 5` from
+`min_localBound_five_le_chromaticNumber_closed` (once its hypotheses are theorems) and the kernel's upper half
+(`SqrtFortySeven.chromaticNumber_planeOver_sqrt47_le_five`, and `UpperHalf.chromaticNumber_planeOver_le_localBound` on
+`main`). **No scope model is needed** (§ 1.2). **`5 ≤ L(ℚ(√47))`, my reading**: `47 ≡ 7 (mod 8)` puts no stable prime above
+2; `3` and `7` are inert in `ℚ(√47)` (residue `𝔽_9`, `𝔽_49` already hold `i`, so they split in `L`); no odd prime ramifies
+in `L/F`; so every stable prime lies over a `p ≡ 3 (mod 4)` with `(47/p) = 1` or `p = 47`, residue `𝔽_{p²}` with conjugation
+non-trivial, and the floor needed is `χ(Γ_p) ≥ 5` at `p ∈ {11, 19, 23, 31}` (each splits: `(47/p) = 1`) and at every
+`p ≥ 43` (Weil from `Q ≥ 34`: `3·2√Q < Q + 1`). The four small floors are M13's level-one facts (11 and 19 by a refutation
+certificate or FS-66's bound, 23 and 31 by exact Hoffman). **Price: 800–1,500 lines for the place computations and the
+composition (Mathlib's `Ideal.sum_ramification_inertia` and the primed `inertiaDeg'` API, `LEAN.md` § Searching), about
+1 week; each further field (`ℚ(√143)`, `ℚ(√311)`, `ℚ(√335)`, `ℚ(√3,√5)`, `ℚ(√167) ≥ 5`) about 300–600 lines once the
+machinery stands.**
+
 ## Drafts for files I do not write
 
 *(filled at the stages that produce them)*
