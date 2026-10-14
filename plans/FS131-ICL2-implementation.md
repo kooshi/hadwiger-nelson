@@ -192,3 +192,37 @@ generalization, INVENTORY). `tendsto_bad`: the bad sets are measurable (a finite
 convergence with bound `1` on the window. `false_of_slice`: as planned — `c = max (c₀, 0)` from `tca_uniform`,
 `ε = (1 − 4 max (m₁, c))/16`, `s₀` from `Plane.exists_nrWindow`, a level `k ≥ 1` where every colour's bad points are under
 `ε s₀²` (`eventually_all`), each colour `≤ (max (m₁, c) + 2ε) s₀²`, four colours fill `squareWin 0 s₀ × K` (measure `s₀²`).
+
+## Stage 4 — SAVED: lane Λ3's first module — `Rigidity/CountTorus` (7 leaves) proved; block A re-priced
+
+`CountTorus` holds no `sorry` and compiles in the farm with **exit 0 and no warning** (`logs/ct-8.log`; ≈ 510 lines net,
+against block A's 600–900). **The opening leaf, `mem_closure_pow`, is green** (eight elaborations of the module, each ≈ 10 s).
+
+**Route of `mem_closure_pow`** (the plan's, with the place bookkeeping made one lemma). For `h = 1` the point is its own
+power; `−1 = i · i` from the case `x ≠ −1` (the closure of the `h`-th powers is a submonoid, private `powSubmonoid`); for
+`x ≠ −1`, `h ≥ 2`: `x = (1 + i t₀)/(1 − i t₀)` with `t₀ = Im x / (1 + Re x) ∈ F`. Every place of `L = F(i)` is complex
+(`isComplex_place`: `w(i)² = −1` has no real solution) and `w(i) = ±i` (`embedding_iL`). **One lemma carries the places**
+(`exists_coord`): for each place `w` of `L`, with `φ = w ∘ ι` and `v = InfinitePlace.mk φ`, a continuous
+`λ_w : mixedSpace F → ℂ` with `λ_w (e_F t) = w (ι t)` for `t ∈ F` — `a ↦ a.1 v` at a real `v`, `a ↦ a.2 v` or its conjugate at
+a complex `v` as `InfinitePlace.embedding_mk_eq` says — and whose value at the one point `Ypt t₀ g` (the function
+`g = cayRoot h` read at each place's embedding of `t₀`) is `g (w t₀)` or `conj (g (conj (w t₀)))`. The principal `h`-th Cayley
+root `cayRoot h z = (ξ − 1)/(i(ξ + 1))`, `ξ = exp (log c / h)`, `c = (1 + iz)/(1 − iz)`, has `ξ ≠ −1` because
+`cos (Im (log c)/h) ≥ 0` at `h ≥ 2` (`exp_div_ne_neg_one`), is real at real points (`cayRoot_im`: `|ξ| = 1` there), and in each
+of the four cases (sign `±i`, root or conjugated root) its Cayley image to the `h` is the target (`cay_pow_eq`). Then
+`Ψ(a) = (cayI (w i) (λ_w a))^h` is continuous at `Ypt t₀ g`, takes the value `e x` there, sends `e_F t` to `e (cay(t)^h)`, and
+`F` is dense in its mixed space (`dense_range_mixedEmbedding`: rational multiples of `latticeBasis`, as `RingScope`'s density
+does): `mem_closure_image`. No weak approximation for the torus in full, no root of `F`'s places chosen by hand.
+
+**The others.** `mem_normOneL_iff` from `UnitRing.mem_normOne_conjOn_iff`; `Delta_ratCast` by `map_rat_smul`;
+`Delta_circle_mem_closure` by the rational Cayley points (`Rat.denseRange_cast`) where `cos (θ/2) ≠ 0` and `e^{iθ} = −1 ∈ U`
+where it vanishes; `Delta_circle_mul_mem_closure_pow` in the submonoid's closure; `pow_mem_normOneL`, `mul_mem_normOneL` by
+`map_pow`, `map_mul`.
+
+**Unread binders dropped (item 726's word), four statements of `CountTorus`:** `[NumberField F]` from `Delta_ratCast`,
+`Delta_circle_mem_closure`, `pow_mem_normOneL`, `mul_mem_normOneL` (each proof reads no number field; the build's
+`unusedSectionVars` linter warns otherwise). `mem_closure_pow` and `Delta_circle_mul_mem_closure_pow` keep it (the density of
+`F` in its mixed space reads `latticeBasis`).
+
+**Re-priced:** block A at ≈ 510 lines against 600–900 (0.6–0.85, the least favourable ratio of the job — the place
+bookkeeping the planner flagged). Λ3 was 1,300–1,850; block K (`CountCompletion`, 11 leaves) is left, its hard leaf
+`tendsto_haarK_bad`; at the job's ratios ≈ 400–650 lines. Nothing prices over a week.

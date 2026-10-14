@@ -1,0 +1,49 @@
+slot: admitted icl2: mem 6 GiB (hard cap), cpus 6,7
+data/fs131/icl2/work/CountTorus.lean:491:4: error: linarith failed to find a contradiction
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+x : ↥(fieldI F)
+hx : x ∈ normOneL F
+hx1 : x ≠ -1
+h : ℕ
+hh : 2 ≤ h
+hxU : ↑x ∈ unitVectors F
+a : ℝ := (↑x).re
+hre : a ∈ F
+ha : a = (↑x).re
+b : ℝ := (↑x).im
+him : b ∈ F
+hb : b = (↑x).im
+hn : a ^ 2 + b ^ 2 = 1
+hxab : ↑x = ↑a + ↑b * Complex.I
+h0 : 1 + a = 0
+hb0 : b = 0
+⊢ False
+failed
+data/fs131/icl2/work/CountTorus.lean:502:80: warning: this constant has no effect on the linear combination; it can be dropped from the term
+data/fs131/icl2/work/CountTorus.lean:502:4: error: ring failed, ring expressions not equal
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+x : ↥(fieldI F)
+hx : x ∈ normOneL F
+hx1 : x ≠ -1
+h : ℕ
+hh : 2 ≤ h
+hxU : ↑x ∈ unitVectors F
+a : ℝ := ⋯
+hre : a ∈ F
+ha : a = (↑x).re
+b : ℝ := ⋯
+him : b ∈ F
+hb : b = (↑x).im
+hn : a ^ 2 + b ^ 2 = 1
+hxab : ↑x = ↑a + ↑b * Complex.I
+ha1 : 1 + a ≠ 0
+t₀ : ↥F := ⋯
+ht₀ : t₀ = ⟨b / (1 + a), ⋯⟩
+ha1' : 1 + ↑a ≠ 0
+hn' : ↑a ^ 2 + ↑b ^ 2 = 1
+⊢ ↑a ^ 2 * ↑b * Complex.I - ↑b * Complex.I + ↑b ^ 3 * Complex.I = 0
+Command exited with non-zero status 1
+wall=10.09s maxrss=3856780kB
+lean1: compile failed; the build's .olean of Rigidity/CountTorus linked back into the farm

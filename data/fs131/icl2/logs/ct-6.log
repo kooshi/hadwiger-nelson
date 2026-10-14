@@ -1,0 +1,12 @@
+slot: admitted icl2: mem 6 GiB (hard cap), cpus 4,5
+data/fs131/icl2/work/CountTorus.lean:392:8: warning: automatically included section variable(s) unused in theorem `_private.data.fs131.icl2.work.CountTorus.0.HadwigerNelson.Rigidity.Counting.exists_coord`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/icl2/work/CountTorus.lean:446:8: warning: declaration uses `sorry`
+data/fs131/icl2/work/CountTorus.lean:454:8: warning: declaration uses `sorry`
+data/fs131/icl2/work/CountTorus.lean:459:8: warning: declaration uses `sorry`
+data/fs131/icl2/work/CountTorus.lean:462:8: warning: declaration uses `sorry`
+wall=7.14s maxrss=3862440kB

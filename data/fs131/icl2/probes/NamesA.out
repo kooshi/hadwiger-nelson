@@ -1,0 +1,42 @@
+slot: admitted icl2: mem 6 GiB (hard cap), cpus 5,6
+data/fs131/icl2/probes/NamesA.lean:3:8: error(lean.unknownIdentifier): Unknown identifier `HadwigerNelson.UnitRing.mem_normOne`
+@InfinitePlace.mk : {K : Type u_1} → [inst : Field K] → (K →+* ℂ) → InfinitePlace K
+@InfinitePlace.embedding_of_isReal_apply : ∀ {K : Type u_1} [inst : Field K] {w : InfinitePlace K} (hw : w.IsReal)
+  (x : K), ↑((InfinitePlace.embedding_of_isReal hw) x) = w.embedding x
+@ComplexEmbedding.isReal_iff : ∀ {K : Type u_1} [inst : Field K] {φ : K →+* ℂ},
+  ComplexEmbedding.IsReal φ ↔ ComplexEmbedding.conjugate φ = φ
+@Complex.exp_log : ∀ {x : ℂ}, x ≠ 0 → Complex.exp (Complex.log x) = x
+Complex.neg_pi_lt_log_im : ∀ (x : ℂ), -Real.pi < (Complex.log x).im
+Complex.log_im_le_pi : ∀ (x : ℂ), (Complex.log x).im ≤ Real.pi
+@Complex.exp_eq_one_iff : ∀ {x : ℂ}, Complex.exp x = 1 ↔ ∃ n, x = ↑n * (2 * ↑Real.pi * Complex.I)
+@Rat.denseRange_cast : ∀ {𝕜 : Type u_1} [inst : Field 𝕜] [inst_1 : LinearOrder 𝕜] [IsStrictOrderedRing 𝕜]
+  [inst_3 : TopologicalSpace 𝕜] [OrderTopology 𝕜] [Archimedean 𝕜], DenseRange Rat.cast
+@Submonoid.topologicalClosure : {M : Type u_1} →
+  [inst : TopologicalSpace M] → [inst_1 : Monoid M] → [SeparatelyContinuousMul M] → Submonoid M → Submonoid M
+@mem_closure_image : ∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y]
+  {f : X → Y} {s : Set X} {x : X}, ContinuousAt f x → x ∈ closure s → f x ∈ closure (f '' s)
+data/fs131/icl2/probes/NamesA.lean:14:8: error(lean.unknownIdentifier): Unknown constant `ContinuousAt.mem_closure_image`
+@InfinitePlace.isComplex_iff : ∀ {K : Type u_1} [inst : Field K] {w : InfinitePlace K},
+  w.IsComplex ↔ ¬ComplexEmbedding.IsReal w.embedding
+mixedEmbedding.latticeBasis_apply : ∀ (K : Type u_1) [inst : Field K] [inst_1 : NumberField K]
+  (i : Module.Free.ChooseBasisIndex ℤ (𝓞 K)),
+  (mixedEmbedding.latticeBasis K) i = (mixedEmbedding K) ((integralBasis K) i)
+data/fs131/icl2/probes/NamesA.lean:17:8: error(lean.unknownIdentifier): Unknown constant `Complex.abs_exp`
+Complex.norm_exp : ∀ (z : ℂ), ‖Complex.exp z‖ = Real.exp z.re
+Complex.exp_re : ∀ (x : ℂ), (Complex.exp x).re = Real.exp x.re * Real.cos x.im
+Complex.log_re : ∀ (x : ℂ), (Complex.log x).re = Real.log ‖x‖
+Complex.exp_conj : ∀ (x : ℂ), Complex.exp ((starRingEnd ℂ) x) = (starRingEnd ℂ) (Complex.exp x)
+Complex.log_conj : ∀ (x : ℂ), x.arg ≠ Real.pi → Complex.log ((starRingEnd ℂ) x) = (starRingEnd ℂ) (Complex.log x)
+Complex.log_inv : ∀ (x : ℂ), x.arg ≠ Real.pi → Complex.log x⁻¹ = -Complex.log x
+Complex.slitPlane : Set ℂ
+@InfinitePlace.not_isReal_iff_isComplex : ∀ {K : Type u_1} [inst : Field K] {w : InfinitePlace K},
+  ¬w.IsReal ↔ w.IsComplex
+data/fs131/icl2/probes/NamesA.lean:26:8: error(lean.unknownIdentifier): Unknown identifier `HadwigerNelson.SpectralChain.conjOn`
+data/fs131/icl2/probes/NamesA.lean:27:8: error(lean.unknownIdentifier): Unknown identifier `HadwigerNelson.UnitRing.conjOn`
+Complex.ofReal_re : ∀ (r : ℝ), (↑r).re = r
+HadwigerNelson.SpectralChain.fieldI_conj : ∀ (F : Subfield ℝ),
+  ∀ z ∈ HadwigerNelson.SpectralChain.fieldI F, (starRingEnd ℂ) z ∈ HadwigerNelson.SpectralChain.fieldI F
+data/fs131/icl2/probes/NamesA.lean:30:8: error(lean.unknownIdentifier): Unknown identifier `HadwigerNelson.UnitRing.conjOn_apply`
+data/fs131/icl2/probes/NamesA.lean:31:0: error(lean.dependsOnNoncomputable): failed to compile definition, consider marking it as 'noncomputable' because it depends on 'instCommCStarAlgebraComplex', which is 'noncomputable'
+Command exited with non-zero status 1
+wall=2.08s maxrss=3730152kB
