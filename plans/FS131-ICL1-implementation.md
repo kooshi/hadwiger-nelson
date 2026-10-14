@@ -143,7 +143,7 @@ dump at stage 4.
 
 **Λ1 re-priced from its first two leaves** (`exists_nrWindow` with its two helpers, about 155 lines in three elaborations;
 `sum_volume_inter_sq_le` with its helpers, about 140 lines in three): the lane is **done at 511 lines** (302 + 209) against the
-planner's 800–1,150, in about 45 minutes of active work from the first edit. No price message is owed (the lane is under a day).
+planner's 800–1,150, in about 25 minutes of wall time from the first draft (written while build 1 walked) to the stage-3 commit, a six-minute slot wait included. No price message is owed (the lane is under a day).
 
 ## Stage 4 — SAVED: Λ4, `Rigidity/CountExtension` — five leaves proved (elaborated in the farm; the build is stage 5's); Λ4 re-priced
 
