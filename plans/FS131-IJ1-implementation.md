@@ -14,12 +14,12 @@ Each [kernel], axioms exactly `[propext, Classical.choice, Quot.sound]`, printed
   `contChars_subset_TA`; with them **`contChars_tauPrime : ∀ (F : Subfield ℝ) [NumberField ↥F], contChars (tauPrime F)
   = TA F`** (J45 N1 (a) at `S = ∅`: the characters of `ℤ[U_F]` continuous for the profinite-plus-archimedean topology are
   exactly the torsion characters times the archimedean ones) has no leaf below it. 28 records of the module, all CLEAN
-  (11 public, 17 private and generated).
+  (10 public, 18 private and generated).
 - **M2a, `Rigidity/Herglotz`** (3 leaves): `exists_almostInvariant_weights`, `exists_fejer_measures`,
   `exists_fourier_eq_of_tendsto`; with them **`bochnerHerglotz_of_countable : ∀ (G : Type u_1) [AddCommGroup G]
   [Countable G], BochnerHerglotz G`** (every positive-definite function on a countable abelian group is the
   Fourier–Stieltjes transform of a unique finite measure on its dual; `[Rudin1962]` 1.4.3 with 1.3.6, by a Fejér route)
-  has no leaf below it. 15 records of the module, all CLEAN.
+  has no leaf below it. 15 records of the module (4 public, 11 private and generated), all CLEAN.
 - `mem_torsion_mul_arch_iff`, `exists_rat_coords` (`Rigidity/ChainAtTA`, proved before, made public): CLEAN.
 
 9 leaves; 27 private helpers (five of them private definitions: `archHom`, `fivePow`, `wBox`, `wPt`, `wCnt`) and two
@@ -140,7 +140,7 @@ removes the six `sorry` lines and nothing else. About 420 lines against the plan
 | `archContinuousAt_pow_of_mem_contChars` | yes (`Re χ > 0` on `M·R ∩ B_δ`, the profinite neighbourhood holding `M·R` by `Filter.iInf_sets_induct`; then `|arg χ^M(x)| < π/(2n)` when `n‖ι_∞ x‖ < δ/M`) |
 | `contChars_subset_TA` | yes (`mem_torsion_mul_arch_iff`, now public) |
 
-**Private helpers** (16): `archHom` (a private definition: `archTop`'s map as an additive map, `archTop F =
+**Private helpers** (17): `archHom` (a private definition: `archTop`'s map as an additive map, `archTop F =
 induced (archHom F) inferInstance` by `rfl`), `archTop_eq`, `tendsto_archHom`, `eventually_archTop`, `norm_archHom_nsmul`,
 `arg_mul_of_abs_lt`, `arg_nsmul_of_small`, `abs_arg_lt_of_small`, `inv_five_mem`, `fivePow` (a private definition, `r/5^k
 ∈ R`), `nsmul_fivePow`, `fivePow_succ`, `fivePow_add`, `exists_nsmul_mem_of_mem_nhds_profTop`, `mem_nhds_profTop`,
@@ -163,7 +163,7 @@ stage 5's dump. About 330 lines against the plan's 600–900 (about 0.45).
 | `exists_fejer_measures` | yes: `q_n(χ) = Σ_{x,x'} w x w x' C(x − x') χ(x' − x)` is `hC`'s sum at `z x = w x χ(−x)`, so real and `≥ 0`; `σ_n = dualHaar.withDensity (q_n)₊`; its coefficients `C(r) Σ_x w(x)w(x − r)` by orthogonality (`isHaarFourier_dualHaar`); mass the coefficient at `0` |
 | `exists_fourier_eq_of_tendsto` | yes, with a **cluster point** in place of a subsequence (no metrizability of the space of measures): `isCompact_setOf_finiteMeasure_le_of_compactSpace`, `IsCompact.exists_clusterPt`, the coefficient map continuous on `FiniteMeasure` (`tendsto_iff_forall_integral_rclike_tendsto` at `ℂ`), `ClusterPt.map`, `eq_of_nhds_neBot` |
 
-**Private helpers** (9): `wBox`, `wPt`, `wCnt` (private definitions: the box, its points, the fibre counts),
+**Private helpers** (10): `wBox`, `wPt`, `wCnt` (private definitions: the box, its points, the fibre counts),
 `wPt_add_single`, `card_wBox_pos`, `card_wBox_lt`, `fejer_sum_eq`, `integral_dualHaar_eval`, `integrable_dualHaar_eval`,
 `integral_fejer`. With them **`bochnerHerglotz_of_countable : BochnerHerglotz G`** has no leaf below it in its module
 (axioms in stage 5).
@@ -230,7 +230,7 @@ carried by `T + A` — the statement is true; the proof the plan names (twisted 
 ## Drafts for the landing (files this job does not write; each names its slot)
 
 **The audit's block** (`scripts/Axioms.lean`, CLEAN section, after FS131-ITK1's block): `data/fs131/ij1/draft-axioms-block.lean`,
-16 `#print axioms` lines — the two lemmas of `ChainAtTA` made public, the 11 public declarations of `ContinuityGroup`,
+16 `#print axioms` lines — the two lemmas of `ChainAtTA` made public, the 10 public declarations of `ContinuityGroup`,
 the 4 of `Herglotz` — CLEAN at build 2, generated from the built tree's print. The private helpers and the two generated
 `congr_simp` constants are not in the CLEAN section (as FS131-ITK1's block).
 
