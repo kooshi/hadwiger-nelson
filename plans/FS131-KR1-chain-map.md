@@ -310,6 +310,117 @@ invoked fresh) and obligation pass (`debruijn-obligation-modeling`, invoked fres
 `./scripts/build.sh` under `scripts/slot.py --mem 10 --cpus 4` (`MEMMAX=10G BATCH=8`): log
 `data/fs131/kr1/logs/build-1.log` (result in § 4.5 below).
 
+## Stage 5 — SAVED: the map — the chain's whole remaining road
+
+*States: **proved** (no `sorry` in the module on this branch's ancestry), **typed** (statements elaborate, leaves `sorry`;
+count on this branch at `fec557c9a` plus this job), **read** (read and priced, not typed). Prices of the modules this job did
+not read are their planners' (as the coordinator logged them, items 791 and 811), **not re-priced here**; "—" where none was
+logged. Other branches (`fs131-wq1`'s ports, implementers' branches) may hold more than this branch shows.*
+
+| module | Lean modules | state | lanes | price | waits on |
+|---|---|---|---|---|---|
+| first layer | `Rigidity/Entropy` (1 `sorry`), `Solenoid`, `SolenoidErgodic`, `PositiveEntropy` (10), `ChainAtTA` (3: `entropySplit`, `zeroEntropyCarried`, `noRamifiedStableDyadic_of_tca`) | typed; the headline's composition proved over its leaves | M9-S (`noRamifiedStableDyadic_of_tca`, off the path) | — | M5–M8 |
+| C0 | in `ChainAtTA` | **proved** | — | — | — |
+| M0 | the entropy port (`[OAIMath2026]` family 015) | on `fs131-wq1` (brief) | port | — | — |
+| M1 | `Rigidity/Entropy` | typed (1 leaf) | — | — | M0 |
+| M4 | `Rigidity/DualGroup` (13), `DualConnected` (4), `SubgroupHaar` (6), `Annihilator` (9), `Duality` (10) | typed | — | — | — |
+| M5 | `Rigidity/PositiveEntropy`, `EntropyFibres` (9) | typed, planned (KN9) | M5-E, M5-P | — | M1 |
+| M6 | `Rigidity/Pieces` (15) | typed | — | — | M4, C0 |
+| M7 | `Rigidity/EntropySplitMax` (6), `HaarMultiple` (proved) | typed | — | — | M5, M6 |
+| M8a | `Rigidity/ZeroEntropyNames` | **proved** | — | — | — |
+| M8b | `Rigidity/PlaceSizes` (23), `Multipliers` (6), `ThinBoxes` (14), `GlobalPoint` (11), `WanderingShells` (7), `ZeroEntropyClosed` (composition) | typed (K8B1) | K8-A, K8-M, K8-B, K8-G, K8-S | 1,600–1,900 lines, ~2.5 days (K8B1) | lane T |
+| lane T | `Rigidity/TateModel` (4), `TateArch` (3), `TateCharacter` (13), `TateKernel` (8), `TateLocal` (6), `TateExists` (composition), `UnitCircle` (8) | typed (KT1) | lane T's five | several days, 2,000–4,000 lines (KN9) | — |
+| M9 | `Rigidity/RingScope` (3) | typed | M9-R, M9-S | — | — |
+| **M10** | `Rigidity/ContinuityGroup` (6) | **typed (this job)** | one implementer | 800–1,200 lines, 2–3 days | M9-R (density, `c₀𝓞_L ⊆ R`); two private lemmas of `ChainAtTA` made public |
+| **M2a** | `Rigidity/Herglotz` (3) | **typed (this job)**; `bochnerHerglotz_of_countable` composed | one implementer | 600–900 lines, 1.5–2 days | M4 (`DualGroup`) |
+| **M3** | `Rigidity/InvariantMeasure` (2) | **typed (this job)**; `invariantMeasureOnClosed_of_countable` composed | one implementer | 500–800 lines, 1–2 days | M2a's weights lemma |
+| **M2b** | `Rigidity/BochnerTau` (4) | **typed (this job)** | one implementer (the hard leaf `exists_twisted_parts` first, to re-price) | 2,000–2,500 lines, 4–6 days (ruled: formalize; message if a first leaf reprices it above a week) | M10, M2a, M4, M9-R |
+| **M11** | — | **read** (§ 2.4) | a planner (the cyclic-subspace step, § 2.4 (d), is the one no record states as a lemma), then one or two implementers | 1,500–2,500 lines, 3–5 days | M10, M2b, M4 |
+| **M12** | `Plane/OneAvoidingDensity` (1) for its input | **read** (§ 2.5); its input **typed** | its own planner, then five lanes C1–C5 | 6,000–12,000 lines, 3–6 weeks; `m₁ < 1/4` itself 3–6 weeks more if Kooshi rules formalize | M13's `tca_uniform`, M9, the ruling on `m₁` |
+| **M13** | `Rigidity/ClassRatio` (3) | **typed (this job)**; `tca_of_five_le_localBound` composed | a planner for the per-prime leaf; **the FS-66 certificate check measured first**; then two or three implementers | 2,500–5,000 lines plus the certificates (unmeasured), 1–2.5 weeks | Weil (declared), FS-66's certificates |
+| M14 | row 99 | **proved on `main`** (FS131-LJ1) | — | — | the join |
+| **M15** | — | **read** (§ 2.7) | one implementer | 800–1,500 lines, about 1 week; each further field 300–600 | M13's level-one floors; the headline closed |
+
+**The road in one line.** What this job read adds, by its own prices, **about 14,000–28,000 lines**, of which M12 (the count)
+is about half and is the longest single stretch; the chain's critical path through it is M13 (tail) → M12, beside lane T → M8b
+and M4 → M10 → M2b → M11. **What can start now, beside each other, writing only new files:** M2a, M3 (after M2a's weights
+lemma, or with it), M10 (after M9-R), M13's measurement of the FS-66 certificates, M12's planner, and M15's place
+computations.
+
+## Stage 6 — SAVED: drafts for files I do not write
+
+### 6.1 Dated lines for `data/fs131/claims-NF2.md` § Dated lines (each to follow the last)
+
+- 2026-10-14 — **M2 and M3 are typed by averaging** (FS131-KR1): `Rigidity.bochnerHerglotz_of_countable` (M2's existence half;
+  uniqueness is `DualGroup.measure_eq_of_fourier`, item 757) and `Rigidity.invariantMeasureOnClosed_of_countable`, each
+  composed over its leaves; neither route reads `[Rudin1962]` or `[Kakutani1938]`.
+- 2026-10-14 — **`BochnerOn` is read by M11 only, at `τ′_∅` = `Rigidity.tauPrime F`** (FS131-KR1): M12's count passes from
+  spectrum on `T + A` to continuity by dominated convergence.
+- 2026-10-14 — **The count reads one constant** (FS131-KR1; the coordinator's ruling): `Interface.Count`'s proof reads `TCA F`
+  together with Weil's bound at the tail, through `Rigidity.tca_uniform` (module M13); no typed statement changes.
+- 2026-10-14 — **`m₁(ℝ²) < 1/4` is a named outside hypothesis, not declared** (FS131-KR1; the coordinator's ruling):
+  `Plane.OneAvoidingDensityBound`, `[AmbrusEtAl2023]` Thm 1 (arXiv v3, p. 4) in the paper's form; Kooshi decides between
+  declaring it and formalizing it (priced at 3–6 agent-weeks).
+- 2026-10-14 — **M15 needs no model of `NoRamifiedStableDyadic`** (FS131-KR1): the headline reads the scope from `5 ≤ L(F)`
+  (FS131-KN6) and EF⁺ is typed with no scope (FS131-K8B1); the clause leaves M15's draft claim list.
+
+**Why the draft claim lists under `data/fs131/kn3/` are not edited here**: they are generated by
+`tools/fs131_kn3_claimlists.py`, whose `--check` fires on a line edited by hand (FS131-KN3 § Stage 6); a change belongs in the
+generator's input or in a fixed claim list, which is the coordinator's. The changes are the five lines above and § 1.2's M15
+correction.
+
+### 6.2 `BIBLIOGRAPHY.md`
+
+- `[AmbrusEtAl2023]`, reading status, to follow the present text: "Thm 1 (p. 4) and the definitions of p. 2 with eq. (1)
+  re-read from the PDF's text layer by FS131-KR1 (2026-10-14) for `Plane.OneAvoidingDensityBound`".
+- `[Rudin1962]` and `[Kakutani1938]`: "cited by FS131-KR1's modules (`Rigidity/Herglotz`, `BochnerTau`, `InvariantMeasure`) as
+  the printed sources their routes do not follow; not held, not read".
+- `[LevitzMott1972]`: "cited by `Rigidity/BochnerTau` (`finite_quotient_nsmul`, J28V-7); not read by FS131-KR1".
+- `[KMOR2016]` (Lemma 3.2 (1), the first leaf of `m₁`'s formalization), `[BachocEtAl2014]` Thm 2.2 and `[Zhang2012]` Thm 1.8
+  (M12's price): cited in `plans/FS131-KR1-chain-map.md` § 2.5; not read by FS131-KR1.
+
+### 6.3 The four items for `Plane.OneAvoidingDensityBound`, should Kooshi rule "declare" (`LEAN.md` § Assumptions)
+
+1. *Docstring*: names `[AmbrusEtAl2023]`, Theorem 1, p. 4 of arXiv:2207.14179 v3, and the definitions of p. 2 with eq. (1) —
+   in the module now.
+2. *Read-back, symbol against symbol:*
+
+   | the paper (p. 4, p. 2) | the Lean statement |
+   |---|---|
+   | "Any … planar set" | `∀ A : Set (EuclideanSpace ℝ (Fin 2))` |
+   | "Lebesgue measurable" | `NullMeasurableSet A volume` (`volume` on `EuclideanSpace ℝ (Fin 2)` is `λ₂`) |
+   | "1-avoiding": "independent in the unit distance graph" | `∀ a ∈ A, ∀ b ∈ A, dist a b ≠ 1` (Euclidean distance) |
+   | "upper density" `δ(A) = lim sup_{R→∞} λ_d(A ∩ B_d(x, R))/λ_d(B_d(x, R))`, "`x ∈ ℝ^d` … fixed", "independent of the choice of `x`" | `∀ x, limsup (fun R : ℝ => volume (A ∩ ball x R) / volume (ball x R)) atTop` — open balls (a sphere is null); the quotient in `ℝ≥0∞`, whose `R ≤ 0` terms (`0/0 = 0`) the limsup at `∞` does not see; every centre, equal to the paper's single centre by its independence remark (two balls of radius `R` differ by `o(R²)`) |
+   | "at most 0.2470" | `≤ ENNReal.ofReal 0.2470` |
+
+   Direction of each choice: equal to the page; none is stronger than the page.
+3. *Model*: `Plane.oneAvoidingDensityBound_model` (proved): the open ball of radius `1/2`.
+4. *`ARCHITECTURE.md` § Trust*, a line: "`Plane.one_avoiding_density_bound : Plane.OneAvoidingDensityBound` — an `axiom`
+   importing `[AmbrusEtAl2023]` Thm 1 (arXiv v3, p. 4; computer-assisted; its certificate re-checked here, J26 and J49): every
+   Lebesgue-measurable 1-avoiding planar set has upper density at most `0.2470`. Read by module M12's count." With it, one
+   `AxiomAudit.declareImport` line in `scripts/Axioms.lean`'s IMPORTED section.
+
+**Until then** (the ruled form): at the landing, one line of `AssumptionAudit.declared` in `scripts/Assumptions.lean`:
+`.former ``HadwigerNelson.Plane.OneAvoidingDensityBound outside "[AmbrusEtAl2023] Thm 1, arXiv:2207.14179 v3 p. 4"`.
+
+### 6.4 `LEAN.md` § Searching — Lean, three lines
+
+- At the pin the Prokhorov compactness lemmas are in the root namespace: `isCompact_setOf_finiteMeasure_le_of_compactSpace`
+  (`MeasureTheory/Measure/Prokhorov.lean` l. 69) and `isCompact_closure_of_isTightMeasureSet` (l. 504); with a `MeasureTheory.`
+  prefix they are unknown identifiers (FS131-KR1, `data/fs131/kr1/probes/Names.out`).
+- A `def` whose type is a class (`TopologicalSpace (unitRing F)`) draws the pin's warning "of class type must be marked with
+  `@[reducible]` or `@[implicit_reducible]`": mark it `@[reducible]` and keep it a `def`, not an instance, when the type
+  already carries an instance of the class — a subtype of `ℂ` has its subspace topology (`Rigidity.tauPrime`, FS131-KR1).
+- A topology generated by the subgroups `N·R` excludes `N = 0` (`0·R = 0` makes it discrete, and every character continuous):
+  index by `N + 1` (`Rigidity.profTop`, FS131-KR1).
+
+### 6.5 `ARCHITECTURE.md`
+
+Six rows added in this branch (§ 3 of the map, beside `Rigidity/ZeroEntropyClosed` and `Plane/Suprema`);
+`tools/check_architecture.py`: the six rows pass, and its one failure is the inherited `Rigidity/ZeroEntropyNames` imports cell
+(`Outside/OAI015Maximal`), fixed on `fs131-wdg` by FS131-IDG1 (item 791) — the base commit fails it too, with the six new
+modules then missing rows (`data/fs131/kr1/logs/architecture-base.log`).
+
 ## Drafts for files I do not write
 
-*(filled at the stages that produce them)*
+All drafts are in Stage 6.
