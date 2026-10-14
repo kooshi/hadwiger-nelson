@@ -96,3 +96,127 @@ The four items of `LEAN.md` § Assumptions for `Rigidity.positive_entropy_rigidi
 
 Item 2 (c) is this job's item 2; (a) and the "ergodic" sense of (b) are read in Stage 2 with it.
 
+## Stage 2 — SAVED: the declared theorem against its page
+
+The page: `[EinsiedlerLindenstrauss2022]`, arXiv:2101.11120v1, our copy
+`~/source/library/pdf/EinsiedlerLindenstrauss2022-rigidity-commuting-automorphisms-tori-solenoids.pdf`, read in its text layer
+(`pdftotext -layout`, into the ignored `build/fs131-kn7/el.txt`; page numbers by form feed). Read for this stage: Thm 1.3
+(pp. 2–3), § 1.3's first paragraph and its two constructions (p. 4), § 4's opening, Thm 4.1, § 4.1 and Lemma 4.2 (pp.
+14–15), § 3.2's paragraph on entropy contributions conditional on a factor (p. 13).
+
+### 2.1 The possible defect — the σ-algebra on `X/G_j` — settled: no defect in truth; a gap in the read-back, in the unsafe direction
+
+**What the statement takes.** The stored type (§ 1.3) puts on `X ⧸ G j` Mathlib's `QuotientAddGroup.measurableSpace
+(G j)`, which is `MeasurableSpace.map (QuotientAddGroup.mk' G) ‹MeasurableSpace X›` by `rfl` (`DeclaredRead.lean`, (C1)):
+a set of `X ⧸ G j` is measurable when its preimage in `X` is Borel. **It asserts no Borel structure on the quotient**: no
+`borel`, no `BorelSpace` instance on a quotient and no `PolishSpace` occurs in it. The "assertion" item (b) names is in
+prose — KN3 § 5.3's table ("equal: the quotient σ-algebra on `X/G_j` is its Borel σ-algebra for a Polish group … and a
+solenoid is compact metrizable (its dual is countable)") and the module docstring of `Rigidity/PositiveEntropy` ("which
+for a solenoid is the Borel σ-algebra of `X/G_j`").
+
+**What the page takes.** Thm 1.3 (4), p. 3: "The measure µj induces a measure on the factor X/Gj with hµj(αⁿ_{X/Gj}) = 0
+for any n ∈ Λ." The factor of a closed invariant subgroup is built on p. 4, § 1.3, first bullet: "If X′ ⊆ X is a closed
+α-invariant subgroup and π : X → X/X′ denotes the canonical projection map, then the preimage A = π⁻¹B_{X/X′} of the
+Borel σ-algebra B_{X/X′} of X/X′ is α-invariant." So the page's σ-algebra on `X/G_j` is **the Borel σ-algebra of the
+quotient group**.
+
+**How the two compare** (kernel, scratch, the standard three axioms):
+- the Borel σ-algebra is contained in the quotient one, for every topological group with Borel sets
+  (`kn7_borel_le_quotient`: the projection is continuous);
+- so the entropy on the factor for the Borel σ-algebra is at most the entropy for the quotient one
+  (`KN7Scratch.entropy_borel_le_quotient`, over `ksEntropy_map_mono`: each Borel label map is a quotient one, and its
+  cells have the same mass under both pushed measures because the induced map is continuous, so the cells are Borel);
+  and the declared clause (4) gives the page's (`current_clause_four_implies_r1`). **The declared σ-algebra is the finer
+  one: where the two differ, the axiom says more than the page.**
+- They are one when `X` is Polish and `G j` closed — Mathlib's `QuotientAddGroup.borelSpace` (Lusin–Souslin;
+  `DeclaredRead.lean` (C3)); clause (2) gives `G j` closed.
+
+**Whether `IsSolenoid X` gives Polish.** Not in this library and not in Mathlib at the pin: with the four fields of
+`IsSolenoid X` made instances, `MetrizableSpace X` is not synthesized, and the partner with `SecondCountableTopology X`
+added is (`data/fs131/kn7/lean/PolishProbe.lean`, `logs/lean-polish-probe.log`: one error, at the first example only).
+Mathlib's whole Pontryagin duality at the pin is `Topology/Algebra/PontryaginDual.lean` (no duality theorem, no
+Peter–Weyl: `grep -rln "Peter.Weyl\|PeterWeyl" Mathlib` is empty). Mathematically every solenoid in the page's sense
+**is** metrizable — its dual embeds in `ℚⁿ`, so is countable, and the characters of a compact abelian group separate its
+points (Peter–Weyl), so `X` embeds in a countable product of circles — and the page itself reads that duality (§ 4.1, p. 14:
+"By Pontryagin duality we also have that X is isomorphic to the quotient of X_m = A^m/Q^m modulo the annihilator K = V⊥").
+That last step is **[reading]: classical, recalled, not read in a source here**.
+
+**Verdict.** The declared statement is implied by the page together with one classical theorem outside Mathlib (a
+compact abelian group with countable dual is metrizable) and Mathlib's Lusin–Souslin instance; no `X` satisfying its
+hypotheses has the two σ-algebras differ, so the axiom is consistent if the page is. **There is no defect in truth.**
+There is a defect in the read-back, of the kind `LEAN.md` § Assumptions item 2 rules out ("State the axiom in the paper's
+own form and derive the form the library uses"): at clause (4) the stored σ-algebra is not the page's, the difference is
+in the unsafe direction, and the bridge is a theorem neither the library nor Mathlib holds. Grades: the containment, the
+direction and the equality for Polish `X` [kernel] (scratch files, not the library); the metrizability of every solenoid
+[reading].
+
+**Proposed repair R1 — not made; for the coordinator's ruling.** State clause (4) over the page's σ-algebra.
+
+Old (`Rigidity/PositiveEntropy.lean` ll. 73–74):
+```lean
+        ∀ n ∈ Λ, ∀ h : G j ≤ (G j).comap (α n),
+          ksEntropy ((ν j).map (QuotientAddGroup.mk' (G j))) (QuotientAddGroup.map (G j) (G j) (α n) h) = 0
+```
+New:
+```lean
+        ∀ n ∈ Λ, ∀ h : G j ≤ (G j).comap (α n),
+          @ksEntropy (X ⧸ G j) (borel (X ⧸ G j))
+            (@Measure.map X (X ⧸ G j) _ (borel (X ⧸ G j)) (QuotientAddGroup.mk' (G j)) (ν j))
+            (QuotientAddGroup.map (G j) (G j) (α n) h) = 0
+```
+and beside it, a theorem deriving the old form for Polish `X` (`positive_entropy_rigidity_of_polishSpace`, eleven lines,
+compiled in `data/fs131/kn7/lean/RepairR1.lean` over a scratch copy of the new axiom). Why the new form is implied by the
+page: it is the page's sentence symbol for symbol (`B_{X/X′}` is `borel (X ⧸ G j)`; "induces a measure" is the push-forward
+by the projection, which is Borel measurable, so `Measure.map` is the true push-forward); and it is implied by the old
+form for every `X` (`current_clause_four_implies_r1`) — R1 can only weaken the axiom. What the chain loses: nothing at a
+Polish solenoid, where the old form is a theorem over the new. Every solenoid the chain applies the axiom to is the dual of
+a countable discrete group (the pieces `M̂`, module M6), second countable and so Polish — M6's planner shows it.
+What it costs a consumer: `haar_or_zero_entropy` (M5) reads clause (4) where every `G j` is finite; if its proof wants the
+quotient σ-algebra it takes `[PolishSpace X]` (a hypothesis added to a statement of ours, routed through the
+coordinator), else it reads the Borel form directly. Docstring edits that go with R1: the module docstring's "which for a
+solenoid is the Borel σ-algebra of `X/G_j`" becomes "the Borel σ-algebra of the quotient group, the page's `B_{X/X′}` (p. 4);
+for Polish `X` it is Mathlib's quotient σ-algebra (`positive_entropy_rigidity_of_polishSpace`)".
+
+Alternatives weighed. **R2** — add `[PolishSpace X]` to the axiom and keep Mathlib's σ-algebra: also implied by the page (a
+restriction of its class, on which the two σ-algebras agree by a Mathlib theorem), but its read-back of clause (4) goes
+through `QuotientAddGroup.borelSpace` rather than symbol against symbol, and the hypothesis is not on the page.
+**R0** — keep the statement and write the gap into the docstring and the read-back with the classical theorem named: a
+declared statement whose read-back rests on an unformalized theorem, when a literal form costs nothing. **R1 recommended;
+confidence high.**
+
+### 2.2 The infimum form of the entropy — no repair
+
+From the stored type (§ 1.3): `ksEntropy` occurs once, in the conclusion, as `= 0`; no hypothesis mentions an entropy. The
+page's `h_{µ_j}(αⁿ_{X/G_j})` is the textbook's: for the push-forward (a probability measure, preserved by the induced map
+for `n ∈ Λ` because `ν j` is `α_Λ`-invariant and the projection intertwines) the supremum over finite measurable
+partitions of `lim_n H_n/n`. The declared number is the supremum of `inf_n H_n/n` over the same partitions (a measurable
+label map into `Fin k` is a finite measurable partition, empty cells adding `negMulLog 0 = 0`), and the infimum is below
+every reading of the limit for every measure and map (`Rigidity.partitionEntropy_le_liminf`, kernel): the page's `= 0`
+gives the declared `= 0`. The base of the logarithm does not enter `= 0`. The cells' masses are true measures, not outer
+ones: the induced map is continuous, hence measurable for both σ-algebras on the quotient. Unchanged by R1. **Verdict:
+within the page; the safe direction by construction, as KN6 said.**
+
+### 2.3 "Ergodic" as strict invariance — no repair; the bridge is short and planned as a kernel theorem
+
+`herg : α.IsErgodicOn ⊤ μ` (stored type, line 12): every `α n` preserves `μ`, and a measurable set **strictly** fixed by
+every `α n` is null or conull. As a hypothesis this asks less of `μ` than the textbook's ergodicity (sets fixed up to a
+null set), so formally the axiom applies to more measures. They agree for a countable group, and the argument reads only
+what the hypothesis holds: given measurable `s` with `μ((α n)⁻¹' s ∆ s) = 0` for every `n`, put
+`s′ := ⋂_{n ∈ ℤ^d} (α n)⁻¹' s`. It is measurable (a countable intersection; each `α n` is continuous on a Borel `X`),
+strictly fixed (`(α m)⁻¹' s′ = ⋂_n (α (n + m))⁻¹' s = s′`, since `α (n + m) = α n ∘ α m` and `n ↦ n + m` is a bijection
+of `ℤ^d`), and `μ(s ∆ s′) = 0` (a countable union of null sets, using that `α n` preserves `μ`). So the strict form implies
+the textbook's, and the page's hypothesis holds whenever the declared one does. In the conclusion, clause (1) in the
+strict form is weaker than the page's: safe. **Verdict: within the page.** The argument is about thirty lines and I type
+it as a leaf of a new module (§ Stage 5), so that this row of the read-back becomes a kernel theorem.
+
+### 2.4 The read-back of the declared theorem as it stands after this stage
+
+| the page | the Lean statement | direction | how it is known |
+|---|---|---|---|
+| a `ℤ^d`-action, `d ≥ 2`, by automorphisms of a solenoid | `IsSolenoid X`, `2 ≤ d`, `ZdAction d X`, `[BorelSpace X]` | equal | KN3 § 5.3 |
+| no virtually cyclic factors | `NoVirtuallyCyclicFactors` | a sense chosen (FS105-VC) | residual trust, unchanged |
+| `µ` invariant, ergodic, probability | `IsProbabilityMeasure μ`, `IsErgodicOn ⊤ μ` (strict) | the strict form implies the textbook's | § 2.3 [hand]; a planned kernel leaf |
+| `Λ`, `µ = (1/J) Σ µ_j`, mutually singular; clauses (1)–(3) | as typed | equal | KN3 § 5.3 |
+| (4) entropy on `X/G_j` with `B_{X/G_j}` | **as stored: Mathlib's quotient σ-algebra (finer)** | **says more where the two differ**; equal for Polish `X` | § 2.1 [kernel, scratch] and a classical theorem [reading]; **R1 proposed** |
+| (4) the entropy itself | `ksEntropy`, the infimum form | below the page's | § 2.2 [kernel] |
+
