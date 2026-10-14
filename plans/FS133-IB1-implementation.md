@@ -9,7 +9,45 @@ only.*
 
 ## Theorems this phase proved
 
-(Filled at the last stage, from the built tree.)
+Each **[kernel] on `[propext, Classical.choice, Quot.sound]`**, printed from the built tree (stage 5;
+`data/fs133/ib1/axioms-built.out`); none rests on the declared outside theorem. Statements FS133-K1's, four widened
+by the coordinator's Amendments 1–3 (one unread binder each, marked †); proofs this job's.
+
+`Proofs/HadwigerNelson/Plane/OneClass/InvariantLaw.lean` (C133-INV-CLASS):
+- `HadwigerNelson.OneClass.IsShiftInvariantLaw.measure_origin_le` — a translation-invariant random independent set
+  of any graph on the algebraic plane has density at most the graph's finitary independence ratio (the entry's
+  bound; step (1)).
+- `HadwigerNelson.OneClass.countable_algPlane` — the algebraic plane is countable.
+- `HadwigerNelson.OneClass.exists_foelner_finset` † — a countable commutative group has a Følner sequence of finite
+  nonempty sets (by polynomial growth; `[Module ℚ A]` dropped).
+- `HadwigerNelson.OneClass.exists_shiftInvariant_of_foelner` — Følner averages of translates of labellings in a
+  closed translation-stable set have a translation-invariant limit carried by it, with at least each proportion of a
+  label at the origin (step (2)).
+- `HadwigerNelson.OneClass.exists_turnInvariant` † — from a translation-invariant probability carried by a closed
+  rotation-stable set: one invariant under the translations and the rotations, carried by it, with the same law of
+  the label at the origin (step (3), no Markov–Kakutani; `hshift` dropped).
+- `HadwigerNelson.OneClass.exists_invariant_of_closed` — a nonempty closed set of labellings stable under both
+  carries an invariant probability (C133-PAIR's step F1; the skeleton's assembly, now on no `sorry`).
+- `HadwigerNelson.OneClass.exists_isInvariantLaw` — **C133-INV-CLASS**: for a set `S` invariant under the algebraic
+  rotations, an invariant random independent set of `circulantGraph S` whose density is the finitary ratio.
+- `HadwigerNelson.OneClass.norm_kCoeff_mul` — a rotation preserves the modulus.
+- `HadwigerNelson.OneClass.unitDistance_algPlane_eq_circulantGraph` — the unit-distance graph of the algebraic plane
+  is the Cayley graph of its unit circle.
+- `HadwigerNelson.OneClass.exists_isInvariantLaw_unitDistance` — C133-INV as posed, with equality (the skeleton's
+  assembly, now on no `sorry`).
+
+`Proofs/HadwigerNelson/Plane/OneClass/SectionDensity.lean` (C133-DENS-CLASS):
+- `HadwigerNelson.Plane.sectionDensity_univ` †, `HadwigerNelson.Plane.sectionDensity_empty` † — drift checks: `1`
+  and `0` (`[MeasurableSpace Ω]` dropped from each).
+- `HadwigerNelson.Plane.measurable_sectionDensity` — the window density of a measurable random set is measurable.
+- `HadwigerNelson.Plane.le_lintegral_sectionDensity` — the reverse Fatou step: mean upper density at least `α`.
+- `HadwigerNelson.Plane.measure_le_sectionDensity_pos` — upper density at least `α` with positive probability.
+- `HadwigerNelson.Plane.exists_mem_le_sectionDensity` — every event of full probability holds such an `ω` (the
+  skeleton's assembly, now on no `sorry`).
+- `HadwigerNelson.Plane.ofReal_integral_le_measure_pos` — a function at most `1` is positive with probability at
+  least its mean.
+- `HadwigerNelson.Plane.sectionDensity_setOf_pos` — **C133-DENS-CLASS as its entry states it** (the skeleton's
+  assembly, now on no `sorry`).
 
 ## Stage 1 — SAVED: the readback, the leaves restated, the statements as the kernel holds them before any edit
 
@@ -223,3 +261,134 @@ and nothing else" is stage 5's, on the built tree):
 **4.5 The draft D4 filed** (Done, item 6): the first implementer's dated note, word for word (its text taken from
 `plans/FS133-IA1-implementation.md` by script and re-wrapped), in `plans/FS133-kernel-plan.md` § 2.4, as a paragraph
 of its own following the sentence the draft names ("… and its docstring and `ARCHITECTURE.md` line must say so.").
+
+## Stage 5 — SAVED: the build under the slot, and every receipt from the built tree
+
+**5.1 The build** (Done, item 4). `data/fs133/ib1/build.sh`: `./scripts/build.sh` under the slot (`--mem 12 --cpus 4`,
+`MEMMAX=12G BATCH=4`), after the last edit of a module: **`build: OK — 484 of 484 batches, 6 module(s) rebuilt, 4
+module(s) with warnings, 12m47s`, exit 0** (`data/fs133/ib1/build.log`, `build.exit`; full output
+`build/gate/build/20261014T031109Z-1310049.log`). Rebuilt: `Plane/OneClass/SectionDensity` (2.7 s), `InvariantLaw`
+(4.5 s), `Algebraic`, `Fractional`, `Pair`, `Proofs`. **No warning from either of this job's files**: the log's 26
+warnings are each `declaration uses 'sorry'`, in `Defs` (13), `Algebraic` (5), `Fractional` (3), `Pair` (5) — the
+other lanes' leaves (26 of 26 lines matched; none names `InvariantLaw` or `SectionDensity`). `grep sorry` over the
+two files: 0 and 0.
+
+**5.2 No statement changed beyond the four ruled drops** — from the kernel's side, on the built tree.
+- The two modules (`data/fs133/ib1/lean/StatementDump.lean` → `moved/built.out.xz`, against stage 1's
+  `before.out.xz`; `tools/fs133_ib1_moved.py --ruled=…`, `moved/before-to-built.txt`): **19 constants, 15 IDENTICAL
+  in the full print, 4 RULED-DROP** — each the stored type of stage 1 with exactly one binder of its telescope
+  removed and the indices above it lowered, character for character: `exists_foelner_finset` binder 2, the instance
+  `Module ℚ A`; `exists_turnInvariant` binder 8, the explicit `hshift`; `sectionDensity_univ` and
+  `sectionDensity_empty` binder 3, the instance `MeasurableSpace Ω`. **0 DIFFERENT outside the ruling, 0 MISSING.**
+  New in the built dump: the 24 private helpers (21 in `InvariantLaw`, 3 in `SectionDensity`), each listed in it.
+- All eight modules of the milestone (FS133-IA1's dumper, `data/fs133/ia1/lean/StatementDumpErased.lean` →
+  `moved/eight-built.out.xz`, against that job's last dump `data/fs133/ia1/moved/built.out.xz`;
+  `moved/eight-ia1-to-built.txt`): **114 constants, 110 IDENTICAL in the full print, the same 4 RULED-DROP.** So the
+  three import lines added to `InvariantLaw` moved no stored statement of `Algebraic`, `Fractional` or `Pair` (which
+  import it), not even in instance arguments, and `OAI158Rigidity`, `Defs`, `Field` are as lane A left them.
+- Controls. On the reader (`moved/control-built.txt`): the four plants of the first implementer's reader, and three
+  for the ruling — a constant changed in an unruled statement (the run fails and names it), a second change inside a
+  ruled statement (RULED-NOT-A-DROP), a ruled statement put back (RULED-BUT-IDENTICAL) — each read as planted. End to
+  end, in a copy of the module (`moved/planted-in-module.txt`): a hypothesis added to `ofReal_integral_le_measure_pos`,
+  the copy elaborated with the footer, its dump read — `DIFFERENT … (not ruled)`, `MOVED FAILED: 1`, exit 1.
+
+**5.3 The axioms of every public declaration** (`data/fs133/ib1/lean/Axioms.lean` → `axioms-built.out`;
+`tools/fs133_ib1_axioms.py`, the first implementer's reader, against `axioms-expect.tsv`, all CLEAN by the plan's
+§ 5.5): **19 records, 19 on `[propext, Classical.choice, Quot.sound]`, `AXIOMS OK`** (`axioms-verdict.out`). None
+prints `sorryAx` or the declared outside theorem. Controls: on the reader, a `sorryAx` in a clean record, the import
+in a clean record and a record removed are each reported (`axioms-control.out`); end to end, a planted theorem on
+`sorry` beside the nineteen (`lean/AxiomsPlanted.lean`) prints `sorryAx` and is reported, exit 1
+(`axioms-planted-verdict.out`).
+
+**5.4 Not run here** (the landing's, on the joined tree): `scripts/axioms.sh`, `vacuity.sh`, `dupnames.sh`,
+`assumptions.sh`, `lake lint`. No process of this job is left running: the build's slot is released, its monitor and
+its waiter have exited.
+
+## Drafts for the landing (files this job does not write; each names its slot)
+
+**DB1. `scripts/Axioms.lean`, under CLEAN** — the block `data/fs133/ib1/axioms-block.txt`, appended where the
+waves append their CLEAN records (just above the PURCHASED banner): its header comment and nineteen
+`#print axioms` lines, one per public declaration of the two modules (18 theorems, the definition
+`Plane.sectionDensity`). No line goes under IMPORTED: no record of the two modules rests on the declared outside
+theorem (stage 5, the plan's § 5.5).
+
+**DB2. The model for each hypothesis** (`LEAN.md` § The gate). No named model was added to either file — that
+would be a new public declaration, outside this job's touches; each note names a theorem of the library or a term
+that inhabits the hypotheses, all at once, at a parameter nothing refutes.
+- `IsShiftInvariantLaw.measure_origin_le` (`h : IsShiftInvariantLaw G P`): at `G := unitDistance E`, the law of
+  `exists_isInvariantLaw_unitDistance` (proved here, on the standard three), through `toIsShiftInvariantLaw` — a law
+  of density equal to the ratio, so the bound is met with equality; the point mass at the empty set
+  (`isInvariantLaw_dirac`, `Defs`, another lane's leaf) is the degenerate model of density `0`.
+- `exists_shiftInvariant_of_foelner`: a Følner sequence of `E` is `exists_foelner_finset E`; `C`, its stability
+  and `ℓ n ∈ C` are inhabited at once inside the proof of `exists_isInvariantLaw` (the indicators of independent
+  sets of `circulantGraph S`, independent subsets of `F n` of the ratio's size), with `c := ratio.toReal` — positive
+  at the unit circle (the ratio is at least `1/7` there by `inv_le_finIndepRatio_of_colorable`, `Defs`, another
+  lane's leaf, and the plane's seven-colouring), so the label clause is exercised; and trivially at `C := univ`.
+- `exists_turnInvariant`: inside the proofs of `exists_isInvariantLaw` and `exists_invariant_of_closed`, on the
+  output of `exists_shiftInvariant_of_foelner`; trivially at `C := univ`, `P₀ := dirac (fun _ => a)`.
+- `exists_invariant_of_closed`: `C := univ`; or the carrier of `exists_isInvariantLaw`'s proof.
+- `exists_isInvariantLaw` (`hS`): `S := {z : E | ‖(z : ℂ)‖ = 1}` with `hS` from `norm_kCoeff_mul` — exactly
+  `exists_isInvariantLaw_unitDistance`'s proof; also `S := ∅`.
+- `le_lintegral_sectionDensity`, `measure_le_sectionDensity_pos`, `exists_mem_le_sectionDensity`,
+  `measurable_sectionDensity`: at `W := univ`, `α := 1`, any probability `μ` and any measurable windows of finite
+  non-zero measure (`X := ℝ`, `lam := volume`, `Xn n := Icc 0 (n + 1)`) every hypothesis holds (`hcov`: `μ univ = 1`),
+  and `sectionDensity_univ` computes the density there: `1`. `sectionDensity_setOf_pos`: `H := 1`, `α := 1`.
+  `ofReal_integral_le_measure_pos`: `h := 1`.
+- The vacuity scan will read these binders `GENERIC` (no colouring binder; the structures are the law predicates,
+  `IsShiftInvariantLaw` and `IsInvariantLaw`, which `Defs` declares and models).
+
+**DB3. For the join** (Amendment 1, item 4): **the two private lemmas `card_le_indepNum_induce` and
+`exists_indep_subset` in `Plane/OneClass/InvariantLaw` are re-pointed at `Defs`'s public lemmas
+(`le_finIndepRatio_iff`, and the bridge `Defs` proves for it) or deleted, when `Defs` is proved — no duplicate proof
+goes to the landing.** (`exists_indep_subset` is `(le_finIndepRatio_iff G).1 le_rfl S hS` once that lemma is proved.)
+
+**DB4. `data/fs133/claims-K1.md`** (the coordinator's file; for the dated lines the amendments ask for) — the four
+ruled differences, each one binder that neither the statement nor its proof reads, dropped:
+
+| statement | binder dropped | why it was unread | ruling |
+|---|---|---|---|
+| `OneClass.exists_turnInvariant` | `hshift : ∀ z, MapsTo (shiftLab z) C C` | a rotation of a translation-invariant law is translation-invariant by the covariance `shiftLab z ∘ turnLab u = turnLab u ∘ shiftLab (kCoeff u * z)` alone, whatever its carrier | Amendment 1, item 3 |
+| `OneClass.exists_foelner_finset` | `[Module ℚ A]` | the sequence comes from polynomial growth of a countable commutative group: no basis, no scalar | Amendment 2 |
+| `Plane.sectionDensity_univ` | `[MeasurableSpace Ω]` | entered by the file's `variable` line; `sectionDensity` takes only `[MeasurableSpace X]`, and the statement measures nothing on `Ω` | Amendment 3 |
+| `Plane.sectionDensity_empty` | `[MeasurableSpace Ω]` | the same | Amendment 3 |
+
+**DB5. `ARCHITECTURE.md` § 3**, the rows of the two modules (each: the status words, and two names the
+experience pass changed and the rows did not follow):
+- `Plane/OneClass/SectionDensity`: "**FS-133 (FS133-K1; a skeleton).**" → "**FS-133 (FS133-K1's statements,
+  FS133-IB1's proofs; no `sorry`).**"; "`sectionDensity_pos_set`" → "`sectionDensity_setOf_pos`".
+- `Plane/OneClass/InvariantLaw`: "**FS-133 (FS133-K1; a skeleton).**" → "**FS-133 (FS133-K1's statements,
+  FS133-IB1's proofs; no `sorry`).**"; "`IsShiftInvariantLaw.measure_zero_le`" →
+  "`IsShiftInvariantLaw.measure_origin_le`"; "`exists_foelner_finset`" → "`exists_foelner_finset` (any countable
+  commutative group, by polynomial growth)". The imports cells are unchanged: the three imports added are Mathlib's.
+
+**DB6. `LEAN.md` § Searching — Lean**, new bullets:
+- "Weak limits of probabilities need no metrizability of `ProbabilityMeasure X`: Mathlib's Portmanteau lemmas
+  (`ProbabilityMeasure.limsup_measure_closed_le_of_tendsto`, `…tendsto_measure_of_null_frontier_of_tendsto'` with
+  `IsClopen.frontier_eq`) and `ProbabilityMeasure.tendsto_iff_forall_integral_tendsto` are stated for any filter, so
+  a cluster point is taken along `Ultrafilter.of atTop` by `isCompact_univ.ultrafilter_le_nhds`, and a closed class
+  of probabilities is shown closed by `isClosed_iff_forall_filter`. `CompactSpace (ProbabilityMeasure X)` needs
+  `Mathlib.MeasureTheory.Measure.Prokhorov` (FS133-IB1)."
+- "A common fixed point of commuting continuous maps of a compact space on a closed class of probabilities, with no
+  Markov–Kakutani: one map by Cesàro averages (`OneClass.exists_fixed_of_average`, private), then
+  `IsCompact.inter_iInter_nonempty` over the closed sets of fixed probabilities, the finite case by induction on the
+  `Finset` (FS133-IB1)."
+- "A Følner sequence of any countable commutative group by polynomial growth: the images of the boxes `[0, N]^Z` have
+  at most `(N + 1)^#Z` points, so some step grows by at most `1 + ε` (`tendsto_pow_const_div_const_pow_of_one_lt`);
+  no basis (`OneClass.exists_foelner_finset`, FS133-IB1)."
+- "`measurable_pi_apply g (measurableSet_singleton true)` does not elaborate against `MeasurableSet {I | I g =
+  true}`, nor `IsClosed.preimage` against a set-builder: the elaborator does not unify a preimage with a `setOf`.
+  State it as `show MeasurableSet ((fun I => I g) ⁻¹' {true}) from …` (FS133-IB1)."
+- "A section's `variable [MeasurableSpace Ω]` enters every theorem whose statement names `Ω`, though the definition
+  the statement is about does not take it; with a `sorry` body the `unusedSectionVars` linter is silent and with a
+  proof it warns, so a skeleton can carry an unread instance binder that only its proof shows
+  (`Plane.sectionDensity_univ`; `omit … in`, FS133-IB1)."
+- "`obtain ⟨…⟩ := f ?_ … ?_` lost its `?_` goals here (the next bullet read 'no goals'); `suffices` the destructured
+  form, then `refine f ?_ … ?_`, keeps them in order. `integral_indicator_one` is not in the closure of
+  `Mathlib.MeasureTheory.Integral.Bochner.Basic`; `integral_eq_lintegral_pos_part_sub_lintegral_neg_part` is. At the
+  pin `lintegral_finset_sum`, `integral_finset_sum_measure` and `Measure.coe_finset_sum` are deprecated for
+  `lintegral_finsetSum`, `integral_finsetSum_measure`, `Measure.coe_finsetSum` (FS133-IB1)."
+
+**DB7. Not run in this job** (the landing's, on the joined tree): `scripts/axioms.sh` (it fails by design until the
+import of lane A is declared to it), `vacuity.sh`, `dupnames.sh`, `assumptions.sh`, the lint. The private helpers'
+names are private (`_private.…`), so none can double a public name; `dupnames.sh` on the joined tree is still what
+shows it.

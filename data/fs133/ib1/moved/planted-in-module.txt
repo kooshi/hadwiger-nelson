@@ -1,0 +1,17 @@
+Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw: DIFFERENT 2, IDENTICAL 8
+  DIFFERENT       theorem  HadwigerNelson.OneClass.exists_foelner_finset
+      only before: Module Rat
+      only after:  —
+  DIFFERENT       theorem  HadwigerNelson.OneClass.exists_turnInvariant
+Proofs.HadwigerNelson.Plane.OneClass.SectionDensity: DIFFERENT 3, IDENTICAL 6
+  DIFFERENT       theorem  HadwigerNelson.Plane.ofReal_integral_le_measure_pos
+  DIFFERENT       theorem  HadwigerNelson.Plane.sectionDensity_empty
+  DIFFERENT       theorem  HadwigerNelson.Plane.sectionDensity_univ
+constants of the first dump: 19  DIFFERENT 5  IDENTICAL 14  new in the second: 0
+ruled: 4
+  RULED-DROP      HadwigerNelson.OneClass.exists_foelner_finset: binder 2 dropped — instance `inst` : (((((c Module [0,(p u_1)]) (c Rat [])) #1) (c Rat.semiring [])) (((c AddCommGroup.toAddCommMonoid [(p u_1)]) #1) #0))
+  RULED-DROP      HadwigerNelson.OneClass.exists_turnInvariant: binder 8 dropped — explicit `hshift` : (pi.d z (((c Subtype [(S 0)]) (c Complex [])) (lam.d x (c Complex []) ((((((c Membership.mem [0,0]) (c Complex [])) ((((((c IntermediateField [0,0]) (…
+  RULED-DROP      HadwigerNelson.Plane.sectionDensity_empty: binder 3 dropped — instance `inst` : ((c MeasurableSpace [(p u_2)]) #1)
+  RULED-DROP      HadwigerNelson.Plane.sectionDensity_univ: binder 3 dropped — instance `inst` : ((c MeasurableSpace [(p u_2)]) #1)
+  DIFFERENT       HadwigerNelson.Plane.ofReal_integral_le_measure_pos  (not ruled)
+MOVED FAILED: 1
