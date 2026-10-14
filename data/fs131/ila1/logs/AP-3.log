@@ -1,0 +1,25 @@
+data/fs131/ila1/work/AdmissiblePrime.lean:22:16: warning: declaration uses `sorry`
+data/fs131/ila1/work/AdmissiblePrime.lean:28:16: warning: declaration uses `sorry`
+data/fs131/ila1/work/AdmissiblePrime.lean:32:16: warning: declaration uses `sorry`
+data/fs131/ila1/work/AdmissiblePrime.lean:47:66: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑(eval t (minpoly ℤ θ))
+in the target expression
+  eval (↑t) b * ↑(eval (↑t) (minpoly ℤ θ)) = 0
+
+K : Type u_1
+inst✝² : Field K
+inst✝¹ : NumberField K
+θ : 𝓞 K
+q : ℕ
+inst✝ : Fact (Nat.Prime q)
+hq : ¬q ∣ RingOfIntegers.exponent θ
+t : ℤ
+ht : ↑q ∣ eval t (minpoly ℤ θ)
+e : (ZMod q)[X] ⧸ Ideal.span {Polynomial.map (Int.castRingHom (ZMod q)) (minpoly ℤ θ)} ≃+* 𝓞 K ⧸ Ideal.span {↑q} :=
+  RingOfIntegers.ZModXQuotSpanEquivQuotSpan hq
+b : (ZMod q)[X]
+ha :
+  b * Polynomial.map (Int.castRingHom (ZMod q)) (minpoly ℤ θ) ∈
+    Ideal.span {Polynomial.map (Int.castRingHom (ZMod q)) (minpoly ℤ θ)}
+⊢ eval (↑t) b * ↑(eval (↑t) (minpoly ℤ θ)) = 0
+lean-exit 1

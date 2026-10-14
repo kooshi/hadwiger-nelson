@@ -1,0 +1,2 @@
+'HadwigerNelson.Rigidity.exists_residueHom_unramified' depends on axioms: [propext, Classical.choice, Quot.sound]
+lean-exit 0

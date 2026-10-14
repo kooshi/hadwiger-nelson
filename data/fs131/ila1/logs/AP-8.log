@@ -1,0 +1,18 @@
+data/fs131/ila1/work/AdmissiblePrime.lean:22:16: warning: declaration uses `sorry`
+data/fs131/ila1/work/AdmissiblePrime.lean:36:44: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (↑↑y)⁻¹ * (↑↑y * ?b)
+in the target expression
+  α = (↑↑↑y)⁻¹ * (↑y * α)
+
+K : Type u_1
+inst✝¹ : Field K
+inst✝ : NumberField K
+α : K
+hα : ℚ⟮α⟯ = ⊤
+y : ℤ
+hy0 : y ≠ 0
+hy : IsIntegral ℤ (y • α)
+hy' : ↑↑y ≠ 0
+⊢ α = (↑↑↑y)⁻¹ * (↑y * α)
+data/fs131/ila1/work/AdmissiblePrime.lean:38:28: error(lean.unknownIdentifier): Unknown constant `IntermediateField.ratCast_mem`
+lean-exit 1
