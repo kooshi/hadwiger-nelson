@@ -22,6 +22,7 @@ D11b: slot found once, replaced
 D12 (6 bullets): slot found once, inserted after
 D13 (16 bullets): slot found once, inserted after
 D14: GATE_CHANGES entry inserted after the FS133-LD1 entry
+D14b: superseded-count entries (before the 'ℤ[i]' entry): 9038 | 9101 | declarations=17902 | 17902 | declarations=17902 refutations-skipped=234 sites=1454
 D15: IDB3's D5 and the LDB1 line inserted after the slot's line (the slot's line is not the file's last line: see CHECK)
 filed: ARCHITECTURE.md, BIBLIOGRAPHY.md, CLAUDE.md, LEAN.md, LEDGER.md, data/fs131/claims-NF2.md, tools/claude_md_fact_audit.py
 CLAUDE.md bytes 78773

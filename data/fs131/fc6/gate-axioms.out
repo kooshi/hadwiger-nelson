@@ -1,0 +1,768 @@
+    audited: 9824 records — 9438 clean on the standard axioms, 355 axiom-free, 26 imported (resting on a declared outside theorem), 5 declared purchase(s)
+    clean records, by axiom set:
+       9023  [propext, Classical.choice, Quot.sound]
+        306  [propext]
+        108  [propext, Quot.sound]
+          1  [Quot.sound]
+        355  (no axioms): HadwigerNelson.Adjoin.approx, HadwigerNelson.DensityBound.BesselCert.CellSpec.N, HadwigerNelson.DensityBound.BesselCert.CellSpec.casesOn, HadwigerNelson.DensityBound.BesselCert.CellSpec.ctorIdx, HadwigerNelson.DensityBound.BesselCert.CellSpec.entry, HadwigerNelson.DensityBound.BesselCert.CellSpec.exit, HadwigerNelson.DensityBound.BesselCert.CellSpec.mk.inj, HadwigerNelson.DensityBound.BesselCert.CellSpec.mk.noConfusion, HadwigerNelson.DensityBound.BesselCert.CellSpec.mk.sizeOf_spec, HadwigerNelson.DensityBound.BesselCert.CellSpec.noConfusion, HadwigerNelson.DensityBound.BesselCert.CellSpec.noConfusionType, HadwigerNelson.DensityBound.BesselCert.CellSpec.recOn, HadwigerNelson.DensityBound.BesselCert.CellSpec.t0, HadwigerNelson.DensityBound.BesselCert.CellSpec.w, HadwigerNelson.DensityBound.BesselCert.Cells.P23, HadwigerNelson.DensityBound.BesselCert.Cells.allCells, HadwigerNelson.DensityBound.BesselCert.Cells.allCells_linked, HadwigerNelson.DensityBound.BesselCert.Cells.code0, HadwigerNelson.DensityBound.BesselCert.Cells.code0_init, HadwigerNelson.DensityBound.BesselCert.Cells.us23, HadwigerNelson.DensityBound.BesselCert.Core.P0, HadwigerNelson.DensityBound.BesselCert.Core.P1, HadwigerNelson.DensityBound.BesselCert.Core.R0, HadwigerNelson.DensityBound.BesselCert.Core.R1, HadwigerNelson.DensityBound.BesselCert.Core.casesOn, HadwigerNelson.DensityBound.BesselCert.Core.ctorIdx, HadwigerNelson.DensityBound.BesselCert.Core.err, HadwigerNelson.DensityBound.BesselCert.Core.mk.inj, HadwigerNelson.DensityBound.BesselCert.Core.mk.noConfusion, HadwigerNelson.DensityBound.BesselCert.Core.mk.sizeOf_spec, HadwigerNelson.DensityBound.BesselCert.Core.noConfusion, HadwigerNelson.DensityBound.BesselCert.Core.noConfusionType, HadwigerNelson.DensityBound.BesselCert.Core.ok, HadwigerNelson.DensityBound.BesselCert.Core.q, HadwigerNelson.DensityBound.BesselCert.Core.recOn, HadwigerNelson.DensityBound.BesselCert.F144, HadwigerNelson.DensityBound.BesselCert.F216, HadwigerNelson.DensityBound.BesselCert.F72, HadwigerNelson.DensityBound.BesselCert.H71, HadwigerNelson.DensityBound.BesselCert.K, HadwigerNelson.DensityBound.BesselCert.Linked, HadwigerNelson.DensityBound.BesselCert.Linked.eq_def, HadwigerNelson.DensityBound.BesselCert.Params.Ds, HadwigerNelson.DensityBound.BesselCert.Params.TD, HadwigerNelson.DensityBound.BesselCert.Params.TN, HadwigerNelson.DensityBound.BesselCert.Params.WS, HadwigerNelson.DensityBound.BesselCert.Params.Ws, HadwigerNelson.DensityBound.BesselCert.Params.casesOn, HadwigerNelson.DensityBound.BesselCert.Params.ctorIdx, HadwigerNelson.DensityBound.BesselCert.Params.mk.inj, HadwigerNelson.DensityBound.BesselCert.Params.mk.noConfusion, HadwigerNelson.DensityBound.BesselCert.Params.mk.sizeOf_spec, HadwigerNelson.DensityBound.BesselCert.Params.noConfusion, HadwigerNelson.DensityBound.BesselCert.Params.noConfusionType, HadwigerNelson.DensityBound.BesselCert.Params.recOn, HadwigerNelson.DensityBound.BesselCert.Params.w1N, HadwigerNelson.DensityBound.BesselCert.S, HadwigerNelson.DensityBound.BesselCert.SC, HadwigerNelson.DensityBound.BesselCert.St.casesOn, HadwigerNelson.DensityBound.BesselCert.St.ctorIdx, HadwigerNelson.DensityBound.BesselCert.St.m0, HadwigerNelson.DensityBound.BesselCert.St.m1, HadwigerNelson.DensityBound.BesselCert.St.mk.inj, HadwigerNelson.DensityBound.BesselCert.St.mk.noConfusion, HadwigerNelson.DensityBound.BesselCert.St.mk.sizeOf_spec, HadwigerNelson.DensityBound.BesselCert.St.noConfusion, HadwigerNelson.DensityBound.BesselCert.St.noConfusionType, HadwigerNelson.DensityBound.BesselCert.St.r, HadwigerNelson.DensityBound.BesselCert.St.recOn, HadwigerNelson.DensityBound.BesselCert.T2, HadwigerNelson.DensityBound.BesselCert.Wh, HadwigerNelson.DensityBound.BesselCert.Wh.eq_def, HadwigerNelson.DensityBound.BesselCert.absL, HadwigerNelson.DensityBound.BesselCert.absL.eq_def, HadwigerNelson.DensityBound.BesselCert.addL, HadwigerNelson.DensityBound.BesselCert.addL.eq_def, HadwigerNelson.DensityBound.BesselCert.affX, HadwigerNelson.DensityBound.BesselCert.affX.eq_def, HadwigerNelson.DensityBound.BesselCert.cdiv, HadwigerNelson.DensityBound.BesselCert.chainEnd, HadwigerNelson.DensityBound.BesselCert.chainEnd.eq_def, HadwigerNelson.DensityBound.BesselCert.chainExit, HadwigerNelson.DensityBound.BesselCert.chainExit.eq_def, HadwigerNelson.DensityBound.BesselCert.core, HadwigerNelson.DensityBound.BesselCert.coreOf, HadwigerNelson.DensityBound.BesselCert.core_eq, HadwigerNelson.DensityBound.BesselCert.dL, HadwigerNelson.DensityBound.BesselCert.decode, HadwigerNelson.DensityBound.BesselCert.decodeAux, HadwigerNelson.DensityBound.BesselCert.derivAux, HadwigerNelson.DensityBound.BesselCert.derivAux.eq_def, HadwigerNelson.DensityBound.BesselCert.evF, HadwigerNelson.DensityBound.BesselCert.evF.eq_def, HadwigerNelson.DensityBound.BesselCert.evZ, HadwigerNelson.DensityBound.BesselCert.evZ.eq_def, HadwigerNelson.DensityBound.BesselCert.homogL, HadwigerNelson.DensityBound.BesselCert.homogL.eq_def, HadwigerNelson.DensityBound.BesselCert.initStates, HadwigerNelson.DensityBound.BesselCert.instDecidableEqSt, HadwigerNelson.DensityBound.BesselCert.instDecidableEqSt.decEq, HadwigerNelson.DensityBound.BesselCert.powScale, HadwigerNelson.DensityBound.BesselCert.powScale.eq_def, HadwigerNelson.DensityBound.BesselCert.pw, HadwigerNelson.DensityBound.BesselCert.pw.eq_def, HadwigerNelson.DensityBound.BesselCert.quadOk, HadwigerNelson.DensityBound.BesselCert.rnd, HadwigerNelson.DensityBound.BesselCert.shiftL, HadwigerNelson.DensityBound.BesselCert.shiftL.eq_def, HadwigerNelson.DensityBound.BesselCert.smulL, HadwigerNelson.DensityBound.BesselCert.smulL.eq_def, HadwigerNelson.DensityBound.BesselCert.taylor, HadwigerNelson.DensityBound.BesselCert.taylorAux, HadwigerNelson.DensityBound.BesselCert.termNext, HadwigerNelson.DensityBound.BesselCert.termOk, HadwigerNelson.DensityBound.BesselCert.xList, HadwigerNelson.DensityBound.X23Check.B72, HadwigerNelson.DensityBound.X23Check.C4.add, HadwigerNelson.DensityBound.X23Check.C4.beq, HadwigerNelson.DensityBound.X23Check.C4.casesOn, HadwigerNelson.DensityBound.X23Check.C4.cond, HadwigerNelson.DensityBound.X23Check.C4.conj, HadwigerNelson.DensityBound.X23Check.C4.ctorIdx, HadwigerNelson.DensityBound.X23Check.C4.im, HadwigerNelson.DensityBound.X23Check.C4.mk.inj, HadwigerNelson.DensityBound.X23Check.C4.mk.noConfusion, HadwigerNelson.DensityBound.X23Check.C4.mk.sizeOf_spec, HadwigerNelson.DensityBound.X23Check.C4.mul, HadwigerNelson.DensityBound.X23Check.C4.noConfusion, HadwigerNelson.DensityBound.X23Check.C4.noConfusionType, HadwigerNelson.DensityBound.X23Check.C4.normSq, HadwigerNelson.DensityBound.X23Check.C4.re, HadwigerNelson.DensityBound.X23Check.C4.recOn, HadwigerNelson.DensityBound.X23Check.C4.smul, HadwigerNelson.DensityBound.X23Check.C4.sub, HadwigerNelson.DensityBound.X23Check.Encl.K, HadwigerNelson.DensityBound.X23Check.Encl.casesOn, HadwigerNelson.DensityBound.X23Check.Encl.ctorIdx, HadwigerNelson.DensityBound.X23Check.Encl.l11, HadwigerNelson.DensityBound.X23Check.Encl.l3, HadwigerNelson.DensityBound.X23Check.Encl.l33, HadwigerNelson.DensityBound.X23Check.Encl.mk.inj, HadwigerNelson.DensityBound.X23Check.Encl.mk.noConfusion, HadwigerNelson.DensityBound.X23Check.Encl.mk.sizeOf_spec, HadwigerNelson.DensityBound.X23Check.Encl.noConfusion, HadwigerNelson.DensityBound.X23Check.Encl.noConfusionType, HadwigerNelson.DensityBound.X23Check.Encl.ok, HadwigerNelson.DensityBound.X23Check.Encl.recOn, HadwigerNelson.DensityBound.X23Check.Encl.u11, HadwigerNelson.DensityBound.X23Check.Encl.u3, HadwigerNelson.DensityBound.X23Check.Encl.u33, HadwigerNelson.DensityBound.X23Check.GroupsOk, HadwigerNelson.DensityBound.X23Check.KF, HadwigerNelson.DensityBound.X23Check.M23, HadwigerNelson.DensityBound.X23Check.OFF, HadwigerNelson.DensityBound.X23Check.OFFS, HadwigerNelson.DensityBound.X23Check.Q4.a, HadwigerNelson.DensityBound.X23Check.Q4.add, HadwigerNelson.DensityBound.X23Check.Q4.b, HadwigerNelson.DensityBound.X23Check.Q4.beq, HadwigerNelson.DensityBound.X23Check.Q4.c, HadwigerNelson.DensityBound.X23Check.Q4.casesOn, HadwigerNelson.DensityBound.X23Check.Q4.ctorIdx, HadwigerNelson.DensityBound.X23Check.Q4.d, HadwigerNelson.DensityBound.X23Check.Q4.mk.inj, HadwigerNelson.DensityBound.X23Check.Q4.mk.noConfusion, HadwigerNelson.DensityBound.X23Check.Q4.mk.sizeOf_spec, HadwigerNelson.DensityBound.X23Check.Q4.mul, HadwigerNelson.DensityBound.X23Check.Q4.neg, HadwigerNelson.DensityBound.X23Check.Q4.noConfusion, HadwigerNelson.DensityBound.X23Check.Q4.noConfusionType, HadwigerNelson.DensityBound.X23Check.Q4.ofInt, HadwigerNelson.DensityBound.X23Check.Q4.recOn, HadwigerNelson.DensityBound.X23Check.Q4.smul, HadwigerNelson.DensityBound.X23Check.Q4.sub, HadwigerNelson.DensityBound.X23Check.S64, HadwigerNelson.DensityBound.X23Check.boundN, HadwigerNelson.DensityBound.X23Check.c4At, HadwigerNelson.DensityBound.X23Check.decSt, HadwigerNelson.DensityBound.X23Check.dg, HadwigerNelson.DensityBound.X23Check.digits, HadwigerNelson.DensityBound.X23Check.distOk, HadwigerNelson.DensityBound.X23Check.enclL, HadwigerNelson.DensityBound.X23Check.encl_ok, HadwigerNelson.DensityBound.X23Check.evHi, HadwigerNelson.DensityBound.X23Check.evLo, HadwigerNelson.DensityBound.X23Check.final, HadwigerNelson.DensityBound.X23Check.fr00, HadwigerNelson.DensityBound.X23Check.fr01, HadwigerNelson.DensityBound.X23Check.fr02, HadwigerNelson.DensityBound.X23Check.fr03, HadwigerNelson.DensityBound.X23Check.fr04, HadwigerNelson.DensityBound.X23Check.fr05, HadwigerNelson.DensityBound.X23Check.fr06, HadwigerNelson.DensityBound.X23Check.fr07, HadwigerNelson.DensityBound.X23Check.fr08, HadwigerNelson.DensityBound.X23Check.fr09, HadwigerNelson.DensityBound.X23Check.fr10, HadwigerNelson.DensityBound.X23Check.fr100, HadwigerNelson.DensityBound.X23Check.fr101, HadwigerNelson.DensityBound.X23Check.fr102, HadwigerNelson.DensityBound.X23Check.fr11, HadwigerNelson.DensityBound.X23Check.fr12, HadwigerNelson.DensityBound.X23Check.fr13, HadwigerNelson.DensityBound.X23Check.fr14, HadwigerNelson.DensityBound.X23Check.fr15, HadwigerNelson.DensityBound.X23Check.fr16, HadwigerNelson.DensityBound.X23Check.fr17, HadwigerNelson.DensityBound.X23Check.fr18, HadwigerNelson.DensityBound.X23Check.fr19, HadwigerNelson.DensityBound.X23Check.fr20, HadwigerNelson.DensityBound.X23Check.fr21, HadwigerNelson.DensityBound.X23Check.fr22, HadwigerNelson.DensityBound.X23Check.fr23, HadwigerNelson.DensityBound.X23Check.fr24, HadwigerNelson.DensityBound.X23Check.fr25, HadwigerNelson.DensityBound.X23Check.fr26, HadwigerNelson.DensityBound.X23Check.fr27, HadwigerNelson.DensityBound.X23Check.fr28, HadwigerNelson.DensityBound.X23Check.fr29, HadwigerNelson.DensityBound.X23Check.fr30, HadwigerNelson.DensityBound.X23Check.fr31, HadwigerNelson.DensityBound.X23Check.fr32, HadwigerNelson.DensityBound.X23Check.fr33, HadwigerNelson.DensityBound.X23Check.fr34, HadwigerNelson.DensityBound.X23Check.fr35, HadwigerNelson.DensityBound.X23Check.fr36, HadwigerNelson.DensityBound.X23Check.fr37, HadwigerNelson.DensityBound.X23Check.fr38, HadwigerNelson.DensityBound.X23Check.fr39, HadwigerNelson.DensityBound.X23Check.fr40, HadwigerNelson.DensityBound.X23Check.fr41, HadwigerNelson.DensityBound.X23Check.fr42, HadwigerNelson.DensityBound.X23Check.fr43, HadwigerNelson.DensityBound.X23Check.fr44, HadwigerNelson.DensityBound.X23Check.fr45, HadwigerNelson.DensityBound.X23Check.fr46, HadwigerNelson.DensityBound.X23Check.fr47, HadwigerNelson.DensityBound.X23Check.fr48, HadwigerNelson.DensityBound.X23Check.fr49, HadwigerNelson.DensityBound.X23Check.fr50, HadwigerNelson.DensityBound.X23Check.fr51, HadwigerNelson.DensityBound.X23Check.fr52, HadwigerNelson.DensityBound.X23Check.fr53, HadwigerNelson.DensityBound.X23Check.fr54, HadwigerNelson.DensityBound.X23Check.fr55, HadwigerNelson.DensityBound.X23Check.fr56, HadwigerNelson.DensityBound.X23Check.fr57, HadwigerNelson.DensityBound.X23Check.fr58, HadwigerNelson.DensityBound.X23Check.fr59, HadwigerNelson.DensityBound.X23Check.fr60, HadwigerNelson.DensityBound.X23Check.fr61, HadwigerNelson.DensityBound.X23Check.fr62, HadwigerNelson.DensityBound.X23Check.fr63, HadwigerNelson.DensityBound.X23Check.fr64, HadwigerNelson.DensityBound.X23Check.fr65, HadwigerNelson.DensityBound.X23Check.fr66, HadwigerNelson.DensityBound.X23Check.fr67, HadwigerNelson.DensityBound.X23Check.fr68, HadwigerNelson.DensityBound.X23Check.fr69, HadwigerNelson.DensityBound.X23Check.fr70, HadwigerNelson.DensityBound.X23Check.fr71, HadwigerNelson.DensityBound.X23Check.fr72, HadwigerNelson.DensityBound.X23Check.fr73, HadwigerNelson.DensityBound.X23Check.fr74, HadwigerNelson.DensityBound.X23Check.fr75, HadwigerNelson.DensityBound.X23Check.fr76, HadwigerNelson.DensityBound.X23Check.fr77, HadwigerNelson.DensityBound.X23Check.fr78, HadwigerNelson.DensityBound.X23Check.fr79, HadwigerNelson.DensityBound.X23Check.fr80, HadwigerNelson.DensityBound.X23Check.fr81, HadwigerNelson.DensityBound.X23Check.fr82, HadwigerNelson.DensityBound.X23Check.fr83, HadwigerNelson.DensityBound.X23Check.fr84, HadwigerNelson.DensityBound.X23Check.fr85, HadwigerNelson.DensityBound.X23Check.fr86, HadwigerNelson.DensityBound.X23Check.fr87, HadwigerNelson.DensityBound.X23Check.fr88, HadwigerNelson.DensityBound.X23Check.fr89, HadwigerNelson.DensityBound.X23Check.fr90, HadwigerNelson.DensityBound.X23Check.fr91, HadwigerNelson.DensityBound.X23Check.fr92, HadwigerNelson.DensityBound.X23Check.fr93, HadwigerNelson.DensityBound.X23Check.fr94, HadwigerNelson.DensityBound.X23Check.fr95, HadwigerNelson.DensityBound.X23Check.fr96, HadwigerNelson.DensityBound.X23Check.fr97, HadwigerNelson.DensityBound.X23Check.fr98, HadwigerNelson.DensityBound.X23Check.fr99, HadwigerNelson.DensityBound.X23Check.frL, HadwigerNelson.DensityBound.X23Check.groupsOf, HadwigerNelson.DensityBound.X23Check.highMul, HadwigerNelson.DensityBound.X23Check.inGroup, HadwigerNelson.DensityBound.X23Check.lowMul, HadwigerNelson.DensityBound.X23Check.oneGroup, HadwigerNelson.DensityBound.X23Check.pack, HadwigerNelson.DensityBound.X23Check.packSt, HadwigerNelson.DensityBound.X23Check.ptsL, HadwigerNelson.DensityBound.X23Check.q4At, HadwigerNelson.DensityBound.X23Check.rowB, HadwigerNelson.DensityBound.X23Check.rowC, HadwigerNelson.DensityBound.X23Check.rowI, HadwigerNelson.DensityBound.X23Check.rowJ, HadwigerNelson.DensityBound.X23Check.rowM, HadwigerNelson.DensityBound.X23Check.rowN, HadwigerNelson.DensityBound.X23Check.rowU, HadwigerNelson.DensityBound.X23Check.rowV, HadwigerNelson.DensityBound.X23Check.sdg, HadwigerNelson.DensityBound.X23Check.sqd, HadwigerNelson.DensityBound.X23Check.termOk, HadwigerNelson.DensityBound.X23Check.vertsL, HadwigerNelson.DensityBound.X23Check.verts_length, HadwigerNelson.DensityBound.X23Check.w0N, HadwigerNelson.DensityBound.X23Check.w1N, HadwigerNelson.DensityBound.X23Check.w2T, HadwigerNelson.DensityBound.X23Check.wc00, HadwigerNelson.DensityBound.X23Check.wc01, HadwigerNelson.DensityBound.X23Check.wc02, HadwigerNelson.DensityBound.X23Check.wc03, HadwigerNelson.DensityBound.X23Check.wc04, HadwigerNelson.DensityBound.X23Check.wc05, HadwigerNelson.DensityBound.X23Check.wc06, HadwigerNelson.DensityBound.X23Check.wc07, HadwigerNelson.DensityBound.X23Check.wcR, HadwigerNelson.Outside.OAI158.ChainJoin.joint, HadwigerNelson.Outside.OAI158.CountableApprox.truncate, HadwigerNelson.Outside.OAI158.RectangleDensity.Code, HadwigerNelson.Outside.OAI158.Spectral.MomentTest, HadwigerNelson.PartialColoring.map, HadwigerNelson.Plane.ArcMap.SemiKind.O.sizeOf_spec, HadwigerNelson.Plane.ArcMap.SemiKind.T.sizeOf_spec, HadwigerNelson.Plane.ArcMap.SemiKind.ofNat_ctorIdx, HadwigerNelson.Plane.ArcMap.fin_two_eq_of_ne, HadwigerNelson.Plane.BranchGerms.fin3_adj, HadwigerNelson.Plane.BranchGerms.mem_gapGerm, HadwigerNelson.Plane.BranchGerms.mem_gapSec, HadwigerNelson.Plane.CircleSide, HadwigerNelson.Plane.CircleSide.flip, HadwigerNelson.Plane.CircleSide.flip_flip, HadwigerNelson.Plane.CircleSide.flip_inside, HadwigerNelson.Plane.CircleSide.flip_outside, HadwigerNelson.Plane.fin_three_eq_or_of_ne, HadwigerNelson.Plane.instDecidableEqCircleSide, HadwigerNelson.Plane.labHi, HadwigerNelson.Q4.approx, HadwigerNelson.StandingFive.squaresBelow_11, HadwigerNelson.Stripe.wheel_all, HadwigerNelson.Thomassen.ReachIn.mono, HadwigerNelson.edgeGraph_adj_mono, HadwigerNelson.edgeGraph_mono, HadwigerNelson.edgeHom, HadwigerNelson.fanEdges, HadwigerNelson.sepChain, HadwigerNelson.sepIvals, HadwigerNelson.valid_comp_of_injective
+    declared purchases:
+      HadwigerNelson.moserSpindle_cnf_unsat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_lrat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindleCubes_unsat  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_cubes  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.four_le_chromaticNumber_plane_certified  [9 native, propext, Classical.choice, Quot.sound]
+    declared imports (2): HadwigerNelson.StandingFive.kloosterman_bound, HadwigerNelson.Outside.OAI158.no_proper_five_coloring
+    imported records (26):
+      HadwigerNelson.StandingFive.kloostermanBound_of_ringChar_ne_two  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.targetFloor_seven_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.targetFloor_six_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.circle_sum_le_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.standingFloor_seven_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.standingFloor_five_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.seven_le_localBound_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.StandingFive.five_le_chromaticNumber_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine_of_colorable_three  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeColourCriterion.exists_maximal_of_torsion  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeColourCriterion.exists_normOne_zero_of_card_ne_nine  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeColourCriterion.targetFloor_four_weil  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_eq_localBound_of_le_four  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_eq_three_iff  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_le_three_iff  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeFourColours.colorable_three_planeOver_iff  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeFourColours.exists_maximal_card_nine_sqrt_three  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeFourColours.localBound_le_chromaticNumber_of_le_four  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.ThreeFourColours.localBound_le_chromaticNumber_or_four_le  [propext, Classical.choice, Quot.sound, HadwigerNelson.StandingFive.kloosterman_bound]
+      HadwigerNelson.Outside.OAI158.not_colorable_five  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+      HadwigerNelson.Outside.OAI158.six_le_chromaticNumber_plane  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+      HadwigerNelson.Outside.OAI158.chromaticNumber_plane_six_or_seven  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+      HadwigerNelson.Outside.OAI158.six_le_chiM0  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+      HadwigerNelson.Outside.OAI158.chiM0_six_or_seven  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+      HadwigerNelson.Plane.radius_five  [propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+    library axioms other than native auxiliaries (2): HadwigerNelson.Outside.OAI158.no_proper_five_coloring, HadwigerNelson.StandingFive.kloosterman_bound; native auxiliaries: 10
+    recorded count in CLAUDE.md § Trust ledger: match (clean, purchases and imported compared)
+    --- changes since the previous complete run ---
+    previous: data/fs133/ld1/gate/receipt-axioms-final.log
+    + HadwigerNelson.DensityBound.BesselCert.AllOk  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.AllOk.eq_def  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.CellOk  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.CellSpec.N  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.CellSpec.casesOn  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.CellSpec.ctorIdx  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.CellSpec.entry  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.CellSpec.exit  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.CellSpec.mk.inj  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.CellSpec.mk.injEq  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.CellSpec.mk.noConfusion  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.CellSpec.mk.sizeOf_spec  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.CellSpec.noConfusion  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.CellSpec.noConfusionType  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.CellSpec.recOn  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.CellSpec.t0  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.CellSpec.w  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Cells.P23  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Cells.allCells  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Cells.allCells_linked  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Cells.allCells_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.allCells_tail  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.code0  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Cells.code0_init  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Cells.phiApprox_ge  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg00_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg01_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg02_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg03_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg04_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg05_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg06_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg07_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg08_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg09_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg10_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg11_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg12_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg13_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg14_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg15_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg16_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg17_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg18_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg19_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg20_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg21_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg22_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg23_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg24_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg25_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg26_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg27_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg28_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg29_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg30_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg31_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg32_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg33_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg34_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg35_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg36_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg37_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg38_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg39_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg40_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg41_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg42_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg43_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg44_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.seg45_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Cells.us23  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Close  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.Core.P0  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Core.P1  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Core.R0  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Core.R1  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Core.casesOn  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Core.ctorIdx  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Core.err  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Core.mk.inj  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Core.mk.injEq  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Core.mk.noConfusion  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Core.mk.sizeOf_spec  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Core.noConfusion  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Core.noConfusionType  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Core.ok  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Core.q  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Core.recOn  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.F144  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.F216  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.F72  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.H71  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.K  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.K_eq  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.K_pos  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.Linked  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Linked.eq_def  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Params.Ds  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Params.TD  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Params.TN  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Params.WS  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Params.Ws  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Params.casesOn  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Params.ctorIdx  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Params.mk.inj  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Params.mk.injEq  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.Params.mk.noConfusion  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Params.mk.sizeOf_spec  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Params.noConfusion  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Params.noConfusionType  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Params.recOn  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Params.w1N  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.S  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.SC  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.SC_eq  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.SC_pos  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.S_pos  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.S_real  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.St.Valid  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.St.casesOn  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.St.ctorIdx  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.St.m0  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.St.m1  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.St.mk.inj  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.St.mk.injEq  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.St.mk.noConfusion  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.St.mk.sizeOf_spec  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.St.noConfusion  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.St.noConfusionType  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.St.r  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.St.recOn  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.StatesValid  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.T2  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.T2_pos  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.Wh  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.Wh.eq_def  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.absL  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.absL.eq_def  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.abs_J0_tail  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.abs_div_sub_le_cdiv  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.abs_ev_le  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.addL  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.addL.eq_def  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.affX  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.affX.eq_def  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.allOk_append  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.besselField_eq  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.cast_Wh  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.cast_evZ  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.cast_natAbs_eq  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.cdiv  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.cellCheck  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.cellCheck_sound  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.chainEnd  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.chainEnd.eq_def  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.chainExit  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.chainExit.eq_def  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.chain_sound  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.close_self  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.core  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.coreOf  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.coreOf_sound  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.core_eq  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.covering_sound  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.dL  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.decode  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.decodeAux  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.defect_bound  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.defect_im  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.defect_im_mul  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.defect_im_zero  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.defect_re  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.derivAux  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.derivAux.eq_def  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.ev  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.ev.eq_def  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.evF  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.evF.eq_def  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.evF_eq  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.evF_zero  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.evZ  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.evZ.eq_def  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.ev_absL_nonneg  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.ev_addL  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.ev_affX  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.ev_cons  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.ev_dL_cons  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.ev_derivAux_succ  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.ev_eq_Wh_div  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.ev_homogL  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.ev_nil  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.ev_powScale  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.ev_shiftL  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.ev_smulL  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.ev_split  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.hasDerivAt_ev  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.hasDerivAt_pp  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.homogL  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.homogL.eq_def  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.initStates  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.instDecidableCellOk  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.instDecidableEqSt  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.instDecidableEqSt.decEq  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.instReprSt  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.instReprSt.repr  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.jsum  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.jsum.eq_def  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.jsum_eq_sum  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.le_cdiv  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.mul_ev_le_cdiv  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.mul_ev_le_cdiv'  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.powScale  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.powScale.eq_def  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.pp  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.pw  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.pw.eq_def  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.pw_eq  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.pw_pos  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.quadOk  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.quadOk_sound  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.rnd  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.shiftL  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.shiftL.eq_def  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.smulL  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.smulL.eq_def  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.statesValid_init  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.tailCheck  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.tailCheck_sound  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.tailSum  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.tailSum.eq_def  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.tailSum_sound  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.taylor  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.taylorAux  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.termNext  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.termOk  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.BesselCert.term_le_of_close  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.termsOut  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.termsOut.eq_def  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.termsOut_cons  CLEAN [propext]
+    + HadwigerNelson.DensityBound.BesselCert.termsOut_sound  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.valid_iff  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.BesselCert.xList  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.DualCert.Congruent  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.IsIndep  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.L  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.Valid.atoms  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.Valid.bound_nonneg  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.Valid.casesOn  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.Valid.cong  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.Valid.recOn  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.X  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.bound  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.casesOn  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.ctorIdx  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.limsup_le  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.mk.inj  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.mk.injEq  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.mk.noConfusion  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.mk.sizeOf_spec  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.noConfusion  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.noConfusionType  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.oneAvoidingDensityBound_of  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.phi  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.recOn  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.w1  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.w2  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.wc  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.window_bound  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.DualCert.window_le  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.J0  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.J0_eq_integral  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.J0_zero  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.J1  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.J1_eq_integral  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.J1_zero  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.Jc  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.B72  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.C4.add  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.C4.beq  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.C4.casesOn  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.C4.cond  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.C4.conj  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.C4.ctorIdx  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.C4.eq_of_beq  CLEAN [propext, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.C4.im  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.C4.mk.inj  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.C4.mk.injEq  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.C4.mk.noConfusion  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.C4.mk.sizeOf_spec  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.C4.mul  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.C4.noConfusion  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.C4.noConfusionType  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.C4.normSq  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.C4.re  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.C4.recOn  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.C4.smul  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.C4.sub  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Encl.K  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Encl.casesOn  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Encl.ctorIdx  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Encl.l11  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Encl.l3  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Encl.l33  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Encl.mk.inj  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Encl.mk.injEq  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.Encl.mk.noConfusion  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Encl.mk.sizeOf_spec  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Encl.noConfusion  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Encl.noConfusionType  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Encl.ok  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Encl.recOn  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Encl.u11  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Encl.u3  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Encl.u33  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.GroupsOk  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.KF  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.L_eq  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.M23  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.OFF  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.OFFS  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Pass  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.Q4.a  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Q4.add  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Q4.b  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Q4.beq  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Q4.c  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Q4.casesOn  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Q4.ctorIdx  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Q4.d  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Q4.eq_of_beq  CLEAN [propext, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.Q4.mk.inj  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Q4.mk.injEq  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.Q4.mk.noConfusion  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Q4.mk.sizeOf_spec  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Q4.mul  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Q4.neg  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Q4.noConfusion  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Q4.noConfusionType  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Q4.ofInt  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Q4.recOn  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Q4.smul  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.Q4.sub  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.S64  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.X23_atoms  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.X23pt  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.addGroup  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.addGroup.eq_def  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.addGroup_eq  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.adjOk  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.adj_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.atoms_dfs  CLEAN [propext, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.boundN  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.c4At  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.collect  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.collect.eq_def  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.collect_sound  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.congruent_of_rowOk  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.corrOk  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.corrOk.eq_def  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.decSt  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.dfsG  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.dfsG.eq_def  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.dfsG_append  CLEAN [propext, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.dfsG_eq_all  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.dg  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.digits  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.distOk  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.distOk_sound  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.dist_of_adj  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.dist_of_sqd  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.distsOk  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.distsOk.eq_def  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.enclL  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.encl_ok  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.encl_sqrt  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.ev  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.evHi  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.evLo  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.ev_add  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.ev_encl  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.ev_mul  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.ev_neg  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.ev_ofInt  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.ev_smul  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.ev_sub  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.final  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.finsetOf  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.forall₂_exists_left  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.forall₂_exists_right  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.forall₂_of_distsOk  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.fr00  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr00_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr01  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr01_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr02  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr02_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr03  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr03_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr04  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr04_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr05  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr05_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr06  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr06_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr07  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr07_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr08  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr08_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr09  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr09_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr10  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr100  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr100_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr101  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr101_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr102  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr102_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr10_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr11  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr11_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr12  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr12_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr13  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr13_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr14  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr14_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr15  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr15_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr16  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr16_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr17  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr17_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr18  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr18_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr19  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr19_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr20  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr20_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr21  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr21_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr22  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr22_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr23  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr23_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr24  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr24_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr25  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr25_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr26  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr26_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr27  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr27_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr28  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr28_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr29  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr29_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr30  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr30_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr31  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr31_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr32  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr32_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr33  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr33_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr34  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr34_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr35  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr35_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr36  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr36_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr37  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr37_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr38  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr38_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr39  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr39_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr40  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr40_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr41  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr41_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr42  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr42_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr43  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr43_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr44  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr44_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr45  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr45_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr46  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr46_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr47  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr47_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr48  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr48_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr49  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr49_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr50  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr50_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr51  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr51_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr52  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr52_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr53  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr53_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr54  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr54_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr55  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr55_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr56  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr56_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr57  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr57_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr58  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr58_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr59  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr59_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr60  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr60_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr61  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr61_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr62  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr62_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr63  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr63_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr64  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr64_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr65  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr65_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr66  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr66_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr67  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr67_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr68  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr68_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr69  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr69_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr70  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr70_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr71  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr71_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr72  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr72_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr73  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr73_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr74  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr74_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr75  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr75_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr76  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr76_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr77  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr77_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr78  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr78_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr79  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr79_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr80  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr80_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr81  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr81_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr82  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr82_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr83  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr83_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr84  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr84_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr85  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr85_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr86  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr86_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr87  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr87_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr88  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr88_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr89  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr89_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr90  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr90_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr91  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr91_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr92  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr92_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr93  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr93_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr94  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr94_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr95  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr95_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr96  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr96_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr97  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr97_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr98  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr98_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.fr99  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.fr99_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.frL  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.frL_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.frontier_eq  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.frontier_rt  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.groupsOf  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.groupsOk_of_getD  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.groups_eq  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.gval  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.gval_congr  CLEAN [propext, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.gval_eq_zero  CLEAN [propext, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.highMul  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.inGroup  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.land_eq_self_iff  CLEAN [propext, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.le_highMul  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.lowMul  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.lowMul_le  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.maskL  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.maskL.eq_def  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.maskL_sub_iff  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.maskOf  CLEAN [propext, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.mem_finsetOf  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.normSq_toC  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.oneGroup  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.one_group  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.pack  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.packSt  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.pass_of_getD  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.pt  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.ptsL  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.q4At  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.rowB  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.rowC  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.rowI  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.rowJ  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.rowM  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.rowN  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.rowOk  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.rowTerms  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.rowU  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.rowV  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.sdg  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.sqd  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.subtreeOk  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.sum_groups  CLEAN [propext, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.sum_ite_const  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.termOk  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.terms  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.termsOk  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.terms_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.terms_ok'  CLEAN [propext, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.testBit_maskL  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.testBit_maskOf  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.testBit_maskOf_iff  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.testBit_of_inGroup  CLEAN [propext, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.toC  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.toC_add  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.toC_cond  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.toC_mul  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.toC_smul  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.toC_sub  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.tot  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.tot.eq_def  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.tot_eq  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.tval  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.tval_pack  CLEAN [propext, Quot.sound]
+    + HadwigerNelson.DensityBound.X23Check.vertsL  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.verts_length  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.w0N  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.w1N  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.w2T  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.w2Term  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.wc00  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.wc00_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.wc01  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.wc01_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.wc02  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.wc02_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.wc03  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.wc03_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.wc04  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.wc04_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.wc05  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.wc05_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.wc06  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.wc06_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.wc07  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.wc07_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23Check.wcR  CLEAN (no axioms)
+    + HadwigerNelson.DensityBound.X23Check.wcR_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.X23_close  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23_phi  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23_ratio  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23_valid  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23dists  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.X23w0  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.abs_J0_le_of_le  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.abs_J0_le_one  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.abs_J0_sub_le  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.abs_J0_sub_re_le  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.abs_J1_le_one  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.antitoneOn_norm_Jc  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.autocorr  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.autocorr_eq_zero_of_norm_eq_one  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.besselField  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.circleAverage_exp_inner  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.circleAvg_autocorr_one  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.circleAvg_autocorr_zero  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.continuous_J0  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.continuous_J1  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.continuous_autocorr  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.dists_ok  CLEAN [propext]
+    + HadwigerNelson.DensityBound.hasDerivAt_J0  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.hasDerivAt_J1  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.hasDerivAt_Jc  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.norm_Jc_sub_le_of_defect  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.sum_circleAvg_autocorr_nonneg  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.trivialCert  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.DensityBound.trivialCert_valid  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.OneAvoidingDensityBound  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.mOne_eq_iSup_bandFree  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.mOne_le_of_oneAvoidingDensityBound  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.mOne_lt_quarter  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.oneAvoidingDensityBound  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.oneAvoidingDensityBound_model  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Plane.upperDensity_le_of_oneAvoidingDensityBound  CLEAN [propext, Classical.choice, Quot.sound]
