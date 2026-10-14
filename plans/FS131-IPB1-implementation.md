@@ -115,8 +115,9 @@ site, the rule withdrawn (18 failing), a head listed where it does not occur.
 | `RelativeCenters.centerKernel_apply` | theorem | — | `centerKernel`, `center` | |
 | `RelativeCenters.condDistrib_centerMap`, `centerKernel_comp_map` | theorem | — | `centerMap`, `centerKernel` | |
 
-**31 declarations in the cascade** (4 definitions, 27 theorems; 6 of them with the two binders inserted, 25 only
-carrying the two extra instance arguments at the applications of a cascade definition), plus **2 ADAPTED only**
+**31 declarations in the cascade** (4 definitions, 27 theorems; 8 of them with the two binders inserted — the 4
+definitions and the 4 theorems whose `omit` was dropped —, 23 only carrying the two extra instance arguments at the
+applications of a cascade definition), plus **2 ADAPTED only**
 (`Location.center_translate`, `center_orthogonal`: 350, 371). The cascade's **heads for lanes C and D** — a statement
 naming one of them carries two inserted instance arguments at each application: `CosetCenter.Embedding.frequencyLaw`,
 `CosetCenter.Embedding.center` (positions 4, 5), `RelativeCenters.centerMap`, `RelativeCenters.centerKernel`
