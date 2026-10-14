@@ -1,0 +1,46 @@
+{
+ "global_instances": [
+  [
+   52,
+   "global: on a type built from the release's own definition `OrbitSpace K` (`Factors.lean`), the release's model of the orbit space"
+  ],
+  [
+   53,
+   "global: on a type built from the release's own definition `OrbitSpace K` (`Factors.lean`), the release's model of the orbit space"
+  ],
+  [
+   54,
+   "global: on a type built from the release's own definition `OrbitSpace K` (`Factors.lean`), the release's model of the orbit space"
+  ],
+  [
+   55,
+   "global: on a type built from the release's own definition `OrbitSpace K` (`Factors.lean`), the release's model of the orbit space"
+  ],
+  [
+   56,
+   "global: on a type built from the release's own definition `OrbitSpace K` (`Factors.lean`), the release's model of the orbit space"
+  ],
+  [
+   68,
+   "global: on a type built from the release's own definition `OrbitSpace K` (`Factors.lean`), the release's model of the orbit space"
+  ],
+  [
+   76,
+   "global: on a type built from the release's own definition `OrbitSpace K` (`Factors.lean`), the release's model of the orbit space"
+  ],
+  [
+   79,
+   "global: on a type built from the release's own definition `OrbitSpace K` (`Factors.lean`), the release's model of the orbit space"
+  ],
+  [
+   557,
+   "global: on a type built from the release's own structure `Model μ Good` (`Factors.lean`): its order"
+  ]
+ ],
+ "drop_imports": [
+  [
+   "Mathlib.Order.CompletePartialOrder",
+   "the module of `CompletePartialOrder.toSupSet`: under it a supremum in a complete lattice is stored through that instance, and imported here it would move a stored statement of this library that sees the port's imports (`HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff`, INSTANCES-ONLY: `data/fs131/ko1/exposure/OAI158-*`; without it, nothing moves: `OAI158-noCPO-*`); FS131-IE1 left it out of its port for the same reason. The module elaborates without it"
+  ]
+ ]
+}

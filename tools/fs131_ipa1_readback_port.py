@@ -168,8 +168,12 @@ def normalise(s, renamed=None, here=False, erased=False):
         for a, b in (RENAMED if renamed is None else renamed).items():
             s = s.replace(f"(c {a} [", f"(c {b} [")
         s = rb.unfold(s, erased)
-        if STATE.get("coeff", True):
+        # the release-side rewrites read a stored term; a level-one line (`levels=… | type = … | …`) is compared as it
+        # stands, its differences read by hand
+        if s.startswith("(") and STATE.get("coeff", True):
             s = coeff_rewrite(s)
+        if s.startswith("(") and STATE.get("eqset", True):
+            s = eqset_rewrite(s)
     return s
 
 
@@ -185,6 +189,22 @@ CLASS_PARAMS = {"Algebra.algebraMap": 3}
 # constants it may touch, by name — each then classed PIN-DIFFERENCE (COEFF).
 COEFF_HEAD = "DFunLike.coe"
 COEFF_LEMMAS = {"§.AlgebraicCayley.reciprocal_denominator", "§.AlgebraicCayley.coeff_polyLinear"}
+# EQSET (FS131-IPB1, on the coordinator's standing word of 2026-10-14: a Mathlib definition interposed between the pins
+# that changes how an application is stored and not what it names): `s =ᵐ[μ] t` of SETS elaborates at v4.34.1 to
+# `Filter.EventuallyEqSet l s t`, a definition new there (`Mathlib/Order/Filter/Defs.lean:310`: `EventuallyEq l (· ∈ s)
+# (· ∈ t)`), and at v4.32.0 to `Filter.EventuallyEq l s t` at `Prop` (a set is `α → Prop`).  On the release's side
+# `(c Filter.EventuallyEqSet [u]) α` is written `((c Filter.EventuallyEq [u,0]) α) (Sort 0)`, only at the declarations
+# EQSET_LEMMAS lists, each then PIN-DIFFERENCE (EQSET); the release's kernel checks `EventuallyEqSet l s t =
+# EventuallyEq l s t` by `rfl` in the level-one print (`ReleaseLevel1.lean`).
+EQSET_HEAD = "Filter.EventuallyEqSet"
+EQSET_LEMMAS = {"§.KernelCompact.exists_invariant_set"}
+# rule -> (the declarations it may touch, the note its PIN-DIFFERENCE carries); each rule's flag is STATE[rule.lower()]
+RELEASE_REWRITES = {
+    "COEFF": (COEFF_LEMMAS, "`Polynomial.coeff` is `R[X] → ℕ →₀ R` at the release's pin and `R[X] → ℕ → R` here; the "
+                            "same coefficient"),
+    "EQSET": (EQSET_LEMMAS, "`s =ᵐ[μ] t` of sets is `Filter.EventuallyEqSet` at the release's pin and `Filter.EventuallyEq` "
+                            "at `Prop` here; the same proposition by definition"),
+}
 PIN_DIFFERENCE = {"§.Spectral.instCommGroupDiscreteE", "§.Spectral.instCommGroupDiscreteF",
                   "§.InvariantMean.instAddCommGroupPeriodGroup"}
 RULED = {"§.DifferenceFourier.differenceLaw_probability": ["MeasurableMul₂", "MeasurableInv"]}
@@ -359,6 +379,29 @@ def antidiag_erase(s):
     return unparse(rewrite(t, f))
 
 
+def eqset_rewrite(s):
+    """EQSET (above): on the release's side, the head `Filter.EventuallyEqSet.{u} α` is written
+    `Filter.EventuallyEq.{u,0} α (Sort 0)`, wherever it is applied to its type argument."""
+    key = f"(c {EQSET_HEAD} ["
+    if key not in s:
+        return s
+    t = parse(s)
+    assert unparse(t) == s
+
+    def go(x):
+        if isinstance(x, str):
+            return x
+        if is_app(x):
+            h, args = spine(x)
+            h, args = go(h), [go(a) for a in args]
+            if isinstance(h, list) and len(h) == 3 and h[:2] == ["c", EQSET_HEAD] and args:
+                lv = h[2][1:-1]
+                return build(["c", "Filter.EventuallyEq", f"[{lv},0]"], [args[0], ["Sort", "0"]] + args[1:])
+            return build(h, args)
+        return [go(y) for y in x]
+    return unparse(go(t))
+
+
 def coeff_rewrite(s):
     """COEFF (FS131-IPB1, the coordinator's ruling of 2026-10-14): on the RELEASE's side only, every
     `DFunLike.coe (Finsupp ℕ R) ℕ _ _ (Polynomial.coeff R _ p) n` (six arguments; the first a `Finsupp` over `Nat`;
@@ -492,28 +535,33 @@ def ruled_compare(rel_text, our_text, renamed=None, record=None, quiet=False, wr
     table, _, fatal, seen = rb.compare(rel_text, our_text, renamed, quiet=True, record=record)
     rel, _ = rb.load(rel_text, renamed)
     our, _ = rb.load(our_text, renamed, here=True)
-    # COEFF: the constants whose release print the rewrite changed (the prints read once more without it)
-    saved = STATE.get("coeff", True)
-    STATE["coeff"] = False
-    try:
-        rel_raw, _ = rb.load(rel_text, renamed)
-    finally:
-        STATE["coeff"] = saved
-    touched = {lab for lab, d in rel.items() if lab in rel_raw
-               and any(d[f] != rel_raw[lab][f] for f in ("type", "etype", "value", "evalue"))}
-    for lab in sorted(COEFF_LEMMAS & {t[1] for t in table}):
-        if lab not in touched and STATE.get("coeff", True):
-            fatal.append(f"COEFF lists {lab}, which the rewrite does not touch (the list is stale)")
+    # COEFF, EQSET: the constants whose release print each rewrite changed (the prints read once more without it)
+    touched_by = {}
+    for rule in RELEASE_REWRITES:
+        flag = rule.lower()
+        saved = STATE.get(flag, True)
+        STATE[flag] = False
+        try:
+            rel_raw, _ = rb.load(rel_text, renamed)
+        finally:
+            STATE[flag] = saved
+        for lab, d in rel.items():
+            if lab in rel_raw and any(d[f] != rel_raw[lab][f] for f in ("type", "etype", "value", "evalue")):
+                touched_by.setdefault(lab, set()).add(rule)
+        for lab in sorted(RELEASE_REWRITES[rule][0] & {t[1] for t in table}):
+            if rule not in touched_by.get(lab, set()) and STATE.get(flag, True):
+                fatal.append(f"{rule} lists {lab}, which the rewrite does not touch (the list is stale)")
     out = []
     for (cls, lab, kind, verdict, there, here, why) in table:
         r, o = rel.get(lab), our.get(lab)
         owner = next((p for p in PIN_DIFFERENCE if lab == p or lab.startswith(p + ".")), None)
-        if lab in touched:
-            if lab not in COEFF_LEMMAS:
-                verdict, why = "DIFFERENT", "COEFF rewrote a constant it does not list"
+        rules = touched_by.get(lab)
+        if rules:
+            unlisted = sorted(x for x in rules if lab not in RELEASE_REWRITES[x][0])
+            if unlisted:
+                verdict, why = "DIFFERENT", f"{', '.join(unlisted)} rewrote a constant it does not list"
             elif verdict in ("IDENTICAL", "UP-TO-INSTANCES"):
-                verdict, why = "PIN-DIFFERENCE", ("COEFF: `Polynomial.coeff` is `R[X] → ℕ →₀ R` at the release's pin and "
-                                                  "`R[X] → ℕ → R` here; the same coefficient")
+                verdict, why = "PIN-DIFFERENCE", "; ".join(f"{x}: {RELEASE_REWRITES[x][1]}" for x in sorted(rules))
         elif owner is not None and verdict not in ("IDENTICAL", "UP-TO-INSTANCES"):
             ro, oo = rel.get(owner), our.get(owner)
             if ro and oo and ro["kind"] == oo["kind"] == "def" and ro["levels"] == oo["levels"] \
@@ -813,6 +861,28 @@ def self_test(label):
         finally:
             COEFF_LEMMAS.clear()
             COEFF_LEMMAS.update(saved_cl)
+    # EQSET (FS131-IPB1): another head at a site, the rule withdrawn, a listed lemma taken out of the list
+    eq_here = sorted(EQSET_LEMMAS & set(rel))
+    if eq_here:
+        e0 = eq_here[0]
+        i, j = rel_block(e0)
+        k = next(x for x in range(i + 1, j) if rel_lines[x][7:13] == "etype ")
+        out = rel_lines[:]
+        assert f"(c {EQSET_HEAD} [" in out[k], e0
+        out[k] = out[k].replace(f"(c {EQSET_HEAD} [", f"(c {EQSET_HEAD}' [", 1)
+        expect(f"EQSET: another head at a site ({e0})", rel_planted="\n".join(out))
+        STATE["eqset"] = False
+        try:
+            expect(f"EQSET withdrawn ({len(eq_here)} lemmas)")
+        finally:
+            STATE["eqset"] = True
+        saved_el = set(EQSET_LEMMAS)
+        EQSET_LEMMAS.discard(e0)
+        try:
+            expect(f"EQSET: {e0} taken out of the list")
+        finally:
+            EQSET_LEMMAS.clear()
+            EQSET_LEMMAS.update(saved_el)
     # STRIP (FS131-IPB1): each part of the check must refuse what the ruling does not cover
     strip_here = [lab for lab in STRIP if lab in rel]
     if strip_here:

@@ -1,0 +1,35 @@
+{
+ "global_instances": [
+  [
+   658,
+   "global: on a type built from the release's own definition: `IsProbabilityMeasure` of the release's law `RelativeProduct.law` (`Kernels.lean`), found only by a search on that term (as `OAI158FourierTests`' `differenceLaw_probability` at 238)"
+  ]
+ ],
+ "renames": [
+  [
+   "Measurable.of_eval",
+   "measurable_pi_iff.mpr",
+   "`Measurable.of_eval {f} (hf : ∀ a, Measurable fun c => f c a)` (v4.34.1, `Mathlib/MeasureTheory/MeasurableSpace/Constructions.lean:596`, proved there as `measurable_pi_iff.mpr hf`, in the section of `measurable_pi_iff`) is not at v4.32.0; `measurable_pi_iff.mpr` is that proof, with the same variables and the same statement (`Constructions.lean:573` here)"
+  ]
+ ],
+ "patches": [
+  [
+   509,
+   "change EventuallyEmptyOrUniv s (ae ν)",
+   "",
+   "at v4.34.1 the goal's set form is the definition `Filter.EventuallyEmptyOrUniv s l` (`EventuallyConst (· ∈ s) l`, `Mathlib/Order/Filter/EventuallyConst.lean:77`, new there), to which the release's `change` turns the goal before unfolding it; at v4.32.0 `ErgodicSMul`'s field concludes `EventuallyConst s l` itself (`Mathlib/Dynamics/Ergodic/Action/Basic.lean:46`), so the `change` would do nothing (a linter warning, `-try1`) and is left out: the line is blank"
+  ],
+  [
+   510,
+   "rw [eventuallyEmptyOrUniv_iff]",
+   "rw [Filter.eventuallyConst_set]",
+   "at v4.34.1 the set form `Filter.EventuallyEmptyOrUniv s l` is a definition (`EventuallyConst (· ∈ s) l`, `Mathlib/Order/Filter/EventuallyConst.lean:77`, new there) with `eventuallyEmptyOrUniv_iff` its unfolding; at v4.32.0 the same goal is `EventuallyConst s l` and the unfolding `Filter.eventuallyConst_set` (`EventuallyConst.lean:74` here), with the same right-hand side (as `OAI158Amenability`'s patch at `Amenability.lean:385`)"
+  ]
+ ],
+ "drop_imports": [
+  [
+   "Mathlib.Order.CompletePartialOrder",
+   "the module of `CompletePartialOrder.toSupSet`: under it a supremum in a complete lattice is stored through that instance, and imported here it would move a stored statement of this library that sees the port's imports (`HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff`, INSTANCES-ONLY: `data/fs131/ko1/exposure/OAI158-*`; without it, nothing moves: `OAI158-noCPO-*`); FS131-IE1 left it out of its port for the same reason. The module elaborates without it"
+  ]
+ ]
+}

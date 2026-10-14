@@ -1,0 +1,21 @@
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Outside/OAI158Functions.lean:178:22: error(lean.unknownIdentifier): Unknown identifier `dist_star_star`
+Proofs/HadwigerNelson/Outside/OAI158Functions.lean:178:6: error: Type mismatch: After simplification, term
+  hai
+ has type
+  Integrable (fun x => dist (H (k • x)) (∑ i, a (q x) i * F i x) ^ 2) μ
+but is expected to have type
+  Integrable (fun x => dist (star (H (k • x))) (star (∑ i, a (q x) i * F i x)) ^ 2) μ
+Proofs/HadwigerNelson/Outside/OAI158Functions.lean:181:22: error(lean.unknownIdentifier): Unknown identifier `dist_star_star`
+Proofs/HadwigerNelson/Outside/OAI158Functions.lean:181:6: error: Type mismatch: After simplification, term
+  hae
+ has type
+  ∫ (x : X), dist (H (k • x)) (∑ i, a (q x) i * F i x) ^ 2 ∂μ < ε ^ 2
+but is expected to have type
+  ∫ (x : X), dist (star (H (k • x))) (star (∑ i, a (q x) i * F i x)) ^ 2 ∂μ < ε ^ 2
+Proofs/HadwigerNelson/Outside/OAI158Functions.lean:608:14: error(lean.unknownIdentifier): Unknown constant `Complex.isometry_ofReal.lipschitzWith.comp`
+Proofs/HadwigerNelson/Outside/OAI158Functions.lean:646:59: error(lean.unknownIdentifier): Unknown constant `isometry_neg.lipschitzWith`
+Proofs/HadwigerNelson/Outside/OAI158Functions.lean:883:34: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsProbabilityMeasure ν
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.

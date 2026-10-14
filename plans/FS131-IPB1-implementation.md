@@ -193,3 +193,65 @@ source) must be refused by that branch, read from its message. `--check` on the 
 after (`gen-plant-check-{before,after}.out`, `gen-plant-files-before.sha256`), `--parse-all` passes, self-test **21
 plants refused and 4 partners accepted**; with the branch removed in a scratch copy the plant reads SILENT and the
 self-test fails (`gen-plant-control-nobranch.out`).
+
+## Stage 3 — SAVED: lane C, its first five modules (Approximation, ConditionalLimits, Kernels, BoundedFunctions, Functions)
+
+**3.1 Instances of lane C, every one classed** (tables `data/fs131/ko1/port/OAI158<Stem>.json`): global, on a type
+built from the release's own definitions — `Kernels.lean:658` (`IsProbabilityMeasure` of `RelativeProduct.law`),
+`BoundedFunctions.lean:29` (`CoeFun (Func X)`), `Factors.lean` 52–56, 68, 76, 79 (`OrbitSpace K`) and 557 (`Preorder
+(Model μ Good)`), `RelativeProducts.lean` 19 (a law), 210, 211 (`Family G X`), `Stationary.lean` 86, 87, 90
+(`StationaryMean.measure t r x₀`) and 112 (`Countable K`, `K` the release's `def` subgroup of `Circle`, as Basic's
+`MulAction K D`); **scoped**, on Mathlib's types — `RelativeProducts.lean:372` (`product_measurable_vadd :
+MeasurableConstVAdd G (X × X)`, the product action of Mathlib's `Prod` over the section's variables).
+
+**3.2 Per module** (elaboration logs `data/fs131/ipb1/farm/<Module>-<try>.out`; final `-c1b`):
+
+| module | table (each entry with its reason) | elaboration |
+|---|---|---|
+| `OAI158Approximation` | renames `dite_eq_left`→`dif_pos`, `ite_eq_left`→`if_pos`, `ite_eq_right`→`if_neg`, `Measurable.of_eval`→`measurable_pi_lambda` (all `apply` or `simp` sites); patches 316, 354, 404: `haveI := Measure.isProbabilityMeasure_map (hp.aemeasurable (μ := μ));` before the tactic that needs `IsProbabilityMeasure (μ.map p)` | try1 17 errors; **0, 0** |
+| `OAI158ConditionalLimits` | renames `ite_eq_left`, `ite_eq_right`, `Measurable.of_eval`→`measurable_pi_lambda`; patches 229, 292, 306, 356, 402, 639, 652: a `let : IsProbabilityMeasure (μ.map f) := inferInstance` given `Measure.isProbabilityMeasure_map` at the context's measurability (`hp`, `hv n`, `hb`, `hP`, `hq`); 562 `Measurable.of_eval (fun _ =>` → `measurable_pi_lambda _ (fun _ =>` (a term site); `drop_imports` `Mathlib.Order.CompletePartialOrder` | try1 21 errors; **0, 0** |
+| `OAI158Kernels` | rename `Measurable.of_eval`→`measurable_pi_iff.mpr` (that lemma's own proof at the release; term and `apply` sites alike); patches 509 (the release's `change EventuallyEmptyOrUniv s (ae ν)` left out: at this pin the goal is already `EventuallyConst s (ae ν)`, and the `change` drew the linter's "does nothing", try1), 510 `eventuallyEmptyOrUniv_iff` → `Filter.eventuallyConst_set` (Amenability's); global instance 658; `drop_imports` | try1 0 errors 1 warning; **0, 0** |
+| `OAI158BoundedFunctions` | global instance 29 | **0, 0** at try1 |
+| `OAI158Functions` | renames `Measurable.of_eval`→`measurable_pi_iff.mpr`, `Set.mem_ofPred_eq`→`Set.mem_setOf_eq`; patches 128, 131 `dist_star_star` → `star_isometry.dist_eq` (the release's lemma is that term, `CStarAlgebra/Basic.lean:89` there; absent here); 551, 552, 588 `Isometry.lipschitzWith` → `Isometry.lipschitz` (renamed after v4.32.0; a patch per site, since a rename of the token would reach `lipschitzWith_thickenedIndicator`); 812 the `let`'s instance from `hπ` | try1 7 errors; **0, 0** |
+
+*A slip, caught and redone:* the first elaboration and read-back of these five were made with
+`Mathlib.Order.CompletePartialOrder` imported by ConditionalLimits and Kernels — the plan's § 4.1 leaves it out of every
+module whose dump lists it, and I had not written the `drop_imports` entries. Found by grepping the generated imports
+before saving; the entries written (and Factors' in advance), the five re-elaborated (`-c1b`) and every receipt below
+re-run from the new oleans. The here-dump moved (sha256 `4b5afc55…` → `72c5816…`): six more instance constants, all
+the supremum paths of § 3.5 (`CompletePartialOrder.toSupSet` at the release, the `ConditionallyCompletePartialOrderSup`
+path here), UP-TO-INSTANCES.
+
+**3.3 A sixth Mathlib definition that changed between the pins reaches a statement: `Filter.EventuallyEqSet`.**
+`KernelCompact.exists_invariant_set` writes `s =ᵐ[μ] t` of sets; at v4.34.1 that elaborates to
+`Filter.EventuallyEqSet l s t` (a definition new there, `Mathlib/Order/Filter/Defs.lean:310`, `EventuallyEq l (· ∈ s)
+(· ∈ t)`), at v4.32.0 to `Filter.EventuallyEq l s t` at `Prop`. The same proposition by definition, stored another way:
+**under the coordinator's standing word of 2026-10-14 a named comparator rule, EQSET** (release side only: the head
+`Filter.EventuallyEqSet.{u} α` written `Filter.EventuallyEq.{u,0} α (Sort 0)`; `EQSET_LEMMAS` lists the one lemma, then
+PIN-DIFFERENCE (EQSET)). Controls: another head at the site — refused; the rule withdrawn — refused; the lemma taken out
+of the list — refused. The rewrite bookkeeping of COEFF was generalized to a table of release-side rules
+(`RELEASE_REWRITES`), each with its flag and its list; lanes A and B re-compared after: READBACK OK, their counts
+unchanged. *A tool fault of mine, caught on its first run:* the release-side rewrites parsed level-one lines (`levels=… |
+type = … | …`), which are no single term; they now read stored terms only (a level-one line starts with `levels=`),
+lane B's level one re-run byte-identical. *Owed:* the release kernel's `rfl` for `EventuallyEqSet l s t = EventuallyEq
+l s t`, as FS132-I2 checked `EventuallySubset` — added to the level-one print of the stage that closes lane C.
+
+**3.4 The five receipts, lane C's first five.**
+1. `--check` on the five: **`CHECK OK`** (`data/fs131/ipb1/gen-check-laneC1.out`).
+2. Each **0 errors, 0 warnings** (3.2; `-c1b`).
+3. Axioms (`data/fs131/ipb1/axioms/AxiomslaneC1.out`): **`SUMMARY constants=212 clean=212 other=0`** (the footer's
+   control is lane B's, the same generator).
+4. Read-back (`data/fs131/ipb1/readback/laneC1/`, 199 constants: 155 declarations, 44 auxiliaries): **`READBACK OK`** —
+   definitions 26 IDENTICAL, 3 UP-TO-INSTANCES; lemmas 102 IDENTICAL, 23 UP-TO-INSTANCES, 1 PIN-DIFFERENCE (EQSET);
+   auxiliaries 33 IDENTICAL, 6 AUX-ABSENT, 5 AUX-DIFFERS (`BoundedMeasurable.l2._proof_n`, `Spectral.UniversalGood._proof_n`,
+   `CompactFunctions.compact_mul._simp_1_1`, counted); 56 instance constants, read: Mathlib's instance paths (the
+   `Complex`, `Subalgebra`, `AEEqFun`, `Lp` and `Pi` structures, the supremum paths) and seven generated proofs. Self-test
+   **11 plants refused** (`selftest.out`). **No statement or definition of the five names `eLpNorm`** (no erased type
+   or value of the release's print holds it; nor in lane B's). **The ruled cascade does not reach them**: no statement
+   names `frequencyLaw`, `center`, `centerMap` or `centerKernel` (none is DIFFERENT, and STRIP lists none).
+   Level one: **165 constants, 148 IDENTICAL, 8 MOVED, 9 DIFFERENT**, all of known classes — `Monoid`, `Group`,
+   `CommGroup` (the `Monoid` parents, item 763 (3)); `IntermediateField`, `SeminormedAddCommGroup` (instance paths);
+   `ErgodicSMul` (EQSET and `EventuallyEmptyOrUniv`, stage 2.4); `Lp`, `MemLp` (item 764); `Measure.map` (§ 3.3).
+5. Every table entry has its reason; none touches a protected declaration (no lane C declaration is among the density
+   branch's shared names — checked with the generator's `shared_names()`: none of the five's 157 copied declarations — and the library's own
+   modules name none).
