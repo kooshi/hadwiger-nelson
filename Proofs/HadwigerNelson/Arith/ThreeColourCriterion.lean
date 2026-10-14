@@ -9,8 +9,9 @@ plane is not bipartite: `χ(F²) = 3` iff some prime of `F` above 3 has residue 
 direction that is this project's — from a three-colouring to the prime — **as far as the ring `ℤ[U_F]`**:
 `exists_maximal_card_nine_of_colorable_three`, a maximal ideal of `ℤ[U_F]` with nine elements in its quotient. The last
 step (that ideal is cut out by a prime `𝔓` of `F(i)` fixed by conjugation with `𝓞/𝔓 = 𝔽₉`, so `𝔓 ∩ F` has residue field
-`𝔽₃`) reads `UpperHalf.exists_stablePrime_of_valuationSubring`, which lives on another line (`fs131-wnf`); it and the
-clause as claimed are in the joining module `Arith/ThreeFourColours` (`plans/FS131-KN4-three-four-colours-plan.md` § 4).
+`𝔽₃`) reads `UpperHalf.exists_stablePrime_of_valuationSubring`, the residue module's (`Arith/UpperHalf`, which this module does
+not import); it and the clause as claimed are in the joining module `Arith/ThreeFourColours`
+(`chromaticNumber_planeOver_eq_three_iff`; `plans/FS131-KN4-three-four-colours-plan.md` § 4).
 
 **The route** (FS91-J02-T1's ⟹, `plans/FS91-S0F-three-colours.md` §2.6, with two steps shortened by the kernel planner).
 `τ ∈ Θ₃ ∩ T₆` (`TorsionExtraction.exists_torsion_mem_fieldBandSet`) splits as `τ₂ = 3τ` on `R/2R` and `τ₃ = −2τ` on
@@ -43,9 +44,10 @@ and the two-colour end do not read it.
 
 **Inhabitants.** The hypotheses of `exists_maximal_card_nine` at `A = 𝔽₉ = 𝔽₃[i]`, conjugation, `l(x + yi) = x + y`
 (FS91-J02-L4(a) at `q = 3`: `l ≠ 0` on `μ₄ = {±1, ±i}`); of `exists_maximal_conj_trivial` at `A = 𝔽₂`, the identity and
-`l = id`. `exists_maximal_card_nine_of_colorable_three` at `F = ℚ(√3)` (`χ = 3`, `[Fischer1990]` Thm 9), which no
-declaration on this line exhibits; `exists_maximal_conj_trivial_of_colorable_two` at `F = ℚ(√2)`
-(`DyadicQuadratic.colorable_two_planeOver_sqrt`, downstream of this module). The two field cases: `𝔽₈₁` has no
+`l = id`. `exists_maximal_card_nine_of_colorable_three` at `F = ℚ(√3)` (`χ = 3`, `[Fischer1990]` Thm 9): exhibited
+downstream, `ThreeFourColours.exists_maximal_card_nine_sqrt_three`; `exists_maximal_conj_trivial_of_colorable_two` at
+`F = ℚ(√2)`: `ThreeFourColours.exists_maximal_conj_trivial_sqrt_two` (through
+`DyadicQuadratic.colorable_two_planeOver_sqrt_of_mod_four`, downstream of this module). The two field cases: `𝔽₈₁` has no
 model of `exists_normOne_zero_of_card_ne_nine`'s `ι` with `σ ι = −ι` (`ι ∈ 𝔽₉` is fixed by `x ↦ x⁹`); its first model is
 `𝔽₂₇[i]`, the field of `27²` elements; `eq_zero_of_forall_normOne_eq` at `𝔽₄` with Frobenius, `e = 0`.
 -/

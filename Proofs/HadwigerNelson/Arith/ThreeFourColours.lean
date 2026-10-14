@@ -18,8 +18,21 @@ Statements planned by FS131-KN4 (passes FS131-KN5); joined, extended and proved 
   residue field `𝔽₃`."* — `chromaticNumber_planeOver_eq_three_iff`; without the hypothesis, FS91-J02-T2's form
   `colorable_three_planeOver_iff`.
 * (a), the table — one theorem per row, each naming the upper half it reads (every upper half is prior art:
-  `[Fischer1990]`, `[Johnson2000]`; at the level of a field it is NF1's).
-* Row 99 in the form row 127 takes — `localBound_le_chromaticNumber_of_le_four`.
+  `[Fischer1990]`, `[Johnson2000]`; at the level of a field it is NF1's), and the four rows as one statement,
+  `chromaticNumber_planeOver_sqrt_table`. The lower bound at four needs no squarefreeness
+  (`TorsionExtraction.four_le_chromaticNumber_planeOver_fieldOfRadicands`).
+* (c) *"For any subfield `F` of `ℝ`: if `1/3` is an integer combination of unit vectors and `F²` has an odd cycle, then
+  `χ(F²) ⩾ 4`."* — not here: `TorsionExtraction.four_le_chromaticNumber_planeOver_of_inv_three_mem` ("`1/3` an integer
+  combination of unit vectors" is `(3 : ℂ)⁻¹ ∈ unitRing F`; "has an odd cycle" is `¬ Colorable 2`).
+* Row 99 in the form row 127 takes — `localBound_le_chromaticNumber_of_le_four`; its two sentences,
+  `chromaticNumber_planeOver_le_three_iff` and `chromaticNumber_planeOver_eq_localBound_of_le_four`.
+
+**Rests on.** Seven public statements here rest on the declared outside theorem `StandingFive.kloosterman_bound`
+(Weil's bound, `[Weil1948]` p. 207), each through `ThreeColourCriterion.exists_maximal_card_nine_of_colorable_three`:
+clause (b) in both forms, row 99 in its four forms (`localBound_le_chromaticNumber_or_four_le`, `…_of_le_four`,
+`chromaticNumber_planeOver_eq_localBound_of_le_four`, `chromaticNumber_planeOver_le_three_iff`) and the model
+`exists_maximal_card_nine_sqrt_three`. Everything else — the table (clause (a)), the dictionary J1–J4, the two colourings
+of level targets, the dyadic primes, and clause (b) from the prime to the colouring — is on the standard three axioms.
 -/
 
 namespace HadwigerNelson.ThreeFourColours
@@ -579,7 +592,8 @@ theorem chromaticNumber_planeOver_eq_three_iff (F : Subfield ℝ) [NumberField F
 
 /-! ## Row 99 in the form row 127 takes -/
 
-/-- **Row 99's lower half** (FS91-J02-T3, S2): `L(F) ≤ χ(F²)` or `χ(F²) ≥ 4`, every real number field. -/
+/-- **Row 99's lower half** (FS91-J02-T3, S2): `L(F) ≤ χ(F²)` or `χ(F²) ≥ 4`, every real number field. Rests on Weil's
+bound (the case of three colours and not two; the two-colour case and `χ ≥ 4` do not read it). -/
 theorem localBound_le_chromaticNumber_or_four_le (F : Subfield ℝ) [NumberField F] :
     localBound F ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber ∨
       4 ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber := by
@@ -606,7 +620,9 @@ theorem localBound_le_chromaticNumber_or_four_le (F : Subfield ℝ) [NumberField
       exact h3 (hk.mono (by omega))
     exact_mod_cast h
 
-/-- **`hRow99` of `SpectralChain.min_localBound_five_le_chromaticNumber`, discharged.** -/
+/-- **`hRow99` of `SpectralChain.min_localBound_five_le_chromaticNumber`, discharged**: `L(F) ≤ 4 ⟹ L(F) ≤ χ(F²)`, every
+real number field — the binder's type, term for term. Rests on Weil's bound (`StandingFive.kloosterman_bound`, a declared
+outside theorem), so a statement that reads this theorem in place of the binder rests on that import too. -/
 theorem localBound_le_chromaticNumber_of_le_four (F : Subfield ℝ) [NumberField F] (h : localBound F ≤ 4) :
     localBound F ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber :=
   (localBound_le_chromaticNumber_or_four_le F).elim id fun h4 => h.trans h4
@@ -893,7 +909,10 @@ theorem fieldBandSet_three_nonempty_sqrt_three : (fieldBandSet (fieldOfRadicands
 
 /-- **A maximal ideal of `ℤ[U_F]` with nine elements in its quotient, at `F = ℚ(√3)`**: the hypotheses of
 `exists_maximal_card_nine_of_colorable_three` hold there, and its conclusion is the hypothesis of J3 and of
-`exists_stablePrime_card_nine`. Rests on Weil's bound, as that theorem does. -/
+`exists_stablePrime_card_nine`. Rests on Weil's bound, as that theorem does. (`exists_stablePrime_card_nine` applied to
+it is a stable prime of `ℚ(√3)(i)` with nine elements in its quotient — the hypothesis of
+`levelTarget_colorable_three_of_card_nine` and `exists_maximal_card_three_of_stablePrime_card_nine`; a composition, stated
+by no declaration.) -/
 theorem exists_maximal_card_nine_sqrt_three :
     ∃ 𝔪 : Ideal (unitRing (fieldOfRadicands {3})), 𝔪.IsMaximal ∧ Nat.card (unitRing (fieldOfRadicands {3}) ⧸ 𝔪) = 9 :=
   exists_maximal_card_nine_of_colorable_three _ (colorable_three_planeOver_sqrt (Or.inr ⟨dvd_refl 3, by norm_num⟩))
