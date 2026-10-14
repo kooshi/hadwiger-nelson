@@ -14,7 +14,7 @@ orders of every pair of points.
 * `AdmissibleAe N ℓ` — for each `r`, almost no `(x, u)` in `ℂ × S¹` has a forbidden pair at `x`, `x + r u`;
 * `IsAlgPattern N` — countably many distances carry a forbidden pair, each positive and algebraic;
 * `exists_measurable_admissibleAe` — forward: from the algebraic plane to a Borel labelling admissible almost
-  everywhere (rests on the declared outside theorem `Spectral.residual_fourier`);
+  everywhere (rests on `[OAIMath2026]`'s ported theorem `Spectral.residual_fourier`);
 * `exists_admissibleOn_of_ae` — converse: from a Lebesgue-measurable labelling admissible almost everywhere to one
   admissible at every pair (density points and compactness; no outside theorem);
 * `exists_admissibleOn_univ_iff_ae`, `exists_admissibleOn_univ_iff_algPlane` — **C133-PAIR**.
@@ -133,7 +133,7 @@ private theorem dist_kCoeff_mul (u : K) (x y : E) :
   rw [dist_eq_norm, dist_eq_norm, h1, h2, norm_kCoeff_mul]
 
 /-- **C133-PAIR, forward** (steps F1–F6): a labelling admissible on the algebraic plane gives a labelling of the
-plane with Borel fibres that is admissible almost everywhere. Rests on the declared outside theorem
+plane with Borel fibres that is admissible almost everywhere. Rests on `[OAIMath2026]`'s ported theorem
 `Spectral.residual_fourier`. -/
 theorem exists_measurable_admissibleAe [Finite Λ] {N : ℝ → Λ → Λ → Prop} (hN : IsAlgPattern N) {ℓ : ℂ → Λ}
     (h : AdmissibleOn N (E : Set ℂ) ℓ) :
@@ -465,7 +465,7 @@ theorem exists_admissibleOn_of_ae [Finite Λ] {N : ℝ → Λ → Λ → Prop}
   exact hadm _ (hξ t x hx) _ (hξ t y hy) hxy
 
 /-- **C133-PAIR, first clause**: an admissible labelling of the plane exists if and only if a Lebesgue-measurable
-labelling admissible almost everywhere exists. The direction from left to right rests on the declared outside
+labelling admissible almost everywhere exists. The direction from left to right rests on `[OAIMath2026]`'s ported
 theorem `Spectral.residual_fourier`. -/
 theorem exists_admissibleOn_univ_iff_ae [Finite Λ] {N : ℝ → Λ → Λ → Prop} (hN : IsAlgPattern N) :
     (∃ ℓ : ℂ → Λ, AdmissibleOn N univ ℓ) ↔
@@ -478,7 +478,7 @@ theorem exists_admissibleOn_univ_iff_ae [Finite Λ] {N : ℝ → Λ → Λ → P
     exact exists_admissibleOn_of_ae hN.pos hm hae
 
 /-- **C133-PAIR, second clause**: an admissible labelling of the plane exists if and only if one of the algebraic
-plane exists. The direction from right to left rests on the declared outside theorem
+plane exists. The direction from right to left rests on `[OAIMath2026]`'s ported theorem
 `Spectral.residual_fourier`. -/
 theorem exists_admissibleOn_univ_iff_algPlane [Finite Λ] {N : ℝ → Λ → Λ → Prop} (hN : IsAlgPattern N) :
     (∃ ℓ : ℂ → Λ, AdmissibleOn N univ ℓ) ↔ ∃ ℓ : ℂ → Λ, AdmissibleOn N (E : Set ℂ) ℓ := by

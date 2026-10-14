@@ -153,8 +153,9 @@ theorem exists_mem_le_sectionDensity (lam : Measure X) (μ : Measure Ω) [IsProb
   have hsub : {ω | α ≤ sectionDensity lam Xn W ω} ⊆ Sᶜ := fun ω hω hωS => h ⟨ω, hωS, hω⟩
   exact (measure_le_sectionDensity_pos lam μ hW hXm hpos hfin hcov).ne' (measure_mono_null hsub hS)
 
-/-- A function at most `1` is positive with probability at least its mean (the entry's "`1_{H > 0} ≥ H`"). -/
-theorem ofReal_integral_le_measure_pos (μ : Measure Ω) [IsProbabilityMeasure μ] {h : Ω → ℝ} (hm : Measurable h)
+/-- A function at most `1` is positive on a set of measure at least its integral (the entry's "`1_{H > 0} ≥ H`"),
+for any measure: with probability at least its mean for a probability measure. -/
+theorem ofReal_integral_le_measure_pos (μ : Measure Ω) {h : Ω → ℝ} (hm : Measurable h)
     (h1 : ∀ ω, h ω ≤ 1) : ENNReal.ofReal (∫ ω, h ω ∂μ) ≤ μ {ω | 0 < h ω} := by
   by_cases hi : Integrable h μ
   · have hS : MeasurableSet {ω | 0 < h ω} := measurableSet_lt measurable_const hm

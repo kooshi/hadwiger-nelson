@@ -448,7 +448,7 @@ theorem fractionalChromaticNumber_induce_le {V : Type*} (G : SimpleGraph V) (S :
     (G.induce S).fractionalChromaticNumber ≤ G.fractionalChromaticNumber :=
   fractionalChromaticNumber_mono_of_hom (Embedding.induce S).toHom
 
-/-- **C133-ONE, second line, the plane**: `χ_f(ℝ²) = 1 / m₁(ℝ²)`. Rests on the declared outside theorem
+/-- **C133-ONE, second line, the plane**: `χ_f(ℝ²) = 1 / m₁(ℝ²)`. Rests on `[OAIMath2026]`'s ported theorem
 `Spectral.residual_fourier`. -/
 theorem fractionalChromaticNumber_plane : (unitDistance ℂ).fractionalChromaticNumber = mOne⁻¹ := by
   refine le_antisymm fractionalChromaticNumber_plane_le ?_

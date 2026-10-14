@@ -341,7 +341,6 @@ import Proofs.HadwigerNelson.Plane.Radius
 import Proofs.HadwigerNelson.Plane.RadiusOutside
 import Proofs.HadwigerNelson.Plane.LebesgueNumber
 import Proofs.HadwigerNelson.Outside.OAI158Rigidity
-import Proofs.HadwigerNelson.Outside.OAI158Transfer
 import Proofs.HadwigerNelson.Plane.OneClass.SectionDensity
 import Proofs.HadwigerNelson.Plane.OneClass.Defs
 import Proofs.HadwigerNelson.Plane.OneClass.Field

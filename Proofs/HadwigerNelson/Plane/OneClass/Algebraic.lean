@@ -23,7 +23,7 @@ stage 5):
   `α₁(ℝ²) = α₁(𝒜²) = m₁(ℝ²)`;
 * `tendsto_minIndepNum_div` — **C133-FN**: `f(n) / n → m₁(ℝ²)`.
 
-The two headlines and C133-ALG rest on the declared outside theorem `Outside.OAI158.Spectral.residual_fourier`
+The two headlines and C133-ALG rest on `[OAIMath2026]`'s ported theorem `Outside.OAI158.Spectral.residual_fourier`
 (through `exists_field`). Not claimed: any value of `m₁(ℝ²)`; anything at a number field's plane; that the release
 states any of this (its manuscript does not); that the result is new (`[Davies2026]` proves the same sentence in
 dimension four and up).
@@ -97,7 +97,7 @@ theorem exists_measurable_indep_of_field {Ω : Type*} [MeasurableSpace Ω] (P : 
     exact hωd.trans hsec
 
 /-- **C133-ALG.** Every invariant random independent set of the unit-distance graph of the algebraic plane has
-density at most `m₁(ℝ²)`. Rests on the declared outside theorem `Spectral.residual_fourier`. Its hypothesis is
+density at most `m₁(ℝ²)`. Rests on `[OAIMath2026]`'s ported theorem `Spectral.residual_fourier`. Its hypothesis is
 inhabited with positive density: `exists_isInvariantLaw_unitDistance`. -/
 theorem IsInvariantLaw.measure_origin_le_mOne {P : Measure (E → Bool)} (h : IsInvariantLaw (unitDistance E) P) :
     P {I | I 0 = true} ≤ mOne := by
@@ -243,12 +243,12 @@ theorem finIndepRatio_algPlane_le_mOne : (unitDistance E).finIndepRatio ≤ mOne
 
 /-- **C133-ONE, first line, the plane**: `α₁(ℝ²) = m₁(ℝ²)` — the infimum of `α(G) / |G|` over the finite point
 sets of the plane is the supremum of the upper densities of its measurable sets with no two points at distance
-one. Rests on the declared outside theorem `Spectral.residual_fourier`. -/
+one. Rests on `[OAIMath2026]`'s ported theorem `Spectral.residual_fourier`. -/
 theorem finIndepRatio_plane_eq_mOne : (unitDistance ℂ).finIndepRatio = mOne :=
   le_antisymm ((finIndepRatio_le_of_embedding algPlaneEmbedding).trans finIndepRatio_algPlane_le_mOne)
     mOne_le_finIndepRatio
 
-/-- **C133-ONE, first line, the algebraic plane**: `α₁(𝒜²) = m₁(ℝ²)`. Rests on the declared outside theorem
+/-- **C133-ONE, first line, the algebraic plane**: `α₁(𝒜²) = m₁(ℝ²)`. Rests on `[OAIMath2026]`'s ported theorem
 `Spectral.residual_fourier`. -/
 theorem finIndepRatio_algPlane_eq_mOne : (unitDistance E).finIndepRatio = mOne :=
   le_antisymm finIndepRatio_algPlane_le_mOne
@@ -356,7 +356,7 @@ theorem tendsto_minIndepNum_div_finIndepRatio :
   exact hconv n hn
 
 /-- **C133-FN**: `f(n) / n → m₁(ℝ²)`, where `f(n)` is the least independence number of the unit-distance graph on
-`n` points of the plane (`[DuczVarga2026]` Conjecture 1, first clause). Rests on the declared outside theorem
+`n` points of the plane (`[DuczVarga2026]` Conjecture 1, first clause). Rests on `[OAIMath2026]`'s ported theorem
 `Spectral.residual_fourier`. -/
 theorem tendsto_minIndepNum_div : Tendsto (fun n : ℕ => (minIndepNum n : ℝ≥0∞) / n) atTop (𝓝 mOne) :=
   finIndepRatio_plane_eq_mOne ▸ tendsto_minIndepNum_div_finIndepRatio

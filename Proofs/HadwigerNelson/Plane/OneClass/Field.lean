@@ -1,5 +1,5 @@
 import Proofs.HadwigerNelson.Plane.OneClass.Defs
-import Proofs.HadwigerNelson.Outside.OAI158Transfer
+import Proofs.HadwigerNelson.Outside.OAI158BorelTransfer
 
 /-!
 # The field theorem: rotation-fixed observables of a plane system have continuous parts on the real plane (FS-133)
@@ -11,7 +11,7 @@ measurable `[0, 1]`-valued fields over the real plane with the observables' mean
 pair of observables uncorrelated at one non-zero algebraic displacement is uncorrelated on the whole circle of that
 radius.
 
-It rests on the declared outside theorem `Outside.OAI158.Spectral.residual_fourier` (through
+It rests on `[OAIMath2026]`'s ported theorem `Outside.OAI158.Spectral.residual_fourier` (through
 `residual_fourier_cross`) and on the release's generic lemmas, ported (`plans/FS133-kernel-plan.md`, leaf P): the
 field is the orbit extension of the projection of each observable on the continuous vectors.
 -/
@@ -28,7 +28,7 @@ noncomputable section FieldAux
 /-! ### The Hilbert-space layer (private): the Koopman representation of a plane system on `L²`, the observables'
 vectors, their projections on the continuous vectors, and the orbit extension to the real plane. The release's label
 model (`BorelTransfer.lean` ll. 9–96, 200–245, 337–368) rewritten for an arbitrary plane system and a finite family;
-the generic lemmas are the ported ones (`Outside/OAI158Transfer`). -/
+the generic lemmas are the port's (`Outside/OAI158Basic` … `OAI158BorelTransfer`). -/
 
 open HadwigerNelson.Outside.OAI158.ContinuousVectors
 open scoped InnerProductSpace
@@ -292,7 +292,7 @@ values in `[0, 1]` such that
 * if `f i` and `f j ∘ τ z` have almost surely zero product at some `z ≠ 0` of the algebraic plane, then
   `H i (x, ·)` and `H j (x + w, ·)` have almost surely zero product at every `x` and every `w` of the real plane
   with `‖w‖ = ‖z‖`.
-Rests on the declared outside theorem `Spectral.residual_fourier`. The hypotheses are inhabited at an invariant
+Rests on `[OAIMath2026]`'s ported theorem `Spectral.residual_fourier`. The hypotheses are inhabited at an invariant
 random independent set with its indicator at the origin (`IsInvariantLaw.isPlaneSystem`); the consumer there is
 `IsInvariantLaw.measure_origin_le_mOne`. -/
 theorem exists_field {Ω : Type*} [MeasurableSpace Ω] {P : Measure Ω} {τ : E → Ω → Ω} {ρ : K → Ω → Ω}
