@@ -1,0 +1,6 @@
+unplanted (A against itself): PASS
+plant 'DIFFERENT Proofs.HadwigerNelson.Outside.OAI158Amenability HadwigerNelson.Outside.OAI158.Amenable.Mean.ctorIdx': REPORTED
+plant 'DIFFERENT Proofs.HadwigerNelson.Outside.OAI158Characters HadwigerNelson.Outside.OAI158.ContinuousCharacters.dyadicApprox_tendsto': REPORTED
+plant 'ONLY-IN-A Proofs.HadwigerNelson.Outside.OAI158Approximation HadwigerNelson.Outside.OAI158.Spectral.relative_singularity_successor': REPORTED
+plant 'a module's count off by one': REPORTED
+CONTROL OK
