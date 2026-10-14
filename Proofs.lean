@@ -295,6 +295,9 @@ import Proofs.HadwigerNelson.Outside.OAI158PaletteTransport
 import Proofs.HadwigerNelson.Outside.OAI158BinaryPalettes
 import Proofs.HadwigerNelson.Outside.OAI158States
 import Proofs.HadwigerNelson.Outside.OAI158AngularBoundary
+import Proofs.HadwigerNelson.Outside.OAI015Shannon
+import Proofs.HadwigerNelson.Outside.OAI015Mixtures
+import Proofs.HadwigerNelson.Outside.OAI015Maximal
 import Proofs.HadwigerNelson.Plane.SixRing.Confine
 import Proofs.HadwigerNelson.Plane.SixRing.Orbit
 import Proofs.HadwigerNelson.Plane.SixRing.Basic

@@ -1,0 +1,3 @@
+# FS131-IE1: the constants by which a ported declaration's stored term differs from the release's INSIDE instance
+# arguments and proof arguments only (verdict UP-TO-INSTANCES).  Written by `compare --record`; read before committing.
+

@@ -1,0 +1,12 @@
+observationEntropy_finite_mixture_bounds | first difference at char 1615 of 3467 3467
+  release: 0,(p u_1)]) (c ENNReal [])) (((c MeasureTheory.Measure [(p u_1)]) #13) #10)) ((((((c MeasureTheory.Measure.instSMul [(p u_1),0]) #13) (c ENNReal [])) #10) (((c instSMulOfMul [0]) (c ENNReal [])) (((c Distrib.toMul [0]) (c ENNReal [])) (((c instDistribOfSemiring [0]) (c 
+  here   : 0,(p u_1)]) (c ENNReal [])) (((c MeasureTheory.Measure [(p u_1)]) #13) #10)) ((((((c MeasureTheory.Measure.instSMul [(p u_1),0]) #13) (c ENNReal [])) (((c instSMulOfMul [0]) (c ENNReal [])) (((c Distrib.toMul [0]) (c ENNReal [])) (((c instDistribOfSemiring [0]) (c ENNRe
+observationEntropyRate_finite_mixture | first difference at char 1615 of 3060 3060
+  release: 0,(p u_1)]) (c ENNReal [])) (((c MeasureTheory.Measure [(p u_1)]) #13) #10)) ((((((c MeasureTheory.Measure.instSMul [(p u_1),0]) #13) (c ENNReal [])) #10) (((c instSMulOfMul [0]) (c ENNReal [])) (((c Distrib.toMul [0]) (c ENNReal [])) (((c instDistribOfSemiring [0]) (c 
+  here   : 0,(p u_1)]) (c ENNReal [])) (((c MeasureTheory.Measure [(p u_1)]) #13) #10)) ((((((c MeasureTheory.Measure.instSMul [(p u_1),0]) #13) (c ENNReal [])) (((c instSMulOfMul [0]) (c ENNReal [])) (((c Distrib.toMul [0]) (c ENNReal [])) (((c instDistribOfSemiring [0]) (c ENNRe
+weighted_kernelCell | first difference at char 798 of 2049 2049
+  release: l [0,(p u_2)]) (c ENNReal [])) (((c MeasureTheory.Measure [(p u_2)]) #8) #5)) ((((((c MeasureTheory.Measure.instSMul [(p u_2),0]) #8) (c ENNReal [])) #5) (((c instSMulOfMul [0]) (c ENNReal [])) (((c Distrib.toMul [0]) (c ENNReal [])) (((c instDistribOfSemiring [0]) (c E
+  here   : l [0,(p u_2)]) (c ENNReal [])) (((c MeasureTheory.Measure [(p u_2)]) #8) #5)) ((((((c MeasureTheory.Measure.instSMul [(p u_2),0]) #8) (c ENNReal [])) (((c instSMulOfMul [0]) (c ENNReal [])) (((c Distrib.toMul [0]) (c ENNReal [])) (((c instDistribOfSemiring [0]) (c ENNRe
+kernel_finite_cells | first difference at char 1554 of 2303 2303
+  release: [0,(p u_2)]) (c ENNReal [])) (((c MeasureTheory.Measure [(p u_2)]) #10) #7)) ((((((c MeasureTheory.Measure.instSMul [(p u_2),0]) #10) (c ENNReal [])) #7) (((c instSMulOfMul [0]) (c ENNReal [])) (((c Distrib.toMul [0]) (c ENNReal [])) (((c instDistribOfSemiring [0]) (c E
+  here   : [0,(p u_2)]) (c ENNReal [])) (((c MeasureTheory.Measure [(p u_2)]) #10) #7)) ((((((c MeasureTheory.Measure.instSMul [(p u_2),0]) #10) (c ENNReal [])) (((c instSMulOfMul [0]) (c ENNReal [])) (((c Distrib.toMul [0]) (c ENNReal [])) (((c instDistribOfSemiring [0]) (c ENNRe

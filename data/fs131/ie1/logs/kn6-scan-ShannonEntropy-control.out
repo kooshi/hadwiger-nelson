@@ -1,0 +1,4 @@
+HIT ShannonEntropy.lean:457: [#eval] #eval (1 : Nat)
+HIT ShannonEntropy.lean:458: [import] import Evil
+scanned ShannonEntropy.lean: lines=458 hits=2
+control FIRED

@@ -1,0 +1,24 @@
+unplanted: PASS (as it must)
+plant 'a generated file changed by two spaces': REFUSED
+plant 'a generated file absent': REFUSED
+plant 'a patch that does not apply': REFUSED
+plant 'a patch into a statement': REFUSED
+plant 'a patch into a definition': REFUSED
+plant 'a patch into a definition without `:=`': REFUSED
+partner 'a patch into a proof': generation ACCEPTED, files then DIFFER
+plant 'a declared patch withdrawn': REFUSED
+plant 'the clone at another commit': REFUSED
+the scratch clone at its own commit, unplanted: accepted (as it must)
+plant 'an `#eval` in a copied file': REFUSED
+plant 'an `initialize` in a copied file': REFUSED
+plant '`unsafe` inside a proof of a copied file (the scan)': REFUSED
+plant '`IO.` inside a proof of a copied file (the scan)': REFUSED
+plant 'an instance that is in neither table': REFUSED
+plant 'two ported declarations of one name': REFUSED
+plant 'a selected declaration absent from the partial file': REFUSED
+plant 'a namespace the script does not map': REFUSED
+plant 'the licence copy changed by one byte': REFUSED
+plant 'the licence copy absent': REFUSED
+plant 'a module generated with `import Mathlib` whole': REFUSED
+SELF-TEST OK: 19 plants refused and 1 partner accepted
+exit=0
