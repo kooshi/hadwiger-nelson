@@ -6,7 +6,14 @@ explicit path, not pushed (the brief: the remote is unreachable).*
 
 ## Theorems this phase proved
 
-(filled in as the stages fall)
+- `HadwigerNelson.FibreCertSound.sum_le_of_certOK` (`Arith/FibreCertSound`): an accepted certificate bounds FS-66's
+  region, `Σφ ≤ U_num/L` for every `φ : (ℤ/p)² → [0, 1]` with `q(φ) ≥ 0`, every `p` with `NeZero p`. [kernel], the
+  standard three (§ Stage 6 for the built tree's print). Statement unchanged (§ Stage 6).
+- `HadwigerNelson.FibreCertSound.card_le_of_certOK`: an independent set of `Cay((ℤ/p)², S)` has at most `U_num/L` points.
+  [kernel], the standard three. Statement unchanged.
+- Private, in `Arith/FibreCertSound`, each [kernel] on the standard three: the four leaves `psd_of_psdCheck` (L1),
+  `blockT_nonneg` (L2), `opSum_O23_eq` (L3), `opSum_O4_eq` (L4), and their helpers (§§ Stage 2–5).
+- **Not reached**: K1 at p = 11 (the library modules at eight segments) and F2 at p = 19 — § What is left.
 
 ## Stage 1 — SAVED: the readback
 
@@ -118,3 +125,68 @@ priced 350–500), in four sections:
 **K2 in all**: `Arith/FibreCertSound` is 2,665 lines against 794 at this job's start; with FS131-IKC1's part, K2 took
 about 2,450 lines of proof — inside the planner's 2,000–4,000, and as § Stage 3's re-price said. **No change to
 `certOK`'s definition was needed** (none made): every check the proof reads was already in FS131-IKC1's checker.
+
+## What is left (not reached in this job)
+
+* **K1 at p = 11** (brief item 3): not started. The converter is `tools/fs131_ikc1_gen.py` (FS131-IKC1's; `--nseg 8`,
+  `--doc`/`--tail` write library modules). The work: generate the data module and one check module per declaration
+  (`globalOK`, eight `segCheck`s, `psdAll`), register them in `Proofs.lean` and `ARCHITECTURE.md`, build under the slot
+  and measure each declaration (FS131-IKC1 § Stage 6 measured nseg = 4 at 7.1–9.5 GB a segment, a segment's fixed cost
+  about 4.5 GB; nseg = 8 is extrapolated near 7 GB, not run); then `cert11_ok : certOK cert11 = true` and the bound at
+  p = 11, `sum_le_of_certOK cert11 cert11_ok` (with `NeZero 11`), which now rests on the standard three plus whatever
+  `cert11_ok` prints (`[propext]`, as `cert3_ok` does).
+* **F2 at p = 19** (brief item 4): not started; the planner's record § 3.2 is the design. Every new part of the checker
+  will need its own soundness lemma in the style of this job's (§§ Stage 2–5): the per-segment op lists and the bitmask
+  cover replace `sum_shadow`/`seg_shadow`'s "every segment reads every op", and the tree literals replace the list reads.
+  So F2 changes `certOK`'s definition and reopens K2's computation half; it is a checker job plus a proof job.
+
+## Stage 6 — SAVED: the build, the statements from the kernel's side, the axioms
+
+* **The build** (`./scripts/build.sh` under the slot, `--mem 10 --cpus 4`, `MEMMAX=10G BATCH=8`): OK, 249 of 249
+  batches, 2 modules rebuilt (`Arith/FibreCertSound`, `Proofs`), **0 modules with warnings**, 6m35s
+  (`data/fs131/ikc2/logs/build1-full.log`, the gate's copy `build1-gate.log`).
+* **No conclusion weakened.** `StatementDump.lean` on the built library (`data/fs131/ikc2/statements-after.txt`)
+  against § 1.3's dump, read by FS131-IKC1's `tools/fs131_ikc1_statements.py` (not edited): `sum_le_of_certOK`,
+  `card_le_of_certOK`, `V`, `unitCircle`, `qform`, `Cert.p`, `Cert.scale`, `Cert.unum` — SAME, raw stored text
+  identical (`statements-compare.txt`, exit 0). Its control plants `LE.le → LT.lt` in the after-dump's type of
+  `sum_le_of_certOK` and exits 1 naming it (`statements-compare-control.txt`). Public constants: none removed, none
+  changed; one added, `qform.congr_simp`, which Lean generates on demand in the module that defines `qform` (L4's `simp`
+  asked for it; a reserved name, in the module of its definition, so no second copy elsewhere). `FibreCert` and
+  `FibreCert3` are byte-for-byte as § 1.3 has them (217 and 3 constants, unchanged): **no change to `certOK`'s definition.**
+* **Axioms** (`data/fs131/ikc2/lean/Axioms.lean`, FS131-IKC1's printer copied, → `data/fs131/ikc2/axioms.txt`; read by
+  `tools/fs131_ikc2_axioms.py` → `axioms-read.txt`, exit 0): 205 public records of the three modules and 418 private
+  theorems of `Arith/FibreCertSound`, every one a subset of the standard three; `sum_le_of_certOK`, `card_le_of_certOK`,
+  `model` — `[propext, Classical.choice, Quot.sound]`; `cert3_ok` — `[propext]`. The planted record
+  `FS131IKC2Axioms.planted` reads `[sorryAx]`; the reader's control (`--control`, `sorryAx` planted into the first public
+  record) exits 1 naming it (`axioms-control.txt`). `native_decide`: nowhere in the three modules.
+* Not run: the axiom audit, the vacuity scan, the assumptions step, the lint and the doubled names over the whole library
+  — the landing's. For the vacuity scan's reading: `sum_le_of_certOK`'s hypotheses are inhabited together by `model`
+  (`cert3`, `φ = 0`).
+
+## Drafts for the front page
+
+### `scripts/Axioms.lean`, CLEAN (for the landing)
+
+`HadwigerNelson.FibreCertSound.sum_le_of_certOK`, `HadwigerNelson.FibreCertSound.card_le_of_certOK`,
+`HadwigerNelson.FibreCertSound.model`, `HadwigerNelson.FibreCert.cert3_ok` — each a subset of the standard three in the
+built tree (§ Stage 6).
+
+### `data/fs131/claims-NF2.md` § Dated lines (to follow the last)
+
+- 2026-10-14 — **The class-ratio checker is proved sound** (FS131-IKC2): `FibreCertSound.sum_le_of_certOK` and
+  `card_le_of_certOK` are kernel theorems on the standard three, their stored statements unchanged since FS131-KC13 typed
+  them; `certOK`'s definition unchanged since FS131-IKC1 strengthened it. An accepted certificate now implies `Σφ ≤ U_num/L`
+  on FS-66's region at its `p`. The p = 11 certificate's library modules (K1) and p = 19's form F2 are not yet built.
+
+### `LEAN.md` § Searching — Lean (after the last bullet)
+
+- In a module importing only `Mathlib.Data.ZMod.Basic`, `Mathlib.Data.Real.Basic` and the big-operator files,
+  `List.getD_append`, `List.getD_append_right`, `List.getD_eq_default`, `List.getD_eq_getElem`, `Finset.sum_range_reflect`,
+  `Finset.sum_div` and `abel` are unknown (they live in `Mathlib.Data.List.GetD`, `Mathlib.Algebra.BigOperators.Intervals`,
+  …); a three-line local version through `List.getElem?_append_left`/`_right` and `List.getElem?_eq_none` serves, and
+  adding the import changes which instances later statements store (§ above) (FS131-IKC2).
+- A checker written as one long `let` chain is reasoned about through an `rfl` restatement with each part a named
+  private definition (`FibreCertSound.psdCheck_eq`, `p1step_eq`): the parts can then be unfolded one at a time. A fold
+  lemma whose step function is `fun a x => … R a.1 x …` does not rewrite by `simp` (`R a.1 x` is not a pattern);
+  instantiate it with the function and `rw` with the instance, or let `exact` check it by definitional unfolding
+  (`allFold`, `qfold`) (FS131-IKC2).
