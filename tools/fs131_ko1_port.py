@@ -162,7 +162,17 @@ SCAN = [
 LICENCE_NAME = "OAIMath2026-LICENSE.txt"
 LICENCE_SRC = "LICENSE"
 TABLE_KEYS = {"patches", "renames", "scoped", "global_instances", "drop_open", "drop_imports", "more_imports",
-              "aux_unported", "notes", "adaptations", "drop_omit"}
+              "aux_unported", "notes", "adaptations", "drop_omit", "nolint"}
+# NOLINT (FS131-LP1, the coordinator's inventory item 831, Amendment 1 of its brief): an environment linter silenced on
+# one copied declaration, by name, in the file — `[[declaration, linter, reason]]`, the declaration by the name the
+# kernel gives it HERE (the name map and ANON, as the lint prints it), the reason one of NOLINT_REASONS.  The generator
+# writes `@[nolint <linter>]` on exactly that declaration — its own line before the keyword line, or merged into the
+# attribute block the release's text already has there (one block is all Lean takes) — and a one-line comment before
+# it naming the reason class.  An attribute moves no stored term.  Refused: an entry whose declaration is not copied in
+# this module (outside the port, or in another module), a private declaration, an unknown reason, a linter that is not
+# an identifier, an entry given twice, and an entry not used.
+NOLINT_REASONS = {"name": "the release's name", "binder": "the release's binder",
+                  "simpnf": "simp's normal form of the release's lemma"}
 # ADAPTATIONS (a table of their own, pending the coordinator's ruling: plans/FS131-KO1-port-plan.md § 4.3): a token of a
 # release-internal STATEMENT or DEFINITION that does not elaborate at this pin because a Mathlib API changed between the
 # pins (Mathlib's `Measure.map` / `ProbabilityMeasure.map`: § 3.3), rewritten to the same object at this pin.  Refused
@@ -513,7 +523,18 @@ def emit_module(m, path, lines, decls, want, tab, names_here):
     name = base(path)
     mod = MOD_OF_REL[m]
     tree = parse(lines, decls, mod)
-    used = dict(patches=set(), scoped=set(), glob=set(), drop_open=set(), adapt=set(), drop_omit=set())
+    used = dict(patches=set(), scoped=set(), glob=set(), drop_open=set(), adapt=set(), drop_omit=set(), nolint=set())
+    seen_nl = set()
+    for i, ent in enumerate(tab["nolint"]):
+        if not (isinstance(ent, list) and len(ent) == 3):
+            raise Refused(f"{mod}: nolint {i} is not [declaration, linter, reason]")
+        if ent[2] not in NOLINT_REASONS:
+            raise Refused(f"{mod}: nolint {i} ({ent[0]}): the reason {ent[2]!r} is not one of {sorted(NOLINT_REASONS)}")
+        if not re.fullmatch(r"[A-Za-z][A-Za-z0-9_]*", ent[1]):
+            raise Refused(f"{mod}: nolint {i} ({ent[0]}): the linter {ent[1]!r} is not an identifier")
+        if (ent[0], ent[1]) in seen_nl:
+            raise Refused(f"{mod}: nolint {i} ({ent[0]}, {ent[1]}) is given twice")
+        seen_nl.add((ent[0], ent[1]))
     copied, left, examples, rooted, adapted = [], [], [], [], []
 
     def has_want(node):
@@ -681,8 +702,31 @@ def emit_module(m, path, lines, decls, want, tab, names_here):
         addr = f"`[OAIMath2026]` `{name}:{a + kw}`."
         if out[0].startswith("/--"):
             out[0] = f"/-- {addr} " + out[0][3:].lstrip()
+            kwo = kw
         else:
             out.insert(0, f"/-- {addr} -/")
+            kwo = kw + 1
+        # NOLINT (FS131-LP1): the table's entries for this declaration, by its name here
+        nl = [i for i, ent in enumerate(tab["nolint"]) if not o.startswith("_private.") and ent[0] == record_name(o)]
+        if nl:
+            if not KEYWORD.match(out[kwo]):
+                raise Refused(f"nolint {nl[0]} ({name}:{a + kw}): the keyword line of {o} is not where it should be")
+            lints = " ".join(tab["nolint"][i][1] for i in nl)
+            notes = [f"-- nolint (FS131-LP1, inventory item 831): {NOLINT_REASONS[tab['nolint'][i][2]]}, kept as it "
+                     f"is ({tab['nolint'][i][1]})" for i in nl]
+            ind = re.match(r"^\s*", out[kwo]).group(0)
+            if out[kwo].lstrip().startswith("@["):
+                out[kwo] = out[kwo].replace("@[", f"@[nolint {lints}, ", 1)
+                at = kwo
+            elif kwo > 0 and re.match(r"^\s*@\[[^\]]*\]\s*$", out[kwo - 1]):
+                out[kwo - 1] = out[kwo - 1].replace("@[", f"@[nolint {lints}, ", 1)
+                at = kwo - 1
+            else:
+                out.insert(kwo, f"{ind}@[nolint {lints}]")
+                at = kwo
+            for k, note in enumerate(notes):
+                out.insert(at + k, ind + note)
+            used["nolint"].update(nl)
         h = here_name(o) if not o.startswith("_private.") else None
         if h is not None:
             if h in names_here:
@@ -696,8 +740,13 @@ def emit_module(m, path, lines, decls, want, tab, names_here):
     missing = want - {(a, b, o) for a, b, o, _ in copied}
     if missing:
         raise Refused(f"{name}: cone declarations not placed: {sorted(x[2] for x in missing)}")
+    stray_nl = [tab["nolint"][i][0] for i in range(len(tab["nolint"])) if i not in used["nolint"]]
+    if stray_nl:
+        raise Refused(f"{mod}: nolint entries name no declaration copied in this module (outside the port, private, or "
+                      f"another module's): {stray_nl}")
     for key, u in (("patches", "patches"), ("scoped", "scoped"), ("global_instances", "glob"),
-                   ("drop_open", "drop_open"), ("adaptations", "adapt"), ("drop_omit", "drop_omit")):
+                   ("drop_open", "drop_open"), ("adaptations", "adapt"), ("drop_omit", "drop_omit"),
+                   ("nolint", "nolint")):
         if len(used[u]) != len(tab[key]):
             raise Refused(f"{mod}: {key} entries not used: {sorted(set(range(len(tab[key]))) - used[u])}")
     return dict(name=name, path=path, body=body, copied=copied, left=left, examples=examples, rooted=rooted,
@@ -1169,6 +1218,55 @@ def self_test(mods):
             rn_ok = False
         print(f"partner 'a rename (planted on {short(o)}) matches whole names only': {'WHOLE' if rn_ok else 'FAILED'}")
         ok = ok and rn_ok
+        # NOLINT (FS131-LP1, inventory item 831): an entry on a declaration outside the port, and one with a reason
+        # that is not a class, refused; the partner — an entry on a copied theorem of m0 — adds exactly its comment
+        # line and its attribute line (or, where the keyword line already carries an attribute block, merges into it)
+        # and changes nothing else
+        expect("a nolint entry on a declaration outside the port (`HadwigerNelson.Plane.radius_down`)",
+               refused(tables={m0: dict(tab, nolint=tab["nolint"] + [["HadwigerNelson.Plane.radius_down",
+                                                                       "unusedArguments", "binder"]])}))
+        expect("a nolint entry whose reason is not a class",
+               refused(tables={m0: dict(tab, nolint=tab["nolint"] + [[record_name(o), "unusedArguments",
+                                                                       "planted reason"]])}))
+        import difflib
+        base_lines = texts[m0].split("\n")
+        nl_ok, cases = True, []
+        for want_merge in (False, True):
+            cand = [c for c in q0["copied"] if c[3] in PROOFKINDS and not c[2].startswith("_private.")
+                    and all(e[0] != record_name(c[2]) for e in tab["nolint"])
+                    and src0[next(no for no in range(c[0], c[1] + 1) if KEYWORD.match(src0[no - 1])) - 1]
+                    .lstrip().startswith("@[") == want_merge]
+            if not cand:
+                continue
+            _, _, no_, _ = cand[0]
+            try:
+                tn, _ = generate(mods, tables={m0: dict(tab, nolint=tab["nolint"] + [[record_name(no_),
+                                                                                       "unusedArguments", "binder"]])})
+            except Refused:
+                nl_ok = False
+                continue
+            new_lines = tn[m0].split("\n")
+            ops = [op for op in difflib.SequenceMatcher(None, base_lines, new_lines, autojunk=False).get_opcodes()
+                   if op[0] != "equal"]
+            comment = "-- nolint (FS131-LP1, inventory item 831): the release's binder, kept as it is (unusedArguments)"
+            if not want_merge:
+                good = (len(ops) == 1 and ops[0][0] == "insert" and
+                        [x.strip() for x in new_lines[ops[0][3]:ops[0][4]]] == [comment, "@[nolint unusedArguments]"]
+                        and KEYWORD.match(new_lines[ops[0][4]]) is not None)
+            else:
+                # one source line (the keyword line with its attribute block) becomes two: the comment, and the same
+                # line with `nolint unusedArguments, ` inserted at the head of its block
+                good = (len(ops) == 1 and ops[0][0] == "replace" and ops[0][2] - ops[0][1] == 1
+                        and ops[0][4] - ops[0][3] == 2
+                        and new_lines[ops[0][3]].strip() == comment
+                        and new_lines[ops[0][3] + 1] == base_lines[ops[0][1]].replace("@[", "@[nolint unusedArguments, ", 1))
+            cases.append(f"{'merged into an attribute block' if want_merge else 'its own line'} on {short(no_)}: "
+                         f"{'EXACT' if good else 'FAILED'}")
+            nl_ok = nl_ok and good
+        nl_ok = nl_ok and bool(cases)
+        print(f"partner 'a nolint entry adds exactly its comment and its attribute' ({'; '.join(cases) or 'no case'}): "
+              f"{'EXACT' if nl_ok else 'FAILED'}")
+        ok = ok and nl_ok
         # the audit's records (FS131-IPD1's revision): the block for m0 holds exactly one record per copied
         # declaration, instances included, and per instance a `deriving` clause declares; and a private declaration's
         # record stands inside a `section` that opens it — the private one planted by giving a copied theorem of m0 the
@@ -1220,7 +1318,7 @@ def self_test(mods):
         if check(mods, outdir=td, quiet=True) != 0:
             print("SELF-TEST FAILED: the scratch copy does not pass after the plants were undone")
             return 1
-    print(f"SELF-TEST OK: {n} plants refused and 8 partners accepted" if ok else "SELF-TEST FAILED")
+    print(f"SELF-TEST OK: {n} plants refused and 9 partners accepted" if ok else "SELF-TEST FAILED")
     return 0 if ok else 1
 
 
