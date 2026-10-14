@@ -324,11 +324,11 @@ listed — refused).
 | `Filter.EventuallyEqSet` (new at v4.34.1) | `s =ᵐ[μ] t` of sets stored through it there, as `EventuallyEq` at `Prop` here | `KernelCompact.exists_invariant_set`; `ErgodicSMul`'s field (level one only) | EQSET (standing word), PIN-DIFFERENCE; the release kernel's `rfl` |
 | `Filter.EventuallyEmptyOrUniv` (new at v4.34.1) | `ErgodicSMul`'s conclusion `EventuallyEmptyOrUniv s` there, `EventuallyConst s` here | proofs only (3 patches: Amenability 385, RelativeCenters 129, Kernels 509–510); `ErgodicSMul` at level one | proof patches |
 | the coercion's placement through `∏` (the elaborator, not Mathlib) | `↑(∏ …)` there, `∏ ↑…` here | `prod_act_project_lift` | ascription (ruled), ADAPTED |
-| `ProbabilityMeasure.map`, `Measure.map`, `isProbabilityMeasure_map` instance | as § 3.3 | 1 statement adapted at an instance (`covariance_mean_zero`), 1 at `ProbabilityMeasure.map` (`center_law_ordinary`), 22 proof sites | ADAPTED / patches |
+| `ProbabilityMeasure.map`, `Measure.map`, `isProbabilityMeasure_map` instance | as § 3.3 | 1 statement adapted at an instance (`covariance_mean_zero`), 1 at `ProbabilityMeasure.map` (`center_law_ordinary`), 14 proof sites (lanes B's remainder and C) | ADAPTED / patches |
 | renamed lemmas | `ite_eq_left/right`, `dite_eq_left` (core), `Measurable.of_eval`, `Set.mem_ofPred_eq`, `Finset.prod_le_prod₀`, `Isometry.lipschitzWith`, `dist_star_star`, `Measure.fst_map_prodMk`'s and `compProd_map_condDistrib`'s and `condDistrib_comp`'s arguments | proofs only | renames and patches |
 
 **5.2 Re-pricing for lane D, from what B and C cost.** Lane B's remainder and lane C took this job one session:
-Lane C's ten modules (5,574 release lines) needed 1–3 elaboration tries each, 47 table entries beyond the instances, and
+Lane C's ten modules (5,574 release lines) needed 1–3 elaboration tries each, 42 renames, patches and adaptations beyond the instances (and 3 `drop_imports`), and
 five rulings or standing-word rules (COEFF, CLASS_PARAMS, EQSET, the ascription, the inductive docstrings); the per-module
 cost was minutes, the rulings and the comparator's rules were the cost, as the first implementer found. Lane D's six
 modules (2,656 lines: Representations, Energy, SpectralMeasure, RadialEnergy, Ergodicity, BorelTransfer) carry the
