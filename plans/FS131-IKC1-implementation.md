@@ -5,8 +5,18 @@ from `fs131-wc13` at `7be9eef34`, worktree `.claude/worktrees/fs131-wnf`. Workin
 
 ## Theorems this phase proved
 
-- `HadwigerNelson.FibreCertSound.not_sum_le_of_certOK` (in `data/fs131/ikc1/lean/controls/Drop3.lean`, not a library
-  module): the statement of `sum_le_of_certOK` is false at FS131-KC13's `certOK`. [kernel], axioms the standard three.
+- `HadwigerNelson.FibreCertSound.not_sum_le_of_certOK` (`data/fs131/ikc1/lean/controls/Drop3.lean`, not a library
+  module): the statement of `sum_le_of_certOK` is false at FS131-KC13's `certOK`. [kernel], the standard three.
+- `HadwigerNelson.FibreCert.cert3_ok : certOK cert3 = true` at the strengthened checker (`Arith/FibreCert3`). [kernel],
+  `[propext]`.
+- `HadwigerNelson.FibreCertSound.model` (`Arith/FibreCertSound`): the hypotheses hold together at `cert3`. [kernel],
+  the standard three.
+- In `Arith/FibreCertSound`, private, no `sorry`, the standard three: `opSum_eq_zero` (an accepted certificate's ops
+  sum to zero at the moments — the computation half), `opSum_O1`, `opSum_boxOps`, `opSum_O5_nonneg`, and their helpers
+  (`sum_digit`, `dec_bag`, `Yv_map_act`, `Ym_witness`, `Inv_step`, `seg_shadow`, `sum_shadow`, …). [kernel]
+- The controls `cert3drop_refused`, `cert3dims_refused`, `cert3long_refused`, `cert3psd_refused`
+  (`data/fs131/ikc1/lean/controls/`): `certOK _ = false` by `decide +kernel`. [kernel]
+- **Not proved**: `sum_le_of_certOK` and `card_le_of_certOK` rest on `sorryAx` through four leaves, L1–L4 (§ Stage 5).
 
 ## Stage 1 — SAVED: the readback
 
@@ -116,3 +126,109 @@ monomial (`++`, `map`, `foldl`, `length`: a `brecOn` per step) → unrolled matc
 phase 1 repeated in every segment → its rows as checked literals (segment 0 at p = 11: over 12 GiB → 9.5 GB). A
 `let` chain in the op step is not a cost (no change when removed). The base of a segment — generating and reading
 all 53,813 ops — is about 4.5 GB, so `nseg = 4` leaves 9.5 GB; the landing's shape (§ K1) takes more segments.
+
+## Stage 3 — SAVED: the proof's skeleton; the assembly, level one, the left side and the rows
+
+`Arith/FibreCertSound`: the moments `Ym p φ m = Σ_{γ ∈ affs p} Π_{x ∈ m} φ(act γ (pt p x))`, summed (unnormalised) over
+the maps `act (t, s, e) z = s·z̄^e + t`, `N(s) = 1`; an op's value `opVal`; `opSum` of a list of ops. The theorem is
+assembled from five children: `opSum_eq_zero` (the computation half), `opSum_O1` (the left side: `−U_num·G + L·G·Σφ`,
+`G = |affs|`), `opSum_O23_nonneg`, `opSum_O4_nonneg`, `opSum_O5_nonneg`; then `L·G·Σφ ≤ U_num·G` and `G, L > 0`.
+`card_le_of_certOK` follows from it (the indicator of an independent set has `q = 0`). Proved at this stage: the
+assembly, `card_le_of_certOK`, `opSum_O1`, the rows (`opSum_boxOps`: `±lam·Σ_γ Π_A φγ·Π_B(1 − φγ)`, by induction
+on `B`).
+
+## Stage 4 — SAVED: the computation half proved
+
+`opSum_eq_zero : certOK C = true → opSum (opList C (orbRows C) (qcoefs C)) = 0`, with no `sorry`, from:
+* `sum_digit` — digit `e` of `Σ_{i<K} c_i B^i` is `c_e` when every `c_i < B` (K2b); `digits_eq` its use on the slots;
+* `dec_bag` — the base-8 digits of `bag l = Σ 8^x` name the multiset `l` when `|l| < 8` (K2d);
+* the maps as a group (`comp`, `inv`, `act_comp`, `comp_assoc`, `comp_inv`, `inv_comp`), `sum_affs_comp` (precomposing
+  permutes `affs`), `Yv_map_act` and `Yv_perm` (K2e);
+* the codes (`pt_mkP`, `pt_subP`, `pt_addP`, `pt_gmap`, `gmap_lt`, `isUnit_norm`), `pt_witness` and `Ym_witness`: a
+  witness map is one of the averaged maps, so it does not move a moment (K2e);
+* the segment's fold: `Inv` (ghost slot totals `P`, `N`, salts `S`; every leaf `S + Σ_s P_s 2^{w(s+1)}`; every slot
+  total at most `tot`; while every check holds, the segment's sum is `Σ (P − N)·Y(dec key)`), `Inv_step`, `Inv_fold`,
+  `seg_shadow` (an accepted segment's part is zero, and every op's entry names a segment below `nseg`), and
+  `sum_shadow` (covered ops: the segments add up to the identity) (K2c, K2i).
+
+## Stage 5 — SAVED: the two block families reduced to four typed leaves; the price re-made
+
+`opSum_O23_nonneg` and `opSum_O4_nonneg` are proved from four leaves, each typed and `sorry`:
+
+| leaf | statement | what it needs |
+|---|---|---|
+| L1 `psd_of_psdCheck` | `psdCheck b = true → PSDN b.tri b.m` (`∀ v, 0 ≤ Σ_{i,j<m} R_ij v_i v_j`, `R = triGet b.tri`) | `symRows` is `triGet` on `m × m`; each packed row is the sum of its digits; `rev` by Horner; the Kronecker digit is `Σ_k d_ik d_jk` (the digit lemma on a product's coefficients, all below `2^wB`); `E = s·R − M·Mᵀ`; diagonal dominance gives `vᵀEv ≥ 0` |
+| L2 `blockT_nonneg` | `PSDN b.tri b.m → |reps| + 1 ≤ b.m → weights in range → 0 ≤ blockT C φ b reps` | `p·T = Σ_{j ∈ ZMod p} Σ_γ vᵀ R v`, `v₀ = c`, `v₁₊ₐ = Σ_x f(j + ⟨u, x⟩)·Π_{reps_a}(φ ∘ γ ∘ (· + x))` (`u = 0`: `f(0)`); the codes below `n` as the points of `V`; translation invariance of `Ym`; the checker's `σ`, `κ` as `p·Σ_j` of the virtual weights (no primality) |
+| L3 `opSum_O23_eq` | `globalOK C = true → opSum (opsO2 ++ opsO3) = Σ_{b ∈ blocks1} blockT C φ b C.reps` | `pairCoefs` is `triGet` over `repPairs` (`m = |reps| + 1`); the bucketed orbit rows (`bget`, `bmod`) and `orowsOK`; the packed orbit rows' digits (`sum_digit`, the bound `< 2^w`); each pair's transporter moves its term onto its orbit's representative (`Yv_map_act`, the swap by a translation and `κ` even); `i ≤ j` doubling with `R` symmetric |
+| L4 `opSum_O4_eq` | `globalOK C = true → opSum (opsO4 C (qcoefs C)) = qform·Σ_{b ∈ blocksq} blockT C φ b [[0]]` | `Q(m)(Y) = q(φ)·Y(m)` (`q(φ ∘ act γ) = q(φ)`: `act γ` a bijection of `V`, `s ↦ s_γ s̄^e` a bijection of `S`); every `t` moved to its class's representative (`g(t_ν) = t`, `g 0 = 0`) |
+
+**Re-priced from the children proved.** The computation half (K2a–K2d, K2i), the assembly, level one, the left side
+and the rows took about 600 lines of proof, against the plan's estimate for K2 of 2,000–4,000 in all. The four leaves
+left are priced at L1 250–350, L2 200–300, L3 350–500, L4 150–250 lines: about 950–1,400 more, so K2 is about
+**1,550–2,000 lines of proof**, at the low end of the plan's range, plus the checker (606 lines, rewritten). Kernel:
+p = 11 in six declarations, about 320 s in all, at most 9.5 GB (§ Stage 6).
+
+## Stage 6 — SAVED: p = 11 under the new checker, measured (K1's numbers; the landing's modules not yet cut)
+
+`tools/fs131_ikc1_gen.py data/fs66/b1/cert-p11.json … --nseg 4` (53,813 ops, 3,760 slots, 218 orbits, slot width 120
+bits; the data 4.3 MB of text, 6.0 MB of `.olean`, 18 s to compile). Each part in its own file, `decide +kernel`, the
+laptop under the slot, one CPU, `/usr/bin/time -v` (logs `data/fs131/ikc1/logs/K11*.log`):
+
+| declaration | kernel and elaboration | peak RSS |
+|---|---|---|
+| `globalOK cert11 = true` (phase 1 with its packed rows, `orowsOK`, the q-part, the shape) | 39.5 s | 6.2 GB |
+| `segCheck cert11 0 = true` | 85.9 s | 9.5 GB |
+| `segCheck cert11 1 = true` | 50.2 s | 8.5 GB |
+| `segCheck cert11 2 = true` | 51.1 s | 8.6 GB |
+| `segCheck cert11 3 = true` | 42.4 s | 7.1 GB |
+| `psdAll cert11 = true` | 50.6 s | 6.6 GB |
+| **`certOK cert11 = true`, its three conjuncts** | **about 320 s** | **at most 9.5 GB** |
+
+So FS-66's p = 11 certificate passes the strengthened checker in the kernel. The planner's 185 s / 12.0 GB is
+superseded (it was measured under the old checker). These are probe files run through `lake env lean` against a
+scratch farm of this tree's modules, not library modules: the landing's cut is open. Every segment pays a base of
+about 4.5 GB (generating and reading all 53,813 ops), so a segment module cannot share a 10 GB build batch with
+another; the cut that fits the build is one module per declaration with `BATCH=1` for them, or `nseg = 8` (about
+7 GB each, extrapolated, not run). F2 at p = 19 (§ 3.2 of the planner's record) is not started.
+
+## Drafts for the front page
+
+### `LEAN.md` § The kernel's cost model (after the bullet "A kernel leaf priced from a plan's table is priced high")
+
+- **List recursion on a short list costs the kernel a `brecOn` per step; an unrolled `match` does not.** Computing an
+  op's key as `bag ((a ++ b.map f).map g)` (`++`, `map`, `foldl`, `length` on lists of at most four points) cost 51.6 s
+  and 4.2 GB at p = 7; the same key as an unrolled `match` on `a` and on `b` (`FibreCert.bagMap`, `lenU`), 26.6 s and
+  3.3 GB. A `let` chain in the step is not a cost: removing it changed nothing (FS131-IKC1).
+- **Random access into a list of lists is paid per lookup and retained**: `triGet` by `getD` in phase 1 at p = 11
+  (1953 pairs × 11 blocks) cost 35 s and 6.3 GB alone; the same entries read in order from the flattened rows,
+  nothing measurable. An in-place `List.modify` of a 218-element list per pair cost 1.6 GB; buckets of 16 removed it
+  (FS131-IKC1).
+- **A computation every declaration repeats belongs in the data, checked once**: phase 1's packed orbit rows as
+  certificate literals, compared in one declaration (`orowsOK`), took a segment at p = 11 from over 12 GiB to 9.5 GB
+  (FS131-IKC1).
+
+### The audit's block (for the landing; `scripts/Axioms.lean`)
+
+To be filed when the module's leaves are proved: `HadwigerNelson.FibreCertSound.sum_le_of_certOK`,
+`HadwigerNelson.FibreCertSound.card_le_of_certOK`, `HadwigerNelson.FibreCertSound.model` and
+`HadwigerNelson.FibreCert.cert3_ok` under CLEAN. Today the first two read `sorryAx` through L1–L4 (§ Stage 7).
+
+## Stage 7 — SAVED: the gate items this stage can give
+
+* **The build** (`./scripts/build.sh` under the slot, `--mem 10 --cpus 4`, `MEMMAX=10G BATCH=8`): OK, 249 of 249 batches,
+  7m41s (`data/fs131/ikc1/logs/build2-full.log`). The only warnings from these files are the four leaves' `sorry`
+  (`FibreCertSound.lean` lines 635, 651, 658, 664). The first build (`build1-full.log`) also warned of two unused
+  hypotheses of private theorems; they were removed.
+* **No conclusion weakened, from the kernel's side.** `StatementDump.lean` on the built library after
+  (`data/fs131/ikc1/statements-after.txt`), compared with § 1.3's dump by `tools/fs131_ikc1_statements.py`
+  (`statements-compare.txt`): `sum_le_of_certOK`, `card_le_of_certOK`, `V`, `unitCircle`, `qform`, `Cert.p`,
+  `Cert.scale`, `Cert.unum` — SAME, the raw stored text identical. Its control plants `LE.le → LT.lt` in the
+  after-dump's type of `sum_le_of_certOK` and exits 1 (`statements-compare-control.txt`). 36 public constants of the
+  checker changed and 64 were removed (old helpers: `Tr`, `OT`, `revRow`, `wa`, …), all listed: § 2.1 is their account.
+* **Axioms** (`data/fs131/ikc1/lean/Axioms.lean` → `data/fs131/ikc1/axioms.txt`): every public declaration of the three
+  modules, 204 records: 140 `[]`, 58 `[propext]` (the checker's definitions, `cert3_ok`), 4 the standard three (`model`,
+  `qform`, `unitCircle`, `unitCircle.congr_simp`), 2 with `sorryAx` (`sum_le_of_certOK`, `card_le_of_certOK`). The
+  private theorems are printed too: `sorryAx` reaches exactly the four leaves and the four theorems above them. The
+  planted record `FS131IKC1Axioms.planted` reads `[sorryAx]`. `native_decide`: nowhere in the three modules.
+* Not run: the axiom audit, the vacuity scan, the assumptions step, the lint, the doubled names — they are the
+  landing's, and with four `sorry`s the module is not at a landing.

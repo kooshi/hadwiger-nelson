@@ -678,8 +678,7 @@ private theorem shape_of (C : Cert) (hC : globalOK C = true) :
   exact ⟨hC.1.1.2, hC.1.2, hC.2⟩
 
 /-- **The times-1 blocks** (K2g, K2h): their constant, linear and quadratic terms sum to a non-negative number. -/
-private theorem opSum_O23_nonneg (C : Cert) [NeZero C.p] (hC : certOK C = true) (φ : V C.p → ℝ)
-    (h0 : ∀ x, 0 ≤ φ x) (h1 : ∀ x, φ x ≤ 1) :
+private theorem opSum_O23_nonneg (C : Cert) [NeZero C.p] (hC : certOK C = true) (φ : V C.p → ℝ) :
     0 ≤ opSum C.p φ (opsO2 C ++ opsO3 C (orbRows C)) := by
   have hg := globalOK_of C hC
   obtain ⟨hm, -, hw⟩ := shape_of C hg
@@ -691,7 +690,7 @@ private theorem opSum_O23_nonneg (C : Cert) [NeZero C.p] (hC : certOK C = true) 
 
 /-- **The times-q blocks** (K2g, the q-part): `q(φ)` times a non-negative number. -/
 private theorem opSum_O4_nonneg (C : Cert) [NeZero C.p] (hC : certOK C = true) (φ : V C.p → ℝ)
-    (h0 : ∀ x, 0 ≤ φ x) (h1 : ∀ x, φ x ≤ 1) (hq : 0 ≤ qform C.p φ) :
+    (hq : 0 ≤ qform C.p φ) :
     0 ≤ opSum C.p φ (opsO4 C (qcoefs C)) := by
   have hg := globalOK_of C hC
   obtain ⟨-, hm, hw⟩ := shape_of C hg
@@ -753,9 +752,9 @@ theorem sum_le_of_certOK (C : Cert) [NeZero C.p] (hC : certOK C = true) (φ : V 
   have hz := opSum_eq_zero C hC φ
   simp only [opList, opSum_append] at hz
   rw [opSum_O1] at hz
-  have h23 := opSum_O23_nonneg C hC φ h0 h1
+  have h23 := opSum_O23_nonneg C hC φ
   rw [opSum_append] at h23
-  have h4 := opSum_O4_nonneg C hC φ h0 h1 hq
+  have h4 := opSum_O4_nonneg C hC φ hq
   have h5 := opSum_O5_nonneg C φ h0 h1
   have hG := gsize_pos C.p
   have hL : (0 : ℝ) < C.scale := by exact_mod_cast scale_pos C hC
