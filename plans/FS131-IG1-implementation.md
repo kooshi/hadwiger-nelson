@@ -7,7 +7,39 @@ its Amendment 1, 07:42 UTC). Branch `fs131-wpg` in the worktree `.claude/worktre
 
 ## Theorems this phase proved
 
-(Filled at the hand-back, from the built tree's axiom print.)
+Every line is [kernel]. The axioms were printed from the built tree after build 3 by `data/fs131/ig1/lean/Axioms.lean`
+(`data/fs131/ig1/axioms-after-3.txt`) and read by `tools/fs131_ig1_axioms.py`. "The standard three" means exactly
+`[propext, Classical.choice, Quot.sound]`. Namespace `HadwigerNelson.Rigidity`.
+
+- `PieceDual.continuous_dualMap`: the dual `χ ↦ χ ∘ φ` of an endomorphism is continuous. Standard three.
+- `measurable_toPiece`: restriction `R̂ → M̂` is measurable. Standard three.
+- `IsPiece.mulR_mem`: a piece is stable under every `γ_n`. Standard three.
+- `pieceMul_zero`, `pieceMul_add`: `n ↦ γ_n·` is an action of `ℤ²` on a piece. Standard three.
+- `toPiece_rot`: restriction intertwines `rot γ_n` with `α^n`. Standard three.
+- `isSolenoid_pieceDual`: **PE-1′, first bullet.** Over a number field, `M̂` is a solenoid for every `M ⊆ R`. The
+  unread `IsPiece` binder is dropped. Standard three.
+- `isTotallyIrreducible_pieceAction`: **PE-1′, the criterion's (⇐).** The action on a piece is totally irreducible
+  (number field). Lemma F is proved here as a private helper. Standard three.
+- `not_isVirtuallyCyclic_pieceAction`: **PE-1′, third bullet.** Standard three.
+- `isPiece_closure_one`: `ℤ[Γ]·1` is a piece (number field; `ℚ[Γ] = ℚ(Γ) = F(i)`). Standard three.
+- `exists_pieceChain`: a monotone chain of pieces exhausting `R` (number field). Standard three.
+- `isErgodicOn_map_toPiece`: **Lemma Γ, step 1.** The unread probability binder is dropped. Standard three.
+- `integral_eq_zero_of_isAddHaarMeasure`: **Lemma Γ, step 4.** The unread probability binder is dropped. Standard three.
+- `ksEntropy_rot_eq_iSup`: **Lemma Γ, step 3.** Standard three and `sorryAx`, only through
+  `ksEntropy_eq_iSup_ksEntropyOn` (T2, `Rigidity/Entropy`'s tenth leaf, not mine).
+- `isHaarFourier_or_ksEntropy_eq_zero`: **Lemma Γ.** Standard three and `sorryAx`, only through `haar_or_zero_entropy`
+  (the printed Theorem 1.2, `Rigidity/PositiveEntropy`'s leaf) and T2, both not mine.
+
+**Consequences.** These were proved already and had rested on `sorryAx` through this module's leaves; they now rest on
+the standard three: `pieceMul`, `pieceAction` (their values read `IsPiece.mulR_mem`, `pieceMul_zero`, `pieceMul_add` and
+`continuous_dualMap`).
+
+**Private helpers**, each on the standard three:
+- Lemma F, in two parts: `finiteIndex_range_nsmul_prime` and `finiteIndex_range_nsmul`.
+- `exists_nat_mul_mem_closure`: `ℚ[Γ_Λ] = F(i)`, denominators cleared.
+- `exists_nat_mul_mem_of_mem_span`, `isAlgebraic_of_mem_fieldI`, `exists_common_nsmul_mem`, `countable_of_isPiece`,
+  `comap_toPiece_mono`, `map_rot_eq`, `ksEntropy_map_toPiece`, `PieceDual.measurableAdd`, `PieceDual.measurable_dualMap`.
+- The `mulR` and `γC` lemmas, `pieceToFieldI`, `restrictPiece`.
 
 ## Stage 1 — SAVED: the readback, the leaves restated, the stored statements before any edit
 
@@ -154,3 +186,145 @@ repaired plant) reads all seven files SAME as `HEAD` with every block comment re
 kernel's side** the seven modules were dumped before the build (`data/fs131/ig1/lean/DocDump.lean`, IDG1's with one
 `PROOF <hash>` line per theorem added, so that proofs are compared too; `docdump-before.txt.xz`, 304 constants, 252
 theorems), to be compared after it (stage 4).
+
+## Stage 4 — SAVED: three builds, two more ruled drops, the checks from the built tree
+
+**Build 1** (`data/fs131/ig1/build.sh 1 8`, the slot at 10 GiB and 4 CPUs): `==> build: OK — 249 of 249 batches, 10
+module(s) rebuilt, 5 module(s) with warnings, 7m38s`, `exit=0` (`logs/build-1.log`; full output
+`build/gate/build/20261014T080506Z-2252505.log`; peak 3.50 GiB for one process). Rebuilt: the seven docstring modules,
+`Pieces`, `EntropySplitMax`, `Proofs`. `Pieces` built with no warning (`✔`). Its statement dump showed one new public
+constant, `pieceAction.congr_simp`, which `push Not` generated in Lemma Γ's proof (`simp` making a congruence lemma for
+a definition with a proof argument). The `push Not` is replaced by `not_not` (a proof edit), and **build 2**
+(`logs/build-2.log`, 7m0s, `exit=0`) generates no such constant.
+
+**The lint after build 2 was red, and correctly so** (`logs/lint-1.log`, exit 1): `unusedArguments` named
+`isErgodicOn_map_toPiece` and `integral_eq_zero_of_isAddHaarMeasure`, argument `[IsProbabilityMeasure ρ]` in each.
+Neither proof reads it: ergodicity and a vanishing Fourier coefficient need no total mass. **Both binders are dropped**
+under item 726's standing word. Their callers are Lemma Γ (the instance is not positional) and my model drafts, and no
+other module names them (`grep`). That makes four ruled differences, listed below.
+**Build 3** (`data/fs131/ig1/build.sh 3 8`): `==> build: OK — 249 of 249 batches, 3 module(s) rebuilt, 5 module(s) with
+warnings, 7m7s`, `exit=0` (`logs/build-3.log`; full output `build/gate/build/20261014T083711Z-2343931.log`).
+Rebuilt: `Pieces` (8.5 s), `EntropySplitMax`, `Proofs`. **No warning from `Pieces`** (`✔ … Built
+Proofs.HadwigerNelson.Rigidity.Pieces`). The build prints no warning that is not `declaration uses 'sorry'`, and those
+come from `Entropy` (T2), `PositiveEntropy` (`haar_or_zero_entropy`), `ChainAtTA` (three leaves), `UnitCircle` (lane A's
+leaf) and `EntropySplitMax` (six leaves), none of them mine. **`sorry` in `Pieces`: 0** (`grep -c`).
+
+**From the built tree after build 3:**
+- *Statements* (`tools/fs131_ig1_statements.py statements-before.txt statements-after-3.txt 68c47bb40 --dropped
+  dropped.txt`, `logs/statements-compare.out`): **PASS**. In the nine modules, 219 named constants agree in kind and type,
+  54 data definitions agree in value, the 2 ruled definitions' data views agree, and the 6 `example` heads are
+  unchanged. There is **no new public constant**, no axiom, and 25 new private helpers. The four **RULED DROP**s are
+  `isSolenoid_pieceDual`, `exists_pieceChain`, `isErgodicOn_map_toPiece` and `integral_eq_zero_of_isAddHaarMeasure`.
+  **Its control** (`logs/statements-compare-control.out`) plants 8 faults and reports all 8.
+- *The four ruled differences, exactly* (`tools/fs131_ig1_ruled.py`, `logs/ruled.out`): **PASS**.
+  - `exists_pieceChain`: the stored type is the old one with the single `fun (hM : ` renamed `fun (_hM : `, and its hash
+    is unchanged (1327684456). This is the coordinator's condition.
+  - `isSolenoid_pieceDual`: the old type was printed `…, (IsPiece F p M) -> (BODY)` (an arrow, since the body never read
+    the hypothesis). The new type is that with the arrow, the body's parentheses and `{p : AdmissiblePair F}` removed.
+  - The two instance drops: each new type is the old one with the binder ` [inst : IsProbabilityMeasure …]` removed.
+  **Its control** (`logs/ruled-control.out`) changes one character of each of the four new types, and all 4 are reported.
+- *The seven docstring modules* (`tools/fs131_ig1_docdump_diff.py docdump-before.txt docdump-after-3.txt`,
+  `logs/docdump-compare.out`): **PASS: identical**. All 304 constants match line for line, internal ones included,
+  with every theorem's proof hash. **Its control** (`logs/docdump-compare-control.out`) reports all 3 planted faults.
+- *Axioms* (`data/fs131/ig1/lean/Axioms.lean` → `axioms-after-3.txt`, read by `tools/fs131_ig1_axioms.py`,
+  `logs/axioms-check.out`): **PASS**. `Pieces` has 60 records, private helpers included.
+  - **58 CLEAN**: each rests on a subset of the standard three.
+  - **2 THROUGH**: each rests on the standard three and `sorryAx`, and its `sorry` comes only from leaves of other
+    modules. `ksEntropy_rot_eq_iSup` reaches it through `ksEntropy_eq_iSup_ksEntropyOn` (T2, `Rigidity/Entropy`).
+    Lemma Γ, `isHaarFourier_or_ksEntropy_eq_zero`, reaches it through that and `haar_or_zero_entropy` (`Rigidity/PositiveEntropy`).
+  - **0 DECLARED**: nothing reaches the declared theorem yet, because `haar_or_zero_entropy` is a `sorry`.
+  - **No `sorry` of `Pieces`' own.** The planted record (`positive_entropy_rigidity_of_polishSpace`) reads DECLARED.
+  - **Downstream** (`EntropySplitMax`, 9 records): 3 rest on no `sorry`. The `sorry` of the other 6 comes only from
+    that module's own six leaves, none from `Pieces`.
+  **Its control** (`logs/axioms-check-control.out`) plants 4 faults, all reported, and the planted record fires: a `sorry`
+  of `Pieces` itself, an unknown axiom, a `sorry` from a leaf outside the allowed two, and a downstream record whose
+  `sorry` comes from `Pieces`.
+- *Linters* (`lake lint --no-build -- --no-build --trace` under the slot, `logs/lint-2.log`): `exit=0`, `-- Linting
+  passed for Proofs.`, 14 linters `(2/2) Passed!`. The control is real: `logs/lint-1.log` was red on build 2's two
+  unread binders and named both.
+- *Doubled names* (`./scripts/dupnames.sh` under the slot, `logs/dupnames-1.log`): `OK — no name is declared by two
+  modules (24 generated on demand)`, `exit=0`. The scan reports that no repeated name appeared or disappeared since this
+  tree's previous complete run.
+- *Spec examples*: the 6 `example`s of the nine modules elaborate in each build and their heads are unchanged (the
+  statement reader's text side).
+- *Models* (`data/fs131/ig1/work/ModelDrafts.lean` against the built tree, `logs/lean-models-2.log`, exit 0). The same
+  file with a planted `example : (1 : ℕ) = 2 := rfl` fails (`logs/lean-models-plant.log`, exit 1). The contents are in
+  the drafts below.
+
+**Re-price** (Done means item 2): leaves 1–5 took about 20 minutes. The other ten were then priced at an hour and took
+about 40 minutes with three repairs. After that the time went to the builds, about 7 minutes each, three of them.
+
+## Drafts for the landing
+
+### `scripts/Axioms.lean` — the CLEAN block
+
+`data/fs131/ig1/audit-block.lean` was generated from build 3's axiom print by `tools/fs131_ig1_audit_block.py`
+(IDG1's generator, aimed at `Pieces`). It has **31 `#print axioms` lines**, one per public record of `Pieces` on the
+standard three; Lean's generated names (`casesOn`, `recOn`, …) are left out. Lemma Γ and step 3 are left out and listed
+in a comment, each with the leaves its `sorry` comes from.
+- **Once T2 lands** (`ksEntropy_eq_iSup_ksEntropyOn`), `ksEntropy_rot_eq_iSup` joins CLEAN.
+- **Once `haar_or_zero_entropy` lands** on the declared Theorem 1.3, Lemma Γ belongs in IMPORTED, resting on
+  `positive_entropy_rigidity`: a record the audit's IMPORTED section must list.
+
+**Slot:** the end of CLEAN, just above the PURCHASED banner, beside FS131-IDG1's block (`data/fs131/idg1/audit-block.lean`)
+when the chain lands.
+
+### `ARCHITECTURE.md` § 3, the row of `Rigidity/Pieces` (outside my touches)
+
+- "**FS-131 (FS131-KN8), skeleton: 15 leaves `sorry`.**" → "**FS-131 (FS131-KN8, proved by FS131-IG1): no `sorry`;
+  `ksEntropy_rot_eq_iSup` and Lemma Γ rest on `sorryAx` through `Rigidity.ksEntropy_eq_iSup_ksEntropyOn` (T2) and
+  `Rigidity.haar_or_zero_entropy` until those land.**"
+- "**Proved:** `dualMap_apply`, `dualMap_id`, `dualMap_comp`." → "**Proved:** all; Lemma F
+  (`G ⧸ mG` finite for a group in `F(i)`) as a private helper."
+- The imports cell is right as it stands. The new import `Mathlib.Algebra.Group.Subgroup.Finsupp` is Mathlib's, and
+  `tools/check_architecture.py` passes.
+
+### `Rigidity/Pieces`' module docstring (outside my touches but the amendment's phrase)
+
+- The title "(FS-131, job FS131-KN8; module M6 of `plans/FS131-KN3-chain-plan.md`; skeleton)" → "…; proved by FS131-IG1)".
+- After "PE-1′ (X02D l. 146): `M̂` is a solenoid (`isSolenoid_pieceDual`)" add ", for every `M ⊆ R` over a number field —
+  the proof reads no piece".
+- The **Models.** paragraph gains: "Lemma Γ's hypothesis and PE-1′'s, at the first piece and the point mass, are
+  inhabited given an admissible pair (FS131-IG1's `ModelDrafts`, to be added as `example`s here)".
+
+A docstring edit in `Pieces` recompiles `EntropySplitMax` and `Proofs` only.
+
+### Models of the hypotheses, for the landing's reading
+
+The vacuity scan has no tracked carrier among `Pieces`' binders, so it is silent here (`LEAN.md` § The gate, the
+silent-module clause). For each structure of hypotheses, its model and whether the library holds it:
+
+| statement(s) | hypotheses | model | in the library? |
+|---|---|---|---|
+| `continuous_dualMap`, `measurable_toPiece`, `toPiece` | none beyond the types | every `M`, `φ` | yes |
+| `IsPiece.mulR_mem`, `pieceMul_*`, `pieceAction`, `toPiece_rot`, `not_isVirtuallyCyclic_pieceAction` | `IsPiece p M` | `ℤ[Γ]·1` (`isPiece_closure_one`), given `p` | given `p` only: `exists_admissiblePair` is lane A's open leaf |
+| `isSolenoid_pieceDual` | `[NumberField F]` | every `M`; `F = ⊥` (`Instances.UpperHalfValues.instNumberFieldBot`, downstream) | yes |
+| `isTotallyIrreducible_pieceAction`, `isPiece_closure_one`, `exists_pieceChain` | `[NumberField F]`, `p` (and `IsPiece p M`) | the first piece, given `p` | given `p` only |
+| `isErgodicOn_map_toPiece`, `ksEntropy_rot_eq_iSup`, **Lemma Γ** | `ErgodicSMul p.subgroup (Dual F) ρ` (with probability where read) | the point mass at the trivial character (`FS131IG1Models.ergodicSMul_dirac_one`, drafted) | **no** — drafted, given `p` |
+| PE-1′ as a model of the printed Theorem 1.2's hypotheses (`haar_or_zero_entropy`) | solenoid, totally irreducible, not virtually cyclic, an invariant ergodic probability | the first piece and the point mass's image (`FS131IG1Models.pe1_model`, drafted) | **no** — drafted, given `p`. The **non-degenerate model** the earlier planners named: every clause is exercised, unlike the one-point solenoid |
+| `integral_eq_zero_of_isAddHaarMeasure` | `(ρ.map (toPiece M)).IsAddHaarMeasure`, `0 ≠ r ∈ M` | inside Lemma Γ's proof, at a late piece where `haar_or_zero_entropy` returns Haar. Outside: `ρ = dualHaar (unitRing F)`, whose image under the onto continuous homomorphism `toPiece M` is Haar | **no** — the second is not proved here (it needs onto-ness, D3's `surjective_compAddMonoidHom`, and open-positivity of Haar), a short job if a model is wanted |
+| the declared Theorem 1.3's `NoVirtuallyCyclicFactors` at a piece | — | FS105-NVC, inside `haar_or_zero_entropy`'s proof (lane M5) | not mine |
+
+The drafts are `data/fs131/ig1/work/ModelDrafts.lean`: `ergodicSMul_dirac_one`, `firstPiece`, `pe1_model`, and an
+`example` applying Lemma Γ at the model. They elaborate against the built tree (`logs/lean-models-2.log`). **Slot:** each
+as an `example` (or a theorem named `…_model`) at the end of `Rigidity/Pieces`. Every one of them takes `p`, and becomes
+unconditional with `exists_admissiblePair`.
+
+### `LEAN.md` § Searching — Lean (Keryx files; each a new bullet at the section's end)
+
+- `ℚ[Γ] = ℚ(Γ)` for algebraic generators, with no polynomial written: `IntermediateField.adjoin_toSubalgebra_of_isAlgebraic` (the name `adjoin_algebraic_toSubalgebra` is deprecated at the pin) makes the subfield's carrier `Algebra.adjoin`, `Algebra.adjoin_eq_span` and `Submonoid.closure_eq` make that the `ℚ`-span of the monoid the generators form, and one `Submodule.span_induction` clears denominators (`Rat.smul_def`, `Rat.mul_den_eq_num`, `linear_combination`). An element of a number-field subfield `K` of `ℂ` is algebraic over `ℚ` as `((IsIntegral.of_finite ℚ (⟨x, hx⟩ : K)).map K.subtype.toRatAlgHom).isAlgebraic` (`Rigidity.exists_nat_mul_mem_closure`, private; FS131-IG1).
+- Lemma F (`A` torsion-free with an injective map into a number field `K`: `A ⧸ mA` finite) as an index: at a prime the argument of `main`'s `ThreeColourCriterion.finite_quotient_span_prime` runs for any such group with `ZMod q` acting on `A ⧸ qA`; at a product `AddSubgroup.relIndex_mul_index` and `AddSubgroup.index_comap_of_surjective` along `(nsmulAddMonoidHom b).rangeRestrict`, whose comap of `abA` is `aA` by `nsmul_right_injective` (`Rigidity.finiteIndex_range_nsmul`, private; FS131-IG1).
+- An `AddSubgroup.closure` of a countable set is countable with no lemma of its own at the pin: `AddSubgroup.mem_closure_range_iff` (import `Mathlib.Algebra.Group.Subgroup.Finsupp`) makes `(ι →₀ ℤ) → closure (range f)` onto, and `ι →₀ ℤ` is countable for countable `ι` (`Rigidity.countable_of_isPiece`, private; FS131-IG1).
+- A statement that binds a name inside a proposition (`∃ hM : P, Q` with `Q` not reading `hM`) is silent under `sorry` and warns once proved (`unusedVariables`, at the statement, where no proof reaches): bind it as `_hM` at the skeleton (`Rigidity.exists_pieceChain`, FS131-IG1; the coordinator's ruling).
+- `Measure.map_map` does not see the coercion of a `ZdAction` at a point through a lemma stated at its body (`Measurable (dualMap φ)`): state `Measurable (α n)` first and rewrite with that (`Rigidity.isErgodicOn_map_toPiece`). `eventuallyConst_set'` is `Filter.eventuallyConst_set'`. In `γ '' ⊤` the `⊤` elaborates as `Set.univ`; the image of a subgroup `⊤` is `γ '' ((⊤ : AddSubgroup _) : Set _)` (FS131-IG1).
+- A coset representative of `n ∈ ℤ²` modulo a finite-index `Λ` needs no quotient: `i = [ℤ² : Λ]` gives `n - (n % i) = i • (n / i) ∈ Λ` (`AddSubgroup.nsmul_index_mem`, `Int.emod_def`), and `n % i ∈ [0, i)²` by `Int.emod_nonneg`, `Int.emod_lt_of_pos`, `omega` on `Int.toNat` (`Rigidity.isTotallyIrreducible_pieceAction`, FS131-IG1).
+
+## Drafts for the front page
+
+None for this job. No milestone closes with it: the chain lands as one unit, and Lemma Γ waits on two leaves of other
+modules. The gate's whole-library counts belong to the landing that joins the chain to `main`. Its rows are the audit
+block above and the theorems listed in this record.
+
+## Stage 5 — SAVED: the drafts
+
+The drafts above. Nothing of this job is running or queued.

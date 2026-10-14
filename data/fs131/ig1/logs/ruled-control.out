@@ -1,0 +1,5 @@
+DIFFERS HadwigerNelson.Rigidity.exists_pieceChain: occurrences of the bound name 1; lengths 17375 -> 17376; hash 1327684456 -> 1327684456
+DIFFERS HadwigerNelson.Rigidity.isSolenoid_pieceDual: lengths 30031 -> 29939; after removing the binder and `p`: 29939
+DIFFERS HadwigerNelson.Rigidity.isErgodicOn_map_toPiece: lengths 91800 -> 90341
+DIFFERS HadwigerNelson.Rigidity.integral_eq_zero_of_isAddHaarMeasure: lengths 88422 -> 86964
+CONTROL: 4 of 4 planted changes reported — the check can fail

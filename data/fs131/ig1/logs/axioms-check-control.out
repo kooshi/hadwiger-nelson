@@ -1,0 +1,16 @@
+PLANT reported: HadwigerNelson.Rigidity.positive_entropy_rigidity_of_polishSpace reads DECLARED, ['HadwigerNelson.Rigidity.positive_entropy_rigidity']
+records of Pieces: 60 (AXIOMS-COUNT 60): CLEAN 56, THROUGH 1, DECLARED 0, failing 3
+  THROUGH public HadwigerNelson.Rigidity.isHaarFourier_or_ksEntropy_eq_zero: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']; sorry from ['HadwigerNelson.Rigidity.haar_or_zero_entropy', 'HadwigerNelson.Rigidity.ksEntropy_eq_iSup_ksEntropyOn']
+downstream records: 9; on no sorry: 3; on sorry: 6; their sorry comes from:
+  HadwigerNelson.Rigidity.condExpKernel_ergodicDecomposition (1 records)
+  HadwigerNelson.Rigidity.entropySplit_of_admissiblePair (1 records)
+  HadwigerNelson.Rigidity.exists_pieceChain (1 records)
+  HadwigerNelson.Rigidity.ksEntropy_eq_zero_of_not_smul_le (1 records)
+  HadwigerNelson.Rigidity.measure_haarSet_eq_zero (1 records)
+  HadwigerNelson.Rigidity.not_smul_dualHaar_le_dirac_one (1 records)
+  HadwigerNelson.Rigidity.rotInv_sub_maxMultiple (1 records)
+AXIOMS   Proofs.HadwigerNelson.Rigidity.Pieces public HadwigerNelson.Rigidity.isPiece_closure_one: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']; sorry from ['HadwigerNelson.Rigidity.isPiece_closure_one']
+AXIOMS   Proofs.HadwigerNelson.Rigidity.Pieces public HadwigerNelson.Rigidity.ksEntropy_rot_eq_iSup: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']; sorry from ['HadwigerNelson.Rigidity.exists_admissiblePair', 'HadwigerNelson.Rigidity.ksEntropy_eq_iSup_ksEntropyOn']
+AXIOMS   Proofs.HadwigerNelson.Rigidity.Pieces public HadwigerNelson.Rigidity.toPiece_rot: ['Classical.choice', 'Quot.sound', 'planted.unknownAxiom', 'propext']
+DOWNSTREAM DOWNSTREAM-Proofs.HadwigerNelson.Rigidity.EntropySplitMax HadwigerNelson.Rigidity.condExpKernel_ergodicDecomposition: its sorry comes from Pieces' ['HadwigerNelson.Rigidity.exists_pieceChain']
+CONTROL: 4 of 4 planted faults reported, plant fired — the check can fail

@@ -1,0 +1,2 @@
+slot: waiting (ledger 20 + 6 > budget 22 GiB)
+slot: admitted ig1: mem 6 GiB (hard cap), cpus 4,5

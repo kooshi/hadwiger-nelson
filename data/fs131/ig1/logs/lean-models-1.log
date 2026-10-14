@@ -1,0 +1,52 @@
+slot: admitted ig1: mem 7 GiB (hard cap), cpus 2,3
+data/fs131/ig1/work/ModelDrafts.lean:17:34: error: unsolved goals
+F : Subfield ℝ
+p : AdmissiblePair F
+g : ↥p.subgroup
+s : Set (Dual F)
+hs : MeasurableSet s
+hm : Measurable fun χ => g • χ
+h1 : g • 1 = 1
+⊢ (if 1 ∈ (fun χ => g • χ) ⁻¹' s then 1 1 else 0) = if 1 ∈ s then 1 1 else 0
+data/fs131/ig1/work/ModelDrafts.lean:37:6: error: don't know how to synthesize implicit argument `m0`
+  @IsProbabilityMeasure (PieceDual ↥(?m.102 p hM)) (PieceDual.instMeasurableSpace ↥(?m.102 p hM))
+    (Measure.map (toPiece (?m.102 p hM)) (Measure.dirac 1))
+context:
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+p : AdmissiblePair F
+hM : IsPiece p (AddSubgroup.closure {y | ∃ n, ∃ x ∈ {1}, y = (p.mulR n) x})
+⊢ MeasurableSpace (PieceDual ↥(?m.102 p hM))
+
+Note: All parameter types and holes (e.g., `_`) in the header of a theorem are resolved before the proof is processed; information from the proof cannot be used to infer what these values should be
+data/fs131/ig1/work/ModelDrafts.lean:37:6: error: don't know how to synthesize implicit argument `α`
+  @IsProbabilityMeasure (PieceDual ↥(?m.102 p hM)) (PieceDual.instMeasurableSpace ↥(?m.102 p hM))
+    (Measure.map (toPiece (?m.102 p hM)) (Measure.dirac 1))
+context:
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+p : AdmissiblePair F
+hM : IsPiece p (AddSubgroup.closure {y | ∃ n, ∃ x ∈ {1}, y = (p.mulR n) x})
+⊢ Type
+
+Note: All parameter types and holes (e.g., `_`) in the header of a theorem are resolved before the proof is processed; information from the proof cannot be used to infer what these values should be
+data/fs131/ig1/work/ModelDrafts.lean:37:28: error: don't know how to synthesize implicit argument `β`
+  @Measure.map (Dual F) (PieceDual ↥(?m.102 p hM)) (dualMeasurableSpace ↥(unitRing F))
+    (PieceDual.instMeasurableSpace ↥(?m.102 p hM)) (toPiece (?m.102 p hM)) (Measure.dirac 1)
+context:
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+p : AdmissiblePair F
+hM : IsPiece p (AddSubgroup.closure {y | ∃ n, ∃ x ∈ {1}, y = (p.mulR n) x})
+⊢ Type
+
+Note: All parameter types and holes (e.g., `_`) in the header of a theorem are resolved before the proof is processed; information from the proof cannot be used to infer what these values should be
+data/fs131/ig1/work/ModelDrafts.lean:37:70: error: don't know how to synthesize placeholder for argument `M`
+context:
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+p : AdmissiblePair F
+hM : IsPiece p (AddSubgroup.closure {y | ∃ n, ∃ x ∈ {1}, y = (p.mulR n) x})
+⊢ AddSubgroup ↥(unitRing F)
+
+Note: All parameter types and holes (e.g., `_`) in the header of a theorem are resolved before the proof is processed; information from the proof cannot be used to infer what these values should be

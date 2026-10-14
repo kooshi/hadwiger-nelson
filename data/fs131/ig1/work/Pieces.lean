@@ -705,7 +705,7 @@ theorem exists_pieceChain [NumberField F] :
 /-- **Lemma Γ, step 1**: the image on a piece of a `Γ`-invariant `Γ`-ergodic probability is invariant and ergodic for the
 action of `ℤ²` (a strictly invariant measurable set of `M̂` pulls back to a `Γ`-invariant set of `R̂`). -/
 theorem isErgodicOn_map_toPiece {M : AddSubgroup (unitRing F)} (hM : IsPiece p M) {ρ : Measure (Dual F)}
-    [IsProbabilityMeasure ρ] (hρ : ErgodicSMul p.subgroup (Dual F) ρ) :
+    (hρ : ErgodicSMul p.subgroup (Dual F) ρ) :
     (pieceAction hM).IsErgodicOn ⊤ (ρ.map (toPiece M)) := by
   refine ⟨fun n _ => ⟨measurable_dualMap _, ?_⟩, fun s hs hinv => ?_⟩
   · have hα : Measurable (pieceAction hM n) := measurable_dualMap _
@@ -765,7 +765,7 @@ theorem ksEntropy_rot_eq_iSup {M : ℕ → AddSubgroup (unitRing F)} (hmono : Mo
 /-- **Lemma Γ, step 4**: if the image of `ρ` on a piece is Haar, the Fourier coefficients of `ρ` vanish at every nonzero
 `r ∈ M` (a character of `M̂` not `1` at the evaluation `r`, and translation invariance). -/
 theorem integral_eq_zero_of_isAddHaarMeasure {M : AddSubgroup (unitRing F)} {ρ : Measure (Dual F)}
-    [IsProbabilityMeasure ρ] (hH : (ρ.map (toPiece M)).IsAddHaarMeasure) {r : unitRing F} (hr : r ∈ M) (hr0 : r ≠ 0) :
+    (hH : (ρ.map (toPiece M)).IsAddHaarMeasure) {r : unitRing F} (hr : r ∈ M) (hr0 : r ≠ 0) :
     ∫ χ, (χ r : ℂ) ∂ρ = 0 := by
   haveI := hH
   haveI := PieceDual.measurableAdd M
@@ -808,8 +808,7 @@ theorem isHaarFourier_or_ksEntropy_eq_zero [NumberField F] (p : AdmissiblePair F
   rw [ksEntropy_rot_eq_iSup hmono hM hex hρ n] at hpos
   obtain ⟨k₀, hk₀⟩ : ∃ k₀, ksEntropy (ρ.map (toPiece (M k₀))) (pieceAction (hM k₀) n) ≠ 0 := by
     by_contra h
-    push Not at h
-    exact hpos (ENNReal.iSup_eq_zero.mpr h)
+    exact hpos (ENNReal.iSup_eq_zero.mpr fun k => not_not.mp fun hk => h ⟨k, hk⟩)
   -- on every later piece the entropy stays positive, so the image is Haar there
   have hlate : ∀ k, k₀ ≤ k → (ρ.map (toPiece (M k))).IsAddHaarMeasure := by
     intro k hk

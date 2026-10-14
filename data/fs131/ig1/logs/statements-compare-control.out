@@ -1,0 +1,44 @@
+compared: 219 named constants of the first dump (kinds and types), 54 data definitions' values, 2 ruled definitions' data views, 6 example heads of the base files
+axioms of the modules: [] before, ['HadwigerNelson.Rigidity.planted_axiom'] after
+internal (not compared): 169 before, 180 after
+new public constants in the second dump: 1 (allow-list: 0)
+  NEW THM HadwigerNelson.Rigidity.planted_new_public
+new private constants in the second dump: 25
+  NEW PRIVATE THM HadwigerNelson.Rigidity.PieceDual.measurableAdd
+  NEW PRIVATE THM HadwigerNelson.Rigidity.PieceDual.measurable_dualMap
+  NEW PRIVATE THM HadwigerNelson.Rigidity.coe_mem_fieldI
+  NEW PRIVATE THM HadwigerNelson.Rigidity.coe_mulR
+  NEW PRIVATE THM HadwigerNelson.Rigidity.comap_toPiece_mono
+  NEW PRIVATE THM HadwigerNelson.Rigidity.countable_of_isPiece
+  NEW PRIVATE THM HadwigerNelson.Rigidity.exists_common_nsmul_mem
+  NEW PRIVATE THM HadwigerNelson.Rigidity.exists_nat_mul_mem_closure
+  NEW PRIVATE THM HadwigerNelson.Rigidity.exists_nat_mul_mem_of_mem_span
+  NEW PRIVATE THM HadwigerNelson.Rigidity.finiteIndex_range_nsmul
+  NEW PRIVATE THM HadwigerNelson.Rigidity.finiteIndex_range_nsmul_prime
+  NEW PRIVATE THM HadwigerNelson.Rigidity.isAlgebraic_of_mem_fieldI
+  NEW PRIVATE THM HadwigerNelson.Rigidity.ksEntropy_map_toPiece
+  NEW PRIVATE THM HadwigerNelson.Rigidity.map_rot_eq
+  NEW PRIVATE THM HadwigerNelson.Rigidity.measurable_restrictPiece
+  NEW PRIVATE THM HadwigerNelson.Rigidity.mulR_add_apply
+  NEW PRIVATE THM HadwigerNelson.Rigidity.mulR_apply
+  NEW PRIVATE THM HadwigerNelson.Rigidity.mulR_zero_apply
+  NEW PRIVATE DEF HadwigerNelson.Rigidity.pieceToFieldI
+  NEW PRIVATE THM HadwigerNelson.Rigidity.pieceToFieldI_injective
+  NEW PRIVATE DEF HadwigerNelson.Rigidity.restrictPiece
+  NEW PRIVATE DEF HadwigerNelson.Rigidity.γC
+  NEW PRIVATE THM HadwigerNelson.Rigidity.γC_add
+  NEW PRIVATE THM HadwigerNelson.Rigidity.γC_mem
+  NEW PRIVATE THM HadwigerNelson.Rigidity.γC_zero
+examples in the working files that the base does not hold: 0
+RULED DROP THM HadwigerNelson.Rigidity.isErgodicOn_map_toPiece: the stored statement differs (a dropped unread binder)
+RULED DROP THM HadwigerNelson.Rigidity.isSolenoid_pieceDual: the stored statement differs (a dropped unread binder)
+RULED DROP THM HadwigerNelson.Rigidity.integral_eq_zero_of_isAddHaarMeasure: the stored statement differs (a dropped unread binder)
+DATA     DEF HadwigerNelson.Rigidity.AdmissiblePair.ofPow: a data field of the stored definition differs
+TYPE     THM HadwigerNelson.Rigidity.isTotallyIrreducible_pieceAction: the stored statement differs
+KIND     HadwigerNelson.Rigidity.toPiece_rot: THM -> DEF
+VALUE    DEF HadwigerNelson.Rigidity.pieceAction: the stored definition differs
+MISSING  THM HadwigerNelson.Rigidity.exists_pieceChain: in the first dump, not in the second
+TYPE     THM HadwigerNelson.Rigidity.entropySplit_of_admissiblePair: the stored statement differs
+AXIOMS   the modules declare axioms: [] before, ['HadwigerNelson.Rigidity.planted_axiom'] after
+NEW      THM HadwigerNelson.Rigidity.planted_new_public: a new public constant that the allow-list does not hold
+CONTROL: 8 of 8 planted faults reported — the check can fail
