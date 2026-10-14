@@ -35,6 +35,7 @@ changed copy of part of `PrimePackets/KernelEntropy.lean` and part of `PrimePack
    - `ErgodicDecomposition.lean` line 69: `Function.diag` → `(fun y => (id y, id y))` — `Function.diag` (`fun a ↦ (a, a)`) is a definition of the later pin, with which v4.34.1 states `compProd_trim_condExpKernel`; at v4.32.0 that lemma is stated with `fun ω ↦ (id ω, id ω)`, which is written out here
    - `ErgodicDecomposition.lean` line 114: `Function.diag` → `(fun y => (id y, id y))` — `Function.diag` (`fun a ↦ (a, a)`) is a definition of the later pin, with which v4.34.1 states `compProd_trim_condExpKernel`; at v4.32.0 that lemma is stated with `fun ω ↦ (id ω, id ω)`, which is written out here
    - `ErgodicDecomposition.lean` line 116: `Function.diag` → `(fun y => (id y, id y))` — `Function.diag` (`fun a ↦ (a, a)`) is a definition of the later pin, with which v4.34.1 states `compProd_trim_condExpKernel`; at v4.32.0 that lemma is stated with `fun ω ↦ (id ω, id ω)`, which is written out here
+7. *Linter attributes*: `@[nolint unusedArguments]` on `condExpKernel_ae_constant` — each release statement takes an instance argument its proof does not read; it is kept so that the statement stays the release's, and the linter is silenced by name on that declaration, with a comment beside the attribute (Amendment 1 of FS131-IE1's brief). The attribute is not part of the stored statement.
 
 What is here: the fixed point in the closed convex hull of an orbit of a unitary representation
 (`fixedPoint_mem_closed_convex_orbit`), the σ-algebra of the sets fixed by every element of a group acting
@@ -537,6 +538,8 @@ theorem invariant_kernel_decomposition {Y I : Type*} (m : MeasurableSpace Y) [mY
     (fun i => condExpKernel_invariant m μ hm (hT i) (hfix i))⟩
 
 /-- `[OAIMath2026]` `ErgodicDecomposition.lean:104`. -/
+-- the release's statement takes this instance and its proof does not read it; kept so that the statement stays the release's
+@[nolint unusedArguments]
 theorem condExpKernel_ae_constant {Y : Type*} (m : MeasurableSpace Y) [mY : MeasurableSpace Y]
     [StandardBorelSpace Y] [Nonempty Y] (μ : Measure Y) [IsProbabilityMeasure μ]
     (hm : m ≤ mY) {f : Y → ℝ} (hf : Measurable[m] f) :
