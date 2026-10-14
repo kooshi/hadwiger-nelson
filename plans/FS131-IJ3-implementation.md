@@ -148,3 +148,26 @@ two hard leaves (KN8's "(i)'s measurability name, and (ii)'s complex-valued cond
 
 Built at the next build (§ the last stage). The split's records rest on Lemma Γ and so on the leaves open in
 `Rigidity/Pieces` and below (`haar_or_zero_entropy`): their axioms are the last stage's print.
+
+## Stage 4 — SAVED: M5-E, `Rigidity/EntropyFibres`, its nine leaves
+
+Written against `data/fs131/ij3/work/EntropyFibres.lean` (rounds `logs/EF-1.log` … `EF-10.log`, the last exit 0 with **no
+warning**), copied over the module: `git diff` removes the nine `sorry` lines (and the `by` of the one-line
+`measurable_blockLabel`), adds proofs and **one ruled binder drop**: `omit [IsTopologicalAddGroup X] in` above
+`exists_pattern_names_le`, whose proof reads no topological group structure (the `unusedSectionVars` linter named it once
+the proof was in; item 726's word, as the brief rules). No other statement, docstring or import changed. About 390 lines.
+
+| leaf | route |
+|---|---|
+| `measurable_blockLabel` | `measurable_of_countable` after `measurable_pi_lambda` (KN9) |
+| `blockEntropy_iterate` | the word equivalence `(Fin (q·n) → Fin k) ≃ (Fin n → Fin (k^q))` from `finProdFinEquiv`, `Equiv.curry`, `finFunctionFinEquiv`; `observationEntropy_equiv` (KN9) |
+| `ksEntropy_eq_zero_of_iterate` | the infimum at index `q(n+1) − 1`; `a/(qm) ≤ a/m` for `a ≥ 0`, both `ofReal` zero otherwise (KN9) |
+| `ksEntropy_finite_mixture_eq_zero` | `Kernel.ofFunOfCountable`, the uniform probability, `Measure.bind_apply`, `ksEntropy_bind_eq_zero` (KN9) |
+| `observationEntropy_comp_le` | fibre masses add (`measureReal_biUnion_finset`), the port's `negMulLog_sum_le` on the fibre written as an `if`, `Finset.sum_comm` (KN9) |
+| `exists_sectionPartition` | KN9's route; `U = U₀ ∩ −U₀` from `exists_open_nhds_zero_half`; `Q` the least covering index (`Finset.min'`); the image of a Borel set of a translate through `IsOpenEmbedding.of_continuous_injective_isOpenMap` and `IsOpenEmbedding.measurableEmbedding` under a local `borel` instance |
+| `exists_pattern_names_le` | KN9's pattern `R₀ x i ∈ Option (Fin l × Fin k)`, encoded by `Fintype.equivFin`; its cells are preimages of images of measurable subsets of cells (`himg`); the names of `P` are determined by `Q` at time zero and the names of `R` (induction along the orbit); then `observationEntropy_comp_le`, `observationEntropy_joint_le`, `finiteShannon_le_log_card` |
+| `ksEntropy_eq_zero_iff_of_finite` | `ksEntropy_map` at `borel (X ⧸ G)` (the induced map continuous by `continuous_coinduced_dom`); `⇒` by the two lemmas above and `exists_blockEntropy_le_mul` with `n ≥ 2 log k / ε`; `⇐` by `ksEntropyOn_le_ksEntropy` (KN9) |
+| `finFour_fibre_model` | the five clauses directly |
+
+**Re-priced:** M5-E's first two leaves were 2 and 25 lines; the lane came to about 390 lines, with the finite-fibred trio
+about 300 of them.
