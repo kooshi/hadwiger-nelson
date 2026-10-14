@@ -1,0 +1,9 @@
+match    data/fs131/REQUEST-2026-10-13.md (1 lines) | W4: (2026-10-14, at his check-in, after my explanation of the transfer
+match    data/fs131/REQUEST-2026-10-13.md (1 lines) | W2: (2026-10-13, answering the choice between the two publishable form
+match    plans/FS131-close-inventory.md (1 lines) | 759. **FS131-KO1 handed back: the port's plan is written (2026-10-14 0
+match    plans/FS131-close-inventory.md (1 lines) | 807. **FS131-IPD1 handed back: the port's last lane done, the switch m
+match    plans/FS131-close-inventory.md (1 lines) | 758. **FS131-KO1 — the trial's result, and a ruling on Mathlib's chang
+match    plans/FS131-close-inventory.md (1 lines) | 763. **FS131-IPA1 — lane A's ten modules elaborate; three read-back fi
+match    plans/FS131-close-inventory.md (1 lines) | 767. **FS131-IPA1 — a definition needs the measurability binders: `Cos
+match    plans/FS131-close-inventory.md (1 lines) | 772. **FS131-IPB1 — a fifth Mathlib definition changed between the pin
+8 matched, 0 mismatched
