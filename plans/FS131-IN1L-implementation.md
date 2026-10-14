@@ -193,3 +193,34 @@ file, six elaborations, about 120 lines. Every route held as planned, and no sta
 
 That is three to four hours for lane N, against the planner's "N1 is the longest leaf". The slowest steps are the
 `ℝ≥0∞`/`ℝ` bookkeeping and the `List`/`Fin` bridge of N1, as both planners said.
+
+## Stage 3a — SAVED: lane N's seven short leaves (N2–N6, N8, N9), through `lake env lean`
+
+- **N9** `ZdAction.IsErgodicOn.null_or_conull_of_ae_invariant` (`Rigidity/SolenoidErgodic`): the plan's route.
+  `s′ := ⋂_{n : Λ} α n ⁻¹' s` is measurable and strictly fixed: `α (a + b) x = α a (α b x)` from `map_add'`, and
+  `n ↦ n ∓ m` stays in `Λ`. It agrees with `s` almost everywhere (`ae_all_iff` over the countable `Λ`, with `0 ∈ Λ`).
+  Then `measure_congr`, with `EventuallyEq.compl`. 0 errors, 0 warnings (`logs/lean-solerg-2.log`).
+- **N8** `measure_frequentVisits_le`: the import `Proofs.HadwigerNelson.Outside.OAI015Maximal` (an import line), and
+  the proof is the term `Outside.OAI015.excessiveOccupation_measure_bound μ hT hB hθ`. `visits` and
+  `excessiveOccupation`/`visitCount` agree by definitional unfolding, and no `show` is needed. Whether the import
+  moved a stored statement is decided by Stage 4's dump.
+- **N2** `mul_card_heavyNames_le`, **N3** `mul_measureReal_light_le_blockEntropy`, **N6**
+  `measureReal_lightCells_le` rest on three private helpers:
+  - `nameCell_eq_preimage`;
+  - `measureReal_nameOf_preimage`: the mass of `nameOf ⁻¹' W` is the sum of `W`'s cells
+    (`sum_measureReal_preimage_singleton`);
+  - `sum_measureReal_nameCell`: the cells total `1`.
+
+  N3's real-variable child is the private `mul_le_negMulLog_of_lt_exp`: `0 ≤ p < e^{−s} → s p ≤ negMulLog p`.
+- **N4** `rpow_mul_exp_le_exp`: `Real.rpow_def_of_pos`, `Real.exp_add`, two products as `have`s, `linarith only`, as
+  planned.
+- **N5** `badStarts_nameOf_le_visits`: `Finset.card_le_card`. `visits`'s filter carries the classical instance of its
+  definition, and `Finset.mem_filter.mpr` synthesizes `Set.decidableSetOf` against it: "synthesized type class instance
+  is not definitionally equal". `Finset.filter_congr_decidable` first rewrites the instance to the synthesized one.
+- **Three hypotheses the proofs do not read**: `hc : 0 < c` (N2), `hγ : 0 ≤ γ` (N3) and `hθ : 0 ≤ θ` (N4). The
+  build's `unusedVariables` linter names each of them. The statements stay as typed. Each proof references its
+  hypothesis by `have _ := h`, with a `--` comment saying why the bound holds without it. This is a **statement
+  observation** for the planner, not a defect: each hypothesis is harmless and true at every use site.
+
+`ZeroEntropyNames` through `lake env lean`: 0 errors. Its only warnings are the two `sorry`s left (N1 and N7)
+(`logs/lean-zen-4.log`).

@@ -29,7 +29,34 @@ theorem IsErgodicOn.null_or_conull_of_ae_invariant {d : ℕ} {X : Type*} [AddCom
     [MeasurableSpace X] [BorelSpace X] {α : ZdAction d X} {Λ : AddSubgroup (Fin d → ℤ)} {μ : Measure X}
     (h : α.IsErgodicOn Λ μ) {s : Set X} (hs : MeasurableSet s) (hinv : ∀ n ∈ Λ, (α n ⁻¹' s : Set X) =ᵐ[μ] s) :
     μ s = 0 ∨ μ sᶜ = 0 := by
-  sorry
+  have hadd : ∀ a b x, α (a + b) x = α a (α b x) := fun a b x => congrArg (fun f : X →+ X => f x) (α.map_add' a b)
+  let s' : Set X := ⋂ n : Λ, (α n ⁻¹' s : Set X)
+  have hmeas : MeasurableSet s' := MeasurableSet.iInter fun n => (α.continuous' n).measurable hs
+  have hfix : ∀ m ∈ Λ, (α m ⁻¹' s' : Set X) = s' := by
+    intro m hm
+    ext x
+    simp only [s', Set.mem_preimage, Set.mem_iInter]
+    constructor
+    · intro h n
+      have h1 := h ⟨(n : Fin d → ℤ) - m, Λ.sub_mem n.2 hm⟩
+      rwa [← hadd, sub_add_cancel] at h1
+    · intro h n
+      rw [← hadd]
+      exact h ⟨(n : Fin d → ℤ) + m, Λ.add_mem n.2 hm⟩
+  have hae : s' =ᵐ[μ] s := by
+    have h1 : ∀ᵐ x ∂μ, ∀ n : Λ, (α n ⁻¹' s : Set X) x = s x := ae_all_iff.mpr fun n => hinv n n.2
+    filter_upwards [h1] with x hx
+    show (x ∈ s') = (x ∈ s)
+    apply propext
+    simp only [s', Set.mem_iInter]
+    constructor
+    · intro h
+      exact Eq.mp (hx ⟨0, Λ.zero_mem⟩) (h ⟨0, Λ.zero_mem⟩)
+    · intro h n
+      exact Eq.mpr (hx n) h
+  rcases h.2 s' hmeas hfix with h0 | h0
+  · exact Or.inl ((measure_congr hae).symm.trans h0)
+  · exact Or.inr ((measure_congr hae.compl).symm.trans h0)
 
 -- Spec: on the one-point group every measurable set is null or conull for the point mass, so the theorem's hypotheses
 -- have an inhabitant (the trivial action, `Λ = ⊤`).

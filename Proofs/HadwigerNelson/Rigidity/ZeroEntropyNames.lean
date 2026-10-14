@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Rigidity.Entropy
+import Proofs.HadwigerNelson.Outside.OAI015Maximal
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import Mathlib.Analysis.SpecificLimits.Basic
 
@@ -148,12 +149,50 @@ theorem mem_heavyNames {m : MeasurableSpace X} {μ : Measure X} {a : ℕ} {T : X
   classical
   simp [heavyNames]
 
+/-- The cell of a word is the preimage of the word under the name. -/
+private theorem nameCell_eq_preimage {a : ℕ} (T : X → X) (P : X → Fin a) (n : ℕ) (w : Fin n → Fin a) :
+    nameCell T P n w = nameOf T P n ⁻¹' {w} := by
+  ext x
+  exact mem_nameCell_iff_nameOf
+
+/-- The points whose name lies in a set `W` of words have the mass of `W`'s cells together. -/
+private theorem measureReal_nameOf_preimage {m : MeasurableSpace X} (μ : Measure X) [IsFiniteMeasure μ] {T : X → X}
+    (hT : Measurable T) {a : ℕ} {P : X → Fin a} (hP : Measurable P) (n : ℕ) (W : Finset (Fin n → Fin a)) :
+    μ.real (nameOf T P n ⁻¹' ↑W) = ∑ w ∈ W, μ.real (nameCell T P n w) := by
+  rw [← sum_measureReal_preimage_singleton W fun w _ => measurable_nameOf hT hP n (measurableSet_singleton w)]
+  simp only [nameCell_eq_preimage]
+
+/-- The cells of the names of length `n` have total mass `1`. -/
+private theorem sum_measureReal_nameCell {m : MeasurableSpace X} (μ : Measure X) [IsProbabilityMeasure μ]
+    {T : X → X} (hT : Measurable T) {a : ℕ} {P : X → Fin a} (hP : Measurable P) (n : ℕ) :
+    ∑ w, μ.real (nameCell T P n w) = 1 := by
+  rw [← measureReal_nameOf_preimage μ hT hP n Finset.univ, Finset.coe_univ, Set.preimage_univ, probReal_univ]
+
 /-- **Few heavy names** (EN2 § 3.5 step 2, `#𝒢 ≤ e^{γk}`): the cells are disjoint and measurable, so at most `1/c` of them
 have mass `≥ c`. -/
 theorem mul_card_heavyNames_le {m : MeasurableSpace X} (μ : Measure X) [IsProbabilityMeasure μ] {T : X → X}
     (hT : Measurable T) {a : ℕ} {P : X → Fin a} (hP : Measurable P) (n : ℕ) {c : ℝ} (hc : 0 < c) :
     c * (heavyNames μ T P n c).card ≤ 1 := by
-  sorry
+  -- `0 < c` is not read: for `c ≤ 0` the bound is immediate, and the proof below covers every `c`.
+  have _ := hc
+  calc c * (heavyNames μ T P n c).card = ∑ _w ∈ heavyNames μ T P n c, c := by
+        rw [Finset.sum_const, nsmul_eq_mul, mul_comm]
+    _ ≤ ∑ w ∈ heavyNames μ T P n c, μ.real (nameCell T P n w) :=
+        Finset.sum_le_sum fun w hw => mem_heavyNames.mp hw
+    _ ≤ ∑ w, μ.real (nameCell T P n w) :=
+        Finset.sum_le_sum_of_subset_of_nonneg (Finset.subset_univ _) fun _ _ _ => measureReal_nonneg
+    _ = 1 := sum_measureReal_nameCell μ hT hP n
+
+/-- A mass below `e^{−s}` has its entropy term at least `s` times itself: `log p < −s`. -/
+private theorem mul_le_negMulLog_of_lt_exp {p s : ℝ} (hp : 0 ≤ p) (hps : p < Real.exp (-s)) :
+    s * p ≤ Real.negMulLog p := by
+  rcases hp.eq_or_lt with rfl | hp
+  · simp
+  have h1 : Real.log p < -s := by
+    rw [← Real.log_exp (-s)]
+    exact Real.log_lt_log hp hps
+  rw [Real.negMulLog]
+  nlinarith
 
 /-- **Markov on the terms of `H_n`** (EN2 § 3.5 step 2, `H_k ≥ γk · μ(B)`): the points whose name's cell is lighter than
 `e^{−γn}` have mass at most `H_n / (γ n)`. Each light cell's term `−p log p` is at least `γ n · p`, and every term is
@@ -161,7 +200,22 @@ non-negative. -/
 theorem mul_measureReal_light_le_blockEntropy {m : MeasurableSpace X} (μ : Measure X) [IsProbabilityMeasure μ]
     {T : X → X} (hT : Measurable T) {a : ℕ} {P : X → Fin a} (hP : Measurable P) (n : ℕ) {γ : ℝ} (hγ : 0 ≤ γ) :
     γ * n * μ.real {x | nameOf T P n x ∉ heavyNames μ T P n (Real.exp (-(γ * n)))} ≤ blockEntropy μ T P n := by
-  sorry
+  classical
+  -- `0 ≤ γ` is not read: the Markov step holds for every `γ`.
+  have _ := hγ
+  set S := heavyNames μ T P n (Real.exp (-(γ * n)))
+  have hset : {x | nameOf T P n x ∉ S} = nameOf T P n ⁻¹' ↑(Sᶜ) := by
+    ext x
+    simp
+  rw [hset, measureReal_nameOf_preimage μ hT hP n, Finset.mul_sum, blockEntropy]
+  calc ∑ w ∈ Sᶜ, γ * n * μ.real (nameCell T P n w) ≤ ∑ w ∈ Sᶜ, Real.negMulLog (μ.real (nameCell T P n w)) := by
+        refine Finset.sum_le_sum fun w hw => mul_le_negMulLog_of_lt_exp measureReal_nonneg ?_
+        have hw' : w ∉ S := Finset.mem_compl.mp hw
+        rw [mem_heavyNames] at hw'
+        exact not_le.mp hw'
+    _ ≤ ∑ w, Real.negMulLog (μ.real (nameCell T P n w)) :=
+        Finset.sum_le_sum_of_subset_of_nonneg (Finset.subset_univ _) fun _ _ _ =>
+          Real.negMulLog_nonneg measureReal_nonneg measureReal_le_one
 
 /-- **The visits of the orbit of `x` to `B` before time `n`**: the number of `0 ≤ j < n` with `T^[j] x ∈ B` (the
 release's `visitCount`, `PrimePackets/InverseEntropy.lean` l. 247, with the same decidability instance). -/
@@ -175,8 +229,8 @@ visits `B` more than `θ n` times before some time `n` have mass at most `μ(B)/
 until lane P's port is joined; its proof is then that theorem (module docstring). -/
 theorem measure_frequentVisits_le {m : MeasurableSpace X} (μ : Measure X) [IsFiniteMeasure μ] {T : X → X}
     (hT : MeasurePreserving T μ μ) {B : Set X} (hB : MeasurableSet B) {θ : ℝ} (hθ : 0 < θ) :
-    ENNReal.ofReal θ * μ {x | ∃ n : ℕ, θ * n < (visits T B n x : ℝ)} ≤ μ B := by
-  sorry
+    ENNReal.ofReal θ * μ {x | ∃ n : ℕ, θ * n < (visits T B n x : ℝ)} ≤ μ B :=
+  Outside.OAI015.excessiveOccupation_measure_bound μ hT hB hθ
 
 /-- **The bad starts of a name are visits to the light points** (EN2 § 3.5 step 4): with the heavy names of length
 `k ≥ 1` as the good blocks, a bad start `j` of the name of `x` is a time `j < n` at which `T^[j] x` has a light name of
@@ -185,14 +239,28 @@ theorem badStarts_nameOf_le_visits {m : MeasurableSpace X} (μ : Measure X) {T :
     {k : ℕ} (hk : 1 ≤ k) (c : ℝ) (n : ℕ) (x : X) :
     badStarts (heavyNames μ T P k c) (nameOf T P n x) ≤
       visits T {y | nameOf T P k y ∉ heavyNames μ T P k c} n x := by
-  sorry
+  unfold badStarts visits
+  rw [Finset.filter_congr_decidable (Finset.range n)]
+  refine Finset.card_le_card fun j hj => ?_
+  obtain ⟨hjr, hjk, hbad⟩ := Finset.mem_filter.mp hj
+  have hjn : j < n := by omega
+  refine Finset.mem_filter.mpr ⟨Finset.mem_range.mpr hjn, ?_⟩
+  rw [wordBlock_nameOf] at hbad
+  exact hbad
 
 /-- **The arithmetic of step 4** (EN2 § 3.5): with `γ = β/8` and `θ log(2a) ≤ β/8`, once `k ≤ θ n` the count's bound
 `(2a)^{θn + k} · e^{2γn}` is at most `e^{βn/2}`. A real-variable lemma (`LEAN.md`: one inequality, its own hypotheses). -/
 theorem rpow_mul_exp_le_exp {a β θ n k : ℝ} (ha : 1 ≤ a) (hθ : 0 ≤ θ) (hθβ : θ * Real.log (2 * a) ≤ β / 8)
     (hn : 0 ≤ n) (hkn : k ≤ θ * n) :
     (2 * a) ^ (θ * n + k) * Real.exp (2 * (β / 8) * n) ≤ Real.exp (β * n / 2) := by
-  sorry
+  -- `0 ≤ θ` is not read: `k ≤ θ n` and `0 ≤ n` carry what the exponent needs.
+  have _ := hθ
+  have h2a : 1 < 2 * a := by linarith
+  rw [Real.rpow_def_of_pos (by linarith), ← Real.exp_add, Real.exp_le_exp]
+  have hlog : 0 < Real.log (2 * a) := Real.log_pos h2a
+  have h1 : 0 ≤ Real.log (2 * a) * (θ * n - k) := mul_nonneg hlog.le (by linarith)
+  have h2 : 0 ≤ n * (β / 8 - θ * Real.log (2 * a)) := mul_nonneg hn (by linarith)
+  linarith only [h1, h2]
 
 /-- **The light cells of few names are light in total** (EN2 § 3.5 step 5): the points whose name lies in `W` and whose
 cell has mass below `c ≥ 0` have mass at most `#W · c`. -/
@@ -200,7 +268,18 @@ theorem measureReal_lightCells_le {m : MeasurableSpace X} (μ : Measure X) [IsFi
     (hT : Measurable T) {a : ℕ} {P : X → Fin a} (hP : Measurable P) (n : ℕ) (W : Finset (Fin n → Fin a)) {c : ℝ}
     (hc : 0 ≤ c) :
     μ.real {x | nameOf T P n x ∈ W ∧ μ.real (nameCell T P n (nameOf T P n x)) < c} ≤ W.card * c := by
-  sorry
+  classical
+  set W' := W.filter fun w => μ.real (nameCell T P n w) < c
+  have hset : {x | nameOf T P n x ∈ W ∧ μ.real (nameCell T P n (nameOf T P n x)) < c} = nameOf T P n ⁻¹' ↑W' := by
+    ext x
+    simp [W']
+  rw [hset, measureReal_nameOf_preimage μ hT hP n]
+  calc ∑ w ∈ W', μ.real (nameCell T P n w) ≤ ∑ _w ∈ W', c :=
+        Finset.sum_le_sum fun w hw => (Finset.mem_filter.mp hw).2.le
+    _ = W'.card * c := by rw [Finset.sum_const, nsmul_eq_mul]
+    _ ≤ W.card * c := by
+        gcongr
+        exact Finset.filter_subset _ W
 
 /-- **EN2-ZE, entropy zero puts no small name cell on a large set** (`plans/FS131-EN2-derivation.md` § 3.5, the entry at
 l. 506; [hand], one mind): for a probability measure that `T` preserves and a measurable partition `P` with
