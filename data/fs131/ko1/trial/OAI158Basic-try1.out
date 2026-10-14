@@ -1,0 +1,52 @@
+Proofs/HadwigerNelson/Outside/OAI158Basic.lean:159:14: error: unsolved goals
+ξ : ℂ
+⊢ Circle.exp ((embed 1).re * ξ.re) * Circle.exp ((embed 1).im * ξ.im) = 1
+Proofs/HadwigerNelson/Outside/OAI158Basic.lean:160:32: error(lean.unknownIdentifier): Unknown identifier `embed_mul`
+Proofs/HadwigerNelson/Outside/OAI158Basic.lean:160:21: error: `simp` made no progress
+Proofs/HadwigerNelson/Outside/OAI158Basic.lean:490:6: error: Type mismatch: After simplification, term
+  ht
+ has type
+  Circle.exp (ξ.re * ((↑imagUnit).re * ↑q)) * Circle.exp (ξ.im * ((↑imagUnit).im * ↑q)) = 1
+but is expected to have type
+  Circle.exp (ξ.im * ↑q) = 1
+Proofs/HadwigerNelson/Outside/OAI158Basic.lean:519:45: error(lean.unknownIdentifier): Unknown identifier `isAlgebraic_natCast`
+Proofs/HadwigerNelson/Outside/OAI158Basic.lean:525:4: error: unsolved goals
+case e'_6
+z : ℂ
+hi : IsAlgebraic ℚ Complex.I
+hhalf : IsAlgebraic ℚ 2⁻¹
+hz : IsAlgebraic ℚ z
+hc : IsAlgebraic ℚ ((starRingEnd ℂ) z)
+h : IsAlgebraic ℚ ((z + (starRingEnd ℂ) z) * 2⁻¹)
+⊢ (algebraMap ℝ ℂ) z.re = (z + (starRingEnd ℂ) z) * 2⁻¹
+Proofs/HadwigerNelson/Outside/OAI158Basic.lean:530:4: error: unsolved goals
+case e'_6
+z : ℂ
+hi : IsAlgebraic ℚ Complex.I
+hhalf : IsAlgebraic ℚ 2⁻¹
+hz : IsAlgebraic ℚ z
+hc : IsAlgebraic ℚ ((starRingEnd ℂ) z)
+h : IsAlgebraic ℚ ((z - (starRingEnd ℂ) z) * 2⁻¹ * Complex.I⁻¹)
+⊢ (algebraMap ℝ ℂ) z.im = (z - (starRingEnd ℂ) z) * 2⁻¹ * Complex.I⁻¹
+Proofs/HadwigerNelson/Outside/OAI158Basic.lean:575:34: error(lean.unknownIdentifier): Unknown identifier `isAlgebraic_ratCast`
+Proofs/HadwigerNelson/Outside/OAI158Basic.lean:635:17: error: `simp` made no progress
+Proofs/HadwigerNelson/Outside/OAI158Basic.lean:636:32: error(lean.unknownIdentifier): Unknown identifier `embedF_mul`
+Proofs/HadwigerNelson/Outside/OAI158Basic.lean:636:21: error: `simp` made no progress
+Proofs/HadwigerNelson/Outside/OAI158Basic.lean:743:81: error: unsolved goals
+case e_6
+d : D
+h1 : d ∈ L 1
+hi : d ∈ L imagUnit
+l : ℝ
+hl : jF l = restrictLine 1 d
+e : ℝ
+he : jF e = restrictLine imagUnit d
+z : DiscreteE
+hr : ∀ (t : ↥F), d (Multiplicative.ofAdd (ofF t)) = Circle.exp (l * ↑t)
+hi' : ∀ (t : ↥F), d (Multiplicative.ofAdd (imagUnit * ofF t)) = Circle.exp (e * ↑t)
+hd :
+  d z =
+    d (Multiplicative.ofAdd (ofF (reF (Multiplicative.toAdd z)))) *
+      d (Multiplicative.ofAdd (imagUnit * ofF (imF (Multiplicative.toAdd z))))
+⊢ l * (↑(Multiplicative.toAdd z)).re + e * (↑(Multiplicative.toAdd z)).im =
+    l * ↑(reF (Multiplicative.toAdd z)) + e * ↑(imF (Multiplicative.toAdd z))

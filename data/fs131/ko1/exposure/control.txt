@@ -1,0 +1,4 @@
+plant INSTANCES-ONLY: classed INSTANCES-ONLY
+plant DIFFERENT: classed DIFFERENT
+plant MISSING: classed MISSING
+CONTROL OK

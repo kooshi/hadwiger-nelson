@@ -1,0 +1,7 @@
+slot: waiting (ledger 17 + 10 > budget 22 GiB)
+slot: waiting (ledger 21 + 10 > budget 22 GiB)
+slot: waiting (ledger 17 + 10 > budget 22 GiB)
+slot: waiting (ledger 21 + 10 > budget 22 GiB)
+slot: waiting (ledger 17 + 10 > budget 22 GiB)
+slot: admitted ko1: mem 10 GiB (hard cap), cpus 4,5
+exit=0

@@ -1,0 +1,46 @@
+{
+ "global_instances": [
+  [
+   459,
+   "global: on a type built from the release's own definition `parameterKernel` (the release's kernel)"
+  ]
+ ],
+ "patches": [
+  [
+   320,
+   "Set.mem_ofPred_eq",
+   "Set.mem_setOf_eq",
+   "Mathlib renamed `setOf` and its lemmas to `Set.ofPred` on 2026-07-09 (`LEAN.md` § Searching — Lean; FS132-I2's patches); at v4.32.0 the lemma is `Set.mem_setOf_eq`, the same statement"
+  ],
+  [
+   446,
+   "Set.mem_ofPred_eq",
+   "Set.mem_setOf_eq",
+   "Mathlib renamed `setOf` and its lemmas to `Set.ofPred` on 2026-07-09 (`LEAN.md` § Searching — Lean; FS132-I2's patches); at v4.32.0 the lemma is `Set.mem_setOf_eq`, the same statement"
+  ],
+  [
+   484,
+   "Set.mem_ofPred_eq",
+   "Set.mem_setOf_eq",
+   "Mathlib renamed `setOf` and its lemmas to `Set.ofPred` on 2026-07-09 (`LEAN.md` § Searching — Lean; FS132-I2's patches); at v4.32.0 the lemma is `Set.mem_setOf_eq`, the same statement"
+  ],
+  [
+   565,
+   "ite_eq_right",
+   "if_neg",
+   "core renamed `if_neg` to `ite_eq_right` on 2026-07-21 (`LEAN.md`; FS132-I2's patch); at v4.32.0 only the old name, the same statement"
+  ],
+  [
+   687,
+   "ite_eq_right",
+   "if_neg",
+   "core renamed `if_neg` to `ite_eq_right` on 2026-07-21 (`LEAN.md`; FS132-I2's patch); at v4.32.0 only the old name, the same statement"
+  ]
+ ],
+ "drop_imports": [
+  [
+   "Mathlib.Order.CompletePartialOrder",
+   "the module of `CompletePartialOrder.toSupSet`: under it a supremum in a complete lattice is stored through that instance, and imported here it would move a stored statement of this library that sees the port's imports (`HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff`, INSTANCES-ONLY: `data/fs131/ko1/exposure/OAI158-*`; without it, nothing moves: `OAI158-noCPO-*`); FS131-IE1 left it out of its port for the same reason. The module elaborates without it"
+  ]
+ ]
+}

@@ -1,0 +1,102 @@
+{
+ "scoped": [
+  [
+   53,
+   "`E` is an abbreviation of Mathlib's `algebraicClosure ℚ ℂ`: an unscoped `Countable` instance on it would be this library's speech into every instance search on a Mathlib type (FS133-IA1's ruling, kept). Scoped to `HadwigerNelson.Outside.OAI158.Spectral`: found inside that namespace and under `open` of it"
+  ]
+ ],
+ "global_instances": [
+  [
+   32,
+   "global: on a type built from the release's own definition `K` (a subgroup of `Circle` defined in the release): found only by a search on `↥K`"
+  ],
+  [
+   45,
+   "global: on a type built from the release's own definition `DiscreteE` (a `def`, not reducible): found only by a search on that type"
+  ],
+  [
+   46,
+   "global: on a type built from the release's own definition `DiscreteE`"
+  ],
+  [
+   47,
+   "global: on a type built from the release's own definition `DiscreteE`"
+  ],
+  [
+   60,
+   "global: on a type built from the release's own definition `DiscreteE`"
+  ],
+  [
+   62,
+   "global: on a type built from the release's own definition: `D := PontryaginDual DiscreteE`; a search reaches it only at that argument"
+  ],
+  [
+   118,
+   "global: on a type built from the release's own definition: `D`"
+  ],
+  [
+   119,
+   "global: on a type built from the release's own definition: `D`"
+  ],
+  [
+   234,
+   "global: on a type built from the release's own definition: `MulAction K D`"
+  ],
+  [
+   244,
+   "global: on a type built from the release's own definition: `MulAction K Cosets`"
+  ],
+  [
+   499,
+   "global: on a type built from the release's own definition `DiscreteF`"
+  ],
+  [
+   500,
+   "global: on a type built from the release's own definition `DiscreteF`"
+  ],
+  [
+   501,
+   "global: on a type built from the release's own definition `DiscreteF`"
+  ],
+  [
+   503,
+   "global: on a type built from the release's own definition: `DF`"
+  ],
+  [
+   504,
+   "global: on a type built from the release's own definition: `DF`"
+  ]
+ ],
+ "patches": [
+  [
+   402,
+   "isAlgebraic_natCast",
+   "isAlgebraic_nat",
+   "Mathlib renamed `isAlgebraic_nat` to `isAlgebraic_natCast` (after v4.32.0; at v4.34.1 the old name is a deprecated alias); at v4.32.0 the lemma has only the old name, the same statement (`Mathlib/RingTheory/Algebraic/Basic.lean:145`)"
+  ],
+  [
+   456,
+   "isAlgebraic_ratCast",
+   "isAlgebraic_rat",
+   "Mathlib renamed `isAlgebraic_rat` to `isAlgebraic_ratCast` on 2026-07-14 (FS133-IA1's patch, the same); at v4.32.0 the lemma has only the old name, the same statement (`Mathlib/RingTheory/Algebraic/Basic.lean:153`)"
+  ],
+  [
+   412,
+   "first | rfl | (apply Complex.ext <;> simp; ring)",
+   "all_goals first | rfl | (apply Complex.ext <;> simp; ring)",
+   "at v4.32.0 `convert h using 1` leaves two goals here where the release's pin leaves one (FS132-I2 met the same at `PaletteDensity.lean:182`); the release's closing tactic is run on each (`all_goals`), unchanged"
+  ],
+  [
+   417,
+   "first | rfl | (apply Complex.ext <;> simp; ring)",
+   "all_goals first | rfl | (apply Complex.ext <;> simp; ring)",
+   "at v4.32.0 `convert h using 1` leaves two goals here where the release's pin leaves one (FS132-I2 met the same at `PaletteDensity.lean:182`); the release's closing tactic is run on each (`all_goals`), unchanged"
+  ]
+ ],
+ "drop_imports": [
+  [
+   "Mathlib.Order.CompletePartialOrder",
+   "the module of `CompletePartialOrder.toSupSet`: under it a supremum in a complete lattice is stored through that instance, and imported here it would move a stored statement of this library that sees the port's imports (`HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff`, INSTANCES-ONLY: `data/fs131/ko1/exposure/OAI158-*`; without it, nothing moves: `OAI158-noCPO-*`); FS131-IE1 left it out of its port for the same reason. The module elaborates without it"
+  ]
+ ]
+}

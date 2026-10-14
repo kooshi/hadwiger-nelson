@@ -1,0 +1,18 @@
+Proofs/HadwigerNelson/Outside/OAI158Basic.lean:560:4: error: unsolved goals
+case e'_6
+z : ℂ
+hi : IsAlgebraic ℚ Complex.I
+hhalf : IsAlgebraic ℚ 2⁻¹
+hz : IsAlgebraic ℚ z
+hc : IsAlgebraic ℚ ((starRingEnd ℂ) z)
+h : IsAlgebraic ℚ ((z + (starRingEnd ℂ) z) * 2⁻¹)
+⊢ (algebraMap ℝ ℂ) z.re = (z + (starRingEnd ℂ) z) * 2⁻¹
+Proofs/HadwigerNelson/Outside/OAI158Basic.lean:565:4: error: unsolved goals
+case e'_6
+z : ℂ
+hi : IsAlgebraic ℚ Complex.I
+hhalf : IsAlgebraic ℚ 2⁻¹
+hz : IsAlgebraic ℚ z
+hc : IsAlgebraic ℚ ((starRingEnd ℂ) z)
+h : IsAlgebraic ℚ ((z - (starRingEnd ℂ) z) * 2⁻¹ * Complex.I⁻¹)
+⊢ (algebraMap ℝ ℂ) z.im = (z - (starRingEnd ℂ) z) * 2⁻¹ * Complex.I⁻¹
