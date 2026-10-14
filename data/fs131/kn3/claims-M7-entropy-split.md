@@ -81,3 +81,18 @@ Lives in a new file that the chain module's successor imports; after M5 and M6. 
 ## Not claimed
 
 Any size or price. That the statements marked "to type" elaborate as written. The deriver's entries are [hand], one mind, "given Lemma Γ and Lemma W by statement"; the kernel is their second check. Lemma Γ and Lemma W themselves. What I read: EN2 §§ 4.0–4.3 and 5.2 in full; § 4.5 (the deriver's attack on its own argument) not read; X02D not read by me beyond the lines quoted there.
+
+## Since FS131-KN8 (2026-10-14; by hand — the old text above is kept, git holds every version)
+
+- **Statement 2 (Lemma Γ) is typed**: `Rigidity.isHaarFourier_or_ksEntropy_eq_zero` (module `Rigidity/Pieces`), for an
+  admissible pair `p` and `ρ` with `ErgodicSMul p.subgroup (Dual F) ρ` — the release's decomposition's own conclusion.
+- **Statement 3 (the route built) is typed** in module `Rigidity/EntropySplitMax`: steps 1–3 and the split
+  (`rotInv_sub_maxMultiple`, `measure_haarSet_eq_zero` — for any group action, wider than step 2 —,
+  `ksEntropy_eq_zero_of_not_smul_le`, `entropySplit_of_admissiblePair`), the release's decomposition as the leaf
+  `condExpKernel_ergodicDecomposition`, closed by lane P2 at the join.
+- **The table's T4 row**: from `Rigidity.measure_eq_of_fourier` (`Rigidity/DualGroup`, Mathlib's
+  `ext_of_forall_mem_subalgebra_integral_eq_of_polish`), **not** from Herglotz–Bochner; **the Haar row**: `Rigidity.dualHaar`
+  with `isHaarFourier_iff` and `IsHaarFourier.rotInv`. **Imports**: M2 leaves this list; `Rigidity/DualGroup`,
+  `Rigidity/UnitCircle`, `Rigidity/Pieces` join it.
+- **New classical inputs read by Lemma Γ through PE-1′**: Pontryagin duality for a countable discrete group, D1 (characters of
+  `M̂` are evaluations) and D2 (closed subgroups are annihilators) — `plans/FS131-KN8-chain-split.md` § 2.3.

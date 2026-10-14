@@ -33,3 +33,14 @@ new files only; can start now
 ## Not claimed
 
 Any size or price. That the statements marked "to type" elaborate as written. What I read: not typed; whether Mathlib's `PontryaginDual` at the pin has the duality half needed is unchecked.
+
+## Since FS131-KN8 (2026-10-14; by hand — the old text above is kept)
+
+Typed in `Rigidity/DualGroup`, cut differently from statements 1–4: **no separate type** — the pointwise topology is put on
+`AddChar G Circle` itself (a scoped instance, induced by the map the cylinder σ-algebra is the comap of), so the bijection of
+statement 1 is the identity and "Borel = cylinder" is `borelSpace_dual`; statement 2 is `isHaarFourier_iff`
+(`IsHaarFourier m ↔ m = dualHaar G`, Mathlib's `haarMeasure ⊤`); statement 3's duality half (D1) is a lane of its own with
+D2 (`plans/FS131-KN8-chain-split.md` § 2.3); the additive carrier the axiom takes is `Rigidity.PieceDual M`
+(`Rigidity/Pieces`); statement 4's "carries Haar to Haar" is, in Fourier form, a computation at one piece
+(`Rigidity.integral_eq_zero_of_isAddHaarMeasure`). Added: Fourier uniqueness with no Herglotz–Bochner
+(`measure_eq_of_fourier`) and `StandardBorelSpace` for countable `G`.

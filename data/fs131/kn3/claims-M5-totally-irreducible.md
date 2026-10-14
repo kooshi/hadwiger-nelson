@@ -32,3 +32,9 @@ edits `Rigidity/PositiveEntropy.lean` (one proof) or proves it in a new file; sh
 ## Not claimed
 
 Any size or price. That the statements marked "to type" elaborate as written. What I read: statement typed by me; the deduction read only at its entry.
+
+## Since FS131-KN8 (2026-10-14; by hand — the old text above is kept)
+
+Statement 1 takes `[PolishSpace X]` (the coordinator's standing word, inventory item 750 ruling 2): the finite-fibred step
+(statement 3) reads clause (4) over Mathlib's quotient σ-algebra, so the proof runs over
+`positive_entropy_rigidity_of_polishSpace` (`plans/FS131-KN8-chain-split.md` § 2.6).

@@ -35,3 +35,10 @@ new files only; after M4
 ## Not claimed
 
 Any size or price. That the statements marked "to type" elaborate as written. What I read: not read by me beyond the leaf lines; size unknown.
+
+## Since FS131-KN8 (2026-10-14; by hand — the old text above is kept)
+
+Typed in `Rigidity/UnitCircle` (statement 1: `exists_admissiblePair`, at one `u`; admissibility as `AdmissiblePair`, the
+page's form with its generators) and `Rigidity/Pieces` (statement 2: `isSolenoid_pieceDual`, `isTotallyIrreducible_pieceAction`,
+`not_isVirtuallyCyclic_pieceAction`, each over `IsPiece p M` and the first two with `[NumberField F]`; statement 3:
+`exists_pieceChain`), with Lemma Γ and its steps in the same module.

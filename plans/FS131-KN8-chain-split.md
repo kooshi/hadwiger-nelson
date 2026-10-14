@@ -315,3 +315,179 @@ changed, the axiom, its model and the Polish form byte-identical; control (`--pl
 **Sharper** (`logs/dump-binder-check.out`): the after-print is the before-print with exactly the text
 ` [@PolishSpace.{u_1} X inst_1]` inserted at character 213 (`True`), and one character short of it does not reproduce
 (`False`, the control). No proof reads the theorem yet (it is a leaf, and no module calls it), so nothing else moves.
+
+## Stage 3 — SAVED: the split's module typed (M7b, `Rigidity/EntropySplitMax`)
+
+### 3.1 Vocabulary (KN7 § 6.3's four items, as built)
+
+1. the unit vectors as a group — `unitCircle F` (`Rigidity/UnitCircle`, Stage 2);
+2. the rotation action — `mulAction_dual`, `smul_def`, `MeasurableConstSMul`, so the rotation as a measurable equivalence is
+   Mathlib's `MeasurableEquiv.smul g`; a subgroup acts by Mathlib's `Subgroup.instMulAction`, countable over a number field;
+3. admissibility — **the page's form, as a structure with its generators** (`AdmissiblePair`), the operational form a
+   constructor (`AdmissiblePair.ofPow`) — Stage 2 § 2.2;
+4. `StandardBorelSpace (Dual F)` — `Rigidity.standardBorelSpace_dual` with the instance
+   `countable_unitRing_of_numberField` (found missing at the first elaboration of this module: `condExpKernel` did not
+   synthesize its `StandardBorelSpace` until `Countable (unitRing F)` was an instance).
+
+New here: `invariantSigma H Y` — the release's `actionInvariantSigma` (`PrimePackets/KernelEntropy.lean` l. 279, read in the
+clone: `⨅ g : H, MeasurableSpace.invariants (fun y : Y => g • y)`), its body word for word under a name of its own
+(`@[reducible]`, as the class-type linter asks); `haarSet κ` for a family of measures.
+
+### 3.2 The statements, read aloud against EN2-PE2-MAX's steps (kernel's print: `logs/lean-KernelSigs.log`)
+
+| statement | EN2 § 5.2 | reading |
+|---|---|---|
+| `condExpKernel_ergodicDecomposition` | "the release's theorem" (T1, #2 of the table: "both conjuncts … Its uniqueness is not read anywhere") | the release's `action_ergodic_decomposition` (ll. 127–134), with `actionInvariantSigma` unfolded; **a leaf closed by lane P2 at the join** (`exact action_ergodic_decomposition μ hp`, by unfolding) |
+| `rotInv_sub_maxMultiple` | step 1: "`τ′ := τ − a·m` is a finite positive measure, `U`-invariant because `τ` and `m` are" | equal; `m` any `IsHaarFourier` measure (rotation invariant by `IsHaarFourier.rotInv`) |
+| `measure_haarSet_eq_zero` | step 2: "`A := {x : f_r(x) = 0 for all r ≠ 0}` … by step 1 `λ(A) = 0`" | **wider**: for the kernel on the invariant σ-algebra of any group action, and any probability with no positive Haar multiple below it — step 2 reads neither invariance nor `Γ` (the obligation pass); the hypothesis "no `c > 0` has `c·m ≤ τ′`" is read for the normalised `λ`, the scaling done in the split |
+| `ksEntropy_eq_zero_of_not_smul_le` | step 3: "`κ(x)` … is `Γ`-invariant and `Γ`-ergodic … Lemma Γ gives `h_{κ(x)}(γ) = 0` for all `γ ∈ Γ`; the mixture lemma gives `h_{τ′}(γ) = 0`" | equal, for every `γ ∈ Γ`; Lemma W and the torsion case are not read (KN7 § 6.1) |
+| `entropySplit_of_admissiblePair` | the entry's statement, at the chain's strength (`EntropySplit`: one non-torsion rotation), and the deriver's two points of typing ((i) `b = 0`, `ρ` the point mass; (ii) one `m` throughout) | equal to `EntropySplit F` given one admissible pair; `m := dualHaar` (unique by `isHaarFourier_iff`, so (ii) holds by a theorem) |
+| `not_smul_dualHaar_le_dirac_one` | the model of steps 2–3's hypothesis | the point mass at the trivial character carries no positive Haar multiple |
+
+**Which step fails if a reading is wrong.** (1) *Lemma Γ's hypothesis is `ErgodicSMul p.subgroup (Dual F) ρ`*, exactly the
+decomposition's conclusion at `H = Γ`: if Lemma Γ needed ergodicity under all of `U`, or invariance strictly rather than
+almost everywhere, step 3's application at `κ x` would fail — and Lemma Γ's own step 1 (`isErgodicOn_map_toPiece`) is where
+the kernel checks that `ErgodicSMul` of `Γ` is enough to give the declared theorem's strict ergodicity on a piece. (2) *The
+invariant σ-algebra is the release's*: if `actionInvariantSigma` were the almost-invariant sets, the leaf would not close
+by unfolding at the join — read in the clone, it is `⨅ g, MeasurableSpace.invariants (g • ·)`. (3) *The mixture lemma's base
+space carries the invariant σ-algebra, not the cylinder one*: `ksEntropy_bind_eq_zero` takes any `MeasurableSpace Z`, so it
+applies with `Z = Dual F` under `invariantSigma` (`@`-instantiated) and `τ = ν.trim`; if lane E's proof of it needed `Z`
+standard Borel, step 3 would fail there — it does not (the release's `measureEntropy_kernel_zero` has no such hypothesis,
+EN2 § 5.2 #3).
+
+### 3.3 The obligation pass (`debruijn-obligation-modeling`, a fresh invocation, scoped to M7b)
+
+Every statement true as typed. One change before commit, a widening: step 2 first took the pair and the invariance of `ν`
+(`hinv`) and read neither (a hypothesis the proof never touches); it now quantifies over any group action. A first attempt
+over an arbitrary sub-σ-algebra `𝓘` failed to elaborate for a reason worth a line in `LEAN.md` (§ 3.5): a binder
+`(𝓘 : MeasurableSpace X)` is a local instance for every later binder, so `ν : Measure X` and `condExpKernel ν 𝓘`'s instance
+argument were elaborated over `𝓘`. The action form needs no such binder.
+
+### 3.4 A plan per leaf (one implementer, after `Rigidity/Pieces`; lane P2 closes the first leaf at the join)
+
+1. `condExpKernel_ergodicDecomposition`: at the join, `action_ergodic_decomposition μ hp` (the bodies agree by unfolding;
+   if the elaborator does not see it, `show` with `actionInvariantSigma` unfolded). Before the join: nothing — a declared leaf.
+2. `rotInv_sub_maxMultiple`: `rotInv_iff.2 fun g => map_sub_maxMultiple τ m (MeasurableEquiv.smul g) (rotInv_iff.1 hτ g)
+   (rotInv_iff.1 hm.rotInv g)` with `haveI := hm.1`; `MeasurableEquiv.smul` coerces to `(g • ·)` (`MeasurableEquiv.coe_smul`).
+3. `measure_haarSet_eq_zero`: (i) `MeasurableSet[invariantSigma H _] (haarSet κ)`: a countable intersection over `r`
+   (`countable_unitRing_of_numberField`) of zero sets of `x ↦ ∫ χ, (χ r : ℂ) ∂κ x`, measurable for the source σ-algebra of the
+   kernel (`StronglyMeasurable.integral_kernel`-shape; the implementer finds the name); (ii) for `r ≠ 0`,
+   `∫ χ in A, (χ r : ℂ) ∂ν = ∫ x in A, ∫ χ, (χ r : ℂ) ∂κ x ∂ν = 0` — `setIntegral_condExp` with
+   `condExp_ae_eq_integral_condExpKernel` (`MeasureTheory.Measure.trim` a probability, so `SigmaFinite`), and the inner integral
+   `0` on `A`; at `r = 0`, `ν A` (`AddChar.map_zero_eq_one`); (iii) `measure_eq_of_fourier` gives `ν.restrict A = ν A • m`
+   (coefficients of `ν A • m`: `integral_smul_measure`, `hm.2`); (iv) `Measure.restrict_le_self` and `hnone (ν A)`. Hard: (i)'s
+   measurability name, and (ii)'s complex-valued conditional expectation (Mathlib's lemmas are for any Banach space).
+4. `ksEntropy_eq_zero_of_not_smul_le`: `obtain ⟨hbind, herg⟩ := condExpKernel_ergodicDecomposition (H := p.subgroup) ν hinv`;
+   `hnull := measure_haarSet_eq_zero p.subgroup ν hm hnone`, so `haarSet κ` is `ν.trim`-null (`trim_measurableSet_eq` with
+   (i) of leaf 3 — **state (i) as its own lemma** `measurableSet_haarSet` when leaf 3 is filled, since leaf 4 reads it too);
+   for `ν.trim`-a.e. `x`: `κ x` a probability (`IsMarkovKernel`), `ErgodicSMul`, not `IsHaarFourier` (`x ∉ haarSet`), so
+   `isHaarFourier_or_ksEntropy_eq_zero p (κ x)` gives entropy zero at `g`; `rw [← hbind]` and
+   `@ksEntropy_bind_eq_zero _ (Dual F) (invariantSigma _ _) _ (ν.trim _) _ κ _ (rot _) (measurable_rot _) hpres hzero`, with
+   `hpres` from `ErgodicSMul`'s `SMulInvariantMeasure` (`MeasurePreserving` of `(g • ·)` by `measurePreserving_smul`).
+5. `entropySplit_of_admissiblePair`: as its docstring; children inline: `τ = a • m + τ′` (`sub_maxMultiple_add`, `add_comm`);
+   `τ′ = 0` case with `Measure.map_dirac (measurable_rot u)`, `rot u 1 = 1` (`DFunLike.ext`), `ksEntropy_dirac`; else
+   `b := τ′ univ` (`≠ 0` by `Measure.measure_univ_eq_zero`, `≠ ⊤` by `Measure.sub_le` and finiteness), `ρ := b⁻¹ • τ′`
+   (`isProbabilityMeasure_smul`-shape, `ENNReal.inv_mul_cancel`), `RotInv` of a scalar multiple (`Measure.map_smul`), `hnone`
+   by `not_smul_le_sub_maxMultiple` at `b * c` (`smul_smul`, `smul_le_smul_left`-shape, `mul_ne_zero`), step 3 at
+   `p.u ∈ p.subgroup` (`mem_subgroup` with `n = ![1, 0]`, `zpowHom` at it is `p.u`, `simp`), `AdmissiblePair.u_nonTorsion`.
+6. `not_smul_dualHaar_le_dirac_one`: at the measurable `{1}ᶜ` (`{1}` is the countable intersection of `{χ | χ r = 1}`):
+   `c * dualHaar {1}ᶜ ≤ dirac 1 {1}ᶜ = 0`; `dualHaar {1}ᶜ ≠ 0`, else `dualHaar = dirac 1` (a probability null off a point),
+   whose coefficient at `r = 1 ≠ 0` is `1`, against `isHaarFourier_dualHaar`.
+
+### 3.5 Drafts from this stage
+
+- `LEAN.md` § Searching — Lean, a new line: "A binder `(𝓘 : MeasurableSpace X)` in a theorem is a local instance for every
+  later binder and the conclusion: written before `(ν : Measure X)`, it makes `ν` a measure for `𝓘`, and an instance argument
+  of the conclusion (`condExpKernel ν 𝓘`'s `[MeasurableSpace Ω]`) is filled by `𝓘`. Put such a σ-algebra after every term
+  that must use the instance, as Mathlib's `condExpKernel (μ) [IsFiniteMeasure μ] (m)` does, or name it by a term
+  (`invariantSigma H X`) instead of a binder (FS131-KN8)."
+
+## Stage 4 — SAVED: the zero-entropy side's second module (M8b), its vocabulary decided in words (not typed)
+
+Read for this stage: X01D § 2.0 and §§ 3.1–3.8 (ll. 111–311, in full), M8's draft claim list. Not reached in Lean: the
+typing. What I decide for its planner, as KN7 did for the split:
+
+**1. The model of `R̂` — a theorem over one classical input, not a definition of `Dual F`.** `Dual F` stays the carrier (every
+statement of the chain is about measures on it). M8b-1 builds `W := L_∞ × ∏′_{w split} L_w` (Mathlib's
+`NumberField.InfiniteAdeleRing L` times a `RestrictedProduct` over the split places — or `𝔸_L` itself with
+`Λ_𝔸 := L + ∏_{w stable} 𝔡_w^{-1}Ô_w`, whichever Mathlib's API at the pin makes shorter; the planner measures both on the
+first two leaves), the standard character `ψ`, and `π : W → Dual F`, `π a := (r ↦ ψ(a r))`, a continuous homomorphism
+equivariant for multiplication by `U` (`π (u a) = rot u (π a)`). **The input**: Tate's self-duality — `π` is open and onto
+with kernel `Λ = R^∨ ⊂ L` (diagonal), discrete and cocompact (X01D l. 118: "Tate; for S-integer rings Chothi–Everest–Ward
+1997"). It is not in Mathlib (no Tate duality at the pin: `RestrictedProduct` and the adele rings are; their duals are not).
+**My call: the same decision as § 2.3's D1/D2** — a separate planner-and-implementer job for "the dual of a countable
+discrete group" family (D1, D2, Tate's `L^⊥ = L` in `𝔸_L`), with a declared axiom (`[Tate1950]`/`[Weil1967]`, to be added
+to the bibliography) as the fallback if priced over a week. The set `TA F` is then a theorem: `TA F = π(L + L_∞)` — `T = π(L)`
+(torsion characters are the classes of global points, because `R/N R` is finite) and `A = π(L_∞)` (a real lift is an
+archimedean point) — the bridge from the kernel's `Rigidity.TA` to the derivation's `T + A` (KN3 § 6, the deriver's question
+(2)).
+
+**2. M8b-2, thin boxes (Lemma 3.1′).** `Q(ε)`, `Q_{v*}(ε, δ)` as sets of `W`; **Lemma PF** for `y ∈ Λ ∖ 0` over Mathlib's
+product formula (`NumberField.prod_abs_eq_one`, NF2-LEAF-21); **the expanding place** (Kronecker: Mathlib's
+`NumberField.Embeddings.pow_eq_one_of_norm_eq_one`-shape, to `#check`, with the product formula); **local injectivity**
+(part (ii), the induction on `i`); **Lemma 3.1′** as EN2-L31 states it, its part (iii) over `Rigidity.exists_forall_exp_le_measureReal_nameCell`
+(EN2-ZE, typed in `Rigidity/ZeroEntropyNames`) — the partition `ξ` of part (i) is a measurable map `Dual F → Fin k`, so EN2-ZE
+applies word for word with `P := ξ`, `T := rot u*`.
+
+**3. M8b-3, the pigeonhole and the global point (Lemma 3.2′(a), § 3.5–3.6).** The multipliers `V_M ⊆ U_ℚ`. **A shorter
+input than the one on the list** (a finding): the pigeonhole needs only `#V_M ≥ c·M^{α′}` for **some** `α′ > 0`, because `β`
+is chosen after it (`β := α′/(2K)`); the family `z = 1 + 2bi`, `b ≥ 1` (primitive, `a + b` odd, `H_{ℚ(i)}(z/z̄) = 1 + 4b²`)
+gives `α′ = 1/(2[F:ℚ])` with no count of Pythagorean triples (Lehmer's asymptotic, X01D l. 151, FS105:106, :110, leaves the
+path). Then the two scales (`z = 0`), the point `t ∈ L` global at `v*`, and `μ(R̂ ∖ (T + K_{v*})) = 0`.
+
+**4. M8b-4, leaves and wandering shells (§ 3.7–3.8).** `φ_t` injective (`W_{v*} ∩ Λ = 0`), a Borel isomorphism onto its image
+(Mathlib's `MeasurableSet.image_of_continuousOn_injOn`, Lusin–Souslin, on the Polish `W_{v*}`); finite `U`-orbits on `L/Λ`
+(strong approximation, X01D l. 293 — **a second classical input**, Mathlib has none by that name; at a planner's first leaf
+priced, or replaced: the orbit of `t` is finite because `L/Λ ≅ ⊕_{w stable} L_w/Λ_w` is a torsion group on which `U` acts
+through the finite quotients `(O_w/𝔭^k)^×`, which is local algebra once the isomorphism is in hand); the shells at a split
+`w ≠ v*` with `g = γ/σ(γ)`, `(γ) = 𝔓_w^h` (Mathlib's class group: `ClassGroup`, its finiteness). Its exit is
+`Rigidity.zeroEntropyCarried`.
+
+**What M8b reads that is not typed anywhere yet**: Tate's duality (with D1/D2, one job); strong approximation; Kronecker
+(Mathlib, to check). Its typed inputs: EN2-ZE and EN2-CNT (`Rigidity/ZeroEntropyNames`), the maximal inequality (the port).
+
+## Stage 5 — SAVED: the lanes after this job, and the drafts
+
+### 5.1 The lanes (none shares a file with another)
+
+| lane | writes | needs | who |
+|---|---|---|---|
+| **D** — `Rigidity/DualGroup`'s 13 leaves | that file | Mathlib | an implementer; leaf 8 (Fourier uniqueness) the hard one |
+| **U** — `Rigidity/UnitCircle`'s 7 leaves other than `exists_admissiblePair` | that file | D (for `IsHaarFourier.rotInv`) | an implementer; short |
+| **A** — `exists_admissiblePair` | a new file downstream of `UnitCircle` (the landing moves the proof, or the leaf moves) | Mathlib's class group and valuations; one completely split prime | a planner-and-implementer job (X02D's Lemma W construction at one `u`) |
+| **PD** — Pontryagin duality for countable discrete groups, D1 and D2 (and, with M8b, Tate's `L^⊥ = L`) | new files | Mathlib (Haar, `L²`) | **a planner first**; my call: formalize (W2), the declared form the fallback |
+| **G** — `Rigidity/Pieces`'s leaves 1–7, 10–14 | that file | D, U, M5 (`haar_or_zero_entropy`), lane E's leaves 9–10 (T2, `ksEntropy_map`), C0's Lemma F (leaf 9) | an implementer; leaves 8–9 wait on PD |
+| **S** — `Rigidity/EntropySplitMax`'s leaves 2–6 | that file | G, H, E (mixture lemma), P2 (leaf 1, at the join) | an implementer |
+| **P, P2, P3, E, N, H, C** | as KN7 § 6.4 | unchanged | unchanged |
+| **M5** — `haar_or_zero_entropy` (FS105-DED; now with `[PolishSpace X]`) | `Rigidity/PositiveEntropy` (one proof) or a new file | M1, the finite-fibred step (M5's draft claim list, item 3) | a planner first (its draft claim list has two statements "to type") |
+| **M8b** | new files (§ Stage 4) | N, M9, PD (Tate) | a planner, on § Stage 4's vocabulary |
+
+### 5.2 Drafts for files I do not write
+
+- **`data/fs131/claims-NF2.md` § Dated lines** (Keryx files; each follows the last line there):
+  - "2026-10-14 — **`haar_or_zero_entropy` takes `[PolishSpace X]` (FS131-KN8, on the standing word of inventory item 750
+    ruling 2).** FS105-DED's finite-fibred step reads clause (4) over Mathlib's quotient σ-algebra, which for the Borel
+    σ-algebra of `X ⧸ G j` is Lusin–Souslin; every use on the headline's path is at `Rigidity.PieceDual M` of a countable `M`,
+    Polish by `Rigidity.polishSpace_dual`. The stored statement changed by exactly that binder (the kernel's dump)."
+  - "2026-10-14 — **T4 and Haar measure on the dual need no Herglotz–Bochner (FS131-KN8).** On the dual of a countable discrete
+    abelian group with the pointwise topology (Polish; Borel = the cylinder σ-algebra), Fourier uniqueness is Mathlib's
+    `ext_of_forall_mem_subalgebra_integral_eq_of_polish` and Haar is `haarMeasure ⊤` (`Rigidity.measure_eq_of_fourier`,
+    `Rigidity.isHaarFourier_iff`, typed in `Rigidity/DualGroup`); NF2-LEAF-20's T4 no longer reads leaf 3 (M2), and at
+    countable `G` Herglotz–Bochner's uniqueness clause is a theorem."
+  - "2026-10-14 — **A classical input the leaf list does not name: Pontryagin duality for a countable discrete group (FS131-KN8).**
+    PE-1′ (NF2-LEAF-20) reads that the continuous characters of `M̂` are the evaluations (D1; NF2-LEAF-15's draft names it) and
+    that a closed subgroup of `M̂` is the annihilator of its annihilator (D2, the duality theorem for compact abelian groups);
+    EF_F⁺'s model (NF2-LEAF-21) reads Tate's self-duality of the adeles. X02D and X01D cite them as textbook."
+  - "2026-10-14 — **NF2-LEAF-21's height count is replaceable (FS131-KN8).** Lemma 3.2′(a)'s pigeonhole needs `#V_M ≥ c·M^{α′}`
+    for some `α′ > 0` only (its `β` is chosen after `α′`); `z = 1 + 2bi` gives `α′ = 1/(2[F:ℚ])` with no Pythagorean count."
+- **`LEAN.md` § Searching — Lean**: the binder line of § 3.5; and: "`AddChar.ext` at the pin takes its two characters
+  explicitly (`AddChar.ext ψ χ h`), and `ext r` on an equation of `AddChar`s into `Circle` reaches the coercion to `ℂ`
+  (`↑((g • χ) r) = …`); write `DFunLike.ext _ _ fun r => ?_` (FS131-KN8, `Rigidity.mulAction_dual`)." And: "Dot notation
+  on a `def` whose body is a conjunction (`SpectralInputs.IsHaarFourier`) looks in the def's own namespace: a lemma meant for
+  `hm.map_dual` is declared `_root_.HadwigerNelson.SpectralInputs.IsHaarFourier.map_dual` from any module (FS131-KN8)."
+- **`BIBLIOGRAPHY.md`**: `[Rudin1962]` §§ 1.5 (the duality theorem), 2.1 — cited as the source of D1/D2 by this job's plan,
+  **not read** (recalled); a row for Tate's thesis (`[Tate1950]`, *Fourier analysis in number fields and Hecke's
+  zeta-functions*) or Weil's *Basic Number Theory* (`[Weil1967]`, Ch. IV) if the coordinator takes the declared route for
+  M8b's model — **not held, not read**; `[OAIMath2026]`: `PrimePackets/KernelEntropy.lean` l. 278–283
+  (`actionInvariantSigma`, `actionInvariantSigma_le`) read by FS131-KN8.
+- **`ARCHITECTURE.md` § Trust**: nothing new (no axiom added; the declared theorem untouched).

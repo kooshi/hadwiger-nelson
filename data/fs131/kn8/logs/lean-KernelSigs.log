@@ -1,0 +1,145 @@
+slot: admitted kn8p: mem 4 GiB (hard cap), cpus 0,1
+dualTopologicalSpace : (G : Type u_1) → [inst : AddCommGroup G] → TopologicalSpace (AddChar G Circle)
+continuous_evalChar : ∀ (G : Type u_1) [inst : AddCommGroup G] (g : G), Continuous fun χ => ↑(χ g)
+isClosedEmbedding_coe : ∀ (G : Type u_1) [inst : AddCommGroup G], Topology.IsClosedEmbedding fun χ g => ↑(χ g)
+isTopologicalGroup_dual : ∀ (G : Type u_1) [inst : AddCommGroup G], IsTopologicalGroup (AddChar G Circle)
+t2Space_dual : ∀ (G : Type u_1) [inst : AddCommGroup G], T2Space (AddChar G Circle)
+compactSpace_dual : ∀ (G : Type u_1) [inst : AddCommGroup G], CompactSpace (AddChar G Circle)
+secondCountableTopology_dual : ∀ (G : Type u_1) [inst : AddCommGroup G] [Countable G],
+  SecondCountableTopology (AddChar G Circle)
+polishSpace_dual : ∀ (G : Type u_1) [inst : AddCommGroup G] [Countable G], PolishSpace (AddChar G Circle)
+borelSpace_dual : ∀ (G : Type u_1) [inst : AddCommGroup G] [Countable G], BorelSpace (AddChar G Circle)
+standardBorelSpace_dual : ∀ (G : Type u_1) [inst : AddCommGroup G] [Countable G], StandardBorelSpace (AddChar G Circle)
+@exists_apply_ne_one : ∀ {G : Type u_1} [inst : AddCommGroup G] {r : G}, r ≠ 0 → ∃ ψ, ψ r ≠ 1
+@measure_eq_of_fourier : ∀ {G : Type u_1} [inst : AddCommGroup G] [Countable G] {σ σ' : Measure (AddChar G Circle)}
+  [IsFiniteMeasure σ] [IsFiniteMeasure σ'],
+  (∀ (r : G), ∫ (χ : AddChar G Circle), ↑(χ r) ∂σ = ∫ (χ : AddChar G Circle), ↑(χ r) ∂σ') → σ = σ'
+dualHaar : (G : Type u_1) → [inst : AddCommGroup G] → [Countable G] → Measure (AddChar G Circle)
+isProbabilityMeasure_dualHaar : ∀ (G : Type u_1) [inst : AddCommGroup G] [inst_1 : Countable G],
+  IsProbabilityMeasure (dualHaar G)
+isHaarMeasure_dualHaar : ∀ (G : Type u_1) [inst : AddCommGroup G] [inst_1 : Countable G], (dualHaar G).IsHaarMeasure
+isHaarFourier_dualHaar : ∀ (G : Type u_1) [inst : AddCommGroup G] [inst_1 : Countable G], IsHaarFourier (dualHaar G)
+@isHaarFourier_iff : ∀ {G : Type u_1} [inst : AddCommGroup G] [inst_1 : Countable G] {m : Measure (AddChar G Circle)},
+  IsHaarFourier m ↔ m = dualHaar G
+@exists_isHaarFourier_of_countable : ∀ {G : Type u_1} [inst : AddCommGroup G] [Countable G], ∃ m, IsHaarFourier m
+@IsHaarFourier.map_dual : ∀ {G : Type u_1} [inst : AddCommGroup G] {m : Measure (AddChar G Circle)},
+  IsHaarFourier m →
+    ∀ (φ : G →+ G), Function.Injective ⇑φ → IsHaarFourier (Measure.map (fun χ => χ.compAddMonoidHom φ) m)
+@IsHaarFourier.map_mul_right : ∀ {G : Type u_1} [inst : AddCommGroup G] {m : Measure (AddChar G Circle)},
+  IsHaarFourier m → ∀ (a : AddChar G Circle), IsHaarFourier (Measure.map (fun χ => χ * a) m)
+@IsHaarFourier.map_dual_eq : ∀ {G : Type u_1} [inst : AddCommGroup G] [Countable G] {m : Measure (AddChar G Circle)},
+  IsHaarFourier m → ∀ (φ : G →+ G), Function.Injective ⇑φ → Measure.map (fun χ => χ.compAddMonoidHom φ) m = m
+@IsHaarFourier.map_mul_right_eq : ∀ {G : Type u_1} [inst : AddCommGroup G] [Countable G]
+  {m : Measure (AddChar G Circle)}, IsHaarFourier m → ∀ (a : AddChar G Circle), Measure.map (fun χ => χ * a) m = m
+@dualHaar_fourier_zero : ∀ {G : Type u_1} [inst : AddCommGroup G] [inst_1 : Countable G],
+  ∫ (χ : AddChar G Circle), ↑(χ 0) ∂dualHaar G = 1
+unitCircle : Subfield ℝ → Subgroup Circle
+@mem_unitCircle : ∀ {F : Subfield ℝ} {z : Circle}, z ∈ unitCircle F ↔ ↑z ∈ fieldI F
+@toUnitVector : {F : Subfield ℝ} → ↥(unitCircle F) → ↑(unitVectors F)
+@coe_toUnitVector : ∀ {F : Subfield ℝ} (g : ↥(unitCircle F)), ↑(toUnitVector g) = ↑↑g
+unitCircleEquiv : (F : Subfield ℝ) → ↥(unitCircle F) ≃ ↑(unitVectors F)
+uvRing_toUnitVector_mul : ∀ (F : Subfield ℝ) (g h : ↥(unitCircle F)),
+  uvRing (toUnitVector (g * h)) = uvRing (toUnitVector g) * uvRing (toUnitVector h)
+uvRing_toUnitVector_one : ∀ (F : Subfield ℝ), uvRing (toUnitVector 1) = 1
+mulAction_dual : (F : Subfield ℝ) → MulAction (↥(unitCircle F)) (Dual F)
+@smul_def : ∀ {F : Subfield ℝ} (g : ↥(unitCircle F)) (χ : Dual F), g • χ = rot (toUnitVector g) χ
+@measurableConstSMul_dual : ∀ {F : Subfield ℝ}, MeasurableConstSMul (↥(unitCircle F)) (Dual F)
+@rotInv_iff : ∀ {F : Subfield ℝ} {τ : Measure (Dual F)},
+  RotInv F τ ↔ ∀ (g : ↥(unitCircle F)), Measure.map (fun x => g • x) τ = τ
+@countable_unitRing_of_numberField : ∀ {F : Subfield ℝ} [NumberField ↥F], Countable ↥(unitRing F)
+@countable_unitCircle : ∀ {F : Subfield ℝ} [NumberField ↥F], Countable ↥(unitCircle F)
+@IsHaarFourier.rotInv : ∀ {F : Subfield ℝ} [NumberField ↥F] {m : Measure (Dual F)}, IsHaarFourier m → RotInv F m
+@zpowHom : {F : Subfield ℝ} → ↥(unitCircle F) → ↥(unitCircle F) → Multiplicative (Fin 2 → ℤ) →* ↥(unitCircle F)
+AdmissiblePair : Subfield ℝ → Type
+@AdmissiblePair.subgroup : {F : Subfield ℝ} → AdmissiblePair F → Subgroup ↥(unitCircle F)
+@AdmissiblePair.mem_subgroup : ∀ {F : Subfield ℝ} (p : AdmissiblePair F) {g : ↥(unitCircle F)},
+  g ∈ p.subgroup ↔ ∃ n, (zpowHom p.u p.w) (Multiplicative.ofAdd n) = g
+@AdmissiblePair.u_nonTorsion : ∀ {F : Subfield ℝ} (p : AdmissiblePair F) (k : ℕ), k ≠ 0 → ↑(toUnitVector p.u) ^ k ≠ 1
+@AdmissiblePair.ofPow : {F : Subfield ℝ} →
+  (u w : ↥(unitCircle F)) →
+    Function.Injective ⇑(zpowHom u w) → (∀ (k : ℕ), 0 < k → Subfield.closure {↑↑w ^ k} = fieldI F) → AdmissiblePair F
+@exists_admissiblePair : ∀ {F : Subfield ℝ} [NumberField ↥F], Nonempty (AdmissiblePair F)
+PieceDual : (M : Type u_1) → [AddCommGroup M] → Type u_1
+PieceDual.ofChar : (M : Type u_1) → [inst : AddCommGroup M] → AddChar M Circle ≃ PieceDual M
+@PieceDual.dualMap : {M : Type u_1} → [inst : AddCommGroup M] → (M →+ M) → PieceDual M →+ PieceDual M
+@PieceDual.dualMap_apply : ∀ {M : Type u_1} [inst : AddCommGroup M] (φ : M →+ M) (χ : PieceDual M) (x : M),
+  ((PieceDual.ofChar M).symm ((PieceDual.dualMap φ) χ)) x = ((PieceDual.ofChar M).symm χ) (φ x)
+@PieceDual.dualMap_id : ∀ {M : Type u_1} [inst : AddCommGroup M],
+  PieceDual.dualMap (AddMonoidHom.id M) = AddMonoidHom.id (PieceDual M)
+@PieceDual.dualMap_comp : ∀ {M : Type u_1} [inst : AddCommGroup M] (φ ψ : M →+ M),
+  PieceDual.dualMap (φ.comp ψ) = (PieceDual.dualMap ψ).comp (PieceDual.dualMap φ)
+@PieceDual.continuous_dualMap : ∀ {M : Type u_1} [inst : AddCommGroup M] (φ : M →+ M), Continuous ⇑(PieceDual.dualMap φ)
+@toPiece : {F : Subfield ℝ} → (M : AddSubgroup ↥(unitRing F)) → Dual F → PieceDual ↥M
+@measurable_toPiece : ∀ {F : Subfield ℝ} (M : AddSubgroup ↥(unitRing F)), Measurable (toPiece M)
+@AdmissiblePair.mulR : {F : Subfield ℝ} → AdmissiblePair F → (Fin 2 → ℤ) → ↥(unitRing F) →+ ↥(unitRing F)
+@IsPiece : {F : Subfield ℝ} → AdmissiblePair F → AddSubgroup ↥(unitRing F) → Prop
+@IsPiece.mulR_mem : ∀ {F : Subfield ℝ} {p : AdmissiblePair F} {M : AddSubgroup ↥(unitRing F)},
+  IsPiece p M → ∀ (n : Fin 2 → ℤ) {x : ↥(unitRing F)}, x ∈ M → (p.mulR n) x ∈ M
+@pieceMul : {F : Subfield ℝ} →
+  {p : AdmissiblePair F} → {M : AddSubgroup ↥(unitRing F)} → IsPiece p M → (Fin 2 → ℤ) → ↥M →+ ↥M
+@pieceMul_zero : ∀ {F : Subfield ℝ} {p : AdmissiblePair F} {M : AddSubgroup ↥(unitRing F)} (hM : IsPiece p M),
+  pieceMul hM 0 = AddMonoidHom.id ↥M
+@pieceMul_add : ∀ {F : Subfield ℝ} {p : AdmissiblePair F} {M : AddSubgroup ↥(unitRing F)} (hM : IsPiece p M)
+  (m n : Fin 2 → ℤ), pieceMul hM (m + n) = (pieceMul hM n).comp (pieceMul hM m)
+@pieceAction : {F : Subfield ℝ} →
+  {p : AdmissiblePair F} → {M : AddSubgroup ↥(unitRing F)} → IsPiece p M → ZdAction 2 (PieceDual ↥M)
+@toPiece_rot : ∀ {F : Subfield ℝ} {p : AdmissiblePair F} {M : AddSubgroup ↥(unitRing F)} (hM : IsPiece p M)
+  (n : Fin 2 → ℤ) (χ : Dual F),
+  toPiece M (rot (toUnitVector ((zpowHom p.u p.w) (Multiplicative.ofAdd n))) χ) =
+    ((pieceAction hM).toFun n) (toPiece M χ)
+@isSolenoid_pieceDual : ∀ {F : Subfield ℝ} {p : AdmissiblePair F} [NumberField ↥F] {M : AddSubgroup ↥(unitRing F)},
+  IsPiece p M → IsSolenoid (PieceDual ↥M)
+@isTotallyIrreducible_pieceAction : ∀ {F : Subfield ℝ} {p : AdmissiblePair F} [NumberField ↥F]
+  {M : AddSubgroup ↥(unitRing F)} (hM : IsPiece p M), (pieceAction hM).IsTotallyIrreducible
+@not_isVirtuallyCyclic_pieceAction : ∀ {F : Subfield ℝ} {p : AdmissiblePair F} {M : AddSubgroup ↥(unitRing F)}
+  (hM : IsPiece p M), ¬(pieceAction hM).IsVirtuallyCyclic
+@isPiece_closure_one : ∀ {F : Subfield ℝ} {p : AdmissiblePair F} [NumberField ↥F],
+  IsPiece p (AddSubgroup.closure {y | ∃ n, ∃ x ∈ {1}, y = (p.mulR n) x})
+@exists_pieceChain : ∀ {F : Subfield ℝ} {p : AdmissiblePair F} [NumberField ↥F],
+  ∃ M, Monotone M ∧ ∃ (_ : ∀ (k : ℕ), IsPiece p (M k)), ∀ (r : ↥(unitRing F)), ∃ k, r ∈ M k
+@isErgodicOn_map_toPiece : ∀ {F : Subfield ℝ} {p : AdmissiblePair F} {M : AddSubgroup ↥(unitRing F)} (hM : IsPiece p M)
+  {ρ : Measure (Dual F)} [IsProbabilityMeasure ρ],
+  ErgodicSMul (↥p.subgroup) (Dual F) ρ → (pieceAction hM).IsErgodicOn ⊤ (Measure.map (toPiece M) ρ)
+@ksEntropy_rot_eq_iSup : ∀ {F : Subfield ℝ} {p : AdmissiblePair F} {M : ℕ → AddSubgroup ↥(unitRing F)},
+  Monotone M →
+    ∀ (hM : ∀ (k : ℕ), IsPiece p (M k)),
+      (∀ (r : ↥(unitRing F)), ∃ k, r ∈ M k) →
+        ∀ {ρ : Measure (Dual F)} [IsProbabilityMeasure ρ],
+          ErgodicSMul (↥p.subgroup) (Dual F) ρ →
+            ∀ (n : Fin 2 → ℤ),
+              ksEntropy ρ (rot (toUnitVector ((zpowHom p.u p.w) (Multiplicative.ofAdd n)))) =
+                ⨆ k, ksEntropy (Measure.map (toPiece (M k)) ρ) ⇑((pieceAction ⋯).toFun n)
+@integral_eq_zero_of_isAddHaarMeasure : ∀ {F : Subfield ℝ} {M : AddSubgroup ↥(unitRing F)} {ρ : Measure (Dual F)}
+  [IsProbabilityMeasure ρ],
+  (Measure.map (toPiece M) ρ).IsAddHaarMeasure → ∀ {r : ↥(unitRing F)}, r ∈ M → r ≠ 0 → ∫ (χ : Dual F), ↑(χ r) ∂ρ = 0
+@isHaarFourier_or_ksEntropy_eq_zero : ∀ {F : Subfield ℝ} [NumberField ↥F] (p : AdmissiblePair F) (ρ : Measure (Dual F))
+  [IsProbabilityMeasure ρ],
+  ErgodicSMul (↥p.subgroup) (Dual F) ρ → IsHaarFourier ρ ∨ ∀ g ∈ p.subgroup, ksEntropy ρ (rot (toUnitVector g)) = 0
+invariantSigma : (H : Type u_1) →
+  (Y : Type u_2) → [inst : Group H] → [MulAction H Y] → [MeasurableSpace Y] → MeasurableSpace Y
+invariantSigma_le : ∀ (H : Type u_1) (Y : Type u_2) [inst : Group H] [inst_1 : MulAction H Y] [mY : MeasurableSpace Y],
+  invariantSigma H Y ≤ mY
+@condExpKernel_ergodicDecomposition : ∀ {H : Type u_1} {Y : Type u_2} [inst : Group H] [Countable H]
+  [inst_2 : MulAction H Y] [inst_3 : MeasurableSpace Y] [inst_4 : StandardBorelSpace Y] [Nonempty Y] (μ : Measure Y)
+  [inst_6 : IsProbabilityMeasure μ],
+  (∀ (g : H), MeasurePreserving (fun y => g • y) μ μ) →
+    ⇑(condExpKernel μ (invariantSigma H Y)) ∘ₘ μ.trim ⋯ = μ ∧
+      ∀ᵐ (x : Y) ∂μ.trim ⋯, ErgodicSMul H Y ((condExpKernel μ (invariantSigma H Y)) x)
+@rotInv_sub_maxMultiple : ∀ {F : Subfield ℝ} [NumberField ↥F] (τ : Measure (Dual F)) [IsFiniteMeasure τ],
+  RotInv F τ → ∀ {m : Measure (Dual F)}, IsHaarFourier m → RotInv F (τ - maxMultiple τ m • m)
+@haarSet : {F : Subfield ℝ} → (Dual F → Measure (Dual F)) → Set (Dual F)
+@measure_haarSet_eq_zero : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (p : AdmissiblePair F) (ν : Measure (Dual F))
+  [inst_1 : IsProbabilityMeasure ν],
+  (∀ (g : ↥p.subgroup), MeasurePreserving (fun χ => g • χ) ν ν) →
+    ∀ {m : Measure (Dual F)},
+      IsHaarFourier m →
+        (∀ (c : ℝ≥0∞), c ≠ 0 → ¬c • m ≤ ν) → ν (haarSet ⇑(condExpKernel ν (invariantSigma (↥p.subgroup) (Dual F)))) = 0
+@ksEntropy_eq_zero_of_not_smul_le : ∀ {F : Subfield ℝ} [NumberField ↥F] (p : AdmissiblePair F) (ν : Measure (Dual F))
+  [IsProbabilityMeasure ν],
+  (∀ (g : ↥p.subgroup), MeasurePreserving (fun χ => g • χ) ν ν) →
+    ∀ {m : Measure (Dual F)},
+      IsHaarFourier m → (∀ (c : ℝ≥0∞), c ≠ 0 → ¬c • m ≤ ν) → ∀ g ∈ p.subgroup, ksEntropy ν (rot (toUnitVector g)) = 0
+@entropySplit_of_admissiblePair : ∀ {F : Subfield ℝ} [NumberField ↥F] (p : AdmissiblePair F), EntropySplit F
+@not_smul_dualHaar_le_dirac_one : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (c : ℝ≥0∞),
+  c ≠ 0 → ¬c • dualHaar ↥(unitRing F) ≤ Measure.dirac 1
+exit=0

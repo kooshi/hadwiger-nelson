@@ -108,7 +108,12 @@ instance measurableConstSMul_dual : MeasurableConstSMul (unitCircle F) (Dual F) 
 theorem rotInv_iff {τ : Measure (Dual F)} : RotInv F τ ↔ ∀ g : unitCircle F, τ.map (g • ·) = τ := by
   sorry
 
-/-- **`R = ℤ[U]` is countable** over a number field, and so is `unitCircle F`. -/
+/-- **`R = ℤ[U]` is countable** over a number field (`SpectralChain.countable_unitRing`), as an instance: the standard
+Borel structure of `Dual F` (`Rigidity.standardBorelSpace_dual`) reads it. -/
+instance countable_unitRing_of_numberField [NumberField F] : Countable (unitRing F) :=
+  @countable_unitRing F (Finsupp.Countable.of_moduleFinite (R := ℚ) (M := F))
+
+/-- **`unitCircle F` is countable** over a number field: it injects into `R`. -/
 instance countable_unitCircle [NumberField F] : Countable (unitCircle F) := by
   sorry
 
