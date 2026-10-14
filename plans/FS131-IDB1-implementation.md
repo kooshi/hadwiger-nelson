@@ -110,3 +110,41 @@ Plants (`data/fs131/idb1/probes/Plants.lean`), each beside its faithful partner:
 
 The planner priced lane C at 900 lines plus a generator; the checker and its soundness came to 1,168 lines (with docs and
 the spec examples) and the generator to 289: **1.3×** the plan on lines, the kernel rate as measured. No message owed.
+
+## Stage 3 — SAVED: the checker split to core; lane B's 17 leaves written
+
+### 3.1 The checker in core, so the cells load no Mathlib and outlive any edit to the Bessel proofs
+
+A finding while lane C stood: Lake rebuilds every module downstream of an edited one (`LEAN.md` § Building, FS131-LU1's
+113 dependents recompiled to the same bytes), and the cells imported `BesselCert`, which imports `Bessel`; every edit to a
+Bessel proof would have re-run the 41 minutes of kernel time. So the computations moved, unchanged, into a new module
+**`Plane/DensityBound/BesselCheck`** (316 lines, core only, no import: `Int`/`Nat` for `ℤ`/`ℕ`), and `BesselCert` (now
+the soundness only, 880 lines) imports it; `Cells/Data` and the parts import `BesselCheck`, `Cells/Covering` imports
+`BesselCert` and the parts. Measured on Part40 as a standalone file: **60.3 s, RSS 1.95 GB** (against 61.4 s and 4.60 GB
+with Mathlib loaded). The chain stage re-run against the core module printed a byte-identical `Chain.out`
+(`data/fs131/idb1/gen/run3.sha256` against `run2.sha256`, second line). A new module is outside the letter of the
+brief's file list; the brief gives the checker's design to this lane, and this is said in the report.
+
+### 3.2 Lane B, all 17 leaves (written in copies under `data/fs131/idb1/work/` while builds walked, then copied over)
+
+`Bessel` (13): `J0_eq_integral`, `J1_eq_integral`, `J0_zero`, `J1_zero` (one `simp` each through `Real.circleAverage_def`,
+`circleMap`); `abs_J0_le_one`, `abs_J1_le_one` (circle-average monotonicity, `|z.im| ≤ ‖z‖ = 1` on the circle);
+`hasDerivAt_J0` and a private `hasDerivAt_J1_integral` (`J₁′ = (2π)⁻¹∫ sin²θ cos(x sin θ)` at **every** `x`) from one private
+helper `hasDerivAt_integral_sin` (Mathlib's `intervalIntegral.hasDerivAt_integral_of_dominated_loc_of_deriv_le` at
+`s = univ`, bound `1`); `hasDerivAt_J1` (`x ≠ 0`) by one integration by parts (`integral_mul_deriv_eq_deriv_mul`, boundary
+terms `0` at `0` and `2π`); `continuous_J0`, `continuous_J1` (from the derivatives, `J₁` at `0` included — no limit
+argument needed); `antitoneOn_norm_Jc` (`(J₀² + J₁²)′ = −2J₁²/x`, `antitoneOn_of_deriv_nonpos` on `Ici 0`);
+`abs_J0_sub_le` (`lipschitzWith_of_nnnorm_deriv_le`); `circleAverage_exp_inner` (`⟪ξ, r e^{iθ}⟫ = r‖ξ‖ sin(θ − β)` with
+`β = arg ξ − π/2`, a shift by periodicity, `exp = cos + i sin`, the sine part `0` by `θ ↦ 2π − θ`).
+
+`BesselDefect` (4): `norm_Jc_sub_le_of_defect` — for `κ > 0`, `f = √(‖J − p‖² + κ²)` has derivative
+`⟪e, F(e) − δ⟫/f ≤ ‖e‖·D/f ≤ D` on `(a, b)` (the contraction `⟪w, F(x, w)⟫ = −w₁²/x ≤ 0`), so
+`Convex.image_sub_le_mul_sub_of_deriv_le` on `Icc a b` gives `‖e(x)‖ ≤ ‖e(a)‖ + κ + (x − a)D`, and `κ → 0`; the planner's
+separate limit at `a = 0` is not needed (the mean-value lemma reads continuity on `Icc`, derivatives on `Ioo`);
+`hasDerivAt_Jc` (through a private copy `hasDerivAt_Jc_aux` placed before the comparison lemma, which uses it — no
+declaration moved); `abs_J0_sub_re_le`; `abs_J0_le_of_le`.
+
+Both copies elaborate with no error and no `sorry` (`lake env lean`, `-DautoImplicit=false`): Bessel 5.4 s, BesselDefect
+4.8 s. The text diff against the skeletons removes exactly the 13 + 4 `sorry` lines and adds proofs and the three private
+helpers. Re-priced from the first two leaves: the plan's 600 lines for lane B against about 330 written — **0.55×**.
+The kernel-side statement check and the build are stage 4's.

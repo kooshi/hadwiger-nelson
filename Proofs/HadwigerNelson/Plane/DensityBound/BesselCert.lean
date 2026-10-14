@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Plane.DensityBound.BesselDefect
+import Proofs.HadwigerNelson.Plane.DensityBound.BesselCheck
 
 /-!
 # The `J₀` covering: its checker and the checker's soundness (FS-131, FS131-IDB1)
@@ -26,7 +27,9 @@ cell boundary (`decode`), so the kernel reads a literal, never a computed state 
 the planner measured chained states at 21.8 s per cell against 1.5 s for literals). Past the last cell, `‖J‖` is
 antitone, so the last states bound every later `|J₀|` (`tailCheck_sound`).
 
-The data and the cells are generated modules `Plane/DensityBound/Cells/*`. Plan: `plans/FS131-KDB1-density-bound.md`
+The computations themselves are `Plane/DensityBound/BesselCheck` (core only, so the cells' kernel checks load no Mathlib);
+this module gives them their meaning and proves them sound. The data and the cells are generated modules
+`Plane/DensityBound/Cells/*`. Plan: `plans/FS131-KDB1-density-bound.md`
 § 2.1 R4; record `plans/FS131-IDB1-implementation.md`.
 -/
 
@@ -36,18 +39,6 @@ namespace BesselCert
 open Real Set
 
 /-! ### Scales -/
-
-/-- `S = 2⁶⁴`: the scale of a state's coordinates and of the distances. -/
-def S : ℤ := 18446744073709551616
-
-/-- `T2 = 2²⁰`: the scale of the `t`-grid. -/
-def T2 : ℤ := 1048576
-
-/-- `SC = T2·S = 2⁸⁴`: the scale of a cell's left end `t₀·D` in `x`. -/
-def SC : ℤ := 19342813113834066795298816
-
-/-- `K = 2·T2·S = 2⁸⁵`: the scale of the cell variable `u = 2·T2·τ` against `y = τ/S`. -/
-def K : ℤ := 38685626227668133590597632
 
 theorem S_real : (S : ℝ) = 2 ^ 64 := by norm_num [S]
 
@@ -74,31 +65,15 @@ theorem ev_nil (x : ℝ) : ev [] x = 0 := rfl
 
 theorem ev_cons (a : ℤ) (l : List ℤ) (x : ℝ) : ev (a :: l) x = a + x * ev l x := rfl
 
-/-- Horner evaluation at an integer: the kernel's. -/
-def evZ : List ℤ → ℤ → ℤ
-  | [], _ => 0
-  | a :: l, x => a + x * evZ l x
-
 theorem cast_evZ (l : List ℤ) (x : ℤ) : ((evZ l x : ℤ) : ℝ) = ev l x := by
   induction l with
   | nil => simp [evZ, ev]
   | cons a l ih => simp [evZ, ev, ih]
 
-/-- `pw b n = bⁿ` by recursion (the kernel's: `^` on `ℤ` elaborates through `Monoid.npow` under Mathlib). -/
-def pw (b : ℤ) : ℕ → ℤ
-  | 0 => 1
-  | n + 1 => pw b n * b
-
 theorem pw_eq (b : ℤ) (n : ℕ) : pw b n = b ^ n := by
   induction n with
   | zero => simp [pw]
   | succ n ih => simp [pw, ih, pow_succ]
-
-/-- Coefficientwise sum. -/
-def addL : List ℤ → List ℤ → List ℤ
-  | [], m => m
-  | a :: l, [] => a :: l
-  | a :: l, b :: m => (a + b) :: addL l m
 
 theorem ev_addL (l m : List ℤ) (x : ℝ) : ev (addL l m) x = ev l x + ev m x := by
   induction l generalizing m with
@@ -108,20 +83,10 @@ theorem ev_addL (l m : List ℤ) (x : ℝ) : ev (addL l m) x = ev l x + ev m x :
     | nil => simp [addL, ev]
     | cons b m => simp only [addL, ev, ih]; push_cast; ring
 
-/-- Multiplication by a constant. -/
-def smulL (c : ℤ) : List ℤ → List ℤ
-  | [] => []
-  | a :: l => (c * a) :: smulL c l
-
 theorem ev_smulL (c : ℤ) (l : List ℤ) (x : ℝ) : ev (smulL c l) x = c * ev l x := by
   induction l with
   | nil => simp [smulL, ev]
   | cons a l ih => simp only [smulL, ev, ih]; push_cast; ring
-
-/-- Absolute values of the coefficients. -/
-def absL : List ℤ → List ℤ
-  | [] => []
-  | a :: l => (a.natAbs : ℤ) :: absL l
 
 theorem cast_natAbs_eq (a : ℤ) : (((a.natAbs : ℤ)) : ℝ) = |(a : ℝ)| := by
   rw [Int.natCast_natAbs, Int.cast_abs]
@@ -144,14 +109,6 @@ theorem abs_ev_le (l : List ℤ) {x h : ℝ} (hx : |x| ≤ h) : |ev l x| ≤ ev 
           rw [← abs_mul]; exact abs_add_le _ _
       _ ≤ |(a : ℝ)| + h * ev (absL l) h := by
           gcongr
-
-/-- `derivAux k [l₀, l₁, …] = [k l₀, (k + 1) l₁, …]`. -/
-def derivAux : ℤ → List ℤ → List ℤ
-  | _, [] => []
-  | k, a :: l => (k * a) :: derivAux (k + 1) l
-
-/-- The derivative's coefficients: `dL [l₀, l₁, l₂, …] = [l₁, 2 l₂, …]`. -/
-def dL (l : List ℤ) : List ℤ := derivAux 1 l.tail
 
 theorem ev_derivAux_succ (k : ℤ) (l : List ℤ) (x : ℝ) :
     ev (derivAux (k + 1) l) x = ev l x + ev (derivAux k l) x := by
@@ -180,40 +137,20 @@ theorem hasDerivAt_ev (l : List ℤ) (x : ℝ) : HasDerivAt (fun y => ev l y) (e
     rw [e1, ev_dL_cons, show ev l x + x * ev (dL l) x = 1 * ev l x + x * ev (dL l) x by ring]
     exact h
 
-/-- `affX w a L` holds the coefficients of `a + (w + v)·L(v)`. -/
-def affX (w : ℤ) : ℤ → List ℤ → List ℤ
-  | a, [] => [a]
-  | a, c :: L => (a + w * c) :: affX w c L
-
 theorem ev_affX (w : ℤ) (L : List ℤ) : ∀ (a : ℤ) (v : ℝ), ev (affX w a L) v = a + (w + v) * ev L v := by
   induction L with
   | nil => intro a v; simp [affX, ev]
   | cons c L ih => intro a v; simp only [affX, ev, ih]; push_cast; ring
-
-/-- The Taylor shift: `shiftL w l` holds the coefficients of `v ↦ l(w + v)`. -/
-def shiftL (w : ℤ) : List ℤ → List ℤ
-  | [] => []
-  | a :: l => affX w a (shiftL w l)
 
 theorem ev_shiftL (w : ℤ) (l : List ℤ) (v : ℝ) : ev (shiftL w l) v = ev l (w + v) := by
   induction l with
   | nil => simp [shiftL, ev]
   | cons a l ih => simp only [shiftL, ev_affX, ih, ev]
 
-/-- `powScale D p [l₀, l₁, …] = [p l₀, p D l₁, p D² l₂, …]`. -/
-def powScale (D : ℤ) : ℤ → List ℤ → List ℤ
-  | _, [] => []
-  | p, a :: l => (a * p) :: powScale D (p * D) l
-
 theorem ev_powScale (D : ℤ) (l : List ℤ) : ∀ (p : ℤ) (y : ℝ), ev (powScale D p l) y = p * ev l (D * y) := by
   induction l with
   | nil => intro p y; simp [powScale, ev]
   | cons a l ih => intro p y; simp only [powScale, ev, ih]; push_cast; ring
-
-/-- `homogL K l = [lₙ K^(L−1−n)]` (`L` the length): `ev (homogL K l) u · K = K^L · ev l (u/K)`. -/
-def homogL (K : ℤ) : List ℤ → List ℤ
-  | [] => []
-  | a :: l => (a * pw K l.length) :: homogL K l
 
 theorem ev_homogL (K : ℤ) (hK : (K : ℝ) ≠ 0) (l : List ℤ) (u : ℝ) :
     ev (homogL K l) u * K = (K : ℝ) ^ l.length * ev l (u / K) := by
@@ -225,16 +162,6 @@ theorem ev_homogL (K : ℤ) (hK : (K : ℝ) ≠ 0) (l : List ℤ) (u : ℝ) :
     rw [add_mul, mul_assoc u, ih]
     field_simp
     ring
-
-/-- `Wh hn hd l = Σₙ lₙ hnⁿ hd^(L−n)` (`L` the length), so `Wh/hd^L = ev l (hn/hd)`. -/
-def Wh (hn hd : ℤ) : List ℤ → ℤ
-  | [] => 0
-  | a :: l => a * pw hd (l.length + 1) + hn * Wh hn hd l
-
-/-- `Wh` forward, with accumulators: what the kernel runs. -/
-def evF (hn hd : ℤ) : ℤ → ℤ → ℤ → List ℤ → ℤ × ℤ
-  | v, _, q, [] => (v, q)
-  | v, p, q, a :: l => evF hn hd ((v + a * p) * hd) (p * hn) (q * hd) l
 
 theorem evF_eq (hn hd : ℤ) : ∀ (v p q : ℤ) (l : List ℤ),
     evF hn hd v p q l = (v * pw hd l.length + p * Wh hn hd l, q * pw hd l.length)
@@ -274,9 +201,6 @@ theorem ev_split (l : List ℤ) (v : ℝ) :
 
 /-! ### Rounding -/
 
-/-- `⌈num/den⌉` for `den > 0`. -/
-def cdiv (num den : ℤ) : ℤ := -((-num) / den)
-
 theorem le_cdiv {num den : ℤ} (h : 0 < den) : (num : ℝ) / den ≤ cdiv num den := by
   have h1 := Int.ediv_mul_le (-num) h.ne'
   have hd : (0 : ℝ) < den := by exact_mod_cast h
@@ -284,37 +208,7 @@ theorem le_cdiv {num den : ℤ} (h : 0 < den) : (num : ℝ) / den ≤ cdiv num d
   rw [div_le_iff₀ hd]
   simp only [cdiv]; push_cast; linarith
 
-/-- Rounding to nearest, for the generator's states (not read by any proof). -/
-def rnd (num den : ℤ) : ℤ := (2 * num + den) / (2 * den)
-
-/-! ### The Taylor recurrence (untrusted: no proof reads it) -/
-
-/-- The Taylor coefficients `a_{n+1}, b_{n+1}` of the Bessel system at `x = C/SC` from `(a_{n−1}, a_n, b_n)`:
-`(n+1) a_{n+1} = −b_n`, `c (n+1) b_{n+1} = c a_n + a_{n−1} − (n+1) b_n` (`c > 0`), `b_{n+1} = a_n/(n+2)` (`c = 0`), rounded.
-Any lists would serve the soundness proof; these make the defect small. -/
-def taylorAux (C : ℤ) : ℕ → ℕ → ℤ → ℤ → ℤ → List ℤ × List ℤ
-  | 0, _, _, _, _ => ([], [])
-  | fuel + 1, n, am1, an, bn =>
-    let an1 := -(rnd bn ((n : ℤ) + 1))
-    let bn1 := if C = 0 then rnd an ((n : ℤ) + 2)
-      else rnd (C * an + SC * (am1 - ((n : ℤ) + 1) * bn)) (C * ((n : ℤ) + 1))
-    match taylorAux C fuel (n + 1) an an1 bn1 with
-    | (la, lb) => (an1 :: la, bn1 :: lb)
-
-/-- `N` further coefficients of `a` and of `b` from `a₀ = m0`, `b₀ = m1` at `x = C/SC`. -/
-def taylor (C : ℤ) (N : ℕ) (m0 m1 : ℤ) : List ℤ × List ℤ := taylorAux C N 0 0 m0 m1
-
 /-! ### States -/
-
-/-- A state of one term's chain: `‖J(x) − (m0 + i m1)/2⁶⁴‖ ≤ r/2⁶⁴` (`St.Valid`). -/
-structure St where
-  /-- `2⁶⁴ ·` the real part. -/
-  m0 : ℤ
-  /-- `2⁶⁴ ·` the imaginary part. -/
-  m1 : ℤ
-  /-- `2⁶⁴ ·` the radius. -/
-  r : ℤ
-  deriving DecidableEq, Repr
 
 /-- The state is valid at `x`. -/
 def St.Valid (st : St) (x : ℝ) : Prop :=
@@ -345,60 +239,11 @@ theorem jsum_eq_sum (Ws : List ℤ) (d : List ℝ) (t : ℝ) :
 
 /-! ### One term over one cell -/
 
-/-- A term's pass over a cell: side conditions, its error `err` (scale `S`), `p(c + h)` as `P0/R0 + i P1/R1` (scale `S`),
-and its contribution `q` to the cell polynomial. -/
-structure Core where
-  /-- `D > 0`, and `b₀ = 0` at a cell starting at `0`. -/
-  ok : Bool
-  /-- `r + h·sup‖δ‖` at scale `S`, rounded up. -/
-  err : ℤ
-  /-- numerator of `Re p(c + h)` at scale `S`. -/
-  P0 : ℤ
-  /-- its denominator. -/
-  R0 : ℤ
-  /-- numerator of `Im p(c + h)`. -/
-  P1 : ℤ
-  /-- its denominator. -/
-  R1 : ℤ
-  /-- `[W aₙ Dⁿ]`. -/
-  q : List ℤ
-
-/-- `δ₁`'s list. At `C ≠ 0` (cell start `c = C/SC > 0`): `X = C g + SC (s g + b)`, so that `SC·S·x·δ₁ = X(s)`. At `C = 0`
-(and `b₀ = 0`): `g + b/s`, so that `S·δ₁ = X(s)`. Here `g = b′ − a`. -/
-def xList (C : ℤ) (g b tb : List ℤ) : List ℤ :=
-  if C = 0 then addL g tb else addL (smulL C g) (smulL SC (addL (0 :: g) b))
-
-/-- One term over the cell `[t0, t0 + w]` (scale `T2`) at distance `D` (scale `S`) from the state `st`, with the
-polynomials' higher coefficients `ta`, `tb`. -/
-def coreOf (W D : ℤ) (st : St) (t0 w : ℤ) (ta tb : List ℤ) : Core :=
-  match evF (w * D) SC 0 1 1 (absL (addL (dL (st.m0 :: ta)) (st.m1 :: tb))),
-      evF (w * D) SC 0 1 1 (absL (xList (t0 * D) (addL (dL (st.m1 :: tb)) (smulL (-1) (st.m0 :: ta))) (st.m1 :: tb) tb)),
-      evF (w * D) SC 0 1 1 (st.m0 :: ta), evF (w * D) SC 0 1 1 (st.m1 :: tb) with
-  | (V0, Q0), (V1, Q1), (P0, R0), (P1, R1) =>
-    ⟨decide (0 < D) && (decide (t0 * D ≠ 0) || decide (st.m1 = 0)),
-      st.r + cdiv (w * D * V0) (SC * Q0) + cdiv (w * D * V1) (SC * Q1 * (if t0 * D = 0 then 1 else t0 * D)),
-      P0, R0, P1, R1, powScale D W (st.m0 :: ta)⟩
-
-/-- One term over one cell, its polynomials from the Taylor recurrence. -/
-def core (W D : ℤ) (st : St) (t0 w : ℤ) (N : ℕ) : Core :=
-  match taylor (t0 * D) N st.m0 st.m1 with
-  | (ta, tb) => coreOf W D st t0 w ta tb
-
 theorem core_eq (W D : ℤ) (st : St) (t0 w : ℤ) (N : ℕ) :
     core W D st t0 w N = coreOf W D st t0 w (taylor (t0 * D) N st.m0 st.m1).1 (taylor (t0 * D) N st.m0 st.m1).2 := by
   unfold core
   generalize taylor (t0 * D) N st.m0 st.m1 = p
   rfl
-
-/-- The exit state `st'` is accepted: its radius covers the error and its distance to `p(c + h)`. -/
-def termOk (c : Core) (st' : St) : Bool :=
-  c.ok && decide (c.err + cdiv ((c.P0 - st'.m0 * c.R0).natAbs) c.R0 + cdiv ((c.P1 - st'.m1 * c.R1).natAbs) c.R1 ≤ st'.r)
-
-/-- The generator's exit state (rounded `p(c + h)` and the least accepted radius); not read by any proof. -/
-def termNext (c : Core) : St :=
-  let m0 := rnd c.P0 c.R0
-  let m1 := rnd c.P1 c.R1
-  ⟨m0, m1, c.err + cdiv ((c.P0 - m0 * c.R0).natAbs) c.R0 + cdiv ((c.P1 - m1 * c.R1).natAbs) c.R1⟩
 
 /-- The polynomial pair `p(x) = (a(x − c) + i b(x − c))/S`. -/
 noncomputable def pp (a b : List ℤ) (c x : ℝ) : ℂ := ⟨ev a (x - c) / S, ev b (x - c) / S⟩
@@ -653,15 +498,6 @@ theorem coreOf_sound {W D : ℤ} {st st' : St} {t0 w : ℤ} {ta tb : List ℤ} (
 
 /-! ### All terms over one cell -/
 
-/-- All terms over one cell: `(every exit state accepted, Σₖ qₖ, Σₖ |Wₖ|·(T2·errₖ + t0 + w))`, the last at scale
-`S·T2`; its `t0 + w` is the distances' allowance (`|dₖ − Dₖ/S| ≤ 1/S` and `J₀` `1`-Lipschitz). -/
-def termsOut (t0 w : ℤ) (N : ℕ) : List ℤ → List ℤ → List St → List St → Bool × List ℤ × ℤ
-  | W :: Ws, D :: Ds, st :: sts, st' :: sts' =>
-    match core W D st t0 w N, termsOut t0 w N Ws Ds sts sts' with
-    | c, (ok, q, e) => (termOk c st' && ok, addL c.q q, W.natAbs * (T2 * c.err + (t0 + w)) + e)
-  | [], [], [], [] => (true, [], 0)
-  | _, _, _, _ => (false, [], 0)
-
 theorem termsOut_cons (t0 w : ℤ) (N : ℕ) (W D : ℤ) (Ws Ds : List ℤ) (st st' : St) (sts sts' : List St) :
     termsOut t0 w N (W :: Ws) (D :: Ds) (st :: sts) (st' :: sts') =
       (termOk (core W D st t0 w N) st' && (termsOut t0 w N Ws Ds sts sts').1,
@@ -741,11 +577,6 @@ theorem termsOut_sound {t0 w : ℤ} {N : ℕ} (ht0 : 0 ≤ t0) (hw : 0 < w) :
 
 /-! ### The cell polynomial's lower bound -/
 
-/-- `q0 + q1 v + q2 v² ≥ L` on `|v| ≤ w`, decided exactly: both endpoints, and the vertex when it lies inside. -/
-def quadOk (q0 q1 q2 w L : ℤ) : Bool :=
-  decide (L ≤ q0 - q1 * w + q2 * w * w) && decide (L ≤ q0 + q1 * w + q2 * w * w) &&
-    (if 0 < q2 ∧ (q1.natAbs : ℤ) ≤ 2 * q2 * w then decide (4 * q2 * L ≤ 4 * q0 * q2 - q1 * q1) else true)
-
 theorem quadOk_sound {q0 q1 q2 w L : ℤ} (h : quadOk q0 q1 q2 w L = true) (hw : 0 ≤ w) {v : ℝ} (hv : |v| ≤ w) :
     (L : ℝ) ≤ q0 + q1 * v + q2 * v ^ 2 := by
   simp only [quadOk, Bool.and_eq_true, decide_eq_true_eq] at h
@@ -790,33 +621,6 @@ theorem quadOk_sound {q0 q1 q2 w L : ℤ} (h : quadOk q0 q1 q2 w L = true) (hw :
         nlinarith
 
 /-! ### One cell -/
-
-/-- A covering's parameters: the weights' scale `WS`, `w₁·WS`, the target `TN/TD`, and per term its weight `Wₖ` (scale
-`WS`) and distance `Dₖ` (scale `S`). -/
-structure Params where
-  /-- The weights' scale. -/
-  WS : ℤ
-  /-- `w₁·WS`. -/
-  w1N : ℤ
-  /-- The target's numerator. -/
-  TN : ℤ
-  /-- The target's denominator. -/
-  TD : ℤ
-  /-- `Wₖ·WS`. -/
-  Ws : List ℤ
-  /-- `Dₖ·S`. -/
-  Ds : List ℤ
-
-/-- **The cell check**: every term's exit state accepted, and the cell polynomial `w₁·S + Σ qₖ`, homogenized at scale
-`K` and re-centred at the cell's midpoint, at least the target plus every error on the cell. -/
-def cellCheck (P : Params) (sts : List St) (t0 w : ℤ) (N : ℕ) (sts' : List St) : Bool :=
-  match termsOut t0 w N P.Ws P.Ds sts sts' with
-  | (ok, q, e) =>
-    let R := shiftL w (homogL K (addL [P.w1N * S] q))
-    ok && decide (0 ≤ t0) && decide (0 < w) && decide (0 < P.TD) && decide (0 < P.WS) &&
-      quadOk (R.getD 0 0) (R.getD 1 0) (R.getD 2 0) w
-        (w * w * w * evZ (absL (R.drop 3)) w +
-          cdiv ((P.TN * S * P.WS * T2 + e * P.TD) * pw K (addL [P.w1N * S] q).length) (K * P.TD * T2))
 
 /-- **One cell is sound**: if the check accepts, valid entry states give valid exit states, and on the cell
 `w₁ + Σₖ Wₖ J₀(t dₖ) ≥ TN/TD` (all at their scales) for any distances `dₖ` within `2⁻⁶⁴` of `Dₖ/2⁶⁴`. Inhabited by every
@@ -909,71 +713,10 @@ theorem cellCheck_sound {P : Params} {sts sts' : List St} {t0 w : ℤ} {N : ℕ}
 
 /-! ### Packed states, the chain, the tail -/
 
-/-- `2⁷²`, one packed field's width. -/
-def F72 : ℕ := 4722366482869645213696
-
-/-- `2¹⁴⁴`. -/
-def F144 : ℕ := 22300745198530623141535718272648361505980416
-
-/-- `2²¹⁶`, one packed state's width. -/
-def F216 : ℕ := 105312291668557186697918027683670432318895095400549111254310977536
-
-/-- `2⁷¹`, a packed field's offset. -/
-def H71 : ℤ := 2361183241434822606848
-
-/-- `k` states packed in one `ℕ`, three `72`-bit fields each (`m0`, `m1`, `r`, each offset by `2⁷¹`), state `0` lowest. -/
-def decodeAux : ℕ → ℕ → List St
-  | 0, _ => []
-  | k + 1, n =>
-    ⟨((n % F72 : ℕ) : ℤ) - H71, ((n / F72 % F72 : ℕ) : ℤ) - H71, ((n / F144 % F72 : ℕ) : ℤ) - H71⟩ ::
-      decodeAux k (n / F216)
-
-/-- One state per term, read from its packed code. -/
-def decode (P : Params) (n : ℕ) : List St := decodeAux P.Ds.length n
-
-/-- A cell of the covering: its left end and width (scale `T2`), its degree, its packed entry and exit states. -/
-structure CellSpec where
-  /-- The left end, scale `T2`. -/
-  t0 : ℤ
-  /-- The width, scale `T2`. -/
-  w : ℤ
-  /-- The polynomials' degree. -/
-  N : ℕ
-  /-- The packed entry states. -/
-  entry : ℕ
-  /-- The packed exit states. -/
-  exit : ℕ
-
-/-- The cell is accepted. -/
-def CellOk (P : Params) (c : CellSpec) : Prop :=
-  cellCheck P (decode P c.entry) c.t0 c.w c.N (decode P c.exit) = true
-
-instance (P : Params) (c : CellSpec) : Decidable (CellOk P c) := inferInstanceAs (Decidable (_ = true))
-
-/-- Every cell of a list is accepted. -/
-def AllOk (P : Params) : List CellSpec → Prop
-  | [] => True
-  | c :: cs => CellOk P c ∧ AllOk P cs
-
 theorem allOk_append (P : Params) (l₁ l₂ : List CellSpec) : AllOk P (l₁ ++ l₂) ↔ AllOk P l₁ ∧ AllOk P l₂ := by
   induction l₁ with
   | nil => simp [AllOk]
   | cons c l ih => simp only [List.cons_append, AllOk, ih, and_assoc]
-
-/-- The cells follow one another from time `t` and packed states `e`: each starts where and with what the last ended. -/
-def Linked : ℤ → ℕ → List CellSpec → Bool
-  | _, _, [] => true
-  | t, e, c :: cs => decide (c.t0 = t) && decide (c.entry = e) && Linked (t + c.w) c.exit cs
-
-/-- The time a chain ends. -/
-def chainEnd : ℤ → List CellSpec → ℤ
-  | t, [] => t
-  | t, c :: cs => chainEnd (t + c.w) cs
-
-/-- The packed states a chain ends with. -/
-def chainExit : ℕ → List CellSpec → ℕ
-  | e, [] => e
-  | _, c :: cs => chainExit c.exit cs
 
 /-- **The chain is sound**: linked accepted cells carry valid states from the start to the end, and bound
 `w₁ + Σ Wₖ J₀(t dₖ)` on `[start, end)`. -/
@@ -999,21 +742,6 @@ theorem chain_sound (P : Params) : ∀ (cs : List CellSpec) (t : ℤ) (e : ℕ),
     by_cases hle : t' ≤ ((c.t0 : ℝ) + c.w) / T2
     · exact h1.2 d hd t' ⟨ht'.1, hle⟩
     · exact h2.2 d hd t' ⟨by push_cast; linarith, ht'.2⟩
-
-/-- The tail's sum `Σₖ |Wₖ|(uₖ + rₖ + E)` with its side conditions (`Dₖ ≥ 0`, `uₖ² ≥ m0² + m1²`). -/
-def tailSum (E : ℤ) : List ℤ → List ℤ → List St → List ℕ → Bool × ℤ
-  | W :: Ws, D :: Ds, st :: sts, u :: us =>
-    match tailSum E Ws Ds sts us with
-    | (ok, s) => (ok && decide (0 ≤ D) && decide (st.m0 * st.m0 + st.m1 * st.m1 ≤ (u : ℤ) * u),
-        W.natAbs * ((u : ℤ) + st.r + E) + s)
-  | [], [], [], [] => (true, 0)
-  | _, _, _, _ => (false, 0)
-
-/-- **The tail check** at `tEnd` (scale `T2`) from the chain's last states and integer bounds `uₖ ≥ ‖(m0, m1)‖`. -/
-def tailCheck (P : Params) (tEnd : ℤ) (sts : List St) (us : List ℕ) : Bool :=
-  match tailSum (cdiv tEnd T2) P.Ws P.Ds sts us with
-  | (ok, s) => ok && decide (0 ≤ tEnd) && decide (0 < P.TD) && decide (0 < P.WS) &&
-      decide (P.TN * P.WS * S ≤ P.TD * (P.w1N * S - s))
 
 /-- Past the chain's end, `|J₀(t x)| ≤ (u + r + E)/S`: `‖J‖` is antitone, the state is within `r/S` of `J` at the end,
 and `|x − D/S| ≤ 1/S` costs at most `E/S` where `t x` falls short of the end. -/
@@ -1121,9 +849,6 @@ theorem tailCheck_sound {P : Params} {tEnd : ℤ} {sts : List St} {us : List ℕ
     rw [this, le_div_iff₀ hS]; linarith
   nlinarith
 
-/-- The initial states: `J(0) = (1, 0)` exactly. -/
-def initStates (n : ℕ) : List St := List.replicate n ⟨S, 0, 0⟩
-
 theorem statesValid_init (Ds : List ℤ) : StatesValid Ds (initStates Ds.length) 0 := by
   induction Ds with
   | nil => exact List.Forall₂.nil
@@ -1149,20 +874,6 @@ theorem covering_sound (P : Params) (cs : List CellSpec) (e0 : ℕ) (us : List �
   by_cases hlt : t < (chainEnd 0 cs : ℝ) / T2
   · exact hc.2 d hd t ⟨by simpa using ht, hlt⟩
   · exact tailCheck_sound htail hc.1 d hd t (not_lt.1 hlt)
-
-/-! ### Spec examples (each fails if its definition drifts) -/
-
-example : evZ [1, 2, 3] 2 = 17 := by decide
-example : addL [1, 2] [3] = [4, 2] := by decide
-example : dL [5, 3, 2] = [3, 4] := by decide
-example : shiftL 1 [0, 0, 1] = [1, 2, 1] := by decide
-example : homogL 2 [1, 1, 1] = [4, 2, 1] := by decide
-example : evF 1 2 0 1 1 [1, 1] = (6, 4) := by decide
-example : powScale 3 2 [1, 1, 1] = [2, 6, 18] := by decide
-example : cdiv 7 2 = 4 ∧ cdiv (-7) 2 = -3 ∧ rnd 7 2 = 4 := by decide
-example : quadOk 0 0 1 1 0 = true ∧ quadOk 0 0 1 1 1 = false := by decide
-example : decodeAux 1 (H71.toNat + 5 + F72 * (H71.toNat - 3) + F144 * (H71.toNat + 2)) = [⟨5, -3, 2⟩] := by decide
-example : taylor 0 2 S 0 = ([0, -4611686018427387904], [9223372036854775808, 0]) := by decide
 
 end BesselCert
 end HadwigerNelson.DensityBound

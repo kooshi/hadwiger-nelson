@@ -1,0 +1,22 @@
+import Proofs.HadwigerNelson.Plane.DensityBound.BesselDefect
+open Real
+#check @image_sub_le_mul_sub_of_deriv_le
+#check @HasDerivAt.norm_sq
+#check @HasDerivAt.sqrt
+#check @real_inner_le_norm
+#check @Complex.inner
+#check @Complex.real_inner_eq_re_inner
+#check @le_of_forall_pos_le_add
+#check @Real.sqrt_le_sqrt
+#check @Real.sqrt_le_left
+#check @Real.le_sqrt
+#check @Real.sqrt_sq
+#check @Real.sqrt_add_le_add_sqrt
+#check @lipschitzWith_of_nnnorm_deriv_le
+#check @Real.circleAverage_def
+#check @Real.circleAverage_mono
+#check @antitoneOn_of_deriv_nonpos
+#check @Complex.sq_norm
+#check @Complex.normSq_mk
+#check @pow_le_pow_iff_left₀
+example (w z : ℂ) : inner ℝ w z = w.re * z.re + w.im * z.im := by simp [Complex.inner]
