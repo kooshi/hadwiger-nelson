@@ -1,0 +1,5 @@
+paths under Proofs/ and Proofs.lean that differ from the commit before the edits (fb76f2890):
+ .../HadwigerNelson/Arith/ThreeColourCriterion.lean | 12 +++++----
+ Proofs/HadwigerNelson/Arith/ThreeFourColours.lean  | 29 ++++++++++++++++++----
+ Proofs/HadwigerNelson/Arith/TorsionExtraction.lean |  2 +-
+ 3 files changed, 32 insertions(+), 11 deletions(-)

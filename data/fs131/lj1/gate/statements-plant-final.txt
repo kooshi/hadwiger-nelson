@@ -1,0 +1,6 @@
+plant: a theorem's stored type changed (HadwigerNelson.ThreeColourCharacter.exists_character_one_two): FIRED — TYPE HadwigerNelson.ThreeColourCharacter.exists_character_one_two: the stored type differs
+plant: a definition's stored value changed (HadwigerNelson.TorsionExtraction.inv5): FIRED — VALUE HadwigerNelson.TorsionExtraction.inv5: the stored value differs
+plant: a constant dropped (HadwigerNelson.ThreeColourCharacter.exists_character_one_two): FIRED — LOST THM HadwigerNelson.ThreeColourCharacter.exists_character_one_two (Proofs.HadwigerNelson.Arith.ThreeColourCharacter)
+plant: a constant added (zz.planted): FIRED — NEW THM zz.planted (Proofs.HadwigerNelson.Arith.ThreeColourCharacter)
+plants: every one of 4 fired; the unplanted pair passes
+exit=0

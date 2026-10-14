@@ -12,7 +12,14 @@ job touches names that directory and not `tools/`). Times are UTC.*
 
 ## Theorems this phase proved
 
-*Filled at the green line: § "Theorems this phase proved, final". This job proved no theorem of the library.*
+*The gate is green on one commit, `def7c07f8` (stage 8). This job proved no theorem of the library: it landed the line's
+six files — 94 theorems and 2 definitions, each [kernel]. 84 records are on the standard three axioms or fewer, and 12
+are on those and the declared outside theorem `StandingFive.kloosterman_bound` (Weil's bound). The list, one line per
+declaration with its banner and its axioms as the audit printed them, is § "Theorems this phase proved, final". In
+short: the table for real quadratic fields (`ThreeFourColours.chromaticNumber_planeOver_sqrt_table`) and clause (c)
+(`TorsionExtraction.four_le_chromaticNumber_planeOver_of_inv_three_mem`) are on the standard three; clause (b)
+(`ThreeFourColours.chromaticNumber_planeOver_eq_three_iff`) and row 99's three sentences are on Weil's bound. The
+values 2 and 3 and every upper bound are prior art.*
 
 ## Stage 1 — SAVED (FS131-LJ1): the readback, what was read, `main` merged, the six modules dumped before any edit
 
@@ -544,3 +551,435 @@ whole `.lake/build` of `fs131-wnf`, the tree whose gate passed last (its stage 2
 (`data/fs131/lj1/olean_against_lu1.py`, with four plants). Only the last landing's three modules and the root may
 differ, because that landing recompiled them after making its manifest; and only the line's six modules may be new. It
 also dumps the last two landings' modules as stored and compares them with those landings' own final dumps.
+
+## Stage 8 — SAVED (FS131-LJ1): the full gate on one commit — `def7c07f8` — green on its first pass
+
+One pass ran every step in order, one at a time, under the slot (`data/fs131/lj1/run-gate.sh final 3a6f8876b 8`,
+launched from a snapshot copy). Every log is under `data/fs131/lj1/gate/` with its exit status on its last line.
+`run-gate-final.head` records the commit, `def7c07f8e7bda496e33aac52ee076cfab554d17`, and that no tracked file was
+modified at its start; it also lists the paths under `Proofs/`, `scripts/` and the map where the commit differs from
+`main`: the six modules, `Proofs.lean` and `ARCHITECTURE.md`. `scripts/` differs from `main` too: see the baseline row
+below. `run-pass-final.out` holds every step's exit and `measure-final.txt` every step's wall time and memory
+(03:40:05–04:03:20, 23 minutes). **Every step exited 0 but the one planted control that must exit 1** (the scan
+difference's plants), and "tracked files modified after the pass: 0". It is the **first** full pass of this job. Every
+count below is read from the saved logs.
+
+| step | result, read from its saved log (`data/fs131/lj1/gate/`, tag `final`) | log | wall | peak (charged) / max-rss |
+|---|---|---|---|---|
+| build (`BATCH=8`, `--mem 10 --cpus 4`) | "build: OK — 249 of 249 batches, 2 module(s) rebuilt, **0 module(s) with warnings**, 7m15s": `Instances.UpperHalfCorollaries` and the root, recompiled from the text restored after the lint's control. One line of the build log holds "warning", and it is that sentence; Lake's full log has 0. Then `lake build --no-build Proofs`: up to date | `build-final.log`, `receipt-build-final.log`, `build-final.rss`, `uptodate-final.log` | 450 s | the one compiler 3.3 GiB resident |
+| `sorry` | the narrow pattern over `Proofs/` and `Proofs.lean`: **0** lines; `\bsorry\b`: 24, all prose, `main`'s count; the search's plant fired before the pass (stage 7) | `sorry-narrow-final.txt`, `sorry-wide-final.txt`; `../sorry-plant.out` | — | — |
+| `axiom` lines in `Proofs/` | 4 line-initial, as on `main` (three axioms, and one line of a docstring's code block). **The landing brings none** | `axiom-lines-final.txt` | — | — |
+| doubled names, after the build and before the audit | "dupnames: OK — no name is declared by two modules (24 generated on demand, listed above)"; its self-test "OK — all 15 controls behaved" | `dupnames-final.log`, `dupnames-selftest-final.log` | 6.2 s; 28 s | 0.51 / 4.34 GiB; 0.78 / 1.54 |
+| every declaration in a block, before the audit | "declarations the landing brings: 96 (of 96 constants in 6 modules); with one line: 96; unfiled: 0; doubled: 0; `#print axioms` lines in the script: 7602, names twice: 0" | `unfiled-final.txt`, `decls-final.out` | 67 s (the dump) | 0.55 / 4.38 |
+| axioms | "audited: **7602 records — 7531 clean on the standard axioms, 28 axiom-free, 38 imported** (resting on a declared outside theorem), **5 declared purchase(s)**"; "axioms: OK". `CLAUDE.md` § Trust ledger flagged stale, "7447 clean → 7531, 26 imported → 38" (draft 1) | `axioms-final.log`, `receipt-axioms-final.log` | 9.4 s | 0.63 / 4.44 |
+| its self-test | "axioms self-test: OK — every planted fault fired, and every partner passed." (23 of 23; its two state-reading controls moved at stage 3 after being seen red) | `axioms-selftest-final.log`, `receipt-axioms-self-test-final.log` | 193 s | 1.08 / 4.80 |
+| every declaration of the landing filed on what it rests on (`data/fs131/lj1/lj1_records.py`) | "records: PASS": 83 records on exactly the three, 1 on `[propext, Quot.sound]` (`DyadicQuadratic.mod_four_of_squarefree`), 12 on the three and Weil's bound; headlines "39 of 39" under CLEAN and "12 of 12" under IMPORTED; over the whole log 38 under IMPORTED (20 + 6 + 12), none carrying two imports, none `sorryAx`; "plants: every one of 16 fired; the unplanted lists pass" | `records-final.txt`, `records-plant-final.txt`, `theorem-lines-final.txt` | — | — |
+| the import's block with its two controls; the generated modules against the generator (regression checks, because the audit script they read is edited) | "block: PASS — every record as filed; both controls fired"; "CHECK OK" (163 records); "SELF-TEST OK: 10 plants refused and 1 partner accepted" | `block-final.txt`, `port-check-final.txt`, `port-selftest-final.txt` | 9 s | (the tool's own slots) |
+| vacuity | "scanned: **declarations=16125 refutations-skipped=228**"; "sites: **sites=1454 vacuous=0 stale=0 declared=3 witnessed=38 generic=1411 unknown=2**"; "vacuity: OK"; the baseline header "match (9 of 9 compared)". Flagged stale, not failed: `CLAUDE.md` § The gate ("declarations 16029 → 16125"; draft 2) | `vacuity-final.log`, `receipt-vacuity-final.log` | 118 s | 0.60 / 4.50 |
+| the scan against the last landing's, row for row | "by module: declarations +96, refutations +0: equal to the scans difference"; "vacdiff: PASS"; its plants: "vacdiff: FAIL (5)", exit 1, as they must | `vacdiff-final.txt`, `vacdiff-plant-final.txt`, `count-modules-final.out` | 74 s (the counter) | 0.57 / 4.45 |
+| its self-test | "OK — all 65 controls behaved: every one fired, and the silent ones stayed silent." | `vacuity-selftest-final.log` | 124 s | 0.60 / 4.51 |
+| assumptions | "assumptions: OK — 3 outside theorem(s) as axioms, with **39** theorem(s) resting on them; 19 named and **14** inline hypotheses (7 outside, **21** ours, 5 open), taken by **102** statement(s) and mentioned by 1"; "assumed: **axioms=3 rests=39 named=19 inline=14 outside=7 ours=21 open=5 takes=102 mentions=1**"; the ledger's header "match (9 of 9 compared)"; `CLAUDE.md` § Trust ledger flagged stale, "rests 26 → 39, inline 15 → 14, ours 22 → 21, takes 106 → 102" (draft 3); its self-test "OK — all 33 checks behaved" | `assumptions-final.log`, `receipt-assumptions-final.log`, `assumptions-selftest-final.log` | 122 s; 122 s | 0.68 / 4.57; 0.71 / 4.60 |
+| architecture | "RESULT: PASS" | `arch-final.txt` | 3.8 s | — |
+| guarded lint (`lake lint --no-build -- --no-build --trace`, `--mem 8`) | exit 0, "-- Linting passed for Proofs.", 14 linters, each "Passed!", none failed; its control went red before the pass (stage 7) | `lint-final.log`; `../lint-plant.log` | 10.3 s | 0.90 / 4.93 |
+| notes, as the last landing ran them | "notes read: 196 LOCAL-SAID=31 NO-OBJECT=48 NONE-SAID=59 no-conflict=58", `main`'s count; "self-test: OK (6 controls, 1 planted)" | `notes-l5-final.txt`, `notes-qa4-selftest-final.txt` | 3.8 s | — |
+| **the statements as stored, against the dump made before the merge and before any edit** | "statements: PASS: no statement and no definition changed — 96 named constants compared in 6 module(s)"; "plants: every one of 4 fired; the unplanted pair passes" | `statements-final.txt`, `statements-plant-final.txt`, `statements-final.compact` | 6.1 s | 0.59 / 4.41 |
+| the six files in text, block comments removed, against the merge commit (`fb76f2890`) | "SAME" six times; the plant "DIFFERS" six times | `code-only-final.txt`, `code-only-plant-final.txt`, `proofs-diff-final.txt` | — | — |
+| the statements by `#check`, their axioms, the four sites of the retired binder, the models | no error, no warning; 47 prints, **28 on `[propext, Classical.choice, Quot.sound]` and 19 on those and `StandingFive.kloosterman_bound`**, each as stage 6 reads it | `checks-final.out`, `checks-final.err` (empty) | 3.6 s | 0.53 / 4.36 |
+| the compiled library against the last landing's manifest of its gated tree | ".olean files of Proofs: 1908 in the tree, 1902 in the last landing's manifest; same SHA-256: 1900; differing: 2" (`Proofs.olean`, `Arith/QuadraticPrime.olean`, both allowed: that landing recompiled them after its manifest); "in the tree only: 6", the line's modules; `Outside/OAI158`, `Plane/LebesgueNumber`, `Plane/AeColouring`, `Arith/WeilKloosterman`, `SpectralChain` "identical"; "olean-against-lu1: PASS"; "plants: every one of 4 fired" | `olean-against-lu1-final.txt`, `…-plant-final.txt` | 2.5 s | — |
+| the last two landings' modules as this tree stores them, against those landings' own final dumps | FS131-LU1's three: "PASS … 52 named constants compared in 3 module(s)"; FS131-LC1's: "PASS … 87 named constants compared in 3 module(s)" | `statements-lu1-final.txt`, `statements-lc1-final.txt` | 5.5 s; 3.7 s | 0.63 / 4.45 |
+| the baseline and the scans' sources | baseline entries unchanged from `main`'s (2). Lines that differ from `main`'s: `scripts/Axioms.lean` 118 (the block), `scripts/Assumptions.lean` 10 (the retired sites and the comment), `scripts/assumptions-ledger.txt` 19, `scripts/axioms-controls.txt` 13 (the two controls and the header's description of the state), `scripts/vacuity-baseline.txt` 2 (the header's count line). 0 lines differ in `scripts/Vacuity.lean`, the other control files, `DupNames.lean`, `gate_report.py`, the four gate scripts or `build.sh` | `baseline-final.txt` | — | — |
+| the three digests against the previous landing's receipts (`data/fs131/lu1/gate/receipt-*-final.log`) | axioms: 96 rows added and none removed, 84 under CLEAN and 12 under IMPORTED; vacuity: one count moves, "rows: none changed"; assumptions: `rests 26 → 39`, `inline 15 → 14`, `ours 22 → 21`, `takes 106 → 102` — the entry, four sites and four `TAKES` rows of `inline:Row99` gone, thirteen `RESTS` rows added. **Stale against the front page until the drafts are filed, exactly these lines**: in `CLAUDE.md` § Trust ledger, "7447 clean → 7531, 26 imported → 38" and "rests 26 → 39, inline 15 → 14, ours 22 → 21, takes 106 → 102"; in `CLAUDE.md` § The gate, "declarations 16029 → 16125". The two headers on the branch match | `digest-axioms-final.txt`, `digest-vacuity-final.txt`, `digest-assumptions-final.txt` | — | — |
+
+**The brief's prediction, against the gate**: "7,602 records, 7,531 clean, 38 imported, with the axiom-free and purchase
+counts unchanged". **Met, each count.**
+
+**Read aloud against the informal claim.** The claim of this landing is the claim list's theorem: (a) the table for
+real quadratic fields; (b) the three-colour criterion over every real number field; (c) a lower bound of four over every
+subfield of `ℝ` whose unit-vector ring holds `1/3`; and row 99's first three sentences. What the gate shows: no `axiom`
+and no `sorry` enters `Proofs/`; each of the 96 declarations of the six modules has one record, 84 under CLEAN on the
+standard three or fewer and 12 under IMPORTED on those and Weil's bound alone; no name is declared twice, so each
+printed list is the list of the proof the kernel checked; the one hand result the line proves has left the ledger of
+what the library assumes, and its cost is the import's `RESTS` rows; no statement moved between the joining job's
+first build, the merge and this commit. **What the gate does not show, and this record says**: that each statement is
+its claim (stage 6, clause by clause, with two places where Lean says slightly more); that the hypotheses can be met
+(stage 5 names each model and how it is held, since the scan saw none of them); that the assumptions step would have
+noticed the discharged binder (it would not: stage 4, where four kernel terms stand in its place); that any value is
+new. The values 2 and 3 and every upper bound are prior art. This project's are the lower bound of four, the
+three-colour criterion's direction from a colouring to the prime, and the clause for subfields, each with its kernel
+proof.
+
+## Drafts for the front page (FS131-LJ1)
+
+*For the coordinator to file; this job files none of them. Each draft names its slot: the file, the section, and **the
+exact words on `main` it replaces or follows**. A script checks that each slot occurs exactly once on `main`
+(`data/fs131/lj1/drafts-slots.py`, output `drafts-slots.out`). Each draft also names the log line it comes from. The
+gated commit is `def7c07f8e7bda496e33aac52ee076cfab554d17`; its logs are `data/fs131/lj1/gate/*-final.*`, and the three scans' full outputs are
+`receipt-axioms-final.log`, `receipt-vacuity-final.log` and `receipt-assumptions-final.log`. **Whose the mathematics is,
+as the joining job read it against the paper**: the values 2 and 3 and every upper bound are prior art (`[Fischer1990]`
+Thms 1, 8, 9, 10(i); `[Johnson1987]`; the residue plane, `[Moorhouse2010]`, `[Madore2015]`). This project's are three
+things: the lower bound of four against every colouring at radicands 11 modulo 12; the three-colour criterion over
+every real number field (the direction from a colouring to the prime); and the clause for subfields of the reals.
+Throughout, the kernel proofs are this project's. Nothing here moves the answer.*
+
+**1. `CLAUDE.md` § Trust ledger, the audit's sentence.** *Replaces* "the current audit reads 7447 clean and 5 declared
+purchases, and 26 imported (and 28 axiom-free; 7,506 records at the landing of FS-131's first number-field module, the
+residue upper half, FS131-LU1, 2026-10-13)". From `axioms-final.log`, "audited: 7602 records — 7531 clean on the
+standard axioms, 28 axiom-free, 38 imported (resting on a declared outside theorem), 5 declared purchase(s)":
+
+> the current audit reads 7531 clean and 5 declared purchases, and 38 imported (and 28 axiom-free; 7,602 records at the
+> landing of FS-131's three-and-four-colours line, FS131-LJ1, 2026-10-14)
+
+7447 + 84 = 7531; 26 + 12 = 38; 7,506 + 96 = 7,602; axiom-free and purchases do not move.
+
+**1b. The same paragraph, the import's count.** *Replaces* "`StandingFive.kloosterman_bound` — Weil's bound for
+Kloosterman sums, `[Weil1948]` p. 207, read against its page by two readers — with eight imported records;" *by*
+
+> `StandingFive.kloosterman_bound` — Weil's bound for Kloosterman sums, `[Weil1948]` p. 207, read against its page by
+> two readers — with twenty imported records (twelve of them the three-colour criterion's and row 99's, FS131-LJ1);
+
+From `records-final.txt`: "records carrying kloosterman_bound: 20 (filed: 20); of the landing's: 12". The rest of the
+paragraph stands: "no record rests on two of the three" ("carrying two imports 0").
+
+**2. `CLAUDE.md` § The gate, the vacuity scan's two count lines.** *Replaces* "`declarations=16029
+refutations-skipped=228 sites=1454`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1411 unknown=2`." From
+`vacuity-final.log`, "scanned: declarations=16125 refutations-skipped=228" and "sites: sites=1454 vacuous=0 stale=0
+declared=3 witnessed=38 generic=1411 unknown=2" (runs of spaces collapsed):
+
+> `declarations=16125 refutations-skipped=228 sites=1454`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1411 unknown=2`.
+
+One count moves: declarations +96. No site is added, because the scan is silent on the line (stage 5). The baseline's
+header is refiled on the branch.
+
+**3. `CLAUDE.md` § Trust ledger, the nine assumption counts and their sentence.** *Replaces* "`axioms=3 rests=26
+named=19 inline=15 outside=7 ours=22 open=5 takes=106 mentions=1` — three outside theorems declared as axioms, with
+twenty-six theorems resting on them; thirty-four hypotheses, nineteen named and fifteen written out in a binder — seven
+standing for outside theorems, twenty-two for hand results of ours and five declared as open questions — taken in 106
+(hypothesis, statement) pairs by 52 statements (`scripts/assumptions-ledger.txt` lists each pair; FS131-LT5, 2026-10-06;
+one hand result left the list at FS131-LU1, 2026-10-13: the upper half `χ(F²) ≤ L(F)` is the theorem
+`UpperHalf.chromaticNumber_planeOver_le_localBound`)". From `receipt-assumptions-final.log`, its `=== TOTALS ===` line,
+"axioms=3 rests=39 named=19 inline=14 outside=7 ours=21 open=5 takes=102 mentions=1":
+
+> `axioms=3 rests=39 named=19 inline=14 outside=7 ours=21 open=5 takes=102 mentions=1` — three outside theorems declared
+> as axioms, with thirty-nine theorems resting on them; thirty-three hypotheses, nineteen named and fourteen written out
+> in a binder — seven standing for outside theorems, twenty-one for hand results of ours and five declared as open
+> questions — taken in 102 (hypothesis, statement) pairs by 52 statements (`scripts/assumptions-ledger.txt` lists each
+> pair; FS131-LT5, 2026-10-06; two hand results have left the list since. At FS131-LU1, 2026-10-13: the upper half
+> `χ(F²) ≤ L(F)`, now the theorem `UpperHalf.chromaticNumber_planeOver_le_localBound`. At FS131-LJ1, 2026-10-14: row 99's
+> lower half through four, `hRow99`, now the theorem `ThreeFourColours.localBound_le_chromaticNumber_of_le_four`, which
+> rests on Weil's bound)
+
+Four of the nine move:
+- `rests` 26 → 39: the twelve imported records and one private helper.
+- `inline` 15 → 14 and `ours` 22 → 21: the entry `inline:Row99` retired.
+- `takes` 106 → 102: its four pairs.
+
+The ledger is rewritten on the branch by the script (`--write-ledger`: thirteen rows gained, four lost, 142 rows).
+
+**4. `tools/claude_md_fact_audit.py`, `GATE_CHANGES`.** One entry after the last (`(("7395", "5"), ("7447", "5")):`):
+
+```python
+    (("7447", "5"), ("7531", "5")): "FS-131, the landing of its three-and-four-colours line — for squarefree m the plane over Q(sqrt m) needs 2 colours at m != 3 (mod 4), 3 at m = 3, 7 (mod 12), at least 4 at m = 11 (mod 12) and exactly 4 there outside 47, 143, 167 (mod 168); over every real number field a non-bipartite plane is three-chromatic iff a prime has residue field F_3, chi <= 3 iff L <= 3 and chi = L for L <= 4 (on Weil's bound); chi >= 4 over every subfield of R whose unit-vector ring holds 1/3 and whose plane is not bipartite; the values 2 and 3 and every upper bound prior art, the lower bound of four, the criterion and the clause for subfields ours, the kernel proofs ours (FS131-LJ1; copy data/fs131/lj1/gate/receipt-axioms-final.log, gated commit def7c07f8): 7,602 records, 7,531 clean, 28 axiom-free, 38 imported, 5 purchases",
+```
+
+**4b. The same file's table of superseded counts.** Every token the drafts retire, in that table's own form, each with
+its value as the reason: `"7447"` (7531 clean); `"7,506"` and `"7506"` (7,602 records); `"26 imported"` (38 imported);
+`"with eight"` (with twenty); `"declarations=16029"`, `"16029"` and `"declarations=16029 refutations-skipped=228
+sites=1454"` (16125); `"rests=26"` (39); `"inline=15"` (14); `"ours=22"` (21); `"takes=106"` (102); `"axioms=3
+rests=26 named=19 inline=15 outside=7 ours=22 open=5 takes=106 mentions=1"` (the new nine); `"twenty-six theorems
+resting"` (thirty-nine); `"thirty-four hypotheses"` (thirty-three); `"fifteen written out"` (fourteen); `"twenty-two
+for hand results"` (twenty-one); `"106 (hypothesis, statement) pairs by 52 statements"` (102 by 52). The reason for
+each: "superseded gate count, refiled at FS131-LJ1's landing from data/fs131/lj1/gate/receipt-axioms-final.log (the
+vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count
+stays in data/fs131/lu1/gate/ and in GATE_CHANGES". **The next landing's previous receipts are
+`data/fs131/lj1/gate/receipt-{axioms,vacuity,assumptions}-final.log`.**
+
+**5. `CLAUDE.md` § Where the problem stands, "What the kernel holds, beyond the interval": the sentences on three and
+four colours.** *Follows* "`χ(ℚ(√167)²) ≤ 8` and `χ(ℚ(√47)²) ≤ 5` a second way (rows 52, 57, 63, 105, 119, 121;
+FS131-LU1; known values and bounds, the kernel proofs ours);" *with*
+
+> **three and four colours over real number fields** (FS131-LJ1). For squarefree `m` the plane over `ℚ(√m)` needs 2
+> colours when `m ≢ 3 (mod 4)` and 3 when `m ≡ 3, 7 (mod 12)`. When `m ≡ 11 (mod 12)` it needs at least 4, and exactly 4
+> outside the classes 47, 143 and 167 modulo 168. All of this is on the standard three axioms
+> (`ThreeFourColours.chromaticNumber_planeOver_sqrt_table`), and the lower bound of four needs no squarefreeness
+> (`TorsionExtraction.four_le_chromaticNumber_planeOver_fieldOfRadicands`). Every subfield of `ℝ` whose unit-vector ring
+> holds `1/3` has a plane that needs at least four colours unless it is bipartite, and is never exactly three-chromatic
+> (`TorsionExtraction.four_le_chromaticNumber_planeOver_of_inv_three_mem`, `…_ne_three_…`; standard three). Over every
+> real number field, on one declared outside theorem, Weil's bound: a non-bipartite plane is three-chromatic exactly when
+> some prime of `F` has residue field `𝔽₃`; `χ(F²) ≤ 3 ⟺ L(F) ≤ 3`; and `χ(F²) = L(F)` whenever `L(F) ≤ 4`
+> (`ThreeFourColours.chromaticNumber_planeOver_eq_three_iff`, `…_le_three_iff`, `…_eq_localBound_of_le_four`; rows 82
+> and 99). The values 2 and 3 and every upper bound are `[Fischer1990]`'s (Thms 8, 9, 10(i)) and the residue planes'.
+> The lower bound of four against every colouring, the three-colour criterion and the clause for subfields are this
+> project's, with every kernel proof;
+
+**6. `CLAUDE.md` § Frontier, the "Last filed" line.** *Replaces* "Last filed: **the landing of FS-131's first
+number-field module, the residue upper half**" *by* "Last filed: **the landing of FS-131's three-and-four-colours line**
+(FS131-LJ1, 2026-10-14: `Arith/ThreeColourCharacter`, `TorsionExtraction`, `ThreeColourCriterion`, `DyadicQuadratic`,
+`ThreeFourColours` and `Instances/UpperHalfCorollaries` through the gate — 94 theorems and 2 definitions, 84 records on
+the standard three axioms and 12 on those and Weil's bound; the quadratic table, the three-colour criterion over every
+real number field and row 99's first three sentences in the kernel; row 99's `hRow99` discharged; no value moved);
+before it **the landing of FS-131's first number-field module, the residue upper half**". The rest of the line stands.
+
+**7. `LEDGER.md` — the rows this line regrades, each only as far as its statement landed** (the joining job's D5 checked
+against the built tree; every name below is a kernel theorem of the gated commit, with its axioms from `checks-final.out`
+and `records-final.txt`).
+- **Row 52.** *Replaces* "The two values stay [hand + tools] until the ramified clause is applied at 11 to `K(√5)` and
+  `K(√247)`: no file states those instances." *by* "The ramified clause is applied at 11 since FS131-LJ1: the two values'
+  upper halves are [kernel] (`UpperHalf.chromaticNumber_planeOver_sqrt_five_le_five`, `…_sqrt_247_le_five`: `χ ≤ 5` over
+  `fieldOfRadicands {11, 3, 5}` and `{11, 3, 247}`, the standard three; prior art). Their lower halves, `χ ≥ 5` over these
+  two fields, are stated by no declaration, so the two values stay [hand + tools]." The grade bracket "[kernel for the
+  bound; hand + tools for the two values]" stands.
+- **Row 73.** *Follows* "four exactly except 47 (≤ 5 at 11)." *with* "Since FS131-LJ1, `χ(ℚ(√11)²) = 4` is also the
+  table's dyadic row at `m = 11` (`ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four_of_dyadic`). The five lower
+  bounds `χ ≥ 4` at 23, 47, 71, 95 and 191 are instances of row 82's family theorem in the kernel
+  (`TorsionExtraction.four_le_chromaticNumber_planeOver_fieldOfRadicands`, standard three), and no longer [certified,
+  tools] only. The value is exactly 4 at 23, 71, 95 and 191 (`ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four`:
+  each is squarefree and `≡ 11 (mod 12)`, and none is 47, 143 or 167 modulo 168). The case at 23 is an `example` of the
+  module; the cases at 71, 95 and 191 are kernel-checked terms of the landing (`data/fs131/lj1/checks.lean`,
+  `table_at_71_95_191`), not library theorems."
+- **Row 79.** *Follows* the grade "**[hand; two independent derivations — de Bruijn and Coxeter — read by Poros; the
+  owner checked the two deciding steps]**" *with* "**Its ⟹ is [kernel] since FS131-LJ1** (standard three), for every
+  abelian group and step set: `ThreeColourCharacter.bandSet_three_nonempty_of_proper`, with
+  `exists_character_of_properAlong`; and at the plane over every subfield of `ℝ`,
+  `fieldBandSet_three_nonempty_of_colorable` and, reading the colouring only on `ℤ[U_F]`,
+  `…_of_colorable_unitRing` (FS73-T22's ⟹ and FS81-T2). The ⟸, the density of periodic colourings and the statement
+  about forced pairs stay [hand]."
+- **Row 82.** *Replaces* the grade "**[hand, two independent derivations]**" *by* "**[kernel since FS131-LJ1, the
+  standard three; before it hand, two independent derivations]**". *And replaces*, in its **Not claimed**, "anything in
+  the kernel (FS73-T22's ⟹ is hand-proved, never kernel; FS-75);" *by* "a kernel proof beyond what the landing holds —
+  the row's theorem is `TorsionExtraction.four_le_chromaticNumber_planeOver_of_inv_three_mem` and
+  `chromaticNumber_planeOver_ne_three_of_inv_three_mem`; its family clause is `four_le_chromaticNumber_planeOver_of_sqrt_mem`
+  (every subfield of `ℝ` holding `√d`, `d ≡ 11 (mod 12)`, with no squarefreeness), whose character form is
+  `fieldBandSet_three_eq_empty_of_sqrt_mem`; T4 is `colorable_two_of_fieldBandSet_three_nonempty`; and 'three-colourability
+  of every real quadratic plane is decided exactly' is `ThreeFourColours.chromaticNumber_planeOver_sqrt_table`
+  (FS131-LJ1);". The row's prior art stands, with the theorem numbers the joining job read: `[Fischer1990]` Thm 10(ii)
+  and Ex. 4 for the unit vector and the additive case.
+- **Row 99.** *Replaces* the grade "**[hand (+ Weil, tools exact); S1 three derivations (J02, J09, J09v), S2 and the
+  torsion theorem two, S3 three, no mixing two independent (J09; J09v blind, a different route)]**" *by*
+  "**[kernel since FS131-LJ1, on one declared outside theorem (Weil's bound), for the row's first three sentences:
+  `ThreeFourColours.chromaticNumber_planeOver_le_three_iff`, `chromaticNumber_planeOver_eq_localBound_of_le_four`,
+  `chromaticNumber_planeOver_eq_three_iff`; "no mixing" and `χ(ℚ(α,√7)²) = 4` stay hand (+ Weil, tools exact) — S1 three
+  derivations (J02, J09, J09v), S2 and the torsion theorem two, S3 three, no mixing two independent (J09; J09v blind, a
+  different route)]**". *And replaces*, in its **Not claimed**, "a kernel proof (FS-75) — of which one leaf is in the
+  kernel since FS131-LU1, the upper half `χ(F²) ≤ L(F)` for every real number field
+  (`UpperHalf.chromaticNumber_planeOver_le_localBound`); every other step of the row stays [hand];" *by* "a kernel proof
+  of "no mixing" or of `χ(ℚ(α,√7)²) = 4` — the row's other statements are in the kernel: the upper half since FS131-LU1
+  (`UpperHalf.chromaticNumber_planeOver_le_localBound`), and since FS131-LJ1 the lower half
+  `ThreeFourColours.localBound_le_chromaticNumber_or_four_le` with its three sentences, on Weil's bound. Weil's bound is
+  read at one place, `ThreeColourCriterion.targetFloor_four_weil`, in the case of three colours and not two. The
+  direction from the prime to the colouring rests on the standard three (`colorable_three_of_card_three`);".
+- **Row 105.** *Replaces* "the reading applied at any named field (`K(√7)`'s "every prime above 2 splits in `K(√7)(i)`"
+  is not stated);" *by* "the reading applied at any named field but `K(√7)`. There, its consequence that no stable prime
+  of `K(√7)(i)` holds 2 is `UpperHalf.two_notMem_stablePrime_seven` since FS131-LJ1 (standard three). That statement
+  ranges over a type the kernel does not show to be non-empty (a stable prime exists by Chebotarev), and the splitting
+  itself is not stated;".
+
+**8. `LEAN.md`** — the lines the five records drafted, each for § Searching — Lean, after its last bullet ("`tools/check_architecture.py`
+fails on a row's imports cell and on module coverage; a misnamed identifier in a row's description is listed under `[3]`
+and does not fail (FS131-IV1, two plants on copies)."), by address, to be filed in their words. Each record is in this
+tree:
+- FS131-IC1, `plans/FS131-IC1-implementation.md` § D7: `simp [f]` on an upstream definition generates `f.eq_1` in the
+  module that asks, so a sibling may hold a second copy (a `GENERATED` row of `scripts/dupnames.sh`).
+- FS131-IT1, `plans/FS131-IT1-implementation.md` lines 311–320: four lines (`Int.inductionOn'`; `linear_combination` and
+  `Complex.I_sq`; the numeral cast in a subring; an orbit as a `zpow`).
+- FS131-IN1, `plans/FS131-IN1-implementation.md` § 5: `letI` against `haveI` for a module structure;
+  `ConstantInfo.value?` is `none` for a theorem; a farm for a worktree with no upstream `.olean`; two deprecations.
+- FS131-ID1, `plans/FS131-ID1-implementation.md` § D6: three lines (a footer's hygienic names; pricing an exhaustion over
+  residues by its modulus; `omega` and `Int.natAbs`).
+- FS131-KJ1, `plans/FS131-KJ1-joining-module.md` § Stage 7, D8: four lines.
+- **This landing's two**, for § The gate (after the assumptions bullet's sentence "… (`hUpper` of
+  `SpectralChain.chromaticNumber_eq_localBound`, proved by `UpperHalf.chromaticNumber_planeOver_le_localBound` and retired
+  by FS131-LU1 — its record's stage 4 has the receipt);"):
+  "A binder retired on the landing's word is retired on a kernel term, not by eye: apply each theorem that takes it to the
+  discharging theorem in a checks file. If the binder's type is not that theorem's, the term does not elaborate; and the
+  term's axioms are what feeding the binder costs. When that theorem rests on a declared import, the hand result leaves
+  the list and its cost moves to the import's `RESTS` row (`hRow99`, `data/fs131/lj1/checks.lean`; FS131-LJ1)." And, for
+  § Trust ledger: "The assumptions step's `rests` counts every theorem whose stored axiom list holds an import, private
+  helpers included. The audit's imported count counts only the records it names, which are public, so the two can
+  differ: 39 against 38 at FS131-LJ1 (`ThreeColourCriterion.exists_maximal_card_nine_of_quotient`)."
+
+**9. `BIBLIOGRAPHY.md`, the row `[Fischer1990]`.** *Follows* "colorings of the graphs (ℚ²(√m), 1)"*. the upper bound `χ(ℚ(√11)²) ≤ 4` is
+kernel-checked since FS131-LU1 (`UpperHalf.chromaticNumber_planeOver_eleven`)." in its "what rests on it" cell (the
+words before "the upper bound" are part of the slot: the rest occurs twice in the file) *with*: "His Thms 8, 9, 10(i)
+give the values and upper bounds of the quadratic table in the kernel since FS131-LJ1
+(`ThreeFourColours.chromaticNumber_planeOver_sqrt_table`). His Thm 1(i)–(iii) are three kernel statements
+(`DyadicQuadratic.colorable_planeOver_of_addMonoidHom`, `TorsionExtraction.colorable_two_iff_fieldBandSet_two_nonempty`,
+`ThreeColourCriterion.exists_maximal_conj_trivial_of_colorable_two` with `fieldBandSet_two_nonempty_of_conj_trivial`)." In
+its reading cell, *after* "… which conclude only the additive case (`LEDGER.md` row 82)": the joining job's sentence,
+"re-read 2026-10-13 by FS131-KJ1 (Thm 1 and its proof, Thms 7–10 and their proofs, Ex. 4, against the kernel statements
+of the three-and-four-colours line): Thm 1(i)–(iii) are three kernel statements; the two-colour and three-colour maps
+are his; his four-colouring at `N ≡ 3 (mod 8)` is `ℤ/(4)`-valued and is not the kernel's."
+
+**10. `CLAUDE.md` § The theory in one paragraph.** *Replaces* "and through
+five the bound is exact: χ(F²) = L(F) whenever L(F) ≤ 5 (row 99 below five;" *by* "and through
+five the bound is exact: χ(F²) = L(F) whenever L(F) ≤ 5 (row 99 below five — through four [kernel] since FS131-LJ1 on
+Weil's bound, `ThreeFourColours.chromaticNumber_planeOver_eq_localBound_of_le_four`;". *(The slot is checked by the
+script; if the paragraph's words differ, this draft is dropped, not reworded.)*
+
+## Open gate items at this landing
+
+1. **The chain's four theorems still state `hRow99`.** The binder is now discharged by
+   `ThreeFourColours.localBound_le_chromaticNumber_of_le_four`, which rests on Weil's bound. The four are
+   `SpectralChain.min_localBound_five_le_chromaticNumber`, `…_of_totallyReal`, `chromaticNumber_eq_localBound` and
+   `UpperHalf.chromaticNumber_eq_localBound_of_chain`. Restating the headline without the binder is the chain's next
+   planner's job (item 720, ruling (d)); the restated headline would be an imported record (`site_chain`,
+   `data/fs131/lj1/checks.lean`). Their docstrings still list row 99 among the hand inputs: `SpectralChain.lean:239`,
+   `:594`, `:614`. These words now describe a hypothesis that a theorem meets over the import. This is a correction for
+   the cleanup sweep, not made here, because the files are not the landing's.
+2. **The assumptions step still finds a discharged binder only on a landing's word**, as at FS131-LU1. Here the word is
+   backed by four kernel terms that apply each taker to the theorem; the step itself compares no binder's type with any
+   conclusion. The tooling list's line from FS131-LU1 stands, with this second instance.
+3. **Hypotheses met by terms only, not by library declarations.** The first is `localBound F ≤ 4` (and `≤ 2`) of row
+   99's forms and of `UpperHalf.chromaticNumber_planeOver_eq_two_of_localBound_le_two`: no library theorem bounds a
+   `localBound` above at a named field, and the terms are `L(ℚ) ≤ 2`, `= 2`, `L(ℚ(√3)) = 3` and `L(ℚ(√11)) = 4`. The
+   second is a stable prime with nine elements in its quotient (`stablePrime_nine_sqrt_three`). The table's value at
+   71, 95 and 191 is also a term. **Not held at all**: the two finite-field models of
+   `ThreeColourCriterion.exists_maximal_card_nine` and `exists_normOne_zero_of_card_ne_nine` (item 698 ruled them a
+   sentence), and a stable prime of `K(√7)` for `UpperHalf.two_notMem_stablePrime_seven` (which exists by Chebotarev; the
+   docstring says so). One line each would make the first two library `example`s. That is the next module's choice.
+4. **Row 52's two values**: the upper halves are in the kernel; `χ ≥ 5` over `K(√5)` and `K(√247)` is stated by no
+   declaration (item 720, ruling (c)).
+5. **Row 99's last two clauses**, "no mixing" and `χ(ℚ(α,√7)²) = 4`, are not in the kernel; no statement of this line is
+   either.
+6. **Corrections drafted for older files**, waiting for one sweep (items 702, 708). The joining job drafted three:
+   `Instances/SqrtEleven.lean:29` and `:242` ("`[Fischer1990]` Thm 9" should read Thm 10(i), and "not in the kernel" is
+   no longer true); `Instances/UpperHalfValues.lean:21`. This landing adds item 1's three docstring lines in
+   `SpectralChain.lean`.
+7. **The vacuity scan is silent on the line.** It adds 96 declarations and no site, so stage 5's table is the only
+   reading of its hypotheses' models. This is the class of module `LEAN.md` § The gate already names (FS131-LU1).
+8. **`rests` and the audit's imported count now differ (39 against 38)** by one private helper on Weil's bound. This is
+   not a defect; the front page's sentence counts theorems, and draft 8's second line says why the two differ.
+
+## Theorems this phase proved, final
+
+*This job proved no theorem of the library. The gate's pass shows that the 96 declarations of the six modules are [kernel], each with one record. Below is every one with its banner and its axioms as the audit printed them on the gated commit `def7c07f8`, generated by `data/fs131/lj1/lj1_records.py … --lines` from `gate/receipt-axioms-final.log` (`gate/theorem-lines-final.txt`). Whose each theorem is, and its credits, are in its module's docstrings and the claim list. The kernel-checked terms of `data/fs131/lj1/checks.lean` are not library theorems and are not listed here (stages 4 and 5).*
+
+*`Arith/ThreeColourCharacter`*
+- `ThreeColour.Winding.exists_box_point` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeColourCharacter.bandSet_nonempty_of_finite` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeColourCharacter.bandSet_three_nonempty_of_proper` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeColourCharacter.bandSet_three_nonempty_zmod_five` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeColourCharacter.exists_character_of_box_point` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeColourCharacter.exists_character_of_properAlong` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeColourCharacter.exists_character_one_two` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeColourCharacter.exists_int_vector_of_forall_neg` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeColourCharacter.fieldBandSet_three_nonempty_of_colorable_unitRing` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeColourCharacter.isClosed_band` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+*`Arith/TorsionExtraction`*
+- `TorsionExtraction.chromaticNumber_planeOver_ne_three_of_inv_three_mem` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `TorsionExtraction.coe_inv5` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `TorsionExtraction.colorable_two_iff_fieldBandSet_two_nonempty` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `TorsionExtraction.colorable_two_of_fieldBandSet_three_nonempty` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `TorsionExtraction.colorable_two_of_inv_three_mem` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `TorsionExtraction.exists_torsion_mem_fieldBandSet` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `TorsionExtraction.exists_zmod_hom_of_mem_torsionBy` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `TorsionExtraction.fieldBandSet_three_eq_empty_of_sqrt_mem` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `TorsionExtraction.four_le_chromaticNumber_planeOver_fieldOfRadicands` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `TorsionExtraction.four_le_chromaticNumber_planeOver_of_inv_three_mem` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `TorsionExtraction.four_le_chromaticNumber_planeOver_of_sqrt_mem` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `TorsionExtraction.inv5` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `TorsionExtraction.inv_natCast_mem_unitRing_of_sqrt_mem` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `TorsionExtraction.inv_three_mem_unitRing_of_sqrt_mem` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `TorsionExtraction.layer_dichotomy` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `TorsionExtraction.layer_step` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `TorsionExtraction.mem_fieldBandSet_two_of_inv_three_mem` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `TorsionExtraction.not_colorable_two_of_sqrt_mem` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `TorsionExtraction.tendsto_layer` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `TorsionExtraction.three_le_chromaticNumber_planeOver_of_sqrt_mem` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+*`Arith/ThreeColourCriterion`*
+- `ThreeColourCriterion.coe_conjR` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeColourCriterion.comap_conjR_eq` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeColourCriterion.conjR` — definition; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeColourCriterion.conjR_conjR` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeColourCriterion.conj_mem_unitRing` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeColourCriterion.eq_zero_of_forall_normOne_eq` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeColourCriterion.exists_maximal_card_nine` — theorem; [kernel]; under IMPORTED; axioms: [propext, Classical.choice, Quot.sound, StandingFive.kloosterman_bound]
+- `ThreeColourCriterion.exists_maximal_card_nine_of_colorable_three` — theorem; [kernel]; under IMPORTED; axioms: [propext, Classical.choice, Quot.sound, StandingFive.kloosterman_bound]
+- `ThreeColourCriterion.exists_maximal_conj_trivial` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeColourCriterion.exists_maximal_conj_trivial_of_colorable_two` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeColourCriterion.exists_maximal_of_torsion` — theorem; [kernel]; under IMPORTED; axioms: [propext, Classical.choice, Quot.sound, StandingFive.kloosterman_bound]
+- `ThreeColourCriterion.exists_mul_conj_inv_eq_of_mul_conj_eq_one` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeColourCriterion.exists_normOne_zero_of_card_ne_nine` — theorem; [kernel]; under IMPORTED; axioms: [propext, Classical.choice, Quot.sound, StandingFive.kloosterman_bound]
+- `ThreeColourCriterion.exists_unitSet_mul_conjR_eq` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeColourCriterion.fieldBandSet_two_nonempty_of_conj_trivial` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeColourCriterion.finite_quotient_span_natCast` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeColourCriterion.targetFloor_four_weil` — theorem; [kernel]; under IMPORTED; axioms: [propext, Classical.choice, Quot.sound, StandingFive.kloosterman_bound]
+*`Arith/DyadicQuadratic`*
+- `DyadicQuadratic.colorable_four_planeOver_sqrt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `DyadicQuadratic.colorable_planeOver_of_addMonoidHom` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `DyadicQuadratic.colorable_two_planeOver_sqrt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `DyadicQuadratic.colorable_two_planeOver_sqrt_of_mod_four` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `DyadicQuadratic.dyadic_shape_one_mod_four` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `DyadicQuadratic.dyadic_shape_three_mod_eight` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `DyadicQuadratic.dyadic_shape_two_mod_four` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `DyadicQuadratic.exists_addMonoidHom_one_mod_four` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `DyadicQuadratic.exists_addMonoidHom_three_mod_eight` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `DyadicQuadratic.exists_addMonoidHom_two_mod_four` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `DyadicQuadratic.exists_int_solution_of_mem_unitVectors` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `DyadicQuadratic.exists_rat_add_mul_sqrt_eq` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `DyadicQuadratic.mod_four_of_squarefree` — theorem; [kernel]; under CLEAN; axioms: [propext, Quot.sound]
+*`Arith/ThreeFourColours`*
+- `ThreeFourColours.chromaticNumber_planeOver_eq_localBound_of_le_four` — theorem; [kernel]; under IMPORTED; axioms: [propext, Classical.choice, Quot.sound, StandingFive.kloosterman_bound]
+- `ThreeFourColours.chromaticNumber_planeOver_eq_three_iff` — theorem; [kernel]; under IMPORTED; axioms: [propext, Classical.choice, Quot.sound, StandingFive.kloosterman_bound]
+- `ThreeFourColours.chromaticNumber_planeOver_le_three_iff` — theorem; [kernel]; under IMPORTED; axioms: [propext, Classical.choice, Quot.sound, StandingFive.kloosterman_bound]
+- `ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four_of_dyadic` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four_of_seven` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_four_of_seven_of_mod` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_three` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_three_of_mod` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.chromaticNumber_planeOver_sqrt_eq_two` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.chromaticNumber_planeOver_sqrt_table` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.chromaticNumber_planeOver_sqrt_three` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.colorable_four_planeOver_sqrt_of_seven` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.colorable_three_of_card_three` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.colorable_three_planeOver_iff` — theorem; [kernel]; under IMPORTED; axioms: [propext, Classical.choice, Quot.sound, StandingFive.kloosterman_bound]
+- `ThreeFourColours.colorable_three_planeOver_sqrt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.exists_maximal_card_nine_sqrt_three` — theorem; [kernel]; under IMPORTED; axioms: [propext, Classical.choice, Quot.sound, StandingFive.kloosterman_bound]
+- `ThreeFourColours.exists_maximal_card_three_of_card_nine` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.exists_maximal_card_three_of_stablePrime_card_nine` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.exists_maximal_conj_trivial_sqrt_two` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.exists_stablePrime_card_four_sqrt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.exists_stablePrime_card_nine` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.exists_stablePrime_conj_trivial` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.exists_stablePrime_of_maximal` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.exists_stablePrime_ramified_sqrt` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.exists_unitSet_residue_eq` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.fieldBandSet_three_nonempty_sqrt_three` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.levelTarget_colorable_three_of_card_nine` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.levelTarget_colorable_two_of_ramified` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `ThreeFourColours.localBound_le_chromaticNumber_of_le_four` — theorem; [kernel]; under IMPORTED; axioms: [propext, Classical.choice, Quot.sound, StandingFive.kloosterman_bound]
+- `ThreeFourColours.localBound_le_chromaticNumber_or_four_le` — theorem; [kernel]; under IMPORTED; axioms: [propext, Classical.choice, Quot.sound, StandingFive.kloosterman_bound]
+*`Instances/UpperHalfCorollaries`*
+- `UpperHalf.chromaticNumber_planeOver_eq_two_of_localBound_le_two` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `UpperHalf.chromaticNumber_planeOver_sqrt_247_le_five` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `UpperHalf.chromaticNumber_planeOver_sqrt_five_le_five` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+- `UpperHalf.two_notMem_stablePrime_seven` — theorem; [kernel]; under CLEAN; axioms: [propext, Classical.choice, Quot.sound]
+(96 declarations of 96 constants in 6 modules)
+
+## Slips, my own
+
+1. **A count written loosely.** Stage 5's first text said "six models are held as terms only". The true count is three
+   hypotheses met by terms only, plus two joint forms whose pieces are library theorems. It was corrected in the record
+   before stage 6 was saved; no draft carried it.
+2. **A check written against a listing I had not looked at.** `olean_against_lu1.py` first globbed `*.olean*`, which
+   also matches the `.olean.hash` files the manifest does not list. A directory listing caught it before its first run;
+   the shipped version reads `*.olean` only, as the manifest does.
+3. **A docstring edit after the first build.** Stage 5's pointer in `Arith/TorsionExtraction` was made after the first
+   build. The lint control's build and then the pass's build compiled it; the text check and the stored-term
+   comparison of the pass cover it.
+
+## Stage 9 — SAVED (FS131-LJ1): the green line, and where the branch stands
+
+The gate is green on `def7c07f8` (stage 8), and the coordinator has been told in one line. The branch `fs131-wj1`
+holds, above `main` at `3a6f8876b`:
+- the six modules (docstring edits in three of them: `ThreeColourCriterion`, `ThreeFourColours`, `TorsionExtraction`);
+- their six import lines and six rows of the map;
+- the audit block, the two moved controls, the retired sites, the rewritten ledger and the refiled baseline header;
+- this record and `data/fs131/lj1/`.
+
+Nothing is pushed: the server is unreachable, and the brief says so. The merge into `main` is the
+coordinator's. No background process of this job is running or queued (`scripts/slot.py --status`: no `lj1-` slot).
+The drafts are above, with their slots checked on `main` at `3a6f8876b` (21 of 21) and kept as one file,
+`data/fs131/lj1/drafts.md`. The next landing's previous receipts are
+`data/fs131/lj1/gate/receipt-{axioms,vacuity,assumptions}-final.log`.

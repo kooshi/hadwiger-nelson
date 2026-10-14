@@ -1,0 +1,12 @@
+landing: 96 constants in 6 modules; declarations it brings: 96 (94 THM, 2 DEF, 0 IND; Arith.ThreeColourCharacter 11, Arith.TorsionExtraction 20, Arith.ThreeColourCriterion 17, Arith.DyadicQuadratic 13, Arith.ThreeFourColours 31, Instances.UpperHalfCorollaries 4); records in the log: 7602
+  landing records on exactly the three: 83
+  landing records on fewer: [Quot.sound, propext]: 1
+  landing records on the three and Weil's bound: 12
+  headlines under CLEAN on the standard three: 39 of 39
+  headlines under IMPORTED on the three and Weil's bound: 12 of 12
+  whole log: records carrying kloosterman_bound: 20 (filed: 20); of the landing's: 12
+  whole log: records carrying no_proper_five_coloring: 6 (filed: 6); of the landing's: 0
+  whole log: records carrying proper_to_borel_weak: 12 (filed: 12); of the landing's: 0
+  whole log: records under IMPORTED 38; carrying two imports 0; carrying sorryAx 0
+records: PASS
+exit=0
