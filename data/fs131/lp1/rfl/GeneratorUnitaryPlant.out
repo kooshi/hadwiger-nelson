@@ -1,0 +1,15 @@
+/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/data/fs131/lp1/rfl/GeneratorUnitaryPlant.lean:16:0: error: Not a definitional equality: the left-hand side
+  let __src := SubmonoidClass.toMonoid (algebra U);
+  { toSemigroup := __src.toSemigroup, toOne := __src.toOne, one_mul := ⋯, mul_one := ⋯, npow := fun n x => npowRec n x,
+    npow_zero := ⋯, npow_succ := ⋯ }
+is not definitionally equal to the right-hand side
+  inferInstance
+/home/kooshi/source/lean-dir/.claude/worktrees/fs132-wi1/data/fs131/lp1/rfl/GeneratorUnitaryPlant.lean:20:102: error: Type mismatch
+  rfl
+has type
+  ?m.60 = ?m.60
+but is expected to have type
+  (let __src := SubmonoidClass.toMonoid (algebra U);
+    { toSemigroup := __src.toSemigroup, toOne := __src.toOne, one_mul := ⋯, mul_one := ⋯,
+      npow := fun n x => npowRec n x, npow_zero := ⋯, npow_succ := ⋯ }) =
+    inferInstance

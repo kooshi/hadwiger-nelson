@@ -1,0 +1,20 @@
+{
+ "global_instances": [
+  [
+   86,
+   "global: on a type built from the release's own definition `StationaryMean.measure t r x₀` (`Stationary.lean`)"
+  ],
+  [
+   87,
+   "global: on a type built from the release's own definition `StationaryMean.measure t r x₀` (`Stationary.lean`)"
+  ],
+  [
+   90,
+   "global: on a type built from the release's own definition `StationaryMean.measure t r x₀` (`Stationary.lean`)"
+  ],
+  [
+   112,
+   "global: on a type built from the release's own definition `K` (`Basic.lean:11`, a `def` subgroup of `Circle`), as `Basic.lean:234`'s `MulAction K D`, global by the trial's table"
+  ]
+ ]
+}

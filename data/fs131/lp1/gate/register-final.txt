@@ -1,0 +1,2 @@
+REGISTER-CHECK OK: 32 modules, 32 rows, 1422 generated records and 12 moved
+exit=0

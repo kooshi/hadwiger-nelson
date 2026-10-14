@@ -1,0 +1,8 @@
+  ok    the transfer: [('CLEAN', ['propext', 'Classical.choice', 'Quot.sound'])]
+  ok    the twelve records that rested on it, each under CLEAN on exactly the three (12 of 12)
+  ok    no record rests on the transfer (0) and no DECLARED IMPORT names it
+  ok    declared imports: ['HadwigerNelson.StandingFive.kloosterman_bound', 'HadwigerNelson.Outside.OAI158.no_proper_five_coloring']
+  ok    IMPORTED: 26 records, 20 on Weil's bound alone, 6 on the five-colour theorem alone
+  ok    records: 9024 ({'IMPORTED': 26, 'CLEAN': 8993, 'PURCHASED': 5}), 9024 predicted; printed twice: []
+records: PASS
+exit=0

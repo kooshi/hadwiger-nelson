@@ -1,0 +1,22 @@
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Outside/OAI158ConditionalSelection.lean:241:18: error: Application type mismatch: The argument
+  condDistrib_comp ?m.74 (Measurable.aemeasurable measurable_id) hb
+has type
+  ⇑(condDistrib (b ∘ id) ?m.74 μ) =ᵐ[Measure.map ?m.74 μ] ⇑((condDistrib id ?m.74 μ).map b)
+but is expected to have type
+  ?m.56 ∈ ae (Measure.map p μ)
+in the application
+  mp_mem (condDistrib_comp ?m.74 (Measurable.aemeasurable measurable_id) hb)
+Proofs/HadwigerNelson/Outside/OAI158ConditionalSelection.lean:251:4: error: Application type mismatch: The argument
+  condDistrib_self ?m.62
+has type
+  ⇑(condDistrib ?m.62 ?m.62 ?m.53) =ᵐ[Measure.map ?m.62 ?m.53] ⇑Kernel.id
+but is expected to have type
+  ?m.45 ∈ ae (Measure.map p μ)
+in the application
+  mp_mem (condDistrib_self ?m.62)
+Proofs/HadwigerNelson/Outside/OAI158ConditionalSelection.lean:377:4: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsProbabilityMeasure (Measure.map p μ)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158ConditionalSelection.lean:376:9: error: Tactic `rcases` failed: `x✝ : ?m.1513` is not an inductive datatype

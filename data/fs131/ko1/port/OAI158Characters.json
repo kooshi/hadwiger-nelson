@@ -1,0 +1,28 @@
+{
+ "scoped": [
+  [
+   461,
+   "`F` is an abbreviation (`abbrev`, `Characters.lean:286`) of Mathlib's `algebraicClosure ℚ ℝ`: an unscoped `Countable` instance on it would be this library's speech into every instance search on a Mathlib type (the rule of `LEAN.md` § Assumptions; FS133-IA1's ruling on `Basic.lean:53`'s `E_countable`, the same shape). Scoped to `HadwigerNelson.Outside.OAI158.ContinuousCharacters`: found inside that namespace and under `open` of it"
+  ]
+ ],
+ "drop_imports": [
+  [
+   "Mathlib.Order.CompletePartialOrder",
+   "the module of `CompletePartialOrder.toSupSet`: under it a supremum in a complete lattice is stored through that instance, and imported here it would move a stored statement of this library that sees the port's imports (`HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff`, INSTANCES-ONLY: `data/fs131/ko1/exposure/OAI158-*`; without it, nothing moves: `OAI158-noCPO-*`); FS131-IE1 left it out of its port for the same reason. The module elaborates without it"
+  ]
+ ],
+ "patches": [
+  [
+   187,
+   "Set.mem_ofPred_eq",
+   "Set.mem_setOf_eq",
+   "Mathlib renamed `setOf` and its lemmas to `Set.ofPred` on 2026-07-09 (`LEAN.md` § Searching — Lean; FS132-I2's patches); at v4.32.0 the lemma is `Set.mem_setOf_eq`, the same statement"
+  ],
+  [
+   553,
+   "Set.ofPred_true",
+   "Set.setOf_true",
+   "Mathlib renamed `Set.setOf_true` to `Set.ofPred_true` with the rest of `setOf`'s lemmas on 2026-07-09 (`LEAN.md` § Searching — Lean); at v4.32.0 the lemma is `Set.setOf_true` (`Mathlib/Data/Set/Basic.lean:503`), the same statement `{ _x : α | True } = univ`"
+  ]
+ ]
+}

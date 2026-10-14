@@ -1,0 +1,6 @@
+slot: admitted lp1: mem 4 GiB (hard cap), cpus 0
+data/fs131/lp1/nolint/probes/attrs.lean:7:25: error: unexpected token '@['; expected 'abbrev', 'axiom', 'binder_predicate', 'builtin_initialize', 'class', 'coinductive', 'def', 'elab', 'elab_rules', 'example', 'inductive', 'infix', 'infixl', 'infixr', 'initialize', 'instance', 'macro', 'macro_rules', 'notation', 'opaque', 'postfix', 'prefix', 'register_option', 'structure', 'syntax' or 'theorem'
+data/fs131/lp1/nolint/probes/attrs.lean:10:9: error: linter 'defsWithUnderscore' not found
+zz_two_blocks: nolint none simp true
+instInhabitedZzT: nolint none simp false
+zz_merged: nolint (some #[unusedArguments]) simp true

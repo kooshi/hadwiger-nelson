@@ -1,0 +1,26 @@
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Outside/OAI158Energy.lean:354:12: error(lean.unknownIdentifier): Unknown identifier `EventuallyEmptyOrUniv`
+Proofs/HadwigerNelson/Outside/OAI158Energy.lean:361:6: error(lean.unknownIdentifier): Unknown identifier `eventuallyEmptyOrUniv_iff`
+Proofs/HadwigerNelson/Outside/OAI158Energy.lean:344:52: error: unsolved goals
+G : Type u_1
+X : Type u_2
+Y : Type u_3
+inst✝⁷ : AddCommGroup G
+inst✝⁶ : MeasurableSpace X
+inst✝⁵ : MeasurableSpace Y
+inst✝⁴ : AddAction G X
+inst✝³ : AddAction G Y
+inst✝² : MeasurableConstVAdd G X
+inst✝¹ : MeasurableConstVAdd G Y
+μ : Measure X
+inst✝ : ErgodicVAdd G X μ
+q : X → Y
+hq : Measurable q
+hqcov : ∀ (g : G), (fun x => q (g +ᵥ x)) =ᵐ[μ] fun x => g +ᵥ q x
+hp : ∀ (g : G), MeasurePreserving (fun y => g +ᵥ y) (Measure.map q μ) (Measure.map q μ)
+this : VAddInvariantMeasure G Y (Measure.map q μ)
+s : Set Y
+hs : MeasurableSet s
+hinv : ∀ (g : G), (fun x => g +ᵥ x) ⁻¹' s =ᵐ[Measure.map q μ] s
+hc : sorry
+⊢ EventuallyConst s (ae (Measure.map q μ))

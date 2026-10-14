@@ -1,0 +1,24 @@
+slot: admitted lp1: mem 10 GiB (hard cap), cpus 0,1,2,3
+	Command being timed: "env SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 python3 /home/kooshi/source/lean-dir/scripts/slot.py --mem 10 --cpus 4 --wait 7200 --name lp1 -- env MEMMAX=10G BATCH=8 ./scripts/build.sh"
+	User time (seconds): 825.70
+	System time (seconds): 141.05
+	Percent of CPU this job got: 156%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 10:17.82
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 4638340
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 97
+	Minor (reclaiming a frame) page faults: 11043981
+	Voluntary context switches: 4559955
+	Involuntary context switches: 181302
+	Swaps: 0
+	File system inputs: 45392
+	File system outputs: 195584
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

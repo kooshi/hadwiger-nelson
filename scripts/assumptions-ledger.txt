@@ -4,7 +4,7 @@
 # holds it at unknown polarity). An inline assumption is inline:<Label>. Rewritten only by
 #   ./scripts/assumptions.sh --write-ledger
 # which prints every row it adds or removes. The counts this ledger was written from:
-#   axioms=3 rests=39 named=19 inline=14 outside=7 ours=21 open=5 takes=102 mentions=1
+#   axioms=2 rests=27 named=19 inline=14 outside=7 ours=21 open=5 takes=102 mentions=1
 MENTIONS HadwigerNelson.Plane.Voronov11 HadwigerNelson.Plane.forall_mu_six_lt_one_iff
 RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outside.OAI158.chiM0_six_or_seven
 RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outside.OAI158.chromaticNumber_plane_six_or_seven
@@ -12,18 +12,6 @@ RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outsi
 RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outside.OAI158.six_le_chiM0
 RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outside.OAI158.six_le_chromaticNumber_plane
 RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Plane.radius_five
-RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Outside.OAI158.chiM0_le_chromaticNumber_plane
-RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Outside.OAI158.chromaticNumber_plane_eq_chiM0
-RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Outside.OAI158.colorable_iff_nonempty_aeColouring
-RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Outside.OAI158.nonempty_aeColouring_of_colorable
-RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff
-RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Plane.chromaticNumber_euclidean_plane_eq_chiLebesgue
-RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Plane.chromaticNumber_plane_eq_chiLebesgue
-RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Plane.colorable_iff_exists_nullMeasurable_proper
-RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Plane.colorable_iff_forall_ball
-RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Plane.exists_isWeakColouringOn_of_colorable
-RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Plane.radius_down
-RESTS HadwigerNelson.Outside.OAI158.proper_to_borel_weak HadwigerNelson.Plane.seven_le_chromaticNumber_plane_iff_exists_ball
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.StandingFive.circle_sum_le_weil
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.StandingFive.five_le_chromaticNumber_weil
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.StandingFive.kloostermanBound_of_ringChar_ne_two

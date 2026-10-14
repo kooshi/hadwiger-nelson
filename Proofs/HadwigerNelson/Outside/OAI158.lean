@@ -10,53 +10,54 @@ import Mathlib.Analysis.Fourier.AddCircle
 import Mathlib.LinearAlgebra.Complex.FiniteDimensional
 
 /-!
-# The plane is not five-colourable, and a proper colouring gives a measurable one: two outside theorems, imported (FS-132)
+# The plane is not five-colourable: an outside theorem, imported (FS-132); the transfer, a theorem of the port (FS-131)
 
-**The two outside theorems of this module** are `[OAIMath2026]` family 158 — a Lean development published at
-github.com/openai/math, read here at its commit `adc7f1241b42e322a6451854ab7e4b4c146bf78a` — and each is an `axiom`
-**in the release's own form, over the release's own definitions, copied**:
+**The outside theorem of this module** is `[OAIMath2026]` family 158 — a Lean development published at
+github.com/openai/math, read here at its commit `adc7f1241b42e322a6451854ab7e4b4c146bf78a` — an `axiom` **in the
+release's own form, over the release's own definitions, copied**:
 
-* `no_proper_five_coloring` (H): no map `ℂ → Fin 5` gives different colours to every two points at distance `1`;
-* `proper_to_borel_weak` (T): a proper `k`-colouring of `ℂ`, for any `k`, gives a Borel `k`-colouring proper at almost
-  every unit pair — the transfer of colourability to measurable colourings.
+* `no_proper_five_coloring` (H): no map `ℂ → Fin 5` gives different colours to every two points at distance `1`.
+
+**The transfer** `proper_to_borel_weak` (T) — a proper `k`-colouring of `ℂ`, for any `k`, gives a Borel `k`-colouring
+proper at almost every unit pair — was declared here as a second axiom, over the same copied definitions. It is now the
+release's own theorem, its proof ported (`Outside/OAI158BorelTransfer`, under the same name, over these definitions;
+FS-131, the port of `plans/FS131-KO1-port-plan.md`) and kernel-checked in this library on the standard three axioms.
+The port imports `Outside/OAI158Palette`, which imports this module, so T stands downstream of it: the theorems that use
+T — `nonempty_aeColouring_of_colorable`, `colorable_iff_nonempty_aeColouring`, `chiM0_le_chromaticNumber_plane`,
+`chromaticNumber_plane_eq_chiM0`, `seven_le_chromaticNumber_plane_iff`, and the `example` that applies it — are in
+`Outside/OAI158Collapse`, moved there unchanged (FS131-IPD1).
 
 Everything else in this file is kernel-checked: the passage from the release's definitions to this library's
-(`properColoring_iff_colorable`, `weakColoring_iff_unitPairsNull`), and the forms this library cites —
-`six_le_chromaticNumber_plane`, `chromaticNumber_plane_six_or_seven`, `colorable_iff_nonempty_aeColouring`,
-`chiM0_le_chromaticNumber_plane`, `chromaticNumber_plane_eq_chiM0`, `six_le_chiM0`.
+(`properColoring_iff_colorable`, `weakColoring_iff_unitPairsNull`), and the forms of H this library cites —
+`six_le_chromaticNumber_plane`, `chromaticNumber_plane_six_or_seven`, `six_le_chiM0`, `chiM0_six_or_seven`.
 
-**Why axioms, and what was checked.** The release proves both at Lean v4.34.1 on Mathlib's tag `v4.34.1`, in 70
-modules; this library is at v4.32.0, and holding the proofs here is a port. The release was audited on this machine
-(`plans/EXT-OAI1-audit.md`): its 70 modules compile from its source, both theorems rest on `[propext,
-Classical.choice, Quot.sound]` there (a planted `sorry` reaches the headline), the headline's stored statement is
-the release's challenge statement, and the modules replay through `leanchecker`. **The read-back** is
-`plans/FS132-I1-implementation.md` (stages 1 and 2): the eight declarations below — the six copied and the two
-statements — are, as the kernel stores them at this pin, the release's eight as the kernel stores them at the
-release's pin, term for term (`tools/fs132_i1_readback.py`, on `data/fs132/i1/readback/`). What no check here
-reaches is Mathlib itself between the two tags, below the constants the statements name; what stands in for it is
-the two equivalences above, which say in this library's own vocabulary what the two axioms assert at this pin, and
-nine characterisations of the copied definitions that elaborate, as one text, at both pins (`SemanticBody.lean.inc`
-there).
+**Why an axiom, and what was checked.** The release proves H at Lean v4.34.1 on Mathlib's tag `v4.34.1`, in 70
+modules; this library is at v4.32.0, and its five-colour arm is not ported (`plans/FS131-KO1-port-plan.md` § 2.4). The
+release was audited on this machine (`plans/EXT-OAI1-audit.md`): its 70 modules compile from its source, H rests on
+`[propext, Classical.choice, Quot.sound]` there (a planted `sorry` reaches the headline), the headline's stored
+statement is the release's challenge statement, and the modules replay through `leanchecker`. **The read-back** is
+`plans/FS132-I1-implementation.md` (stages 1 and 2): the six copied declarations below and the statement of H — and
+of T while it was declared here — are, as the kernel stores them at this pin, the release's as the kernel stores them
+at the release's pin, term for term (`tools/fs132_i1_readback.py`, on `data/fs132/i1/readback/`); T as the port's
+theorem is read back against the release by the port's own read-back (FS131-LP1: IDENTICAL). What no check here reaches is Mathlib itself between
+the two tags, below the constants H's statement names; what stands in for it is the equivalences above, which say in
+this library's own vocabulary what the axiom asserts at this pin, and nine characterisations of the copied definitions
+that elaborate, as one text, at both pins (`SemanticBody.lean.inc` there).
 
 **Licence.** The release is published under the Apache License, Version 2.0, and the declarations copied from it
 below are used under that licence: a byte-identical copy of its `LICENSE` file is beside this module,
 `Proofs/HadwigerNelson/Outside/OAIMath2026-LICENSE.txt`.
 
 **Read aloud.** H: colour every point of the plane with one of five colours; then some two points exactly one unit
-apart have the same colour. T: suppose `k` colours can be given to the points of the plane so that no two points one
-unit apart share a colour — with no regularity asked of the colouring. Then there is a Borel-measurable colouring
-with the same `k` colours for which the pairs (a point, a direction) whose two ends — the point, and the point moved
-one unit in that direction — share a colour form a set of measure zero.
+apart have the same colour.
 
-**What the axioms do not say.** H says nothing at six colours. T does not say its measurable colouring is proper at
-every unit pair, nor that it is close to the given one; it holds for every `k` and is empty of content where no
-proper `k`-colouring exists (`k ≤ 5`, by H). The release's rigidity theorem and its measurable five-colour theorem
-are not imported: no statement here cites them.
+**What the axiom does not say.** H says nothing at six colours. The release's rigidity theorem and its measurable
+five-colour theorem are not imported: no statement here cites them.
 
 **Models** (`LEAN.md` § Assumptions, item 3). H has no hypothesis; its sentence at four colours is this library's own
 theorem and at seven it is false (the two `example`s under H). T's hypothesis is inhabited at `k = 7`
-(`exists_properColoring_seven`, row 33's upper end), and there its conclusion is a theorem with no axiom
-(`proper_to_borel_weak_model`).
+(`exists_properColoring_seven`, row 33's upper end), and there its conclusion is this library's own theorem, with no
+use of T (`proper_to_borel_weak_model`) — the model an import asked for, kept as T's model now that T is ported.
 -/
 
 open MeasureTheory
@@ -96,7 +97,7 @@ def WeakColoring (k : ℕ) (c : ℂ → Fin k) : Prop :=
   AEMeasurable c (volume : Measure ℂ) ∧ ∀ᵐ p ∂(volume : Measure ℂ).prod angularMeasure,
     c p.1 ≠ c (p.1+direction p.2)
 
-/-! ## The two outside theorems, in the release's form -/
+/-! ## The outside theorem, in the release's form -/
 
 /-- **IMPORTED: the plane is not five-colourable** — `[OAIMath2026]` (OpenAI, *Mathematics manuscript collection*,
 github.com/openai/math, commit `adc7f1241b42e322a6451854ab7e4b4c146bf78a`), family 158,
@@ -109,19 +110,6 @@ The statement has no hypothesis, so no model is asked; `ProperColoring` is inhab
 (`exists_properColoring_seven`), and the two `example`s below read this sentence at four colours and at seven.
 Declared in `ARCHITECTURE.md` § Trust. -/
 axiom no_proper_five_coloring : ¬ ∃ c : ℂ → Fin 5, ProperColoring 5 c
-
-/-- **IMPORTED: a proper colouring of the plane gives a Borel colouring proper at almost every unit pair** —
-`[OAIMath2026]` (as above), family 158, `lean/OAI/Geometry/PlaneColoring/BorelTransfer.lean` **lines 436–437**, the
-lemma `OAI.EuclideanFiveColor.proper_to_borel_weak`; its manuscript's theorem "Transfer of colorability", forward
-direction. For every number of colours `k`; `[NeZero k]` is the release's binder (a colouring of the non-empty plane
-has a colour, so it carries no content).
-
-Proved there on `[propext, Classical.choice, Quot.sound]` at Lean v4.34.1 (audit: `plans/EXT-OAI1-audit.md` stage 4).
-Read back against the release's stored statement, term for term, in `plans/FS132-I1-implementation.md` stages 1–2.
-A model of its hypothesis, where its conclusion is a theorem with no axiom, is `proper_to_borel_weak_model` below
-(`k = 7`). Declared in `ARCHITECTURE.md` § Trust. -/
-axiom proper_to_borel_weak {k : ℕ} [NeZero k] {c : ℂ → Fin k} (hc : ProperColoring k c) :
-    ∃ d : ℂ → Fin k, Measurable d ∧ WeakColoring k d
 
 /-! ## The copied definitions in this library's vocabulary (no axiom below this line until `not_colorable_five`) -/
 
@@ -250,39 +238,6 @@ theorem chromaticNumber_plane_six_or_seven :
       (unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber ≤ 7 :=
   ⟨six_le_chromaticNumber_plane, chromaticNumber_plane_interval.2⟩
 
-/-- **T in this library's words**: if the plane has a proper `k`-colouring, it has a measurable `k`-colouring proper
-at almost every unit pair. Rests on the standard three axioms and `proper_to_borel_weak`. Inhabitant of the
-hypothesis: `k = 7`, by `exists_properColoring_seven` through `properColoring_iff_colorable`. -/
-theorem nonempty_aeColouring_of_colorable {k : ℕ} (h : (unitDistance ℂ).Colorable k) :
-    Nonempty (Plane.AeColouring k) := by
-  obtain ⟨c, hc⟩ := properColoring_iff_colorable.mpr h
-  haveI : NeZero k := ⟨fun h0 => by subst h0; exact (c 0).elim0⟩
-  obtain ⟨d, hd, hw⟩ := proper_to_borel_weak hc
-  exact nonempty_aeColouring_of_weak hd hw
-
-/-- **The transfer, colour by colour**: the plane has a proper `k`-colouring exactly when it has a measurable
-`k`-colouring proper at almost every unit pair. The direction from a proper colouring is `proper_to_borel_weak`; the
-other is this library's N-EASY (`Plane.chromaticNumber_plane_le_chiM0`), which needs no import. -/
-theorem colorable_iff_nonempty_aeColouring {k : ℕ} :
-    (unitDistance ℂ).Colorable k ↔ Nonempty (Plane.AeColouring k) :=
-  ⟨nonempty_aeColouring_of_colorable, fun ⟨a⟩ => SimpleGraph.chromaticNumber_le_iff_colorable.mp
-    (Plane.chromaticNumber_plane_le_chiM0.trans (Plane.chiM0_le a))⟩
-
-/-- **`χ_m⁰(ℝ²) ≤ χ(ℝ²)`** — the half of row 130's collapse this project held only given measure rigidity. Rests on
-the standard three axioms and `proper_to_borel_weak`. -/
-theorem chiM0_le_chromaticNumber_plane : Plane.chiM0 ≤ (unitDistance ℂ).chromaticNumber := by
-  rw [SimpleGraph.chromaticNumber]
-  refine le_iInf₂ fun k hk => ?_
-  obtain ⟨a⟩ := nonempty_aeColouring_of_colorable hk
-  exact Plane.chiM0_le a
-
-/-- **Row 130's collapse, with no measure rigidity: `χ(ℝ²) = χ_m⁰(ℝ²)`.** One half is `proper_to_borel_weak`, the
-other this library's N-EASY. On branch `fs131-w9` the proposition `Plane.Row130Collapse` is this equality by
-definition, assumed there by the theorems of `Plane/Reduction`; at that wave's join this theorem proves it, and
-each of those theorems then holds on this import in its place. -/
-theorem chromaticNumber_plane_eq_chiM0 : (unitDistance ℂ).chromaticNumber = Plane.chiM0 :=
-  le_antisymm Plane.chromaticNumber_plane_le_chiM0 chiM0_le_chromaticNumber_plane
-
 /-- **`6 ≤ χ_m⁰(ℝ²)`**: a measurable colouring of the plane proper at almost every unit pair needs six colours
 (FS-104's question). From `no_proper_five_coloring` and N-EASY alone — the transfer is not used. -/
 theorem six_le_chiM0 : 6 ≤ Plane.chiM0 := by
@@ -295,12 +250,6 @@ theorem six_le_chiM0 : 6 ≤ Plane.chiM0 := by
 theorem chiM0_six_or_seven : 6 ≤ Plane.chiM0 ∧ Plane.chiM0 ≤ 7 := by
   obtain ⟨a, -⟩ := Plane.r7_aeColouring
   exact ⟨six_le_chiM0, Plane.chiM0_le a⟩
-
-/-- **The third item, run**: the transfer applied to this library's seven-colouring of the plane gives a Borel
-seven-colouring proper at almost every unit pair. -/
-example : ∃ d : ℂ → Fin 7, Measurable d ∧ WeakColoring 7 d := by
-  obtain ⟨c, hc⟩ := exists_properColoring_seven
-  exact proper_to_borel_weak hc
 
 /-! ## Spec examples (each fails if its definition drifts) -/
 
@@ -316,43 +265,5 @@ example : angularMeasure Set.univ = 1 := measure_univ
 /-- The direction at the angle `π / 2` is `i`: angles are in radians and counter-clockwise. -/
 example : direction ((Real.pi / 2 : ℝ) : Angles) = Complex.I := by
   rw [direction_coe, Plane.e_eq, Real.cos_pi_div_two, Real.sin_pi_div_two]; simp
-
-/-- **The one question, for the plane's chromatic number itself: `χ(ℝ²) ≥ 7 ⟺ lim_{ε → 0} µ₆(ε) < 1`.** Row 131's
-criterion — `Plane.seven_le_chiM0_iff`, FS106-EQ at six classes, this library's own theorem on the standard three
-axioms — rewritten by `chromaticNumber_plane_eq_chiM0`. Rests on the standard three axioms and `proper_to_borel_weak`
-alone: `no_proper_five_coloring` is not used. It has no hypothesis, so no model is asked (FS132-L1).
-
-**Read aloud**, against the front page's sentence (`CLAUDE.md` § The aim, item 5: "`χ(ℝ²) = χ_m⁰(ℝ²)` …, and
-`χ_m⁰(ℝ²) ≥ 7` iff six classes, each free of monochromatic pairs at distances in `[1−ε, 1+ε]`, cannot cover the plane
-up to holes of density tending to 0 as `ε → 0`"): *the plane needs at least seven colours exactly when there is a
-`δ > 0` such that, for every `ε > 0`, any six disjoint measurable sets, each with only a null set of pairs of its own
-points at a distance in `[1 − ε, 1 + ε]`, leave uncovered a part of the plane of lower density at least `δ`.* Term by
-term:
-
-* `(unitDistance ℂ).chromaticNumber` is the plane's chromatic number in row 33's sense:
-  `chromaticNumber_plane_eq_complex` equates it with `(unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber`, the
-  number `chromaticNumber_plane_interval` bounds by `5` and `7`. With that upper end, `7 ≤ χ` is `χ = 7`; with the
-  lower end of `chromaticNumber_plane_six_or_seven` (which rests on the other import), its negation is `χ = 6`.
-* `Plane.mu 6 ε` is the best six-class cover at slack `ε`: the supremum, over families of six measurable, pairwise
-  disjoint sets each `Plane.BandNull` at `ε`, of the upper density of their union (`Plane.upperDensity`: the `limsup`
-  of the covered fraction of the disc of radius `R` about `0`, as `R → ∞`). `⨆ ε > 0, Plane.mu 6 ε` is its limit as
-  `ε → 0⁺`: a narrower band is a weaker condition (`Plane.antitone_mu`), so the supremum over `ε > 0` is the limit
-  from the right at `0`, and `Plane.tendsto_mu` names that limit `Plane.muZero 6`.
-* `< 1`: the limit is at most `1` (`Plane.mu_le_one`), and it is `1` exactly when the uncovered part can be made of
-  density as small as one likes by taking `ε` small (the form of `Plane.chiM0_le_iff_periodic`: for every `δ > 0`
-  some `ε > 0` and some family at `ε` cover upper density at least `1 − δ`). So `< 1` says that the holes keep a
-  density bounded below, by one bound for every `ε > 0` and every family: the covered fraction of the discs about
-  `0` has `limsup` at most `1 − δ`, so the uncovered fraction has `liminf` at least `δ`.
-
-**Where the statement and the sentence differ in wording, and why that is no gap.** The sentence says each class is
-*free* of monochromatic pairs in the band; `Plane.mu` asks that such pairs be *null* (`Plane.BandNull`), the weaker
-condition (`Plane.bandNull_of_bandFree`) and so the larger supremum (`Plane.muPer_le_muTile`, `Plane.muTile_le_mu`).
-The limit is the same under the strict reading and under the strictest — periodic families of half-open grid squares
-with no such pair at all: `Plane.tendsto_muTile` and `Plane.tendsto_muPer` have the same limit `Plane.muZero 6`, and
-`Plane.chiM0_le_iff_periodic` states the criterion in that form at every number of classes. The plane of the statement
-is `ℂ`, as in every `Plane` module. -/
-theorem seven_le_chromaticNumber_plane_iff :
-    7 ≤ (unitDistance ℂ).chromaticNumber ↔ (⨆ ε > (0 : ℝ), Plane.mu 6 ε) < 1 := by
-  rw [chromaticNumber_plane_eq_chiM0]; exact Plane.seven_le_chiM0_iff
 
 end HadwigerNelson.Outside.OAI158

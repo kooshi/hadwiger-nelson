@@ -1,0 +1,24 @@
+slot: admitted ipd1: mem 7 GiB (hard cap), cpus 4,5
+Proofs/HadwigerNelson/Outside/OAI158BorelTransfer.lean:174:62: error(lean.unknownIdentifier): Unknown identifier `isAlgebraic_ratCast`
+Proofs/HadwigerNelson/Outside/OAI158BorelTransfer.lean:175:62: error(lean.unknownIdentifier): Unknown identifier `isAlgebraic_ratCast`
+Proofs/HadwigerNelson/Outside/OAI158BorelTransfer.lean:255:39: warning: This simp argument is unused:
+  Circle.norm_coe
+
+Hint: Omit it from the simp argument list.
+  simp ̵[̵C̵i̵r̵c̵l̵e̵.̵n̵o̵r̵m̵_̵c̵o̵e̵]̵
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Proofs/HadwigerNelson/Outside/OAI158BorelTransfer.lean:368:4: error: Type mismatch: After simplification, term
+  tsum_enorm_ne_top_iff_summable_norm.mpr hs
+ has type
+  ∑' (i : ℕ), ‖g i‖ₑ ≠ ∞
+but is expected to have type
+  ∀ (n : ℕ), AEStronglyMeasurable (↑↑(g n)) μ
+Proofs/HadwigerNelson/Outside/OAI158BorelTransfer.lean:469:8: error(lean.unknownIdentifier): Unknown identifier `measurableSet_setOfPred.mp`
+Proofs/HadwigerNelson/Outside/OAI158BorelTransfer.lean:488:42: error(lean.unknownIdentifier): Unknown identifier `dite_eq_left`
+Proofs/HadwigerNelson/Outside/OAI158BorelTransfer.lean:489:4: error: Type mismatch
+  Exists.choose_spec hn
+has type
+  Exists.choose hn ∈ positiveSupport f x
+but is expected to have type
+  (if h : (positiveSupport f x).Nonempty then Exists.choose h else 0) ∈ positiveSupport f x

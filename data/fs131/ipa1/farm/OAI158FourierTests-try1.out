@@ -1,0 +1,5 @@
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 6,7
+Proofs/HadwigerNelson/Outside/OAI158FourierTests.lean:290:2: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsProbabilityMeasure (Measure.map (fun p => p.1 / p.2) (⇑(κ ×ₖ κ) ∘ₘ ν))
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.

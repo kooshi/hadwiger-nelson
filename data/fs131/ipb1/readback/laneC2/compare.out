@@ -1,0 +1,14 @@
+ADAPTED	lemma	§.BoundedMeasurable.prod_act_project_lift	ADAPTED_ASCRIPTION: an ascription restores the release's stored term; the read-back reads UP-TO-INSTANCES
+ADAPTED	lemma	§.BoundedMeasurable.covariance_mean_zero	ADAPTED_INSTANCE: an instance argument supplied from the statement's own measurability; a proof, erased, so the erased prints agree
+  aux          AUX-ABSENT       14
+  aux          AUX-DIFFERS      21
+  aux          IDENTICAL        52
+  aux          UP-TO-INSTANCES  3
+  definition   IDENTICAL        44
+  definition   UP-TO-INSTANCES  10
+  lemma        ADAPTED          2
+  lemma        IDENTICAL        158
+  lemma        UP-TO-INSTANCES  60
+  constants differing inside instance and proof arguments: 93
+constants: 364  failing: 0  fatal: 0
+READBACK OK

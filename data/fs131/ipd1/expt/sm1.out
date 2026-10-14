@@ -1,0 +1,25 @@
+slot: admitted ipd1: mem 6 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:177:38: error: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce
+
+case refine_2
+G : Type u_1
+H : Type u_2
+inst✝³ : CommGroup G
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+U : G →* ↥(unitary (H →L[ℂ] H))
+left right : G
+⊢ (fun g => ↑(U g)) left * (fun g => ↑(U g)) right = (fun g => ↑(U g)) right * (fun g => ↑(U g)) left
+Proofs/HadwigerNelson/Outside/OAI158SpectralMeasure.lean:180:38: error: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce
+
+case refine_3
+G : Type u_1
+H : Type u_2
+inst✝³ : CommGroup G
+inst✝² : NormedAddCommGroup H
+inst✝¹ : InnerProductSpace ℂ H
+inst✝ : CompleteSpace H
+U : G →* ↥(unitary (H →L[ℂ] H))
+left right : G
+⊢ (fun g => ↑(U g)) left * star ((fun g => ↑(U g)) right) = star ((fun g => ↑(U g)) right) * (fun g => ↑(U g)) left

@@ -1,0 +1,26 @@
+OK: OAI158Basic: only the title and item 1 differ
+OK: OAI158InvariantMean: only the title and item 1 differ
+OK: OAI158NumberFields: only the title and item 1 differ
+OK: OAI158PhaseEncoding: only the title and item 1 differ
+OK: OAI158SmallArcs: only the title and item 1 differ
+OK: OAI158Amenability: only the title and item 1 differ
+OK: OAI158Centers: only the title and item 1 differ
+OK: OAI158Characters: only the title and item 1 differ
+OK: OAI158PhaseCollision: only the title and item 1 differ
+OK: OAI158Selections: only the title and item 1 differ
+OK: OAI158RelativeCenters: only the title and item 1 differ
+OK: OAI158Multipliers: only the title and item 1 differ
+OK: OAI158ConditionalSelection: only the title and item 1 differ
+OK: OAI158FourierTests: only the title and item 1 differ
+OK: OAI158ConditionalSpectrum: only the title and item 1 differ
+OK: OAI158Approximation: only the title and item 1 differ
+OK: OAI158ConditionalLimits: only the title and item 1 differ
+OK: OAI158Kernels: only the title and item 1 differ
+OK: OAI158BoundedFunctions: only the title and item 1 differ
+OK: OAI158Functions: only the title and item 1 differ
+OK: OAI158Factors: only the title and item 1 differ
+OK: OAI158RelativeProducts: only the title and item 1 differ
+OK: OAI158Separability: only the title and item 1 differ
+OK: OAI158Stationary: only the title and item 1 differ
+OK: OAI158AlgebraModels: only the title and item 1 differ
+HEADER-DIFF OK: 25 of 25 modules

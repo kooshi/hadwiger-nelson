@@ -1,0 +1,23 @@
+slot: admitted lp1-readback: mem 8 GiB (hard cap), cpus 1
+PIN-DIFFERENCE	lemma	§.ConvexAverage.setIntegral_bm	EQSET: `s =ᵐ[μ] t` of sets is `Filter.EventuallyEqSet` at the release's pin and `Filter.EventuallyEq` at `Prop` here; the same proposition by definition
+PIN-DIFFERENCE	lemma	§.ConvexAverage.setIntegral_of_limit	EQSET: `s =ᵐ[μ] t` of sets is `Filter.EventuallyEqSet` at the release's pin and `Filter.EventuallyEq` at `Prop` here; the same proposition by definition
+UP-TO-INSTANCES	lemma	§.Spectral.residual_fourier	TARGET_IN_LIBRARY: Mathlib's instance constants only (there ['CommSemiring.toSemiring', 'Complex.instCommSemiring', 'Semifield.toCommSemiring', 'SubsemiringClass.toCommSemiring'], here ['DivisionSemiring.toSemiring', 'Semifield.toDivisionSemiring']); its stored type IDENTICAL to the axiom it replace
+PIN-DIFFERENCE	definition	§.Spectral.instAddCommGroupRot	`Monoid`'s parents changed between the pins; §.Spectral.instAddCommGroupRot's type is identical
+ADAPTED	definition	§.CommutingSpectral.algebra_commRing	ADAPTED_VALUE: the release's own instance named with the Prop it asks proved explicitly; the read-back reads UP-TO-INSTANCES
+UP-TO-INSTANCES	lemma	§.CommutingSpectral.generator_unitary	INSTANCE_EVIDENCE: differs inside instance arguments by the release's own ['§.CommutingSpectral.algebra_commRing'], the two instance terms equal by rfl at this pin (the kernel's receipt in data/fs131/lp1/readback/evidence.out)
+  aux          AUX-ABSENT       24
+  aux          AUX-DIFFERS      26
+  aux          IDENTICAL        111
+  aux          PIN-DIFFERENCE   15
+  aux          UP-TO-INSTANCES  21
+  definition   ADAPTED          1
+  definition   IDENTICAL        62
+  definition   PIN-DIFFERENCE   1
+  definition   UP-TO-INSTANCES  22
+  lemma        IDENTICAL        161
+  lemma        PIN-DIFFERENCE   2
+  lemma        UP-TO-INSTANCES  78
+  constants differing inside instance and proof arguments: 147
+constants: 524  failing: 0  fatal: 0
+READBACK OK
+exit=0

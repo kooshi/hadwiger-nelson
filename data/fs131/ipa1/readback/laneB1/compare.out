@@ -1,0 +1,22 @@
+recorded 35 constants in data/fs131/ipa1/readback/laneB1/instance-constants.txt
+DIFFERENT	lemma	§.AlgebraicCayley.minpoly_reverse_eval_ne_zero	type, erased print, at char 667: release … [])) @0) (c Rat.commSemiring [])) (((c CommSemiring.toSemiring [(p u_1)]) @0) _)) _)) @5)))) ((((c OfNat.ofNat [(p u_1)]) @0) (nat 0)) _)) … | here … [])) @0) (c Rat.commSemiring [])) (((c DivisionSemiring.toSemiring [(p u_1)]) @0) _)) _)) @5)))) ((((c OfNa
+DIFFERENT	lemma	§.AlgebraicCayley.linearFraction_polynomials	type, erased print, at char 988: release … [])) @0) (c Rat.commSemiring [])) (((c CommSemiring.toSemiring [(p u_1)]) @0) _)) _)) @10)))) ((((c OfNat.ofNat [(p u_1)]) @0) (nat 0)) _))… | here … [])) @0) (c Rat.commSemiring [])) (((c DivisionSemiring.toSemiring [(p u_1)]) @0) _)) _)) @10)))) ((((c OfN
+DIFFERENT	lemma	§.AlgebraicCayley.reciprocal_denominator	type, erased print, at char 463: release … []) ((((c Eq [(S 0)]) (c Rat [])) (((((((c DFunLike.coe [(S 0),(S 0),(S 0)]) ((((c Finsupp [0,0]) (c Nat [])) (c Rat [])) _)) (c Nat [])) (… | here … []) ((((c Eq [(S 0)]) (c Rat [])) (((((c Polynomial.coeff [0]) (c Rat [])) _) @5) ((((c OfNat.ofNat [0]) (c
+DIFFERENT	definition	§.AlgebraicCayley.realLine	value, erased print, at char 2423: release …)) @4)))) (c Rat.commSemiring [])) (((c Ring.toSemiring [0]) (((c Subtype [(S 0)]) (c Real [])) (lam.d x (c Real []) ((((((c Membership.mem … | here …)) @4)))) (c Rat.commSemiring [])) (((c DivisionSemiring.toSemiring [0]) (((c Subtype [(S 0)]) (c Real [])
+DIFFERENT	lemma	§.AlgebraicCayley.coeff_polyLinear	type, erased print, at char 364: release … []) ((((c Eq [(S 0)]) (c Rat [])) (((((((c DFunLike.coe [(S 0),(S 0),(S 0)]) ((((c Finsupp [0,0]) (c Nat [])) (c Rat [])) _)) (c Nat [])) (… | here … []) ((((c Eq [(S 0)]) (c Rat [])) (((((c Polynomial.coeff [0]) (c Rat [])) _) ((((((c §.AlgebraicCayley.pol
+DIFFERENT	lemma	§.AlgebraicCayley.eval_polyLinear	type, erased print, at char 975: release … [])) @0) (c Rat.commSemiring [])) (((c CommSemiring.toSemiring [(p u_1)]) @0) _)) _)) @5)) @4)))))))))… | here … [])) @0) (c Rat.commSemiring [])) (((c DivisionSemiring.toSemiring [(p u_1)]) @0) _)) _)) @5)) @4)))))))))…
+DIFFERENT	lemma	§.AlgebraicCayley.polyLinear_eq_zero_iff	type, erased print, at char 1069: release … [])) @0) (c Rat.commSemiring [])) (((c CommSemiring.toSemiring [(p u_1)]) @0) _)) _)) @5)) @4))) ((((c OfNat.ofNat [0]) (c Rat [])) (nat 0)… | here … [])) @0) (c Rat.commSemiring [])) (((c DivisionSemiring.toSemiring [(p u_1)]) @0) _)) _)) @5)) @4))) ((((c
+DIFFERENT	lemma	§.AlgebraicCayley.cayley_annihilation	type, erased print, at char 811: release … [])) @0) (c Rat.commSemiring [])) (((c CommSemiring.toSemiring [(p u_1)]) @0) _)) _)) @6)))) ((((c OfNat.ofNat [(p u_1)]) @0) (nat 0)) _)))… | here … [])) @0) (c Rat.commSemiring [])) (((c DivisionSemiring.toSemiring [(p u_1)]) @0) _)) _)) @6)))) ((((c OfNa
+  aux          AUX-ABSENT       2
+  aux          AUX-DIFFERS      10
+  aux          IDENTICAL        51
+  aux          UP-TO-INSTANCES  9
+  definition   DIFFERENT        1
+  definition   IDENTICAL        22
+  definition   UP-TO-INSTANCES  4
+  lemma        DIFFERENT        7
+  lemma        IDENTICAL        61
+  lemma        UP-TO-INSTANCES  28
+  constants differing inside instance and proof arguments: 35
+constants: 195  failing: 8  fatal: 0
+READBACK FAILED

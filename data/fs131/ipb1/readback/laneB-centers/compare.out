@@ -1,0 +1,28 @@
+ADAPTED	lemma	§.Location.center_translate	binders none; inserted arguments at MeasureTheory.ProbabilityMeasure.map ×1
+ADAPTED	lemma	§.Location.center_orthogonal	binders none; inserted arguments at MeasureTheory.ProbabilityMeasure.map ×1
+RULED	definition	§.CosetCenter.Embedding.frequencyLaw	binders ['MeasurableMul₂', 'MeasurableInv']; inserted arguments at none
+RULED	lemma	§.CosetCenter.Embedding.frequencyLaw_measure	binders none; inserted arguments at §.CosetCenter.Embedding.frequencyLaw ×1
+RULED	lemma	§.CosetCenter.Embedding.measurable_frequencyLaw	binders none; inserted arguments at §.CosetCenter.Embedding.frequencyLaw ×1
+RULED	lemma	§.CosetCenter.Embedding.frequencyLaw_shift	binders none; inserted arguments at MeasureTheory.ProbabilityMeasure.map ×1, §.CosetCenter.Embedding.frequencyLaw ×2
+RULED	definition	§.CosetCenter.Embedding.center	binders ['MeasurableMul₂', 'MeasurableInv']; inserted arguments at §.CosetCenter.Embedding.frequencyLaw ×1
+RULED	lemma	§.CosetCenter.Embedding.measurable_center	binders none; inserted arguments at §.CosetCenter.Embedding.center ×1
+RULED	lemma	§.CosetCenter.Embedding.center_mem_coset	binders ['MeasurableMul₂', 'MeasurableInv']; inserted arguments at §.CosetCenter.Embedding.center ×1
+RULED	lemma	§.CosetCenter.Embedding.center_mul_j	binders none; inserted arguments at §.CosetCenter.Embedding.center ×2
+RULED	lemma	§.CosetCenter.Embedding.center_eq_of_mem_coset	binders none; inserted arguments at §.CosetCenter.Embedding.center ×2
+RULED	lemma	§.CosetCenter.Embedding.quotient_center	binders ['MeasurableMul₂', 'MeasurableInv']; inserted arguments at §.CosetCenter.Embedding.center ×1
+RULED	lemma	§.CosetCenter.Embedding.center_eq_iff	binders none; inserted arguments at §.CosetCenter.Embedding.center ×2
+RULED	lemma	§.CosetCenter.Embedding.center_mem_ordinary_iff	binders ['MeasurableMul₂', 'MeasurableInv']; inserted arguments at §.CosetCenter.Embedding.center ×1
+RULED	lemma	§.CosetCenter.Embedding.preimage_center_singleton	binders none; inserted arguments at §.CosetCenter.Embedding.center ×2
+RULED	lemma	§.CosetCenter.Embedding.measurable_center_fixed	binders none; inserted arguments at §.CosetCenter.Embedding.center ×1
+RULED	lemma	§.CosetCenter.Embedding.frequencyLaw_equiv	binders none; inserted arguments at MeasureTheory.ProbabilityMeasure.map ×2, §.CosetCenter.Embedding.frequencyLaw ×2
+RULED	lemma	§.CosetCenter.Embedding.center_equivariant	binders none; inserted arguments at MeasureTheory.ProbabilityMeasure.map ×1, §.CosetCenter.Embedding.center ×2
+  aux          AUX-DIFFERS      2
+  aux          IDENTICAL        14
+  definition   IDENTICAL        18
+  definition   RULED            2
+  lemma        ADAPTED          2
+  lemma        IDENTICAL        67
+  lemma        RULED            14
+  constants differing inside instance and proof arguments: 0
+constants: 119  failing: 0  fatal: 0
+READBACK OK

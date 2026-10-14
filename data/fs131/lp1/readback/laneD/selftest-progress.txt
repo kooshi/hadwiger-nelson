@@ -1,0 +1,30 @@
+a constant changed in a statement (DFunLike.coe, in §.MovingMean.syndetic_of_all_means)	REFUSED
+a numeral changed in a definition's value (§.BoundedMeasurable.Family.energy)	REFUSED
+a binder kind changed (§.BoundedMeasurable.Family.energy_apply)	REFUSED
+a declaration missing from this pin's print (§.BoundedMeasurable.Family.energy_mean_eq_of_meanNorm_zero)	REFUSED
+a theorem turned into an axiom (§.BoundedMeasurable.Family.energy_mean_eq_of_meanNorm_zero)	REFUSED
+a truncated print	REFUSED
+the record lists a constant that does not differ	REFUSED
+CLASS_PARAMS Algebra.algebraMap: its argument 2 changed (§.BoundedMeasurable.avg_orbit_const)	REFUSED
+CLASS_PARAMS Algebra.algebraMap withdrawn (1 users)	SILENT
+EQSET: another head at a site (§.ConvexAverage.setIntegral_bm)	REFUSED
+EQSET withdrawn (2 lemmas)	REFUSED
+EQSET: §.ConvexAverage.setIntegral_bm taken out of the list	REFUSED
+ADAPTED_VALUE: §.CommutingSpectral.algebra_commRing's value changed outright	REFUSED FOR ANOTHER REASON
+PROOF_ONLY: §.BoundedMeasurable.mulLp's value changed	REFUSED
+PROOF_ONLY: the auxiliary named wrongly (§.BoundedMeasurable.mulLp._proof_99)	REFUSED
+TARGETS_HERE: §.Spectral.residual_fourier's full type changed in an instance argument	REFUSED
+TARGETS_HERE: §.proper_to_borel_weak's full type changed in an instance argument	REFUSED
+PIN-DIFFERENCE: the full type of §.CommutingSpectral.algebra_commCStar changed	REFUSED
+RENAMED without Set.ofPred	REFUSED
+PIN-DIFFERENCE: the full type of §.Spectral.instAddCommGroupRot changed	REFUSED
+PIN-DIFFERENCE: §.Spectral.instAddCommGroupRot taken out of the list	REFUSED
+EQSET: §.ConvexAverage.setIntegral_of_limit taken out of the list	REFUSED
+INSTANCE_EVIDENCE: §.CommutingSpectral.generator_unitary with no receipt	REFUSED
+INSTANCE_EVIDENCE: §.CommutingSpectral.generator_unitary's allowed constants withdrawn	REFUSED
+INSTANCE_EVIDENCE: another constant of the release's own in §.CommutingSpectral.generator_unitary's instance argument	REFUSED
+INSTANCE_EVIDENCE: the receipt's line for §.CommutingSpectral.generator_unitary reads FAILED	REFUSED
+TARGET_IN_LIBRARY: §.Spectral.residual_fourier taken out of the list	REFUSED
+TARGET_IN_LIBRARY: §.Spectral.residual_fourier with no receipt	REFUSED
+TARGET_IN_LIBRARY: a constant outside Mathlib in §.Spectral.residual_fourier's instance argument	REFUSED
+TARGET_IN_LIBRARY: a differing constant's USES line placed outside Mathlib (§.Spectral.residual_fourier)	REFUSED

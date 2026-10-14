@@ -1,0 +1,11 @@
+a constant changed in a statement (DFunLike.coe, in §.DifferenceInvariant.invariant)	REFUSED
+a numeral changed in a definition's value (§.CompactApproximation.Scalar)	REFUSED
+a binder kind changed (§.CompactApproximation.pi_dist_sq_le_sum)	REFUSED
+a declaration missing from this pin's print (§.CompactApproximation.vector_of_scalar)	REFUSED
+a theorem turned into an axiom (§.CompactApproximation.vector_of_scalar)	REFUSED
+a truncated print	REFUSED
+the record lists a constant that does not differ	REFUSED
+EQSET: another head at a site (§.KernelCompact.exists_invariant_set)	REFUSED
+EQSET withdrawn (1 lemmas)	REFUSED
+EQSET: §.KernelCompact.exists_invariant_set taken out of the list	REFUSED
+RENAMED without Set.ofPred	REFUSED

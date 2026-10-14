@@ -1,0 +1,115 @@
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:466:18: error: Application type mismatch: The argument
+  fun point => point + v
+has type
+  ℂ → ℂ
+of sort `Type` but is expected to have type
+  AEMeasurable ?m.6 ↑μ
+of sort `Prop` in the application
+  μ.map fun point => point + v
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:490:18: error: Application type mismatch: The argument
+  O
+has type
+  ℂ ≃ₗᵢ[ℝ] ℂ
+of sort `Type` but is expected to have type
+  AEMeasurable ?m.18 ↑μ
+of sort `Prop` in the application
+  μ.map O
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:507:2: warning: missing doc string for public field Embedding.hom
+
+Note: This linter can be disabled with `set_option linter.missingDocs false`
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:508:2: warning: missing doc string for public field Embedding.measurableEmbedding
+
+Note: This linter can be disabled with `set_option linter.missingDocs false`
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:646:6: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsProbabilityMeasure (Measure.map (fun d => e.coordinate (d / z)) (↑μ)[|e.coset z])
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:656:4: error: No goals to be solved
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:654:10: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:660:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:711:31: error: Application type mismatch: The argument
+  fun point => point + -v
+has type
+  ℂ → ℂ
+of sort `Type` but is expected to have type
+  AEMeasurable ?m.33 ↑(e.frequencyLaw μ z)
+of sort `Prop` in the application
+  (e.frequencyLaw μ z).map fun point => point + -v
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:718:39: error: Application type mismatch: The argument
+  Continuous.aemeasurable (Continuous.add_const continuous_id (-v))
+has type
+  AEMeasurable (fun x => id x + -v) ?m.134
+of sort `Prop` but is expected to have type
+  Measure ?m.100
+of sort `Type ?u.63` in the application
+  Measure.map_smul (↑μ (e.coset z))⁻¹ (Continuous.aemeasurable (Continuous.add_const continuous_id (-v)))
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:711:60: error: unsolved goals
+G : Type u_1
+inst✝³ : CommGroup G
+inst✝² : MeasurableSpace G
+e : Embedding G
+inst✝¹ : MeasurableMul₂ G
+inst✝ : MeasurableInv G
+μ : ProbabilityMeasure G
+z : G
+v : ℂ
+h : ↑μ (e.coset z) ≠ 0
+⊢ (↑μ (e.coset z))⁻¹ • e.frequencyMeasure (↑μ) (z * e.j v) =
+    Measure.map (fun t => t + -v) ((↑μ (e.coset z))⁻¹ • e.frequencyMeasure (↑μ) z)
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:740:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:845:26: error: Application type mismatch: The argument
+  T
+has type
+  G ≃* G
+of sort `Type u_1` but is expected to have type
+  AEMeasurable ?m.51 ↑μ
+of sort `Prop` in the application
+  μ.map T
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:846:31: error: Application type mismatch: The argument
+  O
+has type
+  ℂ ≃ₗᵢ[ℝ] ℂ
+of sort `Type` but is expected to have type
+  AEMeasurable ?m.60 ↑(e.frequencyLaw μ z)
+of sort `Prop` in the application
+  (e.frequencyLaw μ z).map O
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:848:32: error: Application type mismatch: The argument
+  T
+has type
+  G ≃* G
+of sort `Type u_1` but is expected to have type
+  AEMeasurable ?m.78 ↑μ
+of sort `Prop` in the application
+  μ.map T
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:854:25: error: Application type mismatch: The argument
+  Continuous.aemeasurable (LinearIsometryEquiv.continuous O)
+has type
+  AEMeasurable ⇑O ?m.166
+of sort `Prop` but is expected to have type
+  Measure ?m.135
+of sort `Type ?u.77` in the application
+  Measure.map_smul ?m.142 (Continuous.aemeasurable (LinearIsometryEquiv.continuous O))
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:846:36: error: unsolved goals
+G : Type u_1
+inst✝³ : CommGroup G
+inst✝² : MeasurableSpace G
+e : Embedding G
+inst✝¹ : MeasurableMul₂ G
+inst✝ : MeasurableInv G
+T : G ≃* G
+O : ℂ ≃ₗᵢ[ℝ] ℂ
+hT : Measurable ⇑T
+he : ∀ (t : ℂ), T (e.j t) = e.j (O t)
+μ : ProbabilityMeasure G
+z : G
+hz : ↑μ (e.coset z) ≠ 0
+⊢ (↑μ (e.coset z))⁻¹ • e.frequencyMeasure (Measure.map ⇑T ↑μ) (T z) =
+    Measure.map (⇑O) ((↑μ (e.coset z))⁻¹ • e.frequencyMeasure (↑μ) z)
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:861:20: error: Application type mismatch: The argument
+  T
+has type
+  G ≃* G
+of sort `Type u_1` but is expected to have type
+  AEMeasurable ?m.51 ↑μ
+of sort `Prop` in the application
+  μ.map T

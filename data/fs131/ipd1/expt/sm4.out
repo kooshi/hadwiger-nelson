@@ -1,0 +1,474 @@
+slot: admitted ipd1: mem 6 GiB (hard cap), cpus 0,1
+@[implicit_reducible] def HadwigerNelson.Outside.OAI158.CommutingSpectral.algebra_commRing.{u_1, u_2} : {G : Type u_1} →
+  {H : Type u_2} →
+    [inst : CommGroup G] →
+      [inst_1 : NormedAddCommGroup H] →
+        [inst_2 :
+            @InnerProductSpace Complex H Complex.instRCLike (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)] →
+          [inst_3 :
+              @CompleteSpace H
+                (@PseudoMetricSpace.toUniformSpace H
+                  (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                    (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)))] →
+            (U :
+                @MonoidHom G
+                  (↥(@unitary
+                      (@ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
+                        (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) H
+                        (@UniformSpace.toTopologicalSpace H
+                          (@PseudoMetricSpace.toUniformSpace H
+                            (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+                        (@AddCommGroup.toAddCommMonoid H
+                          (@IsAddCommutative.instAddCommGroup H
+                            (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+                        H
+                        (@UniformSpace.toTopologicalSpace H
+                          (@PseudoMetricSpace.toUniformSpace H
+                            (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+                        (@AddCommGroup.toAddCommMonoid H
+                          (@IsAddCommutative.instAddCommGroup H
+                            (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+                        (@NormedSpace.toModule Complex H Complex.instNormedField
+                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+                          (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2))
+                        (@NormedSpace.toModule Complex H Complex.instNormedField
+                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+                          (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2)))
+                      (@Semiring.toMonoid
+                        (@ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
+                          (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) H
+                          (@UniformSpace.toTopologicalSpace H
+                            (@PseudoMetricSpace.toUniformSpace H
+                              (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+                          (@AddCommGroup.toAddCommMonoid H
+                            (@IsAddCommutative.instAddCommGroup H
+                              (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+                          H
+                          (@UniformSpace.toTopologicalSpace H
+                            (@PseudoMetricSpace.toUniformSpace H
+                              (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+                          (@AddCommGroup.toAddCommMonoid H
+                            (@IsAddCommutative.instAddCommGroup H
+                              (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+                          (@NormedSpace.toModule Complex H Complex.instNormedField
+                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+                            (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2))
+                          (@NormedSpace.toModule Complex H Complex.instNormedField
+                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+                            (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2)))
+                        (@ContinuousLinearMap.semiring Complex Complex.instSemiring H
+                          (@UniformSpace.toTopologicalSpace H
+                            (@PseudoMetricSpace.toUniformSpace H
+                              (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+                          (@AddCommGroup.toAddCommMonoid H
+                            (@IsAddCommutative.instAddCommGroup H
+                              (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+                          (@NormedSpace.toModule Complex H Complex.instNormedField
+                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+                            (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2))
+                          ⋯))
+                      (@ContinuousLinearMap.instStarMulId Complex H Complex.instRCLike inst_1 inst_2 inst_3)))
+                  (@MulOneClass.toMulOne G
+                    (@Monoid.toMulOneClass G
+                      (@DivInvMonoid.toMonoid G (@Group.toDivInvMonoid G (@CommGroup.toGroup G inst)))))
+                  (@MulOneClass.toMulOne
+                    (↥(@unitary
+                        (@ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
+                          (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) H
+                          (@UniformSpace.toTopologicalSpace H
+                            (@PseudoMetricSpace.toUniformSpace H
+                              (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+                          (@AddCommGroup.toAddCommMonoid H
+                            (@IsAddCommutative.instAddCommGroup H
+                              (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+                          H
+                          (@UniformSpace.toTopologicalSpace H
+                            (@PseudoMetricSpace.toUniformSpace H
+                              (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+                          (@AddCommGroup.toAddCommMonoid H
+                            (@IsAddCommutative.instAddCommGroup H
+                              (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+                          (@NormedSpace.toModule Complex H Complex.instNormedField
+                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+                            (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2))
+                          (@NormedSpace.toModule Complex H Complex.instNormedField
+                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+                            (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2)))
+                        (@Semiring.toMonoid
+                          (@ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
+                            (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) H
+                            (@UniformSpace.toTopologicalSpace H
+                              (@PseudoMetricSpace.toUniformSpace H
+                                (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+                            (@AddCommGroup.toAddCommMonoid H
+                              (@IsAddCommutative.instAddCommGroup H
+                                (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+                            H
+                            (@UniformSpace.toTopologicalSpace H
+                              (@PseudoMetricSpace.toUniformSpace H
+                                (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+                            (@AddCommGroup.toAddCommMonoid H
+                              (@IsAddCommutative.instAddCommGroup H
+                                (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+                            (@NormedSpace.toModule Complex H Complex.instNormedField
+                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+                              (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2))
+                            (@NormedSpace.toModule Complex H Complex.instNormedField
+                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+                              (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2)))
+                          (@ContinuousLinearMap.semiring Complex Complex.instSemiring H
+                            (@UniformSpace.toTopologicalSpace H
+                              (@PseudoMetricSpace.toUniformSpace H
+                                (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+                            (@AddCommGroup.toAddCommMonoid H
+                              (@IsAddCommutative.instAddCommGroup H
+                                (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+                            (@NormedSpace.toModule Complex H Complex.instNormedField
+                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+                              (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2))
+                            ⋯))
+                        (@ContinuousLinearMap.instStarMulId Complex H Complex.instRCLike inst_1 inst_2 inst_3)))
+                    (@Submonoid.toMulOneClass
+                      (@ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
+                        (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) H
+                        (@UniformSpace.toTopologicalSpace H
+                          (@PseudoMetricSpace.toUniformSpace H
+                            (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+                        (@AddCommGroup.toAddCommMonoid H
+                          (@IsAddCommutative.instAddCommGroup H
+                            (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+                        H
+                        (@UniformSpace.toTopologicalSpace H
+                          (@PseudoMetricSpace.toUniformSpace H
+                            (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+                        (@AddCommGroup.toAddCommMonoid H
+                          (@IsAddCommutative.instAddCommGroup H
+                            (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+                        (@NormedSpace.toModule Complex H Complex.instNormedField
+                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+                          (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2))
+                        (@NormedSpace.toModule Complex H Complex.instNormedField
+                          (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+                          (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2)))
+                      (@Monoid.toMulOneClass
+                        (@ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
+                          (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) H
+                          (@UniformSpace.toTopologicalSpace H
+                            (@PseudoMetricSpace.toUniformSpace H
+                              (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+                          (@AddCommGroup.toAddCommMonoid H
+                            (@IsAddCommutative.instAddCommGroup H
+                              (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+                          H
+                          (@UniformSpace.toTopologicalSpace H
+                            (@PseudoMetricSpace.toUniformSpace H
+                              (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+                          (@AddCommGroup.toAddCommMonoid H
+                            (@IsAddCommutative.instAddCommGroup H
+                              (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+                          (@NormedSpace.toModule Complex H Complex.instNormedField
+                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+                            (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2))
+                          (@NormedSpace.toModule Complex H Complex.instNormedField
+                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+                            (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2)))
+                        (@Semiring.toMonoid
+                          (@ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
+                            (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) H
+                            (@UniformSpace.toTopologicalSpace H
+                              (@PseudoMetricSpace.toUniformSpace H
+                                (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+                            (@AddCommGroup.toAddCommMonoid H
+                              (@IsAddCommutative.instAddCommGroup H
+                                (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+                            H
+                            (@UniformSpace.toTopologicalSpace H
+                              (@PseudoMetricSpace.toUniformSpace H
+                                (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+                            (@AddCommGroup.toAddCommMonoid H
+                              (@IsAddCommutative.instAddCommGroup H
+                                (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+                            (@NormedSpace.toModule Complex H Complex.instNormedField
+                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+                              (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2))
+                            (@NormedSpace.toModule Complex H Complex.instNormedField
+                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+                              (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2)))
+                          (@ContinuousLinearMap.semiring Complex Complex.instSemiring H
+                            (@UniformSpace.toTopologicalSpace H
+                              (@PseudoMetricSpace.toUniformSpace H
+                                (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+                            (@AddCommGroup.toAddCommMonoid H
+                              (@IsAddCommutative.instAddCommGroup H
+                                (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+                            (@NormedSpace.toModule Complex H Complex.instNormedField
+                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+                              (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2))
+                            ⋯)))
+                      (@unitary
+                        (@ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
+                          (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) H
+                          (@UniformSpace.toTopologicalSpace H
+                            (@PseudoMetricSpace.toUniformSpace H
+                              (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+                          (@AddCommGroup.toAddCommMonoid H
+                            (@IsAddCommutative.instAddCommGroup H
+                              (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+                          H
+                          (@UniformSpace.toTopologicalSpace H
+                            (@PseudoMetricSpace.toUniformSpace H
+                              (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+                          (@AddCommGroup.toAddCommMonoid H
+                            (@IsAddCommutative.instAddCommGroup H
+                              (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+                          (@NormedSpace.toModule Complex H Complex.instNormedField
+                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+                            (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2))
+                          (@NormedSpace.toModule Complex H Complex.instNormedField
+                            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+                            (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2)))
+                        (@Semiring.toMonoid
+                          (@ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
+                            (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) H
+                            (@UniformSpace.toTopologicalSpace H
+                              (@PseudoMetricSpace.toUniformSpace H
+                                (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+                            (@AddCommGroup.toAddCommMonoid H
+                              (@IsAddCommutative.instAddCommGroup H
+                                (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+                            H
+                            (@UniformSpace.toTopologicalSpace H
+                              (@PseudoMetricSpace.toUniformSpace H
+                                (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+                            (@AddCommGroup.toAddCommMonoid H
+                              (@IsAddCommutative.instAddCommGroup H
+                                (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+                            (@NormedSpace.toModule Complex H Complex.instNormedField
+                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+                              (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2))
+                            (@NormedSpace.toModule Complex H Complex.instNormedField
+                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+                              (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2)))
+                          (@ContinuousLinearMap.semiring Complex Complex.instSemiring H
+                            (@UniformSpace.toTopologicalSpace H
+                              (@PseudoMetricSpace.toUniformSpace H
+                                (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+                            (@AddCommGroup.toAddCommMonoid H
+                              (@IsAddCommutative.instAddCommGroup H
+                                (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+                            (@NormedSpace.toModule Complex H Complex.instNormedField
+                              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+                              (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2))
+                            ⋯))
+                        (@ContinuousLinearMap.instStarMulId Complex H Complex.instRCLike inst_1 inst_2 inst_3))))) →
+              CommRing ↥(@HadwigerNelson.Outside.OAI158.CommutingSpectral.algebra G H inst inst_1 inst_2 inst_3 U) :=
+fun {G} {H} [inst : CommGroup G] [inst_1 : NormedAddCommGroup H]
+    [inst_2 : @InnerProductSpace Complex H Complex.instRCLike (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)]
+    [inst_3 :
+      @CompleteSpace H
+        (@PseudoMetricSpace.toUniformSpace H
+          (@SeminormedAddCommGroup.toPseudoMetricSpace H (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)))]
+    U =>
+  have this := ⋯;
+  @inferInstance (CommRing ↥(@HadwigerNelson.Outside.OAI158.CommutingSpectral.algebra G H inst inst_1 inst_2 inst_3 U))
+    (@IsMulCommutative.instCommRing
+      (↥(@HadwigerNelson.Outside.OAI158.CommutingSpectral.algebra G H inst inst_1 inst_2 inst_3 U))
+      (@SubringClass.toRing
+        (@StarSubalgebra Complex
+          (@ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
+            (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) H
+            (@UniformSpace.toTopologicalSpace H
+              (@PseudoMetricSpace.toUniformSpace H
+                (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+            (@AddCommGroup.toAddCommMonoid H
+              (@IsAddCommutative.instAddCommGroup H
+                (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+            H
+            (@UniformSpace.toTopologicalSpace H
+              (@PseudoMetricSpace.toUniformSpace H
+                (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+            (@AddCommGroup.toAddCommMonoid H
+              (@IsAddCommutative.instAddCommGroup H
+                (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+            (@NormedSpace.toModule Complex H Complex.instNormedField
+              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+              (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2))
+            (@NormedSpace.toModule Complex H Complex.instNormedField
+              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+              (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2)))
+          Complex.instCommSemiring Complex.instStarRing
+          (@ContinuousLinearMap.semiring Complex Complex.instSemiring H
+            (@UniformSpace.toTopologicalSpace H
+              (@PseudoMetricSpace.toUniformSpace H
+                (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+            (@AddCommGroup.toAddCommMonoid H
+              (@IsAddCommutative.instAddCommGroup H
+                (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+            (@NormedSpace.toModule Complex H Complex.instNormedField
+              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+              (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2))
+            ⋯)
+          (@ContinuousLinearMap.instStarRingId Complex H Complex.instRCLike inst_1 inst_2 inst_3)
+          (@ContinuousLinearMap.algebra Complex Complex H Complex.instSemiring
+            (@UniformSpace.toTopologicalSpace H
+              (@PseudoMetricSpace.toUniformSpace H
+                (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+            (@IsAddCommutative.instAddCommGroup H
+              (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯)
+            (@NormedSpace.toModule Complex H Complex.instNormedField
+              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+              (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2))
+            Complex.instCommSemiring
+            (@NormedSpace.toModule Complex H Complex.instNormedField
+              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+              (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2))
+            ⋯ (@instSMulOfMul Complex Complex.instMul) ⋯ ⋯ ⋯)
+          ⋯)
+        (@HadwigerNelson.Outside.OAI158.CommutingSpectral.algebra G H inst inst_1 inst_2 inst_3 U)
+        (@ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
+          (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) H
+          (@UniformSpace.toTopologicalSpace H
+            (@PseudoMetricSpace.toUniformSpace H
+              (@SeminormedAddCommGroup.toPseudoMetricSpace H (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+          (@AddCommGroup.toAddCommMonoid H
+            (@IsAddCommutative.instAddCommGroup H
+              (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+          H
+          (@UniformSpace.toTopologicalSpace H
+            (@PseudoMetricSpace.toUniformSpace H
+              (@SeminormedAddCommGroup.toPseudoMetricSpace H (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+          (@AddCommGroup.toAddCommMonoid H
+            (@IsAddCommutative.instAddCommGroup H
+              (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+          (@NormedSpace.toModule Complex H Complex.instNormedField
+            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+            (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2))
+          (@NormedSpace.toModule Complex H Complex.instNormedField
+            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+            (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2)))
+        (@ContinuousLinearMap.ring Complex Complex.instRing H
+          (@UniformSpace.toTopologicalSpace H
+            (@PseudoMetricSpace.toUniformSpace H
+              (@SeminormedAddCommGroup.toPseudoMetricSpace H (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+          (@NormedAddCommGroup.toAddCommGroup H inst_1)
+          (@NormedSpace.toModule Complex H Complex.instNormedField
+            (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+            (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2))
+          ⋯)
+        (@StarSubalgebra.setLike Complex
+          (@ContinuousLinearMap Complex Complex Complex.instSemiring Complex.instSemiring
+            (@RingHom.id Complex (@Semiring.toNonAssocSemiring Complex Complex.instSemiring)) H
+            (@UniformSpace.toTopologicalSpace H
+              (@PseudoMetricSpace.toUniformSpace H
+                (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+            (@AddCommGroup.toAddCommMonoid H
+              (@IsAddCommutative.instAddCommGroup H
+                (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+            H
+            (@UniformSpace.toTopologicalSpace H
+              (@PseudoMetricSpace.toUniformSpace H
+                (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+            (@AddCommGroup.toAddCommMonoid H
+              (@IsAddCommutative.instAddCommGroup H
+                (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+            (@NormedSpace.toModule Complex H Complex.instNormedField
+              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+              (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2))
+            (@NormedSpace.toModule Complex H Complex.instNormedField
+              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+              (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2)))
+          Complex.instCommSemiring Complex.instStarRing
+          (@ContinuousLinearMap.semiring Complex Complex.instSemiring H
+            (@UniformSpace.toTopologicalSpace H
+              (@PseudoMetricSpace.toUniformSpace H
+                (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+            (@AddCommGroup.toAddCommMonoid H
+              (@IsAddCommutative.instAddCommGroup H
+                (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯))
+            (@NormedSpace.toModule Complex H Complex.instNormedField
+              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+              (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2))
+            ⋯)
+          (@ContinuousLinearMap.instStarRingId Complex H Complex.instRCLike inst_1 inst_2 inst_3)
+          (@ContinuousLinearMap.algebra Complex Complex H Complex.instSemiring
+            (@UniformSpace.toTopologicalSpace H
+              (@PseudoMetricSpace.toUniformSpace H
+                (@SeminormedAddCommGroup.toPseudoMetricSpace H
+                  (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1))))
+            (@IsAddCommutative.instAddCommGroup H
+              (@NormedAddGroup.toAddGroup H (@NormedAddCommGroup.toNormedAddGroup H inst_1)) ⋯)
+            (@NormedSpace.toModule Complex H Complex.instNormedField
+              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+              (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2))
+            Complex.instCommSemiring
+            (@NormedSpace.toModule Complex H Complex.instNormedField
+              (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1)
+              (@InnerProductSpace.toNormedSpace Complex H Complex.instRCLike
+                (@NormedAddCommGroup.toSeminormedAddCommGroup H inst_1) inst_2))
+            ⋯ (@instSMulOfMul Complex Complex.instMul) ⋯ ⋯ ⋯)
+          ⋯)
+        ⋯)
+      ⋯)

@@ -1,0 +1,8 @@
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 4,5
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:698:6: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsProbabilityMeasure (Measure.map (fun d => e.coordinate (d / z)) (↑μ)[|e.coset z])
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:708:4: error: No goals to be solved
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:706:10: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Outside/OAI158Centers.lean:712:8: warning: declaration uses `sorry`

@@ -1,0 +1,8 @@
+  SAME  the record as committed: rows
+  SAME  the record as committed: failing, fatal, recorded constants
+  SAME  no record: rows
+  SAME  no record: failing, fatal, recorded constants
+  SAME  a block removed (§.Amenable.Mean.vector_orbit_invariant): failing, fatal
+  SAME  truncated at half its lines: failing, fatal
+  AS DESIGNED  a block printed twice (§.Amenable.Mean.vector_orbit_invariant): in-memory as unplanted (0 failing, 1 fatal); streaming as unplanted and one more fatal: ["this pin's print holds 1 block(s) out of the row order (a label printed twice, out of order, or not a row): ['§.Amenable.Mean.vector_orbit_invariant']"]
+EQUIVALENCE OK: laneB1

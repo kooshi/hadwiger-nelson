@@ -1,0 +1,2 @@
+slot: waiting (ledger 14 + 10 > budget 22 GiB)
+slot: admitted ipb1: mem 10 GiB (hard cap), cpus 4,5

@@ -1,0 +1,26 @@
+slot: admitted ipd1: mem 6 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Outside/OAI158Ergodicity.lean:349:6: error(lean.unknownIdentifier): Unknown identifier `eventuallyEmptyOrUniv_iff`
+Proofs/HadwigerNelson/Outside/OAI158Ergodicity.lean:323:25: error: unsolved goals
+X : Type u_1
+inst✝⁶ : MeasurableSpace X
+inst✝⁵ : MeasurableSpace.CountablyGenerated X
+G : Type u_2
+inst✝⁴ : AddCommGroup G
+inst✝³ : AddAction G X
+inst✝² : MeasurableConstVAdd G X
+μ : Measure X
+inst✝¹ : IsProbabilityMeasure μ
+inst✝ : VAddInvariantMeasure G X μ
+A : Finset ℕ → ℕ → ConvexAverage G
+c : Finset ℕ → ℂ
+hA : ∀ (i : Finset ℕ), ∀ᵐ (x : X) ∂μ, Tendsto (fun n => ↑((A i n).bm (test X i)) x) atTop (𝓝 (c i))
+s : Set X
+hs : MeasurableSet s
+hinv : ∀ (g : G), (fun x => g +ᵥ x) ⁻¹' s =ᵐ[μ] s
+hall : ∀ (i : Finset ℕ), ∫ (x : X), ↑(test X i) x ∂μ = c i
+htest : ∀ (i : Finset ℕ), (μ.restrict s).real (testSet X i) = μ.real s * μ.real (testSet X i)
+he : μ.restrict s = μ s • μ
+hr : μ.real s = μ.real s * μ.real s
+hz : μ.real s = 0 ∨ μ.real s = 1
+⊢ EventuallyConst s (ae μ)
+Proofs/HadwigerNelson/Outside/OAI158Ergodicity.lean:377:2: error(lean.unknownIdentifier): Unknown constant `Measurable.of_eval`

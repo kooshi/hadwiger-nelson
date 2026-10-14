@@ -1,0 +1,4 @@
+slot: admitted ko1: mem 6 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Outside/OAI158Representations.lean:148:13: error(lean.unknownIdentifier): Unknown constant `Set.ofPred_forall`
+Proofs/HadwigerNelson/Outside/OAI158Representations.lean:148:2: error: `simp` made no progress
+Proofs/HadwigerNelson/Outside/OAI158Representations.lean:461:47: error(lean.unknownIdentifier): Unknown constant `Complex.isometry_ofReal.lipschitzWith.comp`

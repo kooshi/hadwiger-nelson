@@ -1,0 +1,35 @@
+{
+ "global_instances": [
+  [
+   38,
+   "global: on a type built from the release's own definition: `D := PontryaginDual DiscreteE` (`Basic.lean:48`), `DiscreteE` the release's `def`; a search reaches it only at that argument (as `Basic.lean:62`'s instance on `D`, global by the trial's table)"
+  ]
+ ],
+ "patches": [
+  [
+   130,
+   "(Complex.isIntegral_I ℚ)",
+   "Complex.isIntegral_rat_I",
+   "Mathlib generalized `Complex.isIntegral_rat_I : IsIntegral ℚ I` to `Complex.isIntegral_I (R) : IsIntegral R I` on 2026-08-06 (at v4.34.1 the old name is a deprecated alias of it: `Mathlib/Analysis/Complex/IsIntegral.lean:31`); at v4.32.0 the lemma is `Complex.isIntegral_rat_I` (`IsIntegral.lean` here), the same statement at `R = ℚ`"
+  ],
+  [
+   133,
+   "(Complex.isIntegral_I ℚ)",
+   "Complex.isIntegral_rat_I",
+   "Mathlib generalized `Complex.isIntegral_rat_I : IsIntegral ℚ I` to `Complex.isIntegral_I (R) : IsIntegral R I` on 2026-08-06 (at v4.34.1 the old name is a deprecated alias of it: `Mathlib/Analysis/Complex/IsIntegral.lean:31`); at v4.32.0 the lemma is `Complex.isIntegral_rat_I` (`IsIntegral.lean` here), the same statement at `R = ℚ`"
+  ],
+  [
+   254,
+   "Set.preimage_ofPred_eq",
+   "Set.preimage_setOf_eq",
+   "Mathlib renamed `Set.preimage_setOf_eq` to `Set.preimage_ofPred_eq` with the rest of `setOf`'s lemmas on 2026-07-09 (`LEAN.md` § Searching — Lean); at v4.32.0 the lemma is `Set.preimage_setOf_eq` (`Mathlib/Data/Set/Image.lean:103` at both pins), the same statement"
+  ]
+ ],
+ "nolint": [
+  [
+   "HadwigerNelson.Outside.OAI158.Spectral.instMeasurableSpaceCircle_proofs",
+   "defsWithUnderscore",
+   "name"
+  ]
+ ]
+}

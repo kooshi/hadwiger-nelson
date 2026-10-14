@@ -1,0 +1,27 @@
+OK: OAI158Basic.lean is the generated text, 928 lines, sha256 bb74393f75116598
+OK: OAI158InvariantMean.lean is the generated text, 1234 lines, sha256 55d8909d33724d93
+OK: OAI158NumberFields.lean is the generated text, 613 lines, sha256 e17170401cca88bb
+OK: OAI158PhaseEncoding.lean is the generated text, 316 lines, sha256 e3130464dca179b1
+OK: OAI158SmallArcs.lean is the generated text, 379 lines, sha256 42be643fa45e14f5
+OK: OAI158Amenability.lean is the generated text, 501 lines, sha256 c817f76751333f29
+OK: OAI158Centers.lean is the generated text, 952 lines, sha256 716fa0f5b1d23a77
+OK: OAI158Characters.lean is the generated text, 654 lines, sha256 7788a144375d9b2d
+OK: OAI158PhaseCollision.lean is the generated text, 592 lines, sha256 2bd6a0ed5f1942a2
+OK: OAI158Selections.lean is the generated text, 487 lines, sha256 ff1516b5f4398f92
+OK: OAI158RelativeCenters.lean is the generated text, 739 lines, sha256 5446daecd1bef9a2
+OK: OAI158Multipliers.lean is the generated text, 388 lines, sha256 7f53d81d05c009e6
+OK: OAI158ConditionalSelection.lean is the generated text, 510 lines, sha256 ec37eed9185bc759
+OK: OAI158FourierTests.lean is the generated text, 360 lines, sha256 9535b3165e49fd69
+OK: OAI158ConditionalSpectrum.lean is the generated text, 582 lines, sha256 ceffec7e7bfb4c68
+OK: OAI158Approximation.lean is the generated text, 581 lines, sha256 5a78e20e40509f98
+OK: OAI158ConditionalLimits.lean is the generated text, 818 lines, sha256 fd04f7bd1e75d778
+OK: OAI158Kernels.lean is the generated text, 869 lines, sha256 a7fa06f57c20ab3a
+OK: OAI158BoundedFunctions.lean is the generated text, 311 lines, sha256 7f8cc8613dbebcd4
+OK: OAI158Functions.lean is the generated text, 985 lines, sha256 4b25236e90582f6f
+OK: OAI158Factors.lean is the generated text, 760 lines, sha256 a505435e2fe85392
+OK: OAI158RelativeProducts.lean is the generated text, 591 lines, sha256 c99276156758cfab
+OK: OAI158Separability.lean is the generated text, 698 lines, sha256 dba4cea2abd3a661
+OK: OAI158Stationary.lean is the generated text, 268 lines, sha256 38d955a7efb5a933
+OK: OAI158AlgebraModels.lean is the generated text, 743 lines, sha256 76bd29c59a3bbef3
+OK: OAIMath2026-LICENSE.txt is the release's LICENSE byte for byte, sha256 c71d239df91726fc
+CHECK OK

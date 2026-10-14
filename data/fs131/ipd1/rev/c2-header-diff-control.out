@@ -1,0 +1,4 @@
+control 'a code line changed': REPORTED (must be REPORTED)
+control 'item 2 of the header changed': REPORTED (must be REPORTED)
+control 'item 1 changed (the partner: inside what may differ)': PASSED (must be PASSED)
+CONTROL OK
