@@ -131,3 +131,24 @@ real places decidable (`Fintype` of a subtype): `eventually_archTop` and `norm_a
 Classical in`, and the proofs that read the norm open `classical`.
 
 **Re-priced from M10:** about 0.4 of the plan; the hard leaf, by a shorter route, about 100 lines.
+
+## Stage 4 — SAVED: M2a, `Rigidity/Herglotz`, all three leaves (elaborated; the build is the next stage)
+
+Against a copy (`data/fs131/ij1/work/Herglotz.lean`; rounds `logs/M2a-1.log` … `M2a-8.log`, the last exit 0 with **no
+warning**), copied over the module; `git diff -U0` removes the three `sorry` lines and nothing else. One import added:
+`Mathlib.MeasureTheory.Measure.Prokhorov` (finite measures and their compactness); whether it moved a stored instance is
+stage 5's dump. About 330 lines against the plan's 600–900 (about 0.45).
+
+| leaf | route as planned? |
+|---|---|
+| `exists_almostInvariant_weights` | **another route, shorter** (no convolutions, no Young's inequality): for a surjection `g : ℕ → G`, `ν_n` is the push-forward of the counting measure of the box `{0,…,n}^n` by `a ↦ Σ_j a_j g_j`, and `w_n = √ν_n`; then `Σ w_n² = 1` fibre by fibre, `Σ_x w(x)w(x + z) ≤ 1` by `ab ≤ (a² + b²)/2`, and `≥ n/(n+1)` once `z = g_m`, `m < n`, because `√(ν(x)ν(x+g_m)) ≥ #{a : a_m < n, Σ a_j g_j = x}/#box` (the vectors whose `m`-th exponent can grow inject into both fibres) and those vectors are `n/(n+1)` of the box |
+| `exists_fejer_measures` | yes: `q_n(χ) = Σ_{x,x'} w x w x' C(x − x') χ(x' − x)` is `hC`'s sum at `z x = w x χ(−x)`, so real and `≥ 0`; `σ_n = dualHaar.withDensity (q_n)₊`; its coefficients `C(r) Σ_x w(x)w(x − r)` by orthogonality (`isHaarFourier_dualHaar`); mass the coefficient at `0` |
+| `exists_fourier_eq_of_tendsto` | yes, with a **cluster point** in place of a subsequence (no metrizability of the space of measures): `isCompact_setOf_finiteMeasure_le_of_compactSpace`, `IsCompact.exists_clusterPt`, the coefficient map continuous on `FiniteMeasure` (`tendsto_iff_forall_integral_rclike_tendsto` at `ℂ`), `ClusterPt.map`, `eq_of_nhds_neBot` |
+
+**Private helpers** (9): `wBox`, `wPt`, `wCnt` (private definitions: the box, its points, the fibre counts),
+`wPt_add_single`, `card_wBox_pos`, `card_wBox_lt`, `fejer_sum_eq`, `integral_dualHaar_eval`, `integrable_dualHaar_eval`,
+`integral_fejer`. With them **`bochnerHerglotz_of_countable : BochnerHerglotz G`** has no leaf below it in its module
+(axioms in stage 5).
+
+**Re-priced:** M2a at about 0.45 of its plan, M10 at about 0.4. M3 (plan 500–800) at these rates is about 250–350 lines; M2b
+(plan 2,000–2,500) about 900–1,100.

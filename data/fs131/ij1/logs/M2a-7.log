@@ -1,0 +1,92 @@
+slot: waiting (ledger 22 + 4 > budget 22 GiB)
+slot: admitted ij1: mem 4 GiB (hard cap), cpus 0,1
+data/fs131/ij1/work/Herglotz.lean:220:35: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  star
+in the target expression
+  ↑(w x) * ↑(χ (-x)) * ((starRingEnd ℂ) ↑(w x') * (starRingEnd ℂ) ↑(χ (-x'))) * C (x - x') =
+    ↑(w x) * ↑(w x') * C (x - x') * ↑(χ (x' - x))
+
+G : Type u_2
+inst✝ : AddCommGroup G
+C : G → ℂ
+w : G →₀ ℝ
+χ : AddChar G Circle
+x : G
+x✝¹ : x ∈ w.support
+x' : G
+x✝ : x' ∈ w.support
+⊢ ↑(w x) * ↑(χ (-x)) * ((starRingEnd ℂ) ↑(w x') * (starRingEnd ℂ) ↑(χ (-x'))) * C (x - x') =
+    ↑(w x) * ↑(w x') * C (x - x') * ↑(χ (x' - x))
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    χ (-x)
+  has type
+    Circle
+  but is expected to have type
+    ↥(Submonoid.unitSphere ℂ)
+  in the application
+    ↑(χ (-x))
+data/fs131/ij1/work/Herglotz.lean:226:35: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Decidable (s = 0)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/ij1/work/Herglotz.lean:227:2: error: Tactic `split_ifs` failed: no if-then-else conditions to split
+
+G : Type u_2
+inst✝¹ : AddCommGroup G
+inst✝ : Countable G
+s : G
+⊢ ∫ (χ : AddChar G Circle), ↑(χ s) ∂dualHaar G = sorry
+data/fs131/ij1/work/Herglotz.lean:238:16: warning: declaration uses `sorry`
+data/fs131/ij1/work/Herglotz.lean:325:22: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?ψ 0
+in the target expression
+  ∫ (χ : AddChar G Circle), ↑(χ 0) ∂σ n = C 0
+
+case refine_1
+G : Type u_1
+inst✝¹ : AddCommGroup G
+inst✝ : Countable G
+C : G → ℂ
+hC : PosDef C
+w : ℕ → G →₀ ℝ
+hw1 : ∀ (n : ℕ), ∑ x ∈ (w n).support, (w n) x ^ 2 = 1
+hwt : ∀ (z : G), Tendsto (fun n => ∑ x ∈ (w n).support, (w n) x * (w n) (x + z)) atTop (𝓝 1)
+q : ℕ → AddChar G Circle → ℂ :=
+  fun n χ => ∑ x ∈ (w n).support, ∑ x' ∈ (w n).support, ↑((w n) x) * ↑((w n) x') * C (x - x') * ↑(χ (x' - x))
+hq : q = fun n χ => ∑ x ∈ (w n).support, ∑ x' ∈ (w n).support, ↑((w n) x) * ↑((w n) x') * C (x - x') * ↑(χ (x' - x))
+hq_pos : ∀ (n : ℕ) (χ : AddChar G Circle), (q n χ).im = 0 ∧ 0 ≤ (q n χ).re
+hq_real : ∀ (n : ℕ) (χ : AddChar G Circle), ↑(q n χ).re = q n χ
+hq_meas : ∀ (n : ℕ), Measurable (q n)
+d : ℕ → AddChar G Circle → NNReal := fun n χ => (q n χ).re.toNNReal
+hd_def : d = fun n χ => (q n χ).re.toNNReal
+hd : ∀ (n : ℕ) (χ : AddChar G Circle), ↑↑(d n χ) = q n χ
+hd_meas : ∀ (n : ℕ), Measurable (d n)
+σ : ℕ → Measure (AddChar G Circle) := fun n => (dualHaar G).withDensity fun χ => ↑(d n χ)
+hσ : σ = fun n => (dualHaar G).withDensity fun χ => ↑(d n χ)
+hcoef :
+  ∀ (n : ℕ) (r : G), ∫ (χ : AddChar G Circle), ↑(χ r) ∂σ n = C r * ∑ x ∈ (w n).support, ↑((w n) x) * ↑((w n) (x - r))
+hbound :
+  ∀ (n : ℕ) (χ : AddChar G Circle),
+    ‖↑(d n χ)‖ ≤ ∑ x ∈ (w n).support, ∑ x' ∈ (w n).support, ‖↑((w n) x) * ↑((w n) x') * C (x - x')‖
+hfin : ∀ (n : ℕ), IsFiniteMeasure (σ n)
+hsq : ∀ (n : ℕ), ∑ x ∈ (w n).support, ↑((w n) x) * ↑((w n) (x - 0)) = 1
+n : ℕ
+this : IsFiniteMeasure (σ n)
+h0 : ∫ (χ : AddChar G Circle), ↑(χ 0) ∂σ n = C 0
+⊢ (σ n) Set.univ = ENNReal.ofReal (C 0).re
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    χ 0
+  has type
+    Circle
+  but is expected to have type
+    ↥(Submonoid.unitSphere ℂ)
+  in the application
+    ↑(χ 0)
+seconds=42
+exit=1

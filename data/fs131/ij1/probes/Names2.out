@@ -1,0 +1,49 @@
+slot: waiting (ledger 20 + 4 > budget 22 GiB)
+slot: waiting (ledger 22 + 4 > budget 22 GiB)
+slot: admitted ij1: mem 4 GiB (hard cap), cpus 3,4
+exists_surjective_nat : ∀ (α : Sort u_1) [Nonempty α] [Countable α], ∃ f, Function.Surjective f
+@Fintype.card_piFinset : ∀ {ι : Type u_1} {α : ι → Type u_2} [inst : DecidableEq ι] [inst_1 : Fintype ι]
+  (s : (i : ι) → Finset (α i)), (Fintype.piFinset s).card = ∏ i, (s i).card
+@Finset.card_eq_sum_card_fiberwise : ∀ {ι : Type u_1} {M : Type u_2} [inst : DecidableEq M] {f : ι → M} {s : Finset ι}
+  {t : Finset M}, Set.MapsTo f ↑s ↑t → s.card = ∑ b ∈ t, {a ∈ s | f a = b}.card
+@Finset.mul_prod_erase : ∀ {ι : Type u_1} {M : Type u_2} [inst : CommMonoid M] [inst_1 : DecidableEq ι] (s : Finset ι)
+  (f : ι → M) {a : ι}, a ∈ s → f a * ∏ x ∈ s.erase a, f x = ∏ x ∈ s, f x
+@Finsupp.onFinset : {α : Type u_1} →
+  {M : Type u_2} → [inst : Zero M] → (s : Finset α) → (f : α → M) → (∀ (a : α), f a ≠ 0 → a ∈ s) → α →₀ M
+@Finsupp.support_onFinset : ∀ {α : Type u_1} {M : Type u_2} [inst : Zero M] [inst_1 : DecidableEq M] {s : Finset α}
+  {f : α → M} (hf : ∀ (a : α), f a ≠ 0 → a ∈ s), (Finsupp.onFinset s f hf).support = {a ∈ s | f a ≠ 0}
+@tendsto_natCast_div_add_atTop : ∀ {𝕜 : Type u_1} [inst : DivisionSemiring 𝕜] [inst_1 : TopologicalSpace 𝕜]
+  [inst_2 : CharZero 𝕜] [ContinuousSMul ℚ≥0 𝕜] [IsTopologicalSemiring 𝕜] [ContinuousInv₀ 𝕜] (x : 𝕜),
+  Filter.Tendsto (fun n => ↑n / (↑n + x)) Filter.atTop (nhds 1)
+@tendsto_of_tendsto_of_tendsto_of_le_of_le' : ∀ {α : Type u_1} {β : Type u_2} [ts : TopologicalSpace α]
+  [inst : Preorder α] [OrderTopology α] {f g h : β → α} {b : Filter β} {a : α},
+  Filter.Tendsto g b (nhds a) →
+    Filter.Tendsto h b (nhds a) →
+      (∀ᶠ (b : β) in b, g b ≤ f b) → (∀ᶠ (b : β) in b, f b ≤ h b) → Filter.Tendsto f b (nhds a)
+@Real.sqrt_mul_self : ∀ {x : ℝ}, 0 ≤ x → √(x * x) = x
+@Real.le_sqrt : ∀ {x y : ℝ}, 0 ≤ x → 0 ≤ y → (x ≤ √y ↔ x ^ 2 ≤ y)
+@Real.sqrt_le_sqrt : ∀ {x y : ℝ}, x ≤ y → √x ≤ √y
+isCompact_setOf_finiteMeasure_le_of_compactSpace : ∀ (E : Type u_1) [inst : MeasurableSpace E]
+  [inst_1 : TopologicalSpace E] [T2Space E] [inst_3 : BorelSpace E] [CompactSpace E] (C : NNReal),
+  IsCompact {μ | μ.mass ≤ C}
+@FiniteMeasure.tendsto_iff_forall_integral_tendsto : ∀ {Ω : Type u_1} [inst : MeasurableSpace Ω]
+  [inst_1 : TopologicalSpace Ω] [inst_2 : OpensMeasurableSpace Ω] {γ : Type u_2} {F : Filter γ}
+  {μs : γ → FiniteMeasure Ω} {μ : FiniteMeasure Ω},
+  Filter.Tendsto μs F (nhds μ) ↔
+    ∀ (f : BoundedContinuousFunction Ω ℝ),
+      Filter.Tendsto (fun i => ∫ (x : Ω), f x ∂↑(μs i)) F (nhds (∫ (x : Ω), f x ∂↑μ))
+@IsCompact.exists_clusterPt : ∀ {X : Type u_1} [inst : TopologicalSpace X] {s : Set X},
+  IsCompact s → ∀ {f : Filter X} [f.NeBot], f ≤ Filter.principal s → ∃ x ∈ s, ClusterPt x f
+@FiniteMeasure.continuous_integral_boundedContinuousFunction : ∀ {X : Type u_1} [inst : TopologicalSpace X]
+  [inst_1 : MeasurableSpace X] [inst_2 : OpensMeasurableSpace X] (f : BoundedContinuousFunction X ℝ),
+  Continuous fun μ => ∫ (x : X), f x ∂↑μ
+@Fintype.piFinset_subset : ∀ {α : Type u_1} [inst : DecidableEq α] [inst_1 : Fintype α] {δ : α → Type u_2}
+  (t₁ t₂ : (a : α) → Finset (δ a)), (∀ (a : α), t₁ a ⊆ t₂ a) → Fintype.piFinset t₁ ⊆ Fintype.piFinset t₂
+@Function.update : {α : Sort u_1} →
+  {β : α → Sort u_2} → [DecidableEq α] → ((a : α) → β a) → (a' : α) → β a' → (a : α) → β a
+data/fs131/ij1/probes/Names2.lean:21:8: error(lean.unknownIdentifier): Unknown constant `Real.add_pow_le_pow_mul_pow_of_sq_le_sq`
+data/fs131/ij1/probes/Names2.lean:22:8: error(lean.unknownIdentifier): Unknown constant `Real.sqrt_mul_le_add`
+@two_mul_le_add_sq : ∀ {R : Type u_1} [inst : CommSemiring R] [inst_1 : LinearOrder R] [ExistsAddOfLE R]
+  [MulPosStrictMono R] [AddLeftReflectLE R] [AddLeftMono R] (a b : R), 2 * a * b ≤ a ^ 2 + b ^ 2
+seconds=53
+exit=1
