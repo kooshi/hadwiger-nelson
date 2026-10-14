@@ -57,3 +57,66 @@ A second instrument for a file not yet built: `data/fs133/ib1/footer.sh` appends
 `data/fs133/ib1/lean/Footer.lean.inc` to a working copy and prints the same dump of the constants the copy itself
 declares, and the axioms of each of its public theorems, under `lake env lean` (iteration only; the build is the
 receipt).
+
+## Stage 2 — SAVED: I3 and I4, the two compactness leaves, and `countable_algPlane`
+
+*Proved under `lake env lean` with the lakefile's options (`data/fs133/ib1/lean1.sh`); the build is the last
+stage's receipt.*
+
+**2.1 Three import lines added to `InvariantLaw`** — `Mathlib.Algebra.AlgebraicCard` (`Algebraic.countable`),
+`Mathlib.MeasureTheory.Measure.Portmanteau`, `Mathlib.MeasureTheory.Measure.Prokhorov` (the compactness of the space
+of probabilities on a compact space, which the plan's route names; none of the three is in the closure of the
+module's former imports: `ProbabilityMeasure` itself was an unknown identifier under them). An import can move the
+instance a statement stores (the first implementer's finding), so the ten stored statements of `InvariantLaw` were
+dumped from the file with the three imports and set against stage 1's dump: **10 IDENTICAL, in the full print**
+(`data/fs133/ib1/stage2-moved.txt`; its nine `MISSING` lines are `SectionDensity`'s constants, which a one-file dump
+does not hold). Whether a statement of a module downstream (`Algebraic`, `Fractional`, `Pair`) moves is read at the
+build, on all eight modules.
+
+**2.2 The route taken, and where it leaves the plan's.** The plan's § 5.2 route for both leaves, with three
+changes of shape, none of statement:
+- *One ultrafilter instead of a subsequence.* A cluster point of the averages is taken along `Ultrafilter.of atTop`
+  (compactness as `IsCompact.ultrafilter_le_nhds`), so no metrizability of the space of probabilities is asked.
+  Mathlib's Portmanteau lemmas and `ProbabilityMeasure.tendsto_iff_forall_integral_tendsto` are stated for any
+  filter.
+- *A finite-intersection argument instead of an enumeration.* `exists_common_fixed` is proved for a family of
+  commuting continuous maps indexed by **any** type: the sets of fixed probabilities are closed, every finite
+  subfamily has a common fixed point in the class (induction on the finite set, one map at a time by
+  `exists_fixed_of_average`), and compactness intersects them (`IsCompact.inter_iInter_nonempty`). The rotations'
+  countability is not read.
+- *The class is a predicate on measures, stable under one map and under finite uniform averages*, in place of
+  "stable under Cesàro averages": then the step for one more map needs only that a pushforward by a commuting map
+  and an average of fixed measures are fixed, and the instance needs one rotation, not its iterates.
+
+**2.3 The private helpers** (all in `InvariantLaw`, all `private`):
+`avgMeasure` with `avgMeasure_apply`, `isProbabilityMeasure_avgMeasure`, `avgMeasure_map`, `integral_avgMeasure`
+(the uniform average of finitely many measures); `abs_sum_add_sub_sum_le` (translating a finite set moves a bounded
+sum over it by at most twice the bound times the number of points translated out); `map_eq_of_tendsto` (a weak limit
+of asymptotically invariant probabilities is invariant), `map_eq_of_tendsto_of_eventually`,
+`measure_compl_eq_zero_of_tendsto` (a weak limit of probabilities carried by a closed set is carried by it),
+`tendsto_measure_of_isClopen`, `isClosed_setOf_of_tendsto`; `exists_fixed_of_average` (one map: Krylov–Bogolyubov
+inside a closed class; the two integrals against the `n`-th average differ by a telescoping sum, at most
+`2‖f‖/(n+1)`), `exists_common_fixed`; `continuous_shiftLab`, `continuous_turnLab`, `isClopen_setOf_origin_eq`.
+
+**2.4 Results.**
+- **I3 `exists_shiftInvariant_of_foelner` — proved.** The averages are `avgMeasure (F n) fun r => dirac (shiftLab r
+  (ℓ n))`; carried by `C` through Portmanteau's closed-set half; invariance through `abs_sum_add_sub_sum_le` and the
+  Følner hypothesis; the origin's label through the clopen set `{ℓ' | ℓ' 0 = a}`.
+- **I4 `exists_turnInvariant` — proved**, as the instance of `exists_common_fixed` at the class "carried by `C`,
+  translation-invariant, with `P₀`'s law of the label at the origin".
+- **`countable_algPlane` — proved** (the release's proof of `E_countable`, three lines).
+- Axioms, from the footer on the file (`data/fs133/ib1/stage2-axioms.out`):
+  `exists_shiftInvariant_of_foelner`, `exists_turnInvariant`, `countable_algPlane` each
+  `[propext, Classical.choice, Quot.sound]`.
+
+**2.5 A finding about a statement (a widening the proof shows; the statement is not changed).**
+`exists_turnInvariant` takes `hshift : ∀ z, MapsTo (shiftLab z) C C` and **the proof does not read it**: a rotation
+of a translation-invariant law is translation-invariant by the covariance `shiftLab z ∘ turnLab u = turnLab u ∘
+shiftLab (kCoeff u * z)` alone, whatever its carrier. The unused-variable linter reports the binder; the proof holds
+it with `have _ := hshift` and a comment (the form `LEAN.md` § The gate records for an argument kept on purpose).
+Both callers supply it. Sent to the coordinator with the line on the two leaves.
+
+**2.6 Re-pricing, from these two leaves** (the plan: 6–10 h each, "the heaviest of lane B"). Both were written in
+one pass over a shared set of helpers and closed in seven elaborations, the errors each a missing annotation; about
+400 lines. The rest is priced from that: I2 (the Følner sequence) is now the heaviest — bookkeeping in coordinates,
+no library to lean on; I1 and I5 a few dozen lines each over the helpers above; I6, I7, D1–D5 short.
