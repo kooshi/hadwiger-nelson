@@ -1,0 +1,5 @@
+match    data/fs131/REQUEST-2026-10-13.md | W2: (2026-10-13, answering the choice between the two publishable form
+match    data/fs133/claims-K1.md | K133-ONE: (entry at line 469 of the derivation file) `α₁(ℝ²) = α₁(𝒜²) 
+match    data/fs133/claims-K1.md | K133-NC-ONE: any value of `m₁(ℝ²)` or of a chromatic number; `m₁(ℝ²) =
+match    plans/FS131-close-inventory.md | 752. **FS133-IB2 handed back: the density equality's definitions file 
+matched: 4  mismatched: 0
