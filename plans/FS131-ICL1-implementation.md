@@ -6,7 +6,27 @@ Report: `data/fs131/reports/FS131-ICL1.md`. Commits by explicit path, not pushed
 
 ## Theorems this phase proved
 
-*(filled at each saved stage; none at stage 1)*
+Sixteen leaves proved, every one with no `sorry` of its own; read from the built tree (`data/fs131/icl1/axioms.out`). Grade
+[kernel] where the axioms are the standard three; "[kernel, over upstream leaves]" where `sorryAx` enters only through named
+`sorry` leaves of other modules (stage 5.3), which is what the grade becomes [kernel] on when they land.
+
+- `HadwigerNelson.Plane.densitySet_bandFree` — [kernel], the standard three — `Plane/WindowDensity`
+- `HadwigerNelson.Plane.volume_inter_sq_le` — [kernel], the standard three — `Plane/WindowDensity`
+- `HadwigerNelson.Plane.exists_periodic_near_mOne` — [kernel], the standard three — `Plane/WindowDensity`
+- `HadwigerNelson.Plane.unitPairsNull_diff_essNbhd_union` — [kernel], the standard three — `Plane/WindowDensity`
+- `HadwigerNelson.Plane.exists_nrWindow` — [kernel], the standard three — `Plane/WindowDensity`
+- the spec `example : essNbhd ∅ = ∅` — elaborated — `Plane/WindowDensity`
+- `HadwigerNelson.Rigidity.measurableSet_lonely` — [kernel], the standard three — `Rigidity/PlaneZhang`
+- `HadwigerNelson.Rigidity.unitPairsNull_lonely` — [kernel], the standard three — `Rigidity/PlaneZhang`
+- `HadwigerNelson.Rigidity.ae_sIndep_social` — [kernel], the standard three — `Rigidity/PlaneZhang`
+- `HadwigerNelson.Rigidity.ae_disjoint_touched` — [kernel], the standard three — `Rigidity/PlaneZhang`
+- `HadwigerNelson.Rigidity.sum_volume_inter_sq_le` — [kernel, over upstream leaves]: the standard three and `sorryAx` from
+  `card_le_mul_card_closedNbhd` — `Rigidity/PlaneZhang`
+- `HadwigerNelson.Rigidity.Counting.measure_ne_eq` — [kernel], the standard three — `Rigidity/CountExtension`
+- `HadwigerNelson.Rigidity.Counting.comap_ιG_le_nhds_tauPrime` — [kernel, over upstream leaves] — `Rigidity/CountExtension`
+- `HadwigerNelson.Rigidity.Counting.tendsto_measure_ne` — [kernel, over upstream leaves] — `Rigidity/CountExtension`
+- `HadwigerNelson.Rigidity.Counting.exists_extension` — [kernel, over upstream leaves] — `Rigidity/CountExtension`
+- `HadwigerNelson.Rigidity.Counting.exists_slice` — [kernel, over upstream leaves] — `Rigidity/CountExtension`
 
 ## Stage 1 — SAVED: the readback
 
@@ -218,3 +238,105 @@ of this job's (the two `congr_simp` of 5.2 have one copy each). The lint (`lake 
 `data/fs131/icl1/logs/lint.log`): **exit 1, one finding, not in these files** — `unusedArguments` on
 `Rigidity.archTop`'s `[NumberField ↥F]` (`Rigidity/ContinuityGroup.lean:42`, a file this branch does not change); 13 of 14
 linters passed; nothing reported in the three files.
+
+## Stage 6 — SAVED: drafts for the landing
+
+### 6.1 The audit's block for these files (`scripts/Axioms.lean`, a new block in the CLEAN section, after the last FS-131 block)
+
+Every public record of the three modules, one `#print axioms` line each. **It belongs in CLEAN only when the upstream leaves
+land**: at this stage the records marked UPSTREAM in stage 5's table rest on `sorryAx` through leaves of other modules
+(`card_le_mul_card_closedNbhd`; `TA_subset_contChars`; `exists_level_mem_nsmul`; `hasBasis_nhds_zero_K`, `denseRange_ιG`,
+`mem_closure_ιG`, `CompactSpace (K F)`), and the audit fails on them until then.
+
+```
+-- FS131-ICL1 block: `Plane/WindowDensity` — 9 records (7 theorems, 2 definitions); the six leaves' proofs FS131-ICL1's
+#print axioms HadwigerNelson.Plane.essNbhd
+#print axioms HadwigerNelson.Plane.measurableSet_essNbhd
+#print axioms HadwigerNelson.Plane.densitySet_bandFree
+#print axioms HadwigerNelson.Plane.volume_inter_sq_le
+#print axioms HadwigerNelson.Plane.exists_periodic_near_mOne
+#print axioms HadwigerNelson.Plane.unitPairsNull_diff_essNbhd_union
+#print axioms HadwigerNelson.Plane.NRWindow
+#print axioms HadwigerNelson.Plane.exists_nrWindow
+#print axioms HadwigerNelson.Plane.mOne_le_one
+-- FS131-ICL1 block: `Rigidity/PlaneZhang` — 9 records (5 theorems, 4 definitions); the five leaves' proofs FS131-ICL1's
+#print axioms HadwigerNelson.Rigidity.lonely
+#print axioms HadwigerNelson.Rigidity.social
+#print axioms HadwigerNelson.Rigidity.touched
+#print axioms HadwigerNelson.Rigidity.RowsEdgeNull
+#print axioms HadwigerNelson.Rigidity.measurableSet_lonely
+#print axioms HadwigerNelson.Rigidity.unitPairsNull_lonely
+#print axioms HadwigerNelson.Rigidity.ae_sIndep_social
+#print axioms HadwigerNelson.Rigidity.ae_disjoint_touched
+#print axioms HadwigerNelson.Rigidity.sum_volume_inter_sq_le
+-- FS131-ICL1 block: `Rigidity/CountExtension` — 6 records (5 theorems, 1 definition); the five leaves' proofs FS131-ICL1's
+#print axioms HadwigerNelson.Rigidity.Counting.measure_ne_eq
+#print axioms HadwigerNelson.Rigidity.Counting.comap_ιG_le_nhds_tauPrime
+#print axioms HadwigerNelson.Rigidity.Counting.tendsto_measure_ne
+#print axioms HadwigerNelson.Rigidity.Counting.exists_extension
+#print axioms HadwigerNelson.Rigidity.Counting.SliceEdgeNull
+#print axioms HadwigerNelson.Rigidity.Counting.exists_slice
+-- FS131-ICL1 block end
+```
+
+### 6.2 The models (`LEAN.md` § The gate: every theorem whose hypothesis is a structure ships a named inhabitant)
+
+- **`Plane/WindowDensity`.** The hypotheses are sets: `MeasurableSet`, `UnitPairsNull`, `BandFree … 0`. Inhabited at once by
+  `∅` and by the open disc of radius `1/3` (`Plane.unitPairsNull_of_dist_lt_one`; the disc's diameter is below `1`, so it is
+  `BandFree … 0`), as the module docstring says. `NRWindow ε s₀` is inhabited at every `ε > 0` by the theorem
+  `exists_nrWindow`.
+- **`Rigidity/PlaneZhang`.** `sum_volume_inter_sq_le`'s hypotheses are inhabited together by library declarations: any finite
+  group `Q` with `S = ∅` (symmetric), `RatioLe ∅ 1` (`Rigidity.ratioLe_one`), `r = 1 ≥ 0`, the empty rows (measurable; their
+  `RowsEdgeNull` is the module's spec `example`), and `NRWindow ε s₀` from `Plane.exists_nrWindow`. A model with a non-empty
+  row: `Q` one point, `S = ∅`, the row the disc of radius `1/3` (`RowsEdgeNull ∅ _` is vacuous in `s`; its edge sets are
+  never asked). No declaration is added.
+- **`Rigidity/CountExtension`.** Every theorem takes `(μ : InvariantColouring F)`, `IsTraceSpectral F μ.μ σ` and
+  `σ (TA F)ᶜ = 0`. **No kernel model is in the library**, and the module's docstring says it is owed by this module's
+  implementer. Not built: it is a public declaration, which this brief does not allow. **Its route** (the docstring's, made
+  checkable): at `F = ⊥` (`ℚ`), (i) the residue map `ρ : unitRing ⊥ →+* ZMod 2` — every unit vector `(a + bi)/c` of a primitive
+  triple has `c` odd and exactly one of `a`, `b` odd, so `U` lies in the ring `ℤ_(2)[i]` and `u ≡ 1` modulo `(1 + i)`;
+  `ρ` is built on `Subring.closure` by `Subring.closure_induction` on the generators, or as the restriction of the residue map of
+  `UpperHalf`'s local ring at the dyadic prime of `ℚ(i)` (`toLocal`, `P.residue 1`); (ii) `μ = ½(δ_{c₀} + δ_{c₁})`,
+  `c_s(x) = ρ(x) + s ∈ Fin 4` through `ZMod 2 ↪ Fin 4`; `carried` since `ρ(x + u) = ρ(x) + 1`; `shift_inv` since
+  `c_s(· + y) = c_{s + ρ(y)}` (the two atoms permuted); `rot_inv` since `ρ(u x) = ρ(x)`; (iii) `C(y) = 1` when `ρ(y) = 0` and
+  `−1/3` otherwise, so `σ = ⅓ δ_1 + ⅔ δ_χ` with `χ(y) = (−1)^{ρ(y)}`, both 2-torsion, so `σ (TA ⊥)ᶜ = 0`
+  (`one_mem_TA`; `χ ∈ torsionChars`). Priced at 150–300 lines from this job's rate; the count's contradiction itself is
+  `Counting.false_of_slice`, which reads `TCA F` and is false at `ℚ` (the ramified dyadic prime), as the docstring says.
+
+### 6.3 `LEAN.md` § Searching — Lean, four lines
+
+- `rw [nhds_induced]` on a topology induced from `⊥` (`profTop`'s quotients) fails with "synthesized type class instance is
+  not definitionally equal to expression inferred by typing rules": name the topology, `rw [@nhds_induced _ _ ⊥]`, and bound
+  `@nhds _ ⊥ a` from below by `@pure_le_nhds _ ⊥ a` rather than rewriting with `nhds_discrete` (whose `⟨rfl⟩` instance argument
+  meets the same error). `refine le_of_le_of_eq (le_inf ?_ ?_) (nhds_inf (t₁ := …) (t₂ := …)).symm` reads a neighbourhood
+  filter of an infimum topology given by a reducible definition, where `rw [tauPrime, nhds_inf]` finds no pattern
+  (`Counting.comap_ιG_le_nhds_tauPrime`, FS131-ICL1).
+- A measurable choice from countably many candidates needs no measurable-selection theorem: `Measurable.find`
+  (`Mathlib/MeasureTheory/MeasurableSpace/Constructions.lean`) makes `x ↦ f (Nat.find (h x)) x` measurable from measurable
+  `f n` and measurable `{x | p n x}`, and `measurable_from_prod_countable_left` makes `(c, r) ↦ c r` measurable on
+  `(R → Fin 4) × R` for a countable `R` with measurable singletons — together "the first element of an enumeration of `R`
+  with `ιG r − g ∈ O`" and "the eventual value of `c (π n g)`" are jointly measurable, which replaces Doob–Cohn
+  (`Counting.exists_extension`, FS131-ICL1).
+- "Every cell of a periodic set's period holds the same measure" is in no lemma of the library; a window bound averaged over
+  translates needs none: for `T ⊆ squareWin 0 ℓ` and every `t` with `T + t` meeting `E ⊆ W`, `t` lies in a square `D` of side
+  `s + ℓ`, and `∫⁻ t in D, |(T + t) ∩ E| = |T| |E|` by `Measure.prod_apply`, `prod_apply_symm` and
+  `measurePreserving_sub_left` on `ℂ × ℂ` (`Plane.exists_nrWindow`'s private `lintegral_volume_translate_inter`,
+  FS131-ICL1).
+- An indicator built as `(integrable_const 1).indicator h` elaborates the function as `fun _ => 1`, which `rw` with
+  `integral_indicator_one` (stated at `1`) does not find: write `A.indicator (fun _ => (1 : ℝ))` and use
+  `integral_indicator_const`. At the pin `integrable_finset_sum` and `integral_finset_sum` are deprecated for
+  `integrable_finsetSum`, `integral_finsetSum` (FS131-ICL1).
+
+### 6.4 `ARCHITECTURE.md` (this job's pen for its three rows)
+
+The three rows' state cells changed from "skeleton" to "proved (FS131-ICL1)", each naming what its records read outside the
+file; `tools/check_architecture.py`: **PASS** (392 rows, 0 import mismatches; `data/fs131/icl1/logs/architecture.log`).
+
+### 6.5 For the landing to read
+
+- The lint's one finding (`Rigidity.archTop`'s unread `[NumberField ↥F]`, `Rigidity/ContinuityGroup.lean:42`) is in a file this
+  branch does not change: the join implementer's or the landing's.
+- The vacuity scan was not run by this job. The three files' structure hypotheses are named in 6.2; the scan's reading of the
+  binder `(μ : InvariantColouring F)` is the landing's to read.
+- `exists_periodic_near_mOne` is now read by no proof (`exists_nrWindow` takes the dense window directly); it is a proved
+  theorem of the module either way.
