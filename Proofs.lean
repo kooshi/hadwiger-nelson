@@ -194,6 +194,8 @@ import Proofs.HadwigerNelson.Rigidity.Entropy
 import Proofs.HadwigerNelson.Rigidity.Solenoid
 import Proofs.HadwigerNelson.Rigidity.PositiveEntropy
 import Proofs.HadwigerNelson.Rigidity.ChainAtTA
+import Proofs.HadwigerNelson.Rigidity.ZeroEntropyNames
+import Proofs.HadwigerNelson.Rigidity.SolenoidErgodic
 import Proofs.HadwigerNelson.Plane.LocalMap
 import Proofs.HadwigerNelson.Plane.LocalMapExamples
 import Proofs.HadwigerNelson.Plane.CircleColouring

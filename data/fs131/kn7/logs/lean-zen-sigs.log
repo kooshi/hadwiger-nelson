@@ -1,0 +1,65 @@
+slot: admitted kn7s: mem 5 GiB (hard cap), cpus 0,1
+@card_words_badStarts_le : ∀ {α : Type u_1} [inst : Fintype α] [inst_1 : DecidableEq α] [Nonempty α] {k : ℕ},
+  1 ≤ k →
+    ∀ (𝒢 : Finset (Fin k → α)) {g : ℝ},
+      2 ≤ g →
+        ↑𝒢.card ≤ g →
+          ∀ {θ : ℝ},
+            0 ≤ θ →
+              ∀ {n : ℕ},
+                k ≤ n →
+                  ↑{w | ↑(badStarts 𝒢 w) ≤ θ * ↑n}.card ≤ (2 * ↑(Fintype.card α)) ^ (θ * ↑n + ↑k) * g ^ (2 * ↑n / ↑k)
+@exists_forall_exp_le_measureReal_nameCell : ∀ {X : Type u_1} {m : MeasurableSpace X} (μ : MeasureTheory.Measure X)
+  [MeasureTheory.IsProbabilityMeasure μ] {T : X → X},
+  MeasureTheory.MeasurePreserving T μ μ →
+    ∀ {a : ℕ} {P : X → Fin a},
+      Measurable P →
+        partitionEntropy μ T P = 0 →
+          ∀ {β η : ℝ},
+            0 < β →
+              0 < η →
+                ∃ N₀ X',
+                  MeasurableSet X' ∧
+                    1 - η ≤ μ.real X' ∧
+                      ∀ x ∈ X', ∀ (n : ℕ), N₀ ≤ n → Real.exp (-(β * ↑n)) ≤ μ.real (nameCell T P n (nameOf T P n x))
+@badStarts : {α : Type u_1} → [DecidableEq α] → {n k : ℕ} → Finset (Fin k → α) → (Fin n → α) → ℕ
+@measure_frequentVisits_le : ∀ {X : Type u_1} {m : MeasurableSpace X} (μ : MeasureTheory.Measure X)
+  [MeasureTheory.IsFiniteMeasure μ] {T : X → X},
+  MeasureTheory.MeasurePreserving T μ μ →
+    ∀ {B : Set X}, MeasurableSet B → ∀ {θ : ℝ}, 0 < θ → ENNReal.ofReal θ * μ {x | ∃ n, θ * ↑n < ↑(visits T B n x)} ≤ μ B
+@badStarts_nameOf_le_visits : ∀ {X : Type u_1} {m : MeasurableSpace X} (μ : MeasureTheory.Measure X) {T : X → X} {a : ℕ}
+  {P : X → Fin a} {k : ℕ},
+  1 ≤ k →
+    ∀ (c : ℝ) (n : ℕ) (x : X),
+      badStarts (heavyNames μ T P k c) (nameOf T P n x) ≤ visits T {y | nameOf T P k y ∉ heavyNames μ T P k c} n x
+@mul_measureReal_light_le_blockEntropy : ∀ {X : Type u_1} {m : MeasurableSpace X} (μ : MeasureTheory.Measure X)
+  [MeasureTheory.IsProbabilityMeasure μ] {T : X → X},
+  Measurable T →
+    ∀ {a : ℕ} {P : X → Fin a},
+      Measurable P →
+        ∀ (n : ℕ) {γ : ℝ},
+          0 ≤ γ →
+            γ * ↑n * μ.real {x | nameOf T P n x ∉ heavyNames μ T P n (Real.exp (-(γ * ↑n)))} ≤ blockEntropy μ T P n
+@rpow_mul_exp_le_exp : ∀ {a β θ n k : ℝ},
+  1 ≤ a →
+    0 ≤ θ →
+      θ * Real.log (2 * a) ≤ β / 8 →
+        0 ≤ n → k ≤ θ * n → (2 * a) ^ (θ * n + k) * Real.exp (2 * (β / 8) * n) ≤ Real.exp (β * n / 2)
+@measureReal_lightCells_le : ∀ {X : Type u_1} {m : MeasurableSpace X} (μ : MeasureTheory.Measure X)
+  [MeasureTheory.IsFiniteMeasure μ] {T : X → X},
+  Measurable T →
+    ∀ {a : ℕ} {P : X → Fin a},
+      Measurable P →
+        ∀ (n : ℕ) (W : Finset (Fin n → Fin a)) {c : ℝ},
+          0 ≤ c → μ.real {x | nameOf T P n x ∈ W ∧ μ.real (nameCell T P n (nameOf T P n x)) < c} ≤ ↑W.card * c
+@mul_card_heavyNames_le : ∀ {X : Type u_1} {m : MeasurableSpace X} (μ : MeasureTheory.Measure X)
+  [MeasureTheory.IsProbabilityMeasure μ] {T : X → X},
+  Measurable T →
+    ∀ {a : ℕ} {P : X → Fin a}, Measurable P → ∀ (n : ℕ) {c : ℝ}, 0 < c → c * ↑(heavyNames μ T P n c).card ≤ 1
+'HadwigerNelson.Rigidity.wordBlock_nameOf' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Rigidity.zeroEntropyNames_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.mem_nameCell_iff_nameOf' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Rigidity.measurable_nameOf' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.mem_heavyNames' depends on axioms: [propext, Classical.choice, Quot.sound]
+seconds=2
+exit=0

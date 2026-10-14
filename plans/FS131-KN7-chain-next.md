@@ -301,7 +301,7 @@ run in `~/source/math`; no copy is in a commit.
 | bundle | release lines | declared cone | scan | trial 1 | renames added | trial 2 |
 |---|---|---|---|---|---|---|
 | **ErgDecomp** — `PrimePackets/KernelEntropy.lean` ll. 4–47 (header) and 220–558 (convex orbit approximants, `actionInvariantSigma`, `exists_invariant_orbit_average_limit`, `ergodicSMul_of_orbit_indicator_limits`), `PrimePackets/ErgodicDecomposition.lean` ll. 4–179 (`condExpKernel_invariant`, `invariant_kernel_decomposition`, `condExpKernel_ae_constant`, **`action_ergodic_decomposition`**) | 559 (572 with the closers) | 28 files, 22,632 lines | 0 hits; control fired | 7 errors, 303 s (most of it waiting for the slot) | 3 names, 6 tokens, **each inside a proof**: `Set.ofPred_forall` → `Set.setOf_forall`; `eventuallyEmptyOrUniv_iff` → `eventuallyConst_set` (a lemma of the later pin; the set form here has the same two disjuncts in the same order, read from both branches of its one use); `Function.diag` → `(fun y => (id y, id y))` (4 uses; at this pin `compProd_trim_condExpKernel` is stated with `fun ω ↦ (id ω, id ω)`) | **0 errors, 0 warnings, 17 s** |
-| **Generating** — the eleven files of `EntropyGeneratingSupremum.lean`'s declared cone, in import order (the first two are lane P's `ShannonEntropy`, `EntropyMixtures`) | 1,843 (862 beyond lane P's) | 11 files, 1,843 lines | 0 hits; control fired | 11 errors, 12 s, from one name | `Set.mem_ofPred_eq` → `Set.mem_setOf_eq` (7 uses, each in a `simp only` list) | **0 errors, 0 warnings, 11 s** |
+| **Generating** — the eleven files of `EntropyGeneratingSupremum.lean`'s declared cone, in import order (the first two are lane P's `ShannonEntropy`, `EntropyMixtures`) | 1,843 (850 beyond lane P's 993) | 11 files, 1,843 lines | 0 hits; control fired | 11 errors, 12 s, from one name | `Set.mem_ofPred_eq` → `Set.mem_setOf_eq` (7 uses, each in a `simp only` list) | **0 errors, 0 warnings, 11 s** |
 
 Logs: `data/fs131/kn7/logs/{make,scan,trial}-*`.
 
@@ -309,7 +309,7 @@ Logs: `data/fs131/kn7/logs/{make,scan,trial}-*`.
 is **hours, not days**: its used cone is at most 559 lines of the release, against a declared cone of 22,632, and it
 elaborates at this pin after three renames inside proofs, no proof repaired. The cut is mine and the trial shows it is
 enough: KernelEntropy ll. 48–219 (the entropy of kernels) and ErgodicDecomposition ll. 180–509 (the packet
-applications) are not read. The generating-sequence theorem (T2, lane E's leaf 10) adds 862 lines over lane P's two files,
+applications) are not read. The generating-sequence theorem (T2, lane E's leaf 10) adds 850 lines over lane P's two files,
 one rename. Both join the port by FS-132's generator as lanes P2 and P3 (§ Stage 6).
 
 **What each needs at the consumer, read from the statements.**
@@ -332,4 +332,162 @@ one rename. Both join the port by FS-132's generator as lanes P2 and P3 (§ Stag
   ksEntropyOn (𝒜 n) …`; `observationSigma (Q n)` is monotone (the family grows) and its supremum contains every `A i j`,
   hence `⨆ i, 𝒜 i = m`. The `≥` side is `ksEntropyOn_le_ksEntropy`. Hard: the encoding of a finite family of indicators
   as one label; nothing else.
+
+## Stage 5 — SAVED: lane N typed (module M8a, `Rigidity/ZeroEntropyNames`), the ergodicity leaf (`Rigidity/SolenoidErgodic`), and a plan per leaf
+
+### 5.1 The domain pass (`debruijn-domain-modeling`, a fresh invocation, scoped to lane N's new definitions)
+
+| definition | the form chosen | weighed and rejected, with what decided |
+|---|---|---|
+| `nameOf T P n x : Fin n → Fin a` | the orbit's labels; `nameCell T P n w` is its fibre (`mem_nameCell_iff_nameOf`, proved) | writing `fun j => P (T^[j] x)` at each use: the map is the object whose fibres are the cells, and measurability (`measurable_nameOf`) and the block identity are lemmas about it |
+| `wordBlock w k j h` | `fun i => w ⟨j + i, _⟩`, with the proof `j + k ≤ n` as an argument | Mathlib's `Fin.take` (a prefix only; no window or drop at the pin, searched); positions in `Fin (n + 1 − k)` (a truncated subtraction the count would carry everywhere) |
+| `IsBadStart 𝒢 w j`, `badStarts 𝒢 w` | a `Prop` with a `DecidablePred` instance; the count over `range (n + 1)`, so positions `0 ≤ j ≤ n − k` exactly for every `k` (with `range n` the position `j = n` is missed at `k = 0`) | a `Set` of good blocks (the count needs `#𝒢` and decidability); a `Bool` version (the instance computes: three `#guard` checks run) |
+| `heavyNames μ T P n c : Finset` | the words whose cell has mass `≥ c`; the deriver's `B` is not a new definition but `{x | nameOf T P k x ∉ heavyNames …}`, a preimage under a measurable map | a separate `lightPoints` set (two names for one fact) |
+| `visits T B n x` | the release's `visitCount`, body for body, with the same classical decidability instance | an inline count in each statement: the maximal inequality and the bad-start bound read one object |
+| the maximal inequality | `measure_frequentVisits_le`, the release's `excessiveOccupation_measure_bound` with its two definitions unfolded, **a leaf of this module closed by the port at the join** | a hypothesis of EN2-ZE (it would make a theorem of the release an assumption of ours in the headline's path); importing lane P's `Outside/OAI015Maximal` (it is on another branch) |
+| names of numbers | `a` letters (the entry's), `k` the block length | `Rigidity/Entropy`'s `k` for the number of labels, which collides with the entry's block length |
+
+No index anywhere: every invariant is beside the type. The next lemma test: EN2-L31's third part (Lemma 3.1′, M8b) reads
+`μ.real (nameCell T P n (nameOf T P n x)) ≥ exp (−β n)` on a measurable `X′` — stated in this vocabulary, nothing added.
+
+### 5.2 The statements, read aloud against their entries (from the kernel's print, `logs/lean-zen-sigs.log`)
+
+- **EN2-CNT** (`plans/FS131-EN2-derivation.md` l. 459) ↔ `card_words_badStarts_le`. "an alphabet of `a ≥ 1` letters" =
+  `[Fintype α] [Nonempty α]`, `a = Fintype.card α`; "`k ≥ 1`" = `1 ≤ k`; "`𝒢` a set of words of length `k`" =
+  `𝒢 : Finset (Fin k → α)`; "`g ≥ 2` with `#𝒢 ≤ g`" = `2 ≤ g`, `↑𝒢.card ≤ g`; "`θ ≥ 0`", "`n ≥ k`" = `0 ≤ θ`, `k ≤ n`; "the
+  number of words `w` of length `n` having at most `θn` positions `0 ≤ j ≤ n − k` with `w[j, j + k) ∉ 𝒢`" =
+  `↑{w | ↑(badStarts 𝒢 w) ≤ θ * ↑n}.card`; "is at most `(2a)^{θn + k}·g^{2n/k}`" =
+  `≤ (2 * ↑(Fintype.card α)) ^ (θ * ↑n + ↑k) * g ^ (2 * ↑n / ↑k)` (real powers). Equal.
+- **EN2-ZE** (l. 507) ↔ `exists_forall_exp_le_measureReal_nameCell`. "a probability space, `T` measurable with `T_*μ = μ`"
+  = `[IsProbabilityMeasure μ]`, `MeasurePreserving T μ μ`; "`P` measurable to a finite set" = `P : X → Fin a`,
+  `Measurable P`; "`[x]_n`" = `nameCell T P n (nameOf T P n x)`; "`H_n`" = `blockEntropy μ T P n`; "`inf_{n ≥ 1} H_n/n = 0`" =
+  `partitionEntropy μ T P = 0`, which is `⨅ n, ofReal (H_{n+1}/(n+1)) = 0`: the same, because every `H_n ≥ 0`
+  (`blockEntropy_nonneg`) and `ofReal` is an order embedding on `[0, ∞)`; "for every `β > 0` and `η > 0` there are `N₀` and a
+  measurable `X′` with `μ(X′) ≥ 1 − η` such that `μ([x]_n) ≥ e^{−βn}` for every `x ∈ X′` and every `n ≥ N₀`" =
+  `∃ N₀ X', MeasurableSet X' ∧ 1 - η ≤ μ.real X' ∧ ∀ x ∈ X', ∀ n, N₀ ≤ n → exp (-(β * n)) ≤ μ.real (…)`. Equal.
+- The six children are the deriver's steps, each in this vocabulary (module docstring); the ergodicity leaf is § 2.3's
+  argument.
+
+**Models.** EN2-CNT: the entry's (`a = 2`, `k = 3`, `𝒢 = {000}`, `g = 2`, `θ = 9/10`, `n = 13`), its hypotheses proved in an
+`example`. EN2-ZE: `zeroEntropyNames_model` (proved: the point mass, the identity, one label; every `H_n` is `0`) —
+degenerate; the entry's rotation model is not in the library. The ergodicity leaf: the trivial action's model
+(`trivialAction_isErgodicOn`). Spec checks: three `#guard`s on `badStarts`. Through `lake env lean`: `ZeroEntropyNames` 0
+errors, 8 `sorry` warnings (`logs/lean-zen-1.log`); `SolenoidErgodic` 0 errors, 1 (`logs/lean-solerg-1.log`). The proved
+API's axioms: `wordBlock_nameOf`, `mem_nameCell_iff_nameOf` `[propext, Quot.sound]`; `measurable_nameOf`,
+`mem_heavyNames`, `zeroEntropyNames_model` the standard three.
+
+### 5.3 The obligation pass (`debruijn-obligation-modeling`, a fresh invocation) — every leaf true as typed; no statement changed
+
+Mutation reading: `rpow_mul_exp_le_exp` is false without `hkn` (large `k`) or without `hθβ`; `measureReal_lightCells_le`
+is false without `0 ≤ c` (an empty set against a negative bound) — the hypotheses are load-bearing; `mul_card_heavyNames_le`
+and the Markov leaf are false without measurability (outer measures of a partition can add past `1`).
+
+### 5.4 A plan per leaf (lane N: `Rigidity/ZeroEntropyNames.lean` and `Rigidity/SolenoidErgodic.lean`; one implementer, two files)
+
+Every Mathlib name below was `#check`ed at the pin (`data/fs131/kn7/lean/LaneNChecks.lean`, `logs/lean-lanen-checks.log`:
+32 found; two asked for and absent, `Real.add_pow_le_pow_mul_pow_of_sq_le_sq` and
+`Measure.exists_measurable_superset_iff_measure_eq_zero`, which no plan uses). Order: N1–N4 first (independent), then N5,
+N6, then N7; N8 at the join; N9 any time.
+
+**N1. `card_words_badStarts_le` (EN2-CNT).** The statement the proof derives from is the weighted count, and the parse is a
+function, never an injection into token sequences.
+- Work on lists. Define (private) `singles (𝒢 : Finset (Fin k → α)) (k) : List α → ℕ` by the parse's recursion: `[] ↦ 0`;
+  `l ↦ if hk : 1 ≤ k ∧ k ≤ l.length ∧ blockOf l ∈ 𝒢 then singles (l.drop k) else 1 + singles l.tail`, with
+  `termination_by l => l.length` (`1 ≤ k` inside the condition makes it terminate for every `k`); `blockOf l` the first
+  `k` letters as `Fin k → α` (`fun i => l.get ⟨i, _⟩`). And `badStartsL` on lists, with one bridge
+  `badStarts 𝒢 w = badStartsL 𝒢 (List.ofFn w)` (the quarantine: the only place `Fin n → α` meets `List α`).
+- (A) **the weighted count**: with `t = 1/(2a)` and `ρ = g^{2/k}`, `∑ over words of length m of t^{singles w} ≤ ρ^m`, by
+  strong induction on `m`. Split the words by whether the head block is good: the good ones are `Fin.appendEquiv k (m − k)`
+  images of `𝒢 × words (m − k)` (sum `= #𝒢 · c_{m−k}`), the others contribute at most `t · a · c_{m−1}` (drop the
+  restriction, `Fintype.sum_equiv` with `Fin.cons`); then `c_m ≤ (1/2) ρ^{m−1} + g ρ^{m−k} ≤ ρ^m` from `a t = 1/2`,
+  `g ρ^{−k} = g^{−1} ≤ 1/2`, `ρ ≥ 1`. For `m < k` every letter is a single: `c_m = 2^{−m} ≤ 1 ≤ ρ^m`. Stating (A) as an
+  inequality, not the recursion's equality, is the weakening that makes each case local (KN6 § 3b item 2).
+- (B) `singles l ≤ badStartsL l + (k − 1)`, by functional induction on `singles` (`fun_induction`): a good head block (the
+  bad starts of `l.drop k` shift into bad starts of `l`); a single at a bad start (`badStartsL l = 1 + badStartsL l.tail`);
+  a single with `l.length < k` (`singles l = l.length ≤ k − 1`). No strengthening is needed.
+- (C) For `w` with `badStarts ≤ θ n`: `singles ≤ θ n + k`, so `t^{singles} ≥ t^{θn + k}` (`t ∈ (0, 1)`,
+  `Real.rpow_le_rpow_of_exponent_ge` after `Real.rpow_natCast`); summing over those `w`, `#W · t^{θn+k} ≤ c_n ≤ ρ^n`, and
+  `t^{−(θn + k)} = (2a)^{θn + k}`, `ρ^n = g^{2n/k}` (`Real.rpow_def_of_pos` or `Real.rpow_natCast`/`Real.rpow_mul`).
+- Hard: the bookkeeping of (A)'s split; nothing in (B) or (C). Control on the implementer's side: the entry's
+  `count-names` enumeration (`data/fs131/en2/count_names.py`) is the [tools] check the theorem replaces.
+
+**N2. `mul_card_heavyNames_le`.** `c · #heavy = ∑_{w ∈ heavy} c ≤ ∑_{w ∈ heavy} μ.real (cell w) ≤ ∑_w μ.real (cell w) = 1`.
+Child `sum_measureReal_nameCell : ∑ w, μ.real (nameCell T P n w) = 1` from `MeasureTheory.sum_measure_preimage_singleton`
+(cells are `nameOf ⁻¹' {w}` by `mem_nameCell_iff_nameOf`; measurable by `measurable_nameOf`), then `measure_univ`. Use it in
+N3 and N7 as well. Nothing hard.
+
+**N3. `mul_measureReal_light_le_blockEntropy` (Markov on the terms of `H_n`).** The light set is `nameOf ⁻¹' ↑Sᶜ` with
+`S = heavyNames …`, so its mass is `∑_{w ∉ S} μ.real (cell w)` (`measureReal_biUnion_finset` or the preimage-singleton
+lemma). Child, a real-variable lemma: `0 ≤ p → p < exp (−s) → s * p ≤ negMulLog p` (`p = 0` trivially; else
+`Real.log_lt_log` and `Real.log_exp` give `log p < −s`). Then `γ n · μ(light) = ∑_{w ∉ S} γ n p_w ≤ ∑_{w ∉ S} negMulLog p_w ≤
+∑_w negMulLog p_w` (`Real.negMulLog_nonneg`, `Finset.sum_le_sum_of_subset_of_nonneg`). Nothing hard.
+
+**N4. `rpow_mul_exp_le_exp`.** `(2a)^{θn+k} = exp (log(2a) · (θn + k))` (`Real.rpow_def_of_pos`); then `Real.exp_add` and
+`Real.exp_le_exp`; the exponent inequality `log(2a)(θn + k) + 2(β/8)n ≤ βn/2` from two products stated as `have`s —
+`log(2a) · (θn − k) ≥ 0` (`mul_nonneg`, `Real.log_pos` at `2a > 1`) and `n · (β/8 − θ log 2a) ≥ 0` — and `linarith only`
+(`LEAN.md`: products as `have`s, not `nlinarith`). Nothing hard.
+
+**N5. `badStarts_nameOf_le_visits`.** `Finset.card_le_card` with the subset of filters: a bad start `j` has
+`h : j + k ≤ n`, hence `j < n` by `hk`; `wordBlock_nameOf` turns `wordBlock (nameOf …) k j h ∉ heavy` into
+`T^[j] x ∈ {y | nameOf T P k y ∉ heavy}`. Unfold `visits` with `classical`; the two decidability instances on the filter
+are matched by `Finset.filter_congr_decidable` if `simp` does not. Nothing hard.
+
+**N6. `measureReal_lightCells_le`.** The set is `nameOf ⁻¹' ↑W′` with `W′ = W.filter (μ.real (cell w) < c)`; its mass is
+`∑_{w ∈ W′} μ.real (cell w) ≤ #W′ · c ≤ #W · c` (`Finset.sum_le_card_nsmul`-shape, `Finset.card_filter_le`, `0 ≤ c`).
+Nothing hard.
+
+**N7. `exists_forall_exp_le_measureReal_nameCell` (EN2-ZE), the assembly** — the deriver's steps, each a `have` with its
+statement:
+1. `1 ≤ a`: a probability measure has a point (`μ univ ≠ 0`), and `P` of it lies in `Fin a`. Parameters `γ := β/8`,
+   `θ := min (η/2) (β / (8 * log (2a)))`, `θ > 0`.
+2. `exists_blockEntropy_le_mul μ hT hP h0` (`Rigidity/Entropy`, M1's leaf) at `ε := γ θ²` and `K := ⌈log 2 / γ⌉₊`
+   (`Nat.ceil_le`): a `k ≥ K`, `k > 0`, `H_k ≤ γθ²k`; so `γ k ≥ log 2`. `𝒢 := heavyNames μ T P k (exp (−γk))`,
+   `g := exp (γ k) ≥ 2`, `#𝒢 ≤ g` (N2 at `c = exp (−γk)`). `B := {x | nameOf T P k x ∉ 𝒢}`, measurable; N3:
+   `γ k · μ(B) ≤ H_k ≤ γθ²k`, so `μ(B) ≤ θ²`.
+3. `E := {x | ∃ n, θ n < visits T B n x}`: N8 gives `θ · μ(E) ≤ μ(B) ≤ θ²`, so `μ(E) ≤ θ` (in `ℝ≥0∞`, then `toReal`).
+   Measurable: a countable union of `{x | θ n < visits T B n x}` (the release's `measurable_visitCount` route:
+   `visits` is a finite sum of indicators of `T^[j] ⁻¹' B`).
+4. For `x ∉ E` and every `n`: `visits ≤ θ n`, so by N5 `nameOf T P n x ∈ W_n :=` the words with `badStarts 𝒢 ≤ θ n`. For
+   `n ≥ max k ⌈k/θ⌉`: N1 at `α = Fin a` gives `#W_n ≤ (2a)^{θn+k} g^{2n/k}`, `g^{2n/k} = exp (2γn)` (`Real.exp_log`,
+   `Real.rpow_def_of_pos`), and N4 (with `θ log(2a) ≤ β/8` from `min_le_right`) gives `#W_n ≤ exp (βn/2)`.
+5. `S_n := {x | nameOf T P n x ∈ W_n ∧ μ.real (cell) < exp (−βn)}`: N6 gives `μ(S_n) ≤ #W_n · exp (−βn) ≤ exp (−βn/2)`.
+6. `N₀ ≥ max k ⌈k/θ⌉` with `∑_{n ≥ N₀} exp (−βn/2) ≤ η/2`: the tail is `exp (−βN₀/2)/(1 − exp (−β/2))`
+   (`tsum_geometric_of_lt_one`), which tends to `0` (`Real.tendsto_exp_neg_atTop_nhds_zero`); state it as a real-variable
+   child. `X′ := (E ∪ ⋃_{n ≥ N₀} S_n)ᶜ`: measurable; `μ(X′ᶜ) ≤ θ + η/2 ≤ η` (`measure_union_le`, `measure_iUnion_le`,
+   `ENNReal.ofReal_tsum_of_nonneg` or a direct `ENNReal` bound), so `1 − η ≤ μ.real X′` (`measureReal_compl`). For
+   `x ∈ X′`, `n ≥ N₀`: `x ∉ E` gives `nameOf T P n x ∈ W_n`, and `x ∉ S_n` gives the bound.
+- Hard: the `ℝ≥0∞`/`ℝ` bookkeeping of steps 3 and 6 (one direction at a time, `ENNReal.toReal_mono`), and step 4's
+  composition with N1. The deriver's first place to attack (EN2 § 3.7: "the block of `name_n(x)` at `j` is
+  `name_k(T^j x)`") is already a theorem (`wordBlock_nameOf`, proved).
+
+**N8. `measure_frequentVisits_le` — at the join, not before.** Once lane P's `Outside/OAI015Maximal` is on the joined tree:
+import it, and the proof is `DukePrimeDegree.excessiveOccupation_measure_bound μ hT hB hθ` (the release namespace as the
+port leaves it; `excessiveOccupation` and `visitCount` unfold to this statement — `visits` is `visitCount` body for body;
+if the elaborator does not see it by `exact`, `show` the release's form and `rfl`). The statement does not change.
+
+**N9. `ZdAction.IsErgodicOn.null_or_conull_of_ae_invariant` (`Rigidity/SolenoidErgodic`).** `s′ := ⋂ n : Λ, α n ⁻¹' s`
+(`Countable Λ`: a subtype of the countable `Fin d → ℤ`).
+(i) measurable: `MeasurableSet.iInter` of `(α.continuous' n).measurable hs`. (ii) strictly fixed: for `m ∈ Λ`,
+`α m ⁻¹' s′ = ⋂ n : Λ, α (n + m) ⁻¹' s` (`α.map_add' n m`, `Set.preimage_iInter`, `Set.preimage_comp`), and
+`n ↦ n + m` is a bijection of `Λ` (`Equiv.addRight ⟨m, hm⟩`, `Equiv.iInter_comp`). (iii) `s′ =ᵐ[μ] s`: `ae_all_iff` on
+`hinv` gives `∀ᵐ x, ∀ n : Λ, (x ∈ α n ⁻¹' s ↔ x ∈ s)`, and then `x ∈ s′ ↔ x ∈ s` (`0 ∈ Λ` for one direction). (iv) the
+second clause of `h` at `s′`, and `measure_congr` (with `EventuallyEq.compl` for the complement). Nothing hard; about
+thirty lines.
+
+**The build** (`data/fs131/kn7/build.sh 3 8`, both modules in `Proofs.lean` and in `ARCHITECTURE.md`'s map;
+`tools/check_architecture.py` PASS, `logs/arch-2.out`): `==> build: OK — 250 of 250 batches, 3 module(s) rebuilt, 5
+module(s) with warnings, 7m12s`, `exit=0` (`logs/build-3.log`); rebuilt `Rigidity.SolenoidErgodic`,
+`Rigidity.ZeroEntropyNames`, `Proofs`; 24 warnings, each `declaration uses 'sorry'` (15 as before, 8 and 1 new), no
+other — the docstring linter is quiet on the two modules, and the three `#guard`s pass in the build.
+
+### 5.5 The lanes after this stage
+
+| lane | writes | needs | who |
+|---|---|---|---|
+| **N** (M8a) | `Rigidity/ZeroEntropyNames.lean`, `Rigidity/SolenoidErgodic.lean` | `Rigidity/Entropy` (`exists_blockEntropy_le_mul` stated; its proof is lane E's); N8 waits on lane P's join | one implementer from § 5.4; N1 is the longest leaf |
+| P, E, C | as KN6 § 5.6 | — | unchanged |
+
+Lane N shares no file with lanes P, E and C. The draft claim list `data/fs131/kn3/claims-M8-zero-entropy-carried.md`
+statement 3–4 needs no change: the typed statements are the entries' (§ 5.2); its table's row for the maximal inequality
+should name `Rigidity.measure_frequentVisits_le` as the statement read (a dated line drafted in the report).
 
