@@ -36,7 +36,7 @@ open scoped ENNReal
 #check @unitCircleEquiv
 #check @uvRing_toUnitVector_mul
 #check @uvRing_toUnitVector_one
-#check @mulAction_dual
+#check @instMulActionDual
 #check @smul_def
 #check @measurableConstSMul_dual
 #check @rotInv_iff

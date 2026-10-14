@@ -9,7 +9,22 @@ the last three on `main`. Working files: `data/fs131/kn8/`.*
 
 ## Theorems this phase proved
 
-(Filled at the hand-back.)
+A planning job; the chain's leaves are not proved here. Proved while typing the four new modules, each **[kernel]** through
+`./scripts/build.sh` (build 2, exit 0), axioms read from the built tree (`data/fs131/kn8/logs/lean-AxiomsCheck.log`), each on
+`[propext, Classical.choice, Quot.sound]`:
+
+- `Rigidity.continuous_evalChar` — `Rigidity/DualGroup.lean`
+- `Rigidity.unitCircle` (its three closure fields), `Rigidity.mem_unitCircle`, `Rigidity.coe_toUnitVector`,
+  `Rigidity.unitCircleEquiv`, `Rigidity.countable_unitRing_of_numberField`, `Rigidity.zpowHom` (its two fields),
+  `Rigidity.AdmissiblePair.mem_subgroup` — `Rigidity/UnitCircle.lean`
+- `Rigidity.PieceDual.dualMap_apply`, `dualMap_id`, `dualMap_comp` — `Rigidity/Pieces.lean`
+- `Rigidity.invariantSigma_le` — `Rigidity/EntropySplitMax.lean`
+
+**Proved over leaves of this job, so printing `sorryAx`** (compositions, not theorems of the library until their leaves land):
+`t2Space_dual`, `secondCountableTopology_dual`, `isHaarMeasure_dualHaar`, `exists_isHaarFourier_of_countable`,
+`IsHaarFourier.map_dual_eq`, `IsHaarFourier.map_mul_right_eq`, `dualHaar_fourier_zero`, `instMulActionDual`, `smul_def`,
+`measurableConstSMul_dual`, `pieceAction`. Unchanged: `mrPlus_of_split_of_carried` on the standard three axioms. The
+branch is a skeleton: 73 `sorry` leaves (42 of them this job's) and one undeclared `axiom`; not at the gate.
 
 ## Stage 1 — SAVED: the readback
 
@@ -321,7 +336,7 @@ changed, the axiom, its model and the Polish form byte-identical; control (`--pl
 ### 3.1 Vocabulary (KN7 § 6.3's four items, as built)
 
 1. the unit vectors as a group — `unitCircle F` (`Rigidity/UnitCircle`, Stage 2);
-2. the rotation action — `mulAction_dual`, `smul_def`, `MeasurableConstSMul`, so the rotation as a measurable equivalence is
+2. the rotation action — `instMulActionDual`, `smul_def`, `MeasurableConstSMul`, so the rotation as a measurable equivalence is
    Mathlib's `MeasurableEquiv.smul g`; a subgroup acts by Mathlib's `Subgroup.instMulAction`, countable over a number field;
 3. admissibility — **the page's form, as a structure with its generators** (`AdmissiblePair`), the operational form a
    constructor (`AdmissiblePair.ofPow`) — Stage 2 § 2.2;
@@ -482,7 +497,7 @@ through the finite quotients `(O_w/𝔭^k)^×`, which is local algebra once the 
     for some `α′ > 0` only (its `β` is chosen after `α′`); `z = 1 + 2bi` gives `α′ = 1/(2[F:ℚ])` with no Pythagorean count."
 - **`LEAN.md` § Searching — Lean**: the binder line of § 3.5; and: "`AddChar.ext` at the pin takes its two characters
   explicitly (`AddChar.ext ψ χ h`), and `ext r` on an equation of `AddChar`s into `Circle` reaches the coercion to `ℂ`
-  (`↑((g • χ) r) = …`); write `DFunLike.ext _ _ fun r => ?_` (FS131-KN8, `Rigidity.mulAction_dual`)." And: "Dot notation
+  (`↑((g • χ) r) = …`); write `DFunLike.ext _ _ fun r => ?_` (FS131-KN8, `Rigidity.instMulActionDual`)." And: "Dot notation
   on a `def` whose body is a conjunction (`SpectralInputs.IsHaarFourier`) looks in the def's own namespace: a lemma meant for
   `hm.map_dual` is declared `_root_.HadwigerNelson.SpectralInputs.IsHaarFourier.map_dual` from any module (FS131-KN8)."
 - **`BIBLIOGRAPHY.md`**: `[Rudin1962]` §§ 1.5 (the duality theorem), 2.1 — cited as the source of D1/D2 by this job's plan,
@@ -491,3 +506,23 @@ through the finite quotients `(O_w/𝔭^k)^×`, which is local algebra once the 
   M8b's model — **not held, not read**; `[OAIMath2026]`: `PrimePackets/KernelEntropy.lean` l. 278–283
   (`actionInvariantSigma`, `actionInvariantSigma_le`) read by FS131-KN8.
 - **`ARCHITECTURE.md` § Trust**: nothing new (no axiom added; the declared theorem untouched).
+
+## Stage 6 — SAVED: the builds and the checks at the hand-back
+
+- **Build 1** (`data/fs131/kn8/build.sh 1 8`: `./scripts/build.sh` under the slot, `--mem 10 --cpus 4`, `MEMMAX=10G`,
+  `BATCH=8`): `==> build: OK — 250 of 250 batches, 6 module(s) rebuilt, 10 module(s) with warnings, 6m43s`, `exit=0`
+  (`logs/build-1.log`); 73 warnings, each ``declaration uses `sorry` `` (this job's modules: `DualGroup` 13, `UnitCircle` 8,
+  `Pieces` 15, `EntropySplitMax` 6), no other; peak 3.33 GiB summed, 2.46 GiB one process (`build-1.times`).
+- **Lint 1** failed, one message, correctly: `defsWithUnderscore` on the data instance `mulAction_dual`
+  (`logs/lint-1.log`). Renamed `instMulActionDual` (Mathlib's instance naming), and every mention in this record and the
+  probes.
+- **Build 2**: `OK — 250 of 250 batches, 4 module(s) rebuilt, 10 module(s) with warnings, 7m5s`, `exit=0`, the same 73
+  `sorry` warnings and no other (`logs/build-2.log`). **Lint 2**: `Linting passed for Proofs.`, 14 linters `(2/2) Passed`,
+  `exit=0` (`logs/lint-2.log`). `tools/check_architecture.py`: PASS (`logs/arch-3.out`).
+- **Not run**: `scripts/dupnames.sh` (a gate step for the landing; the new names were checked against the source with
+  `rg` — none declared elsewhere; `HadwigerNelson.unitCircle` in `LocalGlobal` is a different full name from
+  `HadwigerNelson.Rigidity.unitCircle`, which a reader in namespace `HadwigerNelson` should know), the axiom audit and the
+  scans (a skeleton).
+- Nothing of this job is running. No compiled library was copied between trees; nothing was written or run in the release's
+  clone (two files read there: `PrimePackets/ErgodicDecomposition.lean` ll. 127–136 and `KernelEntropy.lean` ll. 278–286, for
+  statements). **Not pushed** (the brief).

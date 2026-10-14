@@ -86,7 +86,7 @@ theorem uvRing_toUnitVector_one : uvRing (toUnitVector (1 : unitCircle F)) = 1 :
   sorry
 
 /-- **The rotation action** of the unit vectors on `R̂`: `(g • χ)(r) = χ(g r)` — an action because `R` is commutative. -/
-instance mulAction_dual : MulAction (unitCircle F) (Dual F) where
+instance instMulActionDual : MulAction (unitCircle F) (Dual F) where
   smul g χ := rot (toUnitVector g) χ
   one_smul χ := by
     refine DFunLike.ext _ _ fun r => ?_
