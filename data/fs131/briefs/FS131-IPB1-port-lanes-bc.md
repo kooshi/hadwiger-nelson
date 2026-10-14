@@ -121,3 +121,9 @@ deep, because the coordinator can only review work it knows exists).
 The rule COEFF is approved: on the release's side only, `DFunLike.coe (ℕ →₀ R) … (Polynomial.coeff p) n` is read as `Polynomial.coeff p n`. A planted different coercion head is refused, and the rule withdrawn is refused. The two NumberFields lemmas are classed PIN-DIFFERENCE (COEFF) by name, with level one's prints as evidence. **Standing word:** a Mathlib definition whose type changed between the pins only in how an application is stored, not in what it names, gets a named comparator rule with its controls and its lemmas listed, reported in your hand-back, without waiting for me. Anything that moves a statement's meaning comes to me first (inventory item 772).
 
 You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
+
+## Amendment 2 (2026-10-14 07:03 UTC) — one more generator change: an inductive's constructors get their address docstrings
+
+Your touches are extended by one change to `tools/fs131_ko1_port.py`. The step that gives a structure's or class's undocumented fields their `[OAIMath2026]` address docstring extends to an `inductive`'s undocumented constructors, and nothing else changes. Its controls: `--check` byte-identical on every other generated module, with only AlgebraModels' two lines added; `--parse-all` passing; a self-test partner; the change in its own commit (inventory item 781).
+
+You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
