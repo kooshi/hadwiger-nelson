@@ -164,6 +164,7 @@ import Proofs.HadwigerNelson.Plane.UnitAvoiding
 import Proofs.HadwigerNelson.Plane.Chord
 import Proofs.HadwigerNelson.Plane.Cover
 import Proofs.HadwigerNelson.Plane.Suprema
+import Proofs.HadwigerNelson.Plane.OneAvoidingDensity
 import Proofs.HadwigerNelson.Plane.CPColouring
 import Proofs.HadwigerNelson.Plane.MaximalCover
 import Proofs.HadwigerNelson.Plane.Slack
