@@ -6,24 +6,33 @@ from `fs131-wcm2` at `a7501c681`, in the tree `.claude/worktrees/fs131-wch`. Wor
 
 ## Theorems this phase proved
 
-Read from the built tree after build 1 (`data/fs131/icm3/axioms1.out`, `axioms1-read.out`): 187 records of `Arith/CircleCos`,
-`Rigidity/ClassRatio`, `CountCompletion`, `CountModels` and `count_of_oneAvoidingDensityBound` — **CLEAN 175, IMPORTED 7,
-UPSTREAM 5, FAIL 0**.
+Read from the built tree after build 4 (`data/fs131/icm3/axioms4.out`, `axioms4-read.out`): 245 records of `Arith/CircleCos`,
+`Rigidity/ClassRatio`, `CountCompletion`, `CountModels` and `count_of_oneAvoidingDensityBound` — **CLEAN 229, IMPORTED 7,
+UPSTREAM 9, FAIL 0**.
 
 - `HadwigerNelson.CircleCos.circleCos_ge` (`Arith/CircleCos`, public, new) — [kernel], `[propext, Classical.choice,
   Quot.sound]`: at `q ∈ {23, 31}` some `κ < 1/3`, `κ ≥ 2/(q + 1)`, bounds every non-trivial character sum over the circle
   `a² + b² = 1` of `ZMod q` by `−κ(q + 1)`. Read against KC13 § 5.3's "at 23 and 31 the normalised least eigenvalue clears
-  `−1/3` by `1.6·10⁻³` and `4.9·10⁻⁶`". With it, public and on the standard three (or `[propext]` alone for the
-  `decide +kernel` checks): `taylorCos_sub_le_cos` (Taylor's bound for `cos` at a rational), `cosLow_le_cos`,
-  `piLo_lt_pi`, `pi_lt_piLo_add`, `re_I_pow`, `sum_circle_eq`, `circCheck_sound`, `circleCos_of_check`, `circ23_eq`,
-  `circ31_eq`, `circ23_nodup`, `circ31_nodup`, `tab23_ok`, `tab31_ok`, `check23`, `check31`.
-- `circleCos_bound` (private, `Rigidity/ClassRatio`) — [kernel], the standard three: the leaf, by `circleCos_ge`.
-- `charBound_one_exact_27` (private) — [kernel], `[propext, Classical.choice, Quot.sound,
-  StandingFive.kloosterman_bound]`: at `Q = 27`, `κ = 2/7` (ratio `2/9`). Read against FS100-G27's "`λ_min = −8`, ratio
-  `2/9`" — the leaf proves the bound `Re Σ ≥ −8`, not the equality.
-- So `charBound_one_exact` (private) is proved, on the standard three and Weil's bound.
-- Still `sorry` (two, private): `ratioAtMost_dyadic`, `ratioAtMost_cert` (stays named). `ratioAtMost_of_five_le_chromaticNumber`
-  and `tca_of_five_le_localBound` rest on these two and Weil's bound.
+  `−1/3` by `1.6·10⁻³` and `4.9·10⁻⁶`". With it, public, on the standard three or fewer: `taylorCos_sub_le_cos` (Taylor's
+  bound for `cos` at a rational), `cosLow_le_cos`, `piLo_lt_pi`, `pi_lt_piLo_add`, `re_I_pow`, `sum_circle_eq`,
+  `circCheck_sound`, `circleCos_of_check`, `circ23_eq`, `circ31_eq`, `circ23_nodup`, `circ31_nodup`, `tab23_ok`, `tab31_ok`,
+  `check23`, `check31`.
+- `HadwigerNelson.Rigidity.ratioAtMost_of_two_notMem` (`Rigidity/ClassRatio`, public, new by the brief's amendment) —
+  `[propext, Classical.choice, Quot.sound, StandingFive.kloosterman_bound, sorryAx]`, its `sorry` from
+  **`ratioAtMost_cert` alone**: at a stable prime not above 2 whose residue field has neither 9 nor 49 elements, the
+  all-levels ratio is below `1/4`. Read against the amendment's "the odd branch of `ratioAtMost_of_five_le_chromaticNumber`,
+  with its chromatic hypothesis replaced by the two residue sizes that branch excludes"; its stored statement is the
+  amendment's text (`statements-after4.txt`). `ratioAtMost_of_five_le_chromaticNumber`'s odd branch now reads it.
+- Private, [kernel]: `circleCos_bound` (standard three); `charBound_one_exact_27` and so `charBound_one_exact` (standard
+  three and Weil's bound); **Lemma P with no unit `2`** — `SqZeroInvT.card_Kn_sq`, `.card_lift`, `.norm_sum_le`,
+  `.pm_of_good`, `card_fibreT`, `norm_charSum_new_leT`, `charBound_of_charBound_oneT` (standard three); the dyadic glue
+  `card_eq_sq_of_involution`, `exists_card_two_pow_sq`, `charBound_one_of_charSum` (standard three); **EN1-UQ4**,
+  `charSum_dyadic_large` with `card_shift_le_two`, `sum_uqSum_pow_four`, `card_quad_le`, `fourth_moment_arith` (standard
+  three: the fourth-moment count, a hand result of one mind, now a kernel theorem).
+- `ratioAtMost_dyadic` (private) — proved over two children, `colorable_four_dyadic_small` and `charSum_64_ge`.
+- Still `sorry` (three, private): `colorable_four_dyadic_small` (`U_Q` four-colourable, `Q ∈ {4, 8, 16, 32}`),
+  `charSum_64_ge` (`λ_min(U₆₄) ≥ −15`), `ratioAtMost_cert` (stays named). `ratioAtMost_of_five_le_chromaticNumber` and
+  `tca_of_five_le_localBound` rest on these three and Weil's bound.
 
 ## Stage 1 — SAVED: the readback
 
@@ -192,3 +201,85 @@ CLEAN: the whole `SqZeroInvT` chain, `charBound_of_charBound_oneT`, `card_eq_sq_
 fourth-moment count ≈ 260 (KR1's "about 300"). Left: the two certificate children — a generic form of `Floor128`'s bridge
 (its 661 lines are specific to one polynomial), ≈ 400–600 lines, then five certificates (degrees 4, 6, 8, 10 for the
 colourings, 12 for the spectrum), ≈ 60–120 lines each with their generators: **≈ 700–1,200 lines** in all.
+
+## Stage 5 — SAVED: the fourth-moment count proved; the amendment's public theorem; build 4; the job's state from the kernel's side
+
+**EN1-UQ4 proved** (`charSum_dyadic_large`, ≈ 260 lines, private, `section UQ4`; developed in
+`data/fs131/icm3/lean/UQ4Work.lean`). Over a field `k` of `Q² = 2^{2f}` elements, `ψ ≠ 1`, `μ = {u : u^{Q+1} = 1}`,
+`uqSum b = Σ_{u∈μ} ψ(bu)`:
+- `card_shift_le_two`: for `s ≠ 0` at most two `u ∈ μ` have `s + u ∈ μ` (`s^Q u² + s^{Q+1}u + s = 0`, `card_le_degree_of_subset_roots`; Frobenius additivity `add_pow_char_pow`).
+- `sum_uqSum_pow_four`: `Σ_b uqSum(b)⁴ = |k|·N`, `N = #{z ∈ μ⁴ : z₁ + z₂ + z₃ + z₄ = 0}` (`AddChar.sum_mulShift`, `ψ` primitive by `AddChar.IsPrimitive.of_ne_one`).
+- `card_quad_le`: `N ≤ 3(Q + 1)²` — each pair `p` has at most `2 + [p₁ = p₂](Q + 1)` completions. This is cruder than the derivation's `(Q + 1)(3Q + 1)`; it gives `|λ|⁴ ≤ 2Q³ − 3Q − 1` in place of `2Q³ − 2Q² − 3Q − 1`, still enough.
+- `uqSum` is real (`ψ` is `±1`-valued in characteristic 2) and constant on `μ` (`u ↦ vu`), so `(Q + 1)⁴ + (Q + 1)·λ⁴ ≤ Q²·3(Q + 1)²`, and `fourth_moment_arith` gives `λ ≥ −(3/10)(Q + 1)` at `Q ≥ 256`.
+
+**The amendment** (`§ Amendment — 2026-10-14 20:35 UTC`): `ratioAtMost_of_two_notMem` added with the ruled statement
+verbatim, proved from `exists_card_sq`, `ratioAtMost_weil_lt`, `ratioAtMost_cert`, `charBound_one_exact` with Lemma P,
+`card_ne_fifteen_sq` (the odd branch's text, with `h9`, `h49` closing `Q ∈ {3, 7}`); `ratioAtMost_of_five_le_chromaticNumber`'s
+odd branch is now `ratioAtMost_of_two_notMem` with `h9`, `h49` from `chromaticNumber_le_four_of_small` at `Q := 3`, `7` —
+the fact is proved once.
+
+**Build 4** under the slot (`logs/build-4.log`, full output `logs/build-4-full.log.xz`,
+`build/gate/build/20261014T203906Z-526724.log`; build 3, `logs/build-3.log`, was the same tree before the amendment):
+**OK — 257 of 257 batches, 7 modules rebuilt, 8 m 36 s, exit 0**; the only warnings from this job's files are the three
+remaining leaves' `declaration uses 'sorry'` (`ClassRatio.lean` lines 1649, 1657, 2075); `Arith/CircleCos` none.
+`tools/check_architecture.py`: **PASS** (`logs/architecture-4.log`; `ClassRatio`'s row names `ratioAtMost_of_two_notMem` and
+its state). **Linters** (`lake lint --no-build -- --no-build --trace` under the slot, `logs/lint-4.log`): exit 1 with **one
+finding, not this job's**: `HadwigerNelson.Rigidity.archTop` (`Rigidity/ContinuityGroup`, untouched here) has an unused
+`[NumberField ↥F]`; no finding in `Arith/CircleCos` or `Rigidity/ClassRatio`.
+
+**No statement and no definition changed** (`statements-compare4.out`; the comparator gained `--new NAME`, which reads the
+one amended name `NEW` instead of `ADDED-PUBLIC`): **SAME 44, PRIVATE-SAME 129, CHANGED 0, MISSING 0, ADDED-PUBLIC 0, NEW 1**
+(`Rigidity.ratioAtMost_of_two_notMem`), ADDED-INTERNAL 116, NEW-MODULE 27 — PASS. **Controls:** without `--new` the same
+dumps read **FAIL (1)**, `ADDED-PUBLIC` (`statements-compare4-nonew.out`, exit 1); five plants fire with `--new` in force
+(`statements-plant4.out`, the added-public plant among them).
+
+**Axioms** (`axioms4-read.out`, the three remaining leaves named): **245 records — CLEAN 229, IMPORTED 7, UPSTREAM 9, FAIL
+0**. New CLEAN: the fourth-moment chain, `charSum_dyadic_large` among them. UPSTREAM: the three leaves;
+`chromaticNumber_le_four_dyadic`, `ratioAtMost_dyadic` over the two certificate children;
+**`ratioAtMost_of_two_notMem` over `ratioAtMost_cert` alone** (and Weil); `ratioAtMost_of_five_le_chromaticNumber`,
+`tca_of_five_le_localBound` over the three; `count_of_oneAvoidingDensityBound` over `Plane.upperDensity_le_of_oneAvoidingDensityBound`
+and `Rigidity.noRamifiedStableDyadic_of_tca` only. Without the leaf list **FAIL 8** (exit 1); the planted `sorry` and axiom
+**2 of 2 FAIL** (`axioms4-plant-read.out`). Not run by this job: `scripts/dupnames.sh`, `scripts/vacuity.sh`,
+`scripts/assumptions.sh` (the landing's, on the joined tree; this job added one public module in a fresh namespace,
+`HadwigerNelson.CircleCos`, and one public theorem in `Rigidity`).
+
+**Re-priced:** EN1-UQ4 ≈ 260 lines (KR1's "about 300"). **What is left of the dyadic branch:** `colorable_four_dyadic_small`
+and `charSum_64_ge` — a generic form of `Floor128`'s bridge (a primitive polynomial of degree `n` gives a root in every
+field of `2^n` elements whose powers are the field's non-zero elements; `Floor128`'s 661 lines do this for one polynomial),
+≈ 400–600 lines, then five certificates with their generators (degrees 4, 6, 8, 10: two coordinate functionals off `μ`;
+degree 12: counters `≤ 40` over classes modulo 63), ≈ 60–120 lines each — **≈ 700–1,200 lines**.
+
+## Drafts for the landing
+
+### The audit's block (`scripts/Axioms.lean`, by the landing)
+
+- `Arith/CircleCos` (new): every public declaration CLEAN (`circleCos_ge`, `circleCos_of_check`, `cosLow_le_cos`,
+  `taylorCos_sub_le_cos`: the standard three; the `decide +kernel` checks `check23`, `check31`: `[propext]`).
+- `Rigidity/ClassRatio`: `tca_uniform`, `exists_uniform_tail` IMPORTED (Weil and the standard three), unchanged;
+  `ratioAtMost_of_two_notMem` (new) UPSTREAM through `ratioAtMost_cert` alone — IMPORTED once the certificate line is joined;
+  `ratioAtMost_of_five_le_chromaticNumber`, `tca_of_five_le_localBound` UPSTREAM through `ratioAtMost_cert`,
+  `colorable_four_dyadic_small`, `charSum_64_ge`.
+- `Rigidity/CountDescent`'s `count_of_oneAvoidingDensityBound`: UPSTREAM through lane P's and M9-S's leaves only, unchanged.
+
+### `LEAN.md` § The kernel's cost model (each to follow the last)
+
+- `decide +kernel` evaluates `ℚ` arithmetic at the pin cheaply (`Rat`'s `NatCast` is `Rat.ofInt ↑n`, its `Pow` `Rat.instPowNat`):
+  31 Taylor polynomials of degree 25 at rationals with 12-digit denominators, each compared with a table entry, 0.7 s; a
+  `List.all` pass over 960 pairs × 32 points with `List.getD` lookups in a 31-entry `ℤ` table, about 9 s
+  (`Arith/CircleCos`; `data/fs131/icm3/lean/probes/Kernel31.lean`; FS131-ICM3).
+
+### `LEAN.md` § Searching — Lean (each to follow the last)
+
+- A lower bound on `cos x` at an irrational point: Taylor at a rational `r` (`Complex.exp_bound'` at `r·i`, real parts,
+  `Re iᵐ` by `m mod 4`), then `Real.abs_cos_sub_cos_le` with `π` bracketed by `Real.pi_gt_d20`, `Real.pi_lt_d20`
+  (`CircleCos.cosLow_le_cos`, FS131-ICM3).
+- `push_cast` turns `((min a b : ℕ) : ℝ)` into `min ↑a ↑b`, so a `set j' := min a b` abbreviation is lost after unfolding:
+  `rw [def, ← hj']` before `push_cast` (FS131-ICM3).
+- A set with a fixed-point-free involution has even size by `Equiv.Perm.card_fixedPoints_modEq` at `p = 2`, the
+  involution a `Function.End` of the subtype (`charBound_one_exact_27`, FS131-ICM3).
+- `AddChar.sum_mulShift` is stated for `ψ (x * b)` (the summed variable on the left); a nontrivial character of a field is
+  primitive by `AddChar.IsPrimitive.of_ne_one` (FS131-ICM3).
+- `Finset.sum_nbij'`'s membership hypotheses are stated on the `Finset`; `Finset.card_nbij'`'s on its coercion (`Finset.mem_coe`)
+  (FS131-ICM3).
+- `interval_cases` is not in the closure of `Mathlib.Analysis.Real.Pi.Bounds` ("unknown tactic"); a four-way `omega`
+  split serves (FS131-ICM3).

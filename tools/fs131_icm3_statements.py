@@ -25,6 +25,8 @@ and for AFTER's constants absent from BEFORE:
   ADDED-GENERATED  a reserved name Lean generates on demand (`f.congr_simp`, `f.eq_<n>`, `f.eq_def`) — allowed, listed
   NEW-MODULE       a public constant of a module BEFORE does not hold (a module this job adds: allowed, listed)
   ADDED-PUBLIC     a public declaration in a module BEFORE holds      -> FAIL (the brief allows none there)
+  NEW              a public declaration named by --new NAME (ADDED IN FS131-ICM3: the brief's amendment of
+                   2026-10-14 adds exactly `Rigidity.ratioAtMost_of_two_notMem`) — allowed, listed
 
 It also reads every stored type of BEFORE (or of one dump, with --binders-only) for the class binder its section declares
 (item 847's defect): a constant whose type names `Subfield` must bind `NumberField` (` : NumberField.{0} (…)` in the raw
@@ -119,6 +121,9 @@ def compare_private(before, after, quiet=False):
     return bad, counts
 
 
+NEW_ALLOWED = set()
+
+
 def compare(before, after, before_mods, ruled, quiet=False):
     bad, lines = 0, []
     counts = {"SAME": 0, "CHANGED": 0, "RULED": 0, "MISSING": 0, "ADDED-INTERNAL": 0, "ADDED-GENERATED": 0,
@@ -156,6 +161,9 @@ def compare(before, after, before_mods, ruled, quiet=False):
         elif a["mod"] not in before_mods:
             counts["NEW-MODULE"] += 1
             lines.append(f"NEW-MODULE {a['mod'].split('.')[-1]} {n}")
+        elif n in NEW_ALLOWED:
+            counts["NEW"] = counts.get("NEW", 0) + 1
+            lines.append(f"NEW {n}")
         else:
             counts["ADDED-PUBLIC"] += 1
             bad += 1
@@ -175,6 +183,10 @@ def main(argv):
             print(l)
         print(f"binder misses: {len(m)} of {sum(1 for c in consts.values() if not c['internal'])} public constants")
         return 0
+    if "--new" in argv:
+        i = argv.index("--new")
+        NEW_ALLOWED.add(argv[i + 1])
+        argv = argv[:i] + argv[i + 2:]
     args = [a for a in argv if not a.startswith("--")]
     ruled = set()
     if "--ruled" in argv:
