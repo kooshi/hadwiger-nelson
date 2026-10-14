@@ -551,8 +551,9 @@ is a perfect matching, of independence ratio `1/2`, so T-C(A) fails. Read by the
 headline's own scope step reads `noRamifiedStableDyadic_of_three_le_localBound` (FS131-KN6). Proved (FS131-IJN1): the two
 colour classes of `colorable_two_levelTarget_one_of_isRamified` are independent and cover `𝓞 ⧸ P`, so one holds at least
 half of it, against T-C(A)'s `c < 1/4` at level one; an infinite quotient has `Nat.card` zero, and one point is
-independent. -/
-theorem noRamifiedStableDyadic_of_tca [NumberField F] (h : TCA F) : NoRamifiedStableDyadic F := by
+independent. It holds over every real subfield: its `[NumberField F]` was read by no step and was dropped at the chain's join
+(FS131-IJN1; the coordinator's ruling, item 726's word for an unread binder). -/
+theorem noRamifiedStableDyadic_of_tca (h : TCA F) : NoRamifiedStableDyadic F := by
   intro P _ hram
   obtain ⟨c, hc, hb⟩ := h P
   obtain ⟨C⟩ := colorable_two_levelTarget_one_of_isRamified hram

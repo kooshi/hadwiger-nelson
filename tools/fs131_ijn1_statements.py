@@ -13,13 +13,18 @@ The ruled changes, and how each is checked:
   stored type must equal, hygienic names aside, the `EXPECT` line of `data/fs131/ijn1/drop-expect.txt` — the first stored
   type with exactly the named `∀`-binders removed, computed by the kernel's own term surgery on the merges' build
   (`data/fs131/ijn1/lean/DropExpect.lean`); and that file's `BEFORE` line must equal the first dump's stored type.
+  The seventh drop, the unread `[NumberField ↥F]` of `noRamifiedStableDyadic_of_tca` (the coordinator's ruling of
+  2026-10-14, after the guarded lint named it), is computed by `DropExpect2.lean` (an anonymous instance binder, matched
+  by its binder kind and its type's head) into `drop-expect-2.txt`; the eighth, its cascade — the section instance
+  `[NumberField ↥F]` of `Counting.ratio_unramified_of_tca`, unread once the first is gone, omitted by the same ruling —
+  by `DropExpect3.lean` into `drop-expect-3.txt`.
 - NEW (the headline): `min_localBound_five_le_chromaticNumber` in `Rigidity.ChainHeadline`, the one new public constant.
 Everything else: every non-internal constant of the first dump is in the second, with the same kind, module, propness
 and stored type (hygienic names aside); a data definition keeps its value (or differs in proof subterms only); the only
 axiom is the declared `positive_entropy_rigidity`, unchanged; new private constants are listed; every `example` head of
 the base commit's touched files is present, in order, in the working files.
 
-Usage: fs131_ijn1_statements.py <before.txt> <after.txt> <drop-expect.txt> <base-commit> [--control]
+Usage: fs131_ijn1_statements.py <before.txt> <after.txt> <drop-expect.txt,drop-expect-2.txt,drop-expect-3.txt> <base-commit> [--control]
 --control plants ten faults in memory and requires each planted constant named by a report and no other report.
 """
 import pathlib
@@ -35,7 +40,7 @@ MOVES = {NS + n: (MP + "ChainAtTA", MP + "ZeroEntropyClosed")
 NEW_OK = {NS + "min_localBound_five_le_chromaticNumber": MP + "ChainHeadline"}
 AXIOMS_OK = {NS + "positive_entropy_rigidity"}
 TOUCHED = ["ChainAtTA", "ZeroEntropyClosed", "PositiveEntropy", "ZeroEntropyNames", "UnitCircle", "ClassRatio",
-           "EntropySplitMax", "RingScope"]
+           "EntropySplitMax", "RingScope", "CountResidue"]
 FILES = ["Proofs/HadwigerNelson/Rigidity/" + m + ".lean" for m in TOUCHED]
 REQUIRED = [NS + n for n in ("entropySplit", "zeroEntropyCarried", "mrPlus", "noRamifiedStableDyadic_of_tca",
                              "ZdAction.mulTwoThree_model", "card_words_badStarts_le", "positive_entropy_rigidity",
@@ -93,9 +98,9 @@ def read_dump(path):
     return out, nmods
 
 
-def read_expect(path):
+def read_expect(paths):
     out, cur = {}, None
-    for ln in open(path, encoding="utf-8"):
+    for ln in (l for path in paths.split(",") for l in open(path, encoding="utf-8")):
         ln = ln.rstrip("\n")
         if ln.startswith("@@ "):
             cur = ln.split(" ")[1]
@@ -104,8 +109,8 @@ def read_expect(path):
             out[cur]["before"] = ln[7:]
         elif ln.startswith("EXPECT "):
             out[cur]["expect"] = ln[7:]
-    if len(out) != 6 or any(set(v) != {"before", "expect"} for v in out.values()):
-        sys.exit(f"BROKEN EXPECT FILE {path}")
+    if len(out) != 8 or any(set(v) != {"before", "expect"} for v in out.values()):
+        sys.exit(f"BROKEN EXPECT FILES {paths}: {len(out)} entries, 8 expected")
     return out
 
 

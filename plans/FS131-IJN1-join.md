@@ -6,7 +6,23 @@ cores, 31 GB.*
 
 ## Theorems this phase proved
 
-(Filled at the last stage, from the final build's print.)
+[kernel], printed from build 5's tree (`data/fs131/ijn1/axioms-final.txt`; reader `tools/fs131_ijn1_axioms.py` PASS, control
+4 of 4); all under `HadwigerNelson.Rigidity`; "standard three" = `[propext, Classical.choice, Quot.sound]`.
+- `noRamifiedStableDyadic_of_tca : ∀ (F : Subfield ℝ), TCA F → NoRamifiedStableDyadic F` (M9-S; FS100-EXC) — standard three.
+- `ZdAction.mulTwoThree_model : mulTwoThree.IsIrreducible ∧ ¬ mulTwoThree.IsVirtuallyCyclic` (the model of FS105-NVC's
+  hypotheses) — standard three.
+- `entropySplit : ∀ (F) [NumberField F], EntropySplit F` (PE-2 at one non-torsion rotation; moved, proved) — standard three
+  and the declared `positive_entropy_rigidity`; no `sorry`.
+- `zeroEntropyCarried : ∀ (F) [NumberField F], ZeroEntropyCarried F` (EF_F⁺; moved, scope dropped, proved) — standard three.
+- `mrPlus : ∀ (F) [NumberField F], MRPlus F` (MR⁺ over every real number field; moved, scope dropped) — standard three and
+  the declared theorem; no `sorry`.
+- `min_localBound_five_le_chromaticNumber_closed` (moved, unchanged) — standard three and the declared theorem.
+- **`min_localBound_five_le_chromaticNumber : ∀ (F : Subfield ℝ) [NumberField F], Plane.OneAvoidingDensityBound →
+  (localBound F ≤ 4 → localBound F ≤ χ) → min (localBound F) 5 ≤ χ`** (the headline, `Rigidity/ChainHeadline`) —
+  standard three, `positive_entropy_rigidity`, `StandingFive.kloosterman_bound` and **`sorryAx`, through seven leaves of
+  other lines** (Stage 4's table). Not a closed theorem until they land.
+- Restated by drops, each stronger and on the standard three: `Counting.ratio_unramified_of_tca`, `card_words_badStarts_le`,
+  `mul_card_heavyNames_le`, `mul_measureReal_light_le_blockEntropy`, `rpow_mul_exp_le_exp`.
 
 ## Stage 1 — SAVED: the readback, the merges, build 1, the dumps taken after the merges
 
@@ -176,3 +192,163 @@ copies of an internal name.
 7. **`ARCHITECTURE.md`**: rows of `ChainAtTA`, `PositiveEntropy`, `ZeroEntropyClosed`, `ZeroEntropyNames`, `TraceSplit`,
    `APlus` (the last two said M2b "until it lands"), a new row for `Rigidity/ChainHeadline`, and the § Trust row;
    `tools/check_architecture.py`: PASS (`logs/arch-1.log`). `Proofs.lean`: the new module.
+
+## Stage 4 — SAVED: the headline, read from the kernel
+
+**`Rigidity.min_localBound_five_le_chromaticNumber`** (`Proofs/HadwigerNelson/Rigidity/ChainHeadline.lean`, new):
+`min_localBound_five_le_chromaticNumber_of_closed F (bochnerHerglotz_of_countable (unitRing F))
+(invariantMeasureOnClosed_of_countable F) (Counting.count_of_oneAvoidingDensityBound hOA) (aPlusOfR88 F) (entropySplit F)
+(fun _ => zeroEntropyCarried F) (tca_of_five_le_localBound F) hRow99`. Six of the old headline's eight hypotheses are
+discharged by proved theorems; `hCount` by the count over `hOA`; `hRow99` kept.
+
+**The stored statement** (`data/fs131/ijn1/lean/HeadlineCheck.lean` → `headline-check.txt`, run on build 5; `pp.explicit` there):
+
+```
+∀ (F : Subfield ℝ) [NumberField ↥F],
+  HadwigerNelson.Plane.OneAvoidingDensityBound →
+    (localBound F ≤ 4 → localBound F ≤ (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).chromaticNumber) →
+      min (localBound F) 5 ≤ (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).chromaticNumber
+```
+
+**Read aloud.** For every real number field `F`: if every Lebesgue-measurable set of the plane with no two points at
+distance exactly 1 has upper density at most `0.2470` about every centre (`[AmbrusEtAl2023]` Thm 1 as printed), and if
+`L(F) ≤ 4` implies `L(F) ≤ χ(F²)` (row 99's lower half at four, a theorem on `main` on Weil's bound), then
+`min(L(F), 5) ≤ χ(F²)`, where `L(F)` is the least chromatic number of the level-one residue targets at the
+conjugation-stable primes of `F(i)` and `χ(F²)` the chromatic number of the unit-distance graph on `F²` (in `ℕ∞`). **Against
+the old headline's conclusion**, as the kernel stores both: the two types opened at the same `F` and instance, every
+hypothesis stripped, the conclusions compared as terms — **SAME**; control, the old headline's conclusion against its
+`hRow99`'s, **DIFFERENT**; `hRow99` new against old: **SAME**. Against the informal claim (the local–global conjecture's
+main clause through five, its lower half, `CLAUDE.md` § The local–global conjecture): `χ(F²) ≥ min(L(F), 5)` is what the
+chain was built to give; with `UpperHalf.chromaticNumber_planeOver_le_localBound` (`χ(F²) ≤ L(F)`, on `main` and here) it
+gives `χ(F²) = L(F)` wherever `L(F) ≤ 5`.
+
+**Its axioms** (`axioms-final.txt`, from build 5's tree; build 2's print, `axioms-after.txt`, was the same): `[propext, sorryAx, Classical.choice, Quot.sound,
+HadwigerNelson.Rigidity.positive_entropy_rigidity, HadwigerNelson.StandingFive.kloosterman_bound]` — the standard three,
+two declared outside theorems (Einsiedler–Lindenstrauss through `entropySplit`; Weil through M13's `charBound_one_weil`),
+and `sorryAx`. **Every leaf its `sorryAx` comes through** (the printer's `SORRY-LEAF`, the line of each name; the build's
+warnings name the same lines):
+
+| leaf | module, line | whose |
+|---|---|---|
+| `card_fibre` (private; Lemma P, Hensel's fibre count) | `Rigidity/ClassRatio` l. 214 | M13's leaves, `fs131-wcm2` |
+| `norm_charSum_new_le` (private; Lemma P, a character new at a level) | `Rigidity/ClassRatio` l. 224 | M13's leaves |
+| `ratioAtMost_dyadic` (private; the dyadic branch) | `Rigidity/ClassRatio` l. 346 | M13's leaves |
+| `chromaticNumber_le_four_of_small` (private; the exclusions at `q ∈ {3, 7}`) | `Rigidity/ClassRatio` l. 351 | M13's leaves |
+| `ratioAtMost_cert` (private; **the certificates' link** at `q ∈ {11, 19}`) | `Rigidity/ClassRatio` l. 359 | M13's leaves / the certificates, `fs131-wc16` |
+| `charBound_one_exact` (private; the exact spectra at `q ∈ {23, 27, 31}`) | `Rigidity/ClassRatio` l. 366 | M13's leaves |
+| `upperDensity_le_of_oneAvoidingDensityBound` (**the density bound's instance**: the paper's form carried to `ℂ`) | `Plane/OneAvoidingDensity` l. 54 | the density bound, `fs131-wdb3` |
+
+As the brief expected: M13's six leaves, the certificates' link among them, and the density bound's instance; nothing
+else. `RingScope`'s `unitRing_eq_stableIntegers` (l. 247) is not on the headline's path. **What the headline's `sorryAx`
+does not come through:** the entropy side, the zero-entropy side, M11, the count's own modules, M2a/M2b/M3/M10, lane A —
+each proved on this branch; on the branch's 870 public records (`axioms-all.txt`, build 5), 851 are on the standard three, 8 on the declared
+Einsiedler–Lindenstrauss and no `sorry`, and 11 carry `sorryAx`, every one through the seven leaves above or `RingScope`'s
+(`draft-axioms-block.lean`).
+
+**The two hypotheses kept.** `hOA : Plane.OneAvoidingDensityBound` is a named hypothesis standing for an outside theorem
+(its docstring: "External: a named hypothesis standing for an outside theorem, not proved in the library"; not declared
+as an axiom by the coordinator's ruling of 2026-10-14) — not declared to the assumptions step on this branch (§ Drafts).
+`hRow99` is discharged at the landing by `ThreeFourColours.localBound_le_chromaticNumber_of_le_four` (`main`, FS131-LJ1;
+its statement, read in `main`'s source, is `hRow99`'s text for text; its stored type is not compared here), which rests on `StandingFive.kloosterman_bound`. So on the
+joined `main` the headline would take one hypothesis, the printed theorem of `[AmbrusEtAl2023]`, and rest on two declared
+axioms and the seven leaves.
+
+## Stage 5 — SAVED: the gate items of § Done means, from the kernel's side; two more ruled drops
+
+**5.1 Two ruled drops after the lint** (the coordinator's rulings of 2026-10-14, by message, item 726's word for an unread
+binder; listed with stage 3's). The guarded lint on the planted build (§ 5.3) named, besides the plant, one real finding:
+**`noRamifiedStableDyadic_of_tca`'s `[NumberField ↥F]` unused** once its proof was in. Ruled: drop it (the alternative,
+`@[nolint]`, declined: a theorem without it is only stronger). Dropped (build 4, `logs/build4-full.log`: OK, 26 rebuilt,
+9m58s). Its one reader, `CountResidue` l. 315, compiled — and its theorem `Counting.ratio_unramified_of_tca` then carried an
+unread section instance (`unusedSectionVars` in build 4, `unusedArguments` in the lint, `logs/lint-build4.log`). Ruled as
+the cascade: `omit [NumberField ↥F] in` above it, with a `--` reason (its one reader, l. 381, is inside a proof with the
+instance in scope; no stored type outside `CountResidue` moves). Done (**build 5**, `logs/build5-full.log`, gate log
+`build/gate/build/20261014T195639Z-385836.log` → `logs/build5-gate.log`: **`OK — 257 of 257 batches, 7 module(s) rebuilt,
+3 module(s) with warnings, 8m20s`, exit 0**). Each expected type computed from the kernel's term on the build before its
+drop (`lean/DropExpect2.lean` on build 3 → `drop-expect-2.txt`; `lean/DropExpect3.lean` on build 4 → `drop-expect-3.txt`;
+an anonymous instance binder matched by its kind and its type's head); each `BEFORE` equal to the merged dump's.
+
+**5.2 No other statement or definition changed** (`tools/fs131_ijn1_statements.py`, the merged dump against build 5's,
+`statements-after-5.txt`, `.xz` + sha256, with the three expect files): **PASS** (`statements-compare-5.out`) — 1,132 named
+constants, 246 data definitions' values, 5 example heads of the base commit's nine touched files; **4 RULED MOVE, 8 RULED
+DROP** (`zeroEntropyCarried`, `mrPlus`, lane N's four statements with five binders, `noRamifiedStableDyadic_of_tca`,
+`Counting.ratio_unramified_of_tca`), **1 NEW** (the headline), 4 new private helpers, nothing else. **Control** (ten
+plants): **10 of 10, 0 stray** (`statements-control-5.out`).
+
+**5.3 The build and the lint.** Build 5: its every warning is ``declaration uses `sorry` `` of another line's leaf
+(`OneAvoidingDensity` l. 54; `ClassRatio` ll. 214, 224, 346, 351, 359, 366; `RingScope` l. 247), 0 others. **The guarded
+lint** (`lake lint --no-build -- --no-build --trace` under the slot, `logs/lint-build5.log`): **exit 0, 14 of 14 `(2/2)
+Passed!`, `-- Linting passed for Proofs.`** **Its control** (`data/fs131/ijn1/lint-plant.sh`, FS131-LJ1's with the module
+and the plant's name changed): `theorem zz_ijn1_lint_plant [Nonempty ℕ] : (1 : ℕ) = 1 := rfl` planted at the end of
+`ChainHeadline`, the tree built (OK, 2 rebuilt), the lint **exit 1 naming the plant** (`synTaut` and `unusedArguments`,
+`logs/lint-plant.log`) — and the real finding of § 5.1 —, the module restored by `git checkout` (digest equal, 0 tracked
+files modified, `lint-plant-restore.txt`); build 3 rebuilt it from the restored text (OK, 2 rebuilt).
+
+**5.4 `dupnames`** (`./scripts/dupnames.sh` on the joined tree, build 5, `logs/dupnames-2.log`): **OK — no name declared
+by two modules** (25 generated on demand, e.g. `SpectralChain.corr.eq_1`). Not run: its `--self-test` and the audit's
+(the landing's whole-library gate).
+
+**5.5 The architecture check** (`logs/arch-3.log`): **RESULT: PASS.**
+
+**5.6 The axioms of every public declaration in the files I touch** (`lean/Axioms.lean` over the ten modules this job writes
+— `ChainAtTA`, `ZeroEntropyClosed`, `ChainHeadline`, `PositiveEntropy`, `ZeroEntropyNames`, `UnitCircle`, `ClassRatio`,
+`EntropySplitMax`, `RingScope`, `CountResidue` — → `axioms-final.txt`, private helpers included; reader
+`tools/fs131_ijn1_axioms.py` → `axioms-final-verdict.out`): **PASS, 235 records** — `ChainAtTA` 35 CLEAN; `ZeroEntropyClosed`
+2 CLEAN, 3 IMPORTED; `ChainHeadline` 1 OPEN-LEAF (the headline); `PositiveEntropy` 16 CLEAN, 2 IMPORTED; `ZeroEntropyNames`
+58 CLEAN; `UnitCircle` 33 CLEAN; `ClassRatio` 19 CLEAN, 1 IMPORTED (`charBound_one_weil`, private, on Weil), 13 OPEN-LEAF
+(its six leaves and what reads them); `EntropySplitMax` 8 CLEAN, 2 IMPORTED; `RingScope` 8 CLEAN, 1 OPEN-LEAF
+(`unitRing_eq_stableIntegers`); `CountResidue` 33 CLEAN. Every OPEN-LEAF's `sorry` is sourced in M13's six private leaves,
+the density bound's instance or `RingScope`'s leaf; the planted record (`positive_entropy_rigidity_of_polishSpace`) reads
+IMPORTED. **Control** (`--control`, four plants: an unknown axiom, a `sorry` sourced in a proved leaf, the declared theorem
+in a record that must be clean, a ninth leaf under the headline): **4 of 4** (`axioms-final-control.out`). The public
+records, one per line, are `axioms-final.txt`'s `AXIOMS … public …` lines. **`./scripts/axioms.sh`** on build 5
+(`logs/axioms-sh-3.log`): **OK — 7447 clean, 28 axiom-free, 34 imported, 5 declared purchases.**
+
+**5.7 Spec examples and models.** No `#eval`/`example` added or removed (5 example heads in order). Models of the new
+statements' hypotheses: `noRamifiedStableDyadic_of_tca`'s `TCA F` — at `ℚ(√47)` (the instances' module, M15; not in the
+library), its conclusion `NoRamifiedStableDyadic` is false at `ℚ` (the prime `(1 + i)`), so `TCA ⊥` is false, which is
+the theorem's contrapositive; `mulTwoThree_model` is itself a model; the headline's: § Stage 4's paragraph. The vacuity
+scan was not run (the landing's).
+
+## Drafts for the landing (files this job does not write; each names its slot)
+
+**D1. The audit's block for the joined chain** (`scripts/Axioms.lean`): `data/fs131/ijn1/draft-axioms-block.lean`,
+generated by `tools/fs131_ijn1_audit_block.py` from `axioms-all.txt` (every public declaration of the branch's 54 chain
+modules: `Rigidity/*` with `ChainHeadline`, the five `Outside/OAI015*` ports, `Plane/OneAvoidingDensity`,
+`Plane/WindowDensity`; build 2's tree). **870 public records: 851 CLEAN** (one `#print axioms` line each, grouped by
+module, for the CLEAN section above the PURCHASED banner), **8 IMPORTED on `Rigidity.positive_entropy_rigidity`** (filed on
+this branch, stage 3; the block repeats them), **0 on any other import**, **11 not auditable** (`sorryAx`; listed with their
+sources: the count, M13's public theorems, `mOne_le_…`, `mOne_lt_quarter`, the density bound's instance, `RingScope`'s
+`unitRing_eq_stableIntegers`, and the new headline). The ports' records may want the port block's form
+(`open private … from …`) where the landing's port job keeps one. Control: an unknown axiom planted in one record stops the
+generator, naming it (exit 1).
+
+**D2. The assumptions ledger's lines** (`scripts/assumptions-ledger.txt` and `scripts/Assumptions.lean`'s
+`AssumptionAudit.declared`): `data/fs131/ijn1/draft-assumptions.txt`, read from `./scripts/assumptions.sh` on the joined
+branch (`logs/assumptions-1.log`; exit 1, 45 checks failed — the branch was never at this gate). (a) **23 rows the ledger
+lacks**: 9 `RESTS` of `StandingFive.kloosterman_bound` (M13's public theorems, the count, the headline), the `TAKES` of
+`BochnerHerglotz`, `InvariantMeasureOnClosed`, `Interface.Count`, `Interface.APlusOfR88`, `Interface.APlus0` by
+`five_le_chromaticNumber_of_mrPlus`, `min_localBound_five_le_chromaticNumber_of_closed` and `_closed`, one `TAKES` of
+`SpectralInputs.BochnerOn` (`isSpectralMeasureOf_condExpL2`), one `MENTIONS` of `Interface.MR` (`interface_mr_iff`) —
+`--write-ledger` adds them once (b) is filed. (b) **13 entries**: `Plane.OneAvoidingDensityBound` is undeclared — a
+`.former` of kind `outside`, source `[AmbrusEtAl2023]` (its docstring says "External: a named hypothesis"), which also
+clears the five `undeclared-closed-hypothesis` rows (`mOne_le_…`, `mOne_lt_quarter`, `upperDensity_le_…`, the count, the
+headline's `hOA`); four `.condition` entries are now stale because the chain concludes them (`SpectralChain.IsTraceSpectral`
+by `aplus_model` and `Counting.exists_invariantColouring_rat`; `SpectralChain.TCA` by `tca_of_five_le_localBound`;
+`SpectralInputs.IsHaarFourier` by `exists_isHaarFourier`, `isHaarFourier_dualHaar`; `SpectralInputs.IsSpectralMeasureOf` by
+`IsSpectralMeasureOf.add_of_orthogonal`, `spectral_null_model`) — remove each; three `Prop`-formers no theorem concludes
+need a `.condition` with its model or the statement that no declaration exhibits one (`Rigidity.EntropySplitEvery`,
+`Rigidity.IsRamified` — at `ℚ` the prime `(1 + i)`, `Rigidity.SIndep`). Then the nine counts move (this branch's run:
+`axioms=4 rests=45 named=19 inline=15 outside=7 ours=22 open=5 takes=118 mentions=2`, before (b)) — the landing's, on
+`main`'s ledger.
+
+**D3. `LEAN.md` lines** (§ Searching — Lean, appended at its end): `data/fs131/ijn1/draft-lean-md.txt`, five lines — the
+term surgery that gives a ruled drop's expected stored type; unique factorisation at 2 and 3 with no valuation;
+`Finset.card_filter_add_card_filter_not` and the infinite case of a `Nat.card` bound; `findDeclarationRanges?` and
+`selectionRange` for a leaf's line; the module in a moved statement's hygienic names.
+
+**D4. `ARCHITECTURE.md` § Trust's count sentence and the front page** (`CLAUDE.md` § Trust ledger, at the landing): the
+declared imports become four with `Rigidity.positive_entropy_rigidity`, eight records on it on this branch (nine `RESTS`
+rows, the headline the ninth, not auditable until its leaves land). `CLAUDE.md` § Trust ledger's sentence "The library
+declares three outside axioms" → four, naming `Rigidity.positive_entropy_rigidity` — `[EinsiedlerLindenstrauss2022]`
+Thm 1.3 — "with eight records"; the counts themselves are the landing's audit on the joined `main`.

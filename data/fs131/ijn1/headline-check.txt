@@ -1,6 +1,4 @@
-slot: waiting (ledger 22 + 4 > budget 22 GiB)
-slot: waiting (ledger 21 + 4 > budget 22 GiB)
-slot: admitted ijn1e: mem 4 GiB (hard cap), cpus 6,7
+slot: admitted ijn1e: mem 4 GiB (hard cap), cpus 1,2
 CONCLUSION new vs old: SAME
   new: min (HadwigerNelson.SpectralChain.localBound F) 5 ≤
   (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
@@ -49,5 +47,3 @@ STORED TYPE (pp.explicit):
           (@SimpleGraph.induce.{0} Complex (HadwigerNelson.planeOver F)
             (@HadwigerNelson.unitDistance.{0} Complex
               (@NormedField.toMetricSpace.{0} Complex Complex.instNormedField))))
-seconds=403
-exit=0

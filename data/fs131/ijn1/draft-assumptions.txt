@@ -1,0 +1,42 @@
+# FS131-IJN1 — DRAFT for the landing: what ./scripts/assumptions.sh reports on the joined branch fs131-wj (build 2),
+# beyond the nine RESTS rows of `Rigidity.positive_entropy_rigidity` this job inserted. Read from logs/assumptions-1.log.
+# (a) rows the ledger lacks (each `unlisted-consumer`): the landing's --write-ledger adds them
+
+MENTIONS HadwigerNelson.SpectralChain.Interface.MR HadwigerNelson.Rigidity.interface_mr_iff
+RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Rigidity.Counting.count_of_oneAvoidingDensityBound
+RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Rigidity.Counting.false_of_slice
+RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Rigidity.exists_uniform_tail
+RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber
+RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Rigidity.ratioAtMost_of_five_le_chromaticNumber
+RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Rigidity.tca_of_five_le_localBound
+RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Rigidity.tca_uniform
+RESTS HadwigerNelson.StandingFive.kloosterman_bound _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.charBound_one_weil
+RESTS HadwigerNelson.StandingFive.kloosterman_bound _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.ratioAtMost_weil
+RESTS HadwigerNelson.StandingFive.kloosterman_bound _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.ratioAtMost_weil_lt
+TAKES HadwigerNelson.SpectralChain.BochnerHerglotz HadwigerNelson.Rigidity.five_le_chromaticNumber_of_mrPlus
+TAKES HadwigerNelson.SpectralChain.BochnerHerglotz HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber_closed
+TAKES HadwigerNelson.SpectralChain.BochnerHerglotz HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber_of_closed
+TAKES HadwigerNelson.SpectralChain.Interface.APlus0 HadwigerNelson.Rigidity.five_le_chromaticNumber_of_mrPlus
+TAKES HadwigerNelson.SpectralChain.Interface.APlusOfR88 HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber_closed
+TAKES HadwigerNelson.SpectralChain.Interface.APlusOfR88 HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber_of_closed
+TAKES HadwigerNelson.SpectralChain.Interface.Count HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber_closed
+TAKES HadwigerNelson.SpectralChain.Interface.Count HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber_of_closed
+TAKES HadwigerNelson.SpectralChain.InvariantMeasureOnClosed HadwigerNelson.Rigidity.five_le_chromaticNumber_of_mrPlus
+TAKES HadwigerNelson.SpectralChain.InvariantMeasureOnClosed HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber_closed
+TAKES HadwigerNelson.SpectralChain.InvariantMeasureOnClosed HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber_of_closed
+TAKES HadwigerNelson.SpectralInputs.BochnerOn HadwigerNelson.Rigidity.isSpectralMeasureOf_condExpL2
+
+# (b) entries of AssumptionAudit.declared the step asks for (each FAIL as printed)
+FAIL stale-condition HadwigerNelson.SpectralChain.IsTraceSpectral :: declared a condition, and it is concluded by [HadwigerNelson.Rigidity.aplus_model, HadwigerNelson.Rigidity.Counting.exists_invariantColouring_rat]: the entry is not needed
+FAIL stale-condition HadwigerNelson.SpectralChain.TCA :: declared a condition, and it is concluded by [HadwigerNelson.Rigidity.tca_of_five_le_localBound]: the entry is not needed
+FAIL stale-condition HadwigerNelson.SpectralInputs.IsHaarFourier :: declared a condition, and it is concluded by [HadwigerNelson.SpectralInputs.exists_isHaarFourier, HadwigerNelson.Rigidity.isHaarFourier_dualHaar]: the entry is not needed
+FAIL stale-condition HadwigerNelson.SpectralInputs.IsSpectralMeasureOf :: declared a condition, and it is concluded by [HadwigerNelson.Rigidity.IsSpectralMeasureOf.add_of_orthogonal, HadwigerNelson.Rigidity.spectral_null_model]: the entry is not needed
+FAIL undeclared-by-docstring HadwigerNelson.Plane.OneAvoidingDensityBound :: its docstring uses the library's words for an assumption and no entry declares it
+FAIL undeclared-closed-hypothesis HadwigerNelson.Plane.mOne_le_of_oneAvoidingDensityBound:h :: the closed hypothesis `HadwigerNelson.Plane.OneAvoidingDensityBound` is proved by no library theorem and named by no entry
+FAIL undeclared-closed-hypothesis HadwigerNelson.Plane.mOne_lt_quarter:h :: the closed hypothesis `HadwigerNelson.Plane.OneAvoidingDensityBound` is proved by no library theorem and named by no entry
+FAIL undeclared-closed-hypothesis HadwigerNelson.Plane.upperDensity_le_of_oneAvoidingDensityBound:h :: the closed hypothesis `HadwigerNelson.Plane.OneAvoidingDensityBound` is proved by no library theorem and named by no entry
+FAIL undeclared-closed-hypothesis HadwigerNelson.Rigidity.Counting.count_of_oneAvoidingDensityBound:hOA :: the closed hypothesis `HadwigerNelson.Plane.OneAvoidingDensityBound` is proved by no library theorem and named by no entry
+FAIL undeclared-closed-hypothesis HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber:hOA :: the closed hypothesis `HadwigerNelson.Plane.OneAvoidingDensityBound` is proved by no library theorem and named by no entry
+FAIL undeclared-never-concluded HadwigerNelson.Rigidity.EntropySplitEvery :: taken as a hypothesis by 1 constant(s) ([HadwigerNelson.Rigidity.entropySplit_of_every]), concluded by none: an assumption (.former) or a condition (.condition)?
+FAIL undeclared-never-concluded HadwigerNelson.Rigidity.IsRamified :: taken as a hypothesis by 2 constant(s) ([HadwigerNelson.Rigidity.IsRamified.isDyadic, HadwigerNelson.Rigidity.colorable_two_levelTarget_one_of_isRamified]), concluded by none: an assumption (.former) or a condition (.condition)?
+FAIL undeclared-never-concluded HadwigerNelson.Rigidity.SIndep :: taken as a hypothesis by 1 constant(s) ([HadwigerNelson.Rigidity.card_le_mul_card_closedNbhd]), concluded by none: an assumption (.former) or a condition (.condition)?

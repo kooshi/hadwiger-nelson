@@ -311,6 +311,9 @@ theorem resR_eq_zero_of_le (P : StablePrime F) {m k : ℕ} (hmk : m ≤ k) {r : 
     rw [← hfac, RingHom.comp_apply]
   rw [e, hr, map_zero]
 
+-- `[NumberField F]` is read by no step since `noRamifiedStableDyadic_of_tca` dropped it (FS131-IJN1; the coordinator's
+-- ruling, the cascade of that drop)
+omit [NumberField ↥F] in
 theorem ratio_unramified_of_tca (h : TCA F) (P : StablePrime F) : ¬ IsRamified P :=
   (noRamifiedStableDyadic_iff F).mp (noRamifiedStableDyadic_of_tca F h) P
 

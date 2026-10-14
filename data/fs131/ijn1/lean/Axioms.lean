@@ -7,9 +7,10 @@ import Proofs.HadwigerNelson.Rigidity.UnitCircle
 import Proofs.HadwigerNelson.Rigidity.ClassRatio
 import Proofs.HadwigerNelson.Rigidity.EntropySplitMax
 import Proofs.HadwigerNelson.Rigidity.RingScope
+import Proofs.HadwigerNelson.Rigidity.CountResidue
 /-! FS131-IJN1 — the axioms of every theorem and definition stored in the compiled modules this job writes
 (`ChainAtTA`, `ZeroEntropyClosed`, `ChainHeadline`, `PositiveEntropy`, `ZeroEntropyNames`, `UnitCircle`, `ClassRatio`,
-`EntropySplitMax`, `RingScope`; private helpers included; names Lean generates inside a declaration skipped), one line
+`EntropySplitMax`, `RingScope`, `CountResidue`; private helpers included; names Lean generates inside a declaration skipped), one line
 each, sorted by name within a module:
 
   AXIOMS <module> <public|private> <name> : [axioms, sorted]
@@ -18,7 +19,7 @@ each, sorted by name within a module:
 
 then one planted record under the module name `PLANT` — `positive_entropy_rigidity_of_polishSpace`, which rests on the
 declared printed theorem (the reader, `tools/fs131_ijn1_axioms.py`, must report it). FS131-IJ3's printer
-(`data/fs131/ij3/lean/Axioms.lean`) aimed at these nine modules, with the leaf's module and line added. Run from the
+(`data/fs131/ij3/lean/Axioms.lean`) aimed at these ten modules, with the leaf's module and line added. Run from the
 worktree against its compiled library:
   lake env lean data/fs131/ijn1/lean/Axioms.lean > data/fs131/ijn1/axioms-<when>.txt -/
 namespace FS131IJN1Axioms
@@ -26,7 +27,7 @@ open Lean Elab Command
 
 /-- The modules read: the Lean modules this job writes. -/
 def modules : List Name :=
-  [`Proofs.HadwigerNelson.Rigidity.ChainAtTA, `Proofs.HadwigerNelson.Rigidity.ZeroEntropyClosed, `Proofs.HadwigerNelson.Rigidity.ChainHeadline, `Proofs.HadwigerNelson.Rigidity.PositiveEntropy, `Proofs.HadwigerNelson.Rigidity.ZeroEntropyNames, `Proofs.HadwigerNelson.Rigidity.UnitCircle, `Proofs.HadwigerNelson.Rigidity.ClassRatio, `Proofs.HadwigerNelson.Rigidity.EntropySplitMax, `Proofs.HadwigerNelson.Rigidity.RingScope]
+  [`Proofs.HadwigerNelson.Rigidity.ChainAtTA, `Proofs.HadwigerNelson.Rigidity.ZeroEntropyClosed, `Proofs.HadwigerNelson.Rigidity.ChainHeadline, `Proofs.HadwigerNelson.Rigidity.PositiveEntropy, `Proofs.HadwigerNelson.Rigidity.ZeroEntropyNames, `Proofs.HadwigerNelson.Rigidity.UnitCircle, `Proofs.HadwigerNelson.Rigidity.ClassRatio, `Proofs.HadwigerNelson.Rigidity.EntropySplitMax, `Proofs.HadwigerNelson.Rigidity.RingScope, `Proofs.HadwigerNelson.Rigidity.CountResidue]
 
 /-- The constants of the library, reachable from `n`, that mention `sorryAx` directly. -/
 def sorrySources (env : Environment) (n : Name) : Array Name := Id.run do
