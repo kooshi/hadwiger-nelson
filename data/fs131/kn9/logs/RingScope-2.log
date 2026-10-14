@@ -1,0 +1,4 @@
+slot: admitted kn9: mem 5 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/RingScope.lean:61:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/RingScope.lean:71:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/RingScope.lean:80:8: warning: declaration uses `sorry`

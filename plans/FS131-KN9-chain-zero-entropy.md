@@ -222,3 +222,91 @@ implementer finds the namespaced form; KN8's plan reads it too). `continuous_mul
 Two implementers can run them at once; one implementer takes M5-E first. `Rigidity/Pieces`' docstring sentence "with
 `[PolishSpace (PieceDual M)]` from `Rigidity.polishSpace_dual`" is stale since the ruling (Lemma Γ no longer needs the instance
 for this call); it is lane G's file — a docstring edit for lane G or the landing, drafted in § Drafts.
+
+## Stage 3 — SAVED: M9 typed and planned (the ring and the scope)
+
+Read for this stage: EN1 § 8.1–8.2 (`plans/FS131-EN1-derivation.md`), J45 N1 (`plans/FS84-SI-D-derivation.md` ll. 100–122), J28D C1
+(`plans/FS86-R88-D-derivation.md` ll. 144–152), FS91-J07-3 and J07-4 (`plans/FS91-derivation.md` ll. 127–136), FS91-J10's lemmas L1–L7
+(`plans/FS91-S1V-character.md` § 2.2, ll. 45–116), FS100-EXC (`plans/FS100-derivation.md` l. 297); in this tree `Rigidity/ChainAtTA`
+(the scope's definitions), `UnitRing.lean`'s declarations, `Arith/UpperHalf` ll. 100–190 (the stable valuation subrings).
+
+### 3.1 The cut, and what the coordinator's rulings of this job changed in it
+
+**`Rigidity/RingScope` (new; imports `Rigidity/ChainAtTA`)**: `stableIntegers F` (`O′`), `R ⊆ O′` (proved), `c·O′ ⊆ R`, `R = O′`,
+the density. `R` is read inside `L` as `UnitRing.unitRing (conjOn (fieldI_conj F))`; the plane's `unitRing F ⊆ ℂ` is the same
+ring through `UnitRing.coe_mem_unitRingOver_iff`, already proved. **The scope lemma** `noRamifiedStableDyadic_of_tca` stays
+where it is typed (`Rigidity/ChainAtTA`, off the headline's path); its plan is § 3.4, one proof in that file — the brief keeps
+that file mine to read only, so the edit is the M9 implementer's (lane C, its only other writer, has landed) or moves
+downstream unchanged at the landing; the coordinator's choice.
+
+**The weaker reading of EF_F⁺** (sent mid-job; the coordinator's ruling of 2026-10-14: "plan M8b on it"): M8b's model needs
+`R ⊆ O′` and `c·O′ ⊆ R` only, both over every real number field. So **`R = O′` (Lemma C′) is off M8b's path**, and by the
+same ruling it is typed and planned in words only (§ 3.3). Whether anything else on the headline's path reads it: EN1 § 8.1
+row 8 says T-C(A) at `S = ∅` "reads `R = O′` (Lemma C (d), Lemma C′)" — module M12's, not this job's; Lemma C (d)'s
+inclusion `R ∩ ∏_{𝔓∣N} 𝔓^K ⊆ NR` follows from `c·O′ ⊆ R` alone (FS91-J10-L3's proof, read above), so whether M12 needs the
+equality or only (d) is **M12's planner's question, named here**. Row 3's density, in the form typed here, does not read it.
+
+**The readability lemma** of KN6's dated line ("`IsRamified P` is equivalent to ramification index 2 over `P ∩ 𝓞_F` in Mathlib's
+sense") is **not typed by this job**: stating it needs an `Algebra F (fieldI F)` (and so `Algebra (𝓞 F) (𝓞 (fieldI F))`) that the
+library does not declare — a structure no consumer reads — and the proof reads Mathlib's Galois inertia API at the pin
+(`Ideal.card_inertia_eq_ramificationIdxIn`, `Ideal.Quotient.stabilizerHom_surjective`, both present;
+`data/fs131/kn9/logs/Names9.log`). Its route in words: for a stable `P`, `g = 1`; `e·f = 2`; the decomposition group is
+`Gal(L/F)` and surjects onto the residue automorphisms (`stabilizerHom_surjective`), so conjugation acts trivially on `𝓞 ⧸ P`
+iff the residue extension is trivial iff `f = 1` iff `e = 2`. Off the path; a stub-sized job if wanted.
+
+### 3.2 The passes (each a fresh invocation, scoped to M9)
+
+**Domain** (`debruijn-domain-modeling`): `O′` as the infimum of the stable valuation subrings is the problem's own object (the
+Dedekind overring that inverts the split primes), and it speaks the vocabulary the library already reasons in
+(`UnitRing.unitRing_le_valuationSubring_iff`, `inv_mem_iff_forall_valuationSubring`, `UpperHalf.mem_localRing_of_mul_conj_eq_one`),
+which is why `R ⊆ O′` closed in three lines. It needs `[NumberField F]` (the valuation subrings are built from `𝓞 (F(i))`), found
+at the first elaboration (`logs/RingScope-1.log`). **The density** is typed as "`N·R` is dense in `L ⊗ ℝ` for every `N ≥ 1`",
+which is J45 N1 (b) at `S = ∅` with the profinite factor read off (a basic open set of `R̂_prof × (L ⊗ ℝ)` is
+`(r + N·R̂) × V`): the intrinsic content without a profinite completion the library lacks. `L ⊗ ℝ` is Mathlib's mixed space of
+`L`, through `NumberField.mixedEmbedding`. Adversarial member: `R` discrete in `L ⊗ ℝ` (as `𝓞 L` is) would make the statement
+false; `1/5 ∈ R` is what excludes it, and it is consistent with `R ⊆ O′` because no prime above 5 is stable (`(2 ± i)` are
+swapped by conjugation).
+
+**Obligation** (`debruijn-obligation-modeling`):
+
+| statement | true? | reads | children |
+|---|---|---|---|
+| `mem_stableIntegers`, `unitRing_le_stableIntegers` | **proved** (`Subring.mem_iInf`; `unitRing_le_iff`, `mem_localRing_of_mul_conj_eq_one`) | — | — |
+| `exists_mul_stableIntegers_le` | yes, every real number field (FS91-J10-L1 (e); [hand], J10, and J07's (C) route) | `[NumberField F]` | **(b)** `ℚ·R = L` ⇒ `∃ c₀ ≠ 0, c₀·𝓞 L ⊆ R`: `i ∈ R`; the `ℚ`-span of `R` is a finite-dimensional `ℚ`-subalgebra of `L`, a domain, hence a field (`Subalgebra.toIntermediateField`-shape over algebraicity); `u_a = (1 + ia)/(1 − ia) ∈ U` gives `ia`, then `a = −i·ia`; then an integral basis of `𝓞 L` with a common denominator. **(d)** `𝓞 L[U] = O′`: `⊆` from `R ⊆ O′` and `𝓞 L ⊆ O′`; `⊇` by the overring argument, at a non-stable `𝔔` an `a` with `v_𝔔(a) = −1`, `v_{c𝔔}(a) = 0` (approximation in a Dedekind domain), `u = a/ā` of norm one, then the ideal `J` and a maximal `𝔐 ⊇ J` (the hard child: a DVR has no proper overring but its fraction field — Mathlib's `ValuationSubring.eq_of_le_of_ne_top`, `LEAN.md` § Searching, FS131-KN2's line). **(e)** `O′ = Σ 𝓞 L·U`, so `c₀·O′ ⊆ R` |
+| `unitRing_eq_stableIntegers` | yes in the scope ([hand], three derivations); **false without it** at `ℚ(√5)` and `ℚ(√17)` (J10-T6's exception data) | `h` | words only (§ 3.3) |
+| `dense_mixedEmbedding_nsmul_unitRing` | yes; **`hN` load-bearing** (`0·R = {0}`) | `[NumberField F]`, `hN` | (i) `(3 + 4i)/5 ∈ U` (`3/5, 4/5 ∈ F`), `6/5 = u + ū ∈ R`, `1/5 ∈ R`; (ii) `c₀·𝓞 L ⊆ R` (step (b) above); (iii) the image of `𝓞 L` spans the mixed space (`NumberField.mixedEmbedding.latticeBasis`); (iv) the union over `k` of `N 5^{−k} c₀ ·` that lattice is dense (each coordinate approximated by `m/5^k`) |
+| `noRamifiedStableDyadic_of_tca` (in `ChainAtTA`) | yes; reads `h` only (the dyadic clause of the scope is not read: a ramified stable prime is dyadic anyway) | `h` | § 3.4 |
+
+### 3.3 `R = O′` (Lemma C′), in words only — off M8b's path
+
+Statement as typed: for a real number field with `NoRamifiedStableDyadic F`, `UnitRing.unitRing (conjOn (fieldI_conj F)) =
+stableIntegers F`. Route (FS91-J10's, the shortest of the three derivations): by `exists_mul_stableIntegers_le`, `R = O′` iff
+`R + c·O′ = O′` iff `R → O′/cO′` is onto; `O′/cO′ ≅ ∏_{stable 𝔓 ∣ c} 𝓞_𝔓/𝔓^{m_𝔓}` (CRT in `O′`); the image of `U` there is the
+product of the local norm-one images (weak approximation for the norm-one torus, FS91-J10-L2, by the stereographic
+parametrisation and the approximation theorem for `F`); the subring of a finite product of local rings generated by a product
+of subgroups containing `−1` is the product of the generated subrings (idempotents from the local rings' distinct maximal
+ideals); and at each stable `𝔓` the norm-one image generates `𝓞_𝔓/𝔓^m` — at an inert `𝔓` from level one (`μ_{q+1}` generates
+`𝔽_{q²}`) through the graded pieces `1 + π^{m−1}H` (J10-L6's computation), and it fails exactly at a ramified dyadic level one,
+where the image is `{1}` (FS100-EXC). Not sized; not on the headline's path after § Stage 4's plan; a stub-sized job (Lemma C
+and C′ in the kernel are FS-47's stub, inventory item 79 of FS-91).
+
+### 3.4 `noRamifiedStableDyadic_of_tca`, the plan
+
+`intro P _ hram`; `obtain ⟨c, hc, hbound⟩ := h P`; at `m = 1`, the two-colouring `C` of `colorable_two_levelTarget_one_of_isRamified
+hram` (`Colorable.toColoring`-shape). If `𝓞 ⧸ P ^ 1` is infinite, `Nat.card = 0` and the singleton `{0}` is independent (a simple
+graph has no loops): `1 ≤ c·0`, false. If finite, the two colour classes cover it, one holds at least half
+(`Finset.exists_le_card_fiber_of_mul_le_card`-shape), it is independent (a colour class of a proper colouring), so
+`N/2 ≤ c·N < N/4` with `N ≥ 1`, false. About twenty-five lines.
+
+### 3.5 Lanes for M9
+
+| lane | writes | needs | note |
+|---|---|---|---|
+| **M9-R** — `exists_mul_stableIntegers_le`, `dense_mixedEmbedding_nsmul_unitRing` | `Rigidity/RingScope` | Mathlib's Dedekind and mixed-embedding API | **on M8b's path** (the first) and M12's (the second); the overring child (d) is the hard one |
+| **M9-S** — `noRamifiedStableDyadic_of_tca` | one proof in `Rigidity/ChainAtTA` | nothing new | off the path; any time |
+| `unitRing_eq_stableIntegers` | — | — | off the path; not a lane until something reads it |
+
+### 3.6 Build 4
+
+`OK — 251 of 251 batches, 2 module(s) rebuilt, 13 module(s) with warnings, 6m43s`, `exit=0` (`data/fs131/kn9/build4.log`); 95
+warnings, each ``declaration uses `sorry` `` (3 new, `Rigidity/RingScope`'s leaves); none other.

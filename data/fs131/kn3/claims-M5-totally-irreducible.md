@@ -38,3 +38,13 @@ Any size or price. That the statements marked "to type" elaborate as written. Wh
 Statement 1 takes `[PolishSpace X]` (the coordinator's standing word, inventory item 750 ruling 2): the finite-fibred step
 (statement 3) reads clause (4) over Mathlib's quotient σ-algebra, so the proof runs over
 `positive_entropy_rigidity_of_polishSpace` (`plans/FS131-KN8-chain-split.md` § 2.6).
+
+## Since FS131-KN9 (2026-10-14; by hand — the text above is kept)
+
+**Typed** (`plans/FS131-KN9-chain-zero-entropy.md` § Stage 2): statement 2 as `ZdAction.two_le_of_not_isVirtuallyCyclic` and
+`ZdAction.noVirtuallyCyclicFactors_of_isIrreducible` (its restriction clause not typed: off the path, the deduction applies the
+declared theorem to `α` itself); statement 3 as `Rigidity.ksEntropy_eq_zero_iff_of_finite` (module `Rigidity/EntropyFibres`),
+over the Borel σ-algebra of `X ⧸ G` as in the declared clause (4), for every compact T1 group, by a section partition and a
+pattern partition (no Abramov–Rokhlin, no Lusin–Souslin). With it: the power (`ksEntropy_eq_zero_of_iterate`), the finite mixture
+(`ksEntropy_finite_mixture_eq_zero`), the Haar steps of Case A. **Statement 1 no longer takes `[PolishSpace X]`** (the
+coordinator's ruling of 2026-10-14; the kernel's dump shows exactly that binder removed). Lanes M5-E and M5-P (§ 2.8 there).
