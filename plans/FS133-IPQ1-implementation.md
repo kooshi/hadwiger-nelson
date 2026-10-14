@@ -38,3 +38,52 @@ their compiled data, in the full print and the print with instance and proof arg
 `data/fs133/ipq1/moved/before.out.xz` (sha256 in `before.sha256`) — **`SectionDensity` 9 named and 3 private, `Defs`
 53 and 4, `InvariantLaw` 9 and 19, `Field` 1 and 30, `Algebraic` 9 and 1, `Fractional` 7 and 11, `Pair` 19 named and
 0 private; 175 in all**; no `ABSENT`. This job edits only `Pair`; the other six are dumped to show them untouched.
+
+## Stage 2 — SAVED: Q4 proved; Q5 re-priced
+
+**2.1 Q4 `exists_measurable_admissibleAe` — proved**, on the plan's route, in `Pair.lean` itself (no new module), with
+four private helpers:
+- `kCoeff_one_pair`, `kCoeff_mul_pair` — the rotation coefficients multiply (copies of `Defs`' private
+  `kCoeff_one'`, `kCoeff_mul'`, under names of their own);
+- `isPlaneSystem_lab` — a law on `E → Λ` invariant under `shiftLab` and `turnLab` is a plane system (the
+  `Λ`-valued form of `IsInvariantLaw.isPlaneSystem`, whose measurability helpers are private to `Defs`);
+- `dist_kCoeff_mul` — the algebraic rotations preserve distances (from `norm_kCoeff_mul`).
+
+The proof, step by step against the derivation's F1–F6. `Λ` gets the discrete topology and the full σ-algebra
+locally (`letI`), as `exists_invariant_of_closed` asks; nothing of either reaches the statement. **(F1)** `C`, the
+labellings `m : E → Λ` with `¬ N (dist ↑x ↑y) (m x) (m y)` for all `x y : E`, is closed (an intersection over pairs of
+preimages of a set of the discrete `Λ × Λ` under the continuous `m ↦ (m x, m y)`), nonempty (the restriction of `ℓ`),
+and preserved by `shiftLab` (`dist_add_right`) and `turnLab` (`dist_kCoeff_mul`); `exists_invariant_of_closed` gives
+`P`, carried by `C`. **(F2)** `f a m := if m 0 = a then 1 else 0`, measurable, in `[0, 1]`, fixed by `turnLab`
+(`kCoeff u * 0 = 0`). **(F3–F5)** `exists_field` at `ι := Λ`: the affine clause at `c = 1, d = 1` gives
+`∑ a H a (x, ·) = 1` almost surely at every `x`; for `N r a b`, `z := (r : E)` (`r` algebraic:
+`IsAlgebraic.algebraMap`, `mem_algebraicClosure_iff`; nonzero as `r > 0`), the premise `f a · f b ∘ shiftLab z = 0`
+holds on `C` (`dist ↑0 ↑z = r`), so the products vanish at every `x` and every `w = r e^{iθ}`. **(F6)** Tonelli twice,
+as `exists_measurable_indep_of_field` does (`Measure.prod_apply_symm`, `Measure.measure_ae_null_of_prod_null`): almost
+every `ω` has a null set of forbidden pairs `{(x, θ) | 0 < H a (x, ω), 0 < H b (x + r e^{iθ}, ω)}` for every
+`(r, a, b)` with `N r a b` — countably many: `ae_all_iff` over `{r | ∃ a b, N r a b} × Λ × Λ`, countable by
+`IsAlgPattern.countable` — and a null set `Bad` of points where no field is positive. One such `ω` is fixed. **The
+labelling**: `ℓ' x := g (pos x)` with `pos x a := decide (0 < H a (x, ω))` and `g S` a label `a` with `S a = true`
+if there is one (`Exists.choose`), else `ℓ 0` — no order on `Λ` is needed; `ℓ'` is Borel as a function of a finite
+type composed with a measurable map (`measurable_of_finite`, `measurable_to_bool`), so every fibre is Borel. Off
+`Bad`, `H (ℓ' x) (x, ω) > 0`. Admissibility almost everywhere: the pairs with first endpoint in `Bad` are null
+(`Measure.quasiMeasurePreserving_fst`), with second endpoint in `Bad` null (each `θ`-section is a translate of
+`Bad`, `measure_preimage_add_right`), and the rest lie in the null sets of forbidden pairs.
+
+**Its axioms**, from a copy of the file with a `#print axioms` footer (`data/fs133/ipq1/work/PairAx.lean`, output
+`PairAx-q4.out`): `[propext, Classical.choice, Quot.sound, HadwigerNelson.Outside.OAI158.Spectral.residual_fourier]`
+— the plan's § 5.5 list for it. Elaborated under `lean1.sh` (the lakefile's options): no error, one warning, Q5's
+`sorry`.
+
+**2.2 Q5 re-priced.** Q4 closed in six elaborations of about 3–4 s each against the plan's 6–10 h. Q5's two new
+pieces, both as private helpers in `Pair.lean`: (i) a two-set, radius-`r` density-point lemma — if `x` is a
+density-one point of `A`, `y` of a Lebesgue-measurable `B`, and `‖y − x‖ = r > 0`, then
+`{(x', θ) | x' ∈ A, x' + r e^{iθ} ∈ B}` has positive `Leb ⊗ arc` measure: the comparison of
+`dist_ne_one_of_mem_densitySet` (`Plane/DensityPoints`) run for two sets and a radius, its sections taken without
+measurability (`Measure.measure_ae_null_of_prod_null` after `Measure.prod_swap`); (ii) the extension — simpler than
+the library's `exists_proper_ae_eq_of_proper_on_conull`, because Q5 asks no agreement with `ℓ'`: one conull set `T`
+of points that are density-one points of their own fibre, a translate of every finite set into `T`
+(`exists_translate_mem` at `V x = T`), and `Finset.rado_selection`. **Re-priced at one long stage for both**; neither is
+larger. **A binder the route does not read:** `hcount` (the countability of the constrained distances) — the converse
+reads each distance's null set alone (the derivation's § Converse never takes a union over distances; the forward
+direction does). If the proof confirms it, the binder is dropped under the standing word of item 726, and named.
