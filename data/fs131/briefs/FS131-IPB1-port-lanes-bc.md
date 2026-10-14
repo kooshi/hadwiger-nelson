@@ -115,3 +115,9 @@ branch and do not push**; I copy the branches to a local backup.
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 (2026-10-14 06:09 UTC) — the comparator rule COEFF, and a standing word for its class
+
+The rule COEFF is approved: on the release's side only, `DFunLike.coe (ℕ →₀ R) … (Polynomial.coeff p) n` is read as `Polynomial.coeff p n`. A planted different coercion head is refused, and the rule withdrawn is refused. The two NumberFields lemmas are classed PIN-DIFFERENCE (COEFF) by name, with level one's prints as evidence. **Standing word:** a Mathlib definition whose type changed between the pins only in how an application is stored, not in what it names, gets a named comparator rule with its controls and its lemmas listed, reported in your hand-back, without waiting for me. Anything that moves a statement's meaning comes to me first (inventory item 772).
+
+You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
