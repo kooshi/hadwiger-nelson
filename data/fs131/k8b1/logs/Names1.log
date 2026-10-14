@@ -1,0 +1,165 @@
+slot: admitted k8b1: mem 4 GiB (hard cap), cpus 2,3
+@prod_abs_eq_one : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] {x : K},
+  x ≠ 0 → (∏ w, w x ^ w.mult) * ∏ᶠ (w : FinitePlace K), w x = 1
+@FinitePlace.prod_eq_inv_abs_norm : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] {x : K},
+  x ≠ 0 → ∏ᶠ (w : FinitePlace K), w x = ↑|(Algebra.norm ℚ) x|⁻¹
+@FinitePlace.prod_eq_inv_abs_norm_int : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] {x : 𝓞 K},
+  x ≠ 0 → ∏ᶠ (w : FinitePlace K), w ↑x = |↑((Algebra.norm ℤ) x)|⁻¹
+@InfinitePlace.prod_eq_abs_norm : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] (x : K),
+  ∏ w, w x ^ w.mult = ↑|(Algebra.norm ℚ) x|
+@FinitePlace.equivHeightOneSpectrum : {K : Type u_1} →
+  [inst : Field K] → [inst_1 : NumberField K] → FinitePlace K ≃ HeightOneSpectrum (𝓞 K)
+@FinitePlace.equivHeightOneSpectrum_symm_apply : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K]
+  (v : HeightOneSpectrum (𝓞 K)) (x : K), (FinitePlace.equivHeightOneSpectrum.symm v) x = ‖(FinitePlace.embedding v) x‖
+@FinitePlace.norm_embedding : ∀ {K : Type u_1} [inst : Field K] {R : Type u_2} [inst_1 : CommRing R]
+  [inst_2 : Algebra R K] [inst_3 : IsDedekindDomain R] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R)
+  [inst_5 : Module.Finite ℤ R] [inst_6 : Module.Free ℤ R] (x : K),
+  ‖(FinitePlace.embedding v) x‖ = (NumberField.HeightOneSpectrum.adicAbv K v) x
+@FinitePlace.norm_def : ∀ {K : Type u_1} [inst : Field K] {R : Type u_2} [inst_1 : CommRing R] [inst_2 : Algebra R K]
+  [inst_3 : IsDedekindDomain R] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R) [inst_5 : Module.Finite ℤ R]
+  [inst_6 : Module.Free ℤ R] (x : adicCompletion K v), ‖x‖ = ↑((WithZeroMulInt.toNNReal ⋯) (Valued.v x))
+@FinitePlace.hasFiniteMulSupport : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] {x : K},
+  x ≠ 0 → Function.HasFiniteMulSupport fun w => w x
+FinitePlace.norm_le_one : ∀ (K : Type u_1) [inst : Field K] {R : Type u_2} [inst_1 : CommRing R] [inst_2 : Algebra R K]
+  [inst_3 : IsDedekindDomain R] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R) [inst_5 : Module.Finite ℤ R]
+  [inst_6 : Module.Free ℤ R] (x : R), ‖(FinitePlace.embedding v) ((algebraMap R K) x)‖ ≤ 1
+HeightOneSpectrum.adicAbv_def : ∀ (K : Type u_1) [inst : Field K] {R : Type u_2} [inst_1 : CommRing R]
+  [inst_2 : Algebra R K] [inst_3 : IsDedekindDomain R] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R)
+  [inst_5 : Module.Finite ℤ R] [inst_6 : Module.Free ℤ R] {x : K},
+  (NumberField.HeightOneSpectrum.adicAbv K v) x = ↑((WithZeroMulInt.toNNReal ⋯) ((valuation K v) x))
+HeightOneSpectrum.adicAbv_natCast_le_one : ∀ (K : Type u_1) [inst : Field K] {R : Type u_2} [inst_1 : CommRing R]
+  [inst_2 : Algebra R K] [inst_3 : IsDedekindDomain R] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R)
+  [inst_5 : Module.Finite ℤ R] [inst_6 : Module.Free ℤ R] (n : ℕ), (NumberField.HeightOneSpectrum.adicAbv K v) ↑n ≤ 1
+HeightOneSpectrum.adicAbv_add_le_max : ∀ (K : Type u_1) [inst : Field K] {R : Type u_2} [inst_1 : CommRing R]
+  [inst_2 : Algebra R K] [inst_3 : IsDedekindDomain R] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R)
+  [inst_5 : Module.Finite ℤ R] [inst_6 : Module.Free ℤ R] (x y : K),
+  (NumberField.HeightOneSpectrum.adicAbv K v) (x + y) ≤
+    max ((NumberField.HeightOneSpectrum.adicAbv K v) x) ((NumberField.HeightOneSpectrum.adicAbv K v) y)
+@mem_integers_of_valuation_le_one : ∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2)
+  [inst_2 : Field K] [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (x : K),
+  (∀ (v : HeightOneSpectrum R), (valuation K v) x ≤ 1) → x ∈ (algebraMap R K).range
+@valuedAdicCompletion_eq_valuation' : ∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type u_2}
+  [inst_2 : Field K] [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R) (k : K),
+  Valued.v { toCompletion := ↑((WithVal.equiv (valuation K v)).symm k) } = (valuation K v) k
+Support.finite : ∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type u_2} [inst_2 : Field K]
+  [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (k : K), (Support R k).Finite
+Embeddings.pow_eq_one_of_norm_eq_one : ∀ (K : Type u_1) [inst : Field K] [NumberField K] (A : Type u_2)
+  [inst_2 : NormedField A] [IsAlgClosed A] [NormedAlgebra ℚ A] {x : K},
+  IsIntegral ℤ x → (∀ (φ : K →+* A), ‖φ x‖ = 1) → ∃ n, ∃ (_ : 0 < n), x ^ n = 1
+@InfinitePlace.comap : {k : Type u_1} →
+  [inst : Field k] → {K : Type u_2} → [inst_1 : Field K] → InfinitePlace K → (k →+* K) → InfinitePlace k
+@InfinitePlace.comap_apply : ∀ {k : Type u_1} [inst : Field k] {K : Type u_2} [inst_1 : Field K] (w : InfinitePlace K)
+  (f : k →+* K) (x : k), (w.comap f) x = w (f x)
+data/fs131/k8b1/probes/Names.lean:29:8: error(lean.unknownIdentifier): Unknown constant `NumberField.InfinitePlace.mk_apply`
+@InfinitePlace.apply : ∀ {K : Type u_1} [inst : Field K] (φ : K →+* ℂ) (x : K), (InfinitePlace.mk φ) x = ‖φ x‖
+@InfinitePlace.sum_mult_eq : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K],
+  ∑ w, w.mult = Module.finrank ℚ K
+@InfinitePlace.mult : {K : Type u_1} → [inst : Field K] → InfinitePlace K → ℕ
+@InfinitePlace.one_le_mult : ∀ {K : Type u_1} [inst : Field K] {w : InfinitePlace K}, 1 ≤ ↑w.mult
+@mixedEmbedding.normAtPlace : {K : Type u_1} → [inst : Field K] → InfinitePlace K → mixedEmbedding.mixedSpace K →*₀ ℝ
+@mixedEmbedding.normAtPlace_apply : ∀ {K : Type u_1} [inst : Field K] (w : InfinitePlace K) (x : K),
+  (mixedEmbedding.normAtPlace w) ((mixedEmbedding K) x) = w x
+@mixedEmbedding.continuous_normAtPlace : ∀ {K : Type u_1} [inst : Field K] (w : InfinitePlace K),
+  Continuous ⇑(mixedEmbedding.normAtPlace w)
+data/fs131/k8b1/probes/Names.lean:37:8: error(lean.unknownIdentifier): Unknown constant `NumberField.mixedEmbedding.normAtPlace_mul`
+@mixedEmbedding.normAtPlace_add_le : ∀ {K : Type u_1} [inst : Field K] (w : InfinitePlace K)
+  (x y : mixedEmbedding.mixedSpace K),
+  (mixedEmbedding.normAtPlace w) (x + y) ≤ (mixedEmbedding.normAtPlace w) x + (mixedEmbedding.normAtPlace w) y
+@mixedEmbedding.normAtPlace_neg : ∀ {K : Type u_1} [inst : Field K] (w : InfinitePlace K)
+  (x : mixedEmbedding.mixedSpace K), (mixedEmbedding.normAtPlace w) (-x) = (mixedEmbedding.normAtPlace w) x
+data/fs131/k8b1/probes/Names.lean:40:8: error(lean.unknownIdentifier): Unknown constant `NumberField.mixedEmbedding.normAtPlace_eq_zero`
+@Ideal.finite_setOf_absNorm_eq : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S]
+  [inst_2 : Module.Free ℤ S] [Module.Finite ℤ S] [CharZero S] (n : ℕ), {I | Ideal.absNorm I = n}.Finite
+@finprod_eq_prod_of_mulSupport_subset : ∀ {α : Type u_1} {M : Type u_2} [inst : CommMonoid M] (f : α → M)
+  {s : Finset α}, Function.mulSupport f ⊆ ↑s → ∏ᶠ (i : α), f i = ∏ i ∈ s, f i
+@finprod_le_finprod : ∀ {α : Type u_1} {M : Type u_2} [inst : CommMonoidWithZero M] [inst_1 : PartialOrder M]
+  [ZeroLEOneClass M] [PosMulMono M] {f g : α → M},
+  Function.HasFiniteMulSupport f →
+    (∀ (a : α), 0 ≤ f a) → Function.HasFiniteMulSupport g → f ≤ g → ∏ᶠ (a : α), f a ≤ ∏ᶠ (a : α), g a
+@Finset.prod_le_prod_of_subset_of_one_le' : ∀ {ι : Type u_1} {N : Type u_2} [inst : CommMonoid N] [inst_1 : Preorder N]
+  {f : ι → N} {s t : Finset ι} [MulLeftMono N], s ⊆ t → (∀ i ∈ t, i ∉ s → 1 ≤ f i) → ∏ i ∈ s, f i ≤ ∏ i ∈ t, f i
+IsUltrametricDist : (X : Type u_1) → [Dist X] → Prop
+@IsUltrametricDist.norm_add_le_max : ∀ {S : Type u_1} [inst : SeminormedAddGroup S] [IsUltrametricDist S] (x y : S),
+  ‖x + y‖ ≤ max ‖x‖ ‖y‖
+@RestrictedProduct.isOpen_forall_mem : ∀ {ι : Type u_1} {R : ι → Type u_2} {A : (i : ι) → Set (R i)}
+  [inst : (i : ι) → TopologicalSpace (R i)], (∀ (i : ι), IsOpen (A i)) → IsOpen {f | ∀ (i : ι), ↑f i ∈ A i}
+@RestrictedProduct.continuous_eval : ∀ {ι : Type u_1} {R : ι → Type u_2} {A : (i : ι) → Set (R i)} {𝓕 : Filter ι}
+  [inst : (i : ι) → TopologicalSpace (R i)] (i : ι), Continuous fun x => x i
+@SigmaCompactSpace.of_countable : ∀ {X : Type u_1} [inst : TopologicalSpace X] (S : Set (Set X)),
+  S.Countable → (∀ s ∈ S, IsCompact s) → ⋃₀ S = Set.univ → SigmaCompactSpace X
+@isSigmaCompact_univ : ∀ {X : Type u_1} [inst : TopologicalSpace X] [h : SigmaCompactSpace X], IsSigmaCompact Set.univ
+@IsSigmaCompact.of_isClosed_subset : ∀ {X : Type u_1} [inst : TopologicalSpace X] {s t : Set X},
+  IsSigmaCompact t → IsClosed s → s ⊆ t → IsSigmaCompact s
+@IsSigmaCompact.image : ∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y]
+  {f : X → Y}, Continuous f → ∀ {s : Set X}, IsSigmaCompact s → IsSigmaCompact (f '' s)
+data/fs131/k8b1/probes/Names.lean:54:8: error(lean.unknownIdentifier): Unknown constant `IsSigmaCompact.measurableSet`
+@IsCompact.measurableSet : ∀ {α : Type u_1} {s : Set α} [inst : TopologicalSpace α] [inst_1 : MeasurableSpace α]
+  [OpensMeasurableSpace α] [T2Space α], IsCompact s → MeasurableSet s
+@IsOpen.measurableSet : ∀ {α : Type u_1} {s : Set α} [inst : TopologicalSpace α] [inst_1 : MeasurableSpace α]
+  [OpensMeasurableSpace α], IsOpen s → MeasurableSet s
+@MeasurePreserving.conservative : ∀ {α : Type u_1} [inst : MeasurableSpace α] {f : α → α} {μ : Measure α}
+  [IsFiniteMeasure μ], MeasurePreserving f μ μ → Conservative f μ
+@Conservative.exists_mem_iterate_mem : ∀ {α : Type u_1} [inst : MeasurableSpace α] {f : α → α} {s : Set α}
+  {μ : Measure α}, Conservative f μ → NullMeasurableSet s μ → μ s ≠ 0 → ∃ x ∈ s, ∃ m, m ≠ 0 ∧ f^[m] x ∈ s
+@Conservative : {α : Type u_1} → [inst : MeasurableSpace α] → (α → α) → Measure α → Prop
+@exists_nonempty_inter_of_measure_univ_lt_sum_measure : ∀ {α : Type u_1} {ι : Type u_2} {m : MeasurableSpace α}
+  (μ : Measure α) {s : Finset ι} {t : ι → Set α},
+  (∀ i ∈ s, NullMeasurableSet (t i) μ) →
+    μ Set.univ < ∑ i ∈ s, μ (t i) → ∃ i ∈ s, ∃ j ∈ s, ∃ (_ : i ≠ j), (t i ∩ t j).Nonempty
+@IsCompact.elim_finite_subcover : ∀ {X : Type u_1} [inst : TopologicalSpace X] {s : Set X} {ι : Type u_2},
+  IsCompact s → ∀ (U : ι → Set X), (∀ (i : ι), IsOpen (U i)) → s ⊆ ⋃ i, U i → ∃ t, s ⊆ ⋃ i ∈ t, U i
+@measure_iUnion_null : ∀ {α : Type u_1} {F : Type u_2} [inst : FunLike F (Set α) ENNReal] [OuterMeasureClass F α]
+  {μ : F} {ι : Sort u_3} [Countable ι] {s : ι → Set α}, (∀ (i : ι), μ (s i) = 0) → μ (⋃ i, s i) = 0
+@UniformSpace.Completion.denseRange_coe : ∀ {α : Type u_1} [inst : UniformSpace α],
+  DenseRange UniformSpace.Completion.coe'
+HadwigerNelson.Rigidity.mem_stableIntegers_iff_valuation : ∀ (F : Subfield ℝ) [inst : NumberField ↥F]
+  {x : ↥(HadwigerNelson.SpectralChain.fieldI F)},
+  x ∈ HadwigerNelson.Rigidity.stableIntegers F ↔
+    ∀ (v : HeightOneSpectrum (𝓞 ↥(HadwigerNelson.SpectralChain.fieldI F))),
+      HadwigerNelson.Rigidity.IsStablePlace F v → (valuation (↥(HadwigerNelson.SpectralChain.fieldI F)) v) x ≤ 1
+@HadwigerNelson.Rigidity.exists_forall_exp_le_measureReal_nameCell : ∀ {X : Type u_1} {m : MeasurableSpace X}
+  (μ : Measure X) [IsProbabilityMeasure μ] {T : X → X},
+  MeasurePreserving T μ μ →
+    ∀ {a : ℕ} {P : X → Fin a},
+      Measurable P →
+        HadwigerNelson.Rigidity.partitionEntropy μ T P = 0 →
+          ∀ {β η : ℝ},
+            0 < β →
+              0 < η →
+                ∃ N₀ X',
+                  MeasurableSet X' ∧
+                    1 - η ≤ μ.real X' ∧
+                      ∀ x ∈ X',
+                        ∀ (n : ℕ),
+                          N₀ ≤ n →
+                            Real.exp (-(β * ↑n)) ≤
+                              μ.real (HadwigerNelson.Rigidity.nameCell T P n (HadwigerNelson.Rigidity.nameOf T P n x))
+@HadwigerNelson.Rigidity.partitionEntropy_le_ksEntropy : ∀ {X : Type u_1} {m : MeasurableSpace X} (μ : Measure X)
+  (T : X → X) {k : ℕ} {P : X → Fin k},
+  Measurable P → HadwigerNelson.Rigidity.partitionEntropy μ T P ≤ HadwigerNelson.Rigidity.ksEntropy μ T
+@HadwigerNelson.Rigidity.mem_nameCell_iff_nameOf : ∀ {X : Type u_1} {a : ℕ} {T : X → X} {P : X → Fin a} {n : ℕ}
+  {w : Fin n → Fin a} {x : X}, x ∈ HadwigerNelson.Rigidity.nameCell T P n w ↔ HadwigerNelson.Rigidity.nameOf T P n x = w
+@HadwigerNelson.SpectralChain.measurable_rot : ∀ {F : Subfield ℝ} (u : ↑(HadwigerNelson.SpectralChain.unitVectors F)),
+  Measurable (HadwigerNelson.SpectralChain.rot u)
+@HadwigerNelson.SpectralChain.countable_unitRing : ∀ {F : Subfield ℝ} [Countable ↥F],
+  Countable ↥(HadwigerNelson.SpectralChain.unitRing F)
+@HadwigerNelson.Rigidity.TateModel.mul_mem_Λ : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (D : HadwigerNelson.Rigidity.TateModel F) (r : ↥(HadwigerNelson.SpectralChain.unitRing F))
+  {y : ↥(HadwigerNelson.SpectralChain.fieldI F)}, y ∈ D.Λ → (HadwigerNelson.Rigidity.ofUnitRing F) r * y ∈ D.Λ
+@HadwigerNelson.Rigidity.TateModel.π_eq_π_iff : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (D : HadwigerNelson.Rigidity.TateModel F) (a b : HadwigerNelson.Rigidity.SAdeleRing F),
+  D.π a = D.π b ↔ ∃ y ∈ D.Λ, a = b + (HadwigerNelson.Rigidity.toSAdele F) y
+@HadwigerNelson.Rigidity.TateModel.isOpenMap : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (D : HadwigerNelson.Rigidity.TateModel F), IsOpenMap ⇑D.π
+@HadwigerNelson.Rigidity.TateModel.mem_TA : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (D : HadwigerNelson.Rigidity.TateModel F) (t : ↥(HadwigerNelson.SpectralChain.fieldI F))
+  (b : mixedEmbedding.mixedSpace ↥(HadwigerNelson.SpectralChain.fieldI F)),
+  D.π ((HadwigerNelson.Rigidity.toSAdele F) t + (b, 0)) ∈ HadwigerNelson.Rigidity.TA F
+HadwigerNelson.Rigidity.measurableSet_TA : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  MeasurableSet (HadwigerNelson.Rigidity.TA F)
+HadwigerNelson.Rigidity.unitRing_le_stableIntegers : ∀ (F : Subfield ℝ) [inst : NumberField ↥F],
+  HadwigerNelson.UnitRing.unitRing (HadwigerNelson.conjOn ⋯) ≤ HadwigerNelson.Rigidity.stableIntegers F
+HadwigerNelson.Rigidity.compactSpace_dual : ∀ (G : Type u_1) [inst : AddCommGroup G], CompactSpace (AddChar G Circle)
+HadwigerNelson.Rigidity.borelSpace_dual : ∀ (G : Type u_1) [inst : AddCommGroup G] [Countable G],
+  BorelSpace (AddChar G Circle)
+exit=1
