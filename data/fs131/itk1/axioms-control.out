@@ -1,0 +1,7 @@
+records: 167 (printer count 167); CLEAN 163; OTHER-LEAF 0
+planted record: reported, resting on HadwigerNelson.Rigidity.positive_entropy_rigidity
+AXIOM HadwigerNelson.Rigidity.Collision.point_eq: ['HadwigerNelson.Rigidity.positive_entropy_rigidity']
+AXIOM HadwigerNelson.Rigidity.multiplier_injective: ['HadwigerNelson.Rigidity.planted_axiom']
+SORRY-MINE HadwigerNelson.Rigidity.surjective_tatePi: from ['HadwigerNelson.Rigidity.surjective_tatePi']
+SORRY-MINE HadwigerNelson.Rigidity.TateModel.measure_shell_eq_zero: from ['HadwigerNelson.Rigidity.exists_one_lt_absAt']
+CONTROL: 4 of 4 planted faults reported — the check can fail

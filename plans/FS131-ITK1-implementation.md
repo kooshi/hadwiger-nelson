@@ -6,12 +6,37 @@
 
 ## Theorems this phase proved
 
-Each [kernel], axioms `[propext, Classical.choice, Quot.sound]` as printed from the built tree; all under
+Each [kernel], axioms exactly `[propext, Classical.choice, Quot.sound]`, printed from build 2's tree
+(`data/fs131/itk1/axioms-after.txt`, reader `tools/fs131_itk1_axioms.py` PASS: 167 records, all CLEAN); all under
 `HadwigerNelson.Rigidity`.
-- **T-K, `Rigidity/TateKernel`** (build 1; `data/fs131/itk1/logs/AxTK.log`): `exists_eq_mixedEmbedding_of_mem_oAnn`,
-  `eq_zero_of_mem_oAnn`, `exists_nat_forall_mem_oAnn`, `tatePi_ker_subset`, `tatePi_exists_nat_mul_mem`,
-  `tatePi_exists_isCompact`, `tatePi_eq_one_forall_imp`, `surjective_tatePi`. With them **`exists_tateModel : ∀ (F :
-  Subfield ℝ) [NumberField ↥F], Nonempty (TateModel F)`** prints the standard three: lane T is complete.
+- **T-K, `Rigidity/TateKernel`** (8): `exists_eq_mixedEmbedding_of_mem_oAnn`, `eq_zero_of_mem_oAnn`,
+  `exists_nat_forall_mem_oAnn`, `tatePi_ker_subset`, `tatePi_exists_nat_mul_mem`, `tatePi_exists_isCompact`,
+  `tatePi_eq_one_forall_imp`, `surjective_tatePi`. With them **`exists_tateModel : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  Nonempty (TateModel F)`** prints the standard three: lane T is complete.
+- **K8-A, `Rigidity/PlaceSizes`** (23): `WPlace.size_toSAdele`, `size_toSAdele_mul`, `size_add_le`, `size_add_le_max`,
+  `size_neg`, `size_nonneg`, `continuous_size`, `absAt_mul`, `absAt_nonneg`, `absAt_eq_zero`, `absAt_natCast_le_one`,
+  `size_le_one_iff`; `exists_finset_absAt_le_one`, `splitHeight_eq_prod`, `one_le_splitHeight`, `absAt_le_splitHeight`,
+  `one_le_prod_absAt_of_mem_stableIntegers` (Lemma PF for `O′`), `ofUnitRing_mem_stableIntegers`, `TateModel.exists_isGap`
+  (Lemma PF for `Λ`), `exists_one_lt_absAt` (Step 0), `exists_unitVector_absAt_lt_one`, `countable_fieldI`,
+  `countable_splitPlace` (stored type with `[NumberField ↥F]`, ruled).
+- **K8-M, `Rigidity/Multipliers`** (6): `multiplier_mem` (private), `coe_multiplier`, `multiplier_one`,
+  `multiplier_injective`, `absAt_multiplier_arch`, `splitHeight_multiplier_le`.
+- **K8-B, `Rigidity/ThinBoxes`** (13): `isOpen_box`, `isClosed_closedThinBox`, `zero_mem_box`, `sub_mem_box`,
+  `size_le_of_mem_box`, `TateModel.measurableSet_image`, `TateModel.iterate_rot_π`, `TateModel.exists_box_partition`,
+  `TateModel.exists_orbit_box`, `TateModel.nameCell_subset`, `exists_delta_of_one_lt`, **`TateModel.thinBox_heavy`**
+  (Lemma 3.1′, EN2-L31), `exists_eps_lt`.
+- **K8-G, `Rigidity/GlobalPoint`** (11): `heavyExponent_pos`, `scaleHeight_three_mul_sq` (unread binder dropped),
+  `Collision.ℓ_ne_zero`, `Collision.ℓ_eq_ofUnitRing`, `Collision.mul_sub_point`, `Collision.point_eq`,
+  `Collision.size_sub_point_le`, `TateModel.exists_collision`, `TateModel.exists_point_of_heavy`,
+  `TateModel.measurableSet_leafSet`, `TateModel.measure_leafSet_compl_eq_zero`.
+- **K8-S, `Rigidity/WanderingShells`** (7): `TateModel.eq_of_π_add_eq`, `TateModel.measurableSet_shell`,
+  `TateModel.iterate_rot_not_mem_shell`, `TateModel.measure_shell_eq_zero`, `exists_absAt_eq_norm`,
+  `TateModel.leafSet_subset`, `TateModel.measure_compl_TA_eq_zero`.
+- **Now on the standard three with no leaf below them**: `zeroEntropyCarried_of_tateModel` (WanderingShells) and
+  **`zeroEntropyCarried_of_numberField : ∀ (F : Subfield ℝ) [NumberField ↥F], ZeroEntropyCarried F`** (ZeroEntropyClosed):
+  EF_F⁺ over every real number field, with no scope.
+
+68 leaves; 31 private helpers (one of them a private definition, `iL`).
 
 ## Stage 1 — SAVED: the readback; the stored statements before any edit
 
@@ -184,3 +209,101 @@ Private helpers: `e_eq`, `size_e_arch`, `size_e_split`, `absAt_ℓ_arch`, `absAt
 build's linter said so once it was proved; `omit [NumberField F] in` drops it from this theorem's stored type alone (no
 definition mentions it). Listed for stage 5's check as a ruled drop. About 420 lines against the plan's ~500, in 13 rounds
 (casts of a `let`-bound `ℕ → ℕ` into `ℝ` cost four of them: `(Bs j : ℝ)` does not elaborate, `(Nat.cast (Bs j) : ℝ)` does).
+
+## Stage 5 — SAVED: build 2; no statement changed but two ruled ones; the axioms; lint; doubled names; architecture
+
+**5.1 Build 2** (`./scripts/build.sh` under the slot, `MEMMAX=10G BATCH=8`): `OK — 254 of 254 batches, 7 module(s) rebuilt,
+6 module(s) with warnings, 7m57s`, exit 0 (`logs/build2.log`; gate log `build/gate/build/20261014T131918Z-3149901.log`).
+Rebuilt: `PlaceSizes`, `Multipliers`, `ThinBoxes`, `GlobalPoint`, `WanderingShells`, `ZeroEntropyClosed`, `Proofs`.
+**Warnings from my six files: none** (every warning of the build is in `ChainAtTA`, `EntropyFibres`, `EntropySplitMax`,
+`PositiveEntropy`, `RingScope`, `UnitCircle` — other lanes' leaves).
+
+**5.2 From the kernel's side** (stage 1's dump against build 2's, `statements-after.txt`, `.xz` + sha256;
+`tools/fs131_itk1_statements.py … 72c8520a7 --dropped dropped.txt --ruled-type ruled-type.txt --allow-new allow-new.txt`):
+**PASS** — 141 named constants (kinds, types, modules), 40 data definitions' values (`box`, `multiplier`, `splitHeight`,
+`scaleHeight`, `Collision`, `TateModel.shell`, `oAnn`, … unchanged), 17 example heads; 30 new private helpers; and two
+stored-type changes, each named (`statements-compare.out`):
+- **RULED TYPE `countable_splitPlace`** (the coordinator's ruling of 2026-10-14, received at this stage). Before
+  (`statements-before.txt` l. 55): `TYPE 613514900 forall {F : Subfield.{0} Real Real.instDivisionRing}, Countable.{1}
+  (HadwigerNelson.Rigidity.SplitPlace F)`; after (`statements-after.txt` l. 81): `TYPE 32669621 forall {F : …} [inst… :
+  NumberField.{0} ↥F], Countable.{1} (HadwigerNelson.Rigidity.SplitPlace F)`. The skeleton `instance` with a `sorry` body
+  had not picked up the section's `[NumberField F]`; the statement without it is believed false at `F = ⊤` (the primes of
+  the algebraic integers are uncountable). The one reader, `TateModel.measure_compl_TA_eq_zero` (instance search, with
+  `[NumberField F]` in scope), was rebuilt in build 2.
+- **RULED DROP `scaleHeight_three_mul_sq`** (item 726's word): its unread `[NumberField F]` dropped (`omit … in`); no
+  definition mentions it.
+- **Five generated constants, allowed and listed** (`allow-new.txt`): `SAdeleRing.congr_simp`, `TateModel.congr_simp`,
+  `splitHeight.congr_simp` (in `ThinBoxes`), `WPlace.absAt.congr_simp` (`PlaceSizes`), `multiplier.congr_simp`
+  (`Multipliers`) — reserved names Lean generates on demand when a `simp`-family tactic or `linarith`'s preprocessing
+  descends into an applied definition with an instance argument. Located synchronously (`probes/gen/*Gen.lean`:
+  `set_option Elab.async false`, `env.contains` between declarations; `logs/Gen-*.log`): `absAt` in
+  `TateModel.exists_isGap` (its closing `linarith`), `multiplier` in `absAt_multiplier_arch` (a `simp only` under
+  `multiplier F b`), the three of `ThinBoxes` in `TateModel.thinBox_heavy` (its `by linarith`, with `hεC` in context). No
+  stored proof names them (`probes/WhoUses.lean`). Not removed: every module downstream (`GlobalPoint` alone has 74
+  `simp`-family and `linarith` calls over the same atoms) would generate them in turn; each exists **once** in the library
+  (`dupnames` below).
+**The planted changes, watched firing:** `--control` on these two dumps, 8 of 8 reported
+(`statements-compare-control.out`); and the same two dumps without the ruled lists FAIL, naming `countable_splitPlace`
+and the five generated constants (stage 5's first run, kept in this record's history).
+`multiplier_mem`'s `[NumberField F]` was **not** dropped (stage 3): `multiplier`'s stored value is unchanged, as the check
+shows.
+
+**5.3 The axioms of every declaration of my files**, from build 2's tree (`lean/Axioms.lean` → `axioms-after.txt`;
+`tools/fs131_itk1_axioms.py` → `axioms-verdict.out`): **PASS** — **167 records** of the six modules (131 public, 5
+generated, 31 private), **all CLEAN**, none resting on `sorryAx`. The planted record (`positive_entropy_rigidity_of_
+polishSpace`) is reported resting on the declared printed theorem. `--control`: 4 of 4 planted faults reported
+(`axioms-control.out`). Downstream, for information: `exists_tateModel` and **`zeroEntropyCarried_of_numberField`** —
+`[Classical.choice, Quot.sound, propext]`.
+
+**5.4 The linters** (`lake lint --no-build -- --no-build --trace` under the slot): exit 0, `-- Linting passed for Proofs.`,
+14 of 14 `Passed` (`logs/lint.log`). **Doubled names** (`./scripts/dupnames.sh`): OK — no name declared by two modules, 24
+generated on demand, none of them this job's, "no repeated name appeared or disappeared since the previous complete run"
+(`logs/dupnames.log`). **Architecture** (`tools/check_architecture.py`): RESULT PASS with the six rows updated
+(`logs/architecture.log`); a plant in a copy (`WanderingShells`' imports cell `Rigidity/ThinBoxes`) FAILS naming it
+(`logs/architecture-plant.log`). **Not run** (item 815's ruling 2, the same branch condition): `scripts/axioms.sh`,
+`assumptions.sh`, `vacuity.sh` — the branch carries the declared printed theorem not yet declared to the audit.
+
+## Drafts for the landing (files this job does not write; each names its slot)
+
+**The audit's block** (`scripts/Axioms.lean`, CLEAN section, after FS131-ITT1's block):
+`data/fs131/itk1/draft-axioms-block.lean`, 131 `#print axioms` lines — every public declaration of the six files but the
+five generated ones, CLEAN at build 2, generated from the built tree's print — plus, at the landing,
+`zeroEntropyCarried_of_numberField` and `exists_tateModel` (now CLEAN).
+
+**The models** (`LEAN.md` § The gate). `TateModel F` is now inhabited at every real number field by a theorem on the
+standard three (`exists_tateModel`), so every statement over `(D : TateModel F)` has its structure's model in the
+library. The others, as their docstrings and K8B1 §§ 2.3, 3.3, 4.5 name them: Lemma 3.1′'s and the leaf set's measure
+hypotheses at the point mass at `1` (`zeroEntropyCarried_model`) with `u = (3 + 4i)/5`; `Collision` at that point mass,
+the lift `0`, `B ≥ 2` (`exists_collision`; at `B = 1` its hypothesis is false); the shells' at `δ_1`, `c = 1` and
+`exists_unitVector_absAt_lt_one`; `eq_zero_of_mem_oAnn` and `tatePi_eq_one_forall_imp` are uniqueness shapes inhabited at
+`c = 0`, `r = 0` (KT1 § 4.4); `IsGap` by `exists_isGap`'s constant. Each note names objects for the hypotheses they
+satisfy only.
+
+**`ARCHITECTURE.md`** (written on this branch): the six rows' state cells ("no `sorry`", lane and job). For the landing:
+`Rigidity/TateExists`' and `Rigidity/ZeroEntropyClosed`'s rows still say "skeleton: no leaf of its own" — both now rest
+on no `sorry`.
+
+**`LEAN.md` § Searching — Lean**, five lines (each follows the last line there):
+- "A skeleton `instance` whose body is `sorry` does not take the section's instance variables: its stored type can lack
+  a `[NumberField F]` its statement needs, and the proof that uses the instance adds it. Read a skeleton instance's stored
+  type (the dump), not its text (`Rigidity.countable_splitPlace`, false without the binder at `F = ⊤`; the coordinator's
+  ruling, FS131-ITK1)."
+- "`omit [inst] in` on a proof field of a definition (`multiplier_mem` for `multiplier`) removes the instance from the
+  definition's stored type, and from every statement that mentions it, when nothing else reads it: the unused-section-
+  variable warning on such a field is silenced for the one declaration (`set_option linter.unusedSectionVars false in`),
+  or the drop is ruled as a definition change (FS131-ITK1)."
+- "`linarith` (its preprocessing) and `simp`-family tactics that descend into an applied definition with an instance
+  argument (`splitHeight x`, `p.absAt x`, `D.π`) generate `f.congr_simp` in the module that asks, used by no stored proof.
+  To find the declaration: a copy with `set_option Elab.async false` and an `#eval` of `env.contains` between
+  declarations (`data/fs131/itk1/probes/gen/`); `linarith only [h₁, h₂]` or an explicit `lt_irrefl` closes without it
+  (FS131-ITK1)."
+- "`(Bs j : ℝ)` for a `let Bs : ℕ → ℕ := fun j => Nat.rec …` in a proof is 'type mismatch: ℕ expected ℝ'; `(Nat.cast
+  (Bs j) : ℝ)` elaborates. `push_cast` leaves `((2 : ↥(fieldI F)) : ℂ)`; `simp only [show ((2 : fieldI F) : ℂ) = 2 from
+  map_ofNat (fieldI F).subtype 2]` moves it (FS131-ITK1)."
+- "At the pin: the split places' norms are `FinitePlace.norm_def` (`‖z‖ = toNNReal (absNorm_ne_zero v) (Valued.v z)`)
+  with `WithZeroMulInt.toNNReal_le_one_iff (NumberField.HeightOneSpectrum.one_lt_absNorm_nnreal v)`; the coercion
+  `(x : v.adicCompletion K)` is `FinitePlace.embedding v x` by `rfl`, so `FinitePlace.norm_le_one`,
+  `norm_lt_one_iff_mem`, `norm_eq_one_iff_notMem` apply to it by `exact`; the ultrametric equality is
+  `IsUltrametricDist.norm_add_eq_max_of_norm_ne_norm`; `InfinitePlace.mult_ne_zero`, `InfinitePlace.map_natCast`,
+  `isIntegral_natCast` (root namespace); there is no `Real.one_lt_exp` (use `Real.exp_zero` and `Real.exp_lt_exp`)
+  (FS131-ITK1)."

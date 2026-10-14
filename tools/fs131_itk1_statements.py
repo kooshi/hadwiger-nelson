@@ -22,6 +22,7 @@ Two comparisons, both must hold (exit 0), each with planted faults that must be 
    whitespace-normalized, block comments and docstrings blanked first, of the base commit's file must be in the working
    file, in the base's order.  A head only in the working file is listed as NEW EXAMPLE.
 
+With `--ruled-type <file>`: stored-type changes the coordinator ruled (each line `<full name>`), reported as RULED TYPE.
 With `--allow-new <file>`: the NEW public constants must be exactly the names listed (one per line); with no such file
 there must be none.  With `--dropped <file>`: binders dropped by the standing word of inventory item 726 (each line
 `<full name>`: that constant's TYPE may differ and is reported as RULED DROP, never silently).
@@ -135,6 +136,7 @@ def main():
     argv = sys.argv[1:]
     allow = opt(argv, "--allow-new")
     dropped = opt(argv, "--dropped")
+    ruled_type = opt(argv, "--ruled-type")
     args = [a for a in argv if not a.startswith("--")]
     before, after, base = read_dump(args[0]), read_dump(args[1]), args[2]
     bad, ruled, moved_ok = [], [], []
@@ -202,6 +204,8 @@ def main():
         if a["type"] != b["type"] and not hyg:
             if name in dropped:
                 ruled.append(f"RULED DROP {b['kind']} {name}: the stored statement differs (a dropped unread binder)")
+            elif name in ruled_type:
+                ruled.append(f"RULED TYPE {b['kind']} {name}: the stored statement differs (a change the coordinator ruled)")
             else:
                 bad.append(f"TYPE     {b['kind']} {name}: the stored statement differs")
         elif name in MOVED and a["kind"] == b["kind"]:

@@ -1,0 +1,30 @@
+slot: admitted itk1: mem 4 GiB (hard cap), cpus 1,2
+GEN 50 false false true false false
+GEN 55 false false true false false
+GEN 62 false false true false false
+GEN 65 false false true false false
+GEN 117 false false true false false
+GEN 127 false false true false false
+GEN 133 false false true false false
+GEN 143 false false true false false
+GEN 147 false false true false false
+GEN 156 false false true false false
+GEN 164 false false true false false
+GEN 217 false false true false false
+GEN 255 false false true false false
+GEN 308 false false true false false
+GEN 329 false false true false false
+GEN 332 false false true false false
+data/fs131/itk1/probes/gen/ThinBoxesGen.lean:399:0: warning: automatically included section variable(s) unused in theorem `HadwigerNelson.Rigidity.exists_heavy_nameCells`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+GEN 344 false false true false false
+GEN 400 false false true false false
+GEN 431 true true true false true
+GEN 458 true true true false true
+GEN 460 true true true false true
+seconds=16
+exit=0
