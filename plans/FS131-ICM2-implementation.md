@@ -8,9 +8,9 @@ from `fs131-wcm` at `0dea51730`, in the tree `.claude/worktrees/fs131-wch`. Work
 
 Read from the built tree after build 1 (`data/fs131/icm2/axioms1.out`, `axioms1-read.out`).
 
-- `Rigidity.tca_uniform`, `Rigidity.exists_uniform_tail` (`Rigidity/ClassRatio`, public) — [kernel, outside]:
-  `[propext, Classical.choice, Quot.sound, StandingFive.kloosterman_bound]` — Weil's bound (declared) and the standard three;
-  no `sorry`. Read against: "T-C(A) with one constant — the tail's constant and the finitely many primes below `B`"
+- `Rigidity.tca_uniform`, `Rigidity.exists_uniform_tail` (`Rigidity/ClassRatio`, public) — [kernel], imported records:
+  `[propext, Classical.choice, Quot.sound, StandingFive.kloosterman_bound]` — the standard three and Weil's bound, the
+  declared outside theorem; no `sorry`. Read against: "T-C(A) with one constant — the tail's constant and the finitely many primes below `B`"
   (its docstring), the form the count reads.
 - Private, the standard three: `card_fibre` (Hensel's fibre count), `norm_charSum_new_le` (a character new at a level),
   and so `charBound_of_charBound_one` (Lemma P), with their helpers (`SqZeroInv.card_lift`, `SqZeroInv.norm_sum_le`,
@@ -18,6 +18,10 @@ Read from the built tree after build 1 (`data/fs131/icm2/axioms1.out`, `axioms1-
 - `Rigidity.Counting.count_of_oneAvoidingDensityBound` (`CountDescent`, not this job's file) — its `sorryAx` now comes
   only from `Plane.upperDensity_le_of_oneAvoidingDensityBound` and `Rigidity.noRamifiedStableDyadic_of_tca`; no leaf of
   M13 is under it.
+- `chromaticNumber_le_four_of_small` (private, stage 3) — the standard three: at `Q ∈ {3, 7}` the level-one target is
+  four-colourable.
+- Still `sorry`: `ratioAtMost_dyadic`, `charBound_one_exact`, `ratioAtMost_cert` (the last stays named, by the brief); so
+  `ratioAtMost_of_five_le_chromaticNumber` and `tca_of_five_le_localBound` rest on these three and Weil's bound.
 
 ## Stage 1 — SAVED: the readback
 
@@ -123,3 +127,32 @@ IMPORTED (Weil's bound and the standard three, no `sorry`): **`tca_uniform`**, *
 and `Rigidity.noRamifiedStableDyadic_of_tca` only. Read with no leaf list the same output gives **FAIL 6**
 (`axioms1-read-noleaves.out`, exit 1: the four leaves and their two consumers); the planted `sorry` and axiom **2 of 2
 FAIL** (`axioms1-plant-read.out`). The one line was sent to the coordinator.
+
+## Stage 3 — SAVED: the exclusions at `Q ∈ {3, 7}`; build 2
+
+**`chromaticNumber_le_four_of_small` proved** (≈ 60 lines; one import line, `Arith/GapSeven`, for its four-colouring of
+`UD(𝔽₇, 2)`). The level-one target maps into the unit-quadrance graph of the fixed field `k₀ = {x : σx = x}` of the
+residue field by `x ↦ (u(x + σx), −uι(x − σx))` (`u = 1/2`): it is injective (`x = a + bι`) and carries the norm to
+`a² + b²` (`(2u)² = 1`, `ι² = −1`). `|k₀| = Q` (`StandingFive.card_fixed_of_involution`), so `k₀ ≃+* ZMod Q`
+(`Arith.nonempty_ringEquiv_zmod_of_card`), and `unitQuadrance.map` lands in `finitePlane Q`; at `3` it is
+`finitePlane3_colorable_three`, at `7` `GapSeven.gamma` with `gamma_proper`. This is the recorded route ("the level-one
+target as `Γ_Q`"), with a homomorphism in place of K3's isomorphism; the price was 300–500 lines with K3, and the
+homomorphism needs none of K3's surjectivity. **Re-priced:** ≈ 60 lines.
+
+**Build 2** under the slot (`data/fs131/icm2/logs/build-2.log`, full output `logs/build-2-full.log.xz`,
+`build/gate/build/20261014T184454Z-141180.log`): **OK — 257 of 257 batches, 7 modules rebuilt, 8 m 6 s, exit 0**; the
+only warnings from this job's files are the three remaining leaves' `declaration uses 'sorry'` (`ClassRatio.lean` lines
+962, 1034, 1041); the count's five downstream modules rebuilt with none. `tools/check_architecture.py`: **PASS**
+(`logs/architecture-2.log`, the imports cell of `Rigidity/ClassRatio`'s row now names `Arith/GapSeven`); with the cell
+put back as it was, **FAIL** "imports of Rigidity/ClassRatio: … real-only ['Arith/GapSeven']" (`logs/architecture-plant.log`),
+then restored.
+
+**No statement and no definition changed across the new import** (`statements-after2.txt.xz` against stage 1's;
+`statements-compare2.out`): **SAME 44, PRIVATE-SAME 69, CHANGED 0, MISSING 0, ADDED-PUBLIC 0** — PASS; five plants fire
+(`statements-plant2.out`). `Arith/GapSeven`'s one instance (`Decidable (Gapped v m)`) is on its own predicate and moved
+no stored term.
+
+**Axioms** (`axioms2-read.out`, the three remaining leaves named): **156 records — CLEAN 145, IMPORTED 5, UPSTREAM 6, FAIL
+0**; `chromaticNumber_le_four_of_small` CLEAN; the IMPORTED five as in stage 2 (`tca_uniform`, `exists_uniform_tail`
+among them). Without the leaf list **FAIL 5** (`axioms2-read-noleaves.out`, exit 1); plants **2 of 2 FAIL**
+(`axioms2-plant-read.out`).

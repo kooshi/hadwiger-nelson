@@ -1,0 +1,10 @@
+slot: admitted icm2: mem 4 GiB (hard cap), cpus 5,6
+data/fs131/icm2/lean/ClassRatioWork.lean:961:16: warning: declaration uses `sorry`
+data/fs131/icm2/lean/ClassRatioWork.lean:1023:16: error(lean.unknownIdentifier): Unknown identifier `nonempty_ringEquiv_zmod_of_card`
+data/fs131/icm2/lean/ClassRatioWork.lean:1023:9: error: Tactic `rcases` failed: `x✝ : ?m.1166` is not an inductive datatype
+data/fs131/icm2/lean/ClassRatioWork.lean:1033:16: warning: declaration uses `sorry`
+data/fs131/icm2/lean/ClassRatioWork.lean:1040:16: warning: declaration uses `sorry`
+finitePlane3_colorable_three : (finitePlane 3).Colorable 3
+data/fs131/icm2/lean/ClassRatioWork.lean:1179:8: error(lean.unknownIdentifier): Unknown identifier `GapSeven.gamma_proper`
+data/fs131/icm2/lean/ClassRatioWork.lean:1180:8: error(lean.unknownIdentifier): Unknown identifier `nonempty_ringEquiv_zmod_of_card`
+exit 1

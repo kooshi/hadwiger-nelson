@@ -1,5 +1,6 @@
 import Proofs.HadwigerNelson.Arith.WeilKloosterman
 import Proofs.HadwigerNelson.Rigidity.ChainAtTA
+import Proofs.HadwigerNelson.Arith.GapSeven
 
 /-!
 # CLS: a local bound of at least five gives T-C(A) at `S = ∅`; the uniform tail (FS-131, job FS131-KR1; module M13; skeleton)
@@ -966,7 +967,66 @@ private theorem ratioAtMost_dyadic [NumberField F] (P : StablePrime F) (h2 : (2 
 private theorem chromaticNumber_le_four_of_small [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P)
     {Q : ℕ} (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) (hQ37 : Q = 3 ∨ Q = 7) :
     (levelTarget P 1).chromaticNumber ≤ 4 := by
-  sorry
+  classical
+  haveI hmax : (P.P ^ 1).IsMaximal := by rw [pow_one]; exact P.isMaximal
+  letI : Field (𝓞 (fieldI F) ⧸ P.P ^ 1) := Ideal.Quotient.field (P.P ^ 1)
+  haveI := finite_quot_pow P 1
+  set σ : (𝓞 (fieldI F) ⧸ P.P ^ 1) →+* (𝓞 (fieldI F) ⧸ P.P ^ 1) :=
+    Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1) with hσdef
+  have hσmk : ∀ x, σ (Ideal.Quotient.mk (P.P ^ 1) x) = Ideal.Quotient.mk (P.P ^ 1) (conjO F x) := fun x =>
+    Ideal.quotientMap_mk
+  have hσ : ∀ x, σ (σ x) = x := fun x => by
+    obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
+    rw [hσmk, hσmk, UpperHalf.conjO_conjO]
+  obtain ⟨i, hi2, hci⟩ := exists_I_int (F := F)
+  have h2k : (2 : 𝓞 (fieldI F) ⧸ P.P ^ 1) ≠ 0 := by
+    rw [← map_ofNat (Ideal.Quotient.mk (P.P ^ 1)) 2, Ne, Ideal.Quotient.eq_zero_iff_mem, pow_one]; exact h2
+  set ι := Ideal.Quotient.mk (P.P ^ 1) i with hιdef
+  have hι : ι ^ 2 = -1 := by rw [hιdef, ← map_pow, hi2, map_neg, map_one]
+  have hσι : σ ι = -ι := by rw [hιdef, hσmk, hci, map_neg]
+  obtain ⟨hcard0, -⟩ := StandingFive.card_fixed_of_involution σ hσ hι hσι h2k
+  set k₀ := σ.eqLocusField (RingHom.id _) with hk₀def
+  have hk₀ : Nat.card k₀ = Q := by
+    have e : Nat.card k₀ ^ 2 = Q ^ 2 := by rw [← hcard0, ← hQ, pow_one]
+    exact Nat.pow_left_injective two_ne_zero e
+  set u : 𝓞 (fieldI F) ⧸ P.P ^ 1 := (2 : 𝓞 (fieldI F) ⧸ P.P ^ 1)⁻¹ with hudef
+  have hu : 2 * u = 1 := mul_inv_cancel₀ h2k
+  have hσu : σ u = u := by rw [hudef, map_inv₀, map_ofNat]
+  -- the coordinates `x = a + bι` with `a, b` fixed by `σ`
+  have ha : ∀ x, u * (x + σ x) ∈ k₀ := fun x => by
+    show σ (u * (x + σ x)) = u * (x + σ x)
+    rw [map_mul, map_add, hσ, hσu]; ring
+  have hb : ∀ x, -(u * ι * (x - σ x)) ∈ k₀ := fun x => by
+    show σ (-(u * ι * (x - σ x))) = -(u * ι * (x - σ x))
+    rw [map_neg, map_mul, map_mul, map_sub, hσ, hσu, hσι]; ring
+  let φ : levelTarget P 1 →g unitQuadrance k₀ :=
+    { toFun := fun x => (⟨_, ha x⟩, ⟨_, hb x⟩)
+      map_rel' := by
+        intro x y hxy
+        rw [unitQuadrance_adj]
+        obtain ⟨hne, hN⟩ := (SimpleGraph.fromRel_adj _ _ _).1 hxy
+        have hN' : (x - y) * σ (x - y) = 1 := by
+          rcases hN with h | h
+          · exact h
+          · have e : (y - x) * σ (y - x) = (x - y) * σ (x - y) := by rw [map_sub, map_sub]; ring
+            rw [← e]; exact h
+        refine ⟨fun heq => hne ?_, ?_⟩
+        · have h1 := congrArg (fun p : k₀ × k₀ => (p.1 : 𝓞 (fieldI F) ⧸ P.P ^ 1)) heq
+          have h2' := congrArg (fun p : k₀ × k₀ => (p.2 : 𝓞 (fieldI F) ⧸ P.P ^ 1)) heq
+          simp only at h1 h2'
+          linear_combination h1 + ι * h2' - (x - y) * hu + u * (x - y - (σ x - σ y)) * hι
+        · apply Subtype.ext
+          push_cast
+          rw [map_sub] at hN'
+          linear_combination (2 * u + 1) * (x - y) * (σ x - σ y) * hu + hN' +
+            u ^ 2 * (x - y - (σ x - σ y)) ^ 2 * hι }
+  haveI : Fact Q.Prime := ⟨by rcases hQ37 with rfl | rfl <;> norm_num⟩
+  obtain ⟨e⟩ := Arith.nonempty_ringEquiv_zmod_of_card (Fact.out : Q.Prime) hk₀
+  have hcol : (finitePlane Q).Colorable 4 := by
+    rcases hQ37 with rfl | rfl
+    · exact finitePlane3_colorable_three.mono (by norm_num)
+    · exact ⟨SimpleGraph.Coloring.mk GapSeven.gamma fun {u v} h => GapSeven.gamma_proper u v h⟩
+  exact (hcol.of_hom ((unitQuadrance.map e.toRingHom).comp φ)).chromaticNumber_le
 
 /-- **The certificate branch at `q ∈ {11, 19}`** (KC13 § 5.2: K1 the checks `cert11_ok`, `cert19_ok`; K2
 `FibreCertSound.sum_le_of_certOK`, proved on the line `fs131-wc15`; K3 the level-one target as `Cay((ℤ/q)², S)`; K4 the
