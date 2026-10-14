@@ -1,0 +1,10 @@
+slot: waiting (ledger 20 + 5 > budget 22 GiB)
+slot: admitted kn7s: mem 5 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/HaarMultiple.lean:43:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/HaarMultiple.lean:47:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/HaarMultiple.lean:51:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/HaarMultiple.lean:56:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/HaarMultiple.lean:62:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/HaarMultiple.lean:68:8: warning: declaration uses `sorry`
+seconds=218
+exit=0

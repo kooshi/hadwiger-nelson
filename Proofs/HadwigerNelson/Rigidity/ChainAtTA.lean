@@ -16,8 +16,10 @@ characters of `R = ℤ[U_F]`, a part `TA` and an entropy-like function are free 
 * **`MRPlus F`** — the one sentence the chain reads (EN1-MRPLUS): every finite rotation-invariant measure on the dual of
   `ℤ[U_F]` that gives `T + A` measure `0` has every Fourier coefficient off `0` equal to `0`. `Measure` is a positive
   measure in Lean, so the signed reading, which is false, cannot be typed. It is `(chainInterface F).MR`, by `Iff.rfl`.
-* **`EntropySplit F`** — PE-2 (FS100-PE2), in its own form: `τ = a·m + b·ρ` with `m` Haar (`IsHaarFourier`), `ρ` a
-  rotation-invariant probability measure of entropy zero under every rotation. **Stated beside `Interface.PE2`, not through
+* **`EntropySplit F`** — PE-2 (FS100-PE2) at the strength its one consumer reads: `τ = a·m + b·ρ` with `m` Haar
+  (`IsHaarFourier`), `ρ` a rotation-invariant probability measure of entropy zero under **one non-torsion rotation**
+  (FS131-KN7, Amendment 2 of its brief). PE-2 as derived — entropy zero under every rotation — is `EntropySplitEvery F`,
+  which implies it (`entropySplit_of_every`) and is off the headline's path. **Stated beside `Interface.PE2`, not through
   it:** that `Prop` carries the clause "the Haar part is null on `E`", which at `E := T + A` is `m(T + A) = 0` — a hand result
   no proof on the path reads (FS131-EN1 § 4.1).
 * **`ZeroEntropyCarried F`** — EF_F⁺ (FS100-EFP), at its own strength: zero entropy at *one* non-torsion unit vector puts a
@@ -28,15 +30,17 @@ characters of `R = ℤ[U_F]`, a part `TA` and an entropy-like function are free 
   prime is dyadic (`IsRamified.isDyadic`), so the scope says that no stable prime is ramified (`noRamifiedStableDyadic_iff`).
 
 **Proved here:** `mrPlus_of_split_of_carried` (EN1-FROM-TWO: PE-2 and EF_F⁺ give MR⁺, five lines, no R-U, no Haar-null
-clause); `five_le_chromaticNumber_of_mrPlus`; **the scope from the local bound**,
+clause, and no leaf: the non-torsion rotation comes with the split); `entropySplit_of_every`; `five_le_chromaticNumber_of_mrPlus`; **the scope from the local bound**,
 `noRamifiedStableDyadic_of_three_le_localBound` (at a ramified stable prime the level-one target is two-colourable,
 `colorable_two_levelTarget_one_of_isRamified`, so `L(F) ≤ 2`); and **the headline with closed hypotheses**,
 `min_localBound_five_le_chromaticNumber_of_closed` — eight of them: the scope is no longer one (FS131-KN6).
 
 **Leaves (`sorry`), each a module of the architecture in `plans/FS131-KN3-chain-plan.md`:** `measurableSet_TA`,
-`rot_preimage_TA`, `exists_nonTorsion_unitVector` (module C0); `entropySplit` (PE-2: modules M5–M7); `zeroEntropyCarried`
-(EF_F⁺: module M8). **Stated and off the headline's path:** `noRamifiedStableDyadic_of_tca` (FS100-EXC in its own words,
-module M9), which the hand record under `LEDGER.md` row 121 cites and no theorem of this module reads.
+`rot_preimage_TA`, `exists_nonTorsion_unitVector` (module C0); `entropySplit` (PE-2 at one non-torsion rotation: modules
+M5–M7); `zeroEntropyCarried` (EF_F⁺: module M8). **Stated and off the headline's path:** `noRamifiedStableDyadic_of_tca`
+(FS100-EXC in its own words, module M9), which the hand record under `LEDGER.md` row 121 cites and no theorem of this module
+reads; and `EntropySplitEvery`, PE-2 at every rotation (its proof's extra layer — Lemma W for every vector and the torsion
+case — is in module M7's draft claim list, marked off the path).
 
 **Inhabitants.** `one_mem_TA`. `MRPlus`, `EntropySplit` and `ZeroEntropyCarried` quantify over measures, of which the zero
 measure and (given Herglotz–Bochner) Haar measure are instances. `NoRamifiedStableDyadic` **fails at `F = ℚ`** (the prime
@@ -102,13 +106,32 @@ def MRPlus : Prop :=
 /-- MR⁺ is the interface's `MR` at `E := T + A`, word for word. -/
 theorem interface_mr_iff [NumberField F] : (chainInterface F).MR ↔ MRPlus F := Iff.rfl
 
-/-- **PE-2, the entropy split** (FS100-PE2, `plans/FS100-derivation.md` l. 191; X02D): "every `U`-invariant finite positive
-measure `τ` on `R̂`: `τ = a·m + τ′` with `a ≥ 0`, `τ′` a `U`-invariant finite positive measure, and `h_{τ′}(u) = 0` for every
-`u ∈ U`" — with `τ′ = b·ρ` for a probability measure `ρ` (entropy is of a probability measure; `b = 0` when `τ′ = 0`). -/
+/-- **PE-2, the entropy split, at the strength the chain reads** (FS100-PE2, `plans/FS100-derivation.md` l. 191; X02D;
+FS131-KN7, Amendment 2): every rotation-invariant finite measure `τ` on `R̂` is `a·m + b·ρ` with `m` Haar and `ρ` a
+rotation-invariant probability measure (`b = 0` when `τ − a·m = 0`) of entropy zero under **one** rotation by a
+non-torsion unit vector. Its one consumer, `mrPlus_of_split_of_carried`, reads the entropy at one non-torsion rotation and
+no other. PE-2 as derived says "`h_{τ′}(u) = 0` for every `u ∈ U`": `EntropySplitEvery`, which implies this
+(`entropySplit_of_every`). -/
 def EntropySplit : Prop :=
   ∀ τ : Measure (Dual F), IsFiniteMeasure τ → RotInv F τ →
     ∃ (a b : ℝ≥0∞) (m ρ : Measure (Dual F)), IsHaarFourier m ∧ IsProbabilityMeasure ρ ∧ RotInv F ρ ∧
+      (∃ u : unitVectors F, (∀ n : ℕ, n ≠ 0 → (u : ℂ) ^ n ≠ 1) ∧ ksEntropy ρ (rot u) = 0) ∧ τ = a • m + b • ρ
+
+/-- **PE-2 as derived** (FS100-PE2, `plans/FS100-derivation.md` l. 191; X02D): "every `U`-invariant finite positive measure `τ`
+on `R̂`: `τ = a·m + τ′` with `a ≥ 0`, `τ′` a `U`-invariant finite positive measure, and `h_{τ′}(u) = 0` for every `u ∈ U`" —
+with `τ′ = b·ρ` for a probability measure `ρ`. **Off the headline's path** since FS131-KN7: the headline reads
+`EntropySplit`, which this implies. -/
+def EntropySplitEvery : Prop :=
+  ∀ τ : Measure (Dual F), IsFiniteMeasure τ → RotInv F τ →
+    ∃ (a b : ℝ≥0∞) (m ρ : Measure (Dual F)), IsHaarFourier m ∧ IsProbabilityMeasure ρ ∧ RotInv F ρ ∧
       (∀ u : unitVectors F, ksEntropy ρ (rot u) = 0) ∧ τ = a • m + b • ρ
+
+/-- PE-2 at every rotation gives it at one: the rotation is `(3 + 4i)/5`'s (`exists_nonTorsion_unitVector`). -/
+theorem entropySplit_of_every (h : EntropySplitEvery F) : EntropySplit F := by
+  intro τ hfin hrot
+  obtain ⟨a, b, m, ρ, hm, hρ, hρrot, hρh, hτ⟩ := h τ hfin hrot
+  obtain ⟨u, hu⟩ := exists_nonTorsion_unitVector F
+  exact ⟨a, b, m, ρ, hm, hρ, hρrot, ⟨u, hu, hρh u⟩, hτ⟩
 
 /-- **EF_F⁺, zero entropy is carried by `T + A`** (FS100-EFP, `plans/FS100-derivation.md` l. 162; X01D l. 194): "every
 `U`-invariant finite positive Borel measure `μ` on `R̂` such that `h_μ(u*) = 0` for **one** non-torsion `u* ∈ U` satisfies
@@ -181,17 +204,16 @@ theorem noRamifiedStableDyadic_of_three_le_localBound (h : 3 ≤ localBound F) :
 
 /-- **MR⁺ from PE-2 and EF_F⁺** (FS131-EN1, EN1-FROM-TWO): for an invariant `τ` null on `T + A`, write `τ = a·m + b·ρ`; if
 `b ≠ 0` then `ρ` is null on `T + A` and, having entropy zero at a non-torsion unit vector, null off it — impossible for a
-probability measure; so `τ = a·m`. Reads no R-U, no `E`, no Haar-null clause. -/
+probability measure; so `τ = a·m`. Reads no R-U, no `E`, no Haar-null clause, and the entropy at one rotation only. -/
 theorem mrPlus_of_split_of_carried (hPE : EntropySplit F) (hEF : ZeroEntropyCarried F) : MRPlus F := by
   intro τ hfin hrot hTA r hr
-  obtain ⟨a, b, m, ρ, hm, hρ, hρrot, hρh, rfl⟩ := hPE τ hfin hrot
-  obtain ⟨u, hu⟩ := exists_nonTorsion_unitVector F
+  obtain ⟨a, b, m, ρ, hm, hρ, hρrot, ⟨u, hu, hρu⟩, rfl⟩ := hPE τ hfin hrot
   have hb : b = 0 := by
     by_contra hb
     have h1 : ρ (TA F) = 0 := by
       rw [Measure.add_apply, Measure.smul_apply, Measure.smul_apply, smul_eq_mul, smul_eq_mul] at hTA
       exact (mul_eq_zero.mp (add_eq_zero.mp hTA).2).resolve_left hb
-    have h2 : ρ (TA F)ᶜ = 0 := hEF ρ hρ hρrot u hu (hρh u)
+    have h2 : ρ (TA F)ᶜ = 0 := hEF ρ hρ hρrot u hu hρu
     have h3 : ρ Set.univ = 0 := by
       rw [← Set.union_compl_self (TA F)]
       exact measure_union_null h1 h2
@@ -242,8 +264,10 @@ theorem min_localBound_five_le_chromaticNumber_of_closed [NumberField F] (hBH : 
 
 /-! ## The two deductions and the scope, as closed statements — the leaves under MR⁺ -/
 
-/-- **PE-2** (FS100-PE2; [hand], X02D and X02V): the entropy split holds over every real number field. Rests on
-`Rigidity.positive_entropy_rigidity` through `Rigidity.haar_or_zero_entropy` on the pieces `M̂`. -/
+/-- **PE-2 at one non-torsion rotation** (FS100-PE2; [hand], X02D and X02V; the variant EN2-PE2-MAX of
+`plans/FS131-EN2-derivation.md` § 5.2): the entropy split holds over every real number field, with the entropy zero at a
+rotation of one admissible `Γ`. Rests on `Rigidity.positive_entropy_rigidity` through `Rigidity.haar_or_zero_entropy` on
+the pieces `M̂`; needs no Lemma W for every vector and no torsion case (FS131-KN7). -/
 theorem entropySplit [NumberField F] : EntropySplit F := by
   sorry
 

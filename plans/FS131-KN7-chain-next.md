@@ -7,17 +7,23 @@
 
 ## Theorems this phase proved
 
-None in the library: this job writes no proof into a module before the coordinator's ruling on the declared theorem.
-Kernel-checked in scratch files only (`data/fs131/kn7/lean/`, against this tree's built library; not modules, not
-imported by any), each on the standard three axioms unless said — evidence for the finding of Stage 2:
+A planning job; the chain's leaves are not proved here. Proved while making the two ruled changes and typing the new
+modules, each **[kernel]**, through `./scripts/build.sh` (build 4, exit 0), axiom lists from the built tree
+(`data/fs131/kn7/logs/lean-axioms-check.log`) — the standard three unless said:
 
-- `kn7_borel_le_quotient` — the Borel σ-algebra of `X ⧸ G` is contained in Mathlib's quotient σ-algebra, for every
-  topological group `X` with Borel sets — `data/fs131/kn7/lean/DeclaredRead.lean`
-- `KN7Scratch.ksEntropy_map_mono`, `entropy_borel_le_quotient`, `current_clause_four_implies_r1` — the entropy on the
-  factor for the Borel σ-algebra is at most the entropy for the quotient σ-algebra; so the declared clause (4) implies
-  the page's — `data/fs131/kn7/lean/RepairR1.lean`
-- `KN7Scratch.positive_entropy_rigidity_of_polishSpace` — from the proposed repair R1 (a scratch axiom), the declared
-  statement word for word, for Polish `X` (axioms: the standard three and the scratch axiom) — the same file
+- `Rigidity.positive_entropy_rigidity_of_polishSpace` — the declared theorem over Mathlib's quotient σ-algebra, for Polish
+  `X` — axioms: the standard three and the declared `Rigidity.positive_entropy_rigidity` — `Rigidity/PositiveEntropy.lean`
+- `Rigidity.mrPlus_of_split_of_carried` — EN1-FROM-TWO (MR⁺ from the entropy split and EF_F⁺), **now with no leaf under
+  it** (before this job it rested on `exists_nonTorsion_unitVector`, a `sorry`) — `Rigidity/ChainAtTA.lean`
+- `Rigidity.mem_nameCell_iff_nameOf`, `mem_nameCell_nameOf`, `wordBlock_nameOf` (`[propext, Quot.sound]`),
+  `measurable_nameOf`, `mem_heavyNames`, `zeroEntropyNames_model`, `nameOf_apply` (`rfl`) — `Rigidity/ZeroEntropyNames.lean`
+- `Rigidity.le_maxMultiple` — `Rigidity/HaarMultiple.lean`
+
+**Not theorems of the library**: `Rigidity.entropySplit_of_every` is proved over the leaf `exists_nonTorsion_unitVector`
+(prints `sorryAx`); the headline still prints `sorryAx`. Kernel-checked in scratch files only (`data/fs131/kn7/lean/`, not
+modules), evidence for Stage 2: `kn7_borel_le_quotient`; `KN7Scratch.ksEntropy_map_mono`, `entropy_borel_le_quotient`,
+`current_clause_four_implies_r1` (standard three); `KN7Scratch.positive_entropy_rigidity_of_polishSpace` (over a scratch
+axiom). The branch is a skeleton — 31 `sorry` leaves and one undeclared `axiom` — and is not at the gate.
 
 ## Stage 1 — SAVED: the readback
 
@@ -491,3 +497,173 @@ Lane N shares no file with lanes P, E and C. The draft claim list `data/fs131/kn
 statement 3–4 needs no change: the typed statements are the entries' (§ 5.2); its table's row for the maximal inequality
 should name `Rigidity.measure_frequentVisits_le` as the statement read (a dated line drafted in the report).
 
+## Stage 6 — SAVED: the entropy split weakened (Amendment 2), module M7a typed, and M7's remaining plan
+
+### 6.1 The weaker split (Amendment 2, 04:20 UTC: ruled; the weak form mine to choose)
+
+**The form chosen: one non-torsion rotation** — `(∃ u : unitVectors F, (∀ n : ℕ, n ≠ 0 → (u : ℂ) ^ n ≠ 1) ∧ ksEntropy ρ
+(rot u) = 0)` in place of `(∀ u : unitVectors F, ksEntropy ρ (rot u) = 0)`. Why the weakest and not "every element of one
+admissible `Γ`": it is exactly what `mrPlus_of_split_of_carried` reads; it is typed in the vocabulary `ZeroEntropyCarried`
+already uses (the same non-torsion predicate, word for word), so `ChainAtTA` gains no definition of admissibility; and it
+costs M7 nothing — the variant gives entropy zero for every rotation of one admissible `Γ`, and a generator of `Γ` is
+non-torsion (two multiplicatively independent generators), one line. Weighed and left: naming the non-torsion predicate
+(it now occurs three times in the module) — a name would move the stored statements of `ZeroEntropyCarried` and
+`exists_nonTorsion_unitVector` for no reader.
+
+**What changed in `Rigidity/ChainAtTA.lean`**: `EntropySplit`'s entropy clause, as above; **new** `EntropySplitEvery`
+(the old definition, word for word, under its own name, docstring marking it off the headline's path) and
+`entropySplit_of_every : EntropySplitEvery F → EntropySplit F` (proved: the rotation is `exists_nonTorsion_unitVector`'s);
+`mrPlus_of_split_of_carried` takes its rotation from the split (`⟨u, hu, hρu⟩`) and no longer calls
+`exists_nonTorsion_unitVector`; docstrings of the module, the split, its consumer and `entropySplit` restated.
+
+**From the kernel's side** (`data/fs131/kn7/lean/ModuleDumpChain.lean`, the dump of every constant of the module; before:
+from build 3, `logs/lean-chain-dump-before.log`; after: `logs/lean-chain-dump-after.log`; `tools/fs131_kn7_dump_diff.py`,
+`logs/chain-dump-diff.out`): `ADDED=2 REMOVED=0 CHANGED=1 SAME=30` — CHANGED `EntropySplit` only (its value: the first
+1,577 and last 5,685 characters identical, the middle the `∀ u` clause become `∃ u, (∀ n, n ≠ 0 → ↑u ^ n ≠ 1) ∧ …`);
+ADDED `EntropySplitEvery`, `entropySplit_of_every`; every other stored type byte-identical, the headline's and the
+consumer's among them (they name `EntropySplit F`). Control (`--plant`): all 31 present in both read CHANGED
+(`chain-dump-diff-control.out`). The prints (`data/fs131/kn7/lean/ChainPrint.lean`, `logs/lean-chain-print-{before,after}.log`):
+the old and new bodies of `EntropySplit` as above; `mrPlus_of_split_of_carried : ∀ F, EntropySplit F → ZeroEntropyCarried F
+→ MRPlus F` unchanged, its proof re-elaborated in its five lines, and **its axioms now the standard three** (before:
+`sorryAx`, from `exists_nonTorsion_unitVector`) — EN1-FROM-TWO is a theorem of the library; the headline's print
+unchanged, eight hypotheses, its axioms still `sorryAx` (the leaves under `chainInterface` and `entropySplit`).
+
+**The leaf that proves the split**, `entropySplit [NumberField F] : EntropySplit F`: its statement text is unchanged and
+now means the weak form; its docstring says so (PE-2 at one non-torsion rotation, through the variant at one admissible
+`Γ`, no Lemma W for every vector, no torsion case). **The draft claim list** `data/fs131/kn3/claims-M7-entropy-split.md`:
+statement 1 restated, and a statement 1′ keeping the layer that left the path stated and marked — Lemma W for every
+non-torsion `u` (X02D l. 156, over Chebotarev) and the torsion case (X02D l. 166, over the power rule the library lacks),
+needed only for `EntropySplitEvery`; what stays on the path is one admissible `Γ`. Edited by hand: `tools/fs131_kn6_recut.py
+--check` now reports that file `DIFFERS` from its template, as it should; the old text is in git.
+
+**Which step would fail if the reading of the variant were wrong** (the check the coordinator did not launch: that
+EN2-PE2-MAX's steps 1–3 are written for one fixed `Γ`): step 3's application of Lemma Γ to `κ(x)` — it needs `κ(x)`
+`Γ`-invariant and `Γ`-ergodic for that one `Γ`, which the release's `action_ergodic_decomposition` at `H = Γ` gives; and
+step 2's Fourier argument reads `A ∈ 𝓘_Γ` and `τ′`'s invariance only under `Γ ⊆ U`. If either step needed all of `U`,
+the leaf `entropySplit` would fail there, at the kernel.
+
+### 6.2 Module M7a typed: `Rigidity/HaarMultiple` — EN2-PE2-MAX step 1, pure measure theory
+
+The domain pass (`debruijn-domain-modeling`, a fresh invocation, scoped to `maxMultiple`, the weakened split and M7b's
+vocabulary): `{c | c • m ≤ τ}` is a down-closed interval of `ℝ≥0∞` closed under suprema, so `maxMultiple τ m := sSup …`
+is **the upper adjoint of `c ↦ c • m`** — the statement every other one is read off is the Galois connection
+`smul_le_iff_le_maxMultiple : c • m ≤ τ ↔ c ≤ maxMultiple τ m`, added by the pass. Weighed and rejected: `a` as the essential
+infimum of `dτ/dm` (reads the Lebesgue decomposition the variant exists to avoid). The unsampled member: `m = 0` gives
+`maxMultiple = ⊤`, and every statement that needs `a` finite takes `[IsProbabilityMeasure m]`.
+
+Statements (`lake env lean`: 0 errors, 7 `sorry`; `logs/lean-haarmult-2.log`): `maxMultiple` (definition);
+`le_maxMultiple` (**proved**, `le_sSup`); leaves `maxMultiple_smul_le`, `smul_le_iff_le_maxMultiple`,
+`maxMultiple_le_measure_univ`, `sub_maxMultiple_add`, `not_smul_le_sub_maxMultiple`, `map_sub_maxMultiple` (for a
+measurable equivalence preserving both measures), `maxMultiple_self` (the spec check: `maxMultiple m m = 1`). Read aloud
+against step 1 of EN2-PE2-MAX (EN2 § 5.2, quoted in the module docstring): "contains `0`" — `le_maxMultiple` at `0`; "is
+bounded by `τ(X)`" — `maxMultiple_le_measure_univ`; "is closed; let `a` be its maximum" — `maxMultiple_smul_le`; "`τ′ := τ −
+a·m` is a finite positive measure" — `sub_maxMultiple_add` (and `Measure.sub_le` for finiteness); "`U`-invariant because `τ`
+and `m` are" — `map_sub_maxMultiple` at each rotation; "no `c > 0` has `c·m ≤ τ′`" — `not_smul_le_sub_maxMultiple`. Equal.
+
+**A plan per leaf (lane H: `Rigidity/HaarMultiple.lean` only; Mathlib only).**
+- `maxMultiple_smul_le`: `Measure.le_iff`; on a measurable `s`, `(maxMultiple τ m • m) s = sSup S * m s =
+  ⨆ c ∈ S, c * m s` (`Measure.smul_apply`, `ENNReal.sSup_mul`, checked at the pin: `Data/ENNReal/Inv.lean` l. 824) `≤ τ s`
+  (`iSup₂_le`, each `c ∈ S` by `Measure.le_iff`).
+- `smul_le_iff_le_maxMultiple`: `→` `le_maxMultiple`; `←` `(smul_le_smul_right' h m).trans (maxMultiple_smul_le τ m)` —
+  the monotonicity of `c ↦ c • m` (the implementer finds its name: `Measure.smul_le_smul_right`-shape, or by `Measure.le_iff`
+  and `mul_le_mul_right'`).
+- `maxMultiple_le_measure_univ`: `(maxMultiple_smul_le τ m)` at `univ` with `measure_univ` and `mul_one`.
+- `sub_maxMultiple_add`: `Measure.sub_add_cancel_of_le (maxMultiple_smul_le τ m)`, its finiteness instance from
+  `maxMultiple_le_measure_univ` (`a < ⊤` since `τ` is finite; `IsFiniteMeasure (a • m)`).
+- `not_smul_le_sub_maxMultiple`: if `c • m ≤ τ − a • m` then `(a + c) • m = c • m + a • m ≤ (τ − a • m) + a • m = τ`
+  (`add_smul`, `add_le_add_right`, `sub_maxMultiple_add`), so `a + c ≤ a` by the connection, and `c = 0` because `a ≠ ⊤`
+  (`ENNReal.add_le_iff_nonpos_right`-shape, `ENNReal.le_of_add_le_add_left`).
+- `map_sub_maxMultiple`: the connection is natural in `e`: `c • m ≤ τ ↔ c • m.map e ≤ τ.map e` (`Measure.map_smul`,
+  `MeasurableEquiv.map_le_map`-shape), so `maxMultiple (τ.map e) (m.map e) = maxMultiple τ m`; then
+  `(τ − a • m).map e + a • m = (τ − a • m + a • m).map e = τ` (`Measure.map_add`, `hτ`, `hm`) and cancel the finite
+  `a • m` (`Measure.sub_add_cancel_of_le` read backwards, or `add_left_cancel` on finite measures via `Measure.ext` and
+  `ENNReal.add_left_inj`). Hard: this cancellation, the leaf's only non-trivial step.
+- `maxMultiple_self`: `c • m ≤ m` at `univ` gives `c ≤ 1`; `1 • m = m`; antisymmetry.
+
+### 6.3 What is left of M7, planned in words (module M7b, `Rigidity/EntropySplitMax`; not typed by this job)
+
+M7b proves `entropySplit` from M7a, Lemma Γ (M6/M5), the two release theorems (lanes P2, P3), Fourier uniqueness (M2) and
+Haar existence (M4). Its vocabulary, decided here for its planner:
+1. **The unit vectors as a group**: `unitCircle F : Subgroup Circle`, the `z` with `(z : ℂ) ∈ planeOver F` (closed under
+   product and under inverse, which is conjugation on the circle), with `unitVectors F ≃ unitCircle F`. No group structure on
+   `unitVectors F` exists in the library (searched `Subgroup Circle`, `MulAction … Dual`).
+2. **The rotation action** `MulAction (unitCircle F) (Dual F)` with `g • χ = rot g χ`; owes `rot (u * v) = rot u ∘ rot v`
+   and `rot 1 = id` (`rot_apply` and `uvRing` multiplicativity). A subgroup `Γ` then acts by restriction, and
+   `Countable Γ` (`Countable F`).
+3. **Admissibility**, X02D's operational form: `Γ` is generated by two multiplicatively independent elements and contains
+   a `w` with `Subfield.closure {(w : ℂ) ^ k} = ` the field `F(i)` for every `k ≥ 1`. Its existence for one `Γ` is the one
+   arithmetic input left on the path (§ 6.1); whether `IsAdmissible` takes the operational form or "every finite-index
+   subgroup generates `F(i)`" is the M6 planner's call (PE-1′ reads the second).
+4. **`StandardBorelSpace (Dual F)`** for the cylinder σ-algebra (§ Stage 4: the release's decomposition asks it).
+Its statements, in the deriver's order (EN2 § 5.2): (a) `RotInv` of `τ − maxMultiple τ m • m` (M7a's
+`map_sub_maxMultiple` at each `rot u` as a measurable equivalence); (b) **step 2**, the Haar set of the kernel is null: for
+`λ` the normalised remainder and `κ := condExpKernel λ (the Γ-invariant σ-algebra)`, the set `A` of `x` at which every
+Fourier coefficient off `0` of `κ x` vanishes has `λ A = 0` — over Fourier uniqueness and M7a's
+`not_smul_le_sub_maxMultiple`; (c) **step 3**, entropy zero at every `γ ∈ Γ` — over `action_ergodic_decomposition`, Lemma Γ
+and `ksEntropy_bind_eq_zero` (lane E's leaf 9, the mixture lemma); (d) `entropySplit` from (a)–(c) and a non-torsion
+generator; `b = 0` and `ρ` the point mass at the trivial character when the remainder is `0` (`ksEntropy_dirac`, lane E's
+leaf 3). Lemma Γ itself (X02D § 3.1) belongs with the pieces (M6) and `haar_or_zero_entropy` (M5), whose proof may take
+`[PolishSpace X]` (Stage 3) — that statement change comes to the coordinator before it is typed.
+
+### 6.4 The lanes after this job (none shares a file with another)
+
+| lane | writes | needs | who |
+|---|---|---|---|
+| **P** — the port, M0-shannon, M0-mix, M0-max | three files under `Outside/` | Mathlib | the implementer on `fs131-we1` (in flight) |
+| **P2** — the ergodic decomposition (`ErgDecomp` bundle: KernelEntropy ll. 220–558, ErgodicDecomposition ll. 4–179) | one file under `Outside/` | Mathlib | an implementer with FS-132's generator; three renames inside proofs (§ Stage 4); hours |
+| **P3** — the generating-sequence theorem (nine files beyond lane P's two) | files under `Outside/` | lane P's two | an implementer; one rename; hours |
+| **E** — `Rigidity/Entropy` | as KN6 § 5.4; leaf 10 now planned (§ Stage 4) | P (leaves 5–9), P3 (leaf 10) | the implementer on `fs131-we1` |
+| **N** — `Rigidity/ZeroEntropyNames`, `Rigidity/SolenoidErgodic` | § 5.4 | `exists_blockEntropy_le_mul` stated; N8 at P's join | an implementer |
+| **H** — `Rigidity/HaarMultiple` | § 6.2 | Mathlib | an implementer; short |
+| **C** — `Rigidity/ChainAtTA` C0 leaves | as KN6 § 5.6 | — | an implementer |
+| **M7b** | a new file | H, P2, E, M2, M4, M6 | a planner first (§ 6.3) |
+| **M8b** | new files | N, M9 | a planner first (its model of `Dual F` as `𝔸_𝒮/D` and the pigeonhole) |
+
+### 6.5 The fourth build and the checks at the hand-back
+
+- `data/fs131/kn7/build.sh 4 8`: `==> build: OK — 250 of 250 batches, 3 module(s) rebuilt, 6 module(s) with warnings,
+  7m9s`, `exit=0` (`logs/build-4.log`); rebuilt `Rigidity.HaarMultiple`, `Rigidity.ChainAtTA`, `Proofs`; 31 warnings, each
+  `declaration uses 'sorry'` (`Entropy` 8, `PositiveEntropy` 1, `ChainAtTA` 6, `ZeroEntropyNames` 8, `SolenoidErgodic` 1,
+  `HaarMultiple` 7), no other. `lake lint`: `exit=0`, `Linting passed for Proofs`, 14 linters passed (`logs/lint-4.log`).
+  `tools/check_architecture.py`: PASS (`logs/arch-3.out`).
+- The chain module's dump from the build equals the dump after the edit (`SAME=33`, `logs/chain-dump-diff-build.out`), as
+  the declared theorem's did (`SAME=4`, `logs/dump-diff-build.out`).
+- No copied compiled file was rewritten: `sha256sum -c` of the manifest made after the copy reports one file differing,
+  `Proofs.olean`, which every build rebuilds (`logs/manifest-check-4.out`); the modules this job compiled were absent from
+  the manifest.
+- Nothing of this job is running; the scratch copies of the release stay under the ignored `build/fs131-kn7/`; nothing was
+  written or run in `~/source/math` or in `fs131-wnf`. **Not pushed** (the brief).
+
+## Drafts for files I do not write
+
+- **`data/fs131/claims-NF2.md` § Dated lines** (Keryx files; each follows the last line there):
+  - "2026-10-14 — **Clause (4) of the declared rigidity theorem is the page's (FS131-KN7, Amendment 1 of its brief).**
+    `Rigidity.positive_entropy_rigidity` states the entropy on `X/G_j` over the Borel σ-algebra of the quotient group
+    (`[EinsiedlerLindenstrauss2022]` p. 4, § 1.3: 'the Borel σ-algebra B_{X/X′} of X/X′'), where it had Mathlib's quotient
+    σ-algebra, which contains that one and can be larger; the old form is `Rigidity.positive_entropy_rigidity_of_polishSpace`,
+    proved for Polish `X`. The axiom is weaker than before and says what its page says at that clause."
+  - "2026-10-14 — **NF2-LEAF-20 is narrowed: the entropy split is read at one rotation (FS131-KN7, Amendment 2 of its
+    brief).** `Rigidity.EntropySplit` asks for entropy zero at one rotation by a non-torsion unit vector, which is all
+    `mrPlus_of_split_of_carried` reads; PE-2 at every rotation is `Rigidity.EntropySplitEvery`, which implies it and is off
+    the headline's path. Off the path with it: Lemma W for every non-torsion vector and the torsion case (X02D ll. 156, 166);
+    on the path: one admissible `Γ`. `mrPlus_of_split_of_carried` is now a theorem on the standard three axioms."
+  - "2026-10-14 — **NF2-LEAF-18's statements are typed (FS131-KN7).** EN2-CNT and EN2-ZE are
+    `Rigidity.card_words_badStarts_le` and `Rigidity.exists_forall_exp_le_measureReal_nameCell` (module
+    `Rigidity/ZeroEntropyNames`), read back from the kernel's print against their entries; the maximal inequality they read
+    is `Rigidity.measure_frequentVisits_le`, the release's `excessiveOccupation_measure_bound` with its definitions unfolded,
+    closed by the port at the join."
+- **`LEAN.md` § Searching — Lean**, a new line: "Mathlib's `MeasurableSpace` instance on a quotient group `X ⧸ G` is the
+  quotient σ-algebra (`QuotientGroup.measurableSpace`, `MeasurableSpace.map mk`): it contains `borel (X ⧸ G)` for every
+  topological `X` with Borel sets and equals it only through `QuotientGroup.borelSpace`, which asks `[PolishSpace X]` and `G`
+  closed. A statement that means the Borel σ-algebra of a quotient writes `borel (X ⧸ G)` out — in an entropy or any quantity
+  monotone in the σ-algebra, the instance is the unsafe side (`Rigidity.positive_entropy_rigidity`, FS131-KN7)."
+- **`LEAN.md` § Assumptions**, item 2, an instance: "Read the stored statement's instances, not its text: a declared
+  statement that names a measure on a quotient took Mathlib's quotient σ-algebra where the page has the Borel one; found by
+  `pp.explicit` and a constant listing of the stored type (FS131-KN7, `data/fs131/kn7/lean/DeclaredRead.lean`)."
+- **`ARCHITECTURE.md` § Trust** (at the first landing that proves a record from the axiom): KN3 § 5.3 item 4's draft line,
+  with "its σ-algebra on the factor is the Borel one of the quotient (FS131-KN7)" added.
+- **`BIBLIOGRAPHY.md`, `[EinsiedlerLindenstrauss2022]`**, reading status: "p. 4 § 1.3's two constructions, § 4's opening,
+  Thm 4.1, § 4.1, Lemma 4.2 (pp. 14–15) and § 3.2's paragraph on conditional entropy contributions (p. 13) read by FS131-KN7
+  (2026-10-14) for clause (4)'s σ-algebra." And `[OAIMath2026]`: "family 015's `PrimePackets/KernelEntropy.lean` ll. 220–558,
+  `ErgodicDecomposition.lean` ll. 4–179 and the eleven files of `EntropyGeneratingSupremum.lean`'s cone elaborated at this
+  pin in scratch copies by FS131-KN7 (0 errors after four renames, all inside proofs); statements read, proofs not read."

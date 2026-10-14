@@ -1,0 +1,8 @@
+slot: admitted kn7s: mem 4 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:76:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:81:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:85:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:271:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:276:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:283:8: warning: declaration uses `sorry`
+exit=0
