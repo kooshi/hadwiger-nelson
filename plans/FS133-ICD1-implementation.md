@@ -117,3 +117,18 @@ elaborations of the file, and all five of `Algebraic` in five. What is left: **C
 12–20 h; the library's `eventually_le_muPer` already assembles the windowing, keeping and tiling for `k` classes, so
 what is new is the count of translates of a periodic grid union — re-priced at one long stage), **Q4** and **Q5**
 (6–10 h each by the plan; not begun).
+
+## Stage 3 — SAVED: C2, the fold cover — lane C complete
+
+**C2** `exists_fold_cover` — **proved**, no `sorry` in `Algebraic` or `Fractional`. Route: the windowing, keeping and
+tiling of `Plane.eventually_le_muPer` (`Plane/Slack`), run for one class with its data kept — `exists_squareWin_dense`
+at an integer side `ℓ`, `ae_eventually_keptAt` and continuity from below on the window, `exists_tiled_kept` at pixel
+`h = 1/M`, `keptAt_band`, and `periodize` at `ℓ + 2 = K h` with `K = (ℓ + 2) M` (so the pixel divides the period,
+which `muPer`'s definition does not record) — then the count, which is new here, in private helpers:
+`card_sub_mem` (every point lies in the same number `n'` of the `K²` translates of the periodized grid union by the
+lattice points `(i h, j h)`, `i, j ∈ ZMod K`: membership depends only on the square, the square's corner reduces
+modulo `K` by the period, and `p ↦ (⌊x/h⌋, ⌊y/h⌋) − p` is a bijection of `(ZMod K)²`), and
+`volume_le_card_corners` (the kept squares' area is at most `n' h²`: they lie in a window of fewer than `K` squares a
+side, so distinct squares have distinct corners modulo `K`). Then `a K² < n'`, so `c K² ≤ n'`, `n' > 0`. The plan's
+route (regularise by `3/4`-dense discs, grid squares inside an open set) was not needed: the library's kept squares
+are already a grid union.

@@ -1,0 +1,16 @@
+import Proofs.HadwigerNelson.Plane.OneClass.Algebraic
+open MeasureTheory
+#check @Finset.card_le_card_of_injOn
+#check @ZMod.intCast_eq_intCast_iff_dvd_sub
+#check @Int.eq_zero_of_abs_lt_dvd
+#check @ZMod.val_intCast
+#check @ZMod.natCast_zmod_val
+#check @ZMod.card
+#check @Int.floor_sub_natCast
+#check @Int.le_floor
+#check @Int.floor_lt
+#check @measure_biUnion_finset_le
+#check @Finset.card_nbij'
+#check @Int.emod_add_ediv
+#check @HadwigerNelson.Plane.volume_squareWin
+#check @Set.ncard_coe_finset
