@@ -533,10 +533,14 @@ hash, automatic (`6e6cf60a2`), so that the commit the gate reads holds them. The
 the merged tree: 8 of 8 (`readback-tree.out`). The drafts' slots read on `main` at that commit
 (`data/fs131/lu1/drafts-slots.py`): 29 of 29 found exactly once, the control absent.
 
-**The tree the compiled modules were copied from is gone.** `.claude/worktrees/fs131-wkc` was removed by another
-hand at about 20:25 UTC (the directory `worktrees/` was last written then; `git worktree list` no longer shows it) —
-after this job's copy and its after-check (20:21 UTC) and during its first build. Nothing of this job's wrote there
-(`rsync` from it, no `--delete`). So the comparison of stage 1 cannot be made again; what stands in its place:
+**The tree the compiled modules were copied from is no longer at its path, and has been built in since.** The
+coordinator moved `.claude/worktrees/fs131-wkc` at about 20:25 UTC to become `.claude/worktrees/fs133-wk1` for the
+next job, and that tree's build went on there (the coordinator's word, after the green line) — after this job's copy
+and its after-check (20:21 UTC) and during its first build. *(This paragraph first said the tree "was removed by
+another hand": that was this job's reading of a path that had stopped existing — `git worktree list` no longer showed
+it — and it was wrong; slip 8.)* Nothing of this job's wrote there (`rsync` from it, no `--delete`). So the comparison
+of stage 1 cannot be made again against the files it was made with; what stands in its place, accepted by the
+coordinator as it is:
 - the three listings made then (`rsync-dry.out`, `rsync-real.out`; the dry run after the copy listed only the three
   excluded sourceless modules);
 - **a manifest of every `.olean` of `Proofs` in this tree** — SHA-256 and time — made after the first build
@@ -832,8 +836,8 @@ both) (FS131-LC1).":
 >   117 modules stale after the merge, 4 recompiled, 5 m 34 s against 47 m). A module that imports an edited docstring
 >   recompiles to the same `.olean` bytes — only its `.trace` moves (113 of 114 dependents, by checksum). Take the
 >   checksum listing before and after the copy, and a manifest of every `.olean`'s hash and time once it is in
->   (`data/fs131/lu1/compiled_unchanged.py`): the source tree can be removed under you (it was, four minutes later),
->   and the manifest is then what shows that no copied file has been rewritten.
+>   (`data/fs131/lu1/compiled_unchanged.py`): the source tree can be moved and built in under you (it was, four
+>   minutes later, for the next job), and the manifest is then what shows that no copied file has been rewritten.
 
 *§ Searching — Lean, following* "both stored-term comparisons with the release are run again (FS131-LC1)." *— the
 planner's three lines, FS131-IU1's four, FS131-IQ1's four and FS131-IV1's five, each copied from its record by
@@ -1007,7 +1011,8 @@ written out".
    for the row or the label. This landing searched for `UpperHalf` and for rows 52 and 57: the one site.
 9. **The vacuity scan decides nothing about this module**: sixty declarations, no site. The notes check reads QA4's
    modules only: no instrument reads the three files' "Inhabitants" notes; stage 5 read them.
-10. **The compiled library was brought current by copy, and the tree it was copied from is gone** (stages 1 and 7).
+10. **The compiled library was brought current by copy, and the tree it was copied from has since been moved and
+    built in** (stages 1 and 7).
     117 modules of `Plane/` and `Outside/` were compiled by the last landing in another tree; Lake's trace check took
     each; the manifest shows none rewritten here; the last landing's three modules store the statements that landing's
     final dump holds. No cold build of the whole library has been run on the joined tree. The coordinator ruled that
@@ -1137,7 +1142,7 @@ theorems and 3 definitions — with the banner its record is under and its axiom
    scratch file; the wrapper appended a line to the tracked `probes/measure.txt`, so the plant's script ended on
    "tracked files modified: 1". The module's digest and the plant's absence are what show the restore; the count was
    mine to keep at zero.
-3. **A cross-tree check written before looking whether the other tree was still there**: `compiled-identical.sh`
+3. **A cross-tree check written before looking whether the other tree was still at its path**: `compiled-identical.sh`
    was written for the pass, failed on its first run ("no build at …/fs131-wkc"), and was replaced by the manifest
    check; it was never committed.
 4. **The record's stage numbers run one ahead of the brief's items from the gate on**, as the last landing's did:
@@ -1150,6 +1155,16 @@ theorems and 3 definitions — with the banner its record is under and its axiom
 7. **One slot of the drafts' check was wider than its draft**: the map's `[S2]` sentence was first checked with the
    table's next cell attached, on a wrong reading that the sentence occurs twice in the file; it occurs once, and the
    check now holds the sentence alone (29 of 29 both times).
+8. **"Removed by another hand" was wrong, and it was said in five places before the correction** — three in this
+   record, the manifest tool's docstring and the report. The tree
+   the compiled files were copied from (`.claude/worktrees/fs131-wkc`) was **moved** by the coordinator at about 20:25
+   UTC to `.claude/worktrees/fs133-wk1` for the next job, and built in there afterwards; this job saw the path gone and
+   the worktree list without it and wrote "removed" — it had even noticed that `fs133-wk1` held the last landing's
+   module with that landing's timestamp, and did not follow the thought. Stage 7, open gate item 10, draft 11's
+   § Building bullet, the manifest tool's docstring and the report's last inventory line are corrected in place; the
+   green line sent to the coordinator and the subject of commit `c2f4e4f54` carry the wrong word and cannot be
+   changed. Nothing about the evidence moves: the copy and its after-check were made while the tree was at its path
+   and untouched, and the manifest check never read the other tree.
 
 ## Stage 9 — SAVED (FS131-LU1): the green line, and where the branch stands
 
@@ -1170,6 +1185,11 @@ coordinator's. This job pushed nothing.** The drafts' slots were read last on `m
   the waits have exited; the slot's ledger holds no reservation of mine.
 - **The bibliography audit** (`tools/bib_audit.py`, run as a courtesy; `data/fs131/lu1/bib-audit.out`): exit 0, "every
   cited work resolves to a row or a recorded alias".
+- **The coordinator's receipt of the green line** (its message, after stage 9 was first committed): its own checks
+  agree — the gated commit is an ancestor of the tip, nothing differs after it outside `plans/` and `data/`, no
+  `sorry`, and it printed the axioms of six headlines from this tree's compiled modules itself, the standard three
+  each — with one correction to this record, made here (slip 8): the source tree was moved, not removed. The stand-in
+  evidence is accepted as it is.
 - **What is left, in order** — none of it gate work: (1) the filing, from the drafts (the coordinator's); (2) one more
   fast-forward for this record's last section and the report (`plans/` and `data/` only); (3) the open gate items, of
   which 1 (the stale docstrings), 3 (models that are terms) and 6 (corollaries one line away, row 52's two values
