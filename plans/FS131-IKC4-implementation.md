@@ -6,7 +6,26 @@ explicit path, not pushed (the brief: the remote is unreachable).*
 
 ## Theorems this phase proved
 
-(filled at the stage that proves them)
+Each [kernel], printed from the built tree (`data/fs131/ikc4/axioms.txt`; 420 public records and 438 private theorems of
+the 81 modules printed, every one a subset of the standard three):
+
+- `HadwigerNelson.FibreCert.cert19_ok : certOK cert19 = true` (`Arith/FibreCert19Bound`) — the reduced certificate at
+  `p = 19` passes the checker of `Arith/FibreCert`, unchanged; `[propext, Classical.choice, Quot.sound]`.
+- `HadwigerNelson.FibreCertSound.sum_le_nineteen` — every `φ : (ℤ/19)² → [0, 1]` with `q(φ) ≥ 0` has
+  `Σφ ≤ 8864340098471101020193379809808304 / 10^32` (= 88.6434…); the standard three.
+- `HadwigerNelson.FibreCertSound.card_le_nineteen` — an independent set of `Cay((ℤ/19)², {a² + b² = 1})` has at most
+  that many points; the standard three.
+- `HadwigerNelson.FibreCertSound.bound_nineteen_lt_quarter` — `U/(361·L) < 1/4` (`0.24555…`); the standard three.
+- `HadwigerNelson.FibreCertSound.card_div_lt_quarter_nineteen` — such a set has `|I|/361 < 1/4`; the standard three.
+- `HadwigerNelson.FibreCertSound.model_nineteen` — the hypotheses inhabited together (`φ = 0`; `I = {0}`).
+- `Arith/FibreCertFast` (core only): `globalOK_eq_K`, `globalOKKZ_eq`, `globalOKKZ_eq_P`, `p1stepZ_eq`, `p1stepF_eq`,
+  `segCheck_eq_Z`, `foldl_O3`, `foldl_O4`, `ktEq_eq`, `eq_flatten_of_pieces`, `fold_p1stepZ_rd_co`, `fold_chunk`,
+  `fold_drop_chunk`, `readIter_qj`, `readIter_eq_rdAt`, `readK_add`, `rows_flatten`, `pairCoefs_eq`, `coefFrom_eq`,
+  `p1AtF_eq`, `fold_drop_chunkF` and their helpers — each fast form equal to the checker's part for every certificate.
+- The 41 check declarations (`cert19_kt0_ok` … `cert19_kt7_ok`, `cert19_p1c0` … `cert19_p1c7`, `cert19_globalP`,
+  `cert19_seg0` … `cert19_seg3`, `cert19_psd0` … `cert19_psd18`, `cert19_psdq0`), each `decide +kernel`, and the
+  assembly lemmas `ktable_cert19`, `cert19_phase1`, `cert19_global`; the four `rfl` facts `cert19_p`, `_unum`,
+  `_scale`, `_nseg`.
 
 ## Stage 1 — SAVED: the readback
 
@@ -92,3 +111,72 @@ way to compute one part of the check, proved equal to the checker's part for eve
 `globalOKKZ_eq`, `p1stepZ_eq`, `p1stepF_eq`, `segCheck_eq_Z`, `fold_drop_chunk`, `p1AtF_eq`), so that the kernel
 evaluates the fast form on `cert19` and the proof rewrites it into `certOK cert19 = true`. The soundness theorems, the
 checker, `cert3` and `cert11` are untouched, and K2's proof is not reopened.
+
+## Stage 3 — SAVED: the bound at p = 19
+
+### 3.1 The modules (every one generated but `Arith/FibreCertFast`)
+
+* Data (`tools/fs131_ikc4_gen.py … --nseg 4 --scale-bits 40 --kt-maps 5 --p1-chunks 8`, 37 modules, 49.0 MB, the largest
+  2.2 MB): `FibreCert19B0` … `B18`, `Q0` (the blocks), `K0` … `K7` (the K table, 5 maps each), `P1` … `P8` (phase 1's
+  orbit rows and bound after each chunk, 0.3–0.6 MB), `FibreCert19` (the rest, `cert19`, the K table's flatten).
+* `Arith/FibreCertFast` (core, about 700 lines): the fast forms and their equalities (§ Theorems).
+* Checks (`tools/fs131_ikc4_checks.py`, 27 modules chained by imports): `Kt0` … `Kt3` (two K-table pieces each),
+  `C0` … `C7` (phase 1's chunks), `Global`, `Seg0` … `Seg3`, `Psd0` … `Psd9` (two blocks each).
+* `Arith/FibreCert19Bound`: `cert19_ok` assembled with no evaluation — `ktable cert19 = cert19_kt` from the eight
+  pieces (`eq_flatten_of_pieces`); phase 1 = the last chunk's result by eight `fold_drop_chunkF` rewrites; `globalOK`
+  through `globalOK_eq_K`, `globalOKKZ_eq`, `globalOKKZ_eq_P`; the segments through `segCheck_eq_Z`; PSD by blocks — then
+  the bound from `sum_le_of_certOK`, `card_le_of_certOK`, and `norm_num` for `1/4`.
+* Registered in `Proofs.lean` and `ARCHITECTURE.md` (66 rows; `tools/check_architecture.py` PASS, `logs/arch1.txt`).
+
+### 3.2 Each declaration (the build under the slot, `--mem 10 --cpus 4`, `MEMMAX=10G BATCH=8`; time is Lake's per module,
+peak the module's `lean` resident set sampled every half second, `logs/build1-rss.txt`)
+
+| module | declarations | time | peak |
+|---|---|---|---|
+| `Kt0` … `Kt3` | K table, maps 0–39, two pieces each | 46 / 45 / 45 / 42 s | 3.81–3.82 GiB |
+| `C0` … `C7` | phase 1, 2,081–2,082 pairs each | 30 / 38 / 39 / 37 / 38 / 40 / 42 / 45 s | 5.36 / 6.40 / 6.29 / 6.27 / 6.18 / 6.47 / 6.58 / 6.61 GiB |
+| `Global` | the shape at phase 1's result | 0.9 s | 0.59 GiB |
+| `Seg0` … `Seg3` | the identity, four segments | 62 / 34 / 31 / 27 s | 7.28 / 6.33 / 6.11 / 5.64 GiB |
+| `Psd0` … `Psd9` | PSD, two blocks each (`Psd9`: block 18 and the q-block) | 80–85 s each, `Psd9` 40 s | 5.56–5.85 GiB, `Psd9` 4.85 GiB |
+| data | 37 modules, eight at a time | 0.6–36 s each | 0.47–0.71 GiB |
+| `Bound` | `cert19_ok` and the bounds | 4.0 s | — |
+| **the whole p = 19 check** | **41 kernel declarations** | **1,422 s (23.7 min)** | **at most 7.28 GiB** |
+
+### 3.3 The builds
+
+* `logs/build1.log` (full: `logs/build1-full.log`): 65 modules rebuilt, every check module green, 0 modules with
+  warnings; the batch of `FibreCert19Bound` failed — the copy in `Proofs/` was generated before a fix of the
+  generator (`show l = l.drop 0 from rfl` sent the elaborator into evaluating the pair list: maximum recursion depth).
+* `logs/build2.log`: `FibreCert19Bound` failed at two `by rw [hpl]; decide` steps that `rw` had already closed
+  ("No goals") — written as terms (`Nat.le_trans (by decide) (Nat.le_of_eq hpl.symm)`).
+* `logs/build3.log` (full: `logs/build3-full.log`): **OK, 264 of 264 batches, 2 modules rebuilt (`FibreCert19Bound`
+  4.0 s, `Proofs` 7.6 s), 0 modules with warnings, 7 m 13 s.**
+
+### 3.4 What the bound says, read against the claim
+
+`sum_le_nineteen`: FS-66's L4 at `p = 19` (`data/fs66/b1/SOUNDNESS.md` § 0), with the reduced certificate's
+`U = 88.6434…` in place of FS-66's 77.5117…; `card_le_nineteen` and `card_div_lt_quarter_nineteen`: at level one,
+an independent set of `Cay((ℤ/19)², S)` has density below `1/4` (`0.2455…`, margin `1.607` points of `361/4 = 90.25`,
+the search record's). The tower to every level is K4's (Lemma P), not this module's.
+
+## Stage 4 — SAVED: the new parts, each refusing a planted fault
+
+The parts are proof-level forms, not changes to `certOK`; each new check refuses one corrupted entry, the kernel
+*proving* the check `= false` (`data/fs131/ikc4/plants/`, logs `logs/plants1` … `plants3`). Each twin is the library
+declaration named in the file.
+
+| part | plant | time | peak | verdict |
+|---|---|---|---|---|
+| K table vs literal, first entry compared | slot 5 of map 5, block 0, +1 in the literal (`PlantKt`) | 0.5 s | 0.49 GiB | `= false` proved |
+| K table vs literal, last entry compared | the last block of map 39, `N` + 1 (`PlantKtLast`) | 22.3 s | 3.39 GiB | `= false` proved |
+| phase-1 chunk, rows | first orbit row of the checkpoint `+1` (`PlantChunk`) | 1.1 s | 0.63 GiB | `= false` proved |
+| phase-1 chunk, bound (its last conjunct) | bound `+1` (`PlantChunkBound`) | 36.7 s | 5.35 GiB | `= false` proved |
+| the shape at phase 1's result | first / last orbit row `+1` (`PlantGlobal`, `PlantGlobalLast`) | 0.6 / 0.5 s | 0.5 GiB | `= false` proved |
+| identity without zero ops | `U_num − 1` (`PlantSeg`, segment 0) | 73.6 s | 7.24 GiB | `= false` proved |
+| PSD at `2^40` | `M[0][0]` doubled in block 1 (`PlantPsd`) | 7.8 s | 1.94 GiB | `= false` proved |
+
+The short times are `&&` stopping at the corrupted entry; the last-entry plants force the whole comparison.
+`PlantSeg` first ran with the default heartbeat limit and stopped there after 73 s (`(deterministic) timeout at
+isDefEq`), the library's `Seg0` (62 s) did not: rerun with the limit lifted, refused. **The proofs' reopened part:
+none** — `certOK`, `FibreCertSound` and K2 are untouched (§ 5), so nothing was re-proved; the first implementer's
+counterexample controls are about `certOK`'s definition, which is unchanged.

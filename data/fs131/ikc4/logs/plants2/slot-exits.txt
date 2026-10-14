@@ -1,0 +1,4 @@
+PlantKtLast slot-exit 0 mem 6
+PlantChunkBound slot-exit 0 mem 9
+PlantGlobalLast slot-exit 0 mem 4
+DONE

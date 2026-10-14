@@ -1,0 +1,11 @@
+DIFFERS HadwigerNelson.FibreCertSound.sum_le_of_certOK (raw text differs)
+SAME HadwigerNelson.FibreCertSound.card_le_of_certOK (raw text identical)
+SAME HadwigerNelson.FibreCertSound.V (raw text identical)
+SAME HadwigerNelson.FibreCertSound.unitCircle (raw text identical)
+SAME HadwigerNelson.FibreCertSound.qform (raw text identical)
+SAME HadwigerNelson.FibreCert.Cert.p (raw text identical)
+SAME HadwigerNelson.FibreCert.Cert.scale (raw text identical)
+SAME HadwigerNelson.FibreCert.Cert.unum (raw text identical)
+constants: before 791, after 791; public removed 0, added 0, changed 1 (the checker, by design)
+  CHANGED HadwigerNelson.FibreCertSound.sum_le_of_certOK
+FAIL: ['HadwigerNelson.FibreCertSound.sum_le_of_certOK']

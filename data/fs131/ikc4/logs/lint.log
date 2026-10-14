@@ -1,0 +1,189 @@
+Running linter on specified modules: [Proofs]
+[Proofs] Starting lint...
+[Proofs] Running linters:
+  checkType
+  defsWithUnderscore
+  deprecatedNoSince
+  docBlame
+  impossibleInstance
+  nonClassInstance
+  simpComm
+  simpNF
+  structureInType
+  subsetDotNotationLinter
+  synTaut
+  tacticDocs
+  unusedArguments
+  unusedHavesSuffices
+[Proofs] - checkType: (0/2) Starting...
+[Proofs] - defsWithUnderscore: (0/2) Starting...
+[Proofs] - deprecatedNoSince: (0/2) Starting...
+[Proofs] - docBlame: (0/2) Starting...
+[Proofs] - impossibleInstance: (0/2) Starting...
+[Proofs] - nonClassInstance: (0/2) Starting...
+[Proofs] - simpComm: (0/2) Starting...
+[Proofs] - simpNF: (0/2) Starting...
+[Proofs] - structureInType: (0/2) Starting...
+[Proofs] - subsetDotNotationLinter: (0/2) Starting...
+[Proofs] - synTaut: (0/2) Starting...
+[Proofs] - tacticDocs: (0/2) Starting...
+[Proofs] - unusedArguments: (0/2) Starting...
+[Proofs] - unusedHavesSuffices: (0/2) Starting...
+[Proofs] - checkType: (1/2) Getting...
+[Proofs] - checkType: (2/2) Passed!
+[Proofs] - defsWithUnderscore: (1/2) Getting...
+[Proofs] - defsWithUnderscore: (2/2) Failed with 46 messages, but these may include declarations in `nolints.json`.
+[Proofs] - deprecatedNoSince: (1/2) Getting...
+[Proofs] - deprecatedNoSince: (2/2) Passed!
+[Proofs] - docBlame: (1/2) Getting...
+[Proofs] - docBlame: (2/2) Passed!
+[Proofs] - impossibleInstance: (1/2) Getting...
+[Proofs] - impossibleInstance: (2/2) Passed!
+[Proofs] - nonClassInstance: (1/2) Getting...
+[Proofs] - nonClassInstance: (2/2) Passed!
+[Proofs] - simpComm: (1/2) Getting...
+[Proofs] - simpComm: (2/2) Passed!
+[Proofs] - simpNF: (1/2) Getting...
+[Proofs] - simpNF: (2/2) Passed!
+[Proofs] - structureInType: (1/2) Getting...
+[Proofs] - structureInType: (2/2) Passed!
+[Proofs] - subsetDotNotationLinter: (1/2) Getting...
+[Proofs] - subsetDotNotationLinter: (2/2) Passed!
+[Proofs] - synTaut: (1/2) Getting...
+[Proofs] - synTaut: (2/2) Passed!
+[Proofs] - tacticDocs: (1/2) Getting...
+[Proofs] - tacticDocs: (2/2) Passed!
+[Proofs] - unusedArguments: (1/2) Getting...
+[Proofs] - unusedArguments: (2/2) Passed!
+[Proofs] - unusedHavesSuffices: (1/2) Getting...
+[Proofs] - unusedHavesSuffices: (2/2) Passed!
+[Proofs] Completed linting!
+[Proofs] scripts/nolints.json summary (number of nolints per linter):
+  
+-- Found 46 errors in 14408 declarations (plus 12114 automatically generated ones) in Proofs with 14 linters
+
+/- The `defsWithUnderscore` linter reports:
+FOUND definitions with an underscore in their name.
+This linter can be disabled with `@[nolint defsWithUnderscore]`. -/
+-- Proofs.HadwigerNelson.Arith.FibreCert19
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19.lean:1230:1: error: HadwigerNelson.FibreCert.cert19_kt The definition `HadwigerNelson.FibreCert.cert19_kt` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19B0
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19B0.lean:5:1: error: HadwigerNelson.FibreCert.cert19_b0 The definition `HadwigerNelson.FibreCert.cert19_b0` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19B1
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19B1.lean:5:1: error: HadwigerNelson.FibreCert.cert19_b1 The definition `HadwigerNelson.FibreCert.cert19_b1` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19B10
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19B10.lean:5:1: error: HadwigerNelson.FibreCert.cert19_b10 The definition `HadwigerNelson.FibreCert.cert19_b10` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19B11
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19B11.lean:5:1: error: HadwigerNelson.FibreCert.cert19_b11 The definition `HadwigerNelson.FibreCert.cert19_b11` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19B12
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19B12.lean:5:1: error: HadwigerNelson.FibreCert.cert19_b12 The definition `HadwigerNelson.FibreCert.cert19_b12` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19B13
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19B13.lean:5:1: error: HadwigerNelson.FibreCert.cert19_b13 The definition `HadwigerNelson.FibreCert.cert19_b13` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19B14
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19B14.lean:5:1: error: HadwigerNelson.FibreCert.cert19_b14 The definition `HadwigerNelson.FibreCert.cert19_b14` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19B15
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19B15.lean:5:1: error: HadwigerNelson.FibreCert.cert19_b15 The definition `HadwigerNelson.FibreCert.cert19_b15` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19B16
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19B16.lean:5:1: error: HadwigerNelson.FibreCert.cert19_b16 The definition `HadwigerNelson.FibreCert.cert19_b16` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19B17
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19B17.lean:5:1: error: HadwigerNelson.FibreCert.cert19_b17 The definition `HadwigerNelson.FibreCert.cert19_b17` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19B18
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19B18.lean:5:1: error: HadwigerNelson.FibreCert.cert19_b18 The definition `HadwigerNelson.FibreCert.cert19_b18` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19B2
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19B2.lean:5:1: error: HadwigerNelson.FibreCert.cert19_b2 The definition `HadwigerNelson.FibreCert.cert19_b2` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19B3
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19B3.lean:5:1: error: HadwigerNelson.FibreCert.cert19_b3 The definition `HadwigerNelson.FibreCert.cert19_b3` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19B4
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19B4.lean:5:1: error: HadwigerNelson.FibreCert.cert19_b4 The definition `HadwigerNelson.FibreCert.cert19_b4` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19B5
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19B5.lean:5:1: error: HadwigerNelson.FibreCert.cert19_b5 The definition `HadwigerNelson.FibreCert.cert19_b5` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19B6
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19B6.lean:5:1: error: HadwigerNelson.FibreCert.cert19_b6 The definition `HadwigerNelson.FibreCert.cert19_b6` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19B7
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19B7.lean:5:1: error: HadwigerNelson.FibreCert.cert19_b7 The definition `HadwigerNelson.FibreCert.cert19_b7` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19B8
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19B8.lean:5:1: error: HadwigerNelson.FibreCert.cert19_b8 The definition `HadwigerNelson.FibreCert.cert19_b8` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19B9
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19B9.lean:5:1: error: HadwigerNelson.FibreCert.cert19_b9 The definition `HadwigerNelson.FibreCert.cert19_b9` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19C0
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19C0.lean:12:1: error: HadwigerNelson.FibreCert.cert19_p1s0 The definition `HadwigerNelson.FibreCert.cert19_p1s0` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19K0
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19K0.lean:5:1: error: HadwigerNelson.FibreCert.cert19_kt0 The definition `HadwigerNelson.FibreCert.cert19_kt0` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19K1
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19K1.lean:5:1: error: HadwigerNelson.FibreCert.cert19_kt1 The definition `HadwigerNelson.FibreCert.cert19_kt1` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19K2
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19K2.lean:5:1: error: HadwigerNelson.FibreCert.cert19_kt2 The definition `HadwigerNelson.FibreCert.cert19_kt2` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19K3
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19K3.lean:5:1: error: HadwigerNelson.FibreCert.cert19_kt3 The definition `HadwigerNelson.FibreCert.cert19_kt3` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19K4
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19K4.lean:5:1: error: HadwigerNelson.FibreCert.cert19_kt4 The definition `HadwigerNelson.FibreCert.cert19_kt4` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19K5
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19K5.lean:5:1: error: HadwigerNelson.FibreCert.cert19_kt5 The definition `HadwigerNelson.FibreCert.cert19_kt5` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19K6
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19K6.lean:5:1: error: HadwigerNelson.FibreCert.cert19_kt6 The definition `HadwigerNelson.FibreCert.cert19_kt6` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19K7
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19K7.lean:5:1: error: HadwigerNelson.FibreCert.cert19_kt7 The definition `HadwigerNelson.FibreCert.cert19_kt7` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19P1
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19P1.lean:5:1: error: HadwigerNelson.FibreCert.cert19_p1s1 The definition `HadwigerNelson.FibreCert.cert19_p1s1` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19P1.lean:70:1: error: HadwigerNelson.FibreCert.cert19_p1b1 The definition `HadwigerNelson.FibreCert.cert19_p1b1` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19P2
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19P2.lean:5:1: error: HadwigerNelson.FibreCert.cert19_p1s2 The definition `HadwigerNelson.FibreCert.cert19_p1s2` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19P2.lean:70:1: error: HadwigerNelson.FibreCert.cert19_p1b2 The definition `HadwigerNelson.FibreCert.cert19_p1b2` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19P3
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19P3.lean:5:1: error: HadwigerNelson.FibreCert.cert19_p1s3 The definition `HadwigerNelson.FibreCert.cert19_p1s3` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19P3.lean:70:1: error: HadwigerNelson.FibreCert.cert19_p1b3 The definition `HadwigerNelson.FibreCert.cert19_p1b3` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19P4
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19P4.lean:5:1: error: HadwigerNelson.FibreCert.cert19_p1s4 The definition `HadwigerNelson.FibreCert.cert19_p1s4` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19P4.lean:70:1: error: HadwigerNelson.FibreCert.cert19_p1b4 The definition `HadwigerNelson.FibreCert.cert19_p1b4` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19P5
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19P5.lean:5:1: error: HadwigerNelson.FibreCert.cert19_p1s5 The definition `HadwigerNelson.FibreCert.cert19_p1s5` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19P5.lean:70:1: error: HadwigerNelson.FibreCert.cert19_p1b5 The definition `HadwigerNelson.FibreCert.cert19_p1b5` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19P6
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19P6.lean:5:1: error: HadwigerNelson.FibreCert.cert19_p1s6 The definition `HadwigerNelson.FibreCert.cert19_p1s6` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19P6.lean:70:1: error: HadwigerNelson.FibreCert.cert19_p1b6 The definition `HadwigerNelson.FibreCert.cert19_p1b6` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19P7
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19P7.lean:5:1: error: HadwigerNelson.FibreCert.cert19_p1s7 The definition `HadwigerNelson.FibreCert.cert19_p1s7` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19P7.lean:70:1: error: HadwigerNelson.FibreCert.cert19_p1b7 The definition `HadwigerNelson.FibreCert.cert19_p1b7` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19P8
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19P8.lean:5:1: error: HadwigerNelson.FibreCert.cert19_p1s8 The definition `HadwigerNelson.FibreCert.cert19_p1s8` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19P8.lean:70:1: error: HadwigerNelson.FibreCert.cert19_p1b8 The definition `HadwigerNelson.FibreCert.cert19_p1b8` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+
+-- Proofs.HadwigerNelson.Arith.FibreCert19Q0
+/home/kooshi/source/lean-dir/.claude/worktrees/fs131-wnf/Proofs/HadwigerNelson/Arith/FibreCert19Q0.lean:5:1: error: HadwigerNelson.FibreCert.cert19_q0 The definition `HadwigerNelson.FibreCert.cert19_q0` contains an underscore. This almost surely violates mathlib's naming convention; use lowerCamelCase or UpperCamelCase instead.
+lint exit 1
