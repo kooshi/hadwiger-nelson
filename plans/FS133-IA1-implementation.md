@@ -8,7 +8,34 @@ The outside release is `[OAIMath2026]` family 158 at commit `adc7f1241b42e322a64
 
 ## Theorems this phase proved
 
-*(filled as the leaves close; one line per kernel theorem, with its declaration and its axioms)*
+Each printed from the built tree (stage 5; `data/fs133/ia1/axioms-built.out`). "The standard three" is
+`[propext, Classical.choice, Quot.sound]`; "the import" is the declared outside theorem
+`HadwigerNelson.Outside.OAI158.Spectral.residual_fourier`.
+
+- **`HadwigerNelson.OneClass.exists_field`** (`Proofs/HadwigerNelson/Plane/OneClass/Field.lean`) — the field
+  theorem: finitely many measurable `[0, 1]`-valued rotation-fixed observables of a plane system have jointly
+  measurable `[0, 1]`-valued fields over the real plane with their means and their almost-sure affine relations, in
+  which an almost-sure zero product at one non-zero algebraic displacement is an almost-sure zero product on the
+  whole circle of that radius. **[kernel] on the standard three and the import.** Read against the plan's § 3.3 and
+  the forward halves of the derivation's C133-ALG (F3–F9) and C133-PAIR (F2–F5).
+- **`HadwigerNelson.Outside.OAI158.Spectral.residual_fourier_cross`** (`Proofs/HadwigerNelson/Outside/OAI158Rigidity.lean`)
+  — two rotation-fixed vectors orthogonal to the continuous vectors are uncorrelated at every non-zero translate.
+  **[kernel] on the standard three and the import.**
+- **`HadwigerNelson.Outside.OAI158.Spectral.residual_fourier_model`** (same file) — a model of the import's
+  hypotheses with a non-zero vector, where its conclusion holds by computation. **[kernel] on the standard three; it
+  does not read the import.**
+- **`Proofs/HadwigerNelson/Outside/OAI158Transfer.lean`, 48 declarations ported from `[OAIMath2026]`** (the release's
+  lemmas, its proofs, kernel-checked at this pin; not this project's mathematics), each **[kernel] on the standard
+  three**: the plan's twenty-five targets — `Koopman.unitary`, `unitary_apply`, `nonlinear_commute`;
+  `ContinuousVectors.isClosed_space`, `op_mem`, `orbit_continuous`, `nonlinear_mem`, `projection_range`,
+  `covariance_mem`, `projection_covariance_fixed`, `op_orthogonal`, `projection_coefficient`;
+  `projection_fixed_of_contraction`, `positive_orthogonal`, `exists_measurable_field`; `Spectral.dense_E`,
+  `orbit_uniformContinuous`, `orbitExtension`, `orbitExtension_continuous`, `orbitExtension_eq`,
+  `orbitExtension_inner`, `normalized_algebraic`, `circle_closed_induction`, `E_countable`, `kCoeff_ne_zero` — and
+  the twenty-three declarations their proofs name.
+- Not a theorem of the library, an instrument's: `FS133IA1R.rebuilt_release_type`
+  (`data/fs133/ia1/rebuild/Rebuild.lean`) — the release's stored statement of `residual_fourier`, rebuilt at this
+  pin, equals the declared statement by `Eq.refl`; accepted by the kernel on the standard three (stage 6).
 
 ## Stage 1 — SAVED: the readback, the leaves restated, the statements as the kernel holds them before any proof
 
@@ -279,6 +306,66 @@ modules after the three proofs against `after-A` (the skeleton with the two rule
 hypothesis in the module itself, re-elaborated, dumped: read `DIFFERENT` (`LT.lt` entering), exit 1
 (`data/fs133/ia1/moved/planted-read.txt`); the file restored from its copy and re-elaborated, and `git diff` of the
 module shows the proof and nothing of the plant.
+
+## Stage 5 — SAVED: the build under the slot, and every receipt again from the built tree
+
+**5.1 The build.** `./scripts/build.sh` under the slot (`--mem 12 --cpus 4`, `MEMMAX=12G BATCH=4`), after the last
+edit of a module (the sentence of leaf R in the axiom's docstring): **`build: OK — 484 of 484 batches, 9 module(s)
+rebuilt, 6 module(s) with warnings, 15m2s`, exit 0** (`data/fs133/ia1/build.log`; full output
+`build/gate/build/20261014T021950Z-1148556.log`). Rebuilt: `Outside/OAI158Rigidity` (7.1 s), `Outside/OAI158Transfer`
+(8.2 s), `Plane/OneClass/Defs`, `Field` (9.4 s), `InvariantLaw`, `Algebraic`, `Fractional`, `Pair`, `Proofs`. The
+log's 40 warnings are each `declaration uses sorry` in the six files of the other three lanes (6 + 13 + 8 + 5 + 3 +
+5: the skeleton's 43 leaves less this lane's 3); **none is from `OAI158Rigidity`, `OAI158Transfer` or `Field`**, and
+none of the three holds a `sorry`.
+
+**5.2 No statement changed** (Done, item 5), from the kernel's side, on the built tree.
+- `tools/fs133_ia1_moved.py` (full print and erased print of every named constant of the eight modules):
+  `before` (the planner's build) → `built`: **114 constants, 110 IDENTICAL, 4 INSTANCES-ONLY, 0 DIFFERENT, 0
+  MISSING** (`moved/moved-before-to-built.txt`) — the four are stage 2.5's, moved by the two ruled import lines:
+  `Spectral.residual_fourier`, `residual_fourier_cross`, `residual_fourier_model`, and lane B's
+  `Plane.isIndepSet_ball_half`. `after-A` (the skeleton with the two imports and no proof) → `built`: **114
+  IDENTICAL in the full print** (`moved/moved-A-to-built.txt`): the proofs, the private helpers, the import of the
+  ported module into `Field` and the `open … in` lines before `exists_field` moved no stored statement and no
+  definition. Control on the built pair: each of four plants read as planted (`moved/control-built.txt`); the
+  planted change made in the module itself is stage 4's.
+- The character-for-character reader of the lane's two modules (`tools/fs133_ia1_statements.py`, stage 1.4's dump
+  against the built tree's, `statements-compare.out`): 11 named constants compared; it reports the three statements
+  of `OAI158Rigidity` whose instance arguments the ruled imports moved, and nothing else — the six definitions with
+  their values, the derived instance and `exists_field` are the same characters; the modules' one `axiom` is the
+  same one, an axiom in both. It cannot tell an instance-only move from another, which is why the reader above
+  replaced it; its control is run on the built dump against itself (5 of 5 plants reported).
+- The text, for the four statements: from `axiom residual_fourier` to the end of its conclusion the file holds the
+  same bytes as at `fe95f704d` (sha256 `ae14453b13ae…` of both); and from `theorem` to `:= by` so do
+  `residual_fourier_cross`, `residual_fourier_model` and `exists_field`. Not one character of the declared
+  statement changed.
+
+**5.3 The axioms of every public declaration of the lane**, printed from the built tree and set against the plan's
+§ 5.5 by `tools/fs133_ia1_axioms.py` (`axioms-built.out`, `axioms-expect.tsv`, `axioms-verdict.out`): **51 records —
+49 on `[propext, Classical.choice, Quot.sound]` (the 48 ported declarations and `residual_fourier_model`), 2 on those
+and `Spectral.residual_fourier` (`residual_fourier_cross`, `exists_field`). `AXIOMS OK`**: every record of § 5.5's
+first list prints the import, no record of its second list does, none prints `sorryAx`. Control: a planted
+`sorryAx`, the import planted in a clean record, the import removed from an imported record and a record removed are
+each reported.
+
+**5.4 The port, on the built module.** `tools/fs133_ia1_port.py --check`: `CHECK OK` (the module is the generated
+text; the licence copy is the release's byte for byte); `--self-test`: 17 plants refused, 1 partner accepted. The
+read-back again (`readback/compare.out`): `READBACK OK`, the same table as stage 2.6 (targets 16 / 9, definitions
+2 / 4, lemmas 17, the 37 recorded constants); its self-test: 11 plants refused.
+
+**5.5 The declared statement, on the built module.** The planner's two comparators again
+(`axiom-readback/`): six of eight term for term; the axiom `UP-TO-INSTANCES` with four constants at the release only
+and two here only; the erased prints of all eight alike; four and two plants refused. Leaf R again
+(`rebuild/emit.out`, `Rebuild.out`): 4 places, 2 distinct pairs, the rewritten print identical; the kernel accepts
+the rebuilt statement and each pair, refuses the two plants it must and accepts the binder-kind plant;
+`REBUILD OK`.
+
+**5.6 Slips of this stage.** (a) I stopped a first build (`data/fs133/ia1/build-1-stopped.log`) to add leaf R's
+sentence to the axiom's docstring before the final receipts, on a wrong reading of its log: I took its "rebuilt"
+lines for header text and wrote to myself that it had compiled nothing. It had rebuilt the lane's modules in its
+first batches, with no warning from them, and was a third of the way through its walk (batch 159 of 484). Stopped by
+PID (the `build.sh` process), verified by effect (both PIDs gone, the log static across ten seconds, the slot
+released). What the stop forfeited: that run's verdict line, and about four minutes; the build of 5.1 is the whole
+walk again. (b) The prints are kept compressed (`*.xz`); `prints.sha256` holds the hash of each uncompressed print.
 
 ## Stage 6 — SAVED: leaf R, the rebuilt-type comparison (Amendment 1, item 4) — the full form
 

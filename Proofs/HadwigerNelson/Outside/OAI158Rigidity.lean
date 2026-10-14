@@ -129,7 +129,12 @@ names depends on the module's imports as well as on the pin: this module imports
 `Mathlib.Analysis.CStarAlgebra.Classes` and `Mathlib.Analysis.CStarAlgebra.Module.Constructions` so that the inner
 product of `H` and the normed ring `ℂ` are reached as at the release's pin (`CStarModule.toInner`,
 `WithCStarModule.instCStarModuleComplex`, `instCommCStarAlgebraComplex`); without those two imports the two stored
-statements differ by twenty-four constants there and four here, in place of four and two. A model of
+statements differ by twenty-four constants there and four here, in place of four and two. The release's stored
+statement, rebuilt at this pin from its print (120 constants, each present here), is accepted by this pin's kernel
+as definitionally equal to this statement, and each of the two instance terms that differ (`Semiring ↥E`,
+`Semiring ℂ`) is kernel-equal to its counterpart (`data/fs133/ia1/rebuild/`, `plans/FS133-IA1-implementation.md`
+stage 6); what the comparison leaves to trust is that a Mathlib constant of one name means one thing at the two
+pins. A model of
 its hypotheses with `v ≠ 0`, where its conclusion holds by computation, is `residual_fourier_model` below. Declared in
 `ARCHITECTURE.md` § Trust. -/
 axiom residual_fourier {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]

@@ -23,6 +23,7 @@ Usage:  fs133_ia1_statements.py <before.txt> <after.txt> <base-commit> [--contro
 What this does not see: a change to a docstring or a comment (not a statement).
 (FS124-I3's reader, `data/fs124/i3/statement_diff.py`, for this job's modules.)
 """
+import lzma
 import pathlib
 import re
 import subprocess
@@ -49,7 +50,9 @@ REQUIRED = [
 
 def read_dump(path):
     out, cur = {}, None
-    for ln in pathlib.Path(path).read_text().splitlines():
+    path = pathlib.Path(path)
+    text = lzma.open(path, "rt", encoding="utf-8").read() if path.suffix == ".xz" else path.read_text()
+    for ln in text.splitlines():
         if ln.startswith("@@ "):
             parts = ln.split(" ")
             cur = {"kind": parts[1], "internal": parts[-1] == "INTERNAL", "type": None, "value": None}
