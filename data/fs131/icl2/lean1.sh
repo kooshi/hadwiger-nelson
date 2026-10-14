@@ -13,4 +13,12 @@ SRC="${3:-Proofs/HadwigerNelson/$1.lean}"
 if [ ! -d "$S/Proofs" ]; then mkdir -p "$S" && cp -rs "$W/.lake/build/lib/lean/Proofs" "$S/Proofs" && ln -s "$W/.lake/build/lib/lean/Proofs.olean" "$S/Proofs.olean"; fi
 mkdir -p "$S/Proofs/HadwigerNelson/$(dirname "$1")"
 rm -f "$S/Proofs/HadwigerNelson/$1.olean" "$S/Proofs/HadwigerNelson/$1.ilean"
-cd "$W" && exec env SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 python3 /home/kooshi/source/lean-dir/scripts/slot.py --mem "${2:-5}" --cpus 2 --wait 7200 --name icl2 -- env LEAN_PATH="$S:$P/Cli/.lake/build/lib/lean:$P/batteries/.lake/build/lib/lean:$P/Qq/.lake/build/lib/lean:$P/aesop/.lake/build/lib/lean:$P/proofwidgets/.lake/build/lib/lean:$P/importGraph/.lake/build/lib/lean:$P/LeanSearchClient/.lake/build/lib/lean:$P/plausible/.lake/build/lib/lean:$P/mathlib/.lake/build/lib/lean:$T/lib/lean" /usr/bin/time -f "wall=%es maxrss=%MkB" "$T/bin/lean" -DautoImplicit=false -DrelaxedAutoImplicit=false -Dlinter.missingDocs=true -o "$S/Proofs/HadwigerNelson/$1.olean" "$SRC"
+cd "$W" && env SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 python3 /home/kooshi/source/lean-dir/scripts/slot.py --mem "${2:-5}" --cpus 2 --wait 7200 --name icl2 -- env LEAN_PATH="$S:$P/Cli/.lake/build/lib/lean:$P/batteries/.lake/build/lib/lean:$P/Qq/.lake/build/lib/lean:$P/aesop/.lake/build/lib/lean:$P/proofwidgets/.lake/build/lib/lean:$P/importGraph/.lake/build/lib/lean:$P/LeanSearchClient/.lake/build/lib/lean:$P/plausible/.lake/build/lib/lean:$P/mathlib/.lake/build/lib/lean:$T/lib/lean" /usr/bin/time -f "wall=%es maxrss=%MkB" "$T/bin/lean" -DautoImplicit=false -DrelaxedAutoImplicit=false -Dlinter.missingDocs=true -o "$S/Proofs/HadwigerNelson/$1.olean" "$SRC"
+rc=$?
+# a failed compile writes no .olean: put the build's link back so that the farm's downstream modules still import
+if [ ! -e "$S/Proofs/HadwigerNelson/$1.olean" ] && [ -e "$W/.lake/build/lib/lean/Proofs/HadwigerNelson/$1.olean" ]; then
+  ln -s "$W/.lake/build/lib/lean/Proofs/HadwigerNelson/$1.olean" "$S/Proofs/HadwigerNelson/$1.olean"
+  ln -sf "$W/.lake/build/lib/lean/Proofs/HadwigerNelson/$1.ilean" "$S/Proofs/HadwigerNelson/$1.ilean"
+  echo "lean1: compile failed; the build's .olean of $1 linked back into the farm" >&2
+fi
+exit $rc

@@ -111,3 +111,45 @@ No other stored statement lacks a class binder its section declares: nothing to 
 | | `tendsto_haarK_bad` | for measurable `Y`, the points badly filled at level `k` `→ 0` | regularity and clopen cylinders (the block's hard leaf) |
 | | `denseRange_ιG` | `DenseRange (ιG F)` | `M·R` dense in `L ⊗ ℝ`, `M ∈ P^k` |
 | | `mem_closure_ιG` | `(Δ(e^{iθ}), ιK u) ∈ closure (ιG '' U)` | the exponent of the units of a level; `Delta_circle_mul_mem_closure_pow` |
+
+## Stage 2 — SAVED: lane Λ2's first two modules — `Rigidity/FiniteZhang` (4 leaves) and `Rigidity/CountResidue` (14 leaves) proved
+
+Both files hold no `sorry`; each compiles in the farm (`data/fs131/icl2/lean1.sh`: the tree's compiled library as symlinks,
+the module written over its link, the lakefile's options and `linter.missingDocs`) with **exit 0 and no warning**
+(`logs/fz-3.log`, `logs/cr-4.log`). The build that is evidence is stage 6's.
+
+**`FiniteZhang`** (274 lines net, against block Z's 400–550). `card_le_mul_card_closedNbhd` is the planner's scratch leaf
+`LeafZ`, folded in. `ratioLe_prod`, **the lane's opening leaf, green at the third elaboration**: J28D's count in finite form —
+the rows `X b`, their lonely points `L b` (independent), the social columns `A a` (independent; the neighbourhood of `A a`
+misses the touched columns `B a`), `|I| = Σ_b |L b| + Σ_a |A a|` and `Σ_b |N[L b]| = Σ_a |B a|` by indicator sums, then the
+neighbourhood ratio in each factor. `ratioLe_pi` by `Finite.induction_empty_option`, the motive applied to `H S hS h` (a
+`revert` made the implicit-lambda feature eat the motive's binders); the equivalence step through
+`Equiv.piCongrLeft' H e.symm` (its `toFun` is a plain composition, so additivity is `rfl`) and the option step through
+`Equiv.piOptionEquivProd` and `ratioLe_prod`. `ratioLe_subgroup` by the transversal `(i, q) ↦ i + q.out`. Private helpers:
+`ratioLe_nonneg`, `ratioLe_of_addEquiv`, `card_eq_sum_ite`. **Two import lines added**, `Mathlib.Algebra.BigOperators.Ring.Finset`
+(`Finset.mul_sum`) and `Mathlib.Tactic.Ring`; the stage-6 dump compares every stored statement across them.
+
+**`CountResidue`** (≈250 lines net, against block R's 500–650). `ofUnitRing_mem_localRing` is `PlaceSizes`'
+`ofUnitRing_mem_stableIntegers` written out (that module is not upstream of this one): `unitRing_le_stableIntegers` and
+`mem_stableIntegers`. `[S9]` is the scratch leaf `LeafR` cut at its joints into four private helpers
+(`mk_mem_normOneQ_iff`, `exists_add_mul_conj_notMem`, `sub_mul_conj_mem`, `div_conj_mem_normOneL`, `residue_div_conj`), which
+`exists_normOneL_residues` reuses after two Chinese remainder steps (`IsDedekindDomain.exists_forall_sub_mem_ideal` at the
+exponent `m` for the lift `a`, at the exponent `1` for `w`). **Lemma C (d)** by another route than the plan's valuations:
+`M = N c` (`c·O′ ⊆ R`), `m = absNorm (M)`; then `M ∉ P^m` at every stable prime (`absNorm P ≥ 2`, `2^m > m`), and since
+`𝓞_P` is a valuation ring, `r/M ∉ 𝓞_P` would put `M` in `r·𝓞_P`, whose residues are zero — so residues zero at the stable
+primes of norm at most `m` put `r/M` in `O′` and `c·(r/M) = r/N` in `R`. `Φ` is that finite set, written out (the module's
+`level` and `mem_level` are declared below the lemma, and nothing is moved). `finite_quot` by
+`Ideal.finiteQuotientOfFreeOfNeBot` with `P^m ≠ ⊥` — **its stored type now binds `[NumberField ↥F]`** (`probes/FiniteQuot.out`;
+item 847 ruling 2; stage 6 dumps it). One timeout met and named: `Finset.le_sup` unified at `Ideal.absNorm P.P` runs out of
+heartbeats in `whnf` (`probes/LevelProbe2.lean`, `LevelProbe3.lean`); a bound stated for any function `f` first, then
+instantiated, takes 2 s.
+
+**Unread binders dropped (item 726's word), four statements of `CountResidue`:** `[NumberField F]` from
+`isIndepSet_levelTarget_iff`, `neg_mem_normOneQ`, `ratioLe_normOneQ` and `exists_unitRing_of_normOneL` — each proof reads no
+number field, and the build's `unusedSectionVars` linter warns on each with the binder kept. Stage 6 lists them from the
+kernel's side.
+
+**Re-priced from the lane's first two leaves** (`ratioLe_prod`, 130 lines in three elaborations; `card_le_mul_card_closedNbhd`,
+73 lines, the scratch leaf): blocks Z and R came in at 0.4–0.7 of their planned lines (≈ 524 against 900–1,200). Λ2 was
+planned at 1,350–1,900 lines; at that ratio it is **≈ 700–1,100 lines**, about half a day at the measured rate — far under a
+week. Block D (`CountDescent`, measure theory over the completion) is next.

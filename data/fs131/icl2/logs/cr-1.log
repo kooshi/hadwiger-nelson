@@ -1,0 +1,97 @@
+slot: admitted icl2: mem 6 GiB (hard cap), cpus 0,1
+data/fs131/icl2/work/CountResidue.lean:62:8: warning: automatically included section variable(s) unused in theorem `_private.data.fs131.icl2.work.CountResidue.0.HadwigerNelson.Rigidity.Counting.zero_notMem_normOneQ`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/icl2/work/CountResidue.lean:85:0: warning: automatically included section variable(s) unused in theorem `HadwigerNelson.Rigidity.Counting.neg_mem_normOneQ`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/icl2/work/CountResidue.lean:104:8: warning: automatically included section variable(s) unused in theorem `_private.data.fs131.icl2.work.CountResidue.0.HadwigerNelson.Rigidity.Counting.mk_mem_normOneQ_iff`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/icl2/work/CountResidue.lean:109:8: warning: automatically included section variable(s) unused in theorem `_private.data.fs131.icl2.work.CountResidue.0.HadwigerNelson.Rigidity.Counting.exists_add_mul_conj_notMem`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/icl2/work/CountResidue.lean:124:8: warning: automatically included section variable(s) unused in theorem `_private.data.fs131.icl2.work.CountResidue.0.HadwigerNelson.Rigidity.Counting.sub_mul_conj_mem`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/icl2/work/CountResidue.lean:132:8: warning: automatically included section variable(s) unused in theorem `_private.data.fs131.icl2.work.CountResidue.0.HadwigerNelson.Rigidity.Counting.div_conj_mem_normOneL`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/icl2/work/CountResidue.lean:155:8: warning: automatically included section variable(s) unused in theorem `_private.data.fs131.icl2.work.CountResidue.0.HadwigerNelson.Rigidity.Counting.coe_ne_zero_of_notMem`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/icl2/work/CountResidue.lean:180:76: error(lean.unknownIdentifier): Unknown identifier `stablePrime_injective`
+data/fs131/icl2/work/CountResidue.lean:208:0: warning: automatically included section variable(s) unused in theorem `HadwigerNelson.Rigidity.Counting.exists_unitRing_of_normOneL`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/icl2/work/CountResidue.lean:243:10: error(lean.unknownIdentifier): Unknown identifier `level`
+data/fs131/icl2/work/CountResidue.lean:249:21: error(lean.unknownIdentifier): Unknown identifier `level`
+data/fs131/icl2/work/CountResidue.lean:249:35: error(lean.unknownIdentifier): Unknown identifier `mem_level`
+data/fs131/icl2/work/CountResidue.lean:270:32: error: Application type mismatch: The argument
+  ofUnitRing_mem_localRing P r
+has type
+  (ofUnitRing F) r ∈ P.localRing
+of sort `Prop` but is expected to have type
+  ↥(fieldI F)
+of sort `Type` in the application
+  ValuationSubring.mul_mem P.localRing (ofUnitRing_mem_localRing P r)
+data/fs131/icl2/work/CountResidue.lean:274:38: error: Application type mismatch: The argument
+  h
+has type
+  (ofUnitRing F) a = (ofUnitRing F) b
+but is expected to have type
+  a = b
+in the application
+  congrArg Subtype.val h
+data/fs131/icl2/work/CountResidue.lean:328:0: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+data/fs131/icl2/work/CountResidue.lean:372:31: error: Application type mismatch: The argument
+  h
+has type
+  TCA F
+of sort `Prop` but is expected to have type
+  Subfield ℝ
+of sort `Type` in the application
+  @image_levR_unitVectors h
+data/fs131/icl2/work/CountResidue.lean:366:87: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+h : TCA F
+c : ℝ
+hc0 : 0 ≤ c
+hc : ∀ (P : StablePrime F), RatioAtMost P c
+k : ℕ
+hk : 1 ≤ k
+hpi : RatioLe (normOneLev F k) c
+d : Lev F k
+hd : d ∈ normOneLev F k
+⊢ d ∈ ↑(levR F k).range.toAddSubgroup
+Command exited with non-zero status 1
+wall=18.66s maxrss=4081428kB

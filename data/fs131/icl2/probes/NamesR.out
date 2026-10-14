@@ -1,0 +1,56 @@
+slot: admitted icl2: mem 5 GiB (hard cap), cpus 0,1
+data/fs131/icl2/probes/NamesR.lean:3:8: error(lean.unknownIdentifier): Unknown identifier `HadwigerNelson.Rigidity.ofUnitRing_mem_stableIntegers`
+HadwigerNelson.Rigidity.mem_stableIntegers : ∀ (F : Subfield ℝ) [inst : NumberField ↥F]
+  {x : ↥(HadwigerNelson.SpectralChain.fieldI F)},
+  x ∈ HadwigerNelson.Rigidity.stableIntegers F ↔ ∀ (P : HadwigerNelson.SpectralChain.StablePrime F), x ∈ P.localRing
+@Ideal.finiteQuotientOfFreeOfNeBot : ∀ {S : Type u_1} [inst : CommRing S] [IsDomain S] [Module.Free ℤ S]
+  [Module.Finite ℤ S] (I : Ideal S), I ≠ ⊥ → Finite (S ⧸ I)
+@IsDedekindDomain.exists_forall_sub_mem_ideal : ∀ {R : Type u_1} [inst : CommRing R] [IsDedekindDomain R] {ι : Type u_2}
+  {s : Finset ι} (P : ι → Ideal R) (e : ι → ℕ),
+  (∀ i ∈ s, Prime (P i)) →
+    (∀ i ∈ s, ∀ j ∈ s, i ≠ j → P i ≠ P j) → ∀ (x : ↥s → R), ∃ y, ∀ (i : ι) (hi : i ∈ s), y - x ⟨i, hi⟩ ∈ P i ^ e i
+@Ideal.Quotient.factor : {R : Type u_1} →
+  [inst : Ring R] → {S T : Ideal R} → [inst_1 : S.IsTwoSided] → [inst_2 : T.IsTwoSided] → S ≤ T → R ⧸ S →+* R ⧸ T
+@Ideal.Quotient.factor_mk : ∀ {R : Type u_1} [inst : Ring R] {S T : Ideal R} [inst_1 : S.IsTwoSided]
+  [inst_2 : T.IsTwoSided] (H : S ≤ T) (x : R),
+  (Ideal.Quotient.factor H) ((Ideal.Quotient.mk S) x) = (Ideal.Quotient.mk T) x
+@Ideal.absNorm_dvd_absNorm_of_le : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S]
+  [inst_2 : Module.Free ℤ S] {I J : Ideal S}, J ≤ I → Ideal.absNorm I ∣ Ideal.absNorm J
+@ValuationSubring.mem_or_inv_mem : ∀ {K : Type u_1} [inst : Field K] (A : ValuationSubring K) (x : K), x ∈ A ∨ x⁻¹ ∈ A
+@Ideal.absNorm_span_singleton : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S]
+  [inst_2 : Module.Free ℤ S] [Module.Finite ℤ S] (r : S), Ideal.absNorm (Ideal.span {r}) = ((Algebra.norm ℤ) r).natAbs
+@Ideal.absNorm_eq_zero_iff : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S]
+  [inst_2 : Module.Free ℤ S] [Module.Finite ℤ S] {I : Ideal S}, Ideal.absNorm I = 0 ↔ I = ⊥
+@Ideal.absNorm_eq_one_iff : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S]
+  [inst_2 : Module.Free ℤ S] {I : Ideal S}, Ideal.absNorm I = 1 ↔ I = ⊤
+@Ideal.pow_le_pow_right : ∀ {R : Type u_1} [inst : Semiring R] {I : Ideal R} {m n : ℕ}, m ≤ n → I ^ n ≤ I ^ m
+data/fs131/icl2/probes/NamesR.lean:15:8: error(lean.unknownIdentifier): Unknown identifier `UnitRing.coe_mem_unitRingOver_iff`
+@Ideal.Quotient.eq_zero_iff_mem : ∀ {R : Type u_1} [inst : Ring R] {I : Ideal R} {a : R} [inst_1 : I.IsTwoSided],
+  (Ideal.Quotient.mk I) a = 0 ↔ a ∈ I
+@IsLocalization.ringHom_ext : ∀ {R : Type u_1} [inst : CommSemiring R] (M : Submonoid R) {S : Type u_2}
+  [inst_1 : CommSemiring S] [inst_2 : Algebra R S] [IsLocalization M S] {P : Type u_3} [inst_4 : Semiring P]
+  ⦃j k : S →+* P⦄, j.comp (algebraMap R S) = k.comp (algebraMap R S) → j = k
+@Ideal.prime_of_isPrime : ∀ {A : Type u_1} [inst : CommRing A] [IsDedekindDomain A] {P : Ideal A},
+  P ≠ ⊥ → P.IsPrime → Prime P
+@Ring.ne_bot_of_isMaximal_of_not_isField : ∀ {R : Type u_1} [inst : CommSemiring R] [Nontrivial R] {M : Ideal R},
+  M.IsMaximal → ¬IsField R → M ≠ ⊥
+@HadwigerNelson.SpectralChain.StablePrime.heightOne : {F : Subfield ℝ} →
+  [NumberField ↥F] →
+    HadwigerNelson.SpectralChain.StablePrime F →
+      IsDedekindDomain.HeightOneSpectrum (𝓞 ↥(HadwigerNelson.SpectralChain.fieldI F))
+@Nat.lt_two_pow_self : ∀ {n : ℕ}, n < 2 ^ n
+@HadwigerNelson.UpperHalf.residue_algebraMap : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (P : HadwigerNelson.SpectralChain.StablePrime F) (m : ℕ) (a : 𝓞 ↥(HadwigerNelson.SpectralChain.fieldI F)),
+  (P.residue m) ((algebraMap (𝓞 ↥(HadwigerNelson.SpectralChain.fieldI F)) ↥P.localRing) a) =
+    (Ideal.Quotient.mk (P.P ^ m)) a
+@SimpleGraph.fromRel_adj : ∀ {V : Type u_1} (r : V → V → Prop) (v w : V),
+  (SimpleGraph.fromRel r).Adj v w ↔ v ≠ w ∧ (r v w ∨ r w v)
+data/fs131/icl2/probes/NamesR.lean:24:8: error(lean.unknownIdentifier): Unknown constant `Ideal.Quotient.nontrivial`
+@Ideal.IsMaximal.ne_top : ∀ {α : Type u_1} [inst : Semiring α] {I : Ideal α}, I.IsMaximal → I ≠ ⊤
+@Ideal.finite_setOf_absNorm_le : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S]
+  [inst_2 : Module.Free ℤ S] [Module.Finite ℤ S] [CharZero S] (n : ℕ), {I | Ideal.absNorm I ≤ n}.Finite
+@Set.Finite.mem_toFinset : ∀ {α : Type u_1} {s : Set α} {a : α} (hs : s.Finite), a ∈ hs.toFinset ↔ a ∈ s
+@Ideal.absNorm_ne_zero_of_nonZeroDivisors : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S]
+  [inst_2 : Module.Free ℤ S] [Module.Finite ℤ S] (I : ↥(nonZeroDivisors (Ideal S))), Ideal.absNorm ↑I ≠ 0
+Int.natAbs_pow : ∀ (n : ℤ) (k : ℕ), (n ^ k).natAbs = n.natAbs ^ k
+Algebra.norm : (R : Type u_1) → {S : Type u_2} → [inst : CommRing R] → [inst_1 : Ring S] → [Algebra R S] → S →* R
