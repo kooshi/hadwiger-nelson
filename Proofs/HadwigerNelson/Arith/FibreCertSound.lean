@@ -46,6 +46,92 @@ def unitCircle (p : ℕ) [NeZero p] : Finset (V p) := Finset.univ.filter fun x =
 noncomputable def qform (p : ℕ) [NeZero p] (φ : V p → ℝ) : ℝ :=
   2 * ∑ x, φ x * (1 - φ x) - ∑ x, ∑ s ∈ unitCircle p, φ x * φ (x + s)
 
+/-! ### Packed arithmetic: one digit lemma -/
+
+private theorem lowBits_eq (x k : ℕ) : lowBits x k = x % 2 ^ k := by
+  unfold lowBits
+  rw [show Nat.sub (Nat.shiftLeft 1 k) 1 = 2 ^ k - 1 by simp [Nat.shiftLeft_eq]]
+  exact Nat.and_two_pow_sub_one_eq_mod x k
+
+private theorem digit_eq (x w e : ℕ) : digit x w e = x / (2 ^ w) ^ e % 2 ^ w := by
+  simp [digit, lowBits_eq, Nat.shiftRight_eq_div_pow, ← pow_mul]
+
+private theorem sum_lt_pow (B : ℕ) (c : ℕ → ℕ) (K : ℕ) (hc : ∀ i < K, c i < B) :
+    ∑ i ∈ Finset.range K, c i * B ^ i < B ^ K := by
+  induction K with
+  | zero => simp
+  | succ K ih =>
+    rw [Finset.sum_range_succ, pow_succ]
+    have h1 := ih fun i hi => hc i (by omega)
+    have h2 : c K + 1 ≤ B := hc K (by omega)
+    nlinarith [Nat.zero_le (B ^ K)]
+
+/-- **The digit lemma**: digit `e` of `Σ_{i<K} c_i B^i` is `c_e` when every `c_i < B`. -/
+private theorem sum_digit (B : ℕ) (c : ℕ → ℕ) (K : ℕ) (hc : ∀ i < K, c i < B) (e : ℕ) (he : e < K) :
+    (∑ i ∈ Finset.range K, c i * B ^ i) / B ^ e % B = c e := by
+  have hB : 0 < B := lt_of_le_of_lt (Nat.zero_le _) (hc e he)
+  obtain ⟨k, rfl⟩ : ∃ k, K = e + 1 + k := ⟨K - (e + 1), by omega⟩
+  induction k with
+  | zero =>
+    rw [Nat.add_zero, Finset.sum_range_succ]
+    have hl := sum_lt_pow B c e fun i hi => hc i (by omega)
+    rw [Nat.add_mul_div_right _ _ (pow_pos hB e), Nat.div_eq_of_lt hl, zero_add, Nat.mod_eq_of_lt (hc e (by omega))]
+  | succ k ih =>
+    rw [show e + 1 + (k + 1) = (e + 1 + k) + 1 by omega, Finset.sum_range_succ,
+      show B ^ (e + 1 + k) = B ^ e * (B * B ^ k) by rw [← pow_succ', ← pow_add]; ring_nf]
+    rw [show c (e + 1 + k) * (B ^ e * (B * B ^ k)) = (c (e + 1 + k) * (B * B ^ k)) * B ^ e by ring,
+      Nat.add_mul_div_right _ _ (pow_pos hB e), show c (e + 1 + k) * (B * B ^ k) = (c (e + 1 + k) * B ^ k) * B by ring,
+      Nat.add_mul_mod_self_right]
+    exact ih (fun i hi => hc i (by omega)) (by omega)
+
+private theorem lsum_range {M : Type*} [AddCommMonoid M] (f : ℕ → M) (n : ℕ) :
+    ((List.range n).map f).sum = ∑ i ∈ Finset.range n, f i := by
+  induction n with
+  | zero => simp
+  | succ n ih => rw [List.range_succ, List.map_append, List.sum_append, ih, Finset.sum_range_succ]; simp
+
+/-! ### Bag keys: the base-8 digits of `Σ 8^x` are the multiplicities -/
+
+private theorem shl_one (k : ℕ) : Nat.shiftLeft 1 k = 2 ^ k := by
+  rw [show Nat.shiftLeft 1 k = 1 <<< k from rfl, Nat.one_shiftLeft]
+
+private theorem bag_eq (l : List ℕ) : bag l = (l.map fun x => 8 ^ x).sum := by
+  suffices ∀ a, l.foldl (fun a x => Nat.add a (Nat.shiftLeft 1 (Nat.mul 3 x))) a = a + (l.map fun x => 8 ^ x).sum by
+    exact (this 0).trans (zero_add _)
+  induction l with
+  | nil => simp
+  | cons x l ih =>
+    intro a
+    rw [List.foldl_cons, ih, List.map_cons, List.sum_cons, shl_one, Nat.mul_eq, Nat.add_eq, pow_mul]
+    norm_num [add_assoc]
+
+/-- The multiset a key names, read off its base-8 digits below `n`. -/
+private def dec (n K : ℕ) : List ℕ := (List.range n).flatMap fun x => List.replicate (K / 8 ^ x % 8) x
+
+private theorem bag_eq_sum (n : ℕ) (l : List ℕ) (hx : ∀ x ∈ l, x < n) :
+    bag l = ∑ x ∈ Finset.range n, l.count x * 8 ^ x := by
+  classical
+  rw [bag_eq, Finset.sum_list_map_count]
+  refine Finset.sum_subset (fun x hx' => Finset.mem_range.2 (hx x (List.mem_toFinset.1 hx'))) ?_
+  intro x _ hx'
+  simp [List.count_eq_zero_of_not_mem (fun h => hx' (List.mem_toFinset.2 h))]
+
+/-- **A key names its multiset**: at most seven points, every one below `n`. -/
+private theorem dec_bag (n : ℕ) (l : List ℕ) (hl : l.length < 8) (hx : ∀ x ∈ l, x < n) :
+    (dec n (bag l)).Perm l := by
+  classical
+  rw [List.perm_iff_count]
+  intro y
+  have hd : ∀ x < n, bag l / 8 ^ x % 8 = l.count x := fun x hx' => by
+    rw [bag_eq_sum n l hx]
+    exact sum_digit 8 (fun x => l.count x) n (fun i _ => lt_of_le_of_lt List.count_le_length hl) x hx'
+  simp only [dec, List.count_flatMap, Function.comp_def, List.count_replicate, beq_iff_eq]
+  rw [lsum_range, Finset.sum_ite_eq']
+  by_cases hy : y < n
+  · simp [hy, hd y hy]
+  · simp only [Finset.mem_range, hy, if_false]
+    exact (List.count_eq_zero_of_not_mem fun h => hy (hx y h)).symm
+
 /-! ### The symmetrised moments -/
 
 /-- The point coded `x = a·p + b`. -/
@@ -67,6 +153,187 @@ private def affs (p : ℕ) [NeZero p] : Finset (V p × V p × Bool) := Finset.un
 private noncomputable def Ym (p : ℕ) [NeZero p] (φ : V p → ℝ) (m : List ℕ) : ℝ :=
   ∑ γ ∈ affs p, (m.map fun x => φ (act γ (pt p x))).prod
 
+/-! ### The maps form a group: composition, inverse, reindexing -/
+
+private theorem cmul_comm {p : ℕ} (a b : V p) : cmul a b = cmul b a := by
+  simp only [cmul, Prod.mk.injEq]; constructor <;> ring
+private theorem cmul_assoc {p : ℕ} (a b c : V p) : cmul (cmul a b) c = cmul a (cmul b c) := by
+  simp only [cmul, Prod.mk.injEq]; constructor <;> ring
+private theorem cmul_add {p : ℕ} (a b c : V p) : cmul a (b + c) = cmul a b + cmul a c := by
+  simp only [cmul, Prod.fst_add, Prod.snd_add, Prod.mk_add_mk, Prod.mk.injEq]; constructor <;> ring
+private theorem cmul_neg {p : ℕ} (a b : V p) : cmul a (-b) = -cmul a b := by
+  simp only [cmul, Prod.fst_neg, Prod.snd_neg, Prod.neg_mk, Prod.mk.injEq]; constructor <;> ring
+private theorem cmul_one {p : ℕ} (a : V p) : cmul a (1, 0) = a := by simp [cmul]
+private theorem one_cmul' {p : ℕ} (a : V p) : cmul (1, 0) a = a := by rw [cmul_comm, cmul_one]
+private theorem cj_false {p : ℕ} (a : V p) : cj false a = a := by simp [cj]
+private theorem cmul_zero {p : ℕ} (a : V p) : cmul a 0 = 0 := by simp [cmul]
+private theorem cj_add {p : ℕ} (e : Bool) (a b : V p) : cj e (a + b) = cj e a + cj e b := by
+  cases e <;> simp [cj, add_comm]
+private theorem cj_neg {p : ℕ} (e : Bool) (a : V p) : cj e (-a) = -cj e a := by cases e <;> simp [cj]
+private theorem cj_cmul {p : ℕ} (e : Bool) (a b : V p) : cj e (cmul a b) = cmul (cj e a) (cj e b) := by
+  cases e
+  · simp [cj]
+  · simp only [cj, cmul, Prod.mk.injEq, if_true]; constructor <;> ring
+private theorem cj_cj {p : ℕ} (e e' : Bool) (a : V p) : cj e (cj e' a) = cj (xor e e') a := by
+  cases e <;> cases e' <;> simp [cj]
+private theorem cj_zero {p : ℕ} (e : Bool) : cj e (0 : V p) = 0 := by cases e <;> simp [cj]
+private theorem cj_one {p : ℕ} (e : Bool) : cj e ((1, 0) : V p) = (1, 0) := by cases e <;> simp [cj]
+private theorem cmul_cj_self {p : ℕ} (a : V p) : cmul a (cj true a) = (a.1 ^ 2 + a.2 ^ 2, 0) := by
+  simp only [cmul, cj, if_true, Prod.mk.injEq]; constructor <;> ring
+
+/-- `γ ∘ δ`. -/
+private def comp {p : ℕ} (γ δ : V p × V p × Bool) : V p × V p × Bool :=
+  (cmul γ.2.1 (cj γ.2.2 δ.1) + γ.1, cmul γ.2.1 (cj γ.2.2 δ.2.1), xor γ.2.2 δ.2.2)
+
+/-- `δ⁻¹`, for `N(s) = 1`. -/
+private def inv {p : ℕ} (δ : V p × V p × Bool) : V p × V p × Bool :=
+  (-(cj δ.2.2 (cmul (cj true δ.2.1) δ.1)), cj δ.2.2 (cj true δ.2.1), δ.2.2)
+
+private theorem act_comp {p : ℕ} (γ δ : V p × V p × Bool) (z : V p) : act (comp γ δ) z = act γ (act δ z) := by
+  simp only [act, comp, cj_add, cj_cmul, cj_cj, cmul_add, cmul_assoc, add_assoc]
+
+private theorem comp_assoc {p : ℕ} (γ δ ε : V p × V p × Bool) : comp (comp γ δ) ε = comp γ (comp δ ε) := by
+  simp only [comp, cj_add, cj_cmul, cj_cj, cmul_add, cmul_assoc, Bool.xor_assoc, add_assoc]
+
+private theorem comp_one {p : ℕ} (γ : V p × V p × Bool) : comp γ (0, (1, 0), false) = γ := by
+  simp [comp, cj_zero, cj_one, cmul_zero, cmul_one]
+
+private theorem mem_unitCircle {p : ℕ} [NeZero p] (s : V p) : s ∈ unitCircle p ↔ s.1 ^ 2 + s.2 ^ 2 = 1 := by
+  simp [unitCircle]
+
+private theorem mem_affs {p : ℕ} [NeZero p] (γ : V p × V p × Bool) :
+    γ ∈ affs p ↔ γ.2.1.1 ^ 2 + γ.2.1.2 ^ 2 = 1 := by
+  simp [affs, mem_unitCircle]
+
+private theorem norm_cmul {p : ℕ} (a b : V p) :
+    (cmul a b).1 ^ 2 + (cmul a b).2 ^ 2 = (a.1 ^ 2 + a.2 ^ 2) * (b.1 ^ 2 + b.2 ^ 2) := by simp [cmul]; ring
+private theorem norm_cj {p : ℕ} (e : Bool) (a : V p) : (cj e a).1 ^ 2 + (cj e a).2 ^ 2 = a.1 ^ 2 + a.2 ^ 2 := by
+  cases e <;> simp [cj]
+
+private theorem comp_mem {p : ℕ} [NeZero p] {γ δ : V p × V p × Bool} (hγ : γ ∈ affs p) (hδ : δ ∈ affs p) :
+    comp γ δ ∈ affs p := by
+  rw [mem_affs] at *; simp only [comp, norm_cmul, norm_cj, hγ, hδ, one_mul]
+
+private theorem inv_mem {p : ℕ} [NeZero p] {δ : V p × V p × Bool} (hδ : δ ∈ affs p) : inv δ ∈ affs p := by
+  rw [mem_affs] at *; simp only [inv, norm_cj, hδ]
+
+private theorem comp_inv {p : ℕ} [NeZero p] {δ : V p × V p × Bool} (hδ : δ ∈ affs p) :
+    comp δ (inv δ) = (0, (1, 0), false) := by
+  rw [mem_affs] at hδ
+  have h : cmul δ.2.1 (cj true δ.2.1) = (1, 0) := by rw [cmul_cj_self, hδ]
+  simp only [comp, inv, cj_neg, cj_cj, Bool.xor_self, cj_false, cmul_neg, ← cmul_assoc, h, one_cmul',
+    neg_add_cancel, ← Bool.xor_assoc, Bool.false_xor]
+
+private theorem inv_comp {p : ℕ} [NeZero p] {δ : V p × V p × Bool} (hδ : δ ∈ affs p) :
+    comp (inv δ) δ = (0, (1, 0), false) := by
+  rw [mem_affs] at hδ
+  have h : cmul (cj true δ.2.1) δ.2.1 = (1, 0) := by rw [cmul_comm, cmul_cj_self, hδ]
+  simp only [comp, inv, ← cj_cmul, h, cj_one, add_neg_cancel, Bool.xor_self]
+
+/-- **Reindexing**: precomposing every map with one of them permutes the maps. -/
+private theorem sum_affs_comp {p : ℕ} [NeZero p] {δ : V p × V p × Bool} (hδ : δ ∈ affs p)
+    (F : (V p × V p × Bool) → ℝ) : ∑ γ ∈ affs p, F (comp γ δ) = ∑ γ ∈ affs p, F γ :=
+  Finset.sum_nbij' (fun γ => comp γ δ) (fun γ => comp γ (inv δ)) (fun γ h => comp_mem h hδ)
+    (fun γ h => comp_mem h (inv_mem hδ)) (fun γ _ => by rw [comp_assoc, comp_inv hδ, comp_one])
+    (fun γ _ => by rw [comp_assoc, inv_comp hδ, comp_one]) (fun _ _ => rfl)
+
+/-- The moment of a monomial of points. -/
+private noncomputable def Yv (p : ℕ) [NeZero p] (φ : V p → ℝ) (m : List (V p)) : ℝ :=
+  ∑ γ ∈ affs p, (m.map fun z => φ (act γ z)).prod
+
+private theorem Ym_eq (p : ℕ) [NeZero p] (φ : V p → ℝ) (m : List ℕ) : Ym p φ m = Yv p φ (m.map (pt p)) := by
+  simp [Ym, Yv, List.map_map, Function.comp_def]
+
+/-- **Invariance**: the moment of the image of a monomial under one of the maps is the moment of the monomial. -/
+private theorem Yv_map_act {p : ℕ} [NeZero p] (φ : V p → ℝ) {δ : V p × V p × Bool} (hδ : δ ∈ affs p)
+    (m : List (V p)) : Yv p φ (m.map (act δ)) = Yv p φ m := by
+  unfold Yv
+  conv_rhs => rw [← sum_affs_comp hδ]
+  simp [List.map_map, Function.comp_def, act_comp]
+
+private theorem Yv_perm {p : ℕ} [NeZero p] (φ : V p → ℝ) {m m' : List (V p)} (h : m.Perm m') :
+    Yv p φ m = Yv p φ m' := by
+  unfold Yv; exact Finset.sum_congr rfl fun γ _ => (h.map _).prod_eq
+
+/-! ### Codes and points -/
+
+private theorem nmod (x p : ℕ) : Nat.mod x p = x % p := rfl
+private theorem ndiv (x p : ℕ) : Nat.div x p = x / p := rfl
+
+private theorem mkP_div (p a b : ℕ) (hb : b < p) : mkP p a b / p = a := by
+  have hp : 0 < p := lt_of_le_of_lt (Nat.zero_le _) hb
+  simp only [mkP, Nat.add_eq, Nat.mul_eq]
+  rw [add_comm, Nat.add_mul_div_right _ _ hp, Nat.div_eq_of_lt hb, zero_add]
+
+private theorem mkP_mod (p a b : ℕ) (hb : b < p) : mkP p a b % p = b := by
+  simp only [mkP, Nat.add_eq, Nat.mul_eq]
+  rw [add_comm, Nat.add_mul_mod_self_right, Nat.mod_eq_of_lt hb]
+
+private theorem pt_mkP (p a b : ℕ) (hb : b < p) : pt p (mkP p a b) = ((a : ZMod p), (b : ZMod p)) := by
+  simp [pt, mkP_div p a b hb, mkP_mod p a b hb]
+
+private theorem mkP_lt (p a b : ℕ) (ha : a < p) (hb : b < p) : mkP p a b < p * p := by
+  simp only [mkP, Nat.add_eq, Nat.mul_eq]; nlinarith
+
+private theorem cast_sub_mod (p y z : ℕ) (hz : z < p) :
+    (((Nat.sub (Nat.add y p) z) % p : ℕ) : ZMod p) = (y : ZMod p) - z := by
+  rw [ZMod.natCast_mod, Nat.sub_eq, Nat.add_eq, Nat.cast_sub (by omega), Nat.cast_add, ZMod.natCast_self, add_zero]
+
+private theorem pt_subP (p : ℕ) [NeZero p] (x o : ℕ) : pt p (subP p x o) = pt p x - pt p o := by
+  have hp : 0 < p := Nat.pos_of_ne_zero (NeZero.ne p)
+  unfold subP
+  simp only [nmod, ndiv]
+  rw [pt_mkP _ _ _ (Nat.mod_lt _ hp), cast_sub_mod _ _ _ (Nat.mod_lt _ hp), cast_sub_mod _ _ _ (Nat.mod_lt _ hp)]
+  simp [pt, ZMod.natCast_mod]
+
+private theorem pt_addP (p : ℕ) [NeZero p] (x y : ℕ) : pt p (addP p x y) = pt p x + pt p y := by
+  have hp : 0 < p := Nat.pos_of_ne_zero (NeZero.ne p)
+  unfold addP
+  simp only [nmod, ndiv]
+  rw [pt_mkP _ _ _ (Nat.mod_lt _ hp)]
+  simp [pt, ZMod.natCast_mod]
+
+private theorem pt_gmap (p : ℕ) [NeZero p] (c d e x : ℕ) (hc : c ≤ p) (hd : d ≤ p) :
+    pt p (gmap p c d e x) = cmul ((c : ZMod p), (d : ZMod p)) (cj (!Nat.beq e 0) (pt p x)) := by
+  have hp : 0 < p := Nat.pos_of_ne_zero (NeZero.ne p)
+  unfold gmap
+  simp only [nmod, ndiv]
+  cases h : Nat.beq e 0
+  · simp only [cond_false, Bool.not_false]
+    rw [pt_mkP _ _ _ (Nat.mod_lt _ hp)]
+    simp only [pt, cj, cmul, if_true, ZMod.natCast_mod, Nat.add_eq, Nat.mul_eq, Nat.sub_eq, Nat.cast_add,
+      Nat.cast_mul, Nat.cast_sub hc, ZMod.natCast_self, Prod.mk.injEq]
+    constructor <;> ring
+  · simp only [cond_true, Bool.not_true]
+    rw [pt_mkP _ _ _ (Nat.mod_lt _ hp)]
+    simp only [pt, cj, cmul, Bool.false_eq_true, if_false, ZMod.natCast_mod, Nat.add_eq, Nat.mul_eq, Nat.sub_eq,
+      Nat.cast_add, Nat.cast_mul, Nat.cast_sub hd, ZMod.natCast_self, Prod.mk.injEq]
+    constructor <;> ring
+
+private theorem gmap_lt (p : ℕ) [NeZero p] (c d e x : ℕ) : gmap p c d e x < p * p := by
+  have hp : 0 < p := Nat.pos_of_ne_zero (NeZero.ne p)
+  unfold gmap; simp only [nmod, ndiv]; cases Nat.beq e 0 <;> exact mkP_lt _ _ _ (Nat.mod_lt _ hp) (Nat.mod_lt _ hp)
+
+private theorem isUnit_norm (p : ℕ) [NeZero p] (c d : ℕ) (h : isUnit p c d = true) :
+    ((c : ZMod p), (d : ZMod p)).1 ^ 2 + ((c : ZMod p), (d : ZMod p)).2 ^ 2 = 1 := by
+  simp only [isUnit, Nat.beq_eq, Nat.add_eq, Nat.mul_eq, nmod] at h
+  have := congrArg (fun k : ℕ => (k : ZMod p)) h
+  simp only [ZMod.natCast_mod, Nat.cast_add, Nat.cast_mul, Nat.cast_one] at this
+  simpa [sq] using this
+
+/-- **A witness map is one of the maps averaged over**: `x ↦ g(x − o)`, read on points. -/
+private theorem pt_witness (p : ℕ) [NeZero p] (c d e o : ℕ) (hc : c ≤ p) (hd : d ≤ p) (h : isUnit p c d = true) :
+    ∃ δ ∈ affs p, ∀ x, pt p (gmap p c d e (subP p x o)) = act δ (pt p x) := by
+  refine ⟨(-cmul ((c : ZMod p), (d : ZMod p)) (cj (!Nat.beq e 0) (pt p o)), ((c : ZMod p), (d : ZMod p)),
+    !Nat.beq e 0), (mem_affs _).2 (isUnit_norm p c d h), fun x => ?_⟩
+  rw [pt_gmap p c d e _ hc hd, pt_subP, act, sub_eq_add_neg, cj_add, cmul_add, cj_neg, cmul_neg]
+
+private theorem Ym_witness (p : ℕ) [NeZero p] (φ : V p → ℝ) (c d e o : ℕ) (hc : c ≤ p) (hd : d ≤ p)
+    (h : isUnit p c d = true) (m : List ℕ) : Ym p φ (m.map fun x => gmap p c d e (subP p x o)) = Ym p φ m := by
+  obtain ⟨δ, hδ, hw⟩ := pt_witness p c d e o hc hd h
+  rw [Ym_eq, Ym_eq, List.map_map, ← Yv_map_act φ hδ (m.map (pt p)), List.map_map]
+  congr 1; exact List.map_congr_left fun x _ => hw x
+
 /-- An op's value. -/
 private def opVal (o : Op) : ℤ := (o.vp : ℤ) - o.vn
 
@@ -78,12 +345,254 @@ private theorem opSum_append (p : ℕ) [NeZero p] (φ : V p → ℝ) (l l' : Lis
     opSum p φ (l ++ l') = opSum p φ l + opSum p φ l' := by
   simp [opSum]
 
+/-! ### The computation half: a segment's fold -/
+
+private theorem getD_modify {α : Type*} (l : List α) (i j : ℕ) (f : α → α) (d : α) (hj : j < l.length) :
+    (l.modify i f).getD j d = if i = j then f (l.getD j d) else l.getD j d := by
+  rw [List.getD_eq_getElem?_getD, List.getElem?_modify, List.getD_eq_getElem?_getD, List.getElem?_eq_getElem hj]
+  simp
+
+private theorem getD_mem {α : Type*} (l : List α) (i : ℕ) (d : α) (h : i < l.length) : l.getD i d ∈ l := by
+  rw [List.getD_eq_getElem?_getD, List.getElem?_eq_getElem h]; exact List.getElem_mem h
+
+private theorem bagMap_eq (g : ℕ → ℕ) (l : List ℕ) : bagMap g l = bag (l.map g) := by
+  unfold bagMap
+  split <;> simp [bag_eq, Nat.mul_eq, Nat.add_eq, Nat.one_shiftLeft, pow_mul, add_assoc]
+
+private theorem lenU_eq (l : List ℕ) : lenU l = l.length := by unfold lenU; split <;> rfl
+
+private theorem fKey_eq (C : Cert) (f : ℕ) (o : Op) : fKey C f o = bag ((o.mono C.p).map (fImg C f)) := by
+  simp only [fKey, bagMap_eq, Op.mono, List.map_append, List.map_map, bag_eq, List.sum_append, Nat.add_eq]
+  rfl
+
+private theorem Ym_perm (p : ℕ) [NeZero p] (φ : V p → ℝ) {m m' : List ℕ} (h : m.Perm m') :
+    Ym p φ m = Ym p φ m' := by rw [Ym_eq, Ym_eq]; exact Yv_perm φ (h.map _)
+
+/-- The op-stream reader after an op. -/
+private def rdNext (C : Cert) (rd : Rd) (o : Op) : Rd :=
+  cond (Nat.beq (o.vp + o.vn) 0) rd (rd.read (C.kw + C.ko) C.pero).2
+
+/-- An op's term in segment `seg`'s sum: its value times its moment, if its stream entry names the segment. -/
+private noncomputable def contrib (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (seg : ℕ) (rd : Rd) (o : Op) : ℝ :=
+  if Nat.beq (o.vp + o.vn) 0 = true then 0
+  else if fSeg C (rd.read (C.kw + C.ko) C.pero).1 = seg then (opVal o : ℝ) * Ym C.p φ (o.mono C.p) else 0
+
+/-- Segment `seg`'s part of the identity. -/
+private noncomputable def shadow (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (seg : ℕ) : List Op → Rd → ℝ
+  | [], _ => 0
+  | o :: l, rd => contrib C φ seg rd o + shadow C φ seg l (rdNext C rd o)
+
+/-- Every op's stream entry names a segment below `nseg`. -/
+private def covered (C : Cert) : List Op → Rd → Prop
+  | [], _ => True
+  | o :: l, rd => (Nat.beq (o.vp + o.vn) 0 = false → fSeg C (rd.read (C.kw + C.ko) C.pero).1 < C.nseg) ∧
+      covered C l (rdNext C rd o)
+
+private theorem opVal_zero (o : Op) (h : Nat.beq (o.vp + o.vn) 0 = true) : opVal o = 0 := by
+  simp only [Nat.beq_eq] at h; simp [opVal]; omega
+
+/-- **The segments add up to the identity** when every op is covered. -/
+private theorem sum_shadow (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) :
+    ∀ (l : List Op) (rd : Rd), covered C l rd →
+      ∑ seg ∈ Finset.range C.nseg, shadow C φ seg l rd = opSum C.p φ l
+  | [], _, _ => by simp [shadow, opSum]
+  | o :: l, rd, ⟨hc, hl⟩ => by
+    simp only [shadow, Finset.sum_add_distrib, sum_shadow C φ l _ hl, opSum, List.map_cons, List.sum_cons]
+    congr 1
+    unfold contrib
+    by_cases h0 : Nat.beq (o.vp + o.vn) 0 = true
+    · simp [h0, opVal_zero o h0]
+    · simp only [h0, if_false, Bool.false_eq_true]
+      rw [Finset.sum_ite_eq (Finset.range C.nseg) _ (fun _ => (opVal o : ℝ) * Ym C.p φ (o.mono C.p))]
+      simp [hc (Bool.eq_false_iff.2 h0)]
+
+/-- What a segment's state holds, read with ghost slot totals `P`, `N` and salts `S`: every leaf is its keys,
+`S + Σ_s P_s 2^{w(s+1)}` and `S + Σ_s N_s 2^{w(s+1)}`; every slot total is at most the in-range total; and while every
+check has passed, the segment's sum so far is `Σ (P − N)·Y(the multiset the slot's key names)`. -/
+private def Inv (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (keys : List ℕ) (st : St) (A : ℝ) : Prop :=
+  ∃ P N : ℕ → ℕ → ℕ, ∃ S : ℕ → ℕ,
+    st.leaves.length = 2 ^ C.ds ∧
+    (∀ ℓ < 2 ^ C.ds, st.leaves.getD ℓ (0, 0, 0) = (keys.getD ℓ 0,
+      S ℓ + ∑ s ∈ Finset.range (2 ^ C.lb), P ℓ s * (2 ^ C.w) ^ (s + 1),
+      S ℓ + ∑ s ∈ Finset.range (2 ^ C.lb), N ℓ s * (2 ^ C.w) ^ (s + 1))) ∧
+    (∀ ℓ s, P ℓ s + N ℓ s ≤ st.tot) ∧
+    (st.ok = true → A = ∑ ℓ ∈ Finset.range (2 ^ C.ds), ∑ s ∈ Finset.range (2 ^ C.lb),
+      ((P ℓ s : ℝ) - N ℓ s) * Ym C.p φ (dec (C.p * C.p) (lowBits (Nat.shiftRight (keys.getD ℓ 0) (Nat.mul C.kb s)) C.kb)))
+
+private theorem lowBits_lt (x k : ℕ) : lowBits x k < 2 ^ k := by rw [lowBits_eq]; exact Nat.mod_lt _ (by positivity)
+
+private theorem leaf_sum (K w s0 S v salt : ℕ) (Q : ℕ → ℕ) (hs0 : s0 < K) :
+    Nat.add (S + ∑ s ∈ Finset.range K, Q s * (2 ^ w) ^ (s + 1))
+      (Nat.add (Nat.shiftLeft v (Nat.mul w (Nat.add s0 1))) salt) =
+    S + salt + ∑ s ∈ Finset.range K, (Q s + if s = s0 then v else 0) * (2 ^ w) ^ (s + 1) := by
+  rw [show Nat.shiftLeft v (Nat.mul w (Nat.add s0 1)) = v * (2 ^ w) ^ (s0 + 1) from by
+    rw [show Nat.shiftLeft v (Nat.mul w (Nat.add s0 1)) = v <<< (w * (s0 + 1)) from rfl, Nat.shiftLeft_eq, pow_mul]]
+  simp only [add_mul, Finset.sum_add_distrib, ite_mul, zero_mul, Finset.sum_ite_eq', Finset.mem_range, hs0, if_true,
+    Nat.add_eq]
+  ring
+
+/-- One op preserves the invariant. -/
+private theorem Inv_step (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (seg : ℕ) (keys : List ℕ) (st : St) (A : ℝ)
+    (o : Op) (h : Inv C φ keys st A) :
+    Inv C φ keys (St.op C seg st o) (A + contrib C φ seg st.rd o) ∧ (St.op C seg st o).rd = rdNext C st.rd o ∧
+      ((St.op C seg st o).ok = true → st.ok = true ∧
+        (Nat.beq (o.vp + o.vn) 0 = false → fSeg C (st.rd.read (C.kw + C.ko) C.pero).1 < C.nseg)) := by
+  obtain ⟨P, N, S, hlen, hleaf, htot, hA⟩ := h
+  by_cases h0 : Nat.beq (o.vp + o.vn) 0 = true
+  · have e : St.op C seg st o = st := by simp [St.op, h0]
+    refine ⟨?_, by simp [e, rdNext, h0], fun hok => ⟨by rwa [e] at hok, fun h => by simp [h0] at h⟩⟩
+    rw [e, show contrib C φ seg st.rd o = 0 by simp [contrib, h0], add_zero]
+    exact ⟨P, N, S, hlen, hleaf, htot, hA⟩
+  have h0' : Nat.beq (o.vp + o.vn) 0 = false := Bool.eq_false_iff.2 h0
+  have eop : St.op C seg st o = St.op1 C seg st o (st.rd.read (C.kw + C.ko) C.pero) := by simp [St.op, h0']
+  have ec : contrib C φ seg st.rd o = if fSeg C (st.rd.read (C.kw + C.ko) C.pero).1 = seg then
+      (opVal o : ℝ) * Ym C.p φ (o.mono C.p) else 0 := by simp [contrib, h0']
+  have enx : rdNext C st.rd o = (st.rd.read (C.kw + C.ko) C.pero).2 := by simp [rdNext, h0']
+  rw [eop, ec, enx]
+  generalize st.rd.read (C.kw + C.ko) C.pero = r
+  by_cases hs : Nat.beq (fSeg C r.1) seg = true
+  · -- the op's own segment
+    have hs' : fSeg C r.1 = seg := by simpa using hs
+    have hli : lowBits (fLeaf C r.1) C.ds < 2 ^ C.ds := lowBits_lt _ _
+    have hs0 : lowBits (fSlot C r.1) C.lb < 2 ^ C.lb := lowBits_lt _ _
+    generalize hli' : lowBits (fLeaf C r.1) C.ds = li at hli
+    generalize hs0' : lowBits (fSlot C r.1) C.lb = s0 at hs0
+    have e : St.op1 C seg st o r = ⟨r.2, st.leaves.modify li (leafAdd C r.1 o.vp o.vn (Nat.add 1 (lowBits st.tot 16))),
+        Nat.add st.tot (Nat.add o.vp o.vn), st.ok && Nat.blt (fSeg C r.1) C.nseg &&
+        opGood C r.1 (st.leaves.getD li (0, 0, 0)).1 o⟩ := by
+      simp only [St.op1, hs, cond_true, hli']
+    rw [e, if_pos hs']
+    refine ⟨⟨fun ℓ s => P ℓ s + if ℓ = li ∧ s = s0 then o.vp else 0,
+      fun ℓ s => N ℓ s + if ℓ = li ∧ s = s0 then o.vn else 0,
+      fun ℓ => S ℓ + if ℓ = li then Nat.add 1 (lowBits st.tot 16) else 0, ?_, ?_, ?_, ?_⟩, rfl, ?_⟩
+    · simp [hlen]
+    · intro ℓ hℓ
+      simp only
+      rw [getD_modify _ _ _ _ _ (by rw [hlen]; exact hℓ)]
+      by_cases hl : li = ℓ
+      · subst hl
+        rw [if_pos rfl, hleaf li hli]
+        simp only [leafAdd, if_true, Prod.mk.injEq, true_and]
+        rw [hs0']
+        exact ⟨leaf_sum _ _ _ _ _ _ _ hs0, leaf_sum _ _ _ _ _ _ _ hs0⟩
+      · rw [if_neg hl, hleaf ℓ hℓ]
+        simp [Ne.symm hl]
+    · intro ℓ s
+      have := htot ℓ s
+      simp only [Nat.add_eq]
+      split_ifs <;> omega
+    · intro hok
+      simp only [Bool.and_eq_true] at hok
+      obtain ⟨⟨hok0, -⟩, hgood⟩ := hok
+      rw [hA hok0]
+      simp only [opGood, Bool.and_eq_true, Nat.beq_eq, Nat.blt_eq] at hgood
+      obtain ⟨⟨hkey, hunit⟩, hlenm⟩ := hgood
+      have hkeys : (st.leaves.getD li (0, 0, 0)).1 = keys.getD li 0 := by rw [hleaf li hli]
+      rw [hkeys, slotKey, hs0'] at hkey
+      have hY : Ym C.p φ (dec (C.p * C.p) (lowBits (Nat.shiftRight (keys.getD li 0) (Nat.mul C.kb s0)) C.kb)) =
+          Ym C.p φ (o.mono C.p) := by
+        rw [hkey, fKey_eq, Ym_perm C.p φ (dec_bag _ _ ?_ ?_)]
+        · exact Ym_witness C.p φ _ _ _ _ (Nat.le_of_lt (Nat.mod_lt _ (Nat.pos_of_ne_zero (NeZero.ne _))))
+            (Nat.le_of_lt (Nat.mod_lt _ (Nat.pos_of_ne_zero (NeZero.ne _)))) hunit _
+        · rw [List.length_map]; simpa [Op.mono, lenU_eq] using hlenm
+        · intro x hx
+          obtain ⟨y, -, rfl⟩ := List.mem_map.1 hx
+          exact gmap_lt _ _ _ _ _
+      have hsplit : ∀ (F : ℕ → ℕ → ℝ), ∑ ℓ ∈ Finset.range (2 ^ C.ds), ∑ s ∈ Finset.range (2 ^ C.lb),
+          (((P ℓ s + if ℓ = li ∧ s = s0 then o.vp else 0 : ℕ) : ℝ) -
+            ((N ℓ s + if ℓ = li ∧ s = s0 then o.vn else 0 : ℕ) : ℝ)) * F ℓ s =
+          ∑ ℓ ∈ Finset.range (2 ^ C.ds), ∑ s ∈ Finset.range (2 ^ C.lb),
+          ((P ℓ s : ℝ) - N ℓ s) * F ℓ s + ((o.vp : ℝ) - o.vn) * F li s0 := by
+        intro F
+        have : ∀ ℓ s, (((P ℓ s + if ℓ = li ∧ s = s0 then o.vp else 0 : ℕ) : ℝ) -
+            ((N ℓ s + if ℓ = li ∧ s = s0 then o.vn else 0 : ℕ) : ℝ)) * F ℓ s = ((P ℓ s : ℝ) - N ℓ s) * F ℓ s +
+            if ℓ = li ∧ s = s0 then ((o.vp : ℝ) - o.vn) * F ℓ s else 0 := by
+          intro ℓ s
+          split_ifs <;> push_cast <;> ring
+        simp only [this, Finset.sum_add_distrib]
+        congr 1
+        rw [Finset.sum_eq_single_of_mem li (Finset.mem_range.2 hli) (fun ℓ _ hl => Finset.sum_eq_zero fun s _ => by
+          simp [hl]), Finset.sum_eq_single_of_mem s0 (Finset.mem_range.2 hs0) (fun s _ hs => by simp [hs])]
+        simp
+      rw [hsplit, hY, opVal]
+      push_cast; ring
+    · intro hok
+      simp only [Bool.and_eq_true, Nat.blt_eq] at hok
+      exact ⟨hok.1.1, fun _ => hok.1.2⟩
+  · -- another segment's op
+    have hs' : Nat.beq (fSeg C r.1) seg = false := Bool.eq_false_iff.2 hs
+    have hs'' : fSeg C r.1 ≠ seg := fun h => hs (by rw [h]; exact Nat.beq_refl seg)
+    have e : St.op1 C seg st o r = ⟨r.2, st.leaves, st.tot, st.ok && Nat.blt (fSeg C r.1) C.nseg⟩ := by
+      simp only [St.op1, hs', cond_false]
+    rw [e, if_neg hs'', add_zero]
+    refine ⟨⟨P, N, S, hlen, hleaf, htot, fun hok => hA ?_⟩, rfl, fun hok => ?_⟩
+    · simp only [Bool.and_eq_true] at hok; exact hok.1
+    · simp only [Bool.and_eq_true, Nat.blt_eq] at hok; exact ⟨hok.1, fun _ => hok.2⟩
+
+private theorem Inv_fold (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (seg : ℕ) (keys : List ℕ) :
+    ∀ (l : List Op) (st : St) (A : ℝ), Inv C φ keys st A →
+      Inv C φ keys (l.foldl (St.op C seg) st) (A + shadow C φ seg l st.rd) ∧
+      ((l.foldl (St.op C seg) st).ok = true → st.ok = true ∧ covered C l st.rd)
+  | [], st, A, h => by simpa [shadow, covered] using h
+  | o :: l, st, A, h => by
+    obtain ⟨h1, h2, h3⟩ := Inv_step C φ seg keys st A o h
+    have ih := Inv_fold C φ seg keys l _ _ h1
+    rw [h2] at ih
+    simp only [List.foldl_cons, shadow, covered]
+    refine ⟨by rw [← add_assoc]; exact ih.1, fun hok => ?_⟩
+    obtain ⟨hok', hcov⟩ := ih.2 hok
+    obtain ⟨hst, hc⟩ := h3 hok'
+    exact ⟨hst, hc, hcov⟩
+
+/-- Equal packed sums with digits below the base have equal digits. -/
+private theorem digits_eq (B K : ℕ) (hB : 0 < B) (P N : ℕ → ℕ) (hP : ∀ s, P s < B) (hN : ∀ s, N s < B)
+    (h : ∑ s ∈ Finset.range K, P s * B ^ (s + 1) = ∑ s ∈ Finset.range K, N s * B ^ (s + 1)) :
+    ∀ s < K, P s = N s := by
+  have h' : (∑ s ∈ Finset.range K, P s * B ^ s) * B = (∑ s ∈ Finset.range K, N s * B ^ s) * B := by
+    simp only [Finset.sum_mul, mul_assoc, ← pow_succ]; exact h
+  have h'' := Nat.eq_of_mul_eq_mul_right hB h'
+  intro s hs
+  rw [← sum_digit B P K (fun i _ => hP i) s hs, ← sum_digit B N K (fun i _ => hN i) s hs, h'']
+
+/-- **One segment**: its part of the identity is zero, and every op's entry names a checked segment. -/
+private theorem seg_shadow (C : Cert) [NeZero C.p] (φ : V C.p → ℝ) (seg : ℕ) (h : segCheck C seg = true) :
+    shadow C φ seg (opList C (orbRows C) (qcoefs C)) ⟨0, 0, C.ops⟩ = 0 ∧
+      covered C (opList C (orbRows C) (qcoefs C)) ⟨0, 0, C.ops⟩ := by
+  let keys := (List.range (2 ^ C.ds)).map fun k => C.keys.getD (Nat.add (Nat.mul seg (2 ^ C.ds)) k) 0
+  have h0 : Inv C φ keys ⟨⟨0, 0, C.ops⟩, (List.range (2 ^ C.ds)).map fun k =>
+      (C.keys.getD (Nat.add (Nat.mul seg (2 ^ C.ds)) k) 0, 0, 0), 0, true⟩ 0 := by
+    refine ⟨fun _ _ => 0, fun _ _ => 0, fun _ => 0, by simp, fun ℓ hℓ => ?_, fun _ _ => le_rfl, fun _ => by simp⟩
+    simp only [keys, List.getD_eq_getElem?_getD, List.getElem?_map, List.getElem?_range hℓ]
+    simp
+  simp only [segCheck, shl_one, Bool.and_eq_true, Nat.blt_eq, List.all_eq_true, Nat.beq_eq] at h
+  obtain ⟨⟨hok, htot⟩, hbal⟩ := h
+  obtain ⟨⟨P, N, S, hlen, hleaf, hPN, hA⟩, hcov⟩ := Inv_fold C φ seg keys _ _ 0 h0
+  simp only [zero_add] at hA
+  refine ⟨?_, (hcov hok).2⟩
+  rw [hA hok]
+  refine Finset.sum_eq_zero fun ℓ hℓ => Finset.sum_eq_zero fun s hs => ?_
+  rw [Finset.mem_range] at hℓ hs
+  have hb := hbal _ (getD_mem _ ℓ (0, 0, 0) (by rw [hlen]; exact hℓ))
+  rw [hleaf ℓ hℓ] at hb
+  have hB : (0 : ℕ) < 2 ^ C.w := by positivity
+  have hlt : ∀ ℓ s, P ℓ s < 2 ^ C.w ∧ N ℓ s < 2 ^ C.w := fun ℓ s =>
+    ⟨by have := hPN ℓ s; omega, by have := hPN ℓ s; omega⟩
+  have := digits_eq _ _ hB (P ℓ) (N ℓ) (fun s => (hlt ℓ s).1) (fun s => (hlt ℓ s).2) (by simpa using hb) s hs
+  simp [this]
+
 /-! ### The children (FS131-IKC1 § 3: each a leaf until proved) -/
 
 /-- **The computation half** (K2a–d, K2i): an accepted certificate's ops sum to zero at the moments. -/
 private theorem opSum_eq_zero (C : Cert) [NeZero C.p] (hC : certOK C = true) (φ : V C.p → ℝ) :
     opSum C.p φ (opList C (orbRows C) (qcoefs C)) = 0 := by
-  sorry
+  have hn : 0 < C.nseg := by
+    simp only [certOK, globalOK, Bool.and_eq_true, Nat.blt_eq] at hC
+    exact hC.1.1.1.1.1.1.1.1.1.2
+  have hseg : ∀ seg < C.nseg, segCheck C seg = true := by
+    simp only [certOK, segAll, Bool.and_eq_true, List.all_eq_true, List.mem_range] at hC
+    exact hC.1.2
+  rw [← sum_shadow C φ _ _ (seg_shadow C φ 0 (hseg 0 hn)).2]
+  exact Finset.sum_eq_zero fun seg h => (seg_shadow C φ seg (hseg seg (Finset.mem_range.1 h))).1
 
 /-- The number of maps averaged over. -/
 private noncomputable def gsize (p : ℕ) [NeZero p] : ℝ := ((affs p).card : ℝ)
