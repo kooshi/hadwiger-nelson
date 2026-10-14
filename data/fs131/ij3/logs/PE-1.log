@@ -1,0 +1,31 @@
+slot: admitted ij3f: mem 5 GiB (hard cap), cpus 4,5
+data/fs131/ij3/work/PositiveEntropy.lean:164:8: warning: declaration uses `sorry`
+data/fs131/ij3/work/PositiveEntropy.lean:204:69: error(lean.unknownIdentifier): Unknown constant `MeasureTheory.Measure.map_add_left_eq_self`
+data/fs131/ij3/work/PositiveEntropy.lean:198:46: error: unsolved goals
+d : ℕ
+X : Type u_1
+inst✝⁸ : AddCommGroup X
+inst✝⁷ : TopologicalSpace X
+inst✝⁶ : IsTopologicalAddGroup X
+inst✝⁵ : CompactSpace X
+inst✝⁴ : T2Space X
+inst✝³ : MeasurableSpace X
+inst✝² : BorelSpace X
+α : ZdAction d X
+ν : Measure X
+inst✝¹ : IsProbabilityMeasure ν
+inst✝ : ν.IsAddHaarMeasure
+n : Fin d → ℤ
+hcont : ∀ (m : Fin d → ℤ), Continuous ⇑(α.toFun m)
+hmeas : ∀ (m : Fin d → ℤ), Measurable ⇑(α.toFun m)
+hinv : ∀ (x : X), (α.toFun n) ((α.toFun (-n)) x) = x
+this : IsProbabilityMeasure (Measure.map (⇑(α.toFun n)) ν)
+g : X
+hcomp : (fun x => g + x) ∘ ⇑(α.toFun n) = ⇑(α.toFun n) ∘ fun x => (α.toFun (-n)) g + x
+⊢ Measure.map (⇑(α.toFun n)) (Measure.map (fun x => (α.toFun (-n)) g + x) ν) = Measure.map (⇑(α.toFun n)) ν
+data/fs131/ij3/work/PositiveEntropy.lean:215:8: warning: declaration uses `sorry`
+data/fs131/ij3/work/PositiveEntropy.lean:243:8: warning: declaration uses `sorry`
+data/fs131/ij3/work/PositiveEntropy.lean:272:12: error(lean.unknownIdentifier): Unknown constant `MeasureTheory.Measure.map_add_right_eq_self`
+data/fs131/ij3/work/PositiveEntropy.lean:309:8: warning: declaration uses `sorry`
+seconds=3
+exit=1

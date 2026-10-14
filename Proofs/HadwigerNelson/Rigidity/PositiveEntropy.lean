@@ -148,7 +148,14 @@ theorem IsTotallyIrreducible.isIrreducible {α : ZdAction d X} (h : α.IsTotally
 /-- **FS105-NVC, the rank** (FS105-DED step 0a): an action of `ℤ⁰` or `ℤ¹` is virtually cyclic (`n = 0`, resp. `n = 1`, with
 `Λ = ℤ^d` and `k = m₀`), so an action that is not has `d ≥ 2`. No hypothesis on `X`. -/
 theorem two_le_of_not_isVirtuallyCyclic (α : ZdAction d X) (h : ¬ α.IsVirtuallyCyclic) : 2 ≤ d := by
-  sorry
+  by_contra hd
+  push Not at hd
+  apply h
+  interval_cases d
+  · exact ⟨0, ⊤, inferInstance, fun m _ => ⟨0, congrArg α (funext fun i => i.elim0)⟩⟩
+  · refine ⟨fun _ => 1, ⊤, inferInstance, fun m _ => ⟨m 0, congrArg α (funext fun i => ?_)⟩⟩
+    rw [Subsingleton.elim i 0]
+    simp
 
 /-- **FS105-NVC, the factors** (FS105-DED step 0d, the primal route): an irreducible action on a connected T1 group that is
 not virtually cyclic has no virtually cyclic factor. A closed invariant `Y ≠ X` is finite by irreducibility; if the action is
@@ -160,7 +167,17 @@ theorem noVirtuallyCyclicFactors_of_isIrreducible [IsTopologicalAddGroup X] [T1S
 
 /-- **`α^{q n}` is the `q`-th iterate of `α^n`**: `map_add'` and induction on `q`. -/
 theorem coe_nsmul (α : ZdAction d X) (q : ℕ) (n : Fin d → ℤ) : ⇑(α (q • n)) = (⇑(α n))^[q] := by
-  sorry
+  induction q with
+  | zero =>
+    rw [zero_smul, Function.iterate_zero]
+    show ⇑(α.toFun 0) = id
+    rw [α.map_zero']
+    rfl
+  | succ q ih =>
+    rw [succ_nsmul, Function.iterate_succ, ← ih]
+    show ⇑(α.toFun (q • n + n)) = ⇑(α.toFun (q • n)) ∘ ⇑(α.toFun n)
+    rw [α.map_add']
+    rfl
 
 /-- **Haar measure is invariant under every `α^n`** (C1 of FS105-DED § 2.2): `(α^n)_* m` is a left-invariant probability
 measure — `g + α^n x = α^n (α^{-n} g + x)` — hence a Haar probability measure
@@ -169,7 +186,26 @@ measure — `g + α^n x = α^n (α^{-n} g + x)` — hence a Haar probability mea
 theorem map_eq_of_isAddHaarMeasure [IsTopologicalAddGroup X] [CompactSpace X] [T2Space X] [MeasurableSpace X]
     [BorelSpace X] (α : ZdAction d X) (ν : Measure X) [IsProbabilityMeasure ν] [ν.IsAddHaarMeasure]
     (n : Fin d → ℤ) : ν.map (α n) = ν := by
-  sorry
+  have hcont : ∀ m, Continuous (α m) := α.continuous'
+  have hmeas : ∀ m, Measurable (α m) := fun m => (hcont m).measurable
+  -- `α n` is a bijection with inverse `α (−n)`
+  have hinv : ∀ x, α n (α (-n) x) = x := by
+    intro x
+    have h := α.map_add' n (-n)
+    rw [add_neg_cancel, α.map_zero'] at h
+    exact (DFunLike.congr_fun h x).symm
+  haveI : IsProbabilityMeasure (ν.map (α n)) := Measure.isProbabilityMeasure_map (hmeas n).aemeasurable
+  haveI : (ν.map (α n)).IsAddLeftInvariant := by
+    refine ⟨fun g => ?_⟩
+    rw [Measure.map_map (measurable_const_add g) (hmeas n)]
+    have hcomp : (fun x => g + x) ∘ ⇑(α n) = ⇑(α n) ∘ fun x => α (-n) g + x := by
+      funext x
+      simp only [Function.comp_apply, map_add, hinv]
+    rw [hcomp, ← Measure.map_map (hmeas n) (measurable_const_add _), map_add_left_eq_self]
+  haveI : (ν.map (α n)).IsAddHaarMeasure :=
+    Measure.isAddHaarMeasure_of_isCompact_nonempty_interior _ Set.univ isCompact_univ
+      (by rw [interior_univ]; exact Set.univ_nonempty) (by simp) (by simp)
+  exact Measure.isAddHaarMeasure_eq_of_isProbabilityMeasure _ _
 
 /-- **An ergodic measure with an invariant component is that component** (FS105-DED step 2, C3, with no use of clause (3)
 of the declared theorem): if `µ = J⁻¹(ν 1 + … + ν J)` with mutually singular probability measures and `ν j₀` is
@@ -214,7 +250,8 @@ theorem invariantComponent_model :
     (trivial 2 Unit).IsErgodicOn ⊤ (Measure.dirac ()) ∧
       Measure.dirac () = ((1 : ℕ) : ℝ≥0∞)⁻¹ • ∑ j : Fin 1, (fun _ => Measure.dirac ()) j ∧
       IsProbabilityMeasure (Measure.dirac ()) ∧ ∀ n, (Measure.dirac ()).map ((trivial 2 Unit) n) = Measure.dirac () := by
-  sorry
+  refine ⟨trivialAction_isErgodicOn 2 ⊤, by simp, inferInstance, fun n => ?_⟩
+  exact Measure.map_dirac' (measurable_of_countable _) () |>.trans (by rfl)
 
 end ZdAction
 
@@ -226,7 +263,14 @@ theorem finTwo_haar_model :
       ∀ (g : Fin 2) (B : Set (Fin 2)), MeasurableSet B →
         ((2 : ℝ≥0∞)⁻¹ • Measure.count : Measure (Fin 2)) ((fun x => x + g) ⁻¹' B) =
           ((2 : ℝ≥0∞)⁻¹ • Measure.count : Measure (Fin 2)) B := by
-  sorry
+  refine ⟨⟨?_⟩, fun g B hB => ?_⟩
+  · rw [Measure.smul_apply, Measure.count_univ, smul_eq_mul]
+    simp only [ENat.card_eq_coe_fintype_card, Fintype.card_fin]
+    exact ENNReal.inv_mul_cancel (by norm_num) (by norm_num)
+  · rw [Measure.smul_apply, Measure.smul_apply]
+    congr 1
+    have := map_add_right_eq_self (Measure.count : Measure (Fin 2)) g
+    rw [← Measure.map_apply (measurable_add_const g) hB, this]
 
 /-- **A translation-invariant probability measure on a compact group is a Haar measure** (C1 of FS105-DED § 2.2, the half
 read in Case A): clause (2) of the declared theorem with `G j = X` says `ν((· + g)⁻¹ B) = ν B` for every `g` and measurable
@@ -235,7 +279,16 @@ read in Case A): clause (2) of the declared theorem with `G j = X` says `ν((· 
 theorem isAddHaarMeasure_of_add_invariant {X : Type*} [AddCommGroup X] [TopologicalSpace X] [IsTopologicalAddGroup X]
     [CompactSpace X] [MeasurableSpace X] [BorelSpace X] (ν : Measure X) [IsProbabilityMeasure ν]
     (h : ∀ g : X, ∀ B : Set X, MeasurableSet B → ν ((fun x => x + g) ⁻¹' B) = ν B) : ν.IsAddHaarMeasure := by
-  sorry
+  haveI : ν.IsAddLeftInvariant := by
+    refine ⟨fun g => Measure.ext fun B hB => ?_⟩
+    rw [Measure.map_apply (measurable_const_add g) hB]
+    have hcomm : (fun x => g + x) ⁻¹' B = (fun x => x + g) ⁻¹' B := by
+      ext x
+      simp [add_comm]
+    rw [hcomm, h g B hB]
+  haveI : Nonempty X := nonempty_of_isProbabilityMeasure ν
+  exact Measure.isAddHaarMeasure_of_isCompact_nonempty_interior ν Set.univ isCompact_univ
+    (by rw [interior_univ]; exact Set.univ_nonempty) (by simp) (by simp)
 
 /-- **`[EinsiedlerLindenstrauss2022]` Theorem 1.2 (p. 2)**: "Let `α` be a totally irreducible, not virtually-cyclic
 `ℤ^d`-action by automorphisms of a solenoid `X`. Let `µ` be an `α`-invariant and ergodic probability measure. Then either

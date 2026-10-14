@@ -171,3 +171,14 @@ the proof was in; item 726's word, as the brief rules). No other statement, docs
 
 **Re-priced:** M5-E's first two leaves were 2 and 25 lines; the lane came to about 390 lines, with the finite-fibred trio
 about 300 of them.
+
+## Stage 5 — SAVED: M5-P, `Rigidity/PositiveEntropy`, six of its ten leaves
+
+Written against `data/fs131/ij3/work/PositiveEntropy.lean` (`logs/PE-1.log`, `PE-2.log`, the last exit 0 with no warning
+but the four remaining leaves' ``declaration uses `sorry` ``), copied over the module; `git diff` removes six `sorry` lines.
+Proved, each by KN9's route: `ZdAction.two_le_of_not_isVirtuallyCyclic` (`interval_cases`; `n = 0` at `d = 0`, `n = 1` at
+`d = 1`), `ZdAction.coe_nsmul` (induction), `ZdAction.map_eq_of_isAddHaarMeasure` (`g + α^n x = α^n(α^{−n} g + x)`,
+`isAddHaarMeasure_of_isCompact_nonempty_interior` at `univ`, `isAddHaarMeasure_eq_of_isProbabilityMeasure`),
+`ZdAction.invariantComponent_model`, `finTwo_haar_model` (`map_add_right_eq_self` for the counting measure),
+`isAddHaarMeasure_of_add_invariant`. **Left:** `noVirtuallyCyclicFactors_of_isIrreducible`,
+`eq_of_isErgodicOn_of_invariant_component`, `mulTwoThree_model`, `haar_or_zero_entropy`.
