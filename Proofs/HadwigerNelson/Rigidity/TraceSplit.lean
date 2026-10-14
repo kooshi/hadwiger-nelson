@@ -207,7 +207,7 @@ theorem integral_condLaw_mul_nonneg [NumberField F] (μ : InvariantColouring F) 
 
 /-- **A proper colouring repeats no colour across a unit vector**: `⟨e_j, V_u e_j⟩ = μ(c(0) = j = c(u)) = 0` (`μ` is carried
 by `X₄(F)`). -/
-theorem inner_colourInd_comp_unit [NumberField F] (μ : InvariantColouring F) (u : unitVectors F) (j : Fin 4) :
+theorem inner_colourInd_comp_unit (μ : InvariantColouring F) (u : unitVectors F) (j : Fin 4) :
     ∫ c, colourInd μ.μ (fun c => c 0) (measurable_pi_apply 0) j c *
         Lp.compMeasurePreserving (colourShift (uvRing u)) (μ.measurePreserving_shift (uvRing u))
           (colourInd μ.μ (fun c => c 0) (measurable_pi_apply 0) j) c ∂μ.μ = 0 := by

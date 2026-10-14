@@ -18,13 +18,17 @@ prefixed by a publicized name (`archHom.congr_simp`, a generated theorem) is com
 constant of that name when the second has it, and is otherwise reported `GONE GENERATED` (a theorem Lean generates on
 demand; not a statement of the file).
 
+**A dropped unread binder** (`--dropped <file>`, lines `<full name>`; the brief's item 726 word): a listed constant's stored
+statement may differ (`RULED DROP`); its kind, module and value are still compared, and a listed name must be in the
+first dump.
+
 Otherwise as FS131-IJ1's reader: every constant of `before` that is not INTERNAL must be in `after` with the same kind
 and type, in the same module; a definition keeps its value; constants only in `after` are NEW (public; must be listed in
 `--allow-new`) or NEW PRIVATE; the modules declare no axiom; every `example` head of the base commit's files is in the
 working files, in order.
 
 Usage:  fs131_im11_statements.py <before.txt> <after.txt> <base-commit> [--publicized <file>] [--allow-new <file>]
-        [--control]
+        [--dropped <file>] [--control]
 """
 import pathlib
 import re
@@ -122,6 +126,7 @@ def main():
     argv = sys.argv[1:]
     allow = opt(argv, "--allow-new")
     publicized = opt(argv, "--publicized")
+    dropped = opt(argv, "--dropped")
     args = [a for a in argv if not a.startswith("--")]
     before, after, base = read_dump(args[0]), read_dump(args[1]), args[2]
     bad, ruled, subst_ok, pub_ok = [], [], [], []
@@ -216,6 +221,8 @@ def main():
         if a["type"] != b["type"]:
             if body(a["type"]) == body(sb_type):
                 subst_ok.append(f"RULED SUBST TYPE {b['kind']} {bn}: differs only in the publicized names")
+            elif bn in dropped:
+                ruled.append(f"RULED DROP {b['kind']} {bn}: the stored statement differs (a dropped unread binder)")
             else:
                 bad.append(f"TYPE     {b['kind']} {bn}: the stored statement differs")
         if b["kind"] == "DEF" and not b["prop"]:
@@ -228,6 +235,9 @@ def main():
         if tgt is not None and tgt in publicized:
             pub_ok.append(f"RULED PUBLIC {a['kind']} {tgt}: was {bn}; kind, module and stored type (after SUBST) "
                           f"identical")
+    for d in sorted(dropped):
+        if d not in before:
+            bad.append(f"DROPPED  {d}: listed as a dropped binder's statement and not in the first dump")
     axioms = sorted(n for d in (before, after) for n, c in d.items() if c["kind"] == "AXIOM")
     if axioms:
         bad.append(f"AXIOMS   the modules must declare no axiom: {axioms}")

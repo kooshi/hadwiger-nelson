@@ -68,23 +68,26 @@ theorem tendsto_mul_nhds_tauPrime [NumberField F] (r : unitRing F) :
     rw [map_zero, QuotientAddGroup.mk'_apply, QuotientAddGroup.eq_zero_iff]
     refine ⟨-(r * z), ?_⟩
     rw [nsmulAddMonoidHom_apply, hy', smul_neg, mul_neg, mul_smul_comm]
-  · -- archimedean: on the mixed space it is multiplication by the image of `r`
-    have hmul : ∀ y : unitRing F, archHom F (r * y) = archHom F r * archHom F y := by
+  · -- archimedean: `archTop` is induced by the mixed embedding, which is multiplicative
+    let f : unitRing F → NumberField.mixedEmbedding.mixedSpace (fieldI F) := fun r =>
+      NumberField.mixedEmbedding (fieldI F) ⟨(r : ℂ), UnitRing.unitRingOver_le_planeOverSubring F r.2⟩
+    have hmul : ∀ y : unitRing F, f (r * y) = f r * f y := by
       intro y
       show NumberField.mixedEmbedding (fieldI F) ⟨((r * y : unitRing F) : ℂ), _⟩ =
         NumberField.mixedEmbedding (fieldI F) ⟨(r : ℂ), _⟩ * NumberField.mixedEmbedding (fieldI F) ⟨(y : ℂ), _⟩
       rw [← map_mul]
       rfl
-    have ha : archTop F = TopologicalSpace.induced (archHom F) inferInstance := rfl
-    rw [ha, nhds_induced, tendsto_comap_iff]
-    have hc : Tendsto (fun v => archHom F r * v) (nhds (archHom F 0)) (nhds (archHom F r * archHom F 0)) :=
-      (continuous_const_mul (archHom F r)).tendsto _
-    rw [map_zero, mul_zero] at hc
-    rw [map_zero]
-    have hf : (archHom F ∘ fun y => r * y) = (fun v => archHom F r * v) ∘ archHom F := funext hmul
-    rw [hf]
-    exact hc.comp (by simpa [map_zero] using (tendsto_comap : Tendsto (archHom F) (Filter.comap (archHom F)
-      (nhds (archHom F 0))) (nhds (archHom F 0))))
+    have h0 : f 0 = 0 := by
+      show NumberField.mixedEmbedding (fieldI F) ⟨((0 : unitRing F) : ℂ), _⟩ = 0
+      rw [← map_zero (NumberField.mixedEmbedding (fieldI F))]
+      rfl
+    have ha : archTop F = TopologicalSpace.induced f inferInstance := rfl
+    have hc : Tendsto (fun v => f r * v) (nhds 0) (nhds 0) := by
+      have := (continuous_const_mul (f r)).tendsto (0 : NumberField.mixedEmbedding.mixedSpace (fieldI F))
+      rwa [mul_zero] at this
+    have hcomap : Tendsto f (Filter.comap f (nhds 0)) (nhds 0) := tendsto_comap
+    rw [ha, nhds_induced, h0, tendsto_comap_iff]
+    exact Tendsto.congr (fun y => (hmul y).symm) (hc.comp hcomap)
 
 /-- The conjugate of a unit vector, as a unit vector. -/
 private def conjUV (u : unitVectors F) : unitVectors F :=

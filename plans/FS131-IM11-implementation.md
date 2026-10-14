@@ -6,7 +6,45 @@
 
 ## Theorems this phase proved
 
-*(filled at the last stage)*
+All 33 leaves of M11 are proved; axioms as `data/fs131/im11/lean/Axioms.lean` prints them from the compiled library of
+build 3 (`data/fs131/im11/axioms-after.txt`). "Standard three" = `[propext, Classical.choice, Quot.sound]`; "M2b" =
+`[propext, sorryAx, Classical.choice, Quot.sound]` with `sorryAx` only through `Rigidity.bochnerOn_tauPrime` (module
+`Rigidity/BochnerTau`, being proved on another line); "M3" = the same with `sorryAx` only through
+`exists_shiftInvariant_on` and `exists_rotInvariant_of_shiftInvariant` (module `Rigidity/InvariantMeasure`).
+
+*`Rigidity/SpectralSubspace` (M11-S), every one [kernel], standard three:*
+- `Rigidity.gram_sum_eq` — the complex Gram identity in a real inner product space.
+- `Rigidity.posDef_koopman` — `y ↦ ⟨f, V_y f⟩` is positive definite.
+- `Rigidity.comp_mem_contVec` — `V_y` maps `l`-continuous vectors to `l`-continuous vectors.
+- `Rigidity.inner_comp_eq_inner_comp_neg` — `⟨g, V_y f⟩ = ⟨V_{−y} g, f⟩`.
+- `Rigidity.IsSpectralMeasureOf.add_of_orthogonal` — `σ_{h+r} = σ_h + σ_r` (SI-1's cross terms vanish).
+- `Rigidity.exists_trigPoly_tendsto` — trigonometric polynomials are dense in `L²(σ)` on the dual of a countable group.
+- `Rigidity.norm_sq_koopmanSum_re_add_im`, `Rigidity.inner_koopmanSum_re`, `Rigidity.comp_koopmanSum` — the Koopman isometry,
+  pairing and shift.
+- `Rigidity.exists_spectral_vector` — the spectral vector `1_A(V) f` of a measurable set of characters.
+- **`Rigidity.spectral_null_of_orthogonal`** — the cyclic-subspace step (FS131-KR1's step (d)), no Bochner theorem read.
+- **`Rigidity.isSpectralMeasureOf_condExpL2`** — J45 N2's last clause in spectral form.
+- `Rigidity.spectral_null_model` — a non-degenerate model of the cyclic-subspace step's hypotheses (`ℤ` on `Fin 2`, `σ ≠ 0`).
+- Composed by the planner, now with no `sorry` under them: `Rigidity.exists_isSpectralMeasureOf`,
+  `Rigidity.spectral_contChars_null_of_orthogonal`.
+
+*`Rigidity/TraceSplit` (M11-T), [kernel]:*
+- `Rigidity.integral_colourInd_mul_comp`, `Rigidity.trace_decomp` (`3σ + δ₁ = 4Σ_j σ_{e_j}`), `Rigidity.condLaw_comp_colourShift`,
+  `Rigidity.inner_colourInd_comp_unit` (its unread `[NumberField ↥F]` dropped, item 726), `Rigidity.colourCond_ae_eq_condLaw`,
+  `Rigidity.integral_colourCond_mul_comp`, **`Rigidity.setIntegral_compl_TA_rot`** (remark (ii)) — standard three.
+- **`Rigidity.setIntegral_compl_TA_re`** (SI-3 at `S = ∅`) and `Rigidity.setIntegral_compl_TA_re_nonpos` — M2b.
+
+*`Rigidity/APlus` (M11-A), [kernel]:*
+- `Rigidity.tendsto_mul_nhds_tauPrime`, `Rigidity.comap_colourRot_colourFactor` (`𝒜` rotation-invariant),
+  `Rigidity.factorColouring_shift_ae`, `Rigidity.factorColouring_rot_ae`, `Rigidity.integral_condLaw_mul_eq_zero_of_adj`,
+  `Rigidity.factorColouring_mem_X4`, `Rigidity.factorLaw_carried`, `Rigidity.factorLaw_shift_inv`, `Rigidity.factorLaw_rot_inv`,
+  `Rigidity.numberField_bot` — standard three.
+- `Rigidity.factorLaw_trace_null`, `Rigidity.equalAtUnits_of_not_neg` and the composition **`Rigidity.aPlusOfR88 (F)
+  [NumberField F] : (chainInterface F).APlusOfR88`** — M2b.
+- The models `Rigidity.nonempty_invariantColouring_bot`, `Rigidity.aplus_model` — M3.
+
+So **`aPlusOfR88` rests on exactly one open leaf, `bochnerOn_tauPrime` (M2b)**: it prints the standard three the day M2b
+lands, with no further change here.
 
 ## Stage 1 — SAVED: the readback
 
@@ -163,3 +201,87 @@ the plan's 350–550; about 10 minutes of writing during the build and 2 minutes
 
 **M11 as a whole:** 33 of 33 leaves proved, 987 lines added to the three modules (609 + 175 + 203) against the plan's
 1,170–1,720 still to write (§ 4.2 of the planner's record, its ~430 written lines subtracted) — about 0.6–0.85 of plan.
+
+## Stage 5 — SAVED: the gate items, and two lint findings repaired
+
+**The lint, first run** (`lake lint --no-build -- --no-build --trace`, on build 2): exit 1, three `unusedArguments`
+findings — `archTop`'s `[NumberField ↥F]` (known: item 863 ruling 1, owed on another branch), **`archHom`'s
+`[NumberField ↥F]`** (made public at stage 4, so newly linted: the map does not read the binder, exactly as `archTop`), and
+**`inner_colourInd_comp_unit`'s `[NumberField ↥F]`** (its statement reads no number field). **Repairs, both mine to decide
+and said here:** (1) `archHom` is **private again** — `tendsto_mul_nhds_tauPrime`'s archimedean half now reads the map
+`archTop` is defined with (it is `@[reducible]`, `archTop F = induced f inferInstance` by `rfl`), multiplicative by `map_mul`
+of the mixed embedding, so no helper of `ContinuityGroup` but `mem_nhds_profTop` is read and no fact is proved twice;
+making it public would need `@[nolint unusedArguments]` there, a line the brief does not give me. (2) The unread binder of
+`inner_colourInd_comp_unit` is **dropped** (item 726's word, in the brief): stored type before `∀ {F} [inst : NumberField
+↥F] (μ …) (u …) (j …), …`, after `∀ {F} (μ …) (u …) (j …), …` (`statements-before.txt`, `statements-after.txt`). So of item 873
+ruling 1's three helpers **one is public** (`mem_nhds_profTop`, the one my route reads); `archHom` and `eventually_archTop`
+stay private.
+
+**Build 3** (the last): **`build: OK — 256 of 256 batches, 10 module(s) rebuilt, 18 module(s) with warnings, 8m14s`**
+(`data/fs131/im11/build3.log`; `build/gate/build/20261014T164056Z-3864357.log`) — **no warning from any of my four files**
+(`grep` of the log for them: 0 lines); the 18 modules with warnings are other modules' `sorry`.
+
+**No statement and no definition changed** but the ruled ones, from the kernel's side: `tools/fs131_im11_statements.py`
+(FS131-IJ1's reader aimed at the ten modules, the publicization and the dropped binder made checkable) on
+`statements-before.txt` (stage 1) and `statements-after.txt` (build 3): **PASS** — 172 named constants compared (kinds,
+stored types, modules), 41 data definitions' values, 6 example heads; `RULED PUBLIC mem_nhds_profTop` (kind, module, stored
+type identical once the private name is substituted), `RULED DROP inner_colourInd_comp_unit`; the six downstream modules'
+stored terms unmoved; three new public constants, each a generated `congr_simp` theorem (`koopmanSum`,
+`Lp.compMeasurePreservingₗ`, `factorColouring`; `data/fs131/im11/allow-new.txt`); 26 new private helpers
+(`statements-verdict.out`). **Control** (`--control`): ten faults planted in memory — a leaf's stored type, a definition's
+value, a leaf gone, a downstream statement, a move, an unlisted public constant, an axiom, a theorem become a definition, the
+publicized helper's type, a private constant's type — **10 of 10 reported** (`statements-control.out`).
+
+**Axioms**, every declaration of the four modules (`data/fs131/im11/lean/Axioms.lean` → `axioms-after.txt`, read by
+`tools/fs131_im11_axioms.py`): **PASS** — 121 records, 114 CLEAN, 7 OPEN-LEAF: `SpectralSubspace` 40 of 40 clean,
+`ContinuityGroup` 28 of 28, `TraceSplit` 21 of 23 (`setIntegral_compl_TA_re`, `_nonpos` through `bochnerOn_tauPrime`), `APlus`
+25 of 30 (`aPlusOfR88`, `equalAtUnits_of_not_neg`, `factorLaw_trace_null` through `bochnerOn_tauPrime`;
+`nonempty_invariantColouring_bot`, `aplus_model` through M3's two leaves); no `sorry` sourced in my four modules; **the planted
+record** (`positive_entropy_rigidity_of_polishSpace`) **reported** resting on the declared printed theorem. **Control**: four
+faults planted (a `sorry` sourced in `SpectralSubspace`, an unknown axiom, the declared theorem, a `sorry` in a must-clean
+leaf) — **4 of 4 reported** (`axioms-control.out`).
+
+**The guarded lint on build 3** (`data/fs131/im11/lint.out`): exit 1 on **one** finding, `archTop`'s
+`[NumberField ↥F]` (`ContinuityGroup` l. 42) — the pre-existing one, item 863 ruling 1, owed by another job on another
+branch; **no finding in `SpectralSubspace`, `TraceSplit` or `APlus`, and none new in `ContinuityGroup`**. 13 of 14 linters
+`(2/2) Passed!`.
+
+`tools/check_architecture.py`: **PASS** (`data/fs131/im11/arch.out`), with the four rows updated (three modules proved; the
+`ContinuityGroup` row names `mem_nhds_profTop` public).
+
+## Drafts for the landing
+
+**The audit's block** (`scripts/Axioms.lean`, CLEAN section): `data/fs131/im11/draft-axioms-block.lean` — 57 records CLEAN
+at build 3 (every public declaration of the three modules whose axioms are the standard three, generated `congr_simp`
+theorems left out, and `mem_nhds_profTop`), and 7 commented as not yet clean, to move up when M2b and M3 land.
+
+**The models** (`LEAN.md` § The gate, the inhabitant rule):
+- `spectral_null_model` — now a **kernel theorem** (standard three): `ℤ` acting on `Fin 2` by flips (`T y i = i + y • 1`,
+  the counting measure), `f = 1_{0} − ½`, `σ` from Herglotz–Bochner with `σ ≠ 0`, `l = ⊤`, `A = {1}`: every hypothesis of
+  `spectral_null_of_orthogonal` at once, non-degenerately.
+- `IsSpectralMeasureOf` hypotheses (`add_of_orthogonal`, `exists_spectral_vector`, `isSpectralMeasureOf_condExpL2`, …):
+  inhabited for every vector by `exists_isSpectralMeasureOf` (standard three).
+- `trace_decomp`'s hypotheses: inhabited at `κ = id` on the colourings with the shift action, inside
+  `setIntegral_compl_TA_re`, and at `κ = c′` inside `factorLaw_trace_null`; an invariant colouring and a trace measure exist
+  over `ℚ` (`aplus_model`, M3).
+- `isSpectralMeasureOf_condExpL2` at the topology the chain reads (`tauPrime F`): its use in `setIntegral_compl_TA_re`.
+- `EqualAtUnits`: a step inside a proof by contradiction; its docstring names the model over `ℚ` (described, not a
+  declaration), unchanged.
+
+**`LEAN.md` § Searching — Lean, lines (each to follow the last):**
+- At the pin `Fin n` has no global `IntCast` (its ring structure is not an instance): a `ℤ`-action on `Fin 2` is
+  `i + y • 1` (`zsmul`), `abel` closes its action law (FS131-IM11, `spectral_null_model`).
+- `rw [Measure.map_map hg hf]` does not find `map (fun c x => c (x + y)) (map f μ)` when `hg` is stated for a named
+  definition with that body (`measurable_colourShift y`): `rw` does not unfold it; pass `(g := fun c x => c (x + y))`
+  (FS131-IM11).
+- Making a private declaration public exposes it to `lake lint`'s `unusedArguments`, which never reads private ones:
+  `ContinuityGroup.archHom`'s `[NumberField ↥F]` is unread as `archTop`'s is. Lint before publicizing; a reducible
+  definition's body can be read instead (`archTop F = induced f inferInstance := rfl`) (FS131-IM11).
+- Dot notation on a hypothesis whose type is a definition unfolding to `∧` (`hσ : IsSpectralMeasureOf …`) looks in
+  `And`: `hσ.unique` is "Invalid field"; write `IsSpectralMeasureOf.unique hσ h` (FS131-IM11).
+- `IsFiniteMeasure (n • ν)` for `n : ℕ`, and of a `Finset` sum of measures, are not instances at the pin:
+  `Measure.smul_apply`, `nsmul_eq_mul`, `ENNReal.mul_lt_top`; `Measure.finsetSum_apply`, `ENNReal.sum_lt_top`. A finite sum
+  of measures restricts by `Measure.restrictₗ` and `map_sum` (FS131-IM11, `TraceSplit`).
+- A module's compiled data holds the `congr_simp` theorems its proofs asked for, of its own definitions and of Mathlib's
+  (`MeasureTheory.Lp.compMeasurePreservingₗ.congr_simp` in `Rigidity/SpectralSubspace`): a statement check lists them as
+  generated, never as new statements (FS131-IM11).
