@@ -217,6 +217,9 @@ import Proofs.HadwigerNelson.Rigidity.Herglotz
 import Proofs.HadwigerNelson.Rigidity.InvariantMeasure
 import Proofs.HadwigerNelson.Rigidity.ContinuityGroup
 import Proofs.HadwigerNelson.Rigidity.BochnerTau
+import Proofs.HadwigerNelson.Rigidity.SpectralSubspace
+import Proofs.HadwigerNelson.Rigidity.TraceSplit
+import Proofs.HadwigerNelson.Rigidity.APlus
 import Proofs.HadwigerNelson.Rigidity.ClassRatio
 import Proofs.HadwigerNelson.Plane.OneAvoidingDensity
 import Proofs.HadwigerNelson.Plane.WindowDensity
