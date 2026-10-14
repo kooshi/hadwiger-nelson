@@ -114,3 +114,25 @@ The remote is unreachable: **commit by explicit path on your branch and do not p
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 (2026-10-14 03:55 UTC) — the three unused instance arguments of the ported statements: silence the linter by name, on those three only
+
+**Ruling: your option (a).** The generator puts `@[nolint unusedArguments]` on exactly the three ported declarations
+you name (`observationEntropy_finite_mixture_bounds`, `kernelCell_preserving`, `kernelCell_real`), and nothing else.
+*The alternatives I weighed:* drop the three instance arguments, which would make the ported statements no longer
+the release's — the one thing a port must not do; a global list of exceptions, which hides the reason in a file a
+reader of the module never sees; or leave the lint red, which only hands the same question to the landing.
+*Why (a):* a port keeps the source's statements as the source wrote them, unused arguments included, and an attribute
+on the declaration says so where a reader looks. Confidence: high.
+
+**What goes with it:** each attribute carries a one-line comment beside it — the release's statement takes this
+instance and its proof does not read it; it is kept so that the statement stays the release's; the module header's
+list of changes names the three; a dump shows the three stored types unchanged by the attribute; the lint is then
+green with its planted control still red. Draft one sentence for `LEAN.md` § Assumptions on ports: a ported
+statement keeps the source's unused arguments, and the linter is silenced by name on that declaration, never by a
+global list. These are the first `nolint` attributes in the library; say so in your report.
+
+**Your second finding** (an import left out of the ported modules because it moved two stored statements of the
+chain's own entropy file): accepted as you handled it. For a port the read-back is an instrument and not a gate, so
+"identical up to instance arguments" for one ported definition costs nothing in trust, while a moved statement of
+ours would. Say it in your record and in the module's header. You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
