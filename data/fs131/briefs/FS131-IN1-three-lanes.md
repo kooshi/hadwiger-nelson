@@ -107,3 +107,11 @@ branch and do not push**; I copy the branches to a local backup.
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 (2026-10-14 04:56 UTC) — the job's id, and lane C's fourth leaf
+
+**The id.** This job is **FS131-IN1L**: its record is plans/FS131-IN1L-implementation.md, its data folder data/fs131/in1l/, its report data/fs131/reports/FS131-IN1L.md, its tools tools/fs131_in1l_*.py (all yours to write, in place of the names in the header). The id FS131-IN1 belongs to an earlier, finished job (inventory item 754).
+
+**Lane C's fourth leaf** has no typed statement; it exists only in words, in the second planner's record § 3a.3. Your touches are extended by two new public declarations in `Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean`: `rotInv_dirac_one` (the point mass at the trivial character is rotation-invariant) and `zeroEntropyCarried_model` (the model of `ZeroEntropyCarried`'s hypotheses that section names). No existing statement or definition changes. The dump comparison lists exactly these two as added, with the planted control firing. The model is read aloud in your record against that section's sentence on `ZeroEntropyCarried`, at every non-torsion vector as the definition now quantifies. Both print the standard three axioms (inventory item 755).
+
+You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review work it knows exists).
