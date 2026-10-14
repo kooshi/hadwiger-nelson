@@ -124,3 +124,34 @@ dump at stage 4.
 **Λ1 re-priced from its first two leaves** (`exists_nrWindow` with its two helpers, about 155 lines in three elaborations;
 `sum_volume_inter_sq_le` with its helpers, about 140 lines in three): the lane is **done at 511 lines** (302 + 209) against the
 planner's 800–1,150, in about 45 minutes of active work from the first edit. No price message is owed (the lane is under a day).
+
+## Stage 4 — SAVED: Λ4, `Rigidity/CountExtension` — five leaves proved (elaborated in the farm; the build is stage 5's); Λ4 re-priced
+
+All five `sorry`s of `Rigidity/CountExtension` replaced. Farm elaboration (`data/fs131/icl1/lean1.sh`, the lakefile's options):
+**exit 0, no warning, 7.8 s, 4.1 GB** (`data/fs131/icl1/logs/ce-5.log`; five elaborations, `ce-1` to `ce-5`). **295 lines
+added.**
+
+| leaf | how | lines |
+|---|---|---|
+| `measure_ne_eq` | `tetra (c 0) (c y) = 1 − (4/3)·1_{c 0 ≠ c y}`; `integral_sub`, `integral_indicator_const` | 22 |
+| `comap_ιG_le_nhds_tauPrime` | as planned: `nhds_inf`, `nhds_iInf`; the profinite part through `exists_level_mem_nsmul` and the level kernel `univ ×ˢ {proj k = 0}` (`hasBasis_nhds_zero_K`), `pure_le_nhds` for the discrete quotient; the archimedean part through `continuous_fst` | 30 |
+| `tendsto_measure_ne` | the scratch proof (`data/fs131/k12a/leaves/LeafE.lean`) folded in unchanged | 47 |
+| `exists_extension` | as planned, every choice a `Nat.find`: neighbourhoods `W n` on whose triple differences `P(c 0 ≠ c y) ≤ 2⁻ⁿ` (from C1), `O n = ⋂_{k ≤ n} interior (W k)`; `π n g` the first `r` of an enumeration of `R` with `ιG r − g ∈ O n` (`denseRange_ιG`); `f c g = c (π N g)` at the first `N` from which `c ∘ π · g` is constant (`Measurable.find` twice, `measurable_from_prod_countable_left`); Borel–Cantelli (`measure_limsup_atTop_eq_zero`) for the eventual constancy; an edge `t` by a unit vector `u` with `ιG u − t ∈ O m` and the proper colourings (`μ.carried`), so `μ(f c g = f c (g + t)) ≤ inf_m 2⁻ᵐ` off a null set | 141 + 22 |
+| `exists_slice` | Tonelli over `μ × ((volume × haarK) × arcLength)` at each unit vector (`Measure.prod_apply_symm`, `measure_prod_null`), the fibre by `exists_extension` at `t = (Δ(e^{iθ}), ιK u)` (`mem_closure_ιG`); `ae_all_iff` over the countably many unit vectors; one sample | 50 |
+
+Private helpers: `measure_ne_shift` (shift invariance at a pair), `measure_eq_add_unit` (an edge is a.s. bichromatic).
+
+**Read from outside the lane, as stated** (each a `sorry` leaf of its own module, so `sorryAx` reaches this module's theorems
+through them until they land): `Rigidity.TA_subset_contChars` (M10, `Rigidity/ContinuityGroup`), `exists_level_mem_nsmul`
+(`Rigidity/CountResidue`, Λ2), `hasBasis_nhds_zero_K`, `denseRange_ιG`, `mem_closure_ιG` and the instance
+`CompactSpace (K F)` (`Rigidity/CountCompletion`, Λ3). Nothing of `CountTorus` is read.
+
+**Unread binder dropped (item 726's word):** `measure_ne_eq` does not read `[NumberField F]` (`omit [NumberField F] in`); its
+one reader, `tendsto_measure_ne`, is in this file.
+
+**Λ4 re-priced from its first two leaves** (`exists_extension` about 165 lines in three elaborations, `exists_slice` 50 in
+one): **done at 295 lines** against the planner's 700–1,100.
+
+**The model the module's docstring owes is not built** (`InvariantColouring` at `F = ℚ` with its trace spectral measure on
+`T + A`): a public declaration, which the brief does not allow this job to add. Its route is drafted at stage 6; held for the
+coordinator.
