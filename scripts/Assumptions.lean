@@ -843,8 +843,6 @@ def declared : Array Entry := #[
   .premise ``HadwigerNelson.Plane.voronov11_of_forall_mu_lt `H
     "one half of FS106-COMP's equivalence (mu_lt_of_voronov11 is the other): the implication is the content",
   -- ## Formers taken as hypotheses and concluded by no theorem that are conditions, not assumptions
-  .condition ``HadwigerNelson.SpectralChain.TCA
-    "T-C(A) at S = ∅ in class form, a property of the field F: the theorems take it only as the conclusion of the declared hypothesis CLS and as the antecedent of hMR",
   .condition ``HadwigerNelson.Arith.IsUsablePrime "a predicate of a prime of F (maximal, residue field of size ≡ 3 mod 4): a condition on the theorem's prime",
   .condition ``HadwigerNelson.Arith.NoAffFieldHyp "the field hypotheses of NOAFF-FIELDS at k: a condition on the field F and on k",
   .condition ``HadwigerNelson.DensityBound.DualCert.IsIndep "S is independent in the unit-distance graph on a certificate's points: a predicate of the theorem's set S (X23_atoms reads it; the empty set and each of the 13,552 independent sets of the certificate satisfy it; no declaration exhibits one — FS131-LDB1)",
@@ -880,12 +878,11 @@ def declared : Array Entry := #[
   .condition ``HadwigerNelson.Plane.IsSelection "a selection from a family: a predicate of the theorem's colouring",
   .condition ``HadwigerNelson.Plane.IsTriod "three arcs from x to the rim of the disc B(x, r) (the claim list's clauses on a sector point's arcs): a predicate of the theorem's point, radius and arcs; no declaration concludes it — `ThreePiece.IsSector.hasArcEdges` builds one inside its proof from the data of any sector point, and `sectorPoint_isSector` gives one (an open gate item of FS124-L2)",
   .condition ``HadwigerNelson.Plane.IsTriodCut "a triod with three open preconnected pairwise disjoint sets filling the disc less the arcs: a predicate of the theorem's arcs and pieces, the data a sector point is given with — not a hand result and not the classical theta-curve theorem, whose half 'the cut disc has three components' it takes as given; no declaration concludes it (as `IsTriod`; an open gate item of FS124-L2)",
+  .condition ``HadwigerNelson.Rigidity.EntropySplitEvery "PE-2 as derived (FS100-PE2: the entropy of the second part zero at every unit vector), a property of the field F compared with the form the headline reads: its one taker, entropySplit_of_every, proves that it implies EntropySplit F, which the kernel holds with no such hypothesis (Rigidity.entropySplit, on the declared import positive_entropy_rigidity); no theorem assumes it, and no declaration exhibits it (FS131-LGT1)",
+  .condition ``HadwigerNelson.Rigidity.IsRamified "a stable prime of F(i) ramified over F (conjugation trivial on its residue field): a predicate of the theorem's prime; at F = ℚ the prime of ℤ[i] above 2 is one, by hand, and no declaration exhibits it (FS131-LGT1)",
+  .condition ``HadwigerNelson.Rigidity.SIndep "I is independent in the Cayley graph of S: a predicate of the theorem's sets; the empty set satisfies it for every S, and no declaration states it (FS131-LGT1)",
   .condition ``HadwigerNelson.SixRing.FourCycleStraddle "the four-set hypothesis of C132-M-ORBIT (four compact sets through the centre whose straddle regions miss the essential supports of the consecutive labels of a four-cycle): a predicate of the theorem's colouring, centre, labels and sets, taken only to be refuted together with OutsideOrbit under a weak six-colouring (no_outside_orbit, not_ae_outside); the constant colouring satisfies it and is not weak (FS132-L2)",
   .condition ``HadwigerNelson.SixRing.OutsideOrbit "the ring hypothesis of C132-M-ORBIT, clauses (i) and (ii), at a centre, a base angle and a width: a predicate of the theorem's colouring, centre, two labels and angle, taken only to be refuted (no_outside_orbit_points) or carried by the leaves under that refutation; no declaration exhibits one (FS132-L2)",
-  .condition ``HadwigerNelson.SpectralInputs.IsHaarFourier
-    "m is a measure with Haar's Fourier coefficients: a predicate of the theorem's measure; its one existence theorem is from Herglotz–Bochner, declared",
-  .condition ``HadwigerNelson.SpectralChain.IsTraceSpectral "σ is a trace spectral measure of μ: a predicate of the theorem's two measures (existence is from Herglotz–Bochner, declared)",
-  .condition ``HadwigerNelson.SpectralInputs.IsSpectralMeasureOf "σ is a spectral measure of f: a predicate of the theorem's vector and measure; no declaration exhibits one (an open gate item of FS131-L10A)",
   .condition ``HadwigerNelson.SpernerGrid.Rainbow "three labels are pairwise distinct: a decidable predicate of the theorem's labels",
   .condition ``HadwigerNelson.Strip.WindowProper "a proper colouring of an L-column window: a predicate of the theorem's window colouring",
   .condition ``HadwigerNelson.Thomassen.IsTwoSep "a 2-separator of a graph: a predicate of the theorem's two vertices"
