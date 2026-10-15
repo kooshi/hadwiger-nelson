@@ -1,0 +1,60 @@
+slot: waiting (ledger 20 + 4 > budget 22 GiB)
+slot: admitted itk1: mem 4 GiB (hard cap), cpus 1,2
+data/fs131/itk1/work/Multipliers.lean:32:8: warning: automatically included section variable(s) unused in theorem `_private.data.fs131.itk1.work.Multipliers.0.HadwigerNelson.Rigidity.multiplier_mem`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/itk1/work/Multipliers.lean:79:8: warning: automatically included section variable(s) unused in theorem `_private.data.fs131.itk1.work.Multipliers.0.HadwigerNelson.Rigidity.embedding_iL`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/itk1/work/Multipliers.lean:97:71: error: unsolved goals
+case a
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+v : InfinitePlace ↥(fieldI F)
+b : ℕ
+q₁ : ℚ := (1 - 4 * ↑b ^ 2) / (1 + 4 * ↑b ^ 2)
+q₂ : ℚ := 4 * ↑b / (1 + 4 * ↑b ^ 2)
+⊢ (1 - 4 * ↑b ^ 2) / (1 + 4 * ↑b ^ 2) = ((1 - 4 * ↑b ^ 2) / (1 + 4 * ↑b ^ 2)).re + -(4 * ↑b / (1 + 4 * ↑b ^ 2)).im
+
+case a
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+v : InfinitePlace ↥(fieldI F)
+b : ℕ
+q₁ : ℚ := (1 - 4 * ↑b ^ 2) / (1 + 4 * ↑b ^ 2)
+q₂ : ℚ := 4 * ↑b / (1 + 4 * ↑b ^ 2)
+⊢ 4 * ↑b / (1 + 4 * ↑b ^ 2) = ((1 - 4 * ↑b ^ 2) / (1 + 4 * ↑b ^ 2)).im + (4 * ↑b / (1 + 4 * ↑b ^ 2)).re
+data/fs131/itk1/work/Multipliers.lean:118:69: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+b : ℕ
+x : ↥(fieldI F) := unitL (multiplier F b)
+hxdef : x = unitL (multiplier F b)
+zb : ↥(fieldI F) := 1 - ↑(2 * b) * iL F
+hzb : zb = 1 - ↑(2 * b) * iL F
+z : ↥(fieldI F) := 1 + ↑(2 * b) * iL F
+hz : z = 1 + ↑(2 * b) * iL F
+⊢ ↑2 = 2 ∨ b = 0
+data/fs131/itk1/work/Multipliers.lean:119:67: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+b : ℕ
+x : ↥(fieldI F) := unitL (multiplier F b)
+hxdef : x = unitL (multiplier F b)
+zb : ↥(fieldI F) := 1 - ↑(2 * b) * iL F
+hzb : zb = 1 - ↑(2 * b) * iL F
+z : ↥(fieldI F) := 1 + ↑(2 * b) * iL F
+hz : z = 1 + ↑(2 * b) * iL F
+hzbC : ↑zb = 1 - 2 * ↑b * Complex.I
+⊢ ↑2 = 2 ∨ b = 0
+data/fs131/itk1/work/Multipliers.lean:141:20: error(lean.unknownIdentifier): Unknown identifier `absAt_nonneg`
+data/fs131/itk1/work/Multipliers.lean:141:54: error(lean.unknownIdentifier): Unknown identifier `absAt_eq_zero`
+data/fs131/itk1/work/Multipliers.lean:145:12: error(lean.unknownIdentifier): Unknown identifier `absAt_mul`
+seconds=225
+exit=1

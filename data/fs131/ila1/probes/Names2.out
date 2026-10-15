@@ -1,0 +1,85 @@
+@ZMod.ringHom_eq_of_ker_eq : ∀ {n : ℕ} {R : Type u_1} [inst : Ring R] (f g : R →+* ZMod n),
+  RingHom.ker f = RingHom.ker g → f = g
+@Ideal.exists_isMaximal_dvd_of_dvd_absNorm : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S]
+  [inst_2 : Module.Free ℤ S] [Module.Finite ℤ S] {p : ℤ},
+  Prime p → ∀ (I : Ideal S), p ∣ ↑(Ideal.absNorm I) → ∃ P, P.IsMaximal ∧ Ideal.under ℤ P = Ideal.span {p} ∧ P ∣ I
+@Ideal.liesOver_span_iff : ∀ {R : Type u_1} {S : Type u_2} [inst : CommSemiring R] [inst_1 : CommSemiring S]
+  [NoZeroDivisors R] [Ring.KrullDimLE 1 R] [inst_4 : Algebra R S] {P : Ideal S} {p : R},
+  P ≠ ⊤ → Prime p → (P.LiesOver (Ideal.span {p}) ↔ (algebraMap R S) p ∈ P)
+@Separable.aeval_derivative_ne_zero : ∀ {R : Type u_1} [inst : CommSemiring R] {S : Type u_2} [inst_1 : CommSemiring S]
+  [Nontrivial S] [inst_3 : Algebra R S] {p : R[X]},
+  p.Separable → ∀ {x : S}, (aeval x) p = 0 → (aeval x) (derivative p) ≠ 0
+@minpoly.isIntegrallyClosed_eq_field_fractions' : ∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R]
+  [inst_1 : CommRing S] [IsDomain R] [inst_3 : Algebra R S] (K : Type u_3) [inst_4 : Field K] [inst_5 : Algebra R K]
+  [IsFractionRing R K] [IsIntegrallyClosed R] [IsDomain S] [inst_9 : Algebra K S] [IsScalarTower R K S] {s : S},
+  IsIntegral R s → minpoly K s = map (algebraMap R K) (minpoly R s)
+@IsAlgebraic.exists_integral_multiple : ∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : Ring A]
+  [inst_2 : Algebra R A] {z : A}, IsAlgebraic R z → ∃ y, y ≠ 0 ∧ IsIntegral R (y • z)
+@padicValNat.mul : ∀ {p a b : ℕ} [hp : Fact (Nat.Prime p)],
+  a ≠ 0 → b ≠ 0 → padicValNat p (a * b) = padicValNat p a + padicValNat p b
+@padicValNat_self : ∀ {p : ℕ} [Fact (Nat.Prime p)], padicValNat p p = 1
+@padicValNat.eq_zero_of_not_dvd : ∀ {p n : ℕ}, ¬p ∣ n → padicValNat p n = 0
+@Subfield.toIntermediateField : {K : Type u_1} →
+  {L : Type u_2} →
+    [inst : Field K] →
+      [inst_1 : Field L] →
+        [inst_2 : Algebra K L] → (S : Subfield L) → (∀ (x : K), (algebraMap K L) x ∈ S) → IntermediateField K L
+@IntermediateField.adjoin_simple_le_iff : ∀ {F : Type u_1} [inst : Field F] {E : Type u_2} [inst_1 : Field E]
+  [inst_2 : Algebra F E] {α : E} {K : IntermediateField F E}, F⟮α⟯ ≤ K ↔ α ∈ K
+@IntermediateField.finrank_top' : ∀ {F : Type u_1} [inst : Field F] {E : Type u_2} [inst_1 : Field E]
+  [inst_2 : Algebra F E], Module.finrank F ↥⊤ = Module.finrank F E
+@injective_iff_map_eq_one : ∀ {F : Type u_1} {G : Type u_2} {H : Type u_3} [inst : Group G] [inst_1 : MulOneClass H]
+  [inst_2 : FunLike F G H] [MonoidHomClass F G H] (f : F), Function.Injective ⇑f ↔ ∀ (a : G), f a = 1 → a = 1
+@Set.Infinite.exists_notMem_finset : ∀ {α : Type u_1} {s : Set α}, s.Infinite → ∀ (t : Finset α), ∃ a ∈ s, a ∉ t
+@Set.infinite_range_of_injective : ∀ {α : Type u_1} {β : Type u_2} [Infinite α] {f : α → β},
+  Function.Injective f → (Set.range f).Infinite
+@mem_roots : ∀ {R : Type u_1} {a : R} [inst : CommRing R] [inst_1 : IsDomain R] {p : R[X]},
+  p ≠ 0 → (a ∈ p.roots ↔ p.IsRoot a)
+Nat.exists_infinite_primes : ∀ (n : ℕ), ∃ p, n ≤ p ∧ Nat.Prime p
+@Ideal.sup_pow_eq_top : ∀ {R : Type u_1} [inst : Semiring R] {I J : Ideal R} [I.IsTwoSided] {n : ℕ},
+  I ⊔ J = ⊤ → I ⊔ J ^ n = ⊤
+@IsCoprime.pow_left : ∀ {R : Type u_1} [inst : CommSemiring R] {x y : R} {m : ℕ}, IsCoprime x y → IsCoprime (x ^ m) y
+@Ideal.isCoprime_iff_sup_eq : ∀ {R : Type u_1} [inst : CommSemiring R] {I J : Ideal R}, IsCoprime I J ↔ I ⊔ J = ⊤
+@Ideal.mul_le_left : ∀ {R : Type u_1} [inst : Semiring R] {I J : Ideal R}, I * J ≤ J
+@Ideal.IsMaximal.eq_of_le : ∀ {α : Type u_1} [inst : Semiring α] {I J : Ideal α}, I.IsMaximal → J ≠ ⊤ → I ≤ J → I = J
+@eval_intCast_map : ∀ {R : Type u_1} {S : Type u_2} [inst : Ring R] [inst_1 : Ring S] (f : R →+* S) (p : R[X]) (i : ℤ),
+  eval (↑i) (map f p) = f (eval (↑i) p)
+@eval_map : ∀ {R : Type u_1} {S : Type u_2} [inst : Semiring R] {p : R[X]} [inst_1 : Semiring S] (f : R →+* S) (x : S),
+  eval x (map f p) = eval₂ f x p
+@Ideal.Quotient.lift : {R : Type u_1} →
+  [inst : Ring R] →
+    (I : Ideal R) →
+      {S : Type u_2} →
+        [inst_1 : I.IsTwoSided] → [inst_2 : Semiring S] → (f : R →+* S) → (∀ a ∈ I, f a = 0) → R ⧸ I →+* S
+@Ideal.map_span : ∀ {R : Type u_1} {S : Type u_2} {F : Type u_3} [inst : Semiring R] [inst_1 : Semiring S]
+  [inst_2 : FunLike F R S] (f : F) [RingHomClass F R S] (s : Set R), Ideal.map f (Ideal.span s) = Ideal.span (⇑f '' s)
+@Ideal.span_singleton_le_iff_mem : ∀ {α : Type u_1} [inst : Semiring α] (I : Ideal α) {x : α},
+  Ideal.span {x} ≤ I ↔ x ∈ I
+padicValInt : ℕ → ℤ → ℕ
+@padicValRat.of_int : ∀ {p : ℕ} {z : ℤ}, padicValRat p ↑z = ↑(padicValInt p z)
+@padicValInt.of_nat : ∀ {p n : ℕ}, padicValInt p ↑n = padicValNat p n
+padicValInt : ℕ → ℤ → ℕ
+@Int.natAbs_dvd_natAbs : ∀ {a b : ℤ}, a.natAbs ∣ b.natAbs ↔ a ∣ b
+Algebra.IsSeparable.isSeparable : ∀ (F : Type u_1) {K : Type u_2} [inst : CommRing F] [inst_1 : Ring K]
+  [inst_2 : Algebra F K] [Algebra.IsSeparable F K] (x : K), IsSeparable F x
+@Ideal.pow_le_self : ∀ {R : Type u_1} [inst : Semiring R] {I : Ideal R} {n : ℕ}, n ≠ 0 → I ^ n ≤ I
+@Ideal.pow_right_strictAnti : ∀ {A : Type u_1} [inst : CommRing A] [IsDedekindDomain A] (I : Ideal A),
+  I ≠ ⊥ → I ≠ ⊤ → StrictAnti fun x => I ^ x
+@Ideal.eq_top_iff_one : ∀ {α : Type u_1} [inst : Semiring α] (I : Ideal α), I = ⊤ ↔ 1 ∈ I
+@Submodule.mem_sup : ∀ {R : Type u_1} {M : Type u_2} [inst : Semiring R] [inst_1 : AddCommMonoid M]
+  [inst_2 : Module R M] {x : M} {p p' : Submodule R M}, x ∈ p ⊔ p' ↔ ∃ y ∈ p, ∃ z ∈ p', y + z = x
+data/fs131/ila1/probes/Names2.lean:40:8: error(lean.unknownIdentifier): Unknown constant `Ideal.mem_sup`
+@Ideal.IsPrime.mem_of_pow_mem : ∀ {α : Type u_1} [inst : Semiring α] {I : Ideal α},
+  I.IsPrime → ∀ {r : α} (n : ℕ), r ^ n ∈ I → r ∈ I
+IsScalarTower.algebraMap_apply : ∀ (R : Type u_1) (S : Type u_2) (A : Type u_3) [inst : CommSemiring R]
+  [inst_1 : CommSemiring S] [inst_2 : Semiring A] [inst_3 : Algebra R S] [inst_4 : Algebra S A] [inst_5 : Algebra R A]
+  [IsScalarTower R S A] (x : R), (algebraMap R A) x = (algebraMap S A) ((algebraMap R S) x)
+@RingOfIntegers.coe_injective : ∀ {K : Type u_1} [inst : Field K], Function.Injective ⇑(algebraMap (𝓞 K) K)
+@Algebra.IsAlgebraic.isAlgebraic : ∀ {R : Type u_1} {A : Type u_2} {inst : CommRing R} {inst_1 : Ring A}
+  {inst_2 : Algebra R A} [self : Algebra.IsAlgebraic R A] (x : A), IsAlgebraic R x
+@RingOfIntegers.ext : ∀ {K : Type u_1} [inst : Field K] {x y : 𝓞 K}, ↑x = ↑y → x = y
+data/fs131/ila1/probes/Names2.lean:46:8: warning: `IntermediateField.adjoin_simple_toSubalgebra_of_integral` has been deprecated: Use `adjoin_simple_toSubalgebra_of_isAlgebraic` instead
+@IntermediateField.adjoin_simple_toSubalgebra_of_integral : ∀ {F : Type u_1} [inst : Field F] {E : Type u_2}
+  [inst_1 : Field E] [inst_2 : Algebra F E] {α : E}, IsIntegral F α → F⟮α⟯.toSubalgebra = F[α]
+data/fs131/ila1/probes/Names2.lean:47:8: error(lean.unknownIdentifier): Unknown constant `Ideal.absNorm_mul`
+@Ideal.mul_le_right : ∀ {R : Type u_1} [inst : Semiring R] {I J : Ideal R} [I.IsTwoSided], I * J ≤ I

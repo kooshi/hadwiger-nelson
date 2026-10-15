@@ -1,0 +1,12 @@
+Proofs/HadwigerNelson/Rigidity/GlobalPoint.lean:61:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/GlobalPoint.lean:65:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/GlobalPoint.lean:111:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/GlobalPoint.lean:115:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/GlobalPoint.lean:120:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/GlobalPoint.lean:127:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/GlobalPoint.lean:134:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/GlobalPoint.lean:147:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/GlobalPoint.lean:158:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/GlobalPoint.lean:173:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/GlobalPoint.lean:179:8: warning: declaration uses `sorry`
+exit=0

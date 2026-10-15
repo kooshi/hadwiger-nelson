@@ -1,0 +1,14 @@
+slot: waiting (ledger 22 + 4 > budget 22 GiB)
+slot: admitted ij1: mem 4 GiB (hard cap), cpus 6,7
+data/fs131/ij1/work/Herglotz.lean:216:8: warning: declaration uses `sorry`
+data/fs131/ij1/work/Herglotz.lean:239:28: error: elaboration function for `Mathlib.Tactic.superscriptTerm` has not been implemented
+  ᵇ
+data/fs131/ij1/work/Herglotz.lean:240:53: error: Function expected at
+  χ
+but this term has type
+  ?m.156
+
+Note: Expected a function because this term is being applied to the argument
+  y
+seconds=55
+exit=1

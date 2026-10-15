@@ -1,0 +1,15 @@
+slot: admitted kn8s: mem 4 GiB (hard cap), cpus 4,5
+Proofs/HadwigerNelson/Rigidity/DualGroup.lean:64:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/DualGroup.lean:68:16: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/DualGroup.lean:75:16: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/DualGroup.lean:82:16: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/DualGroup.lean:88:16: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/DualGroup.lean:93:9: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/DualGroup.lean:100:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/DualGroup.lean:107:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/DualGroup.lean:117:9: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/DualGroup.lean:126:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/DualGroup.lean:133:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/DualGroup.lean:143:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/DualGroup.lean:148:8: warning: declaration uses `sorry`
+exit=0

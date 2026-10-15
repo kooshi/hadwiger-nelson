@@ -1,0 +1,20 @@
+slot: waiting (ledger 20 + 4 > budget 22 GiB)
+slot: admitted itt1: mem 4 GiB (hard cap), cpus 6,7
+data/fs131/itt1/work/TateCharacter.lean:212:21: error: Application type mismatch: The argument
+  fun r => ?m.25
+has type
+  (r : ?m.23) → ?m.26 r
+but is expected to have type
+  AddChar ?m.19 ?m.20
+in the application
+  AddChar.ext fun r => ?m.25
+data/fs131/itt1/work/TateCharacter.lean:221:21: error: Application type mismatch: The argument
+  fun r => ?m.22
+has type
+  (r : ?m.20) → ?m.23 r
+but is expected to have type
+  AddChar ?m.16 ?m.17
+in the application
+  AddChar.ext fun r => ?m.22
+seconds=196
+exit=1

@@ -1,0 +1,7 @@
+slot: admitted in1l: mem 4 GiB (hard cap), cpus 4,5
+@HadwigerNelson.Rigidity.badStarts.congr_simp : ∀ {α : Type u_1} {inst : DecidableEq α} [inst_1 : DecidableEq α]
+  {n k : ℕ} (𝒢 𝒢_1 : Finset (Fin k → α)),
+  𝒢 = 𝒢_1 →
+    ∀ (w w_1 : Fin n → α), w = w_1 → HadwigerNelson.Rigidity.badStarts 𝒢 w = HadwigerNelson.Rigidity.badStarts 𝒢_1 w_1
+seconds=10
+exit=0

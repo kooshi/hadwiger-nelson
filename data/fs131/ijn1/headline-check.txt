@@ -1,0 +1,49 @@
+slot: admitted ijn1e: mem 4 GiB (hard cap), cpus 1,2
+CONCLUSION new vs old: SAME
+  new: min (HadwigerNelson.SpectralChain.localBound F) 5 ≤
+  (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+  old: min (HadwigerNelson.SpectralChain.localBound F) 5 ≤
+  (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+CONTROL old conclusion vs hRow99's conclusion: DIFFERENT (must be DIFFERENT)
+HYPOTHESES of the new headline (2), after `F` and `[NumberField F]`:
+  HadwigerNelson.Plane.OneAvoidingDensityBound
+  HadwigerNelson.SpectralChain.localBound F ≤ 4 →
+  HadwigerNelson.SpectralChain.localBound F ≤
+    (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+HYPOTHESES of the old headline (8):
+  HadwigerNelson.SpectralChain.BochnerHerglotz ↥(HadwigerNelson.SpectralChain.unitRing F)
+  HadwigerNelson.SpectralChain.InvariantMeasureOnClosed F
+  (HadwigerNelson.Rigidity.chainInterface F).Count
+  (HadwigerNelson.Rigidity.chainInterface F).APlusOfR88
+  HadwigerNelson.Rigidity.EntropySplit F
+  HadwigerNelson.Rigidity.NoRamifiedStableDyadic F → HadwigerNelson.Rigidity.ZeroEntropyCarried F
+  5 ≤ HadwigerNelson.SpectralChain.localBound F → HadwigerNelson.SpectralChain.TCA F
+  HadwigerNelson.SpectralChain.localBound F ≤ 4 →
+  HadwigerNelson.SpectralChain.localBound F ≤
+    (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+hRow99 new vs old: SAME
+STORED TYPE (pp.explicit):
+∀ (F : @Subfield.{0} Real Real.instDivisionRing) [@NumberField.{0} (↥F) (@Subfield.toField.{0} Real Real.instField F)],
+  HadwigerNelson.Plane.OneAvoidingDensityBound →
+    (@LE.le.{0} ENat instLEENat (HadwigerNelson.SpectralChain.localBound F)
+          (@OfNat.ofNat.{0} ENat (nat_lit 4) (@instOfNatAtLeastTwo.{0} ENat (nat_lit 4) ENat.instNatCast ⋯)) →
+        @LE.le.{0} ENat instLEENat (HadwigerNelson.SpectralChain.localBound F)
+          (@SimpleGraph.chromaticNumber.{0} (@Set.Elem.{0} Complex (HadwigerNelson.planeOver F))
+            (@SimpleGraph.induce.{0} Complex (HadwigerNelson.planeOver F)
+              (@HadwigerNelson.unitDistance.{0} Complex
+                (@NormedField.toMetricSpace.{0} Complex Complex.instNormedField))))) →
+      @LE.le.{0} ENat instLEENat
+        (@min.{0} ENat
+          (@SemilatticeInf.toMin.{0} ENat
+            (@Lattice.toSemilatticeInf.{0} ENat
+              (@ConditionallyCompleteLattice.toLattice.{0} ENat
+                (@ConditionallyCompleteLinearOrder.toConditionallyCompleteLattice.{0} ENat
+                  (@ConditionallyCompleteLinearOrderBot.toConditionallyCompleteLinearOrder.{0} ENat
+                    (@CompleteLinearOrder.toConditionallyCompleteLinearOrderBot.{0} ENat
+                      instCompleteLinearOrderENat))))))
+          (HadwigerNelson.SpectralChain.localBound F)
+          (@OfNat.ofNat.{0} ENat (nat_lit 5) (@instOfNatAtLeastTwo.{0} ENat (nat_lit 5) ENat.instNatCast ⋯)))
+        (@SimpleGraph.chromaticNumber.{0} (@Set.Elem.{0} Complex (HadwigerNelson.planeOver F))
+          (@SimpleGraph.induce.{0} Complex (HadwigerNelson.planeOver F)
+            (@HadwigerNelson.unitDistance.{0} Complex
+              (@NormedField.toMetricSpace.{0} Complex Complex.instNormedField))))

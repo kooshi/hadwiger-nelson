@@ -1,0 +1,16 @@
+records: 121 (printer count 121); CLEAN 114; OPEN-LEAF 7
+  APlus: 30 records, 25 CLEAN
+  ContinuityGroup: 28 records, 28 CLEAN
+  SpectralSubspace: 40 records, 40 CLEAN
+  TraceSplit: 23 records, 21 CLEAN
+  OPEN-LEAF APlus HadwigerNelson.Rigidity.aPlusOfR88: from ['HadwigerNelson.Rigidity.bochnerOn_tauPrime']
+  OPEN-LEAF APlus HadwigerNelson.Rigidity.aplus_model: from ['HadwigerNelson.Rigidity.exists_rotInvariant_of_shiftInvariant', 'HadwigerNelson.Rigidity.exists_shiftInvariant_on']
+  OPEN-LEAF APlus HadwigerNelson.Rigidity.equalAtUnits_of_not_neg: from ['HadwigerNelson.Rigidity.bochnerOn_tauPrime']
+  OPEN-LEAF APlus HadwigerNelson.Rigidity.factorLaw_trace_null: from ['HadwigerNelson.Rigidity.bochnerOn_tauPrime']
+  OPEN-LEAF APlus HadwigerNelson.Rigidity.nonempty_invariantColouring_bot: from ['HadwigerNelson.Rigidity.exists_rotInvariant_of_shiftInvariant', 'HadwigerNelson.Rigidity.exists_shiftInvariant_on']
+  OPEN-LEAF TraceSplit HadwigerNelson.Rigidity.setIntegral_compl_TA_re: from ['HadwigerNelson.Rigidity.bochnerOn_tauPrime']
+  OPEN-LEAF TraceSplit HadwigerNelson.Rigidity.setIntegral_compl_TA_re_nonpos: from ['HadwigerNelson.Rigidity.bochnerOn_tauPrime']
+planted record: reported, resting on HadwigerNelson.Rigidity.positive_entropy_rigidity
+info: bochnerOn_tauPrime ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx'], sorry from ['HadwigerNelson.Rigidity.bochnerOn_tauPrime']
+info: invariantMeasureOnClosed_of_countable ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx'], sorry from ['HadwigerNelson.Rigidity.exists_rotInvariant_of_shiftInvariant', 'HadwigerNelson.Rigidity.exists_shiftInvariant_on']
+PASS

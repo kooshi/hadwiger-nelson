@@ -1,0 +1,12 @@
+slot: admitted icl1: mem 5 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Plane/WindowDensity.lean:230:5: warning: Variable name `hD` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Proofs/HadwigerNelson/Plane/WindowDensity.lean:257:53: warning: Variable name `hm0` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+wall=8.88s maxrss=3456052kB

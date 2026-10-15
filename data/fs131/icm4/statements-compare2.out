@@ -1,0 +1,215 @@
+BINDER-MISS HadwigerNelson.Rigidity.tca_iff (ClassRatio): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.RatioAtMost (ClassRatio): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.unitVectorsR (CountCompletion): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.exists_invariantColouring_rat (CountModels): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.not_r88TCA_rat (CountModels): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.ratColouring (CountModels): names Subfield, lacks NumberField
+ADDED-INTERNAL HadwigerNelson.BinaryField.step_lt._proof_1_1
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.iterate_step_ne_zero
+ADDED-INTERNAL HadwigerNelson.BinaryField.pass_snd._proof_1_6
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.exists_iterate_step_eq
+ADDED-INTERNAL HadwigerNelson.BinaryField.orbitOk.eq_2
+ADDED-INTERNAL HadwigerNelson.BinaryField.colorable_four_of_check._proof_1_2
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.exists_code
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.IsPrimitiveCode.one_le
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.primCheck
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.charP_two_of_card
+ADDED-INTERNAL HadwigerNelson.BinaryField.normOne_eq_image._proof_1_2
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.IsPrimitiveCode.first
+ADDED-INTERNAL HadwigerNelson.BinaryField.orbitOk.eq_1
+ADDED-INTERNAL HadwigerNelson.BinaryField.orbitOk._f
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.step_zero
+ADDED-INTERNAL HadwigerNelson.BinaryField.pass_snd._proof_1_5
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.isPrimitiveCode_of_check
+ADDED-INTERNAL HadwigerNelson.BinaryField.pass._sunfold
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.orbitOk
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.iterate_step_injOn
+ADDED-INTERNAL HadwigerNelson.BinaryField.isPrimitiveCode_of_check._proof_1_4
+ADDED-INTERNAL HadwigerNelson.BinaryField.IsPrimitiveCode.one_le._proof_1_1
+ADDED-INTERNAL HadwigerNelson.BinaryField.step.eq_1
+ADDED-GENERATED HadwigerNelson.BinaryField.pass.eq_def
+ADDED-INTERNAL HadwigerNelson.BinaryField.orbitOk_iff.match_1_1
+ADDED-INTERNAL HadwigerNelson.BinaryField.charSum_ge_of_classes._proof_1_5
+ADDED-INTERNAL HadwigerNelson.BinaryField.pass._unsafe_rec
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Arith.BinaryField.0.HadwigerNelson.BinaryField.pass.match_1.eq_1
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Arith.BinaryField.0.HadwigerNelson.BinaryField.pass.match_1.eq_2
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.pass_snd
+ADDED-INTERNAL HadwigerNelson.BinaryField.charSum_ge_of_classes._simp_1_2
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.IsPrimitiveCode.recOn
+ADDED-INTERNAL HadwigerNelson.BinaryField.charSum_ge_of_classes._proof_1_6
+ADDED-INTERNAL HadwigerNelson.BinaryField.pass_snd._proof_1_7
+ADDED-INTERNAL HadwigerNelson.BinaryField.orbitOk_iff._f
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.step_lt
+ADDED-INTERNAL HadwigerNelson.BinaryField.orbitOk.match_1
+ADDED-INTERNAL HadwigerNelson.BinaryField.charSum_ge_of_classes._proof_1_1
+ADDED-INTERNAL HadwigerNelson.BinaryField.exists_root._proof_1_1
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.IsPrimitiveCode.pos
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.exists_root_pow_eq
+ADDED-INTERNAL HadwigerNelson.BinaryField.pass_class._proof_1_1
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.orbitOk_iff
+ADDED-INTERNAL HadwigerNelson.BinaryField.primCheck.eq_1
+ADDED-GENERATED HadwigerNelson.BinaryField.orbitOk.eq_def
+ADDED-INTERNAL HadwigerNelson.BinaryField.IsPrimitiveCode.mk._flat_ctor
+ADDED-INTERNAL HadwigerNelson.BinaryField.colorable_four_of_check._simp_1_1
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.root_pow_eq_one
+ADDED-INTERNAL HadwigerNelson.BinaryField.pass._f
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.IsPrimitiveCode.deg
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.ev_step
+ADDED-INTERNAL HadwigerNelson.BinaryField.orbitOk_iff._proof_1_8
+ADDED-INTERNAL HadwigerNelson.BinaryField.pass.match_1
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Arith.BinaryField.0.HadwigerNelson.BinaryField.pass.match_1.splitter
+ADDED-INTERNAL HadwigerNelson.BinaryField.orbitOk_iff._proof_1_6
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.exists_addChar
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.IsPrimitiveCode.testBit_gt
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.ev_ne_zero
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.IsPrimitiveCode.testBit_deg
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.charSum_ge_of_classes
+ADDED-INTERNAL HadwigerNelson.BinaryField.pass_snd._proof_1_4
+ADDED-INTERNAL HadwigerNelson.BinaryField.charSum_ge_of_classes._proof_1_4
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.ev_iterate_step
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.ev_inj
+ADDED-INTERNAL HadwigerNelson.BinaryField.orbitOk_iff._proof_1_7
+ADDED-INTERNAL HadwigerNelson.BinaryField.isPrimitiveCode_of_check._proof_1_5
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.iterate_step_lt
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.colourCheck
+ADDED-INTERNAL HadwigerNelson.BinaryField.ev_ne_zero._proof_1_1
+ADDED-INTERNAL HadwigerNelson.BinaryField.IsPrimitiveCode.testBit_gt._proof_1_1
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.pass
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.normOne_eq_image
+ADDED-INTERNAL HadwigerNelson.BinaryField.normOne_eq_image._proof_1_1
+ADDED-INTERNAL HadwigerNelson.BinaryField.sq_facts._proof_1_1
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.sq_facts
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.IsPrimitiveCode.period
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.root_pow_inj
+ADDED-INTERNAL HadwigerNelson.BinaryField.orbitOk._unsafe_rec
+ADDED-INTERNAL HadwigerNelson.BinaryField.charSum_ge_of_classes._simp_1_3
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.pass_class
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.exists_root
+ADDED-INTERNAL HadwigerNelson.BinaryField.isPrimitiveCode_of_check._simp_1_2
+ADDED-INTERNAL HadwigerNelson.BinaryField.orbitOk._sunfold
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.IsPrimitiveCode.rec
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Arith.BinaryField.0.HadwigerNelson.BinaryField.orbitOk.match_1.eq_2
+ADDED-INTERNAL HadwigerNelson.BinaryField.iterate_step_ne_zero._proof_1_1
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Arith.BinaryField.0.HadwigerNelson.BinaryField.orbitOk.match_1.splitter
+ADDED-INTERNAL HadwigerNelson.BinaryField.pass.eq_1
+ADDED-INTERNAL HadwigerNelson.BinaryField.isPrimitiveCode_of_check._proof_1_3
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.exists_ev_iterate_step
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.colorable_four_of_check
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.exists_code_fun
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Arith.BinaryField.0.HadwigerNelson.BinaryField.orbitOk.match_1.eq_1
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.IsPrimitiveCode
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.IsPrimitiveCode.mk
+ADDED-INTERNAL HadwigerNelson.BinaryField.pass.eq_2
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.step
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.IsPrimitiveCode.casesOn
+NEW-MODULE BinaryField HadwigerNelson.BinaryField.minimalPeriod_step
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.colorable_four_two_pow
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.P8
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.P12
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.colour8
+ADDED-INTERNAL HadwigerNelson.DyadicCerts.counts64_ok._proof_1_1
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.colour32
+ADDED-INTERNAL HadwigerNelson.DyadicCerts.colour4._proof_1_1
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.E4
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.prim4
+ADDED-INTERNAL HadwigerNelson.DyadicCerts.prim8._proof_1_1
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.prim8
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.colour16
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.E16
+ADDED-INTERNAL HadwigerNelson.DyadicCerts.countsOk64.eq_1
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.class64_le
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.E32
+ADDED-INTERNAL HadwigerNelson.DyadicCerts.counts64.eq_1
+ADDED-INTERNAL HadwigerNelson.DyadicCerts.prim6._proof_1_1
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.charSum_64_ge
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.counts64
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.P10
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.E8
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.prim6
+ADDED-INTERNAL HadwigerNelson.DyadicCerts.prim10._proof_1_1
+ADDED-INTERNAL HadwigerNelson.DyadicCerts.prim4._proof_1_1
+ADDED-INTERNAL HadwigerNelson.DyadicCerts.colour16._proof_1_1
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.countsOk64
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.colour4
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.P4
+ADDED-INTERNAL HadwigerNelson.DyadicCerts.prim12._proof_1_1
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.prim12
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.P6
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.B64
+ADDED-INTERNAL HadwigerNelson.DyadicCerts.colour8._proof_1_1
+ADDED-INTERNAL HadwigerNelson.DyadicCerts.colour32._proof_1_1
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.counts64_ok
+NEW-MODULE DyadicCerts HadwigerNelson.DyadicCerts.prim10
+ADDED-INTERNAL HadwigerNelson.DyadicCerts.colorable_four_two_pow._proof_1_1
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.exists_conj_sub_notMem
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvTAt._proof_6
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.norm_charSum_le_of_resT
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvTAt._proof_3
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvTAt._proof_7
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvTAt._proof_5
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvTAt._proof_4
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvTAt._proof_9
+ADDED-INTERNAL _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvTAt._proof_8
+SAME=136 CHANGED=0 RULED=0 MISSING=0 ADDED-INTERNAL=74 ADDED-GENERATED=2 NEW-MODULE=70 ADDED-PUBLIC=0
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.σK
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.sum_Kn
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.recOn
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.rec
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.σu
+PRIVATE-HYGIENE _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInvT.pm_of_good
+PRIVATE-HYGIENE _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInvT.add_mem_Kn
+PRIVATE-HYGIENE _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInvT.norm_sum_le
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.ι
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv
+PRIVATE-HYGIENE _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInvT.card_Kn_sq
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.charBound_of_charBound_one
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.σι
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.ι_sq
+PRIVATE-HYGIENE _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInvT.card_lift
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.sub_mem_Kn
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.card_res_fibre
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.Kp
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.Kn
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.two_u
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvAt_K
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.mk.sizeOf_spec
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.noConfusion
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.card_fibre
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.card_Kp_eq
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.mem_Kn
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.card_Kf_eq
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.sq
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvAt
+PRIVATE-HYGIENE _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInvT.Kn
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.σ
+PRIVATE-HYGIENE _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInvT.Kf
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.card_Kn_sq
+PRIVATE-PROOFARGS _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvTAt
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.Kf
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.card_levelSet_succ
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.noConfusionType
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.invol
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.mem_Kp
+PRIVATE-HYGIENE _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInvT.mem_Kn
+PRIVATE-HYGIENE _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInvT.sum_Kn
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.K
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.mk
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.casesOn
+PRIVATE-HYGIENE _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInvT.mem_Kf
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.card_lift
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.u
+PRIVATE-HYGIENE _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInvT.sub_mem_Kn
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.norm_charSum_new_le
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.mk.injEq
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.add_mem_Kn
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.ctorIdx
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.norm_sum_le
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.mk.noConfusion
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.sqZeroInvAt_σ
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.card_Kn_at
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.pm_of_good
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.card_levelSet_one
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.mem_Kf
+PRIVATE-DELETED _private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.SqZeroInv.mk.inj
+PRIVATE-SAME=132 PRIVATE-CHANGED=0 PRIVATE-MISSING=0 PRIVATE-DELETED=48 PRIVATE-HYGIENE=11 PRIVATE-PROOFARGS=1
+RESULT: PASS

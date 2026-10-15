@@ -1,0 +1,5 @@
+slot: waiting (ledger 21 + 5 > budget 22 GiB)
+slot: admitted ip23: mem 5 GiB (hard cap), cpus 2,3
+seconds=91
+exit=0
+olean=.lake/build/lib/lean/Proofs/HadwigerNelson/Outside/OAI015ErgodicDecomposition.olean

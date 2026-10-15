@@ -1,0 +1,97 @@
+slot: admitted ij2: mem 4 GiB (hard cap), cpus 0,1
+data/fs131/ij2/work/BochnerTau.lean:37:8: warning: declaration uses `sorry`
+data/fs131/ij2/work/BochnerTau.lean:43:8: warning: declaration uses `sorry`
+Try this:
+  [apply] abel_nf
+data/fs131/ij2/work/BochnerTau.lean:716:45: error: unsolved goals
+F : Subfield ℝ
+σ : Measure (Dual F)
+inst✝² : IsFiniteMeasure σ
+inst✝¹ : NumberField ↥F
+N : ℕ
+inst✝ : Fintype (↥(unitRing F) ⧸ nR F N)
+x : ↥(unitRing F) ⧸ nR F N → ↥(unitRing F)
+hx : ∀ (c : ↥(unitRing F) ⧸ nR F N), ↑(x c) = c
+r : ℝ
+hr : ∀ (c : ↥(unitRing F) ⧸ nR F N), ‖(archHom F) (x c)‖ < r
+t : Dual F
+ht : ∀ w ∈ nR F N, t w = 1
+M : ℕ
+hMN : M ∣ N
+δ ε : ℝ
+hE : ∀ (s : ↥(unitRing F)), ‖(archHom F) (M • s)‖ < δ → ∫ (χ : Dual F), ‖↑(χ (M • s)) - 1‖ ∂σ < ε
+y z : ↥(unitRing F)
+hz : ‖(archHom F) z‖ + 2 * r < δ
+hcard : 0 < ↑(Fintype.card (↥(unitRing F) ⧸ nR F N))
+zq : ↥(unitRing F) ⧸ nR F N := ↑z
+hzq : zq = ↑z
+w : ↥(unitRing F) ⧸ nR F N → ↥(unitRing F) := fun c => z + x c - x (c + zq)
+hw : w = fun c => z + x c - x (c + zq)
+hwmem : ∀ (c : ↥(unitRing F) ⧸ nR F N), w c ∈ nR F N
+hwE : ∀ (c : ↥(unitRing F) ⧸ nR F N), ∫ (χ : Dual F), ‖↑(χ (w c)) - 1‖ ∂σ < ε
+χ : Dual F
+a : ↥(unitRing F) ⧸ nR F N → ℂ := fun c => (starRingEnd ℂ) ↑(t (x c)) * ↑(χ (x c))
+ha : a = fun c => (starRingEnd ℂ) ↑(t (x c)) * ↑(χ (x c))
+hna : ∀ (c : ↥(unitRing F) ⧸ nR F N), ‖a c‖ = 1
+v : ℂ := (starRingEnd ℂ) ↑(t z) * ↑(χ z)
+hv : v = (starRingEnd ℂ) ↑(t z) * ↑(χ z)
+hA : twSum x t χ = ∑ c, a c
+hshift : ∑ c, a c = ∑ c, a (c + zq)
+c : ↥(unitRing F) ⧸ nR F N
+⊢ z + x c = x (c + zq) + (z + (x c + -1 • x (c + zq)))
+data/fs131/ij2/work/BochnerTau.lean:761:32: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∫ (a : Dual F), ∑ i ∈ ?m.1571, ‖((fun χ => ↑(χ (w i))) - fun x => 1) a‖ ∂σ
+in the target expression
+  (↑(Fintype.card (↥(unitRing F) ⧸ nR F N)))⁻¹ * ∫ (a : Dual F), ∑ c, ‖↑(a (w c)) - 1‖ ∂σ =
+    (↑(Fintype.card (↥(unitRing F) ⧸ nR F N)))⁻¹ * ∑ c, ∫ (χ : Dual F), ‖↑(χ (w c)) - 1‖ ∂σ
+
+F : Subfield ℝ
+σ : Measure (Dual F)
+inst✝² : IsFiniteMeasure σ
+inst✝¹ : NumberField ↥F
+N : ℕ
+inst✝ : Fintype (↥(unitRing F) ⧸ nR F N)
+x : ↥(unitRing F) ⧸ nR F N → ↥(unitRing F)
+hx : ∀ (c : ↥(unitRing F) ⧸ nR F N), ↑(x c) = c
+r : ℝ
+hr : ∀ (c : ↥(unitRing F) ⧸ nR F N), ‖(archHom F) (x c)‖ < r
+t : Dual F
+ht : ∀ w ∈ nR F N, t w = 1
+M : ℕ
+hMN : M ∣ N
+δ ε : ℝ
+hE : ∀ (s : ↥(unitRing F)), ‖(archHom F) (M • s)‖ < δ → ∫ (χ : Dual F), ‖↑(χ (M • s)) - 1‖ ∂σ < ε
+y z : ↥(unitRing F)
+hz : ‖(archHom F) z‖ + 2 * r < δ
+hcard : 0 < ↑(Fintype.card (↥(unitRing F) ⧸ nR F N))
+zq : ↥(unitRing F) ⧸ nR F N := ↑z
+hzq : zq = ↑z
+w : ↥(unitRing F) ⧸ nR F N → ↥(unitRing F) := fun c => z + x c - x (c + zq)
+hw : w = fun c => z + x c - x (c + zq)
+hwmem : ∀ (c : ↥(unitRing F) ⧸ nR F N), w c ∈ nR F N
+hwE : ∀ (c : ↥(unitRing F) ⧸ nR F N), ∫ (χ : Dual F), ‖↑(χ (w c)) - 1‖ ∂σ < ε
+hpt :
+  ∀ (χ : Dual F),
+    ‖(starRingEnd ℂ) ↑(t z) * ↑(χ z) - 1‖ * twW x t χ ≤
+      (↑(Fintype.card (↥(unitRing F) ⧸ nR F N)))⁻¹ * ∑ c, ‖↑(χ (w c)) - 1‖
+hint : ∀ (u : ↥(unitRing F)), Integrable (fun χ => ↑(χ u) * ↑(twW x t χ)) σ
+hdiffK :
+  (starRingEnd ℂ) ↑(t (y + z)) * twK σ x t (y + z) - (starRingEnd ℂ) ↑(t y) * twK σ x t y =
+    ∫ (χ : Dual F), (starRingEnd ℂ) ↑(t y) * ↑(χ y) * (((starRingEnd ℂ) ↑(t z) * ↑(χ z) - 1) * ↑(twW x t χ)) ∂σ
+hintS : Integrable (fun χ => (↑(Fintype.card (↥(unitRing F) ⧸ nR F N)))⁻¹ * ∑ c, ‖↑(χ (w c)) - 1‖) σ
+⊢ (↑(Fintype.card (↥(unitRing F) ⧸ nR F N)))⁻¹ * ∫ (a : Dual F), ∑ c, ‖↑(a (w c)) - 1‖ ∂σ =
+    (↑(Fintype.card (↥(unitRing F) ⧸ nR F N)))⁻¹ * ∑ c, ∫ (χ : Dual F), ‖↑(χ (w c)) - 1‖ ∂σ
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    a (w c)
+  has type
+    Circle
+  but is expected to have type
+    ↥(Submonoid.unitSphere ℂ)
+  in the application
+    ↑(a (w c))
+data/fs131/ij2/work/BochnerTau.lean:967:8: warning: declaration uses `sorry`
+seconds=11
+exit=1

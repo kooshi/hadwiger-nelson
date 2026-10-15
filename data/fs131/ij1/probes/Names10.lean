@@ -1,0 +1,35 @@
+import Mathlib.NumberTheory.NumberField.CanonicalEmbedding.Basic
+import Mathlib.Analysis.SpecialFunctions.Complex.Circle
+import Mathlib.Topology.Algebra.Group.Basic
+open NumberField
+#check @Complex.abs_arg_lt_pi_div_two_iff
+#check @Circle.arg_exp
+#check @Circle.exp_arg
+#check @Circle.exp_add
+#check @Circle.exp_nsmul
+#check @Circle.exp_zero
+#check @AddChar.map_nsmul_eq_pow
+#check @AddChar.map_add_eq_mul
+#check @nhds_induced
+#check @nhds_inf
+#check @nhds_iInf
+#check @nhds_bot
+#check @Filter.mem_iInf
+#check @Filter.mem_inf_iff
+#check @norm_nsmul
+#check @mixedEmbedding.latticeBasis_apply
+#check @topologicalAddGroup_induced
+#check @topologicalAddGroup_inf
+#check @topologicalAddGroup_iInf
+#check @Filter.isCountablyGenerated_pure
+#check @continuous_induced_dom
+#check @continuous_bot
+#check @Circle.continuous_exp
+#check @Complex.continuousAt_arg
+#check @pow_unbounded_of_one_lt
+#check @Basis.repr
+#check @LinearMap.continuous_of_finiteDimensional
+#check @map_ratCast
+#check @Circle.coe_exp
+example (K : Type) [Field K] [NumberField K] : NormedSpace ℝ (mixedEmbedding.mixedSpace K) := inferInstance
+example (K : Type) [Field K] [NumberField K] : FiniteDimensional ℝ (mixedEmbedding.mixedSpace K) := inferInstance

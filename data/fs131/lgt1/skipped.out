@@ -1,0 +1,36 @@
+slot: admitted lgt1: mem 8 GiB (hard cap), cpus 0,1
+HadwigerNelson.Rigidity.noRamifiedStableDyadic_of_tca (Proofs.HadwigerNelson.Rigidity.ChainAtTA) : ∀ (F : Subfield ℝ),
+  HadwigerNelson.SpectralChain.TCA F → HadwigerNelson.Rigidity.NoRamifiedStableDyadic F
+HadwigerNelson.Rigidity.noRamifiedStableDyadic_of_three_le_localBound (Proofs.HadwigerNelson.Rigidity.ChainAtTA) : ∀
+  (F : Subfield ℝ), 3 ≤ HadwigerNelson.SpectralChain.localBound F → HadwigerNelson.Rigidity.NoRamifiedStableDyadic F
+HadwigerNelson.Rigidity.Counting.count_of_oneAvoidingDensityBound (Proofs.HadwigerNelson.Rigidity.CountDescent) : ∀
+  {F : Subfield ℝ} [inst : NumberField ↥F],
+  HadwigerNelson.Plane.OneAvoidingDensityBound → (HadwigerNelson.Rigidity.chainInterface F).Count
+HadwigerNelson.Rigidity.Counting.false_of_slice (Proofs.HadwigerNelson.Rigidity.CountDescent) : ∀ {F : Subfield ℝ}
+  [inst : NumberField ↥F],
+  HadwigerNelson.SpectralChain.TCA F →
+    HadwigerNelson.Plane.mOne < ENNReal.ofReal (1 / 4) →
+      ∀ {φ : ℂ × HadwigerNelson.Rigidity.Counting.K F → Fin 4},
+        Measurable φ → HadwigerNelson.Rigidity.Counting.SliceEdgeNull φ → False
+HadwigerNelson.Rigidity.ZdAction.noVirtuallyCyclicFactors_of_isIrreducible (Proofs.HadwigerNelson.Rigidity.PositiveEntropy) : ∀
+  {d : ℕ} {X : Type u_1} [inst : AddCommGroup X] [inst_1 : TopologicalSpace X] [IsTopologicalAddGroup X] [T1Space X]
+  [ConnectedSpace X] (α : HadwigerNelson.Rigidity.ZdAction d X),
+  α.IsIrreducible → ¬α.IsVirtuallyCyclic → α.NoVirtuallyCyclicFactors
+HadwigerNelson.Rigidity.trivialAction_noVirtuallyCyclicFactors (Proofs.HadwigerNelson.Rigidity.Solenoid) : ∀ (d : ℕ),
+  (HadwigerNelson.Rigidity.ZdAction.trivial d Unit).NoVirtuallyCyclicFactors
+HadwigerNelson.Rigidity.nonempty_invariantColouring_bot (Proofs.HadwigerNelson.Rigidity.APlus) : Nonempty
+  (HadwigerNelson.SpectralChain.InvariantColouring ⊥)
+HadwigerNelson.Rigidity.NoRamifiedStableDyadic (Proofs.HadwigerNelson.Rigidity.ChainAtTA) : Subfield ℝ → Prop
+  := fun F =>
+  ∀ (P : HadwigerNelson.SpectralChain.StablePrime F),
+    HadwigerNelson.Rigidity.IsDyadic P → ¬HadwigerNelson.Rigidity.IsRamified P
+HadwigerNelson.Rigidity.ZdAction.NoVirtuallyCyclicFactors (Proofs.HadwigerNelson.Rigidity.Solenoid) : {d : ℕ} →
+  {X : Type u_1} → [inst : AddCommGroup X] → [inst_1 : TopologicalSpace X] → HadwigerNelson.Rigidity.ZdAction d X → Prop
+  := fun {d} {X} [AddCommGroup X] [TopologicalSpace X] α =>
+  ∀ (Y : AddSubgroup X), IsClosed ↑Y → α.InvariantOn ⊤ Y → Y ≠ ⊤ → ¬α.IsVirtuallyCyclicMod Y
+HadwigerNelson.SpectralChain.Interface.Count (Proofs.HadwigerNelson.SpectralChain) : {F : Subfield ℝ} →
+  HadwigerNelson.SpectralChain.Interface F → Prop
+  := fun {F} I => HadwigerNelson.SpectralChain.TCA F → I.R88TCA
+SimpleGraph.Coloring.colorClass.eq_1 (Proofs.HadwigerNelson.Rigidity.SqrtClassFive) : ∀ {V : Type u} {G : SimpleGraph V}
+  {α : Type u_2} (C : G.Coloring α) (c : α), C.colorClass c = {v | C v = c}
+exit=0

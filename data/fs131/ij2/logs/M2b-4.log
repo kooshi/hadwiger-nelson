@@ -1,0 +1,25 @@
+slot: admitted ij2: mem 4 GiB (hard cap), cpus 0,5
+data/fs131/ij2/work/BT2.lean:14:8: warning: declaration uses `sorry`
+data/fs131/ij2/work/BT2.lean:328:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∫ (a : Dual F), ?m.159 - ‖↑(a w) - 1‖ ∂σ
+in the target expression
+  ∫ (x : Dual F), ((fun x => 1) - fun χ => ‖↑(χ w) - 1‖) x ∂σ ≤ ∫ (x : Dual F), RCLike.re ↑(x w) ∂σ
+
+F : Subfield ℝ
+σ : Measure (Dual F)
+inst✝ : IsFiniteMeasure σ
+w : ↥(unitRing F)
+hre : ∫ (χ : Dual F), (↑(χ w)).re ∂σ = (∫ (χ : Dual F), ↑(χ w) ∂σ).re
+h1 : Integrable (fun χ => ‖↑(χ w) - 1‖) σ
+h2 : ∫ (x : Dual F), ((fun x => 1) - fun χ => ‖↑(χ w) - 1‖) x ∂σ ≤ ∫ (x : Dual F), RCLike.re ↑(x w) ∂σ
+⊢ σ.real Set.univ - ∫ (χ : Dual F), ‖↑(χ w) - 1‖ ∂σ ≤ ∫ (χ : Dual F), (↑(χ w)).re ∂σ
+data/fs131/ij2/work/BT2.lean:467:34: error: Application type mismatch: The argument
+  ha
+has type
+  a ∈ ?m.74
+but is expected to have type
+  a ∈ ↑S
+in the application
+  Finset.mem_coe.mp ha
+seconds=10
+exit=1

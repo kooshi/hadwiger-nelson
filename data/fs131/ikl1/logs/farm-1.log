@@ -1,0 +1,3 @@
+slot: waiting (ledger 20 + 4 > budget 22 GiB)
+slot: admitted ikl1f: mem 4 GiB (hard cap), cpus 2,3
+farm: Arith/FibreShareIneq from data/fs131/ikl1/lean/FibreShareIneq.lean exit 0

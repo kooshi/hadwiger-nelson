@@ -1,0 +1,19 @@
+slot: admitted ip23: mem 4 GiB (hard cap), cpus 2,3
+⚠ [5835/6038] Replayed Proofs.HadwigerNelson.Rigidity.Entropy
+warning: Proofs/HadwigerNelson/Rigidity/Entropy.lean:384:8: declaration uses `sorry`
+⚠ [5840/6038] Replayed Proofs.HadwigerNelson.Rigidity.PositiveEntropy
+warning: Proofs/HadwigerNelson/Rigidity/PositiveEntropy.lean:144:8: declaration uses `sorry`
+⚠ [5842/6038] Replayed Proofs.HadwigerNelson.Rigidity.ChainAtTA
+warning: Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:550:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:555:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/ChainAtTA.lean:562:8: declaration uses `sorry`
+⚠ [5867/6038] Replayed Proofs.HadwigerNelson.Rigidity.UnitCircle
+warning: Proofs/HadwigerNelson/Rigidity/UnitCircle.lean:219:8: declaration uses `sorry`
+⚠ [5872/6038] Replayed Proofs.HadwigerNelson.Rigidity.EntropySplitMax
+warning: Proofs/HadwigerNelson/Rigidity/EntropySplitMax.lean:64:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/EntropySplitMax.lean:76:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/EntropySplitMax.lean:90:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/EntropySplitMax.lean:98:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/EntropySplitMax.lean:109:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/EntropySplitMax.lean:114:8: declaration uses `sorry`
+All targets up-to-date (6038 jobs).

@@ -1,0 +1,8 @@
+[0] MISMATCH  data/fs131/REQUEST-2026-10-13.md  (264 chars)
+[1] MISMATCH  plans/SESSION-HANDOFF-2026-10-14.md  (130 chars)
+[2] MISMATCH  plans/FS131-close-inventory.md  (2876 chars)
+[3] MISMATCH  plans/FS131-close-inventory.md  (2181 chars)
+[4] MISMATCH  plans/FS131-close-inventory.md  (4465 chars)
+[5] MISMATCH  plans/FS131-close-inventory.md  (3265 chars)
+[6] MISMATCH  plans/FS131-close-inventory.md  (3204 chars)
+PLANT: 7/7 blocks failed (all must)

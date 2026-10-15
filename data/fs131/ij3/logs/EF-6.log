@@ -1,0 +1,94 @@
+slot: admitted ij3f: mem 5 GiB (hard cap), cpus 4,5
+data/fs131/ij3/work/EntropyFibres.lean:378:4: error: No goals to be solved
+data/fs131/ij3/work/EntropyFibres.lean:380:43: error: Application type mismatch: The argument
+  MeasurableSpace.comap (⇑π) (borel (X ⧸ G))
+has type
+  MeasurableSpace X
+of sort `Type u_1` but is expected to have type
+  Countable ?m.548
+of sort `Prop` in the application
+  @measurable_to_countable' ?m.548 ?m.549 ?m.550 (MeasurableSpace.comap (⇑π) (borel (X ⧸ G)))
+data/fs131/ij3/work/EntropyFibres.lean:406:61: error: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
+  QuotientAddGroup.measurableSpace G
+inferred
+  borel (X ⧸ G)
+data/fs131/ij3/work/EntropyFibres.lean:420:14: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  Q (T^[j] y')
+in the target expression
+  R₀ (T^[j] y') (Q (T^[j] y)) = some (P (T^[j] y), Q (T (T^[j] y)))
+
+X : Type u_1
+inst✝⁵ : AddCommGroup X
+inst✝⁴ : TopologicalSpace X
+inst✝³ : IsTopologicalAddGroup X
+inst✝² : MeasurableSpace X
+inst✝¹ : BorelSpace X
+μ : Measure X
+inst✝ : IsProbabilityMeasure μ
+G : AddSubgroup X
+k : ℕ
+Q : X → Fin k
+hQ : Measurable Q
+hsec : ∀ (x g : X), g ∈ G → Q (x + g) = Q x → g = 0
+T : X → X
+hT : Measurable T
+l : ℕ
+P : X → Fin l
+hP : Measurable P
+y₀ : X
+π : X →+ X ⧸ G := QuotientAddGroup.mk' G
+himg : ∀ (i : Fin k) (S : Set X), MeasurableSet S → MeasurableSet (⇑π '' (Q ⁻¹' {i} ∩ S))
+hπ : π = QuotientAddGroup.mk' G
+huniq : ∀ (y y' : X), Q y = Q y' → π y = π y' → y = y'
+R₀ : X → Fin k → Option (Fin l × Fin k) :=
+  fun x i => if h : ∃ y, Q y = i ∧ π y = π x then some (P h.choose, Q (T h.choose)) else none
+hR₀ :
+  ∀ (x : X) (i : Fin k) (a : Fin l) (c : Fin k),
+    R₀ x i = some (a, c) ↔ ∃ y, (Q y = i ∧ P y = a ∧ Q (T y) = c) ∧ π y = π x
+hR₀none : ∀ (x : X) (i : Fin k), R₀ x i = none ↔ ¬∃ y, Q y = i ∧ π y = π x
+hkey : ∀ (y : X), R₀ y (Q y) = some (P y, Q (T y))
+e : (Fin k → Option (Fin l × Fin k)) ≃ Fin (Fintype.card (Fin k → Option (Fin l × Fin k))) :=
+  Fintype.equivFin (Fin k → Option (Fin l × Fin k))
+R : X → Fin (Fintype.card (Fin k → Option (Fin l × Fin k))) := fun x => e (R₀ x)
+hpre : ∀ (i : Fin k) (S : Set X), MeasurableSet S → MeasurableSet {x | ∃ y, (Q y = i ∧ y ∈ S) ∧ π y = π x}
+hRc : Measurable R
+hπm : Measurable ⇑π
+hR : Measurable R
+n : ℕ
+Rn : X → Fin n → Fin (Fintype.card (Fin k → Option (Fin l × Fin k))) := Outside.OAI015.orbitName T R n
+hRn : Rn = Outside.OAI015.orbitName T R n
+y y' : X
+hq : Q y = Q y'
+hr : Rn y = Rn y'
+j : ℕ
+hj : j < n
+hqj : Q (T^[j] y) = Q (T^[j] y')
+h1 : R₀ (T^[j] y) = R₀ (T^[j] y')
+h2 : R₀ (T^[j] y') (Q (T^[j] y)) = some (P (T^[j] y), Q (T (T^[j] y)))
+h3 : R₀ (T^[j] y') (Q (T^[j] y')) = some (P (T^[j] y'), Q (T (T^[j] y')))
+⊢ P (T^[j] y) = P (T^[j] y') ∧ Q (T^[j + 1] y) = Q (T^[j + 1] y')
+data/fs131/ij3/work/EntropyFibres.lean:442:19: error: Application type mismatch: The argument
+  hc.left
+has type
+  Q ⋯.choose = Q y
+but is expected to have type
+  Q h.choose = Q y
+in the application
+  hdet h.choose y hc.left
+data/fs131/ij3/work/EntropyFibres.lean:357:17: warning: This simp argument is unused:
+  reduceCtorEq
+
+Hint: Omit it from the simp argument list.
+  simp only [r̵e̵d̵u̵c̵e̵C̵t̵o̵r̵E̵q̵,̵ ̵false_iff]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/EntropyFibres.lean:364:17: warning: This simp argument is unused:
+  reduceCtorEq
+
+Hint: Omit it from the simp argument list.
+  simp only [r̵e̵d̵u̵c̵e̵C̵t̵o̵r̵E̵q̵,̵ ̵false_iff, not_not]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/EntropyFibres.lean:473:8: warning: declaration uses `sorry`
+seconds=4
+exit=1

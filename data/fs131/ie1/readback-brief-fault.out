@@ -1,0 +1,5 @@
+MISMATCH data/fs131/REQUEST-2026-10-13.md | W2: (2026-10-13, answering the choice between the two publishable form
+MISMATCH data/fs131/claims-NF2.md | NF2-LEAF-13: **Kolmogorov–Sinai entropy** `h_μ(T)` of a measure-preser
+MISMATCH data/fs131/claims-NF2.md | - 2026-10-14 — **NF2-LEAF-18 is answered (FS131-EN2, inventory item 70
+matched: 0  mismatched: 3
+exit=1

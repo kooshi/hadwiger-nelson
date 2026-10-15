@@ -1,0 +1,5 @@
+slot: waiting (ledger 20 + 4 > budget 22 GiB)
+slot: admitted ij1: mem 4 GiB (hard cap), cpus 4,5
+data/fs131/ij1/work/Herglotz.lean:216:8: warning: declaration uses `sorry`
+seconds=65
+exit=0

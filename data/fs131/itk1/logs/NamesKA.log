@@ -1,0 +1,71 @@
+slot: admitted itk1: mem 4 GiB (hard cap), cpus 8,9
+@mixedEmbedding.normAtPlace_apply : ∀ {K : Type u_1} [inst : Field K] (w : InfinitePlace K) (x : K),
+  (mixedEmbedding.normAtPlace w) ((mixedEmbedding K) x) = w x
+@mixedEmbedding.normAtPlace_add_le : ∀ {K : Type u_1} [inst : Field K] (w : InfinitePlace K)
+  (x y : mixedEmbedding.mixedSpace K),
+  (mixedEmbedding.normAtPlace w) (x + y) ≤ (mixedEmbedding.normAtPlace w) x + (mixedEmbedding.normAtPlace w) y
+@mixedEmbedding.normAtPlace_neg : ∀ {K : Type u_1} [inst : Field K] (w : InfinitePlace K)
+  (x : mixedEmbedding.mixedSpace K), (mixedEmbedding.normAtPlace w) (-x) = (mixedEmbedding.normAtPlace w) x
+@mixedEmbedding.normAtPlace_nonneg : ∀ {K : Type u_1} [inst : Field K] (w : InfinitePlace K)
+  (x : mixedEmbedding.mixedSpace K), 0 ≤ (mixedEmbedding.normAtPlace w) x
+@mixedEmbedding.continuous_normAtPlace : ∀ {K : Type u_1} [inst : Field K] (w : InfinitePlace K),
+  Continuous ⇑(mixedEmbedding.normAtPlace w)
+@FinitePlace.norm_def : ∀ {K : Type u_1} [inst : Field K] {R : Type u_2} [inst_1 : CommRing R] [inst_2 : Algebra R K]
+  [inst_3 : IsDedekindDomain R] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R) [inst_5 : Module.Finite ℤ R]
+  [inst_6 : Module.Free ℤ R] (x : adicCompletion K v), ‖x‖ = ↑((WithZeroMulInt.toNNReal ⋯) (Valued.v x))
+@FinitePlace.norm_embedding : ∀ {K : Type u_1} [inst : Field K] {R : Type u_2} [inst_1 : CommRing R]
+  [inst_2 : Algebra R K] [inst_3 : IsDedekindDomain R] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R)
+  [inst_5 : Module.Finite ℤ R] [inst_6 : Module.Free ℤ R] (x : K),
+  ‖(FinitePlace.embedding v) x‖ = (NumberField.HeightOneSpectrum.adicAbv K v) x
+@WithZeroMulInt.toNNReal_le_one_iff : ∀ {e : NNReal} {m : WithZero (Multiplicative ℤ)} (he : 1 < e),
+  (WithZeroMulInt.toNNReal ⋯) m ≤ 1 ↔ m ≤ 1
+@WithZeroMulInt.toNNReal_strictMono : ∀ {e : NNReal} (he : 1 < e), StrictMono ⇑(WithZeroMulInt.toNNReal ⋯)
+@RestrictedProduct.continuous_eval : ∀ {ι : Type u_1} {R : ι → Type u_2} {A : (i : ι) → Set (R i)} {𝓕 : Filter ι}
+  [inst : (i : ι) → TopologicalSpace (R i)] (i : ι), Continuous fun x => x i
+Support.finite : ∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type u_2} [inst_2 : Field K]
+  [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (k : K), (Support R k).Finite
+@finprod_eq_prod_of_mulSupport_subset : ∀ {α : Type u_1} {M : Type u_2} [inst : CommMonoid M] (f : α → M)
+  {s : Finset α}, Function.mulSupport f ⊆ ↑s → ∏ᶠ (i : α), f i = ∏ i ∈ s, f i
+@Finset.one_le_prod' : ∀ {ι : Type u_1} {N : Type u_2} [inst : CommMonoid N] [inst_1 : Preorder N] {f : ι → N}
+  {s : Finset ι} [MulLeftMono N], (∀ i ∈ s, 1 ≤ f i) → 1 ≤ ∏ i ∈ s, f i
+@Finset.prod_le_prod_of_subset_of_one_le' : ∀ {ι : Type u_1} {N : Type u_2} [inst : CommMonoid N] [inst_1 : Preorder N]
+  {f : ι → N} {s t : Finset ι} [MulLeftMono N], s ⊆ t → (∀ i ∈ t, i ∉ s → 1 ≤ f i) → ∏ i ∈ s, f i ≤ ∏ i ∈ t, f i
+@FinitePlace.prod_eq_inv_abs_norm : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] {x : K},
+  x ≠ 0 → ∏ᶠ (w : FinitePlace K), w x = ↑|(Algebra.norm ℚ) x|⁻¹
+@InfinitePlace.prod_eq_abs_norm : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] (x : K),
+  ∏ w, w x ^ w.mult = ↑|(Algebra.norm ℚ) x|
+@prod_abs_eq_one : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] {x : K},
+  x ≠ 0 → (∏ w, w x ^ w.mult) * ∏ᶠ (w : FinitePlace K), w x = 1
+@FinitePlace.equivHeightOneSpectrum_symm_apply : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K]
+  (v : HeightOneSpectrum (𝓞 K)) (x : K), (FinitePlace.equivHeightOneSpectrum.symm v) x = ‖(FinitePlace.embedding v) x‖
+@FinitePlace.hasFiniteMulSupport : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] {x : K},
+  x ≠ 0 → Function.HasFiniteMulSupport fun w => w x
+@InfinitePlace.sum_mult_eq : ∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K],
+  ∑ w, w.mult = Module.finrank ℚ K
+Embeddings.pow_eq_one_of_norm_eq_one : ∀ (K : Type u_1) [inst : Field K] [NumberField K] (A : Type u_2)
+  [inst_2 : NormedField A] [IsAlgClosed A] [NormedAlgebra ℚ A] {x : K},
+  IsIntegral ℤ x → (∀ (φ : K →+* A), ‖φ x‖ = 1) → ∃ n, ∃ (_ : 0 < n), x ^ n = 1
+@InfinitePlace.comap_apply : ∀ {k : Type u_1} [inst : Field k] {K : Type u_2} [inst_1 : Field K] (w : InfinitePlace K)
+  (f : k →+* K) (x : k), (w.comap f) x = w (f x)
+data/fs131/itk1/probes/NamesKA.lean:25:8: error(lean.unknownIdentifier): Unknown constant `NumberField.mem_integers_of_valuation_le_one`
+@Ideal.finite_setOf_absNorm_eq : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S]
+  [inst_2 : Module.Free ℤ S] [Module.Finite ℤ S] [CharZero S] (n : ℕ), {I | Ideal.absNorm I = n}.Finite
+FinitePlace.norm_lt_one_iff_mem : ∀ (K : Type u_1) [inst : Field K] {R : Type u_2} [inst_1 : CommRing R]
+  [inst_2 : Algebra R K] [inst_3 : IsDedekindDomain R] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R)
+  [inst_5 : Module.Finite ℤ R] [inst_6 : Module.Free ℤ R] (x : R),
+  ‖(FinitePlace.embedding v) ((algebraMap R K) x)‖ < 1 ↔ x ∈ v.asIdeal
+FinitePlace.norm_eq_one_iff_notMem : ∀ (K : Type u_1) [inst : Field K] {R : Type u_2} [inst_1 : CommRing R]
+  [inst_2 : Algebra R K] [inst_3 : IsDedekindDomain R] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R)
+  [inst_5 : Module.Finite ℤ R] [inst_6 : Module.Free ℤ R] (x : R),
+  ‖(FinitePlace.embedding v) ((algebraMap R K) x)‖ = 1 ↔ x ∉ v.asIdeal
+FinitePlace.norm_le_one : ∀ (K : Type u_1) [inst : Field K] {R : Type u_2} [inst_1 : CommRing R] [inst_2 : Algebra R K]
+  [inst_3 : IsDedekindDomain R] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R) [inst_5 : Module.Finite ℤ R]
+  [inst_6 : Module.Free ℤ R] (x : R), ‖(FinitePlace.embedding v) ((algebraMap R K) x)‖ ≤ 1
+data/fs131/itk1/probes/NamesKA.lean:30:8: error(lean.unknownIdentifier): Unknown identifier `adicAbv_natCast_le_one`
+HeightOneSpectrum.adicAbv_def : ∀ (K : Type u_1) [inst : Field K] {R : Type u_2} [inst_1 : CommRing R]
+  [inst_2 : Algebra R K] [inst_3 : IsDedekindDomain R] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R)
+  [inst_5 : Module.Finite ℤ R] [inst_6 : Module.Free ℤ R] {x : K},
+  (NumberField.HeightOneSpectrum.adicAbv K v) x = ↑((WithZeroMulInt.toNNReal ⋯) ((valuation K v) x))
+@InfinitePlace.one_le_mult : ∀ {K : Type u_1} [inst : Field K] {w : InfinitePlace K}, 1 ≤ ↑w.mult
+seconds=3
+exit=1

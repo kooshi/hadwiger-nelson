@@ -1,0 +1,4 @@
+ARCHITECTURE.md hunk 1: ours 8 kept; theirs 7, added ['Rigidity/CertLink', 'Rigidity/CertLinkModels']
+ARCHITECTURE.md hunk 2: ours 2 kept; theirs 2, added []
+Proofs.lean hunk 1: ours 0 kept; theirs 3, added ['import Proofs.HadwigerNelson.Rigidity.CertLink', 'import Proofs.HadwigerNelson.Rigidity.CertLinkModels', 'import Proofs.HadwigerNelson.Plane.OneAvoidingDensity']
+Proofs.lean: the duplicate import Proofs.HadwigerNelson.Plane.OneAvoidingDensity (the link's line added it) removed

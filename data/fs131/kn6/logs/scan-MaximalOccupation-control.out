@@ -1,0 +1,4 @@
+HIT MaximalOccupation.lean:259: [#eval] #eval (1 : Nat)
+HIT MaximalOccupation.lean:260: [import] import Evil
+scanned MaximalOccupation.lean: lines=260 hits=2
+control FIRED

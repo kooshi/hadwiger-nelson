@@ -1,0 +1,27 @@
+slot: admitted ij3f: mem 5 GiB (hard cap), cpus 0,1
+data/fs131/ij3/work/EntropySplitMax.lean:193:4: error: unsolved goals
+case pos.refine_1
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+p : AdmissiblePair F
+τ : Measure (Dual F)
+hfin : IsFiniteMeasure τ
+hτ : RotInv F τ
+m : Measure (AddChar (↥(unitRing F)) Circle) := dualHaar ↥(unitRing F)
+hm : IsHaarFourier m
+this : IsProbabilityMeasure m
+hmdef : m = dualHaar ↥(unitRing F)
+a : ℝ≥0∞ := maxMultiple τ m
+ha : a = maxMultiple τ m
+τ' : Measure (Dual F) := τ - a • m
+hτ'def : τ' = τ - a • m
+hτ' : RotInv F τ'
+hsplit : τ = a • m + τ'
+hu : ∀ (k : ℕ), k ≠ 0 → ↑(toUnitVector p.u) ^ k ≠ 1
+hmem : p.u ∈ p.subgroup
+h0 : τ' = 0
+u : ↑(unitVectors F)
+⊢ Measure.dirac (rot u 1) = Measure.dirac 1
+data/fs131/ij3/work/EntropySplitMax.lean:210:14: warning: `mul_le_mul_left'` has been deprecated: Use `mul_le_mul_right` instead
+seconds=5
+exit=1

@@ -1,0 +1,8 @@
+slot: admitted ip23: mem 4 GiB (hard cap), cpus 4,5
+data/fs131/ip23/work/EntropySplitMax.lean:79:8: warning: declaration uses `sorry`
+data/fs131/ip23/work/EntropySplitMax.lean:93:8: warning: declaration uses `sorry`
+data/fs131/ip23/work/EntropySplitMax.lean:101:8: warning: declaration uses `sorry`
+data/fs131/ip23/work/EntropySplitMax.lean:112:8: warning: declaration uses `sorry`
+data/fs131/ip23/work/EntropySplitMax.lean:117:8: warning: declaration uses `sorry`
+seconds=3
+exit=0

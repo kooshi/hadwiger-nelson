@@ -1,0 +1,4 @@
+HadwigerNelson.Rigidity.isSolenoid_pieceDual
+HadwigerNelson.Rigidity.exists_pieceChain
+HadwigerNelson.Rigidity.isErgodicOn_map_toPiece
+HadwigerNelson.Rigidity.integral_eq_zero_of_isAddHaarMeasure

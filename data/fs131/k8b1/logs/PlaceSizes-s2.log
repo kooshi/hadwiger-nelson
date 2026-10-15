@@ -1,0 +1,30 @@
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:83:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:87:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:92:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:96:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:100:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:103:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:106:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:109:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:112:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:115:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:119:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:123:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:155:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:160:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:165:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:168:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:173:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:179:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:182:0: warning: automatically included section variable(s) unused in theorem `HadwigerNelson.Rigidity.unitL_eq_ofUnitRing`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:195:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:200:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:206:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:211:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:215:9: warning: declaration uses `sorry`
+exit=0

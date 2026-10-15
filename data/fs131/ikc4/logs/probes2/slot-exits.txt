@@ -1,0 +1,3 @@
+Lens slot-exit 0 mem 1
+SegZ slot-exit 0 mem 10
+GlobKZ slot-exit 143 mem 12

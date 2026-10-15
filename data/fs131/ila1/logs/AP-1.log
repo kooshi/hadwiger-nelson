@@ -1,0 +1,6 @@
+data/fs131/ila1/work/AdmissiblePrime.lean:22:16: warning: declaration uses `sorry`
+data/fs131/ila1/work/AdmissiblePrime.lean:28:16: warning: declaration uses `sorry`
+data/fs131/ila1/work/AdmissiblePrime.lean:32:16: warning: declaration uses `sorry`
+data/fs131/ila1/work/AdmissiblePrime.lean:39:16: warning: declaration uses `sorry`
+data/fs131/ila1/work/AdmissiblePrime.lean:44:16: warning: declaration uses `sorry`
+lean-exit 0

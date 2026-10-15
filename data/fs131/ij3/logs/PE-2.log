@@ -1,0 +1,7 @@
+slot: admitted ij3f: mem 5 GiB (hard cap), cpus 4,5
+data/fs131/ij3/work/PositiveEntropy.lean:164:8: warning: declaration uses `sorry`
+data/fs131/ij3/work/PositiveEntropy.lean:215:8: warning: declaration uses `sorry`
+data/fs131/ij3/work/PositiveEntropy.lean:243:8: warning: declaration uses `sorry`
+data/fs131/ij3/work/PositiveEntropy.lean:309:8: warning: declaration uses `sorry`
+seconds=2
+exit=0

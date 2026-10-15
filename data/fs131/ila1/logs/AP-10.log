@@ -1,0 +1,8 @@
+data/fs131/ila1/work/AdmissiblePrime.lean:22:16: warning: declaration uses `sorry`
+data/fs131/ila1/work/AdmissiblePrime.lean:38:4: error: Type mismatch
+  mul_mem (inv_mem (intCast_mem ℚ⟮y • α⟯ y)) (mem_adjoin_simple_self ℚ (y • α))
+has type
+  (↑y)⁻¹ * y • α ∈ ℚ⟮y • α⟯
+but is expected to have type
+  α ∈ ℚ⟮y • ((↑y)⁻¹ * y • α)⟯
+lean-exit 1

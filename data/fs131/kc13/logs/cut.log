@@ -1,0 +1,17 @@
+p=11 eval 803837, 288741, true
+== p=11 hk % 1000007 = 803837
+(803837, 288741, true)
+14.69 s wall, 2537472 KB peak
+== p=11 hp % 1000007 = 288741
+(803837, 288741, true)
+25.08 s wall, 4528748 KB peak
+== p=11 segCheck cert11 77 = true
+(803837, 288741, true)
+47.73 s wall, 8139928 KB peak
+p=19 eval 324346, 646063, true
+== p=19 hk % 1000007 = 324346
+slot: admitted kc13-cut: mem 12 GiB (hard cap), cpus 0
+== p=19 hp % 1000007 = 646063
+Command terminated by signal 15
+40.06 s wall, 3280652 KB peak
+== p=19 hp: stopped by the planner at ~35 s (it computes the K table, which alone exceeded the 12 GiB cap above); segCheck 77 at p=19 not run

@@ -1,0 +1,10 @@
+slot: admitted ij2: mem 4 GiB (hard cap), cpus 0,1
+'HadwigerNelson.Rigidity.invariantMeasureOnClosed_of_countable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Rigidity.exists_shiftInvariant_on' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.exists_rotInvariant_of_shiftInvariant' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+seconds=4
+exit=0

@@ -1,0 +1,9 @@
+SAME    theorem HadwigerNelson.Rigidity.haar_or_zero_entropy
+CHANGED axiom HadwigerNelson.Rigidity.positive_entropy_rigidity
+  common prefix 6118 chars, common suffix 11392 chars
+  before: …QuotientAddGroup.measurableSpace.{u_1} X (@AddCommGroup.toAddGroup.{u_1} X inst) inst_2 (G j)) (@MeasureTheory.Measure.map.{u_1, u_1} X (@HasQuotient.Quotient.{u_1, u_1} X (@AddSubgroup.{u_1} X (@AddCommGroup.toAddGroup.{u_1} X inst)) (@QuotientAddGroup.instHasQuotientAddSubgroup.{u_1} X (@AddCommGroup.toAddGroup.{u_1} X inst)) (G j)) inst_2 (@QuotientAddGroup.measurableSpace.{u_1} X (@AddCommGroup.toAddGroup.{u_1} X inst) inst_2 (G j…
+  after:  …borel.{u_1} (@HasQuotient.Quotient.{u_1, u_1} X (@AddSubgroup.{u_1} X (@AddCommGroup.toAddGroup.{u_1} X inst)) (@QuotientAddGroup.instHasQuotientAddSubgroup.{u_1} X (@AddCommGroup.toAddGroup.{u_1} X inst)) (G j)) (@QuotientAddGroup.instTopologicalSpace.{u_1} X inst_1 (@AddCommGroup.toAddGroup.{u_1} X inst) (G j))) (@MeasureTheory.Measure.map.{u_1, u_1} X (@HasQuotient.Quotient.{u_1, u_1} X (@AddSubgroup.{u_1} X (@AddCommGroup.toAddGroup.{u_1} X inst)) (@QuotientAddGroup.instHasQuotientAddSubgroup.{u_1} X (@AddCommGroup.toAddGroup.{u_1} X inst)) (G j)) inst_2 (@borel.{u_1} (@HasQuotient.Quotient.{u_1, u_1} X (@AddSubgroup.{u_1} X (@AddCommGroup.toAddGroup.{u_1} X inst)) (@QuotientAddGroup.instHasQuotientAddSubgroup.{u_1} X (@AddCommGroup.toAddGroup.{u_1} X inst)) (G j)) (@QuotientAddGroup.instTopologicalSpace.{u_1} X inst_1 (@AddCommGroup.toAddGroup.{u_1} X inst) (G j)…
+SAME    theorem HadwigerNelson.Rigidity.positive_entropy_rigidity_model
+ADDED   theorem HadwigerNelson.Rigidity.positive_entropy_rigidity_of_polishSpace
+ADDED=1 REMOVED=0 CHANGED=1 SAME=2
+exit=0

@@ -1,0 +1,71 @@
+recorded 30 constants in data/fs131/ip23/readback/instance-constants.txt
+  target       IDENTICAL        60
+  target       UP-TO-INSTANCES  4
+  target finiteShannon_mul: IDENTICAL
+  target finiteShannon_mass_decomposition: IDENTICAL
+  target finiteShannon_joint_mass_le: IDENTICAL
+  target finiteShannon_submodular: IDENTICAL
+  target finiteShannon_fst_le: IDENTICAL
+  target finiteShannon_joint_decomposition: IDENTICAL
+  target observationPair_measurable_fiber: IDENTICAL
+  target conditionalObservationEntropy: IDENTICAL
+  target observationEntropy_swap: IDENTICAL
+  target observationEntropy_assoc: IDENTICAL
+  target conditionalObservationEntropy_nonneg: IDENTICAL
+  target conditionalObservationEntropy_le: IDENTICAL
+  target conditionalObservationEntropy_chain: IDENTICAL
+  target observationEntropy_submodular: IDENTICAL
+  target conditionalObservationEntropy_conditioning_le: IDENTICAL
+  target conditionalObservationEntropy_pair_le: IDENTICAL
+  target observationEntropy_injective: IDENTICAL
+  target conditionalObservationEntropy_injective: IDENTICAL
+  target conditionalObservationEntropy_comp_preserving: IDENTICAL
+  target conditionalObservationEntropy_coarsening_le: IDENTICAL
+  target conditionalObservationEntropy_pair_pair_le: IDENTICAL
+  target observationEntropy_le_add_conditional: IDENTICAL
+  target observationEntropy_unique: IDENTICAL
+  target orbitName_one: IDENTICAL
+  target conditionalOrbitEntropy_one: IDENTICAL
+  target conditionalOrbitEntropy_le: IDENTICAL
+  target observationEntropyRate_le_add_conditional: IDENTICAL
+  target observationConditionalProbability: IDENTICAL
+  target observationConditionalProbability_nonneg: IDENTICAL
+  target observationConditionalProbability_le_one: IDENTICAL
+  target observationConditionalProbability_sum: IDENTICAL
+  target observationConditionalProbability_ae_sum: IDENTICAL
+  target conditionalObservationEntropy_eq_sum: IDENTICAL
+  target conditionalObservationEntropy_eq_integral: IDENTICAL
+  target observationSigma: IDENTICAL
+  target observationSigma_le: IDENTICAL
+  target stronglyMeasurable_observation_values: IDENTICAL
+  target setIntegral_eq_of_observation_atoms: IDENTICAL
+  target observation_values_ae_eq_condExp: IDENTICAL
+  target setIntegral_observationConditionalProbability: IDENTICAL
+  target observationConditionalProbability_ae_eq_condExp: IDENTICAL
+  target observationConditionalProbability_tendsto: UP-TO-INSTANCES (only there ['CompleteLattice.toCompletePartialOrder', 'CompletePartialOrder.toSupSet'], only here ['CompleteLattice.toConditionallyCompleteLattice', 'ConditionallyCompleteLattice.toConditionallyCompletePartialOrder', 'ConditionallyCompletePartialOrder.toConditionallyCompletePartialOrderSup', 'ConditionallyCompletePartialOrderSup.toSupSet'])
+  target conditionalObservationEntropy_tendsto_zero: UP-TO-INSTANCES (only there ['CompleteLattice.toCompletePartialOrder', 'CompletePartialOrder.toSupSet'], only here ['CompleteLattice.toConditionallyCompleteLattice', 'ConditionallyCompleteLattice.toConditionallyCompletePartialOrder', 'ConditionallyCompletePartialOrder.toConditionallyCompletePartialOrderSup', 'ConditionallyCompletePartialOrderSup.toSupSet'])
+  target measureEntropy_eq_iSup_generating: UP-TO-INSTANCES (only there ['CompleteLattice.toCompletePartialOrder', 'CompleteLinearOrder.toCompletelyDistribLattice', 'CompletePartialOrder.toSupSet', 'CompletelyDistribLattice.toCompleteLattice'], only here ['CompleteLattice.toConditionallyCompleteLattice', 'CompleteLinearOrder.toConditionallyCompleteLinearOrderBot', 'ConditionallyCompleteLattice.toConditionallyCompletePartialOrder', 'ConditionallyCompleteLinearOrder.toConditionallyCompleteLattice', 'ConditionallyCompleteLinearOrderBot.toConditionallyCompleteLinearOrder', 'ConditionallyCompletePartialOrder.toConditionallyCompletePartialOrderSup', 'ConditionallyCompletePartialOrderSup.toSupSet'])
+  target fixedPoint_mem_closed_convex_orbit: IDENTICAL
+  target exists_convex_orbit_approximants: IDENTICAL
+  target actionInvariantSigma: IDENTICAL
+  target actionInvariantSigma_le: IDENTICAL
+  target measurable_actionInvariantSigma: IDENTICAL
+  target exists_pointwise_invariant_representative: IDENTICAL
+  target orbitConvexHull: IDENTICAL
+  target orbitConvexHull_measurable: IDENTICAL
+  target orbitConvexHull_interval: IDENTICAL
+  target orbitConvexHull_integral: IDENTICAL
+  target orbitConvexHull_setIntegral: IDENTICAL
+  target lp_convex_orbit_representative: UP-TO-INSTANCES (only there ['AddGroup.toSubNegMonoid', 'AddSubgroup.instAddSubgroupClass', 'AddSubgroupClass.toAddSubmonoidClass', 'AddSubmonoidClass.toAddCommMonoid', 'CommRing.toNonUnitalCommRing', 'IsSemitopologicalRing.toIsSemitopologicalSemiring', 'IsSemitopologicalSemiring.toContinuousAdd', 'IsTopologicalRing.toIsSemitopologicalRing', 'MeasureTheory.AEEqFun.instAddCommMonoid', 'NonUnitalCommRing.toNonUnitalNonAssocCommRing', 'NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing', 'NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring', 'Real.commRing', 'Real.instAddCommMonoid', 'Real.instAddGroup', 'instIsTopologicalAddGroupReal', 'instIsTopologicalRingReal'], only here ['AddCommGroup.toAddCommMonoid', 'MeasureTheory.Lp.instAddCommGroup'])
+  target exists_invariant_orbit_average_limit: IDENTICAL
+  target orbitConvexHull_aeSetIntegral: IDENTICAL
+  target invariant_set_independent_of_orbit_indicator_limit: IDENTICAL
+  target ergodicSMul_of_orbit_indicator_limits: IDENTICAL
+  target condExpKernel_invariant: IDENTICAL
+  target invariant_kernel_decomposition: IDENTICAL
+  target condExpKernel_ae_constant: IDENTICAL
+  target action_ergodic_decomposition: IDENTICAL
+  constants differing inside instance and proof arguments: 30 (recorded: 30)
+cone constants: 64  failing: 0  fatal: 0  renamed map: {'Set.ofPred': 'setOf'}
+EVENTUALLYEQSET applied in: ['§.orbitConvexHull_aeSetIntegral', '§.invariant_set_independent_of_orbit_indicator_limit']
+READBACK OK

@@ -1,0 +1,16 @@
+compared: 209 named constants of the first dump (kinds and types), 48 data definitions' values, 3 example heads of the base files
+axioms of the modules: ['HadwigerNelson.Rigidity.positive_entropy_rigidity'] before, ['HadwigerNelson.Rigidity.planted_axiom', 'HadwigerNelson.Rigidity.positive_entropy_rigidity'] after
+internal (not compared): 129 before, 129 after
+new public constants in the second dump: 1 (allow-list: 0)
+  NEW THM HadwigerNelson.Rigidity.planted_new_public
+new private constants in the second dump: 0
+examples in the working files that the base does not hold: 0
+VALUE    DEF HadwigerNelson.Rigidity.ksEntropyOn: the stored definition differs
+TYPE     THM HadwigerNelson.Rigidity.ksEntropy_eq_iSup_ksEntropyOn: the stored statement differs
+KIND     HadwigerNelson.Rigidity.ksEntropy_bind_eq_zero: THM -> DEF
+TYPE     AXIOM HadwigerNelson.Rigidity.positive_entropy_rigidity: the stored statement differs
+TYPE     THM HadwigerNelson.Rigidity.ksEntropy_rot_eq_iSup: the stored statement differs
+MISSING  THM HadwigerNelson.Rigidity.condExpKernel_ergodicDecomposition: in the first dump, not in the second
+AXIOMS   the modules must declare exactly HadwigerNelson.Rigidity.positive_entropy_rigidity: ['HadwigerNelson.Rigidity.positive_entropy_rigidity'] before, ['HadwigerNelson.Rigidity.planted_axiom', 'HadwigerNelson.Rigidity.positive_entropy_rigidity'] after
+NEW      THM HadwigerNelson.Rigidity.planted_new_public: a new public constant that the allow-list does not hold
+CONTROL: 8 of 8 planted faults reported — the check can fail

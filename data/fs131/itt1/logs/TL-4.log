@@ -1,0 +1,33 @@
+slot: admitted itt1: mem 4 GiB (hard cap), cpus 2,3
+Proofs/HadwigerNelson/Rigidity/TateLocal.lean:233:4: error: Type mismatch
+  IsOpen.preimage (Continuous.sub continuous_id continuous_const) (Valued.isOpen_ball (adicCompletion K v) 1)
+has type
+  IsOpen ((id - fun x => ?m.397) ⁻¹' {x | Valued.v.restrict x < 1})
+but is expected to have type
+  IsOpen {x | Valued.v (x - ↑z) < 1}
+Proofs/HadwigerNelson/Rigidity/TateLocal.lean:246:6: error(lean.unknownIdentifier): Unknown constant `IsLocalRing.residue_eq_residue_iff?`
+Proofs/HadwigerNelson/Rigidity/TateLocal.lean:203:49: error: unsolved goals
+K : Type u_1
+inst✝¹ : Field K
+inst✝ : NumberField K
+v : HeightOneSpectrum (𝓞 K)
+this✝¹ : IsDiscreteValuationRing ↥(Valued.integer (adicCompletion K v))
+this✝ : IsClosed ↑(Valued.integer (adicCompletion K v))
+this : Finite (𝓞 K ⧸ v.asIdeal)
+O : Subring (adicCompletion K v) := Valued.integer (adicCompletion K v)
+φ : 𝓞 K →+* ↥O := algebraMap (𝓞 K) ↥(adicCompletionIntegers K v)
+hφ : ∀ (a : 𝓞 K), ↑(φ a) = { toCompletion := ↑((WithVal.equiv (valuation K v)).symm ↑a) }
+hmax : ∀ (x : ↥O), Valued.v ↑x < 1 → x ∈ IsLocalRing.maximalIdeal ↥O
+g : 𝓞 K →+* IsLocalRing.ResidueField ↥O := (IsLocalRing.residue ↥O).comp φ
+hg : ∀ a ∈ v.asIdeal, g a = 0
+z : ↥(Valued.integer (adicCompletion K v))
+hopen : IsOpen {x | Valued.v (x - ↑z) < 1}
+k : K
+hk : (algebraMap K (adicCompletion K v)) k ∈ {x | Valued.v (x - ↑z) < 1}
+hkz : Valued.v ({ toCompletion := ↑((WithVal.equiv (valuation K v)).symm k) } - ↑z) < 1
+hk1 : (valuation K v) k ≤ 1
+a : 𝓞 K
+ha : (valuation K v) ((algebraMap (𝓞 K) K) a - k) < ↑1
+⊢ (IsLocalRing.residue ↥O) (φ a) = (IsLocalRing.residue ↥O) z
+seconds=5
+exit=1

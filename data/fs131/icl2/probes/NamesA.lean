@@ -1,0 +1,32 @@
+import Proofs.HadwigerNelson.Rigidity.CountTorus
+open NumberField
+#check @HadwigerNelson.UnitRing.mem_normOne
+#check @NumberField.InfinitePlace.mk
+#check @NumberField.InfinitePlace.embedding_of_isReal_apply
+#check @NumberField.ComplexEmbedding.isReal_iff
+#check @Complex.exp_log
+#check @Complex.neg_pi_lt_log_im
+#check @Complex.log_im_le_pi
+#check @Complex.exp_eq_one_iff
+#check @Rat.denseRange_cast
+#check @Submonoid.topologicalClosure
+#check @mem_closure_image
+#check @ContinuousAt.mem_closure_image
+#check @NumberField.InfinitePlace.isComplex_iff
+#check @NumberField.mixedEmbedding.latticeBasis_apply
+#check @Complex.abs_exp
+#check @Complex.norm_exp
+#check @Complex.exp_re
+#check @Complex.log_re
+#check @Complex.exp_conj
+#check @Complex.log_conj
+#check @Complex.log_inv
+#check @Complex.slitPlane
+#check @NumberField.InfinitePlace.not_isReal_iff_isComplex
+#check @HadwigerNelson.SpectralChain.conjOn
+#check @HadwigerNelson.UnitRing.conjOn
+#check @Complex.ofReal_re
+#check @HadwigerNelson.SpectralChain.fieldI_conj
+#check @HadwigerNelson.UnitRing.conjOn_apply
+example : TopologicalSpace (mixedEmbedding.mixedSpace ℚ) := inferInstance
+example : ContinuousMul (mixedEmbedding.mixedSpace ℚ) := inferInstance

@@ -1,0 +1,65 @@
+class	name	kind	verdict	constants only at the release's pin	constants only at this pin	note
+target	finiteShannon_mul	theorem	IDENTICAL	—	—	
+target	finiteShannon_mass_decomposition	theorem	IDENTICAL	—	—	
+target	finiteShannon_joint_mass_le	theorem	IDENTICAL	—	—	
+target	finiteShannon_submodular	theorem	IDENTICAL	—	—	
+target	finiteShannon_fst_le	theorem	IDENTICAL	—	—	
+target	finiteShannon_joint_decomposition	theorem	IDENTICAL	—	—	
+target	observationPair_measurable_fiber	theorem	IDENTICAL	—	—	
+target	conditionalObservationEntropy	def	IDENTICAL	—	—	
+target	observationEntropy_swap	theorem	IDENTICAL	—	—	
+target	observationEntropy_assoc	theorem	IDENTICAL	—	—	
+target	conditionalObservationEntropy_nonneg	theorem	IDENTICAL	—	—	
+target	conditionalObservationEntropy_le	theorem	IDENTICAL	—	—	
+target	conditionalObservationEntropy_chain	theorem	IDENTICAL	—	—	
+target	observationEntropy_submodular	theorem	IDENTICAL	—	—	
+target	conditionalObservationEntropy_conditioning_le	theorem	IDENTICAL	—	—	
+target	conditionalObservationEntropy_pair_le	theorem	IDENTICAL	—	—	
+target	observationEntropy_injective	theorem	IDENTICAL	—	—	
+target	conditionalObservationEntropy_injective	theorem	IDENTICAL	—	—	
+target	conditionalObservationEntropy_comp_preserving	theorem	IDENTICAL	—	—	
+target	conditionalObservationEntropy_coarsening_le	theorem	IDENTICAL	—	—	
+target	conditionalObservationEntropy_pair_pair_le	theorem	IDENTICAL	—	—	
+target	observationEntropy_le_add_conditional	theorem	IDENTICAL	—	—	
+target	observationEntropy_unique	theorem	IDENTICAL	—	—	
+target	orbitName_one	theorem	IDENTICAL	—	—	
+target	conditionalOrbitEntropy_one	theorem	IDENTICAL	—	—	
+target	conditionalOrbitEntropy_le	theorem	IDENTICAL	—	—	
+target	observationEntropyRate_le_add_conditional	theorem	IDENTICAL	—	—	
+target	observationConditionalProbability	def	IDENTICAL	—	—	
+target	observationConditionalProbability_nonneg	theorem	IDENTICAL	—	—	
+target	observationConditionalProbability_le_one	theorem	IDENTICAL	—	—	
+target	observationConditionalProbability_sum	theorem	IDENTICAL	—	—	
+target	observationConditionalProbability_ae_sum	theorem	IDENTICAL	—	—	
+target	conditionalObservationEntropy_eq_sum	theorem	IDENTICAL	—	—	
+target	conditionalObservationEntropy_eq_integral	theorem	IDENTICAL	—	—	
+target	observationSigma	def	IDENTICAL	—	—	
+target	observationSigma_le	theorem	IDENTICAL	—	—	
+target	stronglyMeasurable_observation_values	theorem	IDENTICAL	—	—	
+target	setIntegral_eq_of_observation_atoms	theorem	IDENTICAL	—	—	
+target	observation_values_ae_eq_condExp	theorem	IDENTICAL	—	—	
+target	setIntegral_observationConditionalProbability	theorem	IDENTICAL	—	—	
+target	observationConditionalProbability_ae_eq_condExp	theorem	IDENTICAL	—	—	
+target	observationConditionalProbability_tendsto	theorem	UP-TO-INSTANCES	CompleteLattice.toCompletePartialOrder CompletePartialOrder.toSupSet	CompleteLattice.toConditionallyCompleteLattice ConditionallyCompleteLattice.toConditionallyCompletePartialOrder ConditionallyCompletePartialOrder.toConditionallyCompletePartialOrderSup ConditionallyCompletePartialOrderSup.toSupSet	
+target	conditionalObservationEntropy_tendsto_zero	theorem	UP-TO-INSTANCES	CompleteLattice.toCompletePartialOrder CompletePartialOrder.toSupSet	CompleteLattice.toConditionallyCompleteLattice ConditionallyCompleteLattice.toConditionallyCompletePartialOrder ConditionallyCompletePartialOrder.toConditionallyCompletePartialOrderSup ConditionallyCompletePartialOrderSup.toSupSet	
+target	measureEntropy_eq_iSup_generating	theorem	UP-TO-INSTANCES	CompleteLattice.toCompletePartialOrder CompleteLinearOrder.toCompletelyDistribLattice CompletePartialOrder.toSupSet CompletelyDistribLattice.toCompleteLattice	CompleteLattice.toConditionallyCompleteLattice CompleteLinearOrder.toConditionallyCompleteLinearOrderBot ConditionallyCompleteLattice.toConditionallyCompletePartialOrder ConditionallyCompleteLinearOrder.toConditionallyCompleteLattice ConditionallyCompleteLinearOrderBot.toConditionallyCompleteLinearOrder ConditionallyCompletePartialOrder.toConditionallyCompletePartialOrderSup ConditionallyCompletePartialOrderSup.toSupSet	
+target	fixedPoint_mem_closed_convex_orbit	theorem	IDENTICAL	—	—	
+target	exists_convex_orbit_approximants	theorem	IDENTICAL	—	—	
+target	actionInvariantSigma	def	IDENTICAL	—	—	
+target	actionInvariantSigma_le	theorem	IDENTICAL	—	—	
+target	measurable_actionInvariantSigma	theorem	IDENTICAL	—	—	
+target	exists_pointwise_invariant_representative	theorem	IDENTICAL	—	—	
+target	orbitConvexHull	def	IDENTICAL	—	—	
+target	orbitConvexHull_measurable	theorem	IDENTICAL	—	—	
+target	orbitConvexHull_interval	theorem	IDENTICAL	—	—	
+target	orbitConvexHull_integral	theorem	IDENTICAL	—	—	
+target	orbitConvexHull_setIntegral	theorem	IDENTICAL	—	—	
+target	lp_convex_orbit_representative	theorem	UP-TO-INSTANCES	AddGroup.toSubNegMonoid AddSubgroup.instAddSubgroupClass AddSubgroupClass.toAddSubmonoidClass AddSubmonoidClass.toAddCommMonoid CommRing.toNonUnitalCommRing IsSemitopologicalRing.toIsSemitopologicalSemiring IsSemitopologicalSemiring.toContinuousAdd IsTopologicalRing.toIsSemitopologicalRing MeasureTheory.AEEqFun.instAddCommMonoid NonUnitalCommRing.toNonUnitalNonAssocCommRing NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring Real.commRing Real.instAddCommMonoid Real.instAddGroup instIsTopologicalAddGroupReal instIsTopologicalRingReal	AddCommGroup.toAddCommMonoid MeasureTheory.Lp.instAddCommGroup	
+target	exists_invariant_orbit_average_limit	theorem	IDENTICAL	—	—	
+target	orbitConvexHull_aeSetIntegral	theorem	IDENTICAL	—	—	
+target	invariant_set_independent_of_orbit_indicator_limit	theorem	IDENTICAL	—	—	
+target	ergodicSMul_of_orbit_indicator_limits	theorem	IDENTICAL	—	—	
+target	condExpKernel_invariant	theorem	IDENTICAL	—	—	
+target	invariant_kernel_decomposition	theorem	IDENTICAL	—	—	
+target	condExpKernel_ae_constant	theorem	IDENTICAL	—	—	
+target	action_ergodic_decomposition	theorem	IDENTICAL	—	—	

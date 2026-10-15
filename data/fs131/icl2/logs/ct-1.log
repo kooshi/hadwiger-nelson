@@ -1,0 +1,135 @@
+slot: admitted icl2: mem 6 GiB (hard cap), cpus 4,5
+data/fs131/icl2/work/CountTorus.lean:64:8: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  DivisionRing (mixedEmbedding.mixedSpace ↥(fieldI F))
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/icl2/work/CountTorus.lean:64:8: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  RingHomClass (↥(fieldI F) →+* mixedEmbedding.mixedSpace ↥(fieldI F)) (↥(fieldI F))
+    (mixedEmbedding.mixedSpace ↥(fieldI F))
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/icl2/work/CountTorus.lean:64:56: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?a • ?x
+in the target expression
+  ↑q = q • 1
+
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+q₁ q₂ : ℚ
+hre : (↑q₁ + ↑q₂ * Complex.I).re = ↑q₁
+him : (↑q₁ + ↑q₂ * Complex.I).im = ↑q₂
+q : ℚ
+⊢ ↑q = q • 1
+data/fs131/icl2/work/CountTorus.lean:59:90: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+q₁ q₂ : ℚ
+hre : (↑q₁ + ↑q₂ * Complex.I).re = ↑q₁
+him : (↑q₁ + ↑q₂ * Complex.I).im = ↑q₂
+hq : ∀ (q : ℚ), (mixedEmbedding ↥(fieldI F)) ↑q = ↑q • (mixedEmbedding ↥(fieldI F)) 1
+⊢ (↑q₁).re • (mixedEmbedding ↥(fieldI F)) 1 + (↑q₁).im • (mixedEmbedding ↥(fieldI F)) (iL F) +
+      ((↑q₂ * Complex.I).re • (mixedEmbedding ↥(fieldI F)) 1 +
+        (↑q₂ * Complex.I).im • (mixedEmbedding ↥(fieldI F)) (iL F)) =
+    ↑q₁ • (mixedEmbedding ↥(fieldI F)) 1 + ↑q₂ • ((mixedEmbedding ↥(fieldI F)) 1 * (mixedEmbedding ↥(fieldI F)) (iL F))
+data/fs131/icl2/work/CountTorus.lean:65:104: warning: This simp argument is unused:
+  hre
+
+Hint: Omit it from the simp argument list.
+  simp only [Delta, LinearMap.add_apply, LinearMap.smulRight_apply, Complex.reLm_coe,
+  ̲  ̲ ̲ ̲Complex.imLm_coe, hr̵e̵,̵ ̵h̵im,
+  ̵  ̵ ̵ ̵map_add, map_mul, hq, smul_mul_assoc, one_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/icl2/work/CountTorus.lean:65:109: warning: This simp argument is unused:
+  him
+
+Hint: Omit it from the simp argument list.
+  simp only [Delta, LinearMap.add_apply, LinearMap.smulRight_apply, Complex.reLm_coe,
+  ̲  ̲ ̲ ̲Complex.imLm_coe, hre, h̵i̵m,̵
+  ̵ ̵ ̵ ̵ ̵m̵ap_add, map_mul, hq, smul_mul_assoc, one_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/icl2/work/CountTorus.lean:66:42: warning: This simp argument is unused:
+  one_mul
+
+Hint: Omit it from the simp argument list.
+  simp only [Delta, LinearMap.add_apply, LinearMap.smulRight_apply, Complex.reLm_coe,
+  ̲  ̲ ̲ ̲Complex.imLm_coe, hre, him,
+  ̵  ̵ ̵ ̵map_add, map_mul, hq, smul_mul_assoc,̵ ̵o̵n̵e̵_̵m̵u̵l̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/icl2/work/CountTorus.lean:98:2: error(lean.unknownIdentifier): Unknown constant `Submonoid.topologicalClosure_coe`
+data/fs131/icl2/work/CountTorus.lean:124:6: error: ring failed, ring expressions not equal
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+θ : ℝ
+X : Set (mixedEmbedding.mixedSpace ↥(fieldI F)) := ⋯
+hX : X = closure (⇑(mixedEmbedding ↥(fieldI F)) '' normOneL F)
+hΔc : Continuous ⇑(Delta F)
+cay : ℝ → ℂ := ⋯
+hcay : cay = fun t => (1 + ↑t * Complex.I) / (1 - ↑t * Complex.I)
+hden : ∀ (t : ℝ), 1 - ↑t * Complex.I ≠ 0
+hcayc : Continuous cay
+q : ℚ
+hq : 1 + q ^ 2 ≠ 0
+hqC : 1 + ↑q ^ 2 ≠ 0
+⊢ 1 + ↑q ^ 2 * 3 + ↑q ^ 2 * Complex.I ^ 2 * 3 + Complex.I ^ 2 = 0
+data/fs131/icl2/work/CountTorus.lean:130:10: error(lean.unknownIdentifier): Unknown constant `Complex.conj_ofReal?`
+data/fs131/icl2/work/CountTorus.lean:142:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  Complex.cos ↑?x
+in the target expression
+  Complex.exp (↑θ * Complex.I) = (↑(Real.cos (θ / 2)) + ↑(Real.sin (θ / 2)) * Complex.I) ^ 2
+
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+θ : ℝ
+X : Set (mixedEmbedding.mixedSpace ↥(fieldI F)) := closure (⇑(mixedEmbedding ↥(fieldI F)) '' normOneL F)
+hX : X = closure (⇑(mixedEmbedding ↥(fieldI F)) '' normOneL F)
+hΔc : Continuous ⇑(Delta F)
+cay : ℝ → ℂ := fun t => (1 + ↑t * Complex.I) / (1 - ↑t * Complex.I)
+hcay : cay = fun t => (1 + ↑t * Complex.I) / (1 - ↑t * Complex.I)
+hden : ∀ (t : ℝ), 1 - ↑t * Complex.I ≠ 0
+hcayc : Continuous cay
+hrat : ∀ (q : ℚ), (Delta F) (cay ↑q) ∈ X
+hreal : ∀ (t : ℝ), (Delta F) (cay t) ∈ X
+⊢ Complex.exp (↑θ * Complex.I) = (↑(Real.cos (θ / 2)) + ↑(Real.sin (θ / 2)) * Complex.I) ^ 2
+data/fs131/icl2/work/CountTorus.lean:151:29: error: 'linear_combination' supports only linear operations
+data/fs131/icl2/work/CountTorus.lean:165:6: error: ring failed, ring expressions not equal
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+θ : ℝ
+X : Set (mixedEmbedding.mixedSpace ↥(fieldI F)) := ⋯
+hX : X = closure (⇑(mixedEmbedding ↥(fieldI F)) '' normOneL F)
+hΔc : Continuous ⇑(Delta F)
+cay : ℝ → ℂ := ⋯
+hcay : cay = fun t => (1 + ↑t * Complex.I) / (1 - ↑t * Complex.I)
+hden : ∀ (t : ℝ), 1 - ↑t * Complex.I ≠ 0
+hcayc : Continuous cay
+hrat : ∀ (q : ℚ), (Delta F) (cay ↑q) ∈ X
+hreal : ∀ (t : ℝ), (Delta F) (cay t) ∈ X
+hexp : Complex.exp (↑θ * Complex.I) = (↑(Real.cos (θ / 2)) + ↑(Real.sin (θ / 2)) * Complex.I) ^ 2
+hc0 : Real.cos (θ / 2) ≠ 0
+hcs : ↑(Real.cos (θ / 2)) ^ 2 + ↑(Real.sin (θ / 2)) ^ 2 = 1
+hcC : ↑(Real.cos (θ / 2)) ≠ 0
+⊢ -1 + Complex.cos (↑θ / 2) * Complex.sin (↑θ / 2) * Complex.I * 2 -
+                            Complex.cos (↑θ / 2) * Complex.sin (↑θ / 2) ^ 2 * Complex.I ^ 2 * (Complex.cos (↑θ / 2))⁻¹ *
+                              2 +
+                          Complex.cos (↑θ / 2) ^ 2 -
+                        Complex.cos (↑θ / 2) ^ 2 * Complex.sin (↑θ / 2) * Complex.I * (Complex.cos (↑θ / 2))⁻¹ -
+                      Complex.sin (↑θ / 2) * Complex.I * (Complex.cos (↑θ / 2))⁻¹ +
+                    Complex.sin (↑θ / 2) ^ 2 * Complex.I ^ 2 -
+                  Complex.sin (↑θ / 2) ^ 3 * Complex.I ^ 3 * (Complex.cos (↑θ / 2))⁻¹ +
+                Complex.I * ↑(Real.cos (θ / 2)) ^ 2 * ↑(Real.sin (θ / 2)) -
+              Complex.I * ↑(Real.sin (θ / 2)) +
+            Complex.I * ↑(Real.sin (θ / 2)) ^ 3 -
+          ↑(Real.cos (θ / 2)) +
+        ↑(Real.cos (θ / 2)) * ↑(Real.sin (θ / 2)) ^ 2 +
+      ↑(Real.cos (θ / 2)) ^ 3 =
+    0
+data/fs131/icl2/work/CountTorus.lean:170:8: warning: declaration uses `sorry`
+data/fs131/icl2/work/CountTorus.lean:178:8: warning: declaration uses `sorry`
+data/fs131/icl2/work/CountTorus.lean:183:8: warning: declaration uses `sorry`
+data/fs131/icl2/work/CountTorus.lean:186:8: warning: declaration uses `sorry`
+Command exited with non-zero status 1
+wall=4.74s maxrss=3797308kB
+lean1: compile failed; the build's .olean of Rigidity/CountTorus linked back into the farm

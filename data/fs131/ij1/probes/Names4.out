@@ -1,0 +1,29 @@
+slot: waiting (ledger 22 + 4 > budget 22 GiB)
+slot: admitted ij1: mem 4 GiB (hard cap), cpus 2,3
+@FiniteMeasure.ext_of_forall_integral_eq : ∀ {Ω : Type u_1} [inst : MeasurableSpace Ω] [inst_1 : TopologicalSpace Ω]
+  [HasOuterApproxClosed Ω] [BorelSpace Ω] {μ ν : FiniteMeasure Ω},
+  (∀ (f : BoundedContinuousFunction Ω ℝ), ∫ (x : Ω), f x ∂↑μ = ∫ (x : Ω), f x ∂↑ν) → μ = ν
+@ext_of_forall_integral_eq_of_IsFiniteMeasure : ∀ {Ω : Type u_1} [inst : MeasurableSpace Ω]
+  [inst_1 : TopologicalSpace Ω] [HasOuterApproxClosed Ω] [BorelSpace Ω] {μ ν : Measure Ω} [IsFiniteMeasure μ]
+  [IsFiniteMeasure ν], (∀ (f : BoundedContinuousFunction Ω ℝ), ∫ (x : Ω), f x ∂μ = ∫ (x : Ω), f x ∂ν) → μ = ν
+@FiniteMeasure.continuous_map : ∀ {Ω : Type u_1} {Ω' : Type u_2} [inst : MeasurableSpace Ω]
+  [inst_1 : MeasurableSpace Ω'] [inst_2 : TopologicalSpace Ω] [inst_3 : OpensMeasurableSpace Ω]
+  [inst_4 : TopologicalSpace Ω'] [inst_5 : BorelSpace Ω'] {f : Ω → Ω'}, Continuous f → Continuous fun ν => ν.map f
+@Measure.map_dirac : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α] [inst_1 : MeasurableSpace β]
+  [MeasurableSingletonClass α] [MeasurableSingletonClass β] {f : α → β} (a : α),
+  Measure.map f (Measure.dirac a) = Measure.dirac (f a)
+@integral_dirac : ∀ {α : Type u_1} {E : Type u_2} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E]
+  [hE : CompleteSpace E] [inst_2 : MeasurableSpace α] [MeasurableSingletonClass α] (f : α → E) (a : α),
+  ∫ (x : α), f x ∂Measure.dirac a = f a
+data/fs131/ij1/probes/Names4.lean:15:8: warning: `MeasureTheory.integral_finset_sum_measure` has been deprecated: Use `MeasureTheory.integral_finsetSum_measure` instead
+@integral_finset_sum_measure : ∀ {α : Type u_1} {G : Type u_2} [inst : NormedAddCommGroup G] [inst_1 : NormedSpace ℝ G]
+  {ι : Type u_3} {m : MeasurableSpace α} {f : α → G} {μ : ι → Measure α} {s : Finset ι},
+  (∀ i ∈ s, Integrable f (μ i)) → ∫ (a : α), f a ∂∑ i ∈ s, μ i = ∑ i ∈ s, ∫ (a : α), f a ∂μ i
+@integral_smul_measure : ∀ {α : Type u_1} {G : Type u_2} [inst : NormedAddCommGroup G] [inst_1 : NormedSpace ℝ G]
+  {m : MeasurableSpace α} {μ : Measure α} (f : α → G) (c : ENNReal),
+  ∫ (x : α), f x ∂c • μ = c.toReal • ∫ (x : α), f x ∂μ
+@Measure.map_map : ∀ {α : Type u_1} {β : Type u_2} {γ : Type u_3} {mα : MeasurableSpace α} {mβ : MeasurableSpace β}
+  {mγ : MeasurableSpace γ} {μ : Measure α} {g : β → γ} {f : α → β},
+  Measurable g → Measurable f → Measure.map g (Measure.map f μ) = Measure.map (g ∘ f) μ
+seconds=483
+exit=0

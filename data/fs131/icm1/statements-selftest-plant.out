@@ -1,0 +1,9 @@
+BINDER-MISS HadwigerNelson.Rigidity.tca_iff (ClassRatio): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.RatioAtMost (ClassRatio): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.unitVectorsR (CountCompletion): names Subfield, lacks NumberField
+SAME=41 CHANGED=0 RULED=0 MISSING=0 ADDED-INTERNAL=0 ADDED-GENERATED=0 NEW-MODULE=0 ADDED-PUBLIC=0
+PLANT type-char in HadwigerNelson.Rigidity.Counting.ιK: CHANGED=1 -> FIRED
+PLANT drop HadwigerNelson.Rigidity.Counting.ιK: MISSING=1 -> FIRED
+PLANT add public in CountCompletion: ADDED-PUBLIC=1 -> FIRED
+PLANT binder in HadwigerNelson.Rigidity.tca_of_five_le_localBound: misses=4 -> FIRED
+plant: ALL FIRED

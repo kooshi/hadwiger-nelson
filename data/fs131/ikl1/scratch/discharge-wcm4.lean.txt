@@ -1,0 +1,21 @@
+/-- **Hensel's count in the certificate link's words** (FS131-IKL1): at a stable prime not above `2` with
+`|𝓞 ⧸ P| = Q²`, every norm-one residue at level one has `Q^n` norm-one lifts at level `n + 1` (`card_res_fibreT` at
+`θ = i`, `exists_conj_sub_notMem`). -/
+theorem henselCount_of_two_notMem [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) {Q : ℕ}
+    (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) : CertLink.HenselCount P Q :=
+  fun n hfin _ ht => card_res_fibreT P (exists_conj_sub_notMem P h2).choose_spec hQ n hfin ht
+
+/-- **The bound on new characters in the certificate link's words** (FS131-IKL1; FS-66's L1): at a stable prime not
+above `2` with `|𝓞 ⧸ P| = Q²`, a character of level `n + 1` not trivial on the kernel of the map to level one sums to at
+most `2Q^n` in modulus over the norm-one set (`norm_charSum_le_of_resT` at `θ = i`, and `|S_{n+1}| = Q^n(Q + 1)`,
+`card_levelSet_succT`). -/
+theorem newCharBound_of_two_notMem [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) {Q : ℕ}
+    (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) : CertLink.NewCharBound P Q := by
+  intro n hfin ψ hψ
+  have ha := (exists_conj_sub_notMem P h2).choose_spec
+  have hb := norm_charSum_le_of_resT P ha hQ n hfin ψ hψ
+  rw [card_levelSet_succT P ha hQ n hfin] at hb
+  have hQ1 : (0 : ℝ) < (Q : ℝ) + 1 := by positivity
+  refine hb.trans (le_of_eq ?_)
+  push_cast
+  field_simp

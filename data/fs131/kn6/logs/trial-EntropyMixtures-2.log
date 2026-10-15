@@ -1,0 +1,54 @@
+slot: admitted kn6t: mem 8 GiB (hard cap), cpus 2,3
+build/fs131-kn6/release-copies/EntropyMixtures.lean:675:18: error(lean.unknownIdentifier): Unknown identifier `ite_eq_right`
+build/fs131-kn6/release-copies/EntropyMixtures.lean:674:74: error: unsolved goals
+Z : Type u_1
+Y : Type u_2
+ι : Type u_3
+inst✝³ : MeasurableSpace Z
+inst✝² : MeasurableSpace Y
+τ : Measure Z
+inst✝¹ : IsProbabilityMeasure τ
+κ : Kernel Z Y
+inst✝ : IsMarkovKernel κ
+Q : Z → ι
+i : ι
+h : τ {z | Q z = i} ≠ 0
+S : Set Y
+hS : MeasurableSet S
+⊢ (if τ {z | Q z = i} = 0 then ⇑κ ∘ₘ τ else ⇑κ ∘ₘ τ[|{z | Q z = i}]).real S =
+    (τ.real {z | Q z = i})⁻¹ * ∫ (z : Z) in {z | Q z = i}, (κ z).real S ∂τ
+build/fs131-kn6/release-copies/EntropyMixtures.lean:719:18: error(lean.unknownIdentifier): Unknown identifier `ite_eq_left`
+build/fs131-kn6/release-copies/EntropyMixtures.lean:719:35: error(lean.unknownIdentifier): Unknown identifier `ite_eq_right`
+build/fs131-kn6/release-copies/EntropyMixtures.lean:720:4: error: Tactic `contradiction` failed
+
+Z : Type u_1
+V : Type u_2
+inst✝³ : MeasurableSpace Z
+inst✝² : PseudoMetricSpace V
+inst✝¹ : MeasurableSpace V
+inst✝ : BorelSpace V
+p : Z → V
+hp : Measurable p
+K : Set V
+hK : IsCompact K
+hpK : ∀ (z : Z), p z ∈ K
+δ : ℝ
+hδ : 0 < δ
+U : V → Set V := fun v => Metric.ball v (δ / 2)
+s : Finset V
+hs : K ⊆ ⋃ i ∈ s, U i
+e : Fin (Fintype.card ↥s) ≃ ↥s := (Fintype.equivFin ↥s).symm
+Q : Z → Fin (Fintype.card ↥s) → Bool := fun z i => if p z ∈ U ↑(e i) then true else false
+hQ : Measurable Q
+z z' : Z
+H : Q z = Q z'
+v : V
+hv : v ∈ s
+hz : p z ∈ U v
+i : Fin (Fintype.card ↥s) := e.symm ⟨v, hv⟩
+hzi : p z ∈ U ↑(e i)
+H' : (if p z ∈ U ↑(e i) then true else false) = if p z' ∈ U ↑(e i) then true else false
+hn : ¬p z' ∈ U ↑(e i)
+⊢ False
+seconds=10
+exit=1

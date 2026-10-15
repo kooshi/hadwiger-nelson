@@ -1,0 +1,5 @@
+PlantGlobal exit 0
+PlantKt exit 0
+PlantChunk exit 0
+PlantSeg exit 1
+PlantPsd exit 0

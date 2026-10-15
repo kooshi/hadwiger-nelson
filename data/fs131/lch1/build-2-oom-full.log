@@ -1,0 +1,485 @@
+### up-to-date check, lake build --no-build over 2151 modules: exit 3 after 4s
+✖ [3703/3704] Building Proofs.HadwigerNelson.Arith.FibreCert
+error: target is out-of-date and needs to be rebuilt
+✖ [6040/6177] Building Proofs.HadwigerNelson.Outside.OAI158Kernels
+error: target is out-of-date and needs to be rebuilt
+✖ [6210/6452] Building Proofs.HadwigerNelson.Outside.OAI158
+error: target is out-of-date and needs to be rebuilt
+✖ [6293/6452] Building Proofs.HadwigerNelson.Arith.DyadicQuadratic
+error: target is out-of-date and needs to be rebuilt
+✖ [6297/6452] Building Proofs.HadwigerNelson.Arith.UpperHalf
+error: target is out-of-date and needs to be rebuilt
+✖ [6298/6452] Building Proofs.HadwigerNelson.Instances.SqrtFortySeven
+error: target is out-of-date and needs to be rebuilt
+✖ [6328/6452] Building Proofs.HadwigerNelson.Arith.ThreeColourCharacter
+error: target is out-of-date and needs to be rebuilt
+✖ [6371/6452] Building Proofs.HadwigerNelson.Rigidity.Herglotz
+error: target is out-of-date and needs to be rebuilt
+✖ [6397/6452] Building Proofs.HadwigerNelson.Arith.BinaryField
+error: target is out-of-date and needs to be rebuilt
+✖ [6416/6452] Building Proofs.HadwigerNelson.Rigidity.Pieces
+error: target is out-of-date and needs to be rebuilt
+Some required targets logged failures:
+- Proofs.HadwigerNelson.Arith.FibreCert
+- Proofs.HadwigerNelson.Outside.OAI158Kernels
+- Proofs.HadwigerNelson.Outside.OAI158
+- Proofs.HadwigerNelson.Arith.DyadicQuadratic
+- Proofs.HadwigerNelson.Arith.UpperHalf
+- Proofs.HadwigerNelson.Instances.SqrtFortySeven
+- Proofs.HadwigerNelson.Arith.ThreeColourCharacter
+- Proofs.HadwigerNelson.Rigidity.Herglotz
+- Proofs.HadwigerNelson.Arith.BinaryField
+- Proofs.HadwigerNelson.Rigidity.Pieces
+### batch 1/725, attempt 1: exit 0 after 2s: Proofs.Basic Proofs.HadwigerNelson.Arith.CircleCos Proofs.HadwigerNelson.Arith.Dyadic
+Build completed successfully (3678 jobs).
+### batch 2/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Arith.FalconerFan Proofs.HadwigerNelson.Arith.FibreCert Proofs.HadwigerNelson.Arith.MajorityVote
+✔ [2943/2943] Built Proofs.HadwigerNelson.Arith.FibreCert (905ms)
+Build completed successfully (2943 jobs).
+### batch 3/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Arith.NoAffine Proofs.HadwigerNelson.Arith.RatioBound Proofs.HadwigerNelson.Arith.StationaryRatio
+Build completed successfully (2911 jobs).
+### batch 4/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Coset Proofs.HadwigerNelson.Field.Quadratic Proofs.HadwigerNelson.Fractional
+Build completed successfully (2194 jobs).
+### batch 5/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Greedy Proofs.HadwigerNelson.Instances.Core23.Edges Proofs.HadwigerNelson.Instances.SpindleLrat
+Build completed successfully (1002 jobs).
+### batch 6/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.ZMod121Four.Pts Proofs.HadwigerNelson.Outside.OAI015ErgodicDecomposition Proofs.HadwigerNelson.Outside.OAI015Maximal
+Build completed successfully (2986 jobs).
+### batch 7/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Outside.OAI015Shannon Proofs.HadwigerNelson.Outside.OAI158Amenability Proofs.HadwigerNelson.Outside.OAI158Basic
+Build completed successfully (3342 jobs).
+### batch 8/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Outside.OAI158Centers Proofs.HadwigerNelson.Outside.OAI158InvariantMean Proofs.HadwigerNelson.Outside.OAI158NumberFields
+Build completed successfully (3462 jobs).
+### batch 9/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Outside.OAI158PhaseEncoding Proofs.HadwigerNelson.Outside.OAI158SmallArcs Proofs.HadwigerNelson.Pattern
+Build completed successfully (2970 jobs).
+### batch 10/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.Basic Proofs.HadwigerNelson.Plane.CircleColouring Proofs.HadwigerNelson.Plane.DensityBound.Bessel
+Build completed successfully (2746 jobs).
+### batch 11/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Plane.DensityBound.BesselCheck Proofs.HadwigerNelson.Plane.DensityBound.X23Check Proofs.HadwigerNelson.Plane.MetricalBoundary
+Build completed successfully (2577 jobs).
+### batch 12/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.OneClass.SectionDensity Proofs.HadwigerNelson.Plane.RingCalculus.HubCount Proofs.HadwigerNelson.RealClosed
+Build completed successfully (2625 jobs).
+### batch 13/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Rigidity.FiniteZhang Proofs.HadwigerNelson.Rigidity.HaarMultiple Proofs.HadwigerNelson.Rigidity.Solenoid
+Build completed successfully (2099 jobs).
+### batch 14/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Rigidity.TateArch Proofs.HadwigerNelson.Rigidity.TateLocal Proofs.HadwigerNelson.Sat.Mask
+Build completed successfully (3384 jobs).
+### batch 15/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Strip Proofs.HadwigerNelson.Stripe Proofs.HadwigerNelson.Thomassen
+Build completed successfully (1233 jobs).
+### batch 16/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.ThreeColour Proofs.HadwigerNelson.Topology.SpernerGrid Proofs.HadwigerNelson.UnitDistance
+Build completed successfully (1467 jobs).
+### batch 17/725, attempt 1: exit 0 after 33s: Proofs.HadwigerNelson.Arith.FibreCert11 Proofs.HadwigerNelson.Arith.FibreCert19B0 Proofs.HadwigerNelson.Arith.FibreCert19B1
+✔ [3/5] Built Proofs.HadwigerNelson.Arith.FibreCert19B1 (8.8s)
+✔ [4/5] Built Proofs.HadwigerNelson.Arith.FibreCert19B0 (18s)
+✔ [5/5] Built Proofs.HadwigerNelson.Arith.FibreCert11 (33s)
+Build completed successfully (5 jobs).
+### batch 18/725, attempt 1: exit 0 after 10s: Proofs.HadwigerNelson.Arith.FibreCert19B10 Proofs.HadwigerNelson.Arith.FibreCert19B11 Proofs.HadwigerNelson.Arith.FibreCert19B12
+✔ [3/5] Built Proofs.HadwigerNelson.Arith.FibreCert19B11 (8.3s)
+✔ [4/5] Built Proofs.HadwigerNelson.Arith.FibreCert19B10 (8.9s)
+✔ [5/5] Built Proofs.HadwigerNelson.Arith.FibreCert19B12 (9.3s)
+Build completed successfully (5 jobs).
+### batch 19/725, attempt 1: exit 0 after 11s: Proofs.HadwigerNelson.Arith.FibreCert19B13 Proofs.HadwigerNelson.Arith.FibreCert19B14 Proofs.HadwigerNelson.Arith.FibreCert19B15
+✔ [3/5] Built Proofs.HadwigerNelson.Arith.FibreCert19B14 (8.2s)
+✔ [4/5] Built Proofs.HadwigerNelson.Arith.FibreCert19B15 (8.7s)
+✔ [5/5] Built Proofs.HadwigerNelson.Arith.FibreCert19B13 (10s)
+Build completed successfully (5 jobs).
+### batch 20/725, attempt 1: exit 0 after 11s: Proofs.HadwigerNelson.Arith.FibreCert19B16 Proofs.HadwigerNelson.Arith.FibreCert19B17 Proofs.HadwigerNelson.Arith.FibreCert19B18
+✔ [3/5] Built Proofs.HadwigerNelson.Arith.FibreCert19B16 (8.6s)
+✔ [4/5] Built Proofs.HadwigerNelson.Arith.FibreCert19B18 (8.7s)
+✔ [5/5] Built Proofs.HadwigerNelson.Arith.FibreCert19B17 (10s)
+Build completed successfully (5 jobs).
+### batch 21/725, attempt 1: exit 0 after 11s: Proofs.HadwigerNelson.Arith.FibreCert19B2 Proofs.HadwigerNelson.Arith.FibreCert19B3 Proofs.HadwigerNelson.Arith.FibreCert19B4
+✔ [3/5] Built Proofs.HadwigerNelson.Arith.FibreCert19B4 (8.5s)
+✔ [4/5] Built Proofs.HadwigerNelson.Arith.FibreCert19B3 (8.0s)
+✔ [5/5] Built Proofs.HadwigerNelson.Arith.FibreCert19B2 (10s)
+Build completed successfully (5 jobs).
+### batch 22/725, attempt 1: exit 0 after 11s: Proofs.HadwigerNelson.Arith.FibreCert19B5 Proofs.HadwigerNelson.Arith.FibreCert19B6 Proofs.HadwigerNelson.Arith.FibreCert19B7
+✔ [3/5] Built Proofs.HadwigerNelson.Arith.FibreCert19B5 (9.0s)
+✔ [4/5] Built Proofs.HadwigerNelson.Arith.FibreCert19B6 (9.7s)
+✔ [5/5] Built Proofs.HadwigerNelson.Arith.FibreCert19B7 (10s)
+Build completed successfully (5 jobs).
+### batch 23/725, attempt 1: exit 0 after 19s: Proofs.HadwigerNelson.Arith.FibreCert19B8 Proofs.HadwigerNelson.Arith.FibreCert19B9 Proofs.HadwigerNelson.Arith.FibreCert19K0
+✔ [3/5] Built Proofs.HadwigerNelson.Arith.FibreCert19B9 (8.5s)
+✔ [4/5] Built Proofs.HadwigerNelson.Arith.FibreCert19B8 (8.8s)
+✔ [5/5] Built Proofs.HadwigerNelson.Arith.FibreCert19K0 (18s)
+Build completed successfully (5 jobs).
+### batch 24/725, attempt 1: exit 0 after 25s: Proofs.HadwigerNelson.Arith.FibreCert19K1 Proofs.HadwigerNelson.Arith.FibreCert19K2 Proofs.HadwigerNelson.Arith.FibreCert19K3
+✔ [3/5] Built Proofs.HadwigerNelson.Arith.FibreCert19K1 (20s)
+✔ [4/5] Built Proofs.HadwigerNelson.Arith.FibreCert19K3 (22s)
+✔ [5/5] Built Proofs.HadwigerNelson.Arith.FibreCert19K2 (23s)
+Build completed successfully (5 jobs).
+### batch 25/725, attempt 1: exit 0 after 23s: Proofs.HadwigerNelson.Arith.FibreCert19K4 Proofs.HadwigerNelson.Arith.FibreCert19K5 Proofs.HadwigerNelson.Arith.FibreCert19K6
+✔ [3/5] Built Proofs.HadwigerNelson.Arith.FibreCert19K4 (20s)
+✔ [4/5] Built Proofs.HadwigerNelson.Arith.FibreCert19K6 (20s)
+✔ [5/5] Built Proofs.HadwigerNelson.Arith.FibreCert19K5 (22s)
+Build completed successfully (5 jobs).
+### batch 26/725, attempt 1: exit 0 after 20s: Proofs.HadwigerNelson.Arith.FibreCert19K7 Proofs.HadwigerNelson.Arith.FibreCert19P1 Proofs.HadwigerNelson.Arith.FibreCert19P2
+✔ [3/5] Built Proofs.HadwigerNelson.Arith.FibreCert19P1 (7.3s)
+✔ [4/5] Built Proofs.HadwigerNelson.Arith.FibreCert19P2 (8.0s)
+✔ [5/5] Built Proofs.HadwigerNelson.Arith.FibreCert19K7 (19s)
+Build completed successfully (5 jobs).
+### batch 27/725, attempt 1: exit 0 after 12s: Proofs.HadwigerNelson.Arith.FibreCert19P3 Proofs.HadwigerNelson.Arith.FibreCert19P4 Proofs.HadwigerNelson.Arith.FibreCert19P5
+✔ [3/5] Built Proofs.HadwigerNelson.Arith.FibreCert19P3 (9.5s)
+✔ [4/5] Built Proofs.HadwigerNelson.Arith.FibreCert19P4 (9.9s)
+✔ [5/5] Built Proofs.HadwigerNelson.Arith.FibreCert19P5 (11s)
+Build completed successfully (5 jobs).
+### batch 28/725, attempt 1: exit 0 after 12s: Proofs.HadwigerNelson.Arith.FibreCert19P6 Proofs.HadwigerNelson.Arith.FibreCert19P7 Proofs.HadwigerNelson.Arith.FibreCert19P8
+✔ [3/5] Built Proofs.HadwigerNelson.Arith.FibreCert19P8 (9.3s)
+✔ [4/5] Built Proofs.HadwigerNelson.Arith.FibreCert19P7 (10s)
+✔ [5/5] Built Proofs.HadwigerNelson.Arith.FibreCert19P6 (11s)
+Build completed successfully (5 jobs).
+### batch 29/725, attempt 1: exit 0 after 3s: Proofs.HadwigerNelson.Arith.FibreCert19Q0 Proofs.HadwigerNelson.Arith.FibreCert3 Proofs.HadwigerNelson.Arith.FibreCertFast
+✔ [3/5] Built Proofs.HadwigerNelson.Arith.FibreCert19Q0 (254ms)
+✔ [4/5] Built Proofs.HadwigerNelson.Arith.FibreCertFast (1.3s)
+✔ [5/5] Built Proofs.HadwigerNelson.Arith.FibreCert3 (1.8s)
+Build completed successfully (5 jobs).
+### batch 30/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Brick Proofs.HadwigerNelson.EdgeList Proofs.HadwigerNelson.Field.Approx
+Build completed successfully (2195 jobs).
+### batch 31/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.FractionalSpec Proofs.HadwigerNelson.Outside.OAI015Mixtures Proofs.HadwigerNelson.Outside.OAI158Characters
+Build completed successfully (3289 jobs).
+### batch 32/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Outside.OAI158PhaseCollision Proofs.HadwigerNelson.Outside.OAI158RelativeCenters Proofs.HadwigerNelson.Outside.OAI158Selections
+Build completed successfully (3484 jobs).
+### batch 33/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.ArcMap Proofs.HadwigerNelson.Plane.CPColouring Proofs.HadwigerNelson.Plane.Chord
+Build completed successfully (2955 jobs).
+### batch 34/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.CircleCrossing Proofs.HadwigerNelson.Plane.DensityBound.Autocorr Proofs.HadwigerNelson.Plane.DensityBound.BesselDefect
+Build completed successfully (2815 jobs).
+### batch 35/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Plane.DensityBound.Cells.Data Proofs.HadwigerNelson.Plane.DensityBound.X23Data Proofs.HadwigerNelson.Plane.PlaneTopology
+Build completed successfully (2772 jobs).
+### batch 36/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.UnitPairs Proofs.HadwigerNelson.Rigidity.SolenoidErgodic Proofs.HadwigerNelson.Sat.ClauseTable
+Build completed successfully (2515 jobs).
+### batch 37/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.ThetaCert Proofs.HadwigerNelson.Topology.LebesgueCovering Proofs.HadwigerNelson.TwoCircle
+Build completed successfully (2220 jobs).
+### batch 38/725, attempt 1: exit 0 after 56s: Proofs.HadwigerNelson.Arith.FibreCert11Seg0 Proofs.HadwigerNelson.Arith.FibreCert19 Proofs.HadwigerNelson.Arith.FibreCertSound
+✔ [1276/1278] Built Proofs.HadwigerNelson.Arith.FibreCertSound (11s)
+✔ [1277/1278] Built Proofs.HadwigerNelson.Arith.FibreCert19 (22s)
+✔ [1278/1278] Built Proofs.HadwigerNelson.Arith.FibreCert11Seg0 (55s)
+Build completed successfully (1278 jobs).
+### batch 39/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Certificate Proofs.HadwigerNelson.DistanceGraph Proofs.HadwigerNelson.FieldWall
+Build completed successfully (2553 jobs).
+### batch 40/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.IndepSearch Proofs.HadwigerNelson.Instances.Core122.Cnf.Table00 Proofs.HadwigerNelson.Instances.Core122.Cnf.Table01
+Build completed successfully (1355 jobs).
+### batch 41/725, attempt 1: exit 0 after 0s: Proofs.HadwigerNelson.Instances.Core122.Cnf.Table02 Proofs.HadwigerNelson.Instances.Core122.Cnf.Table03 Proofs.HadwigerNelson.Instances.Core122.Cnf.Table04
+Build completed successfully (6 jobs).
+### batch 42/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Core122.Cnf.Table05 Proofs.HadwigerNelson.Instances.Core122.Cnf.Table06 Proofs.HadwigerNelson.Instances.Core122.Cnf.Table07
+Build completed successfully (6 jobs).
+### batch 43/725, attempt 1: exit 0 after 0s: Proofs.HadwigerNelson.Instances.Core122.Cnf.Table08 Proofs.HadwigerNelson.Instances.Core122.Cnf.Table09 Proofs.HadwigerNelson.Instances.Core122.Cnf.Table10
+Build completed successfully (6 jobs).
+### batch 44/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Core122.Cnf.Table11 Proofs.HadwigerNelson.Instances.Core122.Cnf.Table12 Proofs.HadwigerNelson.Instances.Core122.Cnf.Table13
+Build completed successfully (6 jobs).
+### batch 45/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Core122.Cnf.Table14 Proofs.HadwigerNelson.Instances.Core122.Cnf.Table15 Proofs.HadwigerNelson.Instances.Core23.Cnf.Table00
+Build completed successfully (6 jobs).
+### batch 46/725, attempt 1: exit 0 after 0s: Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table00 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table01 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table02
+Build completed successfully (6 jobs).
+### batch 47/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table03 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table04 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table05
+Build completed successfully (6 jobs).
+### batch 48/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table06 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table07 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table08
+Build completed successfully (6 jobs).
+### batch 49/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table09 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table10 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table11
+Build completed successfully (6 jobs).
+### batch 50/725, attempt 1: exit 0 after 0s: Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table12 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table13 Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table14
+Build completed successfully (6 jobs).
+### batch 51/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table15 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Table00 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Table01
+Build completed successfully (6 jobs).
+### batch 52/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Table02 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Table03 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Table00
+Build completed successfully (6 jobs).
+### batch 53/725, attempt 1: exit 0 after 0s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Table01 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Table02 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Table03
+Build completed successfully (6 jobs).
+### batch 54/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Mycielski.Cnf.Table00 Proofs.HadwigerNelson.Instances.Seven Proofs.HadwigerNelson.Instances.SqrtEleven.Cnf.Table00
+Build completed successfully (2403 jobs).
+### batch 55/725, attempt 1: exit 0 after 0s: Proofs.HadwigerNelson.Instances.SqrtEleven.Cnf.Table01 Proofs.HadwigerNelson.Instances.SqrtEleven.Cnf.Table02 Proofs.HadwigerNelson.Instances.SqrtEleven.Cnf.Table03
+Build completed successfully (6 jobs).
+### batch 56/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.SqrtOneSixSeven.Cert Proofs.HadwigerNelson.Instances.Triangle Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table00
+Build completed successfully (2406 jobs).
+### batch 57/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table01 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table02 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table03
+Build completed successfully (6 jobs).
+### batch 58/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table04 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table05 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table06
+Build completed successfully (6 jobs).
+### batch 59/725, attempt 1: exit 0 after 0s: Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table07 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table08 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table09
+Build completed successfully (6 jobs).
+### batch 60/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table10 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table11 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table12
+Build completed successfully (6 jobs).
+### batch 61/725, attempt 1: exit 0 after 0s: Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table13 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table14 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table15
+Build completed successfully (6 jobs).
+### batch 62/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.TwoAdicFive.Edges Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Table00 Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Table01
+Build completed successfully (1347 jobs).
+### batch 63/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Table02 Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Table03 Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Table04
+Build completed successfully (6 jobs).
+### batch 64/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Table05 Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Table06 Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Table07
+Build completed successfully (6 jobs).
+### batch 65/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.ZMod121Four.Edges Proofs.HadwigerNelson.Outside.OAI015Generating Proofs.HadwigerNelson.Outside.OAI158ConditionalSelection
+Build completed successfully (3044 jobs).
+### batch 66/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Outside.OAI158Multipliers Proofs.HadwigerNelson.Plane.AeColouring Proofs.HadwigerNelson.Plane.DensityBound.BesselCert
+Build completed successfully (3494 jobs).
+### batch 67/725, attempt 1: exit 0 after 0s: Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part00 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part01 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part02
+Build completed successfully (6 jobs).
+### batch 68/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part03 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part04 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part05
+Build completed successfully (6 jobs).
+### batch 69/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part06 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part07 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part08
+Build completed successfully (6 jobs).
+### batch 70/725, attempt 1: exit 0 after 0s: Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part09 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part10 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part11
+Build completed successfully (6 jobs).
+### batch 71/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part12 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part13 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part14
+Build completed successfully (6 jobs).
+### batch 72/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part15 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part16 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part17
+Build completed successfully (6 jobs).
+### batch 73/725, attempt 1: exit 0 after 0s: Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part18 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part19 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part20
+Build completed successfully (6 jobs).
+### batch 74/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part21 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part22 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part23
+Build completed successfully (6 jobs).
+### batch 75/725, attempt 1: exit 0 after 0s: Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part24 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part25 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part26
+Build completed successfully (6 jobs).
+### batch 76/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part27 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part28 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part29
+Build completed successfully (6 jobs).
+### batch 77/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part30 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part31 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part32
+Build completed successfully (6 jobs).
+### batch 78/725, attempt 1: exit 0 after 0s: Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part33 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part34 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part35
+Build completed successfully (6 jobs).
+### batch 79/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part36 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part37 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part38
+Build completed successfully (6 jobs).
+### batch 80/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part39 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part40 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part41
+Build completed successfully (6 jobs).
+### batch 81/725, attempt 1: exit 0 after 0s: Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part42 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part43 Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part44
+Build completed successfully (6 jobs).
+### batch 82/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Plane.DensityBound.Cells.Part45 Proofs.HadwigerNelson.Plane.DensityBound.Pattern Proofs.HadwigerNelson.Plane.DensityBound.X23Atoms00
+Build completed successfully (2804 jobs).
+### batch 83/725, attempt 1: exit 0 after 0s: Proofs.HadwigerNelson.Plane.DensityBound.X23Atoms01 Proofs.HadwigerNelson.Plane.DensityBound.X23Atoms02 Proofs.HadwigerNelson.Plane.DensityBound.X23Atoms03
+Build completed successfully (6 jobs).
+### batch 84/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.DensityBound.X23Atoms04 Proofs.HadwigerNelson.Plane.DensityBound.X23Atoms05 Proofs.HadwigerNelson.Plane.DensityBound.X23Atoms06
+Build completed successfully (6 jobs).
+### batch 85/725, attempt 1: exit 0 after 0s: Proofs.HadwigerNelson.Plane.DensityBound.X23Atoms07 Proofs.HadwigerNelson.Plane.DensityBound.X23Atoms08 Proofs.HadwigerNelson.Plane.DensityBound.X23Atoms09
+Build completed successfully (6 jobs).
+### batch 86/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.DensityBound.X23Atoms10 Proofs.HadwigerNelson.Plane.DensityBound.X23Atoms11 Proofs.HadwigerNelson.Plane.DensityBound.X23Atoms12
+Build completed successfully (6 jobs).
+### batch 87/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.DensityBound.X23Cong00 Proofs.HadwigerNelson.Plane.DensityBound.X23Cong01 Proofs.HadwigerNelson.Plane.DensityBound.X23Cong02
+Build completed successfully (6 jobs).
+### batch 88/725, attempt 1: exit 0 after 0s: Proofs.HadwigerNelson.Plane.DensityBound.X23Cong03 Proofs.HadwigerNelson.Plane.DensityBound.X23Cong04 Proofs.HadwigerNelson.Plane.DensityBound.X23Cong05
+Build completed successfully (6 jobs).
+### batch 89/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.DensityBound.X23Cong06 Proofs.HadwigerNelson.Plane.DensityBound.X23Cong07 Proofs.HadwigerNelson.Plane.Lens
+Build completed successfully (2621 jobs).
+### batch 90/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Plane.LocalMap Proofs.HadwigerNelson.Plane.Saturated.Curve Proofs.HadwigerNelson.Plane.UnitAvoiding
+Build completed successfully (2617 jobs).
+### batch 91/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Sat.Encoding Proofs.HadwigerNelson.Sat.MaskCheck
+Build completed successfully (1346 jobs).
+### batch 92/725, attempt 1: exit 0 after 46s: Proofs.HadwigerNelson.Arith.FibreCert11Seg1 Proofs.HadwigerNelson.Arith.FibreCert19Kt0 Proofs.HadwigerNelson.BrickDistance
+✔ [1938/1939] Built Proofs.HadwigerNelson.Arith.FibreCert11Seg1 (41s)
+✔ [1939/1939] Built Proofs.HadwigerNelson.Arith.FibreCert19Kt0 (44s)
+Build completed successfully (1939 jobs).
+### batch 93/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Gadget Proofs.HadwigerNelson.Instances.Core122.Base Proofs.HadwigerNelson.Instances.Core23.Cnf.Table
+Build completed successfully (2473 jobs).
+### batch 94/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.CoreSpindle.Cert Proofs.HadwigerNelson.Instances.CoreSpindle.Weights Proofs.HadwigerNelson.Instances.DeGrey.Table
+Build completed successfully (2468 jobs).
+### batch 95/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Table Proofs.HadwigerNelson.Instances.Heule553.Table Proofs.HadwigerNelson.Instances.Spindle
+Build completed successfully (2466 jobs).
+### batch 96/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Instances.SqrtEleven.Table Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Table Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Table
+Build completed successfully (2496 jobs).
+### batch 97/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Motion Proofs.HadwigerNelson.Outside.OAI158FourierTests Proofs.HadwigerNelson.Packed
+Build completed successfully (3530 jobs).
+### batch 98/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.PairDist Proofs.HadwigerNelson.Plane.Cover Proofs.HadwigerNelson.Plane.DensityBound.Cells.Covering
+Build completed successfully (2873 jobs).
+### batch 99/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.DensityBound.X23All Proofs.HadwigerNelson.Plane.DensityPoints Proofs.HadwigerNelson.Plane.LocalMapExamples
+Build completed successfully (2650 jobs).
+### batch 100/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.LocalStructure Proofs.HadwigerNelson.Plane.SixFragment Proofs.HadwigerNelson.Plane.WeakColouringOn
+Build completed successfully (2636 jobs).
+### batch 101/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Reduction Proofs.HadwigerNelson.Rigidity.Entropy Proofs.HadwigerNelson.Sat.Diagnose
+Build completed successfully (3019 jobs).
+### batch 102/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Sat.Lrat Proofs.HadwigerNelson.UnitQuadrance
+Build completed successfully (2467 jobs).
+### batch 103/725, attempt 1: exit 0 after 50s: Proofs.HadwigerNelson.Arith.FibreCert11Seg2 Proofs.HadwigerNelson.Arith.FibreCert19Kt1 Proofs.HadwigerNelson.Arith.GapSeven
+✔ [2510/2511] Built Proofs.HadwigerNelson.Arith.FibreCert11Seg2 (40s)
+✔ [2511/2511] Built Proofs.HadwigerNelson.Arith.FibreCert19Kt1 (48s)
+Build completed successfully (2511 jobs).
+### batch 104/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Assembly Proofs.HadwigerNelson.Forcer Proofs.HadwigerNelson.Instances.Core122.Aug
+Build completed successfully (2471 jobs).
+### batch 105/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Core23.Cnf.Seg000 Proofs.HadwigerNelson.Instances.Core23.Cnf.Seg001 Proofs.HadwigerNelson.Instances.CoreSpindle.Search
+Build completed successfully (2477 jobs).
+### batch 106/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.DeGrey.Edges Proofs.HadwigerNelson.Instances.Heule510.Edges Proofs.HadwigerNelson.Instances.Heule553.Edges
+Build completed successfully (2469 jobs).
+### batch 107/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Instances.Mycielski Proofs.HadwigerNelson.Instances.Nine Proofs.HadwigerNelson.Instances.SqrtEleven.Edges
+Build completed successfully (2473 jobs).
+### batch 108/725, attempt 1: exit 0 after 0s: Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Seg000 Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Seg000 Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Seg001
+Build completed successfully (1377 jobs).
+### batch 109/725, attempt 1: exit 0 after 0s: Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Seg002 Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Seg003 Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Seg004
+Build completed successfully (1359 jobs).
+### batch 110/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Seg005 Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Seg006 Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Seg007
+Build completed successfully (1359 jobs).
+### batch 111/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Lift Proofs.HadwigerNelson.Limit Proofs.HadwigerNelson.Outside.OAI158ConditionalSpectrum
+Build completed successfully (3616 jobs).
+### batch 112/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.PackedDiagnose Proofs.HadwigerNelson.Plane.Closure Proofs.HadwigerNelson.Plane.CurveGraph
+Build completed successfully (2668 jobs).
+### batch 113/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Plane.DensityBound.X23 Proofs.HadwigerNelson.Plane.FalconerReduction Proofs.HadwigerNelson.Plane.Stationary
+Build completed successfully (3132 jobs).
+### batch 114/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.Suprema Proofs.HadwigerNelson.Plane.ValidMap.Basic Proofs.HadwigerNelson.ResidueTower
+Build completed successfully (2830 jobs).
+### batch 115/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Rigidity.EntropyFibres Proofs.HadwigerNelson.Rigidity.ZeroEntropyNames
+Build completed successfully (2989 jobs).
+### batch 116/725, attempt 1: exit 0 after 45s: Proofs.HadwigerNelson.Arith.FibreCert11Seg3 Proofs.HadwigerNelson.Arith.FibreCert19Kt2 Proofs.HadwigerNelson.AssemblyDiagnose
+✔ [2512/2513] Built Proofs.HadwigerNelson.Arith.FibreCert11Seg3 (34s)
+✔ [2513/2513] Built Proofs.HadwigerNelson.Arith.FibreCert19Kt2 (43s)
+Build completed successfully (2513 jobs).
+### batch 117/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Fan Proofs.HadwigerNelson.ForcerDiagnose Proofs.HadwigerNelson.Instances.Core122.Cnf.Table
+Build completed successfully (2491 jobs).
+### batch 118/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Core23.Cnf.Cert Proofs.HadwigerNelson.Instances.CoreSpindle.Bound Proofs.HadwigerNelson.Instances.DeGrey.Diffs
+Build completed successfully (2484 jobs).
+### batch 119/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.DeGrey.Split Proofs.HadwigerNelson.Instances.Heule510.Cnf.Table Proofs.HadwigerNelson.Instances.Heule510.Diffs
+Build completed successfully (2479 jobs).
+### batch 120/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Table Proofs.HadwigerNelson.Instances.Heule553.Diffs Proofs.HadwigerNelson.Instances.LiftObstruction11
+Build completed successfully (2480 jobs).
+### batch 121/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.LiftObstruction131 Proofs.HadwigerNelson.Instances.LiftObstruction19 Proofs.HadwigerNelson.Instances.LimitSpec
+Build completed successfully (2473 jobs).
+### batch 122/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Instances.Mycielski.Cnf.Table Proofs.HadwigerNelson.Instances.SpindleBound Proofs.HadwigerNelson.Instances.SqrtEleven.Cnf.Table
+Build completed successfully (2485 jobs).
+### batch 123/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.SqrtEleven.Geom00 Proofs.HadwigerNelson.Instances.TwoAdicFive.Cnf.Cert Proofs.HadwigerNelson.Instances.ZMod121Four.Cnf.Cert
+Build completed successfully (2509 jobs).
+### batch 124/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Mascot Proofs.HadwigerNelson.Outside.OAI158Approximation Proofs.HadwigerNelson.Plane.DensityBound.X23Dist
+Build completed successfully (3722 jobs).
+### batch 125/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.Diameter Proofs.HadwigerNelson.Plane.MaximalCover Proofs.HadwigerNelson.Plane.Slack
+Build completed successfully (3094 jobs).
+### batch 126/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.StuckChain Proofs.HadwigerNelson.Plane.ValidMap.Chain Proofs.HadwigerNelson.Plane.ValidMap.Sectors
+Build completed successfully (2642 jobs).
+### batch 127/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Plane.Woodall.Basic Proofs.HadwigerNelson.Rigidity.PositiveEntropy
+Build completed successfully (3044 jobs).
+### batch 128/725, attempt 1: exit 0 after 48s: Proofs.HadwigerNelson.Arith.FibreCert11Seg4 Proofs.HadwigerNelson.Arith.FibreCert19Kt3 Proofs.HadwigerNelson.ClassGeometry
+✔ [1951/1952] Built Proofs.HadwigerNelson.Arith.FibreCert11Seg4 (35s)
+✔ [1952/1952] Built Proofs.HadwigerNelson.Arith.FibreCert19Kt3 (47s)
+Build completed successfully (1952 jobs).
+### batch 129/725, attempt 1: exit 0 after 0s: Proofs.HadwigerNelson.Coverage Proofs.HadwigerNelson.Critical Proofs.HadwigerNelson.FanMono
+Build completed successfully (1353 jobs).
+### batch 130/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Instances.Core122.Cnf.Seg000 Proofs.HadwigerNelson.Instances.Core122.Cnf.Seg001 Proofs.HadwigerNelson.Instances.Core122.Cnf.Seg002
+Build completed successfully (2489 jobs).
+### batch 131/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Core122.Cnf.Seg003 Proofs.HadwigerNelson.Instances.Core122.Cnf.Seg004 Proofs.HadwigerNelson.Instances.Core122.Cnf.Seg005
+Build completed successfully (2489 jobs).
+### batch 132/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Core122.Cnf.Seg006 Proofs.HadwigerNelson.Instances.Core122.Cnf.Seg007 Proofs.HadwigerNelson.Instances.Core122.Cnf.Seg008
+Build completed successfully (2489 jobs).
+### batch 133/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Core122.Cnf.Seg009 Proofs.HadwigerNelson.Instances.Core122.Cnf.Seg010 Proofs.HadwigerNelson.Instances.Core122.Cnf.Seg011
+Build completed successfully (2489 jobs).
+### batch 134/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Core122.Cnf.Seg012 Proofs.HadwigerNelson.Instances.Core122.Cnf.Seg013 Proofs.HadwigerNelson.Instances.Core122.Cnf.Seg014
+Build completed successfully (2489 jobs).
+### batch 135/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Core122.Cnf.Seg015 Proofs.HadwigerNelson.Instances.Core23 Proofs.HadwigerNelson.Instances.CoreSpindle.Diagnose
+Build completed successfully (2505 jobs).
+### batch 136/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Instances.DeGrey.HalfA.Table Proofs.HadwigerNelson.Instances.DeGrey.Valid Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg000
+Build completed successfully (2498 jobs).
+### batch 137/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg001 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg002 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg003
+Build completed successfully (2477 jobs).
+### batch 138/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg004 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg005 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg006
+Build completed successfully (2477 jobs).
+### batch 139/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg007 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg008 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg009
+Build completed successfully (2477 jobs).
+### batch 140/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg010 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg011 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg012
+Build completed successfully (2477 jobs).
+### batch 141/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg013 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg014 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg015
+Build completed successfully (2477 jobs).
+### batch 142/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg016 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg017 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg018
+Build completed successfully (2477 jobs).
+### batch 143/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg019 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg020 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg021
+Build completed successfully (2477 jobs).
+### batch 144/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg022 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg023 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg024
+Build completed successfully (2477 jobs).
+### batch 145/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg025 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg026 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg027
+Build completed successfully (2477 jobs).
+### batch 146/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg028 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg029 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg030
+Build completed successfully (2477 jobs).
+### batch 147/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg031 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg032 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg033
+Build completed successfully (2477 jobs).
+### batch 148/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg034 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg035 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg036
+Build completed successfully (2477 jobs).
+### batch 149/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg037 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg038 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg039
+Build completed successfully (2477 jobs).
+### batch 150/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg040 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg041 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg042
+Build completed successfully (2477 jobs).
+### batch 151/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg043 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg044 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg045
+Build completed successfully (2477 jobs).
+### batch 152/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg046 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg047 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg048
+Build completed successfully (2477 jobs).
+### batch 153/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg049 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg050 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg051
+Build completed successfully (2477 jobs).
+### batch 154/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg052 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg053 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg054
+Build completed successfully (2477 jobs).
+### batch 155/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg055 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg056 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg057
+Build completed successfully (2477 jobs).
+### batch 156/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg058 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg059 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg060
+Build completed successfully (2477 jobs).
+### batch 157/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg061 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg062 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg063
+Build completed successfully (2477 jobs).
+### batch 158/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg064 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg065 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg066
+Build completed successfully (2477 jobs).
+### batch 159/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg067 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg068 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg069
+Build completed successfully (2477 jobs).
+### batch 160/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg070 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg071 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg072
+Build completed successfully (2477 jobs).
+### batch 161/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg073 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg074 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg075
+Build completed successfully (2477 jobs).
+### batch 162/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg076 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg077 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg078
+Build completed successfully (2477 jobs).
+### batch 163/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg079 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg080 Proofs.HadwigerNelson.Instances.Heule510.Cnf.Seg081
+Build completed successfully (2477 jobs).
+### batch 164/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Instances.Heule510.Valid Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg000 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg001
+Build completed successfully (2481 jobs).
+### batch 165/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg002 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg003 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg004
+Build completed successfully (2477 jobs).
+### batch 166/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg005 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg006 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg007
+Build completed successfully (2477 jobs).
+### batch 167/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg008 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg009 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg010
+Build completed successfully (2477 jobs).
+### batch 168/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg011 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg012 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg013
+Build completed successfully (2477 jobs).
+### batch 169/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg014 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg015 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg016
+Build completed successfully (2477 jobs).
+### batch 170/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg017 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg018 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg019
+Build completed successfully (2477 jobs).
+### batch 171/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg020 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg021 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg022
+Build completed successfully (2477 jobs).
+### batch 172/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg023 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg024 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg025
+Build completed successfully (2477 jobs).
+### batch 173/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg026 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg027 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg028
+Build completed successfully (2477 jobs).
+### batch 174/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg029 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg030 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg031
+Build completed successfully (2477 jobs).
+### batch 175/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg032 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg033 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg034
+Build completed successfully (2477 jobs).
+### batch 176/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg035 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg036 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg037
+Build completed successfully (2477 jobs).
+### batch 177/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg038 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg039 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg040
+Build completed successfully (2477 jobs).
+### batch 178/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg041 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg042 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg043
+Build completed successfully (2477 jobs).
+### batch 179/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg044 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg045 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg046
+Build completed successfully (2477 jobs).
+### batch 180/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg047 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg048 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg049
+Build completed successfully (2477 jobs).
+### batch 181/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg050 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg051 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg052
+Build completed successfully (2477 jobs).
+### batch 182/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg053 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg054 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg055
+Build completed successfully (2477 jobs).
+### batch 183/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg056 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg057 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg058
+Build completed successfully (2477 jobs).
+### batch 184/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg059 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg060 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg061
+Build completed successfully (2477 jobs).
+### batch 185/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg062 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg063 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg064
+Build completed successfully (2477 jobs).
+### batch 186/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg065 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg066 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg067
+Build completed successfully (2477 jobs).
+### batch 187/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg068 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg069 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg070
+Build completed successfully (2477 jobs).
+### batch 188/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg071 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg072 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg073
+Build completed successfully (2477 jobs).
+### batch 189/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg074 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg075 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg076
+Build completed successfully (2477 jobs).
+### batch 190/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg077 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg078 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg079
+Build completed successfully (2477 jobs).
+### batch 191/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg080 Proofs.HadwigerNelson.Instances.Heule553.Cnf.Seg081 Proofs.HadwigerNelson.Instances.Heule553.Valid
+Build completed successfully (2479 jobs).
+### batch 192/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Mycielski.Cnf.Seg000 Proofs.HadwigerNelson.Instances.Mycielski.Cnf.Seg001 Proofs.HadwigerNelson.Instances.Mycielski.Cnf.Seg002
+Build completed successfully (1357 jobs).
+### batch 193/725, attempt 1: exit 0 after 0s: Proofs.HadwigerNelson.Instances.Mycielski.Cnf.Seg003 Proofs.HadwigerNelson.Instances.Mycielski.Cnf.Seg004 Proofs.HadwigerNelson.Instances.Mycielski.Cnf.Seg005
+Build completed successfully (1357 jobs).
+### batch 194/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Mycielski.Cnf.Seg006 Proofs.HadwigerNelson.Instances.Mycielski.Cnf.Seg007 Proofs.HadwigerNelson.Instances.Mycielski.Cnf.Seg008
+Build completed successfully (1357 jobs).
+### batch 195/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Mycielski.Cnf.Seg009 Proofs.HadwigerNelson.Instances.Mycielski.Cnf.Seg010 Proofs.HadwigerNelson.Instances.Mycielski.Cnf.Seg011
+Build completed successfully (1357 jobs).
+### batch 196/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Mycielski.Cnf.Seg012 Proofs.HadwigerNelson.Instances.Mycielski.Cnf.Seg013 Proofs.HadwigerNelson.Instances.Mycielski.Cnf.Seg014
+Build completed successfully (1357 jobs).
+### batch 197/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.Mycielski.Cnf.Seg015 Proofs.HadwigerNelson.Instances.SqrtEleven.Cnf.Seg000 Proofs.HadwigerNelson.Instances.SqrtEleven.Cnf.Seg001
+Build completed successfully (2482 jobs).
+### batch 198/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Instances.SqrtEleven.Valid Proofs.HadwigerNelson.Outside.OAI158ConditionalLimits Proofs.HadwigerNelson.Palette
+Build completed successfully (3646 jobs).
+### batch 199/725, attempt 1: exit 0 after 1s: Proofs.HadwigerNelson.Plane.CoverExamples Proofs.HadwigerNelson.Plane.SVMap Proofs.HadwigerNelson.Plane.Tiles
+Build completed successfully (3117 jobs).
+### batch 200/725, attempt 1: exit 0 after 2s: Proofs.HadwigerNelson.Plane.YesLimit Proofs.HadwigerNelson.SpareColour
+Build completed successfully (3212 jobs).
+### batch 201/725, attempt 1: exit 143 after 27s: Proofs.HadwigerNelson.Additive Proofs.HadwigerNelson.Arith.FibreCert11Seg5 Proofs.HadwigerNelson.Arith.FibreCert19C0
+### batch 201/725, attempt 2: exit 143 after 28s: Proofs.HadwigerNelson.Additive Proofs.HadwigerNelson.Arith.FibreCert11Seg5 Proofs.HadwigerNelson.Arith.FibreCert19C0

@@ -1,0 +1,31 @@
+slot: waiting (ledger 20 + 4 > budget 22 GiB)
+slot: waiting (ledger 22 + 4 > budget 22 GiB)
+slot: waiting (ledger 20 + 4 > budget 22 GiB)
+slot: admitted ij1: mem 4 GiB (hard cap), cpus 0,1
+data/fs131/ij1/work/Herglotz.lean:235:27: error: unsolved goals
+G : Type u_1
+inst✝¹ : AddCommGroup G
+inst✝ : Countable G
+C : G → ℂ
+hC : PosDef C
+w : ℕ → G →₀ ℝ
+hw1 : ∀ (n : ℕ), ∑ x ∈ (w n).support, (w n) x ^ 2 = 1
+hwt : ∀ (z : G), Tendsto (fun n => ∑ x ∈ (w n).support, (w n) x * (w n) (x + z)) atTop (𝓝 1)
+z : ℕ → AddChar G Circle → G → ℂ := fun n χ x => ↑((w n) x) * ↑(χ (-x))
+p : ℕ → AddChar G Circle → ℂ :=
+  fun n χ => ∑ x ∈ (w n).support, ∑ x' ∈ (w n).support, z n χ x * star (z n χ x') * C (x - x')
+K : ℕ → G → G → ℂ := fun n x x' => ↑((w n) x) * ↑((w n) x') * C (x - x')
+hp_eq : ∀ (n : ℕ) (χ : AddChar G Circle), p n χ = ∑ x ∈ (w n).support, ∑ x' ∈ (w n).support, K n x x' * ↑(χ (x' - x))
+n : ℕ
+χ : AddChar G Circle
+⊢ 0 = (p n χ).im
+data/fs131/ij1/work/Herglotz.lean:310:4: error: `simp` made no progress
+data/fs131/ij1/work/Herglotz.lean:235:36: warning: This simp argument is unused:
+  (hC _ _).1
+
+Hint: Omit it from the simp argument list.
+  simp ̵[̵(̵h̵C̵ ̵_̵ ̵_̵)̵.̵1̵]̵
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+seconds=524
+exit=1

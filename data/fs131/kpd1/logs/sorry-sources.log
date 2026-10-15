@@ -1,0 +1,15 @@
+slot: admitted kpd1: mem 5 GiB (hard cap), cpus 0,1
+data/fs131/kpd1/probes/SorrySources.lean:10:12: warning: missing doc string for public def kpd1Sources
+
+Note: This linter can be disabled with `set_option linter.missingDocs false`
+data/fs131/kpd1/probes/SorrySources.lean:29:0: warning: missing doc string for elab
+
+Note: This linter can be disabled with `set_option linter.missingDocs false`
+HadwigerNelson.Rigidity.dualAnnihilator_dualCoannihilator_of_isClosed: [HadwigerNelson.Rigidity.borelSpace_dual, HadwigerNelson.Rigidity.isTopologicalGroup_dual, HadwigerNelson.Rigidity.isClosedEmbedding_coe, HadwigerNelson.Rigidity.measure_eq_of_fourier, HadwigerNelson.Rigidity.compactSpace_dual]
+HadwigerNelson.Rigidity.eq_top_of_isClosed_of_dualCoannihilator_eq_bot': [HadwigerNelson.Rigidity.borelSpace_dual, HadwigerNelson.Rigidity.isTopologicalGroup_dual, HadwigerNelson.Rigidity.isClosedEmbedding_coe, HadwigerNelson.Rigidity.measure_eq_of_fourier, HadwigerNelson.Rigidity.compactSpace_dual]
+HadwigerNelson.Rigidity.evalDualHom_surjective: [HadwigerNelson.Rigidity.borelSpace_dual, HadwigerNelson.Rigidity.isTopologicalGroup_dual, HadwigerNelson.Rigidity.isClosedEmbedding_coe, HadwigerNelson.Rigidity.measure_eq_of_fourier, HadwigerNelson.Rigidity.compactSpace_dual, HadwigerNelson.Rigidity.exists_apply_ne_one]
+HadwigerNelson.Rigidity.additiveDualDualEquiv: [HadwigerNelson.Rigidity.borelSpace_dual, HadwigerNelson.Rigidity.isTopologicalGroup_dual, HadwigerNelson.Rigidity.isClosedEmbedding_coe, HadwigerNelson.Rigidity.measure_eq_of_fourier, HadwigerNelson.Rigidity.compactSpace_dual, HadwigerNelson.Rigidity.exists_apply_ne_one]
+HadwigerNelson.Rigidity.finite_dualAnnihilator: NONE
+HadwigerNelson.Rigidity.connectedSpace_dual: [HadwigerNelson.Rigidity.compactSpace_dual, HadwigerNelson.Rigidity.isTopologicalGroup_dual]
+HadwigerNelson.Rigidity.subgroupHaar_bot: [HadwigerNelson.Rigidity.subgroupHaar_bot, HadwigerNelson.Rigidity.borelSpace_dual, HadwigerNelson.Rigidity.isTopologicalGroup_dual]
+HadwigerNelson.Rigidity.not_connectedSpace_dual_zmod_two: [HadwigerNelson.Rigidity.not_connectedSpace_dual_zmod_two]

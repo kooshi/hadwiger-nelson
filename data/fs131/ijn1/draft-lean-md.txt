@@ -1,0 +1,25 @@
+LEAN.md § Searching — Lean: five lines, each to follow the last line of that section (FS131-IJN1; each measured in this
+job's rounds, data/fs131/ijn1/logs/).
+
+- A non-dependent hypothesis is stored with its binder name, but the stored type's print (`Expr.dbgToString`, the
+  dumpers' format) shows it as `(P) -> …` with no name, and dropping one regroups the printed binders
+  (`forall {θ} {n}, …` for `forall {θ}, (…) -> (forall {n}, …)`): a text surgery on the print does not give the type a
+  ruled binder drop must produce. Compute it from the kernel's term on the build before the drop — the `∀` of that
+  binder name removed by `Expr.lowerLooseBVars 1 1`, refused if the body depends on it — and compare the stored type after
+  with it, hygienic names aside (`data/fs131/ijn1/lean/DropExpect.lean`, `tools/fs131_ijn1_statements.py`) (FS131-IJN1).
+- `padicValRat` is outside the import closure of `Rigidity/PositiveEntropy`, and an import there would move the stored
+  instances of every downstream statement. Unique factorisation at `2` and `3` with integer exponents needs no valuation:
+  in `ℕ`, `2^m = 3^n` or `2^m·3^n = 1` only at `m = n = 0` by parity (`Nat.even_pow'`, `Odd.pow`, `Nat.not_even_iff_odd`),
+  `Nat.pow_right_injective` and `Nat.eq_one_of_mul_eq_one_right`/`_left`; in `ℝ`, four sign cases by `Int.eq_nat_or_neg`
+  with `zpow_neg`, `zpow_natCast` (`ZdAction.mulTwoThree_model`'s private helpers) (FS131-IJN1).
+- `Finset.filter_card_add_filter_neg_card_eq_card` is deprecated at the pin for `Finset.card_filter_add_card_filter_not`.
+  A bound "every independent set is at most `c · Nat.card Q`" needs no finiteness of `Q` to be refuted: when `Q` is
+  infinite `Nat.card_eq_zero_of_infinite` makes it `0`, and a singleton is independent (`Set.pairwise_singleton`)
+  (`Rigidity.noRamifiedStableDyadic_of_tca`) (FS131-IJN1).
+- The source position of an imported declaration is in the compiled environment: `findDeclarationRanges?` (in
+  `CommandElabM` through `liftCoreM`) gives it, and `selectionRange` is the line of the name — the line the build's
+  ``declaration uses `sorry` `` warning names — while `range` begins at the docstring (`data/fs131/ijn1/lean/Axioms.lean`,
+  which names each leaf a record's `sorryAx` comes through, by module and line) (FS131-IJN1).
+- A statement moved between modules keeps its stored type but not its print: an anonymous instance binder's stored name
+  carries the declaring module (`inst._@.<module>.<n>._hygCtx._hyg.<k>`), so a comparison across a move canonicalizes
+  those names and requires the module to be exactly the ruled one (`tools/fs131_ijn1_statements.py`'s `MOVES`) (FS131-IJN1).

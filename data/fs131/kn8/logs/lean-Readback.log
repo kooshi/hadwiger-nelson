@@ -1,0 +1,201 @@
+slot: admitted kn8p: mem 4 GiB (hard cap), cpus 0,1
+@positive_entropy_rigidity : ∀ {X : Type u_1} [inst : AddCommGroup X] [inst_1 : TopologicalSpace X]
+  [inst_2 : MeasurableSpace X] [BorelSpace X],
+  IsSolenoid X →
+    ∀ {d : ℕ},
+      2 ≤ d →
+        ∀ (α : ZdAction d X),
+          α.NoVirtuallyCyclicFactors →
+            ∀ (μ : Measure X),
+              IsProbabilityMeasure μ →
+                α.IsErgodicOn ⊤ μ →
+                  ∃ Λ J ν G,
+                    Λ.FiniteIndex ∧
+                      0 < J ∧
+                        μ = (↑J)⁻¹ • ∑ j, ν j ∧
+                          (∀ (i j : Fin J), i ≠ j → ν i ⟂ₘ ν j) ∧
+                            ∀ (j : Fin J),
+                              IsProbabilityMeasure (ν j) ∧
+                                α.IsErgodicOn Λ (ν j) ∧
+                                  (IsClosed ↑(G j) ∧
+                                      α.InvariantOn Λ (G j) ∧
+                                        ∀ g ∈ G j,
+                                          ∀ (B : Set X), MeasurableSet B → (ν j) ((fun x => x + g) ⁻¹' B) = (ν j) B) ∧
+                                    (∀ (n : Fin d → ℤ),
+                                        ∃ k,
+                                          Measure.map (⇑(α.toFun n)) (ν j) = ν k ∧
+                                            AddSubgroup.map (α.toFun n) (G j) = G k) ∧
+                                      ∀ n ∈ Λ,
+                                        ∀ (h : G j ≤ AddSubgroup.comap (α.toFun n) (G j)),
+                                          ksEntropy (Measure.map (⇑(QuotientAddGroup.mk' (G j))) (ν j))
+                                              ⇑(QuotientAddGroup.map (G j) (G j) (α.toFun n) h) =
+                                            0
+def HadwigerNelson.Rigidity.EntropySplit : Subfield ℝ → Prop :=
+fun F =>
+  ∀ (τ : Measure (Dual F)),
+    IsFiniteMeasure τ →
+      RotInv F τ →
+        ∃ a b m ρ,
+          IsHaarFourier m ∧
+            IsProbabilityMeasure ρ ∧
+              RotInv F ρ ∧ (∃ u, (∀ (n : ℕ), n ≠ 0 → ↑u ^ n ≠ 1) ∧ ksEntropy ρ (rot u) = 0) ∧ τ = a • m + b • ρ
+def HadwigerNelson.Rigidity.ZeroEntropyCarried : Subfield ℝ → Prop :=
+fun F =>
+  ∀ (ρ : Measure (Dual F)),
+    IsProbabilityMeasure ρ →
+      RotInv F ρ → ∀ (u : ↑(unitVectors F)), (∀ (n : ℕ), n ≠ 0 → ↑u ^ n ≠ 1) → ksEntropy ρ (rot u) = 0 → ρ (TA F)ᶜ = 0
+mrPlus_of_split_of_carried : ∀ (F : Subfield ℝ), EntropySplit F → ZeroEntropyCarried F → MRPlus F
+@haar_or_zero_entropy : ∀ {X : Type u_1} [inst : AddCommGroup X] [inst_1 : TopologicalSpace X]
+  [inst_2 : MeasurableSpace X] [BorelSpace X],
+  IsSolenoid X →
+    ∀ {d : ℕ} (α : ZdAction d X),
+      α.IsTotallyIrreducible →
+        ¬α.IsVirtuallyCyclic →
+          ∀ (μ : Measure X),
+            IsProbabilityMeasure μ →
+              α.IsErgodicOn ⊤ μ → μ.IsAddHaarMeasure ∨ ∀ (n : Fin d → ℤ), ksEntropy μ ⇑(α.toFun n) = 0
+'HadwigerNelson.Rigidity.mrPlus_of_split_of_carried' depends on axioms: [propext, Classical.choice, Quot.sound]
+def HadwigerNelson.SpectralChain.RotInv : (F : Subfield ℝ) → Measure (Dual F) → Prop :=
+fun F τ => ∀ (u : ↑(unitVectors F)), Measure.map (rot u) τ = τ
+def HadwigerNelson.SpectralInputs.IsHaarFourier.{u_1} : {G : Type u_1} →
+  [inst : AddCommGroup G] → Measure (AddChar G Circle) → Prop :=
+fun {G} [AddCommGroup G] m => IsProbabilityMeasure m ∧ ∀ (r : G), r ≠ 0 → ∫ (χ : AddChar G Circle), ↑(χ r) ∂m = 0
+@ext_of_fourier : ∀ {G : Type u_1} [inst : AddCommGroup G],
+  BochnerHerglotz G →
+    ∀ {σ σ' : Measure (AddChar G Circle)} [IsFiniteMeasure σ] [IsFiniteMeasure σ'],
+      (∀ (y : G), ∫ (χ : AddChar G Circle), ↑(χ y) ∂σ = ∫ (χ : AddChar G Circle), ↑(χ y) ∂σ') → σ = σ'
+@exists_isHaarFourier : ∀ {G : Type u_1} [inst : AddCommGroup G], BochnerHerglotz G → ∃ m, IsHaarFourier m
+@IsHaarFourier.map_mulRight : ∀ {G : Type u_1} [inst : AddCommGroup G],
+  BochnerHerglotz G →
+    ∀ {m : Measure (AddChar G Circle)}, IsHaarFourier m → ∀ (a : AddChar G Circle), Measure.map (fun χ => χ * a) m = m
+@maxMultiple : {Y : Type u_1} → [inst : MeasurableSpace Y] → Measure Y → Measure Y → ℝ≥0∞
+@map_sub_maxMultiple : ∀ {Y : Type u_1} [inst : MeasurableSpace Y] (τ m : Measure Y) [IsFiniteMeasure τ]
+  [IsProbabilityMeasure m] (e : Y ≃ᵐ Y),
+  Measure.map (⇑e) τ = τ → Measure.map (⇑e) m = m → Measure.map (⇑e) (τ - maxMultiple τ m • m) = τ - maxMultiple τ m • m
+@not_smul_le_sub_maxMultiple : ∀ {Y : Type u_1} [inst : MeasurableSpace Y] (τ m : Measure Y) [IsFiniteMeasure τ]
+  [IsProbabilityMeasure m] {c : ℝ≥0∞}, c ≠ 0 → ¬c • m ≤ τ - maxMultiple τ m • m
+@ksEntropy : {X : Type u_1} → {m : MeasurableSpace X} → Measure X → (X → X) → ℝ≥0∞
+@ksEntropyOn : {X : Type u_1} → {m : MeasurableSpace X} → MeasurableSpace X → Measure X → (X → X) → ℝ≥0∞
+@ksEntropy_eq_iSup_ksEntropyOn : ∀ {X : Type u_1} {m : MeasurableSpace X} (μ : Measure X) [IsProbabilityMeasure μ]
+  {T : X → X},
+  MeasurePreserving T μ μ →
+    ∀ (𝒜 : ℕ → MeasurableSpace X),
+      Monotone 𝒜 →
+        ⨆ i, 𝒜 i = m → (∀ (i : ℕ), MeasurableSpace.CountablyGenerated X) → ksEntropy μ T = ⨆ i, ksEntropyOn (𝒜 i) μ T
+@ksEntropy_bind_eq_zero : ∀ {X : Type u_1} {Z : Type u_2} [inst : MeasurableSpace Z] {m : MeasurableSpace X}
+  (τ : Measure Z) [IsProbabilityMeasure τ] (κ : ProbabilityTheory.Kernel Z X) [ProbabilityTheory.IsMarkovKernel κ]
+  {T : X → X},
+  Measurable T →
+    (∀ᵐ (z : Z) ∂τ, MeasurePreserving T (κ z) (κ z)) →
+      (∀ᵐ (z : Z) ∂τ, ksEntropy (κ z) T = 0) → ksEntropy (τ.bind ⇑κ) T = 0
+@ksEntropy_dirac : ∀ {X : Type u_1} {m : MeasurableSpace X} {T : X → X},
+  Measurable T → ∀ (x : X), ksEntropy (Measure.dirac x) T = 0
+@ksEntropy_map : ∀ {X : Type u_1} {m : MeasurableSpace X} {Y : Type u_2} [mY : MeasurableSpace Y] (μ : Measure X)
+  {T : X → X} {π : X → Y},
+  Measurable π →
+    ∀ {S : Y → Y},
+      Measurable S →
+        (∀ (x : X), π (T x) = S (π x)) → ksEntropy (Measure.map π μ) S = ksEntropyOn (MeasurableSpace.comap π mY) μ T
+@measurable_rot : ∀ {F : Subfield ℝ} (u : ↑(unitVectors F)), Measurable (rot u)
+planeOver : Subfield ℝ → Set ℂ
+data/fs131/kn8/lean/Readback.lean:35:8: error(lean.unknownIdentifier): Unknown identifier `planeOverSubring`
+@MeasureTheory.ext_of_forall_mem_subalgebra_integral_eq_of_polish : ∀ {E : Type u_1} {𝕜 : Type u_2} [inst : RCLike 𝕜]
+  [inst_1 : MeasurableSpace E] [inst_2 : TopologicalSpace E] [PolishSpace E] [BorelSpace E]
+  {P P' : MeasureTheory.Measure E} [MeasureTheory.IsFiniteMeasure P] [MeasureTheory.IsFiniteMeasure P']
+  {A : StarSubalgebra 𝕜 (BoundedContinuousFunction E 𝕜)},
+  (StarSubalgebra.map (BoundedContinuousFunction.toContinuousMapStarₐ 𝕜) A).SeparatesPoints →
+    (∀ g ∈ A, ∫ (x : E), g x ∂P = ∫ (x : E), g x ∂P') → P = P'
+@borel_comap : ∀ {α : Type u_1} {β : Type u_2} {f : α → β} {t : TopologicalSpace β},
+  borel α = MeasurableSpace.comap f (borel β)
+@Pi.borelSpace : ∀ {ι : Type u_1} {X : ι → Type u_2} [Countable ι] [inst : (i : ι) → TopologicalSpace (X i)]
+  [inst_1 : (i : ι) → MeasurableSpace (X i)] [∀ (i : ι), SecondCountableTopology (X i)] [∀ (i : ι), BorelSpace (X i)],
+  BorelSpace ((i : ι) → X i)
+data/fs131/kn8/lean/Readback.lean:43:8: error(lean.unknownIdentifier): Unknown constant `PolishSpace.pi_countable`
+@Topology.IsClosedEmbedding.polishSpace : ∀ {α : Type u_1} {β : Type u_2} [inst : TopologicalSpace α]
+  [inst_1 : TopologicalSpace β] [PolishSpace β] {f : α → β}, Topology.IsClosedEmbedding f → PolishSpace α
+@CharacterModule.exists_character_apply_ne_zero_of_ne_zero : ∀ {A : Type u_1} [inst : AddCommGroup A] {a : A},
+  a ≠ 0 → ∃ c, c a ≠ 0
+@MeasureTheory.Measure.haarMeasure : {G : Type u_1} →
+  [inst : Group G] →
+    [inst_1 : TopologicalSpace G] →
+      [IsTopologicalGroup G] →
+        [inst : MeasurableSpace G] → [BorelSpace G] → TopologicalSpace.PositiveCompacts G → MeasureTheory.Measure G
+@MeasureTheory.Measure.haarMeasure_self : ∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G]
+  [inst_2 : IsTopologicalGroup G] [inst_3 : MeasurableSpace G] [inst_4 : BorelSpace G]
+  {K₀ : TopologicalSpace.PositiveCompacts G}, (MeasureTheory.Measure.haarMeasure K₀) ↑K₀ = 1
+@MeasureTheory.Measure.isHaarMeasure_eq_of_isProbabilityMeasure : ∀ {G : Type u_1} [inst : TopologicalSpace G]
+  [inst_1 : Group G] [IsTopologicalGroup G] [inst_3 : MeasurableSpace G] [BorelSpace G] [LocallyCompactSpace G]
+  (μ' μ : MeasureTheory.Measure G) [MeasureTheory.IsProbabilityMeasure μ] [MeasureTheory.IsProbabilityMeasure μ']
+  [μ.IsHaarMeasure] [μ'.IsHaarMeasure], μ' = μ
+@MeasureTheory.Measure.IsHaarMeasure : {G : Type u_1} →
+  [Group G] → [TopologicalSpace G] → [inst : MeasurableSpace G] → MeasureTheory.Measure G → Prop
+@MeasureTheory.Measure.IsAddHaarMeasure : {G : Type u_1} →
+  [AddGroup G] → [TopologicalSpace G] → [inst : MeasurableSpace G] → MeasureTheory.Measure G → Prop
+TopologicalSpace.PositiveCompacts : (α : Type u_1) → [TopologicalSpace α] → Type u_1
+inferInstance : TopologicalSpace (Additive Circle)
+data/fs131/kn8/lean/Readback.lean:53:8: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  MeasurableSpace (Additive Circle)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+inferInstance : IsTopologicalAddGroup (Additive Circle)
+data/fs131/kn8/lean/Readback.lean:55:24: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  MeasurableSpace (Additive Circle)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+StandardBorelSpace : (α : Type u_1) → [MeasurableSpace α] → Prop
+inferInstance : CommGroup (AddChar ℤ Circle)
+@AddChar.compAddMonoidHom : {A : Type u_1} →
+  {B : Type u_2} →
+    {M : Type u_3} →
+      [inst : AddMonoid A] → [inst_1 : AddMonoid B] → [inst_2 : Monoid M] → AddChar B M → (A →+ B) → AddChar A M
+@AddCircle.toCircle : {T : ℝ} → AddCircle T → Circle
+ErgodicSMul : (G : Type u_1) → (α : Type u_2) → [SMul G α] → {x : MeasurableSpace α} → MeasureTheory.Measure α → Prop
+data/fs131/kn8/lean/Readback.lean:61:8: error(lean.unknownIdentifier): Unknown identifier `MeasureTheory.condExpKernel`
+@MeasureTheory.Measure.sub_add_cancel_of_le : ∀ {α : Type u_1} {m : MeasurableSpace α} {μ ν : MeasureTheory.Measure α}
+  [MeasureTheory.IsFiniteMeasure ν], ν ≤ μ → μ - ν + ν = μ
+@Subgroup.closure : {G : Type u_1} → [inst : Group G] → Set G → Subgroup G
+@ContinuousMap.starSubalgebra_topologicalClosure_eq_top_of_separatesPoints : ∀ {𝕜 : Type u_1} {X : Type u_2}
+  [inst : RCLike 𝕜] [inst_1 : TopologicalSpace X] [inst_2 : CompactSpace X] (A : StarSubalgebra 𝕜 C(X, 𝕜)),
+  A.SeparatesPoints → A.topologicalClosure = ⊤
+@BoundedContinuousFunction.toContinuousMapStarₐ : {α : Type u_1} →
+  {β : Type u_2} →
+    (𝕜 : Type u_3) →
+      [inst : NormedField 𝕜] →
+        [inst_1 : TopologicalSpace α] →
+          [inst_2 : NormedRing β] →
+            [inst_3 : NormedAlgebra 𝕜 β] →
+              [inst_4 : StarAddMonoid β] → [inst_5 : NormedStarGroup β] → BoundedContinuousFunction α β →⋆ₐ[𝕜] C(α, β)
+Algebra.adjoin_eq_span : ∀ (R : Type u_1) {A : Type u_2} [inst : CommSemiring R] [inst_1 : Semiring A]
+  [inst_2 : Algebra R A] (s : Set A),
+  Subalgebra.toSubmodule (Algebra.adjoin R s) = Submodule.span R ↑(Submonoid.closure s)
+@AddChar.coe_mul : ∀ {A : Type u_1} {M : Type u_2} [inst : AddMonoid A] [inst_1 : CommMonoid M] (ψ χ : AddChar A M),
+  ⇑(ψ * χ) = ⇑ψ * ⇑χ
+@Subgroup.instMulAction : {G : Type u_1} →
+  {α : Type u_2} → [inst : Group G] → [MulAction G α] → {S : Subgroup G} → MulAction (↥S) α
+@Set.Countable.measurableSet : ∀ {α : Type u_1} [inst : MeasurableSpace α] [MeasurableSingletonClass α] {s : Set α},
+  s.Countable → MeasurableSet s
+@MeasurableSpace.comap_generateFrom : ∀ {α : Type u_1} {β : Type u_2} {f : α → β} {s : Set (Set β)},
+  MeasurableSpace.comap f (MeasurableSpace.generateFrom s) = MeasurableSpace.generateFrom (Set.preimage f '' s)
+@Topology.IsInducing.secondCountableTopology : ∀ {α : Type u_1} {β : Type u_2} [inst : TopologicalSpace α] {f : α → β}
+  [inst_1 : TopologicalSpace β] [SecondCountableTopology β], Topology.IsInducing f → SecondCountableTopology α
+@Topology.IsEmbedding.t2Space : ∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X]
+  [inst_1 : TopologicalSpace Y] [T2Space Y] {f : X → Y}, Topology.IsEmbedding f → T2Space X
+@Topology.IsClosedEmbedding.compactSpace : ∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X]
+  [inst_1 : TopologicalSpace Y] [h : CompactSpace Y] {f : X → Y}, Topology.IsClosedEmbedding f → CompactSpace X
+@isCompact_univ_pi : ∀ {ι : Type u_1} {X : ι → Type u_2} [inst : (i : ι) → TopologicalSpace (X i)]
+  {s : (i : ι) → Set (X i)}, (∀ (i : ι), IsCompact (s i)) → IsCompact (Set.univ.pi s)
+@AddChar.map_zero_eq_one : ∀ {A : Type u_1} {M : Type u_2} [inst : AddMonoid A] [inst_1 : Monoid M] (ψ : AddChar A M),
+  ψ 0 = 1
+PontryaginDual : (A : Type u_1) → [Monoid A] → [TopologicalSpace A] → Type u_1
+@MeasureTheory.Measure.map_map : ∀ {α : Type u_1} {β : Type u_2} {γ : Type u_3} {mα : MeasurableSpace α}
+  {mβ : MeasurableSpace β} {mγ : MeasurableSpace γ} {μ : MeasureTheory.Measure α} {g : β → γ} {f : α → β},
+  Measurable g →
+    Measurable f → MeasureTheory.Measure.map g (MeasureTheory.Measure.map f μ) = MeasureTheory.Measure.map (g ∘ f) μ
+@MeasureTheory.MeasurePreserving : {α : Type u_1} →
+  {β : Type u_2} →
+    [inst : MeasurableSpace α] →
+      [inst_1 : MeasurableSpace β] →
+        (α → β) →
+          autoParam (MeasureTheory.Measure α) MeasureTheory.MeasurePreserving._auto_1 →
+            autoParam (MeasureTheory.Measure β) MeasureTheory.MeasurePreserving._auto_3 → Prop
+exit=1

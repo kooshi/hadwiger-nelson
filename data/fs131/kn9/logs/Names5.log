@@ -1,0 +1,64 @@
+slot: admitted kn9: mem 4 GiB (hard cap), cpus 0,1
+@Measure.isAddHaarMeasure_eq_of_isProbabilityMeasure : ∀ {G : Type u_1} [inst : TopologicalSpace G]
+  [inst_1 : AddGroup G] [IsTopologicalAddGroup G] [inst_3 : MeasurableSpace G] [BorelSpace G] [LocallyCompactSpace G]
+  (μ' μ : Measure G) [IsProbabilityMeasure μ] [IsProbabilityMeasure μ'] [μ.IsAddHaarMeasure] [μ'.IsAddHaarMeasure],
+  μ' = μ
+@Measure.isAddHaarMeasure_of_isCompact_nonempty_interior : ∀ {G : Type u_1} [inst : MeasurableSpace G]
+  [inst_1 : AddGroup G] [inst_2 : TopologicalSpace G] [IsTopologicalAddGroup G] [BorelSpace G] (μ : Measure G)
+  [μ.IsAddLeftInvariant] (K : Set G), IsCompact K → (interior K).Nonempty → μ K ≠ 0 → μ K ≠ ⊤ → μ.IsAddHaarMeasure
+@AddSubgroup.nsmul_index_mem : ∀ {G : Type u_1} [inst : AddGroup G] (H : AddSubgroup G) [H.Normal] (g : G),
+  H.index • g ∈ H
+@IsClopen.eq_univ : ∀ {α : Type u_1} [inst : TopologicalSpace α] [PreconnectedSpace α] {s : Set α},
+  IsClopen s → s.Nonempty → s = Set.univ
+@Set.Finite.isClosed : ∀ {X : Type u_1} [inst : TopologicalSpace X] [T1Space X] {s : Set X}, s.Finite → IsClosed s
+@finFunctionFinEquiv : {m n : ℕ} → (Fin n → Fin m) ≃ Fin (m ^ n)
+@ProbabilityTheory.Kernel.ofFunOfCountable : {α : Type u_1} →
+  {β : Type u_2} →
+    [inst : MeasurableSpace α] →
+      {x : MeasurableSpace β} →
+        [Countable α] → [MeasurableSingletonClass α] → (α → Measure β) → ProbabilityTheory.Kernel α β
+@Measure.dirac_bind : ∀ {α : Type u_1} {β : Type u_2} {mα : MeasurableSpace α} {mβ : MeasurableSpace β}
+  {f : α → Measure β}, Measurable f → ∀ (a : α), (Measure.dirac a).bind f = f a
+@Measure.bind_apply : ∀ {α : Type u_1} {β : Type u_2} {mα : MeasurableSpace α} {mβ : MeasurableSpace β} {m : Measure α}
+  {f : α → Measure β} {s : Set β}, MeasurableSet s → AEMeasurable f m → (m.bind f) s = ∫⁻ (a : α), (f a) s ∂m
+@Measure.MutuallySingular.nullSet : {α : Type u_1} → {m0 : MeasurableSpace α} → {μ ν : Measure α} → μ ⟂ₘ ν → Set α
+@Measure.MutuallySingular.measure_compl_nullSet : ∀ {α : Type u_1} {m0 : MeasurableSpace α} {μ ν : Measure α}
+  (h : μ ⟂ₘ ν), ν h.nullSetᶜ = 0
+@Measure.MutuallySingular.measure_nullSet : ∀ {α : Type u_1} {m0 : MeasurableSpace α} {μ ν : Measure α} (h : μ ⟂ₘ ν),
+  μ h.nullSet = 0
+@QuotientAddGroup.borelSpace : ∀ {G : Type u_1} [inst : TopologicalSpace G] [PolishSpace G] [inst_2 : AddGroup G]
+  [IsTopologicalAddGroup G] [inst_4 : MeasurableSpace G] [BorelSpace G] {N : AddSubgroup G} [N.Normal] [IsClosed ↑N],
+  BorelSpace (G ⧸ N)
+@measurable_quotient_mk'' : ∀ {α : Type u_1} [inst : MeasurableSpace α] {s : Setoid α}, Measurable Quotient.mk''
+@measurable_from_quotient : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α] [inst_1 : MeasurableSpace β]
+  {s : Setoid α} {f : Quotient s → β}, Measurable f ↔ Measurable (f ∘ Quotient.mk'')
+@HadwigerNelson.Outside.OAI015.negMulLog_sum_le : ∀ {ι : Type u_1} [inst : Fintype ι] (p : ι → ℝ),
+  (∀ (i : ι), 0 ≤ p i) → (∑ i, p i).negMulLog ≤ ∑ i, (p i).negMulLog
+@HadwigerNelson.Outside.OAI015.observationEntropy_joint_le : ∀ {Y : Type u_1} {α : Type u_2} {β : Type u_3}
+  [inst : MeasurableSpace Y] [inst_1 : Fintype α] [inst_2 : Fintype β] (μ : Measure Y) [IsProbabilityMeasure μ]
+  (P : Y → α) (Q : Y → β),
+  (∀ (a : α), MeasurableSet {y | P y = a}) →
+    (∀ (b : β), MeasurableSet {y | Q y = b}) →
+      (HadwigerNelson.Outside.OAI015.observationEntropy μ fun y => (P y, Q y)) ≤
+        HadwigerNelson.Outside.OAI015.observationEntropy μ P + HadwigerNelson.Outside.OAI015.observationEntropy μ Q
+@HadwigerNelson.Outside.OAI015.finiteShannon_le_log_card : ∀ {α : Type u_1} [inst : Fintype α] {p : α → ℝ},
+  (∀ (a : α), 0 ≤ p a) → ∑ a, p a = 1 → HadwigerNelson.Outside.OAI015.finiteShannon p ≤ Real.log ↑(Fintype.card α)
+@Measure.IsAddHaarMeasure : {G : Type u_1} →
+  [AddGroup G] → [TopologicalSpace G] → [inst : MeasurableSpace G] → Measure G → Prop
+@Measure.IsAddLeftInvariant : {G : Type u_1} → [inst : MeasurableSpace G] → [Add G] → Measure G → Prop
+data/fs131/kn9/lean/Names5.lean:25:8: error(lean.unknownIdentifier): Unknown constant `MeasureTheory.Measure.map_add_left_eq_self`
+data/fs131/kn9/lean/Names5.lean:26:8: error(lean.unknownIdentifier): Unknown constant `AddMonoidHom.iterate_map_nsmul`
+@IsCompact.elim_finite_subcover : ∀ {X : Type u_1} [inst : TopologicalSpace X] {s : Set X} {ι : Type u_2},
+  IsCompact s → ∀ (U : ι → Set X), (∀ (i : ι), IsOpen (U i)) → s ⊆ ⋃ i, U i → ∃ t, s ⊆ ⋃ i ∈ t, U i
+data/fs131/kn9/lean/Names5.lean:28:8: error(lean.unknownIdentifier): Unknown identifier `exists_open_nhds_zero_sub`
+@Set.Finite.measurableSet : ∀ {α : Type u_1} [inst : MeasurableSpace α] [MeasurableSingletonClass α] {s : Set α},
+  s.Finite → MeasurableSet s
+@measurable_add_const : ∀ {M : Type u_1} {inst : MeasurableSpace M} {inst_1 : Add M} [self : MeasurableAdd M] (c : M),
+  Measurable fun x => x + c
+data/fs131/kn9/lean/Names5.lean:31:8: error(lean.unknownIdentifier): Unknown constant `MeasureTheory.Measure.isAddLeftInvariant_map`
+@Measurable.of_discrete : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α] [inst_1 : MeasurableSpace β]
+  [DiscreteMeasurableSpace α] {f : α → β}, Measurable f
+@ProbabilityTheory.uniformOn : {Ω : Type u_1} → [inst : MeasurableSpace Ω] → Set Ω → Measure Ω
+@Measure.count : {α : Type u_1} → [inst : MeasurableSpace α] → Measure α
+@Measure.sum_smul_dirac : ∀ {α : Type u_1} [inst : MeasurableSpace α] [Countable α] [MeasurableSingletonClass α]
+  (μ : Measure α), (Measure.sum fun a => μ {a} • Measure.dirac a) = μ

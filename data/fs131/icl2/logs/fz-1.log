@@ -1,0 +1,269 @@
+slot: admitted icl2: mem 4 GiB (hard cap), cpus 0,1
+data/fs131/icl2/work/FiniteZhang.lean:143:16: error: Application type mismatch: The argument
+  hx
+has type
+  Membership.mem.{u_2, u_2} (map e.toEmbedding I) (e.toEmbedding x)
+but is expected to have type
+  Membership.mem.{u_1, u_1} I x
+in the application
+  hI x hx
+data/fs131/icl2/work/FiniteZhang.lean:254:9: error: unknown tactic
+data/fs131/icl2/work/FiniteZhang.lean:248:48: error(lean.unknownIdentifier): Unknown constant `Finset.mul_sum`
+data/fs131/icl2/work/FiniteZhang.lean:248:39: error: unsolved goals
+G₁ : Type u_2
+G₂ : Type u_3
+inst✝³ : AddCommGroup G₁
+inst✝² : Finite G₁
+inst✝¹ : AddCommGroup G₂
+inst✝ : Finite G₂
+S₁ : Set G₁
+S₂ : Set G₂
+c : ℝ
+hS₁ : ∀ s ∈ S₁, -s ∈ S₁
+hS₂ : ∀ s ∈ S₂, -s ∈ S₂
+h₁ : RatioLe S₁ c
+h₂ : RatioLe S₂ c
+this✝ : Fintype G₁
+this : Fintype G₂
+I : Finset (G₁ × G₂)
+hI : SIndep (S₁ ×ˢ S₂) I
+hc : 0 ≤ c
+hpair : ∀ (a : G₁) (b : G₂) (a' : G₁) (b' : G₂), (a, b) ∈ I → (a', b') ∈ I → a' - a ∈ S₁ → b' - b ∈ S₂ → False
+X : G₂ → Finset G₁ := fun b => {a | (a, b) ∈ I}
+hX : X = fun b => {a | (a, b) ∈ I}
+L : G₂ → Finset G₁ := fun b => {a ∈ X b | ∀ a' ∈ X b, a' - a ∉ S₁}
+hL : L = fun b => {a ∈ X b | ∀ a' ∈ X b, a' - a ∉ S₁}
+A : G₁ → Finset G₂ := fun a => {b | a ∈ X b ∧ a ∉ L b}
+hA : A = fun a => {b | a ∈ X b ∧ a ∉ L b}
+B : G₁ → Finset G₂ := fun a => {b | a ∈ closedNbhd S₁ (L b)}
+hB : B = fun a => {b | a ∈ closedNbhd S₁ (L b)}
+memX : ∀ (a : G₁) (b : G₂), a ∈ X b ↔ (a, b) ∈ I
+memL : ∀ (a : G₁) (b : G₂), a ∈ L b ↔ a ∈ X b ∧ ∀ a' ∈ X b, a' - a ∉ S₁
+memA : ∀ (a : G₁) (b : G₂), b ∈ A a ↔ a ∈ X b ∧ a ∉ L b
+memB : ∀ (a : G₁) (b : G₂), b ∈ B a ↔ a ∈ closedNbhd S₁ (L b)
+memN₁ : ∀ (T : Finset G₁) (y : G₁), y ∈ closedNbhd S₁ T ↔ y ∈ T ∨ ∃ x ∈ T, y - x ∈ S₁
+memN₂ : ∀ (T : Finset G₂) (y : G₂), y ∈ closedNbhd S₂ T ↔ y ∈ T ∨ ∃ x ∈ T, y - x ∈ S₂
+social : ∀ (a : G₁) (b : G₂), a ∈ X b → a ∉ L b → ∃ a'' ∈ X b, a'' - a ∈ S₁
+hLind : ∀ (b : G₂), SIndep S₁ (L b)
+hAind : ∀ (a : G₁), SIndep S₂ (A a)
+hdisj : ∀ (a : G₁), Disjoint (closedNbhd S₂ (A a)) (B a)
+hrow : ∀ (a : G₁) (b : G₂), (if (a, b) ∈ I then 1 else 0) = (if a ∈ L b then 1 else 0) + if b ∈ A a then 1 else 0
+cardI : #I = ∑ b, #(L b) + ∑ a, #(A a)
+cardNB : ∑ b, #(closedNbhd S₁ (L b)) = ∑ a, #(B a)
+hLle : ∀ (b : G₂), ↑(#(L b)) ≤ c * ↑(#(closedNbhd S₁ (L b)))
+hAle : ∀ (a : G₁), ↑(#(A a)) ≤ c * (↑(Nat.card G₂) - ↑(#(B a)))
+⊢ ∑ b, c * ↑(#(closedNbhd S₁ (L b))) = c * ∑ a, ↑(#(B a))
+data/fs131/icl2/work/FiniteZhang.lean:252:14: error(lean.unknownIdentifier): Unknown constant `Finset.mul_sum`
+data/fs131/icl2/work/FiniteZhang.lean:251:79: error: unsolved goals
+G₁ : Type u_2
+G₂ : Type u_3
+inst✝³ : AddCommGroup G₁
+inst✝² : Finite G₁
+inst✝¹ : AddCommGroup G₂
+inst✝ : Finite G₂
+S₁ : Set G₁
+S₂ : Set G₂
+c : ℝ
+hS₁ : ∀ s ∈ S₁, -s ∈ S₁
+hS₂ : ∀ s ∈ S₂, -s ∈ S₂
+h₁ : RatioLe S₁ c
+h₂ : RatioLe S₂ c
+this✝ : Fintype G₁
+this : Fintype G₂
+I : Finset (G₁ × G₂)
+hI : SIndep (S₁ ×ˢ S₂) I
+hc : 0 ≤ c
+hpair : ∀ (a : G₁) (b : G₂) (a' : G₁) (b' : G₂), (a, b) ∈ I → (a', b') ∈ I → a' - a ∈ S₁ → b' - b ∈ S₂ → False
+X : G₂ → Finset G₁ := fun b => {a | (a, b) ∈ I}
+hX : X = fun b => {a | (a, b) ∈ I}
+L : G₂ → Finset G₁ := fun b => {a ∈ X b | ∀ a' ∈ X b, a' - a ∉ S₁}
+hL : L = fun b => {a ∈ X b | ∀ a' ∈ X b, a' - a ∉ S₁}
+A : G₁ → Finset G₂ := fun a => {b | a ∈ X b ∧ a ∉ L b}
+hA : A = fun a => {b | a ∈ X b ∧ a ∉ L b}
+B : G₁ → Finset G₂ := fun a => {b | a ∈ closedNbhd S₁ (L b)}
+hB : B = fun a => {b | a ∈ closedNbhd S₁ (L b)}
+memX : ∀ (a : G₁) (b : G₂), a ∈ X b ↔ (a, b) ∈ I
+memL : ∀ (a : G₁) (b : G₂), a ∈ L b ↔ a ∈ X b ∧ ∀ a' ∈ X b, a' - a ∉ S₁
+memA : ∀ (a : G₁) (b : G₂), b ∈ A a ↔ a ∈ X b ∧ a ∉ L b
+memB : ∀ (a : G₁) (b : G₂), b ∈ B a ↔ a ∈ closedNbhd S₁ (L b)
+memN₁ : ∀ (T : Finset G₁) (y : G₁), y ∈ closedNbhd S₁ T ↔ y ∈ T ∨ ∃ x ∈ T, y - x ∈ S₁
+memN₂ : ∀ (T : Finset G₂) (y : G₂), y ∈ closedNbhd S₂ T ↔ y ∈ T ∨ ∃ x ∈ T, y - x ∈ S₂
+social : ∀ (a : G₁) (b : G₂), a ∈ X b → a ∉ L b → ∃ a'' ∈ X b, a'' - a ∈ S₁
+hLind : ∀ (b : G₂), SIndep S₁ (L b)
+hAind : ∀ (a : G₁), SIndep S₂ (A a)
+hdisj : ∀ (a : G₁), Disjoint (closedNbhd S₂ (A a)) (B a)
+hrow : ∀ (a : G₁) (b : G₂), (if (a, b) ∈ I then 1 else 0) = (if a ∈ L b then 1 else 0) + if b ∈ A a then 1 else 0
+cardI : #I = ∑ b, #(L b) + ∑ a, #(A a)
+cardNB : ∑ b, #(closedNbhd S₁ (L b)) = ∑ a, #(B a)
+hLle : ∀ (b : G₂), ↑(#(L b)) ≤ c * ↑(#(closedNbhd S₁ (L b)))
+hAle : ∀ (a : G₁), ↑(#(A a)) ≤ c * (↑(Nat.card G₂) - ↑(#(B a)))
+hsumL : ∑ b, ↑(#(L b)) ≤ c * ∑ a, ↑(#(B a))
+⊢ ∑ a, c * (↑(Nat.card G₂) - ↑(#(B a))) = c * (↑(Nat.card G₁) * ↑(Nat.card G₂)) - c * ∑ a, ↑(#(B a))
+data/fs131/icl2/work/FiniteZhang.lean:157:70: error: unsolved goals
+G₁ : Type u_2
+G₂ : Type u_3
+inst✝³ : AddCommGroup G₁
+inst✝² : Finite G₁
+inst✝¹ : AddCommGroup G₂
+inst✝ : Finite G₂
+S₁ : Set G₁
+S₂ : Set G₂
+c : ℝ
+hS₁ : ∀ s ∈ S₁, -s ∈ S₁
+hS₂ : ∀ s ∈ S₂, -s ∈ S₂
+h₁ : RatioLe S₁ c
+h₂ : RatioLe S₂ c
+this✝ : Fintype G₁
+this : Fintype G₂
+I : Finset (G₁ × G₂)
+hI : SIndep (S₁ ×ˢ S₂) I
+hc : 0 ≤ c
+hpair : ∀ (a : G₁) (b : G₂) (a' : G₁) (b' : G₂), (a, b) ∈ I → (a', b') ∈ I → a' - a ∈ S₁ → b' - b ∈ S₂ → False
+X : G₂ → Finset G₁ := fun b => {a | (a, b) ∈ I}
+hX : X = fun b => {a | (a, b) ∈ I}
+L : G₂ → Finset G₁ := fun b => {a ∈ X b | ∀ a' ∈ X b, a' - a ∉ S₁}
+hL : L = fun b => {a ∈ X b | ∀ a' ∈ X b, a' - a ∉ S₁}
+A : G₁ → Finset G₂ := fun a => {b | a ∈ X b ∧ a ∉ L b}
+hA : A = fun a => {b | a ∈ X b ∧ a ∉ L b}
+B : G₁ → Finset G₂ := fun a => {b | a ∈ closedNbhd S₁ (L b)}
+hB : B = fun a => {b | a ∈ closedNbhd S₁ (L b)}
+memX : ∀ (a : G₁) (b : G₂), a ∈ X b ↔ (a, b) ∈ I
+memL : ∀ (a : G₁) (b : G₂), a ∈ L b ↔ a ∈ X b ∧ ∀ a' ∈ X b, a' - a ∉ S₁
+memA : ∀ (a : G₁) (b : G₂), b ∈ A a ↔ a ∈ X b ∧ a ∉ L b
+memB : ∀ (a : G₁) (b : G₂), b ∈ B a ↔ a ∈ closedNbhd S₁ (L b)
+memN₁ : ∀ (T : Finset G₁) (y : G₁), y ∈ closedNbhd S₁ T ↔ y ∈ T ∨ ∃ x ∈ T, y - x ∈ S₁
+memN₂ : ∀ (T : Finset G₂) (y : G₂), y ∈ closedNbhd S₂ T ↔ y ∈ T ∨ ∃ x ∈ T, y - x ∈ S₂
+social : ∀ (a : G₁) (b : G₂), a ∈ X b → a ∉ L b → ∃ a'' ∈ X b, a'' - a ∈ S₁
+hLind : ∀ (b : G₂), SIndep S₁ (L b)
+hAind : ∀ (a : G₁), SIndep S₂ (A a)
+hdisj : ∀ (a : G₁), Disjoint (closedNbhd S₂ (A a)) (B a)
+hrow : ∀ (a : G₁) (b : G₂), (if (a, b) ∈ I then 1 else 0) = (if a ∈ L b then 1 else 0) + if b ∈ A a then 1 else 0
+cardI : #I = ∑ b, #(L b) + ∑ a, #(A a)
+cardNB : ∑ b, #(closedNbhd S₁ (L b)) = ∑ a, #(B a)
+hLle : ∀ (b : G₂), ↑(#(L b)) ≤ c * ↑(#(closedNbhd S₁ (L b)))
+hAle : ∀ (a : G₁), ↑(#(A a)) ≤ c * (↑(Nat.card G₂) - ↑(#(B a)))
+hsumL : ∑ b, ↑(#(L b)) ≤ c * ∑ a, ↑(#(B a))
+hsumA : ∑ a, ↑(#(A a)) ≤ c * (↑(Nat.card G₁) * ↑(Nat.card G₂)) - c * ∑ a, ↑(#(B a))
+⊢ ↑(#I) ≤ c * ↑(Nat.card (G₁ × G₂))
+data/fs131/icl2/work/FiniteZhang.lean:264:9: error: Type mismatch
+  Finite.induction_empty_option ?m.56 ?m.57 ?m.58 ι
+has type
+  ∀ (H : ι → Type ?u.60) [inst : (i : ι) → AddCommGroup (H i)] [∀ (i : ι), Finite (H i)] {S : (i : ι) → Set (H i)},
+    (∀ (i : ι), ∀ s ∈ S i, -s ∈ S i) → (∀ (i : ι), RatioLe (S i) c) → RatioLe {d | ∀ (i : ι), d i ∈ S i} c
+but is expected to have type
+  (∀ (i : ι), ∀ s ∈ S✝ i, -s ∈ S✝ i) → (∀ (i : ι), RatioLe (S✝ i) c) → RatioLe {d | ∀ (i : ι), d i ∈ S✝ i} c
+the following variables have been introduced by the implicit lambda feature
+  H✝ : ι → Type u_3
+  inst✝¹ : (i : ι) → AddCommGroup (H✝ i)
+  inst✝ : ∀ (i : ι), Finite (H✝ i)
+  S✝ : (i : ι) → Set (H✝ i)
+you can disable implicit lambdas using `@` or writing a lambda expression with `{}` or `[]` binder annotations.
+data/fs131/icl2/work/FiniteZhang.lean:327:9: error: unknown tactic
+data/fs131/icl2/work/FiniteZhang.lean:325:58: error: unsolved goals
+G : Type u_1
+inst✝¹ : AddCommGroup G
+inst✝ : Finite G
+A : AddSubgroup G
+S : Set G
+hSA : S ⊆ ↑A
+c : ℝ
+h : RatioLe S c
+this✝ : Fintype G
+this : Fintype (G ⧸ A)
+I : Finset ↥A
+hI : SIndep {d | ↑d ∈ S} I
+f : ↥A × G ⧸ A → G := fun p => ↑p.1 + Quotient.out p.2
+hq : ∀ (p : ↥A × G ⧸ A), ↑(f p) = p.2
+hf : Function.Injective f
+J : Finset G := image f (I ×ˢ univ)
+hJdef : J = image f (I ×ˢ univ)
+i : ↥A
+q : G ⧸ A
+hx : f (i, q) ∈ J
+j : ↥A
+hiq : i ∈ I ∧ q ∈ univ
+hy : f (j, q) ∈ J
+hs : f (j, q) - f (i, q) ∈ S
+hjq : j ∈ I ∧ q ∈ univ
+⊢ ↑j + Quotient.out q - (↑i + Quotient.out q) = ↑j - ↑i
+data/fs131/icl2/work/FiniteZhang.lean:322:4: error: unsolved goals
+case pos
+G : Type u_1
+inst✝¹ : AddCommGroup G
+inst✝ : Finite G
+A : AddSubgroup G
+S : Set G
+hSA : S ⊆ ↑A
+c : ℝ
+h : RatioLe S c
+this✝ : Fintype G
+this : Fintype (G ⧸ A)
+I : Finset ↥A
+hI : SIndep {d | ↑d ∈ S} I
+f : ↥A × G ⧸ A → G := fun p => ↑p.1 + Quotient.out p.2
+hq : ∀ (p : ↥A × G ⧸ A), ↑(f p) = p.2
+hf : Function.Injective f
+J : Finset G := image f (I ×ˢ univ)
+hJdef : J = image f (I ×ˢ univ)
+i : ↥A
+q : G ⧸ A
+hx : f (i, q) ∈ J
+j : ↥A
+hiq : i ∈ I ∧ q ∈ univ
+hy : f (j, q) ∈ J
+hs : f (j, q) - f (i, q) ∈ S
+hjq : j ∈ I ∧ q ∈ univ
+e : f (j, q) - f (i, q) = ↑(j - i)
+⊢ ↑(j - i) ∈ S
+data/fs131/icl2/work/FiniteZhang.lean:316:26: error: unsolved goals
+case neg
+G : Type u_1
+inst✝¹ : AddCommGroup G
+inst✝ : Finite G
+A : AddSubgroup G
+S : Set G
+hSA : S ⊆ ↑A
+c : ℝ
+h : RatioLe S c
+this✝ : Fintype G
+this : Fintype (G ⧸ A)
+I : Finset ↥A
+hI : SIndep {d | ↑d ∈ S} I
+f : ↥A × G ⧸ A → G := fun p => ↑p.1 + Quotient.out p.2
+hq : ∀ (p : ↥A × G ⧸ A), ↑(f p) = p.2
+hf : Function.Injective f
+J : Finset G := image f (I ×ˢ univ)
+hJdef : J = image f (I ×ˢ univ)
+i : ↥A
+q : G ⧸ A
+hx : f (i, q) ∈ J
+j : ↥A
+q' : G ⧸ A
+hy : f (j, q') ∈ J
+hs : f (j, q') - f (i, q) ∈ S
+hiq : i ∈ I ∧ q ∈ univ
+hjq : j ∈ I ∧ q' ∈ univ
+hqq : ¬q = q'
+⊢ False
+data/fs131/icl2/work/FiniteZhang.lean:296:59: error: unsolved goals
+G : Type u_1
+inst✝¹ : AddCommGroup G
+inst✝ : Finite G
+A : AddSubgroup G
+S : Set G
+hSA : S ⊆ ↑A
+c : ℝ
+h : RatioLe S c
+this✝ : Fintype G
+this : Fintype (G ⧸ A)
+I : Finset ↥A
+hI : SIndep {d | ↑d ∈ S} I
+f : ↥A × G ⧸ A → G := fun p => ↑p.1 + Quotient.out p.2
+hq : ∀ (p : ↥A × G ⧸ A), ↑(f p) = p.2
+hf : Function.Injective f
+J : Finset G := image f (I ×ˢ univ)
+hJdef : J = image f (I ×ˢ univ)
+hJ : SIndep S J
+⊢ ↑(#I) ≤ c * ↑(Nat.card ↥A)
+Command exited with non-zero status 1
+wall=3.07s maxrss=1974928kB

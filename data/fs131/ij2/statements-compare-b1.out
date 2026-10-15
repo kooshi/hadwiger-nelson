@@ -1,0 +1,22 @@
+compared: 111 named constants of the first dump (kinds, types, modules), 30 data definitions' values, 3 example heads of the base files
+internal (not compared): 78 before, 80 after
+new public constants in the second dump: 0 (allow-list: 0)
+new private constants in the second dump: 16
+  NEW PRIVATE DEF HadwigerNelson.Rigidity.avgMeasure  (Proofs.HadwigerNelson.Rigidity.InvariantMeasure)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.avgMeasure_apply  (Proofs.HadwigerNelson.Rigidity.InvariantMeasure)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.avgMeasure_eq_zero  (Proofs.HadwigerNelson.Rigidity.InvariantMeasure)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.avgMeasure_map  (Proofs.HadwigerNelson.Rigidity.InvariantMeasure)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.avgMeasure_map_eq  (Proofs.HadwigerNelson.Rigidity.InvariantMeasure)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.continuous_rotCol  (Proofs.HadwigerNelson.Rigidity.InvariantMeasure)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.continuous_shiftCol  (Proofs.HadwigerNelson.Rigidity.InvariantMeasure)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.exists_common_fixed  (Proofs.HadwigerNelson.Rigidity.InvariantMeasure)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.exists_fixed_of_average  (Proofs.HadwigerNelson.Rigidity.InvariantMeasure)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.integral_avgMeasure  (Proofs.HadwigerNelson.Rigidity.InvariantMeasure)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.isClosed_setOf_of_tendsto  (Proofs.HadwigerNelson.Rigidity.InvariantMeasure)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.isProbabilityMeasure_avgMeasure  (Proofs.HadwigerNelson.Rigidity.InvariantMeasure)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.map_compl_eq_zero  (Proofs.HadwigerNelson.Rigidity.InvariantMeasure)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.map_eq_of_tendsto  (Proofs.HadwigerNelson.Rigidity.InvariantMeasure)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.map_eq_of_tendsto_of_eventually  (Proofs.HadwigerNelson.Rigidity.InvariantMeasure)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.measure_compl_eq_zero_of_tendsto  (Proofs.HadwigerNelson.Rigidity.InvariantMeasure)
+examples in the working files that the base does not hold: 0
+PASS: no statement and no definition changed but the ruled ones listed above

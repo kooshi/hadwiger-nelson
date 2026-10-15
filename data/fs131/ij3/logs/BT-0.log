@@ -1,0 +1,4 @@
+slot: admitted ij3f: mem 5 GiB (hard cap), cpus 0,1
+data/fs131/ij3/work/BochnerTau.lean:106:8: warning: declaration uses `sorry`
+seconds=14
+exit=0

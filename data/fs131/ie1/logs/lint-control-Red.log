@@ -1,0 +1,10 @@
+slot: admitted ie1: mem 5 GiB (hard cap), cpus 4,5
+build/fs131-ie1/lint/Red.lean:603:0: error: -- Found 1 error in 30 declarations (plus 8 automatically generated ones) in the current file with 1 linters
+
+/- The `unusedArguments` linter reports:
+UNUSED ARGUMENTS.
+This linter can be disabled with `@[nolint unusedArguments]`. -/
+#check @HadwigerNelson.Outside.OAI015.kernelCell_real /- 1 unused argument:
+  argument 7: [MeasureTheory.IsProbabilityMeasure τ] -/
+seconds=4
+exit=1

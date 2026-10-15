@@ -1,0 +1,24 @@
+slot: admitted itk1: mem 4 GiB (hard cap), cpus 1,2
+GEN 46 false false true false false
+GEN 52 false false true false false
+GEN 62 false false true false false
+GEN 66 false false true false false
+GEN 78 false false true false false
+GEN 82 false false true false false
+data/fs131/itk1/probes/gen/MultipliersGen.lean:108:8: warning: automatically included section variable(s) unused in theorem `_private.data.fs131.itk1.probes.gen.MultipliersGen.0.HadwigerNelson.Rigidity.embedding_iL`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+data/fs131/itk1/probes/gen/MultipliersGen.lean:118:9: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  NumberField ↥F
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/itk1/probes/gen/MultipliersGen.lean:118:31: error: Tactic `rcases` failed: `x✝ : ?m.13` is not an inductive datatype
+GEN 95 false false true false false
+GEN 118 false false true true false
+GEN 180 false false true true false
+GEN 182 false false true true false
+seconds=7
+exit=1

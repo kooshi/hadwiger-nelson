@@ -1,0 +1,144 @@
+slot: waiting (ledger 22 + 4 > budget 22 GiB)
+slot: admitted ij1: mem 4 GiB (hard cap), cpus 4,5
+data/fs131/ij1/work/ContinuityGroup.lean:58:93: error: Application type mismatch: The argument
+  map_add ?m.67 ?m.68 ?m.69
+has type
+  @DFunLike.coe ?m.62 ?m.60 (fun x => ?m.61) ?m.65 ?m.67 (?m.68 + ?m.69) = ?m.67 ?m.68 + ?m.67 ?m.69
+but is expected to have type
+  @DFunLike.coe (↥(fieldI F) →+* mixedEmbedding.mixedSpace ↥(fieldI F)) (↥(fieldI F))
+      (fun x => mixedEmbedding.mixedSpace ↥(fieldI F)) RingHom.instFunLike (mixedEmbedding ↥(fieldI F))
+      ⟨↑(x✝¹ + x✝), ⋯⟩ =
+    (mixedEmbedding ↥(fieldI F)) ⟨↑x✝¹, ⋯⟩ + (mixedEmbedding ↥(fieldI F)) ⟨↑x✝, ⋯⟩
+in the application
+  Eq.trans (congrArg (⇑(mixedEmbedding ↥(fieldI F))) (Subtype.ext rfl)) (map_add ?m.67 ?m.68 ?m.69)
+data/fs131/ij1/work/ContinuityGroup.lean:60:0: error: Not a definitional equality: the left-hand side
+  archTop F
+is not definitionally equal to the right-hand side
+  TopologicalSpace.induced (⇑(archHom F)) inferInstance
+data/fs131/ij1/work/ContinuityGroup.lean:60:111: error: Type mismatch
+  rfl
+has type
+  ?m.12 = ?m.12
+but is expected to have type
+  archTop F = TopologicalSpace.induced (⇑(archHom F)) inferInstance
+data/fs131/ij1/work/ContinuityGroup.lean:72:2: error: No goals to be solved
+data/fs131/ij1/work/ContinuityGroup.lean:170:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ⨅ i, nhds ?m.58
+in the target expression
+  A ∈ ⨅ N, nhds 0
+
+F : Subfield ℝ
+A : Set ↥(unitRing F)
+hA : A ∈ nhds 0
+⊢ A ∈ ⨅ N, nhds 0
+data/fs131/ij1/work/ContinuityGroup.lean:174:6: error: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
+  QuotientAddGroup.instTopologicalSpace (nsmulAddMonoidHom (N + 1)).range
+inferred
+  ⊥
+data/fs131/ij1/work/ContinuityGroup.lean:181:20: error: unsolved goals
+F : Subfield ℝ
+A : Set ↥(unitRing F)
+hA : A ∈ nhds 0
+hA' : A ∈ ⨅ N, nhds 0
+N : ℕ
+s₁ s₂ : Set ↥(unitRing F)
+hs₁ :
+  s₁ ∈
+    Filter.comap (⇑(QuotientAddGroup.mk' (nsmulAddMonoidHom (N + 1)).range))
+      (pure ((QuotientAddGroup.mk' (nsmulAddMonoidHom (N + 1)).range) 0))
+M : ℕ
+hM : M ≠ 0
+hM₂ : ∀ (y : ↥(unitRing F)), M • y ∈ s₂
+t : Set (↥(unitRing F) ⧸ (nsmulAddMonoidHom (N + 1)).range)
+ht : t ∈ pure ((QuotientAddGroup.mk' (nsmulAddMonoidHom (N + 1)).range) 0)
+hts : ⇑(QuotientAddGroup.mk' (nsmulAddMonoidHom (N + 1)).range) ⁻¹' t ⊆ s₁
+y : ↥(unitRing F)
+⊢ (N + 1) • M • y = M • (N + 1) • y
+data/fs131/ij1/work/ContinuityGroup.lean:185:4: error: Type mismatch
+  hM₂ ?m.308
+has type
+  M • ?m.308 ∈ s₂
+but is expected to have type
+  (N + 1) • M • y ∈ s₂
+data/fs131/ij1/work/ContinuityGroup.lean:196:8: error: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
+  QuotientAddGroup.instTopologicalSpace (nsmulAddMonoidHom (N + 1)).range
+inferred
+  ⊥
+data/fs131/ij1/work/ContinuityGroup.lean:197:4: error: Type mismatch
+  Filter.preimage_mem_comap (Filter.mem_pure.mpr rfl)
+has type
+  ?m.121 ⁻¹' Eq ?m.129 ∈ Filter.comap ?m.121 (pure ?m.129)
+but is expected to have type
+  {x |
+      (QuotientAddGroup.mk' (nsmulAddMonoidHom (N + 1)).range) x =
+        (QuotientAddGroup.mk' (nsmulAddMonoidHom (N + 1)).range) y} ∈
+    Filter.comap (⇑(QuotientAddGroup.mk' (nsmulAddMonoidHom (N + 1)).range))
+      (pure ((QuotientAddGroup.mk' (nsmulAddMonoidHom (N + 1)).range) y))
+data/fs131/ij1/work/ContinuityGroup.lean:231:12: warning: `continuous_finset_sum` has been deprecated: Use `continuous_finsetSum` instead
+data/fs131/ij1/work/ContinuityGroup.lean:231:11: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  ContinuousAdd ↥(unitRing F)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/ij1/work/ContinuityGroup.lean:232:4: error: No goals to be solved
+data/fs131/ij1/work/ContinuityGroup.lean:238:6: error: 'show' tactic failed, pattern
+  (mixedEmbedding ↥(fieldI F)) (↑c * ↑(b i)) = ?m.162
+is not definitionally equal to target
+  (archHom F) (e i) = c • B i
+data/fs131/ij1/work/ContinuityGroup.lean:250:31: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Algebra.IsAlgebraic ℤ ↥(fieldI F)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/ij1/work/ContinuityGroup.lean:250:11: error: Tactic `rcases` failed: `x✝ : ?m.218` is not an inductive datatype
+data/fs131/ij1/work/ContinuityGroup.lean:270:34: error: typeclass instance problem is stuck
+  AddGroup ?m.10
+
+Note: Lean will not try to resolve this typeclass instance problem because the type argument to `AddGroup` is a metavariable. This argument must be fully determined before Lean will try to resolve the typeclass.
+
+Hint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.
+data/fs131/ij1/work/ContinuityGroup.lean:279:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  nhds ?m.11
+in the target expression
+  (nhds 0).IsCountablyGenerated
+
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+⊢ (nhds 0).IsCountablyGenerated
+data/fs131/ij1/work/ContinuityGroup.lean:307:40: error: Application type mismatch: The argument
+  Filter.Eventually.filter_mono (nhds_mono inf_le_left) hev
+has type
+  ∀ᶠ (x : ↥(unitRing F)) in @nhds (↥(unitRing F)) (profTop F ⊓ ?m.203) y, t x = t y
+but is expected to have type
+  ∀ᶠ (x' : ↥(unitRing F)) in @nhds (↥(unitRing F)) (tauPrime F) y, t x' = (fun y => t y) y
+in the application
+  tendsto_nhds_of_eventually_eq (Filter.Eventually.filter_mono (nhds_mono inf_le_left) hev)
+data/fs131/ij1/work/ContinuityGroup.lean:312:42: error: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
+  instTopologicalSpaceSubtype
+inferred
+  archTop F
+data/fs131/ij1/work/ContinuityGroup.lean:419:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  nhds ?m.113
+in the target expression
+  (fun y => χ y) ⁻¹' {z | 0 < (↑z).re} ∈ nhds 0
+
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+χ : Dual F
+h : χ ∈ contChars (tauPrime F)
+hc : Continuous fun y => χ y
+hopen : IsOpen {z | 0 < (↑z).re}
+h1 : (fun y => χ y) 0 ∈ {z | 0 < (↑z).re}
+hmem : (fun y => χ y) ⁻¹' {z | 0 < (↑z).re} ∈ nhds 0
+⊢ ∃ N, N ≠ 0 ∧ ContinuousAt (fun r => (χ ^ N) r) 0
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    z
+  has type
+    Circle
+  but is expected to have type
+    ↥(Submonoid.unitSphere ℂ)
+  in the application
+    ↑z
+seconds=17
+exit=1

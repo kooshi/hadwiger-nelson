@@ -1,0 +1,309 @@
+# FS131-ITK1 — the five-colour chain: the adelic model finished (lane T-K), then the zero-entropy side's second half (M8b)
+
+*de Bruijn, the implementer. Brief: `data/fs131/briefs/FS131-ITK1-tate-m8b.md` (on `main`). Branch `fs131-wt2`, cut from
+`fs131-wt1` at `72c8520a7` in the worktree `.claude/worktrees/fs131-wq1`. Working files: `data/fs131/itk1/`. Laptop: 12 cores,
+31 GB.*
+
+## Theorems this phase proved
+
+Each [kernel], axioms exactly `[propext, Classical.choice, Quot.sound]`, printed from build 2's tree
+(`data/fs131/itk1/axioms-after.txt`, reader `tools/fs131_itk1_axioms.py` PASS: 167 records, all CLEAN); all under
+`HadwigerNelson.Rigidity`.
+- **T-K, `Rigidity/TateKernel`** (8): `exists_eq_mixedEmbedding_of_mem_oAnn`, `eq_zero_of_mem_oAnn`,
+  `exists_nat_forall_mem_oAnn`, `tatePi_ker_subset`, `tatePi_exists_nat_mul_mem`, `tatePi_exists_isCompact`,
+  `tatePi_eq_one_forall_imp`, `surjective_tatePi`. With them **`exists_tateModel : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  Nonempty (TateModel F)`** prints the standard three: lane T is complete.
+- **K8-A, `Rigidity/PlaceSizes`** (23): `WPlace.size_toSAdele`, `size_toSAdele_mul`, `size_add_le`, `size_add_le_max`,
+  `size_neg`, `size_nonneg`, `continuous_size`, `absAt_mul`, `absAt_nonneg`, `absAt_eq_zero`, `absAt_natCast_le_one`,
+  `size_le_one_iff`; `exists_finset_absAt_le_one`, `splitHeight_eq_prod`, `one_le_splitHeight`, `absAt_le_splitHeight`,
+  `one_le_prod_absAt_of_mem_stableIntegers` (Lemma PF for `O′`), `ofUnitRing_mem_stableIntegers`, `TateModel.exists_isGap`
+  (Lemma PF for `Λ`), `exists_one_lt_absAt` (Step 0), `exists_unitVector_absAt_lt_one`, `countable_fieldI`,
+  `countable_splitPlace` (stored type with `[NumberField ↥F]`, ruled).
+- **K8-M, `Rigidity/Multipliers`** (6): `multiplier_mem` (private), `coe_multiplier`, `multiplier_one`,
+  `multiplier_injective`, `absAt_multiplier_arch`, `splitHeight_multiplier_le`.
+- **K8-B, `Rigidity/ThinBoxes`** (13): `isOpen_box`, `isClosed_closedThinBox`, `zero_mem_box`, `sub_mem_box`,
+  `size_le_of_mem_box`, `TateModel.measurableSet_image`, `TateModel.iterate_rot_π`, `TateModel.exists_box_partition`,
+  `TateModel.exists_orbit_box`, `TateModel.nameCell_subset`, `exists_delta_of_one_lt`, **`TateModel.thinBox_heavy`**
+  (Lemma 3.1′, EN2-L31), `exists_eps_lt`.
+- **K8-G, `Rigidity/GlobalPoint`** (11): `heavyExponent_pos`, `scaleHeight_three_mul_sq` (unread binder dropped),
+  `Collision.ℓ_ne_zero`, `Collision.ℓ_eq_ofUnitRing`, `Collision.mul_sub_point`, `Collision.point_eq`,
+  `Collision.size_sub_point_le`, `TateModel.exists_collision`, `TateModel.exists_point_of_heavy`,
+  `TateModel.measurableSet_leafSet`, `TateModel.measure_leafSet_compl_eq_zero`.
+- **K8-S, `Rigidity/WanderingShells`** (7): `TateModel.eq_of_π_add_eq`, `TateModel.measurableSet_shell`,
+  `TateModel.iterate_rot_not_mem_shell`, `TateModel.measure_shell_eq_zero`, `exists_absAt_eq_norm`,
+  `TateModel.leafSet_subset`, `TateModel.measure_compl_TA_eq_zero`.
+- **Now on the standard three with no leaf below them**: `zeroEntropyCarried_of_tateModel` (WanderingShells) and
+  **`zeroEntropyCarried_of_numberField : ∀ (F : Subfield ℝ) [NumberField ↥F], ZeroEntropyCarried F`** (ZeroEntropyClosed):
+  EF_F⁺ over every real number field, with no scope.
+
+68 leaves; 31 private helpers (one of them a private definition, `iL`).
+
+## Stage 1 — SAVED: the readback; the stored statements before any edit
+
+**1.1 The build of the tree.** `lake build --no-build` under the slot: `exit=0`, "All targets up-to-date (6078 jobs)" (the four
+`sorry` warnings printed are `Rigidity/EntropySplitMax`'s, not this job's). The tree's build is current for `72c8520a7`.
+
+**1.2 The brief's quotations** (standing rule 3). `tools/fs131_itk1_quotes.py` (FS131-ITT1's reader, unchanged in logic)
+against `main`'s tree: **6 quotations, 6 MATCH** (`data/fs131/itk1/logs/quotes.log`) — W2 (`data/fs131/REQUEST-2026-10-13.md`),
+the two dated lines of 2026-10-14 (`data/fs131/claims-NF2.md`), inventory items 799, 811, 829 (`plans/FS131-close-inventory.md`).
+**Control** (`--plant`): one character of each quotation changed in turn; each planted quotation MISMATCH and the other five
+MATCH, 6 of 6 (`logs/quotes-plant.log`). No finding about the brief.
+
+**1.3 The stored statements before any edit.** `data/fs131/itk1/lean/StatementDump.lean` (FS131-ITT1's dumper, aimed at the
+six modules this job writes — `TateKernel`, `PlaceSizes`, `Multipliers`, `ThinBoxes`, `GlobalPoint`, `WanderingShells` — and
+the two downstream of them it does not, `TateExists`, `ZeroEntropyClosed`), run on the built tree before any edit:
+`statements-before.txt` (67 MB; committed as `.xz`, sha256 in `statements-before.sha256`), 176 constants (141 named, 35
+internal). The reader is `tools/fs131_itk1_statements.py` (ITT1's, with no move). **Against itself:** PASS — 141 named
+constants, 40 data definitions' values, 17 example heads (`statements-self.out`). **Its control** plants eight faults (a T-K
+leaf's type, `box`'s value, a K8-A leaf missing, `zeroEntropyCarried_of_numberField`'s type downstream, `TateModel.shell` moved
+to another module, a new public constant, an axiom, a leaf become a definition) and all 8 are reported, "the check can fail"
+(`statements-control.out`).
+
+**1.4 Each leaf, its statement in one line, beside its plan** (plans: T-K, `plans/FS131-KT1-tate.md` §§ 4.2–4.3; M8b,
+`plans/FS131-K8B1-zero-entropy-second.md` §§ 2.4, 3.4, 4.6). `L = F(i)`, `W = SAdeleRing F`, `ι = toSAdele F`, `ψ = tateChar F`,
+`π = tatePi F`, `O′ = stableIntegers F`, `R = unitRing F`.
+
+| module | leaf | the statement | the plan's route |
+|---|---|---|---|
+| `TateKernel` (T-K) | `exists_eq_mixedEmbedding_of_mem_oAnn` | `a ∈ oAnn`, integral at every split prime ⇒ `a_∞ = ι_∞ y` with `Tr(y s) ∈ ℤ` for `s ∈ 𝓞 L` | § 4.2 step 2: `tateChar_of_integral`, `Circle.exp_eq_one`, `exists_eq_mixedEmbedding_of_archTrace_int` |
+| | `eq_zero_of_mem_oAnn` | `c ∈ oAnn`, `c_∞ = 0`, integral at split primes ⇒ `c = 0` | § 4.2 step 4: `exists_trace_not_int_away`, `exists_approx_completion` at `t₀/c_{w₀}`, `tateCharFun_eq` at `t₀` |
+| | `exists_nat_forall_mem_oAnn` | one `d₀ ≠ 0` with every `a ∈ oAnn` equal to `ι x`, `d₀ x ∈ O′` | § 4.2 steps 1–3 |
+| | `tatePi_ker_subset` | `π a = 1` ⇒ `a = ι y` | `exists_mul_stableIntegers_le` (`c·O′ ⊆ R`) puts `ι c · a` in `oAnn` |
+| | `tatePi_exists_nat_mul_mem` | some `d ≠ 0` has `π(ι y) = 1 ⇒ d y ∈ O′` | the same, `d = d₀ c` |
+| | `tatePi_exists_isCompact` | `W = K + ι(O′)`, `K` compact | closure of `latticeBasis`'s fundamental domain × `∏ O_w`; approximant, then `ZSpan.floor` |
+| | `tatePi_eq_one_forall_imp` | `π(a)(r) = 1` for all `a` ⇒ `r = 0` | `(b, 0)` with `Tr_∞(b r) = 1/2` (`archTrace_mixedEmbedding_one`) |
+| | `surjective_tatePi` | `π` onto | `π(W) = π(K)` compact, closed; coannihilator `⊥`; `eq_top_of_isClosed_of_dualCoannihilator_eq_bot` |
+| `PlaceSizes` (K8-A) | `size_toSAdele` | `|ι x|_p = |x|_p` | `normAtPlace_apply`; `rfl` |
+| | `size_toSAdele_mul` | `|ι x · a|_p = |x|_p |a|_p` | `map_mul` of `normAtPlace`; `norm_mul` |
+| | `size_add_le`, `size_neg`, `size_nonneg` | triangle, symmetry, nonnegativity of sizes | `normAtPlace_*`; `norm_*` |
+| | `size_add_le_max` | ultrametric at a split prime | `IsUltrametricDist.norm_add_le_max` |
+| | `continuous_size` | `p.size` continuous | `continuous_normAtPlace`; `RestrictedProduct.continuous_eval` |
+| | `absAt_mul`, `absAt_nonneg`, `absAt_eq_zero` | `|·|_p` multiplicative, `≥ 0`, zero only at `0` | `map_mul`, `apply_nonneg`, `map_eq_zero`; `norm_*` |
+| | `absAt_natCast_le_one` | `|n|_w ≤ 1` | `FinitePlace.norm_embedding`-shape |
+| | `size_le_one_iff` | `|a|_w ≤ 1 ↔ a_w ∈ O_w` | `FinitePlace.norm_def`, `mem_adicCompletionIntegers` |
+| | `exists_finset_absAt_le_one` | `x` integral off a finite set of split primes | `HeightOneSpectrum.Support.finite` |
+| | `splitHeight_eq_prod` | `splitHeight x` = product over any such `T` | `finprod_eq_prod_of_mulSupport_subset` |
+| | `one_le_splitHeight`, `absAt_le_splitHeight` | `1 ≤ splitHeight x`, `|x|_w ≤ splitHeight x` | from `splitHeight_eq_prod` |
+| | `one_le_prod_absAt_of_mem_stableIntegers` | Lemma PF for `O′`: `1 ≤ ∏_v v(x)^{mult} · ∏_{w ∈ T} |x|_w` | the product formula, stable factors `≤ 1` |
+| | `ofUnitRing_mem_stableIntegers` | `R ⊆ O′` read in `L` | `unitRing_le_stableIntegers` |
+| | `TateModel.exists_isGap` | a gap `C > 0` for `Λ` | `C = d^{−[L:ℚ]}` from `exists_nat_mul_mem` and PF |
+| | `exists_one_lt_absAt` | a non-torsion unit vector expands at some place of `W` | not integral ⇒ a split prime; integral ⇒ Kronecker |
+| | `exists_unitVector_absAt_lt_one` | at each split `w` a unit vector with `|g|_w < 1` | `g = γ/γ̄`, `γ ∈ 𝔓_w ∖ σ𝔓_w` |
+| | `countable_fieldI`, `countable_splitPlace` | `L` and the split primes countable | `Finsupp.Countable.of_moduleFinite`; `Ideal.finite_setOf_absNorm_eq` |
+| `Multipliers` (K8-M) | `multiplier_mem` (private) | `((1 − 4b²) + 4b i)/(1 + 4b²)` is a unit vector of `F²` | rational coordinates; `(1 − 4b²)² + (4b)² = (1 + 4b²)²` |
+| | `coe_multiplier`, `multiplier_one` | `v_b = (1 + 2bi)/(1 − 2bi)`; `v_1 = (−3 + 4i)/5` | `Complex.ext`, `field_simp` |
+| | `multiplier_injective` | `b ↦ v_b` injective | real parts strictly decreasing |
+| | `absAt_multiplier_arch` | `v(v_b) = 1` at every archimedean `v` | `φ(i) = ±i` |
+| | `splitHeight_multiplier_le` | `splitHeight v_b ≤ (1 + 2b)^{[L:ℚ]}` | `v_b = z/z̄`, the product formula for `z̄` |
+| `ThinBoxes` (K8-B) | `isOpen_box`, `isClosed_closedThinBox` | `Q(ε)` open; `Q̄_p(ε, δ)` closed | `IsOpen.prod`; `isClosed_iInter` |
+| | `zero_mem_box`, `sub_mem_box`, `size_le_of_mem_box` | `0 ∈ Q(ε)`; `Q(ε) − Q(ε) ⊆ Q(2ε)`; sizes `≤ max ε 1` | `normAtPlace` arithmetic; `size_le_one_iff` |
+| | `TateModel.measurableSet_image` | `π(closed)` is Borel | σ-compactness, compact images closed |
+| | `TateModel.iterate_rot_π` | `(rot u)^[n] (π a) = π(ι(u^n) a)` | induction, `π_unit_mul` |
+| | `TateModel.exists_box_partition` | finitely many translates of `π(Q(ε))` cover, a measurable label | `isOpenMap`, compactness, first index |
+| | `TateModel.exists_orbit_box` | one name of length `n ≥ 1` ⇒ `y = π(x̃ + a)`, `u^i a ∈ Q(2ε)` for `i < n` | induction on `i`, the gap |
+| | `TateModel.nameCell_subset` | the name cell lies in the image of a thin box | `exists_orbit_box` at `i = n − 1` |
+| | `exists_delta_of_one_lt` | the scales `δ ↦ n` | real arithmetic, least `n` |
+| | `TateModel.thinBox_heavy` | Lemma 3.1′ (EN2-L31) | (i), (iii′), (iv), `nameCell_subset` |
+| | `exists_eps_lt` | a small `ε` with `16ε ≤ 1` and the gap product `< C` | the product tends to `0` |
+| `GlobalPoint` (K8-G) | `heavyExponent_pos`, `scaleHeight_three_mul_sq` | `β > 0`; `M(3B²) = M(B)²` | `positivity`; `ring` |
+| | `Collision.ℓ_ne_zero`, `ℓ_eq_ofUnitRing` | `ℓ = v₁ − v₂ ≠ 0`, `ℓ ∈ R` | `multiplier_injective`; `map_sub` |
+| | `Collision.mul_sub_point` | `v₂a₂ − v₁a₁ = ℓ(x̃ − t)` | `c.eq`, ring arithmetic |
+| | `Collision.point_eq` | two scales give one point | the gap at `z = ℓ₂y₁ − ℓ₁y₂` |
+| | `Collision.size_sub_point_le` | `|x̃ − t|_p ≤ 2^{D+2} M(B)³ δ` | PF for `ℓ` |
+| | `TateModel.exists_collision` | `B μ(π(x̃ + Q̄)) > 1` ⇒ a collision | measure pigeonhole |
+| | `TateModel.exists_point_of_heavy` | heavy thin boxes at `x̃` ⇒ `x̃ − ι t ∈ W_p` | scales `B_{j+1} = 3B_j²` |
+| | `TateModel.measurableSet_leafSet`, `measure_leafSet_compl_eq_zero` | the leaf set Borel, of full measure | countable union; Lemma 3.1′ |
+| `WanderingShells` (K8-S) | `TateModel.eq_of_π_add_eq` | the lift on a leaf is unique | `π_eq_π_iff`, `eq_zero_of_toSAdele_mem_hyperplane` |
+| | `TateModel.measurableSet_shell` | shells Borel | `measurableSet_image` |
+| | `TateModel.iterate_rot_not_mem_shell` | shells wander under `rot g`, `|g|_w < 1` | `eq_of_π_add_eq`, sizes |
+| | `TateModel.measure_shell_eq_zero` | shells null | `MeasurePreserving.conservative` |
+| | `exists_absAt_eq_norm` | `‖L_w ∖ 0‖ = |L ∖ 0|_w` | density, ultrametric |
+| | `TateModel.leafSet_subset`, `measure_compl_TA_eq_zero` | leaf set `⊆ T + A ∪` shells; `μ` carried by `T + A` | `mem_TA`; countable null union |
+
+## Stage 2 — SAVED: lane T-K proved; `exists_tateModel` on the standard three
+
+**2.1 The leaves**, all eight by the plan's routes (FS131-KT1 §§ 4.2–4.3), in two elaboration rounds (`logs/TK-1.log`: six
+errors — `RestrictedProduct.ext`'s explicit arguments, two rewrites under a `show` that had unfolded the completion's
+coercion, a `field_simp` under a `let`, the instance `Countable (unitRing F)`; `logs/TK-2.log`: exit 0, no warning). About
+230 lines against the plan's ~350. Routes, where they differ in detail from the table:
+- `eq_zero_of_mem_oAnn`: as § 4.2 step 4; the congruence at `w₀` is `c s − t₀ = −c(t₀/c − s)` (`mul_div_cancel₀`), at
+  `w ≠ w₀` both terms integral.
+- `exists_nat_forall_mem_oAnn`: steps 1–3 with `c := ι(d₀)·(b − ι y)` and `b = ι y` from `ι(d₀⁻¹)·c = b − ι y`.
+- `tatePi_ker_subset`, `tatePi_exists_nat_mul_mem` through one private helper, `toSAdele_mul_mem_oAnn` (`π a = 1` and
+  `c·O′ ⊆ R` put `ι(c)·a` in `oAnn`; the element `c s ∈ R` read as a point of `unitRing F` by
+  `UnitRing.coe_mem_unitRingOver_iff`).
+- `tatePi_exists_isCompact`: `K = closure(ZSpan.fundamentalDomain latticeBasis) ×ˢ range structureMap`; the integer part
+  `ZSpan.floor` lies in `mixedEmbedding.integerLattice` (`mem_span_latticeBasis`), so is `ι_∞ s`, `s ∈ 𝓞 L`, and
+  `a − ι(t + s)` has archimedean part `ZSpan.fract`.
+- `tatePi_eq_one_forall_imp`: `b = ι_∞(q·x⁻¹)`, `q = 1/(2[L:ℚ])`; `e(2π·½) = 1` would make `½` an integer.
+- `surjective_tatePi`: the range of `π.toMonoidHom` is `π(K)`; `Countable (unitRing F)` supplied in the proof from
+  `SpectralChain.countable_unitRing` (no new import).
+Eleven private helpers (`valuation_coe_le_one`, `coe_mem_integers_iff`, `coe_mem_stableIntegers`,
+`mem_stableIntegers_of_away`, `snd_mul_apply`, `snd_sub_apply`, `toSAdele_snd_apply`, `exists_int_of_exp_eq_one`,
+`toSAdele_injective`, `sub_toSAdele_mem_oAnn`, `toSAdele_mul_mem_oAnn`).
+
+**2.2 Build 1** (`./scripts/build.sh` under the slot, `MEMMAX=10G BATCH=8`): `OK — 254 of 254 batches, 4 module(s)
+rebuilt, 11 module(s) with warnings, 7m50s`, exit 0 (`logs/build1.log`; gate log
+`build/gate/build/20261014T123916Z-3023456.log`). Rebuilt: `TateKernel`, `TateExists`, `ZeroEntropyClosed`, `Proofs`.
+Every warning is ``declaration uses `sorry` ``, none from `TateKernel`.
+
+**2.3 The axioms** (`probes/AxTK.lean` on build 1's tree, `logs/AxTK.log`): the eight leaves and `exists_tateModel`, each
+`[propext, Classical.choice, Quot.sound]`; `zeroEntropyCarried_of_numberField` `[propext, sorryAx, Classical.choice,
+Quot.sound]` (the M8b leaves). The one line was sent to the coordinator.
+
+**2.4 No statement changed, from the kernel's side** (build 1's dump `statements-b1.txt`, `.xz` and sha256 committed,
+against stage 1's): **PASS** — 141 named constants, 40 data definitions' values, 17 example heads; no new public
+constant; the eleven private helpers listed; internal constants 35 → 37 (`statements-compare-b1.out`).
+
+**2.5 Re-priced.** T-K came in at about two thirds of its plan, in two rounds for the whole lane.
+
+## Stage 3 — SAVED: lanes K8-A, K8-M, K8-B proved in the modules (elaborated file by file; the build is stage 5)
+
+Each module written against a copy under `data/fs131/itk1/work/` and elaborated there under `lake env lean` with the
+lakefile's two options (`data/fs131/itk1/lean1.sh`), exit 0 and no warning, then copied over the module: `PlaceSizes`
+(`logs/KA-2.log`), `Multipliers` (`KM-4.log`), `ThinBoxes` (`KB-3.log`). No `sorry` is left in the three files; the
+only lines removed are the `sorry`s and three `:= by` that became `:=` before a term proof (`git diff -U0`). The kernel's
+side is stage 5's.
+
+| lane | leaves | route as planned? | lines (est. → written) | rounds |
+|---|---|---|---|---|
+| K8-A `PlaceSizes` | the 23 | yes, but for: `size_le_one_iff` and the split norms through one private helper `‖z‖ ≤ 1 ↔ v z ≤ 1` (`FinitePlace.norm_def`, `WithZeroMulInt.toNNReal_le_one_iff`); Lemma PF with the stable/split split as `Finset.prod_sdiff` over `mulSupport ∪ T` (no filter); `exists_one_lt_absAt` with `u ū = 1` computed in `ℂ` (`Complex.mul_conj`) | ~500 → ~240 | 2 |
+| K8-M `Multipliers` | the 6 | `absAt_multiplier_arch` **by another route**: `v_b = q₁ + q₂ i` with `q₁, q₂ ∈ ℚ`, so an embedding sends it to `q₁ ± q₂ i`, of modulus `‖v_b‖ = 1` — no `(1 + 2bi)/(1 − 2bi)` at the archimedean places. `splitHeight_multiplier_le` **by another route**: Lemma PF for `z̄ = 1 − 2bi` (`one_le_prod_absAt_of_mem_stableIntegers`) in place of the product formula over all finite places — `∏_T max(1, |v_b|_w) ≤ (∏_T |z̄|_w)⁻¹ ≤ ∏_v v(z̄)^{mult} ≤ (1 + 2b)^{[L:ℚ]}` | ~150 → ~110 | 4 |
+| K8-B `ThinBoxes` | the 13 | yes; `exists_orbit_box`'s step as one private helper `orbit_step` (the gap at `y′ = l₂ − l₁`, `ι y′ = ι(u)·a′ − b`); the partition's label by `Nat.find` over the subcover extended to `ℕ`; `exists_delta_of_one_lt` with `n = ⌈log(c/δ)/log s⌉₊ + 1` and `δ₀ = c·e^{−K log s}`, `K = max(N₀, 2 log c/log s + 3)` (no `Nat.find`) | ~450 → ~300 | 3 |
+
+**Private helpers added**: `PlaceSizes` — `norm_le_one_iff_valued`, `norm_lt_one_iff_valued`, `norm_coe_le_one_iff`,
+`coe_natCast_completion`, `coe_mul_completion`; `Multipliers` — `iL` (a private definition: `i` in `L`), `embedding_iL`,
+`norm_embedding_iL`; `ThinBoxes` — `absAt_pow`, `orbit_step`.
+
+**One linter question, decided and held for the coordinator.** `multiplier_mem` (private, the skeleton's proof field of
+`multiplier`) takes the section's `[NumberField F]`, which its proof does not read, and once proved the build's
+unused-section-variable linter warns. Dropping the binder (`omit … in`) **changes the stored type of the definition
+`multiplier`** — it then takes no `[NumberField F]` — and of every statement that mentions it (seen at once: three
+readers then drew the same warning, `logs/KM-2.log`). So the binder stays, and the linter is switched off for that one
+private declaration (`set_option linter.unusedSectionVars false in`, with a `--` comment saying why); nothing stored
+changes. The alternative — drop it under item 726's word and let `multiplier`'s type lose the instance — is the
+coordinator's to choose; it is not a binder of the declaration alone.
+
+**Re-priced** from the first leaves of each lane: K8-A came in at about half its plan, K8-M at about three quarters,
+K8-B at about two thirds, each in two to four elaboration rounds. What is left is K8-G (11 leaves, planned ~500) and
+K8-S (7, planned ~200): at these rates about 450 lines, a few hours.
+
+## Stage 4 — SAVED: lane K8-G proved in its module (elaborated; the build is stage 5)
+
+`Rigidity/GlobalPoint`, all 11 leaves, against a copy (`data/fs131/itk1/work/GlobalPoint.lean`; rounds `logs/KG-1.log` …
+`KG-13.log`, the last exit 0 with no warning), copied over the module; the only lines removed are the `sorry`s.
+
+| leaf | route as planned? |
+|---|---|
+| `heavyExponent_pos`, `scaleHeight_three_mul_sq` | yes |
+| `Collision.ℓ_ne_zero`, `ℓ_eq_ofUnitRing`, `mul_sub_point` | yes |
+| `Collision.point_eq` | yes, with the split per place: archimedean sizes of `z` by `2(|a₁₂| + |a₂₂|) + 2(|a₁₁| + |a₂₁|)`, split ones by `max(1,|v₁₁|)·max(1,|v₁₂|)·max(1,|v₂₁|)·max(1,|v₂₂|)·max σ`; then `cases p`: at an archimedean `p` the archimedean product `≤ 8δ` and the split product `≤ M⁶`; at a split `p` the archimedean product `≤ 1` and the split product (over the supports with `p` inserted) `≤ M⁶·δ`; both `≤ 8M^{−10}` |
+| `Collision.size_sub_point_le` | yes: `1 ≤ |ℓ|_p·2^{[L:ℚ]+1}M²` from Lemma PF for `ℓ` with the factor at `p` kept, and `|e|_p ≤ 2Mδ` |
+| `TateModel.exists_collision` | yes (preimages under `rot v_b`; `Nat.card_Icc`) |
+| `TateModel.exists_point_of_heavy` | yes, with `δ(B)^β = e^{−log(3B)/2}` computed in logarithms (no `rpow` algebra), `B₀ = max(4, ⌈1/δ₀⌉₊ + ⌈8/C⌉₊ + 1)`, `B_j ≥ B₀ + j`, and `|x̃ − t|_p ≤ 2^{[L:ℚ]+2}/B_j` |
+| `TateModel.measurableSet_leafSet`, `measure_leafSet_compl_eq_zero` | yes |
+
+Private helpers: `e_eq`, `size_e_arch`, `size_e_split`, `absAt_ℓ_arch`, `absAt_ℓ_split`, `max_le_mul_max`,
+`splitHeight_le_scaleHeight`, `prod_le_mul_prod_erase`. **One unread binder dropped** (item 726's word):
+`scaleHeight_three_mul_sq` did not read the section's `[NumberField F]` (`scaleHeight` reads only `finrank`), and the
+build's linter said so once it was proved; `omit [NumberField F] in` drops it from this theorem's stored type alone (no
+definition mentions it). Listed for stage 5's check as a ruled drop. About 420 lines against the plan's ~500, in 13 rounds
+(casts of a `let`-bound `ℕ → ℕ` into `ℝ` cost four of them: `(Bs j : ℝ)` does not elaborate, `(Nat.cast (Bs j) : ℝ)` does).
+
+## Stage 5 — SAVED: build 2; no statement changed but two ruled ones; the axioms; lint; doubled names; architecture
+
+**5.1 Build 2** (`./scripts/build.sh` under the slot, `MEMMAX=10G BATCH=8`): `OK — 254 of 254 batches, 7 module(s) rebuilt,
+6 module(s) with warnings, 7m57s`, exit 0 (`logs/build2.log`; gate log `build/gate/build/20261014T131918Z-3149901.log`).
+Rebuilt: `PlaceSizes`, `Multipliers`, `ThinBoxes`, `GlobalPoint`, `WanderingShells`, `ZeroEntropyClosed`, `Proofs`.
+**Warnings from my six files: none** (every warning of the build is in `ChainAtTA`, `EntropyFibres`, `EntropySplitMax`,
+`PositiveEntropy`, `RingScope`, `UnitCircle` — other lanes' leaves).
+
+**5.2 From the kernel's side** (stage 1's dump against build 2's, `statements-after.txt`, `.xz` + sha256;
+`tools/fs131_itk1_statements.py … 72c8520a7 --dropped dropped.txt --ruled-type ruled-type.txt --allow-new allow-new.txt`):
+**PASS** — 141 named constants (kinds, types, modules), 40 data definitions' values (`box`, `multiplier`, `splitHeight`,
+`scaleHeight`, `Collision`, `TateModel.shell`, `oAnn`, … unchanged), 17 example heads; 30 new private helpers; and two
+stored-type changes, each named (`statements-compare.out`):
+- **RULED TYPE `countable_splitPlace`** (the coordinator's ruling of 2026-10-14, received at this stage). Before
+  (`statements-before.txt` l. 55): `TYPE 613514900 forall {F : Subfield.{0} Real Real.instDivisionRing}, Countable.{1}
+  (HadwigerNelson.Rigidity.SplitPlace F)`; after (`statements-after.txt` l. 81): `TYPE 32669621 forall {F : …} [inst… :
+  NumberField.{0} ↥F], Countable.{1} (HadwigerNelson.Rigidity.SplitPlace F)`. The skeleton `instance` with a `sorry` body
+  had not picked up the section's `[NumberField F]`; the statement without it is believed false at `F = ⊤` (the primes of
+  the algebraic integers are uncountable). The one reader, `TateModel.measure_compl_TA_eq_zero` (instance search, with
+  `[NumberField F]` in scope), was rebuilt in build 2.
+- **RULED DROP `scaleHeight_three_mul_sq`** (item 726's word): its unread `[NumberField F]` dropped (`omit … in`); no
+  definition mentions it.
+- **Five generated constants, allowed and listed** (`allow-new.txt`): `SAdeleRing.congr_simp`, `TateModel.congr_simp`,
+  `splitHeight.congr_simp` (in `ThinBoxes`), `WPlace.absAt.congr_simp` (`PlaceSizes`), `multiplier.congr_simp`
+  (`Multipliers`) — reserved names Lean generates on demand when a `simp`-family tactic or `linarith`'s preprocessing
+  descends into an applied definition with an instance argument. Located synchronously (`probes/gen/*Gen.lean`:
+  `set_option Elab.async false`, `env.contains` between declarations; `logs/Gen-*.log`): `absAt` in
+  `TateModel.exists_isGap` (its closing `linarith`), `multiplier` in `absAt_multiplier_arch` (a `simp only` under
+  `multiplier F b`), the three of `ThinBoxes` in `TateModel.thinBox_heavy` (its `by linarith`, with `hεC` in context). No
+  stored proof names them (`probes/WhoUses.lean`). Not removed: every module downstream (`GlobalPoint` alone has 74
+  `simp`-family and `linarith` calls over the same atoms) would generate them in turn; each exists **once** in the library
+  (`dupnames` below).
+**The planted changes, watched firing:** `--control` on these two dumps, 8 of 8 reported
+(`statements-compare-control.out`); and the same two dumps without the ruled lists FAIL with 7 differences, naming
+`countable_splitPlace`, `scaleHeight_three_mul_sq` and the five generated constants (`statements-compare-unruled.out`).
+`multiplier_mem`'s `[NumberField F]` was **not** dropped (stage 3): `multiplier`'s stored value is unchanged, as the check
+shows.
+
+**5.3 The axioms of every declaration of my files**, from build 2's tree (`lean/Axioms.lean` → `axioms-after.txt`;
+`tools/fs131_itk1_axioms.py` → `axioms-verdict.out`): **PASS** — **167 records** of the six modules (131 public, 5
+generated, 31 private), **all CLEAN**, none resting on `sorryAx`. The planted record (`positive_entropy_rigidity_of_
+polishSpace`) is reported resting on the declared printed theorem. `--control`: 4 of 4 planted faults reported
+(`axioms-control.out`). Downstream, for information: `exists_tateModel` and **`zeroEntropyCarried_of_numberField`** —
+`[Classical.choice, Quot.sound, propext]`.
+
+**5.4 The linters** (`lake lint --no-build -- --no-build --trace` under the slot): exit 0, `-- Linting passed for Proofs.`,
+14 of 14 `Passed` (`logs/lint.log`). **Doubled names** (`./scripts/dupnames.sh`): OK — no name declared by two modules, 24
+generated on demand, none of them this job's, "no repeated name appeared or disappeared since the previous complete run"
+(`logs/dupnames.log`). **Architecture** (`tools/check_architecture.py`): RESULT PASS with the six rows updated
+(`logs/architecture.log`); a plant in a copy (`WanderingShells`' imports cell `Rigidity/ThinBoxes`) FAILS naming it
+(`logs/architecture-plant.log`). **Not run** (item 815's ruling 2, the same branch condition): `scripts/axioms.sh`,
+`assumptions.sh`, `vacuity.sh` — the branch carries the declared printed theorem not yet declared to the audit.
+
+## Drafts for the landing (files this job does not write; each names its slot)
+
+**The audit's block** (`scripts/Axioms.lean`, CLEAN section, after FS131-ITT1's block):
+`data/fs131/itk1/draft-axioms-block.lean`, 131 `#print axioms` lines — every public declaration of the six files but the
+five generated ones, CLEAN at build 2, generated from the built tree's print — plus, at the landing,
+`zeroEntropyCarried_of_numberField` and `exists_tateModel` (now CLEAN).
+
+**The models** (`LEAN.md` § The gate). `TateModel F` is now inhabited at every real number field by a theorem on the
+standard three (`exists_tateModel`), so every statement over `(D : TateModel F)` has its structure's model in the
+library. The others, as their docstrings and K8B1 §§ 2.3, 3.3, 4.5 name them: Lemma 3.1′'s and the leaf set's measure
+hypotheses at the point mass at `1` (`zeroEntropyCarried_model`) with `u = (3 + 4i)/5`; `Collision` at that point mass,
+the lift `0`, `B ≥ 2` (`exists_collision`; at `B = 1` its hypothesis is false); the shells' at `δ_1`, `c = 1` and
+`exists_unitVector_absAt_lt_one`; `eq_zero_of_mem_oAnn` and `tatePi_eq_one_forall_imp` are uniqueness shapes inhabited at
+`c = 0`, `r = 0` (KT1 § 4.4); `IsGap` by `exists_isGap`'s constant. Each note names objects for the hypotheses they
+satisfy only.
+
+**`ARCHITECTURE.md`** (written on this branch): the six rows' state cells ("no `sorry`", lane and job). For the landing:
+`Rigidity/TateExists`' and `Rigidity/ZeroEntropyClosed`'s rows still say "skeleton: no leaf of its own" — both now rest
+on no `sorry`.
+
+**`LEAN.md` § Searching — Lean**, five lines (each follows the last line there):
+- "A skeleton `instance` whose body is `sorry` does not take the section's instance variables: its stored type can lack
+  a `[NumberField F]` its statement needs, and the proof that uses the instance adds it. Read a skeleton instance's stored
+  type (the dump), not its text (`Rigidity.countable_splitPlace`, false without the binder at `F = ⊤`; the coordinator's
+  ruling, FS131-ITK1)."
+- "`omit [inst] in` on a proof field of a definition (`multiplier_mem` for `multiplier`) removes the instance from the
+  definition's stored type, and from every statement that mentions it, when nothing else reads it: the unused-section-
+  variable warning on such a field is silenced for the one declaration (`set_option linter.unusedSectionVars false in`),
+  or the drop is ruled as a definition change (FS131-ITK1)."
+- "`linarith` (its preprocessing) and `simp`-family tactics that descend into an applied definition with an instance
+  argument (`splitHeight x`, `p.absAt x`, `D.π`) generate `f.congr_simp` in the module that asks, used by no stored proof.
+  To find the declaration: a copy with `set_option Elab.async false` and an `#eval` of `env.contains` between
+  declarations (`data/fs131/itk1/probes/gen/`); `linarith only [h₁, h₂]` or an explicit `lt_irrefl` closes without it
+  (FS131-ITK1)."
+- "`(Bs j : ℝ)` for a `let Bs : ℕ → ℕ := fun j => Nat.rec …` in a proof is 'type mismatch: ℕ expected ℝ'; `(Nat.cast
+  (Bs j) : ℝ)` elaborates. `push_cast` leaves `((2 : ↥(fieldI F)) : ℂ)`; `simp only [show ((2 : fieldI F) : ℂ) = 2 from
+  map_ofNat (fieldI F).subtype 2]` moves it (FS131-ITK1)."
+- "At the pin: the split places' norms are `FinitePlace.norm_def` (`‖z‖ = toNNReal (absNorm_ne_zero v) (Valued.v z)`)
+  with `WithZeroMulInt.toNNReal_le_one_iff (NumberField.HeightOneSpectrum.one_lt_absNorm_nnreal v)`; the coercion
+  `(x : v.adicCompletion K)` is `FinitePlace.embedding v x` by `rfl`, so `FinitePlace.norm_le_one`,
+  `norm_lt_one_iff_mem`, `norm_eq_one_iff_notMem` apply to it by `exact`; the ultrametric equality is
+  `IsUltrametricDist.norm_add_eq_max_of_norm_ne_norm`; `InfinitePlace.mult_ne_zero`, `InfinitePlace.map_natCast`,
+  `isIntegral_natCast` (root namespace); there is no `Real.one_lt_exp` (use `Real.exp_zero` and `Real.exp_lt_exp`)
+  (FS131-ITK1)."

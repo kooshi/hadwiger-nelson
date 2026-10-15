@@ -1,0 +1,245 @@
+slot: admitted ij3f: mem 5 GiB (hard cap), cpus 5,6
+data/fs131/ij3/work/BochnerTau.lean:119:26: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Decidable (i = j)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/ij3/work/BochnerTau.lean:132:2: error: unsolved goals
+case pos
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+c : ℕ
+hc : c ≠ 0
+hcR : ∀ (a : 𝓞 ↥(fieldI F)), ↑c * ↑a ∈ UnitRing.unitRing (conjOn ⋯)
+B : Module.Basis (Module.Free.ChooseBasisIndex ℤ (𝓞 ↥(fieldI F))) ℤ (𝓞 ↥(fieldI F)) := RingOfIntegers.basis ↥(fieldI F)
+β : Module.Basis (Module.Free.ChooseBasisIndex ℤ (𝓞 ↥(fieldI F))) ℚ ↥(fieldI F) := integralBasis ↥(fieldI F)
+hβ : ∀ (i : Module.Free.ChooseBasisIndex ℤ (𝓞 ↥(fieldI F))), β i = ↑(B i)
+hc' : ↑c ≠ 0
+b : Module.Free.ChooseBasisIndex ℤ (𝓞 ↥(fieldI F)) → ↥(unitRing F) := fun i => ⟨↑(↑c * ↑(B i)), ⋯⟩
+q : Module.Free.ChooseBasisIndex ℤ (𝓞 ↥(fieldI F)) → ↥(unitRing F) →+ ℚ :=
+  fun j => AddMonoidHom.mk' (fun y => (β.repr ((toFieldI F) y)) j / ↑c) ⋯
+i j : Module.Free.ChooseBasisIndex ℤ (𝓞 ↥(fieldI F))
+hb : (toFieldI F) (b i) = ↑c • β i
+h✝ : i = j
+⊢ 1 = sorry ()
+
+case neg
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+c : ℕ
+hc : c ≠ 0
+hcR : ∀ (a : 𝓞 ↥(fieldI F)), ↑c * ↑a ∈ UnitRing.unitRing (conjOn ⋯)
+B : Module.Basis (Module.Free.ChooseBasisIndex ℤ (𝓞 ↥(fieldI F))) ℤ (𝓞 ↥(fieldI F)) := RingOfIntegers.basis ↥(fieldI F)
+β : Module.Basis (Module.Free.ChooseBasisIndex ℤ (𝓞 ↥(fieldI F))) ℚ ↥(fieldI F) := integralBasis ↥(fieldI F)
+hβ : ∀ (i : Module.Free.ChooseBasisIndex ℤ (𝓞 ↥(fieldI F))), β i = ↑(B i)
+hc' : ↑c ≠ 0
+b : Module.Free.ChooseBasisIndex ℤ (𝓞 ↥(fieldI F)) → ↥(unitRing F) := fun i => ⟨↑(↑c * ↑(B i)), ⋯⟩
+q : Module.Free.ChooseBasisIndex ℤ (𝓞 ↥(fieldI F)) → ↥(unitRing F) →+ ℚ :=
+  fun j => AddMonoidHom.mk' (fun y => (β.repr ((toFieldI F) y)) j / ↑c) ⋯
+i j : Module.Free.ChooseBasisIndex ℤ (𝓞 ↥(fieldI F))
+hb : (toFieldI F) (b i) = ↑c • β i
+h✝ : ¬i = j
+⊢ 0 = sorry ()
+data/fs131/ij3/work/BochnerTau.lean:165:30: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Decidable (i = j)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/ij3/work/BochnerTau.lean:177:7: error: invalid 'calc' step, left-hand side is
+  ∑ i, 5 ^ k * (↑(z i) * (q j) (fivePow F k (b i))) : ℚ
+but is expected to be
+  ∑ x, 5 ^ k * (q j) (↑(z x) * fivePow F k (b x)) : ℚ
+data/fs131/ij3/work/BochnerTau.lean:176:13: warning: This simp argument is unused:
+  map_zsmul
+
+Hint: Omit it from the simp argument list.
+  simp only [̵m̵a̵p̵_̵z̵s̵m̵u̵l̵,̵ ̵z̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵]̵[̲z̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/BochnerTau.lean:184:30: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Decidable (i = j)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/ij3/work/BochnerTau.lean:216:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑(N / ((q j) y).den)
+in the target expression
+  ↑(↑N / ↑((q j) y).den) * ↑((q j) y).num = ↑N * (q j) y
+
+F : Subfield ℝ
+inst✝¹ : NumberField ↥F
+ι : Type
+inst✝ : Fintype ι
+b : ι → ↥(unitRing F)
+q : ι → ↥(unitRing F) →+ ℚ
+hqb : ∀ (i j : ι), (q j) (b i) = if i = j then 1 else 0
+hinj : Function.Injective fun y j => (q j) y
+y : ↥(unitRing F)
+N : ℕ := ∏ j, ((q j) y).den
+hN : N = ∏ j, ((q j) y).den
+hN0 : N ≠ 0
+hdvd : ∀ (j : ι), ((q j) y).den ∣ N
+w : ι → ℤ := fun j => ↑(N / ((q j) y).den) * ((q j) y).num
+j : ι
+hd : ↑((q j) y).den ≠ 0
+⊢ ↑(↑N / ↑((q j) y).den) * ↑((q j) y).num = ↑N * (q j) y
+data/fs131/ij3/work/BochnerTau.lean:218:39: error: unsolved goals
+F : Subfield ℝ
+inst✝¹ : NumberField ↥F
+ι : Type
+inst✝ : Fintype ι
+b : ι → ↥(unitRing F)
+q : ι → ↥(unitRing F) →+ ℚ
+hqb : ∀ (i j : ι), (q j) (b i) = if i = j then 1 else 0
+hinj : Function.Injective fun y j => (q j) y
+y : ↥(unitRing F)
+N : ℕ := ∏ j, ((q j) y).den
+hN : N = ∏ j, ((q j) y).den
+hN0 : N ≠ 0
+hdvd : ∀ (j : ι), ((q j) y).den ∣ N
+w : ι → ℤ := fun j => ↑(N / ((q j) y).den) * ((q j) y).num
+hw : ∀ (j : ι), ↑(w j) = ↑N * (q j) y
+j' : ι
+⊢ ↑(w j') = ∑ x, (q j') (↑(w x) * b x)
+data/fs131/ij3/work/BochnerTau.lean:223:15: warning: This simp argument is unused:
+  map_zsmul
+
+Hint: Omit it from the simp argument list.
+  simp only [m̵a̵p̵_̵z̵s̵m̵u̵l̵,̵ ̵hqb, smul_ite, smul_zero, Finset.sum_ite_eq', Finset.mem_univ, if_true, zsmul_eq_mul,
+        mul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/BochnerTau.lean:223:26: warning: This simp argument is unused:
+  hqb
+
+Hint: Omit it from the simp argument list.
+  simp only [map_zsmul, h̵q̵b̵,̵ ̵smul_ite, smul_zero, Finset.sum_ite_eq', Finset.mem_univ, if_true,
+  ̲  ̲ ̲ ̲ ̲ ̲zsmul_eq_mul,
+  ̵  ̵ ̵ ̵ ̵ ̵mul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/BochnerTau.lean:223:31: warning: This simp argument is unused:
+  smul_ite
+
+Hint: Omit it from the simp argument list.
+  simp only [map_zsmul, hqb, smul_i̵t̵e̵,̵ ̵s̵m̵u̵l̵_̵zero, Finset.sum_ite_eq', Finset.mem_univ, if_true,
+  ̲  ̲ ̲ ̲ ̲ ̲zsmul_eq_mul,
+  ̵  ̵ ̵ ̵ ̵ ̵mul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/BochnerTau.lean:223:41: warning: This simp argument is unused:
+  smul_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [map_zsmul, hqb, smul_ite, s̵m̵u̵l̵_̵z̵e̵r̵o̵,̵ ̵Finset.sum_ite_eq', Finset.mem_univ, if_true, zsmul_eq_mul,
+        mul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/BochnerTau.lean:223:52: warning: This simp argument is unused:
+  Finset.sum_ite_eq'
+
+Hint: Omit it from the simp argument list.
+  simp only [map_zsmul, hqb, smul_ite, smul_zero, F̵i̵n̵s̵e̵t̵.̵s̵u̵m̵_̵i̵t̵e̵_̵e̵q̵'̵,̵ ̵Finset.mem_univ, if_true, zsmul_eq_mul, mul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/BochnerTau.lean:223:72: warning: This simp argument is unused:
+  Finset.mem_univ
+
+Hint: Omit it from the simp argument list.
+  simp only [map_zsmul, hqb, smul_ite, smul_zero, Finset.sum_ite_eq', F̵in̵s̵e̵t̵.̵m̵e̵m̵_̵u̵n̵i̵v̵,̵ ̵i̵f_true, zsmul_eq_mul,
+        mul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/BochnerTau.lean:223:89: warning: This simp argument is unused:
+  if_true
+
+Hint: Omit it from the simp argument list.
+  simp only [map_zsmul, hqb, smul_ite, smul_zero, Finset.sum_ite_eq', Finset.mem_univ,
+  ̲  ̲ ̲ ̲ ̲ ̲i̵f̵_̵t̵r̵u̵e̵,̵ ̵zsmul_eq_mul, mul_one]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/BochnerTau.lean:224:6: warning: This simp argument is unused:
+  mul_one
+
+Hint: Omit it from the simp argument list.
+  simp only [map_zsmul, hqb, smul_ite, smul_zero, Finset.sum_ite_eq', Finset.mem_univ, if_true,
+  ̲  ̲ ̲ ̲ ̲ ̲z̵s̵m̵u̵l̵_̵e̵q̵_̵m̵u̵l̵,̵
+  ̵ ̵ ̵ ̵ ̵ ̵ ̵m̵u̵l̵_̵o̵n̵e̵]̵z̲s̲m̲u̲l̲_̲e̲q̲_̲m̲u̲l̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij3/work/BochnerTau.lean:319:21: error: not a positivity goal
+data/fs131/ij3/work/BochnerTau.lean:349:34: warning: `MeasureTheory.integrable_finset_sum` has been deprecated: Use `MeasureTheory.integrable_finsetSum` instead
+data/fs131/ij3/work/BochnerTau.lean:374:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∫ (a : Dual F), ?m.1202 - RCLike.re ↑(a (n • y₀)) ∂ρ
+in the target expression
+  ∫ (a : Dual F), 1 - (↑(a (n • y₀))).re ∂ρ = 1 - (∫ (χ : Dual F), ↑(χ (n • y₀)) ∂ρ).re
+
+case e_a
+F : Subfield ℝ
+ρ : Measure (Dual F)
+inst✝ : IsProbabilityMeasure ρ
+y₀ : ↥(unitRing F)
+k : ℕ
+M η : ℝ
+hM : 0 < M
+hη : ∀ (n : ℕ), ↑n < 3 * Real.pi * 5 ^ k / M → 1 - (∫ (χ : Dual F), ↑(χ (n • y₀)) ∂ρ).re ≤ η
+hpi : 0 < Real.pi
+h5 : 0 < 5 ^ k
+hη0 : 0 ≤ η
+hMk : M < Real.pi * 5 ^ k
+L : ℕ := ⌈2 * Real.pi * 5 ^ k / M⌉₊
+hL : L = ⌈2 * Real.pi * 5 ^ k / M⌉₊
+hLge : 2 * Real.pi * 5 ^ k / M ≤ ↑L
+hLpos : 0 < ↑L
+hLlt : ↑L < 3 * Real.pi * 5 ^ k / M
+f : Dual F → ℝ := fun χ => 2 / ↑L * ∑ n ∈ Finset.range L, (1 - (↑(χ (n • y₀))).re)
+hf : f = fun χ => 2 / ↑L * ∑ n ∈ Finset.range L, (1 - (↑(χ (n • y₀))).re)
+hterm : ∀ (χ : Dual F) (n : ℕ), 0 ≤ 1 - (↑(χ (n • y₀))).re
+hf0 : ∀ (χ : Dual F), 0 ≤ f χ
+hint : ∀ (n : ℕ), Integrable (fun χ => 1 - (↑(χ (n • y₀))).re) ρ
+hfint : Integrable f ρ
+hsub : {χ | M < 5 ^ k * |(↑(χ y₀)).arg|} ⊆ {χ | 1 ≤ f χ}
+hmarkov : ρ.real {x | 1 ≤ f x} ≤ ∫ (x : Dual F), f x ∂ρ
+n : ℕ
+x✝ : n ∈ Finset.range L
+⊢ ∫ (a : Dual F), 1 - (↑(a (n • y₀))).re ∂ρ = 1 - (∫ (χ : Dual F), ↑(χ (n • y₀)) ∂ρ).re
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    a (n • y₀)
+  has type
+    Circle
+  but is expected to have type
+    ↥(Submonoid.unitSphere ℂ)
+  in the application
+    ↑(a (n • y₀))
+data/fs131/ij3/work/BochnerTau.lean:490:57: error: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+data/fs131/ij3/work/BochnerTau.lean:489:101: error: (deterministic) timeout at `«tactic execution»`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+data/fs131/ij3/work/BochnerTau.lean:493:17: error: (deterministic) timeout at `«synthesize pending MVars»`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+data/fs131/ij3/work/BochnerTau.lean:437:88: error: (deterministic) timeout at `«tactic execution»`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+data/fs131/ij3/work/BochnerTau.lean:388:0: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+data/fs131/ij3/work/BochnerTau.lean:660:10: error: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
+  instTopologicalSpaceSubtype
+inferred
+  archTop F
+data/fs131/ij3/work/BochnerTau.lean:648:8: error: (kernel) unknown constant '_private.data.fs131.ij3.work.BochnerTau.0.HadwigerNelson.Rigidity.as_support_prob'
+seconds=34
+exit=1

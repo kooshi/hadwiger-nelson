@@ -1,0 +1,10 @@
+PLANT reported: HadwigerNelson.Rigidity.positive_entropy_rigidity_of_polishSpace rests on ['HadwigerNelson.Rigidity.positive_entropy_rigidity']
+records: 109 (AXIOMS-COUNT 109); per module: ChainAtTA 39, HaarMultiple 11, SolenoidErgodic 1, ZeroEntropyNames 58
+standard three or fewer: 104; not mine (sorry from the three leaves): 5; failing: 0
+  NOT MINE HadwigerNelson.Rigidity.entropySplit: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']; sorry from ['HadwigerNelson.Rigidity.entropySplit']
+  NOT MINE HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber_closed: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']; sorry from ['HadwigerNelson.Rigidity.entropySplit', 'HadwigerNelson.Rigidity.zeroEntropyCarried']
+  NOT MINE HadwigerNelson.Rigidity.mrPlus: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']; sorry from ['HadwigerNelson.Rigidity.entropySplit', 'HadwigerNelson.Rigidity.zeroEntropyCarried']
+  NOT MINE HadwigerNelson.Rigidity.noRamifiedStableDyadic_of_tca: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']; sorry from ['HadwigerNelson.Rigidity.noRamifiedStableDyadic_of_tca']
+  NOT MINE HadwigerNelson.Rigidity.zeroEntropyCarried: ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']; sorry from ['HadwigerNelson.Rigidity.zeroEntropyCarried']
+PASS
+exit=0

@@ -1,0 +1,10 @@
+slot: admitted itt1: mem 4 GiB (hard cap), cpus 5,6
+data/fs131/itt1/work/RingScope.lean:247:8: warning: declaration uses `sorry`
+data/fs131/itt1/work/RingScope.lean:293:13: error: Type mismatch
+  H
+has type
+  AddSubgroup (mixedEmbedding.mixedSpace ↥(fieldI F))
+but is expected to have type
+  Set ?m.612
+seconds=7
+exit=1

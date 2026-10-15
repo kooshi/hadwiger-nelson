@@ -1,0 +1,75 @@
+slot: admitted kn3: mem 4 GiB (hard cap), cpus 10,11
+@positive_entropy_rigidity : ∀ {X : Type u_1} [inst : AddCommGroup X] [inst_1 : TopologicalSpace X]
+  [inst_2 : MeasurableSpace X],
+  IsSolenoid X →
+    ∀ {d : ℕ},
+      2 ≤ d →
+        ∀ (α : ZdAction d X),
+          α.NoVirtuallyCyclicFactors →
+            ∀ (μ : MeasureTheory.Measure X),
+              MeasureTheory.IsProbabilityMeasure μ →
+                α.IsErgodicOn ⊤ μ →
+                  ∃ Λ J ν G,
+                    Λ.FiniteIndex ∧
+                      0 < J ∧
+                        μ = (↑J)⁻¹ • ∑ j, ν j ∧
+                          (∀ (i j : Fin J), i ≠ j → (ν i).MutuallySingular (ν j)) ∧
+                            ∀ (j : Fin J),
+                              MeasureTheory.IsProbabilityMeasure (ν j) ∧
+                                α.IsErgodicOn Λ (ν j) ∧
+                                  (IsClosed ↑(G j) ∧
+                                      α.InvariantOn Λ (G j) ∧
+                                        ∀ g ∈ G j,
+                                          ∀ (B : Set X), MeasurableSet B → (ν j) ((fun x => x + g) ⁻¹' B) = (ν j) B) ∧
+                                    (∀ (n : Fin d → ℤ),
+                                        ∃ k,
+                                          MeasureTheory.Measure.map (⇑(α.toFun n)) (ν j) = ν k ∧
+                                            AddSubgroup.map (α.toFun n) (G j) = G k) ∧
+                                      ∀ n ∈ Λ,
+                                        ∀ (h : G j ≤ AddSubgroup.comap (α.toFun n) (G j)),
+                                          ksEntropy (MeasureTheory.Measure.map (⇑(QuotientAddGroup.mk' (G j))) (ν j))
+                                              ⇑(QuotientAddGroup.map (G j) (G j) (α.toFun n) h) =
+                                            0
+@haar_or_zero_entropy : ∀ {X : Type u_1} [inst : AddCommGroup X] [inst_1 : TopologicalSpace X]
+  [inst_2 : MeasurableSpace X] [BorelSpace X],
+  IsSolenoid X →
+    ∀ {d : ℕ} (α : ZdAction d X),
+      α.IsTotallyIrreducible →
+        ¬α.IsVirtuallyCyclic →
+          ∀ (μ : MeasureTheory.Measure X),
+            MeasureTheory.IsProbabilityMeasure μ →
+              α.IsErgodicOn ⊤ μ → μ.IsAddHaarMeasure ∨ ∀ (n : Fin d → ℤ), ksEntropy μ ⇑(α.toFun n) = 0
+MRPlus : Subfield ℝ → Prop
+mrPlus_of_split_of_carried : ∀ (F : Subfield ℝ), EntropySplit F → ZeroEntropyCarried F → MRPlus F
+min_localBound_five_le_chromaticNumber_of_closed : ∀ (F : Subfield ℝ) [inst : NumberField ↥F],
+  SpectralChain.BochnerHerglotz ↥(SpectralChain.unitRing F) →
+    SpectralChain.InvariantMeasureOnClosed F →
+      (chainInterface F).Count →
+        (chainInterface F).APlusOfR88 →
+          EntropySplit F →
+            (NoRamifiedStableDyadic F → ZeroEntropyCarried F) →
+              (SpectralChain.TCA F → NoRamifiedStableDyadic F) →
+                (5 ≤ SpectralChain.localBound F → SpectralChain.TCA F) →
+                  (SpectralChain.localBound F ≤ 4 →
+                      SpectralChain.localBound F ≤
+                        (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).chromaticNumber) →
+                    min (SpectralChain.localBound F) 5 ≤
+                      (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).chromaticNumber
+entropySplit : ∀ (F : Subfield ℝ) [NumberField ↥F], EntropySplit F
+zeroEntropyCarried : ∀ (F : Subfield ℝ) [NumberField ↥F], NoRamifiedStableDyadic F → ZeroEntropyCarried F
+noRamifiedStableDyadic_of_tca : ∀ (F : Subfield ℝ) [NumberField ↥F], SpectralChain.TCA F → NoRamifiedStableDyadic F
+measurableSet_TA : ∀ (F : Subfield ℝ) [NumberField ↥F], MeasurableSet (TA F)
+rot_preimage_TA : ∀ (F : Subfield ℝ) (u : ↑(SpectralChain.unitVectors F)), SpectralChain.rot u ⁻¹' TA F = TA F
+'HadwigerNelson.Rigidity.positive_entropy_rigidity_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+data/fs131/kn3/FirstLayerCheck.lean:17:14: error(lean.unknownIdentifier): Unknown constant `isVirtuallyCyclicMod_bot`
+'HadwigerNelson.Rigidity.ksEntropy_zero_measure' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.mrPlus_of_split_of_carried' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber_of_closed' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber_closed' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+exit=1

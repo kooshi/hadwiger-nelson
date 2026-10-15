@@ -1,0 +1,67 @@
+slot: waiting (ledger 20 + 4 > budget 22 GiB)
+slot: admitted idg1: mem 4 GiB (hard cap), cpus 6,7
+data/fs131/idg1/work/DualGroup.lean:85:9: error: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+data/fs131/idg1/work/DualGroup.lean:167:24: error: Application type mismatch: The argument
+  ↑n
+has type
+  ℚ
+but is expected to have type
+  ℤ
+in the application
+  zsmul_one ↑n
+data/fs131/idg1/work/DualGroup.lean:190:62: error(lean.unknownIdentifier): Unknown constant `BoundedContinuousFunction.one_apply`
+data/fs131/idg1/work/DualGroup.lean:188:54: error: unsolved goals
+G : Type u_1
+inst✝ : AddCommGroup G
+χ : AddChar G Circle
+⊢ 1 = 1 χ
+data/fs131/idg1/work/DualGroup.lean:246:29: error: Application type mismatch: The argument
+  hall
+has type
+  ∀ (r : G), χ r = χ' r
+of sort `Prop` but is expected to have type
+  AddChar ?m.63 ?m.64
+of sort `Type (max ?u.44 ?u.43)` in the application
+  AddChar.ext hall
+data/fs131/idg1/work/DualGroup.lean:259:45: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∫ (a : AddChar G Circle), x a + y a ∂σ
+in the target expression
+  ∫ (x_1 : AddChar G Circle), (⇑x + ⇑y) x_1 ∂σ = ∫ (x_1 : AddChar G Circle), (⇑x + ⇑y) x_1 ∂σ'
+
+case refine_2.add
+G : Type u_1
+inst✝³ : AddCommGroup G
+inst✝² : Countable G
+σ σ' : Measure (AddChar G Circle)
+inst✝¹ : IsFiniteMeasure σ
+inst✝ : IsFiniteMeasure σ'
+h : ∀ (r : G), ∫ (χ : AddChar G Circle), ↑(χ r) ∂σ = ∫ (χ : AddChar G Circle), ↑(χ r) ∂σ'
+g x y : BoundedContinuousFunction (AddChar G Circle) ℂ
+hx✝ : x ∈ Submodule.span ℂ (Set.range evalBCF)
+hy✝ : y ∈ Submodule.span ℂ (Set.range evalBCF)
+hx : x ∈ fourierAlg G → ∫ (x_1 : AddChar G Circle), x x_1 ∂σ = ∫ (x_1 : AddChar G Circle), x x_1 ∂σ'
+hy : y ∈ fourierAlg G → ∫ (x : AddChar G Circle), y x ∂σ = ∫ (x : AddChar G Circle), y x ∂σ'
+hg : x + y ∈ fourierAlg G
+⊢ ∫ (x_1 : AddChar G Circle), (⇑x + ⇑y) x_1 ∂σ = ∫ (x_1 : AddChar G Circle), (⇑x + ⇑y) x_1 ∂σ'
+data/fs131/idg1/work/DualGroup.lean:261:20: error: unsolved goals
+case refine_2.smul
+G : Type u_1
+inst✝³ : AddCommGroup G
+inst✝² : Countable G
+σ σ' : Measure (AddChar G Circle)
+inst✝¹ : IsFiniteMeasure σ
+inst✝ : IsFiniteMeasure σ'
+h : ∀ (r : G), ∫ (χ : AddChar G Circle), ↑(χ r) ∂σ = ∫ (χ : AddChar G Circle), ↑(χ r) ∂σ'
+g : BoundedContinuousFunction (AddChar G Circle) ℂ
+a : ℂ
+x : BoundedContinuousFunction (AddChar G Circle) ℂ
+hx✝ : x ∈ Submodule.span ℂ (Set.range evalBCF)
+hx : x ∈ fourierAlg G → ∫ (x_1 : AddChar G Circle), x x_1 ∂σ = ∫ (x_1 : AddChar G Circle), x x_1 ∂σ'
+hg : a • x ∈ fourierAlg G
+⊢ x ∈ fourierAlg G
+seconds=30
+exit=1

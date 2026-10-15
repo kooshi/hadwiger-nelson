@@ -1,0 +1,12 @@
+slot: waiting (ledger 20 + 7 > budget 22 GiB)
+slot: waiting (ledger 22 + 7 > budget 22 GiB)
+slot: waiting (ledger 16 + 7 > budget 22 GiB)
+slot: waiting (ledger 22 + 7 > budget 22 GiB)
+slot: waiting (ledger 16 + 7 > budget 22 GiB)
+slot: waiting (ledger 19 + 7 > budget 22 GiB)
+slot: admitted lch1: mem 7 GiB (hard cap), cpus 2
+wrote /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wq1/data/fs131/lch1/statements-before-chain.txt: modules=1938 constants=27186
+chain dump exit=0
+wrote /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wq1/data/fs131/lch1/statements-before-main.txt: modules=2010 constants=32014
+main dump exit=0
+exit=0

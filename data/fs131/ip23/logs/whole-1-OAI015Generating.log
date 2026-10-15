@@ -1,0 +1,95 @@
+slot: waiting (ledger 20 + 4 > budget 22 GiB)
+slot: admitted ip23: mem 4 GiB (hard cap), cpus 2,3
+build/fs131-ip23/gen/Proofs/HadwigerNelson/Outside/OAI015Generating.lean:189:29: error(lean.unknownIdentifier): Unknown constant `Set.ofPred_and`
+build/fs131-ip23/gen/Proofs/HadwigerNelson/Outside/OAI015Generating.lean:189:2: error: Type mismatch: After simplification, term
+  MeasurableSet.inter (hP a) (hQ b)
+ has type
+  @MeasurableSet Y inst✝ ({y | P y = a} ∩ {y | Q y = b})
+but is expected to have type
+  @MeasurableSet Y inst✝ {y | P y = a ∧ Q y = b}
+build/fs131-ip23/gen/Proofs/HadwigerNelson/Outside/OAI015Generating.lean:263:30: error(lean.unknownIdentifier): Unknown constant `Set.mem_ofPred_eq`
+build/fs131-ip23/gen/Proofs/HadwigerNelson/Outside/OAI015Generating.lean:264:4: error: Tactic `tauto` failed
+
+Y : Type u_1
+α : Type u_2
+β : Type u_3
+γ : Type u_4
+inst✝⁴ : MeasurableSpace Y
+inst✝³ : Fintype α
+inst✝² : Fintype β
+inst✝¹ : Fintype γ
+μ : Measure Y
+inst✝ : IsFiniteMeasure μ
+Q : Y → α
+P : Y → β
+R : Y → γ
+hQ : ∀ (a : α), MeasurableSet {y | Q y = a}
+hP : ∀ (b : β), MeasurableSet {y | P y = b}
+hR : ∀ (c : γ), MeasurableSet {y | R y = c}
+p : α × β × γ → ℝ := fun z => μ.real {y | (Q y, P y, R y) = z}
+hrow : ∀ (a : α), ∑ z, p (a, z) = μ.real {y | Q y = a}
+a : α
+b : β
+c : γ
+a✝ : c ∈ Finset.univ
+y : Y
+⊢ y ∈ {y | Q y = a ∧ P y = b ∧ R y = c} ↔ y ∈ {y | (Q y = a ∧ P y = b) ∧ R y = c}
+build/fs131-ip23/gen/Proofs/HadwigerNelson/Outside/OAI015Generating.lean:273:30: error(lean.unknownIdentifier): Unknown constant `Set.mem_ofPred_eq`
+build/fs131-ip23/gen/Proofs/HadwigerNelson/Outside/OAI015Generating.lean:274:4: error: Tactic `tauto` failed
+
+Y : Type u_1
+α : Type u_2
+β : Type u_3
+γ : Type u_4
+inst✝⁴ : MeasurableSpace Y
+inst✝³ : Fintype α
+inst✝² : Fintype β
+inst✝¹ : Fintype γ
+μ : Measure Y
+inst✝ : IsFiniteMeasure μ
+Q : Y → α
+P : Y → β
+R : Y → γ
+hQ : ∀ (a : α), MeasurableSet {y | Q y = a}
+hP : ∀ (b : β), MeasurableSet {y | P y = b}
+hR : ∀ (c : γ), MeasurableSet {y | R y = c}
+p : α × β × γ → ℝ := fun z => μ.real {y | (Q y, P y, R y) = z}
+hrow : ∀ (a : α), ∑ z, p (a, z) = μ.real {y | Q y = a}
+hleft : ∀ (z : α × β), ∑ c, p (z.1, z.2, c) = μ.real {y | (Q y, P y) = z}
+a : α
+c : γ
+b : β
+a✝ : b ∈ Finset.univ
+y : Y
+⊢ y ∈ {y | Q y = a ∧ P y = b ∧ R y = c} ↔ y ∈ {y | (Q y = a ∧ R y = c) ∧ P y = b}
+build/fs131-ip23/gen/Proofs/HadwigerNelson/Outside/OAI015Generating.lean:335:17: error(lean.unknownIdentifier): Unknown constant `Set.mem_ofPred_eq`
+build/fs131-ip23/gen/Proofs/HadwigerNelson/Outside/OAI015Generating.lean:379:17: error(lean.unknownIdentifier): Unknown constant `Set.mem_ofPred_eq`
+build/fs131-ip23/gen/Proofs/HadwigerNelson/Outside/OAI015Generating.lean:380:50: error: invalid `▸` notation, expected result type of cast is 
+  y ∈ {y | f (Q y) = c}
+however, the equality 
+  h
+of type 
+  y ∈ {y | Q y = ↑b}
+does not contain the expected result type on either the left or the right hand side
+build/fs131-ip23/gen/Proofs/HadwigerNelson/Outside/OAI015Generating.lean:674:49: error(lean.unknownIdentifier): Unknown constant `Set.mem_ofPred_eq`
+build/fs131-ip23/gen/Proofs/HadwigerNelson/Outside/OAI015Generating.lean:698:49: error(lean.unknownIdentifier): Unknown constant `Set.mem_ofPred_eq`
+build/fs131-ip23/gen/Proofs/HadwigerNelson/Outside/OAI015Generating.lean:785:28: error(lean.unknownIdentifier): Unknown constant `Set.mem_ofPred_eq`
+build/fs131-ip23/gen/Proofs/HadwigerNelson/Outside/OAI015Generating.lean:786:2: error: Tactic `tauto` failed
+
+Y : Type u_1
+α : Type u_2
+β : Type u_3
+inst✝² : MeasurableSpace Y
+inst✝¹ : Fintype β
+μ : Measure Y
+inst✝ : IsFiniteMeasure μ
+P : Y → α
+Q : Y → β
+hP : ∀ (a : α), MeasurableSet {y | P y = a}
+hQ : ∀ (b : β), MeasurableSet {y | Q y = b}
+a : α
+b : β
+y : Y
+⊢ y ∈ {y | Q y = b ∧ P y = a} ↔ y ∈ {y | P y = a} ∧ y ∈ {y | Q y = b}
+seconds=33
+exit=1

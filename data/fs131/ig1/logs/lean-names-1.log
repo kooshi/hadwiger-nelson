@@ -1,0 +1,68 @@
+slot: admitted ig1: mem 4 GiB (hard cap), cpus 0,1
+@AddSubgroup.closure_le : ∀ {G : Type u_1} [inst : AddGroup G] (K : AddSubgroup G) {k : Set G},
+  AddSubgroup.closure k ≤ K ↔ k ⊆ ↑K
+@integral_add_left_eq_self : ∀ {G : Type u_1} {E : Type u_2} [inst : MeasurableSpace G] [inst_1 : NormedAddCommGroup E]
+  [inst_2 : NormedSpace ℝ E] {μ : Measure G} [inst_3 : AddGroup G] [MeasurableAdd G] [μ.IsAddLeftInvariant] (f : G → E)
+  (g : G), ∫ (x : G), f (g + x) ∂μ = ∫ (x : G), f x ∂μ
+@integral_map : ∀ {α : Type u_1} {G : Type u_2} [inst : NormedAddCommGroup G] [inst_1 : NormedSpace ℝ G]
+  {m : MeasurableSpace α} {μ : Measure α} {β : Type u_3} [inst_2 : MeasurableSpace β] {φ : α → β},
+  AEMeasurable φ μ →
+    ∀ {f : β → G}, AEStronglyMeasurable f (Measure.map φ μ) → ∫ (y : β), f y ∂Measure.map φ μ = ∫ (x : α), f (φ x) ∂μ
+exists_surjective_nat : ∀ (α : Sort u_1) [Nonempty α] [Countable α], ∃ f, Function.Surjective f
+@Function.Injective.isAddTorsionFree : ∀ {M : Type u_1} {N : Type u_2} [inst : AddMonoid M] [inst_1 : AddMonoid N]
+  [IsAddTorsionFree N] (f : M →+ N), Function.Injective ⇑f → IsAddTorsionFree M
+@IsAddTorsionFree.of_isCancelMulZero_charZero : ∀ {R : Type u_1} [inst : Semiring R] [CharZero R] [IsCancelMulZero R],
+  IsAddTorsionFree R
+@Subalgebra.inv_mem_of_algebraic : ∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : Field L]
+  [inst_2 : Algebra K L] (A : Subalgebra K L) {x : ↥A}, IsAlgebraic K ↑x → (↑x)⁻¹ ∈ A
+@MeasurableSpace.CountablyGenerated.comap : ∀ {α : Type u_1} {β : Type u_2} [m : MeasurableSpace β]
+  [h : MeasurableSpace.CountablyGenerated β] (f : α → β), MeasurableSpace.CountablyGenerated α
+@MeasurableSpace.comap_iSup : ∀ {α : Type u_2} {β : Type u_3} {ι : Sort u_1} {g : β → α} {m : ι → MeasurableSpace α},
+  MeasurableSpace.comap g (⨆ i, m i) = ⨆ i, MeasurableSpace.comap g (m i)
+@MeasurableSpace.pi : {δ : Type u_1} →
+  {X : δ → Type u_2} → [m : (a : δ) → MeasurableSpace (X a)] → MeasurableSpace ((a : δ) → X a)
+@MeasurableSpace.comap_comp : ∀ {α : Type u_1} {β : Type u_2} {γ : Type u_3} {m : MeasurableSpace α} {f : β → α}
+  {g : γ → β}, MeasurableSpace.comap g (MeasurableSpace.comap f m) = MeasurableSpace.comap (f ∘ g) m
+data/fs131/ig1/probes/Names.lean:14:8: error(lean.unknownIdentifier): Unknown constant `Set.Countable.addSubgroup_closure`
+@AddSubgroup.closure_toAddSubmonoid : ∀ {G : Type u_1} [inst : AddGroup G] (S : Set G),
+  (AddSubgroup.closure S).toAddSubmonoid = AddSubmonoid.closure (S ∪ -S)
+@AddSubgroup.nsmul_index_mem : ∀ {G : Type u_1} [inst : AddGroup G] (H : AddSubgroup G) [H.Normal] (g : G),
+  H.index • g ∈ H
+@AddSubgroup.finiteIndex_of_le : ∀ {G : Type u_1} [inst : AddGroup G] {H K : AddSubgroup G} [H.FiniteIndex],
+  H ≤ K → K.FiniteIndex
+@AddSubgroup.index_comap_of_surjective : ∀ {G : Type u_1} {G' : Type u_2} [inst : AddGroup G] [inst_1 : AddGroup G']
+  (H : AddSubgroup G) {f : G' →+ G}, Function.Surjective ⇑f → (AddSubgroup.comap f H).index = H.index
+@AddSubgroup.relIndex_mul_index : ∀ {G : Type u_1} [inst : AddGroup G] {H K : AddSubgroup G},
+  H ≤ K → H.relIndex K * K.index = H.index
+data/fs131/ig1/probes/Names.lean:20:8: error(lean.unknownIdentifier): Unknown constant `AddSubgroup.relindex_mul_index`
+@AddSubgroup.finite_quotient_of_finiteIndex : ∀ {G : Type u_1} [inst : AddGroup G] {H : AddSubgroup G} [H.FiniteIndex],
+  Finite (G ⧸ H)
+@AddSubgroup.index_ne_zero_of_finite : ∀ {G : Type u_1} [inst : AddGroup G] {H : AddSubgroup G} [hH : Finite (G ⧸ H)],
+  H.index ≠ 0
+Module.finBasis : (R : Type u_1) →
+  (M : Type u_2) →
+    [inst : Semiring R] →
+      [inst_1 : AddCommMonoid M] →
+        [inst_2 : Module R M] →
+          [Module.Free R M] →
+            [StrongRankCondition R] → [Module.Finite R M] → Module.Basis (Fin (Module.finrank R M)) R M
+@Algebra.IsAlgebraic.isAlgebraic : ∀ {R : Type u_1} {A : Type u_2} {inst : CommRing R} {inst_1 : Ring A}
+  {inst_2 : Algebra R A} [self : Algebra.IsAlgebraic R A] (x : A), IsAlgebraic R x
+@IsAlgebraic.algebraMap : ∀ {R : Type u_1} {S : Type u_3} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing S]
+  [inst_2 : Ring A] [inst_3 : Algebra R A] [inst_4 : Algebra R S] [inst_5 : Algebra S A] [IsScalarTower R S A] {a : S},
+  IsAlgebraic R a → IsAlgebraic R ((algebraMap S A) a)
+@isAlgebraic_algebraMap_iff : ∀ {R : Type u_1} {S : Type u_3} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing S]
+  [inst_2 : Ring A] [inst_3 : Algebra R A] [inst_4 : Algebra R S] [inst_5 : Algebra S A] [IsScalarTower R S A] {a : S},
+  Function.Injective ⇑(algebraMap S A) → (IsAlgebraic R ((algebraMap S A) a) ↔ IsAlgebraic R a)
+MeasurableSpace.CountablyGenerated : (α : Type u_1) → [m : MeasurableSpace α] → Prop
+@BorelSpace.countablyGenerated : ∀ {α : Type u_1} [inst : TopologicalSpace α] [inst_1 : MeasurableSpace α]
+  [BorelSpace α] [SecondCountableTopology α], MeasurableSpace.CountablyGenerated α
+@Measure.map_map : ∀ {α : Type u_1} {β : Type u_2} {γ : Type u_3} {mα : MeasurableSpace α} {mβ : MeasurableSpace β}
+  {mγ : MeasurableSpace γ} {μ : Measure α} {g : β → γ} {f : α → β},
+  Measurable g → Measurable f → Measure.map g (Measure.map f μ) = Measure.map (g ∘ f) μ
+@ENNReal.iSup_eq_zero : ∀ {ι : Sort u_1} {f : ι → ENNReal}, ⨆ i, f i = 0 ↔ ∀ (i : ι), f i = 0
+@nsmulAddMonoidHom : {α : Type u_1} → [inst : AddCommMonoid α] → ℕ → α →+ α
+data/fs131/ig1/probes/Names.lean:32:8: error(lean.unknownIdentifier): Unknown identifier `UnitRing.unitRingOver_le_planeOverSubring`
+@Measure.IsAddLeftInvariant : {G : Type u_1} → [inst : MeasurableSpace G] → [Add G] → Measure G → Prop
+seconds=2
+exit=1

@@ -1,0 +1,70 @@
+slot: admitted itk1: mem 4 GiB (hard cap), cpus 5,6
+@Circle.exp_eq_one : ∀ {r : ℝ}, Circle.exp r = 1 ↔ ∃ n, r = ↑n * (2 * Real.pi)
+mixedEmbedding_injective : ∀ (K : Type u_1) [inst : Field K] [NumberField K], Function.Injective ⇑(mixedEmbedding K)
+@valuation_of_algebraMap : ∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type u_2}
+  [inst_2 : Field K] [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R) (r : R),
+  (valuation K v) ↑r = v.intValuation r
+@intValuation_le_one : ∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (v : HeightOneSpectrum R)
+  (x : R), v.intValuation x ≤ 1
+@RestrictedProduct.ext : ∀ {ι : Type u_1} (R : ι → Type u_2) (A : (i : ι) → Set (R i)) {𝓕 : Filter ι}
+  {x y : RestrictedProduct (fun i => R i) (fun i => A i) 𝓕}, (∀ (i : ι), x i = y i) → x = y
+@ZSpan.fract_mem_fundamentalDomain : ∀ {E : Type u_1} {ι : Type u_2} {K : Type u_3} [inst : NormedField K]
+  [inst_1 : NormedAddCommGroup E] [inst_2 : NormedSpace K E] (b : Module.Basis ι K E) [inst_3 : LinearOrder K]
+  [inst_4 : IsStrictOrderedRing K] [inst_5 : FloorRing K] [inst_6 : Fintype ι] (x : E),
+  ZSpan.fract b x ∈ ZSpan.fundamentalDomain b
+@ZSpan.fundamentalDomain_isBounded : ∀ {E : Type u_1} {ι : Type u_2} {K : Type u_3} [inst : NormedField K]
+  [inst_1 : NormedAddCommGroup E] [inst_2 : NormedSpace K E] (b : Module.Basis ι K E) [inst_3 : LinearOrder K]
+  [IsStrictOrderedRing K] [FloorRing K] [Finite ι] [HasSolidNorm K], Bornology.IsBounded (ZSpan.fundamentalDomain b)
+@ZSpan.floor : {E : Type u_1} →
+  {ι : Type u_2} →
+    {K : Type u_3} →
+      [inst : NormedField K] →
+        [inst_1 : NormedAddCommGroup E] →
+          [inst_2 : NormedSpace K E] →
+            (b : Module.Basis ι K E) →
+              [inst_3 : LinearOrder K] →
+                [IsStrictOrderedRing K] → [FloorRing K] → [Fintype ι] → E → ↥(Submodule.span ℤ (Set.range ⇑b))
+@ZSpan.fract_apply : ∀ {E : Type u_1} {ι : Type u_2} {K : Type u_3} [inst : NormedField K]
+  [inst_1 : NormedAddCommGroup E] [inst_2 : NormedSpace K E] (b : Module.Basis ι K E) [inst_3 : LinearOrder K]
+  [inst_4 : IsStrictOrderedRing K] [inst_5 : FloorRing K] [inst_6 : Fintype ι] (m : E),
+  ZSpan.fract b m = m - ↑(ZSpan.floor b m)
+mixedEmbedding.latticeBasis_apply : ∀ (K : Type u_1) [inst : Field K] [inst_1 : NumberField K]
+  (i : Module.Free.ChooseBasisIndex ℤ (𝓞 K)),
+  (mixedEmbedding.latticeBasis K) i = (mixedEmbedding K) ((integralBasis K) i)
+@Metric.isCompact_of_isClosed_isBounded : ∀ {α : Type u_1} {s : Set α} [inst : PseudoMetricSpace α] [ProperSpace α],
+  IsClosed s → Bornology.IsBounded s → IsCompact s
+@Bornology.IsBounded.isCompact_closure : ∀ {α : Type u_1} {s : Set α} [inst : PseudoMetricSpace α] [ProperSpace α],
+  Bornology.IsBounded s → IsCompact (closure s)
+@IsCompact.prod : ∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {s : Set X}
+  {t : Set Y}, IsCompact s → IsCompact t → IsCompact (s ×ˢ t)
+@RestrictedProduct.exists_structureMap_eq_of_forall : ∀ {ι : Type u_1} (R : ι → Type u_2) (A : (i : ι) → Set (R i))
+  {𝓕 : Filter ι} {x : RestrictedProduct (fun i => R i) (fun i => A i) 𝓕},
+  (∀ (i : ι), ↑x i ∈ A i) → ∃ x', RestrictedProduct.structureMap R A 𝓕 x' = x
+@RestrictedProduct.isEmbedding_structureMap : ∀ {ι : Type u_1} {R : ι → Type u_2} {A : (i : ι) → Set (R i)}
+  {𝓕 : Filter ι} [inst : (i : ι) → TopologicalSpace (R i)], Topology.IsEmbedding (RestrictedProduct.structureMap R A 𝓕)
+@AddChar.map_sub_eq_div : ∀ {A : Type u_1} {M : Type u_2} [inst : AddCommGroup A] [inst_1 : DivisionCommMonoid M]
+  (ψ : AddChar A M) (a b : A), ψ (a - b) = ψ a / ψ b
+data/fs131/itk1/probes/NamesTK.lean:19:8: error(lean.unknownIdentifier): Unknown constant `Subring.natCast_mem`
+@Algebra.trace_algebraMap : ∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S]
+  [inst_2 : Algebra R S] [StrongRankCondition R] [Module.Free R S] (x : R),
+  (Algebra.trace R S) ((algebraMap R S) x) = Module.finrank R S • x
+@Module.finrank_pos : ∀ {R : Type u_1} {M : Type u_2} [inst : Ring R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]
+  [StrongRankCondition R] [Module.Finite R M] [IsDomain R] [Module.IsTorsionFree R M] [h : Nontrivial M],
+  0 < Module.finrank R M
+mem_adicCompletionIntegers : ∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2)
+  [inst_2 : Field K] [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R)
+  {x : adicCompletion K v}, x ∈ adicCompletionIntegers K v ↔ Valued.v x ≤ 1
+@valuedAdicCompletion_eq_valuation' : ∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type u_2}
+  [inst_2 : Field K] [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R) (k : K),
+  Valued.v { toCompletion := ↑((WithVal.equiv (valuation K v)).symm k) } = (valuation K v) k
+@adicCompletion.coe_mul : ∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2)
+  [inst_2 : Field K] [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R) (x y : K),
+  { toCompletion := ↑((WithVal.equiv (valuation K v)).symm (x * y)) } =
+    { toCompletion := ↑((WithVal.equiv (valuation K v)).symm x) } *
+      { toCompletion := ↑((WithVal.equiv (valuation K v)).symm y) }
+Real.pi_ne_zero : Real.pi ≠ 0
+data/fs131/itk1/probes/NamesTK.lean:26:52: error(lean.unknownIdentifier): Unknown identifier `SpectralChain.Dual`
+data/fs131/itk1/probes/NamesTK.lean:28:54: error(lean.unknownIdentifier): Unknown identifier `SpectralChain.unitRing`
+data/fs131/itk1/probes/NamesTK.lean:29:83: error(lean.unknownIdentifier): Unknown identifier `SpectralChain.fieldI`
+seconds=3
+exit=1

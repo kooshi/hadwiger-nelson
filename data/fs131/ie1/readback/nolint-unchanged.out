@@ -1,0 +1,5 @@
+HERE-PRINTS IDENTICAL (56 declarations: every stored type and value, full and erased, unchanged by the attributes and the header)
+observationEntropy_finite_mixture_bounds: stored type UNCHANGED (3 print lines)
+kernelCell_preserving: stored type UNCHANGED (3 print lines)
+kernelCell_real: stored type UNCHANGED (3 print lines)
+control (an instance binder made implicit in a copy): DIFFERS, as it must

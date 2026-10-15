@@ -1,0 +1,6 @@
+MATCH    nameCell_eq_orbitName_fibre
+MATCH    blockEntropy_eq_observationEntropy
+MATCH    partitionEntropy_eq_ofReal_observationEntropyRate
+MATCH    ksEntropy_eq_measureEntropy
+heads: 4  mismatched: 0
+exit=0

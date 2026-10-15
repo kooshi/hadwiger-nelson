@@ -1,0 +1,61 @@
+slot: waiting (ledger 20 + 5 > budget 22 GiB)
+slot: admitted ij3f: mem 5 GiB (hard cap), cpus 0,1
+data/fs131/ij3/work/EntropySplitMax.lean:123:7: error(lean.unknownIdentifier): Unknown identifier `Eventually.of_forall`
+data/fs131/ij3/work/EntropySplitMax.lean:132:11: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  IsFiniteMeasure (ν A • m)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/ij3/work/EntropySplitMax.lean:133:4: error: No goals to be solved
+data/fs131/ij3/work/EntropySplitMax.lean:177:53: error: Type mismatch
+  isHaarFourier_dualHaar
+has type
+  ∀ (G : Type ?u.10) [inst : AddCommGroup G] [inst_1 : Countable G], IsHaarFourier (dualHaar G)
+but is expected to have type
+  IsHaarFourier (dualHaar ↥(unitRing F))
+data/fs131/ij3/work/EntropySplitMax.lean:193:10: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  Measure.map ?m.244 (Measure.dirac ?m.246)
+in the target expression
+  Measure.map (rot u) (Measure.dirac 1) = Measure.dirac 1
+
+case pos.refine_1
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+p : AdmissiblePair F
+τ : Measure (Dual F)
+hfin : IsFiniteMeasure τ
+hτ : RotInv F τ
+m : Measure (AddChar (↥(unitRing F)) Circle) := dualHaar ↥(unitRing F)
+hm : IsHaarFourier m
+this : IsProbabilityMeasure m
+hmdef : m = dualHaar ↥(unitRing F)
+a : ℝ≥0∞ := maxMultiple τ m
+ha : a = maxMultiple τ m
+τ' : Measure (Dual F) := τ - a • m
+hτ'def : τ' = τ - a • m
+hτ' : RotInv F τ'
+hsplit : τ = a • m + τ'
+hu : ∀ (k : ℕ), k ≠ 0 → ↑(toUnitVector p.u) ^ k ≠ 1
+hmem : p.u ∈ p.subgroup
+h0 : τ' = 0
+u : ↑(unitVectors F)
+⊢ Measure.map (rot u) (Measure.dirac 1) = Measure.dirac 1
+data/fs131/ij3/work/EntropySplitMax.lean:193:28: error: Application type mismatch: The argument
+  measurable_rot u
+has type
+  Measurable (rot u)
+of sort `Prop` but is expected to have type
+  ?m.238
+of sort `Type ?u.113` in the application
+  Measure.map_dirac (measurable_rot u)
+data/fs131/ij3/work/EntropySplitMax.lean:223:53: error: Type mismatch
+  isHaarFourier_dualHaar
+has type
+  ∀ (G : Type ?u.24) [inst : AddCommGroup G] [inst_1 : Countable G], IsHaarFourier (dualHaar G)
+but is expected to have type
+  IsHaarFourier (dualHaar ↥(unitRing F))
+data/fs131/ij3/work/EntropySplitMax.lean:240:6: error: 'show' tactic failed, pattern
+  ↑(1 1) = (fun x => 1) χ
+is not definitionally equal to target
+  ↑(1 1) = ?m.239 1
+seconds=9
+exit=1

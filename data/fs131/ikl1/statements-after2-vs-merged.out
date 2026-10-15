@@ -1,0 +1,10 @@
+NEW-MODULE Proofs.HadwigerNelson.Arith.FibreShareIneq constants=16
+NEW-MODULE Proofs.HadwigerNelson.Rigidity.CertLink constants=35
+NEW-MODULE Proofs.HadwigerNelson.Rigidity.CertLinkModels constants=2
+modules compared: 15 Proofs.HadwigerNelson.Arith.CircleCos Proofs.HadwigerNelson.Arith.FibreCert Proofs.HadwigerNelson.Arith.FibreCert11Bound Proofs.HadwigerNelson.Arith.FibreCert11Global Proofs.HadwigerNelson.Arith.FibreCert11Psd Proofs.HadwigerNelson.Arith.FibreCert3 Proofs.HadwigerNelson.Arith.FibreCertSound Proofs.HadwigerNelson.Arith.RatioBound Proofs.HadwigerNelson.Arith.StandingFive Proofs.HadwigerNelson.Arith.UpperHalf Proofs.HadwigerNelson.Rigidity.ClassRatio Proofs.HadwigerNelson.Rigidity.CountCompletion Proofs.HadwigerNelson.Rigidity.CountDescent Proofs.HadwigerNelson.Rigidity.CountModels Proofs.HadwigerNelson.SpectralChain
+COUNTS SAME=1678 CHANGED=0 MISSING=0 ADDED=0 ADDED-ALLOWED=0 MODULE-MISSING=0
+VERDICT PASS
+PLANT changed-type FIRED {'SAME': 1677, 'CHANGED': 1, 'MISSING': 0, 'ADDED': 0, 'ADDED-ALLOWED': 0, 'MODULE-MISSING': 0}
+PLANT dropped FIRED {'SAME': 1677, 'CHANGED': 0, 'MISSING': 1, 'ADDED': 0, 'ADDED-ALLOWED': 0, 'MODULE-MISSING': 0}
+PLANT added FIRED {'SAME': 1678, 'CHANGED': 0, 'MISSING': 0, 'ADDED': 1, 'ADDED-ALLOWED': 0, 'MODULE-MISSING': 0}
+PLANTS 3/3

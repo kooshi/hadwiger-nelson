@@ -1,0 +1,4 @@
+slot: admitted itt1: mem 4 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/TateLocal.lean:259:8: error(lean.unknownIdentifier): Unknown constant `SubringClass.coe_sub`
+seconds=6
+exit=1

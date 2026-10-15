@@ -1,0 +1,69 @@
+slot: admitted ij3f: mem 5 GiB (hard cap), cpus 0,1
+@IsCompact.ultrafilter_le_nhds : ∀ {X : Type u_1} [inst : TopologicalSpace X] {s : Set X},
+  IsCompact s → ∀ (f : Ultrafilter X), ↑f ≤ 𝓟 s → ∃ x ∈ s, ↑f ≤ 𝓝 x
+@ProbabilityMeasure.tendsto_iff_forall_integral_tendsto : ∀ {Ω : Type u_1} [inst : MeasurableSpace Ω]
+  [inst_1 : TopologicalSpace Ω] [inst_2 : OpensMeasurableSpace Ω] {γ : Type u_2} {F : Filter γ}
+  {μs : γ → ProbabilityMeasure Ω} {μ : ProbabilityMeasure Ω},
+  Tendsto μs F (𝓝 μ) ↔
+    ∀ (f : BoundedContinuousFunction Ω ℝ), Tendsto (fun i => ∫ (ω : Ω), f ω ∂↑(μs i)) F (𝓝 (∫ (ω : Ω), f ω ∂↑μ))
+@ProbabilityMeasure.tendsto_iff_forall_integral_rclike_tendsto : ∀ {Ω : Type u_1} [inst : MeasurableSpace Ω]
+  [inst_1 : TopologicalSpace Ω] [inst_2 : OpensMeasurableSpace Ω] {γ : Type u_2} (𝕜 : Type u_3) [inst_3 : RCLike 𝕜]
+  {F : Filter γ} {μs : γ → ProbabilityMeasure Ω} {μ : ProbabilityMeasure Ω},
+  Tendsto μs F (𝓝 μ) ↔
+    ∀ (f : BoundedContinuousFunction Ω 𝕜), Tendsto (fun i => ∫ (ω : Ω), f ω ∂↑(μs i)) F (𝓝 (∫ (ω : Ω), f ω ∂↑μ))
+data/fs131/ij3/probes/names1.lean:9:8: error(lean.unknownIdentifier): Unknown identifier `isTightMeasureSet_of_tendsto_measure_norm_gt`
+@isCompact_closure_of_isTightMeasureSet : ∀ {E : Type u_1} [inst : MeasurableSpace E] [inst_1 : TopologicalSpace E]
+  [T2Space E] [inst_3 : BorelSpace E] {S : Set (ProbabilityMeasure E)},
+  IsTightMeasureSet {x | ∃ μ ∈ S, ↑μ = x} → IsCompact (closure S)
+Circle.coe_exp : ∀ (t : ℝ), ↑(Circle.exp t) = Complex.exp (↑t * Complex.I)
+@Real.mul_le_sin : ∀ {x : ℝ}, 0 ≤ x → x ≤ Real.pi / 2 → 2 / Real.pi * x ≤ Real.sin x
+@geom_sum_eq : ∀ {K : Type u_1} [inst : DivisionRing K] {x : K},
+  x ≠ 1 → ∀ (n : ℕ), ∑ i ∈ Finset.range n, x ^ i = (x ^ n - 1) / (x - 1)
+Complex.norm_exp_I_mul_ofReal_sub_one : ∀ (x : ℝ), ‖Complex.exp (Complex.I * ↑x) - 1‖ = ‖2 * Real.sin (x / 2)‖
+data/fs131/ij3/probes/names1.lean:15:8: error(lean.unknownIdentifier): Unknown identifier `HadwigerNelson.Rigidity.measurable_evalChar`
+NumberField.integralBasis_apply : ∀ (K : Type u_1) [inst : Field K] [inst_1 : NumberField K]
+  (i : Module.Free.ChooseBasisIndex ℤ (NumberField.RingOfIntegers K)),
+  (NumberField.integralBasis K) i =
+    (algebraMap (NumberField.RingOfIntegers K) K) ((NumberField.RingOfIntegers.basis K) i)
+HadwigerNelson.Rigidity.exists_mul_stableIntegers_le : ∀ (F : Subfield ℝ) [inst : NumberField ↥F],
+  ∃ c,
+    c ≠ 0 ∧
+      ∀ x ∈ HadwigerNelson.Rigidity.stableIntegers F,
+        ↑c * x ∈ HadwigerNelson.UnitRing.unitRing (HadwigerNelson.conjOn ⋯)
+@Ultrafilter.of_le : ∀ {α : Type u_1} (f : Filter α) [inst : f.NeBot], ↑(Ultrafilter.of f) ≤ f
+@Measure.map_apply : ∀ {α : Type u_1} {β : Type u_2} {mα : MeasurableSpace α} {mβ : MeasurableSpace β} {μ : Measure α}
+  {f : α → β}, Measurable f → ∀ {s : Set β}, MeasurableSet s → (Measure.map f μ) s = μ (f ⁻¹' s)
+@integral_map : ∀ {α : Type u_1} {G : Type u_2} [inst : NormedAddCommGroup G] [inst_1 : NormedSpace ℝ G]
+  {m : MeasurableSpace α} {μ : Measure α} {β : Type u_3} [inst_2 : MeasurableSpace β] {φ : α → β},
+  AEMeasurable φ μ →
+    ∀ {f : β → G}, AEStronglyMeasurable f (Measure.map φ μ) → ∫ (y : β), f y ∂Measure.map φ μ = ∫ (x : α), f (φ x) ∂μ
+@tendsto_integral_of_dominated_convergence : ∀ {α : Type u_1} {G : Type u_2} [inst : NormedAddCommGroup G]
+  [inst_1 : NormedSpace ℝ G] {m : MeasurableSpace α} {μ : Measure α} {F : ℕ → α → G} {f : α → G} (bound : α → ℝ),
+  (∀ (n : ℕ), AEStronglyMeasurable (F n) μ) →
+    Integrable bound μ →
+      (∀ (n : ℕ), ∀ᵐ (a : α) ∂μ, ‖F n a‖ ≤ bound a) →
+        (∀ᵐ (a : α) ∂μ, Tendsto (fun n => F n a) atTop (𝓝 (f a))) →
+          Tendsto (fun n => ∫ (a : α), F n a ∂μ) atTop (𝓝 (∫ (a : α), f a ∂μ))
+@Nat.le_ceil : ∀ {R : Type u_1} [inst : Semiring R] [inst_1 : LinearOrder R] [inst_2 : FloorSemiring R] (a : R),
+  a ≤ ↑⌈a⌉₊
+@Int.floor_le : ∀ {α : Type u_1} [inst : Ring α] [inst_1 : LinearOrder α] [inst_2 : FloorRing α] (a : α), ↑⌊a⌋ ≤ a
+@Int.lt_floor_add_one : ∀ {R : Type u_1} [inst : Ring R] [inst_1 : LinearOrder R] [inst_2 : FloorRing R] (a : R),
+  a < ↑⌊a⌋ + 1
+Complex.arg_le_pi : ∀ (x : ℂ), x.arg ≤ Real.pi
+Complex.neg_pi_lt_arg : ∀ (x : ℂ), -Real.pi < x.arg
+Circle.exp_arg : ∀ (z : Circle), Circle.exp (↑z).arg = z
+data/fs131/ij3/probes/names1.lean:28:8: error(lean.unknownIdentifier): Unknown constant `Real.cos_sq_half`
+@pi_norm_lt_iff : ∀ {ι : Type u_1} {G : ι → Type u_2} [inst : Fintype ι] [inst_1 : (i : ι) → SeminormedAddGroup (G i)]
+  {x : (i : ι) → G i} {r : ℝ}, 0 < r → (‖x‖ < r ↔ ∀ (i : ι), ‖x i‖ < r)
+HadwigerNelson.Rigidity.archTop_eq : ∀ (F : Subfield ℝ) [inst : NumberField ↥F],
+  HadwigerNelson.Rigidity.archTop F = TopologicalSpace.induced (⇑(HadwigerNelson.Rigidity.archHom F)) inferInstance
+HadwigerNelson.Rigidity.fivePow : (F : Subfield ℝ) →
+  ℕ → ↥(HadwigerNelson.SpectralChain.unitRing F) → ↥(HadwigerNelson.SpectralChain.unitRing F)
+@AddChar.map_zsmul_eq_zpow : ∀ {A : Type u_1} {M : Type u_2} [inst : AddGroup A] [inst_1 : DivisionMonoid M]
+  (ψ : AddChar A M) (n : ℤ) (a : A), ψ (n • a) = ψ a ^ n
+@AddChar.map_nsmul_eq_pow : ∀ {A : Type u_1} {M : Type u_2} [inst : AddMonoid A] [inst_1 : Monoid M] (ψ : AddChar A M)
+  (n : ℕ) (x : A), ψ (n • x) = ψ x ^ n
+data/fs131/ij3/probes/names1.lean:34:8: error(lean.unknownIdentifier): Unknown constant `Circle.exp_int_mul`
+data/fs131/ij3/probes/names1.lean:35:8: error(lean.unknownIdentifier): Unknown constant `Circle.exp_sum`
+seconds=2
+exit=1

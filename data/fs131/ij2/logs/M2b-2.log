@@ -1,0 +1,36 @@
+slot: waiting (ledger 20 + 4 > budget 22 GiB)
+slot: waiting (ledger 21 + 4 > budget 22 GiB)
+slot: admitted ij2: mem 4 GiB (hard cap), cpus 3,4
+data/fs131/ij2/work/BochnerTwist.lean:14:8: warning: declaration uses `sorry`
+data/fs131/ij2/work/BochnerTwist.lean:32:67: error: unsolved goals
+F : Subfield ℝ
+⊢ ↑5 * (1 / 5) = 1
+data/fs131/ij2/work/BochnerTwist.lean:86:6: error: ring failed, ring expressions not equal
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+N : ℕ
+hN : N ≠ 0
+r : ↥(unitRing F)
+δ : ℝ
+hδ : 0 < δ
+this : Finite (↥(unitRing F) ⧸ (nsmulAddMonoidHom N).range)
+i✝ j✝ : ℕ
+hij✝ : i✝ ≠ j✝
+hq : ↑(fivePow F i✝ r) = ↑(fivePow F j✝ r)
+i j : ℕ
+hij : i < j
+h : -fivePow F i r + fivePow F j r ∈ nR F N
+h5 : 5 ^ i * uFive F ^ i = 1
+hj : uFive F ^ j = uFive F ^ (j - i) * uFive F ^ i
+⊢ uFive F ^ (j - i) * uFive F ^ i * r * 5 ^ i * 2 - uFive F ^ i * r * 5 ^ i * 2 = 0
+data/fs131/ij2/work/BochnerTwist.lean:215:18: warning: This simp argument is unused:
+  Nat.cast_id
+
+Hint: Omit it from the simp argument list.
+  simp only [norm_mul, RCLike.norm_conj, Circle.norm_coe, mul_one, Finset.sum_const,
+  ̲  ̲ ̲ ̲Finset.card_univ,
+  ̵  ̵ ̵ ̵nsmul_eq_mul,̵ ̵N̵a̵t̵.̵c̵a̵s̵t̵_̵i̵d̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+seconds=305
+exit=1

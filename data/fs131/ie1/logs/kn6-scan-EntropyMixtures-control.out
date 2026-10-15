@@ -1,0 +1,4 @@
+HIT EntropyMixtures.lean:997: [#eval] #eval (1 : Nat)
+HIT EntropyMixtures.lean:998: [import] import Evil
+scanned EntropyMixtures.lean: lines=998 hits=2
+control FIRED

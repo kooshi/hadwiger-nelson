@@ -1,0 +1,5 @@
+slot: admitted ikl1f: mem 4 GiB (hard cap), cpus 0,1
+'HadwigerNelson.CertLink.card_le_of_fibreShareBound_model' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ StandingFive.kloosterman_bound]

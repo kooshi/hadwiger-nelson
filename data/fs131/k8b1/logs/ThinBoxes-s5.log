@@ -1,0 +1,21 @@
+Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:76:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:79:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:88:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:92:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:96:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:104:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:109:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:113:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:119:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:128:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:138:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:151:0: warning: automatically included section variable(s) unused in theorem `HadwigerNelson.Rigidity.exists_heavy_nameCells`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:164:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:173:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ThinBoxes.lean:185:8: warning: declaration uses `sorry`
+exit=0

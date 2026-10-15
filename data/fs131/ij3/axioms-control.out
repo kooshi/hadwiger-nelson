@@ -1,0 +1,37 @@
+PLANT HadwigerNelson.Rigidity.positive_entropy_rigidity_of_polishSpace: IMPORTED — reported resting on the declared theorem
+BAD       HadwigerNelson.Rigidity.archimedean_support axioms ['planted.unknownAxiom']
+IMPORTED  HadwigerNelson.Rigidity.bochnerOn_tauPrime 
+OPEN-LEAF HadwigerNelson.Rigidity.entropySplit sources ['HadwigerNelson.Rigidity.entropySplit']
+OPEN-LEAF HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber_closed sources ['HadwigerNelson.Rigidity.entropySplit', 'HadwigerNelson.Rigidity.zeroEntropyCarried']
+OPEN-LEAF HadwigerNelson.Rigidity.mrPlus sources ['HadwigerNelson.Rigidity.entropySplit', 'HadwigerNelson.Rigidity.zeroEntropyCarried']
+OPEN-LEAF HadwigerNelson.Rigidity.noRamifiedStableDyadic_of_tca sources ['HadwigerNelson.Rigidity.noRamifiedStableDyadic_of_tca']
+OPEN-LEAF HadwigerNelson.Rigidity.zeroEntropyCarried sources ['HadwigerNelson.Rigidity.zeroEntropyCarried']
+BAD       HadwigerNelson.Rigidity.ksEntropy_eq_zero_iff_of_finite sorry sourced in a declaration of this job's modules not left open: ['HadwigerNelson.Rigidity.exists_pattern_names_le']
+IMPORTED  HadwigerNelson.Rigidity.entropySplit_of_admissiblePair 
+IMPORTED  HadwigerNelson.Rigidity.ksEntropy_eq_zero_of_not_smul_le 
+OPEN-LEAF HadwigerNelson.Rigidity.ZdAction.mulTwoThree_model sources ['HadwigerNelson.Rigidity.ZdAction.mulTwoThree_model']
+BAD       HadwigerNelson.Rigidity.haar_or_zero_entropy sorryAx with no source named
+IMPORTED  HadwigerNelson.Rigidity.positive_entropy_rigidity_of_polishSpace 
+OPEN-LEAF HadwigerNelson.Rigidity.exists_admissiblePair sources ['HadwigerNelson.Rigidity.exists_admissiblePair']
+  BochnerTau: BAD 1
+  BochnerTau: CLEAN 77
+  BochnerTau: IMPORTED 1
+  ChainAtTA: CLEAN 34
+  ChainAtTA: OPEN-LEAF 5
+  ContinuityGroup: CLEAN 28
+  EntropyFibres: BAD 1
+  EntropyFibres: CLEAN 9
+  EntropySplitMax: CLEAN 8
+  EntropySplitMax: IMPORTED 2
+  PositiveEntropy: BAD 1
+  PositiveEntropy: CLEAN 11
+  PositiveEntropy: IMPORTED 1
+  PositiveEntropy: OPEN-LEAF 1
+  UnitCircle: CLEAN 32
+  UnitCircle: OPEN-LEAF 1
+records: 213
+BAD Proofs.HadwigerNelson.Rigidity.BochnerTau HadwigerNelson.Rigidity.archimedean_support: axioms ['planted.unknownAxiom']
+NOT CLEAN HadwigerNelson.Rigidity.bochnerOn_tauPrime: IMPORTED 
+BAD Proofs.HadwigerNelson.Rigidity.EntropyFibres HadwigerNelson.Rigidity.ksEntropy_eq_zero_iff_of_finite: sorry sourced in a declaration of this job's modules not left open: ['HadwigerNelson.Rigidity.exists_pattern_names_le']
+BAD Proofs.HadwigerNelson.Rigidity.PositiveEntropy HadwigerNelson.Rigidity.haar_or_zero_entropy: sorryAx with no source named
+CONTROL: 4 of 4 planted faults reported — the check can fail

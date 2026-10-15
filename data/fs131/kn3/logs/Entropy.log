@@ -1,0 +1,5 @@
+slot: admitted kn3: mem 4 GiB (hard cap), cpus 10,11
+Proofs/HadwigerNelson/Rigidity/Entropy.lean:98:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Entropy.lean:104:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Entropy.lean:110:8: warning: declaration uses `sorry`
+exit=0

@@ -1,0 +1,46 @@
+slot: admitted itk1: mem 4 GiB (hard cap), cpus 5,6
+data/fs131/itk1/work/GlobalPoint.lean:647:34: error: unexpected token '('; expected ')', ',' or ':'
+data/fs131/itk1/work/GlobalPoint.lean:589:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?a * (?b / ?c)
+in the target expression
+  8 * (scaleHeight F B)⁻¹ ^ 10 ≤ 8 / ↑B
+
+F : Subfield ℝ
+inst✝¹ : NumberField ↥F
+D : TateModel F
+μ : Measure (Dual F)
+inst✝ : IsProbabilityMeasure μ
+hμ : RotInv F μ
+p : WPlace F
+C : ℝ
+hC0 : 0 < C
+hC : D.IsGap C
+ε : ℝ
+hε16 : 16 * ε ≤ 1
+δ₀ : ℝ
+hδ₀ : 0 < δ₀
+xw : SAdeleRing F
+hheavy : ∀ (δ : ℝ), 0 < δ → δ ≤ δ₀ → δ ^ heavyExponent F ≤ μ.real (⇑D.π '' (fun x => xw + x) '' thinBox p (2 * ε) δ)
+hn : 0 < Module.finrank ℚ ↥(fieldI F)
+hMB : ∀ (B : ℕ), 1 ≤ B → ↑B ≤ scaleHeight F B
+hinv : ∀ (B : ℕ), 1 ≤ B → (scaleHeight F B)⁻¹ ≤ 1 / ↑B
+hinv1 : ∀ (B : ℕ), 1 ≤ B → (scaleHeight F B)⁻¹ ≤ 1
+hinv0 : ∀ (B : ℕ), 0 ≤ (scaleHeight F B)⁻¹
+hδB : ∀ (B : ℕ), 1 ≤ B → scaleThin F B ≤ 1 / ↑B
+B : ℕ
+hB : 1 ≤ B
+⊢ 8 * (scaleHeight F B)⁻¹ ^ 10 ≤ 8 / ↑B
+data/fs131/itk1/work/GlobalPoint.lean:614:15: error(lean.unknownIdentifier): Unknown constant `Real.one_lt_exp`
+data/fs131/itk1/work/GlobalPoint.lean:615:12: error: No goals to be solved
+data/fs131/itk1/work/GlobalPoint.lean:646:35: error: mod_cast has type
+  @OfNat.ofNat ℕ 0 (instOfNatNat 0) < B₀
+but is expected to have type
+  @OfNat.ofNat ?m.1147 0 Zero.toOfNat0 < ?m.1151
+data/fs131/itk1/work/GlobalPoint.lean:646:75: error: mod_cast has type
+  ?m.1192 + ?m.1189 ≤ ?m.1194 → ?m.1192 ≤ ?m.1194
+but is expected to have type
+  ?m.1151 ≤ ?m.1152
+data/fs131/itk1/work/GlobalPoint.lean:697:8: warning: declaration uses `sorry`
+data/fs131/itk1/work/GlobalPoint.lean:703:8: warning: declaration uses `sorry`
+seconds=21
+exit=1

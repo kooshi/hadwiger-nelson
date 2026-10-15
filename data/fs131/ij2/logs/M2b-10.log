@@ -1,0 +1,45 @@
+slot: admitted ij2: mem 4 GiB (hard cap), cpus 4,5
+data/fs131/ij2/work/BochnerTau.lean:106:8: warning: declaration uses `sorry`
+data/fs131/ij2/work/BochnerTau.lean:1034:36: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Countable ↥F
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/ij2/work/BochnerTau.lean:1093:50: error: Application type mismatch: The argument
+  hρA t
+has type
+  (ρ t) (archChars ↥(unitRing F))ᶜ = 0
+but is expected to have type
+  ((ρ t) fun χ => ∀ (hA : ?m.567), False) = 0
+in the application
+  measure_mono_null (fun χ hχ hA => hχ ?m.564) (hρA t)
+data/fs131/ij2/work/BochnerTau.lean:1032:71: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+σ : Measure (AddChar (↥(unitRing F)) Circle)
+hσ : IsFiniteMeasure σ
+hc : Continuous[tauPrime F, _] fun y => ∫ (χ : AddChar (↥(unitRing F)) Circle), ↑(χ y) ∂σ
+this : Countable ↥(unitRing F)
+ψ : ↑(torsionChars ↥(unitRing F)) → ↥(unitRing F) → ℂ
+hPD : ∀ (t : ↑(torsionChars ↥(unitRing F))), PosDef fun y => (starRingEnd ℂ) ↑(↑t y) * ψ t y
+hcont : ∀ (t : ↑(torsionChars ↥(unitRing F))), Continuous[archTop F, _] fun y => (starRingEnd ℂ) ↑(↑t y) * ψ t y
+hsum : Summable fun t => (ψ t 0).re
+hhas : ∀ (y : ↥(unitRing F)), HasSum (fun t => ψ t y) (∫ (χ : Dual F), ↑(χ y) ∂σ)
+ρ : ↑(torsionChars ↥(unitRing F)) → Measure (Dual F)
+hρf : ∀ (t : ↑(torsionChars ↥(unitRing F))), IsFiniteMeasure (ρ t)
+hρF :
+  ∀ (t : ↑(torsionChars ↥(unitRing F))) (y : ↥(unitRing F)),
+    ∫ (χ : Dual F), ↑(χ y) ∂ρ t = (starRingEnd ℂ) ↑(↑t y) * ψ t y
+hρA : ∀ (t : ↑(torsionChars ↥(unitRing F))), (ρ t) (archChars ↥(unitRing F))ᶜ = 0
+h0 : ∀ (t : ↑(torsionChars ↥(unitRing F))), ↑((ρ t).real Set.univ) = ψ t 0
+hre0 : ∀ (t : ↑(torsionChars ↥(unitRing F))), 0 ≤ (ψ t 0).re
+hmass : ∀ (t : ↑(torsionChars ↥(unitRing F))), (ρ t) Set.univ = ENNReal.ofReal (ψ t 0).re
+ν : Measure (Dual F) := Measure.sum fun t => Measure.map (fun x => x * ↑t) (ρ t)
+hν : ν = Measure.sum fun t => Measure.map (fun x => x * ↑t) (ρ t)
+hνuniv : ν Set.univ = ENNReal.ofReal (∑' (t : ↑(torsionChars ↥(unitRing F))), (ψ t 0).re)
+hνf : IsFiniteMeasure ν
+hνF : ∀ (y : ↥(unitRing F)), ∫ (χ : Dual F), ↑(χ y) ∂ν = ∫ (χ : AddChar (↥(unitRing F)) Circle), ↑(χ y) ∂σ
+hσν : σ = ν
+t : ↑(torsionChars ↥(unitRing F))
+⊢ (ρ t) ((fun χ => χ * ↑t) ⁻¹' (TA F)ᶜ) = 0
+seconds=16
+exit=1

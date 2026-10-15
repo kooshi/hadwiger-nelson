@@ -1,0 +1,4 @@
+ShannonEntropy: 456 lines from ['ShannonEntropy.lean']; patches by kind: none
+EntropyMixtures: 996 lines from ['ShannonEntropy.lean', 'EntropyMixtures.lean']; patches by kind: none
+HopfMaximal: 109 lines from ['HopfMaximal.lean']; patches by kind: none
+MaximalOccupation: 258 lines from ['InverseEntropy.lean', 'HopfMaximal.lean', 'MaximalOccupation.lean']; patches by kind: none

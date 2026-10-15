@@ -1,0 +1,9 @@
+slot: admitted ig1: mem 4 GiB (hard cap), cpus 2,3
+data/fs131/ig1/work/ModelDraftsPlant.lean:53:25: error: Type mismatch
+  rfl
+has type
+  ?m.8 = ?m.8
+but is expected to have type
+  1 = 2
+seconds=3
+exit=1

@@ -1,0 +1,42 @@
+slot: admitted kn8p: mem 4 GiB (hard cap), cpus 0,1
+'HadwigerNelson.Rigidity.continuous_evalChar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.t2Space_dual' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.secondCountableTopology_dual' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Rigidity.isHaarMeasure_dualHaar' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.exists_isHaarFourier_of_countable' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SpectralInputs.IsHaarFourier.map_dual_eq' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SpectralInputs.IsHaarFourier.map_mul_right_eq' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Rigidity.dualHaar_fourier_zero' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.mem_unitCircle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.unitCircle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.coe_toUnitVector' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.unitCircleEquiv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.instMulActionDual' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.smul_def' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.measurableConstSMul_dual' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.countable_unitRing_of_numberField' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.zpowHom' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.AdmissiblePair.mem_subgroup' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.PieceDual.dualMap_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.PieceDual.dualMap_id' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.PieceDual.dualMap_comp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.pieceAction' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.invariantSigma_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.mrPlus_of_split_of_carried' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.positive_entropy_rigidity_of_polishSpace' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ positive_entropy_rigidity]
+exit=0

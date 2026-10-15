@@ -1,0 +1,16 @@
+compared: 154 named constants of the first dump (kinds and types), 37 data definitions' values, 2 ruled definitions' data views, 5 example heads of the base files
+axioms of the modules: [] before, ['HadwigerNelson.Rigidity.planted_axiom'] after
+internal (not compared): 84 before, 84 after
+new public constants in the second dump: 1 (allow-list: 0)
+  NEW THM HadwigerNelson.Rigidity.planted_new_public
+new private constants in the second dump: 0
+examples in the working files that the base does not hold: 0
+TYPE     THM HadwigerNelson.Rigidity.measure_eq_of_fourier: the stored statement differs
+KIND     HadwigerNelson.Rigidity.isClosedEmbedding_coe: THM -> DEF
+MISSING  THM HadwigerNelson.Rigidity.exists_apply_ne_one: in the first dump, not in the second
+VALUE    DEF HadwigerNelson.Rigidity.dualHaar: the stored definition differs
+DATA     DEF HadwigerNelson.Rigidity.AdmissiblePair.ofPow: a data field of the stored definition differs
+TYPE     THM HadwigerNelson.Rigidity.isTotallyIrreducible_pieceAction: the stored statement differs
+AXIOMS   the modules declare axioms: [] before, ['HadwigerNelson.Rigidity.planted_axiom'] after
+NEW      THM HadwigerNelson.Rigidity.planted_new_public: a new public constant that the allow-list does not hold
+CONTROL: 8 of 8 planted faults reported — the check can fail

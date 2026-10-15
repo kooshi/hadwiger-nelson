@@ -1,0 +1,172 @@
+slot: admitted kt1: mem 4 GiB (hard cap), cpus 2,3
+@IsLocalization.surj : ∀ {R : Type u_1} [inst : CommSemiring R] (M : Submonoid R) {S : Type u_2}
+  [inst_1 : CommSemiring S] [inst_2 : Algebra R S] [IsLocalization M S] (z : S),
+  ∃ x, z * (algebraMap R S) ↑x.2 = (algebraMap R S) x.1
+@Ideal.finite_factors : ∀ {R : Type u_1} [inst : CommRing R] [IsDedekindDomain R] {I : Ideal R},
+  I ≠ 0 → {v | v.asIdeal ∣ I}.Finite
+@exists_forall_sub_mem_ideal : ∀ {R : Type u_1} [inst : CommRing R] [IsDedekindDomain R] {ι : Type u_2} {s : Finset ι}
+  (P : ι → Ideal R) (e : ι → ℕ),
+  (∀ i ∈ s, Prime (P i)) →
+    (∀ i ∈ s, ∀ j ∈ s, i ≠ j → P i ≠ P j) → ∀ (x : ↥s → R), ∃ y, ∀ (i : ι) (hi : i ∈ s), y - x ⟨i, hi⟩ ∈ P i ^ e i
+@Ideal.prime_of_isPrime : ∀ {A : Type u_1} [inst : CommRing A] [IsDedekindDomain A] {P : Ideal A},
+  P ≠ ⊥ → P.IsPrime → Prime P
+@intValuation_eq_exp_neg_multiplicity : ∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R]
+  (v : HeightOneSpectrum R) {r : R},
+  r ≠ 0 → v.intValuation r = WithZero.exp (-↑(multiplicity v.asIdeal (Ideal.span {r})))
+@intValuation_le_pow_iff_mem : ∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R]
+  (v : HeightOneSpectrum R) (r : R) (n : ℕ), v.intValuation r ≤ WithZero.exp (-↑n) ↔ r ∈ v.asIdeal ^ n
+@valuation_of_algebraMap : ∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type u_2}
+  [inst_2 : Field K] [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R) (r : R),
+  (valuation K v) ↑r = v.intValuation r
+@multiplicity_eq_zero : ∀ {α : Type u_1} [inst : Monoid α] {a b : α}, multiplicity a b = 0 ↔ ¬a ∣ b
+@denseRange_algebraMap : ∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2)
+  [inst_2 : Field K] [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R),
+  DenseRange ⇑(algebraMap K (adicCompletion K v))
+@DenseRange.exists_mem_open : ∀ {X : Type u_1} [inst : TopologicalSpace X] {α : Type u_2} {f : α → X} {s : Set X},
+  DenseRange f → IsOpen s → s.Nonempty → ∃ a, f a ∈ s
+@Valued.isOpen_valuationSubring : ∀ {Γ₀ : Type u_1} [inst : LinearOrderedCommGroupWithZero Γ₀] (K : Type u_2)
+  [inst_1 : Field K] [hv : Valued K Γ₀], IsOpen ↑Valued.v.valuationSubring
+@valuedAdicCompletion_eq_valuation' : ∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type u_2}
+  [inst_2 : Field K] [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R) (k : K),
+  Valued.v { toCompletion := ↑((WithVal.equiv (valuation K v)).symm k) } = (valuation K v) k
+@mem_integers_of_valuation_le_one : ∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2)
+  [inst_2 : Field K] [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (x : K),
+  (∀ (v : HeightOneSpectrum R), (valuation K v) x ≤ 1) → x ∈ (algebraMap R K).range
+@Algebra.isIntegral_trace : ∀ {R : Type u_1} [inst : CommRing R] {L : Type u_2} [inst_1 : Field L] {F : Type u_3}
+  [inst_2 : Field F] [inst_3 : Algebra R L] [inst_4 : Algebra L F] [inst_5 : Algebra R F] [IsScalarTower R L F]
+  [FiniteDimensional L F] {x : F}, IsIntegral R x → IsIntegral R ((Algebra.trace L F) x)
+@IsIntegrallyClosed.isIntegral_iff : ∀ {R : Type u_1} [inst : CommRing R] {K : Type u_2} [inst_1 : CommRing K]
+  [inst_2 : Algebra R K] [ifr : IsFractionRing R K] [IsIntegrallyClosed R] {x : K},
+  IsIntegral R x ↔ ∃ y, (algebraMap R K) y = x
+@RingOfIntegers.isIntegral_coe : ∀ {K : Type u_1} [inst : Field K] (x : 𝓞 K), IsIntegral ℤ ((algebraMap (𝓞 K) K) x)
+@valuation_exists_uniformizer : ∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2)
+  [inst_2 : Field K] [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R),
+  ∃ π, (valuation K v) π = WithZero.exp (-1)
+traceForm_nondegenerate : ∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L]
+  [FiniteDimensional K L] [Algebra.IsSeparable K L], (Algebra.traceForm K L).Nondegenerate
+@LinearMap.BilinForm.dualBasis : {V : Type u_1} →
+  {K : Type u_2} →
+    [inst : Field K] →
+      [inst_1 : AddCommGroup V] →
+        [inst_2 : Module K V] →
+          {ι : Type u_3} →
+            [DecidableEq ι] →
+              [Finite ι] → (B : LinearMap.BilinForm K V) → B.Nondegenerate → Module.Basis ι K V → Module.Basis ι K V
+@LinearMap.BilinForm.dualBasis_repr_apply : ∀ {V : Type u_1} {K : Type u_2} [inst : Field K] [inst_1 : AddCommGroup V]
+  [inst_2 : Module K V] {ι : Type u_3} [inst_3 : DecidableEq ι] [inst_4 : Finite ι] {B : LinearMap.BilinForm K V}
+  (hB : B.Nondegenerate) (b : Module.Basis ι K V) (x : V) (i : ι), ((B.dualBasis hB b).repr x) i = (B x) (b i)
+@IsLocalization.exist_integer_multiples_of_finset : ∀ {R : Type u_1} [inst : CommSemiring R] (M : Submonoid R)
+  {S : Type u_2} [inst_1 : CommSemiring S] [inst_2 : Algebra R S] [IsLocalization M S] (s : Finset S),
+  ∃ b, ∀ a ∈ s, IsLocalization.IsInteger R (↑b • a)
+@Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField : ∀ {K : Type u_1}
+  {Γ₀ : Type u_2} [inst : Field K] [inst_1 : LinearOrderedCommGroupWithZero Γ₀] [inst_2 : Valued K Γ₀]
+  [Valued.v.RankOne],
+  CompactSpace ↥(Valued.integer K) ↔
+    CompleteSpace ↥(Valued.integer K) ∧ IsDiscreteValuationRing ↥(Valued.integer K) ∧ Finite (Valued.ResidueField K)
+@exists_valuation_sub_lt_of_integer : ∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type u_2}
+  [inst_2 : Field K] [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R) {x : K},
+  (valuation K v) x ≤ 1 → ∀ (γ : (WithZero (Multiplicative ℤ))ˣ), ∃ a, (valuation K v) ((algebraMap R K) a - x) < ↑γ
+@IsClosed.completeSpace_coe : ∀ {α : Type u_1} [inst : UniformSpace α] [CompleteSpace α] {s : Set α} [hs : IsClosed s],
+  CompleteSpace ↑s
+@Valued.isClosed_valuationSubring : ∀ {Γ₀ : Type u_1} [inst : LinearOrderedCommGroupWithZero Γ₀] (K : Type u_2)
+  [inst_1 : Field K] [hv : Valued K Γ₀], IsClosed ↑Valued.v.valuationSubring
+mixedEmbedding.latticeBasis : (K : Type u_1) →
+  [inst : Field K] →
+    [inst_1 : NumberField K] → Module.Basis (Module.Free.ChooseBasisIndex ℤ (𝓞 K)) ℝ (mixedEmbedding.mixedSpace K)
+mixedEmbedding.latticeBasis_apply : ∀ (K : Type u_1) [inst : Field K] [inst_1 : NumberField K]
+  (i : Module.Free.ChooseBasisIndex ℤ (𝓞 K)),
+  (mixedEmbedding.latticeBasis K) i = (mixedEmbedding K) ((integralBasis K) i)
+mixedEmbedding.mem_rat_span_latticeBasis : ∀ (K : Type u_1) [inst : Field K] [inst_1 : NumberField K] (x : K),
+  (mixedEmbedding K) x ∈ Submodule.span ℚ (Set.range ⇑(mixedEmbedding.latticeBasis K))
+integralBasis_apply : ∀ (K : Type u_1) [inst : Field K] [inst_1 : NumberField K]
+  (i : Module.Free.ChooseBasisIndex ℤ (𝓞 K)), (integralBasis K) i = (algebraMap (𝓞 K) K) ((RingOfIntegers.basis K) i)
+@Module.Basis.constr_basis : ∀ {M' : Type u_1} [inst : AddCommMonoid M'] {ι : Type u_2} {R : Type u_3} {M : Type u_4}
+  [inst_1 : Semiring R] [inst_2 : AddCommMonoid M] [inst_3 : Module R M] (b : Module.Basis ι R M) [inst_4 : Module R M']
+  (S : Type u_5) [inst_5 : Semiring S] [inst_6 : Module S M'] [inst_7 : SMulCommClass R S M'] (f : ι → M') (i : ι),
+  ((b.constr S) f) (b i) = f i
+discr_ne_zero : ∀ (K : Type u_1) [inst : Field K] [inst_1 : NumberField K], discr K ≠ 0
+Algebra.discr_def : ∀ (A : Type u_1) {B : Type u_2} {ι : Type u_3} [inst : DecidableEq ι] [inst_1 : CommRing A]
+  [inst_2 : CommRing B] [inst_3 : Algebra A B] [inst_4 : Fintype ι] (b : ι → B),
+  Algebra.discr A b = (Algebra.traceMatrix A b).det
+@Algebra.trace_algebraMap : ∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S]
+  [inst_2 : Algebra R S] [StrongRankCondition R] [Module.Free R S] (x : R),
+  (Algebra.trace R S) ((algebraMap R S) x) = Module.finrank R S • x
+@valuationSubringAtPrime_eq_valuationSubring : ∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R]
+  {K : Type u_2} [inst_2 : Field K] [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : HeightOneSpectrum R),
+  valuationSubringAtPrime K v = (valuation K v).valuationSubring
+@RestrictedProduct.isEmbedding_structureMap : ∀ {ι : Type u_1} {R : ι → Type u_2} {A : (i : ι) → Set (R i)}
+  {𝓕 : Filter ι} [inst : (i : ι) → TopologicalSpace (R i)], Topology.IsEmbedding (RestrictedProduct.structureMap R A 𝓕)
+@isCompact_univ_pi : ∀ {ι : Type u_1} {X : ι → Type u_2} [inst : (i : ι) → TopologicalSpace (X i)]
+  {s : (i : ι) → Set (X i)}, (∀ (i : ι), IsCompact (s i)) → IsCompact (Set.univ.pi s)
+@ZSpan.fundamentalDomain_isBounded : ∀ {E : Type u_1} {ι : Type u_2} {K : Type u_3} [inst : NormedField K]
+  [inst_1 : NormedAddCommGroup E] [inst_2 : NormedSpace K E] (b : Module.Basis ι K E) [inst_3 : LinearOrder K]
+  [IsStrictOrderedRing K] [FloorRing K] [Finite ι] [HasSolidNorm K], Bornology.IsBounded (ZSpan.fundamentalDomain b)
+@ZSpan.exist_unique_vadd_mem_fundamentalDomain : ∀ {E : Type u_1} {ι : Type u_2} {K : Type u_3} [inst : NormedField K]
+  [inst_1 : NormedAddCommGroup E] [inst_2 : NormedSpace K E] (b : Module.Basis ι K E) [inst_3 : LinearOrder K]
+  [IsStrictOrderedRing K] [FloorRing K] [Finite ι] (x : E), ∃! v, v +ᵥ x ∈ ZSpan.fundamentalDomain b
+mixedEmbedding.fundamentalDomain_integerLattice : ∀ (K : Type u_1) [inst : Field K] [inst_1 : NumberField K],
+  MeasureTheory.IsAddFundamentalDomain (↥(mixedEmbedding.integerLattice K))
+    (ZSpan.fundamentalDomain (mixedEmbedding.latticeBasis K)) MeasureTheory.volume
+@Metric.isCompact_of_isClosed_isBounded : ∀ {α : Type u_1} {s : Set α} [inst : PseudoMetricSpace α] [ProperSpace α],
+  IsClosed s → Bornology.IsBounded s → IsCompact s
+@AddChar.toMonoidHom : {A : Type u_1} →
+  {M : Type u_2} → [inst : AddMonoid A] → [inst_1 : Monoid M] → AddChar A M → Multiplicative A →* M
+@MonoidHom.isOpenMap_of_sigmaCompact : ∀ {G : Type u_1} [inst : TopologicalSpace G] [inst_1 : Group G]
+  [IsTopologicalGroup G] [SigmaCompactSpace G] {H : Type u_2} [inst_4 : Group H] [inst_5 : TopologicalSpace H]
+  [BaireSpace H] [T2Space H] [ContinuousMul H] (f : G →* H), Function.Surjective ⇑f → Continuous ⇑f → IsOpenMap ⇑f
+@SigmaCompactSpace.of_countable : ∀ {X : Type u_1} [inst : TopologicalSpace X] (S : Set (Set X)),
+  S.Countable → (∀ s ∈ S, IsCompact s) → ⋃₀ S = Set.univ → SigmaCompactSpace X
+@continuous_of_continuousAt_one : ∀ {G : Type u_1} [inst : TopologicalSpace G] [inst_1 : Group G] [IsTopologicalGroup G]
+  {M : Type u_2} {hom : Type u_3} [inst_3 : MulOneClass M] [inst_4 : TopologicalSpace M] [ContinuousMul M]
+  [inst_6 : FunLike hom G M] [MonoidHomClass hom G M] (f : hom), ContinuousAt (⇑f) 1 → Continuous ⇑f
+@AddChar.map_nsmul_eq_pow : ∀ {A : Type u_1} {M : Type u_2} [inst : AddMonoid A] [inst_1 : Monoid M] (ψ : AddChar A M)
+  (n : ℕ) (x : A), ψ (n • x) = ψ x ^ n
+@AddChar.map_sub_eq_div : ∀ {A : Type u_1} {M : Type u_2} [inst : AddCommGroup A] [inst_1 : DivisionCommMonoid M]
+  (ψ : AddChar A M) (a b : A), ψ (a - b) = ψ a / ψ b
+Circle.exp_int_mul_two_pi : ∀ (n : ℤ), Circle.exp (↑n * (2 * Real.pi)) = 1
+Circle.exp_two_pi_mul_int : ∀ (n : ℤ), Circle.exp (2 * Real.pi * ↑n) = 1
+@IsAlgebraic.exists_integral_multiple : ∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : Ring A]
+  [inst_2 : Algebra R A] {z : A}, IsAlgebraic R z → ∃ y, y ≠ 0 ∧ IsIntegral R (y • z)
+@Subring.closure_le : ∀ {R : Type u_1} [inst : NonAssocRing R] {s : Set R} {t : Subring R},
+  Subring.closure s ≤ t ↔ s ⊆ ↑t
+@HadwigerNelson.Rigidity.eq_top_of_isClosed_of_dualCoannihilator_eq_bot : ∀ {G : Type u_1} [inst : AddCommGroup G]
+  [Countable G] (Y : Subgroup (AddChar G Circle)), IsClosed ↑Y → HadwigerNelson.Rigidity.dualCoannihilator Y = ⊥ → Y = ⊤
+HadwigerNelson.Rigidity.isClosedEmbedding_coe : ∀ (G : Type u_1) [inst : AddCommGroup G],
+  Topology.IsClosedEmbedding fun χ g => ↑(χ g)
+HadwigerNelson.Rigidity.exists_mul_stableIntegers_le : ∀ (F : Subfield ℝ) [inst : NumberField ↥F],
+  ∃ c,
+    c ≠ 0 ∧
+      ∀ x ∈ HadwigerNelson.Rigidity.stableIntegers F,
+        ↑c * x ∈ HadwigerNelson.UnitRing.unitRing (HadwigerNelson.conjOn ⋯)
+HadwigerNelson.Rigidity.unitRing_le_stableIntegers : ∀ (F : Subfield ℝ) [inst : NumberField ↥F],
+  HadwigerNelson.UnitRing.unitRing (HadwigerNelson.conjOn ⋯) ≤ HadwigerNelson.Rigidity.stableIntegers F
+@HadwigerNelson.UnitRing.coe_mem_unitRingOver_iff : ∀ {F : Subfield ℝ}
+  (x : ↥(HadwigerNelson.UnitRing.planeOverSubfield F)),
+  ↑x ∈ HadwigerNelson.UnitRing.unitRingOver F ↔ x ∈ HadwigerNelson.UnitRing.unitRing (HadwigerNelson.conjOn ⋯)
+FractionalIdeal.dual : (A : Type u_2) →
+  (K : Type u_3) →
+    {L : Type u_1} →
+      {B : Type u_4} →
+        [inst : CommRing A] →
+          [inst_1 : Field K] →
+            [inst_2 : CommRing B] →
+              [inst_3 : Field L] →
+                [inst_4 : Algebra A K] →
+                  [inst_5 : Algebra B L] →
+                    [inst_6 : Algebra A B] →
+                      [inst_7 : Algebra K L] →
+                        [inst_8 : Algebra A L] →
+                          [IsScalarTower A K L] →
+                            [IsScalarTower A B L] →
+                              [IsFractionRing A K] →
+                                [IsIntegrallyClosed A] →
+                                  [FiniteDimensional K L] →
+                                    [IsIntegralClosure B A L] →
+                                      [Algebra.IsSeparable K L] →
+                                        [IsDomain A] →
+                                          [IsFractionRing B L] →
+                                            [Nontrivial B] →
+                                              [NoZeroDivisors B] →
+                                                FractionalIdeal (nonZeroDivisors B) L →
+                                                  FractionalIdeal (nonZeroDivisors B) L
+exit=0

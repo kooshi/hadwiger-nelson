@@ -1,0 +1,152 @@
+HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  Min.min (HadwigerNelson.SpectralChain.localBound F) 5 ≤
+    (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+'HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five : (SimpleGraph.induce
+      (HadwigerNelson.planeOver HadwigerNelson.SqrtFortySeven.F47) (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+  5
+'HadwigerNelson.SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  5 ≤ HadwigerNelson.SpectralChain.localBound F →
+    5 ≤ (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+'HadwigerNelson.Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt143_eq_five : (SimpleGraph.induce
+      (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {143}))
+      (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+  5
+'HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt143_eq_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt311_eq_five : (SimpleGraph.induce
+      (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {311}))
+      (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+  5
+'HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt311_eq_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt335_eq_five : (SimpleGraph.induce
+      (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {335}))
+      (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+  5
+'HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt335_eq_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt3_sqrt5_eq_five : (SimpleGraph.induce
+      (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {3, 5}))
+      (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+  5
+'HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt3_sqrt5_eq_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.SqrtClassValues.five_le_chromaticNumber_planeOver_sqrt167 : 5 ≤
+  (SimpleGraph.induce (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {167}))
+      (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+'HadwigerNelson.SqrtClassValues.five_le_chromaticNumber_planeOver_sqrt167' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.SqrtFortySeven.five_le_localBound_sqrt47 : 5 ≤
+  HadwigerNelson.SpectralChain.localBound HadwigerNelson.SqrtFortySeven.F47
+'HadwigerNelson.SqrtFortySeven.five_le_localBound_sqrt47' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+def HadwigerNelson.planeOver : Subfield ℝ → Set ℂ :=
+fun F => {z | z.re ∈ F ∧ z.im ∈ F}
+def HadwigerNelson.unitDistance.{u_4} : (V : Type u_4) → [MetricSpace V] → SimpleGraph V :=
+fun V [MetricSpace V] => { Adj := fun x y => Dist.dist x y = 1, symm := ⋯, loopless := ⋯ }
+def HadwigerNelson.SpectralChain.localBound : Subfield ℝ → ℕ∞ :=
+fun F => ⨅ P, (HadwigerNelson.SpectralChain.levelTarget P 1).chromaticNumber
+structure HadwigerNelson.SpectralChain.StablePrime (F : Subfield ℝ) : Type
+number of parameters: 1
+fields:
+  HadwigerNelson.SpectralChain.StablePrime.P : Ideal
+      (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F))
+  HadwigerNelson.SpectralChain.StablePrime.isMaximal : self.P.IsMaximal
+  HadwigerNelson.SpectralChain.StablePrime.comap_conj : Ideal.comap (HadwigerNelson.SpectralChain.conjO F) self.P =
+      self.P
+constructor:
+  HadwigerNelson.SpectralChain.StablePrime.mk {F : Subfield ℝ}
+    (P : Ideal (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F))) (isMaximal : P.IsMaximal)
+    (comap_conj : Ideal.comap (HadwigerNelson.SpectralChain.conjO F) P = P) : HadwigerNelson.SpectralChain.StablePrime F
+@[reducible] def HadwigerNelson.SpectralChain.fieldI : Subfield ℝ → Subfield ℂ :=
+fun F => HadwigerNelson.UnitRing.planeOverSubfield F
+def HadwigerNelson.UnitRing.planeOverSubfield : Subfield ℝ → Subfield ℂ :=
+fun F =>
+  let __src := HadwigerNelson.Chain.planeOverSubring F;
+  { toSubring := __src, inv_mem' := ⋯ }
+def HadwigerNelson.SpectralChain.levelTarget : {F : Subfield ℝ} →
+  (P : HadwigerNelson.SpectralChain.StablePrime F) →
+    (m : ℕ) → SimpleGraph (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P ^ m) :=
+fun {F} P m =>
+  SimpleGraph.fromRel fun x y =>
+    (x - y) * (Ideal.quotientMap (P.P ^ m) (HadwigerNelson.SpectralChain.conjO F) ⋯) (x - y) = 1
+def HadwigerNelson.SquareClass.fieldOfRadicands : Set ℕ → Subfield ℝ :=
+fun D => Subfield.closure ((fun d => √↑d) '' D)
+@[reducible] def HadwigerNelson.SqrtFortySeven.F47 : Subfield ℝ :=
+HadwigerNelson.SquareClass.fieldOfRadicands {47}
+def SimpleGraph.chromaticNumber.{u} : {V : Type u} → SimpleGraph V → ℕ∞ :=
+fun {V} G => ⨅ n ∈ setOf G.Colorable, ↑n
+@[reducible] def SimpleGraph.induce.{u_1} : {V : Type u_1} → (s : Set V) → SimpleGraph V → SimpleGraph ↑s :=
+fun {V} s G => SimpleGraph.comap (⇑(Function.Embedding.subtype fun x => x ∈ s)) G
+HadwigerNelson.SqrtFortySeven.numberField_F47 : NumberField ↥HadwigerNelson.SqrtFortySeven.F47
+'HadwigerNelson.SqrtFortySeven.numberField_F47' depends on axioms: [propext, Classical.choice, Quot.sound]
+@HadwigerNelson.Rigidity.positive_entropy_rigidity : ∀ {X : Type u_1} [inst : AddCommGroup X]
+  [inst_1 : TopologicalSpace X] [inst_2 : MeasurableSpace X] [BorelSpace X],
+  HadwigerNelson.Rigidity.IsSolenoid X →
+    ∀ {d : ℕ},
+      2 ≤ d →
+        ∀ (α : HadwigerNelson.Rigidity.ZdAction d X),
+          α.NoVirtuallyCyclicFactors →
+            ∀ (μ : MeasureTheory.Measure X),
+              MeasureTheory.IsProbabilityMeasure μ →
+                α.IsErgodicOn ⊤ μ →
+                  ∃ Λ J ν G,
+                    Λ.FiniteIndex ∧
+                      0 < J ∧
+                        μ = (↑J)⁻¹ • ∑ j, ν j ∧
+                          (∀ (i j : Fin J), i ≠ j → (ν i).MutuallySingular (ν j)) ∧
+                            ∀ (j : Fin J),
+                              MeasureTheory.IsProbabilityMeasure (ν j) ∧
+                                α.IsErgodicOn Λ (ν j) ∧
+                                  (IsClosed ↑(G j) ∧
+                                      α.InvariantOn Λ (G j) ∧
+                                        ∀ g ∈ G j,
+                                          ∀ (B : Set X), MeasurableSet B → (ν j) ((fun x => x + g) ⁻¹' B) = (ν j) B) ∧
+                                    (∀ (n : Fin d → ℤ),
+                                        ∃ k,
+                                          MeasureTheory.Measure.map (⇑(α.toFun n)) (ν j) = ν k ∧
+                                            AddSubgroup.map (α.toFun n) (G j) = G k) ∧
+                                      ∀ n ∈ Λ,
+                                        ∀ (h : G j ≤ AddSubgroup.comap (α.toFun n) (G j)),
+                                          HadwigerNelson.Rigidity.ksEntropy
+                                              (MeasureTheory.Measure.map (⇑(QuotientAddGroup.mk' (G j))) (ν j))
+                                              ⇑(QuotientAddGroup.map (G j) (G j) (α.toFun n) h) =
+                                            0
+HadwigerNelson.StandingFive.kloosterman_bound : ∀ (F : Type u_1) [inst : Field F] [inst_1 : Fintype F]
+  [inst_2 : DecidableEq F],
+  ringChar F ≠ 2 →
+    ∀ (ψ : AddChar F ℂ),
+      (∃ x, ψ x ≠ 1) →
+        ∀ (c d a : F), 4 * c * d = a → a ≠ 0 → ‖∑ x with x ≠ 0, ψ (c * x + d * x⁻¹)‖ ≤ 2 * √↑(Fintype.card F)

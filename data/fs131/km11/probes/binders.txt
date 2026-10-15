@@ -1,0 +1,64 @@
+APlus            def     Rigidity.EqualAtUnits                                          | NumberField ↥F
+APlus            def     Rigidity.colourRot                                             | 
+APlus            def     Rigidity.factorColouring                                       | NumberField ↥F
+APlus            def     Rigidity.factorLaw                                             | NumberField ↥F
+APlus            def     Rigidity.minSel                                                | 
+APlus            theorem Rigidity.aPlusOfR88                                            | NumberField ↥F
+APlus            theorem Rigidity.aplus_model                                           | 
+APlus            theorem Rigidity.comap_colourRot_colourFactor                          | NumberField ↥F
+APlus            theorem Rigidity.equalAtUnits_of_not_neg                               | NumberField ↥F
+APlus            theorem Rigidity.factorColouring_mem_X4                                | NumberField ↥F
+APlus            theorem Rigidity.factorColouring_rot_ae                                | NumberField ↥F
+APlus            theorem Rigidity.factorColouring_shift_ae                              | NumberField ↥F
+APlus            theorem Rigidity.factorLaw_carried                                     | NumberField ↥F
+APlus            theorem Rigidity.factorLaw_isProb                                      | NumberField ↥F
+APlus            theorem Rigidity.factorLaw_rot_inv                                     | NumberField ↥F
+APlus            theorem Rigidity.factorLaw_shift_inv                                   | NumberField ↥F
+APlus            theorem Rigidity.factorLaw_trace_null                                  | NumberField ↥F
+APlus            theorem Rigidity.integral_condLaw_mul_eq_zero_of_adj                   | NumberField ↥F
+APlus            theorem Rigidity.measurable_colourRot                                  | 
+APlus            theorem Rigidity.measurable_factorColouring                            | NumberField ↥F
+APlus            theorem Rigidity.measurable_factorColouring_apply                      | NumberField ↥F
+APlus            theorem Rigidity.minSel_mem                                            | 
+APlus            theorem Rigidity.nonempty_invariantColouring_bot                       | 
+APlus            theorem Rigidity.numberField_bot                                       | 
+APlus            theorem Rigidity.tendsto_mul_nhds_tauPrime                             | NumberField ↥F
+APlus            theorem SpectralChain.InvariantColouring.measurePreserving_rot         | 
+SpectralSubspace def     Rigidity.koopmanSum                                            | MeasurableSpace Ω; ℝ
+SpectralSubspace def     Rigidity.trigPoly                                              | AddCommGroup R
+SpectralSubspace theorem Rigidity.IsSpectralMeasureOf.add_of_orthogonal                 | AddCommGroup R; MeasurableSpace Ω
+SpectralSubspace theorem Rigidity.IsSpectralMeasureOf.unique                            | AddCommGroup R; MeasurableSpace Ω; Countable R
+SpectralSubspace theorem Rigidity.comp_koopmanSum                                       | AddCommGroup R; MeasurableSpace Ω
+SpectralSubspace theorem Rigidity.comp_mem_contVec                                      | AddCommGroup R; MeasurableSpace Ω
+SpectralSubspace theorem Rigidity.exists_isSpectralMeasureOf                            | AddCommGroup R; MeasurableSpace Ω; Countable R
+SpectralSubspace theorem Rigidity.exists_spectral_vector                                | AddCommGroup R; MeasurableSpace Ω; Countable R
+SpectralSubspace theorem Rigidity.exists_trigPoly_tendsto                               | AddCommGroup R; Countable R; MeasureTheory.IsFiniteMeasure σ
+SpectralSubspace theorem Rigidity.gram_sum_eq                                           | NormedAddCommGroup E; InnerProductSpace ℝ E
+SpectralSubspace theorem Rigidity.inner_comp_eq_inner_comp_neg                          | AddCommGroup R; MeasurableSpace Ω
+SpectralSubspace theorem Rigidity.inner_koopmanSum_re                                   | AddCommGroup R; MeasurableSpace Ω
+SpectralSubspace theorem Rigidity.isSpectralMeasureOf_condExpL2                         | AddCommGroup R; MeasurableSpace Ω; Countable R; MeasureTheory.IsProbabilityMeasure μ
+SpectralSubspace theorem Rigidity.norm_sq_koopmanSum_re_add_im                          | AddCommGroup R; MeasurableSpace Ω
+SpectralSubspace theorem Rigidity.posDef_koopman                                        | AddCommGroup R; MeasurableSpace Ω
+SpectralSubspace theorem Rigidity.spectral_contChars_null_of_orthogonal                 | AddCommGroup R; MeasurableSpace Ω; Countable R
+SpectralSubspace theorem Rigidity.spectral_null_model                                   | 
+SpectralSubspace theorem Rigidity.spectral_null_of_orthogonal                           | AddCommGroup R; MeasurableSpace Ω; Countable R; l.IsCountablyGenerated
+TraceSplit       def     Rigidity.colourCond                                            | NumberField ↥F
+TraceSplit       def     Rigidity.colourFactor                                          | NumberField ↥F
+TraceSplit       def     Rigidity.colourInd                                             | MeasurableSpace Ω; MeasureTheory.IsFiniteMeasure μ
+TraceSplit       def     Rigidity.colourShift                                           | 
+TraceSplit       theorem Rigidity.colourCond_ae_eq_condLaw                              | NumberField ↥F; μ.μ
+TraceSplit       theorem Rigidity.colourFactor.congr_simp                               | NumberField ↥F
+TraceSplit       theorem Rigidity.colourShift_add                                       | 
+TraceSplit       theorem Rigidity.colourShift_zero                                      | 
+TraceSplit       theorem Rigidity.condLaw_comp_colourShift                              | NumberField ↥F; μ.μ
+TraceSplit       theorem Rigidity.inner_colourInd_comp_unit                             | NumberField ↥F
+TraceSplit       theorem Rigidity.integral_colourCond_mul_comp                          | NumberField ↥F
+TraceSplit       theorem Rigidity.integral_colourInd_mul_comp                           | MeasurableSpace Ω; MeasureTheory.IsProbabilityMeasure μ
+TraceSplit       theorem Rigidity.integral_condLaw_mul_nonneg                           | NumberField ↥F
+TraceSplit       theorem Rigidity.measurable_colourShift                                | 
+TraceSplit       theorem Rigidity.setIntegral_compl_TA_re                               | NumberField ↥F
+TraceSplit       theorem Rigidity.setIntegral_compl_TA_re_nonpos                        | NumberField ↥F
+TraceSplit       theorem Rigidity.setIntegral_compl_TA_rot                              | NumberField ↥F
+TraceSplit       theorem Rigidity.three_mul_tetra_add_one                               | 
+TraceSplit       theorem Rigidity.trace_decomp                                          | NumberField ↥F; MeasurableSpace Ω; MeasureTheory.IsProbabilityMeasure μ
+TraceSplit       theorem SpectralChain.InvariantColouring.measurePreserving_shift       | propext, sorryAx, Classical.choice, Quot.sound; propext, sorryAx, Classical.choice, Quot.sound; propext, sorryAx, Classical.choice, Quot.sound; propext, Classical.choice, Quot.sound; propext, Classical.choice, Quot.sound

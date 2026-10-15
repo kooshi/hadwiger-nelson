@@ -1,0 +1,33 @@
+unplanted: PASS (as it must)
+plant 'a generated file changed by two spaces': REFUSED
+plant 'a generated file absent': REFUSED
+plant 'a patch that does not apply': REFUSED
+plant 'a patch into a statement': REFUSED
+plant 'a patch into a definition': REFUSED
+plant 'a patch into a definition without `:=`': REFUSED
+partner 'a patch into a proof': generation ACCEPTED, files then DIFFER
+plant 'a declared patch withdrawn': REFUSED
+plant 'the clone at another commit': REFUSED
+the scratch clone at its own commit, unplanted: accepted (as it must)
+plant 'an `#eval` in a copied file': REFUSED
+plant 'an `initialize` in a copied file': REFUSED
+plant '`unsafe` inside a proof of a copied file (the scan)': REFUSED
+plant '`IO.` inside a proof of a copied file (the scan)': REFUSED
+plant 'an instance that is in neither table': REFUSED
+plant 'two ported declarations of one name': REFUSED
+plant 'a selected declaration absent from the partial file': REFUSED
+plant 'a namespace the script does not map': REFUSED
+plant 'a patch into an attribute line above a keyword (the statement)': REFUSED
+plant 'an attribute line followed by no declaration': REFUSED
+plant 'a patch into an `omit … in` line (the statement)': REFUSED
+plant 'a range that ends inside a declaration': REFUSED
+plant 'a range that begins inside a declaration': REFUSED
+plant 'a range whose declarations are not RANGE_DECLS's': REFUSED
+plant 'a file in both SELECT and RANGES': REFUSED
+plant 'a NOLINT entry whose declaration is not ported': REFUSED
+plant 'a NOLINT entry for another linter': REFUSED
+plant 'a NOLINT entry withdrawn (the files then differ)': REFUSED
+plant 'the licence copy changed by one byte': REFUSED
+plant 'the licence copy absent': REFUSED
+plant 'a module generated with `import Mathlib` whole': REFUSED
+SELF-TEST OK: 29 plants refused and 1 partner accepted

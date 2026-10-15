@@ -1,0 +1,20 @@
+slot: admitted ij1: mem 4 GiB (hard cap), cpus 8,9
+data/fs131/ij1/work/Herglotz.lean:148:6: error: No applicable extensionality theorem found for type
+  ℕ
+
+Note: Extensionality theorems can be registered by marking them with the `[ext]` attribute
+data/fs131/ij1/work/Herglotz.lean:202:10: error: mod_cast has type
+  (wBox n).card * n = {a ∈ wBox n | a mm < n}.card * (n + 1)
+but is expected to have type
+  n * (wBox n).card = D.card * (n + 1)
+data/fs131/ij1/work/Herglotz.lean:181:16: warning: This simp argument is unused:
+  Pi.single_apply
+
+Hint: Omit it from the simp argument list.
+  simp [P̵i̵.̵s̵i̵n̵g̵l̵e̵_̵a̵p̵p̵l̵y̵,̵ ̵hj, haB j]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ij1/work/Herglotz.lean:213:8: warning: declaration uses `sorry`
+data/fs131/ij1/work/Herglotz.lean:221:8: warning: declaration uses `sorry`
+seconds=7
+exit=1

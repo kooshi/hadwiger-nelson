@@ -1,0 +1,4 @@
+slot: admitted ij2: mem 4 GiB (hard cap), cpus 0,5
+data/fs131/ij2/work/BT2.lean:14:8: warning: declaration uses `sorry`
+seconds=9
+exit=0

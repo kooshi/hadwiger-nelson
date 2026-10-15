@@ -1,0 +1,4 @@
+slot: admitted kn6t: mem 8 GiB (hard cap), cpus 2,3
+build/fs131-kn6/release-copies/HopfMaximal.lean:48:8: error(lean.unknownIdentifier): Unknown identifier `birkhoffSum_succ_apply'`
+seconds=4
+exit=1

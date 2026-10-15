@@ -1,0 +1,45 @@
+slot: waiting (ledger 20 + 10 > budget 22 GiB)
+slot: waiting (ledger 14 + 10 > budget 22 GiB)
+slot: admitted lch1: mem 10 GiB (hard cap), cpus 2,3,4,5
+==> build: this run's full output: build/gate/build/20261014T215514Z-816364.log
+==> up-to-date check: exit 3 after 3s (3 means something needs building) — walking the batches
+==> 275 batches of at most 8 modules, capped at 10G
+==> [1/275] 8 modules  16:55:17
+    rebuilt: Arith.CircleCos (18s)
+==> [2/275] 8 modules  16:55:37
+==> [3/275] 8 modules  16:55:38
+    rebuilt: Outside.OAI158PhaseEncoding (5.0s), Outside.OAI158Centers (13s), Outside.OAI158NumberFields (14s), Outside.OAI158Basic (14s), Outside.OAI158Amenability (14s), Outside.OAI158InvariantMean (18s)
+==> [4/275] 8 modules  16:55:58
+    rebuilt: Plane.DensityBound.BesselCheck (990ms), Plane.DensityBound.X23Check (951ms), Plane.DensityBound.Bessel (3.6s), Outside.OAI158SmallArcs (4.2s)
+==> [5/275] 8 modules  16:56:03
+    rebuilt: Rigidity.Solenoid (2.8s), Plane.OneClass.SectionDensity (3.5s), Rigidity.FiniteZhang (4.4s), Rigidity.TateArch (4.5s), Rigidity.TateLocal (6.6s)
+==> [6/275] 7 modules  16:56:11
+==> [7/275] 8 modules  16:56:12
+    rebuilt: Outside.OAI158Characters (6.7s), Outside.OAI158PhaseCollision (6.6s), Outside.OAI158RelativeCenters (9.7s)
+==> [8/275] 8 modules  16:56:23
+    rebuilt: Plane.DensityBound.Cells.Data (287ms), Plane.DensityBound.BesselDefect (6.1s), Outside.OAI158Selections (6.5s), Plane.DensityBound.Autocorr (6.8s)
+==> [9/275] 8 modules  16:56:31
+    rebuilt: Rigidity.SolenoidErgodic (1.6s), Plane.DensityBound.X23Data (66s)
+==> [10/275] 8 modules  16:57:38
+==> [11/275] 8 modules  16:57:39
+==> [12/275] 8 modules  16:57:40
+==> [13/275] 8 modules  16:57:41
+==> [14/275] 8 modules  16:57:41
+==> [15/275] 8 modules  16:57:42
+==> [16/275] 8 modules  16:57:43
+==> [17/275] 8 modules  16:57:44
+==> [18/275] 8 modules  16:57:45
+==> [19/275] 8 modules  16:57:46
+==> [20/275] 8 modules  16:57:47
+    rebuilt: Outside.OAI158Multipliers (14s), Outside.OAI158ConditionalSelection (16s), Plane.DensityBound.BesselCert (37s), Plane.DensityBound.Cells.Part00 (78s), Plane.DensityBound.Cells.Part02 (80s), Plane.DensityBound.Cells.Part01 (81s), Plane.DensityBound.Cells.Part03 (84s)
+==> [21/275] 8 modules  16:59:13
+Terminated                 systemd-run --user --scope -q -p "MemoryMax=${MEMMAX}" -p MemorySwapMax=0 -- lake build "${BATCH_TARGETS[@]}" > "${ATTEMPT}" 2>&1
+    !! batch failed with status 143. What it printed, before the retry:
+    !! retrying ONCE. If this line is common, the machine is unwell and the build is not the
+       thing to fix.
+Terminated                 systemd-run --user --scope -q -p "MemoryMax=${MEMMAX}" -p MemorySwapMax=0 -- lake build "${BATCH_TARGETS[@]}" > "${ATTEMPT}" 2>&1
+    BATCH FAILED. Once it is fixed, rerun ./scripts/build.sh — modules that already built are
+    skipped. Never a bare or named lake build (RUNNING.md § Building).
+==> build: FAIL — 21 of 275 batches, 32 module(s) rebuilt, 0 module(s) with warnings, 8m10s
+    full output: build/gate/build/20261014T215514Z-816364.log
+exit=1

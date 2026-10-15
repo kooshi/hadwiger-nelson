@@ -1,0 +1,426 @@
+slot: waiting (ledger 20 + 4 > budget 22 GiB)
+slot: admitted ikl1f: mem 4 GiB (hard cap), cpus 4,5
+data/fs131/ikl1/lean/CertLink.lean:110:0: error: `[NumberField F]` did not match any variables in the current scope
+data/fs131/ikl1/lean/CertLink.lean:185:62: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  NeZero q
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/ikl1/lean/CertLink.lean:185:55: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+P : StablePrime F
+h2 : 2 ∉ P.P
+q : ℕ
+hq : Nat.Prime q
+hQ : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P) = q ^ 2
+hmax : (P.P ^ 1).IsMaximal
+this✝¹ : Field (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := Ideal.Quotient.field (P.P ^ 1)
+this✝ : Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+this : Fintype (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := Fintype.ofFinite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+σ : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 →+* 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := Ideal.quotientMap (P.P ^ 1) (conjO F) ⋯
+hσdef : σ = Ideal.quotientMap (P.P ^ 1) (conjO F) ⋯
+hσmk : ∀ (x : 𝓞 ↥(fieldI F)), σ ((Ideal.Quotient.mk (P.P ^ 1)) x) = (Ideal.Quotient.mk (P.P ^ 1)) ((conjO F) x)
+hσ : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), σ (σ x) = x
+i : 𝓞 ↥(fieldI F)
+hi2 : i ^ 2 = -1
+hci : (conjO F) i = -i
+h2k : 2 ≠ 0
+ι : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := (Ideal.Quotient.mk (P.P ^ 1)) i
+hιdef : ι = (Ideal.Quotient.mk (P.P ^ 1)) i
+hι : ι ^ 2 = -1
+hσι : σ ι = -ι
+k₀ : Subfield (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := σ.eqLocusField (RingHom.id (𝓞 ↥(fieldI F) ⧸ P.P ^ 1))
+hcard0 : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) = Nat.card ↥k₀ ^ 2
+hk₀def : k₀ = σ.eqLocusField (RingHom.id (𝓞 ↥(fieldI F) ⧸ P.P ^ 1))
+hk₀ : Nat.card ↥k₀ = q
+u : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := 2⁻¹
+hudef : u = 2⁻¹
+hu : 2 * u = 1
+hσu : σ u = u
+ha : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), u * (x + σ x) ∈ k₀
+hb : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), -(u * ι * (x - σ x)) ∈ k₀
+hN0 : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), x * σ x ∈ k₀
+e : ↥k₀ ≃+* ZMod q
+A : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 →+ ZMod q := AddMonoidHom.mk' (fun x => e ⟨u * (x + σ x), ⋯⟩) ⋯
+B : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 →+ ZMod q := AddMonoidHom.mk' (fun x => e ⟨-(u * ι * (x - σ x)), ⋯⟩) ⋯
+hA : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), A x = e ⟨u * (x + σ x), ⋯⟩
+hB : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), B x = e ⟨-(u * ι * (x - σ x)), ⋯⟩
+y : ↥k₀
+⊢ NeZero q
+data/fs131/ikl1/lean/CertLink.lean:210:12: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Fintype (ZMod q × ZMod q)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/ikl1/lean/CertLink.lean:211:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  Fintype.card (?α × ?β)
+in the target expression
+  Fintype (ZMod q × ZMod q)
+
+case refine_1
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+P : StablePrime F
+h2 : 2 ∉ P.P
+q : ℕ
+hq : Nat.Prime q
+hQ : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P) = q ^ 2
+hmax : (P.P ^ 1).IsMaximal
+this✝¹ : Field (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := ⋯
+this✝ : Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+this : Fintype (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := ⋯
+σ : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 →+* 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := ⋯
+hσdef : σ = Ideal.quotientMap (P.P ^ 1) (conjO F) ⋯
+hσmk : ∀ (x : 𝓞 ↥(fieldI F)), σ ((Ideal.Quotient.mk (P.P ^ 1)) x) = (Ideal.Quotient.mk (P.P ^ 1)) ((conjO F) x)
+hσ : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), σ (σ x) = x
+i : 𝓞 ↥(fieldI F)
+hi2 : i ^ 2 = -1
+hci : (conjO F) i = -i
+h2k : 2 ≠ 0
+ι : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := ⋯
+hιdef : ι = (Ideal.Quotient.mk (P.P ^ 1)) i
+hι : ι ^ 2 = -1
+hσι : σ ι = -ι
+k₀ : Subfield (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := ⋯
+hcard0 : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) = Nat.card ↥k₀ ^ 2
+hk₀def : k₀ = σ.eqLocusField (RingHom.id (𝓞 ↥(fieldI F) ⧸ P.P ^ 1))
+hk₀ : Nat.card ↥k₀ = q
+u : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := ⋯
+hudef : u = 2⁻¹
+hu : 2 * u = 1
+hσu : σ u = u
+ha : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), u * (x + σ x) ∈ k₀
+hb : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), -(u * ι * (x - σ x)) ∈ k₀
+hN0 : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), x * σ x ∈ k₀
+e : ↥k₀ ≃+* ZMod q
+A : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 →+ ZMod q := ⋯
+B : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 →+ ZMod q := ⋯
+hA : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), A x = e ⟨u * (x + σ x), ⋯⟩
+hB : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), B x = e ⟨-(u * ι * (x - σ x)), ⋯⟩
+hcast : ∀ (y : ↥k₀), ↑y = ↑(e y).val
+hdec : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), x = ↑(A x).val + ↑(B x).val * ι
+hnorm : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), x * σ x = 1 ↔ A x ^ 2 + B x ^ 2 = 1
+hinj : Function.Injective ⇑(A.prod B)
+⊢ Fintype (ZMod q × ZMod q)
+data/fs131/ikl1/lean/CertLink.lean:353:8: error: unexpected token 'Σ'; expected ':=' or '|'
+data/fs131/ikl1/lean/CertLink.lean:250:17: error: unsolved goals
+F : Subfield ℝ
+inst✝¹ : NumberField ↥F
+P : StablePrime F
+h2 : 2 ∉ P.P
+q : ℕ
+inst✝ : NeZero q
+hq : Nat.Prime q
+hQ : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P) = q ^ 2
+hH : HenselCount P q
+hL : NewCharBound P q
+U : ℝ
+hU : FibreShareBound q U
+n : ℕ
+hm : 1 ≤ n + 1
+s : Finset (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))
+hs : (levelTarget P (n + 1)).IsIndepSet ↑s
+this✝² : Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))
+this✝¹ : Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+this✝ : Fintype (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1)) := Fintype.ofFinite (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))
+this : Fintype (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := Fintype.ofFinite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+hfin : (normOneSet P (n + 1)).Finite
+hfin1 : (normOneSet P 1).Finite
+π : 𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1) →+ 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := (toLevelOne P n).toAddMonoidHom
+hπdef : π = (toLevelOne P n).toAddMonoidHom
+hπ : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1)), π x = (toLevelOne P n) x
+hπs : Function.Surjective ⇑π
+hI : ∀ x ∈ s, ∀ y ∈ s, x - y ∉ hfin.toFinset
+t : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1
+ht : t ∈ hfin1.toFinset
+x✝ : 𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1)
+a✝ : x✝ ∈ hfin.toFinset
+⊢ π x✝ = (toLevelOne P n) x✝
+data/fs131/ikl1/lean/CertLink.lean:270:26: error(lean.unknownIdentifier): Unknown identifier `univ.filter`
+data/fs131/ikl1/lean/CertLink.lean:278:16: error(lean.unknownIdentifier): Unknown identifier `univ.filter`
+data/fs131/ikl1/lean/CertLink.lean:279:13: error(nested.lean.propRecLargeElim): Tactic `cases` failed with a nested error:
+Tactic `induction` failed: recursor `Exists.casesOn` can only eliminate into `Prop`
+
+F : Subfield ℝ
+inst✝¹ : NumberField ↥F
+P : StablePrime F
+h2 : 2 ∉ P.P
+q : ℕ
+inst✝ : NeZero q
+hq : Nat.Prime q
+hQ : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P) = q ^ 2
+hH : HenselCount P q
+hL : NewCharBound P q
+U : ℝ
+hU : FibreShareBound q U
+n : ℕ
+hm : 1 ≤ n + 1
+s✝ : Finset (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))
+hs : (levelTarget P (n + 1)).IsIndepSet ↑s✝
+this✝⁶ : Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))
+this✝⁵ : Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+this✝⁴ : Fintype (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1)) := Fintype.ofFinite (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))
+this✝³ : Fintype (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := Fintype.ofFinite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+hfin : (normOneSet P (n + 1)).Finite
+hfin1 : (normOneSet P 1).Finite
+π : 𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1) →+ 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := (toLevelOne P n).toAddMonoidHom
+hπdef : π = (toLevelOne P n).toAddMonoidHom
+hπ : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1)), π x = (toLevelOne P n) x
+hπs : Function.Surjective ⇑π
+hI : ∀ x ∈ s✝, ∀ y ∈ s✝, x - y ∉ hfin.toFinset
+hL2 :
+  ↑(q ^ n) * ↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)) *
+      ∑ u, ∑ t ∈ hfin1.toFinset, ↑(FibreShare.fibreCount π s✝ u) * ↑(FibreShare.fibreCount π s✝ (u + t)) ≤
+    2 * ↑(q ^ n) *
+      (↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))) * ↑s✝.card -
+        ↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)) * ∑ u, ↑(FibreShare.fibreCount π s✝ u) ^ 2)
+G : Type := 𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1)
+s : Finset G
+this✝² : Finite G
+this✝¹ : Fintype G
+hGdef : G = (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))
+H : Type := 𝓞 ↥(fieldI F) ⧸ P.P ^ 1
+this✝ : Finite H
+this : Fintype H
+hHdef : H = (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+n' : H → ℝ := fun u => ↑(FibreShare.fibreCount π s u)
+hn' : n' = fun u => ↑(FibreShare.fibreCount π s u)
+hHq : ↑(Fintype.card H) = ↑q ^ 2
+hHpos : 0 < ↑(Fintype.card H)
+K : ℝ := ↑(Fintype.card G) / ↑(Fintype.card H)
+hKdef : K = ↑(Fintype.card G) / ↑(Fintype.card H)
+hGK : ↑(Fintype.card G) = K * ↑(Fintype.card H)
+hfibK : ∀ (u : H), sorry = K
+u : H
+h : sorry = K
+x✝ : ∃ a, π a = u
+⊢ sorry
+data/fs131/ikl1/lean/CertLink.lean:286:19: error(lean.unknownIdentifier): Unknown identifier `card_le_card`
+data/fs131/ikl1/lean/CertLink.lean:289:8: error(lean.unknownIdentifier): Unknown identifier `card_eq_sum_card_fiberwise`
+data/fs131/ikl1/lean/CertLink.lean:302:36: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∑ x ∈ ?m.1103, ?f x - ∑ x ∈ ?m.1103, ?g x
+in the target expression
+  ∑ x, (↑(q ^ n) * K * ↑(Fintype.card H) * n' x * 2 - ↑(q ^ n) * ↑(Fintype.card H) * n' x ^ 2 * 2) =
+    ∑ x, (↑(q ^ n) * K * ↑(Fintype.card H) * n' x * 2 - ↑(q ^ n) * ↑(Fintype.card H) * n' x ^ 2 * 2)
+
+F : Subfield ℝ
+inst✝¹ : NumberField ↥F
+P : StablePrime F
+h2 : 2 ∉ P.P
+q : ℕ
+inst✝ : NeZero q
+hq : Nat.Prime q
+hQ : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P) = q ^ 2
+hH : HenselCount P q
+hL : NewCharBound P q
+U : ℝ
+hU : FibreShareBound q U
+n : ℕ
+hm : 1 ≤ n + 1
+s✝ : Finset (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))
+hs : (levelTarget P (n + 1)).IsIndepSet ↑s✝
+this✝⁶ : Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))
+this✝⁵ : Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+this✝⁴ : Fintype (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1)) := Fintype.ofFinite (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))
+this✝³ : Fintype (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := Fintype.ofFinite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+hfin : (normOneSet P (n + 1)).Finite
+hfin1 : (normOneSet P 1).Finite
+π : 𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1) →+ 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := (toLevelOne P n).toAddMonoidHom
+hπdef : π = (toLevelOne P n).toAddMonoidHom
+hπ : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1)), π x = (toLevelOne P n) x
+hπs : Function.Surjective ⇑π
+hI : ∀ x ∈ s✝, ∀ y ∈ s✝, x - y ∉ hfin.toFinset
+hL2 :
+  ↑(q ^ n) * ↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)) *
+      ∑ u, ∑ t ∈ hfin1.toFinset, ↑(FibreShare.fibreCount π s✝ u) * ↑(FibreShare.fibreCount π s✝ (u + t)) ≤
+    2 * ↑(q ^ n) *
+      (↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))) * ↑s✝.card -
+        ↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)) * ∑ u, ↑(FibreShare.fibreCount π s✝ u) ^ 2)
+G : Type := 𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1)
+s : Finset G
+this✝² : Finite G
+this✝¹ : Fintype G
+hGdef : G = (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))
+H : Type := 𝓞 ↥(fieldI F) ⧸ P.P ^ 1
+this✝ : Finite H
+this : Fintype H
+hHdef : H = (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+n' : H → ℝ := fun u => ↑(FibreShare.fibreCount π s u)
+hn' : n' = fun u => ↑(FibreShare.fibreCount π s u)
+hHq : ↑(Fintype.card H) = ↑q ^ 2
+hHpos : 0 < ↑(Fintype.card H)
+K : ℝ := ↑(Fintype.card G) / ↑(Fintype.card H)
+hKdef : K = ↑(Fintype.card G) / ↑(Fintype.card H)
+hGK : ↑(Fintype.card G) = K * ↑(Fintype.card H)
+hfibK : ∀ (u : H), sorry = K
+hKpos : 0 < K
+hnK : ∀ (u : H), n' u ≤ K
+hn0 : ∀ (u : H), 0 ≤ n' u
+hsum : ↑s.card = ∑ u, n' u
+hc : 0 < ↑(q ^ n) * ↑(Fintype.card H)
+⊢ ∑ x, (↑(q ^ n) * K * ↑(Fintype.card H) * n' x * 2 - ↑(q ^ n) * ↑(Fintype.card H) * n' x ^ 2 * 2) =
+    ∑ x, (↑(q ^ n) * K * ↑(Fintype.card H) * n' x * 2 - ↑(q ^ n) * ↑(Fintype.card H) * n' x ^ 2 * 2)
+data/fs131/ikl1/lean/CertLink.lean:306:94: error: Type mismatch
+  hL2
+has type
+  ↑(q ^ n) * ↑(@Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) this✝³) *
+      ∑ u, ∑ t ∈ hfin1.toFinset, ↑(FibreShare.fibreCount π s✝ u) * ↑(FibreShare.fibreCount π s✝ (u + t)) ≤
+    2 * ↑(q ^ n) *
+      (↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))) * ↑s✝.card -
+        ↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)) * ∑ u, ↑(FibreShare.fibreCount π s✝ u) ^ 2)
+but is expected to have type
+  ↑(q ^ n) * ↑(@Fintype.card H this) * ∑ u, ∑ t ∈ hfin1.toFinset, n' u * n' (u + t) ≤
+    2 * ↑(q ^ n) * (↑(Fintype.card G) * ↑s.card - ↑(Fintype.card H) * ∑ u, n' u ^ 2)
+data/fs131/ikl1/lean/CertLink.lean:315:47: error: Application type mismatch: The argument
+  q
+has type
+  ℕ
+of sort `Type` but is expected to have type
+  Type ?u.661
+of sort `Type (?u.661 + 1)` in the application
+  @unitCircle q
+data/fs131/ikl1/lean/CertLink.lean:320:10: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?m.1344 ∈ ↑?m.1345
+in the target expression
+  t ∈ hfin1.toFinset
+
+case refine_1
+F : Subfield ℝ
+inst✝¹ : NumberField ↥F
+P : StablePrime F
+h2 : 2 ∉ P.P
+q : ℕ
+inst✝ : NeZero q
+hq : Nat.Prime q
+hQ : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P) = q ^ 2
+hH : HenselCount P q
+hL : NewCharBound P q
+U : ℝ
+hU : FibreShareBound q U
+n : ℕ
+hm : 1 ≤ n + 1
+s✝ : Finset (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))
+hs : (levelTarget P (n + 1)).IsIndepSet ↑s✝
+this✝⁶ : Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))
+this✝⁵ : Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+this✝⁴ : Fintype (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1)) := Fintype.ofFinite (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))
+this✝³ : Fintype (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := Fintype.ofFinite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+hfin : (normOneSet P (n + 1)).Finite
+hfin1 : (normOneSet P 1).Finite
+π : 𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1) →+ 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := (toLevelOne P n).toAddMonoidHom
+hπdef : π = (toLevelOne P n).toAddMonoidHom
+hπ : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1)), π x = (toLevelOne P n) x
+hπs : Function.Surjective ⇑π
+hI : ∀ x ∈ s✝, ∀ y ∈ s✝, x - y ∉ hfin.toFinset
+hL2 :
+  ↑(q ^ n) * ↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)) *
+      ∑ u, ∑ t ∈ hfin1.toFinset, ↑(FibreShare.fibreCount π s✝ u) * ↑(FibreShare.fibreCount π s✝ (u + t)) ≤
+    2 * ↑(q ^ n) *
+      (↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))) * ↑s✝.card -
+        ↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)) * ∑ u, ↑(FibreShare.fibreCount π s✝ u) ^ 2)
+G : Type := 𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1)
+s : Finset G
+this✝² : Finite G
+this✝¹ : Fintype G
+hGdef : G = (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))
+H : Type := 𝓞 ↥(fieldI F) ⧸ P.P ^ 1
+this✝ : Finite H
+this : Fintype H
+hHdef : H = (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+n' : H → ℝ := fun u => ↑(FibreShare.fibreCount π s u)
+hn' : n' = fun u => ↑(FibreShare.fibreCount π s u)
+hHq : ↑(Fintype.card H) = ↑q ^ 2
+hHpos : 0 < ↑(Fintype.card H)
+K : ℝ := ↑(Fintype.card G) / ↑(Fintype.card H)
+hKdef : K = ↑(Fintype.card G) / ↑(Fintype.card H)
+hGK : ↑(Fintype.card G) = K * ↑(Fintype.card H)
+hfibK : ∀ (u : H), sorry = K
+hKpos : 0 < K
+hnK : ∀ (u : H), n' u ≤ K
+hn0 : ∀ (u : H), 0 ≤ n' u
+hsum : ↑s.card = ∑ u, n' u
+hX : ∑ u, ∑ t ∈ hfin1.toFinset, n' u * n' (u + t) ≤ 2 * ∑ u, n' u * (K - n' u)
+e : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 ≃+ ZMod q × ZMod q
+he : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), x ∈ normOneSet P 1 ↔ (e x).1 ^ 2 + (e x).2 ^ 2 = 1
+φ : V q → ℝ := fun v => n' (e.symm v) / K
+hφ : φ = fun v => n' (e.symm v) / K
+hφe : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), φ (e x) = n' x / K
+htr : ∀ (g : V q → ℝ), ∑ v, g v = ∑ x, g (e x)
+g : V q → ℝ
+t : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1
+ht : t ∈ hfin1.toFinset
+⊢ e t ∈ sorry
+data/fs131/ikl1/lean/CertLink.lean:345:8: error: No goals to be solved
+data/fs131/ikl1/lean/CertLink.lean:348:8: error: Type mismatch
+  Finset.sum_congr rfl fun t x => ?m.1582
+has type
+  Finset.sum ?m.1579 ?m.1576 = Finset.sum ?m.1579 ?m.1577
+but is expected to have type
+  ∑ i ∈ FibreCertSound.unitCircle q, K ^ 2 * (n' u / K * φ (e u + i)) = ∑ t ∈ hfin1.toFinset, n' u * n' (u + t)
+data/fs131/ikl1/lean/CertLink.lean:353:7: error: Missing cases:
+data/fs131/ikl1/lean/CertLink.lean:225:68: error: unsolved goals
+F : Subfield ℝ
+inst✝¹ : NumberField ↥F
+P : StablePrime F
+h2 : 2 ∉ P.P
+q : ℕ
+inst✝ : NeZero q
+hq : Nat.Prime q
+hQ : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P) = q ^ 2
+hH : HenselCount P q
+hL : NewCharBound P q
+U : ℝ
+hU : FibreShareBound q U
+n : ℕ
+hm : 1 ≤ n + 1
+s✝ : Finset (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))
+hs : (levelTarget P (n + 1)).IsIndepSet ↑s✝
+this✝⁶ : Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))
+this✝⁵ : Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+this✝⁴ : Fintype (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1)) := Fintype.ofFinite (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))
+this✝³ : Fintype (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := Fintype.ofFinite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+hfin : (normOneSet P (n + 1)).Finite
+hfin1 : (normOneSet P 1).Finite
+π : 𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1) →+ 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := (toLevelOne P n).toAddMonoidHom
+hπdef : π = (toLevelOne P n).toAddMonoidHom
+hπ : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1)), π x = (toLevelOne P n) x
+hπs : Function.Surjective ⇑π
+hI : ∀ x ∈ s✝, ∀ y ∈ s✝, x - y ∉ hfin.toFinset
+hL2 :
+  ↑(q ^ n) * ↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)) *
+      ∑ u, ∑ t ∈ hfin1.toFinset, ↑(FibreShare.fibreCount π s✝ u) * ↑(FibreShare.fibreCount π s✝ (u + t)) ≤
+    2 * ↑(q ^ n) *
+      (↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))) * ↑s✝.card -
+        ↑(Fintype.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)) * ∑ u, ↑(FibreShare.fibreCount π s✝ u) ^ 2)
+G : Type := 𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1)
+s : Finset G
+this✝² : Finite G
+this✝¹ : Fintype G
+hGdef : G = (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1))
+H : Type := 𝓞 ↥(fieldI F) ⧸ P.P ^ 1
+this✝ : Finite H
+this : Fintype H
+hHdef : H = (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+n' : H → ℝ := fun u => ↑(FibreShare.fibreCount π s u)
+hn' : n' = fun u => ↑(FibreShare.fibreCount π s u)
+hHq : ↑(Fintype.card H) = ↑q ^ 2
+hHpos : 0 < ↑(Fintype.card H)
+K : ℝ := ↑(Fintype.card G) / ↑(Fintype.card H)
+hKdef : K = ↑(Fintype.card G) / ↑(Fintype.card H)
+hGK : ↑(Fintype.card G) = K * ↑(Fintype.card H)
+hfibK : ∀ (u : H), sorry = K
+hKpos : 0 < K
+hnK : ∀ (u : H), n' u ≤ K
+hn0 : ∀ (u : H), 0 ≤ n' u
+hsum : ↑s.card = ∑ u, n' u
+hX : ∑ u, ∑ t ∈ hfin1.toFinset, n' u * n' (u + t) ≤ 2 * ∑ u, n' u * (K - n' u)
+e : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 ≃+ ZMod q × ZMod q
+he : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), x ∈ normOneSet P 1 ↔ (e x).1 ^ 2 + (e x).2 ^ 2 = 1
+φ : V q → ℝ := fun v => n' (e.symm v) / K
+hφ : φ = fun v => n' (e.symm v) / K
+hφe : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), φ (e x) = n' x / K
+htr : ∀ (g : V q → ℝ), ∑ v, g v = ∑ x, g (e x)
+hcirc : ∀ (g : V q → ℝ), ∑ w ∈ sorry, g w = ∑ t ∈ hfin1.toFinset, g (e t)
+h0 : ∀ (v : V q), 0 ≤ φ v
+h1 : ∀ (v : V q), φ v ≤ 1
+hqf : 0 ≤ qform q φ
+⊢ ↑s✝.card ≤ U / ↑q ^ 2 * ↑(Nat.card (𝓞 ↥(fieldI F) ⧸ P.P ^ (n + 1)))

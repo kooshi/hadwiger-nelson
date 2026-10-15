@@ -1,0 +1,17 @@
+compared: 141 named constants of the first dump (kinds, types, modules), 40 data definitions' values, 17 example heads of the base files
+internal (not compared): 35 before, 37 after
+new public constants in the second dump: 0 (allow-list: 0)
+new private constants in the second dump: 11
+  NEW PRIVATE THM HadwigerNelson.Rigidity.coe_mem_integers_iff  (Proofs.HadwigerNelson.Rigidity.TateKernel)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.coe_mem_stableIntegers  (Proofs.HadwigerNelson.Rigidity.TateKernel)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.exists_int_of_exp_eq_one  (Proofs.HadwigerNelson.Rigidity.TateKernel)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.mem_stableIntegers_of_away  (Proofs.HadwigerNelson.Rigidity.TateKernel)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.snd_mul_apply  (Proofs.HadwigerNelson.Rigidity.TateKernel)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.snd_sub_apply  (Proofs.HadwigerNelson.Rigidity.TateKernel)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.sub_toSAdele_mem_oAnn  (Proofs.HadwigerNelson.Rigidity.TateKernel)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.toSAdele_injective  (Proofs.HadwigerNelson.Rigidity.TateKernel)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.toSAdele_mul_mem_oAnn  (Proofs.HadwigerNelson.Rigidity.TateKernel)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.toSAdele_snd_apply  (Proofs.HadwigerNelson.Rigidity.TateKernel)
+  NEW PRIVATE THM HadwigerNelson.Rigidity.valuation_coe_le_one  (Proofs.HadwigerNelson.Rigidity.TateKernel)
+examples in the working files that the base does not hold: 0
+PASS: no statement and no definition changed

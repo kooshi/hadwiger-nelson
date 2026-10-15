@@ -1,0 +1,48 @@
+slot: admitted ij2: mem 4 GiB (hard cap), cpus 0,1
+archHom : (F : Subfield ℝ) → [NumberField ↥F] → ↥(unitRing F) →+ mixedEmbedding.mixedSpace ↥(fieldI F)
+archTop_eq : ∀ (F : Subfield ℝ) [inst : NumberField ↥F],
+  archTop F = TopologicalSpace.induced (⇑(archHom F)) inferInstance
+eventually_archTop : ∀ (F : Subfield ℝ) [inst : NumberField ↥F] {p : ↥(unitRing F) → Prop},
+  (∀ᶠ (r : ↥(unitRing F)) in nhds 0, p r) ↔ ∃ δ > 0, ∀ (r : ↥(unitRing F)), ‖(archHom F) r‖ < δ → p r
+norm_archHom_nsmul : ∀ (F : Subfield ℝ) [inst : NumberField ↥F] (n : ℕ) (x : ↥(unitRing F)),
+  ‖(archHom F) (n • x)‖ = ↑n * ‖(archHom F) x‖
+fivePow : (F : Subfield ℝ) → ℕ → ↥(unitRing F) → ↥(unitRing F)
+nsmul_fivePow : ∀ (F : Subfield ℝ) (k : ℕ) (r : ↥(unitRing F)), 5 ^ k • fivePow F k r = r
+exists_nsmul_mem_of_mem_nhds_profTop : ∀ (F : Subfield ℝ) {A : Set ↥(unitRing F)},
+  A ∈ nhds 0 → ∃ M, M ≠ 0 ∧ ∀ (y : ↥(unitRing F)), M • y ∈ A
+mem_nhds_profTop : ∀ (F : Subfield ℝ) (N : ℕ) (y : ↥(unitRing F)), {x | ∃ z, y = x + (N + 1) • z} ∈ nhds y
+data/fs131/ij2/probes/Priv.lean:20:8: error(lean.unknownIdentifier): Unknown constant `AddChar.sum_apply_eq_ite`
+@AddChar.norm_apply : ∀ {α : Type u_1} [inst : NormedRing α] [NormMulClass α] [NormOneClass α] {G : Type u_2}
+  [inst_3 : AddLeftCancelMonoid G] [Finite G] (ψ : AddChar G α) (x : G), ‖ψ x‖ = 1
+data/fs131/ij2/probes/Priv.lean:22:8: error(lean.unknownIdentifier): Unknown constant `AddChar.card_eq`
+@measure_eq_of_fourier : ∀ {G : Type u_1} [inst : AddCommGroup G] [Countable G] {σ σ' : Measure (AddChar G Circle)}
+  [IsFiniteMeasure σ] [IsFiniteMeasure σ'],
+  (∀ (r : G), ∫ (χ : AddChar G Circle), ↑(χ r) ∂σ = ∫ (χ : AddChar G Circle), ↑(χ r) ∂σ') → σ = σ'
+@measurable_evalChar : ∀ {G : Type u_1} [inst : AddCommGroup G] (y : G), Measurable fun χ => ↑(χ y)
+@nhds_inf : ∀ {α : Type u_1} {t₁ t₂ : TopologicalSpace α} {a : α}, nhds a = nhds a ⊓ nhds a
+@Ultrafilter.of_le : ∀ {α : Type u_1} (f : Filter α) [inst : f.NeBot], ↑(Ultrafilter.of f) ≤ f
+@summable_of_sum_le : ∀ {ι : Type u_1} {f : ι → ℝ} {c : ℝ}, 0 ≤ f → (∀ (u : Finset ι), ∑ x ∈ u, f x ≤ c) → Summable f
+@hasSum_iff_tendsto_nat_of_nonneg : ∀ {f : ℕ → ℝ},
+  (∀ (i : ℕ), 0 ≤ f i) →
+    ∀ (r : ℝ), HasSum f r ↔ Filter.Tendsto (fun n => ∑ i ∈ Finset.range n, f i) Filter.atTop (nhds r)
+@Finset.sum_mul_sum : ∀ {ι : Type u_1} {κ : Type u_2} {R : Type u_3} [inst : NonUnitalNonAssocSemiring R] (s : Finset ι)
+  (t : Finset κ) (f : ι → R) (g : κ → R), (∑ i ∈ s, f i) * ∑ j ∈ t, g j = ∑ i ∈ s, ∑ j ∈ t, f i * g j
+Complex.mul_conj : ∀ (z : ℂ), z * (starRingEnd ℂ) z = ↑(Complex.normSq z)
+Complex.normSq_eq_norm_sq : ∀ (z : ℂ), Complex.normSq z = ‖z‖ ^ 2
+data/fs131/ij2/probes/Priv.lean:32:8: error(lean.unknownIdentifier): Unknown constant `Finset.inner_mul_le_norm_mul_norm`
+data/fs131/ij2/probes/Priv.lean:33:8: error(lean.unknownIdentifier): Unknown identifier `sq_sum_le_card_mul_sum_sq`
+@Fintype.exists_ne_map_eq_of_card_lt : ∀ {α : Type u_1} {β : Type u_2} [inst : Fintype α] [inst_1 : Fintype β]
+  (f : α → β), Fintype.card β < Fintype.card α → ∃ x y, x ≠ y ∧ f x = f y
+@Finite.exists_ne_map_eq_of_infinite : ∀ {α : Sort u_1} {β : Sort u_2} [Infinite α] [Finite β] (f : α → β),
+  ∃ x y, x ≠ y ∧ f x = f y
+@QuotientAddGroup.eq_zero_iff : ∀ {G : Type u_1} [inst : AddGroup G] {N : AddSubgroup G} [inst_1 : N.Normal] (x : G),
+  ↑x = 0 ↔ x ∈ N
+@AddChar.map_zero_eq_one : ∀ {A : Type u_1} {M : Type u_2} [inst : AddMonoid A] [inst_1 : Monoid M] (ψ : AddChar A M),
+  ψ 0 = 1
+data/fs131/ij2/probes/Priv.lean:38:72: warning: Variable name `M` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+seconds=5
+exit=1

@@ -1,0 +1,28 @@
+slot: admitted icl2: mem 3 GiB (hard cap), cpus 4
+@Finite.induction_empty_option : ∀ {P : Type u_1 → Prop},
+  (∀ {α β : Type u_1} (a : α ≃ β), P α → P β) →
+    P PEmpty.{u_1 + 1} → (∀ {α : Type u_1} [Fintype α], P α → P (Option α)) → ∀ (α : Type u_1) [Finite α], P α
+@Equiv.piOptionEquivProd : {α : Type u_2} →
+  {β : Option α → Type u_1} → ((a : Option α) → β a) ≃ β none × ((a : α) → β (some a))
+data/fs131/icl2/probes/NamesZ.lean:10:8: error(lean.unknownIdentifier): Unknown constant `AddEquiv.piOptionEquivProd`
+@AddSubgroup.card_mul_index : ∀ {G : Type u_1} [inst : AddGroup G] (H : AddSubgroup G),
+  Nat.card ↥H * H.index = Nat.card G
+@AddSubgroup.index : {G : Type u_1} → [inst : AddGroup G] → AddSubgroup G → ℕ
+@QuotientAddGroup.out_eq' : ∀ {α : Type u_1} [inst : AddGroup α] {s : AddSubgroup α} (a : α ⧸ s), ↑(Quotient.out a) = a
+@QuotientAddGroup.mk_out_eq_mul : ∀ {α : Type u_1} [inst : AddGroup α] (s : AddSubgroup α) (g : α),
+  ∃ h, Quotient.out ↑g = g + ↑h
+@QuotientAddGroup.eq : ∀ {α : Type u_1} [inst : AddGroup α] {s : AddSubgroup α} {a b : α}, ↑a = ↑b ↔ -a + b ∈ s
+Nat.card_prod : ∀ (α : Type u_1) (β : Type u_2), Nat.card (α × β) = Nat.card α * Nat.card β
+data/fs131/icl2/probes/NamesZ.lean:17:8: error(lean.unknownIdentifier): Unknown constant `AddEquiv.piCongrLeft`
+@Finset.card_map : ∀ {α : Type u_1} {β : Type u_2} {s : Finset α} (f : α ↪ β), (Finset.map f s).card = s.card
+@Finset.card_image_of_injective : ∀ {α : Type u_1} {β : Type u_2} {f : α → β} [inst : DecidableEq β] (s : Finset α),
+  Function.Injective f → (Finset.image f s).card = s.card
+data/fs131/icl2/probes/NamesZ.lean:20:8: error(lean.unknownIdentifier): Unknown constant `AddSubgroup.index_pos`
+@AddSubgroup.card_eq_card_quotient_mul_card_addSubgroup : ∀ {α : Type u_1} [inst : AddGroup α] (s : AddSubgroup α),
+  Nat.card α = Nat.card (α ⧸ s) * Nat.card ↥s
+@Nat.card_eq_fintype_card : ∀ {α : Type u_1} [inst : Fintype α], Nat.card α = Fintype.card α
+@Finset.sum_comm : ∀ {α : Type u_1} {β : Type u_2} {γ : Type u_3} [inst : AddCommMonoid β] {s : Finset γ} {t : Finset α}
+  {f : γ → α → β}, ∑ x ∈ s, ∑ y ∈ t, f x y = ∑ y ∈ t, ∑ x ∈ s, f x y
+@Finset.card_eq_sum_ones : ∀ {ι : Type u_1} (s : Finset ι), s.card = ∑ x ∈ s, 1
+@Fintype.sum_prod_type : ∀ {γ : Type u_1} {α₁ : Type u_2} {α₂ : Type u_3} [inst : Fintype α₁] [inst_1 : Fintype α₂]
+  [inst_2 : AddCommMonoid γ] (f : α₁ × α₂ → γ), ∑ x, f x = ∑ x, ∑ y, f (x, y)

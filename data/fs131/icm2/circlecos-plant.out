@@ -1,0 +1,3 @@
+Q=11 circle=12 least=-4.795754778 at (alpha,beta)=(2,2) normalised=-0.399646232 margin=-6.631e-02 -> FAILS
+Q=19 circle=20 least=-7.609728632 at (alpha,beta)=(4,5) normalised=-0.380486432 margin=-4.715e-02 -> FAILS
+plant: both FAIL, as they must

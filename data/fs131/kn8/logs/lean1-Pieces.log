@@ -1,0 +1,17 @@
+slot: admitted kn8s: mem 4 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/Pieces.lean:88:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Pieces.lean:101:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Pieces.lean:129:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Pieces.lean:137:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Pieces.lean:141:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Pieces.lean:153:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Pieces.lean:161:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Pieces.lean:167:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Pieces.lean:173:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Pieces.lean:180:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Pieces.lean:187:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Pieces.lean:193:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Pieces.lean:201:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Pieces.lean:210:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/Pieces.lean:220:8: warning: declaration uses `sorry`
+exit=0

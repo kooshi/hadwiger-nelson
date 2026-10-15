@@ -1,0 +1,5 @@
+slot: admitted icm4: mem 4 GiB (hard cap), cpus 0,1
+'HadwigerNelson.BinaryField.colorable_four_of_check' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.BinaryField.charSum_ge_of_classes' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.BinaryField.pass_class' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.BinaryField.isPrimitiveCode_of_check' depends on axioms: [propext, Quot.sound]

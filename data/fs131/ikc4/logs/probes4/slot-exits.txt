@@ -1,0 +1,4 @@
+Chunk0F slot-exit 0 mem 12
+Chunk0B1 slot-exit 0 mem 12
+Chunk0B4 slot-exit 0 mem 12
+DONE

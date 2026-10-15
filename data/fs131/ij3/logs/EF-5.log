@@ -1,0 +1,5 @@
+slot: admitted ij3f: mem 5 GiB (hard cap), cpus 2,3
+data/fs131/ij3/work/EntropyFibres.lean:323:8: warning: declaration uses `sorry`
+data/fs131/ij3/work/EntropyFibres.lean:339:8: warning: declaration uses `sorry`
+seconds=3
+exit=0

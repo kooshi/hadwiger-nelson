@@ -1,0 +1,11 @@
+slot: admitted icl2: mem 4 GiB (hard cap), cpus 0,1
+data/fs131/icl2/work/FiniteZhang.lean:272:56: error: Function expected at
+  hd
+but this term has type
+  d ∈ ?m.118
+
+Note: Expected a function because this term is being applied to the argument
+  (e a)
+data/fs131/icl2/work/FiniteZhang.lean:273:4: error: No goals to be solved
+Command exited with non-zero status 1
+wall=3.24s maxrss=1994600kB

@@ -1,0 +1,9 @@
+slot: admitted kn6s: mem 4 GiB (hard cap), cpus 4,5
+data/fs131/kn6/scratch/EntropyInf.lean:98:8: warning: declaration uses `sorry`
+data/fs131/kn6/scratch/EntropyInf.lean:104:8: warning: declaration uses `sorry`
+data/fs131/kn6/scratch/EntropyInf.lean:110:8: warning: declaration uses `sorry`
+data/fs131/kn6/scratch/EntropyInf.lean:123:8: error(lean.unknownIdentifier): Unknown identifier `Subadditive.tendsto_lim`
+data/fs131/kn6/scratch/EntropyInf.lean:124:8: error(lean.unknownIdentifier): Unknown identifier `Subadditive.lim`
+@ENNReal.iSup_eq_zero : ∀ {ι : Sort u_1} {f : ι → ENNReal}, ⨆ i, f i = 0 ↔ ∀ (i : ι), f i = 0
+@Filter.iInf_le_liminf : ∀ {α : Type u_1} {β : Type u_2} [inst : CompleteLattice α] {f : Filter β} {u : β → α},
+  ⨅ n, u n ≤ Filter.liminf u f

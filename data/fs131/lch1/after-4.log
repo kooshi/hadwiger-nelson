@@ -1,0 +1,5 @@
+slot: admitted lch1: mem 8 GiB (hard cap), cpus 0,1
+wrote /home/kooshi/source/lean-dir/.claude/worktrees/fs131-wq1/data/fs131/lch1/statements-after-4.txt: modules=2154 constants=35787
+dump exit=0
+readd exit=0
+axioms exit=0

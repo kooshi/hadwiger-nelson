@@ -1,0 +1,54 @@
+slot: admitted itt1: mem 4 GiB (hard cap), cpus 5,6
+data/fs131/itt1/work/TateLocal.lean:122:26: error(lean.unknownIdentifier): Unknown identifier `exists_nat_mul_integral_of_trace_int`
+data/fs131/itt1/work/TateLocal.lean:122:9: error: Tactic `rcases` failed: `x✝ : ?m.32` is not an inductive datatype
+data/fs131/itt1/work/TateLocal.lean:175:46: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (Algebra.trace ℚ K) (y * ↑s)
+in the target expression
+  (algebraMap ℤ ℚ) n = (Algebra.trace ℚ K) (y * (LinearMap.toSpanSingleton (𝓞 K) K 1) s)
+
+K : Type u_1
+inst✝¹ : Field K
+inst✝ : NumberField K
+hb : ∀ (i : Module.Free.ChooseBasisIndex ℤ (𝓞 K)), IsIntegral ℤ ((integralBasis K) i)
+y : K
+hy : ∀ (s : 𝓞 K), ∃ n, (Algebra.trace ℚ K) (y * ↑s) = ↑n
+v : HeightOneSpectrum (𝓞 K)
+s : 𝓞 K
+n : ℤ
+hn : (Algebra.trace ℚ K) (y * ↑s) = ↑n
+⊢ (algebraMap ℤ ℚ) n = (Algebra.trace ℚ K) (y * (LinearMap.toSpanSingleton (𝓞 K) K 1) s)
+data/fs131/itt1/work/TateLocal.lean:182:26: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?f ↑?n
+in the target expression
+  ↑(discr K).natAbs * y = ↑↑(discr K) * y
+
+K : Type u_1
+inst✝¹ : Field K
+inst✝ : NumberField K
+hb : ∀ (i : Module.Free.ChooseBasisIndex ℤ (𝓞 K)), IsIntegral ℤ ((integralBasis K) i)
+y : K
+hy : ∀ (s : 𝓞 K), ∃ n, (Algebra.trace ℚ K) (y * ↑s) = ↑n
+v : HeightOneSpectrum (𝓞 K)
+hdual : y ∈ Submodule.traceDual ℤ ℚ 1
+hint : IsIntegral ℤ (↑(discr K) • y)
+h : discr K = ↑(discr K).natAbs
+⊢ ↑(discr K).natAbs * y = ↑↑(discr K) * y
+data/fs131/itt1/work/TateLocal.lean:185:26: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?f ↑?n
+in the target expression
+  ↑(discr K).natAbs * y = -(↑↑(discr K) * y)
+
+K : Type u_1
+inst✝¹ : Field K
+inst✝ : NumberField K
+hb : ∀ (i : Module.Free.ChooseBasisIndex ℤ (𝓞 K)), IsIntegral ℤ ((integralBasis K) i)
+y : K
+hy : ∀ (s : 𝓞 K), ∃ n, (Algebra.trace ℚ K) (y * ↑s) = ↑n
+v : HeightOneSpectrum (𝓞 K)
+hdual : y ∈ Submodule.traceDual ℤ ℚ 1
+hint : IsIntegral ℤ (↑(discr K) • y)
+h : discr K = -↑(discr K).natAbs
+⊢ ↑(discr K).natAbs * y = -(↑↑(discr K) * y)
+data/fs131/itt1/work/TateLocal.lean:194:8: warning: declaration uses `sorry`
+seconds=5
+exit=1

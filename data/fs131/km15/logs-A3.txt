@@ -1,0 +1,10 @@
+slot: waiting (ledger 20 + 4 > budget 22 GiB)
+slot: admitted km15f: mem 4 GiB (hard cap), cpus 1,5
+Proofs/HadwigerNelson/Rigidity/SqrtClassFive.lean:53:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SqrtClassFive.lean:72:16: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SqrtClassFive.lean:88:16: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SqrtClassFive.lean:93:16: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SqrtClassFive.lean:97:16: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SqrtClassFive.lean:104:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SqrtClassFive.lean:110:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/SqrtClassFive.lean:117:8: warning: declaration uses `sorry`

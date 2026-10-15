@@ -1,0 +1,8 @@
+compared: 61 named constants of the first dump (types; values of definitions), 2 example heads of the base files
+axioms of the modules: [] before, [] after
+internal (not compared): 9 before, 9 after
+new public constants in the second dump: 0
+new private constants in the second dump: 0
+examples in the working files that the base does not hold: 0
+PASS: no statement and no definition changed
+exit=0

@@ -1,0 +1,235 @@
+slot: waiting (ledger 14 + 10 > budget 22 GiB)
+slot: admitted lch1: mem 10 GiB (hard cap), cpus 4,5,6,7
+==> build: this run's full output: build/gate/build/20261014T223820Z-923632.log
+==> up-to-date check: exit 3 after 4s (3 means something needs building) — walking the batches
+==> 725 batches of at most 3 modules, capped at 10G
+==> [1/725] 3 modules  17:38:24
+==> [2/725] 3 modules  17:38:26
+    rebuilt: Arith.FibreCert (905ms)
+==> [3/725] 3 modules  17:38:28
+==> [4/725] 3 modules  17:38:29
+==> [5/725] 3 modules  17:38:30
+==> [6/725] 3 modules  17:38:31
+==> [7/725] 3 modules  17:38:32
+==> [8/725] 3 modules  17:38:34
+==> [9/725] 3 modules  17:38:35
+==> [10/725] 3 modules  17:38:37
+==> [11/725] 3 modules  17:38:38
+==> [12/725] 3 modules  17:38:40
+==> [13/725] 3 modules  17:38:41
+==> [14/725] 3 modules  17:38:42
+==> [15/725] 3 modules  17:38:44
+==> [16/725] 3 modules  17:38:45
+==> [17/725] 3 modules  17:38:46
+    rebuilt: Arith.FibreCert19B1 (8.8s), Arith.FibreCert19B0 (18s), Arith.FibreCert11 (33s)
+==> [18/725] 3 modules  17:39:19
+    rebuilt: Arith.FibreCert19B11 (8.3s), Arith.FibreCert19B10 (8.9s), Arith.FibreCert19B12 (9.3s)
+==> [19/725] 3 modules  17:39:29
+    rebuilt: Arith.FibreCert19B14 (8.2s), Arith.FibreCert19B15 (8.7s), Arith.FibreCert19B13 (10s)
+==> [20/725] 3 modules  17:39:40
+    rebuilt: Arith.FibreCert19B16 (8.6s), Arith.FibreCert19B18 (8.7s), Arith.FibreCert19B17 (10s)
+==> [21/725] 3 modules  17:39:51
+    rebuilt: Arith.FibreCert19B4 (8.5s), Arith.FibreCert19B3 (8.0s), Arith.FibreCert19B2 (10s)
+==> [22/725] 3 modules  17:40:02
+    rebuilt: Arith.FibreCert19B5 (9.0s), Arith.FibreCert19B6 (9.7s), Arith.FibreCert19B7 (10s)
+==> [23/725] 3 modules  17:40:13
+    rebuilt: Arith.FibreCert19B9 (8.5s), Arith.FibreCert19B8 (8.8s), Arith.FibreCert19K0 (18s)
+==> [24/725] 3 modules  17:40:32
+    rebuilt: Arith.FibreCert19K1 (20s), Arith.FibreCert19K3 (22s), Arith.FibreCert19K2 (23s)
+==> [25/725] 3 modules  17:40:57
+    rebuilt: Arith.FibreCert19K4 (20s), Arith.FibreCert19K6 (20s), Arith.FibreCert19K5 (22s)
+==> [26/725] 3 modules  17:41:20
+    rebuilt: Arith.FibreCert19P1 (7.3s), Arith.FibreCert19P2 (8.0s), Arith.FibreCert19K7 (19s)
+==> [27/725] 3 modules  17:41:40
+    rebuilt: Arith.FibreCert19P3 (9.5s), Arith.FibreCert19P4 (9.9s), Arith.FibreCert19P5 (11s)
+==> [28/725] 3 modules  17:41:52
+    rebuilt: Arith.FibreCert19P8 (9.3s), Arith.FibreCert19P7 (10s), Arith.FibreCert19P6 (11s)
+==> [29/725] 3 modules  17:42:04
+    rebuilt: Arith.FibreCert19Q0 (254ms), Arith.FibreCertFast (1.3s), Arith.FibreCert3 (1.8s)
+==> [30/725] 3 modules  17:42:07
+==> [31/725] 3 modules  17:42:08
+==> [32/725] 3 modules  17:42:09
+==> [33/725] 3 modules  17:42:11
+==> [34/725] 3 modules  17:42:12
+==> [35/725] 3 modules  17:42:13
+==> [36/725] 3 modules  17:42:15
+==> [37/725] 3 modules  17:42:16
+==> [38/725] 3 modules  17:42:17
+    rebuilt: Arith.FibreCertSound (11s), Arith.FibreCert19 (22s), Arith.FibreCert11Seg0 (55s)
+==> [39/725] 3 modules  17:43:13
+==> [40/725] 3 modules  17:43:15
+==> [41/725] 3 modules  17:43:16
+==> [42/725] 3 modules  17:43:16
+==> [43/725] 3 modules  17:43:17
+==> [44/725] 3 modules  17:43:17
+==> [45/725] 3 modules  17:43:18
+==> [46/725] 3 modules  17:43:19
+==> [47/725] 3 modules  17:43:19
+==> [48/725] 3 modules  17:43:20
+==> [49/725] 3 modules  17:43:21
+==> [50/725] 3 modules  17:43:22
+==> [51/725] 3 modules  17:43:22
+==> [52/725] 3 modules  17:43:23
+==> [53/725] 3 modules  17:43:24
+==> [54/725] 3 modules  17:43:24
+==> [55/725] 3 modules  17:43:25
+==> [56/725] 3 modules  17:43:26
+==> [57/725] 3 modules  17:43:27
+==> [58/725] 3 modules  17:43:28
+==> [59/725] 3 modules  17:43:29
+==> [60/725] 3 modules  17:43:29
+==> [61/725] 3 modules  17:43:30
+==> [62/725] 3 modules  17:43:30
+==> [63/725] 3 modules  17:43:31
+==> [64/725] 3 modules  17:43:32
+==> [65/725] 3 modules  17:43:33
+==> [66/725] 3 modules  17:43:34
+==> [67/725] 3 modules  17:43:36
+==> [68/725] 3 modules  17:43:36
+==> [69/725] 3 modules  17:43:37
+==> [70/725] 3 modules  17:43:38
+==> [71/725] 3 modules  17:43:38
+==> [72/725] 3 modules  17:43:39
+==> [73/725] 3 modules  17:43:40
+==> [74/725] 3 modules  17:43:40
+==> [75/725] 3 modules  17:43:41
+==> [76/725] 3 modules  17:43:41
+==> [77/725] 3 modules  17:43:42
+==> [78/725] 3 modules  17:43:43
+==> [79/725] 3 modules  17:43:43
+==> [80/725] 3 modules  17:43:44
+==> [81/725] 3 modules  17:43:45
+==> [82/725] 3 modules  17:43:45
+==> [83/725] 3 modules  17:43:47
+==> [84/725] 3 modules  17:43:47
+==> [85/725] 3 modules  17:43:48
+==> [86/725] 3 modules  17:43:48
+==> [87/725] 3 modules  17:43:49
+==> [88/725] 3 modules  17:43:50
+==> [89/725] 3 modules  17:43:50
+==> [90/725] 3 modules  17:43:51
+==> [91/725] 2 modules  17:43:53
+==> [92/725] 3 modules  17:43:54
+    rebuilt: Arith.FibreCert11Seg1 (41s), Arith.FibreCert19Kt0 (44s)
+==> [93/725] 3 modules  17:44:40
+==> [94/725] 3 modules  17:44:41
+==> [95/725] 3 modules  17:44:42
+==> [96/725] 3 modules  17:44:43
+==> [97/725] 3 modules  17:44:45
+==> [98/725] 3 modules  17:44:46
+==> [99/725] 3 modules  17:44:48
+==> [100/725] 3 modules  17:44:49
+==> [101/725] 3 modules  17:44:50
+==> [102/725] 2 modules  17:44:52
+==> [103/725] 3 modules  17:44:53
+    rebuilt: Arith.FibreCert11Seg2 (40s), Arith.FibreCert19Kt1 (48s)
+==> [104/725] 3 modules  17:45:43
+==> [105/725] 3 modules  17:45:44
+==> [106/725] 3 modules  17:45:45
+==> [107/725] 3 modules  17:45:46
+==> [108/725] 3 modules  17:45:48
+==> [109/725] 3 modules  17:45:48
+==> [110/725] 3 modules  17:45:49
+==> [111/725] 3 modules  17:45:50
+==> [112/725] 3 modules  17:45:52
+==> [113/725] 3 modules  17:45:53
+==> [114/725] 3 modules  17:45:55
+==> [115/725] 2 modules  17:45:56
+==> [116/725] 3 modules  17:45:57
+    rebuilt: Arith.FibreCert11Seg3 (34s), Arith.FibreCert19Kt2 (43s)
+==> [117/725] 3 modules  17:46:42
+==> [118/725] 3 modules  17:46:44
+==> [119/725] 3 modules  17:46:45
+==> [120/725] 3 modules  17:46:46
+==> [121/725] 3 modules  17:46:47
+==> [122/725] 3 modules  17:46:48
+==> [123/725] 3 modules  17:46:50
+==> [124/725] 3 modules  17:46:51
+==> [125/725] 3 modules  17:46:52
+==> [126/725] 3 modules  17:46:53
+==> [127/725] 2 modules  17:46:54
+==> [128/725] 3 modules  17:46:56
+    rebuilt: Arith.FibreCert11Seg4 (35s), Arith.FibreCert19Kt3 (47s)
+==> [129/725] 3 modules  17:47:44
+==> [130/725] 3 modules  17:47:44
+==> [131/725] 3 modules  17:47:46
+==> [132/725] 3 modules  17:47:47
+==> [133/725] 3 modules  17:47:48
+==> [134/725] 3 modules  17:47:49
+==> [135/725] 3 modules  17:47:50
+==> [136/725] 3 modules  17:47:51
+==> [137/725] 3 modules  17:47:53
+==> [138/725] 3 modules  17:47:54
+==> [139/725] 3 modules  17:47:55
+==> [140/725] 3 modules  17:47:56
+==> [141/725] 3 modules  17:47:57
+==> [142/725] 3 modules  17:47:58
+==> [143/725] 3 modules  17:47:59
+==> [144/725] 3 modules  17:48:00
+==> [145/725] 3 modules  17:48:01
+==> [146/725] 3 modules  17:48:02
+==> [147/725] 3 modules  17:48:04
+==> [148/725] 3 modules  17:48:05
+==> [149/725] 3 modules  17:48:06
+==> [150/725] 3 modules  17:48:07
+==> [151/725] 3 modules  17:48:08
+==> [152/725] 3 modules  17:48:09
+==> [153/725] 3 modules  17:48:10
+==> [154/725] 3 modules  17:48:11
+==> [155/725] 3 modules  17:48:12
+==> [156/725] 3 modules  17:48:13
+==> [157/725] 3 modules  17:48:14
+==> [158/725] 3 modules  17:48:16
+==> [159/725] 3 modules  17:48:17
+==> [160/725] 3 modules  17:48:18
+==> [161/725] 3 modules  17:48:19
+==> [162/725] 3 modules  17:48:21
+==> [163/725] 3 modules  17:48:23
+==> [164/725] 3 modules  17:48:24
+==> [165/725] 3 modules  17:48:26
+==> [166/725] 3 modules  17:48:27
+==> [167/725] 3 modules  17:48:28
+==> [168/725] 3 modules  17:48:30
+==> [169/725] 3 modules  17:48:31
+==> [170/725] 3 modules  17:48:33
+==> [171/725] 3 modules  17:48:34
+==> [172/725] 3 modules  17:48:36
+==> [173/725] 3 modules  17:48:37
+==> [174/725] 3 modules  17:48:39
+==> [175/725] 3 modules  17:48:40
+==> [176/725] 3 modules  17:48:42
+==> [177/725] 3 modules  17:48:43
+==> [178/725] 3 modules  17:48:45
+==> [179/725] 3 modules  17:48:46
+==> [180/725] 3 modules  17:48:48
+==> [181/725] 3 modules  17:48:49
+==> [182/725] 3 modules  17:48:50
+==> [183/725] 3 modules  17:48:52
+==> [184/725] 3 modules  17:48:53
+==> [185/725] 3 modules  17:48:54
+==> [186/725] 3 modules  17:48:55
+==> [187/725] 3 modules  17:48:56
+==> [188/725] 3 modules  17:48:58
+==> [189/725] 3 modules  17:48:59
+==> [190/725] 3 modules  17:49:00
+==> [191/725] 3 modules  17:49:02
+==> [192/725] 3 modules  17:49:03
+==> [193/725] 3 modules  17:49:04
+==> [194/725] 3 modules  17:49:04
+==> [195/725] 3 modules  17:49:05
+==> [196/725] 3 modules  17:49:06
+==> [197/725] 3 modules  17:49:07
+==> [198/725] 3 modules  17:49:08
+==> [199/725] 3 modules  17:49:09
+==> [200/725] 2 modules  17:49:10
+==> [201/725] 3 modules  17:49:12
+Terminated                 systemd-run --user --scope -q -p "MemoryMax=${MEMMAX}" -p MemorySwapMax=0 -- lake build "${BATCH_TARGETS[@]}" > "${ATTEMPT}" 2>&1
+    !! batch failed with status 143. What it printed, before the retry:
+    !! retrying ONCE. If this line is common, the machine is unwell and the build is not the
+       thing to fix.
+Terminated                 systemd-run --user --scope -q -p "MemoryMax=${MEMMAX}" -p MemorySwapMax=0 -- lake build "${BATCH_TARGETS[@]}" > "${ATTEMPT}" 2>&1
+    BATCH FAILED. Once it is fixed, rerun ./scripts/build.sh — modules that already built are
+    skipped. Never a bare or named lake build (RUNNING.md § Building).
+==> build: FAIL — 201 of 725 batches, 51 module(s) rebuilt, 0 module(s) with warnings, 11m43s
+    full output: build/gate/build/20261014T223820Z-923632.log
+exit=1

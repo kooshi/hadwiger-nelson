@@ -1,0 +1,36 @@
+import Proofs.HadwigerNelson.Rigidity.CountDescent
+open MeasureTheory Filter Topology
+#check @MeasureTheory.measurePreserving_prodAssoc
+#check @MeasureTheory.MeasurePreserving.prod
+#check @MeasureTheory.Measure.measurePreserving_swap
+#check @MeasureTheory.Measure.measure_ae_null_of_prod_null
+#check @MeasureTheory.measure_preimage_add
+#check @measurableSet_lt
+#check @measurable_measure_prodMk_left
+#check @MeasureTheory.tendsto_lintegral_of_dominated_convergence
+#check @MeasureTheory.Measure.prod_apply
+#check @MeasureTheory.Measure.prod_prod
+#check @ENNReal.toReal_lt_of_lt_ofReal
+#check @Filter.eventually_all
+#check @MeasureTheory.measure_biUnion_finset
+#check @ENNReal.toReal_sum
+#check @MeasureTheory.measure_iUnion_fintype_le
+#check @MeasureTheory.QuasiMeasurePreserving.preimage_null
+#check @MeasureTheory.lintegral_indicator_const
+#check @ENNReal.toReal_mono
+#check @MeasureTheory.measureReal_def
+#check @MeasureTheory.Measure.real
+#check @ENNReal.sub_eq_of_eq_add
+#check @MeasureTheory.measure_union_add_inter
+#check @MeasureTheory.ae_iff
+#check @Set.indicator_le_indicator
+#check @ENNReal.toReal_inv
+#check @HadwigerNelson.Rigidity.Counting.haarK_proj_preimage
+#check @HadwigerNelson.Rigidity.Counting.tendsto_haarK_bad
+#check @HadwigerNelson.Rigidity.Counting.range_proj
+#check @HadwigerNelson.Rigidity.exists_nrWindow
+#check @HadwigerNelson.Plane.exists_nrWindow
+#check @HadwigerNelson.Rigidity.sum_volume_inter_sq_le
+#check @HadwigerNelson.Rigidity.tca_uniform
+#check @HadwigerNelson.Plane.volume_squareWin
+example : MeasurableAdd (HadwigerNelson.Rigidity.Counting.K ⊥) := inferInstance

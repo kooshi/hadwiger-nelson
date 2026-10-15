@@ -1,0 +1,13 @@
+Q=11 circle=12 N=26 D=1000000000 PI_LO=6283185307/2000000000 PI_ERR=1/10000000000
+  table: worst gap cos - cosLow = 6.7913e-11 (>= 0); C_0 = 1000000000
+  least table sum = -4795754784 at (alpha,beta)=(2, 2); M = 4795754784; kappa = M/(D(Q+1)) = 49955779/125000000
+  true least sum = -4.79575477823158; (Q+1)/3 = 4.0
+  exact: 3M < D(Q+1): False  [(Q+1)/3 - M/D = -24867337/31250000 = -7.957548e-01]; 2D <= M: True
+  -> FAILS
+Q=19 circle=20 N=26 D=1000000000 PI_LO=6283185307/2000000000 PI_ERR=1/10000000000
+  table: worst gap cos - cosLow = 8.07404e-11 (>= 0); C_0 = 1000000000
+  least table sum = -7609728640 at (alpha,beta)=(4, 5); M = 7609728640; kappa = M/(D(Q+1)) = 11890201/31250000
+  true least sum = -7.60972863205186; (Q+1)/3 = 6.66666666666667
+  exact: 3M < D(Q+1): False  [(Q+1)/3 - M/D = -4420603/4687500 = -9.430620e-01]; 2D <= M: True
+  -> FAILS
+plant: both FAIL, as they must

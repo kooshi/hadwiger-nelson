@@ -1,0 +1,10 @@
+slot: admitted ikl1f: mem 4 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/CertLinkModels.lean:31:27: error: unsolved goals
+𝔪 : Ideal ↥(unitRing (fieldOfRadicands {3}))
+h𝔪 : 𝔪.IsMaximal
+h9 : Nat.card (↥(unitRing (fieldOfRadicands {3})) ⧸ 𝔪) = 9
+P : StablePrime (fieldOfRadicands {3})
+hP : Nat.card (𝓞 ↥(fieldI (fieldOfRadicands {3})) ⧸ P.P ^ 1) = 9
+hP9 : Nat.card (𝓞 ↥(fieldI (fieldOfRadicands {3})) ⧸ P.P) = 9
+⊢ 9 = 3 ^ 2
+farm: Rigidity/CertLinkModels from Proofs/HadwigerNelson/Rigidity/CertLinkModels.lean exit 1

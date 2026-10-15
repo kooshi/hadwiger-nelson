@@ -1,0 +1,31 @@
+modules: 46 -> 47; compared: 1132 named constants (kind, module, stored type), 246 data definitions' values, 4 example heads of the base commit's 8 touched files
+new private constants: 4
+  + Proofs.HadwigerNelson.Rigidity.PositiveEntropy: _private.Proofs.HadwigerNelson.Rigidity.PositiveEntropy.0.HadwigerNelson.Rigidity.ZdAction.mulTwoThree_apply
+  + Proofs.HadwigerNelson.Rigidity.PositiveEntropy: _private.Proofs.HadwigerNelson.Rigidity.PositiveEntropy.0.HadwigerNelson.Rigidity.ZdAction.two_pow_three_pow_nat
+  + Proofs.HadwigerNelson.Rigidity.PositiveEntropy: _private.Proofs.HadwigerNelson.Rigidity.PositiveEntropy.0.HadwigerNelson.Rigidity.ZdAction.two_three_zpow_inj
+  + Proofs.HadwigerNelson.Rigidity.PositiveEntropy: _private.Proofs.HadwigerNelson.Rigidity.PositiveEntropy.0.HadwigerNelson.Rigidity.ZdAction.two_zpow_eq_three_zpow
+private constants gone: 0
+new examples: 0
+RULED MOVE HadwigerNelson.Rigidity.zeroEntropyCarried: Proofs.HadwigerNelson.Rigidity.ChainAtTA -> Proofs.HadwigerNelson.Rigidity.ZeroEntropyClosed
+RULED DROP HadwigerNelson.Rigidity.zeroEntropyCarried: the second type is the first with exactly the ruled binders removed (by the kernel's term surgery)
+RULED MOVE HadwigerNelson.Rigidity.mrPlus: Proofs.HadwigerNelson.Rigidity.ChainAtTA -> Proofs.HadwigerNelson.Rigidity.ZeroEntropyClosed
+RULED MOVE HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber_closed: Proofs.HadwigerNelson.Rigidity.ChainAtTA -> Proofs.HadwigerNelson.Rigidity.ZeroEntropyClosed
+RULED DROP HadwigerNelson.Rigidity.mul_measureReal_light_le_blockEntropy: the second type is the first with exactly the ruled binders removed (by the kernel's term surgery)
+RULED DROP HadwigerNelson.Rigidity.mul_card_heavyNames_le: the second type is the first with exactly the ruled binders removed (by the kernel's term surgery)
+RULED DROP HadwigerNelson.Rigidity.card_words_badStarts_le: the second type is the first with exactly the ruled binders removed (by the kernel's term surgery)
+RULED DROP HadwigerNelson.Rigidity.rpow_mul_exp_le_exp: the second type is the first with exactly the ruled binders removed (by the kernel's term surgery)
+NEW      THM HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber in Proofs.HadwigerNelson.Rigidity.ChainHeadline (the ruled headline)
+TYPE     THM HadwigerNelson.Rigidity.mrPlus_of_split_of_carried: the stored statement differs
+TYPE     HadwigerNelson.Rigidity.mrPlus: differs from the ruled drop's expected type
+KIND/MODULE HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber_of_closed: THM Proofs.HadwigerNelson.Rigidity.ChainAtTA -> THM Proofs.HadwigerNelson.Rigidity.ZeroEntropyClosed
+KIND/MODULE HadwigerNelson.Rigidity.entropySplit: THM Proofs.HadwigerNelson.Rigidity.ChainAtTA -> THM Proofs.HadwigerNelson.Rigidity.ChainHeadline
+TYPE     THM HadwigerNelson.Rigidity.noRamifiedStableDyadic_of_tca: the stored statement differs
+VALUE    DEF HadwigerNelson.Rigidity.TA: the stored definition differs
+KIND/MODULE HadwigerNelson.Rigidity.chainInterface: DEF Proofs.HadwigerNelson.Rigidity.ChainAtTA -> THM Proofs.HadwigerNelson.Rigidity.ChainAtTA
+MISSING  THM HadwigerNelson.Rigidity.ZdAction.mulTwoThree_model
+DROP     HadwigerNelson.Rigidity.mrPlus: the ruled drop was not seen
+MOVE     HadwigerNelson.Rigidity.entropySplit: the ruled move was not seen
+AXIOM    HadwigerNelson.Rigidity.planted_axiom: an axiom the modules must not declare
+NEW      AXIOM HadwigerNelson.Rigidity.planted_axiom: a new public constant
+NEW      THM HadwigerNelson.Rigidity.planted_public: a new public constant
+CONTROL: 10 of 10 planted faults reported, 0 report(s) naming no plant — the check can fail

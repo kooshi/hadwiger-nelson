@@ -1,0 +1,126 @@
+slot: admitted in1l: mem 4 GiB (hard cap), cpus 0,1
+data/fs131/in1l/work/TAScratch.lean:103:10: error: Application type mismatch: The argument
+  b
+has type
+  Set W
+of sort `Type u_2` but is expected to have type
+  Type u_3
+of sort `Type (u_3 + 1)` in the application
+  Exists.intro b
+data/fs131/in1l/work/TAScratch.lean:110:42: warning: `AddMonoidHom.finset_sum_apply` has been deprecated: Use `AddMonoidHom.finsetSum_apply` instead
+data/fs131/in1l/work/TAScratch.lean:115:39: error: unsolved goals
+G : Type u_1
+inst✝³ : AddCommGroup G
+W : Type u_2
+inst✝² : AddCommGroup W
+inst✝¹ : Module ℚ W
+inst✝ : FiniteDimensional ℚ W
+ι : G →+ W
+hι : Function.Injective ⇑ι
+b : Set W
+hbS : b ⊆ Set.range ⇑ι
+hspan : Submodule.span ℚ b = Submodule.span ℚ (Set.range ⇑ι)
+hli : LinearIndependent ℚ Subtype.val
+this✝ : Finite ↑b
+this : Fintype ↑b := Fintype.ofFinite ↑b
+V : Submodule ℚ W := Submodule.span ℚ (Set.range Subtype.val)
+hV : V = Submodule.span ℚ (Set.range Subtype.val)
+hrange : Set.range Subtype.val = b
+hmem : ∀ (g : G), ι g ∈ V
+B : Module.Basis ↑b ℚ ↥V := Module.Basis.span hli
+c : G →+ ↥V := { toFun := fun g => ⟨ι g, ⋯⟩, map_zero' := ⋯, map_add' := ⋯ }
+q : ↑b → G →+ ℚ := fun j => (B.coord j).toAddMonoidHom.comp c
+ψ : G →+ ℝ
+gen : ↑b → G
+hgen : ∀ (i : ↑b), ι (gen i) = ↑i
+g : G
+Δ : G →+ ℝ := ψ - ∑ j, ψ (gen j) • (Rat.castHom ℝ).toAddMonoidHom.comp (q j)
+hΔ : ∀ (g : G), Δ g = ψ g - ∑ j, ↑((q j) g) * ψ (gen j)
+i : ↑b
+⊢ ↑i = ↑((Module.Basis.span hli) i)
+data/fs131/in1l/work/TAScratch.lean:122:33: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Decidable (i = j)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/in1l/work/TAScratch.lean:122:59: error: unsolved goals
+G : Type u_1
+inst✝³ : AddCommGroup G
+W : Type u_2
+inst✝² : AddCommGroup W
+inst✝¹ : Module ℚ W
+inst✝ : FiniteDimensional ℚ W
+ι : G →+ W
+hι : Function.Injective ⇑ι
+b : Set W
+hbS : b ⊆ Set.range ⇑ι
+hspan : Submodule.span ℚ b = Submodule.span ℚ (Set.range ⇑ι)
+hli : LinearIndependent ℚ Subtype.val
+this✝ : Finite ↑b
+this : Fintype ↑b := Fintype.ofFinite ↑b
+V : Submodule ℚ W := Submodule.span ℚ (Set.range Subtype.val)
+hV : V = Submodule.span ℚ (Set.range Subtype.val)
+hrange : Set.range Subtype.val = b
+hmem : ∀ (g : G), ι g ∈ V
+B : Module.Basis ↑b ℚ ↥V := Module.Basis.span hli
+c : G →+ ↥V := { toFun := fun g => ⟨ι g, ⋯⟩, map_zero' := ⋯, map_add' := ⋯ }
+q : ↑b → G →+ ℚ := fun j => (B.coord j).toAddMonoidHom.comp c
+ψ : G →+ ℝ
+gen : ↑b → G
+hgen : ∀ (i : ↑b), ι (gen i) = ↑i
+g : G
+Δ : G →+ ℝ := ψ - ∑ j, ψ (gen j) • (Rat.castHom ℝ).toAddMonoidHom.comp (q j)
+hΔ : ∀ (g : G), Δ g = ψ g - ∑ j, ↑((q j) g) * ψ (gen j)
+hcgen : ∀ (i : ↑b), c (gen i) = B i
+i j : ↑b
+⊢ (Finsupp.single i 1) j = sorry
+data/fs131/in1l/work/TAScratch.lean:119:44: error: unsolved goals
+G : Type u_1
+inst✝³ : AddCommGroup G
+W : Type u_2
+inst✝² : AddCommGroup W
+inst✝¹ : Module ℚ W
+inst✝ : FiniteDimensional ℚ W
+ι : G →+ W
+hι : Function.Injective ⇑ι
+b : Set W
+hbS : b ⊆ Set.range ⇑ι
+hspan : Submodule.span ℚ b = Submodule.span ℚ (Set.range ⇑ι)
+hli : LinearIndependent ℚ Subtype.val
+this✝ : Finite ↑b
+this : Fintype ↑b := Fintype.ofFinite ↑b
+V : Submodule ℚ W := Submodule.span ℚ (Set.range Subtype.val)
+hV : V = Submodule.span ℚ (Set.range Subtype.val)
+hrange : Set.range Subtype.val = b
+hmem : ∀ (g : G), ι g ∈ V
+B : Module.Basis ↑b ℚ ↥V := Module.Basis.span hli
+c : G →+ ↥V := { toFun := fun g => ⟨ι g, ⋯⟩, map_zero' := ⋯, map_add' := ⋯ }
+q : ↑b → G →+ ℚ := fun j => (B.coord j).toAddMonoidHom.comp c
+ψ : G →+ ℝ
+gen : ↑b → G
+hgen : ∀ (i : ↑b), ι (gen i) = ↑i
+g : G
+Δ : G →+ ℝ := ψ - ∑ j, ψ (gen j) • (Rat.castHom ℝ).toAddMonoidHom.comp (q j)
+hΔ : ∀ (g : G), Δ g = ψ g - ∑ j, ↑((q j) g) * ψ (gen j)
+hcgen : ∀ (i : ↑b), c (gen i) = B i
+i : ↑b
+hq : ∀ (j : ↑b), (q j) (gen i) = sorry
+⊢ ψ (gen i) = ∑ x, ↑(sorry ()) * ψ (gen x)
+data/fs131/in1l/work/TAScratch.lean:125:32: warning: This simp argument is unused:
+  Finsupp.single_apply
+
+Hint: Omit it from the simp argument list.
+  simp only [q, AddMonoidHom.comp_apply, LinearMap.toAddMonoidHom_coe, hcgen,
+  ̲  ̲ ̲ ̲ ̲ ̲ ̲ ̲Module.Basis.coord_apply, M̵o̵d̵u̵l̵e̵.̵B̵a̵s̵i̵s̵.̵r̵e̵p̵r̵_̵s̵e̵l̵f̵,̵ ̵F̵i̵n̵s̵u̵p̵p̵.̵s̵i̵n̵g̵l̵e̵_̵a̵p̵p̵l̵y̵]̵M̲o̲d̲u̲l̲e̲.̲B̲a̲s̲i̲s̲.̲r̲e̲p̲r̲_̲s̲e̲l̲f̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/in1l/work/TAScratch.lean:154:7: warning: `continuous_finset_sum` has been deprecated: Use `continuous_finsetSum` instead
+data/fs131/in1l/work/TAScratch.lean:179:83: error: Application type mismatch: The argument
+  h
+has type
+  ι x = ι y
+but is expected to have type
+  x = y
+in the application
+  congrArg Subtype.val h
+seconds=4
+exit=1

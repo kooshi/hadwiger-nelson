@@ -1,0 +1,277 @@
+slot: waiting (ledger 20 + 10 > budget 22 GiB)
+slot: admitted kc13-build: mem 10 GiB (hard cap), cpus 1,2,3,4
+==> build: this run's full output: build/gate/build/20261014T132720Z-3184752.log
+==> up-to-date check: exit 3 after 4s (3 means something needs building) — walking the batches
+==> 249 batches of at most 8 modules, capped at 10G
+==> [1/249] 8 modules  08:27:24
+    ⚠ [3938/3938] Built Proofs.HadwigerNelson.Arith.FibreCert (815ms)
+    warning: Proofs/HadwigerNelson/Arith/FibreCert.lean:101:4: missing doc string for public constructor Tr.leaf
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    warning: Proofs/HadwigerNelson/Arith/FibreCert.lean:102:4: missing doc string for public constructor Tr.node
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    warning: Proofs/HadwigerNelson/Arith/FibreCert.lean:314:4: missing doc string for public constructor OT.leaf
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    warning: Proofs/HadwigerNelson/Arith/FibreCert.lean:315:4: missing doc string for public constructor OT.node
+    
+    Note: This linter can be disabled with `set_option linter.missingDocs false`
+    rebuilt: Arith.FibreCert (815ms)
+==> [2/249] 8 modules  08:27:26
+==> [3/249] 8 modules  08:27:27
+==> [4/249] 4 modules  08:27:28
+==> [5/249] 8 modules  08:27:29
+    rebuilt: Arith.FibreCert3 (969ms)
+==> [6/249] 7 modules  08:27:31
+==> [7/249] 8 modules  08:27:32
+    ⚠ [2563/2563] Built Proofs.HadwigerNelson.Arith.FibreCertSound (1.2s)
+    warning: Proofs/HadwigerNelson/Arith/FibreCertSound.lean:39:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/FibreCertSound.lean:45:8: declaration uses `sorry`
+    rebuilt: Arith.FibreCertSound (1.2s)
+==> [8/249] 8 modules  08:27:34
+==> [9/249] 8 modules  08:27:35
+==> [10/249] 8 modules  08:27:35
+==> [11/249] 8 modules  08:27:36
+==> [12/249] 8 modules  08:27:37
+==> [13/249] 8 modules  08:27:38
+==> [14/249] 8 modules  08:27:40
+==> [15/249] 8 modules  08:27:40
+==> [16/249] 8 modules  08:27:41
+==> [17/249] 7 modules  08:27:42
+==> [18/249] 8 modules  08:27:43
+==> [19/249] 8 modules  08:27:44
+==> [20/249] 8 modules  08:27:46
+==> [21/249] 2 modules  08:27:47
+==> [22/249] 8 modules  08:27:48
+==> [23/249] 8 modules  08:27:49
+==> [24/249] 8 modules  08:27:51
+==> [25/249] 8 modules  08:27:52
+==> [26/249] 8 modules  08:27:53
+==> [27/249] 8 modules  08:27:54
+==> [28/249] 8 modules  08:27:56
+==> [29/249] 6 modules  08:27:57
+==> [30/249] 8 modules  08:27:58
+==> [31/249] 8 modules  08:28:00
+==> [32/249] 8 modules  08:28:01
+==> [33/249] 8 modules  08:28:03
+==> [34/249] 8 modules  08:28:04
+==> [35/249] 8 modules  08:28:06
+==> [36/249] 8 modules  08:28:07
+==> [37/249] 8 modules  08:28:08
+==> [38/249] 8 modules  08:28:10
+==> [39/249] 8 modules  08:28:11
+==> [40/249] 8 modules  08:28:12
+==> [41/249] 8 modules  08:28:13
+==> [42/249] 8 modules  08:28:15
+==> [43/249] 8 modules  08:28:16
+==> [44/249] 8 modules  08:28:17
+==> [45/249] 8 modules  08:28:18
+==> [46/249] 8 modules  08:28:20
+==> [47/249] 8 modules  08:28:21
+==> [48/249] 8 modules  08:28:23
+==> [49/249] 8 modules  08:28:24
+==> [50/249] 8 modules  08:28:25
+==> [51/249] 8 modules  08:28:26
+==> [52/249] 8 modules  08:28:28
+==> [53/249] 8 modules  08:28:29
+==> [54/249] 8 modules  08:28:30
+==> [55/249] 8 modules  08:28:31
+==> [56/249] 7 modules  08:28:32
+==> [57/249] 8 modules  08:28:34
+==> [58/249] 8 modules  08:28:35
+==> [59/249] 8 modules  08:28:37
+==> [60/249] 8 modules  08:28:39
+==> [61/249] 8 modules  08:28:40
+==> [62/249] 8 modules  08:28:42
+==> [63/249] 8 modules  08:28:44
+==> [64/249] 8 modules  08:28:46
+==> [65/249] 8 modules  08:28:47
+==> [66/249] 8 modules  08:28:49
+==> [67/249] 8 modules  08:28:51
+==> [68/249] 8 modules  08:28:53
+==> [69/249] 8 modules  08:28:55
+==> [70/249] 8 modules  08:28:56
+==> [71/249] 8 modules  08:28:58
+==> [72/249] 8 modules  08:29:00
+==> [73/249] 8 modules  08:29:02
+==> [74/249] 8 modules  08:29:04
+==> [75/249] 8 modules  08:29:05
+==> [76/249] 8 modules  08:29:07
+==> [77/249] 8 modules  08:29:09
+==> [78/249] 8 modules  08:29:11
+==> [79/249] 8 modules  08:29:13
+==> [80/249] 8 modules  08:29:14
+==> [81/249] 8 modules  08:29:16
+==> [82/249] 8 modules  08:29:18
+==> [83/249] 8 modules  08:29:20
+==> [84/249] 8 modules  08:29:22
+==> [85/249] 8 modules  08:29:23
+==> [86/249] 8 modules  08:29:25
+==> [87/249] 8 modules  08:29:27
+==> [88/249] 8 modules  08:29:29
+==> [89/249] 8 modules  08:29:30
+==> [90/249] 8 modules  08:29:32
+==> [91/249] 8 modules  08:29:34
+==> [92/249] 8 modules  08:29:36
+==> [93/249] 8 modules  08:29:38
+==> [94/249] 8 modules  08:29:39
+==> [95/249] 8 modules  08:29:41
+==> [96/249] 8 modules  08:29:43
+==> [97/249] 8 modules  08:29:45
+==> [98/249] 8 modules  08:29:46
+==> [99/249] 8 modules  08:29:48
+==> [100/249] 8 modules  08:29:50
+==> [101/249] 8 modules  08:29:52
+==> [102/249] 8 modules  08:29:54
+==> [103/249] 8 modules  08:29:55
+==> [104/249] 8 modules  08:29:57
+==> [105/249] 8 modules  08:29:59
+==> [106/249] 8 modules  08:30:01
+==> [107/249] 8 modules  08:30:03
+==> [108/249] 8 modules  08:30:04
+==> [109/249] 8 modules  08:30:06
+==> [110/249] 8 modules  08:30:08
+==> [111/249] 8 modules  08:30:10
+==> [112/249] 8 modules  08:30:12
+==> [113/249] 8 modules  08:30:13
+==> [114/249] 8 modules  08:30:15
+==> [115/249] 8 modules  08:30:17
+==> [116/249] 8 modules  08:30:19
+==> [117/249] 8 modules  08:30:21
+==> [118/249] 8 modules  08:30:22
+==> [119/249] 8 modules  08:30:24
+==> [120/249] 8 modules  08:30:26
+==> [121/249] 8 modules  08:30:29
+==> [122/249] 8 modules  08:30:31
+==> [123/249] 8 modules  08:30:33
+==> [124/249] 8 modules  08:30:35
+==> [125/249] 8 modules  08:30:36
+==> [126/249] 8 modules  08:30:38
+==> [127/249] 8 modules  08:30:40
+==> [128/249] 8 modules  08:30:42
+==> [129/249] 8 modules  08:30:44
+==> [130/249] 8 modules  08:30:46
+==> [131/249] 8 modules  08:30:48
+==> [132/249] 8 modules  08:30:50
+==> [133/249] 8 modules  08:30:51
+==> [134/249] 8 modules  08:30:53
+==> [135/249] 8 modules  08:30:55
+==> [136/249] 8 modules  08:30:57
+==> [137/249] 8 modules  08:30:59
+==> [138/249] 8 modules  08:31:01
+==> [139/249] 8 modules  08:31:03
+==> [140/249] 8 modules  08:31:05
+==> [141/249] 8 modules  08:31:07
+==> [142/249] 8 modules  08:31:09
+==> [143/249] 8 modules  08:31:12
+==> [144/249] 8 modules  08:31:14
+==> [145/249] 8 modules  08:31:16
+==> [146/249] 8 modules  08:31:19
+==> [147/249] 8 modules  08:31:21
+==> [148/249] 8 modules  08:31:22
+==> [149/249] 8 modules  08:31:24
+==> [150/249] 8 modules  08:31:26
+==> [151/249] 8 modules  08:31:28
+==> [152/249] 8 modules  08:31:30
+==> [153/249] 8 modules  08:31:32
+==> [154/249] 8 modules  08:31:34
+==> [155/249] 8 modules  08:31:36
+==> [156/249] 8 modules  08:31:37
+==> [157/249] 8 modules  08:31:39
+==> [158/249] 8 modules  08:31:41
+==> [159/249] 8 modules  08:31:43
+==> [160/249] 8 modules  08:31:44
+==> [161/249] 8 modules  08:31:46
+==> [162/249] 8 modules  08:31:48
+==> [163/249] 8 modules  08:31:50
+==> [164/249] 8 modules  08:31:52
+==> [165/249] 8 modules  08:31:53
+==> [166/249] 8 modules  08:31:55
+==> [167/249] 8 modules  08:31:57
+==> [168/249] 8 modules  08:31:59
+==> [169/249] 8 modules  08:32:01
+==> [170/249] 8 modules  08:32:03
+==> [171/249] 8 modules  08:32:05
+==> [172/249] 8 modules  08:32:07
+==> [173/249] 8 modules  08:32:09
+==> [174/249] 8 modules  08:32:11
+==> [175/249] 8 modules  08:32:13
+==> [176/249] 8 modules  08:32:15
+==> [177/249] 8 modules  08:32:17
+==> [178/249] 8 modules  08:32:19
+==> [179/249] 8 modules  08:32:20
+==> [180/249] 8 modules  08:32:23
+==> [181/249] 8 modules  08:32:25
+==> [182/249] 8 modules  08:32:26
+==> [183/249] 8 modules  08:32:28
+==> [184/249] 8 modules  08:32:30
+==> [185/249] 8 modules  08:32:32
+==> [186/249] 8 modules  08:32:34
+==> [187/249] 8 modules  08:32:35
+==> [188/249] 8 modules  08:32:38
+==> [189/249] 8 modules  08:32:40
+==> [190/249] 8 modules  08:32:42
+==> [191/249] 8 modules  08:32:44
+==> [192/249] 8 modules  08:32:46
+==> [193/249] 8 modules  08:32:47
+==> [194/249] 8 modules  08:32:49
+==> [195/249] 8 modules  08:32:51
+==> [196/249] 8 modules  08:32:53
+==> [197/249] 8 modules  08:32:55
+==> [198/249] 8 modules  08:32:56
+==> [199/249] 8 modules  08:32:58
+==> [200/249] 8 modules  08:33:00
+==> [201/249] 8 modules  08:33:02
+==> [202/249] 8 modules  08:33:04
+==> [203/249] 8 modules  08:33:06
+==> [204/249] 8 modules  08:33:08
+==> [205/249] 8 modules  08:33:10
+==> [206/249] 8 modules  08:33:11
+==> [207/249] 8 modules  08:33:13
+==> [208/249] 8 modules  08:33:15
+==> [209/249] 8 modules  08:33:17
+==> [210/249] 8 modules  08:33:19
+==> [211/249] 8 modules  08:33:21
+==> [212/249] 8 modules  08:33:22
+==> [213/249] 8 modules  08:33:23
+==> [214/249] 5 modules  08:33:25
+==> [215/249] 8 modules  08:33:26
+==> [216/249] 8 modules  08:33:29
+==> [217/249] 8 modules  08:33:31
+==> [218/249] 2 modules  08:33:32
+==> [219/249] 8 modules  08:33:34
+==> [220/249] 8 modules  08:33:35
+==> [221/249] 2 modules  08:33:37
+==> [222/249] 8 modules  08:33:38
+==> [223/249] 8 modules  08:33:41
+==> [224/249] 3 modules  08:33:43
+==> [225/249] 8 modules  08:33:44
+==> [226/249] 8 modules  08:33:47
+==> [227/249] 1 modules  08:33:49
+==> [228/249] 8 modules  08:33:50
+==> [229/249] 8 modules  08:33:53
+==> [230/249] 8 modules  08:33:55
+==> [231/249] 8 modules  08:33:58
+==> [232/249] 2 modules  08:34:00
+==> [233/249] 8 modules  08:34:01
+==> [234/249] 8 modules  08:34:05
+==> [235/249] 2 modules  08:34:08
+==> [236/249] 8 modules  08:34:09
+==> [237/249] 5 modules  08:34:12
+==> [238/249] 7 modules  08:34:15
+==> [239/249] 8 modules  08:34:19
+==> [240/249] 3 modules  08:34:22
+==> [241/249] 8 modules  08:34:26
+==> [242/249] 2 modules  08:34:29
+==> [243/249] 7 modules  08:34:32
+==> [244/249] 5 modules  08:34:35
+==> [245/249] 4 modules  08:34:39
+==> [246/249] 2 modules  08:34:42
+==> [247/249] 2 modules  08:34:44
+==> [248/249] 2 modules  08:34:46
+==> [249/249] 1 modules  08:34:48
+    rebuilt: Proofs (4.5s)
+==> build: OK — 249 of 249 batches, 4 module(s) rebuilt, 2 module(s) with warnings, 7m33s
+    full output: build/gate/build/20261014T132720Z-3184752.log
+exit 0

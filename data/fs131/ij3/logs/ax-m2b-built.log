@@ -1,0 +1,5 @@
+slot: admitted ij3: mem 4 GiB (hard cap), cpus 4,5
+'HadwigerNelson.Rigidity.bochnerOn_tauPrime' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.archimedean_support' depends on axioms: [propext, Classical.choice, Quot.sound]
+seconds=2
+exit=0

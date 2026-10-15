@@ -1,0 +1,11 @@
+slot: admitted in1l: mem 4 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/ZeroEntropyNames.lean:88:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/ZeroEntropyNames.lean:282:8: error: Type mismatch
+  Finset.card_filter_le W fun w => μ.real (nameCell T P n w) < c
+has type
+  {w ∈ W | μ.real (nameCell T P n w) < c}.card ≤ W.card
+but is expected to have type
+  W' ⊆ W
+Proofs/HadwigerNelson/Rigidity/ZeroEntropyNames.lean:289:8: warning: declaration uses `sorry`
+seconds=3
+exit=1

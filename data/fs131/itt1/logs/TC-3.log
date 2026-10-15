@@ -1,0 +1,22 @@
+slot: admitted itt1: mem 4 GiB (hard cap), cpus 6,7
+data/fs131/itt1/work/TateCharacter.lean:215:91: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  MulHomClass (AddChar (SAdeleRing F) Circle) (SAdeleRing F) Circle
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/itt1/work/TateCharacter.lean:211:64: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+u : ↑(unitVectors F)
+a : SAdeleRing F
+r : ↥(unitRing F)
+⊢ (tateChar F) ((toSAdele F) (unitL u) * a) * (tateChar F) ((toSAdele F) ((ofUnitRing F) r)) =
+    (tateChar F) (a * (toSAdele F) (unitL u * (ofUnitRing F) r))
+
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+u : ↑(unitVectors F)
+a : SAdeleRing F
+r : ↥(unitRing F)
+⊢ MulHomClass (AddChar (SAdeleRing F) Circle) (SAdeleRing F) Circle
+seconds=14
+exit=1

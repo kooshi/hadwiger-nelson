@@ -57,16 +57,6 @@ private theorem quotientMap_conjO_involutive (P : StablePrime F) (x : 𝓞 (fiel
   obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
   rw [Ideal.quotientMap_mk, Ideal.quotientMap_mk, conjO_conjO]
 
-omit [NumberField F] in
-/-- `i` is an integer of `F(i)`, with `i² = −1` and `ī = −i` (`UpperHalf`'s private lemma, restated). -/
-private theorem exists_I_integer' : ∃ i : 𝓞 (fieldI F), i ^ 2 = -1 ∧ conjO F i = -i := by
-  let iL : fieldI F := ⟨Complex.I, by simp [zero_mem], by simp [one_mem]⟩
-  have hiL : iL ^ 2 = -1 := Subtype.ext Complex.I_sq
-  have hint : IsIntegral ℤ iL := IsIntegral.of_pow (n := 2) (by norm_num) (by rw [hiL]; exact isIntegral_one.neg)
-  refine ⟨⟨iL, hint⟩, RingOfIntegers.coe_injective ?_, RingOfIntegers.coe_injective ?_⟩
-  · rw [map_pow, map_neg, map_one]; exact hiL
-  · rw [map_neg]; exact Subtype.ext Complex.conj_I
-
 /-- The level-one residue map vanishes exactly on the non-units of `𝓞_P`: its kernel is a maximal ideal of a local ring. -/
 private theorem residue_one_eq_zero_iff (P : StablePrime F) (z : P.localRing) :
     P.residue 1 z = 0 ↔ (z : fieldI F) ∈ P.localRing.nonunits := by
@@ -296,7 +286,7 @@ theorem exists_stablePrime_card_nine {𝔪 : Ideal (unitRing F)} (h𝔪 : 𝔪.I
     rwa [← ringResidue_apply, map_ofNat] at h
   have h2κ : (2 : 𝓞 (fieldI F) ⧸ P.P ^ 1) ≠ 0 := fun h => one_ne_zero (by linear_combination h3κ - h)
   -- `i` modulo `P`
-  obtain ⟨i, hi2, hci⟩ := exists_I_integer' (F := F)
+  obtain ⟨i, hi2, hci⟩ := UpperHalf.exists_I_integer (F := F)
   have hι2 : (Ideal.Quotient.mk (P.P ^ 1) i) ^ 2 = -1 := by rw [← map_pow, hi2, map_neg, map_one]
   have hσι : Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1) (Ideal.Quotient.mk (P.P ^ 1) i) =
       -Ideal.Quotient.mk (P.P ^ 1) i := by rw [Ideal.quotientMap_mk, hci, map_neg]
@@ -376,7 +366,7 @@ theorem exists_maximal_card_three_of_stablePrime_card_nine (P : StablePrime F)
     have e : (3 : 𝓞 (fieldI F) ⧸ P.P ^ 1) * 3 = ((9 : ℕ) : 𝓞 (fieldI F) ⧸ P.P ^ 1) := by norm_num
     exact mul_self_eq_zero.mp (e.trans h)
   have h2κ : (2 : 𝓞 (fieldI F) ⧸ P.P ^ 1) ≠ 0 := fun h => one_ne_zero (by linear_combination h3κ - h)
-  obtain ⟨i, hi2, hci⟩ := exists_I_integer' (F := F)
+  obtain ⟨i, hi2, hci⟩ := UpperHalf.exists_I_integer (F := F)
   have hι2 : (Ideal.Quotient.mk (P.P ^ 1) i) ^ 2 = -1 := by rw [← map_pow, hi2, map_neg, map_one]
   have hσι : Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1) (Ideal.Quotient.mk (P.P ^ 1) i) =
       -Ideal.Quotient.mk (P.P ^ 1) i := by rw [Ideal.quotientMap_mk, hci, map_neg]
@@ -510,7 +500,7 @@ theorem levelTarget_colorable_three_of_card_nine (P : StablePrime F)
     have e : (3 : 𝓞 (fieldI F) ⧸ P.P ^ 1) * 3 = ((9 : ℕ) : 𝓞 (fieldI F) ⧸ P.P ^ 1) := by norm_num
     exact mul_self_eq_zero.mp (e.trans h)
   have h2κ : (2 : 𝓞 (fieldI F) ⧸ P.P ^ 1) ≠ 0 := fun h => one_ne_zero (by linear_combination h3κ - h)
-  obtain ⟨i, hi2, hci⟩ := exists_I_integer' (F := F)
+  obtain ⟨i, hi2, hci⟩ := UpperHalf.exists_I_integer (F := F)
   have hι2 : (Ideal.Quotient.mk (P.P ^ 1) i) ^ 2 = -1 := by rw [← map_pow, hi2, map_neg, map_one]
   have hσι : Ideal.quotientMap (P.P ^ 1) (conjO F) (P.le_comap 1) (Ideal.Quotient.mk (P.P ^ 1) i) =
       -Ideal.Quotient.mk (P.P ^ 1) i := by rw [Ideal.quotientMap_mk, hci, map_neg]
@@ -850,7 +840,7 @@ theorem exists_stablePrime_card_four_sqrt {m : ℕ} (h8 : m % 8 = 3) :
   letI : Fintype (𝓞 (fieldI (fieldOfRadicands {m})) ⧸ P.P ^ 1) := Fintype.ofFinite _
   -- the count divides 4
   have hdvd : Nat.card (𝓞 (fieldI (fieldOfRadicands {m})) ⧸ P.P ^ 1) ∣ 4 := by
-    obtain ⟨i, hi2, -⟩ := exists_I_integer' (F := fieldOfRadicands {m})
+    obtain ⟨i, hi2, -⟩ := UpperHalf.exists_I_integer (F := fieldOfRadicands {m})
     have hsq : (1 + i) ^ 2 = 2 * i := by linear_combination hi2
     have h1i : 1 + i ∈ P.P :=
       P.isMaximal.isPrime.mem_of_pow_mem 2 (by rw [hsq]; exact P.P.mul_mem_right i h2P)

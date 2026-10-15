@@ -1,0 +1,22 @@
+slot: admitted kn9: mem 5 GiB (hard cap), cpus 2,3
+Proofs/HadwigerNelson/Rigidity/RingScope.lean:44:64: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  NumberField ↥F
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Rigidity/RingScope.lean:44:4: error(lean.dependsOnNoncomputable): failed to compile definition, consider marking it as 'noncomputable' because it depends on 'Complex.instField', which is 'noncomputable'
+Proofs/HadwigerNelson/Rigidity/RingScope.lean:46:92: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  NumberField ↥F
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Rigidity/RingScope.lean:46:107: error: unsolved goals
+F : Subfield ℝ
+x : ↥(fieldI F)
+⊢ (∀ (i : StablePrime F), x ∈ sorry ()) ↔ ∀ (P : StablePrime F), x ∈ sorry ()
+Proofs/HadwigerNelson/Rigidity/RingScope.lean:47:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/RingScope.lean:53:40: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  NumberField ↥F
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+Proofs/HadwigerNelson/Rigidity/RingScope.lean:61:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/RingScope.lean:71:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/RingScope.lean:80:8: warning: declaration uses `sorry`

@@ -1,0 +1,100 @@
+slot: admitted in1l: mem 4 GiB (hard cap), cpus 0,1
+data/fs131/in1l/work/TAScratch.lean:128:19: error(lean.unknownIdentifier): Unknown constant `Rat.cast_ite`
+data/fs131/in1l/work/TAScratch.lean:121:44: error: unsolved goals
+G : Type u_1
+inst✝³ : AddCommGroup G
+W : Type u
+inst✝² : AddCommGroup W
+inst✝¹ : Module ℚ W
+inst✝ : FiniteDimensional ℚ W
+ι : G →+ W
+hι : Function.Injective ⇑ι
+b : Set W
+hbS : b ⊆ Set.range ⇑ι
+hspan : Submodule.span ℚ b = Submodule.span ℚ (Set.range ⇑ι)
+hli : LinearIndependent ℚ Subtype.val
+this✝ : Finite ↑b
+this : Fintype ↑b := Fintype.ofFinite ↑b
+V : Submodule ℚ W := Submodule.span ℚ (Set.range Subtype.val)
+hV : V = Submodule.span ℚ (Set.range Subtype.val)
+hrange : Set.range Subtype.val = b
+hmem : ∀ (g : G), ι g ∈ V
+B : Module.Basis ↑b ℚ ↥V := Module.Basis.span hli
+c : G →+ ↥V := { toFun := fun g => ⟨ι g, ⋯⟩, map_zero' := ⋯, map_add' := ⋯ }
+q : ↑b → G →+ ℚ := fun j => (B.coord j).toAddMonoidHom.comp c
+ψ : G →+ ℝ
+gen : ↑b → G
+hgen : ∀ (i : ↑b), ι (gen i) = ↑i
+g : G
+Δ : G →+ ℝ := ψ - ∑ j, ψ (gen j) • (Rat.castHom ℝ).toAddMonoidHom.comp (q j)
+hΔ : ∀ (g : G), Δ g = ψ g - ∑ j, ↑((q j) g) * ψ (gen j)
+hcgen : ∀ (i : ↑b), c (gen i) = B i
+i : ↑b
+hq : ∀ (j : ↑b), (q j) (gen i) = if i = j then 1 else 0
+⊢ ψ (gen i) = ∑ x, ↑(if i = x then 1 else 0) * ψ (gen x)
+data/fs131/in1l/work/TAScratch.lean:128:33: warning: This simp argument is unused:
+  Rat.cast_one
+
+Hint: Omit it from the simp argument list.
+  simp only [hq, Rat.cast_ite, Rat.cast_o̵n̵e̵,̵ ̵R̵a̵t̵.̵c̵a̵s̵t̵_̵zero, ite_mul, one_mul, zero_mul, Finset.sum_ite_eq,
+        Finset.mem_univ, if_true]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/in1l/work/TAScratch.lean:128:47: warning: This simp argument is unused:
+  Rat.cast_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [hq, Rat.cast_ite, Rat.cast_one, R̵a̵t̵.̵c̵a̵s̵t̵_̵z̵e̵r̵o̵,̵ ̵ite_mul, one_mul, zero_mul, Finset.sum_ite_eq,
+        Finset.mem_univ, if_true]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/in1l/work/TAScratch.lean:128:62: warning: This simp argument is unused:
+  ite_mul
+
+Hint: Omit it from the simp argument list.
+  simp only [hq, Rat.cast_ite, Rat.cast_one, Rat.cast_zero, i̵t̵e̵_̵m̵u̵l̵,̵ ̵one_mul, zero_mul, Finset.sum_ite_eq,
+        Finset.mem_univ, if_true]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/in1l/work/TAScratch.lean:128:71: warning: This simp argument is unused:
+  one_mul
+
+Hint: Omit it from the simp argument list.
+  simp only [hq, Rat.cast_ite, Rat.cast_one, Rat.cast_zero, ite_mul, o̵n̵e̵_̵m̵u̵l̵,̵ ̵zero_mul, Finset.sum_ite_eq,
+        Finset.mem_univ, if_true]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/in1l/work/TAScratch.lean:128:80: warning: This simp argument is unused:
+  zero_mul
+
+Hint: Omit it from the simp argument list.
+  simp only [hq, Rat.cast_ite, Rat.cast_one, Rat.cast_zero, ite_mul, one_mul, z̵e̵r̵o̵_̵m̵u̵l̵,̵ ̵Finset.sum_ite_eq,
+        Finset.mem_univ, if_true]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/in1l/work/TAScratch.lean:128:90: warning: This simp argument is unused:
+  Finset.sum_ite_eq
+
+Hint: Omit it from the simp argument list.
+  simp only [hq, Rat.cast_ite, Rat.cast_one, Rat.cast_zero, ite_mul, one_mul, zero_mul, ̵F̵i̵n̵s̵e̵t̵.̵s̵u̵m̵_̵i̵t̵e̵_̵e̵q̵,̵
+        Finset.mem_univ, if_true]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/in1l/work/TAScratch.lean:129:6: warning: This simp argument is unused:
+  Finset.mem_univ
+
+Hint: Omit it from the simp argument list.
+  simp only [hq, Rat.cast_ite, Rat.cast_one, Rat.cast_zero, ite_mul, one_mul, zero_mul,
+  ̲  ̲ ̲ ̲ ̲ ̲Finset.sum_ite_eq, F̵i̵n̵s̵e̵t̵.̵m̵e̵m̵_̵u̵n̵i̵v̵,̵ ̵if_true]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/in1l/work/TAScratch.lean:129:23: warning: This simp argument is unused:
+  if_true
+
+Hint: Omit it from the simp argument list.
+  simp only [hq, Rat.cast_ite, Rat.cast_one, Rat.cast_zero, ite_mul, one_mul, zero_mul,
+  ̲  ̲ ̲ ̲ ̲ ̲Finset.sum_ite_eq, F̵i̵n̵s̵e̵t̵.̵m̵e̵m̵_̵u̵n̵i̵v̵,̵ ̵i̵f̵_̵t̵r̵u̵e̵]̵F̲i̲n̲s̲e̲t̲.̲m̲e̲m̲_̲u̲n̲i̲v̲]̲
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+seconds=4
+exit=1

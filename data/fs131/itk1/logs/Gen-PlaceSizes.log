@@ -1,0 +1,41 @@
+slot: waiting (ledger 20 + 4 > budget 22 GiB)
+slot: admitted itk1: mem 4 GiB (hard cap), cpus 1,2
+GEN 49 false false false false false
+GEN 58 false false false false false
+GEN 60 false false false false false
+GEN 66 false false false false false
+GEN 82 false false false false false
+GEN 88 false false false false false
+GEN 95 false false false false false
+GEN 108 false false false false false
+GEN 114 false false false false false
+GEN 123 false false false false false
+GEN 129 false false false false false
+GEN 169 false false false false false
+GEN 175 false false false false false
+GEN 181 false false false false false
+GEN 185 false false false false false
+GEN 193 false false false false false
+GEN 199 false false false false false
+GEN 203 false false false false false
+GEN 208 false false false false false
+GEN 217 false false false false false
+GEN 238 false false false false false
+GEN 273 false false false false false
+GEN 278 false false false false false
+data/fs131/itk1/probes/gen/PlaceSizesGen.lean:372:0: warning: automatically included section variable(s) unused in theorem `HadwigerNelson.Rigidity.unitL_eq_ofUnitRing`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+GEN 281 false false false false false
+GEN 291 false false false false false
+GEN 330 false false true false false
+GEN 368 false false true false false
+GEN 401 false false true false false
+GEN 405 false false true false false
+GEN 416 false false true false false
+GEN 418 false false true false false
+seconds=103
+exit=0

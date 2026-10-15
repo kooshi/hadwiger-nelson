@@ -1,0 +1,9 @@
+slot: admitted kn6t: mem 8 GiB (hard cap), cpus 0,1
+build/fs131-kn6/release-copies/Bridge.lean:564:8: warning: declaration uses `sorry`
+build/fs131-kn6/release-copies/Bridge.lean:570:8: warning: declaration uses `sorry`
+build/fs131-kn6/release-copies/Bridge.lean:578:8: warning: declaration uses `sorry`
+build/fs131-kn6/release-copies/Bridge.lean:587:8: warning: declaration uses `sorry`
+build/fs131-kn6/release-copies/Bridge.lean:618:8: warning: declaration uses `sorry`
+build/fs131-kn6/release-copies/Bridge.lean:624:8: warning: declaration uses `sorry`
+seconds=6
+exit=0

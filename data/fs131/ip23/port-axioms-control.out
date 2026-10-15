@@ -1,0 +1,4 @@
+AXIOMS   HadwigerNelson.Outside.OAI015.finiteShannon_mul: ['sorryAx'] beyond the standard three
+AXIOMS   HadwigerNelson.Outside.OAI015.conditionalObservationEntropy_eq_sum: ['HadwigerNelson.Rigidity.positive_entropy_rigidity'] beyond the standard three
+MISSING  HadwigerNelson.Outside.OAI015.action_ergodic_decomposition: no record in the log
+CONTROL: 3 of 3 planted faults reported — the check can fail

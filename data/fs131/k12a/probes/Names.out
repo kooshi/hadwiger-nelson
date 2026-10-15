@@ -1,0 +1,98 @@
+slot: admitted k12a: mem 5 GiB (hard cap), cpus 2,3
+Complex.volume_preserving_equiv_real_prod : MeasurePreserving (⇑Complex.measurableEquivRealProd) volume volume
+@Real.volume_Ico : ∀ {a b : ℝ}, volume (Set.Ico a b) = ENNReal.ofReal (b - a)
+@Measure.prod_prod : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α] [inst_1 : MeasurableSpace β]
+  {μ : Measure α} {ν : Measure β} [SFinite ν] (s : Set α) (t : Set β), (μ.prod ν) (s ×ˢ t) = μ s * ν t
+@Measure.addHaarMeasure_self : ∀ {G : Type u_1} [inst : AddGroup G] [inst_1 : TopologicalSpace G]
+  [inst_2 : IsTopologicalAddGroup G] [inst_3 : MeasurableSpace G] [inst_4 : BorelSpace G]
+  {K₀ : TopologicalSpace.PositiveCompacts G}, (Measure.addHaarMeasure K₀) ↑K₀ = 1
+@Measure.isAddHaarMeasure_addHaarMeasure : ∀ {G : Type u_1} [inst : AddGroup G] [inst_1 : TopologicalSpace G]
+  [inst_2 : IsTopologicalAddGroup G] [inst_3 : MeasurableSpace G] [inst_4 : BorelSpace G]
+  (K₀ : TopologicalSpace.PositiveCompacts G), (Measure.addHaarMeasure K₀).IsAddHaarMeasure
+@measure_preimage_add_right : ∀ {G : Type u_1} [inst : MeasurableSpace G] [inst_1 : AddGroup G] [MeasurableAdd G]
+  (μ : Measure G) [μ.IsAddRightInvariant] (g : G) (A : Set G), μ ((fun h => h + g) ⁻¹' A) = μ A
+@measure_preimage_add : ∀ {G : Type u_1} [inst : MeasurableSpace G] [inst_1 : AddGroup G] [MeasurableAdd G]
+  (μ : Measure G) [μ.IsAddLeftInvariant] (g : G) (A : Set G), μ ((fun h => g + h) ⁻¹' A) = μ A
+@Filter.le_limsup_of_frequently_le' : ∀ {α : Type u_1} {β : Type u_2} [inst : CompleteLattice β] {f : Filter α}
+  {u : α → β} {x : β}, (∃ᶠ (a : α) in f, x ≤ u a) → x ≤ Filter.limsup u f
+@lintegral_prod_swap : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α] [inst_1 : MeasurableSpace β]
+  {μ : Measure α} {ν : Measure β} [SFinite ν] [SFinite μ] (f : α × β → ENNReal),
+  ∫⁻ (z : β × α), f z.swap ∂ν.prod μ = ∫⁻ (z : α × β), f z ∂μ.prod ν
+@Submonoid.topologicalClosure : {M : Type u_1} →
+  [inst : TopologicalSpace M] → [inst_1 : Monoid M] → [SeparatelyContinuousMul M] → Submonoid M → Submonoid M
+@Submonoid.le_topologicalClosure : ∀ {M : Type u_1} [inst : TopologicalSpace M] [inst_1 : Monoid M]
+  [inst_2 : SeparatelyContinuousMul M] (s : Submonoid M), s ≤ s.topologicalClosure
+@Complex.exp_log : ∀ {x : ℂ}, x ≠ 0 → Complex.exp (Complex.log x) = x
+Complex.log_im_le_pi : ∀ (x : ℂ), (Complex.log x).im ≤ Real.pi
+Complex.neg_pi_lt_log_im : ∀ (x : ℂ), -Real.pi < (Complex.log x).im
+NumberField.mixedEmbedding.mixedEmbedding_apply_isReal : ∀ (K : Type u_1) [inst : Field K] (x : K)
+  (w : { w // w.IsReal }), ((NumberField.mixedEmbedding K) x).1 w = (NumberField.InfinitePlace.embedding_of_isReal ⋯) x
+NumberField.mixedEmbedding.mixedEmbedding_apply_isComplex : ∀ (K : Type u_1) [inst : Field K] (x : K)
+  (w : { w // w.IsComplex }), ((NumberField.mixedEmbedding K) x).2 w = (↑w).embedding x
+NumberField.InfinitePlace.denseRange_algebraMap_pi : ∀ (K : Type u_1) [inst : Field K] [NumberField K],
+  DenseRange ⇑(algebraMap K ((v : NumberField.InfinitePlace K) → WithAbs ↑v))
+NumberField.mixedEmbedding.latticeBasis_apply : ∀ (K : Type u_1) [inst : Field K] [inst_1 : NumberField K]
+  (i : Module.Free.ChooseBasisIndex ℤ (NumberField.RingOfIntegers K)),
+  (NumberField.mixedEmbedding.latticeBasis K) i = (NumberField.mixedEmbedding K) ((NumberField.integralBasis K) i)
+@Monoid.pow_exponent_eq_one : ∀ {G : Type u_1} [inst : Monoid G] (g : G), g ^ Monoid.exponent G = 1
+@Monoid.ExponentExists.of_finite : ∀ {G : Type u_1} [inst : LeftCancelMonoid G] [Finite G], Monoid.ExponentExists G
+@MeasurableSet.exists_isOpen_sdiff_lt : ∀ {α : Type u_1} [inst : MeasurableSpace α] {μ : Measure α}
+  [inst_1 : TopologicalSpace α] [μ.OuterRegular] {A : Set α},
+  MeasurableSet A → μ A ≠ ⊤ → ∀ {ε : ENNReal}, ε ≠ 0 → ∃ U ⊇ A, IsOpen U ∧ μ U < ⊤ ∧ μ (U \ A) < ε
+@MeasurableSet.exists_isCompact_sdiff_lt : ∀ {α : Type u_1} [inst : MeasurableSpace α] {μ : Measure α}
+  [inst_1 : TopologicalSpace α] [OpensMeasurableSpace α] [T2Space α] [μ.InnerRegularCompactLTTop] ⦃A : Set α⦄,
+  MeasurableSet A → μ A ≠ ⊤ → ∀ {ε : ENNReal}, ε ≠ 0 → ∃ K ⊆ A, IsCompact K ∧ μ (A \ K) < ε
+@IsCompact.elim_finite_subcover : ∀ {X : Type u_1} [inst : TopologicalSpace X] {s : Set X} {ι : Type u_2},
+  IsCompact s → ∀ (U : ι → Set X), (∀ (i : ι), IsOpen (U i)) → s ⊆ ⋃ i, U i → ∃ t, s ⊆ ⋃ i ∈ t, U i
+@nhds_pi : ∀ {ι : Type u_1} {A : ι → Type u_2} [T : (i : ι) → TopologicalSpace (A i)] {a : (i : ι) → A i},
+  nhds a = Filter.pi fun i => nhds (a i)
+@Filter.HasBasis.comap : ∀ {α : Type u_1} {β : Type u_2} {ι : Sort u_3} {l : Filter α} {p : ι → Prop} {s : ι → Set α}
+  (f : β → α), l.HasBasis p s → (Filter.comap f l).HasBasis p fun i => f ⁻¹' s i
+@nhds_subtype : ∀ {X : Type u_1} [inst : TopologicalSpace X] (s : Set X) (x : { x // x ∈ s }),
+  nhds x = Filter.comap Subtype.val (nhds ↑x)
+@tendsto_lintegral_filter_of_dominated_convergence : ∀ {α : Type u_1} [inst : MeasurableSpace α] {μ : Measure α}
+  {ι : Type u_2} {l : Filter ι} [l.IsCountablyGenerated] {F : ι → α → ENNReal} {f : α → ENNReal} (bound : α → ENNReal),
+  (∀ᶠ (n : ι) in l, Measurable (F n)) →
+    (∀ᶠ (n : ι) in l, ∀ᵐ (a : α) ∂μ, F n a ≤ bound a) →
+      ∫⁻ (a : α), bound a ∂μ ≠ ⊤ →
+        (∀ᵐ (a : α) ∂μ, Filter.Tendsto (fun n => F n a) l (nhds (f a))) →
+          Filter.Tendsto (fun n => ∫⁻ (a : α), F n a ∂μ) l (nhds (∫⁻ (a : α), f a ∂μ))
+@Ideal.Quotient.mk_surjective : ∀ {R : Type u_1} [inst : Ring R] {I : Ideal R} [inst_1 : I.IsTwoSided],
+  Function.Surjective ⇑(Ideal.Quotient.mk I)
+@Ideal.Quotient.eq_zero_iff_mem : ∀ {R : Type u_1} [inst : Ring R] {I : Ideal R} {a : R} [inst_1 : I.IsTwoSided],
+  (Ideal.Quotient.mk I) a = 0 ↔ a ∈ I
+@Ideal.pow_le_pow_right : ∀ {R : Type u_1} [inst : Semiring R] {I : Ideal R} {m n : ℕ}, m ≤ n → I ^ n ≤ I ^ m
+@Ideal.quotientMap_mk : ∀ {R : Type u_1} [inst : Ring R] {S : Type u_2} [inst_1 : Ring S] {J : Ideal R} {I : Ideal S}
+  [inst_2 : I.IsTwoSided] [inst_3 : J.IsTwoSided] {f : R →+* S} {H : J ≤ Ideal.comap f I} {x : R},
+  (Ideal.quotientMap I f H) ((Ideal.Quotient.mk J) x) = (Ideal.Quotient.mk I) (f x)
+@Finset.sum_comm : ∀ {α : Type u_1} {β : Type u_2} {γ : Type u_3} [inst : AddCommMonoid β] {s : Finset γ} {t : Finset α}
+  {f : γ → α → β}, ∑ x ∈ s, ∑ y ∈ t, f x y = ∑ y ∈ t, ∑ x ∈ s, f x y
+@Finset.card_union_of_disjoint : ∀ {α : Type u_1} {s t : Finset α} [inst : DecidableEq α],
+  Disjoint s t → (s ∪ t).card = s.card + t.card
+@measure_iUnion_null : ∀ {α : Type u_1} {F : Type u_2} [inst : FunLike F (Set α) ENNReal] [OuterMeasureClass F α]
+  {μ : F} {ι : Sort u_3} [Countable ι] {s : ι → Set α}, (∀ (i : ι), μ (s i) = 0) → μ (⋃ i, s i) = 0
+@Measure.measure_univ_eq_zero : ∀ {α : Type u_1} {m0 : MeasurableSpace α} {μ : Measure α}, μ Set.univ = 0 ↔ μ = 0
+@Pi.compactSpace : ∀ {ι : Type u_1} {X : ι → Type u_2} [inst : (i : ι) → TopologicalSpace (X i)]
+  [∀ (i : ι), CompactSpace (X i)], CompactSpace ((i : ι) → X i)
+@DiscreteTopology.secondCountableTopology_of_countable : ∀ {α : Type u_1} [inst : TopologicalSpace α]
+  [hd : DiscreteTopology α] [Countable α], SecondCountableTopology α
+@AddSubgroup.isClosed_topologicalClosure : ∀ {G : Type u_1} [inst : TopologicalSpace G] [inst_1 : AddGroup G]
+  [inst_2 : IsTopologicalAddGroup G] (s : AddSubgroup G), IsClosed ↑s.topologicalClosure
+@ae_of_ae_restrict_of_ae_restrict_compl : ∀ {α : Type u_1} {m0 : MeasurableSpace α} {μ : Measure α} (t : Set α)
+  {p : α → Prop}, (∀ᵐ (x : α) ∂μ.restrict t, p x) → (∀ᵐ (x : α) ∂μ.restrict tᶜ, p x) → ∀ᵐ (x : α) ∂μ, p x
+@Measure.map_apply : ∀ {α : Type u_1} {β : Type u_2} {mα : MeasurableSpace α} {mβ : MeasurableSpace β} {μ : Measure α}
+  {f : α → β}, Measurable f → ∀ {s : Set β}, MeasurableSet s → (Measure.map f μ) s = μ (f ⁻¹' s)
+@integral_prod : ∀ {α : Type u_1} {β : Type u_2} {E : Type u_3} [inst : MeasurableSpace α] [inst_1 : MeasurableSpace β]
+  {μ : Measure α} {ν : Measure β} [inst_2 : NormedAddCommGroup E] [SFinite ν] [inst_4 : NormedSpace ℝ E] [SFinite μ]
+  (f : α × β → E), Integrable f (μ.prod ν) → ∫ (z : α × β), f z ∂μ.prod ν = ∫ (x : α), ∫ (y : β), f (x, y) ∂ν ∂μ
+@Measure.prod_apply_symm : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α] [inst_1 : MeasurableSpace β]
+  {μ : Measure α} {ν : Measure β} [SFinite ν] [SFinite μ] {s : Set (α × β)},
+  MeasurableSet s → (μ.prod ν) s = ∫⁻ (y : β), μ ((fun x => (x, y)) ⁻¹' s) ∂ν
+data/fs131/k12a/probes/Names.lean:47:8: error(lean.unknownIdentifier): Unknown identifier `HadwigerNelson.Plane.volume_diff_densitySet`
+data/fs131/k12a/probes/Names.lean:48:8: error(lean.unknownIdentifier): Unknown identifier `HadwigerNelson.Plane.volume_densitySet_diff`
+data/fs131/k12a/probes/Names.lean:49:8: error(lean.unknownIdentifier): Unknown identifier `HadwigerNelson.Plane.unitPairsNull_iff_ae_phi_eq_zero`
+@HadwigerNelson.Plane.pairSet_null_iff_ae_slice : ∀ {S T : Set ℂ},
+  MeasurableSet S →
+    MeasurableSet T →
+      ((volume.prod HadwigerNelson.Plane.arcLength) (HadwigerNelson.Plane.pairSet S T) = 0 ↔
+        ∀ᵐ (θ : ℝ) ∂HadwigerNelson.Plane.arcLength, volume {x | x ∈ S ∧ x + HadwigerNelson.Plane.e θ ∈ T} = 0)

@@ -1,0 +1,90 @@
+slot: admitted icl1: mem 6 GiB (hard cap), cpus 0,1
+data/fs131/icl1/work/CountExtension.lean:72:8: error: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
+  QuotientAddGroup.instTopologicalSpace (nsmulAddMonoidHom (N + 1)).range
+inferred
+  ⊥
+data/fs131/icl1/work/CountExtension.lean:72:41: error: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
+  QuotientAddGroup.instTopologicalSpace (nsmulAddMonoidHom (N + 1)).range
+inferred
+  ⊥
+data/fs131/icl1/work/CountExtension.lean:85:2: error: unsolved goals
+case e'_3
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+h1 : Tendsto (fun r => ((ιG F) r).1) (comap (⇑(ιG F)) (𝓝 0)) (𝓝 0.1)
+x✝ : ↥(unitRing F)
+⊢ (mixedEmbedding ↥(fieldI F)) ⟨↑x✝, ⋯⟩ = (mixedEmbedding ↥(fieldI F)) ((toL F) x✝)
+
+case e'_5
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+h1 : Tendsto (fun r => ((ιG F) r).1) (comap (⇑(ιG F)) (𝓝 0)) (𝓝 0.1)
+⊢ (mixedEmbedding ↥(fieldI F)) ⟨↑0, ⋯⟩ = 0.1
+data/fs131/icl1/work/CountExtension.lean:301:10: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (c, g).1 (π m (c, g).2)
+in the target expression
+  c (π m g) = c (π m (g + t))
+
+case pos
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+μ : InvariantColouring F
+σ : Measure (Dual F)
+hσ : IsTraceSpectral F μ.μ σ
+hTA : σ (TA F)ᶜ = 0
+this✝¹ : IsProbabilityMeasure μ.μ
+this✝ : Countable ↥F
+this : Countable ↥(unitRing F)
+en : ℕ → ↥(unitRing F)
+hen : Function.Surjective en
+hT : Tendsto (fun y => μ.μ {c | c 0 ≠ c y}) (comap (⇑(ιG F)) (𝓝 0)) (𝓝 0)
+W : ℕ → Set (G F)
+hWn : ∀ (n : ℕ), W n ∈ 𝓝 0
+hWp :
+  ∀ (n : ℕ),
+    ∀ a ∈ W n, ∀ b ∈ W n, ∀ d ∈ W n, ∀ (y : ↥(unitRing F)), (ιG F) y = a - b - d → μ.μ {c | c 0 ≠ c y} ≤ (1 / 2) ^ n
+O : ℕ → Set (G F) := fun n => ⋂ k ∈ Finset.range (n + 1), interior (W k)
+hO : O = fun n => ⋂ k ∈ Finset.range (n + 1), interior (W k)
+hOopen : ∀ (n : ℕ), IsOpen (O n)
+hO0 : ∀ (n : ℕ), 0 ∈ O n
+hOsub : ∀ (n : ℕ), O n ⊆ W n
+hOanti : ∀ (n : ℕ), O (n + 1) ⊆ O n
+hex : ∀ (n : ℕ) (g : G F), ∃ j, (ιG F) (en j) - g ∈ O n
+π : ℕ → G F → ↥(unitRing F) := fun n g => en (Nat.find ⋯)
+hπ : π = fun n g => en (Nat.find ⋯)
+hπmem : ∀ (n : ℕ) (g : G F), (ιG F) (π n g) - g ∈ O n
+hπm : ∀ (n : ℕ), Measurable (π n)
+hev : Measurable fun p => p.1 p.2
+hcm : ∀ (n : ℕ), Measurable fun x => x.1 (π n x.2)
+stab : (↥(unitRing F) → Fin 4) × G F → ℕ → Prop := fun x N => ∀ (n : ℕ), N ≤ n → x.1 (π n x.2) = x.1 (π N x.2)
+hstab : stab = fun x N => ∀ (n : ℕ), N ≤ n → x.1 (π n x.2) = x.1 (π N x.2)
+hstabm : ∀ (N : ℕ), MeasurableSet {x | stab x N}
+EC : Set ((↥(unitRing F) → Fin 4) × G F) := {x | ∃ N, stab x N}
+hEC : EC = {x | ∃ N, stab x N}
+hECm : MeasurableSet EC
+hp : ∀ (x : (↥(unitRing F) → Fin 4) × G F), ∃ N, stab x N ∨ x ∉ EC
+hpm : ∀ (N : ℕ), MeasurableSet {x | stab x N ∨ x ∉ EC}
+f : (↥(unitRing F) → Fin 4) → G F → Fin 4 := fun c g => c (π (Nat.find ⋯) g)
+hf : f = fun c g => c (π (Nat.find ⋯) g)
+hfm : Measurable (Function.uncurry f)
+hfval : ∀ x ∈ EC, ∀ (n : ℕ), Nat.find ⋯ ≤ n → x.1 (π n x.2) = f x.1 x.2
+hae : ∀ (g : G F), ∀ᵐ (c : ↥(unitRing F) → Fin 4) ∂μ.μ, (c, g) ∈ EC
+g t : G F
+ht : t ∈ closure (⇑(ιG F) '' unitVectorsR F)
+C : ℕ → Set (↥(unitRing F) → Fin 4) := fun m => {c | c (π m g) = c (π m (g + t))}
+hC : C = fun m => {c | c (π m g) = c (π m (g + t))}
+hCle : ∀ (m : ℕ), μ.μ (C m) ≤ (1 / 2) ^ m
+hnull : ∀ (M : ℕ), μ.μ (⋂ m, ⋂ (_ : M ≤ m), C m) = 0
+hbad : μ.μ ({c | (c, g) ∉ EC} ∪ {c | (c, g + t) ∉ EC}) = 0
+c : ↥(unitRing F) → Fin 4
+hc : c ∈ {c | f c g = f c (g + t)}
+h1 : (c, g) ∈ EC
+h2 : (c, g + t) ∈ EC
+m : ℕ
+hm : max (Nat.find ⋯) (Nat.find ⋯) ≤ m
+e1 : (c, g).1 (π m (c, g).2) = f (c, g).1 (c, g).2
+e2 : (c, g + t).1 (π m (c, g + t).2) = f (c, g + t).1 (c, g + t).2
+⊢ c (π m g) = c (π m (g + t))
+data/fs131/icl1/work/CountExtension.lean:312:8: warning: declaration uses `sorry`
+Command exited with non-zero status 1
+wall=6.35s maxrss=4069796kB

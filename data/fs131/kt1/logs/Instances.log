@@ -1,0 +1,8 @@
+slot: admitted kt1: mem 4 GiB (hard cap), cpus 0,1
+RestrictedProduct.isTopologicalRing fun w =>
+  IsDedekindDomain.HeightOneSpectrum.adicCompletion ↥(HadwigerNelson.SpectralChain.fieldI F) ↑w
+instIsTopologicalRingProd
+Prod.t2Space
+Prod.instIsTopologicalAddGroup
+Prod.locallyCompactSpace ({ w // w.IsReal } → ℝ) ({ w // w.IsComplex } → ℂ)
+exit=0

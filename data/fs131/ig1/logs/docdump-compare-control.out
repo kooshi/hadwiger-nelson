@@ -1,0 +1,5 @@
+constants: 304 before, 304 after; differing, missing or added: 3
+DIFFERS HadwigerNelson.Rigidity.AdmissiblePair
+MISSING HadwigerNelson.Rigidity.AdmissiblePair._sizeOf_1
+ADDED   planted.added
+CONTROL: 3 of 3 planted faults reported — the check can fail

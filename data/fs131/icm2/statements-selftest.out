@@ -1,0 +1,9 @@
+BINDER-MISS HadwigerNelson.Rigidity.tca_iff (ClassRatio): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.RatioAtMost (ClassRatio): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.unitVectorsR (CountCompletion): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.exists_invariantColouring_rat (CountModels): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.not_r88TCA_rat (CountModels): names Subfield, lacks NumberField
+BINDER-MISS HadwigerNelson.Rigidity.Counting.ratColouring (CountModels): names Subfield, lacks NumberField
+SAME=44 CHANGED=0 RULED=0 MISSING=0 ADDED-INTERNAL=0 ADDED-GENERATED=0 NEW-MODULE=0 ADDED-PUBLIC=0
+PRIVATE-SAME=69 PRIVATE-CHANGED=0 PRIVATE-MISSING=0
+RESULT: PASS

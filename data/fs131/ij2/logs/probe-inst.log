@@ -1,0 +1,40 @@
+slot: admitted ij2: mem 4 GiB (hard cap), cpus 0,1
+Pi.borelSpace
+instHasOuterApproxClosedOfPseudoMetrizableSpace (↥(unitRing F) → Fin 4)
+Function.compactSpace
+Pi.t2Space
+instCompactSpaceProbabilityMeasure
+@ProbabilityMeasure.limsup_measure_closed_le_of_tendsto : ∀ {Ω : Type u_1} {ι : Type u_2} {L : Filter ι}
+  [inst : MeasurableSpace Ω] [inst_1 : TopologicalSpace Ω] [inst_2 : OpensMeasurableSpace Ω] [HasOuterApproxClosed Ω]
+  {μ : ProbabilityMeasure Ω} {μs : ι → ProbabilityMeasure Ω},
+  Filter.Tendsto μs L (nhds μ) → ∀ {F : Set Ω}, IsClosed F → Filter.limsup (fun i => ↑(μs i) F) L ≤ ↑μ F
+@ProbabilityMeasure.tendsto_iff_forall_integral_tendsto : ∀ {Ω : Type u_1} [inst : MeasurableSpace Ω]
+  [inst_1 : TopologicalSpace Ω] [inst_2 : OpensMeasurableSpace Ω] {γ : Type u_2} {F : Filter γ}
+  {μs : γ → ProbabilityMeasure Ω} {μ : ProbabilityMeasure Ω},
+  Filter.Tendsto μs F (nhds μ) ↔
+    ∀ (f : BoundedContinuousFunction Ω ℝ),
+      Filter.Tendsto (fun i => ∫ (ω : Ω), f ω ∂↑(μs i)) F (nhds (∫ (ω : Ω), f ω ∂↑μ))
+@ext_of_forall_integral_eq_of_IsFiniteMeasure : ∀ {Ω : Type u_1} [inst : MeasurableSpace Ω]
+  [inst_1 : TopologicalSpace Ω] [HasOuterApproxClosed Ω] [BorelSpace Ω] {μ ν : Measure Ω} [IsFiniteMeasure μ]
+  [IsFiniteMeasure ν], (∀ (f : BoundedContinuousFunction Ω ℝ), ∫ (x : Ω), f x ∂μ = ∫ (x : Ω), f x ∂ν) → μ = ν
+@integral_finsetSum_measure : ∀ {α : Type u_1} {G : Type u_2} [inst : NormedAddCommGroup G] [inst_1 : NormedSpace ℝ G]
+  {ι : Type u_3} {m : MeasurableSpace α} {f : α → G} {μ : ι → Measure α} {s : Finset ι},
+  (∀ i ∈ s, Integrable f (μ i)) → ∫ (a : α), f a ∂∑ i ∈ s, μ i = ∑ i ∈ s, ∫ (a : α), f a ∂μ i
+@Measure.coe_finsetSum : ∀ {α : Type u_1} {ι : Type u_2} {_m : MeasurableSpace α} (I : Finset ι) (μ : ι → Measure α),
+  ⇑(∑ i ∈ I, μ i) = ∑ i ∈ I, ⇑(μ i)
+@prob_compl_eq_zero_iff : ∀ {α : Type u_1} {m0 : MeasurableSpace α} {μ : Measure α} {s : Set α}
+  [IsProbabilityMeasure μ], MeasurableSet s → (μ sᶜ = 0 ↔ μ s = 1)
+@isClosed_iff_forall_filter : ∀ {X : Type u_1} [inst : TopologicalSpace X] {s : Set X},
+  IsClosed s ↔ ∀ (x : X) (F : Filter X), F.NeBot → F ≤ Filter.principal s → F ≤ nhds x → x ∈ s
+@IsCompact.inter_iInter_nonempty : ∀ {X : Type u_1} [inst : TopologicalSpace X] {s : Set X} {ι : Type u_2},
+  IsCompact s →
+    ∀ (t : ι → Set X),
+      (∀ (i : ι), IsClosed (t i)) → (∀ (u : Finset ι), (s ∩ ⋂ i ∈ u, t i).Nonempty) → (s ∩ ⋂ i, t i).Nonempty
+IsCompact.ultrafilter_le_nhds
+  isCompact_univ : ∀ (f : Ultrafilter ?m.5), ↑f ≤ Filter.principal Set.univ → ∃ x ∈ Set.univ, ↑f ≤ nhds x
+@Finset.sum_range_sub : ∀ {G : Type u_1} [inst : AddCommGroup G] (f : ℕ → G) (n : ℕ),
+  ∑ i ∈ Finset.range n, (f (i + 1) - f i) = f n - f 0
+@tendsto_one_div_add_atTop_nhds_zero_nat : ∀ {𝕜 : Type u_1} [inst : DivisionSemiring 𝕜] [inst_1 : CharZero 𝕜]
+  [inst_2 : TopologicalSpace 𝕜] [ContinuousSMul ℚ≥0 𝕜], Filter.Tendsto (fun n => 1 / (↑n + 1)) Filter.atTop (nhds 0)
+seconds=2
+exit=0

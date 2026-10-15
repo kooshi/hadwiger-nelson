@@ -1,0 +1,22 @@
+slot: admitted itk1: mem 4 GiB (hard cap), cpus 4,5
+data/fs131/itk1/work/GlobalPoint.lean:307:15: error: typeclass instance problem is stuck
+  NumberField ↥?m.2327
+
+Note: Lean will not try to resolve this typeclass instance problem because the first and second type arguments to `NumberField` contain metavariables. These arguments must be fully determined before Lean will try to resolve the typeclass.
+
+Hint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.
+data/fs131/itk1/work/GlobalPoint.lean:350:50: error: Application type mismatch: The argument
+  LT.lt.ne' (LE.le.trans_lt' InfinitePlace.one_le_mult zero_lt_one)
+has type
+  ↑(InfinitePlace.mult ?m.2874) ≠ 0
+but is expected to have type
+  v₀.mult ≠ 0
+in the application
+  pow_le_of_le_one ?m.2871 h8δ (LT.lt.ne' (LE.le.trans_lt' InfinitePlace.one_le_mult zero_lt_one))
+data/fs131/itk1/work/GlobalPoint.lean:401:8: warning: declaration uses `sorry`
+data/fs131/itk1/work/GlobalPoint.lean:414:8: warning: declaration uses `sorry`
+data/fs131/itk1/work/GlobalPoint.lean:425:8: warning: declaration uses `sorry`
+data/fs131/itk1/work/GlobalPoint.lean:440:8: warning: declaration uses `sorry`
+data/fs131/itk1/work/GlobalPoint.lean:446:8: warning: declaration uses `sorry`
+seconds=14
+exit=1

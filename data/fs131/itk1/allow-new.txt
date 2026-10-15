@@ -1,0 +1,6 @@
+# FS131-ITK1: theorems Lean generates on demand (reserved `congr_simp` names, which no author can declare), one copy each
+HadwigerNelson.Rigidity.SAdeleRing.congr_simp
+HadwigerNelson.Rigidity.TateModel.congr_simp
+HadwigerNelson.Rigidity.WPlace.absAt.congr_simp
+HadwigerNelson.Rigidity.multiplier.congr_simp
+HadwigerNelson.Rigidity.splitHeight.congr_simp

@@ -1,0 +1,6 @@
+slot: admitted kt1: mem 4 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:143:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:147:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:151:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:157:8: warning: declaration uses `sorry`
+exit=0

@@ -1,0 +1,28 @@
+slot: admitted icl2: mem 6 GiB (hard cap), cpus 0,1
+@HadwigerNelson.Rigidity.Counting.finite_quot : ∀ {F : Subfield ℝ} [NumberField ↥F]
+  (P : HadwigerNelson.SpectralChain.StablePrime F) (m : ℕ),
+  Finite (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P ^ m)
+@HadwigerNelson.Rigidity.Counting.neg_mem_normOneQ : ∀ {F : Subfield ℝ} (P : HadwigerNelson.SpectralChain.StablePrime F)
+  (m : ℕ) {x : NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P ^ m},
+  x ∈ HadwigerNelson.Rigidity.Counting.normOneQ P m → -x ∈ HadwigerNelson.Rigidity.Counting.normOneQ P m
+@HadwigerNelson.Rigidity.Counting.isIndepSet_levelTarget_iff : ∀ {F : Subfield ℝ}
+  (P : HadwigerNelson.SpectralChain.StablePrime F) {m : ℕ},
+  1 ≤ m →
+    ∀ (s : Finset (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P ^ m)),
+      (HadwigerNelson.SpectralChain.levelTarget P m).IsIndepSet ↑s ↔
+        HadwigerNelson.Rigidity.SIndep (HadwigerNelson.Rigidity.Counting.normOneQ P m) s
+@HadwigerNelson.Rigidity.Counting.ratioLe_normOneQ : ∀ {F : Subfield ℝ} (P : HadwigerNelson.SpectralChain.StablePrime F)
+  {c : ℝ},
+  HadwigerNelson.Rigidity.RatioAtMost P c →
+    ∀ {m : ℕ}, 1 ≤ m → HadwigerNelson.Rigidity.RatioLe (HadwigerNelson.Rigidity.Counting.normOneQ P m) c
+@HadwigerNelson.Rigidity.Counting.exists_unitRing_of_normOneL : ∀ {F : Subfield ℝ}
+  {x : ↥(HadwigerNelson.SpectralChain.fieldI F)},
+  x ∈ HadwigerNelson.Rigidity.Counting.normOneL F →
+    ∃ r, (HadwigerNelson.Rigidity.ofUnitRing F) r = x ∧ ↑r ∈ HadwigerNelson.SpectralChain.unitVectors F
+'HadwigerNelson.Rigidity.Counting.ratioLe_levR_range' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Rigidity.Counting.exists_level_mem_nsmul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.ratioLe_pi' depends on axioms: [propext, Classical.choice, Quot.sound]
+wall=1.90s maxrss=4007568kB

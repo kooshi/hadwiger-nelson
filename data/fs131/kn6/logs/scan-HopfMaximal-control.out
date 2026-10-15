@@ -1,0 +1,4 @@
+HIT HopfMaximal.lean:110: [#eval] #eval (1 : Nat)
+HIT HopfMaximal.lean:111: [import] import Evil
+scanned HopfMaximal.lean: lines=111 hits=2
+control FIRED

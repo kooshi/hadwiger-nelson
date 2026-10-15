@@ -1,0 +1,23 @@
+compared: 135 named constants of the first dump (kinds, types, modules), 39 data definitions' values, 3 example heads of the base files
+internal (not compared): 79 before, 76 after
+new public constants in the second dump: 1 (allow-list: 0)
+  NEW THM HadwigerNelson.Rigidity.planted_new_public
+new private constants in the second dump: 0
+examples in the working files that the base does not hold: 0
+RULED RENAME THM HadwigerNelson.Rigidity.Counting.toL_mem_localRing -> HadwigerNelson.Rigidity.Counting.ofUnitRing_mem_localRing
+RULED DELETE DEF HadwigerNelson.Rigidity.Counting.toL: in the first dump only (the ruled replacement)
+RULED PUBLIC THM HadwigerNelson.Rigidity.exists_rat_coords: was _private.Proofs.HadwigerNelson.Rigidity.ChainAtTA.0.HadwigerNelson.Rigidity.exists_rat_coords; stored type identical, module Proofs.HadwigerNelson.Rigidity.ChainAtTA
+RULED PUBLIC THM HadwigerNelson.Rigidity.mem_torsion_mul_arch_iff: was _private.Proofs.HadwigerNelson.Rigidity.ChainAtTA.0.HadwigerNelson.Rigidity.mem_torsion_mul_arch_iff; stored type identical, module Proofs.HadwigerNelson.Rigidity.ChainAtTA
+RULED SUBST TYPE THM HadwigerNelson.Rigidity.Counting.toL_mem_localRing: differs only in the replaced name (and the hygienic hash of 2 binder-name tokens of the renamed theorem)
+RULED SUBST VALUE DEF HadwigerNelson.Rigidity.Counting.toLocal: differs only in the replaced name
+RULED SUBST VALUE DEF HadwigerNelson.Rigidity.Counting.ιG: differs only in the replaced name
+MODULE   HadwigerNelson.Rigidity.tauPrime: Proofs.HadwigerNelson.Rigidity.ContinuityGroup -> Proofs.HadwigerNelson.Rigidity.BochnerTau (a move the job was not given)
+TYPE     THM HadwigerNelson.Rigidity.mem_archChars_of_continuousAt: the stored statement differs
+VALUE    DEF HadwigerNelson.Rigidity.archTop: the stored definition differs
+MISSING  THM HadwigerNelson.Rigidity.exists_fejer_measures: in the first dump, not in the second
+KIND     HadwigerNelson.Rigidity.exists_twisted_parts: THM -> DEF
+TYPE     THM HadwigerNelson.Rigidity.Counting.exists_unitRing_of_normOneL: the stored statement differs
+TYPE     THM HadwigerNelson.Rigidity.Counting.count_of_oneAvoidingDensityBound: the stored statement differs
+AXIOMS   the modules must declare no axiom: ['HadwigerNelson.Rigidity.planted_axiom']
+NEW      THM HadwigerNelson.Rigidity.planted_new_public: a new public constant that the allow-list does not hold
+CONTROL: 9 of 9 planted faults reported — the check can fail

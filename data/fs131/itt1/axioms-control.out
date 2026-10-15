@@ -1,0 +1,21 @@
+records: 97 (printer count 97); CLEAN 79; OTHER-LEAF 14
+  OTHER-LEAF RingScope HadwigerNelson.Rigidity.unitRing_eq_stableIntegers: from ['HadwigerNelson.Rigidity.unitRing_eq_stableIntegers']
+  OTHER-LEAF ThinBoxes HadwigerNelson.Rigidity.TateModel.exists_box_partition: from ['HadwigerNelson.Rigidity.TateModel.exists_box_partition']
+  OTHER-LEAF ThinBoxes HadwigerNelson.Rigidity.TateModel.exists_orbit_box: from ['HadwigerNelson.Rigidity.TateModel.exists_orbit_box']
+  OTHER-LEAF ThinBoxes HadwigerNelson.Rigidity.TateModel.iterate_rot_π: from ['HadwigerNelson.Rigidity.TateModel.iterate_rot_π']
+  OTHER-LEAF ThinBoxes HadwigerNelson.Rigidity.TateModel.measurableSet_image: from ['HadwigerNelson.Rigidity.TateModel.measurableSet_image']
+  OTHER-LEAF ThinBoxes HadwigerNelson.Rigidity.TateModel.nameCell_subset: from ['HadwigerNelson.Rigidity.TateModel.nameCell_subset']
+  OTHER-LEAF ThinBoxes HadwigerNelson.Rigidity.TateModel.thinBox_heavy: from ['HadwigerNelson.Rigidity.TateModel.thinBox_heavy']
+  OTHER-LEAF ThinBoxes HadwigerNelson.Rigidity.exists_delta_of_one_lt: from ['HadwigerNelson.Rigidity.exists_delta_of_one_lt']
+  OTHER-LEAF ThinBoxes HadwigerNelson.Rigidity.exists_eps_lt: from ['HadwigerNelson.Rigidity.exists_eps_lt']
+  OTHER-LEAF ThinBoxes HadwigerNelson.Rigidity.isClosed_closedThinBox: from ['HadwigerNelson.Rigidity.isClosed_closedThinBox']
+  OTHER-LEAF ThinBoxes HadwigerNelson.Rigidity.isOpen_box: from ['HadwigerNelson.Rigidity.isOpen_box']
+  OTHER-LEAF ThinBoxes HadwigerNelson.Rigidity.size_le_of_mem_box: from ['HadwigerNelson.Rigidity.size_le_of_mem_box']
+  OTHER-LEAF ThinBoxes HadwigerNelson.Rigidity.sub_mem_box: from ['HadwigerNelson.Rigidity.sub_mem_box']
+  OTHER-LEAF ThinBoxes HadwigerNelson.Rigidity.zero_mem_box: from ['HadwigerNelson.Rigidity.zero_mem_box']
+planted record: reported, resting on HadwigerNelson.Rigidity.positive_entropy_rigidity
+AXIOM HadwigerNelson.Rigidity.archTrace_mixedEmbedding: ['HadwigerNelson.Rigidity.planted_axiom']
+AXIOM HadwigerNelson.Rigidity.exists_isApprox: ['HadwigerNelson.Rigidity.positive_entropy_rigidity']
+SORRY-MINE HadwigerNelson.Rigidity.TateModel.isOpenMap: from ['HadwigerNelson.Rigidity.TateModel.isOpenMap']
+SORRY-MINE HadwigerNelson.Rigidity.box: from ['HadwigerNelson.Rigidity.exists_trace_not_int_away']
+CONTROL: 4 of 4 planted faults reported — the check can fail

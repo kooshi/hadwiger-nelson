@@ -1,0 +1,34 @@
+import Proofs.HadwigerNelson.Rigidity.TraceSplit
+open MeasureTheory
+#check @integral_indicator_one
+#check @Measure.map_id'
+#check @Nat.cast_smul_eq_nsmul
+#check @integral_smul_measure
+#check @Measure.restrict_smul
+#check @Measure.restrictₗ_apply
+#check @integral_finsetSum_measure
+#check @integral_dirac'
+#check @Measure.dirac_apply'
+#check @integral_add_compl
+#check @mem_lpMeas_indicatorConstLp
+#check @Measure.finset_sum_apply
+#check @HadwigerNelson.SpectralInputs.integrable_colourIndicator
+#check @HadwigerNelson.SpectralInputs.mem_factorSets_iff
+#check @HadwigerNelson.SpectralInputs.measurableSet_factorSigma_iff
+#check @MeasurePreserving.integral_comp
+#check @Measure.map_congr
+#check @Measure.map_map
+#check @HadwigerNelson.SpectralChain.measurableSet_X4
+#check @HadwigerNelson.SpectralChain.measurable_rot
+#check @HadwigerNelson.Rigidity.contChars_tauPrime
+#check @HadwigerNelson.Rigidity.one_mem_TA
+#check @HadwigerNelson.Rigidity.measurableSet_TA
+#check @HadwigerNelson.Rigidity.bochnerOn_tauPrime
+#check @setIntegral_map
+#check @integral_re
+#check @Finset.sum_eq_zero_iff_of_nonneg
+#check @HadwigerNelson.SpectralInputs.rot_apply
+#check @UnitRing.conj_mem_planeOver
+#check @HadwigerNelson.UnitRing.conj_mem_planeOver
+example {X : Type*} [MeasurableSpace X] (s : Set X) (hs : MeasurableSet s) (c : ℝ) {μ : Measure X} [IsFiniteMeasure μ] :
+  indicatorConstLp 2 hs (measure_ne_top μ s) c = MemLp.toLp (s.indicator fun _ => c) (memLp_indicator_const 2 hs c (Or.inr (measure_ne_top μ s))) := rfl

@@ -1,0 +1,43 @@
+--- tools/fs131_ie1_port.py	2026-10-14 09:25:11.711592407 +0000
++++ build/fs131-ip23/gen/tools/fs131_ie1_port.py	2026-10-14 09:34:04.882712581 +0000
+@@ -285,6 +285,22 @@
+     "OAI015Generating": "read back",
+     "OAI015ErgodicDecomposition": "read back",
+ }
++# module -> (the read-back tool, its tables) when it is not FS131-IE1's, and a sentence the header adds (FS131-IP23)
++READBACK_TOOL = {
++    "OAI015Generating": ("tools/fs131_ip23_port_readback.py", "data/fs131/ip23/readback/"),
++    "OAI015ErgodicDecomposition": ("tools/fs131_ip23_port_readback.py", "data/fs131/ip23/readback/"),
++}
++READBACK_EXTRA = {
++    "OAI015ErgodicDecomposition": (
++        " Two statements, `orbitConvexHull_aeSetIntegral` and `invariant_set_independent_of_orbit_indicator_limit`, "
++        "are the release's under one named rule of that tool (EVENTUALLYEQSET): `s =ᵐ[μ] t` on sets is stored as "
++        "`Filter.EventuallyEqSet` at the release's pin, a definition of its own equal by unfolding to "
++        "`Filter.EventuallyEq` on the sets read as predicates, which is how it is stored here (the kernel checks the "
++        "unfolding at the release's pin). And one Mathlib definition these statements name moved between the pins "
++        "without moving its meaning, which no comparison of statements can see: the field of `ErgodicSMul` is "
++        "`EventuallyConst s (ae μ)` here and `EventuallyEmptyOrUniv s (ae μ)` there, where "
++        "`EventuallyEmptyOrUniv s l` is defined as `EventuallyConst (· ∈ s) l`."),
++}
+ # module -> the clause of the header's item on imports that says what the release's files import
+ RELEASE_IMPORTS_IE1 = ("the release's files import `Mathlib` whole and, for the maximal inequality, modules of the "
+                        "release that its text does not use.")
+@@ -734,13 +750,14 @@
+     o.extend(wrap_words(f"What is here: {what}. All of it is kernel-checked in this library: no axiom, no `sorry`.", 118))
+     o.append("")
+     if READBACK_NOTES[module] == "read back":
++        tool, tables = READBACK_TOOL.get(module, ("tools/fs131_ie1_port_readback.py", "data/fs131/ie1/readback/"))
+         o.extend(wrap_words(
+-            "**Compared with the release** as the kernel stores both (`tools/fs131_ie1_port_readback.py`, FS132-I2's "
+-            "comparator; its tables under `data/fs131/ie1/readback/`): each declaration's stored statement and each "
++            f"**Compared with the release** as the kernel stores both (`{tool}`, FS132-I2's "
++            f"comparator; its tables under `{tables}`): each declaration's stored statement and each "
+             "definition's stored value at the release's pin against this pin's — the same term, or, where the table says "
+             "so, the same once instance arguments and proof arguments are set aside. What that comparison leaves to "
+             "trust: that Mathlib's instances of one class on one type agree at the two pins. The proofs need no such "
+-            "comparison: the kernel checked them here.", 118))
++            "comparison: the kernel checked them here." + READBACK_EXTRA.get(module, ""), 118))
+     else:
+         o.extend(wrap_words(
+             "**Not read back across the pins**: the release's print of these files would need 89 files of the release "

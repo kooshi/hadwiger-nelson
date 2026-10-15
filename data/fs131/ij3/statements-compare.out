@@ -1,0 +1,18 @@
+compared: 867 named constants (kind, module, stored type), 210 data definitions' values, 4 example heads of the base files; 23 stored terms of the first dump touched by the publicity substitution
+new private constants: 25
+  Proofs.HadwigerNelson.Rigidity.BochnerTau: 24
+  Proofs.HadwigerNelson.Rigidity.EntropySplitMax: 1
+new examples: 0
+PROOF-ONLY VALUE DEF _private.Proofs.HadwigerNelson.Rigidity.BochnerTau.0.HadwigerNelson.Rigidity.uFive: the value differs in proof subterms only (the stored data, proofs erased, is equal)
+RULED PUBLIC THM HadwigerNelson.Rigidity.archHom.congr_simp (was private)
+RULED PUBLIC DEF HadwigerNelson.Rigidity.archHom (was private)
+RULED PUBLIC THM HadwigerNelson.Rigidity.exists_nsmul_mem_of_mem_nhds_profTop (was private)
+RULED PUBLIC THM HadwigerNelson.Rigidity.archTop_eq (was private)
+RULED PUBLIC THM HadwigerNelson.Rigidity.norm_archHom_nsmul (was private)
+RULED PUBLIC THM HadwigerNelson.Rigidity.nsmul_fivePow (was private)
+RULED PUBLIC DEF HadwigerNelson.Rigidity.fivePow (was private)
+RULED PUBLIC THM HadwigerNelson.Rigidity.inv_five_mem (was private)
+RULED PUBLIC THM HadwigerNelson.Rigidity.eventually_archTop (was private)
+RULED DROP HadwigerNelson.Rigidity.exists_pattern_names_le: the second type is the first with exactly the ruled binder removed
+RULED DROP HadwigerNelson.Rigidity.ZdAction.map_eq_of_isAddHaarMeasure: the second type is the first with exactly the ruled binder removed
+PASS: no statement and no definition changed but the ruled ones listed above

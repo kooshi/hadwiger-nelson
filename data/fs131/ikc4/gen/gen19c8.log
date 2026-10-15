@@ -1,0 +1,67 @@
+p=19 n=361 |S|=20 maps=40 sha=f94ed6360c11
+reps 182; pairs 16653; orbits 984
+ops 20274 [2.6s]
+slots 1783; identity model: HOLDS; total magnitude bits 125 [11.1s]
+PSD witnesses: 20 blocks diagonally dominant [76.1s]
+wrote data/fs131/ikc4/gen/mods8/FibreCert19B0.lean: 2227415 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19B1.lean: 1347504 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19B2.lean: 1343317 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19B3.lean: 1318001 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19B4.lean: 1322189 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19B5.lean: 1343318 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19B6.lean: 1343319 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19B7.lean: 1343319 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19B8.lean: 1343319 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19B9.lean: 1322191 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19B10.lean: 1343322 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19B11.lean: 1322194 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19B12.lean: 1297118 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19B13.lean: 1343322 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19B14.lean: 1297118 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19B15.lean: 1343322 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19B16.lean: 1318006 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19B17.lean: 1343322 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19B18.lean: 1322194 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19Q0.lean: 905 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19K0.lean: 2075777 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19K1.lean: 2113257 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19K2.lean: 2113799 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19K3.lean: 2113919 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19K4.lean: 2113513 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19K5.lean: 2114244 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19K6.lean: 2113330 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19K7.lean: 2113677 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19P1.lean: 308043 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19P2.lean: 537131 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19P3.lean: 582935 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19P4.lean: 582941 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19P5.lean: 605846 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19P6.lean: 628746 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19P7.lean: 628746 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19P8.lean: 628749 bytes
+wrote data/fs131/ikc4/gen/mods8/FibreCert19.lean: 1418175 bytes
+modules 37; largest 2227415 bytes; total 48977543 bytes
+w=127 ds=3 k1=17 kq=10 kr=158 kw=18 ko=11; chunks ops=72 rows=37 keys=32
+	Command being timed: "python3 -I tools/fs131_ikc4_gen.py /home/kooshi/source/lean-dir/data/search/2026-10-14/certs/v-p19-phi0-13-qs.json data/fs131/ikc4/gen/cert19 --nseg 4 --scale-bits 40 --split data/fs131/ikc4/gen/mods8 --prefix Proofs.HadwigerNelson.Arith.FibreCert19 --kt-maps 5 --p1-chunks 8"
+	User time (seconds): 81.22
+	System time (seconds): 0.17
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:21.75
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 135520
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 18
+	Minor (reclaiming a frame) page faults: 82903
+	Voluntary context switches: 25
+	Involuntary context switches: 585
+	Swaps: 0
+	File system inputs: 49816
+	File system outputs: 95832
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

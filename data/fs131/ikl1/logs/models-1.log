@@ -1,0 +1,28 @@
+slot: admitted ikl1f: mem 4 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/CertLinkModels.lean:26:23: error(lean.unknownIdentifier): Unknown identifier `fieldOfRadicands`
+
+Note: It is not possible to treat `fieldOfRadicands` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+Proofs/HadwigerNelson/Rigidity/CertLinkModels.lean:26:62: error(lean.unknownIdentifier): Unknown identifier `fieldOfRadicands`
+
+Note: It is not possible to treat `fieldOfRadicands` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+Proofs/HadwigerNelson/Rigidity/CertLinkModels.lean:27:27: error(lean.unknownIdentifier): Unknown identifier `fieldOfRadicands`
+
+Note: It is not possible to treat `fieldOfRadicands` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+Proofs/HadwigerNelson/Rigidity/CertLinkModels.lean:30:34: error(lean.unknownIdentifier): Unknown identifier `fieldOfRadicands`
+Proofs/HadwigerNelson/Rigidity/CertLinkModels.lean:33:27: error(lean.unknownIdentifier): Unknown identifier `fieldOfRadicands`
+Proofs/HadwigerNelson/Rigidity/CertLinkModels.lean:34:29: error(lean.unknownIdentifier): Unknown identifier `fieldOfRadicands`
+Proofs/HadwigerNelson/Rigidity/CertLinkModels.lean:36:29: error(lean.unknownIdentifier): Unknown identifier `fieldOfRadicands`
+Proofs/HadwigerNelson/Rigidity/CertLinkModels.lean:39:29: error(lean.unknownIdentifier): Unknown identifier `fieldOfRadicands`
+Proofs/HadwigerNelson/Rigidity/CertLinkModels.lean:40:51: error(lean.unknownIdentifier): Unknown identifier `fieldOfRadicands`
+Proofs/HadwigerNelson/Rigidity/CertLinkModels.lean:40:81: error: Invalid argument name `a` for function `card_nsmul_eq_zero'`
+
+Hint: Perhaps you meant one of the following parameter names:
+  • `x`: a̵x̲
+Proofs/HadwigerNelson/Rigidity/CertLinkModels.lean:43:75: error(lean.unknownIdentifier): Unknown identifier `fieldOfRadicands`
+Proofs/HadwigerNelson/Rigidity/CertLinkModels.lean:48:23: error(lean.unknownIdentifier): Unknown identifier `fieldOfRadicands`
+
+Note: It is not possible to treat `fieldOfRadicands` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+Proofs/HadwigerNelson/Rigidity/CertLinkModels.lean:48:64: error(lean.unknownIdentifier): Unknown identifier `fieldOfRadicands`
+
+Note: It is not possible to treat `fieldOfRadicands` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+farm: Rigidity/CertLinkModels from Proofs/HadwigerNelson/Rigidity/CertLinkModels.lean exit 1

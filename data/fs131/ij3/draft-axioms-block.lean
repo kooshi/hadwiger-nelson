@@ -1,0 +1,44 @@
+-- FS131-IJ3: CLEAN section, after FS131-IJ2's block (each printed [propext, Classical.choice, Quot.sound] at build 4)
+#print axioms HadwigerNelson.Rigidity.ZdAction.IsTotallyIrreducible.isIrreducible
+#print axioms HadwigerNelson.Rigidity.ZdAction.coe_nsmul
+#print axioms HadwigerNelson.Rigidity.ZdAction.eq_of_isErgodicOn_of_invariant_component
+#print axioms HadwigerNelson.Rigidity.ZdAction.invariantComponent_model
+#print axioms HadwigerNelson.Rigidity.ZdAction.map_eq_of_isAddHaarMeasure
+#print axioms HadwigerNelson.Rigidity.ZdAction.mulTwoThree
+#print axioms HadwigerNelson.Rigidity.ZdAction.noVirtuallyCyclicFactors_of_isIrreducible
+#print axioms HadwigerNelson.Rigidity.ZdAction.two_le_of_not_isVirtuallyCyclic
+#print axioms HadwigerNelson.Rigidity.archHom
+#print axioms HadwigerNelson.Rigidity.archTop_eq
+#print axioms HadwigerNelson.Rigidity.archimedean_support
+#print axioms HadwigerNelson.Rigidity.blockEntropy_iterate
+#print axioms HadwigerNelson.Rigidity.blockLabel
+#print axioms HadwigerNelson.Rigidity.bochnerOn_tauPrime
+#print axioms HadwigerNelson.Rigidity.condExpKernel_ergodicDecomposition
+#print axioms HadwigerNelson.Rigidity.eventually_archTop
+#print axioms HadwigerNelson.Rigidity.exists_nsmul_mem_of_mem_nhds_profTop
+#print axioms HadwigerNelson.Rigidity.exists_pattern_names_le
+#print axioms HadwigerNelson.Rigidity.exists_sectionPartition
+#print axioms HadwigerNelson.Rigidity.finFour_fibre_model
+#print axioms HadwigerNelson.Rigidity.finTwo_haar_model
+#print axioms HadwigerNelson.Rigidity.fivePow
+#print axioms HadwigerNelson.Rigidity.haarSet
+#print axioms HadwigerNelson.Rigidity.inv_five_mem
+#print axioms HadwigerNelson.Rigidity.invariantSigma
+#print axioms HadwigerNelson.Rigidity.invariantSigma_le
+#print axioms HadwigerNelson.Rigidity.isAddHaarMeasure_of_add_invariant
+#print axioms HadwigerNelson.Rigidity.ksEntropy_eq_zero_iff_of_finite
+#print axioms HadwigerNelson.Rigidity.ksEntropy_eq_zero_of_iterate
+#print axioms HadwigerNelson.Rigidity.ksEntropy_finite_mixture_eq_zero
+#print axioms HadwigerNelson.Rigidity.measurable_blockLabel
+#print axioms HadwigerNelson.Rigidity.measure_haarSet_eq_zero
+#print axioms HadwigerNelson.Rigidity.norm_archHom_nsmul
+#print axioms HadwigerNelson.Rigidity.not_smul_dualHaar_le_dirac_one
+#print axioms HadwigerNelson.Rigidity.nsmul_fivePow
+#print axioms HadwigerNelson.Rigidity.observationEntropy_comp_le
+#print axioms HadwigerNelson.Rigidity.positive_entropy_rigidity_model
+#print axioms HadwigerNelson.Rigidity.rotInv_sub_maxMultiple
+
+-- FS131-IJ3: IMPORTED section, resting on `HadwigerNelson.Rigidity.positive_entropy_rigidity` (declared; the standard three and it, at build 4)
+#print axioms HadwigerNelson.Rigidity.entropySplit_of_admissiblePair
+#print axioms HadwigerNelson.Rigidity.haar_or_zero_entropy
+#print axioms HadwigerNelson.Rigidity.ksEntropy_eq_zero_of_not_smul_le

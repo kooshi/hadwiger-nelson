@@ -1,0 +1,13 @@
+f=2 Q=4 n=4 P=19: e1=0 e2=1 check=PASS; 2-dim V avoiding mu (unordered pairs / 3): 10 (X26B-T1: 10) MATCH; PLANT (e1, e1): FAILS (good)
+f=3 Q=8 n=6 P=67: e1=2 e2=16 check=PASS; 2-dim V avoiding mu (unordered pairs / 3): 36 (X26B-T1: 36) MATCH; PLANT (e1, e1): FAILS (good)
+f=4 Q=16 n=8 P=285: e1=0 e2=28 check=PASS; 2-dim V avoiding mu (unordered pairs / 3): 68 (X26B-T1: 68) MATCH; PLANT (e1, e1): FAILS (good)
+f=5 Q=32 n=10 P=1033: e1=3 e2=344 check=PASS; F_4-lines V avoiding mu (pairs (e, e+N/3) / 3): 11 (X26B-T1: 11) MATCH; PLANT (e1, e1): FAILS (good)
+n=12 Q=64 P=4179: max c_r = 40 at r=10, min c_r = 26; least sum 65 - 2*40 = -15; the sums: [-15, -11, -7, -3, 1, 5, 9, 13]; CONTROL lambda_min = -15: MATCH
+  PLANT bound 39: FAILS (good)
+LEAN:
+  f=2: primCheck 4 19; colourCheck 4 0 1
+  f=3: primCheck 6 67; colourCheck 8 2 16
+  f=4: primCheck 8 285; colourCheck 16 0 28
+  f=5: primCheck 10 1033; colourCheck 32 3 344
+  n=12: primCheck 12 4179; countsOk bound 40
+ALL PASS

@@ -1,0 +1,2 @@
+slot: admitted icl2: mem 6 GiB (hard cap), cpus 0,1
+wall=5.29s maxrss=4096700kB

@@ -1,0 +1,78 @@
+slot: admitted kn8p: mem 4 GiB (hard cap), cpus 0,1
+@AddSubgroup.nsmul_index_mem : ∀ {G : Type u_1} [inst : AddGroup G] (H : AddSubgroup G) [H.Normal] (g : G),
+  H.index • g ∈ H
+@integral_mul_left_eq_self : ∀ {G : Type u_1} {E : Type u_2} [inst : MeasurableSpace G] [inst_1 : NormedAddCommGroup E]
+  [inst_2 : NormedSpace ℝ E] {μ : Measure G} [inst_3 : Group G] [MeasurableMul G] [μ.IsMulLeftInvariant] (f : G → E)
+  (g : G), ∫ (x : G), f (g * x) ∂μ = ∫ (x : G), f x ∂μ
+@integral_add_left_eq_self : ∀ {G : Type u_1} {E : Type u_2} [inst : MeasurableSpace G] [inst_1 : NormedAddCommGroup E]
+  [inst_2 : NormedSpace ℝ E] {μ : Measure G} [inst_3 : AddGroup G] [MeasurableAdd G] [μ.IsAddLeftInvariant] (f : G → E)
+  (g : G), ∫ (x : G), f (g + x) ∂μ = ∫ (x : G), f x ∂μ
+@StarAlgebra.adjoin_induction : ∀ {R : Type u_1} {A : Type u_2} [inst : CommSemiring R] [inst_1 : StarRing R]
+  [inst_2 : Semiring A] [inst_3 : Algebra R A] [inst_4 : StarRing A] [inst_5 : StarModule R A] {s : Set A}
+  {p : (x : A) → x ∈ StarAlgebra.adjoin R s → Prop},
+  (∀ (x : A) (h : x ∈ s), p x ⋯) →
+    (∀ (r : R), p ((algebraMap R A) r) ⋯) →
+      (∀ (x y : A) (hx : x ∈ StarAlgebra.adjoin R s) (hy : y ∈ StarAlgebra.adjoin R s), p x hx → p y hy → p (x + y) ⋯) →
+        (∀ (x y : A) (hx : x ∈ StarAlgebra.adjoin R s) (hy : y ∈ StarAlgebra.adjoin R s),
+            p x hx → p y hy → p (x * y) ⋯) →
+          (∀ (x : A) (hx : x ∈ StarAlgebra.adjoin R s), p x hx → p (star x) ⋯) →
+            ∀ {a : A} (ha : a ∈ StarAlgebra.adjoin R s), p a ha
+inferInstance : PolishSpace (ℕ → ℂ)
+@Topology.IsInducing.isCompact_iff : ∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X]
+  [inst_1 : TopologicalSpace Y] {s : Set X} {f : X → Y}, Topology.IsInducing f → (IsCompact s ↔ IsCompact (f '' s))
+@AddCircle.injective_toCircle : ∀ {T : ℝ}, T ≠ 0 → Function.Injective AddCircle.toCircle
+@AddCircle.toCircle_add : ∀ {T : ℝ} (x y : AddCircle T), (x + y).toCircle = x.toCircle * y.toCircle
+@condExpKernel : {Ω : Type u_1} →
+  [mΩ : MeasurableSpace Ω] →
+    [StandardBorelSpace Ω] → (μ : Measure Ω) → [IsFiniteMeasure μ] → (m : MeasurableSpace Ω) → Kernel Ω Ω
+@condExpKernel_ae_eq_condExp : ∀ {Ω : Type u_1} {m : MeasurableSpace Ω} [mΩ : MeasurableSpace Ω]
+  [inst : StandardBorelSpace Ω] {μ : Measure Ω} [inst_1 : IsFiniteMeasure μ],
+  m ≤ mΩ →
+    ∀ {s : Set Ω}, MeasurableSet s → (fun ω => ((condExpKernel μ m) ω).real s) =ᵐ[μ] μ[s.indicator fun ω => 1 | m]
+@setIntegral_condExp : ∀ {α : Type u_1} {E : Type u_2} {m m₀ : MeasurableSpace α} {μ : Measure α} {f : α → E}
+  {s : Set α} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [CompleteSpace E] (hm : m ≤ m₀)
+  [SigmaFinite (μ.trim hm)], Integrable f μ → MeasurableSet s → ∫ (x : α) in s, μ[f | m] x ∂μ = ∫ (x : α) in s, f x ∂μ
+@MeasurableEquiv.smul : {G : Type u_1} →
+  {α : Type u_2} →
+    [inst : MeasurableSpace α] → [inst_1 : Group G] → [inst_2 : MulAction G α] → [MeasurableConstSMul G α] → G → α ≃ᵐ α
+@MeasurableSpace.invariants : {α : Type u_1} → [m : MeasurableSpace α] → (α → α) → MeasurableSpace α
+@Measure.bind : {α : Type u_1} →
+  {β : Type u_2} → {mα : MeasurableSpace α} → {mβ : MeasurableSpace β} → Measure α → (α → Measure β) → Measure β
+@Nat.infinite_setOf_prime_and_eq_mod : ∀ {q : ℕ} [NeZero q] {a : ZMod q}, IsUnit a → {p | Nat.Prime p ∧ ↑p = a}.Infinite
+Circle.norm_coe : ∀ (z : Circle), ‖↑z‖ = 1
+@Measure.restrict_le_self : ∀ {α : Type u_1} {m0 : MeasurableSpace α} {μ : Measure α} {s : Set α}, μ.restrict s ≤ μ
+@ext_of_forall_integral_eq_of_IsFiniteMeasure : ∀ {Ω : Type u_1} [inst : MeasurableSpace Ω]
+  [inst_1 : TopologicalSpace Ω] [HasOuterApproxClosed Ω] [BorelSpace Ω] {μ ν : Measure Ω} [IsFiniteMeasure μ]
+  [IsFiniteMeasure ν], (∀ (f : BoundedContinuousFunction Ω ℝ), ∫ (x : Ω), f x ∂μ = ∫ (x : Ω), f x ∂ν) → μ = ν
+@BoundedContinuousFunction.mkOfCompact : {α : Type u_1} →
+  {β : Type u_2} →
+    [inst : TopologicalSpace α] →
+      [inst_1 : PseudoMetricSpace β] → [CompactSpace α] → C(α, β) → BoundedContinuousFunction α β
+@Measure.isAddHaarMeasure_map : ∀ {G : Type u_1} [inst : MeasurableSpace G] [inst_1 : AddGroup G]
+  [inst_2 : TopologicalSpace G] (μ : Measure G) [μ.IsAddHaarMeasure] [BorelSpace G] [ContinuousAdd G] {H : Type u_2}
+  [inst_6 : AddGroup H] [inst_7 : TopologicalSpace H] [inst_8 : MeasurableSpace H] [BorelSpace H]
+  [IsTopologicalAddGroup H] (f : G →+ H),
+  Continuous ⇑f →
+    Function.Surjective ⇑f →
+      Filter.Tendsto (⇑f) (Filter.cocompact G) (Filter.cocompact H) → (Measure.map (⇑f) μ).IsAddHaarMeasure
+@isConnected_iff_connectedSpace : ∀ {α : Type u_1} [inst : TopologicalSpace α] {s : Set α},
+  IsConnected s ↔ ConnectedSpace ↑s
+@MeasurableSpace.CountablyGenerated.comap : ∀ {α : Type u_1} {β : Type u_2} [m : MeasurableSpace β]
+  [h : MeasurableSpace.CountablyGenerated β] (f : α → β), MeasurableSpace.CountablyGenerated α
+@Measure.haarMeasure_unique : ∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G]
+  [inst_2 : IsTopologicalGroup G] [inst_3 : MeasurableSpace G] [inst_4 : BorelSpace G] [SecondCountableTopology G]
+  (μ : Measure G) [SigmaFinite μ] [μ.IsMulLeftInvariant] (K₀ : TopologicalSpace.PositiveCompacts G),
+  μ = μ ↑K₀ • Measure.haarMeasure K₀
+@Measure.trim : {α : Type u_1} → {m m0 : MeasurableSpace α} → Measure α → m ≤ m0 → Measure α
+@condExpKernel_apply_eq_condDistrib : ∀ {Ω : Type u_1} {m : MeasurableSpace Ω} [mΩ : MeasurableSpace Ω]
+  [inst : StandardBorelSpace Ω] {μ : Measure Ω} [inst_1 : IsFiniteMeasure μ] [inst_2 : Nonempty Ω] {ω : Ω},
+  (condExpKernel μ m) ω = (condDistrib id id μ) (id ω)
+@Measure.map_smul : ∀ {α : Type u_1} {β : Type u_2} {mα : MeasurableSpace α} {mβ : MeasurableSpace β} {R : Type u_3}
+  [inst : SMul R ENNReal] [inst_1 : IsScalarTower R ENNReal ENNReal] (c : R) (μ : Measure α) (f : α → β),
+  Measure.map f (c • μ) = c • Measure.map f μ
+@ae_restrict_iff' : ∀ {α : Type u_1} {m0 : MeasurableSpace α} {μ : Measure α} {s : Set α} {p : α → Prop},
+  MeasurableSet s → ((∀ᵐ (x : α) ∂μ.restrict s, p x) ↔ ∀ᵐ (x : α) ∂μ, x ∈ s → p x)
+data/fs131/kn8/lean/Names.lean:31:8: warning: `IntermediateField.adjoin_simple_toSubalgebra_of_integral` has been deprecated: Use `adjoin_simple_toSubalgebra_of_isAlgebraic` instead
+@IntermediateField.adjoin_simple_toSubalgebra_of_integral : ∀ {F : Type u_1} [inst : Field F] {E : Type u_2}
+  [inst_1 : Field E] [inst_2 : Algebra F E] {α : E}, IsIntegral F α → F⟮α⟯.toSubalgebra = F[α]
+exit=0

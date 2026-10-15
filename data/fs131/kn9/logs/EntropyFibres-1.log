@@ -1,0 +1,9 @@
+slot: admitted kn9: mem 4 GiB (hard cap), cpus 2,3
+Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:52:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:58:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:65:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:74:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:90:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:100:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:111:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/EntropyFibres.lean:121:8: warning: declaration uses `sorry`

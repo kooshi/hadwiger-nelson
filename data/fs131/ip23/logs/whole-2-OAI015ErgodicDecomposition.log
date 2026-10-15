@@ -1,0 +1,4 @@
+slot: waiting (ledger 20 + 4 > budget 22 GiB)
+slot: admitted ip23: mem 4 GiB (hard cap), cpus 4,5
+seconds=111
+exit=0

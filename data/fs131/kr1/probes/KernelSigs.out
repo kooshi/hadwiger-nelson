@@ -1,0 +1,61 @@
+slot: waiting (ledger 18 + 5 > budget 22 GiB)
+slot: waiting (ledger 22 + 5 > budget 22 GiB)
+slot: waiting (ledger 18 + 5 > budget 22 GiB)
+slot: waiting (ledger 22 + 5 > budget 22 GiB)
+slot: waiting (ledger 18 + 5 > budget 22 GiB)
+slot: waiting (ledger 22 + 5 > budget 22 GiB)
+slot: waiting (ledger 18 + 5 > budget 22 GiB)
+slot: waiting (ledger 22 + 5 > budget 22 GiB)
+slot: waiting (ledger 18 + 5 > budget 22 GiB)
+slot: waiting (ledger 22 + 5 > budget 22 GiB)
+slot: waiting (ledger 18 + 5 > budget 22 GiB)
+slot: waiting (ledger 22 + 5 > budget 22 GiB)
+slot: waiting (ledger 18 + 5 > budget 22 GiB)
+slot: waiting (ledger 22 + 5 > budget 22 GiB)
+slot: waiting (ledger 18 + 5 > budget 22 GiB)
+slot: waiting (ledger 22 + 5 > budget 22 GiB)
+slot: waiting (ledger 18 + 5 > budget 22 GiB)
+slot: admitted kr1: mem 5 GiB (hard cap), cpus 0,1
+Rigidity.bochnerHerglotz_of_countable : ∀ (G : Type u_1) [inst : AddCommGroup G] [Countable G],
+  SpectralChain.BochnerHerglotz G
+Rigidity.invariantMeasureOnClosed_of_countable : ∀ (F : Subfield ℝ) [Countable ↥(SpectralChain.unitRing F)],
+  SpectralChain.InvariantMeasureOnClosed F
+Rigidity.exists_shiftInvariant_on : ∀ (F : Subfield ℝ) [Countable ↥(SpectralChain.unitRing F)]
+  (K : Set (↥(SpectralChain.unitRing F) → Fin 4)),
+  K.Nonempty →
+    IsClosed K →
+      MeasurableSet K →
+        (∀ (y : ↥(SpectralChain.unitRing F)), ∀ c ∈ K, (fun x => c (x + y)) ∈ K) →
+          ∃ μ,
+            MeasureTheory.IsProbabilityMeasure μ ∧
+              μ Kᶜ = 0 ∧ ∀ (y : ↥(SpectralChain.unitRing F)), MeasureTheory.Measure.map (fun c x => c (x + y)) μ = μ
+Rigidity.contChars_tauPrime : ∀ (F : Subfield ℝ) [inst : NumberField ↥F],
+  SpectralInputs.contChars (Rigidity.tauPrime F) = Rigidity.TA F
+Rigidity.mem_archChars_of_continuousAt : ∀ (F : Subfield ℝ) [inst : NumberField ↥F] (χ : SpectralChain.Dual F),
+  ContinuousAt (fun r => χ r) 0 → χ ∈ Rigidity.archChars ↥(SpectralChain.unitRing F)
+Rigidity.bochnerOn_tauPrime : ∀ (F : Subfield ℝ) [inst : NumberField ↥F], SpectralInputs.BochnerOn (Rigidity.tauPrime F)
+Rigidity.exists_twisted_parts : ∀ (F : Subfield ℝ) [inst : NumberField ↥F]
+  (σ : MeasureTheory.Measure (SpectralChain.Dual F)) [MeasureTheory.IsFiniteMeasure σ],
+  (Continuous fun y => ∫ (χ : SpectralChain.Dual F), ↑(χ y) ∂σ) →
+    ∃ ψ,
+      (∀ (t : ↑(Rigidity.torsionChars ↥(SpectralChain.unitRing F))),
+          SpectralChain.PosDef fun y => (starRingEnd ℂ) ↑(↑t y) * ψ t y) ∧
+        (∀ (t : ↑(Rigidity.torsionChars ↥(SpectralChain.unitRing F))),
+            Continuous fun y => (starRingEnd ℂ) ↑(↑t y) * ψ t y) ∧
+          (Summable fun t => (ψ t 0).re) ∧
+            ∀ (y : ↥(SpectralChain.unitRing F)), HasSum (fun t => ψ t y) (∫ (χ : SpectralChain.Dual F), ↑(χ y) ∂σ)
+Rigidity.tca_of_five_le_localBound : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  5 ≤ SpectralChain.localBound F → SpectralChain.TCA F
+Rigidity.tca_uniform : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  SpectralChain.TCA F → ∃ c < 1 / 4, ∀ (P : SpectralChain.StablePrime F), Rigidity.RatioAtMost P c
+Rigidity.exists_uniform_tail : ∀ (F : Subfield ℝ) [inst : NumberField ↥F],
+  ∃ c < 1 / 4, ∃ B, ∀ (P : SpectralChain.StablePrime F), B < Ideal.absNorm P.P → Rigidity.RatioAtMost P c
+Plane.OneAvoidingDensityBound : Prop
+Plane.mOne_lt_quarter : Plane.OneAvoidingDensityBound → Plane.mOne < ENNReal.ofReal (1 / 4)
+'HadwigerNelson.Rigidity.bochnerHerglotz_of_countable' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Rigidity.tca_of_five_le_localBound' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.oneAvoidingDensityBound_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.mOne_lt_quarter' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]

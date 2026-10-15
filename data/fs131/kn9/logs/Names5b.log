@@ -1,0 +1,31 @@
+slot: admitted kn9: mem 4 GiB (hard cap), cpus 0,1
+@Measure.IsAddLeftInvariant.map_add_left_eq_self : ∀ {G : Type u_1} {inst : MeasurableSpace G} {inst_1 : Add G}
+  {μ : Measure G} [self : μ.IsAddLeftInvariant] (g : G), Measure.map (fun x => g + x) μ = μ
+@Measure.IsAddLeftInvariant.mk : ∀ {G : Type u_1} [inst : MeasurableSpace G] [inst_1 : Add G] {μ : Measure G},
+  (∀ (g : G), Measure.map (fun x => g + x) μ = μ) → μ.IsAddLeftInvariant
+data/fs131/kn9/lean/Names5b.lean:6:8: error(lean.unknownIdentifier): Unknown constant `AddMonoidHom.coe_pow`
+AddMonoid.End.coe_pow : ∀ (M : Type u_1) [inst : AddZero M] (f : AddMonoid.End M) (n : ℕ), ⇑(f ^ n) = (⇑f)^[n]
+data/fs131/kn9/lean/Names5b.lean:8:8: error(lean.unknownIdentifier): Unknown identifier `exists_open_nhds_zero_add`
+@exists_nhds_zero_half : ∀ {M : Type u_1} [inst : TopologicalSpace M] [inst_1 : AddZeroClass M] [ContinuousAdd M]
+  {s : Set M}, s ∈ nhds 0 → ∃ V ∈ nhds 0, ∀ v ∈ V, ∀ w ∈ V, v + w ∈ s
+@exists_open_nhds_zero_half : ∀ {M : Type u_1} [inst : TopologicalSpace M] [inst_1 : AddZeroClass M] [ContinuousAdd M]
+  {s : Set M}, s ∈ nhds 0 → ∃ V, IsOpen V ∧ 0 ∈ V ∧ ∀ v ∈ V, ∀ w ∈ V, v + w ∈ s
+@IsOpen.exists_iUnion_isClosed : ∀ {α : Type u_1} [inst : PseudoEMetricSpace α] {U : Set α},
+  IsOpen U → ∃ F, (∀ (n : ℕ), IsClosed (F n)) ∧ (∀ (n : ℕ), F n ⊆ U) ∧ ⋃ n, F n = U ∧ Monotone F
+@compact_covered_by_add_left_translates : ∀ {G : Type u_1} [inst : TopologicalSpace G] [inst_1 : AddGroup G]
+  [IsTopologicalAddGroup G] {K V : Set G},
+  IsCompact K → (interior V).Nonempty → ∃ t, K ⊆ ⋃ g ∈ t, (fun x => g + x) ⁻¹' V
+@Measure.MutuallySingular.sum_left : ∀ {α : Type u_1} {m0 : MeasurableSpace α} {ν : Measure α} {ι : Type u_2}
+  [Countable ι] {μ : ι → Measure α}, Measure.sum μ ⟂ₘ ν ↔ ∀ (i : ι), μ i ⟂ₘ ν
+data/fs131/kn9/lean/Names5b.lean:14:8: error(lean.unknownIdentifier): Unknown constant `MeasureTheory.Measure.isAddLeftInvariant_map`
+@Measure.map_map : ∀ {α : Type u_1} {β : Type u_2} {γ : Type u_3} {mα : MeasurableSpace α} {mβ : MeasurableSpace β}
+  {mγ : MeasurableSpace γ} {μ : Measure α} {g : β → γ} {f : α → β},
+  Measurable g → Measurable f → Measure.map g (Measure.map f μ) = Measure.map (g ∘ f) μ
+data/fs131/kn9/lean/Names5b.lean:16:8: error(lean.unknownIdentifier): Unknown constant `Countable.measurableSet`
+data/fs131/kn9/lean/Names5b.lean:17:8: error(lean.unknownIdentifier): Unknown constant `ProbabilityTheory.Kernel.ofFunOfCountable_apply`
+@Measure.bind_smul : ∀ {α : Type u_1} {β : Type u_2} {mα : MeasurableSpace α} {mβ : MeasurableSpace β} {R : Type u_3}
+  [inst : SMul R ENNReal] [inst_1 : IsScalarTower R ENNReal ENNReal] (c : R) (m : Measure α) (f : α → Measure β),
+  (c • m).bind f = c • m.bind f
+data/fs131/kn9/lean/Names5b.lean:19:8: error(lean.unknownIdentifier): Unknown constant `MeasureTheory.Measure.bind_add`
+@IsCompact.elim_nhds_subcover : ∀ {X : Type u_1} [inst : TopologicalSpace X] {s : Set X},
+  IsCompact s → ∀ (U : X → Set X), (∀ x ∈ s, U x ∈ nhds x) → ∃ t, (∀ x ∈ t, x ∈ s) ∧ s ⊆ ⋃ x ∈ t, U x

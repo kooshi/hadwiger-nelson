@@ -1,0 +1,4 @@
+HIT Bridge.lean:710: [#eval] #eval (1 : Nat)
+HIT Bridge.lean:711: [import] import Evil
+scanned Bridge.lean: lines=711 hits=2
+control FIRED

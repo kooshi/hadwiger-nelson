@@ -1,0 +1,11 @@
+DIFFERS  DROP HadwigerNelson.Rigidity.Counting.isIndepSet_levelTarget_iff: : NumberField
+DIFFERS  DROP HadwigerNelson.Rigidity.Counting.neg_mem_normOneQ: : NumberField
+DIFFERS  DROP HadwigerNelson.Rigidity.Counting.ratioLe_normOneQ: : NumberField
+DIFFERS  DROP HadwigerNelson.Rigidity.Counting.exists_unitRing_of_normOneL: : NumberField
+DIFFERS  DROP HadwigerNelson.Rigidity.Counting.Delta_ratCast: : NumberField
+DIFFERS  DROP HadwigerNelson.Rigidity.Counting.Delta_circle_mem_closure: : NumberField
+DIFFERS  DROP HadwigerNelson.Rigidity.Counting.pow_mem_normOneL: : NumberField
+DIFFERS  DROP HadwigerNelson.Rigidity.Counting.mul_mem_normOneL: : NumberField
+DIFFERS  ADD  HadwigerNelson.Rigidity.Counting.finite_quot: : NumberField
+DIFFERS  ADD  HadwigerNelson.Rigidity.Counting.rowsEdgeNull_levelRows: (HadwigerNelson.SpectralChain.TCA F) -> (
+plant: 10 of 10 entries report DIFFERS

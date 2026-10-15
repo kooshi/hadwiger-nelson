@@ -1,0 +1,99 @@
+slot: admitted k12a: mem 5 GiB (hard cap), cpus 0,1
+def HadwigerNelson.SpectralChain.Interface.Count : {F : Subfield ℝ} → Interface F → Prop :=
+fun {F} I => TCA F → I.R88TCA
+def HadwigerNelson.SpectralChain.Interface.R88TCA : {F : Subfield ℝ} → Interface F → Prop :=
+fun {F} I => ∀ (μ : InvariantColouring F) (σ : Measure (Dual F)), IsTraceSpectral F μ.μ σ → σ I.TAᶜ ≠ 0
+def HadwigerNelson.SpectralChain.TCA : Subfield ℝ → Prop :=
+fun F =>
+  ∀ (P : StablePrime F),
+    ∃ c < 1 / 4,
+      ∀ (m : ℕ),
+        1 ≤ m →
+          ∀ (s : Finset (NumberField.RingOfIntegers ↥(fieldI F) ⧸ P.P ^ m)),
+            (levelTarget P m).IsIndepSet ↑s →
+              ↑s.card ≤ c * ↑(Nat.card (NumberField.RingOfIntegers ↥(fieldI F) ⧸ P.P ^ m))
+def HadwigerNelson.SpectralChain.IsTraceSpectral : (F : Subfield ℝ) →
+  Measure (↥(unitRing F) → Fin 4) → Measure (Dual F) → Prop :=
+fun F μ σ => IsFiniteMeasure σ ∧ ∀ (y : ↥(unitRing F)), ∫ (χ : Dual F), ↑(χ y) ∂σ = ↑(corr F μ y)
+structure HadwigerNelson.SpectralChain.InvariantColouring (F : Subfield ℝ) : Type
+number of parameters: 1
+fields:
+  HadwigerNelson.SpectralChain.InvariantColouring.μ : Measure (↥(unitRing F) → Fin 4)
+  HadwigerNelson.SpectralChain.InvariantColouring.isProb : IsProbabilityMeasure self.μ
+  HadwigerNelson.SpectralChain.InvariantColouring.carried : self.μ (X4 F)ᶜ = 0
+  HadwigerNelson.SpectralChain.InvariantColouring.shift_inv : ∀ (y : ↥(unitRing F)),
+      Measure.map (fun c x => c (x + y)) self.μ = self.μ
+  HadwigerNelson.SpectralChain.InvariantColouring.rot_inv : ∀ (u : ↑(unitVectors F)),
+      Measure.map (fun c x => c (uvRing u * x)) self.μ = self.μ
+constructor:
+  HadwigerNelson.SpectralChain.InvariantColouring.mk {F : Subfield ℝ} (μ : Measure (↥(unitRing F) → Fin 4))
+    (isProb : IsProbabilityMeasure μ) (carried : μ (X4 F)ᶜ = 0)
+    (shift_inv : ∀ (y : ↥(unitRing F)), Measure.map (fun c x => c (x + y)) μ = μ)
+    (rot_inv : ∀ (u : ↑(unitVectors F)), Measure.map (fun c x => c (uvRing u * x)) μ = μ) : InvariantColouring F
+tca_uniform : ∀ (F : Subfield ℝ) [NumberField ↥F], TCA F → ∃ c < 1 / 4, ∀ (P : StablePrime F), RatioAtMost P c
+Plane.mOne_lt_quarter : Plane.OneAvoidingDensityBound → Plane.mOne < ENNReal.ofReal (1 / 4)
+@Plane.dist_ne_one_of_mem_densitySet : ∀ {A : Set ℂ},
+  MeasurableSet A →
+    Plane.UnitPairsNull A → ∀ {x y : ℂ}, y ∈ Plane.densitySet A → 0 < Plane.upperDensityAt A x → dist x y ≠ 1
+TA_subset_contChars : ∀ (F : Subfield ℝ) [inst : NumberField ↥F], TA F ⊆ SpectralInputs.contChars (tauPrime F)
+isCountablyGenerated_nhds_tauPrime : ∀ (F : Subfield ℝ) [inst : NumberField ↥F], (nhds 0).IsCountablyGenerated
+exists_mul_stableIntegers_le : ∀ (F : Subfield ℝ) [inst : NumberField ↥F],
+  ∃ c, c ≠ 0 ∧ ∀ x ∈ stableIntegers F, ↑c * x ∈ UnitRing.unitRing (conjOn ⋯)
+dense_mixedEmbedding_nsmul_unitRing : ∀ (F : Subfield ℝ) [NumberField ↥F] (N : ℕ),
+  N ≠ 0 → Dense {y | ∃ r ∈ UnitRing.unitRing (conjOn ⋯), y = (NumberField.mixedEmbedding ↥(fieldI F)) (↑N * r)}
+noRamifiedStableDyadic_of_tca : ∀ (F : Subfield ℝ) [NumberField ↥F], TCA F → NoRamifiedStableDyadic F
+@StablePrime.residue : {F : Subfield ℝ} →
+  [inst : NumberField ↥F] →
+    (P : StablePrime F) → (m : ℕ) → ↥P.localRing →+* NumberField.RingOfIntegers ↥(fieldI F) ⧸ P.P ^ m
+@UpperHalf.residue_conj : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (P : StablePrime F) (m : ℕ) (z : ↥P.localRing),
+  (P.residue m) ⟨(conjOn ⋯) ↑z, ⋯⟩ = (Ideal.quotientMap (P.P ^ m) (conjO F) ⋯) ((P.residue m) z)
+@UpperHalf.mem_localRing_of_mul_conj_eq_one : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (P : StablePrime F)
+  {u : ↥(fieldI F)}, u * (conjOn ⋯) u = 1 → u ∈ P.localRing
+@measure_limsup_atTop_eq_zero : ∀ {α : Type u_1} {F : Type u_2} [inst : FunLike F (Set α) ENNReal]
+  [OuterMeasureClass F α] {μ : F} {s : ℕ → Set α}, ∑' (i : ℕ), μ (s i) ≠ ⊤ → μ (Filter.limsup s Filter.atTop) = 0
+@measurable_find : ∀ {α : Type u_1} {mα : MeasurableSpace α} {p : α → ℕ → Prop} [inst : (x : α) → DecidablePred (p x)]
+  (hp : ∀ (x : α), ∃ N, p x N), (∀ (k : ℕ), MeasurableSet {x | p x k}) → Measurable fun x => Nat.find ⋯
+@Measure.addHaarMeasure : {G : Type u_1} →
+  [inst : AddGroup G] →
+    [inst_1 : TopologicalSpace G] →
+      [IsTopologicalAddGroup G] →
+        [inst : MeasurableSpace G] → [BorelSpace G] → TopologicalSpace.PositiveCompacts G → Measure G
+@tendsto_integral_filter_of_dominated_convergence : ∀ {α : Type u_1} {G : Type u_2} [inst : NormedAddCommGroup G]
+  [inst_1 : NormedSpace ℝ G] {m : MeasurableSpace α} {μ : Measure α} {ι : Type u_3} {l : Filter ι}
+  [l.IsCountablyGenerated] {F : ι → α → G} {f : α → G} (bound : α → ℝ),
+  (∀ᶠ (n : ι) in l, AEStronglyMeasurable (F n) μ) →
+    (∀ᶠ (n : ι) in l, ∀ᵐ (a : α) ∂μ, ‖F n a‖ ≤ bound a) →
+      Integrable bound μ →
+        (∀ᵐ (a : α) ∂μ, Filter.Tendsto (fun n => F n a) l (nhds (f a))) →
+          Filter.Tendsto (fun n => ∫ (a : α), F n a ∂μ) l (nhds (∫ (a : α), f a ∂μ))
+@IsDedekindDomain.exists_forall_sub_mem_ideal : ∀ {R : Type u_1} [inst : CommRing R] [IsDedekindDomain R] {ι : Type u_2}
+  {s : Finset ι} (P : ι → Ideal R) (e : ι → ℕ),
+  (∀ i ∈ s, Prime (P i)) →
+    (∀ i ∈ s, ∀ j ∈ s, i ≠ j → P i ≠ P j) → ∀ (x : ↥s → R), ∃ y, ∀ (i : ι) (hi : i ∈ s), y - x ⟨i, hi⟩ ∈ P i ^ e i
+@Ideal.finite_setOf_absNorm_le : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S]
+  [inst_2 : Module.Free ℤ S] [Module.Finite ℤ S] [CharZero S] (n : ℕ), {I | Ideal.absNorm I ≤ n}.Finite
+data/fs131/k12a/probes/Readback.lean:38:8: warning: `MeasurableSet.exists_isOpen_diff_lt` has been deprecated: Use `MeasurableSet.exists_isOpen_sdiff_lt` instead
+@MeasurableSet.exists_isOpen_diff_lt : ∀ {α : Type u_1} [inst : MeasurableSpace α] {μ : Measure α}
+  [inst_1 : TopologicalSpace α] [μ.OuterRegular] {A : Set α},
+  MeasurableSet A → μ A ≠ ⊤ → ∀ {ε : ENNReal}, ε ≠ 0 → ∃ U ⊇ A, IsOpen U ∧ μ U < ⊤ ∧ μ (U \ A) < ε
+data/fs131/k12a/probes/Readback.lean:39:8: warning: `MeasurableSet.exists_isCompact_diff_lt` has been deprecated: Use `MeasurableSet.exists_isCompact_sdiff_lt` instead
+@MeasurableSet.exists_isCompact_diff_lt : ∀ {α : Type u_1} [inst : MeasurableSpace α] {μ : Measure α}
+  [inst_1 : TopologicalSpace α] [OpensMeasurableSpace α] [T2Space α] [μ.InnerRegularCompactLTTop] ⦃A : Set α⦄,
+  MeasurableSet A → μ A ≠ ⊤ → ∀ {ε : ENNReal}, ε ≠ 0 → ∃ K ⊆ A, IsCompact K ∧ μ (A \ K) < ε
+NumberField.mixedEmbedding.latticeBasis : (K : Type u_1) →
+  [inst : Field K] →
+    [inst_1 : NumberField K] →
+      Module.Basis (Module.Free.ChooseBasisIndex ℤ (NumberField.RingOfIntegers K)) ℝ
+        (NumberField.mixedEmbedding.mixedSpace K)
+@Complex.exp_log : ∀ {x : ℂ}, x ≠ 0 → Complex.exp (Complex.log x) = x
+@Measure.prod_apply : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α] [inst_1 : MeasurableSpace β]
+  {μ : Measure α} {ν : Measure β} [SFinite ν] {s : Set (α × β)},
+  MeasurableSet s → (μ.prod ν) s = ∫⁻ (x : α), ν (Prod.mk x ⁻¹' s) ∂μ
+@lintegral_prod : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α] [inst_1 : MeasurableSpace β]
+  {μ : Measure α} {ν : Measure β} [SFinite ν] (f : α × β → ENNReal),
+  AEMeasurable f (μ.prod ν) → ∫⁻ (z : α × β), f z ∂μ.prod ν = ∫⁻ (x : α), ∫⁻ (y : β), f (x, y) ∂ν ∂μ
+@Nat.find : {p : ℕ → Prop} → [DecidablePred p] → (∃ n, p n) → ℕ
+@Filter.HasBasis.tendsto_left_iff : ∀ {α : Type u_1} {β : Type u_2} {ι : Sort u_3} {la : Filter α} {pa : ι → Prop}
+  {sa : ι → Set α} {lb : Filter β} {f : α → β},
+  la.HasBasis pa sa → (Filter.Tendsto f la lb ↔ ∀ t ∈ lb, ∃ i, pa i ∧ Set.MapsTo f (sa i) t)
+Real.arctan : ℝ → ℝ

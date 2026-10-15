@@ -1,0 +1,112 @@
+slot: waiting (ledger 20 + 4 > budget 22 GiB)
+slot: admitted k8b1: mem 4 GiB (hard cap), cpus 6,7
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:69:27: error(lean.invalidField): Invalid field `size`: The environment does not contain `Sum.size`, so it is not possible to project the field `size` from an expression
+  Sum.inl v
+of type
+  InfinitePlace ↥(fieldI F) ⊕ SplitPlace F
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:71:71: error(lean.invalidField): Invalid field `size`: The environment does not contain `Sum.size`, so it is not possible to project the field `size` from an expression
+  Sum.inr w
+of type
+  InfinitePlace ↥(fieldI F) ⊕ SplitPlace F
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:73:79: error(lean.invalidField): Invalid field `absAt`: The environment does not contain `Sum.absAt`, so it is not possible to project the field `absAt` from an expression
+  Sum.inl v
+of type
+  InfinitePlace ↥(fieldI F) ⊕ SplitPlace F
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:76:27: error(lean.invalidField): Invalid field `absAt`: The environment does not contain `Sum.absAt`, so it is not possible to project the field `absAt` from an expression
+  Sum.inr w
+of type
+  InfinitePlace ↥(fieldI F) ⊕ SplitPlace F
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:79:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:83:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:88:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:93:27: error(lean.invalidField): Invalid field `size`: The environment does not contain `Sum.size`, so it is not possible to project the field `size` from an expression
+  Sum.inr w
+of type
+  InfinitePlace ↥(fieldI F) ⊕ SplitPlace F
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:93:70: error(lean.invalidField): Invalid field `size`: The environment does not contain `Sum.size`, so it is not possible to project the field `size` from an expression
+  Sum.inr w
+of type
+  InfinitePlace ↥(fieldI F) ⊕ SplitPlace F
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:93:102: error(lean.invalidField): Invalid field `size`: The environment does not contain `Sum.size`, so it is not possible to project the field `size` from an expression
+  Sum.inr w
+of type
+  InfinitePlace ↥(fieldI F) ⊕ SplitPlace F
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:96:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:99:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:102:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:105:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:108:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:111:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:115:81: error(lean.invalidField): Invalid field `absAt`: The environment does not contain `Sum.absAt`, so it is not possible to project the field `absAt` from an expression
+  Sum.inr w
+of type
+  InfinitePlace ↥(fieldI F) ⊕ SplitPlace F
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:120:27: error(lean.invalidField): Invalid field `size`: The environment does not contain `Sum.size`, so it is not possible to project the field `size` from an expression
+  Sum.inr w
+of type
+  InfinitePlace ↥(fieldI F) ⊕ SplitPlace F
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:146:89: error(lean.invalidField): Invalid field `absAt`: The environment does not contain `Sum.absAt`, so it is not possible to project the field `absAt` from an expression
+  Sum.inr w
+of type
+  InfinitePlace ↥(fieldI F) ⊕ SplitPlace F
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:148:92: error(lean.invalidField): Invalid field `absAt`: The environment does not contain `Sum.absAt`, so it is not possible to project the field `absAt` from an expression
+  Sum.inr w
+of type
+  InfinitePlace ↥(fieldI F) ⊕ SplitPlace F
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:152:65: error(lean.invalidField): Invalid field `absAt`: The environment does not contain `Sum.absAt`, so it is not possible to project the field `absAt` from an expression
+  Sum.inr w
+of type
+  InfinitePlace ↥(fieldI F) ⊕ SplitPlace F
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:157:42: error(lean.invalidField): Invalid field `absAt`: The environment does not contain `Sum.absAt`, so it is not possible to project the field `absAt` from an expression
+  Sum.inr w
+of type
+  InfinitePlace ↥(fieldI F) ⊕ SplitPlace F
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:158:59: error(lean.invalidField): Invalid field `absAt`: The environment does not contain `Sum.absAt`, so it is not possible to project the field `absAt` from an expression
+  Sum.inr w
+of type
+  InfinitePlace ↥(fieldI F) ⊕ SplitPlace F
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:161:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:164:88: error(lean.invalidField): Invalid field `absAt`: The environment does not contain `Sum.absAt`, so it is not possible to project the field `absAt` from an expression
+  Sum.inr w
+of type
+  InfinitePlace ↥(fieldI F) ⊕ SplitPlace F
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:170:70: error(lean.invalidField): Invalid field `absAt`: The environment does not contain `Sum.absAt`, so it is not possible to project the field `absAt` from an expression
+  Sum.inr w
+of type
+  InfinitePlace ↥(fieldI F) ⊕ SplitPlace F
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:171:89: error(lean.invalidField): Invalid field `absAt`: The environment does not contain `Sum.absAt`, so it is not possible to project the field `absAt` from an expression
+  Sum.inr w
+of type
+  InfinitePlace ↥(fieldI F) ⊕ SplitPlace F
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:175:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:178:0: warning: automatically included section variable(s) unused in theorem `HadwigerNelson.Rigidity.unitL_eq_ofUnitRing`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:183:75: error(lean.invalidField): Invalid field `absAt`: The environment does not contain `Sum.absAt`, so it is not possible to project the field `absAt` from an expression
+  Sum.inr w
+of type
+  InfinitePlace ↥(fieldI F) ⊕ SplitPlace F
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:184:85: error(lean.invalidField): Invalid field `absAt`: The environment does not contain `Sum.absAt`, so it is not possible to project the field `absAt` from an expression
+  Sum.inr w
+of type
+  InfinitePlace ↥(fieldI F) ⊕ SplitPlace F
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:187:37: error(lean.invalidField): Invalid field `absAt`: The environment does not contain `Sum.absAt`, so it is not possible to project the field `absAt` from an expression
+  Sum.inr w
+of type
+  InfinitePlace ↥(fieldI F) ⊕ SplitPlace F
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:188:85: error(lean.invalidField): Invalid field `absAt`: The environment does not contain `Sum.absAt`, so it is not possible to project the field `absAt` from an expression
+  Sum.inr w
+of type
+  InfinitePlace ↥(fieldI F) ⊕ SplitPlace F
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:191:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:196:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:203:48: error(lean.invalidField): Invalid field `absAt`: The environment does not contain `Sum.absAt`, so it is not possible to project the field `absAt` from an expression
+  Sum.inr w
+of type
+  InfinitePlace ↥(fieldI F) ⊕ SplitPlace F
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:207:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaceSizes.lean:211:9: warning: declaration uses `sorry`
+exit=1

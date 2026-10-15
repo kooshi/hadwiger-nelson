@@ -1,0 +1,30 @@
+import Proofs.HadwigerNelson.Rigidity.PlaceSizes
+open NumberField IsDedekindDomain IsDedekindDomain.HeightOneSpectrum HadwigerNelson
+#check @mem_integers_of_valuation_le_one
+#check @NumberField.InfinitePlace.map_natCast
+#check @NumberField.InfinitePlace.apply
+#check @NumberField.InfinitePlace.mk_apply
+#check @UnitRing.mem_normOne_conjOn_iff
+#check @UnitRing.mem_normOne
+#check @NumberField.Embeddings.pow_eq_one_of_norm_eq_one
+#check @Ideal.IsMaximal.eq_of_le
+#check @Ideal.comap_ne_top
+#check @HeightOneSpectrum.isMaximal
+#check @NumberField.InfinitePlace.prod_eq_abs_norm
+#check @NumberField.prod_abs_eq_one
+#check @finprod_comp_equiv
+#check @Function.HasFiniteMulSupport
+#check @Finset.prod_sdiff
+#check @Finset.prod_image
+#check @Finset.mul_prod_erase
+#check @InfinitePlace.mult
+#check @Finset.prod_pow_eq_pow_sum
+#check @NumberField.InfinitePlace.sum_mult_eq
+#check @NumberField.FinitePlace.equivHeightOneSpectrum
+#check @UpperHalf.coe_conjO
+#check @SpectralChain.conjO
+#check @coe_conjOn
+#check @NumberField.InfinitePlace.comap_apply
+#check @IsIntegral.map
+#check @RingOfIntegers.isIntegral_coe
+example (F : Subfield ℝ) [NumberField F] (v : InfinitePlace (SpectralChain.fieldI F)) (n : ℕ) : v (n : SpectralChain.fieldI F) = n := by exact?

@@ -1,0 +1,48 @@
+slot: admitted ij1: mem 4 GiB (hard cap), cpus 5,6
+@integral_withDensity_eq_integral_smul : ∀ {X : Type u_1} {E : Type u_2} [inst : MeasurableSpace X] {μ : Measure X}
+  [inst_1 : NormedAddCommGroup E] [inst_2 : NormedSpace ℝ E] {f : X → NNReal},
+  Measurable f → ∀ (g : X → E), (∫ (x : X), g x ∂μ.withDensity fun x => ↑(f x)) = ∫ (x : X), f x • g x ∂μ
+Circle.coe_inv_eq_conj : ∀ (z : Circle), ↑z⁻¹ = (starRingEnd ℂ) ↑z
+@AddChar.map_neg_eq_inv : ∀ {A : Type u_1} {M : Type u_2} [inst : AddGroup A] [inst_1 : DivisionMonoid M]
+  (ψ : AddChar A M) (a : A), ψ (-a) = (ψ a)⁻¹
+@AddChar.map_sub_eq_div : ∀ {A : Type u_1} {M : Type u_2} [inst : AddCommGroup A] [inst_1 : DivisionCommMonoid M]
+  (ψ : AddChar A M) (a b : A), ψ (a - b) = ψ a / ψ b
+data/fs131/ij1/probes/Names3.lean:8:8: warning: `MeasureTheory.integral_finset_sum` has been deprecated: Use `MeasureTheory.integral_finsetSum` instead
+@integral_finset_sum : ∀ {α : Type u_1} {G : Type u_2} [inst : NormedAddCommGroup G] [inst_1 : NormedSpace ℝ G]
+  {m : MeasurableSpace α} {μ : Measure α} {ι : Type u_3} (s : Finset ι) {f : ι → α → G},
+  (∀ i ∈ s, Integrable (f i) μ) → ∫ (a : α), ∑ i ∈ s, f i a ∂μ = ∑ i ∈ s, ∫ (a : α), f i a ∂μ
+@integral_const_mul : ∀ {α : Type u_1} {m : MeasurableSpace α} {μ : Measure α} {L : Type u_2} [inst : RCLike L] (r : L)
+  (f : α → L), ∫ (a : α), r * f a ∂μ = r * ∫ (a : α), f a ∂μ
+@withDensity_apply : ∀ {α : Type u_1} {m0 : MeasurableSpace α} {μ : Measure α} (f : α → ENNReal) {s : Set α},
+  MeasurableSet s → (μ.withDensity f) s = ∫⁻ (a : α) in s, f a ∂μ
+@lintegral_coe_eq_integral : ∀ {α : Type u_1} {m : MeasurableSpace α} {μ : Measure α} (f : α → NNReal),
+  Integrable (fun x => ↑(f x)) μ → ∫⁻ (a : α), ↑(f a) ∂μ = ENNReal.ofReal (∫ (a : α), ↑(f a) ∂μ)
+@ofReal_integral_eq_lintegral_ofReal : ∀ {α : Type u_1} {m : MeasurableSpace α} {μ : Measure α} {f : α → ℝ},
+  Integrable f μ → 0 ≤ᵐ[μ] f → ENNReal.ofReal (∫ (x : α), f x ∂μ) = ∫⁻ (x : α), ENNReal.ofReal (f x) ∂μ
+@Integrable.of_bound : ∀ {α : Type u_1} {E : Type u_2} {mα : MeasurableSpace α} [inst : NormedAddCommGroup E]
+  {μ : Measure α} [IsFiniteMeasure μ] {f : α → E},
+  AEStronglyMeasurable f μ → ∀ (C : ℝ), (∀ᵐ (x : α) ∂μ, ‖f x‖ ≤ C) → Integrable f μ
+@Measurable.coe_nnreal_ennreal : ∀ {α : Type u_1} {mα : MeasurableSpace α} {f : α → NNReal},
+  Measurable f → Measurable fun x => ↑(f x)
+@HadwigerNelson.SpectralInputs.measurable_evalChar : ∀ {G : Type u_1} [inst : AddCommGroup G] (y : G),
+  Measurable fun χ => ↑(χ y)
+@FiniteMeasure.mass : {Ω : Type u_1} → [inst : MeasurableSpace Ω] → FiniteMeasure Ω → NNReal
+@FiniteMeasure.ennreal_mass : ∀ {Ω : Type u_1} [inst : MeasurableSpace Ω] {μ : FiniteMeasure Ω}, ↑μ.mass = ↑μ Set.univ
+@isFiniteMeasure_withDensity : ∀ {α : Type u_1} {m0 : MeasurableSpace α} {μ : Measure α} {f : α → ENNReal},
+  ∫⁻ (a : α), f a ∂μ ≠ ⊤ → IsFiniteMeasure (μ.withDensity f)
+@ClusterPt.mono : ∀ {X : Type u_1} [inst : TopologicalSpace X] {x : X} {f g : Filter X},
+  ClusterPt x f → f ≤ g → ClusterPt x g
+@Filter.Tendsto.mapClusterPt : ∀ {X : Type u_1} [inst : TopologicalSpace X] {α : Type u_2} {F : Filter α} {u : α → X}
+  {x : X} [F.NeBot], Filter.Tendsto u F (nhds x) → MapClusterPt x F u
+@MapClusterPt : {X : Type u_1} → [TopologicalSpace X] → {ι : Type u_2} → X → Filter ι → (ι → X) → Prop
+@mapClusterPt_iff_frequently : ∀ {X : Type u_1} [inst : TopologicalSpace X] {α : Type u_2} {F : Filter α} {u : α → X}
+  {x : X}, MapClusterPt x F u ↔ ∀ s ∈ nhds x, ∃ᶠ (a : α) in F, u a ∈ s
+@tendsto_nhds_unique : ∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [T2Space X] {f : Y → X}
+  {l : Filter Y} {a b : X} [l.NeBot], Filter.Tendsto f l (nhds a) → Filter.Tendsto f l (nhds b) → a = b
+@ClusterPt.map : ∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {f : X → Y}
+  {x : X} {lx : Filter X} {ly : Filter Y},
+  ClusterPt x lx → ContinuousAt f x → Filter.Tendsto f lx ly → ClusterPt (f x) ly
+HadwigerNelson.Rigidity.continuous_evalChar : ∀ (G : Type u_1) [inst : AddCommGroup G] (g : G),
+  Continuous fun χ => ↑(χ g)
+seconds=5
+exit=0

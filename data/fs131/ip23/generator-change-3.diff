@@ -1,0 +1,11 @@
+--- tools/fs131_ie1_port.py	2026-10-14 09:35:31.466950637 +0000
++++ build/fs131-ip23/gen/tools/fs131_ie1_port.py	2026-10-14 09:54:47.017608939 +0000
+@@ -260,6 +260,8 @@
+     (MIXTURES, "observationEntropy_finite_mixture_bounds", "unusedArguments"): _UNUSED,
+     (MIXTURES, "kernelCell_preserving", "unusedArguments"): _UNUSED,
+     (MIXTURES, "kernelCell_real", "unusedArguments"): _UNUSED,
++    # FS131-IP23: `[Nonempty Y]` (`lake lint`, data/fs131/ip23/logs/lint-1.log)
++    (ERGDEC, "condExpKernel_ae_constant", "unusedArguments"): _UNUSED,
+ }
+ 
+ # module -> a sentence for the header's item on imports (what was measured and left out, and what it costs)

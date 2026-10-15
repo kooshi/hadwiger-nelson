@@ -1,0 +1,20 @@
+slot: waiting (ledger 22 + 4 > budget 22 GiB)
+slot: admitted ij1: mem 4 GiB (hard cap), cpus 4,5
+data/fs131/ij1/work/Herglotz.lean:215:8: warning: declaration uses `sorry`
+data/fs131/ij1/work/Herglotz.lean:227:15: error(lean.unknownIdentifier): Unknown identifier `FiniteMeasure`
+data/fs131/ij1/work/Herglotz.lean:228:13: error(lean.unknownIdentifier): Unknown identifier `isCompact_setOf_finiteMeasure_le_of_compactSpace`
+data/fs131/ij1/work/Herglotz.lean:226:97: error: unsolved goals
+G : Type u_1
+inst✝¹ : AddCommGroup G
+inst✝ : Countable G
+σ : ℕ → Measure (AddChar G Circle)
+hfin : ∀ (n : ℕ), IsFiniteMeasure (σ n)
+M : ENNReal
+hM : ∀ (n : ℕ), (σ n) Set.univ ≤ M
+hMtop : M ≠ ⊤
+C : G → ℂ
+hC : ∀ (y : G), Tendsto (fun n => ∫ (χ : AddChar G Circle), ↑(χ y) ∂σ n) atTop (𝓝 (C y))
+σF : ℕ → sorry := fun n => sorry
+⊢ ∃ σ', IsFiniteMeasure σ' ∧ ∀ (y : G), ∫ (χ : AddChar G Circle), ↑(χ y) ∂σ' = C y
+seconds=9
+exit=1

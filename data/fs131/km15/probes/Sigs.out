@@ -1,0 +1,57 @@
+slot: admitted km15f: mem 4 GiB (hard cap), cpus 1,5
+@Rigidity.five_le_chromaticNumber_of_ratioAtMost : ∀ {F : Subfield ℝ} [NumberField ↥F] (P : SpectralChain.StablePrime F)
+  {c : ℝ}, c < 1 / 4 → Rigidity.RatioAtMost P c → 5 ≤ (SpectralChain.levelTarget P 1).chromaticNumber
+Rigidity.five_le_localBound_of_tca : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  SpectralChain.TCA F → 5 ≤ SpectralChain.localBound F
+Rigidity.tca_iff_five_le_localBound : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  SpectralChain.TCA F ↔ 5 ≤ SpectralChain.localBound F
+@Rigidity.five_le_chromaticNumber_of_two_notMem : ∀ {F : Subfield ℝ} [NumberField ↥F] (P : SpectralChain.StablePrime F),
+  2 ∉ P.P →
+    Nat.card (NumberField.RingOfIntegers ↥(SpectralChain.fieldI F) ⧸ P.P) ≠ 9 →
+      Nat.card (NumberField.RingOfIntegers ↥(SpectralChain.fieldI F) ⧸ P.P) ≠ 49 →
+        5 ≤ (SpectralChain.levelTarget P 1).chromaticNumber
+@Rigidity.two_notMem_of_isSquare : ∀ {F : Subfield ℝ} (P : SpectralChain.StablePrime F) {a : ℕ},
+  IsSquare ↑a → a % 8 = 7 → 2 ∉ P.P
+@Rigidity.stablePrime_card_of_two_notMem : ∀ {F : Subfield ℝ} [NumberField ↥F] (P : SpectralChain.StablePrime F),
+  2 ∉ P.P →
+    ∃ p n,
+      Nat.Prime p ∧
+        p % 4 = 3 ∧
+          Odd n ∧
+            ↑p ∈ P.P ∧
+              Nat.card (NumberField.RingOfIntegers ↥(SpectralChain.fieldI F) ⧸ P.P) = (p ^ n) ^ 2 ∧
+                ∀ (d : ℕ), IsSquare ↑d → IsSquare ↑d
+@Rigidity.five_le_chromaticNumber_of_isSquare : ∀ {F : Subfield ℝ} [NumberField ↥F] (P : SpectralChain.StablePrime F)
+  {a b c : ℕ},
+  IsSquare ↑a →
+    a % 8 = 7 →
+      IsSquare ↑b →
+        b % 3 = 2 →
+          IsSquare ↑c → c % 7 = 3 ∨ c % 7 = 5 ∨ c % 7 = 6 → 5 ≤ (SpectralChain.levelTarget P 1).chromaticNumber
+Rigidity.five_le_localBound_of_isSquare : ∀ (F : Subfield ℝ) [NumberField ↥F] {a b c : ℕ},
+  IsSquare ↑a →
+    a % 8 = 7 →
+      IsSquare ↑b → b % 3 = 2 → IsSquare ↑c → c % 7 = 3 ∨ c % 7 = 5 ∨ c % 7 = 6 → 5 ≤ SpectralChain.localBound F
+Rigidity.five_le_localBound_of_isSquare_class : ∀ (F : Subfield ℝ) [NumberField ↥F] {d : ℕ},
+  IsSquare ↑d → d % 168 = 47 ∨ d % 168 = 143 ∨ d % 168 = 167 → 5 ≤ SpectralChain.localBound F
+Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  Plane.OneAvoidingDensityBound →
+    5 ≤ SpectralChain.localBound F → 5 ≤ (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).chromaticNumber
+SqrtFortySeven.numberField_F47 : NumberField ↥SqrtFortySeven.F47
+SqrtFortySeven.finrank_fieldI_F47_le : Module.finrank ℚ ↥(SpectralChain.fieldI SqrtFortySeven.F47) ≤ 4
+SqrtFortySeven.isSquare_fortySeven : IsSquare ↑47
+SqrtFortySeven.stablePrime_card_sqrt47 : ∀ (P : SpectralChain.StablePrime SqrtFortySeven.F47),
+  ∃ p,
+    Nat.Prime p ∧
+      p % 4 = 3 ∧
+        IsSquare 47 ∧ Nat.card (NumberField.RingOfIntegers ↥(SpectralChain.fieldI SqrtFortySeven.F47) ⧸ P.P) = p ^ 2
+SqrtFortySeven.exists_stablePrime_eleven : ∃ P, 11 ∈ P.P
+SqrtFortySeven.five_le_localBound_sqrt47 : 5 ≤ SpectralChain.localBound SqrtFortySeven.F47
+SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five : Plane.OneAvoidingDensityBound →
+  (SimpleGraph.induce (planeOver SqrtFortySeven.F47) (unitDistance ℂ)).chromaticNumber = 5
+'HadwigerNelson.SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound,
+ Rigidity.positive_entropy_rigidity,
+ StandingFive.kloosterman_bound]

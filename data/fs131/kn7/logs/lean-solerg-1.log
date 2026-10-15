@@ -1,0 +1,4 @@
+slot: admitted kn7s: mem 5 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/SolenoidErgodic.lean:28:8: warning: declaration uses `sorry`
+seconds=2
+exit=0

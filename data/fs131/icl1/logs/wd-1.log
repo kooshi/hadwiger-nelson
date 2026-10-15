@@ -1,0 +1,57 @@
+slot: admitted icl1: mem 5 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Plane/WindowDensity.lean:89:2: error: Type mismatch: After simplification, term
+  h
+ has type
+  @LE.le ℝ Real.instLE (⨆ i, ⨆ (_ : NullMeasurableSet i volume ∧ BandFree i 0), upperDensity i).toReal 1
+but is expected to have type
+  @LE.le ℝ Real.instLE mOne.toReal 1
+Proofs/HadwigerNelson/Plane/WindowDensity.lean:243:46: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (fun t => T (x - t)) ∩ D
+in the target expression
+  volume ((fun t => x - t) ⁻¹' T ∩ D) = volume T
+
+case pos
+T E D : Set ℂ
+hT : MeasurableSet T
+hE : MeasurableSet E
+hD : MeasurableSet D
+hsub : ∀ x ∈ E, ∀ (t : ℂ), x - t ∈ T → t ∈ D
+S : Set (ℂ × ℂ) := {p | p.2 - p.1 ∈ T ∧ p.2 ∈ E}
+hS : S = {p | p.2 - p.1 ∈ T ∧ p.2 ∈ E}
+hSm : MeasurableSet S
+h1 : ((volume.restrict D).prod volume) S = ∫⁻ (t : ℂ) in D, volume ((fun x => x - t) ⁻¹' T ∩ E)
+x : ℂ
+hx : x ∈ E
+hpre : (fun t => (t, x)) ⁻¹' S = (fun t => x - t) ⁻¹' T
+hmeas : MeasurableSet ((fun t => x - t) ⁻¹' T)
+⊢ volume ((fun t => x - t) ⁻¹' T ∩ D) = volume T
+Proofs/HadwigerNelson/Plane/WindowDensity.lean:259:34: error: failed to prove strict positivity, but it would be possible to prove nonnegativity if desired
+Proofs/HadwigerNelson/Plane/WindowDensity.lean:267:43: error: failed to prove positivity/nonnegativity/nonzeroness
+Proofs/HadwigerNelson/Plane/WindowDensity.lean:282:2: error: linarith failed to find a contradiction
+m ε s ℓ X Y vT : ℝ
+hm0 : 0 ≤ m
+hm1 : m ≤ 1
+hε : 0 < ε
+hs1 : 1 ≤ s
+hs16 : 16 / ε ≤ s
+hℓs : s ≤ ℓ
+hℓε : 12 * s / ε ≤ ℓ
+hYs : Y ≤ s ^ 2
+hvT : (m - ε / 4) * ℓ ^ 2 ≤ vT
+hvT0 : 0 ≤ vT
+h : X * (s + ℓ) ^ 2 + vT * (s ^ 2 - Y) ≤ m * (s + 2) ^ 2 * (s + ℓ) ^ 2
+hA : 0 < (s + ℓ) ^ 2
+hc : (m - ε / 2) * (s + ℓ) ^ 2 ≤ vT
+h2 : (m - ε / 2) * (s + ℓ) ^ 2 * (s ^ 2 - Y) ≤ vT * (s ^ 2 - Y)
+h3 : X * (s + ℓ) ^ 2 ≤ (m * (s + 2) ^ 2 - (m - ε / 2) * (s ^ 2 - Y)) * (s + ℓ) ^ 2
+h4 : X ≤ m * (s + 2) ^ 2 - (m - ε / 2) * (s ^ 2 - Y)
+h5 : m * (4 * s + 4) ≤ 4 * s + 4
+h16 : 16 ≤ s * ε
+h6 : 16 * s ≤ s * ε * s
+hY0 : 0 ≤ ε / 2 * Y ∨ ε / 2 * Y < 0
+a✝ : m * Y + ε * s ^ 2 < X
+⊢ False
+failed
+Proofs/HadwigerNelson/Plane/WindowDensity.lean:352:69: warning: `Set.diff_subset` has been deprecated: Use `Set.sdiff_subset` instead
+Command exited with non-zero status 1
+wall=9.94s maxrss=3451988kB

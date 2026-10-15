@@ -1,0 +1,76 @@
+slot: admitted ig1: mem 4 GiB (hard cap), cpus 2,3
+data/fs131/ig1/work/Pieces.lean:466:77: warning: Variable name `hM` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+data/fs131/ig1/work/Pieces.lean:616:4: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  a ≥ 1
+where
+ a := ↑k₁
+data/fs131/ig1/work/Pieces.lean:614:18: warning: This simp argument is unused:
+  AddSubmonoidClass.coe_nsmul
+
+Hint: Omit it from the simp argument list.
+  simp only [x, A̵d̵d̵S̵u̵b̵m̵o̵n̵o̵i̵d̵C̵l̵a̵s̵s̵.̵c̵o̵e̵_̵n̵s̵m̵u̵l̵,̵ ̵nsmul_eq_mul, OneMemClass.coe_one, mul_one, ZeroMemClass.coe_zero,
+  ̲  ̲ ̲ ̲ ̲ ̲Nat.cast_eq_zero] at h'
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ig1/work/Pieces.lean:614:61: warning: This simp argument is unused:
+  OneMemClass.coe_one
+
+Hint: Omit it from the simp argument list.
+  simp only [x, AddSubmonoidClass.coe_nsmul, nsmul_eq_mul, O̵n̵e̵M̵e̵m̵C̵l̵a̵s̵s̵.̵c̵o̵e̵_̵o̵n̵e̵,̵ ̵mul_one, ZeroMemClass.coe_zero,
+  ̲  ̲ ̲ ̲ ̲ ̲Nat.cast_eq_zero] at h'
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ig1/work/Pieces.lean:615:29: warning: This simp argument is unused:
+  Nat.cast_eq_zero
+
+Hint: Omit it from the simp argument list.
+  simp only [x, AddSubmonoidClass.coe_nsmul, nsmul_eq_mul, OneMemClass.coe_one, mul_one,
+        ZeroMemClass.coe_zero,̵ ̵N̵a̵t̵.̵c̵a̵s̵t̵_̵e̵q̵_̵z̵e̵r̵o̵] at h'
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/ig1/work/Pieces.lean:671:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  AddSubgroup.closure (γC p '' ⊤)
+in the target expression
+  ↑k * ↑r ∈ AddSubgroup.closure (γC p '' ↑⊤)
+
+F : Subfield ℝ
+p : AdmissiblePair F
+inst✝ : NumberField ↥F
+r : ↥(unitRing F)
+k : ℕ
+hk : 0 < k
+hkr : ↑k * ↑r ∈ AddSubgroup.closure (γC p '' ↑⊤)
+hmap :
+  AddSubgroup.map (unitRing F).toAddSubgroup.subtype (AddSubgroup.closure {y | ∃ n, ∃ x ∈ {1}, y = (p.mulR n) x}) =
+    AddSubgroup.closure (γC p '' ⊤)
+⊢ ∃ k, 0 < k ∧ k • r ∈ AddSubgroup.closure {y | ∃ n, ∃ x ∈ {1}, y = (p.mulR n) x}
+data/fs131/ig1/work/Pieces.lean:683:55: warning: Variable name `hM` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+data/fs131/ig1/work/Pieces.lean:709:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  Measure.map (⇑(dualMap ?m.58)) (Measure.map (toPiece M) ?m.53)
+in the target expression
+  Measure.map (⇑((pieceAction hM).toFun n)) (Measure.map (toPiece M) ρ) = Measure.map (toPiece M) ρ
+
+case refine_1
+F : Subfield ℝ
+p : AdmissiblePair F
+M : AddSubgroup ↥(unitRing F)
+hM : IsPiece p M
+ρ : Measure (Dual F)
+inst✝ : IsProbabilityMeasure ρ
+hρ : ErgodicSMul (↥p.subgroup) (Dual F) ρ
+n : Fin 2 → ℤ
+x✝ : n ∈ ⊤
+⊢ Measure.map (⇑((pieceAction hM).toFun n)) (Measure.map (toPiece M) ρ) = Measure.map (toPiece M) ρ
+data/fs131/ig1/work/Pieces.lean:722:11: error(lean.unknownIdentifier): Unknown identifier `eventuallyConst_set'.mp`
+data/fs131/ig1/work/Pieces.lean:722:43: error: Tactic `rcases` failed: `x✝ : ?m.176` is not an inductive datatype
+seconds=9
+exit=1

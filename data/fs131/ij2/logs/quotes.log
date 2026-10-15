@@ -1,0 +1,6 @@
+[1] MATCH    278 chars  data/fs131/REQUEST-2026-10-13.md
+[2] MATCH    325 chars  data/fs131/claims-NF2.md
+[3] MATCH    182 chars  data/fs131/claims-NF2.md
+[4] MATCH   2931 chars  plans/FS131-close-inventory.md
+[5] MATCH   3789 chars  plans/FS131-close-inventory.md
+quotations=5 mismatches=0

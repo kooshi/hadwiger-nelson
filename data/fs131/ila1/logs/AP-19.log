@@ -1,0 +1,41 @@
+data/fs131/ila1/work/AdmissiblePrime.lean:385:14: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  ZeroHomClass (𝓞 ↥(fieldI F) →* ℤ) (𝓞 ↥(fieldI F)) ℤ
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/ila1/work/AdmissiblePrime.lean:385:41: warning: `padicValNat.zero` has been deprecated: Use `padicValNat_zero_right` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.zero` to `padicValNat_zero_right x`).
+data/fs131/ila1/work/AdmissiblePrime.lean:383:65: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+p : ℕ
+hp : Fact (Nat.Prime p)
+φ : 𝓞 ↥(fieldI F) →+* ZMod p
+z : 𝓞 ↥(fieldI F)
+k : ℕ
+hk : 0 < k
+P : Ideal (𝓞 ↥(fieldI F)) := RingHom.ker φ
+hsq : ↑p ∉ P ^ 2
+hz : z ∈ P ^ 2
+hzQ : ∀ (Q : Ideal (𝓞 ↥(fieldI F))), Q.IsMaximal → ↑p ∈ Q → Q ≠ P → z ∉ Q
+hzb : (conjO F) z ∉ P
+hPdef : P = RingHom.ker φ
+hPm : P.IsMaximal
+hpP : ↑p ∈ P
+hcard : Ideal.absNorm P = p
+hzP : z ∈ P
+hx : ∀ (m : ℕ), 0 < m → padicValNat p (Ideal.absNorm (Ideal.span {z ^ m - ↑p * (conjO F) z ^ m})) = 1
+Zb : ↥(fieldI F) := ↑((conjO F) z)
+hZb : Zb = ↑((conjO F) z)
+hZb0 : Zb ≠ 0
+W : ↥(fieldI F) := ↑z / Zb
+hW : W = ↑z / Zb
+B : ℤ := padicValRat p ((Algebra.norm ℚ) Zb)
+m : ℕ
+hm : 0 < m
+hcoe : ↑(z ^ m - ↑p * (conjO F) z ^ m) = (W ^ m - ↑p) * Zb ^ m
+hval : padicValNat p ((Algebra.norm ℤ) 0).natAbs = 1
+h0 : z ^ m - ↑p * (conjO F) z ^ m = 0
+⊢ ZeroHomClass (𝓞 ↥(fieldI F) →* ℤ) (𝓞 ↥(fieldI F)) ℤ
+data/fs131/ila1/work/AdmissiblePrime.lean:477:8: warning: declaration uses `sorry`
+lean-exit 1

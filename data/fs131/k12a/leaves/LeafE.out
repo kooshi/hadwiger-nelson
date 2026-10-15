@@ -1,0 +1,2 @@
+slot: admitted k12a: mem 5 GiB (hard cap), cpus 4,5
+wall=3.04s maxrss=3953128kB

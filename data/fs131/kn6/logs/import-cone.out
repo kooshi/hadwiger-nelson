@@ -1,0 +1,76 @@
+== OAI.NumberTheory.PrimePackets.ShannonEntropy: 1 release files, 453 lines; Mathlib imports met: 1
+      453  OAI.NumberTheory.PrimePackets.ShannonEntropy
+== OAI.NumberTheory.PrimePackets.EntropyMixtures: 2 release files, 993 lines; Mathlib imports met: 1
+      540  OAI.NumberTheory.PrimePackets.EntropyMixtures
+      453  OAI.NumberTheory.PrimePackets.ShannonEntropy
+== OAI.NumberTheory.PrimePackets.ErgodicDecomposition: 28 release files, 22632 lines; Mathlib imports met: 1
+     4999  OAI.NumberTheory.PrimePackets.ZetaResidues
+     3405  OAI.NumberTheory.PrimePackets.PacketAlgebra
+     1164  OAI.NumberTheory.PrimePackets.PacketMoments
+      944  OAI.NumberTheory.PrimePackets.IdealNorms
+      837  OAI.NumberTheory.PrimePackets.IntervalSieve
+      624  OAI.NumberTheory.PrimePackets.LocalModels
+      558  OAI.NumberTheory.PrimePackets.KernelEntropy
+      540  OAI.NumberTheory.PrimePackets.EntropyMixtures
+      529  OAI.NumberTheory.PrimePackets.PenaltyEuler
+      527  OAI.NumberTheory.PrimePackets.PrimeFactors
+      517  OAI.NumberTheory.PrimePackets.MangoldtBounds
+      513  OAI.NumberTheory.PrimePackets.InverseEntropy
+   … and 16 more
+== OAI.NumberTheory.PrimePackets.EntropyGeneratingSupremum: 11 release files, 1843 lines; Mathlib imports met: 1
+      540  OAI.NumberTheory.PrimePackets.EntropyMixtures
+      453  OAI.NumberTheory.PrimePackets.ShannonEntropy
+      135  OAI.NumberTheory.PrimePackets.ConditionalObservations
+      116  OAI.NumberTheory.PrimePackets.ConditionalOrbitEntropy
+      113  OAI.NumberTheory.PrimePackets.ObservationRefinement
+      110  OAI.NumberTheory.PrimePackets.ConditionalShannon
+       93  OAI.NumberTheory.PrimePackets.GeneratingObservationEntropy
+       90  OAI.NumberTheory.PrimePackets.ObservationConditionalProbability
+       77  OAI.NumberTheory.PrimePackets.ObservationSigmaAlgebra
+       60  OAI.NumberTheory.PrimePackets.ConditionalProbabilityExpectation
+       56  OAI.NumberTheory.PrimePackets.EntropyGeneratingSupremum
+== OAI.NumberTheory.DukePrimeDegree.Dynamics.MaximalOccupation: 89 release files, 43434 lines; Mathlib imports met: 14
+     4999  OAI.NumberTheory.PrimePackets.ZetaResidues
+     3405  OAI.NumberTheory.PrimePackets.PacketAlgebra
+     1164  OAI.NumberTheory.PrimePackets.PacketMoments
+      944  OAI.NumberTheory.PrimePackets.IdealNorms
+      837  OAI.NumberTheory.PrimePackets.IntervalSieve
+      660  OAI.NumberTheory.PrimePackets.ZeroReflection
+      659  OAI.NumberTheory.PrimePackets.XiBoundary
+      641  OAI.NumberTheory.PrimePackets.ScalingCovariance
+      636  OAI.NumberTheory.PrimePackets.RootOverlaps
+      624  OAI.NumberTheory.PrimePackets.LocalModels
+      620  OAI.NumberTheory.PrimePackets.LatticeTheta
+      606  OAI.NumberTheory.PrimePackets.RootLeaves
+   … and 77 more
+== OAI.NumberTheory.DukePrimeDegree.Dynamics.HopfMaximal: 88 release files, 43314 lines; Mathlib imports met: 14
+     4999  OAI.NumberTheory.PrimePackets.ZetaResidues
+     3405  OAI.NumberTheory.PrimePackets.PacketAlgebra
+     1164  OAI.NumberTheory.PrimePackets.PacketMoments
+      944  OAI.NumberTheory.PrimePackets.IdealNorms
+      837  OAI.NumberTheory.PrimePackets.IntervalSieve
+      660  OAI.NumberTheory.PrimePackets.ZeroReflection
+      659  OAI.NumberTheory.PrimePackets.XiBoundary
+      641  OAI.NumberTheory.PrimePackets.ScalingCovariance
+      636  OAI.NumberTheory.PrimePackets.RootOverlaps
+      624  OAI.NumberTheory.PrimePackets.LocalModels
+      620  OAI.NumberTheory.PrimePackets.LatticeTheta
+      606  OAI.NumberTheory.PrimePackets.RootLeaves
+   … and 76 more
+== OAI.NumberTheory.PrimePackets.InverseEntropy: 23 release files, 20071 lines; Mathlib imports met: 1
+     4999  OAI.NumberTheory.PrimePackets.ZetaResidues
+     3405  OAI.NumberTheory.PrimePackets.PacketAlgebra
+     1164  OAI.NumberTheory.PrimePackets.PacketMoments
+      944  OAI.NumberTheory.PrimePackets.IdealNorms
+      837  OAI.NumberTheory.PrimePackets.IntervalSieve
+      624  OAI.NumberTheory.PrimePackets.LocalModels
+      529  OAI.NumberTheory.PrimePackets.PenaltyEuler
+      527  OAI.NumberTheory.PrimePackets.PrimeFactors
+      517  OAI.NumberTheory.PrimePackets.MangoldtBounds
+      513  OAI.NumberTheory.PrimePackets.InverseEntropy
+      486  OAI.NumberTheory.PrimePackets.IdealCoefficients
+      477  OAI.NumberTheory.PrimePackets.OrbitProbability
+   … and 11 more
+== OAI.NumberTheory.DukePrimeDegree.Entropy.EntropyInverse: 2 release files, 545 lines; Mathlib imports met: 1
+      453  OAI.NumberTheory.PrimePackets.ShannonEntropy
+       92  OAI.NumberTheory.DukePrimeDegree.Entropy.EntropyInverse

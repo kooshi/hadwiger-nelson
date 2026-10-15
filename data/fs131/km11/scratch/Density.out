@@ -1,0 +1,4 @@
+slot: waiting (ledger 20 + 5 > budget 22 GiB)
+slot: waiting (ledger 21 + 5 > budget 22 GiB)
+slot: admitted km11p: mem 5 GiB (hard cap), cpus 1,2
+'HadwigerNelson.Rigidity.KM11Scratch.exists_trigPoly_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]

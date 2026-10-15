@@ -1,0 +1,63 @@
+slot: admitted ig1: mem 4 GiB (hard cap), cpus 0,1
+@AddSubgroup.exists_finsupp_of_mem_closure_range : ∀ {M : Type u_1} [inst : AddCommGroup M] {ι : Type u_2} (f : ι → M),
+  ∀ x ∈ AddSubgroup.closure (Set.range f), ∃ a, x = a.sum fun x1 x2 => x2 • f x1
+@AddMonoidHom.map_closure : ∀ {G : Type u_1} [inst : AddGroup G] {N : Type u_2} [inst_1 : AddGroup N] (f : G →+ N)
+  (s : Set G), AddSubgroup.map f (AddSubgroup.closure s) = AddSubgroup.closure (⇑f '' s)
+data/fs131/ig1/probes/Names3.lean:6:8: error(lean.unknownIdentifier): Unknown constant `AddSubgroup.map_closure`
+@Measure.isProbabilityMeasure_map : ∀ {α : Type u_1} {β : Type u_2} {m0 : MeasurableSpace α} [inst : MeasurableSpace β]
+  {μ : Measure α} [IsProbabilityMeasure μ] {f : α → β}, AEMeasurable f μ → IsProbabilityMeasure (Measure.map f μ)
+@AddMonoidHom.coe_mulLeft : ∀ {R : Type u_1} [inst : NonUnitalNonAssocSemiring R] (r : R),
+  ⇑(AddMonoidHom.mulLeft r) = HMul.hMul r
+@IntermediateField.adjoin_toSubalgebra_of_isAlgebraic : ∀ {F : Type u_1} [inst : Field F] {E : Type u_2}
+  [inst_1 : Field E] [inst_2 : Algebra F E] {S : Set E},
+  (∀ x ∈ S, IsAlgebraic F x) → (IntermediateField.adjoin F S).toSubalgebra = Algebra.adjoin F S
+@Function.Surjective.countable : ∀ {α : Sort u_1} {β : Sort u_2} [Countable α] {f : α → β},
+  Function.Surjective f → Countable β
+@AddSubgroup.closure_mono : ∀ {G : Type u_1} [inst : AddGroup G] ⦃h k : Set G⦄,
+  h ⊆ k → AddSubgroup.closure h ≤ AddSubgroup.closure k
+@AddSubgroup.subset_closure : ∀ {G : Type u_1} [inst : AddGroup G] {k : Set G}, k ⊆ ↑(AddSubgroup.closure k)
+@AddSubgroup.nsmul_mem : ∀ {G : Type u_1} [inst : AddGroup G] (K : AddSubgroup G) {x : G}, x ∈ K → ∀ (n : ℕ), n • x ∈ K
+@AddSubgroup.zsmul_mem : ∀ {G : Type u_1} [inst : AddGroup G] (K : AddSubgroup G) {x : G}, x ∈ K → ∀ (n : ℤ), n • x ∈ K
+Module.finrank : (R : Type u_1) → (M : Type u_2) → [inst : Semiring R] → [inst_1 : AddCommMonoid M] → [Module R M] → ℕ
+@Module.Basis.equivFun : {ι : Type u_1} →
+  {R : Type u_2} →
+    {M : Type u_3} →
+      [inst : Semiring R] →
+        [inst_1 : AddCommMonoid M] → [inst_2 : Module R M] → [Finite ι] → Module.Basis ι R M → M ≃ₗ[R] ι → R
+LinearIndependent.iff_fractionRing : ∀ (R : Type u_1) (K : Type u_2) [inst : CommRing R] [inst_1 : CommRing K]
+  [inst_2 : Algebra R K] [IsFractionRing R K] {V : Type u_3} [inst_4 : AddCommGroup V] [inst_5 : Module R V]
+  [inst_6 : Module K V] [IsScalarTower R K V] {ι : Type u_4} {b : ι → V}, LinearIndependent R b ↔ LinearIndependent K b
+@AddCommGroup.zmodModule : {n : ℕ} →
+  {G : Type u_1} → [inst : AddCommGroup G] → (∀ (x : G), n • x = 0) → Module (ZMod n) G
+@Module.rank_lt_aleph0_iff : ∀ {R : Type u_1} {M : Type u_2} [inst : Semiring R] [inst_1 : AddCommMonoid M]
+  [inst_2 : Module R M] [Module.Free R M] [StrongRankCondition R], Module.rank R M < Cardinal.aleph0 ↔ Module.Finite R M
+Module.finite_of_finite : ∀ (R : Type u_1) {M : Type u_2} [inst : Semiring R] [inst_1 : AddCommMonoid M]
+  [inst_2 : Module R M] [Finite R] [Module.Finite R M], Finite M
+@QuotientAddGroup.mk_surjective : ∀ {α : Type u_1} [inst : AddGroup α] {s : AddSubgroup α},
+  Function.Surjective QuotientAddGroup.mk
+@Nat.recOnMul : {motive : ℕ → Sort u_1} →
+  motive 0 →
+    motive 1 →
+      ((p : ℕ) → Nat.Prime p → motive p) → ((a b : ℕ) → motive a → motive b → motive (a * b)) → (a : ℕ) → motive a
+@AddSubgroup.relIndex : {G : Type u_1} → [inst : AddGroup G] → AddSubgroup G → AddSubgroup G → ℕ
+@AddSubgroup.addSubgroupOf : {G : Type u_1} → [inst : AddGroup G] → AddSubgroup G → (K : AddSubgroup G) → AddSubgroup ↥K
+@AddSubgroup.mem_addSubgroupOf : ∀ {G : Type u_1} [inst : AddGroup G] {H K : AddSubgroup G} {h : ↥K},
+  h ∈ H.addSubgroupOf K ↔ ↑h ∈ H
+@Fintype.linearIndependent_iff : ∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} [inst : Ring R]
+  [inst_1 : AddCommGroup M] [inst_2 : Module R M] {v : ι → M} [inst_3 : Fintype ι],
+  LinearIndependent R v ↔ ∀ (g : ι → R), ∑ i, g i • v i = 0 → ∀ (i : ι), g i = 0
+@LinearIndependent.fintype_card_le_finrank : ∀ {R : Type u_1} {M : Type u_2} [inst : Semiring R]
+  [inst_1 : AddCommMonoid M] [inst_2 : Module R M] [StrongRankCondition R] [Module.Finite R M] {ι : Type u_3}
+  [inst_5 : Fintype ι] {b : ι → M}, LinearIndependent R b → Fintype.card ι ≤ Module.finrank R M
+@rank_le : ∀ {R : Type u_1} {M : Type u_2} [inst : Semiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M] {n : ℕ},
+  (∀ (s : Finset M), (LinearIndependent R fun i => ↑i) → s.card ≤ n) → Module.rank R M ≤ ↑n
+ZMod.intCast_zmod_eq_zero_iff_dvd : ∀ (a : ℤ) (b : ℕ), ↑a = 0 ↔ ↑b ∣ a
+@Int.eq_zero_of_abs_lt_dvd : ∀ {m x : ℤ}, m ∣ x → |x| < m → x = 0
+@QuotientAddGroup.eq_zero_iff : ∀ {G : Type u_1} [inst : AddGroup G] {N : AddSubgroup G} [inst_1 : N.Normal] (x : G),
+  ↑x = 0 ↔ x ∈ N
+@Finset.dvd_prod_of_mem : ∀ {ι : Type u_1} {M : Type u_2} [inst : CommMonoid M] (f : ι → M) {a : ι} {s : Finset ι},
+  a ∈ s → f a ∣ ∏ i ∈ s, f i
+@Subfield.closure_mono : ∀ {K : Type u_1} [inst : DivisionRing K] ⦃s t : Set K⦄,
+  s ⊆ t → Subfield.closure s ≤ Subfield.closure t
+seconds=3
+exit=1

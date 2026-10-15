@@ -1,0 +1,10 @@
+slot: admitted ie1: mem 5 GiB (hard cap), cpus 6,7
+data/fs131/ie1/lean/OpenProbe-OAI015Mixtures.lean:37:5: error: unknown namespace `IsDiscreteValuationRing`
+data/fs131/ie1/lean/OpenProbe-OAI015Mixtures.lean:43:5: error: unknown namespace `NumberField`
+data/fs131/ie1/lean/OpenProbe-OAI015Mixtures.lean:49:5: error: unknown namespace `ArithmeticFunction.zeta`
+data/fs131/ie1/lean/OpenProbe-OAI015Mixtures.lean:58:5: error: unknown namespace `ArithmeticFunction`
+data/fs131/ie1/lean/OpenProbe-OAI015Mixtures.lean:61:5: error: unknown namespace `BoundingSieve`
+data/fs131/ie1/lean/OpenProbe-OAI015Mixtures.lean:73:5: error: unknown namespace `FractionalIdeal`
+data/fs131/ie1/lean/OpenProbe-OAI015Mixtures.lean:82:5: error: unknown namespace `Matrix.Norms.Elementwise`
+seconds=2
+exit=1

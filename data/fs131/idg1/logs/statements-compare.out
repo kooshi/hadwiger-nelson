@@ -1,0 +1,16 @@
+compared: 154 named constants of the first dump (kinds and types), 37 data definitions' values, 2 ruled definitions' data views, 5 example heads of the base files
+axioms of the modules: [] before, [] after
+internal (not compared): 84 before, 115 after
+new public constants in the second dump: 0 (allow-list: 0)
+new private constants in the second dump: 7
+  NEW PRIVATE DEF HadwigerNelson.Rigidity.evalBCF
+  NEW PRIVATE THM HadwigerNelson.Rigidity.evalBCF_add
+  NEW PRIVATE THM HadwigerNelson.Rigidity.evalBCF_apply
+  NEW PRIVATE THM HadwigerNelson.Rigidity.evalBCF_zero
+  NEW PRIVATE THM HadwigerNelson.Rigidity.exists_ratCircle
+  NEW PRIVATE DEF HadwigerNelson.Rigidity.fourierAlg
+  NEW PRIVATE THM HadwigerNelson.Rigidity.star_evalBCF
+examples in the working files that the base does not hold: 0
+RULED PROOF FIELD DEF HadwigerNelson.Rigidity.Duality.graphSubgroup: its value moved, its data fields are the same
+RULED PROOF FIELD DEF HadwigerNelson.Rigidity.AdmissiblePair.ofPow: its value moved, its data fields are the same
+PASS: no statement and no definition changed

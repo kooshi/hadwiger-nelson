@@ -1,0 +1,66 @@
+slot: admitted itt1: mem 4 GiB (hard cap), cpus 5,6
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+data/fs131/itt1/work/TateModel.lean:199:50: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+D : TateModel F
+t : ↥(fieldI F)
+y : ℤ
+hy0 : y ≠ 0
+hy : ∀ x ∈ {t}, IsIntegral ℤ (y • x)
+hint : IsIntegral ℤ (y • t)
+h : y = ↑y.natAbs
+⊢ ↑y.natAbs * t = t * ↑|y|
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+data/fs131/itt1/work/TateModel.lean:203:53: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+D : TateModel F
+t : ↥(fieldI F)
+y : ℤ
+hy0 : y ≠ 0
+hy : ∀ x ∈ {t}, IsIntegral ℤ (y • x)
+hint : IsIntegral ℤ (y • t)
+h : y = -↑y.natAbs
+⊢ ↑y.natAbs * t = t * ↑|y|
+data/fs131/itt1/work/TateModel.lean:208:64: error: Application type mismatch: The argument
+  hNint
+has type
+  IsIntegral ℤ (↑y.natAbs * t)
+of sort `Prop` but is expected to have type
+  Subfield ℝ
+of sort `Type` in the application
+  @integral_mem_stableIntegers hNint
+data/fs131/itt1/work/TateModel.lean:194:101: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+D : TateModel F
+t : ↥(fieldI F)
+y : ℤ
+hy0 : y ≠ 0
+hy : ∀ x ∈ {t}, IsIntegral ℤ (y • x)
+hint : IsIntegral ℤ (y • t)
+hNint : IsIntegral ℤ (↑y.natAbs * t)
+⊢ D.π ((toSAdele F) t) ^ y.natAbs = 1
+data/fs131/itt1/work/TateModel.lean:220:28: error(lean.unknownIdentifier): Unknown identifier `D.exists_isCompact`
+data/fs131/itt1/work/TateModel.lean:220:9: error: Tactic `rcases` failed: `x✝ : ?m.7` is not an inductive datatype
+data/fs131/itt1/work/TateModel.lean:231:8: warning: declaration uses `sorry`
+data/fs131/itt1/work/TateModel.lean:237:63: error: Invalid field notation: Function `sigmaCompactSpace_of_tateModel` does not have a usable parameter of type `TateModel ...` for which to substitute `D`
+
+Note: Such a parameter must be explicit, or implicit with a unique name, to be used by field notation
+data/fs131/itt1/work/TateModel.lean:239:4: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  BaireSpace (Dual F)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+seconds=8
+exit=1

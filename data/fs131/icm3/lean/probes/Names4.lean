@@ -1,0 +1,12 @@
+import Mathlib
+#check @add_pow_char_pow
+#check @CharTwo.add_self_eq_zero
+#check @mul_self_eq_one_iff
+#check @Finset.diag_card
+#check @Finset.diag
+#check @Finset.sum_le_sum_of_subset_of_nonneg
+#check @Finset.sum_mul_sum
+#check @Finset.sum_product'
+#check @FiniteField.cast_card_eq_zero
+#check @Polynomial.mem_roots
+#check @AddChar.map_add_eq_mul

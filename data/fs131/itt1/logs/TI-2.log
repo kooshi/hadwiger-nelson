@@ -1,0 +1,6 @@
+slot: admitted itt1: mem 4 GiB (hard cap), cpus 5,6
+data/fs131/itt1/work/TateModel.lean:220:34: error(lean.unknownIdentifier): Unknown constant `Countable.of_moduleFinite`
+data/fs131/itt1/work/TateModel.lean:224:20: warning: `continuous_add_right` has been deprecated: Use `continuous_add_const` instead
+data/fs131/itt1/work/TateModel.lean:230:8: warning: declaration uses `sorry`
+seconds=9
+exit=1

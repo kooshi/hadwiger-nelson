@@ -1,0 +1,9 @@
+slot: admitted ij3f: mem 5 GiB (hard cap), cpus 4,5
+'HadwigerNelson.Rigidity.bochnerOn_tauPrime' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.archimedean_support' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.exists_twisted_parts' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.finite_quotient_nsmul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.archHom' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.eventually_archTop' depends on axioms: [propext, Classical.choice, Quot.sound]
+seconds=2
+exit=0

@@ -1,0 +1,14 @@
+slot: admitted ip23: mem 4 GiB (hard cap), cpus 4,5
+build/fs131-ip23/leafcheck/SplitPlanted.lean:72:70: error: Type mismatch
+  hp 1
+has type
+  MeasurePreserving (fun y => HSMul.hSMul.{u_1, u_2, u_2} 1 y) μ μ
+but is expected to have type
+  MeasurePreserving (fun y => HSMul.hSMul.{0, u_2, u_2} x✝ y) μ μ
+build/fs131-ip23/leafcheck/SplitPlanted.lean:79:8: warning: declaration uses `sorry`
+build/fs131-ip23/leafcheck/SplitPlanted.lean:93:8: warning: declaration uses `sorry`
+build/fs131-ip23/leafcheck/SplitPlanted.lean:101:8: warning: declaration uses `sorry`
+build/fs131-ip23/leafcheck/SplitPlanted.lean:112:8: warning: declaration uses `sorry`
+build/fs131-ip23/leafcheck/SplitPlanted.lean:117:8: warning: declaration uses `sorry`
+seconds=3
+exit=1

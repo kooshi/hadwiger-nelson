@@ -1,0 +1,10 @@
+slot: admitted kn9: mem 4 GiB (hard cap), cpus 2,3
+data/fs131/kn9/lean/Inst5.lean:19:10: error: Function expected at
+  finFunctionFinEquiv
+but this term has type
+  ?m.1
+
+Note: Expected a function because this term is being applied to the argument
+  (![0, 1] : Fin 2 → Fin 2)
+
+Hint: The identifier `finFunctionFinEquiv` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.

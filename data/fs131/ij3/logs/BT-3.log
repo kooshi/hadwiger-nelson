@@ -1,0 +1,8 @@
+slot: admitted ij3f: mem 5 GiB (hard cap), cpus 6,7
+data/fs131/ij3/work/BochnerTau.lean:402:29: warning: Variable name `j` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+seconds=24
+exit=0

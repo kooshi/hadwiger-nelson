@@ -1,0 +1,18 @@
+slot: admitted km15: mem 4 GiB (hard cap), cpus 0,1
+SORRY-FROM HadwigerNelson.SqrtFortySeven.stablePrime_card_sqrt47 : []
+SORRY-FROM HadwigerNelson.SqrtFortySeven.five_le_localBound_sqrt47 : [HadwigerNelson.Rigidity.ratioAtMost_two_notMem_link]
+SORRY-FROM HadwigerNelson.SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five : [HadwigerNelson.Plane.upperDensity_le_of_oneAvoidingDensityBound,
+ HadwigerNelson.Rigidity.card_fibre,
+ HadwigerNelson.Rigidity.charBound_one_exact,
+ HadwigerNelson.Rigidity.chromaticNumber_le_four_of_small,
+ HadwigerNelson.Rigidity.norm_charSum_new_le,
+ HadwigerNelson.Rigidity.ratioAtMost_cert,
+ HadwigerNelson.Rigidity.ratioAtMost_dyadic,
+ HadwigerNelson.Rigidity.ratioAtMost_two_notMem_link]
+SORRY-FROM HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber : [HadwigerNelson.Plane.upperDensity_le_of_oneAvoidingDensityBound,
+ HadwigerNelson.Rigidity.card_fibre,
+ HadwigerNelson.Rigidity.charBound_one_exact,
+ HadwigerNelson.Rigidity.chromaticNumber_le_four_of_small,
+ HadwigerNelson.Rigidity.norm_charSum_new_le,
+ HadwigerNelson.Rigidity.ratioAtMost_cert,
+ HadwigerNelson.Rigidity.ratioAtMost_dyadic]

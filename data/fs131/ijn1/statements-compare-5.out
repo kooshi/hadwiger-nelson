@@ -1,0 +1,22 @@
+modules: 46 -> 47; compared: 1132 named constants (kind, module, stored type), 246 data definitions' values, 5 example heads of the base commit's 9 touched files
+new private constants: 4
+  + Proofs.HadwigerNelson.Rigidity.PositiveEntropy: _private.Proofs.HadwigerNelson.Rigidity.PositiveEntropy.0.HadwigerNelson.Rigidity.ZdAction.mulTwoThree_apply
+  + Proofs.HadwigerNelson.Rigidity.PositiveEntropy: _private.Proofs.HadwigerNelson.Rigidity.PositiveEntropy.0.HadwigerNelson.Rigidity.ZdAction.two_pow_three_pow_nat
+  + Proofs.HadwigerNelson.Rigidity.PositiveEntropy: _private.Proofs.HadwigerNelson.Rigidity.PositiveEntropy.0.HadwigerNelson.Rigidity.ZdAction.two_three_zpow_inj
+  + Proofs.HadwigerNelson.Rigidity.PositiveEntropy: _private.Proofs.HadwigerNelson.Rigidity.PositiveEntropy.0.HadwigerNelson.Rigidity.ZdAction.two_zpow_eq_three_zpow
+private constants gone: 0
+new examples: 0
+RULED MOVE HadwigerNelson.Rigidity.zeroEntropyCarried: Proofs.HadwigerNelson.Rigidity.ChainAtTA -> Proofs.HadwigerNelson.Rigidity.ZeroEntropyClosed
+RULED DROP HadwigerNelson.Rigidity.zeroEntropyCarried: the second type is the first with exactly the ruled binders removed (by the kernel's term surgery)
+RULED MOVE HadwigerNelson.Rigidity.mrPlus: Proofs.HadwigerNelson.Rigidity.ChainAtTA -> Proofs.HadwigerNelson.Rigidity.ZeroEntropyClosed
+RULED DROP HadwigerNelson.Rigidity.mrPlus: the second type is the first with exactly the ruled binders removed (by the kernel's term surgery)
+RULED MOVE HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber_closed: Proofs.HadwigerNelson.Rigidity.ChainAtTA -> Proofs.HadwigerNelson.Rigidity.ZeroEntropyClosed
+RULED MOVE HadwigerNelson.Rigidity.entropySplit: Proofs.HadwigerNelson.Rigidity.ChainAtTA -> Proofs.HadwigerNelson.Rigidity.ZeroEntropyClosed
+RULED DROP HadwigerNelson.Rigidity.noRamifiedStableDyadic_of_tca: the second type is the first with exactly the ruled binders removed (by the kernel's term surgery)
+RULED DROP HadwigerNelson.Rigidity.Counting.ratio_unramified_of_tca: the second type is the first with exactly the ruled binders removed (by the kernel's term surgery)
+RULED DROP HadwigerNelson.Rigidity.mul_measureReal_light_le_blockEntropy: the second type is the first with exactly the ruled binders removed (by the kernel's term surgery)
+RULED DROP HadwigerNelson.Rigidity.mul_card_heavyNames_le: the second type is the first with exactly the ruled binders removed (by the kernel's term surgery)
+RULED DROP HadwigerNelson.Rigidity.card_words_badStarts_le: the second type is the first with exactly the ruled binders removed (by the kernel's term surgery)
+RULED DROP HadwigerNelson.Rigidity.rpow_mul_exp_le_exp: the second type is the first with exactly the ruled binders removed (by the kernel's term surgery)
+NEW      THM HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber in Proofs.HadwigerNelson.Rigidity.ChainHeadline (the ruled headline)
+PASS: no statement and no definition changed but the ruled ones listed above

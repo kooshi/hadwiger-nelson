@@ -1,0 +1,149 @@
+slot: admitted icm2: mem 4 GiB (hard cap), cpus 6,7
+data/fs131/icm2/lean/ClassRatioWork.lean:962:16: warning: declaration uses `sorry`
+data/fs131/icm2/lean/ClassRatioWork.lean:1034:16: warning: declaration uses `sorry`
+data/fs131/icm2/lean/ClassRatioWork.lean:1046:35: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Fintype (ZMod Q × ZMod Q)
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+data/fs131/icm2/lean/ClassRatioWork.lean:1100:4: error: ring failed, ring expressions not equal
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+P : StablePrime F
+h2 : 2 ∉ P.P
+Q : ℕ
+hQ : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P) = Q ^ 2
+hp : Nat.Prime Q
+κ : ℝ
+hcos :
+  ∀ (α β : ℕ),
+    α < Q →
+      β < Q →
+        α ≠ 0 ∨ β ≠ 0 →
+          -(κ * (↑Q + 1)) ≤
+            ∑ v with v.1 ^ 2 + v.2 ^ 2 = 1, Real.cos (2 * Real.pi * ↑((α * v.1.val + β * v.2.val) % Q) / ↑Q)
+hfin : (levelSet P 1).Finite
+ψ : AddChar (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) ℂ
+hψ : ψ ≠ 1
+hmax : (P.P ^ 1).IsMaximal
+this✝² : Field (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := ⋯
+this✝¹ : Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+this✝ : Fintype (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := ⋯
+σ : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 →+* 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := ⋯
+hσdef : σ = Ideal.quotientMap (P.P ^ 1) (conjO F) ⋯
+hσmk : ∀ (x : 𝓞 ↥(fieldI F)), σ ((Ideal.Quotient.mk (P.P ^ 1)) x) = (Ideal.Quotient.mk (P.P ^ 1)) ((conjO F) x)
+hσ : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), σ (σ x) = x
+i : 𝓞 ↥(fieldI F)
+hi2 : i ^ 2 = -1
+hci : (conjO F) i = -i
+h2k : 2 ≠ 0
+ι : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := ⋯
+hιdef : ι = (Ideal.Quotient.mk (P.P ^ 1)) i
+hι : ι ^ 2 = -1
+hσι : σ ι = -ι
+k₀ : Subfield (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := ⋯
+hcard0 : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) = Nat.card ↥k₀ ^ 2
+hk₀def : k₀ = σ.eqLocusField (RingHom.id (𝓞 ↥(fieldI F) ⧸ P.P ^ 1))
+hk₀ : Nat.card ↥k₀ = Q
+u : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := ⋯
+hudef : u = 2⁻¹
+hu : 2 * u = 1
+hσu : σ u = u
+ha : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), u * (x + σ x) ∈ k₀
+hb : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), -(u * ι * (x - σ x)) ∈ k₀
+hN0 : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), x * σ x ∈ k₀
+this : Fact (Nat.Prime Q)
+e : ↥k₀ ≃+* ZMod Q
+A : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 → ZMod Q := ⋯
+hAdef : A = fun x => e ⟨u * (x + σ x), ⋯⟩
+B : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 → ZMod Q := ⋯
+hBdef : B = fun x => e ⟨-(u * ι * (x - σ x)), ⋯⟩
+hcast : ∀ (y : ↥k₀), ↑y = ↑(e y).val
+x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1
+⊢ x * 2⁻¹ * 2 + x * 2⁻¹ * ι ^ 2 * 2 - 2⁻¹ * σ x * 2 - 2⁻¹ * σ x * ι ^ 2 * 2 = 0
+data/fs131/icm2/lean/ClassRatioWork.lean:1122:85: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?f ↑?n
+in the target expression
+  ↑(e.symm 0) = 0
+
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+P : StablePrime F
+h2 : 2 ∉ P.P
+Q : ℕ
+hQ : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P) = Q ^ 2
+hp : Nat.Prime Q
+κ : ℝ
+hcos :
+  ∀ (α β : ℕ),
+    α < Q →
+      β < Q →
+        α ≠ 0 ∨ β ≠ 0 →
+          -(κ * (↑Q + 1)) ≤
+            ∑ v with v.1 ^ 2 + v.2 ^ 2 = 1, Real.cos (2 * Real.pi * ↑((α * v.1.val + β * v.2.val) % Q) / ↑Q)
+hfin : (levelSet P 1).Finite
+ψ : AddChar (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) ℂ
+hψ : ψ ≠ 1
+hmax : (P.P ^ 1).IsMaximal
+this✝² : Field (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := Ideal.Quotient.field (P.P ^ 1)
+this✝¹ : Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+this✝ : Fintype (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := Fintype.ofFinite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+σ : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 →+* 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := Ideal.quotientMap (P.P ^ 1) (conjO F) ⋯
+hσdef : σ = Ideal.quotientMap (P.P ^ 1) (conjO F) ⋯
+hσmk : ∀ (x : 𝓞 ↥(fieldI F)), σ ((Ideal.Quotient.mk (P.P ^ 1)) x) = (Ideal.Quotient.mk (P.P ^ 1)) ((conjO F) x)
+hσ : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), σ (σ x) = x
+i : 𝓞 ↥(fieldI F)
+hi2 : i ^ 2 = -1
+hci : (conjO F) i = -i
+h2k : 2 ≠ 0
+ι : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := (Ideal.Quotient.mk (P.P ^ 1)) i
+hιdef : ι = (Ideal.Quotient.mk (P.P ^ 1)) i
+hι : ι ^ 2 = -1
+hσι : σ ι = -ι
+k₀ : Subfield (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := σ.eqLocusField (RingHom.id (𝓞 ↥(fieldI F) ⧸ P.P ^ 1))
+hcard0 : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) = Nat.card ↥k₀ ^ 2
+hk₀def : k₀ = σ.eqLocusField (RingHom.id (𝓞 ↥(fieldI F) ⧸ P.P ^ 1))
+hk₀ : Nat.card ↥k₀ = Q
+u : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := 2⁻¹
+hudef : u = 2⁻¹
+hu : 2 * u = 1
+hσu : σ u = u
+ha : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), u * (x + σ x) ∈ k₀
+hb : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), -(u * ι * (x - σ x)) ∈ k₀
+hN0 : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), x * σ x ∈ k₀
+this : Fact (Nat.Prime Q)
+e : ↥k₀ ≃+* ZMod Q
+A : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 → ZMod Q := fun x => e ⟨u * (x + σ x), ⋯⟩
+hAdef : A = fun x => e ⟨u * (x + σ x), ⋯⟩
+B : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 → ZMod Q := fun x => e ⟨-(u * ι * (x - σ x)), ⋯⟩
+hBdef : B = fun x => e ⟨-(u * ι * (x - σ x)), ⋯⟩
+hcast : ∀ (y : ↥k₀), ↑y = ↑(e y).val
+hdec : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), x = ↑(A x).val + ↑(B x).val * ι
+hnorm : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), x * σ x = 1 ↔ A x ^ 2 + B x ^ 2 = 1
+hTinj : Function.Injective fun x => (A x, B x)
+hTbij : Function.Bijective fun x => (A x, B x)
+h : ↑(e.symm 0) = 0
+⊢ ↑Q = 0
+data/fs131/icm2/lean/ClassRatioWork.lean:1141:88: error: Application type mismatch: The argument
+  ι
+has type
+  𝓞 ↥(fieldI F) ⧸ P.P ^ 1
+but is expected to have type
+  ℕ
+in the application
+  mul_comm (B x).val ι
+data/fs131/icm2/lean/ClassRatioWork.lean:1173:10: error: Invalid projection: Projections extract constructor fields for one-constructor inductive types. The expression
+  hx
+has type `(A x, B x) = v` which has no fields.
+data/fs131/icm2/lean/ClassRatioWork.lean:1048:23: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+data/fs131/icm2/lean/ClassRatioWork.lean:1172:17: warning: This simp argument is unused:
+  Prod.mk.injEq
+
+Hint: Omit it from the simp argument list.
+  simp only [̵P̵r̵o̵d̵.̵m̵k̵.̵i̵n̵j̵E̵q̵]̵ ̵at hx
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+data/fs131/icm2/lean/ClassRatioWork.lean:1183:16: warning: declaration uses `sorry`

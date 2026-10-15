@@ -1,0 +1,5 @@
+slot: admitted lch1: mem 8 GiB (hard cap), cpus 0,1,2,3
+dupnames exit=0
+axioms exit=0
+lint exit=0
+arch exit=0

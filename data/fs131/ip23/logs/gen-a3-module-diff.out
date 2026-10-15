@@ -1,0 +1,5 @@
+37a38
+> 7. *Linter attributes*: `@[nolint unusedArguments]` on `condExpKernel_ae_constant` — each release statement takes an instance argument its proof does not read; it is kept so that the statement stays the release's, and the linter is silenced by name on that declaration, with a comment beside the attribute (Amendment 1 of FS131-IE1's brief). The attribute is not part of the stored statement.
+539a541,542
+> -- the release's statement takes this instance and its proof does not read it; kept so that the statement stays the release's
+> @[nolint unusedArguments]

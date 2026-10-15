@@ -1,0 +1,6 @@
+slot: admitted kt1: mem 4 GiB (hard cap), cpus 2,3
+data/fs131/kt1/scratch/FormL.lean:33:8: warning: declaration uses `sorry`
+data/fs131/kt1/scratch/FormL.lean:37:8: warning: declaration uses `sorry`
+data/fs131/kt1/scratch/FormL.lean:47:8: warning: declaration uses `sorry`
+data/fs131/kt1/scratch/FormL.lean:52:8: warning: declaration uses `sorry`
+exit=0

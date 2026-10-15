@@ -1,0 +1,285 @@
+slot: admitted ikc1: mem 10 GiB (hard cap), cpus 0,5,6,7
+==> build: this run's full output: build/gate/build/20261014T152852Z-3625451.log
+==> up-to-date check: exit 3 after 4s (3 means something needs building) — walking the batches
+==> 249 batches of at most 8 modules, capped at 10G
+==> [1/249] 8 modules  10:28:56
+    rebuilt: Arith.FibreCert (961ms)
+==> [2/249] 8 modules  10:28:59
+==> [3/249] 8 modules  10:29:00
+==> [4/249] 4 modules  10:29:02
+==> [5/249] 8 modules  10:29:03
+    rebuilt: Arith.FibreCert3 (1.7s)
+==> [6/249] 7 modules  10:29:05
+==> [7/249] 8 modules  10:29:06
+    ⚠ [2563/2563] Built Proofs.HadwigerNelson.Arith.FibreCertSound (3.7s)
+    warning: Proofs/HadwigerNelson/Arith/FibreCertSound.lean:635:16: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/FibreCertSound.lean:651:16: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/FibreCertSound.lean:658:16: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/FibreCertSound.lean:664:16: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Arith/FibreCertSound.lean:682:5: Variable name `h0` is not explicitly referenced.
+    
+    The binding can be removed (if unused) or named `_` (if used implicitly).
+    
+    Note: This linter can be disabled with `set_option linter.unusedVariables false`
+    warning: Proofs/HadwigerNelson/Arith/FibreCertSound.lean:682:25: Variable name `h1` is not explicitly referenced.
+    
+    The binding can be removed (if unused) or named `_` (if used implicitly).
+    
+    Note: This linter can be disabled with `set_option linter.unusedVariables false`
+    warning: Proofs/HadwigerNelson/Arith/FibreCertSound.lean:694:5: Variable name `h0` is not explicitly referenced.
+    
+    The binding can be removed (if unused) or named `_` (if used implicitly).
+    
+    Note: This linter can be disabled with `set_option linter.unusedVariables false`
+    warning: Proofs/HadwigerNelson/Arith/FibreCertSound.lean:694:25: Variable name `h1` is not explicitly referenced.
+    
+    The binding can be removed (if unused) or named `_` (if used implicitly).
+    
+    Note: This linter can be disabled with `set_option linter.unusedVariables false`
+    rebuilt: Arith.FibreCertSound (3.7s)
+==> [8/249] 8 modules  10:29:11
+==> [9/249] 8 modules  10:29:12
+==> [10/249] 8 modules  10:29:12
+==> [11/249] 8 modules  10:29:13
+==> [12/249] 8 modules  10:29:14
+==> [13/249] 8 modules  10:29:15
+==> [14/249] 8 modules  10:29:16
+==> [15/249] 8 modules  10:29:17
+==> [16/249] 8 modules  10:29:18
+==> [17/249] 7 modules  10:29:19
+==> [18/249] 8 modules  10:29:20
+==> [19/249] 8 modules  10:29:21
+==> [20/249] 8 modules  10:29:23
+==> [21/249] 2 modules  10:29:24
+==> [22/249] 8 modules  10:29:26
+==> [23/249] 8 modules  10:29:27
+==> [24/249] 8 modules  10:29:28
+==> [25/249] 8 modules  10:29:29
+==> [26/249] 8 modules  10:29:31
+==> [27/249] 8 modules  10:29:32
+==> [28/249] 8 modules  10:29:34
+==> [29/249] 6 modules  10:29:35
+==> [30/249] 8 modules  10:29:37
+==> [31/249] 8 modules  10:29:38
+==> [32/249] 8 modules  10:29:39
+==> [33/249] 8 modules  10:29:41
+==> [34/249] 8 modules  10:29:42
+==> [35/249] 8 modules  10:29:44
+==> [36/249] 8 modules  10:29:45
+==> [37/249] 8 modules  10:29:46
+==> [38/249] 8 modules  10:29:48
+==> [39/249] 8 modules  10:29:49
+==> [40/249] 8 modules  10:29:51
+==> [41/249] 8 modules  10:29:52
+==> [42/249] 8 modules  10:29:53
+==> [43/249] 8 modules  10:29:55
+==> [44/249] 8 modules  10:29:56
+==> [45/249] 8 modules  10:29:57
+==> [46/249] 8 modules  10:29:59
+==> [47/249] 8 modules  10:30:00
+==> [48/249] 8 modules  10:30:01
+==> [49/249] 8 modules  10:30:03
+==> [50/249] 8 modules  10:30:04
+==> [51/249] 8 modules  10:30:05
+==> [52/249] 8 modules  10:30:07
+==> [53/249] 8 modules  10:30:08
+==> [54/249] 8 modules  10:30:09
+==> [55/249] 8 modules  10:30:10
+==> [56/249] 7 modules  10:30:12
+==> [57/249] 8 modules  10:30:13
+==> [58/249] 8 modules  10:30:15
+==> [59/249] 8 modules  10:30:16
+==> [60/249] 8 modules  10:30:18
+==> [61/249] 8 modules  10:30:20
+==> [62/249] 8 modules  10:30:22
+==> [63/249] 8 modules  10:30:24
+==> [64/249] 8 modules  10:30:26
+==> [65/249] 8 modules  10:30:28
+==> [66/249] 8 modules  10:30:30
+==> [67/249] 8 modules  10:30:31
+==> [68/249] 8 modules  10:30:33
+==> [69/249] 8 modules  10:30:35
+==> [70/249] 8 modules  10:30:37
+==> [71/249] 8 modules  10:30:39
+==> [72/249] 8 modules  10:30:41
+==> [73/249] 8 modules  10:30:43
+==> [74/249] 8 modules  10:30:44
+==> [75/249] 8 modules  10:30:46
+==> [76/249] 8 modules  10:30:48
+==> [77/249] 8 modules  10:30:50
+==> [78/249] 8 modules  10:30:52
+==> [79/249] 8 modules  10:30:54
+==> [80/249] 8 modules  10:30:56
+==> [81/249] 8 modules  10:30:58
+==> [82/249] 8 modules  10:31:00
+==> [83/249] 8 modules  10:31:02
+==> [84/249] 8 modules  10:31:04
+==> [85/249] 8 modules  10:31:06
+==> [86/249] 8 modules  10:31:07
+==> [87/249] 8 modules  10:31:09
+==> [88/249] 8 modules  10:31:11
+==> [89/249] 8 modules  10:31:13
+==> [90/249] 8 modules  10:31:15
+==> [91/249] 8 modules  10:31:17
+==> [92/249] 8 modules  10:31:18
+==> [93/249] 8 modules  10:31:20
+==> [94/249] 8 modules  10:31:22
+==> [95/249] 8 modules  10:31:24
+==> [96/249] 8 modules  10:31:26
+==> [97/249] 8 modules  10:31:28
+==> [98/249] 8 modules  10:31:30
+==> [99/249] 8 modules  10:31:32
+==> [100/249] 8 modules  10:31:34
+==> [101/249] 8 modules  10:31:36
+==> [102/249] 8 modules  10:31:38
+==> [103/249] 8 modules  10:31:39
+==> [104/249] 8 modules  10:31:41
+==> [105/249] 8 modules  10:31:43
+==> [106/249] 8 modules  10:31:45
+==> [107/249] 8 modules  10:31:47
+==> [108/249] 8 modules  10:31:49
+==> [109/249] 8 modules  10:31:51
+==> [110/249] 8 modules  10:31:53
+==> [111/249] 8 modules  10:31:55
+==> [112/249] 8 modules  10:31:56
+==> [113/249] 8 modules  10:31:58
+==> [114/249] 8 modules  10:32:00
+==> [115/249] 8 modules  10:32:02
+==> [116/249] 8 modules  10:32:04
+==> [117/249] 8 modules  10:32:06
+==> [118/249] 8 modules  10:32:08
+==> [119/249] 8 modules  10:32:10
+==> [120/249] 8 modules  10:32:12
+==> [121/249] 8 modules  10:32:14
+==> [122/249] 8 modules  10:32:16
+==> [123/249] 8 modules  10:32:18
+==> [124/249] 8 modules  10:32:20
+==> [125/249] 8 modules  10:32:21
+==> [126/249] 8 modules  10:32:23
+==> [127/249] 8 modules  10:32:25
+==> [128/249] 8 modules  10:32:27
+==> [129/249] 8 modules  10:32:29
+==> [130/249] 8 modules  10:32:31
+==> [131/249] 8 modules  10:32:33
+==> [132/249] 8 modules  10:32:35
+==> [133/249] 8 modules  10:32:37
+==> [134/249] 8 modules  10:32:39
+==> [135/249] 8 modules  10:32:41
+==> [136/249] 8 modules  10:32:43
+==> [137/249] 8 modules  10:32:44
+==> [138/249] 8 modules  10:32:46
+==> [139/249] 8 modules  10:32:48
+==> [140/249] 8 modules  10:32:50
+==> [141/249] 8 modules  10:32:52
+==> [142/249] 8 modules  10:32:54
+==> [143/249] 8 modules  10:32:56
+==> [144/249] 8 modules  10:32:58
+==> [145/249] 8 modules  10:33:00
+==> [146/249] 8 modules  10:33:01
+==> [147/249] 8 modules  10:33:03
+==> [148/249] 8 modules  10:33:05
+==> [149/249] 8 modules  10:33:07
+==> [150/249] 8 modules  10:33:09
+==> [151/249] 8 modules  10:33:11
+==> [152/249] 8 modules  10:33:13
+==> [153/249] 8 modules  10:33:15
+==> [154/249] 8 modules  10:33:17
+==> [155/249] 8 modules  10:33:19
+==> [156/249] 8 modules  10:33:21
+==> [157/249] 8 modules  10:33:22
+==> [158/249] 8 modules  10:33:24
+==> [159/249] 8 modules  10:33:26
+==> [160/249] 8 modules  10:33:28
+==> [161/249] 8 modules  10:33:30
+==> [162/249] 8 modules  10:33:32
+==> [163/249] 8 modules  10:33:34
+==> [164/249] 8 modules  10:33:36
+==> [165/249] 8 modules  10:33:38
+==> [166/249] 8 modules  10:33:39
+==> [167/249] 8 modules  10:33:41
+==> [168/249] 8 modules  10:33:43
+==> [169/249] 8 modules  10:33:45
+==> [170/249] 8 modules  10:33:47
+==> [171/249] 8 modules  10:33:49
+==> [172/249] 8 modules  10:33:51
+==> [173/249] 8 modules  10:33:53
+==> [174/249] 8 modules  10:33:55
+==> [175/249] 8 modules  10:33:57
+==> [176/249] 8 modules  10:33:59
+==> [177/249] 8 modules  10:34:01
+==> [178/249] 8 modules  10:34:03
+==> [179/249] 8 modules  10:34:04
+==> [180/249] 8 modules  10:34:06
+==> [181/249] 8 modules  10:34:08
+==> [182/249] 8 modules  10:34:10
+==> [183/249] 8 modules  10:34:12
+==> [184/249] 8 modules  10:34:14
+==> [185/249] 8 modules  10:34:16
+==> [186/249] 8 modules  10:34:18
+==> [187/249] 8 modules  10:34:20
+==> [188/249] 8 modules  10:34:22
+==> [189/249] 8 modules  10:34:24
+==> [190/249] 8 modules  10:34:25
+==> [191/249] 8 modules  10:34:27
+==> [192/249] 8 modules  10:34:29
+==> [193/249] 8 modules  10:34:31
+==> [194/249] 8 modules  10:34:33
+==> [195/249] 8 modules  10:34:35
+==> [196/249] 8 modules  10:34:37
+==> [197/249] 8 modules  10:34:39
+==> [198/249] 8 modules  10:34:41
+==> [199/249] 8 modules  10:34:43
+==> [200/249] 8 modules  10:34:45
+==> [201/249] 8 modules  10:34:47
+==> [202/249] 8 modules  10:34:48
+==> [203/249] 8 modules  10:34:50
+==> [204/249] 8 modules  10:34:52
+==> [205/249] 8 modules  10:34:54
+==> [206/249] 8 modules  10:34:56
+==> [207/249] 8 modules  10:34:58
+==> [208/249] 8 modules  10:35:00
+==> [209/249] 8 modules  10:35:02
+==> [210/249] 8 modules  10:35:04
+==> [211/249] 8 modules  10:35:06
+==> [212/249] 8 modules  10:35:07
+==> [213/249] 8 modules  10:35:09
+==> [214/249] 5 modules  10:35:10
+==> [215/249] 8 modules  10:35:12
+==> [216/249] 8 modules  10:35:15
+==> [217/249] 8 modules  10:35:16
+==> [218/249] 2 modules  10:35:18
+==> [219/249] 8 modules  10:35:19
+==> [220/249] 8 modules  10:35:21
+==> [221/249] 2 modules  10:35:22
+==> [222/249] 8 modules  10:35:24
+==> [223/249] 8 modules  10:35:27
+==> [224/249] 3 modules  10:35:29
+==> [225/249] 8 modules  10:35:30
+==> [226/249] 8 modules  10:35:33
+==> [227/249] 1 modules  10:35:34
+==> [228/249] 8 modules  10:35:36
+==> [229/249] 8 modules  10:35:39
+==> [230/249] 8 modules  10:35:40
+==> [231/249] 8 modules  10:35:44
+==> [232/249] 2 modules  10:35:45
+==> [233/249] 8 modules  10:35:47
+==> [234/249] 8 modules  10:35:50
+==> [235/249] 2 modules  10:35:53
+==> [236/249] 8 modules  10:35:55
+==> [237/249] 5 modules  10:35:58
+==> [238/249] 7 modules  10:36:01
+==> [239/249] 8 modules  10:36:05
+==> [240/249] 3 modules  10:36:08
+==> [241/249] 8 modules  10:36:11
+==> [242/249] 2 modules  10:36:15
+==> [243/249] 7 modules  10:36:18
+==> [244/249] 5 modules  10:36:21
+==> [245/249] 4 modules  10:36:24
+==> [246/249] 2 modules  10:36:28
+==> [247/249] 2 modules  10:36:29
+==> [248/249] 2 modules  10:36:31
+==> [249/249] 1 modules  10:36:33
+    rebuilt: Proofs (4.3s)
+==> build: OK — 249 of 249 batches, 4 module(s) rebuilt, 1 module(s) with warnings, 7m45s
+    full output: build/gate/build/20261014T152852Z-3625451.log
+exit=0

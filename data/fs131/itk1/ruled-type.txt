@@ -1,0 +1,3 @@
+# FS131-ITK1: stored-type changes ruled by the coordinator (2026-10-14: the skeleton instance with a sorry body lacked
+# the section's [NumberField F]; the statement without it is believed false at F = ⊤)
+HadwigerNelson.Rigidity.countable_splitPlace

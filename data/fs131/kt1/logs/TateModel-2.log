@@ -1,0 +1,14 @@
+slot: admitted kt1: mem 4 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:72:71: error: Application type mismatch: The argument
+  Function.Injective.injOn Subtype.val_injective
+has type
+  Set.InjOn Subtype.val ?m.110
+but is expected to have type
+  Set.InjOn (fun x => (valuation ↥(fieldI F) ↑x) k) ((fun x => (valuation ↥(fieldI F) ↑x) k) ⁻¹' WithBot.LT 1)
+in the application
+  Set.Finite.preimage (Function.Injective.injOn Subtype.val_injective)
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:142:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:146:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:150:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/TateModel.lean:156:8: warning: declaration uses `sorry`
+exit=1

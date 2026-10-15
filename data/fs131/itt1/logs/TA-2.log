@@ -1,0 +1,35 @@
+slot: admitted itt1: mem 4 GiB (hard cap), cpus 5,6
+data/fs131/itt1/work/TateArch.lean:70:50: error: Invalid rewrite argument: Expected an equality or iff proof or definition name, but `?m.299` is a value of type
+  ?m.298
+data/fs131/itt1/work/TateArch.lean:70:53: error(lean.unknownIdentifier): Unknown identifier `traceForm_isSymm`
+data/fs131/itt1/work/TateArch.lean:81:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∑ x ∈ ?s, if ?a = x then ?b x else 0
+in the target expression
+  Φ b j = ∑ x, ↑(if j = x then ↑(n x) else 0)
+
+K : Type u_1
+inst✝¹ : Field K
+inst✝ : NumberField K
+b : mixedSpace K
+h : ∀ (s : 𝓞 K), ∃ n, (archTrace K) (b * (mixedEmbedding K) ↑s) = ↑n
+e : Module.Basis (Module.Free.ChooseBasisIndex ℤ (𝓞 K)) ℚ K := integralBasis K
+Φ : mixedSpace K →ₗ[ℝ] Module.Free.ChooseBasisIndex ℤ (𝓞 K) → ℝ :=
+  LinearMap.pi fun j => archTrace K ∘ₗ LinearMap.mulRight ℝ ((mixedEmbedding K) (e j))
+hΦ :
+  ∀ (c : mixedSpace K) (j : Module.Free.ChooseBasisIndex ℤ (𝓞 K)), Φ c j = (archTrace K) (c * (mixedEmbedding K) (e j))
+hΦK :
+  ∀ (y : K) (j : Module.Free.ChooseBasisIndex ℤ (𝓞 K)), Φ ((mixedEmbedding K) y) j = ↑((Algebra.trace ℚ K) (y * e j))
+B : LinearMap.BilinForm ℚ K := Algebra.traceForm ℚ K
+hB : B.Nondegenerate
+d : Module.Basis (Module.Free.ChooseBasisIndex ℤ (𝓞 K)) ℚ K := B.dualBasis hB e
+hd : ∀ (i j : Module.Free.ChooseBasisIndex ℤ (𝓞 K)), (Algebra.trace ℚ K) (d i * e j) = if j = i then 1 else 0
+hsurj : Function.Surjective ⇑Φ
+hinj : Function.Injective ⇑Φ
+n : Module.Free.ChooseBasisIndex ℤ (𝓞 K) → ℤ
+hn :
+  ∀ (j : Module.Free.ChooseBasisIndex ℤ (𝓞 K)),
+    (archTrace K) (b * (mixedEmbedding K) ↑((RingOfIntegers.basis K) j)) = ↑(n j)
+j : Module.Free.ChooseBasisIndex ℤ (𝓞 K)
+⊢ Φ b j = ∑ x, ↑(if j = x then ↑(n x) else 0)
+seconds=5
+exit=1
