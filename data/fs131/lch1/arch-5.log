@@ -26,3 +26,4 @@
 [7] ledger rows cited exist; rows whose text mentions neither the module nor any identifier in its description: [('ThetaPlane', 79), ('Instances/Core122/Base', 31), ('Instances/Core122/Aug', 31), ('Instances/Core23/Edges', 39), ('Instances/AritySpec', 42), ('Instances/OneDefectSpec', 44), ('Instances/LiftObstruction131', 54), ('Instances/LiftObstruction11', 54), ('Instances/LiftObstruction19', 54), ('Instances/TwoAdicFive/Edges', 67), ('Plane/OneClass/SectionDensity', 129), ('Plane/OneClass/InvariantLaw', 129)]
 
 RESULT: PASS
+arch exit=0

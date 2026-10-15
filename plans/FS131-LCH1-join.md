@@ -5,7 +5,13 @@ and 21:36 UTC). Branch `fs131-wlc`, cut from `fs131-wm15` at `77d9d27ce` in the 
 
 ## Theorems this phase proved
 
-*(filled at the hand-back)*
+Each is [kernel], from the joined tree's compiled library at build 5 (`data/fs131/lch1/axioms-all-5.txt`):
+- `Rigidity.min_localBound_five_le_chromaticNumber : ∀ (F : Subfield ℝ) [NumberField F], min (localBound F) 5 ≤ χ(F²)`, no hypothesis (`Rigidity/ChainHeadline`) — `[propext, Classical.choice, Quot.sound, Rigidity.positive_entropy_rigidity, StandingFive.kloosterman_bound]`.
+- `SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five : χ(ℚ(√47)²) = 5`, no hypothesis (`Instances/SqrtFortySevenFive`) — the same five.
+- `Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound`, and in `Instances/SqrtClassValues` `χ = 5` at `ℚ(√143)`, `ℚ(√311)`, `ℚ(√335)`, `ℚ(√3, √5)` and `χ ≥ 5` at `ℚ(√167)`, each with `hOA` dropped — the same five.
+- `Plane.mOne_le_0_2470 : mOne ≤ ENNReal.ofReal 0.2470`, `Plane.mOne_lt_one_quarter : mOne < ENNReal.ofReal (1 / 4)` (`Plane/MOneBound`) — the standard three.
+- `Rigidity.henselCount_of_two_notMem`, `Rigidity.newCharBound_of_two_notMem`, `CertLink.exists_fibreShareBound_nineteen` (`Rigidity/ClassRatio`; FS131-IKL1's drafts, stated here), `CertLink.fibreShareBound_three`, `CertLink.card_le_of_fibreShareBound_model` (`Rigidity/CertLinkModels`) — as `axioms-all-5.txt` prints them (none `sorryAx`).
+No statement of the skeletons was changed but the ruled ones (stage 4–5's statement check).
 
 ## Stage 1 — SAVED (the readback)
 
@@ -270,3 +276,50 @@ where the image is `{1}` (FS100-EXC). Not sized; not on the headline's path afte
 and C′ in the kernel are FS-47's stub, inventory item 79 of FS-91).
 
 Build 5 (`build-5.log`, `--mem 10`, `MEMMAX=10G`, `BATCH=8`): running at this save.
+
+**Build 5: OK, 291 of 291 batches, 26 modules rebuilt, 0 modules with warnings** (`build-5.log`, `build-5-full.log`). From
+the built tree (`after-5.log`): **no `sorryAx` in any of the chain's records** (`axioms-all-5.txt`: 0); the statement
+check against stage 1's dumps: **34,480 expected — 34,428 the same, 2 renamed back, 26 ruled deletions (one more than
+stage 4: Lemma C′), 16 public, 8 dropped binders re-added equal, 16 new, 0 instance moves, 1,288 incoming; 0 reports**
+(`statements-compare-5.out`); plants **5/5** (`statements-plant-5.out`). Gate steps on the same tree: `dupnames.sh` OK (no
+doubled name, 31 generated), `axioms.sh` **OK — 9,451 clean, 355 axiom-free, 34 imported, 5 declared purchases**, lint
+**14/14**, `check_architecture.py` **PASS** (`*-5.log`). Commit of the tree checked: `80fb92d1e` (sources as at
+`2fcba050a`).
+
+## Drafts for part 2 — what is left, in order (for the full gate on one commit)
+
+Nothing is left to join: `main`, M13's line (`fs131-wcm3`, then `fs131-wcm4`), the p = 19 line (`fs131-wc17`) and the
+certificate link (`fs131-wkl`) are merged, and the tree builds with no `sorry`. What is left is the full gate, as
+FS131-LDB1 ran it (`plans/FS131-LDB1-landing.md` § Stage 5; previous digests `data/fs131/ldb1/gate/`):
+1. **`scripts/Axioms.lean`, the chain's block**: `data/fs131/lch1/draft-axioms-block.lean` (887 CLEAN, 16 on
+   `positive_entropy_rigidity`, 15 on `kloosterman_bound`; its one OPEN record is now deleted — regenerate from
+   `axioms-all-5.txt` filtered as stage 4 did); the link's block (FS131-IKL1 § 4.3, plus `henselCount_of_two_notMem`,
+   `newCharBound_of_two_notMem`, `exists_fibreShareBound_nineteen` under CLEAN and `card_le_of_fibreShareBound_model`
+   under IMPORTED with Weil); the blocks of `Arith/FibreCert*`, `Arith/BinaryField`, `Arith/DyadicCerts` from FS131-IKC4's
+   and FS131-ICM4's records; then a coverage run as FS131-LDB1's `Coverage.lean` (every public constant a record or reached).
+2. **The assumptions step**: `--self-test`, a run, `--write-ledger` (it drops the retired conditional's six `TAKES` rows
+   and adds the chain's); FS131-IJN1's `draft-assumptions.txt` (b) lists the entries the step asked for on the chain's line
+   (`stale-condition` ×4, `undeclared-never-concluded` ×3); `hOA`'s takers now read `ESTABLISHED`; the link's three formers
+   are concluded (IKL1 § 4.4); the nine counts for `CLAUDE.md`.
+3. **Vacuity**: `vacuity.sh` and `--self-test`; the counts reconciled; the link's binders' model at `q = 3` (IKL1 § 4.4).
+4. **The guarded lint's negative control** (a planted unused instance binder, FS131-IJN1's `lint-plant.sh` pattern, at
+   `BATCH=8`: the stale set is one module and the root).
+5. **The read-aloud** of the headline and of `χ(ℚ(√47)²) = 5` against `data/fs131/claims-NF2.md`, and the front page's
+   drafts, each slot checked by a script.
+Build width for any build that recompiles the density bound's cells or the p = 19 checks: `BATCH ≤ 2` at 16 GiB, or
+`BATCH ≤ 3` at 10 GiB for the cells alone (stages 2b, 2c).
+
+## Drafts for `LEAN.md` (§ Building and § Searching — Lean; Keryx files)
+
+- `decide +kernel` modules in one batch share no memory: eight `Plane/DensityBound/Cells/PartNN` (about 2 GB each) are
+  OOM-killed in a 10 GiB scope (exit 143, `Terminated`, the user journal's `oom-kill`), and two FS131-IKC4 check modules
+  (5.4–7.3 GiB each) in one 10 GiB scope likewise; a rebuild of either needs `BATCH=3` (cells) or `BATCH=2` at
+  `MEMMAX=16G` (the checks) (FS131-LCH1).
+- `Expr.hash` reads no binder name: a non-dependent binder a landing drops is checked by putting it back with `mkArrow`
+  inside `forallBoundedTelescope` and comparing the hash with the type dumped before (the headline's `362919061`, equal;
+  a `True` in its place differs) (`data/fs131/lch1/lean/ReAdd.lean`; FS131-LCH1).
+- Making a private declaration public renames every internal constant under it (`avgMeasure._proof_1`), and every stored
+  value that names one moves: a comparison renames back by prefix (`Name.replacePrefix`), not by the declaration's name
+  alone (FS131-LCH1).
+- A corollary of a theorem cannot live in a module the theorem's module imports: check the direction before placing it
+  (`Plane/DensityBound/Window` imports `Plane/OneAvoidingDensity`; FS131-LCH1's `Plane/MOneBound`).
