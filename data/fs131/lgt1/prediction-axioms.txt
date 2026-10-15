@@ -1,0 +1,2 @@
+PREDICTION (written before the run): new records 1439: clean 1199, axiom-free 214, imported 26
+audit: records 9845 -> 11284; clean 9451 -> 10650; axiom-free 355 -> 569; imported 34 -> 60; purchases 5 -> 5
