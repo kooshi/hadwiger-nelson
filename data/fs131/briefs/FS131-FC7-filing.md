@@ -93,3 +93,46 @@ what the report cites under `data/fs131/fc7/`.
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment — 2026-10-15 01:45 UTC
+
+Your stage 3 report (`data/fs131/reports/FS131-FC7.md` in your tree) is read, and every `CHECK:` is ruled here. Thank
+you: the size check stopped exactly where the brief said it should.
+
+**CHECK 1, the size budget: two moves first, then drafts 5–12 in full.** The budget is met by moving text a session does
+not need to a file that already holds it, never by trimming a draft. In this order, each by your script, asserting its
+slot first:
+
+1. **The closed milestone leaves the open-milestones paragraph.** In `CLAUDE.md` § Paths forward, ranked, the paragraph
+   that opens "**Open milestones.**" holds a block that opens "**Closed 2026-10-14: FS-133, the one-class transfer**" and
+   ends "the kernel proof is this project's. " (just before "**Derived 2026-10-07: FS-132, six by the nerve**"). Its words
+   are in `plans/FRONTIER-STUBS.md` § Open milestones, in order, already, and the result's current statement is in
+   "What the kernel holds". Replace the block by exactly this text (my words, a pointer):
+   "**Closed 2026-10-14: FS-133, the one-class transfer** (`plans/FRONTIER-STUBS.md` § Open milestones, in order). "
+2. **The "Last filed" chain keeps only its newest entry.** File draft 5 as written. Then move its three older entries —
+   the ones that open "the landing of the density bound** (FS131-LDB1", "the landing of FS-133, the density equality**
+   (FS133-LD1" and "the landing of the port of `[OAIMath2026]`'s transfer proof** (FS131-LP1" — verbatim to the top of
+   `plans/FILINGS.md`, below its italic header and above its first entry, newest first, each starting "before it **" as
+   the file's entries do. In `CLAUDE.md` the line then reads: draft 5's entry, then "; before it, every earlier filing,
+   newest first: `plans/FILINGS.md`." (the existing words "before them, every earlier filing, newest first" with "them"
+   made "it"). This also settles **CHECK 5**: the words "three → two" travel with the port's entry, and `plans/FILINGS.md`
+   records each filing as it was made.
+3. **Then drafts 6–12**, as written; for **CHECK 4**, leave the sentence after draft 8 as it is.
+
+If `CLAUDE.md` is still over 80,000 bytes after all three, stop and write a `CHECK:` with the byte count.
+
+**CHECK 2, the twelve lost tokens: allow-list them**, in the form of your draft-20b entries — each an old count that a
+draft replaced, its reason naming the new value in the parenthesis (`generic=1411` → 1412, `sites=1454` → 1455,
+`refutations-skipped=234` → 240, `355` → 569 axiom-free, `axioms=2` → 3, `rests=27` → 74, `takes=102` → 108,
+`mentions=1` → 2, and the code token with `generic=1412`). Tokens the two moves send to `plans/FILINGS.md` take
+`EXTERNAL_HOMES` entries in the FS131-FC5 form (`tools/claude_md_fact_audit.py` l. 522 on). Any other lost token is a
+`CHECK:`.
+
+**CHECK 3 and CHECK 6: accepted as you did them.**
+
+**Then run the checks again** (the three digests, the fact audit with `--base faa9a919c` and with `--dupes`,
+`tools/bib_audit.py`, the size) and add stage 4 to your report. **Touches extended** to `plans/FILINGS.md`. Commit by
+explicit path on your branch; do not push.
+
+You start no agents of your own (standing rule 1: delegation is one level deep, because the coordinator can only review
+work it knows exists).
