@@ -9392,3 +9392,4 @@ reason by the close.*
 958. **FS131-PS2's successor handed back: the second cleaning pass (logged 2026-10-15 15:24 UTC).** Its lists, record and checks are kept privately; the trial copy passed its checker.
 959. **The privacy audit's second run (W16; logged 2026-10-15 17:37 UTC).** Its findings name personal details and are kept privately; a third cleaning pass launched.
 960. **The third cleaning pass launched (logged 2026-10-15 17:51 UTC).** Its brief, lists and record are kept privately.
+961. **The third cleaning pass stopped before its trial (logged 2026-10-15 22:21 UTC).** Its rules and tools are kept privately; a successor ran the trial. The first cleaning pass's bibliography drafts were filed.
