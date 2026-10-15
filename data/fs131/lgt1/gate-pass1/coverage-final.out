@@ -1,0 +1,19 @@
+MODULES 148
+CONSTANTS 4015 PUBLIC 1586
+RECORDS 1545 ABSENT 0 BLOCK 1413
+REACHED 41
+CONTROL-REMOVED 13
+PLANT-UNREACHED THM HadwigerNelson.SqrtClassValues.five_le_localBound_sqrt143
+PLANT-UNREACHED THM HadwigerNelson.SqrtClassValues.isSquare_radicand
+PLANT-UNREACHED THM HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt311_eq_five
+PLANT-UNREACHED THM HadwigerNelson.SqrtClassValues.five_le_localBound_sqrt3_sqrt5
+PLANT-UNREACHED THM HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt143_le_five
+PLANT-UNREACHED THM HadwigerNelson.SqrtClassValues.five_le_chromaticNumber_planeOver_sqrt167
+PLANT-UNREACHED THM HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt335_eq_five
+PLANT-UNREACHED THM HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt3_sqrt5_eq_five
+PLANT-UNREACHED THM HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt143_eq_five
+PLANT-UNREACHED THM HadwigerNelson.CertLink.card_le_of_fibreShareBound_model
+PLANT-UNREACHED THM HadwigerNelson.CertLink.exists_stablePrime_sqrt_three
+PLANT-UNREACHED THM HadwigerNelson.CertLink.fibreShareBound_three
+PLANT-UNREACHED THM HadwigerNelson.CertLink.exists_addEquiv_zmod_sqrt_three
+END

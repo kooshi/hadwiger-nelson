@@ -1,0 +1,13 @@
+  ok    the printer: 1545 public records of the 148 modules (1545 at the block's generation)
+  ok    each printed once by the audit, its axioms the printer's, in its section (1545 of 1545)
+  ok    HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber: [('IMPORTED', ['Classical.choice', 'HadwigerNelson.Rigidity.positive_entropy_rigidity', 'HadwigerNelson.StandingFive.kloosterman_bound', 'Quot.sound', 'propext'])]
+  ok    HadwigerNelson.SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five: [('IMPORTED', ['Classical.choice', 'HadwigerNelson.Rigidity.positive_entropy_rigidity', 'HadwigerNelson.StandingFive.kloosterman_bound', 'Quot.sound', 'propext'])]
+  ok    declared imports: ['HadwigerNelson.StandingFive.kloosterman_bound', 'HadwigerNelson.Outside.OAI158.no_proper_five_coloring', 'HadwigerNelson.Rigidity.positive_entropy_rigidity']
+  ok    IMPORTED: 60 records (60 predicted), by import {'kloosterman_bound': 38, 'no_proper_five_coloring': 6, 'positive_entropy_rigidity': 8, 'kloosterman_bound+positive_entropy_rigidity': 8}; predicted main's 13 + 6 outside the 148 modules and the 148 modules' {'kloosterman_bound': 25, 'kloosterman_bound+positive_entropy_rigidity': 8, 'positive_entropy_rigidity': 8}
+  ok    records: 11284 ({'IMPORTED': 60, 'CLEAN': 11219, 'PURCHASED': 5}), 11284 predicted (CLEAN 11219, IMPORTED 60, PURCHASED 5); printed twice: []
+  ok    coverage: modules 148 (148), the print complete
+  ok    coverage: 1545 records among the 148 modules' constants (the printer's 1545), 0 of the block's 1413 absent
+  ok    coverage: public 1586 = records 1545 + reached 41; unreached 0
+  ok    coverage control: 13 removed, 13 reported, the two leaf modules' 13 public records exactly
+records: PASS
+exit=0
