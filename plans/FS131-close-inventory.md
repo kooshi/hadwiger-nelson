@@ -9389,3 +9389,4 @@ reason by the close.*
 955. **FS131-PS2 handed back: the licence, the public pages, the documents moved to the library, and the copy's first lists, script and checker (logged 2026-10-15 04:03 UTC).** The lists and the pass's record are kept privately; its bibliography drafts D1–D5 are owed to the second filing.
 956. **Kooshi: "You're good to go" (W14, verbatim in `data/fs131/REQUEST-2026-10-15.md`; logged 2026-10-15 04:29 UTC).** The copy was made and checked.
 957. **The privacy audit's first run, and Kooshi's word on its findings (W15; logged 2026-10-15 11:01 UTC).** A separate reader audited the copy; its findings name personal details and are kept privately; a second cleaning pass launched.
+958. **FS131-PS2's successor handed back: the second cleaning pass (logged 2026-10-15 15:24 UTC).** Its lists, record and checks are kept privately; the trial copy passed its checker.
