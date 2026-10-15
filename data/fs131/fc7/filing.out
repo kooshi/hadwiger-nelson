@@ -1,0 +1,22 @@
+D1: slot found once, replaced
+D2: slot found once, replaced
+D3a: slot found once, replaced
+D3b: slot found once, replaced
+D4: slot found once, replaced
+D13: slot found once, replaced
+D14: slot found once, replaced
+D15a: slot found once, replaced
+D15b: slot found once, replaced
+D16 (2 bullets): slot found once, inserted after
+D17 (11 bullets: 3 LCH1, 4 IKL1, 4 this job's): slot found once, inserted after
+D18: slot found once, inserted after
+D19: slot found once, inserted after
+D20: GATE_CHANGES entry inserted after the FS131-LDB1 entry
+D21: dated line appended after the slot's line (the file's last)
+CLAUDE.md bytes after start: 78773
+CLAUDE.md bytes after D1: 78779
+CLAUDE.md bytes after D2: 79302
+CLAUDE.md bytes after D3: 79359
+CLAUDE.md bytes after D4: 79359
+D3 note: the nine counts changed (draft 3 is not a 'stands' draft)
+filed: BIBLIOGRAPHY.md, CLAUDE.md, LEAN.md, LEDGER.md, data/fs131/claims-NF2.md, tools/claude_md_fact_audit.py
