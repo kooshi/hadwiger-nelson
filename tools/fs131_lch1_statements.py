@@ -32,6 +32,8 @@ DELETED = {NS + n for n in [
 DELETED_PRIVATE = {  # (module, user name) of private constants deleted
     ('Proofs.HadwigerNelson.Rigidity.SqrtClassFive', NS + 'Rigidity.ratioAtMost_two_notMem_link'),
     ('Proofs.HadwigerNelson.Rigidity.SqrtClassFive', NS + 'Rigidity.exists_I_integer'),
+    ('Proofs.HadwigerNelson.Arith.ThreeFourColours', NS + "ThreeFourColours.exists_I_integer'"),
+    ('Proofs.HadwigerNelson.Rigidity.ClassRatio', NS + 'Rigidity.exists_I_int'),
 } | {('Proofs.HadwigerNelson.Rigidity.InvariantMeasure', NS + 'Rigidity.' + n) for n in [
     'avgMeasure', 'avgMeasure_apply', 'isProbabilityMeasure_avgMeasure', 'avgMeasure_map', 'integral_avgMeasure',
     'map_eq_of_tendsto', 'map_eq_of_tendsto_of_eventually', 'measure_compl_eq_zero_of_tendsto',
@@ -51,12 +53,16 @@ DROPPED = {NS + n for n in [
     'SqrtClassValues.chromaticNumber_planeOver_sqrt3_sqrt5_eq_five',
     'SqrtClassValues.five_le_chromaticNumber_planeOver_sqrt167']}
 NEW = {NS + 'Plane.mOne_le_0_2470': 'Proofs.HadwigerNelson.Plane.MOneBound',
-       NS + 'Plane.mOne_lt_one_quarter': 'Proofs.HadwigerNelson.Plane.MOneBound'}
+       NS + 'Plane.mOne_lt_one_quarter': 'Proofs.HadwigerNelson.Plane.MOneBound',
+       NS + 'Rigidity.henselCount_of_two_notMem': 'Proofs.HadwigerNelson.Rigidity.ClassRatio',
+       NS + 'Rigidity.newCharBound_of_two_notMem': 'Proofs.HadwigerNelson.Rigidity.ClassRatio',
+       NS + 'CertLink.exists_fibreShareBound_nineteen': 'Proofs.HadwigerNelson.Rigidity.ClassRatio'}
 OAD = 'Proofs.HadwigerNelson.Plane.OneAvoidingDensity'
 M13MODS = {'Proofs.HadwigerNelson.Arith.CircleCos', 'Proofs.HadwigerNelson.Rigidity.ClassRatio',
            'Proofs.HadwigerNelson.Arith.BinaryField', 'Proofs.HadwigerNelson.Arith.DyadicCerts'}
 # the p = 19 line's modules (fs131-wc17): merged whole, edited by no one here; their constants are counted, not compared
-INCOMING = 'Proofs.HadwigerNelson.Arith.FibreCert'
+INCOMING = ('Proofs.HadwigerNelson.Arith.FibreCert', 'Proofs.HadwigerNelson.Arith.FibreShareIneq',
+            'Proofs.HadwigerNelson.Rigidity.CertLink')  # also the certificate link's three modules (fs131-wkl)
 
 def read_idx(path):
     d = {}
@@ -80,7 +86,8 @@ def read_full(path, mods):
     return d
 
 def internal_under(n, roots):
-    return any(n.startswith(r + '.') or n.startswith('_private') and r in n for r in roots)
+    # an internal constant generated under a declaration: `decl._proof_1`, `decl.eq_1`, `decl.match_1`, …
+    return any(n.startswith(r + '.') for r in roots)
 
 def priv(mod, user):
     return f'_private.{mod}.0.{user}'
@@ -106,7 +113,7 @@ def main():
     for n, v in mainb.items(): exp[n] = v          # main's modules, OneAvoidingDensity among them, win
     if plant:
         k1 = NS + 'Rigidity.mrPlus'; after[k1] = dict(after[k1], th='PLANTED')
-        k2 = NS + 'Plane.mOne'; after[k2] = dict(after[k2], vh='PLANTED')
+        k2 = NS + 'Plane.mOne'; after[k2] = dict(after[k2], vh='PLANTED', dh='PLANTED')
         k3 = NS + 'Rigidity.entropySplit'; after.pop(k3)
         after[NS + 'Rigidity.PLANTED_new'] = dict(mod='Proofs.HadwigerNelson.Rigidity.ChainHeadline', kind='THM',
                                                   flags='', th='1', vh='', dh='')

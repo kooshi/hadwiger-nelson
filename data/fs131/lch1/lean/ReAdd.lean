@@ -61,23 +61,20 @@ def run : MetaM Unit := do
   let lawMod := `Proofs.HadwigerNelson.Plane.OneClass.InvariantLaw
   let m3Mod := `Proofs.HadwigerNelson.Rigidity.InvariantMeasure
   let pubs : List Name := helpers.map fun s => `HadwigerNelson.OneClass ++ s.toName
-  for (mod, target) in [(lawMod, fun (s : String) => privName lawMod (`HadwigerNelson.OneClass ++ s.toName)),
-                        (m3Mod, fun (s : String) => privName m3Mod (`HadwigerNelson.Rigidity ++ s.toName))] do
+  -- a public helper's name, or an internal constant under it (`avgMeasure._proof_1`, `avgMeasure.eq_1`)
+  let underPub (n : Name) : Bool := pubs.any (·.isPrefixOf n)
+  for (mod, newPrefix) in [(lawMod, `HadwigerNelson.OneClass), (m3Mod, `HadwigerNelson.Rigidity)] do
     let some idx := env.header.moduleNames.findIdx? (· == mod) | throwError "module {mod} not imported"
-    let map : List (Name × Name) := helpers.map fun s => (`HadwigerNelson.OneClass ++ s.toName, target s)
+    let back (n : Name) : Name := privName mod (n.replacePrefix `HadwigerNelson.OneClass newPrefix)
+    let rn (e : Expr) : Expr := e.replace fun x => match x with
+      | .const n us => if underPub n then some (mkConst (back n) us) else none
+      | _ => none
     for ci in env.header.moduleData[idx]!.constants do
-      let mentions := ci.type.getUsedConstants.any (pubs.contains ·)
-      let vmentions := match ci with
-        | .defnInfo v => v.value.getUsedConstants.any (pubs.contains ·) | _ => false
-      if mentions then
-        let t := ci.type.replace fun x => match x with
-          | .const n us => (map.lookup n).map (mkConst · us) | _ => none
-        IO.println s!"READD {ci.name} {t.hash}"
-      if vmentions then
-        if let .defnInfo v := ci then
-          let t := v.value.replace fun x => match x with
-            | .const n us => (map.lookup n).map (mkConst · us) | _ => none
-          IO.println s!"READD {ci.name}:value {t.hash}"
+      if ci.type.getUsedConstants.any underPub then
+        IO.println s!"READD {ci.name} {(rn ci.type).hash}"
+      if let .defnInfo v := ci then
+        if v.value.getUsedConstants.any underPub then
+          IO.println s!"READD {ci.name}:value {(rn v.value).hash}"
 
 #eval run
 
