@@ -28,7 +28,8 @@ import sys
 NS = 'HadwigerNelson.'
 DELETED = {NS + n for n in [
     'Rigidity.zeroEntropyCarried_of_numberField',
-    'SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five_of_chain']}
+    'SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five_of_chain',
+    'Rigidity.unitRing_eq_stableIntegers']}  # Lemma C′, deleted with its unproved body (fifth amendment)
 DELETED_PRIVATE = {  # (module, user name) of private constants deleted
     ('Proofs.HadwigerNelson.Rigidity.SqrtClassFive', NS + 'Rigidity.ratioAtMost_two_notMem_link'),
     ('Proofs.HadwigerNelson.Rigidity.SqrtClassFive', NS + 'Rigidity.exists_I_integer'),

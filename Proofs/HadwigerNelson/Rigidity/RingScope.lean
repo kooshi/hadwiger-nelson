@@ -2,7 +2,7 @@ import Proofs.HadwigerNelson.Rigidity.ChainAtTA
 import Mathlib.NumberTheory.NumberField.CanonicalEmbedding.Basic
 
 /-!
-# The ring and the scope: `R ⊆ O′`, `c·O′ ⊆ R`, `R = O′` in the scope, the density of `R` (FS-131, job FS131-KN9; one leaf open, `unitRing_eq_stableIntegers`)
+# The ring and the scope: `R ⊆ O′`, `c·O′ ⊆ R`, the density of `R` (FS-131, job FS131-KN9)
 
 Module M9 of the chain under "five colours at the square root of 47" (`plans/FS131-KN3-chain-plan.md`, its table). It holds
 the two results the chain's leaf list does not number (NF2-NC: "the density of the ring in its completion, and the ring
@@ -18,8 +18,10 @@ conjugation-stable prime: the intersection of the valuation subrings `P.localRin
   prime); proved here, three lines over `Arith/UpperHalf`.
 * `exists_mul_stableIntegers_le` — **`c·O′ ⊆ R` for some integer `c ≥ 1`, over every real number field, with no scope**
   (FS91-J10-L1 (e), through (b) `ℚR = L` and (d) `O_L[U] = O′`).
-* `unitRing_eq_stableIntegers` — **`R = O′` where no stable dyadic prime is ramified** (Lemma C′, FS91-J07-4 = J10-T6;
-  `LEDGER.md` row 100; [hand], three derivations). The deriver's row 14 of EN1 § 8.1; not a numbered leaf.
+* **`R = O′` where no stable dyadic prime is ramified** (Lemma C′, FS91-J07-4 = J10-T6; `LEDGER.md` row 100; [hand],
+  three derivations) **is not in the library**: nothing here or downstream reads it, and its statement was deleted with
+  its unproved body at the five-colour chain's landing (FS131-LCH1). Its docstring, statement and FS131-KN9's route are kept
+  in `data/fs131/lch1/ring-scope-lemma-c-prime.lean` and in `plans/FS131-LCH1-join.md`, for the roadmap of what is left.
 * `dense_mixedEmbedding_nsmul_unitRing` — **the density of `R`**: for every `N ≥ 1`, `N·R` is dense in `L ⊗ ℝ` (Mathlib's
   mixed space of `L`), which is the density of `R` in `R̂_prof × (L ⊗ ℝ)` (J45 N1 (b) at `S = ∅`) read without a profinite
   completion: a basic open set there is `(r + N·R̂) × V`. Route EN1 § 8.2 item 4: `1/5 ∈ R` and a full lattice in `R`. The
@@ -237,16 +239,6 @@ theorem exists_mul_stableIntegers_le [NumberField F] :
           push_cast; rfl]
       exact hy (a * b)
   simpa using key x hxD 1
-
-/-- **`R = O′` in the scope** (Lemma C′, FS91-J07-4 = FS91-J10-T6; `LEDGER.md` row 100): for a real number field with no
-ramified stable dyadic prime, the unit-vector ring is the ring of elements integral at every stable prime. Route
-(FS91-J10's, plan § Stage 3): by `exists_mul_stableIntegers_le`, `R = O′` iff `R` maps onto `O′/cO′`, a finite product of
-`O_𝔓/𝔓^m` over the stable `𝔓 ∣ c`; there the image of `U` is the product of the local norm-one images (weak approximation
-for the norm-one torus, FS91-J10-L2), and the ring it generates is everything unless some `𝔓` is ramified and dyadic (at a
-ramified dyadic level one the norm-one image is `{1}`). -/
-theorem unitRing_eq_stableIntegers [NumberField F] (h : NoRamifiedStableDyadic F) :
-    UnitRing.unitRing (conjOn (fieldI_conj F)) = stableIntegers F := by
-  sorry
 
 /-- **The density of `R`** (J45 N1 (b) at `S = ∅`, read for `L ⊗ ℝ`; EN1 § 8.1 row 3): for every `N ≥ 1` the image of `N·R`
 under the canonical embedding of `L = F(i)` into its mixed space is dense. Route (EN1 § 8.2 item 4): `(3 ± 4i)/5 ∈ U`, so
