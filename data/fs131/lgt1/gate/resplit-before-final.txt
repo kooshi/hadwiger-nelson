@@ -1,0 +1,4 @@
+data/fs131/lch1/statements-before-chain.txt: 27186 constants indexed, 2480 in FULL modules
+data/fs131/lch1/statements-before-main.txt: 32014 constants indexed, 634 in FULL modules
+RESPLIT: both indexes byte-identical to the committed ones
+exit=0

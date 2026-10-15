@@ -1,0 +1,10 @@
+unplanted: PASS
+plant 'a record removed': FAILED (as it must) — each printed once by the audit, its axioms the printer's, in its section (1544 of 1545): HadwigerNelson.FibreCertSound.c
+plant 'a CLEAN record put under IMPORTED': FAILED (as it must) — each printed once by the audit, its axioms the printer's, in its section (1544 of 1545): HadwigerNelson.FibreCertSound.c
+plant 'sorryAx added to the headline': FAILED (as it must) — each printed once by the audit, its axioms the printer's, in its section (1544 of 1545): HadwigerNelson.SqrtFortySeven.c
+plant 'a record printed twice': FAILED (as it must) — each printed once by the audit, its axioms the printer's, in its section (1544 of 1545): HadwigerNelson.FibreCertSound.c
+plant 'a public constant UNREACHED': FAILED (as it must) — coverage: public 1586 = records 1545 + reached 41; unreached 1: UNREACHED THM HadwigerNelson.Rigidity.planted
+plant 'a record ABSENT': FAILED (as it must) — coverage: 1545 records among the 148 modules' constants (the printer's 1545), 1 of the block's 1413 absent
+plant 'the control's lines dropped': FAILED (as it must) — coverage control: 13 removed, 0 reported, the two leaf modules' 13 public records exactly
+plants: every one fired; the unplanted inputs pass
+exit=0

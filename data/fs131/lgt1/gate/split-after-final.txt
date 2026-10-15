@@ -1,0 +1,2 @@
+data/fs131/lgt1/gate/statements-final.txt: 35786 constants indexed, 3013 in FULL modules
+exit=0

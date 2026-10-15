@@ -1,0 +1,4 @@
+statements-before-chain.txt: OK
+statements-before-main.txt: OK
+statements-after-5.txt: OK
+exit=0
