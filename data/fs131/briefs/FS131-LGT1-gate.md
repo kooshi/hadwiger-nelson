@@ -119,3 +119,7 @@ local backup.
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment — 2026-10-15 00:33 UTC (Keryx, by message to this job)
+
+**How the drafts word novelty** (Kooshi's question of this hour, on the last lander's sentence "None of these values is new"): that sentence meant *not new to this landing* — each value was derived here by hand before (`LEDGER.md` rows 121, 123) — and it reads as *prior art*, which it is not. In your front-page drafts, state each value's novelty in the ledger's own terms: row 121's "**Prior art:** not found in print" (never "first", never "not new"), with what is not ours named as the ledger names it (the upper half `χ ≤ 5` and the plane at 11 are prior art; Weil's bound and Einsiedler–Lindenstrauss Thm 1.3 are declared outside theorems; the density bound is `[AmbrusEtAl2023]`'s); what this landing adds is the kernel's check, said as that. No new touches. You still start no agents of your own: only the coordinator launches agents, so that Kooshi's budget holds and every piece of work is known.
