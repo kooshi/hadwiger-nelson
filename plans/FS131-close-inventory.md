@@ -9390,3 +9390,4 @@ reason by the close.*
 956. **Kooshi: "You're good to go" (W14, verbatim in `data/fs131/REQUEST-2026-10-15.md`; logged 2026-10-15 04:29 UTC).** The copy was made and checked.
 957. **The privacy audit's first run, and Kooshi's word on its findings (W15; logged 2026-10-15 11:01 UTC).** A separate reader audited the copy; its findings name personal details and are kept privately; a second cleaning pass launched.
 958. **FS131-PS2's successor handed back: the second cleaning pass (logged 2026-10-15 15:24 UTC).** Its lists, record and checks are kept privately; the trial copy passed its checker.
+959. **The privacy audit's second run (W16; logged 2026-10-15 17:37 UTC).** Its findings name personal details and are kept privately; a third cleaning pass launched.
