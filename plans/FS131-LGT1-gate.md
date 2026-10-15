@@ -193,3 +193,73 @@ side, against dumps made before any edit. It does not show: the two outside theo
 planners' read-backs; `lean4checker` cannot check an axiom); anything an independent kernel replay would add
 (`lean4checker` not run); that the 81 `FibreCert*` modules are byte-for-byte their generators' output (no generator was
 re-run on them: the kernel checks what they state, and the statement check covers them); that the result is new.
+
+## Stage 4 — SAVED (read aloud)
+
+Printed from the gated build (`data/fs131/lgt1/lean/ReadAloud.lean` → `read-aloud.out`, `pp.fullNames`), after the
+pass's build and before its later steps read the library; the two headline types are those `axioms-all-final.out` and the
+statement dump (byte-identical to the lander's build-5 dump) hold.
+
+**`HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber : ∀ (F : Subfield ℝ) [NumberField ↥F],
+Min.min (SpectralChain.localBound F) 5 ≤ (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).chromaticNumber`** —
+"depends on axioms: [propext, Classical.choice, Quot.sound, HadwigerNelson.Rigidity.positive_entropy_rigidity,
+HadwigerNelson.StandingFive.kloosterman_bound]".
+
+**`HadwigerNelson.SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five : (SimpleGraph.induce (planeOver
+SqrtFortySeven.F47) (unitDistance ℂ)).chromaticNumber = 5`** — the same five axioms.
+
+**Every binder and defined term, traced** (each printed from the build):
+- `F : Subfield ℝ` with `[NumberField ↥F]`: a subfield of the reals, finite over `ℚ` — "a real number field". The
+  headline's only hypothesis is the instance; the assumptions ledger lists no `TAKES` row for either theorem (stage 2).
+- `planeOver F = {z | z.re ∈ F ∧ z.im ∈ F}` (a set of `ℂ`): the plane `F²`, as points of `ℂ`.
+- `unitDistance ℂ`: `Adj x y := dist x y = 1` on `ℂ`'s metric, `|x − y|`, the Euclidean distance of `ℝ²`; `induce` on
+  `planeOver F` is the subgraph on `F²` (`SimpleGraph.comap` along the subtype embedding). So the graph is the
+  unit-distance graph on `F²`, and `chromaticNumber` is Mathlib's (`⨅ n ∈ setOf G.Colorable, ↑n` in `ℕ∞`): `χ(F²)`.
+- `SpectralChain.localBound F = ⨅ P : StablePrime F, (levelTarget P 1).chromaticNumber`, with `StablePrime F` a maximal
+  ideal `P` of `𝓞(F(i))` fixed by conjugation (`comap (conjO F) P = P`), `F(i) = fieldI F = planeOverSubfield F`, and
+  `levelTarget P 1` the Cayley graph `SimpleGraph.fromRel (fun x y => (x − y)·conj(x − y) = 1)` on `𝓞(F(i))/P`: the
+  residue target of norm-one differences. So `localBound F` is `L(F)`, "the least chromatic number among the residue
+  targets its conjugation-fixed primes supply" (`CLAUDE.md` § Notation). (An empty infimum would be `⊤`, making
+  `min(L, 5) = 5`; it is not empty at the instances: `five_le_localBound_sqrt47` and the upper half at a prime above 11
+  read real primes.)
+- `SqrtFortySeven.F47 = SquareClass.fieldOfRadicands {47} = Subfield.closure {√47}` in `ℝ`: `ℚ(√47)`.
+  `numberField_F47 : NumberField ↥F47` on the standard three.
+
+**Against NF2-LEAF-23** ("`NumberField` for `ℚ(√47)`'s `Subfield ℝ`, and `5 ≤ localBound` there: every stable prime of
+`ℚ(√47, i)` and its target … Then `ℚ(√143)`, `ℚ(√311)`, `ℚ(√335)` (D:275), `ℚ(√3,√5)` (D:301), `ℚ(√167) ≥ 5` (D:279)"):
+`numberField_F47` (the standard three); `five_le_localBound_sqrt47 : 5 ≤ SpectralChain.localBound SqrtFortySeven.F47` (the
+standard three and Weil's bound); `SqrtClassValues.chromaticNumber_planeOver_sqrt143_eq_five`, `…sqrt311…`,
+`…sqrt335…` (`= 5` at `fieldOfRadicands {143}`, `{311}`, `{335}`), `…sqrt3_sqrt5_eq_five` (`= 5` at `fieldOfRadicands {3,
+5}`), `five_le_chromaticNumber_planeOver_sqrt167` (`5 ≤ χ` at `fieldOfRadicands {167}`), each with no hypothesis, each on
+the same five axioms. **The leaf is met as stated.**
+
+**Against row 121** ("`χ(ℚ(√47)²) = 5` … MR at ℚ(√47) (row 120) with J45's SP-Cor and T-C(A) at `S = ∅` gives `≥ 5`;
+the plane at 11 gives `≤ 5`"): the stored type is `χ(ℚ(√47)²) = 5`, word for word, with no hypothesis; what the kernel
+did not check is exactly the two declared outside theorems — Weil's bound (`StandingFive.kloosterman_bound`, `[Weil1948]`
+p. 207; its stored type in the print: the Kloosterman sum over a finite field of odd characteristic bounded by `2√|F|`)
+and Einsiedler–Lindenstrauss's positive-entropy rigidity (`Rigidity.positive_entropy_rigidity`,
+`[EinsiedlerLindenstrauss2022]` Thm 1.3; its stored type in the print: an ergodic probability measure for a `ℤ^d` action,
+`d ≥ 2`, with no virtually cyclic factors on a solenoid, is an average of finitely many measures each invariant under a
+closed subgroup with zero entropy on the quotient). Their read-backs against the papers are the planners' (`[Weil1948]`:
+two readers, `CLAUDE.md` § Trust ledger; E–L: `plans/FS131-KN7-chain-next.md` § 3.3, "clause by clause, page and line");
+this job did not re-read either paper. Row 121's other sentences are **not** what the stored statements say, and the
+kernel claims none of them: the triangle-free five-chromatic finite graph by de Bruijn–Erdős (no declaration), row 88 ⟺
+T-B1 at ℚ(√59), ℚ(√83), ℚ(√131), and the prior-art and answered-question clauses (prose).
+
+**M15's other values against row 123** ("for every real number field `F`, `χ(F²) ≥ min(L(F), 5)`, so `χ(F²) = L(F)`
+whenever `L(F) ≤ 5` … Instances: `χ = 5` at ℚ(√143), ℚ(√311), ℚ(√335) and every squarefree `d ≡ 47, 143, 167 (mod 168)`
+with `L = 5` (44 of the 52 with `d ≤ 3000`); `χ(ℚ(√3,√5)²) = 5`; `χ(ℚ(√167)²) ≥ 5`"):
+- the main clause is `Rigidity.min_localBound_five_le_chromaticNumber`, word for word (every real number field, complex
+  places included: `F ⊆ ℝ` with `NumberField`, no total reality asked);
+- `Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound : 5 ≤ L(F) → 5 ≤ χ(F²)`, its form at `L ≥ 5`;
+- "so `χ(F²) = L(F)` whenever `L(F) ≤ 5`" is **not a stored theorem**: it is the headline with the upper half
+  `UpperHalf.chromaticNumber_planeOver_le_localBound` (row 123's own words, [kernel] since FS131-LU1), a two-line
+  composition (`le_antisymm`, `min_eq_left`); the library's stored equality `SpectralChain.chromaticNumber_eq_localBound`
+  and `UpperHalf.chromaticNumber_eq_localBound_of_chain` are the conditional forms, over the named hypotheses (their
+  `TAKES` rows) — an open item below;
+- the instances at ℚ(√143), ℚ(√311), ℚ(√335), ℚ(√3,√5) and `≥ 5` at ℚ(√167): stored, as above;
+- the family "every squarefree `d ≡ 47, 143, 167 (mod 168)` with `L = 5` (44 of 52, `d ≤ 3000`)", the CLS
+  characterization in full, and ℚ(√23, ∛2)'s `L = 5`: **not stored** — each such field is an instance of the headline
+  once `5 ≤ L(F)` is proved there, which the kernel has at the five named fields only.
+**Read aloud: the two statements say what NF2-LEAF-23 and row 121's headline claim say, no more and no less, on two
+declared outside theorems.**
