@@ -39,3 +39,6 @@ data/fs62/q19/sat78.log
 .env
 # queue row 4 (dropped): its 940 partial LRAT proofs were deleted at Kooshi's word (2026-10-03); the unknown cubes' logs stay local
 data/search/2026-10-03/row4/cubes-s10-pass1/
+
+# Session transcripts — kept out of the repository (Kooshi, 2026-10-15); a compressed backup is kept outside the repository
+/chats-bak/
