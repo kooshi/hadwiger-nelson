@@ -1,0 +1,8 @@
+[0] MISMATCH  data/fs131/REQUEST-2026-10-13.md  (264 chars)
+[1] MISMATCH  data/fs131/claims-NF2.md  (311 chars)
+[2] MISMATCH  LEDGER.md  (2876 chars)
+[3] MISMATCH  plans/FS131-close-inventory.md  (3167 chars)
+[4] MISMATCH  plans/FS131-close-inventory.md  (3294 chars)
+[5] MISMATCH  plans/FS131-close-inventory.md  (3263 chars)
+PLANT: 6/6 blocks failed (all must)
+exit=0
