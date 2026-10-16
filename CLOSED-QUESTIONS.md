@@ -296,6 +296,8 @@ record, 0); none addresses a field plane.
 >
 > **And again in October 2026** — `[Davies2026]` p. 5 (read in full 2026-10-13, FS131-ER1): *"Nevertheless, the problem of determining the chromatic number of ℚ(√n)² has been well studied [32, 39, 49, 56]. In particular, it is known that ℚ(√n)² is four-colourable for n ≢ 47, 143, 167 (mod 168). It would be particularly interesting to determine if the remaining cases are six-colourable and if any of them contain a five chromatic unit distance graph."* (Its `[32, 39, 49, 56]` are `[Fischer1990]`, `[Johnson1987]`, `[Moorhouse2010]`, `[Payne2009]`; the sentence needs "squarefree".) Rows 121 and 123 answer the second question — every one of them, given MR, [hand] — and the first where `L = 5`; where `L ⩾ 6` the first is open, and at `ℚ(√635087)` it is Hadwiger–Nelson given MR (row 128).
 
+> The quadratic residue classes' lower half `χ(ℚ(√n)²) ≥ 5` is now a kernel theorem for every squarefree `n ≡ 47, 143, 167 (mod 168)`; six-colourability is answered (five colours) at the members that are squares modulo 11 or 19, and open at the rest; no graph is exhibited.
+
 > **Recorded as answered, 2026-09-27.** This section was held open until `[Johnson2000]` and `[Johnson2006]` were read (the rule of
 > `plans/FS81-quadratic-four-colours.md` §PA.4). Both are read in full (the consolidation run's job LP, `data/consolidation-2026-09-27/lp/record.md`):
 > neither holds a lower bound above three for any real quadratic field — their quadratic results are `[Johnson1987]`'s and Fischer's — and
