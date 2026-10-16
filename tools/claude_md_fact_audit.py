@@ -61,6 +61,8 @@ NORMALISE: list[tuple[str, str, str]] = [
 
 # token -> reason it may vanish. Keep this small and reviewed.
 ALLOW: dict[str, str] = {
+    # The second filing (FS131-FC8, 2026-10-16, Keryx; FS-131 inventory item 983): row 121's source cell reworded by FS131-EN1 § 8.3's draft.
+    "FS100-Q47's": "row 121's source cell reworded by plans/FS131-EN1-derivation.md § 8.3's draft (filed by FS131-FC8): the cell now says which of its eight entries are inputs of SP-Cor's proof instead of 'the inputs FS100-Q47's grade names'; FS100-Q47 itself is still named in LEDGER.md",
     # FS132-L1's landing (2026-10-07, Keryx; FS-131 inventory item 635): gate counts refiled; row 33's pre-import sentence replaced.
     "axioms=1 rests=8 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-assumptions-final.log (axioms=3 rests=18); the old line stays in data/fs131/l8a/gate/receipt-assumptions-final.log",
     "axioms=1": "superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-assumptions-final.log; the old count stays in data/fs131/l8a/gate/receipt-assumptions-final.log",

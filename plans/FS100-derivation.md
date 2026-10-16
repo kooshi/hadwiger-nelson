@@ -213,6 +213,8 @@ none exhibited); Exoo–Ismailescu's smallest-subfield question in part (ℚ(√
 gate on the value is owed** (the posers' author listings in zbMATH, the Polymath16 threads) before any novelty or publication claim. *Kernel:*
 X11K's lane (Kooshi's request); nothing of the chain is kernel yet.
 
+*Erratum (2026-10-13, FS131-EN1 § 5):* the grade's 'SP-Cor … over N1, N2, R-U, A⁺' names R-U as an input. SP-Cor run with `T + A` in the place of `E` does not read R-U; it reads MR⁺ (EN1-MRPLUS), A⁺ at `S = ∅`, and N1 at `S = ∅`. No statement or grade changes.
+
 **FS100-EFG — For `u ∈ U`, `h_m(u) = Σ_v log max(1, |u|_v)` over all places of `L` (the finite ones in `supp u`); `= log H(u)` for totally real `F`. EF-G (a) is FALSE for `F` with a complex place: over ℚ(∛2), a non-torsion relative unit has `H = 1 < exp h_m` (X01D's `u₀`; X01V's `u = (1+∛2 i)/(1−∛2 i)`, `h_m = log 5 + 2.4658… > log 5 = log H`); `U_N` is then infinite (rank `r₂(F)`). EF-G (b) holds (`#U_N ≥ c·N^{1/[F:ℚ]}` via `U_ℚ ⊆ U_F`; exactly `(4/π + o(1))N^{1/[F:ℚ]}` from `U_ℚ` in `H_L`, FS105-W-H). (= X01D EF-G; X01V-T1, T2, T3; X12B-G; X02V's C2.) [hand + tools exact; four minds, three blind to one another]**
 *Proof:* X01D §2.1 (EF-G); X01V §2.2 (X01V-T1–T3); X12B §2.5 (X12B-G). *Proof verdict:* the plan's §R-close (stage 5) 1.1, row EF-G. *Tools:* `tools/x01d_unit_check.py`,
 `tools/x01v_entropy_check.py` (Sturm count; its first certificate could not fire, replaced before any
