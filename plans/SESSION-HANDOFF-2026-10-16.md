@@ -41,8 +41,10 @@ current. Its two owed one-liners and the `k = 7` model go to the next job that t
 
 - **The collapse's filing is merged** (`38579c41b`, item 1007): the front page, row 128, README, ROADMAP, the atlas
   (local) current; the fact audit passes against `8cab63fa2`.
-- **FS131-IQP1** (item 1001): the `p`-adic plane (`.claude/worktrees/il5`, branch `fs131-kpa1`); the three leaves at 23
-  leave the landing (item 1002).
+- **FS131-IQP2** (item 1015): the `p`-adic plane to the gate (`.claude/worktrees/il5`, branch `fs131-kpa1`); FS131-IQP1
+  proved every landing leaf and handed back past its line (item 1014); the three leaves at 23 wait on search request 26;
+  five colours at 23 ruled in. Both implementer branches joined `Proofs.lean`'s import blocks with `main`'s: the second to
+  land will conflict there again — keep both blocks.
 - **FS131-ICT2** (item 1013): the three-colour criterion to the gate (`.claude/worktrees/kel1`, branch `fs131-ktc1`);
   FS131-ICT1 proved all 53 leaves and handed back past its line (item 1012); two unread hypotheses ruled dropped.
 - **FS131-KFR1** (item 1006): the density form's planner (`.claude/worktrees/kcl1`, branch `fs131-kfr1`); its widenings
