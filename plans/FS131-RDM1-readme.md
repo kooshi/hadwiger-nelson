@@ -215,3 +215,131 @@ No statement the page summarizes differs from the page's notation in scope.
 - **F6.** `LEDGER.md` row 75, as I read it before the `p`-adic landing, gave `χ_Bor(ℚ₂₃²) ≥ 6` at [cert]; the kernel holds `≥ 5`
   (`five_le_borelChromaticNumber_padicPlane_twentyThree`). The page states the kernel's and names the certificate's `6` as held
   outside the kernel only if the row as now filed still carries it (checked at Stage 3 after the merge).
+
+## Stage 3 — SAVED: the page
+
+### 3.1 What was written
+
+- **`README.md`**, rewritten whole. Order: the problem in one paragraph (whose each bound is); what the repository is and
+  what `F²` and `χ(F²)` mean; **the table** (ten rows, each a short formula and a status, numbered and linked to its
+  section); a one-line glossary of every symbol the table uses; a note on what "prior art: not found in print" means; one
+  section per row (statement, then short bullets: in words, why it matters, what it rests on, prior art, not claimed, what is
+  still by hand); one paragraph on the hand work toward six against seven, pointing to `ROADMAP.md`; **other people's
+  results the library checks** (a two-column table: result, whose); what the library assumes; how to check it; layout; how
+  it was made; licence.
+- **`RESULTS.md`** (the one reference file, at the root): for every result the README names, the plain-words reading of the
+  stored type, every Lean name, the axioms as printed, whose it is, the ledger row; the definitions the statements use, read
+  from the stored definitions (Stage 2 § 2.3); the provenance of the axiom lists (the gate commits the old README named, and
+  this job's re-print); the outside theorems; and a list of references in full, taken from `BIBLIOGRAPHY.md`'s work column.
+- **Working files**, under `data/fs131/rdm1/`: `README-old.md` (the README at `80629caf3`, the audit's "old");
+  `render/render.py` (a local GitHub-like renderer), `render/reflow.py` (wraps Markdown at 125 columns without breaking inside
+  `$…$` or a code span, and without starting a line with a list or quote marker), and the rendered `render/*.html`.
+
+### 3.2 The choices, and why
+
+1. **The table's ten rows.** Nine kernel theorems that are this project's, and one hand result (the lattice three-colour
+   criterion) whose module is not on `main`. Ordered by subject so a reader can scan: number fields (rows 1–5, the most
+   asked-for first: ℚ(√47), named in print three times), the real plane (6–8), other spaces (9–10). The `p`-adic plane
+   entered at the coordinator's message of this job, as landed on `main` (`785a46e77`).
+2. **Status labels**: `Lean`, `Lean + W`, `Lean + W + EL`, `hand`, with W, EL and O5 named in words a reader knows in the
+   line above the table. No emoji or badges: the words are shorter than a legend for symbols, and survive a plain-text view.
+3. **Math**: GitHub's `$…$` and ```` ```math ```` blocks, every formula short enough for a 390-pixel column; no inline math
+   spans two source lines; no `\{`, and no `|` inside table math. Formulas that would not fit a phone (row 3's criterion,
+   row 4's family, row 9's edge relation) were rewritten as prose with short math spans.
+4. **No coined term as a noun** on the README: "local bound", "the collapse", "Theorem B", "the main clause", "stable
+   prime", "usable prime" do not appear as names; each object is defined or described. "Theorem B" is kept once in
+   `RESULTS.md`, in parentheses, so a reader can follow the records. Row numbers appear only as addresses in parentheses.
+5. **"Defined where it first appears"**: the table comes first (BLUF), so the symbols it uses (`L(F)`, `α₁`, `m₁`, `χ_f`,
+   `µ₆`, `χ_Bor`, a character of `ℤ^d`) get a one-line meaning in a list directly under the table, and the full definition
+   in the row's own section. That is the nearest the BLUF order allows; said here so the coordinator can rule otherwise.
+6. **Citations** on the README are author and year (with section or page where the ledger gives one), because a bracketed key
+   means nothing to a reader landing blind; `RESULTS.md` keeps the keys and gives every reference in full.
+7. **`L(F)` is the kernel's**, level one and every norm-one residue (F5): the README states it that way.
+8. **Wording of novelty**: "prior art: not found in print" everywhere for this project's results; no "first" or "new" for
+   them (a grep finds "first" only in "the first clause" and "run … first"); where a search was partial, the page says what
+   was not searched or not read (rows 9, 10).
+9. **Length.** 34 KB against the old page's 21 KB; at a phone's width the rendered README is about 21,400 pixels tall
+   against the old page's 15,200 (whose wide tables scrolled sideways instead). The growth is the per-row explanations
+   Kooshi asked for; the bottom line is the table, within the first two phone screens.
+
+### 3.3 The `decompress` validation, as the reader
+
+The reader written down first: a mathematician who knows graph colouring, algebraic number theory and measure theory at
+the level of a first-year graduate student, has never seen this project, reads on a phone once, and wants to know in a
+minute what is new here and how sure they can be.
+
+- **Teach-back.** After one reading the reader can say: the plane is known to need 6 or 7 colours (others' work); this
+  project proved in Lean, for planes over number fields, the exact value whenever a finite residue graph certifies at most
+  five (with ℚ(√47) = 5 as the named case), the exact three- and four-colour rules, and that one quadratic field's plane
+  already needs exactly as many colours as the plane; for the real plane, that finite graphs and measurable sets give the
+  same density, and that six against seven is a measurable stability question decided on one disc; that the `p`-adic plane
+  needs unboundedly many Borel colours; and, by hand only, a criterion for three-colouring lattice Cayley graphs. They can
+  also say which results assume Weil's bound or Einsiedler–Lindenstrauss, and that nothing here decides six or seven. That
+  is the page's content; the teach-back holds.
+- **Dictionary audit.** Every noun phrase on the README is either standard for that reader (residue field, Borel,
+  fractional chromatic number, Kloosterman sum, solenoid, Hoffman's ratio bound, de Bruijn–Erdős) or defined before or at
+  its first use: `F²`, real number field, `L(F)`, `α₁`, `m₁`, `µ₆`, `χ_m⁰`, `χ_m`, `χ_Bor`, a character of `ℤ^d`, thickness
+  (row 5's general statement), weak colouring (row 8), LRAT (glossed as a format for SAT solvers' refutation proofs), W, EL,
+  O5. Two non-standard words were caught and fixed on this pass: "character θ" in the table (now in the glossary) and
+  "LRAT".
+- **Pointer audit.** Every "it", "this", "the theorem" resolves within its bullet. "This project's owner" resolves to Kooshi
+  in § How it was made. "Row 2" and "row 4" inside sections are links.
+- **Stop-anywhere.** The first sentence of each section's paragraphs, read alone, is true and gives the result; each bullet
+  opens with its label (in words, why, rests on, prior art, not claimed), so a reader who stops after any bullet holds no
+  false picture.
+- **Why audit.** Each "why it matters" names the published question and its author; each "rests on" says which outside
+  theorem and where it enters; row 5 gives the mechanism in one sentence, at the grade of the ledger's row.
+- **Loss audit.** Below (§ 3.4).
+- **Cold read.** Read top to bottom as the first page on the subject: the question it answers is "what has this repository
+  proved, and how is each checked", which is the question a reader lands with. Three fixes came from it: a sentence that
+  read as if the theorems assumed nothing (rows 1–9 do assume W or EL) was rewritten to "what each assumes is exactly what its
+  status names"; row 2's "answers it whenever the answer is at most five" over-claimed (at `χ(F²) = 5` with `L(F) ≥ 6` the
+  criterion is silent) and now reads "wherever `L(F) ≤ 5`, and decides for every real number field whether four colours
+  suffice"; row 3's credit said "first proved by", and now says whose.
+
+### 3.4 Nothing lost
+
+Ran `python3 tools/claude_md_fact_audit.py --old data/fs131/rdm1/README-old.md --new README.md --also RESULTS.md --ledger
+/nonexistent --instances /nonexistent --stubs /nonexistent` (the corpus limited to the two new files, so a fact surviving only
+in `LEDGER.md` counts as lost). Its CLAUDE.md-specific checks (dangling grokking pointers, PROTECTED regions, the gate
+sentence) do not apply to a README and are ignored. Every token it reports lost, with its disposition:
+
+| lost token | where it went |
+|---|---|
+| `…311…`, `…335…`, `…sqrt3_sqrt5…` (abbreviated names) | written in full in `RESULTS.md` § 1 |
+| `2150` ("about 2,150 files") | recounted: about 2,170 (2,168 `.lean` files) |
+| `569`, `60` (the 2026-10-15 audit) | superseded by `CLAUDE.md` § Trust ledger's current counts: 574 axiom-free, 83 imported, at 11,466 records (2026-10-16) |
+| `x·x̄` (L(F)'s definition) | restated as `(x − y)·conj(x − y) = 1`, the stored form |
+| `⊂` | written `⊆` |
+| "Several" | the sentence on coined words is in § Layout, under `BIBLIOGRAPHY.md` |
+
+Facts the tool cannot see, checked by hand: every row of the old two results tables is in `RESULTS.md` with its Lean names,
+axioms, "whose" text and ledger row (the old "whose" sentences kept word for word, the ledger rows as addresses); the old
+statement that the 2026-10-15 gate "ran before the publication's rewrite, which changed one docstring in the proofs and
+nothing else in them" is in `RESULTS.md`'s provenance paragraph; the native-evaluation purchases, the hypotheses (now 109
+pairs, F2), the `lean4checker` note, the build and gate instructions, the layout, the account of how it was made with its
+quotation and the Ferrous credit, and the licence paragraphs are on the README. Dropped on purpose: the old sentence "It does
+not argue the mathematics" (the new page gives one-sentence outlines); the old hypothesis count 108 and audit counts (stale,
+F2, F3).
+
+### 3.5 How the rendering was checked
+
+GitHub cannot be run locally, so the check is an approximation, and it says so. `data/fs131/rdm1/render/render.py` lifts
+`$…$` and ```` ```math ```` blocks out before Markdown runs (as GitHub does), renders with Python-Markdown (tables, fenced
+code), styles with `github-markdown-css` 5.5.1 and typesets with MathJax 3.2.2 (GitHub's engine). Headless Firefox, with an
+empty profile in the session's scratch directory, took full-page screenshots at 390 pixels (a phone) and 1012 (GitHub's
+desktop column), each tiled and read. At 390: no pixel of the README touches the right edge (a check for sideways
+overflow), the table and every display fit, code spans wrap; the earlier draft's overflows (a fourth column of statuses, a
+three-column context table, three wide displays) were found this way and removed. At 1012: the table reads in one screen.
+`RESULTS.md` at 390: its only right-edge pixels are the window's scrollbar. Heading anchors were written to GitHub's slug
+rule (lower case, punctuation removed, spaces to hyphens); every heading a link targets is ASCII apart from its words, so the
+rule's handling of symbols does not arise. Not verifiable here: GitHub's own math parser's quirks beyond those avoided in
+§ 3.2 item 3, and the GitHub mobile app (which shows math as source in some versions).
+
+### 3.6 Drafts for files this job does not write
+
+- **`ROADMAP.md`**, its first sentence, "[`README.md`](README.md) lists what Lean's kernel has checked." → "[`README.md`](README.md)
+  lists this project's results with their status, and [`RESULTS.md`](RESULTS.md) every Lean theorem behind them, with its
+  axioms." (The README now also shows one hand result, row 10, and the full list of kernel theorems is in `RESULTS.md`.)
+- **For the filing lane**: the old README's "gated at commit" sentence (the hash `752b11569`, which `data/fs131/fc8/`'s
+  owed list tracks as README-HASH) now lives in `RESULTS.md`'s provenance paragraph, not in `README.md`.
