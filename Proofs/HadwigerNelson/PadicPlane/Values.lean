@@ -10,7 +10,7 @@ import Proofs.HadwigerNelson.Arith.FibreCert7Bound
 import Mathlib.NumberTheory.LSeries.PrimesInAP
 
 /-!
-# The p-adic Hadwiger–Nelson problem: the Borel chromatic number of `ℚ_p²` is unbounded in `p`, its values at 3, 7, 11 and 19, and bounds at 23 (FS131-KPA1, proved by FS131-IQP1)
+# The p-adic Hadwiger–Nelson problem: the Borel chromatic number of `ℚ_p²` is unbounded in `p`, its values at 3, 7, 11 and 19, and bounds at 23 (FS131-KPA1, proved by FS131-IQP1 and FS131-IQP3)
 
 **Read aloud, against `[BardestaniMallahiKarai2017]` Question 1 (p. 2): "Is it true that there exists a universal constant
 `B` (independent of `p`) such that `χ_Bor(QG_{𝒬_p}) ≤ B` holds as `p` ranges over all primes of the form `4k + 3`?"** The
@@ -26,8 +26,9 @@ class a Borel set (`PadicPlane/Basic`). **The answer is no.**
 * `not_exists_bound_borelChromaticNumber_padicPlane` — **Question 1 answered no**: no `B` bounds `χ_Bor(ℚ_p²)` over the primes `p ≡ 3 (mod 4)`
   (`1 + (p + 1)/(2√p) > √p/2`, and Dirichlet's theorem in Mathlib gives such primes as large as one likes).
 * The values: `χ_Bor(ℚ₃²) = 3` (the bound alone), `χ_Bor(ℚ₇²) = 4`, `χ_Bor(ℚ₁₁²) = 5`, `χ_Bor(ℚ₁₉²) = 5`, and
-  `4 ≤ χ_Bor(ℚ₂₃²) ≤ 8` — lower halves from FS-66's fibre-share certificates (`TowerRatio p (U/p²)`; at 23 the bound
-  alone, FS-66's certificate there not yet in the kernel), upper halves from the finite planes' colourings
+  `5 ≤ χ_Bor(ℚ₂₃²) ≤ 8` — lower halves from FS-66's fibre-share certificates (`TowerRatio p (U/p²)`; at 23 the bound
+  by characters at the circle's exact cosine sums, `CircleCos.circleCos_ge`, FS-66's certificate there not yet in the
+  kernel), upper halves from the finite planes' colourings
   (`PadicPlane/Upper`, `[Madore2015]` Prop. 3.2 with the values of `[Moorhouse2010]` Table 6.1).
 * Row 75's level clauses, now kernel theorems: no level `UD(ℤ/7^k, 2)` is three-colourable, none at 11 or 19 is
   four-colourable (`unitQuadrance_zmod_seven_pow_not_colorable_three`, … — named as
@@ -36,13 +37,14 @@ class a Borel set (`PadicPlane/Basic`). **The answer is no.**
 **The one new step**, the posers' objection asks the statement to show: the bound holds at **every level of the residue
 tower at once** (`TowerRatio`, `PadicPlane/Tower`): FS-66's fibre argument above level one (Lemma P), and its fibre-share
 inequality for the certificates. **Not claimed:** the plain chromatic number `χ(ℚ_p²)`, which these theorems neither bound
-from below nor compute; any value at 23 beyond `[4, 8]`.
+from below nor compute; any value at 23 beyond `[5, 8]`.
 
 **Prior art.** The question is the posers'; they prove `χ_Bor = O(p²)`. The upper halves' construction is Madore's. The
 lower bound and the values: prior art not found in print (`plans/FS66-derivation.md` FS66-T7's search). This module's
 route needs no `[BardestaniMallahiKarai2017]` Theorem 2.5.
 
-**Models.** The hypothesis of `le_borelChromaticNumber_of_charSum` is inhabited at `κ = 2√p` (`charSum_unitCircle_ge_weil`).
+**Models.** The hypothesis of `le_borelChromaticNumber_of_charSum` is inhabited at `κ = 2√p` (`charSum_unitCircle_ge_weil`),
+and at `p = 23` at `κ = 7.9606872` (`CircleCos.circleCos_ge`, read through the private `charSum_unitCircle_ge_of_circleCos`).
 Every value theorem is closed. `Fact` instances for the primes 3, 7, 11, 19 and 23 are local to this file.
 -/
 
@@ -68,6 +70,54 @@ theorem le_borelChromaticNumber_of_charSum (p : ℕ) [Fact p.Prime] (hp : p % 4 
     ring
   have h' := le_borelChromaticNumber_of_towerRatio p hp2 (towerRatio_of_charSum p hp hκ h) hpos
   rwa [e] at h'
+
+/-- **The cosine sums bound the character sums** (the plane's form of `Rigidity/ClassRatio`'s private
+`charBound_one_of_circleCos`): a character `ψ ≠ 1` of `(ℤ/Q)²` is `v ↦ ζ^{αv₁ + βv₂}` with `ζ = e^{2πi/Q}` and
+`(α, β) ≠ 0`, so the real part of its sum over the circle is the cosine sum `CircleCos.circleCos_ge` bounds. -/
+private theorem charSum_unitCircle_ge_of_circleCos (Q : ℕ) [Fact Q.Prime] {κ : ℝ}
+    (hcos : ∀ α β : ℕ, α < Q → β < Q → (α ≠ 0 ∨ β ≠ 0) →
+      -(κ * ((Q : ℝ) + 1)) ≤ ∑ v ∈ Finset.univ.filter (fun v : ZMod Q × ZMod Q => v.1 ^ 2 + v.2 ^ 2 = 1),
+        Real.cos (2 * Real.pi * (((α * v.1.val + β * v.2.val) % Q : ℕ) : ℝ) / Q))
+    (ψ : AddChar (ZMod Q × ZMod Q) ℂ) (hψ : ψ ≠ 1) :
+    -(κ * ((Q : ℝ) + 1)) ≤ (∑ s ∈ FibreCertSound.unitCircle Q, ψ s).re := by
+  have hp : Q.Prime := Fact.out
+  have hpow : ∀ v : ZMod Q × ZMod Q, ψ v ^ Q = 1 := fun v => by
+    have h0 : Q • v = 0 := by ext <;> simp
+    rw [← AddChar.map_nsmul_eq_pow, h0, AddChar.map_zero_eq_one]
+  have hζ := Complex.isPrimitiveRoot_exp Q hp.ne_zero
+  obtain ⟨α, hα, hαz⟩ := hζ.eq_pow_of_pow_eq_one (hpow (1, 0))
+  obtain ⟨β, hβ, hβz⟩ := hζ.eq_pow_of_pow_eq_one (hpow (0, 1))
+  set ζ := Complex.exp (2 * Real.pi * Complex.I / Q) with hζdef
+  have hdec : ∀ v : ZMod Q × ZMod Q,
+      v.1.val • ((1 : ZMod Q), (0 : ZMod Q)) + v.2.val • ((0 : ZMod Q), (1 : ZMod Q)) = v := by
+    intro v
+    ext <;> simp
+  have hψx : ∀ v, ψ v = ζ ^ ((α * v.1.val + β * v.2.val) % Q) := by
+    intro v
+    have e2 : ζ ^ ((α * v.1.val + β * v.2.val) % Q) = ζ ^ (α * v.1.val + β * v.2.val) := by
+      conv_rhs => rw [← Nat.div_add_mod (α * v.1.val + β * v.2.val) Q]
+      rw [pow_add, pow_mul, hζ.pow_eq_one, one_pow, one_mul]
+    rw [e2, pow_add, pow_mul, pow_mul, hαz, hβz, ← AddChar.map_nsmul_eq_pow, ← AddChar.map_nsmul_eq_pow,
+      ← AddChar.map_add_eq_mul, hdec v]
+  have hαβ : α ≠ 0 ∨ β ≠ 0 := by
+    by_contra h
+    push Not at h
+    apply hψ
+    refine DFunLike.ext _ _ fun v => ?_
+    rw [hψx, h.1, h.2, zero_mul, zero_mul, add_zero, Nat.zero_mod, pow_zero, AddChar.one_apply]
+  have hre : ∀ m : ℕ, (ζ ^ m).re = Real.cos (2 * Real.pi * (m : ℝ) / Q) := by
+    intro m
+    rw [hζdef, ← Complex.exp_nat_mul]
+    have : (m : ℂ) * (2 * Real.pi * Complex.I / Q) = ((2 * Real.pi * (m : ℝ) / Q : ℝ) : ℂ) * Complex.I := by
+      push_cast; ring
+    rw [this, Complex.exp_ofReal_mul_I_re]
+  have hsum : (∑ s ∈ FibreCertSound.unitCircle Q, ψ s).re = ∑ v ∈ Finset.univ.filter
+      (fun v : ZMod Q × ZMod Q => v.1 ^ 2 + v.2 ^ 2 = 1),
+      Real.cos (2 * Real.pi * (((α * v.1.val + β * v.2.val) % Q : ℕ) : ℝ) / Q) := by
+    rw [Complex.re_sum]
+    exact Finset.sum_congr rfl fun v _ => by rw [hψx, hre]
+  rw [hsum]
+  exact hcos α β hα hβ hαβ
 
 /-- **Every Borel colouring of the anisotropic p-adic plane uses at least `1 + (p + 1)/(2√p)` colours** (FS66-T7): for
 every prime `p ≡ 3 (mod 4)`, a proper colouring of `padicPlane p` with `k` colours whose colour classes are Borel sets has
@@ -214,15 +264,24 @@ theorem borelChromaticNumber_padicPlane_nineteen : borelChromaticNumber (padicPl
   refine le_trans ?_ hle
   exact_mod_cast hceil
 
-/-- **`χ_Bor(ℚ₂₃²) ≥ 4`**: the bound itself, `⌈1 + 24/(2√23)⌉ = ⌈3.50…⌉ = 4` (`le_borelChromaticNumber_padicPlane`).
+/-- **`χ_Bor(ℚ₂₃²) ≥ 5`**: the bound by characters (`le_borelChromaticNumber_of_charSum`) at the exact cosine sums of the
+circle of `𝔽₂₃²` (`CircleCos.circleCos_ge`, kernel-checked: every non-trivial character sums over the 24 points to real
+part at least `−κ`, `κ = 7.9606872 < 8`), so `⌈1 + 24/κ⌉ = ⌈4.0148…⌉ = 5`; Weil's `κ = 2√23` gives only `⌈3.50…⌉ = 4`.
 FS-66's certificate at 23 (`⌈529/U⌉ = 6`) is not in the kernel: its reduced form is search request 26. -/
-theorem four_le_borelChromaticNumber_padicPlane_twentyThree : 4 ≤ borelChromaticNumber (padicPlane 23) := by
-  refine le_trans ?_ (le_borelChromaticNumber_padicPlane 23 (by norm_num))
-  have hs : Real.sqrt 23 < 6 := by rw [Real.sqrt_lt' (by norm_num)]; norm_num
-  have hs0 : 0 < Real.sqrt 23 := Real.sqrt_pos.2 (by norm_num)
-  have hx : ((3 : ℕ) : ℝ) < 1 + (((23 : ℕ) : ℝ) + 1) / (2 * Real.sqrt ((23 : ℕ) : ℝ)) := by
-    have h : (2 : ℝ) < 24 / (2 * Real.sqrt 23) := by rw [lt_div_iff₀ (by positivity)]; linarith
-    norm_num
+theorem five_le_borelChromaticNumber_padicPlane_twentyThree : 5 ≤ borelChromaticNumber (padicPlane 23) := by
+  obtain ⟨κ, hκ3, hκQ, hcos⟩ := CircleCos.circleCos_ge (Q := 23) (Or.inl rfl)
+  have hch := charSum_unitCircle_ge_of_circleCos 23 hcos
+  have h24 : ((23 : ℕ) : ℝ) + 1 = 24 := by norm_num
+  rw [h24] at hκQ hch
+  have hκ0 : 0 < κ := lt_of_lt_of_le (by norm_num) hκQ
+  have hκ2 : 2 ≤ κ * 24 := by
+    have := (div_le_iff₀ (by norm_num : (0 : ℝ) < 24)).1 hκQ
+    linarith
+  refine le_trans ?_ (le_borelChromaticNumber_of_charSum 23 (by norm_num) hκ2 hch)
+  have hx : ((4 : ℕ) : ℝ) < 1 + (((23 : ℕ) : ℝ) + 1) / (κ * 24) := by
+    rw [h24, mul_comm, ← div_div, div_self (by norm_num : (24 : ℝ) ≠ 0)]
+    have : (3 : ℝ) < 1 / κ := by rw [lt_div_iff₀ hκ0]; linarith
+    push_cast
     linarith
   exact_mod_cast Nat.lt_ceil.2 hx
 

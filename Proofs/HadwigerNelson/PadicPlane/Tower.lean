@@ -343,11 +343,9 @@ theorem exists_stablePrime_above (hp : p % 4 = 3) :
 `(ℤ/p^k)² → 𝓞 ⧸ P^k` that reflects adjacency into `levelTarget P k`. -/
 theorem exists_levelEmbedding (P : StablePrime (⊥ : Subfield ℝ))
     (hpP : ((p : ℕ) : 𝓞 (fieldI (⊥ : Subfield ℝ))) ∈ P.P) (h2 : (2 : 𝓞 (fieldI (⊥ : Subfield ℝ))) ∉ P.P)
-    (hQ : Nat.card (𝓞 (fieldI (⊥ : Subfield ℝ)) ⧸ P.P) = p ^ 2) (k : ℕ) (hk : 1 ≤ k) :
+    (hQ : Nat.card (𝓞 (fieldI (⊥ : Subfield ℝ)) ⧸ P.P) = p ^ 2) (k : ℕ) :
     ∃ f : ZMod (p ^ k) × ZMod (p ^ k) →+ 𝓞 (fieldI (⊥ : Subfield ℝ)) ⧸ P.P ^ k, Function.Injective f ∧
       ∀ u v, (levelTarget P k).Adj (f u) (f v) → (unitQuadrance (ZMod (p ^ k))).Adj u v := by
-  -- the embedding needs no `1 ≤ k` (at `k = 0` both sides are one point)
-  have _ := hk
   classical
   haveI := charP_quot_pow p P hpP hQ k
   set θ : ZMod (p ^ k) →+* 𝓞 (fieldI (⊥ : Subfield ℝ)) ⧸ P.P ^ k := ZMod.castHom (dvd_refl _) _ with hθdef
@@ -418,7 +416,7 @@ theorem towerRatio_of_ratioAtMost (P : StablePrime (⊥ : Subfield ℝ))
     TowerRatio p c := by
   classical
   intro k hk s hs
-  obtain ⟨f, hf, hadj⟩ := exists_levelEmbedding p P hpP h2 hQ k hk
+  obtain ⟨f, hf, hadj⟩ := exists_levelEmbedding p P hpP h2 hQ k
   have hind : (levelTarget P k).IsIndepSet ((s.image f : Finset _) : Set _) := by
     intro x hx y hy hxy hxy'
     rw [Finset.coe_image] at hx hy
@@ -439,13 +437,11 @@ theorem towerRatio_of_ratioAtMost (P : StablePrime (⊥ : Subfield ℝ))
 /-- **Level one in coordinates** (K3, `CertLink.exists_addEquiv_zmod`): a lower bound on the character sums over the circle
 of `(ℤ/p)²` is the same bound over the norm-one residues of the stable prime above `p`. -/
 theorem charSum_levelOne_of_unitCircle (P : StablePrime (⊥ : Subfield ℝ))
-    (hpP : ((p : ℕ) : 𝓞 (fieldI (⊥ : Subfield ℝ))) ∈ P.P) (h2 : (2 : 𝓞 (fieldI (⊥ : Subfield ℝ))) ∉ P.P)
+    (h2 : (2 : 𝓞 (fieldI (⊥ : Subfield ℝ))) ∉ P.P)
     (hQ : Nat.card (𝓞 (fieldI (⊥ : Subfield ℝ)) ⧸ P.P) = p ^ 2) {κ : ℝ}
     (h : ∀ ψ : AddChar (ZMod p × ZMod p) ℂ, ψ ≠ 1 → -κ ≤ (∑ s ∈ FibreCertSound.unitCircle p, ψ s).re)
     (hfin : (CertLink.normOneSet P 1).Finite) (ψ : AddChar (𝓞 (fieldI (⊥ : Subfield ℝ)) ⧸ P.P ^ 1) ℂ) (hψ : ψ ≠ 1) :
     -κ ≤ (∑ s ∈ hfin.toFinset, ψ s).re := by
-  -- K3 reads only `2 ∉ P` and the residue count
-  have _ := hpP
   classical
   obtain ⟨e, he⟩ := CertLink.exists_addEquiv_zmod P h2 (Fact.out : p.Prime) hQ
   set ψ' : AddChar (ZMod p × ZMod p) ℂ := ψ.compAddMonoidHom e.symm.toAddMonoidHom with hψ'def
@@ -483,7 +479,7 @@ theorem towerRatio_of_charSum (hp : p % 4 = 3) {κ : ℝ} (hκ : 2 ≤ κ)
     TowerRatio p (κ / ((p : ℝ) + 1 + κ)) := by
   obtain ⟨P, hpP, h2, hQ⟩ := exists_stablePrime_above p hp
   exact towerRatio_of_ratioAtMost p P hpP h2 hQ
-    (ratioAtMost_of_charSum_levelOne P h2 hQ hκ (charSum_levelOne_of_unitCircle p P hpP h2 hQ h))
+    (ratioAtMost_of_charSum_levelOne P h2 hQ hκ (charSum_levelOne_of_unitCircle p P h2 hQ h))
 
 /-- **Weil's bound on the circle of `(ℤ/p)²`** (the declared import `StandingFive.kloosterman_bound`, through
 `StandingFive.normOne_charSum_ge` on the residue field of the stable prime above `p`, carried by K3): every non-trivial
