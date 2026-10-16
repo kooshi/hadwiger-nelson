@@ -293,6 +293,8 @@ record, 0); none addresses a field plane.
 > `K = ℚ(√d)`, `d ≥ 2` a squarefree integer? … If `d ≢ 47, 59 or 83 mod 84`, then `χ(K²) ≤ 4`. **What about `χ(ℚ(√47)²)`?**"* The
 > value `χ(ℚ(√47)²) = 5` below (row 121, [hand]) answers that question; FS-61's census (`plans/FS61-quadratic-census.md`) is the
 > answer to the general one as far as finite witnesses reach.
+>
+> **And again in October 2026** — `[Davies2026]` p. 5 (read in full 2026-10-13, FS131-ER1): *"Nevertheless, the problem of determining the chromatic number of ℚ(√n)² has been well studied [32, 39, 49, 56]. In particular, it is known that ℚ(√n)² is four-colourable for n ≢ 47, 143, 167 (mod 168). It would be particularly interesting to determine if the remaining cases are six-colourable and if any of them contain a five chromatic unit distance graph."* (Its `[32, 39, 49, 56]` are `[Fischer1990]`, `[Johnson1987]`, `[Moorhouse2010]`, `[Payne2009]`; the sentence needs "squarefree".) Rows 121 and 123 answer the second question — every one of them, given MR, [hand] — and the first where `L = 5`; where `L ⩾ 6` the first is open, and at `ℚ(√635087)` it is Hadwiger–Nelson given MR (row 128).
 
 > **Recorded as answered, 2026-09-27.** This section was held open until `[Johnson2000]` and `[Johnson2006]` were read (the rule of
 > `plans/FS81-quadratic-four-colours.md` §PA.4). Both are read in full (the consolidation run's job LP, `data/consolidation-2026-09-27/lp/record.md`):
@@ -704,6 +706,11 @@ character colouring over ℚ(√59), ℚ(√83), ℚ(√131) is non-periodic, an
   more general polygonal tiling could reach it; `[SokolovVoronov2025]` answers no — its printed proof repaired at FS-106, and its one edge case, `d = 2`, closed at FS-110: row 132, *"(the
   `d = 2` edge case does not arise: FS-110's CB and CD, both blind)"*, by two routes (row 134: *"the `d = 2` closure by two routes (CD's Theorem
   D2; CE's Antipodal Lemma)"*).
+- **Do the ordinary and measurable chromatic numbers of the plane differ?** `[Davies2026]` pp. 2–3: *"Székely [70] conjectured that the ordinary and measurable chromatic numbers of Euclidean spaces can differ. Croft, Falconer and Guy [16, Problem G10] discuss this, noting Székely's work as evidence against equality. The question and related measurability phenomena recur throughout the literature"*; equal for `d ⩾ 4` by its Thm 1.1; its abstract hopes for `d = 2`. **For the plane: equal** — `[OAIMath2026]` Thm 1.3 with `[Davies2026]` Lemma B.1 (FS131-ER1 § M; [hand], one mind, a composition of two outside results; kernel pending). Open at `d = 3`. (`[Szekely1984]` and `[16]` are not held; the conjecture is quoted through the paper.)
+- **Conjecture 1.6 of `[Davies2026]`: `χ(ℝ²) = 6`.** Open; given MR at `ℚ(√635087)` it is `χ(ℚ(√635087)²) = 6` (row 128).
+- **Is `χ(ℝ²) = χ(ℚ(√n)²)` for some `n`?** `[Davies2026]` p. 5 proves the four-dimensional form, conjectures the three-dimensional one and writes of the plane *"we suspect that a more complicated extension of ℚ² might be required"*. Row 128: yes at `n = 635087`, given MR there ([hand]).
+- **An arithmetic proof that `χ(ℚ^d)` is finite**, `d ⩾ 5` (`[Davies2026]` p. 5: *"it would be particularly interesting to have such a proof that χ(ℚ^d) is finite, even if it does not improve the known bounds"*). Not worked here; the residue method of row 52 is silent where no place is stable, which is that case.
+- **Is `[Davies2026]`'s Lemma B.1 in the literature?** Its own question (p. 44). Not found in four arXiv listing queries (FS131-ER1 § 9.1); zbMATH and `[KechrisMarks2020]` owed.
 
 ---
 
