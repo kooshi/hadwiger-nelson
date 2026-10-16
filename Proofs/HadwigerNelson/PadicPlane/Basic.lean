@@ -5,7 +5,7 @@ import Mathlib.MeasureTheory.Constructions.BorelSpace.Basic
 import Mathlib.Combinatorics.SimpleGraph.Coloring.Vertex
 
 /-!
-# The p-adic plane: the Borel chromatic number, the tower ratio, and integral unit vectors (FS131-KPA1, skeleton)
+# The p-adic plane: the Borel chromatic number, the tower ratio, and integral unit vectors (FS131-KPA1, proved by FS131-IQP1)
 
 **Read aloud, against `[BardestaniMallahiKarai2017]` §1 (pp. 1–2) and Definition 2.6 (p. 6).** The p-adic plane is
 `padicPlane p`, an abbreviation for `unitQuadrance ℚ_[p]`: the vertices are the pairs `(x₁, x₂)` of p-adic numbers, and two are adjacent exactly when

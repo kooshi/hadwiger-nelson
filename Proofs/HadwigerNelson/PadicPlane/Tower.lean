@@ -3,7 +3,7 @@ import Proofs.HadwigerNelson.Rigidity.ClassRatio
 import Proofs.HadwigerNelson.Instances.UpperHalfValues
 
 /-!
-# The residue tower at `p` is the stable prime of `ℚ(i)` above `p`: the tower ratio from Weil and from certificates (FS131-KPA1, skeleton)
+# The residue tower at `p` is the stable prime of `ℚ(i)` above `p`: the tower ratio from Weil and from certificates (FS131-KPA1, proved by FS131-IQP1)
 
 **Read aloud.** At `p ≡ 3 (mod 4)` the prime `p` stays prime in `ℚ(i)`: there is a stable prime `P` of `ℚ(i)` (the library's
 `StablePrime ⊥`) holding `p`, not holding `2`, with `p²` residues (`exists_stablePrime_above`). Its level-`k` residue target

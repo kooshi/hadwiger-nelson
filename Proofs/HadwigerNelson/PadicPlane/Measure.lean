@@ -3,7 +3,7 @@ import Mathlib.MeasureTheory.Measure.Haar.Basic
 import Mathlib.NumberTheory.Padics.Hensel
 
 /-!
-# The measure step: a Borel colouring of the p-adic plane needs at least `1/c` colours (FS131-KPA1, skeleton)
+# The measure step: a Borel colouring of the p-adic plane needs at least `1/c` colours (FS131-KPA1, proved by FS131-IQP1)
 
 **Read aloud.** `ℤ_p²` carries its Borel σ-algebra (scoped here: Mathlib declares none on `ℤ_[p]`) and its Haar probability
 `haar p`. `res p k : ℤ_p² → (ℤ/p^k)²` reduces both coordinates modulo `p^k`; its fibres are the cosets of `p^k ℤ_p²`, each

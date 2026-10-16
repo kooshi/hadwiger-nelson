@@ -1,7 +1,7 @@
 import Proofs.HadwigerNelson.PadicPlane.Basic
 
 /-!
-# The upper half: `χ_Bor(ℚ_p²) ≤ χ(UD(𝔽_p, 2))` at `p ≡ 3 (mod 4)` (FS131-KPA1, skeleton)
+# The upper half: `χ_Bor(ℚ_p²) ≤ χ(UD(𝔽_p, 2))` at `p ≡ 3 (mod 4)` (FS131-KPA1, proved by FS131-IQP1)
 
 **Read aloud, against `[Madore2015]` Prop. 3.2 and Rem. 3.6 (pp. 6–7).** Madore: when the residue form is anisotropic, the
 map `x ↦ x − ξ_C` on each coset `C` of `ℤ_p²` in `ℚ_p²` (`ξ_C` a chosen point of `C`) is a graph homomorphism
