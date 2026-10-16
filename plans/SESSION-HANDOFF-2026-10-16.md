@@ -43,8 +43,8 @@ current. Its two owed one-liners and the `k = 7` model go to the next job that t
   (local) current; the fact audit passes against `8cab63fa2`.
 - **FS131-IQP1** (item 1001): the `p`-adic plane (`.claude/worktrees/il5`, branch `fs131-kpa1`); the three leaves at 23
   leave the landing (item 1002).
-- **FS131-ICT1** (item 1001): the three-colour criterion (`.claude/worktrees/kel1`, branch `fs131-ktc1`); one false
-  skeleton statement corrected by ruling (item 1003).
+- **FS131-ICT2** (item 1013): the three-colour criterion to the gate (`.claude/worktrees/kel1`, branch `fs131-ktc1`);
+  FS131-ICT1 proved all 53 leaves and handed back past its line (item 1012); two unread hypotheses ruled dropped.
 - **FS131-KFR1** (item 1006): the density form's planner (`.claude/worktrees/kcl1`, branch `fs131-kfr1`); its widenings
   and the 250-line disc module ruled in (item 1008).
 
