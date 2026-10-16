@@ -1,0 +1,174 @@
+def HadwigerNelson.PadicPlane.borelChromaticNumber.{u_1} : {X : Type u_1} → [TopologicalSpace X] → SimpleGraph X → ℕ∞ :=
+fun {X : Type u_1} [TopologicalSpace X] (G : SimpleGraph X) =>
+  ⨅ (k : ℕ), ⨅ (_ : ∃ (c : G.Coloring (Fin k)), ∀ (i : Fin k), MeasurableSet (⇑c ⁻¹' {i})), ↑k
+@[reducible] def HadwigerNelson.PadicPlane.padicPlane : (p : ℕ) →
+  [inst : Fact (Nat.Prime p)] → SimpleGraph (ℚ_[p] × ℚ_[p]) :=
+fun (p : ℕ) [Fact (Nat.Prime p)] => HadwigerNelson.unitQuadrance ℚ_[p]
+def HadwigerNelson.unitQuadrance.{u_1} : (R : Type u_1) → [CommRing R] → SimpleGraph (R × R) :=
+fun (R : Type u_1) [CommRing R] => SimpleGraph.addCayley {v : R × R | v.1 ^ 2 + v.2 ^ 2 = 1}
+def HadwigerNelson.PadicPlane.TowerRatio : ℕ → ℝ → Prop :=
+fun (p : ℕ) (c : ℝ) =>
+  ∀ (k : ℕ),
+    1 ≤ k →
+      ∀ (s : Finset (ZMod (p ^ k) × ZMod (p ^ k))),
+        (HadwigerNelson.unitQuadrance (ZMod (p ^ k))).IsIndepSet ↑s → ↑s.card ≤ c * ↑p ^ (2 * k)
+HadwigerNelson.PadicPlane.le_borelChromaticNumber_of_charSum : ∀ (p : ℕ) [inst : Fact (Nat.Prime p)],
+  p % 4 = 3 →
+    ∀ {κ : ℝ},
+      2 ≤ κ →
+        (∀ (ψ : AddChar (ZMod p × ZMod p) ℂ), ψ ≠ 1 → -κ ≤ (∑ s ∈ HadwigerNelson.FibreCertSound.unitCircle p, ψ s).re) →
+          ↑⌈1 + (↑p + 1) / κ⌉₊ ≤ HadwigerNelson.PadicPlane.borelChromaticNumber (HadwigerNelson.PadicPlane.padicPlane p)
+HadwigerNelson.PadicPlane.one_add_div_le_of_borelColoring : ∀ (p : ℕ) [inst : Fact (Nat.Prime p)],
+  p % 4 = 3 →
+    ∀ {k : ℕ} (c : (HadwigerNelson.PadicPlane.padicPlane p).Coloring (Fin k)),
+      (∀ (i : Fin k), MeasurableSet (⇑c ⁻¹' {i})) → 1 + (↑p + 1) / (2 * √↑p) ≤ ↑k
+HadwigerNelson.PadicPlane.le_borelChromaticNumber_padicPlane : ∀ (p : ℕ) [inst : Fact (Nat.Prime p)],
+  p % 4 = 3 →
+    ↑⌈1 + (↑p + 1) / (2 * √↑p)⌉₊ ≤
+      HadwigerNelson.PadicPlane.borelChromaticNumber (HadwigerNelson.PadicPlane.padicPlane p)
+HadwigerNelson.PadicPlane.not_exists_bound_borelChromaticNumber_padicPlane : ¬∃ (B : ℕ),
+    ∀ (p : ℕ) [inst : Fact (Nat.Prime p)],
+      p % 4 = 3 → HadwigerNelson.PadicPlane.borelChromaticNumber (HadwigerNelson.PadicPlane.padicPlane p) ≤ ↑B
+HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_three : HadwigerNelson.PadicPlane.borelChromaticNumber
+    (HadwigerNelson.PadicPlane.padicPlane 3) =
+  3
+HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_seven : HadwigerNelson.PadicPlane.borelChromaticNumber
+    (HadwigerNelson.PadicPlane.padicPlane 7) =
+  4
+HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_eleven : HadwigerNelson.PadicPlane.borelChromaticNumber
+    (HadwigerNelson.PadicPlane.padicPlane 11) =
+  5
+HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_nineteen : HadwigerNelson.PadicPlane.borelChromaticNumber
+    (HadwigerNelson.PadicPlane.padicPlane 19) =
+  5
+HadwigerNelson.PadicPlane.five_le_borelChromaticNumber_padicPlane_twentyThree : 5 ≤
+  HadwigerNelson.PadicPlane.borelChromaticNumber (HadwigerNelson.PadicPlane.padicPlane 23)
+HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_twentyThree_le_eight : HadwigerNelson.PadicPlane.borelChromaticNumber
+    (HadwigerNelson.PadicPlane.padicPlane 23) ≤
+  8
+HadwigerNelson.PadicPlane.unitQuadrance_zmod_seven_pow_not_colorable_three : ∀ (k : ℕ),
+  1 ≤ k → ¬(HadwigerNelson.unitQuadrance (ZMod (7 ^ k))).Colorable 3
+HadwigerNelson.PadicPlane.unitQuadrance_zmod_eleven_pow_not_colorable_four : ∀ (k : ℕ),
+  1 ≤ k → ¬(HadwigerNelson.unitQuadrance (ZMod (11 ^ k))).Colorable 4
+HadwigerNelson.PadicPlane.unitQuadrance_zmod_nineteen_pow_not_colorable_four : ∀ (k : ℕ),
+  1 ≤ k → ¬(HadwigerNelson.unitQuadrance (ZMod (19 ^ k))).Colorable 4
+HadwigerNelson.PadicPlane.borelChromaticNumber_le_chromaticNumber : ∀ (p : ℕ) [inst : Fact (Nat.Prime p)],
+  p % 4 = 3 →
+    HadwigerNelson.PadicPlane.borelChromaticNumber (HadwigerNelson.PadicPlane.padicPlane p) ≤
+      (HadwigerNelson.finitePlane p).chromaticNumber
+@HadwigerNelson.PadicPlane.chromaticNumber_le_borelChromaticNumber : ∀ {X : Type u_1} [inst : TopologicalSpace X]
+  (G : SimpleGraph X), G.chromaticNumber ≤ HadwigerNelson.PadicPlane.borelChromaticNumber G
+HadwigerNelson.PadicPlane.exists_levelEmbedding : ∀ (p : ℕ) [Fact (Nat.Prime p)]
+  (P : HadwigerNelson.SpectralChain.StablePrime ⊥),
+  ↑p ∈ P.P →
+    2 ∉ P.P →
+      Nat.card (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI ⊥) ⧸ P.P) = p ^ 2 →
+        ∀ (k : ℕ),
+          ∃ (f :
+            ZMod (p ^ k) × ZMod (p ^ k) →+
+              NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI ⊥) ⧸ P.P ^ k),
+            Function.Injective ⇑f ∧
+              ∀ (u v : ZMod (p ^ k) × ZMod (p ^ k)),
+                (HadwigerNelson.SpectralChain.levelTarget P k).Adj (f u) (f v) →
+                  (HadwigerNelson.unitQuadrance (ZMod (p ^ k))).Adj u v
+HadwigerNelson.PadicPlane.charSum_levelOne_of_unitCircle : ∀ (p : ℕ) [inst : Fact (Nat.Prime p)]
+  (P : HadwigerNelson.SpectralChain.StablePrime ⊥),
+  2 ∉ P.P →
+    Nat.card (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI ⊥) ⧸ P.P) = p ^ 2 →
+      ∀ {κ : ℝ},
+        (∀ (ψ : AddChar (ZMod p × ZMod p) ℂ), ψ ≠ 1 → -κ ≤ (∑ s ∈ HadwigerNelson.FibreCertSound.unitCircle p, ψ s).re) →
+          ∀ (hfin : (HadwigerNelson.CertLink.normOneSet P 1).Finite)
+            (ψ : AddChar (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI ⊥) ⧸ P.P ^ 1) ℂ),
+            ψ ≠ 1 → -κ ≤ (∑ s ∈ hfin.toFinset, ψ s).re
+HadwigerNelson.PadicPlane.one_add_div_le_of_borelColoring : ∀ (p : Nat) [inst : Fact (Nat.Prime p)],
+  @Eq Nat
+      (@HMod.hMod Nat Nat Nat (@instHMod Nat Nat.instMod) p (@OfNat.ofNat Nat (nat_lit 4) (instOfNatNat (nat_lit 4))))
+      (@OfNat.ofNat Nat (nat_lit 3) (instOfNatNat (nat_lit 3))) →
+    ∀ {k : Nat}
+      (c :
+        @SimpleGraph.Coloring (Prod (@Padic p inst) (@Padic p inst)) (@HadwigerNelson.PadicPlane.padicPlane p inst)
+          (Fin k)),
+      (∀ (i : Fin k),
+          @MeasurableSet (Prod (@Padic p inst) (@Padic p inst))
+            (@borel (Prod (@Padic p inst) (@Padic p inst))
+              (@instTopologicalSpaceProd (@Padic p inst) (@Padic p inst)
+                (@UniformSpace.toTopologicalSpace (@Padic p inst)
+                  (@PseudoMetricSpace.toUniformSpace (@Padic p inst)
+                    (@SeminormedRing.toPseudoMetricSpace (@Padic p inst)
+                      (@SeminormedCommRing.toSeminormedRing (@Padic p inst)
+                        (@NormedCommRing.toSeminormedCommRing (@Padic p inst)
+                          (@NormedField.toNormedCommRing (@Padic p inst) (@Padic.normedField p inst)))))))
+                (@UniformSpace.toTopologicalSpace (@Padic p inst)
+                  (@PseudoMetricSpace.toUniformSpace (@Padic p inst)
+                    (@SeminormedRing.toPseudoMetricSpace (@Padic p inst)
+                      (@SeminormedCommRing.toSeminormedRing (@Padic p inst)
+                        (@NormedCommRing.toSeminormedCommRing (@Padic p inst)
+                          (@NormedField.toNormedCommRing (@Padic p inst) (@Padic.normedField p inst)))))))))
+            (@Set.preimage (Prod (@Padic p inst) (@Padic p inst)) (Fin k)
+              (@DFunLike.coe
+                (@SimpleGraph.Coloring (Prod (@Padic p inst) (@Padic p inst))
+                  (@HadwigerNelson.PadicPlane.padicPlane p inst) (Fin k))
+                (Prod (@Padic p inst) (@Padic p inst)) (fun (x : Prod (@Padic p inst) (@Padic p inst)) => Fin k)
+                (@RelHom.instFunLike (Prod (@Padic p inst) (@Padic p inst)) (Fin k)
+                  (@SimpleGraph.Adj (Prod (@Padic p inst) (@Padic p inst))
+                    (@HadwigerNelson.PadicPlane.padicPlane p inst))
+                  (@SimpleGraph.Adj (Fin k) (SimpleGraph.completeGraph (Fin k))))
+                c)
+              (@Singleton.singleton (Fin k) (Set (Fin k)) (@Set.instSingletonSet (Fin k)) i))) →
+        @LE.le Real Real.instLE
+          (@HAdd.hAdd Real Real Real (@instHAdd Real Real.instAdd)
+            (@OfNat.ofNat Real (nat_lit 1) (@One.toOfNat1 Real Real.instOne))
+            (@HDiv.hDiv Real Real Real (@instHDiv Real (@DivInvMonoid.toDiv Real Real.instDivInvMonoid))
+              (@HAdd.hAdd Real Real Real (@instHAdd Real Real.instAdd) (@Nat.cast Real Real.instNatCast p)
+                (@OfNat.ofNat Real (nat_lit 1) (@One.toOfNat1 Real Real.instOne)))
+              (@HMul.hMul Real Real Real (@instHMul Real Real.instMul)
+                (@OfNat.ofNat Real (nat_lit 2) (@instOfNatAtLeastTwo Real (nat_lit 2) Real.instNatCast ⋯))
+                (@Nat.cast Real Real.instNatCast p).sqrt)))
+          (@Nat.cast Real Real.instNatCast k)
+'HadwigerNelson.PadicPlane.le_borelChromaticNumber_of_charSum' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.PadicPlane.one_add_div_le_of_borelColoring' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.PadicPlane.le_borelChromaticNumber_padicPlane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.PadicPlane.not_exists_bound_borelChromaticNumber_padicPlane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_seven' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_eleven' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_nineteen' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.PadicPlane.five_le_borelChromaticNumber_padicPlane_twentyThree' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_twentyThree_le_eight' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.PadicPlane.unitQuadrance_zmod_seven_pow_not_colorable_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.PadicPlane.unitQuadrance_zmod_eleven_pow_not_colorable_four' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.PadicPlane.unitQuadrance_zmod_nineteen_pow_not_colorable_four' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.PadicPlane.borelChromaticNumber_le_chromaticNumber' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.FibreCertSound.sum_le_seven' depends on axioms: [propext, Classical.choice, Quot.sound]

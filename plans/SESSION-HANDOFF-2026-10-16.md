@@ -42,12 +42,14 @@ Clerk's privacy check of `origin/main..main`, then a fast-forward push (standing
 
 ## 3. Running
 
-**The collapse landed** (item 1005), merged as `0f81fe2a3`, gated on `7c72b9bf7`; its filing merged (`38579c41b`). The
-collapse's gate (`data/fs131/ico2/gate/`) is every implementer's baseline until another lands.
+**The p-adic plane landed** (item 1032), merged as `785a46e77`, gated on `e3e1dbb73`; filed by me; its gate
+(`data/fs131/iqp3/gate/`) is the baseline for the next landing; the three running implementers were told. `CLAUDE.md`'s
+"What the kernel holds" paragraph now lives in `plans/KERNEL-HOLDS.md`, where every landing's clause is filed; the fact
+audit runs with its default `--also` files plus `plans/KERNEL-HOLDS.md` and `plans/FILINGS.md`.
 
 | job | what | worktree, branch | record |
 |---|---|---|---|
-| FS131-IQP3 (item 1023) | the `p`-adic plane to the gate: two ruled drops, `5 ≤ χ_Bor(ℚ₂₃²)`, lint, gate, read-aloud, drafts | `il5`, `fs131-kpa1` | `plans/FS131-IQP3-padic.md` |
+| FS131-RDM1 (item 1031) | the README rewritten for a human reader (Kooshi's W21); to `main` only after my read, three status checks and Kooshi's look | `rdm1`, `fs131-rdm1` | `plans/FS131-RDM1-readme.md` |
 | FS131-ICT3 (item 1023) | the three-colour criterion to the gate: five spec examples, lint, gate, read-aloud, drafts | `kel1`, `fs131-ktc1` | `plans/FS131-ICT3-three-colour.md` |
 | FS131-IFR1 (item 1023) | the density form of the collapse: 81 leaves (about 2,650 lines) and the gate; item 1021's three rulings | `kcl1`, `fs131-kfr1` | `plans/FS131-IFR1-density.md` |
 | FS131-ICS1 (item 1028) | part A of FS131-KCS1's plan (item 1027): the quadratic dichotomy, the family, CLS in full, ℚ(√23, ∛2), the bridge; three `ClassRatio` lemmas made public | `kcs1`, `fs131-kcs1` | `plans/FS131-ICS1-class.md` |

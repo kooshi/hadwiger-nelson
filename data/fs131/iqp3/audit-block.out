@@ -1,0 +1,13 @@
+MODULE Proofs.HadwigerNelson.Arith.FibreCert7: CLEAN 1
+MODULE Proofs.HadwigerNelson.Arith.FibreCert7Bound: CLEAN 7
+MODULE Proofs.HadwigerNelson.Arith.FibreCert7Check: CLEAN 3
+MODULE Proofs.HadwigerNelson.PadicPlane.Basic: CLEAN 10
+MODULE Proofs.HadwigerNelson.PadicPlane.Measure: CLEAN 15
+MODULE Proofs.HadwigerNelson.PadicPlane.Tower: CLEAN 7, kloosterman_bound 2
+MODULE Proofs.HadwigerNelson.PadicPlane.Upper: CLEAN 4
+MODULE Proofs.HadwigerNelson.PadicPlane.Values: CLEAN 15, kloosterman_bound 4
+records: 68 public (0 already filed), 11 private (not audited)
+BLOCK np5: 0
+BLOCK pe: 0
+BLOCK kb: 6
+BLOCK clean: 62

@@ -1,0 +1,6 @@
+#print axioms HadwigerNelson.PadicPlane.charSum_unitCircle_ge_weil
+#print axioms HadwigerNelson.PadicPlane.towerRatio_weil
+#print axioms HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_three
+#print axioms HadwigerNelson.PadicPlane.le_borelChromaticNumber_padicPlane
+#print axioms HadwigerNelson.PadicPlane.not_exists_bound_borelChromaticNumber_padicPlane
+#print axioms HadwigerNelson.PadicPlane.one_add_div_le_of_borelColoring
