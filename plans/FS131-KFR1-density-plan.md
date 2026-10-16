@@ -404,3 +404,41 @@ reader of the docstrings with nothing else.
   collapse's modules use. `IndepLaw` is `InvColouring`'s one-class namesake, said so in its docstring. No change.
 - **Breakdown.** A user who tries the head statement at a field without `[NumberField F]` gets "failed to synthesize
   `NumberField ↥F`" at the statement. That is the true obligation: the residue rings are finite only there. No change.
+
+### 3.7 The domain-modeling pass (`debruijn-domain-modeling`, on the representation choices)
+
+- **One role, unnamed: a law on labellings with one forbidden pair of labels at the unit vectors.** `IndepLaw` (labels
+  `Bool`, forbidden `(true, true)`) and `Collapse.InvColouring` (labels `Fin k`, forbidden the diagonal) are that role twice.
+  D2's copies are the smell "N declarations identical modulo naming". FS-133 already names the role on the algebraic plane
+  (`OneClass.IsAlgPattern`, C133-PAIR). The converged model is `PatternLaw F Λ N`, with one dichotomy, one extension and one
+  slice; `InvColouring` and `IndepLaw` would be its two instances.
+  - **Not adopted here**, because the brief makes `Collapse/` draft-only. A pattern module beside the colouring modules would
+    restate their theorems a second time, which is the duplication it is meant to remove.
+  - **Price:** about 1,100 lines for D2 in pattern form (against 1,370 per class), plus a later refactor of `Collapse/` that
+    is not priced here.
+  - **Recommendation:** per class now. The refactor is a question for the next job that may edit `Collapse/`. It is a
+    finding, not a defect.
+- **`setCol` is incidental structure, and contained.** `Fin 4` comes from the held descent's signature (`levelRows`,
+  `volume_colour_le` and `tendsto_bad` take `φ : ℂ × K → Fin 4`), not from the problem. The encoding is one definition, read
+  by three leaves through `{p | setCol W p = 1} = W`. The alternative is a set form of those three lemmas, an edit to
+  `Rigidity/CountDescent` (drafted only). Keep the encoding.
+- **The carriers agree.** `stableRatio`, `localRatio`, `finIndepRatio` and `mOne` are all in `ℝ≥0∞`. The count's
+  `RatioAtMost` is real, and both bridges are stated (§ 3.6).
+- **The unsampled member.** At `ℚ` the head statement reads `α₁(ℚ²) = 1/2`: the ramified prime gives `r = 1/2`, and the
+  plane is bipartite. That is the one field where the right side is not `m₁`, and no spec example covers it. **Owed to the
+  implementer:** a spec example `localRatio ⊥ = 2⁻¹` (from `half_le_stableRatio_of_isRamified` at
+  `UpperHalf.exists_stablePrime_rat` and `finIndepRatio_planeOver_le_half`). It is stated in this record and not in the
+  skeleton: the skeleton's build had started.
+
+### 3.8 The build
+
+`./scripts/build.sh` ran under the slot (`--mem 12 --cpus 2`, `MEMMAX=12G BATCH=10`) and finished in 8 m 12 s with
+"build: OK — 242 of 242 batches, 5 module(s) rebuilt, 4 module(s) with warnings". The five rebuilt modules are the four new
+ones and the root. Their only warnings are `declaration uses 'sorry'`. The two `out-of-date` lines in the log are the
+up-front `lake build --no-build` check. Logs: `data/fs131/kfr1/build.log`, `data/fs131/kfr1/build-full.log`.
+
+A first attempt at `BATCH=2` was walking at batch 404 of 1094 when the harness's ten-minute foreground limit stopped it, a
+limit I had set the call above. It left no process: the slot's scope ended, and the slot status was checked after. Nothing
+had been compiled by then.
+
+The skeleton stays on `fs131-kfr1`; nothing with a `sorry` goes to `main`.
