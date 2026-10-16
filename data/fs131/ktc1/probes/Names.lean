@@ -1,0 +1,29 @@
+import Proofs.HadwigerNelson.Arith.ThreeColourCharacter
+import Proofs.HadwigerNelson.Kempe
+import Mathlib.Order.WellQuasiOrder
+open HadwigerNelson
+#check @WellQuasiOrderedLE.finite_of_isAntichain
+#check @Pi.wellQuasiOrderedLE
+#check @AddCircle.equivIco
+#check @AddSubgroup.nsmul_index_mem
+#check @Module.Basis.extend
+#check @FiniteDimensional.span_of_finite
+#check @Int.csInf_mem
+#check @DenseRange.piMap
+#check @AddSubgroup.finiteIndex_of_finite_quotient
+#check @AddGroup.FG
+#check @AddSubgroup.closure_induction
+#check @Module.Baer.of_divisible
+#check @Finset.equivFin
+#check @Int.fract
+#check @AddCircle.coe_eq_coe_iff_of_mem_Ico
+#check @exists_finiteIndex_between_notMem
+#check @ThreeColour.Winding.exists_box_point
+#check @ThreeColour.wind_shift
+#check @ThreeColour.height_perm
+#check @SimpleGraph.addCayley_adj
+#check @AddMonoidHom.range_eq_top
+example : TopologicalSpace (Fin 3) := inferInstance
+example : DiscreteTopology (Fin 3) := inferInstance
+#check @ContinuousLinearMap.exists_extension_norm_eq
+#check @Submodule.fg_iff_exists_fin_generating_family

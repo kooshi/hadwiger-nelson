@@ -1,0 +1,23 @@
+import Proofs.HadwigerNelson.PadicPlane.Values
+-- FS131-KPA1: the head statements as the kernel stores them (stage 3 read-back).
+open HadwigerNelson.PadicPlane
+#print HadwigerNelson.PadicPlane.borelChromaticNumber
+#print HadwigerNelson.PadicPlane.padicPlane
+#print HadwigerNelson.PadicPlane.TowerRatio
+#check @HadwigerNelson.PadicPlane.le_borelChromaticNumber_of_charSum
+#check @HadwigerNelson.PadicPlane.one_add_div_le_of_borelColoring
+#check @HadwigerNelson.PadicPlane.le_borelChromaticNumber_padicPlane
+#check @HadwigerNelson.PadicPlane.not_exists_bound_borelChromaticNumber_padicPlane
+#check @HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_three
+#check @HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_seven
+#check @HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_eleven
+#check @HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_nineteen
+#check @HadwigerNelson.PadicPlane.six_le_borelChromaticNumber_padicPlane_twentyThree
+#check @HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_twentyThree_le_eight
+#check @HadwigerNelson.PadicPlane.unitQuadrance_zmod_seven_pow_not_colorable_three
+#check @HadwigerNelson.PadicPlane.towerRatio_of_charSum
+#check @HadwigerNelson.PadicPlane.towerRatio_weil
+#check @HadwigerNelson.PadicPlane.towerRatio_of_fibreShareBound
+#check @HadwigerNelson.PadicPlane.haar_le_of_towerRatio
+#check @HadwigerNelson.PadicPlane.borelChromaticNumber_le_chromaticNumber
+#check @HadwigerNelson.PadicPlane.ratioAtMost_of_charSum_levelOne

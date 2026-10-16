@@ -1,0 +1,60 @@
+slot: admitted lake: mem 5 GiB (hard cap), cpus 10
+@WellQuasiOrderedLE.finite_of_isAntichain : ∀ {α : Type u_1} [inst : Preorder α] [WellQuasiOrderedLE α] {s : Set α},
+  IsAntichain (fun x1 x2 => x1 ≤ x2) s → s.Finite
+@Pi.wellQuasiOrderedLE : ∀ {ι : Type u_1} {α : ι → Type u_2} [inst : (i : ι) → Preorder (α i)]
+  [h : ∀ (i : ι), WellQuasiOrderedLE (α i)] [Finite ι], WellQuasiOrderedLE ((i : ι) → α i)
+@AddCircle.equivIco : {𝕜 : Type u_1} →
+  [inst : AddCommGroup 𝕜] →
+    (p : 𝕜) →
+      [inst_1 : LinearOrder 𝕜] →
+        [IsOrderedAddMonoid 𝕜] → [hp : Fact (0 < p)] → (a : 𝕜) → [Archimedean 𝕜] → AddCircle p ≃ ↑(Set.Ico a (a + p))
+@AddSubgroup.nsmul_index_mem : ∀ {G : Type u_1} [inst : AddGroup G] (H : AddSubgroup G) [H.Normal] (g : G),
+  H.index • g ∈ H
+@Module.Basis.extend : {K : Type u_1} →
+  {V : Type u_2} →
+    [inst : DivisionRing K] →
+      [inst_1 : AddCommGroup V] →
+        [inst_2 : Module K V] → {s : Set V} → (hs : LinearIndepOn K id s) → Module.Basis (↑(hs.extend ⋯)) K V
+FiniteDimensional.span_of_finite : ∀ (K : Type u_1) {V : Type u_2} [inst : DivisionRing K] [inst_1 : AddCommGroup V]
+  [inst_2 : Module K V] {A : Set V}, A.Finite → FiniteDimensional K ↥(Submodule.span K A)
+@Int.csInf_mem : ∀ {s : Set ℤ}, s.Nonempty → BddBelow s → sInf s ∈ s
+@DenseRange.piMap : ∀ {ι : Type u_1} {X : ι → Type u_2} {Y : ι → Type u_3} [inst : (i : ι) → TopologicalSpace (Y i)]
+  {f : (i : ι) → X i → Y i}, (∀ (i : ι), DenseRange (f i)) → DenseRange (Pi.map f)
+@AddSubgroup.finiteIndex_of_finite_quotient : ∀ {G : Type u_1} [inst : AddGroup G] {H : AddSubgroup G} [Finite (G ⧸ H)],
+  H.FiniteIndex
+AddGroup.FG : (H : Type u_1) → [AddGroup H] → Prop
+@AddSubgroup.closure_induction : ∀ {G : Type u_1} [inst : AddGroup G] {k : Set G}
+  {p : (g : G) → g ∈ AddSubgroup.closure k → Prop},
+  (∀ (x : G) (hx : x ∈ k), p x ⋯) →
+    p 0 ⋯ →
+      (∀ (x y : G) (hx : x ∈ AddSubgroup.closure k) (hy : y ∈ AddSubgroup.closure k), p x hx → p y hy → p (x + y) ⋯) →
+        (∀ (x : G) (hx : x ∈ AddSubgroup.closure k), p x hx → p (-x) ⋯) →
+          ∀ {x : G} (hx : x ∈ AddSubgroup.closure k), p x hx
+Module.Baer.of_divisible : ∀ (A : Type u_1) [inst : AddCommGroup A] [DivisibleBy A ℤ], Module.Baer ℤ A
+@Finset.equivFin : {α : Type u_1} → (s : Finset α) → ↥s ≃ Fin s.card
+@Int.fract : {α : Type u_1} → [inst : Ring α] → [inst_1 : LinearOrder α] → [FloorRing α] → α → α
+@AddCircle.coe_eq_coe_iff_of_mem_Ico : ∀ {𝕜 : Type u_1} [inst : AddCommGroup 𝕜] {p : 𝕜} [inst_1 : LinearOrder 𝕜]
+  [IsOrderedAddMonoid 𝕜] [hp : Fact (0 < p)] {a : 𝕜} [Archimedean 𝕜] {x y : 𝕜},
+  x ∈ Set.Ico a (a + p) → y ∈ Set.Ico a (a + p) → (↑x = ↑y ↔ x = y)
+@exists_finiteIndex_between_notMem : ∀ {A : Type u_1} [inst : AddCommGroup A] [AddGroup.FG A] {V H : AddSubgroup A},
+  V ≤ H → H.FiniteIndex → ∀ {e : A}, e ∉ V → ∃ W, V ≤ W ∧ W ≤ H ∧ W.FiniteIndex ∧ e ∉ W
+@ThreeColour.Winding.exists_box_point : ∀ {A : Type u_1} [inst : AddCommGroup A] {m : ℕ} {s : Fin m → A}
+  (W : ThreeColour.Winding s),
+  ∃ x,
+    (∀ (j : Fin m), x j ∈ Set.Icc (1 / 3) (2 / 3)) ∧
+      ∀ (r : ↥(ThreeColour.relMap s).ker), ∑ j, ↑(↑r j) * x j = ↑(W.toHom r)
+@ThreeColour.wind_shift : ∀ {A : Type u_1} [inst : AddCommGroup A] {m : ℕ} (s : Fin m → A) {c : A → ZMod 3},
+  ThreeColour.ProperAlong s c →
+    ∀ {u v : Fin m → ℕ},
+      ThreeColour.wsum s (ThreeColour.word u) = ThreeColour.wsum s (ThreeColour.word v) →
+        ∀ (a : A) (l : List (Fin m)), ThreeColour.wind s c (a + ThreeColour.wsum s l) u v = ThreeColour.wind s c a u v
+@ThreeColour.height_perm : ∀ {A : Type u_1} [inst : AddCommGroup A] {m : ℕ} (s : Fin m → A) {c : A → ZMod 3},
+  ThreeColour.ProperAlong s c →
+    ∀ {l l' : List (Fin m)}, l.Perm l' → ∀ (a : A), ThreeColour.height s c a l = ThreeColour.height s c a l'
+@SimpleGraph.addCayley_adj : ∀ {M : Type u_1} (s : Set M) [inst : AddGroup M] (u v : M),
+  (SimpleGraph.addCayley s).Adj u v ↔ u ≠ v ∧ (-u + v ∈ s ∨ -v + u ∈ s)
+@AddMonoidHom.range_eq_top : ∀ {G : Type u_1} [inst : AddGroup G] {N : Type u_2} [inst_1 : AddGroup N] {f : G →+ N},
+  f.range = ⊤ ↔ Function.Surjective ⇑f
+data/fs131/ktc1/probes/Names.lean:28:8: error(lean.unknownIdentifier): Unknown constant `ContinuousLinearMap.exists_extension_norm_eq`
+@Submodule.fg_iff_exists_fin_generating_family : ∀ {R : Type u_1} {M : Type u_2} [inst : Semiring R]
+  [inst_1 : AddCommMonoid M] [inst_2 : Module R M] {N : Submodule R M}, N.FG ↔ ∃ n s, Submodule.span R (Set.range s) = N

@@ -1,0 +1,61 @@
+slot: admitted lake: mem 7 GiB (hard cap), cpus 0
+def HadwigerNelson.PadicPlane.borelChromaticNumber.{u_1} : {X : Type u_1} → [TopologicalSpace X] → SimpleGraph X → ℕ∞ :=
+fun {X} [TopologicalSpace X] G => ⨅ k, ⨅ (_ : ∃ c, ∀ (i : Fin k), MeasurableSet (⇑c ⁻¹' {i})), ↑k
+@[reducible] def HadwigerNelson.PadicPlane.padicPlane : (p : ℕ) →
+  [inst : Fact (Nat.Prime p)] → SimpleGraph (ℚ_[p] × ℚ_[p]) :=
+fun p [Fact (Nat.Prime p)] => HadwigerNelson.unitQuadrance ℚ_[p]
+def HadwigerNelson.PadicPlane.TowerRatio : ℕ → ℝ → Prop :=
+fun p c =>
+  ∀ (k : ℕ),
+    1 ≤ k →
+      ∀ (s : Finset (ZMod (p ^ k) × ZMod (p ^ k))),
+        (HadwigerNelson.unitQuadrance (ZMod (p ^ k))).IsIndepSet ↑s → ↑s.card ≤ c * ↑p ^ (2 * k)
+le_borelChromaticNumber_of_charSum : ∀ (p : ℕ) [inst : Fact (Nat.Prime p)],
+  p % 4 = 3 →
+    ∀ {κ : ℝ},
+      2 ≤ κ →
+        (∀ (ψ : AddChar (ZMod p × ZMod p) ℂ), ψ ≠ 1 → -κ ≤ (∑ s ∈ HadwigerNelson.FibreCertSound.unitCircle p, ψ s).re) →
+          ↑⌈1 + (↑p + 1) / κ⌉₊ ≤ borelChromaticNumber (padicPlane p)
+one_add_div_le_of_borelColoring : ∀ (p : ℕ) [inst : Fact (Nat.Prime p)],
+  p % 4 = 3 →
+    ∀ {k : ℕ} (c : (padicPlane p).Coloring (Fin k)),
+      (∀ (i : Fin k), MeasurableSet (⇑c ⁻¹' {i})) → 1 + (↑p + 1) / (2 * √↑p) ≤ ↑k
+le_borelChromaticNumber_padicPlane : ∀ (p : ℕ) [inst : Fact (Nat.Prime p)],
+  p % 4 = 3 → ↑⌈1 + (↑p + 1) / (2 * √↑p)⌉₊ ≤ borelChromaticNumber (padicPlane p)
+not_exists_bound_borelChromaticNumber_padicPlane : ¬∃ B,
+    ∀ (p : ℕ) [inst : Fact (Nat.Prime p)], p % 4 = 3 → borelChromaticNumber (padicPlane p) ≤ ↑B
+borelChromaticNumber_padicPlane_three : borelChromaticNumber (padicPlane 3) = 3
+borelChromaticNumber_padicPlane_seven : borelChromaticNumber (padicPlane 7) = 4
+borelChromaticNumber_padicPlane_eleven : borelChromaticNumber (padicPlane 11) = 5
+borelChromaticNumber_padicPlane_nineteen : borelChromaticNumber (padicPlane 19) = 5
+six_le_borelChromaticNumber_padicPlane_twentyThree : 6 ≤ borelChromaticNumber (padicPlane 23)
+borelChromaticNumber_padicPlane_twentyThree_le_eight : borelChromaticNumber (padicPlane 23) ≤ 8
+unitQuadrance_zmod_seven_pow_not_colorable_three : ∀ (k : ℕ),
+  1 ≤ k → ¬(HadwigerNelson.unitQuadrance (ZMod (7 ^ k))).Colorable 3
+towerRatio_of_charSum : ∀ (p : ℕ) [inst : Fact (Nat.Prime p)],
+  p % 4 = 3 →
+    ∀ {κ : ℝ},
+      2 ≤ κ →
+        (∀ (ψ : AddChar (ZMod p × ZMod p) ℂ), ψ ≠ 1 → -κ ≤ (∑ s ∈ HadwigerNelson.FibreCertSound.unitCircle p, ψ s).re) →
+          TowerRatio p (κ / (↑p + 1 + κ))
+towerRatio_weil : ∀ (p : ℕ) [Fact (Nat.Prime p)], p % 4 = 3 → TowerRatio p (2 * √↑p / (↑p + 1 + 2 * √↑p))
+towerRatio_of_fibreShareBound : ∀ (p : ℕ) [inst : Fact (Nat.Prime p)],
+  p % 4 = 3 → ∀ {U : ℝ}, HadwigerNelson.CertLink.FibreShareBound p U → TowerRatio p (U / ↑p ^ 2)
+haar_le_of_towerRatio : ∀ (p : ℕ) [inst : Fact (Nat.Prime p)],
+  p ≠ 2 →
+    ∀ {c : ℝ},
+      TowerRatio p c →
+        ∀ {I : Set (ℤ_[p] × ℤ_[p])},
+          MeasurableSet I → (HadwigerNelson.unitQuadrance ℤ_[p]).IsIndepSet I → (haar p) I ≤ ENNReal.ofReal c
+borelChromaticNumber_le_chromaticNumber : ∀ (p : ℕ) [inst : Fact (Nat.Prime p)],
+  p % 4 = 3 → borelChromaticNumber (padicPlane p) ≤ (HadwigerNelson.finitePlane p).chromaticNumber
+@ratioAtMost_of_charSum_levelOne : ∀ {F : Subfield ℝ} [NumberField ↥F] (P : HadwigerNelson.SpectralChain.StablePrime F),
+  2 ∉ P.P →
+    ∀ {Q : ℕ},
+      Nat.card (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P) = Q ^ 2 →
+        ∀ {κ : ℝ},
+          2 ≤ κ →
+            (∀ (hfin : (HadwigerNelson.CertLink.normOneSet P 1).Finite)
+                (ψ : AddChar (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P ^ 1) ℂ),
+                ψ ≠ 1 → -κ ≤ (∑ s ∈ hfin.toFinset, ψ s).re) →
+              HadwigerNelson.Rigidity.RatioAtMost P (κ / (↑Q + 1 + κ))
