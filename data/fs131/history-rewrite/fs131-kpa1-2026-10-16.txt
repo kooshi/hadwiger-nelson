@@ -1,0 +1,26 @@
+# Branch fs131-kpa1 (the p-adic plane), rewritten 2026-10-16 by the privacy filter before its merge (inventory items 1025, 1032): its own commits after origin/main, old new.
+# Old main commits inside it became main's rewritten ones (data/fs131/history-rewrite/main-2026-10-16.txt), checked pairwise.
+75c2ee81b 28df76a8c
+dc5abc4b1 dd03f83bd
+05ea49e22 b09b9670d
+a86fdc63c f56a68366
+621ccacc4 1230da83d
+8f5f0e3fd 5bcc0e18e
+f8219af91 1586a9acf
+96b07e67f 44b1b8553
+161f4df52 af9ac002f
+36a1bf81e 851dffb80
+7244519f7 d68582f14
+b0bc590aa fe5cc1891
+dbfaf1d0c 410891211
+ab6a2f288 407735d23
+59634120b f3c80b88f
+e2e0e8cb3 fe64fb521
+f8ebf37f5 64757938c
+560dd045d f4db5a235
+4456013b3 2ba20dccf
+7180f4b40 e3e1dbb73
+1fabc7701 988e3d2e0
+a7cb088b1 6bfaa6d75
+ab9130b96 39201650e
+6062487e1 d32ca643f
