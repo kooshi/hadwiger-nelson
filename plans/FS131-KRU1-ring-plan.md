@@ -453,3 +453,7 @@ worktree: "build: OK — 1100 of 1100 batches, 6 module(s) rebuilt, 5 module(s) 
 The six rebuilt modules are the five new ones and the root `Proofs`.
 
 ## Stage 3 — SAVED
+
+## Stage 4 — SAVED: the report
+
+`data/fs131/reports/FS131-KRU1.md`, the same text as the hand-back.
