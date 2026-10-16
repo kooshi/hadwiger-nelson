@@ -442,3 +442,12 @@ limit I had set the call above. It left no process: the slot's scope ended, and 
 had been compiled by then.
 
 The skeleton stays on `fs131-kfr1`; nothing with a `sorry` goes to `main`.
+
+## What is left (2026-10-16, at the coordinator's stop)
+
+Every stage of this planning job is saved, and the build ran to the end: it finished green before the stop, so nothing was
+stopped. What is left is the implementer's work:
+1. The 81 `sorry` leaves of § 3.3, in § 3.4's order.
+2. The owed spec example `localRatio ⊥ = 2⁻¹` (§ 3.7).
+3. The three rulings held for the coordinator in the report: TJ's second clause, the `open private` of
+   `ratioAtMost_of_charBound`, and the splits' place.
