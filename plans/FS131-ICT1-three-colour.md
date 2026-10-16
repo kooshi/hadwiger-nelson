@@ -44,3 +44,27 @@ reduction (plan § 3.5) rides only if the re-price leaves room; the dichotomy's 
 the worktree's compiled skeleton (sources' md5 equal to the planner's `data/fs131/ktc1/build2.sources.md5`, so the `.olean`s are
 those of the gated-for-skeleton build), 2026-10-16 14:40 UTC: `data/fs131/ict1/statements-before.txt.gz` — 71 constants
 (`Circular` 20, `Fibre` 35, `Density` 16). The comparison at the gate reads it.
+
+## Stage 2 — SAVED: `CayleyThree/Circular`, every leaf proved
+
+All fourteen leaves of `Circular` are proved (iteration: `lake env lean` with the lakefile's options, no error, no warning;
+`data/fs131/ict1/logs/Circular.out`; the build and the gate are the evidence, at stage 5). 411 lines against the skeleton's
+136: **about 275 lines of proof against the plan's 440**. Routes, where they differ from the plan:
+- `exists_rat_solution_near` (≈ 85 lines): the plan's route, with the normalization done once by a division. `V = span_ℚ {1, x_i}`,
+  `bV = Module.finBasis ℚ V`; the system holds **coordinate by coordinate** (`Σ_i G_ki a_il = b_k c_l`, by applying `bV.repr` to the
+  equation in `V`, no linear-independence argument); `w_i(t) = Σ_l a_il t_l`, `u(t) = Σ_l c_l t_l` are continuous, equal `x_i` and
+  `1` at `t₀ = (bV l)_l`; near `t₀`, `u > 0` and `|w_i/u − x_i| < ε` (`Filter.Tendsto.div`, `Filter.eventually_all`); a rational
+  `t` there (`DenseRange.piMap`, `Rat.denseRange_cast`) gives `q_i = w_i(t)/u(t)`.
+- `exists_torsion_mem_bandSet` (≈ 140 lines): one finite family `f` listing `S ∪ G₀` (`G₀` a finite generating set, `AddGroup.fg_iff`)
+  through `Finset.equivFin` in place of `Fin.append`; the faces as extra rows of the system (`Fin m ⊕ {j // face j}`), the margin
+  from a private `exists_pos_le`; `exists_character_of_box_point` at the rational point; `∏ den` kills the character on `f`,
+  hence on `closure (range f) = ⊤` (`AddMonoidHom.ker_eq_top_iff`).
+- `colorable_three_iff_exists_isPeriodic`: the circular colouring of `S ∖ {0}` composed with `Hom.ofLE` of
+  `addCayley_erase_zero` (`addCayley S ≤ addCayley (S ∖ {0})`); its periods contain `ker θ`, of finite index.
+- `not_isPeriodic_rat`: `K.index • (q / K.index) = q` (`AddSubgroup.nsmul_index_mem`), so every rational is a period.
+
+New constants in `Circular`: one public, `rep01_coe` (`rep01` is the identity on `[0, 1)`; the spec example reads it); two
+private, `exists_pos_le`, `floor_three_ne`.
+
+**Re-price after `Circular`**: the module came in at about 0.63 of the plan's lines. LEAN.md's rule is to re-price from the
+first two leaves of each *kind*; `Fibre`'s two marked leaves are the re-price point for the rest.
