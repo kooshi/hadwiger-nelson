@@ -6,7 +6,13 @@ at `f1fcc683d`). Worktree `.claude/worktrees/kcl1`, branch `fs131-ico1`, cut at 
 
 ## Theorems this phase proved
 
-(Filled as the leaves close; the final list is at the last stage.)
+None at kernel grade yet: every leaf below is proved and compiled in a scratch farm (`data/fs131/ico1/lean1.sh`, the
+lakefile's options), but the modules have not passed `./scripts/build.sh` since they were proved, and the gate has not run.
+Proved in source, awaiting the build and the gate: `Collapse/Thick` (all 10 leaves), `Collapse/Mixing` (all 4),
+`Collapse/Colouring` (all 6), `Collapse/Dichotomy` (all 8); the new public theorems `StandingFive.norm_normOne_charSum_le`
+(`Arith/FloorPlanes`) and `Rigidity.norm_charSum_le_weil` (`Rigidity/ClassRatio`), which **have** passed the build
+(`data/fs131/ico1/build1.log`, before any `Collapse/` leaf was proved). Open: `Collapse/Slice` (4), `Collapse/Selection` (8),
+`Collapse/Headline` (8).
 
 ## Stage 1 — SAVED: the readback
 
@@ -120,3 +126,49 @@ serves both SI-3 and the factor law's spectrum.
   probability on the empty `R → Fin 0`). `IsColourSpectral.rotInv` directly by Fourier uniqueness (`P(c(0) = c(uy)) =
   P(c(0) = c(y))` from `rot_inv`), with no Herglotz–Bochner uniqueness clause.
 - `attribute [local instance] InvColouring.isProb` in the module (the four-colour modules' `scoped` form, local here).
+
+## Stage 5 — SAVED: hand-back at the brief's budget line, with what is left
+
+**Why here.** The coordinator's word of this session: hand back at a saved stage once past about 550k by the harness's count;
+this session is past it. Nothing is lost: stages 1–4 are committed, and the worktree holds nothing else of this job (the farm
+copies under `data/fs131/ico1/work/` were byte-identical to the committed modules and are deleted; the uncompressed baseline
+dump is deleted, its `.gz` is committed). No slot is held; no process of this job is running.
+
+**A correction to stage 4's numbers.** `Collapse/Colouring` is about 137 lines of proof (240 − 103), not 215.
+
+**A finding about ruling 5 (for the coordinator, before the landing).** The brief's ruling 5 and the plan (§ 4.8) say the
+`omit [NumberField ↥F] in` line at `Collapse.ThickAt.mono` moves no statement, "the binder is not in the stored type". The
+baseline dump of the skeleton's compiled module says otherwise: the stored type of `ThickAt.mono` begins
+`forall {F : Subfield ℝ} [inst… : NumberField ↥F] …` (`statements-before.txt.gz`; the auto-included instance is exactly what
+the `unusedSectionVars` warning reports). The omit, committed at stage 2 as ruled, therefore **drops one instance binder** —
+the theorem becomes more general (a strengthening, never a weakening), but its stored statement moves. Two ways to settle it:
+keep the omit and show the drop from the kernel's side at the gate (LEAN.md § Searching — Lean, the one-binder check of
+FS131-KN9), or replace it by `set_option linter.unusedSectionVars false in` (LEAN.md, FS131-ITK1), which keeps the stored type.
+The successor should follow the coordinator's choice, and use `set_option linter.unusedSectionVars false in` rather than
+`omit` for any other leaf that turns out not to read `[NumberField F]` (in `Collapse/Slice`, `measure_ne_eq_k` will not — its
+four-colour namesake carries `omit [NumberField F] in` there because the namesake's statement was written so).
+
+**What is left, in order** (the plan's § 4.3 for each leaf; what this job learned, below):
+1. `Collapse/Slice` — `Rigidity/CountExtension` at `Fin k`, read in full this session. `measure_ne_eq_k`: `hσ.2 y` gives
+   `∫ χ(y) dσ = P(c(0) = c(y))`, and `P(c(0) ≠ c(y)) = 1 − P(c(0) = c(y))` (probability, `measure_compl` on
+   `measurableSet_eq_fun`). `tendsto_measure_ne_k`: the landed proof with `σ(R̂) = 1` from `hσ.2 0` (`{c | c 0 = c 0} = univ`)
+   and `Re ∫ χ(y) dσ → 1` in place of the correlation. `exists_extension_k`, `exists_slice_k`: the landed proofs at `Fin k`,
+   `measure_ne_shift` and `measure_eq_add_unit` copied privately with `Xk`. The module needs
+   `attribute [local instance] InvColouring.isProb` (as `Collapse/Dichotomy` has it) or `haveI := μ.isProb`.
+2. `Collapse/Selection` (8 leaves, plan § 4.3) — reads `Collapse.mixing_K` and `not_both_ge_of_mixing`, both proved.
+3. `Collapse/Headline` (8 leaves, plan § 4.3), then the experience pass on the headline names and docstrings (ruling 6).
+4. **The build**: `./scripts/build.sh` under the slot (the brief's line). It has not yet compiled the four proved `Collapse/`
+   modules; expect the walk of about 17 minutes and every `Collapse/` module recompiled.
+5. Merge `main` (it gained `Rigidity/MainClauseFive`, FS131-IL5), then the gate on one commit
+   (`data/fs131/clone1/run-gate.sh` copied under `data/fs131/ico1/`), with the statement comparison against
+   `statements-before.txt.gz` (`data/fs131/ico1/lean/StatementDump.lean`, run before and after): it must show (a)
+   `normOne_charSum_ge`, every `ClassRatio` statement and every skeleton statement unchanged, (b) the two new public theorems,
+   (c) the `ThickAt.mono` binder as settled above, and (d) whether `Collapse/Thick`'s two added Mathlib imports
+   (`Mathlib.GroupTheory.FiniteAbelian.Duality`, `Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed`, for
+   `exists_addChar_extend`) moved any stored instance term — LEAN.md: imports choose instances.
+6. The read-aloud of the three headlines against row 128, the front-page drafts (plan § 4.7, brought to what is proved), the
+   report.
+
+**Re-price for the successor.** Four modules took about 1,540 lines of proof (Thick + edits 360, Mixing 630, Colouring 137,
+Dichotomy 600) against the plan's 2,450 for them, every leaf closed within five farm compiles. Left by the plan: Slice 330,
+Selection 310, Headline 250 — on this job's rate, about 600 lines, two or three sessions' worth of work far less than one.
