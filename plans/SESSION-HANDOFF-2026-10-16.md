@@ -1,59 +1,83 @@
-# Session handoff — 2026-10-16: the repository is public; this is the working copy
+# Session handoff — 2026-10-16: the public clone gated; two theorems' worth of work since; one implementer running
 
-*Written 2026-10-16 by Keryx before Kooshi restarts the harness. Current state only. Read it first, then
-`plans/FS131-close-inventory.md` items 960–973. `plans/SESSION-HANDOFF-2026-10-15.md` is older: read only its § 6, the owed list,
-which § 5 below updates.*
+*Rewritten 2026-10-16 13:25 UTC by Keryx before Kooshi compacts the session. Current state only. Read it first, then
+`plans/FS131-close-inventory.md` items 974–992 (each has its receipt and, where it rules, four parts).
+`plans/SESSION-HANDOFF-2026-10-15.md` is older; its § 6 owed list is now filed or tabled (§ 5 below).*
 
-**On resuming, the first thing to do is § 4, step 1.** Nothing is running.
+**On resuming, the first thing to do is § 3: wait for FS131-ICO1's report, or its message that the gate is green.**
 
 ## 1. Where things are
 
-- **This repository is public**: `https://github.com/kooshi/hadwiger-nelson`, pushed by Kooshi at `7000dc3e0` (W20, item 971). This
-  checkout is a clone of it, with `origin` the SSH form of that address. Every commit pushed here is published.
-- **The old repository**, with its full history, every branch and its 75 worktrees, is moved aside on this machine and stays whole
-  until Kooshi has stored it (W10, item 973). Its path, and the paths of the publication's private lists, its tools and the audit
-  folder, are in the auto-memory's "local paths"; they are never written here.
-- **The publication tools are not in this repository** by design (item 966, ruling 1): the guard that checks text against the
-  private lists runs from the old repository's copy (its path is in the auto-memory).
-- **The generic workflow repository** (W17–W19, items 963–965, 970) is built at `/home/kooshi/source/agentic-mathematics`, with no
-  remote; its README links this repository. Kooshi pushes it.
+- **The repository is public**: `https://github.com/kooshi/hadwiger-nelson`; this checkout is its clone. **`main` is 32
+  commits ahead of `origin/main`, none pushed** — every push publishes, and Kooshi has not yet answered whether I may
+  push (§ 4, decision 1). Before any push: the publication guard over every new commit's changed files and messages (its
+  path is in the auto-memory's "local paths"; never written here).
+- **The standing rules say never push** (rule 6) and that everything committed may be published (rule 13), since item
+  975. Every brief names them.
+- **The main tree's build is current for `main`** (rebuilt 05:21 UTC after the named theorem merged: "239 of 239
+  batches, 2 module(s) rebuilt, 0 module(s) with warnings"). It is the reference build for new worktrees.
+- **The full gate was green in this clone** on `16a2d4499` (item 980; logs `data/fs131/clone1/gate/`, runner
+  `data/fs131/clone1/run-gate.sh`), and again on the named theorem's commit (item 990).
 
-## 2. Held
+## 2. Held, new today (on `main`, local)
 
-Unchanged by the publication: the five-colour chain (items 943–944), the front page (item 946), and everything `CLAUDE.md` § Frontier
-states. The proofs here equal the gated tree but for one docstring (`Proofs/HadwigerNelson/CayleyCertificate.lean`); the gated commit
-is `752b11569` in this history, and `README.md` names it.
+- **`χ(F²) = L(F)` whenever `L(F) ≤ 5`, one named theorem** — `Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five`,
+  and the hypothesis-free `Rigidity.min_chromaticNumber_five_eq_min_localBound_five` (`min(χ(F²), 5) = min(L(F), 5)`), in
+  `Rigidity/MainClauseFive`; on the standard three, Weil's bound and Einsiedler–Lindenstrauss Thm 1.3; gated on
+  `113ca8ece`, merged as `0c1ad6a33`, its drafts filed (items 990–991).
+- **The second filing** (items 982–985): FS131-PR1's corrections (the plane's density equality is "prior art: not found
+  in print", no longer "not new"), rows 120–130's notes, 131 `LEAN.md` lines, the bibliography appends. Its table of
+  every owed item, with what is left, is `data/fs131/fc8/owed.md`.
+- **Two prices, records on `main`**: the collapse (row 128) at about 3,270 lines (item 988); Einsiedler–Lindenstrauss
+  Thm 1.3 at about 80,000 lines in full, about 50,000 by a narrow route that retires the axiom from the chain (item 987).
 
-## 3. Kooshi's open decisions
+## 3. Running
 
-1. **Pushing.** Before the publication, `origin` was a private remote and pushes went freely. Now every push publishes. Default until
-   he says otherwise: commit freely, push only at his word or with his standing approval, and run the guard on every commit's text
-   before any push.
-2. **The generic repository's peer-delegation paragraph** (item 964): kept as written unless he says to cut it; he pushes that
-   repository.
+**FS131-ICO1 — the collapse implemented** (item 989; brief `data/fs131/briefs/FS131-ICO1-collapse.md`; worktree
+`.claude/worktrees/kcl1`, branch `fs131-ico1`; record `plans/FS131-ICO1-collapse.md` there). Stages 1–4 saved
+(`001bc8a8f`: D-E1, D-E2, `Collapse/Thick`, `Mixing`, `Colouring`, `Dichotomy` proved). Halted by a network outage
+(EAI_AGAIN) and resumed by message at 13:2x UTC (item 992), told to merge `main` before its gate and to hand back if past
+about 550k. Left: `Collapse/Slice`, `Selection`, `Headline`, the gate, the read-aloud, the drafts. **Its agent id is in
+my scratch only**; if the session is new, a resumed job's id is gone — brief a successor from the record instead.
 
-## 4. Next, in order
+**At its hand-back** (announcement rule, item 988): check the commits; print the three headlines' axioms myself
+(`Collapse.chromaticNumber_planeOver_sqrt635087`, `chromaticNumber_planeOver_eq_plane_of_thick`,
+`chromaticNumber_planeOver_deGrey`; expected the standard three, `Rigidity.positive_entropy_rigidity`,
+`StandingFive.kloosterman_bound`); read them against `LEDGER.md` row 128; guard; merge `--no-ff`; file its drafts by a
+script that asserts each slot; run the fact audit and **read its last line** (item 991); rebuild the main tree.
 
-1. **The first build here.** `.lake/packages` and the reference build were copied in (item 973). Build under the memory tool with
-   this laptop's settings (`LEAN.md` § Toolchain; `SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6`), never `lake build`: the modules importing the
-   changed docstring recompile, and nothing else should. Then run the full gate once (`LEAN.md` § The gate) and read its log.
-2. **Corrections owed here** (items 966, 970):
-   - `data/README.md`: drop the bullet for `data/m62/m63-D1b-A412-rung1.json`, whose recorded checksum this history no longer holds;
-   - `.claude/skills/grokkings/SKILL.md`'s description names a lane that does not load it (de Bruijn's planner);
-   - `.claude/agents/debruijn.md` names the implementer's old model; the implementer runs on Opus;
-   - `.claude/agents/clerk.md`'s list of files only Keryx writes misses `LEAN.md` and `plans/SEARCH-QUEUE.md`;
-   - two sentences where the cleaning cut a clause and left stray punctuation (`BIBLIOGRAPHY.md`, row `[Johnson1987]`'s routes
-     line; `scripts/regen-check.sh`, its opening comment).
-3. **The second filing**: `plans/SESSION-HANDOFF-2026-10-15.md` § 6, less two items now done — the first pass's bibliography drafts
-   (filed, item 961) and the README's gated-commit hash (`752b11569`).
-4. **Next mathematics**: that same § 6's list, first whether `Rigidity.mrPlus` is the form of measure rigidity row 128's collapse uses.
-5. **Tooling**: that § 6's list, and the generic repository's finding: an axiom audit that finds every declaration itself (item 970).
+## 4. Kooshi's open decisions (each reported to him; defaults in force)
 
-## 5. Rules
+1. **Pushing.** Default: commit freely, push nothing. My recommendation: standing approval to push after each batch
+   passes the guard, never forcing.
+2. **Einsiedler–Lindenstrauss.** Default: it stays declared. Recommendation: the narrow route (about 50,000 lines,
+   about 51 active hours), after the collapse lands; it starts by fetching and reading `[EinsiedlerLindenstrauss2010]`
+   §§ 6–8 (not held).
+3. **The aim on the front page** (`CLAUDE.md` § The aim still states 2026-09-26's). Default: unchanged; the work is
+   formalizing our findings, six against seven paused. Recommendation: rewrite it to say so.
+4. **The generic repository's peer-delegation paragraph** (item 964): kept unless he says to cut it.
 
-- Review by artifact; print the key theorem's axioms myself; rulings in four parts; briefs from generators, gated, committed on a pass.
-- Commit messages end with the attribution lines. Times from `date -u`; `.claude/settings.json` sets `TZ=UTC` for every command.
-- **The repository is public.** Write nothing the publication's private lists remove; refer to such things by category, or not at
-  all (the auto-memory's "public repository rules"). Run the guard before any push.
-- Novelty: "prior art: not found in print"; never "new", "first" or "not new" for a result of ours.
-- Staffing: four agent slots, a Sonnet agent counting half.
+## 5. Owed (none urgent)
+
+- **Mathematics / Lean:** Lemma C′ (row 100); the family of 44 fields and CLS (`ROADMAP.md` § 3); `lean4checker` and the
+  comparator before any write-up; KCL1's stub to mint (the four-colour chain as the `k = 4` case of the collapse).
+- **Front files, owed to a lane's words** (no draft exists; `data/fs131/fc8/owed.md` "no draft" rows): row 152's
+  `χ_m ≥ k + 1` stated for Falconer's number where the kernel form is the Borel number; the write-up stub's banner; the
+  prices in records; EN1-UQ4's grade line; `Instances/UpperHalfCorollaries`' stale module docstring (ll. 25–28; a docstring
+  edit rebuilds its dependents); PN1's "Not ours" citing ASTRA T2–T5 against its own T3–T4.
+- **Tooling:** a coverage check in the axiom audit (items 970, 990); the older lists in the 2026-10-14 and 2026-10-15
+  handoffs' § 6.
+
+## 6. Worktrees and disk
+
+`.claude/worktrees/kcl1` (ICO1, building); `filing2` (no build; reusable for a Clerk); `il5` and `kel1` (builds deleted;
+their branches `fs131-il5` merged, `fs131-kel1` holds the price's skeleton with `sorry`, never for `main`). Disk 253 GB free.
+
+## 7. Rules
+
+- Review by artifact; print key axioms myself; rulings in four parts; briefs from generators, gated and guarded, then
+  committed; launch line "Your brief is on disk: read it in full first."
+- Run a command in another tree inside a subshell (`( cd … && … )`): a bare `cd` moves this session's working directory.
+- A brief whose quotations are on a branch is gated with `--root <that worktree>`.
+- Times from `date -u`; commit messages end with the attribution lines; novelty "prior art: not found in print".
+- Staffing: four slots, a Sonnet agent counting half; this laptop's slot settings `SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6`.
