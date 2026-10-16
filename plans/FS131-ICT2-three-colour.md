@@ -69,7 +69,14 @@ Started 2026-10-16 15:50:42 UTC: `SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 python3 /h
 (`data/fs131/ict2/logs/build1.pgid`), log `data/fs131/ict2/build1.full.log` (its last line `exit=<n>` when it ends), sources'
 md5 at the start `data/fs131/ict2/build1.sources.md5`. At the stop it was at batch 288 of 735 (about 1.7 s a batch: the walk;
 the three modules and the root compile at the end). It is left to finish (the coordinator's word allows either); its result
-is § 2.4, if this job saw it end.
+is below.
+
+**Result (seen by this job): exit 0, "build: OK — 735 of 735 batches, 4 module(s) rebuilt, 0 module(s) with warnings, 17m41s"**
+(15:50:42–16:08:30 UTC; the rebuilt modules are the three `CayleyThree/` modules and the root `Proofs`); `grep -c "declaration
+uses 'sorry'"` = 0 in the full output (`data/fs131/ict2/build1.log`, a copy of `build/gate/build/20261016T155042Z-3922412.log`);
+the one `error:` line there is the up-to-date check's own (`lake build --no-build`, exit 3, "needs to be rebuilt"), as
+expected; the sources' md5 unchanged across the build (`md5sum -c data/fs131/ict2/build1.sources.md5`: OK, four files). So
+§ 2.4's step 1 is done; the successor starts at step 2 (lint), on this tree's build as it stands.
 
 ### 2.3 The gate's tools, written and **not yet run** (none plant-tested: a successor runs each with its control first)
 
