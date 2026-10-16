@@ -201,6 +201,15 @@ theorem min_localBoundAllLevels_five [NumberField F] : min (localBoundAllLevels 
 -- The list's residue sizes: `Q²` for `Q ∈ {2, 3, 4, 7, 8, 16, 32}`, and `11² = 121` is not among them.
 example : (({2, 3, 4, 7, 8, 16, 32} : Finset ℕ).image (· ^ 2)) = {4, 9, 16, 49, 64, 256, 1024} := by decide
 example : ∀ Q ∈ ({2, 3, 4, 7, 8, 16, 32} : Finset ℕ), Q ^ 2 ≠ 121 := by decide
+-- `ℚ`'s stable prime above 2 is ramified, so listed (`UpperHalf.exists_stablePrime_rat`).
+example : ∃ P : StablePrime (⊥ : Subfield ℝ), IsFourColourPlace P := by
+  obtain ⟨P, -, hram⟩ := UpperHalf.exists_stablePrime_rat
+  exact ⟨P, Or.inl hram⟩
+-- At `ℚ` both readings of `L` are at most two: the ramified prime's level-one target is bipartite.
+example : localBoundAllLevels (⊥ : Subfield ℝ) ≤ 2 := by
+  obtain ⟨P, -, hram⟩ := UpperHalf.exists_stablePrime_rat
+  exact (localBoundAllLevels_le_localBound _).trans
+    ((iInf_le _ P).trans (colorable_two_levelTarget_one_of_isRamified hram).chromaticNumber_le)
 
 end
 
