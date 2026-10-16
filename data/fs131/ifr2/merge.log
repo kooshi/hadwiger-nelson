@@ -1,0 +1,12 @@
+Auto-merging ARCHITECTURE.md
+Auto-merging Proofs.lean
+Auto-merging Proofs/HadwigerNelson/Rigidity/ClassRatio.lean
+Auto-merging scripts/Axioms.lean
+CONFLICT (content): Merge conflict in scripts/Axioms.lean
+Auto-merging scripts/assumptions-ledger.txt
+CONFLICT (content): Merge conflict in scripts/assumptions-ledger.txt
+Auto-merging scripts/axioms-controls.txt
+CONFLICT (content): Merge conflict in scripts/axioms-controls.txt
+Auto-merging scripts/vacuity-baseline.txt
+CONFLICT (content): Merge conflict in scripts/vacuity-baseline.txt
+Automatic merge failed; fix conflicts and then commit the result.

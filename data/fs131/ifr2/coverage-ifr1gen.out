@@ -1,0 +1,12 @@
+MODULE Proofs.HadwigerNelson.Arith.StableAboveUsable: CLEAN 4
+MODULE Proofs.HadwigerNelson.Collapse.Density.Defs: CLEAN 41
+MODULE Proofs.HadwigerNelson.Collapse.Density.Headline: CLEAN 6, kloosterman_bound+no_proper_five_coloring+positive_entropy_rigidity 1, kloosterman_bound+positive_entropy_rigidity 6, positive_entropy_rigidity 7
+MODULE Proofs.HadwigerNelson.Collapse.Density.Upper: CLEAN 21, positive_entropy_rigidity 4
+MODULE Proofs.HadwigerNelson.Collapse.Headline: CLEAN 16, kloosterman_bound 3, kloosterman_bound+no_proper_five_coloring+positive_entropy_rigidity 3, kloosterman_bound+positive_entropy_rigidity 3, positive_entropy_rigidity 2
+MODULE Proofs.HadwigerNelson.Instances.SqrtFiveClass: CLEAN 3, kloosterman_bound+positive_entropy_rigidity 4
+MODULE Proofs.HadwigerNelson.Instances.SqrtTwentyThreeCbrtTwo: CLEAN 11, kloosterman_bound 2, kloosterman_bound+positive_entropy_rigidity 2
+MODULE Proofs.HadwigerNelson.Plane.TriangularPacking: CLEAN 12
+MODULE Proofs.HadwigerNelson.Rigidity.ClassRatio: CLEAN 10, kloosterman_bound 6
+MODULE Proofs.HadwigerNelson.Rigidity.FourColourPlaces: CLEAN 7, kloosterman_bound 7, kloosterman_bound+positive_entropy_rigidity 1
+records: 182 public (182 already filed), 203 private (not audited)
+COVERAGE OK: every one of the 182 public records is filed under its class

@@ -74,3 +74,71 @@ axiom-free 575; purchases 5. Vacuity declarations 22,566 (`main`) + 117 = 22,683
    `data/fs131/clone1/run-gate.sh`) on one commit. Statement dump and comparison; `#print axioms` of the head statements.
    Save stage 3.
 4. The drafts' counts. Save stage 4. The report.
+
+## Stage 2 — SAVED: the merge and the build
+
+### 2.1 The merge
+
+`git merge main` at `d9ce6f214` (`main` had moved past the brief's `64a41b19a` by coordinator commits only), committed as
+`8dbd69096` (`data/fs131/ifr2/merge.log`). Git merged `Rigidity/ClassRatio.lean`, `Proofs.lean` and `ARCHITECTURE.md` with no
+conflict: their two sides' hunks are disjoint, and the merged texts are each side plus the other's insertions (checked by
+`git diff` against both parents). **No proof or statement was in conflict.** Four gate inputs were, each resolved keeping
+both sides (`data/fs131/ifr2/resolve_both.py` for the audit; the rest by a script whose text is in the commit's message):
+
+| file | conflict | resolution |
+|---|---|---|
+| `scripts/Axioms.lean` | one hunk, end of CLEAN: `main`'s two CLEAN blocks (FS131-ICT3's three-colour, FS131-ICS1's five-colour; 121 lines) against FS131-IFR1's (90 lines) | both, `main`'s first; the IMPORTED lines of the three landings had merged with no conflict. The merged file is `main` + 118 lines and the branch + 140 lines, insertions only both ways |
+| `scripts/axioms-controls.txt` | the counting paragraph and the two state controls (`imported=99`/`100` against `104`/`105`) | the merged totals by arithmetic over the three landings' own counts: the p-adic base 83 (Weil 64, five-colour theorem 7, E–L 27, E–L and Weil 14, all three 1), five-colour +16 (Weil 16, E–L 7, both 7), density +21 (Weil 10, five-colour theorem 3, E–L 20, both 9, all three 3): **imported 120** (`baseline`) and **121** (`imported_declared`); Weil 90, five-colour theorem 10, E–L 54, E–L and Weil 30, four of them on all three. The gate's self-test confirms the total |
+| `scripts/vacuity-baseline.txt` | the header's two count lines | the expected merged counts: `main`'s plus this landing's `+117` declarations and `+2` refutations-skipped, no site: `declarations=22683 refutations-skipped=245 sites=1465`, `vacuous=0 stale=0 declared=3 witnessed=40 generic=1420 unknown=2`. The gate's digest confirms them |
+| `scripts/assumptions-ledger.txt` | the header's count line; one hunk of `RESTS` rows | both sides' rows (168 = 145 + 128 − 105 common) and `rests=168`; then rewritten whole by `--write-ledger` on the merged build |
+
+### 2.2 The build
+
+`main`'s gated build (FS131-ICS1's, of `960882257`, in the main tree) copied in by checksum, no `--delete`
+(`data/fs131/ifr2/copy_build.sh`): the dry run listed 124 files to copy (56 new, 68 changed: the three- and five-colour
+modules, and `ClassRatio`'s cone as `main` compiled it), and 92 files whose content already agreed and only their times
+differ. The real copy itemized the same 124; the source's SHA-256 over the 124 equal before and after the copy, and the copies
+equal to the source (`copy-dryrun.txt`, `copy-list.txt`, `copy-rsync.txt`, `copy-src-before.sha`, `copy-src-after.sha`,
+`copy-dst.sha`). Then the build under the brief's slot (`--mem 8 --cpus 5`, `MEMMAX=8G BATCH=3`):
+exit 0, "build: OK — 740 of 740 batches, 26 module(s) rebuilt, 0 module(s) with warnings, 22m50s" (`build1.log`,
+`build1-full.log`; the 26 in `build1-rebuilt.txt`): `Rigidity.ClassRatio` and its whole cone — the three density modules,
+`Collapse/Headline`, the five-colour modules that import it (`FourColourPlaces`, `SqrtFiveClass`, `SqrtTwentyThreeCbrtTwo`),
+the rest of `Collapse/` and `Rigidity/Count*`, the p-adic plane's two — and the root. `Plane/TriangularPacking`,
+`Arith/StableAboveUsable` and `CayleyThree/*` are outside the cone and kept their compiled files (the predecessor's, and
+`main`'s by the copy). Then `lake build --no-build Proofs`: exit 0, "All targets up-to-date (6538 jobs)"
+(`uptodate-postbuild.log`).
+
+### 2.3 What the merged build holds, read against both gated builds
+
+- **Stored statements** (`tools/fs131_ifr2_statements.py`, new; the merged print `data/fs131/ifr2/statements-merged.txt.gz`
+  from `data/fs131/ifr2/lean/StatementDump.lean`, 27 modules): every constant of FS131-IFR1's gated print (six modules) and
+  of FS131-ICS1's gated print (twenty-one modules) that is not internal is in the merged build with the same kind, flags,
+  stored type and, for a definition, the same value with proofs erased: **VERDICT CLEAN**, 755 SAME, 4 PUBLICIZED, 0 ADDED,
+  0 CONFLICT, and no definition's full value moved (`statements.out`). The four PUBLICIZED are the two landings' ruled
+  publicizations in `ClassRatio`, each private on the other side and public here with its stored type equal up to the
+  hygienic hash of an instance binder's name (FS131-ICS1's finding): `ratioAtMost_of_charBound` (FS131-IFR1, item 1021),
+  `exists_card_two_pow_sq`, `chromaticNumber_le_four_dyadic`, `chromaticNumber_le_four_of_small` (FS131-ICS1, items 1027,
+  1029); each is also SAME against the side where it is public. The two sides' copies of `ClassRatio` and `Collapse/Headline`
+  agree on every constant they share. `PadicPlane/Tower` and `Values` recompiled too and no gated print holds them: counted,
+  not compared. Six plants, all fired: a density type changed, a density constant dropped, an unlisted public added, a
+  publicized type changed, a five-colour type changed, FS131-ICS1's publicization undone. (The comparator was first run on a
+  synthetic union of the two gated prints: clean, its plants firing, `statements-synthetic.out`.)
+  The predecessor's own comparator against its skeleton's print (`statements-ifr1tool.out`) passes every one of its own
+  rulings (PUBLICIZED, seven MOVED, two RULED) and reports 28 failures, each another landing's: the three privates
+  FS131-ICS1 made public (MISSING, then ADDED-PUBLIC-UNLISTED), `ratioAtMost_dyadic_of_six_le` (ADDED-PUBLIC-UNLISTED), and
+  21 modules its skeleton's print did not cover (MODULE-NEW). Read as it is, that is the expected result.
+- **Every record's axioms** (`tools/fs131_ifr2_axioms_diff.py`, new; the merged print `data/fs131/ifr2/axioms-all.txt` from
+  `data/fs131/ifr2/lean/AxiomsAll.lean`, ten modules, 385 records, no `sorryAx`): every record of FS131-IFR1's print (304) and
+  of FS131-ICS1's (191) has the same axiom set in the merged build; nothing added or missing: **VERDICT CLEAN**
+  (`axioms-diff.out`); four VISIBILITY lines, the four ruled publicizations. Four plants fired: an axiom set changed, a record
+  dropped, a record added, a `sorryAx`.
+- **The audit's coverage**: FS131-IFR1's generator and FS131-ICS1's, each with `--coverage` on the merged print against the
+  merged `scripts/Axioms.lean`: `COVERAGE OK: every one of the 182 public records is filed under its class`
+  (`coverage-ifr1gen.out`, `coverage-ics1gen.out`). The generator's plant has no target when every record is filed
+  (`PLANT UNREACHABLE`), so it was run against `main`'s audit file (`git show 8dbd69096^2:scripts/Axioms.lean`): three STOPs —
+  BAD, OPEN, MISFILED (`coverage-plant.out`). Against that file, too, the generator regenerates from the merged print exactly
+  the predecessor's four blocks, byte for byte (`audit/regen.*`, `regen.out`: 85 CLEAN, 17 on E–L, 3 on the five-colour
+  theorem, 1 on Weil's bound alone; 106 records unfiled on `main`, 76 filed).
+- **The assumptions ledger**: `./scripts/assumptions.sh --write-ledger` under the slot (`write-ledger.log`): exit 0, 279
+  rows; it moved two rows of FS131-ICS1's to their sorted place and changed nothing else — the row set is identical to the
+  resolution's (`assumptions-ledger.resolved.txt`), `rests=168` as resolved.

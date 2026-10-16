@@ -1,0 +1,45 @@
+MODULE Proofs.HadwigerNelson.Rigidity.ClassRatio: 186 constants (72 internal); covered by IFR1, ICS1
+MODULE Proofs.HadwigerNelson.Collapse.Headline: 365 constants (336 internal); covered by IFR1, ICS1
+MODULE Proofs.HadwigerNelson.Collapse.Density.Defs: 64 constants (16 internal); covered by IFR1
+MODULE Proofs.HadwigerNelson.Collapse.Density.Upper: 123 constants (39 internal); covered by IFR1
+MODULE Proofs.HadwigerNelson.Collapse.Density.Headline: 26 constants (4 internal); covered by IFR1
+MODULE Proofs.HadwigerNelson.Plane.TriangularPacking: 28 constants (14 internal); covered by IFR1
+MODULE Proofs.HadwigerNelson.Arith.StableAboveUsable: 66 constants (35 internal); covered by ICS1
+MODULE Proofs.HadwigerNelson.Rigidity.FourColourPlaces: 25 constants (8 internal); covered by ICS1
+MODULE Proofs.HadwigerNelson.Instances.SqrtFiveClass: 11 constants (4 internal); covered by ICS1
+MODULE Proofs.HadwigerNelson.Instances.SqrtTwentyThreeCbrtTwo: 31 constants (6 internal); covered by ICS1
+MODULE Proofs.HadwigerNelson.Collapse.Mixing: 70 constants (33 internal); covered by ICS1
+MODULE Proofs.HadwigerNelson.Collapse.Selection: 12 constants (2 internal); covered by ICS1
+MODULE Proofs.HadwigerNelson.Collapse.Slice: 13 constants (5 internal); covered by ICS1
+MODULE Proofs.HadwigerNelson.Collapse.Thick: 27 constants (6 internal); covered by ICS1
+MODULE Proofs.HadwigerNelson.Instances.SqrtClassValues: 9 constants (0 internal); covered by ICS1
+MODULE Proofs.HadwigerNelson.Instances.SqrtFortySevenFive: 10 constants (3 internal); covered by ICS1
+MODULE Proofs.HadwigerNelson.Rigidity.CertLinkModels: 4 constants (0 internal); covered by ICS1
+MODULE Proofs.HadwigerNelson.Rigidity.ChainHeadline: 1 constants (0 internal); covered by ICS1
+MODULE Proofs.HadwigerNelson.Rigidity.CountCompletion: 50 constants (18 internal); covered by ICS1
+MODULE Proofs.HadwigerNelson.Rigidity.CountDescent: 25 constants (13 internal); covered by ICS1
+MODULE Proofs.HadwigerNelson.Rigidity.CountExtension: 17 constants (8 internal); covered by ICS1
+MODULE Proofs.HadwigerNelson.Rigidity.CountModels: 55 constants (19 internal); covered by ICS1
+MODULE Proofs.HadwigerNelson.Rigidity.CountResidue: 92 constants (59 internal); covered by ICS1
+MODULE Proofs.HadwigerNelson.Rigidity.MainClauseFive: 3 constants (0 internal); covered by ICS1
+MODULE Proofs.HadwigerNelson.Rigidity.SqrtClassFive: 26 constants (13 internal); covered by ICS1
+PUBLICIZED Proofs.HadwigerNelson.Rigidity.ClassRatio HadwigerNelson.Rigidity.chromaticNumber_le_four_dyadic (private in IFR1, ruled public by ICS1; type equal up to the hygienic hash)
+PUBLICIZED Proofs.HadwigerNelson.Rigidity.ClassRatio HadwigerNelson.Rigidity.exists_card_two_pow_sq (private in IFR1, ruled public by ICS1; type equal up to the hygienic hash)
+PUBLICIZED Proofs.HadwigerNelson.Rigidity.ClassRatio HadwigerNelson.Rigidity.chromaticNumber_le_four_of_small (private in IFR1, ruled public by ICS1; type equal up to the hygienic hash)
+PUBLICIZED Proofs.HadwigerNelson.Rigidity.ClassRatio HadwigerNelson.Rigidity.ratioAtMost_of_charBound (private in ICS1, ruled public by IFR1; type equal up to the hygienic hash)
+COUNTS SAME=755 PUBLICIZED=4 VALUE-MOVED=0 GENERATED-ADDED=0
+VERDICT CLEAN: 0 failure(s)
+PLANT density type changed: FIRED (1 failure(s); wanted 'CHANGED Proofs.HadwigerNelson.Collapse.Density.Headline HadwigerNelson.Collapse.localRatio_eq_mOne_of_thick')
+    CHANGED Proofs.HadwigerNelson.Collapse.Density.Headline HadwigerNelson.Collapse.localRatio_eq_mOne_of_thick (vs IFR1)
+PLANT density constant dropped: FIRED (1 failure(s); wanted 'MISSING Proofs.HadwigerNelson.Collapse.Density.Headline HadwigerNelson.Collapse.exists_finite_triangleFree_six_chromatic')
+    MISSING Proofs.HadwigerNelson.Collapse.Density.Headline HadwigerNelson.Collapse.exists_finite_triangleFree_six_chromatic (vs IFR1)
+PLANT unlisted public added: FIRED (1 failure(s); wanted 'ADDED Proofs.HadwigerNelson.Collapse.Density.Headline HadwigerNelson.Collapse.planted_extra')
+    ADDED Proofs.HadwigerNelson.Collapse.Density.Headline HadwigerNelson.Collapse.planted_extra (public): a merge adds no declaration
+PLANT publicized type changed: FIRED (2 failure(s); wanted 'CHANGED Proofs.HadwigerNelson.Rigidity.ClassRatio HadwigerNelson.Rigidity.chromaticNumber_le_four_dyadic (PUBLICIZED')
+    CHANGED Proofs.HadwigerNelson.Rigidity.ClassRatio HadwigerNelson.Rigidity.chromaticNumber_le_four_dyadic (PUBLICIZED by ICS1; stored type differs from IFR1's private one)
+    CHANGED Proofs.HadwigerNelson.Rigidity.ClassRatio HadwigerNelson.Rigidity.chromaticNumber_le_four_dyadic (vs ICS1)
+PLANT five-colour type changed: FIRED (1 failure(s); wanted 'CHANGED Proofs.HadwigerNelson.Instances.SqrtFiveClass HadwigerNelson.SqrtFiveClass.colorable_five_planeOver_sqrt')
+    CHANGED Proofs.HadwigerNelson.Instances.SqrtFiveClass HadwigerNelson.SqrtFiveClass.colorable_five_planeOver_sqrt (vs ICS1)
+PLANT ICS1's publicization undone: FIRED (1 failure(s); wanted 'MISSING Proofs.HadwigerNelson.Rigidity.ClassRatio HadwigerNelson.Rigidity.exists_card_two_pow_sq (vs ICS1)')
+    MISSING Proofs.HadwigerNelson.Rigidity.ClassRatio HadwigerNelson.Rigidity.exists_card_two_pow_sq (vs ICS1)
+PLANTS ALL FIRED
