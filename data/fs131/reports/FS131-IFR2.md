@@ -54,5 +54,5 @@ INVENTORY:
 
 HELD FOR THE COORDINATOR:
 - The landing: `main` after merging `fs131-kfr1` equals `2c6896990` in `Proofs/`, `Proofs.lean`, `scripts/` and the package files, provided `main` changes none of them first. The worktree's `.lake/build` is the gated build of `2c6896990` (26 modules recompiled after the copy of `main`'s); `build/gate/axioms-self-test/latest` there is the state-control red run, not the gate's (the gate's is `data/fs131/ifr2/gate/axioms-selftest.log`).
-- The branch's commits before 2026-10-16 18:38 UTC need the history-rewrite filter at landing (item 1025).
+- Item 1025's history-rewrite filter applies to this branch before it merges (it carries pre-rewrite commits through the predecessor's merge of `main`).
 - The drafts D-1 to D-10 (record § Stage 4), and the ledger question item 1050 logged (a row for the fractional collapse and the six-chromatic graph).
