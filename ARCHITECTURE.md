@@ -1106,7 +1106,7 @@ either banner, so an audit that could not elaborate cannot read as a pass.
 
 None is an `axiom`: each is a `Prop` argument visible in the statement of every theorem that takes it, so `#print axioms`
 shows the standard three and the axiom audit counts the theorem clean. `scripts/assumptions-ledger.txt` lists every
-(hypothesis, statement) pair — 102 pairs, 52 statements — and the gate compares it with the library exactly. The gate fails
+(hypothesis, statement) pair — 108 pairs, 55 statements — and the gate compares it with the library exactly. The gate fails
 on a hypothesis that is closed (no free variable), never concluded, concluded only from another assumption, or called one
 in its docstring, and is not in the list. What it cannot find by itself is a hand result written out over a theorem's own
 variables under a docstring that does not say so; the landing that brings one declares it — and retires it, on its own
