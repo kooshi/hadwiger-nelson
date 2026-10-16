@@ -115,3 +115,24 @@ are priced at the plan's numbers or less. No message needed under item 1000's ru
   `liftHeight_add_of_relMap_eq_zero`. Private: `wind_eq_of_surjective`, `minRise_eq_parts`, `height_eq_of_isTight`, `term_le`.
 - Upstream definitions are read by `change` (never `simp [minRise]`, `simp [relMap]`, `simp [height]`), so no `eq_n` of
   `ThreeColour`'s definitions is minted here; the gate's dump and `dupnames.sh` check it.
+
+## Stage 4 — SAVED: `CayleyThree/Fibre`, every leaf proved
+
+All twenty-six leaves of `Fibre` are proved (iteration, no error and no warning: `data/fs131/ict1/logs/Fibre.out`). 1,052 lines
+against the skeleton's 226: **about 830 lines of proof against the plan's 1,020**. Routes after stage 3, where they differ:
+- `exists_mem_pi_Icc_of_forall_int`: the held private proof with `lo`, `hi` (copied, as the plan says; the private original is
+  untouched). A private `exists_mem_box_of_le_vertex` runs the held `Winding.exists_box_point` on a general box from a vertex
+  bound at every relation; `exists_mem_fibre_gt` feeds it the box with `lo_j = 1/3 + 1/(3κ)` and pays the raised face from the
+  slack bound (`−minRise(−r) = Σ_i (2 r_i if r_i ≥ 0, else r_i)`, private `neg_minRise_neg`).
+- `Winding.flip`, `mem_fibre_flip_iff`, `isTight_flip_iff`, `exists_mem_fibre_lt`: one identity, `minRise (−r) = minRise r − 3 Σ r`
+  (private `minRise_neg`).
+- `exists_rat_mem_fibre_relint`: the average of `2m + 1` fibre points indexed by `Option (Fin m × Bool)` (`Convex.sum_mem`,
+  `Finset.sum_lt_sum`), then a private `exists_rat_near_of_box` (the face trick of `exists_torsion_mem_bandSet`, stated once for a
+  rational system with a real solution in `[1/3, 2/3]^ι`) on the relation generators.
+- `exists_affine_of_forall_three_nsmul`: every fibre point's character is a band character, so `3x_j ∈ ℤ`; a direction moved by
+  no tight relation has fibre points with `x_j = 2/3` and `y_j = 1/3`, whose midpoint has `3/2 ∈ ℤ` — so every direction is
+  tight and every step constant; `c (a + relMap r) = c a + Σ_j r_j d_j` on a subgroup of `ℤ^m` holding every `Pi.single j 1`,
+  hence on all of it; `φ = c − c 0`.
+- `isTight_one_two`: `decide` after `heightWinding_apply`.
+Private additions: `exists_pos_le_of_finite`, `exists_rat_near_of_box`, `exists_mem_box_of_le_vertex`, `neg_minRise_neg`,
+`minRise_neg`. No public constant beyond stage 3's seven.

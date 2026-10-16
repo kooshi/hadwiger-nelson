@@ -575,41 +575,359 @@ theorem exists_mem_pi_Icc_of_forall_int {n : ℕ} (lo hi : Fin m → ℝ) (hlh :
     (h : ∀ N : Fin n → ℤ, ∃ b : Fin m → Bool,
       0 ≤ ∑ i, (N i : ℝ) * (∑ j, g i j * (if b j then hi j else lo j) - w i)) :
     ∃ x : Fin m → ℝ, (∀ j, x j ∈ Set.Icc (lo j) (hi j)) ∧ ∀ i, ∑ j, g i j * x j = w i := by
-  sorry
+  -- the held `ThreeColourCharacter.exists_mem_box_of_forall_int`'s proof, with `lo`, `hi` in place of `1/3`, `2/3`
+  classical
+  by_contra hno
+  -- the matrix as a linear map, and the box
+  let L : (Fin m → ℝ) →ₗ[ℝ] (Fin n → ℝ) := Matrix.mulVecLin (Matrix.of g)
+  have hL : ∀ x i, L x i = ∑ j, g i j * x j := fun x i => by
+    simp [L, Matrix.mulVec, dotProduct]
+  let B : Set (Fin m → ℝ) := Set.univ.pi fun j => Set.Icc (lo j) (hi j)
+  have hBc : IsCompact B := isCompact_univ_pi fun _ => isCompact_Icc
+  have hBconv : Convex ℝ B := convex_pi fun _ _ => convex_Icc _ _
+  have hw : w ∉ L '' B := by
+    rintro ⟨x, hx, rfl⟩
+    exact hno ⟨x, fun j => hx j (Set.mem_univ j), fun i => (hL x i).symm⟩
+  -- a functional separating the image of the box from `w`, in coordinates
+  obtain ⟨f, u, hfu, huw⟩ := geometric_hahn_banach_closed_point (hBconv.linear_image L)
+    (hBc.image L.continuous_of_finiteDimensional).isClosed hw
+  let c : Fin n → ℝ := fun i => f (fun k => if i = k then 1 else 0)
+  have hf : ∀ y : Fin n → ℝ, f y = ∑ i, y i * c i := fun y => by
+    simpa [smul_eq_mul] using LinearMap.pi_apply_eq_sum_univ (f : (Fin n → ℝ) →ₗ[ℝ] ℝ) y
+  -- it is negative at every vertex
+  let v : (Fin m → Bool) → Fin m → ℝ := fun b j => if b j then hi j else lo j
+  have hv : ∀ b, v b ∈ B := fun b j _ => by
+    show (if b j then hi j else lo j) ∈ Set.Icc (lo j) (hi j)
+    split_ifs
+    · exact ⟨hlh j, le_rfl⟩
+    · exact ⟨le_rfl, hlh j⟩
+  let d : (Fin m → Bool) → Fin n → ℝ := fun b i => ∑ j, g i j * v b j - w i
+  have hneg : ∀ b, ∑ i, d b i * c i < 0 := fun b => by
+    have h1 : f (L (v b)) < f w := (hfu _ ⟨v b, hv b, rfl⟩).trans huw
+    rw [hf, hf] at h1
+    have h2 : ∑ i, d b i * c i = ∑ i, L (v b) i * c i - ∑ i, w i * c i := by
+      rw [← Finset.sum_sub_distrib]
+      exact Finset.sum_congr rfl fun i _ => by rw [hL]; ring
+    linarith
+  -- so some integer combination is negative at every vertex
+  obtain ⟨N, hN⟩ := exists_int_vector_of_forall_neg
+    (fun b : Fin m → Bool => ∑ i, d b i • (LinearMap.proj i : (Fin n → ℝ) →ₗ[ℝ] ℝ)) (c := c)
+    (fun b => by simpa [LinearMap.sum_apply] using hneg b)
+  obtain ⟨b, hb⟩ := h N
+  have hNb := hN b
+  simp only [LinearMap.sum_apply, LinearMap.smul_apply, LinearMap.proj_apply, smul_eq_mul] at hNb
+  have h3 : ∑ i, (N i : ℝ) * (∑ j, g i j * (if b j then hi j else lo j) - w i) = ∑ i, d b i * (N i : ℝ) :=
+    Finset.sum_congr rfl fun i _ => mul_comm _ _
+  linarith
+
+/-- **A box point for a general box** (the held `Winding.exists_box_point`, with the box `∏_j [lo_j, hi_j]`): if the winding
+is at most the relation form's maximum over the box at every relation, a point of the box realizes it. -/
+private theorem exists_mem_box_of_le_vertex {s : Fin m → A} (W : Winding s) (lo hi : Fin m → ℝ)
+    (hlh : ∀ j, lo j ≤ hi j)
+    (h : ∀ r : (relMap s).ker, ((W.toHom r : ℤ) : ℝ) ≤
+      ∑ j, (((r : Fin m → ℤ) j : ℤ) : ℝ) * (if 0 ≤ (r : Fin m → ℤ) j then hi j else lo j)) :
+    ∃ x : Fin m → ℝ, (∀ j, x j ∈ Set.Icc (lo j) (hi j)) ∧
+      ∀ r : (relMap s).ker, ∑ j, (((r : Fin m → ℤ) j : ℤ) : ℝ) * x j = ((W.toHom r : ℤ) : ℝ) := by
+  -- finitely many generators `g i` of the relation lattice, and every relation an integer combination of them
+  obtain ⟨n, g, hg⟩ := Submodule.fg_iff_exists_fin_generating_family.mp
+    (IsNoetherian.noetherian (AddSubgroup.toIntSubmodule (relMap s).ker))
+  have hgK : ∀ i, g i ∈ (relMap s).ker := fun i =>
+    show g i ∈ AddSubgroup.toIntSubmodule (relMap s).ker from hg ▸ Submodule.subset_span ⟨i, rfl⟩
+  let gK : Fin n → (relMap s).ker := fun i => ⟨g i, hgK i⟩
+  have hcoe : ∀ (N : Fin n → ℤ) (j : Fin m),
+      ((∑ i, N i • gK i : (relMap s).ker) : Fin m → ℤ) j = ∑ i, N i * g i j := fun N j => by
+    simp [gK]
+  have hrep : ∀ r : (relMap s).ker, ∃ N : Fin n → ℤ, r = ∑ i, N i • gK i := fun r => by
+    have hr : (r : Fin m → ℤ) ∈ Submodule.span ℤ (Set.range g) := hg ▸ r.2
+    obtain ⟨N, hN⟩ := (Submodule.mem_span_range_iff_exists_fun ℤ).mp hr
+    refine ⟨N, Subtype.ext (funext fun j => ?_)⟩
+    rw [hcoe, ← hN]
+    simp
+  -- both sides of the equation are additive in the relation
+  have hkey : ∀ (N : Fin n → ℤ) (x : Fin m → ℝ),
+      ∑ j, ((((∑ i, N i • gK i : (relMap s).ker) : Fin m → ℤ) j : ℤ) : ℝ) * x j
+          - ((W.toHom (∑ i, N i • gK i) : ℤ) : ℝ)
+        = ∑ i, (N i : ℝ) * (∑ j, ((g i j : ℤ) : ℝ) * x j - ((W.toHom (gK i) : ℤ) : ℝ)) := fun N x => by
+    simp only [hcoe, map_sum, map_zsmul, smul_eq_mul, Int.cast_sum, Int.cast_mul, mul_sub, Finset.sum_sub_distrib,
+      Finset.sum_mul, Finset.mul_sum]
+    rw [Finset.sum_comm]
+    congr 1
+    exact Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun j _ => by ring
+  obtain ⟨x, hxB, hx⟩ := exists_mem_pi_Icc_of_forall_int lo hi hlh (fun i j => ((g i j : ℤ) : ℝ))
+    (fun i => ((W.toHom (gK i) : ℤ) : ℝ)) fun N => by
+      refine ⟨fun j => decide (0 ≤ ((∑ i, N i • gK i : (relMap s).ker) : Fin m → ℤ) j), ?_⟩
+      have h1 := h (∑ i, N i • gK i)
+      have h2 := hkey N fun j => if 0 ≤ ((∑ i, N i • gK i : (relMap s).ker) : Fin m → ℤ) j then hi j else lo j
+      simp only [decide_eq_true_eq]
+      linarith
+  refine ⟨x, hxB, fun r => ?_⟩
+  obtain ⟨N, rfl⟩ := hrep r
+  have h2 := hkey N x
+  have h0 : ∑ i, (N i : ℝ) * (∑ j, ((g i j : ℤ) : ℝ) * x j - ((W.toHom (gK i) : ℤ) : ℝ)) = 0 :=
+    Finset.sum_eq_zero fun i _ => by rw [hx i, sub_self, mul_zero]
+  linarith
+
+/-- `−minRise (−r)` is the box maximum of the relation form, times three, at the vertex `2/3` where `r ≥ 0`. -/
+private theorem neg_minRise_neg (r : Fin m → ℤ) :
+    -minRise (-r) = ∑ i, (if 0 ≤ r i then 2 * r i else r i) := by
+  change -(∑ i, min ((-r) i) (2 * (-r) i)) = _
+  rw [← Finset.sum_neg_distrib]
+  refine Finset.sum_congr rfl fun i _ => ?_
+  simp only [Pi.neg_apply]; split_ifs <;> omega
+
+/-- The least rise of `−r`. -/
+private theorem minRise_neg (r : Fin m → ℤ) : minRise (-r) = minRise r - 3 * ∑ i, r i := by
+  change ∑ i, min ((-r) i) (2 * (-r) i) = ∑ i, min (r i) (2 * r i) - 3 * ∑ i, r i
+  rw [Finset.mul_sum, ← Finset.sum_sub_distrib]
+  refine Finset.sum_congr rfl fun i _ => ?_
+  simp only [Pi.neg_apply]; omega
 
 /-- **Farkas, one side**: with no tight relation moving `j` forward, some fibre point has `x_j > 1/3`. -/
 theorem exists_mem_fibre_gt {s : Fin m → A} (W : Winding s) (j : Fin m)
     (hj : ∀ σ : (relMap s).ker, 0 < (σ : Fin m → ℤ) j → ¬ IsTight W σ) : ∃ x ∈ fibre W, 1 / 3 < x j := by
-  sorry
+  classical
+  obtain ⟨κ, hκ, hκσ⟩ := exists_slack_bound W j hj
+  have hκ' : (1 : ℝ) ≤ κ := by exact_mod_cast hκ
+  set ε : ℝ := 1 / (3 * κ) with hεdef
+  have hε : 0 < ε := by positivity
+  have hε3 : ε ≤ 1 / 3 := by
+    rw [hεdef]; exact one_div_le_one_div_of_le (by norm_num) (by linarith)
+  let lo : Fin m → ℝ := fun i => if i = j then 1 / 3 + ε else 1 / 3
+  -- the vertex bound, with the slack paying for the raised face at `j`
+  have hvert : ∀ r : (relMap s).ker, ((W.toHom r : ℤ) : ℝ) ≤
+      ∑ i, (((r : Fin m → ℤ) i : ℤ) : ℝ) * (if 0 ≤ (r : Fin m → ℤ) i then 2 / 3 else lo i) := by
+    intro r
+    have hV := neg_minRise_neg (r : Fin m → ℤ)
+    have hneg := W.minRise_le (-r)
+    rw [map_neg, AddSubgroup.coe_neg] at hneg
+    have hsplit : ∀ i, (((r : Fin m → ℤ) i : ℤ) : ℝ) * (if 0 ≤ (r : Fin m → ℤ) i then 2 / 3 else lo i) =
+        ((if 0 ≤ (r : Fin m → ℤ) i then 2 * (r : Fin m → ℤ) i else (r : Fin m → ℤ) i : ℤ) : ℝ) / 3 +
+          (if i = j then (if 0 ≤ (r : Fin m → ℤ) i then 0 else (((r : Fin m → ℤ) i : ℤ) : ℝ) * ε) else 0) := by
+      intro i
+      simp only [lo]
+      split_ifs <;> push_cast <;> ring
+    rw [Finset.sum_congr rfl fun i _ => hsplit i, Finset.sum_add_distrib, ← Finset.sum_div, ← Int.cast_sum, ← hV,
+      Finset.sum_ite_eq' Finset.univ j, if_pos (Finset.mem_univ j)]
+    by_cases hrj : 0 ≤ (r : Fin m → ℤ) j
+    · rw [if_pos hrj]
+      have : (3 : ℝ) * ((W.toHom r : ℤ) : ℝ) ≤ ((-minRise (-(r : Fin m → ℤ)) : ℤ) : ℝ) := by
+        exact_mod_cast (by linarith : 3 * W.toHom r ≤ -minRise (-(r : Fin m → ℤ)))
+      linarith
+    · rw [if_neg hrj]
+      have h1 := hκσ (-r) (by rw [AddSubgroup.coe_neg, Pi.neg_apply]; omega)
+      rw [AddSubgroup.coe_neg, Pi.neg_apply, map_neg] at h1
+      -- `−r_j ≤ κ (3 W(−r) − minRise (−r))`, i.e. `3 W r ≤ −minRise (−r) + r_j / κ`
+      have h2 : ((-(r : Fin m → ℤ) j : ℤ) : ℝ) ≤ (κ : ℝ) * ((3 * -W.toHom r - minRise (-(r : Fin m → ℤ)) : ℤ) : ℝ) := by
+        exact_mod_cast h1
+      push_cast at h2 ⊢
+      have hκpos : (0 : ℝ) < κ := by linarith
+      have h3 : ((r : Fin m → ℤ) j : ℝ) * ε = ((r : Fin m → ℤ) j : ℝ) / (3 * κ) := by rw [hεdef]; ring
+      rw [h3]
+      rw [div_add_div _ _ (by norm_num : (3 : ℝ) ≠ 0) (by positivity), le_div_iff₀ (by positivity)]
+      nlinarith
+  obtain ⟨x, hxb, hxe⟩ := exists_mem_box_of_le_vertex W lo (fun _ => 2 / 3)
+    (fun i => by simp only [lo]; split_ifs <;> linarith) hvert
+  refine ⟨x, ⟨fun i => ?_, hxe⟩, ?_⟩
+  · have h := hxb i
+    simp only [lo] at h
+    split_ifs at h
+    · exact ⟨by linarith [h.1], h.2⟩
+    · exact h
+  · have h := hxb j
+    simp only [lo, if_pos rfl] at h
+    linarith [h.1]
 
 /-- **The reversed winding** `r ↦ Σ_j r_j − W r`: the winding of the colouring `−c`. -/
 def _root_.HadwigerNelson.ThreeColour.Winding.flip {s : Fin m → A} (W : Winding s) : Winding s where
   toHom :=
     { toFun := fun r => ∑ j, (r : Fin m → ℤ) j - W.toHom r
-      map_zero' := by sorry
-      map_add' := by sorry }
-  minRise_le := by sorry
+      map_zero' := by simp
+      map_add' := fun r r' => by
+        simp only [AddSubgroup.coe_add, Pi.add_apply, Finset.sum_add_distrib, map_add]
+        ring }
+  minRise_le := fun r => by
+    have h := W.minRise_le (-r)
+    rw [map_neg, AddSubgroup.coe_neg, minRise_neg] at h
+    change minRise (r : Fin m → ℤ) ≤ 3 * (∑ j, (r : Fin m → ℤ) j - W.toHom r)
+    linarith
 
 theorem mem_fibre_flip_iff {s : Fin m → A} (W : Winding s) (x : Fin m → ℝ) :
     x ∈ fibre W.flip ↔ (fun j => 1 - x j) ∈ fibre W := by
-  sorry
+  simp only [fibre, Set.mem_setOf_eq, Set.mem_Icc]
+  refine and_congr ⟨fun h j => ⟨by linarith [(h j).2], by linarith [(h j).1]⟩,
+    fun h j => ⟨by linarith [(h j).2], by linarith [(h j).1]⟩⟩ (forall_congr' fun r => ?_)
+  have hflip : ((W.flip.toHom r : ℤ) : ℝ) = ∑ j, (((r : Fin m → ℤ) j : ℤ) : ℝ) - ((W.toHom r : ℤ) : ℝ) := by
+    change ((∑ j, (r : Fin m → ℤ) j - W.toHom r : ℤ) : ℝ) = _
+    push_cast; ring
+  have e : ∑ j, (((r : Fin m → ℤ) j : ℤ) : ℝ) * (1 - x j) =
+      ∑ j, (((r : Fin m → ℤ) j : ℤ) : ℝ) - ∑ j, (((r : Fin m → ℤ) j : ℤ) : ℝ) * x j := by
+    rw [← Finset.sum_sub_distrib]; exact Finset.sum_congr rfl fun j _ => by ring
+  rw [hflip, e]
+  constructor <;> intro h <;> linarith
 
 theorem isTight_flip_iff {s : Fin m → A} (W : Winding s) (σ : (relMap s).ker) : IsTight W.flip σ ↔ IsTight W (-σ) := by
-  sorry
+  unfold IsTight
+  rw [map_neg, AddSubgroup.coe_neg, minRise_neg]
+  change minRise (σ : Fin m → ℤ) = 3 * (∑ j, (σ : Fin m → ℤ) j - W.toHom σ) ↔ _
+  constructor <;> intro h <;> linarith
 
 /-- **Farkas, the other side**: with no tight relation moving `j` back, some fibre point has `x_j < 2/3`. -/
 theorem exists_mem_fibre_lt {s : Fin m → A} (W : Winding s) (j : Fin m)
     (hj : ∀ σ : (relMap s).ker, (σ : Fin m → ℤ) j < 0 → ¬ IsTight W σ) : ∃ x ∈ fibre W, x j < 2 / 3 := by
-  sorry
+  obtain ⟨y, hy, hyj⟩ := exists_mem_fibre_gt W.flip j fun σ hσ ht =>
+    hj (-σ) (by rw [AddSubgroup.coe_neg, Pi.neg_apply]; omega) ((isTight_flip_iff W σ).mp ht)
+  exact ⟨fun i => 1 - y i, (mem_fibre_flip_iff W y).mp hy, by simp only; linarith⟩
 
 /-! ## §4 The rational slope strict off the tight directions -/
+
+/-- Finitely many positive reals have a positive common lower bound. -/
+private theorem exists_pos_le_of_finite {ι : Type*} [Finite ι] (δ : ι → ℝ) (h : ∀ i, 0 < δ i) :
+    ∃ ε > 0, ∀ i, ε ≤ δ i := by
+  rcases isEmpty_or_nonempty ι with hι | hι
+  · exact ⟨1, one_pos, fun i => isEmptyElim i⟩
+  · obtain ⟨i₀, hi₀⟩ := Finite.exists_min δ
+    exact ⟨δ i₀, h i₀, hi₀⟩
+
+/-- **A rational solution in the box, strict where the real one is**: a rational system with a real solution in
+`[1/3, 2/3]^ι` has a rational solution in the box, strictly inside it at every coordinate where the real one is (the faces
+the real solution lies on held fixed, then `exists_rat_solution_near`). -/
+private theorem exists_rat_near_of_box {ι κ : Type*} [Fintype ι] [Finite κ] (G : κ → ι → ℚ) (b : κ → ℚ)
+    {x : ι → ℝ} (hx : ∀ k, ∑ i, ((G k i : ℚ) : ℝ) * x i = ((b k : ℚ) : ℝ))
+    (hbox : ∀ i, x i ∈ Set.Icc (1 / 3 : ℝ) (2 / 3)) :
+    ∃ q : ι → ℚ, (∀ k, ∑ i, G k i * q i = b k) ∧ (∀ i, ((q i : ℚ) : ℝ) ∈ Set.Icc (1 / 3 : ℝ) (2 / 3)) ∧
+      ∀ i, 1 / 3 < x i → x i < 2 / 3 → 1 / 3 < ((q i : ℚ) : ℝ) ∧ ((q i : ℚ) : ℝ) < 2 / 3 := by
+  classical
+  let face : ι → Prop := fun i => x i = 1 / 3 ∨ x i = 2 / 3
+  let vq : {i // face i} → ℚ := fun i => if x i.1 = 1 / 3 then 1 / 3 else 2 / 3
+  have hvq : ∀ i : {i // face i}, ((vq i : ℚ) : ℝ) = x i.1 := by
+    rintro ⟨i, hi | hi⟩
+    · simp [vq, hi]
+    · have : x i ≠ 1 / 3 := by rw [hi]; norm_num
+      simp only [vq]
+      rw [if_neg this, hi]
+      norm_num
+  let Gs : κ ⊕ {i // face i} → ι → ℚ := Sum.elim G (fun i' i => if i = i'.1 then 1 else 0)
+  let bs : κ ⊕ {i // face i} → ℚ := Sum.elim b vq
+  have hsys : ∀ k, ∑ i, ((Gs k i : ℚ) : ℝ) * x i = ((bs k : ℚ) : ℝ) := by
+    rintro (k | i')
+    · exact hx k
+    · simp only [Gs, bs, Sum.elim_inr]
+      rw [Finset.sum_eq_single i'.1 (fun i _ hi => by rw [if_neg hi, Rat.cast_zero, zero_mul]) (by simp),
+        if_pos rfl, Rat.cast_one, one_mul, hvq]
+  -- the margin off the faces
+  obtain ⟨ε, hε, hεx⟩ : ∃ ε : ℝ, 0 < ε ∧ ∀ i, ¬ face i → ε ≤ x i - 1 / 3 ∧ ε ≤ 2 / 3 - x i := by
+    let δ : ι → ℝ := fun i => if face i then 1 else min (x i - 1 / 3) (2 / 3 - x i)
+    have hδ : ∀ i, 0 < δ i := fun i => by
+      by_cases hi : face i
+      · simp only [δ, if_pos hi]; exact one_pos
+      · have h2 : x i ≠ 1 / 3 := fun he => hi (Or.inl he)
+        have h3 : x i ≠ 2 / 3 := fun he => hi (Or.inr he)
+        simp only [δ, if_neg hi]
+        exact lt_min (by linarith [lt_of_le_of_ne (hbox i).1 (Ne.symm h2)])
+          (by linarith [lt_of_le_of_ne (hbox i).2 h3])
+    obtain ⟨ε, hε, hεδ⟩ := exists_pos_le_of_finite δ hδ
+    refine ⟨ε, hε, fun i hi => ?_⟩
+    have := hεδ i
+    simp only [δ, if_neg hi] at this
+    exact ⟨this.trans (min_le_left _ _), this.trans (min_le_right _ _)⟩
+  obtain ⟨q, hq, hqx⟩ := exists_rat_solution_near Gs bs hsys hε
+  have hqface : ∀ i, face i → ((q i : ℚ) : ℝ) = x i := fun i hi => by
+    have h := hq (Sum.inr ⟨i, hi⟩)
+    simp only [Gs, bs, Sum.elim_inr, ite_mul, one_mul, zero_mul, Finset.sum_ite_eq', Finset.mem_univ,
+      if_true] at h
+    rw [h, hvq ⟨i, hi⟩]
+  refine ⟨q, fun k => hq (Sum.inl k), fun i => ?_, fun i h1 h2 => ?_⟩
+  · by_cases hi : face i
+    · rw [hqface i hi]; exact hbox i
+    · obtain ⟨h1, h2⟩ := hεx i hi
+      have h3 := abs_lt.mp (hqx i)
+      exact ⟨by linarith [h3.1], by linarith [h3.2]⟩
+  · have hi : ¬ face i := by rintro (h | h) <;> linarith
+    obtain ⟨h3, h4⟩ := hεx i hi
+    have h5 := abs_lt.mp (hqx i)
+    exact ⟨by linarith [h5.1], by linarith [h5.2]⟩
 
 /-- **A rational fibre point in the relative interior** (H-iii's `a*`, as `a* = 3 − 6x`): strict inside the box at every
 direction no tight relation moves. Route: average the points of §3 (one per side and direction), then
 `exists_rat_solution_near` on the affine hull with the tight coordinates held. -/
 theorem exists_rat_mem_fibre_relint {s : Fin m → A} (W : Winding s) :
     ∃ x : Fin m → ℚ, (fun j => (x j : ℝ)) ∈ fibre W ∧ ∀ j ∉ tightSet W, 1 / 3 < x j ∧ x j < 2 / 3 := by
-  sorry
+  classical
+  -- a real fibre point strict off the tight directions: the average of one point per side and direction
+  obtain ⟨x₀, hx₀⟩ := fibre_nonempty W
+  have hgt : ∀ j, j ∉ tightSet W → ∃ x ∈ fibre W, 1 / 3 < x j := fun j hj =>
+    exists_mem_fibre_gt W j fun σ hσ ht => hj ⟨σ, hσ.ne', ht⟩
+  have hlt : ∀ j, j ∉ tightSet W → ∃ x ∈ fibre W, x j < 2 / 3 := fun j hj =>
+    exists_mem_fibre_lt W j fun σ hσ ht => hj ⟨σ, hσ.ne, ht⟩
+  choose yp hyp hypj using hgt
+  choose ym hym hymj using hlt
+  let pt : Option (Fin m × Bool) → Fin m → ℝ := fun o =>
+    o.elim x₀ fun p => if h : p.1 ∈ tightSet W then x₀ else if p.2 then yp p.1 h else ym p.1 h
+  have hpt : ∀ o, pt o ∈ fibre W := by
+    rintro (_ | ⟨j, b⟩)
+    · exact hx₀
+    · show (if h : j ∈ tightSet W then x₀ else if b then yp j h else ym j h) ∈ fibre W
+      split_ifs with h hb
+      · exact hx₀
+      · exact hyp j h
+      · exact hym j h
+  set N : ℕ := Fintype.card (Option (Fin m × Bool)) with hNdef
+  have hN : (0 : ℝ) < N := by exact_mod_cast Fintype.card_pos
+  let xb : Fin m → ℝ := ∑ o, (1 / (N : ℝ)) • pt o
+  have hxb : xb ∈ fibre W := (convex_fibre W).sum_mem (fun _ _ => by positivity)
+    (by rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul, ← hNdef]; field_simp) fun o _ => hpt o
+  have hxbj : ∀ j, xb j = (∑ o, pt o j) / N := fun j => by
+    simp only [xb, Finset.sum_apply, Pi.smul_apply, smul_eq_mul, Finset.sum_div]
+    exact Finset.sum_congr rfl fun o _ => by ring
+  have hstrict : ∀ j, j ∉ tightSet W → 1 / 3 < xb j ∧ xb j < 2 / 3 := by
+    intro j hj
+    have hbox : ∀ o, pt o j ∈ Set.Icc (1 / 3 : ℝ) (2 / 3) := fun o => (hpt o).1 j
+    have hp : 1 / 3 < pt (some (j, true)) j := by
+      show 1 / 3 < (if h : j ∈ tightSet W then x₀ else if true then yp j h else ym j h) j
+      rw [dif_neg hj, if_pos rfl]
+      exact hypj j hj
+    have hm : pt (some (j, false)) j < 2 / 3 := by
+      show (if h : j ∈ tightSet W then x₀ else if false then yp j h else ym j h) j < 2 / 3
+      rw [dif_neg hj, if_neg (by decide)]
+      exact hymj j hj
+    have hlow : ∑ _o : Option (Fin m × Bool), (1 / 3 : ℝ) < ∑ o, pt o j :=
+      Finset.sum_lt_sum (fun o _ => (hbox o).1) ⟨some (j, true), Finset.mem_univ _, hp⟩
+    have hhigh : ∑ o, pt o j < ∑ _o : Option (Fin m × Bool), (2 / 3 : ℝ) :=
+      Finset.sum_lt_sum (fun o _ => (hbox o).2) ⟨some (j, false), Finset.mem_univ _, hm⟩
+    rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul, ← hNdef] at hlow hhigh
+    rw [hxbj, lt_div_iff₀ hN, div_lt_iff₀ hN]
+    constructor <;> linarith
+  -- rational, through the generators of the relations
+  obtain ⟨n, g, hg⟩ := Submodule.fg_iff_exists_fin_generating_family.mp
+    (IsNoetherian.noetherian (AddSubgroup.toIntSubmodule (relMap s).ker))
+  have hgK : ∀ i, g i ∈ (relMap s).ker := fun i =>
+    show g i ∈ AddSubgroup.toIntSubmodule (relMap s).ker from hg ▸ Submodule.subset_span ⟨i, rfl⟩
+  let gK : Fin n → (relMap s).ker := fun i => ⟨g i, hgK i⟩
+  obtain ⟨q, hq, hqbox, hqstrict⟩ := exists_rat_near_of_box (fun i j => ((g i j : ℤ) : ℚ))
+    (fun i => ((W.toHom (gK i) : ℤ) : ℚ)) (x := xb) (fun i => by
+      have := hxb.2 (gK i)
+      push_cast
+      exact this) hxb.1
+  refine ⟨q, ⟨hqbox, fun r => ?_⟩, fun j hj => ?_⟩
+  · have hr : (r : Fin m → ℤ) ∈ Submodule.span ℤ (Set.range g) := hg ▸ r.2
+    obtain ⟨Nc, hNc⟩ := (Submodule.mem_span_range_iff_exists_fun ℤ).mp hr
+    have hrK : r = ∑ i, Nc i • gK i := Subtype.ext (by rw [← hNc]; simp [gK])
+    have hqi : ∀ i, ∑ j, ((g i j : ℤ) : ℝ) * ((q j : ℚ) : ℝ) = ((W.toHom (gK i) : ℤ) : ℝ) := fun i => by
+      have := hq i
+      exact_mod_cast this
+    have hcoe : ∀ j, ((∑ i, Nc i • gK i : (relMap s).ker) : Fin m → ℤ) j = ∑ i, Nc i * g i j := fun j => by
+      simp [gK]
+    rw [hrK, map_sum]
+    simp only [map_zsmul, smul_eq_mul, Int.cast_sum, Int.cast_mul, hcoe, Finset.sum_mul]
+    rw [Finset.sum_comm]
+    refine Finset.sum_congr rfl fun i _ => ?_
+    rw [← hqi i, Finset.mul_sum]
+    exact Finset.sum_congr rfl fun j _ => by ring
+  · have h := hqstrict j (hstrict j hj).1 (hstrict j hj).2
+    have e1 : (1 / 3 : ℝ) = ((1 / 3 : ℚ) : ℝ) := by push_cast; ring
+    have e2 : (2 / 3 : ℝ) = ((2 / 3 : ℚ) : ℝ) := by push_cast; ring
+    rw [e1, e2] at h
+    exact ⟨Rat.cast_lt.mp h.1, Rat.cast_lt.mp h.2⟩
 
 /-! ## §5 Rigidity: band characters of order 3 make every colouring affine -/
 
@@ -618,7 +936,104 @@ generating family is affine, `c = c 0 + φ` with `φ : A → ZMod 3` additive. -
 theorem exists_affine_of_forall_three_nsmul {s : Fin m → A} (hgen : Function.Surjective (relMap s)) {c : A → ZMod 3}
     (hc : ProperAlong s c) (h3 : ∀ θ ∈ bandSet (Set.range s) (band 3), 3 • θ = 0) :
     ∃ φ : A →+ ZMod 3, ∀ x, c x = c 0 + φ x := by
-  sorry
+  classical
+  set W := heightWinding hc with hW
+  -- every fibre point has its coordinates in `(1/3) ℤ`: its character is a band character, of order 3
+  have hthird : ∀ x ∈ fibre W, ∀ j, ∃ n : ℤ, 3 * x j = n := by
+    intro x hx j
+    obtain ⟨θ, hθ⟩ := exists_character_of_box_point s (x := x) fun r => ⟨W.toHom r, hx.2 r⟩
+    have hθb : θ ∈ bandSet (Set.range s) (band 3) := by
+      rintro _ ⟨i, rfl⟩
+      rw [hθ i]
+      exact ⟨x i, by rw [Nat.cast_ofNat]; exact ⟨(hx.1 i).1, by linarith [(hx.1 i).2]⟩, rfl⟩
+    have h := DFunLike.congr_fun (h3 θ hθb) (s j)
+    rw [AddMonoidHom.nsmul_apply, hθ j, AddMonoidHom.zero_apply, ← AddCircle.coe_nsmul,
+      AddCircle.coe_eq_zero_iff] at h
+    obtain ⟨n, hn⟩ := h
+    refine ⟨n, ?_⟩
+    rw [zsmul_eq_mul, mul_one, nsmul_eq_mul] at hn
+    rw [hn]
+    push_cast
+    ring
+  -- so every direction is moved by a tight relation: otherwise two fibre points differ there by `1/3`, and their
+  -- midpoint has a coordinate `1/2`
+  have htight : ∀ j, j ∈ tightSet W := by
+    intro j
+    by_contra hj
+    obtain ⟨x, hx, hxj⟩ := exists_mem_fibre_gt W j fun σ hσ ht => hj ⟨σ, hσ.ne', ht⟩
+    obtain ⟨y, hy, hyj⟩ := exists_mem_fibre_lt W j fun σ hσ ht => hj ⟨σ, hσ.ne, ht⟩
+    have hmid : (1 / 2 : ℝ) • x + (1 / 2 : ℝ) • y ∈ fibre W :=
+      convex_fibre W hx hy (by norm_num) (by norm_num) (by norm_num)
+    obtain ⟨n, hn⟩ := hthird x hx j
+    obtain ⟨n', hn'⟩ := hthird y hy j
+    obtain ⟨k, hk⟩ := hthird _ hmid j
+    simp only [Pi.add_apply, Pi.smul_apply, smul_eq_mul] at hk
+    have hx2 := (hx.1 j).2
+    have hy1 := (hy.1 j).1
+    have a1 : (1 : ℝ) < n := by rw [← hn]; linarith
+    have a2 : (n : ℝ) ≤ 2 := by rw [← hn]; linarith
+    have a3 : (1 : ℝ) ≤ n' := by rw [← hn']; linarith
+    have a4 : (n' : ℝ) < 2 := by rw [← hn']; linarith
+    have a5 : (2 * k : ℝ) = n + n' := by rw [← hk, ← hn, ← hn']; ring
+    have b1 : 1 < n := by exact_mod_cast a1
+    have b2 : n ≤ 2 := by exact_mod_cast a2
+    have b3 : 1 ≤ n' := by exact_mod_cast a3
+    have b4 : n' < 2 := by exact_mod_cast a4
+    have b5 : 2 * k = n + n' := by exact_mod_cast a5
+    omega
+  -- every step is constant along its direction
+  have hconst : ∀ j a, step s c a j = step s c 0 j := by
+    intro j a
+    obtain ⟨σ, hσj, hσt⟩ := htight j
+    rcases lt_or_gt_of_ne hσj with h | h
+    · rw [step_eq_two_of_isTight hc hgen hσt h a, step_eq_two_of_isTight hc hgen hσt h 0]
+    · rw [step_eq_one_of_isTight hc hgen hσt h a, step_eq_one_of_isTight hc hgen hσt h 0]
+  let d : Fin m → ZMod 3 := fun j => ((step s c 0 j : ℤ) : ZMod 3)
+  have hd : ∀ a j, c (a + s j) = c a + d j := fun a j => by
+    have h := step_cast s hc a j
+    rw [hconst j a] at h
+    simp only [d]
+    rw [h]
+    ring
+  -- so the colouring moves by `ψ r = Σ_j r_j d_j` along every vector `r`
+  let ψ : (Fin m → ℤ) →+ ZMod 3 :=
+    { toFun := fun r => ∑ j, ((r j : ℤ) : ZMod 3) * d j
+      map_zero' := by simp
+      map_add' := fun r r' => by simp only [Pi.add_apply, Int.cast_add, add_mul, Finset.sum_add_distrib] }
+  let H : AddSubgroup (Fin m → ℤ) :=
+    { carrier := {r | ∀ a, c (a + relMap s r) = c a + ψ r}
+      zero_mem' := fun a => by simp only [map_zero, add_zero]
+      add_mem' := fun {r r'} hr hr' a => by
+        change c (a + relMap s (r + r')) = c a + ψ (r + r')
+        rw [map_add, map_add, ← add_assoc, hr' (a + relMap s r), hr a, add_assoc]
+      neg_mem' := fun {r} hr a => by
+        change c (a + relMap s (-r)) = c a + ψ (-r)
+        have h := hr (a - relMap s r)
+        rw [sub_add_cancel] at h
+        rw [map_neg, map_neg, ← sub_eq_add_neg, h]
+        ring }
+  have hH : ∀ r, r ∈ H := by
+    intro r
+    rw [← Finset.univ_sum_single r]
+    refine AddSubgroup.sum_mem _ fun j _ => ?_
+    rw [show Pi.single j (r j) = r j • (Pi.single j (1 : ℤ) : Fin m → ℤ) by rw [← Pi.single_smul, smul_eq_mul, mul_one]]
+    have hsingle : (Pi.single j (1 : ℤ) : Fin m → ℤ) ∈ H := by
+      intro a
+      rw [relMap_single, hd]
+      congr 1
+      change d j = ∑ i, (((Pi.single j (1 : ℤ) : Fin m → ℤ) i : ℤ) : ZMod 3) * d i
+      rw [Finset.sum_eq_single j (fun i _ hi => by rw [Pi.single_eq_of_ne hi, Int.cast_zero, zero_mul])
+        (by simp), Pi.single_eq_same, Int.cast_one, one_mul]
+    exact AddSubgroup.zsmul_mem _ hsingle _
+  -- the additive part
+  refine ⟨{ toFun := fun a => c a - c 0, map_zero' := by simp, map_add' := fun a b => ?_ }, fun x => by simp⟩
+  obtain ⟨r, rfl⟩ := hgen b
+  have h1 := hH r a
+  have h2 := hH r 0
+  rw [zero_add] at h2
+  change c (a + relMap s r) - c 0 = (c a - c 0) + (c (relMap s r) - c 0)
+  rw [h1, h2]
+  ring
 
 /-! ## Spec: the model `ℤ` along `(1, 2)`, `x ↦ x mod 3` -/
 
@@ -630,6 +1045,8 @@ example : pmHeight ![(1 : ℤ), 2] (fun x => (x : ZMod 3)) ![0, 1] = -1 := by de
 /-- The model of `IsTight`: the relation `(2, −1)` of `(1, 2)` is tight for the winding of `x ↦ x mod 3`. -/
 theorem isTight_one_two :
     IsTight (heightWinding properAlong_one_two) ⟨![2, -1], by decide⟩ := by
-  sorry
+  unfold IsTight
+  rw [heightWinding_apply]
+  decide
 
 end HadwigerNelson.CayleyThree
