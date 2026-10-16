@@ -1,0 +1,13 @@
+'HadwigerNelson.ELRigidity.exists_eq_mul_abs_of_homogeneous_of_antitone' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.ELRigidity.linearity_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.ELRigidity.isClosed_realLeafPeriods' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.ELRigidity.realLeafPeriods_top_or_cyclic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.ELRigidity.isClosed_leafPeriods' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.ELRigidity.leafPeriods_volume_eq_top' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.ELRigidity.eq_of_le_of_sum_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.ELRigidity.haar_or_zero_entropy_of_core' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
