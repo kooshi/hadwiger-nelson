@@ -1,2 +1,1 @@
-slot: waiting (ledger 16 + 8 > budget 22 GiB)
-slot: admitted ics1-dump: mem 8 GiB (hard cap), cpus 4,5
+slot: admitted ics1-dump: mem 8 GiB (hard cap), cpus 3,4

@@ -114,6 +114,7 @@ AXIOMS Proofs.HadwigerNelson.Rigidity.FourColourPlaces public HadwigerNelson.Rig
 AXIOMS Proofs.HadwigerNelson.Rigidity.FourColourPlaces public HadwigerNelson.Rigidity.colorable_four_levelTarget_one_iff : [Classical.choice, HadwigerNelson.StandingFive.kloosterman_bound, Quot.sound, propext]
 AXIOMS Proofs.HadwigerNelson.Rigidity.FourColourPlaces public HadwigerNelson.Rigidity.colorable_four_levelTarget_one_of_isFourColourPlace : [Classical.choice, Quot.sound, propext]
 AXIOMS Proofs.HadwigerNelson.Rigidity.FourColourPlaces private HadwigerNelson.Rigidity.exists_conj_sub_notMem_of_not_isRamified : [Classical.choice, Quot.sound, propext]
+AXIOMS Proofs.HadwigerNelson.Rigidity.FourColourPlaces public HadwigerNelson.Rigidity.exists_isFourColourPlace_rat : [Classical.choice, Quot.sound, propext]
 AXIOMS Proofs.HadwigerNelson.Rigidity.FourColourPlaces public HadwigerNelson.Rigidity.exists_ratioAtMost_lt_quarter_iff : [Classical.choice, HadwigerNelson.StandingFive.kloosterman_bound, Quot.sound, propext]
 AXIOMS Proofs.HadwigerNelson.Rigidity.FourColourPlaces public HadwigerNelson.Rigidity.exists_ratioAtMost_of_not_isFourColourPlace : [Classical.choice, HadwigerNelson.StandingFive.kloosterman_bound, Quot.sound, propext]
 AXIOMS Proofs.HadwigerNelson.Rigidity.FourColourPlaces public HadwigerNelson.Rigidity.five_le_chromaticNumber_levelTarget_of_ratioAtMost : [Classical.choice, Quot.sound, propext]
@@ -189,4 +190,4 @@ AXIOMS Proofs.HadwigerNelson.Instances.SqrtTwentyThreeCbrtTwo private HadwigerNe
 AXIOMS Proofs.HadwigerNelson.Instances.SqrtTwentyThreeCbrtTwo private HadwigerNelson.SqrtTwentyThreeCbrtTwo.sqrt_mem_F23 : [Classical.choice, Quot.sound, propext]
 AXIOMS Proofs.HadwigerNelson.Instances.SqrtTwentyThreeCbrtTwo private HadwigerNelson.SqrtTwentyThreeCbrtTwo.twentyThree_ne_zero_mod_eleven : [Classical.choice, Quot.sound, propext]
 AXIOMS PLANT public HadwigerNelson.Rigidity.positive_entropy_rigidity_of_polishSpace : [Classical.choice, HadwigerNelson.Rigidity.positive_entropy_rigidity, Quot.sound, propext]
-AXIOMS-COUNT 190
+AXIOMS-COUNT 191
