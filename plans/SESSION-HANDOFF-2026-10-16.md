@@ -1,13 +1,13 @@
-# Session handoff — 2026-10-16 (evening): five landings, the README shipped, a push pending
+# Session handoff — 2026-10-16 (evening): five landings, the README shipped, all pushed
 
 *Rewritten by Keryx before Kooshi compacts the session. Current state only. Read it first, then `plans/FS131-close-inventory.md`
-items 1020–1070 (each with its receipt and, where it rules, four parts). Agent identifiers are in the session scratchpad
+items 1020–1072 (each with its receipt and, where it rules, four parts). Agent identifiers are in the session scratchpad
 (`agents.txt`), never in a file; agents of this session can still be messaged after the compaction.*
 
 ## 1. Where things are
 
-- **Public repository** `https://github.com/kooshi/hadwiger-nelson`; this checkout is its clone. **Pushed through `351645653`**
-  (item 1062). Everything after it waits for the next privacy check (a Clerk; template `data/fs131/briefs/scripts/mk-fs131-pv3.py`,
+- **Public repository** `https://github.com/kooshi/hadwiger-nelson`; this checkout is its clone. **Pushed through `00e7c4b60`**
+  (item 1072). Everything after it waits for the next privacy check (a Clerk; template `data/fs131/briefs/scripts/mk-fs131-pv3.py`,
   which guards compressed files decompressed), then my two checks (the lists' 28 guard text plants refused; no range path on the
   lists' `drop`), then `git push origin <checked>:refs/heads/main` (fast-forward, never force).
 - **History and hooks (Kooshi's W20, item 1025):** the unpushed history was rewritten by a private filter kept in the publication
@@ -36,9 +36,9 @@ The prior-art searches (FS131-PAS1, item 1052): four of five not found in print;
 
 ## 3. Running, and next
 
-Every landing is filed (items 1067, 1070); nothing is in flight but the push. **Next:** a privacy check of
-`origin/main..<head>` by a Clerk (FS131-PV4, from `data/fs131/briefs/scripts/mk-fs131-pv4.py`), my two checks, then
-`git push origin <checked>:refs/heads/main`. After that the open work is the owed list below and the asking lane's next job.
+Nothing is running. Every landing is filed and pushed (items 1067, 1070, 1072). The next push follows the same protocol:
+a Clerk's privacy check (template `data/fs131/briefs/scripts/mk-fs131-pv4.py`), my two checks, a fast-forward push. The
+open work is the owed list below and the asking lane's next job.
 
 ## 4. Kooshi's decisions, all answered
 
