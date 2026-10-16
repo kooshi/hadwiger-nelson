@@ -29,7 +29,13 @@ are all 6-thick (`λ*_v < 1/5` at every level, both signs; `N₆(F) = ∅` …),
 
 **What it rests on**: the standard three axioms, `Rigidity.positive_entropy_rigidity` (`[EinsiedlerLindenstrauss2022]`
 Thm 1.3, through `mrPlus`) and `StandingFive.kloosterman_bound` (`[Weil1948]`, through thickness); the six-or-seven corollary
-also on `Outside.OAI158.no_proper_five_coloring`. No hypothesis of ours.
+also on `Outside.OAI158.no_proper_five_coloring`. The general form rests on `positive_entropy_rigidity` alone: thickness is its
+hypothesis, and Weil's bound enters only where an instance proves it (`thick_of_card`). No hypothesis of ours.
+
+**The plane, as stated.** `χ(ℝ²)` is the chromatic number of `unitDistance ℂ`, and `F²` is `planeOver F` (the points of `ℂ`
+with both coordinates in `F`) with the induced graph; `chromaticNumber_plane_eq_complex` turns the right side into
+`unitDistance (EuclideanSpace ℝ (Fin 2))`'s. `F635087` and `FdG` are `abbrev`s, so a goal written with
+`SquareClass.fieldOfRadicands` finds the headlines by `exact?`.
 
 **Not claimed:** `χ_CP(ℝ²)` (row 128's third member; `χ_CP = χ_m⁰` is row 130's, [hand]); the value of `χ(ℝ²)`; that the
 general form is new beyond row 128 and FS103-CX (V2's complex-place widening, one mind).
@@ -70,7 +76,9 @@ theorem not_colorable_one_planeOver (F : Subfield ℝ) : ¬ ((unitDistance ℂ).
   exact C.valid hadj (Subsingleton.elim _ _)
 
 /-- **The collapse, general form**: over every real number field all of whose stable primes are uniformly `c`-thick with
-`c < 1/5`, `χ(F²) = χ(ℝ²)`. Route: `≤` is `Bridge.chromaticNumber_planeOver_le_plane`; for `≥`, every `k` with `F²`
+`c < 1/5`, `χ(F²) = χ(ℝ²)` — a stable prime is a prime of `F(i)` fixed by conjugation, and `c`-thick means that at every level
+every non-trivial additive character sums over the norm-one residues to at most `c` times their number (`Thick`, `ThickAt`).
+No "totally real"; beyond the standard three it rests on `Rigidity.positive_entropy_rigidity` alone. Route: `≤` is `Bridge.chromaticNumber_planeOver_le_plane`; for `≥`, every `k` with `F²`
 `k`-colourable has `χ(ℝ²) ≤ k` — at `k ≥ 7` by `Bridge.chromaticNumber_complex_le_seven`, at `2 ≤ k ≤ 6` by
 `chromaticNumber_plane_le_of_thick` (`c(k − 1) ≤ 5c < 1`), and `k ≤ 1` does not occur (`not_colorable_one_planeOver`). -/
 theorem chromaticNumber_planeOver_eq_plane_of_thick {c : ℝ} (hT : Thick F c) (hc0 : 0 ≤ c) (hc : c < 1 / 5) :
@@ -107,7 +115,7 @@ theorem isSquare_635087 : IsSquare ((635087 : ℕ) : F635087) :=
     Subtype.ext (by push_cast; exact (Real.mul_self_sqrt (Nat.cast_nonneg 635087)).symm)⟩
 
 /-- **The thirteen small inert primes**: a prime `p ≡ 3 (mod 4)` modulo which `635087` is a square is at least `103` — `635087`
-is a non-square modulo each of `3, 7, 11, 19, 23, 31, 43, 47, 59, 67, 71, 79, 83` (`decide` at each). -/
+is a non-square modulo each of `3, 7, 11, 19, 23, 31, 43, 47, 59, 67, 71, 79, 83` (`decide +kernel` at each). -/
 theorem le_of_isSquare_635087 {p : ℕ} (hp : p.Prime) (hp4 : p % 4 = 3) (hsq : IsSquare ((635087 : ℕ) : ZMod p)) :
     103 ≤ p := by
   by_contra hlt
@@ -137,13 +145,16 @@ theorem weil_103_lt_fifth : 2 * Real.sqrt ((103 : ℕ) : ℝ) / (((103 : ℕ) : 
   push_cast at h ⊢
   linarith
 
-/-- **`χ(ℚ(√635087)²) = χ(ℝ²)`** — row 128's headline instance, with no hypothesis. -/
+/-- **`χ(ℚ(√635087)²) = χ(ℝ²)`** — row 128's headline instance, with no hypothesis: every stable prime of `ℚ(√635087, i)`
+lies over a prime `p ≡ 3 (mod 4)` with `p ≥ 103` (`stablePrime_sqrt635087`), so Weil's bound makes the field uniformly
+`2√103/104`-thick, below `1/5` (`thick_sqrt635087`, `weil_103_lt_fifth`). On the standard three axioms,
+`Rigidity.positive_entropy_rigidity` and `StandingFive.kloosterman_bound`. -/
 theorem chromaticNumber_planeOver_sqrt635087 :
     ((unitDistance ℂ).induce (planeOver F635087)).chromaticNumber = (unitDistance ℂ).chromaticNumber :=
   chromaticNumber_planeOver_eq_plane_of_thick thick_sqrt635087 (by positivity) weil_103_lt_fifth
 
 /-- **Rung D over one real quadratic field**: with `[OAIMath2026]`'s `6 ≤ χ(ℝ²)` (`Outside.OAI158.no_proper_five_coloring`),
-`6 ≤ χ(ℚ(√635087)²) ≤ 7`. -/
+`6 ≤ χ(ℚ(√635087)²) ≤ 7`. A conjunction: its halves are `.1` and `.2` (`exact?` does not project one). -/
 theorem chromaticNumber_planeOver_sqrt635087_six_or_seven :
     6 ≤ ((unitDistance ℂ).induce (planeOver F635087)).chromaticNumber ∧
       ((unitDistance ℂ).induce (planeOver F635087)).chromaticNumber ≤ 7 := by
@@ -160,8 +171,8 @@ theorem isSquare_deGrey {d : ℕ} (hd : d ∈ ({3, 5, 7, 11} : Set ℕ)) : IsSqu
   ⟨⟨Real.sqrt d, SquareClass.sqrt_mem_fieldOfRadicands hd⟩,
     Subtype.ext (by push_cast; exact (Real.mul_self_sqrt (Nat.cast_nonneg d)).symm)⟩
 
-/-- **No prime `p ≡ 3 (mod 4)` below `131` has `3, 5, 7, 11` all squares modulo it** (`decide` at each; `3`, `7`, `11`
-themselves included: `5`, `3`, `7` are non-squares modulo them). -/
+/-- **No prime `p ≡ 3 (mod 4)` below `131` has `3, 5, 7, 11` all squares modulo it** (`decide +kernel` at each; `3`, `7`,
+`11` themselves included: `5`, `3`, `7` are non-squares modulo them). -/
 theorem le_of_isSquare_deGrey {p : ℕ} (hp : p.Prime) (hp4 : p % 4 = 3) (h3 : IsSquare ((3 : ℕ) : ZMod p))
     (h5 : IsSquare ((5 : ℕ) : ZMod p)) (h7 : IsSquare ((7 : ℕ) : ZMod p)) (h11 : IsSquare ((11 : ℕ) : ZMod p)) :
     131 ≤ p := by
@@ -195,7 +206,9 @@ theorem weil_131_lt_fifth : 2 * Real.sqrt ((131 : ℕ) : ℝ) / (((131 : ℕ) : 
   linarith
 
 /-- **`χ(ℚ(√3, √5, √7, √11)²) = χ(ℝ²)`** — row 128's second instance, with no hypothesis (MR at degree 16 is
-`Rigidity.mrPlus` there). -/
+`Rigidity.mrPlus` there): the plane over the field of de Grey's coordinates is exactly as hard to colour as `ℝ²`. Every stable
+prime lies over a prime `p ≡ 3 (mod 4)` with `p ≥ 131` (`stablePrime_deGrey`), and Weil's bound gives `2√131/132 < 1/5`. On the
+same axioms as `chromaticNumber_planeOver_sqrt635087`. -/
 theorem chromaticNumber_planeOver_deGrey :
     ((unitDistance ℂ).induce (planeOver FdG)).chromaticNumber = (unitDistance ℂ).chromaticNumber :=
   chromaticNumber_planeOver_eq_plane_of_thick thick_deGrey (by positivity) weil_131_lt_fifth

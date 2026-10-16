@@ -124,3 +124,33 @@ the general theorem's hypothesis; `not_thick_bot` on the standard three.
 
 **Re-price, this job:** about 410 lines of proof for the three modules (Slice 255, Selection 105, Headline 50) against the plan's
 890; with the previous job's 1,540, the module is about 1,950 lines against the plan's 3,270.
+
+## Stage 5 — SAVED: the experience pass (`debruijn-experience-modeling`, loaded fresh)
+
+**The users, and what each holds.** A mathematician citing the result holds the statement and its docstring, not the module; an
+agent holds the docstring and what `exact?` returns; `exact?` holds the statements' shapes as indexed.
+
+**Probes.** `data/fs131/ico2/work/ExactProbe.lean` (`exact-probe.out`), goals written as a user would, with
+`SquareClass.fieldOfRadicands {635087}` and `{3, 5, 7, 11}` rather than the `abbrev`s: `exact?` returns
+`Collapse.chromaticNumber_planeOver_sqrt635087` and `Collapse.chromaticNumber_planeOver_deGrey` (the `abbrev`s unfold for the
+index, as they should). It does **not** close `6 ≤ χ(ℚ(√635087)²)`: the six-or-seven corollary is a conjunction, and search does
+not project. Proposed, not made (it would add public statements): two one-line corollaries,
+`six_le_chromaticNumber_planeOver_sqrt635087` and `chromaticNumber_planeOver_sqrt635087_le_seven` — held for the coordinator.
+
+**Names.** Kept. `chromaticNumber_planeOver_eq_plane_of_thick` and `…_of_forall_thickAt` read as their statements in Mathlib's
+convention (conclusion, then `of_` hypotheses). The instance names (`chromaticNumber_planeOver_sqrt635087`, `…_deGrey`) omit the
+`_eq_plane` their conclusion would predict; the library is mixed here (`SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five`
+against `UpperHalf.chromaticNumber_planeOver_eleven`), and the names are the coordinator's announcement's, so no rename is
+proposed. `F635087` and `FdG` sit beside `F47`.
+
+**Docstrings edited** (`Collapse/Headline` only; `Thick` and `ThickAt` already gloss themselves in words, and editing
+`Collapse/Thick`'s docstrings would recompile its five dependents for nothing): the module doc says what the general form rests
+on (`positive_entropy_rigidity` alone; Weil's bound enters only where an instance proves thickness) and how the plane is stated
+(`unitDistance ℂ`, with `chromaticNumber_plane_eq_complex` to `EuclideanSpace ℝ (Fin 2)`; the `abbrev`s and `exact?`); the
+general form's docstring glosses a stable prime and `c`-thickness in words and names its axiom; each instance's docstring gives
+the mechanism (the least stable residue characteristic, Weil's constant) and its axioms; the corollary's says its halves are
+`.1`, `.2`; the two residue lemmas say `decide +kernel`, as their proofs now are. **Docstrings only, shown in text**:
+`data/fs131/lc1/code_only_diff.py HEAD …/Headline.lean` reads SAME (7,311 characters of code both sides; comments 5,979 →
+7,590), and its plant (`--plant`, the first `:=` turned into `:≡`) reads DIFFERS (`data/fs131/ico2/pass-code-only*.out`). The
+file compiles clean in the farm (`work/head3.out`). The axiom claims written into the docstrings are the farm's print; the gate's
+audit is their check.
