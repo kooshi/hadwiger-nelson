@@ -181,8 +181,7 @@ variable (F) in
 /-- **The plane over every real number field has infinitely many components** (C8). -/
 theorem infinite_connectedComponent_planeOver [NumberField F] :
     Infinite ((unitDistance ℂ).induce (planeOver F)).ConnectedComponent :=
-  let ⟨P⟩ := nonempty_stablePrime F
-  infinite_connectedComponent_planeOver_of_stablePrime P
+  (nonempty_stablePrime F).elim infinite_connectedComponent_planeOver_of_stablePrime
 
 variable (F) in
 /-- **The plane over a real number field is never connected.** -/

@@ -111,3 +111,24 @@ options, every one with no error and no warning. Departures from the plan, each 
   `φ(q) = 0`, and row 105's prime inversion. It reads only the unit-vector clause of `IsPlaceHom`.
 - **Module 4.** `reachable_iff_sub_mem_unitRingOver`'s `⟹` by induction on the walk (not `reflTransGen`).
 - **Module 5.** Four short terms, as planned.
+
+### 2.5 The builds
+
+- **Build 1** (2026-10-16 21:00–21:23 UTC, on `c01417289`: module 1 and the ruled `AdmissiblePrime` edit; the brief's command
+  line, `--mem 8 --cpus 4`, `MEMMAX=8G BATCH=3`): "build: OK — 739 of 739 batches, 20 module(s) rebuilt, 4 module(s) with
+  warnings, 22m21s", exit 0 (`data/fs131/iru1/build1.out`). Rebuilt: `NormOneGen`, `AdmissiblePrime` and the 17 modules
+  downstream of it (its docstrings and its three renames), and the root; the 34 warnings are the 34 `sorry` leaves of the
+  four modules still holding the skeleton then; `NormOneGen` none.
+- **Build 2** (21:24–21:42 UTC, on `bebe75273`: modules 2–5 in place, the five module titles retitled "proved by
+  FS131-IRU1", `UsablePrime`'s docstring corrected and given its prior-art paragraph): "build: OK — 739 of 739 batches, 6
+  module(s) rebuilt, 0 module(s) with warnings, 17m57s", exit 0 (`data/fs131/iru1/build2.out`, full log
+  `data/fs131/iru1/build2-full.log`: 0 lines with `warning`). Sources checked unchanged against `build2.sources.md5` after.
+- On that build: the statement comparison CLEAN with every plant fired (§ 3.2), the re-add equal, the environment linters
+  passed (`data/fs131/iru1/lint-preview.log`, a preview before the gate's own run), and every head statement on the standard
+  three (`data/fs131/iru1/readaloud.txt`).
+- **One edit after build 2**: `infinite_connectedComponent_planeOver` was a term `let ⟨P⟩ := …`, which stored a public
+  matcher `infinite_connectedComponent_planeOver.match_1_1` that the vacuity scan counts as a declaration
+  (`data/fs131/iru1/vacuity-new.txt` of build 2); now `(nonempty_stablePrime F).elim …`, no matcher. Build 3 follows on the
+  commit that carries it; the gate runs on that commit.
+
+## Stage 2 — SAVED (all 40 leaves proved; build 2 green)

@@ -1,0 +1,122 @@
+slot: admitted lake: mem 6 GiB (hard cap), cpus 5,6
+@HadwigerNelson.Rigidity.unitRing_eq_stableIntegers : ∀ {F : Subfield ℝ} [inst : NumberField ↥F],
+  HadwigerNelson.Rigidity.NoRamifiedStableDyadic F →
+    HadwigerNelson.UnitRing.unitRing (HadwigerNelson.conjOn ⋯) = HadwigerNelson.Rigidity.stableIntegers F
+'HadwigerNelson.Rigidity.unitRing_eq_stableIntegers' depends on axioms: [propext, Classical.choice, Quot.sound]
+@HadwigerNelson.Rigidity.exists_two_pow_mul_mem_unitRing : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  {x : ↥(HadwigerNelson.SpectralChain.fieldI F)},
+  x ∈ HadwigerNelson.Rigidity.stableIntegers F →
+    ∃ a, 2 ^ a * x ∈ HadwigerNelson.UnitRing.unitRing (HadwigerNelson.conjOn ⋯)
+'HadwigerNelson.Rigidity.exists_two_pow_mul_mem_unitRing' depends on axioms: [propext, Classical.choice, Quot.sound]
+@HadwigerNelson.Rigidity.exists_eq_add_mul_of_mem_stableIntegers : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] {n : ℕ},
+  n ≠ 0 →
+    (∀ (P : HadwigerNelson.SpectralChain.StablePrime F), ↑n ∈ P.P → ¬HadwigerNelson.Rigidity.IsRamified P) →
+      ∀ {x : ↥(HadwigerNelson.SpectralChain.fieldI F)},
+        x ∈ HadwigerNelson.Rigidity.stableIntegers F →
+          ∃ r ∈ HadwigerNelson.UnitRing.unitRing (HadwigerNelson.conjOn ⋯),
+            ∃ y ∈ HadwigerNelson.Rigidity.stableIntegers F, x = r + ↑n * y
+'HadwigerNelson.Rigidity.exists_eq_add_mul_of_mem_stableIntegers' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+@HadwigerNelson.Rigidity.resPi_surjective : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (Φ : Finset (HadwigerNelson.SpectralChain.StablePrime F)),
+  (∀ P ∈ Φ, ¬HadwigerNelson.Rigidity.IsRamified P) → ∀ (m : ℕ), Function.Surjective ⇑(HadwigerNelson.Rigidity.resPi Φ m)
+'HadwigerNelson.Rigidity.resPi_surjective' depends on axioms: [propext, Classical.choice, Quot.sound]
+@HadwigerNelson.Rigidity.closure_normOne_eq_top : ∀ {A : Type u_1} [inst : CommRing A] [Finite A] (σ : A →+* A),
+  (∀ (x : A), σ (σ x) = x) →
+    ∀ {θ : A}, IsUnit (θ - σ θ) → (∀ (a : A), σ a = a → IsUnit (a + θ)) → Subring.closure {x | x * σ x = 1} = ⊤
+'HadwigerNelson.Rigidity.closure_normOne_eq_top' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.Rigidity.exists_isUsablePrime : ∀ (F : Subfield ℝ) [NumberField ↥F] (M : ℕ),
+  M ≠ 0 →
+    ∃ q 𝔭,
+      Nat.Prime q ∧
+        ¬q ∣ M ∧ HadwigerNelson.Arith.IsUsablePrime 𝔭 ∧ ↑q ∈ 𝔭 ∧ Nat.card (NumberField.RingOfIntegers ↥F ⧸ 𝔭) = q
+'HadwigerNelson.Rigidity.exists_isUsablePrime' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.Rigidity.nonempty_stablePrime : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  Nonempty (HadwigerNelson.SpectralChain.StablePrime F)
+'HadwigerNelson.Rigidity.nonempty_stablePrime' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.Rigidity.localBound_lt_top : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  HadwigerNelson.SpectralChain.localBound F < ⊤
+'HadwigerNelson.Rigidity.localBound_lt_top' depends on axioms: [propext, Classical.choice, Quot.sound]
+@HadwigerNelson.Rigidity.reachable_iff_sub_mem_unitRingOver : ∀ {F : Subfield ℝ} (x y : ↑(HadwigerNelson.planeOver F)),
+  (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).Reachable x y ↔
+    ↑x - ↑y ∈ HadwigerNelson.UnitRing.unitRingOver F
+'HadwigerNelson.Rigidity.reachable_iff_sub_mem_unitRingOver' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.Rigidity.connected_or_infinite_planeOver : ∀ (F : Subfield ℝ),
+  (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).Connected ∨
+    Infinite (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).ConnectedComponent
+'HadwigerNelson.Rigidity.connected_or_infinite_planeOver' depends on axioms: [propext, Classical.choice, Quot.sound]
+@HadwigerNelson.Rigidity.connected_planeOver_iff_isEmpty_stablePrime : ∀ {F : Subfield ℝ} [NumberField ↥F],
+  (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).Connected ↔
+    IsEmpty (HadwigerNelson.SpectralChain.StablePrime F)
+'HadwigerNelson.Rigidity.connected_planeOver_iff_isEmpty_stablePrime' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+HadwigerNelson.Rigidity.infinite_connectedComponent_planeOver : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  Infinite (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).ConnectedComponent
+'HadwigerNelson.Rigidity.infinite_connectedComponent_planeOver' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+HadwigerNelson.Rigidity.not_connected_planeOver : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  ¬(SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).Connected
+'HadwigerNelson.Rigidity.not_connected_planeOver' depends on axioms: [propext, Classical.choice, Quot.sound]
+@HadwigerNelson.Rigidity.not_isRamified_of_odd_mem : ∀ {F : Subfield ℝ} (P : HadwigerNelson.SpectralChain.StablePrime F)
+  {n : ℕ}, Odd n → ↑n ∈ P.P → ¬HadwigerNelson.Rigidity.IsRamified P
+'HadwigerNelson.Rigidity.not_isRamified_of_odd_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.Rigidity.exists_model_galoisField : (∀ (x : GaloisField 3 2),
+    (frobenius (GaloisField 3 2) 3) ((frobenius (GaloisField 3 2) 3) x) = x) ∧
+  ∃ θ,
+    IsUnit (θ - (frobenius (GaloisField 3 2) 3) θ) ∧
+      ∀ (a : GaloisField 3 2), (frobenius (GaloisField 3 2) 3) a = a → IsUnit (a + θ)
+'HadwigerNelson.Rigidity.exists_model_galoisField' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.UnitRingModels.noRamifiedStableDyadic_sqrt47 : HadwigerNelson.Rigidity.NoRamifiedStableDyadic
+  HadwigerNelson.SqrtFortySeven.F47
+'HadwigerNelson.UnitRingModels.noRamifiedStableDyadic_sqrt47' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.UnitRingModels.unitRing_eq_stableIntegers_sqrt47 : HadwigerNelson.UnitRing.unitRing
+    (HadwigerNelson.conjOn ⋯) =
+  HadwigerNelson.Rigidity.stableIntegers HadwigerNelson.SqrtFortySeven.F47
+'HadwigerNelson.UnitRingModels.unitRing_eq_stableIntegers_sqrt47' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+HadwigerNelson.UnitRingModels.stableIntegers_sqrt47_ne_top : HadwigerNelson.Rigidity.stableIntegers
+    HadwigerNelson.SqrtFortySeven.F47 ≠
+  ⊤
+'HadwigerNelson.UnitRingModels.stableIntegers_sqrt47_ne_top' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.UnitRingModels.exists_stablePrime_three_not_isRamified : ∃ P,
+  ↑3 ∈ P.P ∧ ¬HadwigerNelson.Rigidity.IsRamified P
+'HadwigerNelson.UnitRingModels.exists_stablePrime_three_not_isRamified' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+def HadwigerNelson.Rigidity.NoRamifiedStableDyadic : Subfield ℝ → Prop :=
+fun F =>
+  ∀ (P : HadwigerNelson.SpectralChain.StablePrime F),
+    HadwigerNelson.Rigidity.IsDyadic P → ¬HadwigerNelson.Rigidity.IsRamified P
+def HadwigerNelson.Rigidity.IsRamified : {F : Subfield ℝ} → HadwigerNelson.SpectralChain.StablePrime F → Prop :=
+fun {F} P =>
+  ∀ (x : NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F)),
+    (HadwigerNelson.SpectralChain.conjO F) x - x ∈ P.P
+def HadwigerNelson.Rigidity.IsDyadic : {F : Subfield ℝ} → HadwigerNelson.SpectralChain.StablePrime F → Prop :=
+fun {F} P => 2 ∈ P.P
+def HadwigerNelson.Rigidity.stableIntegers : (F : Subfield ℝ) →
+  [NumberField ↥F] → Subring ↥(HadwigerNelson.SpectralChain.fieldI F) :=
+fun F [NumberField ↥F] => ⨅ P, P.localRing.toSubring
+def HadwigerNelson.UnitRing.unitRing.{u_1} : {L : Type u_1} → [inst : Field L] → (L →+* L) → Subring L :=
+fun {L} [Field L] σ => Subring.closure (HadwigerNelson.normOne σ)
+def HadwigerNelson.UnitRing.unitRingOver : Subfield ℝ → Subring ℂ :=
+fun F => Subring.closure {z | z ∈ HadwigerNelson.planeOver F ∧ ‖z‖ = 1}
+structure HadwigerNelson.SpectralChain.StablePrime (F : Subfield ℝ) : Type
+number of parameters: 1
+fields:
+  HadwigerNelson.SpectralChain.StablePrime.P : Ideal
+      (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F))
+  HadwigerNelson.SpectralChain.StablePrime.isMaximal : self.P.IsMaximal
+  HadwigerNelson.SpectralChain.StablePrime.comap_conj : Ideal.comap (HadwigerNelson.SpectralChain.conjO F) self.P =
+      self.P
+constructor:
+  HadwigerNelson.SpectralChain.StablePrime.mk {F : Subfield ℝ}
+    (P : Ideal (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F))) (isMaximal : P.IsMaximal)
+    (comap_conj : Ideal.comap (HadwigerNelson.SpectralChain.conjO F) P = P) : HadwigerNelson.SpectralChain.StablePrime F
+def HadwigerNelson.SpectralChain.localBound : Subfield ℝ → ℕ∞ :=
+fun F => ⨅ P, (HadwigerNelson.SpectralChain.levelTarget P 1).chromaticNumber
+def HadwigerNelson.Arith.IsUsablePrime : {F : Subfield ℝ} → Ideal (NumberField.RingOfIntegers ↥F) → Prop :=
+fun {F} 𝔭 => 𝔭.IsMaximal ∧ Nat.card (NumberField.RingOfIntegers ↥F ⧸ 𝔭) % 4 = 3
