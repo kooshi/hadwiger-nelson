@@ -77,3 +77,106 @@ shared `eq_n` or `congr_simp`. A difference from these is explained, not absorbe
    (`data/fs131/iru2/run-gate.sh`, the steps of `data/fs131/clone1/run-gate.sh`) on one commit; `#print axioms` of the head
    statements. A saved stage.
 4. **The drafts' counts.** A saved stage. The report.
+
+## Stage 2 — SAVED: the merge and the build
+
+### 2.1 The merge
+
+`git merge main` at `2b53bc133` (`main` had moved past the brief's `5ac6f3ef9`/`d9959820f` by coordinator commits only; later
+to `1d37b4177`, none touching `Proofs/`, `Proofs.lean`, `scripts/` or the package files: `git diff --stat b8cef1f36 1d37b4177`
+over those paths is empty), committed as **`407d720ac`** (`data/fs131/iru2/merge.log`). Git merged `ARCHITECTURE.md`,
+`Proofs.lean` and `scripts/Assumptions.lean` with no conflict: the merged `Proofs.lean` is `main`'s plus this branch's five import
+lines, the merged `ARCHITECTURE.md` `main`'s plus this branch's six rows (five new, `Rigidity/AdmissiblePrime` amended), and in
+`scripts/Assumptions.lean` both sides had deleted the same `.condition` line. **No proof or statement was in conflict.** Two gate
+inputs were, each resolved keeping both sides:
+
+| file | conflict | resolution |
+|---|---|---|
+| `scripts/Axioms.lean` | one hunk, end of CLEAN: `main`'s FS131-ICS1 and FS131-IFR1 blocks (126 lines) against FS131-IRU1's (50 lines) | both, `main`'s first (`data/fs131/iru2/resolve_both.py`, `resolve-axioms.out`). Insertions only against both parents: the merged file is the branch + 172 lines and `main` + 51; its `#print axioms` lines 11,743 = 11,547 (the base) + 45 (this branch) + 151 (`main`'s two landings) |
+| `scripts/vacuity-baseline.txt` | the header's count line (`22564`/`244` against `22683`/`245`) | the expected join, `declarations=22728 refutations-skipped=246 sites=1465` (`main`'s plus this branch's +45 and +1), to be confirmed by the gate's digest |
+
+### 2.2 Names the two lines declare
+
+Before the first build (LEAN.md § Searching — Lean, FS131-LDB1's line): every constant of each line's compiled library, by
+module and name (`data/fs131/iru2/lean/AllNames.lean`, run against this branch's build and against `main`'s gated build in the
+main tree: 36,678 and 37,101 constants, `names-branch.txt.gz`, `names-main.txt.gz`), intersected by name
+(`data/fs131/iru2/collisions.py`): **0 collisions** — no name is declared by a module on one line and by a different module on
+the other (`collisions.out`). Each side's within-library doubles are the same 27 generated-on-demand names (`f.eq_1`,
+`f.congr_simp`), the join adds none. Modules only on the branch: its five; only on `main`: its eight. Control (`--plant`: a
+constant of `Collapse/Density/Headline` added to the branch side under `Rigidity/UsablePrime`): `COLLISION` reported, exit 1
+(`collisions-plant.out`).
+
+### 2.3 Which compiled files to copy
+
+`data/fs131/iru2/cone.py` (FS131-IFR2's) on the merged tree: `main`'s changes (`Rigidity/ClassRatio`, `Collapse/Headline` and
+its eight new modules) have 30 modules in their cone with the root; this branch's changes (`Rigidity/AdmissiblePrime` — three
+lemmas made public, docstrings — and its five new modules) have 29. `main`'s compiled file is right for a module of the first
+cone only if the module is outside the second, and this branch's only if it is outside the first:
+
+- **13 modules taken from `main`'s build** (in `main`'s cone, outside this branch's): `Arith/StableAboveUsable`,
+  `Plane/TriangularPacking`, `Rigidity/ClassRatio`, `Collapse/Mixing`, `Collapse/Thick`, `PadicPlane/Tower`, `PadicPlane/Values`,
+  `Rigidity/CertLinkModels`, `CountCompletion`, `CountDescent`, `CountExtension`, `CountModels`, `CountResidue`
+  (`copy-modules.txt`);
+- **17 to recompile** (in both cones), predicted: the root, `Collapse/Density/Defs`, `Upper`, `Headline`, `Collapse/Headline`,
+  `Selection`, `Slice`, `Instances/SqrtClassValues`, `SqrtFiveClass`, `SqrtFortySevenFive`, `SqrtTwentyThreeCbrtTwo`,
+  `UnitRingModels`, `Rigidity/ChainHeadline`, `FourColourPlaces`, `MainClauseFive`, `SqrtClassFive`, `UnitRingEq`
+  (`recompile-expected.txt`) — most of `main`'s new modules import `Rigidity/AdmissiblePrime`, so `main`'s builds of them are of
+  the private version;
+- **9 kept from this branch's build** (this branch's cone only): `Rigidity/AdmissiblePrime`, `NormOneGen`, `UsablePrime`,
+  `PlaneComponents`, `Pieces`, `UnitCircle`, `EntropySplitMax`, `ZeroEntropyClosed`, `Collapse/Dichotomy`.
+
+An unrestricted `rsync -a --checksum` (dry run only, `copy-dryrun-full.txt`) would write 139 files of 34 modules: the 28 of
+`main`'s cone that `main` has built, and six of this branch's cone (`AdmissiblePrime`, `Pieces`, `UnitCircle`,
+`EntropySplitMax`, `ZeroEntropyClosed`, `Dichotomy`), whose replacement by builds of the old source would only force them to
+recompile; no file outside the two cones differs in content (133 lines of time-only changes). The copy was restricted to the 13
+modules' files (`data/fs131/iru2/copy_build.sh`, LEAN.md § Building, FS131-ICS1's line): `rsync -a --checksum --files-from`, no
+`--delete`; dry run 39 files (16 new, 23 changed), the real copy itemized the same 39; the source's SHA-256 over the 39 equal
+before and after the copy, and the copies equal to the source (`copy-real.out`, `copy-*.sha`, `copy-rsync.txt`).
+
+### 2.4 The build
+
+The brief's command line (`--mem 8 --cpus 5`, `MEMMAX=8G BATCH=3`; `data/fs131/iru2/build1.sh`): exit 0, "build: OK — 743 of
+743 batches, **17 module(s) rebuilt, 0 module(s) with warnings, 18m4s**" (`build1-full.log`, `build1.exit`; Lean's log
+`build1-lean.log`). The 17 rebuilt are exactly the predicted 17 (`build1-rebuilt.txt` against `recompile-expected.txt`). The
+sources were the same after the build as before it (`build1.sources.md5`, 2,186 files). Then `lake build --no-build Proofs`:
+exit 0, "All targets up-to-date (6543 jobs)" (`uptodate-postbuild.log`).
+
+### 2.5 What the merged build holds, read against both gated builds
+
+- **Stored statements** (`tools/fs131_iru2_statements.py`, a copy of FS131-IFR2's comparator with its sides and plants
+  replaced; the merged print `data/fs131/iru2/statements-merged.txt.gz` from `data/fs131/iru2/lean/StatementDump.lean`, 33
+  modules, FS131-ICO2's dumper with the module list replaced): every constant of FS131-IRU1's gated print (six modules,
+  `data/fs131/iru1/statements-after-build3.txt.gz`) and of `main`'s (FS131-IFR2's print of `main`'s gated build, 27 modules,
+  `data/fs131/ifr2/statements-merged.txt.gz`) that is not internal is in the merged build with the same kind, flags, stored type
+  and, for a definition, the same value with proofs erased: **VERDICT CLEAN, 731 SAME**, 0 PUBLICIZED, 0 VALUE-MOVED, 0
+  GENERATED-ADDED (`statements.out`). Stronger: the merged print, every line of it internal constants and full values included,
+  is the union of the two gated prints line for line (`statements-fulltext.diff`, empty), and each module's constant count equals
+  its gated print's. Six plants, all fired (`statements.out`): a stored type in `Rigidity/UnitRingEq` changed, a constant of
+  `Rigidity/UsablePrime` dropped, an unlisted public added to `Instances/UnitRingModels`, a stored type in
+  `Collapse/Density/Headline` changed, a constant of `Rigidity/FourColourPlaces` dropped, FS131-IRU1's publicization of
+  `exists_integral_primitive` undone (reported as MISSING and, the private copy being new, ADDED). The comparator was first run on
+  a synthetic union of the two gated prints: clean, its plants firing (`statements-synthetic.out`).
+- **Every record's axioms** (`tools/fs131_iru2_axioms_diff.py`, a copy of FS131-IFR2's; the merged print
+  `data/fs131/iru2/axioms-all.txt` from `data/fs131/iru2/lean/AxiomsAll.lean`, sixteen modules, 457 records, no `sorryAx`): every
+  record of FS131-IRU1's print (72) and of FS131-IFR2's print of `main` (385) has the same axiom set in the merged build, nothing
+  added or missing: **VERDICT CLEAN** (`axioms-diff.out`); every `AXIOMS` line of the merged print is a line of one of the two
+  gated prints. Four plants fired: an axiom set changed (`UnitRingEq`), a record dropped (`UsablePrime`), a record added
+  (`UnitRingModels`), a `sorryAx` (`Density/Headline`).
+- **The audit's coverage**: FS131-IRU1's generator (`tools/fs131_iru1_audit_block.py --coverage`) on the merged print of its six
+  modules against the merged `scripts/Axioms.lean`: "COVERAGE OK: every one of the 47 public records is filed under its class"
+  (`coverage-iru1gen.out`); FS131-IFR1's and FS131-ICS1's generators on the whole merged print: "COVERAGE OK … 229 public
+  records" each (`coverage-ifr1gen.out`, `coverage-ics1gen.out`). Controls: the same coverage run against `main`'s audit file
+  (`git show main:scripts/Axioms.lean`) reports this branch's 45 records UNFILED, "STOP: 45 record(s)", exit 1
+  (`coverage-plant-mainfile.out`); against that file the generator regenerates exactly the predecessor's 45-record block
+  (`audit/regen.out`; its `#print` lines equal `data/fs131/iru1/audit.clean.lean`'s); and its `--plant` on the merged file reports
+  BAD, IMPORTED, MISFILED and OPEN, exit 1 (`audit-plant.out`).
+- **The head statements**: the predecessor's read-aloud (`data/fs131/iru2/lean/ReadAloud.lean`, its run line changed) on the merged
+  build prints exactly what it printed on the gated build 3 — every stored type, and nineteen axiom lists, each
+  `[propext, Classical.choice, Quot.sound]` — the files differing only in the slot's admission line (`readaloud.txt` against
+  `data/fs131/iru1/readaloud.txt`).
+- **The assumptions ledger**: `./scripts/assumptions.sh --write-ledger` under the slot (`write-ledger.log`): exit 0, 279 rows,
+  "rows the ledger gains (+) and loses (-)": none; the file equals both the branch's parent and `main`'s.
+
+**A slip, logged as mine**: while checking the rebuilt list (§ 2.4) one command wrote a short list of module names to a file in
+`/tmp` and deleted it in the same command (unused; standing rule 2 sends every working file under `data/fs131/iru2/`). Nothing
+was lost or read by another job.

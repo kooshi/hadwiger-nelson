@@ -1,0 +1,24 @@
+23 dependents of ['Proofs.HadwigerNelson.Rigidity.AdmissiblePrime'] of 2186 modules
+  Proofs
+  Proofs.HadwigerNelson.Collapse.Density.Defs
+  Proofs.HadwigerNelson.Collapse.Density.Headline
+  Proofs.HadwigerNelson.Collapse.Density.Upper
+  Proofs.HadwigerNelson.Collapse.Dichotomy
+  Proofs.HadwigerNelson.Collapse.Headline
+  Proofs.HadwigerNelson.Collapse.Selection
+  Proofs.HadwigerNelson.Collapse.Slice
+  Proofs.HadwigerNelson.Instances.SqrtClassValues
+  Proofs.HadwigerNelson.Instances.SqrtFiveClass
+  Proofs.HadwigerNelson.Instances.SqrtFortySevenFive
+  Proofs.HadwigerNelson.Instances.SqrtTwentyThreeCbrtTwo
+  Proofs.HadwigerNelson.Instances.UnitRingModels
+  Proofs.HadwigerNelson.Rigidity.ChainHeadline
+  Proofs.HadwigerNelson.Rigidity.EntropySplitMax
+  Proofs.HadwigerNelson.Rigidity.FourColourPlaces
+  Proofs.HadwigerNelson.Rigidity.MainClauseFive
+  Proofs.HadwigerNelson.Rigidity.Pieces
+  Proofs.HadwigerNelson.Rigidity.PlaneComponents
+  Proofs.HadwigerNelson.Rigidity.SqrtClassFive
+  Proofs.HadwigerNelson.Rigidity.UnitCircle
+  Proofs.HadwigerNelson.Rigidity.UsablePrime
+  Proofs.HadwigerNelson.Rigidity.ZeroEntropyClosed

@@ -1,0 +1,6 @@
+rsync real exit=0
+sha exits: 0 0 0
+source unchanged during the copy: YES
+destination equals source: YES
+itemized lines in the real copy: 39 (dry run: 39)
+exit=0
