@@ -1,0 +1,7 @@
+#print axioms HadwigerNelson.SqrtFiveClass.chromaticNumber_planeOver_sqrt_eq_five
+#print axioms HadwigerNelson.SqrtFiveClass.five_le_chromaticNumber_planeOver_sqrt_iff
+#print axioms HadwigerNelson.SqrtFiveClass.five_le_localBound_sqrt_iff
+#print axioms HadwigerNelson.SqrtFiveClass.localBound_sqrt_eq_five
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.chromaticNumber_planeOver_sqrt23_cbrt2_eq_five
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.localBound_sqrt23_eq_four
+#print axioms HadwigerNelson.Rigidity.min_localBoundAllLevels_five

@@ -386,6 +386,10 @@ import Proofs.HadwigerNelson.Rigidity.MainClauseFive
 import Proofs.HadwigerNelson.Rigidity.SqrtClassFive
 import Proofs.HadwigerNelson.Instances.SqrtFortySevenFive
 import Proofs.HadwigerNelson.Instances.SqrtClassValues
+import Proofs.HadwigerNelson.Rigidity.FourColourPlaces
+import Proofs.HadwigerNelson.Arith.StableAboveUsable
+import Proofs.HadwigerNelson.Instances.SqrtFiveClass
+import Proofs.HadwigerNelson.Instances.SqrtTwentyThreeCbrtTwo
 import Proofs.HadwigerNelson.Rigidity.SolenoidErgodic
 import Proofs.HadwigerNelson.Rigidity.HaarMultiple
 import Proofs.HadwigerNelson.Rigidity.DualGroup
@@ -591,6 +595,9 @@ import Proofs.HadwigerNelson.Arith.UpperHalf
 import Proofs.HadwigerNelson.Arith.QuadraticPrime
 import Proofs.HadwigerNelson.Instances.UpperHalfValues
 import Proofs.HadwigerNelson.Arith.ThreeColourCharacter
+import Proofs.HadwigerNelson.CayleyThree.Circular
+import Proofs.HadwigerNelson.CayleyThree.Fibre
+import Proofs.HadwigerNelson.CayleyThree.Density
 import Proofs.HadwigerNelson.Arith.TorsionExtraction
 import Proofs.HadwigerNelson.Arith.ThreeColourCriterion
 import Proofs.HadwigerNelson.Arith.DyadicQuadratic

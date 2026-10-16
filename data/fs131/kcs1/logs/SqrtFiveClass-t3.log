@@ -1,0 +1,9 @@
+slot: waiting (ledger 22 + 5 > budget 22 GiB; 0 free CPUs < 1)
+slot: admitted lake: mem 5 GiB (hard cap), cpus 0
+Proofs/HadwigerNelson/Instances/SqrtFiveClass.lean:39:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Instances/SqrtFiveClass.lean:45:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Instances/SqrtFiveClass.lean:51:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Instances/SqrtFiveClass.lean:57:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Instances/SqrtFiveClass.lean:64:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Instances/SqrtFiveClass.lean:71:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Instances/SqrtFiveClass.lean:76:8: warning: declaration uses `sorry`

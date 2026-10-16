@@ -1,0 +1,252 @@
+slot: admitted ics1-iter: mem 6 GiB (hard cap), cpus 8,9
+data/fs131/ics1/work/StableAboveUsable.lean:101:47: error: Application type mismatch: The argument
+  hz.left
+has type
+  reF z ∈ B
+of sort `Prop` but is expected to have type
+  ↥F
+of sort `Type` in the application
+  ValuationSubring.mul_mem B hz.left
+data/fs131/ics1/work/StableAboveUsable.lean:101:69: error: Application type mismatch: The argument
+  hz.right
+has type
+  imF z ∈ B
+of sort `Prop` but is expected to have type
+  ↥F
+of sort `Type` in the application
+  ValuationSubring.mul_mem B hz.right
+data/fs131/ics1/work/StableAboveUsable.lean:102:47: error: Application type mismatch: The argument
+  hz.left
+has type
+  reF z ∈ B
+of sort `Prop` but is expected to have type
+  ↥F
+of sort `Type` in the application
+  ValuationSubring.mul_mem B hz.left
+data/fs131/ics1/work/StableAboveUsable.lean:102:69: error: Application type mismatch: The argument
+  hz.right
+has type
+  imF z ∈ B
+of sort `Prop` but is expected to have type
+  ↥F
+of sort `Type` in the application
+  ValuationSubring.mul_mem B hz.right
+data/fs131/ics1/work/StableAboveUsable.lean:107:60: error: Application type mismatch: The argument
+  hz.left
+has type
+  reF z ∈ B
+of sort `Prop` but is expected to have type
+  ↥F
+of sort `Type` in the application
+  ValuationSubring.add_mem B hz.left
+data/fs131/ics1/work/StableAboveUsable.lean:107:104: error: Application type mismatch: The argument
+  hz.right
+has type
+  imF z ∈ B
+of sort `Prop` but is expected to have type
+  ↥F
+of sort `Type` in the application
+  ValuationSubring.add_mem B hz.right
+data/fs131/ics1/work/StableAboveUsable.lean:112:55: error: Application type mismatch: The argument
+  hz.left
+has type
+  reF z ∈ B
+of sort `Prop` but is expected to have type
+  ↥F
+of sort `Type` in the application
+  ValuationSubring.neg_mem B hz.left
+data/fs131/ics1/work/StableAboveUsable.lean:112:94: error: Application type mismatch: The argument
+  hz.right
+has type
+  imF z ∈ B
+of sort `Prop` but is expected to have type
+  ↥F
+of sort `Type` in the application
+  ValuationSubring.neg_mem B hz.right
+data/fs131/ics1/work/StableAboveUsable.lean:119:38: error: Application type mismatch: The argument
+  ht
+has type
+  t ∈ B
+of sort `Prop` but is expected to have type
+  ↥F
+of sort `Type` in the application
+  ValuationSubring.mul_mem B ht
+data/fs131/ics1/work/StableAboveUsable.lean:129:31: error: Application type mismatch: The argument
+  hainv
+has type
+  a⁻¹ ∈ B
+of sort `Prop` but is expected to have type
+  ↥F
+of sort `Type` in the application
+  ValuationSubring.mul_mem B hainv
+data/fs131/ics1/work/StableAboveUsable.lean:129:59: error: Application type mismatch: The argument
+  ht
+has type
+  t ∈ B
+of sort `Prop` but is expected to have type
+  ↥F
+of sort `Type` in the application
+  ValuationSubring.mul_mem B ht
+data/fs131/ics1/work/StableAboveUsable.lean:129:73: error: Application type mismatch: The argument
+  hainv
+has type
+  a⁻¹ ∈ B
+of sort `Prop` but is expected to have type
+  ↥F
+of sort `Type` in the application
+  ValuationSubring.mul_mem B hainv
+data/fs131/ics1/work/StableAboveUsable.lean:152:81: error: Application type mismatch: The argument
+  h.right
+has type
+  imF z / (reF z ^ 2 + imF z ^ 2) ∈ B
+of sort `Prop` but is expected to have type
+  ↥F
+of sort `Type` in the application
+  ValuationSubring.neg_mem B h.right
+data/fs131/ics1/work/StableAboveUsable.lean:155:101: error: Application type mismatch: The argument
+  h.left
+has type
+  imF z / (imF z ^ 2 + reF z ^ 2) ∈ B
+of sort `Prop` but is expected to have type
+  ↥F
+of sort `Type` in the application
+  ValuationSubring.neg_mem B h.left
+data/fs131/ics1/work/StableAboveUsable.lean:158:12: error(lean.dependsOnNoncomputable): failed to compile definition, consider marking it as 'noncomputable' because it depends on 'Complex.instField', which is 'noncomputable'
+data/fs131/ics1/work/StableAboveUsable.lean:222:25: error: Type mismatch: After simplification, term
+  h2B
+ has type
+  @Membership.mem (↥F) (ValuationSubring ↥F) SetLike.instMembership B 2⁻¹
+but is expected to have type
+  @Membership.mem (↥F) (ValuationSubring ↥F) SetLike.instMembership B (↑2)⁻¹
+data/fs131/ics1/work/StableAboveUsable.lean:231:10: error: Tactic `rewrite` failed: motive is not type correct:
+  fun _a => ↑z = ↑(⟨ofF _a, ⋯⟩ + ⟨ofF ↑b, ⋯⟩ * (algebraMap (𝓞 ↥(fieldI F)) ↥P.localRing) iO)
+Error: Application type mismatch: The argument
+  memOf a
+has type
+  ofF ↑a ∈ P.localRing
+but is expected to have type
+  ofF _a ∈ P.localRing
+in the application
+  ⟨ofF _a, ⋯⟩
+
+Explanation: The rewrite tactic rewrites an expression 'e' using an equality 'a = b' by the following process. First, it looks for all 'a' in 'e'. Second, it tries to abstract these occurrences of 'a' to create a function 'm := fun _a => ...', called the *motive*, with the property that 'm a' is definitionally equal to 'e'. Third, we observe that 'congrArg' implies that 'm a = m b', which can be used with lemmas such as 'Eq.mpr' to change the goal. However, if 'e' depends on specific properties of 'a', then the motive 'm' might not typecheck.
+
+Possible solutions: use rewrite's 'occs' configuration option to limit which occurrences are rewritten, or use 'simp' or 'conv' mode, which have strategies for certain kinds of dependencies (these tactics can handle proofs and 'Decidable' instances whose types depend on the rewritten term, and 'simp' can apply user-defined '@[congr]' theorems as well).
+
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+𝔭 : Ideal (𝓞 ↥F)
+B : ValuationSubring ↥F
+hnon : ∀ x ∈ B, 1 + x ^ 2 ∉ B.nonunits
+r : ↥B →+* 𝓞 ↥F ⧸ 𝔭
+hr : Function.Surjective ⇑r
+hker : ∀ (x : ↥B), r x = 0 ↔ ↑x ∈ B.nonunits
+h2B : 2⁻¹ ∈ B
+P : StablePrime F
+hPA : P.localRing = gaussVal B hnon
+hmax : (P.P ^ 1).IsMaximal
+this✝ : Field (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := ⋯
+this : Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+memA : ∀ (z : ↥(fieldI F)), z ∈ P.localRing ↔ reF z ∈ B ∧ imF z ∈ B
+hsurj : Function.Surjective ⇑(P.residue 1)
+hkerres : ∀ (z : ↥P.localRing), (P.residue 1) z = 0 ↔ ↑z ∈ P.localRing.nonunits
+memOf : ∀ (b : ↥B), ofF ↑b ∈ P.localRing
+ρ : ↥B →+* 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := ⋯
+hρ : ∀ (b : ↥B), ρ b = (P.residue 1) ⟨ofF ↑b, ⋯⟩
+hρker : ∀ (b : ↥B), ρ b = 0 ↔ ↑b ∈ B.nonunits
+σ : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 →+* 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := ⋯
+hσdef : σ = Ideal.quotientMap (P.P ^ 1) (conjO F) ⋯
+hσmk : ∀ (x : 𝓞 ↥(fieldI F)), σ ((Ideal.Quotient.mk (P.P ^ 1)) x) = (Ideal.Quotient.mk (P.P ^ 1)) ((conjO F) x)
+hσ : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), σ (σ x) = x
+ι : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := ⋯
+hιdef : ι = (Ideal.Quotient.mk (P.P ^ 1)) iO
+hι : ι ^ 2 = -1
+hσι : σ ι = -ι
+hι0 : ι ≠ 0
+h2k : 2 ≠ 0
+hcard0 : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) = Nat.card ↥(σ.eqLocusField (RingHom.id (𝓞 ↥(fieldI F) ⧸ P.P ^ 1))) ^ 2
+z : ↥P.localRing
+a b : ↥B
+ha : reF ↑z = ↑a
+hb : imF ↑z = ↑b
+⊢ ↑z = ↑(⟨ofF ↑a, ⋯⟩ + ⟨ofF ↑b, ⋯⟩ * (algebraMap (𝓞 ↥(fieldI F)) ↥P.localRing) iO)
+data/fs131/ics1/work/StableAboveUsable.lean:227:58: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+𝔭 : Ideal (𝓞 ↥F)
+B : ValuationSubring ↥F
+hnon : ∀ x ∈ B, 1 + x ^ 2 ∉ B.nonunits
+r : ↥B →+* 𝓞 ↥F ⧸ 𝔭
+hr : Function.Surjective ⇑r
+hker : ∀ (x : ↥B), r x = 0 ↔ ↑x ∈ B.nonunits
+h2B : 2⁻¹ ∈ B
+P : StablePrime F
+hPA : P.localRing = gaussVal B hnon
+hmax : (P.P ^ 1).IsMaximal
+this✝ : Field (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := Ideal.Quotient.field (P.P ^ 1)
+this : Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+memA : ∀ (z : ↥(fieldI F)), z ∈ P.localRing ↔ reF z ∈ B ∧ imF z ∈ B
+hsurj : Function.Surjective ⇑(P.residue 1)
+hkerres : ∀ (z : ↥P.localRing), (P.residue 1) z = 0 ↔ ↑z ∈ P.localRing.nonunits
+memOf : ∀ (b : ↥B), ofF ↑b ∈ P.localRing
+ρ : ↥B →+* 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := (P.residue 1).comp ((ofF.comp B.subtype).codRestrict P.localRing memOf)
+hρ : ∀ (b : ↥B), ρ b = (P.residue 1) ⟨ofF ↑b, ⋯⟩
+hρker : ∀ (b : ↥B), ρ b = 0 ↔ ↑b ∈ B.nonunits
+σ : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 →+* 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := Ideal.quotientMap (P.P ^ 1) (conjO F) ⋯
+hσdef : σ = Ideal.quotientMap (P.P ^ 1) (conjO F) ⋯
+hσmk : ∀ (x : 𝓞 ↥(fieldI F)), σ ((Ideal.Quotient.mk (P.P ^ 1)) x) = (Ideal.Quotient.mk (P.P ^ 1)) ((conjO F) x)
+hσ : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), σ (σ x) = x
+ι : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := (Ideal.Quotient.mk (P.P ^ 1)) iO
+hιdef : ι = (Ideal.Quotient.mk (P.P ^ 1)) iO
+hι : ι ^ 2 = -1
+hσι : σ ι = -ι
+hι0 : ι ≠ 0
+h2k : 2 ≠ 0
+hcard0 : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) = Nat.card ↥(σ.eqLocusField (RingHom.id (𝓞 ↥(fieldI F) ⧸ P.P ^ 1))) ^ 2
+z : ↥P.localRing
+a b : ↥B
+ha : reF ↑z = ↑a
+hb : imF ↑z = ↑b
+e : z = ⟨ofF ↑a, ⋯⟩ + ⟨ofF ↑b, ⋯⟩ * (algebraMap (𝓞 ↥(fieldI F)) ↥P.localRing) iO
+⊢ (P.residue 1) ⟨ofF ↑a, ⋯⟩ + (P.residue 1) ⟨ofF ↑b, ⋯⟩ * (Ideal.Quotient.mk (P.P ^ 1)) iO = ρ a + ρ b * ι
+data/fs131/ics1/work/StableAboveUsable.lean:320:51: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+𝔭 : Ideal (𝓞 ↥F)
+h𝔭 : IsUsablePrime 𝔭
+this✝² : 𝔭.IsMaximal
+this✝¹ : Field (𝓞 ↥F ⧸ 𝔭) := Ideal.Quotient.field 𝔭
+this✝ : Finite (𝓞 ↥F ⧸ 𝔭)
+this : Fintype (𝓞 ↥F ⧸ 𝔭) := Fintype.ofFinite (𝓞 ↥F ⧸ 𝔭)
+B : ValuationSubring ↥F
+hB : ∀ (x : ↥F), x ∈ B ↔ ∃ a, ∃ s ∉ 𝔭, x = ↑a / ↑s
+r : ↥B →+* 𝓞 ↥F ⧸ 𝔭
+hr1 : ∀ (a s : 𝓞 ↥F) (hs : s ∉ 𝔭), r ⟨↑a / ↑s, ⋯⟩ * (Ideal.Quotient.mk 𝔭) s = (Ideal.Quotient.mk 𝔭) a
+hr2 : ∀ (x : ↥B), r x ≠ 0 → ↑x ∉ B.nonunits
+hsq : ¬IsSquare (-1)
+hnon : ∀ x ∈ B, 1 + x ^ 2 ∉ B.nonunits
+h1𝔭 : 1 ∉ 𝔭
+hr : Function.Surjective ⇑r
+hker : ∀ (x : ↥B), r x = 0 ↔ ↑x ∈ B.nonunits
+h2𝔭 : 2 ∉ 𝔭
+⊢ 2 = ↑2
+data/fs131/ics1/work/StableAboveUsable.lean:325:27: error: Application type mismatch: The argument
+  hz.right
+has type
+  imF z ∈ B
+of sort `Prop` but is expected to have type
+  ↥F
+of sort `Type` in the application
+  ValuationSubring.neg_mem B hz.right
+data/fs131/ics1/work/StableAboveUsable.lean:406:59: error: Application type mismatch: The argument
+  k₀
+has type
+  Subfield (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+of sort `Type` but is expected to have type
+  Fintype.card ?m.1186 = Fintype.card ?m.1187
+of sort `Prop` in the application
+  FiniteField.ringEquivOfCardEq k₀
+
+real	0m12.564s
+user	0m19.425s
+sys	0m1.043s

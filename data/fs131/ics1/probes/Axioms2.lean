@@ -1,0 +1,6 @@
+import Proofs.HadwigerNelson.Arith.StableAboveUsable
+open HadwigerNelson.UpperHalf
+#print axioms exists_stablePrime_card_eq_sq
+#print axioms nonempty_hom_levelTarget_one_unitQuadrance
+#print axioms localBound_le_unitQuadrance
+#print axioms localBound_le_finitePlane

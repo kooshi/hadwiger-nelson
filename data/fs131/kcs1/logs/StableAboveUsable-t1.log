@@ -1,0 +1,5 @@
+Proofs/HadwigerNelson/Arith/StableAboveUsable.lean:31:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/StableAboveUsable.lean:37:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/StableAboveUsable.lean:44:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Arith/StableAboveUsable.lean:50:8: warning: declaration uses `sorry`
+exit=0

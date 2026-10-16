@@ -1,0 +1,41 @@
+slot: admitted ics1-uptodate: mem 6 GiB (hard cap), cpus 4,9
+⚠ [6310/6468] Replayed Proofs.HadwigerNelson.Rigidity.FourColourPlaces
+warning: Proofs/HadwigerNelson/Rigidity/FourColourPlaces.lean:44:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/FourColourPlaces.lean:50:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/FourColourPlaces.lean:56:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/FourColourPlaces.lean:61:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/FourColourPlaces.lean:66:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/FourColourPlaces.lean:73:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/FourColourPlaces.lean:79:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/FourColourPlaces.lean:92:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/FourColourPlaces.lean:97:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/FourColourPlaces.lean:102:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/FourColourPlaces.lean:108:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/FourColourPlaces.lean:114:8: declaration uses `sorry`
+⚠ [6311/6468] Replayed Proofs.HadwigerNelson.Arith.StableAboveUsable
+warning: Proofs/HadwigerNelson/Arith/StableAboveUsable.lean:31:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Arith/StableAboveUsable.lean:37:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Arith/StableAboveUsable.lean:44:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Arith/StableAboveUsable.lean:50:8: declaration uses `sorry`
+⚠ [6312/6468] Replayed Proofs.HadwigerNelson.Instances.SqrtFiveClass
+warning: Proofs/HadwigerNelson/Instances/SqrtFiveClass.lean:39:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Instances/SqrtFiveClass.lean:45:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Instances/SqrtFiveClass.lean:51:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Instances/SqrtFiveClass.lean:57:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Instances/SqrtFiveClass.lean:64:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Instances/SqrtFiveClass.lean:71:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Instances/SqrtFiveClass.lean:76:8: declaration uses `sorry`
+⚠ [6313/6468] Replayed Proofs.HadwigerNelson.Instances.SqrtTwentyThreeCbrtTwo
+warning: Proofs/HadwigerNelson/Instances/SqrtTwentyThreeCbrtTwo.lean:36:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Instances/SqrtTwentyThreeCbrtTwo.lean:45:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Instances/SqrtTwentyThreeCbrtTwo.lean:52:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Instances/SqrtTwentyThreeCbrtTwo.lean:58:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Instances/SqrtTwentyThreeCbrtTwo.lean:62:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Instances/SqrtTwentyThreeCbrtTwo.lean:66:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Instances/SqrtTwentyThreeCbrtTwo.lean:71:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Instances/SqrtTwentyThreeCbrtTwo.lean:75:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Instances/SqrtTwentyThreeCbrtTwo.lean:80:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Instances/SqrtTwentyThreeCbrtTwo.lean:84:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Instances/SqrtTwentyThreeCbrtTwo.lean:89:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Instances/SqrtTwentyThreeCbrtTwo.lean:93:8: declaration uses `sorry`
+All targets up-to-date (6470 jobs).

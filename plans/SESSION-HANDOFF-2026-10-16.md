@@ -8,7 +8,7 @@
 continued by a fresh successor from its record. **History (item 1025):** `main`'s unpushed range was rewritten by a
 private filter kept in the publication folder (`history-rewrite-2026-10-16/filter.py` there; the folder's path is in the coordinator's local-paths memory, never in the repository); every
 job branch carrying old commits is rewritten by the same filter at its hand-back, before its merge (`git filter-branch -f
---msg-filter '… msg' --index-filter '… index' -- origin/main..<branch>`; the `p`-adic and three-colour branches first
+--msg-filter '… msg' --index-filter '… index' -- main..<branch>` — never `origin/main..`, which strips the signatures of `main`'s later commits (item 1042); the `p`-adic and three-colour branches first
 need their stopped agents' record lines added to the filter's table, found by a guard scan of the branch), and its
 old-to-new map goes under `data/fs131/history-rewrite/`. A commit hook runs the guard on every commit. Next push: a
 Clerk's privacy check of `origin/main..main`, then a fast-forward push (standing protocol).
@@ -42,24 +42,25 @@ Clerk's privacy check of `origin/main..main`, then a fast-forward push (standing
 
 ## 3. Running
 
-**The p-adic plane landed** (item 1032), merged as `785a46e77`, gated on `e3e1dbb73`; filed by me; its gate
-(`data/fs131/iqp3/gate/`) is the baseline for the next landing; the three running implementers were told. `CLAUDE.md`'s
-"What the kernel holds" paragraph now lives in `plans/KERNEL-HOLDS.md`, where every landing's clause is filed; the fact
-audit runs with its default `--also` files plus `plans/KERNEL-HOLDS.md` and `plans/FILINGS.md`.
+**Landed today** (each filed): the p-adic plane (item 1032), the three-colour criterion (item 1043), the five-colour fields
+(item 1055; front files by FS131-FCS1, the README by me, item 1058). **Pushed** through `6730b314e` (item 1042); everything
+after it waits for the next privacy check (a Clerk, `mk-fs131-pv2.py` as template). Landings serialize: each edits the same
+gate inputs, so a branch gated before another landing re-merges `main` and re-gates (items 1047–1048).
 
 | job | what | worktree, branch | record |
 |---|---|---|---|
-| FS131-RDM1 (item 1031) | the README rewritten for a human reader (Kooshi's W21); to `main` only after my read, three status checks and Kooshi's look | `rdm1`, `fs131-rdm1` | `plans/FS131-RDM1-readme.md` |
-| FS131-ICT3 (item 1023) | the three-colour criterion to the gate: five spec examples, lint, gate, read-aloud, drafts | `kel1`, `fs131-ktc1` | `plans/FS131-ICT3-three-colour.md` |
-| FS131-IFR1 (item 1023) | the density form of the collapse: 81 leaves (about 2,650 lines) and the gate; item 1021's three rulings | `kcl1`, `fs131-kfr1` | `plans/FS131-IFR1-density.md` |
-| FS131-ICS1 (item 1028) | part A of FS131-KCS1's plan (item 1027): the quadratic dichotomy, the family, CLS in full, ℚ(√23, ∛2), the bridge; three `ClassRatio` lemmas made public | `kcs1`, `fs131-kcs1` | `plans/FS131-ICS1-class.md` |
+| FS131-IFR2 (item 1056) | the density form: merge `main`, keep every landing's gate inputs, one gate | `kcl1`, `fs131-kfr1` | `plans/FS131-IFR2-density.md` |
+| FS131-IRU1 (item 1045) | the ring of unit vectors (Lemma C′, components clause, dichotomy); will re-merge `main` before its gate | `il5`, `fs131-kru1` | `plans/FS131-IRU1-ring.md` |
+| FS131-FCS1 (item 1057) | Clerk: the five-colour drafts filed, CLS's "not yet searched" replaced by FS131-PAS1's verdict | `filing2`, `fs131-fcs1` | its report |
 
-Both the `p`-adic and the three-colour branches joined `Proofs.lean`'s import blocks with `main`'s: the second to land
-will conflict there — keep both blocks. At each implementer's hand-back: check its commits, print its head statements'
-axioms myself, read them against the ledger row, guard, reword its predecessor's lines that item 1022 names, merge
-`--no-ff` (`main` equal to the gated commit in `Proofs/`, `scripts/` and the package files), file its drafts (a Clerk if
-large), run the fact audit and read its last line, rebuild the main tree. Search request 26 (`p = 23`) waits for a
-Searcher run on a day the laptop is not building (item 1024).
+At each hand-back: check its commits, print the head statements' axioms myself, read them against the ledger row, rewrite
+the branch over `main..<branch>` with the private filter if it carries pre-rewrite commits, guard-scan it (compressed dumps
+read as false matches: guard them decompressed), merge `--no-ff`, check `main` equals the gated commit in `Proofs/`,
+`scripts/` and the package files, move the gated build into the main tree and run `build.sh`, file the drafts (a Clerk if
+large), run the fact audit with its default `--also` files plus `plans/KERNEL-HOLDS.md` and `plans/FILINGS.md`.
+**Held for landings:** FS131-PAS1's § 3.4 items 1–3 (with FS131-IFR2: row 129, README § 5, a new CLOSED-QUESTIONS entry for
+de Grey's and Haugstrup's questions) and § 5.4 items 1–2, § 6.4 items 1–2 (with FS131-IRU1: rows 100 and 105, crediting
+Nagell and Bauer, item 1051).
 
 ## 4. Kooshi's decisions, all answered (W8–W9, items 1009–1010)
 

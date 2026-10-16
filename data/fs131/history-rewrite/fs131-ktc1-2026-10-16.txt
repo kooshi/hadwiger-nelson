@@ -1,0 +1,30 @@
+# Branch fs131-ktc1 (the three-colour criterion), rewritten 2026-10-16 by the privacy filter before its merge (inventory items 1025, 1042): its own commits, old new.
+# Its old main commits became main's rewritten ones (data/fs131/history-rewrite/main-2026-10-16.txt); main's later commits were left as they are.
+b9f1fcab0 a0bcbbcca
+343b337a1 a32293833
+65b12e2e1 96bf851f4
+89340d044 695cd779e
+29be81111 82f57e522
+60e16a8c1 51af95758
+9466d213b 45fb330d0
+3d8d4bf91 6a605d905
+fbb3741ef defd3beda
+b9e4a8440 472b73dd6
+e71acf2a9 7dd10a862
+132d508a7 9fae3fba1
+0ab9c6614 55edfbb80
+ffe203401 02988b5f2
+c0c96b8d7 1bc78a834
+1146d0006 296ee6bfe
+56c51e6bc f165e2795
+3c7db8a96 f00c6be02
+4ea3653d4 d0a6c1c56
+11d8d1a75 d412b073d
+f6ea4f448 dd1695cc2
+c0a4ca5ae e57f11c43
+c03b81e5e eda40e060
+810e18698 2b04f38d5
+78fda50d1 df1d7eda4
+df3c77d07 b55520556
+7363cc121 3856af159
+8d9748dd7 e34d68d6d
