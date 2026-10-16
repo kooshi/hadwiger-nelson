@@ -144,7 +144,7 @@ symbol for symbol**, except that `F` is now implicit (it is determined by `h`; �
 has a ramified stable dyadic prime and `R = O′`, row 100); Lemma C; the injectivity of `R/nR → O′/nO′`.
 
 **Beside it, in the same module** (the coordinator's ruling: each with its price, § 3.4):
-- `exists_sub_div_mem_stableIntegers` — **the per-prime form** (FS91-J07-4's onto half at every `n`): if no stable prime
+- `exists_eq_add_mul_of_mem_stableIntegers` (renamed by the domain pass, § 3.3) — **the per-prime form** (FS91-J07-4's onto half at every `n`): if no stable prime
   holding `n ≠ 0` is ramified, every `x ∈ O′` is `r + n·y`, `r ∈ R`, `y ∈ O′`. On the head statement's path (no marginal cost).
 - `exists_two_pow_mul_mem_unitRing` — **its corollary at every real number field, no scope**: `x ∈ O′ ⇒ 2^a·x ∈ R` for some
   `a`. Marginal ≈ 45 lines (with `not_isRamified_of_odd_mem`).
@@ -197,3 +197,21 @@ not read; no copy in the library*), its model (`ℚ(i)`, conjugation, the prime 
   number field. Replacement drafted in § 3.6 item 3, owed at the landing (item 1040).
 - **F7 — `L(F) < ⊤` at every real number field** (`localBound_lt_top`, ≈ 15 lines on route E): the kernel's `localBound` can
   no longer be `⊤`; `UpperHalf.chromaticNumber_planeOver_le_localBound` says `χ(F²) ≤ L(F)` with `L(F)` finite everywhere.
+
+## Stage 3 — the skeleton, the passes, the plan per leaf, the price
+
+### 3.1 The domain-modeling pass (`debruijn-domain-modeling`, fresh; committed before the next pass)
+
+- **The exponent was incidental.** `div_natCast_mem_localRing` first took the exponent `m = |𝓞 ⧸ (n)|` inside its statement;
+  what the step uses is only `n ∉ P^m`. Split into `natCast_notMem_pow_absNorm` (that exponent works at every stable prime) and
+  `div_natCast_mem_localRing` (any `m` with `n ∉ P^m`).
+- **The onto statement had a division in it.** `(x − r)/n ∈ O′` became `x = r + n·y` with `y ∈ O′`
+  (`exists_eq_add_mul_of_mem_stableIntegers`): it reads as `R + n·O′ = O′`, J07-4's surjection, and its consumers multiply by
+  `c`, never divide.
+- **Kept, with reasons.** `closure_normOne_eq_top`'s hypothesis `∀ a fixed, IsUnit (a + θ)` is not implied by `θ − σθ` a
+  unit (in `𝔽₃ × 𝔽₃` with the swap, a split prime's picture, it fails), so it stays a hypothesis; its intrinsic form, "σ
+  fixes every maximal ideal", is harder to discharge in a product than the componentwise unit check. `resPi` generalizes
+  `Counting.levR` (`levR F k` is `resPi (level F k) k` up to the synonym `Lev`) because the odd form needs a set of primes that
+  is not a `level` (those holding an odd `n`). `isUnit_mover` returns the two facts the abstract lemma consumes, as one.
+- **Next lemma, predicted before checking:** the components as the quotient, `ConnectedComponent ≃ fieldI F ⧸ ℤ[U]`, states in
+  the existing vocabulary (`reachable_iff_sub_mem_unitRingOver`); not planned (no consumer).
