@@ -32,25 +32,25 @@ variable (p : ℕ) [Fact p.Prime]
 point minus a fixed representative of its coset of `ℤ_p²`, reduced modulo `p`.) -/
 theorem exists_residueMap (hp : p % 4 = 3) :
     ∃ ρ : ℚ_[p] × ℚ_[p] → ZMod p × ZMod p,
-      (∀ x y, (unitQuadrance ℚ_[p]).Adj x y → (finitePlane p).Adj (ρ x) (ρ y)) ∧ ∀ z, IsOpen (ρ ⁻¹' {z}) := by
+      (∀ x y, (padicPlane p).Adj x y → (finitePlane p).Adj (ρ x) (ρ y)) ∧ ∀ z, IsOpen (ρ ⁻¹' {z}) := by
   sorry
 
 /-- **A Borel colouring of the p-adic plane from one of `UD(𝔽_p, 2)`**: a `k`-colouring of the finite plane, pulled back
 along `exists_residueMap`, is a proper `k`-colouring of the p-adic plane whose classes are open, hence Borel. The inhabitant
 of every hypothesis that asks for a Borel colouring of the p-adic plane (`PadicPlane/Measure`). -/
 theorem exists_borelColoring_of_colorable (hp : p % 4 = 3) {k : ℕ} (h : (finitePlane p).Colorable k) :
-    ∃ c : (unitQuadrance ℚ_[p]).Coloring (Fin k), ∀ i, MeasurableSet[borel (ℚ_[p] × ℚ_[p])] (⇑c ⁻¹' {i}) := by
+    ∃ c : (padicPlane p).Coloring (Fin k), ∀ i, MeasurableSet[borel (ℚ_[p] × ℚ_[p])] (⇑c ⁻¹' {i}) := by
   sorry
 
 /-- **The upper half**: a `k`-colouring of `UD(𝔽_p, 2)` bounds the Borel chromatic number of the p-adic plane by `k`. -/
 theorem borelChromaticNumber_le_of_colorable (hp : p % 4 = 3) {k : ℕ} (h : (finitePlane p).Colorable k) :
-    borelChromaticNumber (unitQuadrance ℚ_[p]) ≤ k :=
+    borelChromaticNumber (padicPlane p) ≤ k :=
   let ⟨c, hc⟩ := exists_borelColoring_of_colorable p hp h
   borelChromaticNumber_le_of_coloring c hc
 
 /-- **The upper half, as numbers**: `χ_Bor(ℚ_p²) ≤ χ(UD(𝔽_p, 2))`. -/
 theorem borelChromaticNumber_le_chromaticNumber (hp : p % 4 = 3) :
-    borelChromaticNumber (unitQuadrance ℚ_[p]) ≤ (finitePlane p).chromaticNumber := by
+    borelChromaticNumber (padicPlane p) ≤ (finitePlane p).chromaticNumber := by
   sorry
 
 end HadwigerNelson.PadicPlane

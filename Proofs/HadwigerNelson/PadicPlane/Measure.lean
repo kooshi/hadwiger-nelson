@@ -103,13 +103,13 @@ theorem haar_le_of_towerRatio (hp : p ≠ 2) {c : ℝ} (hc : TowerRatio p c) {I 
 
 /-- **A Borel colouring of the p-adic plane with `k` colours has `1 ≤ k·c`** for every tower ratio `c`. -/
 theorem one_le_mul_of_borelColoring (hp : p ≠ 2) {c : ℝ} (hc : TowerRatio p c) {k : ℕ}
-    (col : (unitQuadrance ℚ_[p]).Coloring (Fin k))
+    (col : (padicPlane p).Coloring (Fin k))
     (hcol : ∀ i, MeasurableSet[borel (ℚ_[p] × ℚ_[p])] (⇑col ⁻¹' {i})) : 1 ≤ (k : ℝ) * c := by
   sorry
 
 /-- **The Borel chromatic number of the p-adic plane is at least `⌈1/c⌉`** for every positive tower ratio `c`. -/
 theorem le_borelChromaticNumber_of_towerRatio (hp : p ≠ 2) {c : ℝ} (hc : TowerRatio p c) (hc0 : 0 < c) :
-    ((⌈1 / c⌉₊ : ℕ) : ℕ∞) ≤ borelChromaticNumber (unitQuadrance ℚ_[p]) := by
+    ((⌈1 / c⌉₊ : ℕ) : ℕ∞) ≤ borelChromaticNumber (padicPlane p) := by
   sorry
 
 end HadwigerNelson.PadicPlane

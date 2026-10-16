@@ -1,0 +1,61 @@
+slot: admitted lake: mem 7 GiB (hard cap), cpus 0
+HadwigerNelson.PadicPlane.one_add_div_le_of_borelColoring : ∀ (p : Nat) [inst : Fact (Nat.Prime p)],
+  @Eq Nat
+      (@HMod.hMod Nat Nat Nat (@instHMod Nat Nat.instMod) p (@OfNat.ofNat Nat (nat_lit 4) (instOfNatNat (nat_lit 4))))
+      (@OfNat.ofNat Nat (nat_lit 3) (instOfNatNat (nat_lit 3))) →
+    ∀ {k : Nat}
+      (c :
+        @SimpleGraph.Coloring (Prod (@Padic p inst) (@Padic p inst)) (@HadwigerNelson.PadicPlane.padicPlane p inst)
+          (Fin k)),
+      (∀ (i : Fin k),
+          @MeasurableSet (Prod (@Padic p inst) (@Padic p inst))
+            (@borel (Prod (@Padic p inst) (@Padic p inst))
+              (@instTopologicalSpaceProd (@Padic p inst) (@Padic p inst)
+                (@UniformSpace.toTopologicalSpace (@Padic p inst)
+                  (@PseudoMetricSpace.toUniformSpace (@Padic p inst)
+                    (@SeminormedRing.toPseudoMetricSpace (@Padic p inst)
+                      (@SeminormedCommRing.toSeminormedRing (@Padic p inst)
+                        (@NormedCommRing.toSeminormedCommRing (@Padic p inst)
+                          (@NormedField.toNormedCommRing (@Padic p inst) (@Padic.normedField p inst)))))))
+                (@UniformSpace.toTopologicalSpace (@Padic p inst)
+                  (@PseudoMetricSpace.toUniformSpace (@Padic p inst)
+                    (@SeminormedRing.toPseudoMetricSpace (@Padic p inst)
+                      (@SeminormedCommRing.toSeminormedRing (@Padic p inst)
+                        (@NormedCommRing.toSeminormedCommRing (@Padic p inst)
+                          (@NormedField.toNormedCommRing (@Padic p inst) (@Padic.normedField p inst)))))))))
+            (@Set.preimage (Prod (@Padic p inst) (@Padic p inst)) (Fin k)
+              (@DFunLike.coe
+                (@SimpleGraph.Coloring (Prod (@Padic p inst) (@Padic p inst))
+                  (@HadwigerNelson.PadicPlane.padicPlane p inst) (Fin k))
+                (Prod (@Padic p inst) (@Padic p inst)) (fun x => Fin k)
+                (@RelHom.instFunLike (Prod (@Padic p inst) (@Padic p inst)) (Fin k)
+                  (@SimpleGraph.Adj (Prod (@Padic p inst) (@Padic p inst))
+                    (@HadwigerNelson.PadicPlane.padicPlane p inst))
+                  (@SimpleGraph.Adj (Fin k) (SimpleGraph.completeGraph (Fin k))))
+                c)
+              (@singleton (Fin k) (Set (Fin k)) (@Set.instSingletonSet (Fin k)) i))) →
+        @LE.le Real Real.instLE
+          (@HAdd.hAdd Real Real Real (@instHAdd Real Real.instAdd)
+            (@OfNat.ofNat Real (nat_lit 1) (@One.toOfNat1 Real Real.instOne))
+            (@HDiv.hDiv Real Real Real (@instHDiv Real (@DivInvMonoid.toDiv Real Real.instDivInvMonoid))
+              (@HAdd.hAdd Real Real Real (@instHAdd Real Real.instAdd) (@Nat.cast Real Real.instNatCast p)
+                (@OfNat.ofNat Real (nat_lit 1) (@One.toOfNat1 Real Real.instOne)))
+              (@HMul.hMul Real Real Real (@instHMul Real Real.instMul)
+                (@OfNat.ofNat Real (nat_lit 2) (@instOfNatAtLeastTwo Real (nat_lit 2) Real.instNatCast ⋯))
+                (@Nat.cast Real Real.instNatCast p).sqrt)))
+          (@Nat.cast Real Real.instNatCast k)
+def HadwigerNelson.PadicPlane.borelChromaticNumber.{u_1} : {X : Type u_1} →
+  [TopologicalSpace X] → SimpleGraph X → ENat :=
+fun {X} [inst : TopologicalSpace X] G =>
+  ⨅ k,
+    ⨅ (_ :
+      ∃ c,
+        ∀ (i : Fin k),
+          @MeasurableSet X (@borel X inst)
+            (@Set.preimage X (Fin k)
+              (@DFunLike.coe (@SimpleGraph.Coloring X G (Fin k)) X (fun x => Fin k)
+                (@RelHom.instFunLike X (Fin k) (@SimpleGraph.Adj X G)
+                  (@SimpleGraph.Adj (Fin k) (SimpleGraph.completeGraph (Fin k))))
+                c)
+              (@singleton (Fin k) (Set (Fin k)) (@Set.instSingletonSet (Fin k)) i))),
+      @Nat.cast ENat ENat.instNatCast k

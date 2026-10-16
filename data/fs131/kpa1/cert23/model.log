@@ -1,0 +1,4 @@
+slot: admitted time: mem 6 GiB (hard cap), cpus 0
+p=23 n=529 |S|=24 maps=48 sha=28cf189c83d2
+reps 266; pairs 35511; orbits 1697
+ops 1444136 [126.2s]

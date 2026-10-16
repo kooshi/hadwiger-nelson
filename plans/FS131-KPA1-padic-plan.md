@@ -225,7 +225,18 @@ thinner: FS-66's `U = 97.98` against `529/5 = 105.8` (8 %), while the reduction 
 and 20 PSD blocks, made by the 2026-10-14 variants' producer. Until it exists, C23 stays a leaf and
 `six_le_borelChromaticNumber_padicPlane_twentyThree` waits on it; nothing else does.
 
-## Stage 3 — the skeleton, the passes and the plan (in progress)
+## Stage 3 — SAVED: the skeleton, the passes and the plan
+
+### 3.0 The skeleton
+
+Five modules under `Proofs/HadwigerNelson/PadicPlane/` — `Basic`, `Measure`, `Upper`, `Tower`, `Values` — imported by
+`Proofs.lean`, with their rows in `ARCHITECTURE.md` § 3.14 (`tools/check_architecture.py` exit 0). **Built through
+`./scripts/build.sh` under the slot** (`MEMMAX=7G BATCH=10`, 239 batches, 6 modules rebuilt, 7 m 26 s; the only warnings
+are the 38 `declaration uses sorry` of the 38 leaves (Basic 3, Measure 10, Upper 3, Tower 7, Values 15); `data/fs131/kpa1/build-gate.log`). Proved in the skeleton, no `sorry`:
+`borelChromaticNumber_le_of_coloring`, `le_borelChromaticNumber`, `chromaticNumber_le_borelChromaticNumber`,
+`TowerRatio.mono`, `res_apply`, `borelChromaticNumber_le_of_colorable` (from U2), `towerRatio_of_charSum` and
+`towerRatio_weil` (compositions of leaves), `borelChromaticNumber_padicPlane_twentyThree_le_eight` (from U2), and the
+spec examples. Nothing with a `sorry` reaches `main`.
 
 ### 3.1 The modeling passes
 
@@ -255,3 +266,289 @@ between structure intrinsic to the problem and structure incidental to it:
 - The unsampled members: `k = 0` in `exists_unitVector_lift` (true: `ZMod 1` is one point) and in `isIndepSet_wellFilled`
   (a single vertex); `I = ∅`; `κ = p + 1` (every character sum is at least `−(p+1)`), which makes the `κ` form's
   conclusion `χ_Bor ≥ 2`. None breaks a statement.
+
+**Obligation modeling** (`debruijn-obligation-modeling`, fresh, on the hard leaves). For each, the statement the proof
+derives from and its named children; every child is a separate fact, so the burn-down descends by leaf count. The
+partition: **assume** Weil's bound only (the declared import); **test** the spec examples (`res p k (1, 0) = (1, 0)`, the
+adjacency of `(0, 0)` and `(1, 0)` in `padicPlane p`, the empty graph's Borel one-colouring); **prove** everything else.
+
+- **M7 `exists_level_haar_bad_le`** derives from one inequality at a saturated set, `Rigidity/CountCompletion`'s
+  `haarK_bad_le` at `κ = 1/2`, which is simpler here: in a badly filled coset `D ⊆ Z`, `μ(I ∩ D) ≤ μ(D)/2 ≤ μ(D \ I)`, so
+  `μ(bad_k) ≤ μ(I \ Z) + μ(Z \ I)` with no division. Children: **M7a** `haar_bad_le` (that inequality, for `Z` a union of
+  level-`k` cosets); **M7b** `exists_level_coset_subset` (an open set holds a whole coset `x + p^jℤ_p²` about each of its
+  points: `Metric.isOpen_iff`, and `‖y − x‖ ≤ p^{−j}` iff `res p j (y − x) = 0` by `PadicInt.ker_toZModPow` and
+  `PadicInt.norm_le_pow_iff_mem_span_pow`); **M7c** `res_eq_zero_of_le` (`j ≤ k`: what `res p k` kills `res p j` kills,
+  `PadicInt.cast_toZModPow`). Then the leaf: `MeasurableSet.exists_isCompact_sdiff_lt` and `exists_isOpen_sdiff_lt` at
+  `ε/2` (Haar on a compact second-countable group is regular by instance, as `CountCompletion` used), a finite subcover of
+  the compact set by the cosets of M7b (`IsCompact.elim_nhds_subcover`), `Z` their union, saturated at every `k` beyond the
+  largest level (M7c).
+- **M8 `haar_le_of_towerRatio`** derives from `μ(I) ≤ μ(bad_k) + μ(good_k)` at every `k ≥ 1`, with
+  `good_k ⊆ ⋃_{x ∈ J_k} res⁻¹{x}` for `J_k` the well-filled residues as a `Finset` (`Finset.univ.filter`). Children:
+  **M8a** `haar_good_le` (`μ(good_k) ≤ |J_k|·p^{−2k}`, by `measure_biUnion_finset_le` and M4); **M8b** the arithmetic
+  (`|J_k| ≤ c·p^{2k}` from `TowerRatio` and M6, read in `ℝ≥0∞`); then `ENNReal.le_of_forall_pos_le_add` with M7.
+- **M5 `exists_unitVector_lift`** derives from a congruence form of Hensel. Children: **M5a** `exists_sq_eq_of_unit`
+  (`p ≠ 2`, `‖b₀‖ = 1`, `a² + b₀² − 1 ∈ span{p^k}` ⟹ some `b` with `a² + b² = 1` and `b − b₀ ∈ span{p^k}`: `hensels_lemma`
+  for `X² − (1 − a²)` at `b₀`, then `(b − b₀)(b + b₀) ∈ span{p^k}` with `b + b₀` a unit); **M5b** one coordinate of a lift of
+  a residue unit vector is a unit (`k ≥ 1`; else `1 ∈ pℤ_p`); **M5c** `toZModPow k x = toZModPow k y ↔ x − y ∈ span{p^k}`
+  (`PadicInt.ker_toZModPow`). `k = 0` is its own one-line case (`(1, 0)`); the two coordinates are symmetric (swap).
+- **T0 `ratioAtMost_of_charSum_levelOne`**, route A (no edit of `ClassRatio`), derives from Hoffman at each level with
+  `m = κQ^n` at level `n + 1`. Children: **T0a** `charSum_descend` (a character trivial on the kernel of `toLevelOne P n`
+  is `χ ∘ toLevelOne P n`, `FibreShare.exists_eq_compAddMonoidHom`, and its sum over `S_{n+1}` is `Q^n` times `χ`'s over
+  `S₁`, by `CertLink.HenselCount` with `CertLink.toLevelOne_mem_normOneSet`); **T0b** `card_normOneSet_succ`
+  (`|S_{n+1}| = Q^n (Q + 1)`, the same count, with `|S₁| = Q + 1` from `StandingFive.card_normOne` through the residue
+  field); **T0c** `charSum_re_ge_of_levelOne` (every non-trivial character at level `n + 1` has `Re Σ ≥ −κQ^n`: descended,
+  by T0a and the hypothesis; new, by `CertLink.NewCharBound`, `2Q^n ≤ κQ^n`); then `RatioBound.card_mul_le_of_indep` and
+  the field algebra `κQ^n/(Q^n(Q+1) + κQ^n) = κ/(Q+1+κ)`. The plumbing (finite quotients, `Fintype.ofFinite`, the level
+  set as a `Finset`) is `CertLink.card_le_of_fibreShareBound`'s, to be copied. Route B, once the collapse has merged and
+  the drafted visibility edit (§ 5.1) is applied: `charBound_of_charBound_oneT` at `κ/(Q + 1)` and
+  `ratioAtMost_of_charBound`, about 20 lines.
+- **T1 `exists_stablePrime_above`** derives from the absolute norm of `(p)`. Children: **T1a**
+  `finrank_fieldI_bot : Module.finrank ℚ (fieldI ⊥) = 2` (`SpectralChain.toFieldI` is a linear bijection from `⊥ × ⊥`,
+  and `finrank ℚ ⊥ = 1`); **T1b** `absNorm (span {(p : 𝓞)}) = p²` (`Ideal.absNorm_span_natCast`,
+  `NumberField.RingOfIntegers.rank`); **T1c** every maximal `P ∋ p` has `|𝓞 ⧸ P| = p²` (`absNorm_dvd_absNorm_of_le`,
+  `Nat.dvd_prime_pow`; not `1`; not `p`, because `𝓞 ⧸ P` holds `ι` with `ι² = −1`, `UpperHalf.exists_I_integer`, and
+  `FiniteField.isSquare_neg_one_iff` refuses it at `p ≡ 3 (mod 4)`); **T1d** stability (`P' = P.comap conj` is maximal and
+  holds `p`, so T1c gives it `p²` residues; were `P' ≠ P`, `(p) ≤ P ⊓ P' = P·P'` and `p⁴ ∣ p²`); **T1e** `2 ∉ P` (else
+  `1 ∈ P` from `p` odd). `p` is not a unit by T1b (`absNorm ⊤ = 1`), with no real-part argument.
+- **T2 `exists_levelEmbedding`** derives from `CharP (𝓞 ⧸ P^k) (p^k)`. Children: **T2a** `card_quot_pow`
+  (`|𝓞 ⧸ P^k| = p^{2k}`, `cardQuot_pow_of_prime`); **T2b** `p^j ∈ P^k → k ≤ j` (`absNorm` divisibility, `p^{2k} ∣ p^{2j}`);
+  **T2c** `charP_quot_pow` (an integer `m = p^j u`, `p ∤ u`, vanishes modulo `P^k` only if `p^k ∣ m`: `u` is a unit modulo
+  `P^k` since `u ∉ P`, and T2b); **T2d** the map `(a, b) ↦ θa + θb·ι` with `θ = ZMod.castHom`, its conjugate
+  `θa − θb·ι`, its norm `θ(a² + b²)`; **T2e** injectivity (conjugate, add, `2` and `ι` units, `ZMod.castHom_injective`);
+  then adjacency reflection is one line from the norm (T2d) and T2e.
+
+**Experience modeling** (`debruijn-experience-modeling`, fresh, on the head statements, as a mathematician would cite them
+and as `exact?` would find them). Changes made:
+
+- **`padicPlane p`**, an `abbrev` for `unitQuadrance ℚ_[p]` beside the library's `finitePlane p`, so that every headline
+  reads `borelChromaticNumber (padicPlane p)` — the domain's words — while every `unitQuadrance` lemma still applies. The
+  posers' name `QG_{𝒬_p}` is in its docstring.
+- **The citable form of T7**: `one_add_div_le_of_borelColoring` — *every* proper colouring of `padicPlane p` with Borel
+  classes and `k` colours has `1 + (p + 1)/(2√p) ≤ k`, a real inequality with no ceiling and no `ℕ∞`; the `ℕ∞` form
+  `le_borelChromaticNumber_padicPlane` (`⌈1 + (p + 1)/(2√p)⌉ ≤ χ_Bor`) stays beside it for composition.
+- **Question 1** is stated in the posers' own shape (`¬ ∃ B, ∀ p ≡ 3 (mod 4), χ_Bor ≤ B`) and named for its conclusion,
+  `not_exists_bound_borelChromaticNumber_padicPlane`.
+- **Row 75's level clauses** are named as the library's existing level-two theorem is
+  (`unitQuadrance_zmod121_not_colorable_four`): `unitQuadrance_zmod_seven_pow_not_colorable_three`, …
+- Kept: `borelChromaticNumber` (the posers' `χ_Bor`, generic in the space); the value names
+  `borelChromaticNumber_padicPlane_seven` etc., on the pattern of `chromaticNumber_finitePlane11`.
+
+### 3.3 The plan, per leaf
+
+Every leaf is a `sorry` in the skeleton. The implementer may not change a statement; a change it needs comes back through
+the coordinator. **Order** (the riskiest first, so the price is re-measured on them): Tower T1, T2, T3 (the number-field
+bridge); Basic B1–B3; Tower T4, T5, T6, T0; Measure M1–M10; Upper U1–U3; the certificate C7; Values. Re-price the phase
+from the first two leaves (`CLAUDE.md` § What compute actually helps).
+
+| leaf | module | route and the names it uses (each confirmed in Mathlib's source at the pin, or a library theorem) | children | hard part | lines |
+|---|---|---|---|---|---|
+| B1 `towerRatio_one` | Basic | `Finset.card_le_univ`, `Fintype.card_prod`, `ZMod.card` | — | `NeZero (p ^ k)` | 10 |
+| B2 `not_colorable_of_towerRatio` | Basic | colour classes `univ.filter (C · = i)` are independent; `Finset.card_eq_sum_card_fiberwise`; `m·c·p^{2k} < p^{2k}` | — | — | 30 |
+| B3 `norm_le_one_of_sq_add_sq_eq_one` | Basic | ultrametric: `‖a‖ ≠ ‖b‖ ⟹ ‖a² + b²‖ = max` (`IsUltrametricDist.norm_add_eq_max_of_norm_ne_norm`); `‖a‖ = ‖b‖ > 1` ⟹ `u = b/a ∈ ℤ_p` with `u² + 1 ∈ pℤ_p`, `PadicInt.toZMod`, `ZMod.exists_sq_eq_neg_one_iff` | — | the case split | 50 |
+| M1 `res_surjective` | Measure | `ZMod.natCast_zmod_val`, `map_natCast` | — | — | 8 |
+| M2 `isOpen_res_fibre` | Measure | fibre = `x₀ + ker`; `PadicInt.ker_toZModPow`, `PadicInt.norm_le_pow_iff_mem_span_pow`; `Metric.isOpen_iff` on the product | — | the product's sup norm | 30 |
+| M3 `haar_univ` | Measure | `Measure.addHaarMeasure_self`, `PositiveCompacts.coe_top` | — | — | 5 |
+| M4 `haar_res_fibre` | Measure | `AddSubgroup.index_mul_measure` (`Mathlib/MeasureTheory/Group/Measure.lean` l. 278), `AddSubgroup.index_ker`, M1; fibres are translates (`measure_preimage_add`) | — | `MeasurableSet` of the kernel (M2) | 25 |
+| M5 `exists_unitVector_lift` | Measure | `hensels_lemma` (`Mathlib/NumberTheory/Padics/Hensel.lean` l. 459), `PadicInt.ker_toZModPow` | M5a–M5c (§ 3.1) | the congruence modulo `p^k` from `‖z − b₀‖ < 1` | 80 |
+| M6 `isIndepSet_wellFilled` | Measure | M5; the translate `(I ∩ C') − s ⊆ C`; `nonempty_inter_of_measure_lt_add` (`MeasureSpace.lean` l. 464); `measure_preimage_add` | — | — | 60 |
+| M7 `exists_level_haar_bad_le` | Measure | after `Rigidity/CountCompletion`'s `haarK_bad_le`, `tendsto_haarK_bad_of_le_one`; `MeasurableSet.exists_isCompact_sdiff_lt`, `exists_isOpen_sdiff_lt`, `IsCompact.elim_nhds_subcover` | M7a–M7c (§ 3.1) | saturation of the finite union | 120 |
+| M8 `haar_le_of_towerRatio` | Measure | M6, M7, M4; `measure_biUnion_finset_le`, `ENNReal.le_of_forall_pos_le_add` | M8a, M8b | `ENNReal` arithmetic | 60 |
+| M9 `one_le_mul_of_borelColoring` | Measure | classes pulled back along `PadicInt.Coe.ringHom` (continuous: `continuous_subtype_val`), measurable for the product of Borels (`Prod.borelSpace`); independent through `unitQuadrance.map`; `measure_iUnion_fintype_le`, M8 | — | Borel on `ℚ_p²` versus the product σ-algebra on `ℤ_p²` (LEAN.md l. 420's pattern, `measurable_generateFrom`) | 50 |
+| M10 `le_borelChromaticNumber_of_towerRatio` | Measure | `le_borelChromaticNumber`, M9, `Nat.ceil_le` | — | — | 15 |
+| U1 `exists_residueMap` | Upper | the subgroup `(PadicInt.subring p).toAddSubgroup.prod …` of `ℚ_p²`, a representative per coset (`Quotient.out`), `ρ x = (toZMod, toZMod)` of `x − rep`; edges stay in a coset by B3; `ρ` constant on `x + pℤ_p²` | — | membership bookkeeping in the subtype `ℤ_[p]` | 90 |
+| U2 `exists_borelColoring_of_colorable` | Upper | `Coloring.mk (col ∘ ρ)`; each class a finite union of open fibres; `IsOpen.measurableSet` at `borel` (`@… ⟨rfl⟩`) | — | — | 25 |
+| U3 `borelChromaticNumber_le_chromaticNumber` | Upper | `SimpleGraph.colorable_chromaticNumber_of_fintype`, U2 | — | `ℕ∞` casts | 15 |
+| T0 `ratioAtMost_of_charSum_levelOne` | Tower | route A: `CertLink.HenselCount`, `CertLink.NewCharBound` at `henselCount_of_two_notMem`, `newCharBound_of_two_notMem`; `FibreShare.exists_eq_compAddMonoidHom`; `RatioBound.card_mul_le_of_indep`; plumbing after `CertLink.card_le_of_fibreShareBound`. Route B: § 5.1 | T0a–T0c (§ 3.1) | the level plumbing | A 150 / B 20 |
+| T1 `exists_stablePrime_above` | Tower | `Ideal.absNorm_span_natCast`, `NumberField.RingOfIntegers.rank`, `Ideal.absNorm_dvd_absNorm_of_le`, `Ideal.exists_le_maximal`, `FiniteField.isSquare_neg_one_iff`, `UpperHalf.exists_I_integer`, `Ideal.absNorm_mul`, `Ideal.inf_eq_mul_of_isCoprime` | T1a–T1e (§ 3.1) | `finrank ℚ (fieldI ⊥) = 2`; LEAN.md's coercion notes on `𝓞` (l. 284, 289) | 120 |
+| T2 `exists_levelEmbedding` | Tower | `cardQuot_pow_of_prime`, `CharP` by `CharP.cast_eq_zero_iff`, `ZMod.castHom`, `ZMod.castHom_injective`, `Ideal.quotientMap` for the conjugate | T2a–T2e (§ 3.1) | T2c's unit argument | 100 |
+| T3 `towerRatio_of_ratioAtMost` | Tower | T2; `Finset.card_image_of_injective`; the image independent; T2a | — | the `Finset` coercions | 40 |
+| T4 `charSum_levelOne_of_unitCircle` | Tower | K3 `CertLink.exists_addEquiv_zmod`; `AddChar.compAddMonoidHom`; `Finset.sum_nbij'` | — | — | 40 |
+| T5 `charSum_unitCircle_ge_weil` | Tower | `StandingFive.normOne_charSum_ge` (`Arith/FloorPlanes` l. 374) at the residue field, `StandingFive.kloostermanBound_of_ringChar_ne_two`, `StandingFive.involution_eq_pow`, K3 the other way; `ClassRatio.charBound_one_weil`'s preamble is the template | — | the norm-one set as `{u^{p+1} = 1}` | 70 |
+| T6 `towerRatio_of_fibreShareBound` | Tower | `CertLink.card_le_of_fibreShareBound` with Lemma P's two public theorems; T3 | — | — | 20 |
+| V1 `le_borelChromaticNumber_of_charSum` | Values | `towerRatio_of_charSum`, M10, `1/(κ/(p+1+κ)) = 1 + (p+1)/κ` | — | — | 20 |
+| V2 `one_add_div_le_of_borelColoring`, `le_borelChromaticNumber_padicPlane` | Values | `towerRatio_weil`, M9; V1 at `κ = 2√p` | — | — | 20 |
+| V3 `not_exists_bound_borelChromaticNumber_padicPlane` | Values | `Nat.forall_exists_prime_gt_and_eq_mod` (`a = 3 : ZMod 4`, a unit) at `n = 4(B + 1)²`; `√p/2 < 1 + (p+1)/(2√p)`; V2 | — | the `Fact` instance inside `∀ p [Fact p.Prime]` (`haveI`) | 50 |
+| C7 `fibreShareBound_seven` | Values, from new `Arith/FibreCert7Bound` | `tools/fs131_ikc1_gen.py data/fs66/b1/cert-p7.json … --name cert7 --nseg 1` (measured, § 2.5) → `Arith/FibreCert7` (data, 707 KB), `Arith/FibreCert7Check` (`cert7_global`, `cert7_seg0`, `cert7_psd`, `decide +kernel`, 49 s, 2.9 GB), `Arith/FibreCert7Bound` (`cert7_ok`, `sum_le_seven`, `model_seven`, after `Arith/FibreCert11Bound`) | — | the generator's output read once against the JSON (its own model) | 60 + generated |
+| C23 `fibreShareBound_twentyThree` | Values | a reduced certificate (search request, § 2.5), then as C7 split by `tools/fs131_ikc4_*`; or FS-66's file as an IKC4-sized job | — | the margin `U < 105.8` | open |
+| V4 the four level clauses | Values | B2 with `towerRatio_of_fibreShareBound` and C7, `fibreShareBound_eleven`, `exists_fibreShareBound_nineteen`, C23 | — | `norm_num` on the numerals | 32 |
+| V5 the values at 3, 7, 11, 19 and 23's floor | Values | V2 (at 3: `√3 < 2`), M10 with T6 and the certificates; U3 or `borelChromaticNumber_le_of_colorable` with `finitePlane3_colorable_three`, `finitePlane7_colorable_four`, `finitePlane11_colorable_five`, `finitePlane19_colorable_five`; `le_antisymm` in `ℕ∞` | — | `⌈49/U⌉ = 4` etc. by `Nat.ceil_eq_iff` and `norm_num` | 70 |
+
+### 3.4 The price
+
+| module | hand-written lines (route A for T0) |
+|---|---|
+| `PadicPlane/Basic` | 90 |
+| `PadicPlane/Measure` | 455 |
+| `PadicPlane/Upper` | 130 |
+| `PadicPlane/Tower` | 540 (410 with route B) |
+| `PadicPlane/Values` | 260 |
+| `Arith/FibreCert7*` (three new modules) | 60, and 707 KB generated |
+| **total** | **about 1,535** (about 1,405 with route B), **without C23** |
+
+C23 is priced in § 2.5: with a reduced certificate under about 2,000 rows, one module family like C7 (an estimate of tens
+of lines and a few minutes of kernel time, extrapolated from the 19's reduced certificate, not measured); with FS-66's
+file, a job of its own, larger than FS131-IKC4.
+
+### 3.5 Vacuity and models (`LEAN.md` § The gate)
+
+- The one binder the vacuity scan reads in these modules is the colouring `(col : (padicPlane p).Coloring (Fin k))` of
+  `one_le_mul_of_borelColoring` and `(c : …)` of `one_add_div_le_of_borelColoring`, both `GENERIC` in `k`. Inhabited at
+  `p = 3`, `k = 3` (`exists_borelColoring_of_colorable` with `finitePlane3_colorable_three`; at `p = 7`, `k = 4`; at
+  `p = 11` and `19`, `k = 5`; at `23`, `k = 8`). Empty at every `k` below the bound: that emptiness is the theorem, not an
+  assumption, and no statement takes it as one.
+- Structures of hypotheses: `TowerRatio p c`, modelled by `towerRatio_one` and inhabited at the constants of
+  `towerRatio_weil` and `towerRatio_of_fibreShareBound`; the stable-prime hypotheses of T2, T3, T4 (`P ∋ p`, `2 ∉ P`,
+  `p²` residues), modelled by `exists_stablePrime_above`; `CertLink.FibreShareBound p U`, modelled by
+  `fibreShareBound_eleven`; the `κ` hypothesis, modelled at `κ = 2√p` (T5).
+- No new `axiom`, no new hypothesis standing for a hand result: the assumptions step's counts do not move; `RESTS` gains
+  the records that read Weil (`charSum_unitCircle_ge_weil` and everything downstream of `towerRatio_weil`), which the
+  landing reads and files as IMPORTED.
+
+### 3.6 The head statements, read back aloud
+
+Read from the kernel's print of the built modules (`data/fs131/kpa1/heads.lean`, output `heads.out`; the σ-algebra of the
+Borel clause with `pp.explicit`, `heads-explicit.out`: `@borel (ℚ_[p] × ℚ_[p])` at the product topology), against the
+result of § 1.2:
+
+- `borelChromaticNumber G = ⨅ k, ⨅ (_ : ∃ c : G.Coloring (Fin k), ∀ i, MeasurableSet[borel X] (c ⁻¹' {i})), k`. *The least
+  number of colours of a proper colouring whose every colour class is a Borel set* — the posers' `χ_Bor`, read in `ℕ∞`.
+- `padicPlane p = unitQuadrance ℚ_[p]`: *vertices `ℚ_p × ℚ_p`, `x ~ y` iff `x ≠ y` and `(x₁ − y₁)² + (x₂ − y₂)² = 1`* —
+  `QG_{𝒬_p}` (`x ≠ y` is automatic, `Q(0) = 0 ≠ 1`).
+- `one_add_div_le_of_borelColoring : ∀ p [Fact p.Prime], p % 4 = 3 → ∀ {k} (c : (padicPlane p).Coloring (Fin k)),
+  (∀ i, MeasurableSet[borel] (c ⁻¹' {i})) → 1 + (p + 1)/(2√p) ≤ k`. *Every Borel colouring of the anisotropic p-adic plane
+  uses at least `1 + (p + 1)/(2√p)` colours.* That is the asking lane's theorem, word for word, with "Borel" in the
+  statement as its objection required.
+- `le_borelChromaticNumber_padicPlane : … → ⌈1 + (p + 1)/(2√p)⌉ ≤ borelChromaticNumber (padicPlane p)`. The same, as a
+  number.
+- `not_exists_bound_borelChromaticNumber_padicPlane : ¬ ∃ B : ℕ, ∀ p [Fact p.Prime], p % 4 = 3 →
+  borelChromaticNumber (padicPlane p) ≤ B`. *There is no universal constant `B` with `χ_Bor(QG_{𝒬_p}) ≤ B` for all primes
+  `p = 4k + 3`* — Question 1's sentence, negated.
+- `le_borelChromaticNumber_of_charSum : … → 2 ≤ κ → (∀ ψ : AddChar ((ℤ/p)²) ℂ, ψ ≠ 1 → −κ ≤ Re Σ_{a²+b²=1} ψ(a, b)) →
+  ⌈1 + (p + 1)/κ⌉ ≤ χ_Bor(padicPlane p)`. *If every non-trivial character sums over the circle of `𝔽_p²` to at least
+  `−κ` (`κ ≥ 2`), the Borel p-adic plane needs `1 + (p+1)/κ` colours* — Hoffman's bound of the finite plane, carried.
+- The values: `borelChromaticNumber (padicPlane 3) = 3`, `(padicPlane 7) = 4`, `(padicPlane 11) = 5`,
+  `(padicPlane 19) = 5`, `6 ≤ (padicPlane 23)`, `(padicPlane 23) ≤ 8`. *4 at 7, 5 at 11 and 19, between 6 and 8 at 23* —
+  the asking lane's sentence, with 3 at 3 beside it.
+- The one new step, visible: `towerRatio_weil : p % 4 = 3 → TowerRatio p (2√p/(p + 1 + 2√p))`, where `TowerRatio p c` is
+  *for every `k ≥ 1`, every independent set of `UD(ℤ/p^k, 2)` has at most `c · p^{2k}` points*; and
+  `towerRatio_of_fibreShareBound` for the certificates.
+- **Not claimed**, and not stated by any declaration: the plain `χ(ℚ_p²)` (`chromaticNumber_le_borelChromaticNumber` goes
+  one way only and nothing bounds `χ` from below); any value at 23 beyond `[6, 8]`; anything at `p ≡ 1 (mod 4)` or `p = 2`
+  (every head carries `p % 4 = 3`, or is at a fixed `p ≡ 3 (mod 4)`).
+
+## 4. The two routes, compared
+
+No fence applied (the brief: nothing in this milestone is blind), so the derivation (`plans/FS66-derivation.md` FS66-L1–L6,
+T7, T8) was read in stage 1. The routes differ in two places, and the implementer builds the second of each:
+
+| step | the derivation's route | the route planned | why |
+|---|---|---|---|
+| the bound | `[BardestaniMallahiKarai2017]` Thm 2.5 (the spectral bound for `A_μ` on `L²(ℚ_p²)`) with the Haar measure of the circle, its Fourier transform computed level by level | Hoffman's ratio bound at each finite level `UD(ℤ/p^k, 2)` (the library's `RatioBound`), then the measure step | one outside theorem fewer; Theorem 2.5 needs Fourier analysis on `ℚ_p` that Mathlib does not hold; every finite piece is already in the kernel at stable primes |
+| the measure step (T8's lower half) | the cosets more than half filled are independent "by Fubini over the lifts"; their share tends to `I`'s measure "by Lebesgue density" | one Hensel lift suffices (two subsets of one coset, each above half, meet); regularity of Haar replaces density | no density theorem for `ℤ_p` exists in Mathlib; the regularity route is `Rigidity/CountCompletion`'s, already in the kernel for another profinite group |
+
+## 5. Drafts for files this lane does not write
+
+### 5.1 `Rigidity/ClassRatio.lean` — the visibility edit (to apply after the collapse merges, on a branch cut from that `main`)
+
+Append, after `ratioAtMost_of_five_le_chromaticNumber` (no `private` declaration changes; the new theorem is the public
+face of two private ones, in the public vocabulary of `CertLink`):
+
+```lean
+/-- **Lemma P with Hoffman's ratio bound, in public words** (FS131-KPA1's leaf `PadicPlane.ratioAtMost_of_charSum_levelOne`):
+at a stable prime not above `2` with `|𝓞 ⧸ P| = Q²`, a lower bound `−κ`, `κ ≥ 2`, on the real parts of the non-trivial
+character sums over the norm-one residues at level one gives the all-levels ratio `κ/(Q + 1 + κ)`
+(`charBound_of_charBound_oneT` at `κ/(Q + 1)`, `ratioAtMost_of_charBound`). -/
+theorem ratioAtMost_of_charSum_levelOne [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) {Q : ℕ}
+    (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) {κ : ℝ} (hκ : 2 ≤ κ)
+    (h1 : ∀ (hfin : (CertLink.normOneSet P 1).Finite) (ψ : AddChar (𝓞 (fieldI F) ⧸ P.P ^ 1) ℂ), ψ ≠ 1 →
+      -κ ≤ (∑ s ∈ hfin.toFinset, ψ s).re) :
+    RatioAtMost P (κ / ((Q : ℝ) + 1 + κ)) := by
+  -- `levelSet P 1` is `CertLink.normOneSet P 1` by definition; `card_levelSet_oneT` gives `|S₁| = Q + 1`, so `h1` is
+  -- `CharBound P 1 (κ / (Q + 1))`; `2/(Q+1) ≤ κ/(Q+1)` from `hκ`; then `charBound_of_charBound_oneT` at every level,
+  -- `ratioAtMost_of_charBound`, and `κ'/(1 + κ') = κ/(Q + 1 + κ)` for `κ' = κ/(Q + 1)`.
+  sorry
+```
+
+It recompiles `ClassRatio` and about 25 dependents (the coordinator's count); its name differs from the `PadicPlane` leaf,
+which then closes as one line, `Rigidity.ratioAtMost_of_charSum_levelOne P h2 hQ hκ h1`. If the edit is declined, route A
+stands (§ 3.3, T0).
+
+### 5.2 `LEDGER.md` row 75 — the grade note, and the kernel clause at the landing
+
+*Now (the coordinator's ruling (4)), after the row's `**[cert]**` clause's sentence "… `α(Γ₂₃) ≤ 97` (was 105; …)":*
+
+> The kernel's certificate at 19 is not FS-66's: `cert19_ok` (`Arith/FibreCert19Bound`) checks the Searcher's reduced
+> certificate (`data/search/2026-10-14/certs/v-p19-phi0-13-qs.json`, `U = 88.6434…`), not `cert-p19.json`
+> (`U = 77.511742`); so at 19 the kernel holds `Σφ ≤ 88.64` and the clauses `α(Γ₁₉) ∈ {76, 77}`, `27,981` and the Haar
+> bracket at 19 rest on `cert-p19.json`, `[cert]`.
+
+*At the landing of FS131-KPA1's module, a `**[kernel]**` clause before the `**[hand]**` one:*
+
+> **[kernel]** (FS131-KPA1's module `PadicPlane/`, on the declared import `StandingFive.kloosterman_bound` for the bound and
+> on the standard three for the values) `PadicPlane.one_add_div_le_of_borelColoring` — every Borel colouring of `ℚ_p²` at
+> `p ≡ 3 (mod 4)` uses at least `1 + (p + 1)/(2√p)` colours; `not_exists_bound_borelChromaticNumber_padicPlane` —
+> `[BardestaniMallahiKarai2017]` Question 1 answered no; `le_borelChromaticNumber_of_charSum` — Hoffman's bound of
+> `UD(𝔽_p, 2)` carried to `χ_Bor(ℚ_p²)`; `χ_Bor(ℚ_p²) = 3, 4, 5, 5` at `p = 3, 7, 11, 19` and `6 ≤ χ_Bor(ℚ₂₃²) ≤ 8`
+> (`borelChromaticNumber_padicPlane_seven`, …); no level `UD(ℤ/p^k, 2)` three-colourable at 7, four-colourable at 11 or 19,
+> five-colourable at 23 (`unitQuadrance_zmod_seven_pow_not_colorable_three`, …). With no `[BardestaniMallahiKarai2017]`
+> Theorem 2.5: Hoffman's bound at every level and the well-filled cosets. *(The 23 clauses only once C23 lands.)*
+
+*The row's "Prior art" clause, its first sentence, replaced:*
+
+> **Prior art:** the chain `χ(F²) ≤ χ(ℚ_p²) = χ(ℤ_p²) ≤ lim_k χ(G_k) ≤ χ(G₁)` at `p ≡ 3 (mod 4)` is `[Madore2015]` Prop. 3.2
+> with Rem. 3.6 (`χ((ℚ_p)²) ≤ χ((𝔽_p)²)`), the levels between being the tower's monotonicity, whose step
+> `χ((A/m²)^d) ≤ χ((A/m)^d)` is his Prop. 3.8;
+
+### 5.3 `CLOSED-QUESTIONS.md` § 1.8
+
+*In the opening quotation's paragraph, "and his Prop. 3.8 is the chain `χ(F²) ≤ χ(ℚ_p²) = χ(ℤ_p²) ≤ lim_k χ(UD(ℤ/p^k, 2)) ≤
+χ(UD(𝔽_p, 2))` this whole entry stands on." replaced by:*
+
+> and his Prop. 3.2 with Rem. 3.6 gives the ends of the chain `χ(F²) ≤ χ(ℚ_p²) = χ(ℤ_p²) ≤ lim_k χ(UD(ℤ/p^k, 2)) ≤
+> χ(UD(𝔽_p, 2))` this whole entry stands on (`χ((ℚ_p)²) ≤ χ((𝔽_p)²)` at `p ≡ 3 (mod 4)`), the levels between being the
+> tower's monotonicity (his Prop. 3.8 is the variant modulo `m²`).
+
+*At the landing, after the first bullet's last sentence:*
+
+> In the kernel (FS131-KPA1) the bound is proved without Theorem 2.5: Hoffman's ratio bound at every finite level
+> `UD(ℤ/p^k, 2)`, and the cosets a Borel colour class fills to more than half, which form an independent set of a level.
+
+### 5.4 `BIBLIOGRAPHY.md`
+
+- `[Madore2015]`, read status: add "pp. 6–8 (Prop. 3.2 with its proof, Cor. 3.4, Rem. 3.5–3.6, ¶3.7, Prop. 3.8 with its
+  proof, Prop. 3.9's statement), ¶1.5, ¶6.6 and ¶7's opening read 2026-10-16 (FS131-KPA1)".
+- `[BardestaniMallahiKarai2017]`, read status: add "§1–§2 re-read 2026-10-16 (FS131-KPA1): Definition 2.6, Theorem 2.2,
+  Lemma 2.4, Theorem 2.5, Question 1".
+
+### 5.5 A stub to mint (the coordinator's ruling (3))
+
+**The Borel bound at every anisotropic local field — a reading.** *Claim (one mind, not checked line by line):* for every
+non-archimedean local field `K` of odd residue characteristic whose residue field `𝔽_q` has `q ≡ 3 (mod 4)` — the fields
+over which `x² + y²` is anisotropic — `χ_Bor(K²) ≥ 1 + (q + 1)/(2√q)`, and with the certificates `χ_Bor(K²) = 4, 5, 5` and
+`≥ 6` whenever `𝔽_q = 𝔽₇, 𝔽₁₁, 𝔽₁₉, 𝔽₂₃`, ramified extensions of `ℚ_p` and `𝔽_q((t))` included. *Why:* the route reads `ℚ_p`
+only as a complete discrete valuation ring with odd residue characteristic: Lemma P's square-zero algebra
+(`Rigidity/ClassRatio`'s `SqZeroInvT`) never reads the ramification; Madore's Prop. 3.2 (any valuation ring) makes unit
+vectors integral; Hensel lifts the circle; Haar on `𝓞_K²` is regular. *Killing test:* a level of `UD(𝓞_K/𝔪^k, 2)` at a
+ramified `K` with an independent set above `2√q/(q + 1 + 2√q)` of its points. *Bearing on the answer:* none on `χ(ℝ²)`;
+it widens the answer to the posers' question from `ℚ_p` to every local field they consider (their Theorem 1.1 is for
+characteristic zero; their Rem. 1.5 asks for positive characteristic). *Lean:* Mathlib at the pin has no general local
+field API this would read; `ℚ_p(√p)` or `𝔽_q((t))` as instances would each be a job.
+
+### 5.6 `LEAN.md` § Searching — Lean (lines learned here)
+
+- `MeasurableSet[m] s` is notation scoped in `MeasureTheory`: a module that writes it without `open MeasureTheory` fails
+  with `failed to synthesize GetElem (Set ?m → Prop) (MeasurableSpace …)` (FS131-KPA1).
+- Mathlib at the pin declares no `MeasurableSpace` on `ℚ_[p]` or `ℤ_[p]` and no continuity lemma for `PadicInt.toZModPow`;
+  a scoped `noncomputable` Borel instance on `ℤ_[p]` makes `Measure.addHaarMeasure ⊤` on `ℤ_[p] × ℤ_[p]` elaborate with no
+  further instance (compact, second countable, Borel product). An `abbrev` over `unitQuadrance ℚ_[p]` must be
+  `noncomputable` (`instCommRingPadic`). `PadicInt.subring`, `PadicInt.Coe.ringHom`, `PadicInt.norm_le_pow_iff_mem_span_pow`,
+  `PadicInt.cast_toZModPow` and `hensels_lemma` (`Mathlib/NumberTheory/Padics/Hensel.lean` l. 459) are the names
+  (FS131-KPA1).
+- `[OAIMath2026]`'s `OAI/NumberTheory/PrimePackets/HaarBounds.lean` l. 18 (`haar_kernel_eq_inv_card`) is the ten-line pattern
+  for the measure of a kernel of finite index, over `AddSubgroup.index_mul_measure` (FS131-KPA1).
+
+*§ The kernel's cost model:*
+
+- FS-66's fibre-share certificate at `p = 7` (8,598 ops, 495 slots, 14 PSD blocks; 707 KB of literals) checks as three
+  `decide +kernel` theorems in one file in 48.8 s at 2.89 GB (shape 7.1 s, the identity 29.4 s, positive definiteness 7.5 s);
+  its certificate at `p = 23` is 1,444,136 ops over 35,511 pairs, 168 times the 7's (FS131-KPA1, `data/fs131/kpa1/`).

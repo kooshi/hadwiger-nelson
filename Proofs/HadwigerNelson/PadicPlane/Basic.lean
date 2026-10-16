@@ -8,7 +8,7 @@ import Mathlib.Combinatorics.SimpleGraph.Coloring.Vertex
 # The p-adic plane: the Borel chromatic number, the tower ratio, and integral unit vectors (FS131-KPA1, skeleton)
 
 **Read aloud, against `[BardestaniMallahiKarai2017]` §1 (pp. 1–2) and Definition 2.6 (p. 6).** The p-adic plane is
-`unitQuadrance ℚ_[p]`: the vertices are the pairs `(x₁, x₂)` of p-adic numbers, and two are adjacent exactly when
+`padicPlane p`, an abbreviation for `unitQuadrance ℚ_[p]`: the vertices are the pairs `(x₁, x₂)` of p-adic numbers, and two are adjacent exactly when
 `(x₁ − y₁)² + (x₂ − y₂)² = 1` — the posers' quadratic graph `QG_{𝒬_p}`, `𝒬_p = (ℚ_p², x₁² + x₂²)`. Its **Borel chromatic
 number** (`borelChromaticNumber`) is the least `k` for which the vertices can be partitioned into `k` Borel sets none of which
 contains two adjacent vertices: the posers' `χ_Bor` ("the least cardinal `c` such that the set `V(𝒢)` can be partitioned
@@ -77,6 +77,19 @@ example : borelChromaticNumber (⊥ : SimpleGraph X) ≤ 1 :=
     · exact absurd (Fin.fin_one_eq_zero i) h
 
 end Borel
+
+/-! ## The p-adic plane -/
+
+/-- **The p-adic plane** `QG_{𝒬_p}` (`[BardestaniMallahiKarai2017]` Definition 2.6, `𝒬_p = (ℚ_p², x₁² + x₂²)`): the pairs of
+p-adic numbers, two adjacent when `(x₁ − y₁)² + (x₂ − y₂)² = 1`. An abbreviation for `unitQuadrance ℚ_[p]`, as
+`finitePlane p` is for `unitQuadrance (ZMod p)`, so every lemma about `unitQuadrance` applies and the headlines read in the
+domain's words. -/
+noncomputable abbrev padicPlane (p : ℕ) [Fact p.Prime] : SimpleGraph (ℚ_[p] × ℚ_[p]) := unitQuadrance ℚ_[p]
+
+/-- Spec: `(0, 0)` and `(1, 0)` are adjacent in the p-adic plane. -/
+example (p : ℕ) [Fact p.Prime] : (padicPlane p).Adj (0, 0) (1, 0) := by
+  rw [unitQuadrance_adj]
+  exact ⟨by simp, by ring⟩
 
 /-! ## The tower ratio -/
 

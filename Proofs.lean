@@ -593,6 +593,11 @@ import Proofs.HadwigerNelson.Arith.ThreeColourCriterion
 import Proofs.HadwigerNelson.Arith.DyadicQuadratic
 import Proofs.HadwigerNelson.Arith.ThreeFourColours
 import Proofs.HadwigerNelson.Instances.UpperHalfCorollaries
+import Proofs.HadwigerNelson.PadicPlane.Basic
+import Proofs.HadwigerNelson.PadicPlane.Measure
+import Proofs.HadwigerNelson.PadicPlane.Upper
+import Proofs.HadwigerNelson.PadicPlane.Tower
+import Proofs.HadwigerNelson.PadicPlane.Values
 
 /-!
 # Proofs
