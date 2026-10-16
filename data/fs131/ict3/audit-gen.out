@@ -1,0 +1,5 @@
+MODULE Proofs.HadwigerNelson.CayleyThree.Circular: CLEAN 17
+MODULE Proofs.HadwigerNelson.CayleyThree.Density: CLEAN 24
+MODULE Proofs.HadwigerNelson.CayleyThree.Fibre: CLEAN 40
+records: 81 public (0 already filed), 16 private (not audited)
+BLOCK clean: 81

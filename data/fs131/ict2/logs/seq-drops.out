@@ -1,0 +1,5 @@
+slot: waiting (ledger 20 + 6 > budget 22 GiB)
+slot: admitted seq.sh: mem 6 GiB (hard cap), cpus 2,3
+Circular exit=0
+Fibre exit=0
+Density exit=0

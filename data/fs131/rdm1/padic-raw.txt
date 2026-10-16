@@ -1,0 +1,65 @@
+slot: admitted lake: mem 8 GiB (hard cap), cpus 4,5
+HadwigerNelson.PadicPlane.one_add_div_le_of_borelColoring : ∀ (p : ℕ) [inst : Fact (Nat.Prime p)],
+  p % 4 = 3 →
+    ∀ {k : ℕ} (c : (HadwigerNelson.PadicPlane.padicPlane p).Coloring (Fin k)),
+      (∀ (i : Fin k), MeasurableSet (⇑c ⁻¹' {i})) → 1 + (↑p + 1) / (2 * √↑p) ≤ ↑k
+'HadwigerNelson.PadicPlane.one_add_div_le_of_borelColoring' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.PadicPlane.not_exists_bound_borelChromaticNumber_padicPlane : ¬∃ B,
+    ∀ (p : ℕ) [inst : Fact (Nat.Prime p)],
+      p % 4 = 3 → HadwigerNelson.PadicPlane.borelChromaticNumber (HadwigerNelson.PadicPlane.padicPlane p) ≤ ↑B
+'HadwigerNelson.PadicPlane.not_exists_bound_borelChromaticNumber_padicPlane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.PadicPlane.le_borelChromaticNumber_padicPlane : ∀ (p : ℕ) [inst : Fact (Nat.Prime p)],
+  p % 4 = 3 →
+    ↑⌈1 + (↑p + 1) / (2 * √↑p)⌉₊ ≤
+      HadwigerNelson.PadicPlane.borelChromaticNumber (HadwigerNelson.PadicPlane.padicPlane p)
+'HadwigerNelson.PadicPlane.le_borelChromaticNumber_padicPlane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_three : HadwigerNelson.PadicPlane.borelChromaticNumber
+    (HadwigerNelson.PadicPlane.padicPlane 3) =
+  3
+'HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_seven : HadwigerNelson.PadicPlane.borelChromaticNumber
+    (HadwigerNelson.PadicPlane.padicPlane 7) =
+  4
+'HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_seven' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_eleven : HadwigerNelson.PadicPlane.borelChromaticNumber
+    (HadwigerNelson.PadicPlane.padicPlane 11) =
+  5
+'HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_eleven' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_nineteen : HadwigerNelson.PadicPlane.borelChromaticNumber
+    (HadwigerNelson.PadicPlane.padicPlane 19) =
+  5
+'HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_nineteen' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+HadwigerNelson.PadicPlane.five_le_borelChromaticNumber_padicPlane_twentyThree : 5 ≤
+  HadwigerNelson.PadicPlane.borelChromaticNumber (HadwigerNelson.PadicPlane.padicPlane 23)
+'HadwigerNelson.PadicPlane.five_le_borelChromaticNumber_padicPlane_twentyThree' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_twentyThree_le_eight : HadwigerNelson.PadicPlane.borelChromaticNumber
+    (HadwigerNelson.PadicPlane.padicPlane 23) ≤
+  8
+'HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_twentyThree_le_eight' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+@[reducible] def HadwigerNelson.PadicPlane.padicPlane : (p : ℕ) →
+  [inst : Fact (Nat.Prime p)] → SimpleGraph (ℚ_[p] × ℚ_[p]) :=
+fun p [Fact (Nat.Prime p)] => HadwigerNelson.unitQuadrance ℚ_[p]
+def HadwigerNelson.PadicPlane.borelChromaticNumber.{u_1} : {X : Type u_1} → [TopologicalSpace X] → SimpleGraph X → ℕ∞ :=
+fun {X} [TopologicalSpace X] G => ⨅ k, ⨅ (_ : ∃ c, ∀ (i : Fin k), MeasurableSet (⇑c ⁻¹' {i})), ↑k

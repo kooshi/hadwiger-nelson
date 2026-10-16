@@ -1,0 +1,2 @@
+@Set.eq_empty_of_forall_notMem : ∀ {α : Type u_1} {s : Set α}, (∀ (x : α), x ∉ s) → s = ∅
+@Set.eq_univ_of_forall : ∀ {α : Type u_1} {s : Set α}, (∀ (x : α), x ∈ s) → s = Set.univ

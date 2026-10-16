@@ -1,0 +1,20 @@
+import Proofs.HadwigerNelson.CayleyThree.Circular
+open HadwigerNelson
+#check @Rat.smul_def
+#check @Submodule.coe_sum
+#check @Submodule.coe_smul
+#check @AddMonoidHom.nsmul_apply
+#check @AddCircle.coe_nsmul
+#check @AddCircle.coe_zsmul
+#check @Submodule.mem_span_range_iff_exists_fun
+#check @Filter.eventually_all
+#check @Metric.tendsto_nhds
+#check @mem_nhds_iff
+#check @DenseRange.exists_mem_open
+#check @Finset.dvd_prod_of_mem
+#check @Rat.cast_def
+#check @AddSubgroup.finiteIndex_of_le
+#check @SimpleGraph.Hom.comp
+#check @Ioi_mem_nhds
+#check @LinearMap.continuous_of_finiteDimensional
+example (t : ℕ → ℝ) : Continuous (fun u : Fin 3 → ℝ => ∑ l, t l * u l) := by fun_prop

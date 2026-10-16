@@ -498,7 +498,7 @@ candidate material for FS-20.
 competition, two independent derivations read by Poros). A Cayley graph of a finitely generated torsion-free abelian group is
 three-colourable iff it has a periodic (circular) three-colouring, iff a character puts every generator in `[1/3, 2/3]`; periodic
 three-colourings are dense, so a pair every periodic colouring identifies is forced; and the colouring space is finite exactly when every
-cell of `Θ₃` is a point — Mixon's finiteness question answered at `k = 3` for these graphs, decidably. **Not kernel-checked** (FS-75).
+cell of `Θ₃` is a point — Mixon's finiteness question answered at `k = 3` for these graphs, decidably. **In the kernel since FS131-ICT3** (`Proofs/HadwigerNelson/CayleyThree/`, on the standard three axioms; `LEDGER.md` row 79), in a wider class: the criterion for every abelian group and every step set without `0`, the periodic form for finitely generated groups with finitely many steps, density and the equality of the two forced groups for every finite generating set, torsion allowed; the clause on the cells of `Θ₃` — the decidable form of Mixon's question — stays [hand].
 **At `k = 4` it is open here** (`LEDGER.md` row 80): plain density fails in rank 1, and FS-79's no-gos are of four named certificate
 formats, not an answer; decidability is open in print.
 

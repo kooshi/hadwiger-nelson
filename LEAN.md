@@ -519,6 +519,12 @@ the `.olean` would. Settle every hand-written module before starting a long gene
   character for character (which shows every binder's kind; a non-dependent binder prints as an arrow, with no name), and two
   controls — the domain `True`, and a near miss — differ in both (`data/fs131/iqp3/lean/ReAdd.lean`, after FS131-LCH1's;
   FS131-IQP3).
+- Stiemke-type steps on a lattice cone go through Dickson's lemma (`Pi.wellQuasiOrderedLE`, `WellQuasiOrderedLE.finite_of_isAntichain`): `CayleyThree.exists_le_mul_of_imp_eq_zero` (FS131-KTC1).
+- A definition's proof field filled after a skeleton stores an auxiliary `<def>._proof_n` constant where the skeleton's `sorry` stood; a DATA comparison that erases proof subterms but reads constants then reports a changed value — erase constants its own dump lists as internal theorems (`tools/fs131_ict2_statements.py`, rule AUXPROOF; `coloringOneTwo`) (FS131-ICT3).
+- In a check that elaborates a domain inside `forallBoundedTelescope`, a quotation's free identifiers are hygienic and do not name the telescope's variables (`Unknown identifier s✝`): write them `$(mkIdent `s)` (`data/fs131/ict2/lean/ReAdd.lean`) (FS131-ICT3).
+- `generalize_proofs hc` names a proof written inside a statement's term (`heightWinding (fun a j => by …)`), so a lemma about `heightWinding hc` can be stated and rewritten in the proof (`Fibre`'s spec example along `(1, 1)`) (FS131-ICT3).
+- A merge of `main` that brings only new modules needs only the root recompiled when the gated build is copied in by checksum (`rsync -a --checksum`, no `--delete`; dry run first): FS131-ICT3, eight modules copied, one rebuilt, 21 m 28 s of walk.
+- An instance of FS131-IJ1's line (lint sees an unread instance binder the build does not), with its ruling: a class hypothesis a statement keeps for its reader is named with an underscore (`[_hfg : AddGroup.FG A]`), a helper's is dropped (`[Finite κ]`) (inventory item 1026).
 
 ## The package
 

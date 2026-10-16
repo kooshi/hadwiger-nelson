@@ -5,6 +5,8 @@ first, moved here verbatim at FS131-FC5 (2026-10-14) under the file's size budge
 not need to a file read by address"). Each entry describes the filing as it was made; the front page and `LEDGER.md` hold what is current.
 A filing that leaves the "Last updated" line is added at the top.*
 
+before it **the p-adic plane** (FS131-KPA1, FS131-IQP1, FS131-IQP3, 2026-10-16: eight modules through the gate on `e3e1dbb73` — the posers' `[BardestaniMallahiKarai2017]` Question 1 answered no in the kernel: every Borel colouring of the anisotropic `ℚ_p²` uses at least `1 + (p + 1)/(2√p)` colours, on Weil's bound; `χ_Bor(ℚ_p²) = 3, 4, 5, 5` at `p = 3, 7, 11, 19` and `5 ≤ χ_Bor(ℚ₂₃²) ≤ 8`; row 75's consequences clause, stated in § Where the problem stands; no value of `χ(ℝ²)` moved)
+
 before it **the collapse** (FS131-KCL1, FS131-ICO1, FS131-ICO2, 2026-10-16: seven `Collapse/` modules through the gate on `7c72b9bf7` — the field equality `χ(F²) = χ(ℝ²)` wherever the stable primes are uniformly thick below `1/5`, and with no hypothesis at ℚ(√635087) and de Grey's field; row 128's field clause, its MR the kernel's `Rigidity.mrPlus`, stated in § Where the problem stands; no value of `χ(ℝ²)` moved)
 
 before it **the main clause through five as one theorem** (FS131-IL5, 2026-10-16: `χ(F²) = L(F)` whenever `L(F) ≤ 5`, `Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five`, and `min(χ(F²), 5) = min(L(F), 5)` at every real number field, `Rigidity.min_chromaticNumber_five_eq_min_localBound_five` — the headline and the upper half composed, on the headline's two declared outside theorems; the model `L(ℚ) ≤ 2` on the standard three; no value of `χ(ℝ²)` moved; the upper half prior art, the lower half this project's derivation);

@@ -1,0 +1,11 @@
+PLANTED: unknown axiom in HadwigerNelson.CayleyThree.circular; sorryAx in HadwigerNelson.CayleyThree.circularColoring; HadwigerNelson.StandingFive.kloosterman_bound in HadwigerNelson.CayleyThree.circular_add_ne; HadwigerNelson.CayleyThree.coe_rep01 filed under PURCHASED
+MODULE Proofs.HadwigerNelson.CayleyThree.Circular: CLEAN 14
+MODULE Proofs.HadwigerNelson.CayleyThree.Density: CLEAN 24
+MODULE Proofs.HadwigerNelson.CayleyThree.Fibre: CLEAN 40
+BAD HadwigerNelson.CayleyThree.circular (Proofs.HadwigerNelson.CayleyThree.Circular): ['planted.unknownAxiom']
+OPEN HadwigerNelson.CayleyThree.circularColoring (Proofs.HadwigerNelson.CayleyThree.Circular): ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+IMPORTED HadwigerNelson.CayleyThree.circular_add_ne (Proofs.HadwigerNelson.CayleyThree.Circular): ['HadwigerNelson.StandingFive.kloosterman_bound'] — this landing declares no import
+MISFILED HadwigerNelson.CayleyThree.coe_rep01: class CLEAN, filed under PURCHASED
+records: 81 public (1 already filed), 16 private (not audited)
+STOP: 4 record(s) the gate cannot take
+PLANT ALL REPORTED: ['BAD', 'IMPORTED', 'MISFILED', 'OPEN']
