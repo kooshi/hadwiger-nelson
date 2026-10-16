@@ -34,7 +34,9 @@ read in full. Keryx is this file's writer. A crunch adds its own clock and queue
 
 6. **Commits by explicit path.** Other agents share the tree.
    - `git add <new file>`, then `git commit <paths> -m …`. Never a bare `git commit`, never `git add -A`, never amend.
-   - Push after each commit (`git push origin <branch>`); on a ref-lock race, sleep 4 and retry. Never force-push.
+   - **Never push.** This repository's `origin` is public (`https://github.com/kooshi/hadwiger-nelson`), so a push publishes, and a
+     published detail cannot be fully recalled. Commit on your branch; every branch is visible to Keryx in the shared repository, and
+     Keryx pushes only at Kooshi's word, after checking the text against the publication's private lists.
    - Subjects name the job and the stage ("FS130-D1: stage 2"). End each message with your harness's attribution lines.
 
 7. **Your record, your tools, and the files you do not write.**
@@ -81,3 +83,9 @@ read in full. Keryx is this file's writer. A crunch adds its own clock and queue
 12. **Budget.** Your brief names a size as guidance and a hand-back line; an overrun is not a slip. Leave margin: the context loaded at
     launch is itself large, and agents' own counts of their context run at 30–70 % of the harness's. Hand back at a saved stage before
     your brief's line.
+
+13. **Everything you commit may be published.** Write nothing personal into a tracked file, a commit message or a report: no
+    personal name beyond the GitHub handle, no e-mail address, no private host or URL, and no path or name of a project on this
+    machine that is not this one (the document library `~/source/library/`, the outside release's clone `~/source/math`, other
+    worktrees of this repository and the descent engine may be named). Where such a thing matters, say its kind ("a private
+    server", "an unrelated project") or ask Keryx. Novelty is worded "prior art: not found in print", never "new" or "first".
