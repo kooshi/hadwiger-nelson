@@ -39,3 +39,42 @@ headline names and docstrings, the gate on one commit, the read-aloud, the draft
 up to date (`uptodate0.log`), so the compiled library is the skeleton's. Every constant of the seven modules and of the two
 edited ones, dumped from that build (`data/fs131/ico1/lean/StatementDump.lean`, FS131-IDG1's dumper with this job's module list;
 `statements-before.txt.gz`, 331 constants).
+
+## Stage 2 — SAVED: the edits D-E1, D-E2, and `Collapse/Thick`
+
+**The edits, measured first, then made.** D-E1 adds `StandingFive.norm_normOne_charSum_le` (`Arith/FloorPlanes`): the body of
+`normOne_charSum_ge` up to its last line, whose conclusion is now the two-sided `‖Σ‖ ≤ 2√Q`; `normOne_charSum_ge` becomes its
+real part in one line. D-E2 adds `Rigidity.norm_charSum_le_weil` (`Rigidity/ClassRatio`, at the end of the file, after the private
+`two_div_le_weil` it reads): `‖Σ_{x x̄ = 1} ψ‖ ≤ 2√Q/(Q + 1)·|S_m|` at every level `m ≥ 1` of a stable prime not above `2` with
+`|𝓞 ⧸ P| = Q²`, stated over `CertLink.normOneSet P m` (the private `levelSet` cannot appear in a public statement, and
+`Counting.normOneQ` is downstream). Inside: the private `charBound_one_weil` is split into `norm_charSum_one_weil` (its body, now
+over D-E1) and its real part, and a private `norm_charSum_le_of_one` runs `charBound_of_charBound_oneT`'s induction with norms.
+No stored statement of either module moves (checked at the gate's statement comparison). **The rebuild they cost**: the build
+after both edits (`data/fs131/ico1/build1.log`; `SLOT_BUDGET_GB=22 … --mem 12 --cpus 6 -- env MEMMAX=12G BATCH=4`) rebuilt 25
+modules in **17 m 16 s** — every dependent under 25 s (`ClassRatio` 22 s, `Floor128` 12 s); the walk is the cost. Far under
+the brief's hour: the edits stand, the copy route is not taken.
+
+**`Collapse/Thick`: every leaf proved** (iteration in a farm, `data/fs131/ico1/lean1.sh`: a symlink copy of the compiled
+library with the module written over it, the lakefile's options passed; the build is the check, at the next build).
+- `thickAt_one` (5 lines, `AddChar.norm_apply`); `thickAt_weil` (2 lines over D-E2); `weil_const_anti` (`(√Q − √B)(√B√Q − 1) ≥ 0`).
+- `thick_of_forall_thickAt` as planned: `c₀ ≤ 0` is vacuous (a private `nonneg_of_thickAt`: a thickness constant is `≥ 0`, so
+  no stable prime exists); otherwise `B = ⌈4/c₀²⌉ + 1` puts Weil's constant below `c₀`, and the primes of absolute norm at most
+  `max(N(2), B²)` are `Counting.level F N` — a `Finset`, so the maximum of their constants is taken there. The private
+  `exists_card_sq` of `ClassRatio` is copied as `exists_card_sq'` (15 lines) rather than made public.
+- `not_isRamified_of_thickAt`: the library's own argument (`colorable_two_levelTarget_one_of_isRamified`): at level one the
+  norm-one residues are `{1}`, and any non-trivial character has `‖ψ 1‖ = 1`.
+- `exists_addChar_extend`: through Mathlib's `MonoidHom.restrict_surjective` (`Mathlib/GroupTheory/FiniteAbelian/Duality`)
+  on `Multiplicative G` with values in `ℂˣ` — **two imports added to the module** (that file and
+  `Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed`, for `HasEnoughRootsOfUnity ℂ n`); whether they move a stored statement
+  is read at the gate's comparison (LEAN.md: imports choose instances).
+- `norm_sum_piFinset_le`: `ψ s = ∏ ψ(single i (s i))`, `Finset.prod_univ_sum`, one factor non-trivial. **Its hypothesis
+  `0 ≤ c` is not read by the proof** (the factors' norms are non-negative by themselves); the statement keeps it, and the proof
+  references it by `have _ := hc` (LEAN.md § The gate's lint line) — reported, not a defect.
+- `image_levR_unitVectors_of_unramified`: the landed proof with `ratio_unramified_of_tca h P` replaced by `hun P`.
+- `levelThick`: `0 ≤ c` from a stable prime of level `k` (a non-trivial character of the level group needs one); the
+  character extended to `Lev F k`; the connection set matched to `Fintype.piFinset` by `Finset.sum_nbij`/`card_nbij`.
+- `levU_nonempty`: `1`.
+- The `unusedSectionVars` warning at `ThickAt.mono` is fixed by `omit [NumberField F] in` (ruling 5).
+
+**Re-price, first kind (a new leaf).** `Collapse/Thick` plus the two edits: about 360 lines of proof against the plan's 550
+(410 + 140), in about 40 minutes of work, every leaf closed on its first or second compile.

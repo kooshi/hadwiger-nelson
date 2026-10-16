@@ -935,13 +935,14 @@ private theorem charBound_of_charBound_oneT [NumberField F] (P : StablePrime F) 
       have : 2 / ((Q : ℝ) + 1) * hfin.toFinset.card ≤ κ * hfin.toFinset.card := mul_le_mul_of_nonneg_right hκ hc
       linarith [neg_abs_le (∑ s ∈ hfin.toFinset, ψ s).re]
 
-/-- **Weil at level one** (`StandingFive.normOne_charSum_ge`, over the declared import `kloosterman_bound`): at an odd
-stable prime with `|𝓞 ⧸ P| = Q²`, every non-trivial character sums to real part at least `−2√Q` over the `Q + 1` norm-one
-residues. -/
-private theorem charBound_one_weil [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) {Q : ℕ}
-    (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) : CharBound P 1 (2 * Real.sqrt Q / ((Q : ℝ) + 1)) := by
+/-- **Weil at level one, two-sided** (`StandingFive.norm_normOne_charSum_le`, over the declared import
+`kloosterman_bound`): at an odd stable prime with `|𝓞 ⧸ P| = Q²`, every non-trivial character sums to modulus at most `2√Q`
+over the `Q + 1` norm-one residues. -/
+private theorem norm_charSum_one_weil [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) {Q : ℕ}
+    (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) (hfin : (levelSet P 1).Finite)
+    (ψ : AddChar (𝓞 (fieldI F) ⧸ P.P ^ 1) ℂ) (hψ : ψ ≠ 1) :
+    ‖∑ s ∈ hfin.toFinset, ψ s‖ ≤ 2 * Real.sqrt Q / ((Q : ℝ) + 1) * hfin.toFinset.card := by
   classical
-  intro hfin ψ hψ
   haveI hmax : (P.P ^ 1).IsMaximal := by rw [pow_one]; exact P.isMaximal
   letI : Field (𝓞 (fieldI F) ⧸ P.P ^ 1) := Ideal.Quotient.field (P.P ^ 1)
   haveI := finite_quot_pow P 1
@@ -987,7 +988,7 @@ private theorem charBound_one_weil [NumberField F] (P : StablePrime F) (h2 : (2 
       StandingFive.KloostermanBound F' := fun F' _ _ _ hF' =>
     StandingFive.kloostermanBound_of_ringChar_ne_two F'
       (StandingFive.ringChar_ne_two_of_card_mod_four (by rw [hF']; exact hQ4))
-  have hW := StandingFive.normOne_charSum_ge hQ4 hcardk hK ψ hψ
+  have hW := StandingFive.norm_normOne_charSum_le hQ4 hcardk hK ψ hψ
   rw [hS, StandingFive.card_normOne hcardk]
   have hpos : (0 : ℝ) < (Q : ℝ) + 1 := by positivity
   have e : 2 * Real.sqrt Q / ((Q : ℝ) + 1) * ((Q + 1 : ℕ) : ℝ) = 2 * Real.sqrt Q := by
@@ -995,6 +996,13 @@ private theorem charBound_one_weil [NumberField F] (P : StablePrime F) (h2 : (2 
     field_simp
   rw [e]
   exact hW
+
+/-- **Weil at level one** (`StandingFive.normOne_charSum_ge`'s form, over the declared import `kloosterman_bound`): at an odd
+stable prime with `|𝓞 ⧸ P| = Q²`, every non-trivial character sums to real part at least `−2√Q` over the `Q + 1` norm-one
+residues — the real part of `norm_charSum_one_weil`. -/
+private theorem charBound_one_weil [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) {Q : ℕ}
+    (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) : CharBound P 1 (2 * Real.sqrt Q / ((Q : ℝ) + 1)) := fun hfin ψ hψ =>
+  neg_le_of_abs_le ((Complex.abs_re_le_norm _).trans (norm_charSum_one_weil P h2 hQ hfin ψ hψ))
 
 -- FS131-ICM3: **the dyadic branch, cut** (KR1 § 2.6 (c); X26B-T1; EN1-UQ4). At an unramified dyadic stable prime the
 -- residue field has `Q²` elements, `Q = 2^f` (`exists_card_two_pow_sq`); `f ≤ 5` is excluded by a four-colouring
@@ -1554,6 +1562,57 @@ theorem newCharBound_of_two_notMem [NumberField F] (P : StablePrime F) (h2 : (2 
   push_cast
   field_simp
 
+-- FS131-ICO1: **Lemma P with norms** — a level-one bound in modulus, `κ ≥ 2/(Q + 1)`, holds at every level in modulus
+-- (`charBound_of_charBound_oneT`'s induction, with norms in place of real parts).
+private theorem norm_charSum_le_of_one [NumberField F] (P : StablePrime F) {a : 𝓞 (fieldI F)} (ha : conjO F a - a ∉ P.P)
+    {Q : ℕ} (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) {κ : ℝ} (hκ : 2 / ((Q : ℝ) + 1) ≤ κ)
+    (h1 : ∀ (hfin : (levelSet P 1).Finite) (ψ : AddChar (𝓞 (fieldI F) ⧸ P.P ^ 1) ℂ), ψ ≠ 1 →
+      ‖∑ s ∈ hfin.toFinset, ψ s‖ ≤ κ * hfin.toFinset.card) (n : ℕ) :
+    ∀ (hfin : (levelSet P (n + 1)).Finite) (ψ : AddChar (𝓞 (fieldI F) ⧸ P.P ^ (n + 1)) ℂ), ψ ≠ 1 →
+      ‖∑ s ∈ hfin.toFinset, ψ s‖ ≤ κ * hfin.toFinset.card := by
+  classical
+  induction n with
+  | zero => exact h1
+  | succ n ih =>
+    intro hfin ψ hψ
+    haveI := finite_quot_pow P (n + 1)
+    have hfin' : (levelSet P (n + 1)).Finite := Set.toFinite _
+    have hmaps : ∀ x ∈ hfin.toFinset, red P n x ∈ hfin'.toFinset := fun x hx =>
+      hfin'.mem_toFinset.2 (red_mem_levelSet P n (hfin.mem_toFinset.1 hx))
+    by_cases hK : ∀ e, red P n e = 0 → ψ e = 1
+    · obtain ⟨ψ', hψ'⟩ := exists_addChar_descent P n ψ hK
+      have hψ'1 : ψ' ≠ 1 := by
+        intro h
+        apply hψ
+        ext x
+        rw [hψ' x, h, AddChar.one_apply, AddChar.one_apply]
+      have hsum : ∑ s ∈ hfin.toFinset, ψ s = ((Q : ℝ) : ℂ) * ∑ t ∈ hfin'.toFinset, ψ' t := by
+        rw [← Finset.sum_fiberwise_of_maps_to hmaps, Finset.mul_sum]
+        refine Finset.sum_congr rfl fun t ht => ?_
+        have hc : ∀ x ∈ hfin.toFinset.filter (fun x => red P n x = t), ψ x = ψ' t := fun x hx => by
+          rw [hψ' x, (Finset.mem_filter.1 hx).2]
+        rw [Finset.sum_congr rfl hc, Finset.sum_const, card_fibreT P ha hQ n hfin (hfin'.mem_toFinset.1 ht),
+          nsmul_eq_mul]
+        push_cast
+        ring
+      have hcard : (hfin.toFinset.card : ℝ) = Q * hfin'.toFinset.card := by
+        rw [Finset.card_eq_sum_card_fiberwise hmaps,
+          Finset.sum_congr rfl fun t ht => card_fibreT P ha hQ n hfin (hfin'.mem_toFinset.1 ht)]
+        rw [Finset.sum_const, smul_eq_mul]
+        push_cast
+        ring
+      have hih := ih hfin' ψ' hψ'1
+      rw [hsum, norm_mul, Complex.norm_real, Real.norm_of_nonneg (Nat.cast_nonneg _), hcard]
+      have hQ0 : (0 : ℝ) ≤ Q := Nat.cast_nonneg _
+      calc (Q : ℝ) * ‖∑ t ∈ hfin'.toFinset, ψ' t‖ ≤ Q * (κ * hfin'.toFinset.card) :=
+            mul_le_mul_of_nonneg_left hih hQ0
+        _ = κ * (Q * hfin'.toFinset.card) := by ring
+    · push Not at hK
+      obtain ⟨e, he, hψe⟩ := hK
+      have hb := norm_charSum_new_leT P ha hQ n hfin ψ ⟨e, he, hψe⟩
+      have hc : (0 : ℝ) ≤ hfin.toFinset.card := Nat.cast_nonneg _
+      exact hb.trans (mul_le_mul_of_nonneg_right hκ hc)
+
 /-- **FS-66's fibre-share bound at `p = 19`, in the certificate link's words** (FS131-LCH1, from FS131-IKL1's draft): some
 `U < 361/4` bounds `∑ φ` over `(ℤ/19)²` for every `φ` with values in `[0, 1]` and `qform 19 φ ≥ 0`
 (`FibreCertSound.sum_le_nineteen`, the p = 19 certificate checked by the kernel). -/
@@ -2008,6 +2067,18 @@ theorem tca_uniform [NumberField F] (h : TCA F) : ∃ c : ℝ, c < 1 / 4 ∧ ∀
   by_cases hPB : B < Ideal.absNorm P.P
   · exact ratioAtMost_mono (hB P hPB) (le_max_left _ _)
   · exact ratioAtMost_mono (hRP P) ((hmle P (not_lt.1 hPB)).trans (le_max_right _ _))
+
+/-- **Weil at level one and Lemma P above it, two-sided** (FS131-ICO1; the planner's drafted edit D-E2, approved): at a
+stable prime not above `2` with `|𝓞 ⧸ P| = Q²`, every non-trivial additive character of `𝓞 ⧸ P^m`, `m ≥ 1`, sums over the
+norm-one set to at most `2√Q/(Q + 1)` of its size in modulus — `StandingFive.norm_normOne_charSum_le` at level one, over the
+declared import `StandingFive.kloosterman_bound`, and the descent of Lemma P (`newCharBound_of_two_notMem`'s) above it. -/
+theorem norm_charSum_le_weil [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P) {Q : ℕ}
+    (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) (hQ1 : 1 ≤ Q) {m : ℕ} (hm : 1 ≤ m)
+    (hfin : (CertLink.normOneSet P m).Finite) (ψ : AddChar (𝓞 (fieldI F) ⧸ P.P ^ m) ℂ) (hψ : ψ ≠ 1) :
+    ‖∑ s ∈ hfin.toFinset, ψ s‖ ≤ 2 * Real.sqrt Q / ((Q : ℝ) + 1) * hfin.toFinset.card := by
+  obtain ⟨n, rfl⟩ : ∃ n, m = n + 1 := ⟨m - 1, by omega⟩
+  exact norm_charSum_le_of_one P (exists_conj_sub_notMem P h2).choose_spec hQ (two_div_le_weil hQ1)
+    (norm_charSum_one_weil P h2 hQ) n hfin ψ hψ
 
 end
 
