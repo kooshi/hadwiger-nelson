@@ -193,7 +193,7 @@ which override your identity where they differ (the build, the publication gate,
 - **Ephodos** derives the milestone's statements, one mind; no blind verifier runs in the standard workflow, because **the kernel is the
   second check: a milestone is Closed only when its Lean module passes the gate** (Kooshi, 2026-10-03).
 - **You plan the kernel module**: the statements in Lean, the skeleton, and a plan for every leaf.
-- **The implementer** (`.claude/agents/debruijn-implementer.md`, on Sonnet) builds the module from your plan and the derivation.
+- **The implementer** (`.claude/agents/debruijn-implementer.md`, on Opus) builds the module from your plan and the derivation.
 - **Keryx** coordinates as the top-level session ("main"); every arrow passes through it.
 
 Nothing is published before it is formalized (`CLAUDE.md` § Publication): your lane is where the mathematics becomes the product.

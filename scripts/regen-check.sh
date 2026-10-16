@@ -6,7 +6,7 @@
 # the generators produce, which is a different and narrower claim with two uses:
 #
 #   * **it is the answer to "did a bit flip land in the artifact".** This machine has a history of
-#     faulty hardware ; a flipped byte in a 13 MB literal is exactly the
+#     faulty hardware; a flipped byte in a 13 MB literal is exactly the
 #     kind of thing that hides. It cannot hide from this.
 #   * **it makes the artifact reproducible rather than merely re-derivable.** A reviewer regenerates
 #     every generated line from six committed files and gets the same bytes — including the LRAT

@@ -18,7 +18,6 @@ project's document library, outside the repository, under a manifest; the record
 
 - the two `data/fs131/ip23/generator-change*.diff` files;
 - two `witness.json` certificates under `data/fs73/` and `data/fs81/`;
-- `data/m62/m63-D1b-A412-rung1.json`;
 - `tools/fs66_tower.py`.
 
 Their recorded sums predate the rewrite. Two frozen tools, `tools/fs61_census.py` and `tools/fs66_tower.py`, differ from their frozen text in one label only.
