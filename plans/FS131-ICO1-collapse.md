@@ -78,3 +78,27 @@ library with the module written over it, the lakefile's options passed; the buil
 
 **Re-price, first kind (a new leaf).** `Collapse/Thick` plus the two edits: about 360 lines of proof against the plan's 550
 (410 + 140), in about 40 minutes of work, every leaf closed on its first or second compile.
+
+## Stage 3 — SAVED: `Collapse/Mixing`
+
+Every leaf proved (farm iteration; the build at the next build). About 630 lines against the plan's 570.
+- `finite_mixing` (**re-price, second new leaf**): Fourier on the finite group with a private coefficient `fhat f ψ = Σ_x f(x)ψ(x)`;
+  the edge identity `Σ_ψ f̂ conj ĝ λ_ψ = |G|·Σ_x f(x) Σ_s g(x + s)` and Parseval (the identity at `S = {0}`), the trivial
+  character split off (`Finset.add_sum_erase`), `|λ_ψ| ≤ c|S|`, Cauchy–Schwarz (`Real.sum_mul_le_sqrt_mul_sqrt`) and
+  `Σ_{ψ≠1}|f̂|² = |G|Σf² − (a|G|)² ≤ |G|²a(1 − a)`. 150 lines with its helpers; two compiles.
+- The level machinery, as private helpers on the finite partition of `K` into the cosets over the level group `LevImg F k`
+  (indexed by a `Fintype` instance taken as an argument): `integral_eq_sum_cosets` (`integral_iUnion_fintype`), the coset
+  measure `1/N` (`haarK_proj_preimage`), `fillAt` with `levelFill F A k x = fillAt A k (proj x)` by `rfl`, measurability of the
+  fill from continuity into the discrete level (`continuous_of_discreteTopology`), the residual integrating to `0` on every
+  coset, and the closed form **`levelResid A k = Σ_g |C_g|·α_g(1 − α_g)`** — sharper than the plan's `≤ 2∫_A(1 − fill)`.
+- `tendsto_levelResid`: the closed form is at most `|bad_k| + κ` (cosets with `α_g ≤ 1 − κ` contribute at most `|A ∩ C_g|`,
+  the others at most `κ|C_g|`), and `Counting.tendsto_haarK_bad` at `κ = ε/2`.
+- `mixing_at_level`: a private `edge_split` (the edge integral at a translation over `s` = `(1/N)Σ_g α_g β_{g+s}` + the
+  residuals' product; the two cross terms vanish coset by coset, the translation `x ↦ x + t` carrying the coset over `g` to
+  the one over `g + s` by `MeasurePreserving.setIntegral_preimage_emb`); Cauchy–Schwarz for integrals as a private
+  `abs_integral_mul_le` (Hölder at `p = q = 2`, `integral_mul_le_Lp_mul_Lq_of_nonneg`); a unit vector chosen over each point
+  of `levU` (`image_levR_unitVectors_of_unramified`); then `finite_mixing` on `LevImg F k` with `levelThick`.
+- `not_both_ge_of_mixing`: squared, `ab ≤ c²(1 − a)(1 − b)` against `c(1 − a) < a`, `c(1 − b) < b`.
+
+**Re-price after two kinds of new leaf** (Thick, Mixing): 990 lines against the plan's 1,120 for these, every leaf closed in at
+most five compiles. The copies (`Colouring → Dichotomy → Slice`) come next; then `Selection`, `Headline`.
