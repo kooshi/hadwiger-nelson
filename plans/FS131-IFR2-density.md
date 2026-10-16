@@ -142,3 +142,90 @@ the rest of `Collapse/` and `Rigidity/Count*`, the p-adic plane's two — and th
 - **The assumptions ledger**: `./scripts/assumptions.sh --write-ledger` under the slot (`write-ledger.log`): exit 0, 279
   rows; it moved two rows of FS131-ICS1's to their sorted place and changed nothing else — the row set is identical to the
   resolution's (`assumptions-ledger.resolved.txt`), `rests=168` as resolved.
+
+## Stage 3 — SAVED: the gate, on `2c6896990`
+
+### 3.1 The run
+
+`data/fs131/ifr2/run-gate.sh` (the steps of `data/fs131/clone1/run-gate.sh`, its log directory changed; logs in
+`data/fs131/ifr2/gate/`), on `2c6896990` — the merge `8dbd69096` plus the stage-2 commit, which changes, among gate inputs,
+only the order of two rows of `scripts/assumptions-ledger.txt`. The header reads `HEAD=2c6896990… tracked-modified=0`; at the
+end "tracked files modified after the pass: 0". **Every step exit 0:**
+
+| step | result | wall |
+|---|---|---|
+| uptodate (`lake build --no-build Proofs`) | exit 0 | 4 s |
+| `sorry` (narrow scan) | 0 lines | — |
+| line-initial `axiom` | 5 lines, as on `main`: the three declared imports and two inside doc comments (`Rigidity/Entropy`, `Sat/Lrat`) | — |
+| dupnames / self-test | exit 0, "no name is declared by two modules (31 generated on demand)" / exit 0, 15 controls | 5 s / 21 s |
+| axioms / self-test | exit 0 / exit 0, 23 controls, `baseline` and `imported_declared` passing at `imported=120`, `121` | 12 s / 261 s |
+| vacuity / self-test | exit 0 / exit 0, 65 controls | 146 s / 156 s |
+| assumptions / self-test | exit 0, `fails=0` / exit 0, 21 controls, 33 checks | 137 s / 148 s |
+| architecture (`tools/check_architecture.py`) | exit 0, `RESULT: PASS` | — |
+| lint (`lake lint --no-build -- --no-build --trace`) | exit 0, 14 linters `(2/2) Passed!`, "Linting passed for Proofs." | 17 s |
+| digests (axioms, vacuity, assumptions) | exit 0; the vacuity baseline's header and the assumptions ledger's header **match** (9 of 9 each); stale flags only for the counts recorded in this tree's `CLAUDE.md` (`main` at `d9ce6f214`, before the five-colour filing) | — |
+
+### 3.2 The counts, against the five-colour gate (FS131-ICS1's, on `960882257`; `data/fs131/ics1/gate/`)
+
+Each change is this landing's, as the predecessor's gate measured it against its own base (FS131-IQP3's p-adic gate,
+`data/fs131/iqp3/gate/`, to the predecessor's `data/fs131/ifr1/gate/`): the two landings add independently, with nothing lost
+and nothing counted twice.
+
+| count | five-colour gate | this gate | change | the density landing's own change (IQP3 → IFR1) |
+|---|---|---|---|---|
+| audit records | 11,592 | 11,698 | +106 | +106 |
+| clean | 10,914 | 10,998 | +84 | +84 |
+| axiom-free | 574 | 575 | +1 | +1 (`Collapse.d7`) |
+| imported | 99 | 120 | +21 | +21 |
+| declared purchases | 5 | 5 | 0 | 0 |
+| imported, by import | Weil 80, five-colour theorem 7, E–L 34, both 21, all three 1 | Weil 90, five-colour theorem 10, E–L 54, both 30, all three 4 | +10, +3, +20, +9, +3 | the same (record § 3.3 of FS131-IFR1) |
+| assumptions `rests` | 128 | 168 | +40 | +40 (25 E–L, 12 Weil, 3 five-colour theorem) |
+| assumptions, the other eight | `axioms=3 named=19 inline=14 outside=7 ours=21 open=5 takes=109 mentions=2` | the same | 0 | 0 |
+| assumptions scan: constants, theorems, formers, hypotheses, unseen | 22,377, 16,444, 459, 26,979, 21,730 | 22,548, 16,593, 461, 27,166, 21,834 | +171, +149, +2, +187, +104 | +171, +149, +2, +187, +104 |
+| vacuity `declarations` | 22,566 | 22,683 | +117 | +117 |
+| vacuity `refutations-skipped` | 243 | 245 | +2 | +2 (`cliqueFree_three_planeOver_of_sqrt_three_notMem`, `Plane.isIndepSet_triPacking`) |
+| vacuity sites, verdicts | `sites=1465`, `vacuous=0 stale=0 declared=3 witnessed=40 generic=1420 unknown=2` | the same | 0 | 0 (the scan is silent on the density modules; their hypotheses' models are the predecessor's record § 3.3) |
+| dupnames | 31 generated on demand | 31 | 0 | 0 |
+| lint | 14 linters passed | 14 | — | — |
+
+The per-import totals are the audit's own print (its 120 imported records, tallied by axiom set: 60 on Weil's bound alone, 6
+on the five-colour theorem alone, 24 on E–L alone, 26 on E–L and Weil's bound, 4 on all three), equal to the text written into
+`scripts/axioms-controls.txt` at the merge.
+
+### 3.3 The head statements' axioms (`data/fs131/ifr2/lean/HeadAxioms.lean` → `data/fs131/ifr2/head-axioms.txt`)
+
+`#print axioms` on the merged build, each as the predecessor printed it (its record's list) and as the coordinator printed the
+five-colour heads (inventory item 1055):
+
+- on the standard three and `Rigidity.positive_entropy_rigidity`: `Collapse.finIndepRatio_planeOver_eq_localRatio`,
+  `…_eq_iSup_density`, `Collapse.fractionalChromaticNumber_planeOver_eq`, `…_eq_mOne_of_thick`, `…_eq_plane_of_thick` (both),
+  `Collapse.IndepLaw.density_le_localRatio`, `Collapse.inv_le_localRatio_of_colorable`;
+- on those and `StandingFive.kloosterman_bound`: `Collapse.finIndepRatio_planeOver_sqrt635087`, `…_deGrey`,
+  `Collapse.fractionalChromaticNumber_planeOver_sqrt635087`, `…_deGrey`, `Collapse.IndepLaw.density_le_notThick`,
+  `Collapse.exists_triangleFree_ratio_lt`; and `SqrtFiveClass.five_le_chromaticNumber_planeOver_sqrt_iff`,
+  `…_sqrt_eq_five`, `SqrtTwentyThreeCbrtTwo.chromaticNumber_planeOver_sqrt23_cbrt2_eq_five`;
+- on all three imports: `Collapse.exists_finite_triangleFree_six_chromatic`, `Collapse.six_le_chromaticNumber_planeOver_sqrt635087`,
+  `Collapse.chromaticNumber_planeOver_sqrt635087_le_seven`;
+- on the standard three and Weil's bound: `Collapse.exists_model_seven`, `Rigidity.five_le_localBound_iff`,
+  `SqrtTwentyThreeCbrtTwo.localBound_sqrt23_cbrt2_eq_five`;
+- on the standard three: `Collapse.le_volume_selection`, `Collapse.inv_localRatio_lt_five`, `Plane.pi_div_le_mOne`,
+  `Plane.fifth_lt_mOne`, `Rigidity.ratioAtMost_of_charBound`, `UpperHalf.localBound_le_unitQuadrance`.
+
+Every record of the ten modules the two landings brought or changed has the axiom set its own landing's gate printed (§ 2.3).
+
+### 3.4 Negative controls watched red
+
+- The quotation checker's plant (stage 1).
+- The statement comparator's six plants and the axiom comparator's four (stage 2).
+- The audit-block generator's three STOPs, against `main`'s audit file (stage 2).
+- Each self-test's own planted controls in the gate: dupnames 15, axioms 23, vacuity 65, assumptions 21 with 33 checks.
+- **The audit's state controls, red at `main`'s counts**: after the gate, in the working tree only, `scripts/axioms-controls.txt`
+  set to `main`'s (`imported=99`, `100`) and `./scripts/axioms.sh --self-test` run (`data/fs131/ifr2/state-controls-red.log`):
+  `baseline` and `imported_declared` red, "expected COUNTS imported=99" (`100`), got `imported=120` (`121`); the other 21
+  controls as in the gate. Restored by `git checkout`; `git status` clean. (`build/gate/axioms-self-test/latest` in this
+  worktree is therefore this red run; the gated self-test's log is `data/fs131/ifr2/gate/axioms-selftest.log`.)
+- **The two recorded headers, planted stale**: the vacuity baseline with `main`'s `declarations=22566 refutations-skipped=243`
+  and the ledger with `rests=128`, each read by `scripts/gate_report.py` against this gate's receipt
+  (`data/fs131/ifr2/plants/`): both flagged, "RECORDED COUNTS ARE STALE in …'s header — update it: declarations 22566 →
+  22683, refutations-skipped 243 → 245" and "rests 128 → 168". The digest flags, it does not fail; that is its design.
+- Not run: a planted lint fault (as at FS131-IFR1 and FS131-ICO2: the driver's control was watched at FS131-LGT1).
