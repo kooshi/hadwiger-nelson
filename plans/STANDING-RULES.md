@@ -13,7 +13,10 @@ read in full. Keryx is this file's writer. A crunch adds its own clock and queue
    - **Resuming.** If your record already exists, you are resuming: check its last SAVED stage against `git log -- <record>` and continue
      at the first stage not saved. Redo nothing saved.
    - **Working files** a successor would need go under the `data/…` path your brief names, committed with the stage — never in the
-     session's scratch directory, and never only in `/tmp`, which is RAM and dies with the session.
+     session's scratch directory, and never only in `/tmp`, which is RAM and dies with the session. **Every other working file too,
+     however temporary, goes under your own `data/…` path:** the session's scratch directory is shared by every running job, so a
+     file there can be overwritten or read by another job's file of the same name (one job's read-aloud once arrived in another
+     job's record that way).
    - **Long runs.** A run expected to exceed about fifteen minutes checkpoints and resumes exactly; your record names the checkpoint's
      path and the resume command (`RUNNING.md` § Building).
 
