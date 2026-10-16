@@ -268,7 +268,7 @@ audit; their one structure carrier, `c ∈ Xk F k`, is inhabited at `F = ℚ`, `
 
 | hypothesis | where taken | model, and grade |
 |---|---|---|
-| `P : StablePrime F` | `Collapse/Thick`, `Headline` | at `ℚ`, `UpperHalf.exists_stablePrime_rat` (kernel, standard three); with `2 ∉ P` and `|𝓞/P| = Q²` (`thickAt_weil`, `thick_of_card`): every stable prime of `ℚ(√635087, i)` satisfies both (`stablePrime_sqrt635087`), and no library theorem exhibits one — the existence of a stable prime there is not stated |
+| `P : StablePrime F` | `Collapse/Thick`, `Headline` | at `ℚ`, `UpperHalf.exists_stablePrime_rat` (kernel, standard three); with `2 ∉ P` and `|𝓞/P| = Q²` (`thickAt_weil`): at `ℚ(√3)`, `Q = 3` (`CertLink.exists_stablePrime_sqrt_three`, kernel, on Weil's bound); for every stable prime at once (`thick_of_card`): at `ℚ(√635087)` (`stablePrime_sqrt635087`) and de Grey's field (`stablePrime_deGrey`), kernel, standard three *(corrected after this stage's commit `e04c74b52`: its first text said no theorem exhibits such a prime; `exists_stablePrime_sqrt_three` does)* |
 | `ThickAt P c`, `Thick F c` | `Thick`, `Mixing`, `Selection`, `Headline` | `ThickAt P 1` at every `P` (`thickAt_one`, kernel, standard three); `Thick F c` at `c < 1/5` at `ℚ(√635087)` and de Grey's field (`thick_sqrt635087`, `thick_deGrey`, kernel, on Weil's bound); empty at `ℚ` for `c < 1` (`not_thick_bot`, kernel, standard three) |
 | `μ : InvColouring F k` | `Colouring`, `Dichotomy`, `Slice` | at `ℚ`, `k = 2` (`nonempty_invColouring_bot`, kernel, standard three); from any proper `k`-colouring of `F²` (`nonempty_invColouring_of_colorable`); empty at `k = 1` (`Xk_one_eq_empty`) |
 | `IsColourSpectral μ.μ σ` | `Dichotomy`, `Slice` | for every `μ` (`exists_isColourSpectral`, kernel, standard three) |
@@ -282,3 +282,54 @@ coverage check against the pre-filing copy; the audit's two state controls and t
 named cause before its input moved; and lint, red for a real finding before the ruling. Each self-test plants its own (15, 23,
 65, 33 controls). **Not run: a lint plant** — the lint step is the driver over the whole library, its control watched at
 FS131-LGT1, and `main`'s last pass ran none either; here lint's red was seen on a real finding.
+
+## Stage 8 — SAVED: the read-aloud, against `LEDGER.md` row 128
+
+The stored statements as the gated build prints them (`data/fs131/ico2/lean/ReadAloud.lean`, `pp.fullNames`;
+`gate/read-aloud.txt`), with the definitions they name:
+`Collapse.F635087 := SquareClass.fieldOfRadicands {635087}` and `Collapse.FdG := SquareClass.fieldOfRadicands {3, 5, 7, 11}`
+(reducible; `fieldOfRadicands D` is `Subfield.closure` of the `√d`, `d ∈ D`, in `ℝ`); `planeOver F := {z : ℂ | z.re ∈ F ∧
+z.im ∈ F}`; `unitDistance V` the graph with `Adj x y ↔ dist x y = 1`; `SimpleGraph.chromaticNumber`, Mathlib's, valued in
+`ℕ∞`; `StablePrime F` a maximal ideal of `𝓞 F(i)` fixed by conjugation; `ThickAt P c := ∀ m ≥ 1, ∀ ψ` non-trivial additive
+character of `𝓞 F(i) ⧸ P^m`, `‖Σ_{s ∈ normOneQ P m} ψ s‖ ≤ c · #normOneQ P m`; `Thick F c := ∀ P : StablePrime F, ThickAt P c`.
+
+**`Collapse.chromaticNumber_planeOver_sqrt635087 : (SimpleGraph.induce (planeOver F635087) (unitDistance ℂ)).chromaticNumber =
+(unitDistance ℂ).chromaticNumber`.** Read: the unit-distance graph on the points of the plane both of whose coordinates lie in
+`ℚ(√635087)` — `F²` — has the same chromatic number, in `ℕ∞`, as the unit-distance graph of the whole plane `ℂ ≅ ℝ²`. No
+hypothesis. Against row 128: its first member, `χ(F²) = χ(ℝ²)`, at its first instance, **with no MR hypothesis** (the row's
+"given MR" is `Rigidity.mrPlus`, a theorem on `[EinsiedlerLindenstrauss2022]` Thm 1.3) and no hypothesis of ours; it rests on
+that theorem and Weil's bound. The row's number for the instance, `sup_v λ*_v = 0.192617` exact, is the exact spectral value; the
+kernel uses Weil's upper bound instead, `2√Q/(Q + 1) ≤ 2√103/104 = 0.19517…` at every stable prime (every one lies over a prime
+`p ≡ 3 (mod 4)`, `p ≥ 103`, matching the row's "first stable place 103"): weaker than the row's number, below `1/5`, which is
+all the proof needs. Not stated: the row's third member `χ_CP(ℝ²)` (row 130's; the library holds `χ(ℝ²) = χ_m⁰(ℝ²)` as
+`Outside.OAI158.chromaticNumber_plane_eq_chiM0`, so `χ(ℚ(√635087)²) = χ_m⁰(ℝ²)` is a one-line composition, not stored).
+
+**`Collapse.chromaticNumber_planeOver_eq_plane_of_thick : ∀ {F : Subfield ℝ} [NumberField ↥F] {c : ℝ}, Thick F c → 0 ≤ c →
+c < 1/5 → (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).chromaticNumber = (unitDistance ℂ).chromaticNumber`.** Read: for
+every subfield of `ℝ` that is a number field (a real number field, as the library takes one), if one constant `c` in `[0, 1/5)`
+bounds, at every stable prime and every level, every non-trivial character's sum over the norm-one residues by `c` times their
+number, then `χ(F²) = χ(ℝ²)`. Against row 128's hypothesis — "every totally real number field `F` whose stable places are all
+6-thick (`λ*_v < 1/5` at every level, both signs)": the character sum over the norm-one residues, normalised by their number, is
+the residue target's normalised eigenvalue, and the modulus is "both signs"; the row's per-place form ("each place below
+`1/5`") is `chromaticNumber_planeOver_eq_plane_of_forall_thickAt` (`∀ P, ∃ c < 1/5, ThickAt P c`), proved from the uniform form
+through Weil's bound at the large primes. **Wider than the row in two ways**, both read in the stored type: no
+`[NumberField.IsTotallyReal F]` binder, and no MR hypothesis and no exception scope (the row's "`N₆(F) = ∅`, which puts `F` outside
+row 100's exception": MR⁺ holds at every real number field in the kernel). The mutation the planner read (§ 4.1): with `c < 1/4`
+the statement would claim what the derivation does not give at six colours; the proof uses `5c < 1` at `k = 6`.
+
+**`Collapse.chromaticNumber_planeOver_deGrey : (SimpleGraph.induce (planeOver FdG) (unitDistance ℂ)).chromaticNumber =
+(unitDistance ℂ).chromaticNumber`.** Read: the same for `ℚ(√3, √5, √7, √11)`, the field of de Grey's coordinates. No hypothesis.
+Against row 128's second instance: every stable prime lies over `p ≡ 3 (mod 4)`, `p ≥ 131` (the row's "first stable places over
+131"), and Weil's bound `2√131/132 = 0.1734…` stands in for the row's exact `0.168047`; the row's "MR at degree 16 walked at
+FS-105, one checking reading" is discharged — MR⁺ is the kernel's at every degree.
+
+**`Collapse.chromaticNumber_planeOver_sqrt635087_six_or_seven : 6 ≤ χ(ℚ(√635087)²) ∧ χ(ℚ(√635087)²) ≤ 7`** (written out as the
+first). Against the row's "Consequences, given MR: rung D is six over ℚ(√635087)" read with its `[OAIMath2026]` paragraph
+("`χ(ℚ(√635087)²) = χ(F_dG²) ∈ {6, 7}`"): the first half of that, on the import `no_proper_five_coloring` in place of "given
+MR" (de Grey's field's is the same composition, not stored).
+
+**Not claimed by any of them**: a value of `χ(ℝ²)`; the row's `χ_CP` member; the row's other consequences (the triangle-free
+reading, S_nf). The row's load-bearing step — "a `k`-colouring of `F²` gives a CP `k`-colouring of `UD(ℝ²)` or an SP witness",
+the colour count entering at `max_j m_j ≥ 1/k` — is `chromaticNumber_plane_le_of_thick` in the library's format: a measurable
+`k`-colouring proper at almost every unit pair (`AeColouring k`, the `χ_m⁰` object) with a fixed threshold, the SP witness
+excluded by MR⁺ inside it, and the pigeonhole at `le_fibreMass_selCol`.
