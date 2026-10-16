@@ -192,8 +192,7 @@ $6 \le \chi(\mathbb{Q}(\sqrt{635087})^2) \le 7$.
   contains no $\sqrt3$, its plane has no unit equilateral triangle; with O5 and de Bruijn–Erdős (an argument outside Lean),
   some finite triangle-free unit-distance graph is six-chromatic.
 - **What it rests on.** The general form: EL. The two fields: also W. The bounds 6 and 7: also O5.
-- **Prior art.** The field equality: not found in print (`LEDGER.md` row 128). The equality it passes through, between
-  $\chi(\mathbb{R}^2)$ and the measurable chromatic number, is OpenAI's.
+- **Prior art.** The field equality: not found in print (`LEDGER.md` row 128). The equality it passes through, between $\chi(\mathbb{R}^2)$ and the measurable chromatic number, is OpenAI's. The finite triangle-free six-chromatic graph: not found in print. It answers a question of de Grey and of Haugstrup (both 2026), whether a triangle-free six-chromatic unit-distance graph exists even in three dimensions — de Grey had speculated that none does.
 - **By hand, not yet in Lean.** A density form for independent sets of $F^2$ (`LEDGER.md` row 129).
 
 ### 6. Finite graphs and measurable sets have the same density
