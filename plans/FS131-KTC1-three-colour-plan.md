@@ -153,3 +153,170 @@ hull of a one-point fibre forcing `R + ℤ^T` of finite index (rank linear algeb
 (⟹) distinct points of an infinite band set giving distinct colourings, by the rational relative-interior points of a fat cell and
 the mean slope of a periodic colouring as an invariant. About 450 lines, in a module of its own after the three below. The row's
 rigidity clause ("every point of order 3 ⟹ every colouring affine") and the first equivalence do ride.
+
+## Stage 3 — SAVED: the skeleton, the plan, the price
+
+### 3.1 The modules (branch `fs131-ktc1` only; `sorry` at every leaf; none reaches `main` with one)
+
+| module | holds | imports |
+|---|---|---|
+| `Proofs/HadwigerNelson/CayleyThree/Circular.lean` | the rational-approximation tool, the circular colouring, the criterion, the periodic form, the `ℚ` control, row 79's class | `Arith/ThreeColourCharacter`, `Kempe`, `LocalGlobal` |
+| `Proofs/HadwigerNelson/CayleyThree/Fibre.lean` | heights on `ℤ^m`, the colouring's winding, tight relations, Dickson's bound, Farkas by sides, the rational relative-interior point, rigidity | `CayleyThree/Circular`, `Mathlib.Order.WellQuasiOrder` |
+| `Proofs/HadwigerNelson/CayleyThree/Density.lean` | the McShane extension, the choice of the period, density (finite and topological forms), `P = F`, the dichotomy's first clause, row 79's class | `CayleyThree/Fibre` |
+
+Imports added to `Proofs.lean` after `Arith.ThreeColourCharacter`; three rows in `ARCHITECTURE.md` after `Arith/ThreeColourCharacter`'s
+(`tools/check_architecture.py`: PASS). Elaborated module by module (`data/fs131/ktc1/seq.sh`, iteration only; logs
+`data/fs131/ktc1/probes/*.out`: sorry warnings only), then through `./scripts/build.sh` under the slot (§ 3.7).
+
+### 3.2 The head statements, read aloud against row 79
+
+*(The coordinator's ruling, inventory item 996: state the widest form the plan proves, and row 79's class as a corollary.)*
+
+1. `CayleyThree.colorable_three_iff_bandSet_nonempty (hS : 0 ∉ S) : (addCayley S).Colorable 3 ↔ (bandSet S (band 3)).Nonempty`
+   — *for every abelian group `A` and every set of steps `S` without `0`, the Cayley graph is 3-colourable iff some character
+   `θ : A → ℝ/ℤ` has `θ(s) ∈ [1/3, 2/3]` for every `s ∈ S`.* Row 79's "(criterion) … 3-colourable ⟺ `Θ₃ ≠ ∅`", with the class
+   widened. `0 ∉ S` is load-bearing: at `S = {0}` the graph is edgeless and `bandSet` is empty.
+2. `CayleyThree.colorable_three_iff_exists_isPeriodic [AddGroup.FG A] (hSfin : S.Finite) : (addCayley S).Colorable 3 ↔ ∃ C,
+   IsPeriodic C` — *a finitely generated abelian group with finitely many steps: 3-colourable iff some 3-colouring has a period
+   group of finite index.* Row 79's "⟺ it has a periodic (circular) 3-colouring". Both hypotheses load-bearing:
+   `colorable_three_rat` with `not_isPeriodic_rat` (`ℚ`, `S = {1}`) for finite generation; for finiteness of `S`, the band set of
+   an irrational rotation's Bohr set over `ℤ` (by hand, not in the skeleton: it needs equidistribution).
+3. `CayleyThree.exists_isPeriodic_eqOn (hSfin : S.Finite) (hgen : AddSubgroup.closure S = ⊤) (C) (B : Finset A) : ∃ C',
+   IsPeriodic C' ∧ Set.EqOn C' C B` — *every 3-colouring agrees on every finite set with a periodic one*, and
+   `coloring_mem_closure_isPeriodic`, the same in the product topology on `A → Fin 3` (the derivation's "dense": agreement on
+   finite sets). Row 79's "(density) periodic 3-colourings are dense". `hgen` is the route's, not the truth's (§ 3.5).
+4. `CayleyThree.periodicForcedSubgroup_three_eq_forcedSubgroup` and `inheritanceQuestion_three` — *`P = F` at three colours*,
+   in `Kempe`'s vocabulary (`periodicForcedSubgroup S 3 = forcedSubgroup S 3`; `InheritanceQuestion S 3`). Row 79's "so `P = F`
+   (C3-inherit) and C3-aper hold at three colours for the whole class".
+5. `CayleyThree.forcedSubgroup_finiteIndex_iff_finite` — *`F` has finite index iff there are finitely many proper
+   `k`-colourings*, every `k`, every `S`. Row 79's dichotomy, first equivalence.
+6. `CayleyThree.exists_affine_of_forall_three_nsmul` — *if every band character has order 3, every 3-colouring proper along a
+   generating family is affine*. Row 79's "if every point has order 3 every 3-colouring is affine".
+7. `colorable_three_iff_of_fg_torsionFree`, `exists_isPeriodic_eqOn_of_fg_torsionFree` — row 79's own class
+   (`[AddGroup.FG A] [IsAddTorsionFree A]`, `S` finite, `−S = S`, generating, `0 ∉ S`), each one line from the widest forms,
+   so the ledger's statement is visibly an instance.
+
+**Not claimed** (in every docstring that could be read otherwise): any `k ≠ 3`; FS73-T22's real form `θ ∈ Hom(Λ, ℝ)` (needs
+torsion-freeness); the dichotomy's clause "⟺ every cell of `Θ₃` is a point" (§ 2.5); density at the standard generators of
+`ℤ^r` as ours (folklore per FS73-T24: `[ChandgotiaMarcus2018]`, listings only); that the widening is new (§ 3.6); the
+instances of row 79 (`ℚ(√11)`, `ℚ(√167)`).
+
+### 3.3 The plan, leaf by leaf (route; names at the pin; children; what is hard; lines)
+
+**`Circular`** — 440 lines.
+- `exists_rat_solution_near` (110). `V = span_ℚ ({1} ∪ range x) ⊆ ℝ` (`FiniteDimensional.span_of_finite`), a basis `b` of `V`
+  (`Module.Basis.ofVectorSpace`), coordinates `κ_l(v) ∈ ℚ`; for `t : basis → ℝ` put `Φ_t(v) = Σ_l κ_l(v) t_l`, so `Φ_b = id`
+  and `t ↦ Φ_t(x_i)/Φ_t(1)` is continuous at `b`; a rational `t` near `b` (`DenseRange.piMap`, `Rat.denseRange_cast`,
+  `DenseRange.exists_mem_open`, as in `exists_int_vector_of_forall_neg`) gives `q_i = Φ_t(x_i)/Φ_t(1)`, and `G q = b` because
+  `Φ_t` is `ℚ`-linear and `Φ_t(b_k·1) = b_k·Φ_t(1)`. Hard: carrying the coordinates as rationals and as reals at once.
+- `rep01`, `rep01_mem`, `coe_rep01` (15): `AddCircle.equivIco 1 0`, `AddCircle.coe_eq_coe_iff_of_mem_Ico`.
+- `circular_add_ne` (35): `t, t' ∈ [0, 1)`, `t' − t ∈ [1/3, 2/3] + ℤ`; `⌊3t⌋, ⌊3t'⌋ ∈ {0, 1, 2}` equal would give `|t' − t| < 1/3`;
+  then the cast to `ZMod 3` is injective on `{0, 1, 2}` (`decide` on the three values). `ker_le_periods_circularColoring` (10).
+- `coloring_add_ne` (15): `addCayley_adj'`, `a ≠ a + u` from `u ≠ 0`. `colorable_three_iff_bandSet_nonempty` (15): ⟹
+  `bandSet_three_nonempty_of_proper`; ⟸ `circularColoring`.
+- `finiteIndex_ker_of_nsmul_eq_zero` (25): the range lies in `{t | N • t = 0}`, finite in `ℝ/ℤ` (`AddCircle` torsion lemmas,
+  `#check` at the leaf); `QuotientAddGroup.quotientKerEquivRange`, `AddSubgroup.finiteIndex_of_finite_quotient`.
+- `exists_torsion_mem_bandSet` (120): `S` enumerated (`Set.Finite.toFinset`, `Finset.equivFin`), a generating family `g` of
+  `A` (`AddGroup.FG`), `f = Fin.append s g`; lifts `x_j ∈ [1/3, 2/3]` for the steps, `rep01` for the rest; relations generated by
+  `n` vectors (`Submodule.fg_iff_exists_fin_generating_family`, as in `Winding.exists_box_point`), values `n_i ∈ ℤ`; the face:
+  hold `x_j` where it is `1/3` or `2/3`; `exists_rat_solution_near` with `ε` the least distance to the other faces; the held
+  `exists_character_of_box_point` gives `θ'`; a common denominator kills `f`, hence `A`. Hard: the bookkeeping of `Fin.append`.
+- `colorable_three_iff_exists_isPeriodic` (25): `addCayley_erase_zero` (the pin's name: confirmed by the spec example in
+  `Density`) to drop `0`; then 1, `exists_torsion_mem_bandSet`, `finiteIndex_ker_of_nsmul_eq_zero`,
+  `AddSubgroup.finiteIndex_of_le`.
+- `colorable_three_rat`, `not_isPeriodic_rat` (45): `x ↦ x/2` is a band character; a subgroup `K` of finite index has
+  `K.index • q ∈ K` (`AddSubgroup.nsmul_index_mem`) and `ℚ` is divisible, so `K = ⊤`, so `C (0 + 1) = C 0`. Spec (15).
+
+**`Fibre`** — 1,020 lines.
+- `liftHeight_add_single` (45): decomposition independence (`height_append`, `height_perm` with `word_add_perm`), then
+  `height_add_gen`. `liftHeight_cast` (15, `height_cast`). `pmHeight_add_single`, `pmHeight_cast` (20).
+  `abs_pmHeight_sub_le` (45: strong induction on `l1 (x − y)`, one coordinate step at a time). `even_pmHeight_sub_sum` (20).
+- `heightWinding` and `liftHeight_add_ker` (60): the difference `liftHeight (x + r) − liftHeight x` is invariant under every
+  `+ e_j` (the two steps are at the same point of `A`), hence constant (`AddSubgroup.closure_induction` on the `Pi.single`
+  basis); its value at `0` is the wind; `3 ∣` by `height_cast`; `minRise_le` by `height_bounds`. `pmHeight_add_ker` (15).
+- `surjective_relMap_iff` (25). `fibre_nonempty` (5, `Winding.exists_box_point`), `convex_fibre` (20).
+- `step_eq_one_of_isTight`, `step_eq_two_of_isTight` (60): `wind` from any base point is `3·W` (`wind_shift` and generation:
+  every `a` is `π m⁺ − π m⁻`); tightness forces `height (word σ⁺) = |σ⁺|`; `height_perm` brings `j` to the front; `step_mem`.
+- `fibre_coord_of_isTight` (30): `σ·x = W σ = minRise σ / 3 = min_box σ·x`, termwise.
+- `exists_le_mul_of_imp_eq_zero` (90): the minimal nonzero elements of `M` are an antichain of `ι → ℕ`, finite
+  (`WellQuasiOrderedLE.finite_of_isAntichain` with `Pi.wellQuasiOrderedLE`); `κ` their largest `t`; strong induction on
+  `Σ_i x_i`: below `x ≠ 0` a minimal `μ` (well-foundedness of `<` on `ι → ℕ`), `x − μ ∈ M`, additivity. **Re-price here.**
+- `exists_slack_bound` (80): per sign pattern `p : Fin m → Bool`, `M_p = {|σ| : σ ∈ R in orthant p}`; `minRise` and `W` are
+  additive on an orthant; the slack is `ℕ`-valued by `minRise_le`; `κ = max_p κ_p`.
+- `exists_mem_pi_Icc_of_forall_int` (70): the private `exists_mem_box_of_forall_int`'s proof with `lo`, `hi` in place of
+  `1/3`, `2/3` (copied, not opened: the generalization is the point).
+- `exists_mem_fibre_gt` (60): `ε = 1/(3κ)`, the box with `x_j ∈ [1/3 + ε, 2/3]`; at `r_j ≥ 0` the best vertex is the box's and
+  `minRise_le` at `−r` pays; at `r_j < 0` the slack at `σ = −r` pays `ε|r_j|`. `Winding.flip`, `mem_fibre_flip_iff`,
+  `isTight_flip_iff` (40), `exists_mem_fibre_lt` (20).
+- `exists_rat_mem_fibre_relint` (110): one point per side per untight direction (§ 3), their average (`Convex.sum_mem`), then
+  `exists_rat_solution_near` on the relation generators with the tight coordinates held at `1/3` or `2/3`
+  (`fibre_coord_of_isTight`), `ε` the least slack of the average.
+- `exists_affine_of_forall_three_nsmul` (60): every fibre point gives a band character (`exists_character_of_box_point`), of
+  order 3, so `x_j ∈ {1/3, 2/3}`; convexity makes each coordinate constant; the contrapositives of `exists_mem_fibre_gt`/`_lt`
+  give a tight relation through every direction; the frozen steps make `c(a + s_j) − c(a)` constant; constant differences
+  along generators give an additive `φ`. `isTight_one_two` (15).
+
+**`Density`** — 770 lines.
+- `mcshane_mem`, `mcshane_le` (60): `Int.csInf_mem`, `csInf_le`; the lower bound `min_{β ∈ B}(h β − l1 (x − β))` from
+  `|λ ℓ| ≤ l1 ℓ` and the triangle inequality for `l1`. `abs_mcshane_add_single_sub` (60: each term is `1`-Lipschitz and has the
+  parity of `Σ x`, so steps are `±1`). `mcshane_add` (40: reindex `ℓ ↦ ℓ − ℓ₀`). `mcshane_eq_of_consistent` (25,
+  `le_csInf`). `mcshane_model` (15).
+- `exists_lt_l1_of_sub_nsmul_mem` (110): the vectors of `l1 ≤ D` are finitely many (a box); for each outside `M`, a
+  finite-index `W ⊇ M` missing it (`exists_finiteIndex_between_notMem` on `ℤ^m`, `V = M`, `H = ⊤`); `N = q·∏ index`;
+  `AddSubgroup.nsmul_index_mem`.
+- `exists_periodic_properAlong_eqOn` (300: the assembly): `x*` from `exists_rat_mem_fibre_relint`, `a* = 3 − 6x*`, `T` the tight
+  set, `η`; `h = pmHeight`, affine along `T` (`step_eq_one/two_of_isTight` through `pmHeight_add_single`, extended over
+  `closure (Pi.single T)`: 40); lifts `B̃` of `B` (`Function.surjInv`); `D = 2·diam/η`; `M = R ⊔ ℤ^T`;
+  `N` from `exists_lt_l1_of_sub_nsmul_mem` with `q = 6·den(a*)`; `L = R ⊔ N•⊤`, `λ ℓ = a*·ℓ` as an `L →+ ℤ` (integral: `w` on
+  `R`, `6 ∣` on `N•⊤`); (C′) by the two cases (100); descent through `π` (`liftHeight_add_ker`, `λ ∈ 3ℤ`); periods `π(N•ℤ^m)`, of
+  index at most `N^m` (`AddSubgroup.finiteIndex_of_finite_quotient`, a surjection from `Fin m → Fin N`). Hard: (C′)'s second
+  case, and keeping `a*` rational while `λ` is integral.
+- `exists_isPeriodic_eqOn` (30): `addCayley_erase_zero`, an enumeration of `S ∖ {0}`, `surjective_relMap_iff`, the family
+  form, `addCayleyColoring`. `coloring_mem_closure_isPeriodic` (50: `nhds_pi`, `isOpen_set_pi`; a basic neighbourhood fixes a
+  finite set). `periodicForcedSubgroup_three_eq_forcedSubgroup` (40: `mem_periodicForcedSubgroup`, `mem_forcedSubgroup`,
+  `B = {x, x + δ}`). `forcedSubgroup_finiteIndex_iff_finite` (60: ⟹ colourings factor through `A ⧸ F`; ⟸ the translation
+  orbit of each colouring is finite, its stabilizer is `periods C`, a finite intersection of finite-index subgroups).
+
+**Total: about 2,230 lines** (Circular 440, Fibre 1,020, Density 770), every leaf on the standard three axioms, no import, no
+hypothesis standing for a result of ours. Later, outside these modules: the dichotomy's cell clause (§ 2.5, about 450); density
+without generation (§ 3.5, about 150). Order of the work: `Circular` (independent; it alone answers Ellenberg's question at
+`k = 3` in the periodic form), then `Fibre` §1–§2, then `exists_le_mul_of_imp_eq_zero` and `exists_slack_bound` — **re-price
+the rest from these two** — then `Fibre` §4–§5, then `Density`.
+
+### 3.4 The modeling passes (fresh invocations)
+
+- **Domain** (`debruijn-domain-modeling`): two costumes for a colouring (`A → ZMod 3` with `ProperAlong`, which every held lemma
+  reads, and `(addCayley S).Coloring (Fin 3)`, which every consumer reads) are kept, with the bridge stated once in each
+  direction (`coloring_add_ne`, `circularColoring`/`addCayleyColoring`). Two normalizations (the library's steps in `{1, 2}`
+  with the fibre in `[1/3, 2/3]^m`; McShane's `±1` steps with slopes in `[−1, 1]^m`) meet at one stated seam,
+  **`pmHeight_add_ker`** (added). Generation appears in two costumes, so **`surjective_relMap_iff`** was added as their
+  bridge. `fibre` is a set beside `Winding`, not an index on it.
+- **Obligation** (`debruijn-obligation-modeling`): measures named — strong induction on `Σ x` (Dickson bound), on `l1` (the
+  Lipschitz bound); no induction elsewhere. The mutation audit removed two hypotheses that were not load-bearing: `0 ∉ S` in
+  the periodic form and in every density statement (the graph ignores `0`: `addCayley_erase_zero`). The audit also found that
+  `hgen` in density is the route's, not the truth's (§ 3.5).
+- **Experience** (`debruijn-experience-modeling`): ledger numbers out of names (`…_of_row79` became `…_of_fg_torsionFree`); both
+  sides named (`periodicForcedSubgroup_three_eq_forcedSubgroup`); the conclusion that the name `…_eqOn` promises is now
+  `Set.EqOn`; `exists_good_N` became `exists_lt_l1_of_sub_nsmul_mem`. Every head docstring opens with the theorem as a
+  mathematician would cite it and its row-79 clause.
+
+### 3.5 Density without generation (a finding; planned, not in the skeleton)
+
+The mutation audit's open point: dropping `hgen` from `exists_isPeriodic_eqOn` does not make it false. On cosets of `H = ⟨S⟩`
+the colourings are independent; colour each of the finitely many cosets `B` meets by the generated case, then choose a
+finite-index `A₀ ⊆ A` with `A₀ ∩ H` inside the common period and the cosets distinct modulo `A₀ + H` — both by residual
+finiteness, applied in `A ⧸ K` and in `A ⧸ H` (`exists_finiteIndex_between_notMem`, twice). About 150 lines, for `A`
+finitely generated. [hand, this planner, one mind.] So row 79's density holds for every finitely generated abelian group and
+every finite `S`, by this route.
+
+### 3.6 Prior-art question (the coordinator's ruling: a question, not a claim)
+
+What of the widening is in print? The ⟸ of the criterion is the classical construction of a circular colouring from a
+homomorphism to the circle group — for distance graphs `G(ℤ, D)` the `κ(D)` literature, for Cayley graphs the circular and
+star chromatic number (Vince 1988; Zhu's survey) — and its validity for every abelian group needs nothing new. The questions for
+the prior-art gate: (a) is "3-colourable ⟺ a band character exists", for arbitrary abelian Cayley graphs, stated in print (the
+derivation found rank 1 not stated, FS73-T22); (b) is the periodic form with torsion or without generation stated; (c) is
+density stated for arbitrary generating sets (FS73-T24 calls the standard-generator case folklore). Searched by this job:
+nothing (no reading beyond the derivation's records). The search words: "circular colouring" with "Cayley graph" and "abelian";
+"hom-shift" with "periodic points dense"; "three-colouring" with "height function" and "lattice"; zbMATH author listings for
+Chandgotia and Zhu.
