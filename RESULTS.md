@@ -187,18 +187,25 @@ each in full. "Prior art: not found in print" reports the searches recorded in t
   claimed; `6 ≤ χ_Bor(ℚ₂₃²)` rests on an exact certificate outside the kernel.
 - **Ledger.** Row 75; `CLOSED-QUESTIONS.md` § 1.8.
 
-### 10. Three-colourings of lattice Cayley graphs (by hand)
+### 10. Three-colourings of lattice Cayley graphs
 
 - **Statement.** For `Λ` finitely generated torsion-free abelian and `S = −S` finite generating: `Cay(Λ, S)` is 3-colourable
   ⟺ some `θ ∈ Hom(Λ, ℝ/ℤ)` has `θ(S) ⊆ [1/3, 2/3]` ⟺ it has a periodic 3-colouring; periodic 3-colourings are dense; the
   colouring space is finite exactly when every cell of that set of `θ` is a point.
-- **Lean.** The direction "3-colourable ⟹ such a `θ`", for every abelian group and step set:
-  `ThreeColourCharacter.bandSet_three_nonempty_of_proper`. The rest is not formalized.
-- **Axioms.** That direction: std3.
+- **Lean.** In a wider class: `CayleyThree.colorable_three_iff_bandSet_nonempty` (every abelian group, `0 ∉ S`; its ⟹ is
+  `ThreeColourCharacter.bandSet_three_nonempty_of_proper`), `CayleyThree.colorable_three_iff_exists_isPeriodic` (finitely
+  generated, `S` finite; finite generation needed: `colorable_three_rat`, `not_isPeriodic_rat`),
+  `CayleyThree.exists_isPeriodic_eqOn` and `coloring_mem_closure_isPeriodic` (density, `S` finite and generating),
+  `periodicForcedSubgroup_three_eq_forcedSubgroup`, `inheritanceQuestion_three`, `forcedSubgroup_finiteIndex_iff_finite`
+  (every `k`), `exists_affine_of_forall_three_nsmul` (rigidity), and this statement's own class as
+  `colorable_three_iff_of_fg_torsionFree` and `exists_isPeriodic_eqOn_of_fg_torsionFree`. The clause on the cells is not
+  formalized.
+- **Axioms.** Every one: std3 (printed 2026-10-16 from the gated build of `2b04f38d5`).
 - **Whose.** Proved by hand, two independent derivations. The questions are `[Ellenberg2018]`'s, Gibbs's and Mixon's
   (Polymath16), `[CGHO2025bg]` Question 6.2, and `[AbrishamiEtAl2025]` Problem 4.6 at three colours. The height lift is
   Chandgotia's device; density at the standard generators is expected folklore and not claimed. The criterion for arbitrary
-  generators: prior art not found in print.
+  generators: prior art not found in print; the wider class the kernel proves: prior art not yet searched. The kernel
+  proof is this project's.
 - **Ledger.** Row 79; `CLOSED-QUESTIONS.md` § 2.4.
 
 ## Other people's results, checked here

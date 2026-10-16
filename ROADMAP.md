@@ -217,7 +217,7 @@ vocabulary, which `BIBLIOGRAPHY.md` § E translates. The full statement, its gra
 | 76 | derived, hand | no | Five colours over ℚ(√3,√5): not landed by a forcer (the value landed at row 123, [hand], through MR) — and whe … |
 | 77 | method | no | The theorem audit: every theorem every milestone M17–FS-66 proved outside the kernel, found, filed and indexed |
 | 78 | cert, hand, tools | yes | Four colours on de Grey's lattice: `F = P = 8Λ` — every four-colouring of it is `8Λ`-periodic — and where else … |
-| 79 | cert, hand, "stay [hand", tools | yes | Three colours are linear: every Cayley graph of a finitely generated torsion-free abelian group is 3-colourabl … |
+| 79 | cert, hand, tools | yes | Three colours are linear: every Cayley graph of a finitely generated torsion-free abelian group is 3-colourabl … |
 | 80 | hand, tools | no | Four colours, cell by cell: no certificate of non-four-colourability comes from the colour complex one cell at … |
 | 81 | cert, tools | no | ℚ(√167) at four colours: `L21cc6506` — the lattice that proved `χ(ℚ(√167)²) ≥ 4` — is four-colourable and loos … |
 | 82 | derived, hand | yes | Three colours over every subfield of ℝ whose unit-vector ring holds 1/3: `χ(F²) ≥ 4` whenever `1/3 ∈ ℤ[U_F]` a … |

@@ -30,7 +30,7 @@ paper, not yet formalized.
 | **[7](#7-six-against-seven-as-a-stability-question)** $\chi(\mathbb{R}^2) \ge 7$ $\iff$ $\lim_{\varepsilon \to 0} \mu_6(\varepsilon) < 1$ | Lean |
 | **[8](#8-one-bounded-disc-decides-it)** $\chi(\mathbb{R}^2) \ge 7$ $\iff$ some disc has no measurable 6-colouring proper at almost every unit pair | Lean |
 | **[9](#9-the-p-adic-plane-needs-unboundedly-many-colours)** $\chi_{\mathrm{Bor}}(\mathbb{Q}_p^2) \ge 1 + \frac{p+1}{2\sqrt{p}}$ for $p \equiv 3 \pmod 4$: unbounded in $p$ | Lean + W |
-| **[10](#10-three-colourings-of-lattice-cayley-graphs)** $\mathrm{Cay}(\mathbb{Z}^d, S)$ is 3-colourable $\iff$ some character $\theta$ has $\theta(S) \subseteq [\frac13, \frac23]$ | hand; ⟹ in Lean |
+| **[10](#10-three-colourings-of-lattice-cayley-graphs)** $\mathrm{Cay}(\mathbb{Z}^d, S)$ is 3-colourable $\iff$ some character $\theta$ has $\theta(S) \subseteq [\frac13, \frac23]$ | Lean |
 
 The symbols, in one line each (each is defined in full in its row's section below):
 
@@ -43,7 +43,7 @@ The symbols, in one line each (each is defined in full in its row's section belo
   9).
 - A *character* $\theta$ of $\mathbb{Z}^d$: a homomorphism $\mathbb{Z}^d \to \mathbb{R}/\mathbb{Z}$ (row 10).
 
-What each Lean theorem behind rows 1–9 assumes is exactly what its status names: none takes a further unproved result as a
+What each Lean theorem behind rows 1–10 assumes is exactly what its status names: none takes a further unproved result as a
 hypothesis. [`RESULTS.md`](RESULTS.md) gives each one's Lean name and its axioms as `#print axioms` prints them.
 
 **On novelty.** For results of this project the page says "prior art: not found in print". That reports the literature
@@ -284,10 +284,13 @@ subgroup of finite index). Periodic 3-colourings are dense among all 3-colouring
   project (2018), and Chandgotia, Gangloff, Hellouin de Menibus and Oprocha (2025, Question 6.2) carry the question as open.
   This answers it at three colours, and with it Abrishami et al.'s Problem 4.6 (2025) at three colours for these graphs. At
   four colours it is open.
-- **Status.** Proved by hand, twice and independently; not yet formalized. The direction "a 3-colouring gives such a
-  $\theta$" is checked in Lean, on the standard axioms, for every abelian group.
+- **Status.** Checked by Lean's kernel on the standard axioms alone, in a wider class than stated here: the criterion for
+  every abelian group and every finite or infinite step set without $0$, the periodic form for every finitely generated
+  group with finitely many steps, and density for every finite generating set, torsion allowed. The clause about which
+  colourings are rigid is in Lean too; the statement about the cells of the set of such $\theta$ is proved by hand only.
 - **Prior art.** The lift of a 3-colouring to integer heights is Chandgotia's device; density at the standard generators is
-  expected folklore and is not claimed. The criterion for arbitrary generating sets: not found in print (`LEDGER.md` row 79).
+  expected folklore and is not claimed. The criterion for arbitrary generating sets: not found in print (`LEDGER.md` row 79); for the wider class the Lean
+  proof covers, prior art not yet searched.
   Not read: the rest of two of those papers' reference lists, and the literature on homomorphism shifts with non-standard
   generating sets beyond the queries run.
 
