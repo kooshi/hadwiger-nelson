@@ -374,19 +374,18 @@ prior art; the fives [hand], `χ(ℚ(√47)²) ≤ 5` in the kernel and its lowe
 > **`[BardestaniMallahiKarai2017]`, Question 1** (arXiv v4, p. 2; read first-hand, §1–§2): *"(The p–adic Hadwiger-Nelson problem). Is it
 > true that there exists a universal constant B (independent of p) such that χ_Bor(QG_{𝒬_p}) ≤ B, holds as p ranges over all primes
 > of the form 4k + 3?"* — asked after the remark that their own proof gives `χ_Bor = O(p²)`. `[Madore2015]` ¶1.5 poses the plain
-> `χ((ℚ_p)²)` as a quantity worth asking for, and his Prop. 3.8 is the chain `χ(F²) ≤ χ(ℚ_p²) = χ(ℤ_p²) ≤ lim_k χ(UD(ℤ/p^k, 2)) ≤ χ(UD(𝔽_p, 2))`
-> this whole entry stands on.
+> `χ((ℚ_p)²)` as a quantity worth asking for, and his Prop. 3.2 with Rem. 3.6 gives the ends of the chain `χ(F²) ≤ χ(ℚ_p²) = χ(ℤ_p²) ≤ lim_k χ(UD(ℤ/p^k, 2)) ≤ χ(UD(𝔽_p, 2))` this whole entry stands on (`χ((ℚ_p)²) ≤ χ((𝔽_p)²)` at `p ≡ 3 (mod 4)`), the levels between being the tower's monotonicity (his Prop. 3.8 is the variant modulo `m²`).
 
 **Our answer: no — three exact values, and a floor at 23.** *(FS-66; `plans/FS66-residue-tower-drop.md`, `plans/FS66-phase2-certificate.md` §ST,
 `data/fs66/owner/note-2026-09-20-fibre-density.md` §7–8.)*
 
-* **No universal bound exists: `χ_Bor(ℚ_p²) ≥ 1 + (p+1)/(2√p) > √p/2` for every `p ≡ 3 (mod 4)`** [hand]. The tool is the paper's own
+* **No universal bound exists: `χ_Bor(ℚ_p²) ≥ 1 + (p+1)/(2√p) > √p/2` for every `p ≡ 3 (mod 4)`** [kernel, on Weil's bound]. The tool is the paper's own
   Theorem 2.5 (the Bachoc–DeCorte–de Oliveira Filho–Vallentin spectral bound, as they state it), fed the Haar measure of the compact
   norm-one circle `{a² + b² = 1} ⊂ ℤ_p²`: its Fourier transform at a character of exact level `k` is `λ(UD(ℤ/p^k, 2))/|S_k|`; level
   one is a Kloosterman sum (Weil: `≥ −2√p/(p+1)`); and **every level `k ≥ 2` is at least `−2/(p+1)` by an elementary fibre sum** —
   the character sum over a fibre of `S_k → S_{k−1}` vanishes except over at most two residues. So the unknown growth is pinned between
-  `√p/2` and `χ(UD(𝔽_p, 2))`.
-* **`χ_Bor(ℚ₇²) = 4`, `χ_Bor(ℚ₁₁²) = 5`, `χ_Bor(ℚ₁₉²) = 5`, and `6 ≤ χ_Bor(ℚ₂₃²) ≤ 8`** [exact certificate + hand]. Upper halves: the chain above and the known
+  `√p/2` and `χ(UD(𝔽_p, 2))`. In the kernel (FS131-KPA1, FS131-IQP1, FS131-IQP3; `PadicPlane.one_add_div_le_of_borelColoring`, `not_exists_bound_borelChromaticNumber_padicPlane`) the bound is proved without Theorem 2.5: Hoffman's ratio bound at every finite level `UD(ℤ/p^k, 2)`, and the cosets a Borel colour class fills to more than half, which form an independent set of a level.
+* **`χ_Bor(ℚ₇²) = 4`, `χ_Bor(ℚ₁₁²) = 5`, `χ_Bor(ℚ₁₉²) = 5`** [kernel], **and `6 ≤ χ_Bor(ℚ₂₃²) ≤ 8`** [exact certificate + hand; the kernel holds `5 ≤ χ_Bor(ℚ₂₃²) ≤ 8`, the lower end by the circle's exact cosine sums]. Upper halves: the chain above and the known
   level-one values (`[Moorhouse2010]` Table 6.1; row 53's kernel value at 11). Lower halves, ours: every independent set of every
   level of the tower obeys one inequality on its fibre shares over level one; an exact integer sum-of-squares certificate of the
   resulting level-one problem, accepted by a frozen standard-library checker written from the specification
@@ -395,10 +394,10 @@ prior art; the fives [hand], `χ(ℚ(√47)²) ≤ 5` in the kernel and its lowe
   cannot cover at 7, four at 11 or 19, five at 23. At 23 the ceiling is `χ(UD(𝔽₂₃,2))`, itself undecided in {6, 7, 8}, so the Borel
   number there is bracketed, not pinned. Six hand-proved links join the checker's word to the statement (`data/fs66/b1/SOUNDNESS.md`). At 11 the second
   level is also in the Lean kernel: `(unitQuadrance (ZMod 121)).chromaticNumber = 5`
-  (`HadwigerNelson.chromaticNumber_unitQuadrance_zmod121`, standard three axioms).
+  (`HadwigerNelson.chromaticNumber_unitQuadrance_zmod121`, standard three axioms). The three values, and `5 ≤ χ_Bor(ℚ₂₃²) ≤ 8`, are kernel theorems on the standard three (`PadicPlane/Values`); the kernel checks FS-66's certificate at 7 itself, the library's at 11 and the Searcher's reduced one at 19.
 
 **What it does not say.** Nothing about the **plain** chromatic number `χ(ℚ_p²)` (axiom-of-choice colourings escape every measure
-argument) — Madore's quantity stays open at every `p`. Nothing exact at `p = 23` until its finite plane is decided. And the lower bound is the spectral one: whether
+argument) — Madore's quantity stays open at every `p`. Nothing exact at `p = 23` until its finite plane is decided. The kernel's lower end there is five; six rests on FS-66's certificate (search request 26 asks for one small enough to check). And the lower bound is the spectral one: whether
 `χ_Bor(ℚ_p²)` grows like `√p` or faster is exactly the unknown gap between the ratio bound and `χ` on the finite planes.
 
 **Prior art checked** (WORKFLOW 3.2 item 8; a negative measures its queries): the complete zbMATH author listings of both posers

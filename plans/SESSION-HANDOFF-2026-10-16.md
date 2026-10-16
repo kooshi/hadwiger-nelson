@@ -4,9 +4,14 @@
 `plans/FS131-close-inventory.md` items 974–992 (each has its receipt and, where it rules, four parts).
 `plans/SESSION-HANDOFF-2026-10-15.md` is older; its § 6 owed list is now filed or tabled (§ 5 below).*
 
-**On resuming:** four jobs run (§ 3, items 1020–1024, relaunched 17:39–17:44 UTC after Kooshi's pause). Agents of an
-ended session cannot be messaged: a job whose agent is gone is continued by a fresh successor from its record. Before the
-next push, item 1022's history question goes to Kooshi (§ 5).
+**On resuming:** four jobs run (§ 3). Agents of an ended session cannot be messaged: a job whose agent is gone is
+continued by a fresh successor from its record. **History (item 1025):** `main`'s unpushed range was rewritten by a
+private filter kept in the publication folder (`history-rewrite-2026-10-16/filter.py` there; the folder's path is in the coordinator's local-paths memory, never in the repository); every
+job branch carrying old commits is rewritten by the same filter at its hand-back, before its merge (`git filter-branch -f
+--msg-filter '… msg' --index-filter '… index' -- origin/main..<branch>`; the `p`-adic and three-colour branches first
+need their stopped agents' record lines added to the filter's table, found by a guard scan of the branch), and its
+old-to-new map goes under `data/fs131/history-rewrite/`. A commit hook runs the guard on every commit. Next push: a
+Clerk's privacy check of `origin/main..main`, then a fast-forward push (standing protocol).
 
 ## 1. Where things are
 
@@ -37,15 +42,17 @@ next push, item 1022's history question goes to Kooshi (§ 5).
 
 ## 3. Running
 
-**The collapse landed** (item 1005), merged as `0f81fe2a3`, gated on `7c72b9bf7`; its filing merged (`38579c41b`). The
-collapse's gate (`data/fs131/ico2/gate/`) is every implementer's baseline until another lands.
+**The p-adic plane landed** (item 1032), merged as `785a46e77`, gated on `e3e1dbb73`; filed by me; its gate
+(`data/fs131/iqp3/gate/`) is the baseline for the next landing; the three running implementers were told. `CLAUDE.md`'s
+"What the kernel holds" paragraph now lives in `plans/KERNEL-HOLDS.md`, where every landing's clause is filed; the fact
+audit runs with its default `--also` files plus `plans/KERNEL-HOLDS.md` and `plans/FILINGS.md`.
 
 | job | what | worktree, branch | record |
 |---|---|---|---|
-| FS131-IQP3 (item 1023) | the `p`-adic plane to the gate: two ruled drops, `5 ≤ χ_Bor(ℚ₂₃²)`, lint, gate, read-aloud, drafts | `il5`, `fs131-kpa1` | `plans/FS131-IQP3-padic.md` |
+| FS131-RDM1 (item 1031) | the README rewritten for a human reader (Kooshi's W21); to `main` only after my read, three status checks and Kooshi's look | `rdm1`, `fs131-rdm1` | `plans/FS131-RDM1-readme.md` |
 | FS131-ICT3 (item 1023) | the three-colour criterion to the gate: five spec examples, lint, gate, read-aloud, drafts | `kel1`, `fs131-ktc1` | `plans/FS131-ICT3-three-colour.md` |
 | FS131-IFR1 (item 1023) | the density form of the collapse: 81 leaves (about 2,650 lines) and the gate; item 1021's three rulings | `kcl1`, `fs131-kfr1` | `plans/FS131-IFR1-density.md` |
-| FS131-KCS1 (item 1024) | planner: row 123's family, CLS, ℚ(√23, ∛2); row 100's Lemma C′ | `kcs1`, `fs131-kcs1` | `plans/FS131-KCS1-class-plan.md` |
+| FS131-ICS1 (item 1028) | part A of FS131-KCS1's plan (item 1027): the quadratic dichotomy, the family, CLS in full, ℚ(√23, ∛2), the bridge; three `ClassRatio` lemmas made public | `kcs1`, `fs131-kcs1` | `plans/FS131-ICS1-class.md` |
 
 Both the `p`-adic and the three-colour branches joined `Proofs.lean`'s import blocks with `main`'s: the second to land
 will conflict there — keep both blocks. At each implementer's hand-back: check its commits, print its head statements'
@@ -63,9 +70,7 @@ Searcher run on a day the laptop is not building (item 1024).
 
 ## 5. Owed (none urgent)
 
-- **Before the next push (Kooshi's word):** item 1022 — wording the privacy guard refuses is in unpushed history (two
-  commit messages on `main`, earlier versions of the inventory and this file, and two records and one message on the
-  job branches). Rewrite the unpushed history, or narrow the guard's rule? His call.
+- **Part B of FS131-KCS1's plan** (the ring lemma, record § 2.6): a successor planner, item 1027 (2).
 
 - **Mathematics / Lean:** Lemma C′ (row 100); the family of 44 fields and CLS (`ROADMAP.md` § 3); `lean4checker` and the
   comparator before any write-up; KCL1's stub to mint (the four-colour chain as the `k = 4` case of the collapse).
