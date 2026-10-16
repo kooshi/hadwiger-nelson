@@ -229,3 +229,103 @@ Every record of the ten modules the two landings brought or changed has the axio
   (`data/fs131/ifr2/plants/`): both flagged, "RECORDED COUNTS ARE STALE in …'s header — update it: declarations 22566 →
   22683, refutations-skipped 243 → 245" and "rests 128 → 168". The digest flags, it does not fail; that is its design.
 - Not run: a planted lint fault (as at FS131-IFR1 and FS131-ICO2: the driver's control was watched at FS131-LGT1).
+
+### 3.5 After the gate: `main` merged once more (the coordinator's word, by message)
+
+`main`'s FS131-FCS1 filing (`cfc3d211b`) edited `ARCHITECTURE.md`'s `Rigidity/ClassRatio` row after the first merge, on the
+line this branch's note edits, so the branch's landing would have conflicted there. I told the coordinator; its word: merge
+`main` once more, keep both insertions, re-run the architecture check. Merged `main` at `e0b476510` as `c984cef29`: the one
+conflict was that row, resolved by applying both insertions (each a pure insertion into the common row text, at two
+different places) to the row as both sides had it. `git diff 2c6896990 c984cef29` over `Proofs/`, `Proofs.lean`, `scripts/`
+and the package files is empty, so the gated commit stands for the branch head; `main` changed none of those files since
+`d9ce6f214`. `tools/check_architecture.py` on `c984cef29`: `RESULT: PASS` (`data/fs131/ifr2/arch-merge2.txt`); its control,
+the `Plane/TriangularPacking` row deleted in the working tree, read `missing: ['Plane/TriangularPacking']`, `RESULT: 1
+failure(s)`, exit 1 (`arch-plant.txt`), and the file was restored by `git checkout`. **For the landing:** `main` after merging
+`fs131-kfr1` equals `2c6896990` in `Proofs/`, `Proofs.lean`, `scripts/` and the package files, as long as `main` changes none
+of them before then.
+
+## Stage 4 — SAVED: the drafts' counts
+
+### Drafts for the front page
+
+FS131-IFR1's drafts (its record § 5), each restated against its slot as the slot reads on `main` at `e0b476510` and with this
+gate's counts (on `2c6896990`, `data/fs131/ifr2/gate/`). Nothing else in them is changed. Where a slot's text moved since the
+predecessor wrote (the five-colour filing went in between), the slot is re-quoted from the current file.
+
+**D-1. `CLAUDE.md` § Trust ledger, the audit sentence.** Replace "the current audit reads 10914 clean and 5 declared purchases,
+and 99 imported (and 574 axiom-free; 11,592 records at FS131-ICS1, five colours by field and by class, 2026-10-16)" with:
+
+> the current audit reads 10998 clean and 5 declared purchases, and 120 imported (and 575 axiom-free; 11,698 records at
+> FS131-IFR1, the density form of the collapse, 2026-10-16)
+
+The per-import counts in the same paragraph move by the landing's 21 imported records (the audit's own tally on this gate:
+Weil's bound 80 → 90, the five-colour theorem 7 → 10, E–L 34 → 54, records on E–L and Weil's bound 21 → 30, records on all
+three 1 → 4; equal to `scripts/axioms-controls.txt`'s counting paragraph). In the paragraph's current words:
+- "with eighty imported records (" → "with ninety imported records (", the parenthesis gaining, after "the other seven on E–L
+  too": "; ten the density form's, FS131-IFR1: the model at `k = 7`, `Collapse.exists_model_seven`, on Weil's bound alone, and
+  nine on E–L too — the four instances at ℚ(√635087) and de Grey's field, TJ's first clause, TF, and the three below on all
+  three";
+- "`Outside.OAI158.no_proper_five_coloring` … with seven (the seventh the collapse's
+  `Collapse.chromaticNumber_planeOver_sqrt635087_six_or_seven`)" → "with ten (the seventh the collapse's
+  `Collapse.chromaticNumber_planeOver_sqrt635087_six_or_seven`; three the density form's, FS131-IFR1: the two splits
+  `Collapse.six_le_chromaticNumber_planeOver_sqrt635087` and `…_le_seven`, and
+  `Collapse.exists_finite_triangleFree_six_chromatic`)";
+- "with thirty-four, twenty-one of which rest on Weil's bound too (" → "with fifty-four, thirty of which rest on Weil's bound
+  too (", the list gaining the density form's nine on both, and, beside "the collapse's general form … rests on it alone",
+  the density form's eleven on it alone: the head statement `Collapse.finIndepRatio_planeOver_eq_localRatio`, B-AMEN
+  (`…_eq_iSup_density`), `Collapse.fractionalChromaticNumber_planeOver_eq`, the fractional collapse at thick fields (three
+  records), `Collapse.inv_le_localRatio_of_colorable`, and four lemmas of `Collapse/Density/Upper`;
+- "one record rests on the five-colour theorem and another import, the collapse's six-or-seven corollary, on all three" →
+  "four records rest on all three: the collapse's six-or-seven corollary and the density form's three".
+
+**D-2. `CLAUDE.md` § Trust ledger, the assumptions digest.** `axioms=3 rests=128 …` becomes
+`axioms=3 rests=168 named=19 inline=14 outside=7 ours=21 open=5 takes=109 mentions=2`. In words: "with one hundred and
+twenty-eight (axiom, theorem) rows resting on them, one hundred and six theorems, twenty of them on two and one on three"
+becomes "with one hundred and sixty-eight (axiom, theorem) rows resting on them, one hundred and thirty-four theorems,
+twenty-six of them on two and four on three" (counted from `scripts/assumptions-ledger.txt`: 134 + 26 + 2·4 = 168). The 40 new
+`RESTS` rows are the predecessor's: 25 on `positive_entropy_rigidity`, 12 on `kloosterman_bound` and 3 on
+`no_proper_five_coloring`, over 21 public theorems and 7 private declarations. No hypothesis was added or retired.
+
+**D-3. `CLAUDE.md` § The gate, the vacuity counts.** `declarations=22566 refutations-skipped=243 sites=1465` becomes
+`declarations=22683 refutations-skipped=245 sites=1465`. The second part stays
+`vacuous=0 stale=0 declared=3 witnessed=40 generic=1420 unknown=2`.
+
+**D-4. `plans/KERNEL-HOLDS.md`.** Unchanged from the predecessor's text and slot: after the collapse's clause, which ends "the
+derivation FS-103's, the kernel's check this landing's;" (present once in the current file, followed by the p-adic plane's
+clause), insert the predecessor's paragraph **the density form of the collapse** (FS-131, FS131-IFR1) as written in its
+record § 5, D-4.
+
+**D-5. `CLAUDE.md` § Frontier, the "Last updated" line.** Replace "Last filed: **five colours by field and by class**
+(FS131-KCS1, FS131-ICS1, 2026-10-16: … no value of `χ(ℝ²)` moved)" with the following, and move the five colours' entry to the
+head of the "before it" list:
+
+> Last filed: **the density form of the collapse** (FS131-KFR1, FS131-IFR1, FS131-IFR2, 2026-10-16: four modules through the
+> gate on `2c6896990`, among them `α₁(F²) = max(m₁(ℝ²), ⨆_P r_P)` at every real number field with no hypothesis,
+> `χ_f(F²) = 1/α_loc(F)`, the fractional collapse, and a finite triangle-free six-chromatic unit-distance graph. This is row
+> 129's field clause; no value of `χ(ℝ²)` moved.)
+
+(The gate commit is this job's merge, not the predecessor's `e849029c3`; FS131-IFR2 added to the job list.)
+
+**D-6. `LEDGER.md` row 129, the grade bracket.** Unchanged: the slot "the whole weight MR's (row 120);" is present once in the
+current file; the replacement is the predecessor's text (its record § 5, D-6). Every declaration it names prints, on this
+gate, the axioms that text gives it (§ 3.3).
+
+**D-7. `README.md`.** **The slot is gone**: the README was rewritten after the predecessor wrote, and the table "Planes over
+number fields" no longer exists; the results are now a numbered table (rows 1–10, `README.md` ll. 21–32) with one section per
+row (`## The results`). The predecessor's row text stands as its content; placing it — as a new row 11 with its section, or
+beside row 5 or 6 — is the coordinator's adaptation, as item 1057 did for FS131-ICS1's D9. In the new table's status words
+its status is **Lean + EL**, the two fields **Lean + W + EL**, the graph **Lean + W + EL + O5**.
+
+**D-8. `ROADMAP.md` § 3's table, row 129.** No change: it reads "hand | yes" (l. 152), and both stay true.
+
+**D-9. The Proof Atlas.** Unchanged: row 129's field clause (FRAC, B-AMEN, TJ in both clauses, ROUND, TF) from [hand] to
+[kernel]; DV, 47, PL and B-CHIF stay [hand]; the fractional collapse and the finite triangle-free six-chromatic graph are in
+the kernel with no row of their own (the coordinator's question, item 1050).
+
+**D-10. `ARCHITECTURE.md`.** Done in this branch: the four modules' rows and the notes on `Collapse/Headline` and
+`Rigidity/ClassRatio` (the latter now beside FS131-FCS1's note, § 3.5).
+
+**The gate's counts for `CLAUDE.md` § The gate and § Trust ledger**, in one place: audit `11698` records, `10998` clean,
+`575` axiom-free, `120` imported, `5` declared purchases; assumptions `axioms=3 rests=168 named=19 inline=14 outside=7 ours=21
+open=5 takes=109 mentions=2`; vacuity `declarations=22683 refutations-skipped=245 sites=1465`,
+`vacuous=0 stale=0 declared=3 witnessed=40 generic=1420 unknown=2`.
