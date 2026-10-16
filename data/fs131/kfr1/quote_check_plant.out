@@ -1,0 +1,11 @@
+[0] MISMATCH data/fs131/REQUEST-2026-10-13.md : 1 line(s) not found
+     first 21 of 278 chars present; differs at: 'Ering the choice between the two publishable forms) I choose the second form. An'
+[1] VERBATIM  plans/POROS-2026-10-13-number-field-findings.md § 3.3 The first ten, each as the theorem a reader would look for  (7 lines, 783 chars)
+[2] VERBATIM  plans/FS131-close-inventory.md   (1 lines, 3393 chars)
+[3] VERBATIM  LEDGER.md   (1 lines, 4721 chars)
+[4] VERBATIM  plans/FS103-derivation.md   (1 lines, 780 chars)
+[5] VERBATIM  plans/FS103-derivation.md   (1 lines, 540 chars)
+[6] VERBATIM  plans/FS103-derivation.md   (1 lines, 428 chars)
+[7] VERBATIM  plans/FS103-derivation.md   (1 lines, 460 chars)
+[8] VERBATIM  plans/FS103-derivation.md   (1 lines, 444 chars)
+MISMATCHES: 1
