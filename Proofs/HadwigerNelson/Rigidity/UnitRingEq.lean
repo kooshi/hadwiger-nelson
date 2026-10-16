@@ -2,7 +2,7 @@ import Proofs.HadwigerNelson.Rigidity.CountResidue
 import Proofs.HadwigerNelson.Rigidity.NormOneGen
 
 /-!
-# Lemma C′: the unit-vector ring is the ring integral at the stable primes (FS-131, job FS131-KRU1; skeleton)
+# Lemma C′: the unit-vector ring is the ring integral at the stable primes (FS-131; planned by FS131-KRU1, proved by FS131-IRU1)
 
 Plan: `plans/FS131-KRU1-ring-plan.md` § 3 (module 2). `LEDGER.md` row 100's Lemma C′ (FS91-J07-4 = J10-T6; [hand], three
 derivations); `ROADMAP.md` § 3 item 2.
@@ -55,14 +55,40 @@ def resPi (Φ : Finset (StablePrime F)) (m : ℕ) : unitRing F →+* ∀ P : Φ,
 theorem isUnit_mk_sub_conj (P : StablePrime F) (m : ℕ) {t : 𝓞 (fieldI F)} (ht : conjO F t - t ∉ P.P) :
     IsUnit (Ideal.Quotient.mk (P.P ^ m) t -
       Ideal.quotientMap (P.P ^ m) (conjO F) (P.le_comap m) (Ideal.Quotient.mk (P.P ^ m) t)) := by
-  sorry
+  haveI := P.isMaximal.isPrime
+  have hmem : t - conjO F t ∈ P.heightOne.asIdeal.primeCompl := by
+    rw [Ideal.mem_primeCompl_iff, UpperHalf.heightOne_asIdeal]
+    intro h
+    exact ht (by rw [← neg_sub]; exact P.P.neg_mem h)
+  rw [Ideal.quotientMap_mk, ← map_sub]
+  exact UpperHalf.isUnit_mk_pow P m ⟨_, hmem⟩
 
 /-- **A residue fixed by conjugation plus the residue of `t` is a unit** when `t̄ − t ∉ P`: else `a + t ∈ P` and, applying
 conjugation, `a + t̄ ∈ P`, so `t − t̄ ∈ P`. -/
 theorem isUnit_add_mk_of_conj_eq (P : StablePrime F) (m : ℕ) {t : 𝓞 (fieldI F)} (ht : conjO F t - t ∉ P.P)
     {a : 𝓞 (fieldI F) ⧸ P.P ^ m} (ha : Ideal.quotientMap (P.P ^ m) (conjO F) (P.le_comap m) a = a) :
     IsUnit (a + Ideal.Quotient.mk (P.P ^ m) t) := by
-  sorry
+  haveI := P.isMaximal.isPrime
+  rcases Nat.eq_zero_or_pos m with rfl | hm
+  · haveI : Subsingleton (𝓞 (fieldI F) ⧸ P.P ^ 0) := Ideal.Quotient.subsingleton_iff.2 (by rw [pow_zero, Ideal.one_eq_top])
+    exact isUnit_of_subsingleton _
+  obtain ⟨b, rfl⟩ := Ideal.Quotient.mk_surjective a
+  rw [Ideal.quotientMap_mk, Ideal.Quotient.eq] at ha
+  have hb : conjO F b - b ∈ P.P := Ideal.pow_le_self hm.ne' ha
+  by_contra hu
+  have hbt : b + t ∈ P.P := by
+    by_contra hbt
+    have hmem : b + t ∈ P.heightOne.asIdeal.primeCompl := by
+      rw [Ideal.mem_primeCompl_iff, UpperHalf.heightOne_asIdeal]
+      exact hbt
+    apply hu
+    rw [← map_add]
+    exact UpperHalf.isUnit_mk_pow P m ⟨_, hmem⟩
+  have hc : conjO F (b + t) ∈ P.P := (UpperHalf.conjO_mem_iff P).2 hbt
+  apply ht
+  have e : conjO F t - t = (conjO F (b + t) - (b + t)) - (conjO F b - b) := by rw [map_add]; ring
+  rw [e]
+  exact P.P.sub_mem (P.P.sub_mem hc hbt) hb
 
 /-- **Every norm-one element of the product is a residue of a unit vector** (`Counting.exists_normOneL_residues`, read in
 the product ring): the norm-one set of `∏_{P ∈ Φ} 𝓞 ⧸ P^m` under componentwise conjugation lies in the range of `resPi`. -/
@@ -70,25 +96,91 @@ theorem normOne_subset_range_resPi (Φ : Finset (StablePrime F)) (hΦ : ∀ P �
     {d : ∀ P : Φ, 𝓞 (fieldI F) ⧸ P.1.P ^ m}
     (hd : ∀ P : Φ, d P * Ideal.quotientMap (P.1.P ^ m) (conjO F) (P.1.le_comap m) (d P) = 1) :
     d ∈ (resPi Φ m).range := by
-  sorry
+  obtain ⟨x, hx, hres⟩ :=
+    exists_normOneL_residues Φ hΦ m (fun P hP => d ⟨P, hP⟩) (fun P hP => hd ⟨P, hP⟩)
+  obtain ⟨r, hrx, -⟩ := exists_unitRing_of_normOneL hx
+  refine ⟨r, funext fun P => ?_⟩
+  rw [resPi_apply]
+  show P.1.residue m (toLocal P.1 r) = d P
+  have e : toLocal P.1 r = ⟨x, UpperHalf.mem_localRing_of_mul_conj_eq_one P.1 hx⟩ := Subtype.ext hrx
+  rw [e]
+  exact hres P.1 P.2
 
 /-- **The residues of `R` fill the product** at a finite set of unramified stable primes, at every exponent. -/
 theorem resPi_surjective (Φ : Finset (StablePrime F)) (hΦ : ∀ P ∈ Φ, ¬ IsRamified P) (m : ℕ) :
     Function.Surjective (resPi Φ m) := by
-  sorry
+  classical
+  -- the componentwise conjugation of the product ring, an involution
+  let σA : (∀ P : Φ, 𝓞 (fieldI F) ⧸ P.1.P ^ m) →+* ∀ P : Φ, 𝓞 (fieldI F) ⧸ P.1.P ^ m :=
+    RingHom.pi fun P => (Ideal.quotientMap (P.1.P ^ m) (conjO F) (P.1.le_comap m)).comp (Pi.evalRingHom _ P)
+  have hσA : ∀ (x : ∀ P : Φ, 𝓞 (fieldI F) ⧸ P.1.P ^ m) (P : Φ),
+      σA x P = Ideal.quotientMap (P.1.P ^ m) (conjO F) (P.1.le_comap m) (x P) := fun _ _ => rfl
+  have hσ : ∀ x, σA (σA x) = x := by
+    intro x
+    funext P
+    obtain ⟨b, hb⟩ := Ideal.Quotient.mk_surjective (x P)
+    rw [hσA, hσA, ← hb, Ideal.quotientMap_mk, Ideal.quotientMap_mk, UpperHalf.conjO_conjO]
+  -- at each prime an integer that conjugation moves off the prime
+  have hmove : ∀ P : Φ, ∃ t : 𝓞 (fieldI F), conjO F t - t ∉ P.1.P := by
+    intro P
+    have h := hΦ P.1 P.2
+    unfold IsRamified at h
+    push Not at h
+    exact h
+  choose t ht using hmove
+  let θ : ∀ P : Φ, 𝓞 (fieldI F) ⧸ P.1.P ^ m := fun P => Ideal.Quotient.mk _ (t P)
+  have hθ : IsUnit (θ - σA θ) := Pi.isUnit_iff.2 fun P => isUnit_mk_sub_conj P.1 m (ht P)
+  have hfix : ∀ a, σA a = a → IsUnit (a + θ) := fun a ha =>
+    Pi.isUnit_iff.2 fun P => isUnit_add_mk_of_conj_eq P.1 m (ht P) (congrFun ha P)
+  have htop := closure_normOne_eq_top σA hσ hθ hfix
+  have hle : Subring.closure {x | x * σA x = 1} ≤ (resPi Φ m).range :=
+    Subring.closure_le.2 fun x hx => normOne_subset_range_resPi Φ hΦ m fun P => congrFun hx P
+  rw [htop, top_le_iff] at hle
+  exact RingHom.range_eq_top.1 hle
+
+-- a stable prime has absolute norm at least `2` (it is neither `⊥` nor `⊤`; as `Counting`'s private lemma)
+private theorem two_le_absNorm_stablePrime (P : StablePrime F) : 2 ≤ Ideal.absNorm P.P := by
+  have h0 : Ideal.absNorm P.P ≠ 0 := fun h => P.heightOne.ne_bot (Ideal.absNorm_eq_zero_iff.1 h)
+  have h1 : Ideal.absNorm P.P ≠ 1 := fun h => P.isMaximal.ne_top (Ideal.absNorm_eq_one_iff.1 h)
+  omega
 
 /-- **A nonzero natural number misses a high power of every stable prime**: `n ∉ P^m` at `m = |𝓞 L ⧸ (n)|` (else
 `|𝓞 L ⧸ P|^m ≤ m` with `|𝓞 L ⧸ P| ≥ 2`; the step inside `Counting.exists_mem_nsmul_of_resR_eq_zero`). -/
 theorem natCast_notMem_pow_absNorm (P : StablePrime F) {n : ℕ} (hn : n ≠ 0) :
     (n : 𝓞 (fieldI F)) ∉ P.P ^ Ideal.absNorm (Ideal.span {(n : 𝓞 (fieldI F))}) := by
-  sorry
+  set m := Ideal.absNorm (Ideal.span {(n : 𝓞 (fieldI F))}) with hm
+  have hm0 : m ≠ 0 := by
+    rw [hm, Ne, Ideal.absNorm_eq_zero_iff, Ideal.span_singleton_eq_bot]
+    exact_mod_cast hn
+  intro hmem
+  have hle : Ideal.span {(n : 𝓞 (fieldI F))} ≤ P.P ^ m := (Ideal.span_singleton_le_iff_mem _).2 hmem
+  have h := Ideal.absNorm_dvd_absNorm_of_le hle
+  rw [map_pow] at h
+  have h1 : Ideal.absNorm P.P ^ m ≤ m := Nat.le_of_dvd (Nat.pos_of_ne_zero hm0) h
+  have h2 : 2 ^ m ≤ Ideal.absNorm P.P ^ m := Nat.pow_le_pow_left (two_le_absNorm_stablePrime P) m
+  have h3 : m < 2 ^ m := Nat.lt_two_pow_self
+  omega
 
 /-- **Division by a natural number in `𝓞_P`**: if `n ∉ P^m`, an element of `𝓞_P` whose residue at `P^m` is zero is `n`
 times an element of `𝓞_P` (the valuation-ring dichotomy: else `(x/n)⁻¹ ∈ 𝓞_P` and `n = x·(x/n)⁻¹` has residue zero). -/
 theorem div_natCast_mem_localRing (P : StablePrime F) {n : ℕ} {m : ℕ} (hm : (n : 𝓞 (fieldI F)) ∉ P.P ^ m)
     {x : fieldI F} (hx : x ∈ P.localRing) (h0 : P.residue m ⟨x, hx⟩ = 0) :
     x / (n : fieldI F) ∈ P.localRing := by
-  sorry
+  by_cases hx0 : x = 0
+  · rw [hx0, zero_div]
+    exact P.localRing.zero_mem
+  rcases P.localRing.mem_or_inv_mem (x / n) with h | h
+  · exact h
+  · exfalso
+    apply hm
+    have e : algebraMap (𝓞 (fieldI F)) P.localRing (n : 𝓞 (fieldI F)) = ⟨x, hx⟩ * ⟨(x / n)⁻¹, h⟩ := by
+      apply Subtype.ext
+      show (((n : 𝓞 (fieldI F))) : fieldI F) = x * (x / n)⁻¹
+      rw [inv_div, mul_div_cancel₀ _ hx0]
+      simp
+    have h0' : P.residue m (algebraMap (𝓞 (fieldI F)) P.localRing (n : 𝓞 (fieldI F))) = 0 := by
+      rw [e, map_mul, h0, zero_mul]
+    rwa [UpperHalf.residue_algebraMap, Ideal.Quotient.eq_zero_iff_mem] at h0'
 
 /-- **`R` maps onto `O′/nO′`** wherever no stable prime holding `n` is ramified: every `x ∈ O′` is `r + n·y`, `r ∈ R`,
 `y ∈ O′` (FS91-J07-4's isomorphism, its onto half, at every `n`). -/
@@ -96,25 +188,84 @@ theorem exists_eq_add_mul_of_mem_stableIntegers {n : ℕ} (hn : n ≠ 0)
     (hram : ∀ P : StablePrime F, (n : 𝓞 (fieldI F)) ∈ P.P → ¬ IsRamified P) {x : fieldI F}
     (hx : x ∈ stableIntegers F) :
     ∃ r ∈ UnitRing.unitRing (conjOn (fieldI_conj F)), ∃ y ∈ stableIntegers F, x = r + (n : fieldI F) * y := by
-  sorry
+  classical
+  set m := Ideal.absNorm (Ideal.span {(n : 𝓞 (fieldI F))}) with hm
+  have hm0 : m ≠ 0 := by
+    rw [hm, Ne, Ideal.absNorm_eq_zero_iff, Ideal.span_singleton_eq_bot]
+    exact_mod_cast hn
+  -- the stable primes that hold `n`, all of level `m`
+  let Φ : Finset (StablePrime F) := (level F m).filter fun P => (n : 𝓞 (fieldI F)) ∈ P.P
+  have hΦ : ∀ P ∈ Φ, ¬ IsRamified P := fun P hP => hram P (Finset.mem_filter.1 hP).2
+  have hmemΦ : ∀ P : StablePrime F, (n : 𝓞 (fieldI F)) ∈ P.P → P ∈ Φ := by
+    intro P hnP
+    refine Finset.mem_filter.2 ⟨(mem_level F).2 ?_, hnP⟩
+    have hle : Ideal.span {(n : 𝓞 (fieldI F))} ≤ P.P := (Ideal.span_singleton_le_iff_mem _).2 hnP
+    exact Nat.le_of_dvd (Nat.pos_of_ne_zero hm0) (Ideal.absNorm_dvd_absNorm_of_le hle)
+  have hxP : ∀ P : StablePrime F, x ∈ P.localRing := (mem_stableIntegers F).1 hx
+  obtain ⟨r, hr⟩ := resPi_surjective Φ hΦ m fun P => P.1.residue m ⟨x, hxP P.1⟩
+  set r' := ofUnitRing F r with hr'
+  have hrR : r' ∈ UnitRing.unitRing (conjOn (fieldI_conj F)) := (UnitRing.coe_mem_unitRingOver_iff r').1 r.2
+  have hn' : (n : fieldI F) ≠ 0 := Nat.cast_ne_zero.2 hn
+  refine ⟨r', hrR, (x - r') / n, ?_, by rw [mul_div_cancel₀ _ hn']; ring⟩
+  rw [mem_stableIntegers]
+  intro P
+  have hrP : r' ∈ P.localRing := ofUnitRing_mem_localRing P r
+  by_cases hnP : (n : 𝓞 (fieldI F)) ∈ P.P
+  · have hPΦ := hmemΦ P hnP
+    have hres : P.residue m ⟨x - r', sub_mem (hxP P) hrP⟩ = 0 := by
+      have e : (⟨x - r', sub_mem (hxP P) hrP⟩ : P.localRing) = ⟨x, hxP P⟩ - toLocal P r := Subtype.ext rfl
+      have hrd : P.residue m (toLocal P r) = P.residue m ⟨x, hxP P⟩ := congrFun hr ⟨P, hPΦ⟩
+      rw [e, map_sub, hrd, sub_self]
+    exact div_natCast_mem_localRing P (natCast_notMem_pow_absNorm P hn) _ hres
+  · have hinv : (n : fieldI F)⁻¹ ∈ P.localRing :=
+      (UpperHalf.mem_localRing P).2 ⟨1, (n : 𝓞 (fieldI F)), hnP, by simp⟩
+    rw [div_eq_mul_inv]
+    exact mul_mem (sub_mem (hxP P) hrP) hinv
 
 /-- **Lemma C′** (FS91-J07-4 = J10-T6; `LEDGER.md` row 100): for a real number field with no ramified stable dyadic prime,
 the ring generated by the unit vectors is the ring of elements of `F(i)` integral at every stable prime. -/
 theorem unitRing_eq_stableIntegers (h : NoRamifiedStableDyadic F) :
     UnitRing.unitRing (conjOn (fieldI_conj F)) = stableIntegers F := by
-  sorry
+  refine le_antisymm (unitRing_le_stableIntegers F) fun x hx => ?_
+  obtain ⟨c, hc, hcO⟩ := exists_mul_stableIntegers_le (F := F)
+  obtain ⟨r, hr, y, hy, rfl⟩ :=
+    exists_eq_add_mul_of_mem_stableIntegers hc (fun P _ => (noRamifiedStableDyadic_iff F).1 h P) hx
+  exact add_mem hr (hcO y hy)
 
+-- the binder `[NumberField ↥F]` is read by no step: dropped by ruling (inventory item 1049)
+omit [NumberField F] in
 /-- An odd natural number lies in no ramified stable prime: a ramified stable prime holds `2` (`IsRamified.isDyadic`), and
 `2` and an odd `n` generate the unit ideal of `ℤ`. -/
 theorem not_isRamified_of_odd_mem (P : StablePrime F) {n : ℕ} (hodd : Odd n) (hn : (n : 𝓞 (fieldI F)) ∈ P.P) :
     ¬ IsRamified P := by
-  sorry
+  intro hP
+  have h2 : (2 : 𝓞 (fieldI F)) ∈ P.P := hP.isDyadic
+  obtain ⟨k, rfl⟩ := hodd
+  have h1 : (1 : 𝓞 (fieldI F)) ∈ P.P := by
+    have e : (1 : 𝓞 (fieldI F)) = ((2 * k + 1 : ℕ) : 𝓞 (fieldI F)) - (k : 𝓞 (fieldI F)) * 2 := by push_cast; ring
+    rw [e]
+    exact P.P.sub_mem hn (P.P.mul_mem_left _ h2)
+  exact P.isMaximal.ne_top ((Ideal.eq_top_iff_one _).2 h1)
 
 /-- **Lemma C′ away from 2, every real number field, no scope** (FS91-J07-4 at every odd prime): every element integral at
 every stable prime is in the unit-vector ring after multiplication by a power of `2`. -/
 theorem exists_two_pow_mul_mem_unitRing {x : fieldI F} (hx : x ∈ stableIntegers F) :
     ∃ a : ℕ, (2 : fieldI F) ^ a * x ∈ UnitRing.unitRing (conjOn (fieldI_conj F)) := by
-  sorry
+  obtain ⟨c, hc, hcO⟩ := exists_mul_stableIntegers_le (F := F)
+  obtain ⟨a, c', hodd, hcc⟩ := Nat.exists_eq_two_pow_mul_odd hc
+  have hc' : c' ≠ 0 := fun h => by simp [h] at hodd
+  obtain ⟨r, hr, y, hy, rfl⟩ :=
+    exists_eq_add_mul_of_mem_stableIntegers hc' (fun P hP => not_isRamified_of_odd_mem P hodd hP) hx
+  refine ⟨a, ?_⟩
+  have h2 : (2 : fieldI F) ^ a ∈ UnitRing.unitRing (conjOn (fieldI_conj F)) := by
+    have h := natCast_mem (UnitRing.unitRing (conjOn (fieldI_conj F))) (2 ^ a)
+    rwa [Nat.cast_pow, Nat.cast_ofNat] at h
+  have e : (2 : fieldI F) ^ a * (r + (c' : fieldI F) * y) = 2 ^ a * r + (c : fieldI F) * y := by
+    rw [hcc]
+    push_cast
+    ring
+  rw [e]
+  exact add_mem (mul_mem h2 hr) (hcO y hy)
 
 /-! ## Spec examples -/
 

@@ -62,3 +62,52 @@ the root `Proofs` out of date, `data/fs131/iru1/uptodate0.log`), before any edit
 `Rigidity/AdmissiblePrime`) → `data/fs131/iru1/statements-before.txt.gz` (166 lines; `AdmissiblePrime` 33 constants,
 `NormOneGen` 6, `UnitRingEq` 14, `UsablePrime` 11, `PlaneComponents` 9, `UnitRingModels` 4). The sources it was made from:
 `data/fs131/iru1/skeleton-sources.md5`.
+
+## Stage 2 — the leaves (module 1 committed; modules 2–5 proved on the farm, build to follow)
+
+### 2.1 Module 1, `Rigidity/NormOneGen` (6 leaves) and the ruled `AdmissiblePrime` edit
+
+All six leaves proved as planned (§ 3.5 module 1 of the plan), with the two private helpers the plan names:
+`add_conj_mul_inv_mem` (the Cayley element's denominator over `θ − σθ` lies in the generated ring) and
+`unit_mem_closure_normOne` (`(θ − σθ)⁻¹` and `θ − σθ` lie in it). The model `exists_model_galoisField` exhibits `θ` with
+`θ³ ≠ θ` by the root count of `X³ − X` (`Polynomial.card_le_degree_of_subset_roots`, `FiniteField.X_pow_card_sub_X_natDegree_eq`)
+against `|𝔽₉| = 9`. **104 lines** of proof against the plan's 125. The three lemmas of `Rigidity/AdmissiblePrime` made public
+with the plan's § 3.7 item 1 docstrings (commit `c01417289`), the ruled change; no other line of that module touched. Before
+publicizing I checked that no module of this tree or of the branches `fs131-kcs1`, `fs131-kfr1`, `fs131-ktc1`, `fs131-pv2`,
+`fs131-rdm1` declares a public constant of those names (each holds the three as `private`, a textual difference at a join,
+no doubled name).
+
+### 2.2 The re-price, from the first leaves
+
+The first two leaves (`inv_mem_of_finite` 6 lines against 15, `exists_fixed_add_mul` 13 against 20) priced at 0.55 of the
+plan; the whole of module 1 at 0.83. Carried through all five modules on the farm, the proof text added is **571 lines**
+against the plan's ≈ 970: module 1 104, module 2 151 (plan 270), module 3 208 (plan 345, the fallback leaf included), module 4
+103 (plan 195), module 5 5 (plan 35). The total moved by more than a third, downward; no reason to stop or to re-scope, and
+the job is not slower than the brief assumed.
+
+### 2.3 A statement defect, ruled (inventory item 1049)
+
+`Rigidity.not_isRamified_of_odd_mem` stored `[NumberField ↥F]`, read by no step of its proof (`IsRamified.isDyadic` and
+ideal arithmetic need none): the build's `unusedSectionVars` warning and Batteries' `unusedArguments` (run on every public
+constant of modules 1–2 on the farm, `data/fs131/iru1/probes/Lint2.lean`: this was the only one flagged) both named it. Messaged
+to the coordinator 2026-10-16 ~21:08 UTC with two forms; **ruled (a)**: `omit [NumberField F] in` above the declaration, a
+ruled one-binder drop, to be checked from the kernel's side by the re-add and the stored-type comparison (§ the gate). Its
+one consumer, `exists_two_pow_mul_mem_unitRing`, keeps its binders.
+
+### 2.4 Modules 2–5 on the farm
+
+Written in copies under `data/fs131/iru1/work/` while the first build walked (it reads the real modules, which still held the
+skeleton), each elaborated against a farm (`data/fs131/iru1/farm.sh`: a symlink copy of the compiled library under
+`build/iru1-farm`, the modules under work compiled over their removed links, `.lake/build` never written) with the lakefile's
+options, every one with no error and no warning. Departures from the plan, each a choice within my brief:
+- **Module 2.** `two_le_absNorm_stablePrime` (private) restates `Counting`'s private `two_le_absNorm` rather than opening it
+  (five lines). Everything else as the plan says.
+- **Module 3.** `exists_prime_mod_four_eq_three_dvd` by strong induction through `Nat.minFac` (not `induction_on_primes`);
+  `exists_Ioo_aeval_neg` by the plan's factorization `g = (X − θ)·h` and the continuity of `h`; `localBound_lt_top` takes the
+  finiteness of `𝓞 L ⧸ P` from `Ideal.absNorm ≠ 0` (`Nat.finite_of_card_ne_zero`), since `Ideal.finiteQuotientOfFreeOfNeBot`
+  is outside the module's imports and I did not add an import (it can move stored instances). **The fallback was taken**:
+  FS131-ICS1's bridge is not on `main`, so `exists_stablePrime_natCast_mem` is proved as the plan's fallback — the subring of
+  points whose two coordinates lie in `Arith.placeHom_base`'s `V` holds `ℤ[U]`, `1/q` would make `φ(1/q)·φ(q) = 1` with
+  `φ(q) = 0`, and row 105's prime inversion. It reads only the unit-vector clause of `IsPlaceHom`.
+- **Module 4.** `reachable_iff_sub_mem_unitRingOver`'s `⟹` by induction on the walk (not `reflTransGen`).
+- **Module 5.** Four short terms, as planned.

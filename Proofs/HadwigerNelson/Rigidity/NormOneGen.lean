@@ -4,7 +4,7 @@ import Mathlib.Algebra.GroupWithZero.Units.Fintype
 import Mathlib.FieldTheory.Finite.GaloisField
 
 /-!
-# The norm-one elements generate a finite ring with an involution (FS-131, job FS131-KRU1; skeleton)
+# The norm-one elements generate a finite ring with an involution (FS-131; planned by FS131-KRU1, proved by FS131-IRU1)
 
 Plan: `plans/FS131-KRU1-ring-plan.md` § 3 (module 1).
 
