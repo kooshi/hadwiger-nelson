@@ -41,20 +41,15 @@ ICO2: `Collapse/Slice`, `Selection`, `Headline` (about 600 lines), the experienc
 with the statement comparison (the `omit`s ruled in item 993 listed as ruled changes), the read-aloud, the drafts. **Its agent
 id is in my scratch only**; in a new session, brief a successor from its record instead.
 
-**FS131-KPA1 and FS131-KTC1 — two planners** (item 995): the `p`-adic plane's Borel bound with its values (the asking
-lane's rank 4; brief `data/fs131/briefs/FS131-KPA1-padic.md`; worktree `.claude/worktrees/il5`, branch `fs131-kpa1`;
-record `plans/FS131-KPA1-padic-plan.md` there) and the three-colour criterion for lattice Cayley graphs (rank 5; brief
-`data/fs131/briefs/FS131-KTC1-three-colour.md`; worktree `.claude/worktrees/kel1`, branch `fs131-ktc1`; record
-`plans/FS131-KTC1-three-colour-plan.md` there). At each hand-back: check its commits and its skeleton's build log,
-read its head statements against the row, copy its record and report onto `main` (the skeleton stays on its branch),
-and brief its implementer. Next free slot: the public roadmap's § 3 items 1–2 (the family, CLS, ℚ(√23, ∛2), Lemma C′);
-after the collapse lands, rank 3's density form (item 995).
-
-**At its hand-back** (announcement rule, item 988): check the commits; print the three headlines' axioms myself
-(`Collapse.chromaticNumber_planeOver_sqrt635087`, `chromaticNumber_planeOver_eq_plane_of_thick`,
-`chromaticNumber_planeOver_deGrey`; expected the standard three, `Rigidity.positive_entropy_rigidity`,
-`StandingFive.kloosterman_bound`); read them against `LEDGER.md` row 128; guard; merge `--no-ff`; file its drafts by a
-script that asserts each slot; run the fact audit and **read its last line** (item 991); rebuild the main tree.
+**FS131-IQP1 and FS131-ICT1 — the two implementers** (item 1001; planners FS131-KPA1, FS131-KTC1 handed back, items
+999–1000): the `p`-adic plane's Borel bound with its values (brief `data/fs131/briefs/FS131-IQP1-padic.md`; worktree
+`.claude/worktrees/il5`, branch `fs131-kpa1`; record `plans/FS131-IQP1-padic.md` there; the value `6 ≤ χ_Bor(ℚ₂₃²)` leaves
+the landing and waits on search request 26) and the three-colour criterion for abelian Cayley graphs (brief
+`data/fs131/briefs/FS131-ICT1-three-colour.md`; worktree `.claude/worktrees/kel1`, branch `fs131-ktc1`; record
+`plans/FS131-ICT1-three-colour.md` there). When the collapse lands on `main`, tell both that its gate is their baseline.
+At each hand-back: the same checklist as above, with the expected axioms of items 999–1000. Next free slot: the public
+roadmap's § 3 items 1–2 (the family, CLS, ℚ(√23, ∛2), Lemma C′); after the collapse lands, rank 3's density form (item
+995).
 
 ## 4. Kooshi's open decisions (each reported to him; defaults in force)
 
