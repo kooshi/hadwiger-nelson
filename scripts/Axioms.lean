@@ -261,6 +261,16 @@ declared that no audited record carries fails as `stale-declaration`. -/
 #print axioms HadwigerNelson.PadicPlane.le_borelChromaticNumber_padicPlane
 #print axioms HadwigerNelson.PadicPlane.not_exists_bound_borelChromaticNumber_padicPlane
 #print axioms HadwigerNelson.PadicPlane.one_add_div_le_of_borelColoring
+-- FS131-ICS1 (IMPORTED, on `StandingFive.kloosterman_bound`): CLS in full and ℚ(√23, ∛2)'s local bound (`Rigidity/FourColourPlaces`, `Instances/SqrtTwentyThreeCbrtTwo`; planned by FS131-KCS1) — 9
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.five_le_localBound_sqrt23_cbrt2
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.localBound_sqrt23_cbrt2_eq_five
+#print axioms HadwigerNelson.Rigidity.colorable_four_levelTarget_one_iff
+#print axioms HadwigerNelson.Rigidity.exists_ratioAtMost_lt_quarter_iff
+#print axioms HadwigerNelson.Rigidity.exists_ratioAtMost_of_not_isFourColourPlace
+#print axioms HadwigerNelson.Rigidity.five_le_chromaticNumber_levelTarget_one_iff
+#print axioms HadwigerNelson.Rigidity.five_le_localBoundAllLevels_iff
+#print axioms HadwigerNelson.Rigidity.five_le_localBound_iff
+#print axioms HadwigerNelson.Rigidity.tca_iff_forall_not_isFourColourPlace
 
 #eval AxiomAudit.declareImport ``HadwigerNelson.Outside.OAI158.no_proper_five_coloring
 
@@ -309,6 +319,14 @@ declared that no audited record carries fails as `stale-declaration`. -/
 #print axioms HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087
 #print axioms HadwigerNelson.Collapse.chromaticNumber_plane_le_of_thick
 #print axioms HadwigerNelson.Collapse.exists_slice_of_colorable
+-- FS131-ICS1 (IMPORTED, on `Rigidity.positive_entropy_rigidity` and `StandingFive.kloosterman_bound`, through the headline): five colours by field and by class — the quadratic dichotomy and the family (`Instances/SqrtFiveClass`), ℚ(√23, ∛2) and ℚ(√23) (`Instances/SqrtTwentyThreeCbrtTwo`), the two readings of `L` (`Rigidity/FourColourPlaces`); planned by FS131-KCS1 — 7
+#print axioms HadwigerNelson.SqrtFiveClass.chromaticNumber_planeOver_sqrt_eq_five
+#print axioms HadwigerNelson.SqrtFiveClass.five_le_chromaticNumber_planeOver_sqrt_iff
+#print axioms HadwigerNelson.SqrtFiveClass.five_le_localBound_sqrt_iff
+#print axioms HadwigerNelson.SqrtFiveClass.localBound_sqrt_eq_five
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.chromaticNumber_planeOver_sqrt23_cbrt2_eq_five
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.localBound_sqrt23_eq_four
+#print axioms HadwigerNelson.Rigidity.min_localBoundAllLevels_five
 
 #eval IO.println "=== CLEAN ==="
 
@@ -13076,6 +13094,42 @@ three or fewer, from the kernel's print (`data/fs131/ict3/axioms-all.txt`, `tool
 #print axioms HadwigerNelson.CayleyThree.three_dvd_liftHeight
 #print axioms HadwigerNelson.CayleyThree.tightSet
 #print axioms HadwigerNelson.ThreeColour.Winding.flip
+
+/-! ## FS131-ICS1 — five colours by field and by class (`Rigidity/FourColourPlaces`, `Arith/StableAboveUsable`,
+`Instances/SqrtFiveClass`, `Instances/SqrtTwentyThreeCbrtTwo`, planned by FS131-KCS1, proved by FS131-ICS1; and the ruled
+`Rigidity/ClassRatio` edit, items 1027 and 1029: three lemmas made public, one added): every public record of the five
+modules on the standard three or fewer, from the kernel's print (`data/fs131/ics1/axioms-all.txt`,
+`data/fs131/ics1/audit_block.py`). The sixteen records on declared imports are under IMPORTED. -/
+
+#print axioms HadwigerNelson.UpperHalf.exists_stablePrime_card_eq_sq
+#print axioms HadwigerNelson.UpperHalf.localBound_le_finitePlane
+#print axioms HadwigerNelson.UpperHalf.localBound_le_unitQuadrance
+#print axioms HadwigerNelson.UpperHalf.nonempty_hom_levelTarget_one_unitQuadrance
+#print axioms HadwigerNelson.SqrtFiveClass.colorable_five_planeOver_sqrt
+#print axioms HadwigerNelson.SqrtFiveClass.exists_maximal_card_eq_of_isSquare
+#print axioms HadwigerNelson.SqrtFiveClass.localBound_sqrt_le_five
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.F23
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.card_ne_sq_of_pow_eq
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.cbrtTwo
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.cbrtTwo_pow_three
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.exists_cube_two
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.exists_usablePrime_eleven_F23
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.instNumberFieldSubtypeRealMemSubfieldF23
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.isSquare_twentyThree
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.nonempty_ringHom_padic_eleven_F23
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.not_isTotallyReal_F23
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.numberField_F23
+#print axioms HadwigerNelson.Rigidity.chromaticNumber_le_four_dyadic
+#print axioms HadwigerNelson.Rigidity.chromaticNumber_le_four_of_small
+#print axioms HadwigerNelson.Rigidity.exists_card_two_pow_sq
+#print axioms HadwigerNelson.Rigidity.ratioAtMost_dyadic_of_six_le
+#print axioms HadwigerNelson.Rigidity.IsFourColourPlace
+#print axioms HadwigerNelson.Rigidity.chromaticNumber_planeOver_le_localBoundAllLevels
+#print axioms HadwigerNelson.Rigidity.colorable_four_levelTarget_one_of_isFourColourPlace
+#print axioms HadwigerNelson.Rigidity.exists_isFourColourPlace_rat
+#print axioms HadwigerNelson.Rigidity.five_le_chromaticNumber_levelTarget_of_ratioAtMost
+#print axioms HadwigerNelson.Rigidity.localBoundAllLevels
+#print axioms HadwigerNelson.Rigidity.localBoundAllLevels_le_localBound
 
 #eval IO.println "=== PURCHASED ==="
 

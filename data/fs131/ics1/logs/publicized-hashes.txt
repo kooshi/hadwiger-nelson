@@ -1,0 +1,3 @@
+exists_card_two_pow_sq before=1954668111 after=1954668111
+chromaticNumber_le_four_dyadic before=610681485 after=610681485
+chromaticNumber_le_four_of_small before=1953704367 after=1953704367

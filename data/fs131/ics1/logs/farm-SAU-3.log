@@ -1,0 +1,6 @@
+slot: admitted ics1-iter: mem 6 GiB (hard cap), cpus 8,9
+data/fs131/ics1/work/StableAboveUsable.lean:158:12: error(lean.dependsOnNoncomputable): failed to compile definition, consider marking it as 'noncomputable' because it depends on 'Complex.instField', which is 'noncomputable'
+
+real	0m12.454s
+user	0m20.161s
+sys	0m0.945s

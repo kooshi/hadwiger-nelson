@@ -1042,8 +1042,10 @@ private theorem card_eq_sq_of_involution {k : Type*} [Field k] [Fintype k] [Deci
     show x - θ * ((x - σ x) / (θ - σ θ)) + θ * ((x - σ x) / (θ - σ θ)) = x
     ring
 
--- FS131-ICM3: at a dyadic stable prime that conjugation moves, `|𝓞 ⧸ P| = (2^f)²`.
-private theorem exists_card_two_pow_sq [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∈ P.P)
+/-- **The residue size at a dyadic stable prime that conjugation moves** (FS131-ICM3): `|𝓞 ⧸ P| = (2^f)²` — the residue
+field is a square of its fixed field's size (`card_eq_sq_of_involution`), a power of 2. Public since FS131-ICS1 (inventory
+item 1029). -/
+theorem exists_card_two_pow_sq [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∈ P.P)
     {a : 𝓞 (fieldI F)} (ha : conjO F a - a ∉ P.P) : ∃ f : ℕ, Nat.card (𝓞 (fieldI F) ⧸ P.P) = (2 ^ f) ^ 2 := by
   classical
   haveI := P.isMaximal
@@ -1394,8 +1396,11 @@ private theorem charSum_dyadic_large {f : ℕ} (hf : 8 ≤ f) {k : Type} [Field 
   rw [htarget]
   exact hfin
 
--- FS131-ICM3: the level-one target at a dyadic stable prime is `Cay(k, {u : u^(Q+1) = 1})`; at `f ≤ 5` four colours.
-private theorem chromaticNumber_le_four_dyadic [NumberField F] (P : StablePrime F) {a : 𝓞 (fieldI F)}
+/-- **The exclusions at dyadic `Q = 2^f`, `f ≤ 5`** (X26B-T1; FS131-ICM3): at a stable prime that conjugation moves
+(`conjO a − a ∉ P`) with `|𝓞 ⧸ P| = (2^f)²`, `f ≤ 5`, the level-one target `Cay(k, {u : u^(Q+1) = 1})` is
+four-colourable — one colour per residue at `Q = 2`, `U_Q`'s `𝔽₂`-linear colouring at `4 ≤ Q ≤ 32`. Public since
+FS131-ICS1 (inventory item 1027). -/
+theorem chromaticNumber_le_four_dyadic [NumberField F] (P : StablePrime F) {a : 𝓞 (fieldI F)}
     (ha : conjO F a - a ∉ P.P) {f : ℕ} (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = (2 ^ f) ^ 2) (hf : f ≤ 5) :
     (levelTarget P 1).chromaticNumber ≤ 4 := by
   classical
@@ -1475,8 +1480,42 @@ private theorem ratioAtMost_dyadic [NumberField F] (P : StablePrime F) (h2 : (2 
   rw [div_lt_iff₀ (by linarith)]
   linarith
 
-/-- **The exclusions at `q ∈ {3, 7}`** (KR1 § 2.6 (a)): there the level-one target is four-colourable (`Γ₃`, `Γ₇`). -/
-private theorem chromaticNumber_le_four_of_small [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P)
+/-- **The large dyadic branch** (KR1 § 2.6 (c); X26B-T1; EN1-UQ4): at a stable prime that conjugation moves
+(`conjO a − a ∉ P`) with `|𝓞 ⧸ P| = (2^f)²` and `f ≥ 6` — a dyadic inert place of norm at least `64²` — the all-levels
+ratio is below `1/4`, with no colouring hypothesis: level one by the exact spectrum at `Q = 64`, `Floor128` at `128`, the
+fourth-moment count at `Q ≥ 256`; Lemma P with no unit `2` carries it to every level. `ratioAtMost_dyadic`'s `f ≥ 6`
+branch, stated alone (FS131-ICS1, inventory item 1027). -/
+theorem ratioAtMost_dyadic_of_six_le [NumberField F] (P : StablePrime F) {a : 𝓞 (fieldI F)}
+    (ha : conjO F a - a ∉ P.P) {f : ℕ} (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = (2 ^ f) ^ 2) (hf : 6 ≤ f) :
+    ∃ c : ℝ, c < 1 / 4 ∧ RatioAtMost P c := by
+  classical
+  have hlevel : ∃ κ : ℝ, κ < 1 / 3 ∧ 2 / (((2 ^ f : ℕ) : ℝ) + 1) ≤ κ ∧ CharBound P 1 κ := by
+    rcases (show f = 6 ∨ f = 7 ∨ 8 ≤ f by omega) with hf | hf | hf
+    · subst hf
+      refine ⟨15 / (((2 ^ 6 : ℕ) : ℝ) + 1), by norm_num, by norm_num, charBound_one_of_charSum P ha hQ ?_⟩
+      intro k _ _ _ hk ψ hψ
+      exact charSum_64_ge hk ψ hψ
+    · subst hf
+      refine ⟨19 / (((2 ^ 7 : ℕ) : ℝ) + 1), by norm_num, by norm_num, charBound_one_of_charSum P ha hQ ?_⟩
+      intro k _ _ _ hk ψ hψ
+      exact Floor128.charSum_128_ge hk ψ hψ
+    · have hQ1 : (0 : ℝ) < ((2 ^ f : ℕ) : ℝ) + 1 := by positivity
+      have h256 : (256 : ℝ) ≤ ((2 ^ f : ℕ) : ℝ) := by
+        have : 2 ^ 8 ≤ 2 ^ f := Nat.pow_le_pow_right (by norm_num) hf
+        exact_mod_cast (by simpa using this)
+      refine ⟨3 * (((2 ^ f : ℕ) : ℝ) + 1) / 10 / (((2 ^ f : ℕ) : ℝ) + 1), ?_, ?_,
+        charBound_one_of_charSum P ha hQ fun k _ _ _ hk ψ hψ => charSum_dyadic_large hf hk ψ hψ⟩
+      · rw [div_lt_iff₀ hQ1]; linarith
+      · rw [div_le_div_iff₀ hQ1 hQ1]; nlinarith
+  obtain ⟨κ, hκ3, hκQ, hκ1⟩ := hlevel
+  have hκ0 : 0 ≤ κ := le_trans (by positivity) hκQ
+  refine ⟨κ / (1 + κ), ?_, ratioAtMost_of_charBound P hκ0 fun _ hm => charBound_of_charBound_oneT P ha hQ hκQ hκ1 hm⟩
+  rw [div_lt_iff₀ (by linarith)]
+  linarith
+
+/-- **The exclusions at `q ∈ {3, 7}`** (KR1 § 2.6 (a)): there the level-one target is four-colourable (`Γ₃`, `Γ₇`).
+Public since FS131-ICS1 (inventory item 1027). -/
+theorem chromaticNumber_le_four_of_small [NumberField F] (P : StablePrime F) (h2 : (2 : 𝓞 (fieldI F)) ∉ P.P)
     {Q : ℕ} (hQ : Nat.card (𝓞 (fieldI F) ⧸ P.P) = Q ^ 2) (hQ37 : Q = 3 ∨ Q = 7) :
     (levelTarget P 1).chromaticNumber ≤ 4 := by
   classical

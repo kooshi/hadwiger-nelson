@@ -1,0 +1,18 @@
+Proofs/HadwigerNelson/Instances/SqrtFiveClass.lean:35:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Instances/SqrtFiveClass.lean:41:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Instances/SqrtFiveClass.lean:47:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Instances/SqrtFiveClass.lean:53:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Instances/SqrtFiveClass.lean:60:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Instances/SqrtFiveClass.lean:67:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Instances/SqrtFiveClass.lean:72:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Instances/SqrtFiveClass.lean:80:73: error: Tactic `decide` failed for proposition
+  Squarefree 47
+because its `Decidable` instance
+  Nat.instDecidablePredSquarefree 47
+did not reduce to `isTrue` or `isFalse`.
+
+After unfolding the instances `decidable_of_decidable_of_iff`, `decidable_of_iff'`, `instDecidableEqNat`, `Nat.decEq`, `Nat.decidable_dvd`, `Nat.instDecidablePredSquarefree`, and `Option.decidableEqNone`, reduction got stuck at the `Decidable` instance
+  match Nat.minSqFac 47 with
+  | none => isTrue ⋯
+  | some val => isFalse ⋯
+exit=1

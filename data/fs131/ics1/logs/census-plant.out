@@ -1,0 +1,4 @@
+class members, squarefree, d <= 3000: 52
+reached (a square, zero excluded (PLANT), mod 11 or mod 19): 41
+not reached: 11: [143, 167, 887, 1007, 1055, 1319, 1823, 1991, 2351, 2735, 2903]
+DIFFERS from the ledger's 44 of 52

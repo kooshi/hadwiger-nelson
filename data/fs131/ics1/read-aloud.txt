@@ -1,0 +1,135 @@
+@HadwigerNelson.SqrtFiveClass.five_le_chromaticNumber_planeOver_sqrt_iff : ∀ {m : ℕ},
+  Squarefree m →
+    (5 ≤
+        (SimpleGraph.induce (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {m}))
+            (HadwigerNelson.unitDistance ℂ)).chromaticNumber ↔
+      m % 168 = 47 ∨ m % 168 = 143 ∨ m % 168 = 167)
+@HadwigerNelson.SqrtFiveClass.five_le_localBound_sqrt_iff : ∀ {m : ℕ},
+  Squarefree m →
+    (5 ≤ HadwigerNelson.SpectralChain.localBound (HadwigerNelson.SquareClass.fieldOfRadicands {m}) ↔
+      m % 168 = 47 ∨ m % 168 = 143 ∨ m % 168 = 167)
+@HadwigerNelson.SqrtFiveClass.chromaticNumber_planeOver_sqrt_eq_five : ∀ {d : ℕ},
+  Squarefree d →
+    d % 168 = 47 ∨ d % 168 = 143 ∨ d % 168 = 167 →
+      IsSquare ↑d ∨ IsSquare ↑d →
+        (SimpleGraph.induce (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {d}))
+              (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+          5
+@HadwigerNelson.SqrtFiveClass.localBound_sqrt_eq_five : ∀ {d : ℕ},
+  Squarefree d →
+    d % 168 = 47 ∨ d % 168 = 143 ∨ d % 168 = 167 →
+      IsSquare ↑d ∨ IsSquare ↑d →
+        HadwigerNelson.SpectralChain.localBound (HadwigerNelson.SquareClass.fieldOfRadicands {d}) = 5
+HadwigerNelson.Rigidity.five_le_localBound_iff : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  5 ≤ HadwigerNelson.SpectralChain.localBound F ↔
+    ∀ (P : HadwigerNelson.SpectralChain.StablePrime F), ¬HadwigerNelson.Rigidity.IsFourColourPlace P
+@HadwigerNelson.Rigidity.colorable_four_levelTarget_one_iff : ∀ {F : Subfield ℝ} [NumberField ↥F]
+  (P : HadwigerNelson.SpectralChain.StablePrime F),
+  (HadwigerNelson.SpectralChain.levelTarget P 1).Colorable 4 ↔ HadwigerNelson.Rigidity.IsFourColourPlace P
+@HadwigerNelson.Rigidity.exists_ratioAtMost_lt_quarter_iff : ∀ {F : Subfield ℝ} [NumberField ↥F]
+  (P : HadwigerNelson.SpectralChain.StablePrime F),
+  (∃ c < 1 / 4, HadwigerNelson.Rigidity.RatioAtMost P c) ↔ ¬HadwigerNelson.Rigidity.IsFourColourPlace P
+HadwigerNelson.Rigidity.tca_iff_forall_not_isFourColourPlace : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  HadwigerNelson.SpectralChain.TCA F ↔
+    ∀ (P : HadwigerNelson.SpectralChain.StablePrime F), ¬HadwigerNelson.Rigidity.IsFourColourPlace P
+HadwigerNelson.Rigidity.five_le_localBoundAllLevels_iff : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  5 ≤ HadwigerNelson.Rigidity.localBoundAllLevels F ↔ 5 ≤ HadwigerNelson.SpectralChain.localBound F
+HadwigerNelson.Rigidity.min_localBoundAllLevels_five : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  Min.min (HadwigerNelson.Rigidity.localBoundAllLevels F) 5 = Min.min (HadwigerNelson.SpectralChain.localBound F) 5
+HadwigerNelson.UpperHalf.localBound_le_unitQuadrance : ∀ (F : Subfield ℝ) [NumberField ↥F]
+  {𝔭 : Ideal (NumberField.RingOfIntegers ↥F)},
+  HadwigerNelson.Arith.IsUsablePrime 𝔭 →
+    HadwigerNelson.SpectralChain.localBound F ≤
+      (HadwigerNelson.unitQuadrance (NumberField.RingOfIntegers ↥F ⧸ 𝔭)).chromaticNumber
+@HadwigerNelson.UpperHalf.exists_stablePrime_card_eq_sq : ∀ {F : Subfield ℝ} [NumberField ↥F]
+  {𝔭 : Ideal (NumberField.RingOfIntegers ↥F)},
+  HadwigerNelson.Arith.IsUsablePrime 𝔭 →
+    ∃ (P : HadwigerNelson.SpectralChain.StablePrime F),
+      Nat.card (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P) =
+        Nat.card (NumberField.RingOfIntegers ↥F ⧸ 𝔭) ^ 2
+HadwigerNelson.SqrtTwentyThreeCbrtTwo.chromaticNumber_planeOver_sqrt23_cbrt2_eq_five : (SimpleGraph.induce
+      (HadwigerNelson.planeOver HadwigerNelson.SqrtTwentyThreeCbrtTwo.F23)
+      (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+  5
+HadwigerNelson.SqrtTwentyThreeCbrtTwo.localBound_sqrt23_cbrt2_eq_five : HadwigerNelson.SpectralChain.localBound
+    HadwigerNelson.SqrtTwentyThreeCbrtTwo.F23 =
+  5
+HadwigerNelson.SqrtTwentyThreeCbrtTwo.localBound_sqrt23_eq_four : HadwigerNelson.SpectralChain.localBound
+    (HadwigerNelson.SquareClass.fieldOfRadicands {23}) =
+  4
+HadwigerNelson.SqrtTwentyThreeCbrtTwo.not_isTotallyReal_F23 : ¬NumberField.IsTotallyReal
+    ↥HadwigerNelson.SqrtTwentyThreeCbrtTwo.F23
+@HadwigerNelson.Rigidity.ratioAtMost_dyadic_of_six_le : ∀ {F : Subfield ℝ} [NumberField ↥F]
+  (P : HadwigerNelson.SpectralChain.StablePrime F)
+  {a : NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F)},
+  (HadwigerNelson.SpectralChain.conjO F) a - a ∉ P.P →
+    ∀ {f : ℕ},
+      Nat.card (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P) = (2 ^ f) ^ 2 →
+        6 ≤ f → ∃ c < 1 / 4, HadwigerNelson.Rigidity.RatioAtMost P c
+def HadwigerNelson.Rigidity.IsFourColourPlace : {F : Subfield ℝ} → HadwigerNelson.SpectralChain.StablePrime F → Prop :=
+fun {F : Subfield ℝ} (P : HadwigerNelson.SpectralChain.StablePrime F) =>
+  HadwigerNelson.Rigidity.IsRamified P ∨
+    ∃ Q ∈ {2, 3, 4, 7, 8, 16, 32},
+      Nat.card (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P) = Q ^ 2
+def HadwigerNelson.Rigidity.localBoundAllLevels : Subfield ℝ → ℕ∞ :=
+fun (F : Subfield ℝ) =>
+  ⨅ (P : HadwigerNelson.SpectralChain.StablePrime F),
+    ⨅ (m : ℕ), ⨅ (_ : 1 ≤ m), (HadwigerNelson.SpectralChain.levelTarget P m).chromaticNumber
+def HadwigerNelson.SqrtTwentyThreeCbrtTwo.F23 : Subfield ℝ :=
+Subfield.closure {√23, HadwigerNelson.SqrtTwentyThreeCbrtTwo.cbrtTwo}
+def HadwigerNelson.SqrtTwentyThreeCbrtTwo.cbrtTwo : ℝ :=
+2 ^ (1 / 3)
+def HadwigerNelson.SpectralChain.localBound : Subfield ℝ → ℕ∞ :=
+fun (F : Subfield ℝ) =>
+  ⨅ (P : HadwigerNelson.SpectralChain.StablePrime F), (HadwigerNelson.SpectralChain.levelTarget P 1).chromaticNumber
+def HadwigerNelson.SpectralChain.levelTarget : {F : Subfield ℝ} →
+  (P : HadwigerNelson.SpectralChain.StablePrime F) →
+    (m : ℕ) → SimpleGraph (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P ^ m) :=
+fun {F : Subfield ℝ} (P : HadwigerNelson.SpectralChain.StablePrime F) (m : ℕ) =>
+  SimpleGraph.fromRel fun (x y : NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P ^ m) =>
+    (x - y) * (Ideal.quotientMap (P.P ^ m) (HadwigerNelson.SpectralChain.conjO F) ⋯) (x - y) = 1
+structure HadwigerNelson.SpectralChain.StablePrime (F : Subfield ℝ) : Type
+number of parameters: 1
+fields:
+  HadwigerNelson.SpectralChain.StablePrime.P : Ideal
+      (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F))
+  HadwigerNelson.SpectralChain.StablePrime.isMaximal : self.P.IsMaximal
+  HadwigerNelson.SpectralChain.StablePrime.comap_conj : Ideal.comap (HadwigerNelson.SpectralChain.conjO F) self.P =
+      self.P
+constructor:
+  HadwigerNelson.SpectralChain.StablePrime.mk {F : Subfield ℝ}
+    (P : Ideal (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F))) (isMaximal : P.IsMaximal)
+    (comap_conj : Ideal.comap (HadwigerNelson.SpectralChain.conjO F) P = P) : HadwigerNelson.SpectralChain.StablePrime F
+def HadwigerNelson.Rigidity.IsRamified : {F : Subfield ℝ} → HadwigerNelson.SpectralChain.StablePrime F → Prop :=
+fun {F : Subfield ℝ} (P : HadwigerNelson.SpectralChain.StablePrime F) =>
+  ∀ (x : NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F)),
+    (HadwigerNelson.SpectralChain.conjO F) x - x ∈ P.P
+def HadwigerNelson.Arith.IsUsablePrime : {F : Subfield ℝ} → Ideal (NumberField.RingOfIntegers ↥F) → Prop :=
+fun {F : Subfield ℝ} (𝔭 : Ideal (NumberField.RingOfIntegers ↥F)) =>
+  𝔭.IsMaximal ∧ Nat.card (NumberField.RingOfIntegers ↥F ⧸ 𝔭) % 4 = 3
+def HadwigerNelson.SquareClass.fieldOfRadicands : Set ℕ → Subfield ℝ :=
+fun (D : Set ℕ) => Subfield.closure ((fun (d : ℕ) => √↑d) '' D)
+def HadwigerNelson.planeOver : Subfield ℝ → Set ℂ :=
+fun (F : Subfield ℝ) => {z : ℂ | z.re ∈ F ∧ z.im ∈ F}
+def HadwigerNelson.unitDistance.{u_4} : (V : Type u_4) → [MetricSpace V] → SimpleGraph V :=
+fun (V : Type u_4) [MetricSpace V] => { Adj := fun (x y : V) => Dist.dist x y = 1, symm := ⋯, loopless := ⋯ }
+'HadwigerNelson.SqrtFiveClass.five_le_chromaticNumber_planeOver_sqrt_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.SqrtFiveClass.chromaticNumber_planeOver_sqrt_eq_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.Rigidity.five_le_localBound_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.SqrtTwentyThreeCbrtTwo.chromaticNumber_planeOver_sqrt23_cbrt2_eq_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.UpperHalf.localBound_le_unitQuadrance' depends on axioms: [propext, Classical.choice, Quot.sound]

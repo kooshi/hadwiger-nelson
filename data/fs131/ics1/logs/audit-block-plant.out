@@ -1,0 +1,11 @@
+PLANTED: unknown axiom in HadwigerNelson.Rigidity.chromaticNumber_le_four_dyadic; sorryAx in HadwigerNelson.Rigidity.chromaticNumber_le_four_of_small; HadwigerNelson.CertLink.exists_fibreShareBound_nineteen filed under PURCHASED
+MODULE Proofs.HadwigerNelson.Arith.StableAboveUsable: CLEAN 4
+MODULE Proofs.HadwigerNelson.Instances.SqrtFiveClass: CLEAN 3, kloosterman_bound+positive_entropy_rigidity 4
+MODULE Proofs.HadwigerNelson.Instances.SqrtTwentyThreeCbrtTwo: CLEAN 11, kloosterman_bound 2, kloosterman_bound+positive_entropy_rigidity 2
+MODULE Proofs.HadwigerNelson.Rigidity.ClassRatio: CLEAN 7, kloosterman_bound 6
+MODULE Proofs.HadwigerNelson.Rigidity.FourColourPlaces: CLEAN 6, kloosterman_bound 7, kloosterman_bound+positive_entropy_rigidity 1
+MISFILED HadwigerNelson.CertLink.exists_fibreShareBound_nineteen: class CLEAN, filed under PURCHASED
+BAD HadwigerNelson.Rigidity.chromaticNumber_le_four_dyadic (Proofs.HadwigerNelson.Rigidity.ClassRatio): ['planted.unknownAxiom']
+OPEN HadwigerNelson.Rigidity.chromaticNumber_le_four_of_small (Proofs.HadwigerNelson.Rigidity.ClassRatio): ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+records: 55 public (11 already filed), 135 private (not audited)
+STOP: 3 record(s) the gate cannot take
