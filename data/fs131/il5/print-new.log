@@ -1,0 +1,31 @@
+slot: admitted il5-print: mem 8 GiB (hard cap), cpus 0,1
+HadwigerNelson.Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  HadwigerNelson.SpectralChain.localBound F ≤ 5 →
+    (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+      HadwigerNelson.SpectralChain.localBound F
+HadwigerNelson.Rigidity.min_chromaticNumber_five_eq_min_localBound_five : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  Min.min (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber 5 =
+    Min.min (HadwigerNelson.SpectralChain.localBound F) 5
+HadwigerNelson.Rigidity.localBound_bot_le_two : HadwigerNelson.SpectralChain.localBound ⊥ ≤ 2
+'HadwigerNelson.Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.Rigidity.min_chromaticNumber_five_eq_min_localBound_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.Rigidity.localBound_bot_le_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  Min.min (HadwigerNelson.SpectralChain.localBound F) 5 ≤
+    (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_localBound : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber ≤
+    HadwigerNelson.SpectralChain.localBound F
+constants declared by the module: 3
+  HadwigerNelson.Rigidity.min_chromaticNumber_five_eq_min_localBound_five
+  HadwigerNelson.Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five
+  HadwigerNelson.Rigidity.localBound_bot_le_two
+exit=0
