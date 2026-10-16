@@ -6,7 +6,8 @@ fence: nothing in this milestone is blind. Started 2026-10-16.*
 
 ## Theorems this phase proved
 
-None: a planning job. The skeleton's leaves are `sorry` (stage 3 lists every one); nothing with a `sorry` leaves this branch.
+None as results: a planning job. The skeleton's 38 leaves are `sorry` (§ 3.3 lists every one); the declarations it proves
+(§ 3.0) are the definition's faces and compositions of leaves. Nothing with a `sorry` leaves this branch.
 
 ## Stage 1 — SAVED: the readback
 
