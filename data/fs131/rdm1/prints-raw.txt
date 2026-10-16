@@ -1,0 +1,415 @@
+slot: waiting (ledger 16 + 8 > budget 22 GiB)
+slot: admitted lake: mem 8 GiB (hard cap), cpus 0,1
+HadwigerNelson.four_le_chromaticNumber_plane : 4 ≤
+  (HadwigerNelson.unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber
+'HadwigerNelson.four_le_chromaticNumber_plane' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.chromaticNumber_plane_ge_five : 5 ≤
+  (HadwigerNelson.unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber
+'HadwigerNelson.chromaticNumber_plane_ge_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.chromaticNumber_plane_ge_five_510 : 5 ≤
+  (HadwigerNelson.unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber
+'HadwigerNelson.chromaticNumber_plane_ge_five_510' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.chromaticNumber_plane_ge_five_553 : 5 ≤
+  (HadwigerNelson.unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber
+'HadwigerNelson.chromaticNumber_plane_ge_five_553' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.chromaticNumber_plane_interval : 5 ≤
+    (HadwigerNelson.unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber ∧
+  (HadwigerNelson.unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber ≤ 7
+'HadwigerNelson.chromaticNumber_plane_interval' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.Outside.OAI158.chromaticNumber_plane_six_or_seven : 6 ≤
+    (HadwigerNelson.unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber ∧
+  (HadwigerNelson.unitDistance (EuclideanSpace ℝ (Fin 2))).chromaticNumber ≤ 7
+'HadwigerNelson.Outside.OAI158.chromaticNumber_plane_six_or_seven' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+HadwigerNelson.Outside.OAI158.six_le_chiM0 : 6 ≤ HadwigerNelson.Plane.chiM0
+'HadwigerNelson.Outside.OAI158.six_le_chiM0' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+HadwigerNelson.Outside.OAI158.chiM0_six_or_seven : 6 ≤ HadwigerNelson.Plane.chiM0 ∧ HadwigerNelson.Plane.chiM0 ≤ 7
+'HadwigerNelson.Outside.OAI158.chiM0_six_or_seven' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+HadwigerNelson.Outside.OAI158.chromaticNumber_plane_eq_chiM0 : (HadwigerNelson.unitDistance ℂ).chromaticNumber =
+  HadwigerNelson.Plane.chiM0
+'HadwigerNelson.Outside.OAI158.chromaticNumber_plane_eq_chiM0' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+HadwigerNelson.Plane.chromaticNumber_plane_eq_chiLebesgue : (HadwigerNelson.unitDistance ℂ).chromaticNumber =
+  HadwigerNelson.Plane.chiLebesgue
+'HadwigerNelson.Plane.chromaticNumber_plane_eq_chiLebesgue' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.Plane.chiM0_eq_chiLebesgue : HadwigerNelson.Plane.chiM0 = HadwigerNelson.Plane.chiLebesgue
+'HadwigerNelson.Plane.chiM0_eq_chiLebesgue' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff : 7 ≤ (HadwigerNelson.unitDistance ℂ).chromaticNumber ↔
+  ⨆ ε, ⨆ (_ : ε > 0), HadwigerNelson.Plane.mu 6 ε < 1
+'HadwigerNelson.Outside.OAI158.seven_le_chromaticNumber_plane_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+HadwigerNelson.Plane.seven_le_chromaticNumber_plane_iff_exists_ball : 7 ≤
+    (HadwigerNelson.unitDistance ℂ).chromaticNumber ↔
+  ∃ R > 0, ¬∃ c, HadwigerNelson.Plane.IsWeakColouringOn (Metric.ball 0 R) c
+'HadwigerNelson.Plane.seven_le_chromaticNumber_plane_iff_exists_ball' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+@HadwigerNelson.Plane.colorable_iff_forall_ball : ∀ {k : ℕ},
+  (HadwigerNelson.unitDistance ℂ).Colorable k ↔ ∀ R > 0, ∃ c, HadwigerNelson.Plane.IsWeakColouringOn (Metric.ball 0 R) c
+'HadwigerNelson.Plane.colorable_iff_forall_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+@HadwigerNelson.Plane.exists_radius_of_not_colorable : ∀ {k : ℕ},
+  ¬(HadwigerNelson.unitDistance ℂ).Colorable k →
+    ∃ R > 0, ∀ (p : ℂ) (c : ℂ → Fin k), ¬HadwigerNelson.Plane.AeProperOn (Metric.ball p R) c
+'HadwigerNelson.Plane.exists_radius_of_not_colorable' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.OneClass.finIndepRatio_plane_eq_mOne : (HadwigerNelson.unitDistance ℂ).finIndepRatio =
+  HadwigerNelson.Plane.mOne
+'HadwigerNelson.OneClass.finIndepRatio_plane_eq_mOne' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.OneClass.finIndepRatio_algPlane_eq_mOne : (HadwigerNelson.unitDistance
+      ↥HadwigerNelson.Outside.OAI158.Spectral.E).finIndepRatio =
+  HadwigerNelson.Plane.mOne
+'HadwigerNelson.OneClass.finIndepRatio_algPlane_eq_mOne' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.OneClass.fractionalChromaticNumber_plane : (HadwigerNelson.unitDistance ℂ).fractionalChromaticNumber =
+  HadwigerNelson.Plane.mOne⁻¹
+'HadwigerNelson.OneClass.fractionalChromaticNumber_plane' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.OneClass.fractionalChromaticNumber_algPlane : (HadwigerNelson.unitDistance
+      ↥HadwigerNelson.Outside.OAI158.Spectral.E).fractionalChromaticNumber =
+  HadwigerNelson.Plane.mOne⁻¹
+'HadwigerNelson.OneClass.fractionalChromaticNumber_algPlane' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.OneClass.tendsto_minIndepNum_div : Filter.Tendsto (fun n => ↑(HadwigerNelson.Plane.minIndepNum n) / ↑n)
+  Filter.atTop (nhds HadwigerNelson.Plane.mOne)
+'HadwigerNelson.OneClass.tendsto_minIndepNum_div' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.OneClass.iSup_fractionalChromaticNumber_plane : ⨆ S,
+    (SimpleGraph.induce (↑S) (HadwigerNelson.unitDistance ℂ)).fractionalChromaticNumber =
+  HadwigerNelson.Plane.mOne⁻¹
+'HadwigerNelson.OneClass.iSup_fractionalChromaticNumber_plane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+HadwigerNelson.Plane.oneAvoidingDensityBound : HadwigerNelson.Plane.OneAvoidingDensityBound
+'HadwigerNelson.Plane.oneAvoidingDensityBound' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.Plane.mOne_le_0_2470 : HadwigerNelson.Plane.mOne ≤ ENNReal.ofReal 0.2470
+'HadwigerNelson.Plane.mOne_le_0_2470' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.Plane.mOne_lt_one_quarter : HadwigerNelson.Plane.mOne < ENNReal.ofReal (1 / 4)
+'HadwigerNelson.Plane.mOne_lt_one_quarter' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.chromaticNumber_seamPlane : (SimpleGraph.induce HadwigerNelson.FieldWall4.seamPlane
+      (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+  4
+'HadwigerNelson.chromaticNumber_seamPlane' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_localBound : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber ≤
+    HadwigerNelson.SpectralChain.localBound F
+'HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_localBound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_finitePlane : ∀ (F : Subfield ℝ) [NumberField ↥F]
+  {𝔭 : Ideal (NumberField.RingOfIntegers ↥F)},
+  HadwigerNelson.Arith.IsUsablePrime 𝔭 →
+    ∀ {p : ℕ},
+      Nat.Prime p →
+        Nat.card (NumberField.RingOfIntegers ↥F ⧸ 𝔭) = p →
+          (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber ≤
+            (HadwigerNelson.finitePlane p).chromaticNumber
+'HadwigerNelson.UpperHalf.chromaticNumber_planeOver_le_finitePlane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+HadwigerNelson.UpperHalf.chromaticNumber_planeOver_rat : (SimpleGraph.induce (HadwigerNelson.planeOver ⊥)
+      (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+  2
+'HadwigerNelson.UpperHalf.chromaticNumber_planeOver_rat' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.UpperHalf.chromaticNumber_planeOver_eleven : (SimpleGraph.induce
+      (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {11}))
+      (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+  4
+'HadwigerNelson.UpperHalf.chromaticNumber_planeOver_eleven' depends on axioms: [propext, Classical.choice, Quot.sound]
+@HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_table : ∀ {m : ℕ},
+  Squarefree m →
+    (m % 4 ≠ 3 →
+        (SimpleGraph.induce (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {m}))
+              (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+          2) ∧
+      (m % 12 = 3 ∨ m % 12 = 7 →
+          (SimpleGraph.induce (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {m}))
+                (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+            3) ∧
+        (m % 12 = 11 →
+            4 ≤
+              (SimpleGraph.induce (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {m}))
+                  (HadwigerNelson.unitDistance ℂ)).chromaticNumber) ∧
+          (m % 12 = 11 →
+            m % 168 ≠ 47 ∧ m % 168 ≠ 143 ∧ m % 168 ≠ 167 →
+              (SimpleGraph.induce (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {m}))
+                    (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+                4)
+'HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_sqrt_table' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+@HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_of_inv_three_mem : ∀ {F : Subfield ℝ},
+  3⁻¹ ∈ HadwigerNelson.SpectralChain.unitRing F →
+    ¬(SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).Colorable 2 →
+      4 ≤ (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+'HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_of_inv_three_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+@HadwigerNelson.TorsionExtraction.chromaticNumber_planeOver_ne_three_of_inv_three_mem : ∀ {F : Subfield ℝ},
+  3⁻¹ ∈ HadwigerNelson.SpectralChain.unitRing F →
+    (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber ≠ 3
+'HadwigerNelson.TorsionExtraction.chromaticNumber_planeOver_ne_three_of_inv_three_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+@HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_fieldOfRadicands : ∀ {d : ℕ},
+  d % 12 = 11 →
+    4 ≤
+      (SimpleGraph.induce (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {d}))
+          (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+'HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_fieldOfRadicands' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+@HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_of_sqrt_mem : ∀ {F : Subfield ℝ} {d : ℕ},
+  d % 12 = 11 →
+    √↑d ∈ F → 4 ≤ (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+'HadwigerNelson.TorsionExtraction.four_le_chromaticNumber_planeOver_of_sqrt_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_eq_three_iff : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  ¬(SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).Colorable 2 →
+    ((SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber = 3 ↔
+      ∃ 𝔭, 𝔭.IsMaximal ∧ Nat.card (NumberField.RingOfIntegers ↥F ⧸ 𝔭) = 3)
+'HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_eq_three_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_le_three_iff : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber ≤ 3 ↔
+    HadwigerNelson.SpectralChain.localBound F ≤ 3
+'HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_le_three_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_eq_localBound_of_le_four : ∀ (F : Subfield ℝ)
+  [NumberField ↥F],
+  HadwigerNelson.SpectralChain.localBound F ≤ 4 →
+    (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+      HadwigerNelson.SpectralChain.localBound F
+'HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_eq_localBound_of_le_four' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  Min.min (HadwigerNelson.SpectralChain.localBound F) 5 ≤
+    (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+'HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  HadwigerNelson.SpectralChain.localBound F ≤ 5 →
+    (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+      HadwigerNelson.SpectralChain.localBound F
+'HadwigerNelson.Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.Rigidity.min_chromaticNumber_five_eq_min_localBound_five : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  Min.min (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber 5 =
+    Min.min (HadwigerNelson.SpectralChain.localBound F) 5
+'HadwigerNelson.Rigidity.min_chromaticNumber_five_eq_min_localBound_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five : (SimpleGraph.induce
+      (HadwigerNelson.planeOver HadwigerNelson.SqrtFortySeven.F47) (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+  5
+'HadwigerNelson.SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.SqrtFortySeven.chromaticNumber_planeOver_sqrt47_le_five : (SimpleGraph.induce
+      (HadwigerNelson.planeOver HadwigerNelson.SqrtFortySeven.F47) (HadwigerNelson.unitDistance ℂ)).chromaticNumber ≤
+  5
+'HadwigerNelson.SqrtFortySeven.chromaticNumber_planeOver_sqrt47_le_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt143_eq_five : (SimpleGraph.induce
+      (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {143}))
+      (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+  5
+'HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt143_eq_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt311_eq_five : (SimpleGraph.induce
+      (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {311}))
+      (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+  5
+'HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt311_eq_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt335_eq_five : (SimpleGraph.induce
+      (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {335}))
+      (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+  5
+'HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt335_eq_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt3_sqrt5_eq_five : (SimpleGraph.induce
+      (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {3, 5}))
+      (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+  5
+'HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt3_sqrt5_eq_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.SqrtClassValues.five_le_chromaticNumber_planeOver_sqrt167 : 5 ≤
+  (SimpleGraph.induce (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {167}))
+      (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+'HadwigerNelson.SqrtClassValues.five_le_chromaticNumber_planeOver_sqrt167' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+@HadwigerNelson.Collapse.chromaticNumber_planeOver_eq_plane_of_thick : ∀ {F : Subfield ℝ} [NumberField ↥F] {c : ℝ},
+  HadwigerNelson.Collapse.Thick F c →
+    0 ≤ c →
+      c < 1 / 5 →
+        (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+          (HadwigerNelson.unitDistance ℂ).chromaticNumber
+'HadwigerNelson.Collapse.chromaticNumber_planeOver_eq_plane_of_thick' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity]
+HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087 : (SimpleGraph.induce
+      (HadwigerNelson.planeOver HadwigerNelson.Collapse.F635087) (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+  (HadwigerNelson.unitDistance ℂ).chromaticNumber
+'HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.Collapse.chromaticNumber_planeOver_deGrey : (SimpleGraph.induce
+      (HadwigerNelson.planeOver HadwigerNelson.Collapse.FdG) (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+  (HadwigerNelson.unitDistance ℂ).chromaticNumber
+'HadwigerNelson.Collapse.chromaticNumber_planeOver_deGrey' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087_six_or_seven : 6 ≤
+    (SimpleGraph.induce (HadwigerNelson.planeOver HadwigerNelson.Collapse.F635087)
+        (HadwigerNelson.unitDistance ℂ)).chromaticNumber ∧
+  (SimpleGraph.induce (HadwigerNelson.planeOver HadwigerNelson.Collapse.F635087)
+        (HadwigerNelson.unitDistance ℂ)).chromaticNumber ≤
+    7
+'HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087_six_or_seven' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+@HadwigerNelson.Collapse.chromaticNumber_planeOver_eq_plane_of_forall_thickAt : ∀ {F : Subfield ℝ} [NumberField ↥F],
+  (∀ (P : HadwigerNelson.SpectralChain.StablePrime F), ∃ c < 1 / 5, HadwigerNelson.Collapse.ThickAt P c) →
+    (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+      (HadwigerNelson.unitDistance ℂ).chromaticNumber
+'HadwigerNelson.Collapse.chromaticNumber_planeOver_eq_plane_of_forall_thickAt' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+HadwigerNelson.RouteC.chromaticNumber_planeOver_adjoin_transcendental_eq : ∀ (F : Subfield ℝ) {t : ℝ},
+  Transcendental (↥F) t →
+    (SimpleGraph.induce (HadwigerNelson.planeOver (HadwigerNelson.RouteC.adjoinTranscendental F t))
+          (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+      (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+'HadwigerNelson.RouteC.chromaticNumber_planeOver_adjoin_transcendental_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+HadwigerNelson.chromaticNumber_unitQuadrance_zmod121 : (HadwigerNelson.unitQuadrance (ZMod 121)).chromaticNumber = 5
+'HadwigerNelson.chromaticNumber_unitQuadrance_zmod121' depends on axioms: [propext, Classical.choice, Quot.sound]
+@HadwigerNelson.ThreeColourCharacter.bandSet_three_nonempty_of_proper : ∀ {A : Type u_1} [inst : AddCommGroup A]
+  {U : Set A} {c : A → ZMod 3},
+  (∀ (a u : A), u ∈ U → c (a + u) ≠ c a) →
+    (HadwigerNelson.CharacterColouring.bandSet U (HadwigerNelson.CharacterColouring.band 3)).Nonempty
+'HadwigerNelson.ThreeColourCharacter.bandSet_three_nonempty_of_proper' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+HadwigerNelson.four_le_chromaticNumber_planeOver_eleven : 4 ≤
+  (SimpleGraph.induce (HadwigerNelson.planeOver (HadwigerNelson.SquareClass.fieldOfRadicands {11}))
+      (HadwigerNelson.unitDistance ℂ)).chromaticNumber
+'HadwigerNelson.four_le_chromaticNumber_planeOver_eleven' depends on axioms: [propext, Classical.choice, Quot.sound]
+@HadwigerNelson.Outside.OAI158.proper_to_borel_weak : ∀ {k : ℕ} [NeZero k] {c : ℂ → Fin k},
+  HadwigerNelson.Outside.OAI158.ProperColoring k c → ∃ d, Measurable d ∧ HadwigerNelson.Outside.OAI158.WeakColoring k d
+'HadwigerNelson.Outside.OAI158.proper_to_borel_weak' depends on axioms: [propext, Classical.choice, Quot.sound]
+@HadwigerNelson.Outside.OAI158.Spectral.residual_fourier : ∀ {H : Type u_1} [inst : NormedAddCommGroup H]
+  [inst_1 : InnerProductSpace ℂ H] [inst_2 : CompleteSpace H]
+  (U : HadwigerNelson.Outside.OAI158.Spectral.DiscreteE →* ↥(unitary (H →L[ℂ] H)))
+  (W : ↥HadwigerNelson.Outside.OAI158.Spectral.K → ↥(unitary (H →L[ℂ] H))),
+  (∀ (k : ↥HadwigerNelson.Outside.OAI158.Spectral.K) (z : ↥HadwigerNelson.Outside.OAI158.Spectral.E) (w : H),
+      ↑(W k) ((HadwigerNelson.Outside.OAI158.ContinuousVectors.op U z) w) =
+        (HadwigerNelson.Outside.OAI158.ContinuousVectors.op U (HadwigerNelson.Outside.OAI158.Spectral.kCoeff k * z))
+          (↑(W k) w)) →
+    ∀ v ∈ (HadwigerNelson.Outside.OAI158.ContinuousVectors.space U)ᗮ,
+      (∀ (k : ↥HadwigerNelson.Outside.OAI158.Spectral.K), ↑(W k) v = v) →
+        ∀ (z : ↥HadwigerNelson.Outside.OAI158.Spectral.E),
+          z ≠ 0 → Inner.inner ℂ v ((HadwigerNelson.Outside.OAI158.ContinuousVectors.op U z) v) = 0
+'HadwigerNelson.Outside.OAI158.Spectral.residual_fourier' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.Outside.OAI158.no_proper_five_coloring : ¬∃ c, HadwigerNelson.Outside.OAI158.ProperColoring 5 c
+'HadwigerNelson.Outside.OAI158.no_proper_five_coloring' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+HadwigerNelson.StandingFive.kloosterman_bound : ∀ (F : Type u_1) [inst : Field F] [inst_1 : Fintype F]
+  [inst_2 : DecidableEq F],
+  ringChar F ≠ 2 →
+    ∀ (ψ : AddChar F ℂ),
+      (∃ x, ψ x ≠ 1) →
+        ∀ (c d a : F), 4 * c * d = a → a ≠ 0 → ‖∑ x with x ≠ 0, ψ (c * x + d * x⁻¹)‖ ≤ 2 * √↑(Fintype.card F)
+'HadwigerNelson.StandingFive.kloosterman_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+@HadwigerNelson.Rigidity.positive_entropy_rigidity : ∀ {X : Type u_1} [inst : AddCommGroup X]
+  [inst_1 : TopologicalSpace X] [inst_2 : MeasurableSpace X] [BorelSpace X],
+  HadwigerNelson.Rigidity.IsSolenoid X →
+    ∀ {d : ℕ},
+      2 ≤ d →
+        ∀ (α : HadwigerNelson.Rigidity.ZdAction d X),
+          α.NoVirtuallyCyclicFactors →
+            ∀ (μ : MeasureTheory.Measure X),
+              MeasureTheory.IsProbabilityMeasure μ →
+                α.IsErgodicOn ⊤ μ →
+                  ∃ Λ J ν G,
+                    Λ.FiniteIndex ∧
+                      0 < J ∧
+                        μ = (↑J)⁻¹ • ∑ j, ν j ∧
+                          (∀ (i j : Fin J), i ≠ j → (ν i).MutuallySingular (ν j)) ∧
+                            ∀ (j : Fin J),
+                              MeasureTheory.IsProbabilityMeasure (ν j) ∧
+                                α.IsErgodicOn Λ (ν j) ∧
+                                  (IsClosed ↑(G j) ∧
+                                      α.InvariantOn Λ (G j) ∧
+                                        ∀ g ∈ G j,
+                                          ∀ (B : Set X), MeasurableSet B → (ν j) ((fun x => x + g) ⁻¹' B) = (ν j) B) ∧
+                                    (∀ (n : Fin d → ℤ),
+                                        ∃ k,
+                                          MeasureTheory.Measure.map (⇑(α.toFun n)) (ν j) = ν k ∧
+                                            AddSubgroup.map (α.toFun n) (G j) = G k) ∧
+                                      ∀ n ∈ Λ,
+                                        ∀ (h : G j ≤ AddSubgroup.comap (α.toFun n) (G j)),
+                                          HadwigerNelson.Rigidity.ksEntropy
+                                              (MeasureTheory.Measure.map (⇑(QuotientAddGroup.mk' (G j))) (ν j))
+                                              ⇑(QuotientAddGroup.map (G j) (G j) (α.toFun n) h) =
+                                            0
+'HadwigerNelson.Rigidity.positive_entropy_rigidity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity]
+def HadwigerNelson.SpectralChain.localBound : Subfield ℝ → ℕ∞ :=
+fun F => ⨅ P, (HadwigerNelson.SpectralChain.levelTarget P 1).chromaticNumber

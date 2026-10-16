@@ -1,129 +1,397 @@
 # Hadwiger–Nelson in Lean 4
 
-How many colours does the plane need so that no two points at distance exactly 1 get the same colour? This number, χ(ℝ²), is
-called the chromatic number of the plane. It has been known since 1950 to be one of 4, 5, 6 or 7. De Grey (2018) ruled out 4. An
-outside Lean development, `[OAIMath2026]`, ruled out 5 in 2026. So today χ(ℝ²) is 6 or 7.
+**The problem.** How many colours are needed to colour every point of the plane so that two points at distance exactly 1
+never get the same colour? This number, $\chi(\mathbb{R}^2)$, is the chromatic number of the plane. Since 1950 it has been
+known to be 4, 5, 6 or 7. De Grey (2018) ruled out 4. In 2026 a manuscript released by OpenAI, with a Lean proof, ruled
+out 5. So $\chi(\mathbb{R}^2)$ is 6 or 7, and deciding which is the open Hadwiger–Nelson problem.
 
-This repository is a Lean 4 library on Mathlib. Lean's kernel has checked every theorem in it, and nothing it rests on is hidden:
-its few outside assumptions are named, cited and audited. The library holds the classical bounds `5 ≤ χ(ℝ²) ≤ 7` on Lean's three
-standard axioms alone. It also holds `6 ≤ χ(ℝ²) ≤ 7` on one more axiom: the outside development's theorem that no proper
-five-colouring of the plane exists. It reduces the question of six against seven to one statement about measurable colourings.
-And it holds exact chromatic numbers for planes over number fields, `F²` for subfields `F ⊂ ℝ` of finite degree over ℚ.
+**This repository** is a Lean 4 library, built on Mathlib, aimed at that problem. It has not solved it. The table below lists
+what it has proved along the way that is its own, and how each result is checked. Most rows are about the plane over a field:
+for a subfield $F \subseteq \mathbb{R}$, $F^2$ is the set of points whose two coordinates both lie in $F$, and $\chi(F^2)$ is
+the least number of colours such that no two points of $F^2$ at distance 1 share a colour. Since $F^2$ is a subset of the
+plane, $\chi(F^2) \le \chi(\mathbb{R}^2)$.
 
-This page says what the library proves, what each result rests on, whose mathematics it is, and how to check it. It does not argue
-the mathematics. [`ROADMAP.md`](ROADMAP.md) lists what is not yet formalized.
+## What this project proved
 
-## Results
+**Status.** **Lean**: checked by Lean's kernel, using only Lean's three standard axioms. **Lean + W**, **Lean + W + EL**:
+checked by the kernel, which also assumes, without proof, the published theorems named — **W** is Weil's 1948 bound for
+Kloosterman sums, **EL** is Einsiedler and Lindenstrauss's 2022 rigidity theorem for commuting automorphisms of solenoids,
+and **O5** (used further down) is OpenAI's 2026 theorem that the plane has no proper five-colouring. **hand**: proved on
+paper, not yet formalized.
 
-Each statement below is a plain-words reading of the stored type of the theorem named beside it. The axiom lists are exactly
-what `#print axioms` printed from the library as gated: on 2026-10-15 at commit `752b11569` (the gate ran before the publication's rewrite, which changed one docstring in the proofs and nothing else in them), and for the rows changed since, on 2026-10-16 at the commit each landing gated (`113ca8ece`, the main clause through five as one theorem; `7c72b9bf7`, the collapse). Keys in brackets, like
-`[Fischer1990]`, are entries of `BIBLIOGRAPHY.md`. **std3** means `[propext, Classical.choice, Quot.sound]`, Lean's
-standard three axioms. **W**, **EL** and **O5** are the three outside theorems the library declares as axioms (see
-[What the library assumes](#what-the-library-assumes)). Every name is under the namespace `HadwigerNelson`. The "ledger" column gives
-the row of `LEDGER.md` where the result, its grade and its sources are recorded.
+| Result | Status |
+|---|---|
+| **[1](#1-fields-that-need-exactly-five-colours)** $\chi(\mathbb{Q}(\sqrt{47})^2) = 5$, and four more fields need exactly five colours | Lean + W + EL |
+| **[2](#2-the-chromatic-number-of-a-number-fields-plane-up-to-five)** $\chi(F^2) = L(F)$ whenever $L(F) \le 5$, for every real number field $F$ | Lean + W + EL |
+| **[3](#3-exactly-when-three-colours-suffice)** $\chi(F^2) = 3$ $\iff$ some prime of $F$ has residue field $\mathbb{F}_3$ (for $F^2$ not bipartite) | Lean + W |
+| **[4](#4-real-quadratic-fields-that-need-four-colours)** $\chi(\mathbb{Q}(\sqrt{m})^2) \ge 4$ for every $m \equiv 11 \pmod{12}$ | Lean |
+| **[5](#5-a-quadratic-field-whose-plane-needs-as-many-colours-as-the-plane)** $\chi(\mathbb{Q}(\sqrt{635087})^2) = \chi(\mathbb{R}^2)$ | Lean + W + EL |
+| **[6](#6-finite-graphs-and-measurable-sets-have-the-same-density)** $\alpha_1(\mathbb{R}^2) = m_1(\mathbb{R}^2)$ and $\chi_f(\mathbb{R}^2) = 1/m_1(\mathbb{R}^2)$ | Lean |
+| **[7](#7-six-against-seven-as-a-stability-question)** $\chi(\mathbb{R}^2) \ge 7$ $\iff$ $\lim_{\varepsilon \to 0} \mu_6(\varepsilon) < 1$ | Lean |
+| **[8](#8-one-bounded-disc-decides-it)** $\chi(\mathbb{R}^2) \ge 7$ $\iff$ some disc has no measurable 6-colouring proper at almost every unit pair | Lean |
+| **[9](#9-the-p-adic-plane-needs-unboundedly-many-colours)** $\chi_{\mathrm{Bor}}(\mathbb{Q}_p^2) \ge 1 + \frac{p+1}{2\sqrt{p}}$ for $p \equiv 3 \pmod 4$: unbounded in $p$ | Lean + W |
+| **[10](#10-three-colourings-of-lattice-cayley-graphs)** $\mathrm{Cay}(\mathbb{Z}^d, S)$ is 3-colourable $\iff$ some character $\theta$ has $\theta(S) \subseteq [\frac13, \frac23]$ | hand; ⟹ in Lean |
 
-### The plane
+The symbols, in one line each (each is defined in full in its row's section below):
 
-| statement, in words | Lean name | rests on | whose | ledger |
-|---|---|---|---|---|
-| The plane needs at least 4 colours (the Moser spindle). | `four_le_chromaticNumber_plane` | std3 | classical; the kernel proof checks all `3⁷` colourings | rung A |
-| The plane needs at least 5 colours. | `chromaticNumber_plane_ge_five` (de Grey's 1581-vertex graph); also `chromaticNumber_plane_ge_five_510` and `_553` (Heule's two smaller graphs) | std3 | the graphs and the bound are de Grey's (2018) and Heule's. The kernel check, through an LRAT checker the kernel can run, is this project's | rung B |
-| `5 ≤ χ(ℝ²) ≤ 7` | `chromaticNumber_plane_interval` | std3 | the seven-colouring is classical: "The colouring is classical; ours is the certificate." | 33 |
-| `6 ≤ χ(ℝ²) ≤ 7` | `Outside.OAI158.chromaticNumber_plane_six_or_seven` | std3 + **O5** | `[OAIMath2026]`'s theorem. It is kernel-checked in that release's own library, which was built and audited here, and it enters this library as a declared axiom | 33 |
-| χ(ℝ²) equals `χ_m⁰(ℝ²)`: the least `k` for which some Borel `k`-colouring of the plane is proper at almost every unit-distance pair (in each colour class, the pairs at distance 1 form a null set). | `Outside.OAI158.chromaticNumber_plane_eq_chiM0` | std3 | `[OAIMath2026]` Thm 1.3 (its transfer theorem, whose proof is ported here and checked by this kernel), together with the direction `χ ≤ χ_m⁰`, whose argument is in print (`[GwynStavrianos2022]` Lemma 2, Thm 2). Not this project's mathematics | 130 |
-| χ(ℝ²) also equals Falconer's measurable chromatic number: Lebesgue-measurable colour classes, proper at every pair. | `Plane.chromaticNumber_plane_eq_chiLebesgue` | std3 | `[Davies2026]` Lemma B.1 composed with `[OAIMath2026]`'s transfer: other people's mathematics, composed and formalized here | 130 |
-| `7 ≤ χ(ℝ²)` exactly when `µ₆(ε)` stays below 1 as ε → 0. Here `µ₆(ε)` is the largest upper density that six disjoint measurable classes can cover when, in each class, the pairs at distances in `[1 − ε, 1 + ε]` form a null set. Stored as `7 ≤ χ ↔ ⨆ ε > 0, µ₆(ε) < 1`. | `Outside.OAI158.seven_le_chromaticNumber_plane_iff` | std3 | prior art: not found in print as an equivalence. The conditional form is in `[SokolovVoronov2025]` §9 | 131 |
-| `7 ≤ χ(ℝ²)` exactly when some open disc about the origin has no measurable six-colouring that is proper at almost every unit pair inside it. | `Plane.seven_le_chromaticNumber_plane_iff_exists_ball` | std3 | the disc form for such colourings: prior art not found in print. The direction toward seven is `[OAIMath2026]`'s transfer, restricted to a disc | 161 |
-| The density equality: `α₁(ℝ²) = α₁(𝒜²) = m₁(ℝ²)`. In words, the infimum of `α(G)/|G|` over finite point sets of the plane (and of the algebraic plane `𝒜²`) equals the supremum of the upper densities of measurable sets with no two points at distance 1. Also `χ_f(ℝ²) = χ_f(𝒜²) = 1/m₁(ℝ²)`, and `f(n)/n → m₁(ℝ²)`, where `f(n)` is the least independence number of a unit-distance graph on `n` points of the plane. | `OneClass.finIndepRatio_plane_eq_mOne`, `OneClass.finIndepRatio_algPlane_eq_mOne`, `OneClass.fractionalChromaticNumber_plane`, `OneClass.fractionalChromaticNumber_algPlane`, `OneClass.tendsto_minIndepNum_div` | std3 | For the plane: prior art not found in print. `[Davies2026]` Thm 1.1 proves the same equality in dimensions four and up. In the plane, `f(n)/n → m₁(ℝ²)` is the first clause of `[DuczVarga2026]`'s Conjecture 1, and `χ_f(ℝ²) = 1/m₁(ℝ²)` is the equality that `[MatolcsiEtAl2025]` §2 calls not known. The rigidity step is `[OAIMath2026]`'s, ported. The kernel proof is this project's | 129 |
-| The density bound: every Lebesgue-measurable planar set with no two points at distance 1 has upper density at most `0.2470` about every centre. So `m₁(ℝ²) ≤ 0.2470 < 1/4`. | `Plane.oneAvoidingDensityBound`, `Plane.mOne_le_0_2470`, `Plane.mOne_lt_one_quarter` | std3 | `[AmbrusEtAl2023]` Theorem 1. The proof starts from the paper's own certificate and needs no Bessel-function citation; the route, the formalization and the kernel check are this project's | 129 |
+- A *real number field* is a subfield of $\mathbb{R}$ of finite degree over $\mathbb{Q}$.
+- $L(F)$: the least chromatic number among certain finite graphs on the residue fields of $F(i)$ (row 2).
+- $\alpha_1$: the least ratio of independence number to size over finite point sets; $m_1$: the largest density of a
+  measurable set with no two points at distance 1; $\chi_f$: the fractional chromatic number (row 6).
+- $\mu_6(\varepsilon)$: the largest density that six measurable classes avoiding distances near 1 can cover (row 7).
+- $\chi_{\mathrm{Bor}}(\mathbb{Q}_p^2)$: the least number of colours, with Borel colour classes, for the $p$-adic plane (row
+  9).
+- A *character* $\theta$ of $\mathbb{Z}^d$: a homomorphism $\mathbb{Z}^d \to \mathbb{R}/\mathbb{Z}$ (row 10).
 
-### Planes over number fields
+What each Lean theorem behind rows 1–9 assumes is exactly what its status names: none takes a further unproved result as a
+hypothesis. [`RESULTS.md`](RESULTS.md) gives each one's Lean name and its axioms as `#print axioms` prints them.
 
-`χ(F²)` is the chromatic number of the unit-distance graph on `F² = {z ∈ ℂ : Re z, Im z ∈ F}`. **L(F)**, the *local bound*,
-is defined as follows. For each prime ideal of `F(i)` that complex conjugation maps to itself, take the residue ring `𝓞/P`. Form
-the finite graph on it whose edges are the differences `x` with `x·x̄ = 1`. L(F) is the least chromatic number of these finite
-graphs (`SpectralChain.localBound`).
+**On novelty.** For results of this project the page says "prior art: not found in print". That reports the literature
+searches recorded in [`LEDGER.md`](LEDGER.md); it is not a claim of priority. Results that are other people's are listed
+[further down](#other-peoples-results-that-the-library-checks), with their authors.
 
-| statement, in words | Lean name | rests on | whose | ledger |
-|---|---|---|---|---|
-| `χ(ℚ(√3, √11)²) = 4` ("Theorem B") | `chromaticNumber_seamPlane` | std3 | the value is `[Fischer1994]`'s. The kernel proof is this project's, by a residue colouring with values in 𝔽₄, which is a different colouring from his | 57 |
-| `χ(F²) ≤ L(F)` for every real number field. Also `χ(F²) ≤ χ(UD(𝔽_p, 2))`, the unit-distance graph of the finite plane `𝔽_p²`, at any prime of `F` whose residue field is `𝔽_p` with `p ≡ 3 (mod 4)`. | `UpperHalf.chromaticNumber_planeOver_le_localBound`, `UpperHalf.chromaticNumber_planeOver_le_finitePlane` | std3 | the bound is `[Moorhouse2010]` §8.2/§10.3, `[Manturov2012]` Thms 17–19 and `[Madore2015]` Cor. 3.4. The kernel proof is this project's | 52 |
-| `χ(ℚ²) = 2`. `χ(ℚ(√11)²) = 4`. | `UpperHalf.chromaticNumber_planeOver_rat`, `UpperHalf.chromaticNumber_planeOver_eleven` | std3 | `χ(ℚ²) = 2` is Woodall's value; the mechanism is in `[Fischer1990]` Thm 8 and `[Moorhouse2010]` Thm 7. For ℚ(√11), the upper bound is `[Moorhouse2010]`'s and `[Fischer1990]`'s, and a lower bound above three for a real quadratic field: prior art not found in print | 63, 73 |
-| For squarefree `m`, `χ(ℚ(√m)²)` is 2 when `m ≢ 3 (mod 4)` and 3 when `m ≡ 3, 7 (mod 12)`. When `m ≡ 11 (mod 12)` it is at least 4, and exactly 4 unless `m ≡ 47, 143, 167 (mod 168)`. | `ThreeFourColours.chromaticNumber_planeOver_sqrt_table` | std3 | the values 2 and 3 and the upper bounds are `[Fischer1990]`'s (Thms 8, 9, 10(i)). The lower bound of four: prior art not found in print | 73, 82, 99 |
-| A non-bipartite `F²` is 3-colourable exactly when some prime of `F` has residue field 𝔽₃. `χ(F²) ≤ 3 ⟺ L(F) ≤ 3`. And `χ(F²) = L(F)` whenever `L(F) ≤ 4`. | `ThreeFourColours.chromaticNumber_planeOver_eq_three_iff`, `…_le_three_iff`, `…_eq_localBound_of_le_four` | std3 + **W** | The question is `[Fischer1990]` §1's: is there an algebraic criterion for χ(F²)? It is also `[Johnson2000]`'s Problem 4.4. The answer at this range: prior art not found in print | 99 |
-| `min(L(F), 5) ≤ χ(F²)` for every real number field, with no further hypothesis. With the upper bound `χ(F²) ≤ L(F)` it gives `χ(F²) = L(F)` whenever `L(F) ≤ 5`, and, with no hypothesis, `min(χ(F²), 5) = min(L(F), 5)`. | `Rigidity.min_localBound_five_le_chromaticNumber`, `Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five`, `Rigidity.min_chromaticNumber_five_eq_min_localBound_five` | std3 + **EL** + **W** | The "local–global" conjecture `χ(F²) = L(F)` is this project's. The question is `[Fischer1990]` §1's. Measure rigidity for the unit-vector group of a number field, and the five: prior art not found in print. The route from **EL** to the number field (two deductions of this project's) is kernel-checked here | 123 |
-| `χ(ℚ(√47)²) = 5`. Also `χ = 5` over ℚ(√143), ℚ(√311), ℚ(√335) and ℚ(√3, √5), and `χ(ℚ(√167)²) ≥ 5`. | `SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five`; `SqrtClassValues.chromaticNumber_planeOver_sqrt143_eq_five` (and `…311…`, `…335…`, `…sqrt3_sqrt5…`), `SqrtClassValues.five_le_chromaticNumber_planeOver_sqrt167` | std3 + **EL** + **W** | The lower half: prior art not found in print. The upper half `≤ 5` is prior art (the plane at 11) and holds on std3 alone (`SqrtFortySeven.chromaticNumber_planeOver_sqrt47_le_five`). `[Moorhouse2010slides]` asks for χ(ℚ(√47)²) by name. `[Davies2026]` p. 5 asks the question by residue class modulo 168, and the field of √47 lies in one of those classes. No finite five-chromatic graph is exhibited | 121, 123 |
-| `χ(F²) = χ(ℝ²)` for every real number field whose stable primes are uniformly `c`-thick with `c < 1/5`: for one `c` and every prime ideal of `F(i)` that conjugation maps to itself, every non-trivial additive character of every `𝓞/Pᵐ` sums over the elements of norm one to at most `c` times their number. So `χ(ℚ(√635087)²) = χ(ℝ²)` and `χ(ℚ(√3, √5, √7, √11)²) = χ(ℝ²)`, and with **O5**, `6 ≤ χ(ℚ(√635087)²) ≤ 7`. | `Collapse.chromaticNumber_planeOver_eq_plane_of_thick`, `Collapse.chromaticNumber_planeOver_sqrt635087`, `Collapse.chromaticNumber_planeOver_deGrey`, `Collapse.chromaticNumber_planeOver_sqrt635087_six_or_seven` | std3 + **EL** (the general form); + **W** (the two fields); + **O5** (the corollary) | the derivation is this project's; the field equality: prior art not found in print. The plane's number it is equated with is `[OAIMath2026]`'s `χ_m⁰`; in dimension at least four the analogue is `[Davies2026]` Thm 1.1 | 128 |
-| Adding a transcendental changes nothing: `χ(F(t)²) = χ(F²)`. | `RouteC.chromaticNumber_planeOver_adjoin_transcendental_eq` | std3 | `[Fischer1990]` Thm 6. The kernel proof is this project's | 104 |
+## The results
 
-`LEDGER.md` holds 167 rows. Each row is one result with its grade, where it lives in the library or the records, and its
-attributions; its "claim list" says what is this project's and what is not. A row that the ledger marks `[hand]`, `[tools]` or
-`[cert]` is not, or not wholly, in the kernel, and [`ROADMAP.md`](ROADMAP.md) lists those rows.
+### 1. Fields that need exactly five colours
 
-"Prior art: not found in print" is a statement about searches that are recorded in the ledger. It is not a claim of priority.
+```math
+\chi\big(\mathbb{Q}(\sqrt{47})^2\big) = 5
+```
+
+The same value holds for $\mathbb{Q}(\sqrt{143})$, $\mathbb{Q}(\sqrt{311})$, $\mathbb{Q}(\sqrt{335})$ and
+$\mathbb{Q}(\sqrt3, \sqrt5)$, and $\chi(\mathbb{Q}(\sqrt{167})^2) \ge 5$.
+
+- **In words.** Five colours suffice for the points of the plane with coordinates in $\mathbb{Q}(\sqrt{47})$, and four do
+  not. Among real quadratic fields $\mathbb{Q}(\sqrt d)$ it is the one with the least $d$ that needs five: the table in [row
+  4](#4-real-quadratic-fields-that-need-four-colours) gives at most four for every smaller $d$. Because
+  $\mathbb{Q}(\sqrt{47})^2$ lies in the plane, this is also a proof that $\chi(\mathbb{R}^2) \ge 5$ that exhibits no graph.
+- **Why it matters.** Moorhouse (2010, in conference slides) asked: "What about χ(ℚ(√47)²)?". Johnson (2006, p. 214) asked
+  whether any $\mathbb{Q}(\sqrt m)^2$ needs more than four colours ("very interesting, if the answer is yes!"). Davies
+  (October 2026, p. 5) lists $n \equiv 47, 143, 167 \pmod{168}$ as the open cases and asks whether any of them contains a
+  five-chromatic unit-distance graph. And it answers in part Exoo and Ismailescu's (2019) question, "what is the smallest
+  subfield of E² that requires 5 colors?": among real quadratic fields, it is $\mathbb{Q}(\sqrt{47})$.
+- **A consequence.** $\mathbb{Q}(\sqrt{47})$ contains no $\sqrt3$, so its plane has no equilateral triangle of side 1; by the
+  de Bruijn–Erdős theorem some finite triangle-free unit-distance graph in it needs five colours. That answers, without a
+  construction, the existence half of Open Problem 55.1 in Soifer's book (2024), "Construct a triangle-free 5-chromatic
+  unit-distance graph".
+- **What it rests on.** The upper bound $\le 5$ is prior art: the plane maps to the finite plane $\mathbb{F}_{11}^2$, which
+  needs five colours (Moorhouse 2010); it is checked on Lean's standard axioms alone. The lower bound is [row
+  2](#2-the-chromatic-number-of-a-number-fields-plane-up-to-five) at these fields, so it assumes W and EL.
+- **Prior art** for the lower bound: not found in print (`LEDGER.md` rows 121 and 123).
+- **Not claimed.** An explicit five-chromatic graph; anything about six colours; more than $\ge 5$ at
+  $\mathbb{Q}(\sqrt{167})$, where this project's conjecture predicts at least six.
+- **By hand, not yet in Lean.** $\chi = 5$ for every squarefree $d \equiv 47, 143, 167 \pmod{168}$ with
+  $L(\mathbb{Q}(\sqrt d)) = 5$: 44 of the 52 such $d$ below 3000.
+
+### 2. The chromatic number of a number field's plane, up to five
+
+Let $F$ be a real number field and $\mathcal{O}$ the ring of integers of $F(i)$. For each prime ideal $\mathfrak{P}$ of
+$\mathcal{O}$ that complex conjugation maps to itself, form the finite graph on the residue field $\mathcal{O}/\mathfrak{P}$
+that joins $x$ and $y$ when $(x - y)\,\overline{(x - y)} = 1$. Let $L(F)$ be the least chromatic number of these graphs.
+$F^2$ has a graph homomorphism to each of them, so $\chi(F^2) \le L(F)$; this upper bound is due to Moorhouse (2010),
+Manturov (2012) and Madore (2015). The theorem says it is exact up to five:
+
+```math
+\chi(F^2) = L(F) \quad \text{whenever } L(F) \le 5,
+```
+
+and, with no condition on $F$, $\min(\chi(F^2), 5) = \min(L(F), 5)$.
+
+- **In words.** If some prime gives a residue graph that can be coloured with $k \le 5$ colours, $F^2$ needs exactly the
+  least such $k$. If none does, $F^2$ needs at least five.
+- **Why it matters.** Fischer (1990, §1) asked "whether some algebraic criterion can be found to determine the chromatic
+  number of F² where F is a subfield of ℝ, of finite degree over ℚ"; Johnson repeated the question (2000, Problem 4.4). This
+  answers it wherever $L(F) \le 5$, and decides for every real number field whether four colours suffice. This project
+  conjectures that $\chi(F^2) = L(F)$ whenever $L(F) \le 6$, and in a bolder form that $\chi(\mathbb{R}^2) = 7$; the case
+  $L(F) = 6$ and the bolder form are open.
+- **What it rests on.** W and EL, declared as axioms. EL enters through a measure-rigidity theorem for the group of unit
+  vectors of $F(i)$ (the $z$ with $z \bar z = 1$), which this project derived from EL; the derivation is checked in Lean.
+- **Prior art.** The conjecture is this project's. The lower bound and the measure-rigidity theorem: not found in print
+  (`LEDGER.md` row 123).
+- **Not claimed.** Anything at $L(F) \ge 6$ beyond $\chi(F^2) \ge 5$.
+
+### 3. Exactly when three colours suffice
+
+Let $F$ be a real number field whose plane cannot be coloured with two colours. Then $\chi(F^2) = 3$ if and only if some
+prime ideal of the ring of integers of $F$ has residue field $\mathbb{F}_3$, the field with three elements. Also
+$\chi(F^2) \le 3 \iff L(F) \le 3$, and $\chi(F^2) = L(F)$ whenever $L(F) \le 4$.
+
+- **Example.** In $\mathbb{Q}(\sqrt{11})$ the prime 3 stays prime and its residue field is $\mathbb{F}_9$, so three colours
+  do not suffice for $\mathbb{Q}(\sqrt{11})^2$ (it needs exactly four, [row
+  4](#4-real-quadratic-fields-that-need-four-colours)).
+- **Why it matters.** It answers Fischer's and Johnson's question (row 2) at three colours, by looking only at how the prime
+  3 factors in $F$, and extends Fischer's (1990) values for real quadratic fields to every real number field.
+- **What it rests on.** W, used at one step. The direction "a prime with residue field $\mathbb{F}_3$ gives a
+  three-colouring" needs only the standard axioms.
+- **Credit and prior art.** The two-colour case for every real number field, and the three-colour case for fields that
+  contain $\sqrt3$, are GPT Astra's, an OpenAI model's, from a conversation with this project's owner (2026-09-14). The
+  general case: prior art not found in print (`LEDGER.md` row 99).
+- **By hand, not yet in Lean.** Every three-colouring of such a plane comes from a single prime; and
+  $\chi(\mathbb{Q}(\alpha, \sqrt7)^2) = 4$ for $\alpha^3 = \alpha + 1$.
+
+### 4. Real quadratic fields that need four colours
+
+For every positive integer $m \equiv 11 \pmod{12}$,
+
+```math
+\chi\big(\mathbb{Q}(\sqrt{m})^2\big) \ge 4 .
+```
+
+More generally, for every subfield $F \subseteq \mathbb{R}$: if $1/3$ lies in the ring generated by the unit vectors of $F^2$
+(the points of $F^2$ at distance 1 from the origin, read as complex numbers) and $F^2$ cannot be 2-coloured, then
+$\chi(F^2) \ge 4$ (and $\chi(F^2) \ne 3$ even without the second condition). With Fischer's values, this completes the table
+for real quadratic fields up to four colours (in Lean as one theorem):
+
+| squarefree $m$ | $\chi$ |
+|---|:-:|
+| $m \not\equiv 3 \bmod 4$ | 2 |
+| $m \equiv 3, 7 \bmod 12$ | 3 |
+| $m \equiv 11 \bmod 12$, except the next row | 4 |
+| $m \equiv 47, 143, 167 \bmod 168$ | $\ge 4$ ([row 1](#1-fields-that-need-exactly-five-colours)) |
+
+- **Why it matters.** Johnson (2006, p. 214) asked: "does there exist a positive integer m such that χ(G(ℚ²(√m), 1)) ≥ 4?".
+  Yes: $m = 11$, and every $m \equiv 11 \pmod{12}$. Johnson (2000, p. 176) had called this family open, and Benda and
+  Perles's Open Question (4) asks for the chromatic number of the plane over every algebraic extension of $\mathbb{Q}$.
+- **What it rests on.** Lean's standard axioms only. For $\mathbb{Q}(\sqrt{11})$ the kernel also checks an explicit 204-point
+  triangle-free unit-distance graph that cannot be 3-coloured.
+- **Prior art.** The values 2 and 3 and every upper bound are Fischer's (1990, Theorems 8, 9 and 10(i)). For
+  $m \equiv 23 \pmod{24}$ Fischer (Theorem 10(ii)) had the identity the proof uses, and concluded only that no *additive*
+  colouring with few colours exists. The step to all colourings, and the lower bound four: not found in print (`LEDGER.md`
+  rows 73 and 82).
+
+### 5. A quadratic field whose plane needs as many colours as the plane
+
+```math
+\chi\big(\mathbb{Q}(\sqrt{635087})^2\big) = \chi(\mathbb{R}^2)
+```
+
+The same holds for $\mathbb{Q}(\sqrt3, \sqrt5, \sqrt7, \sqrt{11})$, the field of de Grey's graph. With OpenAI's 2026 theorem
+that no proper five-colouring of the plane exists (assumed as **O5**, below),
+$6 \le \chi(\mathbb{Q}(\sqrt{635087})^2) \le 7$.
+
+- **The general statement.** $\chi(F^2) = \chi(\mathbb{R}^2)$ for every real number field $F$ that has a constant $c < 1/5$
+  with this property: at every prime $\mathfrak{P}$ of $F(i)$ fixed by complex conjugation, and every $m \ge 1$, every
+  non-trivial additive character of $\mathcal{O}/\mathfrak{P}^m$, summed over the elements of norm one, has absolute value at
+  most $c$ times their number. Weil's bound gives such a $c$ for the two fields named, whose smallest conjugation-fixed
+  primes lie above 103 and above 131.
+- **In words.** The whole Hadwiger–Nelson problem lives in the plane over one real quadratic field. In outline: the small
+  character sums keep a colouring of $F^2$ from exploiting any prime of $F$, EL rules out the one remaining escape, and what
+  is left is a colouring of the whole plane, with as many colours, that is proper at almost every unit pair. By OpenAI's
+  theorem, such colourings need $\chi(\mathbb{R}^2)$ colours.
+- **Why it matters.** Benda and Perles (written in 1976, printed in 2000) showed that some number field's plane needs exactly
+  $\chi(\mathbb{R}^2)$ colours, without naming one. Davies (2026, Theorem 1.1) proved
+  $\chi(\mathbb{Q}^d) = \chi(\mathbb{R}^d)$ for $d \ge 5$, and wrote of the plane that "we suspect that a more complicated
+  extension of ℚ² might be required". Here a real quadratic field suffices, given W and EL. Since $\mathbb{Q}(\sqrt{635087})$
+  contains no $\sqrt3$, its plane has no unit equilateral triangle; with O5 and de Bruijn–Erdős (an argument outside Lean),
+  some finite triangle-free unit-distance graph is six-chromatic.
+- **What it rests on.** The general form: EL. The two fields: also W. The bounds 6 and 7: also O5.
+- **Prior art.** The field equality: not found in print (`LEDGER.md` row 128). The equality it passes through, between
+  $\chi(\mathbb{R}^2)$ and the measurable chromatic number, is OpenAI's.
+- **By hand, not yet in Lean.** A density form for independent sets of $F^2$ (`LEDGER.md` row 129).
+
+### 6. Finite graphs and measurable sets have the same density
+
+```math
+\begin{gathered}
+\alpha_1(\mathbb{R}^2) = m_1(\mathbb{R}^2) \\
+\chi_f(\mathbb{R}^2) = 1/m_1(\mathbb{R}^2)
+\end{gathered}
+```
+
+Here $\alpha_1(\mathbb{R}^2)$ is the infimum, over finite non-empty point sets $S$ of the plane, of
+$\alpha(S)/\lvert S \rvert$, where $\alpha(S)$ is the size of the largest subset of $S$ with no two points at distance 1;
+$m_1(\mathbb{R}^2)$ is the supremum of the upper densities of measurable sets with no two points at distance 1; and $\chi_f$
+is the fractional chromatic number. The same holds over the algebraic plane (points with algebraic coordinates), and
+$f(n)/n \to m_1(\mathbb{R}^2)$, where $f(n)$ is the least independence number of a unit-distance graph on $n$ points of the
+plane.
+
+- **Why it matters.** It proves the first clause of Dúcz and Varga's Conjecture 1 (2026), and answers the question Matolcsi,
+  Ruzsa, Varga and Zsámboki (2025, §2) call open, whether $\chi_f(\mathbb{R}^2) = 1/m_1(\mathbb{R}^2)$; Johnson had posed it
+  earlier (1996; 2000). With the known bounds on $m_1(\mathbb{R}^2)$ (at least 0.2293, Croft 1967; at most 0.2470, Ambrus,
+  Csiszárik, Matolcsi, Varga and Zsámboki 2023), it puts $\chi_f(\mathbb{R}^2)$ between about 4.05 and 4.36.
+- **What it rests on.** Lean's standard axioms only. The key step is OpenAI's rigidity theorem (Theorem 2.3 of their
+  manuscript), whose Lean proof was ported into this library and checked again here.
+- **Prior art.** For the plane: not found in print (`LEDGER.md` row 129). Davies (2026, Theorem 1.1) proves the same equality
+  in dimensions four and up.
+- **Not claimed.** Any value of $m_1(\mathbb{R}^2)$, or that it equals Croft's constant (Dúcz and Varga's second clause).
+
+### 7. Six against seven, as a stability question
+
+```math
+\chi(\mathbb{R}^2) \ge 7 \iff \lim_{\varepsilon \to 0} \mu_6(\varepsilon) < 1
+```
+
+Here $\mu_6(\varepsilon)$ is the largest upper density that six disjoint measurable sets can cover when, inside each set, the
+pairs of points at distance between $1 - \varepsilon$ and $1 + \varepsilon$ form a null set. It grows as $\varepsilon$
+shrinks; Lean states the limit as the supremum over $\varepsilon > 0$.
+
+- **In words.** The plane can be coloured with six colours exactly when six classes, each avoiding a thin band of distances
+  around 1, can cover the plane up to holes whose density tends to 0 as the band narrows. Seven colours are needed exactly
+  when the holes cannot shrink to nothing. This turns a question about arbitrary colourings into one about measurable sets
+  with a little room to spare.
+- **What it rests on.** Lean's standard axioms only, through OpenAI's transfer theorem (a colouring of the plane gives a
+  Borel one proper at almost every unit pair), whose proof is ported into this library.
+- **Prior art.** Not found in print as an equivalence (`LEDGER.md` row 131). Sokolov and Voronov (2025, §9) state the
+  conditional form.
+
+### 8. One bounded disc decides it
+
+$\chi(\mathbb{R}^2) \ge 7$ if and only if, for some $R > 0$, the open disc of radius $R$ about the origin has no
+Borel-measurable colouring with six colours that is proper at almost every unit pair inside the disc. More generally, for
+every $k$, the plane can be $k$-coloured exactly when every such disc has such a $k$-colouring.
+
+- **In words.** A proof of seven needs to rule out these weak six-colourings on one bounded disc. A proof of six needs them
+  on discs of every radius, with no colouring of the whole plane.
+- **What it rests on.** Lean's standard axioms only; the direction toward seven goes through OpenAI's transfer theorem.
+- **Prior art.** Partly: for the whole plane the argument is Gwyn and Stavrianos's (2022, Lemma 2); the bounded case for
+  proper colourings is Kruskal's (2008); the direction toward seven is OpenAI's transfer theorem restricted to a disc. The
+  disc form for weak colourings: not found in print (`LEDGER.md` row 161).
+
+### 9. The p-adic plane needs unboundedly many colours
+
+For a prime $p \equiv 3 \pmod 4$, join two points $x, y$ of $\mathbb{Q}_p^2$ when $Q(x - y) = 1$, where
+$Q(v) = v_1^2 + v_2^2$ (for these $p$ the form $Q$ has no non-trivial zero over $\mathbb{Q}_p$). Every colouring of this
+graph whose colour classes are Borel sets uses at least
+
+```math
+1 + \frac{p + 1}{2\sqrt{p}}
+```
+
+colours, so the Borel chromatic number $\chi_{\mathrm{Bor}}(\mathbb{Q}_p^2)$ is not bounded as $p$ varies. Its values are 3,
+4, 5 and 5 at $p = 3, 7, 11, 19$, and $5 \le \chi_{\mathrm{Bor}}(\mathbb{Q}_{23}^2) \le 8$.
+
+- **Why it matters.** Bardestani and Mallahi-Karai (2017, Question 1) asked whether one constant bounds
+  $\chi_{\mathrm{Bor}}(\mathbb{Q}_p^2)$ for all such $p$; their own method gives $O(p^2)$. The answer is no.
+- **What it rests on.** The bound, and the value at 3: W. The values at 7, 11 and 19 and the bounds at 23: Lean's standard
+  axioms only. The proof applies Hoffman's ratio bound to the finite graphs on $(\mathbb{Z}/p^k)^2$, at every level $k$; it
+  does not use the posers' spectral theorem.
+- **Prior art.** The lower bound, the answer and the lower halves of the values: not found in print (`LEDGER.md` row 75;
+  zbMATH listings of both posers and abstract queries were searched; MathSciNet and the Russian-language literature were
+  not). The upper halves come from Madore's construction (2015) with the known values of the finite planes (Moorhouse 2010).
+- **Not claimed.** The chromatic number of $\mathbb{Q}_p^2$ with no measurability required, which stays open. At $p = 23$ an
+  exact certificate, checked by a separate program and joined to the statement by hand, gives $\chi_{\mathrm{Bor}} \ge 6$.
+
+### 10. Three-colourings of lattice Cayley graphs
+
+Let $\Lambda \cong \mathbb{Z}^d$ and let $S = -S$ be a finite generating set. Then the Cayley graph
+$\mathrm{Cay}(\Lambda, S)$ can be 3-coloured if and only if some homomorphism $\theta : \Lambda \to \mathbb{R}/\mathbb{Z}$
+maps every element of $S$ into $[\frac13, \frac23]$, if and only if it has a periodic 3-colouring (one invariant under a
+subgroup of finite index). Periodic 3-colourings are dense among all 3-colourings, so two vertices that every periodic
+3-colouring colours alike are coloured alike by every 3-colouring.
+
+- **Why it matters.** Ellenberg (MathOverflow, 2018) asked whether a $k$-colourable graph of this kind always has a periodic
+  $k$-colouring: "I don't even know how to do this for A = Z!". Gibbs and Mixon asked related questions on the Polymath16
+  project (2018), and Chandgotia, Gangloff, Hellouin de Menibus and Oprocha (2025, Question 6.2) carry the question as open.
+  This answers it at three colours, and with it Abrishami et al.'s Problem 4.6 (2025) at three colours for these graphs. At
+  four colours it is open.
+- **Status.** Proved by hand, twice and independently; not yet formalized. The direction "a 3-colouring gives such a
+  $\theta$" is checked in Lean, on the standard axioms, for every abelian group.
+- **Prior art.** The lift of a 3-colouring to integer heights is Chandgotia's device; density at the standard generators is
+  expected folklore and is not claimed. The criterion for arbitrary generating sets: not found in print (`LEDGER.md` row 79).
+  Not read: the rest of two of those papers' reference lists, and the literature on homomorphism shifts with non-standard
+  generating sets beyond the queries run.
+
+### Also proved by hand
+
+Most of this project's recent work is about six against seven: partial results, proved by hand, on measurable six-colourings
+of the plane, such as where their colour classes can meet and what a boundary along a unit circle forces. Most have a single
+derivation, not yet repeated independently, and none of them decides the problem. [`ROADMAP.md`](ROADMAP.md) lists them, with
+everything else not yet formalized.
+
+## Other people's results that the library checks
+
+The library also proves these known results. In each case the theorem is its authors' and the Lean proof is this project's.
+All are checked on Lean's standard axioms alone, except $6 \le \chi(\mathbb{R}^2) \le 7$, which also assumes O5.
+
+| Result | Whose |
+|---|---|
+| $\chi(\mathbb{R}^2) \ge 4$ | classical: the Moser spindle |
+| $5 \le \chi(\mathbb{R}^2) \le 7$ | de Grey (2018) and Heule's smaller graphs (2018); the seven-colouring is classical |
+| $6 \le \chi(\mathbb{R}^2) \le 7$ | OpenAI (2026); Lean + O5 |
+| $\chi(\mathbb{R}^2) = \chi_m^0(\mathbb{R}^2)$ | OpenAI (2026, Theorem 1.3) |
+| $\chi_m^0(\mathbb{R}^2) = \chi_m(\mathbb{R}^2)$ | Davies (2026, Lemma B.1) |
+| $m_1(\mathbb{R}^2) \le 0.2470$ | Ambrus, Csiszárik, Matolcsi, Varga, Zsámboki (2023) |
+| $\chi(\mathbb{Q}(\sqrt3, \sqrt{11})^2) = 4$ | Fischer (1994) |
+| $\chi(F^2) \le L(F)$ | Moorhouse (2010), Manturov (2012), Madore (2015) |
+| $\chi(\mathbb{Q}^2) = 2$ | Woodall (1973) |
+| $\chi(F(t)^2) = \chi(F^2)$, $t$ transcendental | Fischer (1990, Theorem 6) |
+
+- $\chi_m^0(\mathbb{R}^2)$ is the least $k$ for which some Borel $k$-colouring of the plane is proper at almost every unit
+  pair; $\chi_m(\mathbb{R}^2)$ is Falconer's measurable chromatic number, with Lebesgue-measurable colour classes and proper
+  at every unit pair. The direction $\chi \le \chi_m^0$ is argued in print by Gwyn and Stavrianos (2022).
+- **What is this project's in these proofs.** For the five-colour bound, the kernel checks the graphs' non-colourability
+  through a checker it can run for LRAT, a format for SAT solvers' refutation proofs. For the seven-colouring, "the colouring
+  is classical; ours is the certificate". For $\mathbb{Q}(\sqrt3, \sqrt{11})$ the Lean proof uses a different four-colouring
+  from Fischer's, with values in $\mathbb{F}_4$ rather than $\mathbb{Z}/4$. For the density bound it starts from the paper's
+  own certificate and needs no citation of Bessel-function facts.
+- **OpenAI's results** come from their Lean development (family 158 of their 2026 manuscript collection), which was built and
+  audited here. Its theorem that no proper five-colouring exists enters as an axiom (O5). Its transfer theorem and its
+  rigidity step enter as theorems: their proofs are ported into this library and checked by this kernel.
 
 ## What the library assumes
 
-Everything here reduces to what Lean's kernel checked plus what is listed in this section.
+Every theorem here reduces to what Lean's kernel checked plus what this section lists.
 
-**Three outside theorems, declared as axioms.** Each axiom is stated in its source's own form. Its statement is read back against
-the source, it has a model of its hypotheses in its file, and it is listed in `ARCHITECTURE.md` § 5:
+- **Lean's three standard axioms**: `propext`, `Classical.choice`, `Quot.sound`.
+- **Three published theorems, declared as axioms.** Each is stated in its source's own form and read back against the source,
+  has a model of its hypotheses in its file, and is listed in [`ARCHITECTURE.md`](ARCHITECTURE.md) § 5:
+  - **W**, `StandingFive.kloosterman_bound`: Weil's bound for Kloosterman sums (Weil 1948, p. 207). Over a finite field of
+    characteristic not 2, with $\psi$ a non-trivial additive character and $4cd = a \ne 0$,
+    $\lVert \sum_{x \ne 0} \psi(cx + dx^{-1}) \rVert \le 2\sqrt q$.
+  - **EL**, `Rigidity.positive_entropy_rigidity`: Einsiedler and Lindenstrauss's positive-entropy rigidity for
+    $\mathbb{Z}^d$-actions ($d \ge 2$) on solenoids with no virtually cyclic factors (2022, Theorem 1.3).
+  - **O5**, `Outside.OAI158.no_proper_five_coloring`: no map $\mathbb{C} \to$ `Fin 5` gives different colours to every two
+    points at distance 1 (OpenAI 2026, family 158). The axiom's statement is the release's stored statement, term for term.
+- **Two further pieces of OpenAI's release are proved, not assumed**: its transfer theorem
+  `Outside.OAI158.proper_to_borel_weak` and its rigidity step `Outside.OAI158.Spectral.residual_fourier`. Their proofs are
+  ported into `Proofs/HadwigerNelson/Outside/`, keep the release's Apache 2.0 licence
+  (`Proofs/HadwigerNelson/Outside/OAIMath2026-LICENSE.txt`), and are checked by this kernel.
+- **Five native-evaluation purchases.** Five declarations use `native_decide`, so they trust Lean's compiler rather than its
+  kernel. All five are in `Instances/SpindleBound.lean`; they cross-check the SAT encoding on the Moser spindle, and no
+  theorem on this page rests on them.
+- **Hypotheses.** Some theorems take an outside result, or a result of this project not yet formalized, as an explicit
+  hypothesis ("if Herglotz–Bochner holds, then …"). Such a theorem prints only the standard axioms, so
+  `scripts/assumptions.sh` lists every one: 33 hypotheses (7 standing for outside theorems, 21 for hand results of this
+  project, 5 for open questions), taken in 109 (hypothesis, theorem) pairs. No theorem on this page or in
+  [`RESULTS.md`](RESULTS.md) takes one.
 
-- **W**, `StandingFive.kloosterman_bound`: Weil's bound for Kloosterman sums. Over a finite field of characteristic not 2, with
-  `ψ` a nontrivial additive character and `4cd = a ≠ 0`, it says `‖Σ_{x≠0} ψ(cx + dx⁻¹)‖ ≤ 2√q` (`[Weil1948]` p. 207).
-- **EL**, `Rigidity.positive_entropy_rigidity`: Einsiedler and Lindenstrauss's positive-entropy rigidity for `ℤ^d`-actions
-  (`d ≥ 2`) on solenoids with no virtually cyclic factors (`[EinsiedlerLindenstrauss2022]` Theorem 1.3).
-- **O5**, `Outside.OAI158.no_proper_five_coloring`: no map `ℂ → Fin 5` gives different colours to every two points at distance 1
-  (`[OAIMath2026]` family 158). The axiom's statement is the release's stored statement, term for term.
-
-Two more pieces of `[OAIMath2026]` are not assumed: their proofs are ported into `Proofs/HadwigerNelson/Outside/` and checked by
-this kernel. They are its transfer theorem `Outside.OAI158.proper_to_borel_weak` and its rigidity step
-`Outside.OAI158.Spectral.residual_fourier`. The ported files keep the release's Apache 2.0 licence
-(`Proofs/HadwigerNelson/Outside/OAIMath2026-LICENSE.txt`).
-
-**Five native-evaluation purchases.** These are declarations that use `native_decide`, so they trust Lean's compiler rather than
-its kernel. All five are in `Instances/SpindleBound.lean`. They are cross-checks of the SAT encoding on the Moser spindle, and
-no headline theorem rests on them.
-
-**Hypotheses.** Some theorems take an outside result, or a result of this project not yet formalized, as an explicit hypothesis.
-An example is "if Herglotz–Bochner holds, then …". Such a theorem prints the standard three axioms, so `scripts/assumptions.sh`
-lists every one: 33 hypotheses, taken in 108 (hypothesis, theorem) pairs. None of the results in the tables above takes any.
-
-**The audit at the last full gate** (2026-10-15) checked 11,284 records. 10,650 rest on the standard three axioms or fewer, 569
-on no axiom at all, 60 on at least one of W, EL, O5, and 5 are the purchases. (The 10,650 rest on a subset of the standard
-three.) No record rests on `sorry`. The independent replay
-`lean4checker` has not been run on the current tree; it is the publication gate and is listed in the roadmap.
+**The audit at the last gate** (2026-10-16) checked 11,466 records: 10,804 rest on some of the standard three axioms and
+nothing else, 574 on no axiom at all, 83 on at least one of W, EL and O5, and 5 are the purchases. No record rests on
+`sorry`. The independent replay `lean4checker` has not been run on the current tree; it is the publication gate
+([`ROADMAP.md`](ROADMAP.md) § 5), and landing W, EL and O5 themselves in Lean is listed there too.
 
 ## How to check it
 
 **Toolchain.** Lean `v4.32.0` and Mathlib at tag `v4.32.0`, pinned by `lean-toolchain` and `lakefile.toml`. Install
-[elan](https://github.com/leanprover/elan) (`./install-toolchain.sh` does it). Then fetch Mathlib's prebuilt files:
+[elan](https://github.com/leanprover/elan) (`./install-toolchain.sh` does it), then fetch Mathlib's prebuilt files:
 
 ```bash
 lake exe cache get
 ```
 
-**Build.** Use `./scripts/build.sh`; never run a bare `lake build`. Some modules peak near 9 GB of memory, and Lake sizes its
-job pool from the machine, so an unbounded build can ask for hundreds of gigabytes. The script builds modules in dependency
-order, in batches of `BATCH` (default 10), each under a memory cap of `MEMMAX` (default `100G`). It needs Linux with `systemd`
-user scopes and `python3`. Set both variables for your machine:
+**Build.** Use `./scripts/build.sh`, never a bare `lake build`. Some modules peak near 9 GB of memory, and Lake sizes its job
+pool from the machine, so an unbounded build can ask for hundreds of gigabytes. The script builds modules in dependency
+order, in batches of `BATCH` (default 10), each under a memory cap of `MEMMAX` (default `100G`). It needs Linux with
+`systemd` user scopes and `python3`. Set both variables for your machine:
 
 ```bash
-BATCH=2 MEMMAX=24G ./scripts/build.sh      # --plan prints the batches and builds nothing
+BATCH=2 MEMMAX=24G ./scripts/build.sh
 ```
 
-On Arch Linux, `source scripts/dev-env.sh` first: the toolchain's bundled `clang` fails against Arch's system LLVM.
+`./scripts/build.sh --plan` prints the batches and builds nothing. On Arch Linux, run `source scripts/dev-env.sh` first: the
+toolchain's bundled `clang` fails against Arch's system LLVM.
 
-**The gate**, after a build. Each step is a script, and each script has a `--self-test` that plants faults and checks that every
-one is caught:
+**The gate**, after a build. Each step is a script with a `--self-test` that plants faults and checks that every one is
+caught.
 
-| step | command | checks |
-|---|---|---|
-| axioms | `./scripts/axioms.sh` | every public record's `#print axioms` (in `scripts/Axioms.lean`), checked as a set against its section: clean, imported (declared outside theorems only), or purchased |
-| assumptions | `./scripts/assumptions.sh` | every hypothesis that stands for an outside or unformalized result is declared, with its source, and every theorem taking it is listed |
-| vacuity | `./scripts/vacuity.sh` | no theorem is a `∀` over an empty domain: where a binder's domain could be empty, the library must exhibit an inhabitant or declare the emptiness with its reason |
-| doubled names | `./scripts/dupnames.sh` | no name is declared by two modules (Lean can merge two such theorems silently at import) |
-| lint | `lake lint --no-build -- --no-build` | Mathlib's environment linters, on the built library |
+- `./scripts/axioms.sh` — every public declaration's `#print axioms` (in `scripts/Axioms.lean`), checked as a set against its
+  section: clean, imported (declared outside theorems only), or purchased.
+- `./scripts/assumptions.sh` — every hypothesis that stands for an outside or unformalized result is declared with its
+  source, and every theorem taking it is listed.
+- `./scripts/vacuity.sh` — no theorem is a `∀` over an empty domain: where a binder's domain could be empty, the library
+  exhibits an inhabitant or declares the emptiness with its reason.
+- `./scripts/dupnames.sh` — no name is declared by two modules (Lean can merge two such theorems silently at import).
+- `lake lint --no-build -- --no-build` — Mathlib's environment linters, on the built library.
 
 **One theorem by hand.** Put this in a file and run `lake env lean <file>`:
 
@@ -133,52 +401,63 @@ import Proofs
 #print axioms HadwigerNelson.SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five
 ```
 
-`lake env lean` does not apply the lakefile's options, so `autoImplicit` is not off unless you pass `-DautoImplicit=false`. Use
-it to read statements, not to decide that a module is green.
+`lake env lean` does not apply the lakefile's options, so `autoImplicit` is not off unless you pass `-DautoImplicit=false`.
+Use it to read statements, not to decide that a module is green.
 
 ## Layout
 
-| path | what is there |
-|---|---|
-| `Proofs/HadwigerNelson/` | the library (about 2,150 files, many of them generated certificate data). `Plane/` holds the measurable and regularity results, `Arith/`, `Rigidity/` and `SpectralChain.lean` the number-field results, `Instances/` the concrete graphs and fields, `Outside/` the imported and ported parts of `[OAIMath2026]`, and `Sat/` the kernel-run refutation checker |
-| `Proofs.lean` | the import surface |
-| `ARCHITECTURE.md` | the module map, checked against the import graph, and § 5, Trust |
-| `LEDGER.md` | one row per result: grade, address, prior art, and the claim list of what is this project's |
-| `BIBLIOGRAPHY.md` | every cited work, what rests on it, and how much of it was read; § E maps this project's working terms to the literature's |
-| `LEAN.md` | this repository's Lean conventions: the build, the gate, the kernel's cost model, how outside theorems are imported |
-| `scripts/` | the build and the gate |
-| `tools/` | generators and instruments (Python). Nothing in `tools/` is trusted: a generator bug can only produce data the kernel refuses |
-| `plans/` | the working records: one file per milestone, derivation and job; `plans/FRONTIER-STUBS.md` ranks the open questions |
-| `CLAUDE.md` | the context every agent shares: the project's current state, its rules, and its working theory |
-| `data/` | the jobs' inputs and outputs: certificates, briefs, reports, logs of gate runs |
-| `visualizations/` | interactive pages for some of the objects |
-
-Several of the words used in `plans/` and in docstrings (for example "usable prime", "local bound", "stable prime") are this
-project's own coinages. `BIBLIOGRAPHY.md` § E translates them into the literature's terms where the literature has them.
+- `Proofs/HadwigerNelson/` — the library (about 2,170 files, many of them generated certificate data). `Plane/` holds the
+  measurable and regularity results; `Arith/`, `Rigidity/`, `Collapse/` and `SpectralChain.lean` the number-field results;
+  `PadicPlane/` the $p$-adic plane; `Instances/` the concrete graphs and fields; `Outside/` the imported and ported parts of
+  OpenAI's release; `Sat/` the refutation checker the kernel runs. Every name is under the namespace `HadwigerNelson`.
+- `Proofs.lean` — the import surface.
+- [`RESULTS.md`](RESULTS.md) — every result on this page with its Lean names, its axioms as printed, its sources and full
+  references.
+- [`ROADMAP.md`](ROADMAP.md) — everything not yet formalized: hand results, computations outside the kernel, the assumed
+  theorems.
+- [`LEDGER.md`](LEDGER.md) — one row per result (167 rows): its grade, where it lives, its prior art, and a claim list of
+  what is this project's and what is not. A row the ledger marks `[hand]`, `[tools]` or `[cert]` is not, or not wholly, in
+  the kernel.
+- [`CLOSED-QUESTIONS.md`](CLOSED-QUESTIONS.md) — the questions posed in print that this project answered, quoted, with the
+  prior art that limits each answer.
+- [`BIBLIOGRAPHY.md`](BIBLIOGRAPHY.md) — every cited work, what rests on it, and how much of it was read. Its § E translates
+  this project's working terms (for example "usable prime", "local bound", "stable prime", used in `plans/` and in
+  docstrings) into the literature's, where the literature has them.
+- [`ARCHITECTURE.md`](ARCHITECTURE.md) — the module map, checked against the import graph, and § 5, Trust.
+- [`LEAN.md`](LEAN.md) — the repository's Lean conventions: the build, the gate, the kernel's cost model, how outside
+  theorems are imported.
+- `scripts/` — the build and the gate.
+- `tools/` — generators and instruments in Python. Nothing in `tools/` is trusted: a generator bug can only produce data the
+  kernel refuses.
+- `plans/` — the working records: one file per milestone, derivation and job; `plans/FRONTIER-STUBS.md` ranks the open
+  questions.
+- [`CLAUDE.md`](CLAUDE.md) — the context every agent shares: the project's current state, its rules and its working theory.
+- `data/` — the jobs' inputs and outputs: certificates, briefs, reports, logs of gate runs.
+- `visualizations/` — interactive pages for some of the objects.
 
 ## How it was made
 
 The project's own account (`CLAUDE.md` § Whose work this is):
 
-> The mathematics and the engineering here are the agents': the questions Poros's, the derivations Ephodos's, the kernel proofs
-> de Bruijn's, the coordination Keryx's — the models, the statements, the proofs, the measurements, and every decision recorded in
-> `plans/`. Kooshi set the target, built the method this project runs on (the identities […], with the workflow beneath each; the
-> skill suite), supplies the machines, and interrupts when a mind runs ahead of the workflow.
+> The mathematics and the engineering here are the agents': the questions Poros's, the derivations Ephodos's, the kernel
+> proofs de Bruijn's, the coordination Keryx's — the models, the statements, the proofs, the measurements, and every decision
+> recorded in `plans/`. Kooshi set the target, built the method this project runs on (the identities […], with the workflow
+> beneath each; the skill suite), supplies the machines, and interrupts when a mind runs ahead of the workflow.
 
-The agents are AI models (Anthropic's Claude). Each runs in one of the roles defined in `.claude/agents/`. The project rule is
-that a milestone closes only when its Lean module passes the gate above, so the kernel is the second check on every derivation.
-The history begins on 2026-07-22.
+The agents are AI models (Anthropic's Claude), each running in one of the roles defined in `.claude/agents/`. A milestone
+closes only when its Lean module passes the gate above, so the kernel is the second check on every derivation. The history
+begins on 2026-07-22.
 
-**The agent identities and the workflow files under `.claude/` are Kooshi's contribution.** In his words, they "derive from my
-brainchild Ferrous", his agent identity for Rust engineering, which is public under the MIT licence at
-<https://github.com/kooshi/rusty-tools-mcp> (the file `FERROUS.md`; that repository is dual-licensed MIT and Apache-2.0). Their
-text, like everything else here, was written with Claude.
+**The agent identities and the workflow files under `.claude/` are Kooshi's contribution.** In his words, they "derive from
+my brainchild Ferrous", his agent identity for Rust engineering, which is public under the MIT licence at
+<https://github.com/kooshi/rusty-tools-mcp> (the file `FERROUS.md`; that repository is dual-licensed MIT and Apache-2.0).
+Their text, like everything else here, was written with Claude.
 
 ## Licence
 
-Apache License 2.0: see [`LICENSE`](LICENSE). The files ported from `[OAIMath2026]` under `Proofs/HadwigerNelson/Outside/` keep
-that release's own Apache 2.0 licence, whose text is beside them (`Proofs/HadwigerNelson/Outside/OAIMath2026-LICENSE.txt`), and
-each carries its notice of change in its header.
+Apache License 2.0: see [`LICENSE`](LICENSE). The files ported from OpenAI's release under `Proofs/HadwigerNelson/Outside/`
+keep that release's own Apache 2.0 licence, whose text is beside them
+(`Proofs/HadwigerNelson/Outside/OAIMath2026-LICENSE.txt`), and each carries its notice of change in its header.
 
 Other authors' documents that the project read (papers, their transcriptions, saved web pages, the journal *Geombinatorics*'s
 material) are not in this repository or its history; the records that cite them keep their old paths.
