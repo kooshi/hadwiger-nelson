@@ -1,0 +1,3 @@
+#print axioms HadwigerNelson.Collapse.exists_finite_triangleFree_six_chromatic
+#print axioms HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087_le_seven
+#print axioms HadwigerNelson.Collapse.six_le_chromaticNumber_planeOver_sqrt635087

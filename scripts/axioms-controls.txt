@@ -26,8 +26,10 @@
 # records on Weil's bound alone; and two more on both, the main clause through five as one theorem (`Rigidity/MainClauseFive`,
 # FS131-IL5); and fifteen of the collapse's landing (`Collapse/*` and D-E2's `Rigidity.norm_charSum_le_weil`, FS131-ICO2: six
 # on Weil's bound alone, five on E–L alone, three on both, one on all three); and six of the p-adic plane's landing
-# (`PadicPlane/Tower`, `PadicPlane/Values`, FS131-IQP3: all six on Weil's bound alone): eighty-three IMPORTED records (Weil's
-# bound 64, the five-colour theorem 7, E–L 27, 14 on E–L and Weil's bound, one of them on the five-colour theorem too). (The first import, `falconer_lemma2_nonempty`, is a theorem since FS131-IF1; the third,
+# (`PadicPlane/Tower`, `PadicPlane/Values`, FS131-IQP3: all six on Weil's bound alone); and twenty-one of the density form's
+# landing (`Collapse/Density/*` and the ruled moves into `Collapse/Headline`, FS131-IFR1: one on Weil's bound alone, eleven on
+# E–L alone, six on both, three on all three): a hundred and four IMPORTED records (Weil's bound 74, the five-colour theorem 10,
+# E–L 47, 23 on E–L and Weil's bound, four of them on the five-colour theorem too). (The first import, `falconer_lemma2_nonempty`, is a theorem since FS131-IF1; the third,
 # `Outside.OAI158.proper_to_borel_weak`, is the release's theorem with its proof ported since FS131-IPD1's switch, and its twelve
 # records are CLEAN since the port's landing, FS131-LP1.) A later import, or one's proof, or a later record resting on
 # a declared import, moves them again — per declared import, `declared` and `library`
@@ -37,22 +39,22 @@
 
 ## control baseline
 ## expect PASS
-## expect COUNT imported=83
+## expect COUNT imported=104
 ## expect COUNT declared=3
 ## expect COUNT library=3
-## digest old 0 the sentence is in its older form, which records no imported count, and the audit has 83 imported
+## digest old 0 the sentence is in its older form, which records no imported count, and the audit has 104 imported
 ## digest new 0 match (clean, purchases and imported compared)
 ## digest doubled 3 not one
 
 ## control imported_declared
 ## expect PASS
-## expect COUNT imported=84
+## expect COUNT imported=105
 ## expect COUNT declared=4
 ## expect COUNT library=4
 ## arch t3c_import
 ## digest new 0 match (clean, purchases and imported compared)
 ## digest off 0 RECORDED COUNT IS STALE
-## digest old 0 the sentence is in its older form, which records no imported count, and the audit has 84 imported
+## digest old 0 the sentence is in its older form, which records no imported count, and the audit has 105 imported
 ## at PRE
 /-- Planted by `scripts/axioms.sh --self-test`: a stand-in for an outside theorem, `[Planted2026]` p. 1. -/
 axiom t3c_import : True

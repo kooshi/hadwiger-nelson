@@ -1,0 +1,5 @@
+slot: admitted lake: mem 6 GiB (hard cap), cpus 4,5
+✖ [6476/6531] Building Proofs.HadwigerNelson.PadicPlane.Tower
+error: target is out-of-date and needs to be rebuilt
+Some required targets logged failures:
+- Proofs.HadwigerNelson.PadicPlane.Tower
