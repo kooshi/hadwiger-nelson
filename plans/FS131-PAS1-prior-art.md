@@ -278,3 +278,61 @@ located by them); Bucić–Davies beyond the abstract.
    pp. 111–118"* and the status to *"read in full (FS131-PAS1, 2026-10-16); its question (p. 116) and its abstract's speculation are
    answered by the triangle-free six-chromatic graph, given `[OAIMath2026]`"*; `[Haugstrup2026]` — copy *"held: same issue, pp.
    102–110"*, status *"§ 1 and closing section read (FS131-PAS1); its closing question answered likewise"*.
+
+## Stage 4 — SAVED: S3, CLS (the classification of four-colour places)
+
+### 4.1 The queries (2026-10-16; tag `S3`; 31 queries)
+
+| discipline | queries (hits) |
+|---|---|
+| geometric graph theory over finite fields | zb `ab:"finite Euclidean" & ab:"chromatic"` (1); `ab:"unit distance" & ab:"finite field" & ab:"chromatic"` (0); `ab:"unit-distance" & ab:"finite field"` (1); `ab:"Euclidean graphs" & ab:"chromatic"` (2); `ti:"finite Euclidean graphs"` (5); `ab:"finite Euclidean graphs"` (8); `ab:"unit graph" & ab:"finite field" & ab:"chromatic"` (0); `ab:"chromatic number" & ab:"F_q^2" & ab:"distance"` (0); `ab:"distance graph" & ab:"finite field" & ab:"chromatic"` (0); `ab:"Euclidean graph" & ab:"finite field" & ab:"chromatic"` (0); ax `abs:"finite Euclidean" AND abs:chromatic` (0); `abs:"unit distance graph" AND abs:"finite field"` (1); `abs:"chromatic number" AND abs:"finite field" AND abs:"unit"` (1: `[Vinh2005]`) |
+| the characteristic-2 targets (Cayley graphs of `𝔽_{Q²}` on `μ_{Q+1}`) | zb `ab:"Cayley graph" & ab:"roots of unity" & ab:"chromatic"` (0); `ab:"generalized Paley" & ab:"chromatic number"` (1, unrelated); `ab:"cyclotomic graph" & ab:"chromatic"` (0); `ab:"unit circle" & ab:"finite field" & ab:"graph"` (0); `ab:"Cayley graph" & ab:"norm one" & ab:"finite field"` (0); `ab:"Hermitian" & ab:"unit circle" & ab:"chromatic"` (0) |
+| the plane over number fields | zb `ab:"chromatic number of the plane" & ab:"field"` (1, unrelated); `ab:"chromatic number" & ab:"number field" & ab:"plane"` (0); `ab:"chromatic number" & ab:"algebraic number field" & ab:"distance"` (0); `ab:"chromatic number" & ab:"residue field" & ab:"plane"` (0); `ab:"unit vectors" & ab:"chromatic number" & ab:"field"` (1: `[Fischer1990]`); `ab:"chromatic number" & ab:"real quadratic field"` (0); `ab:"unit distance graph" & ab:"quadratic field"` (0); ax `abs:"chromatic number" AND abs:"number field" AND abs:plane` (0); `abs:"chromatic number" AND abs:"quadratic field" AND abs:"unit distance"` (0); `abs:"Hadwiger-Nelson" AND abs:field` (2: `[Madore2015]`, `[BardestaniMallahiKarai2015]`) |
+| author listings | zb `au:"Moorhouse, G. Eric"` (28: none on colouring — `[Moorhouse2010]` is an unpublished draft, not indexed); `au:"Fischer, K" & ab:"colorable"` (1) and `& ti:"plane"` (1): `[Fischer1990]` only (`au:"Fischer, Kurt G."` 0); `au:"Johnson, Peter D." & ab:"chromatic"` (33: his fractional and distance-graph papers; *Euclidean distance graphs on the rational points*, 2011, the chapter `BIBLIOGRAPHY.md` holds as `[Johnson2010]`); `au:"Krebs, Mike"` (stage 2) |
+
+### 4.2 What was read
+
+- **`[Moorhouse2010]`** § 8 re-read in full (held): **Theorem 8.1** "If d ≢ 47, 59 or 83 mod 84, then χ(K²) ⩽ 4" for `K = ℚ(√d)`
+  real quadratic, from **Lemma 8.2** (a prime `p ≡ 3 (mod 4)` with `d` zero or a residue mod `p` gives `χ(K²) ≤ χ(𝔽_p²)`),
+  **Corollary 8.3** (the planes at 3 and 7: `χ(𝔽₃²) = 3`, `χ(𝔽₇²) = 4`), **Lemma 8.4** (`d ≡ 1 (mod 4)`: two colours at the
+  dyadic place) and **Theorem 8.5** (`d ≡ 2 (mod 4)`: two colours by a ring of order 8 at the ramified dyadic place); § 6 Table 6.1
+  (`χ(𝔽₁₁²) = 5` and the small values, as the existing row records); § 7.1 (odd degree: two colours by the dyadic trace).
+- Held and read before, consulted for this statement: `[Vinh2005]` (`√q(1/2 + o(1)) ≤ χ(Γ_q)`, Hoffman with `[MMST1996]`'s
+  Kloosterman spectrum), `[Vinh2008]` (Thm 12, the ratio bound with Weil), `[Fischer1990]` Thm 10(i) (`χ ≤ 4` at `d ≡ 3 (mod 8)`),
+  `[Madore2015]`, `[BardestaniMallahiKarai2015]` — none states a classification.
+- Listings only: Bannai–Shimabukuro–Tanaka 2009, *Finite Euclidean graphs and Ramanujan graphs* (Discrete Math. 309), and Medrano
+  et al. 1998 (over rings): spectra, not colourings; unread.
+
+### 4.3 Verdict: **not found in print** as a classification; its quadratic sufficiency half and its odd finite inputs are in print
+
+CLS — for every real number field, the stable places whose residue target is four-colourable are exactly those with residue
+field `𝔽₃` or `𝔽₇`, the dyadic ones inert in `F(i)/F` of norm at most 32, and the dyadic ones ramified there, so `L(F) ≥ 5` exactly
+when there are none — is **not found in print**. Its parts:
+1. **Sufficiency at real quadratic fields: in print.** `[Moorhouse2010]` Thm 8.1 (the places `𝔽₃`, `𝔽₇` and the dyadic ones that
+   ramify or split) with `[Fischer1990]` Thm 10(i) (`d ≡ 3 (mod 8)`, where the dyadic place is inert in `F(i)` with norm 2) give
+   `χ ≤ 4` off `d ≡ 47, 143, 167 (mod 168)` — Moorhouse's three classes mod 84 are those three and three classes already covered
+   by Fischer's. That is the "if" half of CLS at degree 2, and the existing row 117 records it.
+2. **The odd finite inputs: in print.** The values `χ(Γ₃) = 3`, `χ(Γ₇) = 4`, `χ(Γ₁₁) = 5` (`[Moorhouse2010]` Table 6.1) and the
+   growth of `χ(Γ_q)` (`[Vinh2005]`, `[Vinh2008]`); that no usable `q ≥ 11` is four-colourable needs every `q` up to Weil's threshold,
+   which in print is Moorhouse's table at 11 only.
+3. **Not found:** the dyadic inert targets `U_Q` and their threshold (four-colourable exactly when `Q ≤ 32`); the all-levels
+   reading; any statement over a general real number field, of any degree; the converse direction anywhere (that no other place's
+   target is four-colourable). Moorhouse's paper poses no such classification; it bounds fields one prime at a time.
+
+### 4.4 Drafts (each names its slot)
+
+1. **`LEDGER.md` row 123**, its **Prior art** field, after *"so "not found", never "first"."*: *"CLS (the classification of
+   four-colour places): not found in print as a classification (FS131-PAS1, 2026-10-16: 31 queries in finite-Euclidean-graph,
+   cyclotomic and number-field words; the listings of Moorhouse, Fischer, Johnson, Krebs); its real-quadratic sufficiency half is
+   `[Moorhouse2010]` Thm 8.1 (from 𝔽₃, 𝔽₇ and the dyadic place) with `[Fischer1990]` Thm 10(i), and its odd finite inputs are
+   `[Moorhouse2010]` Table 6.1 and `[Vinh2005]`, `[Vinh2008]`; the dyadic inert targets `U_Q` and their threshold `Q ≤ 32` not
+   found."*
+2. **`plans/FS100-derivation.md` FS100-CLS** (an erratum entry under it, the original text left standing, per the record job's rule):
+   *"2026-10-16 (FS131-PAS1): the prior-art debt this entry named — "the general statement not found (X24R did not search it by name:
+   a debt for the next gate)" — is discharged: searched by name, not found in print; parts in print as `LEDGER.md` row 123's prior-art
+   field now says."*
+3. **The public page**, when CLS lands (its entry's prior-art bullet): *"Prior art: not found in print as a classification. For real
+   quadratic fields the sufficient condition is Moorhouse's (2010, Theorem 8.1) with Fischer's (1990, Theorem 10(i)); the values of
+   the small finite planes are Moorhouse's (Table 6.1); the even-characteristic targets and their threshold are this project's."*
+4. **`BIBLIOGRAPHY.md` `[Moorhouse2010]`**: no change of substance; its § 8 was re-read by this job (add *"§ 8 re-read in full,
+   FS131-PAS1"* to the reading column if the row keeps per-section dates).
