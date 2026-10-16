@@ -41,3 +41,27 @@ structure hypothesis's inhabitant, `#print axioms` of the three headlines and D-
 previous job's farm (`build/ico1-farm`, by `data/fs131/ico1/lean1.sh`; the farm's `Thick`, `Mixing`, `Colouring`, `Dichotomy`
 oleans are real files compiled from the committed sources within a minute of each commit); the copy goes over the module between
 builds. The farm is iteration, never evidence: the build is the check.
+
+## Stage 2 — SAVED: `Collapse/Slice`
+
+**The first build of this job** (`data/fs131/ico2/build1.log`; `data/fs131/ico2/build.sh build1`, the brief's line:
+`--mem 16 --cpus 10`, `MEMMAX=16G BATCH=6`): **OK — 381 of 381 batches, 9 modules rebuilt, 10 m 22 s**, at `ebeb126d1` (the stage-1
+commit adds no Lean). Rebuilt: the seven `Collapse/` modules, `Rigidity/MainClauseFive` (brought by the last merge) and `Proofs`.
+**The four modules the previous job proved (`Thick`, `Mixing`, `Colouring`, `Dichotomy`) compiled through `build.sh` with no
+warning of any kind**; the only warnings are the `sorry` leaves of `Slice`, `Selection` and `Headline`. So D-E1, D-E2 and 28 of
+the 49 leaves now stand on the real build.
+
+**`Collapse/Slice`: every leaf proved** (4 of 4; written in `data/fs131/ico2/work/Slice.lean` while the build walked, compiled
+in the farm, clean on the second compile — `slice1.out`, `slice2.out` — then copied over). Each is `Rigidity/CountExtension`'s
+proof at `Fin k`:
+- `measure_ne_eq_k` — `hσ.2 y`, then `measureReal_compl` on `{c(0) = c(y)}` and `probReal_univ`: four lines. **It does not read
+  `[NumberField F]`, and carries `omit [NumberField F] in`** (item 993's ruling): its stored type drops that instance binder — a
+  ruled change, listed in the gate's statement comparison and shown there from the kernel's side.
+- `tendsto_measure_ne_k` — the landed proof with `σ(R̂) = 1` read from `hσ.2 0` (`{c | True} = univ`) and the real part of the
+  coefficient in place of the correlation; no tetrahedral constant.
+- `exists_extension_k` — the landed Borel–Cantelli construction verbatim at `Fin k`, over two private copies,
+  `measure_ne_shift_k` and `measure_eq_add_unit_k` (the four-colour ones are private to `CountExtension`), each with
+  `omit [NumberField F] in` as their originals have it.
+- `exists_slice_k` — the landed Tonelli argument verbatim at `Fin k`.
+
+About 255 lines of proof against the plan's 330, every one of them a copy; no Mathlib name new to the library.

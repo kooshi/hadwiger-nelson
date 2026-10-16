@@ -1,0 +1,20 @@
+slot: admitted ico2: mem 6 GiB (hard cap), cpus 10,11
+data/fs131/ico2/work/Slice.lean:78:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  {c | c 0 = c 0}
+in the target expression
+  ↑(μ.μ.real {c | True}) = 1
+
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+k : ℕ
+μ : InvColouring F k
+σ : Measure (Dual F)
+hσ : IsColourSpectral μ.μ σ
+hTA : σ (TA F)ᶜ = 0
+this✝ : IsFiniteMeasure σ
+this : IsProbabilityMeasure μ.μ
+hpt : ∀ᵐ (χ : Dual F) ∂σ, Tendsto (fun y => ↑(χ y)) (comap (⇑(ιG F)) (𝓝 0)) (𝓝 1)
+hint : Tendsto (fun y => ∫ (χ : Dual F), ↑(χ y) ∂σ) (comap (⇑(ιG F)) (𝓝 0)) (𝓝 (∫ (_χ : Dual F), 1 ∂σ))
+h : ∫ (χ : Dual F), 1 ∂σ = ↑(μ.μ.real {c | True})
+hu : {c | c 0 = c 0} = Set.univ
+⊢ ↑(μ.μ.real {c | True}) = 1
