@@ -1,7 +1,7 @@
-# Session handoff — 2026-10-16 (evening): four landings, the README shipped, two jobs running
+# Session handoff — 2026-10-16 (evening): five landings, the README shipped, a push pending
 
 *Rewritten by Keryx before Kooshi compacts the session. Current state only. Read it first, then `plans/FS131-close-inventory.md`
-items 1020–1066 (each with its receipt and, where it rules, four parts). Agent identifiers are in the session scratchpad
+items 1020–1070 (each with its receipt and, where it rules, four parts). Agent identifiers are in the session scratchpad
 (`agents.txt`), never in a file; agents of this session can still be messaged after the compaction.*
 
 ## 1. Where things are
@@ -21,7 +21,7 @@ items 1020–1066 (each with its receipt and, where it rules, four parts). Agent
 - `CLAUDE.md`'s "What the kernel holds" paragraph lives in `plans/KERNEL-HOLDS.md`; every landing's clause is filed there. The fact
   audit runs with its default `--also` files plus `plans/KERNEL-HOLDS.md` and `plans/FILINGS.md`.
 
-## 2. Landed today (each merged, its axioms printed by me, filed)
+## 2. Landed today (each merged, its axioms printed by me, filed, its README row written)
 
 | result | item | merge |
 |---|---|---|
@@ -29,25 +29,16 @@ items 1020–1066 (each with its receipt and, where it rules, four parts). Agent
 | the three-colour criterion for Cayley graphs of abelian groups (row 79, wider) | 1043 | `8ebb647bc` |
 | five colours: the real quadratic dichotomy mod 168, the family, CLS, ℚ(√23, ∛2) (row 123) | 1055 | `3466820ee` |
 | the density form of the collapse (row 129), the fractional collapse, a finite triangle-free six-chromatic unit-distance graph | 1063 | `dfba6bc68` |
+| the ring of unit vectors: Lemma C′, a stable prime at every real number field, infinitely many components (rows 100, 105, 168) | 1068 | `302a57356` |
 
 The prior-art searches (FS131-PAS1, item 1052): four of five not found in print; the degree-one-primes fact is Nagell 1969 Thm 3
 (after Bauer 1916); the six-chromatic graph answers de Grey's and Haugstrup's 2026 questions.
 
-## 3. Running
+## 3. Running, and next
 
-| job | what | worktree, branch | record |
-|---|---|---|---|
-| FS131-IRU2 (item 1066) | the ring of unit vectors (Lemma C′, components clause, dichotomy; all proved, item 1065): merge `main`, one gate | `il5`, `fs131-kru1` | `plans/FS131-IRU2-ring.md` |
-
-The density landing's filing is merged and its README and `RESULTS.md` rows written (item 1067); the worktree `filing2`
-(no Lean build) is free for the next Clerk.
-**At FS131-IRU2's hand-back** (the landing procedure): check its commits; print the head statements' axioms myself (all on the
-standard three expected); rewrite `fs131-kru1` over `main..fs131-kru1` with the filter (it carries pre-rewrite commits); guard-scan
-the range (a match inside a gzip dump is noise — guard it decompressed); merge `--no-ff`; check `main` equals the gated commit in
-`Proofs/`, `Proofs.lean`, `scripts/` and the package files; move its gated build into the main tree and run `build.sh`; then a
-Clerk files FS131-IRU1's drafts (D3, D4, D6, D11; record `plans/FS131-IRU1-ring.md`) with FS131-PAS1's held § 5.4 items 1–2 and
-§ 6.4 items 1–2 (crediting Nagell and Bauer), and its README row (candidate new row; Lemma C′ "not found in print in general",
-the dichotomy "not yet searched"). **Then a privacy check and a push.**
+Every landing is filed (items 1067, 1070); nothing is in flight but the push. **Next:** a privacy check of
+`origin/main..<head>` by a Clerk (FS131-PV4, from `data/fs131/briefs/scripts/mk-fs131-pv4.py`), my two checks, then
+`git push origin <checked>:refs/heads/main`. After that the open work is the owed list below and the asking lane's next job.
 
 ## 4. Kooshi's decisions, all answered
 
@@ -57,8 +48,8 @@ W20 (rewrite the unpushed history; add the guard as a commit hook) and W21–W22
 ## 5. Owed (none urgent)
 
 - **Bibliography pass** (item 1054): `[Davidson2026]`'s two library copies; `[deGrey2026]`/`[Haugstrup2026]` out of § R.4 now
-  that the issue is held; `[Shimura1964]`'s two rows; § B rows for newly held files; six arXiv ids unlogged.
-- **The Proof Atlas** rebuilt locally once after the landings (drafts D13 of ICS1, D-9 of IFR2).
+  that the issue is held; `[Shimura1964]`'s two rows; § B rows for newly held files; six arXiv ids unlogged; `[Neukirch1999]` (cited in the ring plan) has no row (item 1070).
+- **The Proof Atlas** rebuilt locally once after the landings (drafts D13 of ICS1, D-9 of IFR2, D7 of IRU2).
 - **The asking lane's next job**: its § 3.3 definition of `L(F)` (items 1027, 1055 D11) and `[Davidson2026]`'s conjecture
   reduced by row 79's criterion (item 1052).
 - **Tooling:** the fact audit's default `--also` list should gain `plans/KERNEL-HOLDS.md` and `plans/FILINGS.md`; the
