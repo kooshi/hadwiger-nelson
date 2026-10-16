@@ -277,12 +277,9 @@ theorem exists_addChar_extend {G : Type*} [AddCommGroup G] [Finite G] (H : AddSu
 is bounded by its non-trivial factor: if every non-trivial character of every factor sums over `S i` to at most `c·|S i|`,
 so does every non-trivial character of the product over `∏ S i`. -/
 theorem norm_sum_piFinset_le {ι : Type*} [Fintype ι] [DecidableEq ι] {A : ι → Type*} [∀ i, AddCommGroup (A i)]
-    [∀ i, Finite (A i)] [∀ i, DecidableEq (A i)] (S : ∀ i, Finset (A i)) {c : ℝ} (hc : 0 ≤ c)
+    [∀ i, Finite (A i)] (S : ∀ i, Finset (A i)) {c : ℝ} (hc : 0 ≤ c)
     (hS : ∀ i (φ : AddChar (A i) ℂ), φ ≠ 1 → ‖∑ s ∈ S i, φ s‖ ≤ c * (S i).card) (ψ : AddChar (∀ i, A i) ℂ)
     (hψ : ψ ≠ 1) : ‖∑ s ∈ Fintype.piFinset S, ψ s‖ ≤ c * (Fintype.piFinset S).card := by
-  -- FS131-ICO2: the instance `∀ i, DecidableEq (A i)` is not read either (the proof is classical): it is referenced here so
-  -- that the skeleton's stored statement stays as typed (`lake lint`'s `unusedArguments`), its drop held for a ruling
-  have _ := ‹∀ i, DecidableEq (A i)›
   classical
   -- `0 ≤ c` is not read: the trivial factors are bounded by their sizes, the non-trivial one by `hS`
   have _ := hc

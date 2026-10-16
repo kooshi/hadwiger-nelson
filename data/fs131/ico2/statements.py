@@ -14,7 +14,7 @@ For every constant of BEFORE that is not INTERNAL (a public or a private declara
   SAME     present in AFTER's same module, same kind, same stored type (text), and for a definition the same DATA when
            BEFORE printed one (a definition holding proofs moves its VALUE when a proof is filled), else the same VALUE;
   RULED    one of RULED below: BEFORE's stored type holds the binder's text exactly once, and with it removed is AFTER's
-           stored type character for character (FS131-KN9's one-binder check; item 993's ruling);
+           stored type character for character (FS131-KN9's one-binder check; item 993's ruling, two parts, and item 998's);
   CHANGED  anything else that differs                                                   -> FAIL;
   MISSING  absent from AFTER                                                            -> FAIL.
 AFTER's non-INTERNAL constants absent from BEFORE are ADDED: listed by module, public, private and GENERATED (`f.congr_simp`,
@@ -36,12 +36,16 @@ import sys
 # Theorems Lean generates on demand under a declaration's name in whichever module asks (reserved names no author can
 # declare; LEAN.md § Searching — Lean, FS131-IM11, FS131-ITK1): listed as GENERATED, never as new statements.
 GENERATED = re.compile(r"\.(congr_simp|eq_\d+|eq_def)$")
-NUMBER_FIELD_BINDER = re.compile(r" \[inst\._@\.Proofs\.HadwigerNelson\.Collapse\.\w+\.\d+\._hygCtx\._hyg\.\d+ : NumberField\.\{0\} ")
+INST = r" \[inst\._@\.Proofs\.HadwigerNelson\.Collapse\.\w+\.\d+\._hygCtx\._hyg\.\d+ : "
 
-# The ruled changes: the stored type loses one instance binder `[NumberField ↥F]` (item 993's ruling, two parts).
+# The ruled changes, each an instance binder no proof reads, dropped from the stored type: `[NumberField ↥F]` at two
+# statements (item 993's ruling, the two `omit`s), and `[∀ i, DecidableEq (A i)]` at one (item 998's ruling, the third of
+# item 993's kind). Each maps to the binder's pattern in the raw print, its text up to the class name.
 RULED = {
-    "HadwigerNelson.Collapse.ThickAt.mono": "NumberField",
-    "HadwigerNelson.Collapse.measure_ne_eq_k": "NumberField",
+    "HadwigerNelson.Collapse.ThickAt.mono": (re.compile(INST + r"NumberField\.\{0\} "), "[NumberField ↥F]"),
+    "HadwigerNelson.Collapse.measure_ne_eq_k": (re.compile(INST + r"NumberField\.\{0\} "), "[NumberField ↥F]"),
+    "HadwigerNelson.Collapse.norm_sum_piFinset_le": (re.compile(INST + r"forall \(i : ι\), DecidableEq\."),
+                                                     "[∀ i, DecidableEq (A i)]"),
 }
 # Public constants a module may gain: the approved edits D-E1 and D-E2 (brief FS131-ICO1, ruling 1). Every other new
 # public constant must be named here before it passes, with the job that added it.
@@ -76,10 +80,10 @@ def read(path):
     return mods
 
 
-def strip_binder(text, short=False):
-    """BEFORE's type with the one `[inst… : NumberField.{0} …]` binder removed, or None unless it occurs exactly once.
+def strip_binder(text, pattern, short=False):
+    """BEFORE's type with the one binder `pattern` opens removed, or None unless it occurs exactly once.
     `short` (the plant) keeps the binder's closing bracket: a near miss by one character."""
-    ms = list(NUMBER_FIELD_BINDER.finditer(text))
+    ms = list(pattern.finditer(text))
     if len(ms) != 1:
         return None
     start = ms[0].start()  # the space before the binder's `[`
@@ -112,9 +116,10 @@ def compare(before, after, short_strip=False, quiet=False):
                 fails.append(f"MISSING {name} ({mod})")
                 continue
             if name in RULED:
-                s = strip_binder(c.get("TYPE", ""), short=short_strip)
+                pat, shown = RULED[name]
+                s = strip_binder(c.get("TYPE", ""), pat, short=short_strip)
                 ok = s is not None and a["kind"] == c["kind"] and s == a.get("TYPE")
-                report.append(f"RULED {'OK' if ok else 'DIFFERS'} {name}: the binder `[… : NumberField ↥F]` "
+                report.append(f"RULED {'OK' if ok else 'DIFFERS'} {name}: the binder `{shown}` "
                               f"{'removed exactly' if ok else 'is not the whole difference'}")
                 if not ok:
                     fails.append(f"RULED-DIFFERS {name}")
