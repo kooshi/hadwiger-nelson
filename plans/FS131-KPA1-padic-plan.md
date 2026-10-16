@@ -115,3 +115,112 @@ standard three, `cert3_ok` on `propext` alone.
 7. **`p = 3` is a free value.** The bound at `p = 3` is `1 + 4/(2√3) = 2.15…`, so `χ_Bor(ℚ₃²) ≥ 3`, and `χ(Γ₃) = 3`
    (`finitePlane3_colorable_three`): `χ_Bor(ℚ₃²) = 3` falls out of the bound itself, with no certificate. SOUNDNESS § 8 names
    it ("and `= 3` at `p = 3`"); row 75 does not.
+
+## Stage 2 — SAVED: the map
+
+### 2.1 The coordinator's ruling (inventory item 997, 2026-10-16)
+
+(1) Plan the Weil-only route. (2) Make the `κ_p` constant the head statement if it costs little, with T7's `2√p` form as a
+corollary. (3) Record the wider class of local fields as a reading for a stub of its own. (4) Draft row 75's grade note
+here. **Channel:** making `ratioAtMost_weil` and `charBound_of_charBound_oneT` public is an edit to `Rigidity/ClassRatio.lean`,
+which the collapse implementer's branch (`fs131-ico1`) also edits. So the edit is drafted (§ 5), not made here, and what this
+module needs from those theorems is stated as its own `sorry` leaf (`PadicPlane.ratioAtMost_of_charSum_levelOne`). Read on
+that branch (`.claude/worktrees/kcl1/Proofs/HadwigerNelson/Rigidity/ClassRatio.lean`, l. 2071): its new public
+`Rigidity.norm_charSum_le_weil` bounds every non-trivial character of `𝓞 ⧸ P^m`, `m ≥ 1`, over the norm-one set by
+`2√Q/(Q + 1)` of its size, **in modulus**. It gives T7's tower ratio directly — at each level, with
+`RatioBound.card_mul_le_of_indep` and `Re ≥ −‖·‖` — but not the `κ` form: the `κ` form's level-one hypothesis is one-sided
+(Hoffman reads only `λ_min`; at 11 `λ_max = 5.72` beats `|λ_min| = 4.80`), and that theorem's private engine
+`norm_charSum_le_of_one` is two-sided. So the leaf keeps its own route (§ 2.3, T0).
+
+### 2.2 The route, step by step
+
+FS66-T7, rebuilt for the kernel (the Weil-only route; `[BardestaniMallahiKarai2017]` Thm 2.5 is not read):
+
+1. **Level one** (Weil). Every non-trivial character `ψ` of `(ℤ/p)²` has `Re Σ_{a²+b²=1} ψ(a, b) ≥ −2√p`.
+2. **Every level** (Lemma P, FS-66's L1, Hoffman). If level one has `Re Σ ≥ −κ`, `κ ≥ 2`, then every independent set of
+   `UD(ℤ/p^k, 2)`, `k ≥ 1`, holds at most `κ/(p + 1 + κ)` of the `p^{2k}` points (`TowerRatio p (κ/(p+1+κ))`).
+3. **The tower is the stable prime's.** At `p ≡ 3 (mod 4)`, the prime of `ℚ(i)` above `p` is a stable prime `P` with `p²`
+   residues, and `UD(ℤ/p^k, 2)` embeds in `levelTarget P k` as an induced subgraph on all its points; so step 2 is the
+   library's Lemma P at `P`, read through the embedding.
+4. **Measure** (FS66-T8's lower half). For `I ⊆ ℤ_p²` Borel and independent, the level-`k` cosets that `I` fills to more
+   than half are independent at level `k`, and the rest of `I` has measure tending to `0`; so `haar I ≤ c` for every tower
+   ratio `c`.
+5. **Borel colourings.** A Borel `k`-colouring of `ℚ_p²` meets `ℤ_p²` in `k` Borel independent sets covering measure `1`:
+   `1 ≤ k·c`, so `χ_Bor(ℚ_p²) ≥ ⌈1/c⌉ = ⌈1 + (p + 1)/κ⌉`. At `κ = 2√p`: T7.
+6. **Unboundedness.** `1 + (p + 1)/(2√p) > √p/2`; Dirichlet's theorem (Mathlib, `Nat.forall_exists_prime_gt_and_eq_mod`)
+   gives primes `p ≡ 3 (mod 4)` beyond any bound.
+
+The values (FS-66's L2–L6 with the certificates, and T8's upper half):
+
+7. **Certificates.** `FibreShareBound p U` (`Σφ ≤ U` on FS-66's region) gives `TowerRatio p (U/p²)` through FS-66's L2 and
+   L6 at the stable prime (`CertLink.card_le_of_fibreShareBound`) and step 3; then step 5 gives `χ_Bor ≥ ⌈p²/U⌉`.
+8. **Upper half** (`[Madore2015]` Prop. 3.2, Borel). `x ↦` (the residue modulo `p` of `x` minus its coset's representative)
+   carries edges of `ℚ_p²` to edges of `UD(𝔽_p, 2)` and is locally constant: `χ_Bor(ℚ_p²) ≤ χ(UD(𝔽_p, 2))`.
+
+### 2.3 Each step against this library, Mathlib at `v4.32.0` and the release under `~/source/math`
+
+The release (`~/source/math/lean`, `[OAIMath2026]`): 72 files name `Padic`, `ℤ_[` or `ℚ_[` (searched by name; listing
+`data/fs131/kpa1/release-padic-files.txt`). None states a chromatic number, a colouring or a unit-distance graph over `ℚ_p`
+(the one file under `Geometry/UnitDistances` uses `PadicAlgCl` for absolute values of a number field). Two hold patterns
+this route uses, neither worth a port: `OAI/NumberTheory/PrimePackets/HaarBounds.lean` l. 18, `haar_kernel_eq_inv_card`
+(an invariant probability gives the kernel of a hom with finite range the measure `1/|range|`, ten lines over Mathlib's
+`AddSubgroup.index_mul_measure`), which makes M4 short; and `OAI/Analysis/BackwardIntertwiners/HaarBase.lean` l. 13–21,
+the Borel instance and `Measure.addHaarMeasure ⊤` on `PadicInt 2` with `Regular` by `inferInstanceAs` — the set-up the
+skeleton's `PadicPlane/Measure` makes on `ℤ_p²`. Every Mathlib name below was
+confirmed in the source at the pin (`.lake/packages/mathlib`), and the skeleton elaborates against them.
+
+| step | held | missing, as a leaf (stage 3 names it) | price (lines) |
+|---|---|---|---|
+| 1 | `StandingFive.normOne_charSum_ge` (`Arith/FloorPlanes`, public; over a field with `Q²` elements, the norm-one set `{u^{Q+1} = 1}`, on the declared import through `kloostermanBound_of_ringChar_ne_two`); `CertLink.exists_addEquiv_zmod` (K3, public: `𝓞 ⧸ P ≃+ (ℤ/q)²`, norm-one onto the circle); `StandingFive.involution_eq_pow`, `card_fixed_of_involution` | T5 `charSum_unitCircle_ge_weil` (the residue field of `P` as a field, the norm-one set as `{u^{p+1} = 1}` as in `ClassRatio.charBound_one_weil`'s preamble, carried to `(ℤ/p)²` by K3) | 70 |
+| 2 | at stable primes: `Rigidity.henselCount_of_two_notMem`, `newCharBound_of_two_notMem` (public: Hensel's count and FS-66's L1), `FibreShare.exists_eq_compAddMonoidHom` (descent), `RatioBound.card_mul_le_of_indep` (Hoffman, any finite abelian group); the composition itself is `ClassRatio`'s **private** `charBound_of_charBound_oneT` + `ratioAtMost_of_charBound` | T0 `ratioAtMost_of_charSum_levelOne` (route A: from the public pieces, the level plumbing of `CertLink.card_le_of_fibreShareBound`'s proof; route B: one line from the two private theorems once the drafted visibility edit lands after the collapse merges); T4 `charSum_levelOne_of_unitCircle` (K3 transport) | A 150 / B 20; T4 40 |
+| 3 | `UpperHalf.instNumberFieldBot`, `UpperHalf.exists_stablePrime_rat` (the prime above 2: the pattern for "p is not a unit"), `UpperHalf.exists_I_integer`, `Ideal.absNorm_span_natCast` (`= n ^ finrank ℤ 𝓞`), `NumberField.RingOfIntegers.rank`, `Ideal.absNorm_dvd_absNorm_of_le`, `cardQuot_pow_of_prime`, `FiniteField.isSquare_neg_one_iff`, `ZMod.castHom_injective` | T1 `exists_stablePrime_above` (needs `finrank ℚ (fieldI ⊥) = 2`, from `SpectralChain.toFieldI` on `⊥ × ⊥`); T2 `exists_levelEmbedding` (`CharP (𝓞 ⧸ P^k) (p^k)` from `p^{k−1} ∉ P^k` by the norm); T3 `towerRatio_of_ratioAtMost` | 120; 100; 40 |
+| 4 | Mathlib: `PadicInt.toZModPow`, `PadicInt.ker_toZModPow`, `PadicInt.appr_spec`, `hensels_lemma` (`Mathlib/NumberTheory/Padics/Hensel.lean` l. 459), `PadicInt.compactSpace`, `Measure.addHaarMeasure` with `⊤ : PositiveCompacts` (Haar on `ℤ_p²` elaborates: second countable, Borel product, compact group), `MeasurableSet.exists_isCompact_sdiff_lt`, `exists_isOpen_sdiff_lt`, `nonempty_inter_of_measure_lt_add`; this library: `Rigidity/CountCompletion`'s `haarK_bad_le` and `tendsto_haarK_bad_of_le_one`, the pattern for density along cosets | M1–M8 (`res_surjective`, `isOpen_res_fibre`, `haar_univ`, `haar_res_fibre`, `exists_unitVector_lift`, `isIndepSet_wellFilled`, `exists_level_haar_bad_le`, `haar_le_of_towerRatio`); M4 by `AddSubgroup.index_mul_measure` and `AddSubgroup.index_ker` | 8 + 30 + 5 + 25 + 80 + 60 + 120 + 60 |
+| 5 | `borelChromaticNumber` and its faces (skeleton, proved) | M9 `one_le_mul_of_borelColoring`, M10 `le_borelChromaticNumber_of_towerRatio`; V1, V2 | 50 + 15 + 20 + 5 |
+| 6 | Mathlib's Dirichlet, `Nat.forall_exists_prime_gt_and_eq_mod` (`Mathlib/NumberTheory/LSeries/PrimesInAP.lean` l. 484) | V3 `not_exists_uniform_bound` | 50 |
+| 7 | `CertLink.card_le_of_fibreShareBound`, `fibreShareBound_eleven`, `exists_fibreShareBound_nineteen` (standard three); the checker `Arith/FibreCert`, its soundness `FibreCertSound.sum_le_of_certOK`; the generator `tools/fs131_ikc1_gen.py` and the split tooling `tools/fs131_ikc4_*` | T6 `towerRatio_of_fibreShareBound`; C7 `fibreShareBound_seven`; C23 `fibreShareBound_twentyThree`; the level clauses (row 75's) and the values | 20; C7 60 + generated; C23 § 2.5; 30; 75 |
+| 8 | `unitQuadrance.map`; the colourings `finitePlane3_colorable_three`, `finitePlane7_colorable_four`, `finitePlane11_colorable_five`, `finitePlane19_colorable_five`, `CayleyCert.colorable_finitePlane23_eight` | B3 `norm_le_one_of_sq_add_sq_eq_one`; U1 `exists_residueMap`; U2, U3 | 50; 90; 25 + 15 |
+
+**The hand links L1–L6 against the route.** L1 (new characters) and the Hensel count are Lemma P's two public theorems at
+the stable prime; L2 and L6 are `CertLink.card_le_of_fibreShareBound`; L3–L5 are `FibreCertSound.sum_le_of_certOK`. Nothing
+of L1–L6 is re-derived. **T8** is needed only in its two halves: the lower (step 4, new here) and the upper (step 8, new
+here); its equality `χ_clopen(ℤ_p²) = lim_k χ(G_k)` and the Haar supremum's equality are not read by any value.
+
+### 2.4 The printed theorems: formalize or declare
+
+- **`[BardestaniMallahiKarai2017]` Theorem 2.5**: **not read** by the route, so neither formalized nor declared. Were it
+  wanted for itself it is far over an hour: it needs `L²(ℚ_pⁿ)`, the Fourier transform over `ℚ_p` (Tate's character), and
+  Plancherel, none of which Mathlib holds at the pin (`Mathlib/NumberTheory/Padics/AddChar.lean` treats characters of
+  `ℤ_p` only). Not priced further.
+- **Weil's bound** (`[Weil1948]` p. 207): already declared, `StandingFive.kloosterman_bound`, with its four items in place;
+  T5 reads it through `StandingFive.normOne_charSum_ge` exactly as `ClassRatio.charBound_one_weil` does. **No new import.**
+  Landing it on the standard three is a separate question already owed for the whole library (the Kloosterman bound; for the
+  circle of `𝔽_p²` the sum is a Salié-type sum with an explicit elementary evaluation, which would be a smaller target than
+  Weil's general bound — a reading, not checked here).
+- **`[Madore2015]` Prop. 3.2**: formalized here (U1, about 90 lines, well under an hour). **`[Moorhouse2010]` Table 6.1**:
+  every value read is already a kernel colouring. **Dirichlet**: in Mathlib.
+
+### 2.5 The certificates: sizes, route and a measured cost
+
+The route is the library's: the kernel checker `Arith/FibreCert` (`decide +kernel`, no `native_decide`, core-only data
+modules), its soundness `FibreCertSound.sum_le_of_certOK`, data generated by `tools/fs131_ikc1_gen.py` (untrusted; its Python
+model runs first), split into segments and PSD blocks by `tools/fs131_ikc4_gen.py`/`fs131_ikc4_checks.py` when one
+declaration would not fit.
+
+**Measured at `p = 7`** (`data/fs131/kpa1/cert7/`): FS-66's `cert-p7.json` (sha256 `f4b2ffa7c427…`) generates 8,598 ops,
+495 slots, 69 orbits, 14 diagonally dominant PSD blocks, a 707 KB Lean file; the model's identity holds. Checked by the
+kernel as three `decide +kernel` theorems in one file (`globalOK`, the one identity segment, `psdAll`): **48.8 s wall,
+2.89 GB peak resident** (type checking 7.1 s, 29.4 s, 7.5 s; `data/fs131/kpa1/cert7/check.log`), under the laptop's slot at
+8 GiB. So leaf C7 is one generated data module `Arith/FibreCert7`, one check module `Arith/FibreCert7Check` (the three
+theorems, measured), and `Arith/FibreCert7Bound` (`cert7_ok`, `sum_le_seven`, `model_seven`), about 60 hand-written lines,
+built at `BATCH=2` under `MEMMAX=6G`.
+
+**At `p = 23`**: FS-66's `cert-p23.json` (26.3 MB, 46 blocks, 138,706 rows) generates **1,444,136 ops** over 35,511 pairs
+and 1,697 orbits (the generator's model, `data/fs131/kpa1/cert23/model.log`) — 168 times the ops at 7 and 27 times those at
+11. At the 7's rate (about 3.4 ms of segment checking per op) that is about 80 minutes of segment checking split over at
+least 150 segments of the memory the 7's one needed, plus a phase 1 seventeen times the 19's. It is a job of the IKC3–IKC4
+kind, larger than both. **The cheaper route is a reduced certificate**, as at 19, where the Searcher's variant
+(`v-p19-phi0-13-qs.json`, 1.5 MB, 1,885 rows, `U = 88.64`) replaced FS-66's 10.4 MB file for the kernel. At 23 the margin is
+thinner: FS-66's `U = 97.98` against `529/5 = 105.8` (8 %), while the reduction at 19 cost 14 % of `U`. **Search request**
+(INVENTORY): a fibre-share certificate at `p = 23` in format `fs66-b1-cert-v2` with `U < 105.8` and at most about 2,000 rows
+and 20 PSD blocks, made by the 2026-10-14 variants' producer. Until it exists, C23 stays a leaf and
+`six_le_borelChromaticNumber_padicPlane_twentyThree` waits on it; nothing else does.
