@@ -129,10 +129,14 @@ each in full. "Prior art: not found in print" reports the searches recorded in t
   `Collapse.chromaticNumber_planeOver_eq_plane_of_forall_thickAt`.
 - **Axioms.** The general form: std3 + EL. The two fields and the per-prime form: std3 + EL + W. The corollary: std3 + EL +
   W + O5.
+- **The triangle-free graph.** Some finite unit-distance graph with no triangle has chromatic number exactly 6:
+  `Collapse.exists_finite_triangleFree_six_chromatic`, on std3 + EL + W + O5 (`√3 ∉ ℚ(√635087)`, so that field's plane has
+  no unit triangle; de Bruijn–Erdős). None is constructed. Prior art: not found in print; it answers `[deGrey2026]` p. 116
+  and `[Haugstrup2026]`'s closing question, asked there in `ℝ³`.
 - **Whose.** The derivation is this project's; the field equality: prior art not found in print. The plane's number it is
   equated with is `[OAIMath2026]`'s `χ_m⁰`; in dimension at least four the analogue is `[Davies2026]` Thm 1.1. Weil's bound
   gives the two fields' thickness (their conjugation-fixed primes lie above 103 and above 131 at the least).
-- **Ledger.** Row 128. Its density form (row 129's field clause) is proved by hand and not yet in Lean.
+- **Ledger.** Row 128; the triangle-free graph is row 129's, and so is the density form (§ 6).
 
 ### 6. The density equality for the plane
 
@@ -148,6 +152,18 @@ each in full. "Prior art: not found in print" reports the searches recorded in t
   and up. In the plane, `f(n)/n → m₁(ℝ²)` is the first clause of `[DuczVarga2026]`'s Conjecture 1, and `χ_f(ℝ²) = 1/m₁(ℝ²)`
   is the equality that `[MatolcsiEtAl2025]` § 2 calls not known (posed earlier by `[Johnson1996fcn]` and
   `[Johnson2000surprises]`). The rigidity step is `[OAIMath2026]`'s, ported. The kernel proof is this project's.
+- **At a number field.** For every real number field `F`, with no hypothesis, `α₁(F²) = α_loc(F) = max(m₁(ℝ²), ⨆_P r_P)`,
+  where `r_P` is the all-levels independence ratio of the residue targets at a conjugation-fixed prime `P` of `F(i)`; the same
+  number is the best density of an invariant random independent set; and `χ_f(F²) = 1/α_loc(F)`. At a uniformly `c`-thick
+  field with `c < 1/5`, `α₁(F²) = m₁(ℝ²)` and `χ_f(F²) = χ_f(ℝ²)`, so at ℚ(√635087) and de Grey's field. At every subfield of
+  `ℝ`, `1/α_loc(F) < 5`.
+  - Lean: `Collapse.finIndepRatio_planeOver_eq_localRatio`, `Collapse.finIndepRatio_planeOver_eq_iSup_density`,
+    `Collapse.fractionalChromaticNumber_planeOver_eq`, `Collapse.fractionalChromaticNumber_planeOver_eq_plane_of_thick`,
+    `Collapse.finIndepRatio_planeOver_sqrt635087`, `Collapse.fractionalChromaticNumber_planeOver_sqrt635087`,
+    `Collapse.finIndepRatio_planeOver_deGrey`, `Collapse.inv_localRatio_lt_five`.
+  - Axioms: the general forms std3 + EL; the two fields std3 + EL + W; `Collapse.inv_localRatio_lt_five` std3.
+  - Whose: the derivation is this project's (FS-103); prior art not found in print (FS131-PAS1). At the Moser ring the
+    instance `χ_gf = 4` is `[Ducz2026]` Thm 3.1.
 - **Ledger.** Row 129.
 
 ### 7. Six against seven as a stability question

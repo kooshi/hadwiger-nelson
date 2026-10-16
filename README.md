@@ -189,11 +189,18 @@ $6 \le \chi(\mathbb{Q}(\sqrt{635087})^2) \le 7$.
   $\chi(\mathbb{R}^2)$ colours, without naming one. Davies (2026, Theorem 1.1) proved
   $\chi(\mathbb{Q}^d) = \chi(\mathbb{R}^d)$ for $d \ge 5$, and wrote of the plane that "we suspect that a more complicated
   extension of ℚ² might be required". Here a real quadratic field suffices, given W and EL. Since $\mathbb{Q}(\sqrt{635087})$
-  contains no $\sqrt3$, its plane has no unit equilateral triangle; with O5 and de Bruijn–Erdős (an argument outside Lean),
-  some finite triangle-free unit-distance graph is six-chromatic.
-- **What it rests on.** The general form: EL. The two fields: also W. The bounds 6 and 7: also O5.
+  contains no $\sqrt3$, its plane has no unit equilateral triangle; with O5 and de Bruijn–Erdős, some finite triangle-free
+  unit-distance graph has chromatic number exactly six (a Lean theorem; see the density form below).
+- **What it rests on.** The general form: EL. The two fields: also W. The bounds 6 and 7, and the six-chromatic graph: also
+  O5.
 - **Prior art.** The field equality: not found in print (`LEDGER.md` row 128). The equality it passes through, between $\chi(\mathbb{R}^2)$ and the measurable chromatic number, is OpenAI's. The finite triangle-free six-chromatic graph: not found in print. It answers a question of de Grey and of Haugstrup (both 2026), whether a triangle-free six-chromatic unit-distance graph exists even in three dimensions — de Grey had speculated that none does.
-- **By hand, not yet in Lean.** A density form for independent sets of $F^2$ (`LEDGER.md` row 129).
+- **The density form, also in Lean.** For every real number field $F$,
+  $\alpha_1(F^2) = \max\big(m_1(\mathbb{R}^2), \sup_{\mathfrak{P}} r_{\mathfrak{P}}\big)$ and
+  $\chi_f(F^2) = 1/\alpha_1(F^2)$, with no hypothesis. Here $\alpha_1$ and $m_1$ are as in row 6, and $r_{\mathfrak{P}}$ is
+  the independence ratio of the finite residue graphs at a conjugation-fixed prime $\mathfrak{P}$ of $F(i)$, over all
+  levels. At the two fields named, $\chi_f(F^2) = \chi_f(\mathbb{R}^2)$. At every real number field $1/\alpha_1(F^2) < 5$,
+  so a bound from the density of one colour class never shows that a field's plane needs six colours. Status: Lean + EL; the
+  two fields Lean + W + EL. Prior art: not found in print (`LEDGER.md` row 129).
 
 ### 6. Finite graphs and measurable sets have the same density
 

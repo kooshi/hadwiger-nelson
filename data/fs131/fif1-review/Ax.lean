@@ -1,0 +1,9 @@
+import Proofs
+open HadwigerNelson
+#print axioms Collapse.finIndepRatio_planeOver_eq_iSup_density
+#print axioms Collapse.fractionalChromaticNumber_planeOver_eq
+#print axioms Collapse.finIndepRatio_planeOver_sqrt635087
+#print axioms Collapse.fractionalChromaticNumber_planeOver_sqrt635087
+#print axioms Collapse.finIndepRatio_planeOver_deGrey
+#print axioms Collapse.exists_finite_triangleFree_six_chromatic
+#print axioms Collapse.inv_localRatio_lt_five
