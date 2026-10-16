@@ -177,3 +177,76 @@ route of § 3 does not read it.
 2. **Shortening.** R-U, I-C′, I-CPUP, I-MERGE and the random threshold all leave row 128's path on the kernel route; the exact
    spectrum at 103 is not needed (Weil's bound is below `1/5` there).
 3. **No statement defect** in rows 128 or 120 as quoted. Row 120's grade predating the kernel is FS131-PR1's correction, already owed.
+
+## Stage 3 — SAVED: the map
+
+The route the kernel takes is the five-colour chain's (`Rigidity/ChainHeadline`'s modules) run at `k` colours, with the count's
+last step (`Rigidity.Counting.false_of_slice`, a density contradiction) replaced by a **mixing selection** that produces a
+measurable colouring of the plane, proper at almost every unit pair (`Plane.AeColouring k`), which the library's N-EASY turns into
+`χ(ℝ²) ≤ k`. Its spine, for a real number field `F` all of whose stable primes are uniformly `λ`-thick with `λ(k − 1) < 1`:
+
+```
+F² k-colourable
+ → an invariant random proper k-colouring of Cay(R, U)                         (L0)
+ → its colour spectral measure σ = Σ_j σ_{1{c(0)=j}} on R̂, rotation-invariant   (L1)
+ → ∫_{R̂∖(T+A)} Re χ(1) dσ = −Σ_j E[p_j(0) p_j(1)] ≤ 0                           (L2, SI-3 at T + A)
+ → it is 0, else σ|_{R̂∖(T+A)} is an SP witness, which MR⁺ excludes (stage 2)    (L3)
+ → the factor colouring min supp p: an invariant k-colouring with σ on T + A    (L3, SI-4)
+ → a measurable colouring φ of the slice Δ × K, monochromatic edges null       (L5)
+ → mixing on K at every level, from thickness                                   (L6, L7)
+ → the threshold selection: an AeColouring k of ℂ                               (L6)
+ → χ(ℝ²) ≤ k                                                                    (N-EASY)
+```
+
+and the headline is the sandwich `χ(F²) ≤ χ(ℝ²)` (`chromaticNumber_planeOver_le_plane`), `χ(ℝ²) ≤ 7`
+(`chromaticNumber_plane_le_seven`), and the spine at `k = χ(F²)` when `χ(F²) ≤ 6`.
+
+### 3.1 Each step against the library
+
+| step (V1 / V2) | the library holds | missing | lines |
+|---|---|---|---|
+| **sandwich**: `χ(F²) ≤ χ(ℝ²)` (C-CPUP's second half) | `chromaticNumber_planeOver_le_plane` (`Bridge`) | — | 0 |
+| `χ(ℝ²) ≤ 7` (I-CP57's upper half) | `chromaticNumber_plane_le_seven` (`Instances/Seven`) | — | 0 |
+| **N-EASY**: an `AeColouring k` gives `χ(ℝ²) ≤ k` (replaces C-CPUP's first half and the CP format) | `Plane.chiM0_le` (`Plane/AeColouring`), `Plane.chromaticNumber_plane_le_chiM0` (`Plane/YesLimit`) | — | 0 |
+| **L0** — a proper `k`-colouring of `F²` gives an `R ⋊ U`-invariant random proper `k`-colouring of `Cay(R, U)` (V1-L0; V2 Step 1) | at **four** colours: `SpectralChain.X4`, `InvariantColouring`, `x4_nonempty_of_colorable`, `exists_invariantColouring`; `Rigidity.invariantMeasureOnClosed_of_countable` (`Rigidity/InvariantMeasure`; Markov–Kakutani over a Følner-free fixed point, `OneClass.exists_common_fixed`) | the same at `Fin k`: a copy, `Fin 4 → Fin k` | 300 |
+| **L1** — the spectral measure, rotation-invariant (V1-L1) | four colours: `IsTraceSpectral`, `posDef_corr` (tetrahedral), node L3 `rotInv_of_isTraceSpectral`; generic: `Rigidity.exists_isSpectralMeasureOf` (`Rigidity/SpectralSubspace`, over `bochnerHerglotz_of_countable`), `Rigidity.measure_eq_of_fourier` | the **colour spectral measure** `σ := Σ_j σ_{e_j}` (`e_j = 1{c(0) = j}`): it needs no simplex Gram identity — `∫ χ(y) dσ = P(c(0) = c(y))`, mass `1` — and its rotation invariance per colour | 150 |
+| **L2** — the `T + A` factor: `Π = E[· | 𝒜]`, and SI-3 (V1-L2 (c), V1-L3's identity; V2 L1 (d)–(e), Step 2) | generic: `Rigidity.isSpectralMeasureOf_condExpL2` (spectral measure of `E[f | 𝒜_t]` is `σ_f` on the `t`-continuous characters), `Rigidity.contChars_tauPrime : contChars (tauPrime F) = TA F`, `bochnerOn_tauPrime`, `measurableSet_TA`, `rot_preimage_TA`; four colours: `Rigidity.colourFactor`, `setIntegral_compl_TA_re`, `setIntegral_compl_TA_rot`, `trace_decomp` (`Rigidity/TraceSplit`) | `TraceSplit` at `Fin k`, on `σ = Σ_j σ_{e_j}` (its own route already reads colour indicators, "not tetrahedral coordinates": the constants `3, 4` disappear) | 250 |
+| **L3** — the dichotomy; (B) excluded by MR; the factor colouring (V1-L3; V2 Step 2, SI-4) | stage 2's `not_isSPWitness` (scratch, to be placed); four colours: `SpectralInputs.condLaw`, `condSupport`, `si4`, `si4_equivariant` (`Arith/SpectralInputs` ll. 1040–1269), `Rigidity.factorColouring`, `factorLaw`, `factorLaw_trace_null`, `integral_condLaw_mul_eq_zero_of_adj`, `comap_colourRot_colourFactor` (`Rigidity/APlus`) | SI-4's block and `APlus`'s factor at `Fin k` (copies); the assembly: an invariant `k`-colouring has a sibling whose colour spectrum is carried by `T + A` | 550 |
+| **L4** — density of `R` in the completion (V1-L4; V2 L1 (b)) | `Rigidity.Counting.denseRange_ιG`; the completion is *defined* as the closure (`Kgrp`, `K`) — I-C′ not read | — | 0 |
+| **L5** — extension to the completion, the measurable version, the slice (V1-L5, V1-L8; V2 L2, L-WA, L4) | four colours: `Rigidity.Counting.tendsto_measure_ne`, `exists_extension` (Borel–Cantelli, no Doob–Cohn), `SliceEdgeNull`, `exists_slice` (`Rigidity/CountExtension`); generic: `mem_closure_ιG` (the edges in the closure), `Delta`, `Delta_circle_mem_closure` (`Rigidity/CountTorus`: one plane at every number field) | `CountExtension` at `Fin k`; `measure_ne_eq` becomes `P(c(0) ≠ c(y)) = 1 − Re ∫ χ(y) dσ` with the colour spectral measure | 350 |
+| **L7** — thickness is uniform, at every level (V1-L7; V2 Step 0, V2-NL) | `Rigidity.henselCount_of_two_notMem`, `newCharBound_of_two_notMem` (Lemma P, public); level one, one-sided only: `charBound_one_weil` (private), from `StandingFive.normOne_charSum_ge` (`Arith/FloorPlanes`, one-sided), whose proof holds the two-sided `‖Σ‖ ≤ 2√Q` one line before its end; the descent `norm_charSum_le_of_resT` (private, two-sided) | **two-sided** level-one and all-level bounds: a drafted edit to `FloorPlanes` (split off `norm_normOne_charSum_le`, ~10 lines) and to `ClassRatio` (a public `norm_charSum_le_of_weil`, ~130 lines) — or a copy in the new module (~350) | 140 (edits) / 350 (copy) |
+| **L7′** — from primes to the levels of `K`: `[S9]`, the product, characters of the level group | `Rigidity.Counting.level`, `Lev`, `levR`, `normOneLev`, `image_levR_unitVectors` (stated over `TCA F`, reading only "no stable prime ramified"), `exists_normOneL_residues`, `range_proj` | `[S9]` over "no ramified stable prime" (30); `not_isRamified_of_thick` (40); a character of a product sums over a product set as the product of the sums (80); a character of a subgroup of a finite abelian group extends (60) | 210 |
+| **L6** — the mixing inequality on `K` | `Rigidity.Counting.haarK`, `haarK_proj_preimage` (cosets of level `k` have measure `1/|level-k image|`), `tendsto_haarK_bad` (density along cosets); `RatioBound`'s Fourier technique on a finite abelian group (`fourier_sq_mul_charSum`, `sum_fourier_sq`; one-sided, sets) | the finite-group mixing inequality, two-sided, for `[0, 1]`-valued functions (200); the level decomposition on `K` (cross terms vanish, Cauchy–Schwarz) (150); `‖1_A − E_k 1_A‖₂ → 0` from `tendsto_haarK_bad` (100); assembly (80) | 530 |
+| **L6′** — the threshold selection: an `AeColouring k` from the slice (V1-L6; V2 L3; FS103-SEL) | `Plane.AeColouring`, `UnitPairsNull`, `unitPairSet`, `arcLength`, `e` (`Plane/UnitPairs`, `Plane/Basic`) | fibre masses measurable (60); Tonelli on the slice's null edges (120); the pigeonhole and the threshold (60) — **no random threshold**: the `AeColouring` format asks properness almost everywhere and measurability, not continuity in probability | 240 |
+| **thickness at ℚ(√635087)** (FS103-635; C-635-THK) | `Rigidity.two_notMem_of_isSquare` (no stable prime above 2 when a square `d ≡ 7 (mod 8)` is in `F`), `Rigidity.stablePrime_card_of_two_notMem` (a stable prime not above 2 lies over `p ≡ 3 (mod 4)`, residue size `(pⁿ)²`, and every square of `F` is a square mod `p`) (`Rigidity/SqrtClassFive`); `SquareClass.fieldOfRadicands`, its `NumberField` instance | a `decide` that `635087` is a non-square modulo each of the 13 primes `p ≡ 3 (mod 4)` below 103, and `2√Q/(Q + 1) ≤ 2√103/104 < 1/5` for `Q ≥ 103` | 60 |
+| **the headline**, general and at the instance | — | `chromaticNumber_plane_le_of_thick` (each `k`); `chromaticNumber_planeOver_eq_plane_of_thick`; the instance | 100 |
+| **de Grey's field** (FS103-DG) | the same two `SqrtClassFive` lemmas (`d = 7`), `fieldOfRadicands {3, 5, 7, 11}` | a `decide` that no prime `p ≡ 3 (mod 4)` below 131 has 3, 5, 7 and 11 all squares mod `p` (the 3, 7, 11 themselves included); `2√131/132 < 1/5` | 60 |
+
+**Total: about 3,000 lines of Lean** (2,980 with the two drafted edits; 3,190 with the copy route), of which about 1,600 are copies
+of landed four-colour proofs with `Fin 4` replaced by `Fin k` and the tetrahedral constants removed, about 1,000 are new
+mathematics in Lean (thickness to levels, the two mixing inequalities, the selection), and about 400 are assembly and instances.
+Re-price from the first two leaves (`LEAN.md` § The kernel's cost model): the copies are the likeliest to come in under, the
+selection's Fubini step over `((ℂ × K) × ℝ)` the likeliest over.
+
+**What the result will rest on**: the standard three axioms, `Rigidity.positive_entropy_rigidity` (through `mrPlus`) and
+`StandingFive.kloosterman_bound` (through thickness) — the five-colour chain's two declared outside theorems, and no hypothesis.
+
+### 3.2 Decisions the map rests on
+
+1. **New parallel modules over `Fin k`, not the landed four-colour modules generalized in place.** Generalizing in place would move
+   the stored statements of the five-colour chain's landed theorems (`InvariantColouring F` would take `k`), and its landing's
+   statement dumps, audit blocks and read-backs would all be redone. The cost is about 1,600 lines that are the four-colour proofs
+   at `k`. The debt is named (§ 4's domain pass): the true model is the `k`-colour one, of which the four-colour chain is an
+   instance; re-deriving the chain from it is a later refactor, not this job's.
+2. **The colour spectral measure `Σ_j σ_{e_j}`, not the simplex trace measure.** The derivation's spectral measure is "that of the
+   simplex embedding" (D-TAE); the library's `TraceSplit` already routes through colour indicators. Taking `σ := Σ_j σ_{e_j}` drops
+   the Gram identity, the `posDef` proof and every `k/(k − 1)`: `∫ χ(y) dσ = P(c(0) = c(y))`, `σ(R̂) = 1`, and off `T + A`
+   `σ = Σ_j σ_{e_j − Πe_j}`. The SP witness is `σ|_{R̂∖(T+A)}` exactly as in V1-L3.
+3. **The finite-level route to mixing on `K`, not Fourier analysis on `K`.** `K` is the closure of `R` in `∏_k Lev F k`; its
+   characters are never named. At level `k` the conditional expectation onto the level's cosets commutes with every translation, so
+   the edge integral splits into a finite-group term (the level group, connection set the image of `U`, Fourier there) and a
+   remainder bounded by `‖1_A − E_k 1_A‖₂ ‖1_B − E_k 1_B‖₂`, which `tendsto_haarK_bad` sends to `0`. No Haar measure on the
+   norm-one torus, no Parseval on a profinite group, no weak approximation beyond `mem_closure_ιG`.
+4. **A fixed threshold.** V1-L6 and V2-L3 draw the threshold at random to keep continuity in probability (the CP format). The
+   library's number is `χ_m⁰`, whose colourings need properness almost everywhere and measurability only; any fixed
+   `θ ∈ (λ/(1 + λ), 1/k)` works.
