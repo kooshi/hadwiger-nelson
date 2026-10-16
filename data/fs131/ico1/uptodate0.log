@@ -1,0 +1,64 @@
+slot: admitted lake: mem 6 GiB (hard cap), cpus 4,5
+⚠ [6456/6464] Replayed Proofs.HadwigerNelson.Collapse.Thick
+warning: Proofs/HadwigerNelson/Collapse/Thick.lean:50:0: automatically included section variable(s) unused in theorem `HadwigerNelson.Collapse.ThickAt.mono`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Proofs/HadwigerNelson/Collapse/Thick.lean:54:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Thick.lean:62:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Thick.lean:68:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Thick.lean:82:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Thick.lean:88:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Thick.lean:95:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Thick.lean:102:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Thick.lean:111:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Thick.lean:129:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Thick.lean:134:8: declaration uses `sorry`
+⚠ [6457/6464] Replayed Proofs.HadwigerNelson.Collapse.Colouring
+warning: Proofs/HadwigerNelson/Collapse/Colouring.lean:51:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Colouring.lean:55:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Colouring.lean:59:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Colouring.lean:69:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Colouring.lean:75:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Colouring.lean:93:8: declaration uses `sorry`
+⚠ [6458/6464] Replayed Proofs.HadwigerNelson.Collapse.Dichotomy
+warning: Proofs/HadwigerNelson/Collapse/Dichotomy.lean:118:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Dichotomy.lean:123:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Dichotomy.lean:128:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Dichotomy.lean:146:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Dichotomy.lean:154:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Dichotomy.lean:159:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Dichotomy.lean:171:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Dichotomy.lean:179:8: declaration uses `sorry`
+⚠ [6459/6464] Replayed Proofs.HadwigerNelson.Collapse.Slice
+warning: Proofs/HadwigerNelson/Collapse/Slice.lean:37:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Slice.lean:42:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Slice.lean:48:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Slice.lean:62:8: declaration uses `sorry`
+⚠ [6460/6464] Replayed Proofs.HadwigerNelson.Collapse.Mixing
+warning: Proofs/HadwigerNelson/Collapse/Mixing.lean:42:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Mixing.lean:72:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Mixing.lean:81:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Mixing.lean:110:8: declaration uses `sorry`
+⚠ [6461/6464] Replayed Proofs.HadwigerNelson.Collapse.Selection
+warning: Proofs/HadwigerNelson/Collapse/Selection.lean:45:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Selection.lean:50:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Selection.lean:55:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Selection.lean:62:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Selection.lean:75:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Selection.lean:80:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Selection.lean:85:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Selection.lean:108:0: declaration uses `sorry`
+⚠ [6462/6464] Replayed Proofs.HadwigerNelson.Collapse.Headline
+warning: Proofs/HadwigerNelson/Collapse/Headline.lean:63:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Headline.lean:70:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Headline.lean:88:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Headline.lean:93:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Headline.lean:112:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Headline.lean:134:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Headline.lean:139:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Headline.lean:160:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Collapse/Headline.lean:173:8: declaration uses `sorry`
+All targets up-to-date (6464 jobs).

@@ -1,0 +1,10 @@
+slot: admitted lake: mem 10 GiB (hard cap), cpus 4,5
+Proofs/HadwigerNelson/Collapse/Headline.lean:63:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Headline.lean:70:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Headline.lean:88:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Headline.lean:93:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Headline.lean:112:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Headline.lean:134:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Headline.lean:139:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Headline.lean:160:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Headline.lean:173:8: warning: declaration uses `sorry`

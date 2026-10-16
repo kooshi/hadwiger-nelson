@@ -1,0 +1,8 @@
+#print axioms HadwigerNelson.Collapse.exists_invColouring_TA
+#print axioms HadwigerNelson.Collapse.not_isSPWitness
+#print axioms HadwigerNelson.Collapse.chromaticNumber_planeOver_deGrey
+#print axioms HadwigerNelson.Collapse.chromaticNumber_planeOver_eq_plane_of_forall_thickAt
+#print axioms HadwigerNelson.Collapse.chromaticNumber_planeOver_eq_plane_of_thick
+#print axioms HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087
+#print axioms HadwigerNelson.Collapse.chromaticNumber_plane_le_of_thick
+#print axioms HadwigerNelson.Collapse.exists_slice_of_colorable

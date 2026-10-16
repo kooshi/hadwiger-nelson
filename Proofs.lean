@@ -596,6 +596,13 @@ import Proofs.HadwigerNelson.Arith.ThreeColourCriterion
 import Proofs.HadwigerNelson.Arith.DyadicQuadratic
 import Proofs.HadwigerNelson.Arith.ThreeFourColours
 import Proofs.HadwigerNelson.Instances.UpperHalfCorollaries
+import Proofs.HadwigerNelson.Collapse.Thick
+import Proofs.HadwigerNelson.Collapse.Colouring
+import Proofs.HadwigerNelson.Collapse.Dichotomy
+import Proofs.HadwigerNelson.Collapse.Slice
+import Proofs.HadwigerNelson.Collapse.Mixing
+import Proofs.HadwigerNelson.Collapse.Selection
+import Proofs.HadwigerNelson.Collapse.Headline
 import Proofs.HadwigerNelson.PadicPlane.Basic
 import Proofs.HadwigerNelson.PadicPlane.Measure
 import Proofs.HadwigerNelson.PadicPlane.Upper

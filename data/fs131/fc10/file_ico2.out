@@ -1,0 +1,28 @@
+D1 CLAUDE.md replaced once: the current audit reads 10651 clean and 5 declared
+D1 CLAUDE.md replaced once: with forty-eight imported records (twelve of them 
+D1 CLAUDE.md replaced once: `Outside.OAI158.no_proper_five_coloring` — no map 
+D1 CLAUDE.md replaced once: — with eighteen, ten of which rest on Weil's bound
+D2 CLAUDE.md replaced once: `axioms=3 rests=78 named=19 inline=14 outside=7 ou
+D2 CLAUDE.md replaced once: taken in 108 (hypothesis, statement) pairs by 55 s
+D3 CLAUDE.md replaced once: `declarations=22241 refutations-skipped=240 sites=
+D5 CLAUDE.md replaced once: the derivation is this project's, and the kernel's
+D6 CLAUDE.md replaced once: **The plane's number is a measurable one with no h
+D6 CLAUDE.md replaced once: and given MR(ℚ(√635087)) it is `χ(ℚ(√635087)²)` (r
+D7 CLAUDE.md replaced once: Given MR at a number field (row 120) it also equal
+D8 CLAUDE.md replaced once: seven at ℚ(√635087) is `χ(ℝ²) = 7` given MR (row 1
+D8 CLAUDE.md replaced once: and given MR χ(F²) = χ(ℝ²), the least k with a mea
+D8 CLAUDE.md replaced once: (rows 128, 130, G81; [hand])
+D9 LEDGER.md replaced once: **The collapse: given MR, the plane's number is a 
+D9 LEDGER.md replaced once: **[hand + tools exact; the load-bearing step two d
+D9 LEDGER.md replaced once: **Not claimed:** the complex-place widening; anyth
+D9 LEDGER.md replaced once: `plans/FS105-derivation.md` FS105-MR16
+D10 README.md inserted one row after its slot line
+D11 ROADMAP.md replaced once: Six records rest on it, among them `6 ≤ χ(ℝ²) ≤ 7`
+D11 ROADMAP.md replaced once: Eighteen records rest on it, among them the five-c
+D11 ROADMAP.md replaced once: Forty-eight records rest on it:
+D11 ROADMAP.md replaced once: and, with EL, the five-colour chain
+D12 ARCHITECTURE.md replaced once: and the chain's headline `min_localBound_five_le_c
+D12 ARCHITECTURE.md replaced once: `Plane.radius_five` — six records
+D4 replaced once, old span 537 chars
+transition inserted after previous entry
+WROTE ['ARCHITECTURE.md', 'CLAUDE.md', 'LEDGER.md', 'README.md', 'ROADMAP.md', 'tools/claude_md_fact_audit.py']
