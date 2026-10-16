@@ -254,11 +254,11 @@ Consumers: the publication's comparator surface (statements read as Challenge te
 | module | head statements | leaves | statements as written | proof lines, priced |
 |---|---|---|---|---|
 | `Rigidity/NormOneGen` (imports Mathlib only) | `closure_normOne_eq_top` | 6 | 75 | ≈ 125 |
-| `Rigidity/UnitRingEq` (imports `Rigidity/CountResidue`, `Rigidity/NormOneGen`) | `unitRing_eq_stableIntegers`, `exists_two_pow_mul_mem_unitRing`, `exists_eq_add_mul_of_mem_stableIntegers`, `resPi_surjective` | 11 + `resPi` | 150 | ≈ 270 |
+| `Rigidity/UnitRingEq` (imports `Rigidity/CountResidue`, `Rigidity/NormOneGen`) | `unitRing_eq_stableIntegers`, `exists_two_pow_mul_mem_unitRing`, `exists_eq_add_mul_of_mem_stableIntegers`, `resPi_surjective` | 10 + `resPi`, `resPi_apply` (proved, `rfl`) | 150 | ≈ 270 |
 | `Rigidity/UsablePrime` (imports `Rigidity/AdmissiblePrime`, `Arith/PlaceHom`, `Arith/UpperHalf`) | `exists_isUsablePrime`, `nonempty_stablePrime`, `localBound_lt_top` | 11 | 110 | ≈ 345 (≈ 300 if FS131-ICS1 has landed) |
 | `Rigidity/PlaneComponents` (imports `Rigidity/UsablePrime`, `Rigidity/RingScope`) | `infinite_connectedComponent_planeOver`, `not_connected_planeOver`, `connected_or_infinite_planeOver`, `connected_planeOver_iff_isEmpty_stablePrime`, `reachable_iff_sub_mem_unitRingOver` | 9 | 105 | ≈ 195 |
 | `Instances/UnitRingModels` | models: `noRamifiedStableDyadic_sqrt47`, `unitRing_eq_stableIntegers_sqrt47`, `stableIntegers_sqrt47_ne_top`, `exists_stablePrime_three_not_isRamified` | 4 + 1 example | 55 | ≈ 35 |
-| **total** | | **41 leaves** | | **≈ 970** |
+| **total** | | **40 leaves with `sorry`** | | **≈ 970** |
 
 The stored type of every declaration was read from the compiled modules (`data/fs131/kru1/probes/Sigs.lean`, `Sigs.out`, before
 the passes; the passes' changes re-elaborated, `data/fs131/kru1/seq5.out`); no section variable is silently dropped or added
@@ -397,7 +397,7 @@ unification (`LEAN.md` l. 279).
 
 ### 3.6 The price
 
-**≈ 970 lines of proof over 41 leaves**, five new modules, no outside theorem, no `native_decide`; with ICS1 landed first,
+**≈ 970 lines of proof over 40 leaves**, five new modules, no outside theorem, no `native_decide`; with ICS1 landed first,
 ≈ 925. By part: Lemma C′ and its common step (modules 1, 2 less the odd form, the first three models) ≈ 420; the odd form
 (`not_isRamified_of_odd_mem`, `exists_two_pow_mul_mem_unitRing`) ≈ 37 — **14 % of its module, under the coordinator's fifth**;
 route E (module 3) ≈ 345; the components at every real number field ≈ 140 of module 4 plus the last model; **the dichotomy**
@@ -442,3 +442,14 @@ helps): the plan's table prices high.
    clause is equivalent, at a number field, to the existence of a stable prime, and that existence needs no Chebotarev
    (§ 1.3 F2–F3); its "*Rests on:* by hand, three derivations; nothing unprinted" stays for Lemma C′; for C8 the route is this
    plan's § 2.4, [hand], one mind, kernel pending.
+
+### 3.8 The build (2026-10-16, 20:17–20:50 UTC)
+
+`SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 scripts/slot.py --mem 6 --cpus 3 -- env MEMMAX=6G BATCH=2 ./scripts/build.sh` from the
+worktree: "build: OK — 1100 of 1100 batches, 6 module(s) rebuilt, 5 module(s) with warnings, 33m5s", exit 0
+(`build/gate/build/20261016T201711Z-1223591.log`, copied to `data/fs131/kru1/build-full.log`; the wrapper's output
+`data/fs131/kru1/build.out`). Warnings: 40 distinct, each "declaration uses `sorry`", one per skeleton leaf (the full log prints 133 such lines, the same 40
+(file, position) pairs replayed); no other warning.
+The six rebuilt modules are the five new ones and the root `Proofs`.
+
+## Stage 3 — SAVED
