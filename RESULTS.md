@@ -204,7 +204,7 @@ each in full. "Prior art: not found in print" reports the searches recorded in t
 - **Whose.** Proved by hand, two independent derivations. The questions are `[Ellenberg2018]`'s, Gibbs's and Mixon's
   (Polymath16), `[CGHO2025bg]` Question 6.2, and `[AbrishamiEtAl2025]` Problem 4.6 at three colours. The height lift is
   Chandgotia's device; density at the standard generators is expected folklore and not claimed. The criterion for arbitrary
-  generators: prior art not found in print; the wider class the kernel proves: prior art not yet searched. The kernel
+  generators: prior art not found in print; the wider class the kernel proves: prior art not found in print (FS131-PAS1); `[Payan1992]` and `[KrebsSankar2024]` Theorem 1.2's nontrivial half are corollaries of it. The kernel
   proof is this project's.
 - **Ledger.** Row 79; `CLOSED-QUESTIONS.md` § 2.4.
 

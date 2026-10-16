@@ -289,8 +289,7 @@ subgroup of finite index). Periodic 3-colourings are dense among all 3-colouring
   group with finitely many steps, and density for every finite generating set, torsion allowed. The clause about which
   colourings are rigid is in Lean too; the statement about the cells of the set of such $\theta$ is proved by hand only.
 - **Prior art.** The lift of a 3-colouring to integer heights is Chandgotia's device; density at the standard generators is
-  expected folklore and is not claimed. The criterion for arbitrary generating sets: not found in print (`LEDGER.md` row 79); for the wider class the Lean
-  proof covers, prior art not yet searched.
+  expected folklore and is not claimed. The criterion for arbitrary generating sets: not found in print (`LEDGER.md` row 79); for the wider class the Lean proof covers, not found in print either; two consequences of it are in print — Payan (1992: no Cayley graph on $(\mathbb{Z}/2)^m$ needs exactly three colours) and Krebs and Sankar (2026, Theorem 1.2: none on an abelian group of exponent 1, 2 or 4 does), which follow because such a group's characters meet $[1/3, 2/3]$ only at $1/2$.
   Not read: the rest of two of those papers' reference lists, and the literature on homomorphism shifts with non-standard
   generating sets beyond the queries run.
 
