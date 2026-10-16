@@ -411,7 +411,7 @@ reduces to S5's statement and is searched there.
 
 ## Stage 6 — SAVED: S5, degree-one primes of norm `≡ 3 (mod 4)` — **found in print**
 
-### 6.1 The queries (2026-10-16; tag `S5`; 16 queries)
+### 6.1 The queries (2026-10-16; tag `S5`; 15 queries)
 
 zb `ti:"prime divisors of polynomials"` (5); `ab:"prime divisors" & ab:"polynomial" & ab:"arithmetic progression"` (5);
 `ab:"prime divisors" & ab:"real root"` (0); `ab:"prime divisors" & ab:"3 (mod 4)" & ab:"polynomial"` (1, unrelated);
