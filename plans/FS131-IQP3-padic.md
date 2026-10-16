@@ -7,7 +7,22 @@ FS131-IQP2 (record `plans/FS131-IQP2-padic.md`, stopped at stage 1 at a pause Ko
 
 ## Theorems this phase proved
 
-To be filled at the gate, with each theorem's axioms as `#print axioms` gives them.
+Kernel theorems, built and gated on `7180f4b40` (axioms from `data/fs131/iqp3/gate/receipt-axioms.log`; "std3" is
+`[propext, Classical.choice, Quot.sound]`):
+
+- `PadicPlane.five_le_borelChromaticNumber_padicPlane_twentyThree : 5 ≤ borelChromaticNumber (padicPlane 23)` — std3. New
+  (item 1014 (2)), in place of FS131-IQP1's `four_le_…` (which read Weil's bound).
+- `PadicPlane.charSum_unitCircle_ge_of_circleCos` (private, `PadicPlane/Values`) — the cosine sums over the circle of `(ℤ/Q)²`
+  bound the character sums — std3 (in the private records of `data/fs131/iqp3/axioms-all.txt`).
+- `PadicPlane.exists_levelEmbedding` and `PadicPlane.charSum_levelOne_of_unitCircle`, each with one binder fewer (item 1014 (1):
+  `hk`, `hpP`) — std3; the proofs are FS131-IQP1's, unread binders removed.
+
+Through the gate with them, FS131-IQP1's proofs (its record, stages 2–4): the heads `PadicPlane.le_borelChromaticNumber_of_charSum`
+(std3), `one_add_div_le_of_borelColoring`, `le_borelChromaticNumber_padicPlane`, `not_exists_bound_borelChromaticNumber_padicPlane`
+and `borelChromaticNumber_padicPlane_three` (std3 and `StandingFive.kloosterman_bound`), `borelChromaticNumber_padicPlane_seven`,
+`_eleven`, `_nineteen`, `borelChromaticNumber_padicPlane_twentyThree_le_eight`, the level clauses
+`unitQuadrance_zmod_seven_pow_not_colorable_three`, `…_eleven_pow_not_colorable_four`, `…_nineteen_pow_not_colorable_four`, and
+`FibreCertSound.sum_le_seven` (std3); 68 public records in all (stage 3).
 
 ## Stage 1 — SAVED: the readback
 
@@ -254,3 +269,265 @@ reduced one, search request 26); the level clause at 23 (the same); anything at 
 **The trust each reading rests on** (stage 3's prints): the Weil form, the unboundedness and the value at 3 on
 `StandingFive.kloosterman_bound` (`[Weil1948]` p. 207) and the standard three; everything else, the bound by characters and the
 lower end at 23 included, on the standard three.
+
+## Stage 5 — SAVED: the drafts
+
+The drafts below are for files this lane does not write; each names its slot. They bring the planner's
+`plans/FS131-KPA1-padic-plan.md` § 5.2–5.6 to what is proved (at 23 the kernel holds `5 ≤ χ_Bor(ℚ₂₃²) ≤ 8`, not `6 ≤`; row 75's
+level clause at 23 is not in the kernel), with FS131-IQP1's two `LEAN.md` lines among them.
+
+## Drafts for the front page
+
+*Each draft names its slot: the file, the section, and the words it replaces or follows. Keryx files them. The commit of
+record is the gate's (stage 4); the counts are read from its saved logs. The question is the posers' — M. Bardestani and
+K. Mallahi-Karai's, `[BardestaniMallahiKarai2017]` Question 1 (`BIBLIOGRAPHY.md`'s row `[BardestaniMallahiKarai2015]`, the
+same paper) — and every draft that names it says so.*
+
+### D1 — `CLAUDE.md` § Trust ledger, the audit's sentence
+
+Two replacements in the paragraph beginning "Audited at every milestone with `#print axioms`":
+
+1. "the current audit reads 10747 clean and 5 declared purchases, and 77 imported (and 569 axiom-free; 11,398 records at
+   FS131-ICO2, the collapse, 2026-10-16)" *becomes*
+
+   > the current audit reads 10804 clean and 5 declared purchases, and 83 imported (and 574 axiom-free; 11,466 records at
+   > FS131-IQP3, the p-adic plane, 2026-10-16)
+
+2. "with fifty-eight imported records (twelve of them the three-colour criterion's and row 99's, FS131-LJ1; twenty-six the
+   five-colour chain's, FS131-LGT1; two the main clause's through five as one theorem, FS131-IL5; ten the collapse's, FS131-ICO2:
+   the thickness of ℚ(√635087) and de Grey's field, the two instances, the per-place form, the six-or-seven corollary, and D-E2's
+   `Rigidity.norm_charSum_le_weil`);" *becomes*
+
+   > with sixty-four imported records (twelve of them the three-colour criterion's and row 99's, FS131-LJ1; twenty-six the
+   > five-colour chain's, FS131-LGT1; two the main clause's through five as one theorem, FS131-IL5; ten the collapse's,
+   > FS131-ICO2: the thickness of ℚ(√635087) and de Grey's field, the two instances, the per-place form, the six-or-seven
+   > corollary, and D-E2's `Rigidity.norm_charSum_le_weil`; six the p-adic plane's, FS131-IQP3: the bound at `κ = 2√p`
+   > `PadicPlane.charSum_unitCircle_ge_weil` and `towerRatio_weil`, the posers' question answered —
+   > `one_add_div_le_of_borelColoring`, `le_borelChromaticNumber_padicPlane`, `not_exists_bound_borelChromaticNumber_padicPlane` —
+   > and `borelChromaticNumber_padicPlane_three`);
+
+The digest's own words for the check (`data/fs131/iqp3/gate/digest-axioms.txt`): "RECORDED COUNT IS STALE in CLAUDE.md § Trust
+ledger — update it: 10747 clean → 10804, 77 imported → 83".
+
+### D2 — `CLAUDE.md` § Trust ledger, the assumptions sentence
+
+In the paragraph "**What the library assumes, in both forms**": "`axioms=3 rests=99 named=19 inline=14 outside=7 ours=21 open=5
+takes=109 mentions=2` — three outside theorems declared as axioms, with ninety-nine (axiom, theorem) rows resting on them,
+eighty-four theorems, thirteen of them on two and one on three;" *becomes*
+
+> `axioms=3 rests=105 named=19 inline=14 outside=7 ours=21 open=5 takes=109 mentions=2` — three outside theorems declared as
+> axioms, with one hundred and five (axiom, theorem) rows resting on them, ninety theorems, thirteen of them on two and one on
+> three;
+
+(the six new rows are the p-adic plane's six records on Weil's bound alone: `kloosterman_bound`'s consumers 65 → 71; the digest:
+"RECORDED COUNTS ARE STALE in CLAUDE.md § Trust ledger — update it: rests 99 → 105"; `scripts/assumptions-ledger.txt`'s header
+is already moved, at `7180f4b40`).
+
+### D3 — `CLAUDE.md` § The gate, the vacuity counts
+
+In § The gate, "`declarations=22357 refutations-skipped=242 sites=1455`, `vacuous=0 stale=0 declared=3 witnessed=38
+generic=1412 unknown=2`" *becomes*
+
+> `declarations=22431 refutations-skipped=243 sites=1458`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1415 unknown=2`
+
+(+74 declarations, the eight modules'; +1 skip, `PadicPlane.isIndepSet_wellFilled`, which refutes nothing; +3 `GENERIC` sites,
+the Borel-colouring binders, inhabited at `p = 3`, `k = 3`; `scripts/vacuity-baseline.txt`'s header is already moved). The
+baseline's two entries are unchanged.
+
+### D4 — `CLAUDE.md` § Frontier, the "Last filed" line
+
+*Replaces* "Last filed: **the collapse** (FS131-KCL1, FS131-ICO1, FS131-ICO2, 2026-10-16: seven `Collapse/` modules through the
+gate on `7c72b9bf7` — the field equality `χ(F²) = χ(ℝ²)` wherever the stable primes are uniformly thick below `1/5`, and with
+no hypothesis at ℚ(√635087) and de Grey's field; row 128's field clause, its MR the kernel's `Rigidity.mrPlus`, stated in
+§ Where the problem stands; no value of `χ(ℝ²)` moved); before it, every earlier filing, newest first: `plans/FILINGS.md`."
+*with* (if this landing is filed after the collapse with nothing between):
+
+> Last filed: **the p-adic plane** (FS131-KPA1, FS131-IQP1, FS131-IQP3, 2026-10-16: eight modules through the gate on
+> `7180f4b40` — the posers' `[BardestaniMallahiKarai2017]` Question 1 answered no in the kernel: every Borel colouring of the
+> anisotropic `ℚ_p²` uses at least `1 + (p + 1)/(2√p)` colours, on Weil's bound; `χ_Bor(ℚ_p²) = 3, 4, 5, 5` at
+> `p = 3, 7, 11, 19` and `5 ≤ χ_Bor(ℚ₂₃²) ≤ 8`; row 75's consequences clause, stated in § Where the problem stands; no value
+> of `χ(ℝ²)` moved); before it, **the collapse** (FS131-KCL1, FS131-ICO1, FS131-ICO2) and every earlier filing, newest first:
+> `plans/FILINGS.md`.
+
+### D5 — `CLAUDE.md` § Where the problem stands, "What the kernel holds, beyond the interval"
+
+*Inserted after* the collapse's clause (ending "…the derivation FS-103's, the kernel's check this landing's;") *and before*
+"**Theorems A and B**":
+
+> **the p-adic plane** (FS-131, FS131-IQP3): every Borel colouring of the anisotropic `p`-adic plane — `ℚ_p²`, `p ≡ 3 (mod 4)`,
+> `x ~ y` when `(x₁ − y₁)² + (x₂ − y₂)² = 1` — uses at least `1 + (p + 1)/(2√p)` colours, so no constant bounds its Borel
+> chromatic number as `p` varies: the posers' `[BardestaniMallahiKarai2017]` Question 1, answered no
+> (`PadicPlane.one_add_div_le_of_borelColoring`, `not_exists_bound_borelChromaticNumber_padicPlane`, on Weil's bound); the
+> bound is Hoffman's ratio bound of the finite plane carried to every level of the residue tower and to Borel colourings
+> (`le_borelChromaticNumber_of_charSum`, standard three), with no `[BardestaniMallahiKarai2017]` Theorem 2.5;
+> `χ_Bor(ℚ_p²) = 3, 4, 5, 5` at `p = 3, 7, 11, 19` and `5 ≤ χ_Bor(ℚ₂₃²) ≤ 8` (`borelChromaticNumber_padicPlane_three`, …,
+> `five_le_borelChromaticNumber_padicPlane_twentyThree`; the value at 3 on Weil's bound, the rest on the standard three: FS-66's
+> fibre-share certificates at 7, 11, 19, the circle's exact cosine sums at 23); no level `UD(ℤ/p^k, 2)` three-colourable at 7,
+> four-colourable at 11 or 19 (row 75). Not claimed: the plain `χ(ℚ_p²)`; `6 ≤ χ_Bor(ℚ₂₃²)` and the level clause at 23 (row
+> 75's [cert]). The question and the bound `O(p²)` are the posers', the upper halves `[Madore2015]`'s construction; the lower
+> bound and the values: prior art not found in print (FS66-T7's search); the kernel proof is this project's;
+
+### D6 — `LEDGER.md` row 75
+
+1. *A `**[kernel]**` clause, inserted before* "**[hand]** *The fibre-share inequality:*":
+
+   > **[kernel]** (FS-131: `PadicPlane/`, planned by FS131-KPA1, proved by FS131-IQP1 and FS131-IQP3; `Arith/FibreCert7*`)
+   > `PadicPlane.one_add_div_le_of_borelColoring` — every Borel colouring of `ℚ_p²` at `p ≡ 3 (mod 4)` uses at least
+   > `1 + (p + 1)/(2√p)` colours — and `not_exists_bound_borelChromaticNumber_padicPlane` — the posers'
+   > `[BardestaniMallahiKarai2017]` Question 1 answered no —, on the standard three and `StandingFive.kloosterman_bound`;
+   > `le_borelChromaticNumber_of_charSum` — Hoffman's bound of `UD(𝔽_p, 2)` carried to `χ_Bor(ℚ_p²)` —,
+   > `towerRatio_of_fibreShareBound` — a fibre-share bound `Σφ ≤ U` gives `α(UD(ℤ/p^k, 2)) ≤ U·p^{2(k−1)}` at every level
+   > `k ≥ 1` —, the values `χ_Bor(ℚ_p²) = 4, 5, 5` at `p = 7, 11, 19` (`borelChromaticNumber_padicPlane_seven`, `…_eleven`,
+   > `…_nineteen`: FS-66's certificate at 7, `cert-p7.json`, checked by `decide +kernel` in `Arith/FibreCert7Check`; at 11 the
+   > kernel's certificate, at 19 the Searcher's reduced one, `U = 88.6434…`), `5 ≤ χ_Bor(ℚ₂₃²) ≤ 8`
+   > (`five_le_borelChromaticNumber_padicPlane_twentyThree`, the bound at the circle's exact cosine sums `CircleCos.circleCos_ge`,
+   > `κ = 7.9606872`; `…_twentyThree_le_eight`), and the level clauses — no level `UD(ℤ/7^k, 2)` three-colourable, none at 11 or
+   > 19 four-colourable (`unitQuadrance_zmod_seven_pow_not_colorable_three`, `…_eleven_pow_not_colorable_four`,
+   > `…_nineteen_pow_not_colorable_four`) —, on the standard three; `χ_Bor(ℚ₃²) = 3` on the standard three and Weil's bound.
+   > With no `[BardestaniMallahiKarai2017]` Theorem 2.5: Hoffman's bound at every level and the well-filled cosets. Not in the
+   > kernel: `6 ≤ χ_Bor(ℚ₂₃²)` and the level clause at 23 (FS-66's certificate there, 1,444,136 ops; its reduced form is search
+   > request 26).
+
+2. *After* "and **`α(Γ₂₃) ≤ 97`** (was 105; bracket [87, 97]; `46,023 ≤ α(UD(ℤ/529,2)) ≤ 51,833`)." *(the planner's grade
+   note, `plans/FS131-KPA1-padic-plan.md` § 5.2, unchanged):*
+
+   > The kernel's certificate at 19 is not FS-66's: `cert19_ok` (`Arith/FibreCert19Bound`) checks the Searcher's reduced
+   > certificate (`data/search/2026-10-14/certs/v-p19-phi0-13-qs.json`, `U = 88.6434…`), not `cert-p19.json`
+   > (`U = 77.511742`); so at 19 the kernel holds `Σφ ≤ 88.64` and the clauses `α(Γ₁₉) ∈ {76, 77}`, `27,981` and the Haar
+   > bracket at 19 rest on `cert-p19.json`, `[cert]`.
+
+3. *In "**Consequences:**", the words* "`χ_Bor(ℚ_p²) = 4, 5, 5` at 7, 11, 19 and `[BardestaniMallahiKarai2017]` Question 1
+   answered **no** (`χ_Bor(ℚ_p²) ≥ 1 + (p+1)/(2√p)`; `CLOSED-QUESTIONS.md` §1.8)" *are followed by* "— both in the kernel
+   (above)", *and* "`χ_Bor(ℚ₂₃²) ≥ 6` (ceiling χ(Γ₂₃) ∈ {6, 7, 8})" *becomes* "`χ_Bor(ℚ₂₃²) ≥ 6` [cert] (the kernel holds `≥ 5`
+   and `≤ 8`; ceiling χ(Γ₂₃) ∈ {6, 7, 8})".
+
+4. *The "Prior art" clause's first sentence* "the chain `χ(F²) ≤ χ(ℚ_p²) = χ(ℤ_p²) ≤ lim_k χ(G_k) ≤ χ(G₁)` is `[Madore2015]`
+   Prop. 3.8;" *is replaced by (the planner's correction, § 5.2):*
+
+   > the chain `χ(F²) ≤ χ(ℚ_p²) = χ(ℤ_p²) ≤ lim_k χ(G_k) ≤ χ(G₁)` at `p ≡ 3 (mod 4)` is `[Madore2015]` Prop. 3.2 with Rem. 3.6
+   > (`χ((ℚ_p)²) ≤ χ((𝔽_p)²)`), the levels between being the tower's monotonicity, whose step `χ((A/m²)^d) ≤ χ((A/m)^d)` is
+   > his Prop. 3.8;
+
+   *and* "Ours: the inequality, the certificates and their checker, every value above, the answer." *becomes* "Ours: the
+   inequality, the certificates and their checker, every value above, the answer, and the kernel proof (FS-131)."
+
+5. *The address cell gains* `Proofs/HadwigerNelson/PadicPlane/`, `Arith/FibreCert7.lean`, `Arith/FibreCert7Check.lean`,
+   `Arith/FibreCert7Bound.lean`.
+
+### D7 — `CLOSED-QUESTIONS.md` § 1.8
+
+1. *In the opening quotation's paragraph,* "and his Prop. 3.8 is the chain `χ(F²) ≤ χ(ℚ_p²) = χ(ℤ_p²) ≤ lim_k χ(UD(ℤ/p^k, 2))
+   ≤ χ(UD(𝔽_p, 2))` this whole entry stands on." *is replaced by (the planner's § 5.3):*
+
+   > and his Prop. 3.2 with Rem. 3.6 gives the ends of the chain `χ(F²) ≤ χ(ℚ_p²) = χ(ℤ_p²) ≤ lim_k χ(UD(ℤ/p^k, 2)) ≤
+   > χ(UD(𝔽_p, 2))` this whole entry stands on (`χ((ℚ_p)²) ≤ χ((𝔽_p)²)` at `p ≡ 3 (mod 4)`), the levels between being the
+   > tower's monotonicity (his Prop. 3.8 is the variant modulo `m²`).
+
+2. *The first bullet's grade* "[hand]" *becomes* "[kernel, on Weil's bound]", *and after its last sentence:*
+
+   > In the kernel (FS131-KPA1, FS131-IQP1, FS131-IQP3; `PadicPlane.one_add_div_le_of_borelColoring`,
+   > `not_exists_bound_borelChromaticNumber_padicPlane`) the bound is proved without Theorem 2.5: Hoffman's ratio bound at
+   > every finite level `UD(ℤ/p^k, 2)`, and the cosets a Borel colour class fills to more than half, which form an independent
+   > set of a level.
+
+3. *The second bullet's head* "**`χ_Bor(ℚ₇²) = 4`, `χ_Bor(ℚ₁₁²) = 5`, `χ_Bor(ℚ₁₉²) = 5`, and `6 ≤ χ_Bor(ℚ₂₃²) ≤ 8`** [exact
+   certificate + hand]" *becomes* "**`χ_Bor(ℚ₇²) = 4`, `χ_Bor(ℚ₁₁²) = 5`, `χ_Bor(ℚ₁₉²) = 5`** [kernel], **and
+   `6 ≤ χ_Bor(ℚ₂₃²) ≤ 8`** [exact certificate + hand; the kernel holds `5 ≤ χ_Bor(ℚ₂₃²) ≤ 8`, the lower end by the circle's exact
+   cosine sums]", *and after the bullet's sentence ending* "…standard three axioms)." *:*
+
+   > The three values, and `5 ≤ χ_Bor(ℚ₂₃²) ≤ 8`, are kernel theorems on the standard three (`PadicPlane/Values`); the kernel
+   > checks FS-66's certificate at 7 itself, the library's at 11 and the Searcher's reduced one at 19.
+
+4. *"What it does not say"*: "Nothing exact at `p = 23` until its finite plane is decided." *is followed by* "The kernel's lower
+   end there is five; six rests on FS-66's certificate (search request 26 asks for one small enough to check)."
+
+### D8 — `BIBLIOGRAPHY.md` (the planner's § 5.4, carried unchanged; this job read neither paper)
+
+- `[Madore2015]`, read status: add "pp. 6–8 (Prop. 3.2 with its proof, Cor. 3.4, Rem. 3.5–3.6, ¶3.7, Prop. 3.8 with its proof,
+  Prop. 3.9's statement), ¶1.5, ¶6.6 and ¶7's opening read 2026-10-16 (FS131-KPA1)".
+- `[BardestaniMallahiKarai2015]` (cited as `[BardestaniMallahiKarai2017]`), read status: add "§1–§2 re-read 2026-10-16
+  (FS131-KPA1): Definition 2.6, Theorem 2.2, Lemma 2.4, Theorem 2.5, Question 1". Its role cell might add: "Question 1 answered
+  no in the kernel (FS-131, `PadicPlane/Values`), its Theorem 2.5 not used".
+
+### D9 — a stub to mint (the planner's § 5.5, the coordinator's ruling (3) of item 999), brought to what is proved
+
+**The Borel bound at every anisotropic local field — a reading.** *Claim (one mind, not checked line by line):* for every
+non-archimedean local field `K` of odd residue characteristic whose residue field `𝔽_q` has `q ≡ 3 (mod 4)` — the fields over
+which `x² + y²` is anisotropic — `χ_Bor(K²) ≥ 1 + (q + 1)/(2√q)`, and with the certificates `χ_Bor(K²) = 4, 5, 5` and `≥ 6`
+whenever `𝔽_q = 𝔽₇, 𝔽₁₁, 𝔽₁₉, 𝔽₂₃` (at `𝔽₂₃` the kernel's route gives `≥ 5` from the circle's cosine sums alone; `≥ 6` needs
+FS-66's certificate, [cert]), ramified extensions of `ℚ_p` and `𝔽_q((t))` included. *Why:* the route reads `ℚ_p` only as a
+complete discrete valuation ring with odd residue characteristic: Lemma P's square-zero algebra (`Rigidity/ClassRatio`'s
+`SqZeroInvT`) never reads the ramification; Madore's Prop. 3.2 (any valuation ring) makes unit vectors integral; Hensel lifts
+the circle; Haar on `𝓞_K²` is regular. *Killing test:* a level of `UD(𝓞_K/𝔪^k, 2)` at a ramified `K` with an independent set
+above `2√q/(q + 1 + 2√q)` of its points. *Bearing on the answer:* none on `χ(ℝ²)`; it widens the answer to the posers'
+question from `ℚ_p` to every local field they consider (their Theorem 1.1 is for characteristic zero; their Rem. 1.5 asks for
+positive characteristic). *Lean:* Mathlib at the pin has no general local field API this would read; `ℚ_p(√p)` or `𝔽_q((t))`
+as instances would each be a job. *The kernel's `ℚ_p` case is `PadicPlane/Values` (FS-131), whose proof reads `ℚ_p` through
+`ℤ_[p]`, `PadicInt.toZModPow` and Mathlib's Hensel.*
+
+### D10 — `LEAN.md`
+
+*§ Searching — Lean, appended (the planner's three, § 5.6; the first job's two, its report; one of this job's):*
+
+- `MeasurableSet[m] s` is notation scoped in `MeasureTheory`: a module that writes it without `open MeasureTheory` fails
+  with `failed to synthesize GetElem (Set ?m → Prop) (MeasurableSpace …)` (FS131-KPA1).
+- Mathlib at the pin declares no `MeasurableSpace` on `ℚ_[p]` or `ℤ_[p]` and no continuity lemma for `PadicInt.toZModPow`;
+  a scoped `noncomputable` Borel instance on `ℤ_[p]` makes `Measure.addHaarMeasure ⊤` on `ℤ_[p] × ℤ_[p]` elaborate with no
+  further instance (compact, second countable, Borel product). An `abbrev` over `unitQuadrance ℚ_[p]` must be
+  `noncomputable` (`instCommRingPadic`). `PadicInt.subring`, `PadicInt.Coe.ringHom`, `PadicInt.norm_le_pow_iff_mem_span_pow`,
+  `PadicInt.cast_toZModPow` and `hensels_lemma` (`Mathlib/NumberTheory/Padics/Hensel.lean` l. 459) are the names
+  (FS131-KPA1).
+- `[OAIMath2026]`'s `OAI/NumberTheory/PrimePackets/HaarBounds.lean` l. 18 (`haar_kernel_eq_inv_card`) is the ten-line pattern
+  for the measure of a kernel of finite index, over `AddSubgroup.index_mul_measure` (FS131-KPA1).
+- At the pin `hensels_lemma` gives only `‖z − b₀‖ < 1`, not the distance, so a congruence modulo `p^k` needs the unit
+  argument `(z − b₀)(z + b₀) = −δ` with `z + b₀` a unit (`PadicPlane.exists_unitVector_lift`, FS131-IQP1).
+- Instances of `Measure.addHaarMeasure ⊤` are not found through a `def` that wraps it (`PadicPlane.haar p`): a local `haveI`
+  from a private `isAddHaarMeasure_haar` serves, with no instance declared on the wrapper (FS131-IQP1).
+- A character of `(ℤ/q)²` is a cosine sum's term with no residue field in between: `ψ(1, 0) = ζ^α` and `ψ(0, 1) = ζ^β`
+  (`(Complex.isPrimitiveRoot_exp q _).eq_pow_of_pow_eq_one`, with `q • v = 0` by `ext <;> simp`), and
+  `v = v₁.val • (1, 0) + v₂.val • (0, 1)` gives `ψ v = ζ^{(αv₁ + βv₂) mod q}` through `AddChar.map_nsmul_eq_pow` and
+  `map_add_eq_mul`; `ψ ≠ 1` is `(α, β) ≠ 0` — `Rigidity/ClassRatio`'s private `charBound_one_of_circleCos` on the plane, in
+  47 lines (`PadicPlane.charSum_unitCircle_ge_of_circleCos`, private; FS131-IQP3).
+- A ruled drop of a non-dependent binder is shown from the kernel's side in two readings at once: put back with `mkArrow`
+  inside `forallBoundedTelescope`, the stored type has the before-dump's `Expr.hash` (which reads no binder name) and its raw print
+  character for character (which shows every binder's kind; a non-dependent binder prints as an arrow, with no name), and two
+  controls — the domain `True`, and a near miss — differ in both (`data/fs131/iqp3/lean/ReAdd.lean`, after FS131-LCH1's;
+  FS131-IQP3).
+
+*§ The kernel's cost model, appended (the planner's, § 5.6, with the build's figure):*
+
+- FS-66's fibre-share certificate at `p = 7` (8,598 ops, 495 slots, 14 PSD blocks; 707 KB of literals) checks as three
+  `decide +kernel` theorems in one file in 48.8 s at 2.89 GB measured alone (shape 7.1 s, the identity 29.4 s, positive
+  definiteness 7.5 s), and 33 s for the module in the build (`Arith/FibreCert7Check`); its certificate at `p = 23` is 1,444,136 ops over
+  35,511 pairs, 168 times the 7's (FS131-KPA1, FS131-IQP1, FS131-IQP3).
+
+### D11 — `ARCHITECTURE.md` § 5 (Trust), the declared import's consumer cell (outside this job's touches, so drafted)
+
+In § 5's row for `StandingFive.kloosterman_bound`, its consumer cell's last words "(fifty-eight imported records in all)"
+*become*:
+
+> ; and, since FS131-IQP3, the p-adic plane's six: in `PadicPlane/Tower` `charSum_unitCircle_ge_weil`, `towerRatio_weil`; in
+> `PadicPlane/Values` `one_add_div_le_of_borelColoring`, `le_borelChromaticNumber_padicPlane`,
+> `not_exists_bound_borelChromaticNumber_padicPlane`, `borelChromaticNumber_padicPlane_three` (sixty-four imported records in all)
+
+### D12 — `README.md` § Results
+
+*A new subsection after "### Planes over number fields"'s table and before the paragraph "`LEDGER.md` holds 167 rows.":*
+
+> ### Local fields
+>
+> | statement, in words | Lean name | rests on | whose | ledger |
+> |---|---|---|---|---|
+> | For every prime `p ≡ 3 (mod 4)`, every proper colouring of the `p`-adic plane `ℚ_p²` (two points adjacent when `(x₁ − y₁)² + (x₂ − y₂)² = 1`) whose colour classes are Borel sets uses at least `1 + (p + 1)/(2√p)` colours. So no constant bounds the Borel chromatic number of these planes as `p` varies. | `PadicPlane.one_add_div_le_of_borelColoring`, `PadicPlane.not_exists_bound_borelChromaticNumber_padicPlane` | std3 + **W** | the question is Bardestani and Mallahi-Karai's (`[BardestaniMallahiKarai2017]` Question 1), who prove `O(p²)` from above. The lower bound and the answer: prior art not found in print. The route is Hoffman's ratio bound on every finite level of the residue tower; it does not use their Theorem 2.5. The kernel proof is this project's | 75 |
+> | The Borel chromatic number of `ℚ_p²` is 3, 4, 5 and 5 at `p = 3, 7, 11, 19`, and between 5 and 8 at `p = 23`. | `PadicPlane.borelChromaticNumber_padicPlane_three` (and `…_seven`, `…_eleven`, `…_nineteen`), `PadicPlane.five_le_borelChromaticNumber_padicPlane_twentyThree`, `PadicPlane.borelChromaticNumber_padicPlane_twentyThree_le_eight` | std3 (+ **W** at `p = 3`) | the upper halves are `[Madore2015]`'s construction with the finite planes' values (`[Moorhouse2010]` Table 6.1). The lower halves: prior art not found in print, from FS-66's fibre-share certificates (at 19 the Searcher's reduced one) and, at 23, the circle's exact cosine sums | 75 |
+
+*and the section's opening sentence* "…and for the rows changed since, on 2026-10-16 at the commit each landing gated
+(`113ca8ece`, the main clause through five as one theorem; `7c72b9bf7`, the collapse)." *gains* "; `7180f4b40`, the p-adic
+plane".
+
+### D13 — `ROADMAP.md`, and the Proof Atlas
+
+`ROADMAP.md`'s appendix is generated from `LEDGER.md` (`data/fs131/pr1/nonkernel_rows.py`, `roadmap_appendix.py`): once D6 is
+filed, row 75 stays listed (its `[hand]`, `[cert]` and `[tools]` clauses stand) with "part in the kernel: yes", as now; rerun the
+generator. The Proof Atlas holds no node that cites row 75 or the `p`-adic plane (`data/viz/proof-atlas/facts.json`, 103 nodes,
+searched by text): **no grade change**.
