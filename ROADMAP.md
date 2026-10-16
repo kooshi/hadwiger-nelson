@@ -79,11 +79,10 @@ record now resting on it rests on Lean's three standard axioms alone.
    (`ARCHITECTURE.md` § 5). Landing it means porting that proof the way its transfer theorem was ported
    (`Outside/OAI158Basic` … `OAI158BorelTransfer`). Then `6 ≤ χ(ℝ²) ≤ 7` would hold on the standard three.
 2. **EL, `Rigidity.positive_entropy_rigidity`**: Einsiedler and Lindenstrauss's rigidity theorem for `ℤ^d`-actions on solenoids
-   (`[EinsiedlerLindenstrauss2022]` Theorem 1.3). It is read back clause by clause in `plans/FS131-KN7-chain-next.md` § 3.3. Sixteen
-   records rest on it, among them the five-colour chain `min(L(F), 5) ≤ χ(F²)` and `χ(ℚ(√47)²) = 5`. Landing it would leave the
+   (`[EinsiedlerLindenstrauss2022]` Theorem 1.3). It is read back clause by clause in `plans/FS131-KN7-chain-next.md` § 3.3. Eighteen records rest on it, among them the five-colour chain `min(L(F), 5) ≤ χ(F²)`, `χ(F²) = L(F)` whenever `L(F) ≤ 5`, and `χ(ℚ(√47)²) = 5`. Landing it would leave the
    chain resting on Weil's bound alone. Its formalization has been asked to be priced at some point, not yet
    (`data/fs131/REQUEST-2026-10-13.md`, W2).
-3. **W, `StandingFive.kloosterman_bound`**: Weil's bound for Kloosterman sums (`[Weil1948]` p. 207). Forty-six records rest on it:
+3. **W, `StandingFive.kloosterman_bound`**: Weil's bound for Kloosterman sums (`[Weil1948]` p. 207). Forty-eight records rest on it:
    the three-colour criterion, `χ(F²) = L(F)` at `L(F) ≤ 4`, and, with EL, the five-colour chain. Landing it as well as EL would put
    every number-field result in the README on the standard three.
 
@@ -93,16 +92,15 @@ the cost of landing everything on the standard three axioms is to be measured (`
 
 ## 3. Planes over number fields
 
-The kernel holds `χ(F²) ≤ L(F)` and `min(L(F), 5) ≤ χ(F²)` for every real number field. It holds the values through four colours
-and the five-colour values listed in the README. Left:
+The kernel holds `χ(F²) ≤ L(F)` and `min(L(F), 5) ≤ χ(F²)` for every real number field, and their composition as one theorem:
+`χ(F²) = L(F)` whenever `L(F) ≤ 5` (`Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five`), with its form that takes no
+hypothesis, `min(χ(F²), 5) = min(L(F), 5)` (`Rigidity.min_chromaticNumber_five_eq_min_localBound_five`). It holds the values
+through four colours and the five-colour values listed in the README. Left:
 
-1. **`χ(F²) = L(F)` whenever `L(F) ≤ 5`, as one named theorem.** It is a two-line composition of
-   `Rigidity.min_localBound_five_le_chromaticNumber` with `UpperHalf.chromaticNumber_planeOver_le_localBound`, and it is not yet
-   stored (`LEDGER.md` row 123; the chain's gate record, `plans/FS131-LGT1-gate.md`).
-2. **Also not stored as theorems** (same sources): the family, `χ = 5` at every squarefree `d ≡ 47, 143, 167 (mod 168)` with
+1. **Not stored as theorems** (`LEDGER.md` row 123; the chain's gate record, `plans/FS131-LGT1-gate.md`): the family, `χ = 5` at every squarefree `d ≡ 47, 143, 167 (mod 168)` with
    `L = 5` (44 of the 52 such `d ≤ 3000`); row 123's class statement CLS in full; and the field ℚ(√23, ∛2), the case with a
    complex place.
-3. **Lemma C′** (row 100): for a real number field with no ramified stable dyadic prime, the unit-vector ring equals the ring of
+2. **Lemma C′** (row 100): for a real number field with no ramified stable dyadic prime, the unit-vector ring equals the ring of
    elements integral at every stable prime. Its statement as typed:
    ```lean
    theorem unitRing_eq_stableIntegers [NumberField F] (h : NoRamifiedStableDyadic F) :
@@ -110,22 +108,22 @@ and the five-colour values listed in the README. Left:
    ```
    It was taken out of the library when the chain landed, because nothing read it and its proof was a `sorry`. The statement and its
    hand route are kept in `data/fs131/lch1/ring-scope-lemma-c-prime.lean`.
-4. **The parts of landed rows that stay outside the kernel.** In row 121: a finite triangle-free five-chromatic unit-distance
+3. **The parts of landed rows that stay outside the kernel.** In row 121: a finite triangle-free five-chromatic unit-distance
    graph over ℚ(√47), which exists by de Bruijn–Erdős but has not been exhibited, and the equivalence called "row 88 ⟺ T-B1" at
    ℚ(√59), ℚ(√83), ℚ(√131). In row 99: "no mixing", and `χ(ℚ(α, √7)²) = 4` with `α³ = α + 1`.
-5. **Hand results taken as hypotheses** by the older conditional theorems: 21 entries, among them the chain's interface
+4. **Hand results taken as hypotheses** by the older conditional theorems: 21 entries, among them the chain's interface
    statements `SpectralChain.Interface.MR`, `PE2`, `EFPlus`, `RU`, `Count`. They are listed with their sources in `ARCHITECTURE.md`
    § 5, and every (hypothesis, theorem) pair is in `scripts/assumptions-ledger.txt`. The five-colour chain's headline takes none of
    them. The owner's instruction is that every hypothesis standing for a hand result of this project be discharged in the kernel
    (`data/fs131/REQUEST-2026-10-13.md`, W2). Some outside results are also taken this way: Herglotz–Bochner (`[Rudin1962]`),
    Markov–Kakutani (`[Kakutani1938]`), and Artin–Lang (`[Lang1953]`). Artin–Lang is the one hypothesis of the bridge
    `χ(ℝ²) = max_F χ(F²)` (row 107).
-6. **The finite planes.** The local bound `L(F)` is a chromatic number of finite graphs, and several of those values are held
+5. **The finite planes.** The local bound `L(F)` is a chromatic number of finite graphs, and several of those values are held
    outside the kernel. They come from exact certificates accepted by standalone checkers, and from computations with controls:
    five colours refused at 27 and at 23, six refused at 83, and the window for an exactly six-chromatic finite plane (rows 68–71).
    The open part is whether `L(F) = 6` is possible: it needs one of six finite targets, `Γ_q` at `q ∈ {23, 27, 31, 43, 47}` or
    `U₆₄`, to be six-chromatic, and none is decided (`CLAUDE.md` § Grokkings, the theory in one paragraph).
-7. **Every row 52–127 not graded wholly [kernel]**: the appendix, group B.
+6. **Every row 52–127 not graded wholly [kernel]**: the appendix, group B.
 
 ## 4. Measurements around the early witnesses
 

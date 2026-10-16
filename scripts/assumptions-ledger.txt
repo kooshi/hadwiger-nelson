@@ -4,7 +4,7 @@
 # holds it at unknown polarity). An inline assumption is inline:<Label>. Rewritten only by
 #   ./scripts/assumptions.sh --write-ledger
 # which prints every row it adds or removes. The counts this ledger was written from:
-#   axioms=3 rests=74 named=19 inline=14 outside=7 ours=21 open=5 takes=108 mentions=2
+#   axioms=3 rests=78 named=19 inline=14 outside=7 ours=21 open=5 takes=108 mentions=2
 MENTIONS HadwigerNelson.Plane.Voronov11 HadwigerNelson.Plane.forall_mu_six_lt_one_iff
 MENTIONS HadwigerNelson.SpectralChain.Interface.MR HadwigerNelson.Rigidity.interface_mr_iff
 RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outside.OAI158.chiM0_six_or_seven
@@ -13,12 +13,14 @@ RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outsi
 RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outside.OAI158.six_le_chiM0
 RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Outside.OAI158.six_le_chromaticNumber_plane
 RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Plane.radius_five
+RESTS HadwigerNelson.Rigidity.positive_entropy_rigidity HadwigerNelson.Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five
 RESTS HadwigerNelson.Rigidity.positive_entropy_rigidity HadwigerNelson.Rigidity.entropySplit
 RESTS HadwigerNelson.Rigidity.positive_entropy_rigidity HadwigerNelson.Rigidity.entropySplit_of_admissiblePair
 RESTS HadwigerNelson.Rigidity.positive_entropy_rigidity HadwigerNelson.Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound
 RESTS HadwigerNelson.Rigidity.positive_entropy_rigidity HadwigerNelson.Rigidity.haar_or_zero_entropy
 RESTS HadwigerNelson.Rigidity.positive_entropy_rigidity HadwigerNelson.Rigidity.isHaarFourier_or_ksEntropy_eq_zero
 RESTS HadwigerNelson.Rigidity.positive_entropy_rigidity HadwigerNelson.Rigidity.ksEntropy_eq_zero_of_not_smul_le
+RESTS HadwigerNelson.Rigidity.positive_entropy_rigidity HadwigerNelson.Rigidity.min_chromaticNumber_five_eq_min_localBound_five
 RESTS HadwigerNelson.Rigidity.positive_entropy_rigidity HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber
 RESTS HadwigerNelson.Rigidity.positive_entropy_rigidity HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber_closed
 RESTS HadwigerNelson.Rigidity.positive_entropy_rigidity HadwigerNelson.Rigidity.mrPlus
@@ -34,12 +36,14 @@ RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.CertLink.exis
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.CertLink.exists_stablePrime_sqrt_three
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Rigidity.Counting.count_of_oneAvoidingDensityBound
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Rigidity.Counting.false_of_slice
+RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Rigidity.exists_uniform_tail
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Rigidity.five_le_chromaticNumber_of_isSquare
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Rigidity.five_le_chromaticNumber_of_two_notMem
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Rigidity.five_le_localBound_of_isSquare
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Rigidity.five_le_localBound_of_isSquare_class
+RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Rigidity.min_chromaticNumber_five_eq_min_localBound_five
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Rigidity.ratioAtMost_of_five_le_chromaticNumber
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Rigidity.ratioAtMost_of_two_notMem

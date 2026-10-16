@@ -379,6 +379,7 @@ import Proofs.HadwigerNelson.Rigidity.GlobalPoint
 import Proofs.HadwigerNelson.Rigidity.WanderingShells
 import Proofs.HadwigerNelson.Rigidity.ZeroEntropyClosed
 import Proofs.HadwigerNelson.Rigidity.ChainHeadline
+import Proofs.HadwigerNelson.Rigidity.MainClauseFive
 import Proofs.HadwigerNelson.Rigidity.SqrtClassFive
 import Proofs.HadwigerNelson.Instances.SqrtFortySevenFive
 import Proofs.HadwigerNelson.Instances.SqrtClassValues
