@@ -1,0 +1,5 @@
+slot: admitted ics1-iter: mem 8 GiB (hard cap), cpus 0,1
+
+real	0m3.758s
+user	0m3.682s
+sys	0m0.708s
