@@ -4,9 +4,9 @@
 `plans/FS131-close-inventory.md` items 974–992 (each has its receipt and, where it rules, four parts).
 `plans/SESSION-HANDOFF-2026-10-15.md` is older; its § 6 owed list is now filed or tabled (§ 5 below).*
 
-**On resuming (after Kooshi's pause, items 1016–1019; every job has handed back):** read § 3. Each of the three jobs there was told to save a stage and
-hand back; read each record's last saved stage and its "what is left", then brief a successor from it (or resume it by
-message if it handed back below its line). Five commits wait for the next privacy check before a push (§ 1).
+**On resuming:** four jobs run (§ 3, items 1020–1024, relaunched 17:39–17:44 UTC after Kooshi's pause). Agents of an
+ended session cannot be messaged: a job whose agent is gone is continued by a fresh successor from its record. Before the
+next push, item 1022's history question goes to Kooshi (§ 5).
 
 ## 1. Where things are
 
@@ -37,26 +37,22 @@ message if it handed back below its line). Five commits wait for the next privac
 
 ## 3. Running
 
-**The collapse landed** (item 1005): `χ(ℚ(√635087)²) = χ(ℝ²)`, de Grey's field, and the general form at every real
-number field uniformly `c`-thick with `c < 1/5`, merged as `0f81fe2a3`, gated on `7c72b9bf7`; the main tree's build
-current. Its two owed one-liners and the `k = 7` model go to the next job that touches `Collapse/`.
+**The collapse landed** (item 1005), merged as `0f81fe2a3`, gated on `7c72b9bf7`; its filing merged (`38579c41b`). The
+collapse's gate (`data/fs131/ico2/gate/`) is every implementer's baseline until another lands.
 
-- **The collapse's filing is merged** (`38579c41b`, item 1007): the front page, row 128, README, ROADMAP, the atlas
-  (local) current; the fact audit passes against `8cab63fa2`.
-- **FS131-IQP2** (item 1015): the `p`-adic plane to the gate (`.claude/worktrees/il5`, branch `fs131-kpa1`); FS131-IQP1
-  proved every landing leaf and handed back past its line (item 1014); the three leaves at 23 wait on search request 26;
-  five colours at 23 ruled in. Both implementer branches joined `Proofs.lean`'s import blocks with `main`'s: the second to
-  land will conflict there again — keep both blocks.
-- **FS131-ICT2** (item 1013): the three-colour criterion to the gate (`.claude/worktrees/kel1`, branch `fs131-ktc1`);
-  FS131-ICT1 proved all 53 leaves and handed back past its line (item 1012); two unread hypotheses ruled dropped.
-- **FS131-KFR1 handed back DONE** (item 1017): the density form planned, about 2,675 lines; what I owe it on resuming is
-  in item 1017 (receipts, records onto `main`, three held rulings, its implementer's brief).
+| job | what | worktree, branch | record |
+|---|---|---|---|
+| FS131-IQP3 (item 1023) | the `p`-adic plane to the gate: two ruled drops, `5 ≤ χ_Bor(ℚ₂₃²)`, lint, gate, read-aloud, drafts | `il5`, `fs131-kpa1` | `plans/FS131-IQP3-padic.md` |
+| FS131-ICT3 (item 1023) | the three-colour criterion to the gate: five spec examples, lint, gate, read-aloud, drafts | `kel1`, `fs131-ktc1` | `plans/FS131-ICT3-three-colour.md` |
+| FS131-IFR1 (item 1023) | the density form of the collapse: 81 leaves (about 2,650 lines) and the gate; item 1021's three rulings | `kcl1`, `fs131-kfr1` | `plans/FS131-IFR1-density.md` |
+| FS131-KCS1 (item 1024) | planner: row 123's family, CLS, ℚ(√23, ∛2); row 100's Lemma C′ | `kcs1`, `fs131-kcs1` | `plans/FS131-KCS1-class-plan.md` |
 
-Both implementers were told the collapse's gate (`data/fs131/ico2/gate/`) is their baseline. At each implementer's
-hand-back: check its commits, print its head statements' axioms myself, read them against the ledger row, guard, merge
+Both the `p`-adic and the three-colour branches joined `Proofs.lean`'s import blocks with `main`'s: the second to land
+will conflict there — keep both blocks. At each implementer's hand-back: check its commits, print its head statements'
+axioms myself, read them against the ledger row, guard, reword its predecessor's lines that item 1022 names, merge
 `--no-ff` (`main` equal to the gated commit in `Proofs/`, `scripts/` and the package files), file its drafts (a Clerk if
-large), run the fact audit and read its last line, rebuild the main tree. Next free slot: the public roadmap's § 3
-items 1–2 (the family, CLS, ℚ(√23, ∛2), Lemma C′); search request 26 (`p = 23`) waits for the next Searcher run.
+large), run the fact audit and read its last line, rebuild the main tree. Search request 26 (`p = 23`) waits for a
+Searcher run on a day the laptop is not building (item 1024).
 
 ## 4. Kooshi's decisions, all answered (W8–W9, items 1009–1010)
 
@@ -66,6 +62,10 @@ items 1–2 (the family, CLS, ℚ(√23, ∛2), Lemma C′); search request 26 (
 4. **The peer-delegation paragraph:** kept (approved before he pushed the generic template).
 
 ## 5. Owed (none urgent)
+
+- **Before the next push (Kooshi's word):** item 1022 — wording the privacy guard refuses is in unpushed history (two
+  commit messages on `main`, earlier versions of the inventory and this file, and two records and one message on the
+  job branches). Rewrite the unpushed history, or narrow the guard's rule? His call.
 
 - **Mathematics / Lean:** Lemma C′ (row 100); the family of 44 fields and CLS (`ROADMAP.md` § 3); `lean4checker` and the
   comparator before any write-up; KCL1's stub to mint (the four-colour chain as the `k = 4` case of the collapse).
