@@ -224,3 +224,34 @@ thinner: FS-66's `U = 97.98` against `529/5 = 105.8` (8 %), while the reduction 
 (INVENTORY): a fibre-share certificate at `p = 23` in format `fs66-b1-cert-v2` with `U < 105.8` and at most about 2,000 rows
 and 20 PSD blocks, made by the 2026-10-14 variants' producer. Until it exists, C23 stays a leaf and
 `six_le_borelChromaticNumber_padicPlane_twentyThree` waits on it; nothing else does.
+
+## Stage 3 — the skeleton, the passes and the plan (in progress)
+
+### 3.1 The modeling passes
+
+**Domain modeling** (`debruijn-domain-modeling`, fresh, on the five modules). The representations, read against the cut
+between structure intrinsic to the problem and structure incidental to it:
+
+- `borelChromaticNumber` is generic in the space and the graph, with the posers' class-wise wording (each colour class in
+  `borel X`), so `ℚ_p²`, `ℤ_p²` and any later local field read one definition; `⊤` stands for every infinite cardinal, which
+  no statement reads. Kept.
+- `TowerRatio p c` is the interface between the finite tower and the measure step: the measure step reads only the levels
+  `k ≥ 1`, and `k ≥ 1` is load-bearing (at `k = 0` the one-point level would force `c ≥ 1`). The count `p^{2k}` is the
+  level's size, intrinsic. Kept, with its model `towerRatio_one`.
+- The tower as the stable prime of `ℚ(i)` above `p` is the library's own object: `UD(ℤ/p^k, 2)` is an induced subgraph on
+  all of `levelTarget P k` (T2), so every all-levels theorem at stable primes is read with no new character theory. The
+  hypothesis `p ≡ 3 (mod 4)` is where it belongs — T1, where the prime must stay prime — and nowhere else in the tower.
+- The `κ` form's hypothesis is one-sided and on `(ℤ/p)²`, the finite plane's own coordinates, so a reader instantiates it
+  with `κ = max(2, −λ_min(UD(𝔽_p, 2)))` without meeting `ℚ(i)`. `κ ≥ 2` is the method's (FS-66's L1 constant), stated as a
+  named hypothesis. A closed form with `λ_min` defined was weighed and declined: it buys one definition and an API for no
+  consumer.
+- `haar p` on `ℤ_p²` with the Borel σ-algebra scoped (Mathlib declares none on `ℤ_[p]`), as `[OAIMath2026]` does on
+  `PadicInt 2` (`OAI/Analysis/BackwardIntertwiners/HaarBase.lean`). The well-filled set is stated as "more than half of its
+  coset", with no appeal to the coset's measure, so it does not wait on M4.
+- **Changed by the pass:** the upper half now exposes the Borel colouring itself (`exists_borelColoring_of_colorable`), with
+  `borelChromaticNumber_le_of_colorable` one line from it. That is the inhabitant the colouring binder of
+  `one_le_mul_of_borelColoring` needs — the binder the vacuity scan reads (`GENERIC` in `k`): at `p = 3`, `k = 3`, `c = 1`
+  every hypothesis holds at once.
+- The unsampled members: `k = 0` in `exists_unitVector_lift` (true: `ZMod 1` is one point) and in `isIndepSet_wellFilled`
+  (a single vertex); `I = ∅`; `κ = p + 1` (every character sum is at least `−(p+1)`), which makes the `κ` form's
+  conclusion `χ_Bor ≥ 2`. None breaks a statement.
