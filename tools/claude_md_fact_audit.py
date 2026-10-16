@@ -61,6 +61,15 @@ NORMALISE: list[tuple[str, str, str]] = [
 
 # token -> reason it may vanish. Keep this small and reviewed.
 ALLOW: dict[str, str] = {
+    # FS131-IL5's filing (2026-10-16, Keryx; FS-131 inventory item 990): gate counts refiled; row 123's "Not claimed" clause on the unstored equality removed.
+    "axioms=3 rests=74 named=19 inline=14 outside=7 ours=21 open=5 takes=108 mentions=2": "superseded gate count, refiled at FS131-IL5's filing (2026-10-16, FS-131 inventory item 990) from data/fs131/il5/gate/; the old count stays in data/fs131/clone1/gate/ (rests=78)",
+    "rests=74": "superseded gate count, refiled at FS131-IL5's filing (2026-10-16, FS-131 inventory item 990) from data/fs131/il5/gate/; the old count stays in data/fs131/clone1/gate/",
+    "declarations=22238 refutations-skipped=240 sites=1455": "superseded gate count, refiled at FS131-IL5's filing (2026-10-16, FS-131 inventory item 990) from data/fs131/il5/gate/; the old count stays in data/fs131/clone1/gate/ (declarations=22241)",
+    "declarations=22238": "superseded gate count, refiled at FS131-IL5's filing (2026-10-16, FS-131 inventory item 990) from data/fs131/il5/gate/; the old count stays in data/fs131/clone1/gate/",
+    "22238": "superseded gate count, refiled at FS131-IL5's filing (2026-10-16, FS-131 inventory item 990) from data/fs131/il5/gate/; the old count stays in data/fs131/clone1/gate/",
+    "10650": "superseded gate count, refiled at FS131-IL5's filing (2026-10-16, FS-131 inventory item 990) from data/fs131/il5/gate/; the old count stays in data/fs131/clone1/gate/ (10651 clean)",
+    "11284": "superseded gate count, refiled at FS131-IL5's filing (2026-10-16, FS-131 inventory item 990) from data/fs131/il5/gate/; the old count stays in data/fs131/clone1/gate/ (11,287 records)",
+    "ROADMAP.md": "LEDGER.md row 123's \"Not claimed\" clause pointing to ROADMAP.md for the unstored equality, removed at FS131-IL5's filing because the equality is now stored (Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five); ROADMAP.md is at the repository root",
     # The second filing (FS131-FC8, 2026-10-16, Keryx; FS-131 inventory item 983): row 121's source cell reworded by FS131-EN1 § 8.3's draft.
     "FS100-Q47's": "row 121's source cell reworded by plans/FS131-EN1-derivation.md § 8.3's draft (filed by FS131-FC8): the cell now says which of its eight entries are inputs of SP-Cor's proof instead of 'the inputs FS100-Q47's grade names'; FS100-Q47 itself is still named in LEDGER.md",
     # FS132-L1's landing (2026-10-07, Keryx; FS-131 inventory item 635): gate counts refiled; row 33's pre-import sentence replaced.
@@ -539,6 +548,8 @@ ALLOW: dict[str, str] = {
 # in (a verified allowance, unlike ALLOW). For text whose home was never this corpus -- e.g. paths-forward rows ranked >= 30, whose
 # authoritative rows are plans/FRONTIER-STUBS.md's (E1, 2026-09-26).
 EXTERNAL_HOMES: dict[str, tuple[str, str]] = {
+    # FS131-IL5's filing (2026-10-16): the five-colour chain's "Last filed" entry moved to plans/FILINGS.md.
+    "2026-10-15": ("plans/FILINGS.md", "the five-colour chain's entry of CLAUDE.md's \"Last filed\" chain (FS131-LCH1, FS131-LGT1, 2026-10-15), moved verbatim to plans/FILINGS.md at FS131-IL5's filing (2026-10-16); current state is CLAUDE.md § Frontier and LEDGER.md"),
     # FS131-FC5 (2026-10-14): the "Last filed" chain's older entries moved to plans/FILINGS.md (size budget).
     'Arith/QuadraticPrime': ("plans/FILINGS.md", "an older entry of CLAUDE.md's \"Last filed\" chain, moved verbatim to plans/FILINGS.md at FS131-FC5 (2026-10-14) under CLAUDE.md's size budget (80,619 bytes after the density equality's filing); current state is CLAUDE.md § Frontier and LEDGER.md"),
     'Arith/ThreeColourCharacter': ("plans/FILINGS.md", "an older entry of CLAUDE.md's \"Last filed\" chain, moved verbatim to plans/FILINGS.md at FS131-FC5 (2026-10-14) under CLAUDE.md's size budget (80,619 bytes after the density equality's filing); current state is CLAUDE.md § Frontier and LEDGER.md"),
