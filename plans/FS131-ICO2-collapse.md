@@ -154,3 +154,24 @@ the mechanism (the least stable residue characteristic, Weil's constant) and its
 7,590), and its plant (`--plant`, the first `:=` turned into `:≡`) reads DIFFERS (`data/fs131/ico2/pass-code-only*.out`). The
 file compiles clean in the farm (`work/head3.out`). The axiom claims written into the docstrings are the farm's print; the gate's
 audit is their check.
+
+## Stage 6 — SAVED: the build, and the module map
+
+**The build** (`data/fs131/ico2/build2.log`, at `1f9792da4`, the stage-5 commit; the brief's line): **OK — 381 of 381 batches,
+4 modules rebuilt (`Collapse/Slice`, `Selection`, `Headline`, `Proofs`), 0 with warnings, 9 m 39 s.** The full output
+(`build/gate/build/20261016T134242Z-3442973.log`) holds no `warning` line; `grep -rnw sorry Proofs/HadwigerNelson/Collapse/` finds
+nothing, in code or in comments. Every module of the collapse has now compiled through `build.sh` with its proofs.
+
+**`ARCHITECTURE.md`**: seven rows, after `Rigidity/EntropySplitMax` (the last `Rigidity/` row of § 3), the planner's draft
+(§ 4.5) brought to what is proved — each module's role, its principal declarations, its imports cell, ledger row 128, FS-131.
+`tools/check_architecture.py`: PASS, 625 modules and 625 rows, 0 import mismatches, none of the rows' identifiers unknown
+(`data/fs131/ico2/arch.txt`); its plant — `Collapse/Thick`'s imports cell set to `Rigidity/CountTorus` in a copy — fails by name
+(`FAIL imports of Collapse/Thick: stated-only ['Rigidity/CountTorus'], real-only ['Rigidity/CountCompletion']`,
+`arch-plant.txt`). What each module rests on is added to its row from the gate's audit.
+
+**The gate's instruments, written** (each run at stage 7): `data/fs131/ico2/run-gate.sh` (the `clone1` steps, logs to
+`data/fs131/ico2/gate/`, slots `ico2-*`; the diff is those four lines); `data/fs131/ico2/lean/StatementDump.lean` (FS131-ICO1's
+dumper, namespace renamed) with `data/fs131/ico2/statements.py` (the comparison against `statements-before.txt.gz`, the two ruled
+binder drops checked as FS131-KN9's one-binder check asks, four plants); `data/fs131/ico2/lean/AxiomsAll.lean` (FS131-LGT1's
+record printer, the nine modules listed) with `data/fs131/ico2/audit_block.py` (the audit's blocks from the kernel's print, and
+`--coverage` after they are filed; three plants).
