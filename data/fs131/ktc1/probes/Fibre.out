@@ -1,0 +1,25 @@
+slot: admitted seq.sh: mem 5 GiB (hard cap), cpus 4
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:50:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:54:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:58:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:62:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:67:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:72:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:76:18: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:87:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:105:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:108:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:113:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:119:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:125:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:135:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:143:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:151:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:159:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:164:4: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:171:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:175:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:179:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:188:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:196:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Fibre.lean:209:8: warning: declaration uses `sorry`

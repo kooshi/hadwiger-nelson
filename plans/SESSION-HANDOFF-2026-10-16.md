@@ -8,7 +8,7 @@
 
 ## 1. Where things are
 
-- **The repository is public**: `https://github.com/kooshi/hadwiger-nelson`; this checkout is its clone. **`main` is 32
+- **The repository is public**: `https://github.com/kooshi/hadwiger-nelson`; this checkout is its clone. **`main` is 37
   commits ahead of `origin/main`, none pushed** — every push publishes, and Kooshi has not yet answered whether I may
   push (§ 4, decision 1). Before any push: the publication guard over every new commit's changed files and messages (its
   path is in the auto-memory's "local paths"; never written here).
@@ -40,6 +40,15 @@ leaves) and the edits D-E1, D-E2, and handed back past its line; `main` was merg
 ICO2: `Collapse/Slice`, `Selection`, `Headline` (about 600 lines), the experience pass, the build, the gate on one commit
 with the statement comparison (the `omit`s ruled in item 993 listed as ruled changes), the read-aloud, the drafts. **Its agent
 id is in my scratch only**; in a new session, brief a successor from its record instead.
+
+**FS131-KPA1 and FS131-KTC1 — two planners** (item 995): the `p`-adic plane's Borel bound with its values (the asking
+lane's rank 4; brief `data/fs131/briefs/FS131-KPA1-padic.md`; worktree `.claude/worktrees/il5`, branch `fs131-kpa1`;
+record `plans/FS131-KPA1-padic-plan.md` there) and the three-colour criterion for lattice Cayley graphs (rank 5; brief
+`data/fs131/briefs/FS131-KTC1-three-colour.md`; worktree `.claude/worktrees/kel1`, branch `fs131-ktc1`; record
+`plans/FS131-KTC1-three-colour-plan.md` there). At each hand-back: check its commits and its skeleton's build log,
+read its head statements against the row, copy its record and report onto `main` (the skeleton stays on its branch),
+and brief its implementer. Next free slot: the public roadmap's § 3 items 1–2 (the family, CLS, ℚ(√23, ∛2), Lemma C′);
+after the collapse lands, rank 3's density form (item 995).
 
 **At its hand-back** (announcement rule, item 988): check the commits; print the three headlines' axioms myself
 (`Collapse.chromaticNumber_planeOver_sqrt635087`, `chromaticNumber_planeOver_eq_plane_of_thick`,
