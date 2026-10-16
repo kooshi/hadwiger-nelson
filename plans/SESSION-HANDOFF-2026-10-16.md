@@ -37,14 +37,14 @@
 number field uniformly `c`-thick with `c < 1/5`, merged as `0f81fe2a3`, gated on `7c72b9bf7`; the main tree's build
 current. Its two owed one-liners and the `k = 7` model go to the next job that touches `Collapse/`.
 
-- **FS131-FC10, the Clerk** (item 1005): files FS131-ICO2's drafts D1–D13 and the audit's transition
-  (`.claude/worktrees/filing2`, branch `fs131-fc10`; brief `data/fs131/briefs/FS131-FC10-collapse-filing.md`). At its
-  hand-back: read its CHECKs, guard, merge `--no-ff`, run the fact audit myself and **read its last line**.
+- **The collapse's filing is merged** (`38579c41b`, item 1007): the front page, row 128, README, ROADMAP, the atlas
+  (local) current; the fact audit passes against `8cab63fa2`.
 - **FS131-IQP1** (item 1001): the `p`-adic plane (`.claude/worktrees/il5`, branch `fs131-kpa1`); the three leaves at 23
   leave the landing (item 1002).
 - **FS131-ICT1** (item 1001): the three-colour criterion (`.claude/worktrees/kel1`, branch `fs131-ktc1`); one false
   skeleton statement corrected by ruling (item 1003).
-- **FS131-KFR1** (item 1006): the density form's planner (`.claude/worktrees/kcl1`, branch `fs131-kfr1`).
+- **FS131-KFR1** (item 1006): the density form's planner (`.claude/worktrees/kcl1`, branch `fs131-kfr1`); its widenings
+  and the 250-line disc module ruled in (item 1008).
 
 Both implementers were told the collapse's gate (`data/fs131/ico2/gate/`) is their baseline. At each implementer's
 hand-back: check its commits, print its head statements' axioms myself, read them against the ledger row, guard, merge
