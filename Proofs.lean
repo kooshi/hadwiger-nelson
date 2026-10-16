@@ -416,6 +416,10 @@ import Proofs.HadwigerNelson.Rigidity.AdmissiblePrime
 import Proofs.HadwigerNelson.Rigidity.UnitCircle
 import Proofs.HadwigerNelson.Rigidity.Pieces
 import Proofs.HadwigerNelson.Rigidity.EntropySplitMax
+import Proofs.HadwigerNelson.Rigidity.NormOneGen
+import Proofs.HadwigerNelson.Rigidity.UnitRingEq
+import Proofs.HadwigerNelson.Rigidity.UsablePrime
+import Proofs.HadwigerNelson.Rigidity.PlaneComponents
 import Proofs.HadwigerNelson.Plane.LocalMap
 import Proofs.HadwigerNelson.Plane.LocalMapExamples
 import Proofs.HadwigerNelson.Plane.CircleColouring
@@ -596,6 +600,7 @@ import Proofs.HadwigerNelson.Arith.ThreeColourCriterion
 import Proofs.HadwigerNelson.Arith.DyadicQuadratic
 import Proofs.HadwigerNelson.Arith.ThreeFourColours
 import Proofs.HadwigerNelson.Instances.UpperHalfCorollaries
+import Proofs.HadwigerNelson.Instances.UnitRingModels
 import Proofs.HadwigerNelson.Collapse.Thick
 import Proofs.HadwigerNelson.Collapse.Colouring
 import Proofs.HadwigerNelson.Collapse.Dichotomy

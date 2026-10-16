@@ -1,0 +1,73 @@
+slot: admitted lake: mem 6 GiB (hard cap), cpus 4
+@scaleRoots_eval₂_mul : ∀ {R : Type u_1} {S : Type u_2} [inst : Semiring S] [inst_1 : CommSemiring R] {p : S[X]}
+  (f : S →+* R) (r : R) (s : S), eval₂ f (f s * r) (p.scaleRoots s) = f s ^ p.natDegree * eval₂ f r p
+@coeff_scaleRoots : ∀ {R : Type u_1} [inst : Semiring R] (p : R[X]) (s : R) (i : ℕ),
+  (p.scaleRoots s).coeff i = p.coeff i * s ^ (p.natDegree - i)
+data/fs131/kru1/probes/Names.lean:9:8: error(lean.unknownIdentifier): Unknown constant `Polynomial.Monic.natDegree_scaleRoots`
+data/fs131/kru1/probes/Names.lean:10:8: error(lean.unknownIdentifier): Unknown constant `Polynomial.scaleRoots_monic`
+@Separable.aeval_derivative_ne_zero : ∀ {R : Type u_1} [inst : CommSemiring R] {S : Type u_2} [inst_1 : CommSemiring S]
+  [Nontrivial S] [inst_3 : Algebra R S] {p : R[X]},
+  p.Separable → ∀ {x : S}, (aeval x) p = 0 → (aeval x) (derivative p) ≠ 0
+@mul_divByMonic_eq_iff_isRoot : ∀ {R : Type u_1} {a : R} [inst : CommRing R] {p : R[X]},
+  (X - C a) * (p /ₘ (X - C a)) = p ↔ p.IsRoot a
+@SimpleGraph.reachable_iff_reflTransGen : ∀ {V : Type u_1} {G : SimpleGraph V} (u v : V),
+  G.Reachable u v ↔ Relation.ReflTransGen G.Adj u v
+@SimpleGraph.ConnectedComponent.exact : ∀ {V : Type u_1} {G : SimpleGraph V} {v w : V},
+  G.connectedComponentMk v = G.connectedComponentMk w → G.Reachable v w
+@SimpleGraph.ConnectedComponent.sound : ∀ {V : Type u_1} {G : SimpleGraph V} {v w : V},
+  G.Reachable v w → G.connectedComponentMk v = G.connectedComponentMk w
+@SimpleGraph.connected_iff : ∀ {V : Type u_1} (G : SimpleGraph V), G.Connected ↔ G.Preconnected ∧ Nonempty V
+HadwigerNelson.Rigidity.unitRing_le_stableIntegers : ∀ (F : Subfield ℝ) [inst : NumberField ↥F],
+  HadwigerNelson.UnitRing.unitRing (HadwigerNelson.conjOn ⋯) ≤ HadwigerNelson.Rigidity.stableIntegers F
+HadwigerNelson.Rigidity.exists_mul_stableIntegers_le : ∀ (F : Subfield ℝ) [inst : NumberField ↥F],
+  ∃ c,
+    c ≠ 0 ∧
+      ∀ x ∈ HadwigerNelson.Rigidity.stableIntegers F,
+        ↑c * x ∈ HadwigerNelson.UnitRing.unitRing (HadwigerNelson.conjOn ⋯)
+@HadwigerNelson.Rigidity.Counting.exists_normOneL_residues : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (Φ : Finset (HadwigerNelson.SpectralChain.StablePrime F)),
+  (∀ P ∈ Φ, ¬HadwigerNelson.Rigidity.IsRamified P) →
+    ∀ (m : ℕ)
+      (s :
+        (P : HadwigerNelson.SpectralChain.StablePrime F) →
+          P ∈ Φ → NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P ^ m),
+      (∀ (P : HadwigerNelson.SpectralChain.StablePrime F) (hP : P ∈ Φ),
+          s P hP ∈ HadwigerNelson.Rigidity.Counting.normOneQ P m) →
+        ∃ x,
+          ∃ (hx : x ∈ HadwigerNelson.Rigidity.Counting.normOneL F),
+            ∀ (P : HadwigerNelson.SpectralChain.StablePrime F) (hP : P ∈ Φ), (P.residue m) ⟨x, ⋯⟩ = s P hP
+@HadwigerNelson.Rigidity.Counting.resR : {F : Subfield ℝ} →
+  [NumberField ↥F] →
+    (P : HadwigerNelson.SpectralChain.StablePrime F) →
+      (m : ℕ) →
+        ↥(HadwigerNelson.SpectralChain.unitRing F) →+*
+          NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P ^ m
+@HadwigerNelson.Rigidity.Counting.normOneQ : {F : Subfield ℝ} →
+  (P : HadwigerNelson.SpectralChain.StablePrime F) →
+    (m : ℕ) → Set (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P ^ m)
+@HadwigerNelson.UpperHalf.isUnit_mk_pow : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (P : HadwigerNelson.SpectralChain.StablePrime F) (m : ℕ) (y : ↥P.heightOne.asIdeal.primeCompl),
+  IsUnit ((Ideal.Quotient.mk (P.P ^ m)) ↑y)
+@HadwigerNelson.UpperHalf.localRing_ne_top : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (P : HadwigerNelson.SpectralChain.StablePrime F), P.localRing ≠ ⊤
+@HadwigerNelson.Arith.IsUsablePrime : {F : Subfield ℝ} → Ideal (NumberField.RingOfIntegers ↥F) → Prop
+data/fs131/kru1/probes/Names.lean:25:8: error(lean.unknownIdentifier): Unknown identifier `HadwigerNelson.Chain.unitDistance`
+@HadwigerNelson.UnitRing.unit_mem_unitRingOver : ∀ {F : Subfield ℝ} {z : ℂ},
+  z ∈ HadwigerNelson.planeOver F → ‖z‖ = 1 → z ∈ HadwigerNelson.UnitRing.unitRingOver F
+data/fs131/kru1/probes/Names.lean:27:8: error(lean.unknownIdentifier): Unknown constant `IsUnit.mem_of_subring`
+data/fs131/kru1/probes/Names.lean:28:8: error(lean.unknownIdentifier): Unknown constant `Units.pow_card_eq_one`
+@pow_card_eq_one : ∀ {G : Type u_1} [inst : Group G] [inst_1 : Fintype G] {x : G}, x ^ Fintype.card G = 1
+@Subring.closure_le : ∀ {R : Type u_1} [inst : NonAssocRing R] {s : Set R} {t : Subring R},
+  Subring.closure s ≤ t ↔ s ⊆ ↑t
+@Nat.exists_prime_and_dvd : ∀ {n : ℕ}, n ≠ 1 → ∃ p, Nat.Prime p ∧ p ∣ n
+@Ideal.absNorm_mem : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S] [inst_2 : Module.Free ℤ S]
+  (I : Ideal S), ↑(Ideal.absNorm I) ∈ I
+@RingHom.mem_ker : ∀ {R : Type u_1} {S : Type u_2} {F : Type u_3} [inst : Semiring R] [inst_1 : Semiring S]
+  [inst_2 : FunLike F R S] [rcf : RingHomClass F R S] {f : F} {r : R}, r ∈ RingHom.ker f ↔ f r = 0
+@ZMod.ringHom_surjective : ∀ {n : ℕ} {R : Type u_1} [inst : NonAssocRing R] (f : R →+* ZMod n), Function.Surjective ⇑f
+@Pi.isUnit_iff : ∀ {ι : Type u_1} {M : ι → Type u_2} [inst : (i : ι) → Monoid (M i)] {x : (i : ι) → M i},
+  IsUnit x ↔ ∀ (i : ι), IsUnit (x i)
+data/fs131/kru1/probes/Names.lean:36:8: error(lean.unknownIdentifier): Unknown constant `IsUnit.pi`
+@SimpleGraph.chromaticNumber_le_card : ∀ {V : Type u_1} {G : SimpleGraph V} [inst : Fintype V],
+  G.chromaticNumber ≤ ↑(Fintype.card V)
+HadwigerNelson.SpectralChain.localBound : Subfield ℝ → ℕ∞
