@@ -350,3 +350,143 @@ generation (plan § 3.5); anything at `k ≠ 3` but item 5; density at the stand
 `ℚ(√167)`) — row 119's kernel theorem holds `χ(ℚ(√167)²) ≥ 4` by its own route; "with no arithmetic of the lattice" is the row's
 reading, not a statement; **prior art: not yet searched** (inventory item 1000; the plan's § 3.6 lists the questions), so nothing
 here is worded as new.
+
+## Drafts for the front page
+
+*Stage 5 — SAVED.*
+
+*Each draft names its slot: the file, the section, and the words it replaces or follows. Every quoted slot text was checked by
+script to occur exactly once in its file in this tree (`main` merged at `c03b81e5e`; `tools/fs131_ict3_slots.py`,
+`data/fs131/ict3/slots.out`, with its plant). Counts are this job's gate's (`data/fs131/ict3/gate/`, on `810e18698`, stage 3); the coordinator rewrites the branch's history
+before the merge, so `810e18698` and `c03b81e5e` will have new values.
+Keryx files; this job edits none of these files. The prior-art search the plan's § 3.6 asks for has not been run (inventory item
+1000): no draft words the widening as new, and "prior art not yet searched" stands where a novelty line would go.*
+
+### D1 — `CLAUDE.md` § Trust ledger, the audit's sentence
+
+**Slot:** "the current audit reads 10804 clean and 5 declared purchases, and 83 imported (and 574 axiom-free; 11,466 records at
+FS131-IQP3, the p-adic plane, 2026-10-16)" → "the current audit reads 10885 clean and 5 declared purchases, and 83 imported (and
+574 axiom-free; 11,547 records at FS131-ICT3, three colours on abelian Cayley graphs, 2026-10-16)". Nothing else in the
+paragraph moves: the landing declares no import, and each of its 81 public records is on the standard three.
+
+### D2 — `CLAUDE.md` § Trust ledger, the assumptions sentence
+
+No change: the step reads `axioms=3 rests=105 named=19 inline=14 outside=7 ours=21 open=5 takes=109 mentions=2`, as recorded.
+
+### D3 — `CLAUDE.md` § The gate, the vacuity counts
+
+**Slot:** "`declarations=22431 refutations-skipped=243 sites=1458`, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1415
+unknown=2`." → "`declarations=22519 refutations-skipped=243 sites=1465`, `vacuous=0 stale=0 declared=3 witnessed=40
+generic=1420 unknown=2`." (`scripts/vacuity-baseline.txt`'s header holds the same on the branch.)
+
+### D4 — `CLAUDE.md` § Frontier, the "Last filed" line
+
+**Slot:** from "Last filed: **the p-adic plane** (FS131-KPA1, FS131-IQP1, FS131-IQP3, 2026-10-16:" through "before it, **the
+collapse** (FS131-KCL1, FS131-ICO1, FS131-ICO2) and every earlier filing, newest first" → "Last filed: **three colours on abelian
+Cayley graphs** (FS131-KTC1, FS131-ICT1, FS131-ICT2, FS131-ICT3, 2026-10-16: three `CayleyThree/` modules through the gate on
+`810e18698` — row 79's criterion, its periodic form, density and `P = F` at three colours, in a wider class than the row: every
+abelian group and every step set without `0` for the criterion, no torsion-freeness and no symmetry for the rest; stated in
+`plans/KERNEL-HOLDS.md`; no value of `χ(ℝ²)` moved); before it, **the p-adic plane** (FS131-KPA1, FS131-IQP1, FS131-IQP3),
+**the collapse** (FS131-KCL1, FS131-ICO1, FS131-ICO2) and every earlier filing, newest first" — the p-adic plane's text going to
+`plans/FILINGS.md` as the filings' rule has it.
+
+### D5 — `CLAUDE.md` § Where the problem stands, the summary of what the kernel holds
+
+**Slot: after** "the p-adic plane, the posers' question on the Borel chromatic number of `ℚ_p²` answered no and its values at 3,
+7, 11, 19 and 23 (row 75);" **insert** " three colours on abelian Cayley graphs — 3-colourable exactly when a character puts
+every step in `[1/3, 2/3]`, periodically so over a finitely generated group with finitely many steps, periodic colourings
+dense, so `P = F` at three colours (row 79);".
+
+### D6 — `plans/KERNEL-HOLDS.md`, the clause
+
+**Slot: after** "the lower bound and the values: prior art not found in print (FS66-T7's search); the kernel proof is this
+project's;" (the p-adic plane's clause), **before** "**Theorems A and B**", **insert**:
+
+> **three colours on abelian Cayley graphs** (FS-131, FS131-ICT3; row 79): for every abelian group `A` and every set of steps
+> `S ∌ 0`, `addCayley S` is 3-colourable exactly when some character `θ : A → ℝ/ℤ` puts every step in `[1/3, 2/3]`
+> (`CayleyThree.colorable_three_iff_bandSet_nonempty`: the ⟹ FS131-LJ1's `ThreeColourCharacter.bandSet_three_nonempty_of_proper`,
+> the ⟸ the circular colouring `x ↦ ⌊3·{θ(x)}⌋`); for `A` finitely generated and `S` finite, exactly when some 3-colouring is
+> periodic, its period group of finite index (`CayleyThree.colorable_three_iff_exists_isPeriodic`; finite generation is needed:
+> `colorable_three_rat` and `not_isPeriodic_rat`, over `ℚ` with the step `1`); for `S` finite and generating, every 3-colouring
+> agrees on each finite set with a periodic one and is a limit of periodic ones (`exists_isPeriodic_eqOn`,
+> `coloring_mem_closure_isPeriodic`), so a difference every periodic 3-colouring identifies is identified by all, `P = F`
+> (`periodicForcedSubgroup_three_eq_forcedSubgroup`; `Kempe`'s inheritance question at three colours,
+> `inheritanceQuestion_three`); at every `k`, the forced group has finite index exactly when there are finitely many proper
+> `k`-colourings (`forcedSubgroup_finiteIndex_iff_finite`); and if every band character of a generating family has order 3,
+> every 3-colouring proper along it is affine (`exists_affine_of_forall_three_nsmul`); row 79's class (finitely generated,
+> torsion-free, `S = −S` finite generating) as two instances, `…_of_fg_torsionFree`. All on the standard three axioms, with no
+> import. Not claimed: the dichotomy's clause on the cells of `Θ₃`; density without generation; row 79's instances (ℚ(√11)'s
+> `Λ₁₀`, the `Θ` certificates, ℚ(√167): row 119 is the kernel's own). The question at three colours is `[Ellenberg2018]`'s, and
+> Gibbs's and Mixon's on Polymath16, carried open by `[CGHO2025bg]` §6.2.1 (`CLOSED-QUESTIONS.md` § 2.4, whose prior-art check
+> covers row 79's class); the widening past row 79's class: prior art not yet searched; the derivation FS-73's, the kernel proof
+> this project's;
+
+### D7 — `LEDGER.md` row 79, regraded
+
+**Slot 1:** "The ⟸, the density of periodic colourings and the statement about forced pairs stay [hand]." → "**The ⟸, the
+periodic form, density, `P = F`, the dichotomy's first clause and the rigidity clause are [kernel] since FS131-ICT3** (standard
+three; `Proofs/HadwigerNelson/CayleyThree/`, the gate on `810e18698`), in a wider class than this row states: the criterion for every
+abelian group and every `S ∌ 0` (`CayleyThree.colorable_three_iff_bandSet_nonempty`); the periodic form for `A` finitely
+generated and `S` finite (`colorable_three_iff_exists_isPeriodic`; finite generation is needed: `not_isPeriodic_rat`); density
+and `P = F` for `S` finite and generating, torsion and asymmetric `S` allowed (`exists_isPeriodic_eqOn`,
+`coloring_mem_closure_isPeriodic`, `periodicForcedSubgroup_three_eq_forcedSubgroup`, `inheritanceQuestion_three`); `F` of finite
+index ⟺ finitely many colourings, at every `k` (`forcedSubgroup_finiteIndex_iff_finite`); the rigidity clause
+(`exists_affine_of_forall_three_nsmul`); this row's own class as `colorable_three_iff_of_fg_torsionFree` and
+`exists_isPeriodic_eqOn_of_fg_torsionFree`. The dichotomy's clause on the cells of `Θ₃` stays [hand]. Prior art for the widening
+past this row's class: not yet searched (FS131-KTC1's plan § 3.6)."
+
+**Slot 2, the addresses cell:** after "`tools/fs73v_q11.py`" (its last entry, before "| FS-73 |") add "; `Proofs/HadwigerNelson/CayleyThree/`
+(FS131-KTC1, FS131-ICT1, FS131-ICT2, FS131-ICT3)".
+
+### D8 — `CLOSED-QUESTIONS.md` § 2.4
+
+**Slot:** "**Not kernel-checked** (FS-75)." → "**In the kernel since FS131-ICT3** (`Proofs/HadwigerNelson/CayleyThree/`, on the
+standard three axioms; `LEDGER.md` row 79), in a wider class: the criterion for every abelian group and every step set without
+`0`, the periodic form for finitely generated groups with finitely many steps, density and the equality of the two forced groups
+for every finite generating set, torsion allowed; the clause on the cells of `Θ₃` — the decidable form of Mixon's question —
+stays [hand]."
+
+### D9 — `ROADMAP.md`, the rows table
+
+**Slot:** "| 79 | cert, hand, \"stay [hand\", tools | yes |" → "| 79 | cert, hand, tools | yes |" (the quoted grade phrase is
+gone from the row with D7).
+
+### D10 — `plans/FRONTIER-STUBS.md`, FS-75's row (rank 36)
+
+**Slot: after** "**Minimal instance landed 2026-09-26 (row 119; `plans/FS75-kernel-167.md` §R-close):** `χ(ℚ(√167)²) ≥ 4` in the
+kernel, no finite graph, by T22's ⟹ in winding form and a checker for V2's certificates;" **insert** " **row 79's ⟸, periodic
+form, density and `P = F` landed 2026-10-16 (FS131-ICT3, `CayleyThree/`);**".
+
+### D11 — the Proof Atlas
+
+No node reads row 79 (`data/viz/proof-atlas/facts.json`: no node's source is the row): no grade changes.
+
+### D12 — `README.md` § Results (Keryx's choice)
+
+The section lists planes; row 79 is a statement about abelian Cayley graphs. If Keryx wants it there, a row under a new heading
+"Abelian Cayley graphs":
+
+> | `Cay(A, S)` is 3-colourable exactly when a character `A → ℝ/ℤ` puts every step in `[1/3, 2/3]` (every abelian group, `0 ∉ S`); over a finitely generated group with finitely many steps exactly when it has a periodic 3-colouring; and for a finite generating set the periodic 3-colourings are dense, so `P = F`. | `CayleyThree.colorable_three_iff_bandSet_nonempty`, `…_iff_exists_isPeriodic`, `CayleyThree.exists_isPeriodic_eqOn`, `CayleyThree.periodicForcedSubgroup_three_eq_forcedSubgroup` | std3 | the question is `[Ellenberg2018]`'s (and Polymath16's, carried by `[CGHO2025bg]` §6.2.1); for row 79's class see `CLOSED-QUESTIONS.md` § 2.4; past it, prior art not yet searched. The kernel proof is this project's | 79 |
+
+### D13 — `LEAN.md` § Searching — Lean, candidate lines
+
+- The planner's (plan § 3.8 item 5), its route confirmed by FS131-ICT1's proof, the absence not re-searched here: *"Stiemke-type
+  steps on a lattice cone go through Dickson's lemma (`Pi.wellQuasiOrderedLE`, `WellQuasiOrderedLE.finite_of_isAntichain`):
+  `CayleyThree.exists_le_mul_of_imp_eq_zero` (FS131-KTC1)."*
+- *"A definition's proof field filled after a skeleton stores an auxiliary `<def>._proof_n` constant where the skeleton's `sorry`
+  stood; a DATA comparison that erases proof subterms but reads constants then reports a changed value — erase constants its
+  own dump lists as internal theorems (`tools/fs131_ict2_statements.py`, rule AUXPROOF; `coloringOneTwo`) (FS131-ICT3)."*
+- *"In a check that elaborates a domain inside `forallBoundedTelescope`, a quotation's free identifiers are hygienic and do not
+  name the telescope's variables (`Unknown identifier s✝`): write them `$(mkIdent `s)` (`data/fs131/ict2/lean/ReAdd.lean`)
+  (FS131-ICT3)."*
+- *"`generalize_proofs hc` names a proof written inside a statement's term (`heightWinding (fun a j => by …)`), so a lemma
+  about `heightWinding hc` can be stated and rewritten in the proof (`Fibre`'s spec example along `(1, 1)`) (FS131-ICT3)."*
+- *"A merge of `main` that brings only new modules needs only the root recompiled when the gated build is copied in by checksum
+  (`rsync -a --checksum`, no `--delete`; dry run first): FS131-ICT3, eight modules copied, one rebuilt, 21 m 28 s of walk."*
+- An instance of FS131-IJ1's line (lint sees an unread instance binder the build does not), with its ruling: a class
+  hypothesis a statement keeps for its reader is named with an underscore (`[_hfg : AddGroup.FG A]`), a helper's is dropped
+  (`[Finite κ]`) (inventory item 1026).
+
+### D14 — `plans/GROKKING-INSTANCES.md` / grokkings
+
+None proposed.
