@@ -89,7 +89,11 @@ private def CharBound (P : StablePrime F) (m : ℕ) (κ : ℝ) : Prop :=
     -(κ * hfin.toFinset.card) ≤ (∑ s ∈ hfin.toFinset, ψ s).re
 
 -- FS131-ICM1: the ratio bound at every level (Hoffman, `RatioBound.card_mul_le_of_indep`).
-private theorem ratioAtMost_of_charBound [NumberField F] (P : StablePrime F) {κ : ℝ} (hκ : 0 ≤ κ)
+/-- **Hoffman at every level** (`RatioBound.card_mul_le_of_indep`): if at every level `m ≥ 1` every non-trivial additive
+character of `𝓞 ⧸ P^m` sums over the norm-one elements to real part at least `−κ` times their number (`CharBound P m κ`),
+then every independent set of every level's target holds at most `κ/(1 + κ)` of it. Public since FS131-IFR1 (the
+coordinator's ruling, inventory item 1021), for the density form of the collapse (`Collapse.ratioAtMost_of_thickAt`). -/
+theorem ratioAtMost_of_charBound [NumberField F] (P : StablePrime F) {κ : ℝ} (hκ : 0 ≤ κ)
     (h : ∀ m : ℕ, 1 ≤ m → CharBound P m κ) : RatioAtMost P (κ / (1 + κ)) := by
   classical
   intro m hm s hs

@@ -1,0 +1,17 @@
+#print axioms HadwigerNelson.Collapse.IndepLaw.density_le_notThick
+#print axioms HadwigerNelson.Collapse.exists_triangleFree_ratio_lt
+#print axioms HadwigerNelson.Collapse.finIndepRatio_planeOver_deGrey
+#print axioms HadwigerNelson.Collapse.finIndepRatio_planeOver_eq_iSup_density
+#print axioms HadwigerNelson.Collapse.finIndepRatio_planeOver_eq_localRatio
+#print axioms HadwigerNelson.Collapse.finIndepRatio_planeOver_eq_mOne_of_thick
+#print axioms HadwigerNelson.Collapse.finIndepRatio_planeOver_eq_plane_of_thick
+#print axioms HadwigerNelson.Collapse.finIndepRatio_planeOver_sqrt635087
+#print axioms HadwigerNelson.Collapse.fractionalChromaticNumber_planeOver_deGrey
+#print axioms HadwigerNelson.Collapse.fractionalChromaticNumber_planeOver_eq
+#print axioms HadwigerNelson.Collapse.fractionalChromaticNumber_planeOver_eq_plane_of_thick
+#print axioms HadwigerNelson.Collapse.fractionalChromaticNumber_planeOver_sqrt635087
+#print axioms HadwigerNelson.Collapse.inv_le_localRatio_of_colorable
+#print axioms HadwigerNelson.Collapse.IndepLaw.density_le_localRatio
+#print axioms HadwigerNelson.Collapse.IndepLaw.density_le_max_of_unramified
+#print axioms HadwigerNelson.Collapse.exists_indepLaw_TA
+#print axioms HadwigerNelson.Collapse.integral_condOne_mul_eq_zero

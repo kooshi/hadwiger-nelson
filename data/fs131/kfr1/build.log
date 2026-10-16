@@ -1,0 +1,329 @@
+slot: admitted env: mem 12 GiB (hard cap), cpus 0,1
+==> build: this run's full output: build/gate/build/20261016T154711Z-3906822.log
+==> up-to-date check: exit 3 after 5s (3 means something needs building) — walking the batches
+==> 242 batches of at most 10 modules, capped at 12G
+==> [1/242] 10 modules  15:47:16
+==> [2/242] 10 modules  15:47:17
+==> [3/242] 10 modules  15:47:19
+==> [4/242] 10 modules  15:47:21
+==> [5/242] 8 modules  15:47:23
+==> [6/242] 10 modules  15:47:24
+==> [7/242] 10 modules  15:47:25
+==> [8/242] 10 modules  15:47:26
+==> [9/242] 10 modules  15:47:26
+==> [10/242] 10 modules  15:47:28
+==> [11/242] 10 modules  15:47:29
+==> [12/242] 4 modules  15:47:31
+==> [13/242] 10 modules  15:47:32
+==> [14/242] 10 modules  15:47:34
+==> [15/242] 10 modules  15:47:35
+==> [16/242] 10 modules  15:47:35
+==> [17/242] 10 modules  15:47:36
+==> [18/242] 10 modules  15:47:38
+==> [19/242] 10 modules  15:47:39
+==> [20/242] 10 modules  15:47:40
+==> [21/242] 10 modules  15:47:41
+==> [22/242] 10 modules  15:47:42
+==> [23/242] 10 modules  15:47:43
+==> [24/242] 10 modules  15:47:44
+==> [25/242] 10 modules  15:47:44
+==> [26/242] 10 modules  15:47:45
+==> [27/242] 10 modules  15:47:46
+==> [28/242] 10 modules  15:47:47
+==> [29/242] 1 modules  15:47:48
+==> [30/242] 10 modules  15:47:49
+==> [31/242] 10 modules  15:47:51
+==> [32/242] 10 modules  15:47:52
+==> [33/242] 2 modules  15:47:54
+==> [34/242] 10 modules  15:47:55
+==> [35/242] 10 modules  15:47:57
+==> [36/242] 10 modules  15:47:58
+==> [37/242] 8 modules  15:48:00
+==> [38/242] 10 modules  15:48:02
+==> [39/242] 10 modules  15:48:04
+==> [40/242] 10 modules  15:48:05
+==> [41/242] 5 modules  15:48:07
+==> [42/242] 10 modules  15:48:09
+==> [43/242] 10 modules  15:48:11
+==> [44/242] 10 modules  15:48:12
+==> [45/242] 10 modules  15:48:14
+==> [46/242] 10 modules  15:48:16
+==> [47/242] 10 modules  15:48:17
+==> [48/242] 10 modules  15:48:18
+==> [49/242] 10 modules  15:48:20
+==> [50/242] 10 modules  15:48:21
+==> [51/242] 10 modules  15:48:23
+==> [52/242] 10 modules  15:48:24
+==> [53/242] 10 modules  15:48:26
+==> [54/242] 10 modules  15:48:27
+==> [55/242] 10 modules  15:48:29
+==> [56/242] 10 modules  15:48:30
+==> [57/242] 10 modules  15:48:31
+==> [58/242] 10 modules  15:48:33
+==> [59/242] 10 modules  15:48:34
+==> [60/242] 10 modules  15:48:36
+==> [61/242] 10 modules  15:48:37
+==> [62/242] 10 modules  15:48:39
+==> [63/242] 8 modules  15:48:40
+==> [64/242] 10 modules  15:48:42
+==> [65/242] 10 modules  15:48:44
+==> [66/242] 10 modules  15:48:46
+==> [67/242] 10 modules  15:48:48
+==> [68/242] 10 modules  15:48:50
+==> [69/242] 10 modules  15:48:52
+==> [70/242] 10 modules  15:48:54
+==> [71/242] 10 modules  15:48:56
+==> [72/242] 10 modules  15:48:58
+==> [73/242] 10 modules  15:49:00
+==> [74/242] 10 modules  15:49:02
+==> [75/242] 10 modules  15:49:04
+==> [76/242] 10 modules  15:49:06
+==> [77/242] 10 modules  15:49:08
+==> [78/242] 10 modules  15:49:10
+==> [79/242] 10 modules  15:49:12
+==> [80/242] 10 modules  15:49:15
+==> [81/242] 10 modules  15:49:17
+==> [82/242] 10 modules  15:49:19
+==> [83/242] 10 modules  15:49:21
+==> [84/242] 10 modules  15:49:23
+==> [85/242] 10 modules  15:49:25
+==> [86/242] 10 modules  15:49:27
+==> [87/242] 10 modules  15:49:29
+==> [88/242] 10 modules  15:49:31
+==> [89/242] 10 modules  15:49:33
+==> [90/242] 10 modules  15:49:35
+==> [91/242] 10 modules  15:49:37
+==> [92/242] 10 modules  15:49:39
+==> [93/242] 10 modules  15:49:41
+==> [94/242] 10 modules  15:49:43
+==> [95/242] 10 modules  15:49:45
+==> [96/242] 10 modules  15:49:46
+==> [97/242] 10 modules  15:49:48
+==> [98/242] 10 modules  15:49:50
+==> [99/242] 10 modules  15:49:52
+==> [100/242] 10 modules  15:49:54
+==> [101/242] 10 modules  15:49:56
+==> [102/242] 10 modules  15:49:58
+==> [103/242] 10 modules  15:50:00
+==> [104/242] 10 modules  15:50:02
+==> [105/242] 10 modules  15:50:05
+==> [106/242] 10 modules  15:50:07
+==> [107/242] 10 modules  15:50:09
+==> [108/242] 10 modules  15:50:11
+==> [109/242] 10 modules  15:50:13
+==> [110/242] 10 modules  15:50:15
+==> [111/242] 10 modules  15:50:17
+==> [112/242] 10 modules  15:50:19
+==> [113/242] 10 modules  15:50:20
+==> [114/242] 10 modules  15:50:22
+==> [115/242] 10 modules  15:50:24
+==> [116/242] 10 modules  15:50:26
+==> [117/242] 10 modules  15:50:28
+==> [118/242] 10 modules  15:50:30
+==> [119/242] 10 modules  15:50:31
+==> [120/242] 10 modules  15:50:33
+==> [121/242] 10 modules  15:50:35
+==> [122/242] 10 modules  15:50:36
+==> [123/242] 10 modules  15:50:38
+==> [124/242] 10 modules  15:50:40
+==> [125/242] 10 modules  15:50:42
+==> [126/242] 10 modules  15:50:44
+==> [127/242] 10 modules  15:50:46
+==> [128/242] 10 modules  15:50:48
+==> [129/242] 10 modules  15:50:50
+==> [130/242] 10 modules  15:50:52
+==> [131/242] 10 modules  15:50:54
+==> [132/242] 10 modules  15:50:56
+==> [133/242] 10 modules  15:50:58
+==> [134/242] 10 modules  15:51:00
+==> [135/242] 10 modules  15:51:02
+==> [136/242] 10 modules  15:51:04
+==> [137/242] 10 modules  15:51:06
+==> [138/242] 10 modules  15:51:08
+==> [139/242] 10 modules  15:51:10
+==> [140/242] 10 modules  15:51:12
+==> [141/242] 10 modules  15:51:14
+==> [142/242] 10 modules  15:51:16
+==> [143/242] 10 modules  15:51:18
+==> [144/242] 10 modules  15:51:20
+==> [145/242] 10 modules  15:51:22
+==> [146/242] 10 modules  15:51:24
+==> [147/242] 10 modules  15:51:26
+==> [148/242] 10 modules  15:51:28
+==> [149/242] 10 modules  15:51:30
+==> [150/242] 10 modules  15:51:31
+==> [151/242] 10 modules  15:51:33
+==> [152/242] 10 modules  15:51:35
+==> [153/242] 10 modules  15:51:37
+==> [154/242] 10 modules  15:51:39
+==> [155/242] 10 modules  15:51:41
+==> [156/242] 10 modules  15:51:43
+==> [157/242] 10 modules  15:51:45
+==> [158/242] 10 modules  15:51:46
+==> [159/242] 10 modules  15:51:48
+==> [160/242] 10 modules  15:51:50
+==> [161/242] 10 modules  15:51:52
+==> [162/242] 10 modules  15:51:54
+==> [163/242] 10 modules  15:51:56
+==> [164/242] 10 modules  15:51:58
+==> [165/242] 10 modules  15:52:00
+==> [166/242] 10 modules  15:52:01
+==> [167/242] 10 modules  15:52:03
+==> [168/242] 10 modules  15:52:05
+==> [169/242] 10 modules  15:52:07
+==> [170/242] 10 modules  15:52:10
+==> [171/242] 10 modules  15:52:12
+==> [172/242] 10 modules  15:52:14
+==> [173/242] 10 modules  15:52:16
+==> [174/242] 10 modules  15:52:18
+==> [175/242] 10 modules  15:52:20
+==> [176/242] 10 modules  15:52:22
+==> [177/242] 10 modules  15:52:24
+==> [178/242] 10 modules  15:52:26
+==> [179/242] 10 modules  15:52:28
+==> [180/242] 10 modules  15:52:30
+==> [181/242] 10 modules  15:52:32
+==> [182/242] 10 modules  15:52:34
+==> [183/242] 10 modules  15:52:36
+==> [184/242] 10 modules  15:52:38
+==> [185/242] 10 modules  15:52:40
+==> [186/242] 10 modules  15:52:42
+==> [187/242] 10 modules  15:52:44
+==> [188/242] 10 modules  15:52:47
+==> [189/242] 10 modules  15:52:48
+==> [190/242] 4 modules  15:52:50
+==> [191/242] 10 modules  15:52:52
+==> [192/242] 10 modules  15:52:55
+==> [193/242] 10 modules  15:52:57
+==> [194/242] 10 modules  15:52:59
+==> [195/242] 10 modules  15:53:02
+==> [196/242] 2 modules  15:53:03
+==> [197/242] 10 modules  15:53:05
+==> [198/242] 10 modules  15:53:09
+==> [199/242] 3 modules  15:53:10
+==> [200/242] 10 modules  15:53:12
+==> [201/242] 10 modules  15:53:15
+==> [202/242] 10 modules  15:53:17
+==> [203/242] 9 modules  15:53:21
+==> [204/242] 10 modules  15:53:23
+==> [205/242] 10 modules  15:53:27
+==> [206/242] 1 modules  15:53:28
+==> [207/242] 10 modules  15:53:30
+==> [208/242] 8 modules  15:53:34
+==> [209/242] 10 modules  15:53:36
+==> [210/242] 5 modules  15:53:40
+==> [211/242] 10 modules  15:53:43
+==> [212/242] 10 modules  15:53:47
+==> [213/242] 5 modules  15:53:51
+==> [214/242] 10 modules  15:53:54
+==> [215/242] 10 modules  15:53:58
+    ⚠ [5629/5629] Built Proofs.HadwigerNelson.Plane.TriangularPacking (2.1s)
+    warning: Proofs/HadwigerNelson/Plane/TriangularPacking.lean:34:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/TriangularPacking.lean:37:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/TriangularPacking.lean:41:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/TriangularPacking.lean:45:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/TriangularPacking.lean:49:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/TriangularPacking.lean:53:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/TriangularPacking.lean:58:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/TriangularPacking.lean:62:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/TriangularPacking.lean:66:8: declaration uses `sorry`
+    rebuilt: Plane.TriangularPacking (2.1s)
+==> [216/242] 10 modules  15:54:04
+==> [217/242] 7 modules  15:54:08
+==> [218/242] 10 modules  15:54:10
+==> [219/242] 4 modules  15:54:14
+==> [220/242] 10 modules  15:54:16
+==> [221/242] 1 modules  15:54:20
+==> [222/242] 8 modules  15:54:22
+==> [223/242] 8 modules  15:54:25
+==> [224/242] 5 modules  15:54:27
+==> [225/242] 2 modules  15:54:30
+==> [226/242] 2 modules  15:54:32
+==> [227/242] 2 modules  15:54:34
+==> [228/242] 1 modules  15:54:37
+==> [229/242] 1 modules  15:54:37
+==> [230/242] 1 modules  15:54:38
+==> [231/242] 1 modules  15:54:39
+==> [232/242] 2 modules  15:54:42
+==> [233/242] 1 modules  15:54:44
+==> [234/242] 2 modules  15:54:47
+==> [235/242] 3 modules  15:54:49
+==> [236/242] 3 modules  15:54:52
+==> [237/242] 2 modules  15:54:54
+==> [238/242] 3 modules  15:54:57
+==> [239/242] 1 modules  15:55:01
+    ⚠ [5870/5870] Built Proofs.HadwigerNelson.Collapse.Density.Defs (2.9s)
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:56:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:62:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:66:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:70:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:74:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:79:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:84:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:89:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:95:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:100:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:110:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:116:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:121:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:127:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:132:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:137:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:146:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:150:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:181:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:185:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:189:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:202:8: declaration uses `sorry`
+    rebuilt: Collapse.Density.Defs (2.9s)
+==> [240/242] 1 modules  15:55:08
+    ⚠ [5871/5871] Built Proofs.HadwigerNelson.Collapse.Density.Upper (2.9s)
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:48:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:55:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:61:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:66:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:76:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:81:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:86:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:101:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:108:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:114:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:123:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:131:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:140:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:154:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:160:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:167:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:178:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:186:8: declaration uses `sorry`
+    rebuilt: Collapse.Density.Upper (2.9s)
+==> [241/242] 1 modules  15:55:15
+    ⚠ [5873/5873] Built Proofs.HadwigerNelson.Collapse.Density.Headline (2.7s)
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:49:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:54:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:62:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:70:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:77:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:83:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:88:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:95:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:101:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:106:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:112:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:116:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:126:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:132:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:138:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:144:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:150:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:155:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:172:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:187:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:192:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:197:8: declaration uses `sorry`
+    rebuilt: Collapse.Density.Headline (2.7s)
+==> [242/242] 1 modules  15:55:21
+    rebuilt: Proofs (2.3s)
+==> build: OK — 242 of 242 batches, 5 module(s) rebuilt, 4 module(s) with warnings, 8m12s
+    full output: build/gate/build/20261016T154711Z-3906822.log
+build exit=0

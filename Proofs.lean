@@ -610,6 +610,10 @@ import Proofs.HadwigerNelson.Collapse.Slice
 import Proofs.HadwigerNelson.Collapse.Mixing
 import Proofs.HadwigerNelson.Collapse.Selection
 import Proofs.HadwigerNelson.Collapse.Headline
+import Proofs.HadwigerNelson.Collapse.Density.Defs
+import Proofs.HadwigerNelson.Collapse.Density.Upper
+import Proofs.HadwigerNelson.Plane.TriangularPacking
+import Proofs.HadwigerNelson.Collapse.Density.Headline
 import Proofs.HadwigerNelson.PadicPlane.Basic
 import Proofs.HadwigerNelson.PadicPlane.Measure
 import Proofs.HadwigerNelson.PadicPlane.Upper

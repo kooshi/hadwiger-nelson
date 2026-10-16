@@ -1,0 +1,11 @@
+MODULE Proofs.HadwigerNelson.Collapse.Density.Defs: CLEAN 41
+MODULE Proofs.HadwigerNelson.Collapse.Density.Headline: CLEAN 6, kloosterman_bound+no_proper_five_coloring+positive_entropy_rigidity 1, kloosterman_bound+positive_entropy_rigidity 6, positive_entropy_rigidity 7
+MODULE Proofs.HadwigerNelson.Collapse.Density.Upper: CLEAN 21, positive_entropy_rigidity 4
+MODULE Proofs.HadwigerNelson.Collapse.Headline: CLEAN 16, kloosterman_bound 3, kloosterman_bound+no_proper_five_coloring+positive_entropy_rigidity 3, kloosterman_bound+positive_entropy_rigidity 3, positive_entropy_rigidity 2
+MODULE Proofs.HadwigerNelson.Plane.TriangularPacking: CLEAN 12
+MODULE Proofs.HadwigerNelson.Rigidity.ClassRatio: CLEAN 6, kloosterman_bound 6
+records: 137 public (31 already filed), 167 private (not audited)
+BLOCK np5: 3
+BLOCK pe: 17
+BLOCK kb: 1
+BLOCK clean: 85
