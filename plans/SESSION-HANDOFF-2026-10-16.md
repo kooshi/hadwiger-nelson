@@ -43,7 +43,7 @@ Clerk's privacy check of `origin/main..main`, then a fast-forward push (standing
 ## 3. Running
 
 **Landed today** (each filed): the p-adic plane (item 1032), the three-colour criterion (item 1043), the five-colour fields
-(item 1055; front files by FS131-FCS1, the README by me, item 1058). **Pushed** through `6730b314e` (item 1042); everything
+(item 1055; front files by FS131-FCS1, the README by me, item 1058). **Pushed** through `351645653` (item 1062); everything
 after it waits for the next privacy check (a Clerk, `mk-fs131-pv2.py` as template). Landings serialize: each edits the same
 gate inputs, so a branch gated before another landing re-merges `main` and re-gates (items 1047–1048).
 
