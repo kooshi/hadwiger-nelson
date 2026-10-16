@@ -7,7 +7,22 @@ changed). Started 2026-10-16 14:38 UTC. No fence (`plans/FS131-close-inventory.m
 
 ## Theorems this phase proved
 
-None yet (stage 1).
+Kernel-checked by the build on branch `fs131-ktc1` at `e71acf2a9` (`data/fs131/ict1/build1.log`: OK, 4 modules rebuilt, 0 with
+warnings, no `sorry`); axioms by `#print axioms` (a probe, `data/fs131/ict1/probes/HeadAxioms.lean`; **the gate is not yet run**,
+so none of these is filed as landed). Each on exactly `[propext, Classical.choice, Quot.sound]`:
+- `CayleyThree.colorable_three_iff_bandSet_nonempty` — every abelian group, `0 ∉ S`: 3-colourable ⟺ a band character exists.
+- `CayleyThree.exists_torsion_mem_bandSet` — `A` f.g., `S` finite: a nonempty band set has a point of finite order.
+- `CayleyThree.finiteIndex_ker_of_nsmul_eq_zero` — a character of finite order has a kernel of finite index.
+- `CayleyThree.colorable_three_iff_exists_isPeriodic` — `A` f.g., `S` finite: 3-colourable ⟺ periodically 3-colourable.
+- `CayleyThree.colorable_three_rat`, `CayleyThree.not_isPeriodic_rat` — the control at `ℚ`, `S = {1}`.
+- `CayleyThree.colorable_three_iff_of_fg_torsionFree` — row 79's class, the two forms.
+- `CayleyThree.exists_affine_of_forall_three_nsmul` — band characters all of order 3 ⟹ every colouring affine.
+- `CayleyThree.exists_isPeriodic_eqOn`, `CayleyThree.coloring_mem_closure_isPeriodic` — density, `S` finite generating.
+- `CayleyThree.periodicForcedSubgroup_three_eq_forcedSubgroup`, `CayleyThree.inheritanceQuestion_three` — `P = F` at 3.
+- `CayleyThree.forcedSubgroup_finiteIndex_iff_finite` — every `k`, every `S`: `F` of finite index ⟺ finitely many colourings.
+- `CayleyThree.exists_isPeriodic_eqOn_of_fg_torsionFree` — row 79's class, density.
+- `CayleyThree.mcshane_model` — the McShane layer's model, in the ruled form (item 1003).
+Every other leaf of the three modules (the 53 in all, and the helpers each stage names) is in the same build.
 
 ## Stage 1 — SAVED: the readback
 
@@ -177,3 +192,12 @@ new public constants: `Circular.rep01_coe`; `Fibre.relMap_single`, `relMap_eq_ws
 `l1_add_le`, `l1_sub_le`, `abs_le_l1`, `l1_single_one`, `even_l1_sub_sum`), the vacuity scan's new sites with each structure's
 inhabitant (plan § 3.7's list), `#print axioms` of every head statement; stage 8, the read-aloud against row 79 and the drafts
 (the planner's § 3.8, brought to what is proved).
+
+## Stage 6 — SAVED: the build
+
+`SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 python3 scripts/slot.py --mem 8 --cpus 5 -- env MEMMAX=8G BATCH=3 ./scripts/build.sh`,
+2026-10-16 15:19–15:40 UTC, at `e71acf2a9`: **exit 0, "OK — 735 of 735 batches, 4 module(s) rebuilt, 0 module(s) with warnings,
+20m50s"** (`data/fs131/ict1/build1.log`; full output `data/fs131/ict1/build1.full.log`, `grep -c sorry` = 0; `Circular` 5.6 s,
+`Fibre` 10 s, `Density` 9.0 s, the root 4.4 s). Sources checked unchanged across the build (`build1.sources.md5`, `md5sum -c`
+OK). `#print axioms` of the fifteen head and model statements (probe, not the gate): each exactly the standard three.
+Not run: `lake lint`, the merge of `main`, the gate. That is what is left (stage 5's hand-back paragraph lists it in order).

@@ -1,0 +1,31 @@
+slot: admitted lake: mem 6 GiB (hard cap), cpus 0,1
+'HadwigerNelson.CayleyThree.colorable_three_iff_bandSet_nonempty' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.CayleyThree.finiteIndex_ker_of_nsmul_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.CayleyThree.exists_torsion_mem_bandSet' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.CayleyThree.colorable_three_iff_exists_isPeriodic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.CayleyThree.colorable_three_rat' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.CayleyThree.not_isPeriodic_rat' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.CayleyThree.colorable_three_iff_of_fg_torsionFree' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.CayleyThree.exists_affine_of_forall_three_nsmul' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.CayleyThree.exists_isPeriodic_eqOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.CayleyThree.coloring_mem_closure_isPeriodic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.CayleyThree.periodicForcedSubgroup_three_eq_forcedSubgroup' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.CayleyThree.inheritanceQuestion_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.CayleyThree.forcedSubgroup_finiteIndex_iff_finite' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.CayleyThree.exists_isPeriodic_eqOn_of_fg_torsionFree' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.CayleyThree.mcshane_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+exit 0
