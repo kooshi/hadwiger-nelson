@@ -1,0 +1,73 @@
+slot: admitted lake: mem 6 GiB (hard cap), cpus 7
+@minpoly.monic : ∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : Ring B] [inst_2 : Algebra A B] {x : B},
+  IsIntegral A x → (minpoly A x).Monic
+@Fintype.exists_ne_map_eq_of_card_lt : ∀ {α : Type u_1} {β : Type u_2} [inst : Fintype α] [inst_1 : Fintype β]
+  (f : α → β), Fintype.card β < Fintype.card α → ∃ x y, x ≠ y ∧ f x = f y
+@Nat.exists_eq_two_pow_mul_odd : ∀ {n : ℕ}, n ≠ 0 → ∃ k m, Odd m ∧ n = 2 ^ k * m
+@induction_on_primes : ∀ {motive : ℕ → Prop},
+  motive 0 → motive 1 → (∀ (p a : ℕ), Nat.Prime p → motive a → motive (p * a)) → ∀ (n : ℕ), motive n
+@Nat.recOnMul : {motive : ℕ → Sort u_1} →
+  motive 0 →
+    motive 1 →
+      ((p : ℕ) → Nat.Prime p → motive p) → ((a b : ℕ) → motive a → motive b → motive (a * b)) → (a : ℕ) → motive a
+ZMod.intCast_zmod_eq_zero_iff_dvd : ∀ (a : ℤ) (b : ℕ), ↑a = 0 ↔ ↑b ∣ a
+@Polynomial.natDegree_scaleRoots : ∀ {R : Type u_1} [inst : Semiring R] (p : Polynomial R) (s : R),
+  (p.scaleRoots s).natDegree = p.natDegree
+@RingHom.ker_isMaximal_of_surjective : ∀ {R : Type u_1} {K : Type u_2} {F : Type u_3} [inst : Ring R]
+  [inst_1 : DivisionRing K] [inst_2 : FunLike F R K] [inst_3 : RingHomClass F R K] (f : F),
+  Function.Surjective ⇑f → (RingHom.ker f).IsMaximal
+ZMod.card : ∀ (n : ℕ) [inst : Fintype (ZMod n)], Fintype.card (ZMod n) = n
+@SimpleGraph.Adj.reachable : ∀ {V : Type u_1} {G : SimpleGraph V} {u v : V}, G.Adj u v → G.Reachable u v
+@SimpleGraph.Reachable.trans : ∀ {V : Type u_1} {G : SimpleGraph V} {u v w : V},
+  G.Reachable u v → G.Reachable v w → G.Reachable u w
+@Polynomial.aeval_algHom_apply : ∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommSemiring R]
+  [inst_1 : Semiring A] [inst_2 : Semiring B] [inst_3 : Algebra R A] [inst_4 : Algebra R B] {F : Type u_4}
+  [inst_5 : FunLike F A B] [AlgHomClass F R A B] (f : F) (x : A) (p : Polynomial R),
+  (Polynomial.aeval (f x)) p = f ((Polynomial.aeval x) p)
+@Polynomial.eval_intCast_map : ∀ {R : Type u_1} {S : Type u_2} [inst : Ring R] [inst_1 : Ring S] (f : R →+* S)
+  (p : Polynomial R) (i : ℤ), Polynomial.eval (↑i) (Polynomial.map f p) = f (Polynomial.eval (↑i) p)
+@Ideal.absNorm_dvd_absNorm_of_le : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S]
+  [inst_2 : Module.Free ℤ S] {I J : Ideal S}, J ≤ I → Ideal.absNorm I ∣ Ideal.absNorm J
+@Polynomial.derivative_map : ∀ {R : Type u_1} {S : Type u_2} [inst : Semiring R] [inst_1 : Semiring S]
+  (p : Polynomial R) (f : R →+* S),
+  Polynomial.derivative (Polynomial.map f p) = Polynomial.map f (Polynomial.derivative p)
+@Polynomial.Monic.natDegree_map : ∀ {R : Type u_1} {S : Type u_2} [inst : Semiring R] [inst_1 : Semiring S]
+  [Nontrivial S] {P : Polynomial R}, P.Monic → ∀ (f : R →+* S), (Polynomial.map f P).natDegree = P.natDegree
+@Int.floor_le : ∀ {α : Type u_1} [inst : Ring α] [inst_1 : LinearOrder α] [inst_2 : FloorRing α] (a : α), ↑⌊a⌋ ≤ a
+@Int.lt_floor_add_one : ∀ {R : Type u_1} [inst : Ring R] [inst_1 : LinearOrder R] [inst_2 : FloorRing R] (a : R),
+  a < ↑⌊a⌋ + 1
+@IsDedekindDomain.exists_forall_sub_mem_ideal : ∀ {R : Type u_1} [inst : CommRing R] [IsDedekindDomain R] {ι : Type u_2}
+  {s : Finset ι} (P : ι → Ideal R) (e : ι → ℕ),
+  (∀ i ∈ s, Prime (P i)) →
+    (∀ i ∈ s, ∀ j ∈ s, i ≠ j → P i ≠ P j) → ∀ (x : ↥s → R), ∃ y, ∀ (i : ι) (hi : i ∈ s), y - x ⟨i, hi⟩ ∈ P i ^ e i
+@Subring.closure_induction : ∀ {R : Type u_1} [inst : NonAssocRing R] {s : Set R}
+  {p : (x : R) → x ∈ Subring.closure s → Prop},
+  (∀ (x : R) (hx : x ∈ s), p x ⋯) →
+    p 0 ⋯ →
+      p 1 ⋯ →
+        (∀ (x y : R) (hx : x ∈ Subring.closure s) (hy : y ∈ Subring.closure s), p x hx → p y hy → p (x + y) ⋯) →
+          (∀ (x : R) (hx : x ∈ Subring.closure s), p x hx → p (-x) ⋯) →
+            (∀ (x y : R) (hx : x ∈ Subring.closure s) (hy : y ∈ Subring.closure s), p x hx → p y hy → p (x * y) ⋯) →
+              ∀ {x : R} (hx : x ∈ Subring.closure s), p x hx
+@FiniteField.pow_card : ∀ {K : Type u_1} [inst : GroupWithZero K] [inst_1 : Fintype K] (a : K), a ^ Fintype.card K = a
+GaloisField.card : ∀ (p : ℕ) [h_prime : Fact (Nat.Prime p)] (n : ℕ), n ≠ 0 → Nat.card (GaloisField p n) = p ^ n
+@frobenius_def : ∀ {R : Type u_1} [inst : CommSemiring R] (p : ℕ) [inst_1 : ExpChar R p] (x : R),
+  (frobenius R p) x = x ^ p
+@Polynomial.card_roots' : ∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDomain R] (p : Polynomial R),
+  p.roots.card ≤ p.natDegree
+@Subfield.closure : {K : Type u_1} → [inst : DivisionRing K] → Set K → Subfield K
+@pow_card_eq_one : ∀ {G : Type u_1} [inst : Group G] [inst_1 : Fintype G] {x : G}, x ^ Fintype.card G = 1
+Nat.factorial_pos : ∀ (n : ℕ), 0 < n.factorial
+@Nat.dvd_factorial : ∀ {m n : ℕ}, 0 < m → m ≤ n → m ∣ n.factorial
+data/fs131/kru1/probes/Names2.lean:30:8: error(lean.unknownIdentifier): Unknown constant `Finite.card_le_of_surjective`
+@Polynomial.continuous_aeval : ∀ {R : Type u_1} {A : Type u_2} [inst : CommSemiring R] [inst_1 : Semiring A]
+  [inst_2 : Algebra R A] [inst_3 : TopologicalSpace A] [IsTopologicalSemiring A] (p : Polynomial R),
+  Continuous fun x => (Polynomial.aeval x) p
+data/fs131/kru1/probes/Names2.lean:32:8: error(lean.unknownIdentifier): Unknown constant `Polynomial.Separable.of_minpoly`
+Algebra.IsSeparable.isSeparable : ∀ (F : Type u_1) {K : Type u_2} [inst : CommRing F] [inst_1 : Ring K]
+  [inst_2 : Algebra F K] [Algebra.IsSeparable F K] (x : K), IsSeparable F x
+@minpoly.isIntegrallyClosed_eq_field_fractions : ∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R]
+  [inst_1 : CommRing S] [IsDomain R] [inst_3 : Algebra R S] (K : Type u_3) (L : Type u_4) [inst_4 : Field K]
+  [inst_5 : Algebra R K] [IsFractionRing R K] [inst_7 : CommRing L] [Nontrivial L] [inst_9 : Algebra R L]
+  [inst_10 : Algebra S L] [inst_11 : Algebra K L] [IsScalarTower R K L] [IsScalarTower R S L] [IsIntegrallyClosed R]
+  [IsDomain S] {s : S}, IsIntegral R s → minpoly K ((algebraMap S L) s) = Polynomial.map (algebraMap R K) (minpoly R s)

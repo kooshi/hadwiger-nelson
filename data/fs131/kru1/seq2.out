@@ -1,0 +1,45 @@
+== Rigidity/NormOneGen
+Proofs/HadwigerNelson/Rigidity/NormOneGen.lean:36:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/NormOneGen.lean:41:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/NormOneGen.lean:47:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/NormOneGen.lean:53:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/NormOneGen.lean:60:8: warning: declaration uses `sorry`
+== Rigidity/NormOneGen exit=0
+== Rigidity/UnitRingEq
+Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:53:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:61:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:68:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:75:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:83:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:89:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:95:8: warning: declaration uses `sorry`
+== Rigidity/UnitRingEq exit=0
+== Rigidity/UsablePrime
+Proofs/HadwigerNelson/Rigidity/UsablePrime.lean:44:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/UsablePrime.lean:49:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/UsablePrime.lean:54:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/UsablePrime.lean:60:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/UsablePrime.lean:66:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/UsablePrime.lean:72:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/UsablePrime.lean:78:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/UsablePrime.lean:87:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/UsablePrime.lean:95:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/UsablePrime.lean:100:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/UsablePrime.lean:104:8: warning: declaration uses `sorry`
+== Rigidity/UsablePrime exit=0
+== Rigidity/PlaneComponents
+Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:39:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:44:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:50:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:55:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:61:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:67:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:73:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:79:8: warning: declaration uses `sorry`
+== Rigidity/PlaneComponents exit=0
+== Instances/UnitRingModels
+Proofs/HadwigerNelson/Instances/UnitRingModels.lean:26:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Instances/UnitRingModels.lean:30:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Instances/UnitRingModels.lean:35:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Instances/UnitRingModels.lean:39:8: warning: declaration uses `sorry`
+== Instances/UnitRingModels exit=0

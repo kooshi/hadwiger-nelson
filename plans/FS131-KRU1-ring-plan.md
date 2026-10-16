@@ -248,3 +248,197 @@ Consumers: the publication's comparator surface (statements read as Challenge te
   `F`, and every consumer holds `h`); `nonempty_stablePrime` stays a theorem, not an `instance` — a global `Nonempty` instance
   is speech into every search, and no consumer has asked for `Classical.arbitrary`; the head statements' binders are
   `[NumberField F]` and the scope only, no structure hypothesis the comparator would have to restate.
+
+### 3.4 The skeleton (branch `fs131-kru1`; every leaf `sorry`; nothing of it may reach `main`)
+
+| module | head statements | leaves | statements as written | proof lines, priced |
+|---|---|---|---|---|
+| `Rigidity/NormOneGen` (imports Mathlib only) | `closure_normOne_eq_top` | 6 | 75 | ≈ 125 |
+| `Rigidity/UnitRingEq` (imports `Rigidity/CountResidue`, `Rigidity/NormOneGen`) | `unitRing_eq_stableIntegers`, `exists_two_pow_mul_mem_unitRing`, `exists_eq_add_mul_of_mem_stableIntegers`, `resPi_surjective` | 11 + `resPi` | 150 | ≈ 270 |
+| `Rigidity/UsablePrime` (imports `Rigidity/AdmissiblePrime`, `Arith/PlaceHom`, `Arith/UpperHalf`) | `exists_isUsablePrime`, `nonempty_stablePrime`, `localBound_lt_top` | 11 | 110 | ≈ 345 (≈ 300 if FS131-ICS1 has landed) |
+| `Rigidity/PlaneComponents` (imports `Rigidity/UsablePrime`, `Rigidity/RingScope`) | `infinite_connectedComponent_planeOver`, `not_connected_planeOver`, `connected_or_infinite_planeOver`, `connected_planeOver_iff_isEmpty_stablePrime`, `reachable_iff_sub_mem_unitRingOver` | 9 | 105 | ≈ 195 |
+| `Instances/UnitRingModels` | models: `noRamifiedStableDyadic_sqrt47`, `unitRing_eq_stableIntegers_sqrt47`, `stableIntegers_sqrt47_ne_top`, `exists_stablePrime_three_not_isRamified` | 4 + 1 example | 55 | ≈ 35 |
+| **total** | | **41 leaves** | | **≈ 970** |
+
+The stored type of every declaration was read from the compiled modules (`data/fs131/kru1/probes/Sigs.lean`, `Sigs.out`, before
+the passes; the passes' changes re-elaborated, `data/fs131/kru1/seq5.out`); no section variable is silently dropped or added
+(the two leaves that carry an unread `[NumberField F]` with a `sorry` body — `isUnit_mk_sub_conj` reads it through
+`UpperHalf.isUnit_mk_pow`; `not_isRamified_of_odd_mem` may not — get `omit [NumberField F] in` if the proof's linter asks,
+LEAN.md l. 336). Iteration: `data/fs131/kru1/seq.sh` (`lean -o` into this tree's build directory, new modules only).
+
+### 3.5 The plan per leaf
+
+Names are confirmed by `#check` at the pin (`data/fs131/kru1/probes/Names.out`, `Names2.out`). Order: module 1, 2, 5's first three
+models; module 3, 4, 5's last model. Modules 1–2 and 3–4 are independent and can be built by two implementers.
+
+**Module 1, `Rigidity/NormOneGen`** (abstract; `A` finite commutative, `σ` an involutive ring endomorphism, `δ = θ − σθ` a unit).
+1. `inv_mem_of_finite` (15). `classical`; `Fintype Aˣ` from `Finite A`; `pow_card_eq_one` in `Aˣ` gives
+   `u⁻¹ = u ^ (Fintype.card Aˣ − 1)` (`Fintype.card_pos`); `Units.val_pow_eq_pow_val`, `T.pow_mem`.
+2. `exists_fixed_add_mul` (20). `β = (x − σx)·δ⁻¹`, `α = x − βθ`; `σδ = −δ`, so `σ(δ⁻¹) = −δ⁻¹` (`map_units_inv` or by
+   `IsUnit.mul_right_cancel`); both fixings by `linear_combination`.
+3. `cayley_mul_conj_eq_one` (15). `σv = a + θ` (`map_add`, `ha`, `hσ`), `σ(↑v⁻¹)·σ(↑v) = 1` (`← map_mul`, `Units.inv_mul`,
+   `map_one`); the product is `(a + θ)·σ(↑v⁻¹)·(↑v⁻¹·↑v)`; `linear_combination`.
+4. `mem_closure_normOne_of_fixed` (35). Helper (private, one statement): for `b` fixed, `(b + σθ)·δ⁻¹ ∈ T` — `IsUnit (b + σθ)`
+   is `hfix b` carried by `σ` (`IsUnit.map`, `σb = b`, `hσ`); `t_b = (b + θ)·v⁻¹ ∈ normOne ⊆ T` (item 3,
+   `Subring.subset_closure`); `t_b − 1 = δ·v⁻¹` (ring) is a unit in `T`, its inverse `v·δ⁻¹` in `T` by item 1. At `b = a, 0, 1`
+   and by difference: `a·δ⁻¹`, `δ⁻¹ ∈ T`; item 1 on the unit `δ⁻¹` gives `δ ∈ T`; `a = (a·δ⁻¹)·δ`.
+5. `closure_normOne_eq_top` (20). `eq_top_iff`; `x = α + βθ` (item 2); `α, β ∈ T` (item 4); `θ ∈ T`: from the helper at
+   `b = 0`, `σθ·δ⁻¹ ∈ T`, with `δ ∈ T` (inside item 4's proof — expose it as a second private helper), `θ = σθ·δ⁻¹·δ + δ`.
+6. `exists_model_galoisField` (25). `GaloisField.card 3 2` (`= 9`); `σ(σx) = x⁹ = x` (`frobenius_def`, `← pow_mul`,
+   `FiniteField.pow_card` at `Fintype.card = 9`); a `θ` with `θ³ ≠ θ`: the roots of `X³ − X` are at most 3 (`Polynomial.card_roots'`)
+   and the field has 9 elements; units are the non-zero elements (`isUnit_iff_ne_zero`); `a + θ = 0` with `a³ = a` makes
+   `θ³ = θ`.
+
+**Module 2, `Rigidity/UnitRingEq`.** `R` read in `L` through `ofUnitRing` (`Rigidity/TateModel`) and
+`UnitRing.coe_mem_unitRingOver_iff`.
+1. `resPi_apply` (rfl).
+2. `isUnit_mk_sub_conj` (12). `mk t − σ̄(mk t) = mk (t − conjO t)` (`Ideal.quotientMap_mk`, `map_sub`); `t − conjO t ∉ P`
+   (negate `ht`); `UpperHalf.isUnit_mk_pow P m ⟨_, _⟩`.
+3. `isUnit_add_mk_of_conj_eq` (25). `a = mk b` (`Ideal.Quotient.mk_surjective`); `ha` gives `conjO b − b ∈ P^m`
+   (`Ideal.Quotient.eq`). If `m = 0` the ring is zero (`P^0 = ⊤`): `isUnit_of_subsingleton` after `Ideal.Quotient.subsingleton_iff`.
+   Else by contradiction: not a unit ⇒ `b + t ∈ P` (contrapositive of `UpperHalf.isUnit_mk_pow`), so `conjO (b + t) ∈ P`
+   (`UpperHalf.conjO_mem_iff`), and `t − conjO t = (b + t) − conjO (b + t) + (conjO b − b) ∈ P` (`P^m ≤ P`,
+   `Ideal.pow_le_self`), against `ht`.
+4. `normOne_subset_range_resPi` (30). `Counting.exists_normOneL_residues Φ hΦ m (fun P hP => d ⟨P, hP⟩) (fun P hP => hd ⟨P, hP⟩)`;
+   `Counting.exists_unitRing_of_normOneL`; the residue identification as in `Counting.image_levR_unitVectors`'s last six lines
+   (`toLocal P r = ⟨x, _⟩` by `Subtype.ext`).
+5. `resPi_surjective` (45). `A := ∀ P : Φ, 𝓞 ⧸ P.1.P ^ m`, `Finite A` (`Pi.finite` of
+   `Ideal.finiteQuotientOfFreeOfNeBot _ (pow_ne_zero m P.heightOne.ne_bot)`); `σ_A := RingHom.pi fun P =>
+   (Ideal.quotientMap _ (conjO F) (P.1.le_comap m)).comp (Pi.evalRingHom _ P)`, an involution (`mk_surjective`,
+   `quotientMap_mk` twice, `UpperHalf.conjO_conjO`); `choose t ht` from `¬ IsRamified P` (`push Not`); `θ := fun P => mk (t P)`;
+   `hθ`, `hfix` componentwise by `Pi.isUnit_iff` and items 2–3; `NormOneGen.closure_normOne_eq_top` and
+   `Subring.closure_le.2` item 4 give `(resPi Φ m).range = ⊤` (`RingHom.range_eq_top`).
+6. `natCast_notMem_pow_absNorm` (20). The two `have`s `hdvd`, `hMpow` of `Counting.exists_mem_nsmul_of_resR_eq_zero`
+   (`Ideal.absNorm_dvd_absNorm_of_le`, `map_pow`, `Nat.lt_two_pow_self`), with `2 ≤ absNorm P` (CountResidue's private
+   `two_le_absNorm`, five lines, restated privately here under another name).
+7. `div_natCast_mem_localRing` (25). The valuation-ring dichotomy of the same proof (`ValuationSubring.mem_or_inv_mem`; else
+   `n = x·(x/n)⁻¹` has residue zero, `UpperHalf.residue_algebraMap`, `Ideal.Quotient.eq_zero_iff_mem`).
+8. `exists_eq_add_mul_of_mem_stableIntegers` (60). `m := absNorm (span {n})`; `Φ := (Counting.level F m).filter (n ∈ ·.P)`
+   (`open Classical in`); membership in `level` by `Ideal.absNorm_dvd_absNorm_of_le` and `Nat.le_of_dvd`; target
+   `d P := P.1.residue m ⟨x, (mem_stableIntegers F).1 hx P.1⟩`; item 5 gives `r`; `r′ := ofUnitRing F r ∈ R`; `y := (x − r′)/n`;
+   `y ∈ O′` by cases at each stable `P`: `n ∈ P` — `P ∈ Φ`, residue of `x − r′` is `d P − resR P m r = 0` (`map_sub` on the
+   subtype), items 6–7; `n ∉ P` — `(n : L)⁻¹ ∈ 𝓞_P` (`UpperHalf.mem_localRing P` with `⟨1, n, h, by simp⟩`), and a product.
+   `x = r′ + n·y` by `field_simp`.
+9. `unitRing_eq_stableIntegers` (15). `le_antisymm (unitRing_le_stableIntegers F)`; `c` from `exists_mul_stableIntegers_le F`;
+   item 8 at `n = c` with `noRamifiedStableDyadic_iff F`; `x = r + c·y ∈ R`.
+10. `not_isRamified_of_odd_mem` (12). `IsRamified.isDyadic`; `n = 2k + 1` gives `1 = n − 2k ∈ P`; `P.isMaximal.ne_top`.
+11. `exists_two_pow_mul_mem_unitRing` (25). `c = 2ᵃ·c′`, `c′` odd (`Nat.exists_eq_two_pow_mul_odd`); item 8 at `n = c′` with
+    item 10; `2ᵃ·x = 2ᵃ·r + c·y` (`push_cast`, `ring`), `pow_mem`, `natCast_mem`, the `c·O′ ⊆ R` of `exists_mul_stableIntegers_le`.
+
+**Module 3, `Rigidity/UsablePrime`** (§ 2.4's route E).
+1. `exists_prime_mod_four_eq_three_dvd` (30). Contrapositive "`N` odd and every prime factor `≢ 3 (mod 4)` ⇒ `N ≡ 1 (mod 4)`"
+   by `induction_on_primes` (cases `0`: not odd; `1`; `p·a`: `p` odd so `p % 4 = 1`, `a` odd, `Nat.mul_mod`, `omega`).
+2. `exists_Ioo_aeval_neg` (50). Over `ℝ`, `g = f.map (Int.castRingHom ℝ)` (`Polynomial.aeval_def`, `eval₂_eq_eval_map`);
+   `g = (X − C θ)·h` (`mul_divByMonic_eq_iff_isRoot`), `g′(θ) = h(θ)` (`derivative_mul`, `derivative_X_sub_C`), so `h(θ) ≠ 0`;
+   `h` continuous (`Polynomial.continuous`), so `h` has `h(θ)`'s sign on `(θ − ε, θ + ε)`; take `(θ − ε, θ)` if `h(θ) > 0`,
+   `(θ, θ + ε)` if `h(θ) < 0`.
+3. `exists_one_add_mul_div_pow_mem_Ioo` (30). `e ≥ 1` with `D < (b − a)·Dᵉ` (`pow_unbounded_of_one_lt`);
+   `t := ⌊(a·Dᵉ − 1)/D⌋ + 1` (`Int.floor_le`, `Int.lt_floor_add_one`); then `a·Dᵉ < 1 + Dt ≤ a·Dᵉ + D < b·Dᵉ`.
+4. `scaleRoots_eval_eq` (15). `Polynomial.scaleRoots_eval₂_mul` at `Int.castRingHom ℝ`, `s = k`, `r = x/k` (`k·(x/k) = x`);
+   the cast of `eval` is `eval₂` of the cast (`Polynomial.eval₂_at_intCast` / `hom_eval₂`).
+5. `dvd_scaleRoots_eval_sub_pow` (25). `eval_eq_sum_range` with `natDegree_scaleRoots`; split `i = n` (`Finset.sum_range_succ`;
+   `coeff_scaleRoots`, monic: coefficient `1`, `k⁰`); the other terms carry `k^(n − i)`, `n − i ≥ 1` (`dvd_pow_self`,
+   `Finset.dvd_sum`).
+6. `exists_dvd_eval_of_dvd_scaleRoots_eval` (25). In `ZMod q` (`Fact q.Prime`): `k̄ ≠ 0` (`ZMod.intCast_zmod_eq_zero_iff_dvd`);
+   `scaleRoots_eval₂_mul` at `Int.castRingHom (ZMod q)`, `r = x̄·k̄⁻¹`: `k̄ⁿ·f(r) = 0`, so `f(r) = 0`; `t := (r.val : ℤ)`,
+   `Polynomial.eval_intCast_map`, `ZMod.natCast_zmod_val`.
+7. `exists_prime_three_mod_four_dvd_eval` (55). § 2.4 verbatim: `(a, b)` from item 2; `D = 4M`; item 3; `N := −eval x
+   (f.scaleRoots k)` positive (item 4, `k > 0`); `N ≡ −1 (mod D)` (item 5, `D ∣ k`, `x ≡ 1`, `pow_mod`/`Int.ModEq.pow`); item 1 at
+   `N.toNat`; `q ∤ D` (`q ∣ N` and `N ≡ −1`), so `q ∤ M` and `q ∤ k = Dᵉ` (`Nat.Prime.dvd_of_dvd_pow`); item 6.
+8. `exists_isUsablePrime` (50). `AdmissiblePrime`'s `exists_integral_primitive`, `exists_dvd_of_dvd_exponent`,
+   `nonempty_residueHom` (made public, § 3.7 item 1; else `open private … from Proofs.HadwigerNelson.Rigidity.AdmissiblePrime`,
+   `LEAN.md` l. 422); `f = minpoly ℤ θ` (`minpoly.monic`), the real root and `f′(θ) ≠ 0` carried from `𝓞 F` to `ℝ` by the
+   ℤ-algebra hom `𝓞 F → F → ℝ` (`Polynomial.aeval_algHom_apply`, injectivity; the separability step as in
+   `exists_dvd_of_dvd_exponent`: `Algebra.IsSeparable.isSeparable`, `minpoly.isIntegrallyClosed_eq_field_fractions`); item 7 at
+   `M·E`; `φ`; `𝔭 := ker φ` maximal (`RingHom.ker_isMaximal_of_surjective`, `ZMod.ringHom_surjective`), `Nat.card = q`
+   (`RingHom.quotientKerEquivOfSurjective`, `Nat.card_zmod`), `q ∈ 𝔭` (`map_natCast`, `ZMod.natCast_self`).
+9. `exists_stablePrime_natCast_mem` (45; **the fallback**, dropped if FS131-ICS1 has landed, § 2.4). `Arith.placeHom_base F h𝔭`
+   gives `V`, `φ`; the subring `{z : ℂ | z.re ∈ V ∧ z.im ∈ V}` (as in `SqrtFortySeven.exists_stablePrime_eleven`) holds every unit
+   vector, so `UnitRing.unitRingOver F` lies in it (`Subring.closure_le`); `(q : ℂ)⁻¹` in it would give `1 = φ(1/q)·φ(q) = 0`
+   (`φ(q) = mk q = 0` from `hq`; `Ideal.Quotient.nontrivial`); `UpperHalf.inv_natCast_mem_unitRingOver_iff_forall_stablePrime`.
+10. `nonempty_stablePrime` (5). Item 8 at `M = 1`, then item 9 — or, if ICS1 has landed,
+    `⟨(UpperHalf.exists_stablePrime_card_eq_sq h𝔭).choose⟩`.
+11. `localBound_lt_top` (15). `iInf_le` at the prime of item 10; `SimpleGraph.chromaticNumber_le_card` with
+    `Fintype.ofFinite` of `𝓞 ⧸ P^1`; `ENat.coe_lt_top`.
+
+**Module 4, `Rigidity/PlaneComponents`.**
+1. `reachable_add_sum` (35). Induction on `m`, `y` universally quantified; `Fin.sum_univ_castSucc`; each step
+   `SimpleGraph.Adj.reachable` with `unitDistance_adj` (`dist (p + u) p = ‖u‖ = 1`, `SimpleGraph.induce` adjacency on the
+   subtype), `Reachable.trans`; partial sums lie in `planeOver F` (`UnitRing.planeOverSubring F`'s `add_mem`).
+2. `reachable_iff_sub_mem_unitRingOver` (35). `⟹`: `reachable_iff_reflTransGen`, induction; an edge's difference `u` has
+   `‖u‖ = 1` and lies in `planeOver F`, so `UnitRing.unit_mem_unitRingOver`; `sub_add_sub_cancel`, `add_mem`. `⟸`:
+   `UnitRing.exists_sum_eq_of_mem_unitRingOver`, item 1 at `y`, `x = y + (x − y)`.
+3. `connected_planeOver_iff_subset` (20). `SimpleGraph.connected_iff`; `Nonempty` from `0 ∈ planeOver F`; preconnected ⟺
+   every `x` reachable from `0` (item 2, `sub_zero`; conversely `sub_mem`).
+4. `infinite_connectedComponent_planeOver_of_not_mem` (45). By contradiction, `Finite` components, `d := Nat.card`;
+   `w := z / d!` lies in `planeOver F` (coordinates divided by a natural number in `F`); `Fin (d + 1) → components`,
+   `j ↦ [j·w]`; `Fintype.exists_ne_map_eq_of_card_lt` gives `i ≠ j` with one component; item 2 puts `(j − i)·w ∈ ℤ[U]`;
+   `|j − i| ≤ d` divides `d!` (`Nat.dvd_factorial`), so `z = (d!/(j − i))·((j − i)·w) ∈ ℤ[U]` (`zsmul_mem`).
+5. `connected_or_infinite_planeOver` (8). Cases on `planeOver F ⊆ ℤ[U]`: item 3 or item 4.
+6. `infinite_connectedComponent_planeOver_of_stablePrime` (20). `UpperHalf.localRing_ne_top P` gives `y ∉ 𝓞_P`; `y ∉ R`
+   (`unitRing_le_stableIntegers`, `mem_stableIntegers`); `(y : ℂ) ∉ unitRingOver F` (`UnitRing.coe_mem_unitRingOver_iff`); item 4.
+7. `connected_planeOver_iff_isEmpty_stablePrime` (25). `⟸`: with no stable prime `stableIntegers F = ⊤` (`iInf_of_empty`),
+   so `x = c·(x/c) ∈ R` for every `x : L` (`exists_mul_stableIntegers_le`), item 3. `⟹`: a stable prime gives item 6, and a
+   connected graph has one component (`SimpleGraph.ConnectedComponent` subsingleton from `Connected.preconnected`).
+8. `infinite_connectedComponent_planeOver`, `not_connected_planeOver` (8). Item 6 at `nonempty_stablePrime F`; item 7.
+
+**Module 5, `Instances/UnitRingModels`** (35). `noRamifiedStableDyadic_sqrt47`: `IsDyadic P` is `2 ∈ P.P`, refuted by
+`Rigidity.two_notMem_of_isSquare P SqrtFortySeven.isSquare_fortySeven (by norm_num)`. `unitRing_eq_stableIntegers_sqrt47`: the
+head statement. `stableIntegers_sqrt47_ne_top`: `SqrtFortySeven.exists_stablePrime_eleven` gives `P`; `stableIntegers ≤ P.localRing`
+(`iInf_le`) and `UpperHalf.localRing_ne_top`. `exists_stablePrime_three_not_isRamified`: `PadicPlane.exists_stablePrime_above 3`
+(`Fact (Nat.Prime 3)` is an instance) gives `2 ∉ P`, and `IsRamified.isDyadic`.
+
+**What is hard.** Nothing is new mathematics; the risks are elaboration ones. (i) Module 2 item 5: `RingHom.pi` over a `Finset`
+coerced to a type, and instance search for `Finite` on the product (state the `Finite` instance with `haveI` per component first).
+(ii) Module 3 item 8: transporting `aeval` from `𝓞 F` to `ℝ` through the subfield coercion (`LEAN.md` ll. 293, 298, 302: the
+`RingOfIntegers.val` coercion defeats `map_*` rewrites; use `simp` or state in `ℝ` first). (iii) Module 4 item 1: vertices of an
+induced graph are subtypes; state partial sums as elements of `planeOver F` with their proofs computed, never left to
+unification (`LEAN.md` l. 279).
+
+### 3.6 The price
+
+**≈ 970 lines of proof over 41 leaves**, five new modules, no outside theorem, no `native_decide`; with ICS1 landed first,
+≈ 925. By part: Lemma C′ and its common step (modules 1, 2 less the odd form, the first three models) ≈ 420; the odd form
+(`not_isRamified_of_odd_mem`, `exists_two_pow_mul_mem_unitRing`) ≈ 37 — **14 % of its module, under the coordinator's fifth**;
+route E (module 3) ≈ 345; the components at every real number field ≈ 140 of module 4 plus the last model; **the dichotomy**
+(`connected_planeOver_iff_subset` ⇐ half, `connected_or_infinite_planeOver`, `connected_planeOver_iff_isEmpty_stablePrime`)
+≈ 50 — **26 % of its module (5 % of the job): over the fifth**, so by the ruling the implementer's brief leaves it out unless the
+coordinator rules otherwise; `localBound_lt_top` ≈ 15. Re-price from the first two leaves (`CLAUDE.md` § What compute actually
+helps): the plan's table prices high.
+
+### 3.7 Drafts for files this lane does not write (each with its slot)
+
+1. **`Proofs/HadwigerNelson/Rigidity/AdmissiblePrime.lean`** (an existing module; the implementer's job if the coordinator
+   rules it, as item 1027 (1) ruled `ClassRatio`'s): drop `private` at l. 108, l. 124 and l. 150 and give each a docstring —
+   - above `exists_integral_primitive`: `/-- **An integral primitive element**: every number field is `ℚ⟮θ⟯` for some `θ ∈ 𝓞 K`. -/`
+   - above `exists_dvd_of_dvd_exponent`: `/-- **A nonzero bound on the conductor's primes**: some `E ≠ 0` is divisible by every
+     divisor of `RingOfIntegers.exponent θ` (`E = |𝓞 K ⧸ conductor ℤ θ|`, nonzero by `conductor_mul_differentIdeal`). -/`
+   - above `nonempty_residueHom`: `/-- **Kummer–Dedekind at a root modulo `q`**: for `q ∤ exponent θ` and `q ∣ f(t)`, `f` the
+     minimal polynomial of `θ`, there is a ring homomorphism `𝓞 K → ℤ/q` (`θ ↦ t`). -/`
+   Lint before publicizing (`LEAN.md` l. 436): each reads all its binders. Alternative: `open private … from` in
+   `Rigidity/UsablePrime` (one line, no edit; item 1021 (2)'s reason weighs against it).
+2. **`ARCHITECTURE.md`, row `Rigidity/RingScope`**, at the landing: replace "`R = O′` in the scope (Lemma C′, row 100) is not in
+   the library: its statement, read by nothing, was deleted with its unproved body at the chain's landing (FS131-LCH1) and is
+   kept in `data/fs131/lch1/ring-scope-lemma-c-prime.lean`." by "`R = O′` in the scope (Lemma C′, row 100) is
+   `Rigidity.unitRing_eq_stableIntegers` (`Rigidity/UnitRingEq`, FS131-KRU1's plan)." The same sentence in `RingScope`'s module
+   docstring (its third bullet) is a docstring edit of an upstream module (`LEAN.md` § Building: dependents rebuild).
+3. **`LEDGER.md` row 105** (owed at the landing, item 1040): replace "That statement ranges over a type the kernel does not show
+   to be non-empty (a stable prime exists by Chebotarev), and the splitting itself is not stated" by "That statement's type is
+   non-empty at every real number field (`Rigidity.nonempty_stablePrime`, [kernel] since <landing>: a usable prime of degree one
+   from the sign change of a minimal polynomial at its real root and Kummer–Dedekind, no Chebotarev), and the splitting itself
+   is not stated".
+4. **`LEDGER.md` row 100**, at the landing: after "**Not claimed:** … a kernel proof." replace "a kernel proof" by nothing and
+   add a sentence: "**Kernel** (since <landing>): Lemma C′ as typed, `Rigidity.unitRing_eq_stableIntegers`; its odd part at every
+   real number field with no scope, `Rigidity.exists_two_pow_mul_mem_unitRing`; the onto half of `R/nR ≅ O′/nO′` wherever no
+   stable prime holding `n` is ramified, `Rigidity.exists_eq_add_mul_of_mem_stableIntegers`. Lemma C and CLG are not in the
+   kernel."
+5. **`ROADMAP.md` § 3 item 2**, now: replace "It was taken out of the library when the chain landed, because nothing read it and
+   its proof was a `sorry`. The statement and its hand route are kept in `data/fs131/lch1/ring-scope-lemma-c-prime.lean`." by
+   "Planned by FS131-KRU1 (`plans/FS131-KRU1-ring-plan.md`, ≈ 970 lines with the components clause, no outside theorem): the
+   statement as typed, `F` implicit, in `Rigidity/UnitRingEq`, beside its odd form and C8 (`Rigidity/PlaneComponents`)."
+6. **`LEAN.md` § Searching — Lean**, one line: "- At the pin `Mathlib.Data.Fintype.Units` is deprecated for
+   `Mathlib.Algebra.GroupWithZero.Units.Fintype` (an import warning, which the gate reads as a warning) (FS131-KRU1)."
+7. **`plans/POROS-2026-10-13-number-field-findings.md` § 3.3 (C8)**, a line for the asking lane (its writer's): the components
+   clause is equivalent, at a number field, to the existence of a stable prime, and that existence needs no Chebotarev
+   (§ 1.3 F2–F3); its "*Rests on:* by hand, three derivations; nothing unprinted" stays for Lemma C′; for C8 the route is this
+   plan's § 2.4, [hand], one mind, kernel pending.
