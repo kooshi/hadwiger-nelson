@@ -104,8 +104,9 @@ warnings only). Commit `1eea2ae5f` holds the proofs.
 - **`triCentre_sub` is public in D4** (`triCentre m n − triCentre m' n' = triCentre (m − m') (n − n')`): the lattice's
   linearity, used twice; listed in the comparison. *Alternative:* private — declined, it is the lattice's API.
 - **Every other helper is private**, each with a comment naming what it copies. The planner's `PatternLaw` refactor is not
-  done: D2's copies came to about 1,270 lines against the plan's 1,370, written in one pass with eleven elaboration errors in
-  all, none in the mathematics; a pattern form would save under a third of that and would have to refactor landed modules.
+  done: D2's copies came to about 1,270 lines against the plan's 1,370, written in one pass and elaborated in four rounds whose
+  errors were names, the elaboration order of `measurable_pi_apply` against set-builder notation, and one lemma outside the
+  closure — none in the mathematics; a pattern form would save under a third of that and would have to refactor landed modules.
   Recommendation unchanged: per class now; the refactor when someone next edits `Collapse/`.
 - **`disc7_le_mOne` reads the interior of `disc7 0`**: `disc7_unitPair_mem_sphere` does not say which colour's sphere, so the
   proof shows directly that a boundary point of a class's disc is not interior to the class (two discs of one class are
