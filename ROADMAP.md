@@ -93,22 +93,22 @@ The kernel holds `χ(F²) ≤ L(F)` and `min(L(F), 5) ≤ χ(F²)` for every rea
 through four colours and the five-colour values listed in the README. Left:
 
 1. **Row 123's remainder** (the class, the family as the derivation computed it, CLS in full and ℚ(√23, ∛2) are kernel theorems since FS131-ICS1, `plans/KERNEL-HOLDS.md`): `L` at the class members that are a square neither modulo 11 nor modulo 19 — 167, 887, 1055, 1319, 1823, 2351, 2735, 2903 below 3000 — which needs a target the kernel does not hold (`Γ₃₁` first, undecided); and `χ(ℚ(√167)²) ≥ 5` by its second route (every stable place 4-thick).
-3. **The parts of landed rows that stay outside the kernel.** In row 121: a finite triangle-free five-chromatic unit-distance
+2. **The parts of landed rows that stay outside the kernel.** In row 121: a finite triangle-free five-chromatic unit-distance
    graph over ℚ(√47), which exists by de Bruijn–Erdős but has not been exhibited, and the equivalence called "row 88 ⟺ T-B1" at
    ℚ(√59), ℚ(√83), ℚ(√131). In row 99: "no mixing", and `χ(ℚ(α, √7)²) = 4` with `α³ = α + 1`.
-4. **Hand results taken as hypotheses** by the older conditional theorems: 21 entries, among them the chain's interface
+3. **Hand results taken as hypotheses** by the older conditional theorems: 21 entries, among them the chain's interface
    statements `SpectralChain.Interface.MR`, `PE2`, `EFPlus`, `RU`, `Count`. They are listed with their sources in `ARCHITECTURE.md`
    § 5, and every (hypothesis, theorem) pair is in `scripts/assumptions-ledger.txt`. The five-colour chain's headline takes none of
    them. The owner's instruction is that every hypothesis standing for a hand result of this project be discharged in the kernel
    (`data/fs131/REQUEST-2026-10-13.md`, W2). Some outside results are also taken this way: Herglotz–Bochner (`[Rudin1962]`),
    Markov–Kakutani (`[Kakutani1938]`), and Artin–Lang (`[Lang1953]`). Artin–Lang is the one hypothesis of the bridge
    `χ(ℝ²) = max_F χ(F²)` (row 107).
-5. **The finite planes.** The local bound `L(F)` is a chromatic number of finite graphs, and several of those values are held
+4. **The finite planes.** The local bound `L(F)` is a chromatic number of finite graphs, and several of those values are held
    outside the kernel. They come from exact certificates accepted by standalone checkers, and from computations with controls:
    five colours refused at 27 and at 23, six refused at 83, and the window for an exactly six-chromatic finite plane (rows 68–71).
    The open part is whether `L(F) = 6` is possible: it needs one of six finite targets, `Γ_q` at `q ∈ {23, 27, 31, 43, 47}` or
    `U₆₄`, to be six-chromatic, and none is decided (`CLAUDE.md` § Grokkings, the theory in one paragraph).
-6. **Every row 52–127 not graded wholly [kernel]**: the appendix, group B.
+5. **Every row 52–127 not graded wholly [kernel]**: the appendix, group B.
 
 ## 4. Measurements around the early witnesses
 
