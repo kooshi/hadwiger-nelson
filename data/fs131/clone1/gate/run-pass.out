@@ -1,0 +1,22 @@
+HEAD=16a2d449979ea06fde80bb349e3940d10ffc413f 2026-10-16T03:51:04Z tracked-modified=0
+uptodate exit=0 wall=3s
+sorry (narrow) lines=0
+line-initial axiom lines=5
+dupnames exit=0 wall=4s
+dupnames-selftest exit=0 wall=28s
+axioms exit=0 wall=11s
+axioms-selftest exit=0 wall=239s
+vacuity exit=0 wall=132s
+vacuity-selftest exit=0 wall=130s
+assumptions exit=0 wall=120s
+assumptions-selftest exit=0 wall=127s
+arch exit=0
+lint exit=0 wall=14s
+axioms latest: /home/kooshi/source/lean-dir/build/gate/axioms/20261016T035140Z-2739309.log
+vacuity latest: /home/kooshi/source/lean-dir/build/gate/vacuity/20261016T035550Z-2748658.log
+assumptions latest: /home/kooshi/source/lean-dir/build/gate/assumptions/20261016T040012Z-2757362.log
+digest-axioms exit=0
+digest-vacuity exit=0
+digest-assumptions exit=0
+tracked files modified after the pass: 0
+pass-exit=done 2026-10-16T04:04:38Z
