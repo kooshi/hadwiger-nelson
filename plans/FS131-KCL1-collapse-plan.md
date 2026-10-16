@@ -250,3 +250,256 @@ selection's Fubini step over `((ℂ × K) × ℝ)` the likeliest over.
 4. **A fixed threshold.** V1-L6 and V2-L3 draw the threshold at random to keep continuity in probability (the CP format). The
    library's number is `χ_m⁰`, whose colourings need properness almost everywhere and measurability only; any fixed
    `θ ∈ (λ/(1 + λ), 1/k)` works.
+
+## Stage 4 — SAVED: the skeleton and the plan
+
+### 4.1 The target, read back aloud against row 128
+
+```lean
+theorem Collapse.chromaticNumber_planeOver_sqrt635087 :
+    ((unitDistance ℂ).induce (planeOver F635087)).chromaticNumber = (unitDistance ℂ).chromaticNumber
+-- F635087 := SquareClass.fieldOfRadicands {635087}
+```
+
+*Read aloud:* the unit-distance graph of `ℂ` induced on the points with both coordinates in `ℚ(√635087)` — `F²`'s graph,
+`planeOver F` being `F + F·i` — has the same chromatic number, in `ℕ∞` (`SimpleGraph.chromaticNumber`), as the unit-distance
+graph of the whole of `ℂ ≅ ℝ²`. Against row 128: its first member, `χ(F²) = χ(ℝ²)`, at its first instance, **with no MR
+hypothesis** (MR is `Rigidity.mrPlus`, on `[EinsiedlerLindenstrauss2022]` Thm 1.3) and no hypothesis of ours. Not stated:
+row 128's third member `χ_CP(ℝ²)` (not defined in the library; `χ(ℝ²) = χ_m⁰(ℝ²)` is `Outside.OAI158.chromaticNumber_plane_eq_chiM0`,
+and row 130's `χ_CP = χ_m⁰` is [hand]). The general form, `chromaticNumber_planeOver_eq_plane_of_thick` — every real number field
+whose stable primes are uniformly `c`-thick with `c < 1/5` — is **wider than row 128**: no "totally real", no MR hypothesis
+(§ 2.4, finding 1); `chromaticNumber_planeOver_eq_plane_of_forall_thickAt` states it in row 128's per-place words. The mutation
+audit of the statement: with `c < 1/4` (5-thick) in place of `c < 1/5` the general theorem would claim what V1 shows unproved
+(`χ(F²) = 6 < χ_CP = 7` not excluded) — the proof needs `5c < 1` at `k = 6`, so the hypothesis is load-bearing.
+
+### 4.2 The skeleton
+
+Seven modules under `Proofs/HadwigerNelson/Collapse/`, namespace `HadwigerNelson.Collapse`, imported by `Proofs.lean`; built
+through `./scripts/build.sh` under the slot (`data/fs131/kcl1/build1.log`; § 4.6). Every leaf is a `sorry`; every assembly is
+proved, so the composition is checked now: `exists_invColouring_TA` (the dichotomy closed by MR⁺), `exists_slice_of_colorable`,
+`mixing_K` (the limit over levels), `exists_aeColouring_of_slice` (the threshold arithmetic), `chromaticNumber_plane_le_of_thick`,
+`chromaticNumber_planeOver_eq_plane_of_forall_thickAt`, `stablePrime_sqrt635087`, `thick_sqrt635087`,
+`chromaticNumber_planeOver_sqrt635087`, the de Grey chain and the six-or-seven corollary. Stage 2's two theorems are placed,
+proved, in `Collapse/Dichotomy` (`IsSPWitness`, `not_isSPWitness_of_mrPlus`, `not_isSPWitness`; `MRLiteral` stays in the scratch
+file — no consumer reads it).
+
+| module | imports (beyond the line) | what it states | leaves |
+|---|---|---|---|
+| `Collapse/Thick` | `Rigidity/CountCompletion` | `ThickAt`, `Thick`, `thickAt_weil`, `thick_of_card`, `thick_of_forall_thickAt`, `not_isRamified_of_thickAt`, `exists_addChar_extend`, `norm_sum_piFinset_le`, `image_levR_unitVectors_of_unramified`, `LevImg`, `levU`, `levelThick` | 10 |
+| `Collapse/Colouring` | `Rigidity/APlus` | `Xk`, `InvColouring`, `xk_nonempty_of_colorable`, `exists_invColouring`, models | 6 |
+| `Collapse/Dichotomy` | `Collapse/Colouring`, `Rigidity/ZeroEntropyClosed` | the SP witness and MR⁺ (proved); `IsColourSpectral`, `condLawK`, `factorK`; SI-3 at `T + A`; `exists_factorLawK`; `exists_invColouring_TA` (proved over its leaves) | 8 |
+| `Collapse/Slice` | `Collapse/Dichotomy`, `Rigidity/CountExtension` | `measure_ne_eq_k`, `tendsto_measure_ne_k`, `exists_extension_k`, `SliceEdgeNullK`, `exists_slice_k`, `exists_slice_of_colorable` (proved) | 4 |
+| `Collapse/Mixing` | `Collapse/Thick`, `Arith/RatioBound` | `finite_mixing`, `levelFill`, `levelResid`, `tendsto_levelResid`, `mixing_at_level`, `mixing_K` (proved), `not_both_ge_of_mixing` | 4 |
+| `Collapse/Selection` | `Collapse/Slice`, `Collapse/Mixing`, `Plane/AeColouring` | `fibreMass`, `ae_slice_edge`, `not_both_heavy`, `selCol`, `unitPairsNull_selCol`, `exists_aeColouring_of_slice` (proved) | 8 |
+| `Collapse/Headline` | `Collapse/Selection`, `Plane/YesLimit`, `Bridge`, `Reduction`, `Rigidity/SqrtClassFive`, `Outside/OAI158` | the general theorems; ℚ(√635087); de Grey's field; `not_thick_bot`; the six-or-seven corollary | 8 |
+
+**Validation at the skeleton.** Spec examples per module (the `## Spec` sections: `Thick` against `ThickAt`; `Xk F 1 = ∅`;
+the shift; D-SP's four clauses; the threshold arithmetic at `c = θ = 1/5`; the constant slice's fibre mass; `635087` prime,
+`≡ 7 (mod 8)`, a non-square modulo 3 and 7 and a square modulo 103 — the last three by `decide`). **Models of the hypotheses**:
+`InvColouring ⊥ 2` (`nonempty_invColouring_bot`, proved over its leaves); `Thick` at `c < 1/5` at ℚ(√635087) and de Grey's field
+(`thick_sqrt635087`, `thick_deGrey`, proved over leaves); **adversaries**: `Xk_one_eq_empty`, `not_thick_bot` (ℚ), and the ℚ(√11)
+control in `Collapse/Selection`'s docstring. Every library and Mathlib lemma this plan cites is confirmed by `#check` at the pin
+under the modules' imports (`data/fs131/kcl1/lean/Checks.lean`, 46 names, exit 0).
+
+### 4.3 The plan, per leaf
+
+Each leaf: route; what it reads; named children the implementer may add as private lemmas; what is hard. "Copy" means the
+four-colour proof with `Fin 4 → Fin k`, the module's own names, and the tetrahedral constants gone.
+
+**`Collapse/Thick`**
+- `thickAt_one` — `|ψ s| = 1` on a finite group (`ψ s ^ |G| = 1`), then `norm_sum_le` and the card. 15 lines.
+- `thickAt_weil` — **the two-sided Weil bound at every level.** Level one: `StandingFive.circle_sum_le_weil` through the
+  identification of the norm-one set of `𝓞 ⧸ P ≅ 𝔽_{Q²}` with the circle (the body of `Rigidity`'s private `charBound_one_weil`,
+  which runs through `StandingFive.normOne_charSum_ge` — one-sided only because its last line takes `neg_le_of_abs_le`). Higher
+  levels: the private two-sided descent `norm_charSum_le_of_resT` and the induction of `charBound_of_charBound_oneT` with norms;
+  `henselCount_of_two_notMem`, `newCharBound_of_two_notMem` public. **Two routes**: (a) the drafted edits D-E1, D-E2 (§ 4.5): ~140
+  lines in `Arith/FloorPlanes` and `Rigidity/ClassRatio`, then this leaf is a few lines; (b) a copy of the private chain here,
+  ~350 lines. Recommend (a). Hard: none — the mathematics is in the library.
+- `weil_const_anti` — `2√x/(x + 1)` decreases for `x ≥ 1` (`√x(√B + ...)`; square both sides: `B(Q+1)² ≥ Q(B+1)²` ⟺
+  `(Q − B)(QB − 1) ≥ 0`). 25 lines.
+- `thick_of_forall_thickAt` — case `c₀ ≤ 0`: a stable prime would be `c`-thick with `c < 0`, false at level one (`1` is of norm
+  one and `𝓞 ⧸ P` has a non-trivial character), so there is none and `Thick` is vacuous at `c₀ − 1`. Case `c₀ > 0`: Weil gives
+  `ThickAt P (2√Q/(Q + 1))` at every non-dyadic `P`, below `c₀/2` once `Q ≥ Q₀`; the rest — dyadic primes and `Q < Q₀` — have
+  absolute norm at most `max(2^{[L:ℚ]}, Q₀²)`, finitely many (`Ideal.finite_setOf_absNorm_le`); take the `max` of their `c_P` and
+  `c₀/2`. 80 lines. Hard: bookkeeping only.
+- `not_isRamified_of_thickAt` — at a ramified `P`, `𝓞 ⧸ P` has characteristic 2 (`IsRamified.isDyadic`) and conjugation is the
+  identity on it, so `normOneQ P 1 = {x : x² = 1} = {1}`; `AddChar.exists_apply_ne_zero` at `1 ≠ 0` gives `ψ` with `ψ 1 ≠ 1`,
+  and `‖ψ 1‖ = 1 > c`. 40 lines.
+- `exists_addChar_extend` — restriction `AddChar G ℂ → AddChar H ℂ` is a hom; its kernel is the characters trivial on `H`,
+  equivalent to `AddChar (G ⧸ H) ℂ`; `AddChar.card_eq` thrice and Lagrange give surjectivity. 60 lines. Hard: the quotient's
+  dual as a type.
+- `norm_sum_piFinset_le` — `ψ s = ∏_i ψ (Pi.single i (s i))` (additivity over `Finset.univ_sum_single`), so
+  `Σ_{piFinset} ψ = ∏_i Σ_{S i} ψ_i` (`Finset.prod_univ_sum`); some `ψ_i ≠ 1`; the other factors are at most `|S i|`. 80 lines.
+- `image_levR_unitVectors_of_unramified` — `Rigidity.Counting.image_levR_unitVectors`'s proof with `ratio_unramified_of_tca h P`
+  replaced by `hun P`. 30 lines (a copy; or drafted edit D-E3 weakens the landed lemma's hypothesis — not recommended, it moves a
+  stored statement).
+- `levelThick` — extend `ψ` to `Lev F k` (`exists_addChar_extend`); `levU` is the image of `normOneLev` (`[S9]` with
+  `not_isRamified_of_thickAt`), a product set; `norm_sum_piFinset_le` with `ThickAt P c` at `m = k` for `P ∈ level F k`. 60
+  lines. Hard: the coercions between `LevImg F k`, `Lev F k` and `Fintype.piFinset`.
+- `levU_nonempty` — `levR F k 1 = 1` and `1 ∈ normOneLev`. 10 lines.
+
+**`Collapse/Colouring`** (copies of `SpectralChain` ll. 200–400 and `Rigidity/InvariantMeasure`): `xk_nonempty_of_colorable`
+(`x4_nonempty_of_colorable`, 15), `isClosed_Xk`, `measurableSet_Xk` (`X4_eq_iInter`, `setOf_pair_eq` at `Fin k`, 40),
+`rot_mem_Xk` (15), `exists_invColouring` (`InvariantMeasure` at `Fin k`: `exists_shiftInvariant_on`,
+`exists_rotInvariant_of_shiftInvariant`, `OneClass.exists_common_fixed`; 180), `Xk_one_eq_empty` (`0, 1` adjacent; 10). 260 lines.
+
+**`Collapse/Dichotomy`**
+- `exists_isColourSpectral` — `Rigidity.exists_isSpectralMeasureOf` for each `e_j = indicatorConstLp` (`colourShiftK`,
+  `colourShiftK_add`), `σ := Σ_j σ_j`; the coefficient is `Σ_j P(c(0) = j = c(y)) = P(c(0) = c(y))` (TraceSplit's
+  `integral_colourInd_mul_comp`, copied at `Fin k`). 80 lines.
+- `IsColourSpectral.rotInv` — `P(c(0) = c(uy)) = P(c(0) = c(y))` from `rot_inv` (the rotation fixes `0`), then
+  `measure_eq_of_fourier` for `σ` and `σ.map (rot u)` (`integral_map`, `measurable_rot`). 60 lines.
+- `IsColourSpectral.integral_unit` — `μ (Xk)ᶜ = 0` and `c 0 ≠ c u` on `Xk`. 15 lines.
+- `setIntegral_compl_TA_re_k`, `integral_condLawK_mul_nonneg`, `setIntegral_compl_TA_rot_k`, `equalAtUnitsK_of_not_neg` — copies of
+  `TraceSplit`'s `setIntegral_compl_TA_re`, `integral_condLaw_mul_nonneg`, `setIntegral_compl_TA_rot` and `APlus`'s
+  `equalAtUnits_of_not_neg`, each simpler: the decomposition is `σ = Σ_j σ_{e_j}` itself, no `3σ + δ₁ = 4Σσ_j`. Reads
+  `isSpectralMeasureOf_condExpL2` at `tauPrime F` with `contChars_tauPrime`, `bochnerOn_tauPrime`, `isTopologicalAddGroup_tauPrime`,
+  `isCountablyGenerated_nhds_tauPrime`. 230 lines.
+- `exists_factorLawK` — SI-4 at `Fin k` (copy of `SpectralInputs` ll. 1036–1269: `condSupport`, `measurable_selection`,
+  `ae_mem_condSupport`, `si4`, `si4_equivariant`; 230) and `APlus`'s factor (`minSel` with a default from `k ≠ 0` — a probability
+  on `R → Fin 0` cannot exist; `factorColouring`, `comap_colourRot_colourFactor`, `factorLaw*`, `factorLaw_trace_null`; 300).
+  530 lines. Hard: the equivariance clause and `factorLaw_trace_null` (the `𝒜`-measurable indicators' spectra on `T + A`,
+  `spectral_carried_iff`).
+
+**`Collapse/Slice`** — copies of `Rigidity/CountExtension` at `Fin k`: `measure_ne_eq_k` (now `P(c(0) ≠ c(y)) = 1 − Re ∫ χ(y) dσ`:
+the coefficient is `P(c(0) = c(y))` and `σ(R̂) = 1`; 30), `tendsto_measure_ne_k` (dominated convergence; 60),
+`exists_extension_k` (Borel–Cantelli; 150), `exists_slice_k` (Tonelli over the sample; 90). 330 lines. Hard: none new.
+
+**`Collapse/Mixing`**
+- `finite_mixing` — write `f = a + f₀`, `g = b + g₀` (`f₀`, `g₀` mean zero); `Σ_x f(x) Σ_s g(x + s) = |G||S|ab + Σ_x f₀(x)
+  Σ_s g₀(x + s)` (cross terms vanish: `Σ_x g₀(x + s) = 0`); expand `g₀` in characters (`AddChar.sum_apply_eq_ite` orthogonality,
+  as `RatioBound.fourier_sq_mul_charSum`), so the last sum is `|G| Σ_{ψ ≠ 1} \overline{f̂₀(ψ)} ĝ₀(ψ) λ_ψ` with `|λ_ψ| ≤ c|S|`;
+  Cauchy–Schwarz over `ψ` and Parseval (`RatioBound.sum_fourier_sq` generalised from indicators to functions) bound it by
+  `c|S||G| ‖f₀‖‖g₀‖`, and `‖f₀‖² = E f² − a² ≤ a − a²` (`f ≤ 1`). 200 lines. Hard: Parseval for real functions — RatioBound
+  has it for finset indicators only.
+- `tendsto_levelResid` — `levelFill A k` is constant on level-`k` cosets with mean `Haar(A ∩ coset)/Haar(coset)`; the residual
+  is `∫_A (1 − fill)² + ∫_{Aᶜ} fill² ≤ ∫_A (1 − fill) + ∫_{Aᶜ} fill = 2∫_A (1 − fill)` (the coset averages agree); on `A` the
+  integrand is at most `1` on `{fill ≤ 1 − κ}` and at most `κ` elsewhere: `≤ 2(Haar(bad_k) + κ)` with
+  `Rigidity.Counting.tendsto_haarK_bad`; `κ → 0`. 100 lines. Hard: measurability of `levelFill` (it factors through the finite
+  `proj F k`).
+- `mixing_at_level` — children: (i) `levelFill` factors as `α ∘ proj F k` with `α g = |G|·Haar(A ∩ proj⁻¹{g})`
+  (`haarK_proj_preimage`); (ii) for `t ∈ K`, `∫ fill_A(x)·r_B(x + t) = 0` (`r_B = 1_B − fill_B` integrates to `0` on each coset,
+  and `x ↦ x + t` permutes cosets, `haarK` translation invariant); (iii) `∫ fill_A(x) fill_B(x + t) = |G|⁻¹ Σ_g α(g) β(g + proj t)`;
+  (iv) `|∫ r_A(x) r_B(x + t)| ≤ √resA √resB` (Cauchy–Schwarz, `integral_mul_le_Lp_mul_Lq` at `p = q = 2`, translation
+  invariance); (v) each `s ∈ levU F k` is `proj F k (ιK F u)` for some `u ∈ U` (`image_levR_unitVectors_of_unramified`,
+  `proj_ιK`). Then average the null edge integrals over representatives and apply `finite_mixing` on `LevImg F k` with
+  `levelThick`. 230 lines. **The hardest leaf of the job.**
+- `not_both_ge_of_mixing` — `a, b ≥ θ > c/(1 + c)` gives `ab > c√(a(1−a)b(1−b))`: if `a = 1` or `b = 1` the right side is `0`;
+  else `√(ab/((1−a)(1−b))) ≥ θ/(1−θ) > c`. 40 lines (`nlinarith` on squared forms, per `LEAN.md`'s advice: small lemmas).
+
+**`Collapse/Selection`**
+- `measurable_fibreMass` — `measurable_measure_prodMk_left` on `φ ⁻¹' {j}`, then `ENNReal.measurable_toReal`. 15 lines.
+- `sum_fibreMass` — the fibres partition `K`; `measure_biUnion_finset`, `haarK` a probability. 25 lines.
+- `ae_slice_edge` — per `u`: the set is measurable; transport `((ℂ × K) × ℝ)` to `((ℂ × ℝ) × K)` by
+  `MeasurableEquiv.prodAssoc` and `prodComm` (measure-preserving for the product measures), `Measure.measure_prod_null`; then
+  `ae_all_iff` over the countable `unitVectorsR F`. 120 lines. Hard: the measure-preserving reorder of three factors.
+- `not_both_heavy` — `mixing_K` at `A = {x | φ(z, x) = j}`, `B = {x | φ(w, x) = j}`: `A ∩ (· + ιK u)⁻¹' B` lies in the null set;
+  `not_both_ge_of_mixing`. 30 lines.
+- `le_fibreMass_selCol` — pigeonhole: some `j` has mass `≥ 1/k > θ₀` (`Finset.exists_le_of_sum_le` with `sum_fibreMass`), so the
+  filter is non-empty and `min'` is in it. 30 lines.
+- `measurable_selCol` — each fibre `selCol⁻¹{j} = {θ₀ ≤ m_j} ∩ ⋂_{i < j} {m_i < θ₀}` (or `measurable_to_countable'`). 40 lines.
+- `unitPairsNull_selCol` — `unitPairSet` of a class lies in the complement of `ae_slice_edge`'s set (`not_both_heavy` at
+  `z = p.1`, `w = p.1 + e p.2`, both heavy by `le_fibreMass_selCol`); `measure_mono_null`. 40 lines.
+- the spec example (constant colouring) — `haarK` a probability. 10 lines.
+
+**`Collapse/Headline`**
+- `not_colorable_one_planeOver` — `0, 1 ∈ planeOver F` adjacent. 15 lines.
+- `chromaticNumber_planeOver_eq_plane_of_thick` — `le_antisymm (Bridge.chromaticNumber_planeOver_le_plane F)`; for `≥`, cases on
+  `χ(F²)` in `ℕ∞`: `⊤` trivial; `n ≥ 7` by `Bridge.chromaticNumber_complex_le_seven`; `2 ≤ n ≤ 6` by
+  `SimpleGraph.chromaticNumber_le_iff_colorable` and `chromaticNumber_plane_le_of_thick` (`c(n − 1) ≤ 5c < 1`); `n ≤ 1` by
+  `not_colorable_one_planeOver`. 50 lines.
+- `isSquare_635087`, `isSquare_deGrey` — `SquareClass.sqrt_mem_fieldOfRadicands`, `Real.mul_self_sqrt`. 10 lines each.
+- `le_of_isSquare_635087` — `by_contra`, `interval_cases p` below 103, `omega` on `p % 4`, `norm_num` on primality, `decide` on
+  `¬ IsSquare (635087 : ZMod p)` at the 13 primes. 30 lines; price the `decide`s (each a search over `ZMod p`, `p ≤ 83`: cheap).
+- `le_of_isSquare_deGrey` — the same below 131 with four `IsSquare` facts; 31 primes `≡ 3 (mod 4)` below 131 in all, each refuted
+  by one of `3, 5, 7, 11`. 40 lines.
+- `weil_103_lt_fifth`, `weil_131_lt_fifth` — `Real.sqrt_lt'` and `norm_num` (`√103 < 10.4`, `√131 < 11.5`). 15 lines each.
+- `not_thick_bot` — `UpperHalf.exists_stablePrime_rat` (ramified) and `not_isRamified_of_thickAt`. 10 lines.
+
+### 4.4 The price
+
+| module | lines (route (a)) |
+|---|---|
+| `Collapse/Thick` | 410 |
+| drafted edits D-E1, D-E2 (`FloorPlanes`, `ClassRatio`) | 140 |
+| `Collapse/Colouring` | 260 |
+| `Collapse/Dichotomy` | 1,000 |
+| `Collapse/Slice` | 330 |
+| `Collapse/Mixing` | 570 |
+| `Collapse/Selection` | 310 |
+| `Collapse/Headline` (both fields) | 250 |
+| **total** | **about 3,270** |
+
+The stage-3 estimate (3,000) rises by the leaves the skeleton surfaced (`thick_of_forall_thickAt`, `not_thick_bot`, the spec
+examples). About 1,600 lines are copies; re-price from the first two leaves of each kind (`LEAN.md`): a copy leaf
+(`exists_isColourSpectral`) and a new leaf (`finite_mixing`).
+
+**De Grey's field** costs `isSquare_deGrey`, `le_of_isSquare_deGrey` and `weil_131_lt_fifth` — about 65 lines. What it adds: the
+plane over the field of de Grey's coordinates has the plane's chromatic number, so his 1581-vertex graph lives in a field whose
+plane is exactly as hard as `ℝ²`; and it discharges row 128's "MR at degree 16 walked at FS-105, one checking reading" — in the
+kernel MR⁺ holds at every degree. Recommended: in the same job.
+
+**Order of the leaves** (the implementer's): `Collapse/Thick` and `Collapse/Mixing`'s `finite_mixing` first (new, independent of
+the copies — they decide the price); then the copies `Colouring → Dichotomy → Slice`; then `tendsto_levelResid`,
+`mixing_at_level`, the selection; the headline last.
+
+### 4.5 Drafted edits (not made; each for the coordinator)
+
+- **D-E1** — `Arith/FloorPlanes.lean`, before `normOne_charSum_ge`: a new public theorem `norm_normOne_charSum_le` with the
+  same hypotheses and conclusion `‖∑ u ∈ univ.filter (fun u : k => u ^ (Q + 1) = 1), ψ u‖ ≤ 2 * Real.sqrt Q` — the present proof
+  of `normOne_charSum_ge` up to its last line, which becomes `hle`'s conclusion; `normOne_charSum_ge`'s proof becomes
+  `neg_le_of_abs_le ((Complex.abs_re_le_norm _).trans (norm_normOne_charSum_le …))`. Its stored statement is unchanged.
+- **D-E2** — `Rigidity/ClassRatio.lean`, after `newCharBound_of_two_notMem`: a new public theorem
+  `norm_charSum_le_weil (P : StablePrime F) (h2 : 2 ∉ P.P) (hQ : Nat.card (𝓞 ⧸ P.P) = Q ^ 2) (hQ1 : 1 ≤ Q) (hm : 1 ≤ m) (hfin)
+  (ψ) (hψ : ψ ≠ 1) : ‖∑ s ∈ hfin.toFinset, ψ s‖ ≤ 2 * √Q / (Q + 1) * hfin.toFinset.card` — `charBound_one_weil` with D-E1, and
+  `charBound_of_charBound_oneT`'s induction with norms over the private `norm_charSum_le_of_resT`. No stored statement moves;
+  `ClassRatio`'s dependents recompile.
+- **D-E3** (not recommended) — weaken `Rigidity.Counting.image_levR_unitVectors`'s hypothesis from `TCA F` to "no ramified stable
+  prime": it would move a landed stored statement; the copy is 30 lines.
+- **`ARCHITECTURE.md`**, the module map: seven rows, after the `Rigidity/` block — `Collapse/Thick` (C1, thickness of places and
+  levels; imports `Rigidity/CountCompletion`), `Collapse/Colouring` (C2; `Rigidity/APlus`), `Collapse/Dichotomy` (C3; C2,
+  `Rigidity/ZeroEntropyClosed`), `Collapse/Slice` (C4; C3, `Rigidity/CountExtension`), `Collapse/Mixing` (C5; C1,
+  `Arith/RatioBound`), `Collapse/Selection` (C6; C4, C5, `Plane/AeColouring`), `Collapse/Headline` (C7; C6, `Plane/YesLimit`,
+  `Bridge`, `Reduction`, `Rigidity/SqrtClassFive`, `Outside/OAI158`) — each "skeleton, FS131-KCL1; not on `main`" until it lands.
+
+### 4.6 The modeling passes (this job's)
+
+- **Domain** (`debruijn-domain-modeling`, run at stage 3): uniform thickness as a `Prop` beside the field, per-place form as a
+  corollary; the `k`-colour line as new parallel modules (the four-colour chain is an instance of it — a named debt, § 3.2); the
+  colour spectral measure `Σ_j σ_{e_j}` in place of the simplex measure (the incidental constants of the paper's embedding
+  removed); `AeColouring` as the output, the library's `χ_m⁰` object. Unsampled member: `k = 1` (`Xk_one_eq_empty`);
+  adversaries `ℚ`, `ℚ(√11)`.
+- **Obligation** (`debruijn-obligation-modeling`, run at stage 4): every hard leaf has a local decomposition (§ 4.3); the one
+  global argument — mixing on the profinite `K` — is localised to finite levels, where the obligation is a finite-group
+  inequality plus a residual that a library theorem sends to `0`. Statements checked for truth at their edge cases:
+  `thick_of_forall_thickAt` at `c₀ ≤ 0` (vacuous or contradictory, both handled), `exists_factorLawK` at `k = 0` (no probability).
+- **Experience**: not run — the job is out of budget (§ report). The public names follow the library's (`F635087` beside
+  `F47`; `chromaticNumber_planeOver_…`); owed before the landing.
+
+### 4.7 Front-page corrections and updates owed (drafted; Keryx files)
+
+- **`LEDGER.md` row 128, its grade bracket** — after "MR row 120's grade", add: "MR is in the kernel in a stronger form: the
+  one step that uses it (excluding the SP witness) follows from `Rigidity.mrPlus` at every real number field, on
+  `[EinsiedlerLindenstrauss2022]` Thm 1.3 (FS131-KCL1 stage 2, scratch-checked); what remains [hand] is the load-bearing step
+  and the selection (FS103-LB, FS103-SEL), planned for the kernel at about 3,300 lines (`plans/FS131-KCL1-collapse-plan.md`)".
+  At the landing the row's "given MR" is struck from its headline and its "Not claimed: the complex-place widening" replaced by
+  the general form's scope.
+- **`LEDGER.md` row 128, "MR at degree 16 walked at FS-105, one checking reading"** and **row 120's "Not claimed: MR at row
+  100's exception fields"** — both predate `mrPlus`, which holds MR⁺ at every real number field with no scope. This is FS131-PR1's
+  owed correction "row 120's grade" (inventory item 951), seen again; no new slot.
+- **`CLAUDE.md` § The aim, link 1** ("Given MR at a number field (row 120) it also equals `χ(F²)` at each totally real field where
+  every stable place mixes at six colours, ℚ(√635087) and de Grey's field among them (row 128; [hand, two minds])") — at the
+  landing: "It also equals `χ(F²)` at every real number field whose stable places all mix at six colours, ℚ(√635087) and de
+  Grey's field among them — in the kernel since <landing>, on the two declared outside theorems (row 128)". Before the landing,
+  only "Given MR at a number field (row 120)" is stale: "MR's one use there is a kernel theorem (`Rigidity.mrPlus`); the step that
+  uses it is [hand]".
+
+### 4.8 The build
+
+`SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 scripts/slot.py --mem 12 --cpus 6 -- env MEMMAX=12G BATCH=4 ./scripts/build.sh`: **OK — 557 of
+557 batches, 8 modules rebuilt (the seven `Collapse/` modules and `Proofs`), 16 m 3 s** (`data/fs131/kcl1/build1.log`; the
+full output `data/fs131/kcl1/build1-full.log`). Warnings: the `sorry` leaves, and one `unusedSectionVars` at `ThickAt.mono`
+(`[NumberField F]`): the implementer adds `omit [NumberField ↥F] in` (no statement moves — the binder is not in the stored type).
+For iteration the modules were elaborated by `lake env lean`, each upstream new module written to `.lake/build` with `-o` first;
+the build recompiled all seven from source (no trace existed), so nothing it reports rests on those files. Nothing with a
+`sorry` reaches `main`: the skeleton stays on `fs131-kcl1`.

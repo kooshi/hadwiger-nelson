@@ -1,0 +1,9 @@
+slot: admitted lake: mem 8 GiB (hard cap), cpus 4,5
+Proofs/HadwigerNelson/Collapse/Dichotomy.lean:118:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Dichotomy.lean:123:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Dichotomy.lean:128:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Dichotomy.lean:146:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Dichotomy.lean:154:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Dichotomy.lean:159:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Dichotomy.lean:171:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Dichotomy.lean:179:8: warning: declaration uses `sorry`
