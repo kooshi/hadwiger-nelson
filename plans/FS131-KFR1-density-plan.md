@@ -138,3 +138,269 @@ separate statement for it.
   ℚ(√635087)` makes it triangle-free. **Price: about 150 of the 230 lines above.** Prior art for "a finite triangle-free
   unit-distance graph with `χ = 6`": not searched by this job (prior-art debt for the asking lane; `[OAIMath2026]`'s graphs
   hold `ζ₆`).
+
+## Stage 3 — SAVED: the skeleton, the plan per leaf, the price
+
+The coordinator's ruling (inventory item 1008, received during stage 2) adopts all three findings of § 1.3. The widest form
+is the head statement. The fractional collapse is a theorem beside it. The disc module is part of this plan.
+
+### 3.1 The skeleton (four new modules, 79 leaves, on `fs131-kfr1` only)
+
+| module | contents | leaves |
+|---|---|---|
+| `Collapse/Density/Defs` (D1) | `stableRatio`, `localRatio`, `IndepSets`, `IndepLaw`, `IndepLaw.density`, `SetEdgeNull`; the lower half; the ramified bound; Hoffman from thickness; `disc7_le_mOne`, `sixth_lt_mOne` | 19 |
+| `Collapse/Density/Upper` (D2) | `cayR`, `indShift`, `factorOne`, `condOne`, `IsIndicatorSpectral`, `setCol`; Følner, averaging, the per-class dichotomy, the extension, the slice, the count, the per-law bound | 19 |
+| `Plane/TriangularPacking` (D4) | `triCentre`, `triPacking`; independence, periodicity, density `π/(8√3)`, `pi_div_le_mOne`, `fifth_lt_mOne` | 9 |
+| `Collapse/Density/Headline` (D3) | the head statements, B-AMEN, `χ_f`, the fractional collapse and its instances, TJ, ROUND, TF, the corollary, item 1005's splits (proved) and the model at `k = 7` (`d7`, `F7`) | 22 + 2 proved |
+
+Each module elaborates (`data/fs131/kfr1/seq.sh`, logs under `data/fs131/kfr1/logs/`), and the build is
+`data/fs131/kfr1/build.log` (§ 3.6). The stored types of the head statements were printed from the compiled modules
+(`data/fs131/kfr1/KernelSigs.lean`, `kernel-sigs.out`). Every binder is the one written. `inv_localRatio_lt_five` takes no
+`[NumberField F]`: `localRatio F ≥ m₁` at every `F`. The splits print `[propext, Classical.choice, Quot.sound,
+positive_entropy_rigidity, kloosterman_bound, no_proper_five_coloring]`, which is the six-or-seven corollary's list.
+
+### 3.2 Read aloud against row 129 and the entries
+
+- `finIndepRatio_planeOver_eq_localRatio : α₁(F²) = max(m₁(ℝ²), ⨆_P r_P)` for every `F : Subfield ℝ` with
+  `[NumberField F]`. Row 129 says "given MR(F) … `α₁(F²) = α_loc(F)`, `α_loc(F) = max(m₁(ℝ²), sup_v r_v)` (`r_v` a stable
+  place's all-levels independence ratio)". The two match term for term: `α₁` is `finIndepRatio` of the induced
+  unit-distance graph on `planeOver F`; `m₁` is `Plane.mOne`, the same constant as FS-133's equality; `v` ranges over
+  `StablePrime F`; `r_v` is the supremum over `m ≥ 1` of `levelTarget P m`'s ratio. One reading note: `levelTarget` uses
+  *every* norm-one residue, where the derivation uses the image of `U`. At an unramified prime the two are equal (`[S9]`,
+  `image_levR_unitVectors_of_unramified`). At a ramified prime both sides of the equality are `1/2`. The statement is wider
+  than the row: there is no MR hypothesis, no `R = O′`, and no requirement that `F` be totally real.
+- `finIndepRatio_planeOver_eq_iSup_density` is B-AMEN's `α₁ = α_inv`, with `α_inv` the supremum of `P(0 ∈ I)` over
+  `R ⋊ U`-invariant laws (`IndepLaw`). That is FRAC's definition.
+- `fractionalChromaticNumber_planeOver_eq`, `χ_f(F²) = 1/α_loc(F)`, is the "fractional local–global principle" of row 129's
+  title, stated for `χ_f` itself.
+- The fractional collapse, at `Thick F c` with `0 ≤ c < 1/5` (the collapse's own hypothesis), gives `α₁(F²) = m₁ = α₁(ℝ²)`
+  and `χ_f(F²) = χ_f(ℝ²)`. At the two fields it holds with no hypothesis.
+- TJ's first clause is stated with `N_δ` as "`c`-thick for no `c < δ/(1 − δ)`" (`λ*_v ≥ δ/(1 − δ)`). Its second clause, the
+  selection's density loss, is **not stated** (§ 3.5).
+- ROUND: `1/k ≤ α_loc` for a `k`-colourable `F²`, and `1/α_loc < 5`. Together they are "this route gives at most five". The
+  ceiling form `χ ≥ ⌈1/α_loc⌉` is the first statement read at the integer `k`.
+- TF: for `ε > 0`, a nonempty finite `S ⊂ ℂ` whose unit-distance graph is `CliqueFree 3` and has `α(S) < (m₁ + ε)|S|`. The
+  entry's "`≤ 0.24699 + ε`" is `m₁ ≤ 0.2470` (`Plane.mOne_le_of_oneAvoidingDensityBound`). It is not restated.
+- The corollary: a finite `S ⊂ ℂ`, `CliqueFree 3`, with `χ = 6` exactly.
+- **Not claimed** anywhere: a value of `m₁` or `χ_f(ℝ²)`; anything at six colours beyond the corollary; that the fractional
+  forms are new.
+
+### 3.3 The plan, per leaf
+
+Routes name held declarations, and each name was read in its module at `65ee5a95c`. Leaves marked **(copy)** adapt a held
+proof of the colouring namesake; the edits listed are the only changes.
+
+**D1.**
+- `card_div_le_stableRatio`: `le_iSup₂_of_le` four times.
+- `ratioAtMost_of_stableRatio_le`: `ENNReal.div_le_iff`. The quotient is finite and nonempty: `finite_quot_pow` is private in
+  `Rigidity/ClassRatio`, so use `Ideal.finiteQuotientOfFreeOfNeBot` as there.
+- `stableRatio_le_one`: `Finset.card_le_univ`.
+- `half_le_stableRatio_of_isRamified`: take the larger colour class of `colorable_two_levelTarget_one_of_isRamified` at
+  `m = 1`. A two-way pigeonhole on `Finset.univ.filter` gives `2·|class| ≥ |A|` (`noRamifiedStableDyadic_of_tca`'s proof,
+  `Rigidity/ChainAtTA` l. 556, does the same).
+- `ratioAtMost_of_thickAt`: `open private ratioAtMost_of_charBound from Proofs.HadwigerNelson.Rigidity.ClassRatio`, with
+  `CharBound` from `ThickAt` by `Complex.re_le_norm` (`|Re z| ≤ ‖z‖`; `levelSet P m = normOneQ P m` by `rfl` — **check**).
+  If `open private` is ruled out, reprove it from `RatioBound.card_mul_le_of_indep` (40 lines).
+- `stableRatio_le_of_thickAt`: from the line above, `iSup₂_le`.
+- `card_div_le_finIndepRatio_of_hom`: `le_finIndepRatio_iff`. For a nonempty finite `S`, count
+  `Σ_{a ∈ A} |S ∩ φ⁻¹(s + a)| = |S|·|s|` (`Finset.sum_comm`, `Finset.card_eq_sum_ones`). Some `a` reaches the average
+  (`Finset.exists_le_card_fiber_of_mul_le_card`, or `Finset.exists_lt_of_sum_lt` read contrapositively). `φ⁻¹(s + a) ∩ S`
+  is independent by `hH` and `φ.map_adj`, and `card_le_indepNum_induce` closes. About 70 lines.
+- `levelTarget_adj_add`: `SimpleGraph.fromRel_adj`, `add_sub_add_right_eq_sub`.
+- `stableRatio_le_finIndepRatio`: `iSup₂_le`, `UpperHalf.exists_hom_levelTarget`, the averaging lemma, `Finite` of the
+  quotient.
+- `mOne_le_finIndepRatio_planeOver`: `OneClass.mOne_le_finIndepRatio.trans (finIndepRatio_le_of_embedding (Embedding.induce _))`.
+- `localRatio_le_finIndepRatio`: `max_le` and `iSup_le`.
+- `finIndepRatio_planeOver_le_half`: `finIndepRatio_le_of_forall_card_le` at `S = {0, 1}`, `a = 1`.
+- `disc7_le_mOne`: `upperDensity_le_mOne` at `interior (disc7 0)`. Independence: a unit pair of `disc7 0` lies on its spheres
+  (`disc7_unitPair_mem_sphere`), so it is not in the interior. The density is `upperDensity_congr_ae` from
+  `volume_frontier_disc7`, then `disc7_upperDensity`.
+- `sixth_lt_mOne`: `2π/(21√3) > 1/6` ⟺ `12π > 21√3`, with `Real.pi_gt_three` and `√3 < 7/4` (`Real.sqrt_lt'`).
+- `isClosed_indepSets`, `measurableSet_indepSets`: `Collapse/Colouring`'s `isClosed_Xk`, `measurableSet_Xk` **(copy)**.
+- `nonempty_indepLaw`: the point mass at `fun _ => false`, as `OneClass.isInvariantLaw_dirac`, with `countable_unitRing`.
+- `setEdgeNull_empty`: `simp`.
+
+**D2.**
+- `measurePreserving_shift`: `⟨measurable_pi_lambda …, μ.shift_inv y⟩`.
+- `finIndepRatio_planeOver_le_cayR`: the embedding `x ↦ ⟨x, unitRingOver_le_planeOverSubring F x.2⟩`. Its adjacency iff is
+  `Complex.dist_eq` together with "`|y − x| = 1` and `y − x ∈ planeOver F` is `y − x ∈ unitVectors F`".
+- `exists_indepLaw` **(copy, FS-133 on `R`)**. Steps:
+  - `OneClass.exists_foelner_finset (unitRing F)`.
+  - A largest independent subset `J n ⊆ F n` (`le_finIndepRatio_iff`).
+  - `exists_shiftInvariant_of_foelner`'s proof with `E` replaced by `unitRing F` and `shiftLab` by `indShift` (90 lines).
+  - The rotation step through `OneClass.exists_common_fixed` on the closed class "carried by `IndepSets F`,
+    shift-invariant, origin law fixed". `Collapse/Colouring`'s `exists_invColouring` steps at `Bool` do exactly this. The
+    covariance is `shift_y ∘ rot_u = rot_u ∘ shift_{u y}`.
+  - About 230 lines.
+- `IndepLaw.density_le_finIndepRatio` **(copy)**: `OneClass.IsShiftInvariantLaw.measure_origin_le`'s proof on `R`. The
+  independence of the random set's trace on `S` is from `carried`.
+- `exists_isIndicatorSpectral`: `exists_isSpectralMeasureOf indShift μ.measurePreserving_shift indShift_add` at
+  `indicatorConstLp 2 … 1`. The coefficient is `Collapse/Dichotomy`'s `integral_colourIndK_mul_comp` **(copy at `Bool`,
+  `j = true`)**.
+- `.rotInv` **(copy)** of `IsColourSpectral.rotInv`, with the event `{c 0 = true ∧ c (u y) = true}`.
+- `.integral_unit`: `carried` at the pair `(0, u)`.
+- `factorOne`, `condOne`: definitions. `condOne` is `condExp`, the `μ[·|𝒜]` notation written out.
+- `setIntegral_compl_TA_re_one` **(copy)** of `setIntegral_compl_TA_re_k`'s body with one `j`.
+  - Its helpers, copied: `colourCondK` → `indCond := condExpL2 … (indicatorConstLp …)`, `colourCondK_ae_eq_condLawK`,
+    `condLawK_comp_colourShiftK`, `integral_colourCondK_mul_comp`.
+  - The `Finset.sum` and `colour_decomp` drop out, since the measure *is* the indicator's.
+  - About 150 lines.
+- `integral_condOne_mul_eq_zero`. Let `σ' = σ.restrict (TA F)ᶜ`.
+  - `hpos`: `0 ≤ E[p(0)p(u)]` (`integral_nonneg_of_ae`, `condExp_nonneg`).
+  - `hrot`: `setIntegral_compl_TA_rot_k`'s proof **(copy)**.
+  - If `∫ Re χ(1) dσ' < 0`, then `⟨_, rotInv_restrict_compl_TA hσ.rotInv, restrict_compl self, h⟩ : IsSPWitness F (TA F) σ'`
+    contradicts `not_isSPWitness le_rfl`.
+  - So the integral is `0` at `1`, hence at every `u`, and the identity gives `0`.
+  - About 50 lines.
+- `exists_indepLaw_TA`. The support set is `J ω x := decide (0 < condOne μ x ω)`, with `si4K`'s pattern: the version
+  `p(x) = p(0) ∘ shift_x`.
+  - From `integral_condOne_mul_eq_zero` and `p ≥ 0`, `p(0)p(u) = 0` a.s.: `integral_eq_zero_iff_of_nonneg_ae`.
+  - By shift-invariance and countability of `R × U`, `J` is a.s. independent: `Collapse/Dichotomy`'s
+    `ae_condLawK_mul_eq_zero` **(copy at `Bool`)**.
+  - `J ⊇ I` a.s.: `measure_condLawK_nonpos_inter` **(copy)**.
+  - Shift and rotation invariance of `J`'s law: `factorColouringK_shift_ae`, `_rot_ae` **(copy)**.
+  - Spectrum on `T + A` (`J` is `𝒜`-measurable): `factorLawK_spectral_null` **(copy)**.
+  - The density inequality: `J ⊇ I`.
+  - About 230 lines, half of `Collapse/Dichotomy`'s factor block.
+- `tendsto_measure_ne_one` **(copy)** of `tendsto_measure_ne_k`. Its first line becomes
+  `P(c 0 ≠ c y) = 2(P(c 0) − P(c 0 ∧ c y)) = 2(σ(R̂) − Re ∫ χ(y) dσ)`: the law is shift-invariant, so
+  `P(c y) = P(c 0)`. About 70 lines.
+- `exists_extension_one` **(copy)** of `exists_extension_k`, about 170 lines:
+  - `Fin k` becomes `Bool`.
+  - `measure_eq_add_unit_k` becomes the event `c a ∧ c (a + u)`, null by `carried`.
+  - The edge set `C m` becomes `{c (π m g) ∧ c (π m (g + t))}`.
+  - New, about 25 lines: the one-point law `μ{f c g = true} = density`. It holds for `g = ιG r` by `Nat.find` stability,
+    and in general as a limit of `P(c(π n g))`, a constant sequence by shift-invariance.
+- `exists_slice_set` **(copy)** of `exists_slice_k` for the null edges. The density bound is new, about 40 lines: Tonelli
+  (`Measure.prod_apply_symm`) gives `∫ (vol ⊗ haar)(W_c ∩ win × K) dμ = density · s²`. Then `exists_lt_of_lintegral_lt`
+  (or the contrapositive of `lintegral_mono`) intersected with the almost-sure null edges (`Eventually.and`, `.exists`
+  with `Filter.Frequently`). About 120 lines.
+- `ratioLe_levR_range_of_unramified`: `Counting.ratioLe_levR_range`'s proof **(copy, 10 lines)** with
+  `image_levR_unitVectors_of_unramified`.
+- `rowsEdgeNull_levelRows_set` **(copy)** of `rowsEdgeNull_levelRows`, about 85 lines. `image_levR_unitVectors` becomes the
+  unramified form. `hAB` reads "both in `W`" through `setCol` (`if_pos`), and `hM0` is `SetEdgeNull`.
+- `exists_window_bound`: `false_of_slice`'s window block with no sum, about 70 lines. Ingredients: `exists_nrWindow`;
+  `volume_colour_le` and `tendsto_bad` at `φ = setCol W`, `j = 1`; `{p | setCol W p = 1} = W` (`decide`/`if`);
+  `sum_volume_inter_sq_le` with `ratioLe_levR_range_of_unramified`.
+- `density_le_max_of_unramified`: for each `ε`, the window `s₀`, then `exists_slice_set` (after `exists_indepLaw_TA`) at
+  `(0, s₀)` and `exists_window_bound`. Divide by `s₀²` and let `ε → 0` (`ENNReal.le_of_forall_pos_le_add`). About 40 lines.
+- `density_le_localRatio`, about 40 lines. Ramified case (`by_cases`): `density_le_finIndepRatio`, `cayR`'s ratio `≤ 1/2`
+  (its edge `0 ~ 1`), and `half_le_stableRatio_of_isRamified`. Unramified case: `c := (⨆ P, stableRatio P).toReal`, which
+  is `≤ 1` by `stableRatio_le_one`, and `ratioAtMost_of_stableRatio_le`.
+
+**D4.**
+- `zero_mem_triPacking`, `measurableSet_triPacking`: `isOpen_iUnion`, `isOpen_ball`.
+- `two_le_dist_triCentre`: `|2a + b + bi√3|² = 4(a² + ab + b²)`, and `a² + ab + b² ≥ 1` for `(a, b) ≠ 0` (`nlinarith`, or
+  `omega` after `Int` casts).
+- `isIndepSet_triPacking`: `isIndepSet_unitDistance_iff`. One disc gives distance `< 1` (`dist_triangle`). Two discs give
+  distance `> 2 − 1`.
+- `triPacking_periodic`: reindex `(m, n) ↦ (m + 1, n)` and `(m, n + 1)`.
+- `linearIndependent_triLattice`: `LinearIndependent.pair_iff`, with imaginary parts `0` and `√3 ≠ 0`.
+- `upperDensity_triPacking`, about 120 lines: `upperDensity_of_periodic`, then the cell measure. Model it on
+  `Plane/CoverExamples.volume_disc7_cell`, about 130 lines there: the parallelogram holds, up to translation by lattice
+  vectors, exactly one disc. The cell's area is `2√3`.
+- `pi_div_le_mOne`: `upperDensity_le_mOne`.
+- `fifth_lt_mOne`: `π/(8√3) > 1/5` ⟺ `5π > 8√3`.
+
+**D3.**
+- `finIndepRatio_planeOver_eq_localRatio`: `le_antisymm` of the chain `α₁(F²) ≤ α₁(cayR) ≤ density μ ≤ localRatio`
+  (`finIndepRatio_planeOver_le_cayR`, `exists_indepLaw`, `density_le_localRatio`) and `localRatio_le_finIndepRatio`.
+- `finIndepRatio_planeOver_eq_iSup_density`: the same chain with `density_le_finIndepRatio`.
+- `fractionalChromaticNumber_le_card_div`, about 50 lines. `FractionalColorable H |s| |A|` by `x ↦ {a : x − a ∈ s}`, through
+  `Fintype.equivFin`. Then `FractionalColorable.fractionalChromaticNumber_le`.
+- `fractionalChromaticNumber_planeOver_eq`, about 70 lines.
+  - `≥`: `inv_finIndepRatio_le_iSup_fractionalChromaticNumber`, `fractionalChromaticNumber_induce_le`, the head statement.
+  - `≤ 1/m₁`: `fractionalChromaticNumber_induce_le`, `OneClass.fractionalChromaticNumber_plane`.
+  - `≤ |A|/|s|` at every level: `fractionalChromaticNumber_mono_of_hom`.
+  - So `≤ (max …)⁻¹` by `ENNReal.inv_iSup`-style algebra.
+- `localRatio_eq_mOne_of_thick`: `stableRatio_le_of_thickAt`, `c/(1 + c) < 1/6 < m₁` (`sixth_lt_mOne`).
+- The thick forms and the four instances: one line each from the head statement, `fractionalChromaticNumber_planeOver_eq`,
+  `fractionalChromaticNumber_plane`, `thick_sqrt635087`, `thick_deGrey` and the constants' `< 1/5` (held in
+  `Collapse/Headline`'s instance proofs).
+- `IndepLaw.density_le_notThick`, about 90 lines. The places `c`-thick for some `c < δ/(1 − δ)` have `r_P ≤ c/(1 + c) < δ`.
+  The remaining difficulty is that their supremum stays `< δ`. That needs `r_P → 0` along the stable primes: Weil
+  (`ratioAtMost_weil`, private in `Rigidity/ClassRatio`), `exists_uniform_tail`'s pattern with the constant made small, and
+  `finite_stablePrime_absNorm_le`. Then a case split on the attained maximum.
+- `inv_le_localRatio_of_colorable`: `inv_le_finIndepRatio_of_colorable` and the head statement.
+- `inv_localRatio_lt_five`: `fifth_lt_mOne`, `le_max_left`, `ENNReal.inv_lt_iff_inv_lt`.
+- `cliqueFree_three_planeOver_of_sqrt_three_notMem`, about 60 lines. Three pairwise unit points `x, y, z` give
+  `w = (z − x)/(y − x) ∈ planeOver F` with `|w| = |w − 1| = 1`. Then `Re w = 1/2` and `(Im w)² = 3/4`, so
+  `√3 = ±2 Im w ∈ F`.
+- `sqrt_three_notMem_F635087`, about 50 lines. `QuadraticPrime.nonempty_ringHom_padic {635087}` at `p = 17` (`635087 ≡ 1`)
+  gives `ι : F → ℚ_[17]`, and `ι(√3)² = 3`. Then `‖ι √3‖ = 1`, the residue in `ZMod 17` squares to `3`
+  (`PadicInt.toZMod`), and `decide` refutes it.
+- `exists_triangleFree_ratio_lt`: the head instance, the definition of `⨅` (`iInf_lt_iff`), and the triangle-freeness carried
+  by `Embedding.induce`. About 30 lines.
+- `exists_finite_triangleFree_six_chromatic`, about 90 lines.
+  - Not five-colourable: `six_le_chromaticNumber_planeOver_sqrt635087`.
+  - Compactness: `SimpleGraph.nonempty_hom_of_forall_finite_subgraph_hom`, contrapositive, as `Plane/Radius` uses it. This
+    gives a finite `S₀` with no five-colouring.
+  - `Finset.exists_minimal` on `{S ⊆ S₀ | ¬ Colorable 5}`.
+  - Minimality gives `Colorable 6`: delete a vertex, colour the rest with five colours, and give the vertex the sixth. So
+    `χ = 6` by `chromaticNumber_eq_iff_colorable_not_colorable`.
+  - `CliqueFree 3` is carried by the embedding into `planeOver F635087`.
+- Item 1005's splits: proved (`.1`, `.2`).
+- `stablePrime_F7`, about 60 lines, the pattern of `stablePrime_sqrt635087` and `le_of_isSquare_635087`.
+  `two_notMem_of_isSquare` holds since `d₇ % 8 = 7` (`decide`). `interval_cases` runs over the eighteen primes, each
+  refuted by `decide +kernel` on `IsSquare ((d₇ : ℕ) : ZMod p)`; the residues are small. **Measure** the `decide` on a
+  31-digit numeral cast to `ZMod p`: `Nat.cast` reduces modulo `p` by `Nat.mod`, GMP-backed.
+- `weil_142_lt_sixth`: `√142 < 143/12` ⟺ `142·144 < 143²` (`20448 < 20449`), with `Real.sqrt_lt'`.
+- `exists_model_seven`: `thick_of_card (B := 142)` with `stablePrime_F7`, `weil_142_lt_sixth`, and the plane's
+  seven-colouring restricted (`Instances.plane_colorable_seven`, `Colorable.mono_left` with `Embedding.induce`).
+
+### 3.4 The price, in lines of Lean
+
+| module | lines |
+|---|---|
+| D1 `Collapse/Density/Defs` | 380 |
+| D2 `Collapse/Density/Upper` | 1,370 |
+| D4 `Plane/TriangularPacking` | 250 |
+| D3 `Collapse/Density/Headline` | 650 |
+| **total** | **about 2,650** |
+
+The total is below stage 2's 2,840 because the leaves, priced one by one, reuse more than the table assumed (the count's
+descent is reused, not copied). D2 is the long pole, and two-thirds of it is copy-and-adapt of `Collapse/Dichotomy` and
+`Collapse/Slice`. Re-price from the first two leaves (`CLAUDE.md` § What compute actually helps). The cheapest order that
+shows the head statement's shape early:
+1. D1 and D4, which hold no MR and no spectral theory.
+2. D2's count and Følner leaves, which reuse held proofs with small edits.
+3. D2's dichotomy and extension.
+4. D3.
+
+One implementer, sequential, since D3 needs everything. D1 and D4 could be split off to a second implementer.
+
+### 3.5 Choices made, with the alternative
+
+- **`TJ`'s second clause is not stated.** It is "the mixing selection, per class, keeps only density `≥ (δ − ϑ)/(1 − ϑ)`".
+  It is a statement about a construction that no theorem uses: the derivation records it to explain why the selection is not
+  the tool for the ratio. A statement would be `Collapse.not_both_heavy` composed with Markov's inequality over `fibreMass`,
+  about 110 lines. I would add it only on Keryx's word. Confidence that it belongs to no headline: high.
+- **The colouring privates are copied, not opened.** The alternative is to read `Collapse/Dichotomy`'s private helpers with
+  Batteries' `open private` (LEAN.md's `Rigidity/BochnerTau` precedent). That saves about 200 lines, but it ties a
+  published module to another's private names. `ratioAtMost_of_charBound` is the one place I would open a private: it is
+  40 lines, and a copy duplicates a Hoffman proof. The implementer may also draft making it public, an edit to
+  `Rigidity/ClassRatio` that is Keryx's to rule.
+- **Item 1005's two owed items live in the new `Collapse/Density/Headline`**, not in `Collapse/Headline`. The brief makes
+  existing modules draft-only. `exact?` finds them in either place.
+
+### 3.6 The experience-modeling pass (`debruijn-experience-modeling`, on the head statements and the definitions)
+
+Read as the user holding the goal `((unitDistance ℂ).induce (planeOver F)).finIndepRatio = ?`, as `exact?`, and as a
+reader of the docstrings with nothing else.
+
+- **Shape.** The left sides are the ones the library already uses for `χ` and `α₁`: the induced graph on `planeOver F`, and
+  `finIndepRatio`/`fractionalChromaticNumber` as FS-133 wrote them. The names follow the collapse's own:
+  - `finIndepRatio_planeOver_sqrt635087` matches `chromaticNumber_planeOver_sqrt635087`;
+  - `fractionalChromaticNumber_planeOver_eq_plane_of_thick` matches `chromaticNumber_planeOver_eq_plane_of_thick`;
+  - so a reader who knows one predicts the other. No change.
+- **The new definitions were a hide.** `localRatio` and `stableRatio` had no reasoning surface: a user bounding `α_loc` would
+  have had to unfold a `max` of an `iSup`, and the bridge to the count's `RatioAtMost` ran one way only, which implies that
+  the converse is hard. **Changed:** four leaves added to D1 — `mOne_le_localRatio`, `stableRatio_le_localRatio`,
+  `localRatio_le_iff` (the reasoning surface of an upper bound, as `mOne_le_iff` is `m₁`'s), and `stableRatio_le_of_ratioAtMost`
+  (the converse; five lines). D1 now has 23 leaves, the skeleton 83; the price moves by about 25 lines.
+- **The fractional collapse states both members.** It is given as `α₁(F²) = m₁` and as `α₁(F²) = α₁(ℝ²)`, and `χ_f` likewise,
+  so a user holding either right side finds a closing lemma. No change.
+- **One vocabulary.** "Stable prime", "residue target", "all-levels ratio" and "uniformly `c`-thick" are the words the
+  collapse's modules use. `IndepLaw` is `InvColouring`'s one-class namesake, said so in its docstring. No change.
+- **Breakdown.** A user who tries the head statement at a field without `[NumberField F]` gets "failed to synthesize
+  `NumberField ↥F`" at the statement. That is the true obligation: the residue rings are finite only there. No change.

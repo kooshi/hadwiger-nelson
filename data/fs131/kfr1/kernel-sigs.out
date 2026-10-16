@@ -1,0 +1,47 @@
+slot: admitted lake: mem 6 GiB (hard cap), cpus 10
+@finIndepRatio_planeOver_eq_localRatio : ∀ {F : Subfield ℝ} [NumberField ↥F],
+  (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).finIndepRatio = localRatio F
+@finIndepRatio_planeOver_eq_iSup_density : ∀ {F : Subfield ℝ} [NumberField ↥F],
+  (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).finIndepRatio = ⨆ μ, μ.density
+@fractionalChromaticNumber_planeOver_eq : ∀ {F : Subfield ℝ} [NumberField ↥F],
+  (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).fractionalChromaticNumber = (localRatio F)⁻¹
+@fractionalChromaticNumber_planeOver_eq_plane_of_thick : ∀ {F : Subfield ℝ} [NumberField ↥F] {c : ℝ},
+  Thick F c →
+    0 ≤ c →
+      c < 1 / 5 →
+        (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).fractionalChromaticNumber =
+          (unitDistance ℂ).fractionalChromaticNumber
+@finIndepRatio_planeOver_eq_mOne_of_thick : ∀ {F : Subfield ℝ} [NumberField ↥F] {c : ℝ},
+  Thick F c → 0 ≤ c → c < 1 / 5 → (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).finIndepRatio = Plane.mOne
+@IndepLaw.density_le_localRatio : ∀ {F : Subfield ℝ} [NumberField ↥F] (μ : IndepLaw F), μ.density ≤ localRatio F
+@exists_window_bound : ∀ {F : Subfield ℝ} [inst : NumberField ↥F],
+  (∀ (P : SpectralChain.StablePrime F), ¬Rigidity.IsRamified P) →
+    ∀ {c : ℝ},
+      0 ≤ c →
+        (∀ (P : SpectralChain.StablePrime F), Rigidity.RatioAtMost P c) →
+          ∀ {ε : ℝ},
+            0 < ε →
+              ∃ s₀,
+                0 < s₀ ∧
+                  ∀ (W : Set (ℂ × Rigidity.Counting.K F)),
+                    MeasurableSet W →
+                      SetEdgeNull F W →
+                        (MeasureTheory.volume.prod (Rigidity.Counting.haarK F)) (W ∩ Plane.squareWin 0 s₀ ×ˢ Set.univ) ≤
+                          ENNReal.ofReal ((max Plane.mOne.toReal c + 2 * ε) * s₀ ^ 2)
+inv_localRatio_lt_five : ∀ (F : Subfield ℝ), (localRatio F)⁻¹ < 5
+exists_finite_triangleFree_six_chromatic : ∃ S,
+  (SimpleGraph.induce (↑S) (unitDistance ℂ)).CliqueFree 3 ∧
+    (SimpleGraph.induce (↑S) (unitDistance ℂ)).chromaticNumber = 6
+exists_model_seven : ∃ c,
+  Thick F7 c ∧ 0 ≤ c ∧ c * (↑7 - 1) < 1 ∧ (SimpleGraph.induce (planeOver F7) (unitDistance ℂ)).Colorable 7
+@IndepLaw.density_le_notThick : ∀ {F : Subfield ℝ} [NumberField ↥F] (μ : IndepLaw F) {δ : ℝ},
+  0 < δ →
+    δ < 1 / 2 →
+      μ.density = ENNReal.ofReal δ →
+        μ.density ≤ max Plane.mOne (⨆ P, ⨆ (_ : ∀ c < δ / (1 - δ), ¬ThickAt P c), stableRatio P)
+'HadwigerNelson.Collapse.six_le_chromaticNumber_planeOver_sqrt635087' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ Rigidity.positive_entropy_rigidity,
+ StandingFive.kloosterman_bound,
+ Outside.OAI158.no_proper_five_coloring]

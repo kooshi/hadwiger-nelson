@@ -1,0 +1,14 @@
+import Proofs.HadwigerNelson.Collapse.Density.Headline
+open HadwigerNelson HadwigerNelson.Collapse
+#check @finIndepRatio_planeOver_eq_localRatio
+#check @finIndepRatio_planeOver_eq_iSup_density
+#check @fractionalChromaticNumber_planeOver_eq
+#check @fractionalChromaticNumber_planeOver_eq_plane_of_thick
+#check @finIndepRatio_planeOver_eq_mOne_of_thick
+#check @IndepLaw.density_le_localRatio
+#check @exists_window_bound
+#check @inv_localRatio_lt_five
+#check @exists_finite_triangleFree_six_chromatic
+#check @exists_model_seven
+#check @IndepLaw.density_le_notThick
+#print axioms six_le_chromaticNumber_planeOver_sqrt635087
