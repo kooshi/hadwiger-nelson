@@ -34,6 +34,13 @@ open SimpleGraph SpectralChain NumberField
 
 variable {F : Subfield ℝ}
 
+/-- **A walk along a sum of unit vectors** (the component lemma's `⟸`, its base point generalized): from any `y ∈ F²`, the
+partial sums `y + u₀ + ⋯ + u_j` of unit vectors of `F²` are a path of unit steps. -/
+theorem reachable_add_sum {m : ℕ} (u : Fin m → ℂ) (hu : ∀ j, ‖u j‖ = 1) (hF : ∀ j, u j ∈ planeOver F)
+    (y : planeOver F) (hy : (y : ℂ) + ∑ j, u j ∈ planeOver F) :
+    ((unitDistance ℂ).induce (planeOver F)).Reachable y ⟨(y : ℂ) + ∑ j, u j, hy⟩ := by
+  sorry
+
 /-- **The component lemma**: two points of `F²` are joined by a path of unit steps exactly when their difference is a
 finite sum of unit vectors. -/
 theorem reachable_iff_sub_mem_unitRingOver (x y : planeOver F) :

@@ -215,3 +215,19 @@ not read; no copy in the library*), its model (`ℚ(i)`, conjugation, the prime 
   is not a `level` (those holding an odd `n`). `isUnit_mover` returns the two facts the abstract lemma consumes, as one.
 - **Next lemma, predicted before checking:** the components as the quotient, `ConnectedComponent ≃ fieldI F ⧸ ℤ[U]`, states in
   the existing vocabulary (`reachable_iff_sub_mem_unitRingOver`); not planned (no consumer).
+
+### 3.2 The obligation-modeling pass (`debruijn-obligation-modeling`, fresh)
+
+Three typed joints added, each the place where a proof would otherwise be a walkthrough:
+- `NormOneGen.mem_closure_normOne_of_fixed` — the heart of the generation lemma (fixed elements in the generated ring), the
+  one step that reads finiteness twice; `closure_normOne_eq_top` is then `exists_fixed_add_mul` and three memberships.
+- `UnitRingEq.normOne_subset_range_resPi` — the held joint lift read in the product ring (the seam between `Counting`'s
+  family-indexed statement and the `Pi` type).
+- `PlaneComponents.reachable_add_sum` — the component lemma's `⟸` with its **base point generalized** (Gries's fresh
+  variable): induction on `m` with `Fin.sum_univ_castSucc` closes each step in two lines only when `y` is universally
+  quantified.
+Inductions named: `reachable_iff_sub_mem_unitRingOver` (⟹) is induction on `Relation.ReflTransGen` (`reachable_iff_reflTransGen`),
+one obligation, "an edge's difference is a unit vector"; `exists_prime_mod_four_eq_three_dvd` is the contrapositive "every prime
+factor `≡ 1 (mod 4)` ⇒ `N ≡ 1 (mod 4)`", by `induction_on_primes` (measure: the factorization); every other leaf is a chain
+of `have`s with no recursion. `infinite_connectedComponent_of_not_mem` is pigeonhole on `Fin (d + 1)` (`d` the number of
+components), `w = z/d!`, so the difference `j − i ≤ d` divides `d!` — no quotient group built.

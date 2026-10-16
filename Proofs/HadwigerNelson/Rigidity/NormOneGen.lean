@@ -48,6 +48,14 @@ theorem cayley_mul_conj_eq_one (σ : A →+* A) (hσ : ∀ x, σ (σ x) = x) {θ
     (hv : (v : A) = a + σ θ) : (a + θ) * ↑v⁻¹ * σ ((a + θ) * ↑v⁻¹) = 1 := by
   sorry
 
+/-- **The fixed elements lie in the ring the norm-one elements generate** (the heart of `closure_normOne_eq_top`): for `a`
+fixed, `t_a − 1 = (θ − σθ)/(a + σθ)` with `t_a` the Cayley element, so `(a + σθ)/(θ − σθ)` lies in it
+(`inv_mem_of_finite`); subtract the case `a = 0`, and use `a = 1` and `inv_mem_of_finite` again for `θ − σθ` itself. -/
+theorem mem_closure_normOne_of_fixed [Finite A] (σ : A →+* A) (hσ : ∀ x, σ (σ x) = x) {θ : A}
+    (hθ : IsUnit (θ - σ θ)) (hfix : ∀ a, σ a = a → IsUnit (a + θ)) {a : A} (ha : σ a = a) :
+    a ∈ Subring.closure {x : A | x * σ x = 1} := by
+  sorry
+
 /-- **The norm-one elements generate a finite ring with an involution** that moves some `θ` by a unit, `θ` staying a unit
 after adding any fixed element. -/
 theorem closure_normOne_eq_top [Finite A] (σ : A →+* A) (hσ : ∀ x, σ (σ x) = x) {θ : A} (hθ : IsUnit (θ - σ θ))

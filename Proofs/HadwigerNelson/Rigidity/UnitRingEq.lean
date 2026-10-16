@@ -57,6 +57,14 @@ theorem isUnit_mover (P : StablePrime F) (m : ℕ) {t : 𝓞 (fieldI F)} (ht : c
         IsUnit (a + Ideal.Quotient.mk (P.P ^ m) t) := by
   sorry
 
+/-- **Every norm-one element of the product is a residue of a unit vector** (`Counting.exists_normOneL_residues`, read in
+the product ring): the norm-one set of `∏_{P ∈ Φ} 𝓞 ⧸ P^m` under componentwise conjugation lies in the range of `resPi`. -/
+theorem normOne_subset_range_resPi (Φ : Finset (StablePrime F)) (hΦ : ∀ P ∈ Φ, ¬ IsRamified P) (m : ℕ)
+    {d : ∀ P : Φ, 𝓞 (fieldI F) ⧸ P.1.P ^ m}
+    (hd : ∀ P : Φ, d P * Ideal.quotientMap (P.1.P ^ m) (conjO F) (P.1.le_comap m) (d P) = 1) :
+    d ∈ (resPi Φ m).range := by
+  sorry
+
 /-- **The residues of `R` fill the product** at a finite set of unramified stable primes, at every exponent. -/
 theorem resPi_surjective (Φ : Finset (StablePrime F)) (hΦ : ∀ P ∈ Φ, ¬ IsRamified P) (m : ℕ) :
     Function.Surjective (resPi Φ m) := by
