@@ -370,3 +370,16 @@ StableAboveUsable with SqrtTwentyThreeCbrtTwo); no file is shared.
    `F(i)` fixed by complex conjugation (level one; the all-levels reading agrees through five)" — finding F1.
 4. **`LEDGER.md` row 123 and `ROADMAP.md` § 3 item 1**: nothing until the modules pass the gate on `main` (the announcement
    rule of item 995: "a planner's price is reported as 'planned, one mind; nothing held'").
+
+### 3.6 The build (2026-10-16, 17:59–18:34 UTC)
+
+`SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 scripts/slot.py --mem 6 --cpus 3 -- env MEMMAX=6G BATCH=2 ./scripts/build.sh`, exit 0:
+"build: OK — 1093 of 1093 batches, 5 module(s) rebuilt, 4 module(s) with warnings, 35m7s" (the four skeleton modules and the
+root; every warning `declaration uses 'sorry'`, one per leaf; no other warning). Log `data/fs131/kcs1/logs/build-1.log`;
+full output `build/gate/build/20261016T175931Z-4172396.log`. The text built is commit `09fc7f4c2`'s (the instance modules'
+renames were made before their batches ran, and nothing was edited after). The gate's other steps (audit, scans, lint) are
+not run on a skeleton: it carries `sorry` by design and never reaches `main`.
+
+## Stage 4 — SAVED: the report
+
+`data/fs131/reports/FS131-KCS1.md`, the same text as the hand-back.
