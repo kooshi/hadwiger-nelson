@@ -65,3 +65,28 @@ proof at `Fin k`:
 - `exists_slice_k` — the landed Tonelli argument verbatim at `Fin k`.
 
 About 255 lines of proof against the plan's 330, every one of them a copy; no Mathlib name new to the library.
+
+## Stage 3 — SAVED: `Collapse/Selection`
+
+*(Correction to stage 1: the farm is driven by this job's copy `data/fs131/ico2/lean1.sh` — the previous job's script with the
+slot named `ico2` — not by `data/fs131/ico1/lean1.sh` itself.)*
+
+**Every leaf proved** (8 of 8; work copy `data/fs131/ico2/work/Selection.lean`, clean on the second farm compile — `sel1.out`,
+`sel2.out`). About 105 lines against the plan's 310.
+- `measurable_fibreMass` — one term: `measurable_measure_prodMk_left` on `φ ⁻¹' {j}`, then `ennreal_toReal`.
+- `sum_fibreMass` — `sum_measure_preimage_singleton` over `Finset.univ` for `x ↦ φ(z, x)`, `measure_univ`, and
+  `ENNReal.toReal_sum`.
+- `ae_slice_edge` — the reorder `((z, θ), x) ↦ ((z, x), θ)` is measure-preserving as `prodAssoc.symm ∘ (id × swap) ∘
+  prodAssoc` (`measurePreserving_prodAssoc`, `MeasurePreserving.prod`, `Measure.measurePreserving_swap`); `SliceEdgeNullK`
+  pulled back along it is null, `Measure.measure_prod_null` reads it fibre by fibre, and `ae_all_iff` over the countable
+  `unitVectorsR F` (`countable_unitRing`) takes every unit vector at once.
+- `not_both_heavy` — `mixing_K` on the two fibres of colour `j` (their edge set lies in the null set of `hzw`), and
+  `not_both_ge_of_mixing` with `measureReal_le_one` for `a, b ≤ 1`.
+- `le_fibreMass_selCol` — the pigeonhole `Finset.exists_le_of_sum_le` against `∑ 1/k = 1 = ∑ m_j`, then `dif_pos` and
+  `Finset.min'_mem`.
+- `measurable_selCol` — `selCol φ θ₀` factors through `z ↦ (j ↦ decide (θ₀ ≤ m_j(z)))` into the finite `Fin k → Bool`
+  (`measurable_pi_iff`, `measurable_to_bool`, `measurableSet_le`), and every map out of that is measurable
+  (`measurable_of_finite`); the factorization is one `simp only` with `decide_eq_true_eq`.
+- `unitPairsNull_selCol` — the unit-pair set of a class lies in the exceptional set of `ae_slice_edge`: both ends selected `j`,
+  so both heavy (`le_fibreMass_selCol`), against `not_both_heavy`.
+- the spec example (a constant slice has fibre mass `1` on its colour) — `simp [fibreMass]`.
