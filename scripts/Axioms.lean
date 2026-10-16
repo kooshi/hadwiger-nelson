@@ -281,6 +281,9 @@ declared that no audited record carries fails as `stale-declaration`. -/
 #print axioms HadwigerNelson.SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five
 #print axioms HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber
 #print axioms HadwigerNelson.Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound
+-- FS131-IL5 (IMPORTED, on `Rigidity.positive_entropy_rigidity` and `StandingFive.kloosterman_bound`, through the headline): the main clause through five as one theorem (`Rigidity/MainClauseFive`) — 2
+#print axioms HadwigerNelson.Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five
+#print axioms HadwigerNelson.Rigidity.min_chromaticNumber_five_eq_min_localBound_five
 
 #eval IO.println "=== CLEAN ==="
 
@@ -12788,6 +12791,11 @@ IMPORTED. -/
 #print axioms HadwigerNelson.SqrtFortySeven.sqrt47_mem_A
 #print axioms HadwigerNelson.SqrtFortySeven.z11
 -- FS131-LGT1 block end
+
+/-! ## FS131-IL5 — the main clause through five as one theorem (`Rigidity/MainClauseFive`): its model at `ℚ`. The
+module's two theorems rest on the headline's declared imports and are under IMPORTED. -/
+
+#print axioms HadwigerNelson.Rigidity.localBound_bot_le_two
 
 #eval IO.println "=== PURCHASED ==="
 

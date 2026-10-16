@@ -1,0 +1,4 @@
+ok   HadwigerNelson.Rigidity.min_chromaticNumber_five_eq_min_localBound_five: under IMPORTED, axioms ['Classical.choice', 'HadwigerNelson.Rigidity.positive_entropy_rigidity', 'HadwigerNelson.StandingFive.kloosterman_bound', 'Quot.sound', 'propext']
+ok   HadwigerNelson.Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five: under IMPORTED, axioms ['Classical.choice', 'HadwigerNelson.Rigidity.positive_entropy_rigidity', 'HadwigerNelson.StandingFive.kloosterman_bound', 'Quot.sound', 'propext']
+FAIL HadwigerNelson.Rigidity.localBound_bot_le_two: filed under IMPORTED, its axioms ['Classical.choice', 'Quot.sound', 'propext'] put it under CLEAN
+==> 3 constant(s), 1 not filed as their axioms require (planted run)
