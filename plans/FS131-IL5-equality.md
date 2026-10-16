@@ -235,13 +235,15 @@ the item (Stage 1). Neither moves a value of `χ(ℝ²)`.
 
 ## Stage 4 — SAVED: the drafts
 
-#### Drafts for the front page
+The drafts follow, in the section below.
+
+## Drafts for the front page
 
 *Each draft names its slot: the file, the section, and the words it replaces or follows; every quoted slot text was checked
 to occur exactly once in its file at `440f5cfb9` (line wraps normalized). Counts are this job's gate's (`data/fs131/il5/gate/`,
 Stage 3). Keryx files; nothing here is edited by this job.*
 
-#### D1 — `ROADMAP.md` § 3, Planes over number fields
+### D1 — `ROADMAP.md` § 3, Planes over number fields
 
 **Slot: the section's first paragraph and items 1–2.** Replace
 
@@ -265,7 +267,7 @@ with
 and renumber items 3–7 of § 3 to 2–6 (item 2's text after "the family," unchanged; no file cites § 3's items by number —
 `rg` over the repository outside `data/` and this record).
 
-#### D2 — `ROADMAP.md` § 2, The three outside theorems
+### D2 — `ROADMAP.md` § 2, The three outside theorems
 
 **Slot: item 2 (EL).** Replace "Sixteen records rest on it, among them the five-colour chain `min(L(F), 5) ≤ χ(F²)` and
 `χ(ℚ(√47)²) = 5`." with "Eighteen records rest on it, among them the five-colour chain `min(L(F), 5) ≤ χ(F²)`, `χ(F²) = L(F)`
@@ -275,7 +277,7 @@ whenever `L(F) ≤ 5`, and `χ(ℚ(√47)²) = 5`."
 stands: "the three-colour criterion, `χ(F²) = L(F)` at `L(F) ≤ 4`, and, with EL, the five-colour chain" — the two new records
 are the five-colour chain's).
 
-#### D3 — `README.md` § Planes over number fields, the table
+### D3 — `README.md` § Planes over number fields, the table
 
 **Slot: the row whose first cell begins "`min(L(F), 5) ≤ χ(F²)` for every real number field".** Replace its first two cells
 
@@ -287,7 +289,7 @@ with
 
 The row's other cells stand (rests on: std3 + **EL** + **W**, as `#print axioms` prints for both new theorems).
 
-#### D4 — `LEDGER.md` row 123
+### D4 — `LEDGER.md` row 123
 
 **Slot 1, the grade's first sentence.** Replace "`χ = L` at `L ≤ 5` is that clause with the upper half, not stored as one
 theorem;" with "`χ = L` at `L ≤ 5` is that clause with the upper half, stored as one theorem since FS131-IL5
@@ -303,7 +305,7 @@ No row is regraded: row 123's main clause is [kernel] since FS131-LGT1; what thi
 name, on the same assumptions (`positive_entropy_rigidity`, `[EinsiedlerLindenstrauss2022]` Thm 1.3; `StandingFive.kloosterman_bound`,
 `[Weil1948]` p. 207).
 
-#### D5 — `CLAUDE.md` § Where the problem stands, "What the kernel holds, beyond the interval"
+### D5 — `CLAUDE.md` § Where the problem stands, "What the kernel holds, beyond the interval"
 
 **Slot: in the main-clause entry.** Replace "and with the upper half (`UpperHalf.chromaticNumber_planeOver_le_localBound`)
 `χ(F²) = L(F)` whenever `L(F) ≤ 5` (a two-line composition, not a stored theorem)" with "and with the upper half
@@ -311,7 +313,7 @@ name, on the same assumptions (`positive_entropy_rigidity`, `[EinsiedlerLindenst
 (`Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five`; with no hypothesis, `min(χ(F²), 5) = min(L(F), 5)`,
 `Rigidity.min_chromaticNumber_five_eq_min_localBound_five`; FS131-IL5)".
 
-#### D6 — `CLAUDE.md` § Trust ledger
+### D6 — `CLAUDE.md` § Trust ledger
 
 **Slot 1, the audit sentence.** Replace "the current audit reads 10650 clean and 5 declared purchases, and 60 imported (and 569
 axiom-free; 11,284 records at the landing of the five-colour chain, FS131-LGT1, 2026-10-15)" with "the current audit reads 10651
@@ -335,13 +337,13 @@ mentions=2`" with "`axioms=3 rests=78 named=19 inline=14 outside=7 ours=21 open=
 resting on them, sixty-eight theorems, ten of them on two". (The step flagged `rests 74 → 78` stale in `CLAUDE.md`, and no
 other count; the ledger's header is refiled on this branch.)
 
-#### D7 — `CLAUDE.md` § The gate
+### D7 — `CLAUDE.md` § The gate
 
 **Slot: the vacuity counts.** Replace "`declarations=22238 refutations-skipped=240 sites=1455`" with "`declarations=22241
 refutations-skipped=240 sites=1455`" (the second line, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1412 unknown=2`,
 unchanged; the baseline's header is refiled on this branch).
 
-#### D8 — `CLAUDE.md` § Frontier, the "Last filed" line
+### D8 — `CLAUDE.md` § Frontier, the "Last filed" line
 
 **Slot: the sentence beginning "Last filed:".** If Keryx files this job as its own filing, a line in the form the section uses:
 "Last filed: **the main clause through five as one theorem** (FS131-IL5, 2026-10-16: `χ(F²) = L(F)` whenever `L(F) ≤ 5`,
@@ -352,7 +354,7 @@ lower half this project's derivation)". The previous "Last filed" text moves to 
 
 **Proof Atlas:** no grade changes — row 123's clause was [kernel] already.
 
-#### Optional — `CLAUDE.md` § Grokkings, "The theory in one paragraph"
+### Optional — `CLAUDE.md` § Grokkings, "The theory in one paragraph"
 
 **Slot:** after "`Rigidity.min_localBound_five_le_chromaticNumber`)" in the sentence "through five the bound is exact: …", add
 "; the equality is stored as `Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five`". Optional: the paragraph names the
