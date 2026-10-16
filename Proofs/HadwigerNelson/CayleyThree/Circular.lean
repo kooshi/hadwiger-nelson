@@ -35,7 +35,7 @@ open HadwigerNelson.ThreeColour HadwigerNelson.CharacterColouring HadwigerNelson
 /-- **Rational solutions are dense in the real solutions of a rational linear system**: a system `G y = b` with rational
 coefficients and a real solution `x` has a rational solution within `ε` of `x` in every coordinate. (Route: a `ℚ`-basis of
 the `ℚ`-span of `1` and the coordinates of `x`; the basis vectors moved to nearby rationals; normalized at `1`.) -/
-theorem exists_rat_solution_near {ι κ : Type*} [Fintype ι] [Finite κ] (G : κ → ι → ℚ) (b : κ → ℚ) {x : ι → ℝ}
+theorem exists_rat_solution_near {ι κ : Type*} [Fintype ι] (G : κ → ι → ℚ) (b : κ → ℚ) {x : ι → ℝ}
     (hx : ∀ k, ∑ i, (G k i : ℝ) * x i = b k) {ε : ℝ} (hε : 0 < ε) :
     ∃ q : ι → ℚ, (∀ k, ∑ i, G k i * q i = b k) ∧ ∀ i, |(q i : ℝ) - x i| < ε := by
   classical

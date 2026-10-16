@@ -700,7 +700,7 @@ theorem forcedSubgroup_finiteIndex_iff_finite {S : Set A} {k : ℕ} :
     abel
 
 /-- **Row 79's class, as an instance of density.** -/
-theorem exists_isPeriodic_eqOn_of_fg_torsionFree [AddGroup.FG A] [_htf : IsAddTorsionFree A] {S : Set A} (hSfin : S.Finite)
+theorem exists_isPeriodic_eqOn_of_fg_torsionFree [_hfg : AddGroup.FG A] [_htf : IsAddTorsionFree A] {S : Set A} (hSfin : S.Finite)
     (_hsymm : -S = S) (hgen : AddSubgroup.closure S = ⊤) (_hS : (0 : A) ∉ S) (C : (addCayley S).Coloring (Fin 3))
     (B : Finset A) : ∃ C' : (addCayley S).Coloring (Fin 3), IsPeriodic C' ∧ Set.EqOn (⇑C') (⇑C) (B : Set A) :=
   exists_isPeriodic_eqOn hSfin hgen C B

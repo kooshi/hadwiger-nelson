@@ -63,11 +63,16 @@ def main():
         return 2
     if plant:
         pub = [r for r in recs if r[1] == "public"]
-        new = [r for r in pub if r[2] not in audit]
-        old = [r for r in pub if r[2] in audit and audit[r[2]] == "CLEAN"]
-        if len(new) < 3 or not old:
-            print("PLANT UNREACHABLE: needs three unfiled records and one filed CLEAN record")
+        if len(pub) < 4:
+            print("PLANT UNREACHABLE: needs four public records")
             return 2
+        # FS131-ICT3: the plant is made reachable in both states of the audit (before the block is in, no record is filed;
+        # after, none is unfiled): three records are unfiled in memory and a fourth is filed CLEAN in memory first.
+        new = pub[:3]
+        for r in new:
+            audit.pop(r[2], None)
+        old = [pub[3]]
+        audit[old[0][2]] = "CLEAN"
         new[0][3] = new[0][3] | {"planted.unknownAxiom"}
         new[1][3] = new[1][3] | {"sorryAx"}
         new[2][3] = new[2][3] | {KB}

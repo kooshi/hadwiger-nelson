@@ -29,6 +29,20 @@ def insertAfter (t : Expr) (k : Nat) (dom : Array Expr → TermElabM Expr) : Ter
     let d ← dom xs
     mkForallFVars xs (← mkArrow d body)
 
+/-- Insert one instance-implicit binder, its domain built from the leading binders, after the first `k` binders of `t`
+(FS131-ICT3; `Expr.hash` reads neither binder names nor binder kinds, so this and `insertAfter` hash alike). -/
+def insertInstAfter (t : Expr) (k : Nat) (dom : Array Expr → TermElabM Expr) : TermElabM Expr :=
+  forallBoundedTelescope t k fun xs body => do
+    let d ← dom xs
+    withLocalDecl `inst .instImplicit d fun y => do mkForallFVars (xs.push y) body
+
+/-- The name and domain of binder `k` (0-based) of `t`, and `t` with that binder's domain replaced by `True` (FS131-ICT3). -/
+def binderAt (t : Expr) (k : Nat) : TermElabM (Name × Expr × Expr) :=
+  forallBoundedTelescope t k fun xs rest => do
+    let .forallE n d b bi := rest | throwError "binder {k} is not a forall"
+    let ctrl ← mkForallFVars xs (.forallE n (mkConst ``True) b bi)
+    pure (n, d, ctrl)
+
 /-- Elaborate `stx` at the bound variables in scope, with no expected type, and instantiate its metavariables. -/
 def elabClosed (stx : Syntax) : TermElabM Expr := do
   let e ← Term.elabTerm stx none
@@ -74,6 +88,27 @@ def run : TermElabM Unit := do
   IO.println s!"READD {n₃} {re.hash}"
   IO.println s!"CONTROL-TRUE {n₃} {ctrl.hash}"
 
+/-- FS131-ICT3: the two changes of inventory item 1026. -/
+def run2 : TermElabM Unit := do
+  -- `exists_rat_solution_near`: the instance binder `[Finite κ]` put back after `{ι} {κ} [Fintype ι]`
+  let n₄ := ``HadwigerNelson.CayleyThree.exists_rat_solution_near
+  let t₄ ← typeOf n₄
+  let fk : Array Expr → TermElabM Expr := fun _ => do elabClosed (← `(Finite $(mkIdent `κ)))
+  IO.println s!"AFTER {n₄} {t₄.hash}"
+  IO.println s!"READD {n₄} {(← insertInstAfter t₄ 3 fk).hash}"
+  IO.println s!"CONTROL-TRUE {n₄} {(← insertInstAfter t₄ 3 fun _ => pure (mkConst ``True)).hash}"
+  IO.println s!"CONTROL-POS {n₄} {(← insertInstAfter t₄ 4 fk).hash}"
+  -- `exists_isPeriodic_eqOn_of_fg_torsionFree`: binder 3 (0-based 2) renamed `_hfg`; the type is its own undoing
+  let n₅ := ``HadwigerNelson.CayleyThree.exists_isPeriodic_eqOn_of_fg_torsionFree
+  let t₅ ← typeOf n₅
+  let (bn, bd, ctrl) ← binderAt t₅ 2
+  IO.println s!"AFTER {n₅} {t₅.hash}"
+  IO.println s!"READD {n₅} {t₅.hash}"
+  IO.println s!"CONTROL-TRUE {n₅} {ctrl.hash}"
+  IO.println s!"BINDER {n₅} {bn}"
+  IO.println s!"BINDER-DOMAIN-IS-FG {n₅} {bd.isAppOf ``AddGroup.FG}"
+
 #eval run
+#eval run2
 
 end FS131ICT2ReAdd

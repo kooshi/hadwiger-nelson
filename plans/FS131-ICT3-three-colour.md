@@ -59,7 +59,7 @@ replaces the `.olean`s. `data/fs131/ict2/lean/StatementDump.lean` against FS131-
 `data/fs131/ict3/statements-mid.txt` (195 constants: `Circular` 38, `Fibre` 108, `Density` 49). This is the print of the
 statements as FS131-ICT2 left them; the spec examples add no stored constant, so the print after the rebuild must equal it.
 
-## Stage 2 — SAVED (partly): the five spec examples, the build green, lint red on two skeleton statements (ruling asked)
+## Stage 2 — SAVED: the five spec examples, two ruled binder changes, the build green, lint green
 
 ### 2.1 The spec examples
 
@@ -108,3 +108,39 @@ Both are the skeleton's text, unchanged; the build's linters do not report an un
 never met them. **Sent to the coordinator at once** (2026-10-16, about 18:36 UTC), with a suggestion: drop `[Finite κ]` (item
 998's kind) and rename the second to `[_hfg : AddGroup.FG A]` (part of row 79's class as cited; the stored type moves only in a
 binder name). Waiting for the ruling; the gate's other inputs go on meanwhile.
+
+### 2.4 The ruling (inventory item 1026), applied; the second build; lint green
+
+**Ruling** (the coordinator's message, about 18:46 UTC): (1) drop `[Finite κ]` from `CayleyThree.exists_rat_solution_near` — a
+ruled change, checked by a one-binder re-add; (2) keep the finite-generation binder of
+`CayleyThree.exists_isPeriodic_eqOn_of_fg_torsionFree`, renamed `[_hfg : AddGroup.FG A]` — a ruled rename with the hash check.
+Applied (`Circular.lean` l. 38, `Density.lean` l. 702; nothing else moved); the modules elaborated with the lakefile's options
+(`check-modules.sh ruled`, each exit 0, no warning).
+
+**The second build** (the brief's line, admitted at once, 18:49 UTC): **exit 0, "OK — 735 of 735 batches, 4 module(s) rebuilt,
+0 module(s) with warnings, 20m29s"** (`Circular` 5.6 s, `Fibre` 9.9 s, `Density` 9.3 s, `Proofs` 4.9 s;
+`data/fs131/ict3/build2.full.log`, `build2.log`); no `sorry`; sources unchanged across it (`build2.sources.md5`, `md5sum -c` OK).
+
+**Lint**: `lake lint --no-build -- --no-build --trace` under the slot, **exit 0, "-- Linting passed for Proofs."**, every one of
+the 14 linters `(2/2) Passed` (`data/fs131/ict3/lint2.log`).
+
+**The statements, from the kernel's side** (the dumper on this build, `data/fs131/ict3/statements-ruled.txt.gz`):
+- against the dump before (`statements-mid.txt.gz`, § 1.3), constant by constant: exactly two differ, both in their stored
+  type — `exists_rat_solution_near` and `exists_isPeriodic_eqOn_of_fg_torsionFree` (`data/fs131/ict3/mid-vs-ruled.out`);
+- against the skeleton's (`data/fs131/ict1/statements-before.txt.gz`), by `tools/fs131_ict2_statements.py` with the ReAdd print
+  (`data/fs131/ict3/readd-ruled.txt`): **VERDICT CLEAN**, the five ruled changes each checked twice (the undone type's hash is
+  the skeleton's, every control differs; the text rule exact), the fifteen listed public helpers added and no other public
+  constant, `heightWinding.congr_simp` generated on demand in `Density`, **ten plants all fired**
+  (`data/fs131/ict3/statements-ruled-compare.out`).
+
+The comparator and ReAdd were fixed at their first run, each fix with a plant: ReAdd's quoted domains named their free variables
+hygienically (`Unknown identifier s✝`), now `$(mkIdent …)`; the comparator's text rule for a dropped binder assumed the rest
+was one group (`hadd` precedes `hsub`: rule ARROW); a definition whose `sorry` proof was filled stores an auxiliary
+`coloringOneTwo._proof_1` where the skeleton's print erased the proof (rule AUXPROOF, with a plant that replaces it by a constant
+that is no proof); and the two kinds of item 1026, DROPINST and RENAME (ReAdd's `insertInstAfter`, `binderAt`), each with a
+plant. The audit generator's plant was unreachable once no record was filed, or once all were: it now files and unfiles in
+memory (`tools/fs131_ict2_audit_block.py`; its run: all four plants reported, `data/fs131/ict3/audit-plant.out`).
+
+Stage 3 (the gate) starts from a merge of `main`: the coordinator's message of about 19:10 UTC (inventory item 1032) — the
+`p`-adic plane landed first (`785a46e77`, gated on `e3e1dbb73`, logs `data/fs131/iqp3/gate/`), so the counts are explained
+against its gate.

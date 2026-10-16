@@ -42,8 +42,8 @@ open HadwigerNelson HadwigerNelson.CayleyThree
 
 -- the definitions the head statements read (upstream: `Kempe`, `Arith/ThreeColourCharacter`, `ThreeColour`)
 #print HadwigerNelson.IsPeriodic
-#print HadwigerNelson.ThreeColourCharacter.bandSet
-#print HadwigerNelson.ThreeColourCharacter.band
+#print HadwigerNelson.CharacterColouring.bandSet
+#print HadwigerNelson.CharacterColouring.band
 #print HadwigerNelson.periodicForcedSubgroup
 #print HadwigerNelson.forcedSubgroup
 #print HadwigerNelson.InheritanceQuestion

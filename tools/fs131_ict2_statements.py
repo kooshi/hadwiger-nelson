@@ -33,6 +33,11 @@ Two rules added by FS131-ICT3 at the first run (each with its plant below):
             auxiliary proof the elaborator abstracted, `coloringOneTwo._proof_1`) reads as `True.intro`, as the dumper
             already reads every proof subterm that is not a constant: the skeleton's `sorry` was erased where the filled
             proof became a constant;
+  DROPINST  a dropped instance binder: ` [<hygienic name> : <domain>]` removed exactly once (item 1026,
+            `exists_rat_solution_near`'s `[Finite κ]`); its hash check is the ReAdd's instance re-add, with both controls;
+  RENAME    an anonymous instance binder named: its hygienic name replaced by the new one, everywhere; the hash check is
+            the stored hash equal to the skeleton's (`Expr.hash` reads no binder name), the control a `True` domain, and
+            ReAdd's `BINDER` line the new name (item 1026, `exists_isPeriodic_eqOn_of_fg_torsionFree`'s `_hfg`);
   ARROW     a dropped binder followed by another non-dependent binder prints `(D) -> (D2) -> (rest)`, not
             `(D) -> (∀ more, B)`: there exactly `(D) -> ` is removed and nothing is merged (`exists_le_mul_of_imp_eq_zero`,
             whose `hadd` precedes `hsub`).
@@ -72,6 +77,11 @@ RULED = {
                                           "proof"),
     NS + "mcshane_model": ("REPLACE", (SUMX, "(HadwigerNelson.CayleyThree.l1 m x)"),
                            "item 1003: the right side `∑ j, x j` (false as typed) corrected to `l1 x`"),
+    # FS131-ICT3, inventory item 1026 (lint's `unusedArguments`):
+    NS + "exists_rat_solution_near": ("DROPINST", " : Finite.{succ u_2} κ]",
+                                      "item 1026: the instance binder `[Finite κ]`, read by no proof"),
+    NS + "exists_isPeriodic_eqOn_of_fg_torsionFree": ("RENAME", (" : AddGroup.FG.{u_1} A", "_hfg"),
+                                                      "item 1026: the anonymous `[AddGroup.FG A]` renamed `[_hfg : …]`"),
 }
 # Public constants the proofs added, each named in FS131-ICT1's record (§ 2: `Circular`; § 3.4: `Fibre`; § 5: `Density`).
 ALLOWED_PUBLIC = {
@@ -113,7 +123,8 @@ def read_readd(path):
     out = {}
     for ln in open(path, encoding="utf-8"):
         p = ln.split()
-        if len(p) == 3 and p[0] in ("AFTER", "READD", "CONTROL-TRUE", "CONTROL-POS", "RHS-IS-L1"):
+        if len(p) == 3 and p[0] in ("AFTER", "READD", "CONTROL-TRUE", "CONTROL-POS", "RHS-IS-L1", "BINDER",
+                                    "BINDER-DOMAIN-IS-FG"):
             out[(p[0], p[1])] = p[2]
     return out
 
@@ -163,10 +174,27 @@ def auxproof(raw, mod):
     return raw
 
 
+HYG = r"inst\._@\.[^\s\]]*"
+
+
 def ruled_text(name, before_t, short=False):
     kind, spec, _ = RULED[name]
     if kind == "DROP":
         return strip_arrow(before_t, spec, short)
+    if kind == "DROPINST":                 # remove ` [<hygienic name><spec>` exactly once
+        ms = list(re.finditer(r" \[" + HYG + re.escape(spec), before_t))
+        if len(ms) != 1:
+            return None
+        i, j = ms[0].span()
+        return before_t[:i] + before_t[j - (1 if short else 0):]
+    if kind == "RENAME":                   # the hygienic name of `[… <dom>` replaced by the new name, everywhere
+        dom, new = spec
+        ms = list(re.finditer(r"\[(" + HYG + ")" + re.escape(dom), before_t))
+        if len(ms) != 1:
+            return None
+        old = ms[0].group(1)
+        out = before_t.replace(old, new)
+        return out[:-1] if short else out
     old, new = spec
     if before_t.count(old) != 1 or not before_t.endswith(old):
         return None
@@ -184,12 +212,16 @@ def ruled_hash(name, c, a, rd):
     if got["READD"] != bh:
         probs.append(f"undone type hash {got['READD']} is not the skeleton's {bh}")
     for k in ("CONTROL-TRUE", "CONTROL-POS"):
-        if k == "CONTROL-POS" and RULED[name][0] != "DROP":
+        if k == "CONTROL-POS" and RULED[name][0] not in ("DROP", "DROPINST"):
             continue
         if got[k] is None or got[k] == bh:
             probs.append(f"{k} {got[k]} did not differ from the skeleton's hash")
     if RULED[name][0] == "REPLACE" and got["RHS-IS-L1"] != "true":
         probs.append(f"RHS-IS-L1 {got['RHS-IS-L1']}")
+    if RULED[name][0] == "RENAME":
+        b = rd.get(("BINDER", name)); f = rd.get(("BINDER-DOMAIN-IS-FG", name))
+        if b != RULED[name][1][1] or f != "true":
+            probs.append(f"stored binder {b} (domain AddGroup.FG: {f}), not `{RULED[name][1][1]}`")
     return (not probs), "; ".join(probs) or f"undone hash {bh} = the skeleton's; controls differ"
 
 
@@ -293,6 +325,10 @@ def main():
                    [f"CHANGED (value) {cn} ({M_DENS})"]))
     r6 = dict(rd); n6 = NS + "even_pmHeight_sub_sum"; r6[("READD", n6)] = rd[("CONTROL-POS", n6)]
     plants.append(("a re-add at its position control", after, r6, False, [f"RULED-HASH-DIFFERS {n6}"]))
+    r7 = dict(rd); n7 = NS + "exists_isPeriodic_eqOn_of_fg_torsionFree"; r7[("BINDER", n7)] = "inst"
+    plants.append(("RENAME: the stored binder still anonymous", after, r7, False, [f"RULED-HASH-DIFFERS {n7}"]))
+    r8 = dict(rd); n8 = NS + "exists_rat_solution_near"; r8[("READD", n8)] = rd[("CONTROL-TRUE", n8)]
+    plants.append(("DROPINST: a re-add with the domain `True`", after, r8, False, [f"RULED-HASH-DIFFERS {n8}"]))
     plants.append(("a ruled text check one character short", after, rd, True,
                    [f"RULED-TEXT-DIFFERS {n}" for n in RULED]))
     for label, a, r, short, expect in plants:
