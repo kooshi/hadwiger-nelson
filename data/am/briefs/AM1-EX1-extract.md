@@ -133,3 +133,29 @@ as in this repository; § Never's rule on links is about files).
 
 You start no agents of your own (standing rule 1: delegation is one level
 deep, because the coordinator can only review work it knows exists).
+
+## Amendment 1 — 2026-10-16 02:32 UTC: the grokkings, in full (Kooshi's W18)
+
+> W18: (2026-10-16, on the generic workflow repository, approving the gate's Lean controls) Yep that's fine. Don't forget the grokkings too. They were the defining feature that led to a significant amount of novel findings here. Remember, when you pass through to the frontier, priors are weak, and you need to carry every novel finding in context to be able to make progress with them.
+> — source: data/am/REQUEST-2026-10-16.md
+
+> **W18, read by Keryx (2026-10-16), labelled as mine.** The template carries the grokkings as a defining feature, not only as an empty file: the working theory, each entry in its form (a status, the mechanism, a *Do* with its trigger, a killing test or what it forbids), rewritten in place to current state, a dead entry demoted with its refutation and never deleted, stable numbers, one writer, its size budget, the retired and instances files, the theory in one paragraph in the shared context; loaded in full at launch by the minds that reason from it (the asker, the deriver, its verifier); walked from inside the question at every opening job; new entries drafted by the record job and filed by the coordinator. His reason goes on the template's front page in his words. This problem's entries are not carried, beyond what the worked example needs.
+> — source: data/am/REQUEST-2026-10-16.md
+
+**This replaces § Done means item 2's bullet on the grokkings** ("a grokkings file with its form and no entries"). Carry
+the mechanism whole, as a first-class part of the template:
+- **The file** (`.claude/skills/grokkings/SKILL.md` here) with a header that states its rules, and a description that says
+  which lanes preload it; its two companions as forms (`plans/GROKKINGS-RETIRED.md`, `plans/GROKKING-INSTANCES.md`); and
+  in the `CLAUDE.md` template, § Grokkings' rules and a marked place for the theory in one paragraph.
+- **The entry's form**, the one the deriver's record job drafts (`.claude/agents/ephodos.md` § The record job): a number
+  never reused, a status at its grade, the mechanism, a *Do* with its trigger, and a killing test or what it forbids. Give
+  one or two example entries in that form, clearly marked as examples to delete; take their shape from this repository's
+  file, and their content from no problem in particular, or from the worked example, marked.
+- **The loading and the walk**: the asker, the deriver and its verifier preload the file at launch (their agent files'
+  `skills:` lists here); the opening job's reframe walks every entry from inside the question (`.claude/agents/ephodos.md`
+  § Why the reframe and § The opening job); the coordinator is the file's only writer and files the drafts verbatim;
+  `tools/claude_md_fact_audit.py`'s budget check covers the file. Keep every one of these in the template's lanes.
+- **The front page** gives the grokkings their own section, as a defining feature, with W18's reason in his words and the
+  deriver's three tiers of knowledge (results, understanding, method).
+
+Everything else in the brief stands. The no-spawn rule stands: you start no agents of your own.
