@@ -408,3 +408,74 @@ reduces to S5's statement and is searched there.
    `library/pdf/arXiv-1102.0120-barroero-frei-tichy-additive-unit-representations-survey.pdf` | scanned by search (FS131-PAS1) |;
    `[Shimura1964]` (both existing rows, which duplicate one key): reading status unchanged, *"not read; zbMATH review withheld; the
    FS131-PAS1 gate could not clear it"* — and the two rows (l. 69 and l. 365) merged, a bibliography defect noted here.
+
+## Stage 6 — SAVED: S5, degree-one primes of norm `≡ 3 (mod 4)` — **found in print**
+
+### 6.1 The queries (2026-10-16; tag `S5`; 16 queries)
+
+zb `ti:"prime divisors of polynomials"` (5); `ab:"prime divisors" & ab:"polynomial" & ab:"arithmetic progression"` (5);
+`ab:"prime divisors" & ab:"real root"` (0); `ab:"prime divisors" & ab:"3 (mod 4)" & ab:"polynomial"` (1, unrelated);
+`ab:"Euclidean proof" & ab:"arithmetic progression"` (2: Murty 1988, Pollack 2010); `ti:"diviseurs premiers des polyn"` (0);
+`ab:"Schur" & ab:"prime divisors" & ab:"polynomial"` (1); `ti:"theorem of Bauer"` (4); `ab:"Bauer" & ab:"prime divisors"` (2);
+`ab:"prime ideals of degree one" & ab:"real"` (0); `au:"Nagell, T." & ti:"diviseurs"` (3); ax `abs:"prime divisors" AND abs:"real
+root"` (0); `abs:"Bauer" AND abs:"prime divisors"` (0); `ti:"Subgroup avoidance for primes"` (0); `au:Pollack_P AND …` (0).
+Nagell 1969 was fetched from the Acta Arithmetica archive (`matwbn.icm.edu.pl`, scanned images, no text layer; read as images).
+
+### 6.2 What was read
+
+- **`[Nagell1969]`** — T. Nagell, *Sur les diviseurs premiers des polynômes*, Acta Arith. 15 (1969) 235–244, Zbl 0181.05501,
+  doi 10.4064/aa-15-3-235-244 (fetched: `library/pdf/nagell-1969-sur-les-diviseurs-premiers-des-polynomes-acta-arith15-235-244.pdf`).
+  **Read: pp. 235–239 and the references (p. 244); pp. 240–243 (§ 5's proof of Théorème 4) not read.** p. 238, **Théorème 3**:
+  "Tout polynôme, possédant au moins un zéro réel, admet une infinité de diviseurs premiers qui ne sont pas congrus à 1 modulo n, où
+  n est un nombre naturel quelconque ⩾ 3." — "Every polynomial having at least one real zero has infinitely many prime divisors that
+  are not congruent to 1 modulo n, for every natural number n ⩾ 3." "Pour la démonstration voir Nagell [6], théorème 97", [6] being
+  his *Introduction to Number Theory* (New York 1951). The remark after it: in the book "j'ai présenté le Théorème 3 sous le titre
+  Théorème de Bauer. En réalité, Bauer a seulement établi le résultat suivant" — a polynomial with a real zero whose prime divisors,
+  but finitely many, are `≡ ±1 (mod n)` has infinitely many `≡ −1 (mod n)` (M. Bauer, Math. Ann. 77 (1916) 353–356) — "Cependant,
+  j'ai trouvé qu'on peut, en modifiant la démonstration de Bauer, obtenir le meilleur résultat exprimé par le Théorème 3."
+  A prime divisor of `f` in Nagell's sense (p. 235) is a prime `p` for which `f(x) ≡ 0 (mod p)` has a solution — S5's notion.
+- **`[Schinzel1969]`** — A. Schinzel, *Remarque sur le travail précédent de T. Nagell*, Acta Arith. 15 (1969) 245–246 (fetched:
+  `library/pdf/schinzel-1969-remarque-sur-le-travail-de-nagell-acta-arith15-245-246.pdf`), **read in full**: answers Nagell's
+  question (which polynomials have almost all prime divisors `≡ 1 (mod n)`) by `G = aN(H)`, the norm from `ℚ(ζ_n)`, through
+  Bauer's theorem on fields and "facteur premier idéal de degré 1".
+- zbMATH review of Schinzel 1966, *On a theorem of Bauer and some of its applications* (Acta Arith. 11): Bauer's theorem on the sets
+  `P(K)` of rational primes with a prime ideal factor of degree one in `K`. Listings only: Gerst–Brillhart 1971 (*On the prime divisors
+  of polynomials*, Amer. Math. Monthly 78; summary withheld), Pollack 2017 (*Subgroup avoidance for primes dividing the values of a
+  polynomial*, Rocky Mountain J. Math. 47; summary withheld), Bilhan 1981 (Bauer's theorem in global fields).
+
+### 6.3 Verdict: **found** — classical; the field form is a one-line consequence
+
+1. **The polynomial form is `[Nagell1969]` Théorème 3 at `n = 4`** (proved in `[Nagell1951]` Thm 97, there called Bauer's theorem;
+   a weaker form is Bauer's, 1916): a polynomial over `ℤ` with a real zero has infinitely many prime divisors not `≡ 1 (mod 4)`, so
+   infinitely many `q ≡ 3 (mod 4)` (the prime 2 is one). S5's minimal polynomial `f` of a primitive element of a real field has a real
+   zero. **Same statement**, Nagell's being stronger (every `n ≥ 3`).
+2. **The field form** — every real number field has infinitely many primes of degree one over `q ≡ 3 (mod 4)` — follows by Dedekind's
+   criterion at the `q` not dividing the index of the primitive element, as FS131-KRU1's route E does; that step is textbook.
+3. **The route.** Whether Nagell's (or Bauer's) proof is FS131-KRU1's sign change — a value `−kⁿf(x/k) ≡ −1 (mod D)`, Euclid-style —
+   is **undecided**: the book's proof of Thm 97 is not held and not read, and the 1969 paper does not reprove Théorème 3. The route
+   is Euclid's with Schur's device and a real zero; Murty 1988 (Euclidean proofs exist exactly for `l² ≡ 1 (mod k)`, so for `−1 mod 4`)
+   is the frame in which it is standard. Worded: "classical (Nagell 1969, Thm 3; Nagell 1951, Thm 97; after Bauer 1916)", never "ours",
+   and the route is not claimed new.
+
+So the clause "a stable prime exists at every real number field" (row 105's "(a stable prime exists by Chebotarev)", FS131-KRU1's
+F3 and route E, and the "infinitely many components" clause that rests on it) is classical by an elementary route, with no
+Chebotarev; the kernel proof is this project's.
+
+### 6.4 Drafts (each names its slot)
+
+1. **`LEDGER.md` row 105**, in the sentence FS131-KRU1's record § 3.7 item 3 drafts for the landing (which replaces *"(a stable prime
+   exists by Chebotarev)"*): after its words on the sign change and Kummer–Dedekind, add *"— classical: `[Nagell1969]` Théorème 3 (every
+   polynomial with a real zero has infinitely many prime divisors `≢ 1 (mod n)`, every `n ≥ 3`; proved in `[Nagell1951]` Thm 97, after
+   `[Bauer1916]`), at `n = 4`"*.
+2. **The public page**, where the components clause or the stable prime lands: *"That every real number field has infinitely many
+   primes with residue field of order `q ≡ 3 (mod 4)` is classical (Nagell 1969, Theorem 3, after Bauer 1916); the Lean proof is this
+   project's."*
+3. **`BIBLIOGRAPHY.md`**: new **`[Nagell1969]`** | T. Nagell, *Sur les diviseurs premiers des polynômes*, Acta Arith. 15 (1969) 235–244,
+   Zbl 0181.05501, doi 10.4064/aa-15-3-235-244 | Théorème 3: a polynomial with a real zero has infinitely many prime divisors `≢ 1 (mod
+   n)`, every `n ≥ 3` — the classical form of FS131-KRU1's route E (the stable prime at every real number field) |
+   `library/pdf/nagell-1969-sur-les-diviseurs-premiers-des-polynomes-acta-arith15-235-244.pdf` (scan, no text layer) | read pp. 235–239
+   and 244 (FS131-PAS1); § 5 unread |; new **`[Nagell1951]`** | T. Nagell, *Introduction to Number Theory*, Wiley, New York 1951 | Thm 97,
+   the proof of `[Nagell1969]` Thm 3 ("Bauer's theorem") | not held | named only, through `[Nagell1969]` |; new **`[Bauer1916]`** | M.
+   Bauer, *Zur Theorie der algebraischen Zahlkörper*, Math. Ann. 77 (1916) 353–356 | the weaker form Nagell names | not held | named only
+   |; new **`[Schinzel1969]`** | A. Schinzel, *Remarque sur le travail précédent de T. Nagell*, Acta Arith. 15 (1969) 245–246 | Nagell's
+   converse question answered through Bauer's theorem on degree-one primes | `library/pdf/schinzel-1969-…pdf` | read in full (FS131-PAS1) |.
