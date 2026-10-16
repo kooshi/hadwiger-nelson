@@ -94,3 +94,65 @@ yet proved (4 + 7 + 12 distinct lines); `ClassRatio` and `FourColourPlaces` warn
 axiom probe `probes/Axioms1.lean`: `five_le_localBound_iff` and the per-place forms on the standard three and
 `kloosterman_bound`, `min_localBoundAllLevels_five` on those and `positive_entropy_rigidity`, `localBoundAllLevels_le_localBound`
 on the standard three.
+
+## Stage 3 — SAVED: `Arith/StableAboveUsable`, `Instances/SqrtFiveClass`, `Instances/SqrtTwentyThreeCbrtTwo`; `main` merged; the statement comparison
+
+**`Arith/StableAboveUsable`, four leaves, 389 lines against the plan's 300.** u12 (`exists_stablePrime_card_eq_sq`) by the
+plan's route, built as private lemmas: the valuation subring `B` of `F` at `𝔭` and its residue map (`Arith`'s two
+localization lemmas); `B[i] = {z ∈ F(i) : Re z, Im z ∈ B}` as a valuation subring of `F(i)` (`gaussSubring`, `gaussVal`;
+the valuation property by `gauss_key`: `b = t·a` with `t ∈ B` makes `a + bi` or its inverse integral, `1 + t²` being a
+unit as `−1` is no square in `𝔽_q`); conjugation-stable; not `⊤` (`1/q ∉ B`, because `r(q) = 0` makes `q` a non-unit);
+then `UpperHalf.exists_stablePrime_of_valuationSubring`. The residue count (`card_eq_sq_of_localRing_eq`):
+`StandingFive.card_fixed_of_involution` gives `|𝓞 ⧸ P| = |k₀|²`; `B` maps onto the fixed field `k₀` through the residue
+map with kernel `B`'s non-units (`res(a + bi) = ρ(a) + ρ(b)·ι`, and a fixed residue has `2ρ(b)ι = 0`), as `r` maps onto
+`𝓞 F ⧸ 𝔭` with the same kernel, so `|k₀| = |𝓞 F ⧸ 𝔭|` through `B ⧸ ker`. `i` is taken as this module's own integer
+`iO` (coordinates known), since `exists_I_integer` does not fix the sign. u3 is `chromaticNumber_le_four_of_small`'s hom,
+copied as planned, with `k₀ ≃+* k` by `FiniteField.ringEquivOfCardEq`. New imports: `Arith/StandingFive` (for
+`card_fixed_of_involution`) and `Mathlib.FieldTheory.Finite.GaloisField`; the comparison below shows that no stored
+statement moved.
+
+**`Instances/SqrtFiveClass`, seven leaves, 34 lines against 160** (the census spec, optional, not written): exactly the
+plan's routes, with `ZMod.natCast_eq_zero_iff` for `p ∣ d`.
+
+**`Instances/SqrtTwentyThreeCbrtTwo`, twelve leaves, 223 lines against 380.** One private lemma, `exists_ringHom_F23`,
+carries both embeddings. `F23` maps to any field of characteristic zero holding a cube root `y` of 2 and a square root of
+23, with `∛2 ↦ y`: first `ℚ(∛2) → L` (`algHomAdjoinIntegralEquiv` at the root `y` of the minimal polynomial `X³ − 2`,
+irreducible by `X_pow_sub_C_irreducible_of_prime`, with no rational cube root of 2 by the 2-adic valuation), then
+`ℚ(∛2)(√23) → L` (`nonempty_algHom_adjoin_of_splits`; `X² − 23` splits in `L`), and `F23 ⊆ ℚ(∛2)(√23)`. Applied at
+`ℚ_[11]` (Hensel at 7, `exists_padicInt_cube_eq_two`) for t6, and at `ℂ` with `y = ω∛2` for t11 (a real embedding would
+fix `ω∛2` under conjugation, so `ω` would be real and hence 1). New import: `Mathlib.FieldTheory.KummerPolynomial`.
+The plan's t6 had two separate steps for this, and t11 a third: here they are one lemma. `localBound_sqrt23_cbrt2_eq_five`
+rests on Weil's bound alone; its lower half is the ratio argument (`five_le_chromaticNumber_of_two_notMem`), with no
+measure rigidity.
+
+**Two spec examples** in `FourColourPlaces` (not stored; checked at elaboration): `ℚ`'s ramified stable prime is listed, and
+`localBoundAllLevels ⊥ ≤ 2` (`UpperHalf.exists_stablePrime_rat`).
+
+**The re-price, measured**: about 775 lines (`ClassRatio` 45, the four modules 82 + 389 + 34 + 223) against the planned
+1,100; proof work from 18:50 to 19:22 UTC. Every leaf was written once in the farm, and fixed there in at most four rounds.
+
+**`main` merged** (item 1032): `c7cce9659`, with no conflict; `main` brought eight new modules (`Arith/FibreCert7`,
+`FibreCert7Check`, `FibreCert7Bound`, `PadicPlane/*`) and no edit to an existing Lean module. Their compiled artifacts (64
+files under `lib/lean` and `ir`) were copied from `main`'s checkout by checksum, with no file of a module this branch
+changed among them (`logs/copy-list.txt`, `copy-rsync.txt`; the source's checksums before and after the copy equal, the
+copies equal to the source). `PadicPlane/Tower` imports `ClassRatio`, so it and `Values` recompiled; the other six did
+not. A text search found none of this landing's public names, and no `open private`, in the incoming modules
+(`dupnames.sh` at the gate is the full check).
+
+**The build** (on `77490cdb1`, the merge plus the two examples; two earlier launches were stopped by PID while still
+queued for the slot, having read nothing: `logs/build-2-queued-stopped.log`, `build-2b-queued-stopped.log`): exit 0,
+"build: OK — 739 of 739 batches, 7 module(s) rebuilt, 0 module(s) with warnings, 20m18s" (`logs/build-2.log`,
+`build-2-full.log`).
+
+**The statement comparison** (`data/fs131/ics1/statements.py`, a copy of FS131-ICO2's comparator with this landing's rules;
+the after print `statements-after.txt.gz` from that build): `VERDICT CLEAN: 0 failure(s)` (`logs/statements.out`). Every
+stored type and definition of the 21 modules is unchanged. The ruled changes are exactly these: `exists_card_two_pow_sq`,
+`chromaticNumber_le_four_dyadic` and `chromaticNumber_le_four_of_small` are PUBLICIZED, each one's stored type equal to its
+private one up to the hygienic hash that its instance binder's name carries, which is minted from the declaration name;
+Lean's own hash of each stored type is unchanged (`logs/publicized-hashes.txt`: 1954668111, 610681485, 1953704367 before
+and after). `ratioAtMost_dyadic_of_six_le` is the one new public constant. The rest are 39 private helpers. Planted
+controls (`--plant`, `logs/statements-plant.out`): a changed stored type, a dropped constant, an unlisted public constant,
+a changed publicized type, and a binder from another module that only a too-wide blanking would pass — **all five fired**.
+On the first run two plants could not fire: one searched the raw print for `Q = 3`, which is not there, and one widened
+the blanking after the ruled blanking had already rewritten the hash. Both were fixed in the plant code; the comparison
+itself did not change.

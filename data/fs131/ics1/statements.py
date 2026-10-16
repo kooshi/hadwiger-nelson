@@ -55,10 +55,9 @@ ALLOWED_PUBLIC = {
 
 
 def blank(t, widen=False):
-    out = HYG.sub(lambda m: m.group(1) + ".#" + m.group(2), t)
-    if widen:  # the plant: blank every hygienic binder name, from any module
-        out = re.sub(r"inst\._@\.[\w.]+?\._hygCtx\._hyg\.\d+", "inst#", out)
-    return out
+    if widen:  # the plant: blank every hygienic binder name, from any module, on the raw text
+        t = re.sub(r"inst\._@\.[\w.]+?\._hygCtx\._hyg\.\d+", "inst#", t)
+    return HYG.sub(lambda m: m.group(1) + ".#" + m.group(2), t)
 
 
 def read(path):
@@ -169,9 +168,7 @@ def main():
                                                          "user": "HadwigerNelson.SqrtTwentyThreeCbrtTwo.planted_new", "TYPE": "True"}
     plants.append(("an unlisted public constant", a3, False,
                    f"ADDED-PUBLIC-UNLISTED HadwigerNelson.SqrtTwentyThreeCbrtTwo.planted_new ({mod})"))
-    a4 = copy.deepcopy(after); t = a4[cr][pub]["TYPE"]; a4[cr][pub]["TYPE"] = t.replace("Q = 3", "Q = 5", 1)
-    if a4[cr][pub]["TYPE"] == t:
-        print("PLANT a changed publicized type: UNREACHABLE (no `Q = 3` in the stored type)"); ok = False
+    a4 = copy.deepcopy(after); t = a4[cr][pub]["TYPE"]; a4[cr][pub]["TYPE"] = t[:-1] + ("Y" if t[-1:] == "X" else "X")
     plants.append(("a changed publicized type", a4, False, f"PUBLICIZED-DIFFERS {pub}"))
     a5 = copy.deepcopy(after)
     for n in a5[cr]:
