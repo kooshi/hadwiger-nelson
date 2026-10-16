@@ -4,7 +4,7 @@
 `plans/FS131-close-inventory.md` items 974–992 (each has its receipt and, where it rules, four parts).
 `plans/SESSION-HANDOFF-2026-10-15.md` is older; its § 6 owed list is now filed or tabled (§ 5 below).*
 
-**On resuming (after the usage-limit stop, item 1016):** read § 3. Each of the three jobs there was told to save a stage and
+**On resuming (after the usage-limit stop, items 1016–1019; every job has handed back):** read § 3. Each of the three jobs there was told to save a stage and
 hand back; read each record's last saved stage and its "what is left", then brief a successor from it (or resume it by
 message if it handed back below its line). Five commits wait for the next privacy check before a push (§ 1).
 
