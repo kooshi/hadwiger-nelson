@@ -21,7 +21,7 @@ finite"*. Here:
 
 **The McShane layer** (§1): for a function `h` on `ℤ^m`, a finite set `B`, a subgroup `L` and an additive `λ : L → ℤ` with
 `|λ ℓ| ≤ ‖ℓ‖₁`, `mcshane h B L λ x = min_{β ∈ B, ℓ ∈ L} h β + λ ℓ + ‖x − β − ℓ‖₁`. Inhabitant of every hypothesis of §1 at
-once: `h = Σ_j x_j`, `B = {0}`, `L = ⊥`, `λ = 0` (`mcshane_model`).
+once: `h = Σ_j x_j`, `B = {0}`, `L = ⊥`, `λ = 0`, where the extension is `h 0 + ‖x‖₁ = ‖x‖₁` (`mcshane_model`).
 -/
 
 namespace HadwigerNelson.CayleyThree
@@ -67,9 +67,10 @@ theorem mcshane_eq_of_consistent (hlam : ∀ ℓ : L, |lam ℓ| ≤ l1 (ℓ : Fi
 
 end McShane
 
-/-- **The model of §1**: `h = Σ_j x_j`, `B = {0}`, `L = ⊥`, `λ = 0` meet every hypothesis there, and the extension is `h`. -/
+/-- **The model of §1**: `h = Σ_j x_j`, `B = {0}`, `L = ⊥`, `λ = 0` meet every hypothesis there, and the extension is
+`h 0 + ‖x‖₁ = ‖x‖₁`. -/
 theorem mcshane_model {m : ℕ} (x : Fin m → ℤ) :
-    mcshane (fun y => ∑ j, y j) {0} ⊥ 0 x = ∑ j, x j := by
+    mcshane (fun y => ∑ j, y j) {0} ⊥ 0 x = l1 x := by
   sorry
 
 /-! ## §2 The period: long classes modulo a subgroup -/

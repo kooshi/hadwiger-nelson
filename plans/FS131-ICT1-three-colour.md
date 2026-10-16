@@ -68,3 +68,50 @@ private, `exists_pos_le`, `floor_three_ne`.
 
 **Re-price after `Circular`**: the module came in at about 0.63 of the plan's lines. LEAN.md's rule is to re-price from the
 first two leaves of each *kind*; `Fibre`'s two marked leaves are the re-price point for the rest.
+
+## Stage 3 — SAVED: `Fibre` §1–§2 and the two marked leaves; the re-price; a statement defect ruled
+
+### 3.1 A false skeleton statement, ruled (inventory item 1003)
+
+`CayleyThree.mcshane_model` (`Density.lean` l. 71–73) was false as typed: `mcshane (fun y => ∑ j, y j) {0} ⊥ 0 x = ∑ j, x j`.
+With `B = {0}`, `L = ⊥`, `λ = 0` the set under the `sInf` is the singleton `{h 0 + λ 0 + ‖x‖₁} = {‖x‖₁}`, so the left side is
+`l1 x`; at `m = 1`, `x = ![-1]` it is `1` against `−1`. Sent to the coordinator at once (2026-10-16, about 14:55 UTC). **Ruling
+(item 1003): fix (a)** — the model kept, the conclusion corrected to `mcshane (fun y => ∑ j, y j) {0} ⊥ 0 x = l1 x`, its
+docstring and the module docstring's sentence saying the extension is `h 0 + ‖x‖₁ = ‖x‖₁`; listed in the gate's statement
+comparison as a ruled change. Applied in `Density.lean` (the theorem's docstring, the statement's right side, and one sentence
+of the module docstring); no other text of the skeleton moved.
+
+### 3.2 Two hypotheses the proofs do not read (findings, not defects: the statements are true and stay as typed)
+
+- `even_pmHeight_sub_sum (hc : ProperAlong s c)`: `pmHeight x − Σ x = 2(Σ x − liftHeight x)` for every `c`.
+- `exists_le_mul_of_imp_eq_zero (hadd : ∀ x ∈ M, ∀ y ∈ M, x + y ∈ M)`: the decomposition of an element of `M` into minimal
+  nonzero elements uses only `hsub` and additivity.
+Each proof references its binder by `have _ := h` with a comment (the build's `unusedVariables` linter is otherwise red). A
+statement weakened by dropping the binder would be a statement change; it is the coordinator's to rule if wanted.
+
+### 3.3 The re-price at the plan's two marked leaves
+
+| leaf | plan | proved | route |
+|---|---|---|---|
+| `exists_le_mul_of_imp_eq_zero` | 90 | ≈ 45 | the plan's: `Mn` (minimal nonzero) an antichain, finite by `WellQuasiOrderedLE.finite_of_isAntichain`; `κ = sup t` on it; `WellFoundedLT.induction` with `WellFounded.has_min` for a minimal `μ ≤ x` |
+| `exists_slack_bound` | 80 | ≈ 100 | the plan's: per sign pattern `p`, `sg v = ±v`, `M_p = {v | relMap (sg v) = 0}`, slack as `ℕ` by `toNat`, `minRise` additive on an orthant; `κ = 1 + Σ_p κ_p` |
+
+Together 145 against 170. With `Circular` at 0.63 and `Fibre` §1–§2 (≈ 290 lines of proof against the plan's ≈ 470 for those
+leaves), **the re-price is at or below the plan, not above it**: the rest of `Fibre` (plan ≈ 375) and `Density` (plan ≈ 770)
+are priced at the plan's numbers or less. No message needed under item 1000's ruling; all three modules ride in one landing.
+
+### 3.4 Routes in `Fibre` §1–§2 that differ from the plan
+
+- One representation lemma, `liftHeight_eq_of_sub` (`x = u − v` with `u, v` natural: `u = x⁺ + t`, `v = x⁻ + t`, and the `t`
+  parts cancel by `height_append`), carries `liftHeight_add_single` and the additivity along relations
+  (`liftHeight_add_of_relMap_eq_zero`: the representation `(x⁺ + r⁺, x⁻ + r⁻)` and `wind_shift`) — no `closure_induction` on the
+  basis. `heightWinding`'s fields and `liftHeight_add_ker` read it.
+- `abs_pmHeight_sub_le`: along one coordinate by `Int.induction_on`, then coordinate by coordinate by `Finset.induction_on`
+  (`Finset.univ_sum_single`), no induction on `l1`.
+- `step_eq_one/two_of_isTight`: tightness plus `wind_shift` and generation make the positive word's height its length (the
+  negative word's twice its length) from every base point; `List.perm_cons_erase` puts `j` first.
+- New public constants in `Fibre` (each named here for the statement comparison): `relMap_single`, `relMap_eq_wsum`,
+  `liftHeight_eq_of_sub`, `height_word_single`, `liftHeight_of_relMap_eq_zero`, `three_dvd_liftHeight`,
+  `liftHeight_add_of_relMap_eq_zero`. Private: `wind_eq_of_surjective`, `minRise_eq_parts`, `height_eq_of_isTight`, `term_le`.
+- Upstream definitions are read by `change` (never `simp [minRise]`, `simp [relMap]`, `simp [height]`), so no `eq_n` of
+  `ThreeColour`'s definitions is minted here; the gate's dump and `dupnames.sh` check it.
