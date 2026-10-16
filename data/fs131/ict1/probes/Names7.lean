@@ -1,0 +1,13 @@
+import Proofs.HadwigerNelson.CayleyThree.Fibre
+open HadwigerNelson
+#check @Int.emod_add_ediv_mul
+#check @Rat.mul_den_eq_num
+#check @AddSubgroup.mem_map
+#check @AddMonoidHom.mem_range
+#check @nsmulAddMonoidHom_apply
+#check @Int.mul_ediv_cancel'
+#check @Int.mul_ediv_cancel_left
+#check @Finset.abs_sum_le_sum_abs
+#check @AddSubgroup.mem_sup_left
+#check @le_of_mul_le_mul_left
+#check @AddSubgroup.finiteIndex_of_finite_quotient

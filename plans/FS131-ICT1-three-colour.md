@@ -136,3 +136,44 @@ against the skeleton's 226: **about 830 lines of proof against the plan's 1,020*
 - `isTight_one_two`: `decide` after `heightWinding_apply`.
 Private additions: `exists_pos_le_of_finite`, `exists_rat_near_of_box`, `exists_mem_box_of_le_vertex`, `neg_minRise_neg`,
 `minRise_neg`. No public constant beyond stage 3's seven.
+
+## Stage 5 — SAVED: `CayleyThree/Density`, every leaf proved; all 53 leaves done (iteration)
+
+All thirteen leaves of `Density` are proved (iteration, no error and no warning: `data/fs131/ict1/logs/Density.out`), so
+**no `sorry` remains in the three modules** (`grep -c sorry` = 0 in each). 731 lines against the skeleton's 144: **about 590
+lines of proof against the plan's 770**. The three modules: 2,194 lines against the skeleton's 506, **about 1,690 lines of
+proof against the plan's 2,230** (0.76). The build, the gate and the drafts are not yet run (stage 6 on).
+
+Routes in `Density`, where they differ from the plan:
+- §0 (new, public): the grid distance's API — `l1_nonneg`, `l1_neg`, `l1_add_le`, `l1_sub_le`, `abs_le_l1`, `l1_single_one`,
+  `even_l1_sub_sum` (parity of `‖v‖₁ − Σ v`). Private: `le_term`, `bddBelow_terms` (the McShane set is bounded below by
+  `−Σ_{β∈B} |h β − ‖x − β‖₁|`).
+- §1 as planned (`Int.csInf_mem`, `csInf_le`, `le_csInf`); the step bound by one optimal term each way and the parity of every
+  term. `mcshane_model` in its ruled form (item 1003).
+- §2 as planned: the short vectors are a finite box; one finite-index `W_v ⊇ M` missing each (residual finiteness,
+  `exists_finiteIndex_between_notMem` with `H = ⊤`); `N = q · ∏ index`.
+- §3, the assembly, **in integers throughout**: a private `exists_slope` turns the rational fibre point into a common
+  denominator `D₀` and integer slopes `a_j = D₀(3 − 6x_j)` with `|a_j| ≤ D₀`, `< D₀` off the tight set `T`, `D₀ (h(x + e_j) −
+  h x) = a_j` on `T`, `D₀ (h(x + r) − h x) = a · r` on relations. Then `Λ v = a · v`, `ZT` (vectors supported on `T`), `M = R ⊔ ZT`,
+  `N` from §2 with `q = 6D₀`, `L = R ⊔ N ℤ^m`, `λ ℓ = Λ ℓ / D₀` (exact on `L`); `λ ≡ 0 (mod 3)` on all of `L`; (C′) through `M` by
+  the Lipschitz bound and off `M` by stripping the `T`-part (`D₀(λℓ + ‖ℓ‖₁) ≥ ‖ℓ off T‖₁ > 2·Dbd·D₀`, private `term_nonneg`,
+  `term_ge`); the descent `c' b = ĥ(lift b) + c 0`, its period group `relMap(N ℤ^m)` of finite index by a surjection from
+  `Fin m → Fin N`.
+- `exists_isPeriodic_eqOn`: the nonzero steps listed by `Finset.equivFin`; the family form; `Coloring.mk`.
+- `coloring_mem_closure_isPeriodic`: `nhds_pi`, `Filter.mem_pi`, density at the finite set the cylinder fixes.
+- `forcedSubgroup_finiteIndex_iff_finite`: ⟹ colourings inject into `A ⧸ F → Fin k` (`Quotient.out`); ⟸ each period group's
+  quotient injects into the colourings by translation (`addCayleyTranslate`), then `AddSubgroup.finiteIndex_iInf`.
+
+**Not done here** (item 1000's ruling): the coset reduction (plan § 3.5, density without generation) and the dichotomy's
+cell clause (plan § 2.5). The re-price left room in lines, not in this job's context: see the hand-back line below.
+
+**Hand-back point.** At this stage the job is at about the brief's hand-back line (≈ 550k by the harness's count). What is
+left for a successor, in order: stage 6, the build (`./scripts/build.sh` under the slot, the brief's line), `lake lint`; stage 7,
+merge `main` (the collapse landed at `0f81fe2a3`; the gate's baseline is now `data/fs131/ico2/gate/` on `main`, per the
+coordinator's message), the gate on one commit by `data/fs131/clone1/run-gate.sh`'s steps copied under `data/fs131/ict1/`, the
+statement comparison against `data/fs131/ict1/statements-before.txt.gz` (ruled change: `mcshane_model`'s right side, item 1003;
+new public constants: `Circular.rep01_coe`; `Fibre.relMap_single`, `relMap_eq_wsum`, `liftHeight_eq_of_sub`, `height_word_single`,
+`liftHeight_of_relMap_eq_zero`, `three_dvd_liftHeight`, `liftHeight_add_of_relMap_eq_zero`; `Density.l1_nonneg`, `l1_neg`,
+`l1_add_le`, `l1_sub_le`, `abs_le_l1`, `l1_single_one`, `even_l1_sub_sum`), the vacuity scan's new sites with each structure's
+inhabitant (plan § 3.7's list), `#print axioms` of every head statement; stage 8, the read-aloud against row 79 and the drafts
+(the planner's § 3.8, brought to what is proved).

@@ -28,6 +28,38 @@ namespace HadwigerNelson.CayleyThree
 
 open HadwigerNelson.ThreeColour HadwigerNelson.CharacterColouring HadwigerNelson.ThreeColourCharacter SimpleGraph
 
+/-! ## §0 The grid distance -/
+
+theorem l1_nonneg {m : ℕ} (v : Fin m → ℤ) : 0 ≤ l1 v := Finset.sum_nonneg fun j _ => abs_nonneg (v j)
+
+theorem l1_neg {m : ℕ} (v : Fin m → ℤ) : l1 (-v) = l1 v := by
+  unfold l1; exact Finset.sum_congr rfl fun j _ => by rw [Pi.neg_apply, abs_neg]
+
+theorem l1_add_le {m : ℕ} (u v : Fin m → ℤ) : l1 (u + v) ≤ l1 u + l1 v := by
+  unfold l1; rw [← Finset.sum_add_distrib]
+  exact Finset.sum_le_sum fun j _ => abs_add_le (u j) (v j)
+
+theorem l1_sub_le {m : ℕ} (u v : Fin m → ℤ) : l1 (u - v) ≤ l1 u + l1 v := by
+  rw [sub_eq_add_neg, ← l1_neg v]; exact l1_add_le u (-v)
+
+theorem abs_le_l1 {m : ℕ} (v : Fin m → ℤ) (j : Fin m) : |v j| ≤ l1 v :=
+  Finset.single_le_sum (f := fun i => |v i|) (fun i _ => abs_nonneg (v i)) (Finset.mem_univ j)
+
+theorem l1_single_one {m : ℕ} (j : Fin m) : l1 (Pi.single j 1 : Fin m → ℤ) = 1 := by
+  unfold l1
+  rw [Finset.sum_eq_single j (fun i _ hi => by rw [Pi.single_eq_of_ne hi, abs_zero]) (by simp), Pi.single_eq_same,
+    abs_one]
+
+/-- The grid distance has the parity of the coordinate sum. -/
+theorem even_l1_sub_sum {m : ℕ} (v : Fin m → ℤ) : Even (l1 v - ∑ j, v j) := by
+  refine ⟨∑ j, (if v j < 0 then -v j else 0), ?_⟩
+  unfold l1
+  rw [← Finset.sum_sub_distrib, ← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl fun j _ => ?_
+  rcases lt_or_ge (v j) 0 with h | h
+  · rw [abs_of_neg h, if_pos h]; ring
+  · rw [abs_of_nonneg h, if_neg (not_lt.mpr h)]; ring
+
 /-! ## §1 The McShane extension on `ℤ^m` -/
 
 section McShane
@@ -40,30 +72,103 @@ noncomputable def mcshane (x : Fin m → ℤ) : ℤ :=
 
 variable {h B L lam}
 
+/-- Each term of the extension is at least `h β − ‖x − β‖₁`. -/
+private theorem le_term (hlam : ∀ ℓ : L, |lam ℓ| ≤ l1 (ℓ : Fin m → ℤ)) (x β : Fin m → ℤ) (ℓ : L) :
+    h β - l1 (x - β) ≤ h β + lam ℓ + l1 (x - β - (ℓ : Fin m → ℤ)) := by
+  have h1 := hlam ℓ
+  have h2 : l1 (ℓ : Fin m → ℤ) ≤ l1 (x - β) + l1 (x - β - (ℓ : Fin m → ℤ)) := by
+    have := l1_sub_le (x - β) (x - β - (ℓ : Fin m → ℤ))
+    rwa [sub_sub_cancel] at this
+  have h3 := neg_abs_le (lam ℓ)
+  linarith
+
+/-- The set the extension takes the least element of is bounded below. -/
+private theorem bddBelow_terms (hlam : ∀ ℓ : L, |lam ℓ| ≤ l1 (ℓ : Fin m → ℤ)) (x : Fin m → ℤ) :
+    BddBelow {z | ∃ β ∈ B, ∃ ℓ : L, z = h β + lam ℓ + l1 (x - β - (ℓ : Fin m → ℤ))} := by
+  refine ⟨-∑ β ∈ B, |h β - l1 (x - β)|, ?_⟩
+  rintro z ⟨β, hβ, ℓ, rfl⟩
+  have h1 := le_term (h := h) hlam x β ℓ
+  have h2 : |h β - l1 (x - β)| ≤ ∑ β ∈ B, |h β - l1 (x - β)| :=
+    Finset.single_le_sum (f := fun β => |h β - l1 (x - β)|) (fun _ _ => abs_nonneg _) hβ
+  have h3 := neg_abs_le (h β - l1 (x - β))
+  linarith
+
 theorem mcshane_mem (hB : B.Nonempty) (hlam : ∀ ℓ : L, |lam ℓ| ≤ l1 (ℓ : Fin m → ℤ)) (x : Fin m → ℤ) :
     ∃ β ∈ B, ∃ ℓ : L, mcshane h B L lam x = h β + lam ℓ + l1 (x - β - (ℓ : Fin m → ℤ)) := by
-  sorry
+  obtain ⟨β₀, hβ₀⟩ := hB
+  have hne : ({z | ∃ β ∈ B, ∃ ℓ : L, z = h β + lam ℓ + l1 (x - β - (ℓ : Fin m → ℤ))} : Set ℤ).Nonempty :=
+    ⟨_, β₀, hβ₀, 0, rfl⟩
+  exact Int.csInf_mem hne (bddBelow_terms (h := h) hlam x)
 
 theorem mcshane_le (hlam : ∀ ℓ : L, |lam ℓ| ≤ l1 (ℓ : Fin m → ℤ)) (x : Fin m → ℤ) {β : Fin m → ℤ} (hβ : β ∈ B)
-    (ℓ : L) : mcshane h B L lam x ≤ h β + lam ℓ + l1 (x - β - (ℓ : Fin m → ℤ)) := by
-  sorry
+    (ℓ : L) : mcshane h B L lam x ≤ h β + lam ℓ + l1 (x - β - (ℓ : Fin m → ℤ)) :=
+  csInf_le (bddBelow_terms (h := h) hlam x) ⟨β, hβ, ℓ, rfl⟩
 
 /-- **The extension is a `±1` height**: `1`-Lipschitz (each term is), and of one parity with `Σ_j x_j` (each term is). -/
 theorem abs_mcshane_add_single_sub (hB : B.Nonempty) (hlam : ∀ ℓ : L, |lam ℓ| ≤ l1 (ℓ : Fin m → ℤ))
     (hev : ∀ ℓ : L, Even (lam ℓ - ∑ j, (ℓ : Fin m → ℤ) j)) (hevh : ∀ β ∈ B, Even (h β - ∑ j, β j))
     (x : Fin m → ℤ) (j : Fin m) : |mcshane h B L lam (x + Pi.single j 1) - mcshane h B L lam x| = 1 := by
-  sorry
+  -- every term at `y` has the parity of `Σ y`
+  have hpar : ∀ y : Fin m → ℤ, Even (mcshane h B L lam y - ∑ i, y i) := fun y => by
+    obtain ⟨β, hβ, ℓ, hy⟩ := mcshane_mem (h := h) hB hlam y
+    rw [hy]
+    have e1 := hevh β hβ
+    have e2 := hev ℓ
+    have e3 := even_l1_sub_sum (y - β - (ℓ : Fin m → ℤ))
+    have e : h β + lam ℓ + l1 (y - β - (ℓ : Fin m → ℤ)) - ∑ i, y i =
+        (h β - ∑ i, β i) + (lam ℓ - ∑ i, (ℓ : Fin m → ℤ) i) +
+          (l1 (y - β - (ℓ : Fin m → ℤ)) - ∑ i, (y - β - (ℓ : Fin m → ℤ)) i) := by
+      simp only [Pi.sub_apply, Finset.sum_sub_distrib]; ring
+    rw [e]
+    exact (e1.add e2).add e3
+  -- one step changes the extension by at most `1`
+  have hup : mcshane h B L lam (x + Pi.single j 1) ≤ mcshane h B L lam x + 1 := by
+    obtain ⟨β, hβ, ℓ, hx⟩ := mcshane_mem (h := h) hB hlam x
+    have h1 := mcshane_le (h := h) hlam (x + Pi.single j 1) hβ ℓ
+    have h2 := l1_add_le (x - β - (ℓ : Fin m → ℤ)) (Pi.single j 1)
+    rw [l1_single_one] at h2
+    rw [show x + Pi.single j 1 - β - (ℓ : Fin m → ℤ) = (x - β - (ℓ : Fin m → ℤ)) + Pi.single j 1 by abel] at h1
+    linarith
+  have hdown : mcshane h B L lam x ≤ mcshane h B L lam (x + Pi.single j 1) + 1 := by
+    obtain ⟨β, hβ, ℓ, hx⟩ := mcshane_mem (h := h) hB hlam (x + Pi.single j 1)
+    have h1 := mcshane_le (h := h) hlam x hβ ℓ
+    have h2 := l1_sub_le (x + Pi.single j 1 - β - (ℓ : Fin m → ℤ)) (Pi.single j 1)
+    rw [l1_single_one] at h2
+    rw [show x + Pi.single j 1 - β - (ℓ : Fin m → ℤ) - Pi.single j 1 = x - β - (ℓ : Fin m → ℤ) by abel] at h2
+    linarith
+  have hsum : ∑ i, (x + Pi.single j 1 : Fin m → ℤ) i = ∑ i, x i + 1 := by
+    simp [Pi.add_apply, Finset.sum_add_distrib]
+  obtain ⟨a, ha⟩ := hpar (x + Pi.single j 1)
+  obtain ⟨b, hb⟩ := hpar x
+  rw [hsum] at ha
+  rw [abs_eq (zero_le_one)]
+  omega
 
 /-- **The extension is `L`-equivariant with slope `λ`.** -/
 theorem mcshane_add (hB : B.Nonempty) (hlam : ∀ ℓ : L, |lam ℓ| ≤ l1 (ℓ : Fin m → ℤ)) (x : Fin m → ℤ) (ℓ₀ : L) :
     mcshane h B L lam (x + ℓ₀) = mcshane h B L lam x + lam ℓ₀ := by
-  sorry
+  refine le_antisymm ?_ ?_
+  · obtain ⟨β, hβ, ℓ, hx⟩ := mcshane_mem (h := h) hB hlam x
+    have h1 := mcshane_le (h := h) hlam (x + ℓ₀) hβ (ℓ + ℓ₀)
+    rw [map_add, AddSubgroup.coe_add,
+      show x + (ℓ₀ : Fin m → ℤ) - β - ((ℓ : Fin m → ℤ) + ℓ₀) = x - β - (ℓ : Fin m → ℤ) by abel] at h1
+    linarith
+  · obtain ⟨β, hβ, ℓ, hx⟩ := mcshane_mem (h := h) hB hlam (x + ℓ₀)
+    have h1 := mcshane_le (h := h) hlam x hβ (ℓ - ℓ₀)
+    rw [map_sub, AddSubgroup.coe_sub,
+      show x - β - ((ℓ : Fin m → ℤ) - ℓ₀) = x + (ℓ₀ : Fin m → ℤ) - β - (ℓ : Fin m → ℤ) by abel] at h1
+    linarith
 
 /-- **The extension agrees with `h` on `B`** when the data are consistent (Coxeter's (C′)). -/
 theorem mcshane_eq_of_consistent (hlam : ∀ ℓ : L, |lam ℓ| ≤ l1 (ℓ : Fin m → ℤ))
     (hcons : ∀ β ∈ B, ∀ β' ∈ B, ∀ ℓ : L, h β ≤ h β' + lam ℓ + l1 (β - β' - (ℓ : Fin m → ℤ))) {β : Fin m → ℤ}
     (hβ : β ∈ B) : mcshane h B L lam β = h β := by
-  sorry
+  refine le_antisymm ?_ (le_csInf ⟨h β + lam 0 + l1 (β - β - ((0 : L) : Fin m → ℤ)), β, hβ, 0, rfl⟩ ?_)
+  · have h1 := mcshane_le (h := h) hlam β hβ 0
+    rwa [map_zero, AddSubgroup.coe_zero, sub_self, sub_zero, add_zero,
+      show l1 (0 : Fin m → ℤ) = 0 by simp [l1], add_zero] at h1
+  · rintro z ⟨β', hβ', ℓ, rfl⟩
+    exact hcons β hβ β' hβ' ℓ
 
 end McShane
 
@@ -71,7 +176,18 @@ end McShane
 `h 0 + ‖x‖₁ = ‖x‖₁`. -/
 theorem mcshane_model {m : ℕ} (x : Fin m → ℤ) :
     mcshane (fun y => ∑ j, y j) {0} ⊥ 0 x = l1 x := by
-  sorry
+  have hlam : ∀ ℓ : (⊥ : AddSubgroup (Fin m → ℤ)), |(0 : (⊥ : AddSubgroup (Fin m → ℤ)) →+ ℤ) ℓ| ≤
+      l1 (ℓ : Fin m → ℤ) := fun ℓ => by
+    rw [AddMonoidHom.zero_apply, abs_zero]; exact l1_nonneg _
+  refine le_antisymm ?_ (le_csInf ⟨(fun y : Fin m → ℤ => ∑ j, y j) 0 + (0 : (⊥ : AddSubgroup (Fin m → ℤ)) →+ ℤ) 0 +
+    l1 (x - 0 - ((0 : (⊥ : AddSubgroup (Fin m → ℤ))) : Fin m → ℤ)), 0, Finset.mem_singleton_self 0, 0, rfl⟩ ?_)
+  · have h1 := mcshane_le (h := fun y : Fin m → ℤ => ∑ j, y j) hlam x (Finset.mem_singleton_self 0) 0
+    simpa using h1
+  · rintro z ⟨β, hβ, ℓ, rfl⟩
+    rw [Finset.mem_singleton] at hβ
+    subst hβ
+    have hℓ : (ℓ : Fin m → ℤ) = 0 := (AddSubgroup.mem_bot.mp ℓ.2)
+    simp [hℓ]
 
 /-! ## §2 The period: long classes modulo a subgroup -/
 
@@ -80,11 +196,143 @@ exponent): for a subgroup `M` of `ℤ^m`, a bound `D` and `q ≠ 0`, some `N ≠
 `M` whose class lies in `N·(ℤ^m/M)` longer than `D`. -/
 theorem exists_lt_l1_of_sub_nsmul_mem {m : ℕ} (M : AddSubgroup (Fin m → ℤ)) (D : ℤ) {q : ℕ} (hq : q ≠ 0) :
     ∃ N : ℕ, N ≠ 0 ∧ q ∣ N ∧ ∀ v ν : Fin m → ℤ, v - N • ν ∈ M → v ∉ M → D < l1 v := by
-  sorry
+  classical
+  -- the short vectors are finitely many
+  have hfin : {v : Fin m → ℤ | l1 v ≤ D}.Finite := by
+    refine (Set.Finite.pi (t := fun _ => Set.Icc (-D) D) fun _ => Set.finite_Icc _ _).subset fun v hv i _ => ?_
+    exact abs_le.mp ((abs_le_l1 v i).trans hv)
+  -- for each short vector outside `M`, a finite-index subgroup above `M` missing it (residual finiteness)
+  have hW : ∀ v : Fin m → ℤ, v ∉ M → ∃ W : AddSubgroup (Fin m → ℤ), M ≤ W ∧ W.FiniteIndex ∧ v ∉ W :=
+    fun v hv => by
+      obtain ⟨W, h1, -, h3, h4⟩ := exists_finiteIndex_between_notMem (H := ⊤) le_top inferInstance hv
+      exact ⟨W, h1, h3, h4⟩
+  choose W hMW hWfin hvW using hW
+  let W' : (Fin m → ℤ) → AddSubgroup (Fin m → ℤ) := fun v => if h : v ∈ M then ⊤ else W v h
+  have hW'fin : ∀ v, (W' v).index ≠ 0 := fun v => by
+    by_cases h : v ∈ M
+    · simp only [W', dif_pos h, AddSubgroup.index_top]; exact one_ne_zero
+    · simp only [W', dif_neg h]; exact (hWfin v h).index_ne_zero
+  let F : Finset (Fin m → ℤ) := hfin.toFinset
+  refine ⟨q * ∏ v ∈ F, (W' v).index, mul_ne_zero hq (Finset.prod_ne_zero_iff.mpr fun v _ => hW'fin v),
+    dvd_mul_right _ _, fun v ν hvν hv => ?_⟩
+  by_contra hD
+  have hvF : v ∈ F := hfin.mem_toFinset.mpr (not_lt.mp hD)
+  have hW'v : W' v = W v hv := dif_neg hv
+  -- `N • ν` is in `W' v`, which holds `M`, so `v` is too
+  obtain ⟨k, hk⟩ : (W' v).index ∣ q * ∏ v ∈ F, (W' v).index :=
+    (Finset.dvd_prod_of_mem _ hvF).mul_left q
+  have hNν : (q * ∏ v ∈ F, (W' v).index) • ν ∈ W' v := by
+    rw [hk, mul_nsmul]
+    exact AddSubgroup.nsmul_mem _ ((W' v).nsmul_index_mem ν) _
+  have hmem : v ∈ W' v := by
+    have h1 : v - (q * ∏ v ∈ F, (W' v).index) • ν ∈ W' v := by rw [hW'v]; exact hMW v hv hvν
+    have h2 := add_mem h1 hNν
+    rwa [sub_add_cancel] at h2
+  rw [hW'v] at hmem
+  exact hvW v hv hmem
 
 /-! ## §3 Density -/
 
 variable {A : Type*} [AddCommGroup A]
+
+/-- **The slope data, in integers**: a common denominator `D₀` of a rational fibre point strict off the tight set `T`
+(`exists_rat_mem_fibre_relint`), and the integer slopes `a_j = D₀ (3 − 6 x_j)`. The `±1` height moves by `a_j / D₀ = ±1`
+along a tight direction and by `a · r / D₀` along a relation; `|a_j| ≤ D₀`, strictly off `T`. -/
+private theorem exists_slope {m : ℕ} {s : Fin m → A} (hgen : Function.Surjective (relMap s)) {c : A → ZMod 3}
+    (hc : ProperAlong s c) :
+    ∃ (D₀ : ℕ) (a : Fin m → ℤ) (T : Set (Fin m)), 0 < D₀ ∧ (∀ j, |a j| ≤ D₀) ∧ (∀ j ∉ T, |a j| < D₀) ∧
+      (∀ j ∈ T, ∀ x, (D₀ : ℤ) * (pmHeight s c (x + Pi.single j 1) - pmHeight s c x) = a j) ∧
+      (∀ r ∈ (relMap s).ker, ∀ x, (D₀ : ℤ) * (pmHeight s c (x + r) - pmHeight s c x) = ∑ j, a j * r j) := by
+  classical
+  obtain ⟨xs, hxs, hxT⟩ := exists_rat_mem_fibre_relint (heightWinding hc)
+  set D₀ : ℕ := ∏ j, (xs j).den with hD₀
+  have hD₀pos : 0 < D₀ := Finset.prod_pos fun j _ => (xs j).den_pos
+  have hD₀R : (0 : ℝ) < D₀ := by exact_mod_cast hD₀pos
+  -- the integer numerators `X j = D₀ · x_j`
+  have hX : ∀ j, ∃ X : ℤ, (X : ℚ) = D₀ * xs j := fun j => by
+    obtain ⟨e, he⟩ : (xs j).den ∣ D₀ := Finset.dvd_prod_of_mem _ (Finset.mem_univ j)
+    refine ⟨(xs j).num * e, ?_⟩
+    rw [he]
+    push_cast
+    rw [← Rat.mul_den_eq_num]
+    ring
+  choose X hX using hX
+  have hXr : ∀ j, ((X j : ℤ) : ℝ) = (D₀ : ℝ) * ((xs j : ℚ) : ℝ) := fun j => by
+    have := congrArg (fun q : ℚ => (q : ℝ)) (hX j)
+    push_cast at this
+    exact this
+  -- the box, and its interior off `T`, in integers
+  have hbox : ∀ j, (D₀ : ℤ) ≤ 3 * X j ∧ 3 * X j ≤ 2 * D₀ := fun j => by
+    obtain ⟨h1, h2⟩ := hxs.1 j
+    have e1 : ((D₀ : ℤ) : ℝ) ≤ ((3 * X j : ℤ) : ℝ) := by
+      push_cast; rw [hXr]; nlinarith
+    have e2 : ((3 * X j : ℤ) : ℝ) ≤ ((2 * D₀ : ℤ) : ℝ) := by
+      push_cast; rw [hXr]; nlinarith
+    exact ⟨Int.cast_le.mp e1, Int.cast_le.mp e2⟩
+  have hint : ∀ j ∉ tightSet (heightWinding hc), (D₀ : ℤ) < 3 * X j ∧ 3 * X j < 2 * D₀ := fun j hj => by
+    obtain ⟨h1, h2⟩ := hxT j hj
+    have h1' : (1 / 3 : ℝ) < ((xs j : ℚ) : ℝ) := by
+      have := Rat.cast_lt (K := ℝ).mpr h1; push_cast at this; exact this
+    have h2' : ((xs j : ℚ) : ℝ) < 2 / 3 := by
+      have := Rat.cast_lt (K := ℝ).mpr h2; push_cast at this; exact this
+    have e1 : ((D₀ : ℤ) : ℝ) < ((3 * X j : ℤ) : ℝ) := by
+      push_cast; rw [hXr]; nlinarith
+    have e2 : ((3 * X j : ℤ) : ℝ) < ((2 * D₀ : ℤ) : ℝ) := by
+      push_cast; rw [hXr]; nlinarith
+    exact ⟨Int.cast_lt.mp e1, Int.cast_lt.mp e2⟩
+  refine ⟨D₀, fun j => 3 * D₀ - 6 * X j, tightSet (heightWinding hc), hD₀pos, fun j => ?_, fun j hj => ?_,
+    fun j hj x => ?_, fun r hr x => ?_⟩
+  · obtain ⟨h1, h2⟩ := hbox j
+    show |3 * (D₀ : ℤ) - 6 * X j| ≤ D₀
+    exact abs_le.mpr ⟨by omega, by omega⟩
+  · obtain ⟨h1, h2⟩ := hint j hj
+    show |3 * (D₀ : ℤ) - 6 * X j| < D₀
+    exact abs_lt.mpr ⟨by omega, by omega⟩
+  · -- a tight direction: the step is constant, and the fibre point sits on the face it names
+    obtain ⟨σ, hσj, hσt⟩ := hj
+    obtain ⟨hc1, hc2⟩ := fibre_coord_of_isTight hσt hxs j
+    rw [pmHeight_add_single hc]
+    rcases lt_or_gt_of_ne hσj with h | h
+    · rw [step_eq_two_of_isTight hc hgen hσt h]
+      have hx := hc2 h
+      have e : ((X j : ℤ) : ℝ) = 2 * D₀ / 3 := by rw [hXr, hx]; ring
+      have e' : ((3 * X j : ℤ) : ℝ) = ((2 * D₀ : ℤ) : ℝ) := by push_cast; rw [e]; ring
+      have := Int.cast_inj.mp e'
+      ring_nf; omega
+    · rw [step_eq_one_of_isTight hc hgen hσt h]
+      have hx := hc1 h
+      have e : ((X j : ℤ) : ℝ) = D₀ / 3 := by rw [hXr, hx]; ring
+      have e' : ((3 * X j : ℤ) : ℝ) = ((D₀ : ℤ) : ℝ) := by push_cast; rw [e]; ring
+      have := Int.cast_inj.mp e'
+      ring_nf; omega
+  · -- along a relation, through the fibre equation
+    have h1 := pmHeight_add_ker hc x ⟨r, hr⟩
+    have h2 := hxs.2 ⟨r, hr⟩
+    have e : ((∑ j, X j * r j : ℤ) : ℝ) = ((D₀ * (heightWinding hc).toHom ⟨r, hr⟩ : ℤ) : ℝ) := by
+      push_cast
+      simp only [hXr]
+      rw [← h2, Finset.mul_sum]
+      exact Finset.sum_congr rfl fun j _ => by ring
+    have e' := Int.cast_inj.mp e
+    change pmHeight s c (x + r) = pmHeight s c x + (3 * ∑ j, r j - 6 * (heightWinding hc).toHom ⟨r, hr⟩) at h1
+    rw [h1]
+    simp only [sub_mul, Finset.sum_sub_distrib]
+    rw [show ∑ j, 6 * X j * r j = 6 * ∑ j, X j * r j by rw [Finset.mul_sum]; exact Finset.sum_congr rfl fun j _ => by ring,
+      show ∑ j, 3 * (D₀ : ℤ) * r j = 3 * D₀ * ∑ j, r j by rw [Finset.mul_sum], e']
+    ring
+
+/-- A term of the slope form against the grid distance: non-negative when `|a| ≤ d`. -/
+private theorem term_nonneg {a d v : ℤ} (ha : |a| ≤ d) : 0 ≤ a * v + d * |v| := by
+  have h1 : |a * v| ≤ d * |v| := by rw [abs_mul]; exact mul_le_mul_of_nonneg_right ha (abs_nonneg v)
+  have h2 := neg_abs_le (a * v)
+  linarith
+
+/-- … and at least `|v|` when `|a| < d`. -/
+private theorem term_ge {a d v : ℤ} (ha : |a| < d) : |v| ≤ a * v + d * |v| := by
+  have ha' : |a| ≤ d - 1 := by omega
+  have h1 : |a * v| ≤ (d - 1) * |v| := by rw [abs_mul]; exact mul_le_mul_of_nonneg_right ha' (abs_nonneg v)
+  have h2 := neg_abs_le (a * v)
+  linarith
 
 /-- **Density, family form** (FS73-T24 / H-iii): for a colouring proper along a generating family, and a finite set `B`,
 some colouring proper along the family, constant on the cosets of a subgroup of finite index, agrees with it on `B`. -/
@@ -92,25 +340,322 @@ theorem exists_periodic_properAlong_eqOn {m : ℕ} {s : Fin m → A} (hgen : Fun
     {c : A → ZMod 3} (hc : ProperAlong s c) (B : Finset A) :
     ∃ c' : A → ZMod 3, ProperAlong s c' ∧ (∃ K : AddSubgroup A, K.FiniteIndex ∧ ∀ k ∈ K, Function.Periodic c' k) ∧
       Set.EqOn c' c (B : Set A) := by
-  sorry
+  classical
+  obtain ⟨D₀, a, T, hD₀, ha, haT, hT, hR⟩ := exists_slope hgen hc
+  have hD₀z : (0 : ℤ) < D₀ := by exact_mod_cast hD₀
+  set h := pmHeight s c with hh
+  -- the slope form `Λ v = Σ_j a_j v_j`
+  let Λ : (Fin m → ℤ) →+ ℤ :=
+    { toFun := fun v => ∑ j, a j * v j
+      map_zero' := by simp
+      map_add' := fun u v => by simp only [Pi.add_apply, mul_add, Finset.sum_add_distrib] }
+  have hΛ : ∀ v, Λ v = ∑ j, a j * v j := fun _ => rfl
+  have hΛR : ∀ r ∈ (relMap s).ker, ∀ x, (D₀ : ℤ) * (h (x + r) - h x) = Λ r := hR
+  -- the vectors supported on the tight set, along which `h` is affine with slope `Λ / D₀`
+  let ZT : AddSubgroup (Fin m → ℤ) :=
+    { carrier := {t | ∀ j, j ∉ T → t j = 0}
+      add_mem' := fun {t t'} ht ht' j hj => by
+        change t j + t' j = 0
+        rw [ht j hj, ht' j hj, add_zero]
+      zero_mem' := fun j _ => rfl
+      neg_mem' := fun {t} ht j hj => by
+        change -t j = 0
+        rw [ht j hj, neg_zero] }
+  have hZT : ∀ t ∈ ZT, ∀ x, (D₀ : ℤ) * (h (x + t) - h x) = Λ t := by
+    let H' : AddSubgroup (Fin m → ℤ) :=
+      { carrier := {t | ∀ x, (D₀ : ℤ) * (h (x + t) - h x) = Λ t}
+        add_mem' := fun {t t'} ht ht' x => by
+          change (D₀ : ℤ) * (h (x + (t + t')) - h x) = Λ (t + t')
+          rw [map_add, ← ht x, ← ht' (x + t), ← add_assoc]
+          ring
+        zero_mem' := fun x => by simp
+        neg_mem' := fun {t} ht x => by
+          change (D₀ : ℤ) * (h (x + -t) - h x) = Λ (-t)
+          have := ht (x + -t)
+          rw [neg_add_cancel_right] at this
+          rw [map_neg, ← this]
+          ring }
+    intro t ht
+    have hmem : t ∈ H' := by
+      rw [← Finset.univ_sum_single t]
+      refine AddSubgroup.sum_mem _ fun j _ => ?_
+      by_cases hj : j ∈ T
+      · rw [show Pi.single j (t j) = t j • (Pi.single j (1 : ℤ) : Fin m → ℤ) by
+          rw [← Pi.single_smul, smul_eq_mul, mul_one]]
+        have hsingle : (Pi.single j (1 : ℤ) : Fin m → ℤ) ∈ H' := fun x => by
+          rw [hT j hj x, hΛ]
+          rw [Finset.sum_eq_single j (fun i _ hi => by rw [Pi.single_eq_of_ne hi, mul_zero]) (by simp),
+            Pi.single_eq_same, mul_one]
+        exact AddSubgroup.zsmul_mem _ hsingle _
+      · rw [ht j hj, Pi.single_zero]
+        exact H'.zero_mem
+    exact hmem
+  -- lifts of the finite set, with `0` added so that it is nonempty
+  let lift : A → Fin m → ℤ := Function.surjInv hgen
+  have hlift : ∀ b, relMap s (lift b) = b := Function.surjInv_eq hgen
+  let Bt : Finset (Fin m → ℤ) := (insert 0 B).image lift
+  have hBt : Bt.Nonempty := ⟨lift 0, Finset.mem_image_of_mem _ (Finset.mem_insert_self _ _)⟩
+  let Dbd : ℤ := ∑ β ∈ Bt, ∑ β' ∈ Bt, l1 (β - β')
+  have hDbd : ∀ β ∈ Bt, ∀ β' ∈ Bt, l1 (β - β') ≤ Dbd := fun β hβ β' hβ' => by
+    have h1 : l1 (β - β') ≤ ∑ β'' ∈ Bt, l1 (β - β'') :=
+      Finset.single_le_sum (f := fun β'' => l1 (β - β'')) (fun _ _ => l1_nonneg _) hβ'
+    have h2 : ∑ β'' ∈ Bt, l1 (β - β'') ≤ Dbd :=
+      Finset.single_le_sum (f := fun β => ∑ β'' ∈ Bt, l1 (β - β'')) (fun _ _ => Finset.sum_nonneg fun _ _ =>
+        l1_nonneg _) hβ
+    exact h1.trans h2
+  -- the period `N`: long off `M = R + ℤ^T`
+  let M : AddSubgroup (Fin m → ℤ) := (relMap s).ker ⊔ ZT
+  obtain ⟨N, hN0, ⟨N', hN'⟩, hlong⟩ := exists_lt_l1_of_sub_nsmul_mem M (2 * Dbd * D₀) (q := 6 * D₀) (by omega)
+  let NS : AddSubgroup (Fin m → ℤ) := (nsmulAddMonoidHom N : (Fin m → ℤ) →+ (Fin m → ℤ)).range
+  have hNS : ∀ z ∈ NS, ∃ ν, z = N • ν := fun z hz => by
+    obtain ⟨ν, hν⟩ := AddMonoidHom.mem_range.mp hz
+    exact ⟨ν, by rw [← hν, nsmulAddMonoidHom_apply]⟩
+  have hNSmem : ∀ ν : Fin m → ℤ, N • ν ∈ NS := fun ν => AddMonoidHom.mem_range.mpr ⟨ν, nsmulAddMonoidHom_apply N ν⟩
+  have hΛN : ∀ ν : Fin m → ℤ, Λ (N • ν) = D₀ * (6 * N' * Λ ν) := fun ν => by
+    rw [map_nsmul, hN', nsmul_eq_mul]; push_cast; ring
+  let L : AddSubgroup (Fin m → ℤ) := (relMap s).ker ⊔ NS
+  -- every element of `L` is a relation plus `N • ν`, and `D₀` divides its slope
+  have hdec : ∀ ℓ ∈ L, ∃ y ∈ (relMap s).ker, ∃ ν : Fin m → ℤ, ℓ = y + N • ν ∧
+      Λ ℓ = D₀ * ((h y - h 0) + 6 * N' * Λ ν) := fun ℓ hℓ => by
+    obtain ⟨y, hy, z, hz, rfl⟩ := AddSubgroup.mem_sup.mp hℓ
+    obtain ⟨ν, rfl⟩ := hNS z hz
+    refine ⟨y, hy, ν, rfl, ?_⟩
+    have := hΛR y hy 0
+    rw [zero_add] at this
+    rw [map_add, hΛN, ← this]
+    ring
+  let lam : L →+ ℤ :=
+    { toFun := fun ℓ => Λ ℓ / D₀
+      map_zero' := by simp
+      map_add' := fun ℓ ℓ' => by
+        obtain ⟨y, -, ν, -, hy⟩ := hdec ℓ ℓ.2
+        obtain ⟨y', -, ν', -, hy'⟩ := hdec ℓ' ℓ'.2
+        change Λ ((ℓ : Fin m → ℤ) + ℓ') / D₀ = Λ ℓ / D₀ + Λ ℓ' / D₀
+        rw [map_add, hy, hy', ← mul_add, Int.mul_ediv_cancel_left _ hD₀z.ne', Int.mul_ediv_cancel_left _ hD₀z.ne',
+          Int.mul_ediv_cancel_left _ hD₀z.ne'] }
+  have hlamD : ∀ ℓ : L, (D₀ : ℤ) * lam ℓ = Λ ℓ := fun ℓ => by
+    obtain ⟨y, -, ν, -, hy⟩ := hdec ℓ ℓ.2
+    change (D₀ : ℤ) * (Λ ℓ / D₀) = Λ ℓ
+    rw [hy, Int.mul_ediv_cancel_left _ hD₀z.ne']
+  have hlam_eq : ∀ ℓ : L, ∃ y ∈ (relMap s).ker, ∃ ν : Fin m → ℤ, (ℓ : Fin m → ℤ) = y + N • ν ∧
+      lam ℓ = (h y - h 0) + 6 * N' * Λ ν := fun ℓ => by
+    obtain ⟨y, hy, ν, hℓ, hΛℓ⟩ := hdec ℓ ℓ.2
+    refine ⟨y, hy, ν, hℓ, ?_⟩
+    have := hlamD ℓ
+    rw [hΛℓ] at this
+    exact mul_left_cancel₀ hD₀z.ne' this
+  -- the hypotheses of the McShane layer
+  have hΛbd : ∀ v, |Λ v| ≤ D₀ * l1 v := fun v => by
+    rw [hΛ]
+    refine (Finset.abs_sum_le_sum_abs _ _).trans ?_
+    unfold l1
+    rw [Finset.mul_sum]
+    exact Finset.sum_le_sum fun j _ => by
+      rw [abs_mul]; exact mul_le_mul_of_nonneg_right (ha j) (abs_nonneg _)
+  have hlam : ∀ ℓ : L, |lam ℓ| ≤ l1 (ℓ : Fin m → ℤ) := fun ℓ => by
+    have h1 := hΛbd ℓ
+    rw [← hlamD ℓ, abs_mul, abs_of_pos hD₀z] at h1
+    exact le_of_mul_le_mul_left h1 hD₀z
+  have hev : ∀ ℓ : L, Even (lam ℓ - ∑ j, (ℓ : Fin m → ℤ) j) := fun ℓ => by
+    obtain ⟨y, -, ν, hℓ, hl⟩ := hlam_eq ℓ
+    rw [hl, hℓ]
+    obtain ⟨u, hu⟩ := even_pmHeight_sub_sum hc y
+    obtain ⟨u', hu'⟩ := even_pmHeight_sub_sum hc 0
+    refine ⟨u - u' + 3 * N' * Λ ν - 3 * D₀ * N' * ∑ j, ν j, ?_⟩
+    have hs : ∑ j, (y + N • ν) j = ∑ j, y j + N * ∑ j, ν j := by
+      rw [Finset.mul_sum, ← Finset.sum_add_distrib]
+      exact Finset.sum_congr rfl fun j _ => by rw [Pi.add_apply, Pi.smul_apply, nsmul_eq_mul]
+    rw [hs, hN']
+    simp only [Pi.zero_apply, Finset.sum_const_zero, sub_zero] at hu'
+    rw [← hh] at hu hu'
+    push_cast
+    linarith
+  have hevh : ∀ β ∈ Bt, Even (h β - ∑ j, β j) := fun β _ => even_pmHeight_sub_sum hc β
+  -- the slope is `0` modulo `3` on `L`
+  have hlam3 : ∀ ℓ : L, ((lam ℓ : ℤ) : ZMod 3) = 0 := fun ℓ => by
+    obtain ⟨y, hy, ν, -, hl⟩ := hlam_eq ℓ
+    rw [hl]
+    have h1 := pmHeight_cast hc y
+    have h2 := pmHeight_cast hc (0 : Fin m → ℤ)
+    rw [AddMonoidHom.mem_ker.mp hy] at h1
+    rw [map_zero] at h2
+    push_cast
+    rw [← hh] at h1 h2
+    rw [h1, h2, show (6 : ZMod 3) = 0 from rfl]
+    ring
+  -- consistency (C′): through `M` by the Lipschitz bound, off `M` by the length of the period
+  have hcons : ∀ β ∈ Bt, ∀ β' ∈ Bt, ∀ ℓ : L, h β ≤ h β' + lam ℓ + l1 (β - β' - (ℓ : Fin m → ℤ)) := by
+    intro β hβ β' hβ' ℓ
+    have hlip := abs_pmHeight_sub_le hc β (β' + ℓ)
+    by_cases hM : (ℓ : Fin m → ℤ) ∈ M
+    · obtain ⟨r, hr, t, ht, hrt⟩ := AddSubgroup.mem_sup.mp hM
+      have e1 := hΛR r hr β'
+      have e2 := hZT t ht (β' + r)
+      have e3 : (D₀ : ℤ) * (h (β' + ℓ) - h β') = D₀ * lam ℓ := by
+        rw [hlamD, ← hrt, map_add, ← e1, ← e2, ← add_assoc]; ring
+      have e4 := mul_left_cancel₀ hD₀z.ne' e3
+      rw [show β - (β' + (ℓ : Fin m → ℤ)) = β - β' - ℓ by abel] at hlip
+      have := (abs_le.mp hlip).2
+      linarith
+    · obtain ⟨y, hy, ν, hℓ, -⟩ := hlam_eq ℓ
+      -- strip the tight part of `ℓ`: still outside `M`, still in `M + N ℤ^m`
+      let ℓT : Fin m → ℤ := fun j => if j ∈ T then (ℓ : Fin m → ℤ) j else 0
+      have hℓT : ℓT ∈ ZT := fun j hj => by simp only [ℓT, if_neg hj]
+      have h1 : (ℓ : Fin m → ℤ) - ℓT - N • ν ∈ M := by
+        rw [hℓ, show y + N • ν - ℓT - N • ν = y - ℓT by abel]
+        exact sub_mem (AddSubgroup.mem_sup_left hy) (AddSubgroup.mem_sup_right hℓT)
+      have h2 : (ℓ : Fin m → ℤ) - ℓT ∉ M := fun h' => hM (by
+        have := add_mem h' (AddSubgroup.mem_sup_right (S := (relMap s).ker) hℓT)
+        rwa [sub_add_cancel] at this)
+      have h3 := hlong _ ν h1 h2
+      -- `D₀ (λ ℓ + ‖ℓ‖₁)` dominates the part of `ℓ` off `T`
+      have h4 : l1 ((ℓ : Fin m → ℤ) - ℓT) ≤ (D₀ : ℤ) * (lam ℓ + l1 (ℓ : Fin m → ℤ)) := by
+        rw [mul_add, hlamD, hΛ]
+        unfold l1
+        rw [Finset.mul_sum, ← Finset.sum_add_distrib]
+        refine Finset.sum_le_sum fun j _ => ?_
+        simp only [Pi.sub_apply, ℓT]
+        by_cases hj : j ∈ T
+        · rw [if_pos hj, sub_self, abs_zero]
+          exact term_nonneg (ha j)
+        · rw [if_neg hj, sub_zero]
+          exact term_ge (haT j hj)
+      have h5 : 2 * Dbd < lam ℓ + l1 (ℓ : Fin m → ℤ) := by
+        have : (D₀ : ℤ) * (2 * Dbd) < D₀ * (lam ℓ + l1 (ℓ : Fin m → ℤ)) := by linarith
+        exact lt_of_mul_lt_mul_left this hD₀z.le
+      have h6 := hDbd β hβ β' hβ'
+      have h7 : |h β - h β'| ≤ l1 (β - β') := abs_pmHeight_sub_le hc β β'
+      have h8 : l1 (ℓ : Fin m → ℤ) ≤ l1 (β - β' - (ℓ : Fin m → ℤ)) + l1 (β - β') := by
+        have := l1_sub_le (β - β') (β - β' - (ℓ : Fin m → ℤ))
+        rw [sub_sub_cancel] at this
+        linarith
+      have h9 := (abs_le.mp h7).2
+      linarith
+  -- the extension, and its descent to `A`
+  set hb := mcshane h Bt L lam with hhb
+  have hstep : ∀ x j, |hb (x + Pi.single j 1) - hb x| = 1 := fun x j =>
+    abs_mcshane_add_single_sub hBt hlam hev hevh x j
+  have hshift : ∀ x (ℓ : L), hb (x + ℓ) = hb x + lam ℓ := fun x ℓ => mcshane_add hBt hlam x ℓ
+  have hagree : ∀ β ∈ Bt, hb β = h β := fun β hβ => mcshane_eq_of_consistent hlam hcons hβ
+  let c' : A → ZMod 3 := fun b => ((hb (lift b) : ℤ) : ZMod 3) + c 0
+  have hc' : ∀ x, c' (relMap s x) = ((hb x : ℤ) : ZMod 3) + c 0 := fun x => by
+    have hy : lift (relMap s x) - x ∈ (relMap s).ker := by
+      rw [AddMonoidHom.mem_ker, map_sub, hlift, sub_self]
+    have := hshift x ⟨_, AddSubgroup.mem_sup_left hy⟩
+    simp only [add_sub_cancel] at this
+    change ((hb (lift (relMap s x)) : ℤ) : ZMod 3) + c 0 = _
+    rw [this, Int.cast_add, hlam3, add_zero]
+  refine ⟨c', fun b j => ?_, ⟨NS.map (relMap s), ?_, fun k hk b => ?_⟩, fun b hb' => ?_⟩
+  · -- proper along the family
+    have e1 : b + s j = relMap s (lift b + Pi.single j 1) := by rw [map_add, hlift, relMap_single]
+    have e2 : b = relMap s (lift b) := (hlift b).symm
+    rw [e1, hc', show c' b = c' (relMap s (lift b)) by rw [← e2], hc']
+    intro heq
+    have h1 := hstep (lift b) j
+    have h2 : ((hb (lift b + Pi.single j 1) - hb (lift b) : ℤ) : ZMod 3) = 0 := by
+      push_cast; rw [add_right_cancel heq, sub_self]
+    rcases abs_eq (zero_le_one' ℤ) |>.mp h1 with h3 | h3 <;> rw [h3] at h2 <;> revert h2 <;> decide
+  · -- the period group has finite index
+    haveI : NeZero N := ⟨hN0⟩
+    have hsurj : Function.Surjective (fun f : Fin m → Fin N =>
+        (QuotientAddGroup.mk (relMap s (fun j => ((f j : ℕ) : ℤ))) : A ⧸ NS.map (relMap s))) := by
+      intro q
+      obtain ⟨b, rfl⟩ := QuotientAddGroup.mk_surjective q
+      obtain ⟨x, rfl⟩ := hgen b
+      have hNz : (0 : ℤ) < N := by exact_mod_cast Nat.pos_of_ne_zero hN0
+      refine ⟨fun j => ⟨(x j % N).toNat, by
+        have h1 := Int.emod_nonneg (x j) hNz.ne'
+        have h2 := Int.emod_lt_of_pos (x j) hNz
+        omega⟩, ?_⟩
+      apply QuotientAddGroup.eq.mpr
+      refine AddSubgroup.mem_map.mpr ⟨N • (fun j => x j / N), hNSmem _, ?_⟩
+      rw [← map_neg, ← map_add]
+      congr 1
+      funext j
+      simp only [Pi.add_apply, Pi.neg_apply, Pi.smul_apply, nsmul_eq_mul]
+      have h1 := Int.emod_nonneg (x j) hNz.ne'
+      have h2 := Int.emod_add_ediv_mul (x j) N
+      rw [Int.toNat_of_nonneg h1]
+      linarith
+    haveI : Finite (A ⧸ NS.map (relMap s)) := Finite.of_surjective _ hsurj
+    exact AddSubgroup.finiteIndex_of_finite_quotient
+  · -- periodic under it
+    obtain ⟨z, hz, rfl⟩ := AddSubgroup.mem_map.mp hk
+    have e : b + relMap s z = relMap s (lift b + z) := by rw [map_add, hlift]
+    rw [e, hc', show c' b = c' (relMap s (lift b)) by rw [hlift], hc',
+      show lift b + z = lift b + ((⟨z, AddSubgroup.mem_sup_right hz⟩ : L) : Fin m → ℤ) from rfl, hshift,
+      Int.cast_add, hlam3, add_zero]
+  · -- agreement on `B`
+    have hβ : lift b ∈ Bt := Finset.mem_image_of_mem _ (Finset.mem_insert_of_mem hb')
+    change ((hb (lift b) : ℤ) : ZMod 3) + c 0 = c b
+    rw [hagree _ hβ, hh, pmHeight_cast hc, hlift]
+    ring
 
 /-- **Periodic 3-colourings are dense** (row 79, FS73-T24): for an abelian group generated by a finite set of steps,
 every proper 3-colouring of `addCayley S` agrees on every finite set with a periodic one. -/
 theorem exists_isPeriodic_eqOn {S : Set A} (hSfin : S.Finite) (hgen : AddSubgroup.closure S = ⊤)
     (C : (addCayley S).Coloring (Fin 3)) (B : Finset A) :
     ∃ C' : (addCayley S).Coloring (Fin 3), IsPeriodic C' ∧ Set.EqOn (⇑C') (⇑C) (B : Set A) := by
-  sorry
+  classical
+  -- the nonzero steps, listed
+  let S' : Finset A := hSfin.toFinset.filter (· ≠ 0)
+  let s : Fin S'.card → A := fun j => (S'.equivFin.symm j : A)
+  have hs : ∀ j, s j ∈ S ∧ s j ≠ 0 := fun j => by
+    have h := (S'.equivFin.symm j).2
+    rw [Finset.mem_filter, Set.Finite.mem_toFinset] at h
+    exact h
+  have hsS : ∀ u ∈ S, u ≠ 0 → ∃ j, s j = u := fun u hu hu0 =>
+    ⟨S'.equivFin ⟨u, Finset.mem_filter.mpr ⟨hSfin.mem_toFinset.mpr hu, hu0⟩⟩, by simp [s]⟩
+  have hgen' : Function.Surjective (relMap s) := by
+    rw [surjective_relMap_iff, eq_top_iff, ← hgen, AddSubgroup.closure_le]
+    intro u hu
+    by_cases hu0 : u = 0
+    · rw [hu0]; exact zero_mem _
+    · obtain ⟨j, rfl⟩ := hsS u hu hu0
+      exact AddSubgroup.subset_closure ⟨j, rfl⟩
+  -- the colouring is proper along the family
+  have hc : ProperAlong s (fun a => (C a : ZMod 3)) := fun a j => by
+    have hadj : (addCayley S).Adj a (a + s j) :=
+      (addCayley_adj' _ _ _).mpr ⟨fun h => (hs j).2 (by simpa using h), s j, (hs j).1, Or.inl rfl⟩
+    exact fun h => C.valid hadj h.symm
+  obtain ⟨c', hc', ⟨K, hK, hKper⟩, hagree⟩ := exists_periodic_properAlong_eqOn hgen' hc B
+  -- the periodic colouring, as a colouring of the Cayley graph
+  let C' : (addCayley S).Coloring (Fin 3) := Coloring.mk (fun a => (c' a : Fin 3)) fun {u v} huv => by
+    obtain ⟨hne, g, hg, h | h⟩ := (addCayley_adj' _ _ _).mp huv
+    · have hg0 : g ≠ 0 := fun h0 => hne (by rw [← h, h0, add_zero])
+      obtain ⟨j, rfl⟩ := hsS g hg hg0
+      rw [← h]
+      exact fun heq => hc' u j heq.symm
+    · have hg0 : g ≠ 0 := fun h0 => hne (by rw [h, h0, add_zero])
+      obtain ⟨j, rfl⟩ := hsS g hg hg0
+      rw [h]
+      exact hc' v j
+  haveI := hK
+  refine ⟨C', AddSubgroup.finiteIndex_of_le fun k hk x => hKper k hk x, fun b hb => ?_⟩
+  exact hagree hb
 
 /-- **Density, topological form**: in `A → Fin 3` with the product topology, every proper 3-colouring is a limit of
 periodic ones. -/
 theorem coloring_mem_closure_isPeriodic {S : Set A} (hSfin : S.Finite) (hgen : AddSubgroup.closure S = ⊤) (C : (addCayley S).Coloring (Fin 3)) :
     (C : A → Fin 3) ∈ closure {f : A → Fin 3 | ∃ C' : (addCayley S).Coloring (Fin 3), IsPeriodic C' ∧ ⇑C' = f} := by
-  sorry
+  classical
+  rw [mem_closure_iff_nhds]
+  intro U hU
+  rw [nhds_pi, Filter.mem_pi] at hU
+  obtain ⟨I, hI, t, ht, hIt⟩ := hU
+  obtain ⟨C', hC', heq⟩ := exists_isPeriodic_eqOn hSfin hgen C hI.toFinset
+  refine ⟨C', hIt fun i hi => ?_, C', hC', rfl⟩
+  rw [heq (hI.mem_toFinset.mpr hi)]
+  exact mem_of_mem_nhds (ht i)
 
 /-- **`P = F` at three colours** (C3-inherit, row 79): a difference every periodic 3-colouring identifies is identified
 by every 3-colouring. -/
 theorem periodicForcedSubgroup_three_eq_forcedSubgroup {S : Set A} (hSfin : S.Finite) (hgen : AddSubgroup.closure S = ⊤) : periodicForcedSubgroup S 3 = forcedSubgroup S 3 := by
-  sorry
+  classical
+  refine le_antisymm (fun δ hδ => mem_forcedSubgroup.mpr fun C => ?_) forcedSubgroup_le_periodicForcedSubgroup
+  obtain ⟨C', hC', heq⟩ := exists_isPeriodic_eqOn hSfin hgen C {0, δ}
+  rw [← heq (by simp), ← heq (by simp)]
+  exact mem_periodicForcedSubgroup.mp hδ C' hC'
 
 /-- **The inheritance question at three colours holds** (`Kempe.InheritanceQuestion`, stated there and never claimed). -/
 theorem inheritanceQuestion_three {S : Set A} (hSfin : S.Finite) (hgen : AddSubgroup.closure S = ⊤) : InheritanceQuestion S 3 :=
@@ -120,7 +665,39 @@ theorem inheritanceQuestion_three {S : Set A} (hSfin : S.Finite) (hgen : AddSubg
 index iff there are finitely many proper `k`-colourings. -/
 theorem forcedSubgroup_finiteIndex_iff_finite {S : Set A} {k : ℕ} :
     (forcedSubgroup S k).FiniteIndex ↔ Finite ((addCayley S).Coloring (Fin k)) := by
-  sorry
+  classical
+  have hle : ∀ C : (addCayley S).Coloring (Fin k), forcedSubgroup S k ≤ periods C := fun C =>
+    iInf_le (fun C : (addCayley S).Coloring (Fin k) => periods C) C
+  constructor
+  · -- a colouring is determined by its values on representatives of `A ⧸ F`
+    intro hF
+    haveI := hF
+    refine Finite.of_injective (fun C : (addCayley S).Coloring (Fin k) => fun q : A ⧸ forcedSubgroup S k => C q.out)
+      fun C C' hCC' => ?_
+    ext a
+    have hq : -(QuotientAddGroup.mk a : A ⧸ forcedSubgroup S k).out + a ∈ forcedSubgroup S k :=
+      QuotientAddGroup.eq.mp (by rw [QuotientAddGroup.out_eq'])
+    have h1 := congrFun hCC' (QuotientAddGroup.mk a)
+    simp only at h1
+    have e : a = (QuotientAddGroup.mk a : A ⧸ forcedSubgroup S k).out +
+        (-(QuotientAddGroup.mk a : A ⧸ forcedSubgroup S k).out + a) := by abel
+    rw [e, hle C hq, hle C' hq, h1]
+  · -- each period group has finite index: the translates of a colouring are finitely many
+    intro hfin
+    refine AddSubgroup.finiteIndex_iInf fun C => ?_
+    refine @AddSubgroup.finiteIndex_of_finite_quotient _ _ _ (Finite.of_injective
+      (fun q : A ⧸ periods C => C.comp (addCayleyTranslate S q.out)) fun q q' hqq' => ?_)
+    have h1 : ∀ y, C (q.out + y) = C (q'.out + y) := fun y => by
+      have := DFunLike.congr_fun hqq' y
+      simpa using this
+    rw [← QuotientAddGroup.out_eq' q, ← QuotientAddGroup.out_eq' q']
+    apply QuotientAddGroup.eq.mpr
+    intro x
+    have := h1 (x - q.out)
+    rw [add_sub_cancel] at this
+    rw [this]
+    congr 1
+    abel
 
 /-- **Row 79's class, as an instance of density.** -/
 theorem exists_isPeriodic_eqOn_of_fg_torsionFree [AddGroup.FG A] [_htf : IsAddTorsionFree A] {S : Set A} (hSfin : S.Finite)
@@ -134,7 +711,16 @@ theorem exists_isPeriodic_eqOn_of_fg_torsionFree [AddGroup.FG A] [_htf : IsAddTo
 generating set without `0`. -/
 def coloringOneTwo : (addCayley ({1, 2} : Set ℤ)).Coloring (Fin 3) :=
   addCayleyColoring (fun x : ℤ => ((x : ZMod 3) : Fin 3)) fun d hd x => by
-    sorry
+    rcases hd with rfl | rfl
+    · change ((x + 1 : ℤ) : ZMod 3) ≠ (x : ZMod 3)
+      push_cast; intro h
+      have := congrArg (· - (x : ZMod 3)) h
+      simp at this
+    · change ((x + 2 : ℤ) : ZMod 3) ≠ (x : ZMod 3)
+      push_cast; intro h
+      have := congrArg (· - (x : ZMod 3)) h
+      simp at this
+      exact absurd this (by decide)
 
 example : ({1, 2} : Set ℤ).Finite := Set.toFinite _
 example : (0 : ℤ) ∉ ({1, 2} : Set ℤ) := by simp

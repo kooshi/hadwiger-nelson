@@ -1,0 +1,19 @@
+import Proofs.HadwigerNelson.CayleyThree.Fibre
+open HadwigerNelson
+example (m : ℕ) : AddGroup.FG (Fin m → ℤ) := inferInstance
+#check @Function.surjInv_eq
+#check @QuotientAddGroup.eq
+#check @Quotient.out_eq
+#check @Set.Finite.pi
+#check @Finset.dvd_prod_of_mem
+#check @mul_nsmul
+#check @nhds_pi
+#check @Filter.mem_pi
+#check @mem_closure_iff_nhds
+#check @Int.emod_add_ediv
+#check @Int.emod_nonneg
+#check @Int.emod_lt_of_pos
+#check @Int.ediv_add_emod
+#check @Finite.of_surjective
+#check @Finite.of_injective
+#check @SimpleGraph.Coloring.mk
