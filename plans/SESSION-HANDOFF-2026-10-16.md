@@ -38,10 +38,9 @@ The prior-art searches (FS131-PAS1, item 1052): four of five not found in print;
 | job | what | worktree, branch | record |
 |---|---|---|---|
 | FS131-IRU2 (item 1066) | the ring of unit vectors (Lemma C′, components clause, dichotomy; all proved, item 1065): merge `main`, one gate | `il5`, `fs131-kru1` | `plans/FS131-IRU2-ring.md` |
-| FS131-FIF1 (item 1064) | Clerk: the density landing's drafts and FS131-PAS1's § 3.4 items 1–3 | `filing2`, `fs131-fif1` | its report |
 
-**At FS131-FIF1's hand-back:** merge its branch; then adapt the density landing's README row myself (D-7; `README.md` § 5's
-"By hand, not yet in Lean" bullet becomes the kernel statements, `RESULTS.md` §§ 5–6 gain their names and axioms).
+The density landing's filing is merged and its README and `RESULTS.md` rows written (item 1067); the worktree `filing2`
+(no Lean build) is free for the next Clerk.
 **At FS131-IRU2's hand-back** (the landing procedure): check its commits; print the head statements' axioms myself (all on the
 standard three expected); rewrite `fs131-kru1` over `main..fs131-kru1` with the filter (it carries pre-rewrite commits); guard-scan
 the range (a match inside a gzip dump is noise — guard it decompressed); merge `--no-ff`; check `main` equals the gated commit in
