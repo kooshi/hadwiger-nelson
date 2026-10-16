@@ -262,7 +262,7 @@ you are its only writer. A brief for a job that runs a process or builds a check
 ## Staffing
 
 Staffing — head-count, model, budget — is Kooshi's.
-- **Four agent slots at a time** (Kooshi, 2026-10-14: *"Increase staffing cap to  4 consecutive subagents. Weeks are days in agent time, so I'm not too worried about it."*; the 3-slot cap of 2026-10-03 and 2026-10-05 is raised), the Searcher included: an Opus agent counts one, a Sonnet agent one half (Kooshi, 2026-10-04: *"[…] one Opus slot may be filled with two Sonnet agents."*), and the total stays at or under four.
+- **Four agent slots at a time** (Kooshi, 2026-10-14: *"Increase staffing cap to  4 consecutive subagents. Weeks are days in agent time, so I'm not too worried about it."*; the 3-slot cap of 2026-10-03 and 2026-10-05 is raised), the Searcher included: an Opus agent counts one, a Sonnet agent one half (Kooshi, 2026-10-04: *"[…] one Opus slot may be filled with two Sonnet agents."*), because a Sonnet agent costs about half of what an Opus agent does against the same limits; and the total stays at or under four.
 - **Models**: Opus 5.5 for everything judged and for de Bruijn's implementer (Kooshi, 2026-10-04, after the implementer trial: *"Yes, all implementers should be Opus based on those results."*); Sonnet 5.5 for the Clerk.
 - **Replace, do not reuse**, an agent returning with about 500k–600k tokens of context by the harness's count (agents' own counts run at
   30–70 % of it): brief a successor from the record.
@@ -326,7 +326,8 @@ commit each:
 - `tools/claude_md_fact_audit.py --base <the previous filing>` and `--dupes`.
 - The Proof Atlas: its facts written after the ledger rows (its checker quotes filed rows), the page header in
   `visualizations/proof-atlas/page.tmpl.html`, rebuilt (`visualizations/proof-atlas/README.md`) and kept local (Kooshi, 2026-10-06: *"[…] When
-  closing updates them, I guess just keep it local […]."*). Commit the rebuilt page; publish nothing.
+  closing updates them, I guess just keep it local […]."*), because the published page cannot be updated from this session, and a second
+  published copy would leave two links that disagree. Commit the rebuilt page; publish nothing.
 
 When the filing is large, the Clerk is your pen, verbatim, on its own branch in its own worktree, and its stage commits are merged as one
 commit (`--no-ff`).
