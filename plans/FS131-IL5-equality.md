@@ -232,3 +232,128 @@ hypothesis; its proof is the item's two-line composition (`le_antisymm` of the u
 named hypotheses (`UpperHalf.chromaticNumber_eq_localBound_of_chain`, which also asks `[NumberField.IsTotallyReal F]`). The
 `min` form, `min(χ(F²), 5) = min(L(F), 5)` for every real number field, is read the same way and is strictly stronger than
 the item (Stage 1). Neither moves a value of `χ(ℝ²)`.
+
+## Stage 4 — SAVED: the drafts
+
+#### Drafts for the front page
+
+*Each draft names its slot: the file, the section, and the words it replaces or follows; every quoted slot text was checked
+to occur exactly once in its file at `440f5cfb9` (line wraps normalized). Counts are this job's gate's (`data/fs131/il5/gate/`,
+Stage 3). Keryx files; nothing here is edited by this job.*
+
+#### D1 — `ROADMAP.md` § 3, Planes over number fields
+
+**Slot: the section's first paragraph and items 1–2.** Replace
+
+> The kernel holds `χ(F²) ≤ L(F)` and `min(L(F), 5) ≤ χ(F²)` for every real number field. It holds the values through four colours
+> and the five-colour values listed in the README. Left:
+>
+> 1. **`χ(F²) = L(F)` whenever `L(F) ≤ 5`, as one named theorem.** It is a two-line composition of
+>    `Rigidity.min_localBound_five_le_chromaticNumber` with `UpperHalf.chromaticNumber_planeOver_le_localBound`, and it is not yet
+>    stored (`LEDGER.md` row 123; the chain's gate record, `plans/FS131-LGT1-gate.md`).
+> 2. **Also not stored as theorems** (same sources): the family, …
+
+with
+
+> The kernel holds `χ(F²) ≤ L(F)` and `min(L(F), 5) ≤ χ(F²)` for every real number field, and their composition as one theorem:
+> `χ(F²) = L(F)` whenever `L(F) ≤ 5` (`Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five`), with its form that takes no
+> hypothesis, `min(χ(F²), 5) = min(L(F), 5)` (`Rigidity.min_chromaticNumber_five_eq_min_localBound_five`). It holds the values
+> through four colours and the five-colour values listed in the README. Left:
+>
+> 1. **Not stored as theorems** (`LEDGER.md` row 123; the chain's gate record, `plans/FS131-LGT1-gate.md`): the family, …
+
+and renumber items 3–7 of § 3 to 2–6 (item 2's text after "the family," unchanged; no file cites § 3's items by number —
+`rg` over the repository outside `data/` and this record).
+
+#### D2 — `ROADMAP.md` § 2, The three outside theorems
+
+**Slot: item 2 (EL).** Replace "Sixteen records rest on it, among them the five-colour chain `min(L(F), 5) ≤ χ(F²)` and
+`χ(ℚ(√47)²) = 5`." with "Eighteen records rest on it, among them the five-colour chain `min(L(F), 5) ≤ χ(F²)`, `χ(F²) = L(F)`
+whenever `L(F) ≤ 5`, and `χ(ℚ(√47)²) = 5`."
+
+**Slot: item 3 (W).** Replace "Forty-six records rest on it:" with "Forty-eight records rest on it:" (the sentence after it
+stands: "the three-colour criterion, `χ(F²) = L(F)` at `L(F) ≤ 4`, and, with EL, the five-colour chain" — the two new records
+are the five-colour chain's).
+
+#### D3 — `README.md` § Planes over number fields, the table
+
+**Slot: the row whose first cell begins "`min(L(F), 5) ≤ χ(F²)` for every real number field".** Replace its first two cells
+
+> | `min(L(F), 5) ≤ χ(F²)` for every real number field, with no further hypothesis. With the upper bound `χ(F²) ≤ L(F)` it gives `χ(F²) = L(F)` whenever `L(F) ≤ 5`; that composition is not yet stored as one theorem. | `Rigidity.min_localBound_five_le_chromaticNumber` |
+
+with
+
+> | `min(L(F), 5) ≤ χ(F²)` for every real number field, with no further hypothesis. With the upper bound `χ(F²) ≤ L(F)` it gives `χ(F²) = L(F)` whenever `L(F) ≤ 5`, and, with no hypothesis, `min(χ(F²), 5) = min(L(F), 5)`. | `Rigidity.min_localBound_five_le_chromaticNumber`, `Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five`, `Rigidity.min_chromaticNumber_five_eq_min_localBound_five` |
+
+The row's other cells stand (rests on: std3 + **EL** + **W**, as `#print axioms` prints for both new theorems).
+
+#### D4 — `LEDGER.md` row 123
+
+**Slot 1, the grade's first sentence.** Replace "`χ = L` at `L ≤ 5` is that clause with the upper half, not stored as one
+theorem;" with "`χ = L` at `L ≤ 5` is that clause with the upper half, stored as one theorem since FS131-IL5
+(`Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five`, with the hypothesis-free form `min(χ(F²), 5) = min(L(F), 5)`,
+`Rigidity.min_chromaticNumber_five_eq_min_localBound_five`; `Rigidity/MainClauseFive`), on the same two declared outside
+theorems;"
+
+**Slot 2, the "Not claimed" line.** Replace "an explicit five-chromatic graph over any of these fields; `χ(F²) = L(F)` at
+`L(F) ≤ 5` as one stored theorem (the main clause with the upper half; not stored, `ROADMAP.md`)." with "an explicit
+five-chromatic graph over any of these fields."
+
+No row is regraded: row 123's main clause is [kernel] since FS131-LGT1; what this job adds is the composition stored under a
+name, on the same assumptions (`positive_entropy_rigidity`, `[EinsiedlerLindenstrauss2022]` Thm 1.3; `StandingFive.kloosterman_bound`,
+`[Weil1948]` p. 207).
+
+#### D5 — `CLAUDE.md` § Where the problem stands, "What the kernel holds, beyond the interval"
+
+**Slot: in the main-clause entry.** Replace "and with the upper half (`UpperHalf.chromaticNumber_planeOver_le_localBound`)
+`χ(F²) = L(F)` whenever `L(F) ≤ 5` (a two-line composition, not a stored theorem)" with "and with the upper half
+(`UpperHalf.chromaticNumber_planeOver_le_localBound`) `χ(F²) = L(F)` whenever `L(F) ≤ 5`
+(`Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five`; with no hypothesis, `min(χ(F²), 5) = min(L(F), 5)`,
+`Rigidity.min_chromaticNumber_five_eq_min_localBound_five`; FS131-IL5)".
+
+#### D6 — `CLAUDE.md` § Trust ledger
+
+**Slot 1, the audit sentence.** Replace "the current audit reads 10650 clean and 5 declared purchases, and 60 imported (and 569
+axiom-free; 11,284 records at the landing of the five-colour chain, FS131-LGT1, 2026-10-15)" with "the current audit reads 10651
+clean and 5 declared purchases, and 62 imported (and 569 axiom-free; 11,287 records at FS131-IL5, the main clause through five as
+one theorem, 2026-10-16)". (`scripts/gate_report.py` reads the first three numbers; the digest flagged them stale at 10650 → 10651
+and 60 → 62, and nothing else.)
+
+**Slot 2, Weil's bound's count.** Replace "with forty-six imported records (twelve of them the three-colour criterion's and row
+99's, FS131-LJ1; twenty-six the five-colour chain's, FS131-LGT1)" with "with forty-eight imported records (twelve of them the
+three-colour criterion's and row 99's, FS131-LJ1; twenty-six the five-colour chain's, FS131-LGT1; two the main clause's through
+five as one theorem, FS131-IL5)".
+
+**Slot 3, E–L's count.** Replace "with sixteen, eight of which rest on Weil's bound too (the five-colour chain's headline
+`Rigidity.min_localBound_five_le_chromaticNumber`, `χ(ℚ(√47)²) = 5` and M15's other values);" with "with eighteen, ten of which
+rest on Weil's bound too (the five-colour chain's headline `Rigidity.min_localBound_five_le_chromaticNumber`, `χ(ℚ(√47)²) = 5`
+and M15's other values, and `χ(F²) = L(F)` at `L(F) ≤ 5` with its `min` form, `Rigidity/MainClauseFive`);"
+
+**Slot 4, the assumptions counts.** Replace "`axioms=3 rests=74 named=19 inline=14 outside=7 ours=21 open=5 takes=108
+mentions=2`" with "`axioms=3 rests=78 named=19 inline=14 outside=7 ours=21 open=5 takes=108 mentions=2`", and "with seventy-four
+(axiom, theorem) rows resting on them, sixty-six theorems, eight of them on two" with "with seventy-eight (axiom, theorem) rows
+resting on them, sixty-eight theorems, ten of them on two". (The step flagged `rests 74 → 78` stale in `CLAUDE.md`, and no
+other count; the ledger's header is refiled on this branch.)
+
+#### D7 — `CLAUDE.md` § The gate
+
+**Slot: the vacuity counts.** Replace "`declarations=22238 refutations-skipped=240 sites=1455`" with "`declarations=22241
+refutations-skipped=240 sites=1455`" (the second line, `vacuous=0 stale=0 declared=3 witnessed=38 generic=1412 unknown=2`,
+unchanged; the baseline's header is refiled on this branch).
+
+#### D8 — `CLAUDE.md` § Frontier, the "Last filed" line
+
+**Slot: the sentence beginning "Last filed:".** If Keryx files this job as its own filing, a line in the form the section uses:
+"Last filed: **the main clause through five as one theorem** (FS131-IL5, 2026-10-16: `χ(F²) = L(F)` whenever `L(F) ≤ 5`,
+`Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five`, and `min(χ(F²), 5) = min(L(F), 5)` at every real number field,
+`Rigidity.min_chromaticNumber_five_eq_min_localBound_five` — the headline and the upper half composed, on the headline's two
+declared outside theorems; the model `L(ℚ) ≤ 2` on the standard three; no value of `χ(ℝ²)` moved; the upper half prior art, the
+lower half this project's derivation)". The previous "Last filed" text moves to `plans/FILINGS.md` by that file's convention.
+
+**Proof Atlas:** no grade changes — row 123's clause was [kernel] already.
+
+#### Optional — `CLAUDE.md` § Grokkings, "The theory in one paragraph"
+
+**Slot:** after "`Rigidity.min_localBound_five_le_chromaticNumber`)" in the sentence "through five the bound is exact: …", add
+"; the equality is stored as `Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five`". Optional: the paragraph names the
+lower half's theorem, and a reader who wants the equality now finds it under its own name.
