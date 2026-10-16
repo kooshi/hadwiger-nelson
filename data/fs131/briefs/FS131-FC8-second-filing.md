@@ -135,3 +135,29 @@ one to the coordinator:**
 4. No milestone changes state in this filing, and the Proof Atlas is not touched.
 5. Rows that need a lane's words that nobody drafted (prices to correct, predictions to score, a grade to restate) are
    **no draft**, never written by you.
+
+## Amendment 1 (2026-10-16 04:09 UTC) — my rulings on stage 2's CHECK rows
+
+Read from your table (`data/fs131/fc8/owed.md` at `828207831`). Each row's id is yours. The standing rules still hold in full:
+no agents of your own (rule 1, because only the coordinator can review work it knows exists), never push (rule 6).
+
+**File, as an extension of stage 3** (your touches grow by exactly the three derivation records named here, for these rows only):
+1. **AXIOMS-ARCH** — read `ARCHITECTURE.md` § Trust; if KN3 § 5.3 item 4's line is absent, file KN7's version of it; if it is
+   present without KN7's parenthesis, add the parenthesis as KN7 drafts it; if it is present with it, the row is filed. Say which.
+2. **LEAN-KN7-A** — file KN7 ll. 660–662's instance as the last sentence of `LEAN.md` § Assumptions item 2.
+3. **ERR-FS84-N1** and **ERR-FS100-Q47** — file EN1 § 8.3's drafted dated errata into `plans/FS84-SI-D-derivation.md` and
+   `plans/FS100-derivation.md` at the slots they name, if each slot is found exactly once; otherwise a `CHECK:`.
+4. **FS136-NOTE** — file the landing's draft 11 (c) words for C136-PARTNERS into `plans/FS136-derivation.md`, at the slot the
+   draft names, if found exactly once; otherwise a `CHECK:`.
+5. **The bibliography appends** (your 13 ready rows) and **BIB-Tate-Weil** (KN9's draft, the later of the two, one row each,
+   placed with the other rows held "not held, not read") — after stage 4, if you are under about 300k by your own estimate;
+   otherwise leave them listed as ready, and that is a good report.
+
+**Declined, nothing to file** (each stays in your table with this reason):
+- **L57kn1** — the slot moved; the words are owed to the next kernel-lane record that touches row 57.
+- **LEAN-A-binder-rule** — the fact is already filed in KN3's words (your row above it).
+- **LEAN-KR1-A** — moot: the density bound was proved, not declared (W6; FS131-LDB1).
+- **LEAN-IPA1-IPB1**, **LEAN-IPD1-a** — no words quoted; owed to a de Bruijn record.
+- **ERR-FS100-L5**, **ERR-K47**, **ERR-J45-KM11** — no words drafted; owed to a deriver.
+- **RERANK** — stale: ranking the frontier is the asking lane's, when the frontier work resumes.
+- **BIB-PS2**'s D3 — removed by Kooshi's word W14 (`data/fs131/REQUEST-2026-10-15.md`); D1, D2, D4, D5 are the filed ones.
