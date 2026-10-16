@@ -393,6 +393,20 @@ def SetEdgeNull [NumberField F] (W : Set (ℂ × K F)) : Prop :=
 
 /-- The empty set has null edges (the model of `SetEdgeNull`; a positive-measure one is `exists_slice_set`'s). -/
 theorem setEdgeNull_empty [NumberField F] : SetEdgeNull F ∅ := fun _ _ => by simp
+/-! ## Spec -/
+
+-- the independence condition, pair by pair
+example (c : unitRing F → Bool) :
+    c ∈ IndepSets F ↔ ∀ x y : unitRing F, (y : ℂ) - x ∈ unitVectors F → ¬ (c x = true ∧ c y = true) := Iff.rfl
+
+-- the empty indicator is a point of `IndepSets F`
+example : (fun _ => false : unitRing F → Bool) ∈ IndepSets F := fun _ _ _ h => by simp at h
+
+-- the slice's null edges, unit vector by unit vector
+example [NumberField F] (W : Set (ℂ × K F)) : SetEdgeNull F W ↔ ∀ u ∈ unitVectorsR F,
+    ((volume.prod (haarK F)).prod arcLength) {p : (ℂ × K F) × ℝ | p.1 ∈ W ∧ (p.1.1 + e p.2, p.1.2 + ιK F u) ∈ W} = 0 :=
+  Iff.rfl
+
 
 end
 

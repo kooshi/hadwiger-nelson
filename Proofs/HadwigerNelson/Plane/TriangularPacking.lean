@@ -212,6 +212,12 @@ theorem fifth_lt_mOne : (5 : ℝ≥0∞)⁻¹ < mOne := by
     rw [ENNReal.ofReal_inv_of_pos (by norm_num)]; norm_num]
   rw [ENNReal.ofReal_lt_ofReal_iff (by positivity), lt_div_iff₀ (by positivity)]
   nlinarith [Real.pi_gt_three]
+/-! ## Spec -/
+
+-- the lattice point `(1, 0)` is `2`, and the packing holds it
+example : triCentre 1 0 = 2 := by norm_num [triCentre]
+example : (2 : ℂ) ∈ triPacking := mem_iUnion₂.2 ⟨1, 0, by norm_num [triCentre]⟩
+
 
 end
 

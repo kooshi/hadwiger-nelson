@@ -1454,6 +1454,25 @@ theorem IndepLaw.density_le_localRatio [NumberField F] (μ : IndepLaw F) : μ.de
     refine (μ.density_le_max_of_unramified hram hc0 hcP).trans (le_of_eq ?_)
     rw [hc, ENNReal.ofReal_toReal hsupt]
     rfl
+/-! ## Spec -/
+
+-- the shift moves the indicator by `+ y`
+example (y x : unitRing F) (c : unitRing F → Bool) : indShift y c x = c (x + y) := rfl
+
+-- the indicator's spectral measure, coefficient by coefficient
+example (μ : Measure (unitRing F → Bool)) (σ : Measure (Dual F)) : IsIndicatorSpectral μ σ ↔
+    IsFiniteMeasure σ ∧ ∀ y : unitRing F, ∫ χ, (χ y : ℂ) ∂σ = ((μ.real {c | c 0 = true ∧ c y = true} : ℝ) : ℂ) :=
+  Iff.rfl
+
+-- the conditional law is the conditional expectation of the indicator on the factor `𝒜`
+example [NumberField F] (μ : IndepLaw F) (x : unitRing F) :
+    condOne μ x = condExp (factorOne μ) μ.μ (Set.indicator {c : unitRing F → Bool | c x = true} fun _ => (1 : ℝ)) :=
+  rfl
+
+-- the set is colour `1`; the empty set is colour `0` everywhere
+example [NumberField F] (W : Set (ℂ × K F)) (p : ℂ × K F) : setCol W p = 1 ↔ p ∈ W := setCol_eq_one
+example [NumberField F] (p : ℂ × K F) : setCol (∅ : Set (ℂ × K F)) p = 0 := by simp [setCol]
+
 
 end
 

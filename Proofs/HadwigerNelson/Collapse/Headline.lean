@@ -310,6 +310,12 @@ example : ¬ IsSquare ((635087 : ℕ) : ZMod 3) ∧ ¬ IsSquare ((635087 : ℕ) 
 -- and a square modulo `103`, the first stable residue characteristic.
 example : IsSquare ((635087 : ℕ) : ZMod 103) := by decide
 
+-- `d₇`'s residues: `7` modulo `8`, a non-square modulo `3` and modulo `139`, the first and last of the eighteen primes
+example : d7 % 8 = 7 ∧ ¬ IsSquare ((d7 : ℕ) : ZMod 3) ∧ ¬ IsSquare ((d7 : ℕ) : ZMod 139) := by decide +kernel
+
+-- `ℚ(√d₇)` is the field of the one radicand
+example : F7 = SquareClass.fieldOfRadicands {d7} := rfl
+
 end
 
 end HadwigerNelson.Collapse
