@@ -8,8 +8,8 @@
 
 ## 1. Where things are
 
-- **The repository is public**: `https://github.com/kooshi/hadwiger-nelson`; this checkout is its clone. **`main` is 37
-  commits ahead of `origin/main`, none pushed** — every push publishes, and Kooshi has not yet answered whether I may
+- **The repository is public**: `https://github.com/kooshi/hadwiger-nelson`; this checkout is its clone. **`main` is many
+  commits ahead of `origin/main` (count with `git rev-list --count origin/main..main`), none pushed** — every push publishes, and Kooshi has not yet answered whether I may
   push (§ 4, decision 1). Before any push: the publication guard over every new commit's changed files and messages (its
   path is in the auto-memory's "local paths"; never written here).
 - **The standing rules say never push** (rule 6) and that everything committed may be published (rule 13), since item
@@ -33,23 +33,24 @@
 
 ## 3. Running
 
-**FS131-ICO2 — the collapse finished** (item 994; brief `data/fs131/briefs/FS131-ICO2-collapse.md`; worktree
-`.claude/worktrees/kcl1`, branch `fs131-ico1`; record `plans/FS131-ICO2-collapse.md` there). Its predecessor FS131-ICO1
-(item 993; record `plans/FS131-ICO1-collapse.md`) proved `Collapse/Thick`, `Mixing`, `Colouring`, `Dichotomy` (28 of 48
-leaves) and the edits D-E1, D-E2, and handed back past its line; `main` was merged into the branch at `ebeb126d1`. Left for
-ICO2: `Collapse/Slice`, `Selection`, `Headline` (about 600 lines), the experience pass, the build, the gate on one commit
-with the statement comparison (the `omit`s ruled in item 993 listed as ruled changes), the read-aloud, the drafts. **Its agent
-id is in my scratch only**; in a new session, brief a successor from its record instead.
+**The collapse landed** (item 1005): `χ(ℚ(√635087)²) = χ(ℝ²)`, de Grey's field, and the general form at every real
+number field uniformly `c`-thick with `c < 1/5`, merged as `0f81fe2a3`, gated on `7c72b9bf7`; the main tree's build
+current. Its two owed one-liners and the `k = 7` model go to the next job that touches `Collapse/`.
 
-**FS131-IQP1 and FS131-ICT1 — the two implementers** (item 1001; planners FS131-KPA1, FS131-KTC1 handed back, items
-999–1000): the `p`-adic plane's Borel bound with its values (brief `data/fs131/briefs/FS131-IQP1-padic.md`; worktree
-`.claude/worktrees/il5`, branch `fs131-kpa1`; record `plans/FS131-IQP1-padic.md` there; the value `6 ≤ χ_Bor(ℚ₂₃²)` leaves
-the landing and waits on search request 26) and the three-colour criterion for abelian Cayley graphs (brief
-`data/fs131/briefs/FS131-ICT1-three-colour.md`; worktree `.claude/worktrees/kel1`, branch `fs131-ktc1`; record
-`plans/FS131-ICT1-three-colour.md` there). When the collapse lands on `main`, tell both that its gate is their baseline.
-At each hand-back: the same checklist as above, with the expected axioms of items 999–1000. Next free slot: the public
-roadmap's § 3 items 1–2 (the family, CLS, ℚ(√23, ∛2), Lemma C′); after the collapse lands, rank 3's density form (item
-995).
+- **FS131-FC10, the Clerk** (item 1005): files FS131-ICO2's drafts D1–D13 and the audit's transition
+  (`.claude/worktrees/filing2`, branch `fs131-fc10`; brief `data/fs131/briefs/FS131-FC10-collapse-filing.md`). At its
+  hand-back: read its CHECKs, guard, merge `--no-ff`, run the fact audit myself and **read its last line**.
+- **FS131-IQP1** (item 1001): the `p`-adic plane (`.claude/worktrees/il5`, branch `fs131-kpa1`); the three leaves at 23
+  leave the landing (item 1002).
+- **FS131-ICT1** (item 1001): the three-colour criterion (`.claude/worktrees/kel1`, branch `fs131-ktc1`); one false
+  skeleton statement corrected by ruling (item 1003).
+- **FS131-KFR1** (item 1006): the density form's planner (`.claude/worktrees/kcl1`, branch `fs131-kfr1`).
+
+Both implementers were told the collapse's gate (`data/fs131/ico2/gate/`) is their baseline. At each implementer's
+hand-back: check its commits, print its head statements' axioms myself, read them against the ledger row, guard, merge
+`--no-ff` (`main` equal to the gated commit in `Proofs/`, `scripts/` and the package files), file its drafts (a Clerk if
+large), run the fact audit and read its last line, rebuild the main tree. Next free slot: the public roadmap's § 3
+items 1–2 (the family, CLS, ℚ(√23, ∛2), Lemma C′); search request 26 (`p = 23`) waits for the next Searcher run.
 
 ## 4. Kooshi's open decisions (each reported to him; defaults in force)
 
