@@ -1,0 +1,5 @@
+MODULE Proofs.HadwigerNelson.CayleyThree.Circular: CLEAN 17
+MODULE Proofs.HadwigerNelson.CayleyThree.Density: CLEAN 24
+MODULE Proofs.HadwigerNelson.CayleyThree.Fibre: CLEAN 40
+records: 81 public (81 already filed), 16 private (not audited)
+COVERAGE OK: every one of the 81 public records is filed under its class
