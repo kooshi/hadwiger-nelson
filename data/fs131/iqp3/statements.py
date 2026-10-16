@@ -103,7 +103,8 @@ def read(path):
 
 def read_readd(path):
     out = {}
-    for ln in open(path, encoding="utf-8"):
+    opener = gzip.open if path.endswith(".gz") else open
+    for ln in opener(path, "rt", encoding="utf-8"):
         m = re.match(r"(READD|CONTROL-TRUE|CONTROL-NEAR) (\S+) (\d+) (.*)$", ln.rstrip("\n"))
         if m:
             out[(m.group(1), m.group(2))] = (m.group(3), m.group(4))
