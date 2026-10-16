@@ -40,9 +40,15 @@ with both coordinates in `F`) with the induced graph; `chromaticNumber_plane_eq_
 **Not claimed:** `χ_CP(ℝ²)` (row 128's third member; `χ_CP = χ_m⁰` is row 130's, [hand]); the value of `χ(ℝ²)`; that the
 general form is new beyond row 128 and FS103-CX (V2's complex-place widening, one mind).
 
-**Models.** The hypotheses of the general theorems are inhabited at `ℚ(√635087)` (`thick_sqrt635087`) and at de Grey's field
-(`thick_deGrey`); they fail at `ℚ` (`not_thick_bot`: its stable prime above `2` is ramified) and at `ℚ(√11)` (the dyadic
-`K₄`), as `χ(ℚ²) = 2` and `χ(ℚ(√11)²) = 4` require.
+**Models.** The hypotheses of the general form `chromaticNumber_planeOver_eq_plane_of_thick` (and of its per-place form) are
+inhabited at `ℚ(√635087)` (`thick_sqrt635087`) and at de Grey's field (`thick_deGrey`); they fail at `ℚ` (`not_thick_bot`: its
+stable prime above `2` is ramified) and at `ℚ(√11)` (the dyadic `K₄`), as `χ(ℚ²) = 2` and `χ(ℚ(√11)²) = 4` require. Those of
+the load-bearing step `chromaticNumber_plane_le_of_thick` at once — thickness with `c(k − 1) < 1` and a proper `k`-colouring of
+`F²` — are inhabited by no object of the library: at `ℚ(√635087)` they ask `k ≤ 6`; at `k ≤ 5` they are empty given
+`Outside.OAI158.no_proper_five_coloring` (the conclusion would give `χ(ℝ²) ≤ 5`); at `k = 6` their joint satisfiability is
+`χ(ℚ(√635087)²) ≤ 6`, which is `χ(ℝ²) ≤ 6` by the headline — the open question. `ℚ(√635087)` with the plane's seven-colouring
+satisfies the thickness and the colouring and fails `c(k − 1) < 1`; a field uniformly thick below `1/6` (every stable residue
+size `Q²` with `Q ≥ 142`) would inhabit them at `k = 7`, and none is stated here.
 -/
 
 namespace HadwigerNelson.Collapse

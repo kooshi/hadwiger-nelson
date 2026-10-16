@@ -23,8 +23,15 @@ covering pigeonhole `max_j m_j ≥ 1/k`" (`plans/FS103-derivation.md` § 1). Her
 library's number is `χ_m⁰(ℝ²)`, whose colourings need only measurability and properness at almost every unit pair; a fixed
 threshold suffices, and N-EASY (`Plane.chromaticNumber_plane_le_chiM0`) turns the colouring into `χ(ℝ²) ≤ k`.
 
-**Models.** `selCol` is defined for every measurable `φ`; its hypotheses (`SliceEdgeNullK` and thickness) hold together at
-`ℚ(√635087)` for the slice of any of its colourings (`Collapse/Headline`). The adversary is `ℚ(√11)`: its stable prime above
+**Models.** `selCol` is defined for every measurable `φ`. `SliceEdgeNullK` and thickness hold together at `ℚ(√635087)`
+(`c = 2√103/104 = 0.1952`) for the slice of any of its colourings — with seven colours by the plane's seven-colouring
+(`Bridge.chromaticNumber_complex_le_seven`, `exists_slice_of_colorable`) — and that model fails the window: at `k = 7`,
+`c/(1 + c) > 1/7` and `c(k − 1) > 1`. With the window, the hypotheses of `unitPairsNull_selCol` and
+`exists_aeColouring_of_slice` at once are inhabited by no object of the library: at `ℚ(√635087)` the window asks `k ≤ 6`; at
+`k ≤ 5` they are empty given `Outside.OAI158.no_proper_five_coloring` (the conclusion would give `χ(ℝ²) ≤ 5`); at `k = 6` their
+joint satisfiability is `χ(ℝ²) ≤ 6`, the open question (`exists_slice_of_colorable` from a six-colouring of the plane one way,
+this theorem and N-EASY the other). A field all of whose stable primes have residue size `Q²` with `Q ≥ 142` is uniformly
+thick below `1/6` (Weil) and would inhabit them at `k = 7`; none is stated here. The adversary is `ℚ(√11)`: its stable prime above
 `2` has the dyadic target `K₄`, `λ* = 1/3` (V1's control K2), so it is `c`-thick for no `c < 1/3`, and at `k = 4` the residue
 four-colouring's slice has every fibre of mass `1/4 = c/(1 + c)` at `c = 1/3` — the threshold window `(c/(1 + c), 1/k)` is empty,
 as `χ(ℚ(√11)²) = 4 < χ(ℝ²)` requires.

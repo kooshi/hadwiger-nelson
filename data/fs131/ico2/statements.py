@@ -17,8 +17,8 @@ For every constant of BEFORE that is not INTERNAL (a public or a private declara
            stored type character for character (FS131-KN9's one-binder check; item 993's ruling);
   CHANGED  anything else that differs                                                   -> FAIL;
   MISSING  absent from AFTER                                                            -> FAIL.
-AFTER's non-INTERNAL constants absent from BEFORE are ADDED: listed by module, public and private apart. A public one must be
-in ALLOWED_PUBLIC (the approved edits' two theorems, and the public helpers the implementers added, each named) -> else FAIL.
+AFTER's non-INTERNAL constants absent from BEFORE are ADDED: listed by module, public, private and GENERATED (`f.congr_simp`,
+`f.eq_n`, `f.eq_def`: reserved names Lean writes on demand) apart. A public one that is not GENERATED must be in ALLOWED_PUBLIC (the approved edits' two theorems, and the public helpers the implementers added, each named) -> else FAIL.
 INTERNAL constants (generated: `_proof_n`, `eq_n`, `match_n`, `_simp_n`, `congr_simp`, …) are counted per module, never
 compared: they are what the proofs generate, and the proofs are what changed.
 
@@ -33,6 +33,9 @@ import lzma
 import re
 import sys
 
+# Theorems Lean generates on demand under a declaration's name in whichever module asks (reserved names no author can
+# declare; LEAN.md § Searching — Lean, FS131-IM11, FS131-ITK1): listed as GENERATED, never as new statements.
+GENERATED = re.compile(r"\.(congr_simp|eq_\d+|eq_def)$")
 NUMBER_FIELD_BINDER = re.compile(r" \[inst\._@\.Proofs\.HadwigerNelson\.Collapse\.\w+\.\d+\._hygCtx\._hyg\.\d+ : NumberField\.\{0\} ")
 
 # The ruled changes: the stored type loses one instance binder `[NumberField ↥F]` (item 993's ruling, two parts).
@@ -79,8 +82,8 @@ def strip_binder(text, short=False):
     ms = list(NUMBER_FIELD_BINDER.finditer(text))
     if len(ms) != 1:
         return None
-    start = ms[0].start()
-    depth, i = 0, start + 1
+    start = ms[0].start()  # the space before the binder's `[`
+    depth, i = 0, start + 2  # scan after that `[`
     while i < len(text):
         if text[i] == "[":
             depth += 1
@@ -127,13 +130,15 @@ def compare(before, after, short_strip=False, quiet=False):
                 fails.append(f"CHANGED ({what}) {name} ({mod})")
         added = [(n, a) for n, a in amod.items() if n not in consts and not a["internal"]]
         a_int = sum(1 for n, a in amod.items() if a["internal"])
-        pub = sorted(n for n, a in added if not a["private"])
+        gen = sorted(n for n, a in added if not a["private"] and GENERATED.search(n))
+        pub = sorted(n for n, a in added if not a["private"] and not GENERATED.search(n))
         priv = sorted(a["user"] for n, a in added if a["private"])
         for n in pub:
             if n not in ALLOWED_PUBLIC:
                 fails.append(f"ADDED-PUBLIC-UNLISTED {n} ({mod})")
         report.append(f"{mod}: before {len(consts)} constants ({n_int} internal); SAME {n_same}; "
-                      f"added public {len(pub)} {pub}; added private {len(priv)}; internal after {a_int}")
+                      f"added public {len(pub)} {pub}; added private {len(priv)}; generated on demand {gen}; "
+                      f"internal after {a_int}")
         if priv:
             report.append(f"    private added: {priv}")
     for m in after:

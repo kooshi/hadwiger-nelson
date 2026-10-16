@@ -1,0 +1,11 @@
+MODULE Proofs.HadwigerNelson.Arith.FloorPlanes: CLEAN 19
+MODULE Proofs.HadwigerNelson.Collapse.Colouring: CLEAN 24
+MODULE Proofs.HadwigerNelson.Collapse.Dichotomy: CLEAN 20, positive_entropy_rigidity 2
+MODULE Proofs.HadwigerNelson.Collapse.Headline: CLEAN 12, kloosterman_bound 2, kloosterman_bound+no_proper_five_coloring+positive_entropy_rigidity 1, kloosterman_bound+positive_entropy_rigidity 3, positive_entropy_rigidity 2
+MODULE Proofs.HadwigerNelson.Collapse.Mixing: CLEAN 9
+MODULE Proofs.HadwigerNelson.Collapse.Selection: CLEAN 10
+MODULE Proofs.HadwigerNelson.Collapse.Slice: CLEAN 5, positive_entropy_rigidity 1
+MODULE Proofs.HadwigerNelson.Collapse.Thick: CLEAN 14, kloosterman_bound 3
+MODULE Proofs.HadwigerNelson.Rigidity.ClassRatio: CLEAN 5, kloosterman_bound 6
+records: 138 public (138 already filed), 184 private (not audited)
+COVERAGE OK: every one of the 138 public records is filed under its class

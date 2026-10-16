@@ -247,6 +247,13 @@ declared that no audited record carries fails as `stale-declaration`. -/
 #print axioms HadwigerNelson.CertLink.card_le_of_fibreShareBound_model
 #print axioms HadwigerNelson.CertLink.exists_addEquiv_zmod_sqrt_three
 #print axioms HadwigerNelson.CertLink.exists_stablePrime_sqrt_three
+-- FS131-ICO2 (IMPORTED, on `StandingFive.kloosterman_bound`): the collapse's thickness by Weil's bound (`Collapse/Thick`, `Collapse/Headline`) and the approved edit D-E2 (`Rigidity/ClassRatio`) — 6
+#print axioms HadwigerNelson.Collapse.thick_deGrey
+#print axioms HadwigerNelson.Collapse.thick_sqrt635087
+#print axioms HadwigerNelson.Collapse.thickAt_weil
+#print axioms HadwigerNelson.Collapse.thick_of_card
+#print axioms HadwigerNelson.Collapse.thick_of_forall_thickAt
+#print axioms HadwigerNelson.Rigidity.norm_charSum_le_weil
 
 #eval AxiomAudit.declareImport ``HadwigerNelson.Outside.OAI158.no_proper_five_coloring
 
@@ -258,6 +265,8 @@ declared that no audited record carries fails as `stale-declaration`. -/
 #print axioms HadwigerNelson.Outside.OAI158.chiM0_six_or_seven
 -- FS124-I1: the radius clause's record resting on `no_proper_five_coloring` (C124-RADIUS-FIVE, `Plane/RadiusOutside`)
 #print axioms HadwigerNelson.Plane.radius_five
+-- FS131-ICO2 (IMPORTED, on `no_proper_five_coloring`, with `positive_entropy_rigidity` and `kloosterman_bound`): the collapse's six-or-seven corollary (`Collapse/Headline`) — 1
+#print axioms HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087_six_or_seven
 
 #eval AxiomAudit.declareImport ``HadwigerNelson.Rigidity.positive_entropy_rigidity
 
@@ -284,6 +293,15 @@ declared that no audited record carries fails as `stale-declaration`. -/
 -- FS131-IL5 (IMPORTED, on `Rigidity.positive_entropy_rigidity` and `StandingFive.kloosterman_bound`, through the headline): the main clause through five as one theorem (`Rigidity/MainClauseFive`) — 2
 #print axioms HadwigerNelson.Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five
 #print axioms HadwigerNelson.Rigidity.min_chromaticNumber_five_eq_min_localBound_five
+-- FS131-ICO2 (IMPORTED, on `Rigidity.positive_entropy_rigidity`, three of them on `StandingFive.kloosterman_bound` too): the collapse (`Collapse/Dichotomy`, `Collapse/Slice`, `Collapse/Headline`) — 8
+#print axioms HadwigerNelson.Collapse.exists_invColouring_TA
+#print axioms HadwigerNelson.Collapse.not_isSPWitness
+#print axioms HadwigerNelson.Collapse.chromaticNumber_planeOver_deGrey
+#print axioms HadwigerNelson.Collapse.chromaticNumber_planeOver_eq_plane_of_forall_thickAt
+#print axioms HadwigerNelson.Collapse.chromaticNumber_planeOver_eq_plane_of_thick
+#print axioms HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087
+#print axioms HadwigerNelson.Collapse.chromaticNumber_plane_le_of_thick
+#print axioms HadwigerNelson.Collapse.exists_slice_of_colorable
 
 #eval IO.println "=== CLEAN ==="
 
@@ -12796,6 +12814,107 @@ IMPORTED. -/
 module's two theorems rest on the headline's declared imports and are under IMPORTED. -/
 
 #print axioms HadwigerNelson.Rigidity.localBound_bot_le_two
+
+/-! ## FS131-ICO2 — the collapse (`Collapse/Thick` … `Collapse/Headline`) and the approved edit D-E1 (`Arith/FloorPlanes`):
+every public record of the nine modules on the standard three or fewer, from the kernel's print
+(`data/fs131/ico2/axioms-all.txt`, `data/fs131/ico2/audit_block.py`). The records on declared imports are under IMPORTED. -/
+
+#print axioms HadwigerNelson.StandingFive.KloostermanBound
+#print axioms HadwigerNelson.StandingFive.norm_normOne_charSum_le
+#print axioms HadwigerNelson.Collapse.InvColouring.carried
+#print axioms HadwigerNelson.Collapse.InvColouring.casesOn
+#print axioms HadwigerNelson.Collapse.InvColouring.ctorIdx
+#print axioms HadwigerNelson.Collapse.InvColouring.isProb
+#print axioms HadwigerNelson.Collapse.InvColouring.mk.inj
+#print axioms HadwigerNelson.Collapse.InvColouring.mk.injEq
+#print axioms HadwigerNelson.Collapse.InvColouring.mk.noConfusion
+#print axioms HadwigerNelson.Collapse.InvColouring.mk.sizeOf_spec
+#print axioms HadwigerNelson.Collapse.InvColouring.noConfusion
+#print axioms HadwigerNelson.Collapse.InvColouring.noConfusionType
+#print axioms HadwigerNelson.Collapse.InvColouring.recOn
+#print axioms HadwigerNelson.Collapse.InvColouring.rot_inv
+#print axioms HadwigerNelson.Collapse.InvColouring.shift_inv
+#print axioms HadwigerNelson.Collapse.InvColouring.μ
+#print axioms HadwigerNelson.Collapse.Xk
+#print axioms HadwigerNelson.Collapse.Xk_one_eq_empty
+#print axioms HadwigerNelson.Collapse.exists_invColouring
+#print axioms HadwigerNelson.Collapse.isClosed_Xk
+#print axioms HadwigerNelson.Collapse.measurableSet_Xk
+#print axioms HadwigerNelson.Collapse.nonempty_invColouring_bot
+#print axioms HadwigerNelson.Collapse.nonempty_invColouring_of_colorable
+#print axioms HadwigerNelson.Collapse.rot_mem_Xk
+#print axioms HadwigerNelson.Collapse.shift_mem_Xk
+#print axioms HadwigerNelson.Collapse.xk_nonempty_of_colorable
+#print axioms HadwigerNelson.Collapse.EqualAtUnitsK
+#print axioms HadwigerNelson.Collapse.InvColouring.measurePreserving_shift
+#print axioms HadwigerNelson.Collapse.IsColourSpectral
+#print axioms HadwigerNelson.Collapse.IsColourSpectral.integral_unit
+#print axioms HadwigerNelson.Collapse.IsColourSpectral.rotInv
+#print axioms HadwigerNelson.Collapse.IsSPWitness
+#print axioms HadwigerNelson.Collapse.colourShiftK
+#print axioms HadwigerNelson.Collapse.colourShiftK_add
+#print axioms HadwigerNelson.Collapse.condLawK
+#print axioms HadwigerNelson.Collapse.equalAtUnitsK_of_not_neg
+#print axioms HadwigerNelson.Collapse.exists_factorLawK
+#print axioms HadwigerNelson.Collapse.exists_isColourSpectral
+#print axioms HadwigerNelson.Collapse.factorK
+#print axioms HadwigerNelson.Collapse.factorK.congr_simp
+#print axioms HadwigerNelson.Collapse.integral_condLawK_mul_nonneg
+#print axioms HadwigerNelson.Collapse.measurable_colourShiftK
+#print axioms HadwigerNelson.Collapse.not_isSPWitness_of_mrPlus
+#print axioms HadwigerNelson.Collapse.rotInv_restrict_compl_TA
+#print axioms HadwigerNelson.Collapse.setIntegral_compl_TA_re_k
+#print axioms HadwigerNelson.Collapse.setIntegral_compl_TA_rot_k
+#print axioms HadwigerNelson.Collapse.F635087
+#print axioms HadwigerNelson.Collapse.FdG
+#print axioms HadwigerNelson.Collapse.isSquare_635087
+#print axioms HadwigerNelson.Collapse.isSquare_deGrey
+#print axioms HadwigerNelson.Collapse.le_of_isSquare_635087
+#print axioms HadwigerNelson.Collapse.le_of_isSquare_deGrey
+#print axioms HadwigerNelson.Collapse.not_colorable_one_planeOver
+#print axioms HadwigerNelson.Collapse.not_thick_bot
+#print axioms HadwigerNelson.Collapse.stablePrime_deGrey
+#print axioms HadwigerNelson.Collapse.stablePrime_sqrt635087
+#print axioms HadwigerNelson.Collapse.weil_103_lt_fifth
+#print axioms HadwigerNelson.Collapse.weil_131_lt_fifth
+#print axioms HadwigerNelson.Collapse.finite_mixing
+#print axioms HadwigerNelson.Collapse.levelFill
+#print axioms HadwigerNelson.Collapse.levelResid
+#print axioms HadwigerNelson.Collapse.levelResid_nonneg
+#print axioms HadwigerNelson.Collapse.mixing_K
+#print axioms HadwigerNelson.Collapse.mixing_at_level
+#print axioms HadwigerNelson.Collapse.not_both_ge_of_mixing
+#print axioms HadwigerNelson.Collapse.tendsto_levelResid
+#print axioms HadwigerNelson.Rigidity.Counting.K.congr_simp
+#print axioms HadwigerNelson.Collapse.ae_slice_edge
+#print axioms HadwigerNelson.Collapse.exists_aeColouring_of_slice
+#print axioms HadwigerNelson.Collapse.fibreMass
+#print axioms HadwigerNelson.Collapse.le_fibreMass_selCol
+#print axioms HadwigerNelson.Collapse.measurable_fibreMass
+#print axioms HadwigerNelson.Collapse.measurable_selCol
+#print axioms HadwigerNelson.Collapse.not_both_heavy
+#print axioms HadwigerNelson.Collapse.selCol
+#print axioms HadwigerNelson.Collapse.sum_fibreMass
+#print axioms HadwigerNelson.Collapse.unitPairsNull_selCol
+#print axioms HadwigerNelson.Collapse.SliceEdgeNullK
+#print axioms HadwigerNelson.Collapse.exists_extension_k
+#print axioms HadwigerNelson.Collapse.exists_slice_k
+#print axioms HadwigerNelson.Collapse.measure_ne_eq_k
+#print axioms HadwigerNelson.Collapse.tendsto_measure_ne_k
+#print axioms HadwigerNelson.Collapse.LevImg
+#print axioms HadwigerNelson.Collapse.Thick
+#print axioms HadwigerNelson.Collapse.ThickAt
+#print axioms HadwigerNelson.Collapse.ThickAt.mono
+#print axioms HadwigerNelson.Collapse.exists_addChar_extend
+#print axioms HadwigerNelson.Collapse.finite_levU
+#print axioms HadwigerNelson.Collapse.image_levR_unitVectors_of_unramified
+#print axioms HadwigerNelson.Collapse.levU
+#print axioms HadwigerNelson.Collapse.levU_nonempty
+#print axioms HadwigerNelson.Collapse.levelThick
+#print axioms HadwigerNelson.Collapse.norm_sum_piFinset_le
+#print axioms HadwigerNelson.Collapse.not_isRamified_of_thickAt
+#print axioms HadwigerNelson.Collapse.thickAt_one
+#print axioms HadwigerNelson.Collapse.weil_const_anti
 
 #eval IO.println "=== PURCHASED ==="
 

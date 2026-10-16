@@ -1,0 +1,15 @@
+PLANTED: unknown axiom in HadwigerNelson.StandingFive.KloostermanBound; sorryAx in HadwigerNelson.StandingFive.norm_normOne_charSum_le; HadwigerNelson.StandingFive.card_filter_pow_eq_self filed under PURCHASED
+MODULE Proofs.HadwigerNelson.Arith.FloorPlanes: CLEAN 17
+MODULE Proofs.HadwigerNelson.Collapse.Colouring: CLEAN 24
+MODULE Proofs.HadwigerNelson.Collapse.Dichotomy: CLEAN 20, positive_entropy_rigidity 2
+MODULE Proofs.HadwigerNelson.Collapse.Headline: CLEAN 12, kloosterman_bound 2, kloosterman_bound+no_proper_five_coloring+positive_entropy_rigidity 1, kloosterman_bound+positive_entropy_rigidity 3, positive_entropy_rigidity 2
+MODULE Proofs.HadwigerNelson.Collapse.Mixing: CLEAN 9
+MODULE Proofs.HadwigerNelson.Collapse.Selection: CLEAN 10
+MODULE Proofs.HadwigerNelson.Collapse.Slice: CLEAN 5, positive_entropy_rigidity 1
+MODULE Proofs.HadwigerNelson.Collapse.Thick: CLEAN 14, kloosterman_bound 3
+MODULE Proofs.HadwigerNelson.Rigidity.ClassRatio: CLEAN 5, kloosterman_bound 6
+BAD HadwigerNelson.StandingFive.KloostermanBound (Proofs.HadwigerNelson.Arith.FloorPlanes): ['planted.unknownAxiom']
+MISFILED HadwigerNelson.StandingFive.card_filter_pow_eq_self: class CLEAN, filed under PURCHASED
+OPEN HadwigerNelson.StandingFive.norm_normOne_charSum_le (Proofs.HadwigerNelson.Arith.FloorPlanes): ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+records: 138 public (27 already filed), 184 private (not audited)
+STOP: 3 record(s) the gate cannot take
