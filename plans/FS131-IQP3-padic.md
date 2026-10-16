@@ -198,3 +198,59 @@ controls per drop; the audit block's three plants and the coverage check against
 controls and the assumptions step's six rows, each red for its named cause before its input moved; the vacuity header, flagged
 stale before it moved. Each self-test plants its own (15, 23, 65, 33 controls). **Not run: a lint plant** — the lint step is the
 driver over the whole library, its control watched at FS131-LGT1; no lint finding arose here.
+
+## Stage 4 — SAVED: the read-aloud, against `LEDGER.md` row 75 and FS66-T7
+
+The stored statements as the gated build prints them (`data/fs131/iqp3/lean/ReadAloud.lean` → `data/fs131/iqp3/read-aloud.txt`,
+`pp.fullNames`, and `pp.explicit` for the Borel clause), read against FS66-T7 (`plans/FS66-derivation.md` l. 316) and row 75's
+"Consequences" clause, with the posers' question quoted from `CLOSED-QUESTIONS.md` § 1.8 (`[BardestaniMallahiKarai2017]`
+Question 1, p. 2: *"Is it true that there exists a universal constant B (independent of p) such that χ_Bor(QG_{𝒬_p}) ≤ B, holds
+as p ranges over all primes of the form 4k + 3?"*).
+
+**The objects.**
+- `borelChromaticNumber G = ⨅ k, ⨅ (_ : ∃ c : G.Coloring (Fin k), ∀ i, MeasurableSet (c ⁻¹' {i})), (k : ℕ∞)`, the σ-algebra
+  `borel X` of the graph's topology (the explicit print shows `@borel (ℚ_[p] × ℚ_[p]) (instTopologicalSpaceProd …)` of the
+  `p`-adic norm topology): *the least number of colours of a proper colouring whose every colour class is a Borel set, `⊤` if
+  there is none* — the posers' `χ_Bor`, read in `ℕ∞`.
+- `padicPlane p = unitQuadrance ℚ_[p] = addCayley {v | v.1² + v.2² = 1}`: *vertices `ℚ_p × ℚ_p`, `x ~ y` iff `x ≠ y` and
+  `(x₁ − y₁)² + (x₂ − y₂)² = 1`* — `QG_{𝒬_p}` for the form `x² + y²`, which is anisotropic exactly at `p ≡ 3 (mod 4)`.
+- `TowerRatio p c`: *for every `k ≥ 1`, every independent set of `UD(ℤ/p^k, 2)` has at most `c · p^{2k}` points.*
+
+**The heads, read aloud.**
+- `one_add_div_le_of_borelColoring : ∀ p [Fact p.Prime], p % 4 = 3 → ∀ {k} (c : (padicPlane p).Coloring (Fin k)),
+  (∀ i, MeasurableSet (c ⁻¹' {i})) → 1 + (p + 1)/(2√p) ≤ k`. *For every prime `p ≡ 3 (mod 4)`, every proper colouring of the
+  `p`-adic plane with Borel colour classes uses at least `1 + (p + 1)/(2√p)` colours.* FS66-T7's first sentence,
+  `χ_Bor(QG_{ℚ_p}) ≥ 1 + (p+1)/(2√p)`, stated for colourings. **Matches.**
+- `le_borelChromaticNumber_padicPlane : … → ⌈1 + (p + 1)/(2√p)⌉ ≤ borelChromaticNumber (padicPlane p)`. The same, as a number.
+  **Matches** (`⌈·⌉` is the least integer above, which is what an integer-valued bound reads).
+- `not_exists_bound_borelChromaticNumber_padicPlane : ¬ ∃ B : ℕ, ∀ p [Fact p.Prime], p % 4 = 3 → borelChromaticNumber
+  (padicPlane p) ≤ B`. *There is no constant `B` with `χ_Bor(ℚ_p²) ≤ B` for every prime `p = 4k + 3`* — the posers' Question 1,
+  negated in its own shape. `B : ℕ` against the posers' "universal constant": the same, since a real `B` would give `⌊B⌋`.
+  T7's "`> √p/2`" is a step of the proof (`1 + (p + 1)/(2√p) ≥ √p/2`, with Mathlib's Dirichlet for primes `p ≡ 3 (mod 4)` above
+  `4(B + 1)²`), not a stated theorem. **Matches T7's second sentence.**
+- `le_borelChromaticNumber_of_charSum : ∀ p [Fact p.Prime], p % 4 = 3 → ∀ {κ}, 2 ≤ κ → (∀ ψ : AddChar ((ℤ/p)²) ℂ, ψ ≠ 1 →
+  −κ ≤ Re Σ_{s ∈ unitCircle p} ψ s) → ⌈1 + (p + 1)/κ⌉ ≤ borelChromaticNumber (padicPlane p)`. *If every non-trivial character of
+  `(ℤ/p)²` sums over the circle `a² + b² = 1` to real part at least `−κ`, with `κ ≥ 2`, the Borel `p`-adic plane needs
+  `1 + (p + 1)/κ` colours* — Hoffman's ratio bound of `UD(𝔽_p, 2)` carried to every level and to Borel colourings. In neither
+  T7 nor row 75: the general form, with T7 its case `κ = 2√p`; on the standard three.
+- The values: `borelChromaticNumber (padicPlane 3) = 3`, `(padicPlane 7) = 4`, `(padicPlane 11) = 5`, `(padicPlane 19) = 5`;
+  `5 ≤ borelChromaticNumber (padicPlane 23)` and `borelChromaticNumber (padicPlane 23) ≤ 8`. Row 75's "`χ_Bor(ℚ_p²) = 4, 5, 5`
+  at 7, 11, 19" — **matches**; at 3 the kernel adds `3`, which the row does not state; at 23 the row's [cert] clause says
+  `χ_Bor(ℚ₂₃²) ≥ 6` with the ceiling `χ(Γ₂₃) ∈ {6, 7, 8}`: **the kernel holds `[5, 8]`, not `≥ 6`.**
+- The level clauses: `∀ k, 1 ≤ k → ¬ (unitQuadrance (ZMod (7^k))).Colorable 3`, and at `11^k`, `19^k` with `4`. Row 75's "no
+  level at 11 or 19 is four-colourable, none at 7 three-colourable" — **matches**; "none at 23 five-colourable" — **not in the
+  kernel.**
+- `borelChromaticNumber_le_chromaticNumber : p % 4 = 3 → χ_Bor(padicPlane p) ≤ (finitePlane p).chromaticNumber`: the upper
+  halves' source, `[Madore2015]` Prop. 3.2 made Borel (T8's upper half).
+- The two drops, as the kernel now has them: `exists_levelEmbedding` holds at every `k`, `k = 0` included (both sides one
+  point); `charSum_levelOne_of_unitCircle` asks only `2 ∉ P` and `|𝓞 ⧸ P| = p²` of the stable prime. Each is weaker in its
+  hypotheses than the statement it replaces, so every former use still elaborates; both are internal steps, not heads.
+
+**Not claimed**, and stated by no declaration: the plain chromatic number `χ(ℚ_p²)` — `chromaticNumber_le_borelChromaticNumber`
+gives `χ ≤ χ_Bor` only, and nothing bounds `χ(ℚ_p²)` from below; `6 ≤ χ_Bor(ℚ₂₃²)` (it needs FS-66's certificate at 23, or a
+reduced one, search request 26); the level clause at 23 (the same); anything at `p ≡ 1 (mod 4)` or `p = 2` — every head carries
+`p % 4 = 3` or sits at a fixed `p ≡ 3 (mod 4)`; any growth rate between `√p/2` and `χ(UD(𝔽_p, 2))`.
+
+**The trust each reading rests on** (stage 3's prints): the Weil form, the unboundedness and the value at 3 on
+`StandingFive.kloosterman_bound` (`[Weil1948]` p. 207) and the standard three; everything else, the bound by characters and the
+lower end at 23 included, on the standard three.
