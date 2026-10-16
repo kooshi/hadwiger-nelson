@@ -329,3 +329,17 @@ the kernel with no row of their own (the coordinator's question, item 1050).
 `575` axiom-free, `120` imported, `5` declared purchases; assumptions `axioms=3 rests=168 named=19 inline=14 outside=7 ours=21
 open=5 takes=109 mentions=2`; vacuity `declarations=22683 refutations-skipped=245 sites=1465`,
 `vacuous=0 stale=0 declared=3 witnessed=40 generic=1420 unknown=2`.
+
+### A draft for `LEAN.md` § Building (one line, its slot: after the line on copying another landing's gated build in)
+
+> - Two landings that both edit one upstream module (FS131-IFR1 and FS131-ICS1, `Rigidity/ClassRatio`: disjoint hunks, each
+>   making declarations public) merge with no conflict, but the merged module is a third text: neither gated build holds
+>   it, so it and its whole cone recompile after the copy by checksum (26 modules, 22 m 50 s at `BATCH=3` on the laptop,
+>   most of it the walk). Compare the merged build's stored statements with **both** landings' gated prints, each side's
+>   ruled publicizations allowed on the other, by user name (`tools/fs131_ifr2_statements.py`; FS131-IFR2).
+
+## Slip
+
+Once, early (before stage 1 was saved), one command wrote two short file lists to `/tmp` to compare them and deleted them in
+the same command. Standing rule 2 sends every working file under the job's `data/` path; nothing was lost or read by another
+job, and every later working file is under `data/fs131/ifr2/`.
