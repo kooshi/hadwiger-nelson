@@ -93,9 +93,7 @@ The kernel holds `χ(F²) ≤ L(F)` and `min(L(F), 5) ≤ χ(F²)` for every rea
 hypothesis, `min(χ(F²), 5) = min(L(F), 5)` (`Rigidity.min_chromaticNumber_five_eq_min_localBound_five`). It holds the values
 through four colours and the five-colour values listed in the README. Left:
 
-1. **Not stored as theorems** (`LEDGER.md` row 123; the chain's gate record, `plans/FS131-LGT1-gate.md`): the family, `χ = 5` at every squarefree `d ≡ 47, 143, 167 (mod 168)` with
-   `L = 5` (44 of the 52 such `d ≤ 3000`); row 123's class statement CLS in full; and the field ℚ(√23, ∛2), the case with a
-   complex place.
+1. **Row 123's remainder** (the class, the family as the derivation computed it, CLS in full and ℚ(√23, ∛2) are kernel theorems since FS131-ICS1, `plans/KERNEL-HOLDS.md`): `L` at the class members that are a square neither modulo 11 nor modulo 19 — 167, 887, 1055, 1319, 1823, 2351, 2735, 2903 below 3000 — which needs a target the kernel does not hold (`Γ₃₁` first, undecided); and `χ(ℚ(√167)²) ≥ 5` by its second route (every stable place 4-thick).
 2. **Lemma C′** (row 100): for a real number field with no ramified stable dyadic prime, the unit-vector ring equals the ring of
    elements integral at every stable prime. Its statement as typed:
    ```lean
@@ -256,7 +254,7 @@ vocabulary, which `BIBLIOGRAPHY.md` § E translates. The full statement, its gra
 | 120 | hand | no | Measure rigidity for the unit-vector group: for every real number field `F` with `R_F = O′` (row 100 — every ` …` |
 | 121 | hand, "not in the kernel" | yes | `χ(ℚ(√47)²) = 5`: the local–global conjecture's cheapest exposed five-clause is met. MR at ℚ(√47) (row 120) wi … |
 | 122 | hand | no | Where the other routes to MR stop: the one-sided flip needs a quantitative T-C(A); equidistribution is false; … |
-| 123 | hand | yes | The local–global conjecture's main clause through five: for every real number field `F`, `χ(F²) ≥ min(L(F), 5) …` |
+| 123 | kernel, hand | yes | The local–global conjecture's main clause through five: for every real number field `F`, `χ(F²) ≥ min(L(F), 5) …` |
 | 124 | hand | no | The type-(B) fields given MR: over ℚ(√59), ℚ(√83), ℚ(√131) every rotation- and translation-invariant random fo … |
 | 125 | hand | no | Six at ℚ(√167) contains a question about the real plane alone. Given MR: `χ(ℚ(√167)²) ≤ 5` ⟺ `Y = UD(ℝ²) × G₂₃ …` |
 | 126 | hand | no | TR-ROT is Q-μ, and its spectral side is closed on `E`. Given MR, over ℚ(√59), ℚ(√83), ℚ(√131) row 124's one st … |
