@@ -4,7 +4,9 @@
 `plans/FS131-close-inventory.md` items 974–992 (each has its receipt and, where it rules, four parts).
 `plans/SESSION-HANDOFF-2026-10-15.md` is older; its § 6 owed list is now filed or tabled (§ 5 below).*
 
-**On resuming, the first thing to do is § 3: wait for FS131-ICO2's report, or its message that the gate is green.**
+**On resuming (after the usage-limit stop, items 1016–1019; every job has handed back):** read § 3. Each of the three jobs there was told to save a stage and
+hand back; read each record's last saved stage and its "what is left", then brief a successor from it (or resume it by
+message if it handed back below its line). Five commits wait for the next privacy check before a push (§ 1).
 
 ## 1. Where things are
 
@@ -41,12 +43,14 @@ current. Its two owed one-liners and the `k = 7` model go to the next job that t
 
 - **The collapse's filing is merged** (`38579c41b`, item 1007): the front page, row 128, README, ROADMAP, the atlas
   (local) current; the fact audit passes against `8cab63fa2`.
-- **FS131-IQP1** (item 1001): the `p`-adic plane (`.claude/worktrees/il5`, branch `fs131-kpa1`); the three leaves at 23
-  leave the landing (item 1002).
+- **FS131-IQP2** (item 1015): the `p`-adic plane to the gate (`.claude/worktrees/il5`, branch `fs131-kpa1`); FS131-IQP1
+  proved every landing leaf and handed back past its line (item 1014); the three leaves at 23 wait on search request 26;
+  five colours at 23 ruled in. Both implementer branches joined `Proofs.lean`'s import blocks with `main`'s: the second to
+  land will conflict there again — keep both blocks.
 - **FS131-ICT2** (item 1013): the three-colour criterion to the gate (`.claude/worktrees/kel1`, branch `fs131-ktc1`);
   FS131-ICT1 proved all 53 leaves and handed back past its line (item 1012); two unread hypotheses ruled dropped.
-- **FS131-KFR1** (item 1006): the density form's planner (`.claude/worktrees/kcl1`, branch `fs131-kfr1`); its widenings
-  and the 250-line disc module ruled in (item 1008).
+- **FS131-KFR1 handed back DONE** (item 1017): the density form planned, about 2,675 lines; what I owe it on resuming is
+  in item 1017 (receipts, records onto `main`, three held rulings, its implementer's brief).
 
 Both implementers were told the collapse's gate (`data/fs131/ico2/gate/`) is their baseline. At each implementer's
 hand-back: check its commits, print its head statements' axioms myself, read them against the ledger row, guard, merge
