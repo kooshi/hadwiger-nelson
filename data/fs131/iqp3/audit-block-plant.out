@@ -1,0 +1,14 @@
+PLANTED: unknown axiom in HadwigerNelson.PadicPlane.TowerRatio; sorryAx in HadwigerNelson.PadicPlane.TowerRatio.mono; HadwigerNelson.PadicPlane.borelChromaticNumber filed under PURCHASED
+MODULE Proofs.HadwigerNelson.Arith.FibreCert7: CLEAN 1
+MODULE Proofs.HadwigerNelson.Arith.FibreCert7Bound: CLEAN 7
+MODULE Proofs.HadwigerNelson.Arith.FibreCert7Check: CLEAN 3
+MODULE Proofs.HadwigerNelson.PadicPlane.Basic: CLEAN 8
+MODULE Proofs.HadwigerNelson.PadicPlane.Measure: CLEAN 15
+MODULE Proofs.HadwigerNelson.PadicPlane.Tower: CLEAN 7, kloosterman_bound 2
+MODULE Proofs.HadwigerNelson.PadicPlane.Upper: CLEAN 4
+MODULE Proofs.HadwigerNelson.PadicPlane.Values: CLEAN 15, kloosterman_bound 4
+BAD HadwigerNelson.PadicPlane.TowerRatio (Proofs.HadwigerNelson.PadicPlane.Basic): ['planted.unknownAxiom']
+OPEN HadwigerNelson.PadicPlane.TowerRatio.mono (Proofs.HadwigerNelson.PadicPlane.Basic): ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+MISFILED HadwigerNelson.PadicPlane.borelChromaticNumber: class CLEAN, filed under PURCHASED
+records: 68 public (1 already filed), 11 private (not audited)
+PLANT FIRED: all three reported (3 stop(s) in all)

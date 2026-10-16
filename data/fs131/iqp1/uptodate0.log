@@ -1,0 +1,45 @@
+slot: admitted iqp1-uptodate: mem 4 GiB (hard cap), cpus 4
+⚠ [6457/6515] Replayed Proofs.HadwigerNelson.PadicPlane.Basic
+warning: Proofs/HadwigerNelson/PadicPlane/Basic.lean:104:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Basic.lean:113:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Basic.lean:122:8: declaration uses `sorry`
+⚠ [6458/6515] Replayed Proofs.HadwigerNelson.PadicPlane.Measure
+warning: Proofs/HadwigerNelson/PadicPlane/Measure.lean:62:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Measure.lean:66:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Measure.lean:69:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Measure.lean:73:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Measure.lean:80:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Measure.lean:86:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Measure.lean:94:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Measure.lean:100:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Measure.lean:105:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Measure.lean:111:8: declaration uses `sorry`
+⚠ [6459/6515] Replayed Proofs.HadwigerNelson.PadicPlane.Upper
+warning: Proofs/HadwigerNelson/PadicPlane/Upper.lean:33:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Upper.lean:41:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Upper.lean:52:8: declaration uses `sorry`
+⚠ [6460/6515] Replayed Proofs.HadwigerNelson.PadicPlane.Tower
+warning: Proofs/HadwigerNelson/PadicPlane/Tower.lean:44:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Tower.lean:58:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Tower.lean:65:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Tower.lean:73:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Tower.lean:83:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Tower.lean:104:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Tower.lean:122:8: declaration uses `sorry`
+⚠ [6514/6515] Replayed Proofs.HadwigerNelson.PadicPlane.Values
+warning: Proofs/HadwigerNelson/PadicPlane/Values.lean:56:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Values.lean:64:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Values.lean:71:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Values.lean:78:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Values.lean:93:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Values.lean:99:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Values.lean:106:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Values.lean:111:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Values.lean:116:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Values.lean:121:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Values.lean:128:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Values.lean:132:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Values.lean:136:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Values.lean:140:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/PadicPlane/Values.lean:144:8: declaration uses `sorry`
+All targets up-to-date (6517 jobs).

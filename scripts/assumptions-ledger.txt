@@ -4,7 +4,7 @@
 # holds it at unknown polarity). An inline assumption is inline:<Label>. Rewritten only by
 #   ./scripts/assumptions.sh --write-ledger
 # which prints every row it adds or removes. The counts this ledger was written from:
-#   axioms=3 rests=99 named=19 inline=14 outside=7 ours=21 open=5 takes=109 mentions=2
+#   axioms=3 rests=105 named=19 inline=14 outside=7 ours=21 open=5 takes=109 mentions=2
 MENTIONS HadwigerNelson.Plane.Voronov11 HadwigerNelson.Plane.forall_mu_six_lt_one_iff
 MENTIONS HadwigerNelson.SpectralChain.Interface.MR HadwigerNelson.Rigidity.interface_mr_iff
 RESTS HadwigerNelson.Outside.OAI158.no_proper_five_coloring HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087_six_or_seven
@@ -53,6 +53,12 @@ RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Collapse.thic
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Collapse.thick_of_card
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Collapse.thick_of_forall_thickAt
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Collapse.thick_sqrt635087
+RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_three
+RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.PadicPlane.charSum_unitCircle_ge_weil
+RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.PadicPlane.le_borelChromaticNumber_padicPlane
+RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.PadicPlane.not_exists_bound_borelChromaticNumber_padicPlane
+RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.PadicPlane.one_add_div_le_of_borelColoring
+RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.PadicPlane.towerRatio_weil
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Rigidity.Counting.count_of_oneAvoidingDensityBound
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Rigidity.Counting.false_of_slice
 RESTS HadwigerNelson.StandingFive.kloosterman_bound HadwigerNelson.Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five

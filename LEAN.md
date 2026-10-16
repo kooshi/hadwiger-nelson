@@ -199,6 +199,10 @@ the `.olean` would. Settle every hand-written module before starting a long gene
 - **Reaching field `n` of a sequentially read stream costs `n` reads.** A chunk of phase 1 starting 14,571 pairs in, its 19 coefficient lists dropped from the start, exceeded 12 GiB; with the reader placed by one shift into the right chunk (`FibreCertFast.rdAt`, `readIter_eq_rdAt`, `coefFrom_eq`) the same chunk was 55.5 s and 6.56 GiB (FS131-IKC4).
 - **Memory is returned between declarations of one file**: two 183 × 183 PSD checks in one module peaked at 5.56 GiB against 4.82 GiB for one (FS131-IKC4).
 - **A check that does not fit can be made to fit without changing the checker**: define the faster form beside it, prove it equal for every input, and rewrite (`Arith/FibreCertFast`: no statement of the soundness proof moved, `cert3` and `cert11` untouched) (FS131-IKC4).
+- FS-66's fibre-share certificate at `p = 7` (8,598 ops, 495 slots, 14 PSD blocks; 707 KB of literals) checks as three
+  `decide +kernel` theorems in one file in 48.8 s at 2.89 GB measured alone (shape 7.1 s, the identity 29.4 s, positive
+  definiteness 7.5 s), and 33 s for the module in the build (`Arith/FibreCert7Check`); its certificate at `p = 23` is 1,444,136 ops over
+  35,511 pairs, 168 times the 7's (FS131-KPA1, FS131-IQP1, FS131-IQP3).
 
 ## Searching — Lean
 
@@ -491,6 +495,30 @@ the `.olean` would. Settle every hand-written module before starting a long gene
 - At the pin Mathlib has no σ-compactness or local compactness lemma for a restricted product beyond `weaklyLocallyCompactSpace_of_cofinite` and the group instance; for adeles over a countable field, `range structureMap` of the compact `∏ O_w` (Tychonoff) plus approximation at the finitely many non-integral places writes the space as `⋃_{t ∈ L} (ι t + H)` (`TateModel`'s `sigmaCompactSpace_splitAdeleRing`). `O_v`'s compactness is `Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField` on `Valued.integer (K_v)`, one carrier with `adicCompletionIntegers` (`suffices h : CompactSpace (Valued.integer _) from h`; the DVR instance by `inferInstanceAs`) (FS131-ITT1).
 - The trace dual of `𝓞 K` has denominators dividing `disc K`: Mathlib's `isIntegral_discr_mul_of_mem_traceDual` at `integralBasis` (with `coe_discr`); no dual basis needed. A field's countability: `Finsupp.Countable.of_moduleFinite (R := ℚ)` (the namespace is `Finsupp`) (FS131-ITT1).
 - `refine AddChar.ext fun r => ?_` does not elaborate at the pin; `refine DFunLike.ext _ _ fun r => ?_` does. An overring `D ⊇ 𝓞 L` of a number field's integers needs no localization for 'every element integral at the primes `D` does not invert lies in `D`': Chevalley's `Ideal.image_subset_nonunits_valuationSubring` on `{d : d x ∈ D}` and `UpperHalf.exists_stablePrime_of_valuationSubring` (`RingScope`'s `stableIntegers_le_span`) (FS131-ITT1).
+- `MeasurableSet[m] s` is notation scoped in `MeasureTheory`: a module that writes it without `open MeasureTheory` fails
+  with `failed to synthesize GetElem (Set ?m → Prop) (MeasurableSpace …)` (FS131-KPA1).
+- Mathlib at the pin declares no `MeasurableSpace` on `ℚ_[p]` or `ℤ_[p]` and no continuity lemma for `PadicInt.toZModPow`;
+  a scoped `noncomputable` Borel instance on `ℤ_[p]` makes `Measure.addHaarMeasure ⊤` on `ℤ_[p] × ℤ_[p]` elaborate with no
+  further instance (compact, second countable, Borel product). An `abbrev` over `unitQuadrance ℚ_[p]` must be
+  `noncomputable` (`instCommRingPadic`). `PadicInt.subring`, `PadicInt.Coe.ringHom`, `PadicInt.norm_le_pow_iff_mem_span_pow`,
+  `PadicInt.cast_toZModPow` and `hensels_lemma` (`Mathlib/NumberTheory/Padics/Hensel.lean` l. 459) are the names
+  (FS131-KPA1).
+- `[OAIMath2026]`'s `OAI/NumberTheory/PrimePackets/HaarBounds.lean` l. 18 (`haar_kernel_eq_inv_card`) is the ten-line pattern
+  for the measure of a kernel of finite index, over `AddSubgroup.index_mul_measure` (FS131-KPA1).
+- At the pin `hensels_lemma` gives only `‖z − b₀‖ < 1`, not the distance, so a congruence modulo `p^k` needs the unit
+  argument `(z − b₀)(z + b₀) = −δ` with `z + b₀` a unit (`PadicPlane.exists_unitVector_lift`, FS131-IQP1).
+- Instances of `Measure.addHaarMeasure ⊤` are not found through a `def` that wraps it (`PadicPlane.haar p`): a local `haveI`
+  from a private `isAddHaarMeasure_haar` serves, with no instance declared on the wrapper (FS131-IQP1).
+- A character of `(ℤ/q)²` is a cosine sum's term with no residue field in between: `ψ(1, 0) = ζ^α` and `ψ(0, 1) = ζ^β`
+  (`(Complex.isPrimitiveRoot_exp q _).eq_pow_of_pow_eq_one`, with `q • v = 0` by `ext <;> simp`), and
+  `v = v₁.val • (1, 0) + v₂.val • (0, 1)` gives `ψ v = ζ^{(αv₁ + βv₂) mod q}` through `AddChar.map_nsmul_eq_pow` and
+  `map_add_eq_mul`; `ψ ≠ 1` is `(α, β) ≠ 0` — `Rigidity/ClassRatio`'s private `charBound_one_of_circleCos` on the plane, in
+  47 lines (`PadicPlane.charSum_unitCircle_ge_of_circleCos`, private; FS131-IQP3).
+- A ruled drop of a non-dependent binder is shown from the kernel's side in two readings at once: put back with `mkArrow`
+  inside `forallBoundedTelescope`, the stored type has the before-dump's `Expr.hash` (which reads no binder name) and its raw print
+  character for character (which shows every binder's kind; a non-dependent binder prints as an arrow, with no name), and two
+  controls — the domain `True`, and a near miss — differ in both (`data/fs131/iqp3/lean/ReAdd.lean`, after FS131-LCH1's;
+  FS131-IQP3).
 
 ## The package
 

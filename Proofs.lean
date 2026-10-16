@@ -272,6 +272,9 @@ import Proofs.HadwigerNelson.Arith.FibreCert
 import Proofs.HadwigerNelson.Arith.FibreCert3
 import Proofs.HadwigerNelson.Arith.FibreCert11
 import Proofs.HadwigerNelson.Arith.FibreCert11Bound
+import Proofs.HadwigerNelson.Arith.FibreCert7
+import Proofs.HadwigerNelson.Arith.FibreCert7Check
+import Proofs.HadwigerNelson.Arith.FibreCert7Bound
 import Proofs.HadwigerNelson.Arith.FibreCert11Global
 import Proofs.HadwigerNelson.Arith.FibreCert11Psd
 import Proofs.HadwigerNelson.Arith.FibreCert11Seg0
@@ -604,6 +607,11 @@ import Proofs.HadwigerNelson.Collapse.Density.Defs
 import Proofs.HadwigerNelson.Collapse.Density.Upper
 import Proofs.HadwigerNelson.Plane.TriangularPacking
 import Proofs.HadwigerNelson.Collapse.Density.Headline
+import Proofs.HadwigerNelson.PadicPlane.Basic
+import Proofs.HadwigerNelson.PadicPlane.Measure
+import Proofs.HadwigerNelson.PadicPlane.Upper
+import Proofs.HadwigerNelson.PadicPlane.Tower
+import Proofs.HadwigerNelson.PadicPlane.Values
 
 /-!
 # Proofs

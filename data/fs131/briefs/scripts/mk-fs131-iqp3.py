@@ -44,7 +44,7 @@ cannot be resumed (item 1020 below), so its plan is yours to start from.
 
 The rule this project publishes by is Kooshi's W2 (`data/fs131/REQUEST-2026-10-13.md`): any finding of ours is
 formalized. The p-adic bound answers a question posed in print (`[BardestaniMallahiKarai2017]` Question 1). The brief the
-job before you worked to, `data/fs131/briefs/FS131-IQP1-padic.md`, holds the head statements as typed and its § Done
+first job worked to, `data/fs131/briefs/FS131-IQP1-padic.md`, holds the head statements as typed and its § Done
 means steps 3–7, which still hold.
 
 ## Where the work stands
@@ -63,6 +63,10 @@ The second job's record is `{REC}`: its § 1.2 is the remaining work in order, w
 to five colours at 23 already read, and you may start from it (check it against the source as you go). The first job's
 record is `plans/FS131-IQP1-padic.md`, its report `data/fs131/reports/FS131-IQP1.md`; the leaves at 23 are kept in `data/fs131/iqp1/leaves-23.lean`. The plan is
 `plans/FS131-KPA1-padic-plan.md`. The cosine bound at 23 is in `Proofs/HadwigerNelson/Arith/CircleCos.lean`.
+
+One wording rule, new today (inventory item 1022): the repository is public, and the second job's record and one commit
+message give the reason for Kooshi's pause in words the privacy guard refuses. Do not repeat them: in your record,
+messages and report, the pause is "a pause Kooshi called", nothing more. I will reword the predecessor's lines at the merge.
 
 ## Done means
 

@@ -1,0 +1,6 @@
+p=7 n=49 |S|=8 maps=16 sha=f4b2ffa7c427
+reps 26; pairs 351; orbits 69
+ops 8598 [0.0s]
+slots 495; identity model: HOLDS; total magnitude bits 114 [0.9s]
+PSD witnesses: 14 blocks diagonally dominant [1.1s]
+wrote Proofs/HadwigerNelson/Arith/FibreCert7.lean: w=116 ds=3 k1=12 kq=7 kr=136 kw=13 ko=9; chunks ops=24 rows=9 keys=8
