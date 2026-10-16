@@ -57,8 +57,13 @@ each in full. "Prior art: not found in print" reports the searches recorded in t
   `SqrtClassValues.chromaticNumber_planeOver_sqrt335_eq_five`,
   `SqrtClassValues.chromaticNumber_planeOver_sqrt3_sqrt5_eq_five`,
   `SqrtClassValues.five_le_chromaticNumber_planeOver_sqrt167`. The upper half alone:
-  `SqrtFortySeven.chromaticNumber_planeOver_sqrt47_le_five`.
-- **Axioms.** std3 + W + EL. The upper half: std3.
+  `SqrtFortySeven.chromaticNumber_planeOver_sqrt47_le_five`. Every real quadratic field:
+  `SqrtFiveClass.five_le_chromaticNumber_planeOver_sqrt_iff` (for squarefree `m`, `5 ≤ χ(ℚ(√m)²) ↔ m % 168 ∈ {47, 143, 167}`)
+  and `SqrtFiveClass.chromaticNumber_planeOver_sqrt_eq_five` (`χ = 5` where `m` is a square modulo 11 or 19); the
+  classification of four-colour places, `Rigidity.five_le_localBound_iff`; the bridge `UpperHalf.localBound_le_unitQuadrance`;
+  `SqrtTwentyThreeCbrtTwo.chromaticNumber_planeOver_sqrt23_cbrt2_eq_five` and `…_localBound_sqrt23_cbrt2_eq_five`.
+- **Axioms.** std3 + W + EL. The upper half: std3. The classification and `L(ℚ(√23, ∛2)) = 5`: std3 + W. The bridge:
+  std3 (printed 2026-10-16 from the gated build of `960882257`).
 - **Whose.** The lower half: prior art not found in print. The upper half `≤ 5` is prior art (the plane at 11).
   `[Moorhouse2010slides]` asks for χ(ℚ(√47)²) by name. `[Davies2026]` p. 5 asks the question by residue class modulo 168, and
   the field of √47 lies in one of those classes. It answers the existence half of `[Soifer2024]` Open Problem 55.1, which
