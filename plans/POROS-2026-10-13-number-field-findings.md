@@ -440,6 +440,8 @@ asked:* `[Johnson2000]` § 5, p. 177. *Rests on:* by hand, three derivations; no
 prime inversion in general is the outside model's, the quadratic and multiquadratic cases `[Fischer1990b]`'s, and
 "`[Shimura1964]` undecided" — **novelty unchecked** where a number theorist would look first.
 
+C8 is in the kernel (FS131-IRU1): Lemma C′ as typed and its odd form; the components clause at every real number field, which is equivalent there to the existence of a stable prime, and that existence is classical (`[Nagell1969]` Thm 3) and kernel-checked with no Chebotarev.
+
 **Rank 9 — C14.** *The theorem:* the fractional chromatic number of the plane over `ℚ(√3,√11)` is 4. *Entry:*
 `plans/FS56-field-blowup.md`. *Who asked:* `[CranstonRabern2015]`, concluding section. *Rests on:* by hand; the lower
 bound is `[MatolcsiEtAl2025]`'s graph and theorem, the upper Fischer's value. *The first objection:* "Almost all of it

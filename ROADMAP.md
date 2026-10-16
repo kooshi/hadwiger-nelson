@@ -89,19 +89,10 @@ the cost of landing everything on the standard three axioms is to be measured (`
 ## 3. Planes over number fields
 
 The kernel holds `χ(F²) ≤ L(F)` and `min(L(F), 5) ≤ χ(F²)` for every real number field, and their composition as one theorem:
-`χ(F²) = L(F)` whenever `L(F) ≤ 5` (`Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five`), with its form that takes no
-hypothesis, `min(χ(F²), 5) = min(L(F), 5)` (`Rigidity.min_chromaticNumber_five_eq_min_localBound_five`). It holds the values
+`χ(F²) = L(F)` whenever `L(F) ≤ 5` (`Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five`), with its form that takes no hypothesis, `min(χ(F²), 5) = min(L(F), 5)` (`Rigidity.min_chromaticNumber_five_eq_min_localBound_five`). It holds Lemma C′ as typed (`Rigidity.unitRing_eq_stableIntegers`, row 100), its odd part at every real number field, and the components clause: the plane over every real number field has infinitely many components (`Rigidity.infinite_connectedComponent_planeOver`), through a stable prime at every real number field with no Chebotarev (`Rigidity.nonempty_stablePrime`, row 105); so `L(F) < ∞` everywhere (`Rigidity.localBound_lt_top`). It holds the values
 through four colours and the five-colour values listed in the README. Left:
 
 1. **Row 123's remainder** (the class, the family as the derivation computed it, CLS in full and ℚ(√23, ∛2) are kernel theorems since FS131-ICS1, `plans/KERNEL-HOLDS.md`): `L` at the class members that are a square neither modulo 11 nor modulo 19 — 167, 887, 1055, 1319, 1823, 2351, 2735, 2903 below 3000 — which needs a target the kernel does not hold (`Γ₃₁` first, undecided); and `χ(ℚ(√167)²) ≥ 5` by its second route (every stable place 4-thick).
-2. **Lemma C′** (row 100): for a real number field with no ramified stable dyadic prime, the unit-vector ring equals the ring of
-   elements integral at every stable prime. Its statement as typed:
-   ```lean
-   theorem unitRing_eq_stableIntegers [NumberField F] (h : NoRamifiedStableDyadic F) :
-       UnitRing.unitRing (conjOn (fieldI_conj F)) = stableIntegers F
-   ```
-   It was taken out of the library when the chain landed, because nothing read it and its proof was a `sorry`. The statement and its
-   hand route are kept in `data/fs131/lch1/ring-scope-lemma-c-prime.lean`.
 3. **The parts of landed rows that stay outside the kernel.** In row 121: a finite triangle-free five-chromatic unit-distance
    graph over ℚ(√47), which exists by de Bruijn–Erdős but has not been exhibited, and the equivalence called "row 88 ⟺ T-B1" at
    ℚ(√59), ℚ(√83), ℚ(√131). In row 99: "no mixing", and `χ(ℚ(α, √7)²) = 4` with `α³ = α + 1`.
