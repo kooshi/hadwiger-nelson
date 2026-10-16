@@ -4,7 +4,7 @@
 `plans/FS131-close-inventory.md` items 974–992 (each has its receipt and, where it rules, four parts).
 `plans/SESSION-HANDOFF-2026-10-15.md` is older; its § 6 owed list is now filed or tabled (§ 5 below).*
 
-**On resuming, the first thing to do is § 3: wait for FS131-ICO1's report, or its message that the gate is green.**
+**On resuming, the first thing to do is § 3: wait for FS131-ICO2's report, or its message that the gate is green.**
 
 ## 1. Where things are
 
@@ -33,12 +33,13 @@
 
 ## 3. Running
 
-**FS131-ICO1 — the collapse implemented** (item 989; brief `data/fs131/briefs/FS131-ICO1-collapse.md`; worktree
-`.claude/worktrees/kcl1`, branch `fs131-ico1`; record `plans/FS131-ICO1-collapse.md` there). Stages 1–4 saved
-(`001bc8a8f`: D-E1, D-E2, `Collapse/Thick`, `Mixing`, `Colouring`, `Dichotomy` proved). Halted by a network outage
-(EAI_AGAIN) and resumed by message at 13:2x UTC (item 992), told to merge `main` before its gate and to hand back if past
-about 550k. Left: `Collapse/Slice`, `Selection`, `Headline`, the gate, the read-aloud, the drafts. **Its agent id is in
-my scratch only**; if the session is new, a resumed job's id is gone — brief a successor from the record instead.
+**FS131-ICO2 — the collapse finished** (item 994; brief `data/fs131/briefs/FS131-ICO2-collapse.md`; worktree
+`.claude/worktrees/kcl1`, branch `fs131-ico1`; record `plans/FS131-ICO2-collapse.md` there). Its predecessor FS131-ICO1
+(item 993; record `plans/FS131-ICO1-collapse.md`) proved `Collapse/Thick`, `Mixing`, `Colouring`, `Dichotomy` (28 of 48
+leaves) and the edits D-E1, D-E2, and handed back past its line; `main` was merged into the branch at `ebeb126d1`. Left for
+ICO2: `Collapse/Slice`, `Selection`, `Headline` (about 600 lines), the experience pass, the build, the gate on one commit
+with the statement comparison (the `omit`s ruled in item 993 listed as ruled changes), the read-aloud, the drafts. **Its agent
+id is in my scratch only**; in a new session, brief a successor from its record instead.
 
 **At its hand-back** (announcement rule, item 988): check the commits; print the three headlines' axioms myself
 (`Collapse.chromaticNumber_planeOver_sqrt635087`, `chromaticNumber_planeOver_eq_plane_of_thick`,
