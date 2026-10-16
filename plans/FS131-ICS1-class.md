@@ -192,7 +192,7 @@ itself did not change.
 
 ## Stage 4 — SAVED: the gate on one commit
 
-**The gate's inputs** (commits `29f8c8e9e`… `6ff038e87`; each step watched red where the step has a red to watch):
+**The gate's inputs** (commits `815f7121a` and `6ff038e87`; each step watched red where the step has a red to watch):
 - `scripts/Axioms.lean`: the landing's 45 public records, from the kernel's print of the five modules
   (`data/fs131/ics1/lean/AxiomsAll.lean` → `axioms-all.txt`, 56 public and 135 private records, no `sorryAx`), by
   `data/fs131/ics1/audit_block.py` (FS131-ICO2's generator, copied): 9 IMPORTED on `kloosterman_bound`, 7 on
