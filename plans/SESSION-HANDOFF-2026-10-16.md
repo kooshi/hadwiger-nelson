@@ -52,7 +52,8 @@ kernel holds" paragraph lives in `plans/KERNEL-HOLDS.md`; the fact audit runs wi
 |---|---|---|---|
 | FS131-IFR1 (item 1023) | the density form of the collapse: 81 leaves (about 2,650 lines) and the gate; item 1021's three rulings | `kcl1`, `fs131-kfr1` | `plans/FS131-IFR1-density.md` |
 | FS131-ICS1 (item 1028) | part A of FS131-KCS1's plan (item 1027): the quadratic dichotomy, the family, CLS in full, ℚ(√23, ∛2), the bridge; three `ClassRatio` lemmas made public | `kcs1`, `fs131-kcs1` | `plans/FS131-ICS1-class.md` |
-| FS131-KRU1 (item 1036) | planner: row 100's Lemma C′ and the components clause, by the elementary route (item 1040) | `il5`, `fs131-kru1` | `plans/FS131-KRU1-ring-plan.md` |
+| FS131-IRU1 (item 1045) | the ring of unit vectors implemented: Lemma C′, the components clause (no outside theorem), the dichotomy; item 1044's rulings | `il5`, `fs131-kru1` | `plans/FS131-IRU1-ring.md` |
+| FS131-PAS1 (item 1046) | the prior-art searches owed by five results (items 1000, 1021, 1027, 1043, 1044) | `filing2`, `fs131-pas1` | `plans/FS131-PAS1-prior-art.md` |
 
 Both the `p`-adic and the three-colour branches joined `Proofs.lean`'s import blocks with `main`'s: the second to land
 will conflict there — keep both blocks. At each implementer's hand-back: check its commits, print its head statements'
