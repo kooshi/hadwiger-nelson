@@ -1,0 +1,12 @@
+import Proofs.HadwigerNelson.Instances.SqrtTwentyThreeCbrtTwo
+open HadwigerNelson
+#print axioms SqrtFiveClass.five_le_chromaticNumber_planeOver_sqrt_iff
+#print axioms SqrtFiveClass.chromaticNumber_planeOver_sqrt_eq_five
+#print axioms SqrtFiveClass.localBound_sqrt_eq_five
+#print axioms SqrtFiveClass.colorable_five_planeOver_sqrt
+#print axioms SqrtTwentyThreeCbrtTwo.chromaticNumber_planeOver_sqrt23_cbrt2_eq_five
+#print axioms SqrtTwentyThreeCbrtTwo.localBound_sqrt23_cbrt2_eq_five
+#print axioms SqrtTwentyThreeCbrtTwo.localBound_sqrt23_eq_four
+#print axioms SqrtTwentyThreeCbrtTwo.not_isTotallyReal_F23
+#print axioms SqrtTwentyThreeCbrtTwo.nonempty_ringHom_padic_eleven_F23
+#print axioms SqrtTwentyThreeCbrtTwo.card_ne_sq_of_pow_eq

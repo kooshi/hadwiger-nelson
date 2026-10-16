@@ -1,0 +1,2 @@
+Proofs/HadwigerNelson/Instances/SqrtTwentyThreeCbrtTwo.lean:1:0: error: object file '/home/kooshi/source/lean-dir/.claude/worktrees/kcs1/.lake/build/lib/lean/Proofs/HadwigerNelson/Instances/SqrtFiveClass.olean' of module Proofs.HadwigerNelson.Instances.SqrtFiveClass does not exist
+exit=1

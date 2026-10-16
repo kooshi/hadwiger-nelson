@@ -1,0 +1,6 @@
+slot: admitted ics1-iter: mem 8 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Rigidity/FourColourPlaces.lean:95:49: error(lean.unknownIdentifier): Unknown constant `Ideal.Quotient.nontrivial`
+
+real	0m3.773s
+user	0m3.673s
+sys	0m0.713s

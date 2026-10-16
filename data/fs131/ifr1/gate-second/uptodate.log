@@ -1,0 +1,4 @@
+slot: waiting (ledger 20 + 6 > budget 22 GiB)
+slot: admitted ifr1-uptodate: mem 6 GiB (hard cap), cpus 7,8,9,10
+All targets up-to-date (6531 jobs).
+exit=0 wall=19s

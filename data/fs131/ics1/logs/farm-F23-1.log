@@ -1,0 +1,197 @@
+slot: admitted ics1-iter: mem 6 GiB (hard cap), cpus 9,10
+data/fs131/ics1/work/SqrtTwentyThreeCbrtTwo.lean:67:75: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  Nat.card ↥k₀ ^ 2
+in the target expression
+  (fun a => a ^ 2) (Nat.card ↥k₀) = (fun a => a ^ 2) p
+
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+P : StablePrime F
+h2 : 2 ∉ P.P
+p k a : ℕ
+hp : Nat.Prime p
+ha : ∀ (y : ZMod p), y ^ k ≠ ↑a
+hcard : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P) = p ^ 2
+t : ↥F
+ht : t ^ k = ↑a
+hk : k ≠ 0
+hmax : (P.P ^ 1).IsMaximal
+this✝ : Field (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := Ideal.Quotient.field (P.P ^ 1)
+this : Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+σ : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 →+* 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := Ideal.quotientMap (P.P ^ 1) (conjO F) ⋯
+hσdef : σ = Ideal.quotientMap (P.P ^ 1) (conjO F) ⋯
+hσmk : ∀ (x : 𝓞 ↥(fieldI F)), σ ((Ideal.Quotient.mk (P.P ^ 1)) x) = (Ideal.Quotient.mk (P.P ^ 1)) ((conjO F) x)
+hσ : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), σ (σ x) = x
+i : 𝓞 ↥(fieldI F)
+hi2 : i ^ 2 = -1
+hci : (conjO F) i = -i
+h2k : 2 ≠ 0
+ι : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := (Ideal.Quotient.mk (P.P ^ 1)) i
+hιdef : ι = (Ideal.Quotient.mk (P.P ^ 1)) i
+hι : ι ^ 2 = -1
+hσι : σ ι = -ι
+k₀ : Subfield (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := σ.eqLocusField (RingHom.id (𝓞 ↥(fieldI F) ⧸ P.P ^ 1))
+hcard0 : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) = Nat.card ↥k₀ ^ 2
+hk₀def : k₀ = σ.eqLocusField (RingHom.id (𝓞 ↥(fieldI F) ⧸ P.P ^ 1))
+⊢ (fun a => a ^ 2) (Nat.card ↥k₀) = (fun a => a ^ 2) p
+data/fs131/ics1/work/SqrtTwentyThreeCbrtTwo.lean:72:15: error(lean.unknownIdentifier): Unknown constant `SubfieldClass.coe_pow`
+data/fs131/ics1/work/SqrtTwentyThreeCbrtTwo.lean:72:38: error(lean.unknownIdentifier): Unknown constant `SubfieldClass.coe_natCast`
+data/fs131/ics1/work/SqrtTwentyThreeCbrtTwo.lean:73:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑?r ^ ?n
+in the target expression
+  ↑(⟨↑↑t, ⋯⟩ ^ k) = ↑↑a
+
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+P : StablePrime F
+h2 : 2 ∉ P.P
+p k a : ℕ
+hp : Nat.Prime p
+ha : ∀ (y : ZMod p), y ^ k ≠ ↑a
+hcard : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P) = p ^ 2
+t : ↥F
+ht : t ^ k = ↑a
+hk : k ≠ 0
+hmax : (P.P ^ 1).IsMaximal
+this✝ : Field (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := Ideal.Quotient.field (P.P ^ 1)
+this : Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+σ : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 →+* 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := Ideal.quotientMap (P.P ^ 1) (conjO F) ⋯
+hσdef : σ = Ideal.quotientMap (P.P ^ 1) (conjO F) ⋯
+hσmk : ∀ (x : 𝓞 ↥(fieldI F)), σ ((Ideal.Quotient.mk (P.P ^ 1)) x) = (Ideal.Quotient.mk (P.P ^ 1)) ((conjO F) x)
+hσ : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), σ (σ x) = x
+i : 𝓞 ↥(fieldI F)
+hi2 : i ^ 2 = -1
+hci : (conjO F) i = -i
+h2k : 2 ≠ 0
+ι : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := (Ideal.Quotient.mk (P.P ^ 1)) i
+hιdef : ι = (Ideal.Quotient.mk (P.P ^ 1)) i
+hι : ι ^ 2 = -1
+hσι : σ ι = -ι
+k₀ : Subfield (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := σ.eqLocusField (RingHom.id (𝓞 ↥(fieldI F) ⧸ P.P ^ 1))
+hcard0 : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) = Nat.card ↥k₀ ^ 2
+hk₀def : k₀ = σ.eqLocusField (RingHom.id (𝓞 ↥(fieldI F) ⧸ P.P ^ 1))
+hk₀ : Nat.card ↥k₀ = p
+e : ↥k₀ ≃+* ZMod p
+tL : ↥(fieldI F) := ⟨↑↑t, ⋯⟩
+⊢ ↑(⟨↑↑t, ⋯⟩ ^ k) = ↑↑a
+
+Note: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    ⟨of_eq_true (SetLike.coe_mem._simp_1 t), of_eq_true (ZeroMemClass.zero_mem._simp_1 F)⟩
+  has type
+    (↑↑t).re ∈ F ∧ (↑↑t).im ∈ F
+  but is expected to have type
+    ↑↑t ∈ fieldI F
+  in the application
+    ⟨↑↑t, ⋯⟩
+data/fs131/ics1/work/SqrtTwentyThreeCbrtTwo.lean:78:41: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑((conjO ?m.633) ?a)
+in the target expression
+  (algebraMap (𝓞 ↥(fieldI F)) ↥(fieldI F)) ((conjO F) tO) = (algebraMap (𝓞 ↥(fieldI F)) ↥(fieldI F)) tO
+
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+P : StablePrime F
+h2 : 2 ∉ P.P
+p k a : ℕ
+hp : Nat.Prime p
+ha : ∀ (y : ZMod p), y ^ k ≠ ↑a
+hcard : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P) = p ^ 2
+t : ↥F
+ht : t ^ k = ↑a
+hk : k ≠ 0
+hmax : (P.P ^ 1).IsMaximal
+this✝ : Field (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := Ideal.Quotient.field (P.P ^ 1)
+this : Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+σ : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 →+* 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := Ideal.quotientMap (P.P ^ 1) (conjO F) ⋯
+hσdef : σ = Ideal.quotientMap (P.P ^ 1) (conjO F) ⋯
+hσmk : ∀ (x : 𝓞 ↥(fieldI F)), σ ((Ideal.Quotient.mk (P.P ^ 1)) x) = (Ideal.Quotient.mk (P.P ^ 1)) ((conjO F) x)
+hσ : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), σ (σ x) = x
+i : 𝓞 ↥(fieldI F)
+hi2 : i ^ 2 = -1
+hci : (conjO F) i = -i
+h2k : 2 ≠ 0
+ι : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := (Ideal.Quotient.mk (P.P ^ 1)) i
+hιdef : ι = (Ideal.Quotient.mk (P.P ^ 1)) i
+hι : ι ^ 2 = -1
+hσι : σ ι = -ι
+k₀ : Subfield (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := σ.eqLocusField (RingHom.id (𝓞 ↥(fieldI F) ⧸ P.P ^ 1))
+hcard0 : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) = Nat.card ↥k₀ ^ 2
+hk₀def : k₀ = σ.eqLocusField (RingHom.id (𝓞 ↥(fieldI F) ⧸ P.P ^ 1))
+hk₀ : Nat.card ↥k₀ = p
+e : ↥k₀ ≃+* ZMod p
+tL : ↥(fieldI F) := ⟨↑↑t, ⋯⟩
+htL : tL ^ k = ↑a
+hint : IsIntegral ℤ tL
+tO : 𝓞 ↥(fieldI F) := ⟨tL, hint⟩
+htO : tO ^ k = ↑a
+⊢ (algebraMap (𝓞 ↥(fieldI F)) ↥(fieldI F)) ((conjO F) tO) = (algebraMap (𝓞 ↥(fieldI F)) ↥(fieldI F)) tO
+data/fs131/ics1/work/SqrtTwentyThreeCbrtTwo.lean:83:8: error(lean.unknownIdentifier): Unknown constant `SubfieldClass.coe_pow`
+data/fs131/ics1/work/SqrtTwentyThreeCbrtTwo.lean:82:59: error: unsolved goals
+F : Subfield ℝ
+inst✝ : NumberField ↥F
+P : StablePrime F
+h2 : 2 ∉ P.P
+p k a : ℕ
+hp : Nat.Prime p
+ha : ∀ (y : ZMod p), y ^ k ≠ ↑a
+hcard : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P) = p ^ 2
+t : ↥F
+ht : t ^ k = ↑a
+hk : k ≠ 0
+hmax : (P.P ^ 1).IsMaximal
+this✝ : Field (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := Ideal.Quotient.field (P.P ^ 1)
+this : Finite (𝓞 ↥(fieldI F) ⧸ P.P ^ 1)
+σ : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 →+* 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := Ideal.quotientMap (P.P ^ 1) (conjO F) ⋯
+hσdef : σ = Ideal.quotientMap (P.P ^ 1) (conjO F) ⋯
+hσmk : ∀ (x : 𝓞 ↥(fieldI F)), σ ((Ideal.Quotient.mk (P.P ^ 1)) x) = (Ideal.Quotient.mk (P.P ^ 1)) ((conjO F) x)
+hσ : ∀ (x : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1), σ (σ x) = x
+i : 𝓞 ↥(fieldI F)
+hi2 : i ^ 2 = -1
+hci : (conjO F) i = -i
+h2k : 2 ≠ 0
+ι : 𝓞 ↥(fieldI F) ⧸ P.P ^ 1 := (Ideal.Quotient.mk (P.P ^ 1)) i
+hιdef : ι = (Ideal.Quotient.mk (P.P ^ 1)) i
+hι : ι ^ 2 = -1
+hσι : σ ι = -ι
+k₀ : Subfield (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) := σ.eqLocusField (RingHom.id (𝓞 ↥(fieldI F) ⧸ P.P ^ 1))
+hcard0 : Nat.card (𝓞 ↥(fieldI F) ⧸ P.P ^ 1) = Nat.card ↥k₀ ^ 2
+hk₀def : k₀ = σ.eqLocusField (RingHom.id (𝓞 ↥(fieldI F) ⧸ P.P ^ 1))
+hk₀ : Nat.card ↥k₀ = p
+e : ↥k₀ ≃+* ZMod p
+tL : ↥(fieldI F) := ⟨↑↑t, ⋯⟩
+htL : tL ^ k = ↑a
+hint : IsIntegral ℤ tL
+tO : 𝓞 ↥(fieldI F) := ⟨tL, hint⟩
+htO : tO ^ k = ↑a
+hcO : (conjO F) tO = tO
+hx : (Ideal.Quotient.mk (P.P ^ 1)) tO ∈ k₀
+⊢ ↑(⟨(Ideal.Quotient.mk (P.P ^ 1)) tO, hx⟩ ^ k) = ↑↑a
+data/fs131/ics1/work/SqrtTwentyThreeCbrtTwo.lean:140:23: error: unsolved goals
+L : Type u_1
+inst✝¹ : Field L
+inst✝ : CharZero L
+y s : L
+hy : y ^ 3 = 2
+hs : s ^ 2 = 23
+hyroot : y ∈ (minpoly ℚ cbrtTwo).aroots L
+φ₀ : ↥ℚ⟮cbrtTwo⟯ →ₐ[ℚ] L := (algHomAdjoinIntegralEquiv ℚ isIntegral_cbrtTwo).symm ⟨y, hyroot⟩
+hφ₀ : φ₀ (AdjoinSimple.gen ℚ cbrtTwo) = y
+this : Algebra (↥ℚ⟮cbrtTwo⟯) L := φ₀.toAlgebra
+hi : IsIntegral ℚ √23
+⊢ 23 - ↑23 = 0
+data/fs131/ics1/work/SqrtTwentyThreeCbrtTwo.lean:205:87: error: unsolved goals
+⊢ 0 ≤ ↑23
+data/fs131/ics1/work/SqrtTwentyThreeCbrtTwo.lean:232:95: error: Expected type must not contain free variables
+  ↑23 ≠ 0
+
+Hint: Use the `+revert` option to automatically clean up and revert free variables
+data/fs131/ics1/work/SqrtTwentyThreeCbrtTwo.lean:232:110: error: Expected type must not contain free variables
+  ↑23 = 1 * 1
+
+Hint: Use the `+revert` option to automatically clean up and revert free variables
+
+real	0m8.571s
+user	0m10.946s
+sys	0m0.949s

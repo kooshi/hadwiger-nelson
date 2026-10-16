@@ -1,0 +1,3 @@
+HEAD=85292ab3824456c4ce5787348f2d360b087c4dab start=2026-10-16T19:27:40Z
+slot: waiting (ledger 16 + 8 > budget 22 GiB; 3 free CPUs < 4)
+exit=143 end=2026-10-16T19:29:35Z

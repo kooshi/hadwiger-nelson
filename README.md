@@ -80,8 +80,15 @@ $\mathbb{Q}(\sqrt3, \sqrt5)$, and $\chi(\mathbb{Q}(\sqrt{167})^2) \ge 5$.
 - **Prior art** for the lower bound: not found in print (`LEDGER.md` rows 121 and 123).
 - **Not claimed.** An explicit five-chromatic graph; anything about six colours; more than $\ge 5$ at
   $\mathbb{Q}(\sqrt{167})$, where this project's conjecture predicts at least six.
-- **By hand, not yet in Lean.** $\chi = 5$ for every squarefree $d \equiv 47, 143, 167 \pmod{168}$ with
-  $L(\mathbb{Q}(\sqrt d)) = 5$: 44 of the 52 such $d$ below 3000.
+- **Every real quadratic field, also in Lean.** For squarefree $m$, $\chi(\mathbb{Q}(\sqrt m)^2) \ge 5$ exactly when
+  $m \equiv 47, 143, 167 \pmod{168}$, and $\chi = 5$ at every such $m$ that is a square modulo 11 or modulo 19 (44 of the 52
+  such $m$ below 3000; at the other eight the exact value is open). So the table in [row
+  4](#4-real-quadratic-fields-that-need-four-colours) is complete up to five colours. Also $\chi = 5$ for
+  $\mathbb{Q}(\sqrt{23}, \sqrt[3]{2})$, a field that is not totally real, and a classification of the primes whose finite
+  graphs allow four colours. Lean + W + EL; the classification, Lean + W.
+- **Prior art for the classification:** not found in print as a classification. For real quadratic fields the sufficient
+  condition is Moorhouse's (2010, Theorem 8.1) with Fischer's (1990, Theorem 10(i)); the values of the small finite planes are
+  Moorhouse's (Table 6.1); the even-characteristic targets and their threshold are this project's.
 
 ### 2. The chromatic number of a number field's plane, up to five
 
@@ -147,7 +154,7 @@ for real quadratic fields up to four colours (in Lean as one theorem):
 | $m \not\equiv 3 \bmod 4$ | 2 |
 | $m \equiv 3, 7 \bmod 12$ | 3 |
 | $m \equiv 11 \bmod 12$, except the next row | 4 |
-| $m \equiv 47, 143, 167 \bmod 168$ | $\ge 4$ ([row 1](#1-fields-that-need-exactly-five-colours)) |
+| $m \equiv 47, 143, 167 \bmod 168$ | $\ge 5$ ([row 1](#1-fields-that-need-exactly-five-colours)) |
 
 - **Why it matters.** Johnson (2006, p. 214) asked: "does there exist a positive integer m such that χ(G(ℚ²(√m), 1)) ≥ 4?".
   Yes: $m = 11$, and every $m \equiv 11 \pmod{12}$. Johnson (2000, p. 176) had called this family open, and Benda and
@@ -289,8 +296,7 @@ subgroup of finite index). Periodic 3-colourings are dense among all 3-colouring
   group with finitely many steps, and density for every finite generating set, torsion allowed. The clause about which
   colourings are rigid is in Lean too; the statement about the cells of the set of such $\theta$ is proved by hand only.
 - **Prior art.** The lift of a 3-colouring to integer heights is Chandgotia's device; density at the standard generators is
-  expected folklore and is not claimed. The criterion for arbitrary generating sets: not found in print (`LEDGER.md` row 79); for the wider class the Lean
-  proof covers, prior art not yet searched.
+  expected folklore and is not claimed. The criterion for arbitrary generating sets: not found in print (`LEDGER.md` row 79); for the wider class the Lean proof covers, not found in print either; two consequences of it are in print — Payan (1992: no Cayley graph on $(\mathbb{Z}/2)^m$ needs exactly three colours) and Krebs and Sankar (2026, Theorem 1.2: none on an abelian group of exponent 1, 2 or 4 does), which follow because such a group's characters meet $[1/3, 2/3]$ only at $1/2$.
   Not read: the rest of two of those papers' reference lists, and the literature on homomorphism shifts with non-standard
   generating sets beyond the queries run.
 

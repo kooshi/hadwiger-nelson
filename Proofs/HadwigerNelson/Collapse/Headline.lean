@@ -26,6 +26,11 @@ are all 6-thick (`λ*_v < 1/5` at every level, both signs; `N₆(F) = ∅` …),
 * `chromaticNumber_planeOver_deGrey` — **`χ(ℚ(√3, √5, √7, √11)²) = χ(ℝ²)`**, the same way above `131` (`2√131/132 = 0.1734…`).
 * `chromaticNumber_planeOver_sqrt635087_six_or_seven` — with `[OAIMath2026]`'s `6 ≤ χ(ℝ²)` (the declared import
   `Outside.OAI158.no_proper_five_coloring`): `χ(ℚ(√635087)²) ∈ {6, 7}` — rung D over one real quadratic field.
+  Its halves are `six_le_chromaticNumber_planeOver_sqrt635087` and `chromaticNumber_planeOver_sqrt635087_le_seven`
+  (FS131-IFR1, inventory item 1005 (1), placed here by the coordinator's ruling, item 1021).
+* `exists_model_seven` — **a model of `chromaticNumber_plane_le_of_thick`'s joint hypotheses at `k = 7`** (item 1005 (2)):
+  `ℚ(√d₇)`, `d₇` a non-residue modulo the eighteen primes `p ≡ 3 (mod 4)` below `142` and `≡ 7 (mod 8)`, is uniformly
+  `2√142/143`-thick, below `1/6`, and the plane's seven-colouring restricts to it.
 
 **What it rests on**: the standard three axioms, `Rigidity.positive_entropy_rigidity` (`[EinsiedlerLindenstrauss2022]`
 Thm 1.3, through `mrPlus`) and `StandingFive.kloosterman_bound` (`[Weil1948]`, through thickness); the six-or-seven corollary
@@ -167,6 +172,69 @@ theorem chromaticNumber_planeOver_sqrt635087_six_or_seven :
   rw [chromaticNumber_planeOver_sqrt635087, ← chromaticNumber_plane_eq_complex]
   exact Outside.OAI158.chromaticNumber_plane_six_or_seven
 
+/-- **Item 1005 (1), first split**: `6 ≤ χ(ℚ(√635087)²)`. -/
+theorem six_le_chromaticNumber_planeOver_sqrt635087 :
+    6 ≤ ((unitDistance ℂ).induce (planeOver F635087)).chromaticNumber :=
+  chromaticNumber_planeOver_sqrt635087_six_or_seven.1
+
+/-- **Item 1005 (1), second split**: `χ(ℚ(√635087)²) ≤ 7`. -/
+theorem chromaticNumber_planeOver_sqrt635087_le_seven :
+    ((unitDistance ℂ).induce (planeOver F635087)).chromaticNumber ≤ 7 :=
+  chromaticNumber_planeOver_sqrt635087_six_or_seven.2
+
+/-! ## Item 1005 (2): the model at `k = 7` -/
+
+/-- **`d₇`**: `≡ 7 (mod 8)` and a quadratic non-residue modulo each of the eighteen primes `p ≡ 3 (mod 4)` below `142`, by
+the Chinese remainder theorem (`data/fs131/kfr1/d7_crt.py`: the formula and its check). -/
+def d7 : ℕ := 1033204869123838804565816643023
+
+/-- `ℚ(√d₇)`. -/
+noncomputable abbrev F7 : Subfield ℝ := SquareClass.fieldOfRadicands {d7}
+
+-- FS131-IFR1: `d₇` is a square in `ℚ(√d₇)`.
+private theorem isSquare_d7 : IsSquare ((d7 : ℕ) : F7) :=
+  ⟨⟨Real.sqrt (d7 : ℕ), SquareClass.sqrt_mem_fieldOfRadicands rfl⟩,
+    Subtype.ext (by push_cast; exact (Real.mul_self_sqrt (Nat.cast_nonneg _)).symm)⟩
+
+-- FS131-IFR1: **the eighteen small inert primes**: a prime `p ≡ 3 (mod 4)` modulo which `d₇` is a square is at least `142`
+-- (`decide +kernel` at each of `3, 7, 11, 19, 23, 31, 43, 47, 59, 67, 71, 79, 83, 103, 107, 127, 131, 139`).
+private theorem le_of_isSquare_d7 {p : ℕ} (hp : p.Prime) (hp4 : p % 4 = 3) (hsq : IsSquare ((d7 : ℕ) : ZMod p)) :
+    142 ≤ p := by
+  by_contra hlt
+  have hlt : p < 142 := not_le.mp hlt
+  interval_cases p <;> first | omega | (norm_num at hp; done) | exact absurd hsq (by decide +kernel)
+
+/-- Every stable prime of `ℚ(√d₇, i)` lies above a prime `p ≡ 3 (mod 4)` with `p ≥ 142`, none above `2`. -/
+theorem stablePrime_F7 (P : StablePrime F7) :
+    (2 : 𝓞 (fieldI F7)) ∉ P.P ∧ ∃ Q : ℕ, 142 ≤ Q ∧ Nat.card (𝓞 (fieldI F7) ⧸ P.P) = Q ^ 2 := by
+  have h2 := Rigidity.two_notMem_of_isSquare P isSquare_d7 (by decide)
+  obtain ⟨p, n, hp, hp4, hn, -, hcard, hsq⟩ := Rigidity.stablePrime_card_of_two_notMem P h2
+  refine ⟨h2, p ^ n, ?_, hcard⟩
+  have h142 := le_of_isSquare_d7 hp hp4 (hsq d7 isSquare_d7)
+  have hn0 : n ≠ 0 := by obtain ⟨j, rfl⟩ := hn; omega
+  exact h142.trans (Nat.le_self_pow hn0 p)
+
+/-- `2√142/143 < 1/6` (`142 · 144 < 143²`). -/
+theorem weil_142_lt_sixth : 2 * Real.sqrt ((142 : ℕ) : ℝ) / (((142 : ℕ) : ℝ) + 1) < 1 / 6 := by
+  have h : Real.sqrt ((142 : ℕ) : ℝ) < 143 / 12 := by
+    rw [Real.sqrt_lt' (by norm_num)]
+    norm_num
+  rw [div_lt_iff₀ (by positivity)]
+  push_cast at h ⊢
+  linarith
+
+/-- **The model at `k = 7`**: `ℚ(√d₇)` with the plane's seven-colouring inhabits the joint hypotheses of
+`chromaticNumber_plane_le_of_thick` (and of `exists_aeColouring_of_slice` through `exists_slice_of_colorable`). -/
+theorem exists_model_seven : ∃ c : ℝ, Thick F7 c ∧ 0 ≤ c ∧ c * ((7 : ℕ) - 1 : ℝ) < 1 ∧
+    ((unitDistance ℂ).induce (planeOver F7)).Colorable 7 := by
+  refine ⟨2 * Real.sqrt ((142 : ℕ) : ℝ) / (((142 : ℕ) : ℝ) + 1), thick_of_card (by norm_num) stablePrime_F7,
+    by positivity, ?_, ?_⟩
+  · have h := weil_142_lt_sixth
+    push_cast at h ⊢
+    linarith
+  · exact (chromaticNumber_le_iff_colorable.mp Bridge.chromaticNumber_complex_le_seven).of_hom
+      (Embedding.induce _).toHom
+
 /-! ## De Grey's field -/
 
 /-- **De Grey's field** `ℚ(√3, √5, √7, √11)`, the field of the coordinates of his graph (`CLAUDE.md` G43). -/
@@ -241,6 +309,12 @@ example : ¬ IsSquare ((635087 : ℕ) : ZMod 3) ∧ ¬ IsSquare ((635087 : ℕ) 
 
 -- and a square modulo `103`, the first stable residue characteristic.
 example : IsSquare ((635087 : ℕ) : ZMod 103) := by decide
+
+-- `d₇`'s residues: `7` modulo `8`, a non-square modulo `3` and modulo `139`, the first and last of the eighteen primes
+example : d7 % 8 = 7 ∧ ¬ IsSquare ((d7 : ℕ) : ZMod 3) ∧ ¬ IsSquare ((d7 : ℕ) : ZMod 139) := by decide +kernel
+
+-- `ℚ(√d₇)` is the field of the one radicand
+example : F7 = SquareClass.fieldOfRadicands {d7} := rfl
 
 end
 

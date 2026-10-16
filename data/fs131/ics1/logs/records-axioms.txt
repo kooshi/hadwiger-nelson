@@ -1,0 +1,56 @@
+ClassRatio CertLink.exists_fibreShareBound_nineteen std3 
+ClassRatio Rigidity.chromaticNumber_le_four_dyadic std3 
+ClassRatio Rigidity.chromaticNumber_le_four_of_small std3 
+ClassRatio Rigidity.exists_card_two_pow_sq std3 
+ClassRatio Rigidity.exists_uniform_tail std3 + W 
+ClassRatio Rigidity.henselCount_of_two_notMem std3 
+ClassRatio Rigidity.newCharBound_of_two_notMem std3 
+ClassRatio Rigidity.norm_charSum_le_weil std3 + W 
+ClassRatio Rigidity.ratioAtMost_dyadic_of_six_le std3 
+ClassRatio Rigidity.ratioAtMost_of_five_le_chromaticNumber std3 + W 
+ClassRatio Rigidity.ratioAtMost_of_two_notMem std3 + W 
+ClassRatio Rigidity.RatioAtMost std3 
+ClassRatio Rigidity.tca_iff std3 
+ClassRatio Rigidity.tca_of_five_le_localBound std3 + W 
+ClassRatio Rigidity.tca_uniform std3 + W 
+FourColourPlaces Rigidity.chromaticNumber_planeOver_le_localBoundAllLevels std3 
+FourColourPlaces Rigidity.colorable_four_levelTarget_one_iff std3 + W 
+FourColourPlaces Rigidity.colorable_four_levelTarget_one_of_isFourColourPlace std3 
+FourColourPlaces Rigidity.exists_isFourColourPlace_rat std3 
+FourColourPlaces Rigidity.exists_ratioAtMost_lt_quarter_iff std3 + W 
+FourColourPlaces Rigidity.exists_ratioAtMost_of_not_isFourColourPlace std3 + W 
+FourColourPlaces Rigidity.five_le_chromaticNumber_levelTarget_of_ratioAtMost std3 
+FourColourPlaces Rigidity.five_le_chromaticNumber_levelTarget_one_iff std3 + W 
+FourColourPlaces Rigidity.five_le_localBoundAllLevels_iff std3 + W 
+FourColourPlaces Rigidity.five_le_localBound_iff std3 + W 
+FourColourPlaces Rigidity.IsFourColourPlace std3 
+FourColourPlaces Rigidity.localBoundAllLevels_le_localBound std3 
+FourColourPlaces Rigidity.localBoundAllLevels std3 
+FourColourPlaces Rigidity.min_localBoundAllLevels_five std3 + EL + W 
+FourColourPlaces Rigidity.tca_iff_forall_not_isFourColourPlace std3 + W 
+SqrtFiveClass SqrtFiveClass.chromaticNumber_planeOver_sqrt_eq_five std3 + EL + W 
+SqrtFiveClass SqrtFiveClass.colorable_five_planeOver_sqrt std3 
+SqrtFiveClass SqrtFiveClass.exists_maximal_card_eq_of_isSquare std3 
+SqrtFiveClass SqrtFiveClass.five_le_chromaticNumber_planeOver_sqrt_iff std3 + EL + W 
+SqrtFiveClass SqrtFiveClass.five_le_localBound_sqrt_iff std3 + EL + W 
+SqrtFiveClass SqrtFiveClass.localBound_sqrt_eq_five std3 + EL + W 
+SqrtFiveClass SqrtFiveClass.localBound_sqrt_le_five std3 
+SqrtTwentyThreeCbrtTwo SqrtTwentyThreeCbrtTwo.card_ne_sq_of_pow_eq std3 
+SqrtTwentyThreeCbrtTwo SqrtTwentyThreeCbrtTwo.cbrtTwo_pow_three std3 
+SqrtTwentyThreeCbrtTwo SqrtTwentyThreeCbrtTwo.cbrtTwo std3 
+SqrtTwentyThreeCbrtTwo SqrtTwentyThreeCbrtTwo.chromaticNumber_planeOver_sqrt23_cbrt2_eq_five std3 + EL + W 
+SqrtTwentyThreeCbrtTwo SqrtTwentyThreeCbrtTwo.exists_cube_two std3 
+SqrtTwentyThreeCbrtTwo SqrtTwentyThreeCbrtTwo.exists_usablePrime_eleven_F23 std3 
+SqrtTwentyThreeCbrtTwo SqrtTwentyThreeCbrtTwo.F23 std3 
+SqrtTwentyThreeCbrtTwo SqrtTwentyThreeCbrtTwo.five_le_localBound_sqrt23_cbrt2 std3 + W 
+SqrtTwentyThreeCbrtTwo SqrtTwentyThreeCbrtTwo.instNumberFieldSubtypeRealMemSubfieldF23 std3 
+SqrtTwentyThreeCbrtTwo SqrtTwentyThreeCbrtTwo.isSquare_twentyThree std3 
+SqrtTwentyThreeCbrtTwo SqrtTwentyThreeCbrtTwo.localBound_sqrt23_cbrt2_eq_five std3 + W 
+SqrtTwentyThreeCbrtTwo SqrtTwentyThreeCbrtTwo.localBound_sqrt23_eq_four std3 + EL + W 
+SqrtTwentyThreeCbrtTwo SqrtTwentyThreeCbrtTwo.nonempty_ringHom_padic_eleven_F23 std3 
+SqrtTwentyThreeCbrtTwo SqrtTwentyThreeCbrtTwo.not_isTotallyReal_F23 std3 
+SqrtTwentyThreeCbrtTwo SqrtTwentyThreeCbrtTwo.numberField_F23 std3 
+StableAboveUsable UpperHalf.exists_stablePrime_card_eq_sq std3 
+StableAboveUsable UpperHalf.localBound_le_finitePlane std3 
+StableAboveUsable UpperHalf.localBound_le_unitQuadrance std3 
+StableAboveUsable UpperHalf.nonempty_hom_levelTarget_one_unitQuadrance std3 

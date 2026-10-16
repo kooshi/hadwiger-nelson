@@ -1,0 +1,832 @@
+slot: admitted env: mem 8 GiB (hard cap), cpus 0,1,2,3
+==> build: this run's full output: build/gate/build/20261016T174229Z-4077589.log
+==> up-to-date check: exit 3 after 4s (3 means something needs building) — walking the batches
+==> 738 batches of at most 3 modules, capped at 8G
+==> [1/738] 3 modules  17:42:33
+==> [2/738] 3 modules  17:42:34
+==> [3/738] 3 modules  17:42:35
+==> [4/738] 3 modules  17:42:37
+==> [5/738] 3 modules  17:42:38
+==> [6/738] 3 modules  17:42:38
+==> [7/738] 3 modules  17:42:39
+==> [8/738] 3 modules  17:42:41
+==> [9/738] 3 modules  17:42:42
+==> [10/738] 3 modules  17:42:43
+==> [11/738] 3 modules  17:42:44
+==> [12/738] 3 modules  17:42:45
+==> [13/738] 3 modules  17:42:47
+==> [14/738] 3 modules  17:42:48
+==> [15/738] 3 modules  17:42:49
+==> [16/738] 3 modules  17:42:50
+==> [17/738] 3 modules  17:42:50
+==> [18/738] 3 modules  17:42:51
+==> [19/738] 3 modules  17:42:51
+==> [20/738] 3 modules  17:42:52
+==> [21/738] 3 modules  17:42:52
+==> [22/738] 3 modules  17:42:53
+==> [23/738] 3 modules  17:42:54
+==> [24/738] 3 modules  17:42:54
+==> [25/738] 3 modules  17:42:55
+==> [26/738] 3 modules  17:42:55
+==> [27/738] 3 modules  17:42:56
+==> [28/738] 3 modules  17:42:56
+==> [29/738] 3 modules  17:42:57
+==> [30/738] 3 modules  17:42:57
+==> [31/738] 3 modules  17:42:58
+==> [32/738] 3 modules  17:43:00
+==> [33/738] 3 modules  17:43:01
+==> [34/738] 3 modules  17:43:02
+==> [35/738] 3 modules  17:43:03
+==> [36/738] 3 modules  17:43:05
+==> [37/738] 3 modules  17:43:06
+==> [38/738] 1 modules  17:43:07
+==> [39/738] 3 modules  17:43:08
+==> [40/738] 3 modules  17:43:09
+==> [41/738] 3 modules  17:43:10
+==> [42/738] 3 modules  17:43:10
+==> [43/738] 3 modules  17:43:11
+==> [44/738] 3 modules  17:43:12
+==> [45/738] 3 modules  17:43:12
+==> [46/738] 3 modules  17:43:13
+==> [47/738] 3 modules  17:43:13
+==> [48/738] 3 modules  17:43:14
+==> [49/738] 3 modules  17:43:14
+==> [50/738] 3 modules  17:43:15
+==> [51/738] 3 modules  17:43:15
+==> [52/738] 3 modules  17:43:16
+==> [53/738] 3 modules  17:43:17
+==> [54/738] 3 modules  17:43:17
+==> [55/738] 3 modules  17:43:18
+==> [56/738] 3 modules  17:43:19
+==> [57/738] 3 modules  17:43:19
+==> [58/738] 3 modules  17:43:20
+==> [59/738] 3 modules  17:43:21
+==> [60/738] 3 modules  17:43:21
+==> [61/738] 3 modules  17:43:22
+==> [62/738] 3 modules  17:43:22
+==> [63/738] 3 modules  17:43:23
+==> [64/738] 3 modules  17:43:24
+==> [65/738] 3 modules  17:43:24
+==> [66/738] 3 modules  17:43:25
+==> [67/738] 3 modules  17:43:26
+==> [68/738] 3 modules  17:43:27
+==> [69/738] 3 modules  17:43:28
+==> [70/738] 3 modules  17:43:28
+==> [71/738] 3 modules  17:43:29
+==> [72/738] 3 modules  17:43:29
+==> [73/738] 3 modules  17:43:30
+==> [74/738] 3 modules  17:43:30
+==> [75/738] 3 modules  17:43:31
+==> [76/738] 3 modules  17:43:31
+==> [77/738] 3 modules  17:43:32
+==> [78/738] 3 modules  17:43:32
+==> [79/738] 3 modules  17:43:33
+==> [80/738] 3 modules  17:43:34
+==> [81/738] 3 modules  17:43:34
+==> [82/738] 3 modules  17:43:35
+==> [83/738] 3 modules  17:43:35
+==> [84/738] 3 modules  17:43:36
+==> [85/738] 3 modules  17:43:37
+==> [86/738] 3 modules  17:43:37
+==> [87/738] 3 modules  17:43:38
+==> [88/738] 3 modules  17:43:38
+==> [89/738] 3 modules  17:43:39
+==> [90/738] 3 modules  17:43:39
+==> [91/738] 3 modules  17:43:41
+==> [92/738] 2 modules  17:43:42
+==> [93/738] 3 modules  17:43:42
+==> [94/738] 3 modules  17:43:43
+==> [95/738] 3 modules  17:43:45
+==> [96/738] 3 modules  17:43:46
+==> [97/738] 3 modules  17:43:47
+==> [98/738] 3 modules  17:43:48
+==> [99/738] 3 modules  17:43:49
+==> [100/738] 3 modules  17:43:50
+==> [101/738] 3 modules  17:43:51
+==> [102/738] 3 modules  17:43:52
+==> [103/738] 2 modules  17:43:54
+==> [104/738] 3 modules  17:43:55
+==> [105/738] 3 modules  17:43:56
+==> [106/738] 3 modules  17:43:57
+==> [107/738] 3 modules  17:43:58
+==> [108/738] 3 modules  17:43:59
+==> [109/738] 3 modules  17:44:00
+==> [110/738] 3 modules  17:44:01
+==> [111/738] 3 modules  17:44:02
+==> [112/738] 3 modules  17:44:02
+==> [113/738] 3 modules  17:44:04
+==> [114/738] 3 modules  17:44:05
+==> [115/738] 3 modules  17:44:06
+==> [116/738] 2 modules  17:44:07
+==> [117/738] 3 modules  17:44:08
+==> [118/738] 3 modules  17:44:09
+==> [119/738] 3 modules  17:44:10
+==> [120/738] 3 modules  17:44:11
+==> [121/738] 3 modules  17:44:13
+==> [122/738] 3 modules  17:44:14
+==> [123/738] 3 modules  17:44:15
+==> [124/738] 3 modules  17:44:16
+==> [125/738] 3 modules  17:44:17
+==> [126/738] 3 modules  17:44:18
+==> [127/738] 3 modules  17:44:20
+==> [128/738] 2 modules  17:44:21
+==> [129/738] 3 modules  17:44:22
+==> [130/738] 3 modules  17:44:23
+==> [131/738] 3 modules  17:44:24
+==> [132/738] 3 modules  17:44:25
+==> [133/738] 3 modules  17:44:26
+==> [134/738] 3 modules  17:44:27
+==> [135/738] 3 modules  17:44:28
+==> [136/738] 3 modules  17:44:29
+==> [137/738] 3 modules  17:44:30
+==> [138/738] 3 modules  17:44:32
+==> [139/738] 3 modules  17:44:33
+==> [140/738] 3 modules  17:44:34
+==> [141/738] 3 modules  17:44:36
+==> [142/738] 3 modules  17:44:37
+==> [143/738] 3 modules  17:44:38
+==> [144/738] 3 modules  17:44:39
+==> [145/738] 3 modules  17:44:40
+==> [146/738] 3 modules  17:44:41
+==> [147/738] 3 modules  17:44:42
+==> [148/738] 3 modules  17:44:43
+==> [149/738] 3 modules  17:44:44
+==> [150/738] 3 modules  17:44:45
+==> [151/738] 3 modules  17:44:46
+==> [152/738] 3 modules  17:44:47
+==> [153/738] 3 modules  17:44:48
+==> [154/738] 3 modules  17:44:50
+==> [155/738] 3 modules  17:44:51
+==> [156/738] 3 modules  17:44:52
+==> [157/738] 3 modules  17:44:54
+==> [158/738] 3 modules  17:44:55
+==> [159/738] 3 modules  17:44:56
+==> [160/738] 3 modules  17:44:58
+==> [161/738] 3 modules  17:44:59
+==> [162/738] 3 modules  17:45:00
+==> [163/738] 3 modules  17:45:02
+==> [164/738] 3 modules  17:45:03
+==> [165/738] 3 modules  17:45:04
+==> [166/738] 3 modules  17:45:06
+==> [167/738] 3 modules  17:45:07
+==> [168/738] 3 modules  17:45:08
+==> [169/738] 3 modules  17:45:10
+==> [170/738] 3 modules  17:45:11
+==> [171/738] 3 modules  17:45:12
+==> [172/738] 3 modules  17:45:14
+==> [173/738] 3 modules  17:45:15
+==> [174/738] 3 modules  17:45:16
+==> [175/738] 3 modules  17:45:18
+==> [176/738] 3 modules  17:45:19
+==> [177/738] 3 modules  17:45:20
+==> [178/738] 3 modules  17:45:21
+==> [179/738] 3 modules  17:45:23
+==> [180/738] 3 modules  17:45:24
+==> [181/738] 3 modules  17:45:25
+==> [182/738] 3 modules  17:45:26
+==> [183/738] 3 modules  17:45:28
+==> [184/738] 3 modules  17:45:29
+==> [185/738] 3 modules  17:45:31
+==> [186/738] 3 modules  17:45:32
+==> [187/738] 3 modules  17:45:34
+==> [188/738] 3 modules  17:45:35
+==> [189/738] 3 modules  17:45:37
+==> [190/738] 3 modules  17:45:38
+==> [191/738] 3 modules  17:45:39
+==> [192/738] 3 modules  17:45:41
+==> [193/738] 3 modules  17:45:42
+==> [194/738] 3 modules  17:45:43
+==> [195/738] 3 modules  17:45:43
+==> [196/738] 3 modules  17:45:44
+==> [197/738] 3 modules  17:45:45
+==> [198/738] 3 modules  17:45:46
+==> [199/738] 3 modules  17:45:48
+==> [200/738] 3 modules  17:45:49
+==> [201/738] 2 modules  17:45:50
+==> [202/738] 3 modules  17:45:52
+==> [203/738] 3 modules  17:45:53
+==> [204/738] 3 modules  17:45:54
+==> [205/738] 3 modules  17:45:55
+==> [206/738] 3 modules  17:45:57
+==> [207/738] 3 modules  17:45:59
+==> [208/738] 3 modules  17:46:01
+==> [209/738] 3 modules  17:46:03
+==> [210/738] 3 modules  17:46:05
+==> [211/738] 3 modules  17:46:07
+==> [212/738] 3 modules  17:46:09
+==> [213/738] 3 modules  17:46:11
+==> [214/738] 3 modules  17:46:13
+==> [215/738] 3 modules  17:46:15
+==> [216/738] 3 modules  17:46:17
+==> [217/738] 3 modules  17:46:19
+==> [218/738] 3 modules  17:46:21
+==> [219/738] 3 modules  17:46:22
+==> [220/738] 3 modules  17:46:24
+==> [221/738] 3 modules  17:46:26
+==> [222/738] 3 modules  17:46:28
+==> [223/738] 3 modules  17:46:30
+==> [224/738] 3 modules  17:46:32
+==> [225/738] 3 modules  17:46:34
+==> [226/738] 3 modules  17:46:36
+==> [227/738] 3 modules  17:46:38
+==> [228/738] 3 modules  17:46:39
+==> [229/738] 3 modules  17:46:41
+==> [230/738] 3 modules  17:46:43
+==> [231/738] 3 modules  17:46:45
+==> [232/738] 3 modules  17:46:46
+==> [233/738] 3 modules  17:46:48
+==> [234/738] 3 modules  17:46:50
+==> [235/738] 3 modules  17:46:52
+==> [236/738] 3 modules  17:46:54
+==> [237/738] 3 modules  17:46:55
+==> [238/738] 3 modules  17:46:57
+==> [239/738] 3 modules  17:47:00
+==> [240/738] 3 modules  17:47:01
+==> [241/738] 3 modules  17:47:04
+==> [242/738] 3 modules  17:47:05
+==> [243/738] 3 modules  17:47:07
+==> [244/738] 3 modules  17:47:09
+==> [245/738] 3 modules  17:47:11
+==> [246/738] 3 modules  17:47:14
+==> [247/738] 3 modules  17:47:16
+==> [248/738] 3 modules  17:47:17
+==> [249/738] 3 modules  17:47:19
+==> [250/738] 3 modules  17:47:21
+==> [251/738] 3 modules  17:47:23
+==> [252/738] 3 modules  17:47:25
+==> [253/738] 3 modules  17:47:27
+==> [254/738] 3 modules  17:47:29
+==> [255/738] 3 modules  17:47:31
+==> [256/738] 3 modules  17:47:33
+==> [257/738] 3 modules  17:47:34
+==> [258/738] 3 modules  17:47:36
+==> [259/738] 3 modules  17:47:38
+==> [260/738] 3 modules  17:47:40
+==> [261/738] 3 modules  17:47:42
+==> [262/738] 3 modules  17:47:44
+==> [263/738] 3 modules  17:47:46
+==> [264/738] 3 modules  17:47:48
+==> [265/738] 3 modules  17:47:50
+==> [266/738] 3 modules  17:47:52
+==> [267/738] 3 modules  17:47:54
+==> [268/738] 3 modules  17:47:56
+==> [269/738] 3 modules  17:47:57
+==> [270/738] 3 modules  17:48:00
+==> [271/738] 3 modules  17:48:02
+==> [272/738] 3 modules  17:48:04
+==> [273/738] 3 modules  17:48:05
+==> [274/738] 3 modules  17:48:07
+==> [275/738] 3 modules  17:48:09
+==> [276/738] 3 modules  17:48:11
+==> [277/738] 3 modules  17:48:13
+==> [278/738] 3 modules  17:48:15
+==> [279/738] 3 modules  17:48:17
+==> [280/738] 3 modules  17:48:19
+==> [281/738] 3 modules  17:48:21
+==> [282/738] 3 modules  17:48:23
+==> [283/738] 3 modules  17:48:24
+==> [284/738] 3 modules  17:48:26
+==> [285/738] 3 modules  17:48:28
+==> [286/738] 3 modules  17:48:31
+==> [287/738] 3 modules  17:48:32
+==> [288/738] 3 modules  17:48:34
+==> [289/738] 3 modules  17:48:36
+==> [290/738] 3 modules  17:48:38
+==> [291/738] 3 modules  17:48:40
+==> [292/738] 3 modules  17:48:42
+==> [293/738] 3 modules  17:48:44
+==> [294/738] 3 modules  17:48:46
+==> [295/738] 3 modules  17:48:48
+==> [296/738] 3 modules  17:48:50
+==> [297/738] 3 modules  17:48:52
+==> [298/738] 3 modules  17:48:54
+==> [299/738] 3 modules  17:48:56
+==> [300/738] 3 modules  17:48:58
+==> [301/738] 3 modules  17:49:00
+==> [302/738] 3 modules  17:49:02
+==> [303/738] 3 modules  17:49:04
+==> [304/738] 3 modules  17:49:06
+==> [305/738] 3 modules  17:49:08
+==> [306/738] 3 modules  17:49:10
+==> [307/738] 3 modules  17:49:12
+==> [308/738] 3 modules  17:49:13
+==> [309/738] 3 modules  17:49:15
+==> [310/738] 3 modules  17:49:17
+==> [311/738] 3 modules  17:49:19
+==> [312/738] 3 modules  17:49:21
+==> [313/738] 3 modules  17:49:23
+==> [314/738] 3 modules  17:49:25
+==> [315/738] 3 modules  17:49:27
+==> [316/738] 3 modules  17:49:29
+==> [317/738] 3 modules  17:49:31
+==> [318/738] 3 modules  17:49:33
+==> [319/738] 3 modules  17:49:35
+==> [320/738] 3 modules  17:49:36
+==> [321/738] 3 modules  17:49:38
+==> [322/738] 3 modules  17:49:40
+==> [323/738] 3 modules  17:49:42
+==> [324/738] 3 modules  17:49:44
+==> [325/738] 3 modules  17:49:46
+==> [326/738] 3 modules  17:49:48
+==> [327/738] 3 modules  17:49:50
+==> [328/738] 3 modules  17:49:52
+==> [329/738] 3 modules  17:49:54
+==> [330/738] 3 modules  17:49:56
+==> [331/738] 3 modules  17:49:58
+==> [332/738] 3 modules  17:50:00
+==> [333/738] 3 modules  17:50:01
+==> [334/738] 3 modules  17:50:03
+==> [335/738] 3 modules  17:50:05
+==> [336/738] 3 modules  17:50:07
+==> [337/738] 3 modules  17:50:09
+==> [338/738] 3 modules  17:50:11
+==> [339/738] 3 modules  17:50:13
+==> [340/738] 3 modules  17:50:15
+==> [341/738] 3 modules  17:50:17
+==> [342/738] 3 modules  17:50:19
+==> [343/738] 3 modules  17:50:20
+==> [344/738] 3 modules  17:50:22
+==> [345/738] 3 modules  17:50:24
+==> [346/738] 3 modules  17:50:26
+==> [347/738] 3 modules  17:50:28
+==> [348/738] 3 modules  17:50:30
+==> [349/738] 3 modules  17:50:32
+==> [350/738] 3 modules  17:50:34
+==> [351/738] 3 modules  17:50:36
+==> [352/738] 3 modules  17:50:38
+==> [353/738] 3 modules  17:50:40
+==> [354/738] 3 modules  17:50:41
+==> [355/738] 3 modules  17:50:43
+==> [356/738] 3 modules  17:50:45
+==> [357/738] 3 modules  17:50:47
+==> [358/738] 3 modules  17:50:49
+==> [359/738] 3 modules  17:50:51
+==> [360/738] 3 modules  17:50:53
+==> [361/738] 3 modules  17:50:55
+==> [362/738] 3 modules  17:50:57
+==> [363/738] 3 modules  17:50:58
+==> [364/738] 3 modules  17:51:00
+==> [365/738] 3 modules  17:51:02
+==> [366/738] 3 modules  17:51:04
+==> [367/738] 3 modules  17:51:06
+==> [368/738] 3 modules  17:51:08
+==> [369/738] 3 modules  17:51:10
+==> [370/738] 3 modules  17:51:12
+==> [371/738] 3 modules  17:51:14
+==> [372/738] 3 modules  17:51:16
+==> [373/738] 3 modules  17:51:18
+==> [374/738] 3 modules  17:51:20
+==> [375/738] 3 modules  17:51:22
+==> [376/738] 3 modules  17:51:23
+==> [377/738] 3 modules  17:51:25
+==> [378/738] 3 modules  17:51:27
+==> [379/738] 3 modules  17:51:29
+==> [380/738] 3 modules  17:51:31
+==> [381/738] 3 modules  17:51:33
+==> [382/738] 3 modules  17:51:35
+==> [383/738] 3 modules  17:51:37
+==> [384/738] 3 modules  17:51:38
+==> [385/738] 3 modules  17:51:40
+==> [386/738] 3 modules  17:51:42
+==> [387/738] 3 modules  17:51:44
+==> [388/738] 3 modules  17:51:46
+==> [389/738] 3 modules  17:51:48
+==> [390/738] 3 modules  17:51:50
+==> [391/738] 3 modules  17:51:52
+==> [392/738] 3 modules  17:51:53
+==> [393/738] 3 modules  17:51:55
+==> [394/738] 3 modules  17:51:57
+==> [395/738] 3 modules  17:51:59
+==> [396/738] 3 modules  17:52:01
+==> [397/738] 3 modules  17:52:03
+==> [398/738] 3 modules  17:52:05
+==> [399/738] 3 modules  17:52:07
+==> [400/738] 3 modules  17:52:09
+==> [401/738] 3 modules  17:52:11
+==> [402/738] 3 modules  17:52:12
+==> [403/738] 3 modules  17:52:14
+==> [404/738] 3 modules  17:52:16
+==> [405/738] 3 modules  17:52:18
+==> [406/738] 3 modules  17:52:20
+==> [407/738] 3 modules  17:52:22
+==> [408/738] 3 modules  17:52:23
+==> [409/738] 3 modules  17:52:25
+==> [410/738] 3 modules  17:52:27
+==> [411/738] 3 modules  17:52:29
+==> [412/738] 3 modules  17:52:31
+==> [413/738] 3 modules  17:52:33
+==> [414/738] 3 modules  17:52:35
+==> [415/738] 3 modules  17:52:37
+==> [416/738] 3 modules  17:52:38
+==> [417/738] 3 modules  17:52:40
+==> [418/738] 3 modules  17:52:42
+==> [419/738] 3 modules  17:52:44
+==> [420/738] 3 modules  17:52:46
+==> [421/738] 3 modules  17:52:48
+==> [422/738] 3 modules  17:52:50
+==> [423/738] 3 modules  17:52:52
+==> [424/738] 3 modules  17:52:53
+==> [425/738] 3 modules  17:52:55
+==> [426/738] 3 modules  17:52:57
+==> [427/738] 3 modules  17:52:59
+==> [428/738] 3 modules  17:53:01
+==> [429/738] 3 modules  17:53:03
+==> [430/738] 3 modules  17:53:05
+==> [431/738] 3 modules  17:53:07
+==> [432/738] 3 modules  17:53:08
+==> [433/738] 3 modules  17:53:10
+==> [434/738] 3 modules  17:53:12
+==> [435/738] 3 modules  17:53:14
+==> [436/738] 3 modules  17:53:16
+==> [437/738] 3 modules  17:53:18
+==> [438/738] 3 modules  17:53:20
+==> [439/738] 3 modules  17:53:21
+==> [440/738] 3 modules  17:53:23
+==> [441/738] 3 modules  17:53:25
+==> [442/738] 3 modules  17:53:27
+==> [443/738] 3 modules  17:53:29
+==> [444/738] 3 modules  17:53:31
+==> [445/738] 3 modules  17:53:33
+==> [446/738] 3 modules  17:53:35
+==> [447/738] 3 modules  17:53:37
+==> [448/738] 3 modules  17:53:39
+==> [449/738] 3 modules  17:53:41
+==> [450/738] 3 modules  17:53:43
+==> [451/738] 3 modules  17:53:44
+==> [452/738] 3 modules  17:53:46
+==> [453/738] 3 modules  17:53:48
+==> [454/738] 3 modules  17:53:50
+==> [455/738] 3 modules  17:53:52
+==> [456/738] 3 modules  17:53:54
+==> [457/738] 3 modules  17:53:55
+==> [458/738] 3 modules  17:53:57
+==> [459/738] 3 modules  17:53:59
+==> [460/738] 3 modules  17:54:01
+==> [461/738] 3 modules  17:54:03
+==> [462/738] 3 modules  17:54:05
+==> [463/738] 3 modules  17:54:07
+==> [464/738] 3 modules  17:54:09
+==> [465/738] 3 modules  17:54:10
+==> [466/738] 3 modules  17:54:12
+==> [467/738] 3 modules  17:54:14
+==> [468/738] 3 modules  17:54:16
+==> [469/738] 3 modules  17:54:18
+==> [470/738] 3 modules  17:54:20
+==> [471/738] 3 modules  17:54:22
+==> [472/738] 3 modules  17:54:24
+==> [473/738] 3 modules  17:54:26
+==> [474/738] 3 modules  17:54:27
+==> [475/738] 3 modules  17:54:29
+==> [476/738] 3 modules  17:54:31
+==> [477/738] 3 modules  17:54:33
+==> [478/738] 3 modules  17:54:35
+==> [479/738] 3 modules  17:54:37
+==> [480/738] 3 modules  17:54:38
+==> [481/738] 3 modules  17:54:40
+==> [482/738] 3 modules  17:54:42
+==> [483/738] 3 modules  17:54:44
+==> [484/738] 3 modules  17:54:46
+==> [485/738] 3 modules  17:54:48
+==> [486/738] 3 modules  17:54:50
+==> [487/738] 3 modules  17:54:51
+==> [488/738] 3 modules  17:54:53
+==> [489/738] 3 modules  17:54:55
+==> [490/738] 3 modules  17:54:57
+==> [491/738] 3 modules  17:54:59
+==> [492/738] 3 modules  17:55:01
+==> [493/738] 3 modules  17:55:03
+==> [494/738] 3 modules  17:55:05
+==> [495/738] 3 modules  17:55:07
+==> [496/738] 3 modules  17:55:09
+==> [497/738] 3 modules  17:55:10
+==> [498/738] 3 modules  17:55:12
+==> [499/738] 3 modules  17:55:14
+==> [500/738] 3 modules  17:55:16
+==> [501/738] 3 modules  17:55:18
+==> [502/738] 3 modules  17:55:20
+==> [503/738] 3 modules  17:55:22
+==> [504/738] 3 modules  17:55:23
+==> [505/738] 3 modules  17:55:25
+==> [506/738] 3 modules  17:55:27
+==> [507/738] 3 modules  17:55:29
+==> [508/738] 3 modules  17:55:31
+==> [509/738] 3 modules  17:55:33
+==> [510/738] 3 modules  17:55:35
+==> [511/738] 3 modules  17:55:37
+==> [512/738] 3 modules  17:55:39
+==> [513/738] 3 modules  17:55:40
+==> [514/738] 3 modules  17:55:42
+==> [515/738] 3 modules  17:55:44
+==> [516/738] 3 modules  17:55:46
+==> [517/738] 3 modules  17:55:48
+==> [518/738] 3 modules  17:55:50
+==> [519/738] 3 modules  17:55:52
+==> [520/738] 3 modules  17:55:54
+==> [521/738] 3 modules  17:55:55
+==> [522/738] 3 modules  17:55:57
+==> [523/738] 3 modules  17:55:59
+==> [524/738] 3 modules  17:56:01
+==> [525/738] 3 modules  17:56:03
+==> [526/738] 3 modules  17:56:05
+==> [527/738] 3 modules  17:56:07
+==> [528/738] 3 modules  17:56:09
+==> [529/738] 3 modules  17:56:11
+==> [530/738] 3 modules  17:56:13
+==> [531/738] 3 modules  17:56:15
+==> [532/738] 3 modules  17:56:17
+==> [533/738] 3 modules  17:56:18
+==> [534/738] 3 modules  17:56:20
+==> [535/738] 3 modules  17:56:22
+==> [536/738] 3 modules  17:56:24
+==> [537/738] 3 modules  17:56:26
+==> [538/738] 3 modules  17:56:28
+==> [539/738] 3 modules  17:56:30
+==> [540/738] 3 modules  17:56:32
+==> [541/738] 3 modules  17:56:34
+==> [542/738] 3 modules  17:56:35
+==> [543/738] 3 modules  17:56:37
+==> [544/738] 3 modules  17:56:39
+==> [545/738] 3 modules  17:56:41
+==> [546/738] 3 modules  17:56:43
+==> [547/738] 3 modules  17:56:45
+==> [548/738] 3 modules  17:56:47
+==> [549/738] 3 modules  17:56:49
+==> [550/738] 3 modules  17:56:50
+==> [551/738] 3 modules  17:56:52
+==> [552/738] 3 modules  17:56:54
+==> [553/738] 3 modules  17:56:56
+==> [554/738] 3 modules  17:56:58
+==> [555/738] 3 modules  17:57:00
+==> [556/738] 3 modules  17:57:02
+==> [557/738] 3 modules  17:57:04
+==> [558/738] 3 modules  17:57:05
+==> [559/738] 3 modules  17:57:07
+==> [560/738] 3 modules  17:57:09
+==> [561/738] 3 modules  17:57:11
+==> [562/738] 3 modules  17:57:13
+==> [563/738] 3 modules  17:57:15
+==> [564/738] 3 modules  17:57:17
+==> [565/738] 3 modules  17:57:19
+==> [566/738] 3 modules  17:57:21
+==> [567/738] 3 modules  17:57:22
+==> [568/738] 3 modules  17:57:24
+==> [569/738] 3 modules  17:57:26
+==> [570/738] 3 modules  17:57:28
+==> [571/738] 3 modules  17:57:30
+==> [572/738] 3 modules  17:57:32
+==> [573/738] 3 modules  17:57:34
+==> [574/738] 3 modules  17:57:35
+==> [575/738] 3 modules  17:57:37
+==> [576/738] 3 modules  17:57:39
+==> [577/738] 3 modules  17:57:41
+==> [578/738] 3 modules  17:57:43
+==> [579/738] 3 modules  17:57:45
+==> [580/738] 3 modules  17:57:47
+==> [581/738] 3 modules  17:57:49
+==> [582/738] 3 modules  17:57:51
+==> [583/738] 3 modules  17:57:53
+==> [584/738] 3 modules  17:57:55
+==> [585/738] 3 modules  17:57:57
+==> [586/738] 3 modules  17:57:59
+==> [587/738] 3 modules  17:58:01
+==> [588/738] 3 modules  17:58:03
+==> [589/738] 3 modules  17:58:05
+==> [590/738] 3 modules  17:58:07
+==> [591/738] 3 modules  17:58:09
+==> [592/738] 3 modules  17:58:11
+==> [593/738] 3 modules  17:58:13
+==> [594/738] 3 modules  17:58:14
+==> [595/738] 3 modules  17:58:16
+==> [596/738] 3 modules  17:58:18
+==> [597/738] 3 modules  17:58:20
+==> [598/738] 3 modules  17:58:22
+==> [599/738] 3 modules  17:58:24
+==> [600/738] 3 modules  17:58:26
+==> [601/738] 3 modules  17:58:28
+==> [602/738] 3 modules  17:58:30
+==> [603/738] 3 modules  17:58:32
+==> [604/738] 3 modules  17:58:34
+==> [605/738] 3 modules  17:58:36
+==> [606/738] 3 modules  17:58:38
+==> [607/738] 3 modules  17:58:40
+==> [608/738] 3 modules  17:58:42
+==> [609/738] 3 modules  17:58:44
+==> [610/738] 3 modules  17:58:46
+==> [611/738] 3 modules  17:58:48
+==> [612/738] 3 modules  17:58:50
+==> [613/738] 3 modules  17:58:52
+==> [614/738] 3 modules  17:58:53
+==> [615/738] 3 modules  17:58:55
+==> [616/738] 3 modules  17:58:56
+==> [617/738] 3 modules  17:58:58
+==> [618/738] 3 modules  17:58:59
+==> [619/738] 3 modules  17:59:01
+==> [620/738] 3 modules  17:59:02
+==> [621/738] 3 modules  17:59:04
+==> [622/738] 3 modules  17:59:06
+==> [623/738] 1 modules  17:59:08
+==> [624/738] 3 modules  17:59:10
+==> [625/738] 3 modules  17:59:12
+==> [626/738] 3 modules  17:59:15
+==> [627/738] 3 modules  17:59:16
+==> [628/738] 3 modules  17:59:18
+==> [629/738] 3 modules  17:59:19
+==> [630/738] 3 modules  17:59:21
+==> [631/738] 3 modules  17:59:23
+==> [632/738] 3 modules  17:59:24
+==> [633/738] 3 modules  17:59:26
+==> [634/738] 3 modules  17:59:28
+==> [635/738] 3 modules  17:59:30
+==> [636/738] 3 modules  17:59:31
+==> [637/738] 3 modules  17:59:33
+==> [638/738] 3 modules  17:59:35
+==> [639/738] 3 modules  17:59:36
+==> [640/738] 3 modules  17:59:38
+==> [641/738] 1 modules  17:59:40
+==> [642/738] 3 modules  17:59:41
+==> [643/738] 3 modules  17:59:43
+==> [644/738] 3 modules  17:59:47
+==> [645/738] 3 modules  17:59:49
+==> [646/738] 3 modules  17:59:50
+==> [647/738] 3 modules  17:59:52
+==> [648/738] 3 modules  17:59:54
+==> [649/738] 2 modules  17:59:55
+==> [650/738] 3 modules  17:59:57
+==> [651/738] 3 modules  17:59:59
+==> [652/738] 3 modules  18:00:02
+==> [653/738] 3 modules  18:00:05
+==> [654/738] 3 modules  18:00:07
+==> [655/738] 3 modules  18:00:08
+==> [656/738] 2 modules  18:00:10
+==> [657/738] 3 modules  18:00:11
+==> [658/738] 3 modules  18:00:13
+==> [659/738] 3 modules  18:00:17
+==> [660/738] 3 modules  18:00:18
+==> [661/738] 3 modules  18:00:20
+==> [662/738] 3 modules  18:00:22
+==> [663/738] 1 modules  18:00:23
+==> [664/738] 3 modules  18:00:24
+==> [665/738] 3 modules  18:00:26
+==> [666/738] 3 modules  18:00:28
+==> [667/738] 3 modules  18:00:31
+==> [668/738] 3 modules  18:00:33
+==> [669/738] 3 modules  18:00:34
+==> [670/738] 3 modules  18:00:36
+==> [671/738] 3 modules  18:00:38
+==> [672/738] 3 modules  18:00:40
+==> [673/738] 3 modules  18:00:42
+==> [674/738] 3 modules  18:00:45
+==> [675/738] 3 modules  18:00:47
+==> [676/738] 3 modules  18:00:49
+==> [677/738] 3 modules  18:00:50
+==> [678/738] 3 modules  18:00:52
+==> [679/738] 3 modules  18:00:54
+==> [680/738] 3 modules  18:00:57
+==> [681/738] 3 modules  18:01:01
+==> [682/738] 3 modules  18:01:02
+==> [683/738] 3 modules  18:01:04
+==> [684/738] 3 modules  18:01:08
+==> [685/738] 1 modules  18:01:11
+==> [686/738] 3 modules  18:01:13
+==> [687/738] 3 modules  18:01:15
+==> [688/738] 3 modules  18:01:17
+==> [689/738] 3 modules  18:01:21
+==> [690/738] 3 modules  18:01:24
+==> [691/738] 3 modules  18:01:27
+==> [692/738] 3 modules  18:01:29
+==> [693/738] 3 modules  18:01:31
+==> [694/738] 3 modules  18:01:35
+==> [695/738] 3 modules  18:01:38
+==> [696/738] 3 modules  18:01:42
+    ⚠ [3752/3768] Replayed Proofs.HadwigerNelson.Plane.TriangularPacking
+    warning: Proofs/HadwigerNelson/Plane/TriangularPacking.lean:34:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/TriangularPacking.lean:37:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/TriangularPacking.lean:41:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/TriangularPacking.lean:45:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/TriangularPacking.lean:49:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/TriangularPacking.lean:53:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/TriangularPacking.lean:58:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/TriangularPacking.lean:62:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Plane/TriangularPacking.lean:66:8: declaration uses `sorry`
+==> [697/738] 2 modules  18:01:44
+==> [698/738] 3 modules  18:01:46
+==> [699/738] 3 modules  18:01:48
+==> [700/738] 3 modules  18:01:52
+==> [701/738] 3 modules  18:01:56
+==> [702/738] 3 modules  18:01:59
+==> [703/738] 2 modules  18:02:01
+==> [704/738] 3 modules  18:02:03
+==> [705/738] 3 modules  18:02:07
+==> [706/738] 3 modules  18:02:11
+==> [707/738] 3 modules  18:02:15
+==> [708/738] 2 modules  18:02:17
+==> [709/738] 3 modules  18:02:19
+==> [710/738] 3 modules  18:02:21
+==> [711/738] 3 modules  18:02:25
+==> [712/738] 2 modules  18:02:27
+==> [713/738] 3 modules  18:02:29
+==> [714/738] 3 modules  18:02:31
+==> [715/738] 2 modules  18:02:33
+==> [716/738] 3 modules  18:02:35
+==> [717/738] 3 modules  18:02:38
+==> [718/738] 2 modules  18:02:40
+==> [719/738] 3 modules  18:02:42
+==> [720/738] 2 modules  18:02:44
+==> [721/738] 2 modules  18:02:46
+==> [722/738] 2 modules  18:02:49
+==> [723/738] 2 modules  18:02:51
+==> [724/738] 1 modules  18:02:54
+==> [725/738] 1 modules  18:02:55
+==> [726/738] 1 modules  18:02:56
+==> [727/738] 1 modules  18:02:57
+    rebuilt: Rigidity.ClassRatio (27s)
+==> [728/738] 2 modules  18:03:27
+    rebuilt: Rigidity.CertLinkModels (3.4s), Rigidity.CountResidue (6.9s)
+==> [729/738] 1 modules  18:03:36
+    rebuilt: Rigidity.CountCompletion (8.1s)
+==> [730/738] 2 modules  18:03:47
+    rebuilt: Collapse.Thick (6.9s), Rigidity.CountExtension (11s)
+==> [731/738] 3 modules  18:04:01
+    rebuilt: Rigidity.CountDescent (15s), Collapse.Slice (17s), Collapse.Mixing (18s)
+==> [732/738] 3 modules  18:04:22
+    rebuilt: Rigidity.ChainHeadline (3.5s), Collapse.Selection (7.1s), Rigidity.CountModels (7.4s)
+==> [733/738] 2 modules  18:04:32
+    rebuilt: Rigidity.MainClauseFive (2.9s), Rigidity.SqrtClassFive (5.5s)
+==> [734/738] 3 modules  18:04:40
+    rebuilt: Instances.SqrtClassValues (3.0s), Instances.SqrtFortySevenFive (5.5s), Collapse.Headline (6.9s)
+==> [735/738] 1 modules  18:04:52
+    ⚠ [5870/5870] Built Proofs.HadwigerNelson.Collapse.Density.Defs (3.6s)
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:56:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:62:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:66:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:70:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:74:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:79:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:84:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:89:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:95:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:100:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:110:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:116:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:121:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:127:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:132:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:137:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:146:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:150:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:181:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:185:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:189:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Defs.lean:202:8: declaration uses `sorry`
+    rebuilt: Collapse.Density.Defs (3.6s)
+==> [736/738] 1 modules  18:05:00
+    ⚠ [5871/5871] Built Proofs.HadwigerNelson.Collapse.Density.Upper (3.4s)
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:48:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:55:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:61:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:66:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:76:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:81:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:86:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:101:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:108:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:114:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:123:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:131:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:140:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:154:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:160:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:167:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:178:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Upper.lean:186:8: declaration uses `sorry`
+    rebuilt: Collapse.Density.Upper (3.4s)
+==> [737/738] 1 modules  18:05:08
+    ⚠ [5873/5873] Built Proofs.HadwigerNelson.Collapse.Density.Headline (3.3s)
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:49:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:54:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:62:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:70:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:77:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:83:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:88:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:95:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:101:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:106:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:112:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:116:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:126:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:132:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:138:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:144:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:150:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:155:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:172:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:187:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:192:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Collapse/Density/Headline.lean:197:8: declaration uses `sorry`
+    rebuilt: Collapse.Density.Headline (3.3s)
+==> [738/738] 1 modules  18:05:15
+    rebuilt: Proofs (2.9s)
+==> build: OK — 738 of 738 batches, 21 module(s) rebuilt, 4 module(s) with warnings, 22m50s
+    full output: build/gate/build/20261016T174229Z-4077589.log
+build exit=0

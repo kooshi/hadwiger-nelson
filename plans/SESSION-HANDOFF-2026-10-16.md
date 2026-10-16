@@ -1,96 +1,79 @@
-# Session handoff — 2026-10-16: the public clone gated; two theorems' worth of work since; one implementer running
+# Session handoff — 2026-10-16 (evening): four landings, the README shipped, two jobs running
 
-*Rewritten 2026-10-16 13:25 UTC by Keryx before Kooshi compacts the session. Current state only. Read it first, then
-`plans/FS131-close-inventory.md` items 974–992 (each has its receipt and, where it rules, four parts).
-`plans/SESSION-HANDOFF-2026-10-15.md` is older; its § 6 owed list is now filed or tabled (§ 5 below).*
-
-**On resuming:** four jobs run (§ 3). Agents of an ended session cannot be messaged: a job whose agent is gone is
-continued by a fresh successor from its record. **History (item 1025):** `main`'s unpushed range was rewritten by a
-private filter kept in the publication folder (`history-rewrite-2026-10-16/filter.py` there; the folder's path is in the coordinator's local-paths memory, never in the repository); every
-job branch carrying old commits is rewritten by the same filter at its hand-back, before its merge (`git filter-branch -f
---msg-filter '… msg' --index-filter '… index' -- main..<branch>` — never `origin/main..`, which strips the signatures of `main`'s later commits (item 1042); the `p`-adic and three-colour branches first
-need their stopped agents' record lines added to the filter's table, found by a guard scan of the branch), and its
-old-to-new map goes under `data/fs131/history-rewrite/`. A commit hook runs the guard on every commit. Next push: a
-Clerk's privacy check of `origin/main..main`, then a fast-forward push (standing protocol).
+*Rewritten by Keryx before Kooshi compacts the session. Current state only. Read it first, then `plans/FS131-close-inventory.md`
+items 1020–1066 (each with its receipt and, where it rules, four parts). Agent identifiers are in the session scratchpad
+(`agents.txt`), never in a file; agents of this session can still be messaged after the compaction.*
 
 ## 1. Where things are
 
-- **The repository is public**: `https://github.com/kooshi/hadwiger-nelson`; this checkout is its clone. **Pushed through
-  `66d5e928c`** (item 1011). **The push protocol is standing** (Kooshi's W8–W9, items 1009–1010): before every push a
-  Clerk's privacy check over every unpushed commit (every file version, every message, identities, sizes, credential-like
-  names; the guard's command and scratch folder in the launch message only, never in the repository), then my positive
-  control (the lists' own plants through the guard, values never printed) and the drop-path check, then a fast-forward
-  push of exactly the checked commit. Template: `data/fs131/briefs/scripts/mk-fs131-pv1.py`.
-- **The standing rules say never push** (rule 6) and that everything committed may be published (rule 13), since item
-  975. Every brief names them.
-- **The main tree's build is current for `main`** (rebuilt 05:21 UTC after the named theorem merged: "239 of 239
-  batches, 2 module(s) rebuilt, 0 module(s) with warnings"). It is the reference build for new worktrees.
-- **The full gate was green in this clone** on `16a2d4499` (item 980; logs `data/fs131/clone1/gate/`, runner
-  `data/fs131/clone1/run-gate.sh`), and again on the named theorem's commit (item 990).
+- **Public repository** `https://github.com/kooshi/hadwiger-nelson`; this checkout is its clone. **Pushed through `351645653`**
+  (item 1062). Everything after it waits for the next privacy check (a Clerk; template `data/fs131/briefs/scripts/mk-fs131-pv3.py`,
+  which guards compressed files decompressed), then my two checks (the lists' 28 guard text plants refused; no range path on the
+  lists' `drop`), then `git push origin <checked>:refs/heads/main` (fast-forward, never force).
+- **History and hooks (Kooshi's W20, item 1025):** the unpushed history was rewritten by a private filter kept in the publication
+  folder (`history-rewrite-2026-10-16/filter.py`; the folder's path is in the coordinator's local-paths memory, never in the
+  repository). A job branch carrying pre-rewrite commits is rewritten with it **over `main..<branch>`** (never `origin/main..`,
+  which strips the signatures of `main`'s later commits; item 1042) before it merges; old-to-new maps go under
+  `data/fs131/history-rewrite/`. A pre-commit and a commit-msg hook run the privacy guard on every commit in every worktree.
+- **The README** was rewritten for a human reader (FS131-RDM1; Kooshi: "The new readme is great. Ship it."): a results table with
+  status, a section per result, `RESULTS.md` for every Lean name and axiom list. Its rows are kept current at each landing.
+- **The main tree's build** is current for `main` (the density landing's gated build moved in, `build.sh`: up to date).
+- `CLAUDE.md`'s "What the kernel holds" paragraph lives in `plans/KERNEL-HOLDS.md`; every landing's clause is filed there. The fact
+  audit runs with its default `--also` files plus `plans/KERNEL-HOLDS.md` and `plans/FILINGS.md`.
 
-## 2. Held, new today (on `main`, local)
+## 2. Landed today (each merged, its axioms printed by me, filed)
 
-- **`χ(F²) = L(F)` whenever `L(F) ≤ 5`, one named theorem** — `Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five`,
-  and the hypothesis-free `Rigidity.min_chromaticNumber_five_eq_min_localBound_five` (`min(χ(F²), 5) = min(L(F), 5)`), in
-  `Rigidity/MainClauseFive`; on the standard three, Weil's bound and Einsiedler–Lindenstrauss Thm 1.3; gated on
-  `113ca8ece`, merged as `0c1ad6a33`, its drafts filed (items 990–991).
-- **The second filing** (items 982–985): FS131-PR1's corrections (the plane's density equality is "prior art: not found
-  in print", no longer "not new"), rows 120–130's notes, 131 `LEAN.md` lines, the bibliography appends. Its table of
-  every owed item, with what is left, is `data/fs131/fc8/owed.md`.
-- **Two prices, records on `main`**: the collapse (row 128) at about 3,270 lines (item 988); Einsiedler–Lindenstrauss
-  Thm 1.3 at about 80,000 lines in full, about 50,000 by a narrow route that retires the axiom from the chain (item 987).
+| result | item | merge |
+|---|---|---|
+| the p-adic plane: Bardestani–Mallahi-Karai's Question 1 answered no; values at 3, 7, 11, 19, 23 | 1032 | `785a46e77` |
+| the three-colour criterion for Cayley graphs of abelian groups (row 79, wider) | 1043 | `8ebb647bc` |
+| five colours: the real quadratic dichotomy mod 168, the family, CLS, ℚ(√23, ∛2) (row 123) | 1055 | `3466820ee` |
+| the density form of the collapse (row 129), the fractional collapse, a finite triangle-free six-chromatic unit-distance graph | 1063 | `dfba6bc68` |
+
+The prior-art searches (FS131-PAS1, item 1052): four of five not found in print; the degree-one-primes fact is Nagell 1969 Thm 3
+(after Bauer 1916); the six-chromatic graph answers de Grey's and Haugstrup's 2026 questions.
 
 ## 3. Running
 
-**Landed today:** the p-adic plane (item 1032, `785a46e77`) and the three-colour criterion (item 1043, `8ebb647bc`), each filed by me;
-the README rewritten and **pushed** (items 1035–1042: `origin/main` at `6730b314e`; the commits after it wait for the next
-privacy check). The three-colour gate (`data/fs131/ict3/gate/`) is the baseline for the next landing. `CLAUDE.md`'s "What the
-kernel holds" paragraph lives in `plans/KERNEL-HOLDS.md`; the fact audit runs with its default `--also` files plus
-`plans/KERNEL-HOLDS.md` and `plans/FILINGS.md`.
-
 | job | what | worktree, branch | record |
 |---|---|---|---|
-| FS131-IFR1 (item 1023) | the density form of the collapse: 81 leaves (about 2,650 lines) and the gate; item 1021's three rulings | `kcl1`, `fs131-kfr1` | `plans/FS131-IFR1-density.md` |
-| FS131-ICS1 (item 1028) | part A of FS131-KCS1's plan (item 1027): the quadratic dichotomy, the family, CLS in full, ℚ(√23, ∛2), the bridge; three `ClassRatio` lemmas made public | `kcs1`, `fs131-kcs1` | `plans/FS131-ICS1-class.md` |
-| FS131-KRU1 (item 1036) | planner: row 100's Lemma C′ and the components clause, by the elementary route (item 1040) | `il5`, `fs131-kru1` | `plans/FS131-KRU1-ring-plan.md` |
+| FS131-IRU2 (item 1066) | the ring of unit vectors (Lemma C′, components clause, dichotomy; all proved, item 1065): merge `main`, one gate | `il5`, `fs131-kru1` | `plans/FS131-IRU2-ring.md` |
+| FS131-FIF1 (item 1064) | Clerk: the density landing's drafts and FS131-PAS1's § 3.4 items 1–3 | `filing2`, `fs131-fif1` | its report |
 
-Both the `p`-adic and the three-colour branches joined `Proofs.lean`'s import blocks with `main`'s: the second to land
-will conflict there — keep both blocks. At each implementer's hand-back: check its commits, print its head statements'
-axioms myself, read them against the ledger row, guard, reword its predecessor's lines that item 1022 names, merge
-`--no-ff` (`main` equal to the gated commit in `Proofs/`, `scripts/` and the package files), file its drafts (a Clerk if
-large), run the fact audit and read its last line, rebuild the main tree. Search request 26 (`p = 23`) waits for a
-Searcher run on a day the laptop is not building (item 1024).
+**At FS131-FIF1's hand-back:** merge its branch; then adapt the density landing's README row myself (D-7; `README.md` § 5's
+"By hand, not yet in Lean" bullet becomes the kernel statements, `RESULTS.md` §§ 5–6 gain their names and axioms).
+**At FS131-IRU2's hand-back** (the landing procedure): check its commits; print the head statements' axioms myself (all on the
+standard three expected); rewrite `fs131-kru1` over `main..fs131-kru1` with the filter (it carries pre-rewrite commits); guard-scan
+the range (a match inside a gzip dump is noise — guard it decompressed); merge `--no-ff`; check `main` equals the gated commit in
+`Proofs/`, `Proofs.lean`, `scripts/` and the package files; move its gated build into the main tree and run `build.sh`; then a
+Clerk files FS131-IRU1's drafts (D3, D4, D6, D11; record `plans/FS131-IRU1-ring.md`) with FS131-PAS1's held § 5.4 items 1–2 and
+§ 6.4 items 1–2 (crediting Nagell and Bauer), and its README row (candidate new row; Lemma C′ "not found in print in general",
+the dichotomy "not yet searched"). **Then a privacy check and a push.**
 
-## 4. Kooshi's decisions, all answered (W8–W9, items 1009–1010)
+## 4. Kooshi's decisions, all answered
 
-1. **Pushing:** the standing protocol above.
-2. **Einsiedler–Lindenstrauss:** held off; Theorem 1.3 stays a declared outside theorem.
-3. **The aim:** `CLAUDE.md` § The aim not rewritten; the current goal is formalizing; what comes after is open.
-4. **The peer-delegation paragraph:** kept (approved before he pushed the generic template).
+W20 (rewrite the unpushed history; add the guard as a commit hook) and W21–W22 (rewrite the README; "Ship it") are in
+`data/fs131/REQUEST-2026-10-16.md`. The push protocol (W8–W9) is standing. The four-slot cap holds (a Sonnet agent counts half).
 
 ## 5. Owed (none urgent)
 
-- **Part B of FS131-KCS1's plan** (the ring lemma, record § 2.6): a successor planner, item 1027 (2).
+- **Bibliography pass** (item 1054): `[Davidson2026]`'s two library copies; `[deGrey2026]`/`[Haugstrup2026]` out of § R.4 now
+  that the issue is held; `[Shimura1964]`'s two rows; § B rows for newly held files; six arXiv ids unlogged.
+- **The Proof Atlas** rebuilt locally once after the landings (drafts D13 of ICS1, D-9 of IFR2).
+- **The asking lane's next job**: its § 3.3 definition of `L(F)` (items 1027, 1055 D11) and `[Davidson2026]`'s conjecture
+  reduced by row 79's criterion (item 1052).
+- **Tooling:** the fact audit's default `--also` list should gain `plans/KERNEL-HOLDS.md` and `plans/FILINGS.md`; the
+  ROADMAP appendix generator `data/fs131/pr1/` is not in this clone (item 1032); `ratioAtMost_dyadic` keeps a duplicate `f ≥ 6`
+  branch (item 1055); the coverage check in the axiom audit.
+- **Row 123's family wording**: `L` is open at 167, 887, 1055, 1319, 1823, 2351, 2735, 2903 (item 1055).
+- **Search request 26** (`p = 23`) waits for a Searcher day when the laptop is not building.
+- Lemma C′ prior art: `[Shimura1964]` unread; Nagell 1951 Thm 97's proof unread (item 1052).
 
-- **Mathematics / Lean:** Lemma C′ (row 100); the family of 44 fields and CLS (`ROADMAP.md` § 3); `lean4checker` and the
-  comparator before any write-up; KCL1's stub to mint (the four-colour chain as the `k = 4` case of the collapse).
-- **Front files, owed to a lane's words** (no draft exists; `data/fs131/fc8/owed.md` "no draft" rows): row 152's
-  `χ_m ≥ k + 1` stated for Falconer's number where the kernel form is the Borel number; the write-up stub's banner; the
-  prices in records; EN1-UQ4's grade line; `Instances/UpperHalfCorollaries`' stale module docstring (ll. 25–28; a docstring
-  edit rebuilds its dependents); PN1's "Not ours" citing ASTRA T2–T5 against its own T3–T4.
-- **Tooling:** a coverage check in the axiom audit (items 970, 990); the older lists in the 2026-10-14 and 2026-10-15
-  handoffs' § 6.
+## 6. Rules learned today
 
-## 6. Worktrees and disk
-
-`.claude/worktrees/kcl1` (ICO1, building); `filing2` (no build; reusable for a Clerk); `il5` and `kel1` (builds deleted;
-their branches `fs131-il5` merged, `fs131-kel1` holds the price's skeleton with `sorry`, never for `main`). Disk 253 GB free.
-
-## 7. Rules
-
-- Review by artifact; print key axioms myself; rulings in four parts; briefs from generators, gated and guarded, then
-  committed; launch line "Your brief is on disk: read it in full first."
-- Run a command in another tree inside a subshell (`( cd … && … )`): a bare `cd` moves this session's working directory.
-- A brief whose quotations are on a branch is gated with `--root <that worktree>`.
-- Times from `date -u`; commit messages end with the attribution lines; novelty "prior art: not found in print".
-- Staffing: four slots, a Sonnet agent counting half; this laptop's slot settings `SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6`.
+- A brief is committed only after a "GATE: PASS" line is read back (item 1061).
+- Landings serialize: a branch gated before another landing re-merges `main` and re-gates once (items 1047–1048).
+- An agent past its hand-back line is replaced by a successor from its record, not resumed (item 1065).
+- Every working file, however temporary, goes under the job's own `data/…` path (standing rule 2, item 1050).
+- Times from `date -u` inside the command; never typed by hand (items 1022–1023).
+- Run commands in another tree inside a subshell `( cd … && … )`: a bare `cd` moves this session's directory.

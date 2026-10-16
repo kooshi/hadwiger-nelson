@@ -1,0 +1,30 @@
+MODULE Proofs.HadwigerNelson.Arith.StableAboveUsable private: 27 records
+MODULE Proofs.HadwigerNelson.Arith.StableAboveUsable public: 4 records
+MODULE Proofs.HadwigerNelson.Collapse.Density.Defs private: 4 records
+MODULE Proofs.HadwigerNelson.Collapse.Density.Defs public: 41 records
+MODULE Proofs.HadwigerNelson.Collapse.Density.Headline private: 2 records
+MODULE Proofs.HadwigerNelson.Collapse.Density.Headline public: 20 records
+MODULE Proofs.HadwigerNelson.Collapse.Density.Upper private: 59 records
+MODULE Proofs.HadwigerNelson.Collapse.Density.Upper public: 25 records
+MODULE Proofs.HadwigerNelson.Collapse.Headline private: 2 records
+MODULE Proofs.HadwigerNelson.Collapse.Headline public: 27 records
+MODULE Proofs.HadwigerNelson.Instances.SqrtFiveClass public: 7 records
+MODULE Proofs.HadwigerNelson.Instances.SqrtTwentyThreeCbrtTwo private: 10 records
+MODULE Proofs.HadwigerNelson.Instances.SqrtTwentyThreeCbrtTwo public: 15 records
+MODULE Proofs.HadwigerNelson.Plane.TriangularPacking private: 2 records
+MODULE Proofs.HadwigerNelson.Plane.TriangularPacking public: 12 records
+MODULE Proofs.HadwigerNelson.Rigidity.ClassRatio private: 95 records
+MODULE Proofs.HadwigerNelson.Rigidity.ClassRatio public: 16 records
+MODULE Proofs.HadwigerNelson.Rigidity.FourColourPlaces private: 2 records
+MODULE Proofs.HadwigerNelson.Rigidity.FourColourPlaces public: 15 records
+VISIBILITY Proofs.HadwigerNelson.Rigidity.ClassRatio HadwigerNelson.Rigidity.chromaticNumber_le_four_dyadic: private in IFR1, public in MERGED (ruled)
+VISIBILITY Proofs.HadwigerNelson.Rigidity.ClassRatio HadwigerNelson.Rigidity.chromaticNumber_le_four_of_small: private in IFR1, public in MERGED (ruled)
+VISIBILITY Proofs.HadwigerNelson.Rigidity.ClassRatio HadwigerNelson.Rigidity.exists_card_two_pow_sq: private in IFR1, public in MERGED (ruled)
+VISIBILITY Proofs.HadwigerNelson.Rigidity.ClassRatio HadwigerNelson.Rigidity.ratioAtMost_of_charBound: private in ICS1, public in MERGED (ruled)
+RECORDS merged=385 IFR1=304 ICS1=191
+VERDICT CLEAN: 0 failure(s)
+PLANT axiom set changed: FIRED (1 failure(s); wanted 'CHANGED Proofs.HadwigerNelson.Collapse.Density.Headline HadwigerNelson.Collapse.IndepLaw.density_le_notThick')
+PLANT record dropped: FIRED (1 failure(s); wanted 'MISSING Proofs.HadwigerNelson.Instances.SqrtFiveClass HadwigerNelson.SqrtFiveClass.chromaticNumber_planeOver_sqrt_eq_five')
+PLANT record added: FIRED (1 failure(s); wanted 'ADDED Proofs.HadwigerNelson.Collapse.Density.Headline HadwigerNelson.Collapse.planted_extra')
+PLANT sorryAx planted: FIRED (2 failure(s); wanted 'SORRY Proofs.HadwigerNelson.Plane.TriangularPacking HadwigerNelson.Plane.fifth_lt_mOne')
+PLANTS ALL FIRED

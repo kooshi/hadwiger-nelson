@@ -1,0 +1,8 @@
+Auto-merging ARCHITECTURE.md
+Auto-merging Proofs.lean
+Auto-merging scripts/Axioms.lean
+CONFLICT (content): Merge conflict in scripts/Axioms.lean
+Auto-merging scripts/vacuity-baseline.txt
+CONFLICT (content): Merge conflict in scripts/vacuity-baseline.txt
+Automatic merge failed; fix conflicts and then commit the result.
+exit=1

@@ -1,0 +1,6 @@
+[0] MISMATCH plans/FS131-close-inventory.md : 1 line(s) not found
+     first 31 of 1443 chars present; differs at: 'E gate green on one commit, on the same stale base; the landings sequenced (logg'
+[1] VERBATIM  plans/FS131-close-inventory.md   (1 lines, 1926 chars)
+[2] VERBATIM  plans/FS131-close-inventory.md   (1 lines, 2300 chars)
+[3] VERBATIM  plans/FS131-close-inventory.md   (1 lines, 2276 chars)
+MISMATCHES: 1

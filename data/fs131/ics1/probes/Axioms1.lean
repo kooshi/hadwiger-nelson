@@ -1,0 +1,7 @@
+import Proofs.HadwigerNelson.Rigidity.FourColourPlaces
+open HadwigerNelson.Rigidity
+#print axioms five_le_localBound_iff
+#print axioms min_localBoundAllLevels_five
+#print axioms exists_ratioAtMost_of_not_isFourColourPlace
+#print axioms colorable_four_levelTarget_one_iff
+#print axioms localBoundAllLevels_le_localBound

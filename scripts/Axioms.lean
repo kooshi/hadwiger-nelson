@@ -261,6 +261,19 @@ declared that no audited record carries fails as `stale-declaration`. -/
 #print axioms HadwigerNelson.PadicPlane.le_borelChromaticNumber_padicPlane
 #print axioms HadwigerNelson.PadicPlane.not_exists_bound_borelChromaticNumber_padicPlane
 #print axioms HadwigerNelson.PadicPlane.one_add_div_le_of_borelColoring
+-- FS131-ICS1 (IMPORTED, on `StandingFive.kloosterman_bound`): CLS in full and ℚ(√23, ∛2)'s local bound (`Rigidity/FourColourPlaces`, `Instances/SqrtTwentyThreeCbrtTwo`; planned by FS131-KCS1) — 9
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.five_le_localBound_sqrt23_cbrt2
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.localBound_sqrt23_cbrt2_eq_five
+#print axioms HadwigerNelson.Rigidity.colorable_four_levelTarget_one_iff
+#print axioms HadwigerNelson.Rigidity.exists_ratioAtMost_lt_quarter_iff
+#print axioms HadwigerNelson.Rigidity.exists_ratioAtMost_of_not_isFourColourPlace
+#print axioms HadwigerNelson.Rigidity.five_le_chromaticNumber_levelTarget_one_iff
+#print axioms HadwigerNelson.Rigidity.five_le_localBoundAllLevels_iff
+#print axioms HadwigerNelson.Rigidity.five_le_localBound_iff
+#print axioms HadwigerNelson.Rigidity.tca_iff_forall_not_isFourColourPlace
+
+-- FS131-IFR1 (IMPORTED, on `StandingFive.kloosterman_bound`): the model at `k = 7` (`Collapse/Headline`, the coordinator's ruling 3, inventory item 1021) — 1
+#print axioms HadwigerNelson.Collapse.exists_model_seven
 
 #eval AxiomAudit.declareImport ``HadwigerNelson.Outside.OAI158.no_proper_five_coloring
 
@@ -274,6 +287,11 @@ declared that no audited record carries fails as `stale-declaration`. -/
 #print axioms HadwigerNelson.Plane.radius_five
 -- FS131-ICO2 (IMPORTED, on `no_proper_five_coloring`, with `positive_entropy_rigidity` and `kloosterman_bound`): the collapse's six-or-seven corollary (`Collapse/Headline`) — 1
 #print axioms HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087_six_or_seven
+
+-- FS131-IFR1 (IMPORTED, on `no_proper_five_coloring`, with `positive_entropy_rigidity` and `kloosterman_bound`): item 1005's splits (`Collapse/Headline`) and the finite triangle-free six-chromatic graph (`Collapse/Density/Headline`) — 3
+#print axioms HadwigerNelson.Collapse.exists_finite_triangleFree_six_chromatic
+#print axioms HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087_le_seven
+#print axioms HadwigerNelson.Collapse.six_le_chromaticNumber_planeOver_sqrt635087
 
 #eval AxiomAudit.declareImport ``HadwigerNelson.Rigidity.positive_entropy_rigidity
 
@@ -309,6 +327,33 @@ declared that no audited record carries fails as `stale-declaration`. -/
 #print axioms HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087
 #print axioms HadwigerNelson.Collapse.chromaticNumber_plane_le_of_thick
 #print axioms HadwigerNelson.Collapse.exists_slice_of_colorable
+-- FS131-ICS1 (IMPORTED, on `Rigidity.positive_entropy_rigidity` and `StandingFive.kloosterman_bound`, through the headline): five colours by field and by class — the quadratic dichotomy and the family (`Instances/SqrtFiveClass`), ℚ(√23, ∛2) and ℚ(√23) (`Instances/SqrtTwentyThreeCbrtTwo`), the two readings of `L` (`Rigidity/FourColourPlaces`); planned by FS131-KCS1 — 7
+#print axioms HadwigerNelson.SqrtFiveClass.chromaticNumber_planeOver_sqrt_eq_five
+#print axioms HadwigerNelson.SqrtFiveClass.five_le_chromaticNumber_planeOver_sqrt_iff
+#print axioms HadwigerNelson.SqrtFiveClass.five_le_localBound_sqrt_iff
+#print axioms HadwigerNelson.SqrtFiveClass.localBound_sqrt_eq_five
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.chromaticNumber_planeOver_sqrt23_cbrt2_eq_five
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.localBound_sqrt23_eq_four
+#print axioms HadwigerNelson.Rigidity.min_localBoundAllLevels_five
+
+-- FS131-IFR1 (IMPORTED, on `Rigidity.positive_entropy_rigidity`, six of them on `StandingFive.kloosterman_bound` too): the density form of the collapse (`Collapse/Density/Upper`, `Collapse/Density/Headline`) — 17
+#print axioms HadwigerNelson.Collapse.IndepLaw.density_le_notThick
+#print axioms HadwigerNelson.Collapse.exists_triangleFree_ratio_lt
+#print axioms HadwigerNelson.Collapse.finIndepRatio_planeOver_deGrey
+#print axioms HadwigerNelson.Collapse.finIndepRatio_planeOver_eq_iSup_density
+#print axioms HadwigerNelson.Collapse.finIndepRatio_planeOver_eq_localRatio
+#print axioms HadwigerNelson.Collapse.finIndepRatio_planeOver_eq_mOne_of_thick
+#print axioms HadwigerNelson.Collapse.finIndepRatio_planeOver_eq_plane_of_thick
+#print axioms HadwigerNelson.Collapse.finIndepRatio_planeOver_sqrt635087
+#print axioms HadwigerNelson.Collapse.fractionalChromaticNumber_planeOver_deGrey
+#print axioms HadwigerNelson.Collapse.fractionalChromaticNumber_planeOver_eq
+#print axioms HadwigerNelson.Collapse.fractionalChromaticNumber_planeOver_eq_plane_of_thick
+#print axioms HadwigerNelson.Collapse.fractionalChromaticNumber_planeOver_sqrt635087
+#print axioms HadwigerNelson.Collapse.inv_le_localRatio_of_colorable
+#print axioms HadwigerNelson.Collapse.IndepLaw.density_le_localRatio
+#print axioms HadwigerNelson.Collapse.IndepLaw.density_le_max_of_unramified
+#print axioms HadwigerNelson.Collapse.exists_indepLaw_TA
+#print axioms HadwigerNelson.Collapse.integral_condOne_mul_eq_zero
 
 #eval IO.println "=== CLEAN ==="
 
@@ -13076,6 +13121,133 @@ three or fewer, from the kernel's print (`data/fs131/ict3/axioms-all.txt`, `tool
 #print axioms HadwigerNelson.CayleyThree.three_dvd_liftHeight
 #print axioms HadwigerNelson.CayleyThree.tightSet
 #print axioms HadwigerNelson.ThreeColour.Winding.flip
+
+/-! ## FS131-ICS1 — five colours by field and by class (`Rigidity/FourColourPlaces`, `Arith/StableAboveUsable`,
+`Instances/SqrtFiveClass`, `Instances/SqrtTwentyThreeCbrtTwo`, planned by FS131-KCS1, proved by FS131-ICS1; and the ruled
+`Rigidity/ClassRatio` edit, items 1027 and 1029: three lemmas made public, one added): every public record of the five
+modules on the standard three or fewer, from the kernel's print (`data/fs131/ics1/axioms-all.txt`,
+`data/fs131/ics1/audit_block.py`). The sixteen records on declared imports are under IMPORTED. -/
+
+#print axioms HadwigerNelson.UpperHalf.exists_stablePrime_card_eq_sq
+#print axioms HadwigerNelson.UpperHalf.localBound_le_finitePlane
+#print axioms HadwigerNelson.UpperHalf.localBound_le_unitQuadrance
+#print axioms HadwigerNelson.UpperHalf.nonempty_hom_levelTarget_one_unitQuadrance
+#print axioms HadwigerNelson.SqrtFiveClass.colorable_five_planeOver_sqrt
+#print axioms HadwigerNelson.SqrtFiveClass.exists_maximal_card_eq_of_isSquare
+#print axioms HadwigerNelson.SqrtFiveClass.localBound_sqrt_le_five
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.F23
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.card_ne_sq_of_pow_eq
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.cbrtTwo
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.cbrtTwo_pow_three
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.exists_cube_two
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.exists_usablePrime_eleven_F23
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.instNumberFieldSubtypeRealMemSubfieldF23
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.isSquare_twentyThree
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.nonempty_ringHom_padic_eleven_F23
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.not_isTotallyReal_F23
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.numberField_F23
+#print axioms HadwigerNelson.Rigidity.chromaticNumber_le_four_dyadic
+#print axioms HadwigerNelson.Rigidity.chromaticNumber_le_four_of_small
+#print axioms HadwigerNelson.Rigidity.exists_card_two_pow_sq
+#print axioms HadwigerNelson.Rigidity.ratioAtMost_dyadic_of_six_le
+#print axioms HadwigerNelson.Rigidity.IsFourColourPlace
+#print axioms HadwigerNelson.Rigidity.chromaticNumber_planeOver_le_localBoundAllLevels
+#print axioms HadwigerNelson.Rigidity.colorable_four_levelTarget_one_of_isFourColourPlace
+#print axioms HadwigerNelson.Rigidity.exists_isFourColourPlace_rat
+#print axioms HadwigerNelson.Rigidity.five_le_chromaticNumber_levelTarget_of_ratioAtMost
+#print axioms HadwigerNelson.Rigidity.localBoundAllLevels
+#print axioms HadwigerNelson.Rigidity.localBoundAllLevels_le_localBound
+
+/-! ## FS131-IFR1 — the density form of the collapse (`Collapse/Density/Defs`, `Upper`, `Headline`, `Plane/TriangularPacking`;
+planned by FS131-KFR1, proved by FS131-IFR1), the ruled moves into `Collapse/Headline` and `Rigidity.ratioAtMost_of_charBound`
+made public: every public record of the six modules on the standard three or fewer, from the kernel's print
+(`data/fs131/ifr1/axioms-all.txt`, `tools/fs131_ifr1_audit_block.py`). The records on declared imports are under IMPORTED. -/
+
+#print axioms HadwigerNelson.Collapse.IndepLaw.carried
+#print axioms HadwigerNelson.Collapse.IndepLaw.casesOn
+#print axioms HadwigerNelson.Collapse.IndepLaw.ctorIdx
+#print axioms HadwigerNelson.Collapse.IndepLaw.density
+#print axioms HadwigerNelson.Collapse.IndepLaw.isProb
+#print axioms HadwigerNelson.Collapse.IndepLaw.mk.inj
+#print axioms HadwigerNelson.Collapse.IndepLaw.mk.injEq
+#print axioms HadwigerNelson.Collapse.IndepLaw.mk.noConfusion
+#print axioms HadwigerNelson.Collapse.IndepLaw.mk.sizeOf_spec
+#print axioms HadwigerNelson.Collapse.IndepLaw.noConfusion
+#print axioms HadwigerNelson.Collapse.IndepLaw.noConfusionType
+#print axioms HadwigerNelson.Collapse.IndepLaw.recOn
+#print axioms HadwigerNelson.Collapse.IndepLaw.rot_inv
+#print axioms HadwigerNelson.Collapse.IndepLaw.shift_inv
+#print axioms HadwigerNelson.Collapse.IndepLaw.μ
+#print axioms HadwigerNelson.Collapse.IndepSets
+#print axioms HadwigerNelson.Collapse.SetEdgeNull
+#print axioms HadwigerNelson.Collapse.card_div_le_finIndepRatio_of_hom
+#print axioms HadwigerNelson.Collapse.card_div_le_stableRatio
+#print axioms HadwigerNelson.Collapse.disc7_le_mOne
+#print axioms HadwigerNelson.Collapse.finIndepRatio_planeOver_le_half
+#print axioms HadwigerNelson.Collapse.half_le_stableRatio_of_isRamified
+#print axioms HadwigerNelson.Collapse.isClosed_indepSets
+#print axioms HadwigerNelson.Collapse.levelTarget_adj_add
+#print axioms HadwigerNelson.Collapse.localRatio
+#print axioms HadwigerNelson.Collapse.localRatio_le_finIndepRatio
+#print axioms HadwigerNelson.Collapse.localRatio_le_iff
+#print axioms HadwigerNelson.Collapse.mOne_le_finIndepRatio_planeOver
+#print axioms HadwigerNelson.Collapse.mOne_le_localRatio
+#print axioms HadwigerNelson.Collapse.measurableSet_indepSets
+#print axioms HadwigerNelson.Collapse.nonempty_indepLaw
+#print axioms HadwigerNelson.Collapse.ratioAtMost_of_stableRatio_le
+#print axioms HadwigerNelson.Collapse.ratioAtMost_of_thickAt
+#print axioms HadwigerNelson.Collapse.setEdgeNull_empty
+#print axioms HadwigerNelson.Collapse.sixth_lt_mOne
+#print axioms HadwigerNelson.Collapse.stableRatio
+#print axioms HadwigerNelson.Collapse.stableRatio_le_finIndepRatio
+#print axioms HadwigerNelson.Collapse.stableRatio_le_localRatio
+#print axioms HadwigerNelson.Collapse.stableRatio_le_of_ratioAtMost
+#print axioms HadwigerNelson.Collapse.stableRatio_le_of_thickAt
+#print axioms HadwigerNelson.Collapse.stableRatio_le_one
+#print axioms HadwigerNelson.Collapse.cliqueFree_three_planeOver_of_sqrt_three_notMem
+#print axioms HadwigerNelson.Collapse.fractionalChromaticNumber_le_card_div
+#print axioms HadwigerNelson.Collapse.inv_localRatio_lt_five
+#print axioms HadwigerNelson.Collapse.le_volume_selection
+#print axioms HadwigerNelson.Collapse.localRatio_eq_mOne_of_thick
+#print axioms HadwigerNelson.Collapse.sqrt_three_notMem_F635087
+#print axioms HadwigerNelson.Collapse.IndepLaw.density_le_finIndepRatio
+#print axioms HadwigerNelson.Collapse.IndepLaw.measurePreserving_shift
+#print axioms HadwigerNelson.Collapse.IsIndicatorSpectral
+#print axioms HadwigerNelson.Collapse.IsIndicatorSpectral.integral_unit
+#print axioms HadwigerNelson.Collapse.IsIndicatorSpectral.rotInv
+#print axioms HadwigerNelson.Collapse.cayR
+#print axioms HadwigerNelson.Collapse.condOne
+#print axioms HadwigerNelson.Collapse.condOne.congr_simp
+#print axioms HadwigerNelson.Collapse.exists_extension_one
+#print axioms HadwigerNelson.Collapse.exists_indepLaw
+#print axioms HadwigerNelson.Collapse.exists_isIndicatorSpectral
+#print axioms HadwigerNelson.Collapse.exists_slice_set
+#print axioms HadwigerNelson.Collapse.exists_window_bound
+#print axioms HadwigerNelson.Collapse.factorOne
+#print axioms HadwigerNelson.Collapse.finIndepRatio_planeOver_le_cayR
+#print axioms HadwigerNelson.Collapse.indShift
+#print axioms HadwigerNelson.Collapse.ratioLe_levR_range_of_unramified
+#print axioms HadwigerNelson.Collapse.rowsEdgeNull_levelRows_set
+#print axioms HadwigerNelson.Collapse.setCol
+#print axioms HadwigerNelson.Collapse.setIntegral_compl_TA_re_one
+#print axioms HadwigerNelson.Collapse.tendsto_measure_ne_one
+#print axioms HadwigerNelson.Collapse.F7
+#print axioms HadwigerNelson.Collapse.d7
+#print axioms HadwigerNelson.Collapse.stablePrime_F7
+#print axioms HadwigerNelson.Collapse.weil_142_lt_sixth
+#print axioms HadwigerNelson.Plane.fifth_lt_mOne
+#print axioms HadwigerNelson.Plane.isIndepSet_triPacking
+#print axioms HadwigerNelson.Plane.linearIndependent_triLattice
+#print axioms HadwigerNelson.Plane.measurableSet_triPacking
+#print axioms HadwigerNelson.Plane.pi_div_le_mOne
+#print axioms HadwigerNelson.Plane.triCentre
+#print axioms HadwigerNelson.Plane.triCentre_sub
+#print axioms HadwigerNelson.Plane.triPacking
+#print axioms HadwigerNelson.Plane.triPacking_periodic
+#print axioms HadwigerNelson.Plane.two_le_dist_triCentre
+#print axioms HadwigerNelson.Plane.upperDensity_triPacking
+#print axioms HadwigerNelson.Plane.zero_mem_triPacking
+#print axioms HadwigerNelson.Rigidity.ratioAtMost_of_charBound
 
 /-! ## FS131-IRU1 — the ring of unit vectors (`Rigidity/NormOneGen`, `UnitRingEq`, `UsablePrime`, `PlaneComponents`,
 `Instances/UnitRingModels`; ledger rows 100 and 105; planner FS131-KRU1, implementer FS131-IRU1), and the three lemmas of

@@ -1,0 +1,113 @@
+'HadwigerNelson.Collapse.finIndepRatio_planeOver_eq_localRatio' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity]
+'HadwigerNelson.Collapse.finIndepRatio_planeOver_eq_iSup_density' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity]
+'HadwigerNelson.Collapse.fractionalChromaticNumber_planeOver_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity]
+'HadwigerNelson.Collapse.finIndepRatio_planeOver_eq_mOne_of_thick' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity]
+'HadwigerNelson.Collapse.finIndepRatio_planeOver_eq_plane_of_thick' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity]
+'HadwigerNelson.Collapse.fractionalChromaticNumber_planeOver_eq_plane_of_thick' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity]
+'HadwigerNelson.Collapse.finIndepRatio_planeOver_sqrt635087' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.Collapse.finIndepRatio_planeOver_deGrey' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.Collapse.fractionalChromaticNumber_planeOver_sqrt635087' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.Collapse.fractionalChromaticNumber_planeOver_deGrey' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.Collapse.IndepLaw.density_le_localRatio' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity]
+'HadwigerNelson.Collapse.IndepLaw.density_le_notThick' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.Collapse.le_volume_selection' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Collapse.inv_le_localRatio_of_colorable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity]
+'HadwigerNelson.Collapse.inv_localRatio_lt_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Collapse.exists_triangleFree_ratio_lt' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.Collapse.exists_finite_triangleFree_six_chromatic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+'HadwigerNelson.Collapse.six_le_chromaticNumber_planeOver_sqrt635087' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+'HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087_le_seven' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+'HadwigerNelson.Collapse.exists_model_seven' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.Plane.pi_div_le_mOne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Plane.fifth_lt_mOne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.ratioAtMost_of_charBound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtFiveClass.five_le_chromaticNumber_planeOver_sqrt_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.SqrtFiveClass.chromaticNumber_planeOver_sqrt_eq_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.SqrtTwentyThreeCbrtTwo.chromaticNumber_planeOver_sqrt23_cbrt2_eq_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.Rigidity.five_le_localBound_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.SqrtTwentyThreeCbrtTwo.localBound_sqrt23_cbrt2_eq_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.UpperHalf.localBound_le_unitQuadrance' depends on axioms: [propext, Classical.choice, Quot.sound]

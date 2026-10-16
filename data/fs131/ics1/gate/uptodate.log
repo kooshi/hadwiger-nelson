@@ -1,0 +1,3 @@
+slot: admitted ics1-uptodate: mem 6 GiB (hard cap), cpus 0,1,2,3
+All targets up-to-date (6534 jobs).
+exit=0 wall=4s

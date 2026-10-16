@@ -1,0 +1,31 @@
+# Branch fs131-kfr1 (the density form of the collapse), rewritten 2026-10-16 by the privacy filter before its merge (inventory items 1025, 1063): its own commits, old new.
+# Its old main commits became main's rewritten ones (data/fs131/history-rewrite/main-2026-10-16.txt); main's later commits were left as they are.
+20a356c9f df455c1b7
+33bbc83dd a560c96d6
+c2d2d8fb7 acf2ab035
+0bcac0a96 c6f21e10f
+26f14172f de46af660
+627ec43ba 7ee7ead06
+4ee9b8856 48315edb6
+a0600cf37 bad5c5371
+97989fb99 3cf332c41
+1eea2ae5f 27158739b
+da11d9e1f f83113756
+6499da816 d34777e28
+86e176fc3 24c8b2dd5
+ef6e11f20 be316a0c7
+57ef7d145 300a224a6
+bdec33ee7 5b0535a94
+c28039837 c87a6edfe
+fb029ddc0 5eb64ea26
+6eb1e875c 11bf37a5c
+e849029c3 298569914
+9e9739eb5 e3f328f3e
+e21fbc6b4 f21a9e3dc
+8dbd69096 da020f966
+2c6896990 b8cef1f36
+0c3ae78a8 cda87832c
+c984cef29 a02154d7f
+571469c32 fa14fbf42
+0b3964085 727365c71
+342908505 8950430e2

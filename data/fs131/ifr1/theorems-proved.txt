@@ -1,0 +1,80 @@
+# FS131-IFR1 — every kernel theorem this phase proved (public, kind THM, in the four new modules and the five moved into
+# Collapse/Headline), with its axioms as `data/fs131/ifr1/axioms-all.txt` printed them. Left out: the structure IndepLaw's
+# field projections and constructor lemmas, the generated `condOne.congr_simp`, and `Rigidity.ratioAtMost_of_charBound`
+# (proved by FS131-ICM1, made public here).
+Collapse.Headline | `HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087_le_seven` | standard three + no_proper_five_coloring, positive_entropy_rigidity, kloosterman_bound
+Collapse.Headline | `HadwigerNelson.Collapse.exists_model_seven` | standard three + kloosterman_bound
+Collapse.Headline | `HadwigerNelson.Collapse.six_le_chromaticNumber_planeOver_sqrt635087` | standard three + no_proper_five_coloring, positive_entropy_rigidity, kloosterman_bound
+Collapse.Headline | `HadwigerNelson.Collapse.stablePrime_F7` | standard three
+Collapse.Headline | `HadwigerNelson.Collapse.weil_142_lt_sixth` | standard three
+Collapse.Density.Defs | `HadwigerNelson.Collapse.card_div_le_finIndepRatio_of_hom` | standard three
+Collapse.Density.Defs | `HadwigerNelson.Collapse.card_div_le_stableRatio` | standard three
+Collapse.Density.Defs | `HadwigerNelson.Collapse.disc7_le_mOne` | standard three
+Collapse.Density.Defs | `HadwigerNelson.Collapse.finIndepRatio_planeOver_le_half` | standard three
+Collapse.Density.Defs | `HadwigerNelson.Collapse.half_le_stableRatio_of_isRamified` | standard three
+Collapse.Density.Defs | `HadwigerNelson.Collapse.isClosed_indepSets` | standard three
+Collapse.Density.Defs | `HadwigerNelson.Collapse.levelTarget_adj_add` | standard three
+Collapse.Density.Defs | `HadwigerNelson.Collapse.localRatio_le_finIndepRatio` | standard three
+Collapse.Density.Defs | `HadwigerNelson.Collapse.localRatio_le_iff` | standard three
+Collapse.Density.Defs | `HadwigerNelson.Collapse.mOne_le_finIndepRatio_planeOver` | standard three
+Collapse.Density.Defs | `HadwigerNelson.Collapse.mOne_le_localRatio` | standard three
+Collapse.Density.Defs | `HadwigerNelson.Collapse.measurableSet_indepSets` | standard three
+Collapse.Density.Defs | `HadwigerNelson.Collapse.nonempty_indepLaw` | standard three
+Collapse.Density.Defs | `HadwigerNelson.Collapse.ratioAtMost_of_stableRatio_le` | standard three
+Collapse.Density.Defs | `HadwigerNelson.Collapse.ratioAtMost_of_thickAt` | standard three
+Collapse.Density.Defs | `HadwigerNelson.Collapse.setEdgeNull_empty` | standard three
+Collapse.Density.Defs | `HadwigerNelson.Collapse.sixth_lt_mOne` | standard three
+Collapse.Density.Defs | `HadwigerNelson.Collapse.stableRatio_le_finIndepRatio` | standard three
+Collapse.Density.Defs | `HadwigerNelson.Collapse.stableRatio_le_localRatio` | standard three
+Collapse.Density.Defs | `HadwigerNelson.Collapse.stableRatio_le_of_ratioAtMost` | standard three
+Collapse.Density.Defs | `HadwigerNelson.Collapse.stableRatio_le_of_thickAt` | standard three
+Collapse.Density.Defs | `HadwigerNelson.Collapse.stableRatio_le_one` | standard three
+Collapse.Density.Upper | `HadwigerNelson.Collapse.IndepLaw.density_le_finIndepRatio` | standard three
+Collapse.Density.Upper | `HadwigerNelson.Collapse.IndepLaw.density_le_localRatio` | standard three + positive_entropy_rigidity
+Collapse.Density.Upper | `HadwigerNelson.Collapse.IndepLaw.density_le_max_of_unramified` | standard three + positive_entropy_rigidity
+Collapse.Density.Upper | `HadwigerNelson.Collapse.IndepLaw.measurePreserving_shift` | standard three
+Collapse.Density.Upper | `HadwigerNelson.Collapse.IsIndicatorSpectral.integral_unit` | standard three
+Collapse.Density.Upper | `HadwigerNelson.Collapse.IsIndicatorSpectral.rotInv` | standard three
+Collapse.Density.Upper | `HadwigerNelson.Collapse.exists_extension_one` | standard three
+Collapse.Density.Upper | `HadwigerNelson.Collapse.exists_indepLaw` | standard three
+Collapse.Density.Upper | `HadwigerNelson.Collapse.exists_indepLaw_TA` | standard three + positive_entropy_rigidity
+Collapse.Density.Upper | `HadwigerNelson.Collapse.exists_isIndicatorSpectral` | standard three
+Collapse.Density.Upper | `HadwigerNelson.Collapse.exists_slice_set` | standard three
+Collapse.Density.Upper | `HadwigerNelson.Collapse.exists_window_bound` | standard three
+Collapse.Density.Upper | `HadwigerNelson.Collapse.finIndepRatio_planeOver_le_cayR` | standard three
+Collapse.Density.Upper | `HadwigerNelson.Collapse.integral_condOne_mul_eq_zero` | standard three + positive_entropy_rigidity
+Collapse.Density.Upper | `HadwigerNelson.Collapse.ratioLe_levR_range_of_unramified` | standard three
+Collapse.Density.Upper | `HadwigerNelson.Collapse.rowsEdgeNull_levelRows_set` | standard three
+Collapse.Density.Upper | `HadwigerNelson.Collapse.setIntegral_compl_TA_re_one` | standard three
+Collapse.Density.Upper | `HadwigerNelson.Collapse.tendsto_measure_ne_one` | standard three
+Collapse.Density.Headline | `HadwigerNelson.Collapse.IndepLaw.density_le_notThick` | standard three + positive_entropy_rigidity, kloosterman_bound
+Collapse.Density.Headline | `HadwigerNelson.Collapse.cliqueFree_three_planeOver_of_sqrt_three_notMem` | standard three
+Collapse.Density.Headline | `HadwigerNelson.Collapse.exists_finite_triangleFree_six_chromatic` | standard three + no_proper_five_coloring, positive_entropy_rigidity, kloosterman_bound
+Collapse.Density.Headline | `HadwigerNelson.Collapse.exists_triangleFree_ratio_lt` | standard three + positive_entropy_rigidity, kloosterman_bound
+Collapse.Density.Headline | `HadwigerNelson.Collapse.finIndepRatio_planeOver_deGrey` | standard three + positive_entropy_rigidity, kloosterman_bound
+Collapse.Density.Headline | `HadwigerNelson.Collapse.finIndepRatio_planeOver_eq_iSup_density` | standard three + positive_entropy_rigidity
+Collapse.Density.Headline | `HadwigerNelson.Collapse.finIndepRatio_planeOver_eq_localRatio` | standard three + positive_entropy_rigidity
+Collapse.Density.Headline | `HadwigerNelson.Collapse.finIndepRatio_planeOver_eq_mOne_of_thick` | standard three + positive_entropy_rigidity
+Collapse.Density.Headline | `HadwigerNelson.Collapse.finIndepRatio_planeOver_eq_plane_of_thick` | standard three + positive_entropy_rigidity
+Collapse.Density.Headline | `HadwigerNelson.Collapse.finIndepRatio_planeOver_sqrt635087` | standard three + positive_entropy_rigidity, kloosterman_bound
+Collapse.Density.Headline | `HadwigerNelson.Collapse.fractionalChromaticNumber_le_card_div` | standard three
+Collapse.Density.Headline | `HadwigerNelson.Collapse.fractionalChromaticNumber_planeOver_deGrey` | standard three + positive_entropy_rigidity, kloosterman_bound
+Collapse.Density.Headline | `HadwigerNelson.Collapse.fractionalChromaticNumber_planeOver_eq` | standard three + positive_entropy_rigidity
+Collapse.Density.Headline | `HadwigerNelson.Collapse.fractionalChromaticNumber_planeOver_eq_plane_of_thick` | standard three + positive_entropy_rigidity
+Collapse.Density.Headline | `HadwigerNelson.Collapse.fractionalChromaticNumber_planeOver_sqrt635087` | standard three + positive_entropy_rigidity, kloosterman_bound
+Collapse.Density.Headline | `HadwigerNelson.Collapse.inv_le_localRatio_of_colorable` | standard three + positive_entropy_rigidity
+Collapse.Density.Headline | `HadwigerNelson.Collapse.inv_localRatio_lt_five` | standard three
+Collapse.Density.Headline | `HadwigerNelson.Collapse.le_volume_selection` | standard three
+Collapse.Density.Headline | `HadwigerNelson.Collapse.localRatio_eq_mOne_of_thick` | standard three
+Collapse.Density.Headline | `HadwigerNelson.Collapse.sqrt_three_notMem_F635087` | standard three
+Plane.TriangularPacking | `HadwigerNelson.Plane.fifth_lt_mOne` | standard three
+Plane.TriangularPacking | `HadwigerNelson.Plane.isIndepSet_triPacking` | standard three
+Plane.TriangularPacking | `HadwigerNelson.Plane.linearIndependent_triLattice` | standard three
+Plane.TriangularPacking | `HadwigerNelson.Plane.measurableSet_triPacking` | standard three
+Plane.TriangularPacking | `HadwigerNelson.Plane.pi_div_le_mOne` | standard three
+Plane.TriangularPacking | `HadwigerNelson.Plane.triCentre_sub` | standard three
+Plane.TriangularPacking | `HadwigerNelson.Plane.triPacking_periodic` | standard three
+Plane.TriangularPacking | `HadwigerNelson.Plane.two_le_dist_triCentre` | standard three
+Plane.TriangularPacking | `HadwigerNelson.Plane.upperDensity_triPacking` | standard three
+Plane.TriangularPacking | `HadwigerNelson.Plane.zero_mem_triPacking` | standard three
+COUNT 75
