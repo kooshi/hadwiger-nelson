@@ -1,7 +1,7 @@
 import Proofs.HadwigerNelson.CayleyThree.Fibre
 
 /-!
-# Three colours on abelian Cayley graphs: periodic colourings are dense, and `P = F` (FS-131, planner FS131-KTC1; skeleton)
+# Three colours on abelian Cayley graphs: periodic colourings are dense, and `P = F` (FS-131; planner FS131-KTC1, implementers FS131-ICT1 and FS131-ICT2)
 
 **Read aloud, against `LEDGER.md` row 79**: *"its periodic 3-colourings are dense, … so `P = F` (C3-inherit) and C3-aper hold
 at three colours for the whole class"*, and the dichotomy's first clause *"`F` has finite index ⟺ the colouring space is
@@ -459,8 +459,8 @@ theorem exists_periodic_properAlong_eqOn {m : ℕ} {s : Fin m → A} (hgen : Fun
   have hev : ∀ ℓ : L, Even (lam ℓ - ∑ j, (ℓ : Fin m → ℤ) j) := fun ℓ => by
     obtain ⟨y, -, ν, hℓ, hl⟩ := hlam_eq ℓ
     rw [hl, hℓ]
-    obtain ⟨u, hu⟩ := even_pmHeight_sub_sum hc y
-    obtain ⟨u', hu'⟩ := even_pmHeight_sub_sum hc 0
+    obtain ⟨u, hu⟩ := even_pmHeight_sub_sum (s := s) (c := c) y
+    obtain ⟨u', hu'⟩ := even_pmHeight_sub_sum (s := s) (c := c) 0
     refine ⟨u - u' + 3 * N' * Λ ν - 3 * D₀ * N' * ∑ j, ν j, ?_⟩
     have hs : ∑ j, (y + N • ν) j = ∑ j, y j + N * ∑ j, ν j := by
       rw [Finset.mul_sum, ← Finset.sum_add_distrib]
@@ -470,7 +470,7 @@ theorem exists_periodic_properAlong_eqOn {m : ℕ} {s : Fin m → A} (hgen : Fun
     rw [← hh] at hu hu'
     push_cast
     linarith
-  have hevh : ∀ β ∈ Bt, Even (h β - ∑ j, β j) := fun β _ => even_pmHeight_sub_sum hc β
+  have hevh : ∀ β ∈ Bt, Even (h β - ∑ j, β j) := fun β _ => even_pmHeight_sub_sum (s := s) (c := c) β
   -- the slope is `0` modulo `3` on `L`
   have hlam3 : ∀ ℓ : L, ((lam ℓ : ℤ) : ZMod 3) = 0 := fun ℓ => by
     obtain ⟨y, hy, ν, -, hl⟩ := hlam_eq ℓ

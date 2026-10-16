@@ -3,7 +3,7 @@ import Proofs.HadwigerNelson.Kempe
 import Proofs.HadwigerNelson.LocalGlobal
 
 /-!
-# Three colours on abelian Cayley graphs: the criterion and the periodic form (FS-131, planner FS131-KTC1; skeleton)
+# Three colours on abelian Cayley graphs: the criterion and the periodic form (FS-131; planner FS131-KTC1, implementers FS131-ICT1 and FS131-ICT2)
 
 **Read aloud, against `LEDGER.md` row 79.** Row 79: *"every Cayley graph of a finitely generated torsion-free abelian group is
 3-colourable iff a character puts every generator in `[1/3, 2/3]` … ⟺ it has a periodic (circular) 3-colouring"*, for `S = −S`

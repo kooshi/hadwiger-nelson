@@ -2,7 +2,7 @@ import Proofs.HadwigerNelson.CayleyThree.Circular
 import Mathlib.Order.WellQuasiOrder
 
 /-!
-# Three colours on abelian Cayley graphs: heights, the fibre, tight relations (FS-131, planner FS131-KTC1; skeleton)
+# Three colours on abelian Cayley graphs: heights, the fibre, tight relations (FS-131; planner FS131-KTC1, implementers FS131-ICT1 and FS131-ICT2)
 
 The layer FS73-T21/T23 and Coxeter's H-ii stand on, in the library's normalization: a colouring `c : A → ZMod 3` proper
 along a family `s : Fin m → A` (`ThreeColour.ProperAlong`), steps lifted to `{1, 2}` (`ThreeColour.step`), the winding
@@ -176,11 +176,8 @@ theorem abs_pmHeight_sub_le (hc : ProperAlong s c) (x y : Fin m → ℤ) :
   rwa [Finset.univ_sum_single, add_sub_cancel] at h
 
 /-- The `±1` height has the parity of `Σ_j x_j`. -/
-theorem even_pmHeight_sub_sum (hc : ProperAlong s c) (x : Fin m → ℤ) : Even (pmHeight s c x - ∑ j, x j) := by
-  -- `hc` is not needed: `pmHeight x − Σ x = 2 (Σ x − liftHeight x)` for every colouring (the skeleton's statement
-  -- carries it; recorded in `plans/FS131-ICT1-three-colour.md`)
-  have _ := hc
-  exact ⟨∑ j, x j - liftHeight s c x, by rw [pmHeight]; ring⟩
+theorem even_pmHeight_sub_sum (x : Fin m → ℤ) : Even (pmHeight s c x - ∑ j, x j) :=
+  ⟨∑ j, x j - liftHeight s c x, by rw [pmHeight]; ring⟩
 
 /-- On a relation the height is the held winding of its two parts read from `0`. -/
 theorem liftHeight_of_relMap_eq_zero {r : Fin m → ℤ} (hr : relMap s r = 0) :
@@ -427,17 +424,14 @@ theorem fibre_coord_of_isTight {s : Fin m → A} {W : Winding s} {σ : (relMap s
 
 /-! ## §3 Dickson in place of LP duality -/
 
-/-- **A Gordan bound by Dickson's lemma.** On a set `M ⊆ ℕ^ι` closed under sums and under differences of comparable
-elements, two functions additive on `M` with `g x = 0 → t x = 0` satisfy `t ≤ κ·g` for one `κ`. (The minimal nonzero
+/-- **A Gordan bound by Dickson's lemma.** On a set `M ⊆ ℕ^ι` closed under differences of comparable elements, two
+functions additive on `M` with `g x = 0 → t x = 0` satisfy `t ≤ κ·g` for one `κ`. (The minimal nonzero
 elements of `M` are an antichain, finite by `WellQuasiOrderedLE.finite_of_isAntichain`; `κ` is the largest `t` among them.) -/
 theorem exists_le_mul_of_imp_eq_zero {ι : Type*} [Finite ι] (M : Set (ι → ℕ))
-    (hadd : ∀ x ∈ M, ∀ y ∈ M, x + y ∈ M) (hsub : ∀ x ∈ M, ∀ y ∈ M, y ≤ x → x - y ∈ M) (g t : (ι → ℕ) → ℕ)
+    (hsub : ∀ x ∈ M, ∀ y ∈ M, y ≤ x → x - y ∈ M) (g t : (ι → ℕ) → ℕ)
     (hg : ∀ x ∈ M, ∀ y ∈ M, g (x + y) = g x + g y) (ht : ∀ x ∈ M, ∀ y ∈ M, t (x + y) = t x + t y)
     (h0 : ∀ x ∈ M, g x = 0 → t x = 0) : ∃ κ : ℕ, ∀ x ∈ M, t x ≤ κ * g x := by
   classical
-  -- `hadd` is not needed: the decomposition into minimal elements uses only `hsub` and additivity (the skeleton's
-  -- statement carries it; recorded in `plans/FS131-ICT1-three-colour.md`)
-  have _ := hadd
   -- the minimal nonzero elements of `M` are an antichain, finite by Dickson's lemma
   let Mn : Set (ι → ℕ) := {μ | μ ∈ M ∧ μ ≠ 0 ∧ ∀ ν ∈ M, ν ≠ 0 → ν ≤ μ → ν = μ}
   have hanti : IsAntichain (· ≤ ·) Mn := fun μ hμ ν hν hne hle => hne (hν.2.2 μ hμ.1 hμ.2.1 hle)
@@ -526,7 +520,7 @@ theorem exists_slack_bound {s : Fin m → A} (W : Winding s) (j : Fin m)
       have h3 := slack_eq w hw
       rw [e, map_add, mr_add] at h1
       omega
-    obtain ⟨κ, hκ⟩ := exists_le_mul_of_imp_eq_zero M hMadd hMsub slack (fun v => v j) hslack
+    obtain ⟨κ, hκ⟩ := exists_le_mul_of_imp_eq_zero M hMsub slack (fun v => v j) hslack
       (fun v _ w _ => rfl) fun v hv h0 => by
         by_contra hvj
         have hσ : IsTight W ⟨sg v, hv⟩ := by

@@ -41,3 +41,80 @@ l. 433) took `(hadd : ∀ x ∈ M, ∀ y ∈ M, x + y ∈ M)` and read it only b
 5. **The drafts** for the front files (plan § 3.8 brought to what is proved; "prior art not yet searched" where a novelty line
    would go, item 1000) — a saved stage.
 6. **The report**.
+
+## Stage 2 — SAVED (partly): the ruled drops applied; the build running at the coordinator's stop; the gate's tools written, not run
+
+**Stopped here at the coordinator's word** (message of 2026-10-16, about 15:56 UTC: a pause Kooshi called; save a stage
+and hand back). What is done, what is running, and what is left, for a successor in this worktree and on this branch.
+
+### 2.1 The two ruled drops (inventory item 1012), applied
+
+- `CayleyThree.even_pmHeight_sub_sum` (`Fibre.lean` l. 179): `(hc : ProperAlong s c)` removed; the proof is now the term
+  `⟨∑ j, x j - liftHeight s c x, by rw [pmHeight]; ring⟩`. Its three call sites in `Density.lean`
+  (`exists_periodic_properAlong_eqOn`, ll. 462, 463, 473) pass `(s := s) (c := c)` in place of `hc`.
+- `CayleyThree.exists_le_mul_of_imp_eq_zero` (`Fibre.lean` l. 430): `(hadd : ∀ x ∈ M, ∀ y ∈ M, x + y ∈ M)` removed, with the
+  `have _ := hadd` and its comment; its docstring's "closed under sums and under differences of comparable elements" now reads
+  "closed under differences of comparable elements" (the hypothesis it described is gone). Its one call site
+  (`exists_slack_bound`) drops `hMadd` from the argument list (`hMadd` is still used there, for `hslack`).
+- Doc text only: the three module titles' "(FS-131, planner FS131-KTC1; skeleton)" now reads "(FS-131; planner FS131-KTC1,
+  implementers FS131-ICT1 and FS131-ICT2)"; the three `ARCHITECTURE.md` rows say the same in place of "skeleton".
+- **Iteration (not evidence):** the three modules elaborated in order with the lakefile's options
+  (`data/fs131/ict2/seq.sh drops`, `lean -o` into this tree's `.lake/build`, where none of the three was compiled): each
+  `exit=0`, no warning (`data/fs131/ict2/logs/{Circular,Fibre,Density}-drops.log`).
+
+### 2.2 The build
+
+Started 2026-10-16 15:50:42 UTC: `SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 python3 /home/kooshi/source/lean-dir/scripts/slot.py
+--mem 8 --cpus 5 -- env MEMMAX=8G BATCH=3 ./scripts/build.sh`, process group `3922409`
+(`data/fs131/ict2/logs/build1.pgid`), log `data/fs131/ict2/build1.full.log` (its last line `exit=<n>` when it ends), sources'
+md5 at the start `data/fs131/ict2/build1.sources.md5`. At the stop it was at batch 288 of 735 (about 1.7 s a batch: the walk;
+the three modules and the root compile at the end). It is left to finish (the coordinator's word allows either); its result
+is § 2.4, if this job saw it end.
+
+### 2.3 The gate's tools, written and **not yet run** (none plant-tested: a successor runs each with its control first)
+
+- `data/fs131/ict2/run-gate.sh` — `data/fs131/clone1/run-gate.sh` with its log directory `data/fs131/ict2/gate/` and slot
+  names `ict2-*`; nothing else changed (`diff` in this stage's work).
+- `data/fs131/ict2/lean/StatementDump.lean` — FS131-ICT1's dumper, renamed only. Run after the build:
+  `lake env lean data/fs131/ict2/lean/StatementDump.lean > data/fs131/ict2/statements-after.txt` (gzip it before committing:
+  inventory item 1011).
+- `data/fs131/ict2/lean/ReAdd.lean` — the three ruled changes undone by term surgery on the stored types (the two dropped
+  binders put back with `mkArrow` after 5 and 3 leading binders, their domains elaborated from the skeleton's text;
+  `mcshane_model`'s right side replaced by `∑ j, x j`), printing `AFTER`/`READD`/`CONTROL-TRUE`/`CONTROL-POS`/`RHS-IS-L1` lines
+  with `Expr.hash` for comparison with the skeleton's stored hashes (FS131-LCH1's method). Not yet elaborated: it may need a
+  fix at first run.
+- `tools/fs131_ict2_statements.py BEFORE AFTER READD [--plant]` — the comparator: SAME / RULED (hash and text) / CHANGED /
+  MISSING / ADDED, `ALLOWED_PUBLIC` = FS131-ICT1's fifteen public helpers (record §§ 2, 3.4, 5), seven plants. BEFORE is
+  `data/fs131/ict1/statements-before.txt.gz`.
+- `data/fs131/ict2/lean/AxiomsAll.lean` and `tools/fs131_ict2_audit_block.py` — the kernel's print of every record of the
+  three modules, and the generator of their `#print axioms` block for `scripts/Axioms.lean`'s CLEAN section (FS131-ICO2's
+  method; a record on any import STOPS it here). The block is not yet in `scripts/Axioms.lean`; after it goes in (a
+  `/-! ## FS131-ICT2 … -/` block before `=== PURCHASED ===`, as FS131-ICO2's), run the generator with `--coverage`.
+- `data/fs131/ict2/lean/VacuityNew.lean` — the scan's `declarations=` and `refutations-skipped` counts for the three modules
+  (FS131-ICO2's reader).
+- `data/fs131/ict2/lean/ReadAloud.lean` — the fifteen head and model statements as stored, their axioms, the definitions they
+  read and the named inhabitants (`ThreeColour.properAlong_one_two`, `ThreeColour.nonempty_winding_one_two`,
+  `isTight_one_two`, `coloringOneTwo`, `mcshane_model`; `colorable_three_rat` for `not_isPeriodic_rat`'s closed carrier,
+  which the scan reads as evidence: `scripts/Vacuity.lean` l. 637).
+
+### 2.4 What is left, in order (for the successor)
+
+1. Read the build's end in `data/fs131/ict2/build1.full.log` (§ 2.2) and check `md5sum -c data/fs131/ict2/build1.sources.md5`.
+   If it did not finish green, rebuild with the brief's line.
+2. `lake lint --no-build -- --no-build --trace` under the slot (LEAN.md § The gate); a finding in the three modules needs a
+   proof edit and a rebuild.
+3. The dumps (`StatementDump`, `ReAdd`), then `tools/fs131_ict2_statements.py` with `--plant`; the audit block
+   (`AxiomsAll` → `fs131_ict2_audit_block.py`, its `--plant`, then the block into `scripts/Axioms.lean`, then `--coverage`;
+   the axioms self-test's controls may need moving by `scripts/axioms-controls.txt`'s rule if its counts are read there);
+   `VacuityNew`; commit; then `data/fs131/ict2/run-gate.sh` on that commit, and every count against
+   `data/fs131/ico2/gate/` (baseline: axioms 11,398 records — 10,747 clean, 569 axiom-free, 77 imported, 5 purchases;
+   vacuity `declarations=22357 refutations-skipped=242 sites=1455`, `vacuous=0 stale=0 declared=3 witnessed=38
+   generic=1412 unknown=2`; assumptions `axioms=3 rests=99 named=19 inline=14 outside=7 ours=21 open=5 takes=109
+   mentions=2`). The three modules are new to `main`, so every change should be theirs.
+4. The read-aloud against row 79 (`ReadAloud.lean`'s print; plan § 3.2 has the planner's), with what is not claimed.
+5. The drafts (plan § 3.8 brought to what is proved; "prior art not yet searched" where a novelty line would go, item 1000).
+   One observation for them: definitions without a spec example of their own — `circularColoring`, `tightSet`, `fibre`,
+   `Winding.flip`, `coloringOneTwo` (`heightWinding` is exercised by `isTight_one_two`, `mcshane` by `mcshane_model`); the gate
+   item "every definition has an `example` that would fail if it drifted" may want them before the landing (a source edit, so
+   a rebuild).
+6. The report.
