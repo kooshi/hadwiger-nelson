@@ -1,0 +1,6 @@
+deleting:
+3. **Row 128, the collapse.** For a totally real field whose stable places all "mix" at six colours, such as ℚ(√635087), the
+   row's hand proof gives `χ(F²) = χ(ℝ²)`, given measure rigidity (MR) at `F`. The kernel now holds a form of MR for every real
+   number field: `Rigidity.mrPlus`, resting on the outside theorem **EL**. Whether that form is the one row 128's proof uses has
+   not been checked here (`LEDGER.md` row 128; `Rigidity/ZeroEntropyClosed.lean`).
+

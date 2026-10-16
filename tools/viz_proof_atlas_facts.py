@@ -102,10 +102,11 @@ N("MR", "measure rigidity (MR)", "held", "Every measure on the dual of the unit-
   "gives no mass to the archimedean part, is a multiple of Haar measure. The hinge of every result above four at a field, and of the "
   "collapse.", L(120), "every U_F-invariant finite positive measure on R̂ with τ(E) = 0 is a multiple of Haar measure (MR(F))",
   "PE-2 two derivations blind to each other (X02D, X02V)", at=(304, 440), sector="engine", tier=1)
-N("R128", "the collapse", "held", "Given MR, at a totally real field whose every stable place mixes at six colours (ℚ(√635087), de "
-  "Grey's field), the field's plane, the real plane and the stationary random colourings all need the same number of colours.",
-  L(128), "The collapse: given MR, the plane's number is a field's.",
-  "the load-bearing step two derivations blind to each other and to J39's and J48's proofs (V1; V2)", at=(316, 330), sector="engine",
+N("R128", "the collapse", "held", "At every real number field whose stable places all mix at six colours (ℚ(√635087), de "
+  "Grey's field), the field's plane and the real plane need the same number of colours — in the kernel, on EL (and W at the two "
+  "fields); the stationary random colourings' number is row 130's.",
+  L(128), "The collapse: the plane's number is a field's.",
+  "kernel since FS131-ICO2 for the field clause", at=(316, 330), sector="engine",
   tier=1)
 N("R130", "χ_CP = χ_m⁰", "held", "With no MR, the stationary number equals the measurable number: the fewest colours of a measurable "
   "colouring proper at almost every unit pair. Given MR, that is Hadwiger–Nelson itself.", L(130), "With no hypothesis ([OAIMath2026] Thm 1.3; χ_m⁰ ≤ χ kernel-checked there and audited here, EXT-OAI1): χ(ℝ²) = χ_m⁰(ℝ²)",
@@ -432,7 +433,7 @@ N("R129", "density cannot give six", "nogo", "One colour class at a time is capp
   "1/α_loc ≤ 4.36: that route never gives six", "FRAC, TJ, ROUND, DV, TF, 47 two derivations (FS103-F; FS103-B blind to F's record)",
   at=(110, 205), sector="six-low",
   posed=[dict(question="the first clause of Ducz–Varga's Conjecture 1 (2026), and Matolcsi et al.'s equality question (2025, §2) — with no hypothesis, over "
-              "[OAIMath2026]'s rigidity theorem, at [hand], one mind", state="answered", src=LGC, quote="row 129 (FS-133; one mind) answers the first clause of [DuczVarga2026]'s Conjecture 1 and "
+              "[OAIMath2026]'s rigidity theorem, in the kernel since FS133-LD1", state="answered", src=LGC, quote="row 129's plane clause (FS-133) answers the first clause of [DuczVarga2026]'s Conjecture 1 and "
               "[MatolcsiEtAl2025] §2's equality question")])
 N("FS80", "window-frequency certificate", "question", "An averaged certificate at five colours on the real plane — the integrality "
   "shape a six certificate must take (FS-80).", FSR(19), "averaged certificates at five colours on the real plane — the integrality shape a six certificate must take",
@@ -516,7 +517,7 @@ E("DEGREY", "LB5", "rests", INTERVAL, "the lower end is chromaticNumber_plane_ge
 E("SEVEN", "UB7", "rests", INTERVAL, "the upper end is chromaticNumber_plane_le_seven — the 4/5 × 3/5 brick colouring")
 # the engine
 E("EL", "MR", "rests", L(120), "the positive-entropy input [EinsiedlerLindenstrauss2022] Thm 1.3")
-E("MR", "R128", "rests", L(128), "The collapse: given MR, the plane's number is a field's.")
+E("MR", "R128", "rests", L(128), "The collapse: the plane's number is a field's.")
 E("MR", "R121", "rests", L(121), "MR at ℚ(√47) (row 120) with J45's SP-Cor and T-C(A) at S = ∅ gives ≥ 5")
 E("MR", "R123", "rests", L(123), "With MR (row 120) that gives five")
 E("MR", "R125", "rests", L(125), "Given MR: χ(ℚ(√167)²) ≤ 5 ⟺ Y = UD(ℝ²) × G₂₃ × G₄₃ has a cut-and-project five-colouring", bus=True)
