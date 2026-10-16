@@ -9,7 +9,24 @@ called.*
 
 ## Theorems this phase proved
 
-None yet: the mathematics was proved by FS131-ICT1; this job gates it. Filled in at the gate.
+The proofs are FS131-ICT1's. This job brings them through the gate: kernel-checked by the gate's build on `810e18698` (branch
+`fs131-ktc1`, `main` merged at `c03b81e5e`; gate logs `data/fs131/ict3/gate/`), each on exactly `[propext, Classical.choice,
+Quot.sound]` by the audit's receipt. Grade [kernel] for all of them:
+- `CayleyThree.colorable_three_iff_bandSet_nonempty` — every abelian group, `0 ∉ S`: 3-colourable ⟺ a band character exists.
+- `CayleyThree.colorable_three_iff_exists_isPeriodic` — `A` finitely generated, `S` finite: 3-colourable ⟺ periodically so.
+- `CayleyThree.exists_torsion_mem_bandSet`, `CayleyThree.finiteIndex_ker_of_nsmul_eq_zero` — its two steps.
+- `CayleyThree.colorable_three_rat`, `CayleyThree.not_isPeriodic_rat` — the control over `ℚ`.
+- `CayleyThree.exists_isPeriodic_eqOn`, `CayleyThree.coloring_mem_closure_isPeriodic` — density, for a finite generating `S`.
+- `CayleyThree.periodicForcedSubgroup_three_eq_forcedSubgroup`, `CayleyThree.inheritanceQuestion_three` — `P = F` at three colours.
+- `CayleyThree.forcedSubgroup_finiteIndex_iff_finite` — every `k`, every `S`: `F` of finite index ⟺ finitely many colourings.
+- `CayleyThree.exists_affine_of_forall_three_nsmul` — band characters all of order 3 ⟹ every colouring affine.
+- `CayleyThree.colorable_three_iff_of_fg_torsionFree`, `CayleyThree.exists_isPeriodic_eqOn_of_fg_torsionFree` — row 79's class.
+- `CayleyThree.mcshane_model` — the McShane layer's model (item 1003's form).
+- `CayleyThree.exists_rat_solution_near` — any number of equations, after item 1026's drop.
+
+The other 65 public records of the three modules are kernel-checked by the same build on the same axioms, filed in
+`scripts/Axioms.lean`. Five stored statements differ from the skeleton's, each by a ruling: items 1003, 1012 (two) and 1026
+(two).
 
 ## Stage 1 — SAVED: the readback
 
@@ -144,3 +161,114 @@ memory (`tools/fs131_ict2_audit_block.py`; its run: all four plants reported, `d
 Stage 3 (the gate) starts from a merge of `main`: the coordinator's message of about 19:10 UTC (inventory item 1032) — the
 `p`-adic plane landed first (`785a46e77`, gated on `e3e1dbb73`, logs `data/fs131/iqp3/gate/`), so the counts are explained
 against its gate.
+
+## Stage 3 — SAVED: the gate on one commit
+
+### 3.1 The merge of `main`, and the build it is gated on
+
+`main` merged at `c03b81e5e` (inventory item 1032: the `p`-adic plane, `785a46e77`). It brings eight new modules
+(`PadicPlane/Basic` … `Values`, `Arith/FibreCert7`, `FibreCert7Check`, `FibreCert7Bound`) and edits no existing module; four files
+conflicted. `scripts/Axioms.lean` keeps both blocks, `main`'s first. The inventory, the session handoff and the brief script
+are taken as on `main`: the conflicts came from the rewritten history, and this job never edited those files. `Proofs.lean` merged
+cleanly with both import blocks. Against `main`, the merge differs only in the three modules, their three imports and their
+audit block.
+
+The p-adic tree's own build had been deleted at its hand-back (`il5/.lake/build` absent). `main`'s tree holds the gated build of
+exactly these sources (`git diff` of `Proofs/` is empty), so it was copied in by checksum (`rsync -a --checksum`, no `--delete`).
+The dry run first (`data/fs131/ict3/logs/rsync-dry.txt`) found 72 files that differed: the eight new modules and the root, nothing
+else. After the copy a second dry run itemized nothing, and the copied `.olean`s match the source tree by `sha256sum -c`
+(`logs/copied-oleans.sha256`). **The build** (the brief's line, `--wait 7200`, admitted 19:19 UTC): **exit 0, "OK — 736 of 736
+batches, 1 module(s) rebuilt, 0 module(s) with warnings, 21m28s"**. Only the root was rebuilt (`data/fs131/ict3/build3.full.log`,
+`build3.log`); no `sorry`; sources unchanged across it (`build3.sources.md5`).
+
+**The merge moved nothing in the three modules**, from the kernel's side:
+- the dump on the merged build is byte-identical to the dump before the merge (`statements-ruled.txt.gz`);
+- the ReAdd print is identical (`readd-merged.txt`);
+- the axioms print of the 97 records is identical (`axioms-all-merged.txt`);
+- the audit generator's `--coverage` passes, "every one of the 81 public records is filed under its class"
+  (`audit-coverage-merged.out`);
+- `Models.lean` and `SpecControls.lean` elaborate with no message (`logs/models-merged.out`, `logs/controls-merged.out`).
+
+### 3.2 The gate
+
+`data/fs131/ict3/run-gate.sh` (FS131-ICT2's copy of `data/fs131/clone1/run-gate.sh`, its log directory and slot names this
+job's) ran on **`810e18698`**: the merge plus one commit of gate inputs and logs (the vacuity baseline's header, the build logs).
+`tracked-modified=0` at the start and at the end. The pass ran 19:43–20:01 UTC (`data/fs131/ict3/gate/run-pass.out`), and every
+step exited 0:
+
+| step | result | log |
+|---|---|---|
+| up to date | `lake build --no-build Proofs` exit 0 | `uptodate.log` |
+| `sorry` | 0 narrow lines; 5 line-initial `axiom` lines, the library's own, as at the p-adic gate | `sorry-narrow.txt`, `axiom-lines.txt` |
+| dupnames, self-test | OK, no name declared by two modules, 31 generated on demand (the same 31 as the p-adic gate); self-test OK | `dupnames*.log` |
+| axioms, self-test | **OK — 11,547 records: 10,885 clean, 574 axiom-free, 83 imported, 5 declared purchases**; self-test OK, every planted fault fired and every partner passed | `axioms*.log`, `receipt-axioms.log` |
+| vacuity, self-test | **OK — `declarations=22519 refutations-skipped=243 sites=1465`, `vacuous=0 stale=0 declared=3 witnessed=40 generic=1420 unknown=2`**; self-test OK, all 65 controls behaved | `vacuity*.log`, `receipt-vacuity.log` |
+| assumptions, self-test | OK — `axioms=3 rests=105 named=19 inline=14 outside=7 ours=21 open=5 takes=109 mentions=2`; self-test OK, all 33 checks behaved | `assumptions*.log` |
+| architecture | PASS | `arch.txt` |
+| lint | exit 0, "Linting passed for Proofs.", 14 of 14 linters passed | `lint.log` |
+| digests | each exit 0. The vacuity baseline's header and the assumptions ledger match (9 of 9); CLAUDE.md's Trust-ledger assumptions counts match. **Flagged stale, not failed:** CLAUDE.md's audit sentence (10804 → 10885) and its § The gate vacuity counts | `digest-*.txt` |
+
+### 3.3 Every count change against the `p`-adic gate (`data/fs131/iqp3/gate/`, gated on `e3e1dbb73`)
+
+- **The audit**: records 11,466 → 11,547 (+81), clean 10,804 → 10,885 (+81). The +81 are the three modules' public records: 17 in
+  `Circular`, 40 in `Fibre`, 24 in `Density` (FS131-ICT2's printer `data/fs131/ict2/lean/AxiomsAll.lean` →
+  `tools/fs131_ict2_audit_block.py`, filed in `scripts/Axioms.lean`'s CLEAN section under the FS131-ICT3 banner; its 16 private
+  records are not audited). Each is exactly `[propext, Classical.choice, Quot.sound]`. Axiom-free (574), imported (83) and
+  purchases (5) are unchanged: the landing declares no import, and no record is axiom-free. The axioms self-test's state
+  controls read imported 83 and declared 3, which are unmoved.
+- **Vacuity**: declarations 22,431 → 22,519 (+88 = 20 + 43 + 25: `data/fs131/ict3/vacuity-new.txt`, the scan's own predicate,
+  module by module). Refutations-skipped stays 243 (+0): `not_isPeriodic_rat` concludes `¬ IsPeriodic C`, which the law does not
+  skip. Sites 1,458 → 1,465 (+7). Witnessed 38 → 40: `coloringOneTwo` (its own site) and `not_isPeriodic_rat` (by
+  `colorable_three_rat`). Generic 1,415 → 1,420: `exists_isPeriodic_eqOn`, `exists_isPeriodic_eqOn_of_fg_torsionFree`,
+  `coloring_add_ne`, `circularColoring` and `coloring_mem_closure_isPeriodic`, each `(addCayley S).Coloring (Fin 3)` at a
+  parameter `S`. **These counts were written into `scripts/vacuity-baseline.txt`'s header before the run, as predicted from the
+  pre-merge preview (+88, +7, +2, +5) and the p-adic gate's counts, and the digest reads them "match (9 of 9)".**
+- **Assumptions**: unchanged. The modules take no declared hypothesis and declare none. No structure they take as a hypothesis
+  is `undeclared-never-concluded`: `ProperAlong`, `IsTight` and `IsPeriodic` are each concluded by a library theorem.
+- **dupnames**: unchanged. The one constant the modules generate on demand, `heightWinding.congr_simp` (in `Density`), is
+  generated in no other module.
+
+### 3.4 The structures' models (LEAN.md § The gate)
+
+- `ProperAlong`: `ThreeColour.properAlong_one_two`.
+- `Winding`: `ThreeColour.nonempty_winding_one_two`.
+- `IsTight`: `isTight_one_two`.
+- The McShane layer's hypotheses: `mcshane_model`.
+- A colouring at a finite generating set without `0`: `coloringOneTwo`.
+- `not_isPeriodic_rat`'s closed carrier: `colorable_three_rat`.
+
+These are library theorems or terms, checked by the gate's build. Two head statements take hypotheses that no single library
+model meets all at once. For each, a model is kernel-checked outside the library (`data/fs131/ict3/lean/Models.lean`, elaborated
+with no message on the merged build):
+- `exists_isPeriodic_eqOn_of_fg_torsionFree` at `ℤ` with `S = {−2, −1, 1, 2}`: finite, symmetric, generating, without `0`, and
+  `x ↦ x mod 3` colours it; the theorem is applied there.
+- `exists_affine_of_forall_three_nsmul` at `ℤ` along `(1, 2)` with `x ↦ x mod 3`: generation, properness, and every band
+  character of order 3 (`three_nsmul_of_mem_bandSet_one_two`: `θ(1) = t` and `θ(2) = 2t` in `[1/3, 2/3]` force
+  `t ∈ {1/3, 2/3}`); the theorem is applied there.
+
+The five `GENERIC` sites are the caller's obligation by the scan's law. `coloringOneTwo` inhabits each at `S = {1, 2}` (and
+`colS4` at `{±1, ±2}` for the class instance).
+
+### 3.5 `#print axioms` of the head statements (the gate's receipt, `data/fs131/ict3/gate/receipt-axioms.log`)
+
+Each of the following is exactly `[propext, Classical.choice, Quot.sound]`:
+- `colorable_three_iff_bandSet_nonempty`, `exists_torsion_mem_bandSet`, `finiteIndex_ker_of_nsmul_eq_zero`;
+- `colorable_three_iff_exists_isPeriodic`, `colorable_three_rat`, `not_isPeriodic_rat`, `colorable_three_iff_of_fg_torsionFree`;
+- `exists_affine_of_forall_three_nsmul`, `exists_isPeriodic_eqOn`, `coloring_mem_closure_isPeriodic`;
+- `periodicForcedSubgroup_three_eq_forcedSubgroup`, `inheritanceQuestion_three`, `forcedSubgroup_finiteIndex_iff_finite`;
+- `exists_isPeriodic_eqOn_of_fg_torsionFree`, `mcshane_model`, `exists_rat_solution_near`.
+
+### 3.6 The negative controls, each watched firing
+
+- **The gate's own** (each step's self-test above):
+  - axioms: 23 planted faults;
+  - vacuity: 65 controls;
+  - dupnames: 15 controls;
+  - assumptions: 33 checks.
+- **Lint**: it went red at stage 2 on exactly the two unread binders, and green once the ruling was applied (`lint1.log` against
+  `lint2.log` and the gate's `lint.log`). That is a real fault on these modules, seen firing and seen cleared.
+- **The comparator** (`tools/fs131_ict2_statements.py`): ten plants fired.
+- **The audit generator**: its four plants were reported.
+- **The spec examples**: one drift control each (§ 2.1).
+- **The byte-identity checks**: a planted byte was reported.
+- **The quote and slot checkers**: each plant missed every quotation.
