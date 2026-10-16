@@ -15,7 +15,9 @@ skeleton's print holds (`data/fs131/ict1/statements-before.txt.gz`). After FS131
 Prints, per ruled constant, `AFTER <name> <hash of the stored type>`, `READD <name> <hash>` (the surgery) and two controls
 that must differ from the skeleton's hash: `CONTROL-TRUE` (the domain `True` in place of the binder's, or `0` in place of
 the right side) and, for each dropped binder, `CONTROL-POS` (the right domain at the wrong position: one binder later).
-Run from the worktree's root: `lake env lean data/fs131/ict2/lean/ReAdd.lean > data/fs131/ict2/readd.txt`.
+Run from the worktree's root: `lake env lean data/fs131/ict2/lean/ReAdd.lean > data/fs131/ict3/readd-<when>.txt`.
+FS131-ICT3's fix at first run: the free names of the quoted domains (`s`, `c`, `M`, `x`) are written `$(mkIdent …)`, so
+they name the telescope's variables and not hygienic copies (`Unknown identifier s✝`); `Level.one` for the deprecated `levelOne`.
 -/
 open Lean Meta Elab Term Command
 
@@ -43,7 +45,7 @@ def run : TermElabM Unit := do
   -- `even_pmHeight_sub_sum`: `(hc : ProperAlong s c)` after `{A} [AddCommGroup A] {m} {s} {c}`
   let n₁ := ``HadwigerNelson.CayleyThree.even_pmHeight_sub_sum
   let t₁ ← typeOf n₁
-  let pa : Array Expr → TermElabM Expr := fun _ => do elabClosed (← `(HadwigerNelson.ThreeColour.ProperAlong s c))
+  let pa : Array Expr → TermElabM Expr := fun _ => do elabClosed (← `(HadwigerNelson.ThreeColour.ProperAlong $(mkIdent `s) $(mkIdent `c)))
   IO.println s!"AFTER {n₁} {t₁.hash}"
   IO.println s!"READD {n₁} {(← insertAfter t₁ 5 pa).hash}"
   IO.println s!"CONTROL-TRUE {n₁} {(← insertAfter t₁ 5 fun _ => pure (mkConst ``True)).hash}"
@@ -51,7 +53,7 @@ def run : TermElabM Unit := do
   -- `exists_le_mul_of_imp_eq_zero`: `(hadd : ∀ x ∈ M, ∀ y ∈ M, x + y ∈ M)` after `{ι} [Finite ι] (M)`
   let n₂ := ``HadwigerNelson.CayleyThree.exists_le_mul_of_imp_eq_zero
   let t₂ ← typeOf n₂
-  let ha : Array Expr → TermElabM Expr := fun _ => do elabClosed (← `(∀ x ∈ M, ∀ y ∈ M, x + y ∈ M))
+  let ha : Array Expr → TermElabM Expr := fun _ => do elabClosed (← `(∀ x ∈ $(mkIdent `M), ∀ y ∈ $(mkIdent `M), x + y ∈ $(mkIdent `M)))
   IO.println s!"AFTER {n₂} {t₂.hash}"
   IO.println s!"READD {n₂} {(← insertAfter t₂ 3 ha).hash}"
   IO.println s!"CONTROL-TRUE {n₂} {(← insertAfter t₂ 3 fun _ => pure (mkConst ``True)).hash}"
@@ -62,11 +64,11 @@ def run : TermElabM Unit := do
   IO.println s!"AFTER {n₃} {t₃.hash}"
   let (re, rhsIsL1, ctrl) ← forallTelescope t₃ fun xs body => do
     let some (ty, lhs, rhs) := body.eq? | throwError "{n₃}: the body is not an equation"
-    let l1x ← elabClosed (← `(HadwigerNelson.CayleyThree.l1 x))
-    let sumx ← elabClosed (← `(∑ j, x j))
+    let l1x ← elabClosed (← `(HadwigerNelson.CayleyThree.l1 $(mkIdent `x)))
+    let sumx ← elabClosed (← `(∑ j, $(mkIdent `x) j))
     let zero ← elabClosed (← `((0 : ℤ)))
-    let re ← mkForallFVars xs (mkApp3 (mkConst ``Eq [levelOne]) ty lhs sumx)
-    let ctrl ← mkForallFVars xs (mkApp3 (mkConst ``Eq [levelOne]) ty lhs zero)
+    let re ← mkForallFVars xs (mkApp3 (mkConst ``Eq [Level.one]) ty lhs sumx)
+    let ctrl ← mkForallFVars xs (mkApp3 (mkConst ``Eq [Level.one]) ty lhs zero)
     pure (re, rhs == l1x, ctrl)
   IO.println s!"RHS-IS-L1 {n₃} {rhsIsL1}"
   IO.println s!"READD {n₃} {re.hash}"

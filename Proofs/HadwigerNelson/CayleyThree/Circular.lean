@@ -408,4 +408,17 @@ example : circular (mk1.comp ((AddMonoidHom.mulLeft (1 / 3 : ℝ)).comp (Int.cas
   rw [circular, h, rep01_coe ⟨by norm_num, by norm_num⟩, show (3 : ℝ) * (1 / 3) = 1 by norm_num, Int.floor_one]
   rfl
 
+-- `circularColoring` drifts if it stops being `x ↦ ⌊3·{θ x}⌋` on the graph: at `θ x = x/3` on `ℤ`, step `1`, `2 ↦ 2`.
+example : circularColoring (S := ({1} : Set ℤ)) (mk1.comp ((AddMonoidHom.mulLeft (1 / 3 : ℝ)).comp (Int.castAddHom ℝ)))
+    (fun u hu => by
+      rw [Set.mem_singleton_iff] at hu
+      subst hu
+      exact ⟨1 / 3, ⟨by norm_num, by norm_num⟩, by simp⟩) 2 = 2 := by
+  have h : (mk1.comp ((AddMonoidHom.mulLeft (1 / 3 : ℝ)).comp (Int.castAddHom ℝ))) 2 = ((2 / 3 : ℝ) : UnitAddCircle) := by
+    simp only [AddMonoidHom.coe_comp, Function.comp_apply, Int.coe_castAddHom, Int.cast_ofNat, AddMonoidHom.coe_mulLeft]
+    norm_num
+  change ((⌊3 * rep01 ((mk1.comp ((AddMonoidHom.mulLeft (1 / 3 : ℝ)).comp (Int.castAddHom ℝ))) 2)⌋ : ℤ) : ZMod 3) = 2
+  rw [h, rep01_coe ⟨by norm_num, by norm_num⟩, show (3 : ℝ) * (2 / 3) = 2 by norm_num, Int.floor_ofNat]
+  rfl
+
 end HadwigerNelson.CayleyThree

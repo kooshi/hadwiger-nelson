@@ -728,4 +728,7 @@ example : (0 : ℤ) ∉ ({1, 2} : Set ℤ) := by simp
 -- `0 ∈ S` is harmless for every statement of §3 that does not name `bandSet`: the graph ignores it.
 example (S : Set ℤ) : addCayley (S \ {0}) = addCayley S := addCayley_erase_zero _
 
+-- `coloringOneTwo` drifts if it stops being `x ↦ x mod 3`: `5 ↦ 2`, `−1 ↦ 2`, `3 ↦ 0`.
+example : coloringOneTwo 5 = 2 ∧ coloringOneTwo (-1) = 2 ∧ coloringOneTwo 3 = 0 := by decide
+
 end HadwigerNelson.CayleyThree

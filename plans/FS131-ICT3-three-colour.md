@@ -58,3 +58,53 @@ LEAN.md § Searching — Lean (FS124-I2): print every constant of the modules fr
 replaces the `.olean`s. `data/fs131/ict2/lean/StatementDump.lean` against FS131-ICT2's build, 2026-10-16 17:42 UTC:
 `data/fs131/ict3/statements-mid.txt` (195 constants: `Circular` 38, `Fibre` 108, `Density` 49). This is the print of the
 statements as FS131-ICT2 left them; the spec examples add no stored constant, so the print after the rebuild must equal it.
+
+## Stage 2 — SAVED (partly): the five spec examples, the build green, lint red on two skeleton statements (ruling asked)
+
+### 2.1 The spec examples
+
+One `example` each, in the modules' spec sections (`--` comments; no stored constant), each pinning the definition at a model
+where a drift changes the value:
+- `circularColoring` (`Circular.lean`, end): the circular colouring of `x ↦ x/3` on `ℤ`, step `1`, colours `2` with `2`.
+- `tightSet` (`Fibre.lean`, end): at `(1, 2)` with `x ↦ x mod 3` it is every direction (the tight relation `(2, −1)` moves both,
+  `isTight_one_two`); at `(1, 1)` with `x ↦ x mod 3` it is empty (every relation `k·(1, −1)` rises by `−|k|` against a winding of
+  `0`, so none is tight).
+- `Winding.flip` (`Fibre.lean`): at `(2, −1)` the flip of the winding of `x ↦ x mod 3` is `1`, and the flip of the flip `0`.
+- `fibre` (`Fibre.lean`): the fibre of the winding of `x ↦ x mod 3` along `(1, 2)` is the one point `(1/3, 2/3)` (the relations
+  are `ℤ·(2, −1)`, the winding vanishes on them, and `2x₀ = x₁` meets `[1/3, 2/3]²` once).
+- `coloringOneTwo` (`Density.lean`, end): `5 ↦ 2`, `−1 ↦ 2`, `3 ↦ 0`.
+
+**Their controls** (`data/fs131/ict3/lean/SpecControls.lean`, elaborated with exit 0, `data/fs131/ict3/logs/controls1.out`): for
+each definition a drifted copy, and a kernel proof that the example's statement is **false** at the drift — the circular
+colouring shifted by one step (`≠ 2` at `2`: it is `0`); the tight set with tightness dropped (`≠ ∅` along `(1, 1)`: `(1, −1)`
+moves direction `0`); the fibre with the relation constraint dropped (`≠ {(1/3, 2/3)}`: `(1/2, 1/2)` is in the box); the flip as
+`Σ r + W r` and as `−W r` (the pair `1, 0` fails: `1, 2` and `0, 0`); the colouring `x ↦ (x + 1) mod 3` (the three values fail).
+Iteration first (never evidence): `data/fs131/ict3/lean/SpecScratch.lean` against FS131-ICT2's build, then the three modules'
+text with the lakefile's options, writing nothing (`data/fs131/ict3/check-modules.sh`: each exit 0, no warning).
+
+### 2.2 The build
+
+`SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 python3 scripts/slot.py --mem 8 --cpus 5 --wait 7200 -- env MEMMAX=8G BATCH=3
+./scripts/build.sh`, queued 17:59 UTC behind two other implementers' slots, admitted 18:07:55, **exit 0: "OK — 735 of 735
+batches, 4 module(s) rebuilt, 0 module(s) with warnings, 23m35s"** (`Circular` 6.3 s, `Fibre` 12 s, `Density` 10 s, `Proofs`
+5.4 s; `data/fs131/ict3/build1.full.log`, the tool's log copied to `data/fs131/ict3/build1.log`); `grep -c "declaration uses
+'sorry'"` = 0; the one `error:` line is the up-to-date check's own; `md5sum -c data/fs131/ict3/build1.sources.md5` OK (the
+three modules and `Proofs.lean` unchanged across the build).
+
+**The stored statements did not move**: the dump after the build (`data/fs131/ict3/statements-after.txt`) is byte-identical to
+the dump before it (`statements-mid.txt.gz`, § 1.3) — `cmp` silent; its control, one byte planted on line 5 of a copy, reported
+at byte 9268.
+
+### 2.3 Lint: two skeleton statements carry an unread instance binder (ruling asked)
+
+`lake lint --no-build -- --no-build --trace` under the slot: **exit 1**, `unusedArguments` failed, "Found 2 errors in 19513
+declarations" (`data/fs131/ict3/lint1.log`), every other linter passed:
+- `CayleyThree.exists_rat_solution_near` (`Circular.lean` l. 38): argument 4, `[Finite κ]`, read by no proof — the rational point
+  solves every equation `k` at once, so the statement holds for any index set of equations;
+- `CayleyThree.exists_isPeriodic_eqOn_of_fg_torsionFree` (`Density.lean` l. 702): argument 3, `[AddGroup.FG A]` — row 79's class,
+  which density does not read (it needs `S` finite generating); the skeleton names the class's other unread hypotheses with
+  underscores (`_htf`, `_hsymm`, `_hS`), not this one.
+Both are the skeleton's text, unchanged; the build's linters do not report an unused instance binder, so FS131-ICT1 and -ICT2
+never met them. **Sent to the coordinator at once** (2026-10-16, about 18:36 UTC), with a suggestion: drop `[Finite κ]` (item
+998's kind) and rename the second to `[_hfg : AddGroup.FG A]` (part of row 79's class as cited; the stored type moves only in a
+binder name). Waiting for the ruling; the gate's other inputs go on meanwhile.

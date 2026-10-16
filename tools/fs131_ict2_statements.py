@@ -28,6 +28,14 @@ AFTER's non-INTERNAL constants absent from BEFORE are ADDED: listed by module, p
 ALLOWED_PUBLIC (the public helpers FS131-ICT1 added, each named in its record §§ 3.4, 4, 5) -> else FAIL; and every name of
 ALLOWED_PUBLIC must be ADDED (a list naming a constant that is not there is a wrong list) -> else FAIL.
 INTERNAL constants are counted per module, never compared.
+Two rules added by FS131-ICT3 at the first run (each with its plant below):
+  AUXPROOF  in a DATA comparison, a constant that its own dump lists as `THM … INTERNAL PROPTYPE` in the same module (an
+            auxiliary proof the elaborator abstracted, `coloringOneTwo._proof_1`) reads as `True.intro`, as the dumper
+            already reads every proof subterm that is not a constant: the skeleton's `sorry` was erased where the filled
+            proof became a constant;
+  ARROW     a dropped binder followed by another non-dependent binder prints `(D) -> (D2) -> (rest)`, not
+            `(D) -> (∀ more, B)`: there exactly `(D) -> ` is removed and nothing is merged (`exists_le_mul_of_imp_eq_zero`,
+            whose `hadd` precedes `hsub`).
 
 --plant runs the comparison seven more times, each on one fault planted in memory, and requires each reported by name and
 nothing else new: a public stored type changed by one character; a public constant dropped; an unlisted public constant
@@ -90,7 +98,8 @@ def read(path):
                 kind, name, flags = parts[1], parts[2], parts[3:]
                 private = "PRIVATE" in flags
                 mods[cur][name] = {"kind": kind, "internal": "INTERNAL" in flags, "private": private,
-                                   "user": flags[flags.index("PRIVATE") + 1] if private else name}
+                                   "user": flags[flags.index("PRIVATE") + 1] if private else name,
+                                   "proptype": "PROPTYPE" in flags}
                 last = mods[cur][name]
             elif ln.startswith(("TYPE ", "VALUE ", "DATA ")):
                 tag, rest = ln.split(" ", 1)
@@ -132,12 +141,26 @@ def strip_arrow(t, key, short=False):
         if depth == 0:
             break
         e += 1
+    if t[e + 1:].startswith(" -> "):     # ARROW: `(D) -> (D2) -> …`, the group at j is the next binder's domain
+        return t[:i] + t[k + (4 if short else 5):]
     head, inner, tail = t[:i], t[j + 1:e], t[e + 1:]
     if short:
         inner = inner[1:]
     if head.endswith(", ") and inner.startswith("forall "):
         return head[:-2] + " " + inner[len("forall "):] + tail
     return head + inner + tail
+
+
+def auxproof(raw, mod):
+    """AUXPROOF: `raw` with every constant that `mod` (one module of one dump) lists as an internal theorem of a
+    proposition read as `True.intro`."""
+    if raw is None:
+        return None
+    names = [n for n, c in mod.items() if c["internal"] and c["kind"] == "THM" and c.get("proptype")]
+    for n in sorted(names, key=len, reverse=True):
+        if n in raw:
+            raw = re.sub(r"(?<![\w.'])" + re.escape(n) + r"(?![\w.'])", "True.intro", raw)
+    return raw
 
 
 def ruled_text(name, before_t, short=False):
@@ -200,7 +223,10 @@ def compare(before, after, rd, short_text=False, quiet=False):
             same = a["kind"] == c["kind"] and a.get("TYPE") == c.get("TYPE")
             if c["kind"] == "DEF":
                 key = "DATA" if "DATA" in c else "VALUE"
-                same = same and a.get(key) == c.get(key)
+                if key == "DATA":
+                    same = same and auxproof(a.get(key), amod) == auxproof(c.get(key), consts)
+                else:
+                    same = same and a.get(key) == c.get(key)
             if same:
                 n_same += 1
             else:
@@ -261,6 +287,10 @@ def main():
     a5 = copy.deepcopy(after); dn = sorted(defs)[0]; a5[M_DENS][dn]["DATA"] = a5[M_DENS][dn]["DATA"] + " "
     plants.append((f"a definition's DATA changed ({dn.removeprefix(NS)})", a5, rd, False,
                    [f"CHANGED (value) {dn} ({M_DENS})"]))
+    a5b = copy.deepcopy(after); cn = NS + "coloringOneTwo"
+    a5b[M_DENS][cn]["DATA"] = a5b[M_DENS][cn]["DATA"].replace(cn + "._proof_1", "HadwigerNelson.CayleyThree.l1")
+    plants.append(("AUXPROOF: an auxiliary proof replaced by a constant that is not one", a5b, rd, False,
+                   [f"CHANGED (value) {cn} ({M_DENS})"]))
     r6 = dict(rd); n6 = NS + "even_pmHeight_sub_sum"; r6[("READD", n6)] = rd[("CONTROL-POS", n6)]
     plants.append(("a re-add at its position control", after, r6, False, [f"RULED-HASH-DIFFERS {n6}"]))
     plants.append(("a ruled text check one character short", after, rd, True,

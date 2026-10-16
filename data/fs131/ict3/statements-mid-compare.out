@@ -1,0 +1,19 @@
+Proofs.HadwigerNelson.CayleyThree.Circular: before 20 constants (4 internal); SAME 16; added public 1 ['rep01_coe']; added private 2; generated on demand []; internal after 19
+    private added: ['exists_pos_le', 'floor_three_ne']
+RULED HadwigerNelson.CayleyThree.even_pmHeight_sub_sum — item 1012: the binder `(hc : ProperAlong s c)`, read by no proof: hash OK (undone hash 2418846333 = the skeleton's; controls differ); text OK
+RULED HadwigerNelson.CayleyThree.exists_le_mul_of_imp_eq_zero — item 1012: the binder `(hadd : ∀ x ∈ M, ∀ y ∈ M, x + y ∈ M)`, read by no proof: hash OK (undone hash 3732593963 = the skeleton's; controls differ); text OK
+Proofs.HadwigerNelson.CayleyThree.Fibre: before 35 constants (2 internal); SAME 31; added public 7 ['height_word_single', 'liftHeight_add_of_relMap_eq_zero', 'liftHeight_eq_of_sub', 'liftHeight_of_relMap_eq_zero', 'relMap_eq_wsum', 'relMap_single', 'three_dvd_liftHeight']; added private 9; generated on demand []; internal after 59
+    private added: ['exists_mem_box_of_le_vertex', 'exists_pos_le_of_finite', 'exists_rat_near_of_box', 'height_eq_of_isTight', 'minRise_eq_parts', 'minRise_neg', 'neg_minRise_neg', 'term_le', 'wind_eq_of_surjective']
+RULED HadwigerNelson.CayleyThree.mcshane_model — item 1003: the right side `∑ j, x j` (false as typed) corrected to `l1 x`: hash OK (undone hash 13361968 = the skeleton's; controls differ); text OK
+Proofs.HadwigerNelson.CayleyThree.Density: before 16 constants (0 internal); SAME 15; added public 7 ['abs_le_l1', 'even_l1_sub_sum', 'l1_add_le', 'l1_neg', 'l1_nonneg', 'l1_single_one', 'l1_sub_le']; added private 5; generated on demand ['HadwigerNelson.CayleyThree.heightWinding.congr_simp']; internal after 20
+    private added: ['bddBelow_terms', 'exists_slope', 'le_term', 'term_ge', 'term_nonneg']
+VERDICT CLEAN: 0 failure(s)
+PLANT a changed stored type: FIRED — new failures ['CHANGED (type) HadwigerNelson.CayleyThree.colorable_three_iff_bandSet_nonempty (Proofs.HadwigerNelson.CayleyThree.Circular)']
+PLANT a dropped constant: FIRED — new failures ['MISSING HadwigerNelson.CayleyThree.colorable_three_iff_bandSet_nonempty (Proofs.HadwigerNelson.CayleyThree.Circular)']
+PLANT an unlisted public constant: FIRED — new failures ['ADDED-PUBLIC-UNLISTED HadwigerNelson.CayleyThree.planted_new (Proofs.HadwigerNelson.CayleyThree.Circular)']
+PLANT a listed helper absent: FIRED — new failures ['ALLOWED-ABSENT HadwigerNelson.CayleyThree.l1_neg (Proofs.HadwigerNelson.CayleyThree.Density)']
+PLANT a definition's DATA changed (coloringOneTwo): FIRED — new failures ['CHANGED (value) HadwigerNelson.CayleyThree.coloringOneTwo (Proofs.HadwigerNelson.CayleyThree.Density)']
+PLANT AUXPROOF: an auxiliary proof replaced by a constant that is not one: FIRED — new failures ['CHANGED (value) HadwigerNelson.CayleyThree.coloringOneTwo (Proofs.HadwigerNelson.CayleyThree.Density)']
+PLANT a re-add at its position control: FIRED — new failures ['RULED-HASH-DIFFERS HadwigerNelson.CayleyThree.even_pmHeight_sub_sum']
+PLANT a ruled text check one character short: FIRED — new failures ['RULED-TEXT-DIFFERS HadwigerNelson.CayleyThree.even_pmHeight_sub_sum', 'RULED-TEXT-DIFFERS HadwigerNelson.CayleyThree.exists_le_mul_of_imp_eq_zero', 'RULED-TEXT-DIFFERS HadwigerNelson.CayleyThree.mcshane_model']
+PLANTS ALL FIRED
