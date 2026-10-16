@@ -1,4 +1,4 @@
-slot: admitted lake: mem 7 GiB (hard cap), cpus 5,6
+slot: admitted lake: mem 7 GiB (hard cap), cpus 2,3
 AXIOMS Proofs.HadwigerNelson.Rigidity.AdmissiblePrime private HadwigerNelson.Rigidity.adjoin_pow_eq_top : [Classical.choice, Quot.sound, propext]
 AXIOMS Proofs.HadwigerNelson.Rigidity.AdmissiblePrime private HadwigerNelson.Rigidity.closure_eq_of_adjoin_eq_top : [Classical.choice, Quot.sound, propext]
 AXIOMS Proofs.HadwigerNelson.Rigidity.AdmissiblePrime private HadwigerNelson.Rigidity.comap_conjO_isMaximal : [Classical.choice, Quot.sound, propext]

@@ -6,7 +6,7 @@ Proofs.HadwigerNelson.Rigidity.NormOneGen: before 6 constants (0 internal); SAME
 DROPPED OK HadwigerNelson.Rigidity.not_isRamified_of_odd_mem: the binder `[NumberField ↥F]` removed exactly
 Proofs.HadwigerNelson.Rigidity.UnitRingEq: before 14 constants (2 internal); SAME 11; added public []; added private 1 ['HadwigerNelson.Rigidity.two_le_absNorm_stablePrime']; generated on demand []; internal after 4
 Proofs.HadwigerNelson.Rigidity.UsablePrime: before 11 constants (0 internal); SAME 11; added public []; added private 0 []; generated on demand []; internal after 28
-Proofs.HadwigerNelson.Rigidity.PlaneComponents: before 9 constants (0 internal); SAME 9; added public []; added private 0 []; generated on demand []; internal after 11
+Proofs.HadwigerNelson.Rigidity.PlaneComponents: before 9 constants (0 internal); SAME 9; added public []; added private 0 []; generated on demand []; internal after 10
 Proofs.HadwigerNelson.Instances.UnitRingModels: before 4 constants (0 internal); SAME 4; added public []; added private 0 []; generated on demand []; internal after 0
 VERDICT CLEAN: 0 failure(s)
 PLANT a changed stored type: FIRED — new failures ['CHANGED (type) HadwigerNelson.Rigidity.unitRing_eq_stableIntegers (Proofs.HadwigerNelson.Rigidity.UnitRingEq)']

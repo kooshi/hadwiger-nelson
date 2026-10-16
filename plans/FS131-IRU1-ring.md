@@ -132,3 +132,51 @@ options, every one with no error and no warning. Departures from the plan, each 
   commit that carries it; the gate runs on that commit.
 
 ## Stage 2 — SAVED (all 40 leaves proved; build 2 green)
+
+## Stage 3 — the gate
+
+### 3.1 Build 3, the gated build
+
+On `45de7612d` (the matcher removed; § 2.5): "build: OK — 739 of 739 batches, 3 module(s) rebuilt, 0 module(s) with warnings,
+21m13s", exit 0 (`data/fs131/iru1/build3.out`, full log `data/fs131/iru1/build3-full.log`). Rebuilt: `PlaneComponents`,
+`UnitRingModels`, the root. Sources checked unchanged after (`build3.sources.md5`).
+
+### 3.2 No statement changed but the ruled ones (from the kernel's side)
+
+`tools/fs131_iru1_statements.py` (FS131-ICO2's comparator, two ruled classes added) on the dump taken before any edit
+(`data/fs131/iru1/statements-before.txt.gz`, stage 1) and the dump of build 3 (`statements-after-build3.txt.gz`):
+**VERDICT CLEAN, 0 failures** (`data/fs131/iru1/statements-compare.out`). Per module: `AdmissiblePrime` 24 SAME and the three
+**RENAMED OK** (private made public; stored type's `Expr.hash` equal and its text equal once the hygienic number of each
+instance binder of the renamed constant is blanked); `NormOneGen` 6 SAME, 2 private added (`add_conj_mul_inv_mem`,
+`unit_mem_closure_normOne`); `UnitRingEq` 11 SAME, **DROPPED OK** `not_isRamified_of_odd_mem` (the binder
+`[NumberField ↥F]` removed exactly, inventory item 1049), 1 private added (`two_le_absNorm_stablePrime`); `UsablePrime` 11
+SAME; `PlaneComponents` 9 SAME; `UnitRingModels` 4 SAME. No public constant added, none generated on demand (`eq_n`,
+`congr_simp`). **Planted controls, each watched to fire and nothing else new**: a changed character in
+`unitRing_eq_stableIntegers`'s stored type; that constant dropped; an unlisted public constant added; the dropped binder
+removed one character short; a renamed constant with another stored hash — `PLANTS ALL FIRED`. The two `example` heads
+(not stored) compared as text with the skeleton at `e27c45182`, block comments blanked first: SAME, a planted character
+reported (`data/fs131/iru1/examples-compare.out`).
+
+**The re-add** (`data/fs131/iru1/lean/ReAdd.lean` → `readd.txt`): `[NumberField ↥F]` put back after `{F}` in the stored
+type of `not_isRamified_of_odd_mem` gives hash `619762426`, the skeleton's stored hash; the controls (domain `True`:
+`1295855567`; the right domain one binder later: `1653348068`) differ.
+
+### 3.3 The audit's records
+
+`data/fs131/iru1/lean/AxiomsAll.lean` (FS131-ICT2's printer, module list changed) printed every record of the six modules
+from build 3 (`axioms-all.txt`): 47 public (46 on `[propext, Classical.choice, Quot.sound]`, 1 on `[propext, Quot.sound]`),
+25 private, none on `sorryAx`, none on an outside theorem. `tools/fs131_iru1_audit_block.py` (FS131-ICT2's generator):
+47 public, 2 already filed (`exists_residueHom_unramified`, `exists_unitPair`), **45 CLEAN records** emitted
+(`audit.clean.lean`) and placed in `scripts/Axioms.lean` above the PURCHASED banner under a block header naming this job;
+its planted control (an unknown axiom, a `sorryAx`, a declared import, a misfiled record) reported all four, exit 1
+(`audit-plant.out`); `--coverage` after: "COVERAGE OK: every one of the 47 public records is filed under its class"
+(`audit-coverage.out`).
+
+### 3.4 The vacuity scan's new declarations
+
+`data/fs131/iru1/lean/VacuityNew.lean` on build 3 (`vacuity-new.txt`): the scan's declarations in the six modules are 47 —
+`AdmissiblePrime` 5 (2 before: the three made public are new to it), `NormOneGen` 6, `UnitRingEq` 12, `UsablePrime` 11,
+`PlaneComponents` 9, `UnitRingModels` 4 — so **+45 declarations** against the base library; **+1 refutation skipped**:
+`UnitRingModels.noRamifiedStableDyadic_sqrt47`, whose type `NoRamifiedStableDyadic F47` unfolds to `∀ P, IsDyadic P →
+IsRamified P → False`; it is a true refutation of the configuration it names (a ramified dyadic stable prime of
+`ℚ(√47, i)`), and it is the model of item 1's scope, so its skip loses nothing.

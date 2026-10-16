@@ -1,4 +1,4 @@
-slot: admitted lake: mem 7 GiB (hard cap), cpus 5,6
+slot: admitted lake: mem 7 GiB (hard cap), cpus 2,3
 DECL Proofs.HadwigerNelson.Rigidity.AdmissiblePrime HadwigerNelson.Rigidity.nonempty_residueHom
 DECL Proofs.HadwigerNelson.Rigidity.AdmissiblePrime HadwigerNelson.Rigidity.exists_unitPair
 DECL Proofs.HadwigerNelson.Rigidity.AdmissiblePrime HadwigerNelson.Rigidity.exists_dvd_of_dvd_exponent
@@ -46,8 +46,7 @@ DECL Proofs.HadwigerNelson.Rigidity.PlaneComponents HadwigerNelson.Rigidity.conn
 DECL Proofs.HadwigerNelson.Rigidity.PlaneComponents HadwigerNelson.Rigidity.infinite_connectedComponent_planeOver_of_not_mem
 DECL Proofs.HadwigerNelson.Rigidity.PlaneComponents HadwigerNelson.Rigidity.reachable_iff_sub_mem_unitRingOver
 DECL Proofs.HadwigerNelson.Rigidity.PlaneComponents HadwigerNelson.Rigidity.connected_or_infinite_planeOver
-DECL Proofs.HadwigerNelson.Rigidity.PlaneComponents HadwigerNelson.Rigidity.infinite_connectedComponent_planeOver.match_1_1
-COUNT Proofs.HadwigerNelson.Rigidity.PlaneComponents 10
+COUNT Proofs.HadwigerNelson.Rigidity.PlaneComponents 9
 DECL Proofs.HadwigerNelson.Instances.UnitRingModels HadwigerNelson.UnitRingModels.noRamifiedStableDyadic_sqrt47
 REFUTATION Proofs.HadwigerNelson.Instances.UnitRingModels HadwigerNelson.UnitRingModels.noRamifiedStableDyadic_sqrt47
 DECL Proofs.HadwigerNelson.Instances.UnitRingModels HadwigerNelson.UnitRingModels.exists_stablePrime_three_not_isRamified
