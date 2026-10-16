@@ -56,16 +56,12 @@ What is not yet in the kernel is most of this project's hand work on that statem
      statements (`plans/FS136-derivation.md`; `CLAUDE.md` § Paths forward).
    - **FS-129, the cross-application audit** (rows 149–154): its 32 compositions are entries of the Lean backlog
      (`plans/FS129-derivation.md`).
-3. **Row 128, the collapse.** For a totally real field whose stable places all "mix" at six colours, such as ℚ(√635087), the
-   row's hand proof gives `χ(F²) = χ(ℝ²)`, given measure rigidity (MR) at `F`. The kernel now holds a form of MR for every real
-   number field: `Rigidity.mrPlus`, resting on the outside theorem **EL**. Whether that form is the one row 128's proof uses has
-   not been checked here (`LEDGER.md` row 128; `Rigidity/ZeroEntropyClosed.lean`).
-4. **Theorems that take an open question as a hypothesis.** These are design targets, not results to formalize. They are the
+3. **Theorems that take an open question as a hypothesis.** These are design targets, not results to formalize. They are the
    seven-target at six colours, `Plane.NoPar`, and valid six-coloured fragments on discs of every radius (rows 61, 145;
    `ARCHITECTURE.md` § 5, "Open questions and design targets").
-5. **An outside theorem that a plane theorem takes as a hypothesis**: Voronov's Theorem 1.1 (`Plane.Voronov11`,
+4. **An outside theorem that a plane theorem takes as a hypothesis**: Voronov's Theorem 1.1 (`Plane.Voronov11`,
    `[Voronov2023]`), taken by `Plane.mu_lt_of_voronov11` (`ARCHITECTURE.md` § 5).
-6. **Every row 128–167 not graded wholly [kernel]**: the appendix, group A.
+5. **Every row 128–167 not graded wholly [kernel]**: the appendix, group A.
 
 ## 2. The three outside theorems, and what landing each would mean
 
@@ -74,16 +70,16 @@ source, and each has a model of its hypotheses in its own file. "Landing" one me
 record now resting on it rests on Lean's three standard axioms alone.
 
 1. **O5, `Outside.OAI158.no_proper_five_coloring`**: no proper five-colouring of the plane (`[OAIMath2026]` family 158,
-   `lean/OAI/Geometry/PlaneColoring/Five.lean` l. 124). Six records rest on it, among them `6 ≤ χ(ℝ²) ≤ 7` and `6 ≤ χ_m⁰(ℝ²)`. The
+   `lean/OAI/Geometry/PlaneColoring/Five.lean` l. 124). Seven records rest on it, among them `6 ≤ χ(ℝ²) ≤ 7`, `6 ≤ χ_m⁰(ℝ²)` and `6 ≤ χ(ℚ(√635087)²) ≤ 7`. The
    release proves it in Lean at Lean and Mathlib `v4.34.1`, in 70 modules about 1,500 Mathlib commits away from this library's pin
    (`ARCHITECTURE.md` § 5). Landing it means porting that proof the way its transfer theorem was ported
    (`Outside/OAI158Basic` … `OAI158BorelTransfer`). Then `6 ≤ χ(ℝ²) ≤ 7` would hold on the standard three.
 2. **EL, `Rigidity.positive_entropy_rigidity`**: Einsiedler and Lindenstrauss's rigidity theorem for `ℤ^d`-actions on solenoids
-   (`[EinsiedlerLindenstrauss2022]` Theorem 1.3). It is read back clause by clause in `plans/FS131-KN7-chain-next.md` § 3.3. Eighteen records rest on it, among them the five-colour chain `min(L(F), 5) ≤ χ(F²)`, `χ(F²) = L(F)` whenever `L(F) ≤ 5`, and `χ(ℚ(√47)²) = 5`. Landing it would leave the
+   (`[EinsiedlerLindenstrauss2022]` Theorem 1.3). It is read back clause by clause in `plans/FS131-KN7-chain-next.md` § 3.3. Twenty-seven records rest on it, among them the five-colour chain `min(L(F), 5) ≤ χ(F²)`, `χ(F²) = L(F)` whenever `L(F) ≤ 5`, `χ(ℚ(√47)²) = 5`, and the collapse `χ(F²) = χ(ℝ²)` at every uniformly thick real number field. Landing it would leave the
    chain resting on Weil's bound alone. Its formalization has been asked to be priced at some point, not yet
    (`data/fs131/REQUEST-2026-10-13.md`, W2).
-3. **W, `StandingFive.kloosterman_bound`**: Weil's bound for Kloosterman sums (`[Weil1948]` p. 207). Forty-eight records rest on it:
-   the three-colour criterion, `χ(F²) = L(F)` at `L(F) ≤ 4`, and, with EL, the five-colour chain. Landing it as well as EL would put
+3. **W, `StandingFive.kloosterman_bound`**: Weil's bound for Kloosterman sums (`[Weil1948]` p. 207). Fifty-eight records rest on it:
+   the three-colour criterion, `χ(F²) = L(F)` at `L(F) ≤ 4`, and, with EL, the five-colour chain and the collapse at ℚ(√635087) and de Grey's field. Landing it as well as EL would put
    every number-field result in the README on the standard three.
 
 Two pieces of `[OAIMath2026]` were assumed once and are no longer: the transfer `Outside.OAI158.proper_to_borel_weak` and the
