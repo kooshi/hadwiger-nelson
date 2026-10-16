@@ -1,0 +1,22 @@
+slot: admitted lake: mem 8 GiB (hard cap), cpus 4,5
+data/fs131/kcl1/lean/Stage2Control.lean:33:29: error: Type mismatch
+  hτE
+has type
+  τ E = 0
+but is expected to have type
+  τ (TA F) = 0
+data/fs131/kcl1/lean/Stage2Control.lean:61:60: warning: Variable name `hE` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+'HadwigerNelson.Rigidity.KCL1Scratch.not_isSPWitness' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity]
+'HadwigerNelson.Rigidity.KCL1Scratch.mrLiteral_of_mrPlus' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Rigidity.KCL1Scratch.mrLiteral' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity]
