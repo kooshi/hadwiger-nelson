@@ -19,15 +19,18 @@ For every constant of BEFORE that is not INTERNAL (a public or a private declara
   PUBLICIZED  the one constant of PUBLICIZED below (ruling 2: `ratioAtMost_of_charBound` made public): BEFORE's private
            constant `_private.<module>.0.<name>` is absent, AFTER holds `<name>` public in the same module with the same kind
            and the same stored type, character for character;
+  RULED    one of RULED below (the coordinator's ruling on the lint finding, item 998's kind): BEFORE's stored type holds
+           the binder's text exactly once, and with it removed is AFTER's stored type character for character (FS131-KN9's
+           one-binder check, as `data/fs131/ico2/statements.py` runs it);
   CHANGED  anything else that differs                                                   -> FAIL;
   MISSING  absent from AFTER                                                            -> FAIL.
 AFTER's non-INTERNAL constants absent from BEFORE (and not MOVED or PUBLICIZED) are ADDED: listed by module, public,
 private and GENERATED (`f.congr_simp`, `f.eq_n`, `f.eq_def`: reserved names Lean writes on demand) apart. A public one that
 is not GENERATED must be in ALLOWED_PUBLIC -> else FAIL. INTERNAL constants are counted per module, never compared.
 
---plant runs the comparison five more times on AFTER changed in memory and requires each fault reported by name, and
+--plant runs the comparison six more times on AFTER changed in memory and requires each fault reported by name, and
 nothing else new: one character of one public stored type; one public constant dropped; one unlisted public constant
-added; a moved constant's stored type changed by one character; the publicized constant's type changed by one character.
+added; a moved constant's stored type changed by one character; the publicized constant's type changed by one character; a ruled binder removed one character short.
 Usage: fs131_ifr1_statements.py BEFORE AFTER [--plant]   exit 0 iff the comparison is clean (and, with --plant, every
 plant fired)
 """
@@ -52,6 +55,15 @@ CR_MOD = "Proofs.HadwigerNelson.Rigidity.ClassRatio"
 PUBLICIZED = {
     "_private.Proofs.HadwigerNelson.Rigidity.ClassRatio.0.HadwigerNelson.Rigidity.ratioAtMost_of_charBound":
         "HadwigerNelson.Rigidity.ratioAtMost_of_charBound",
+}
+# The ruled drops: an instance binder no proof reads (the lint's `unusedArguments`), removed from the stored type.
+def _inst(mod):
+    return re.compile(r" \[inst\._@\." + re.escape(mod) + r"\.\d+\._hygCtx\._hyg\.\d+ : NumberField\.\{0\} ")
+RULED = {
+    "HadwigerNelson.Collapse.stableRatio_le_of_ratioAtMost":
+        (_inst("Proofs.HadwigerNelson.Collapse.Density.Defs"), "[NumberField ↥F]"),
+    "HadwigerNelson.Collapse.IndepLaw.density_le_finIndepRatio":
+        (_inst("Proofs.HadwigerNelson.Collapse.Density.Upper"), "[NumberField ↥F]"),
 }
 # New public constants this job adds, each named with its reason.
 ALLOWED_PUBLIC = {
@@ -85,6 +97,25 @@ def read(path):
     return mods
 
 
+def strip_binder(text, pattern, short=False):
+    """BEFORE's type with the one binder `pattern` opens removed, or None unless it occurs exactly once.
+    `short` (the plant) keeps the binder's closing bracket: a near miss by one character."""
+    ms = list(pattern.finditer(text))
+    if len(ms) != 1:
+        return None
+    start = ms[0].start()
+    depth, i = 0, start + 2
+    while i < len(text):
+        if text[i] == "[":
+            depth += 1
+        elif text[i] == "]":
+            if depth == 0:
+                return text[:start] + text[i if short else i + 1:]
+            depth -= 1
+        i += 1
+    return None
+
+
 def hyg(text):
     """The old module's name rewritten to the new one inside hygienic names, and nowhere else."""
     return text.replace(f"_@.{OLD_MOD}.", f"_@.{NEW_MOD}.")
@@ -100,7 +131,7 @@ def same_decl(c, a, rewrite=False):
     return True
 
 
-def compare(before, after, quiet=False):
+def compare(before, after, quiet=False, short_strip=False):
     fails, report = [], []
     moved_seen = set()
     for mod, consts in before.items():
@@ -140,6 +171,15 @@ def compare(before, after, quiet=False):
             a = amod.get(name)
             if a is None:
                 fails.append(f"MISSING {name} ({mod})")
+                continue
+            if name in RULED:
+                pat, shown = RULED[name]
+                st = strip_binder(c.get("TYPE", ""), pat, short=short_strip)
+                ok = st is not None and a["kind"] == c["kind"] and st == a.get("TYPE")
+                report.append(f"RULED {'OK' if ok else 'DIFFERS'} {name}: the binder `{shown}` "
+                              f"{'removed exactly' if ok else 'is not the whole difference'}")
+                if not ok:
+                    fails.append(f"RULED-DIFFERS {name}")
                 continue
             if same_decl(c, a):
                 n_same += 1
@@ -207,11 +247,13 @@ def main():
     pb = "HadwigerNelson.Rigidity.ratioAtMost_of_charBound"
     a5 = copy.deepcopy(after); a5[CR_MOD][pb]["TYPE"] = bump(a5[CR_MOD][pb]["TYPE"])
     plants.append(("the publicized constant changed", a5, f"PUBLICIZED-CHANGED {pb}"))
+    plants.append(("the ruled binder a near miss", "SHORT", "RULED-DIFFERS HadwigerNelson.Collapse.stableRatio_le_of_ratioAtMost"))
     for label, a, expect in plants:
-        got = compare(before, a, quiet=True)
+        short = a == "SHORT"
+        got = compare(before, after if short else a, quiet=True, short_strip=short)
         new = sorted(set(got) - set(fails))
         hit = expect in new
-        extra = [g for g in new if g != expect]
+        extra = [g for g in new if g != expect and not (short and g.startswith("RULED-DIFFERS"))]
         print(f"PLANT {label}: {'FIRED' if hit and not extra else 'NOT FIRED'} — new failures {new}")
         ok = ok and hit and not extra
     print(f"PLANTS {'ALL FIRED' if ok else 'SOME DID NOT FIRE'}")

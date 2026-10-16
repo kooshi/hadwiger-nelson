@@ -340,7 +340,7 @@ theorem exists_indepLaw [NumberField F] : ∃ μ : IndepLaw F, (cayR F).finIndep
 
 /-- **The averaging bound** (B-AMEN's `α₁ ≥ α_inv`): a translation-invariant random independent set has density at most
 `α₁(Cay(R, U))` (`OneClass.IsShiftInvariantLaw.measure_origin_le` on `R`). -/
-theorem IndepLaw.density_le_finIndepRatio [NumberField F] (μ : IndepLaw F) : μ.density ≤ (cayR F).finIndepRatio := by
+theorem IndepLaw.density_le_finIndepRatio (μ : IndepLaw F) : μ.density ≤ (cayR F).finIndepRatio := by
   classical
   have hT : ∀ g : unitRing F, MeasurableSet {I : unitRing F → Bool | I g = true} := fun g =>
     show MeasurableSet ((fun I : unitRing F → Bool => I g) ⁻¹' {true}) from

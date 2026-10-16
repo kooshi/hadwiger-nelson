@@ -82,7 +82,7 @@ private theorem card_quot_ne [NumberField F] (P : StablePrime F) (m : ℕ) :
   exact ⟨by exact_mod_cast Nat.card_pos.ne', ENNReal.natCast_ne_top _⟩
 
 /-- **From the count's `RatioAtMost` to `r_P`** (the converse of `ratioAtMost_of_stableRatio_le`). -/
-theorem stableRatio_le_of_ratioAtMost [NumberField F] {P : StablePrime F} {c : ℝ} (h : RatioAtMost P c) :
+theorem stableRatio_le_of_ratioAtMost {P : StablePrime F} {c : ℝ} (h : RatioAtMost P c) :
     stableRatio P ≤ ENNReal.ofReal c := by
   refine iSup₂_le fun m hm => iSup₂_le fun s hs => ENNReal.div_le_of_le_mul ?_
   calc (s.card : ℝ≥0∞) = ENNReal.ofReal s.card := (ENNReal.ofReal_natCast _).symm
