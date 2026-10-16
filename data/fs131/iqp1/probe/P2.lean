@@ -1,0 +1,20 @@
+import Proofs.HadwigerNelson.PadicPlane.Tower
+open HadwigerNelson NumberField
+#check @StandingFive.card_fixed_of_involution
+#check @StandingFive.involution_eq_pow
+#check @StandingFive.card_normOne
+#check @StandingFive.kloostermanBound_of_ringChar_ne_two
+#check @StandingFive.ringChar_ne_two_of_card_mod_four
+#check @cardQuot_pow_of_prime
+#check @NumberField.RingOfIntegers.rank
+#check @FiniteField.isSquare_neg_one_iff
+#check @ZMod.exists_sq_eq_neg_one_iff
+#check @Ideal.comap_isMaximal_of_surjective
+#check @ZMod.castHom_injective
+#check @ZMod.castHom
+#check @LinearMap.finrank_le_finrank_of_surjective
+#check @Ideal.absNorm_span_natCast
+#check @Ideal.exists_le_maximal
+#check @UpperHalf.exists_I_integer
+#check @CharP.cast_eq_zero_iff
+#check @UpperHalf.conjO_conjO

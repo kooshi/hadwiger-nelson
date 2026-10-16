@@ -102,7 +102,12 @@ def TowerRatio (p : ℕ) (c : ℝ) : Prop :=
 
 /-- **The trivial tower ratio**: every level holds at most all of its points. The model of `TowerRatio`. -/
 theorem towerRatio_one (p : ℕ) [Fact p.Prime] : TowerRatio p 1 := by
-  sorry
+  intro k _ s _
+  haveI : NeZero (p ^ k) := ⟨pow_ne_zero k (Fact.out : p.Prime).ne_zero⟩
+  have h := Finset.card_le_univ s
+  rw [Fintype.card_prod, ZMod.card, ← pow_two, ← pow_mul, mul_comm] at h
+  rw [one_mul]
+  exact_mod_cast h
 
 /-- A larger constant is a tower ratio as well. -/
 theorem TowerRatio.mono {p : ℕ} {c c' : ℝ} (h : TowerRatio p c) (hc : c ≤ c') : TowerRatio p c' := fun k hk s hs =>
@@ -112,16 +117,120 @@ theorem TowerRatio.mono {p : ℕ} {c c' : ℝ} (h : TowerRatio p c) (hc : c ≤ 
 (its `p^{2k}` points would be covered by `m` independent sets of at most `c·p^{2k}` points each). -/
 theorem not_colorable_of_towerRatio {p : ℕ} [Fact p.Prime] {c : ℝ} (hc : TowerRatio p c) {m : ℕ}
     (hm : (m : ℝ) * c < 1) (k : ℕ) (hk : 1 ≤ k) : ¬ (unitQuadrance (ZMod (p ^ k))).Colorable m := by
-  sorry
+  classical
+  rintro ⟨C⟩
+  haveI : NeZero (p ^ k) := ⟨pow_ne_zero k (Fact.out : p.Prime).ne_zero⟩
+  have hcls : ∀ i : Fin m, ((Finset.univ.filter fun x => C x = i).card : ℝ) ≤ c * (p : ℝ) ^ (2 * k) := by
+    intro i
+    refine hc k hk _ fun x hx y hy _ hadj => ?_
+    simp only [Finset.coe_filter, Finset.mem_univ, true_and, Set.mem_setOf_eq] at hx hy
+    exact C.valid hadj (hx.trans hy.symm)
+  have hsum : (Finset.univ : Finset (ZMod (p ^ k) × ZMod (p ^ k))).card =
+      ∑ i : Fin m, (Finset.univ.filter fun x => C x = i).card :=
+    Finset.card_eq_sum_card_fiberwise fun _ _ => Finset.mem_univ _
+  have hcard : ((Finset.univ : Finset (ZMod (p ^ k) × ZMod (p ^ k))).card : ℝ) = (p : ℝ) ^ (2 * k) := by
+    rw [Finset.card_univ, Fintype.card_prod, ZMod.card, ← pow_two, ← pow_mul, mul_comm]
+    push_cast
+    ring
+  have hle' : ∑ i : Fin m, ((Finset.univ.filter fun x => C x = i).card : ℝ) ≤ m * c * (p : ℝ) ^ (2 * k) :=
+    calc ∑ i : Fin m, ((Finset.univ.filter fun x => C x = i).card : ℝ)
+        ≤ ∑ _i : Fin m, c * (p : ℝ) ^ (2 * k) := Finset.sum_le_sum fun i _ => hcls i
+      _ = m * c * (p : ℝ) ^ (2 * k) := by
+        rw [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
+        ring
+  have hle : (p : ℝ) ^ (2 * k) ≤ m * c * (p : ℝ) ^ (2 * k) := by
+    have e : (p : ℝ) ^ (2 * k) = ∑ i : Fin m, ((Finset.univ.filter fun x => C x = i).card : ℝ) := by
+      rw [← hcard, hsum]
+      push_cast
+      rfl
+    exact e.le.trans hle'
+  have hpos : (0 : ℝ) < (p : ℝ) ^ (2 * k) := pow_pos (Nat.cast_pos.2 (Fact.out : p.Prime).pos) _
+  nlinarith
 
 /-! ## Unit vectors are integral -/
+
+/-- `−1` is not a square modulo a prime `p ≡ 3 (mod 4)`: a square root of `−1` would be a unit of order `4`, and `4` does
+not divide `p − 1`. -/
+private theorem not_sq_eq_neg_one {p : ℕ} [Fact p.Prime] (hp : p % 4 = 3) (x : ZMod p) : x ^ 2 ≠ -1 := by
+  intro hx
+  have hp2 : p ≠ 2 := by omega
+  have hne : (-1 : ZMod p) ≠ 1 := by
+    intro h
+    have h2 : ((2 : ℕ) : ZMod p) = 0 := by
+      have : (2 : ZMod p) = 1 - (-1) := by ring
+      rw [Nat.cast_ofNat, this, h, sub_self]
+    rw [ZMod.natCast_eq_zero_iff] at h2
+    have := (Nat.prime_dvd_prime_iff_eq (Fact.out : p.Prime) Nat.prime_two).1 h2
+    exact hp2 this
+  have hx0 : x ≠ 0 := by
+    rintro rfl
+    rw [zero_pow two_ne_zero] at hx
+    have h1 : (1 : ZMod p) = 0 := neg_eq_zero.mp hx.symm
+    exact hne (by rw [h1, neg_zero])
+  set u : (ZMod p)ˣ := Units.mk0 x hx0 with hu
+  have hu2 : u ^ 2 ≠ 1 := by
+    intro h
+    have : x ^ 2 = 1 := by
+      have := congrArg (fun v : (ZMod p)ˣ => (v : ZMod p)) h
+      simpa [hu] using this
+    exact hne (hx ▸ this)
+  have hu4 : u ^ 4 = 1 := by
+    ext
+    simp only [hu, Units.val_pow_eq_pow_val, Units.val_mk0, Units.val_one]
+    rw [show x ^ 4 = (x ^ 2) ^ 2 by ring, hx]
+    ring
+  have hd4 : orderOf u ∣ 4 := orderOf_dvd_of_pow_eq_one hu4
+  have hd2 : ¬ orderOf u ∣ 2 := fun h => hu2 (orderOf_dvd_iff_pow_eq_one.1 h)
+  have hdp : orderOf u ∣ p - 1 := by
+    have := orderOf_dvd_card (x := u)
+    rwa [Fintype.card_units, ZMod.card] at this
+  have hpos : 0 < orderOf u := Nat.pos_of_dvd_of_pos hd4 (by norm_num)
+  have hle : orderOf u ≤ 4 := Nat.le_of_dvd (by norm_num) hd4
+  interval_cases h : orderOf u <;> omega
+
+/-- The case `‖b‖ ≤ ‖a‖` of `norm_le_one_of_sq_add_sq_eq_one`: then `‖a‖ ≤ 1`. -/
+private theorem norm_le_one_of_le_of_sq_add_sq {p : ℕ} [Fact p.Prime] (hp : p % 4 = 3) {a b : ℚ_[p]}
+    (h : a ^ 2 + b ^ 2 = 1) (hab : ‖b‖ ≤ ‖a‖) : ‖a‖ ≤ 1 := by
+  by_contra ha1
+  push Not at ha1
+  have ha0 : a ≠ 0 := by
+    rintro rfl
+    rw [norm_zero] at ha1
+    linarith
+  have hapos : 0 < ‖a‖ := norm_pos_iff.2 ha0
+  set u : ℚ_[p] := b / a with hu
+  have hu1 : ‖u‖ ≤ 1 := by
+    rw [hu, norm_div, div_le_one hapos]
+    exact hab
+  have h1 : 1 + u ^ 2 = (a ^ 2)⁻¹ := by
+    have ha2 : a ^ 2 ≠ 0 := pow_ne_zero 2 ha0
+    rw [hu, div_pow]
+    field_simp
+    linear_combination h
+  have hlt : ‖1 + u ^ 2‖ < 1 := by
+    rw [h1, norm_inv, norm_pow]
+    exact inv_lt_one_of_one_lt₀ (one_lt_pow₀ ha1 two_ne_zero)
+  set U : ℤ_[p] := ⟨u, hu1⟩ with hU
+  have hU' : ‖(1 + U ^ 2 : ℤ_[p])‖ < 1 := by
+    rw [PadicInt.norm_def]
+    push_cast
+    exact hlt
+  have hker : (1 + U ^ 2 : ℤ_[p]) ∈ RingHom.ker (PadicInt.toZMod : ℤ_[p] →+* ZMod p) := by
+    rw [PadicInt.ker_toZMod, IsLocalRing.mem_maximalIdeal, PadicInt.mem_nonunits]
+    exact hU'
+  rw [RingHom.mem_ker, map_add, map_one, map_pow] at hker
+  exact not_sq_eq_neg_one hp (PadicInt.toZMod U) (by linear_combination hker)
 
 /-- **Unit vectors of the p-adic plane are integral at `p ≡ 3 (mod 4)`** (`[Madore2015]` Prop. 3.2, the first paragraph of
 its proof): if `a² + b² = 1` in `ℚ_p` then `‖a‖ ≤ 1` and `‖b‖ ≤ 1`. (Were `‖a‖ ≥ ‖b‖` and `‖a‖ > 1`, then `u = b/a` has
 `‖u‖ ≤ 1` and `‖1 + u²‖ = ‖1/a²‖ < 1`, so `u² ≡ −1 (mod p)`, and `−1` is not a square modulo `p`.) -/
 theorem norm_le_one_of_sq_add_sq_eq_one {p : ℕ} [Fact p.Prime] (hp : p % 4 = 3) {a b : ℚ_[p]}
     (h : a ^ 2 + b ^ 2 = 1) : ‖a‖ ≤ 1 ∧ ‖b‖ ≤ 1 := by
-  sorry
+  rcases le_total ‖b‖ ‖a‖ with hab | hab
+  · have ha := norm_le_one_of_le_of_sq_add_sq hp h hab
+    exact ⟨ha, hab.trans ha⟩
+  · have hb := norm_le_one_of_le_of_sq_add_sq hp (by rw [add_comm]; exact h) hab
+    exact ⟨hab.trans hb, hb⟩
 
 /-- Spec: the hypothesis of `norm_le_one_of_sq_add_sq_eq_one` is inhabited by `(1, 0)` at `p = 3`. -/
 example : haveI : Fact (Nat.Prime 3) := ⟨Nat.prime_three⟩; (1 : ℚ_[3]) ^ 2 + (0 : ℚ_[3]) ^ 2 = 1 := by norm_num

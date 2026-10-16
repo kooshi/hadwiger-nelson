@@ -6,7 +6,12 @@
 
 ## Theorems this phase proved
 
-None yet (stage 1 is the readback).
+Elaborated under `lake env lean` (iteration only; the build is the evidence, stage 7), axioms to be printed at the gate:
+
+- `PadicPlane.towerRatio_one`, `not_colorable_of_towerRatio`, `norm_le_one_of_sq_add_sq_eq_one` (`PadicPlane/Basic`).
+- `PadicPlane.ratioAtMost_of_charSum_levelOne`, `exists_stablePrime_above`, `exists_levelEmbedding`,
+  `towerRatio_of_ratioAtMost`, `charSum_levelOne_of_unitCircle`, `charSum_unitCircle_ge_weil`,
+  `towerRatio_of_fibreShareBound` (`PadicPlane/Tower`).
 
 ## Stage 1 — SAVED: the readback
 
@@ -63,3 +68,42 @@ finite check. **It is held already:** `CircleCos.circleCos_ge` (public, `Arith/C
 bounds every non-trivial cosine sum over the circle of `𝔽₂₃²` below by `−κ'·24` with `κ' < 1/3`, so `κ = 24κ' < 8` and
 `⌈1 + 24/κ⌉ ≥ 5`. What it costs is the translation from `AddChar (ZMod p × ZMod p) ℂ` to the cosines (about 50 lines);
 decided at the Values stage, recorded there.
+
+## Stage 2 — SAVED: `PadicPlane/Basic` and `PadicPlane/Tower`
+
+Every leaf of the two modules proved; each file elaborates under `lake env lean` with the lakefile's two options and no
+warning (`data/fs131/iqp1/probe/tower.log` empty). No stored statement touched.
+
+**`Basic` (3 leaves, 105 lines against the plan's 90).** B1 by `Finset.card_le_univ`; B2 by the colour classes as
+`Finset.univ.filter`, summed fibrewise. B3 by the route the docstring states, with one change: no ultrametric case split
+is needed — with `‖b‖ ≤ ‖a‖` and `‖a‖ > 1`, `u = b/a` is integral and `1 + u² = a⁻²` has norm below `1`, so the residue of
+`u` squares to `−1` in `𝔽_p`. That `−1` is not a square at `p ≡ 3 (mod 4)` is proved here in 30 lines from
+`orderOf_dvd_card` (a square root of `−1` is a unit of order `4`, and `4 ∤ p − 1`): neither `ZMod.exists_sq_eq_neg_one_iff`
+nor `FiniteField.isSquare_neg_one_iff` is in `Basic`'s import closure, and an added import can move stored statements
+(`LEAN.md` § Searching — Lean). Two private helpers: `not_sq_eq_neg_one`, `norm_le_one_of_le_of_sq_add_sq`.
+
+**`Tower` (7 leaves, 435 lines against the plan's 540 by route A).** T0 by route A as ruled: Hoffman
+(`RatioBound.card_mul_le_of_indep`) at each level `n + 1` with `m = κQ^n`, every non-trivial character either descended
+(`FibreShare.exists_eq_compAddMonoidHom`, then Hensel's count `Rigidity.henselCount_of_two_notMem` fibre by fibre: the sum
+is `Q^n` times a level-one sum) or new (`Rigidity.newCharBound_of_two_notMem`: `‖Σ‖ ≤ 2Q^n ≤ κQ^n`); `|S_{n+1}| =
+Q^n(Q + 1)` by the same count and `|S₁| = Q + 1` (`StandingFive.card_normOne` once the norm-one set is `{u^(Q+1) = 1}`,
+`StandingFive.involution_eq_pow`). No edit to `Rigidity/ClassRatio.lean`, no private name read. T1 by absolute norms only:
+`finrank ℚ (ℚ(i)) ≤ 2` from the two surjections `ℚ → ⊥` and `⊥ × ⊥ → ℚ(i)`; every maximal `Q ∋ p` has `absNorm Q ∣ p^d`,
+`d ≤ 2`, not `1` (`Q ≠ ⊤`), not `p` (a field of `p` elements holding a square root of `−1`,
+`FiniteField.isSquare_neg_one_iff`), so `p²` and `d = 2`; stability because two distinct conjugate maximal ideals over `p`
+would give `p⁴ ∣ p²` (`Ideal.mul_eq_inf_of_isCoprime`). T2 through `CharP (𝓞 ⧸ P^k) (p^k)` (private `charP_quot_pow`:
+`n = p^j u`, `u` invertible modulo `p^k`, so `p^j ∈ P^k` and `p^{2k} ∣ p^{2j}`), then `ZMod.castHom` and `(a, b) ↦ θa +
+θb·ι`, whose norm is `θ(a² + b²)`; injective because `2` is invertible modulo `p^k`. T3 by the image of the independent
+set. T4 and T5 through K3 (`CertLink.exists_addEquiv_zmod`); T5 reads Weil exactly as `ClassRatio`'s private
+`charBound_one_weil` does, through the public `StandingFive.normOne_charSum_ge`. T6 is `CertLink.card_le_of_fibreShareBound`
+with Lemma P's two public theorems, through T3. Private helpers: `normOne_iff_pow`, `card_normOneSet_one`,
+`finrank_int_le_two`, `charP_quot_pow`.
+
+**Two statement binders no proof reads**: `hk : 1 ≤ k` of `exists_levelEmbedding` (the embedding exists at `k = 0`) and
+`hpP` of `charSum_levelOne_of_unitCircle` (K3 reads only `2 ∉ P` and the residue count). The statements are kept; each
+proof references the binder once (`have _ := hk`) with a comment saying it is not needed, which the build's
+`unusedVariables` linter accepts and `clear` does not (`data/fs131/iqp1/probe/P3.lean`). A weaker hypothesis than needed,
+not a defect.
+
+**Re-price.** The two modules took 540 lines against the plan's 630 and three elaboration rounds each (about 7 s per round
+for `Tower`). The plan's per-line prices hold; nothing seen here moves the rest of the plan's price.
