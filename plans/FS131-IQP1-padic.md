@@ -12,6 +12,11 @@ Elaborated under `lake env lean` (iteration only; the build is the evidence, sta
 - `PadicPlane.ratioAtMost_of_charSum_levelOne`, `exists_stablePrime_above`, `exists_levelEmbedding`,
   `towerRatio_of_ratioAtMost`, `charSum_levelOne_of_unitCircle`, `charSum_unitCircle_ge_weil`,
   `towerRatio_of_fibreShareBound` (`PadicPlane/Tower`).
+- `PadicPlane.res_surjective`, `isOpen_res_fibre`, `haar_univ`, `haar_res_fibre`, `exists_unitVector_lift`,
+  `isIndepSet_wellFilled`, `exists_level_haar_bad_le`, `haar_le_of_towerRatio`, `one_le_mul_of_borelColoring`,
+  `le_borelChromaticNumber_of_towerRatio` (`PadicPlane/Measure`).
+- `PadicPlane.exists_residueMap`, `exists_borelColoring_of_colorable`, `borelChromaticNumber_le_chromaticNumber`
+  (`PadicPlane/Upper`).
 
 ## Stage 1 — SAVED: the readback
 
@@ -107,3 +112,40 @@ not a defect.
 
 **Re-price.** The two modules took 540 lines against the plan's 630 and three elaboration rounds each (about 7 s per round
 for `Tower`). The plan's per-line prices hold; nothing seen here moves the rest of the plan's price.
+
+## Stage 3 — SAVED: `PadicPlane/Measure` and `PadicPlane/Upper`
+
+Every leaf of the two modules proved; each elaborates with the lakefile's options and no warning
+(`data/fs131/iqp1/probe/measure.log`, `upper.log`, both empty). No stored statement touched.
+
+**`Measure` (10 leaves, about 330 lines against the plan's 455).** M1 by `ZMod.natCast_zmod_val`. M2 from a private
+`res_eq_iff_dist_le` (two points share a level-`j` residue exactly when they are within `p^{−j}` in the sup metric:
+`PadicInt.ker_toZModPow`, `PadicInt.norm_le_pow_iff_mem_span_pow`), so each fibre holds the open ball of radius `p^{−k}`
+about each of its points. M3 by `Measure.addHaarMeasure_self` at `⊤`. M4: every fibre is a translate of the fibre over
+`0` (`measure_preimage_add`) and the `p^{2k}` fibres sum to `1` (`sum_measure_preimage_singleton`). M5 by
+`hensels_lemma` for `X² − (1 − a²)` at a lift `b₀` of the unit coordinate; at this pin `hensels_lemma` gives only
+`‖z − b₀‖ < 1`, not the distance, so the congruence modulo `p^k` comes from `(z − b₀)(z + b₀) = −(a² + b₀² − 1)` with
+`z + b₀` a unit (`‖2b₀‖ = 1 > ‖z − b₀‖`); the swap of coordinates covers a vanishing second residue, and `k = 0` is
+`(1, 0)`. M6 by one lift, as planned: `I ∩ C_x` and `(I ∩ C_y) − s` lie in `C_x`, each above half of it, and
+`nonempty_inter_of_measure_lt_add` gives `z, z + s ∈ I`. M7 by regularity with no density theorem: a compact `K ⊆ I`
+and an open `U ⊇ I` within `ε/2` (`MeasurableSet.exists_isCompact_sdiff_lt`, `exists_isOpen_sdiff_lt`), a coset inside
+`U` about each point of `U`, finitely many covering `K` (`IsCompact.elim_nhds_subcover`); their union `Z` is saturated
+from the largest level on (private `res_eq_of_le`, `PadicInt.cast_toZModPow`), and the private `haar_bad_le` bounds the
+badly filled points by `μ(I \ Z) + μ(Z \ I)`. M8: every point of `I` is badly filled or in a well-filled coset, the
+well-filled residues are independent (M6), so at most `c·p^{2k}`. M9: the inclusion `ℤ_p² → ℚ_p²` is
+`unitQuadrance.map` of `PadicInt.Coe.ringHom`, continuous, so measurable into `borel (ℚ_p²)` (`measurable_generateFrom`,
+`LEAN.md` l. 420's pattern); its classes are measurable independent sets covering `ℤ_p²`. M10 by `Nat.ceil_le`. The Haar
+instances are read through the definition by a local `haveI` from the private `isAddHaarMeasure_haar`: no instance is
+declared on `haar`.
+
+**`Upper` (3 leaves, about 125 lines against the plan's 130).** U1: `ℤ_p² ⊂ ℚ_p²` as the additive subgroup
+`H = (PadicInt.subring p).toAddSubgroup.prod …`, a representative of each coset by `Quotient.out`
+(`QuotientAddGroup.eq`, `out_eq'`), the difference `x − c(x)` read in `ℤ_p²` by choice through the coordinate inclusion,
+reduced by `PadicInt.toZMod` in each coordinate. An edge stays in one coset (`norm_le_one_of_sq_add_sq_eq_one`), so its
+image difference is the residue of a unit vector of `ℤ_p²`; within distance `1` the residue does not move
+(`PadicInt.ker_toZMod`), so each fibre is open. U2: the pulled-back colouring's classes are unions of fibres, open, and
+`MeasurableSpace.measurableSet_generateFrom` puts them in `borel`. U3 by `colorable_chromaticNumber_of_fintype` and
+`ENat.coe_toNat`.
+
+**Re-price.** Two rounds of elaboration each for `Measure` and `Upper` after the first. The hand-written total so far
+is about 995 lines for 23 leaves against the plan's 1,215 for the same leaves.
