@@ -51,6 +51,7 @@ HYG = re.compile(r"(inst\._@\.Proofs\.HadwigerNelson\.Rigidity\.ClassRatio)\.\d+
 # Public constants a module may gain: item 1027 (1)'s new lemma. Every other new public constant must be named here first.
 ALLOWED_PUBLIC = {
     "HadwigerNelson.Rigidity.ratioAtMost_dyadic_of_six_le": "item 1027 (1), item 1029 (b): FS131-ICS1",
+    "HadwigerNelson.Rigidity.exists_isFourColourPlace_rat": "FS131-ICS1: the model the assumptions step asks of IsFourColourPlace (LEAN.md § The gate, FS124-L2's rule)",
 }
 
 

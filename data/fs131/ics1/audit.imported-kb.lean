@@ -1,0 +1,9 @@
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.five_le_localBound_sqrt23_cbrt2
+#print axioms HadwigerNelson.SqrtTwentyThreeCbrtTwo.localBound_sqrt23_cbrt2_eq_five
+#print axioms HadwigerNelson.Rigidity.colorable_four_levelTarget_one_iff
+#print axioms HadwigerNelson.Rigidity.exists_ratioAtMost_lt_quarter_iff
+#print axioms HadwigerNelson.Rigidity.exists_ratioAtMost_of_not_isFourColourPlace
+#print axioms HadwigerNelson.Rigidity.five_le_chromaticNumber_levelTarget_one_iff
+#print axioms HadwigerNelson.Rigidity.five_le_localBoundAllLevels_iff
+#print axioms HadwigerNelson.Rigidity.five_le_localBound_iff
+#print axioms HadwigerNelson.Rigidity.tca_iff_forall_not_isFourColourPlace

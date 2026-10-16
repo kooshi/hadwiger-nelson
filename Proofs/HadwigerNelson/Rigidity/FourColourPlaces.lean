@@ -196,15 +196,17 @@ theorem min_localBoundAllLevels_five [NumberField F] : min (localBoundAllLevels 
     (le_min ((min_localBound_five_le_chromaticNumber F).trans (chromaticNumber_planeOver_le_localBoundAllLevels F))
       (min_le_right _ _))
 
+/-- **A listed place exists**: `ℚ`'s stable prime above 2 is ramified (`UpperHalf.exists_stablePrime_rat`). The model of
+`IsFourColourPlace` the assumptions step asks of a predicate taken as a hypothesis. -/
+theorem exists_isFourColourPlace_rat : ∃ P : StablePrime (⊥ : Subfield ℝ), IsFourColourPlace P := by
+  obtain ⟨P, -, hram⟩ := UpperHalf.exists_stablePrime_rat
+  exact ⟨P, Or.inl hram⟩
+
 /-! ## Spec -/
 
 -- The list's residue sizes: `Q²` for `Q ∈ {2, 3, 4, 7, 8, 16, 32}`, and `11² = 121` is not among them.
 example : (({2, 3, 4, 7, 8, 16, 32} : Finset ℕ).image (· ^ 2)) = {4, 9, 16, 49, 64, 256, 1024} := by decide
 example : ∀ Q ∈ ({2, 3, 4, 7, 8, 16, 32} : Finset ℕ), Q ^ 2 ≠ 121 := by decide
--- `ℚ`'s stable prime above 2 is ramified, so listed (`UpperHalf.exists_stablePrime_rat`).
-example : ∃ P : StablePrime (⊥ : Subfield ℝ), IsFourColourPlace P := by
-  obtain ⟨P, -, hram⟩ := UpperHalf.exists_stablePrime_rat
-  exact ⟨P, Or.inl hram⟩
 -- At `ℚ` both readings of `L` are at most two: the ramified prime's level-one target is bipartite.
 example : localBoundAllLevels (⊥ : Subfield ℝ) ≤ 2 := by
   obtain ⟨P, -, hram⟩ := UpperHalf.exists_stablePrime_rat
