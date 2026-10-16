@@ -15,9 +15,9 @@ the library. `ConnectedComponent` is Mathlib's.
 * `reachable_iff_sub_mem_unitRingOver` — **the component lemma** (`[Fischer1990b]` §§ 2–3, "stated in passing"): two points are
   joined by a path exactly when their difference lies in `ℤ[U] = UnitRing.unitRingOver F`, the additive group the unit
   vectors generate. Every subfield `F ⊆ ℝ`.
-* `connected_or_infinite` — **the dichotomy, every subfield `F ⊆ ℝ`**: the plane is connected or has infinitely many
+* `connected_or_infinite_planeOver` — **the dichotomy, every subfield `F ⊆ ℝ`**: the plane is connected or has infinitely many
   components (`F²` is a `ℚ`-vector space, and a subgroup of finite index `d` holds `d·F² = F²`).
-* `connected_iff_isEmpty_stablePrime` — over a real number field the plane is connected exactly when `F(i)` has no stable
+* `connected_planeOver_iff_isEmpty_stablePrime` — over a real number field the plane is connected exactly when `F(i)` has no stable
   prime (no stable prime: `O′ = F(i)` and `c·O′ ⊆ ℤ[U]`; a stable prime `P`: `ℤ[U] ⊆ 𝓞_P ≠ F(i)`).
 * `infinite_connectedComponent_planeOver` — **C8: at every real number field the plane has infinitely many components**,
   from `Rigidity.nonempty_stablePrime` (`Rigidity/UsablePrime`, no outside theorem).
@@ -48,30 +48,30 @@ theorem reachable_iff_sub_mem_unitRingOver (x y : planeOver F) :
   sorry
 
 /-- **Connected exactly when every point of `F²` is a finite sum of unit vectors.** -/
-theorem connected_iff_planeOver_subset :
+theorem connected_planeOver_iff_subset :
     ((unitDistance ℂ).induce (planeOver F)).Connected ↔ planeOver F ⊆ UnitRing.unitRingOver F := by
   sorry
 
 /-- **A point outside `ℤ[U]` gives infinitely many components**: were there finitely many, `d` of them, the classes of
 `z/d` modulo `ℤ[U]` would have order dividing `d`, so `z = d·(z/d) ∈ ℤ[U]`. -/
-theorem infinite_connectedComponent_of_not_mem {z : ℂ} (hz : z ∈ planeOver F) (hzR : z ∉ UnitRing.unitRingOver F) :
+theorem infinite_connectedComponent_planeOver_of_not_mem {z : ℂ} (hz : z ∈ planeOver F) (hzR : z ∉ UnitRing.unitRingOver F) :
     Infinite ((unitDistance ℂ).induce (planeOver F)).ConnectedComponent := by
   sorry
 
 /-- **The dichotomy**, every subfield of `ℝ`: the plane over `F` is connected or has infinitely many components. -/
-theorem connected_or_infinite (F : Subfield ℝ) :
+theorem connected_or_infinite_planeOver (F : Subfield ℝ) :
     ((unitDistance ℂ).induce (planeOver F)).Connected ∨
       Infinite ((unitDistance ℂ).induce (planeOver F)).ConnectedComponent := by
   sorry
 
 /-- **A stable prime gives infinitely many components**: `ℤ[U] ⊆ 𝓞_P ≠ F(i)` (`UpperHalf.localRing_ne_top`). -/
-theorem infinite_connectedComponent_of_stablePrime [NumberField F] (P : StablePrime F) :
+theorem infinite_connectedComponent_planeOver_of_stablePrime [NumberField F] (P : StablePrime F) :
     Infinite ((unitDistance ℂ).induce (planeOver F)).ConnectedComponent := by
   sorry
 
 /-- **Connected exactly when `F(i)` has no stable prime** (with no stable prime, `O′ = F(i)` and `c·O′ ⊆ ℤ[U]`,
 `Rigidity.exists_mul_stableIntegers_le`, give `ℤ[U] = F(i)`). -/
-theorem connected_iff_isEmpty_stablePrime [NumberField F] :
+theorem connected_planeOver_iff_isEmpty_stablePrime [NumberField F] :
     ((unitDistance ℂ).induce (planeOver F)).Connected ↔ IsEmpty (StablePrime F) := by
   sorry
 

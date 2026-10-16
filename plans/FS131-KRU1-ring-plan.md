@@ -151,13 +151,13 @@ has a ramified stable dyadic prime and `R = O′`, row 100); Lemma C; the inject
 
 ### 2.3 The components clause — at every field with an exhibited stable prime, and at every real number field
 
-- **With an exhibited stable prime** (`infinite_connectedComponent_of_stablePrime (P : StablePrime F)`): the component lemma
+- **With an exhibited stable prime** (`infinite_connectedComponent_planeOver_of_stablePrime (P : StablePrime F)`): the component lemma
   (`reachable_iff_sub_mem_unitRingOver`), a point outside `ℤ[U]` gives infinitely many components
-  (`infinite_connectedComponent_of_not_mem`, pigeonhole on `j·z/d!`), and `ℤ[U] ⊆ 𝓞_P ≠ F(i)`. ≈ 140 lines.
+  (`infinite_connectedComponent_planeOver_of_not_mem`, pigeonhole on `j·z/d!`), and `ℤ[U] ⊆ 𝓞_P ≠ F(i)`. ≈ 140 lines.
 - **At every real number field** (`infinite_connectedComponent_planeOver F`, `not_connected_planeOver F`): the above with
   `nonempty_stablePrime F` (route E, § 2.4). ≈ 6 lines more, plus module 3.
-- **The dichotomy** (`connected_or_infinite`, every subfield of `ℝ`; `connected_iff_isEmpty_stablePrime`, every real number
-  field): marginal ≈ 55 lines (`connected_iff_planeOver_subset` 25, `connected_or_infinite` 10, the iff 20 — the last reads
+- **The dichotomy** (`connected_or_infinite_planeOver`, every subfield of `ℝ`; `connected_planeOver_iff_isEmpty_stablePrime`, every real number
+  field): marginal ≈ 55 lines (`connected_planeOver_iff_subset` 25, `connected_or_infinite_planeOver` 10, the iff 20 — the last reads
   `exists_mul_stableIntegers_le` at an empty set of stable primes).
 
 **Read aloud** (`infinite_connectedComponent_planeOver`): for every number field `F ⊆ ℝ`, the graph on the points of `ℂ`
@@ -229,5 +229,22 @@ Three typed joints added, each the place where a proof would otherwise be a walk
 Inductions named: `reachable_iff_sub_mem_unitRingOver` (⟹) is induction on `Relation.ReflTransGen` (`reachable_iff_reflTransGen`),
 one obligation, "an edge's difference is a unit vector"; `exists_prime_mod_four_eq_three_dvd` is the contrapositive "every prime
 factor `≡ 1 (mod 4)` ⇒ `N ≡ 1 (mod 4)`", by `induction_on_primes` (measure: the factorization); every other leaf is a chain
-of `have`s with no recursion. `infinite_connectedComponent_of_not_mem` is pigeonhole on `Fin (d + 1)` (`d` the number of
+of `have`s with no recursion. `infinite_connectedComponent_planeOver_of_not_mem` is pigeonhole on `Fin (d + 1)` (`d` the number of
 components), `w = z/d!`, so the difference `j − i ≤ d` divides `d!` — no quotient group built.
+
+### 3.3 The experience-modeling pass on the head statements (`debruijn-experience-modeling`, fresh)
+
+Consumers: the publication's comparator surface (statements read as Challenge text), readers of `LEDGER.md` rows 100 and 105,
+`exact?`, and the next kernel jobs.
+- **One name family for the plane's components**, predictable from any one member: every statement whose subject is the
+  graph on `planeOver F` carries `planeOver` — `connected_or_infinite_planeOver`, `connected_planeOver_iff_subset`,
+  `connected_planeOver_iff_isEmpty_stablePrime`, `infinite_connectedComponent_planeOver(_of_not_mem | _of_stablePrime)`,
+  `not_connected_planeOver`; `reachable_iff_sub_mem_unitRingOver` keeps its name (its vertices' type says `planeOver`).
+- **No coined word in a name.** `isUnit_mover` (a two-fact bundle named by an in-house word) is split into
+  `isUnit_mk_sub_conj` and `isUnit_add_mk_of_conj_eq`, each named by its conclusion, so `exact?` finds each alone.
+- **`resPi` has its API**: `@[simp] resPi_apply` (the component is `resR`), the spec example pins it to `P.residue m ∘
+  toLocal P` (an `rfl` that fails if the definition drifts).
+- **Kept:** `unitRing_eq_stableIntegers` with `F` implicit (determined by `h`; the roadmap's typed form showed no binder for
+  `F`, and every consumer holds `h`); `nonempty_stablePrime` stays a theorem, not an `instance` — a global `Nonempty` instance
+  is speech into every search, and no consumer has asked for `Classical.arbitrary`; the head statements' binders are
+  `[NumberField F]` and the scope only, no structure hypothesis the comparator would have to restate.

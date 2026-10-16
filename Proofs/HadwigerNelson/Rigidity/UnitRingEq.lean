@@ -47,14 +47,21 @@ variable {F : Subfield ℝ} [NumberField F]
 def resPi (Φ : Finset (StablePrime F)) (m : ℕ) : unitRing F →+* ∀ P : Φ, 𝓞 (fieldI F) ⧸ P.1.P ^ m :=
   RingHom.pi fun P => resR P.1 m
 
-/-- **The residue of an unramified stable prime's mover is a mover**: for `t` with `t̄ − t ∉ P`, the residue `θ` of `t` in
-`𝓞 L ⧸ P^m` has `θ − θ̄` a unit, and `a + θ` is a unit for every residue `a` fixed by conjugation (else `a + t ∈ P` and
-`a + t̄ ∈ P`, so `t − t̄ ∈ P`). -/
-theorem isUnit_mover (P : StablePrime F) (m : ℕ) {t : 𝓞 (fieldI F)} (ht : conjO F t - t ∉ P.P) :
+@[simp] theorem resPi_apply (Φ : Finset (StablePrime F)) (m : ℕ) (r : unitRing F) (P : Φ) :
+    resPi Φ m r P = resR P.1 m r := rfl
+
+/-- **Conjugation moves the residue of `t` by a unit** when `t̄ − t ∉ P`: the residue of `t − t̄` in `𝓞 L ⧸ P^m` lies outside
+`P` (`UpperHalf.isUnit_mk_pow`). -/
+theorem isUnit_mk_sub_conj (P : StablePrime F) (m : ℕ) {t : 𝓞 (fieldI F)} (ht : conjO F t - t ∉ P.P) :
     IsUnit (Ideal.Quotient.mk (P.P ^ m) t -
-        Ideal.quotientMap (P.P ^ m) (conjO F) (P.le_comap m) (Ideal.Quotient.mk (P.P ^ m) t)) ∧
-      ∀ a : 𝓞 (fieldI F) ⧸ P.P ^ m, Ideal.quotientMap (P.P ^ m) (conjO F) (P.le_comap m) a = a →
-        IsUnit (a + Ideal.Quotient.mk (P.P ^ m) t) := by
+      Ideal.quotientMap (P.P ^ m) (conjO F) (P.le_comap m) (Ideal.Quotient.mk (P.P ^ m) t)) := by
+  sorry
+
+/-- **A residue fixed by conjugation plus the residue of `t` is a unit** when `t̄ − t ∉ P`: else `a + t ∈ P` and, applying
+conjugation, `a + t̄ ∈ P`, so `t − t̄ ∈ P`. -/
+theorem isUnit_add_mk_of_conj_eq (P : StablePrime F) (m : ℕ) {t : 𝓞 (fieldI F)} (ht : conjO F t - t ∉ P.P)
+    {a : 𝓞 (fieldI F) ⧸ P.P ^ m} (ha : Ideal.quotientMap (P.P ^ m) (conjO F) (P.le_comap m) a = a) :
+    IsUnit (a + Ideal.Quotient.mk (P.P ^ m) t) := by
   sorry
 
 /-- **Every norm-one element of the product is a residue of a unit vector** (`Counting.exists_normOneL_residues`, read in
@@ -111,7 +118,9 @@ theorem exists_two_pow_mul_mem_unitRing {x : fieldI F} (hx : x ∈ stableInteger
 
 /-! ## Spec examples -/
 
-example (Φ : Finset (StablePrime F)) (m : ℕ) (r : unitRing F) (P : Φ) : resPi Φ m r P = resR P.1 m r := rfl
+/-- `resPi` is the residue map of `𝓞_P` at `P^m` on each component (it would fail if `resPi` drifted to another map). -/
+example (Φ : Finset (StablePrime F)) (m : ℕ) (r : unitRing F) (P : Φ) :
+    resPi Φ m r P = P.1.residue m (toLocal P.1 r) := rfl
 
 end
 
