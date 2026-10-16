@@ -7,7 +7,29 @@ at `57984248b`). Worktree `.claude/worktrees/kcl1`, branch `fs131-ico1`, taken o
 
 ## Theorems this phase proved
 
-None yet at kernel grade (filled in as the gate passes).
+All [kernel], through the full gate on `7c72b9bf7` (stage 7); axioms as the receipt of record prints them (std3 =
+`[propext, Classical.choice, Quot.sound]`; EL = `Rigidity.positive_entropy_rigidity`; W = `StandingFive.kloosterman_bound`;
+O5 = `Outside.OAI158.no_proper_five_coloring`). The modules `Collapse/Thick`, `Mixing`, `Colouring`, `Dichotomy` were proved by
+FS131-ICO1 and `Slice`, `Selection`, `Headline` by this job; all seven reached the kernel's grade at this gate. The headlines:
+- `Collapse.chromaticNumber_planeOver_sqrt635087` — `χ(ℚ(√635087)²) = χ(ℝ²)` — std3 + EL + W.
+- `Collapse.chromaticNumber_planeOver_eq_plane_of_thick` — `χ(F²) = χ(ℝ²)` at every real number field uniformly `c`-thick with
+  `0 ≤ c < 1/5` — std3 + EL.
+- `Collapse.chromaticNumber_planeOver_deGrey` — `χ(ℚ(√3, √5, √7, √11)²) = χ(ℝ²)` — std3 + EL + W.
+- `Collapse.chromaticNumber_planeOver_eq_plane_of_forall_thickAt` — the same, each stable prime `c_P`-thick with `c_P < 1/5` —
+  std3 + EL + W.
+- `Collapse.chromaticNumber_planeOver_sqrt635087_six_or_seven` — `6 ≤ χ(ℚ(√635087)²) ≤ 7` — std3 + EL + W + O5.
+- `Collapse.chromaticNumber_plane_le_of_thick` — over a uniformly `c`-thick real number field with `c(k − 1) < 1`, a proper
+  `k`-colouring of `F²` gives `χ(ℝ²) ≤ k` (the load-bearing step) — std3 + EL.
+- The two approved edits: `StandingFive.norm_normOne_charSum_le` (D-E1, the two-sided norm-one character bound, over the named
+  hypothesis `KloostermanBound`) — std3; `Rigidity.norm_charSum_le_weil` (D-E2, Weil's bound at every level) — std3 + W.
+- Along the line: `Collapse.exists_invColouring_TA`, `Collapse.not_isSPWitness`, `Collapse.exists_slice_of_colorable` — std3 +
+  EL; `Collapse.thickAt_weil`, `thick_of_card`, `thick_of_forall_thickAt`, `thick_sqrt635087`, `thick_deGrey` — std3 + W;
+  `Collapse.mixing_K`, `finite_mixing`, `exists_aeColouring_of_slice`, `exists_slice_k`, `exists_extension_k`,
+  `tendsto_measure_ne_k`, `exists_factorLawK`, `exists_isColourSpectral`, `exists_invColouring`, `not_thick_bot`,
+  `le_of_isSquare_635087`, `le_of_isSquare_deGrey` and the rest — std3.
+
+Every one of the 80 public theorems of the nine modules, with its axioms: `data/fs131/ico2/gate/theorems-proved.txt`; every
+one of the 138 public records (theorems and definitions) as filed in the audit: `data/fs131/ico2/audit.*.lean`.
 
 ## Stage 1 — SAVED: the readback
 
@@ -333,3 +355,171 @@ reading, S_nf). The row's load-bearing step — "a `k`-colouring of `F²` gives 
 the colour count entering at `max_j m_j ≥ 1/k` — is `chromaticNumber_plane_le_of_thick` in the library's format: a measurable
 `k`-colouring proper at almost every unit pair (`AeColouring k`, the `χ_m⁰` object) with a fixed threshold, the SP witness
 excluded by MR⁺ inside it, and the pigeonhole at `le_fibreMass_selCol`.
+
+## Stage 9 — SAVED: the drafts
+
+## Drafts for the front page
+
+*Each draft names its slot: the file, the section, and the words it replaces or follows. Every quoted slot text was checked to
+occur exactly once in its file in this tree (`main` merged at `ac830b568`). Counts are this job's gate's
+(`data/fs131/ico2/gate/`, `7c72b9bf7`, stage 7). Keryx files; this job edits none of these files.*
+
+### D1 — `CLAUDE.md` § Trust ledger, the audit's sentence
+
+**Slot:** "the current audit reads 10651 clean and 5 declared purchases, and 62 imported (and 569 axiom-free; 11,287 records at
+FS131-IL5, the main clause through five as one theorem, 2026-10-16)" → "the current audit reads 10747 clean and 5 declared
+purchases, and 77 imported (and 569 axiom-free; 11,398 records at FS131-ICO2, the collapse, 2026-10-16)".
+
+**Slot, same paragraph:** "with forty-eight imported records (twelve of them the three-colour criterion's and row 99's, FS131-LJ1;
+twenty-six the five-colour chain's, FS131-LGT1; two the main clause's through five as one theorem, FS131-IL5)" → "with fifty-eight
+imported records (twelve of them the three-colour criterion's and row 99's, FS131-LJ1; twenty-six the five-colour chain's,
+FS131-LGT1; two the main clause's through five as one theorem, FS131-IL5; ten the collapse's, FS131-ICO2: the thickness of
+ℚ(√635087) and de Grey's field, the two instances, the per-place form, the six-or-seven corollary, and D-E2's
+`Rigidity.norm_charSum_le_weil`)".
+
+**Slot, same paragraph:** "`Outside.OAI158.no_proper_five_coloring` — no map `ℂ → Fin 5` separates every unit pair — with six;" →
+"`Outside.OAI158.no_proper_five_coloring` — no map `ℂ → Fin 5` separates every unit pair — with seven (the seventh the collapse's
+`Collapse.chromaticNumber_planeOver_sqrt635087_six_or_seven`);".
+
+**Slot, same paragraph:** "— with eighteen, ten of which rest on Weil's bound too (the five-colour chain's headline
+`Rigidity.min_localBound_five_le_chromaticNumber`, `χ(ℚ(√47)²) = 5` and M15's other values, and `χ(F²) = L(F)` at `L(F) ≤ 5` with
+its `min` form, `Rigidity/MainClauseFive`); no record rests on the five-colour theorem and another import," → "— with
+twenty-seven, fourteen of which rest on Weil's bound too (the five-colour chain's headline
+`Rigidity.min_localBound_five_le_chromaticNumber`, `χ(ℚ(√47)²) = 5` and M15's other values, `χ(F²) = L(F)` at `L(F) ≤ 5` with its
+`min` form, `Rigidity/MainClauseFive`, and the collapse at ℚ(√635087) and de Grey's field, its per-place form and its six-or-seven
+corollary, `Collapse/Headline`; the collapse's general form `Collapse.chromaticNumber_planeOver_eq_plane_of_thick` rests on it
+alone); one record rests on the five-colour theorem and another import, the collapse's six-or-seven corollary, on all three,".
+
+### D2 — `CLAUDE.md` § Trust ledger, the assumptions sentence
+
+**Slot:** "`axioms=3 rests=78 named=19 inline=14 outside=7 ours=21 open=5 takes=108 mentions=2` — three outside theorems declared as
+axioms, with seventy-eight (axiom, theorem) rows resting on them, sixty-eight theorems, ten of them on two;" → "`axioms=3 rests=99
+named=19 inline=14 outside=7 ours=21 open=5 takes=109 mentions=2` — three outside theorems declared as axioms, with ninety-nine
+(axiom, theorem) rows resting on them, eighty-four theorems, thirteen of them on two and one on three;". **And** in the same
+sentence "taken in 108 (hypothesis, statement) pairs by 55 statements" → "taken in 109 (hypothesis, statement) pairs by 56
+statements" (the new pair: D-E1's `StandingFive.norm_normOne_charSum_le` takes `KloostermanBound`, as its sibling
+`normOne_charSum_ge` does). *(The theorem counts are mine, from the step's per-axiom counts — `no_proper_five_coloring` 7,
+`positive_entropy_rigidity` 27, `kloosterman_bound` 65, so 99 memberships — over 84 theorems: 70 on one, 13 on two, 1 on three
+(the sentence's old 68 and 10, plus this landing's 16 theorems: 5 on E–L alone, 7 on Weil's bound alone, 3 on both, 1 on all
+three). The step prints the rows, not the theorems; Keryx may prefer to drop them.)*
+
+### D3 — `CLAUDE.md` § The gate, the vacuity counts
+
+**Slot:** "`declarations=22241 refutations-skipped=240 sites=1455`" → "`declarations=22357 refutations-skipped=242 sites=1455`"
+(the second backticked group unchanged). The two new refutation-skips are `Collapse.shift_mem_Xk` and `rot_mem_Xk`, which refute
+nothing (stage 7).
+
+### D4 — `CLAUDE.md` § Frontier, the "Last filed" line
+
+**Slot:** from "Last filed: **the main clause through five as one theorem** (FS131-IL5, 2026-10-16:" through "the upper half prior
+art, the lower half this project's derivation);" → "Last filed: **the collapse** (FS131-KCL1, FS131-ICO1, FS131-ICO2,
+2026-10-16: seven `Collapse/` modules through the gate on `7c72b9bf7` — `χ(F²) = χ(ℝ²)` at every real number field whose stable
+primes are uniformly `c`-thick with `c < 1/5`, totally real or not (`Collapse.chromaticNumber_planeOver_eq_plane_of_thick`, on
+`[EinsiedlerLindenstrauss2022]` Thm 1.3 alone), `χ(ℚ(√635087)²) = χ(ℝ²)` and `χ(ℚ(√3,√5,√7,√11)²) = χ(ℝ²)` with no hypothesis
+(on it and Weil's bound), and with `[OAIMath2026]`'s import `6 ≤ χ(ℚ(√635087)²) ≤ 7`; row 128's field clause, its MR the kernel's
+`Rigidity.mrPlus`; the field equality prior art: not found in print, the plane equality `[OAIMath2026]`'s; no value of `χ(ℝ²)`
+moved);" — the IL5 text going to `plans/FILINGS.md` as the filings' rule has it.
+
+### D5 — `CLAUDE.md` § Where the problem stands, "What the kernel holds"
+
+**Slot: after** "the derivation is this project's, and the kernel's check is this landing's;" (the main clause through five's
+entry), **before** "**Theorems A and B**": insert "**the collapse** (FS-131, FS131-ICO2): `χ(F²) = χ(ℝ²)` at every real number
+field whose stable primes are uniformly `c`-thick, `c < 1/5` — every non-trivial character of every level of every
+conjugation-fixed prime of `F(i)` summing over the norm-one residues to at most `c` times their number — totally real or not
+(`Collapse.chromaticNumber_planeOver_eq_plane_of_thick`, on `[EinsiedlerLindenstrauss2022]` Thm 1.3 alone; its per-place form
+`…_of_forall_thickAt` on Weil's bound too); `χ(ℚ(√635087)²) = χ(ℝ²)` and `χ(ℚ(√3,√5,√7,√11)²) = χ(ℝ²)` with no hypothesis,
+thickness by Weil's bound above 103 and 131 (`Collapse.chromaticNumber_planeOver_sqrt635087`, `…_deGrey`), and `6 ≤
+χ(ℚ(√635087)²) ≤ 7` with `Outside.OAI158.no_proper_five_coloring` (`…_sqrt635087_six_or_seven`) — row 128's field clause, wider
+than the row (no total reality; no MR hypothesis); the field equality prior art: not found in print (row 128), the plane equality
+`[OAIMath2026]`'s; the derivation FS-103's, the kernel's check this landing's;".
+
+### D6 — `CLAUDE.md` § Where the problem stands, the plane's number
+
+**Slot:** "**The plane's number is a measurable one with no hypothesis, and given MR a field's**" → "**The plane's number is a
+measurable one with no hypothesis, and a field's**". **Slot, same paragraph:** "and given MR(ℚ(√635087)) it is `χ(ℚ(√635087)²)`
+(row 128; [hand], two blind minds)" → "and it is `χ(ℚ(√635087)²)` with no hypothesis (`Collapse.chromaticNumber_planeOver_sqrt635087`,
+on `[EinsiedlerLindenstrauss2022]` Thm 1.3 and Weil's bound; row 128, in the kernel since FS131-ICO2)".
+
+### D7 — `CLAUDE.md` § The aim, link 1 (the planner's § 4.7 draft, brought to what is proved)
+
+**Slot:** "Given MR at a number field (row 120) it also equals `χ(F²)` at each totally real field where every stable place mixes at
+six colours, ℚ(√635087) and de Grey's field among them (row 128; [hand, two minds])." → "It also equals `χ(F²)` at every real
+number field whose stable places all mix at six colours, ℚ(√635087) and de Grey's field among them — in the kernel since
+FS131-ICO2, on `[EinsiedlerLindenstrauss2022]` Thm 1.3 and, at the two fields, Weil's bound (row 128;
+`Collapse.chromaticNumber_planeOver_eq_plane_of_thick`)."
+
+### D8 — `CLAUDE.md` § The local–global conjecture, and the theory paragraph
+
+**Slot (the conjecture):** "seven at ℚ(√635087) is `χ(ℝ²) = 7` given MR (row 128)" → "seven at ℚ(√635087) is `χ(ℝ²) = 7` (row 128;
+the equality `χ(ℚ(√635087)²) = χ(ℝ²)` in the kernel since FS131-ICO2)". **Slot (§ Grokkings' theory in one paragraph):** "and given
+MR χ(F²) = χ(ℝ²), the least k with a measurable k-colouring proper at almost every unit pair" → "and χ(F²) = χ(ℝ²), the least k with
+a measurable k-colouring proper at almost every unit pair" — and in the parenthesis after it, "(rows 128, 130, G81; [hand])" →
+"(rows 128, 130, G81; the field equality [kernel] since FS131-ICO2, on `[EinsiedlerLindenstrauss2022]` Thm 1.3)". *(Whether the
+grokkings file's G81 entry says "given MR" too is Keryx's to read; this job did not open the grokkings.)*
+
+### D9 — `LEDGER.md` row 128, regraded
+
+**Slot 1, the head:** "**The collapse: given MR, the plane's number is a field's." → "**The collapse: the plane's number is a
+field's.". **Slot 2, the grade bracket:** "**[hand + tools exact; the load-bearing step two derivations blind to each other and to
+J39's and J48's proofs (V1; V2) — four derivations with the two held; the assemblies two blind; place lists and spectra tools
+exact, three code bases; MR row 120's grade; the complex-place widening one mind (V2), not claimed]**" → "**[kernel since FS131-ICO2
+for the field clause (`Proofs/HadwigerNelson/Collapse/`, the gate on `7c72b9bf7`): at every real number field uniformly `c`-thick
+with `c < 1/5`, totally real or not, `Collapse.chromaticNumber_planeOver_eq_plane_of_thick`, on
+`Rigidity.positive_entropy_rigidity` (`[EinsiedlerLindenstrauss2022]` Thm 1.3) — MR is `Rigidity.mrPlus` there — and the
+standard three; at ℚ(√635087) and de Grey's field with no hypothesis, `Collapse.chromaticNumber_planeOver_sqrt635087`,
+`Collapse.chromaticNumber_planeOver_deGrey`, also on `StandingFive.kloosterman_bound` (`[Weil1948]`), which gives the kernel's
+thickness, `2√103/104` and `2√131/132`, in place of the row's exact spectra; the per-place form
+`Collapse.chromaticNumber_planeOver_eq_plane_of_forall_thickAt` on both; with `Outside.OAI158.no_proper_five_coloring`,
+`6 ≤ χ(ℚ(√635087)²) ≤ 7`, `Collapse.chromaticNumber_planeOver_sqrt635087_six_or_seven`. Still [hand + tools exact], as graded
+before: the `χ_CP` member (row 130), the consequences past `{6, 7}`, the exact spectra and place lists]**". **Slot 3:** "**Not
+claimed:** the complex-place widening; anything at six." → "**Not claimed:** anything at six. The complex-place widening is held
+in the kernel's form: the general theorem takes no total reality.". **Slot 4, the addresses cell:** after
+"`plans/FS105-derivation.md` FS105-MR16" add "; `Proofs/HadwigerNelson/Collapse/` (FS131-KCL1, FS131-ICO1, FS131-ICO2)".
+
+**Row 120** (its "Not claimed: MR at row 100's exception fields (ℚ(√5), ℚ(√17), ℚ(α)), where the adelic model needs `R = O′`"):
+predates `Rigidity.mrPlus`, which the collapse reads at every real number field, exception fields included. This is FS131-PR1's
+owed correction "row 120's grade" (inventory item 951), seen a third time; no new slot.
+
+### D10 — `README.md` § Results, Planes over number fields
+
+**Slot: after** the row whose first cell begins "`χ(ℚ(√47)²) = 5`. Also `χ = 5` over ℚ(√143)", **insert**:
+
+> | `χ(F²) = χ(ℝ²)` for every real number field whose stable primes are uniformly `c`-thick with `c < 1/5`: for one `c` and every prime ideal of `F(i)` that conjugation maps to itself, every non-trivial additive character of every `𝓞/Pᵐ` sums over the elements of norm one to at most `c` times their number. So `χ(ℚ(√635087)²) = χ(ℝ²)` and `χ(ℚ(√3, √5, √7, √11)²) = χ(ℝ²)`, and with **O5**, `6 ≤ χ(ℚ(√635087)²) ≤ 7`. | `Collapse.chromaticNumber_planeOver_eq_plane_of_thick`, `Collapse.chromaticNumber_planeOver_sqrt635087`, `Collapse.chromaticNumber_planeOver_deGrey`, `Collapse.chromaticNumber_planeOver_sqrt635087_six_or_seven` | std3 + **EL** (the general form); + **W** (the two fields); + **O5** (the corollary) | the derivation is this project's; the field equality: prior art not found in print. The plane's number it is equated with is `[OAIMath2026]`'s `χ_m⁰`; in dimension at least four the analogue is `[Davies2026]` Thm 1.1 | 128 |
+
+**And the section's header sentence:** "The axiom lists are exactly what `#print axioms` printed on 2026-10-15 from the library as
+gated at commit `752b11569`" holds for every other row; the new row's lists are this job's receipt (`7c72b9bf7`, 2026-10-16) —
+Keryx's choice of wording.
+
+### D11 — `ROADMAP.md`
+
+**§ 1, item 3** ("**Row 128, the collapse.** For a totally real field whose stable places all "mix" at six colours … has not been
+checked here (`LEDGER.md` row 128; `Rigidity/ZeroEntropyClosed.lean`)."): delete it — the form of MR row 128's proof uses is
+`Rigidity.mrPlus` (checked: the planner's stage 2, and in the kernel since this landing) — and renumber items 4–6 to 3–5 (I have
+not checked whether any file cites § 1's items by number). Row 128 stays in item 6's group A for its parts still [hand].
+
+**§ 2, item 1 (O5):** "Six records rest on it, among them `6 ≤ χ(ℝ²) ≤ 7` and `6 ≤ χ_m⁰(ℝ²)`." → "Seven records rest on it, among
+them `6 ≤ χ(ℝ²) ≤ 7`, `6 ≤ χ_m⁰(ℝ²)` and `6 ≤ χ(ℚ(√635087)²) ≤ 7`." **Item 2 (EL):** "Eighteen records rest on it, among them the
+five-colour chain `min(L(F), 5) ≤ χ(F²)`, `χ(F²) = L(F)` whenever `L(F) ≤ 5`, and `χ(ℚ(√47)²) = 5`." → "Twenty-seven records rest
+on it, among them the five-colour chain `min(L(F), 5) ≤ χ(F²)`, `χ(F²) = L(F)` whenever `L(F) ≤ 5`, `χ(ℚ(√47)²) = 5`, and the
+collapse `χ(F²) = χ(ℝ²)` at every uniformly thick real number field." **Item 3 (W):** "Forty-eight records rest on it:" →
+"Fifty-eight records rest on it:", and in its sentence "and, with EL, the five-colour chain" → "and, with EL, the five-colour chain
+and the collapse at ℚ(√635087) and de Grey's field".
+
+### D12 — `ARCHITECTURE.md` § 5 (Trust), the consumer cells (outside this job's touches, so drafted)
+
+**`Rigidity.positive_entropy_rigidity`'s row:** after "and the chain's headline `min_localBound_five_le_chromaticNumber`" add ";
+and the collapse (`Collapse/`, FS131-ICO2): `chromaticNumber_planeOver_eq_plane_of_thick` and its instances". **`no_proper_five_coloring`'s
+row:** "`Plane.radius_five` — six records" → "`Plane.radius_five`; and, of the collapse, `Collapse.chromaticNumber_planeOver_sqrt635087_six_or_seven`
+— seven records". **`kloosterman_bound`'s row:** its "(twenty imported records in all)" has been stale since FS131-LGT1 (the audit
+reads 58 now); a count, or "the principal consumers", is Keryx's choice.
+
+### D13 — the Proof Atlas
+
+Node `R128` ("the collapse", `tools/viz_proof_atlas_facts.py` l. 105; `data/viz/proof-atlas/facts.json`): its grade is read from
+row 128's grade words, so D9 moves it to kernel for the field clause; its `plain` text "Given MR, at a totally real field whose
+every stable place mixes at six colours (ℚ(√635087), de Grey's field), the field's plane, the real plane and the stationary random
+colourings all need the same number of colours." → "At every real number field whose stable places all mix at six colours
+(ℚ(√635087), de Grey's field), the field's plane and the real plane need the same number of colours — in the kernel, on EL (and W at
+the two fields); the stationary random colourings' number is row 130's."; its quote, and the `MR → R128` edge's (l. 519), follow
+D9's new head ("The collapse: the plane's number is a field's."), which the checker re-reads. `LEANWALL`'s quote (l. 159, "the
+collapse (row 128)" among what Lean owes) is from `plans/STUB-regularity-wall.md`, whose text is the stub's writers'.
