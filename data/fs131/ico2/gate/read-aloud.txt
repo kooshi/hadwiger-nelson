@@ -1,0 +1,59 @@
+HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087 : (SimpleGraph.induce
+      (HadwigerNelson.planeOver HadwigerNelson.Collapse.F635087) (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+  (HadwigerNelson.unitDistance ℂ).chromaticNumber
+@HadwigerNelson.Collapse.chromaticNumber_planeOver_eq_plane_of_thick : ∀ {F : Subfield ℝ} [NumberField ↥F] {c : ℝ},
+  HadwigerNelson.Collapse.Thick F c →
+    0 ≤ c →
+      c < 1 / 5 →
+        (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+          (HadwigerNelson.unitDistance ℂ).chromaticNumber
+HadwigerNelson.Collapse.chromaticNumber_planeOver_deGrey : (SimpleGraph.induce
+      (HadwigerNelson.planeOver HadwigerNelson.Collapse.FdG) (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+  (HadwigerNelson.unitDistance ℂ).chromaticNumber
+@HadwigerNelson.Collapse.chromaticNumber_planeOver_eq_plane_of_forall_thickAt : ∀ {F : Subfield ℝ} [NumberField ↥F],
+  (∀ (P : HadwigerNelson.SpectralChain.StablePrime F), ∃ c < 1 / 5, HadwigerNelson.Collapse.ThickAt P c) →
+    (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber =
+      (HadwigerNelson.unitDistance ℂ).chromaticNumber
+HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087_six_or_seven : 6 ≤
+    (SimpleGraph.induce (HadwigerNelson.planeOver HadwigerNelson.Collapse.F635087)
+        (HadwigerNelson.unitDistance ℂ)).chromaticNumber ∧
+  (SimpleGraph.induce (HadwigerNelson.planeOver HadwigerNelson.Collapse.F635087)
+        (HadwigerNelson.unitDistance ℂ)).chromaticNumber ≤
+    7
+@HadwigerNelson.Collapse.chromaticNumber_plane_le_of_thick : ∀ {F : Subfield ℝ} [NumberField ↥F] {c : ℝ},
+  HadwigerNelson.Collapse.Thick F c →
+    0 ≤ c →
+      ∀ {k : ℕ},
+        2 ≤ k →
+          c * (↑k - 1) < 1 →
+            (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).Colorable k →
+              (HadwigerNelson.unitDistance ℂ).chromaticNumber ≤ ↑k
+@[reducible] def HadwigerNelson.Collapse.F635087 : Subfield ℝ :=
+HadwigerNelson.SquareClass.fieldOfRadicands {635087}
+@[reducible] def HadwigerNelson.Collapse.FdG : Subfield ℝ :=
+HadwigerNelson.SquareClass.fieldOfRadicands {3, 5, 7, 11}
+def HadwigerNelson.Collapse.Thick : Subfield ℝ → ℝ → Prop :=
+fun (F : Subfield ℝ) (c : ℝ) => ∀ (P : HadwigerNelson.SpectralChain.StablePrime F), HadwigerNelson.Collapse.ThickAt P c
+def HadwigerNelson.Collapse.ThickAt : {F : Subfield ℝ} → HadwigerNelson.SpectralChain.StablePrime F → ℝ → Prop :=
+fun {F : Subfield ℝ} (P : HadwigerNelson.SpectralChain.StablePrime F) (c : ℝ) =>
+  ∀ (m : ℕ),
+    1 ≤ m →
+      ∀ (hfin : (HadwigerNelson.Rigidity.Counting.normOneQ P m).Finite)
+        (ψ : AddChar (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P ^ m) ℂ),
+        ψ ≠ 1 → ‖∑ s ∈ hfin.toFinset, ψ s‖ ≤ c * ↑hfin.toFinset.card
+structure HadwigerNelson.SpectralChain.StablePrime (F : Subfield ℝ) : Type
+number of parameters: 1
+fields:
+  HadwigerNelson.SpectralChain.StablePrime.P : Ideal
+      (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F))
+  HadwigerNelson.SpectralChain.StablePrime.isMaximal : self.P.IsMaximal
+  HadwigerNelson.SpectralChain.StablePrime.comap_conj : Ideal.comap (HadwigerNelson.SpectralChain.conjO F) self.P =
+      self.P
+constructor:
+  HadwigerNelson.SpectralChain.StablePrime.mk {F : Subfield ℝ}
+    (P : Ideal (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F))) (isMaximal : P.IsMaximal)
+    (comap_conj : Ideal.comap (HadwigerNelson.SpectralChain.conjO F) P = P) : HadwigerNelson.SpectralChain.StablePrime F
+def HadwigerNelson.planeOver : Subfield ℝ → Set ℂ :=
+fun (F : Subfield ℝ) => {z : ℂ | z.re ∈ F ∧ z.im ∈ F}
+def HadwigerNelson.unitDistance.{u_4} : (V : Type u_4) → [MetricSpace V] → SimpleGraph V :=
+fun (V : Type u_4) [MetricSpace V] => { Adj := fun (x y : V) => Dist.dist x y = 1, symm := ⋯, loopless := ⋯ }

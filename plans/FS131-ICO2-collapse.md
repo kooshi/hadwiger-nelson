@@ -175,3 +175,110 @@ dumper, namespace renamed) with `data/fs131/ico2/statements.py` (the comparison 
 binder drops checked as FS131-KN9's one-binder check asks, four plants); `data/fs131/ico2/lean/AxiomsAll.lean` (FS131-LGT1's
 record printer, the nine modules listed) with `data/fs131/ico2/audit_block.py` (the audit's blocks from the kernel's print, and
 `--coverage` after they are filed; three plants).
+
+## Stage 7 — SAVED: the gate on one commit
+
+**The commit of record: `7c72b9bf7`** (branch `fs131-ico1`). It holds `main` merged (`ac830b568`: the brief and the handoff
+only, no Lean), the gate's inputs (`54921b69e`), the coordinator's ruling of item 998 (`5391315fc`: the unread binder
+`[∀ i, DecidableEq (A i)]` dropped from `Collapse.norm_sum_piFinset_le`), and the build of that commit (`7c72b9bf7` adds only
+the build's log, a script parameter and a printer: no Lean; the pass's up-to-date check reads exit 0 there). **The build**
+(`data/fs131/ico2/build4.log`, at `5391315fc`): OK — 381 of 381 batches, 5 modules rebuilt (`Collapse/Thick`, `Mixing`,
+`Selection`, `Headline`, `Proofs`), 0 with warnings, 9 m 57 s; its slot lowered to `--mem 9 --cpus 6`, `MEMMAX=9G` (two planners
+held 13 GiB and six cores; the brief's 16 GiB and ten cores could not be admitted beside them — a cap lowered, never raised).
+The build before the ruling (`build3.log`) was stopped while it waited for its slot, having read nothing (`exit=143`; the waiting
+`slot.py` found by the inode of the log it held open, stopped by PID, gone from `ps` and the log static after).
+
+**The pass** (`data/fs131/ico2/run-gate.sh`, `clone1`'s steps; logs `data/fs131/ico2/gate/`), 14:42:28–14:55:47 UTC,
+`HEAD=7c72b9bf7…`, tracked files modified 0 at the start and 0 after. Every step exited 0; read from the saved logs, against
+`main`'s last gate (`data/fs131/il5/gate/`, `113ca8ece`):
+
+| step | `main`'s last gate (`113ca8ece`) | this pass (`7c72b9bf7`) | the change, explained |
+|---|---|---|---|
+| up to date | exit 0 | exit 0 (3 s) | — |
+| `sorry` (narrow) | 0 lines | 0 lines | — |
+| line-initial `axiom` | 5 lines | 5 lines, identical (`diff` empty) | no axiom added |
+| doubled names | OK, 31 generated on demand | OK, 31, the list identical | the two new `congr_simp` theorems (`Collapse.factorK.congr_simp` in `Dichotomy`, `Rigidity.Counting.K.congr_simp` in `Mixing`) are each in one module |
+| its self-test | 15 of 15 | 15 of 15 | — |
+| axiom audit | 11287 records: 10651 clean, 569 axiom-free, 62 imported, 5 purchases | 11398: **10747** clean, 569, **77** imported, 5 | +111 records, every public record of the nine modules not filed before: 96 CLEAN, 15 IMPORTED (6 on Weil's bound alone, 5 on E–L alone, 3 on both, 1 on both and the five-colour theorem); declared imports 3, library axioms 3, native auxiliaries 10, unchanged |
+| its self-test | 23 of 23 | 23 of 23 | after the two state controls moved (below) |
+| vacuity | declarations=22241, refutations-skipped=240; sites=1455 vacuous=0 stale=0 declared=3 witnessed=38 generic=1412 unknown=2 | declarations=**22357**, refutations-skipped=**242**, the sites identical | +116 declarations: the scan's own predicates read on the nine modules (`data/fs131/ico2/lean/VacuityNew.lean`, `vacuity-new.txt`) give 114 in the seven `Collapse/` modules and one each from D-E1 and D-E2; +2 refutations, `Collapse.shift_mem_Xk` and `rot_mem_Xk` (below); **no site** |
+| its self-test | 65 of 65 | 65 of 65 | — |
+| assumptions | axioms=3 rests=78 named=19 inline=14 outside=7 ours=21 open=5 takes=108 mentions=2 | rests=**99**, takes=**109**, the rest identical | +21 `RESTS` rows (the 20 new public IMPORTED records' 20 axiom pairs — 9 on E–L, 10 on Weil's bound, 1 on the five-colour theorem — and D-E2's private `norm_charSum_one_weil` on Weil's bound) and +1 `TAKES` (D-E1 takes the named hypothesis `KloostermanBound`, as its sibling `normOne_charSum_ge` does); also constants 21920 → 22111, theorems 16046 → 16208, formers 450 → 456 (the six new predicates, each concluded by a theorem, none flagged), hypotheses 26313 → 26653, `cohyp` 77 → 80, `unseen` 21276 → 21481 (the new theorems' other hypotheses — every one a condition on the theorem's own variables: **no hand result of ours is written out in a binder**, said here on the landing's word as the step asks) |
+| its self-test | 33 of 33 | 33 of 33 | — |
+| architecture | PASS, 618 modules | PASS, **625** modules and rows, 0 import mismatches | +7 modules and rows |
+| lint | 14 linters `(2/2) Passed!`, "Linting passed for Proofs." | the same | after the ruling of item 998 (below) |
+| digests | the headers and `CLAUDE.md` matching | the two ledgers' headers match (9 of 9 each); `CLAUDE.md` flagged stale in exactly three places: § Trust ledger `10651 clean → 10747, 62 imported → 77`; § Trust ledger `rests 78 → 99, takes 108 → 109`; § The gate `declarations 22241 → 22357, refutations-skipped 240 → 242` | `CLAUDE.md` is Keryx's to write: the drafts below |
+
+**The gate's inputs, each seen red for its named cause before it moved** (`data/fs131/ico2/prep/`): the audit's block —
+generated from the kernel's print of every record of the nine modules (`lean/AxiomsAll.lean` → `axioms-all.txt`, 322 records:
+138 public, 184 private, which the audit does not take) by `audit_block.py` (96 CLEAN, 6 / 8 / 1 IMPORTED under the
+`kloosterman_bound`, `positive_entropy_rigidity` and `no_proper_five_coloring` banners, each with a job comment line), filed in
+`scripts/Axioms.lean`; its coverage check after filing reads all 138 filed under their class, and against the pre-filing copy
+reports the 111 UNFILED with exit 1; its plant (an unknown axiom, a `sorryAx`, a CLEAN record moved to PURCHASED) reports all
+three with exit 1. `scripts/axioms-controls.txt`: the self-test on the new audit failed exactly `baseline` (expected
+`imported=62`, got 77) and `imported_declared` (63, got 78), the other 21 behaving (`axioms-selftest-red.log`); moved by the
+file's rule (the counts, the `old` digests' texts, the header's tally: seventy-seven IMPORTED, Weil's bound 58, the five-colour
+theorem 7, E–L 27, 14 on E–L and Weil's bound), then 23 of 23. `scripts/assumptions-ledger.txt`: the step failed on exactly 22
+`unlisted-consumer` rows (`assumptions-red.log`); written by `--write-ledger` (22 rows in, none out, 188 → 210;
+`assumptions-write-ledger.log`). `scripts/vacuity-baseline.txt`: the header's count line after the scan flagged it stale and
+nothing else (`vacuity.log`). No `AssumptionAudit.declared` line: the theorems take no hypothesis standing for an assumption.
+
+**The lint finding and the ruling (inventory item 998).** The preview of the linters on the stage-6 build
+(`prep/lint-preview.log`) failed on one finding: `Collapse.norm_sum_piFinset_le`, argument 7, `[(i : ι) → DecidableEq (A i)]`,
+unread (the proof is classical; `Fintype.piFinset` needs only `[DecidableEq ι]`) — a skeleton statement's, which the build's
+linters never see. I referenced the binder in the proof to keep the stored statement, and messaged the coordinator; the ruling:
+drop it, a third ruled change of item 993's kind. Dropped at `5391315fc`; its one consumer `levelThick` finds the instance as
+before. Lint is green on the commit of record.
+
+**The statement comparison** (`data/fs131/ico2/statements.py` against `data/fs131/ico1/statements-before.txt.gz`, the
+skeleton's compiled library dumped before the first rebuild; the after-dump from the gated build, `gate/statements-after.txt`;
+`gate/statements.out`): **CLEAN**. In the nine modules every stored type, and every definition's data (the value with proofs
+erased), is the skeleton's but the three ruled drops, each read as FS131-KN9's one-binder check reads one — the before-print
+holds the binder's text exactly once and, with it removed, is the after-print character for character:
+- `Collapse.ThickAt.mono`: `[NumberField ↥F]` (item 993, the committed `omit`);
+- `Collapse.measure_ne_eq_k`: `[NumberField ↥F]` (item 993, the `omit` at `Collapse/Slice`);
+- `Collapse.norm_sum_piFinset_le`: `[∀ i, DecidableEq (A i)]` (item 998).
+Added: the two public theorems of the approved edits, `StandingFive.norm_normOne_charSum_le` (D-E1) and
+`Rigidity.norm_charSum_le_weil` (D-E2), and no other public declaration; 87 private helpers (2 in `ClassRatio`, 85 in
+`Collapse/`), and two theorems Lean generates on demand (`factorK.congr_simp`, `Rigidity.Counting.K.congr_simp`). **`Collapse/Thick`'s
+two added Mathlib imports moved no stored term**: its other fifteen constants, and every constant of the six modules downstream,
+print identically, instance arguments included. Its plants: a changed stored type, a dropped constant, an unlisted public
+constant, and each ruled binder a near miss by one character (its closing bracket kept) — each reported by name and nothing else
+new (`PLANTS ALL FIRED`). Its first run had a bug of my own (the bracket scan began at the binder's own `[`), which made the ruled
+entries read DIFFERS — a failure in the loud direction, fixed before any verdict was taken.
+
+**`#print axioms`** (the receipt of record, `gate/receipt-axioms.log`, `pp.fullNames`):
+- `Collapse.chromaticNumber_planeOver_sqrt635087`, `Collapse.chromaticNumber_planeOver_deGrey`,
+  `Collapse.chromaticNumber_planeOver_eq_plane_of_forall_thickAt`: `[propext, Classical.choice, Quot.sound,
+  Rigidity.positive_entropy_rigidity, StandingFive.kloosterman_bound]`;
+- `Collapse.chromaticNumber_planeOver_eq_plane_of_thick`: `[propext, Classical.choice, Quot.sound,
+  Rigidity.positive_entropy_rigidity]` — **Weil's bound is not among them**: thickness is the hypothesis, and Weil enters only
+  where an instance proves it (`thick_of_card`); the per-place form needs it, because making per-prime thickness uniform uses
+  Weil's bound at the infinitely many large primes (`thick_of_forall_thickAt`);
+- `Collapse.chromaticNumber_planeOver_sqrt635087_six_or_seven`: those five and `Outside.OAI158.no_proper_five_coloring`;
+- D-E1, `StandingFive.norm_normOne_charSum_le`: the standard three (Weil's bound is its named hypothesis `KloostermanBound`);
+- D-E2, `Rigidity.norm_charSum_le_weil`: the standard three and `StandingFive.kloosterman_bound`.
+
+**The scan's two refutation-skips, read.** `Collapse.shift_mem_Xk` and `Collapse.rot_mem_Xk` conclude `… ∈ Xk F k`, which the
+reducing telescope unfolds through `Xk`'s definition to `c x ≠ c y`, so the scan counts them as refutations: they refute
+nothing (closure of the proper colourings under translation and rotation). What the skip hides is their binders'
+audit; their one structure carrier, `c ∈ Xk F k`, is inhabited at `F = ℚ`, `k = 2` (`nonempty_invColouring_bot`'s colouring).
+
+**The structure hypotheses, by hand** (the scan adds no site: its tracked carriers do not occur). Each with its model and grade:
+
+| hypothesis | where taken | model, and grade |
+|---|---|---|
+| `P : StablePrime F` | `Collapse/Thick`, `Headline` | at `ℚ`, `UpperHalf.exists_stablePrime_rat` (kernel, standard three); with `2 ∉ P` and `|𝓞/P| = Q²` (`thickAt_weil`, `thick_of_card`): every stable prime of `ℚ(√635087, i)` satisfies both (`stablePrime_sqrt635087`), and no library theorem exhibits one — the existence of a stable prime there is not stated |
+| `ThickAt P c`, `Thick F c` | `Thick`, `Mixing`, `Selection`, `Headline` | `ThickAt P 1` at every `P` (`thickAt_one`, kernel, standard three); `Thick F c` at `c < 1/5` at `ℚ(√635087)` and de Grey's field (`thick_sqrt635087`, `thick_deGrey`, kernel, on Weil's bound); empty at `ℚ` for `c < 1` (`not_thick_bot`, kernel, standard three) |
+| `μ : InvColouring F k` | `Colouring`, `Dichotomy`, `Slice` | at `ℚ`, `k = 2` (`nonempty_invColouring_bot`, kernel, standard three); from any proper `k`-colouring of `F²` (`nonempty_invColouring_of_colorable`); empty at `k = 1` (`Xk_one_eq_empty`) |
+| `IsColourSpectral μ.μ σ` | `Dichotomy`, `Slice` | for every `μ` (`exists_isColourSpectral`, kernel, standard three) |
+| `σ (TA F)ᶜ = 0` | `Slice` | supplied by `exists_invColouring_TA` for every `F` with an invariant colouring (kernel, on E–L) — at `ℚ`, `k = 2` |
+| `Measurable φ ∧ SliceEdgeNullK F φ` | `Selection` | from any proper `k`-colouring of `F²` (`exists_slice_of_colorable`, kernel, on E–L): at `ℚ`, `k = 2`; at `ℚ(√635087)`, `k = 7` |
+| thickness with `c(k − 1) < 1` (or the window `c/(1 + c) < θ₀ < 1/k`) and a `k`-colouring (or a slice `k`-colouring), at once | `chromaticNumber_plane_le_of_thick`, `unitPairsNull_selCol`, `exists_aeColouring_of_slice` | **no object of the library**: at `k ≤ 5` empty given `Outside.OAI158.no_proper_five_coloring`; at `k = 6` (`ℚ(√635087)`) the joint satisfiability is `χ(ℝ²) ≤ 6`, the open question; at `k = 7` satisfiable in mathematics by any field all of whose stable residue sizes are `Q²` with `Q ≥ 142` (Weil's constant below `1/6`), none stated here. Said so in the Models paragraphs of `Collapse/Selection` and `Collapse/Headline` (edited at `54921b69e`: docstrings only, `code_only_diff.py` SAME), with the model `ℚ(√635087)` at `k = 7` named and the hypothesis it fails (`c(k − 1) < 1`) |
+
+**Negative controls watched red in this job**: the quotation checker's plant; the residue exhaustion's plant; the code-only diff's
+plant; the map check's plant (a wrong imports cell); the comparator's four plants; the audit block's three plants and the
+coverage check against the pre-filing copy; the audit's two state controls and the assumptions step's 22 rows, each red for its
+named cause before its input moved; and lint, red for a real finding before the ruling. Each self-test plants its own (15, 23,
+65, 33 controls). **Not run: a lint plant** — the lint step is the driver over the whole library, its control watched at
+FS131-LGT1, and `main`'s last pass ran none either; here lint's red was seen on a real finding.
