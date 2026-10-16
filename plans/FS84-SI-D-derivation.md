@@ -436,6 +436,8 @@ derivation: J45-N1
 Rests on it: J45-N2, J45-SI-J (through N1 (c)), J45-SP-if (the openness of `r₀R`), R-U (FS100-EFZ's first clause), and through them A⁺, SP-Cor and
 FS100-Q47 (row 121).
 
+*Erratum (2026-10-13, FS131-EN1 §§ 5–6):* N1 reaches A⁺ and FS100-Q47 through its clauses at `S = ∅` only — (a), (b), σ-compactness and `U`-invariance. Its clauses at `S ≠ ∅`, its Borel isomorphism and its clause (c) reach row 121 only through R-U and through SI-J; SP-Cor run at `T + A` (FS131-EN1, EN1-SPCOR) reads neither.
+
 derivation: J45-N2
   statement: the vectors of `L²(μ)` with spectral measure on `E_S` are `L²(𝒜_S)` for a translation-invariant σ-algebra, and `Π(E_S) = E[·|𝒜_S]`
   uses only: Bochner on `G′_S`; J45-N1 (b) (`R` dense in `G′_S`); uniqueness of Fourier–Stieltjes coefficients on the compact `R̂`; dominated

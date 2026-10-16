@@ -1,0 +1,29 @@
+DRAFT BIB-EL-KN7 :: p. 4 § 1.3's two constructions, § 4's opening, Thm 4.1, § 4.1, Lemma 4.2 (pp. 14–15) and § 3.2's paragraph on conditional entropy contributions (p. 13) read by FS131-KN7 (2026-10-14) for clause (4)'s σ-algebra.
+DRAFT BIB-OAI-KN7 :: family 015's `PrimePackets/KernelEntropy.lean` ll. 220–558, `ErgodicDecomposition.lean` ll. 4–179 and the eleven files of `EntropyGeneratingSupremum.lean`'s cone elaborated at this pin in scratch copies by FS131-KN7 (0 errors after four renames, all inside proofs); statements read, proofs not read.
+DRAFT BIB-EL-KN3 :: pp. 1–4 of arXiv v1 re-read from the PDF's text layer by FS131-KN3 (2026-10-13) for the Lean statement of Thm 1.3; Thms 1.2, 1.3 and the three definitions of p. 2 quoted in `Proofs/HadwigerNelson/Rigidity/`
+DRAFT BIB-OAI-KN3 :: its entropy development surveyed by statement (FS131-KN3, `plans/FS131-KN3-chain-plan.md` § Stage 4): `PrimePackets/ShannonEntropy.lean` and `DukePrimeDegree/Entropy/MetricEntropy.lean` read in full; statement heads of about twenty files; no proof read, nothing built
+DRAFT BIB-KR1-Ambrus :: Thm 1 (p. 4) and the definitions of p. 2 with eq. (1) re-read from the PDF's text layer by FS131-KR1 (2026-10-14) for `Plane.OneAvoidingDensityBound`
+DRAFT BIB-KR1-Kakutani :: cited by FS131-KR1's modules (`Rigidity/Herglotz`, `BochnerTau`, `InvariantMeasure`) as the printed sources their routes do not follow; not held, not read
+DRAFT BIB-KR1-Levitz :: cited by `Rigidity/BochnerTau` (`finite_quotient_nsmul`, J28V-7); not read by FS131-KR1
+DRAFT BIB-K12A-Zhang :: Thm 1.8's counting (social and lonely points) typed as `Rigidity.ratioLe_prod` and `Rigidity.sum_volume_inter_sq_le` (FS131-K12A, skeleton), following J28D § 3.2 C5's count; the paper not read by FS131-K12A
+DRAFT BIB-K12A-Bachoc :: off the count's path since FS131-K12A (the count reads ratios through `tca_uniform`, not Hoffman bounds)
+DRAFT BIB-K12A-Ambrus :: read by FS131-K12A only through `Plane.OneAvoidingDensityBound` as FS131-KR1 typed it; not re-read
+DRAFT BIB-KR1-KMOR :: `[KMOR2016]` (Lemma 3.2 (1), the first leaf of `m₁`'s formalization), `[BachocEtAl2014]` Thm 2.2 and `[Zhang2012]` Thm 1.8 (M12's price): cited in `plans/FS131-KR1-chain-map.md` § 2.5; not read by FS131-KR1.
+DRAFT LEAN-KN7-A :: Read the stored statement's instances, not its text: a declared statement that names a measure on a quotient took Mathlib's quotient σ-algebra where the page has the Borel one; found by `pp.explicit` and a constant listing of the stored type (FS131-KN7, `data/fs131/kn7/lean/DeclaredRead.lean`).
+DRAFT ERR-FS84-N1 :: *Erratum (2026-10-13, FS131-EN1 §§ 5–6):* N1 reaches A⁺ and FS100-Q47 through its clauses at `S = ∅` only — (a), (b), σ-compactness and `U`-invariance. Its clauses at `S ≠ ∅`, its Borel isomorphism and its clause (c) reach row 121 only through R-U and through SI-J; SP-Cor run at `T + A` (FS131-EN1, EN1-SPCOR) reads neither.
+DRAFT ERR-FS100-Q47 :: *Erratum (2026-10-13, FS131-EN1 § 5):* the grade's 'SP-Cor … over N1, N2, R-U, A⁺' names R-U as an input. SP-Cor run with `T + A` in the place of `E` does not read R-U; it reads MR⁺ (EN1-MRPLUS), A⁺ at `S = ∅`, and N1 at `S = ∅`. No statement or grade changes.
+filed BIB-EL-KN7 -> BIBLIOGRAPHY.md
+filed BIB-EL-KN3 -> BIBLIOGRAPHY.md
+filed BIB-OAI-KN7 -> BIBLIOGRAPHY.md
+filed BIB-OAI-KN3 -> BIBLIOGRAPHY.md
+filed BIB-KR1-Ambrus -> BIBLIOGRAPHY.md
+filed BIB-K12A-Ambrus -> BIBLIOGRAPHY.md
+filed BIB-KR1-Kakutani -> BIBLIOGRAPHY.md
+filed BIB-KR1-Levitz -> BIBLIOGRAPHY.md
+filed BIB-KR1-KMOR -> BIBLIOGRAPHY.md
+filed BIB-K12A-Zhang -> BIBLIOGRAPHY.md
+filed BIB-K12A-Bachoc -> BIBLIOGRAPHY.md
+filed LEAN-KN7-A -> LEAN.md
+filed ERR-FS84-N1 -> plans/FS84-SI-D-derivation.md
+filed ERR-FS100-Q47 -> plans/FS100-derivation.md
+14 rows filed
