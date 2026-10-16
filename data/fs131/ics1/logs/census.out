@@ -1,0 +1,4 @@
+class members, squarefree, d <= 3000: 52
+reached (a square, zero included, mod 11 or mod 19): 44
+not reached: 8: [167, 887, 1055, 1319, 1823, 2351, 2735, 2903]
+MATCHES the ledger's 44 of 52

@@ -1,4 +1,5 @@
 import Proofs.HadwigerNelson.Instances.SqrtTwentyThreeCbrtTwo
+import Proofs.HadwigerNelson.Rigidity.FourColourPlaces
 /-! FS131-ICS1 — the stored head statements read aloud against `LEDGER.md` row 123, printed from the gated build with full
 names and every implicit argument a reader needs. Run from the worktree's root, under a slot:
   lake env lean data/fs131/ics1/lean/ReadAloud.lean > data/fs131/ics1/read-aloud.txt -/

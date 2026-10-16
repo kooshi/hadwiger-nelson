@@ -6,7 +6,40 @@ Launched 2026-10-16 18:43 UTC. The plan is `plans/FS131-KCS1-class-plan.md` (FS1
 
 ## Theorems this phase proved
 
-None yet (filled at the gate).
+Every theorem below is [kernel], on the gated commit (§ Stage 4); its axioms are the kernel's print
+(`data/fs131/ics1/axioms-all.txt`). **std3** = `[propext, Classical.choice, Quot.sound]`; **W** =
+`StandingFive.kloosterman_bound` (Weil's bound, `[Weil1948]` p. 207); **EL** = `Rigidity.positive_entropy_rigidity`
+(`[EinsiedlerLindenstrauss2022]` Thm 1.3). Both are declared outside theorems.
+
+*The quadratic dichotomy and the family* (`Instances/SqrtFiveClass`):
+- `SqrtFiveClass.five_le_chromaticNumber_planeOver_sqrt_iff` — for squarefree `m`, `5 ≤ χ(ℚ(√m)²)` ⟺ `m ≡ 47, 143, 167 (mod 168)` — std3 + W + EL
+- `SqrtFiveClass.five_le_localBound_sqrt_iff` — for squarefree `m`, `5 ≤ L(ℚ(√m))` ⟺ the same — std3 + W + EL
+- `SqrtFiveClass.chromaticNumber_planeOver_sqrt_eq_five` — `χ(ℚ(√d)²) = 5` at squarefree `d` in the class that is a square, zero included, modulo 11 or modulo 19 — std3 + W + EL
+- `SqrtFiveClass.localBound_sqrt_eq_five` — `L(ℚ(√d)) = 5` there — std3 + W + EL
+- `SqrtFiveClass.colorable_five_planeOver_sqrt`, `localBound_sqrt_le_five`, `exists_maximal_card_eq_of_isSquare` — the upper halves and the prime they use — std3
+
+*CLS in full and the two readings of `L`* (`Rigidity/FourColourPlaces`):
+- `Rigidity.five_le_localBound_iff` — `5 ≤ L(F)` ⟺ no stable prime of `F(i)` satisfies `IsFourColourPlace` — std3 + W
+- `Rigidity.tca_iff_forall_not_isFourColourPlace` — T-C(A) at `S = ∅` ⟺ the same — std3 + W
+- `Rigidity.colorable_four_levelTarget_one_iff`, `exists_ratioAtMost_lt_quarter_iff`, `five_le_chromaticNumber_levelTarget_one_iff`, `exists_ratioAtMost_of_not_isFourColourPlace` — CLS per place — std3 + W
+- `Rigidity.colorable_four_levelTarget_one_of_isFourColourPlace` — a listed place's level-one target is four-colourable — std3
+- `Rigidity.five_le_localBoundAllLevels_iff` — `5 ≤ L_all(F)` ⟺ `5 ≤ L(F)` — std3 + W
+- `Rigidity.min_localBoundAllLevels_five` — `min(L_all(F), 5) = min(L(F), 5)` — std3 + W + EL
+- `Rigidity.localBoundAllLevels_le_localBound`, `chromaticNumber_planeOver_le_localBoundAllLevels`, `five_le_chromaticNumber_levelTarget_of_ratioAtMost`, `exists_isFourColourPlace_rat` — std3
+
+*The bridge from a usable prime* (`Arith/StableAboveUsable`):
+- `UpperHalf.localBound_le_unitQuadrance` — `L(F) ≤ χ(Γ_q)` at a usable prime — std3
+- `UpperHalf.localBound_le_finitePlane`, `exists_stablePrime_card_eq_sq`, `nonempty_hom_levelTarget_one_unitQuadrance` — std3
+
+*ℚ(√23, ∛2)* (`Instances/SqrtTwentyThreeCbrtTwo`):
+- `SqrtTwentyThreeCbrtTwo.chromaticNumber_planeOver_sqrt23_cbrt2_eq_five` — `χ(ℚ(√23, ∛2)²) = 5` — std3 + W + EL
+- `SqrtTwentyThreeCbrtTwo.localBound_sqrt23_cbrt2_eq_five`, `five_le_localBound_sqrt23_cbrt2` — `L = 5`, `L ≥ 5` — std3 + W
+- `SqrtTwentyThreeCbrtTwo.localBound_sqrt23_eq_four` — `L(ℚ(√23)) = 4` — std3 + W + EL
+- `SqrtTwentyThreeCbrtTwo.not_isTotallyReal_F23` — the field has a complex place — std3
+- `SqrtTwentyThreeCbrtTwo.card_ne_sq_of_pow_eq`, `nonempty_ringHom_padic_eleven_F23`, `exists_usablePrime_eleven_F23`, `numberField_F23`, `isSquare_twentyThree`, `exists_cube_two`, `cbrtTwo_pow_three` — std3
+
+*The ruled `ClassRatio` edit* (items 1027, 1029): `Rigidity.ratioAtMost_dyadic_of_six_le` (new), and
+`exists_card_two_pow_sq`, `chromaticNumber_le_four_dyadic`, `chromaticNumber_le_four_of_small` (made public) — std3.
 
 ## Stage 1 — SAVED: the readback
 
@@ -156,3 +189,65 @@ a changed publicized type, and a binder from another module that only a too-wide
 On the first run two plants could not fire: one searched the raw print for `Q = 3`, which is not there, and one widened
 the blanking after the ruled blanking had already rewritten the hash. Both were fixed in the plant code; the comparison
 itself did not change.
+
+## Stage 4 — SAVED: the gate on one commit
+
+**The gate's inputs** (commits `29f8c8e9e`… `6ff038e87`; each step watched red where the step has a red to watch):
+- `scripts/Axioms.lean`: the landing's 45 public records, from the kernel's print of the five modules
+  (`data/fs131/ics1/lean/AxiomsAll.lean` → `axioms-all.txt`, 56 public and 135 private records, no `sorryAx`), by
+  `data/fs131/ics1/audit_block.py` (FS131-ICO2's generator, copied): 9 IMPORTED on `kloosterman_bound`, 7 on
+  `positive_entropy_rigidity` and `kloosterman_bound`, 29 CLEAN; 11 of `ClassRatio`'s were already filed. `--coverage`:
+  all 56 filed under their class. The generator's plant (run against the audit file as it stood before the filing, since
+  the plant needs unfiled records): an unknown axiom, a `sorryAx` and a misfiled CLEAN record, all three reported, exit 1
+  (`logs/audit-block-plant.out`).
+- `scripts/axioms-controls.txt`: `baseline` imported 83 → 99 and `imported_declared` 84 → 100, with their digest texts and
+  the tally paragraph (Weil's bound 64 → 80 records, E–L 27 → 34, both 14 → 21; union 99). **Seen red first**: the
+  self-test against the old controls failed exactly `baseline` and `imported_declared`, naming them (`prep/axioms-selftest-red.log`);
+  green after (`prep/axioms-selftest-green.log`).
+- `scripts/Assumptions.lean`: the `.condition HadwigerNelson.Arith.IsUsablePrime` entry **retired** — the step failed it as
+  `stale-condition`, "concluded by [SqrtTwentyThreeCbrtTwo.exists_usablePrime_eleven_F23]: the entry is not needed"
+  (`prep/assumptions-red.log`; `LEAN.md`'s rule for a condition a landing concludes).
+- `Rigidity.exists_isFourColourPlace_rat`, a public theorem added to `FourColourPlaces`: the step failed
+  `IsFourColourPlace` as `undeclared-never-concluded` (taken by one theorem, concluded by none); the model the gate rule
+  asks for is a theorem concluding it at its model (`LEAN.md` § The gate, FS124-L2's rule). The spec `example` saying the
+  same was replaced by it (an `example` is not stored). The comparator lists it in `ALLOWED_PUBLIC` with that reason.
+- `scripts/assumptions-ledger.txt`: `--write-ledger` added 23 rows, every one `RESTS <W or EL> <a record of this
+  landing>`, none a `TAKES` (no statement of this landing takes a declared hypothesis); header `rests=105 → 128`.
+- `scripts/vacuity-baseline.txt`: header `declarations=22431 → 22478`.
+
+**The run** (`data/fs131/ics1/run-gate.sh`, a copy of `data/fs131/clone1/run-gate.sh`, launched from a snapshot;
+`data/fs131/ics1/gate/run-pass.out`): `HEAD=6ff038e87… tracked-modified=0`; up to date (exit 0); `sorry` lines 0;
+line-initial `axiom` lines 5 (as at the p-adic gate); dupnames 0, its self-test 0; axioms 0, its self-test 0 (316 s);
+vacuity 0, its self-test 0; assumptions 0, its self-test 0; architecture 0; lint 0 (`-- Linting passed for Proofs.`, 14
+linters `(2/2) Passed!`); the three digests 0. "tracked files modified after the pass: 2": this record and
+`data/fs131/ics1/lean/ReadAloud.lean` (an import line added while the pass ran), neither an input of any step.
+
+**Count changes against the latest landed gate** (the p-adic plane's, `data/fs131/iqp3/gate/`, on `7180f4b40` = `e3e1dbb73`):
+
+| count | iqp3 | ics1 | change | why |
+|---|---|---|---|---|
+| audit records | 11,466 | 11,511 | +45 | the 56 public records of the five modules less the 11 `ClassRatio` records already filed |
+| clean | 10,804 | 10,833 | +29 | 28 from the generator, and `exists_isFourColourPlace_rat` |
+| axiom-free | 574 | 574 | 0 | — |
+| imported | 83 | 99 | +16 | 9 on Weil's bound alone (CLS's seven, `L(ℚ(√23, ∛2)) = 5` and `≥ 5`), 7 on E–L and Weil's bound (the dichotomy, its local form, the family's `χ` and `L`, `χ(ℚ(√23, ∛2)²) = 5`, `L(ℚ(√23)) = 4`, `min_localBoundAllLevels_five`) |
+| declared purchases | 5 | 5 | 0 | — |
+| assumptions `rests` | 105 | 128 | +23 | 9 + 2·7 rows; the other eight counts unchanged |
+| vacuity `declarations` | 22,431 | 22,478 | +47 | `ClassRatio` +4 (three made public, one added; the scan skips private names) and the four modules' 17 + 4 + 7 + 15 = 43 (`vacuity-new.txt`; the 17 include two compiler-made `…match_1_1` auxiliaries of destructuring lambdas in `exists_ratioAtMost_lt_quarter_iff` and `five_le_chromaticNumber_levelTarget_one_iff`) |
+| vacuity `refutations-skipped`, `sites` and verdicts | 243; 1,458 (0, 0, 3, 38, 1,415, 2) | the same | 0 | no site: the modules' structures are number-theoretic and their one colourability hypothesis is `Colorable k` of a finite graph (`LEAN.md`: the scan is silent on such modules) |
+| dupnames generated on demand | 31 | 31 | 0 | — |
+
+**The structures' models** (the scan is silent; `LEAN.md` § The gate asks the landing to name each model):
+- `StablePrime F`: `ℚ`'s prime above 2 (`UpperHalf.exists_stablePrime_rat`, library theorem; ramified, so listed:
+  `Rigidity.exists_isFourColourPlace_rat`, this landing); `ℚ(√47)`'s prime above 11 (`SqrtFortySeven.exists_stablePrime_eleven`);
+  the prime above any usable prime (`UpperHalf.exists_stablePrime_card_eq_sq`, this landing).
+- `¬ IsFourColourPlace P` and `RatioAtMost P c` with `c < 1/4`: `ℚ(√47)`'s prime above 11, with `|𝓞 ⧸ P| = 11²`
+  (`SqrtFortySeven.stablePrime_card_sqrt47`), odd so not ramified (`IsRamified.isDyadic`), and the ratio by
+  `Rigidity.ratioAtMost_of_two_notMem` — library theorems, not stored as one statement.
+- `IsUsablePrime 𝔭`: `SqrtTwentyThreeCbrtTwo.exists_usablePrime_eleven_F23` (this landing); `ℚ(√47)` above 11
+  (`QuadraticPrime.exists_maximal_card_eq` at 11).
+- `nonempty_hom_levelTarget_one_unitQuadrance`'s `k`: `𝓞 F ⧸ 𝔭` at a usable prime, as `localBound_le_unitQuadrance` uses it.
+- `card_ne_sq_of_pow_eq`'s hypotheses: at `F23`, `p = 7`, `k = 3`, `a = 2` (its use in `five_le_localBound_sqrt23_cbrt2`).
+- The family's arithmetic: `d = 47` (the module's spec).
+- `ratioAtMost_dyadic_of_six_le`'s (an unramified dyadic stable prime with `|𝓞 ⧸ P| = (2^f)²`, `f ≥ 6`): **no model in
+  the library**. One exists at a field where 2 is inert of residue degree at least 6 and stays inert in `F(i)`; none is
+  exhibited here. The lemma is the `f ≥ 6` branch CLS's proof calls, and it is used there only.
