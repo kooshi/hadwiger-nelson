@@ -169,6 +169,8 @@ which is generic in `Q` — composed with `k₀ ≃+* 𝓞 F ⧸ 𝔭` (`FiniteF
 
 ### 2.6 B — Lemma C′ (≈ 700 lines; route FS91-J10's, refined here)
 
+*Superseded by `plans/FS131-KRU1-ring-plan.md` and proved by FS131-IRU1; the map here priced three leaves that were held (FS131-KRU1 § 1.3 F1).*
+
 Held: `R ⊆ O′`, `c·O′ ⊆ R`. Leaves:
 (b0) `R = O′` iff `O′ ⊆ R + c·O′` (given `c·O′ ⊆ R`) — 15.
 (b1) finitely many stable primes contain `c` (`Ideal.finite_factors`-style, or private `finite_stablePrime_absNorm_le`) — 30.

@@ -1,0 +1,15 @@
+D1     CLAUDE.md                                            matches=1  old='the current audit reads 10998 clean and 5 declared'
+D2     CLAUDE.md                                            matches=1  old='declarations=22683 refutations-skipped=245 sites=1'
+D3a    LEDGER.md                                            matches=1  old="whether CLG-g's exception is ever realised; a kern"
+D3b    LEDGER.md                                            matches=1  old="Lemma C/C′ partly `[Fischer1990b]`'s (quadratic an"
+D4     LEDGER.md                                            matches=1  old='That statement ranges over a type the kernel does '
+D5     LEDGER.md                                            matches=1  old='(?m)^\\| 167 \\|.*$'
+D6a    ROADMAP.md                                           matches=1  old='2. **Lemma C′** (row 100): for a real number field'
+D6b    ROADMAP.md                                           matches=1  old='with its form that takes no hypothesis, `min(χ(F²)'
+D8a    CLAUDE.md                                            matches=1  old='Last filed: **the density form of the collapse** ('
+D8b    plans/KERNEL-HOLDS.md                                matches=1  old='(`QuadraticPrime.exists_maximal_card_eq`, `…_of_ra'
+LEAN   LEAN.md                                              matches=1  old='(`data/fs131/ics1/logs/copy2-*`; FS131-ICS1).'
+D10    plans/POROS-2026-10-13-number-field-findings.md      matches=1  old='`[Shimura1964]` undecided" — **novelty unchecked**'
+D11    plans/FS131-KCS1-class-plan.md                       matches=1  old="### 2.6 B — Lemma C′ (≈ 700 lines; route FS91-J10'"
+moved entry: before it **the density form of the collapse** (FS131-KFR1, FS131-IFR1, FS131-IFR2, 2026-10-16: four ...  This is row 129's field clause; no value of `χ(ℝ²)` moved.)
+written
