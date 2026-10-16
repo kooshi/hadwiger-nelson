@@ -180,3 +180,86 @@ exit 0, "All targets up-to-date (6543 jobs)" (`uptodate-postbuild.log`).
 **A slip, logged as mine**: while checking the rebuilt list (§ 2.4) one command wrote a short list of module names to a file in
 `/tmp` and deleted it in the same command (unused; standing rule 2 sends every working file under `data/fs131/iru2/`). Nothing
 was lost or read by another job.
+
+## Stage 3 — SAVED: the gate, on `b261d0f12`
+
+### 3.1 The run
+
+`data/fs131/iru2/run-gate.sh` (the steps of `data/fs131/clone1/run-gate.sh`, its log directory and step names changed), run from a
+snapshot at `build/iru2/snap/run-gate.sh`, 2026-10-16 23:15:57–23:29:34 UTC, on **`b261d0f12`** — the merge `407d720ac` plus the
+stage-2 commit, which adds this job's tools, prints and record and changes no gate input. Logs in `data/fs131/iru2/gate/`, each
+with its exit on its last line. The header reads `HEAD=b261d0f12… tracked-modified=0`; at the end "tracked files modified after
+the pass: 0". **Every step exit 0:**
+
+| step | result | wall |
+|---|---|---|
+| uptodate (`lake build --no-build Proofs`) | exit 0 | 4 s |
+| `sorry` (narrow scan) | 0 lines | — |
+| line-initial `axiom` | 5 lines, as on `main`: the three declared imports and two inside doc comments (`Rigidity/Entropy`, `Sat/Lrat`) | — |
+| dupnames / self-test | exit 0, "no name is declared by two modules (31 generated on demand)" / exit 0, all 15 controls | 4 s / 23 s |
+| axioms / self-test | exit 0, "11043 clean, 575 axiom-free, 120 imported, 5 declared purchase(s)" / exit 0, every planted fault fired and every partner passed (23 controls; `baseline` and `imported_declared` at `main`'s `imported=120`, `121`, unmoved) | 11 s / 243 s |
+| vacuity / self-test | exit 0, `declarations=22728 refutations-skipped=246`, `sites=1465 vacuous=0 stale=0 declared=3 witnessed=40 generic=1420 unknown=2` / exit 0, all 65 controls | 131 s / 128 s |
+| assumptions / self-test | exit 0, `axioms=3 rests=168 named=19 inline=14 outside=7 ours=21 open=5 takes=109 mentions=2`, `conditions=40 fails=0` / exit 0, all 33 checks | 123 s / 128 s |
+| architecture (`tools/check_architecture.py`) | exit 0, `RESULT: PASS` | — |
+| lint (`lake lint --no-build -- --no-build --trace`) | exit 0, 14 linters `(2/2) Passed!`, "Linting passed for Proofs." | 14 s |
+| digests (axioms, vacuity, assumptions) | exit 0; the vacuity baseline's header and the assumptions ledger's header **match** (9 of 9 each); stale flags only for the counts recorded in this tree's `CLAUDE.md` (`main`'s, before the density landing's filing: "10914 clean → 11043, 99 imported → 120", "declarations 22566 → 22728, refutations-skipped 243 → 246", "rests 128 → 168") | — |
+
+### 3.2 The counts, against the density gate (FS131-IFR2's, on `b8cef1f36`; `data/fs131/ifr2/gate/`)
+
+Each change is this branch's own, as the predecessor's gate measured it against its base (FS131-ICT3's three-colour gate,
+`data/fs131/ict3/gate/`, to `data/fs131/iru1/gate/`): the two lines add independently, nothing lost and nothing counted twice.
+
+| count | density gate (`main`) | this gate | change | the ring's own change (ICT3 → IRU1) |
+|---|---|---|---|---|
+| audit records | 11,698 | 11,743 | +45 | +45 |
+| clean | 10,998 | 11,043 | +45 | +45 |
+| axiom-free | 575 | 575 | 0 | 0 |
+| imported | 120 | 120 | 0 | 0 |
+| declared purchases | 5 | 5 | 0 | 0 |
+| assumptions' nine counts | `axioms=3 rests=168 named=19 inline=14 outside=7 ours=21 open=5 takes=109 mentions=2` | the same | 0 | 0 |
+| assumptions `conditions` | 40 | 40 | 0 | −1 (`Arith.IsUsablePrime`'s entry, which `main` had already retired: § 2.1) |
+| assumptions scan: constants, theorems, formers, hypotheses, unseen | 22,548, 16,593, 461, 27,166, 21,834 | 22,593, 16,637, 461, 27,251, 21,894 | +45, +44, 0, +85, +60 | +45, +44, 0, +85, +60 |
+| vacuity `declarations` | 22,683 | 22,728 | +45 | +45 |
+| vacuity `refutations-skipped` | 245 | 246 | +1 | +1 (`UnitRingModels.noRamifiedStableDyadic_sqrt47`) |
+| vacuity sites, verdicts | `sites=1465`, `vacuous=0 stale=0 declared=3 witnessed=40 generic=1420 unknown=2` | the same | 0 | 0 |
+| dupnames | 31 generated on demand | 31 | 0 | 0 |
+| lint | 14 linters passed | 14 | — | — |
+
+The vacuity receipts of the two gates differ in their `SCANNED` line alone (every `SITE`, `EVIDENCE`, `DECLARED` and `UNKNOWN`
+row equal). The predecessor's count of the six modules' declarations, rerun on the merged build
+(`data/fs131/iru2/lean/VacuityNew.lean` → `vacuity-new.txt`), is its own line for line: 47 declarations in the six modules, two of
+them `Rigidity/AdmissiblePrime`'s before the branch (so +45), and the one refutation. The audit's records: the merged
+`scripts/Axioms.lean` prints 11,743, the base's 11,547 plus this branch's 45 and `main`'s 151, and the audit classes them
+11,043 + 575 + 120 + 5.
+
+### 3.3 The head statements' axioms
+
+`#print axioms` on the merged build of every head statement, the ruled drop and the models (`data/fs131/iru2/readaloud.txt`,
+§ 2.5): each `[propext, Classical.choice, Quot.sound]` — `unitRing_eq_stableIntegers`, `exists_two_pow_mul_mem_unitRing`,
+`exists_eq_add_mul_of_mem_stableIntegers`, `resPi_surjective`, `closure_normOne_eq_top`, `exists_isUsablePrime`,
+`nonempty_stablePrime`, `localBound_lt_top`, `reachable_iff_sub_mem_unitRingOver`, `connected_or_infinite_planeOver`,
+`connected_planeOver_iff_isEmpty_stablePrime`, `infinite_connectedComponent_planeOver`, `not_connected_planeOver`,
+`not_isRamified_of_odd_mem`, `exists_model_galoisField`, and the four `UnitRingModels` theorems — as the predecessor printed
+them, the file the same but for the slot's line. Every record of the sixteen modules the two lines brought or changed has the
+axiom set its own landing's gate printed (§ 2.5), `main`'s head statements among them.
+
+### 3.4 Negative controls watched red
+
+- The quotation checker's plant (stage 1); the name intersection's plant (§ 2.2).
+- The statement comparator's six plants and the axiom comparator's four (§ 2.5), each first on a synthetic union of the two
+  gated prints.
+- The audit-block generator: coverage against `main`'s audit file, 45 UNFILED, exit 1; its `--plant`, four STOPs (§ 2.5).
+- Each self-test's own planted controls in the gate: dupnames 15, axioms 23, vacuity 65, assumptions 33 checks.
+- **The vacuity header, planted stale** in two copies (`data/fs131/iru2/plants/`): with `main`'s `22683`/`245` and with the branch's
+  `22564`/`244`, each read by `scripts/gate_report.py` against this gate's receipt: both flagged, "RECORDED COUNTS ARE STALE in
+  …'s header — update it: declarations 22683 → 22728, refutations-skipped 245 → 246" (and `22564 → 22728`, `244 → 246`). The
+  digest flags and does not fail; that is its design.
+- Not run: a planted lint fault (as at FS131-IFR2, FS131-IFR1 and FS131-ICO2; the driver's control was watched at FS131-LGT1);
+  the audit's state controls planted red (FS131-IFR2 watched them at these same totals, `imported=120`, `121`, which this merge
+  does not move).
+
+### 3.5 For the landing
+
+`main` after merging `fs131-kru1` equals `b261d0f12` in `Proofs/`, `Proofs.lean`, `scripts/` and the package files as long as
+`main` changes none of them before then (`main` at `1d37b4177` had changed none since `b8cef1f36`). This worktree's
+`.lake/build` is the gated build of `b261d0f12`; moving it into the main tree for the landing is the coordinator's.
