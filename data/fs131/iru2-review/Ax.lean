@@ -1,0 +1,21 @@
+import Proofs.HadwigerNelson.Instances.UnitRingModels
+open HadwigerNelson HadwigerNelson.Rigidity
+#print axioms unitRing_eq_stableIntegers
+#print axioms exists_two_pow_mul_mem_unitRing
+#print axioms exists_eq_add_mul_of_mem_stableIntegers
+#print axioms resPi_surjective
+#print axioms closure_normOne_eq_top
+#print axioms exists_isUsablePrime
+#print axioms nonempty_stablePrime
+#print axioms localBound_lt_top
+#print axioms reachable_iff_sub_mem_unitRingOver
+#print axioms connected_or_infinite_planeOver
+#print axioms connected_planeOver_iff_isEmpty_stablePrime
+#print axioms infinite_connectedComponent_planeOver
+#print axioms not_connected_planeOver
+#print axioms not_isRamified_of_odd_mem
+#print axioms exists_model_galoisField
+#print axioms UnitRingModels.noRamifiedStableDyadic_sqrt47
+#print axioms UnitRingModels.unitRing_eq_stableIntegers_sqrt47
+#print axioms UnitRingModels.stableIntegers_sqrt47_ne_top
+#print axioms UnitRingModels.exists_stablePrime_three_not_isRamified
