@@ -61,7 +61,13 @@ theorem chromaticNumber_plane_le_of_thick {c : ℝ} (hT : Thick F c) (hc0 : 0 �
 
 /-- `F²` is not one-colourable: `0` and `1` are at distance one. -/
 theorem not_colorable_one_planeOver (F : Subfield ℝ) : ¬ ((unitDistance ℂ).induce (planeOver F)).Colorable 1 := by
-  sorry
+  rintro ⟨C⟩
+  have h0 : (0 : ℂ) ∈ planeOver F := ⟨by simp, by simp⟩
+  have h1 : (1 : ℂ) ∈ planeOver F := ⟨by simp, by simp⟩
+  have hadj : ((unitDistance ℂ).induce (planeOver F)).Adj ⟨0, h0⟩ ⟨1, h1⟩ := by
+    show dist (0 : ℂ) 1 = 1
+    simp
+  exact C.valid hadj (Subsingleton.elim _ _)
 
 /-- **The collapse, general form**: over every real number field all of whose stable primes are uniformly `c`-thick with
 `c < 1/5`, `χ(F²) = χ(ℝ²)`. Route: `≤` is `Bridge.chromaticNumber_planeOver_le_plane`; for `≥`, every `k` with `F²`
@@ -69,7 +75,18 @@ theorem not_colorable_one_planeOver (F : Subfield ℝ) : ¬ ((unitDistance ℂ).
 `chromaticNumber_plane_le_of_thick` (`c(k − 1) ≤ 5c < 1`), and `k ≤ 1` does not occur (`not_colorable_one_planeOver`). -/
 theorem chromaticNumber_planeOver_eq_plane_of_thick {c : ℝ} (hT : Thick F c) (hc0 : 0 ≤ c) (hc : c < 1 / 5) :
     ((unitDistance ℂ).induce (planeOver F)).chromaticNumber = (unitDistance ℂ).chromaticNumber := by
-  sorry
+  refine le_antisymm (Bridge.chromaticNumber_planeOver_le_plane F) (chromaticNumber_le_of_forall_imp fun n hn => ?_)
+  by_cases h7 : 7 ≤ n
+  · exact (chromaticNumber_le_iff_colorable.mp Bridge.chromaticNumber_complex_le_seven).mono h7
+  · have h2 : 2 ≤ n := by
+      by_contra h2
+      exact not_colorable_one_planeOver F (hn.mono (by omega))
+    refine chromaticNumber_le_iff_colorable.mp (chromaticNumber_plane_le_of_thick hT hc0 h2 ?_ hn)
+    have h6 : (n : ℝ) - 1 ≤ 5 := by
+      have : (n : ℝ) ≤ 6 := by exact_mod_cast (by omega : n ≤ 6)
+      linarith
+    have := mul_le_mul_of_nonneg_left h6 hc0
+    linarith
 
 /-- **The collapse in row 128's per-place words**: if every stable prime is `c_P`-thick for some `c_P < 1/5` (`N₆(F) = ∅`),
 then `χ(F²) = χ(ℝ²)` (`thick_of_forall_thickAt` makes the constant uniform). -/
@@ -85,14 +102,17 @@ theorem chromaticNumber_planeOver_eq_plane_of_forall_thickAt (h : ∀ P : Stable
 noncomputable abbrev F635087 : Subfield ℝ := SquareClass.fieldOfRadicands {635087}
 
 /-- `635087` is a square in `ℚ(√635087)`. -/
-theorem isSquare_635087 : IsSquare ((635087 : ℕ) : F635087) := by
-  sorry
+theorem isSquare_635087 : IsSquare ((635087 : ℕ) : F635087) :=
+  ⟨⟨Real.sqrt (635087 : ℕ), SquareClass.sqrt_mem_fieldOfRadicands rfl⟩,
+    Subtype.ext (by push_cast; exact (Real.mul_self_sqrt (Nat.cast_nonneg 635087)).symm)⟩
 
 /-- **The thirteen small inert primes**: a prime `p ≡ 3 (mod 4)` modulo which `635087` is a square is at least `103` — `635087`
 is a non-square modulo each of `3, 7, 11, 19, 23, 31, 43, 47, 59, 67, 71, 79, 83` (`decide` at each). -/
 theorem le_of_isSquare_635087 {p : ℕ} (hp : p.Prime) (hp4 : p % 4 = 3) (hsq : IsSquare ((635087 : ℕ) : ZMod p)) :
     103 ≤ p := by
-  sorry
+  by_contra hlt
+  have hlt : p < 103 := not_le.mp hlt
+  interval_cases p <;> first | omega | (norm_num at hp; done) | exact absurd hsq (by decide +kernel)
 
 /-- **Every stable prime of `ℚ(√635087, i)`**: not above `2`, residue size `Q²` with `Q ≥ 103`. -/
 theorem stablePrime_sqrt635087 (P : StablePrime F635087) :
@@ -110,7 +130,12 @@ theorem thick_sqrt635087 : Thick F635087 (2 * Real.sqrt ((103 : ℕ) : ℝ) / ((
 
 /-- Weil's constant at `103` is below `1/5`: `√103 < 10.4`. -/
 theorem weil_103_lt_fifth : 2 * Real.sqrt ((103 : ℕ) : ℝ) / (((103 : ℕ) : ℝ) + 1) < 1 / 5 := by
-  sorry
+  have h : Real.sqrt ((103 : ℕ) : ℝ) < 10.4 := by
+    rw [Real.sqrt_lt' (by norm_num)]
+    norm_num
+  rw [div_lt_iff₀ (by positivity)]
+  push_cast at h ⊢
+  linarith
 
 /-- **`χ(ℚ(√635087)²) = χ(ℝ²)`** — row 128's headline instance, with no hypothesis. -/
 theorem chromaticNumber_planeOver_sqrt635087 :
@@ -131,15 +156,19 @@ theorem chromaticNumber_planeOver_sqrt635087_six_or_seven :
 noncomputable abbrev FdG : Subfield ℝ := SquareClass.fieldOfRadicands {3, 5, 7, 11}
 
 /-- Each radicand is a square in de Grey's field. -/
-theorem isSquare_deGrey {d : ℕ} (hd : d ∈ ({3, 5, 7, 11} : Set ℕ)) : IsSquare ((d : ℕ) : FdG) := by
-  sorry
+theorem isSquare_deGrey {d : ℕ} (hd : d ∈ ({3, 5, 7, 11} : Set ℕ)) : IsSquare ((d : ℕ) : FdG) :=
+  ⟨⟨Real.sqrt d, SquareClass.sqrt_mem_fieldOfRadicands hd⟩,
+    Subtype.ext (by push_cast; exact (Real.mul_self_sqrt (Nat.cast_nonneg d)).symm)⟩
 
 /-- **No prime `p ≡ 3 (mod 4)` below `131` has `3, 5, 7, 11` all squares modulo it** (`decide` at each; `3`, `7`, `11`
 themselves included: `5`, `3`, `7` are non-squares modulo them). -/
 theorem le_of_isSquare_deGrey {p : ℕ} (hp : p.Prime) (hp4 : p % 4 = 3) (h3 : IsSquare ((3 : ℕ) : ZMod p))
     (h5 : IsSquare ((5 : ℕ) : ZMod p)) (h7 : IsSquare ((7 : ℕ) : ZMod p)) (h11 : IsSquare ((11 : ℕ) : ZMod p)) :
     131 ≤ p := by
-  sorry
+  by_contra hlt
+  have hlt : p < 131 := not_le.mp hlt
+  interval_cases p <;> first | omega | (norm_num at hp; done) | exact absurd h3 (by decide +kernel) |
+    exact absurd h5 (by decide +kernel) | exact absurd h7 (by decide +kernel) | exact absurd h11 (by decide +kernel)
 
 /-- **Every stable prime of de Grey's field with `i`**: not above `2` (`7 ≡ 7 (mod 8)`), residue size `Q²` with `Q ≥ 131`. -/
 theorem stablePrime_deGrey (P : StablePrime FdG) :
@@ -158,7 +187,12 @@ theorem thick_deGrey : Thick FdG (2 * Real.sqrt ((131 : ℕ) : ℝ) / (((131 : �
 
 /-- Weil's constant at `131` is below `1/5`. -/
 theorem weil_131_lt_fifth : 2 * Real.sqrt ((131 : ℕ) : ℝ) / (((131 : ℕ) : ℝ) + 1) < 1 / 5 := by
-  sorry
+  have h : Real.sqrt ((131 : ℕ) : ℝ) < 11.5 := by
+    rw [Real.sqrt_lt' (by norm_num)]
+    norm_num
+  rw [div_lt_iff₀ (by positivity)]
+  push_cast at h ⊢
+  linarith
 
 /-- **`χ(ℚ(√3, √5, √7, √11)²) = χ(ℝ²)`** — row 128's second instance, with no hypothesis (MR at degree 16 is
 `Rigidity.mrPlus` there). -/
@@ -173,7 +207,10 @@ theorem chromaticNumber_planeOver_deGrey :
 theorem not_thick_bot {c : ℝ} (hc : c < 1) :
     haveI := Rigidity.numberField_bot
     ¬ Thick (⊥ : Subfield ℝ) c := by
-  sorry
+  haveI := Rigidity.numberField_bot
+  intro hT
+  obtain ⟨P, -, hram⟩ := UpperHalf.exists_stablePrime_rat
+  exact not_isRamified_of_thickAt (hT P) hc hram
 
 /-! ## Spec -/
 

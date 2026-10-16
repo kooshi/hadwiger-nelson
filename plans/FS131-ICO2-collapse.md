@@ -90,3 +90,37 @@ slot named `ico2` — not by `data/fs131/ico1/lean1.sh` itself.)*
 - `unitPairsNull_selCol` — the unit-pair set of a class lies in the exceptional set of `ae_slice_edge`: both ends selected `j`,
   so both heavy (`le_fibreMass_selCol`), against `not_both_heavy`.
 - the spec example (a constant slice has fibre mass `1` on its colour) — `simp [fibreMass]`.
+
+## Stage 4 — SAVED: `Collapse/Headline`
+
+**Every leaf proved** (9 of 9; work copy `data/fs131/ico2/work/Headline.lean`; `head1.out` the first compile with two errors
+and four `unnecessarySimpa` warnings, `head2.out` clean). About 50 lines against the plan's 250.
+- `not_colorable_one_planeOver` — `0, 1 ∈ planeOver F` at distance `1`, and a colouring by `Fin 1` cannot separate them.
+- `chromaticNumber_planeOver_eq_plane_of_thick` — `≤` by `Bridge.chromaticNumber_planeOver_le_plane`; `≥` by Mathlib's
+  `chromaticNumber_le_of_forall_imp`: every `n` with `F²` `n`-colourable has `ℝ²` `n`-colourable — at `n ≥ 7` from
+  `Bridge.chromaticNumber_complex_le_seven`, at `2 ≤ n ≤ 6` from `chromaticNumber_plane_le_of_thick` with
+  `c(n − 1) ≤ 5c < 1`, and `n ≤ 1` excluded by the leaf above. (The first attempt, `le_chromaticNumber_iff_colorable`, is
+  stated for a natural number on the left and does not apply.)
+- `isSquare_635087`, `isSquare_deGrey` — `⟨√d, sqrt_mem_fieldOfRadicands⟩` and `Real.mul_self_sqrt`: the three-line proof of
+  `SqrtClassValues.isSquare_radicand`, which is outside this module's import closure (`Instances/SqrtClassValues` imports
+  `Rigidity/SqrtClassFive`, not the other way), inlined rather than imported.
+- `le_of_isSquare_635087`, `le_of_isSquare_deGrey` — `interval_cases p` below `103` (`131`): each case closed by `omega`
+  (`p % 4 ≠ 3`), by `norm_num` on `Nat.Prime` (composite), or by `decide +kernel` refuting `IsSquare` at one radicand. Plain
+  `decide` hit the maximum recursion depth at the larger moduli of de Grey's case, so both lemmas use `+kernel` (same axioms).
+  The residue facts were checked first by exhaustion in exact arithmetic (`data/fs131/ico2/residues.py`, output
+  `residues.out`: 13 primes below `103` refute `635087`; 16 below `131` each refute one of `3, 5, 7, 11`, and `131` is the first
+  prime `≡ 3 (mod 4)` at which all four are squares — so both bounds are tight; its plant, `--plant`, pretends `635087` is a
+  square mod `83` and the check fails, `residues_plant.out`).
+- `weil_103_lt_fifth`, `weil_131_lt_fifth` — `√103 < 10.4`, `√131 < 11.5` by `Real.sqrt_lt'`, then `div_lt_iff₀` and `linarith`.
+- `not_thick_bot` — `UpperHalf.exists_stablePrime_rat` gives a ramified stable prime of `ℚ(i)`; `not_isRamified_of_thickAt`.
+
+**No `sorry` remains in `Proofs/HadwigerNelson/Collapse/`** (`grep -cw sorry`: 0 in all seven). **A farm-side axiom print**
+(iteration, not the gate's audit; `data/fs131/ico2/work/AxiomsScratch.lean`, `axioms-scratch.out`):
+`chromaticNumber_planeOver_sqrt635087` and `chromaticNumber_planeOver_deGrey` on the standard three,
+`Rigidity.positive_entropy_rigidity` and `StandingFive.kloosterman_bound`; the six-or-seven corollary on those and
+`Outside.OAI158.no_proper_five_coloring`; **the general form `chromaticNumber_planeOver_eq_plane_of_thick` on the standard three
+and `positive_entropy_rigidity` alone** — Weil's bound enters only at the instances, through `thick_of_card`, since thickness is
+the general theorem's hypothesis; `not_thick_bot` on the standard three.
+
+**Re-price, this job:** about 410 lines of proof for the three modules (Slice 255, Selection 105, Headline 50) against the plan's
+890; with the previous job's 1,540, the module is about 1,950 lines against the plan's 3,270.

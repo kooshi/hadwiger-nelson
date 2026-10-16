@@ -1,0 +1,25 @@
+slot: waiting (ledger 16 + 8 > budget 22 GiB)
+slot: admitted ico2: mem 8 GiB (hard cap), cpus 0,1
+data/fs131/ico2/work/Headline.lean:65:41: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+data/fs131/ico2/work/Headline.lean:65:68: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+data/fs131/ico2/work/Headline.lean:66:41: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+data/fs131/ico2/work/Headline.lean:66:67: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+data/fs131/ico2/work/Headline.lean:78:67: error: Application type mismatch: The argument
+  le_chromaticNumber_iff_colorable.mpr fun n hn => ?m.35
+has type
+  ↑?m.30 ≤ chromaticNumber ?m.29
+but is expected to have type
+  (unitDistance ℂ).chromaticNumber ≤ (induce (planeOver F) (unitDistance ℂ)).chromaticNumber
+in the application
+  le_antisymm (Bridge.chromaticNumber_planeOver_le_plane F) (le_chromaticNumber_iff_colorable.mpr fun n hn => ?m.35)
+data/fs131/ico2/work/Headline.lean:170:84: error: maximum recursion depth has been reached
+use `set_option maxRecDepth <num>` to increase limit
+use `set_option diagnostics true` to get diagnostic information
