@@ -1,0 +1,78 @@
+MODULE Proofs.HadwigerNelson.Arith.FibreCert7: CLEAN 1
+MODULE Proofs.HadwigerNelson.Arith.FibreCert7Bound: CLEAN 7
+MODULE Proofs.HadwigerNelson.Arith.FibreCert7Check: CLEAN 3
+MODULE Proofs.HadwigerNelson.PadicPlane.Basic: CLEAN 10
+MODULE Proofs.HadwigerNelson.PadicPlane.Measure: CLEAN 15
+MODULE Proofs.HadwigerNelson.PadicPlane.Tower: CLEAN 7, kloosterman_bound 2
+MODULE Proofs.HadwigerNelson.PadicPlane.Upper: CLEAN 4
+MODULE Proofs.HadwigerNelson.PadicPlane.Values: CLEAN 15, kloosterman_bound 4
+UNFILED HadwigerNelson.PadicPlane.TowerRatio (Proofs.HadwigerNelson.PadicPlane.Basic): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.TowerRatio.mono (Proofs.HadwigerNelson.PadicPlane.Basic): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.borelChromaticNumber (Proofs.HadwigerNelson.PadicPlane.Basic): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.borelChromaticNumber_le_of_coloring (Proofs.HadwigerNelson.PadicPlane.Basic): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.chromaticNumber_le_borelChromaticNumber (Proofs.HadwigerNelson.PadicPlane.Basic): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.le_borelChromaticNumber (Proofs.HadwigerNelson.PadicPlane.Basic): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.norm_le_one_of_sq_add_sq_eq_one (Proofs.HadwigerNelson.PadicPlane.Basic): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.not_colorable_of_towerRatio (Proofs.HadwigerNelson.PadicPlane.Basic): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.padicPlane (Proofs.HadwigerNelson.PadicPlane.Basic): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.towerRatio_one (Proofs.HadwigerNelson.PadicPlane.Basic): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.exists_level_haar_bad_le (Proofs.HadwigerNelson.PadicPlane.Measure): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.exists_unitVector_lift (Proofs.HadwigerNelson.PadicPlane.Measure): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.haar (Proofs.HadwigerNelson.PadicPlane.Measure): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.haar_le_of_towerRatio (Proofs.HadwigerNelson.PadicPlane.Measure): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.haar_res_fibre (Proofs.HadwigerNelson.PadicPlane.Measure): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.haar_univ (Proofs.HadwigerNelson.PadicPlane.Measure): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.instBorelSpacePadicInt (Proofs.HadwigerNelson.PadicPlane.Measure): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.instMeasurableSpacePadicInt (Proofs.HadwigerNelson.PadicPlane.Measure): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.isIndepSet_wellFilled (Proofs.HadwigerNelson.PadicPlane.Measure): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.isOpen_res_fibre (Proofs.HadwigerNelson.PadicPlane.Measure): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.le_borelChromaticNumber_of_towerRatio (Proofs.HadwigerNelson.PadicPlane.Measure): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.one_le_mul_of_borelColoring (Proofs.HadwigerNelson.PadicPlane.Measure): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.res (Proofs.HadwigerNelson.PadicPlane.Measure): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.res_apply (Proofs.HadwigerNelson.PadicPlane.Measure): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.res_surjective (Proofs.HadwigerNelson.PadicPlane.Measure): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.borelChromaticNumber_le_chromaticNumber (Proofs.HadwigerNelson.PadicPlane.Upper): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.borelChromaticNumber_le_of_colorable (Proofs.HadwigerNelson.PadicPlane.Upper): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.exists_borelColoring_of_colorable (Proofs.HadwigerNelson.PadicPlane.Upper): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.exists_residueMap (Proofs.HadwigerNelson.PadicPlane.Upper): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.charSum_levelOne_of_unitCircle (Proofs.HadwigerNelson.PadicPlane.Tower): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.charSum_unitCircle_ge_weil (Proofs.HadwigerNelson.PadicPlane.Tower): class IMPORTED
+UNFILED HadwigerNelson.PadicPlane.exists_levelEmbedding (Proofs.HadwigerNelson.PadicPlane.Tower): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.exists_stablePrime_above (Proofs.HadwigerNelson.PadicPlane.Tower): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.ratioAtMost_of_charSum_levelOne (Proofs.HadwigerNelson.PadicPlane.Tower): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.towerRatio_of_charSum (Proofs.HadwigerNelson.PadicPlane.Tower): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.towerRatio_of_fibreShareBound (Proofs.HadwigerNelson.PadicPlane.Tower): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.towerRatio_of_ratioAtMost (Proofs.HadwigerNelson.PadicPlane.Tower): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.towerRatio_weil (Proofs.HadwigerNelson.PadicPlane.Tower): class IMPORTED
+UNFILED HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_eleven (Proofs.HadwigerNelson.PadicPlane.Values): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_nineteen (Proofs.HadwigerNelson.PadicPlane.Values): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_seven (Proofs.HadwigerNelson.PadicPlane.Values): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_three (Proofs.HadwigerNelson.PadicPlane.Values): class IMPORTED
+UNFILED HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_twentyThree_le_eight (Proofs.HadwigerNelson.PadicPlane.Values): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.factPrimeEleven (Proofs.HadwigerNelson.PadicPlane.Values): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.factPrimeNineteen (Proofs.HadwigerNelson.PadicPlane.Values): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.factPrimeSeven (Proofs.HadwigerNelson.PadicPlane.Values): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.factPrimeThree (Proofs.HadwigerNelson.PadicPlane.Values): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.factPrimeTwentyThree (Proofs.HadwigerNelson.PadicPlane.Values): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.fibreShareBound_seven (Proofs.HadwigerNelson.PadicPlane.Values): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.five_le_borelChromaticNumber_padicPlane_twentyThree (Proofs.HadwigerNelson.PadicPlane.Values): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.le_borelChromaticNumber_of_charSum (Proofs.HadwigerNelson.PadicPlane.Values): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.le_borelChromaticNumber_padicPlane (Proofs.HadwigerNelson.PadicPlane.Values): class IMPORTED
+UNFILED HadwigerNelson.PadicPlane.not_exists_bound_borelChromaticNumber_padicPlane (Proofs.HadwigerNelson.PadicPlane.Values): class IMPORTED
+UNFILED HadwigerNelson.PadicPlane.one_add_div_le_of_borelColoring (Proofs.HadwigerNelson.PadicPlane.Values): class IMPORTED
+UNFILED HadwigerNelson.PadicPlane.unitQuadrance_zmod_eleven_pow_not_colorable_four (Proofs.HadwigerNelson.PadicPlane.Values): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.unitQuadrance_zmod_nineteen_pow_not_colorable_four (Proofs.HadwigerNelson.PadicPlane.Values): class CLEAN
+UNFILED HadwigerNelson.PadicPlane.unitQuadrance_zmod_seven_pow_not_colorable_three (Proofs.HadwigerNelson.PadicPlane.Values): class CLEAN
+UNFILED HadwigerNelson.FibreCert.cert7 (Proofs.HadwigerNelson.Arith.FibreCert7): class CLEAN
+UNFILED HadwigerNelson.FibreCert.cert7_global (Proofs.HadwigerNelson.Arith.FibreCert7Check): class CLEAN
+UNFILED HadwigerNelson.FibreCert.cert7_psd (Proofs.HadwigerNelson.Arith.FibreCert7Check): class CLEAN
+UNFILED HadwigerNelson.FibreCert.cert7_seg0 (Proofs.HadwigerNelson.Arith.FibreCert7Check): class CLEAN
+UNFILED HadwigerNelson.FibreCert.cert7_nseg (Proofs.HadwigerNelson.Arith.FibreCert7Bound): class CLEAN
+UNFILED HadwigerNelson.FibreCert.cert7_ok (Proofs.HadwigerNelson.Arith.FibreCert7Bound): class CLEAN
+UNFILED HadwigerNelson.FibreCert.cert7_p (Proofs.HadwigerNelson.Arith.FibreCert7Bound): class CLEAN
+UNFILED HadwigerNelson.FibreCert.cert7_scale (Proofs.HadwigerNelson.Arith.FibreCert7Bound): class CLEAN
+UNFILED HadwigerNelson.FibreCert.cert7_unum (Proofs.HadwigerNelson.Arith.FibreCert7Bound): class CLEAN
+UNFILED HadwigerNelson.FibreCertSound.model_seven (Proofs.HadwigerNelson.Arith.FibreCert7Bound): class CLEAN
+UNFILED HadwigerNelson.FibreCertSound.sum_le_seven (Proofs.HadwigerNelson.Arith.FibreCert7Bound): class CLEAN
+records: 68 public (0 already filed), 11 private (not audited)
+STOP: 68 record(s) the gate cannot take

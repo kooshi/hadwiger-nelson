@@ -4,9 +4,14 @@
 `plans/FS131-close-inventory.md` items 974–992 (each has its receipt and, where it rules, four parts).
 `plans/SESSION-HANDOFF-2026-10-15.md` is older; its § 6 owed list is now filed or tabled (§ 5 below).*
 
-**On resuming (after Kooshi's pause, items 1016–1019; every job has handed back):** read § 3. Each of the three jobs there was told to save a stage and
-hand back; read each record's last saved stage and its "what is left", then brief a successor from it (or resume it by
-message if it handed back below its line). Five commits wait for the next privacy check before a push (§ 1).
+**On resuming:** four jobs run (§ 3). Agents of an ended session cannot be messaged: a job whose agent is gone is
+continued by a fresh successor from its record. **History (item 1025):** `main`'s unpushed range was rewritten by a
+private filter kept in the publication folder (`history-rewrite-2026-10-16/filter.py` there; the folder's path is in the coordinator's local-paths memory, never in the repository); every
+job branch carrying old commits is rewritten by the same filter at its hand-back, before its merge (`git filter-branch -f
+--msg-filter '… msg' --index-filter '… index' -- origin/main..<branch>`; the `p`-adic and three-colour branches first
+need their stopped agents' record lines added to the filter's table, found by a guard scan of the branch), and its
+old-to-new map goes under `data/fs131/history-rewrite/`. A commit hook runs the guard on every commit. Next push: a
+Clerk's privacy check of `origin/main..main`, then a fast-forward push (standing protocol).
 
 ## 1. Where things are
 
@@ -37,26 +42,24 @@ message if it handed back below its line). Five commits wait for the next privac
 
 ## 3. Running
 
-**The collapse landed** (item 1005): `χ(ℚ(√635087)²) = χ(ℝ²)`, de Grey's field, and the general form at every real
-number field uniformly `c`-thick with `c < 1/5`, merged as `0f81fe2a3`, gated on `7c72b9bf7`; the main tree's build
-current. Its two owed one-liners and the `k = 7` model go to the next job that touches `Collapse/`.
+**The p-adic plane landed** (item 1032), merged as `785a46e77`, gated on `e3e1dbb73`; filed by me; its gate
+(`data/fs131/iqp3/gate/`) is the baseline for the next landing; the three running implementers were told. `CLAUDE.md`'s
+"What the kernel holds" paragraph now lives in `plans/KERNEL-HOLDS.md`, where every landing's clause is filed; the fact
+audit runs with its default `--also` files plus `plans/KERNEL-HOLDS.md` and `plans/FILINGS.md`.
 
-- **The collapse's filing is merged** (`38579c41b`, item 1007): the front page, row 128, README, ROADMAP, the atlas
-  (local) current; the fact audit passes against `8cab63fa2`.
-- **FS131-IQP2** (item 1015): the `p`-adic plane to the gate (`.claude/worktrees/il5`, branch `fs131-kpa1`); FS131-IQP1
-  proved every landing leaf and handed back past its line (item 1014); the three leaves at 23 wait on search request 26;
-  five colours at 23 ruled in. Both implementer branches joined `Proofs.lean`'s import blocks with `main`'s: the second to
-  land will conflict there again — keep both blocks.
-- **FS131-ICT2** (item 1013): the three-colour criterion to the gate (`.claude/worktrees/kel1`, branch `fs131-ktc1`);
-  FS131-ICT1 proved all 53 leaves and handed back past its line (item 1012); two unread hypotheses ruled dropped.
-- **FS131-KFR1 handed back DONE** (item 1017): the density form planned, about 2,675 lines; what I owe it on resuming is
-  in item 1017 (receipts, records onto `main`, three held rulings, its implementer's brief).
+| job | what | worktree, branch | record |
+|---|---|---|---|
+| FS131-RDM1 (item 1031) | the README rewritten for a human reader (Kooshi's W21); to `main` only after my read, three status checks and Kooshi's look | `rdm1`, `fs131-rdm1` | `plans/FS131-RDM1-readme.md` |
+| FS131-ICT3 (item 1023) | the three-colour criterion to the gate: five spec examples, lint, gate, read-aloud, drafts | `kel1`, `fs131-ktc1` | `plans/FS131-ICT3-three-colour.md` |
+| FS131-IFR1 (item 1023) | the density form of the collapse: 81 leaves (about 2,650 lines) and the gate; item 1021's three rulings | `kcl1`, `fs131-kfr1` | `plans/FS131-IFR1-density.md` |
+| FS131-ICS1 (item 1028) | part A of FS131-KCS1's plan (item 1027): the quadratic dichotomy, the family, CLS in full, ℚ(√23, ∛2), the bridge; three `ClassRatio` lemmas made public | `kcs1`, `fs131-kcs1` | `plans/FS131-ICS1-class.md` |
 
-Both implementers were told the collapse's gate (`data/fs131/ico2/gate/`) is their baseline. At each implementer's
-hand-back: check its commits, print its head statements' axioms myself, read them against the ledger row, guard, merge
+Both the `p`-adic and the three-colour branches joined `Proofs.lean`'s import blocks with `main`'s: the second to land
+will conflict there — keep both blocks. At each implementer's hand-back: check its commits, print its head statements'
+axioms myself, read them against the ledger row, guard, reword its predecessor's lines that item 1022 names, merge
 `--no-ff` (`main` equal to the gated commit in `Proofs/`, `scripts/` and the package files), file its drafts (a Clerk if
-large), run the fact audit and read its last line, rebuild the main tree. Next free slot: the public roadmap's § 3
-items 1–2 (the family, CLS, ℚ(√23, ∛2), Lemma C′); search request 26 (`p = 23`) waits for the next Searcher run.
+large), run the fact audit and read its last line, rebuild the main tree. Search request 26 (`p = 23`) waits for a
+Searcher run on a day the laptop is not building (item 1024).
 
 ## 4. Kooshi's decisions, all answered (W8–W9, items 1009–1010)
 
@@ -66,6 +69,8 @@ items 1–2 (the family, CLS, ℚ(√23, ∛2), Lemma C′); search request 26 (
 4. **The peer-delegation paragraph:** kept (approved before he pushed the generic template).
 
 ## 5. Owed (none urgent)
+
+- **Part B of FS131-KCS1's plan** (the ring lemma, record § 2.6): a successor planner, item 1027 (2).
 
 - **Mathematics / Lean:** Lemma C′ (row 100); the family of 44 fields and CLS (`ROADMAP.md` § 3); `lean4checker` and the
   comparator before any write-up; KCL1's stub to mint (the four-colour chain as the `k = 4` case of the collapse).

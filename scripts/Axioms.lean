@@ -254,6 +254,13 @@ declared that no audited record carries fails as `stale-declaration`. -/
 #print axioms HadwigerNelson.Collapse.thick_of_card
 #print axioms HadwigerNelson.Collapse.thick_of_forall_thickAt
 #print axioms HadwigerNelson.Rigidity.norm_charSum_le_weil
+-- FS131-IQP3 (IMPORTED, on `StandingFive.kloosterman_bound`): the p-adic plane's Weil form (`PadicPlane/Tower`, `PadicPlane/Values`; planned by FS131-KPA1, proved by FS131-IQP1 and FS131-IQP3) — 6
+#print axioms HadwigerNelson.PadicPlane.charSum_unitCircle_ge_weil
+#print axioms HadwigerNelson.PadicPlane.towerRatio_weil
+#print axioms HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_three
+#print axioms HadwigerNelson.PadicPlane.le_borelChromaticNumber_padicPlane
+#print axioms HadwigerNelson.PadicPlane.not_exists_bound_borelChromaticNumber_padicPlane
+#print axioms HadwigerNelson.PadicPlane.one_add_div_le_of_borelColoring
 
 #eval AxiomAudit.declareImport ``HadwigerNelson.Outside.OAI158.no_proper_five_coloring
 
@@ -12915,6 +12922,74 @@ every public record of the nine modules on the standard three or fewer, from the
 #print axioms HadwigerNelson.Collapse.not_isRamified_of_thickAt
 #print axioms HadwigerNelson.Collapse.thickAt_one
 #print axioms HadwigerNelson.Collapse.weil_const_anti
+
+/-! ## FS131-IQP3 — the p-adic plane (`PadicPlane/Basic` … `PadicPlane/Values`, planned by FS131-KPA1, proved by FS131-IQP1
+and FS131-IQP3; FS-66's certificate at 7, `Arith/FibreCert7`, `FibreCert7Check`, `FibreCert7Bound`): every public record of the
+eight modules on the standard three or fewer, from the kernel's print (`data/fs131/iqp3/axioms-all.txt`,
+`data/fs131/iqp3/audit_block.py`). The six records on Weil's bound are under IMPORTED. -/
+
+#print axioms HadwigerNelson.FibreCert.cert7
+#print axioms HadwigerNelson.FibreCert.cert7_nseg
+#print axioms HadwigerNelson.FibreCert.cert7_ok
+#print axioms HadwigerNelson.FibreCert.cert7_p
+#print axioms HadwigerNelson.FibreCert.cert7_scale
+#print axioms HadwigerNelson.FibreCert.cert7_unum
+#print axioms HadwigerNelson.FibreCertSound.model_seven
+#print axioms HadwigerNelson.FibreCertSound.sum_le_seven
+#print axioms HadwigerNelson.FibreCert.cert7_global
+#print axioms HadwigerNelson.FibreCert.cert7_psd
+#print axioms HadwigerNelson.FibreCert.cert7_seg0
+#print axioms HadwigerNelson.PadicPlane.TowerRatio
+#print axioms HadwigerNelson.PadicPlane.TowerRatio.mono
+#print axioms HadwigerNelson.PadicPlane.borelChromaticNumber
+#print axioms HadwigerNelson.PadicPlane.borelChromaticNumber_le_of_coloring
+#print axioms HadwigerNelson.PadicPlane.chromaticNumber_le_borelChromaticNumber
+#print axioms HadwigerNelson.PadicPlane.le_borelChromaticNumber
+#print axioms HadwigerNelson.PadicPlane.norm_le_one_of_sq_add_sq_eq_one
+#print axioms HadwigerNelson.PadicPlane.not_colorable_of_towerRatio
+#print axioms HadwigerNelson.PadicPlane.padicPlane
+#print axioms HadwigerNelson.PadicPlane.towerRatio_one
+#print axioms HadwigerNelson.PadicPlane.exists_level_haar_bad_le
+#print axioms HadwigerNelson.PadicPlane.exists_unitVector_lift
+#print axioms HadwigerNelson.PadicPlane.haar
+#print axioms HadwigerNelson.PadicPlane.haar_le_of_towerRatio
+#print axioms HadwigerNelson.PadicPlane.haar_res_fibre
+#print axioms HadwigerNelson.PadicPlane.haar_univ
+#print axioms HadwigerNelson.PadicPlane.instBorelSpacePadicInt
+#print axioms HadwigerNelson.PadicPlane.instMeasurableSpacePadicInt
+#print axioms HadwigerNelson.PadicPlane.isIndepSet_wellFilled
+#print axioms HadwigerNelson.PadicPlane.isOpen_res_fibre
+#print axioms HadwigerNelson.PadicPlane.le_borelChromaticNumber_of_towerRatio
+#print axioms HadwigerNelson.PadicPlane.one_le_mul_of_borelColoring
+#print axioms HadwigerNelson.PadicPlane.res
+#print axioms HadwigerNelson.PadicPlane.res_apply
+#print axioms HadwigerNelson.PadicPlane.res_surjective
+#print axioms HadwigerNelson.PadicPlane.charSum_levelOne_of_unitCircle
+#print axioms HadwigerNelson.PadicPlane.exists_levelEmbedding
+#print axioms HadwigerNelson.PadicPlane.exists_stablePrime_above
+#print axioms HadwigerNelson.PadicPlane.ratioAtMost_of_charSum_levelOne
+#print axioms HadwigerNelson.PadicPlane.towerRatio_of_charSum
+#print axioms HadwigerNelson.PadicPlane.towerRatio_of_fibreShareBound
+#print axioms HadwigerNelson.PadicPlane.towerRatio_of_ratioAtMost
+#print axioms HadwigerNelson.PadicPlane.borelChromaticNumber_le_chromaticNumber
+#print axioms HadwigerNelson.PadicPlane.borelChromaticNumber_le_of_colorable
+#print axioms HadwigerNelson.PadicPlane.exists_borelColoring_of_colorable
+#print axioms HadwigerNelson.PadicPlane.exists_residueMap
+#print axioms HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_eleven
+#print axioms HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_nineteen
+#print axioms HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_seven
+#print axioms HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_twentyThree_le_eight
+#print axioms HadwigerNelson.PadicPlane.factPrimeEleven
+#print axioms HadwigerNelson.PadicPlane.factPrimeNineteen
+#print axioms HadwigerNelson.PadicPlane.factPrimeSeven
+#print axioms HadwigerNelson.PadicPlane.factPrimeThree
+#print axioms HadwigerNelson.PadicPlane.factPrimeTwentyThree
+#print axioms HadwigerNelson.PadicPlane.fibreShareBound_seven
+#print axioms HadwigerNelson.PadicPlane.five_le_borelChromaticNumber_padicPlane_twentyThree
+#print axioms HadwigerNelson.PadicPlane.le_borelChromaticNumber_of_charSum
+#print axioms HadwigerNelson.PadicPlane.unitQuadrance_zmod_eleven_pow_not_colorable_four
+#print axioms HadwigerNelson.PadicPlane.unitQuadrance_zmod_nineteen_pow_not_colorable_four
+#print axioms HadwigerNelson.PadicPlane.unitQuadrance_zmod_seven_pow_not_colorable_three
 
 /-! ## FS131-ICT3 — three colours on abelian Cayley graphs (`CayleyThree/Circular`, `Fibre`, `Density`; ledger row 79;
 planner FS131-KTC1, implementers FS131-ICT1 to FS131-ICT3): every public record of the three modules, each on the standard

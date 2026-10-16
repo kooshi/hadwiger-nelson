@@ -1,0 +1,18 @@
+Proofs.HadwigerNelson.PadicPlane.Basic: before 11 constants (1 internal); SAME 10; added public 0 []; added private 2; generated on demand []; internal after 7
+    private added: ['HadwigerNelson.PadicPlane.norm_le_one_of_le_of_sq_add_sq', 'HadwigerNelson.PadicPlane.not_sq_eq_neg_one']
+Proofs.HadwigerNelson.PadicPlane.Measure: before 19 constants (4 internal); SAME 15; added public 0 []; added private 4; generated on demand []; internal after 9
+    private added: ['HadwigerNelson.PadicPlane.haar_bad_le', 'HadwigerNelson.PadicPlane.isAddHaarMeasure_haar', 'HadwigerNelson.PadicPlane.res_eq_iff_dist_le', 'HadwigerNelson.PadicPlane.res_eq_of_le']
+Proofs.HadwigerNelson.PadicPlane.Upper: before 5 constants (1 internal); SAME 4; added public 0 []; added private 0; generated on demand []; internal after 3
+RULED OK HadwigerNelson.PadicPlane.exists_levelEmbedding: the binder (hk : 1 ≤ k), item 1014 (1) put back gives the before-print exactly (hash 722125952, raw text equal); controls both differ
+RULED OK HadwigerNelson.PadicPlane.charSum_levelOne_of_unitCircle: the binder (hpP : ((p : ℕ) : 𝓞 (fieldI ⊥)) ∈ P.P), item 1014 (1) put back gives the before-print exactly (hash 423489433, raw text equal); controls both differ
+Proofs.HadwigerNelson.PadicPlane.Tower: before 9 constants (0 internal); SAME 7; added public 0 []; added private 4; generated on demand []; internal after 10
+    private added: ['HadwigerNelson.PadicPlane.card_normOneSet_one', 'HadwigerNelson.PadicPlane.charP_quot_pow', 'HadwigerNelson.PadicPlane.finrank_int_le_two', 'HadwigerNelson.PadicPlane.normOne_iff_pow']
+REMOVED HadwigerNelson.PadicPlane.fibreShareBound_twentyThree: item 1002 (search request 26)
+REMOVED HadwigerNelson.PadicPlane.unitQuadrance_zmod_twentyThree_pow_not_colorable_five: item 1002 (search request 26)
+REMOVED HadwigerNelson.PadicPlane.six_le_borelChromaticNumber_padicPlane_twentyThree: item 1002 (search request 26)
+Proofs.HadwigerNelson.PadicPlane.Values: before 21 constants (0 internal); SAME 18; added public 1 ['HadwigerNelson.PadicPlane.five_le_borelChromaticNumber_padicPlane_twentyThree']; added private 1; generated on demand []; internal after 2
+    private added: ['HadwigerNelson.PadicPlane.charSum_unitCircle_ge_of_circleCos']
+NEW MODULE Proofs.HadwigerNelson.Arith.FibreCert7 (the plan's C7): public 1 ['HadwigerNelson.FibreCert.cert7']; private 0 []; internal 0
+NEW MODULE Proofs.HadwigerNelson.Arith.FibreCert7Check (the plan's C7): public 3 ['HadwigerNelson.FibreCert.cert7_global', 'HadwigerNelson.FibreCert.cert7_psd', 'HadwigerNelson.FibreCert.cert7_seg0']; private 0 []; internal 3
+NEW MODULE Proofs.HadwigerNelson.Arith.FibreCert7Bound (the plan's C7): public 7 ['HadwigerNelson.FibreCert.cert7_nseg', 'HadwigerNelson.FibreCert.cert7_ok', 'HadwigerNelson.FibreCert.cert7_p', 'HadwigerNelson.FibreCert.cert7_scale', 'HadwigerNelson.FibreCert.cert7_unum', 'HadwigerNelson.FibreCertSound.model_seven', 'HadwigerNelson.FibreCertSound.sum_le_seven']; private 0 []; internal 2
+VERDICT CLEAN: 0 failure(s)

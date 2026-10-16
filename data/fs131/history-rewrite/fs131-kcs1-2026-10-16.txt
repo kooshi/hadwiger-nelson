@@ -1,0 +1,5 @@
+# Branch fs131-kcs1, rewritten 2026-10-16 by the privacy filter (inventory items 1025, 1027): its own commits, old new.
+# Its base eeec277b7 became main's ae15e7350 (data/fs131/history-rewrite/main-2026-10-16.txt).
+1b0dd7a44 9223c3925
+09fc7f4c2 bd80ea712
+f59f5feec 620a9fb40
