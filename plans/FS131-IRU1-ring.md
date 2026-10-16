@@ -180,3 +180,17 @@ its planted control (an unknown axiom, a `sorryAx`, a declared import, a misfile
 `UnitRingModels.noRamifiedStableDyadic_sqrt47`, whose type `NoRamifiedStableDyadic F47` unfolds to `∀ P, IsDyadic P →
 IsRamified P → False`; it is a true refutation of the configuration it names (a ramified dyadic stable prime of
 `ℚ(√47, i)`), and it is the model of item 1's scope, so its skip loses nothing.
+
+### 3.5 The first full gate run (on `f73b481ad`): one failure, the gate's own
+
+`data/fs131/iru1/run-gate.sh` (a copy of `data/fs131/clone1/run-gate.sh`, paths changed), run from a snapshot at
+`build/iru1/snap/` (the script finds the root three levels up; a first snapshot at `build/` refused with exit 2, "not the
+repository root", before running any step). Every step green but one (`data/fs131/iru1/gate-run1/run-pass.out`):
+`assumptions exit=1` — "**FAIL stale-condition `HadwigerNelson.Arith.IsUsablePrime`** :: declared a condition, and it is
+concluded by [`HadwigerNelson.Rigidity.exists_isUsablePrime`]: the entry is not needed". The landing brought a theorem that
+concludes the former (LEAN.md § Searching — Lean, FS131-LGT1's line): the `.condition` entry is retired from
+`AssumptionAudit.declared`, by the step's own rule. The vacuity step was green and said its recorded counts are stale:
+"declarations 22519 → 22564, refutations-skipped 243 → 244" in `scripts/vacuity-baseline.txt`'s header and in `CLAUDE.md`
+§ The gate — exactly the +45 and +1 of § 3.4; the baseline's header is refiled here, `CLAUDE.md` drafted (stage 5). The
+audit read "axioms: OK — 10930 clean, 574 axiom-free, 83 imported, 5 declared purchase(s)": 10,885 + 45 against FS131-ICT3's
+gate, the rest unchanged. The gate is run again in full on the commit that carries the two edits.
