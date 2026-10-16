@@ -21,7 +21,7 @@ def block(path,first,last,heading):
 L16=block("plans/SESSION-HANDOFF-2026-10-16.md",47,48,"4. Next, in order")
 L15=block("plans/SESSION-HANDOFF-2026-10-15.md",73,82,"6. Owed, in the new working copy")
 L14=block("plans/SESSION-HANDOFF-2026-10-14.md",83,90,"6. Owed, not done")
-L13=block("plans/SESSION-HANDOFF-2026-10-13.md",113,120,"7. Owed, not done")
+L13=block("plans/SESSION-HANDOFF-2026-10-13.md",113,119,"7. Owed, not done")
 assert L16.startswith("> 3. **The second filing**") and L15.startswith("> - `LEDGER.md` notes") and L14.startswith("> - **The second filing**") and L13.startswith("> - **One filing by the Clerk")
 I948=item(948); I951=item(951)
 b=f'''# Brief {JOB} — the second filing: find every front-page draft the last two weeks left unfiled, file the ready ones word for word, and table the rest
