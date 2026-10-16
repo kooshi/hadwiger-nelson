@@ -320,3 +320,45 @@ density stated for arbitrary generating sets (FS73-T24 calls the standard-genera
 nothing (no reading beyond the derivation's records). The search words: "circular colouring" with "Cayley graph" and "abelian";
 "hom-shift" with "periodic points dense"; "three-colouring" with "height function" and "lattice"; zbMATH author listings for
 Chandgotia and Zhu.
+
+### 3.8 Front-page lines owed (drafts; Keryx files)
+
+1. **`LEDGER.md` row 79, the grade sentence** — now, replacing *"The ⟸, the density of periodic colourings and the statement
+   about forced pairs stay [hand]."* by: *"The ⟸, the periodic form, density, `P = F` and the dichotomy's first clause are planned
+   for the kernel (FS131-KTC1: skeleton `CayleyThree/Circular`, `Fibre`, `Density` on branch `fs131-ktc1`, about 2,230 lines),
+   stated in a wider class than this row's (inventory item 996); they stay [hand] until it lands."* — and at the landing, by:
+   *"The ⟸ and the periodic form are [kernel] since <landing> (standard three), for every abelian group and every `S ∌ 0`
+   (`CayleyThree.colorable_three_iff_bandSet_nonempty`) and for `A` finitely generated with `S` finite
+   (`colorable_three_iff_exists_isPeriodic`; finite generation is needed: `not_isPeriodic_rat`); density and `P = F` for a
+   finite generating `S`, torsion allowed (`exists_isPeriodic_eqOn`, `coloring_mem_closure_isPeriodic`,
+   `periodicForcedSubgroup_three_eq_forcedSubgroup`, `inheritanceQuestion_three`); `F` of finite index ⟺ finitely many
+   colourings, every `k` (`forcedSubgroup_finiteIndex_iff_finite`); the rigidity clause (`exists_affine_of_forall_three_nsmul`);
+   row 79's own class as `…_of_fg_torsionFree`. The dichotomy's cell clause stays [hand]."*
+2. **`CLOSED-QUESTIONS.md` § 2.4**, after its account of what row 79 answers — at the landing: *"Kernel status: the criterion,
+   the periodic form and density are kernel theorems since <landing> (`Proofs/HadwigerNelson/CayleyThree/`), in the widest
+   class their proofs read; what of the widening is in print is the prior-art gate's open question (FS131-KTC1 plan § 3.6)."*
+3. **`CLAUDE.md` § What the kernel holds** — at the landing only, one clause after the three- and four-colour paragraph:
+   *"three colours on abelian Cayley graphs (row 79): colourable iff a character puts every step in `[1/3, 2/3]`, iff
+   periodically colourable (finitely generated, finitely many steps), and periodic colourings dense, so `P = F` at three
+   colours (`CayleyThree/*`)."*
+4. **`ARCHITECTURE.md`**: the three rows are written on the branch (this job's file to touch); at the landing their parentheticals
+   change from "skeleton" to the landing's name.
+5. **`BIBLIOGRAPHY.md`**: no new row (nothing new read). **`LEAN.md`**: a candidate line, if the implementer confirms it: *"The
+   pin has no LP duality and no closedness of finitely generated cones; Stiemke-type steps on a lattice cone go through Dickson's
+   lemma (`Pi.wellQuasiOrderedLE`, `WellQuasiOrderedLE.finite_of_isAntichain`): `CayleyThree.exists_le_mul_of_imp_eq_zero`
+   (FS131-KTC1)."*
+
+### 3.7 The build
+
+`./scripts/build.sh` under the slot (`SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6`, `--mem 6 --cpus 3`, `MEMMAX=6G BATCH=2`), 2026-10-16
+13:59–14:31 UTC: **exit 0**; four modules rebuilt (`CayleyThree.Circular` 1.0 s, `Fibre` 2.9 s, `Density` 3.1 s, the root `Proofs`
+2.0 s); the only warnings in the new modules are the 53 `declaration uses 'sorry'` (14, 26, 13 leaves); sources checked
+unchanged since the build began (`data/fs131/ktc1/build2.sources.md5`). Log: `data/fs131/ktc1/build2.log`. A first build
+(`build1.log`) was stopped by this job at batch 49 of its walk, by process group (exit 143, a deliberate SIGTERM, not a crash),
+because the modeling passes were about to edit the modules it would read; it had compiled nothing of this job's.
+
+**For the implementer's gate** (not run here: a skeleton has `sorry`): the colouring binders read `GENERIC` (`S` a parameter)
+except `not_isPeriodic_rat`, whose carrier `(addCayley {1} : ℚ).Coloring (Fin 3)` is inhabited by `colorable_three_rat`; the
+hypothesis structures are `Winding` (`nonempty_winding_one_two`), `ProperAlong` (`properAlong_one_two`), `IsTight`
+(`isTight_one_two`), the McShane data (`mcshane_model`), a coloured generating set (`coloringOneTwo`); no axiom and no declared
+hypothesis enters; `exists_mem_pi_Icc_of_forall_int` copies a private proof, so the dupnames scan sees no doubled name.

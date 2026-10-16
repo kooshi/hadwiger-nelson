@@ -1,0 +1,15 @@
+slot: admitted lake: mem 5 GiB (hard cap), cpus 0
+Proofs/HadwigerNelson/CayleyThree/Circular.lean:38:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Circular.lean:50:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Circular.lean:53:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Circular.lean:60:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Circular.lean:70:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Circular.lean:75:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Circular.lean:80:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Circular.lean:87:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Circular.lean:94:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Circular.lean:99:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Circular.lean:106:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Circular.lean:112:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Circular.lean:128:0: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/CayleyThree/Circular.lean:132:0: warning: declaration uses `sorry`
