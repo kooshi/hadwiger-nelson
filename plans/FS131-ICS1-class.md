@@ -61,3 +61,36 @@ skeleton modules among them) and `StableAboveUsable`.
 `Instances/SqrtTwentyThreeCbrtTwo` (t2, t4, t1, t5, t3, t6, t7–t10, t11). A build through `./scripts/build.sh` under the
 slot after each module, and a saved stage. Iteration is in a real-copy farm of the compiled library (`build/ics1-farm`,
 gitignored), never evidence.
+
+## Stage 2 — SAVED: the ruled `ClassRatio` edit and `Rigidity/FourColourPlaces`
+
+**The ruled edit** (items 1027 (1) and 1029, `Proofs/HadwigerNelson/Rigidity/ClassRatio.lean`; four declarations, no
+other line): `exists_card_two_pow_sq` (l. 1046), `chromaticNumber_le_four_dyadic` and `chromaticNumber_le_four_of_small`
+made public, each with a docstring and its statement unchanged; `ratioAtMost_dyadic_of_six_le` added after
+`ratioAtMost_dyadic`, stated without the drafted `h2` (item 1029 (b)): `(P) {a} (ha : conjO F a − a ∉ P.P) {f}
+(hQ : |𝓞 ⧸ P| = (2^f)²) (hf : 6 ≤ f) : ∃ c < 1/4, RatioAtMost P c`, its proof `ratioAtMost_dyadic`'s `f ≥ 6` branch
+copied (30 lines). `ratioAtMost_dyadic` itself is untouched: the ruling places the new lemma after it, so it cannot call
+it; a later edit could let it, removing the copy.
+
+**`Rigidity/FourColourPlaces`, twelve leaves, 82 lines, against the plan's 260.** Routes as planned, but with no
+`open private` (ruling 1027 (1)), and two departures:
+- leaf 10 (`five_le_chromaticNumber_levelTarget_of_ratioAtMost`) uses the public `HadwigerNelson.not_colorable_of_mul_lt`
+  (`LocalGlobal`) at `a = ⌊c·N⌋₊`, not `SqrtClassFive`'s private counting lemma: `c ≥ 0` from the empty independent set,
+  `4⌊cN⌋ ≤ 4cN < N`;
+- leaf 12 (`min_localBoundAllLevels_five`) needs no case split: `min(L, 5) ≤ χ(F²) ≤ L_all` and `min(L, 5) ≤ 5`.
+Leaf 1 reads `2 ∉ P` at `Q ∈ {3, 7}` from `stablePrime_card_of_two_notMem` (an odd stable prime's `Q` is a power of an odd
+prime, so `Q ∉ {2, 4, 8, 16, 32}`), and at `2 ∈ P` gets `Q = 2^f` from `exists_card_two_pow_sq`. Two private helpers:
+`not_five_le_of_colorable_four`, `exists_conj_sub_notMem_of_not_isRamified`.
+
+**Re-price after leaves 8 and 1** (`LEAN.md` § The kernel's cost model: from the first two leaves, never the plan's
+table): leaf 8 is 2 lines against 6, leaf 1 is 32 against 50, the module 82 against 260. Re-priced total for part A: about
+0.4–0.7 of the planned 1,100 lines (measured at the end: about 775, § 3).
+
+**The build** (`SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 scripts/slot.py --mem 8 --cpus 4 -- env MEMMAX=8G BATCH=3
+./scripts/build.sh`, on `bd3f68c1b`): exit 0, "build: OK — 738 of 738 batches, 21 module(s) rebuilt, 3 module(s) with
+warnings, 22m32s" — `ClassRatio`, its 19 downstream modules and the root; every warning a `sorry` in the three modules not
+yet proved (4 + 7 + 12 distinct lines); `ClassRatio` and `FourColourPlaces` warning-free (`logs/build-1.log`,
+`logs/build-1-full.log`). Iteration before it was in a real-copy farm (`data/fs131/ics1/lean1.sh`, `build/ics1-farm`), its
+axiom probe `probes/Axioms1.lean`: `five_le_localBound_iff` and the per-place forms on the standard three and
+`kloosterman_bound`, `min_localBoundAllLevels_five` on those and `positive_entropy_rigidity`, `localBoundAllLevels_le_localBound`
+on the standard three.
