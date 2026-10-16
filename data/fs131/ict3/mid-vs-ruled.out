@@ -1,0 +1,3 @@
+TYPE Proofs.HadwigerNelson.CayleyThree.Circular HadwigerNelson.CayleyThree.exists_rat_solution_near
+TYPE Proofs.HadwigerNelson.CayleyThree.Density HadwigerNelson.CayleyThree.exists_isPeriodic_eqOn_of_fg_torsionFree
+differences: 2

@@ -13009,6 +13009,92 @@ eight modules on the standard three or fewer, from the kernel's print (`data/fs1
 #print axioms HadwigerNelson.PadicPlane.unitQuadrance_zmod_nineteen_pow_not_colorable_four
 #print axioms HadwigerNelson.PadicPlane.unitQuadrance_zmod_seven_pow_not_colorable_three
 
+/-! ## FS131-ICT3 — three colours on abelian Cayley graphs (`CayleyThree/Circular`, `Fibre`, `Density`; ledger row 79;
+planner FS131-KTC1, implementers FS131-ICT1 to FS131-ICT3): every public record of the three modules, each on the standard
+three or fewer, from the kernel's print (`data/fs131/ict3/axioms-all.txt`, `tools/fs131_ict2_audit_block.py`). -/
+
+#print axioms HadwigerNelson.CayleyThree.circular
+#print axioms HadwigerNelson.CayleyThree.circularColoring
+#print axioms HadwigerNelson.CayleyThree.circular_add_ne
+#print axioms HadwigerNelson.CayleyThree.coe_rep01
+#print axioms HadwigerNelson.CayleyThree.colorable_three_iff_bandSet_nonempty
+#print axioms HadwigerNelson.CayleyThree.colorable_three_iff_exists_isPeriodic
+#print axioms HadwigerNelson.CayleyThree.colorable_three_iff_of_fg_torsionFree
+#print axioms HadwigerNelson.CayleyThree.colorable_three_rat
+#print axioms HadwigerNelson.CayleyThree.coloring_add_ne
+#print axioms HadwigerNelson.CayleyThree.exists_rat_solution_near
+#print axioms HadwigerNelson.CayleyThree.exists_torsion_mem_bandSet
+#print axioms HadwigerNelson.CayleyThree.finiteIndex_ker_of_nsmul_eq_zero
+#print axioms HadwigerNelson.CayleyThree.ker_le_periods_circularColoring
+#print axioms HadwigerNelson.CayleyThree.not_isPeriodic_rat
+#print axioms HadwigerNelson.CayleyThree.rep01
+#print axioms HadwigerNelson.CayleyThree.rep01_coe
+#print axioms HadwigerNelson.CayleyThree.rep01_mem
+#print axioms HadwigerNelson.CayleyThree.abs_le_l1
+#print axioms HadwigerNelson.CayleyThree.abs_mcshane_add_single_sub
+#print axioms HadwigerNelson.CayleyThree.coloringOneTwo
+#print axioms HadwigerNelson.CayleyThree.coloring_mem_closure_isPeriodic
+#print axioms HadwigerNelson.CayleyThree.even_l1_sub_sum
+#print axioms HadwigerNelson.CayleyThree.exists_isPeriodic_eqOn
+#print axioms HadwigerNelson.CayleyThree.exists_isPeriodic_eqOn_of_fg_torsionFree
+#print axioms HadwigerNelson.CayleyThree.exists_lt_l1_of_sub_nsmul_mem
+#print axioms HadwigerNelson.CayleyThree.exists_periodic_properAlong_eqOn
+#print axioms HadwigerNelson.CayleyThree.forcedSubgroup_finiteIndex_iff_finite
+#print axioms HadwigerNelson.CayleyThree.heightWinding.congr_simp
+#print axioms HadwigerNelson.CayleyThree.inheritanceQuestion_three
+#print axioms HadwigerNelson.CayleyThree.l1_add_le
+#print axioms HadwigerNelson.CayleyThree.l1_neg
+#print axioms HadwigerNelson.CayleyThree.l1_nonneg
+#print axioms HadwigerNelson.CayleyThree.l1_single_one
+#print axioms HadwigerNelson.CayleyThree.l1_sub_le
+#print axioms HadwigerNelson.CayleyThree.mcshane
+#print axioms HadwigerNelson.CayleyThree.mcshane_add
+#print axioms HadwigerNelson.CayleyThree.mcshane_eq_of_consistent
+#print axioms HadwigerNelson.CayleyThree.mcshane_le
+#print axioms HadwigerNelson.CayleyThree.mcshane_mem
+#print axioms HadwigerNelson.CayleyThree.mcshane_model
+#print axioms HadwigerNelson.CayleyThree.periodicForcedSubgroup_three_eq_forcedSubgroup
+#print axioms HadwigerNelson.CayleyThree.IsTight
+#print axioms HadwigerNelson.CayleyThree.abs_pmHeight_sub_le
+#print axioms HadwigerNelson.CayleyThree.convex_fibre
+#print axioms HadwigerNelson.CayleyThree.even_pmHeight_sub_sum
+#print axioms HadwigerNelson.CayleyThree.exists_affine_of_forall_three_nsmul
+#print axioms HadwigerNelson.CayleyThree.exists_le_mul_of_imp_eq_zero
+#print axioms HadwigerNelson.CayleyThree.exists_mem_fibre_gt
+#print axioms HadwigerNelson.CayleyThree.exists_mem_fibre_lt
+#print axioms HadwigerNelson.CayleyThree.exists_mem_pi_Icc_of_forall_int
+#print axioms HadwigerNelson.CayleyThree.exists_rat_mem_fibre_relint
+#print axioms HadwigerNelson.CayleyThree.exists_slack_bound
+#print axioms HadwigerNelson.CayleyThree.fibre
+#print axioms HadwigerNelson.CayleyThree.fibre_coord_of_isTight
+#print axioms HadwigerNelson.CayleyThree.fibre_nonempty
+#print axioms HadwigerNelson.CayleyThree.heightWinding
+#print axioms HadwigerNelson.CayleyThree.heightWinding_apply
+#print axioms HadwigerNelson.CayleyThree.height_word_single
+#print axioms HadwigerNelson.CayleyThree.isTight_flip_iff
+#print axioms HadwigerNelson.CayleyThree.isTight_one_two
+#print axioms HadwigerNelson.CayleyThree.l1
+#print axioms HadwigerNelson.CayleyThree.liftHeight
+#print axioms HadwigerNelson.CayleyThree.liftHeight_add_ker
+#print axioms HadwigerNelson.CayleyThree.liftHeight_add_of_relMap_eq_zero
+#print axioms HadwigerNelson.CayleyThree.liftHeight_add_single
+#print axioms HadwigerNelson.CayleyThree.liftHeight_cast
+#print axioms HadwigerNelson.CayleyThree.liftHeight_eq_of_sub
+#print axioms HadwigerNelson.CayleyThree.liftHeight_of_relMap_eq_zero
+#print axioms HadwigerNelson.CayleyThree.mem_fibre_flip_iff
+#print axioms HadwigerNelson.CayleyThree.pmHeight
+#print axioms HadwigerNelson.CayleyThree.pmHeight_add_ker
+#print axioms HadwigerNelson.CayleyThree.pmHeight_add_single
+#print axioms HadwigerNelson.CayleyThree.pmHeight_cast
+#print axioms HadwigerNelson.CayleyThree.relMap_eq_wsum
+#print axioms HadwigerNelson.CayleyThree.relMap_single
+#print axioms HadwigerNelson.CayleyThree.step_eq_one_of_isTight
+#print axioms HadwigerNelson.CayleyThree.step_eq_two_of_isTight
+#print axioms HadwigerNelson.CayleyThree.surjective_relMap_iff
+#print axioms HadwigerNelson.CayleyThree.three_dvd_liftHeight
+#print axioms HadwigerNelson.CayleyThree.tightSet
+#print axioms HadwigerNelson.ThreeColour.Winding.flip
+
 /-! ## FS131-ICS1 — five colours by field and by class (`Rigidity/FourColourPlaces`, `Arith/StableAboveUsable`,
 `Instances/SqrtFiveClass`, `Instances/SqrtTwentyThreeCbrtTwo`, planned by FS131-KCS1, proved by FS131-ICS1; and the ruled
 `Rigidity/ClassRatio` edit, items 1027 and 1029: three lemmas made public, one added): every public record of the five
