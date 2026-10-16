@@ -367,14 +367,15 @@ theorem exists_mulShift_eq {F : Type*} [Field F] [Finite F] (ψ₀ : AddChar F �
     (AddChar.to_mulShift_inj_of_isPrimitive (AddChar.IsPrimitive.of_ne_one hψ₀)) ?_).2 φ
   rw [Nat.card_eq_fintype_card, Nat.card_eq_fintype_card, AddChar.card_eq]
 
-/-- **The character sums of the norm-one set of `𝔽_{Q²}`, `Q ≡ 3 (mod 4)`**: every non-trivial additive character sums to
-real part at least `−2√Q` over `{u : u ^ (Q + 1) = 1}`, given Weil's bound at the fields of `Q` elements. (The subfield
-`k₀ = {x : x ^ Q = x}` has `Q` elements; `−1` is a square in `k` and not in `k₀`, so `k = k₀ ⊕ k₀·i`, `u ^ (Q + 1) =
-u₁² + u₂²`, and `ψ(u₁ + u₂ i) = ψ₀(b₁u₁ + b₂u₂)` for a non-trivial `ψ₀` of `k₀` and some `b ≠ 0`.) -/
-theorem normOne_charSum_ge {k : Type} [Field k] [Fintype k] [DecidableEq k] {Q : ℕ} (hQ4 : Q % 4 = 3)
+/-- **The character sums of the norm-one set of `𝔽_{Q²}`, `Q ≡ 3 (mod 4)`, two-sided**: every non-trivial additive
+character sums to modulus at most `2√Q` over `{u : u ^ (Q + 1) = 1}`, given Weil's bound at the fields of `Q` elements.
+(The subfield `k₀ = {x : x ^ Q = x}` has `Q` elements; `−1` is a square in `k` and not in `k₀`, so `k = k₀ ⊕ k₀·i`,
+`u ^ (Q + 1) = u₁² + u₂²`, and `ψ(u₁ + u₂ i) = ψ₀(b₁u₁ + b₂u₂)` for a non-trivial `ψ₀` of `k₀` and some `b ≠ 0`; then
+`circle_sum_le` at radius `1`.) -/
+theorem norm_normOne_charSum_le {k : Type} [Field k] [Fintype k] [DecidableEq k] {Q : ℕ} (hQ4 : Q % 4 = 3)
     (hcard : Fintype.card k = Q ^ 2)
     (hK : ∀ (F : Type) [Field F] [Fintype F] [DecidableEq F], Fintype.card F = Q → KloostermanBound F) (ψ : AddChar k ℂ)
-    (hψ : ψ ≠ 1) : -(2 * Real.sqrt Q) ≤ (∑ u ∈ univ.filter (fun u : k => u ^ (Q + 1) = 1), ψ u).re := by
+    (hψ : ψ ≠ 1) : ‖∑ u ∈ univ.filter (fun u : k => u ^ (Q + 1) = 1), ψ u‖ ≤ 2 * Real.sqrt Q := by
   -- the subfield `k₀` fixed by the `Q`-th power map, with `Q` elements
   obtain ⟨τ, hτ⟩ := exists_ringHom_pow hcard
   let k₀ : Subfield k := τ.eqLocusField (RingHom.id k)
@@ -469,7 +470,16 @@ theorem normOne_charSum_ge {k : Type} [Field k] [Fintype k] [DecidableEq k] {Q :
     · rw [if_neg h, if_neg fun h' => h ((hnorm s).mp h')]
   have hle := circle_sum_le hodd₀ (hK k₀ hcard₀) ψ₀ hψ₀' (a := 1) one_ne_zero (b₁, b₂) hb
   rw [hcard₀, ← hsum] at hle
-  exact neg_le_of_abs_le ((Complex.abs_re_le_norm _).trans hle)
+  exact hle
+
+/-- **The character sums of the norm-one set of `𝔽_{Q²}`, `Q ≡ 3 (mod 4)`**: every non-trivial additive character sums to
+real part at least `−2√Q` over `{u : u ^ (Q + 1) = 1}`, given Weil's bound at the fields of `Q` elements — the real part
+of the two-sided bound `norm_normOne_charSum_le`. -/
+theorem normOne_charSum_ge {k : Type} [Field k] [Fintype k] [DecidableEq k] {Q : ℕ} (hQ4 : Q % 4 = 3)
+    (hcard : Fintype.card k = Q ^ 2)
+    (hK : ∀ (F : Type) [Field F] [Fintype F] [DecidableEq F], Fintype.card F = Q → KloostermanBound F) (ψ : AddChar k ℂ)
+    (hψ : ψ ≠ 1) : -(2 * Real.sqrt Q) ≤ (∑ u ∈ univ.filter (fun u : k => u ^ (Q + 1) = 1), ψ u).re :=
+  neg_le_of_abs_le ((Complex.abs_re_le_norm _).trans (norm_normOne_charSum_le hQ4 hcard hK ψ hψ))
 
 /-- **The planes' floor**: `χ(Γ_Q) ≥ 7` for `Q ≡ 3 (mod 4)`, `Q ≥ 98`, over Weil's bound at the fields of `Q` elements
 (`1 + (Q + 1)/(2√Q) > 6` exactly when `Q ≥ 98`). -/

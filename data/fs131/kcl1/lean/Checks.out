@@ -1,0 +1,244 @@
+slot: waiting (ledger 22 + 8 > budget 22 GiB)
+slot: waiting (ledger 18 + 8 > budget 22 GiB)
+slot: admitted lake: mem 8 GiB (hard cap), cpus 0,1
+@Measure.measure_prod_null : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α] [inst_1 : MeasurableSpace β]
+  {μ : Measure α} {ν : Measure β} [SFinite ν] {s : Set (α × β)},
+  MeasurableSet s → ((μ.prod ν) s = 0 ↔ (fun x => ν (Prod.mk x ⁻¹' s)) =ᵐ[μ] 0)
+@MeasurableEquiv.prodAssoc : {α : Type u_1} →
+  {β : Type u_2} →
+    {γ : Type u_3} →
+      [inst : MeasurableSpace α] →
+        [inst_1 : MeasurableSpace β] → [inst_2 : MeasurableSpace γ] → (α × β) × γ ≃ᵐ α × β × γ
+@measurable_measure_prodMk_left : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α]
+  [inst_1 : MeasurableSpace β] {ν : Measure β} [SFinite ν] {s : Set (α × β)},
+  MeasurableSet s → Measurable fun x => ν (Prod.mk x ⁻¹' s)
+@ae_all_iff : ∀ {α : Type u_1} {F : Type u_2} [inst : FunLike F (Set α) ENNReal] [inst_1 : OuterMeasureClass F α]
+  {μ : F} {ι : Sort u_3} [Countable ι] {p : α → ι → Prop},
+  (∀ᵐ (a : α) ∂μ, ∀ (i : ι), p a i) ↔ ∀ (i : ι), ∀ᵐ (a : α) ∂μ, p a i
+@AddChar.sum_apply_eq_ite : ∀ {α : Type u_1} [inst : AddCommGroup α] [inst_1 : Fintype α] [inst_2 : DecidableEq α]
+  (a : α), ∑ ψ, ψ a = if a = 0 then ↑(Fintype.card α) else 0
+@AddChar.card_eq : ∀ {α : Type u_1} [inst : AddCommGroup α] [inst_1 : Fintype α],
+  Fintype.card (AddChar α ℂ) = Fintype.card α
+@Fintype.piFinset : {α : Type u_1} →
+  [DecidableEq α] → [Fintype α] → {δ : α → Type u_2} → ((a : α) → Finset (δ a)) → Finset ((a : α) → δ a)
+@Finset.prod_univ_sum : ∀ {ι : Type u_1} {R : Type u_2} [inst : CommSemiring R] [inst_1 : DecidableEq ι]
+  {κ : ι → Type u_3} [inst_2 : Fintype ι] (t : (i : ι) → Finset (κ i)) (f : (i : ι) → κ i → R),
+  ∏ i, ∑ j ∈ t i, f i j = ∑ x ∈ Fintype.piFinset t, ∏ i, f i (x i)
+@integral_re : ∀ {X : Type u_1} [inst : MeasurableSpace X] {μ : Measure X} {𝕜 : Type u_2} [inst_1 : RCLike 𝕜]
+  {f : X → 𝕜}, Integrable f μ → ∫ (x : X), RCLike.re (f x) ∂μ = RCLike.re (∫ (x : X), f x ∂μ)
+@Nat.le_self_pow : ∀ {n : ℕ}, n ≠ 0 → ∀ (a : ℕ), a ≤ a ^ n
+@SimpleGraph.chromaticNumber_le_iff_colorable : ∀ {V : Type u_1} {G : SimpleGraph V} {n : ℕ},
+  G.chromaticNumber ≤ ↑n ↔ G.Colorable n
+@Ideal.finite_setOf_absNorm_le : ∀ {S : Type u_1} [inst : CommRing S] [inst_1 : IsDedekindDomain S]
+  [inst_2 : Module.Free ℤ S] [Module.Finite ℤ S] [CharZero S] (n : ℕ), {I | Ideal.absNorm I ≤ n}.Finite
+@HadwigerNelson.Rigidity.isSpectralMeasureOf_condExpL2 : ∀ {R : Type u_1} [inst : AddCommGroup R] {Ω : Type u_2}
+  [inst_1 : MeasurableSpace Ω] {μ : Measure Ω} [Countable R] (t : TopologicalSpace R),
+  IsTopologicalAddGroup R →
+    (nhds 0).IsCountablyGenerated →
+      HadwigerNelson.SpectralInputs.BochnerOn t →
+        MeasurableSet (HadwigerNelson.SpectralInputs.contChars t) →
+          ∀ [inst_3 : IsProbabilityMeasure μ] (T : R → Ω → Ω) (hT : ∀ (y : R), MeasurePreserving (T y) μ μ),
+            (∀ (x y : R), T (x + y) = T x ∘ T y) →
+              ∀ {f : ↥(Lp ℝ 2 μ)} {σ : Measure (AddChar R Circle)},
+                HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT f σ →
+                  HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT (↑((condExpL2 ℝ ℝ ⋯) f))
+                      (σ.restrict (HadwigerNelson.SpectralInputs.contChars t)) ∧
+                    HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT (f - ↑((condExpL2 ℝ ℝ ⋯) f))
+                      (σ.restrict (HadwigerNelson.SpectralInputs.contChars t)ᶜ)
+@HadwigerNelson.Rigidity.exists_isSpectralMeasureOf : ∀ {R : Type u_1} [inst : AddCommGroup R] {Ω : Type u_2}
+  [inst_1 : MeasurableSpace Ω] {μ : Measure Ω} [Countable R] (T : R → Ω → Ω)
+  (hT : ∀ (y : R), MeasurePreserving (T y) μ μ),
+  (∀ (x y : R), T (x + y) = T x ∘ T y) →
+    ∀ (f : ↥(Lp ℝ 2 μ)), ∃ σ, HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT f σ
+@HadwigerNelson.Rigidity.measure_eq_of_fourier : ∀ {G : Type u_1} [inst : AddCommGroup G] [Countable G]
+  {σ σ' : Measure (AddChar G Circle)} [IsFiniteMeasure σ] [IsFiniteMeasure σ'],
+  (∀ (r : G), ∫ (χ : AddChar G Circle), ↑(χ r) ∂σ = ∫ (χ : AddChar G Circle), ↑(χ r) ∂σ') → σ = σ'
+HadwigerNelson.Rigidity.Counting.tendsto_haarK_bad : ∀ (F : Subfield ℝ) [inst : NumberField ↥F]
+  {Y : Set (HadwigerNelson.Rigidity.Counting.K F)},
+  MeasurableSet Y →
+    ∀ {κ : ENNReal},
+      0 < κ →
+        Filter.Tendsto
+          (fun k =>
+            (HadwigerNelson.Rigidity.Counting.haarK F)
+              {x |
+                x ∈ Y ∧
+                  (HadwigerNelson.Rigidity.Counting.haarK F)
+                      (Y ∩
+                        ⇑(HadwigerNelson.Rigidity.Counting.proj F k) ⁻¹'
+                          {(HadwigerNelson.Rigidity.Counting.proj F k) x}) ≤
+                    (1 - κ) *
+                      (HadwigerNelson.Rigidity.Counting.haarK F)
+                        (⇑(HadwigerNelson.Rigidity.Counting.proj F k) ⁻¹'
+                          {(HadwigerNelson.Rigidity.Counting.proj F k) x})})
+          Filter.atTop (nhds 0)
+HadwigerNelson.Rigidity.Counting.haarK_proj_preimage : ∀ (F : Subfield ℝ) [inst : NumberField ↥F] (k : ℕ)
+  {a : HadwigerNelson.Rigidity.Counting.Lev F k},
+  a ∈ Set.range ⇑(HadwigerNelson.Rigidity.Counting.proj F k) →
+    (HadwigerNelson.Rigidity.Counting.haarK F) (⇑(HadwigerNelson.Rigidity.Counting.proj F k) ⁻¹' {a}) =
+      (↑(Nat.card ↑(Set.range ⇑(HadwigerNelson.Rigidity.Counting.proj F k))))⁻¹
+HadwigerNelson.Rigidity.Counting.mem_closure_ιG : ∀ (F : Subfield ℝ) [inst : NumberField ↥F] (θ : ℝ)
+  {u : ↥(HadwigerNelson.SpectralChain.unitRing F)},
+  u ∈ HadwigerNelson.Rigidity.Counting.unitVectorsR F →
+    ((HadwigerNelson.Rigidity.Counting.Delta F) (Complex.exp (↑θ * Complex.I)),
+        (HadwigerNelson.Rigidity.Counting.ιK F) u) ∈
+      closure (⇑(HadwigerNelson.Rigidity.Counting.ιG F) '' HadwigerNelson.Rigidity.Counting.unitVectorsR F)
+@HadwigerNelson.Rigidity.Counting.exists_extension : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (μ : HadwigerNelson.SpectralChain.InvariantColouring F) {σ : Measure (HadwigerNelson.SpectralChain.Dual F)},
+  HadwigerNelson.SpectralChain.IsTraceSpectral F μ.μ σ →
+    σ (HadwigerNelson.Rigidity.TA F)ᶜ = 0 →
+      ∃ f,
+        Measurable (Function.uncurry f) ∧
+          ∀ (g t : HadwigerNelson.Rigidity.Counting.G F),
+            t ∈ closure (⇑(HadwigerNelson.Rigidity.Counting.ιG F) '' HadwigerNelson.Rigidity.Counting.unitVectorsR F) →
+              μ.μ {c | f c g = f c (g + t)} = 0
+@HadwigerNelson.Rigidity.Counting.exists_slice : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (μ : HadwigerNelson.SpectralChain.InvariantColouring F) {σ : Measure (HadwigerNelson.SpectralChain.Dual F)},
+  HadwigerNelson.SpectralChain.IsTraceSpectral F μ.μ σ →
+    σ (HadwigerNelson.Rigidity.TA F)ᶜ = 0 → ∃ φ, Measurable φ ∧ HadwigerNelson.Rigidity.Counting.SliceEdgeNull φ
+@HadwigerNelson.Rigidity.Counting.exists_normOneL_residues : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (Φ : Finset (HadwigerNelson.SpectralChain.StablePrime F)),
+  (∀ P ∈ Φ, ¬HadwigerNelson.Rigidity.IsRamified P) →
+    ∀ (m : ℕ)
+      (s :
+        (P : HadwigerNelson.SpectralChain.StablePrime F) →
+          P ∈ Φ → NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P ^ m),
+      (∀ (P : HadwigerNelson.SpectralChain.StablePrime F) (hP : P ∈ Φ),
+          s P hP ∈ HadwigerNelson.Rigidity.Counting.normOneQ P m) →
+        ∃ x,
+          ∃ (hx : x ∈ HadwigerNelson.Rigidity.Counting.normOneL F),
+            ∀ (P : HadwigerNelson.SpectralChain.StablePrime F) (hP : P ∈ Φ), (P.residue m) ⟨x, ⋯⟩ = s P hP
+HadwigerNelson.Rigidity.Counting.range_proj : ∀ (F : Subfield ℝ) [inst : NumberField ↥F] (k : ℕ),
+  Set.range ⇑(HadwigerNelson.Rigidity.Counting.proj F k) = Set.range ⇑(HadwigerNelson.Rigidity.Counting.levR F k)
+@HadwigerNelson.Rigidity.henselCount_of_two_notMem : ∀ {F : Subfield ℝ} [NumberField ↥F]
+  (P : HadwigerNelson.SpectralChain.StablePrime F),
+  2 ∉ P.P →
+    ∀ {Q : ℕ},
+      Nat.card (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P) = Q ^ 2 →
+        HadwigerNelson.CertLink.HenselCount P Q
+@HadwigerNelson.Rigidity.newCharBound_of_two_notMem : ∀ {F : Subfield ℝ} [NumberField ↥F]
+  (P : HadwigerNelson.SpectralChain.StablePrime F),
+  2 ∉ P.P →
+    ∀ {Q : ℕ},
+      Nat.card (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P) = Q ^ 2 →
+        HadwigerNelson.CertLink.NewCharBound P Q
+HadwigerNelson.Rigidity.contChars_tauPrime : ∀ (F : Subfield ℝ) [inst : NumberField ↥F],
+  HadwigerNelson.SpectralInputs.contChars (HadwigerNelson.Rigidity.tauPrime F) = HadwigerNelson.Rigidity.TA F
+HadwigerNelson.Rigidity.bochnerOn_tauPrime : ∀ (F : Subfield ℝ) [inst : NumberField ↥F],
+  HadwigerNelson.SpectralInputs.BochnerOn (HadwigerNelson.Rigidity.tauPrime F)
+@HadwigerNelson.Rigidity.factorLaw_trace_null : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (μ : HadwigerNelson.SpectralChain.InvariantColouring F) {σ' : Measure (HadwigerNelson.SpectralChain.Dual F)},
+  HadwigerNelson.SpectralChain.IsTraceSpectral F (Measure.map (HadwigerNelson.Rigidity.factorColouring μ) μ.μ) σ' →
+    σ' (HadwigerNelson.Rigidity.TA F)ᶜ = 0
+@HadwigerNelson.Rigidity.equalAtUnits_of_not_neg : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (μ : HadwigerNelson.SpectralChain.InvariantColouring F) {σ : Measure (HadwigerNelson.SpectralChain.Dual F)},
+  HadwigerNelson.SpectralChain.IsTraceSpectral F μ.μ σ →
+    ¬∫ (χ : HadwigerNelson.SpectralChain.Dual F) in (HadwigerNelson.Rigidity.TA F)ᶜ, (↑(χ 1)).re ∂σ < 0 →
+      HadwigerNelson.Rigidity.EqualAtUnits μ
+@HadwigerNelson.Rigidity.setIntegral_compl_TA_re : ∀ {F : Subfield ℝ} [inst : NumberField ↥F]
+  (μ : HadwigerNelson.SpectralChain.InvariantColouring F) {σ : Measure (HadwigerNelson.SpectralChain.Dual F)},
+  HadwigerNelson.SpectralChain.IsTraceSpectral F μ.μ σ →
+    ∀ (u : ↑(HadwigerNelson.SpectralChain.unitVectors F)),
+      ∫ (χ : HadwigerNelson.SpectralChain.Dual F) in (HadwigerNelson.Rigidity.TA F)ᶜ,
+          (↑(χ (HadwigerNelson.SpectralChain.uvRing u))).re ∂σ =
+        -(4 / 3) *
+          ∑ j,
+            ∫ (c : ↥(HadwigerNelson.SpectralChain.unitRing F) → Fin 4),
+              HadwigerNelson.SpectralInputs.condLaw (HadwigerNelson.Rigidity.colourFactor μ) μ.μ (fun c => c) 0 j c *
+                HadwigerNelson.SpectralInputs.condLaw (HadwigerNelson.Rigidity.colourFactor μ) μ.μ (fun c => c)
+                  (HadwigerNelson.SpectralChain.uvRing u) j c ∂μ.μ
+HadwigerNelson.Rigidity.invariantMeasureOnClosed_of_countable : ∀ (F : Subfield ℝ)
+  [Countable ↥(HadwigerNelson.SpectralChain.unitRing F)], HadwigerNelson.SpectralChain.InvariantMeasureOnClosed F
+@HadwigerNelson.Rigidity.two_notMem_of_isSquare : ∀ {F : Subfield ℝ} (P : HadwigerNelson.SpectralChain.StablePrime F)
+  {a : ℕ}, IsSquare ↑a → a % 8 = 7 → 2 ∉ P.P
+@HadwigerNelson.Rigidity.stablePrime_card_of_two_notMem : ∀ {F : Subfield ℝ} [NumberField ↥F]
+  (P : HadwigerNelson.SpectralChain.StablePrime F),
+  2 ∉ P.P →
+    ∃ p n,
+      Nat.Prime p ∧
+        p % 4 = 3 ∧
+          Odd n ∧
+            ↑p ∈ P.P ∧
+              Nat.card (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P) = (p ^ n) ^ 2 ∧
+                ∀ (d : ℕ), IsSquare ↑d → IsSquare ↑d
+@HadwigerNelson.Rigidity.IsRamified.isDyadic : ∀ {F : Subfield ℝ} {P : HadwigerNelson.SpectralChain.StablePrime F},
+  HadwigerNelson.Rigidity.IsRamified P → HadwigerNelson.Rigidity.IsDyadic P
+@HadwigerNelson.SpectralInputs.si4 : ∀ {Ω : Type u_1} {V : Type u_2} [Countable V] (𝒜 : MeasurableSpace Ω)
+  [m0 : MeasurableSpace Ω] (μ : Measure Ω) [IsProbabilityMeasure μ],
+  𝒜 ≤ m0 →
+    ∀ (c : Ω → V → Fin 4),
+      (∀ (x : V), Measurable fun ω => c ω x) →
+        ∀ (adj : V → V → Prop),
+          (∀ (x y : V),
+              adj x y →
+                ∀ (j : Fin 4),
+                  ∫ (ω : Ω),
+                      μ[{ω' | c ω' x = j}.indicator fun x => 1 | 𝒜] ω *
+                        μ[{ω' | c ω' y = j}.indicator fun x => 1 | 𝒜] ω ∂μ =
+                    0) →
+            ∀ (f : Finset (Fin 4) → Fin 4),
+              (∀ (s : Finset (Fin 4)), s.Nonempty → f s ∈ s) →
+                (∀ (x : V), Measurable fun ω => f (HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c ω x)) ∧
+                  (∀ᵐ (ω : Ω) ∂μ,
+                      ∀ (x y : V),
+                        adj x y →
+                          f (HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c ω x) ≠
+                            f (HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c ω y)) ∧
+                    ∀ᵐ (ω : Ω) ∂μ, ∀ (x : V), c ω x ∈ HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c ω x
+@HadwigerNelson.SpectralInputs.si4_equivariant : ∀ {Ω : Type u_1} {V : Type u_2} [Countable V] (𝒜 : MeasurableSpace Ω)
+  [m0 : MeasurableSpace Ω] (μ : Measure Ω) [IsProbabilityMeasure μ],
+  𝒜 ≤ m0 →
+    ∀ (c : Ω → V → Fin 4),
+      (∀ (x : V), Measurable fun ω => c ω x) →
+        ∀ {S : Ω → Ω},
+          MeasurePreserving S μ μ →
+            MeasurableSpace.comap S 𝒜 = 𝒜 →
+              ∀ (π : V → V),
+                (∀ (ω : Ω) (x : V), c (S ω) x = c ω (π x)) →
+                  ∀ᵐ (ω : Ω) ∂μ,
+                    ∀ (x : V),
+                      HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c (S ω) x =
+                        HadwigerNelson.SpectralInputs.condSupport 𝒜 μ c ω (π x)
+@HadwigerNelson.SpectralInputs.spectral_carried_iff : ∀ {R : Type u_1} [inst : AddCommGroup R] {Ω : Type u_2}
+  [inst_1 : MeasurableSpace Ω] {μ : Measure Ω} (t : TopologicalSpace R),
+  IsTopologicalAddGroup R →
+    (nhds 0).IsCountablyGenerated →
+      HadwigerNelson.SpectralInputs.BochnerOn t →
+        ∀ (T : R → Ω → Ω) (hT : ∀ (y : R), MeasurePreserving (T y) μ μ),
+          (∀ (x y : R), T (x + y) = T x ∘ T y) →
+            ∀ {f : ↥(Lp ℝ 2 μ)} {σ : Measure (AddChar R Circle)},
+              HadwigerNelson.SpectralInputs.IsSpectralMeasureOf T hT f σ →
+                (σ (HadwigerNelson.SpectralInputs.contChars t)ᶜ = 0 ↔
+                  f ∈ HadwigerNelson.SpectralInputs.contVec T hT (nhds 0))
+@HadwigerNelson.StandingFive.circle_sum_le_weil : ∀ {F : Type u_1} [inst : Field F] [inst_1 : Fintype F]
+  [inst_2 : DecidableEq F],
+  ringChar F ≠ 2 →
+    ∀ (ψ : AddChar F ℂ),
+      ψ ≠ 1 →
+        ∀ (a : F) (b : F × F),
+          b ≠ 0 →
+            a ≠ 0 ∨ b.1 ^ 2 + b.2 ^ 2 ≠ 0 →
+              ‖∑ s with s.1 ^ 2 + s.2 ^ 2 = a, ψ (b.1 * s.1 + b.2 * s.2)‖ ≤ 2 * √↑(Fintype.card F)
+@HadwigerNelson.StandingFive.normOne_charSum_ge : ∀ {k : Type} [inst : Field k] [inst_1 : Fintype k]
+  [inst_2 : DecidableEq k] {Q : ℕ},
+  Q % 4 = 3 →
+    Fintype.card k = Q ^ 2 →
+      (∀ (F : Type) [inst : Field F] [inst_3 : Fintype F] [inst_4 : DecidableEq F],
+          Fintype.card F = Q → HadwigerNelson.StandingFive.KloostermanBound F) →
+        ∀ (ψ : AddChar k ℂ), ψ ≠ 1 → -(2 * √↑Q) ≤ (∑ u with u ^ (Q + 1) = 1, ψ u).re
+@HadwigerNelson.RatioBound.sum_fourier_sq : ∀ {G : Type u_1} [inst : AddCommGroup G] [inst_1 : Fintype G]
+  [DecidableEq G] (I : Finset G), ∑ ψ, (∑ x ∈ I, ψ x) * (starRingEnd ℂ) (∑ x ∈ I, ψ x) = ↑(Fintype.card G) * ↑I.card
+HadwigerNelson.Plane.chromaticNumber_plane_le_chiM0 : (HadwigerNelson.unitDistance ℂ).chromaticNumber ≤
+  HadwigerNelson.Plane.chiM0
+@HadwigerNelson.Plane.chiM0_le : ∀ {k : ℕ} (c : HadwigerNelson.Plane.AeColouring k), HadwigerNelson.Plane.chiM0 ≤ ↑k
+HadwigerNelson.Bridge.chromaticNumber_planeOver_le_plane : ∀ (F : Subfield ℝ),
+  (SimpleGraph.induce (HadwigerNelson.planeOver F) (HadwigerNelson.unitDistance ℂ)).chromaticNumber ≤
+    (HadwigerNelson.unitDistance ℂ).chromaticNumber
+HadwigerNelson.Bridge.chromaticNumber_complex_le_seven : (HadwigerNelson.unitDistance ℂ).chromaticNumber ≤ 7
+@HadwigerNelson.SquareClass.sqrt_mem_fieldOfRadicands : ∀ {D : Set ℕ} {d : ℕ},
+  d ∈ D → √↑d ∈ HadwigerNelson.SquareClass.fieldOfRadicands D
+HadwigerNelson.UpperHalf.exists_stablePrime_rat : ∃ P,
+  2 ∈ P.P ∧
+    ∀ (x : NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI ⊥)),
+      (HadwigerNelson.SpectralChain.conjO ⊥) x - x ∈ P.P
+@AddChar.exists_apply_ne_zero : ∀ {α : Type u_1} [inst : AddCommGroup α] {a : α} [Finite α], (∃ ψ, ψ a ≠ 1) ↔ a ≠ 0

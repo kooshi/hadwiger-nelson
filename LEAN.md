@@ -88,6 +88,11 @@ independent replay is single-threaded and RAM-heavy, so it runs once, on hardwar
 new mathematics. It cannot re-check a purchase (a purchase is an axiom, and every kernel accepts axioms), so "replayed through an
 independent kernel" covers the kernel-checked part only.
 
+
+### Ported outside proofs
+
+The release's transfer `Outside.OAI158.proper_to_borel_weak` — a proper `k`-colouring of the plane gives a Borel one proper at almost every unit pair — is no longer an import: it is the release's theorem with its proof ported (31 modules generated whole from the release's files, `Outside/OAI158Basic` … `OAI158BorelTransfer`; FS131-KO1 to FS131-IPD1), every proof checked by this kernel at this pin on the standard three; its stored statement is the release's term for term and the deleted axiom's (FS131-LP1's read-back across pins; FS131-IPD1's switch), and the twelve records that rested on it are clean (three of them FS-131's: `χ(ℝ²) = χ_m(ℝ²)`, the Lebesgue-measurable chromatic number, in two forms and colour by colour, `Plane/LebesgueNumber`); its first import, `[Falconer1981]` Lemma 2 (i), is a theorem since FS131-IF1. The release's rigidity step `Outside.OAI158.Spectral.residual_fourier` (`[OAIMath2026]` family 158, `Ergodicity.lean` l. 403: its Theorem 2.3 composed with the spectral theorem) never entered `main` as an import: FS-133's branch declared it as an axiom over six copied definitions, and at the density equality's landing the copies and the axiom were deleted and the port's theorem read, its stored type the declared one's constant for constant (FS133-LD1); the fourteen records that rested on it there are clean. Four lemmas of `[OAIMath2026]` family 158 that FS-132's first theorem stands on — `Outside.OAI158.palette_transfer_pair`, `palette_sixty_disjoint`, `two_state_impossible` and `mem_spatialSupport_ae` — are not imports: their proofs are ported (the palette chain and 163 further declarations in nine generated modules, FS132-K1 and FS132-I2), kernel-checked at this pin on the standard three, and rest on no declared outside theorem; the release's licence text is kept beside them (`Outside/OAIMath2026-LICENSE.txt`).
+
 ## Toolchain
 
 Managed by **elan** and pinned by `lean-toolchain` (`leanprover/lean4:v4.32.0`); the toolchain and the Mathlib pin move as one unit.

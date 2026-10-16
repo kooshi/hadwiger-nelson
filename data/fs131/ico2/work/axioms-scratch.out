@@ -1,0 +1,22 @@
+slot: admitted ico2: mem 8 GiB (hard cap), cpus 0,1
+'HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.Collapse.chromaticNumber_planeOver_eq_plane_of_thick' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity]
+'HadwigerNelson.Collapse.chromaticNumber_planeOver_deGrey' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound]
+'HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087_six_or_seven' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity,
+ HadwigerNelson.StandingFive.kloosterman_bound,
+ HadwigerNelson.Outside.OAI158.no_proper_five_coloring]
+'HadwigerNelson.Collapse.not_thick_bot' depends on axioms: [propext, Classical.choice, Quot.sound]

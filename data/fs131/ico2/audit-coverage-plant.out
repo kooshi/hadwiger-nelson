@@ -1,0 +1,122 @@
+MODULE Proofs.HadwigerNelson.Arith.FloorPlanes: CLEAN 19
+MODULE Proofs.HadwigerNelson.Collapse.Colouring: CLEAN 24
+MODULE Proofs.HadwigerNelson.Collapse.Dichotomy: CLEAN 20, positive_entropy_rigidity 2
+MODULE Proofs.HadwigerNelson.Collapse.Headline: CLEAN 12, kloosterman_bound 2, kloosterman_bound+no_proper_five_coloring+positive_entropy_rigidity 1, kloosterman_bound+positive_entropy_rigidity 3, positive_entropy_rigidity 2
+MODULE Proofs.HadwigerNelson.Collapse.Mixing: CLEAN 9
+MODULE Proofs.HadwigerNelson.Collapse.Selection: CLEAN 10
+MODULE Proofs.HadwigerNelson.Collapse.Slice: CLEAN 5, positive_entropy_rigidity 1
+MODULE Proofs.HadwigerNelson.Collapse.Thick: CLEAN 14, kloosterman_bound 3
+MODULE Proofs.HadwigerNelson.Rigidity.ClassRatio: CLEAN 5, kloosterman_bound 6
+UNFILED HadwigerNelson.StandingFive.KloostermanBound (Proofs.HadwigerNelson.Arith.FloorPlanes): class CLEAN
+UNFILED HadwigerNelson.StandingFive.norm_normOne_charSum_le (Proofs.HadwigerNelson.Arith.FloorPlanes): class CLEAN
+UNFILED HadwigerNelson.Rigidity.norm_charSum_le_weil (Proofs.HadwigerNelson.Rigidity.ClassRatio): class IMPORTED
+UNFILED HadwigerNelson.Collapse.LevImg (Proofs.HadwigerNelson.Collapse.Thick): class CLEAN
+UNFILED HadwigerNelson.Collapse.Thick (Proofs.HadwigerNelson.Collapse.Thick): class CLEAN
+UNFILED HadwigerNelson.Collapse.ThickAt (Proofs.HadwigerNelson.Collapse.Thick): class CLEAN
+UNFILED HadwigerNelson.Collapse.ThickAt.mono (Proofs.HadwigerNelson.Collapse.Thick): class CLEAN
+UNFILED HadwigerNelson.Collapse.exists_addChar_extend (Proofs.HadwigerNelson.Collapse.Thick): class CLEAN
+UNFILED HadwigerNelson.Collapse.finite_levU (Proofs.HadwigerNelson.Collapse.Thick): class CLEAN
+UNFILED HadwigerNelson.Collapse.image_levR_unitVectors_of_unramified (Proofs.HadwigerNelson.Collapse.Thick): class CLEAN
+UNFILED HadwigerNelson.Collapse.levU (Proofs.HadwigerNelson.Collapse.Thick): class CLEAN
+UNFILED HadwigerNelson.Collapse.levU_nonempty (Proofs.HadwigerNelson.Collapse.Thick): class CLEAN
+UNFILED HadwigerNelson.Collapse.levelThick (Proofs.HadwigerNelson.Collapse.Thick): class CLEAN
+UNFILED HadwigerNelson.Collapse.norm_sum_piFinset_le (Proofs.HadwigerNelson.Collapse.Thick): class CLEAN
+UNFILED HadwigerNelson.Collapse.not_isRamified_of_thickAt (Proofs.HadwigerNelson.Collapse.Thick): class CLEAN
+UNFILED HadwigerNelson.Collapse.thickAt_one (Proofs.HadwigerNelson.Collapse.Thick): class CLEAN
+UNFILED HadwigerNelson.Collapse.thickAt_weil (Proofs.HadwigerNelson.Collapse.Thick): class IMPORTED
+UNFILED HadwigerNelson.Collapse.thick_of_card (Proofs.HadwigerNelson.Collapse.Thick): class IMPORTED
+UNFILED HadwigerNelson.Collapse.thick_of_forall_thickAt (Proofs.HadwigerNelson.Collapse.Thick): class IMPORTED
+UNFILED HadwigerNelson.Collapse.weil_const_anti (Proofs.HadwigerNelson.Collapse.Thick): class CLEAN
+UNFILED HadwigerNelson.Collapse.InvColouring.carried (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.InvColouring.casesOn (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.InvColouring.ctorIdx (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.InvColouring.isProb (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.InvColouring.mk.inj (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.InvColouring.mk.injEq (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.InvColouring.mk.noConfusion (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.InvColouring.mk.sizeOf_spec (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.InvColouring.noConfusion (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.InvColouring.noConfusionType (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.InvColouring.recOn (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.InvColouring.rot_inv (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.InvColouring.shift_inv (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.InvColouring.μ (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.Xk (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.Xk_one_eq_empty (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.exists_invColouring (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.isClosed_Xk (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.measurableSet_Xk (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.nonempty_invColouring_bot (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.nonempty_invColouring_of_colorable (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.rot_mem_Xk (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.shift_mem_Xk (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.xk_nonempty_of_colorable (Proofs.HadwigerNelson.Collapse.Colouring): class CLEAN
+UNFILED HadwigerNelson.Collapse.EqualAtUnitsK (Proofs.HadwigerNelson.Collapse.Dichotomy): class CLEAN
+UNFILED HadwigerNelson.Collapse.InvColouring.measurePreserving_shift (Proofs.HadwigerNelson.Collapse.Dichotomy): class CLEAN
+UNFILED HadwigerNelson.Collapse.IsColourSpectral (Proofs.HadwigerNelson.Collapse.Dichotomy): class CLEAN
+UNFILED HadwigerNelson.Collapse.IsColourSpectral.integral_unit (Proofs.HadwigerNelson.Collapse.Dichotomy): class CLEAN
+UNFILED HadwigerNelson.Collapse.IsColourSpectral.rotInv (Proofs.HadwigerNelson.Collapse.Dichotomy): class CLEAN
+UNFILED HadwigerNelson.Collapse.IsSPWitness (Proofs.HadwigerNelson.Collapse.Dichotomy): class CLEAN
+UNFILED HadwigerNelson.Collapse.colourShiftK (Proofs.HadwigerNelson.Collapse.Dichotomy): class CLEAN
+UNFILED HadwigerNelson.Collapse.colourShiftK_add (Proofs.HadwigerNelson.Collapse.Dichotomy): class CLEAN
+UNFILED HadwigerNelson.Collapse.condLawK (Proofs.HadwigerNelson.Collapse.Dichotomy): class CLEAN
+UNFILED HadwigerNelson.Collapse.equalAtUnitsK_of_not_neg (Proofs.HadwigerNelson.Collapse.Dichotomy): class CLEAN
+UNFILED HadwigerNelson.Collapse.exists_factorLawK (Proofs.HadwigerNelson.Collapse.Dichotomy): class CLEAN
+UNFILED HadwigerNelson.Collapse.exists_invColouring_TA (Proofs.HadwigerNelson.Collapse.Dichotomy): class IMPORTED
+UNFILED HadwigerNelson.Collapse.exists_isColourSpectral (Proofs.HadwigerNelson.Collapse.Dichotomy): class CLEAN
+UNFILED HadwigerNelson.Collapse.factorK (Proofs.HadwigerNelson.Collapse.Dichotomy): class CLEAN
+UNFILED HadwigerNelson.Collapse.factorK.congr_simp (Proofs.HadwigerNelson.Collapse.Dichotomy): class CLEAN
+UNFILED HadwigerNelson.Collapse.integral_condLawK_mul_nonneg (Proofs.HadwigerNelson.Collapse.Dichotomy): class CLEAN
+UNFILED HadwigerNelson.Collapse.measurable_colourShiftK (Proofs.HadwigerNelson.Collapse.Dichotomy): class CLEAN
+UNFILED HadwigerNelson.Collapse.not_isSPWitness (Proofs.HadwigerNelson.Collapse.Dichotomy): class IMPORTED
+UNFILED HadwigerNelson.Collapse.not_isSPWitness_of_mrPlus (Proofs.HadwigerNelson.Collapse.Dichotomy): class CLEAN
+UNFILED HadwigerNelson.Collapse.rotInv_restrict_compl_TA (Proofs.HadwigerNelson.Collapse.Dichotomy): class CLEAN
+UNFILED HadwigerNelson.Collapse.setIntegral_compl_TA_re_k (Proofs.HadwigerNelson.Collapse.Dichotomy): class CLEAN
+UNFILED HadwigerNelson.Collapse.setIntegral_compl_TA_rot_k (Proofs.HadwigerNelson.Collapse.Dichotomy): class CLEAN
+UNFILED HadwigerNelson.Collapse.SliceEdgeNullK (Proofs.HadwigerNelson.Collapse.Slice): class CLEAN
+UNFILED HadwigerNelson.Collapse.exists_extension_k (Proofs.HadwigerNelson.Collapse.Slice): class CLEAN
+UNFILED HadwigerNelson.Collapse.exists_slice_k (Proofs.HadwigerNelson.Collapse.Slice): class CLEAN
+UNFILED HadwigerNelson.Collapse.exists_slice_of_colorable (Proofs.HadwigerNelson.Collapse.Slice): class IMPORTED
+UNFILED HadwigerNelson.Collapse.measure_ne_eq_k (Proofs.HadwigerNelson.Collapse.Slice): class CLEAN
+UNFILED HadwigerNelson.Collapse.tendsto_measure_ne_k (Proofs.HadwigerNelson.Collapse.Slice): class CLEAN
+UNFILED HadwigerNelson.Collapse.finite_mixing (Proofs.HadwigerNelson.Collapse.Mixing): class CLEAN
+UNFILED HadwigerNelson.Collapse.levelFill (Proofs.HadwigerNelson.Collapse.Mixing): class CLEAN
+UNFILED HadwigerNelson.Collapse.levelResid (Proofs.HadwigerNelson.Collapse.Mixing): class CLEAN
+UNFILED HadwigerNelson.Collapse.levelResid_nonneg (Proofs.HadwigerNelson.Collapse.Mixing): class CLEAN
+UNFILED HadwigerNelson.Collapse.mixing_K (Proofs.HadwigerNelson.Collapse.Mixing): class CLEAN
+UNFILED HadwigerNelson.Collapse.mixing_at_level (Proofs.HadwigerNelson.Collapse.Mixing): class CLEAN
+UNFILED HadwigerNelson.Collapse.not_both_ge_of_mixing (Proofs.HadwigerNelson.Collapse.Mixing): class CLEAN
+UNFILED HadwigerNelson.Collapse.tendsto_levelResid (Proofs.HadwigerNelson.Collapse.Mixing): class CLEAN
+UNFILED HadwigerNelson.Rigidity.Counting.K.congr_simp (Proofs.HadwigerNelson.Collapse.Mixing): class CLEAN
+UNFILED HadwigerNelson.Collapse.ae_slice_edge (Proofs.HadwigerNelson.Collapse.Selection): class CLEAN
+UNFILED HadwigerNelson.Collapse.exists_aeColouring_of_slice (Proofs.HadwigerNelson.Collapse.Selection): class CLEAN
+UNFILED HadwigerNelson.Collapse.fibreMass (Proofs.HadwigerNelson.Collapse.Selection): class CLEAN
+UNFILED HadwigerNelson.Collapse.le_fibreMass_selCol (Proofs.HadwigerNelson.Collapse.Selection): class CLEAN
+UNFILED HadwigerNelson.Collapse.measurable_fibreMass (Proofs.HadwigerNelson.Collapse.Selection): class CLEAN
+UNFILED HadwigerNelson.Collapse.measurable_selCol (Proofs.HadwigerNelson.Collapse.Selection): class CLEAN
+UNFILED HadwigerNelson.Collapse.not_both_heavy (Proofs.HadwigerNelson.Collapse.Selection): class CLEAN
+UNFILED HadwigerNelson.Collapse.selCol (Proofs.HadwigerNelson.Collapse.Selection): class CLEAN
+UNFILED HadwigerNelson.Collapse.sum_fibreMass (Proofs.HadwigerNelson.Collapse.Selection): class CLEAN
+UNFILED HadwigerNelson.Collapse.unitPairsNull_selCol (Proofs.HadwigerNelson.Collapse.Selection): class CLEAN
+UNFILED HadwigerNelson.Collapse.F635087 (Proofs.HadwigerNelson.Collapse.Headline): class CLEAN
+UNFILED HadwigerNelson.Collapse.FdG (Proofs.HadwigerNelson.Collapse.Headline): class CLEAN
+UNFILED HadwigerNelson.Collapse.chromaticNumber_planeOver_deGrey (Proofs.HadwigerNelson.Collapse.Headline): class IMPORTED
+UNFILED HadwigerNelson.Collapse.chromaticNumber_planeOver_eq_plane_of_forall_thickAt (Proofs.HadwigerNelson.Collapse.Headline): class IMPORTED
+UNFILED HadwigerNelson.Collapse.chromaticNumber_planeOver_eq_plane_of_thick (Proofs.HadwigerNelson.Collapse.Headline): class IMPORTED
+UNFILED HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087 (Proofs.HadwigerNelson.Collapse.Headline): class IMPORTED
+UNFILED HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087_six_or_seven (Proofs.HadwigerNelson.Collapse.Headline): class IMPORTED
+UNFILED HadwigerNelson.Collapse.chromaticNumber_plane_le_of_thick (Proofs.HadwigerNelson.Collapse.Headline): class IMPORTED
+UNFILED HadwigerNelson.Collapse.isSquare_635087 (Proofs.HadwigerNelson.Collapse.Headline): class CLEAN
+UNFILED HadwigerNelson.Collapse.isSquare_deGrey (Proofs.HadwigerNelson.Collapse.Headline): class CLEAN
+UNFILED HadwigerNelson.Collapse.le_of_isSquare_635087 (Proofs.HadwigerNelson.Collapse.Headline): class CLEAN
+UNFILED HadwigerNelson.Collapse.le_of_isSquare_deGrey (Proofs.HadwigerNelson.Collapse.Headline): class CLEAN
+UNFILED HadwigerNelson.Collapse.not_colorable_one_planeOver (Proofs.HadwigerNelson.Collapse.Headline): class CLEAN
+UNFILED HadwigerNelson.Collapse.not_thick_bot (Proofs.HadwigerNelson.Collapse.Headline): class CLEAN
+UNFILED HadwigerNelson.Collapse.stablePrime_deGrey (Proofs.HadwigerNelson.Collapse.Headline): class CLEAN
+UNFILED HadwigerNelson.Collapse.stablePrime_sqrt635087 (Proofs.HadwigerNelson.Collapse.Headline): class CLEAN
+UNFILED HadwigerNelson.Collapse.thick_deGrey (Proofs.HadwigerNelson.Collapse.Headline): class IMPORTED
+UNFILED HadwigerNelson.Collapse.thick_sqrt635087 (Proofs.HadwigerNelson.Collapse.Headline): class IMPORTED
+UNFILED HadwigerNelson.Collapse.weil_103_lt_fifth (Proofs.HadwigerNelson.Collapse.Headline): class CLEAN
+UNFILED HadwigerNelson.Collapse.weil_131_lt_fifth (Proofs.HadwigerNelson.Collapse.Headline): class CLEAN
+records: 138 public (27 already filed), 184 private (not audited)
+STOP: 111 record(s) the gate cannot take

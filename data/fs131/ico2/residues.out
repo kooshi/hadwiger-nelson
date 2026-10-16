@@ -1,0 +1,32 @@
+635087 mod 3: non-square
+635087 mod 7: non-square
+635087 mod 11: non-square
+635087 mod 19: non-square
+635087 mod 23: non-square
+635087 mod 31: non-square
+635087 mod 43: non-square
+635087 mod 47: non-square
+635087 mod 59: non-square
+635087 mod 67: non-square
+635087 mod 71: non-square
+635087 mod 79: non-square
+635087 mod 83: non-square
+635087: 13 primes below 103; square mod 103: True; prime: True; mod 8: 7
+deGrey mod 3: non-squares [5, 11]
+deGrey mod 7: non-squares [3, 5]
+deGrey mod 11: non-squares [7]
+deGrey mod 19: non-squares [3]
+deGrey mod 23: non-squares [5, 7, 11]
+deGrey mod 31: non-squares [3, 11]
+deGrey mod 43: non-squares [3, 5, 7]
+deGrey mod 47: non-squares [5, 11]
+deGrey mod 59: non-squares [11]
+deGrey mod 67: non-squares [3, 5, 7, 11]
+deGrey mod 71: non-squares [7, 11]
+deGrey mod 79: non-squares [3, 7]
+deGrey mod 83: non-squares [5]
+deGrey mod 103: non-squares [3, 5, 11]
+deGrey mod 107: non-squares [5, 7]
+deGrey mod 127: non-squares [3, 5, 7]
+deGrey: 16 primes below 131; first p = 3 mod 4 with all four squares: [131]
+PASS 0

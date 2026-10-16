@@ -1,0 +1,7 @@
+slot: admitted lake: mem 8 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Collapse/Colouring.lean:51:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Colouring.lean:55:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Colouring.lean:59:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Colouring.lean:69:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Colouring.lean:75:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Colouring.lean:93:8: warning: declaration uses `sorry`

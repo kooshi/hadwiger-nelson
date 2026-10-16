@@ -8,10 +8,12 @@
 
 ## 1. Where things are
 
-- **The repository is public**: `https://github.com/kooshi/hadwiger-nelson`; this checkout is its clone. **`main` is 37
-  commits ahead of `origin/main`, none pushed** — every push publishes, and Kooshi has not yet answered whether I may
-  push (§ 4, decision 1). Before any push: the publication guard over every new commit's changed files and messages (its
-  path is in the auto-memory's "local paths"; never written here).
+- **The repository is public**: `https://github.com/kooshi/hadwiger-nelson`; this checkout is its clone. **Pushed through
+  `66d5e928c`** (item 1011). **The push protocol is standing** (Kooshi's W8–W9, items 1009–1010): before every push a
+  Clerk's privacy check over every unpushed commit (every file version, every message, identities, sizes, credential-like
+  names; the guard's command and scratch folder in the launch message only, never in the repository), then my positive
+  control (the lists' own plants through the guard, values never printed) and the drop-path check, then a fast-forward
+  push of exactly the checked commit. Template: `data/fs131/briefs/scripts/mk-fs131-pv1.py`.
 - **The standing rules say never push** (rule 6) and that everything committed may be published (rule 13), since item
   975. Every brief names them.
 - **The main tree's build is current for `main`** (rebuilt 05:21 UTC after the named theorem merged: "239 of 239
@@ -33,39 +35,31 @@
 
 ## 3. Running
 
-**FS131-ICO2 — the collapse finished** (item 994; brief `data/fs131/briefs/FS131-ICO2-collapse.md`; worktree
-`.claude/worktrees/kcl1`, branch `fs131-ico1`; record `plans/FS131-ICO2-collapse.md` there). Its predecessor FS131-ICO1
-(item 993; record `plans/FS131-ICO1-collapse.md`) proved `Collapse/Thick`, `Mixing`, `Colouring`, `Dichotomy` (28 of 48
-leaves) and the edits D-E1, D-E2, and handed back past its line; `main` was merged into the branch at `ebeb126d1`. Left for
-ICO2: `Collapse/Slice`, `Selection`, `Headline` (about 600 lines), the experience pass, the build, the gate on one commit
-with the statement comparison (the `omit`s ruled in item 993 listed as ruled changes), the read-aloud, the drafts. **Its agent
-id is in my scratch only**; in a new session, brief a successor from its record instead.
+**The collapse landed** (item 1005): `χ(ℚ(√635087)²) = χ(ℝ²)`, de Grey's field, and the general form at every real
+number field uniformly `c`-thick with `c < 1/5`, merged as `0f81fe2a3`, gated on `7c72b9bf7`; the main tree's build
+current. Its two owed one-liners and the `k = 7` model go to the next job that touches `Collapse/`.
 
-**FS131-KPA1 and FS131-KTC1 — two planners** (item 995): the `p`-adic plane's Borel bound with its values (the asking
-lane's rank 4; brief `data/fs131/briefs/FS131-KPA1-padic.md`; worktree `.claude/worktrees/il5`, branch `fs131-kpa1`;
-record `plans/FS131-KPA1-padic-plan.md` there) and the three-colour criterion for lattice Cayley graphs (rank 5; brief
-`data/fs131/briefs/FS131-KTC1-three-colour.md`; worktree `.claude/worktrees/kel1`, branch `fs131-ktc1`; record
-`plans/FS131-KTC1-three-colour-plan.md` there). At each hand-back: check its commits and its skeleton's build log,
-read its head statements against the row, copy its record and report onto `main` (the skeleton stays on its branch),
-and brief its implementer. Next free slot: the public roadmap's § 3 items 1–2 (the family, CLS, ℚ(√23, ∛2), Lemma C′);
-after the collapse lands, rank 3's density form (item 995).
+- **The collapse's filing is merged** (`38579c41b`, item 1007): the front page, row 128, README, ROADMAP, the atlas
+  (local) current; the fact audit passes against `8cab63fa2`.
+- **FS131-IQP1** (item 1001): the `p`-adic plane (`.claude/worktrees/il5`, branch `fs131-kpa1`); the three leaves at 23
+  leave the landing (item 1002).
+- **FS131-ICT1** (item 1001): the three-colour criterion (`.claude/worktrees/kel1`, branch `fs131-ktc1`); one false
+  skeleton statement corrected by ruling (item 1003).
+- **FS131-KFR1** (item 1006): the density form's planner (`.claude/worktrees/kcl1`, branch `fs131-kfr1`); its widenings
+  and the 250-line disc module ruled in (item 1008).
 
-**At its hand-back** (announcement rule, item 988): check the commits; print the three headlines' axioms myself
-(`Collapse.chromaticNumber_planeOver_sqrt635087`, `chromaticNumber_planeOver_eq_plane_of_thick`,
-`chromaticNumber_planeOver_deGrey`; expected the standard three, `Rigidity.positive_entropy_rigidity`,
-`StandingFive.kloosterman_bound`); read them against `LEDGER.md` row 128; guard; merge `--no-ff`; file its drafts by a
-script that asserts each slot; run the fact audit and **read its last line** (item 991); rebuild the main tree.
+Both implementers were told the collapse's gate (`data/fs131/ico2/gate/`) is their baseline. At each implementer's
+hand-back: check its commits, print its head statements' axioms myself, read them against the ledger row, guard, merge
+`--no-ff` (`main` equal to the gated commit in `Proofs/`, `scripts/` and the package files), file its drafts (a Clerk if
+large), run the fact audit and read its last line, rebuild the main tree. Next free slot: the public roadmap's § 3
+items 1–2 (the family, CLS, ℚ(√23, ∛2), Lemma C′); search request 26 (`p = 23`) waits for the next Searcher run.
 
-## 4. Kooshi's open decisions (each reported to him; defaults in force)
+## 4. Kooshi's decisions, all answered (W8–W9, items 1009–1010)
 
-1. **Pushing.** Default: commit freely, push nothing. My recommendation: standing approval to push after each batch
-   passes the guard, never forcing.
-2. **Einsiedler–Lindenstrauss.** Default: it stays declared. Recommendation: the narrow route (about 50,000 lines,
-   about 51 active hours), after the collapse lands; it starts by fetching and reading `[EinsiedlerLindenstrauss2010]`
-   §§ 6–8 (not held).
-3. **The aim on the front page** (`CLAUDE.md` § The aim still states 2026-09-26's). Default: unchanged; the work is
-   formalizing our findings, six against seven paused. Recommendation: rewrite it to say so.
-4. **The generic repository's peer-delegation paragraph** (item 964): kept unless he says to cut it.
+1. **Pushing:** the standing protocol above.
+2. **Einsiedler–Lindenstrauss:** held off; Theorem 1.3 stays a declared outside theorem.
+3. **The aim:** `CLAUDE.md` § The aim not rewritten; the current goal is formalizing; what comes after is open.
+4. **The peer-delegation paragraph:** kept (approved before he pushed the generic template).
 
 ## 5. Owed (none urgent)
 

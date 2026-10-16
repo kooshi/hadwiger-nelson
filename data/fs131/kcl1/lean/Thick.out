@@ -1,0 +1,17 @@
+slot: admitted lake: mem 8 GiB (hard cap), cpus 0,1
+Proofs/HadwigerNelson/Collapse/Thick.lean:50:0: warning: automatically included section variable(s) unused in theorem `HadwigerNelson.Collapse.ThickAt.mono`:
+  [NumberField ↥F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NumberField ↥F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+Proofs/HadwigerNelson/Collapse/Thick.lean:54:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Thick.lean:62:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Thick.lean:68:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Thick.lean:82:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Thick.lean:88:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Thick.lean:95:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Thick.lean:102:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Thick.lean:111:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Thick.lean:129:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Collapse/Thick.lean:134:8: warning: declaration uses `sorry`
