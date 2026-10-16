@@ -8,10 +8,12 @@
 
 ## 1. Where things are
 
-- **The repository is public**: `https://github.com/kooshi/hadwiger-nelson`; this checkout is its clone. **`main` is many
-  commits ahead of `origin/main` (count with `git rev-list --count origin/main..main`), none pushed** — every push publishes, and Kooshi has not yet answered whether I may
-  push (§ 4, decision 1). Before any push: the publication guard over every new commit's changed files and messages (its
-  path is in the auto-memory's "local paths"; never written here).
+- **The repository is public**: `https://github.com/kooshi/hadwiger-nelson`; this checkout is its clone. **Pushed through
+  `66d5e928c`** (item 1011). **The push protocol is standing** (Kooshi's W8–W9, items 1009–1010): before every push a
+  Clerk's privacy check over every unpushed commit (every file version, every message, identities, sizes, credential-like
+  names; the guard's command and scratch folder in the launch message only, never in the repository), then my positive
+  control (the lists' own plants through the guard, values never printed) and the drop-path check, then a fast-forward
+  push of exactly the checked commit. Template: `data/fs131/briefs/scripts/mk-fs131-pv1.py`.
 - **The standing rules say never push** (rule 6) and that everything committed may be published (rule 13), since item
   975. Every brief names them.
 - **The main tree's build is current for `main`** (rebuilt 05:21 UTC after the named theorem merged: "239 of 239
@@ -52,16 +54,12 @@ hand-back: check its commits, print its head statements' axioms myself, read the
 large), run the fact audit and read its last line, rebuild the main tree. Next free slot: the public roadmap's § 3
 items 1–2 (the family, CLS, ℚ(√23, ∛2), Lemma C′); search request 26 (`p = 23`) waits for the next Searcher run.
 
-## 4. Kooshi's open decisions (each reported to him; defaults in force)
+## 4. Kooshi's decisions, all answered (W8–W9, items 1009–1010)
 
-1. **Pushing.** Default: commit freely, push nothing. My recommendation: standing approval to push after each batch
-   passes the guard, never forcing.
-2. **Einsiedler–Lindenstrauss.** Default: it stays declared. Recommendation: the narrow route (about 50,000 lines,
-   about 51 active hours), after the collapse lands; it starts by fetching and reading `[EinsiedlerLindenstrauss2010]`
-   §§ 6–8 (not held).
-3. **The aim on the front page** (`CLAUDE.md` § The aim still states 2026-09-26's). Default: unchanged; the work is
-   formalizing our findings, six against seven paused. Recommendation: rewrite it to say so.
-4. **The generic repository's peer-delegation paragraph** (item 964): kept unless he says to cut it.
+1. **Pushing:** the standing protocol above.
+2. **Einsiedler–Lindenstrauss:** held off; Theorem 1.3 stays a declared outside theorem.
+3. **The aim:** `CLAUDE.md` § The aim not rewritten; the current goal is formalizing; what comes after is open.
+4. **The peer-delegation paragraph:** kept (approved before he pushed the generic template).
 
 ## 5. Owed (none urgent)
 
