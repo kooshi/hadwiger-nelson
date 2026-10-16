@@ -383,6 +383,10 @@ import Proofs.HadwigerNelson.Rigidity.MainClauseFive
 import Proofs.HadwigerNelson.Rigidity.SqrtClassFive
 import Proofs.HadwigerNelson.Instances.SqrtFortySevenFive
 import Proofs.HadwigerNelson.Instances.SqrtClassValues
+import Proofs.HadwigerNelson.Rigidity.FourColourPlaces
+import Proofs.HadwigerNelson.Arith.StableAboveUsable
+import Proofs.HadwigerNelson.Instances.SqrtFiveClass
+import Proofs.HadwigerNelson.Instances.SqrtTwentyThreeCbrtTwo
 import Proofs.HadwigerNelson.Rigidity.SolenoidErgodic
 import Proofs.HadwigerNelson.Rigidity.HaarMultiple
 import Proofs.HadwigerNelson.Rigidity.DualGroup
