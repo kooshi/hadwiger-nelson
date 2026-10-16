@@ -6,7 +6,49 @@ planner's skeleton with `main` merged in). Brief: `data/fs131/briefs/FS131-IRU1-
 
 ## Theorems this phase proved
 
-None yet.
+40 theorems, every one **[kernel]**, from build 3 (`45de7612d`; the library the gated commit carries unchanged, stage 3); axioms as `#print axioms` lists them
+(`data/fs131/iru1/axioms-all.txt`). No outside theorem, no `native_decide`, no hypothesis standing for an assumption.
+
+- `Rigidity.cayley_mul_conj_eq_one` — `Rigidity/NormOneGen` — [propext, Quot.sound]
+- `Rigidity.closure_normOne_eq_top` — `Rigidity/NormOneGen` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.exists_fixed_add_mul` — `Rigidity/NormOneGen` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.exists_model_galoisField` — `Rigidity/NormOneGen` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.inv_mem_of_finite` — `Rigidity/NormOneGen` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.mem_closure_normOne_of_fixed` — `Rigidity/NormOneGen` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.div_natCast_mem_localRing` — `Rigidity/UnitRingEq` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.exists_eq_add_mul_of_mem_stableIntegers` — `Rigidity/UnitRingEq` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.exists_two_pow_mul_mem_unitRing` — `Rigidity/UnitRingEq` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.isUnit_add_mk_of_conj_eq` — `Rigidity/UnitRingEq` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.isUnit_mk_sub_conj` — `Rigidity/UnitRingEq` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.natCast_notMem_pow_absNorm` — `Rigidity/UnitRingEq` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.normOne_subset_range_resPi` — `Rigidity/UnitRingEq` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.not_isRamified_of_odd_mem` — `Rigidity/UnitRingEq` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.resPi_surjective` — `Rigidity/UnitRingEq` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.unitRing_eq_stableIntegers` — `Rigidity/UnitRingEq` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.dvd_scaleRoots_eval_sub_pow` — `Rigidity/UsablePrime` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.exists_Ioo_aeval_neg` — `Rigidity/UsablePrime` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.exists_dvd_eval_of_dvd_scaleRoots_eval` — `Rigidity/UsablePrime` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.exists_isUsablePrime` — `Rigidity/UsablePrime` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.exists_one_add_mul_div_pow_mem_Ioo` — `Rigidity/UsablePrime` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.exists_prime_mod_four_eq_three_dvd` — `Rigidity/UsablePrime` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.exists_prime_three_mod_four_dvd_eval` — `Rigidity/UsablePrime` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.exists_stablePrime_natCast_mem` — `Rigidity/UsablePrime` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.localBound_lt_top` — `Rigidity/UsablePrime` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.nonempty_stablePrime` — `Rigidity/UsablePrime` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.scaleRoots_eval_eq` — `Rigidity/UsablePrime` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.connected_or_infinite_planeOver` — `Rigidity/PlaneComponents` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.connected_planeOver_iff_isEmpty_stablePrime` — `Rigidity/PlaneComponents` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.connected_planeOver_iff_subset` — `Rigidity/PlaneComponents` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.infinite_connectedComponent_planeOver` — `Rigidity/PlaneComponents` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.infinite_connectedComponent_planeOver_of_not_mem` — `Rigidity/PlaneComponents` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.infinite_connectedComponent_planeOver_of_stablePrime` — `Rigidity/PlaneComponents` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.not_connected_planeOver` — `Rigidity/PlaneComponents` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.reachable_add_sum` — `Rigidity/PlaneComponents` — [propext, Classical.choice, Quot.sound]
+- `Rigidity.reachable_iff_sub_mem_unitRingOver` — `Rigidity/PlaneComponents` — [propext, Classical.choice, Quot.sound]
+- `UnitRingModels.exists_stablePrime_three_not_isRamified` — `Instances/UnitRingModels` — [propext, Classical.choice, Quot.sound]
+- `UnitRingModels.noRamifiedStableDyadic_sqrt47` — `Instances/UnitRingModels` — [propext, Classical.choice, Quot.sound]
+- `UnitRingModels.stableIntegers_sqrt47_ne_top` — `Instances/UnitRingModels` — [propext, Classical.choice, Quot.sound]
+- `UnitRingModels.unitRing_eq_stableIntegers_sqrt47` — `Instances/UnitRingModels` — [propext, Classical.choice, Quot.sound]
 
 ## Stage 1 — SAVED: the readback
 
@@ -194,3 +236,121 @@ concludes the former (LEAN.md § Searching — Lean, FS131-LGT1's line): the `.c
 § The gate — exactly the +45 and +1 of § 3.4; the baseline's header is refiled here, `CLAUDE.md` drafted (stage 5). The
 audit read "axioms: OK — 10930 clean, 574 axiom-free, 83 imported, 5 declared purchase(s)": 10,885 + 45 against FS131-ICT3's
 gate, the rest unchanged. The gate is run again in full on the commit that carries the two edits.
+
+### 3.6 The gate on one commit (`ddb765bac`): green
+
+`data/fs131/iru1/run-gate.sh` again in full, 2026-10-16 22:25–22:40 UTC (`data/fs131/iru1/gate/run-pass.out`; every log under
+`data/fs131/iru1/gate/`, its exit on its last line): `HEAD=ddb765bac… tracked-modified=0`; **uptodate** 0 (Lake: nothing to
+build); **sorry** (narrow) 0 lines; line-initial `axiom` lines 5 (the library's, unchanged); **dupnames** 0 ("no name is declared
+by two modules (31 generated on demand)"); **dupnames self-test** 0 (15 of 15 controls); **axioms** 0 ("10930 clean, 574
+axiom-free, 83 imported, 5 declared purchase(s)"); **axioms self-test** 0 (23 controls); **vacuity** 0 (`declarations=22564
+refutations-skipped=244`, `sites=1465 vacuous=0 stale=0 declared=3 witnessed=40 generic=1420 unknown=2`; the baseline's header
+"match (9 of 9 compared)"); **vacuity self-test** 0 (65 of 65); **assumptions** 0 (`axioms=3 rests=105 named=19 inline=14
+outside=7 ours=21 open=5 takes=109 mentions=2`; `conditions=40 fails=0`); **assumptions self-test** 0 (33 of 33); **arch** 0
+(PASS); **lint** 0 ("Linting passed for Proofs."; every linter `(2/2) Passed!`). The three digests exit 0; each flags only
+`CLAUDE.md`'s recorded counts as stale (drafted, stage 5). The pass ends "tracked files modified after the pass: 2": this
+record and `data/fs131/iru1/examples-compare.out`, edited while the pass ran; neither is read by any step.
+
+**Every count change against `main`'s last gate (FS131-ICT3, `data/fs131/ict3/gate/`), explained:**
+
+| count | ICT3 | here | change | why |
+|---|---|---|---|---|
+| audit records | 11,547 | 11,592 | +45 | the 45 CLEAN records of § 3.3 |
+| clean | 10,885 | 10,930 | +45 | the same; none is axiom-free, imported or purchased |
+| axiom-free, imported, purchases | 574, 83, 5 | 574, 83, 5 | 0 | no record of this job is one |
+| vacuity declarations | 22,519 | 22,564 | +45 | the 45 public declarations of § 3.4 |
+| refutations-skipped | 243 | 244 | +1 | `UnitRingModels.noRamifiedStableDyadic_sqrt47` (§ 3.4) |
+| sites and their verdicts | 1,465 … | 1,465 … | 0 | no binder of a tracked carrier in the six modules |
+| assumptions' nine counts | as here | as here | 0 | no hypothesis declared, none taken |
+| conditions (decided, not one of the nine) | 41 | 40 | −1 | `IsUsablePrime`'s entry retired (§ 3.5) |
+
+**Negative controls watched**: the four self-tests above (each plants its faults and reports every one fired); the first run's
+red on the stale condition (a fault the landing made, named by the step, § 3.5); this job's own checks — the quotation check, the
+statement comparison (five plants), the example heads, the audit block (four plants), the re-add (two controls) — each seen to
+fire. `#print axioms` of every head statement and model on the gated build: `[propext, Classical.choice, Quot.sound]`, each
+(`data/fs131/iru1/readaloud.txt`, 19 lines, rerun on build 3); the re-add rerun there gives the skeleton's hash again.
+
+### 3.7 Structures in the hypotheses, and their models
+
+The vacuity scan has no new site (no binder of a tracked colouring carrier); the structures the new statements take, each with
+a model the kernel holds: `StablePrime F` — `Rigidity.nonempty_stablePrime` at every real number field, and the terms
+`UnitRingModels.exists_stablePrime_three_not_isRamified` (`ℚ(i)`, above 3) and `SqrtFortySeven.exists_stablePrime_eleven`;
+`¬ IsRamified P` (and `∀ P ∈ Φ, ¬ IsRamified P`) — the prime above 3 of `ℚ(i)`; `NoRamifiedStableDyadic F` —
+`UnitRingModels.noRamifiedStableDyadic_sqrt47`; `IsUsablePrime 𝔭` — `Rigidity.exists_isUsablePrime` at every real number
+field (whence the retired condition); the hypotheses of `closure_normOne_eq_top` and its children (a finite ring, an involution,
+`θ − σθ` a unit, `a + θ` a unit for each fixed `a`) — `Rigidity.exists_model_galoisField`, every clause exercised;
+`z ∈ planeOver F ∧ z ∉ ℤ[U]` of `infinite_connectedComponent_planeOver_of_not_mem` — exhibited inside
+`infinite_connectedComponent_planeOver_of_stablePrime`'s proof at every real number field (a point outside `𝓞_P`), not as a
+separate theorem; the integer-polynomial hypotheses of route E (`f` monic, a simple real root) — the minimal polynomial of an
+integral primitive element of any real number field, as `exists_isUsablePrime`'s proof uses them.
+
+## Stage 3 — SAVED (the gate green on `ddb765bac`)
+
+## Stage 4 — the read-aloud
+
+Read against the kernel's own print of each head statement (`data/fs131/iru1/readaloud.txt`, `#check @` with full names,
+from the build gated in stage 3), against `LEDGER.md` row 100, the roadmap's typed form (`ROADMAP.md` § 3 item 2) and the
+asking lane's C8 (`plans/POROS-2026-10-13-number-field-findings.md`, rank 8). Vocabulary, unfolded one step in the same
+print: `UnitRing.unitRing σ = Subring.closure (normOne σ)`, `normOne σ = {u | u·σu = 1}`; `stableIntegers F = ⨅ P, P.localRing`
+over `StablePrime F` (a maximal ideal `P` of `𝓞 (F(i))` with `P.comap conjO = P`); `IsRamified P := ∀ x, conjO x − x ∈ P`;
+`IsDyadic P := 2 ∈ P`; `NoRamifiedStableDyadic F := ∀ P, IsDyadic P → ¬ IsRamified P`; `IsUsablePrime 𝔭 := 𝔭.IsMaximal ∧
+Nat.card (𝓞 F ⧸ 𝔭) % 4 = 3`; `localBound F = ⨅ P, (levelTarget P 1).chromaticNumber`; the plane's graph
+`(unitDistance ℂ).induce (planeOver F)`, `planeOver F = {z | z.re ∈ F ∧ z.im ∈ F}`.
+
+1. **`Rigidity.unitRing_eq_stableIntegers : ∀ {F : Subfield ℝ} [NumberField ↥F], NoRamifiedStableDyadic F →
+   UnitRing.unitRing (conjOn ⋯) = stableIntegers F`.** For a number field `F` given inside `ℝ`, if no conjugation-fixed prime
+   of `𝓞 (F(i))` that holds 2 has conjugation acting trivially on its residue field, then the subring of `F(i)` generated by the
+   elements of norm one equals the elements of `F(i)` lying in every localization at a conjugation-fixed prime. **Against row
+   100**: "Lemma C′: `R_F = O′`, the ring integral at the stable primes, with no Galois hypothesis, except possibly at a ramified
+   stable dyadic place" — the same statement with the exception as the scope. **Against the roadmap's typed form**: the same
+   text, `[NumberField F]` and `F` implicit from the section, as the planner read it. **Against C8**: C8 says "the additive group
+   generated by the unit vectors is the ring …"; the kernel's `R` is the *subring* the unit vectors generate, which is the same
+   set (the unit vectors hold `1`, `−1` and are closed under products, so their additive span is a ring: the library's
+   `UnitRing.exists_sum_eq_of_mem_unitRingOver`); and C8's scope "no prime above 2 fixed by conjugation ramifies in `F(i)`" is
+   `NoRamifiedStableDyadic` read through `IsRamified` — conjugation trivial on the residue field, which at a stable prime is
+   ramification in `F(i)/F` (the identification of the two is the derivation's, not stated in the kernel). **Not claimed:** the
+   converse (false: `ℚ(√2)` has a ramified stable dyadic prime and `R = O′`, row 100); `R = O′` at a field with a ramified
+   stable dyadic prime (false at `ℚ(√5)`, `ℚ(√17)`); Lemma C (`R ⊗ ℤ_p`); CLG; the injectivity half of `R/nR ≅ O′/nO′`.
+2. **`Rigidity.exists_two_pow_mul_mem_unitRing : ∀ {F} [NumberField ↥F] {x : ↥(fieldI F)}, x ∈ stableIntegers F →
+   ∃ a, 2 ^ a * x ∈ UnitRing.unitRing (conjOn ⋯)`.** At every real number field, with no scope, every element integral at the
+   stable primes lands in `R` after multiplication by a power of 2: `R` and `O′` agree once 2 is inverted. FS91-J07-4's
+   statement at every odd `p`, in its global form. **Not claimed:** any bound on `a`.
+3. **`Rigidity.exists_eq_add_mul_of_mem_stableIntegers`**: for `n ≠ 0` such that no stable prime holding `n` is ramified, every
+   `x ∈ O′` is `r + n·y` with `r ∈ R`, `y ∈ O′` — `R + n·O′ = O′`, the onto half of J07-4's `R/nR ≅ O′/nO′` at `n`.
+4. **`Rigidity.nonempty_stablePrime : ∀ (F : Subfield ℝ) [NumberField ↥F], Nonempty (StablePrime F)`.** Every number field
+   inside `ℝ` has, in `F(i)`, a conjugation-fixed maximal ideal of the ring of integers. With
+   **`Rigidity.exists_isUsablePrime`**: for every `M ≠ 0`, a prime `q ∤ M` and a maximal ideal `𝔭 ∋ q` of `𝓞 F` with exactly
+   `q` residues and `q ≡ 3 (mod 4)` (`IsUsablePrime` asks the residue count `≡ 3 (mod 4)`; here it is `q` itself) — a usable
+   prime of degree one outside any finite set of rational primes. **Against row 105**: its sentence "That statement ranges over
+   a type the kernel does not show to be non-empty (a stable prime exists by Chebotarev)" is now false of the kernel: the type is
+   shown non-empty at every real number field, with no Chebotarev and no outside theorem. **Not claimed:** infinitely many such
+   primes as a set (only "outside any finite set", which implies it but is not stated as `Set.Infinite`); a density; that the
+   stable prime above `𝔭` is unique or inert; anything at a field with no real embedding.
+5. **`Rigidity.localBound_lt_top : ∀ (F : Subfield ℝ) [NumberField ↥F], localBound F < ⊤`.** `L(F)` is a finite number at
+   every real number field (`⨅` over a non-empty family of chromatic numbers of finite graphs).
+6. **`Rigidity.connected_or_infinite_planeOver : ∀ (F : Subfield ℝ), (…induce (planeOver F)).Connected ∨ Infinite
+   (…induce (planeOver F)).ConnectedComponent`.** For every subfield `F` of `ℝ`, number field or not, the unit-distance graph
+   on `F²` is connected or has infinitely many connected components (Mathlib's `Connected`, `ConnectedComponent`, `Infinite`).
+   **Not claimed:** which one at a field that is not a number field (`ℝ` itself is connected; not stated).
+7. **`Rigidity.connected_planeOver_iff_isEmpty_stablePrime : ∀ {F} [NumberField ↥F], (…).Connected ↔ IsEmpty (StablePrime
+   F)`**, and with item 4, **`Rigidity.not_connected_planeOver`** and **`Rigidity.infinite_connectedComponent_planeOver :
+   ∀ (F : Subfield ℝ) [NumberField ↥F], Infinite (…induce (planeOver F)).ConnectedComponent`** — **C8's components clause**:
+   "in every case the unit-distance graph on `F²` has infinitely many components", at every real number field, and nothing
+   more. **Not claimed:** anything about a component's shape beyond `reachable_iff_sub_mem_unitRingOver` (two points are joined
+   exactly when their difference lies in `ℤ[U]`, so the components are the cosets of `ℤ[U]` in `F²`, a reading not stated as
+   an equivalence of types); a count of components beyond `Infinite`.
+8. **The ruled drop**: `Rigidity.not_isRamified_of_odd_mem : ∀ {F} (P : StablePrime F) {n : ℕ}, Odd n → ↑n ∈ P.P →
+   ¬ IsRamified P` — the skeleton's statement with `[NumberField ↥F]` removed (inventory item 1049), strictly more general.
+
+**Axioms of every head statement**: `[propext, Classical.choice, Quot.sound]`, each (the same print); no outside theorem, no
+`native_decide`, no hypothesis standing for an assumption.
+
+**The models** (each a theorem of the landing, on the standard three): the scope of item 1 at `ℚ(√47)`
+(`UnitRingModels.noRamifiedStableDyadic_sqrt47`), item 1 there (`unitRing_eq_stableIntegers_sqrt47`) and not trivially
+(`stableIntegers_sqrt47_ne_top`: a stable prime above 11, so `O′ ≠ F(i)`); the local hypothesis `¬ IsRamified P` of items 3
+and of `resPi_surjective` at the prime `(3)` of `ℚ(i)` (`exists_stablePrime_three_not_isRamified`); the hypotheses of the
+generation lemma `closure_normOne_eq_top` at `𝔽₉` with `x ↦ x³` (`exists_model_galoisField`, every clause exercised: an
+involution, `θ − θ³` a unit, `a + θ` a unit at each of the three fixed `a`); items 2, 4–7 take `NumberField F` or nothing, and
+`ℚ` inhabits them (`UpperHalf.numberField_bot`); the components at `ℚ(√47)` as a spec example.
+
+## Stage 4 — SAVED (the read-aloud)

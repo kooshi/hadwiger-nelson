@@ -1,9 +1,9 @@
+Proofs/HadwigerNelson/Rigidity/NormOneGen.lean: 0 example(s) at the skeleton, 0 now: SAME
 Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean: 1 example(s) at the skeleton, 1 now: SAME
     example (Φ : Finset (StablePrime F)) (m : ℕ) (r : unitRing F) (P : Φ) : resPi Φ m r P = P.1.residue m (toLocal P.1 r)
-Proofs/HadwigerNelson/Instances/UnitRingModels.lean: 1 example(s) at the skeleton, 1 now: SAME
-    example : Infinite ((unitDistance ℂ).induce (planeOver SqrtFortySeven.F47)).ConnectedComponent
-Proofs/HadwigerNelson/Rigidity/NormOneGen.lean: 0 example(s) at the skeleton, 0 now: SAME
 Proofs/HadwigerNelson/Rigidity/UsablePrime.lean: 0 example(s) at the skeleton, 0 now: SAME
 Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean: 0 example(s) at the skeleton, 0 now: SAME
+Proofs/HadwigerNelson/Instances/UnitRingModels.lean: 1 example(s) at the skeleton, 1 now: SAME
+    example : Infinite ((unitDistance ℂ).induce (planeOver SqrtFortySeven.F47)).ConnectedComponent
 PLANT FIRED
 VERDICT CLEAN

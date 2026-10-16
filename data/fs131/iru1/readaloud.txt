@@ -1,4 +1,4 @@
-slot: admitted lake: mem 6 GiB (hard cap), cpus 5,6
+slot: admitted lake: mem 6 GiB (hard cap), cpus 0,1
 @HadwigerNelson.Rigidity.unitRing_eq_stableIntegers : ∀ {F : Subfield ℝ} [inst : NumberField ↥F],
   HadwigerNelson.Rigidity.NoRamifiedStableDyadic F →
     HadwigerNelson.UnitRing.unitRing (HadwigerNelson.conjOn ⋯) = HadwigerNelson.Rigidity.stableIntegers F
