@@ -433,7 +433,7 @@ N("R129", "density cannot give six", "nogo", "One colour class at a time is capp
   "1/α_loc ≤ 4.36: that route never gives six", "FRAC, TJ, ROUND, DV, TF, 47 two derivations (FS103-F; FS103-B blind to F's record)",
   at=(110, 205), sector="six-low",
   posed=[dict(question="the first clause of Ducz–Varga's Conjecture 1 (2026), and Matolcsi et al.'s equality question (2025, §2) — with no hypothesis, over "
-              "[OAIMath2026]'s rigidity theorem, at [hand], one mind", state="answered", src=LGC, quote="row 129 (FS-133; one mind) answers the first clause of [DuczVarga2026]'s Conjecture 1 and "
+              "[OAIMath2026]'s rigidity theorem, in the kernel since FS133-LD1", state="answered", src=LGC, quote="row 129's plane clause (FS-133) answers the first clause of [DuczVarga2026]'s Conjecture 1 and "
               "[MatolcsiEtAl2025] §2's equality question")])
 N("FS80", "window-frequency certificate", "question", "An averaged certificate at five colours on the real plane — the integrality "
   "shape a six certificate must take (FS-80).", FSR(19), "averaged certificates at five colours on the real plane — the integrality shape a six certificate must take",

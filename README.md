@@ -16,7 +16,7 @@ the mathematics. [`ROADMAP.md`](ROADMAP.md) lists what is not yet formalized.
 ## Results
 
 Each statement below is a plain-words reading of the stored type of the theorem named beside it. The axiom lists are exactly
-what `#print axioms` printed on 2026-10-15 from the library as gated at commit `752b11569` (the gate ran before the publication's rewrite, which changed one docstring in the proofs and nothing else in them). Keys in brackets, like
+what `#print axioms` printed from the library as gated: on 2026-10-15 at commit `752b11569` (the gate ran before the publication's rewrite, which changed one docstring in the proofs and nothing else in them), and for the rows changed since, on 2026-10-16 at the commit each landing gated (`113ca8ece`, the main clause through five as one theorem; `7c72b9bf7`, the collapse). Keys in brackets, like
 `[Fischer1990]`, are entries of `BIBLIOGRAPHY.md`. **std3** means `[propext, Classical.choice, Quot.sound]`, Lean's
 standard three axioms. **W**, **EL** and **O5** are the three outside theorems the library declares as axioms (see
 [What the library assumes](#what-the-library-assumes)). Every name is under the namespace `HadwigerNelson`. The "ledger" column gives

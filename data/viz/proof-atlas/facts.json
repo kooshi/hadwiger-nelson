@@ -2362,14 +2362,14 @@
    "tier": 2,
    "posed": [
     {
-     "question": "the first clause of Ducz–Varga's Conjecture 1 (2026), and Matolcsi et al.'s equality question (2025, §2) — with no hypothesis, over [OAIMath2026]'s rigidity theorem, at [hand], one mind",
+     "question": "the first clause of Ducz–Varga's Conjecture 1 (2026), and Matolcsi et al.'s equality question (2025, §2) — with no hypothesis, over [OAIMath2026]'s rigidity theorem, in the kernel since FS133-LD1",
      "state": "answered",
      "src": {
       "file": "CLAUDE.md",
       "section": "### The local–global conjecture"
      },
-     "quote": "row 129 (FS-133; one mind) answers the first clause of [DuczVarga2026]'s Conjecture 1 and [MatolcsiEtAl2025] §2's equality question",
-     "address": "CLAUDE.md § The local–global conjecture, line 125"
+     "quote": "row 129's plane clause (FS-133) answers the first clause of [DuczVarga2026]'s Conjecture 1 and [MatolcsiEtAl2025] §2's equality question",
+     "address": "CLAUDE.md § The local–global conjecture, line 158"
     }
    ],
    "status": "hand-2b",

@@ -69,6 +69,17 @@ ALLOW: dict[str, str] = {
     "22238": "superseded gate count, refiled at FS131-IL5's filing (2026-10-16, FS-131 inventory item 990) from data/fs131/il5/gate/; the old count stays in data/fs131/clone1/gate/",
     "10650": "superseded gate count, refiled at FS131-IL5's filing (2026-10-16, FS-131 inventory item 990) from data/fs131/il5/gate/; the old count stays in data/fs131/clone1/gate/ (10651 clean)",
     "11284": "superseded gate count, refiled at FS131-IL5's filing (2026-10-16, FS-131 inventory item 990) from data/fs131/il5/gate/; the old count stays in data/fs131/clone1/gate/ (11,287 records)",
+    "axioms=3 rests=78 named=19 inline=14 outside=7 ours=21 open=5 takes=108 mentions=2": "superseded gate count, refiled at FS131-ICO2's filing (2026-10-16, FS-131 inventory item 1007) from data/fs131/ico2/gate/; the old count stays in data/fs131/il5/gate/ (rests=99, takes=109)",
+    "rests=78": "superseded gate count, refiled at FS131-ICO2's filing (2026-10-16, FS-131 inventory item 1007) from data/fs131/ico2/gate/; the old count stays in data/fs131/il5/gate/",
+    "takes=108": "superseded gate count, refiled at FS131-ICO2's filing (2026-10-16, FS-131 inventory item 1007) from data/fs131/ico2/gate/; the old count stays in data/fs131/il5/gate/",
+    "declarations=22241 refutations-skipped=240 sites=1455": "superseded gate count, refiled at FS131-ICO2's filing (2026-10-16, FS-131 inventory item 1007) from data/fs131/ico2/gate/; the old count stays in data/fs131/il5/gate/ (declarations=22357, refutations-skipped=242)",
+    "declarations=22241": "superseded gate count, refiled at FS131-ICO2's filing (2026-10-16, FS-131 inventory item 1007) from data/fs131/ico2/gate/; the old count stays in data/fs131/il5/gate/",
+    "refutations-skipped=240": "superseded gate count, refiled at FS131-ICO2's filing (2026-10-16, FS-131 inventory item 1007) from data/fs131/ico2/gate/; the old count stays in data/fs131/il5/gate/",
+    "22241": "superseded gate count, refiled at FS131-ICO2's filing (2026-10-16, FS-131 inventory item 1007) from data/fs131/ico2/gate/; the old count stays in data/fs131/il5/gate/",
+    "10651": "superseded gate count, refiled at FS131-ICO2's filing (2026-10-16, FS-131 inventory item 1007) from data/fs131/ico2/gate/; the old count stays in data/fs131/il5/gate/ (10747 clean)",
+    "11287": "superseded gate count, refiled at FS131-ICO2's filing (2026-10-16, FS-131 inventory item 1007) from data/fs131/ico2/gate/; the old count stays in data/fs131/il5/gate/ (11,398 records)",
+    "G81:[hand, two blind minds (row 128); the ambiguity reading one mind]": "regraded at FS131-ICO2's filing (2026-10-16, FS-131 inventory item 1007): the field equality of row 128 is a kernel theorem since FS131-ICO2 (Collapse.chromaticNumber_planeOver_eq_plane_of_thick, gated on 7c72b9bf7); the ambiguity reading keeps its grade",
+    "[hand, two blind minds (row 128); the ambiguity reading one mind]": "regraded at FS131-ICO2's filing (2026-10-16, FS-131 inventory item 1007): the field equality of row 128 is a kernel theorem since FS131-ICO2 (Collapse.chromaticNumber_planeOver_eq_plane_of_thick, gated on 7c72b9bf7); the ambiguity reading keeps its grade",
     "ROADMAP.md": "LEDGER.md row 123's \"Not claimed\" clause pointing to ROADMAP.md for the unstored equality, removed at FS131-IL5's filing because the equality is now stored (Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five); ROADMAP.md is at the repository root",
     # The second filing (FS131-FC8, 2026-10-16, Keryx; FS-131 inventory item 983): row 121's source cell reworded by FS131-EN1 § 8.3's draft.
     "FS100-Q47's": "row 121's source cell reworded by plans/FS131-EN1-derivation.md § 8.3's draft (filed by FS131-FC8): the cell now says which of its eight entries are inputs of SP-Cor's proof instead of 'the inputs FS100-Q47's grade names'; FS100-Q47 itself is still named in LEDGER.md",
@@ -548,6 +559,8 @@ ALLOW: dict[str, str] = {
 # in (a verified allowance, unlike ALLOW). For text whose home was never this corpus -- e.g. paths-forward rows ranked >= 30, whose
 # authoritative rows are plans/FRONTIER-STUBS.md's (E1, 2026-09-26).
 EXTERNAL_HOMES: dict[str, tuple[str, str]] = {
+    # FS131-ICO2's filing (2026-10-16): the main clause's "Last filed" entry moved to plans/FILINGS.md.
+    "L(ℚ)": ("plans/FILINGS.md", "the main clause's entry of CLAUDE.md's \"Last filed\" chain (FS131-IL5, 2026-10-16), moved verbatim to plans/FILINGS.md at FS131-ICO2's filing (2026-10-16); current state is CLAUDE.md § Frontier and LEDGER.md"),
     # FS131-IL5's filing (2026-10-16): the five-colour chain's "Last filed" entry moved to plans/FILINGS.md.
     "2026-10-15": ("plans/FILINGS.md", "the five-colour chain's entry of CLAUDE.md's \"Last filed\" chain (FS131-LCH1, FS131-LGT1, 2026-10-15), moved verbatim to plans/FILINGS.md at FS131-IL5's filing (2026-10-16); current state is CLAUDE.md § Frontier and LEDGER.md"),
     # FS131-FC5 (2026-10-14): the "Last filed" chain's older entries moved to plans/FILINGS.md (size budget).
