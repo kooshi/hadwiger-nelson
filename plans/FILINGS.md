@@ -5,6 +5,8 @@ first, moved here verbatim at FS131-FC5 (2026-10-14) under the file's size budge
 not need to a file read by address"). Each entry describes the filing as it was made; the front page and `LEDGER.md` hold what is current.
 A filing that leaves the "Last updated" line is added at the top.*
 
+before it **three colours on abelian Cayley graphs** (FS131-KTC1, FS131-ICT1, FS131-ICT2, FS131-ICT3, 2026-10-16: three `CayleyThree/` modules through the gate on `2b04f38d5` — row 79's criterion, its periodic form, density and `P = F` at three colours, in a wider class than the row: every abelian group and every step set without `0` for the criterion, no torsion-freeness and no symmetry for the rest; stated in `plans/KERNEL-HOLDS.md`; no value of `χ(ℝ²)` moved)
+
 before it **the p-adic plane** (FS131-KPA1, FS131-IQP1, FS131-IQP3, 2026-10-16: eight modules through the gate on `e3e1dbb73` — the posers' `[BardestaniMallahiKarai2017]` Question 1 answered no in the kernel: every Borel colouring of the anisotropic `ℚ_p²` uses at least `1 + (p + 1)/(2√p)` colours, on Weil's bound; `χ_Bor(ℚ_p²) = 3, 4, 5, 5` at `p = 3, 7, 11, 19` and `5 ≤ χ_Bor(ℚ₂₃²) ≤ 8`; row 75's consequences clause, stated in § Where the problem stands; no value of `χ(ℝ²)` moved)
 
 before it **the collapse** (FS131-KCL1, FS131-ICO1, FS131-ICO2, 2026-10-16: seven `Collapse/` modules through the gate on `7c72b9bf7` — the field equality `χ(F²) = χ(ℝ²)` wherever the stable primes are uniformly thick below `1/5`, and with no hypothesis at ℚ(√635087) and de Grey's field; row 128's field clause, its MR the kernel's `Rigidity.mrPlus`, stated in § Where the problem stands; no value of `χ(ℝ²)` moved)
