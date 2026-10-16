@@ -1,0 +1,51 @@
+slot: admitted time: mem 8 GiB (hard cap), cpus 7
+import took 299ms
+elaboration took 2.88s
+type checking took 7.1s
+type checking took 29.4s
+type checking took 7.52s
+cumulative profiling times:
+	attribute application 0.0528ms
+	blocked (unaccounted) 44.5s
+	compilation (IR) 13ms
+	compilation (LCNF base) 65.4ms
+	compilation (LCNF impure) 53.5ms
+	compilation (LCNF mono) 67.7ms
+	elaboration 2.89s
+	fix level params 0.458ms
+	import 299ms
+	initialization 59ms
+	instantiate metavars 0.382ms
+	interpretation 6.08ms
+	let-to-have transformation 6.45ms
+	linting 42.4ms
+	module linting 0.00112ms
+	parsing 80.3ms
+	process pre-definitions 24.5ms
+	share common exprs 2.95ms
+	tactic execution 1.33ms
+	type checking 44s
+	typeclass inference 168ms
+	Command being timed: "lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false -Dprofiler=true data/fs131/kpa1/cert7/Cert7Probe.lean"
+	User time (seconds): 44.79
+	System time (seconds): 3.70
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:48.77
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 2894116
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 448658
+	Voluntary context switches: 549
+	Involuntary context switches: 500
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
