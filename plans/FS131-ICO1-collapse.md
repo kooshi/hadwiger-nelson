@@ -102,3 +102,21 @@ Every leaf proved (farm iteration; the build at the next build). About 630 lines
 
 **Re-price after two kinds of new leaf** (Thick, Mixing): 990 lines against the plan's 1,120 for these, every leaf closed in at
 most five compiles. The copies (`Colouring → Dichotomy → Slice`) come next; then `Selection`, `Headline`.
+
+## Stage 4 — SAVED: `Collapse/Colouring` and `Collapse/Dichotomy` (the first copies)
+
+Every leaf proved (farm iteration). **Re-price, the copy kind:** `Colouring` 215 lines of proof against the plan's 260;
+`Dichotomy` about 610 against 1,000 — each leaf a copy of its four-colour namesake at `Fin k`, closed in at most three
+compiles. The colour spectral measure (record § 3.2, decision 2) is what made the copies shorter: no tetrahedral identity, and
+one private `colour_decomp` (`σ = Σ_j σ_{e_j}` by Fourier uniqueness, for any random colouring moved equivariantly at `0`)
+serves both SI-3 and the factor law's spectrum.
+- `Colouring`: `xk_nonempty_of_colorable`, `isClosed_Xk`, `measurableSet_Xk`, `rot_mem_Xk` as `SpectralChain`'s; the
+  invariant measure as `Rigidity/InvariantMeasure`'s two steps at `Fin k` (private copies; that module's statements are at
+  `Fin 4`); `Xk_one_eq_empty` (`0, 1` adjacent).
+- `Dichotomy`: private `colourIndK`, `integral_colourIndK_mul_comp`, `measureReal_eq_sum_colours`, `colour_decomp`; the SI-4
+  block of `Arith/SpectralInputs` at `Fin k` (`condSupportK`, `si4K`, `si4_equivariantK`, with the generic
+  `condExp_comp_measurePreserving` read as it is); `TraceSplit`'s conditional-law lemmas at `Fin k`; `APlus`'s rotation of the
+  factor and its factor colouring at `Fin k` (`minSelK` needs `NeZero k`: `exists_factorLawK` disposes of `k = 0` first — no
+  probability on the empty `R → Fin 0`). `IsColourSpectral.rotInv` directly by Fourier uniqueness (`P(c(0) = c(uy)) =
+  P(c(0) = c(y))` from `rot_inv`), with no Herglotz–Bochner uniqueness clause.
+- `attribute [local instance] InvColouring.isProb` in the module (the four-colour modules' `scoped` form, local here).
