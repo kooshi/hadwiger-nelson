@@ -1,0 +1,96 @@
+@colorable_three_iff_bandSet_nonempty : ∀ {A : Type u_1} [inst : AddCommGroup A] {S : Set A},
+  0 ∉ S → ((SimpleGraph.addCayley S).Colorable 3 ↔ (CharacterColouring.bandSet S (CharacterColouring.band 3)).Nonempty)
+'HadwigerNelson.CayleyThree.colorable_three_iff_bandSet_nonempty' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+@exists_torsion_mem_bandSet : ∀ {A : Type u_1} [inst : AddCommGroup A] {S : Set A} [AddGroup.FG A],
+  S.Finite →
+    (CharacterColouring.bandSet S (CharacterColouring.band 3)).Nonempty →
+      ∃ θ ∈ CharacterColouring.bandSet S (CharacterColouring.band 3), ∃ N, N ≠ 0 ∧ N • θ = 0
+'HadwigerNelson.CayleyThree.exists_torsion_mem_bandSet' depends on axioms: [propext, Classical.choice, Quot.sound]
+@finiteIndex_ker_of_nsmul_eq_zero : ∀ {A : Type u_1} [inst : AddCommGroup A] {θ : A →+ UnitAddCircle} {N : ℕ},
+  N ≠ 0 → N • θ = 0 → θ.ker.FiniteIndex
+'HadwigerNelson.CayleyThree.finiteIndex_ker_of_nsmul_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+@colorable_three_iff_exists_isPeriodic : ∀ {A : Type u_1} [inst : AddCommGroup A] {S : Set A} [AddGroup.FG A],
+  S.Finite → ((SimpleGraph.addCayley S).Colorable 3 ↔ ∃ C, IsPeriodic C)
+'HadwigerNelson.CayleyThree.colorable_three_iff_exists_isPeriodic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+colorable_three_rat : (SimpleGraph.addCayley {1}).Colorable 3
+'HadwigerNelson.CayleyThree.colorable_three_rat' depends on axioms: [propext, Classical.choice, Quot.sound]
+not_isPeriodic_rat : ∀ (C : (SimpleGraph.addCayley {1}).Coloring (Fin 3)), ¬IsPeriodic C
+'HadwigerNelson.CayleyThree.not_isPeriodic_rat' depends on axioms: [propext, Classical.choice, Quot.sound]
+@colorable_three_iff_of_fg_torsionFree : ∀ {A : Type u_1} [inst : AddCommGroup A] {S : Set A} [AddGroup.FG A]
+  [_htf : IsAddTorsionFree A],
+  S.Finite →
+    -S = S →
+      AddSubgroup.closure S = ⊤ →
+        0 ∉ S →
+          ((SimpleGraph.addCayley S).Colorable 3 ↔
+              (CharacterColouring.bandSet S (CharacterColouring.band 3)).Nonempty) ∧
+            ((SimpleGraph.addCayley S).Colorable 3 ↔ ∃ C, IsPeriodic C)
+'HadwigerNelson.CayleyThree.colorable_three_iff_of_fg_torsionFree' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+@exists_affine_of_forall_three_nsmul : ∀ {A : Type u_1} [inst : AddCommGroup A] {m : ℕ} {s : Fin m → A},
+  Function.Surjective ⇑(ThreeColour.relMap s) →
+    ∀ {c : A → ZMod 3},
+      ThreeColour.ProperAlong s c →
+        (∀ θ ∈ CharacterColouring.bandSet (Set.range s) (CharacterColouring.band 3), 3 • θ = 0) →
+          ∃ φ, ∀ (x : A), c x = c 0 + φ x
+'HadwigerNelson.CayleyThree.exists_affine_of_forall_three_nsmul' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+@exists_isPeriodic_eqOn : ∀ {A : Type u_1} [inst : AddCommGroup A] {S : Set A},
+  S.Finite →
+    AddSubgroup.closure S = ⊤ →
+      ∀ (C : (SimpleGraph.addCayley S).Coloring (Fin 3)) (B : Finset A), ∃ C', IsPeriodic C' ∧ Set.EqOn ⇑C' ⇑C ↑B
+'HadwigerNelson.CayleyThree.exists_isPeriodic_eqOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+@coloring_mem_closure_isPeriodic : ∀ {A : Type u_1} [inst : AddCommGroup A] {S : Set A},
+  S.Finite →
+    AddSubgroup.closure S = ⊤ →
+      ∀ (C : (SimpleGraph.addCayley S).Coloring (Fin 3)), ⇑C ∈ closure {f | ∃ C', IsPeriodic C' ∧ ⇑C' = f}
+'HadwigerNelson.CayleyThree.coloring_mem_closure_isPeriodic' depends on axioms: [propext, Classical.choice, Quot.sound]
+@periodicForcedSubgroup_three_eq_forcedSubgroup : ∀ {A : Type u_1} [inst : AddCommGroup A] {S : Set A},
+  S.Finite → AddSubgroup.closure S = ⊤ → periodicForcedSubgroup S 3 = forcedSubgroup S 3
+'HadwigerNelson.CayleyThree.periodicForcedSubgroup_three_eq_forcedSubgroup' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+@inheritanceQuestion_three : ∀ {A : Type u_1} [inst : AddCommGroup A] {S : Set A},
+  S.Finite → AddSubgroup.closure S = ⊤ → InheritanceQuestion S 3
+'HadwigerNelson.CayleyThree.inheritanceQuestion_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+@forcedSubgroup_finiteIndex_iff_finite : ∀ {A : Type u_1} [inst : AddCommGroup A] {S : Set A} {k : ℕ},
+  (forcedSubgroup S k).FiniteIndex ↔ Finite ((SimpleGraph.addCayley S).Coloring (Fin k))
+'HadwigerNelson.CayleyThree.forcedSubgroup_finiteIndex_iff_finite' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+@exists_isPeriodic_eqOn_of_fg_torsionFree : ∀ {A : Type u_1} [inst : AddCommGroup A] [AddGroup.FG A]
+  [_htf : IsAddTorsionFree A] {S : Set A},
+  S.Finite →
+    -S = S →
+      AddSubgroup.closure S = ⊤ →
+        0 ∉ S →
+          ∀ (C : (SimpleGraph.addCayley S).Coloring (Fin 3)) (B : Finset A), ∃ C', IsPeriodic C' ∧ Set.EqOn ⇑C' ⇑C ↑B
+'HadwigerNelson.CayleyThree.exists_isPeriodic_eqOn_of_fg_torsionFree' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+@mcshane_model : ∀ {m : ℕ} (x : Fin m → ℤ), mcshane (fun y => ∑ j, y j) {0} ⊥ 0 x = l1 x
+'HadwigerNelson.CayleyThree.mcshane_model' depends on axioms: [propext, Classical.choice, Quot.sound]
+def HadwigerNelson.IsPeriodic.{u_1} : {A : Type u_1} →
+  [inst : AddCommGroup A] → {S : Set A} → {k : ℕ} → (SimpleGraph.addCayley S).Coloring (Fin k) → Prop :=
+fun {A} [AddCommGroup A] {S} {k} C => (periods C).FiniteIndex
+data/fs131/ict2/lean/ReadAloud.lean:45:7: error(lean.unknownIdentifier): Unknown constant `HadwigerNelson.ThreeColourCharacter.bandSet`
+data/fs131/ict2/lean/ReadAloud.lean:46:7: error(lean.unknownIdentifier): Unknown constant `HadwigerNelson.ThreeColourCharacter.band`
+def HadwigerNelson.periodicForcedSubgroup.{u_1} : {A : Type u_1} →
+  [inst : AddCommGroup A] → Set A → ℕ → AddSubgroup A :=
+fun {A} [AddCommGroup A] S k => ⨅ C, ⨅ (_ : IsPeriodic C), periods C
+def HadwigerNelson.forcedSubgroup.{u_1} : {A : Type u_1} → [inst : AddCommGroup A] → Set A → ℕ → AddSubgroup A :=
+fun {A} [AddCommGroup A] S k => ⨅ C, periods C
+def HadwigerNelson.InheritanceQuestion.{u_1} : {A : Type u_1} → [AddCommGroup A] → Set A → ℕ → Prop :=
+fun {A} [AddCommGroup A] S k => (∃ C, IsPeriodic C) → periodicForcedSubgroup S k ≤ forcedSubgroup S k
+ThreeColour.properAlong_one_two : ThreeColour.ProperAlong ![1, 2] fun x => ↑x
+ThreeColour.nonempty_winding_one_two : Nonempty (ThreeColour.Winding ![1, 2])
+isTight_one_two : IsTight (heightWinding ThreeColour.properAlong_one_two) ⟨![2, -1], ⋯⟩
+coloringOneTwo : (SimpleGraph.addCayley {1, 2}).Coloring (Fin 3)
+'HadwigerNelson.CayleyThree.isTight_one_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.CayleyThree.coloringOneTwo' depends on axioms: [propext, Classical.choice, Quot.sound]

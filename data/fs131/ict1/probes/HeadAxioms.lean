@@ -1,0 +1,17 @@
+import Proofs.HadwigerNelson.CayleyThree.Density
+open HadwigerNelson.CayleyThree
+#print axioms colorable_three_iff_bandSet_nonempty
+#print axioms finiteIndex_ker_of_nsmul_eq_zero
+#print axioms exists_torsion_mem_bandSet
+#print axioms colorable_three_iff_exists_isPeriodic
+#print axioms colorable_three_rat
+#print axioms not_isPeriodic_rat
+#print axioms colorable_three_iff_of_fg_torsionFree
+#print axioms exists_affine_of_forall_three_nsmul
+#print axioms exists_isPeriodic_eqOn
+#print axioms coloring_mem_closure_isPeriodic
+#print axioms periodicForcedSubgroup_three_eq_forcedSubgroup
+#print axioms inheritanceQuestion_three
+#print axioms forcedSubgroup_finiteIndex_iff_finite
+#print axioms exists_isPeriodic_eqOn_of_fg_torsionFree
+#print axioms mcshane_model

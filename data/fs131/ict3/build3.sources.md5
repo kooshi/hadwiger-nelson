@@ -1,0 +1,12 @@
+5bdabe8599e0e3f2b183b13749b4c9e2  Proofs/HadwigerNelson/CayleyThree/Circular.lean
+2e064082623ad16d32919e11afd430fd  Proofs/HadwigerNelson/CayleyThree/Fibre.lean
+80ba81d39924aa8c583ed560d6aaa236  Proofs/HadwigerNelson/CayleyThree/Density.lean
+db55f0e213a7404ed3a8caea259818b5  Proofs.lean
+05df3d734acb6b6d20988283b0f7170c  Proofs/HadwigerNelson/PadicPlane/Basic.lean
+5c49cec29f5326d67197d1de124680ea  Proofs/HadwigerNelson/PadicPlane/Measure.lean
+88d11ab95a0dfcf5e02d34853797d35e  Proofs/HadwigerNelson/PadicPlane/Tower.lean
+ac09ef337371e6785d28cbd07c749ed5  Proofs/HadwigerNelson/PadicPlane/Upper.lean
+b0fe2f6a564d004973b16d20fd7846ce  Proofs/HadwigerNelson/PadicPlane/Values.lean
+c736465bd2b53051ceb5d01fe6dedd43  Proofs/HadwigerNelson/Arith/FibreCert7Bound.lean
+da4c68bb3b4bb6d5e45d4dafa86c3ffd  Proofs/HadwigerNelson/Arith/FibreCert7Check.lean
+051d0450802739f42376f80a4259be80  Proofs/HadwigerNelson/Arith/FibreCert7.lean
