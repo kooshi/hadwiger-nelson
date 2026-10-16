@@ -159,3 +159,35 @@ the mechanism whole, as a first-class part of the template:
   deriver's three tiers of knowledge (results, understanding, method).
 
 Everything else in the brief stands. The no-spawn rule stands: you start no agents of your own.
+
+## Amendment 2 — 2026-10-16 02:34 UTC: the why of every rule (Kooshi's W19)
+
+> W19: (2026-10-16, on the generic workflow repository) Make sure that the "why" of every aspect of our workflow is documented for the agent that lands in that repo cold.
+> — source: data/am/REQUEST-2026-10-16.md
+
+> **W19, read by Keryx (2026-10-16), labelled as mine.** ("Make" corrected from a typo, W13.) Every rule, setting, gate, state, role boundary and convention in the template carries its reason beside it, in the file the mind that obeys it loads, so that an agent arriving with no context can apply it, and can tell when it no longer applies. Where this repository's text gives the reason only as an attribution ("Kooshi, date: …"), the template states the reason itself; where the reason was an incident here, it says what went wrong in terms tied to no problem. A rule whose reason cannot be recovered is reported, never shipped bare.
+> — source: data/am/REQUEST-2026-10-16.md
+
+**This adds to § Done means.** The reader to write for is a fresh agent launched in the new repository with nothing but
+the files it loads: no conversation, no history and no access to this repository.
+- **Beside every rule, its reason**, in the file the mind that obeys the rule loads: each standing rule, each lane's
+  boundaries and hand-offs, each milestone state and what moves it, the gate's every check, the brief's every field, the
+  one-writer files, delegation one level deep, the slot cap and model choice, replacing agents deep in their context, the
+  budgets, current-state-only files, one home per fact, the protected paragraphs, the grades, the stub rule, the search
+  lane's separation, the kernel as the second check, and every setting in `.claude/settings.json` (JSON holds no comments,
+  so the settings' reasons go in a file beside it that the README points to).
+- **The reason, not the attribution.** This repository often gives a rule's reason as its source alone, such as "(Kooshi,
+  2026-10-03: …)". In the template, state the reason the quotation carries, in plain words. Where his words are the
+  clearest statement of a principle, quote them as the principal's, as W18's are; never as a bare authority.
+- **Incidents become lessons.** Where a rule exists because something went wrong here, say what went wrong in terms tied
+  to no problem and to no person's circumstances (for example: "a job id was issued twice, and two jobs wrote one record").
+  You may read this repository's history and plans to recover a reason: `plans/HISTORY-WORKFLOW-3.0.md`, `WORKFLOW.md`,
+  the close inventories, `git log`. They are read-only.
+- **The identities stay byte-identical.** Their reasons are already inside them; where a lane file builds on an identity,
+  its workflow says why it departs from or extends it.
+- **A control:** your record lists every rule you carried, with the file and line where its reason sits. A rule whose
+  reason you cannot recover is a `CHECK:` in your report, and is not shipped without one.
+- **Then a cold read**: before the front page's stage closes, read the template as that fresh agent would, from
+  `CLAUDE.md` and the coordinator's output style outward, and fix every rule that reads as an order with no reason.
+
+Everything else in the brief and in Amendment 1 stands. The no-spawn rule stands: you start no agents of your own.
