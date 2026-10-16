@@ -1,0 +1,81 @@
+FloorPlanes	StandingFive.norm_normOne_charSum_le	std3
+ClassRatio	Rigidity.norm_charSum_le_weil	std3 + StandingFive.kloosterman_bound
+Thick	Collapse.ThickAt.mono	std3
+Thick	Collapse.thickAt_one	std3
+Thick	Collapse.exists_addChar_extend	std3
+Thick	Collapse.not_isRamified_of_thickAt	std3
+Thick	Collapse.thick_of_forall_thickAt	std3 + StandingFive.kloosterman_bound
+Thick	Collapse.norm_sum_piFinset_le	std3
+Thick	Collapse.thickAt_weil	std3 + StandingFive.kloosterman_bound
+Thick	Collapse.levU_nonempty	std3
+Thick	Collapse.finite_levU	std3
+Thick	Collapse.thick_of_card	std3 + StandingFive.kloosterman_bound
+Thick	Collapse.image_levR_unitVectors_of_unramified	std3
+Thick	Collapse.weil_const_anti	std3
+Thick	Collapse.levelThick	std3
+Colouring	Collapse.nonempty_invColouring_bot	std3
+Colouring	Collapse.exists_invColouring	std3
+Colouring	Collapse.xk_nonempty_of_colorable	std3
+Colouring	Collapse.rot_mem_Xk	std3
+Colouring	Collapse.InvColouring.isProb	std3
+Colouring	Collapse.shift_mem_Xk	std3
+Colouring	Collapse.Xk_one_eq_empty	std3
+Colouring	Collapse.measurableSet_Xk	std3
+Colouring	Collapse.isClosed_Xk	std3
+Colouring	Collapse.nonempty_invColouring_of_colorable	std3
+Colouring	Collapse.InvColouring.carried	std3
+Colouring	Collapse.InvColouring.rot_inv	std3
+Colouring	Collapse.InvColouring.shift_inv	std3
+Dichotomy	Collapse.exists_invColouring_TA	std3 + Rigidity.positive_entropy_rigidity
+Dichotomy	Collapse.exists_isColourSpectral	std3
+Dichotomy	Collapse.not_isSPWitness_of_mrPlus	std3
+Dichotomy	Collapse.not_isSPWitness	std3 + Rigidity.positive_entropy_rigidity
+Dichotomy	Collapse.IsColourSpectral.rotInv	std3
+Dichotomy	Collapse.colourShiftK_add	std3
+Dichotomy	Collapse.IsColourSpectral.integral_unit	std3
+Dichotomy	Collapse.measurable_colourShiftK	std3
+Dichotomy	Collapse.integral_condLawK_mul_nonneg	std3
+Dichotomy	Collapse.rotInv_restrict_compl_TA	std3
+Dichotomy	Collapse.InvColouring.measurePreserving_shift	std3
+Dichotomy	Collapse.setIntegral_compl_TA_re_k	std3
+Dichotomy	Collapse.equalAtUnitsK_of_not_neg	std3
+Dichotomy	Collapse.exists_factorLawK	std3
+Dichotomy	Collapse.setIntegral_compl_TA_rot_k	std3
+Slice	Collapse.exists_slice_of_colorable	std3 + Rigidity.positive_entropy_rigidity
+Slice	Collapse.exists_extension_k	std3
+Slice	Collapse.exists_slice_k	std3
+Slice	Collapse.tendsto_measure_ne_k	std3
+Slice	Collapse.measure_ne_eq_k	std3
+Mixing	Collapse.not_both_ge_of_mixing	std3
+Mixing	Collapse.levelResid_nonneg	std3
+Mixing	Collapse.tendsto_levelResid	std3
+Mixing	Collapse.finite_mixing	std3
+Mixing	Collapse.mixing_K	std3
+Mixing	Collapse.mixing_at_level	std3
+Selection	Collapse.le_fibreMass_selCol	std3
+Selection	Collapse.sum_fibreMass	std3
+Selection	Collapse.exists_aeColouring_of_slice	std3
+Selection	Collapse.ae_slice_edge	std3
+Selection	Collapse.not_both_heavy	std3
+Selection	Collapse.unitPairsNull_selCol	std3
+Selection	Collapse.measurable_fibreMass	std3
+Selection	Collapse.measurable_selCol	std3
+Headline	Collapse.isSquare_deGrey	std3
+Headline	Collapse.isSquare_635087	std3
+Headline	Collapse.not_colorable_one_planeOver	std3
+Headline	Collapse.chromaticNumber_planeOver_sqrt635087_six_or_seven	std3 + Outside.OAI158.no_proper_five_coloring, Rigidity.positive_entropy_rigidity, StandingFive.kloosterman_bound
+Headline	Collapse.thick_sqrt635087	std3 + StandingFive.kloosterman_bound
+Headline	Collapse.le_of_isSquare_635087	std3
+Headline	Collapse.chromaticNumber_planeOver_eq_plane_of_forall_thickAt	std3 + Rigidity.positive_entropy_rigidity, StandingFive.kloosterman_bound
+Headline	Collapse.chromaticNumber_planeOver_eq_plane_of_thick	std3 + Rigidity.positive_entropy_rigidity
+Headline	Collapse.stablePrime_sqrt635087	std3
+Headline	Collapse.chromaticNumber_planeOver_sqrt635087	std3 + Rigidity.positive_entropy_rigidity, StandingFive.kloosterman_bound
+Headline	Collapse.weil_103_lt_fifth	std3
+Headline	Collapse.chromaticNumber_plane_le_of_thick	std3 + Rigidity.positive_entropy_rigidity
+Headline	Collapse.chromaticNumber_planeOver_deGrey	std3 + Rigidity.positive_entropy_rigidity, StandingFive.kloosterman_bound
+Headline	Collapse.thick_deGrey	std3 + StandingFive.kloosterman_bound
+Headline	Collapse.weil_131_lt_fifth	std3
+Headline	Collapse.not_thick_bot	std3
+Headline	Collapse.le_of_isSquare_deGrey	std3
+Headline	Collapse.stablePrime_deGrey	std3
+# 80 public theorems

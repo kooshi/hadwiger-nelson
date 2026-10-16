@@ -1,0 +1,9 @@
+start 2026-10-16T14:19:55Z at 54921b69e
+slot: waiting (ledger 12 + 16 > budget 22 GiB; 8 free CPUs < 10)
+slot: waiting (ledger 18 + 16 > budget 22 GiB; 5 free CPUs < 10)
+slot: waiting (ledger 12 + 16 > budget 22 GiB; 8 free CPUs < 10)
+slot: waiting (ledger 20 + 16 > budget 22 GiB; 7 free CPUs < 10)
+slot: waiting (ledger 12 + 16 > budget 22 GiB; 8 free CPUs < 10)
+slot: waiting (9 free CPUs < 10)
+slot: waiting (ledger 13 + 16 > budget 22 GiB; 6 free CPUs < 10)
+exit=143 2026-10-16T14:30:41Z

@@ -1,0 +1,11 @@
+slot: admitted ico2: mem 6 GiB (hard cap), cpus 10,11
+data/fs131/ico2/work/Selection.lean:74:7: error(lean.unknownIdentifier): Unknown identifier `measurePreserving_swap`
+data/fs131/ico2/work/Selection.lean:160:27: error: Application type mismatch: The argument
+  fun p hp hall => ?m.78
+has type
+  (p : ℂ × ℝ) → (hp : p ∈ unitPairSet (selCol φ θ₀ ⁻¹' {j})) → (hall : ?m.79 p hp) → ?m.80 p hp hall
+but is expected to have type
+  unitPairSet (selCol φ θ₀ ⁻¹' {j}) ⊆ ?m.73
+in the application
+  measure_mono_null fun p hp hall => ?m.78
+data/fs131/ico2/work/Selection.lean:161:2: error: No goals to be solved
