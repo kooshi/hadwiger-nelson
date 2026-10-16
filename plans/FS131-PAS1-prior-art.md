@@ -194,3 +194,87 @@ earlier JCTB 180 paper (their [9]); the hom-shift literature beyond FS-79's read
      every algebraic noninteger `α` and four for every `α`; cites `[OAIMath2026]` | `library/pdf/arXiv-2610.09474-davidson-monomial-cayley-graphs-one-parameter.pdf` |
      read: abstract, § 1, § 2.1–2.2; the rest scanned (FS131-PAS1) |
    - `[Payan1992]` (existing row): add *"zbMATH 0772.05043; its review read (FS131-PAS1); a corollary of row 79's criterion"*.
+
+## Stage 3 — SAVED: S2, a finite triangle-free six-chromatic unit-distance graph; the fractional forms
+
+### 3.1 The queries (2026-10-16; tag `S2` in `data/fs131/pas1/queries.jsonl`; 25 queries)
+
+| discipline | queries (hits) |
+|---|---|
+| geometric graph theory, girth | zb `ab:"unit distance" & ab:"triangle-free"` (3); `ab:"unit-distance" & ab:"triangle-free"` (3); `ab:"unit distance" & ab:"girth" & ab:"chromatic"` (7); `ab:"unit-distance graph" & ab:"girth"` (2); `ab:"chromatic number of the plane" & ab:"triangle"` (4); `ab:"chromatic number" & ab:"triangle-free" & ab:"plane" & ab:"unit"` (2); `ab:"unit distance graph" & ab:"rational points" & ab:"chromatic"` (1); ax `abs:"unit distance" AND abs:"triangle-free"` (1); `abs:"unit-distance" AND abs:"triangle-free"` (1); `abs:"6-chromatic" AND abs:"unit distance"` (0); `abs:"six-chromatic" AND abs:"unit"` (0); every arXiv abstract since 2026-07-01 with "Hadwiger-Nelson" (3) and since 2026-10-01 with "chromatic number of the plane" (1) |
+| fractional colouring | zb `ab:"fractional chromatic number" & ab:"unit distance"` (6); `… & ab:"plane" & ab:"rational"` (0); `… & ab:"number field"` (0); `… & ab:"algebraic"` (8, none on the plane); `ab:"fractional chromatic" & ab:"field" & ab:"distance"` (1, unrelated); `ab:"independence ratio" & ab:"unit distance"` (2); `ab:"independence ratio" & ab:"field" & ab:"distance"` (0); `ab:"Hall ratio" & ab:"plane"` (1); ax `abs:"fractional chromatic number" AND abs:"unit distance"` (3) |
+| held texts | the eighteen Polymath16 threads (`library/notes/polymath16-threads-1-18-text.txt`), grepped for "triangle-free" (3 lines; read in context); `[OAIMath2026]`'s clone, grepped for "triangle-free" and "girth" in its Hadwiger–Nelson family (none); `[Davies2026]` (held), grepped (none) |
+
+### 3.2 What was read
+
+- **`[deGrey2026]`** — A. de Grey, *A 5-chromatic, triangle-free unit-distance graph in ℝ³ with 61 vertices*, Geombinatorics
+  35(3) (2026) 111–118, **held** in the journal copy `library/geombinatorics/geombinatorics-v35-n3-2026-01.pdf` (the bibliography
+  row still says "not held … unread"). **Read in full.** Abstract: "We present an embedding of a 61-vertex, 5-chromatic graph of
+  girth 4 in R3 as a unit-distance graph (UDG). We speculate that no 6-chromatic case exists, even though 6-chromatic UDGs in R3
+  with girth 3 exist having as few as 47 vertices." Closing remarks (p. 116): "Second, do triangle-free 6-chromatic UDGs in R3
+  exist? Here we are less optimistic." Introduction: in the plane "no 5-chromatic case is known (indeed, all known 5-chromatic UDGs
+  are very triangle-dense)".
+- **`[Haugstrup2026]`** — A. Haugstrup, *A tetrahedron-free 6-chromatic unit-distance graph in three-dimensional space*, same issue,
+  102–110, **held** in the same copy (row says "not held"). **Read: § 1 and the closing section.** Closing: "Another question to
+  consider in R3 is the triangle-free case. Elsewhere in this issue [12] is demonstrated a 5-chromatic such construction, and we are
+  curious whether chromatic number 6 is achievable."
+- **`[Polymath16threads]`**, eighteenth thread (held): de Grey's post of 17 January 2026 states a conjecture — "For all d >= 2 and 3
+  <= n <= d+2, there exists a (d+n-1)-chromatic unit-distance graph in R^d that does not contain any n-simplex" — and calls its
+  plane case "proven for both relevant values of n (namely 3 and 4)"; Haugstrup's post of 13 February 2026 sketches "a triangle-free
+  6-chromatic UDG in R^4".
+- **`[Ducz2026]`** (held, read in full at an earlier gate): geometric 4-colourings of the Moser lattice and of the whole Moser ring,
+  so every unit-distance graph in the Moser ring has geometric fractional chromatic number at most 4, and `[MatolcsiEtAl2025]`'s
+  27-vertex graph there has exactly 4.
+- Abstracts: Bucić–Davies (arXiv:2312.06898; Amer. Math. Monthly 2025: large girth, exponential chromatic number in `ℝ^d`); Silva
+  Filho (arXiv:2607.19995: the coordinate fields of Exoo–Ismailescu's triangle-free 4-chromatic graphs); `[DuczVarga2026]`,
+  `[MatolcsiEtAl2025]` (held, read before); Alon–Bucić–Davies (arXiv:2609.36220, typical norms) by title only.
+
+### 3.3 Verdict: **not found in print** — and it answers two questions in print, against one speculation
+
+**The finite triangle-free six-chromatic unit-distance graph:** not found in print. No paper or thread found states one, in the
+plane or in any dimension below 4. What S2 bears on, given `[OAIMath2026]`'s `χ(ℝ²) ≥ 6` and the collapse's declared outside
+theorems (as the kernel corollary states it):
+1. **It answers `[deGrey2026]`'s question and `[Haugstrup2026]`'s** — whether a triangle-free 6-chromatic unit-distance graph exists
+   in `ℝ³` — **yes**: a planar unit-distance graph is one in `ℝ³`. It is **contrary to `[deGrey2026]`'s abstract**, "We speculate that
+   no 6-chromatic case exists" (the case being girth 4 in `ℝ³`; a triangle-free graph of the plane over a field has girth 4 or more,
+   and exactly 4 once a unit rhombus is added as a separate component, which changes no chromatic number).
+2. In the plane it goes past the triangle-free 5-chromatic graph asked for by `[Soifer2024]`'s Open Problem 55.1 (whose existence
+   half row 121 answered at ℚ(√47)), and past the plane case of de Grey's 2026 Polymath16 conjecture (which asks only 4 colours
+   without triangles).
+3. **A generalization the argument already carries** (no new derivation; a composition of held statements, [derived], one mind):
+   the collapse gives `χ(ℚ(√635087)²) = χ(ℝ²)` whatever `χ(ℝ²)` is, and `√3 ∉ ℚ(√635087)`, so by de Bruijn–Erdős **some finite
+   triangle-free unit-distance graph has chromatic number exactly `χ(ℝ²)`** — six or seven. Without `[OAIMath2026]` this says
+   triangle-free graphs reach the plane's number; with it, six.
+
+**The fractional forms:** `χ_f(F²) = 1/α_loc(F)` at every real number field, and `χ_f(F²) = χ_f(ℝ²)` where the collapse holds: not
+found in print. The nearest in print: the plane's `χ_f(ℝ²) = 1/m₁(ℝ²)` question (`[MatolcsiEtAl2025]` §2; row 129, answered by
+FS-133); and **one instance partly**: at the Moser ring, `χ_gf = 4` (`[Ducz2026]` Thm 3.1 with `[MatolcsiEtAl2025]`'s `G27`), the
+ring-level shadow of `χ_f(K²) = 4` (G60's instance; K's tight dyadic places give `α_loc(K) = 1/4`). The Moser ring is smaller than
+the ring `ℤ[U_K]` that the plane over K reaches (Lemma C′ puts the split primes' inverses in it), so the field statement is not
+Dúcz's.
+
+**Not read:** the rest of Haugstrup's paper; Rubanov's 2007 and 2013 claims (cited second-hand by both papers, publication not
+located by them); Bucić–Davies beyond the abstract.
+
+### 3.4 Drafts (each names its slot)
+
+1. **`README.md`** § 5 (the collapse), **Prior art** bullet, after *"The equality it passes through, between $\chi(\mathbb{R}^2)$
+   and the measurable chromatic number, is OpenAI's."*: *"The finite triangle-free six-chromatic graph: not found in print. It
+   answers a question of de Grey and of Haugstrup (both 2026), whether a triangle-free six-chromatic unit-distance graph exists even
+   in three dimensions — de Grey had speculated that none does."*
+2. **`LEDGER.md` row 129**, its **Prior art** field, after *"B-CHIF likely folklore."*: *"The fractional forms at a number field —
+   `χ_f(F²) = 1/α_loc(F)` at every real number field, and `= χ_f(ℝ²)` where the collapse holds — not found in print (FS131-PAS1,
+   2026-10-16); at the Moser ring the instance `χ_gf = 4` is `[Ducz2026]` Thm 3.1 with `[MatolcsiEtAl2025]`'s `G27`. The finite
+   triangle-free six-chromatic unit-distance graph (given `[OAIMath2026]`): not found in print; it answers `[deGrey2026]` p. 116 and
+   `[Haugstrup2026]`'s closing question in `ℝ³`, against `[deGrey2026]`'s speculation that none exists."* (If the kernel landing
+   files the triangle-free corollary under row 128 instead, the second sentence goes there.)
+3. **`CLOSED-QUESTIONS.md`** — a new entry beside § (Soifer 55.1, l. 619): *"**A triangle-free 6-chromatic unit-distance graph in
+   ℝ³.** `[deGrey2026]` p. 116: "do triangle-free 6-chromatic UDGs in R3 exist? Here we are less optimistic"; `[Haugstrup2026]`
+   (closing section): "we are curious whether chromatic number 6 is achievable". **Answered yes, in the plane, non-constructively**,
+   given `[OAIMath2026]`'s `χ(ℝ²) ≥ 6`: `χ(ℚ(√635087)²) = χ(ℝ²)` (row 128) and `√3 ∉ ℚ(√635087)`, so by de Bruijn–Erdős a finite
+   triangle-free unit-distance graph has chromatic number `χ(ℝ²) ≥ 6`; [kernel] at the landing of FS131-IFR1's corollary, on the
+   collapse's declared outside theorems and `Outside.OAI158.no_proper_five_coloring`. None is constructed."*
+4. **`BIBLIOGRAPHY.md`**: `[deGrey2026]` — change the copy column to *"held: `library/geombinatorics/geombinatorics-v35-n3-2026-01.pdf`,
+   pp. 111–118"* and the status to *"read in full (FS131-PAS1, 2026-10-16); its question (p. 116) and its abstract's speculation are
+   answered by the triangle-free six-chromatic graph, given `[OAIMath2026]`"*; `[Haugstrup2026]` — copy *"held: same issue, pp.
+   102–110"*, status *"§ 1 and closing section read (FS131-PAS1); its closing question answered likewise"*.
