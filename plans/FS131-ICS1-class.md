@@ -317,3 +317,196 @@ against `LEDGER.md` row 123 and `[Davies2026]` p. 5 as the row quotes it. `χ(·
 **Not claimed by the landing as a whole**: anything at `L ≥ 6`; any explicit five-chromatic graph; χ(ℚ(√167)²) ≥ 5's
 second route (every stable place 4-thick; planner's F5); novelty of CLS's general statement (not yet searched); `ℚ(√47)`'s
 value keeps row 121's attribution.
+
+## Drafts for the front page
+
+*Each draft names its file, its section, and the words it replaces or follows. The counts are the second gate's (§ Stage 6,
+on `960882257`, equal to the merge `21a5fc591` in `Proofs/`, `scripts/` and the package files). No novelty wording: CLS's
+general statement has not been searched for by name (item 1027), so "prior art not yet searched" stands where a novelty
+line would go; `ℚ(√47)`'s value keeps the ledger's attribution.*
+
+**D1 — `CLAUDE.md` § Trust ledger, the audit's sentence.** Replace "the current audit reads 10885 clean and 5 declared
+purchases, and 83 imported (and 574 axiom-free; 11,547 records at FS131-ICT3, three colours on abelian Cayley graphs,
+2026-10-16)" with: "the current audit reads 10914 clean and 5 declared purchases, and 99 imported (and 574 axiom-free;
+11,592 records at FS131-ICS1, five colours by field and by class, 2026-10-16)".
+
+**D2 — `CLAUDE.md` § Trust ledger, the imports' tallies.** (a) Replace "with sixty-four imported records (twelve of them the
+three-colour criterion's" with "with eighty imported records (twelve of them the three-colour criterion's", and after
+"…and `borelChromaticNumber_padicPlane_three`)" (the p-adic clause, which closes the Weil parenthesis) insert before its
+closing parenthesis: "; sixteen five colours by field and by class's, FS131-ICS1: CLS in full — `Rigidity.five_le_localBound_iff`
+over the arithmetic list `Rigidity.IsFourColourPlace`, its per-place forms, T-C(A)'s and the all-levels reading's — and
+`L(ℚ(√23, ∛2)) = 5` with its lower half, nine of them on Weil's bound alone; the other seven on E–L too". (b) Replace "with
+twenty-seven, fourteen of which rest on Weil's bound too (" with "with thirty-four, twenty-one of which rest on Weil's bound
+too (", and before "; the collapse's general form" insert ", and FS131-ICS1's seven: the quadratic dichotomy
+`SqrtFiveClass.five_le_chromaticNumber_planeOver_sqrt_iff` with its local form, the family's `χ = 5` and `L = 5`,
+`χ(ℚ(√23, ∛2)²) = 5`, `L(ℚ(√23)) = 4`, and the two readings of `L` agreeing through five".
+
+**D3 — `CLAUDE.md` § Trust ledger, "What the library assumes".** Replace "`axioms=3 rests=105 named=19 inline=14 outside=7
+ours=21 open=5 takes=109 mentions=2` — three outside theorems declared as axioms, with one hundred and five (axiom, theorem)
+rows resting on them, ninety theorems, thirteen of them on two and one on three;" with "`axioms=3 rests=128 named=19 inline=14
+outside=7 ours=21 open=5 takes=109 mentions=2` — three outside theorems declared as axioms, with one hundred and twenty-eight
+(axiom, theorem) rows resting on them, one hundred and six theorems, twenty of them on two and one on three;". (Check:
+85 + 2·20 + 3 = 128.)
+
+**D4 — `CLAUDE.md` § The gate, the vacuity counts.** Replace "`declarations=22519 refutations-skipped=243 sites=1465`" with
+"`declarations=22566 refutations-skipped=243 sites=1465`"; the second sentence (`vacuous=0 stale=0 declared=3 witnessed=40
+generic=1420 unknown=2`) is unchanged.
+
+**D5 — `CLAUDE.md` § Frontier, the "Last filed" line.** Replace "Last filed: **three colours on abelian Cayley graphs**
+(FS131-KTC1, …; no value of `χ(ℝ²)` moved); before it," with "Last filed: **five colours by field and by class** (FS131-KCS1,
+FS131-ICS1, 2026-10-16: four modules through the gate on `960882257` — for squarefree `m`, `χ(ℚ(√m)²) ≥ 5` exactly when
+`m ≡ 47, 143, 167 (mod 168)`; `χ = L = 5` at each such squarefree `d` that is a square modulo 11 or 19; `L(F) ≥ 5` exactly
+when no conjugation-fixed prime of `F(i)` is on an arithmetic list (CLS in full), and the two readings of `L` agree through
+five; `χ(ℚ(√23, ∛2)²) = 5`, a field with a complex place; stated in `plans/KERNEL-HOLDS.md`; no value of `χ(ℝ²)` moved);
+before it, **three colours on abelian Cayley graphs** (FS131-KTC1, FS131-ICT1, FS131-ICT2, FS131-ICT3),".
+
+**D6 — `plans/KERNEL-HOLDS.md`, "What the kernel holds, beyond the interval".** After "…the derivation is this project's,
+and the kernel's check is this landing's;" (the end of **the main clause through five**) insert: "**five colours by field
+and by class** (FS-131, FS131-ICS1): for squarefree `m`, `χ(ℚ(√m)²) ≥ 5` exactly when `m ≡ 47, 143, 167 (mod 168)`
+(`SqrtFiveClass.five_le_chromaticNumber_planeOver_sqrt_iff`; and `L(ℚ(√m)) ≥ 5` likewise, `…five_le_localBound_sqrt_iff`);
+`χ(ℚ(√d)²) = L(ℚ(√d)) = 5` at every such squarefree `d` that is a square, zero included, modulo 11 or modulo 19
+(`SqrtFiveClass.chromaticNumber_planeOver_sqrt_eq_five`, `…localBound_sqrt_eq_five`; 44 of the 52 class members below
+3000); **CLS in full** — for every real number field `F`, `L(F) ≥ 5` exactly when no prime of `F(i)` fixed by conjugation is
+ramified over `F`, has fixed field `𝔽₃` or `𝔽₇`, or is dyadic inert of norm at most 32 (`Rigidity.five_le_localBound_iff`
+over the arithmetic predicate `Rigidity.IsFourColourPlace`; per place, the level-one target is four-colourable exactly at a
+listed place and the all-levels four-colour ratio is below `1/4` exactly off the list,
+`Rigidity.colorable_four_levelTarget_one_iff`, `…exists_ratioAtMost_lt_quarter_iff`; T-C(A) likewise,
+`…tca_iff_forall_not_isFourColourPlace`; a listed place exists, `…exists_isFourColourPlace_rat`), on Weil's bound alone, and
+the level-one and all-levels readings of `L` agree through five (`Rigidity.min_localBoundAllLevels_five`); a usable prime's
+plane is a level-one target, `L(F) ≤ χ(Γ_q)` (`UpperHalf.localBound_le_unitQuadrance`, standard three; the bound is row
+52's, in `L`'s words); and `χ(ℚ(√23, ∛2)²) = 5` with `L = 5`, while `L(ℚ(√23)) = 4` and the field has a complex place
+(`SqrtTwentyThreeCbrtTwo.chromaticNumber_planeOver_sqrt23_cbrt2_eq_five`, `…localBound_sqrt23_cbrt2_eq_five`,
+`…localBound_sqrt23_eq_four`, `…not_isTotallyReal_F23`) — row 123's class, family and complex-place instance; the lower halves
+on `[EinsiedlerLindenstrauss2022]` Thm 1.3 and Weil's bound, the upper halves on the standard three. Prior art: CLS's general
+statement not yet searched; the quadratic instances are posed as open by `[Davies2026]` p. 5 (row 123); `ℚ(√47)`'s value as row
+121. Not claimed: anything at `L ≥ 6`; an explicit five-chromatic graph; `L` at the eight class members below 3000 that are a
+square neither modulo 11 nor modulo 19 (167 first);"
+
+**D7 — `LEDGER.md` row 123, the grade.** Replace "the family (44 of 52, `d ≤ 3000`), CLS in full and ℚ(√23, ∛2) keep the
+derivation's grade:**" with: "**[kernel] since FS131-ICS1 for the quadratic dichotomy — for squarefree `m`, `χ(ℚ(√m)²) ≥ 5`
+⟺ `m ≡ 47, 143, 167 (mod 168)` (`SqrtFiveClass.five_le_chromaticNumber_planeOver_sqrt_iff`, its `L` form
+`…five_le_localBound_sqrt_iff`) —; the family as the derivation computed it, `χ = L = 5` at every squarefree `d` in the class
+that is a square, zero included, modulo 11 or modulo 19 (`SqrtFiveClass.chromaticNumber_planeOver_sqrt_eq_five`,
+`…localBound_sqrt_eq_five`; 44 of the 52 with `d ≤ 3000`, re-counted by `tools/fs131_ics1_census.py`); CLS in full
+(`Rigidity.five_le_localBound_iff` over `Rigidity.IsFourColourPlace`, the per-place forms `colorable_four_levelTarget_one_iff`,
+`exists_ratioAtMost_lt_quarter_iff`, `five_le_chromaticNumber_levelTarget_one_iff`, T-C(A)'s `tca_iff_forall_not_isFourColourPlace`,
+the all-levels reading `five_le_localBoundAllLevels_iff`, `min_localBoundAllLevels_five`; on Weil's bound alone, the last on E–L
+too); and ℚ(√23, ∛2) (`SqrtTwentyThreeCbrtTwo.chromaticNumber_planeOver_sqrt23_cbrt2_eq_five`, `localBound_sqrt23_cbrt2_eq_five`
+on Weil's bound alone, `localBound_sqrt23_eq_four`, `not_isTotallyReal_F23`) — `Instances/SqrtFiveClass`,
+`Rigidity/FourColourPlaces`, `Instances/SqrtTwentyThreeCbrtTwo`, with the bridge `UpperHalf.localBound_le_unitQuadrance`
+(`Arith/StableAboveUsable`); the rest keeps the derivation's grade — the ledger's wider family "with `L = 5`" at the class
+members that are a square neither modulo 11 nor modulo 19 (eight below 3000, 167 first; `L` open there), `χ(ℚ(√167)²) ≥ 5`'s
+second route, and X28D's statement that `ℚ` and `ℚ(√23)` are all of ℚ(√23, ∛2)'s totally real subfields:**". And in the row's
+*Prior art* sentence, after "…it has no local bound and no statement over a general number field.", add: "CLS's general statement:
+prior art not yet searched (FS131-ICS1, item 1027)." The row's address column gains `Proofs/HadwigerNelson/Instances/SqrtFiveClass.lean`,
+`Rigidity/FourColourPlaces.lean`, `Instances/SqrtTwentyThreeCbrtTwo.lean`, `Arith/StableAboveUsable.lean`; `plans/FS131-ICS1-class.md`.
+
+**D8 — `ROADMAP.md` § 3, item 1.** Replace the item ("**Not stored as theorems** (`LEDGER.md` row 123; …) … the case with a
+complex place.") with: "1. **Row 123's remainder** (the class, the family as the derivation computed it, CLS in full and
+ℚ(√23, ∛2) are kernel theorems since FS131-ICS1, `plans/KERNEL-HOLDS.md`): `L` at the class members that are a square neither
+modulo 11 nor modulo 19 — 167, 887, 1055, 1319, 1823, 2351, 2735, 2903 below 3000 — which needs a target the kernel does not
+hold (`Γ₃₁` first, undecided); and `χ(ℚ(√167)²) ≥ 5` by its second route (every stable place 4-thick)." And in the appendix,
+group B, row 123's line: replace "| 123 | hand | yes |" with "| 123 | kernel, hand | yes |" (its kernel part as D7).
+
+**D9 — `README.md`, the table "Planes over number fields".** After the row "`χ(ℚ(√47)²) = 5`. Also `χ = 5` over ℚ(√143), …"
+insert the row: "| For squarefree `m`, `χ(ℚ(√m)²) ≥ 5` exactly when `m ≡ 47, 143, 167 (mod 168)`, and `χ(ℚ(√d)²) = 5` at each
+such squarefree `d` that is a square (zero included) modulo 11 or modulo 19. `L(F) ≥ 5` exactly when no prime ideal of `F(i)`
+that conjugation maps to itself is ramified over `F`, has a residue field of 9 or 49 elements, or lies above 2 with at most
+`32²` elements in its residue field. `χ(ℚ(√23, ∛2)²) = 5`, at a field with a complex place, while `L(ℚ(√23)) = 4`. |
+`SqrtFiveClass.five_le_chromaticNumber_planeOver_sqrt_iff`, `SqrtFiveClass.chromaticNumber_planeOver_sqrt_eq_five`,
+`Rigidity.five_le_localBound_iff`, `SqrtTwentyThreeCbrtTwo.chromaticNumber_planeOver_sqrt23_cbrt2_eq_five` | std3 + **EL** +
+**W** (the class criterion `L(F) ≥ 5`: std3 + **W**) | `[Davies2026]` p. 5 asks, for these residue classes, for a
+five-chromatic graph and whether six colours suffice: the lower bound `≥ 5` holds at every such squarefree `n`, with no graph
+exhibited, and five colours suffice at the squares modulo 11 or 19. The class criterion: prior art not yet searched | 123 |".
+
+**D10 — `LEAN.md` § Searching — Lean, new lines** (the planner's § 3.5 item 2 first):
+- "`decide` on `Squarefree n` at a numeral sticks at the well-founded `Nat.minSqFac`; for a prime use `(by norm_num : Nat.Prime
+  n).prime.squarefree` (FS131-KCS1)."
+- "`ValuationSubring.mul_mem`, `add_mem`, `neg_mem`, `sub_mem` take the two elements explicitly (`B.mul_mem x y hx hy`); the
+  `SubringClass` forms `mul_mem hx hy` take the membership proofs alone (FS131-ICS1)."
+- "`UpperHalf.exists_I_integer` gives an integer `i` of `F(i)` with `i² = −1` and `ī = −i`, not its sign: a proof that needs
+  `(i : ℂ) = I` builds the integer itself (`StableAboveUsable`'s private `iO`, from `exists_I_integer`'s own proof; FS131-ICS1)."
+- "A field generated by a cube root `c` of 2 and `√23` maps to any field `L` of characteristic zero that holds a cube root `y` of
+  2 and a square root of 23, with `c ↦ y` and no Galois closure: `IntermediateField.algHomAdjoinIntegralEquiv` at the root `y` of
+  `minpoly ℚ c = X³ − 2` (irreducible by `X_pow_sub_C_irreducible_of_prime`, in `Mathlib.FieldTheory.KummerPolynomial`, not in
+  the library's closure before; no rational cube root of 2 by `padicValRat.pow` at 2), then `L` as a `ℚ(c)`-algebra through that
+  map and `IntermediateField.nonempty_algHom_adjoin_of_splits` for `√23` over `ℚ(c)`. One lemma serves the `p`-adic embedding and
+  a complex embedding (`SqrtTwentyThreeCbrtTwo.exists_ringHom_F23`, private; FS131-ICS1)."
+- "A valuation subring of `F(i)` above a valuation subring `B` of `F` at an inert place: `B[i] = {z : Re z, Im z ∈ B}` is one
+  when `1 + t²` is a unit of `B` for every `t ∈ B` (`b = t·a` gives `a + bi` or its inverse); `ValuationSubring.ofSubring` with the
+  case split `b/a ∈ B` or `a/b ∈ B`, and `UpperHalf.exists_stablePrime_of_valuationSubring` names the stable prime
+  (`StableAboveUsable`'s private `gaussVal`; FS131-ICS1)."
+- "`decide` gave 'Expected type must not contain free variables' on a closed residue fact (`((23 : ℕ) : ZMod 11) ≠ 0`) passed as an
+  argument while a `haveI : Fact (Nat.Prime 11)` was in scope; stated as a closed lemma and passed, it elaborated (seen once; the
+  mechanism not read; FS131-ICS1)."
+- "The assumptions step counts a theorem concluding `∃ x, P x ∧ …` as concluding `P`: a landing that proves such an existence
+  makes a declared `.condition` for `P` `stale-condition`, and the entry is retired (`Arith.IsUsablePrime` by
+  `SqrtTwentyThreeCbrtTwo.exists_usablePrime_eleven_F23`, FS131-ICS1). A predicate a new module takes as a hypothesis with no
+  theorem concluding it fails as `undeclared-never-concluded`, and an `example` exhibiting a model does not count, being not
+  stored: state the model as a theorem (`Rigidity.exists_isFourColourPlace_rat`, FS131-ICS1)."
+- "A destructuring `fun ⟨_, h⟩ => …` or `let ⟨_, h⟩ := …` in a term-mode proof leaves a public `….match_1_1` auxiliary that the
+  vacuity scan counts in `declarations=` (FS131-ICS1: two in `Rigidity/FourColourPlaces`); reconcile the count with them, or
+  write the proof with `obtain`."
+- "Making a private theorem public is a rename: its instance binders' hygienic hash, minted from the declaration name, moves,
+  and Lean's hash of the stored type (which reads no binder name) does not. A statement check across the change compares the
+  private constant with its public name with that hash blanked for those constants alone, and the stored-type hashes equal
+  (`data/fs131/ics1/statements.py`'s `PUBLICIZED`, `logs/publicized-hashes.txt`; FS131-ICS1)."
+- "A landing whose branch changed a module that main's newer modules do not import copies only those new modules' build files
+  from main's tree (a full `rsync --checksum` dry run lists `ClassRatio` and its 19 downstream modules too, which it would replace
+  by builds of the old source): the copy, a checksum manifest before and after, and the build rebuilds the root alone
+  (`data/fs131/ics1/logs/copy2-*`; FS131-ICS1)."
+
+**D11 — `plans/POROS-2026-10-13-number-field-findings.md` § 3.3** (its writer's; the planner's § 3.5 item 3, unchanged):
+"`Cay(𝒪/𝔓^m, image of the unit vectors)`, `𝔓` a prime of `F(i)` fixed by complex conjugation, `m ⩾ 1`" → "`Cay(𝒪/𝔓, the
+norm-one residues)`, `𝔓` a prime of `F(i)` fixed by complex conjugation (level one; the all-levels reading agrees through five,
+`Rigidity.min_localBoundAllLevels_five`)".
+
+**D12 — `ARCHITECTURE.md`, the row `Rigidity/ClassRatio`** (not edited here; FS131-IFR1 edits the same module): append to its
+description "Public since FS131-ICS1 (items 1027, 1029): `exists_card_two_pow_sq`, `chromaticNumber_le_four_dyadic`,
+`chromaticNumber_le_four_of_small`, and `ratioAtMost_dyadic_of_six_le` (the `f ≥ 6` branch of `ratioAtMost_dyadic`, stated alone)."
+
+**D13 — the Proof Atlas** (rebuilt locally at the filing): row 123's grade from [hand] to [kernel] for the dichotomy, the family as
+computed, CLS in full and ℚ(√23, ∛2); [hand] stays for the wider family's eight members and the second route at ℚ(√167).
+
+**D14 — `CLOSED-QUESTIONS.md`** (if the filing keeps `[Davies2026]`'s question there): the quadratic residue classes'
+lower half `χ(ℚ(√n)²) ≥ 5` is now a kernel theorem for every squarefree `n ≡ 47, 143, 167 (mod 168)`; six-colourability is
+answered (five colours) at the members that are squares modulo 11 or 19, and open at the rest; no graph is exhibited.
+
+## Stage 6 — SAVED: the second gate, after `main`'s second merge (item 1047)
+
+`main` gained the three-colour criterion (`8ebb647bc`, three `CayleyThree/` modules) after the first gate, so `main` merged
+again (`21a5fc591`). Two conflicts, both resolved by keeping both landings' entries: `scripts/Axioms.lean` (the two CLEAN
+blocks before `=== PURCHASED ===`, the three-colour block first) and the vacuity header (`declarations=22566`, its sites and
+verdicts the three-colour gate's: my modules add no site). `Proofs.lean` and `ARCHITECTURE.md` merged with no conflict;
+the architecture check passes (`logs/arch-2.txt`). **The build copy**: a full `rsync --checksum` dry run from `main`'s
+checkout listed 86 files, among them `ClassRatio`'s and its 19 downstream modules', which it would have replaced by builds of
+the old source (`logs/copy2-dryrun-full.txt`). So only the three `CayleyThree` modules' 24 files were copied; their imports
+(`Arith/ThreeColourCharacter`, `Kempe`, `LocalGlobal`, Mathlib) include nothing this branch changed. Manifests before and
+after: the source unchanged, the copies identical (`logs/copy2-*`). **The build** on `21a5fc591`: exit 0, "241 of 241
+batches, 1 module(s) rebuilt" — the root alone — "0 module(s) with warnings, 7m18s" (`logs/build-4.log`, `build-4-full.log`).
+The 21 dumped modules were not rebuilt, so the statement comparison of Stage 3 (redone after the model theorem, Stage 4)
+reads the modules as gated.
+
+**The run** on `960882257` (two commits after the merge, touching only `plans/` and `data/`: `git diff 21a5fc591 960882257 --
+Proofs Proofs.lean scripts lakefile.toml lake-manifest.json lean-toolchain` is empty), logs `data/fs131/ics1/gate/`
+(the first gate's kept as `gate-1/`): `tracked-modified=0`; up to date; `sorry` lines 0; line-initial `axiom` lines 5;
+dupnames 0 and its self-test 0; axioms 0 and its self-test 0; vacuity 0 and its self-test 0; assumptions 0 and its self-test
+0; architecture 0; lint 0; the three digests 0 (each flags only `CLAUDE.md`'s recorded counts, which D1–D4 carry). "tracked
+files modified after the pass: 1" — this record, its drafts written during the run.
+
+**Count changes against the three-colour gate** (`data/fs131/ict3/gate/`, on `2b04f38d5`):
+
+| count | ict3 | ics1 (second gate) | change | why |
+|---|---|---|---|---|
+| audit records | 11,547 | 11,592 | +45 | this landing's 45 newly filed public records (56 in the five modules, 11 filed before) |
+| clean | 10,885 | 10,914 | +29 | 28 from the generator, and `exists_isFourColourPlace_rat` |
+| axiom-free | 574 | 574 | 0 | — |
+| imported | 83 | 99 | +16 | 9 on W alone, 7 on EL and W |
+| declared purchases | 5 | 5 | 0 | — |
+| assumptions `rests` | 105 | 128 | +23 | 9 + 2·7; the other eight counts unchanged |
+| vacuity `declarations` | 22,519 | 22,566 | +47 | as against iqp3: `ClassRatio` +4, the four modules +43 |
+| vacuity sites, verdicts, `refutations-skipped` | 1,465 (0, 0, 3, 40, 1,420, 2); 243 | the same | 0 | no site |
+| dupnames generated on demand | 31 | 31 | 0 | — |
+
+The first gate (`gate-1/`, on `6ff038e87`, before the three-colour criterion) read the same changes against the p-adic gate
+(§ Stage 4); the two runs agree in every change.
