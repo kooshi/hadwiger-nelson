@@ -100,3 +100,118 @@ Madore); `χ(ℚ²) = 2` (Woodall); `χ(F(t)²) = χ(F²)` (`[Fischer1990]` Thm 
   10,747 clean, 77 imported, 5 purchases, 569 axiom-free, at FS131-ICO2 on 2026-10-16).
 - **F4.** `LEDGER.md` row 104's *Not claimed* says "`χ(ℚ(L)²) = 2` needs `χ(ℚ²) = 2` in the kernel, row 63's missing instance";
   row 63 holds `χ(ℚ²) = 2` in the kernel since FS131-LU1. A stale clause; a correction owed to the ledger.
+
+## Stage 2 — SAVED: the facts, checked
+
+### 2.1 How the prints were made
+
+Three scratch files, run from the main tree (`/home/kooshi/source/lean-dir`, whose build is current for `main`) with
+`SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 python3 scripts/slot.py --mem 8 --cpus 2 -- lake env lean data/fs131/rdm1/<file>`; each
+exited 0 with no error. The files and their outputs are copied here, under `data/fs131/rdm1/`:
+
+| file | what it prints | output |
+|---|---|---|
+| `Prints.lean` | `#check @` and `#print axioms` for the 61 names the page or the reference file cites (main at `d6c07a22c`; no Lean file changed between `80629caf3` and it) | `prints-raw.txt` |
+| `Defs.lean` | `#print` of the 27 definitions those statements use (`localBound`, `levelTarget`, `StablePrime`, `planeOver`, `Thick`, `ThickAt`, `Plane.mu`, `Plane.mOne`, `Plane.chiM0`, `Plane.chiLebesgue`, `IsWeakColouringOn`, `Spectral.E`, …) | `defs-raw.txt` |
+| `Padic.lean` | the same for the `p`-adic plane's nine theorems and two definitions, after they landed on `main` during this job (`785a46e77`; the main tree at `cf2d262e7`, its build holding `PadicPlane/*.olean`) | `padic-raw.txt` |
+
+### 2.2 The axiom lists, as printed
+
+*std3* = `[propext, Classical.choice, Quot.sound]`; **W** = `StandingFive.kloosterman_bound` (Weil's bound); **EL** =
+`Rigidity.positive_entropy_rigidity` (Einsiedler–Lindenstrauss Thm 1.3); **O5** = `Outside.OAI158.no_proper_five_coloring`.
+Every name is under `HadwigerNelson`.
+
+| statement (short) | Lean name | printed |
+|---|---|---|
+| `4 ≤ χ(ℝ²)` | `four_le_chromaticNumber_plane` | std3 |
+| `5 ≤ χ(ℝ²)` (three graphs) | `chromaticNumber_plane_ge_five`, `…_510`, `…_553` | std3 |
+| `5 ≤ χ(ℝ²) ≤ 7` | `chromaticNumber_plane_interval` | std3 |
+| `6 ≤ χ(ℝ²) ≤ 7` | `Outside.OAI158.chromaticNumber_plane_six_or_seven` | std3 + O5 |
+| `6 ≤ χ_m⁰`, `6 ≤ χ_m⁰ ≤ 7` | `Outside.OAI158.six_le_chiM0`, `…chiM0_six_or_seven` | std3 + O5 |
+| `χ(ℝ²) = χ_m⁰(ℝ²)` | `Outside.OAI158.chromaticNumber_plane_eq_chiM0` | std3 |
+| `χ(ℝ²) = χ_m(ℝ²)`, `χ_m⁰ = χ_m` | `Plane.chromaticNumber_plane_eq_chiLebesgue`, `Plane.chiM0_eq_chiLebesgue` | std3 |
+| `7 ≤ χ ⟺ ⨆_{ε>0} µ₆(ε) < 1` | `Outside.OAI158.seven_le_chromaticNumber_plane_iff` | std3 |
+| the disc criterion and its two halves | `Plane.seven_le_chromaticNumber_plane_iff_exists_ball`, `Plane.colorable_iff_forall_ball`, `Plane.exists_radius_of_not_colorable` | std3 |
+| the density equality (six statements) | `OneClass.finIndepRatio_plane_eq_mOne`, `…_algPlane_eq_mOne`, `fractionalChromaticNumber_plane`, `…_algPlane`, `iSup_fractionalChromaticNumber_plane`, `tendsto_minIndepNum_div` | std3 |
+| `m₁ ≤ 0.2470`, `m₁ < 1/4` | `Plane.oneAvoidingDensityBound`, `Plane.mOne_le_0_2470`, `Plane.mOne_lt_one_quarter` | std3 |
+| `χ(ℚ(√3,√11)²) = 4` | `chromaticNumber_seamPlane` | std3 |
+| `χ(F²) ≤ L(F)`; `≤ χ(𝔽_p²)` | `UpperHalf.chromaticNumber_planeOver_le_localBound`, `…_le_finitePlane` | std3 |
+| `χ(ℚ²) = 2`, `χ(ℚ(√11)²) = 4` | `UpperHalf.chromaticNumber_planeOver_rat`, `…_eleven` | std3 |
+| `4 ≤ χ(ℚ(√11)²)` (witness) | `four_le_chromaticNumber_planeOver_eleven` | std3 |
+| the quadratic table | `ThreeFourColours.chromaticNumber_planeOver_sqrt_table` | std3 |
+| four colours from `1/3` | `TorsionExtraction.four_le_…_of_inv_three_mem`, `…_ne_three_of_inv_three_mem`, `four_le_…_fieldOfRadicands`, `four_le_…_of_sqrt_mem` | std3 |
+| the three-colour criterion; `χ = L` at `L ≤ 4` | `ThreeFourColours.chromaticNumber_planeOver_eq_three_iff`, `…_le_three_iff`, `…_eq_localBound_of_le_four` | std3 + W |
+| the main clause through five (three forms) | `Rigidity.min_localBound_five_le_chromaticNumber`, `…chromaticNumber_planeOver_eq_localBound_of_le_five`, `…min_chromaticNumber_five_eq_min_localBound_five` | std3 + EL + W |
+| `χ(ℚ(√47)²) = 5`; `= 5` at 143, 311, 335, ℚ(√3,√5); `≥ 5` at 167 | `SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five`; `SqrtClassValues.…` (five names) | std3 + EL + W |
+| `χ(ℚ(√47)²) ≤ 5` | `SqrtFortySeven.chromaticNumber_planeOver_sqrt47_le_five` | std3 |
+| the collapse, general | `Collapse.chromaticNumber_planeOver_eq_plane_of_thick` | std3 + EL |
+| the collapse at ℚ(√635087), at ℚ(√3,√5,√7,√11), per place | `Collapse.chromaticNumber_planeOver_sqrt635087`, `…_deGrey`, `…_eq_plane_of_forall_thickAt` | std3 + EL + W |
+| `6 ≤ χ(ℚ(√635087)²) ≤ 7` | `Collapse.chromaticNumber_planeOver_sqrt635087_six_or_seven` | std3 + EL + W + O5 |
+| `χ(F(t)²) = χ(F²)` | `RouteC.chromaticNumber_planeOver_adjoin_transcendental_eq` | std3 |
+| `χ(UD(ℤ/121, 2)) = 5` | `chromaticNumber_unitQuadrance_zmod121` | std3 |
+| three-colouring ⟹ a character in the band | `ThreeColourCharacter.bandSet_three_nonempty_of_proper` | std3 |
+| the transfer; the rigidity step (ported) | `Outside.OAI158.proper_to_borel_weak`, `Outside.OAI158.Spectral.residual_fourier` | std3 |
+| the `p`-adic bound; no uniform bound | `PadicPlane.one_add_div_le_of_borelColoring`, `…not_exists_bound_borelChromaticNumber_padicPlane`, `…le_borelChromaticNumber_padicPlane` | std3 + W |
+| `χ_Bor(ℚ₃²) = 3` | `PadicPlane.borelChromaticNumber_padicPlane_three` | std3 + W |
+| `χ_Bor = 4, 5, 5` at 7, 11, 19; `5 ≤ χ_Bor(ℚ₂₃²) ≤ 8` | `PadicPlane.borelChromaticNumber_padicPlane_seven`, `…_eleven`, `…_nineteen`, `five_le_…_twentyThree`, `…_twentyThree_le_eight` | std3 |
+| the three declared outside theorems | `Outside.OAI158.no_proper_five_coloring`, `StandingFive.kloosterman_bound`, `Rigidity.positive_entropy_rigidity` | each prints itself (and `propext`) |
+
+Every print agrees with the old README's "rests on" column, and with `CLAUDE.md` § Where the problem stands.
+
+### 2.3 Each result's notation, read against its stored type
+
+The page writes the plane over `F` as `F²` and its chromatic number as `χ(F²)`. The stored form is
+`(SimpleGraph.induce (planeOver F) (unitDistance ℂ)).chromaticNumber`, with `planeOver F = {z : ℂ | z.re ∈ F ∧ z.im ∈ F}` and
+`unitDistance ℂ` joining points at distance exactly 1 — the unit-distance graph on `F × F`. The readings that needed care:
+
+1. **`L(F)` is level one only.** `localBound F = ⨅ P, (levelTarget P 1).chromaticNumber`, over `StablePrime F` — the maximal ideals
+   `P` of the ring of integers of `F(i)` with `conj⁻¹(P) = P` — and `levelTarget P m` is the graph on `𝓞_{F(i)}/P^m` joining `x`, `y`
+   when `(x − y)·conj(x − y) = 1`. So the page defines `L(F)` as: the least chromatic number, over the primes of `F(i)` fixed by
+   complex conjugation, of the graph on the residue field joining `x` and `y` when `(x − y)` has norm one. The old README's definition
+   is this one. The asking lane's reader-facing statement (`plans/POROS-2026-10-13-number-field-findings.md` § 3.3, rank 1, labelled
+   "my reading of the kernel's `localBound` (every level `m`, the image of the unit vectors)") is not the kernel's: the kernel reads
+   level one and every norm-one residue, not only the images of unit vectors. No consequence for the page, which follows the kernel;
+   noted so nobody copies § 3.3's definition onto it. With no stable prime the infimum is `⊤`.
+2. **"Some prime of `F` has residue field `𝔽₃`"**: `∃ 𝔭, 𝔭.IsMaximal ∧ Nat.card (𝓞_F ⧸ 𝔭) = 3` — a prime of `F` itself, not of
+   `F(i)`; under the hypothesis `¬ Colorable 2`.
+3. **The quadratic table**: `m : ℕ` with `Squarefree m`, `ℚ(√m)` as `fieldOfRadicands {m}` = the subfield of `ℝ` generated by `√m`.
+   Its four clauses are exactly the old README's. The family clause `four_le_…_fieldOfRadicands` takes `d % 12 = 11` with no
+   squarefreeness; `four_le_…_of_sqrt_mem` takes any subfield of `ℝ` holding `√d`.
+4. **`1/3 ∈ ℤ[U_F]`**: `3⁻¹ ∈ unitRing F`, the subring of `ℂ` generated by `{z ∈ planeOver F | ‖z‖ = 1}`.
+5. **Thickness**: `Thick F c` = for every stable prime `P`, every `m ≥ 1` and every non-trivial additive character `ψ` of `𝓞/P^m`,
+   `‖Σ_{s ∈ normOneQ P m} ψ(s)‖ ≤ c · |normOneQ P m|`, where `normOneQ P m = {x | x · conj x = 1}`. The theorem also asks `0 ≤ c`
+   and `c < 1/5`. The old README's sentence matches.
+6. **`µ₆(ε)`**: `Plane.mu 6 ε` = the supremum, over six measurable pairwise-disjoint sets each of whose pairs at distances in
+   `[1 − ε, 1 + ε]` form a null set of `ℂ × ℂ`, of the upper density (about the origin) of their union. It increases as `ε`
+   decreases, so the stored `⨆_{ε > 0} µ₆(ε) < 1` is `lim_{ε→0} µ₆(ε) < 1`.
+7. **The disc criterion**: `∃ R > 0, ¬ ∃ c : ℂ → Fin 6, IsWeakColouringOn (ball 0 R) c`, where a weak colouring on `U` is a Borel map
+   whose monochromatic unit pairs inside `U` are null for area × arc length.
+8. **`m₁(ℝ²)`** = `⨆` of `upperDensity A` (about the origin) over measurable `A ⊆ ℂ` independent in the unit-distance graph;
+   **`α₁`** = `finIndepRatio` = `⨅` over non-empty finite `S` of `α(G[S]) / |S|`; **`f(n)`** = `minIndepNum n` = the least independence
+   number over `n`-point sets; **`𝒜²`** = `unitDistance` on `algebraicClosure ℚ ℂ`, the points with algebraic coordinates.
+9. **`χ_m⁰`** = `Plane.chiM0`: least `k` with a Borel `ℂ → Fin k` each of whose classes has null unit pairs; **`χ_m`** =
+   `Plane.chiLebesgue`: least `k` with a Lebesgue-measurable (null-measurable) `f` that is proper at every unit pair.
+10. **The `p`-adic plane**: `padicPlane p = unitQuadrance ℚ_[p]`, the graph on `ℚ_p × ℚ_p` joining `x`, `y` with
+    `(x₁ − y₁)² + (x₂ − y₂)² = 1`; `borelChromaticNumber` = least `k` with a colouring all of whose classes are measurable sets. The
+    bound is stated for every prime `p ≡ 3 (mod 4)` and every such `k`-colouring: `1 + (p + 1)/(2√p) ≤ k`.
+11. **The finite-plane bound** takes a prime `𝔭` of `F` with `|𝓞_F/𝔭| = p` prime and `≡ 3 (mod 4)`.
+
+No statement the page summarizes differs from the page's notation in scope.
+
+### 2.4 Findings
+
+- **F1, confirmed — a correction owed to `LEDGER.md`.** `Outside.OAI158.seven_le_chromaticNumber_plane_iff`,
+  `Plane.seven_le_chromaticNumber_plane_iff_exists_ball`, `Plane.colorable_iff_forall_ball` and
+  `Plane.chromaticNumber_plane_eq_chiLebesgue` print std3: the transfer they use, `Outside.OAI158.proper_to_borel_weak`, prints std3
+  (its proof was ported, `LEAN.md` § Ported outside proofs). Rows 130, 131 and 161 still call it a declared outside theorem (row 130:
+  "imported as the outside theorem … holds on the import of that one theorem" and "on the declared outside theorem
+  `Outside.OAI158.proper_to_borel_weak`"; row 131: "the declared outside theorem `Outside.OAI158.proper_to_borel_weak` alone"; row
+  161: "-DOWN `radius_down` and the two forms of the criterion … each on those three and the declared outside theorem"). The page
+  follows the print. Messaged to the coordinator with this stage.
+- **F2, F3** (stale counts in the old README) stand as Stage 1 wrote them; the page uses `CLAUDE.md` § Trust ledger's counts.
+- **F4** (row 104's stale *Not claimed* clause) stands.
+- **F5.** `plans/POROS-2026-10-13-number-field-findings.md` § 3.3's `L(F)` (every level, images of unit vectors) is not the kernel's
+  `localBound` (level one, every norm-one residue); § 2.3 item 1. The page uses the kernel's.
+- **F6.** `LEDGER.md` row 75, as I read it before the `p`-adic landing, gave `χ_Bor(ℚ₂₃²) ≥ 6` at [cert]; the kernel holds `≥ 5`
+  (`five_le_borelChromaticNumber_padicPlane_twentyThree`). The page states the kernel's and names the certificate's `6` as held
+  outside the kernel only if the row as now filed still carries it (checked at Stage 3 after the merge).

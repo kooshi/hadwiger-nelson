@@ -1,0 +1,105 @@
+slot: waiting (ledger 16 + 8 > budget 22 GiB)
+slot: waiting (ledger 22 + 8 > budget 22 GiB; 1 free CPUs < 2)
+slot: waiting (ledger 16 + 8 > budget 22 GiB)
+slot: admitted lake: mem 8 GiB (hard cap), cpus 4,5
+def HadwigerNelson.SpectralChain.levelTarget : {F : Subfield ℝ} →
+  (P : HadwigerNelson.SpectralChain.StablePrime F) →
+    (m : ℕ) → SimpleGraph (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P ^ m) :=
+fun {F} P m =>
+  SimpleGraph.fromRel fun x y =>
+    (x - y) * (Ideal.quotientMap (P.P ^ m) (HadwigerNelson.SpectralChain.conjO F) ⋯) (x - y) = 1
+structure HadwigerNelson.SpectralChain.StablePrime (F : Subfield ℝ) : Type
+number of parameters: 1
+fields:
+  HadwigerNelson.SpectralChain.StablePrime.P : Ideal
+      (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F))
+  HadwigerNelson.SpectralChain.StablePrime.isMaximal : self.P.IsMaximal
+  HadwigerNelson.SpectralChain.StablePrime.comap_conj : Ideal.comap (HadwigerNelson.SpectralChain.conjO F) self.P =
+      self.P
+constructor:
+  HadwigerNelson.SpectralChain.StablePrime.mk {F : Subfield ℝ}
+    (P : Ideal (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F))) (isMaximal : P.IsMaximal)
+    (comap_conj : Ideal.comap (HadwigerNelson.SpectralChain.conjO F) P = P) : HadwigerNelson.SpectralChain.StablePrime F
+def HadwigerNelson.planeOver : Subfield ℝ → Set ℂ :=
+fun F => {z | z.re ∈ F ∧ z.im ∈ F}
+def HadwigerNelson.unitDistance.{u_4} : (V : Type u_4) → [MetricSpace V] → SimpleGraph V :=
+fun V [MetricSpace V] => { Adj := fun x y => Dist.dist x y = 1, symm := ⋯, loopless := ⋯ }
+@[reducible] def HadwigerNelson.SpectralChain.unitRing : Subfield ℝ → Subring ℂ :=
+fun F => HadwigerNelson.UnitRing.unitRingOver F
+def HadwigerNelson.Collapse.Thick : Subfield ℝ → ℝ → Prop :=
+fun F c => ∀ (P : HadwigerNelson.SpectralChain.StablePrime F), HadwigerNelson.Collapse.ThickAt P c
+def HadwigerNelson.Collapse.ThickAt : {F : Subfield ℝ} → HadwigerNelson.SpectralChain.StablePrime F → ℝ → Prop :=
+fun {F} P c =>
+  ∀ (m : ℕ),
+    1 ≤ m →
+      ∀ (hfin : (HadwigerNelson.Rigidity.Counting.normOneQ P m).Finite)
+        (ψ : AddChar (NumberField.RingOfIntegers ↥(HadwigerNelson.SpectralChain.fieldI F) ⧸ P.P ^ m) ℂ),
+        ψ ≠ 1 → ‖∑ s ∈ hfin.toFinset, ψ s‖ ≤ c * ↑hfin.toFinset.card
+def HadwigerNelson.Plane.mu : ℕ → ℝ → ENNReal :=
+fun k ε =>
+  ⨆ C,
+    ⨆ (_ : HadwigerNelson.Plane.IsPartialColouring C ∧ ∀ (j : Fin k), HadwigerNelson.Plane.BandNull (C j) ε),
+      HadwigerNelson.Plane.upperDensity (⋃ j, C j)
+def HadwigerNelson.Plane.mOne : ENNReal :=
+⨆ A, ⨆ (_ : MeasurableSet A), ⨆ (_ : (HadwigerNelson.unitDistance ℂ).IsIndepSet A), HadwigerNelson.Plane.upperDensity A
+def HadwigerNelson.Plane.minIndepNum : ℕ → ℕ :=
+fun n => ⨅ S, (SimpleGraph.induce (↑↑S) (HadwigerNelson.unitDistance ℂ)).indepNum
+def HadwigerNelson.Plane.chiM0 : ℕ∞ :=
+⨅ k, ⨅ (_ : Nonempty (HadwigerNelson.Plane.AeColouring k)), ↑k
+def HadwigerNelson.Plane.chiLebesgue : ℕ∞ :=
+⨅ k,
+  ⨅ (_ :
+    ∃ f, MeasureTheory.NullMeasurable f MeasureTheory.MeasureSpace.volume ∧ ∀ (x y : ℂ), Dist.dist x y = 1 → f x ≠ f y),
+    ↑k
+structure HadwigerNelson.Plane.IsWeakColouringOn {k : ℕ} (U : Set ℂ) (c : ℂ → Fin k) : Prop
+number of parameters: 3
+fields:
+  HadwigerNelson.Plane.IsWeakColouringOn.measurable : Measurable c
+  HadwigerNelson.Plane.IsWeakColouringOn.aeProperOn : HadwigerNelson.Plane.AeProperOn U c
+constructor:
+  HadwigerNelson.Plane.IsWeakColouringOn.mk {k : ℕ} {U : Set ℂ} {c : ℂ → Fin k} (measurable : Measurable c)
+    (aeProperOn : HadwigerNelson.Plane.AeProperOn U c) : HadwigerNelson.Plane.IsWeakColouringOn U c
+def HadwigerNelson.Plane.AeProperOn.{u_1} : {α : Type u_1} → Set ℂ → (ℂ → α) → Prop :=
+fun {α} U c =>
+  (MeasureTheory.MeasureSpace.volume.prod HadwigerNelson.Plane.arcLength) (HadwigerNelson.Plane.monoPairSet U c) = 0
+def HadwigerNelson.Plane.OneAvoidingDensityBound : Prop :=
+∀ (A : Set (EuclideanSpace ℝ (Fin 2))),
+  MeasureTheory.NullMeasurableSet A MeasureTheory.MeasureSpace.volume →
+    (∀ a ∈ A, ∀ b ∈ A, Dist.dist a b ≠ 1) →
+      ∀ (x : EuclideanSpace ℝ (Fin 2)),
+        Filter.limsup
+            (fun R =>
+              MeasureTheory.MeasureSpace.volume (A ∩ Metric.ball x R) /
+                MeasureTheory.MeasureSpace.volume (Metric.ball x R))
+            Filter.atTop ≤
+          ENNReal.ofReal 0.2470
+@[reducible] def HadwigerNelson.Outside.OAI158.Spectral.E : IntermediateField ℚ ℂ :=
+algebraicClosure ℚ ℂ
+def HadwigerNelson.Outside.OAI158.ProperColoring : (k : ℕ) → (ℂ → Fin k) → Prop :=
+fun k c => ∀ (x y : ℂ), ‖x - y‖ = 1 → c x ≠ c y
+def HadwigerNelson.Outside.OAI158.WeakColoring : (k : ℕ) → (ℂ → Fin k) → Prop :=
+fun k c =>
+  AEMeasurable c MeasureTheory.MeasureSpace.volume ∧
+    ∀ᵐ (p :
+      ℂ ×
+        HadwigerNelson.Outside.OAI158.Angles) ∂MeasureTheory.MeasureSpace.volume.prod
+        HadwigerNelson.Outside.OAI158.angularMeasure,
+      c p.1 ≠ c (p.1 + HadwigerNelson.Outside.OAI158.direction p.2)
+@[reducible] def HadwigerNelson.Collapse.F635087 : Subfield ℝ :=
+HadwigerNelson.SquareClass.fieldOfRadicands {635087}
+@[reducible] def HadwigerNelson.Collapse.FdG : Subfield ℝ :=
+HadwigerNelson.SquareClass.fieldOfRadicands {3, 5, 7, 11}
+@[reducible] def HadwigerNelson.SqrtFortySeven.F47 : Subfield ℝ :=
+HadwigerNelson.SquareClass.fieldOfRadicands {47}
+def HadwigerNelson.SquareClass.fieldOfRadicands : Set ℕ → Subfield ℝ :=
+fun D => Subfield.closure ((fun d => √↑d) '' D)
+def HadwigerNelson.Arith.IsUsablePrime : {F : Subfield ℝ} → Ideal (NumberField.RingOfIntegers ↥F) → Prop :=
+fun {F} 𝔭 => 𝔭.IsMaximal ∧ Nat.card (NumberField.RingOfIntegers ↥F ⧸ 𝔭) % 4 = 3
+@[reducible] def HadwigerNelson.finitePlane : (p : ℕ) → SimpleGraph (ZMod p × ZMod p) :=
+fun p => HadwigerNelson.unitQuadrance (ZMod p)
+def HadwigerNelson.FieldWall4.seamPlane : Set ℂ :=
+{z | z.re ∈ HadwigerNelson.FieldWall4.seamSpan ∧ z.im ∈ HadwigerNelson.FieldWall4.seamSpan}
+def HadwigerNelson.unitQuadrance.{u_1} : (R : Type u_1) → [CommRing R] → SimpleGraph (R × R) :=
+fun R [CommRing R] => SimpleGraph.addCayley {v | v.1 ^ 2 + v.2 ^ 2 = 1}
+def HadwigerNelson.RouteC.adjoinTranscendental : Subfield ℝ → ℝ → Subfield ℝ :=
+fun F t => (↥F)⟮t⟯.toSubfield
