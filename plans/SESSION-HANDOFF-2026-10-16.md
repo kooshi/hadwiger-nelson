@@ -49,8 +49,8 @@ current. Its two owed one-liners and the `k = 7` model go to the next job that t
   land will conflict there again — keep both blocks.
 - **FS131-ICT2** (item 1013): the three-colour criterion to the gate (`.claude/worktrees/kel1`, branch `fs131-ktc1`);
   FS131-ICT1 proved all 53 leaves and handed back past its line (item 1012); two unread hypotheses ruled dropped.
-- **FS131-KFR1** (item 1006): the density form's planner (`.claude/worktrees/kcl1`, branch `fs131-kfr1`); its widenings
-  and the 250-line disc module ruled in (item 1008).
+- **FS131-KFR1 handed back DONE** (item 1017): the density form planned, about 2,675 lines; what I owe it on resuming is
+  in item 1017 (receipts, records onto `main`, three held rulings, its implementer's brief).
 
 Both implementers were told the collapse's gate (`data/fs131/ico2/gate/`) is their baseline. At each implementer's
 hand-back: check its commits, print its head statements' axioms myself, read them against the ledger row, guard, merge
