@@ -105,7 +105,8 @@ private theorem schur_prime (f : ℤ[X]) (hf : 0 < f.natDegree) (M : ℕ) (hM : 
 
 /-! ## An integral primitive element, and a nonzero integer in its conductor -/
 
-private theorem exists_integral_primitive (K : Type*) [Field K] [NumberField K] :
+/-- **An integral primitive element**: every number field is `ℚ⟮θ⟯` for some `θ ∈ 𝓞 K`. -/
+theorem exists_integral_primitive (K : Type*) [Field K] [NumberField K] :
     ∃ θ : 𝓞 K, ℚ⟮(θ : K)⟯ = ⊤ := by
   obtain ⟨α, hα⟩ := Field.exists_primitive_element ℚ K
   obtain ⟨y, hy0, hy⟩ :=
@@ -121,7 +122,9 @@ private theorem exists_integral_primitive (K : Type*) [Field K] [NumberField K] 
   rw [eq_top_iff, ← hα, IntermediateField.adjoin_simple_le_iff]
   exact hmem
 
-private theorem exists_dvd_of_dvd_exponent (K : Type*) [Field K] [NumberField K] {θ : 𝓞 K}
+/-- **A nonzero bound on the conductor's primes**: some `E ≠ 0` is divisible by every divisor of
+`RingOfIntegers.exponent θ` (`E = |𝓞 K ⧸ conductor ℤ θ|`, nonzero by `conductor_mul_differentIdeal`). -/
+theorem exists_dvd_of_dvd_exponent (K : Type*) [Field K] [NumberField K] {θ : 𝓞 K}
     (hθ : ℚ⟮(θ : K)⟯ = ⊤) :
     ∃ E : ℕ, E ≠ 0 ∧ ∀ q : ℕ, q ∣ RingOfIntegers.exponent θ → q ∣ E := by
   have hadj : Algebra.adjoin ℚ {algebraMap (𝓞 K) K θ} = ⊤ :=
@@ -147,7 +150,9 @@ private theorem exists_dvd_of_dvd_exponent (K : Type*) [Field K] [NumberField K]
 
 /-! ## The residue homomorphism at a root modulo `q`, and the unramified square -/
 
-private theorem nonempty_residueHom (K : Type*) [Field K] [NumberField K] {θ : 𝓞 K} {q : ℕ} [Fact q.Prime]
+/-- **Kummer–Dedekind at a root modulo `q`**: for `q ∤ exponent θ` and `q ∣ f(t)`, `f` the minimal polynomial of `θ`,
+there is a ring homomorphism `𝓞 K → ℤ/q` (`θ ↦ t`). -/
+theorem nonempty_residueHom (K : Type*) [Field K] [NumberField K] {θ : 𝓞 K} {q : ℕ} [Fact q.Prime]
     (hq : ¬ q ∣ RingOfIntegers.exponent θ) {t : ℤ} (ht : (q : ℤ) ∣ (minpoly ℤ θ).eval t) :
     Nonempty (𝓞 K →+* ZMod q) := by
   let e := RingOfIntegers.ZModXQuotSpanEquivQuotSpan hq

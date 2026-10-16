@@ -1,0 +1,27 @@
+slot: admitted seq.sh: mem 6 GiB (hard cap), cpus 4
+== Rigidity/UnitRingEq
+Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:53:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:61:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:67:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:73:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:80:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:88:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:94:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:100:8: warning: declaration uses `sorry`
+== Rigidity/UnitRingEq exit=0
+== Rigidity/PlaneComponents
+Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:39:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:44:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:50:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:55:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:61:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:67:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:73:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:79:8: warning: declaration uses `sorry`
+== Rigidity/PlaneComponents exit=0
+== Instances/UnitRingModels
+Proofs/HadwigerNelson/Instances/UnitRingModels.lean:26:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Instances/UnitRingModels.lean:30:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Instances/UnitRingModels.lean:35:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/Instances/UnitRingModels.lean:39:8: warning: declaration uses `sorry`
+== Instances/UnitRingModels exit=0

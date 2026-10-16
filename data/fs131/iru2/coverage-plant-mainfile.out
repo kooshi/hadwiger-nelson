@@ -1,0 +1,54 @@
+MODULE Proofs.HadwigerNelson.Instances.UnitRingModels: CLEAN 4
+MODULE Proofs.HadwigerNelson.Rigidity.AdmissiblePrime: CLEAN 5
+MODULE Proofs.HadwigerNelson.Rigidity.NormOneGen: CLEAN 6
+MODULE Proofs.HadwigerNelson.Rigidity.PlaneComponents: CLEAN 9
+MODULE Proofs.HadwigerNelson.Rigidity.UnitRingEq: CLEAN 12
+MODULE Proofs.HadwigerNelson.Rigidity.UsablePrime: CLEAN 11
+UNFILED HadwigerNelson.Rigidity.exists_dvd_of_dvd_exponent (Proofs.HadwigerNelson.Rigidity.AdmissiblePrime): class CLEAN
+UNFILED HadwigerNelson.Rigidity.exists_integral_primitive (Proofs.HadwigerNelson.Rigidity.AdmissiblePrime): class CLEAN
+UNFILED HadwigerNelson.Rigidity.nonempty_residueHom (Proofs.HadwigerNelson.Rigidity.AdmissiblePrime): class CLEAN
+UNFILED HadwigerNelson.Rigidity.cayley_mul_conj_eq_one (Proofs.HadwigerNelson.Rigidity.NormOneGen): class CLEAN
+UNFILED HadwigerNelson.Rigidity.closure_normOne_eq_top (Proofs.HadwigerNelson.Rigidity.NormOneGen): class CLEAN
+UNFILED HadwigerNelson.Rigidity.exists_fixed_add_mul (Proofs.HadwigerNelson.Rigidity.NormOneGen): class CLEAN
+UNFILED HadwigerNelson.Rigidity.exists_model_galoisField (Proofs.HadwigerNelson.Rigidity.NormOneGen): class CLEAN
+UNFILED HadwigerNelson.Rigidity.inv_mem_of_finite (Proofs.HadwigerNelson.Rigidity.NormOneGen): class CLEAN
+UNFILED HadwigerNelson.Rigidity.mem_closure_normOne_of_fixed (Proofs.HadwigerNelson.Rigidity.NormOneGen): class CLEAN
+UNFILED HadwigerNelson.Rigidity.div_natCast_mem_localRing (Proofs.HadwigerNelson.Rigidity.UnitRingEq): class CLEAN
+UNFILED HadwigerNelson.Rigidity.exists_eq_add_mul_of_mem_stableIntegers (Proofs.HadwigerNelson.Rigidity.UnitRingEq): class CLEAN
+UNFILED HadwigerNelson.Rigidity.exists_two_pow_mul_mem_unitRing (Proofs.HadwigerNelson.Rigidity.UnitRingEq): class CLEAN
+UNFILED HadwigerNelson.Rigidity.isUnit_add_mk_of_conj_eq (Proofs.HadwigerNelson.Rigidity.UnitRingEq): class CLEAN
+UNFILED HadwigerNelson.Rigidity.isUnit_mk_sub_conj (Proofs.HadwigerNelson.Rigidity.UnitRingEq): class CLEAN
+UNFILED HadwigerNelson.Rigidity.natCast_notMem_pow_absNorm (Proofs.HadwigerNelson.Rigidity.UnitRingEq): class CLEAN
+UNFILED HadwigerNelson.Rigidity.normOne_subset_range_resPi (Proofs.HadwigerNelson.Rigidity.UnitRingEq): class CLEAN
+UNFILED HadwigerNelson.Rigidity.not_isRamified_of_odd_mem (Proofs.HadwigerNelson.Rigidity.UnitRingEq): class CLEAN
+UNFILED HadwigerNelson.Rigidity.resPi (Proofs.HadwigerNelson.Rigidity.UnitRingEq): class CLEAN
+UNFILED HadwigerNelson.Rigidity.resPi_apply (Proofs.HadwigerNelson.Rigidity.UnitRingEq): class CLEAN
+UNFILED HadwigerNelson.Rigidity.resPi_surjective (Proofs.HadwigerNelson.Rigidity.UnitRingEq): class CLEAN
+UNFILED HadwigerNelson.Rigidity.unitRing_eq_stableIntegers (Proofs.HadwigerNelson.Rigidity.UnitRingEq): class CLEAN
+UNFILED HadwigerNelson.Rigidity.dvd_scaleRoots_eval_sub_pow (Proofs.HadwigerNelson.Rigidity.UsablePrime): class CLEAN
+UNFILED HadwigerNelson.Rigidity.exists_Ioo_aeval_neg (Proofs.HadwigerNelson.Rigidity.UsablePrime): class CLEAN
+UNFILED HadwigerNelson.Rigidity.exists_dvd_eval_of_dvd_scaleRoots_eval (Proofs.HadwigerNelson.Rigidity.UsablePrime): class CLEAN
+UNFILED HadwigerNelson.Rigidity.exists_isUsablePrime (Proofs.HadwigerNelson.Rigidity.UsablePrime): class CLEAN
+UNFILED HadwigerNelson.Rigidity.exists_one_add_mul_div_pow_mem_Ioo (Proofs.HadwigerNelson.Rigidity.UsablePrime): class CLEAN
+UNFILED HadwigerNelson.Rigidity.exists_prime_mod_four_eq_three_dvd (Proofs.HadwigerNelson.Rigidity.UsablePrime): class CLEAN
+UNFILED HadwigerNelson.Rigidity.exists_prime_three_mod_four_dvd_eval (Proofs.HadwigerNelson.Rigidity.UsablePrime): class CLEAN
+UNFILED HadwigerNelson.Rigidity.exists_stablePrime_natCast_mem (Proofs.HadwigerNelson.Rigidity.UsablePrime): class CLEAN
+UNFILED HadwigerNelson.Rigidity.localBound_lt_top (Proofs.HadwigerNelson.Rigidity.UsablePrime): class CLEAN
+UNFILED HadwigerNelson.Rigidity.nonempty_stablePrime (Proofs.HadwigerNelson.Rigidity.UsablePrime): class CLEAN
+UNFILED HadwigerNelson.Rigidity.scaleRoots_eval_eq (Proofs.HadwigerNelson.Rigidity.UsablePrime): class CLEAN
+UNFILED HadwigerNelson.Rigidity.connected_or_infinite_planeOver (Proofs.HadwigerNelson.Rigidity.PlaneComponents): class CLEAN
+UNFILED HadwigerNelson.Rigidity.connected_planeOver_iff_isEmpty_stablePrime (Proofs.HadwigerNelson.Rigidity.PlaneComponents): class CLEAN
+UNFILED HadwigerNelson.Rigidity.connected_planeOver_iff_subset (Proofs.HadwigerNelson.Rigidity.PlaneComponents): class CLEAN
+UNFILED HadwigerNelson.Rigidity.infinite_connectedComponent_planeOver (Proofs.HadwigerNelson.Rigidity.PlaneComponents): class CLEAN
+UNFILED HadwigerNelson.Rigidity.infinite_connectedComponent_planeOver_of_not_mem (Proofs.HadwigerNelson.Rigidity.PlaneComponents): class CLEAN
+UNFILED HadwigerNelson.Rigidity.infinite_connectedComponent_planeOver_of_stablePrime (Proofs.HadwigerNelson.Rigidity.PlaneComponents): class CLEAN
+UNFILED HadwigerNelson.Rigidity.not_connected_planeOver (Proofs.HadwigerNelson.Rigidity.PlaneComponents): class CLEAN
+UNFILED HadwigerNelson.Rigidity.reachable_add_sum (Proofs.HadwigerNelson.Rigidity.PlaneComponents): class CLEAN
+UNFILED HadwigerNelson.Rigidity.reachable_iff_sub_mem_unitRingOver (Proofs.HadwigerNelson.Rigidity.PlaneComponents): class CLEAN
+UNFILED HadwigerNelson.UnitRingModels.exists_stablePrime_three_not_isRamified (Proofs.HadwigerNelson.Instances.UnitRingModels): class CLEAN
+UNFILED HadwigerNelson.UnitRingModels.noRamifiedStableDyadic_sqrt47 (Proofs.HadwigerNelson.Instances.UnitRingModels): class CLEAN
+UNFILED HadwigerNelson.UnitRingModels.stableIntegers_sqrt47_ne_top (Proofs.HadwigerNelson.Instances.UnitRingModels): class CLEAN
+UNFILED HadwigerNelson.UnitRingModels.unitRing_eq_stableIntegers_sqrt47 (Proofs.HadwigerNelson.Instances.UnitRingModels): class CLEAN
+records: 47 public (2 already filed), 25 private (not audited)
+STOP: 45 record(s) the gate cannot take
+exit=1

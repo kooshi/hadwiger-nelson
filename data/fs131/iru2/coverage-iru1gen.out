@@ -1,0 +1,9 @@
+MODULE Proofs.HadwigerNelson.Instances.UnitRingModels: CLEAN 4
+MODULE Proofs.HadwigerNelson.Rigidity.AdmissiblePrime: CLEAN 5
+MODULE Proofs.HadwigerNelson.Rigidity.NormOneGen: CLEAN 6
+MODULE Proofs.HadwigerNelson.Rigidity.PlaneComponents: CLEAN 9
+MODULE Proofs.HadwigerNelson.Rigidity.UnitRingEq: CLEAN 12
+MODULE Proofs.HadwigerNelson.Rigidity.UsablePrime: CLEAN 11
+records: 47 public (47 already filed), 25 private (not audited)
+COVERAGE OK: every one of the 47 public records is filed under its class
+exit=0

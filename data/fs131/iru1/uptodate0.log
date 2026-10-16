@@ -1,0 +1,50 @@
+slot: admitted lake: mem 6 GiB (hard cap), cpus 8,9
+⚠ [6317/6535] Replayed Proofs.HadwigerNelson.Rigidity.NormOneGen
+warning: Proofs/HadwigerNelson/Rigidity/NormOneGen.lean:36:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/NormOneGen.lean:41:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/NormOneGen.lean:47:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/NormOneGen.lean:54:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/NormOneGen.lean:61:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/NormOneGen.lean:68:8: declaration uses `sorry`
+⚠ [6318/6535] Replayed Proofs.HadwigerNelson.Rigidity.UnitRingEq
+warning: Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:55:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:62:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:69:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:76:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:82:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:88:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:95:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:103:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:109:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UnitRingEq.lean:115:8: declaration uses `sorry`
+⚠ [6319/6535] Replayed Proofs.HadwigerNelson.Rigidity.UsablePrime
+warning: Proofs/HadwigerNelson/Rigidity/UsablePrime.lean:44:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UsablePrime.lean:49:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UsablePrime.lean:55:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UsablePrime.lean:61:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UsablePrime.lean:67:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UsablePrime.lean:73:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UsablePrime.lean:79:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UsablePrime.lean:88:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UsablePrime.lean:96:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UsablePrime.lean:101:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/UsablePrime.lean:105:8: declaration uses `sorry`
+⚠ [6320/6535] Replayed Proofs.HadwigerNelson.Rigidity.PlaneComponents
+warning: Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:39:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:46:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:51:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:57:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:62:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:68:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:74:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:80:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Rigidity/PlaneComponents.lean:86:8: declaration uses `sorry`
+⚠ [6470/6535] Replayed Proofs.HadwigerNelson.Instances.UnitRingModels
+warning: Proofs/HadwigerNelson/Instances/UnitRingModels.lean:26:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Instances/UnitRingModels.lean:30:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Instances/UnitRingModels.lean:35:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Instances/UnitRingModels.lean:39:8: declaration uses `sorry`
+✖ [6534/6535] Building Proofs
+error: target is out-of-date and needs to be rebuilt
+Some required targets logged failures:
+- Proofs

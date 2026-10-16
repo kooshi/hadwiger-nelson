@@ -1,0 +1,8 @@
+MODULE Proofs.HadwigerNelson.Instances.UnitRingModels: CLEAN 4
+MODULE Proofs.HadwigerNelson.Rigidity.AdmissiblePrime: CLEAN 5
+MODULE Proofs.HadwigerNelson.Rigidity.NormOneGen: CLEAN 6
+MODULE Proofs.HadwigerNelson.Rigidity.PlaneComponents: CLEAN 9
+MODULE Proofs.HadwigerNelson.Rigidity.UnitRingEq: CLEAN 12
+MODULE Proofs.HadwigerNelson.Rigidity.UsablePrime: CLEAN 11
+records: 47 public (2 already filed), 25 private (not audited)
+BLOCK clean: 45

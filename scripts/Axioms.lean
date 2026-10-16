@@ -13249,6 +13249,57 @@ made public: every public record of the six modules on the standard three or few
 #print axioms HadwigerNelson.Plane.zero_mem_triPacking
 #print axioms HadwigerNelson.Rigidity.ratioAtMost_of_charBound
 
+/-! ## FS131-IRU1 — the ring of unit vectors (`Rigidity/NormOneGen`, `UnitRingEq`, `UsablePrime`, `PlaneComponents`,
+`Instances/UnitRingModels`; ledger rows 100 and 105; planner FS131-KRU1, implementer FS131-IRU1), and the three lemmas of
+`Rigidity/AdmissiblePrime` made public by ruling (inventory item 1044): every public record not already filed, each on the
+standard three or fewer, from the kernel's print (`data/fs131/iru1/axioms-all.txt`, `tools/fs131_iru1_audit_block.py`). -/
+
+#print axioms HadwigerNelson.UnitRingModels.exists_stablePrime_three_not_isRamified
+#print axioms HadwigerNelson.UnitRingModels.noRamifiedStableDyadic_sqrt47
+#print axioms HadwigerNelson.UnitRingModels.stableIntegers_sqrt47_ne_top
+#print axioms HadwigerNelson.UnitRingModels.unitRing_eq_stableIntegers_sqrt47
+#print axioms HadwigerNelson.Rigidity.exists_dvd_of_dvd_exponent
+#print axioms HadwigerNelson.Rigidity.exists_integral_primitive
+#print axioms HadwigerNelson.Rigidity.nonempty_residueHom
+#print axioms HadwigerNelson.Rigidity.cayley_mul_conj_eq_one
+#print axioms HadwigerNelson.Rigidity.closure_normOne_eq_top
+#print axioms HadwigerNelson.Rigidity.exists_fixed_add_mul
+#print axioms HadwigerNelson.Rigidity.exists_model_galoisField
+#print axioms HadwigerNelson.Rigidity.inv_mem_of_finite
+#print axioms HadwigerNelson.Rigidity.mem_closure_normOne_of_fixed
+#print axioms HadwigerNelson.Rigidity.connected_or_infinite_planeOver
+#print axioms HadwigerNelson.Rigidity.connected_planeOver_iff_isEmpty_stablePrime
+#print axioms HadwigerNelson.Rigidity.connected_planeOver_iff_subset
+#print axioms HadwigerNelson.Rigidity.infinite_connectedComponent_planeOver
+#print axioms HadwigerNelson.Rigidity.infinite_connectedComponent_planeOver_of_not_mem
+#print axioms HadwigerNelson.Rigidity.infinite_connectedComponent_planeOver_of_stablePrime
+#print axioms HadwigerNelson.Rigidity.not_connected_planeOver
+#print axioms HadwigerNelson.Rigidity.reachable_add_sum
+#print axioms HadwigerNelson.Rigidity.reachable_iff_sub_mem_unitRingOver
+#print axioms HadwigerNelson.Rigidity.div_natCast_mem_localRing
+#print axioms HadwigerNelson.Rigidity.exists_eq_add_mul_of_mem_stableIntegers
+#print axioms HadwigerNelson.Rigidity.exists_two_pow_mul_mem_unitRing
+#print axioms HadwigerNelson.Rigidity.isUnit_add_mk_of_conj_eq
+#print axioms HadwigerNelson.Rigidity.isUnit_mk_sub_conj
+#print axioms HadwigerNelson.Rigidity.natCast_notMem_pow_absNorm
+#print axioms HadwigerNelson.Rigidity.normOne_subset_range_resPi
+#print axioms HadwigerNelson.Rigidity.not_isRamified_of_odd_mem
+#print axioms HadwigerNelson.Rigidity.resPi
+#print axioms HadwigerNelson.Rigidity.resPi_apply
+#print axioms HadwigerNelson.Rigidity.resPi_surjective
+#print axioms HadwigerNelson.Rigidity.unitRing_eq_stableIntegers
+#print axioms HadwigerNelson.Rigidity.dvd_scaleRoots_eval_sub_pow
+#print axioms HadwigerNelson.Rigidity.exists_Ioo_aeval_neg
+#print axioms HadwigerNelson.Rigidity.exists_dvd_eval_of_dvd_scaleRoots_eval
+#print axioms HadwigerNelson.Rigidity.exists_isUsablePrime
+#print axioms HadwigerNelson.Rigidity.exists_one_add_mul_div_pow_mem_Ioo
+#print axioms HadwigerNelson.Rigidity.exists_prime_mod_four_eq_three_dvd
+#print axioms HadwigerNelson.Rigidity.exists_prime_three_mod_four_dvd_eval
+#print axioms HadwigerNelson.Rigidity.exists_stablePrime_natCast_mem
+#print axioms HadwigerNelson.Rigidity.localBound_lt_top
+#print axioms HadwigerNelson.Rigidity.nonempty_stablePrime
+#print axioms HadwigerNelson.Rigidity.scaleRoots_eval_eq
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

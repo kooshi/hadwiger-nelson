@@ -1,0 +1,15 @@
+PLANTED: unknown axiom in HadwigerNelson.Rigidity.exists_dvd_of_dvd_exponent; sorryAx in HadwigerNelson.Rigidity.exists_integral_primitive; HadwigerNelson.StandingFive.kloosterman_bound in HadwigerNelson.Rigidity.exists_residueHom_unramified; HadwigerNelson.Rigidity.exists_unitPair filed under PURCHASED
+MODULE Proofs.HadwigerNelson.Instances.UnitRingModels: CLEAN 4
+MODULE Proofs.HadwigerNelson.Rigidity.AdmissiblePrime: CLEAN 2
+MODULE Proofs.HadwigerNelson.Rigidity.NormOneGen: CLEAN 6
+MODULE Proofs.HadwigerNelson.Rigidity.PlaneComponents: CLEAN 9
+MODULE Proofs.HadwigerNelson.Rigidity.UnitRingEq: CLEAN 12
+MODULE Proofs.HadwigerNelson.Rigidity.UsablePrime: CLEAN 11
+BAD HadwigerNelson.Rigidity.exists_dvd_of_dvd_exponent (Proofs.HadwigerNelson.Rigidity.AdmissiblePrime): ['planted.unknownAxiom']
+OPEN HadwigerNelson.Rigidity.exists_integral_primitive (Proofs.HadwigerNelson.Rigidity.AdmissiblePrime): ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+IMPORTED HadwigerNelson.Rigidity.exists_residueHom_unramified (Proofs.HadwigerNelson.Rigidity.AdmissiblePrime): ['HadwigerNelson.StandingFive.kloosterman_bound'] — this landing declares no import
+MISFILED HadwigerNelson.Rigidity.exists_unitPair: class CLEAN, filed under PURCHASED
+records: 47 public (44 already filed), 25 private (not audited)
+STOP: 4 record(s) the gate cannot take
+PLANT ALL REPORTED: ['BAD', 'IMPORTED', 'MISFILED', 'OPEN']
+exit=1

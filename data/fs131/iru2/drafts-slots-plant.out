@@ -1,0 +1,16 @@
+BAD 0 CLAUDE.md: the current audit reads 10989 clean and 5 declared purchases, and 120 imported (and 575 ax
+OK  1 CLAUDE.md: `axioms=3 rests=168 named=19 inline=14 outside=7 ours=21 open=5 takes=109 mentions=2`
+OK  1 CLAUDE.md: `declarations=22683 refutations-skipped=245 sites=1465`
+OK  1 CLAUDE.md: `vacuous=0 stale=0 declared=3 witnessed=40 generic=1420 unknown=2`
+OK  1 CLAUDE.md: Last filed: **the density form of the collapse** (FS131-KFR1, FS131-IFR1, FS131-IFR2, 2026
+OK  1 CLAUDE.md: the collapse, `χ(F²) = χ(ℝ²)` at uniformly thick fields, ℚ(√635087) and de Grey's field (r
+OK  1 LEDGER.md: whether CLG-g's exception is ever realised; a kernel proof.
+OK  1 LEDGER.md: That statement ranges over a type the kernel does not show to be non-empty (a stable prime
+OK  1 ROADMAP.md: with its form that takes no hypothesis, `min(χ(F²), 5) = min(L(F), 5)` (`Rigidity.min_chro
+OK  1 ROADMAP.md: 2. **Lemma C′** (row 100): for a real number field with no ramified stable dyadic prime, t
+OK  1 ROADMAP.md: It was taken out of the library when the chain landed, because nothing read it and its pro
+OK  1 plans/KERNEL-HOLDS.md: (`QuadraticPrime.exists_maximal_card_eq`, `…_of_ramified`)
+OK  1 plans/POROS-2026-10-13-number-field-findings.md: **Rank 8 — C8. The ring of unit vectors.**
+OK  1 plans/FS131-KCS1-class-plan.md: ### 2.6 B — Lemma C′ (≈ 700 lines; route FS91-J10's, refined here)
+SLOTS 14 BAD 1
+exit=1

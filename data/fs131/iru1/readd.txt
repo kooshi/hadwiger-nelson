@@ -1,0 +1,5 @@
+slot: admitted lake: mem 6 GiB (hard cap), cpus 0,1
+AFTER HadwigerNelson.Rigidity.not_isRamified_of_odd_mem 4173422368
+READD HadwigerNelson.Rigidity.not_isRamified_of_odd_mem 619762426
+CONTROL-TRUE HadwigerNelson.Rigidity.not_isRamified_of_odd_mem 1295855567
+CONTROL-POS HadwigerNelson.Rigidity.not_isRamified_of_odd_mem 1653348068

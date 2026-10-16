@@ -1,0 +1,94 @@
+slot: admitted bash: mem 6 GiB (hard cap), cpus 0
+@inv_mem_of_finite : ∀ {A : Type u_1} [inst : CommRing A] [Finite A] (T : Subring A) (u : Aˣ), ↑u ∈ T → ↑u⁻¹ ∈ T
+@exists_fixed_add_mul : ∀ {A : Type u_1} [inst : CommRing A] (σ : A →+* A),
+  (∀ (x : A), σ (σ x) = x) →
+    ∀ {θ : A}, IsUnit (θ - σ θ) → ∀ (x : A), ∃ (α : A) (β : A), σ α = α ∧ σ β = β ∧ x = α + β * θ
+@cayley_mul_conj_eq_one : ∀ {A : Type u_1} [inst : CommRing A] (σ : A →+* A),
+  (∀ (x : A), σ (σ x) = x) → ∀ {θ a : A}, σ a = a → ∀ (v : Aˣ), ↑v = a + σ θ → (a + θ) * ↑v⁻¹ * σ ((a + θ) * ↑v⁻¹) = 1
+@closure_normOne_eq_top : ∀ {A : Type u_1} [inst : CommRing A] [Finite A] (σ : A →+* A),
+  (∀ (x : A), σ (σ x) = x) →
+    ∀ {θ : A}, IsUnit (θ - σ θ) → (∀ (a : A), σ a = a → IsUnit (a + θ)) → Subring.closure {x : A | x * σ x = 1} = ⊤
+exists_model_galoisField : (∀ (x : GaloisField 3 2),
+    (frobenius (GaloisField 3 2) 3) ((frobenius (GaloisField 3 2) 3) x) = x) ∧
+  ∃ (θ : GaloisField 3 2),
+    IsUnit (θ - (frobenius (GaloisField 3 2) 3) θ) ∧
+      ∀ (a : GaloisField 3 2), (frobenius (GaloisField 3 2) 3) a = a → IsUnit (a + θ)
+@resPi : {F : Subfield ℝ} →
+  [NumberField ↥F] →
+    (Φ : Finset (SpectralChain.StablePrime F)) →
+      (m : ℕ) →
+        ↥(SpectralChain.unitRing F) →+* (P : ↥Φ) → NumberField.RingOfIntegers ↥(SpectralChain.fieldI F) ⧸ (↑P).P ^ m
+@isUnit_mover : ∀ {F : Subfield ℝ} [NumberField ↥F] (P : SpectralChain.StablePrime F) (m : ℕ)
+  {t : NumberField.RingOfIntegers ↥(SpectralChain.fieldI F)},
+  (SpectralChain.conjO F) t - t ∉ P.P →
+    IsUnit
+        ((Ideal.Quotient.mk (P.P ^ m)) t -
+          (Ideal.quotientMap (P.P ^ m) (SpectralChain.conjO F) ⋯) ((Ideal.Quotient.mk (P.P ^ m)) t)) ∧
+      ∀ (a : NumberField.RingOfIntegers ↥(SpectralChain.fieldI F) ⧸ P.P ^ m),
+        (Ideal.quotientMap (P.P ^ m) (SpectralChain.conjO F) ⋯) a = a → IsUnit (a + (Ideal.Quotient.mk (P.P ^ m)) t)
+@resPi_surjective : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (Φ : Finset (SpectralChain.StablePrime F)),
+  (∀ P ∈ Φ, ¬IsRamified P) → ∀ (m : ℕ), Function.Surjective ⇑(resPi Φ m)
+@div_natCast_mem_localRing : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] (P : SpectralChain.StablePrime F) {n : ℕ},
+  n ≠ 0 →
+    ∀ {x : ↥(SpectralChain.fieldI F)} (hx : x ∈ P.localRing),
+      (P.residue (Ideal.absNorm (Ideal.span {↑n}))) ⟨x, hx⟩ = 0 → x / ↑n ∈ P.localRing
+@exists_sub_div_mem_stableIntegers : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] {n : ℕ},
+  n ≠ 0 →
+    (∀ (P : SpectralChain.StablePrime F), ↑n ∈ P.P → ¬IsRamified P) →
+      ∀ {x : ↥(SpectralChain.fieldI F)},
+        x ∈ stableIntegers F → ∃ r ∈ UnitRing.unitRing (conjOn ⋯), (x - r) / ↑n ∈ stableIntegers F
+@unitRing_eq_stableIntegers : ∀ {F : Subfield ℝ} [inst : NumberField ↥F],
+  NoRamifiedStableDyadic F → UnitRing.unitRing (conjOn ⋯) = stableIntegers F
+@not_isRamified_of_odd_mem : ∀ {F : Subfield ℝ} [NumberField ↥F] (P : SpectralChain.StablePrime F) {n : ℕ},
+  Odd n → ↑n ∈ P.P → ¬IsRamified P
+@exists_two_pow_mul_mem_unitRing : ∀ {F : Subfield ℝ} [inst : NumberField ↥F] {x : ↥(SpectralChain.fieldI F)},
+  x ∈ stableIntegers F → ∃ (a : ℕ), 2 ^ a * x ∈ UnitRing.unitRing (conjOn ⋯)
+@exists_prime_mod_four_eq_three_dvd : ∀ {N : ℕ}, N % 4 = 3 → ∃ (q : ℕ), Nat.Prime q ∧ q % 4 = 3 ∧ q ∣ N
+exists_Ioo_aeval_neg : ∀ (f : Polynomial ℤ) {θ : ℝ},
+  (Polynomial.aeval θ) f = 0 →
+    (Polynomial.aeval θ) (Polynomial.derivative f) ≠ 0 →
+      ∃ (a : ℝ) (b : ℝ), a < b ∧ ∀ y ∈ Set.Ioo a b, (Polynomial.aeval y) f < 0
+@exists_one_add_mul_div_pow_mem_Ioo : ∀ {D : ℕ},
+  2 ≤ D → ∀ {a b : ℝ}, a < b → ∃ (e : ℕ) (t : ℤ), a < ↑(1 + ↑D * t) / ↑D ^ e ∧ ↑(1 + ↑D * t) / ↑D ^ e < b
+scaleRoots_eval_eq : ∀ (f : Polynomial ℤ) (x : ℤ) {k : ℤ},
+  k ≠ 0 → ↑(Polynomial.eval x (f.scaleRoots k)) = ↑k ^ f.natDegree * (Polynomial.aeval (↑x / ↑k)) f
+@dvd_scaleRoots_eval_sub_pow : ∀ {f : Polynomial ℤ},
+  f.Monic → ∀ (x k : ℤ), k ∣ Polynomial.eval x (f.scaleRoots k) - x ^ f.natDegree
+exists_dvd_eval_of_dvd_scaleRoots_eval : ∀ (f : Polynomial ℤ) {q : ℕ},
+  Nat.Prime q → ∀ {x k : ℤ}, ¬↑q ∣ k → ↑q ∣ Polynomial.eval x (f.scaleRoots k) → ∃ (t : ℤ), ↑q ∣ Polynomial.eval t f
+exists_prime_three_mod_four_dvd_eval : ∀ (f : Polynomial ℤ),
+  f.Monic →
+    ∀ {θ : ℝ},
+      (Polynomial.aeval θ) f = 0 →
+        (Polynomial.aeval θ) (Polynomial.derivative f) ≠ 0 →
+          ∀ (M : ℕ), M ≠ 0 → ∃ (q : ℕ), Nat.Prime q ∧ q % 4 = 3 ∧ ¬q ∣ M ∧ ∃ (t : ℤ), ↑q ∣ Polynomial.eval t f
+exists_isUsablePrime : ∀ (F : Subfield ℝ) [NumberField ↥F] (M : ℕ),
+  M ≠ 0 →
+    ∃ (q : ℕ) (𝔭 : Ideal (NumberField.RingOfIntegers ↥F)),
+      Nat.Prime q ∧ ¬q ∣ M ∧ Arith.IsUsablePrime 𝔭 ∧ ↑q ∈ 𝔭 ∧ Nat.card (NumberField.RingOfIntegers ↥F ⧸ 𝔭) = q
+@exists_stablePrime_natCast_mem : ∀ {F : Subfield ℝ} [NumberField ↥F] {𝔭 : Ideal (NumberField.RingOfIntegers ↥F)},
+  Arith.IsUsablePrime 𝔭 → ∀ {q : ℕ}, q ≠ 0 → ↑q ∈ 𝔭 → ∃ (P : SpectralChain.StablePrime F), ↑q ∈ P.P
+nonempty_stablePrime : ∀ (F : Subfield ℝ) [NumberField ↥F], Nonempty (SpectralChain.StablePrime F)
+localBound_lt_top : ∀ (F : Subfield ℝ) [NumberField ↥F], SpectralChain.localBound F < ⊤
+@reachable_iff_sub_mem_unitRingOver : ∀ {F : Subfield ℝ} (x y : ↑(planeOver F)),
+  (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).Reachable x y ↔ ↑x - ↑y ∈ UnitRing.unitRingOver F
+@connected_iff_planeOver_subset : ∀ {F : Subfield ℝ},
+  (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).Connected ↔ planeOver F ⊆ ↑(UnitRing.unitRingOver F)
+@infinite_connectedComponent_of_not_mem : ∀ {F : Subfield ℝ} {z : ℂ},
+  z ∈ planeOver F →
+    z ∉ UnitRing.unitRingOver F → Infinite (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).ConnectedComponent
+connected_or_infinite : ∀ (F : Subfield ℝ),
+  (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).Connected ∨
+    Infinite (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).ConnectedComponent
+@infinite_connectedComponent_of_stablePrime : ∀ {F : Subfield ℝ} [NumberField ↥F] (P : SpectralChain.StablePrime F),
+  Infinite (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).ConnectedComponent
+@connected_iff_isEmpty_stablePrime : ∀ {F : Subfield ℝ} [NumberField ↥F],
+  (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).Connected ↔ IsEmpty (SpectralChain.StablePrime F)
+infinite_connectedComponent_planeOver : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  Infinite (SimpleGraph.induce (planeOver F) (unitDistance ℂ)).ConnectedComponent
+not_connected_planeOver : ∀ (F : Subfield ℝ) [NumberField ↥F],
+  ¬(SimpleGraph.induce (planeOver F) (unitDistance ℂ)).Connected
+UnitRingModels.noRamifiedStableDyadic_sqrt47 : NoRamifiedStableDyadic SqrtFortySeven.F47
+UnitRingModels.unitRing_eq_stableIntegers_sqrt47 : UnitRing.unitRing (conjOn ⋯) = stableIntegers SqrtFortySeven.F47
+UnitRingModels.stableIntegers_sqrt47_ne_top : stableIntegers SqrtFortySeven.F47 ≠ ⊤
+UnitRingModels.exists_stablePrime_three_not_isRamified : ∃ (P : SpectralChain.StablePrime ⊥), ↑3 ∈ P.P ∧ ¬IsRamified P

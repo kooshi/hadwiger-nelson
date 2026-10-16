@@ -1,0 +1,36 @@
+MODULE Proofs.HadwigerNelson.Arith.StableAboveUsable private: 27 records
+MODULE Proofs.HadwigerNelson.Arith.StableAboveUsable public: 4 records
+MODULE Proofs.HadwigerNelson.Collapse.Density.Defs private: 4 records
+MODULE Proofs.HadwigerNelson.Collapse.Density.Defs public: 41 records
+MODULE Proofs.HadwigerNelson.Collapse.Density.Headline private: 2 records
+MODULE Proofs.HadwigerNelson.Collapse.Density.Headline public: 20 records
+MODULE Proofs.HadwigerNelson.Collapse.Density.Upper private: 59 records
+MODULE Proofs.HadwigerNelson.Collapse.Density.Upper public: 25 records
+MODULE Proofs.HadwigerNelson.Collapse.Headline private: 2 records
+MODULE Proofs.HadwigerNelson.Collapse.Headline public: 27 records
+MODULE Proofs.HadwigerNelson.Instances.SqrtFiveClass public: 7 records
+MODULE Proofs.HadwigerNelson.Instances.SqrtTwentyThreeCbrtTwo private: 10 records
+MODULE Proofs.HadwigerNelson.Instances.SqrtTwentyThreeCbrtTwo public: 15 records
+MODULE Proofs.HadwigerNelson.Instances.UnitRingModels public: 4 records
+MODULE Proofs.HadwigerNelson.Plane.TriangularPacking private: 2 records
+MODULE Proofs.HadwigerNelson.Plane.TriangularPacking public: 12 records
+MODULE Proofs.HadwigerNelson.Rigidity.AdmissiblePrime private: 22 records
+MODULE Proofs.HadwigerNelson.Rigidity.AdmissiblePrime public: 5 records
+MODULE Proofs.HadwigerNelson.Rigidity.ClassRatio private: 95 records
+MODULE Proofs.HadwigerNelson.Rigidity.ClassRatio public: 16 records
+MODULE Proofs.HadwigerNelson.Rigidity.FourColourPlaces private: 2 records
+MODULE Proofs.HadwigerNelson.Rigidity.FourColourPlaces public: 15 records
+MODULE Proofs.HadwigerNelson.Rigidity.NormOneGen private: 2 records
+MODULE Proofs.HadwigerNelson.Rigidity.NormOneGen public: 6 records
+MODULE Proofs.HadwigerNelson.Rigidity.PlaneComponents public: 9 records
+MODULE Proofs.HadwigerNelson.Rigidity.UnitRingEq private: 1 records
+MODULE Proofs.HadwigerNelson.Rigidity.UnitRingEq public: 12 records
+MODULE Proofs.HadwigerNelson.Rigidity.UsablePrime public: 11 records
+RECORDS merged=457 IRU1=72 MAIN=385
+VERDICT CLEAN: 0 failure(s)
+PLANT axiom set changed: FIRED (1 failure(s); wanted 'CHANGED Proofs.HadwigerNelson.Rigidity.UnitRingEq HadwigerNelson.Rigidity.div_natCast_mem_localRing')
+PLANT record dropped: FIRED (1 failure(s); wanted 'MISSING Proofs.HadwigerNelson.Rigidity.UsablePrime HadwigerNelson.Rigidity.dvd_scaleRoots_eval_sub_pow')
+PLANT record added: FIRED (1 failure(s); wanted 'ADDED Proofs.HadwigerNelson.Instances.UnitRingModels HadwigerNelson.UnitRingModels.planted_extra')
+PLANT sorryAx planted: FIRED (2 failure(s); wanted 'SORRY Proofs.HadwigerNelson.Collapse.Density.Headline HadwigerNelson.Collapse.IndepLaw.density_le_notThick')
+PLANTS ALL FIRED
+exit=0

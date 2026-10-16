@@ -1,0 +1,22 @@
+HEAD=b261d0f12e026367f2b6ed4b76722e3984872644 2026-10-16T23:15:57Z tracked-modified=0
+uptodate exit=0 wall=4s
+sorry (narrow) lines=0
+line-initial axiom lines=5
+dupnames exit=0 wall=4s
+dupnames-selftest exit=0 wall=23s
+axioms exit=0 wall=11s
+axioms-selftest exit=0 wall=243s
+vacuity exit=0 wall=131s
+vacuity-selftest exit=0 wall=128s
+assumptions exit=0 wall=123s
+assumptions-selftest exit=0 wall=128s
+arch exit=0
+lint exit=0 wall=14s
+axioms latest: /home/kooshi/source/lean-dir/.claude/worktrees/il5/build/gate/axioms/20261016T231629Z-1845485.log
+vacuity latest: /home/kooshi/source/lean-dir/.claude/worktrees/il5/build/gate/vacuity/20261016T232043Z-1851968.log
+assumptions latest: /home/kooshi/source/lean-dir/.claude/worktrees/il5/build/gate/assumptions/20261016T232502Z-1855760.log
+digest-axioms exit=0
+digest-vacuity exit=0
+digest-assumptions exit=0
+tracked files modified after the pass: 0
+pass-exit=done 2026-10-16T23:29:34Z

@@ -1,0 +1,6 @@
+[0] MISMATCH plans/FS131-close-inventory.md : 1 line(s) not found
+     first 23 of 2155 chars present; differs at: 'Ed back DONE: the ring of unit vectors proved, gated on a stale base (logged 202'
+[1] VERBATIM  plans/FS131-close-inventory.md   (1 lines, 2701 chars)
+[2] VERBATIM  plans/FS131-close-inventory.md   (1 lines, 2276 chars)
+MISMATCHES: 1
+exit=1
