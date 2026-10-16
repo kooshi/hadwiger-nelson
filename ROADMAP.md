@@ -1,6 +1,6 @@
 # Roadmap: what is left to formalize
 
-[`README.md`](README.md) lists what Lean's kernel has checked. This page lists everything else this project holds: results proved
+[`README.md`](README.md) lists this project's results with their status, and [`RESULTS.md`](RESULTS.md) every Lean theorem behind them, with its axioms. This page lists everything else this project holds: results proved
 by hand, results computed outside the kernel, theorems the library assumes, and Lean work that is under way on branches. Every
 item names the place where its full statement lives.
 
