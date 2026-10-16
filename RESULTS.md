@@ -8,7 +8,9 @@ of [`LEDGER.md`](LEDGER.md) that records its grade and sources. A list of refere
 gated on 2026-10-15 at commit `752b11569` (the gate ran before the publication's rewrite, which changed one docstring in the
 proofs and nothing else in them), and for the results changed since, at the commit each landing gated: `113ca8ece` (the main
 clause through five as one theorem), `7c72b9bf7` (a number field's plane equal to the plane's), and `e3e1dbb73` (the `p`-adic
-plane, merged as `785a46e77`). All of them were printed again on 2026-10-16 from `main`'s build, with the same result; the
+plane, merged as `785a46e77`); the later landings' lists were printed at each merge from its gated build, `main` then
+equal to the gated commit in the proofs: `8ebb647bc` (three colours), `3466820ee` (five colours), `dfba6bc68` (the density
+form) and `302a57356` (the ring of unit vectors; `data/fs131/iru2-review/`). The earlier lists were printed again on 2026-10-16 from `main`'s build, with the same result; the
 scratch files and their output are in `data/fs131/rdm1/`.
 
 **Conventions.** Every Lean name is under the namespace `HadwigerNelson`. **std3** means
@@ -229,6 +231,30 @@ each in full. "Prior art: not found in print" reports the searches recorded in t
   proof is this project's.
 - **Ledger.** Row 79; `CLOSED-QUESTIONS.md` § 2.4.
 
+### 11. The ring the unit vectors generate, and the plane's components
+
+- **Statement.** Identify `F²` with `F(i)`; `U` is the set of norm-one elements, `ℤ[U]` the ring it generates, and `O′` the
+  elements of `F(i)` integral at every conjugation-fixed prime. At a real number field with no ramified conjugation-fixed
+  prime above 2, `ℤ[U] = O′` (Lemma C′); at every real number field, `2^a·x ∈ ℤ[U]` for every `x ∈ O′`, some `a`. Two points
+  of `F²` are joined by unit steps iff their difference is in `ℤ[U]`; for every subfield of `ℝ` the plane is connected or has
+  infinitely many components; over a real number field it is connected iff `F(i)` has no conjugation-fixed prime; every real
+  number field has one (a usable prime of degree one over `q ≡ 3 (mod 4)` outside any finite set of rational primes), so the
+  plane has infinitely many components, and `L(F) < ∞`.
+- **Lean.** `Rigidity.unitRing_eq_stableIntegers`, `Rigidity.exists_two_pow_mul_mem_unitRing`,
+  `Rigidity.exists_eq_add_mul_of_mem_stableIntegers`, `Rigidity.closure_normOne_eq_top`,
+  `Rigidity.reachable_iff_sub_mem_unitRingOver`, `Rigidity.connected_or_infinite_planeOver`,
+  `Rigidity.connected_planeOver_iff_isEmpty_stablePrime`, `Rigidity.infinite_connectedComponent_planeOver`,
+  `Rigidity.not_connected_planeOver`, `Rigidity.exists_isUsablePrime`, `Rigidity.nonempty_stablePrime`,
+  `Rigidity.localBound_lt_top`; the model at ℚ(√47), `UnitRingModels.unitRing_eq_stableIntegers_sqrt47`, not trivial there
+  (`UnitRingModels.stableIntegers_sqrt47_ne_top`).
+- **Axioms.** std3, every one.
+- **Whose.** Lemma C′ for real quadratic and multiquadratic fields away from 2, and the components clause for multiquadratic
+  fields, are `[Fischer1990b]`'s; the residue-field piece of the local step is `[MinacNguyenTan2026]` Thm 3.16; the general
+  form: prior art not found in print (`[Shimura1964]` unread). The degree-one primes are classical: `[Nagell1969]` Théorème 3
+  at `n = 4` (after `[Bauer1916]`). The dichotomy at every subfield of `ℝ`: prior art not yet searched. The kernel proofs are
+  this project's.
+- **Ledger.** Rows 100, 105 and 168.
+
 ## Other people's results, checked here
 
 In each case below the theorem is its authors'. What this project contributed is said in the "whose" line.
@@ -324,6 +350,7 @@ is listed in `ARCHITECTURE.md` § 5. What landing each in Lean would mean is `RO
   distances*, Math. Program. 207 (2024) 303–327; arXiv:2207.14179.
 - **[BardestaniMallahiKarai2017]** M. Bardestani, K. Mallahi-Karai, *On a generalization of the Hadwiger–Nelson problem*,
   Israel J. Math. 217 (2017) 313–335; arXiv:1507.05300.
+- **[Bauer1916]** M. Bauer, *Zur Theorie der algebraischen Zahlkörper*, Math. Ann. 77 (1916) 353–356.
 - **[BendaPerles2000]** M. Benda, M. Perles, *Colorings of metric spaces*, Geombinatorics IX(3) (2000) 113–126 (written in
   1976).
 - **[CGHO2025bg]** N. Chandgotia, S. Gangloff, B. Hellouin de Menibus, P. Oprocha, *Undecidability of the block gluing
@@ -342,6 +369,8 @@ is listed in `ARCHITECTURE.md` § 5. What landing each in Lean would mean is `RO
 - **[ExooIsmailescu2019]** G. Exoo, D. Ismailescu, *The chromatic number of the plane is at least 5 — a new proof*, Discrete
   Comput. Geom. (2019); arXiv:1805.00157.
 - **[Fischer1990]** K. G. Fischer, *Additive k-colorable extensions of the rational plane*, Discrete Math. 82 (1990) 181–195.
+- **[Fischer1990b]** K. G. Fischer, *The connected components of the graph `Q(√N₁, …, √N_d)²`*, Congressus Numerantium
+  72 (1990) 213–221.
 - **[Fischer1994]** K. G. Fischer, *A planar geometric graph of chromatic number four*, Congressus Numerantium 104 (1994)
   73–79.
 - **[GwynStavrianos2022]** H. Gwyn, J. Stavrianos, *A finite graph approach to the probabilistic Hadwiger–Nelson problem*,
@@ -363,11 +392,15 @@ is listed in `ARCHITECTURE.md` § 5. What landing each in Lean would mean is `RO
   Sciences 214(5) (2016) 687–698.
 - **[MatolcsiEtAl2025]** M. Matolcsi, I. Z. Ruzsa, D. Varga, P. Zsámboki, *The fractional chromatic number of the plane is at
   least 4*, arXiv:2311.10069.
+- **[MinacNguyenTan2026]** J. Mináč, T. T. Nguyen, N. D. Tân, *Sums of units in finite rings and applications to Cayley
+  graphs*, arXiv:2607.00404 (2026).
 - **[Moorhouse2010]** G. E. Moorhouse, *On the Chromatic Numbers of Planes*, preliminary draft (2010).
 - **[Moorhouse2010slides]** G. E. Moorhouse, *Colouring the Plane*, conference slides (2010).
+- **[Nagell1969]** T. Nagell, *Sur les diviseurs premiers des polynômes*, Acta Arith. 15 (1969) 235–244.
 - **[OAIMath2026]** OpenAI, *Mathematics manuscript collection*, github.com/openai/math (2026); family 158, *The Euclidean
   plane is not five-colorable*, with its Lean formalization; Apache License 2.0.
 - **[Polymath16threads]** D. H. J. Polymath, the Polymath16 discussion threads (2018–2026), `dustingmixon.wordpress.com`.
+- **[Shimura1964]** G. Shimura, *Arithmetic of unitary groups*, Ann. of Math. (2) 79 (1964) 369–409 (not read here).
 - **[Soifer2024]** A. Soifer, *The New Mathematical Coloring Book*, Springer (2024).
 - **[SokolovVoronov2025]** G. Sokolov, V. Voronov, *On the chromatic number of the plane for map-type colorings*, Discrete
   Math. 349 (2026) 115321; arXiv:2502.01958.
