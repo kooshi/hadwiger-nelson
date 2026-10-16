@@ -58,7 +58,7 @@ A push publishes every one of them, so an intermediate version of a file counts 
 2. **Every commit message,** in full, passed to the guard.
 3. **Identities:** every distinct author and committer name and e-mail address in the range, counted.
 4. **Sizes:** every file version above 10 MB, with its size (GitHub refuses a file above 100 MB).
-4b. **Compressed files** (`.gz`): decompress each version under the scratch folder and pass the text to the guard; a match
+4b. **Compressed files** (gzip): decompress each version under the scratch folder and pass the text to the guard; a match
    in the compressed bytes themselves is noise (two such false matches were seen at the last landing), so report the
    decompressed result.
 5. **Names:** every path in the range whose name looks like a credential or a transcript (the names ".env", "auth.json",
