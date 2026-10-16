@@ -171,4 +171,4 @@ four-colour namesake carries `omit [NumberField F] in` there because the namesak
 
 **Re-price for the successor.** Four modules took about 1,540 lines of proof (Thick + edits 360, Mixing 630, Colouring 137,
 Dichotomy 600) against the plan's 2,450 for them, every leaf closed within five farm compiles. Left by the plan: Slice 330,
-Selection 310, Headline 250 — on this job's rate, about 600 lines, two or three sessions' worth of work far less than one.
+Selection 310, Headline 250 — on this job's rate, about 600 lines, well within one successor's session.
