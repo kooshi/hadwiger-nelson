@@ -123,3 +123,33 @@ steps) about **0.5 min**. Memory, not time, sets the cut: a declaration of at mo
 * rows at 300 a declaration.
 
 Total: about 30 min of kernel, every declaration under about 4.5 GB.
+
+## Stage 3 — SAVED: the modules (hand-written proofs complete; generated data built, see Stage 4)
+
+All under `Proofs/HadwigerNelson/Plane/G27/`, namespace `HadwigerNelson.G27`:
+
+| module | what | lines |
+|---|---|---|
+| `Check` (core, imports only `X23Check`) | the checker: terms `key + 2²⁷·(c + 2⁸⁵²)`, the residual steps (`stepOut`, `stepIn`, `mergeR`), `dfsR`/`collectR`, `goodB`, `splitOk`, the sort (`sortRounds`), the rows' terms (`rowsTerms`, `rowsFit`), `adjOk`, `wfB`, `pathsOk`, `singSumOk`; spec examples | 230 |
+| `Sound` | `val_mergeR`, `val_sortR`, `val_stepOut`, `val_stepIn`, **`dfsR_sound`**, `dfsR_append`, `dfsR_eq_all`, `goodB_of_split`, `segsOk_spec` | 600 |
+| `Law` | the field and points (`xpt_mem`: every point in `ℤ[U]` by a path of edges); `row_corr`/`row_phi` (each row an isometry of `R`, preserving `φ(Y) = P(Y ⊆ I) + P(Ȳ ⊆ I)`); `expect_le` (integrals of the terms); `indepFrom_mk`; **`density_le_of_cert`** | 650 |
+| `Bound` | `cert_bound` (condition (iii) from `good_root`, `root_sorted`, `segs_ok`); **`density_le_quarter`** | 60 |
+| generated (`tools/fs131_kfs1_g27.py --write`) | `Data` (points, masks, paths, `Dn`, singletons; `adj_ok`, `wf_ok`, `paths_ok`, `origin_ok`, `sing_ok`), `Rows00…28` (600 rows each: two `rowOk` checks, `rowsFit`, the sorted terms), `RootData`, `RootSort`, `St000…005` (the split tree's literal states), `Chk00…07` (the split and leaf-group checks), `All` (the assembly: `segs_ok`, `root_sorted`, `good000…005`, `good_root`) | 47 files, 46 MB |
+
+`Instances/SeamFractional`: `numberField_seamField` proved (a ring map into `fieldOfRadicands {3, 11}`, a number field);
+`IndepLaw.density_le_quarter_seamField` is `G27.density_le_quarter` (edited after the build, which must not read it mid-walk).
+
+**Re-price from the first leaves.** The plan priced Part B at about 1,360 hand-written lines; written: about 1,540, of which the
+soundness of the residual DFS (the plan's route had none to write — it borrowed `X23`'s scan) and the split tree are the new
+part. Kernel, measured: a `Chk` module of about 410 k residual entries is 46 s and 2.9 GB; a `Rows` module about 50 s.
+
+**The split tree** (`--stats`, `data/fs131/isf1/gen/manifest.json`): leaves of at most 150 k residual entries, splits of at
+most 200 k, groups of at most 150 k; 6 splits (root → point 5; then 5 → 12, 12 → 13, 5 → 6 twice, 5 → 9), 22 leaf groups,
+94,639 literal residual entries below the root; largest generated file 9.0 MB, all 47.3 MB.
+
+**The generalization** (FS131-PAS2 § 4.2: every finite unit-distance graph over `K` has `χ_gf ≤ 4`) — not stated: `χ_gf` is
+not in the library's vocabulary. Price: about 40 lines to define the geometric fractional chromatic number of a finite set
+`H ⊆ K²` (fractional colourings whose aggregate on a point set depends only on its congruence class), and about 100–150 for
+the bound — the four classes of Theorem B's residue colouring, each weighted 1, have aggregate `[c constant on Y]`, which
+is invariant under the isometries of `K²` because the residue map is additive and multiplies by the unit's residue. Over
+the 100-line line: left as priced.

@@ -13,7 +13,7 @@ valid, is `Plane/G27/Valid`.
 * **Points and edges.** `[MatolcsiEtAl2025]`'s 27 points, each stored as `12·xᵢ` in `X23Check`'s packing, relabelled in the
   DFS's order and translated so that point 0 is the origin. `adjOk`: every bit of a point's adjacency mask is a unit pair.
   `pathsOk`: every point is joined to point 0 by a path of listed edges (so every point lies in `ℤ[U]`).
-* **Terms.** A term is one `Nat`, `key + 2²⁷·(c + OFFC)`: `key` is a mask of points, `c` an integer coefficient (`OFFC = 2¹⁰⁰⁰`).
+* **Terms.** A term is one `Nat`, `key + 2²⁷·(c + OFFC)`: `key` is a mask of points, `c` an integer coefficient (`OFFC = 2⁸⁵²`).
   The certificate's terms are the 27 singletons and, for each congruence row, `−c` on its `I` and `+c` on its `J`
   (`expand`); `sortR` merges them, adding equal keys, into one list sorted by key.
 * **The residual DFS** (`dfsR`) decides the points in order, refuses a point adjacent to one already in, and carries the
@@ -33,9 +33,9 @@ open HadwigerNelson.DensityBound.X23Check
 /-- `2²⁷`: one bit per point; the base of a term's key. -/
 def M27 : Nat := 134217728
 
-/-- `2¹⁰⁰⁰`: the offset of a term's coefficient. -/
+/-- `2⁸⁵²`: the offset of a term's coefficient (every coefficient here, merged or not, is below `2⁸⁴⁶` in size). -/
 def OFFC : Nat :=
-  10715086071862673209484250490600018105614048117055336074437503883703510511249361224931983788156958581275946729175531468251871452856923140435984577574698574803934567774824230985421074605062371141877954182153046474983581941267398767559165543946077062914571196477686542167660429831652624386837205668069376
+  30030067315218800919884630782037027445247038374198014146711597563050526250476926831789640794321325523394216076738821850476730762665208973047045843626559620640158907690363610309346513399556581649279919071671610504617321356178738468477058455548958390664298496
 
 /-- A term's key: its mask of points. -/
 def key (t : Nat) : Nat := t % M27
@@ -115,15 +115,31 @@ noncomputable def leafOk (D : Int) (_S : Nat) (L : List Nat) : Bool := decide (v
 /-- A frontier state, as one list: the set, then the residual. -/
 def stateL (p : Nat × List Nat) : List Nat := p.1 :: p.2
 
-/-- The DFS below one frontier state (`st = S :: L`) from point `k` on. -/
-noncomputable def subtreeOk (D : Int) (as : List Nat) (k : Nat) (st : List Nat) : Bool :=
-  dfsR (leafOk D) as k (st.headD 0) st.tail
+/-- Equality of lists of naturals, as a `Bool`. -/
+def eqL : List Nat → List Nat → Bool
+  | [], [] => true
+  | a :: l, b :: m => Nat.beq a b && eqL l m
+  | _, _ => false
 
 /-- Equality of lists of lists of naturals, as a `Bool`. -/
 def eqLL : List (List Nat) → List (List Nat) → Bool
   | [], [] => true
-  | a :: as, b :: bs => a == b && eqLL as bs
+  | a :: as, b :: bs => eqL a b && eqLL as bs
   | _, _ => false
+
+/-- The DFS accepts below the state `st = S :: L` at point `k` (`as` lists every point's adjacency mask). -/
+noncomputable def goodB (D : Int) (as : List Nat) (k : Nat) (st : List Nat) : Bool :=
+  dfsR (leafOk D) (as.drop k) k (st.headD 0) st.tail
+
+/-- From the state `st` at point `k`, the DFS's states at point `d` are the list `out`. -/
+noncomputable def splitOk (as : List Nat) (k d : Nat) (st : List Nat) (out : List (List Nat)) : Bool :=
+  Nat.ble k d && Nat.ble d as.length &&
+    eqLL ((collectR ((as.drop k).take (d - k)) k (st.headD 0) st.tail).map stateL) out
+
+/-- The masks are well formed from point `k` on: each at a point `< 27`, below `2²⁷`, without its own bit. -/
+def wfB : List Nat → Nat → Bool
+  | [], _ => true
+  | a :: as, k => Nat.blt k 27 && Nat.blt a M27 && !(a.testBit k) && wfB as (k + 1)
 
 /-! ### Sorting the terms -/
 

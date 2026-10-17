@@ -45,9 +45,14 @@ MODPFX = "Proofs.HadwigerNelson.Plane.G27"
 B72 = 1 << 72
 OFF70 = 1 << 70
 M27 = 1 << 27
-OFFC = 1 << 1000
+OFFC = 1 << 852
 FUEL = 1073741824
 N = 27
+ROWS_PER_MOD = 600
+WLEAF = 150000
+WSPLIT = 200000
+WGROUP = 150000
+WMODULE = 450000
 
 
 class Refusal(Exception):
@@ -200,21 +205,27 @@ def merge_r(l1, l2, fuel=FUEL):
     return out
 
 
-def sort_r(L):
-    ls = [[t] for t in L]
-    r = 20
-    while r > 0 and len(ls) >= 2:
-        nl = []
-        k = 0
+def sort_rounds(ls, r):
+    """the kernel's `sortRounds`: bottom-up rounds of `mergePairs`, then flattened when the rounds run out."""
+    ls = [list(l) for l in ls]
+    while True:
+        if r == 0:
+            return [t for l in ls for t in l]
+        if len(ls) == 0:
+            return []
+        if len(ls) == 1:
+            return ls[0]
+        nl, k = [], 0
         while k + 1 < len(ls):
             nl.append(merge_r(ls[k], ls[k + 1])); k += 2
         if k < len(ls):
             nl.append(ls[k])
         ls = nl
         r -= 1
-    if len(ls) >= 2:
-        raise Refusal("sortR ran out of rounds")
-    return ls[0] if ls else []
+
+
+def sort_r(L):
+    return sort_rounds([[t] for t in L], 20)
 
 
 def step_out(bit, L):
@@ -313,7 +324,7 @@ def find_isometry(rep_pts, tgt_pts):
     return None
 
 
-def build(kf, chunk_work):
+def build():
     d, sha, P, weights = load()
     # the graph on MRVZ's labels
     def sqd(p, q):
@@ -411,198 +422,335 @@ def build(kf, chunk_work):
                     raise Refusal("row correspondence fails")
             rows.append(pack_row(len(rows), refl, m, U, V, rep, J))
             coefs.append(wsets[ns] + OFFC)
-    # the terms, the root, the frontier
-    expanded = [term(1 << k, sing[k]) for k in range(N)]
-    for r, cpk in zip(rows, coefs):
-        # decode back what the kernel decodes: I, J from the row
+    # the rows in modules; each module's terms sorted; the root
+    sing_terms = [term(1 << k, sing[k]) for k in range(N)]
+    def row_terms(r, cpk):
         n = (r >> (72 * 19)) % B72
         I = [(r >> (72 * (20 + k))) % B72 for k in range(n)]
         J = [(r >> (72 * (20 + n + k))) % B72 for k in range(n)]
-        expanded.append(mask(I) + M27 * (2 * OFFC - cpk))
-        expanded.append(mask(J) + M27 * cpk)
-    root = sort_r(expanded)
+        return [mask(I) + M27 * (2 * OFFC - cpk), mask(J) + M27 * cpk]
+    segs = []
+    for lo in range(0, len(rows), ROWS_PER_MOD):
+        rr, cc = rows[lo:lo + ROWS_PER_MOD], coefs[lo:lo + ROWS_PER_MOD]
+        terms = [t for r, c in zip(rr, cc) for t in row_terms(r, c)]
+        segs.append((rr, cc, sort_r(terms)))
+    root = sort_rounds([sing_terms] + [sg[2] for sg in segs], 20)
     agg = sorted((mask(s), c) for s, c in wsets.items() if c != 0)
     if [(tkey(t), tcf(t)) for t in root if tcf(t) != 0] != agg:
         raise Refusal("the root is not the certificate's weights")
-    frontier = collect(adj, 0, 0, root, kf, [])
-    # chunks: consecutive frontier states, cut at a target work
-    chunks, cur, curw = [], [], 0
-    works = []
-    allok = True
-    totwork = 0
-    for S, L in frontier:
-        w, lv, worst, ok = dfs_cost(adj, kf, S, L, D)
-        allok = allok and ok
-        totwork += w
-        works.append(w)
-        if cur and curw + w > chunk_work:
-            chunks.append(cur); cur, curw = [], 0
-        cur.append((S, L)); curw += w
-    if cur:
-        chunks.append(cur)
-    if not allok:
-        raise Refusal("the DFS refuses a leaf: some independent set weighs more than 1")
+    if max(abs(tcf(t)) for t in root).bit_length() > 846:
+        raise Refusal("a coefficient is too large for the offset")
+    # the whole DFS tree: node = [k, S, |L|, children]
+    nodes = []
+    stack = [(0, 0, root, None)]
+    while stack:
+        k, S, L, par = stack.pop()
+        i = len(nodes)
+        nodes.append([k, S, len(L), []])
+        if par is not None:
+            nodes[par][3].append(i)
+        if k == N:
+            if val(0, L) > D:
+                raise Refusal("the DFS refuses a leaf: some independent set weighs more than 1")
+            continue
+        bit, a = 1 << k, adj[k]
+        # children in collect order: OUT first; pushed last so it is built first
+        if a & S == 0:
+            stack.append((k + 1, S | bit, step_in(bit, a, L), i))
+        stack.append((k + 1, S, step_out(bit, L), i))
+    # the stack builds OUT before IN, so each node's children list is [OUT, IN] (or [OUT])
+    work = [0] * len(nodes)
+    for i in range(len(nodes) - 1, -1, -1):
+        work[i] = nodes[i][2] + sum(work[c] for c in nodes[i][3])
+    def level(i, d):
+        out, pw, st = [], 0, [i]
+        while st:
+            j = st.pop()
+            if nodes[j][0] == d:
+                out.append(j); continue
+            pw += nodes[j][2]
+            st.extend(reversed(nodes[j][3]))
+        return out, pw
+    memo = {}
+    def best(i):
+        if i in memo:
+            return memo[i]
+        if work[i] <= WLEAF:
+            memo[i] = (nodes[i][2], None); return memo[i]
+        k, opt = nodes[i][0], None
+        for d in range(k + 1, N):
+            kids, pw = level(i, d)
+            if pw > WSPLIT:
+                break
+            cost = nodes[i][2] + sum(best(c)[0] for c in kids)
+            if opt is None or cost < opt[0]:
+                opt = (cost, d)
+        if opt is None:
+            raise Refusal(f"no split within budget below a node at depth {k}")
+        memo[i] = opt
+        return opt
+    best(0)
+    # the split tree, in preorder; each split's children in collect order, leaves grouped
+    splits = []          # dict(id, node, k, d, state, items) ; items: ('grp', name, [states], work) | ('st', id)
+    def state_of(i):
+        return None
+    def emit(i, state):
+        sid = len(splits)
+        k, d = nodes[i][0], memo[i][1]
+        S, L = state
+        kids = collect(adj, k, S, L, d, [])
+        kid_nodes, _ = level(i, d)
+        assert [nodes[c][1] for c in kid_nodes] == [st[0] for st in kids]
+        rec = dict(id=sid, k=k, d=d, state=state, items=[], work=level(i, d)[1])
+        splits.append(rec)
+        grp, gw = [], 0
+        for c, st in zip(kid_nodes, kids):
+            if memo[c][1] is None:
+                if grp and gw + work[c] > WGROUP:
+                    rec["items"].append(["grp", grp, gw]); grp, gw = [], 0
+                grp.append(st); gw += work[c]
+            else:
+                if grp:
+                    rec["items"].append(["grp", grp, gw]); grp, gw = [], 0
+                rec["items"].append(["st", emit(c, st)])
+        if grp:
+            rec["items"].append(["grp", grp, gw])
+        return sid
+    emit(0, (0, root))
+    nlit = sum(len(sp["state"][1]) for sp in splits[1:]) + sum(
+        len(L) for sp in splits for it in sp["items"] if it[0] == "grp" for _, L in it[1])
+    ngroups = sum(1 for sp in splits for it in sp["items"] if it[0] == "grp")
     stats = dict(points=N, edges=nedges, order=order, D_bits=D.bit_length(), sets=len(wsets),
-                 classes=len(classes), rows=len(rows), expanded=len(expanded), root=len(root), kf=kf,
-                 frontier=len(frontier), frontier_entries=sum(len(L) for _, L in frontier), chunks=len(chunks),
-                 chunk_work=[sum(works[i] for i in range(sum(len(c) for c in chunks[:k]),
-                                                       sum(len(c) for c in chunks[:k + 1])))
-                             for k in range(len(chunks))],
-                 subtree_work=totwork, cert_sha256=sha)
-    return dict(Q=Q, adj=adj, paths=paths, D=D, sing=sing, rows=rows, coefs=coefs, root=root, frontier=frontier,
-                chunks=chunks, stats=stats, order=order, provenance=d.get("provenance"))
+                 classes=len(classes), rows=len(rows), row_modules=len(segs), expanded=N + 2 * len(rows),
+                 root=len(root), dfs_nodes=len(nodes), dfs_work=work[0], splits=len(splits), groups=ngroups,
+                 literal_entries_below_root=nlit, wleaf=WLEAF, wsplit=WSPLIT, wgroup=WGROUP, cert_sha256=sha)
+    return dict(Q=Q, adj=adj, paths=paths, D=D, sing=sing, segs=segs, root=root, splits=splits, stats=stats,
+                order=order)
 
 
 # ---------------------------------------------------------------------------------------------------- the modules
-HEADER = "-- generated by tools/fs131_kfs1_g27.py; do not edit (regenerate, and check with --check)\n"
+def hx(n):
+    return f"0x{n:x}"
 
 
 def lean_list(xs, indent="  "):
-    return "[" + (",\n" + indent).join(str(x) for x in xs) + "]"
+    return "[" + (",\n" + indent).join(hx(x) for x in xs) + "]"
 
 
-def lean_lists(xss, indent="  "):
-    return "[" + (",\n" + indent).join(lean_list(xs, indent + " ") for xs in xss) + "]"
+def lean_list_dec(xs):
+    return "[" + ", ".join(str(x) for x in xs) + "]"
 
 
-def modules(g, rows_per_mod, chunks_per_mod, root_per_mod):
+def lean_states(sts, indent="  "):
+    return "[" + (",\n" + indent).join(lean_list([S] + L, indent + " ") for S, L in sts) + "]"
+
+
+PRE = "set_option maxRecDepth 200000\nset_option maxHeartbeats 0\n\n"
+OPEN_X23 = "open HadwigerNelson.DensityBound.X23Check\n\n"
+
+
+def head(imports, title, body_doc="", opens=""):
+    imp = "".join(f"import {MODPFX}.{m}\n" for m in imports)
+    doc = (f"/-!\n# {title} (FS-131, FS131-ISF1; generated by `tools/fs131_kfs1_g27.py`)\n"
+           + (f"\n{body_doc}\n" if body_doc else "") + "-/\n\n")
+    return imp + "\n" + doc + "namespace HadwigerNelson.G27\n\n" + opens
+
+
+TAIL = "\nend HadwigerNelson.G27\n"
+
+
+def modules(g):
     st = g["stats"]
     out = {}
-    # Data
+    # ---- Data
     out["Data"] = (
-        f"import {MODPFX}.Check\n\n"
-        f"/-!\n# `G27`'s certificate: points, edges, paths, singletons (FS-131, FS131-ISF1; generated by "
-        f"`tools/fs131_kfs1_g27.py`)\n\n"
-        f"From `data/fs56/g27/cert-g27-mrvz.json` (sha256 `{st['cert_sha256'][:16]}…`): MRVZ's 27 points relabelled in the "
-        f"DFS's order (MRVZ's labels `{st['order']}`), translated so that point 0 is the origin, each as `12·xᵢ`; their "
-        f"{st['edges']} unit edges as adjacency masks; a path of edges from point 0 to each point; the common denominator "
-        f"`Dn` of the weights ({st['D_bits']} bits) and the singletons' coefficients `yᵢ·Dn` (packed `+ OFFC`).\n-/\n\n"
-        f"namespace HadwigerNelson.G27\n\n"
-        f"set_option maxRecDepth 100000\n\n"
-        f"/-- The 27 points `12·xᵢ` (0-based, in the DFS's order), each packed as eight signed digits. -/\n"
+        head(["Check"], "`G27`'s certificate: points, edges, paths, singletons",
+             f"From `data/fs56/g27/cert-g27-mrvz.json` (sha256 `{st['cert_sha256'][:16]}…`): MRVZ's 27 points relabelled "
+             f"in the DFS's order (MRVZ's labels `{st['order']}`), translated so that point 0 is the origin, each as "
+             f"`12·xᵢ`; their {st['edges']} unit edges as adjacency masks; a path of edges from point 0 to each point; the "
+             f"common denominator `Dn` of the weights ({st['D_bits']} bits) and the singletons' coefficients "
+             f"`yᵢ·Dn + OFFC`.", OPEN_X23)
+        + PRE +
+        "/-- The 27 points `12·xᵢ` (0-based, in the DFS's order), each packed as eight signed digits. -/\n"
         f"def ptsL : List Nat := {lean_list([pack_point(z) for z in g['Q']])}\n\n"
-        f"/-- The adjacency masks, point by point. -/\n"
-        f"def adjL : List Nat := {lean_list(g['adj'])}\n\n"
-        f"/-- A path of edges from point 0 to each point (the points after 0). -/\n"
-        f"def pathsL : List (List Nat) := {lean_lists(g['paths'])}\n\n"
-        f"/-- The common denominator of the certificate's weights. -/\n"
+        "/-- The adjacency masks, point by point. -/\n"
+        f"def adjL : List Nat := {lean_list_dec(g['adj'])}\n\n"
+        "/-- A path of edges from point 0 to each point (the points after 0). -/\n"
+        "def pathsL : List (List Nat) := [" + ", ".join(lean_list_dec(p) for p in g["paths"]) + "]\n\n"
+        "/-- The common denominator of the certificate's weights. -/\n"
         f"def Dn : Int := {g['D']}\n\n"
-        f"/-- The singletons' coefficients `yᵢ·Dn + OFFC`, point by point. -/\n"
-        f"def singL : List Nat := {lean_list([s + OFFC for s in g['sing']])}\n\n"
-        f"/-- The frontier's depth. -/\n"
-        f"def KF : Nat := {st['kf']}\n\n"
-        f"theorem adj_ok : adjOk ptsL adjL = true := by decide +kernel\n\n"
-        f"theorem paths_ok : pathsOk adjL pathsL = true := by decide +kernel\n\n"
-        f"theorem sing_ok : singSumOk 4 Dn singL = true := by decide +kernel\n\n"
-        f"end HadwigerNelson.G27\n")
-    # Rows
-    rows, coefs = g["rows"], g["coefs"]
-    nrm = (len(rows) + rows_per_mod - 1) // rows_per_mod
-    for k in range(nrm):
-        lo, hi = k * rows_per_mod, min(len(rows), (k + 1) * rows_per_mod)
+        "/-- The singletons' coefficients `yᵢ·Dn + OFFC`, point by point. -/\n"
+        f"def singL : List Nat := {lean_list([x + OFFC for x in g['sing']])}\n\n"
+        "theorem adj_ok : adjOk ptsL adjL = true := by decide +kernel\n\n"
+        "theorem wf_ok : wfB adjL 0 = true := by decide +kernel\n\n"
+        "theorem paths_ok : pathsOk adjL pathsL = true := by decide +kernel\n\n"
+        "theorem origin_ok : (pt ptsL 0).beq ⟨Q4.ofInt 0, Q4.ofInt 0⟩ = true := by decide +kernel\n\n"
+        "theorem sing_ok : singSumOk 4 Dn singL = true := by decide +kernel\n\n"
+        "theorem Dn_pos : 0 < Dn := by decide\n" + TAIL)
+    # ---- Rows
+    segs = g["segs"]
+    nseg = len(segs)
+    base = 0
+    for k, (rr, cc, ss) in enumerate(segs):
+        half = (len(rr) + 1) // 2
         out[f"Rows{k:02d}"] = (
-            f"import {MODPFX}.Data\n\n"
-            f"/-!\n# Congruence rows {lo}–{hi - 1} (FS-131, FS131-ISF1; generated by `tools/fs131_kfs1_g27.py`)\n\n"
-            f"Each row an isometry carrying its `I` onto its `J` (`rowOk`), naming points `< 27`, its coefficient fitting.\n-/\n\n"
-            f"namespace HadwigerNelson.G27\n\n"
-            f"open HadwigerNelson.DensityBound.X23Check\n\n"
-            f"set_option maxRecDepth 100000\n\n"
-            f"/-- Congruence rows {lo}–{hi - 1}. -/\n"
-            f"def rows{k:02d} : List Nat := {lean_list(rows[lo:hi])}\n\n"
-            f"/-- Their coefficients `c + OFFC`. -/\n"
-            f"def coefs{k:02d} : List Nat := {lean_list(coefs[lo:hi])}\n\n"
-            f"theorem rows{k:02d}_ok : rows{k:02d}.all (rowOk ptsL) = true := by decide +kernel\n\n"
+            head(["Data"], f"Congruence rows {base}–{base + len(rr) - 1}",
+                 "Each row an isometry carrying its `I` onto its `J` (`rowOk`), naming points `< 27`, its coefficient "
+                 "fitting; the rows' terms sorted by key and merged.", OPEN_X23) + PRE +
+            f"/-- Congruence rows {base}–{base + len(rr) - 1}. -/\n"
+            f"def rows{k:02d} : List Nat := {lean_list(rr)}\n\n"
+            "/-- Their coefficients `c + OFFC`. -/\n"
+            f"def coefs{k:02d} : List Nat := {lean_list(cc)}\n\n"
+            "/-- Their terms, sorted by key and merged. -/\n"
+            f"def sorted{k:02d} : List Nat := {lean_list(ss)}\n\n"
+            f"theorem rows{k:02d}_ok0 : (rows{k:02d}.take {half}).all (rowOk ptsL) = true := by decide +kernel\n\n"
+            f"theorem rows{k:02d}_ok1 : (rows{k:02d}.drop {half}).all (rowOk ptsL) = true := by decide +kernel\n\n"
             f"theorem rows{k:02d}_fit : rowsFit rows{k:02d} coefs{k:02d} = true := by decide +kernel\n\n"
-            f"end HadwigerNelson.G27\n")
-    # Root parts
+            f"theorem rows{k:02d}_sort : eqL (sortR (rowsTerms rows{k:02d} coefs{k:02d})) sorted{k:02d} = true := by\n"
+            "  decide +kernel\n" + TAIL)
+        base += len(rr)
+    # ---- the root
     root = g["root"]
-    nroot = (len(root) + root_per_mod - 1) // root_per_mod
-    for k in range(nroot):
-        lo, hi = k * root_per_mod, min(len(root), (k + 1) * root_per_mod)
-        out[f"Root{k:02d}"] = (
-            f"import {MODPFX}.Data\n\n"
-            f"/-!\n# The sorted terms {lo}–{hi - 1} (FS-131, FS131-ISF1; generated by `tools/fs131_kfs1_g27.py`)\n-/\n\n"
-            f"namespace HadwigerNelson.G27\n\n"
-            f"set_option maxRecDepth 100000\n\n"
-            f"/-- The sorted, merged terms {lo}–{hi - 1}. -/\n"
-            f"def root{k:02d} : List Nat := {lean_list(root[lo:hi])}\n\n"
-            f"end HadwigerNelson.G27\n")
-    # Atoms
-    chunks = g["chunks"]
-    nam = (len(chunks) + chunks_per_mod - 1) // chunks_per_mod
-    for k in range(nam):
-        lo, hi = k * chunks_per_mod, min(len(chunks), (k + 1) * chunks_per_mod)
-        body = []
-        for c in range(lo, hi):
-            states = [[S] + L for S, L in chunks[c]]
-            body.append(f"/-- Frontier chunk {c}: {len(states)} states. -/\n"
-                        f"def fr{c:03d} : List (List Nat) := {lean_lists(states)}\n\n"
-                        f"theorem fr{c:03d}_ok : fr{c:03d}.all (subtreeOk Dn (adjL.drop KF) KF) = true := by\n"
-                        f"  decide +kernel\n")
-        out[f"Atoms{k:02d}"] = (
-            f"import {MODPFX}.Data\n\n"
-            f"/-!\n# The residual DFS below frontier chunks {lo}–{hi - 1} (FS-131, FS131-ISF1; generated by "
-            f"`tools/fs131_kfs1_g27.py`)\n\nEach chunk: every independent extension of each of its states weighs at most "
-            f"`Dn` (`leafOk`).\n-/\n\n"
-            f"namespace HadwigerNelson.G27\n\n"
-            f"set_option maxRecDepth 100000\n\n" + "\n".join(body) + "\nend HadwigerNelson.G27\n")
-    return out, dict(rows_mods=nrm, root_mods=nroot, atoms_mods=nam)
+    q = (len(root) + 3) // 4
+    parts = [root[i * q:(i + 1) * q] for i in range(4)]
+    out["RootData"] = (
+        head(["Data"], "The root: the certificate's terms sorted by key, equal keys merged",
+             f"{len(root)} terms, one per weighted set: `key + 2²⁷·(y·Dn + OFFC)`.") + PRE +
+        "".join(f"/-- The sorted terms, part {i}. -/\ndef rootL{i} : List Nat := {lean_list(parts[i])}\n\n" for i in range(4)) +
+        "/-- The sorted terms. -/\ndef rootL : List Nat := rootL0 ++ (rootL1 ++ (rootL2 ++ rootL3))\n\n"
+        "/-- The DFS's root state: the empty set, then the sorted terms. -/\ndef rootSt : List Nat := 0 :: rootL\n" + TAIL)
+    out["RootSort"] = (
+        head(["RootData"] + [f"Rows{k:02d}" for k in range(nseg)], "The root is the rows' sorted terms merged") + PRE +
+        "theorem root_ok : eqL (sortRounds 20 (singTerms 0 singL :: [" +
+        ", ".join(f"sorted{k:02d}" for k in range(nseg)) + "])) rootL = true := by\n  decide +kernel\n" + TAIL)
+    # ---- the split tree: states and checks
+    splits = g["splits"]
+    parent = {}
+    for sp in splits:
+        for it in sp["items"]:
+            if it[0] == "st":
+                parent[it[1]] = sp["id"]
+
+    def stname(i):
+        return "rootSt" if i == 0 else f"st{i:03d}"
+
+    def stmod(i):
+        return "RootData" if i == 0 else f"St{parent[i]:03d}"
+    checks = []
+    for sp in splits:
+        i = sp["id"]
+        names, body = [], []
+        for j, it in enumerate(sp["items"]):
+            if it[0] == "grp":
+                nm = f"gp{i:03d}x{j:02d}"
+                body.append(f"/-- Leaf states, group {j} of split {i}: {len(it[1])} states at point {sp['d']}. -/\n"
+                            f"def {nm} : List (List Nat) := {lean_states(it[1])}\n\n")
+                names.append(nm)
+                checks.append((f"theorem {nm}_ok : {nm}.all (goodB Dn adjL {sp['d']}) = true := by\n  decide +kernel\n",
+                               it[2], [f"St{i:03d}"]))
+            else:
+                c = it[1]
+                S, L = splits[c]["state"]
+                body.append(f"/-- The state of split {c}, at point {sp['d']}. -/\n"
+                            f"def {stname(c)} : List Nat := {lean_list([S] + L)}\n\n")
+                names.append(f"[{stname(c)}]")
+        body.append(f"/-- The states at point {sp['d']} below split {i}, in the DFS's order. -/\n"
+                    f"def out{i:03d} : List (List Nat) := " + " ++ ".join(names) + "\n")
+        out[f"St{i:03d}"] = (head(["Data"], f"Split {i}: the states at point {sp['d']} below its state at point {sp['k']}")
+                             + PRE + "".join(body) + TAIL)
+        checks.append((f"theorem sp{i:03d}_ok : splitOk adjL {sp['k']} {sp['d']} {stname(i)} out{i:03d} = true := by\n"
+                       "  decide +kernel\n", sp["work"], sorted({stmod(i), f"St{i:03d}"})))
+    cmods, cur, curw, curimp = [], [], 0, set()
+    for decl, w, imps in checks:
+        if cur and (curw + w > WMODULE or len(curimp | set(imps)) > 3):
+            cmods.append((cur, sorted(curimp), curw)); cur, curw, curimp = [], 0, set()
+        cur.append(decl); curw += w; curimp |= set(imps)
+    if cur:
+        cmods.append((cur, sorted(curimp), curw))
+    for k, (decls, imps, w) in enumerate(cmods):
+        out[f"Chk{k:02d}"] = (head(imps, f"Residual DFS checks, part {k}", f"About {w} residual entries in all.")
+                              + PRE + "\n".join(decls) + TAIL)
+    # ---- the assembly
+    L = [head(["RootSort"] + [f"Chk{k:02d}" for k in range(len(cmods))] + ["Sound"],
+              "`G27`'s kernel checks assembled",
+              "The rows' checks joined by module (`segs_ok`), the root (`root_sorted`), and the residual DFS accepting "
+              "from the root (`good_root`): each split's state passes because its states one level down do."), PRE]
+    L.append("/-- The congruence rows, by module. -/\ndef segR : List (List Nat) := [" +
+             ", ".join(f"rows{k:02d}" for k in range(nseg)) + "]\n\n")
+    L.append("/-- Their coefficients, by module. -/\ndef segC : List (List Nat) := [" +
+             ", ".join(f"coefs{k:02d}" for k in range(nseg)) + "]\n\n")
+    L.append("/-- Their sorted terms, by module. -/\ndef segS : List (List Nat) := [" +
+             ", ".join(f"sorted{k:02d}" for k in range(nseg)) + "]\n\n")
+    L.append("theorem segs_ok : SegsOk ptsL segR segC segS := by\n  simp only [segR, segC, segS, SegsOk]\n  exact ⟨" +
+             ", ".join(f"⟨⟨{(len(segs[k][0]) + 1) // 2}, rows{k:02d}_ok0, rows{k:02d}_ok1⟩, rows{k:02d}_fit, rows{k:02d}_sort⟩"
+                       for k in range(nseg)) +
+             ", trivial⟩\n\n")
+    L.append("theorem root_sorted : eqL (sortRounds 20 (singTerms 0 singL :: segS)) rootL = true := root_ok\n\n")
+    for sp in reversed(splits):
+        i = sp["id"]
+        rw = [f"gp{i:03d}x{j:02d}_ok" if it[0] == "grp" else f"good{it[1]:03d}" for j, it in enumerate(sp["items"])]
+        L.append(f"theorem good{i:03d} : goodB Dn adjL {sp['k']} {stname(i)} = true :=\n"
+                 f"  goodB_of_split sp{i:03d}_ok (by\n    simp only [out{i:03d}, List.all_append, List.all_cons, "
+                 "List.all_nil, " + ", ".join(rw) + ", Bool.and_true, Bool.true_and])\n\n")
+    L.append("theorem good_root : goodB Dn adjL 0 rootSt = true := good000\n")
+    L.append(TAIL)
+    out["All"] = "".join(L)
+    return out, dict(check_modules=len(cmods), check_module_work=[w for _, _, w in cmods])
+
+
+HAND = ("Check.lean", "Sound.lean", "Law.lean", "Bound.lean")
 
 
 def main(argv):
-    kf, cw = 14, 60000
-    rows_per_mod, chunks_per_mod, root_per_mod = 600, 6, 3000
-    only = None
-    for k, a in enumerate(argv):
-        if a == "--kf":
-            kf = int(argv[k + 1])
-        if a == "--chunk-work":
-            cw = int(argv[k + 1])
-        if a == "--only":
-            only = argv[k + 1].split(",")
     try:
-        g = build(kf, cw)
+        g = build()
     except Refusal as e:
         print(f"REFUSED: {e}")
         return 1
-    mods, counts = modules(g, rows_per_mod, chunks_per_mod, root_per_mod)
+    mods, counts = modules(g)
     st = dict(g["stats"], **counts)
-    manifest = json.dumps(dict(stats=st, modules=sorted(mods)), indent=1, sort_keys=True) + "\n"
+    sizes = {name: len(text.encode()) for name, text in mods.items()}
+    st["largest_module_bytes"] = max(sizes.values())
+    st["total_bytes"] = sum(sizes.values())
+    manifest = json.dumps(dict(stats=st, modules=sorted(mods), sizes=sizes), indent=1, sort_keys=True) + "\n"
+    if max(sizes.values()) > 20_000_000:
+        print("REFUSED: a module is over 20 MB")
+        return 1
     if "--stats" in argv:
         print(json.dumps(st, indent=1))
         return 0
     if "--write" in argv:
         MODDIR.mkdir(parents=True, exist_ok=True)
         MANIFEST.parent.mkdir(parents=True, exist_ok=True)
+        keep = set(HAND) | {f"{n}.lean" for n in mods}
+        for p in sorted(MODDIR.glob("*.lean")):
+            if p.name not in keep:
+                p.unlink()
         for name, text in mods.items():
-            if only is None or name in only:
-                (MODDIR / f"{name}.lean").write_text(text)
+            (MODDIR / f"{name}.lean").write_text(text)
         MANIFEST.write_text(manifest)
-        print(f"wrote {len(mods) if only is None else len(only)} modules; {json.dumps(st)}")
+        print(f"wrote {len(mods)} modules; {json.dumps(st)}")
         return 0
     if "--check" in argv:
         files = {f"{name}.lean": text for name, text in mods.items()}
-        files["manifest.json"] = manifest
         if "--plant" in argv:
-            name = sorted(n for n in files if n.startswith("Rows"))[0]
-            t = files[name]
-            k = t.index("def rows")
-            k = t.index("[", k) + 1
-            d0 = t[k]
-            files[name] = t[:k] + ("1" if d0 != "1" else "2") + t[k + 1:]
+            t = files["Rows00.lean"]
+            k = t.index("def rows00 : List Nat := [0x") + len("def rows00 : List Nat := [0x")
+            files["Rows00.lean"] = t[:k] + ("1" if t[k] != "1" else "2") + t[k + 1:]
         bad = []
         for name, text in sorted(files.items()):
-            path = MANIFEST if name == "manifest.json" else MODDIR / name
+            path = MODDIR / name
             if not path.exists() or path.read_text() != text:
                 bad.append(name)
-        # modules on disk that the generator would not write
+        if not MANIFEST.exists() or MANIFEST.read_text() != manifest:
+            bad.append("manifest.json")
         for p in sorted(MODDIR.glob("*.lean")):
-            if p.name != "Check.lean" and p.name not in files and p.name not in ("Valid.lean", "Law.lean", "All.lean"):
-                bad.append(f"{p.name} (not generated)")
+            if p.name not in files and p.name not in HAND:
+                bad.append(f"{p.name} (on disk, not generated)")
         if bad:
             print("MISMATCH: " + ", ".join(bad))
             return 1
-        print(f"IDENTICAL: {len(files)} files")
+        print(f"IDENTICAL: {len(files)} modules and the manifest")
         return 0
     print(__doc__)
     return 2

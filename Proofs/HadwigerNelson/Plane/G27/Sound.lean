@@ -481,4 +481,104 @@ theorem dfsR_eq_all (leaf : ℕ → List ℕ → Bool) : ∀ (as : List ℕ) (k 
     cases a &&& S != 0 <;> simp
 
 
+/-! ### Splitting the DFS at literal states, and the rows by module -/
+
+theorem eqL_eq : ∀ {a b : List ℕ}, eqL a b = true → a = b
+  | [], [], _ => rfl
+  | x :: a, y :: b, h => by
+    simp only [eqL, Bool.and_eq_true] at h
+    rw [Nat.eq_of_beq_eq_true h.1, eqL_eq h.2]
+  | [], _ :: _, h => by simp [eqL] at h
+  | _ :: _, [], h => by simp [eqL] at h
+
+theorem eqLL_eq : ∀ {a b : List (List ℕ)}, eqLL a b = true → a = b
+  | [], [], _ => rfl
+  | x :: a, y :: b, h => by
+    simp only [eqLL, Bool.and_eq_true] at h
+    rw [eqL_eq h.1, eqLL_eq h.2]
+  | [], _ :: _, h => by simp [eqLL] at h
+  | _ :: _, [], h => by simp [eqLL] at h
+
+theorem wfAdj_of_wfB : ∀ {as : List ℕ} {k : ℕ}, wfB as k = true → WfAdj as k
+  | [], _, _ => trivial
+  | a :: as, k, h => by
+    simp only [wfB, Bool.and_eq_true, Nat.blt_eq, Bool.not_eq_true'] at h
+    exact ⟨h.1.1.1, h.1.1.2, h.1.2, wfAdj_of_wfB h.2⟩
+
+/-- **A split**: if the states one level down pass, the state passes. -/
+theorem goodB_of_split {D : ℤ} {as : List ℕ} {k d : ℕ} {st : List ℕ} {out : List (List ℕ)}
+    (hs : splitOk as k d st out = true) (hc : out.all (goodB D as d) = true) : goodB D as k st = true := by
+  simp only [splitOk, Bool.and_eq_true, Nat.ble_eq] at hs
+  obtain ⟨⟨hkd, hdl⟩, heq⟩ := hs
+  have hout := eqLL_eq heq
+  have hdd : (as.drop k).drop (d - k) = as.drop d := by
+    rw [List.drop_drop]; congr 1; omega
+  have hsplit : as.drop k = (as.drop k).take (d - k) ++ as.drop d := by
+    rw [← hdd, List.take_append_drop]
+  have hlen : k + ((as.drop k).take (d - k)).length = d := by
+    rw [List.length_take, List.length_drop]; omega
+  unfold goodB
+  rw [hsplit, dfsR_append, hlen, dfsR_eq_all, List.all_eq_true]
+  intro p hp
+  have hm : stateL p ∈ out := hout ▸ List.mem_map_of_mem hp
+  have := List.all_eq_true.1 hc _ hm
+  simpa [goodB, stateL] using this
+
+/-- The root state: the DFS from point 0 with the empty set. -/
+theorem goodB_root {D : ℤ} {as L : List ℕ} (h : goodB D as 0 (0 :: L) = true) : dfsR (leafOk D) as 0 0 L = true := by
+  simpa [goodB] using h
+
+theorem rowsFit_length : ∀ {r c : List ℕ}, rowsFit r c = true → r.length = c.length
+  | [], [], _ => rfl
+  | _ :: r, _ :: c, h => by
+    simp only [rowsFit, Bool.and_eq_true] at h
+    simp [rowsFit_length h.2]
+  | [], _ :: _, h => by simp [rowsFit] at h
+  | _ :: _, [], h => by simp [rowsFit] at h
+
+theorem rowsFit_append : ∀ {r c : List ℕ} (r' c' : List ℕ), rowsFit r c = true →
+    rowsFit (r ++ r') (c ++ c') = rowsFit r' c'
+  | [], [], _, _, _ => rfl
+  | x :: r, y :: c, r', c', h => by
+    simp only [rowsFit, Bool.and_eq_true] at h
+    simp only [List.cons_append, rowsFit, rowsFit_append r' c' h.2, h.1, Bool.true_and]
+  | [], _ :: _, _, _, h => by simp [rowsFit] at h
+  | _ :: _, [], _, _, h => by simp [rowsFit] at h
+
+theorem rowsTerms_append : ∀ {r c : List ℕ} (r' c' : List ℕ), r.length = c.length →
+    rowsTerms (r ++ r') (c ++ c') = rowsTerms r c ++ rowsTerms r' c'
+  | [], [], _, _, _ => by simp [rowsTerms]
+  | x :: r, y :: c, r', c', h => by
+    simp only [List.length_cons, Nat.add_right_cancel_iff] at h
+    simp only [List.cons_append, rowsTerms, rowsTerms_append r' c' h, List.append_assoc]
+  | [], _ :: _, _, _, h => by simp at h
+  | _ :: _, [], _, _, h => by simp at h
+
+/-- Each module of rows: its rows are isometries (in two halves), they fit, and their terms sort to the given list. -/
+def SegsOk (pts : List ℕ) : List (List ℕ) → List (List ℕ) → List (List ℕ) → Prop
+  | [], [], [] => True
+  | r :: rs, c :: cs, s :: ss =>
+    ((∃ n, (r.take n).all (DensityBound.X23Check.rowOk pts) = true ∧
+        (r.drop n).all (DensityBound.X23Check.rowOk pts) = true) ∧
+      rowsFit r c = true ∧ eqL (sortR (rowsTerms r c)) s = true) ∧ SegsOk pts rs cs ss
+  | _, _, _ => False
+
+/-- The modules of rows joined: every row an isometry, every row fitting, and the value of their terms the sorted lists'. -/
+theorem segsOk_spec {pts : List ℕ} : ∀ {rs cs ss : List (List ℕ)}, SegsOk pts rs cs ss →
+    rs.flatten.all (DensityBound.X23Check.rowOk pts) = true ∧ rowsFit rs.flatten cs.flatten = true ∧
+      ∀ U, val U (rowsTerms rs.flatten cs.flatten) = (ss.map (val U)).sum
+  | [], [], [], _ => ⟨rfl, rfl, fun _ => rfl⟩
+  | r :: rs, c :: cs, s :: ss, h => by
+    obtain ⟨⟨⟨n, h0, h1⟩, hfit, hsort⟩, hrest⟩ := h
+    obtain ⟨ih1, ih2, ih3⟩ := segsOk_spec hrest
+    refine ⟨?_, ?_, fun U => ?_⟩
+    · rw [List.flatten_cons, List.all_append, ← List.take_append_drop n r, List.all_append, h0, h1, ih1]; rfl
+    · rw [List.flatten_cons, List.flatten_cons, rowsFit_append _ _ hfit, ih2]
+    · rw [List.flatten_cons, List.flatten_cons, rowsTerms_append _ _ (rowsFit_length hfit), val_append, ih3,
+        ← eqL_eq hsort, List.map_cons, List.sum_cons, val_sortR]
+  | [], [], _ :: _, h => h.elim
+  | [], _ :: _, _, h => h.elim
+  | _ :: _, [], _, h => h.elim
+  | _ :: _, _ :: _, [], h => h.elim
+
 end HadwigerNelson.G27
