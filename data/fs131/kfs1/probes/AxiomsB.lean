@@ -1,0 +1,13 @@
+import Proofs.HadwigerNelson.Collapse.Density.Headline
+import Proofs.HadwigerNelson.FieldWall4
+open HadwigerNelson
+#print axioms HadwigerNelson.Collapse.fractionalChromaticNumber_planeOver_eq
+#print axioms HadwigerNelson.Collapse.exists_indepLaw
+#print axioms HadwigerNelson.Collapse.finIndepRatio_planeOver_le_cayR
+#print axioms HadwigerNelson.Collapse.localRatio_le_finIndepRatio
+#print axioms SimpleGraph.inv_finIndepRatio_le_iSup_fractionalChromaticNumber
+#print axioms HadwigerNelson.FieldWall4.chromaticNumber_seamPlane
+#check @HadwigerNelson.Collapse.exists_indepLaw
+#check @HadwigerNelson.Collapse.finIndepRatio_planeOver_le_cayR
+#check @SimpleGraph.inv_finIndepRatio_le_iSup_fractionalChromaticNumber
+#check @HadwigerNelson.FieldWall4.chromaticNumber_seamPlane

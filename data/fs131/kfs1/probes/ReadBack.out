@@ -1,0 +1,57 @@
+slot: admitted lake: mem 8 GiB (hard cap), cpus 0
+RationalFour.zero_le_val_iff : ∀ (z : Quaternion ℚ),
+  0 ≤ RationalFour.val z ↔
+    ∃ m a b c d,
+      Odd m ∧
+        a ≡ b [ZMOD 2] ∧
+          a ≡ c [ZMOD 2] ∧
+            a ≡ d [ZMOD 2] ∧
+              z =
+                { re := (↑a : ℚ) / (2 * (↑m : ℚ)), imI := (↑b : ℚ) / (2 * (↑m : ℚ)), imJ := (↑c : ℚ) / (2 * (↑m : ℚ)),
+                  imK := (↑d : ℚ) / (2 * (↑m : ℚ)) }
+@RationalFour.one_le_val_div_odd : ∀ {m : ℕ},
+  Odd m →
+    ∀ {a b c d : ℤ},
+      (a, b, c, d) ≠ (0, 0, 0, 0) →
+        (1 ≤
+            RationalFour.val
+              { re := (↑a : ℚ) / (↑m : ℚ), imI := (↑b : ℚ) / (↑m : ℚ), imJ := (↑c : ℚ) / (↑m : ℚ),
+                imK := (↑d : ℚ) / (↑m : ℚ) } ↔
+          2 ∣ a + b + c + d)
+@RationalFour.inv_prime_mem_comp : ∀ {p : ℕ}, Nat.Prime p → p ≠ 2 → (↑(↑p : ℚ) : Quaternion ℚ)⁻¹ ∈ RationalFour.comp
+RationalFour.forall_coloring_eq_iff : ∀ (x y : Fin 4 → ℚ),
+  (∀ (c : RationalFour.ratFourGraph.Coloring (Fin 4)), (c : (Fin 4 → ℚ) → Fin 4) x = (c : (Fin 4 → ℚ) → Fin 4) y) ↔
+    x = y ∨ 1 ≤ padicValRat 2 (RationalFour.sqDist4 x y)
+RationalFour.forall_coloring_ne_iff : ∀ (x y : Fin 4 → ℚ),
+  (∀ (c : RationalFour.ratFourGraph.Coloring (Fin 4)), (c : (Fin 4 → ℚ) → Fin 4) x ≠ (c : (Fin 4 → ℚ) → Fin 4) y) ↔
+    padicValRat 2 (RationalFour.sqDist4 x y) = 0 ∧ x ≠ y
+RationalFour.exists_coloring_eq_and_ne_iff : ∀ (x y : Fin 4 → ℚ),
+  ((∃ c, (c : (Fin 4 → ℚ) → Fin 4) x = (c : (Fin 4 → ℚ) → Fin 4) y) ∧
+      ∃ c, (c : (Fin 4 → ℚ) → Fin 4) x ≠ (c : (Fin 4 → ℚ) → Fin 4) y) ↔
+    padicValRat 2 (RationalFour.sqDist4 x y) < 0
+@RationalFour.exists_coloring_forbidding_iff : ∀ {d : ℝ},
+  0 < d →
+    ((∃ c,
+        ∀ (x y : Fin 4 → ℚ),
+          (↑(RationalFour.sqDist4 x y) : ℝ) = d ^ 2 → (c : (Fin 4 → ℚ) → Fin 4) x ≠ (c : (Fin 4 → ℚ) → Fin 4) y) ↔
+      (∀ (r : ℚ), (↑r : ℝ) ≠ d ^ 2) ∨ ∃ p q, Odd p ∧ Odd q ∧ d ^ 2 = (↑p : ℝ) / (↑q : ℝ))
+@RationalFour.exists_coloring_forbidding_iff_padicValRat : ∀ {r : ℚ},
+  0 < r →
+    ((∃ c,
+        ∀ (x y : Fin 4 → ℚ), RationalFour.sqDist4 x y = r → (c : (Fin 4 → ℚ) → Fin 4) x ≠ (c : (Fin 4 → ℚ) → Fin 4) y) ↔
+      padicValRat 2 r = 0)
+@RationalFour.coloring_forbids_of_odd : ∀ {p q : ℕ},
+  Odd p →
+    Odd q →
+      ∀ (c : RationalFour.ratFourGraph.Coloring (Fin 4)) {x y : Fin 4 → ℚ},
+        RationalFour.sqDist4 x y = (↑p : ℚ) / (↑q : ℚ) → (c : (Fin 4 → ℚ) → Fin 4) x ≠ (c : (Fin 4 → ℚ) → Fin 4) y
+RationalFour.nonempty_iso_unitDistance : Nonempty
+  (RationalFour.ratFourGraph ≃g SimpleGraph.induce RationalFour.ratPoints (unitDistance (EuclideanSpace ℝ (Fin 4))))
+Instances.SeamFractional.fractionalChromaticNumber_seamPlane : (SimpleGraph.induce seamPlane
+      (unitDistance ℂ)).fractionalChromaticNumber =
+  4
+Instances.SeamFractional.IndepLaw.density_le_quarter_seamField : ∀ (μ : Collapse.IndepLaw seamField), μ.density ≤ 4⁻¹
+'HadwigerNelson.Instances.SeamFractional.fractionalChromaticNumber_seamPlane' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]

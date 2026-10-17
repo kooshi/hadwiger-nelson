@@ -1,0 +1,185 @@
+slot: admitted irf1-axioms-selftest: mem 8 GiB (hard cap), cpus 2,3,4,5
+==> axioms-self-test: this run's full output: build/gate/axioms-self-test/20261017T015705Z-2217196.log
+==> axioms self-test: 23 controls, each planted in a copy of scripts/Axioms.lean
+    ok    baseline — passed
+            digest old: exit 0, 'the sentence is in its older form, which records no imported count, and the audit has 120 imported'
+            digest new: exit 0, 'match (clean, purchases and imported compared)'
+            digest doubled: exit 3, 'not one'
+    ok    imported_declared — passed
+            digest new: exit 0, 'match (clean, purchases and imported compared)'
+            digest off: exit 0, 'RECORDED COUNT IS STALE'
+            digest old: exit 0, 'the sentence is in its older form, which records no imported count, and the audit has 121 imported'
+    ok    imported_undeclared — failed (2 FAIL line(s))
+            FAIL undeclared-in-imported 't3c_imported_user' carries t3c_ax_b, which is not the standard three and not a declared import
+            FAIL undeclared-library-axiom t3c_ax_b is an axiom of the library and no declareImport names it
+    ok    clean_undeclared — failed (2 FAIL line(s))
+            FAIL undeclared-in-clean 't3c_clean_user' carries t3c_ax_a, which is not the standard three and not a declared import
+            FAIL undeclared-library-axiom t3c_ax_a is an axiom of the library and no declareImport names it
+    ok    import_in_clean — failed (1 FAIL line(s))
+            FAIL import-in-clean 't3c_imported_user' carries the declared import t3c_import: move its record under IMPORTED
+    ok    arch_missing — failed (1 FAIL line(s))
+            FAIL arch-missing t3c_import is declared and ARCHITECTURE.md § Trust does not name it in backticks (LEAN.md § Assumptions item 4)
+    ok    stale_declaration — failed (1 FAIL line(s))
+            FAIL stale-declaration t3c_import is declared and no audited record carries it: audit its consumers, or delete the axiom
+    ok    declared_twice — failed (1 FAIL line(s))
+            FAIL declared-twice t3c_import is declared 2 times
+    ok    stale_import — failed (1 FAIL line(s))
+            FAIL stale-import 'HadwigerNelson.four_le_chromaticNumber_plane' carries no declared import: its record belongs under CLEAN
+    ok    native_in_imported — failed (2 FAIL line(s))
+            FAIL native-in-imported 'HadwigerNelson.moserSpindle_cnf_unsat' carries the native purchase HadwigerNelson.moserSpindle_cnf_unsat._native.native_decide.ax_1_1 (a record with a native axiom belongs und
+            FAIL stale-import 'HadwigerNelson.moserSpindle_cnf_unsat' carries no declared import: its record belongs under CLEAN
+    ok    library_undeclared — failed (1 FAIL line(s))
+            FAIL undeclared-library-axiom t3c_unaudited is an axiom of the library and no declareImport names it
+    ok    library_accounting — failed (1 FAIL line(s))
+            FAIL library-accounting LIBRARY SUMMARY counts 4 axioms and 3 LIBRARY AXIOM lines were read
+    ok    declare_not_axiom — did not elaborate
+            /tmp/tmp.H5sseMzEtA/declare_not_axiom.lean:358:0: error: declareImport: HadwigerNelson.four_le_chromaticNumber_plane is not an `axiom`; only an axiom is an imported outside theorem
+    ok    declare_outside_library — did not elaborate
+            /tmp/tmp.H5sseMzEtA/declare_outside_library.lean:358:0: error: declareImport: propext is not declared in the library (a module under `Proofs`); an axiom of a dependency is not ours to declare
+    ok    declare_no_doc — did not elaborate
+            /tmp/tmp.H5sseMzEtA/declare_no_doc.lean:359:0: error: declareImport: t3c_import has no docstring; LEAN.md § Assumptions item 1 asks it to name its bibliography key, section and page
+    ok    declare_no_key — did not elaborate
+            /tmp/tmp.H5sseMzEtA/declare_no_key.lean:360:0: error: declareImport: t3c_import's docstring names no bibliography key of the form [Author2024]; LEAN.md § Assumptions item 1
+    ok    declare_typo — did not elaborate
+            /tmp/tmp.H5sseMzEtA/declare_typo.lean:358:33: error(lean.unknownIdentifier): Unknown constant `t3c_no_such_axiom`
+    ok    sorry — failed (1 FAIL line(s))
+            FAIL sorry CLEAN 't3c_sorry' carries sorryAx
+    ok    native_in_clean — failed (1 FAIL line(s))
+            FAIL native-in-clean 'HadwigerNelson.moserSpindle_cnf_unsat' carries the native purchase HadwigerNelson.moserSpindle_cnf_unsat._native.native_decide.ax_1_1
+    ok    stale_purchase — failed (2 FAIL line(s))
+            FAIL stale-purchase 'HadwigerNelson.four_le_chromaticNumber_plane' carries no native axiom: a stale ledger entry
+            FAIL purchase-ledgers the source ledger and the environment ledger disagree ('<' = a docstring says 'Trust purchase' and scripts/Axioms.lean never audits it; '>' = audited as PURCHASED and its docstri
+    ok    purchased_undeclared — failed (3 FAIL line(s))
+            FAIL undeclared-in-purchased 't3c_mixed' carries t3c_ax_c, which is not the standard three, not native, and not a declared import
+            FAIL undeclared-library-axiom t3c_ax_c is an axiom of the library and no declareImport names it
+            FAIL purchase-ledgers the source ledger and the environment ledger disagree ('<' = a docstring says 'Trust purchase' and scripts/Axioms.lean never audits it; '>' = audited as PURCHASED and its docstri
+    ok    outside_banners — failed (1 FAIL line(s))
+            FAIL outside-banners 'HadwigerNelson.four_le_chromaticNumber_plane' is printed before the first banner
+    ok    banner_dropped — failed (124 FAIL line(s))
+            FAIL banners === IMPORTED === printed 0 time(s), not once: scripts/Axioms.lean did not run to completion, or its banners changed
+            FAIL outside-banners 'HadwigerNelson.StandingFive.kloostermanBound_of_ringChar_ne_two' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.StandingFive.targetFloor_seven_weil' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.StandingFive.targetFloor_six_weil' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.StandingFive.circle_sum_le_weil' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.StandingFive.standingFloor_seven_weil' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.StandingFive.standingFloor_five_weil' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.StandingFive.seven_le_localBound_weil' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.StandingFive.five_le_chromaticNumber_weil' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.ThreeColourCriterion.exists_maximal_card_nine_of_colorable_three' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.ThreeColourCriterion.exists_maximal_of_torsion' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.ThreeColourCriterion.exists_normOne_zero_of_card_ne_nine' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.ThreeColourCriterion.targetFloor_four_weil' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_eq_localBound_of_le_four' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_eq_three_iff' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.ThreeFourColours.chromaticNumber_planeOver_le_three_iff' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.ThreeFourColours.colorable_three_planeOver_iff' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.ThreeFourColours.exists_maximal_card_nine_sqrt_three' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.ThreeFourColours.localBound_le_chromaticNumber_of_le_four' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.ThreeFourColours.localBound_le_chromaticNumber_or_four_le' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.SqrtClassValues.five_le_localBound_sqrt143' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.SqrtClassValues.five_le_localBound_sqrt3_sqrt5' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.SqrtFortySeven.five_le_localBound_sqrt47' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.exists_uniform_tail' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.ratioAtMost_of_five_le_chromaticNumber' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.ratioAtMost_of_two_notMem' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.tca_of_five_le_localBound' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.tca_uniform' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.Counting.count_of_oneAvoidingDensityBound' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.Counting.false_of_slice' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.five_le_chromaticNumber_of_isSquare' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.five_le_chromaticNumber_of_two_notMem' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.five_le_localBound_of_isSquare' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.five_le_localBound_of_isSquare_class' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.tca_iff_five_le_localBound' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.CertLink.card_le_of_fibreShareBound_model' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.CertLink.exists_addEquiv_zmod_sqrt_three' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.CertLink.exists_stablePrime_sqrt_three' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.thick_deGrey' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.thick_sqrt635087' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.thickAt_weil' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.thick_of_card' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.thick_of_forall_thickAt' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.norm_charSum_le_weil' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.PadicPlane.charSum_unitCircle_ge_weil' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.PadicPlane.towerRatio_weil' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.PadicPlane.borelChromaticNumber_padicPlane_three' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.PadicPlane.le_borelChromaticNumber_padicPlane' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.PadicPlane.not_exists_bound_borelChromaticNumber_padicPlane' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.PadicPlane.one_add_div_le_of_borelColoring' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.SqrtTwentyThreeCbrtTwo.five_le_localBound_sqrt23_cbrt2' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.SqrtTwentyThreeCbrtTwo.localBound_sqrt23_cbrt2_eq_five' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.colorable_four_levelTarget_one_iff' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.exists_ratioAtMost_lt_quarter_iff' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.exists_ratioAtMost_of_not_isFourColourPlace' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.five_le_chromaticNumber_levelTarget_one_iff' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.five_le_localBoundAllLevels_iff' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.five_le_localBound_iff' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.tca_iff_forall_not_isFourColourPlace' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.exists_model_seven' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Outside.OAI158.not_colorable_five' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Outside.OAI158.six_le_chromaticNumber_plane' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Outside.OAI158.chromaticNumber_plane_six_or_seven' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Outside.OAI158.six_le_chiM0' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Outside.OAI158.chiM0_six_or_seven' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Plane.radius_five' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087_six_or_seven' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.exists_finite_triangleFree_six_chromatic' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087_le_seven' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.six_le_chromaticNumber_planeOver_sqrt635087' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.positive_entropy_rigidity_of_polishSpace' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.haar_or_zero_entropy' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.isHaarFourier_or_ksEntropy_eq_zero' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.ksEntropy_eq_zero_of_not_smul_le' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.entropySplit_of_admissiblePair' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.entropySplit' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.mrPlus' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber_closed' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt143_eq_five' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt311_eq_five' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt335_eq_five' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.SqrtClassValues.chromaticNumber_planeOver_sqrt3_sqrt5_eq_five' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.SqrtClassValues.five_le_chromaticNumber_planeOver_sqrt167' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.SqrtFortySeven.chromaticNumber_planeOver_sqrt47_eq_five' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.min_localBound_five_le_chromaticNumber' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.five_le_chromaticNumber_planeOver_of_five_le_localBound' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.min_chromaticNumber_five_eq_min_localBound_five' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.exists_invColouring_TA' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.not_isSPWitness' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.chromaticNumber_planeOver_deGrey' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.chromaticNumber_planeOver_eq_plane_of_forall_thickAt' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.chromaticNumber_planeOver_eq_plane_of_thick' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.chromaticNumber_planeOver_sqrt635087' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.chromaticNumber_plane_le_of_thick' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.exists_slice_of_colorable' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.SqrtFiveClass.chromaticNumber_planeOver_sqrt_eq_five' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.SqrtFiveClass.five_le_chromaticNumber_planeOver_sqrt_iff' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.SqrtFiveClass.five_le_localBound_sqrt_iff' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.SqrtFiveClass.localBound_sqrt_eq_five' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.SqrtTwentyThreeCbrtTwo.chromaticNumber_planeOver_sqrt23_cbrt2_eq_five' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.SqrtTwentyThreeCbrtTwo.localBound_sqrt23_eq_four' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Rigidity.min_localBoundAllLevels_five' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.IndepLaw.density_le_notThick' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.exists_triangleFree_ratio_lt' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.finIndepRatio_planeOver_deGrey' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.finIndepRatio_planeOver_eq_iSup_density' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.finIndepRatio_planeOver_eq_localRatio' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.finIndepRatio_planeOver_eq_mOne_of_thick' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.finIndepRatio_planeOver_eq_plane_of_thick' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.finIndepRatio_planeOver_sqrt635087' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.fractionalChromaticNumber_planeOver_deGrey' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.fractionalChromaticNumber_planeOver_eq' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.fractionalChromaticNumber_planeOver_eq_plane_of_thick' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.fractionalChromaticNumber_planeOver_sqrt635087' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.inv_le_localRatio_of_colorable' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.IndepLaw.density_le_localRatio' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.IndepLaw.density_le_max_of_unramified' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.exists_indepLaw_TA' is printed before the first banner
+            FAIL outside-banners 'HadwigerNelson.Collapse.integral_condOne_mul_eq_zero' is printed before the first banner
+            FAIL stale-declaration HadwigerNelson.Outside.OAI158.no_proper_five_coloring is declared and no audited record carries it: audit its consumers, or delete the axiom
+            FAIL stale-declaration HadwigerNelson.StandingFive.kloosterman_bound is declared and no audited record carries it: audit its consumers, or delete the axiom
+            FAIL stale-declaration HadwigerNelson.Rigidity.positive_entropy_rigidity is declared and no audited record carries it: audit its consumers, or delete the axiom
+==> axioms self-test: OK — every planted fault fired, and every partner passed.
+    every control's output: build/gate/axioms-self-test/20261017T015705Z-2217196.log
+exit=0 wall=287s

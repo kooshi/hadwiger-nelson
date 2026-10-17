@@ -1,0 +1,73 @@
+slot: admitted lake: mem 4 GiB (hard cap), cpus 0
+data/fs131/kfs1/probes/NamesA.lean:1:0: warning: 
+'Mathlib.Combinatorics.SimpleGraph.Coloring' has been deprecated: please replace this import by
+
+import Mathlib.Combinatorics.SimpleGraph.Coloring.Vertex
+@normSq : {R : Type u_1} → [inst : CommRing R] → ℍ[R] →*₀ R
+@normSq_def' : ∀ {R : Type u_1} [inst : CommRing R] (a : ℍ[R]), normSq a = a.re ^ 2 + a.imI ^ 2 + a.imJ ^ 2 + a.imK ^ 2
+@self_mul_star : ∀ {R : Type u_1} [inst : CommRing R] (a : ℍ[R]), a * star a = ↑(normSq a)
+@normSq_eq_zero : ∀ {R : Type u_1} [inst : CommRing R] [inst_1 : LinearOrder R] [IsStrictOrderedRing R] {a : ℍ[R]},
+  normSq a = 0 ↔ a = 0
+@QuaternionAlgebra.equivTuple : {R : Type u_1} → (c₁ c₂ c₃ : R) → ℍ[R,c₁,c₂,c₃] ≃ (Fin 4 → R)
+@normSq_star : ∀ {R : Type u_1} [inst : CommRing R] (a : ℍ[R]), normSq (star a) = normSq a
+Nat.sum_four_squares : ∀ (n : ℕ), ∃ a b c d, a ^ 2 + b ^ 2 + c ^ 2 + d ^ 2 = n
+@padicValRat.mul : ∀ {p : ℕ} [hp : Fact (Nat.Prime p)] {q r : ℚ},
+  q ≠ 0 → r ≠ 0 → padicValRat p (q * r) = padicValRat p q + padicValRat p r
+@padicValRat.inv : ∀ {p : ℕ} [hp : Fact (Nat.Prime p)] (q : ℚ), padicValRat p q⁻¹ = -padicValRat p q
+@padicValRat.div : ∀ {p : ℕ} [hp : Fact (Nat.Prime p)] {q r : ℚ},
+  q ≠ 0 → r ≠ 0 → padicValRat p (q / r) = padicValRat p q - padicValRat p r
+@padicValRat.min_le_padicValRat_add : ∀ {p : ℕ} [hp : Fact (Nat.Prime p)] {q r : ℚ},
+  q + r ≠ 0 → min (padicValRat p q) (padicValRat p r) ≤ padicValRat p (q + r)
+@padicValRat.of_nat : ∀ {p n : ℕ}, padicValRat p ↑n = ↑(padicValNat p n)
+@padicValRat.pow : ∀ {p : ℕ} [hp : Fact (Nat.Prime p)] (q : ℚ) {k : ℕ}, padicValRat p (q ^ k) = ↑k * padicValRat p q
+data/fs131/kfs1/probes/NamesA.lean:21:8: error(lean.unknownIdentifier): Unknown identifier `padicNorm.nonarchimedean`
+@Rat.cast_add_of_ne_zero : ∀ {α : Type u_1} [inst : DivisionRing α] {q r : ℚ},
+  ↑q.den ≠ 0 → ↑r.den ≠ 0 → ↑(q + r) = ↑q + ↑r
+@Subring.closure_induction : ∀ {R : Type u_1} [inst : NonAssocRing R] {s : Set R}
+  {p : (x : R) → x ∈ Subring.closure s → Prop},
+  (∀ (x : R) (hx : x ∈ s), p x ⋯) →
+    p 0 ⋯ →
+      p 1 ⋯ →
+        (∀ (x y : R) (hx : x ∈ Subring.closure s) (hy : y ∈ Subring.closure s), p x hx → p y hy → p (x + y) ⋯) →
+          (∀ (x : R) (hx : x ∈ Subring.closure s), p x hx → p (-x) ⋯) →
+            (∀ (x y : R) (hx : x ∈ Subring.closure s) (hy : y ∈ Subring.closure s), p x hx → p y hy → p (x * y) ⋯) →
+              ∀ {x : R} (hx : x ∈ Subring.closure s), p x hx
+@AddSubgroup.closure_induction : ∀ {G : Type u_1} [inst : AddGroup G] {k : Set G}
+  {p : (g : G) → g ∈ AddSubgroup.closure k → Prop},
+  (∀ (x : G) (hx : x ∈ k), p x ⋯) →
+    p 0 ⋯ →
+      (∀ (x y : G) (hx : x ∈ AddSubgroup.closure k) (hy : y ∈ AddSubgroup.closure k), p x hx → p y hy → p (x + y) ⋯) →
+        (∀ (x : G) (hx : x ∈ AddSubgroup.closure k), p x hx → p (-x) ⋯) →
+          ∀ {x : G} (hx : x ∈ AddSubgroup.closure k), p x hx
+data/fs131/kfs1/probes/NamesA.lean:25:8: error(lean.unknownIdentifier): Unknown constant `Subring.closure_toAddSubgroup`
+@Submonoid.closure_eq : ∀ {M : Type u_1} [inst : MulOneClass M] (S : Submonoid M), Submonoid.closure ↑S = S
+@SimpleGraph.Coloring : {V : Type u_1} → SimpleGraph V → Type u_2 → Type (max u_1 u_2)
+@SimpleGraph.Coloring.valid : ∀ {V : Type u_1} {G : SimpleGraph V} {α : Type u_2} (C : G.Coloring α) {v w : V},
+  G.Adj v w → C v ≠ C w
+@EuclideanSpace.dist_eq : ∀ {𝕜 : Type u_1} [inst : RCLike 𝕜] {n : Type u_2} [inst_1 : Fintype n]
+  (x y : EuclideanSpace 𝕜 n), dist x y = √(∑ i, dist (x.ofLp i) (y.ofLp i) ^ 2)
+Int.gcd_eq_gcd_ab : ∀ (x y : ℤ), ↑(x.gcd y) = x * x.gcdA y + y * x.gcdB y
+@Nat.recOnMul : {motive : ℕ → Sort u_1} →
+  motive 0 →
+    motive 1 →
+      ((p : ℕ) → Nat.Prime p → motive p) → ((a b : ℕ) → motive a → motive b → motive (a * b)) → (a : ℕ) → motive a
+@Nat.Coprime.isCoprime : ∀ {m n : ℕ}, m.Coprime n → IsCoprime ↑m ↑n
+@QuotientAddGroup.mk_out_eq_mul : ∀ {α : Type u_1} [inst : AddGroup α] (s : AddSubgroup α) (g : α),
+  ∃ h, Quotient.out ↑g = g + ↑h
+@QuotientAddGroup.leftRel_apply : ∀ {α : Type u_1} [inst : AddGroup α] {s : AddSubgroup α} {x y : α},
+  (QuotientAddGroup.leftRel s) x y ↔ -x + y ∈ s
+@coe_inv : ∀ {R : Type u_1} [inst : Field R] [inst_1 : LinearOrder R] [IsStrictOrderedRing R] (x : R), ↑x⁻¹ = (↑x)⁻¹
+@normSq_inv : ∀ {R : Type u_1} [inst : Field R] [inst_1 : LinearOrder R] [IsStrictOrderedRing R] (a : ℍ[R]),
+  normSq a⁻¹ = (normSq a)⁻¹
+data/fs131/kfs1/probes/NamesA.lean:37:55: error: unsolved goals
+case re
+⊢ 2 = QuaternionAlgebra.re 2
+
+case imI
+⊢ 0 = QuaternionAlgebra.imI 2
+
+case imJ
+⊢ 0 = QuaternionAlgebra.imJ 2
+
+case imK
+⊢ 0 = QuaternionAlgebra.imK 2
