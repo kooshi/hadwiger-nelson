@@ -217,7 +217,7 @@ the binder `c : quatGraph.Coloring (Fin 4)` in `coloring_eq_of_sqDist_two`, `col
 `c : ratFourGraph.Coloring (Fin 4)` in `coloring_eq_of_one_le_padicValRat`, `coloring_ne_of_padicValRat_eq_zero`,
 `coloring_forbids_of_odd` and `coloring_eq_of_eqOn_isOpen` (two binders) — WITNESSED by `nonempty_ratFourGraph_coloring`. The
 hypotheses beyond the colourings are conditions on the theorem's own variables, each met at a named point by the spec examples:
-`h : sqDist x y = 2` (Zaks's Lemma 2 example's pair, scaled), `1 ≤ v₂` at `(0, (2,0,0,0))`, `sqDist4 x y = 3/5` (the `Forbid`
+`h : sqDist x y = 2` at `(1, i)` (`Basic`'s spec example), `1 ≤ v₂` at `(0, (2,0,0,0))`, `sqDist4 x y = 3/5` (the `Forbid`
 example), and `coloring_eq_of_eqOn_isOpen`'s `U` at `U = univ` (any colouring with itself). The heads stated as `↔` carry their
 colourings inside the equivalence and read no site; both sides are inhabited by the same two witnesses.
 
@@ -236,3 +236,54 @@ the audit-block generator (`--plant`: an unknown axiom, a `sorryAx`, a declared 
 `RationalFour/Order` in a copy: `FAIL imports of RationalFour/Forbid`, exit 1, `data/fs131/irf1/plants/arch-plant.out`).
 **Not run:** a lint plant — it needs a module edited, a walk rebuilt and a second walk to restore (two walks of about 19 minutes
 at this machine's `BATCH=3`); the lint driver is unchanged since FS131-LGT1 watched its control fire.
+
+## Drafts for the front page
+
+*Each names its slot; none is applied (Keryx files). No novelty wording: "prior art: pending `[KubickiLehelMorayne2002]`" stands
+where a novelty line would go (the brief), and item 1086's reading — the paper's Thm 4.3 is rigidity, weaker than A3, and does
+not contain C7 — is the coordinator's to word.*
+
+1. **`CLAUDE.md` § The gate**, the counts sentence: replace `` `declarations=22728 refutations-skipped=246 sites=1465`,
+   `vacuous=0 stale=0 declared=3 witnessed=40 generic=1420 unknown=2` `` by `` `declarations=22802 refutations-skipped=246
+   sites=1477`, `vacuous=0 stale=0 declared=3 witnessed=52 generic=1420 unknown=2` ``.
+2. **`CLAUDE.md` § Trust ledger**, the audit sentence: replace `the current audit reads 11043 clean and 5 declared purchases, and
+   120 imported (and 575 axiom-free; 11,743 records at FS131-IRU1, the ring of unit vectors, 2026-10-16)` by `the current audit
+   reads 11106 clean and 5 declared purchases, and 120 imported (and 575 axiom-free; 11,806 records at FS131-IRF1, rational
+   four-space at four colours, 2026-10-17)`. The assumptions sentence's nine counts are unchanged.
+3. **`LEDGER.md`**, a new row after the last (its number Keryx's) — the planner's draft brought to what is proved:
+   `| N | **The four-colour compulsion law of `ℚ⁴`, the distances a four-colouring of `ℚ⁴` can forbid beside 1, and the
+   structure behind both:** for `x ≠ y` in `ℚ⁴`, every proper four-colouring of the unit-distance graph gives them one colour
+   iff `v₂(|x − y|²) ≥ 1`, every one gives them two iff `v₂(|x − y|²) = 0`, and neither is forced iff `v₂(|x − y|²) < 0`; so
+   for `d > 0` a proper four-colouring forbidding `d` exists iff `d² ∉ ℚ` or `d² = p/q` with `p, q` odd, and then every proper
+   four-colouring forbids `d` — `[Johnson2006]` p. 212's question; and every proper four-colouring is, on each component, the
+   residue map onto the unit tetrahedron followed by a bijection of the colours, so it is rigid in `[KubickiLehelMorayne2002]`'s
+   sense (Thm 4.3). **Grade:** [kernel] (FS131-IRF1, gated on `6ab6248fe`; `RationalFour.forall_coloring_eq_iff`,
+   `forall_coloring_ne_iff`, `exists_coloring_eq_and_ne_iff`, `exists_coloring_forbidding_iff`, `coloring_forbids_of_odd`,
+   `exists_equiv_coloring_add_eq_residue`, `coloring_eq_of_eqOn_isOpen`), on the standard three axioms, no outside theorem and
+   no hypothesis; derived by two minds, one blind (the consolidation run's LV-T3, LX-T5–T6). **Rests on:** nothing outside the
+   kernel — `[Zaks1999]` Lemma 1 (`coloring_eq_of_sqDist_two`), `[BendaPerles2000]` pp. 123–125 (`mem_comp_iff`) and
+   `[Johnson1990]` Thm 3 (`residueColouring`) are formalized, not imported. **Prior art:** pending `[KubickiLehelMorayne2002]`.
+   **Bearing on the answer:** none (dimension four). | `Proofs/HadwigerNelson/RationalFour/`; `plans/FS131-IRF1-four-space.md` |
+   consolidation run (2026-09-27); FS-131 (FS131-KFS1, FS131-IRF1) |`
+4. **`CLOSED-QUESTIONS.md` § 3**, the `ℚ⁴` entry: replace `**Not claimed:** a gate; the kernel.` by `**Kernel-checked**
+   (FS131-IRF1, on the standard three axioms, no import): `RationalFour.exists_coloring_forbidding_iff` (Johnson's question for
+   every `d > 0`), the compulsion law `forall_coloring_eq_iff`, `forall_coloring_ne_iff`, `exists_coloring_eq_and_ne_iff`, and
+   the structure `exists_equiv_coloring_add_eq_residue`; `[Zaks1999]` Lemma 1 and `[BendaPerles2000]`'s component formalized
+   on the way.`
+5. **`plans/KERNEL-HOLDS.md`**, a clause after the last: `**Rational four-space at four colours** (FS131-IRF1): the compulsion law
+   (forced equal iff `v₂(|x − y|²) ≥ 1`, forced apart iff `= 0`, free iff `< 0`), `[Johnson2006]` p. 212's question answered
+   (`d² ∉ ℚ` or `d² = p/q`, `p, q` odd), the structure clause, and `[KubickiLehelMorayne2002]` Thm 4.3's rigidity —
+   `HadwigerNelson.RationalFour.*`, standard three axioms.`
+6. **`CLAUDE.md` § Frontier**, the "Last filed" line: `Last filed: **rational four-space at four colours** (FS131-KFS1,
+   FS131-IRF1, 2026-10-17: four modules through the gate on `6ab6248fe` — `[Johnson2006]` p. 212's question answered for every
+   `d > 0`, the compulsion law and the structure clause of `ℚ⁴` at four colours, `[KubickiLehelMorayne2002]` Thm 4.3's rigidity
+   as a corollary; no value of `χ(ℝ²)` moved)`, the previous filing moving to the "before it" list.
+7. **The Proof Atlas:** C7 (the `ℚ⁴` compulsion law and Johnson's question) [derived, two minds, one blind] → [kernel]; A3 (the
+   structure clause) → [kernel]; `[KubickiLehelMorayne2002]` Thm 4.3's rigidity half → [kernel] (here, as a corollary).
+8. **`BIBLIOGRAPHY.md`**, "what of ours rests on it": `[Zaks1999]` — Lemma 1 is `RationalFour.coloring_eq_of_sqDist_two` (proved by
+   a five-point gadget, not imported); `[BendaPerles2000]` — pp. 123–125's `H⁴` is `RationalFour.mem_comp_iff`; `[Johnson1990]` —
+   Thm 3's colouring is `RationalFour.residueColouring` (shift 0); `[Johnson2006]` — p. 212's question is
+   `RationalFour.exists_coloring_forbidding_iff`; `[KubickiLehelMorayne2002]` — Thm 4.3's rigidity half is
+   `RationalFour.coloring_eq_of_eqOn_isOpen`, stated in its p. 49 definition (implied by A3, `exists_equiv_coloring_add_eq_residue`).
+9. **`ARCHITECTURE.md`** — applied on the branch (the brief's touches): the four rows say "FS131-KFS1 planned, FS131-IRF1 proved";
+   no § Trust line (no purchase).
