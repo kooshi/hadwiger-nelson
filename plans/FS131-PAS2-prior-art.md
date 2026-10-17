@@ -231,3 +231,98 @@ Ponomarenko–Raigorodskii 2015 beyond their summaries (asymptotic in `n`, by th
      1213.05098); Ponomarenko–Raigorodskii 2013, 2015 (Zbl 1286.05051, 1317.05064); Johnson–Schneider–Tiemeyer 2007 (Zbl 1506.05072); Johnson 2008
      (Zbl 1506.05070); Johnson–Tiemeyer 2009 (Zbl 1506.51003; on `ℚ³`, its exponent dropped by zbMATH's title); Noble 2012 (Zbl 1262.05121) — each
      *"not held; no bearing on `ℚ⁴` with two distances by its review or by `[Johnson2010]`'s account"*.
+
+## Stage 3 — SAVED: row 129's plane clause is in print — Li–Su 2026 (found off-brief, during C14's search)
+
+### 3.1 How it was found, and what was read
+
+zbMATH `ab:"independence ratio" & ab:"plane"` (tag `C14`, 4 hits) returned arXiv:2610.15424. **Read in full** (6 pages; fetched from
+arXiv 2026-10-17, held as `library/pdf/arXiv-2610.15424-li-su-every-n-points-no-unit-distance-m1.pdf`): S. Li, Y. Su, *Every n points in the
+plane contain (m1 + o(1)) n points with no unit distance*, arXiv:2610.15424v1 [math.CO], 11 October 2026. The PDF is dated *"October 10,
+2026"*. The coordinator checked the identity from the same PDF (title, both authors, the arXiv stamp, Theorem 1.1, 6 pages).
+
+- **Theorem 1.1**, verbatim: *"lim f (n)/n = m1 . Moreover f (n) ≥ m1 n for every n ≥ 1."* (n → ∞), with `f(n) = min{α(P) : P ⊂ ℝ², |P| = n}`
+  and `m₁` the supremum of the upper densities of measurable planar sets with no two points at distance 1 (§ 1; Remark 2.1: the same value
+  for discs or squares, real or integer radii). **Corollary 1.2:** `0.22936 n ≤ f(n) ≤ (0.2470 + o(1)) n`.
+- They call it *"the first half of a conjecture of Dúcz and Varga"* (abstract), quoting `[DuczVarga2026]` § 2.1's Conjecture 1, and Erdős
+  Problem #1070 in Bloom's database.
+- **Route** (§§ 3–5): `f(n)/n → α*` with `α* = inf α(P)/|P|` over finite `P ⊂ ℝ²` (Fekete-type, § 3); `α* ≥ m₁` (Larman–Rogers, § 4); and
+  `m₁ ≥ α*` (§ 5, *"the new part"*): a random independent subset of the algebraic plane, invariant under algebraic translations and
+  rotations, built by *"a single-label version of the transfer in Section 4 of the OpenAI preprint"*, with *"Theorem 5.1 (Haar rigidity [10,
+  Thm. 2.3])"* — `[OAIMath2026]` Thm 2.3, the same input as FS-133.
+- **Formalized** (§ 6): Lean 4 with Mathlib, on a verbatim copy of `[OAIMath2026]`'s import closure; `f div tendsto m1`, `m1 mul le f`, and
+  disc-convention twins; *"#print axioms reports only propext, Classical.choice and Quot.sound"*; repository `github.com/daizisheng/erdos-1070`,
+  release v1.0 (not cloned or built here).
+- **Not stated there** (my reading, one mind, from the full text): `α₁(𝒜²) = m₁(ℝ²)` as a theorem (the algebraic plane is the proof's
+  setting, not a stated result); any fractional chromatic number — the word "fractional" occurs only in a reference title; `[MatolcsiEtAl2025]`
+  § 2's equality question; Johnson's 1996 and 2000 questions.
+
+**Inference, one mind, labelled:** `χ_f,0(ℝ²) = 1/m₁(ℝ²)` follows from Li–Su's Theorem 1.1 with `[MatolcsiEtAl2025]` Theorem 2
+(`χ_f,0(ℝ²) = 1/α₁(ℝ²)`). The equality with the infinite graph's `χ_f(ℝ²)`, which is what `[MatolcsiEtAl2025]` § 2 asks, needs in addition
+`χ_f(ℝ²) ≤ 1/m₁(ℝ²)` (FS-133's C133-CHIF, through periodic approximants C133-PER); no printed source for that step was checked in this job.
+
+**The dates, and only what they show.** Their PDF is dated 10 October 2026 and was posted 11 October 2026. FS-133's derivation of the same
+equality is dated 7 October 2026 (`plans/FS133-E1-derivation.md`, commit `7ceb406ef`, C133-ONE and C133-FN), and its kernel proof 14 October
+2026 (FS133-LD1). This project learned of Li–Su on 17 October 2026, by this job. Neither work cites the other. **The first clause is credited
+to them, as published first.**
+
+### 3.2 Drafts (Keryx files; each names its slot)
+
+1. **`README.md`** § 6 *"Finite graphs and measurable sets have the same density"*, the **"Why it matters"** bullet (l. 224). Replace
+   *"It proves the first clause of Dúcz and Varga's Conjecture 1 (2026), and answers the question Matolcsi, Ruzsa, Varga and Zsámboki
+   (2025, §2) call open, whether $\chi_f(\mathbb{R}^2) = 1/m_1(\mathbb{R}^2)$; Johnson had posed it earlier (1996; 2000)."* with:
+   *"Its first part, $f(n)/n \to m_1(\mathbb{R}^2)$, is the first clause of Dúcz and Varga's Conjecture 1 (2026); Li and Su proved it first in
+   print (arXiv:2610.15424, posted 11 October 2026, with a Lean proof), and this library's proof, derived on 7 October and kernel-checked on 14
+   October, was found independently of theirs. The fractional part answers the question Matolcsi, Ruzsa, Varga and Zsámboki (2025, §2) call
+   open, whether $\chi_f(\mathbb{R}^2) = 1/m_1(\mathbb{R}^2)$; Johnson had posed it earlier (1996; 2000)."* (The sentence after it, on the
+   bounds 4.05–4.36, stays.)
+2. **`README.md`** § 6, the **"Prior art"** bullet (l. 230). Replace *"For the plane: not found in print (`LEDGER.md` row 129)."* with:
+   *"For the plane, $f(n)/n \to m_1(\mathbb{R}^2)$ and $\alpha_1(\mathbb{R}^2) = m_1(\mathbb{R}^2)$ are Li and Su's (arXiv:2610.15424, 2026),
+   by the same rigidity theorem of OpenAI's. The algebraic-plane form and the fractional equalities are not stated there; for them, prior art
+   not found in print (`LEDGER.md` row 129)."* (The Davies sentence after it stays.)
+3. **`RESULTS.md`** § 6 *"The density equality for the plane"*, the **"Whose"** bullet (ll. 151–156). Replace *"For the plane: prior art not
+   found in print."* with *"For the plane: `α₁(ℝ²) = m₁(ℝ²)`, as `f(n)/n → m₁(ℝ²)`, is `[LiSu2026]`'s Theorem 1.1 (posted 11 October 2026,
+   with a Lean proof over the same `[OAIMath2026]` Thm 2.3), published before this project's kernel proof (14 October; derivation 7 October)
+   and found independently of it. `α₁(𝒜²) = m₁(ℝ²)` and the fractional equalities are not stated there (a reading, one mind, FS131-PAS2):
+   prior art not found in print."* — and in the same bullet replace *"In the plane, `f(n)/n → m₁(ℝ²)` is the first clause of
+   `[DuczVarga2026]`'s Conjecture 1, and"* with *"`f(n)/n → m₁(ℝ²)` is the first clause of `[DuczVarga2026]`'s Conjecture 1, as `[LiSu2026]`
+   says; and"*. The last sentence, *"The kernel proof is this project's."*, stays.
+4. **`CLAUDE.md`** § The mission, **Publication**, the second *"What clears the bar"* bullet (l. 158). Replace *"with no hypothesis, row 129's
+   plane clause (FS-133) answers the first clause of `[DuczVarga2026]`'s Conjecture 1 and `[MatolcsiEtAl2025]` §2's equality question —
+   formalized: in the kernel since FS133-LD1, on the standard three axioms, through `[OAIMath2026]`'s rigidity step, ported; for the plane,
+   prior art not found in print (row 129; `plans/FS131-ER1-davies-reading.md` § Stage 7) — `[Davies2026]` Thm 1.1 proves the same equality in
+   dimensions four and up —; the kernel proof is this project's."* with: *"with no hypothesis, row 129's plane clause (FS-133) answers
+   `[MatolcsiEtAl2025]` §2's equality question — formalized: in the kernel since FS133-LD1, on the standard three axioms, through
+   `[OAIMath2026]`'s rigidity step, ported; for the fractional equality, prior art not found in print (row 129); its first part, `f(n)/n →
+   m₁(ℝ²)` (`[DuczVarga2026]`'s Conjecture 1, first clause), is `[LiSu2026]`'s, published first (11 October 2026) and found independently
+   — `[Davies2026]` Thm 1.1 proves the same equality in dimensions four and up —; the kernel proof is this project's."*
+5. **`CLOSED-QUESTIONS.md`**, the entry *"**`[DuczVarga2026]` Conjecture 1, first clause …**"* (l. 659), after *"…the second clause
+   (`m₁ = δ_Croft`) is open."*: insert *"**The first clause is in print:** `[LiSu2026]` Theorem 1.1, *"lim f (n)/n = m1 . Moreover f (n) ≥ m1
+   n for every n ≥ 1."* (arXiv:2610.15424, posted 11 October 2026, with a Lean proof over `[OAIMath2026]` Thm 2.3), published before FS-133's
+   kernel proof (14 October; its derivation is dated 7 October) and found independently of it; this project learned of it on 17 October
+   (FS131-PAS2). The fractional equality and Johnson's questions are not stated there (a reading, one mind)."* And replace *"Not closed until
+   FS-133's Lean module passes the gate."*, which FS133-LD1 discharged, with *"Kernel-checked since FS133-LD1 (2026-10-14)."* — if Keryx's
+   filing has not already done so.
+6. **`LEDGER.md`** row 129, its **Prior art** field. Replace *"the equalities not found (F §3.6, five queries; a gate under
+   descriptive-combinatorics names owed; FS-133's gate (fifteen arXiv queries, two web searches, 2026-10-07; zbMATH down): not found; the
+   descriptive-combinatorics neighbours named, unread (`plans/FS133-one-class-transfer.md` § PA.4));"* with: *"the plane's clause `α₁(ℝ²) =
+   m₁(ℝ²)`, as `f(n)/n → m₁(ℝ²)`, is `[LiSu2026]` Theorem 1.1 (arXiv:2610.15424, PDF dated 10 October 2026, posted 11 October, Lean-formalized
+   over `[OAIMath2026]` Thm 2.3), published first; FS-133's derivation (7 October) and kernel proof (14 October) were made without knowledge of
+   it, found 17 October by FS131-PAS2 (zbMATH `ab:"independence ratio" & ab:"plane"`) — FS-133's own gate of 7 October (fifteen arXiv queries,
+   two web searches, zbMATH down) predates it. `α₁(𝒜²) = m₁(ℝ²)` and the fractional equalities `χ_f,0(ℝ²) = χ_f(ℝ²) = χ_f(𝒜²) = 1/m₁(ℝ²)` are not
+   stated there (a reading, one mind); `χ_f,0(ℝ²) = 1/m₁(ℝ²)` follows from it with `[MatolcsiEtAl2025]` Thm 2, and the step to `χ_f(ℝ²)` is
+   C133-CHIF (an inference, one mind) — for these, not found in print; the descriptive-combinatorics neighbours named, unread
+   (`plans/FS133-one-class-transfer.md` § PA.4);"*. In the row's statement cell, *"`f(n)/n → m₁(ℝ²)` — the first clause of `[DuczVarga2026]`
+   Conjecture 1 —"* may gain *"(first in print: `[LiSu2026]`)"*; Keryx's call.
+7. **`plans/KERNEL-HOLDS.md`** l. 7, the clause *"**the density equality for the plane** (FS-133, FS133-LD1)"*: it claims no novelty, so no
+   correction is owed. Optional, for one home per fact: after *"(`[DuczVarga2026]` Conjecture 1, first clause;"* insert *"first proved in print
+   by `[LiSu2026]`;"*.
+8. **`BIBLIOGRAPHY.md`** § A, a new row: **`[LiSu2026]`** | S. Li, Y. Su, *Every n points in the plane contain (m1 + o(1)) n points with no
+   unit distance*, arXiv:2610.15424v1 [math.CO] (11 October 2026; the PDF dated 10 October 2026), 6 pp.; Lean development
+   `github.com/daizisheng/erdos-1070`, release v1.0 | **Row 129's plane clause in print, first:** Theorem 1.1, *"lim f (n)/n = m1 . Moreover f
+   (n) ≥ m1 n for every n ≥ 1."*, the first clause of `[DuczVarga2026]` Conjecture 1 (Erdős Problem #1070), by a single-label version of
+   `[OAIMath2026]` § 4's transfer over its Thm 2.3, formalized in Lean 4 on the standard three axioms (§ 6). Found independently of FS-133
+   (derived 7 October, kernel 14 October); found here 17 October (FS131-PAS2). Not stated there: `α₁(𝒜²) = m₁`, any fractional chromatic
+   number (a reading, one mind) | `library/pdf/arXiv-2610.15424-li-su-every-n-points-no-unit-distance-m1.pdf` | **read in full** (FS131-PAS2,
+   2026-10-17); its Lean repository not cloned. And § B, the library row: *`pdf/arXiv-2610.15424-li-su-every-n-points-no-unit-distance-m1.pdf`
+   | `[LiSu2026]` | read in full*.
