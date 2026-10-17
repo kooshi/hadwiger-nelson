@@ -1,0 +1,11 @@
+EXAMPLES-SAME Basic: 6 heads
+EXAMPLES-SAME Order: 3 heads
+EXAMPLES-SAME Compulsion: 1 heads
+EXAMPLES-SAME Forbid: 3 heads
+FAIL HEAD-ABSENT HadwigerNelson.RationalFour.exists_equiv_coloring_add_eq_residue
+base public-or-private non-internal constants: 59; SAME 59; VALUE-MOVED 0; ADDED 0; FAILS 1
+PLANT type char: FIRED (1 new: ['CHANGED Proofs.HadwigerNelson.RationalFour.Compulsion HadwigerNelson.RationalFour.forall_coloring_eq_iff (kind, flags or stored type)'])
+PLANT dropped: FIRED (1 new: ['MISSING Proofs.HadwigerNelson.RationalFour.Order HadwigerNelson.RationalFour.mem_comp_iff'])
+PLANT data: FIRED (1 new: ['CHANGED Proofs.HadwigerNelson.RationalFour.Compulsion HadwigerNelson.RationalFour.residueCol (DATA)'])
+PLANT example head: FIRED (1 new: ["EXAMPLES-DIFFER Forbid: base 3 heads, after 3; first difference: #0: 'example : ¬ ∃ c : ratFourGraph.Coloring (Fin 4), ∀ x y, sqDist4 x y = 2 → c x ≠ c y' vs 'example : ¬ ∃ c : ratFourGraph.Coloring (Fin 4), ∀ x y, sqDist4 x y = 4 → c x ≠ c y'"])
+PLANT example dropped: FIRED (1 new: ['EXAMPLES-DIFFER Basic: base 6 heads, after 5; first difference: a head added or dropped'])
