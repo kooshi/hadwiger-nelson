@@ -6,7 +6,20 @@
 
 ## Theorems this phase proved
 
-None yet (stage 1 is the readback).
+Every one [kernel], on exactly `[propext, Classical.choice, Quot.sound]` (`#print axioms`, `data/fs131/irf1/readaloud.txt`;
+the audit's 63 records, `data/fs131/irf1/axioms-all.txt`), no outside theorem, no hypothesis standing for one; gated on
+`6ab6248fe` (stage 4).
+- `HadwigerNelson.RationalFour.forall_coloring_eq_iff`, `forall_coloring_ne_iff`, `exists_coloring_eq_and_ne_iff` — the
+  four-colour compulsion law of `ℚ⁴` (`RationalFour/Compulsion`); applied forms `coloring_eq_of_one_le_padicValRat`,
+  `coloring_ne_of_padicValRat_eq_zero`.
+- `HadwigerNelson.RationalFour.exists_coloring_forbidding_iff` — `[Johnson2006]` p. 212's question, every `d > 0`
+  (`RationalFour/Forbid`); `exists_coloring_forbidding_iff_padicValRat`, `coloring_forbids_of_odd`.
+- `HadwigerNelson.RationalFour.exists_equiv_coloring_add_eq_residue` — A3, the structure clause; `coloring_eq_of_forall_tetra`.
+- `HadwigerNelson.RationalFour.coloring_eq_of_eqOn_isOpen` — `[KubickiLehelMorayne2002]` Thm 4.3's rigidity.
+- `HadwigerNelson.RationalFour.coloring_eq_of_sqDist_two` — `[Zaks1999]` Lemma 1; `mem_comp_iff` — `[BendaPerles2000]`
+  pp. 123–125's component; `residueColouring`, `nonempty_coloring`, `nonempty_ratFourGraph_coloring` — `[Johnson1990]` Thm 3's
+  colouring; `nonempty_iso_unitDistance` — the read-back anchor; `zero_le_val_iff`, `mem_pr_iff`,
+  `existsUnique_tetra_sub_mem_pr`, `inv_odd_mem_comp`, `mul_mem_comp` and the quaternion-level law.
 
 ## Stage 1 — SAVED: the readback, the dump, Part B's skeleton removed
 
@@ -133,3 +146,93 @@ no lakefile (`git diff --stat` over `Proofs`, `Proofs.lean`, `scripts`, `lakefil
 **Build:** `data/fs131/irf1/build.sh all` on `68f2052ce` (clean tree): **OK — 746 of 746 batches, 3 modules rebuilt
 (`Compulsion`, `Forbid`, the root), 0 modules with warnings**, 18 m 49 s (`data/fs131/irf1/build-all.log`; the gate's copy
 `build/gate/build/20261017T012516Z-2119524.log`). No `sorry` remains in the four modules.
+
+## Stage 5 — SAVED: the read-aloud
+
+Each statement as the kernel stores it (`data/fs131/irf1/readaloud.txt`, `#check @` on the built modules), read against
+`CLOSED-QUESTIONS.md` § 3's `ℚ⁴` entry (C7) and `[Johnson2006]` p. 212's question, *"For which d > 0 does there exist a
+4-coloring of ℚ⁴ which forbids both distances 1 and d?"*. Vocabulary: `ratFourGraph` on `Fin 4 → ℚ`, `x ∼ y ⟺
+Σᵢ (xᵢ − yᵢ)² = 1` (`sqDist4`); a proper four-colouring is Mathlib's `ratFourGraph.Coloring (Fin 4)`; `nonempty_iso_unitDistance`
+shows this graph is the library's `unitDistance (EuclideanSpace ℝ (Fin 4))` induced on the points with rational coordinates.
+
+- **`exists_coloring_forbidding_iff`** `{d : ℝ} (hd : 0 < d) : (∃ c, ∀ x y, (sqDist4 x y : ℝ) = d ^ 2 → c x ≠ c y) ↔
+  (∀ r : ℚ, (r : ℝ) ≠ d ^ 2) ∨ ∃ p q : ℕ, Odd p ∧ Odd q ∧ d ^ 2 = p / q`. Aloud: *for `d > 0`, a proper four-colouring of
+  `ℚ⁴` in which no two points at distance `d` share a colour exists exactly when `d²` is irrational, or `d² = p/q` with `p, q`
+  odd natural numbers.* That is Johnson's question as posed (forbidding 1 is properness), answered for every `d > 0`, and C7's
+  answer with LX's scope repair as its first disjunct. **Matches.**
+- **`coloring_forbids_of_odd`** `(hp : Odd p) (hq : Odd q) (c) (h : sqDist4 x y = p / q) : c x ≠ c y` — *every proper
+  four-colouring forbids `√(p/q)`*: C7's "and then every proper four-colouring forbids `d`". **Matches.**
+- **`exists_coloring_forbidding_iff_padicValRat`** `(hr : 0 < r) : (∃ c, ∀ x y, sqDist4 x y = r → c x ≠ c y) ↔
+  padicValRat 2 r = 0` — the same on rational squared distances: forbiddable iff `v₂(r) = 0`. **Matches** C7's valuation form.
+- **The compulsion law.** `forall_coloring_eq_iff x y : (∀ c, c x = c y) ↔ x = y ∨ 1 ≤ v₂(sqDist4 x y)`;
+  `forall_coloring_ne_iff x y : (∀ c, c x ≠ c y) ↔ v₂(sqDist4 x y) = 0 ∧ x ≠ y`; `exists_coloring_eq_and_ne_iff x y :
+  ((∃ c, c x = c y) ∧ ∃ c, c x ≠ c y) ↔ v₂(sqDist4 x y) < 0`. Aloud: *a pair is forced to one colour iff it is one point or
+  `v₂(|x − y|²) ≥ 1`; forced apart iff `v₂ = 0` and the points differ; free iff `v₂ < 0`* — C7's three clauses ("a pair",
+  i.e. `x ≠ y`), with the junk value `padicValRat 2 0 = 0` guarded in the open: at `x = y` the first holds, the second's
+  `x ≠ y` fails, the third's `v₂(0) = 0 < 0` fails, as the left sides do. **Matches.** The applied forms
+  `coloring_eq_of_one_le_padicValRat`, `coloring_ne_of_padicValRat_eq_zero` are one direction each.
+- **`exists_equiv_coloring_add_eq_residue`** `(c : quatGraph.Coloring (Fin 4)) (x₀ : ℍ[ℚ]) : ∃ e : Fin 4 ≃ Fin 4, ∀ z ∈ comp,
+  c (x₀ + z) = e (residue z)` — A3: *on the component `x₀ + comp` every proper four-colouring is the residue map followed by a
+  bijection of the colours*. Stated on `quatGraph`, which `quatIso` identifies with `ratFourGraph` (`x ↦ (x₀, x₁, x₂, x₃)` as
+  `re, imI, imJ, imK`); `comp` is the group the unit vectors generate (`mem_comp_iff`: `v₂(|z|²) ≥ 0`), `residue z` the vertex
+  of the unit tetrahedron `(0, 1, h, h′)` congruent to `z` modulo `P = (1 + i)·comp` (`existsUnique_tetra_sub_mem_pr`). C7's
+  "on each component, the residue colouring onto `𝔽₄` up to relabelling" — **matches**, with `𝔽₄` named by a transversal:
+  the field structure of `comp/P` is not stated.
+- **`coloring_eq_of_eqOn_isOpen`** `(c c' : ratFourGraph.Coloring (Fin 4)) {U : Set (Fin 4 → ℝ)} (hU : IsOpen U) (hne : ∃ x,
+  (↑x) ∈ U) (h : ∀ x, ↑x ∈ U → c x = c' x) : c = c'` — `[KubickiLehelMorayne2002]` Thm 4.3's rigidity in its p. 49 definition
+  as the coordinator quoted it (item 1086; I have not read the paper): *for every open `U` meeting `ℚ⁴` and every proper
+  four-colouring `c'`, agreement on `U ∩ ℚ⁴` gives `c = c'`*. **Matches the quoted definition** at `k = 4`, `D = ℚ⁴` with
+  `ℝ⁴`'s topology (as `Fin 4 → ℝ`, the product topology).
+
+**Not claimed:** anything with five or more colours; anything in `ℚⁿ`, `n ≠ 4`; the field structure of `comp/P`; the S³-density
+half of Thm 4.3; novelty (prior art: pending `[KubickiLehelMorayne2002]` in the modules' words, per the brief; item 1086's
+reading — the paper does not contain C7 — is the coordinator's to word).
+
+## Stage 4 — SAVED: the gate, on one commit
+
+**The commit:** `6ab6248fe` (branch `fs131-kfs1`, `main` merged at `0e390e766`; the tree clean at the pass's start). The steps of
+`data/fs131/irf1/run-gate.sh` (a copy of `data/fs131/clone1/run-gate.sh`, paths changed), run from the snapshot
+`build/irf1/snap/run-gate.sh`; every log under `data/fs131/irf1/gate/`, `run-pass.out` the summary. **Every step exit 0:**
+up to date (5 s); `sorry` (narrow) 0 lines; line-initial `axiom` lines 5 (unchanged); `dupnames` and its self-test; `axioms` and
+its self-test (287 s, every planted fault fired, every partner passed); `vacuity` and its self-test; `assumptions` and its
+self-test; `check_architecture` PASS; `lake lint` — `Linting passed for Proofs.`; the three digests. The one tracked file
+modified during the pass is this record (the read-aloud, appended while it ran).
+
+**Counts, against `main`'s last gate (FS131-IRU2's, `data/fs131/iru2/gate/`), each change explained:**
+| count | `main` | here | why |
+|---|---|---|---|
+| audit records | 11,743 | 11,806 | +63: the four modules' public theorems and definitions, filed CLEAN (`scripts/Axioms.lean`'s FS131-IRF1 block, generated by `data/fs131/irf1/audit_block.py`; coverage OK) |
+| clean / axiom-free / imported / purchases | 11,043 / 575 / 120 / 5 | 11,106 / 575 / 120 / 5 | +63 clean, each on exactly the standard three; nothing else moves |
+| vacuity `declarations` | 22,728 | 22,802 | +74 = 63 public records + 10 equation lemmas Lean generated on demand in the modules that defined them (`sqDist`, `sqDist4`, `onePlusI`, `val` in `Basic`; `tetra`, `hur`, `hur'`, `pr` in `Order`; `residue`, `residueCol` in `Compulsion`) + 1 matcher, `forall_quatColoring_ne_iff.match_1_1` (a destructuring `fun ⟨hc, hp⟩` in its term; `LEAN.md`'s FS131-ICS1 line — reconciled, not rewritten: a rewrite costs a rebuild and changes no statement) |
+| `refutations-skipped` | 246 | 246 | no new statement concludes `False` |
+| `sites` / `witnessed` | 1,465 / 40 | 1,477 / 52 | +12 sites, each WITNESSED (below) |
+| `generic` / `unknown` / `declared` / `vacuous` / `stale` | 1,420 / 2 / 3 / 0 / 0 | the same | |
+| assumptions (nine counts) | `axioms=3 rests=168 named=19 inline=14 outside=7 ours=21 open=5 takes=109 mentions=2` | the same; `fails=0` | no statement takes a declared hypothesis; no `Prop` former is defined |
+| dupnames, generated on demand | 31 | 31 | each equation lemma lives in one module of a chain; none doubled |
+
+**The vacuity scan's twelve new sites, each structure hypothesis with its inhabitant named** (`data/fs131/irf1/gate/vacuity.log`):
+the binder `c : quatGraph.Coloring (Fin 4)` in `coloring_eq_of_sqDist_two`, `coloring_eq_of_mem_pr`,
+`coloring_ne_of_mem_comp_of_notMem_pr`, `exists_equiv_coloring_add_eq_residue`, `coloring_eq_of_forall_tetra` (two binders) and
+`residueColouring`'s type — WITNESSED by `nonempty_coloring` (the residue colouring at shift 0, a library theorem); the binder
+`c : ratFourGraph.Coloring (Fin 4)` in `coloring_eq_of_one_le_padicValRat`, `coloring_ne_of_padicValRat_eq_zero`,
+`coloring_forbids_of_odd` and `coloring_eq_of_eqOn_isOpen` (two binders) — WITNESSED by `nonempty_ratFourGraph_coloring`. The
+hypotheses beyond the colourings are conditions on the theorem's own variables, each met at a named point by the spec examples:
+`h : sqDist x y = 2` (Zaks's Lemma 2 example's pair, scaled), `1 ≤ v₂` at `(0, (2,0,0,0))`, `sqDist4 x y = 3/5` (the `Forbid`
+example), and `coloring_eq_of_eqOn_isOpen`'s `U` at `U = univ` (any colouring with itself). The heads stated as `↔` carry their
+colourings inside the equivalence and read no site; both sides are inhabited by the same two witnesses.
+
+**Statement comparison against the skeleton** (`data/fs131/irf1/statements.out`; the dump of the built modules
+`statements-after.txt.gz` against `statements-skeleton.txt.gz`): **59 of 59 skeleton constants SAME** (kind, flags, stored type;
+each definition's proof-erased value), VALUE-MOVED 0, the `example` heads of all four modules identical to `273fb7b9a`'s;
+**28 added**: the one expected head (A3), three public theorems the brief left to me (`coloring_eq_of_forall_tetra`,
+`coloring_eq_of_eqOn_isOpen`, `nonempty_ratFourGraph_coloring`), 24 private helpers. Its five plants fired again on this print.
+
+**`#print axioms` of every head:** the standard three, no outside theorem (Theorems this phase proved, above).
+
+**Negative controls watched:** the four gate self-tests (dupnames 15 controls, axioms 23, vacuity 65, assumptions 21) fired and
+passed in this pass; my own: the quotation check (`formalize` → `formalise`: MISSING), the statement comparison (five plants),
+the audit-block generator (`--plant`: an unknown axiom, a `sorryAx`, a declared import and a misfiled record, all four reported,
+`data/fs131/irf1/audit-plant.out`), and the architecture check (`RationalFour/Forbid`'s imports cell planted as
+`RationalFour/Order` in a copy: `FAIL imports of RationalFour/Forbid`, exit 1, `data/fs131/irf1/plants/arch-plant.out`).
+**Not run:** a lint plant — it needs a module edited, a walk rebuilt and a second walk to restore (two walks of about 19 minutes
+at this machine's `BATCH=3`); the lint driver is unchanged since FS131-LGT1 watched its control fire.
