@@ -12,7 +12,9 @@ For points `x ≠ y` of `ℚ⁴`, with `w = v₂(|x − y|²)`:
 
 **The structure clause** (A3): every proper four-colouring is, on each component `x₀ + comp`, the residue map onto the unit
 tetrahedron followed by a bijection of the four colours (`exists_equiv_coloring_add_eq_residue`); so two proper
-four-colourings that agree on one unit tetrahedron agree on its component (`coloring_eq_of_forall_tetra`).
+four-colourings that agree on one unit tetrahedron agree on its component (`coloring_eq_of_forall_tetra`), and, since every
+coset of `P` is dense, two that agree on the rational points of an open set are equal (`coloring_eq_of_eqOn_isOpen`,
+`[KubickiLehelMorayne2002]` Thm 4.3's rigidity, which the structure clause implies and does not follow from).
 
 **What it rests on:** the standard three axioms (`#print axioms`, audited at the gate); no outside theorem. `[Zaks1999]` Lemma 1 (pairs at `√2` share a colour) is
 `coloring_eq_of_sqDist_two`, proved here by the consolidation run's five-point gadget (LX L4), not imported. `[BendaPerles2000]`'s
@@ -387,6 +389,74 @@ has 2-adic valuation 0 (`[Zaks1999]` Theorem 3 is the odd integer distances). -/
 theorem coloring_ne_of_padicValRat_eq_zero (c : ratFourGraph.Coloring (Fin 4)) {x y : Fin 4 → ℚ} (hxy : x ≠ y)
     (h : padicValRat 2 (sqDist4 x y) = 0) : c x ≠ c y :=
   (forall_coloring_ne_iff x y).2 ⟨h, hxy⟩ c
+
+/-! ## Rigidity (`[KubickiLehelMorayne2002]` Thm 4.3) -/
+
+/-- Every coset of `P` is dense in `ℝ⁴`: within `ε` of any rational point `x` lies a rational point congruent to `w` modulo
+`P` — `(2/3ᵏ)ℤ⁴ ⊆ P`, and the lattice `(2/3ᵏ)ℤ⁴` is `3⁻ᵏ`-dense coordinate by coordinate. -/
+private theorem exists_near_sub_mem_pr (w x : Fin 4 → ℚ) {ε : ℝ} (hε : 0 < ε) :
+    ∃ z : Fin 4 → ℚ, (∀ j, |(z j : ℝ) - x j| < ε) ∧ toQuat z - toQuat w ∈ pr := by
+  obtain ⟨k, hk⟩ := exists_pow_lt_of_lt_one hε (by norm_num : (1 / 3 : ℝ) < 1)
+  have hMo : Odd (3 ^ k) := Odd.pow (by decide)
+  have hM0 : (0 : ℚ) < ((3 ^ k : ℕ) : ℚ) := by positivity
+  set M : ℚ := ((3 ^ k : ℕ) : ℚ) with hM
+  let n : Fin 4 → ℤ := fun j => round ((x j - w j) * M / 2)
+  refine ⟨fun j => w j + 2 * n j / M, fun j => ?_, ?_⟩
+  · have hr := abs_sub_round ((x j - w j) * M / 2)
+    have key : |(w j + 2 * n j / M) - x j| ≤ 1 / M := by
+      have e : (w j + 2 * n j / M) - x j = -(2 / M) * ((x j - w j) * M / 2 - n j) := by
+        field_simp
+        ring
+      rw [e, abs_mul, abs_neg, abs_of_pos (by positivity : (0 : ℚ) < 2 / M)]
+      calc 2 / M * |(x j - w j) * M / 2 - n j| ≤ 2 / M * (1 / 2) := by gcongr
+        _ = 1 / M := by ring
+    have hkR : ((1 / M : ℚ) : ℝ) < ε := by
+      rw [hM]
+      push_cast
+      rw [one_div, ← inv_pow, ← one_div]
+      exact hk
+    calc |(((w j + 2 * n j / M : ℚ)) : ℝ) - x j| = ((|(w j + 2 * n j / M) - x j| : ℚ) : ℝ) := by push_cast; rfl
+      _ ≤ ((1 / M : ℚ) : ℝ) := by exact_mod_cast key
+      _ < ε := hkR
+  · have hc : ∀ y : Fin 4 → ℚ, toQuat y = ⟨y 0, y 1, y 2, y 3⟩ := fun y => rfl
+    have heq : toQuat (fun j => w j + 2 * n j / M) - toQuat w =
+        ⟨((2 * n 0 : ℤ) : ℚ) / M, ((2 * n 1 : ℤ) : ℚ) / M, ((2 * n 2 : ℤ) : ℚ) / M, ((2 * n 3 : ℤ) : ℚ) / M⟩ := by
+      rw [hc, hc]
+      ext <;> simp only [re_sub, imI_sub, imJ_sub, imK_sub] <;> push_cast <;> ring
+    rw [heq, mem_pr_iff]
+    by_cases h0 : ((2 * n 0 : ℤ), (2 * n 1 : ℤ), (2 * n 2 : ℤ), (2 * n 3 : ℤ)) = (0, 0, 0, 0)
+    · left
+      simp only [Prod.mk.injEq] at h0
+      obtain ⟨h0, h1, h2, h3⟩ := h0
+      ext <;> simp [h0, h1, h2, h3]
+    · exact Or.inr ((one_le_val_div_odd hMo h0).2 ⟨n 0 + n 1 + n 2 + n 3, by ring⟩)
+
+/-- **Every proper four-colouring of `ℚ⁴` is rigid** (`[KubickiLehelMorayne2002]` Thm 4.3, p. 50: *"Every 4-coloring of
+Q⁴ is S³-dense and, therefore, rigid"* — its rigidity half), rigid in the paper's sense (p. 49): for every open `U` meeting
+`ℚ⁴` and every proper four-colouring `c'`, if `c` and `c'` agree on `U ∩ ℚ⁴` then `c = c'`. Here `ℚ⁴` sits in `ℝ⁴` as
+`Fin 4 → ℝ`, whose product topology is the Euclidean one. A corollary of the structure clause
+(`exists_equiv_coloring_add_eq_residue`, through `coloring_eq_of_forall_tetra`): every coset of `P` is dense, so `U` holds a
+point of every residue class of every component, and a colouring is fixed on a component by its four residue colours. -/
+theorem coloring_eq_of_eqOn_isOpen (c c' : ratFourGraph.Coloring (Fin 4)) {U : Set (Fin 4 → ℝ)} (hU : IsOpen U)
+    (hne : ∃ x : Fin 4 → ℚ, (fun i => (x i : ℝ)) ∈ U)
+    (h : ∀ x : Fin 4 → ℚ, (fun i => (x i : ℝ)) ∈ U → c x = c' x) : c = c' := by
+  obtain ⟨x, hx⟩ := hne
+  obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.1 hU _ hx
+  obtain ⟨cq, hcq⟩ := exists_quatColoring_of c
+  obtain ⟨cq', hcq'⟩ := exists_quatColoring_of c'
+  -- `c` and `c'` agree on every vertex of every translated tetrahedron
+  have htet : ∀ v : ℍ[ℚ], ∀ i, cq (v + tetra i) = cq' (v + tetra i) := by
+    intro v i
+    obtain ⟨z, hzx, hz⟩ := exists_near_sub_mem_pr (toQuat.symm (v + tetra i)) x hε
+    rw [Equiv.apply_symm_apply] at hz
+    have hzU : (fun j => (z j : ℝ)) ∈ U := hball ((dist_pi_lt_iff hε).2 fun j => by
+      rw [Real.dist_eq]
+      exact hzx j)
+    rw [← coloring_eq_of_mem_pr cq hz, ← coloring_eq_of_mem_pr cq' hz, hcq, hcq']
+    exact h z hzU
+  refine DFunLike.ext c c' fun v => ?_
+  rw [← hcq, ← hcq']
+  simpa only [add_zero] using coloring_eq_of_forall_tetra cq cq' (htet (toQuat v)) (zero_mem comp)
 
 /-! ## Spec -/
 
