@@ -137,3 +137,84 @@ nothing else new — one character of `RationalFour.forall_coloring_eq_iff`'s st
 constant added to `Forbid` (ADDED). Against the landings' dumps again (`statements-after-vs-isf1.out`,
 `statements-after-vs-irf1.out`): 423 of 423 and 202 of 202 SAME. So the merge and the edit moved no stored constant of either
 landing — `SeamFractional`'s and `G27`'s statements are FS131-ISF1's, `RationalFour`'s are FS131-IRF1's.
+
+## Stage 3 — SAVED: the gate, green on `31df25939`
+
+### 3.1 The gate's inputs (`31df25939`)
+
+* **`scripts/Axioms.lean`**: one CLEAN block, just above the PURCHASED banner after FS131-IRF1's, of **485 records**
+  (`data/fs131/isf2/audit.clean.lean`). Generated from the kernel's print of every record of the 52 modules
+  (`data/fs131/isf2/lean/AxiomsAll.lean`, FS131-ISF1's copy of FS131-LGT1's printer → `axioms-all.txt`: 497 records, no
+  `sorryAx`) by `tools/fs131_isf2_audit_block.py` (FS131-IRF1's generator, plus one positive control: the printer's planted
+  imported record `Rigidity.positive_entropy_rigidity_of_polishSpace` must be read with its import, or the run stops BLIND).
+  Every public record is CLEAN: 89 on the standard three, 27 on `[propext, Quot.sound]`, 214 on `[propext]`, 155 axiom-free
+  (SeamFractional 7, `G27.Sound` 69, `Law` 73, `Check` 34, `All` 13, `Data` 11, `Bound` 7, `RootData` 6, `RootSort` 1, the 43
+  `Rows`/`Chk`/`St` modules 264); 12 private records are not audited. `--coverage` after filing: all 485 filed under their class
+  (`audit-coverage.out`). Controls: `--plant` (an unknown axiom, a `sorryAx`, a declared import, a misfiled record) — all four
+  reported, exit 1 (`audit-plant.out`); the print without its planted line — BLIND, exit 2 (`audit-blind-control.out`). The
+  records include eight `f.eq_def` equation lemmas, as 37 earlier records do.
+* **`scripts/vacuity-baseline.txt`**'s header: `declarations=23377  refutations-skipped=247  sites=1477` (the second line
+  unchanged), reconciled in 3.3.
+* **Unchanged**, each by reading: `scripts/axioms-controls.txt` (its `baseline` and `imported_declared` controls read only the
+  imported and declared counts; this landing adds neither), `scripts/assumptions-ledger.txt` (the step's rows are identical to
+  `main`'s gate, 3.3), `ARCHITECTURE.md` (both sides' rows, 2.1; no § Trust line: no purchase), `Proofs.lean` (2.1).
+
+### 3.2 The run (`data/fs131/isf2/run-gate.sh`, launched from a snapshot `build/isf2/snap/run-gate.sh`; logs `data/fs131/isf2/gate/`)
+
+`HEAD=31df2593996ad1e0f64dde8138f19bfa66bd64a2`, 03:43:45 → 03:57:52 UTC, **every step exit 0**: up to date (4 s); `sorry`
+(narrow) **0 lines**; line-initial `axiom` lines 5 (`main`'s, unchanged); `dupnames` OK (31 generated on demand, unchanged) and
+its self-test (15 controls: every planted fault fired, every partner passed); `axioms` OK and its self-test (264 s, every planted
+fault fired, every partner passed); `vacuity` OK and its self-test (65 controls); `assumptions` OK and its self-test (33 checks);
+`check_architecture` PASS; `lake lint` — `-- Linting passed for Proofs.`, 14 linters `(2/2) Passed!`; the three digests exit 0.
+Tracked files modified during the pass: 0 (`run-pass.out`).
+
+### 3.3 Every count, against `main`'s last gate (`data/fs131/irf1/gate/`, FS131-IRF1 on `6ab6248fe`)
+
+| count | `main` | here | why |
+|---|---|---|---|
+| audit records | 11,806 | 12,291 | +485: the 52 modules' public theorems and definitions, filed CLEAN (3.1) |
+| clean / axiom-free / imported / purchases | 11,106 / 575 / 120 / 5 | 11,436 / 730 / 120 / 5 | +330 clean (89 on the standard three, 27 on `[propext, Quot.sound]`, 214 on `[propext]`), +155 axiom-free; nothing else moves |
+| vacuity `declarations` | 22,802 | 23,377 | +575 = the 485 records + 55 equation lemmas `f.eq_n` Lean generated on demand + 11 matchers `f.match_n` + 24 proof-term matchers `thm.match_1_k` (destructuring in term-mode proofs, `LEAN.md`'s FS131-ICS1 line); read by name with the scan's own filter (`data/fs131/isf2/lean/ScanCount.lean` → `scan-count.txt`: `SCANNED-COUNT 575`) |
+| `refutations-skipped` | 246 | 247 | +1: `G27.conj_indep` — its stated conclusion is the membership `(fun x => c (conjR x)) ∈ IndepSets seamField`, which the reducing telescope reads through to `… → False`; it refutes nothing (the class `LEAN.md` names for FS124-L2). Its one hypothesis `c ∈ IndepSets seamField` holds at `c = fun _ => false` |
+| `sites` / `witnessed` / `generic` / `unknown` / `declared` / `vacuous` / `stale` | 1,477 / 52 / 1,420 / 2 / 3 / 0 / 0 | the same | no new site; every SITE, EVIDENCE, DECLARED and UNKNOWN row identical to `main`'s gate (1,566 rows, `receipt-compare.out`) |
+| assumptions (nine counts) | `axioms=3 rests=168 named=19 inline=14 outside=7 ours=21 open=5 takes=109 mentions=2` | the same, `fails=0` | every row identical to `main`'s gate (1,954 rows); `unseen` 21,950 → 22,054 (+104: hypotheses of the new theorems over their own variables, read and not decided; `cohyp` 80 unchanged) |
+| dupnames, generated on demand | 31 | 31 | none doubled |
+
+**Every one of `main`'s 11,806 audit prints is here unchanged** (each print joined to one line, `data/fs131/isf2/scripts/join_prints.py`,
+compared under `LC_ALL=C`: 0 missing, 485 new, every new one a `G27` or `SeamFractional` record; `receipt-compare.out`).
+
+**The structure hypotheses, each with its inhabitant** — the scan reads no site in these modules (no binder is a carrier it
+tracks), so the landing names them (`LEAN.md` § The gate):
+* `μ : IndepLaw seamField` — in `IndepLaw.density_le_quarter_seamField`, `G27.density_le_quarter`, `G27.density_le_of_cert`
+  and `Law`'s section variable: inhabited by `Collapse.nonempty_indepLaw` (`[NumberField F] → Nonempty (IndepLaw F)`, a library
+  theorem) at `seamField`'s instance `numberField_seamField`; the heads' own proof takes one from `Collapse.exists_indepLaw`.
+* `c ∈ IndepSets seamField` (`G27.conj_indep`, `indepFrom_mk`): the constant map `fun _ => false`.
+* `density_le_of_cert`'s `hrows`, `hfit`, `hbound`: conditions on its own `rows` and `coefs`, met by the certificate —
+  `G27.density_le_quarter` discharges them at the generated rows (`segs_ok`, `cert_bound`).
+* `cert_bound`'s `IndepFrom adjL 0 U`: holds at `U = 0` (no point chosen), and at every `mk c` by `indepFrom_mk`.
+* The formers `WfAdj`, `IndepFrom`, `SegsOk` are concluded by `wfAdj_of_wfB`, `indepFrom_mk`, `segs_ok`; none stands for an
+  assumption (the assumptions step: no new declared or undeclared former, `fails=0`).
+
+### 3.4 `#print axioms` of every head (`data/fs131/isf2/lean/HeadAxioms.lean` → `head-axioms.txt`, `pp.fullNames`)
+
+On the gated build: `fractionalChromaticNumber_seamPlane`, `finIndepRatio_seamPlane`, `iSup_fractionalChromaticNumber_seamPlane`,
+`IndepLaw.density_le_quarter_seamField`, `numberField_seamField`, `G27.density_le_quarter`, `G27.density_le_of_cert`,
+`G27.cert_bound` — `[propext, Classical.choice, Quot.sound]`; `G27.good_root` (the kernel's DFS) — `[propext, Quot.sound]`; the
+seven `RationalFour` heads the edit recompiled (`forall_coloring_eq_iff`, `forall_coloring_ne_iff`,
+`exists_coloring_eq_and_ne_iff`, `exists_equiv_coloring_add_eq_residue`, `coloring_eq_of_eqOn_isOpen`,
+`exists_coloring_forbidding_iff`, `exists_coloring_forbidding_iff_padicValRat`) — the standard three. **No outside theorem.**
+Positive control in the same file: `Rigidity.positive_entropy_rigidity_of_polishSpace` prints its import
+`HadwigerNelson.Rigidity.positive_entropy_rigidity`.
+
+### 3.5 Negative controls watched
+
+The four self-tests above, in this pass. Mine: the quotation check (stage 1), the code-only check (2.2), the statement
+comparator's four plants (2.6), the audit generator's four plants and its BLIND control (3.1). **The lint's control** (FS131-IRF1
+left it unrun): `isf2LintPlant [Inhabited ℕ] : ℕ := 0`, with a docstring, planted in `RationalFour/Forbid` (a leaf; working tree
+only, never committed); the build rebuilt `Forbid` and the root, 0 warnings, 14 m 14 s; the lint **exit 1**, exactly one error,
+`unusedArguments` at `Forbid.lean:181` naming `@HadwigerNelson.RationalFour.isf2LintPlant` and its argument `[Inhabited ℕ]`, the
+other 13 linters passed (`data/fs131/isf2/lintplant/lint-planted.log`). Restored by `git checkout` (the source's hash equal to
+its hash before the plant); rebuilt (2 modules, 0 warnings, 13 m 58 s); the lint exit 0; **every one of the 2,269 compiled
+`.olean`s byte-identical to build 1's** (`logs/oleans-after-restore.sha256`), so stage 2's dumps describe the gated build.
+`check_architecture`'s control was not planted here: FS131-IRF1 planted it on this file's checker unchanged (its
+`plants/arch-plant.out`).

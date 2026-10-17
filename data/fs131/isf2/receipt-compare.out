@@ -1,0 +1,7 @@
+vacuity SITE/EVIDENCE rows: main 1566, here 1566
+vacuity rows: IDENTICAL
+assumptions rows: main 1954, here 1954
+assumptions rows: IDENTICAL
+axiom print lines: main 11806, here 12291
+main lines missing here: 0; new here: 485
+joined prints (LC_ALL=C): main 11806, here 12291; main's missing here: 0; new here: 485, of which outside G27/SeamFractional: 0

@@ -1,0 +1,47 @@
+slot: admitted isf2-heads: mem 8 GiB (hard cap), cpus 4,5
+'HadwigerNelson.Instances.SeamFractional.fractionalChromaticNumber_seamPlane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Instances.SeamFractional.finIndepRatio_seamPlane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Instances.SeamFractional.iSup_fractionalChromaticNumber_seamPlane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Instances.SeamFractional.IndepLaw.density_le_quarter_seamField' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Instances.SeamFractional.numberField_seamField' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.G27.density_le_quarter' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.G27.density_le_of_cert' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.G27.cert_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.G27.good_root' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.RationalFour.forall_coloring_eq_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RationalFour.forall_coloring_ne_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RationalFour.exists_coloring_eq_and_ne_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RationalFour.exists_equiv_coloring_add_eq_residue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.RationalFour.coloring_eq_of_eqOn_isOpen' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RationalFour.exists_coloring_forbidding_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RationalFour.exists_coloring_forbidding_iff_padicValRat' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+HadwigerNelson.Instances.SeamFractional.fractionalChromaticNumber_seamPlane : (SimpleGraph.induce
+      HadwigerNelson.FieldWall4.seamPlane (HadwigerNelson.unitDistance ℂ)).fractionalChromaticNumber =
+  4
+HadwigerNelson.Instances.SeamFractional.iSup_fractionalChromaticNumber_seamPlane : ⨆ S,
+    (SimpleGraph.induce (↑S)
+        (SimpleGraph.induce HadwigerNelson.FieldWall4.seamPlane
+          (HadwigerNelson.unitDistance ℂ))).fractionalChromaticNumber =
+  4
+HadwigerNelson.Instances.SeamFractional.finIndepRatio_seamPlane : (SimpleGraph.induce
+      HadwigerNelson.FieldWall4.seamPlane (HadwigerNelson.unitDistance ℂ)).finIndepRatio =
+  4⁻¹
+'HadwigerNelson.Rigidity.positive_entropy_rigidity_of_polishSpace' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ HadwigerNelson.Rigidity.positive_entropy_rigidity]
+exit=0
