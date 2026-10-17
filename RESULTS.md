@@ -276,6 +276,23 @@ each in full. "Prior art: not found in print" reports the searches recorded in t
   implies. The derivation is this project's (two minds, one blind); the kernel proof is this project's.
 - **Ledger.** Row 169; `CLOSED-QUESTIONS.md` § 3.
 
+### 13. The fractional chromatic number of the plane over ℚ(√3, √11)
+
+- **Statement.** With `seamPlane` the plane over ℚ(√3, √11) inside `ℂ`: the fractional chromatic number of its unit-distance
+  graph is 4; its finitary independence ratio is `4⁻¹`; the supremum of the fractional chromatic numbers of its finite
+  induced subgraphs is 4.
+- **Lean.** `Instances.SeamFractional.fractionalChromaticNumber_seamPlane`, `Instances.SeamFractional.finIndepRatio_seamPlane`,
+  `Instances.SeamFractional.iSup_fractionalChromaticNumber_seamPlane`; beneath them
+  `Instances.SeamFractional.IndepLaw.density_le_quarter_seamField`, `G27.density_le_quarter` and `G27.cert_bound` (the
+  certificate for `[MatolcsiEtAl2025]`'s `G27`, checked by the kernel; its generated data from `tools/fs131_kfs1_g27.py`).
+- **Axioms.** std3, every one (`G27.good_root`, the kernel's search over the independent sets, on `[propext, Quot.sound]`).
+- **Whose.** "`χ_f(ℚ(√3,√11)²) = 4` answers `[CranstonRabern2015]`'s question; prior art: not found in print (FS131-PAS2,
+  2026-10-17). The upper bound is Fischer's (1994), the lower bound's graph and blow-up are Matolcsi, Ruzsa, Varga and
+  Zsámboki's (2025), read inside the field; at the Moser ring the geometric value 4 is Dúcz's (2026)." The kernel route
+  replaces the blow-up by an invariant random independent set (`Collapse.exists_indepLaw`); the kernel proof is this
+  project's.
+- **Ledger.** Row 71; `CLOSED-QUESTIONS.md` § 1.6.
+
 ## Other people's results, checked here
 
 In each case below the theorem is its authors'. What this project contributed is said in the "whose" line.
@@ -378,11 +395,14 @@ is listed in `ARCHITECTURE.md` § 5. What landing each in Lean would mean is `RO
   1976).
 - **[CGHO2025bg]** N. Chandgotia, S. Gangloff, B. Hellouin de Menibus, P. Oprocha, *Undecidability of the block gluing
   classes of homshifts*, arXiv:2507.21342.
+- **[CranstonRabern2015]** D. W. Cranston, L. Rabern, *The fractional chromatic number of the plane*, Combinatorica 37 (2017)
+  837–861; arXiv:1501.01647.
 - **[Croft1967]** H. T. Croft, the "tortoise" construction, `m₁(ℝ²) ≥ 0.22936` (1967), as cited by `[AmbrusEtAl2023]` § 1;
   not held here.
 - **[Davies2026]** J. Davies, *Measurable obstructions for unmeasurable colourings*, arXiv:2610.12301 (2026).
 - **[deGrey2018]** A. D. N. J. de Grey, *The chromatic number of the plane is at least 5*, Geombinatorics 28 (2018) 18–31;
   arXiv:1804.02385.
+- **[Ducz2026]** Á. Dúcz, *A note on geometric colorings of the Moser lattice*, arXiv:2606.12325 (2026).
 - **[DuczVarga2026]** Á. Dúcz, D. Varga, *A unit-distance graph in the plane with independence ratio below 1/4*,
   arXiv:2606.28157 (2026).
 - **[EinsiedlerLindenstrauss2022]** M. Einsiedler, E. Lindenstrauss, *Rigidity properties for commuting automorphisms on tori

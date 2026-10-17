@@ -33,6 +33,7 @@ paper, not yet formalized.
 | **[10](#10-three-colourings-of-lattice-cayley-graphs)** $\mathrm{Cay}(\mathbb{Z}^d, S)$ is 3-colourable $\iff$ some character $\theta$ has $\theta(S) \subseteq [\frac13, \frac23]$ | Lean |
 | **[11](#11-the-ring-the-unit-vectors-generate-and-the-planes-components)** $\mathbb{Z}[U_F] = \mathcal{O}'_F$ if no conjugation-fixed prime above 2 ramifies; $F^2$'s unit-distance graph has infinitely many components | Lean |
 | **[12](#12-which-distances-a-four-colouring-of-rational-four-space-can-avoid)** A 4-colouring of $\mathbb{Q}^4$ with no unit pair monochromatic can also avoid distance $d$ $\iff$ $d^2 \notin \mathbb{Q}$, or $d^2 = p/q$ with $p, q$ odd | Lean |
+| **[13](#13-the-fractional-chromatic-number-of-the-plane-over-q3-11)** $\chi_f\big(\mathbb{Q}(\sqrt3, \sqrt{11})^2\big) = 4$ | Lean |
 
 The symbols, in one line each (each is defined in full in its row's section below):
 
@@ -48,7 +49,7 @@ The symbols, in one line each (each is defined in full in its row's section belo
   every prime fixed by complex conjugation (row 11).
 - $v_2(r)$, for a rational $r \neq 0$: the exponent of 2 in $r$, so $v_2(12) = 2$ and $v_2(3/4) = -2$ (row 12).
 
-What each Lean theorem behind rows 1–12 assumes is exactly what its status names: none takes a further unproved result as a
+What each Lean theorem behind rows 1–13 assumes is exactly what its status names: none takes a further unproved result as a
 hypothesis. [`RESULTS.md`](RESULTS.md) gives each one's Lean name and its axioms as `#print axioms` prints them.
 
 **On novelty.** For results of this project the page says "prior art: not found in print". That reports the literature
@@ -364,6 +365,29 @@ points at distance 1 share a colour. For $d > 0$:
   Johnson and Noble 2021); and the rigidity theorem above (Kubicki, Lehel and Morayne 2002), which follows from the
   structure and does not give it.
 - **Not claimed.** Five or more colours; $\mathbb{Q}^n$ for $n \neq 4$.
+
+### 13. The fractional chromatic number of the plane over ℚ(√3, √11)
+
+```math
+\chi_f\big(\mathbb{Q}(\sqrt3, \sqrt{11})^2\big) = 4
+```
+
+Also the finitary independence ratio of that plane is $1/4$, and the fractional chromatic numbers of its finite
+unit-distance graphs have supremum 4. ℚ(√3, √11) is the field of the Moser spindle; its plane's chromatic number is 4
+(Fischer 1994), and allowing fractional colourings saves nothing below that.
+
+- **Why it matters.** Cranston and Rabern asked exactly this ("What is the fractional chromatic number of
+  ℚ(√3,√11) × ℚ(√3,√11)?", Combinatorica 2017), after showing it is at least 76/21. It has no bearing on the plane's own
+  number: $\chi_f(\mathbb{R}^2)$ is between about 4.05 and 4.36 (row 6).
+- **Status.** Lean, on the standard axioms alone, with no outside theorem. The lower bound is Matolcsi, Ruzsa, Varga and
+  Zsámboki's certificate for their 27-point graph, checked in full by Lean's kernel (every congruence, every weight, every
+  independent set) and read against an invariant random independent set of the plane; the 47 MB of generated data is
+  rebuilt and checked by `tools/fs131_kfs1_g27.py`.
+- **Prior art.** The value: not found in print. The upper bound is Fischer's (1994); the 27-point graph and its certificate
+  are Matolcsi, Ruzsa, Varga and Zsámboki's (2025), read here inside the field; at the Moser ring, a smaller ring inside
+  this field, the geometric value 4 is Dúcz's (2026).
+- **Not claimed.** Whether every finite unit-distance graph over the field has geometric fractional chromatic number at
+  most 4 (derived by hand, not in Lean).
 
 ### Also proved by hand
 
