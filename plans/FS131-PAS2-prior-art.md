@@ -159,7 +159,7 @@ distance"*, *"component"*, *"permutation"*. A probe shows only which words are t
   rigidity, no Kubicki–Lehel–Morayne. `[Davies2026]` p. 3 (held): *"χ(Q2) = χ(Q3) = 2 and χ(Q4) = 4 [6,72], so the restriction d ⩾ 5 in our
   rational-point conclusion is necessary"*; nothing on four-colourings' structure.
 
-### 2.3 Verdict: **held** — not found in print among everything read; one 2002 paper unread whose summary points at the core of it
+### 2.3 Verdict: **pending `[KubickiLehelMorayne2002]`** — not found in print among everything read; one 2002 paper unread whose summary points at the core of it
 
 1. **The question is in print, twice, and was open at least until 2011.** `[Johnson2006]` p. 212 (2006) and `[Johnson2010]` p. 169 (2011),
    the second time with C7's answer as the author's guess (*"I think that the same answer holds for n = 4, but this has not been shown"*).
@@ -184,6 +184,12 @@ distance"*, *"component"*, *"permutation"*. A probe shows only which words are t
    beyond (a)'s exact intersection, which is LX-T4; both wait on Kubicki–Lehel–Morayne like C7.
 5. **Not misstated.** C7 as the asking lane words it is Johnson's question as he poses it in 2011 (*"for which d > 0 realized as a distance
    between points of ℚ⁴"*), with the answer in his notation `d ∈ √ℚ₀`.
+
+**Two leads from the coordinator's web search, checked (2026-10-17):** arXiv:2602.17943 is G. Istrate, C. Zara, *Hypersphere-based restricting
+conditions for colorings of the Euclidean space* (20 February 2026) — colourings of `ℝⁿ` under hypersphere forcing conditions, by its abstract;
+no bearing on `ℚ⁴`. The University of Haifa record *"On four-colourings of the rational four-space"* is `[Zaks1989]` (Aequationes Math. 37,
+June 1989, doi 10.1007/BF01836448), not `[Zaks1999]`; its abstract is the one read in § 2.2. The coordinator's headless fetch of
+Kubicki–Lehel–Morayne 2002 failed too (ScienceDirect 403); a browser save is requested, and a short follow-up job reads it.
 
 **Not read:** Kubicki–Lehel–Morayne 2002 (the debt above); Zaks 1989 beyond its abstract; Johnson 2008, Johnson–Tiemeyer 2009, Johnson–
 Schneider–Tiemeyer 2007, Noble 2012 (not held; Geombinatorics 16–21 are outside the held run); Raigorodskii–Shitova 2008 and
