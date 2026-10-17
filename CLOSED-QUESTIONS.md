@@ -261,7 +261,7 @@ source on record.
 with the observation that their blow-up (their Theorem 1) **never leaves the field its graph lives in**: every congruence between
 subsets of `F²` is an isometry of `F²`, the group those generate is solvable, and the Følner copies of `G27` stay in `F²`. So finite
 unit-distance graphs over `ℚ(√3,√11)` have fractional chromatic numbers arbitrarily close to 4 (and independence ratios
-arbitrarily close to `1/4`, never below). Proof: `plans/FS56-field-blowup.md` (hand). **Not kernel-checked** beyond Theorem B.
+arbitrarily close to `1/4`, never below). Proof: `plans/FS56-field-blowup.md` (hand). **Kernel-checked** (FS131-ISF1, gated by FS131-ISF2 on `31df25939`; on the standard three axioms, no outside theorem): `Instances/SeamFractional`'s `fractionalChromaticNumber_seamPlane`, `iSup_fractionalChromaticNumber_seamPlane`, `finIndepRatio_seamPlane`. The route is not the hand proof's: an invariant random independent set of `Cay(R, U)` (`Collapse.exists_indepLaw`, the amenability step) has density at most `1/4` by `[MatolcsiEtAl2025]`'s certificate for `G27`, every condition of which the kernel checks (`Plane/G27/`: 16,829 congruence rows as isometries, the 28,496 weights, every independent set of `G27` by a residual DFS); no blow-up and no measure rigidity.
 
 **Prior art that constrains the claim.** Almost all of it is theirs: the geometric fractional chromatic number (`[AmbrusEtAl2023]`),
 the blow-up and `G27` with its rational witness (`[MatolcsiEtAl2025]`). Ours is the field-internal reading of the blow-up and the
