@@ -36,9 +36,18 @@ The prior-art searches (FS131-PAS1, item 1052): four of five not found in print;
 
 ## 3. Running, and next
 
-Nothing is running. Every landing is filed and pushed (items 1067, 1070, 1072). The next push follows the same protocol:
-a Clerk's privacy check (template `data/fs131/briefs/scripts/mk-fs131-pv4.py`), my two checks, a fast-forward push. The
-open work is the owed list below and the asking lane's next job.
+Every landing is filed and pushed (items 1067, 1070, 1072; `origin/main` at `00e7c4b60`). Running (item 1074), the
+asking lane's last two ranks (item 1073):
+
+| job | what | worktree, branch | record |
+|---|---|---|---|
+| FS131-KFS1 | de Bruijn planner: rational four-space at four colours (C7) and the fractional chromatic number over ℚ(√3, √11) (C14) — map, skeleton, price | `il5`, `fs131-kfs1` (build copied) | `plans/FS131-KFS1-four-space-plan.md` |
+| FS131-PAS2 | Ephodos: their prior-art searches (C7 after 2006; C14 against `[Ducz2026]` Thm 3.1) | `kcs1`, `fs131-pas2` | `plans/FS131-PAS2-prior-art.md` |
+
+**At FS131-PAS2's hand-back:** merge it; a Clerk (FS131-FBB1) files its bibliography rows with item 1054's owed items in
+one pass; its novelty lines wait for the landings they word. **At FS131-KFS1's hand-back:** review the plan and price;
+brief an implementer from it. The next push follows the same protocol (template `data/fs131/briefs/scripts/mk-fs131-pv4.py`).
+When the asking lane's list is done, its re-rank (with the owed corrections in § 5) chooses what follows.
 
 ## 4. Kooshi's decisions, all answered
 
