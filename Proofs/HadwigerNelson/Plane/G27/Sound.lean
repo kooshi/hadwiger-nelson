@@ -524,6 +524,15 @@ theorem goodB_of_split {D : ℤ} {as : List ℕ} {k d : ℕ} {st : List ℕ} {ou
   have := List.all_eq_true.1 hc _ hm
   simpa [goodB, stateL] using this
 
+/-- Joining two lists that pass. -/
+theorem all_append_true {α : Type*} {f : α → Bool} {l₁ l₂ : List α} (h₁ : l₁.all f = true) (h₂ : l₂.all f = true) :
+    (l₁ ++ l₂).all f = true := by
+  rw [List.all_append, h₁, h₂]; rfl
+
+/-- One element that passes. -/
+theorem all_singleton_true {α : Type*} {f : α → Bool} {a : α} (h : f a = true) : [a].all f = true := by
+  simp [h]
+
 /-- The root state: the DFS from point 0 with the empty set. -/
 theorem goodB_root {D : ℤ} {as L : List ℕ} (h : goodB D as 0 (0 :: L) = true) : dfsR (leafOk D) as 0 0 L = true := by
   simpa [goodB] using h

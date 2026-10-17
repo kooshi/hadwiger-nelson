@@ -153,3 +153,40 @@ not in the library's vocabulary. Price: about 40 lines to define the geometric f
 the bound — the four classes of Theorem B's residue colouring, each weighted 1, have aggregate `[c constant on Y]`, which
 is invariant under the isometries of `K²` because the residue map is additive and multiplies by the unit's residue. Over
 the 100-line line: left as priced.
+
+## Stage 4 — SAVED: every leaf proved; the build green; the statements unchanged
+
+* **Build 1** (`data/fs131/isf1/build1.log`; the build's own log `build/gate/build/20261017T014626Z-2188811.log`): OK, 1,127
+  batches at `BATCH=2`, 51 modules rebuilt in 45 m 18 s — the 47 generated modules, `Check`, `Sound`, `SeamFractional`
+  (its density leaf still `sorry` then) and the root. Measured in the build: `Rows*` 23–58 s each (two in parallel), `St000`
+  61 s (9 MB of literals), `Chk00…07` 19–68 s, `RootSort` 16 s, `All` 1.3 s. Its one class of warning — unused `simp`
+  arguments in `All`'s split assembly — is gone: the generator now writes each split's proof as a term
+  (`all_append_true`, `all_singleton_true`, added to `Sound`).
+* **Build 2** (`data/fs131/isf1/build2.log`, `build2-full.log`): OK, 248 batches at `BATCH=10`, 6 modules rebuilt (`Sound`,
+  `All`, `Law`, `Bound`, `SeamFractional`, the root), **0 warnings**, 6 m 28 s. A first attempt at `BATCH=2` was stopped by
+  its process group at batch 8 of 1,129 (a 45-minute walk for six modules), checked stopped (no process, log static).
+* **`sorry`**: none in the library (`grep`, narrow form: 0 files).
+* **Axioms** (`data/fs131/isf1/head-axioms.txt`, `pp.fullNames`): `fractionalChromaticNumber_seamPlane`,
+  `finIndepRatio_seamPlane`, `iSup_fractionalChromaticNumber_seamPlane`, `IndepLaw.density_le_quarter_seamField`,
+  `numberField_seamField`, `G27.density_le_quarter`, `G27.cert_bound`: `[propext, Classical.choice, Quot.sound]`;
+  `G27.good_root` (the kernel's DFS): `[propext, Quot.sound]`. No outside theorem.
+* **Statements** (`tools/fs131_isf1_statements.py data/fs131/isf1/statements-skeleton.txt.gz
+  data/fs131/isf1/statements-after.txt.gz --plant`): the skeleton's 7 constants **SAME**, none added to `SeamFractional`;
+  4 new hand-written modules, 416 constants; each of the three plants fires. RESULT: CLEAN.
+* **Generator**: `--check` IDENTICAL (47 modules and the manifest); `--check --plant` (one hex digit of `Rows00` changed in
+  memory) MISMATCH naming `Rows00.lean`, exit 1.
+* **Architecture**: rows for the 51 `Plane/G27/` modules (`data/fs131/isf1/arch_rows.py`, imports from `build_order.py`),
+  the `SeamFractional` row brought to what is proved; `tools/check_architecture.py` PASS
+  (`data/fs131/isf1/arch-check-c2.out`).
+
+## Theorems this phase proved (filled at stage 4)
+
+All on `[propext, Classical.choice, Quot.sound]` or fewer; no outside theorem; no hypothesis standing for an assumption.
+* `HadwigerNelson.Instances.SeamFractional.numberField_seamField` — `ℚ(√3, √11)` is a number field.
+* `HadwigerNelson.Instances.SeamFractional.IndepLaw.density_le_quarter_seamField` — every `R ⋊ U`-invariant random
+  independent set of `Cay(R, U)` over `ℚ(√3, √11)` has density at most `1/4` (`[MatolcsiEtAl2025]` Thm 3, by `G27.density_le_quarter`).
+* With these two leaves the skeleton's three heads stand: `fractionalChromaticNumber_seamPlane` (`χ_f(K²) = 4`),
+  `finIndepRatio_seamPlane` (`α₁(K²) = 1/4`), `iSup_fractionalChromaticNumber_seamPlane` (`⨆_S χ_f(K²[S]) = 4`).
+* `HadwigerNelson.G27.cert_bound` — the certificate's condition (iii) for every independent set of `G27`, by the kernel.
+* `HadwigerNelson.G27.density_le_of_cert`, `density_le_quarter`, `dfsR_sound`, `goodB_of_split`, `val_stepIn`,
+  `val_mergeR`, `val_sortR`, `row_phi`, `xpt_mem` — the route's named steps (`Plane/G27/Sound`, `Law`, `Bound`).

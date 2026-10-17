@@ -1,0 +1,30 @@
+'HadwigerNelson.Instances.SeamFractional.fractionalChromaticNumber_seamPlane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Instances.SeamFractional.finIndepRatio_seamPlane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Instances.SeamFractional.iSup_fractionalChromaticNumber_seamPlane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Instances.SeamFractional.IndepLaw.density_le_quarter_seamField' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Instances.SeamFractional.numberField_seamField' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.G27.density_le_quarter' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.G27.cert_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.G27.good_root' depends on axioms: [propext, Quot.sound]
+HadwigerNelson.Instances.SeamFractional.fractionalChromaticNumber_seamPlane : (SimpleGraph.induce
+      HadwigerNelson.FieldWall4.seamPlane (HadwigerNelson.unitDistance ℂ)).fractionalChromaticNumber =
+  4
+HadwigerNelson.Instances.SeamFractional.iSup_fractionalChromaticNumber_seamPlane : ⨆ S,
+    (SimpleGraph.induce (↑S)
+        (SimpleGraph.induce HadwigerNelson.FieldWall4.seamPlane
+          (HadwigerNelson.unitDistance ℂ))).fractionalChromaticNumber =
+  4
+HadwigerNelson.Instances.SeamFractional.finIndepRatio_seamPlane : (SimpleGraph.induce
+      HadwigerNelson.FieldWall4.seamPlane (HadwigerNelson.unitDistance ℂ)).finIndepRatio =
+  4⁻¹
+exit=0

@@ -1,9 +1,11 @@
 import Proofs.HadwigerNelson.Instances.SeamFractional
+import Proofs.HadwigerNelson.Plane.G27.Bound
 
 /-!
 FS131-ISF1 (a copy of FS131-IRU2's dumper, itself FS131-ICO2's: namespace renamed, module list replaced) — every constant of
 the modules this job builds, as the kernel holds it: read-only. The list grows with the modules (each added here when it is
-first built); the skeleton's one module is `Instances/SeamFractional`. Run from the worktree's root, under a slot:
+first built); the skeleton's one module is `Instances/SeamFractional`; the after-dump adds the hand-written `Plane/G27` modules (the
+generated ones hold certificate data, whose values would print hundreds of MB). Run from the worktree's root, under a slot:
   lake env lean data/fs131/isf1/lean/StatementDump.lean > data/fs131/isf1/statements-<when>.txt
 -/
 open Lean Elab Command Meta
@@ -12,7 +14,8 @@ namespace FS131ISF1Dump
 
 /-- The modules. -/
 def modules : List Name :=
-  [`Proofs.HadwigerNelson.Instances.SeamFractional]
+  [`Proofs.HadwigerNelson.Instances.SeamFractional, `Proofs.HadwigerNelson.Plane.G27.Check,
+   `Proofs.HadwigerNelson.Plane.G27.Sound, `Proofs.HadwigerNelson.Plane.G27.Law, `Proofs.HadwigerNelson.Plane.G27.Bound]
 
 def kindOf : ConstantInfo → String
   | .thmInfo _ => "THM" | .axiomInfo _ => "AXIOM" | .defnInfo _ => "DEF" | .opaqueInfo _ => "OPAQUE"

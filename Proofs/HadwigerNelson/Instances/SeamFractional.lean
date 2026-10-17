@@ -1,9 +1,10 @@
 import Proofs.HadwigerNelson.Collapse.Density.Upper
 import Proofs.HadwigerNelson.Arith.QuadraticPrime
 import Proofs.HadwigerNelson.SquareClass
+import Proofs.HadwigerNelson.Plane.G27.Bound
 
 /-!
-# The fractional chromatic number of the plane over `ℚ(√3, √11)` is 4 (FS-131, FS131-KFS1; skeleton)
+# The fractional chromatic number of the plane over `ℚ(√3, √11)` is 4 (FS-131, FS131-KFS1; FS131-ISF1)
 
 **The question** (`[CranstonRabern2015]`, concluding section): *"What is the fractional chromatic number of
 ℚ(√3,√11) × ℚ(√3,√11)?"*
@@ -18,9 +19,10 @@ import Proofs.HadwigerNelson.SquareClass
 **The route** (FS131-KFS1 § 2.2, route B-I). Upper: Theorem B, `four_colorable_of_seam_field` (`[Fischer1994]`'s value). Lower:
 an invariant random independent set of `Cay(R, U)` with density at least `α₁(K²)` (`Collapse.exists_indepLaw`, the
 amenability step, on the standard three) has density at most `1/4` by `[MatolcsiEtAl2025]`'s 27-point certificate
-(`IndepLaw.density_le_quarter_seamField`, its Theorem 3 checked by the kernel). No blow-up and no measure rigidity.
+(`IndepLaw.density_le_quarter_seamField`, its Theorem 3 checked by the kernel: `Plane/G27/Bound`). No blow-up and no measure
+rigidity.
 
-**What it rests on** (planned): the standard three axioms.
+**What it rests on**: the standard three axioms.
 
 **Not claimed:** `χ_f` at any other field; that the value is new (prior art: FS131-PAS2's to find; the Moser ring's instance
 of the geometric bound is `[Ducz2026]` Thm 3.1).
@@ -45,9 +47,9 @@ instance : NumberField seamField := numberField_seamField
 /-- **`[MatolcsiEtAl2025]` Thm 3, read against an invariant random independent set**: every `R ⋊ U`-invariant random
 independent set of `Cay(R, U)` over `ℚ(√3, √11)` has density at most `1/4`. The certificate (level 12, 28,496 weighted sets,
 11,640 congruence classes; `data/fs56/g27/cert-g27-mrvz.json`) weighs every independent set of `G27` at most 1 and its
-singletons `4`; invariance makes `P(Y ⊆ I)` constant on each congruence class. -/
-theorem IndepLaw.density_le_quarter_seamField (μ : IndepLaw seamField) : μ.density ≤ 4⁻¹ := by
-  sorry
+singletons `4`; invariance makes `P(Y ⊆ I)` constant on each congruence class (`G27.density_le_quarter`). -/
+theorem IndepLaw.density_le_quarter_seamField (μ : IndepLaw seamField) : μ.density ≤ 4⁻¹ :=
+  G27.density_le_quarter μ
 
 /-- The finitary independence ratio is at most `1/4` (the lower half of `χ_f ≥ 4`). -/
 theorem finIndepRatio_seamPlane_le : ((unitDistance ℂ).induce seamPlane).finIndepRatio ≤ 4⁻¹ := by

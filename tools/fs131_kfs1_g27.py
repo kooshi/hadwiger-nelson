@@ -688,10 +688,13 @@ def modules(g):
     L.append("theorem root_sorted : eqL (sortRounds 20 (singTerms 0 singL :: segS)) rootL = true := root_ok\n\n")
     for sp in reversed(splits):
         i = sp["id"]
-        rw = [f"gp{i:03d}x{j:02d}_ok" if it[0] == "grp" else f"good{it[1]:03d}" for j, it in enumerate(sp["items"])]
+        terms = [f"gp{i:03d}x{j:02d}_ok" if it[0] == "grp" else f"(all_singleton_true good{it[1]:03d})"
+                 for j, it in enumerate(sp["items"])]
+        acc = terms[0]
+        for t in terms[1:]:
+            acc = f"(all_append_true {acc} {t})"
         L.append(f"theorem good{i:03d} : goodB Dn adjL {sp['k']} {stname(i)} = true :=\n"
-                 f"  goodB_of_split sp{i:03d}_ok (by\n    simp only [out{i:03d}, List.all_append, List.all_cons, "
-                 "List.all_nil, " + ", ".join(rw) + ", Bool.and_true, Bool.true_and])\n\n")
+                 f"  goodB_of_split sp{i:03d}_ok {acc}\n\n")
     L.append("theorem good_root : goodB Dn adjL 0 rootSt = true := good000\n")
     L.append(TAIL)
     out["All"] = "".join(L)
