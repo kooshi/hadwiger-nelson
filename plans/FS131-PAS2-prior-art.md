@@ -8,7 +8,9 @@ opening job, §PA) run on two statements already derived; no derivation of its o
 
 ## Theorems this phase proved
 
-None. This job searches and reads; it proves nothing.
+None new. This job searches and reads. One composition of held results is recorded where it arose: every finite unit-distance graph over
+`ℚ(√3,√11)` has geometric fractional chromatic number at most 4 — [derived] from FS56-T2 (hand) and row 57's Theorem B (kernel), one mind,
+§ 4.2; it extends `[Ducz2026]`'s Moser-ring bound to the field.
 
 ## Stage 1 — SAVED: the readback
 
