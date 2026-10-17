@@ -1,0 +1,18 @@
+d2a8a86039f5f4d308da6db382af9874dcbea3d1
+ARCHITECTURE.md
+Proofs.lean
+Proofs/HadwigerNelson/Instances/SeamFractional.lean
+Proofs/HadwigerNelson/RationalFour/Basic.lean
+Proofs/HadwigerNelson/RationalFour/Compulsion.lean
+Proofs/HadwigerNelson/RationalFour/Forbid.lean
+Proofs/HadwigerNelson/RationalFour/Order.lean
+
+Auto-merging ARCHITECTURE.md
+CONFLICT (content): Merge conflict in ARCHITECTURE.md
+Auto-merging Proofs.lean
+CONFLICT (content): Merge conflict in Proofs.lean
+CONFLICT (modify/delete): Proofs/HadwigerNelson/Instances/SeamFractional.lean deleted in main and modified in fs131-ksf1.  Version fs131-ksf1 of Proofs/HadwigerNelson/Instances/SeamFractional.lean left in tree.
+CONFLICT (modify/delete): Proofs/HadwigerNelson/RationalFour/Basic.lean deleted in fs131-ksf1 and modified in main.  Version main of Proofs/HadwigerNelson/RationalFour/Basic.lean left in tree.
+CONFLICT (modify/delete): Proofs/HadwigerNelson/RationalFour/Compulsion.lean deleted in fs131-ksf1 and modified in main.  Version main of Proofs/HadwigerNelson/RationalFour/Compulsion.lean left in tree.
+CONFLICT (modify/delete): Proofs/HadwigerNelson/RationalFour/Forbid.lean deleted in fs131-ksf1 and modified in main.  Version main of Proofs/HadwigerNelson/RationalFour/Forbid.lean left in tree.
+CONFLICT (modify/delete): Proofs/HadwigerNelson/RationalFour/Order.lean deleted in fs131-ksf1 and modified in main.  Version main of Proofs/HadwigerNelson/RationalFour/Order.lean left in tree.
