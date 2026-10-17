@@ -1,0 +1,43 @@
+elaboration took 921ms
+type checking took 10.2s
+cumulative profiling times:
+	attribute application 0.0209ms
+	compilation (IR) 64.4ms
+	compilation (LCNF base) 93.5ms
+	compilation (LCNF impure) 107ms
+	compilation (LCNF mono) 78.1ms
+	elaboration 922ms
+	fix level params 0.45ms
+	instantiate metavars 0.909ms
+	let-to-have transformation 11.7ms
+	linting 17.6ms
+	parsing 18ms
+	process pre-definitions 21.6ms
+	share common exprs 3.81ms
+	tactic execution 0.418ms
+	type checking 10.2s
+	typeclass inference 217ms
+	Command being timed: "lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false data/fs131/isf1/probes/G27ProbeA.lean"
+	User time (seconds): 11.67
+	System time (seconds): 0.37
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:12.04
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1962096
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 47827
+	Voluntary context switches: 158
+	Involuntary context switches: 166
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+exit=0

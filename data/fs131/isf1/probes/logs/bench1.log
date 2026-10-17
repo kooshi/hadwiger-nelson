@@ -1,0 +1,53 @@
+elaboration took 1.84s
+compilation (LCNF base) took 241ms
+compilation (LCNF mono) took 139ms
+compilation (LCNF impure) took 174ms
+compilation (IR) took 156ms
+type checking took 1.05s
+type checking took 1.99s
+type checking took 2.64s
+type checking took 2.9s
+type checking took 3.8s
+type checking took 4.86s
+type checking took 5.18s
+cumulative profiling times:
+	attribute application 0.114ms
+	compilation (IR) 156ms
+	compilation (LCNF base) 242ms
+	compilation (LCNF impure) 174ms
+	compilation (LCNF mono) 184ms
+	elaboration 1.87s
+	fix level params 1.14ms
+	instantiate metavars 2.6ms
+	let-to-have transformation 29.9ms
+	linting 37.1ms
+	parsing 35.7ms
+	process pre-definitions 55.8ms
+	share common exprs 15ms
+	tactic execution 2.51ms
+	type checking 22.4s
+	typeclass inference 429ms
+	Command being timed: "lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false data/fs131/isf1/probes/bench/Bench1.lean"
+	User time (seconds): 8.04
+	System time (seconds): 0.32
+	Percent of CPU this job got: 101%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:08.27
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 908308
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 3
+	Minor (reclaiming a frame) page faults: 45701
+	Voluntary context switches: 1181
+	Involuntary context switches: 555
+	Swaps: 0
+	File system inputs: 144
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+exit=0

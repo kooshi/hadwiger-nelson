@@ -33,7 +33,12 @@ open scoped ENNReal
 
 /-- `ℚ(√3, √11)` is a number field: a subfield of `fieldOfRadicands {3, 11}`. -/
 theorem numberField_seamField : NumberField seamField := by
-  sorry
+  let f : seamField →+* SquareClass.fieldOfRadicands {3, 11} :=
+    { toFun := fun x => ⟨x, SquareClass.seamField_le_fieldOfRadicands x.2⟩
+      map_one' := rfl, map_mul' := fun _ _ => rfl, map_zero' := rfl, map_add' := fun _ _ => rfl }
+  have hf : Function.Injective f := fun _ _ h =>
+    Subtype.ext (congrArg (fun z : SquareClass.fieldOfRadicands {3, 11} => (z : ℝ)) h)
+  exact { to_finiteDimensional := Module.Finite.of_injective f.toRatAlgHom.toLinearMap hf }
 
 instance : NumberField seamField := numberField_seamField
 
