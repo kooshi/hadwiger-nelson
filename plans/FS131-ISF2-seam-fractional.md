@@ -152,7 +152,7 @@ landing — `SeamFractional`'s and `G27`'s statements are FS131-ISF1's, `Rationa
   `Rows`/`Chk`/`St` modules 264); 12 private records are not audited. `--coverage` after filing: all 485 filed under their class
   (`audit-coverage.out`). Controls: `--plant` (an unknown axiom, a `sorryAx`, a declared import, a misfiled record) — all four
   reported, exit 1 (`audit-plant.out`); the print without its planted line — BLIND, exit 2 (`audit-blind-control.out`). The
-  records include eight `f.eq_def` equation lemmas, as 37 earlier records do.
+  records include ten `f.eq_def` equation lemmas, as 37 earlier records do.
 * **`scripts/vacuity-baseline.txt`**'s header: `declarations=23377  refutations-skipped=247  sites=1477` (the second line
   unchanged), reconciled in 3.3.
 * **Unchanged**, each by reading: `scripts/axioms-controls.txt` (its `baseline` and `imported_declared` controls read only the
@@ -216,5 +216,5 @@ only, never committed); the build rebuilt `Forbid` and the root, 0 warnings, 14 
 other 13 linters passed (`data/fs131/isf2/lintplant/lint-planted.log`). Restored by `git checkout` (the source's hash equal to
 its hash before the plant); rebuilt (2 modules, 0 warnings, 13 m 58 s); the lint exit 0; **every one of the 2,269 compiled
 `.olean`s byte-identical to build 1's** (`logs/oleans-after-restore.sha256`), so stage 2's dumps describe the gated build.
-`check_architecture`'s control was not planted here: FS131-IRF1 planted it on this file's checker unchanged (its
-`plants/arch-plant.out`).
+`check_architecture`'s control was not planted here: FS131-IRF1 planted it, and `tools/check_architecture.py` is unchanged
+since (last changed `acda212b0`, 2026-09-22; IRF1's `data/fs131/irf1/plants/arch-plant.out`).
