@@ -1,0 +1,24 @@
+== ti:"Überdeckungssätze" & au:Hadwiger
+Traceback (most recent call last):
+  File "<string>", line 4, in <module>
+    for r in d.get('result',[]):
+             ~~~~~^^^^^^^^^^^^^
+TypeError: 'NoneType' object is not iterable
+== ti:"Unit-distance graphs in Minkowski metric spaces"
+0716.05022 | Unit-Distance Graphs in Minkowski metric spaces | Geom. Dedicata 37, No. 3, 345-356 (1991).
+total 1
+== ti:"Graph coloring problems" & au:Toft
+0855.05054 | Graph coloring problems | New York, NY: John Wiley \& Sons. xix, 295 p. (1995).
+total 1
+== ti:"Finite point configurations" & au:Pach
+0914.51012 | Finite point configurations | Goodman, Jacob E. (ed.) et al., Handbook of discrete and computational geometry.
+total 1
+== ti:"Erdős on unit distances"
+1035.05037 | Erdős on unit distances and the Szemerédi-Trotter theorems | Halász, Gábor (ed.) et al., Paul Erdős and his mathematics II. Based on the conf
+total 1
+== au:Hadwiger & py:1944 & so:"Port. Math."
+0060.40610 | Ein Überdeckungssatz für den Euklidischen Raum | Port. Math. 4, 140-144 (1944).
+total 1
+== au:Hadwiger & ti:"Euklidischen Raum" & py:1944
+0060.40610 | Ein Überdeckungssatz für den Euklidischen Raum | Port. Math. 4, 140-144 (1944).
+total 1
