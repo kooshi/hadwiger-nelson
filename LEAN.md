@@ -541,6 +541,15 @@ the `.olean` would. Settle every hand-written module before starting a long gene
 - A sign change of an integer polynomial at a simple real root needs no derivative theorem: `g = (X − θ)·h` (`mul_divByMonic_eq_iff_isRoot`), `g′(θ) = h(θ)` by `derivative_mul`, and `h`'s sign near `θ` by `(h.continuous.continuousAt).eventually (gt_mem_nhds _)` with `Metric.eventually_nhds_iff` (`Rigidity.exists_Ioo_aeval_neg`, FS131-IRU1).
 - `Polynomial.scaleRoots_eval₂_mul` at `Int.castRingHom R` gives the homogeneous value `kⁿ f(x/k)`; `rw [eq_intCast]` (not `simp only [Int.coe_castRingHom]`, which leaves a β-redex `(fun x => ↑x) …` that `rw` cannot see) turns the applied cast hom into the cast (`Rigidity.scaleRoots_eval_eq`, FS131-IRU1).
 - At the pin `Mathlib.Data.Fintype.Units` is deprecated for `Mathlib.Algebra.GroupWithZero.Units.Fintype` (an import warning, which the gate reads as a warning) (FS131-KRU1).
+- **A coercion `ℚ → ℍ[ℚ]` elaborates to `Rat.cast` (`Quaternion.instRatCast`), not to `QuaternionAlgebra.coe`**, because
+  `ℍ[ℚ]` is a division ring. So the stored statements of `inv_prime_mem_comp` and `inv_odd_mem_comp` are about
+  `(Rat.cast (p : ℚ) : ℍ[ℚ])⁻¹` — the quaternion inverse of the cast — and Mathlib's `coe_inv`, `coe_mul` do not rewrite
+  them. Read from the skeleton's dump (`Inv.inv … (Rat.cast … (Nat.cast p))`); the two helpers `ratCast_inv`, `ratCast_mul`
+  carry them to rational arithmetic. The statement means what the plan says (`(Rat.cast p)⁻¹ = Rat.cast p⁻¹`, `ratCast_inv`).
+- **An anonymous constructor ascribed `ℍ[ℚ]` elaborates at the unfolded type `QuaternionAlgebra ℚ (-1) 0 (-1)`** (printed
+  `ℍ[ℚ,-1,-1]`), and `∈ pr` or `*` against it then fails instance search. The skeleton's statements are not affected (each such
+  constructor meets an expected type from `val` or an `Eq` at `ℍ[ℚ]`); in proofs the constructor is named by `set` or the
+  statement takes the point as a variable with an equation (`mem_pr_of_div_odd`'s `hq`).
 
 ## The package
 
