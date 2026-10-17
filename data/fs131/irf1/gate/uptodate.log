@@ -1,0 +1,3 @@
+slot: admitted irf1-uptodate: mem 6 GiB (hard cap), cpus 2,3,4,5
+All targets up-to-date (6550 jobs).
+exit=0 wall=5s

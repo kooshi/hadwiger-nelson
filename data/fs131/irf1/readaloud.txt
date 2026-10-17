@@ -1,0 +1,130 @@
+HadwigerNelson.RationalFour.forall_coloring_eq_iff : ∀ (x y : Fin 4 → ℚ),
+  (∀ (c : HadwigerNelson.RationalFour.ratFourGraph.Coloring (Fin 4)), c x = c y) ↔
+    x = y ∨ 1 ≤ padicValRat 2 (HadwigerNelson.RationalFour.sqDist4 x y)
+'HadwigerNelson.RationalFour.forall_coloring_eq_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.RationalFour.forall_coloring_ne_iff : ∀ (x y : Fin 4 → ℚ),
+  (∀ (c : HadwigerNelson.RationalFour.ratFourGraph.Coloring (Fin 4)), c x ≠ c y) ↔
+    padicValRat 2 (HadwigerNelson.RationalFour.sqDist4 x y) = 0 ∧ x ≠ y
+'HadwigerNelson.RationalFour.forall_coloring_ne_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.RationalFour.exists_coloring_eq_and_ne_iff : ∀ (x y : Fin 4 → ℚ),
+  ((∃ c, c x = c y) ∧ ∃ c, c x ≠ c y) ↔ padicValRat 2 (HadwigerNelson.RationalFour.sqDist4 x y) < 0
+'HadwigerNelson.RationalFour.exists_coloring_eq_and_ne_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.RationalFour.coloring_eq_of_one_le_padicValRat : ∀
+  (c : HadwigerNelson.RationalFour.ratFourGraph.Coloring (Fin 4)) {x y : Fin 4 → ℚ},
+  1 ≤ padicValRat 2 (HadwigerNelson.RationalFour.sqDist4 x y) → c x = c y
+'HadwigerNelson.RationalFour.coloring_eq_of_one_le_padicValRat' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+HadwigerNelson.RationalFour.coloring_ne_of_padicValRat_eq_zero : ∀
+  (c : HadwigerNelson.RationalFour.ratFourGraph.Coloring (Fin 4)) {x y : Fin 4 → ℚ},
+  x ≠ y → padicValRat 2 (HadwigerNelson.RationalFour.sqDist4 x y) = 0 → c x ≠ c y
+'HadwigerNelson.RationalFour.coloring_ne_of_padicValRat_eq_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+@HadwigerNelson.RationalFour.exists_coloring_forbidding_iff : ∀ {d : ℝ},
+  0 < d →
+    ((∃ c, ∀ (x y : Fin 4 → ℚ), ↑(HadwigerNelson.RationalFour.sqDist4 x y) = d ^ 2 → c x ≠ c y) ↔
+      (∀ (r : ℚ), ↑r ≠ d ^ 2) ∨ ∃ p q, Odd p ∧ Odd q ∧ d ^ 2 = ↑p / ↑q)
+'HadwigerNelson.RationalFour.exists_coloring_forbidding_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+@HadwigerNelson.RationalFour.exists_coloring_forbidding_iff_padicValRat : ∀ {r : ℚ},
+  0 < r → ((∃ c, ∀ (x y : Fin 4 → ℚ), HadwigerNelson.RationalFour.sqDist4 x y = r → c x ≠ c y) ↔ padicValRat 2 r = 0)
+'HadwigerNelson.RationalFour.exists_coloring_forbidding_iff_padicValRat' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+@HadwigerNelson.RationalFour.coloring_forbids_of_odd : ∀ {p q : ℕ},
+  Odd p →
+    Odd q →
+      ∀ (c : HadwigerNelson.RationalFour.ratFourGraph.Coloring (Fin 4)) {x y : Fin 4 → ℚ},
+        HadwigerNelson.RationalFour.sqDist4 x y = ↑p / ↑q → c x ≠ c y
+'HadwigerNelson.RationalFour.coloring_forbids_of_odd' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.RationalFour.exists_equiv_coloring_add_eq_residue : ∀
+  (c : HadwigerNelson.RationalFour.quatGraph.Coloring (Fin 4)) (x₀ : Quaternion ℚ),
+  ∃ e, ∀ z ∈ HadwigerNelson.RationalFour.comp, c (x₀ + z) = e (HadwigerNelson.RationalFour.residue z)
+'HadwigerNelson.RationalFour.exists_equiv_coloring_add_eq_residue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+HadwigerNelson.RationalFour.coloring_eq_of_forall_tetra : ∀
+  (c c' : HadwigerNelson.RationalFour.quatGraph.Coloring (Fin 4)) {x₀ : Quaternion ℚ},
+  (∀ (i : Fin 4), c (x₀ + HadwigerNelson.RationalFour.tetra i) = c' (x₀ + HadwigerNelson.RationalFour.tetra i)) →
+    ∀ {z : Quaternion ℚ}, z ∈ HadwigerNelson.RationalFour.comp → c (x₀ + z) = c' (x₀ + z)
+'HadwigerNelson.RationalFour.coloring_eq_of_forall_tetra' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.RationalFour.coloring_eq_of_eqOn_isOpen : ∀
+  (c c' : HadwigerNelson.RationalFour.ratFourGraph.Coloring (Fin 4)) {U : Set (Fin 4 → ℝ)},
+  IsOpen U → (∃ x, (fun i => ↑(x i)) ∈ U) → (∀ (x : Fin 4 → ℚ), (fun i => ↑(x i)) ∈ U → c x = c' x) → c = c'
+'HadwigerNelson.RationalFour.coloring_eq_of_eqOn_isOpen' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.RationalFour.nonempty_iso_unitDistance : Nonempty
+  (HadwigerNelson.RationalFour.ratFourGraph ≃g
+    SimpleGraph.induce HadwigerNelson.RationalFour.ratPoints (HadwigerNelson.unitDistance (EuclideanSpace ℝ (Fin 4))))
+'HadwigerNelson.RationalFour.nonempty_iso_unitDistance' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.RationalFour.forall_quatColoring_eq_iff : ∀ (x y : Quaternion ℚ),
+  (∀ (c : HadwigerNelson.RationalFour.quatGraph.Coloring (Fin 4)), c x = c y) ↔ x - y ∈ HadwigerNelson.RationalFour.pr
+'HadwigerNelson.RationalFour.forall_quatColoring_eq_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.RationalFour.forall_quatColoring_ne_iff : ∀ (x y : Quaternion ℚ),
+  (∀ (c : HadwigerNelson.RationalFour.quatGraph.Coloring (Fin 4)), c x ≠ c y) ↔
+    x - y ∈ HadwigerNelson.RationalFour.comp ∧ x - y ∉ HadwigerNelson.RationalFour.pr
+'HadwigerNelson.RationalFour.forall_quatColoring_ne_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.RationalFour.exists_quatColoring_eq_and_ne_iff : ∀ (x y : Quaternion ℚ),
+  ((∃ c, c x = c y) ∧ ∃ c, c x ≠ c y) ↔ x - y ∉ HadwigerNelson.RationalFour.comp
+'HadwigerNelson.RationalFour.exists_quatColoring_eq_and_ne_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+HadwigerNelson.RationalFour.coloring_eq_of_sqDist_two : ∀ (c : HadwigerNelson.RationalFour.quatGraph.Coloring (Fin 4))
+  {x y : Quaternion ℚ}, HadwigerNelson.RationalFour.sqDist x y = 2 → c x = c y
+'HadwigerNelson.RationalFour.coloring_eq_of_sqDist_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.RationalFour.mem_comp_iff : ∀ (z : Quaternion ℚ),
+  z ∈ HadwigerNelson.RationalFour.comp ↔ 0 ≤ HadwigerNelson.RationalFour.val z
+'HadwigerNelson.RationalFour.mem_comp_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.RationalFour.zero_le_val_iff : ∀ (z : Quaternion ℚ),
+  0 ≤ HadwigerNelson.RationalFour.val z ↔
+    ∃ m a b c d,
+      Odd m ∧
+        a ≡ b [ZMOD 2] ∧
+          a ≡ c [ZMOD 2] ∧
+            a ≡ d [ZMOD 2] ∧
+              z = { re := ↑a / (2 * ↑m), imI := ↑b / (2 * ↑m), imJ := ↑c / (2 * ↑m), imK := ↑d / (2 * ↑m) }
+'HadwigerNelson.RationalFour.zero_le_val_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.RationalFour.mem_pr_iff : ∀ (z : Quaternion ℚ),
+  z ∈ HadwigerNelson.RationalFour.pr ↔ z = 0 ∨ 1 ≤ HadwigerNelson.RationalFour.val z
+'HadwigerNelson.RationalFour.mem_pr_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+@HadwigerNelson.RationalFour.existsUnique_tetra_sub_mem_pr : ∀ {z : Quaternion ℚ},
+  z ∈ HadwigerNelson.RationalFour.comp → ∃! i, z - HadwigerNelson.RationalFour.tetra i ∈ HadwigerNelson.RationalFour.pr
+'HadwigerNelson.RationalFour.existsUnique_tetra_sub_mem_pr' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.RationalFour.nonempty_coloring : Nonempty (HadwigerNelson.RationalFour.quatGraph.Coloring (Fin 4))
+'HadwigerNelson.RationalFour.nonempty_coloring' depends on axioms: [propext, Classical.choice, Quot.sound]
+HadwigerNelson.RationalFour.nonempty_ratFourGraph_coloring : Nonempty
+  (HadwigerNelson.RationalFour.ratFourGraph.Coloring (Fin 4))
+'HadwigerNelson.RationalFour.nonempty_ratFourGraph_coloring' depends on axioms: [propext, Classical.choice, Quot.sound]
+def HadwigerNelson.RationalFour.sqDist4 : (Fin 4 → ℚ) → (Fin 4 → ℚ) → ℚ :=
+fun x y => ∑ i, (x i - y i) ^ 2
+def HadwigerNelson.RationalFour.ratFourGraph : SimpleGraph (Fin 4 → ℚ) :=
+{ Adj := fun x y => HadwigerNelson.RationalFour.sqDist4 x y = 1,
+  symm := HadwigerNelson.RationalFour.ratFourGraph._proof_1,
+  loopless := HadwigerNelson.RationalFour.ratFourGraph._proof_2 }
+def HadwigerNelson.RationalFour.sqDist : Quaternion ℚ → Quaternion ℚ → ℚ :=
+fun x y => Quaternion.normSq (x - y)
+def HadwigerNelson.RationalFour.quatGraph : SimpleGraph (Quaternion ℚ) :=
+{ Adj := fun x y => HadwigerNelson.RationalFour.sqDist x y = 1, symm := HadwigerNelson.RationalFour.quatGraph._proof_1,
+  loopless := HadwigerNelson.RationalFour.quatGraph._proof_2 }
+def HadwigerNelson.RationalFour.toQuat : (Fin 4 → ℚ) ≃ Quaternion ℚ :=
+(QuaternionAlgebra.equivTuple (-1) 0 (-1)).symm
+def HadwigerNelson.RationalFour.ratPoints : Set (EuclideanSpace ℝ (Fin 4)) :=
+{p | ∀ (i : Fin 4), ∃ q, ↑q = p.ofLp i}
+def HadwigerNelson.RationalFour.val : Quaternion ℚ → ℤ :=
+fun z => padicValRat 2 (Quaternion.normSq z)
+def HadwigerNelson.RationalFour.unitSphere : Set (Quaternion ℚ) :=
+{u | Quaternion.normSq u = 1}
+def HadwigerNelson.RationalFour.comp : AddSubgroup (Quaternion ℚ) :=
+AddSubgroup.closure HadwigerNelson.RationalFour.unitSphere
+def HadwigerNelson.RationalFour.pr : AddSubgroup (Quaternion ℚ) :=
+AddSubgroup.map (AddMonoidHom.mulLeft HadwigerNelson.RationalFour.onePlusI) HadwigerNelson.RationalFour.comp
+def HadwigerNelson.RationalFour.tetra : Fin 4 → Quaternion ℚ :=
+![0, 1, HadwigerNelson.RationalFour.hur, HadwigerNelson.RationalFour.hur']
+def HadwigerNelson.RationalFour.hur : Quaternion ℚ :=
+{ re := 1 / 2, imI := 1 / 2, imJ := 1 / 2, imK := 1 / 2 }
+def HadwigerNelson.RationalFour.hur' : Quaternion ℚ :=
+{ re := 1 / 2, imI := 1 / 2, imJ := 1 / 2, imK := -1 / 2 }
+def HadwigerNelson.RationalFour.residue : Quaternion ℚ → Fin 4 :=
+fun z => if hz : z ∈ HadwigerNelson.RationalFour.comp then ⋯.choose else 0
+def HadwigerNelson.RationalFour.residueCol : (Quaternion ℚ ⧸ HadwigerNelson.RationalFour.comp → Fin 4) →
+  Quaternion ℚ → Fin 4 :=
+fun a x => HadwigerNelson.RationalFour.residue (x - Quotient.out ↑x) + a ↑x

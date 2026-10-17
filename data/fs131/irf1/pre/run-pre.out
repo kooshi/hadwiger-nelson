@@ -1,0 +1,5 @@
+dupnames exit=0
+axioms exit=0
+vacuity exit=0
+assumptions exit=0
+done

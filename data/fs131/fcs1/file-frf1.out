@@ -1,0 +1,14 @@
+D1                         CLAUDE.md                  matches=1  old='`declarations=22728 refutations-skipped=246 sites='
+D2                         CLAUDE.md                  matches=1  old='the current audit reads 11043 clean and 5 declared'
+D3                         LEDGER.md                  matches=1  old='(?m)^\\| 168 \\|.*$'
+D4                         CLOSED-QUESTIONS.md        matches=1  old='**Not claimed:** a gate; the kernel.'
+D5                         plans/KERNEL-HOLDS.md      matches=1  old='the cell family (rows 34–41). Also χ(Heule-510) = '
+D6                         CLAUDE.md                  matches=1  old='Last filed: \\*\\*the ring of unit vectors\\*\\*.*?; b'
+D8-Zaks1999                BIBLIOGRAPHY.md            matches=1  old='(?m)^\\| \\*\\*\\[Zaks1999\\]\\*\\*.*$'
+D8-BendaPerles2000         BIBLIOGRAPHY.md            matches=1  old='(?m)^\\| \\*\\*\\[BendaPerles2000\\]\\*\\*.*$'
+D8-Johnson1990             BIBLIOGRAPHY.md            matches=1  old='(?m)^\\| \\*\\*\\[Johnson1990\\]\\*\\*.*$'
+D8-Johnson2006             BIBLIOGRAPHY.md            matches=1  old='(?m)^\\| \\*\\*\\[Johnson2006\\]\\*\\*.*$'
+D8-KubickiLehelMorayne2002 BIBLIOGRAPHY.md            matches=1  old='(?m)^\\| \\*\\*\\[KubickiLehelMorayne2002\\]\\*\\*.*$'
+LEAN                       LEAN.md                    matches=1  old='\n\n## The package\n'
+moved entry: before it **the ring of unit vectors** (FS131-KRU1, FS131-IRU1, FS131-IRU2, 2026-10-16: fi ... d three; rows 100, 105; no value of `χ(ℝ²)` moved)
+written

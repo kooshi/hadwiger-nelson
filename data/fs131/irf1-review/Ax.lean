@@ -1,0 +1,13 @@
+import Proofs
+open HadwigerNelson
+#print axioms RationalFour.forall_coloring_eq_iff
+#print axioms RationalFour.forall_coloring_ne_iff
+#print axioms RationalFour.exists_coloring_eq_and_ne_iff
+#print axioms RationalFour.exists_coloring_forbidding_iff
+#print axioms RationalFour.exists_coloring_forbidding_iff_padicValRat
+#print axioms RationalFour.coloring_forbids_of_odd
+#print axioms RationalFour.exists_equiv_coloring_add_eq_residue
+#print axioms RationalFour.coloring_eq_of_forall_tetra
+#print axioms RationalFour.coloring_eq_of_eqOn_isOpen
+#print axioms RationalFour.nonempty_iso_unitDistance
+#print axioms RationalFour.nonempty_ratFourGraph_coloring

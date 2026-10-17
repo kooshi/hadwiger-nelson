@@ -5,6 +5,8 @@ first, moved here verbatim at FS131-FC5 (2026-10-14) under the file's size budge
 not need to a file read by address"). Each entry describes the filing as it was made; the front page and `LEDGER.md` hold what is current.
 A filing that leaves the "Last updated" line is added at the top.*
 
+before it **the ring of unit vectors** (FS131-KRU1, FS131-IRU1, FS131-IRU2, 2026-10-16: five modules through the gate on `b261d0f12` — Lemma C′ as typed, `R = O′` with no ramified stable dyadic prime, and `2^a·O′ ⊆ R` at every real number field; a stable prime at every real number field with no Chebotarev, so the plane over every real number field has infinitely many components; on the standard three; rows 100, 105; no value of `χ(ℝ²)` moved)
+
 before it **the density form of the collapse** (FS131-KFR1, FS131-IFR1, FS131-IFR2, 2026-10-16: four modules through the gate on `b8cef1f36`, among them `α₁(F²) = max(m₁(ℝ²), ⨆_P r_P)` at every real number field with no hypothesis, `χ_f(F²) = 1/α_loc(F)`, the fractional collapse, and a finite triangle-free six-chromatic unit-distance graph. This is row 129's field clause; no value of `χ(ℝ²)` moved.)
 
 before it **five colours by field and by class** (FS131-KCS1, FS131-ICS1, 2026-10-16: four modules through the gate on `960882257` — for squarefree `m`, `χ(ℚ(√m)²) ≥ 5` exactly when `m ≡ 47, 143, 167 (mod 168)`; `χ = L = 5` at each such squarefree `d` that is a square modulo 11 or 19; `L(F) ≥ 5` exactly when no conjugation-fixed prime of `F(i)` is on an arithmetic list (CLS in full), and the two readings of `L` agree through five; `χ(ℚ(√23, ∛2)²) = 5`, a field with a complex place; stated in `plans/KERNEL-HOLDS.md`; no value of `χ(ℝ²)` moved)

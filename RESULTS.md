@@ -255,6 +255,27 @@ each in full. "Prior art: not found in print" reports the searches recorded in t
   this project's.
 - **Ledger.** Rows 100, 105 and 168.
 
+### 12. Which distances a four-colouring of rational four-space can avoid
+
+- **Statement.** `ratFourGraph` is the unit-distance graph on `ℚ⁴` (`sqDist4 x y = 1`). For every `d > 0`: a proper
+  4-colouring of it with no monochromatic pair at squared distance `d²` exists iff `d²` is not rational or `d² = p/q` with
+  `p`, `q` odd. In every proper 4-colouring, `x ≠ y` are forced equal iff `v₂(|x − y|²) ≥ 1` and forced different iff
+  `v₂(|x − y|²) = 0`; for `v₂ < 0` both happen in some colourings. On each component, every proper 4-colouring is the
+  residue map onto `𝔽₄` up to a bijection of the colours (A3). Rigidity: two proper 4-colourings equal on `U ∩ ℚ⁴`, `U`
+  open and meeting `ℚ⁴`, are equal.
+- **Lean.** `RationalFour.exists_coloring_forbidding_iff`, `RationalFour.exists_coloring_forbidding_iff_padicValRat`,
+  `RationalFour.coloring_forbids_of_odd`, `RationalFour.forall_coloring_eq_iff`, `RationalFour.forall_coloring_ne_iff`,
+  `RationalFour.exists_coloring_eq_and_ne_iff`, `RationalFour.exists_equiv_coloring_add_eq_residue`,
+  `RationalFour.coloring_eq_of_forall_tetra`, `RationalFour.coloring_eq_of_eqOn_isOpen`; the read-back to the Euclidean
+  unit-distance graph, `RationalFour.nonempty_iso_unitDistance`; the model, `RationalFour.nonempty_ratFourGraph_coloring`.
+- **Axioms.** std3, every one.
+- **Whose.** The question is `[Johnson2006]` p. 212's, posed again in `[Johnson2010]` p. 169. The answer, the compulsion law
+  in full and the structure clause: prior art not found in print (FS131-PAS2, FS131-PAS3). In print: `[Zaks1999]` Lemmas 1–2
+  and Thm 3; the component of the origin, `[BendaPerles2000]` pp. 123–125; the *if* half, `[Johnson1990]` Thm 3; the
+  similarity, `[BauJohnsonNoble2021]` Thm 3.3; rigidity, `[KubickiLehelMorayne2002]` Thm 4.3, which the structure clause
+  implies. The derivation is this project's (two minds, one blind); the kernel proof is this project's.
+- **Ledger.** Row 169; `CLOSED-QUESTIONS.md` § 3.
+
 ## Other people's results, checked here
 
 In each case below the theorem is its authors'. What this project contributed is said in the "whose" line.
@@ -351,6 +372,8 @@ is listed in `ARCHITECTURE.md` § 5. What landing each in Lean would mean is `RO
 - **[BardestaniMallahiKarai2017]** M. Bardestani, K. Mallahi-Karai, *On a generalization of the Hadwiger–Nelson problem*,
   Israel J. Math. 217 (2017) 313–335; arXiv:1507.05300.
 - **[Bauer1916]** M. Bauer, *Zur Theorie der algebraischen Zahlkörper*, Math. Ann. 77 (1916) 353–356.
+- **[BauJohnsonNoble2021]** S. Bau, P. Johnson, M. Noble, *On single-distance graphs on the rational points in Euclidean
+  spaces*, Canad. Math. Bull. 64(1) (2021) 13–24.
 - **[BendaPerles2000]** M. Benda, M. Perles, *Colorings of metric spaces*, Geombinatorics IX(3) (2000) 113–126 (written in
   1976).
 - **[CGHO2025bg]** N. Chandgotia, S. Gangloff, B. Hellouin de Menibus, P. Oprocha, *Undecidability of the block gluing
@@ -377,6 +400,8 @@ is listed in `ARCHITECTURE.md` § 5. What landing each in Lean would mean is `RO
   Geombinatorics XXXII(1) (2022) 5–28.
 - **[Heule2018]** M. J. H. Heule, *Computing small unit-distance graphs with chromatic number 5*, Geombinatorics 28 (2018);
   arXiv:1805.12181.
+- **[Johnson1990]** P. D. Johnson Jr., *Two-colorings of a dense subgroup of ℚⁿ that forbid many distances*, Discrete Math.
+  79 (1989/90) 191–195.
 - **[Johnson1996fcn]** P. D. Johnson Jr., *About two definitions of the fractional chromatic number*, Geombinatorics V(3)
   (1996) 99–108.
 - **[Johnson2000]** P. D. Johnson Jr., *Problems posed in or arising from "Colorings of metric spaces": status report*,
@@ -387,6 +412,10 @@ is listed in `ARCHITECTURE.md` § 5. What landing each in Lean would mean is `RO
   compendium*, Geombinatorics XVI(1) (2006) 209–218.
 - **Kruskal (2008)** C. P. Kruskal, *The chromatic number of the plane: the bounded case*, J. Comput. Syst. Sci. 74(4) (2008)
   598–627.
+- **[Johnson2010]** P. D. Johnson Jr., *Euclidean distance graphs on the rational points*, in A. Soifer (ed.), *Ramsey
+  Theory: Yesterday, Today, and Tomorrow*, Birkhäuser 2011, 163–176.
+- **[KubickiLehelMorayne2002]** G. Kubicki, J. Lehel, M. Morayne, *Patch colorings and rigid colorings of the rational
+  n-space*, J. Combin. Theory Ser. B 84 (2002) 45–53.
 - **[LiSu2026]** S. Li, Y. Su, *Every n points in the plane contain (m1 + o(1)) n points with no unit distance*,
   arXiv:2610.15424 (2026).
 - **[Madore2015]** D. A. Madore, *The Hadwiger–Nelson problem over certain fields*, arXiv:1509.07023 (2015).
@@ -409,3 +438,5 @@ is listed in `ARCHITECTURE.md` § 5. What landing each in Lean would mean is `RO
 - **[Weil1948]** A. Weil, *On some exponential sums*, Proc. Nat. Acad. Sci. USA 34 (1948) 204–207.
 - **[Woodall1973]** D. R. Woodall, *Distances realized by sets covering the plane*, J. Combin. Theory Ser. A 14 (1973)
   187–200.
+- **[Zaks1999]** J. Zaks, *On odd integral distances rational graph in four-dimensions*, Geombinatorics IX(2) (1999)
+  90–95.

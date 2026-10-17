@@ -1,0 +1,45 @@
+slot: admitted irf1-uptodate: mem 6 GiB (hard cap), cpus 0,1
+⚠ [6311/6344] Replayed Proofs.HadwigerNelson.RationalFour.Basic
+warning: Proofs/HadwigerNelson/RationalFour/Basic.lean:68:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Basic.lean:84:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Basic.lean:118:0: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Basic.lean:121:0: declaration uses `sorry`
+⚠ [6313/6344] Replayed Proofs.HadwigerNelson.RationalFour.Order
+warning: Proofs/HadwigerNelson/RationalFour/Order.lean:35:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Order.lean:42:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Order.lean:58:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Order.lean:63:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Order.lean:68:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Order.lean:72:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Order.lean:76:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Order.lean:85:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Order.lean:88:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Order.lean:103:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Order.lean:108:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Order.lean:120:0: declaration uses `sorry`
+⚠ [6314/6344] Replayed Proofs.HadwigerNelson.RationalFour.Compulsion
+warning: Proofs/HadwigerNelson/RationalFour/Compulsion.lean:32:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Compulsion.lean:39:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Compulsion.lean:44:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Compulsion.lean:62:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Compulsion.lean:74:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Compulsion.lean:79:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Compulsion.lean:86:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Compulsion.lean:91:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Compulsion.lean:96:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Compulsion.lean:105:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Compulsion.lean:110:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Compulsion.lean:116:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Compulsion.lean:136:0: declaration uses `sorry`
+⚠ [6315/6344] Replayed Proofs.HadwigerNelson.RationalFour.Forbid
+warning: Proofs/HadwigerNelson/RationalFour/Forbid.lean:27:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Forbid.lean:31:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Forbid.lean:37:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Forbid.lean:43:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Forbid.lean:51:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Forbid.lean:59:0: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/RationalFour/Forbid.lean:63:0: declaration uses `sorry`
+⚠ [6344/6551] Replayed Proofs.HadwigerNelson.Instances.SeamFractional
+warning: Proofs/HadwigerNelson/Instances/SeamFractional.lean:35:8: declaration uses `sorry`
+warning: Proofs/HadwigerNelson/Instances/SeamFractional.lean:44:8: declaration uses `sorry`
+All targets up-to-date (6551 jobs).
