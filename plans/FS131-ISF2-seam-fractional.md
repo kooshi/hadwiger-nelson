@@ -72,3 +72,68 @@ build and after it.
    `data/fs131/isf2/`; every count change explained against `main`'s last gate (`data/fs131/irf1/gate/`); the new vacuity
    sites with each structure hypothesis's inhabitant named; `#print axioms` of every head. A saved stage.
 3. The drafts' counts, restated with their slots. The report.
+
+## Stage 2 — SAVED: the merge, the edit, the build green; no statement moved
+
+### 2.1 The merge (`6b9fc22ef`)
+
+`git merge main` (`main` at `1c8e07920`: `f45252bf8` and the inventory line for item 1094) stopped on the seven conflicts of
+§ 1.2, resolved as ruled. `ARCHITECTURE.md` and `Proofs.lean` by `data/fs131/isf2/scripts/union_conflicts.py` (each block ours
+then theirs; it refuses a diff3 base section): `ARCHITECTURE.md` block 1, `main`'s four `RationalFour` rows (ours empty);
+block 2, this branch's 52 rows (`SeamFractional` and the 51 `Plane/G27/*`; theirs empty); `Proofs.lean`, the branch's two
+imports then `main`'s one. The five modify/delete conflicts by `git add` of the version left in the tree, each checked equal:
+the four `RationalFour` files `git diff --quiet main` (and `main` equals FS131-IRF1's gated `6ab6248fe` in `Proofs/`,
+`scripts/` and the package files), `SeamFractional` `git diff --quiet HEAD`. The index before the commit held only paths
+where `main` differs from the branch. After it: the tree differs from `main` in exactly this branch's 53 files (`Proofs.lean`,
+`SeamFractional`, the 51 `G27` modules) and from the branch's `39a5dd2a4` (with stage 1) in exactly `main`'s four modules,
+`Proofs.lean`, `scripts/Axioms.lean`, `scripts/vacuity-baseline.txt` and `main`'s plans. `tools/check_architecture.py` PASS
+(`data/fs131/isf2/arch-merge.out`).
+
+### 2.2 The edit (`d3d9afafa`)
+
+`data/fs131/isf2/docstring-edit.diff`: in each module docstring's **Not claimed** paragraph, `(prior art: pending` /
+`` `[KubickiLehelMorayne2002]`). `` became `(prior art: not found in print` / `` (FS131-PAS2, FS131-PAS3; `CLOSED-QUESTIONS.md`
+§ 3)). `` — two lines in each file, nothing else. The ruling's words are taken literally, so the sentence closes two
+parentheses (`novelty (prior art: not found in print (…))`). **In text:** `tools/fs131_isf2_code_only.py` (FS131-IDG1's tool,
+copied) reads both files SAME as `main` once block comments are removed (16,323 and 6,558 code characters; comment characters
+8,741 → 8,776 and 2,966 → 3,001, `code-only.out`); its plant (the last `:=` made `:≡`) reads both DIFFERS, exit 0
+(`code-only-plant.out`). `[KubickiLehelMorayne2002]` still appears in `Compulsion`'s structure clause (Thm 4.3's rigidity),
+which the ruling does not touch; `Forbid` no longer names the key.
+
+### 2.3 The build files
+
+`data/fs131/isf2/scripts/copy_build.sh`: the 32 files of `main`'s tree under `.lake/build/{lib/lean,ir}/…/RationalFour/`
+(listed in `logs/copy-files.txt`) copied by `rsync -a --checksum --files-from`, nothing else. Checksums before and after
+(`logs/copy-*.sha256`): the worktree's copies after the copy equal `main`'s before it, and `main`'s were unchanged during it.
+Of the 32, 12 (the `ir/` C files) were already byte-equal to the worktree's stale skeleton builds and 20 (`lib/lean/`) were
+replaced. A manifest of every compiled `.olean` was taken before the build (`logs/oleans-before.sha256`, 2,269 files).
+
+### 2.4 The statements before the build
+
+`data/fs131/isf2/lean/StatementDump.lean` (FS131-ISF1's dumper with `main`'s four modules added; its body is FS131-IRF1's line
+for line) printed every constant of nine modules from the compiled files as given: `SeamFractional`, `G27.Check`, `Sound`,
+`Law`, `Bound` and `RationalFour.Basic`, `Order`, `Compulsion`, `Forbid` (`statements-before.txt.gz`, 625 constants, 337 of
+them internal). The comparator `tools/fs131_isf2_statements.py` is strict: every constant, internal ones included, with the
+same header (kind, name, flags), stored type, value and proof-erased value; anything changed, missing or added fails. Against
+the two landings' own last dumps (`statements-before-vs-isf1.out`, `statements-before-vs-irf1.out`): **423 of 423 SAME** in
+the five modules of this branch against FS131-ISF1's `statements-after.txt.gz`, **202 of 202 SAME** in the four `RationalFour`
+modules against FS131-IRF1's — so the compiled files the merge started from are exactly each landing's.
+
+### 2.5 The build
+
+`SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 scripts/slot.py --mem 16 --cpus 10 -- env MEMMAX=16G BATCH=4 ./scripts/build.sh`
+(`data/fs131/isf2/build1.log`; the build's own log `build/gate/build/20261017T025153Z-2359804.log`): up-to-date check exit 3;
+**OK — 579 of 579 batches, 3 modules rebuilt** (`RationalFour.Compulsion` 3.6 s, `RationalFour.Forbid` 1.8 s, `Proofs` 2.0 s),
+**0 modules with warnings**, 13 m 58 s. The manifest after (`logs/oleans-after1.sha256`): exactly those three `.olean`s
+changed — `Compulsion` and `Forbid` (a docstring is environment data), the root (its imports) — and the other 2,266 are
+byte-identical with unchanged times; the 47 generated `G27` modules were not recompiled.
+
+### 2.6 The statements after the build
+
+The same dumper on the build (`statements-after.txt.gz`) is **byte-identical** to the print before it. The comparator, before
+against after with its four plants (`statements-before-vs-after.out`): **625 of 625 SAME**, and each plant fired by name with
+nothing else new — one character of `RationalFour.forall_coloring_eq_iff`'s stored type (CHANGED, TYPE), the head
+`fractionalChromaticNumber_seamPlane` dropped (MISSING), one character of `G27.val`'s proof-erased value (CHANGED, DATA), a
+constant added to `Forbid` (ADDED). Against the landings' dumps again (`statements-after-vs-isf1.out`,
+`statements-after-vs-irf1.out`): 423 of 423 and 202 of 202 SAME. So the merge and the edit moved no stored constant of either
+landing — `SeamFractional`'s and `G27`'s statements are FS131-ISF1's, `RationalFour`'s are FS131-IRF1's.

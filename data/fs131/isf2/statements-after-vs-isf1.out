@@ -1,0 +1,8 @@
+MODULE Proofs.HadwigerNelson.Instances.SeamFractional: base 7 constants, after 7
+MODULE Proofs.HadwigerNelson.Plane.G27.Check: base 69 constants, after 69
+MODULE Proofs.HadwigerNelson.Plane.G27.Sound: base 187 constants, after 187
+MODULE Proofs.HadwigerNelson.Plane.G27.Law: base 150 constants, after 150
+MODULE Proofs.HadwigerNelson.Plane.G27.Bound: base 10 constants, after 10
+compared 423 constants of 5 module(s) (222 INTERNAL included): 423 SAME, 0 finding(s)
+RESULT: CLEAN
+exit=0

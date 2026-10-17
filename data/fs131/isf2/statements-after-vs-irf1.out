@@ -1,0 +1,7 @@
+MODULE Proofs.HadwigerNelson.RationalFour.Basic: base 27 constants, after 27
+MODULE Proofs.HadwigerNelson.RationalFour.Order: base 109 constants, after 109
+MODULE Proofs.HadwigerNelson.RationalFour.Compulsion: base 53 constants, after 53
+MODULE Proofs.HadwigerNelson.RationalFour.Forbid: base 13 constants, after 13
+compared 202 constants of 4 module(s) (115 INTERNAL included): 202 SAME, 0 finding(s)
+RESULT: CLEAN
+exit=0

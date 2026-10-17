@@ -1,0 +1,16 @@
+MODULE Proofs.HadwigerNelson.Instances.SeamFractional: base 7 constants, after 7
+MODULE Proofs.HadwigerNelson.Plane.G27.Check: base 69 constants, after 69
+MODULE Proofs.HadwigerNelson.Plane.G27.Sound: base 187 constants, after 187
+MODULE Proofs.HadwigerNelson.Plane.G27.Law: base 150 constants, after 150
+MODULE Proofs.HadwigerNelson.Plane.G27.Bound: base 10 constants, after 10
+MODULE Proofs.HadwigerNelson.RationalFour.Basic: base 27 constants, after 27
+MODULE Proofs.HadwigerNelson.RationalFour.Order: base 109 constants, after 109
+MODULE Proofs.HadwigerNelson.RationalFour.Compulsion: base 53 constants, after 53
+MODULE Proofs.HadwigerNelson.RationalFour.Forbid: base 13 constants, after 13
+compared 625 constants of 9 module(s) (337 INTERNAL included): 625 SAME, 0 finding(s)
+PLANT type char: FIRED (new: ['CHANGED Proofs.HadwigerNelson.RationalFour.Compulsion HadwigerNelson.RationalFour.forall_coloring_eq_iff (TYPE)'])
+PLANT dropped head: FIRED (new: ['MISSING Proofs.HadwigerNelson.Instances.SeamFractional HadwigerNelson.Instances.SeamFractional.fractionalChromaticNumber_seamPlane'])
+PLANT data char: FIRED (new: ['CHANGED Proofs.HadwigerNelson.Plane.G27.Check HadwigerNelson.G27.val (DATA)'])
+PLANT added: FIRED (new: ['ADDED Proofs.HadwigerNelson.RationalFour.Forbid HadwigerNelson.RationalFour.planted_extra'])
+RESULT: CLEAN
+exit=0
