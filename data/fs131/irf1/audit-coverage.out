@@ -1,0 +1,6 @@
+MODULE Proofs.HadwigerNelson.RationalFour.Basic: CLEAN 17
+MODULE Proofs.HadwigerNelson.RationalFour.Compulsion: CLEAN 22
+MODULE Proofs.HadwigerNelson.RationalFour.Forbid: CLEAN 5
+MODULE Proofs.HadwigerNelson.RationalFour.Order: CLEAN 19
+records: 63 public (63 already filed), 24 private (not audited)
+COVERAGE OK: every one of the 63 public records is filed under its class

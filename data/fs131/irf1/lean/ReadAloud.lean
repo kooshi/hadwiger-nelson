@@ -31,6 +31,8 @@ set_option pp.fullNames true
 #print axioms exists_equiv_coloring_add_eq_residue
 #check @coloring_eq_of_forall_tetra
 #print axioms coloring_eq_of_forall_tetra
+#check @coloring_eq_of_eqOn_isOpen
+#print axioms coloring_eq_of_eqOn_isOpen
 #check @nonempty_iso_unitDistance
 #print axioms nonempty_iso_unitDistance
 #check @forall_quatColoring_eq_iff

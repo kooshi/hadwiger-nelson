@@ -1,0 +1,12 @@
+PLANTED: unknown axiom in HadwigerNelson.RationalFour.nonempty_iso_unitDistance; sorryAx in HadwigerNelson.RationalFour.onePlusI; HadwigerNelson.StandingFive.kloosterman_bound in HadwigerNelson.RationalFour.quatGraph; HadwigerNelson.RationalFour.quatGraph_adj filed under PURCHASED
+MODULE Proofs.HadwigerNelson.RationalFour.Basic: CLEAN 14
+MODULE Proofs.HadwigerNelson.RationalFour.Compulsion: CLEAN 22
+MODULE Proofs.HadwigerNelson.RationalFour.Forbid: CLEAN 5
+MODULE Proofs.HadwigerNelson.RationalFour.Order: CLEAN 19
+BAD HadwigerNelson.RationalFour.nonempty_iso_unitDistance (Proofs.HadwigerNelson.RationalFour.Basic): ['planted.unknownAxiom']
+OPEN HadwigerNelson.RationalFour.onePlusI (Proofs.HadwigerNelson.RationalFour.Basic): ['Classical.choice', 'Quot.sound', 'propext', 'sorryAx']
+IMPORTED HadwigerNelson.RationalFour.quatGraph (Proofs.HadwigerNelson.RationalFour.Basic): ['HadwigerNelson.StandingFive.kloosterman_bound'] — this landing declares no import
+MISFILED HadwigerNelson.RationalFour.quatGraph_adj: class CLEAN, filed under PURCHASED
+records: 63 public (1 already filed), 24 private (not audited)
+STOP: 4 record(s) the gate cannot take
+PLANT ALL REPORTED: ['BAD', 'IMPORTED', 'MISFILED', 'OPEN']
