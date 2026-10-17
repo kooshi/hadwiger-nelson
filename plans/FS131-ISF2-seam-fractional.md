@@ -218,3 +218,85 @@ its hash before the plant); rebuilt (2 modules, 0 warnings, 13 m 58 s); the lint
 `.olean`s byte-identical to build 1's** (`logs/oleans-after-restore.sha256`), so stage 2's dumps describe the gated build.
 `check_architecture`'s control was not planted here: FS131-IRF1 planted it, and `tools/check_architecture.py` is unchanged
 since (last changed `acda212b0`, 2026-09-22; IRF1's `data/fs131/irf1/plants/arch-plant.out`).
+
+## Stage 4 — SAVED: the drafts
+
+## Drafts for the front page
+
+*Each names its slot; none is applied (Keryx files). The gate's commit is `31df25939`; if the landing re-gates on another
+commit, read that commit for it. The assumptions step's nine counts are unchanged, so `CLAUDE.md` § Trust ledger's
+`axioms=3 rests=168 …` sentence and the ledger's header need no edit.*
+
+1. **`CLAUDE.md` § The gate**, the counts line: replace `` `declarations=22802 refutations-skipped=246 sites=1477`,
+   `vacuous=0 stale=0 declared=3 witnessed=52 generic=1420 unknown=2` `` by `` `declarations=23377 refutations-skipped=247
+   sites=1477`, `vacuous=0 stale=0 declared=3 witnessed=52 generic=1420 unknown=2` ``.
+2. **`CLAUDE.md` § Trust ledger**, the audit sentence: replace `the current audit reads 11106 clean and 5 declared purchases, and
+   120 imported (and 575 axiom-free; 11,806 records at FS131-IRF1, rational four-space at four colours, 2026-10-17)` by `the
+   current audit reads 11436 clean and 5 declared purchases, and 120 imported (and 730 axiom-free; 12,291 records at
+   FS131-ISF2, the fractional chromatic number over ℚ(√3, √11), 2026-10-17)`.
+3. **`CLAUDE.md` § Frontier**, the "Last filed" line: replace `Last filed: **rational four-space at four colours** (FS131-KFS1,
+   FS131-IRF1, 2026-10-17: four modules through the gate on `6ab6248fe` — `[Johnson2006]` p. 212's question answered for every
+   `d > 0`, the compulsion law and the structure clause of `ℚ⁴` at four colours, `[KubickiLehelMorayne2002]` Thm 4.3's rigidity
+   as a corollary; no value of `χ(ℝ²)` moved); before it, **the ring of unit vectors**` by `Last filed: **the fractional
+   chromatic number over ℚ(√3, √11)** (FS131-KFS1, FS131-ISF1, FS131-ISF2, 2026-10-17: fifty-two modules through the gate on
+   `31df25939` — `χ_f(ℚ(√3, √11)²) = 4`, `[CranstonRabern2015]`'s question, with `[MatolcsiEtAl2025]`'s certificate for `G27`
+   checked in full by the kernel; no value of `χ(ℝ²)` moved); before it, **rational four-space at four colours** (FS131-KFS1,
+   FS131-IRF1), **the ring of unit vectors**` (the rest of the list unchanged).
+4. **`LEDGER.md` row 71**, regraded: replace `**[hand + cert]** With their `G27` (in the Moser lattice) and Theorem B, **χ_f(K²) =
+   4** and the finitary independence ratio of that plane is exactly 1/4` by `**[kernel]** With their `G27` (in the Moser
+   lattice) and Theorem B, **χ_f(K²) = 4** and the finitary independence ratio of that plane is exactly 1/4
+   (`Instances.SeamFractional.fractionalChromaticNumber_seamPlane`, `finIndepRatio_seamPlane`,
+   `iSup_fractionalChromaticNumber_seamPlane`; FS131-ISF1, gated by FS131-ISF2 on `31df25939`; on the standard three axioms, no
+   outside theorem, no hypothesis. It rests on Theorem B's colouring for the upper bound, and for the lower on
+   `Collapse.exists_indepLaw` — an invariant random independent set of `Cay(R, U)`, the amenability step — whose density
+   `G27.density_le_quarter` bounds by the certificate, every condition of which the kernel checks in `Plane/G27/`. The kernel's
+   route is not the hand proof's: no blow-up and no measure rigidity)`. The `**[hand]**` clause before it (the blow-up never
+   leaves `F`) stays [hand]: it is not what the kernel proves. Address column: add `Proofs/HadwigerNelson/Instances/SeamFractional.lean`,
+   `Proofs/HadwigerNelson/Plane/G27/`; milestone column: `FS-56; FS-131 (FS131-KFS1, FS131-ISF1, FS131-ISF2)`.
+5. **`LEDGER.md` § B, row FS56-T3**: grade `hand + cert` → `kernel (FS131-ISF1, gated by FS131-ISF2)`; address: add
+   `Instances/SeamFractional` (`finIndepRatio_seamPlane` is its "every finite unit-distance graph over `K` has independence
+   ratio `≥ 1/4`, approached arbitrarily closely": deleting edges only raises the independence number, so the induced
+   subgraphs are the worst case).
+6. **`CLOSED-QUESTIONS.md` § 1.6** (FS131-ISF1's draft 1, with the gate): replace `**Not kernel-checked** beyond Theorem B.` by
+   `**Kernel-checked** (FS131-ISF1, gated by FS131-ISF2 on `31df25939`; on the standard three axioms, no outside theorem):
+   `Instances/SeamFractional`'s `fractionalChromaticNumber_seamPlane`, `iSup_fractionalChromaticNumber_seamPlane`,
+   `finIndepRatio_seamPlane`. The route is not the hand proof's: an invariant random independent set of `Cay(R, U)`
+   (`Collapse.exists_indepLaw`, the amenability step) has density at most `1/4` by `[MatolcsiEtAl2025]`'s certificate for `G27`,
+   every condition of which the kernel checks (`Plane/G27/`: 16,829 congruence rows as isometries, the 28,496 weights, every
+   independent set of `G27` by a residual DFS); no blow-up and no measure rigidity.`
+7. **C14's novelty line** (FS131-PAS2 § 4.4, checked verbatim against `plans/FS131-PAS2-prior-art.md` l. 419–422, as
+   FS131-ISF1 quoted it), for the public pages: *"`χ_f(ℚ(√3,√11)²) = 4` answers `[CranstonRabern2015]`'s question; prior art:
+   not found in print (FS131-PAS2, 2026-10-17). The upper bound is Fischer's (1994), the lower bound's graph and blow-up are
+   Matolcsi, Ruzsa, Varga and Zsámboki's (2025), read inside the field; at the Moser ring the geometric value 4 is Dúcz's
+   (2026)."*
+8. **`BIBLIOGRAPHY.md`** (FS131-ISF1's draft 3): `[MatolcsiEtAl2025]`'s "what of ours rests on it", add "Thm 3's certificate
+   (`G27`, the witness re-checked by `tools/fs56_gf_check.py`) is kernel-checked in `Plane/G27/` and consumed by
+   `G27.density_le_quarter` (FS131-ISF1, gated by FS131-ISF2); its Thm 1 (the blow-up) is not used by the kernel route."
+   `[CranstonRabern2015]`: add "the question is answered in the kernel by `Instances/SeamFractional` (FS131-ISF1, gated by
+   FS131-ISF2)."
+9. **`plans/KERNEL-HOLDS.md`**, a clause after the last (in FS131-IRF1's draft 5's form): `**The fractional chromatic number of
+   the plane over ℚ(√3, √11)** (FS131-ISF1, FS131-ISF2): `χ_f(K²) = 4`, the finitary independence ratio `1/4` and the finite
+   subgraphs' supremum 4 — `[CranstonRabern2015]`'s question — with `[MatolcsiEtAl2025]`'s certificate for `G27` checked in full
+   — `HadwigerNelson.Instances.SeamFractional.*`, `HadwigerNelson.G27.*`, standard three axioms.`
+10. **The Proof Atlas**: C14 (`χ_f(ℚ(√3, √11)²) = 4`, `[CranstonRabern2015]`'s question) at its grade (row 71: [hand + cert])
+    → [kernel].
+11. **`LEAN.md`**, FS131-ISF1's three lines (its record § 5.2 draft 4, (a)–(c), under § The kernel's cost model) and three of
+    this job's, under § Building and § The gate:
+    (d) *A merge whose two lines were cut from one skeleton commit holding both lines' skeletons, each line having deleted the
+    other's, has two merge bases, and `git merge` reports modify/delete conflicts on every module of both: each side's
+    surviving file is its landing's, and the resolution keeps both, each checked equal to its gated commit
+    (`git merge-tree --write-tree` predicts the conflicts without touching the tree) (FS131-ISF2).*
+    (e) *The vacuity scan's refutation test reads a membership in a set defined by `∀ …, … → ¬ …` (`IndepSets F`) through to
+    `→ False`, so a theorem concluding such a membership is counted in `refutations-skipped` though it refutes nothing
+    (`G27.conj_indep`, FS131-ISF2); the landing names its hypothesis's inhabitant.*
+    (f) *`#print axioms` wraps a long axiom list across lines: a comparison of two audit receipts joins each print onto one
+    line first (`data/fs131/isf2/scripts/join_prints.py`) and sorts under `LC_ALL=C`, or `comm` refuses the order
+    (FS131-ISF2).*
+12. **`ARCHITECTURE.md`** — applied on the branch (FS131-ISF1's rows, merged with `main`'s); no § Trust line (no purchase).
+
+**Held for the coordinator, not drafted as applied:** `Instances/SeamFractional`'s module docstring is stale in the way the two
+`RationalFour` docstrings were. Its **Not claimed** clause reads `that the value is new (prior art: FS131-PAS2's to find; the
+Moser ring's instance of the geometric bound is `[Ducz2026]` Thm 3.1)`, and FS131-PAS2 has since found "not found in print".
+The edit is outside this brief's touches, and a docstring edit must pass a gate: about 14 minutes of build, since only
+`SeamFractional` and the root recompile, plus the 14-minute gate. A text in the ruling's form: `novelty (prior art: not found
+in print (FS131-PAS2; `CLOSED-QUESTIONS.md` § 1.6); the Moser ring's instance of the geometric bound is `[Ducz2026]` Thm 3.1)`.
