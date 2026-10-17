@@ -43,13 +43,13 @@ last two ranks (item 1073) are planned (item 1082) and in implementation (item 1
 |---|---|---|---|
 | FS131-IRF1 | Part A, C7: rational four-space at four colours, with A3 (the structure clause) | `il5`, `fs131-kfs1` | `plans/FS131-IRF1-four-space.md` |
 | FS131-ISF1 | Part B, C14: `χ_f(ℚ(√3, √11)²) = 4`; price probe first, then the `G27` pipeline | `kcs1`, `fs131-ksf1` | `plans/FS131-ISF1-seam-fractional.md` |
-| FS131-FPA2 | Clerk: FS131-PAS2's drafts ruled for now and the owed bibliography pass | `filing2`, `fs131-fpa2` | its report |
 
-**Held:** C7's novelty wording (both forms drafted, `plans/FS131-PAS2-prior-art.md` § 2.4) until `[KubickiLehelMorayne2002]` is
-read — Kooshi asked for a browser save to `~/source/library/pdf/KubickiLehelMorayne2002-patch-rigid-colorings-rational-n-space-jctb-84-45-53.pdf`
-(item 1075). **At each implementer's hand-back:** the landing procedure (item 1068's form: axioms printed by me, the guard
+**C7's prior art is settled** (item 1086): `[KubickiLehelMorayne2002]`, read in full, proves only rigidity (weaker than A3);
+C7's entry is filed in form (A), "not found in print", naming the paper. Held for the landing: C7's ledger row and novelty
+line (`plans/FS131-PAS3-kubicki-lehel-morayne.md` § 3.4 items 3, 5). FS131-IRF1 was offered KLM's rigidity half as an
+optional corollary of A3. **At each implementer's hand-back:** the landing procedure (item 1068's form: axioms printed by me, the guard
 over `main..<branch>`, merge, equality with the gated commit, the build moved); the second to land re-merges and re-gates.
-**At FS131-FPA2's hand-back:** review, merge. Then a privacy check and a push. When both land, the asking lane's re-rank
+Then a privacy check and a push (the bibliography pass and C7's wording, items 1084–1086, are committed and not yet pushed). When both land, the asking lane's re-rank
 (with the octonion question of item 1082 and the owed corrections in § 5) chooses what follows.
 
 ## 4. Kooshi's decisions, all answered
