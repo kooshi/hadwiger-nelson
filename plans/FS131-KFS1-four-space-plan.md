@@ -335,3 +335,68 @@ the proof derives; the leaf plans above are read with these:
 Prices after the passes: **Part A ≈ 1,190 lines** (§ 2.1's 1,210, less 40 from items 2–3, plus 20 for the two applied forms of
 the experience pass); **Part B ≈ 1,350 lines** of hand-written Lean, a generator of about 350 lines of Python, and generated
 modules whose kernel price is unmeasured.
+
+### 3.5 The price
+
+| module | hand-written Lean (planned) | notes |
+|---|---|---|
+| `RationalFour/Basic` | 90 | the read-back iso is most of it |
+| `RationalFour/Order` | 450 | the normal form (170) and the ring route to `1/p` (90) |
+| `RationalFour/Compulsion` | 400 | Zaks's gadget 80, the residue colourings 130 |
+| `RationalFour/Forbid` | 180 | casts between `ℚ` and `ℝ` |
+| **Part A** | **≈ 1,190** (was 1,210 before the passes) | standard three axioms; no import; every printed input (`[Zaks1999]` Lemma 1, `[BendaPerles2000]` pp. 123–125, `[Johnson1990]` Thm 3) formalized |
+| `Instances/SeamFractional` | 40 | heads already proved from the two leaves |
+| `Plane/G27/Check` (core-only) | 380 | `X23Check` at 27 points, rational weights over one denominator |
+| `Plane/G27/Valid` | 600 | after `X23.lean` |
+| `Plane/G27/Law` | 340 | symmetrization, invariance on congruence classes, the two sums |
+| generator `tools/fs131_kfs1_g27.py` | (≈ 350 lines of Python, with `--check`) | from `data/fs56/g27/cert-g27-mrvz.json` |
+| generated `G27/Data`, `G27/Cong*`, `G27/Atoms*` | data | **kernel price unmeasured**: re-price from the first two atom chunks |
+| **Part B** | **≈ 1,360** + generator + data | standard three axioms; no import |
+
+**Search request** (rule 5): a smaller certificate for `χ_gf(G27) ≥ 4` — the least level `k ≤ 12` and the least support at which
+the certificate form of `plans/FS56-field-blowup.md` § "The certificate form" still certifies `w = 4` (an LP over the 182,304
+independent sets of `G27` and the congruence classes of sets of at most `k` points; at `k = 3` the value is `3.9475`,
+`data/fs56/g27/levels-g27.out`). It would decide how much of Part B's data the kernel must check; Part B does not wait for it.
+
+### 3.6 The build
+
+`SLOT_BUDGET_GB=22 SLOT_RESERVE_GB=6 scripts/slot.py --mem 10 --cpus 6 -- env MEMMAX=10G BATCH=3 ./scripts/build.sh` on commit
+`1e69f1b91`: **OK — 746 of 746 batches, 5 modules rebuilt** (the four `RationalFour` modules and `Instances/SeamFractional`, then
+the root), 17 m 45 s; the only warnings are the 38 `declaration uses 'sorry'` of the skeleton's leaves
+(`data/fs131/kfs1/build2.log`; the gate's copy `build/gate/build/20261017T002013Z-1942598.log`). A first build, started before
+the modeling passes changed three statements, was stopped by its task id at batch 223 of 746 (the run verified a version
+already superseded; nothing it wrote was kept), checked stopped by effect: no process, the log static, the slot ledger empty.
+The stored types of the heads and the two hardest leaves were read from the kernel's side (`data/fs131/kfs1/probes/ReadBack.out`):
+the divisions in the normal form are rational (`(↑a : ℚ) / (2 * (↑m : ℚ))`), and
+`fractionalChromaticNumber_seamPlane` rests on `sorryAx` and the standard three — its two leaves — as planned. `lake lint` was
+not run on the skeleton (its `sorry` bodies hide unused binders, `LEAN.md` § Searching — Lean): it is the implementer's, at the
+first proved module.
+
+## Stage 4 — SAVED: the drafts for the files this lane does not write
+
+Each names its slot; none is applied.
+
+1. **`LEDGER.md`**, a new row after 167 (its number Keryx's): `| N | **The four-colour compulsion law of `ℚ⁴`, and the distances
+   a four-colouring of `ℚ⁴` can forbid beside 1:** for `x ≠ y` in `ℚ⁴`, every proper four-colouring of the unit-distance graph
+   gives them one colour iff `v₂(|x − y|²) ≥ 1`, every one gives them two iff `v₂(|x − y|²) = 0`, and neither is forced iff
+   `v₂(|x − y|²) < 0` (different components); so for `d > 0` a proper four-colouring forbidding `d` exists iff `d² ∉ ℚ` or
+   `d² = p/q` with `p, q` odd, and then every proper four-colouring forbids `d` — `[Johnson2006]` p. 212's question. **Grade:**
+   [derived, two minds, one blind] (the consolidation run's LV-T3, LX-T5–T6); kernel planned (FS131-KFS1; skeleton
+   `RationalFour/*` on branch `fs131-kfs1`; planned, one mind; nothing held). **Rests on:** `[Zaks1999]` Lemma 1,
+   `[BendaPerles2000]` pp. 123–125, both formalized in the plan, not imported; the *if* half is `[Johnson1990]` Thm 3.
+   **Prior art:** FS131-PAS2's to word. **Bearing on the answer:** none (dimension four). | `data/consolidation-2026-09-27/lv/record.md`
+   LV-T3; `data/consolidation-2026-09-27/lx/record.md` stage 1; `plans/FS131-KFS1-four-space-plan.md` | consolidation run
+   (2026-09-27); FS-131 |`
+2. **`CLOSED-QUESTIONS.md` § 3**, the `ℚ⁴` entry: replace `**Not claimed:** a gate; the kernel.` by `**Not claimed:** a gate;
+   the kernel — planned (FS131-KFS1: about 1,190 lines on the standard three axioms, every printed input formalized; planned,
+   one mind; nothing held).`
+3. **`CLOSED-QUESTIONS.md` § 1.6**, after `**Not kernel-checked** beyond Theorem B.`: `A kernel route with no blow-up and no
+   measure rigidity is planned (FS131-KFS1): an invariant random independent set of `Cay(R, U)` with density at least
+   `α₁(K²)` exists on the standard three axioms (`Collapse.exists_indepLaw`), and `G27`'s certificate bounds its density by
+   `1/4`; the head statements are proved in the skeleton from that bound and `NumberField ↥seamField` (planned, one mind;
+   nothing held).`
+4. **`BIBLIOGRAPHY.md`**, the "what of ours rests on it" field: `[Zaks1999]` — add "FS131-KFS1's planned
+   `RationalFour.coloring_eq_of_sqDist_two` (Lemma 1, proved by another gadget)"; `[BendaPerles2000]` — add "FS131-KFS1's
+   planned `RationalFour.mem_comp_iff` (pp. 123–125's `H⁴`)"; `[Johnson1990]` — add "Thm 3 is FS131-KFS1's planned
+   `RationalFour.residueColouring`"; `[MatolcsiEtAl2025]` — add "Thm 3's certificate, FS131-KFS1's planned
+   `IndepLaw.density_le_quarter_seamField`". No new keys.
