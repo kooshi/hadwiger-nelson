@@ -33,7 +33,7 @@ paper, not yet formalized.
 | **[10](#10-three-colourings-of-lattice-cayley-graphs)** $\mathrm{Cay}(\mathbb{Z}^d, S)$ is 3-colourable $\iff$ some character $\theta$ has $\theta(S) \subseteq [\frac13, \frac23]$ | Lean |
 | **[11](#11-the-ring-the-unit-vectors-generate-and-the-planes-components)** $\mathbb{Z}[U_F] = \mathcal{O}'_F$ if no conjugation-fixed prime above 2 ramifies; $F^2$'s unit-distance graph has infinitely many components | Lean |
 | **[12](#12-which-distances-a-four-colouring-of-rational-four-space-can-avoid)** A 4-colouring of $\mathbb{Q}^4$ with no unit pair monochromatic can also avoid distance $d$ $\iff$ $d^2 \notin \mathbb{Q}$, or $d^2 = p/q$ with $p, q$ odd | Lean |
-| **[13](#13-the-fractional-chromatic-number-of-the-plane-over-q3-11)** $\chi_f\big(\mathbb{Q}(\sqrt3, \sqrt{11})^2\big) = 4$ | Lean |
+| **[13](#13-the-fractional-chromatic-number-of-the-plane-over-ℚ3-11)** $\chi_f\big(\mathbb{Q}(\sqrt3, \sqrt{11})^2\big) = 4$ | Lean |
 
 The symbols, in one line each (each is defined in full in its row's section below):
 
