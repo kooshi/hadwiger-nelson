@@ -36,18 +36,21 @@ The prior-art searches (FS131-PAS1, item 1052): four of five not found in print;
 
 ## 3. Running, and next
 
-Every landing is filed and pushed (items 1067, 1070, 1072; `origin/main` at `00e7c4b60`). Running (item 1074), the
-asking lane's last two ranks (item 1073):
+`origin/main` at `ac23b9955` (item 1079: row 129's plane clause credited to `[LiSu2026]`, first in print). The asking lane's
+last two ranks (item 1073) are planned (item 1082) and in implementation (item 1083):
 
 | job | what | worktree, branch | record |
 |---|---|---|---|
-| FS131-KFS1 | de Bruijn planner: rational four-space at four colours (C7) and the fractional chromatic number over ℚ(√3, √11) (C14) — map, skeleton, price | `il5`, `fs131-kfs1` (build copied) | `plans/FS131-KFS1-four-space-plan.md` |
-| FS131-PAS2 | Ephodos: their prior-art searches (C7 after 2006; C14 against `[Ducz2026]` Thm 3.1) | `kcs1`, `fs131-pas2` | `plans/FS131-PAS2-prior-art.md` |
+| FS131-IRF1 | Part A, C7: rational four-space at four colours, with A3 (the structure clause) | `il5`, `fs131-kfs1` | `plans/FS131-IRF1-four-space.md` |
+| FS131-ISF1 | Part B, C14: `χ_f(ℚ(√3, √11)²) = 4`; price probe first, then the `G27` pipeline | `kcs1`, `fs131-ksf1` | `plans/FS131-ISF1-seam-fractional.md` |
+| FS131-FPA2 | Clerk: FS131-PAS2's drafts ruled for now and the owed bibliography pass | `filing2`, `fs131-fpa2` | its report |
 
-**At FS131-PAS2's hand-back:** merge it; a Clerk (FS131-FBB1) files its bibliography rows with item 1054's owed items in
-one pass; its novelty lines wait for the landings they word. **At FS131-KFS1's hand-back:** review the plan and price;
-brief an implementer from it. The next push follows the same protocol (template `data/fs131/briefs/scripts/mk-fs131-pv4.py`).
-When the asking lane's list is done, its re-rank (with the owed corrections in § 5) chooses what follows.
+**Held:** C7's novelty wording (both forms drafted, `plans/FS131-PAS2-prior-art.md` § 2.4) until `[KubickiLehelMorayne2002]` is
+read — Kooshi asked for a browser save to `~/source/library/pdf/KubickiLehelMorayne2002-patch-rigid-colorings-rational-n-space-jctb-84-45-53.pdf`
+(item 1075). **At each implementer's hand-back:** the landing procedure (item 1068's form: axioms printed by me, the guard
+over `main..<branch>`, merge, equality with the gated commit, the build moved); the second to land re-merges and re-gates.
+**At FS131-FPA2's hand-back:** review, merge. Then a privacy check and a push. When both land, the asking lane's re-rank
+(with the octonion question of item 1082 and the owed corrections in § 5) chooses what follows.
 
 ## 4. Kooshi's decisions, all answered
 
