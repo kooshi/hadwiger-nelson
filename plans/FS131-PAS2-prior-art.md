@@ -8,7 +8,9 @@ opening job, §PA) run on two statements already derived; no derivation of its o
 
 ## Theorems this phase proved
 
-None. This job searches and reads; it proves nothing.
+None new. This job searches and reads. One composition of held results is recorded where it arose: every finite unit-distance graph over
+`ℚ(√3,√11)` has geometric fractional chromatic number at most 4 — [derived] from FS56-T2 (hand) and row 57's Theorem B (kernel), one mind,
+§ 4.2; it extends `[Ducz2026]`'s Moser-ring bound to the field.
 
 ## Stage 1 — SAVED: the readback
 
@@ -326,3 +328,95 @@ to them, as published first.**
    number (a reading, one mind) | `library/pdf/arXiv-2610.15424-li-su-every-n-points-no-unit-distance-m1.pdf` | **read in full** (FS131-PAS2,
    2026-10-17); its Lean repository not cloned. And § B, the library row: *`pdf/arXiv-2610.15424-li-su-every-n-points-no-unit-distance-m1.pdf`
    | `[LiSu2026]` | read in full*.
+
+## Stage 4 — SAVED: C14, the fractional chromatic number of the plane over `ℚ(√3, √11)`
+
+### 4.1 The queries (2026-10-17; tag `C14` in `data/fs131/pas2/queries.jsonl`, 51 queries)
+
+| discipline | queries (hits) |
+|---|---|
+| authors, complete listings | zb `au:"Cranston, Daniel W."` (95, all titles read); `au:"Rabern, Landon"` (47); `au:"Matolcsi, Máté"` (70); `au:"Varga, Dániel"` (12); `au:"Zsámboki, Pál"` (9); `au:Ducz \| au:Dúcz` (5); `au:"Ambrus, Gergely"` (43); `au:"Ruzsa, Imre Z." & py:2015-2026` (30) — the plane, fraction, independence and lattice titles listed in the log; none on a field plane |
+| fractional colouring of distance graphs | zb `ab:"geometric fractional chromatic number"` (4); `ab:"Moser lattice"` (4); `ab:"Moser ring"` (1); `ab:"fractional chromatic number" & ab:"plane"` (14); `… & ab:"unit distance"` (6); `… & ab:"rational"` (7, unrelated); `… & ab:"field"` (4, unrelated); `… & ab:"algebraic"` (8, unrelated); `ab:"independence ratio" & ab:"unit distance"` (2); `ab:"independence ratio" & ab:"plane"` (4 — **Li–Su, § 3 above**); `ab:"Hall ratio" & ab:"plane"` (1); `ab:"Moser spindle" & ab:"fractional"` (1: Jungić 2023, an expository survey, by its DOI and a probe: no "field", no "rational"); `ab:"sqrt{11}" & ab:"chromatic"` (2); `ab:"\sqrt{3},\sqrt{11}"` (5); `ab:"sqrt 3" & ab:"sqrt 11"` (21); `ab:"Cranston" & ab:"Rabern"` (6, all graph theory); ax `abs:"geometric fractional chromatic number"` (4); `abs:"Moser lattice"` (4); `abs:"Moser ring"` (1); `abs:"fractional chromatic number" AND abs:"plane"` (6); `abs:"independence ratio" AND abs:"unit distance"` (2); `abs:"fractional chromatic number" AND abs:"number field"` (0); `… AND abs:"rational points"` (0); `abs:"unit distance" AND abs:"algebraic numbers" AND abs:"fractional"` (0); `abs:"Cranston" AND abs:"Rabern"` (3, unrelated); `abs:"Hall ratio" AND abs:"unit distance"` (1); OpenAlex "fractional chromatic number unit distance graph number field algebraic plane" (210; first 25 read, unrelated) |
+| harmonic analysis of distance-avoiding sets | zb `ab:"1-avoiding"` (36, two on unit distances); `ab:"1-avoiding" & ab:"lattice"` (2, unrelated); `ab:"avoiding unit distances"` (1); `ab:"unit distance" & ab:"lattice" & ab:"density"` (2); `ab:"avoiding" & ab:"unit distance" & ab:"rational"` (0); `ab:"independence density" & ab:"Cayley graph"` (0); `ab:"independence ratio" & ab:"Cayley graph" & ab:"amenable"` (0); `ab:"distance-avoiding" & ab:"subgroup"` (0); `ab:"unit distance graph" & ab:"independence number" & ab:"field"` (0) |
+| citation graph | works citing `[CranstonRabern2015]`: Semantic Scholar 11, OpenAlex 10 (the same 11 records as on 2026-09-16, plus none); citing `[MatolcsiEtAl2025]`: Semantic Scholar 5 (Li–Su 2026, Dúcz–Varga, Dúcz, Lev–Matolcsi–Pach–Varga 2025 on Kravitz sets, Engel et al. 2024 on beam search), OpenAlex 0; citing `[AmbrusEtAl2023]`: OpenAlex 3 (Hubert et al. 2024, Cohen–Mani 2025, Tolmachev 2025: densities of periodic or typical avoiding sets); citing `[Ducz2026]`, `[DuczVarga2026]`: 0 in OpenAlex. Every title read; none addresses a field plane |
+
+### 4.2 What was read
+
+- **`[Ducz2026]`** (held; **re-read in full, all five pages, 2026-10-17**, against C14 as the brief asks). What it states:
+  - abstract: *"In [MRVZ25], Matolcsi et al. show that the fractional chromatic number of the plane is at least 4. Their proof uses a 27-vertex
+    unit-distance graph in the Moser lattice, with geometric fractional chromatic number exactly 4. We show that this bound is tight for graphs
+    in the Moser lattice by exhibiting geometric 4-colorings of the entire lattice. The same colorings also extend to the entire Moser ring."*;
+  - p. 2: *"We extend this coloring to the entire Moser lattice, showing that any graph within this lattice has such a non-fractional geometric
+    4-coloring."*; Lemma 2.1 (an integral colouring is geometric iff same-colour depends only on distance) and Lemma 2.2 (its colour classes are
+    the cosets of a sublattice);
+  - **Theorem 3.1**: `π(v) = 1 + l₁ + 2l₂`, `l₁ = a + b + d`, `l₂ = a + c + d (mod 2)`, *"is a geometric 4-coloring of L_Moser"*; p. 4: both
+    colourings *"also generalize to the entire Moser ring R₂"*, `R₂ = {(a + bω₁ + cω₃ + dω₁ω₃)/3ᵏ}` (a remark credited to Varga, no separate
+    theorem); **Theorem 3.2**: *"L_Moser has exactly two integral geometric 4-colorings"*;
+  - p. 2: the attainment at a finite graph *"is not a logical necessity, and remains to be explained"*.
+
+  **So it states the supremum of the geometric fractional chromatic number over the finite unit-distance graphs in the Moser lattice — and,
+  by the remark, in the Moser ring — and that it is 4, attained by `[MatolcsiEtAl2025]`'s `G27`.** It does not state the field's value, the
+  fractional chromatic number of any infinite graph, the blow-up, or anything outside the ring. How each relates to C14:
+  - *The ring and the field.* With `K = ℚ(√3, √11)`, `L_Moser ⊂ R₂ ⊂ K²`, and `R₂` spans only a four-dimensional `ℚ`-subspace of the
+    eight-dimensional `K²` (`ℚ(ω₁, ω₃) = ℚ(√−3, √−11)` inside `K(i)`). The plane over `K` has unit vectors the ring does not (`K(i)`'s
+    norm-one group, of infinite rank), so a statement about `R₂`'s graphs is a statement about a subgraph.
+  - *Upper bounds.* Dúcz's `χ_gf(G) ≤ 4` for finite `G ⊂ R₂` gives `χ_f(G) ≤ 4` there, weaker than C14's upper half on its domain and
+    covering less of it: C14's upper half, `χ_f(K²) ≤ χ(K²) = 4`, is `[Fischer1994]`'s value (Theorem B in the kernel), on all of `K²`.
+    Conversely C14's argument gives Dúcz's inequality on the whole field: by `plans/FS56-field-blowup.md` B2, `χ_f(K²) ≥ χ_gf(H)` for every
+    finite `H ⊂ K²`, so with `χ_f(K²) ≤ 4`, **every finite unit-distance graph over `K` has `χ_gf ≤ 4`** — Dúcz's bound carried from the
+    Moser ring to the field, by a different mechanism (a 4-colouring of `K²` and the field blow-up, not a geometric colouring); not his
+    explicit colourings or his uniqueness (Thm 3.2). [derived from FS56-T2 and row 57, one mind (this job); a composition of held results,
+    not a new derivation.]
+  - *Lower bounds.* Dúcz's statement is an upper bound and gives no lower bound on any `χ_f`. C14's lower half is `[MatolcsiEtAl2025]`
+    Theorem 1's blow-up of `G27` read inside `K²` (B1–B2), which neither Dúcz nor MRVZ states.
+  - **Verdict on the relation:** Dúcz is a **special case, at the Moser ring and for the geometric parameter, of a corollary of C14's
+    argument** — not C14, and not implied by it in his explicit form. The value `χ_gf = 4` "at the Moser ring" is his with MRVZ's `G27`, as
+    FS131-PAS1 recorded.
+- **`[MatolcsiEtAl2025]`** (held; re-read 2026-10-17: § 1, § 3 Theorem 1 with its proof and Theorem 2's statement and opening, § 4 Definition 1 and Remark 1, Corollary 1 and Conjecture 1).
+  Theorem 1's proof takes *"the group K of Euclidean transformations generated by T"* — the congruences between subsets of the graph — and its
+  Følner sets; it never says the group preserves a field, and the paper never names `ℚ(√3, √11)` or cites `[CranstonRabern2015]`'s question
+  (it cites the paper for the lower-bound history, its reference [5]). Remark 1 records only `[ℚ(ω₁, ω₃) : ℚ] = 4`.
+- **`[DuczVarga2026]`** (held; § 2.2 and § 4's opening re-read): *"The entire G27 graph is a subset of L_Moser, and by [6], no graph in this
+  lattice can achieve χgf(G) > 4."*; *"Matolcsi et al. also carried out searches not restricted to the lattice … another starting from the
+  already constructed graph G27, which failed to improve on the value 4."* Nothing on a field; its `G29` leaves `K` (row 71, FS56-T6).
+- `[CranstonRabern2015]`'s question as quoted in § 1.6 was not re-read (held, read 2026-09-08; the quotation is checked verbatim against
+  `CLOSED-QUESTIONS.md`, stage 1).
+
+### 4.3 Verdict: **not found in print**; its two halves and its instance at the Moser ring are in print
+
+- **C14 as stated** — `χ_f(G(ℚ(√3,√11)², 1)) = 4`, `[CranstonRabern2015]`'s question — **not found in print** (the searches in § 4.1, adding
+  to 2026-09-16's). No citing work of `[CranstonRabern2015]`, `[MatolcsiEtAl2025]`, `[Ducz2026]` or `[DuczVarga2026]` addresses a field plane.
+- **In print:** the upper half (`[Fischer1994]`'s `χ(K²) = 4`); the lower half's ingredients (`[MatolcsiEtAl2025]`'s `G27` and Theorem 1),
+  of which the field-internal reading is ours; and at the Moser ring, `sup χ_gf = 4` (`[Ducz2026]` Thm 3.1 and its ring remark, with `G27`).
+- **Not misstated.** A reader would write `χ_f(ℚ(√3,√11)²) = 4`, as Cranston and Rabern do. The value holds for both of Johnson's
+  definitions of `χ_f` of an infinite graph (the upper bound is a 4-colouring, the lower bound passes through finite subgraphs).
+- **A generalization the argument already carries** (inventory): every finite unit-distance graph over `K` has `χ_gf ≤ 4`, which extends
+  `[Ducz2026]`'s Moser-ring statement to the field (§ 4.2). It is a corollary of held results, at their grade ([hand] B2, [kernel] Theorem B).
+
+### 4.4 Drafts (each names its slot)
+
+1. **`CLOSED-QUESTIONS.md`** § 1.6, after its last sentence (*"…none addresses a field plane."*): *"**Searched again 2026-10-17 (FS131-PAS2):**
+   the citers of `[CranstonRabern2015]` (Semantic Scholar 11, OpenAlex 10) and of `[MatolcsiEtAl2025]` (Semantic Scholar 5), the complete
+   zbMATH listings of Cranston, Rabern, Matolcsi, Varga, Zsámboki, Dúcz, Ambrus and Ruzsa (since 2015), and 36 title and abstract queries
+   in two disciplines: not found in print. **At the Moser ring the instance is in print:** `[Ducz2026]` Thm 3.1 gives geometric 4-colourings
+   of the Moser lattice and, by its p. 4 remark, of the Moser ring, so with `G27` the geometric fractional chromatic number of their finite
+   graphs has supremum exactly 4. The ring spans half of `K²`'s dimension, and Dúcz states nothing about `χ_f` of an infinite graph or about
+   the field. Conversely, this entry's argument carries his bound to the whole field: every finite unit-distance graph over `ℚ(√3,√11)` has
+   `χ_gf ≤ 4` (B2 with Theorem B; one mind)."*
+2. **`LEDGER.md`** row 71, after *"…`[CranstonRabern2015]`'s first question (`CLOSED-QUESTIONS.md` §1.6);"*: *"prior art: the value not found in
+   print (searched 2026-09-16 and 2026-10-17, FS131-PAS2); the upper bound is `[Fischer1994]`'s, the lower bound's graph and blow-up
+   `[MatolcsiEtAl2025]`'s, and at the Moser ring `sup χ_gf = 4` is `[Ducz2026]` Thm 3.1 with `G27`;"*.
+3. **`BIBLIOGRAPHY.md`**:
+   - `[Ducz2026]`, its status cell: append *"; re-read in full 2026-10-17 against C14 (FS131-PAS2): it states the supremum of `χ_gf` over the
+     finite graphs of the Moser lattice (and, by a remark, the Moser ring) is 4 — not the field's value, nor any infinite graph's `χ_f`"*.
+   - `[MatolcsiEtAl2025]`, its status cell: append *"; §§ 1, 3, 4 re-read 2026-10-17 (FS131-PAS2): Theorem 1's group is never said to
+     preserve a field; `ℚ(√3,√11)` and Cranston–Rabern's question are not named"*.
+   - `[DuczVarga2026]`: append *"; § 2.2 re-read 2026-10-17 (FS131-PAS2)"*.
+   - § C, a listing row: *Jungić, "Still Spinning: The Moser Spindle at Sixty", Math. Mag. (2023), doi 10.1080/0025570X.2023.2176684, Zbl
+     1535.05104* | *found by zbMATH `ab:"Moser spindle" & ab:"fractional"` (FS131-PAS2); summary withheld, probed: "spindle" and "fractional
+     chromatic number" present, "field" and "rational" absent; not held, not read*.
+
+**C14's novelty line**, for the kernel planner's module and the public pages when it lands: *"`χ_f(ℚ(√3,√11)²) = 4` answers
+`[CranstonRabern2015]`'s question; prior art: not found in print (FS131-PAS2, 2026-10-17). The upper bound is Fischer's (1994), the lower
+bound's graph and blow-up are Matolcsi, Ruzsa, Varga and Zsámboki's (2025), read inside the field; at the Moser ring the geometric value 4 is
+Dúcz's (2026)."*
