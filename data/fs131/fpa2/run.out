@@ -1,0 +1,48 @@
+OK 14 edits:
+P1-1 CLOSED-QUESTIONS 1.6
+P1-2 LEDGER row 71
+P1-3 Ducz status
+P1-3 Matolcsi status
+P1-3 DuczVarga status
+P1-4 Johnson2010 status
+P1-4 BauJohnsonNoble2021 § A copy and read
+P1-4 BauJohnsonNoble2021 § C row marked superseded
+P1-4 Zaks1989 status
+2.2 R.4 rows 8 and 9 deleted (not renumbered)
+2.3 Shimura1964 R.4 #17 key plain
+new § A rows (5)
+new § B rows (7)
+new § C rows (15)
+
+NEW § A ROWS:
+| **[JohnsonVoloshin2007]** | P. Johnson, V. Voloshin, Geombinatorial mixed hypergraph coloring problems, Geombinatorics 17(2) (October 2007) 57–67 | p. 64 defines the period group `P(f, A)`; p. 66 Qu
+| **[KubickiLehelMorayne2002]** | G. Kubicki, J. Lehel, M. Morayne, Patch colorings and rigid colorings of the rational n-space, J. Combin. Theory Ser. B 84 (2002) 45–53, doi 10.1006/jctb.2001.2062, Z
+| **[deGrey2026]** | Aubrey de Grey, *A 5-chromatic, triangle-free unit-distance graph in ℝ³ with 61 vertices*, Geombinatorics (2026) (zbMATH 1581.05080) | Cited by the `CLOSED-QUESTIONS.md` § 3 entri
+| **[Haugstrup2026]** | Asger Haugstrup, *A tetrahedron-free 6-chromatic unit-distance graph in three-dimensional space*, Geombinatorics 35(3) (2026) 102–110 (zbMATH 1581.05067) | Cited by the `CLOSED
+| **[Neukirch1999]** | Neukirch, 1999 (the title is not in the citing plan; Madore's excerpt cites "Neukirch 1999, theorem 13.4", `data/m2/j17/excerpts/madore2015-p5.1-5.4.txt` l. 89) | `plans/FS131-K
+
+NEW § C ROWS:
+| Cibulka 2008 (Zbl 1190.05067) | **Searched, title or review only** (FS131-PAS2): not held; no bearing on `ℚ⁴` with two distances by its review or by `[Johnson2010]`'s account |
+| Raigorodskii–Shitova 2008 (Zbl 1213.05098) | **Searched, title or review only** (FS131-PAS2): not held; no bearing on `ℚ⁴` with two distances by its review or by `[Johnson2010]`'s account |
+| Ponomarenko–Raigorodskii 2013, 2015 (Zbl 1286.05051, 1317.05064) | **Searched, title or review only** (FS131-PAS2): not held; no bearing on `ℚ⁴` with two distances by its review or by `[Johnson2010]
+| Johnson–Schneider–Tiemeyer 2007 (Zbl 1506.05072) | **Searched, title or review only** (FS131-PAS2): not held; no bearing on `ℚ⁴` with two distances by its review or by `[Johnson2010]`'s account |
+| Johnson 2008 (Zbl 1506.05070) | **Searched, title or review only** (FS131-PAS2): not held; no bearing on `ℚ⁴` with two distances by its review or by `[Johnson2010]`'s account |
+| Johnson–Tiemeyer 2009 (Zbl 1506.51003; on `ℚ³`, its exponent dropped by zbMATH's title) | **Searched, title or review only** (FS131-PAS2): not held; no bearing on `ℚ⁴` with two distances by its revi
+| Noble 2012 (Zbl 1262.05121) | **Searched, title or review only** (FS131-PAS2): not held; no bearing on `ℚ⁴` with two distances by its review or by `[Johnson2010]`'s account |
+| Jungić, "Still Spinning: The Moser Spindle at Sixty", Math. Mag. (2023), doi 10.1080/0025570X.2023.2176684, Zbl 1535.05104 | found by zbMATH `ab:"Moser spindle" & ab:"fractional"` (FS131-PAS2); summ
+| arXiv:1502.00965 Godsil–Rooney (title not in the record) | Abstract only (FS131-PAS1, `plans/FS131-PAS1-prior-art.md` § 2.2, 2026-10-16): "None states a criterion for a given `S`." Not held. |
+| arXiv:2303.06267 `[CervantesKrebs2023]`'s Payan note (a Heuberger-matrix proof of Payan) | Abstract only (FS131-PAS1, `plans/FS131-PAS1-prior-art.md` § 2.2, 2026-10-16): "None states a criterion for
+| arXiv:2312.06898 Bucić–Davies (Amer. Math. Monthly 2025) | Abstract only (FS131-PAS1, `plans/FS131-PAS1-prior-art.md` § 3.2, 2026-10-16): large girth, exponential chromatic number in `ℝ^d`. Not held
+| arXiv:2512.05302 Krebs–Pan–Prakash (title not in the record) | Abstract only (FS131-PAS1, `plans/FS131-PAS1-prior-art.md` § 2.2, 2026-10-16): "None states a criterion for a given `S`." Not held. |
+| arXiv:2606.23762 Tung (title not in the record) | Abstract only (FS131-PAS1, `plans/FS131-PAS1-prior-art.md` § 2.2, 2026-10-16): "None states a criterion for a given `S`." Not held. |
+| arXiv:2607.26942 García-Marco–Knauer–Menara (circular chromatic number ≤ 4 for semiminimal abelian Cayley graphs) | Abstract only (FS131-PAS1, `plans/FS131-PAS1-prior-art.md` § 2.2, 2026-10-16): "No
+| arXiv:2602.17943 G. Istrate, C. Zara, *Hypersphere-based restricting conditions for colorings of the Euclidean space* (20 February 2026) | Checked by FS131-PAS2 (`plans/FS131-PAS2-prior-art.md` § 2.
+
+NEW § B ROWS:
+| `pdf/BauJohnsonNoble2021-single-distance-graphs-rational-points-cmb-64-13-24.pdf` | `[BauJohnsonNoble2021]` | **read (2026-09-09): abstract, §1 introduction and §2 preliminaries; the main theorem's 
+| `pdf/arXiv-2607.00404-minac-nguyen-tan-sums-of-units-finite-rings.pdf` | `[MinacNguyenTan2026]` | read: abstract, § 3.3 to Prop. 3.19 and Thm 3.16's statement (FS131-PAS1) |
+| `pdf/arXiv-2610.09474-davidson-monomial-cayley-graphs-one-parameter.pdf` | `[Davidson2026]` | Read: the abstract, the introduction's statement of results, Conjectures 4.3 and 4.7, Corollary 4.6 and 
+| `pdf/arXiv-2610.21940-enami-matsushita-cayley-abelian-circular-colorings.pdf` | `[EnamiMatsushita2026]` | read: §§ 1–2, Thm 4.2 and proof, references; § 3, § 4.1 skimmed (FS131-PAS1) |
+| `pdf/arXiv-1102.0120-barroero-frei-tichy-additive-unit-representations-survey.pdf` | `[BarroeroFreiTichy2011]` | scanned by search (FS131-PAS1) |
+| `pdf/schinzel-1969-remarque-sur-le-travail-de-nagell-acta-arith15-245-246.pdf` | `[Schinzel1969]` | read in full (FS131-PAS1) |
+| `pdf/nagell-1969-sur-les-diviseurs-premiers-des-polynomes-acta-arith15-235-244.pdf` | `[Nagell1969]` | read pp. 235–239 and 244 (FS131-PAS1); § 5 unread |

@@ -269,7 +269,7 @@ upper bound. Their witness was **re-verified here** by an independent exact chec
 `ℚ(√3,√11)` arithmetic, every congruence decided by an exact isometry test, all 182,304 independent sets enumerated; CERTIFIED, with
 five planted faults refused — `data/fs56/g27/`). **Searched for a contradicting or earlier claim** on 2026-09-16: every work citing
 `[CranstonRabern2015]` (Semantic Scholar, 11 records; OpenAlex, 8) and `[MatolcsiEtAl2025]` (Semantic Scholar, 4; OpenAlex's preprint
-record, 0); none addresses a field plane.
+record, 0); none addresses a field plane. **Searched again 2026-10-17 (FS131-PAS2):** the citers of `[CranstonRabern2015]` (Semantic Scholar 11, OpenAlex 10) and of `[MatolcsiEtAl2025]` (Semantic Scholar 5), the complete zbMATH listings of Cranston, Rabern, Matolcsi, Varga, Zsámboki, Dúcz, Ambrus and Ruzsa (since 2015), and 36 title and abstract queries in two disciplines: not found in print. **At the Moser ring the instance is in print:** `[Ducz2026]` Thm 3.1 gives geometric 4-colourings of the Moser lattice and, by its p. 4 remark, of the Moser ring, so with `G27` the geometric fractional chromatic number of their finite graphs has supremum exactly 4. The ring spans half of `K²`'s dimension, and Dúcz states nothing about `χ_f` of an infinite graph or about the field. Conversely, this entry's argument carries his bound to the whole field: every finite unit-distance graph over `ℚ(√3,√11)` has `χ_gf ≤ 4` (B2 with Theorem B; one mind).
 
 **Status:** not written up. It would sit naturally in FS-20's manuscript beside Theorem B, since the upper bound is Theorem B.
 
