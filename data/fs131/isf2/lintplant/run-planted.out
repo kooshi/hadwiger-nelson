@@ -1,0 +1,2 @@
+STEP lint-planted exit=1
+runner exit=0
