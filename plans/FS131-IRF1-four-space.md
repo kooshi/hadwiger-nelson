@@ -97,3 +97,39 @@ stage, with `Compulsion` and `Forbid` drafted in copies under `data/fs131/irf1/w
 **Build:** `data/fs131/irf1/build.sh order` (the brief's line: slot `--mem 8 --cpus 5`, `MEMMAX=8G BATCH=3`) on the working tree
 over `45da98e5b` with `Basic` and `Order` filled: `data/fs131/irf1/build-order.log`. `RationalFour/Basic` and `Order` rebuilt
 with no warning; `Compulsion` and `Forbid` rebuilt with their skeleton `sorry`s only.
+
+## Stage 3 — SAVED: `RationalFour/Compulsion` and `RationalFour/Forbid` proved; A3 and the rigidity corollary added
+
+**Proved, every leaf, no stored statement changed** (receipt: stage 4's comparison). `Compulsion` — Zaks's Lemma 1 by the
+gadget `0, 1, h, a, b` moved by `z ↦ x + (z − a)·q` and one `decide` over `Fin 4⁵` (the plan's route); forced equal by closure
+induction with the base point quantified (the obligation pass's item 4); forced different through the tetrahedron; the residue
+colourings through four private lemmas (`residue_spec`, `residue_eq_of_sub_mem_pr`, `sub_out_mem_comp`,
+`sub_mem_pr_of_residue_eq`); the law on `quatGraph`; the three heads on `ratFourGraph` by two transport lemmas
+(`forall_coloring_iff_quat`, `exists_coloring_iff_quat`, over private colourings read through `toQuat`), each head a single
+`rw` chain; Zaks's Lemma 2 example. `Forbid` — Lagrange over `ℚ` (`Nat.sum_four_squares` at `num·den`), the odd-quotient reading
+of `v₂ = 0` (coprimality of `num`, `den`), the rational answer (the similarity `z ↦ z·q`, `|q|² = r`, carries a colouring
+forbidding `r` to one forbidding `1/r`), `coloring_forbids_of_odd`, Johnson's question for every `d > 0`, and the two spec
+examples.
+
+**Added, public** (the brief's A3, and three the brief left to me, each named in the report):
+- `exists_equiv_coloring_add_eq_residue` — **A3, the structure clause**: `∀ c x₀, ∃ e : Fin 4 ≃ Fin 4, ∀ z ∈ comp,
+  c (x₀ + z) = e (residue z)` (the planner's one line, its name chosen here; `e i = c (x₀ + tetra i)`, a bijection because the
+  tetrahedron's six edges are unit, `Finite.injective_iff_bijective`).
+- `coloring_eq_of_forall_tetra` — its corollary: two proper four-colourings agreeing on one translated tetrahedron agree on its
+  component.
+- `coloring_eq_of_eqOn_isOpen` — **`[KubickiLehelMorayne2002]` Thm 4.3's rigidity, in the paper's own form** (the coordinator's
+  optional addition, inventory item 1086, taken): for every open `U ⊆ Fin 4 → ℝ` meeting `ℚ⁴` and every two proper
+  four-colourings `c, c'` of `ratFourGraph`, agreement on `U ∩ ℚ⁴` gives `c = c'`. One new input, as the reader said: every
+  coset of `P` is dense, `(2/3ᵏ)ℤ⁴ ⊆ P` (private `exists_near_sub_mem_pr`, by `round` coordinate by coordinate). 68 lines with its docstrings
+  against the reader's guess of 60–120.
+- `nonempty_ratFourGraph_coloring` — the model of every hypothesis of the `ratFourGraph` heads, an unconditional
+  `Nonempty (ratFourGraph.Coloring (Fin 4))`, which the vacuity scan reads as a witness (`nonempty_coloring`, the skeleton's, is
+  the one for `quatGraph`).
+
+**The merge of `main`** (`0e390e766`, before the build): main's commits since `273fb7b9a` change no Lean module, no script and
+no lakefile (`git diff --stat` over `Proofs`, `Proofs.lean`, `scripts`, `lakefile.toml`: empty); they bring
+`[KubickiLehelMorayne2002]`'s bibliography row and the reading record `plans/FS131-PAS3-kubicki-lehel-morayne.md`.
+
+**Build:** `data/fs131/irf1/build.sh all` on `68f2052ce` (clean tree): **OK — 746 of 746 batches, 3 modules rebuilt
+(`Compulsion`, `Forbid`, the root), 0 modules with warnings**, 18 m 49 s (`data/fs131/irf1/build-all.log`; the gate's copy
+`build/gate/build/20261017T012516Z-2119524.log`). No `sorry` remains in the four modules.
