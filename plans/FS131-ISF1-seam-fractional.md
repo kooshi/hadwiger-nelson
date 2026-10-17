@@ -190,3 +190,73 @@ All on `[propext, Classical.choice, Quot.sound]` or fewer; no outside theorem; n
 * `HadwigerNelson.G27.cert_bound` — the certificate's condition (iii) for every independent set of `G27`, by the kernel.
 * `HadwigerNelson.G27.density_le_of_cert`, `density_le_quarter`, `dfsR_sound`, `goodB_of_split`, `val_stepIn`,
   `val_mergeR`, `val_sortR`, `row_phi`, `xpt_mem` — the route's named steps (`Plane/G27/Sound`, `Law`, `Bound`).
+
+## Stage 5 — SAVED: the read-aloud, the drafts that need no gate count, and what is left
+
+### 5.1 The read-aloud (the stored types, `data/fs131/isf1/head-axioms.txt`)
+
+`[CranstonRabern2015]`, concluding section: *"What is the fractional chromatic number of `ℚ(√3,√11) × ℚ(√3,√11)`?"* — the graph
+on the points of the plane with both coordinates in `ℚ(√3, √11)`, two points adjacent at distance exactly 1.
+* `fractionalChromaticNumber_seamPlane : (SimpleGraph.induce FieldWall4.seamPlane (unitDistance ℂ)).fractionalChromaticNumber = 4`.
+  `unitDistance ℂ` joins `z, w` with `dist z w = 1`; `seamPlane` is `{z | z.re ∈ seamSpan ∧ z.im ∈ seamSpan}`, `seamSpan` the
+  numbers `a + b√3 + c√11 + d√33` with `a, b, c, d` rational — `ℚ(√3, √11)`. The library's `fractionalChromaticNumber` is the
+  infimum, over `b > 0` and `b`-fold `n`-colourings (each vertex at least `b` of `n` colours, adjacent vertices none in
+  common), of `n/b` in `ℝ≥0∞`. So: no `b`-fold `n`-colouring of `K²` has `n/b < 4`, and `4` is attained (Theorem B's
+  four-colouring). This is § 1.6's "Our answer: 4, exactly".
+* `iSup_fractionalChromaticNumber_seamPlane : ⨆ S, χ_f(K²[S]) = 4` over finite `S` — § 1.6's "finite unit-distance graphs
+  over `ℚ(√3,√11)` have fractional chromatic numbers arbitrarily close to 4"; so the finitary reading of the question gives
+  the same 4.
+* `finIndepRatio_seamPlane : (…).finIndepRatio = 4⁻¹` — the infimum over nonempty finite `S` of `α(K²[S])/|S|`: § 1.6's
+  "independence ratios arbitrarily close to `1/4`, never below".
+
+**Not claimed**: `χ_f` at any other field; `χ_gf(G27) ≥ 4` as a statement (the certificate is consumed by `cert_bound`, a
+statement about the 27 relabelled, translated points, not stated as MRVZ's Theorem 3); the generalization of FS131-PAS2
+§ 4.2 (priced, stage 3); novelty — FS131-PAS2's line, quoted in 5.2. **Route** (not the hand proof's): no blow-up and no
+measure rigidity; `Collapse.exists_indepLaw` (amenability, standard three) and the certificate read against the law.
+
+### 5.2 Drafts (each naming its slot; none applied; the gate's counts are left for the gate)
+
+1. **`CLOSED-QUESTIONS.md` § 1.6**, replace `**Not kernel-checked** beyond Theorem B.` with: `**Kernel-checked** (FS131-ISF1,
+   on the standard three axioms, no outside theorem): `Instances/SeamFractional`'s `fractionalChromaticNumber_seamPlane`,
+   `iSup_fractionalChromaticNumber_seamPlane`, `finIndepRatio_seamPlane`. The route is not the hand proof's: an invariant random
+   independent set of `Cay(R, U)` (`Collapse.exists_indepLaw`, the amenability step) has density at most `1/4` by
+   `[MatolcsiEtAl2025]`'s certificate for `G27`, every condition of which the kernel checks (`Plane/G27/`: 16,829 congruence
+   rows as isometries, the 28,496 weights, every independent set of `G27` by a residual DFS); no blow-up and no measure rigidity.`
+2. **The novelty line** (FS131-PAS2 § 4.4, "C14's novelty line", quoted, not reworded): *"`χ_f(ℚ(√3,√11)²) = 4` answers
+   `[CranstonRabern2015]`'s question; prior art: not found in print (FS131-PAS2, 2026-10-17). The upper bound is Fischer's
+   (1994), the lower bound's graph and blow-up are Matolcsi, Ruzsa, Varga and Zsámboki's (2025), read inside the field; at
+   the Moser ring the geometric value 4 is Dúcz's (2026)."*
+3. **`BIBLIOGRAPHY.md`**, `[MatolcsiEtAl2025]`'s "what of ours rests on it": add "Thm 3's certificate (`G27`, the witness
+   re-checked by `tools/fs56_gf_check.py`) is kernel-checked in `Plane/G27/` and consumed by `G27.density_le_quarter`
+   (FS131-ISF1); its Thm 1 (the blow-up) is not used by the kernel route." `[CranstonRabern2015]`: add "the question is
+   answered in the kernel by `Instances/SeamFractional` (FS131-ISF1)."
+4. **`LEAN.md`** § The kernel's cost model, two lines (Keryx's pen): (a) *A certificate whose terms are sums over subsets
+   (`Σ_{Y ⊆ S} y_Y` for every independent `S`) is checked by a residual DFS, not by testing every term at every node: the
+   residual of the term list (terms whose decided part is in the set, that part removed, equal keys merged, terms holding a
+   neighbour of a chosen point dropped) took `G27`'s check from 974 M mask tests to 2.76 M list elements (FS131-ISF1).*
+   (b) *A list pass written with `List.rec` and direct `Nat` calls costs about 24 µs an element in the kernel, against 50 µs
+   with structural recursion and direct calls and 86 µs with structural recursion and notation; the definitions are
+   `noncomputable` (`List.rec` does not compile), which `decide +kernel` does not mind (FS131-ISF1's benchmark,
+   `data/fs131/isf1/probes/bench/`).* (c) *`simp only [cond_true]` on a goal holding a closed `2¹⁰⁰⁰` offset sent the kernel into
+   deep recursion; stated with the offset a variable and instantiated, the same lemma checks (`Sound.tv_combine_aux`).*
+
+### 5.3 What is left (for this job's successor, or this lane's next job)
+
+**The gate**, on one commit, after merging `main`:
+1. Merge `main` (now with FS131-IRF1's `RationalFour/*`, landed as `cb4ed8079`, item 1089); keep both sides of the gate's
+   inputs (`scripts/Axioms.lean`, the vacuity header, `scripts/assumptions-ledger.txt`, `ARCHITECTURE.md`, `Proofs.lean`).
+   Copy `main`'s compiled `RationalFour` modules in by checksum (`LEAN.md` § Building, FS131-LU1/ICS1's recipe) before the build.
+2. **The coordinator's amendment** (item 1089's message to this job): in the merged tree, in the module docstrings of
+   `Proofs/HadwigerNelson/RationalFour/Compulsion.lean` and `RationalFour/Forbid.lean`, replace each "prior art: pending
+   `[KubickiLehelMorayne2002]`" with "prior art: not found in print (FS131-PAS2, FS131-PAS3; `CLOSED-QUESTIONS.md` § 3)" —
+   docstrings only; the statement comparison must show those two modules' declarations unchanged.
+3. The audit's block for `scripts/Axioms.lean` (CLEAN): print every record of the 52 modules of `data/fs131/isf1/modules.txt`
+   with `data/fs131/isf1/lean/AxiomsAll.lean` (a copy of FS131-LGT1's printer; its plant is an imported record that must
+   class as IMPORTED), check each public record's axioms are within the standard three, and file them; then `axioms.sh`,
+   `--self-test`, `dupnames.sh` (before the audit) and its self-test, `vacuity.sh` (count changes explained against
+   FS131-IRF1's gate, `data/fs131/irf1/gate/` on `main`; the new `IndepLaw seamField` binders and the `List`/`Nat` lemmas
+   are the likely sites — `nonempty_indepLaw` is the law's model), `assumptions.sh` (no hypothesis here stands for an
+   assumption: `density_le_of_cert`'s are conditions on its own `rows`, `coefs`; `WfAdj`, `IndepFrom`, `SegsOk` are concluded
+   by `wfAdj_of_wfB`, `indepFrom_mk`, `segs_ok`) and its self-test, `lake lint`, the steps of
+   `data/fs131/clone1/run-gate.sh` copied under `data/fs131/isf1/`.
+4. The front-page drafts that need the gate's counts (`CLAUDE.md` § The gate and § Trust ledger).
