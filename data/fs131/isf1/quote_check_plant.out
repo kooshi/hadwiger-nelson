@@ -1,0 +1,8 @@
+FOUND   #0 data/fs131/REQUEST-2026-10-13.md (278 chars) in: /home/kooshi/source/lean-dir, .
+FOUND   #1 CLOSED-QUESTIONS.md (1881 chars) in: /home/kooshi/source/lean-dir, .
+MISSING #2 Proofs/HadwigerNelson/Instances/SeamFractional.lean (117 chars); longest found prefix 18: next 'chromaticNumber_seamPlane : ((unitDistance ℂ).induce seamPlane).fractionalChroma'
+FOUND   #3 Proofs/HadwigerNelson/Instances/SeamFractional.lean (175 chars) in: .
+FOUND   #4 plans/FS131-close-inventory.md (3361 chars) in: /home/kooshi/source/lean-dir, .
+FOUND   #5 plans/FS131-close-inventory.md (3065 chars) in: .
+FOUND   #6 plans/FS131-close-inventory.md (2276 chars) in: /home/kooshi/source/lean-dir, .
+7 quotes, 1 missing
