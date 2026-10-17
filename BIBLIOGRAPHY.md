@@ -410,6 +410,7 @@ items 2–6 and the first of these at once** (`[Townsend2005]` then arrived and 
 | **[Nagell1951]** | T. Nagell, *Introduction to Number Theory*, Wiley, New York 1951 | Thm 97, the proof of `[Nagell1969]` Thm 3 ("Bauer's theorem") | not held | named only, through `[Nagell1969]` |
 | **[Bauer1916]** | M. Bauer, *Zur Theorie der algebraischen Zahlkörper*, Math. Ann. 77 (1916) 353–356 | the weaker form Nagell names | not held | named only |
 | **[Schinzel1969]** | A. Schinzel, *Remarque sur le travail précédent de T. Nagell*, Acta Arith. 15 (1969) 245–246 | Nagell's converse question answered through Bauer's theorem on degree-one primes | `library/pdf/schinzel-1969-remarque-sur-le-travail-de-nagell-acta-arith15-245-246.pdf` | read in full (FS131-PAS1) |
+| **[LiSu2026]** | S. Li, Y. Su, *Every n points in the plane contain (m1 + o(1)) n points with no unit distance*, arXiv:2610.15424v1 [math.CO] (11 October 2026; the PDF dated 10 October 2026), 6 pp.; Lean development `github.com/daizisheng/erdos-1070`, release v1.0 | **Row 129's plane clause in print, first:** Theorem 1.1, *"lim f (n)/n = m1 . Moreover f (n) ≥ m1 n for every n ≥ 1."*, the first clause of `[DuczVarga2026]` Conjecture 1 (Erdős Problem #1070), by a single-label version of `[OAIMath2026]` § 4's transfer over its Thm 2.3, formalized in Lean 4 on the standard three axioms (§ 6). Found independently of FS-133 (derived 7 October, kernel 14 October); found here 17 October (FS131-PAS2). Not stated there: `α₁(𝒜²) = m₁`, any fractional chromatic number (a reading, one mind) | `library/pdf/arXiv-2610.15424-li-su-every-n-points-no-unit-distance-m1.pdf` | **read in full** (FS131-PAS2, 2026-10-17); its Lean repository not cloned |
 
 ### A′. Retired and alternate keys
 
@@ -647,6 +648,7 @@ item for that work.*
 | `pdf/shelah-soifer-2003-axiom-of-choice-chromatic-number-plane-jcta-103-387-391.pdf` | `[ShelahSoifer2003]` | read in full (2026-09-26, FS103-G) |
 | `pdf/marks-2023-measurable-graph-combinatorics-icm2022.pdf` | `[Marks2023ICM]` | keyword scan only (2026-09-26, FS103-G): no unit-distance passage |
 | `supplementary/mrvz-2311.10069-fcn4/` (10 files, with `SHA256SUMS`) | `[MatolcsiEtAl2025]` | the paper's supplementary data (`https://bit.ly/fcn-4`); used as data, not read as text: `tools/fs56_mrvz_import.py` imports `G_27_*.txt` and `witness.txt` into `data/fs56/g27/cert-g27-mrvz.json` (sha256 recorded there; `data/fs56/README.md`) |
+| `pdf/arXiv-2610.15424-li-su-every-n-points-no-unit-distance-m1.pdf` | `[LiSu2026]` | read in full |
 
 **Held files with no key — verdicts.** These came with the 2026-09-05 fetch and were scanned on 2026-09-08
 (FS-18, `plans/STUB-library-read.md` §R) against five questions: a chromatic result over a field other than ℝ or ℚ;

@@ -150,8 +150,8 @@ each in full. "Prior art: not found in print" reports the searches recorded in t
   `OneClass.fractionalChromaticNumber_plane`, `OneClass.fractionalChromaticNumber_algPlane`,
   `OneClass.iSup_fractionalChromaticNumber_plane`, `OneClass.tendsto_minIndepNum_div`.
 - **Axioms.** std3.
-- **Whose.** For the plane: prior art not found in print. `[Davies2026]` Thm 1.1 proves the same equality in dimensions four
-  and up. In the plane, `f(n)/n → m₁(ℝ²)` is the first clause of `[DuczVarga2026]`'s Conjecture 1, and `χ_f(ℝ²) = 1/m₁(ℝ²)`
+- **Whose.** For the plane: `α₁(ℝ²) = m₁(ℝ²)`, as `f(n)/n → m₁(ℝ²)`, is `[LiSu2026]`'s Theorem 1.1 (posted 11 October 2026, with a Lean proof over the same `[OAIMath2026]` Thm 2.3), published before this project's kernel proof (14 October; derivation 7 October) and found independently of it. `α₁(𝒜²) = m₁(ℝ²)` and the fractional equalities are not stated there (a reading, one mind, FS131-PAS2): prior art not found in print. `[Davies2026]` Thm 1.1 proves the same equality in dimensions four
+  and up. `f(n)/n → m₁(ℝ²)` is the first clause of `[DuczVarga2026]`'s Conjecture 1, as `[LiSu2026]` says; and `χ_f(ℝ²) = 1/m₁(ℝ²)`
   is the equality that `[MatolcsiEtAl2025]` § 2 calls not known (posed earlier by `[Johnson1996fcn]` and
   `[Johnson2000surprises]`). The rigidity step is `[OAIMath2026]`'s, ported. The kernel proof is this project's.
 - **At a number field.** For every real number field `F`, with no hypothesis, `α₁(F²) = α_loc(F) = max(m₁(ℝ²), ⨆_P r_P)`,
@@ -387,6 +387,8 @@ is listed in `ARCHITECTURE.md` § 5. What landing each in Lean would mean is `RO
   compendium*, Geombinatorics XVI(1) (2006) 209–218.
 - **Kruskal (2008)** C. P. Kruskal, *The chromatic number of the plane: the bounded case*, J. Comput. Syst. Sci. 74(4) (2008)
   598–627.
+- **[LiSu2026]** S. Li, Y. Su, *Every n points in the plane contain (m1 + o(1)) n points with no unit distance*,
+  arXiv:2610.15424 (2026).
 - **[Madore2015]** D. A. Madore, *The Hadwiger–Nelson problem over certain fields*, arXiv:1509.07023 (2015).
 - **[Manturov2012]** V. O. Manturov, *On the chromatic numbers of integer and rational lattices*, arXiv:1206.1934; J. Math.
   Sciences 214(5) (2016) 687–698.

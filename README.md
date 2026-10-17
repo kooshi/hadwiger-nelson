@@ -221,13 +221,11 @@ is the fractional chromatic number. The same holds over the algebraic plane (poi
 $f(n)/n \to m_1(\mathbb{R}^2)$, where $f(n)$ is the least independence number of a unit-distance graph on $n$ points of the
 plane.
 
-- **Why it matters.** It proves the first clause of Dúcz and Varga's Conjecture 1 (2026), and answers the question Matolcsi,
-  Ruzsa, Varga and Zsámboki (2025, §2) call open, whether $\chi_f(\mathbb{R}^2) = 1/m_1(\mathbb{R}^2)$; Johnson had posed it
-  earlier (1996; 2000). With the known bounds on $m_1(\mathbb{R}^2)$ (at least 0.2293, Croft 1967; at most 0.2470, Ambrus,
+- **Why it matters.** Its first part, $f(n)/n \to m_1(\mathbb{R}^2)$, is the first clause of Dúcz and Varga's Conjecture 1 (2026); Li and Su proved it first in print (arXiv:2610.15424, posted 11 October 2026, with a Lean proof), and this library's proof, derived on 7 October and kernel-checked on 14 October, was found independently of theirs. The fractional part answers the question Matolcsi, Ruzsa, Varga and Zsámboki (2025, §2) call open, whether $\chi_f(\mathbb{R}^2) = 1/m_1(\mathbb{R}^2)$; Johnson had posed it earlier (1996; 2000). With the known bounds on $m_1(\mathbb{R}^2)$ (at least 0.2293, Croft 1967; at most 0.2470, Ambrus,
   Csiszárik, Matolcsi, Varga and Zsámboki 2023), it puts $\chi_f(\mathbb{R}^2)$ between about 4.05 and 4.36.
 - **What it rests on.** Lean's standard axioms only. The key step is OpenAI's rigidity theorem (Theorem 2.3 of their
   manuscript), whose Lean proof was ported into this library and checked again here.
-- **Prior art.** For the plane: not found in print (`LEDGER.md` row 129). Davies (2026, Theorem 1.1) proves the same equality
+- **Prior art.** For the plane, $f(n)/n \to m_1(\mathbb{R}^2)$ and $\alpha_1(\mathbb{R}^2) = m_1(\mathbb{R}^2)$ are Li and Su's (arXiv:2610.15424, 2026), by the same rigidity theorem of OpenAI's. The algebraic-plane form and the fractional equalities are not stated there; for them, prior art not found in print (`LEDGER.md` row 129). Davies (2026, Theorem 1.1) proves the same equality
   in dimensions four and up.
 - **Not claimed.** Any value of $m_1(\mathbb{R}^2)$, or that it equals Croft's constant (Dúcz and Varga's second clause).
 
