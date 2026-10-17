@@ -1,0 +1,9 @@
+import Proofs
+open HadwigerNelson
+#print axioms Instances.SeamFractional.fractionalChromaticNumber_seamPlane
+#print axioms Instances.SeamFractional.finIndepRatio_seamPlane
+#print axioms Instances.SeamFractional.iSup_fractionalChromaticNumber_seamPlane
+#print axioms Instances.SeamFractional.IndepLaw.density_le_quarter_seamField
+#print axioms Instances.SeamFractional.numberField_seamField
+#print axioms RationalFour.exists_coloring_forbidding_iff
+#print axioms RationalFour.exists_equiv_coloring_add_eq_residue
