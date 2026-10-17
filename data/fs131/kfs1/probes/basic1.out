@@ -1,0 +1,5 @@
+slot: admitted lake: mem 4 GiB (hard cap), cpus 0
+Proofs/HadwigerNelson/RationalFour/Basic.lean:68:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/RationalFour/Basic.lean:84:8: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/RationalFour/Basic.lean:118:0: warning: declaration uses `sorry`
+Proofs/HadwigerNelson/RationalFour/Basic.lean:121:0: warning: declaration uses `sorry`

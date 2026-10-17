@@ -1,0 +1,9 @@
+slot: admitted seq.sh: mem 8 GiB (hard cap), cpus 0
+== Proofs/HadwigerNelson/RationalFour/Order
+exit 0
+== Proofs/HadwigerNelson/RationalFour/Compulsion
+exit 0
+== Proofs/HadwigerNelson/RationalFour/Forbid
+exit 0
+== Proofs/HadwigerNelson/Instances/SeamFractional
+exit 0

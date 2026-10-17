@@ -170,3 +170,168 @@ form, a search request (stage 3 § 3.6), never a reason to wait.
 **Printed theorems the steps read.** `[MatolcsiEtAl2025]` Thm 3 (`χ_gf(G27) ≥ 4`) enters as its certificate, checked by the
 kernel — formalized, not declared. Their Thm 1 (the blow-up) is not needed on route B-I. `[Fischer1994]`'s value is Theorem B,
 held.
+
+## Stage 3 — SAVED: the skeleton, the plan per leaf, the price
+
+### 3.1 The modules (branch `fs131-kfs1`; nothing with a `sorry` goes to `main`)
+
+| module | holds | imports |
+|---|---|---|
+| `Proofs/HadwigerNelson/RationalFour/Basic.lean` | `sqDist`, `quatGraph`, `sqDist4`, `ratFourGraph`, `toQuat`, `quatIso`, `ratPoints`, `nonempty_iso_unitDistance`, `val`, `unitSphere`, `onePlusI` | Mathlib (quaternions, `padicValRat`, colourings, `PiL2`), `UnitDistance` |
+| `RationalFour/Order.lean` | `comp`, `zero_le_val_iff`, `mul_mem_comp`, `inv_prime_mem_comp`, `inv_odd_mem_comp`, `mem_comp_iff`, `pr`, `mem_pr_iff`, `pr_le_comp`, `hur`, `hur'`, `tetra`, `sqDist_tetra`, `existsUnique_tetra_sub_mem_pr` | `RationalFour/Basic`, `SumFourSquares` |
+| `RationalFour/Compulsion.lean` | Zaks's Lemma 1, forced equal / different, `residue`, `residueCol`, `residueColouring`, `nonempty_coloring`, the law on `quatGraph` and the three heads on `ratFourGraph` | `RationalFour/Order` |
+| `RationalFour/Forbid.lean` | Lagrange over `ℚ`, `padicValRat_eq_zero_iff_odd`, the three forbidden-distance heads | `RationalFour/Compulsion` |
+| `Instances/SeamFractional.lean` | `numberField_seamField`, `IndepLaw.density_le_quarter_seamField` (leaves); **the three heads proved from them** | `Collapse/Density/Upper`, `Arith/QuadraticPrime`, `SquareClass` |
+
+`Proofs.lean` imports `RationalFour/Forbid` and `Instances/SeamFractional`; `ARCHITECTURE.md` § 3.6 has a row for each module
+(`tools/check_architecture.py`: PASS). Each module elaborated with `lake env lean` (iteration, `data/fs131/kfs1/seq.sh`);
+the build through `./scripts/build.sh` is § 3.5.
+
+### 3.2 The head statements, read aloud against the results
+
+**Part A** (`ratFourGraph : SimpleGraph (Fin 4 → ℚ)`, `x ∼ y ⟺ Σᵢ (xᵢ − yᵢ)² = 1`; a proper four-colouring is
+`ratFourGraph.Coloring (Fin 4)`, Mathlib's `G →g ⊤`; `sqDist4 x y = Σᵢ (xᵢ − yᵢ)²`).
+- `forall_coloring_eq_iff x y : (∀ c, c x = c y) ↔ x = y ∨ 1 ≤ padicValRat 2 (sqDist4 x y)` — "every proper four-colouring
+  gives `x, y` one colour iff `x = y` or `v₂(|x − y|²) ≥ 1`". A1's first clause, with the trivial `x = y` written out (Mathlib's
+  `padicValRat 2 0 = 0` would otherwise make the clause false at `x = y`).
+- `forall_coloring_ne_iff x y : (∀ c, c x ≠ c y) ↔ padicValRat 2 (sqDist4 x y) = 0 ∧ x ≠ y` — A1's second clause; `x ≠ y`
+  excludes the junk value.
+- `exists_coloring_eq_and_ne_iff x y : ((∃ c, c x = c y) ∧ ∃ c, c x ≠ c y) ↔ padicValRat 2 (sqDist4 x y) < 0` — A1's third
+  clause; at `x = y` both sides are false.
+- `exists_coloring_forbidding_iff (hd : 0 < d) : (∃ c, ∀ x y, (sqDist4 x y : ℝ) = d ^ 2 → c x ≠ c y) ↔
+  (∀ r : ℚ, (r : ℝ) ≠ d ^ 2) ∨ ∃ p q : ℕ, Odd p ∧ Odd q ∧ d ^ 2 = p / q` — `[Johnson2006]` p. 212's question as posed, for every
+  `d > 0`; "distance `d`" is `|x − y|² = d²` read in `ℝ`, the only reading for rational points.
+- `exists_coloring_forbidding_iff_padicValRat (hr : 0 < r)` — the same on squared distances `r ∈ ℚ>0`: iff `v₂(r) = 0`.
+- `coloring_forbids_of_odd (hp : Odd p) (hq : Odd q) c (h : sqDist4 x y = p / q) : c x ≠ c y` — "and then every proper
+  four-colouring forbids `d`".
+- `nonempty_iso_unitDistance : Nonempty (ratFourGraph ≃g (unitDistance (EuclideanSpace ℝ (Fin 4))).induce ratPoints)` — the
+  graph is the library's unit-distance graph of Euclidean four-space on its rational points: the read-back's anchor.
+
+**Not claimed (Part A):** anything with five or more colours; anything in `ℚⁿ`, `n ≠ 4`; the structure clause A3 as a
+statement (it is one line in the existing vocabulary — `∀ c x₀, ∃ e : Fin 4 ≃ Fin 4, ∀ z ∈ comp, c (x₀ + z) = e (residue z)` —
+and is left out of the price unless the coordinator wants it, about 40 lines); novelty (FS131-PAS2's).
+
+**Part B** (`seamPlane = planeOver seamField`, `K = ℚ(√3, √11)`; `unitDistance ℂ` induced on it).
+- `fractionalChromaticNumber_seamPlane : ((unitDistance ℂ).induce seamPlane).fractionalChromaticNumber = 4` — C14.
+- `finIndepRatio_seamPlane : … .finIndepRatio = 4⁻¹` — the infimum over nonempty finite vertex sets of `α(G[S])/|S|` is `1/4`.
+- `iSup_fractionalChromaticNumber_seamPlane : ⨆ S : Finset seamPlane, χ_f(G[S]) = 4` — "finite unit-distance graphs over `K`
+  have fractional chromatic numbers arbitrarily close to 4", and none above 4.
+
+All three are **proved in the skeleton** from two leaves (`numberField_seamField`, `IndepLaw.density_le_quarter_seamField`)
+through `exists_indepLaw`, `finIndepRatio_planeOver_le_cayR`, `inv_finIndepRatio_le_iSup_fractionalChromaticNumber`,
+`OneClass.fractionalChromaticNumber_induce_le`, `four_colorable_of_seam_field` — the composition is checked; what is open is
+the two leaves. **Not claimed (Part B):** `χ_f` at any other field; the geometric fractional chromatic number as a statement
+(the certificate is consumed, not stated); novelty.
+
+### 3.3 The plan per leaf
+
+Leaves in the order to build them. "Route" is the proof; "uses" names confirmed with `#check` (stage 2's probes) or held by
+the library; "hard" says where the time goes.
+
+**`RationalFour/Basic`**
+| leaf | route | uses | hard | lines |
+|---|---|---|---|---|
+| `sqDist_toQuat` | unfold `toQuat`, `QuaternionAlgebra.equivTuple` (its `symm_apply`), `normSq_def'`, `Fin.sum_univ_four`, `ring` | as named | none | 10 |
+| `nonempty_iso_unitDistance` | the map `x ↦ ⟨toLp (fun i => (x i : ℝ)), _⟩`; injective; surjective on `ratPoints` by `choose`; `dist = √(Σ dist²)` (`EuclideanSpace.dist_eq`), `Real.sqrt_eq_one`, `Rat.cast` of the sum | `EuclideanSpace.dist_eq`, `Real.dist_eq`, `sq_abs` | the `PiLp`/`WithLp` coercions at the pin | 70 |
+| two `val` examples | `padicValRat.of_nat`, `padicValRat.inv`, `padicValNat.self`/`padicValNat.eq_zero_of_not_dvd` | as named | none | 10 |
+
+**`RationalFour/Order`**
+| leaf | route | uses | hard | lines |
+|---|---|---|---|---|
+| `zero_le_val_iff` (A1) | ←: `normSq = (a²+b²+c²+d²)/(4m²)`, the sum `≡ 0 (mod 4)` for one parity (`decide` on `ZMod 4`). →: write the four coordinates over the product `D` of their denominators, `D = 2^e·m` (`Nat.exists_eq_two_pow_mul_odd`); `0 ≤ v₂` gives `4^e ∣ ΣAᵢ²`; strong induction on `e`: `4 ∣ Σ` forces one parity; all even → halve, `e − 1`; all odd → `Σ ≡ 4 (mod 8)` (decide on `ZMod 8`), so `e ≤ 1` | `padicValRat.div/pow/of_nat`, `padicValRat_of_nat` | the bookkeeping from `ℚ` coordinates to one integer quadruple — state a helper `exists_int_coords : ∃ D > 0, ∃ A, z = A / D` first | 170 |
+| `mul_mem_comp` | `AddSubgroup.closure_induction` on `x`, inside it on `y`; generator case `normSq (u v) = 1` (`map_mul`) | `AddSubgroup.closure_induction`, `mul_add`, `mul_neg` | none (`Subring.closure_toAddSubgroup` is not a name at the pin) | 30 |
+| `inv_prime_mem_comp` | `Nat.sum_four_squares p`; permute so `a ≠ 0` (four cases, each a quaternion with the nonzero square first); `u = q * q * (p⁻¹)`, `normSq u = 1`; `u + star u = 4a²/p − 2` (`QuaternionAlgebra` component lemmas, `ring`); `Nat.Coprime (4a²) p` from `0 < a² < p` and `p` odd prime; Bézout (`Nat.Coprime.isCoprime`, `Int.gcd_eq_gcd_ab`) writes `1/p` as an integer combination of `4a²/p` and `1` | as named | the four-case permutation; state a helper `exists_sq_lt_prime` producing `a ≠ 0` with `a² + b² + c² + d² = p` | 90 |
+| `inv_odd_mem_comp` | `Nat.recOnMul`: `0` not odd; `1`; prime (odd, so `≠ 2`); product (both factors odd, `(ab)⁻¹ = a⁻¹ b⁻¹`, `mul_mem_comp`) | `Nat.recOnMul`, `Nat.odd_mul` | none | 25 |
+| `mem_comp_iff` | →: closure induction with the ultrametric step `0 ≤ val x → 0 ≤ val y → 0 ≤ val (x + y)` from the normal form (odd denominators multiply, parities add; `0 ≤ val` of a normal form by ←). ←: normal form `z = (1/m)·(a, b, c, d)/2`, `(a, b, c, d)/2` an integer combination of `1, i, j, k, h` (one parity), each in `unitSphere`; `mul_mem_comp` with `inv_odd_mem_comp` | `zero_le_val_iff`, `zsmul_mem` | none beyond A1 | 60 |
+| `mem_pr_iff` | `z = (1 + i) r` ⟺ `r = (1+i)⁻¹ z`; `val ((1+i)⁻¹ z) = val z − 1` for `z ≠ 0` (`normSq_inv`, `padicValRat.mul`, `v₂(1/2) = −1`); `mem_comp_iff` | `normSq_inv`, `padicValRat.mul/inv` | the `z = 0` case apart | 40 |
+| `pr_le_comp` | `mem_pr_iff`, `mem_comp_iff`, `0 ≤ 1 ≤ val` | — | none | 5 |
+| `sqDist_tetra` | `fin_cases` both, `normSq_def'`, `norm_num` | — | none | 10 |
+| `existsUnique_tetra_sub_mem_pr` | existence: normal form, case on the parity; all even: `Σa'` odd or even picks `1` or `0` (`N ≡ Σ (mod 2)`); all odd: of `h, h′` the one with `Σ(aᵢ − m)/2` even (they differ by `m`, odd); each by `mem_pr_iff` and the parity of the squared length. Uniqueness: `tetra i − tetra j` is a unit (`sqDist_tetra`), `val = 0`, so not in `pr` | `zero_le_val_iff`, `mem_pr_iff` | the integer parity arithmetic of four cases — state one helper per case | 90 |
+| example `onePlusI ∈ comp` | `add_mem` of `1`, `i` | — | none | 3 |
+
+**`RationalFour/Compulsion`** (after the domain-modeling change of § 3.4: the quaternion-level law by membership)
+| leaf | route | uses | hard | lines |
+|---|---|---|---|---|
+| `coloring_eq_of_sqDist_two` | gadget `0, 1, hur, a, b`; `q = (b − a)⁻¹ * (y − x)`, `normSq q = 1`; `φ z = x + (z − a) * q`; `sqDist (φ z) (φ z′) = sqDist z z′` (`map_mul`, `normSq q = 1`); nine adjacencies by `norm_num`; `∀ p q r s t : Fin 4, …` by `decide` | `Coloring.valid`, `normSq_inv` | none | 80 |
+| `coloring_eq_of_mem_pr` | `x − y = (1+i) r`, `r ∈ comp = closure`; induct on `r`: `c (y + (1+i) r) = c y`; generator by the previous leaf (`normSq ((1+i)u) = 2`) | `AddSubgroup.closure_induction` | stating the motive with `y` universally quantified | 50 |
+| `coloring_ne_of_mem_comp_of_notMem_pr` | `existsUnique_tetra_sub_mem_pr` gives `i ≠ 0` with `x − y − tetra i ∈ pr`; `c x = c (y + tetra i)` (previous leaf); `c (y + tetra i) ≠ c y` (adjacent: `sqDist_tetra i 0`) | — | none | 30 |
+| `residueCol_ne_of_adj` | `x − y` a unit, in `comp`, so `⟦x⟧ = ⟦y⟧` (`QuotientAddGroup.eq`); the two residues are those of `x − r`, `y − r`; equal residues would put `x − y` in `pr` (`pr` a subgroup: difference of two members), but `val (x − y) = 0`; the shift is the same element of `Fin 4`, and `· + s` is injective | `QuotientAddGroup.eq`, `mk_out_eq_mul` | `residue`'s `choose` — read it through `existsUnique`'s uniqueness: state `residue_spec` and `residue_eq_iff` first | 70 |
+| `residueCol_eq_imp` | same component: as above, residues equal ⇒ `x − y ∈ pr`; different components: `x − y ∉ comp` | as above | none | 25 |
+| `exists_residueCol_eq_and_ne` | components differ (`⟦x⟧ ≠ ⟦y⟧`); `a := Function.update 0 ⟦y⟧ s` with `s` chosen to make `residueCol a y` equal to, or one more than, `residueCol 0 x` | `Function.update_of_ne` | none | 35 |
+| the law on `quatGraph` (three) | eq: `pr` ⇒ forced (above); not in `pr` ⇒ `residueColouring 0` or a shift separates (in `comp`: separates by `residueCol_eq_imp`; not: `exists_residueCol_eq_and_ne`). ne and free: the same three facts | the leaves above | none | 45 |
+| the three heads on `ratFourGraph` | transport colourings along `quatIso` (`c.comp quatIso.symm.toHom` and back), `sqDist_toQuat`, then `mem_pr_iff`, `mem_comp_iff`, and `x ≠ y ↔ toQuat x ≠ toQuat y` | `quatIso` | none | 50 |
+| Zaks's Lemma 2 example | `val` of `4` is 2 | the head | none | 5 |
+
+**`RationalFour/Forbid`**
+| leaf | route | uses | hard | lines |
+|---|---|---|---|---|
+| `exists_sqDist4_eq` | `r = n/d`, `n·d = a² + b² + c² + e²` (`Nat.sum_four_squares`), `x = (a, b, c, e)/d` | `Rat.num_div_den` | casts | 25 |
+| `padicValRat_eq_zero_iff_odd` | →: `r.num`, `r.den` coprime, `v₂ = v₂(num) − v₂(den) = 0` ⇒ both odd (one of them is odd by coprimality); ←: `padicValRat.div`, `padicValNat.eq_zero_of_not_dvd` | `padicValRat.div`, `padicValRat.of_nat` | none | 35 |
+| `exists_coloring_forbidding_iff_padicValRat` | ←: `residueColouring 0` (transported) separates every pair with `val = 0`. →: `v₂ r ≥ 1`: a pair at `r` (Lagrange) is forced equal; `v₂ r < 0`: `q` with `normSq q = r`, `c' = c ∘ (q * ·)` is proper and forbids `1/r`, `v₂(1/r) ≥ 1`, contradiction by the first case | the law, `exists_sqDist4_eq` | the similarity as a graph map on `ratFourGraph` — do it on `quatGraph` and transport once | 60 |
+| `coloring_forbids_of_odd` | `padicValRat_eq_zero_iff_odd` and `forall_coloring_ne_iff` | — | none | 10 |
+| `exists_coloring_forbidding_iff` | `d² ∉ ℚ`: no pair at `d` (cast of a rational), any colouring; `d² = r`: the rational form and `padicValRat_eq_zero_iff_odd`, with `(p/q : ℝ) = ((p/q : ℚ) : ℝ)` | the two above | casts | 40 |
+| two spec examples | the rational form at `2` and `1/2` | — | none | 10 |
+
+**`Instances/SeamFractional`**
+| leaf | route | uses | hard | lines |
+|---|---|---|---|---|
+| `numberField_seamField` | `seamField_le_fieldOfRadicands`; a `ℚ`-linear injection `seamField →ₗ fieldOfRadicands {3, 11}` (`Subfield.inclusion`), `FiniteDimensional.of_injective`; `CharZero` | `instNumberFieldFieldOfRadicands`, `seamField_le_fieldOfRadicands` | none | 30 |
+| `IndepLaw.density_le_quarter_seamField` | the certificate pipeline B1–B5 of § 2.2, in modules of their own: `Plane/G27/Check` (core-only checker, from `X23Check` at 27 points with one common denominator for the weights), `Plane/G27/Data`, `G27/Cong*`, `G27/Atoms*` (generated by `tools/fs131_kfs1_g27.py` from `data/fs56/g27/cert-g27-mrvz.json`, with a `--check` mode), `Plane/G27/Valid` (soundness, after `X23.lean`), `Plane/G27/Law` (named children: `IndepLaw.conjSymm` — the conjugation-symmetrized law; `IndepLaw.prob_subset_congr` — `P(Y ⊆ I) = P(gY ⊆ I)` for `g` in `R ⋊ U ⋊ ⟨conj⟩`; `G27.mem_unitRing` — every point of `G27` lies in `unitRing seamField`; `G27.congruence_mem` — every congruence row's `u ∈ U`, `v ∈ R`; `IndepLaw.weight_le_one` — `E[Σ_{Y ⊆ I ∩ G27} y_Y] ≤ 1`) | `IndepLaw`, `Pattern.Congruent` as a model of the congruence predicate | the kernel price of the atom check (unmeasured: re-price from the first two chunks); the expectation over finitely many indicator events with signed rational weights (state it with `ENNReal` on positive and negative parts apart, or in `ℝ` with `integral_finsetSum`) | 1,350 + data |
+
+### 3.4 The modeling passes
+
+**Domain modeling** (`debruijn-domain-modeling`, fresh, scoped to this job). The cut it asked for: the intrinsic object is the
+filtration `comp ⊇ pr` of `ℍ[ℚ]` — the component of the origin and its ideal `(1 + i)·comp` — of which `v₂(|z|²)` is a reading.
+The valuation reading has a junk value (`padicValRat 2 0 = 0`), the membership reading none. **Change made:** the
+quaternion-level law (`forall_quatColoring_eq_iff` and its two siblings) is stated by membership — forced equal iff
+`x − y ∈ pr`, forced different iff `x − y ∈ comp ∧ x − y ∉ pr`, free iff `x − y ∉ comp` — and the valuation is read only in
+the heads, which carry the junk value's guard in the open (`x = y ∨ …`, `… ∧ x ≠ y`). The definitions name the component
+(`comp := closure unitSphere`, what the graph sees) and the description is a theorem (`mem_comp_iff`), so Benda–Perles's
+statement is a theorem about the graph, not a definition. The residue field is never built: the unit tetrahedron is a
+transversal of `comp/pr` whose differences are unit vectors, and that is all A7 and A8 read. Unsampled members checked:
+`x = y` in each clause; `d² ∉ ℚ`; `r` with `v₂(r) < 0` (the spec example at `1/2`). Next-lemma test: A3 (the structure clause)
+and Zaks's Lemma 2 and Theorem 3 state in the existing vocabulary.
+
+**Experience modeling** (`debruijn-experience-modeling`, fresh, on the head statements). The user is a mathematician citing the
+result, and a prover holding one colouring `c` and a goal `c x = c y` or `c x ≠ c y`. Findings, both applied:
+1. **The forms a prover applies.** `exact?` does not return an iff's direction for `c x = c y`; the user holding one colouring
+   wants the implication with `c` explicit. Added: `coloring_eq_of_one_le_padicValRat c (h : 1 ≤ v₂(|x − y|²)) : c x = c y`
+   and `coloring_ne_of_padicValRat_eq_zero c (hxy : x ≠ y) (h : v₂(|x − y|²) = 0) : c x ≠ c y` — Zaks's Lemmas 1–2 and
+   Theorem 3 are each one application of these. (`coloring_forbids_of_odd` already had this shape.)
+2. **Attribution in the docstrings, in the words a reader cites.** The forbidden-distance head names `[Johnson2006]` p. 212's
+   question and `[Johnson1990]` Thm 3 for the *if* half; the C14 head names `[CranstonRabern2015]`'s question,
+   `[Fischer1994]`'s value (Theorem B) for the upper bound and `[MatolcsiEtAl2025]` Thm 3 for the lower. Internal ids (LV-T3,
+   LX-T5) stay in the module docstrings, not in the heads'.
+Names: the `ℚ⁴` heads follow the statement-describes-goal convention in `RationalFour.` (`forall_coloring_eq_iff`,
+`exists_coloring_forbidding_iff`); the C14 heads follow the library's own `chromaticNumber_seamPlane`
+(`fractionalChromaticNumber_seamPlane`, `finIndepRatio_seamPlane`), so the name a reader of Theorem B predicts is the name.
+No notation, no `@[simp]`, no instance beyond `NumberField ↥seamField` (canonical: one number field structure).
+
+**Obligation modeling** (`debruijn-obligation-modeling`, fresh, on § 3.3's hard leaves). For each, the statement from which
+the proof derives; the leaf plans above are read with these:
+1. **`zero_le_val_iff` (→).** Not an induction on `z`: strengthen to integer quadruples and induct on the exponent,
+   *generalizing the quadruple* — `∀ e (A : Fin 4 → ℤ) m, Odd m → 4^e ∣ Σ Aᵢ² → (A/(2^e m) has the normal form)`. Step: `4 ∣ Σ`
+   forces one parity (`decide` on `ZMod 4`, 256 cases); all even → `A = 2B`, `4^e ∣ Σ Bᵢ²`, the IH at `B`; all odd → `Σ ≡ 4 (mod 8)`
+   (`decide` on residues mod 8 of odd squares, or `Int.sq_mod_eight`-type lemmas found by `exact?`), so `e = 0`. The bridge from
+   `ℚ` is one lemma: `z = A/D` with `D` the product of the four denominators, `D = 2^e m`, and `0 ≤ val z ⟹ 4^e ∣ Σ Aᵢ²`
+   (`z = 0` apart). Price unchanged (170).
+2. **`mem_comp_iff`.** No induction: name the auxiliary subgroup `ord` (carrier `{z | 0 ≤ val z}`, `add_mem` from the normal
+   form, `neg_mem` from `normSq_neg`); then `comp ≤ ord` is `AddSubgroup.closure_le.2` (each unit has `val = 0`) and `ord ≤ comp`
+   is the normal form with `inv_odd_mem_comp` and the Hurwitz generators. `ord` is closed under `*` trivially
+   (`padicValRat.mul`), which is not needed. Price −20 (40).
+3. **The tetrahedron.** The statement every case reads is one lemma, linear after it: `one_le_val_div_odd` — for
+   `B : Fin 4 → ℤ` not all zero and `m` odd, `1 ≤ val (B/m) ↔ 2 ∣ Σ Bᵢ` (`v₂(Σ Bᵢ²/m²) = v₂(Σ Bᵢ²)` and `B² ≡ B (mod 2)`).
+   Existence then picks the vertex by the parity of `Σ Bᵢ` after subtracting it (`omega`), uniqueness is `sqDist_tetra` with
+   `mem_pr_iff`. Price −20 (70).
+4. **`coloring_eq_of_mem_pr`.** The motive is `∀ y, c (y + (1 + i) r) = c y`, quantified over the base point (Gries's fresh
+   variable): the sum case composes two instances at two base points, the negation case reads the IH at `y − (1 + i) r`. Price
+   unchanged.
+5. **The `G27` bound.** Two statements, each linear: `sum_weight_prob_le_one` — `Σ_Y y_Y μ{Y ⊆ I} = ∫ Σ_{Y ⊆ I ∩ G27} y_Y dμ ≤ 1`
+   (finite sum of indicators in `ℝ`, `integral_finsetSum`, the pointwise bound on `IndepSets` and `carried`); and
+   `sum_weight_prob_eq` — the same sum is `w · μ.density` (invariance makes `μ{Y ⊆ I}` constant on a class; classes of two or
+   more points sum to 0; every singleton has probability `μ.density`). The symmetrization is a third: `IndepLaw.conjSymm`.
+   Price unchanged.
+
+Prices after the passes: **Part A ≈ 1,190 lines** (§ 2.1's 1,210, less 40 from items 2–3, plus 20 for the two applied forms of
+the experience pass); **Part B ≈ 1,350 lines** of hand-written Lean, a generator of about 350 lines of Python, and generated
+modules whose kernel price is unmeasured.
