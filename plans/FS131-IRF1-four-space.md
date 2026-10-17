@@ -63,3 +63,37 @@ docstrings blanked). Self-check, the skeleton against itself (`data/fs131/irf1/s
 `HEAD-ABSENT exists_equiv_coloring_add_eq_residue`, as it must be before A3 exists — and **five plants, each FIRED and alone**:
 a character of `forall_coloring_eq_iff`'s stored type, `mem_comp_iff` dropped, `residueCol`'s data changed, an example head of
 `Forbid` changed, an example of `Basic` turned into a theorem.
+
+## Stage 2 — SAVED: `RationalFour/Basic` and `RationalFour/Order` proved
+
+**Proved, every leaf, no statement changed** (the stage-4 statement comparison is the receipt from the kernel's side):
+`Basic` — `sqDist_toQuat` (two lines: the coordinates of `toQuat` are `rfl`), `nonempty_iso_unitDistance` (the map
+`x ↦ ⟨toLp (x · : ℝ), _⟩` is a bijection onto `ratPoints`; adjacency through `EuclideanSpace.dist_eq`, `Real.sqrt_eq_one` and
+`Rat.cast_inj`), the two `val` examples. `Order` — all twelve leaves, in the plan's order, with eleven private helpers:
+the arithmetic of `v₂` over odd denominators (`padicValRat_int_div_odd`, `zero_le_padicValRat_int`, `two_pow_dvd_iff`), squares
+mod 4 and 8 (`sq_emod_four`, `sq_emod_eight_of_odd`, `parity_of_four_dvd`, `four_dvd_of_parity`), the induction on the 2-power
+of the denominator generalizing the quadruple (`normal_form_aux`, the obligation pass's item 1 exactly), a common denominator
+(`exists_int_mul_of_den_dvd`), the rational scalars of `ℍ[ℚ]` (`ratCast_inv`, `ratCast_mul`), and for the tetrahedron
+`mem_pr_of_div_odd` and `div_two_mul_sub_eq` (the obligation pass's item 3: every residue case is one parity check by `omega`
+and four coordinate identities).
+
+**Two things the plan did not say, both found by the elaborator:**
+1. **A coercion `ℚ → ℍ[ℚ]` elaborates to `Rat.cast` (`Quaternion.instRatCast`), not to `QuaternionAlgebra.coe`**, because
+   `ℍ[ℚ]` is a division ring. So the stored statements of `inv_prime_mem_comp` and `inv_odd_mem_comp` are about
+   `(Rat.cast (p : ℚ) : ℍ[ℚ])⁻¹` — the quaternion inverse of the cast — and Mathlib's `coe_inv`, `coe_mul` do not rewrite
+   them. Read from the skeleton's dump (`Inv.inv … (Rat.cast … (Nat.cast p))`); the two helpers `ratCast_inv`, `ratCast_mul`
+   carry them to rational arithmetic. The statement means what the plan says (`(Rat.cast p)⁻¹ = Rat.cast p⁻¹`, `ratCast_inv`).
+2. **An anonymous constructor ascribed `ℍ[ℚ]` elaborates at the unfolded type `QuaternionAlgebra ℚ (-1) 0 (-1)`** (printed
+   `ℍ[ℚ,-1,-1]`), and `∈ pr` or `*` against it then fails instance search. The skeleton's statements are not affected (each such
+   constructor meets an expected type from `val` or an `Eq` at `ℍ[ℚ]`); in proofs the constructor is named by `set` or the
+   statement takes the point as a variable with an equation (`mem_pr_of_div_odd`'s `hq`).
+
+**The re-price from the first two leaves** (`zero_le_val_iff` with its helpers, then `zero_le_val_add`): about 175 lines in about
+fifteen minutes, against the plan's 170 for the normal form; the module total is 570 lines (plan 450, the plan's skeleton
+included), the extra being the explicit coordinate work of the tetrahedron and of the ring route to `1/p`. Total at this
+stage, with `Compulsion` and `Forbid` drafted in copies under `data/fs131/irf1/work/`: about 1,300 lines against the plan's
+1,190 — within a tenth; nothing to message.
+
+**Build:** `data/fs131/irf1/build.sh order` (the brief's line: slot `--mem 8 --cpus 5`, `MEMMAX=8G BATCH=3`) on the working tree
+over `45da98e5b` with `Basic` and `Order` filled: `data/fs131/irf1/build-order.log`. `RationalFour/Basic` and `Order` rebuilt
+with no warning; `Compulsion` and `Forbid` rebuilt with their skeleton `sorry`s only.

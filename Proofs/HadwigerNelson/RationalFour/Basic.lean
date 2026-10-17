@@ -5,7 +5,7 @@ import Mathlib.Analysis.InnerProductSpace.PiL2
 import Proofs.HadwigerNelson.UnitDistance
 
 /-!
-# Rational four-space: the unit-distance graph, read through the quaternions (FS-131, FS131-KFS1; skeleton)
+# Rational four-space: the unit-distance graph, read through the quaternions (FS-131, FS131-KFS1, FS131-IRF1)
 
 `ℚ⁴` with its Euclidean distance is the rational quaternions `ℍ[ℚ]` with `|x − y|² = normSq (x − y)`: the coordinates are
 `re, imI, imJ, imK`, and `Quaternion.normSq_def'` is the sum of their squares. Multiplication is what the proofs use: `normSq`
@@ -66,7 +66,8 @@ def toQuat : (Fin 4 → ℚ) ≃ ℍ[ℚ] := (QuaternionAlgebra.equivTuple (-1 :
 
 /-- The two squared distances agree. -/
 theorem sqDist_toQuat (x y : Fin 4 → ℚ) : sqDist (toQuat x) (toQuat y) = sqDist4 x y := by
-  sorry
+  rw [sqDist, normSq_def', sqDist4, Fin.sum_univ_four]
+  rfl
 
 /-- **The coordinate graph is the quaternion graph.** -/
 def quatIso : ratFourGraph ≃g quatGraph where
@@ -83,7 +84,27 @@ def ratPoints : Set (EuclideanSpace ℝ (Fin 4)) := {p | ∀ i, ∃ q : ℚ, (q 
 `unitDistance` (adjacency `dist x y = 1`) induced on `ratPoints`. -/
 theorem nonempty_iso_unitDistance :
     Nonempty (ratFourGraph ≃g (unitDistance (EuclideanSpace ℝ (Fin 4))).induce ratPoints) := by
-  sorry
+  classical
+  let f : (Fin 4 → ℚ) → ratPoints := fun x => ⟨WithLp.toLp 2 (fun i => (x i : ℝ)), fun i => ⟨x i, rfl⟩⟩
+  have hf : Function.Bijective f := by
+    constructor
+    · intro x y h
+      funext i
+      have := congrArg (fun p : ratPoints => p.1.ofLp i) h
+      simpa [f] using this
+    · intro p
+      refine ⟨fun i => (p.2 i).choose, ?_⟩
+      apply Subtype.ext
+      ext i
+      exact (p.2 i).choose_spec
+  refine ⟨⟨Equiv.ofBijective f hf, ?_⟩⟩
+  intro x y
+  simp only [Equiv.ofBijective_apply, SimpleGraph.induce_adj, unitDistance_adj, ratFourGraph_adj]
+  rw [EuclideanSpace.dist_eq, Real.sqrt_eq_one]
+  simp only [f, Real.dist_eq, sq_abs, sqDist4]
+  rw [← Rat.cast_inj (α := ℝ)]
+  push_cast
+  rfl
 
 /-! ## The 2-adic valuation of a squared length -/
 
@@ -116,9 +137,16 @@ example : ratFourGraph.Adj 0 ![3 / 5, 4 / 5, 0, 0] := by
   norm_num
 
 example : val ⟨1, 1, 0, 0⟩ = 1 := by
-  sorry
+  rw [val, normSq_def']
+  norm_num
+  exact padicValRat.self (p := 2) (by norm_num)
 
 example : val ⟨1 / 3, 0, 0, 0⟩ = 0 := by
-  sorry
+  rw [val, normSq_def']
+  norm_num
+  rw [one_div, padicValRat.inv, neg_eq_zero]
+  have : ((9 : ℕ) : ℚ) = 9 := by norm_num
+  rw [← this, padicValRat.of_nat, padicValNat.eq_zero_of_not_dvd (by norm_num)]
+  rfl
 
 end HadwigerNelson.RationalFour
