@@ -150,6 +150,7 @@ the `.olean` would. Settle every hand-written module before starting a long gene
 - A lint control planted in a leaf module (one only the root imports: `Rigidity/CertLinkModels`) costs a two-module rebuild: 7 m 17 s at `BATCH=8` on the laptop, all but 3 s of it the walk (FS131-LGT1).
 - A landing whose branch changed a module that main's newer modules do not import copies only those new modules' build files from main's tree (a full `rsync --checksum` dry run lists `ClassRatio` and its 19 downstream modules too, which it would replace by builds of the old source): the copy, a checksum manifest before and after, and the build rebuilds the root alone (`data/fs131/ics1/logs/copy2-*`; FS131-ICS1).
 - When `main`'s newer modules **do** import the module the branch changed (FS131-IRU2: most of the five-colour and density modules import `Rigidity/AdmissiblePrime`, three lemmas of which the branch made public), take `main`'s compiled files only for the modules in `main`'s changed cone and outside the branch's (13 here), keep the branch's for its own cone (9), and let the build recompile the intersection (17, predicted by `data/fs131/iru2/cone.py` and rebuilt exactly, 18 m 4 s at `BATCH=3` on the laptop); an unrestricted `rsync --checksum` would also have replaced six of the branch's correct builds by builds of the old source (`data/fs131/iru2/copy_build.sh`, `--files-from`). The merged statement print is then the union of the two gated prints line for line (`tools/fs131_iru2_statements.py`; FS131-IRU2).
+- A merge whose two lines were cut from one skeleton commit holding both lines' skeletons, each line having deleted the other's, has two merge bases, and `git merge` reports modify/delete conflicts on every module of both: each side's surviving file is its landing's, and the resolution keeps both, each checked equal to its gated commit (`git merge-tree --write-tree` predicts the conflicts without touching the tree) (FS131-ISF2).
 
 ## The kernel's cost model
 
@@ -205,6 +206,9 @@ the `.olean` would. Settle every hand-written module before starting a long gene
   `decide +kernel` theorems in one file in 48.8 s at 2.89 GB measured alone (shape 7.1 s, the identity 29.4 s, positive
   definiteness 7.5 s), and 33 s for the module in the build (`Arith/FibreCert7Check`); its certificate at `p = 23` is 1,444,136 ops over
   35,511 pairs, 168 times the 7's (FS131-KPA1, FS131-IQP1, FS131-IQP3).
+- A certificate whose terms are sums over subsets (`Σ_{Y ⊆ S} y_Y` for every independent `S`) is checked by a residual DFS, not by testing every term at every node: the residual of the term list (terms whose decided part is in the set, that part removed, equal keys merged, terms holding a neighbour of a chosen point dropped) took `G27`'s check from 974 M mask tests to 2.76 M list elements (FS131-ISF1).
+- A list pass written with `List.rec` and direct `Nat` calls costs about 24 µs an element in the kernel, against 50 µs with structural recursion and direct calls and 86 µs with structural recursion and notation; the definitions are `noncomputable` (`List.rec` does not compile), which `decide +kernel` does not mind (FS131-ISF1's benchmark, `data/fs131/isf1/probes/bench/`).
+- `simp only [cond_true]` on a goal holding a closed `2¹⁰⁰⁰` offset sent the kernel into deep recursion; stated with the offset a variable and instantiated, the same lemma checks (`Sound.tv_combine_aux`).
 
 ## Searching — Lean
 
@@ -653,5 +657,7 @@ the characteristic failure here:
 - The final statement is read against Mathlib's `SimpleGraph.chromaticNumber` and the informal claim, out loud, before it is believed.
 - Each check's negative control: break what it guards, watch it go red and name the culprit, then put it back (`RUNNING.md` § Make the
   gate fail, and watch it fail).
+- The vacuity scan's refutation test reads a membership in a set defined by `∀ …, … → ¬ …` (`IndepSets F`) through to `→ False`, so a theorem concluding such a membership is counted in `refutations-skipped` though it refutes nothing (`G27.conj_indep`, FS131-ISF2); the landing names its hypothesis's inhabitant.
+- `#print axioms` wraps a long axiom list across lines: a comparison of two audit receipts joins each print onto one line first (`data/fs131/isf2/scripts/join_prints.py`) and sorts under `LC_ALL=C`, or `comm` refuses the order (FS131-ISF2).
 
 The InfoView is continuous testimony at zero cost — save and read the goal state after every step rather than debugging by guess.

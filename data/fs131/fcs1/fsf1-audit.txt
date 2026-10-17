@@ -1,0 +1,993 @@
+corpus: CLAUDE.md + LEDGER.md + plans/GROKKING-INSTANCES.md + .claude/skills/grokkings/SKILL.md + plans/GROKKINGS-RETIRED.md + RUNNING.md + plans/CLAUDE-MD-HISTORY.md + LEAN.md + plans/WHERE-THE-PROBLEM-STANDS.md + plans/HISTORY-WORKFLOW-3.0.md + plans/KERNEL-HOLDS.md + plans/FILINGS.md + plans/FRONTIER-STUBS.md (each joined if present)
+bytes: 1,573,552 -> 1,577,446  (+3,894)
+token PROXY (see token_proxy; not a tokenizer): 528,562 -> 529,809  (+1,247)
+[date] 55 distinct before, 55 after, LOST 0, homed outside the corpus 0
+[bib] 182 distinct before, 182 after, LOST 0, homed outside the corpus 0
+[code] 4473 distinct before, 4494 after, LOST 1, homed outside the corpus 0
+    LOST code: 'declarations=22802 refutations-skipped=246 sites=1477'  (was ×1)
+[id] 990 distinct before, 990 after, LOST 0, homed outside the corpus 0
+[row] 137 distinct before, 137 after, LOST 0, homed outside the corpus 0
+[ref] 454 distinct before, 454 after, LOST 0, homed outside the corpus 0
+[num] 1040 distinct before, 1042 after, LOST 4, homed outside the corpus 0
+    LOST num: '11106'  (was ×1)
+    LOST num: '11806'  (was ×1)
+    LOST num: '22802'  (was ×1)
+    LOST num: '246'  (was ×1)
+[tag] 138 distinct before, 138 after, LOST 1, homed outside the corpus 0
+    LOST tag: '[hand + cert]'  (was ×1)
+[chunk] 6584 distinct before, 6599 after, LOST 2, homed outside the corpus 0
+    LOST chunk: 'declarations=22802'  (was ×1)
+    LOST chunk: 'refutations-skipped=246'  (was ×1)
+[name] 1313 distinct before, 1315 after, LOST 0, homed outside the corpus 0
+pointers: 137 distinct row references, 100 grokkings; dangling: ['G0']
+PROTECTED regions: 3 before (1086, 2567, 2899 bytes), 3 after
+gate sentence: current audit reads 11436 clean and 5 declared purchases
+
+bytes per section (before -> after):
+         0 ->        0        +0  (preamble)
+     2,622 ->    3,453      +831  # This workspace — lean-dir
+     2,956 ->    2,956        +0  ## Notation
+     2,285 ->    2,285        +0  ## The mission
+     7,537 ->    7,537        +0  ### The aim
+     2,409 ->    2,409        +0  ### Counter-priors — read before pricing anything (Kooshi, 2026-09-26)
+     7,440 ->    7,440        +0  ### The local–global conjecture
+     1,547 ->    1,465       -82  ## Frontier
+    13,281 ->   13,281        +0  ### Where the problem stands
+       624 ->  390,300  +389,676  ### The novel-results ledger
+     8,464 ->    8,464        +0  ### Paths forward, ranked
+       146 ->      146        +0  ### The open structural question
+     5,088 ->    5,088        +0  ## Grokkings — the working theory of Hadwiger–Nelson
+     4,091 ->    3,835      -256  ## The pipeline
+     1,033 ->    1,033        +0  ## Whose work this is
+       463 ->      490       +27  ## Delegation — one level deep
+     2,013 ->    2,773      +760  ## The standard of evidence above rung B
+     1,167 ->    1,167        +0  ## What compute actually helps
+       152 ->      223       +71  ## The shape of the proof
+     6,801 ->    2,393    -4,408  ## Trust ledger
+     1,631 ->    1,854      +223  ## Toolchain
+       417 ->      417        +0  ### Building
+        68 ->      133       +65  ### The kernel's cost model
+       976 ->    1,138      +162  ### Searching
+       143 ->      191       +48  ## The package
+     1,311 ->   16,603   +15,292  ## The gate
+       679 ->      679        +0  ### Make the gate fail, and watch it fail
+   186,665 ->  186,665        +0  # Grokkings — the working theory of Hadwiger–Nelson (the entries)
+     1,182 ->    1,182        +0  # Retired grokkings — recorded, not loaded
+       986 ->      986        +0  ## The paragraph that opened § Grokkings
+    21,595 ->   21,595        +0  ## The entries
+       986 ->      986        +0  ## Subsumed entries
+     1,011 ->    1,011        +0  # Running things here — the toolchain, processes, and instruments that must fail loudly
+     8,261 -> None            ## Toolchain
+    11,130 ->    8,541    -2,589  ## Building
+    20,543 ->   20,543        +0  ## Make the gate fail, and watch it fail
+       360 ->      360        +0  # Text retired from `CLAUDE.md` as history — recorded, not loaded
+     2,699 ->    2,699        +0  ## The size-budget paragraph, as it stood before 2026-09-28's budgets
+       371 ->      371        +0  # The Lean facts of this repository
+     1,046 -> None            ## The shape of the proof
+    10,950 ->   10,950        +0  ## Assumptions: outside theorems and our own
+     2,393 -> None            ## Trust ledger
+     1,907 ->    1,907        +0  ### Ported outside proofs
+       642 -> None            ## Toolchain
+     8,108 -> None            ## Building
+    11,245 ->   12,244      +999  ## The kernel's cost model
+   106,038 ->  106,038        +0  ## Searching — Lean
+       682 -> None            ## The package
+    16,037 -> None            ## The gate
+       429 ->      429        +0  # Where the problem stands — the arithmetic era, and the prior-art position
+    14,553 ->   14,553        +0  ## What the hunt has established, items 1–30
+     1,264 ->    1,264        +0  ## The prior-art position
+       829 ->      829        +0  ## The open structural question
+       878 ->      878        +0  # History: text cut from the always-loaded files by Workflow 3.1
+       305 ->      305        +0  ## 1. The Lean facts, as `.claude/agents/debruijn.md` carried them under Workflow 3.0 (now `LEAN.md`, current state only)
+     1,192 ->    1,192        +0  ### The shape of the proof
+     1,390 ->    1,390        +0  ### Trust ledger
+       654 ->      654        +0  ### Toolchain — Lean
+     3,335 ->    3,335        +0  ### Building Lean
+     3,266 -> None            ### The kernel's cost model
+       561 ->      561        +0  ### Searching — Lean
+       580 ->      580        +0  ### The package
+     3,377 ->    3,377        +0  ### The gate
+        94 ->       94        +0  ## 2. `CLAUDE.md`, the text Workflow 3.1 replaced, by section (verbatim, at commit f550cb5f)
+        16 ->       16        +0  ### the header
+     3,453 -> None            # This workspace — lean-dir
+        85 ->       85        +0  ### the local–global conjecture, item 10's address
+     2,860 ->    2,860        +0  ### the local–global conjecture section, § Publication
+        53 ->       53        +0  ### § Frontier, its head and the Last-updated line
+     1,465 -> None            ## Frontier
+       111 ->      111        +0  ### § Where the problem stands, items 1–30 (moved)
+       121 ->      121        +0  ### § Where the problem stands, the prior-art position (moved)
+        33 ->       33        +0  ### § The novel-results ledger
+       510 -> None            ### The novel-results ledger
+     1,338 ->    1,338        +0  ### § Paths forward, the open-milestones paragraph
+       267 ->      267        +0  ### § Paths forward, its italic head
+       360 ->      360        +0  ### § Paths forward, the table's lead-in
+     2,788 ->    2,788        +0  ### § Paths forward, ranks 4–73 (in plans/FRONTIER-STUBS.md)
+       101 ->      101        +0  ### § The open structural question (moved)
+       914 ->      914        +0  ### § Grokkings, the italic head
+       527 ->      527        +0  ### § Grokkings, the italic foot
+        21 ->       21        +0  ### § The pipeline
+     3,835 -> None            ## The pipeline
+        38 ->       38        +0  ### § Delegation — one level deep
+       490 -> None            ## Delegation — one level deep
+        46 ->       46        +0  ### § The standard of evidence above rung B
+     2,773 -> None            ## The standard of evidence above rung B
+       613 ->      613        +0  ### § What compute actually helps, its first paragraph
+        31 ->       31        +0  ### § The shape of the proof
+       223 -> None            ## The shape of the proof
+       254 ->      254        +0  ### § Trust ledger, its pointer
+        39 ->       39        +0  ### § Toolchain, with the search ban
+     1,854 -> None            ## Toolchain
+        32 ->       32        +0  ### § The kernel's cost model
+       133 -> None            ### The kernel's cost model
+        18 ->       18        +0  ### § Searching
+     1,138 -> None            ### Searching
+        20 ->       20        +0  ### § The package
+       191 -> None            ## The package
+       231 ->      231        +0  ### § The gate, its pointer
+        76 ->       76        +0  ## 3. `plans/FRONTIER-STUBS.md`, the text Workflow 3.1 replaced (verbatim)
+    11,968 ->   11,968        +0  ### § Ranked stubs: the dated re-rank paragraphs
+     1,144 ->    1,144        +0  ### § Open milestones, the paragraph as filed at FS-116's and FS-121's closes
+        56 ->       92       +36  ### the file's head
+       118 -> None            ### the file's head
+        92 -> None            ### the file's head
+    18,171 ->   18,564      +393  # What the kernel holds, beyond the interval — current state
+    10,122 ->   10,488      +366  # The front page's filing log — the "Last filed" line's older entries
+     1,514 ->    1,514        +0  # LEDGER.md — the novel-results ledger of the Hadwiger–Nelson workspace
+    10,189 ->   10,189        +0  ## The claim list — what is ours beyond Theorems A and B (moved from `CLAUDE.md` § The prior-art position, 2026-09-26)
+        32 ->       32        +0  ## A. The novel-results ledger
+   389,530 -> None            ### The novel-results ledger
+   306,022 ->  306,320      +298  ## B. Theorems proved outside the kernel, by milestone
+     1,481 ->    1,481        +0  # GROKKING-INSTANCES.md — the second and later instances behind `CLAUDE.md`'s rules
+    19,794 ->   19,794        +0  ## G21 — A negative measures its enumeration
+       380 ->      380        +0  ## G25 — The forcing ladder is recursive
+    15,759 ->   15,759        +0  ## G30 — Measurement generates; derivation kills
+     5,093 ->    5,093        +0  ### The tally, re-sorted 2026-09-26 (job G2)
+     3,496 ->    3,496        +0  ## G46 — Recognize the classical theory first
+    10,194 ->   10,194        +0  ## G49 — The prior-art gate
+     9,169 ->    9,169        +0  ## G50 — Read what the search found
+    14,833 ->   14,833        +0  ## G51 — A competitor and an advisor beat one mind
+       683 ->      683        +0  ## G54 — Tight or slack
+       781 ->      781        +0  ## G58 — The antipodal conjecture
+       578 ->      578        +0  ## G60 — Fractional colourings reach fields the residue method cannot
+       543 ->      543        +0  ## G64 — Six may be a value no field attains
+       642 ->      642        +0  ## G65 — The refusal phase diagram
+       820 ->      820        +0  ## G67 — A grokking is grokked by its form
+     6,365 ->    6,365        +0  ## G72 — The invariant question
+     4,347 ->    4,347        +0  ## G79 — A wall arrives as a counterexample's invariant
+       187 ->      187        +0  ## G80 — Infinite rank is the resource
+       154 ->      154        +0  ## G81 — Where every place mixes, the field is the plane
+       554 ->      554        +0  ## G82 — The measurable question is a stability question
+     1,162 ->    1,162        +0  ## G83 — With unit arcs, the tight question lives at one four-colour vertex
+     1,196 ->    1,196        +0  ## G84 — Contact is the regularity mechanism
+       178 ->      178        +0  ## G86 — Tile counts are blind to Siamese pairs
+     2,190 ->    2,190        +0  ## G87 — The invention signal
+       421 ->      421        +0  ## G89 — Honesty is free
+       258 ->      258        +0  ## G91 — The ring is the pigeonhole
+     3,172 ->    3,172        +0  ## G92 — A held result reaches as far as its argument, not as far as its statement
+       546 ->      546        +0  ## G95 — Tightness is not regularity
+       756 ->      756        +0  ## G96 — Circle data and ball data: an exclusion reads the unit circle about a point, a meeting of classes is a property of its small balls, and only one passage between them is free
+       393 ->      393        +0  ## G98 — Six is the one count at which the labels left for a ring can wind
+       518 ->      518        +0  ## G99 — With pieces, the local theory is the map class's; what measure owes is the piece
+     1,574 ->    1,574        +0  ## `CLAUDE.md` § Counter-priors
+       827 ->      827        +0  ## `CLAUDE.md` § Delegation — one level deep
+     1,420 ->    1,420        +0  ## `CLAUDE.md` § What compute actually helps
+     2,056 ->    2,056        +0  ## `CLAUDE.md` § Building — Kill by PID or process group
+       398 ->      398        +0  ## `CLAUDE.md` § Building — RAM is the discriminator (`scripts/slot.py`)
+       575 ->      575        +0  ## `CLAUDE.md` § The standard of evidence above rung B
+     1,542 ->    1,542        +0  ## `CLAUDE.md` § Toolchain — Two machines
+     2,717 ->    2,717        +0  ## `CLAUDE.md` § Searching
+     3,876 ->    3,876        +0  ## `CLAUDE.md` § The gate — the vacuity check
+     2,173 ->    2,172        -1  ## `CLAUDE.md` § Make the gate fail, and watch it fail
+     2,227 ->    2,227        +0  # The frontier stubs — the ranked set of next milestones
+    12,910 ->   12,910        +0  ## Open milestones, in order
+   102,736 ->  102,736        +0  ## Ranked stubs
+    32,975 ->   32,976        +1  ## Closed, absorbed and demoted
+
+normalisations in force:
+  '(?<=\\d),(?=\\d{3}(?!\\d))' -> '': thousands separators: 1,581 and 1581 are one number
+  'ℚ\\(√3,√11\\)' -> 'K': legend macro K := ℚ(√3,√11) (§ Notation)
+  'ℚ\\(√3,√5,√7,√11\\)' -> 'K(√5,√7)': K(√d) adjoins √d (§ Notation): de Grey's field
+  'ℚ\\(√3,(√[57]),√11\\)' -> 'K(\\1)': K(√d) adjoins √d (§ Notation)
+  'ℚ\\(√3,√11,(√\\d+)\\)' -> 'K(\\1)': K(√d) adjoins √d (§ Notation)
+  'UD\\(𝔽(_[qp]|[₀-₉]+), ?2\\)' -> 'Γ\\1': legend macro Γ_q := UD(𝔽_q, 2) (§ Notation; rows 70-71 already used it)
+external homes in force: 301
+  'L(ℚ)' -> plans/FILINGS.md: the main clause's entry of CLAUDE.md's "Last filed" chain (FS131-IL5, 2026-10-16), moved verbatim to plans/FILINGS.md at FS131-ICO2's filing (2026-10-16); current state is CLAUDE.md § Frontier and LEDGER.md
+  '2026-10-15' -> plans/FILINGS.md: the five-colour chain's entry of CLAUDE.md's "Last filed" chain (FS131-LCH1, FS131-LGT1, 2026-10-15), moved verbatim to plans/FILINGS.md at FS131-IL5's filing (2026-10-16); current state is CLAUDE.md § Frontier and LEDGER.md
+  'Arith/QuadraticPrime' -> plans/FILINGS.md: an older entry of CLAUDE.md's "Last filed" chain, moved verbatim to plans/FILINGS.md at FS131-FC5 (2026-10-14) under CLAUDE.md's size budget (80,619 bytes after the density equality's filing); current state is CLAUDE.md § Frontier and LEDGER.md
+  'Arith/ThreeColourCharacter' -> plans/FILINGS.md: an older entry of CLAUDE.md's "Last filed" chain, moved verbatim to plans/FILINGS.md at FS131-FC5 (2026-10-14) under CLAUDE.md's size budget (80,619 bytes after the density equality's filing); current state is CLAUDE.md § Frontier and LEDGER.md
+  'Arith/UpperHalf' -> plans/FILINGS.md: an older entry of CLAUDE.md's "Last filed" chain, moved verbatim to plans/FILINGS.md at FS131-FC5 (2026-10-14) under CLAUDE.md's size budget (80,619 bytes after the density equality's filing); current state is CLAUDE.md § Frontier and LEDGER.md
+  'DyadicQuadratic' -> plans/FILINGS.md: an older entry of CLAUDE.md's "Last filed" chain, moved verbatim to plans/FILINGS.md at FS131-FC5 (2026-10-14) under CLAUDE.md's size budget (80,619 bytes after the density equality's filing); current state is CLAUDE.md § Frontier and LEDGER.md
+  'Instances/UpperHalfCorollaries' -> plans/FILINGS.md: an older entry of CLAUDE.md's "Last filed" chain, moved verbatim to plans/FILINGS.md at FS131-FC5 (2026-10-14) under CLAUDE.md's size budget (80,619 bytes after the density equality's filing); current state is CLAUDE.md § Frontier and LEDGER.md
+  'Instances/UpperHalfValues' -> plans/FILINGS.md: an older entry of CLAUDE.md's "Last filed" chain, moved verbatim to plans/FILINGS.md at FS131-FC5 (2026-10-14) under CLAUDE.md's size budget (80,619 bytes after the density equality's filing); current state is CLAUDE.md § Frontier and LEDGER.md
+  'ThreeColourCriterion' -> plans/FILINGS.md: an older entry of CLAUDE.md's "Last filed" chain, moved verbatim to plans/FILINGS.md at FS131-FC5 (2026-10-14) under CLAUDE.md's size budget (80,619 bytes after the density equality's filing); current state is CLAUDE.md § Frontier and LEDGER.md
+  'ThreeFourColours' -> plans/FILINGS.md: an older entry of CLAUDE.md's "Last filed" chain, moved verbatim to plans/FILINGS.md at FS131-FC5 (2026-10-14) under CLAUDE.md's size budget (80,619 bytes after the density equality's filing); current state is CLAUDE.md § Frontier and LEDGER.md
+  'Plane/DensityBound' -> plans/FILINGS.md: an older entry of CLAUDE.md's "Last filed" chain, moved verbatim to plans/FILINGS.md at FS131-FC7 (2026-10-15) under CLAUDE.md's size budget (80,253 bytes after the five-colour chain's draft 5); current state is CLAUDE.md § Frontier and LEDGER.md
+  '1422' -> plans/FILINGS.md: an older entry of CLAUDE.md's "Last filed" chain, moved verbatim to plans/FILINGS.md at FS131-FC7 (2026-10-15) under CLAUDE.md's size budget (80,253 bytes after the five-colour chain's draft 5); current state is CLAUDE.md § Frontier and LEDGER.md
+  'TorsionExtraction' -> plans/FILINGS.md: an older entry of CLAUDE.md's "Last filed" chain, moved verbatim to plans/FILINGS.md at FS131-FC5 (2026-10-14) under CLAUDE.md's size budget (80,619 bytes after the density equality's filing); current state is CLAUDE.md § Frontier and LEDGER.md
+  '142–148' -> plans/FILINGS.md: an older entry of CLAUDE.md's "Last filed" chain, moved verbatim to plans/FILINGS.md at FS131-FC5 (2026-10-14) under CLAUDE.md's size budget (80,619 bytes after the density equality's filing); current state is CLAUDE.md § Frontier and LEDGER.md
+  "FS124-P1's" -> plans/FILINGS.md: an older entry of CLAUDE.md's "Last filed" chain, moved verbatim to plans/FILINGS.md at FS131-FC5 (2026-10-14) under CLAUDE.md's size budget (80,619 bytes after the density equality's filing); current state is CLAUDE.md § Frontier and LEDGER.md
+  "FS132-P1's" -> plans/FILINGS.md: an older entry of CLAUDE.md's "Last filed" chain, moved verbatim to plans/FILINGS.md at FS131-FC5 (2026-10-14) under CLAUDE.md's size budget (80,619 bytes after the density equality's filing); current state is CLAUDE.md § Frontier and LEDGER.md
+  'UpperHalfCorollaries' -> plans/FILINGS.md: an older entry of CLAUDE.md's "Last filed" chain, moved verbatim to plans/FILINGS.md at FS131-FC5 (2026-10-14) under CLAUDE.md's size budget (80,619 bytes after the density equality's filing); current state is CLAUDE.md § Frontier and LEDGER.md
+  'UpperHalfValues' -> plans/FILINGS.md: an older entry of CLAUDE.md's "Last filed" chain, moved verbatim to plans/FILINGS.md at FS131-FC5 (2026-10-14) under CLAUDE.md's size budget (80,619 bytes after the density equality's filing); current state is CLAUDE.md § Frontier and LEDGER.md
+  'RINGBAND' -> plans/STUB-bicycle-windings.md: a detail of the old row of this stub; left `plans/FRONTIER-STUBS.md` when FS124-P1's re-rank rewrote the first sixteen rows (2026-10-07; FS-124 inventory item 4); the stub file holds it
+  "122's" -> plans/STUB-bicycle-windings.md: a detail of the old row of this stub; left `plans/FRONTIER-STUBS.md` when FS124-P1's re-rank rewrote the first sixteen rows (2026-10-07; FS-124 inventory item 4); the stub file holds it
+  'L₆' -> plans/STUB-lateral-extent.md: a detail of the old row of this stub; left `plans/FRONTIER-STUBS.md` when FS124-P1's re-rank rewrote the first sixteen rows (2026-10-07; FS-124 inventory item 4); the stub file holds it
+  '3/2' -> plans/STUB-q-ring.md: a detail of the old row of this stub; left `plans/FRONTIER-STUBS.md` when FS124-P1's re-rank rewrote the first sixteen rows (2026-10-07; FS-124 inventory item 4); the stub file holds it
+  '§ 9' -> plans/STUB-qfree-ring.md: a detail of the old row of this stub; left `plans/FRONTIER-STUBS.md` when FS124-P1's re-rank rewrote the first sixteen rows (2026-10-07; FS-124 inventory item 4); the stub file holds it
+  '148–149' -> plans/STUB-six-by-the-nerve.md: a detail of the old row of this stub; left `plans/FRONTIER-STUBS.md` when FS124-P1's re-rank rewrote the first sixteen rows (2026-10-07; FS-124 inventory item 4); the stub file holds it
+  'st' -> plans/STUB-forced-pair.md: a detail of the old row of this stub; left `plans/FRONTIER-STUBS.md` when FS124-P1's re-rank rewrote the first sixteen rows (2026-10-07; FS-124 inventory item 4); the stub file holds it
+  'plans/STUB-sanctioned-search-fs86.md' -> plans/FRONTIER-STUBS.md: FS-90's paths-forward row, ranked 30 once FS-113 was minted at rank 8 (the 2026-09-27 consolidation run), so it left CLAUDE.md's single rows for the group row; the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  '[Chow1993]' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'U < 308.17' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'forces_of_tight' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-arena-slack-census.md' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-certificate-at-43.md' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-distance-two-gadget.md' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-exact-independence-solver.md' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-fractional-wall.md' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-plane-bridge.md' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-rational-four-space-rigidity.md' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-six-is-not-a-value.md' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'struction' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  '308.17' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  '9–23' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'Chow1993' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'G(ℚ⁴)' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'G–H2' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'v_𝔭(d²)' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  "¶5.4's" -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'α(Γ_q)' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'Nullstellensatz' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'Zaks' -> plans/FRONTIER-STUBS.md: a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-biquadratic-table.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-character-classification.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-de-grey-chain-kernel.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-five-colours-47.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-infinite-place-spectra.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-kr6.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-last-lattice.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-literal-ring-mixon.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-one-prime-minimal-sets.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-pyjama-gluing.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-quadratic-witnesses-kernel.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-rank-one-walls.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-three-colour-classification.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-tower-never-rises.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'plans/STUB-unit-vector-ring-kernel.md' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  '0.1' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  '3^f' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  "C3-aper's" -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'R/3R' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  "V8's" -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'p^{2(k−1)}·α(Γ_p)' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'α(UD(ℤ/p^k,2))' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'α(Γ_p)/p²' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'ℚ(√3,√d)' -> plans/FRONTIER-STUBS.md: a paths-forward row that left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R3's order, mirrored by R4); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  '3′' -> plans/FRONTIER-STUBS.md: FS-101's rank label '3′' in CLAUDE.md's table, renumbered 17 at the 2026-09-26 re-rank (R3, mirrored by R4); plans/FRONTIER-STUBS.md's re-rank paragraphs keep the label
+  '14′' -> plans/FRONTIER-STUBS.md: FS-102's rank label '14′' in CLAUDE.md's table, renumbered 7 at the 2026-09-26 re-rank (R3, mirrored by R4); plans/FRONTIER-STUBS.md's re-rank paragraphs keep the label
+  'Ā' -> plans/STUB-pyjama-gluing.md: FS-93's paths-forward row ('on `A` and `Ā`'), which left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R4); its FRONTIER-STUBS row says 'the half rings', and its stub names `A`, its conjugate `Ā`
+  '0.1–11' -> plans/RERANK-2026-09-26.md: FS-68's paths-forward row ('Certified within 0.1–11 % at 7–23'), which left CLAUDE.md's ranks 1-29 at the 2026-09-26 re-rank (R4); the fact is FS-68's FRONTIER-STUBS row, spelled '0.1 %, 0.7 %, 2 % and 11 %', and R4's record quotes the old cell
+  '30–59' -> plans/RERANK-2026-09-26.md: the pointer row's rank label, 30–59 -> 30–62 at the 2026-09-26 re-rank (FS-103, FS-104, FS-105 minted; R4's record names the change)
+  'plans/CRUNCH-2026-09-25-queue.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/FS67-tight-products.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/FS84-S1-derivation.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/FS84-S1V-verification.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/FS84-five-colours-47.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/FS86-row88-rigidity.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/FS89-rational-band-rigidity.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/FS91-character-local-global.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/M3-exotic-colourings.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/STUB-band-rigidity-six.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/STUB-isometric-measure-rigidity.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/STUB-layer-method-five-colours.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/STUB-three-colours-residue-degree-three.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'plans/STUB-collapse-cp-plane.md' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  '0.30' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'M1–M3' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  'S1V' -> plans/FRONTIER-STUBS.md: the close history cut from CLAUDE.md's Last-updated line and Open-milestones paragraph at FS-103's close (FS103-C's C1, C2; the owner's ruling 4: audited, and restored where lost); plans/FRONTIER-STUBS.md's Open-milestones history and closed list hold it
+  '§ What' -> plans/FRONTIER-STUBS.md: the same close history; restored by FS103-X to plans/FRONTIER-STUBS.md's Open-milestones history (the owner's ruling 4), where the audit found it nowhere else
+  '111–115' -> plans/FRONTIER-STUBS.md: the same close history; restored by FS103-X to plans/FRONTIER-STUBS.md's Open-milestones history (the owner's ruling 4), where the audit found it nowhere else
+  '98–110' -> plans/FRONTIER-STUBS.md: the same close history; restored by FS103-X to plans/FRONTIER-STUBS.md's Open-milestones history (the owner's ruling 4), where the audit found it nowhere else
+  '25–27' -> plans/FRONTIER-STUBS.md: the same close history; restored by FS103-X to plans/FRONTIER-STUBS.md's Open-milestones history (the owner's ruling 4), where the audit found it nowhere else
+  '0.195' -> plans/STUB-collapse-cp-plane.md: FS-103's paths-forward row ('first usable prime 103, `2√103/104 ≈ 0.195 < 1/5`'), which left the table at FS-103's close (C17); the stub plans/STUB-collapse-cp-plane.md keeps it
+  '2√103/104' -> plans/STUB-collapse-cp-plane.md: FS-103's paths-forward row ('first usable prime 103, `2√103/104 ≈ 0.195 < 1/5`'), which left the table at FS-103's close (C17); the stub plans/STUB-collapse-cp-plane.md keeps it
+  'plans/RERANK-2026-09-26.md' -> plans/FRONTIER-STUBS.md: the Last-updated line's 'the paths forward re-ranked (R1–R4, plans/RERANK-2026-09-26.md)', cut when FS-105's close replaced the line (§R-close 4.2); plans/FRONTIER-STUBS.md's re-rank paragraphs cite the record
+  'RERANK' -> plans/FRONTIER-STUBS.md: the same Last-updated clause (the record's name); plans/FRONTIER-STUBS.md cites plans/RERANK-2026-09-26.md
+  'plans/STUB-harden-mr.md' -> plans/FRONTIER-STUBS.md: FS-105's rank-1 paths-forward row, which left the table at FS-105's close (§R-close 4.2, 4.4); the stub's path heads its entry in plans/FRONTIER-STUBS.md's closed list
+  '121–130' -> plans/STUB-harden-mr.md: FS-105's rank-1 row's bearing 'rows 121–130 rest on MR (row 120), the table's weakest link', which left the table at FS-105's close (§R-close 4.2); the stub keeps it
+  '§§3' -> plans/STUB-harden-mr.md: FS-105's rank-1 row's question 'Thm 1.2's proof (§§3, 5–9 unread)', answered at FS-105's close (row 120's grade); the stub keeps it
+  '5–9' -> plans/STUB-harden-mr.md: the same row's '§§3, 5–9 unread'; the stub keeps it
+  'plans/STUB-four-colour-inheritance.md' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-76, which left CLAUDE.md's ranks 1–29 at FS-106's close (FS106-X; E1's design); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'FS-84' -> plans/FRONTIER-STUBS.md: the Open-milestones paragraph's 'Kooshi's rulings (FS-84's among them)', cut by D-C7 at FS-106's close; the closed list holds FS-84's entry and ruling
+  "84's" -> plans/FRONTIER-STUBS.md: the same clause ('FS-84's'); the closed list holds it
+  '120–127' -> plans/FRONTIER-STUBS.md: the Last-updated line's 'FS-100 stage 5 with its waves (rows 120–127)', cut by D-C5 at FS-106's close; the closed list holds it
+  '0.03' -> plans/STUB-cp-plane-six.md: FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-cp-plane-six.md` (formerly FS-104's paths-forward bearing 'the advisor's prior for six itself ≈ 0.03', cut by D-C8 at FS-106's close)
+  "80's" -> plans/FRONTIER-STUBS.md: FS-104's paths-forward question '`k`-point correlation constraints (FS-80's route)', shortened to '(FS-80)' by D-C8; FS-104's row in plans/FRONTIER-STUBS.md keeps it
+  'D1–D5' -> plans/STUB-regularity-wall.md: link 5's normal-form address '(FS-103's V1 and M, D1–D5)', cut by D-C2 at FS-106's close ('whose normal form FS-103 holds'); the stub's reduction, the working copy of § The aim, keeps 'FS103-M's D1–D5'
+  'plans/STUB-ultrametric-continuation.md' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-98, which left CLAUDE.md's ranks 1–29 at FS-107's close (§R-close 4.2; E1's design); the stub's row in plans/FRONTIER-STUBS.md is authoritative
+  'J38' -> plans/FRONTIER-STUBS.md: the same row's 're-aimed (J38's R1)'; FS-98's row in plans/FRONTIER-STUBS.md keeps it
+  "J38's" -> plans/FRONTIER-STUBS.md: the same clause; FS-98's row in plans/FRONTIER-STUBS.md keeps it
+  '§ FS' -> plans/FRONTIER-STUBS.md: the address '`plans/STUB-regularity-wall.md` § FS-107' in FS-107's rank-1 row and the Open-milestones sentence, both replaced at FS-107's close (§R-close 4.2); the closed-list entry keeps it
+  'δ₀' -> plans/STUB-regularity-wall.md: FS-107's rank-1 row's question 'leaves `δ₀|U_R|` uncovered, for every `ε`' (claim R), which left the table at FS-107's close; the stub's § FS-107 keeps it, and row 133 cites it as row 131's C-Q-STAB
+  'δ₀|U_R' -> plans/STUB-regularity-wall.md: the same clause; the stub's § FS-107 keeps it
+  'J47' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-100 (rank 18 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  'Y1' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-90 (rank 29 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  "(3)'s" -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-67 (rank 7 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  '06:5x' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-101 (rank 19 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  '10⁻⁴' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-109 (rank 4 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  '112–113' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-64 (rank 12 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  '116–117' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-64 (rank 12 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  '116–118' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-100 (rank 18 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  '4′' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-100 (rank 18 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  "HD1-cert's" -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-90 (rank 29 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  'PL(23' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-96 (rank 11 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  'plans/STUB-tangency-seam.md' -> plans/FRONTIER-STUBS.md: FS-110's stub, cited by CLAUDE.md's Open-milestones paragraph and paths-forward rank 1 until FS-110 closed (FS110-X; FS110-C's §R-close 4.2); plans/FRONTIER-STUBS.md's closed list keeps it
+  '(1, 2)' -> plans/STUB-tangency-seam.md: FS-110's paths-forward row ('equal-type pairs in `(1, 2)` must survive the bicycle'), removed from CLAUDE.md when FS-110 closed and FS-112 took rank 1 (FS110-X; FS110-C's §R-close 4.2); the stub keeps the fact
+  "R1's" -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-44 (rank 15 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  'T-J39-5' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-59 (rank 8 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  'μ_min' -> plans/FRONTIER-STUBS.md: the paths-forward row of FS-67 (rank 7 before RK), shortened in CLAUDE.md at the ranking pass; its row in plans/FRONTIER-STUBS.md is authoritative and keeps it
+  '2026-07-30' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '# noqa' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '#eval' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '+kernel' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  ', ' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '--' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '-- line comment' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '--plan' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '-j' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  './install-toolchain.sh' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  './scripts/vacuity.sh' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  './scripts/vacuity.sh --self-test' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '.c' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '.claude/settings.local.json' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '.lake/build/ir/' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '.olean' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '/-! module doc -/' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '/-- docstring -/' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '<decl>._native.native_decide.ax_N_M' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '= true' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '@[extern] opaque' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'BATCH' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Bool' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Classical.choice' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'DECLARED' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Decidable' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'False' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'GENERIC' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Instances/TwoAdicFive/Edges.lean' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'LEAN_ABORT_ON_PANIC' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'LEAN_CC' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'LIBRARY_PATH' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Lean.ofReduceBool' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'List.all' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'List.all_eq_true' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'List.map' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'List.range' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'List.range 529' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'MEMMAX' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'MemorySwapMax=0' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Nat.fold' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Nat.ldiff' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Nat.testBit_two_pow_sub_one' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Proofs' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Proofs.lean' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'PtTable' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Quot.sound' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'STALE' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Sat/ClauseTable.lean' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Sat/Diagnose.lean' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Sat/Mask.lean' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Sat/MaskCheck.lean' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'SimpleGraph.chromaticNumber' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Std.HashMap' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Std.Tactic.BVDecide.LRAT.check' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'USize' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'VACUITY DECLARED:' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'VACUOUS' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'WITNESSED' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'ZMod (2 ^ ((5 + 1) / 2))' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'ZMod 8' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'agreesWithCNF' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'autoImplicit' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'autoImplicit := false' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'available_memory / peak' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'axioms.sh' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'build.sh' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'build/gate/<gate>/' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'check' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'check_sound' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'debruijn-init' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'decide (…)' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'decide +kernel' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'example' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'grep -rn "<name-fragment>" $(lean --print-prefix)/src/lean/' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'insert' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'l.all f = true' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'lake' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'lake build --no-build' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'lake env lean <file>' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'lake update' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'lakefile.toml' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'latest' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'lean' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'lean-toolchain' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'lean4checker.sh' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'leanprover/lean4:v4.32.0' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'libc++' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'maxHeartbeats' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'mmap' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'model: opus' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'plans/PROTOCOL-crunch.md' -> .claude/output-styles/keryx.md: moved with CLAUDE.md § Delegation's staffing record to .claude/output-styles/keryx.md § Staffing (Workflow 3.0's split, 2026-09-28): Keryx's alone; CLAUDE.md keeps the rule and a pointer
+  'propext' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'range' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'regen-check.sh' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'relaxedAutoImplicit' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'scripts/build_order.py' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'scripts/gate-log.sh' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'sorryAx' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'source scripts/dev-env.sh' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'v4.32.0' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'vacuity.sh' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '~/.profile' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'K3' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'M04' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'M05' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'M11' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '§ Searching.' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '0.81' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '0.83' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '1024' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '1048576' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '12696' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '16.7' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '180' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '2.14' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '209' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '2381' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '31.9' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '32.9' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '33089' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '4.17' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '4.19' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '5.0' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '5.9' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '600' -> .claude/output-styles/keryx.md: moved with CLAUDE.md § Delegation's staffing record to .claude/output-styles/keryx.md § Staffing (Workflow 3.0's split, 2026-09-28): Keryx's alone; CLAUDE.md keeps the rule and a pointer
+  '6325' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '778' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '853' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '861' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '99335' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '[extern]' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '[it]' -> .claude/output-styles/keryx.md: moved with CLAUDE.md § Delegation's staffing record to .claude/output-styles/keryx.md § Staffing (Workflow 3.0's split, 2026-09-28): Keryx's alone; CLAUDE.md keeps the rule and a pointer
+  '100G' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '100–180' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '20%' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '2×' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '5.0.0' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '500k–600k' -> .claude/output-styles/keryx.md: moved with CLAUDE.md § Delegation's staffing record to .claude/output-styles/keryx.md § Staffing (Workflow 3.0's split, 2026-09-28): Keryx's alone; CLAUDE.md keeps the rule and a pointer
+  '55–70' -> .claude/output-styles/keryx.md: moved with CLAUDE.md § Delegation's staffing record to .claude/output-styles/keryx.md § Staffing (Workflow 3.0's split, 2026-09-28): Keryx's alone; CLAUDE.md keeps the rule and a pointer
+  "M04's" -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'e.1' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'e.2' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  's/1048576' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  '{s+=$1}' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'BVDecide' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'CNF' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  "Claude's" -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'ClauseTable' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Efodos' -> .claude/output-styles/keryx.md: moved with CLAUDE.md § Delegation's staffing record to .claude/output-styles/keryx.md § Staffing (Workflow 3.0's split, 2026-09-28): Keryx's alone; CLAUDE.md keeps the rule and a pointer
+  'Emit' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Fable' -> .claude/output-styles/keryx.md: moved with CLAUDE.md § Delegation's staffing record to .claude/output-styles/keryx.md § Staffing (Workflow 3.0's split, 2026-09-28): Keryx's alone; CLAUDE.md keeps the rule and a pointer
+  'Feed' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'HashMap' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'InfoView' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'KB' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'LLVM' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Managed' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Mask' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'MaskCheck' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'MemorySwapMax' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'OOM' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'SimpleGraph' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'Std' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'TwoAdicFive' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+  'ZMod' -> .claude/agents/debruijn.md: moved with its section to .claude/agents/debruijn.md § The Lean facts of this repository (Workflow 3.0's split, 2026-09-28): the kernel lane's alone; CLAUDE.md keeps a pointer under the heading
+allowances in force: 454
+  'axioms=3 rests=74 named=19 inline=14 outside=7 ours=21 open=5 takes=108 mentions=2': superseded gate count, refiled at FS131-IL5's filing (2026-10-16, FS-131 inventory item 990) from data/fs131/il5/gate/; the old count stays in data/fs131/clone1/gate/ (rests=78)
+  'rests=74': superseded gate count, refiled at FS131-IL5's filing (2026-10-16, FS-131 inventory item 990) from data/fs131/il5/gate/; the old count stays in data/fs131/clone1/gate/
+  'declarations=22238 refutations-skipped=240 sites=1455': superseded gate count, refiled at FS131-IL5's filing (2026-10-16, FS-131 inventory item 990) from data/fs131/il5/gate/; the old count stays in data/fs131/clone1/gate/ (declarations=22241)
+  'declarations=22238': superseded gate count, refiled at FS131-IL5's filing (2026-10-16, FS-131 inventory item 990) from data/fs131/il5/gate/; the old count stays in data/fs131/clone1/gate/
+  '22238': superseded gate count, refiled at FS131-IL5's filing (2026-10-16, FS-131 inventory item 990) from data/fs131/il5/gate/; the old count stays in data/fs131/clone1/gate/
+  '10650': superseded gate count, refiled at FS131-IL5's filing (2026-10-16, FS-131 inventory item 990) from data/fs131/il5/gate/; the old count stays in data/fs131/clone1/gate/ (10651 clean)
+  '11284': superseded gate count, refiled at FS131-IL5's filing (2026-10-16, FS-131 inventory item 990) from data/fs131/il5/gate/; the old count stays in data/fs131/clone1/gate/ (11,287 records)
+  'axioms=3 rests=78 named=19 inline=14 outside=7 ours=21 open=5 takes=108 mentions=2': superseded gate count, refiled at FS131-ICO2's filing (2026-10-16, FS-131 inventory item 1007) from data/fs131/ico2/gate/; the old count stays in data/fs131/il5/gate/ (rests=99, takes=109)
+  'rests=78': superseded gate count, refiled at FS131-ICO2's filing (2026-10-16, FS-131 inventory item 1007) from data/fs131/ico2/gate/; the old count stays in data/fs131/il5/gate/
+  'takes=108': superseded gate count, refiled at FS131-ICO2's filing (2026-10-16, FS-131 inventory item 1007) from data/fs131/ico2/gate/; the old count stays in data/fs131/il5/gate/
+  'declarations=22241 refutations-skipped=240 sites=1455': superseded gate count, refiled at FS131-ICO2's filing (2026-10-16, FS-131 inventory item 1007) from data/fs131/ico2/gate/; the old count stays in data/fs131/il5/gate/ (declarations=22357, refutations-skipped=242)
+  'declarations=22241': superseded gate count, refiled at FS131-ICO2's filing (2026-10-16, FS-131 inventory item 1007) from data/fs131/ico2/gate/; the old count stays in data/fs131/il5/gate/
+  'refutations-skipped=240': superseded gate count, refiled at FS131-ICO2's filing (2026-10-16, FS-131 inventory item 1007) from data/fs131/ico2/gate/; the old count stays in data/fs131/il5/gate/
+  '22241': superseded gate count, refiled at FS131-ICO2's filing (2026-10-16, FS-131 inventory item 1007) from data/fs131/ico2/gate/; the old count stays in data/fs131/il5/gate/
+  '10651': superseded gate count, refiled at FS131-ICO2's filing (2026-10-16, FS-131 inventory item 1007) from data/fs131/ico2/gate/; the old count stays in data/fs131/il5/gate/ (10747 clean)
+  '11287': superseded gate count, refiled at FS131-ICO2's filing (2026-10-16, FS-131 inventory item 1007) from data/fs131/ico2/gate/; the old count stays in data/fs131/il5/gate/ (11,398 records)
+  'G81:[hand, two blind minds (row 128); the ambiguity reading one mind]': regraded at FS131-ICO2's filing (2026-10-16, FS-131 inventory item 1007): the field equality of row 128 is a kernel theorem since FS131-ICO2 (Collapse.chromaticNumber_planeOver_eq_plane_of_thick, gated on 7c72b9bf7); the ambiguity reading keeps its grade
+  '[hand, two blind minds (row 128); the ambiguity reading one mind]': regraded at FS131-ICO2's filing (2026-10-16, FS-131 inventory item 1007): the field equality of row 128 is a kernel theorem since FS131-ICO2 (Collapse.chromaticNumber_planeOver_eq_plane_of_thick, gated on 7c72b9bf7); the ambiguity reading keeps its grade
+  'ROADMAP.md': LEDGER.md row 123's "Not claimed" clause pointing to ROADMAP.md for the unstored equality, removed at FS131-IL5's filing because the equality is now stored (Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five); ROADMAP.md is at the repository root
+  "FS100-Q47's": row 121's source cell reworded by plans/FS131-EN1-derivation.md § 8.3's draft (filed by FS131-FC8): the cell now says which of its eight entries are inputs of SP-Cor's proof instead of 'the inputs FS100-Q47's grade names'; FS100-Q47 itself is still named in LEDGER.md
+  'axioms=1 rests=8 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1': superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-assumptions-final.log (axioms=3 rests=18); the old line stays in data/fs131/l8a/gate/receipt-assumptions-final.log
+  'axioms=1': superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-assumptions-final.log; the old count stays in data/fs131/l8a/gate/receipt-assumptions-final.log
+  'rests=8': superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-assumptions-final.log; the old count stays in data/fs131/l8a/gate/receipt-assumptions-final.log
+  'declarations=14807 refutations-skipped=215 sites=1446': superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-vacuity-final.log (14845, 1447); the old line stays in data/fs131/l8a/gate/receipt-vacuity-final.log
+  'vacuous=0 stale=0 declared=3 witnessed=38 generic=1403 unknown=2': superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-vacuity-final.log (generic=1404); the old line stays in data/fs131/l8a/gate/receipt-vacuity-final.log
+  'declarations=14807': superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-vacuity-final.log; the old count stays in data/fs131/l8a/gate/receipt-vacuity-final.log
+  'declarations=14845 refutations-skipped=215 sites=1447': superseded gate count, refiled at FS132-L2's landing from data/fs132/l2/gate/receipt-vacuity-final.log (15292, 226, 1447); the old line stays in data/fs132/l1/gate/receipt-vacuity-final.log
+  'declarations=14845': superseded gate count, refiled at FS132-L2's landing from data/fs132/l2/gate/receipt-vacuity-final.log (15292, 226, 1447); the old line stays in data/fs132/l1/gate/receipt-vacuity-final.log
+  '14845': superseded gate count, refiled at FS132-L2's landing from data/fs132/l2/gate/receipt-vacuity-final.log (15292, 226, 1447); the old line stays in data/fs132/l1/gate/receipt-vacuity-final.log
+  'refutations-skipped=215': superseded gate count, refiled at FS132-L2's landing from data/fs132/l2/gate/receipt-vacuity-final.log (15292, 226, 1447); the old line stays in data/fs132/l1/gate/receipt-vacuity-final.log
+  'fs132-wi2': a branch name that left the front page when FS-132's first theorem landed (FS132-L2, 2026-10-07): the open-milestones sentence now names the landed theorems, and the branch stays in plans/FS132-close-inventory.md items 33-50
+  'declarations=15292 refutations-skipped=226 sites=1447': superseded gate count, refiled at FS124-L1's landing from data/fs124/l1/gate/receipt-vacuity-final.log (15370, 226, 1448; generic=1405); the old line stays in data/fs132/l2/gate/receipt-vacuity-final.log
+  'vacuous=0 stale=0 declared=3 witnessed=38 generic=1404 unknown=2': superseded gate count, refiled at FS124-L1's landing from data/fs124/l1/gate/receipt-vacuity-final.log (15370, 226, 1448; generic=1405); the old line stays in data/fs132/l2/gate/receipt-vacuity-final.log
+  'declarations=15292': superseded gate count, refiled at FS124-L1's landing from data/fs124/l1/gate/receipt-vacuity-final.log (15370, 226, 1448; generic=1405); the old line stays in data/fs132/l2/gate/receipt-vacuity-final.log
+  '15292': superseded gate count, refiled at FS124-L1's landing from data/fs124/l1/gate/receipt-vacuity-final.log (15370, 226, 1448; generic=1405); the old line stays in data/fs132/l2/gate/receipt-vacuity-final.log
+  'sites=1447': superseded gate count, refiled at FS124-L1's landing from data/fs124/l1/gate/receipt-vacuity-final.log (15370, 226, 1448; generic=1405); the old line stays in data/fs132/l2/gate/receipt-vacuity-final.log
+  '1447': superseded gate count, refiled at FS124-L1's landing from data/fs124/l1/gate/receipt-vacuity-final.log (15370, 226, 1448; generic=1405); the old line stays in data/fs132/l2/gate/receipt-vacuity-final.log
+  'generic=1404': superseded gate count, refiled at FS124-L1's landing from data/fs124/l1/gate/receipt-vacuity-final.log (15370, 226, 1448; generic=1405); the old line stays in data/fs132/l2/gate/receipt-vacuity-final.log
+  '1404': superseded gate count, refiled at FS124-L1's landing from data/fs124/l1/gate/receipt-vacuity-final.log (15370, 226, 1448; generic=1405); the old line stays in data/fs132/l2/gate/receipt-vacuity-final.log
+  'axioms=3 rests=18 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1': superseded gate count, refiled at FS124-L1's landing from data/fs124/l1/gate/receipt-assumptions-final.log (rests=23); the old line stays in data/fs132/l2/gate/receipt-assumptions-final.log
+  'rests=18': superseded gate count, refiled at FS124-L1's landing from data/fs124/l1/gate/receipt-assumptions-final.log (rests=23); the old line stays in data/fs132/l2/gate/receipt-assumptions-final.log
+  'fs124-wk1': a branch name that left the front page when FS-124's disc criterion landed (FS124-L1, 2026-10-07): the open-milestones sentence now names the landed modules and theorem, and the branch stays in plans/FS124-close-inventory.md items 19, 24, 31 and 38
+  '131–164': a range of ledger rows on the front page, now 131–167: FS-136's filing (Derived, 2026-10-07) added rows 165–167; rows 131–164 stand in LEDGER.md
+  '1–164': the ledger's row range on the front page, now 1–167: FS-136's filing (Derived, 2026-10-07) added rows 165–167
+  "C124-EDGE-CLOSED's": a possessive in the ranked table's first row as the asking lane first wrote it ('of C124-EDGE-CLOSED's kind'), replaced at FS-136's filing by the row its record job drafted; the phrase stands in plans/STUB-covering-pairs.md, and the entry in LEDGER.md row 164
+  'G0': not a pointer: G0 is a tile of FS116-Y2-SIXFRAG named in LEDGER.md row 167 ('S0, Q0, G0'), which the pointer pattern reads as a grokking number
+  'sites=1446': superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-vacuity-final.log; the old count stays in data/fs131/l8a/gate/receipt-vacuity-final.log
+  'generic=1403': superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-vacuity-final.log; the old count stays in data/fs131/l8a/gate/receipt-vacuity-final.log
+  '14807': superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-vacuity-final.log; the old count stays in data/fs131/l8a/gate/receipt-vacuity-final.log
+  '1446': superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-vacuity-final.log; the old count stays in data/fs131/l8a/gate/receipt-vacuity-final.log
+  '1403': superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-vacuity-final.log; the old count stays in data/fs131/l8a/gate/receipt-vacuity-final.log
+  '6521': superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-axioms-final.log (6533 clean); the old count stays in data/fs131/l8a/gate/receipt-axioms-final.log and in GATE_CHANGES
+  '6554': superseded gate count, refiled at FS132-L1's landing from data/fs132/l1/gate/receipt-axioms-final.log (6,576 records); the old count stays in data/fs131/l8a/gate/receipt-axioms-final.log and in GATE_CHANGES
+  '6533': superseded gate count, refiled at FS132-L2's landing from data/fs132/l2/gate/receipt-axioms-final.log (6910 clean); the old count stays in data/fs132/l1/gate/receipt-axioms-final.log and in GATE_CHANGES
+  '6576': superseded gate count, refiled at FS132-L2's landing from data/fs132/l2/gate/receipt-axioms-final.log (6,953 records); the old count stays in data/fs132/l1/gate/receipt-axioms-final.log and in GATE_CHANGES
+  '6910': superseded gate count, refiled at FS124-L1's landing from data/fs124/l1/gate/receipt-axioms-final.log (6967 clean); the old count stays in data/fs132/l2/gate/receipt-axioms-final.log and in GATE_CHANGES
+  '6953': superseded gate count, refiled at FS124-L1's landing from data/fs124/l1/gate/receipt-axioms-final.log (7,015 records); the old count stays in data/fs132/l2/gate/receipt-axioms-final.log and in GATE_CHANGES
+  '6967': superseded gate count, refiled at FS124-L2's landing from data/fs124/l2/gate/receipt-axioms-final.log (7364 clean); the old count stays in data/fs124/l1/gate/ and in GATE_CHANGES
+  '7,015': superseded gate count, refiled at FS124-L2's landing from data/fs124/l2/gate/receipt-axioms-final.log (7,420 records); the old count stays in data/fs124/l1/gate/ and in GATE_CHANGES
+  '20 axiom-free': superseded gate count, refiled at FS124-L2's landing from data/fs124/l2/gate/receipt-axioms-final.log (28 axiom-free); the old count stays in data/fs124/l1/gate/ and in GATE_CHANGES
+  'declarations=15370': superseded gate count, refiled at FS124-L2's landing from data/fs124/l2/gate/receipt-vacuity-final.log (15928); the old count stays in data/fs124/l1/gate/ and in GATE_CHANGES
+  'declarations=15370 refutations-skipped=226 sites=1448': superseded gate count, refiled at FS124-L2's landing from data/fs124/l2/gate/receipt-vacuity-final.log (15928, 228, 1448); the old line stays in data/fs124/l1/gate/receipt-vacuity-final.log
+  'axioms=3 rests=23 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1': superseded gate count, refiled at FS131-LC1's landing from data/fs131/lc1/gate/receipt-assumptions-final.log (rests=26); the old line stays in data/fs124/l2/gate/receipt-assumptions-final.log
+  'declarations=15928 refutations-skipped=228 sites=1448': superseded gate count, refiled at FS131-LC1's landing from data/fs131/lc1/gate/receipt-vacuity-final.log (15969, 228, 1454; generic=1411); the old line stays in data/fs124/l2/gate/receipt-vacuity-final.log
+  'vacuous=0 stale=0 declared=3 witnessed=38 generic=1405 unknown=2': superseded gate count, refiled at FS131-LC1's landing from data/fs131/lc1/gate/receipt-vacuity-final.log (15969, 228, 1454; generic=1411); the old line stays in data/fs124/l2/gate/receipt-vacuity-final.log
+  '1405': superseded gate count, refiled at FS131-LC1's landing from data/fs131/lc1/gate/receipt-vacuity-final.log (15969, 228, 1454; generic=1411); the old line stays in data/fs124/l2/gate/receipt-vacuity-final.log
+  '1448': superseded gate count, refiled at FS131-LC1's landing from data/fs131/lc1/gate/receipt-vacuity-final.log (15969, 228, 1454; generic=1411); the old line stays in data/fs124/l2/gate/receipt-vacuity-final.log
+  '15928': superseded gate count, refiled at FS131-LC1's landing from data/fs131/lc1/gate/receipt-vacuity-final.log (15969, 228, 1454; generic=1411); the old line stays in data/fs124/l2/gate/receipt-vacuity-final.log
+  '7420': superseded gate count, refiled at FS131-LC1's landing from data/fs131/lc1/gate/receipt-axioms-final.log (7,454 records); the old count stays in data/fs124/l2/gate/ and in GATE_CHANGES
+  '15370': superseded gate count, refiled at FS124-L2's landing from data/fs124/l2/gate/receipt-vacuity-final.log (15928, 228, 1448); the old line stays in data/fs124/l1/gate/receipt-vacuity-final.log
+  '7015': superseded gate count, refiled at FS124-L2's landing from data/fs124/l2/gate/receipt-axioms-final.log (7,420 records); the old count stays in data/fs124/l1/gate/ and in GATE_CHANGES
+  'refutations-skipped=226': superseded gate count, refiled at FS124-L2's landing from data/fs124/l2/gate/receipt-vacuity-final.log (228); the old count stays in data/fs124/l1/gate/ and in GATE_CHANGES
+  '7364': superseded gate count, refiled at FS131-LC1's landing from data/fs131/lc1/gate/receipt-axioms-final.log (7395 clean); the old count stays in data/fs124/l2/gate/ and in GATE_CHANGES
+  '7,420': superseded gate count, refiled at FS131-LC1's landing from data/fs131/lc1/gate/receipt-axioms-final.log (7,454 records); the old count stays in data/fs124/l2/gate/ and in GATE_CHANGES
+  '23 imported': superseded gate count, refiled at FS131-LC1's landing from data/fs131/lc1/gate/receipt-axioms-final.log (26 imported); the old count stays in data/fs124/l2/gate/ and in GATE_CHANGES
+  'declarations=15928': superseded gate count, refiled at FS131-LC1's landing from data/fs131/lc1/gate/receipt-vacuity-final.log (15969); the old count stays in data/fs124/l2/gate/ and in GATE_CHANGES
+  'sites=1448': superseded gate count, refiled at FS131-LC1's landing from data/fs131/lc1/gate/receipt-vacuity-final.log (1454); the old count stays in data/fs124/l2/gate/ and in GATE_CHANGES
+  'generic=1405': superseded gate count, refiled at FS131-LC1's landing from data/fs131/lc1/gate/receipt-vacuity-final.log (1411); the old count stays in data/fs124/l2/gate/ and in GATE_CHANGES
+  'rests=23': superseded gate count, refiled at FS131-LC1's landing from data/fs131/lc1/gate/receipt-assumptions-final.log (26); the old count stays in data/fs124/l2/gate/ and in GATE_CHANGES
+  'with nine': superseded gate count, refiled at FS131-LC1's landing from data/fs131/lc1/gate/receipt-assumptions-final.log (twelve); the old count stays in data/fs124/l2/gate/ and in GATE_CHANGES
+  'twenty-three theorems resting': superseded gate count, refiled at FS131-LC1's landing from data/fs131/lc1/gate/receipt-assumptions-final.log (twenty-six); the old count stays in data/fs124/l2/gate/ and in GATE_CHANGES
+  '7395': superseded gate count, refiled at FS131-LU1's landing from data/fs131/lu1/gate/receipt-axioms-final.log (7447 clean; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lc1/gate/ and in GATE_CHANGES
+  '7,454': superseded gate count, refiled at FS131-LU1's landing from data/fs131/lu1/gate/receipt-axioms-final.log (7,506 records; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lc1/gate/ and in GATE_CHANGES
+  'declarations=15969': superseded gate count, refiled at FS131-LU1's landing from data/fs131/lu1/gate/receipt-axioms-final.log (16029; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lc1/gate/ and in GATE_CHANGES
+  'inline=16': superseded gate count, refiled at FS131-LU1's landing from data/fs131/lu1/gate/receipt-axioms-final.log (15; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lc1/gate/ and in GATE_CHANGES
+  'ours=23': superseded gate count, refiled at FS131-LU1's landing from data/fs131/lu1/gate/receipt-axioms-final.log (22; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lc1/gate/ and in GATE_CHANGES
+  'takes=98': superseded gate count, refiled at FS131-LU1's landing from data/fs131/lu1/gate/receipt-axioms-final.log (106; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lc1/gate/ and in GATE_CHANGES
+  'thirty-five hypotheses': superseded gate count, refiled at FS131-LU1's landing from data/fs131/lu1/gate/receipt-axioms-final.log (thirty-four; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lc1/gate/ and in GATE_CHANGES
+  'sixteen written out': superseded gate count, refiled at FS131-LU1's landing from data/fs131/lu1/gate/receipt-axioms-final.log (fifteen; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lc1/gate/ and in GATE_CHANGES
+  'twenty-three for hand results': superseded gate count, refiled at FS131-LU1's landing from data/fs131/lu1/gate/receipt-axioms-final.log (twenty-two; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lc1/gate/ and in GATE_CHANGES
+  '98 (hypothesis, statement) pairs by 51 statements': superseded gate count, refiled at FS131-LU1's landing from data/fs131/lu1/gate/receipt-axioms-final.log (106 by 52; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lc1/gate/ and in GATE_CHANGES
+  'axioms=3 rests=26 named=19 inline=16 outside=7 ours=23 open=5 takes=98 mentions=1': superseded gate counts (the assumptions step's nine), refiled at FS131-LU1's landing from data/fs131/lu1/gate/receipt-assumptions-final.log (inline=15, ours=22, takes=106); the old line stays in data/fs131/lc1/gate/ and in GATE_CHANGES
+  'declarations=15969 refutations-skipped=228 sites=1454': superseded gate count (the vacuity scan's), refiled at FS131-LU1's landing from data/fs131/lu1/gate/receipt-vacuity-final.log (declarations=16029); the old line stays in data/fs131/lc1/gate/ and in GATE_CHANGES
+  '15969': superseded gate count (the vacuity scan's), refiled at FS131-LU1's landing from data/fs131/lu1/gate/receipt-vacuity-final.log (declarations=16029); the old line stays in data/fs131/lc1/gate/ and in GATE_CHANGES
+  '7454': superseded gate count, the token form of 7,454 records; refiled at FS131-LU1's landing from data/fs131/lu1/gate/receipt-axioms-final.log (7,506 records); the old count stays in data/fs131/lc1/gate/ and in GATE_CHANGES
+  '7447': superseded gate count, refiled at FS131-LJ1's landing from data/fs131/lj1/gate/receipt-axioms-final.log (7531 clean; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lu1/gate/ and in GATE_CHANGES
+  '7,506': superseded gate count, refiled at FS131-LJ1's landing from data/fs131/lj1/gate/receipt-axioms-final.log (7,602 records; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lu1/gate/ and in GATE_CHANGES
+  '7506': superseded gate count, refiled at FS131-LJ1's landing from data/fs131/lj1/gate/receipt-axioms-final.log (7,602 records; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lu1/gate/ and in GATE_CHANGES
+  '26 imported': superseded gate count, refiled at FS131-LJ1's landing from data/fs131/lj1/gate/receipt-axioms-final.log (38 imported; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lu1/gate/ and in GATE_CHANGES
+  'with eight': superseded gate count, refiled at FS131-LJ1's landing from data/fs131/lj1/gate/receipt-axioms-final.log (with twenty; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lu1/gate/ and in GATE_CHANGES
+  'declarations=16029': superseded gate count, refiled at FS131-LJ1's landing from data/fs131/lj1/gate/receipt-axioms-final.log (16125; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lu1/gate/ and in GATE_CHANGES
+  '16029': superseded gate count, refiled at FS131-LJ1's landing from data/fs131/lj1/gate/receipt-axioms-final.log (16125; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lu1/gate/ and in GATE_CHANGES
+  'declarations=16029 refutations-skipped=228 sites=1454': superseded gate count, refiled at FS131-LJ1's landing from data/fs131/lj1/gate/receipt-axioms-final.log (16125; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lu1/gate/ and in GATE_CHANGES
+  'rests=26': superseded gate count, refiled at FS131-LJ1's landing from data/fs131/lj1/gate/receipt-axioms-final.log (39; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lu1/gate/ and in GATE_CHANGES
+  'inline=15': superseded gate count, refiled at FS131-LJ1's landing from data/fs131/lj1/gate/receipt-axioms-final.log (14; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lu1/gate/ and in GATE_CHANGES
+  'ours=22': superseded gate count, refiled at FS131-LJ1's landing from data/fs131/lj1/gate/receipt-axioms-final.log (21; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lu1/gate/ and in GATE_CHANGES
+  'takes=106': superseded gate count, refiled at FS131-LJ1's landing from data/fs131/lj1/gate/receipt-axioms-final.log (102; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lu1/gate/ and in GATE_CHANGES
+  'axioms=3 rests=26 named=19 inline=15 outside=7 ours=22 open=5 takes=106 mentions=1': superseded gate count, refiled at FS131-LJ1's landing from data/fs131/lj1/gate/receipt-axioms-final.log (the new nine: axioms=3 rests=39 named=19 inline=14 outside=7 ours=21 open=5 takes=102 mentions=1; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lu1/gate/ and in GATE_CHANGES
+  'twenty-six theorems resting': superseded gate count, refiled at FS131-LJ1's landing from data/fs131/lj1/gate/receipt-axioms-final.log (thirty-nine; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lu1/gate/ and in GATE_CHANGES
+  'thirty-four hypotheses': superseded gate count, refiled at FS131-LJ1's landing from data/fs131/lj1/gate/receipt-axioms-final.log (thirty-three; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lu1/gate/ and in GATE_CHANGES
+  'fifteen written out': superseded gate count, refiled at FS131-LJ1's landing from data/fs131/lj1/gate/receipt-axioms-final.log (fourteen; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lu1/gate/ and in GATE_CHANGES
+  'twenty-two for hand results': superseded gate count, refiled at FS131-LJ1's landing from data/fs131/lj1/gate/receipt-axioms-final.log (twenty-one; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lu1/gate/ and in GATE_CHANGES
+  '106 (hypothesis, statement) pairs by 52 statements': superseded gate count, refiled at FS131-LJ1's landing from data/fs131/lj1/gate/receipt-axioms-final.log (102 by 52; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lu1/gate/ and in GATE_CHANGES
+  '[hand, two independent derivations]': LEDGER row 82's grade before FS131-LJ1's landing, superseded by "[kernel since FS131-LJ1, the standard three; before it hand, two independent derivations]", which keeps the old grade's words
+  '7531': superseded gate count, refiled at FS131-LP1's landing from data/fs131/lp1/gate/receipt-axioms-final.log (8961 clean; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lj1/gate/ and in GATE_CHANGES
+  '7,602': superseded gate count, refiled at FS131-LP1's landing from data/fs131/lp1/gate/receipt-axioms-final.log (9,024 records; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lj1/gate/ and in GATE_CHANGES
+  '7602': superseded gate count, refiled at FS131-LP1's landing from data/fs131/lp1/gate/receipt-axioms-final.log (9,024 records; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lj1/gate/ and in GATE_CHANGES
+  '38 imported': superseded gate count, refiled at FS131-LP1's landing from data/fs131/lp1/gate/receipt-axioms-final.log (26 imported; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lj1/gate/ and in GATE_CHANGES
+  '28 axiom-free': superseded gate count, refiled at FS131-LP1's landing from data/fs131/lp1/gate/receipt-axioms-final.log (32 axiom-free; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lj1/gate/ and in GATE_CHANGES
+  'declarations=16125': superseded gate count, refiled at FS131-LP1's landing from data/fs131/lp1/gate/receipt-axioms-final.log (17785; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lj1/gate/ and in GATE_CHANGES
+  '16125': superseded gate count, refiled at FS131-LP1's landing from data/fs131/lp1/gate/receipt-axioms-final.log (17785; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lj1/gate/ and in GATE_CHANGES
+  'refutations-skipped=228': superseded gate count, refiled at FS131-LP1's landing from data/fs131/lp1/gate/receipt-axioms-final.log (232; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lj1/gate/ and in GATE_CHANGES
+  'declarations=16125 refutations-skipped=228 sites=1454': superseded gate count, refiled at FS131-LP1's landing from data/fs131/lp1/gate/receipt-axioms-final.log (17785, 232; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lj1/gate/ and in GATE_CHANGES
+  'axioms=3 rests=39': superseded gate count, refiled at FS131-LP1's landing from data/fs131/lp1/gate/receipt-axioms-final.log (axioms=2 rests=27; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lj1/gate/ and in GATE_CHANGES
+  'rests=39': superseded gate count, refiled at FS131-LP1's landing from data/fs131/lp1/gate/receipt-axioms-final.log (27; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lj1/gate/ and in GATE_CHANGES
+  'axioms=3 rests=39 named=19 inline=14 outside=7 ours=21 open=5 takes=102 mentions=1': superseded gate count, refiled at FS131-LP1's landing from data/fs131/lp1/gate/receipt-axioms-final.log (the new nine: axioms=2 rests=27 named=19 inline=14 outside=7 ours=21 open=5 takes=102 mentions=1; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lj1/gate/ and in GATE_CHANGES
+  'three outside theorems declared as axioms': superseded gate count, refiled at FS131-LP1's landing from data/fs131/lp1/gate/receipt-axioms-final.log (two; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lj1/gate/ and in GATE_CHANGES
+  'thirty-nine theorems resting': superseded gate count, refiled at FS131-LP1's landing from data/fs131/lp1/gate/receipt-axioms-final.log (twenty-seven; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lj1/gate/ and in GATE_CHANGES
+  'three outside axioms': superseded gate count, refiled at FS131-LP1's landing from data/fs131/lp1/gate/receipt-axioms-final.log (two; the vacuity count from receipt-vacuity-final.log, the assumption counts from receipt-assumptions-final.log); the old count stays in data/fs131/lj1/gate/ and in GATE_CHANGES
+  '228': superseded gate count, refiled at FS131-LP1's landing from data/fs131/lp1/gate/receipt-vacuity-final.log (refutations-skipped=232); the bare number of "refutations-skipped=228", which the audit tokenizes alone; the old count stays in data/fs131/lj1/gate/ and in GATE_CHANGES
+  'axioms=3': superseded gate count, refiled at FS131-LP1's landing from data/fs131/lp1/gate/receipt-assumptions-final.log (axioms=2); the bare chunk of "axioms=3 rests=39 …", which the audit tokenizes alone; the old count stays in data/fs131/lj1/gate/ and in GATE_CHANGES
+  '8961': superseded gate count, refiled at FS133-LD1's landing from data/fs133/ld1/gate/receipt-axioms-final.log (9038 clean; the vacuity count from receipt-vacuity-final.log); the old count stays in data/fs131/lp1/gate/ and in GATE_CHANGES
+  '9,024': superseded gate count, refiled at FS133-LD1's landing from data/fs133/ld1/gate/receipt-axioms-final.log (9,101 records; the vacuity count from receipt-vacuity-final.log); the old count stays in data/fs131/lp1/gate/ and in GATE_CHANGES
+  '9024': superseded gate count, refiled at FS133-LD1's landing from data/fs133/ld1/gate/receipt-axioms-final.log (9,101 records; the vacuity count from receipt-vacuity-final.log); the old count stays in data/fs131/lp1/gate/ and in GATE_CHANGES
+  'declarations=17785': superseded gate count, refiled at FS133-LD1's landing from data/fs133/ld1/gate/receipt-axioms-final.log (17902; the vacuity count from receipt-vacuity-final.log); the old count stays in data/fs131/lp1/gate/ and in GATE_CHANGES
+  '17785': superseded gate count, refiled at FS133-LD1's landing from data/fs133/ld1/gate/receipt-axioms-final.log (17902; the vacuity count from receipt-vacuity-final.log); the old count stays in data/fs131/lp1/gate/ and in GATE_CHANGES
+  'refutations-skipped=232': superseded gate count, refiled at FS133-LD1's landing from data/fs133/ld1/gate/receipt-axioms-final.log (234; the vacuity count from receipt-vacuity-final.log); the old count stays in data/fs131/lp1/gate/ and in GATE_CHANGES
+  '232': superseded gate count, refiled at FS133-LD1's landing from data/fs133/ld1/gate/receipt-axioms-final.log (234; the vacuity count from receipt-vacuity-final.log); the old count stays in data/fs131/lp1/gate/ and in GATE_CHANGES
+  'declarations=17785 refutations-skipped=232 sites=1454': superseded gate count, refiled at FS133-LD1's landing from data/fs133/ld1/gate/receipt-axioms-final.log (17902, 234; the vacuity count from receipt-vacuity-final.log); the old count stays in data/fs131/lp1/gate/ and in GATE_CHANGES
+  '9038': superseded gate count, refiled at FS131-LDB1's landing from data/fs131/ldb1/gate/receipt-axioms-final.log (9438 clean; the vacuity count from receipt-vacuity-final.log); the old count stays in data/fs133/ld1/gate/ and in GATE_CHANGES
+  '9101': superseded gate count, refiled at FS131-LDB1's landing from data/fs131/ldb1/gate/receipt-axioms-final.log (9,824 records; the vacuity count from receipt-vacuity-final.log); the old count stays in data/fs133/ld1/gate/ and in GATE_CHANGES
+  'declarations=17902': superseded gate count, refiled at FS131-LDB1's landing from data/fs131/ldb1/gate/receipt-axioms-final.log (20563; the vacuity count from receipt-vacuity-final.log); the old count stays in data/fs133/ld1/gate/ and in GATE_CHANGES
+  '17902': superseded gate count, refiled at FS131-LDB1's landing from data/fs131/ldb1/gate/receipt-axioms-final.log (20563; the vacuity count from receipt-vacuity-final.log); the old count stays in data/fs133/ld1/gate/ and in GATE_CHANGES
+  'declarations=17902 refutations-skipped=234 sites=1454': superseded gate count, refiled at FS131-LDB1's landing from data/fs131/ldb1/gate/receipt-axioms-final.log (20563, 234, 1454; the vacuity count from receipt-vacuity-final.log); the old count stays in data/fs133/ld1/gate/ and in GATE_CHANGES
+  '9438': superseded gate count, refiled at FS131-LGT1's landing from data/fs131/lgt1/gate/receipt-axioms-final.log (10650 clean; the vacuity count from receipt-vacuity-final.log, the nine from receipt-assumptions-final.log); the old count stays in data/fs131/ldb1/gate/ and in GATE_CHANGES
+  '9824': superseded gate count, refiled at FS131-LGT1's landing from data/fs131/lgt1/gate/receipt-axioms-final.log (11,284 records; the vacuity count from receipt-vacuity-final.log, the nine from receipt-assumptions-final.log); the old count stays in data/fs131/ldb1/gate/ and in GATE_CHANGES
+  '20563': superseded gate count, refiled at FS131-LGT1's landing from data/fs131/lgt1/gate/receipt-axioms-final.log (22238; the vacuity count from receipt-vacuity-final.log, the nine from receipt-assumptions-final.log); the old count stays in data/fs131/ldb1/gate/ and in GATE_CHANGES
+  'declarations=20563': superseded gate count, refiled at FS131-LGT1's landing from data/fs131/lgt1/gate/receipt-axioms-final.log (22238; the vacuity count from receipt-vacuity-final.log, the nine from receipt-assumptions-final.log); the old count stays in data/fs131/ldb1/gate/ and in GATE_CHANGES
+  'declarations=20563 refutations-skipped=234 sites=1454': superseded gate count, refiled at FS131-LGT1's landing from data/fs131/lgt1/gate/receipt-axioms-final.log (22238, 240, 1455; the vacuity count from receipt-vacuity-final.log, the nine from receipt-assumptions-final.log); the old count stays in data/fs131/ldb1/gate/ and in GATE_CHANGES
+  'axioms=2 rests=27 named=19 inline=14 outside=7 ours=21 open=5 takes=102 mentions=1': superseded gate count, refiled at FS131-LGT1's landing from data/fs131/lgt1/gate/receipt-axioms-final.log (axioms=3 rests=74 named=19 inline=14 outside=7 ours=21 open=5 takes=108 mentions=2; the vacuity count from receipt-vacuity-final.log, the nine from receipt-assumptions-final.log); the old count stays in data/fs131/ldb1/gate/ and in GATE_CHANGES
+  'vacuous=0 stale=0 declared=3 witnessed=38 generic=1411 unknown=2': superseded gate count, refiled at FS131-LGT1's landing from data/fs131/lgt1/gate/receipt-axioms-final.log (vacuous=0 stale=0 declared=3 witnessed=38 generic=1412 unknown=2; the vacuity count from receipt-vacuity-final.log, the nine from receipt-assumptions-final.log); the old count stays in data/fs131/ldb1/gate/ and in GATE_CHANGES
+  '1411': superseded gate count, refiled at FS131-LGT1's landing from data/fs131/lgt1/gate/receipt-axioms-final.log (generic=1412; the vacuity count from receipt-vacuity-final.log, the nine from receipt-assumptions-final.log); the old count stays in data/fs131/ldb1/gate/ and in GATE_CHANGES
+  '1454': superseded gate count, refiled at FS131-LGT1's landing from data/fs131/lgt1/gate/receipt-axioms-final.log (sites=1455; the vacuity count from receipt-vacuity-final.log, the nine from receipt-assumptions-final.log); the old count stays in data/fs131/ldb1/gate/ and in GATE_CHANGES
+  '234': superseded gate count, refiled at FS131-LGT1's landing from data/fs131/lgt1/gate/receipt-axioms-final.log (refutations-skipped=240; the vacuity count from receipt-vacuity-final.log, the nine from receipt-assumptions-final.log); the old count stays in data/fs131/ldb1/gate/ and in GATE_CHANGES
+  '355': superseded gate count, refiled at FS131-LGT1's landing from data/fs131/lgt1/gate/receipt-axioms-final.log (569 axiom-free; the vacuity count from receipt-vacuity-final.log, the nine from receipt-assumptions-final.log); the old count stays in data/fs131/ldb1/gate/ and in GATE_CHANGES
+  'axioms=2': superseded gate count, refiled at FS131-LGT1's landing from data/fs131/lgt1/gate/receipt-axioms-final.log (axioms=3; the vacuity count from receipt-vacuity-final.log, the nine from receipt-assumptions-final.log); the old count stays in data/fs131/ldb1/gate/ and in GATE_CHANGES
+  'rests=27': superseded gate count, refiled at FS131-LGT1's landing from data/fs131/lgt1/gate/receipt-axioms-final.log (rests=74; the vacuity count from receipt-vacuity-final.log, the nine from receipt-assumptions-final.log); the old count stays in data/fs131/ldb1/gate/ and in GATE_CHANGES
+  'takes=102': superseded gate count, refiled at FS131-LGT1's landing from data/fs131/lgt1/gate/receipt-axioms-final.log (takes=108; the vacuity count from receipt-vacuity-final.log, the nine from receipt-assumptions-final.log); the old count stays in data/fs131/ldb1/gate/ and in GATE_CHANGES
+  'mentions=1': superseded gate count, refiled at FS131-LGT1's landing from data/fs131/lgt1/gate/receipt-axioms-final.log (mentions=2; the vacuity count from receipt-vacuity-final.log, the nine from receipt-assumptions-final.log); the old count stays in data/fs131/ldb1/gate/ and in GATE_CHANGES
+  'generic=1411': superseded gate count, refiled at FS131-LGT1's landing from data/fs131/lgt1/gate/receipt-axioms-final.log (generic=1412; the vacuity count from receipt-vacuity-final.log, the nine from receipt-assumptions-final.log); the old count stays in data/fs131/ldb1/gate/ and in GATE_CHANGES
+  'refutations-skipped=234': superseded gate count, refiled at FS131-LGT1's landing from data/fs131/lgt1/gate/receipt-axioms-final.log (refutations-skipped=240; the vacuity count from receipt-vacuity-final.log, the nine from receipt-assumptions-final.log); the old count stays in data/fs131/ldb1/gate/ and in GATE_CHANGES
+  'sites=1454': superseded gate count, refiled at FS131-LGT1's landing from data/fs131/lgt1/gate/receipt-axioms-final.log (sites=1455; the vacuity count from receipt-vacuity-final.log, the nine from receipt-assumptions-final.log); the old count stays in data/fs131/ldb1/gate/ and in GATE_CHANGES
+  'ℤ[i]': LEDGER row 63's clause "no instance over a real field yet; the only inhabitant is the ring form on ℤ[i], deferred to FS-37" is superseded at FS131-LU1's landing: the library now holds the theorem over a real number field with the rational field's prime above 2 as its instance (UpperHalf.exists_stablePrime_rat, UpperHalf.chromaticNumber_planeOver_rat)
+  "8's": 'wave 8's first landing' in the audit's sentence, superseded by FS132-L1's landing; wave 8's landing stays in plans/FS131-L8A-landing.md
+  'six_le_chromaticNumber_plane_of_no_proper_five': LEDGER row 33's pre-import sentence named this drafted bridge; replaced at FS132-L1's landing by the landed `Outside.OAI158.chromaticNumber_plane_six_or_seven`; the draft stays in `plans/EXT-OAI1-audit.md` stage 7
+  '2))).chromaticNumber': the same pre-import sentence of LEDGER row 33 (its Lean spelling of χ(ℝ²)); the form stays in `plans/EXT-OAI1-audit.md` stage 7 and in `Proofs/HadwigerNelson/Outside/OAI158.lean`
+  'EuclideanSpace': the same pre-import sentence of LEDGER row 33; the carrier stays in `plans/EXT-OAI1-audit.md` stage 7 and in `Proofs/HadwigerNelson/Outside/OAI158.lean`
+  '0.00297': FS-133 withdrew row 129's finite-graph killing test for MR (FS133-E1's draft D2); the window's width stays in `plans/FS105-W-walk.md`
+  '0.0176': FS-133 withdrew row 129's finite-graph killing test for MR (FS133-E1's draft D2); the figure stays in `plans/FS105-W-walk.md`
+  'data/fs129/index/lean-order-corrected.md': FS132-F1 (M8) replaced the open-milestones sentence; the fact stays in `plans/LEAN-BACKLOG.md`
+  'FS129-L1': FS132-F1 (M8) replaced the open-milestones sentence; the fact stays in `plans/LEAN-BACKLOG.md`
+  '[hand, two minds each]': `[OAIMath2026]` Thm 1.3 replaced link 1's grade for the plane's equality (FS132-F1); the fact stays in `plans/STUB-regularity-wall.md`
+  '4–74': the group row reads 4–72 since FS132-P1's re-rank (72 ranked rows)
+  'six-colour-research-directions.md': FS-49 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/STUB-distance-two-gadget.md`
+  'six_le_chromaticNumber_plane_of_separated_two': FS-49 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/STUB-distance-two-gadget.md`
+  'μ(2)': FS-49 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/STUB-distance-two-gadget.md`
+  'J23': FS-108 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/POROS-2026-10-03-fs129-rerank.md`
+  '§ J23': FS-108 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/POROS-2026-10-03-fs129-rerank.md`
+  'Theorem 5': FS-108 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/STUB-regular-half-residuals.md`
+  "FS106-V3's": FS-108 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/STUB-regular-half-residuals.md`
+  "FS114-N2-AVG's": FS-108 left the ranked table for the closed list (FS132-P1); the fact stays in `plans/FS129-OR1-audit.md`
+  "25's": FS132-P1 re-drafted the ranked row; the fact stays in `plans/STUB-curved-pencils.md`
+  '62.14': FS132-P1 re-drafted the ranked row; the fact stays in `plans/STUB-cp-plane-six.md`
+  'j/5': FS132-P1 re-drafted the ranked row; the fact stays in `plans/STUB-cp-plane-six.md`
+  'm₄(ℝ²)': FS132-P1 re-drafted the ranked row; the fact stays in `plans/STUB-cp-plane-six.md`
+  'χ_g(H)': FS132-P1 re-drafted the ranked row; the fact stays in `plans/STUB-cp-plane-six.md`
+  "80's": FS132-P1 re-drafted the ranked row; the fact stays in `plans/STUB-cp-plane-six.md`
+  "FS112-N3-COR3's": FS132-P1 re-drafted the ranked row; the fact stays in `plans/FS112-unit-arc-half.md`
+  'j = 2, 3': FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-cp-plane-six.md`
+  '104–108': FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-qfree-ring.md`
+  '109–111': FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-qfree-ring.md`
+  "C114-LOCAL-F's": FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-qfree-ring.md`
+  "FS114-Y2-BOWTIE's": FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-qfree-ring.md`
+  "FS116-N2's": FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-q-ring.md`
+  'REG-J′-C₅': FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-map-step.md`
+  '√ε': FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-q-ring.md`
+  '(R2)': FS129-P1 re-drafted the ranked row; the fact stays in `plans/STUB-curved-pencils.md`
+  '131–141': item 31's row range now reads 131–154 (FS-129's rows 149–154)
+  'Lemma 5.5': FS-122's old row cited `[OAIMath2026]`'s Lemma 5.5 (centres binary for one pair of labels are separated); FS124-P1's re-rank re-aimed the row at the exact class and dropped the citation (2026-10-07); it stays in `plans/POROS-2026-10-07-after-release.md` and `plans/EXT-OAI2-reading.md`
+  'k = 6': FS-128's old row wrote its two cases as `k = 5` and `k = 6`; the row filed from the asking lane's draft (2026-10-07) words them; the question is unchanged in `plans/STUB-top-colour.md`
+  '131–160': item 31's row range now reads 131–164 (FS-124's rows 161–164; the filing that made FS-124 Derived, 2026-10-07)
+  '1–160': the ledger's row count now reads 1–164 (the same filing)
+  'plans/POROS-2026-10-07-fs124-question.md': the open-milestones sentence that cited the asking lane's first card for FS-124 was replaced when FS-124 became Derived (FS124-Z1's draft); the record is cited in `plans/STUB-q-ring.md` and `plans/FS124-close-inventory.md` item 2
+  "G97:[reading, one mind (the asking lane's identification of the two appearances as one object, unchecked); measured on three rounds and one search]": G97's status changed when its killing test fired at FS-124 (C124-BOTH, C124-EDGE-CLOSED; FS124-Z1's draft, from the asking lane's): demoted in part, with its demotion record in the entry
+  '131–154': item 31's row range now reads 131–160 (FS-132's rows 155–160; the filing that made FS-132 Derived, 2026-10-07)
+  '1–154': the ledger's row count now reads 1–160 (FS-132's rows 155–160; the same filing)
+  'plans/POROS-2026-10-07-after-release.md': the open-milestones paragraph's sentence on the asking lane's recommended order for the Lean backlog left at Kooshi's word of 2026-10-07 (the backlog stays paused; a milestone's Lean phase formalizes what it rests on — FS132-Z2's draft, FS-132 inventory item 35 (b)); the table stays in that file
+  '§ 4.4': the section of `plans/POROS-2026-10-07-after-release.md` the removed sentence on the backlog's order cited (the same filing)
+  'plans/FS129-cross-application-audit.md': FS-129 is Derived: the amendment's R4 replaced the open-milestones sentence that named its plan; the plan file stays at plans/FS129-cross-application-audit.md (FS129-F1 CHECK for the coordinator)
+  '38–42': a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank
+  '46–49': a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank
+  '50–51': a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank
+  '52–54': a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank
+  '55–56': a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank
+  '57–59': a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank
+  "K0's": item 12's 'five at K0's grade (row 121)', a superseded pointer rewritten to its grade and address ('five at [hand], through MR (row 123)'); K0 stays in rows 117, 121 and 123
+  'G1–G79': the stable-identifier range, extended to G1–G80 when G80 (infinite rank is the resource) was minted at FS-100 stage 5's front page
+  '1–119': the ledger's row range in § The novel-results ledger's pointer, extended to 1–122 at FS-100 stage 5's close (the 1–115 precedent)
+  '1–122': the ledger's row range in § The novel-results ledger's pointer, extended to 1–125 at FS-100 stage 5 wave 3's close (the 1–119 precedent)
+  '73–74': § The mission (2)'s citation of four proven at ℚ(√3,√5) (rows 73–74, G55), superseded when five landed there (row 123) at FS-100 stage 5 wave 3's front page; rows 73–74 stand in LEDGER.md
+  '1–125': the ledger's row range in § The novel-results ledger's pointer, extended to 1–127 at FS-100 wave 3b's fold (X31C; the 1–122 precedent)
+  'X27D/X27V': the FS-98 paths-forward row's 'X27D/X27V attacked it at the close', superseded by their verdict (row 126: TR-ROT a GAP at NA₀); the records are plans/FS100-X27D-derivation.md and plans/FS100-X27V-verification.md
+  '7279': the vacuity gate's declaration count, 7279 -> 7438 at X11K3's gate (build/gate/vacuity/20260926T122608Z-1388046.log)
+  'declarations=7279': the same count, as the gate report prints it
+  '309': vacuity's refutations-skipped count, 309 -> 313 at X11K3's gate (the same log)
+  'refutations-skipped=309': the same count, as the gate report prints it
+  '1193': the axiom audit's clean count, 1193 -> 1236 at X11K3's gate (build/gate/axioms/20260926T122606Z-1387817.log; the 1130 precedent)
+  '1209': the axiom audit's record count, 1,209 at FS-75's close -> 1,252 at X11K3's gate (the same log)
+  '7051': the vacuity gate's declaration count, 7051 -> 7279 at FS-75's close (the owner's re-run, build/gate/vacuity/20260926T053434Z-866933.log)
+  'declarations=7051': the same count, as the gate report prints it
+  '304': vacuity's refutations-skipped count, 304 -> 309 at FS-75's close (the same log)
+  'refutations-skipped=304': the same count, as the gate report prints it
+  '1130': the axiom audit's clean count, 1130 -> 1193 at FS-75's close (build/gate/axioms/20260926T053431Z-866750.log; the 1034 precedent)
+  '1146': the axiom audit's record count, 1,146 at M2's close -> 1,209 at FS-75's close (the same log)
+  '1–115': the ledger's row range in § The novel-results ledger's pointer, extended to 1–119 at FS-100's and FS-75's closes (the 1–110 precedent)
+  'J48': FS-100's paths-forward row's stage label ('stages 1 (blind check, J48) and 2 (KT-1, J49) done'), superseded by the row's re-aim at its in-ban close; plans/STUB-measure-rigidity-three-fields.md keeps it
+  'KT-1': the same stage label; the FS-100 stub keeps it
+  "T39's": a possessive of T39 ('with T39's stub') in LEDGER.md § B's FS73-T41 and T42 lines, replaced by FS-75's kernel cells; T39 itself stays
+  'ν̂': a tokenizer artefact of the `\|` escape in M3-J22-T8's code span (`|ν̂|` -> `\|ν̂\|`): the chunker strips `|` but not the backslash; no fact changes
+  '294994': the file's byte count when the temporary 325,000 budget was granted; removed with that budget at the crunch's end
+  '325': the crunch's temporary size budget (325,000), superseded by 300,000 at its end (Kooshi, 2026-09-26)
+  '325k': Kooshi's words granting the temporary 325,000 budget; superseded at the crunch's end
+  '37–41': the paths-forward table's group rank, renumbered 38–42 when FS-100 was ranked in at 3 (J47)
+  '42–44': the same re-rank: now 43–45
+  '54–55': the same re-rank: now 55–56
+  '56–58': the same re-rank: now 57–59
+  '1–110': the ledger's row range, extended to 1–115 at row 88's and FS-67's closes (2026-09-25)
+  'G1–G78': the stable-identifier range, extended to G1–G79 when G79 (Kooshi's example invariant) was minted at J44's front page
+  '34–38': the paths-forward table's group rank, renumbered 37–41 when FS-98, FS-97 and FS-99 were ranked in (J44)
+  '39–41': the same re-rank: now 42–44
+  '42–45': the same re-rank: now 45–48
+  '51–52': the same re-rank: now 54–55
+  '53–55': the same re-rank: now 56–58
+  'G = K_k^s': FS-67's old paths-forward row ('Yes for `G = K_k^s` (Greenwell–Lovász)'), replaced by its close's draft (FS67 R.8c); the fact is row 114's (`K_k^s` by iteration) and the stub's
+  'χ_f(H)': FS-67's old paths-forward row ('leaving the gap `χ_f(H) ≤ k < χ(H)`'), replaced by its close's draft; row 115 states the gap regime as `χv(H) ≤ k < χ(H)`, and the stub keeps Zhang's form
+  'G76:[hand, two derivations for the frame, the local theorem and the no-gos (rows 88–92); the obstruction a reading, reached twice independently]': G76's grade widened by row 88's close's draft (J41, data/fs86r88/j41/claude_drafts.py pair 4) to name the measure half (rows 111–113)
+  'p = 2': row 92's 'C14.2 at `p = 2` … not checked' replaced by M3's correction (C14.2 (c) holds at `q = 2`, row 110); the check is done
+  'B′': FS39-T1's § B kernel cell 'stub (FS-39 phase B′)' replaced by M2's kernel names (row 104); FS-39's stub banner keeps phase B′
+  'ℤ[U]/3ℤ[U]': row 82's T6 parenthesis ('needs ℤ[U]/3ℤ[U] and is not settled') replaced by 'settled at FS-91, row 99' (FS91-J09-J4-T6)
+  'U3': FS-91's paths-forward row ('MS₄({5}) and U3 at one prime'), deleted when FS-91 closed; U3 is answered at every split prime (row 102), the stub keeps it
+  '1/8': FS-91's paths-forward row ('band 1/6 … and 1/8'), deleted when FS-91 closed; every band is answered on characters (row 98)
+  'FS81-T1–T5': FS-75's row, re-aimed at FS-91's close to S1 and no mixing (row 99); plans/STUB-three-colour-criterion-kernel.md keeps T4's leaves
+  '(K(√7))': FS-45's row's `five_le_chromaticNumber_planeOver (K(√7))`, replaced at M2's close by the kernel theorem's own name (row 103, SevenConditional)
+  'F(t)²': G63's old killing test ('a unit vector of `F(t)²` with a pole …'), replaced by the owner's ruling (J24 stage 2) with G67's forbids-form; G63's statement χ(F(t)²) = χ(F²) stays in row 104
+  '1034': the axiom audit's clean count, 1034 -> 1130 at M2's close (J23b stage 0, build/gate/axioms/20260925T232928Z-253944.log)
+  '6795': the vacuity gate's declaration count, 6795 -> 7051 at M2's close (J23b stage 0)
+  'declarations=6795': the same count, as the gate report prints it
+  '278': vacuity's refutations-skipped count, 278 -> 304 at M2's close
+  'refutations-skipped=278': the same count, as the gate report prints it
+  '275': vacuity's sites count, 275 -> 279 at M2's close
+  'sites=275': the same count, as the gate report prints it
+  '253': vacuity's generic count, 253 -> 257 at M2's close
+  'generic=253': the same count, as the gate report prints it
+  '1–94': the ledger's row range in § The novel-results ledger's pointer, extended to 1–110 at the M1-M3 closes
+  'G1–G76': the stable-identifier range, extended to G1–G78 when G77 (M1) and G78 (M3) were minted (2026-09-25)
+  '32–36': a grouped rank in the paths-forward table, renumbered at the M1-M3 re-rank (55 rows)
+  '37–39': a grouped rank, renumbered at the M1-M3 re-rank
+  '40–43': a grouped rank, renumbered at the M1-M3 re-rank
+  '44–45': a grouped rank, renumbered at the M1-M3 re-rank
+  '46–48': a grouped rank, renumbered at the M1-M3 re-rank
+  '49–50': a grouped rank, renumbered at the M1-M3 re-rank
+  '51–53': a grouped rank, renumbered at the M1-M3 re-rank
+  'G63:[hand; prior art: `[Fischer1990]': G63 re-graded at M2's close (owner's ruling, J24): kernel at d = 2 for every F ⊆ ℝ and t transcendental (row 104, Transcendental.lean); title 'pure transcendence'
+  'plans/POROS-2026-09-25-fs86-next.md': the old open-milestones sentence (FS-86 closed; FS-89 chosen and re-posed over ℚ(i)), replaced at FS-89's close by FS-89's; plans/FRONTIER-STUBS.md's closed list and open paragraph keep both addresses
+  'plans/STUB-dyadic-rigidity-triangle-free.md': the old open-milestones sentence (FS-86 closed; FS-89 chosen and re-posed over ℚ(i)), replaced at FS-89's close by FS-89's; plans/FRONTIER-STUBS.md's closed list and open paragraph keep both addresses
+  'ℚ(i)': the old open-milestones sentence (FS-86 closed; FS-89 chosen and re-posed over ℚ(i)), replaced at FS-89's close by FS-89's; plans/FRONTIER-STUBS.md's closed list and open paragraph keep both addresses
+  '§ R.4': a paths-forward table row compressed to its first clauses at FS-89's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'R.4': a paths-forward table row compressed to its first clauses at FS-89's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'C₅': a paths-forward table row compressed to its first clauses at FS-89's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'T34–T35': a paths-forward table row compressed to its first clauses at FS-89's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  '1050': the FS-75 row's minted target, compressed at FS-89's close; plans/STUB-three-colour-criterion-kernel.md keeps the 1,050-leaf certificate and FS-60's fields
+  'Asymmetric': the FS-65 row's bearing, compressed at FS-89's close; plans/FRONTIER-STUBS.md keeps it
+  "60's": the FS-75 row's minted target, compressed at FS-89's close; plans/STUB-three-colour-criterion-kernel.md keeps the 1,050-leaf certificate and FS-60's fields
+  'ℚ(√p,√q)²': row 57's spelling of Fischer's plane; its home, § Publication, says 'the plane over ℚ(√p,√q)'
+  'SUSPENDED': § Publication's trigger was SUSPENDED (2026-09-19) pending [Fischer1994]; read and verified 2026-09-22, it resolved to 'has not fired' — the value is his
+  'UD(ℤ/p²,2)': the FS-66 stub row; § Notation now writes the tower as UD(ℤ/p^k, 2)
+  'UD(ℤ/529,2)': the FS-66 stub row; item 17 and row 75 write UD(ℤ/529, 2)
+  'χ(level': the FS-66 stub row's 'χ(level two) ≤ χ(level one)'; § Notation says χ(G_k) is non-increasing in k
+  'Pilot': the FS-66 stub row's 'Pilot:'; row 75 and G66 say 'the pilot'
+  '3a': WORKFLOW 2.0: the prior-art gate is step 3.2; G49 and the grokkings intro now say 3.2
+  '3g': WORKFLOW 2.0: the re-grokking is step 3.1; the grokkings intro now says 3.1
+  'G1–G54': the stable-identifier range in the grokkings intro, extended to G1–G67 when G67 was minted (2026-09-22)
+  'G1–G67': the stable-identifier range, extended to G1–G68 when G68 (the quotient/fan-gap screen) was minted (2026-09-22)
+  'G1–G68': the stable-identifier range, extended to G1–G69 when G69 (rigidity prime by prime) was minted (2026-09-22)
+  'G1–G71': the stable-identifier range, extended to G1–G72 when G72 (the invariant question, a method) was minted (2026-09-23)
+  'G1–G69': the stable-identifier range, extended to G1–G70 when G70 (√3-clean is residue, Coxeter's theorem) was minted at FS-71's close (2026-09-22)
+  '[kernel for ρ₁₅; measured for ρ₆₃]': G12's old tag; FS-71 batch 1 (M31-T1) found the law a hand derivation confirmed at 26 censuses, kernel for the ρ₁₅ instance
+  'G12:[kernel for ρ₁₅; measured for ρ₆₃]': FS-71 batch 1: G12 re-graded [hand, confirmed at 26 exact censuses; kernel for the ρ₁₅ instance] (M31-T1)
+  'G20:[kernel + measured]': FS-71 batch 1: G20 re-graded [hand + kernel + measured] — the boundary-tightness argument is M36-T1, a hand derivation
+  'G52:[measured + reading, one instance with a positive control]': FS-71 batch 4b: G52's necessary half is a hand theorem (the σ-criterion, M63G-T4/T5); the tag now says so
+  'G54:[kernel one way; derived the other; the table computed]': FS-71 batch 5b: the tight-forcing direction is a hand theorem (FS38-D2-A/B), graded so in row 67 and its entry
+  '[GarciaMarcoKnauer]': G58's yearless key, corrected to [GarciaMarcoKnauer2024] by FS-71 batch 6a
+  'arXiv:2303.06262': G58 cited the wrong arXiv id (it is Cervantes–Krebs); the García-Marco–Knauer paper is arXiv:2405.19543 (FS-71 batch 6a)
+  '6723': the vacuity gate's declaration count, 6723 -> 6728 when Instances/ThreeFive (five declarations) joined Proofs.lean at FS-70's close (2026-09-22)
+  'declarations=6723': the same count, as the gate report prints it
+  'FS38-D2-A/B': the LEDGER.md § B placeholder row FS-71 was to backfill; batch 5b indexed FS-38's seven theorems under their own rows (§ S.2) and removed the placeholder row that named them as pending
+  'FS66-W/E/T': the same placeholder row's FS-66 half; the whole row is one line, so batch 5b's removal (on filing FS-38, per the brief) drops it too — batch 6 adds FS-66's own § B rows fresh, with no placeholder to clean up
+  '6728': the vacuity gate's declaration count, 6728 -> 6795 at FS-73's close (the Kempe layer and FS-72's lattices joined the library)
+  'declarations=6728': the same count, as the gate report prints it
+  '270': vacuity's refutations-skipped count, 270 -> 278 at FS-73's close
+  'refutations-skipped=270': the same count, as the gate report prints it
+  '262': vacuity's sites count, 262 -> 275 at FS-73's close
+  'sites=262': the same count, as the gate report prints it
+  '240': vacuity's generic count, 240 -> 253 at FS-73's close
+  'generic=240': the same count, as the gate report prints it
+  '1–75': the ledger's row range in § The novel-results ledger's pointer, extended to 1–79 at FS-73's close
+  'G1–G72': the stable-identifier range, extended to G1–G73 when G73 (four colours cell by cell) was minted at FS-79's close (2026-09-24)
+  '1–79': the ledger's row range, extended to 1–81 at FS-79's close (2026-09-24)
+  'R1–R9': the FS-59 row's 'the stub's three-colour routes R1–R9 are answered'; the row was rewritten at FS-79's close around the survivors and the four-colour question, and the routes with their answered status stay in plans/STUB-four-colours-167.md
+  'R9': the old FS-59 row's first experiment (the chain route on Kooshi's 7-cycle triangle); superseded at three colours by FS-73's Theta_3 (row 79); its text stays in plans/STUB-four-colours-167.md §3a
+  "R9's": the same, possessive
+  'R5–R8': the old FS-59 row's instruments (degree-aimed asks, core growth, the rigidity dial, the order parameter); kept in plans/STUB-four-colours-167.md §3a, carried to the five-colour question there
+  'c(3w)': R9's pinned ask c(0) != c(3w); plans/STUB-four-colours-167.md §3a
+  'w′': R9's identity 1/6 = 1 + 1 - w - w-bar - w' - w-bar'; plans/STUB-four-colours-167.md §3a
+  'w̄′': the same identity
+  'G68/G69': the old open-milestones sentence 'FS-59's R9 stays deferred, re-aimed by G68/G69'; FS-73 closed and R9 is answered
+  "MASCOT-T6's": the old open-milestones sentence naming FS-73's bearings; G70 names MASCOT-T6 as its source
+  'T39–T44': row 79's theorem range, extended to T39–T45 when T45 (v is G7's n = 42 rotation) was filed at FS-73's close
+  '1–81': the ledger's row range, extended to 1–84 at FS-81's close (2026-09-24)
+  'G1–G73': the stable-identifier range, extended to G1–G74 when G74 (the layer method) was minted at FS-81's close
+  'G61:[kernel + certified + measured; one reading]': G61's grade gained 'hand' at FS-81's close: T4 is proved at [hand, two independent derivations] (row 82); the old claim 'no proof and no route' is kept as a demotion record
+  '[kernel + certified + measured; one reading]': G61's old status tag, replaced by '[kernel + certified + hand + measured; one reading]' (the entry above)
+  '9–13': the paths-forward table's group rank, renumbered 29–33 when the stubs were re-ranked one rank per row at FS-81's close
+  '14–16': the same re-rank: now 34–36
+  '17–20': the same re-rank: now 37–40
+  '21–22': the same re-rank: now 41–42
+  '23–25': the same re-rank: now 43–45
+  '26–27': the same re-rank: now 46–47
+  '28–30': the same re-rank: now 48–50
+  "9's": the old ranked-stubs intro's 'FS-9's bearing rewritten' (FS-79's re-rank narrative); FS-9's row carries its bearing
+  'plans/STUB-five-over-sqrt3-sqrt5.md': the old open-milestones paragraph's banner pointer for FS-70; the stub and its banner are in plans/FRONTIER-STUBS.md's closed list
+  'plans/STUB-invariant-question-four-colours.md': the same, for FS-79
+  'plans/STUB-rigidity-dichotomy.md': the same, for FS-73
+  'plans/STUB-theorem-audit.md': the same, for FS-71
+  '§ B.': the old open-milestones sentence 'every one indexed in `LEDGER.md` § B.'; item 19 keeps the pointer to LEDGER.md § B
+  '56th': old item 14's ℚ(√167) sentence (55 of 57 lattices periodic, a 56th linear, the 57th L21cc6506 refusing); row 79 holds the census of the 57
+  '57th': the same
+  '1–84': the ledger's row range, extended to 1–87 at FS-85's close (2026-09-24)
+  'G1–G74': the stable-identifier range, extended to G1–G75 when G75 (where triangles enter four-colour rigidity) was minted at FS-85's close
+  '29–33': the paths-forward table's group rank, renumbered 31–35 when FS-86, FS-87, FS-88 joined the table at FS-85's close
+  '34–36': the same re-rank: now 36–38
+  '37–40': the same re-rank: now 39–42
+  '41–42': the same re-rank: now 43–44
+  '43–45': the same re-rank: now 45–47
+  '46–47': the same re-rank: now 48–49
+  '48–50': the same re-rank: now 50–52
+  'k·arccos(5/6)': the FS-74 row's lead 1 (Hubai's rotation acting as ±k·120°); FS-74 closed by row 85, and the lead stays in plans/STUB-algebraic-explanation.md
+  '±k·120°': the same lead
+  "Baxter's": the FS-74 row's last lead (Baxter's height); kept in plans/STUB-algebraic-explanation.md
+  'Lead': the FS-74 row's 'Lead 1:'; the row left the table when FS-74 closed
+  'plans/STUB-four-colour-rigidity-without-triangles.md': FS-85's stub; the open-milestones sentence points at the record, and the stub path with its banner is in plans/FRONTIER-STUBS.md's closed list
+  'plans/STUB-quadratic-four-colour-classification.md': FS-81's stub; the old open-milestones sentence; its path and banner are in plans/FRONTIER-STUBS.md's closed list
+  'T1–T25': FS-81's derivation range, in the old open-milestones sentence; plans/FRONTIER-STUBS.md's closed list carries it
+  'T1–T43': FS-79's derivation range, in the old 'earlier closes' list; plans/FRONTIER-STUBS.md's closed list carries it
+  'T1–T45': FS-73's derivation range, the same
+  'plans/<milestone>-derivation.md': the old 'earlier closes' list's FS-71 entry; item 19 keeps the pointer as plans/<home>-derivation.md
+  'M17–M36': FS-71's reading batches, in the old 'earlier closes' list; the batches are in plans/FS71-theorem-audit.md
+  'M37–M52': the same
+  'M53–M61': the same
+  '24–FS-38': the same ('FS-24–FS-38')
+  '50–FS-66': the same ('FS-50–FS-66')
+  'data/fs66/ckpt/b1-p23/README.md': the old 'earlier closes' list's FS-66 note (the GPU solve at 23 re-rounds from a later checkpoint); the commands are in plans/FS66-phase2-certificate.md and plans/FS66-residue-tower-drop.md
+  '559': item 9's 'best object 559, census-certified' had no source (plans/FRONTIER-STUBS.md's M62 row: 'an earlier 559 here had no source'); the census-certified best object is c582 (data/m62/c582/census.json), corrected at FS-85's close
+  '39.7': the FS-60 row's as-minted certificate sizes (59's LRAT 39.7 MB); the row now points at plans/STUB-quadratic-witnesses-kernel.md, which holds them
+  '131–2360': the same (the witnesses' 131–2,360 points)
+  "239's": the same (239's LRAT)
+  'LRATs': the FS-75 row's 'in place of LRATs', compressed to 'through Θ'
+  '1–87': the ledger's row range, extended to 1–94 at FS-86's close (2026-09-25)
+  'G1–G75': the stable-identifier range, extended to G1–G76 when G76 was minted at FS-86's close
+  '31–35': the paths-forward table's group ranks, renumbered +1 at FS-86's close (FS-86 closed; FS-89 and FS-90 minted at ranks 2, 3)
+  '36–38': the paths-forward table's group ranks, renumbered +1 at FS-86's close (FS-86 closed; FS-89 and FS-90 minted at ranks 2, 3)
+  '39–42': the paths-forward table's group ranks, renumbered +1 at FS-86's close (FS-86 closed; FS-89 and FS-90 minted at ranks 2, 3)
+  '43–44': the paths-forward table's group ranks, renumbered +1 at FS-86's close (FS-86 closed; FS-89 and FS-90 minted at ranks 2, 3)
+  '45–47': the paths-forward table's group ranks, renumbered +1 at FS-86's close (FS-86 closed; FS-89 and FS-90 minted at ranks 2, 3)
+  '48–49': the paths-forward table's group ranks, renumbered +1 at FS-86's close (FS-86 closed; FS-89 and FS-90 minted at ranks 2, 3)
+  '50–52': the paths-forward table's group ranks, renumbered +1 at FS-86's close (FS-86 closed; FS-89 and FS-90 minted at ranks 2, 3)
+  'H5': the FS-86 row, closed and removed at FS-86's close; plans/STUB-dyadic-rigidity-triangle-free.md keeps H5/H6, G75's killing test and routes 1–3, and G75 carries its killing test's status
+  'H6': the FS-86 row, closed and removed at FS-86's close; plans/STUB-dyadic-rigidity-triangle-free.md keeps H5/H6, G75's killing test and routes 1–3, and G75 carries its killing test's status
+  "H5's": the FS-86 row, closed and removed at FS-86's close; plans/STUB-dyadic-rigidity-triangle-free.md keeps H5/H6, G75's killing test and routes 1–3, and G75 carries its killing test's status
+  "H6's": the FS-86 row, closed and removed at FS-86's close; plans/STUB-dyadic-rigidity-triangle-free.md keeps H5/H6, G75's killing test and routes 1–3, and G75 carries its killing test's status
+  "G75's": the FS-86 row, closed and removed at FS-86's close; plans/STUB-dyadic-rigidity-triangle-free.md keeps H5/H6, G75's killing test and routes 1–3, and G75 carries its killing test's status
+  '1–3': the FS-86 row, closed and removed at FS-86's close; plans/STUB-dyadic-rigidity-triangle-free.md keeps H5/H6, G75's killing test and routes 1–3, and G75 carries its killing test's status
+  'k = 78': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'n/2': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'q−1': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'μ_{q+1}': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  '7/2': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'χ_f(ℚ(√11)²)': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  '37/47': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'ℚ(√1823)': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'ℚ(√887)': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  '1823': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  '887': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  "43's": a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  "44's": a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'Thm 5': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  "ℚ(√3,√5)'s": a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'H4': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  "29's": a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  '[reading, Poros, 2026-09-24]': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  '480': G51's run records, compressed at FS-86's close to a pointer and the standing rules; their home is plans/PROTOCOL-competitor-and-advisor.md §3 (and FS-85's records for D1–D4)
+  'D1–D4': G51's run records, compressed at FS-86's close to a pointer and the standing rules; their home is plans/PROTOCOL-competitor-and-advisor.md §3 (and FS-85's records for D1–D4)
+  'Draw': item 23's 'Part 1 alone Draw (K)', FS-85's week verdict; its home is plans/FS85-rigidity-without-triangles.md §R-close.2
+  '1–127': the ledger's row range in § The novel-results ledger's pointer, extended to 1–130 at FS-103's close (FS103-C's C5; the 1–125 precedent)
+  'G1–G80': the stable-identifier range, extended to G1–G81 when G81 (where every place mixes, the field is the plane) was minted at FS-103's close (C14, C15; kept by the owner's ruling 3)
+  '30–62': the paths-forward table's group rank, renumbered 29–61 when FS-103's row left the table at its close (C17); the label again at FS-106's close, 30–62 -> 30–63 (FS106-X: FS-106 left, FS-109 and FS-108 minted at 3–4, FS-76 folded into the group row so CLAUDE.md shows ranks 1–29, E1's design)
+  '121–125': FS-105's paths-forward row's 'rows 121–125 and FS-103 rest on MR', superseded by 'rows 121–130 rest on MR' at FS-103's close (C17); rows 121–125 stand in LEDGER.md
+  '§§2–9': row 120's grade 'its proof in EL2021 §§2–9, unread here', superseded at FS-105's close (FS105-C's §R-close 4.1): Thm 1.2's proof is EL2021 Thm 1.3 plus FS105-DED; plans/FS105-harden-mr.md keeps the old reading
+  '§4.1–4.3': row 120's prior-art cell 'EL2021 §2 and §4.1–4.3 read (X24R)', widened to 'EL2021 §§1, 2, 4 read in full (X24R; FS105-R)' at FS-105's close (4.1)
+  'c·M^{1/[F:ℚ]}': row 120's mechanism '`U_ℚ` alone gives `c·M^{1/[F:ℚ]}`', sharpened to the exact constant `(4/π + o(1))M^{1/[F:ℚ]}` at FS-105's close (4.1; FS105-W-H)
+  '29–61': the paths-forward table's group rank, renumbered 28–60 when FS-105's row left the table at its close (§R-close 4.2; the 30–62 precedent)
+  '28–60': the paths-forward table's group rank, renumbered 30–62 when FS-106 and FS-107 were minted at ranks 1–2 at the reframe (RF1; every rank from FS-104's on moved down two, so CLAUDE.md shows ranks 1–29 again, E1's design; the 29–61 precedent)
+  '§G79.': G79's pointer '`plans/GROKKING-INSTANCES.md` §G79.' now reads '§G79 (FS-106: …)' (FS106-C's D-C12); punctuation only, the address stands
+  '1–130': the ledger's row range in § The novel-results ledger's pointer, extended to 1–133 at FS-107's close (FS107-X; rows 131–133 had been added at FS-106's and FS-107's closes; the 1–127 precedent)
+  '30–63': the paths-forward table's group rank, renumbered 30–64 at FS-107's close (§R-close 4.2): FS-107 left, FS-110 and FS-111 minted at ranks 1–2, FS-98 folded into the group (the 30–62 precedent)
+  '30–64': the paths-forward table's group rank, renumbered 30–65 at the 2026-09-27 consolidation run: FS-113 minted at rank 8, every rank from 8 on moved down one, FS-90 folded into the group (plans/CONSOLIDATION-2026-09-27.md; the 30–62 precedent)
+  '1–133': the ledger's row range in § The novel-results ledger's pointer, extended to 1–134 at FS-110's close (FS110-X; row 134 added; the 1–130 precedent)
+  '131–133': item 31's row range in § Where the problem stands, extended to 131–134 at FS-110's close (FS110-X; FS110-C's §R-close 4.2 rewrites item 31 with row 134)
+  '1–134': the ledger's row range in § The novel-results ledger's pointer, extended to 1–136 at FS-112's close (FS112-X; rows 135–136 added; the 1–133 precedent)
+  '131–134': item 31's row range in § Where the problem stands, extended to 131–136 at FS-112's close (FS112-X; FS112-C's §R-close 4.2 D4 rewrites item 31 with rows 135–136)
+  '30–65': the paths-forward table's group rank, renumbered 30–66 at FS-112's close: FS-112 left, FS-114 and FS-115 minted at ranks 1 and 4 (NIGHT-A's ranking, plans/POROS-2026-09-27-night-aim.md §2), FS-75 folded into the group (the 30–62 precedent)
+  'G1–G81': the Grokkings header's range of stable identifiers, extended to G1–G83 at FS-112's close (G82 cites row 131, FS-106's; G83 is FS-112's; flagged in FS112-X's inventory, fixed by the owner)
+  'G82:[hand, two minds, one blind (row 131); the reading one mind]': G82's status tag, now '[…; the reading one mind, corrected at FS-107]': the reading rewritten with its demotion record at FS-107's close (FS107-C's §R-close 4.2; inventory item 26)
+  '# Engineering standard': the heading of CLAUDE.md's `@DEBRUIJN.md` import, removed when de Bruijn became an agent file (`.claude/agents/debruijn.md` now carries the `debruijn` skill, DEBRUIJN.md's text, verbatim; CLAUDE.md § The pipeline); cited only in old audit logs
+  '30–69': the paths-forward table's group rank for its tail, replaced by the row '11–69 | 59 more open stubs' when the table was cut to the top ten (Kooshi, 2026-09-28); every rank stands in plans/FRONTIER-STUBS.md
+  'G1–G83': the Grokkings header's range of stable identifiers, extended to G1–G87 when TP1 noticed it stale (2026-09-28; G84–G87 minted at the FS-114/FS-111 closes and on Kooshi's word)
+  '5th': the Grokkings heading's 'the 5th colour', renamed 'Hadwiger–Nelson' with the heading (Kooshi, 2026-09-28)
+  '## Grokkings — the working theory of the 5th colour': renamed '## Grokkings — the working theory of Hadwiger–Nelson' (Kooshi, 2026-09-28: 'That feels a bit out of date')
+  '# Grokkings — the working theory of the 5th colour (the entries)': renamed with CLAUDE.md's heading, '# Grokkings — the working theory of Hadwiger–Nelson (the entries)' (Kooshi, 2026-09-28)
+  'plans/GROKKINGS-WORKFLOW.md': the retired grokkings' file, renamed plans/GROKKINGS-RETIRED.md on 2026-09-28 when G47 joined the workflow grokkings (retirements of any kind)
+  '121–126': FS-100's paths-forward cell 'rows 121–126 at [hand]', cut with ranks 11–29 (Kooshi, 2026-09-28); the rows stand in LEDGER.md, and FS-100's full row in plans/FRONTIER-STUBS.md
+  '# Workflow': the heading of CLAUDE.md's `@WORKFLOW.md` import, removed when the workflow was split into the identity files (Workflow 3.0, 2026-09-28): WORKFLOW.md is now an index loaded by no one; CLAUDE.md § The pipeline is the shared map
+  'SessionStart': the name of the startup hook that told the main session to load `keryx`; retired the same day for the output style `.claude/output-styles/keryx.md`, which carries the identity in every request
+  "G56:[derived: exact spectra and the 83 certificate; the exclusion is elementary and script-verified; the consequence for χ(ℝ²) rides on the conjecture's bold form and on FS-39's bridge, which is `[Madore2015]": G56's status tag (the audit reads it to the first ']'), now '… FS-39's bridge, which is `[BendaPerles2000]` pp. 117–118 (Madore's ¶5.4) plus de Bruijn–Erdős]': the bridge is Benda–Perles's (1976), Madore's ¶5.4 a re-derivation crediting them in its fn. 5 (the consolidation run's LP and LV; draft D-6, owner item 24); only the credit moved, the grade did not
+gate-count transitions in force: 30
+  ('1034', '5') -> ('1130', '5'): M2's close gate (J23b stage 0; build/gate/axioms/20260925T232928Z-253944.log): 1,146 records, 1,130 clean, 11 axiom-free, 5 purchases
+  ('1130', '5') -> ('1193', '5'): FS-75's close gate (the owner's re-run at J52K's end; build/gate/axioms/20260926T053431Z-866750.log): 1,209 records, 1,193 clean, 11 axiom-free, 5 purchases
+  ('1193', '5') -> ('1236', '5'): X11K3's gate (FS-100 wave 3's kernel lane; build/gate/axioms/20260926T122606Z-1387817.log): 1,252 records, 1,236 clean, 11 axiom-free, 5 purchases
+  ('1285', '5') -> ('1292', '5'): FS131-LEB's landing gate (Lebesgue's covering theorem; .claude/worktrees/fs131-leb/build/gate/axioms/20261004T130707Z-3747446.log): 1,308 records, 1,292 clean, 11 axiom-free, 5 purchases
+  ('1292', '5') -> ('1794', '5'): FS-131 wave 3's landing, gated with FS131-T3's repair (build/gate/axioms/20261004T141303Z-4086598.log): 1,810 records, 1,794 clean, 11 axiom-free, 0 imported, 5 purchases
+  ('1794', '5') -> ('1856', '5'): localSectors' landing (FS131-I3i; .claude/worktrees/fs131-w3b/build/gate/axioms, gated commit 746a7b80): 1,872 records, 1,856 clean, 11 axiom-free, 0 imported, 5 purchases
+  ('1856', '5') -> ('2512', '5'): FS-131 wave 2's landing (FS131-I2n; .claude/worktrees/fs131-w2/build/gate/axioms/20261004T225322Z-3123760.log, gated commit 40f4b4ef): 2,532 records, 2,512 clean, 11 axiom-free, 4 imported, 5 purchases
+  ('2512', '5') -> ('3376', '5'): FS-131 wave 4's landing (FS131-G4; .claude/worktrees/fs131-w4/build/gate/axioms/20261005T030529Z-856603.log, gated commit 5816a11a): 3,397 records, 3,376 clean, 12 axiom-free, 4 imported, 5 purchases
+  ('3376', '5') -> ('3633', '5'): FS-131 Woodall's landing (FS131-WL1; .claude/worktrees/fs131-ww/build/gate/axioms/20261005T041304Z-1297413.log, copy data/fs131/wl/axioms-receipt-final.log, gated commit 08e64ae5): 3,654 records, 3,633 clean, 12 axiom-free, 4 imported, 5 purchases
+  ('3633', '5') -> ('3784', '5'): FS-131 MERGE's landing (FS131-ML1; .claude/worktrees/fs131-w4mm/build/gate/axioms/20261005T092312Z-2984691.log, copy data/fs131/ml/axioms-receipt-final.log, gated commit df473bfe): 3,807 records, 3,784 clean, 14 axiom-free, 4 imported, 5 purchases
+  ('3784', '5') -> ('3889', '5'): FS-131 OPEN's landing (FS131-OL1; .claude/worktrees/fs131-wop/build/gate/axioms/20261006T030550Z-413723.log, copy data/fs131/ol/axioms-receipt-landed.log, gated commit 68670175): 3,912 records, 3,889 clean, 14 axiom-free, 4 imported, 5 purchases
+  ('3889', '5') -> ('5196', '5'): FS-131 wave 5's landing (FS131-L5; .claude/worktrees/fs131-w5c/build/gate/axioms/20261006T094617Z-3066074.log, copy data/fs131/l5/receipt-axioms-final.log, gated commit 1351ebc2): 5,221 records, 5,196 clean, 16 axiom-free, 4 imported, 5 purchases
+  ('5196', '5') -> ('5525', '5'): FS-131, the example maps' landing (FS131-MC1; .claude/worktrees/fs131-wmb/build/gate/axioms/20261006T114811Z-3752274.log, copy data/fs131/mc/receipt-axioms-final2.log, gated commit d9347791): 5,550 records, 5,525 clean, 16 axiom-free, 4 imported, 5 purchases
+  ('5525', '5') -> ('5783', '5'): FS-131, wave 10's first landing (FS131-L10A; .claude/worktrees/fs131-w10l/build/gate/axioms/20261006T145710Z-778814.log, copy data/fs131/l10a/receipt-axioms-first.log, gated commit 999cde4a): 5,809 records, 5,783 clean, 17 axiom-free, 4 imported, 5 purchases
+  ('5783', '5') -> ('6148', '5'): FS-131, wave 6's first landing (FS131-L6A; copy data/fs131/l6a/receipt-axioms-first.log, gated commit 7e67af3b): 6,174 records, 6,148 clean, 17 axiom-free, 4 imported, 5 purchases
+  ('6148', '5') -> ('6304', '5'): FS-131, wave 10's second landing (FS131-L10B; copy data/fs131/l10b/receipt-axioms-final.log, gated commit f0cc3018): 6,334 records, 6,304 clean, 17 axiom-free, 8 imported, 5 purchases
+  ('6304', '5') -> ('6521', '5'): FS-131, wave 8's first landing (FS131-L8A; copy data/fs131/l8a/gate/receipt-axioms-final.log, gated commit 126bff4d): 6,554 records, 6,521 clean, 20 axiom-free, 8 imported, 5 purchases
+  ('6521', '5') -> ('6533', '5'): FS-132, the landing of the import of [OAIMath2026] family 158 (FS132-L1; copy data/fs132/l1/gate/receipt-axioms-final.log, gated commit 5df686f0): 6,576 records, 6,533 clean, 20 axiom-free, 18 imported, 5 purchases
+  ('6533', '5') -> ('6910', '5'): FS-132, the landing of its first theorem — the first night's exclusion at the whole plane over the release's palette lemmas, ported (FS132-L2; copy data/fs132/l2/gate/receipt-axioms-final.log, gated commit b46a9d57): 6,953 records, 6,910 clean, 20 axiom-free, 18 imported, 5 purchases
+  ('6910', '5') -> ('6967', '5'): FS-124, the landing of its first module — the disc criterion: weak colourings of a set, the radius clause and its join over the Borel transfer (FS124-L1; copy data/fs124/l1/gate/receipt-axioms-final.log, gated commit 24a42aa9): 7,015 records, 6,967 clean, 20 axiom-free, 23 imported, 5 purchases
+  ('6967', '5') -> ('7364', '5'): FS-124, the landing of its second module — what a region of one label forces one unit away, and at a common unit point of a close complementary pair; the witnesses; the three-arcs lemma (FS124-L2; copy data/fs124/l2/gate/receipt-axioms-final.log, gated commit da96003b): 7,420 records, 7,364 clean, 28 axiom-free, 23 imported, 5 purchases
+  ('7364', '5') -> ('7395', '5'): FS-131, the landing of the measurable-number module — [Davies2026] Lemma B.1 formalized with its printed proof, chiM0 = chiLebesgue on the standard three, chi(R^2) = chiLebesgue on the declared outside theorem proper_to_borel_weak; other people's mathematics, composed (FS131-LC1; copy data/fs131/lc1/gate/receipt-axioms-final.log, gated commit 10892a8f2): 7,454 records, 7,395 clean, 28 axiom-free, 26 imported, 5 purchases
+  ('7395', '5') -> ('7447', '5'): FS-131, the landing of its first number-field module, the residue upper half — chi(F^2) <= chi of each residue target for every real number field (a homomorphism into each), a degree-one prime at fields of square roots, chi(Q(sqrt 11)^2) = 4 and chi(Q^2) = 2 in both halves, the chain's headline with its upper half discharged; known values and bounds, the kernel proofs ours (FS131-LU1; copy data/fs131/lu1/gate/receipt-axioms-final.log, gated commit c2f4e4f54): 7,506 records, 7,447 clean, 28 axiom-free, 26 imported, 5 purchases
+  ('7447', '5') -> ('7531', '5'): FS-131, the landing of its three-and-four-colours line — for squarefree m the plane over Q(sqrt m) needs 2 colours at m != 3 (mod 4), 3 at m = 3, 7 (mod 12), at least 4 at m = 11 (mod 12) and exactly 4 there outside 47, 143, 167 (mod 168); over every real number field a non-bipartite plane is three-chromatic iff a prime has residue field F_3, chi <= 3 iff L <= 3 and chi = L for L <= 4 (on Weil's bound); chi >= 4 over every subfield of R whose unit-vector ring holds 1/3 and whose plane is not bipartite; the values 2 and 3 and every upper bound prior art, the lower bound of four, the criterion and the clause for subfields ours, the kernel proofs ours (FS131-LJ1; copy data/fs131/lj1/gate/receipt-axioms-final.log, gated commit def7c07f8): 7,602 records, 7,531 clean, 28 axiom-free, 38 imported, 5 purchases
+  ('7531', '5') -> ('8961', '5'): FS-131, the landing of the port of [OAIMath2026]'s transfer proof — the release's theorem proper_to_borel_weak (a proper k-colouring of the plane gives a Borel one proper at almost every unit pair) with its proof ported whole, 31 generated modules, every proof checked by this kernel at v4.32.0; the axiom of that name deleted, its twelve records clean (chi(R^2) = chi_m0(R^2), 7 <= chi(R^2) iff lim mu_6 < 1, chi(R^2) = chi_m(R^2), the disc criterion's half toward seven); the mathematics [OAIMath2026]'s, the port and the kernel check ours (FS131-LP1; copy data/fs131/lp1/gate/receipt-axioms-final.log, gated commit 75a0035f1): 9,024 records, 8,961 clean, 32 axiom-free, 26 imported, 5 purchases
+  ('8961', '5') -> ('9038', '5'): FS-133, the landing of the density equality — Outside/OAI158Rigidity and Plane/OneClass through the gate: alpha_1(R^2) = alpha_1(A^2) = m_1(R^2), chi_f,0(R^2) = chi_f(R^2) = chi_f(A^2) = 1/m_1(R^2), f(n)/n -> m_1(R^2) and the labelling claim both ways, on the standard three axioms through [OAIMath2026]'s Spectral.residual_fourier, ported (the copies and the axiom of FS-133's branch deleted at the join); the statement not new ([Davies2026]), the kernel proof ours (FS133-LD1; copy data/fs133/ld1/gate/receipt-axioms-final.log, gated commit 860538ddf): 9,101 records, 9,038 clean, 32 axiom-free, 26 imported, 5 purchases
+  ('9038', '5') -> ('9438', '5'): FS-131, the landing of the density bound — Plane/DensityBound and Plane/OneAvoidingDensity through the gate: [AmbrusEtAl2023] Theorem 1, every Lebesgue-measurable 1-avoiding planar set has upper density at most 0.2470 (Plane.oneAvoidingDensityBound), from the paper's certificate by decide +kernel with no native_decide, on the standard three axioms; Plane.mOne defined once (the line's own deleted at the join, the bridge mOne_eq_iSup_bandFree, the coordinator's ruling); the theorem [AmbrusEtAl2023]'s, the kernel proof ours (FS131-LDB1; copy data/fs131/ldb1/gate/receipt-axioms-final.log, gated commit 7a2acfef8): 9,824 records, 9,438 clean, 355 axiom-free, 26 imported, 5 purchases
+  ('9438', '5') -> ('10650', '5'): FS-131, the landing of the five-colour chain — the chain's 144 modules and four of main's through the gate on one commit: min(L(F), 5) ≤ χ(F²) for every real number field with no hypothesis (Rigidity.min_localBound_five_le_chromaticNumber), χ(ℚ(√47)²) = 5, χ = 5 at ℚ(√143), ℚ(√311), ℚ(√335), ℚ(√3,√5), χ(ℚ(√167)²) ≥ 5, on Weil's bound and [EinsiedlerLindenstrauss2022] Thm 1.3 (Rigidity.positive_entropy_rigidity, the third declared import); the derivation ours (rows 120–123), the lower half not found in print, the upper half prior art (FS131-LCH1, FS131-LGT1; copy data/fs131/lgt1/gate/receipt-axioms-final.log, gated commit eee71c74c): 11,284 records, 10,650 clean, 569 axiom-free, 60 imported, 5 purchases
+  ('10650', '5') -> ('10651', '5'): FS-131, the main clause through five as one theorem — Rigidity/MainClauseFive through the gate on one commit: χ(F²) = L(F) whenever L(F) ≤ 5 (Rigidity.chromaticNumber_planeOver_eq_localBound_of_le_five) and min(χ(F²), 5) = min(L(F), 5) (Rigidity.min_chromaticNumber_five_eq_min_localBound_five), on Weil's bound and [EinsiedlerLindenstrauss2022] Thm 1.3, and the model L(ℚ) ≤ 2 on the standard three axioms; the upper half prior art, the lower half this project's derivation (FS131-IL5; copy data/fs131/il5/gate/receipt-axioms.log, gated commit 113ca8ece): 11,287 records, 10,651 clean, 569 axiom-free, 62 imported, 5 purchases
+  ('10651', '5') -> ('10747', '5'): FS-131, the collapse — the seven Collapse/ modules and the edits D-E1, D-E2 through the gate on one commit: χ(ℚ(√635087)²) = χ(ℝ²) (Collapse.chromaticNumber_planeOver_sqrt635087) and χ(ℚ(√3,√5,√7,√11)²) = χ(ℝ²) (Collapse.chromaticNumber_planeOver_deGrey), on Weil's bound and [EinsiedlerLindenstrauss2022] Thm 1.3, and χ(F²) = χ(ℝ²) at every real number field uniformly c-thick with c < 1/5 (Collapse.chromaticNumber_planeOver_eq_plane_of_thick) on Thm 1.3 alone; the derivation this project's, row 128 (FS131-KCL1, FS131-ICO1, FS131-ICO2; copy data/fs131/ico2/gate/receipt-axioms.log, gated commit 7c72b9bf7): 11,398 records, 10,747 clean, 569 axiom-free, 77 imported, 5 purchases
+
+FAIL: lost code token 'declarations=22802 refutations-skipped=246 sites=1477'
+FAIL: lost num token '11106'
+FAIL: lost num token '11806'
+FAIL: lost num token '22802'
+FAIL: lost num token '246'
+FAIL: lost tag token '[hand + cert]'
+FAIL: lost chunk token 'declarations=22802'
+FAIL: lost chunk token 'refutations-skipped=246'
+FAIL: the gate-report counts changed: ('11106', '5') -> ('11436', '5')
+AUDIT FAILED (9 failure(s))
+size: CLAUDE.md 75,017 of 80,000 bytes
+size: .claude/skills/grokkings/SKILL.md 187,057 of 200,000 bytes
