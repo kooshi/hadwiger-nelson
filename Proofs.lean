@@ -390,6 +390,8 @@ import Proofs.HadwigerNelson.Rigidity.FourColourPlaces
 import Proofs.HadwigerNelson.Arith.StableAboveUsable
 import Proofs.HadwigerNelson.Instances.SqrtFiveClass
 import Proofs.HadwigerNelson.Instances.SqrtTwentyThreeCbrtTwo
+import Proofs.HadwigerNelson.Instances.SeamFractional
+import Proofs.HadwigerNelson.Plane.G27.All
 import Proofs.HadwigerNelson.RationalFour.Forbid
 import Proofs.HadwigerNelson.Rigidity.SolenoidErgodic
 import Proofs.HadwigerNelson.Rigidity.HaarMultiple

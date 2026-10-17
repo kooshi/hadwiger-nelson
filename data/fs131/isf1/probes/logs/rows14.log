@@ -1,0 +1,51 @@
+let-to-have transformation took 180ms
+type checking took 187ms
+process pre-definitions took 486ms
+elaboration took 705ms
+elaboration took 363ms
+data/fs131/isf1/probes/RowsProbe14.lean:1220:32: error(lean.unknownIdentifier): Unknown identifier `rowOk`
+
+Note: It is not possible to treat `rowOk` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+type checking took 108s
+cumulative profiling times:
+	attribute application 0.044ms
+	compilation (IR) 17.9ms
+	compilation (LCNF base) 114ms
+	compilation (LCNF impure) 60.4ms
+	compilation (LCNF mono) 150ms
+	elaboration 1.07s
+	fix level params 0.615ms
+	instantiate metavars 0.904ms
+	let-to-have transformation 187ms
+	linting 10.9ms
+	parsing 27.4ms
+	process pre-definitions 561ms
+	share common exprs 10.6ms
+	tactic execution 0.622ms
+	type checking 108s
+	typeclass inference 337ms
+Command exited with non-zero status 1
+	Command being timed: "lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false data/fs131/isf1/probes/RowsProbe14.lean"
+	User time (seconds): 110.82
+	System time (seconds): 0.30
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:51.51
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 822728
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 39830
+	Voluntary context switches: 197
+	Involuntary context switches: 1200
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1
+exit=1

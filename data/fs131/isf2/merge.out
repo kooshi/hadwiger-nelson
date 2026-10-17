@@ -1,0 +1,10 @@
+Auto-merging ARCHITECTURE.md
+CONFLICT (content): Merge conflict in ARCHITECTURE.md
+Auto-merging Proofs.lean
+CONFLICT (content): Merge conflict in Proofs.lean
+CONFLICT (modify/delete): Proofs/HadwigerNelson/Instances/SeamFractional.lean deleted in main and modified in HEAD.  Version HEAD of Proofs/HadwigerNelson/Instances/SeamFractional.lean left in tree.
+CONFLICT (modify/delete): Proofs/HadwigerNelson/RationalFour/Basic.lean deleted in HEAD and modified in main.  Version main of Proofs/HadwigerNelson/RationalFour/Basic.lean left in tree.
+CONFLICT (modify/delete): Proofs/HadwigerNelson/RationalFour/Compulsion.lean deleted in HEAD and modified in main.  Version main of Proofs/HadwigerNelson/RationalFour/Compulsion.lean left in tree.
+CONFLICT (modify/delete): Proofs/HadwigerNelson/RationalFour/Forbid.lean deleted in HEAD and modified in main.  Version main of Proofs/HadwigerNelson/RationalFour/Forbid.lean left in tree.
+CONFLICT (modify/delete): Proofs/HadwigerNelson/RationalFour/Order.lean deleted in HEAD and modified in main.  Version main of Proofs/HadwigerNelson/RationalFour/Order.lean left in tree.
+Automatic merge failed; fix conflicts and then commit the result.

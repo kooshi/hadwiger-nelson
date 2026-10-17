@@ -1,0 +1,7 @@
+skeleton constants compared: 7 SAME, 0 failing
+added to the skeleton's modules: 0
+new modules: 4, constants 416
+plant [type of fractionalChromaticNumber_seamPlane]: FIRED -> ['CHANGED HadwigerNelson.Instances.SeamFractional.fractionalChromaticNumber_seamPlane (type)']
+plant [iSup head dropped]: FIRED -> ['MISSING HadwigerNelson.Instances.SeamFractional.iSup_fractionalChromaticNumber_seamPlane']
+plant [numberField_seamField made an axiom]: FIRED -> ['CHANGED HadwigerNelson.Instances.SeamFractional.numberField_seamField (kind)']
+RESULT: CLEAN

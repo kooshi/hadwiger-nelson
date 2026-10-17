@@ -15,8 +15,8 @@ squared distance `r` exists iff `v₂(r) = 0` (`exists_coloring_forbidding_iff_p
 **What it rests on:** the standard three axioms (`#print axioms`, audited at the gate); no outside theorem. The *if* half is `[Johnson1990]` Thm 3; the *only if* half, which
 p. 212 calls open, is the compulsion law (`RationalFour/Compulsion`) with a rational similarity of ratio `d`.
 
-**Not claimed:** anything about colourings with more than four colours; novelty (prior art: pending
-`[KubickiLehelMorayne2002]`).
+**Not claimed:** anything about colourings with more than four colours; novelty (prior art: not found in print
+(FS131-PAS2, FS131-PAS3; `CLOSED-QUESTIONS.md` § 3)).
 -/
 
 namespace HadwigerNelson.RationalFour

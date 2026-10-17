@@ -1,0 +1,576 @@
+SCANNED Proofs.HadwigerNelson.Plane.G27.All THM HadwigerNelson.G27.SegsOk.eq_3
+SCANNED Proofs.HadwigerNelson.Plane.G27.All THM HadwigerNelson.G27.good002 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.All THM HadwigerNelson.G27.SegsOk.eq_def RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.All THM HadwigerNelson.G27.segC.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.All THM HadwigerNelson.G27.segS.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.All THM HadwigerNelson.G27.good003 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.All THM HadwigerNelson.G27.good004 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.All THM HadwigerNelson.G27.good000 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.All THM HadwigerNelson.G27.segs_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.All DEF HadwigerNelson.G27.segR RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.All DEF HadwigerNelson.G27.segC RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.All DEF HadwigerNelson.G27.segS RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.All THM HadwigerNelson.G27.good_root RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.All THM HadwigerNelson.G27.root_sorted RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.All THM HadwigerNelson.G27.good001 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.All THM HadwigerNelson.G27.segR.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.All THM HadwigerNelson.G27.SegsOk.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.All THM HadwigerNelson.G27.good005 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.All THM HadwigerNelson.G27.SegsOk.eq_2
+SCANNED Proofs.HadwigerNelson.Plane.G27.Bound THM HadwigerNelson.G27.rowsAll_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Bound THM HadwigerNelson.G27.rowsAll_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Bound DEF HadwigerNelson.G27.coefsAll RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Bound DEF HadwigerNelson.G27.rowsAll RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Bound THM HadwigerNelson.G27.density_le_quarter RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Bound THM HadwigerNelson.G27.rowsAll.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Bound THM HadwigerNelson.G27.coefsAll.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Bound THM HadwigerNelson.G27.cert_bound RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Bound THM HadwigerNelson.G27.val_expand_eq_root RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.val RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.mergePairs.match_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.wfB RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.mergeR RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.key RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.sortRounds RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.pathFrom RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.pathsOk RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.stepIn RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.singTerms.match_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.shiftIn RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.eqLL.match_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.stepOut RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.splitOk RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.mergePairs RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.cpkOk RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.OFFC RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.eqL RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.expand RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.collectR RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.stateL RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.rowsTerms.match_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.keepIn RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.goodB RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.M27 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.dfsR RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.leafOk RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.rowsTerms RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.adjOk RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.mergeR.match_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.wfB.match_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.sortRounds.match_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.singTerms RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.eqL.match_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.cf RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.val0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.eqLL RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.sortR RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.rowsFit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.singSumOk RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.FUEL RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Check DEF HadwigerNelson.G27.rowTerms RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk00 THM HadwigerNelson.G27.gp000x03_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk00 THM HadwigerNelson.G27.gp000x05_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk00 THM HadwigerNelson.G27.gp000x02_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk00 THM HadwigerNelson.G27.gp000x07_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk01 THM HadwigerNelson.G27.gp001x02_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk01 THM HadwigerNelson.G27.gp001x01_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk01 THM HadwigerNelson.G27.sp000_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk02 THM HadwigerNelson.G27.gp001x04_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk02 THM HadwigerNelson.G27.gp001x05_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk02 THM HadwigerNelson.G27.gp001x03_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk03 THM HadwigerNelson.G27.gp001x09_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk03 THM HadwigerNelson.G27.gp001x08_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk03 THM HadwigerNelson.G27.gp001x07_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk03 THM HadwigerNelson.G27.gp001x06_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk04 THM HadwigerNelson.G27.gp001x10_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk04 THM HadwigerNelson.G27.sp001_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk05 THM HadwigerNelson.G27.gp002x00_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk05 THM HadwigerNelson.G27.gp002x01_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk05 THM HadwigerNelson.G27.gp003x01_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk05 THM HadwigerNelson.G27.gp003x00_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk05 THM HadwigerNelson.G27.sp002_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk06 THM HadwigerNelson.G27.sp004_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk06 THM HadwigerNelson.G27.gp004x00_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk06 THM HadwigerNelson.G27.gp004x01_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk06 THM HadwigerNelson.G27.sp003_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk07 THM HadwigerNelson.G27.gp005x00_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk07 THM HadwigerNelson.G27.sp005_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Chk07 THM HadwigerNelson.G27.gp005x01_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Data THM HadwigerNelson.G27.sing_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Data DEF HadwigerNelson.G27.Dn RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Data DEF HadwigerNelson.G27.ptsL RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Data DEF HadwigerNelson.G27.adjL RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Data THM HadwigerNelson.G27.origin_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Data THM HadwigerNelson.G27.adj_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Data THM HadwigerNelson.G27.paths_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Data DEF HadwigerNelson.G27.pathsL RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Data THM HadwigerNelson.G27.wf_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Data DEF HadwigerNelson.G27.singL RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Data THM HadwigerNelson.G27.Dn_pos RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.indepFrom_mk RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.toC_add RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.testBit_mk RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law DEF HadwigerNelson.G27.singTerms_phi.match_1_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.measurableSet_allIn RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.phi_affine RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.adj_bit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.uConj.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.div12_mem RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law DEF HadwigerNelson.G27.xpt_mem_of_path.match_1_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law DEF HadwigerNelson.G27.mem_allIn_ptsOf.match_1_3
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.mem_ptsOf RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.integral_terms RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law DEF HadwigerNelson.G27.mk RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.maskL_lt RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.ptsOf_mask RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.pathFrom.eq_def RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.singTerms_phi RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.conjR_conjR RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.density_le_of_cert RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.phi_zero RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.ev_smul RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.testBit_maskL RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.toC_smul RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.rowTerms.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.tv_mk RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law DEF HadwigerNelson.G27.indepFrom_of_getD.match_1_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.xR.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.singTerms.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law DEF HadwigerNelson.G27.allIn RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.toC_mul RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law DEF HadwigerNelson.G27.measurableSet_allIn.match_1_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.adjL_length RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.conj_indep RECORD REFUTATION
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.ev_sub RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.ev_add RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law DEF HadwigerNelson.G27.conjR RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.pathFrom.eq_2
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law DEF HadwigerNelson.G27.uConj RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.coe_xR RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.allIn.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.normSq_toC RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.indepFrom_of_getD RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.mem_allIn_map_conj RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.pathFrom.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.cf_add_mul RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.pathsOk.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law DEF HadwigerNelson.G27.map_xR_of_forall₂.match_1_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.mk_lt RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.ev_mul RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law DEF HadwigerNelson.G27.phi_congr.match_1_2
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.toC_sub RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.mem_allIn_ptsOf RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.indicator_allIn_conj RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.ev_ofInt RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.rowsTerms_phi RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.measure_allIn_affine RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.expect_le RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.coe_conjR RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.xpt_zero RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.phi_congr RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.phi_point RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.c4_eq_of_beq RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.ev.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.map_xR_of_forall₂ RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.ptsOf.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.adjOk.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.singTerms.eq_2
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.val_mk RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.expand.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law DEF HadwigerNelson.G27.map_xR_of_forall₂.match_1_7
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.ev_mem RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.conj_mem_unitRing RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.xpt_plane RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law DEF HadwigerNelson.G27.uOne RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law DEF HadwigerNelson.G27.ptsOf RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.ev_neg RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law DEF HadwigerNelson.G27.phi RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.toC_cond RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law DEF HadwigerNelson.G27.rowsTerms_phi.match_1_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.row_phi RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.mk.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law DEF HadwigerNelson.G27.xR RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.allIn_congr RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.row_corr RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.toC.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.singSumOk.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.xpt_mem RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law DEF HadwigerNelson.G27.ev RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.q4_eq_of_beq RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.singTerms.eq_def RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.xpt.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.unit_of_sqd RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law DEF HadwigerNelson.G27.xpt RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law DEF HadwigerNelson.G27.integral_terms.match_1_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law DEF HadwigerNelson.G27.toC RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.phi.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.xpt_mem_of_path RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.phi_conj RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.conjR_affine RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Law THM HadwigerNelson.G27.toC_mem RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.RootData DEF HadwigerNelson.G27.rootL3 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.RootData DEF HadwigerNelson.G27.rootL RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.RootData DEF HadwigerNelson.G27.rootL2 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.RootData DEF HadwigerNelson.G27.rootL1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.RootData DEF HadwigerNelson.G27.rootL0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.RootData DEF HadwigerNelson.G27.rootSt RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.RootSort THM HadwigerNelson.G27.root_ok RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows00 DEF HadwigerNelson.G27.sorted00 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows00 THM HadwigerNelson.G27.rows00_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows00 THM HadwigerNelson.G27.rows00_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows00 THM HadwigerNelson.G27.rows00_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows00 DEF HadwigerNelson.G27.coefs00 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows00 DEF HadwigerNelson.G27.rows00 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows00 THM HadwigerNelson.G27.rows00_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows01 DEF HadwigerNelson.G27.sorted01 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows01 THM HadwigerNelson.G27.rows01_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows01 DEF HadwigerNelson.G27.coefs01 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows01 THM HadwigerNelson.G27.rows01_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows01 THM HadwigerNelson.G27.rows01_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows01 THM HadwigerNelson.G27.rows01_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows01 DEF HadwigerNelson.G27.rows01 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows02 DEF HadwigerNelson.G27.rows02 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows02 DEF HadwigerNelson.G27.sorted02 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows02 THM HadwigerNelson.G27.rows02_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows02 THM HadwigerNelson.G27.rows02_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows02 THM HadwigerNelson.G27.rows02_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows02 DEF HadwigerNelson.G27.coefs02 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows02 THM HadwigerNelson.G27.rows02_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows03 THM HadwigerNelson.G27.rows03_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows03 THM HadwigerNelson.G27.rows03_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows03 DEF HadwigerNelson.G27.coefs03 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows03 THM HadwigerNelson.G27.rows03_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows03 DEF HadwigerNelson.G27.sorted03 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows03 THM HadwigerNelson.G27.rows03_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows03 DEF HadwigerNelson.G27.rows03 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows04 THM HadwigerNelson.G27.rows04_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows04 THM HadwigerNelson.G27.rows04_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows04 THM HadwigerNelson.G27.rows04_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows04 DEF HadwigerNelson.G27.rows04 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows04 DEF HadwigerNelson.G27.coefs04 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows04 DEF HadwigerNelson.G27.sorted04 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows04 THM HadwigerNelson.G27.rows04_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows05 DEF HadwigerNelson.G27.rows05 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows05 THM HadwigerNelson.G27.rows05_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows05 THM HadwigerNelson.G27.rows05_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows05 THM HadwigerNelson.G27.rows05_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows05 DEF HadwigerNelson.G27.coefs05 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows05 DEF HadwigerNelson.G27.sorted05 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows05 THM HadwigerNelson.G27.rows05_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows06 THM HadwigerNelson.G27.rows06_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows06 DEF HadwigerNelson.G27.sorted06 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows06 THM HadwigerNelson.G27.rows06_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows06 THM HadwigerNelson.G27.rows06_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows06 DEF HadwigerNelson.G27.rows06 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows06 THM HadwigerNelson.G27.rows06_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows06 DEF HadwigerNelson.G27.coefs06 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows07 THM HadwigerNelson.G27.rows07_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows07 DEF HadwigerNelson.G27.sorted07 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows07 THM HadwigerNelson.G27.rows07_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows07 THM HadwigerNelson.G27.rows07_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows07 DEF HadwigerNelson.G27.coefs07 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows07 DEF HadwigerNelson.G27.rows07 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows07 THM HadwigerNelson.G27.rows07_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows08 DEF HadwigerNelson.G27.rows08 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows08 THM HadwigerNelson.G27.rows08_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows08 THM HadwigerNelson.G27.rows08_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows08 THM HadwigerNelson.G27.rows08_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows08 THM HadwigerNelson.G27.rows08_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows08 DEF HadwigerNelson.G27.sorted08 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows08 DEF HadwigerNelson.G27.coefs08 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows09 DEF HadwigerNelson.G27.sorted09 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows09 THM HadwigerNelson.G27.rows09_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows09 THM HadwigerNelson.G27.rows09_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows09 THM HadwigerNelson.G27.rows09_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows09 DEF HadwigerNelson.G27.coefs09 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows09 THM HadwigerNelson.G27.rows09_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows09 DEF HadwigerNelson.G27.rows09 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows10 THM HadwigerNelson.G27.rows10_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows10 DEF HadwigerNelson.G27.rows10 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows10 DEF HadwigerNelson.G27.sorted10 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows10 THM HadwigerNelson.G27.rows10_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows10 THM HadwigerNelson.G27.rows10_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows10 THM HadwigerNelson.G27.rows10_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows10 DEF HadwigerNelson.G27.coefs10 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows11 DEF HadwigerNelson.G27.coefs11 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows11 DEF HadwigerNelson.G27.rows11 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows11 THM HadwigerNelson.G27.rows11_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows11 THM HadwigerNelson.G27.rows11_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows11 DEF HadwigerNelson.G27.sorted11 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows11 THM HadwigerNelson.G27.rows11_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows11 THM HadwigerNelson.G27.rows11_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows12 THM HadwigerNelson.G27.rows12_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows12 DEF HadwigerNelson.G27.sorted12 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows12 DEF HadwigerNelson.G27.coefs12 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows12 THM HadwigerNelson.G27.rows12_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows12 DEF HadwigerNelson.G27.rows12 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows12 THM HadwigerNelson.G27.rows12_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows12 THM HadwigerNelson.G27.rows12_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows13 THM HadwigerNelson.G27.rows13_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows13 DEF HadwigerNelson.G27.sorted13 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows13 DEF HadwigerNelson.G27.coefs13 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows13 DEF HadwigerNelson.G27.rows13 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows13 THM HadwigerNelson.G27.rows13_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows13 THM HadwigerNelson.G27.rows13_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows13 THM HadwigerNelson.G27.rows13_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows14 DEF HadwigerNelson.G27.rows14 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows14 DEF HadwigerNelson.G27.coefs14 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows14 DEF HadwigerNelson.G27.sorted14 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows14 THM HadwigerNelson.G27.rows14_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows14 THM HadwigerNelson.G27.rows14_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows14 THM HadwigerNelson.G27.rows14_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows14 THM HadwigerNelson.G27.rows14_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows15 DEF HadwigerNelson.G27.rows15 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows15 THM HadwigerNelson.G27.rows15_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows15 THM HadwigerNelson.G27.rows15_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows15 THM HadwigerNelson.G27.rows15_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows15 DEF HadwigerNelson.G27.sorted15 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows15 DEF HadwigerNelson.G27.coefs15 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows15 THM HadwigerNelson.G27.rows15_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows16 DEF HadwigerNelson.G27.rows16 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows16 DEF HadwigerNelson.G27.sorted16 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows16 DEF HadwigerNelson.G27.coefs16 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows16 THM HadwigerNelson.G27.rows16_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows16 THM HadwigerNelson.G27.rows16_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows16 THM HadwigerNelson.G27.rows16_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows16 THM HadwigerNelson.G27.rows16_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows17 DEF HadwigerNelson.G27.rows17 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows17 THM HadwigerNelson.G27.rows17_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows17 THM HadwigerNelson.G27.rows17_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows17 DEF HadwigerNelson.G27.coefs17 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows17 THM HadwigerNelson.G27.rows17_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows17 THM HadwigerNelson.G27.rows17_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows17 DEF HadwigerNelson.G27.sorted17 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows18 THM HadwigerNelson.G27.rows18_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows18 DEF HadwigerNelson.G27.rows18 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows18 THM HadwigerNelson.G27.rows18_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows18 DEF HadwigerNelson.G27.coefs18 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows18 THM HadwigerNelson.G27.rows18_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows18 DEF HadwigerNelson.G27.sorted18 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows18 THM HadwigerNelson.G27.rows18_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows19 THM HadwigerNelson.G27.rows19_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows19 THM HadwigerNelson.G27.rows19_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows19 DEF HadwigerNelson.G27.sorted19 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows19 THM HadwigerNelson.G27.rows19_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows19 THM HadwigerNelson.G27.rows19_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows19 DEF HadwigerNelson.G27.rows19 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows19 DEF HadwigerNelson.G27.coefs19 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows20 DEF HadwigerNelson.G27.sorted20 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows20 THM HadwigerNelson.G27.rows20_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows20 DEF HadwigerNelson.G27.rows20 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows20 DEF HadwigerNelson.G27.coefs20 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows20 THM HadwigerNelson.G27.rows20_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows20 THM HadwigerNelson.G27.rows20_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows20 THM HadwigerNelson.G27.rows20_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows21 THM HadwigerNelson.G27.rows21_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows21 THM HadwigerNelson.G27.rows21_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows21 DEF HadwigerNelson.G27.rows21 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows21 DEF HadwigerNelson.G27.coefs21 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows21 THM HadwigerNelson.G27.rows21_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows21 DEF HadwigerNelson.G27.sorted21 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows21 THM HadwigerNelson.G27.rows21_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows22 THM HadwigerNelson.G27.rows22_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows22 THM HadwigerNelson.G27.rows22_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows22 THM HadwigerNelson.G27.rows22_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows22 DEF HadwigerNelson.G27.rows22 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows22 DEF HadwigerNelson.G27.sorted22 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows22 DEF HadwigerNelson.G27.coefs22 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows22 THM HadwigerNelson.G27.rows22_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows23 THM HadwigerNelson.G27.rows23_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows23 DEF HadwigerNelson.G27.sorted23 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows23 DEF HadwigerNelson.G27.rows23 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows23 THM HadwigerNelson.G27.rows23_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows23 THM HadwigerNelson.G27.rows23_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows23 THM HadwigerNelson.G27.rows23_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows23 DEF HadwigerNelson.G27.coefs23 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows24 DEF HadwigerNelson.G27.coefs24 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows24 THM HadwigerNelson.G27.rows24_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows24 DEF HadwigerNelson.G27.rows24 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows24 THM HadwigerNelson.G27.rows24_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows24 THM HadwigerNelson.G27.rows24_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows24 DEF HadwigerNelson.G27.sorted24 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows24 THM HadwigerNelson.G27.rows24_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows25 THM HadwigerNelson.G27.rows25_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows25 DEF HadwigerNelson.G27.coefs25 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows25 DEF HadwigerNelson.G27.sorted25 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows25 THM HadwigerNelson.G27.rows25_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows25 THM HadwigerNelson.G27.rows25_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows25 DEF HadwigerNelson.G27.rows25 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows25 THM HadwigerNelson.G27.rows25_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows26 THM HadwigerNelson.G27.rows26_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows26 DEF HadwigerNelson.G27.sorted26 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows26 THM HadwigerNelson.G27.rows26_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows26 DEF HadwigerNelson.G27.rows26 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows26 THM HadwigerNelson.G27.rows26_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows26 THM HadwigerNelson.G27.rows26_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows26 DEF HadwigerNelson.G27.coefs26 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows27 THM HadwigerNelson.G27.rows27_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows27 DEF HadwigerNelson.G27.coefs27 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows27 THM HadwigerNelson.G27.rows27_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows27 DEF HadwigerNelson.G27.rows27 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows27 THM HadwigerNelson.G27.rows27_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows27 DEF HadwigerNelson.G27.sorted27 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows27 THM HadwigerNelson.G27.rows27_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows28 DEF HadwigerNelson.G27.rows28 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows28 THM HadwigerNelson.G27.rows28_sort RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows28 DEF HadwigerNelson.G27.coefs28 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows28 THM HadwigerNelson.G27.rows28_ok1 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows28 THM HadwigerNelson.G27.rows28_ok0 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows28 DEF HadwigerNelson.G27.sorted28 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Rows28 THM HadwigerNelson.G27.rows28_fit RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.dfsR_nil RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound DEF HadwigerNelson.G27.val_flatten.match_1_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.dfsR_eq_all RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.M27_eq RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.mergeR_zero RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.stepOut_cons RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.rowsFit_length RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.mergePairs.eq_def RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound DEF HadwigerNelson.G27.rowsTerms_append.match_1_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.val_cons RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.splitOk.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.mergePairs.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.key.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.goodB_root RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.sortRounds.eq_def RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.val.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.val_flatten RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.rowsTerms.eq_2
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.collectR_nil RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.val_stepOut RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.mergeR_succ_cons_cons RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.sum_val_mergePairs RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.eqL.eq_2
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.rowsFit.eq_def RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.eqLL.eq_def RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound DEF HadwigerNelson.G27.eqL_eq.match_1_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.keepIn_cons RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.tv_eq_zero_of_land RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.leafOk.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.beq_land_false RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.sortRounds.eq_3
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.goodB.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound DEF HadwigerNelson.G27.dfsR_eq_all.match_1_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.val_shift_keep RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.val_nil RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound DEF HadwigerNelson.G27.sum_val_mergePairs.match_1_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.testBit_of_land_two_pow RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.rowsFit.eq_3
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.eqLL.eq_3
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.all_singleton_true RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.wfB.eq_2
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.dfsR_cons RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound DEF HadwigerNelson.G27.wfAdj_of_wfB.match_1_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.all_append_true RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.val_append RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.val_mergeR RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound DEF HadwigerNelson.G27.val_sortRounds.match_1_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound DEF HadwigerNelson.G27.dfsR_sound.match_1_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.sortRounds.eq_2
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound DEF HadwigerNelson.G27.segsOk_spec.match_1_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound DEF HadwigerNelson.G27.WfAdj RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.land_self_iff RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.eqL_eq RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.land_two_pow_eq_zero RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.stepIn.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.tv_of_key_eq RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound DEF HadwigerNelson.G27.dfsR_append.match_1_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound DEF HadwigerNelson.G27.eqLL_eq.match_1_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.mergeR_succ_nil RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.sortRounds.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.key_xor RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.key_add_mul RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.goodB_of_split RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.mergePairs.eq_2
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.tv_combine RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.cf.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.sortRounds.eq_4
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound DEF HadwigerNelson.G27.SegsOk.match_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.tv_zero RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.dfsR_append RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.eqLL_eq RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.testBit_key RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.stepOut_nil RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound DEF HadwigerNelson.G27.rowsFit_length.match_1_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.beq_land_true RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.rowsTerms.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.mergeR_succ_cons_nil RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.eqL.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.two_pow_lt_M27 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound DEF HadwigerNelson.G27.IndepFrom RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.rowsTerms_append RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound DEF HadwigerNelson.G27.rowsFit_append.match_1_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound DEF HadwigerNelson.G27.SegsOk RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.wfB.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.dfsR_sound RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.div_xor RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.val_sortRounds RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.wfAdj_of_wfB RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound DEF HadwigerNelson.G27.WfAdj.match_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.eqL.eq_3
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.wfB.eq_def RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.land_key RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.testBit_of_lt_M27 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.collectR_cons RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.shiftIn_cons RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.segsOk_spec RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.eqLL.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.sortR.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.rowsFit.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.tv.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.or_eq_zero_iff' RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.rowsFit_append RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.val_sortR RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound DEF HadwigerNelson.G27.tv RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.land_eq_zero_iff RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.val0_eq RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound DEF HadwigerNelson.G27.IndepFrom.match_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound DEF HadwigerNelson.G27.val_mergeR.match_1_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.eqLL.eq_2
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.val_stepIn RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.rowsFit.eq_2
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.eqL.eq_def RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.stateL.eq_1
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.div_add_mul RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.Sound THM HadwigerNelson.G27.rowsTerms.eq_def RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St000 DEF HadwigerNelson.G27.st001 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St000 DEF HadwigerNelson.G27.gp000x03 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St000 DEF HadwigerNelson.G27.gp000x02 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St000 DEF HadwigerNelson.G27.st004 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St000 DEF HadwigerNelson.G27.gp000x07 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St000 DEF HadwigerNelson.G27.out000 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St000 DEF HadwigerNelson.G27.st005 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St000 DEF HadwigerNelson.G27.st003 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St000 DEF HadwigerNelson.G27.gp000x05 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St001 DEF HadwigerNelson.G27.gp001x02 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St001 DEF HadwigerNelson.G27.gp001x04 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St001 DEF HadwigerNelson.G27.gp001x07 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St001 DEF HadwigerNelson.G27.gp001x09 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St001 DEF HadwigerNelson.G27.gp001x08 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St001 DEF HadwigerNelson.G27.gp001x05 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St001 DEF HadwigerNelson.G27.out001 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St001 DEF HadwigerNelson.G27.gp001x01 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St001 DEF HadwigerNelson.G27.gp001x06 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St001 DEF HadwigerNelson.G27.st002 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St001 DEF HadwigerNelson.G27.gp001x03 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St001 DEF HadwigerNelson.G27.gp001x10 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St002 DEF HadwigerNelson.G27.out002 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St002 DEF HadwigerNelson.G27.gp002x00 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St002 DEF HadwigerNelson.G27.gp002x01 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St003 DEF HadwigerNelson.G27.gp003x01 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St003 DEF HadwigerNelson.G27.out003 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St003 DEF HadwigerNelson.G27.gp003x00 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St004 DEF HadwigerNelson.G27.gp004x01 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St004 DEF HadwigerNelson.G27.out004 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St004 DEF HadwigerNelson.G27.gp004x00 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St005 DEF HadwigerNelson.G27.gp005x00 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St005 DEF HadwigerNelson.G27.gp005x01 RECORD
+SCANNED Proofs.HadwigerNelson.Plane.G27.St005 DEF HadwigerNelson.G27.out005 RECORD
+SCANNED Proofs.HadwigerNelson.Instances.SeamFractional THM HadwigerNelson.Instances.SeamFractional.finIndepRatio_seamPlane_le RECORD
+SCANNED Proofs.HadwigerNelson.Instances.SeamFractional THM HadwigerNelson.Instances.SeamFractional.finIndepRatio_seamPlane RECORD
+SCANNED Proofs.HadwigerNelson.Instances.SeamFractional THM HadwigerNelson.Instances.SeamFractional.instNumberFieldSubtypeRealMemSubfieldSeamField RECORD
+SCANNED Proofs.HadwigerNelson.Instances.SeamFractional THM HadwigerNelson.Instances.SeamFractional.numberField_seamField RECORD
+SCANNED Proofs.HadwigerNelson.Instances.SeamFractional THM HadwigerNelson.Instances.SeamFractional.fractionalChromaticNumber_seamPlane RECORD
+SCANNED Proofs.HadwigerNelson.Instances.SeamFractional THM HadwigerNelson.Instances.SeamFractional.iSup_fractionalChromaticNumber_seamPlane RECORD
+SCANNED Proofs.HadwigerNelson.Instances.SeamFractional THM HadwigerNelson.Instances.SeamFractional.IndepLaw.density_le_quarter_seamField RECORD
+SCANNED-COUNT 575 REFUTATIONS 1

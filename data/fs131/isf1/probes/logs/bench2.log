@@ -1,0 +1,60 @@
+parsing took 43.1ms
+let-to-have transformation took 26ms
+type checking took 10.9ms
+compilation (LCNF base) took 186ms
+compilation (LCNF mono) took 35.1ms
+compilation (LCNF mono) took 142ms
+compilation (LCNF impure) took 143ms
+compilation (IR) took 143ms
+process pre-definitions took 235ms
+linting took 31.2ms
+elaboration took 2.37s
+type checking took 34.6ms
+type checking took 103ms
+type checking took 257ms
+type checking took 96.7ms
+type checking took 106ms
+type checking took 437ms
+type checking took 359ms
+type checking took 84.6ms
+cumulative profiling times:
+	attribute application 0.0576ms
+	compilation (IR) 143ms
+	compilation (LCNF base) 186ms
+	compilation (LCNF impure) 143ms
+	compilation (LCNF mono) 177ms
+	elaboration 2.38s
+	fix level params 0.993ms
+	instantiate metavars 2.34ms
+	let-to-have transformation 26ms
+	linting 32.4ms
+	parsing 44.7ms
+	process pre-definitions 235ms
+	share common exprs 7.68ms
+	tactic execution 1.92ms
+	type checking 1.49s
+	typeclass inference 477ms
+	Command being timed: "lake env lean -DautoImplicit=false -DrelaxedAutoImplicit=false data/fs131/isf1/probes/bench/Bench2.lean"
+	User time (seconds): 5.79
+	System time (seconds): 0.30
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:06.11
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 822356
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 44886
+	Voluntary context switches: 235
+	Involuntary context switches: 112
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+exit=0

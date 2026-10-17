@@ -1,0 +1,4 @@
+MISSING #0 plans/FS131-close-inventory.md (2312 chars); longest found prefix 215: next 'I.md`, report `data/fs131/reports/FS131-ISF1.md`; branch `fs131-ksf1` at `39a5dd'
+FOUND   #1 plans/FS131-close-inventory.md (2778 chars) in: /home/kooshi/source/lean-dir
+2 quotes, 1 missing
+exit=1

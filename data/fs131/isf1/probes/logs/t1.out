@@ -1,0 +1,10 @@
+slot: admitted seq.sh: mem 10 GiB (hard cap), cpus 0,1
+Data: 	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:01.07
+Data: 	Maximum resident set size (kbytes): 819736
+Data: exit=0
+St000: 	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:38.62
+St000: 	Maximum resident set size (kbytes): 2004612
+St000: exit=0
+Chk00: 	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:46.39
+Chk00: 	Maximum resident set size (kbytes): 2875612
+Chk00: exit=0

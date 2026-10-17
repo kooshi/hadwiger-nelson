@@ -1,0 +1,8 @@
+D bits 843
+root max coef bits 844
+K=5: states 13 entries 39851 maxcoefbits 844 subtree work total 2593678 max 1622772 top5 [147855, 159062, 198432, 203746, 1622772]
+K=6: states 18 entries 48190 maxcoefbits 844 subtree work total 2553827 max 1056199 top5 [97761, 131642, 200510, 546431, 1056199]
+K=7: states 26 entries 49211 maxcoefbits 844 subtree work total 2505637 max 884288 top5 [110453, 156815, 197274, 537239, 884288]
+K=8: states 42 entries 51487 maxcoefbits 844 subtree work total 2456426 max 648220 top5 [159556, 194038, 223398, 368491, 648220]
+K=10: states 82 entries 61255 maxcoefbits 845 subtree work total 2344869 max 294854 top5 [98521, 123298, 156631, 232821, 294854]
+K=12: states 198 entries 67014 maxcoefbits 845 subtree work total 2219792 max 167973 top5 [70548, 84509, 87683, 132416, 167973]

@@ -24,8 +24,8 @@ description of the component is `mem_comp_iff` (`RationalFour/Order`), proved he
 `residueColouring a` inhabit that type on `quatGraph` for every shift `a` (`nonempty_coloring`), and through the coordinates
 on `ratFourGraph` (`nonempty_ratFourGraph_coloring`), so no statement is vacuous.
 
-**Not claimed:** anything at other numbers of colours; anything in `ℚⁿ`, `n ≠ 4`; novelty (prior art: pending
-`[KubickiLehelMorayne2002]`).
+**Not claimed:** anything at other numbers of colours; anything in `ℚⁿ`, `n ≠ 4`; novelty (prior art: not found in print
+(FS131-PAS2, FS131-PAS3; `CLOSED-QUESTIONS.md` § 3)).
 -/
 
 namespace HadwigerNelson.RationalFour

@@ -1,0 +1,4 @@
+DIFFERS Proofs/HadwigerNelson/RationalFour/Compulsion.lean: 16323 characters of code at 1c8e07920, 16323 now; comment characters 8741 -> 8776 (whitespace counted with them)
+DIFFERS Proofs/HadwigerNelson/RationalFour/Forbid.lean: 6558 characters of code at 1c8e07920, 6558 now; comment characters 2966 -> 3001 (whitespace counted with them)
+plant: OK
+exit=0

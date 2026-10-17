@@ -1,0 +1,30 @@
+diff --git a/Proofs/HadwigerNelson/RationalFour/Compulsion.lean b/Proofs/HadwigerNelson/RationalFour/Compulsion.lean
+index 39a275639..edf46e1b6 100644
+--- a/Proofs/HadwigerNelson/RationalFour/Compulsion.lean
++++ b/Proofs/HadwigerNelson/RationalFour/Compulsion.lean
+@@ -24,8 +24,8 @@ description of the component is `mem_comp_iff` (`RationalFour/Order`), proved he
+ `residueColouring a` inhabit that type on `quatGraph` for every shift `a` (`nonempty_coloring`), and through the coordinates
+ on `ratFourGraph` (`nonempty_ratFourGraph_coloring`), so no statement is vacuous.
+ 
+-**Not claimed:** anything at other numbers of colours; anything in `ℚⁿ`, `n ≠ 4`; novelty (prior art: pending
+-`[KubickiLehelMorayne2002]`).
++**Not claimed:** anything at other numbers of colours; anything in `ℚⁿ`, `n ≠ 4`; novelty (prior art: not found in print
++(FS131-PAS2, FS131-PAS3; `CLOSED-QUESTIONS.md` § 3)).
+ -/
+ 
+ namespace HadwigerNelson.RationalFour
+diff --git a/Proofs/HadwigerNelson/RationalFour/Forbid.lean b/Proofs/HadwigerNelson/RationalFour/Forbid.lean
+index cea4e4faf..7fde06463 100644
+--- a/Proofs/HadwigerNelson/RationalFour/Forbid.lean
++++ b/Proofs/HadwigerNelson/RationalFour/Forbid.lean
+@@ -15,8 +15,8 @@ squared distance `r` exists iff `v₂(r) = 0` (`exists_coloring_forbidding_iff_p
+ **What it rests on:** the standard three axioms (`#print axioms`, audited at the gate); no outside theorem. The *if* half is `[Johnson1990]` Thm 3; the *only if* half, which
+ p. 212 calls open, is the compulsion law (`RationalFour/Compulsion`) with a rational similarity of ratio `d`.
+ 
+-**Not claimed:** anything about colourings with more than four colours; novelty (prior art: pending
+-`[KubickiLehelMorayne2002]`).
++**Not claimed:** anything about colourings with more than four colours; novelty (prior art: not found in print
++(FS131-PAS2, FS131-PAS3; `CLOSED-QUESTIONS.md` § 3)).
+ -/
+ 
+ namespace HadwigerNelson.RationalFour
